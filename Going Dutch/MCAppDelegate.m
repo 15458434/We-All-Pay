@@ -7,6 +7,7 @@
 //
 
 #import "MCAppDelegate.h"
+#import "MCAllTripsTableViewController.h"
 
 @implementation MCAppDelegate
 
@@ -14,6 +15,12 @@
 {
     self.window = [[UIWindow alloc] initWithFrame:[[UIScreen mainScreen] bounds]];
     // Override point for customization after application launch.
+    
+    // Make the the TableView with all the trips the root view controller.
+    MCAllTripsTableViewController *allTripsView = [[MCAllTripsTableViewController alloc] init];
+    UINavigationController *navController = [[UINavigationController alloc] initWithRootViewController:allTripsView];
+    [[self window] setRootViewController:navController];
+    
     self.window.backgroundColor = [UIColor whiteColor];
     [self.window makeKeyAndVisible];
     return YES;
