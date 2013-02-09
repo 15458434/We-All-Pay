@@ -7,6 +7,7 @@
 //
 
 #import "MCReturnPayment.h"
+#import "MCPerson.h"
 
 @implementation MCReturnPayment
 
@@ -14,7 +15,7 @@
 @synthesize receiver;
 @synthesize money;
 
-- (id)initWithPayer:(NSString *)p paysTo:(NSString *)r amountOfMoney:(double)m
+- (id)initWithPayer:(MCPerson *)p paysTo:(MCPerson *)r amountOfMoney:(double)m
 {
     self = [super init];
     
@@ -33,7 +34,7 @@
     NSNumberFormatter *nf = [[NSNumberFormatter alloc] init];
     [nf setNumberStyle:NSNumberFormatterCurrencyStyle];
     
-    return [[NSString alloc] initWithFormat:@"%@ has to pay %@ to %@.", payer, [nf stringFromNumber:m], receiver];
+    return [[NSString alloc] initWithFormat:@"%@ has to pay %@ to %@.", [payer name], [nf stringFromNumber:m], [receiver name]];
 }
 
 @end

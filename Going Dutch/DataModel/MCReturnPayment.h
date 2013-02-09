@@ -8,15 +8,17 @@
 
 #import <Foundation/Foundation.h>
 
+@class MCPerson;
+
 @interface MCReturnPayment : NSObject
 {
 
 }
 
-- (id)initWithPayer:(NSString *)p paysTo:(NSString *)r amountOfMoney:(double)m;
+- (id)initWithPayer:(MCPerson *)p paysTo:(MCPerson *)r amountOfMoney:(double)m;
 
-@property (nonatomic, strong) NSString *payer;
-@property (nonatomic, strong) NSString *receiver;
+@property (nonatomic, strong) MCPerson *payer;
+@property (nonatomic, strong) MCPerson *receiver;
 @property (nonatomic) double money;
 
 @end

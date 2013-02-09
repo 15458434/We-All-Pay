@@ -13,6 +13,7 @@
 #import "MCCreateNewTripViewController.h"
 #import "MCPaymentViewController.h"
 #import "MCAllTripsStore.h"
+#import "MCReturnPaymentViewController.h"
 
 @interface MCSharedBillTableViewController ()
 
@@ -48,8 +49,8 @@
 
 - (void)showWhoPaysWho:(id)sender
 {
-    // Still needs to be implement.
-    NSLog(@"Solving has not been implemented yet.");
+    MCReturnPaymentViewController *rpvc = [[MCReturnPaymentViewController alloc] initWithBill:tonightsBill];
+    [[self navigationController] pushViewController:rpvc animated:YES];
 }
 
 - (void)shareBill:(id)sender

@@ -8,6 +8,8 @@
 
 #import "MCSharedBill.h"
 #import "MCPeople.h"
+#import "MCReturnPayment.h"
+#import "MCPerson.h"
 
 @implementation MCSharedBill
 
@@ -17,15 +19,56 @@
 
 - (NSArray *)solveWhoHasToPayWhoFromThisBill
 {
-    NSMutableArray *solveArray = [[NSMutableArray alloc] init];
+    // Create two array's one of peope who should pay and one with people that should receive.
+    NSMutableArray *payers = [[NSMutableArray alloc] init];
+    NSNumber *leftToPay;
+    NSNumber *leftToReceive;
+    NSMutableArray *receivers = [[NSMutableArray alloc] init];
+    NSMutableArray *whoHasToPayWho = [[NSMutableArray alloc] init];
     for (MCPerson *p in [people allPeople]) {
-        double sumOfWhatPPaid = [self totalSumPaidBy:p];
-        NSNumber *sOWPP = [[NSNumber alloc] initWithDouble:sumOfWhatPPaid];
-        NSArray *totalAmountSomeonePaid = [[NSArray alloc] initWithObjects:p, sOWPP, nil];
-        [solveArray addObject:totalAmountSomeonePaid];
+        NSNumber *sumOfWhatWasPaidBy = [[NSNumber alloc] initWithDouble:[self totalSumPaidBy:p]];
+        NSNumber *sumOfWhatShouldBePaid = [[NSNumber alloc] initWithDouble:[self amountPeopleShouldHavePaid]];
+
+        if ([sumOfWhatWasPaidBy doubleValue] < [sumOfWhatShouldBePaid doubleValue]) {
+            // This person should pay to someone.
+            leftToPay = [[NSNumber alloc] initWithDouble:[sumOfWhatShouldBePaid doubleValue] - [sumOfWhatWasPaidBy doubleValue]];
+            NSArray *creditValueOfThisPerson = [[NSMutableArray alloc] initWithObjects:p, sumOfWhatShouldBePaid, sumOfWhatWasPaidBy, leftToPay, nil];
+            [payers addObject:creditValueOfThisPerson];
+        } else if ([sumOfWhatWasPaidBy doubleValue] > [sumOfWhatShouldBePaid doubleValue]){
+            // This person should receive from someone.
+            leftToReceive = [[NSNumber alloc] initWithDouble:[sumOfWhatWasPaidBy doubleValue] - [sumOfWhatShouldBePaid doubleValue]];
+            NSArray *creditValueOfThisPerson = [[NSMutableArray alloc] initWithObjects:p, sumOfWhatShouldBePaid, sumOfWhatWasPaidBy, leftToReceive, nil];
+            [receivers addObject:creditValueOfThisPerson];
+        } else {
+            // This person has already paid enough.
+            MCReturnPayment *notDepted = [[MCReturnPayment alloc] initWithPayer:p paysTo:nil amountOfMoney:0.0];
+            [whoHasToPayWho addObject:notDepted];
+        }
     }
-    // Nu is er een array met wie wat betaald heeft.
-    return nil;
+    
+    for (NSMutableArray *p in payers) {
+        for (NSMutableArray *r in receivers) {
+            double ltp = [[p objectAtIndex:3] doubleValue];
+            double ltr = [[r objectAtIndex:3] doubleValue];
+            MCReturnPayment *rp;
+            if (ltp >= ltr) {
+                rp = [[MCReturnPayment alloc] initWithPayer:[p objectAtIndex:0] paysTo:[r objectAtIndex:0] amountOfMoney:ltr];
+                ltp -= ltr;
+                ltr = 0;
+            } else {
+                rp = [[MCReturnPayment alloc] initWithPayer:[p objectAtIndex:0] paysTo:[r objectAtIndex:0] amountOfMoney:ltp];
+                ltr -= ltp;
+                ltp = 0;
+            }
+            leftToPay = [[NSNumber alloc] initWithDouble:ltp];
+            leftToReceive = [[NSNumber alloc] initWithDouble:ltr];
+            [p replaceObjectAtIndex:3 withObject:leftToPay];
+            [r replaceObjectAtIndex:3 withObject:leftToReceive];
+            [whoHasToPayWho addObject:rp];
+        }
+    }
+    
+    return whoHasToPayWho;
 }
 
 - (double)totalSumOfMoneyOfThisSharedBill
