@@ -12,7 +12,6 @@
 
 @interface MCAllTripsStore : NSObject
 {
-    NSString *uniqueTripId;
     NSMutableArray *allTrips;
 }
 
@@ -23,5 +22,8 @@
 - (void)addTrip:(MCSharedBill *)trip;
 - (void)removeTrip:(MCSharedBill *)trip;
 - (NSArray *)allTrips;
+
+- (NSString *)itemArchivePath;
+- (BOOL)saveChanges;
 
 @end

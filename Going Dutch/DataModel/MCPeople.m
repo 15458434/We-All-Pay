@@ -11,7 +11,8 @@
 
 @implementation MCPeople
 
-// New in this class
+#pragma mark - New in this class
+
 - (void)addPerson:(MCPerson *)newPerson
 {
     // add a person to the array of people
@@ -62,7 +63,7 @@
     return groep;
 }
 
-// Inherited from Super Class
+#pragma mark - Inherited from super class.
 
 - (id)init
 {
@@ -72,6 +73,23 @@
         people = [[NSMutableArray alloc] init];
     }
     
+    return self;
+}
+
+#pragma mark - NSCoding
+
+- (void)encodeWithCoder:(NSCoder *)aCoder
+{
+    [aCoder encodeObject:people forKey:@"people"];
+}
+
+- (id)initWithCoder:(NSCoder *)aDecoder
+{
+    self = [super init];
+    
+    if (self) {
+        people = [aDecoder decodeObjectForKey:@"people"];
+    }
     return self;
 }
 

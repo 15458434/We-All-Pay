@@ -12,7 +12,7 @@
 @class MCPeople;
 @class MCPerson;
 
-@interface MCPayment : NSObject
+@interface MCPayment : NSObject <NSCoding>
 {
     NSString *uniquePaymentID;
     double money;

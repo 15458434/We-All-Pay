@@ -10,7 +10,7 @@
 
 @class MCPerson;
 
-@interface MCPeople : NSObject
+@interface MCPeople : NSObject <NSCoding>
 {
     NSMutableArray *people;
 }

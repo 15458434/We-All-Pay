@@ -11,7 +11,7 @@
 
 @class MCPeople;
 
-@interface MCSharedBill : MCPayment
+@interface MCSharedBill : MCPayment <NSCoding>
 {
     NSString *uniqueBillId;
     NSMutableArray *payments;

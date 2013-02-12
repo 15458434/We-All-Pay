@@ -17,6 +17,8 @@
 @synthesize people;
 @synthesize uniqueBillId;
 
+#pragma mark - New in this class
+
 - (NSArray *)solveWhoHasToPayWhoFromThisBill
 {
     // Create two array's one of peope who should pay and one with people that should receive.
@@ -46,6 +48,7 @@
         }
     }
     
+    // Solve who has to pay who.
     for (NSMutableArray *p in payers) {
         for (NSMutableArray *r in receivers) {
             double ltp = [[p objectAtIndex:3] doubleValue];
@@ -67,7 +70,6 @@
             [whoHasToPayWho addObject:rp];
         }
     }
-    
     return whoHasToPayWho;
 }
 
@@ -162,6 +164,8 @@
     }
 }
 
+#pragma mark - Inherited From super.
+
 - (id)init
 {
     self = [super init];
@@ -183,6 +187,29 @@
     [numberformatter setNumberStyle:NSNumberFormatterCurrencyStyle];
     
     return [[NSString alloc] initWithFormat:@"%@ cost %@", tripName ,[numberformatter stringFromNumber:[[NSNumber alloc] initWithDouble:[self money]]]];
+}
+
+#pragma mark - NSCoding
+
+- (void)encodeWithCoder:(NSCoder *)aCoder
+{
+    [aCoder encodeObject:uniqueBillId forKey:@"uniqueBillId"];
+    [aCoder encodeObject:payments forKey:@"payments"];
+    [aCoder encodeObject:people forKey:@"people"];
+    [aCoder encodeObject:tripName forKey:@"tripName"];
+}
+
+- (id)initWithCoder:(NSCoder *)aDecoder
+{
+    self = [super init];
+    
+    if (self) {
+        uniqueBillId = [aDecoder decodeObjectForKey:@"uniqueBillId"];
+        payments = [aDecoder decodeObjectForKey:@"payments"];
+        people = [aDecoder decodeObjectForKey:@"people"];
+        tripName = [aDecoder decodeObjectForKey:@"tripName"];
+    }
+    return self;
 }
 
 @end

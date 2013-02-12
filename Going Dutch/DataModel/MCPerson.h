@@ -9,12 +9,12 @@
 #import <Foundation/Foundation.h>
 #import <AddressBook/AddressBook.h>
 
-@interface MCPerson : NSObject
+@interface MCPerson : NSObject <NSCoding>
 {
     NSString *uniquePersonId;
     NSString *name;
     NSString *emailAddress;
-    NSMutableArray *allEmailAdressesFromAddressBook;
+    NSMutableArray *allEmailAddressesFromAddressBook;
 }
 
 @property (nonatomic, strong, readonly) NSString *uniquePersonId;

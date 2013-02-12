@@ -19,6 +19,8 @@
 @synthesize place;
 @synthesize timePaid;
 
+#pragma mark - New in this class
+
 - (double)amountPeopleShouldHavePaid:(NSArray *)peoplePresent
 {
     return money / [peoplePresent count];
@@ -74,6 +76,8 @@
     return self;
 }
 
+#pragma mark - Inherited From Super
+
 - (id)init
 {
     self = [super init];
@@ -93,6 +97,31 @@
     [numberFormatter setNumberStyle:NSNumberFormatterCurrencyStyle];
     NSNumber *moneyForString = [[NSNumber alloc] initWithDouble:money];
     return [[NSString alloc] initWithFormat:@"At %@ %@ paid %@.", place, [payingPerson description], [numberFormatter stringFromNumber:moneyForString]];
+}
+
+#pragma mark - NSCoding
+
+- (void)encodeWithCoder:(NSCoder *)aCoder
+{
+    [aCoder encodeObject:uniquePaymentID forKey:@"uniquePaymentID"];
+    [aCoder encodeDouble:money forKey:@"money"];
+    [aCoder encodeObject:payingPerson forKey:@"payingPerson"];
+    [aCoder encodeObject:place forKey:@"place"];
+    [aCoder encodeObject:timePaid forKey:@"timePaid"];
+}
+
+- (id)initWithCoder:(NSCoder *)aDecoder
+{
+    self = [super init];
+    
+    if (self) {
+        [self setUniquePaymentID:[aDecoder decodeObjectForKey:@"uniquePaymentID"]];
+        [self setMoney:[aDecoder decodeDoubleForKey:@"money"]];
+        [self setPayingPerson:[aDecoder decodeObjectForKey:@"payingPerson"]];
+        [self setPlace:[aDecoder decodeObjectForKey:@"place"]];
+        timePaid = [aDecoder decodeObjectForKey:@"timePaid"];
+    }
+    return self;
 }
 
 @end

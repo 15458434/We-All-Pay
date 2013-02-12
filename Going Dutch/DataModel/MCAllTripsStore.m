@@ -13,6 +13,8 @@
 
 @synthesize uniqueTripId;
 
+#pragma mark - New in this class
+
 + (MCAllTripsStore *)sharedList
 {
     static MCAllTripsStore *theList = nil;
@@ -39,6 +41,21 @@
     return allTrips;
 }
 
+-(NSString *)itemArchivePath
+{
+    NSArray *documentDirectories = NSSearchPathForDirectoriesInDomains(NSDocumentDirectory, NSUserDomainMask, YES);
+    NSString *documentDirectory = [documentDirectories objectAtIndex:0];
+    return [documentDirectory stringByAppendingPathComponent:@"alltrip.archive"];
+}
+
+-(BOOL)saveChanges
+{
+    NSString *path = [self itemArchivePath];
+    return [NSKeyedArchiver archiveRootObject:allTrips toFile:path];
+}
+
+#pragma mark - Inherited from super.
+
 + (id)allocWithZone:(NSZone *)zone
 {
     return [self sharedList];
@@ -48,7 +65,11 @@
 {
     self = [super init];
     if (self) {
-        allTrips = [[NSMutableArray alloc] init];
+        allTrips = [NSKeyedUnarchiver unarchiveObjectWithFile:[self itemArchivePath]];
+        
+        if (!allTrips) {
+            allTrips = [[NSMutableArray alloc] init];
+        }
     }
     return self;
 }
