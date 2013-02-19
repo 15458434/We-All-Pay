@@ -13,6 +13,16 @@
 
 #pragma mark - New in this class
 
+- (NSString *)stringWithNamesOfPeoplePresent
+{
+    NSMutableString *returnString = [[NSMutableString alloc] init];
+    for (MCPerson *p in people) {
+        NSString *nameString = [[NSString alloc] initWithFormat:@"%@, ", [p name]];
+        [returnString appendString:nameString];
+    }
+    return returnString;
+}
+
 - (void)addPerson:(MCPerson *)newPerson
 {
     // add a person to the array of people

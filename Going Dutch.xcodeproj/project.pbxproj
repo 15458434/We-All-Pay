@@ -33,6 +33,8 @@
 		38D7B68616BABAD900C609B8 /* MCPersonViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 38D7B68416BABAD900C609B8 /* MCPersonViewController.m */; };
 		38D7B68716BABAD900C609B8 /* MCPersonViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = 38D7B68516BABAD900C609B8 /* MCPersonViewController.xib */; };
 		38EFF2C316C396CE001C8248 /* MCReturnPaymentViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 38EFF2C216C396CE001C8248 /* MCReturnPaymentViewController.m */; };
+		38EFF2D416D215BE001C8248 /* MCAllTripsTableViewCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 38EFF2D316D215BE001C8248 /* MCAllTripsTableViewCell.m */; };
+		38EFF2D616D215FB001C8248 /* MCAllTripsTableViewCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 38EFF2D516D215FB001C8248 /* MCAllTripsTableViewCell.xib */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -78,6 +80,9 @@
 		38D7B68516BABAD900C609B8 /* MCPersonViewController.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; name = MCPersonViewController.xib; path = ViewControllers/MCPersonViewController.xib; sourceTree = "<group>"; };
 		38EFF2C116C396CE001C8248 /* MCReturnPaymentViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = MCReturnPaymentViewController.h; path = ViewControllers/MCReturnPaymentViewController.h; sourceTree = "<group>"; };
 		38EFF2C216C396CE001C8248 /* MCReturnPaymentViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = MCReturnPaymentViewController.m; path = ViewControllers/MCReturnPaymentViewController.m; sourceTree = "<group>"; };
+		38EFF2D216D215BE001C8248 /* MCAllTripsTableViewCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = MCAllTripsTableViewCell.h; path = Views/MCAllTripsTableViewCell.h; sourceTree = "<group>"; };
+		38EFF2D316D215BE001C8248 /* MCAllTripsTableViewCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = MCAllTripsTableViewCell.m; path = Views/MCAllTripsTableViewCell.m; sourceTree = "<group>"; };
+		38EFF2D516D215FB001C8248 /* MCAllTripsTableViewCell.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; name = MCAllTripsTableViewCell.xib; path = Views/MCAllTripsTableViewCell.xib; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -177,6 +182,9 @@
 				38D7B68516BABAD900C609B8 /* MCPersonViewController.xib */,
 				3886D40116B7AA3100ECE64F /* MCPaymentViewController.xib */,
 				38175C1D16B6F31D00804914 /* NewTripHeaderView.xib */,
+				38EFF2D516D215FB001C8248 /* MCAllTripsTableViewCell.xib */,
+				38EFF2D216D215BE001C8248 /* MCAllTripsTableViewCell.h */,
+				38EFF2D316D215BE001C8248 /* MCAllTripsTableViewCell.m */,
 			);
 			name = Views;
 			sourceTree = "<group>";
@@ -259,6 +267,7 @@
 				38175C1E16B6F31D00804914 /* NewTripHeaderView.xib in Resources */,
 				3886D40316B7AA3100ECE64F /* MCPaymentViewController.xib in Resources */,
 				38D7B68716BABAD900C609B8 /* MCPersonViewController.xib in Resources */,
+				38EFF2D616D215FB001C8248 /* MCAllTripsTableViewCell.xib in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -283,6 +292,7 @@
 				3886D40216B7AA3100ECE64F /* MCPaymentViewController.m in Sources */,
 				38D7B68616BABAD900C609B8 /* MCPersonViewController.m in Sources */,
 				38EFF2C316C396CE001C8248 /* MCReturnPaymentViewController.m in Sources */,
+				38EFF2D416D215BE001C8248 /* MCAllTripsTableViewCell.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

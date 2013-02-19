@@ -20,6 +20,7 @@
 - (NSArray *)allPeople;
 - (BOOL)areTherePeople;
 - (BOOL)isPersonWithNamePresent:(MCPerson *)person;
+- (NSString *)stringWithNamesOfPeoplePresent;
 
 + (MCPeople *)createTestGroup;
 

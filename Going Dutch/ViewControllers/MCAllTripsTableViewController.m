@@ -12,12 +12,15 @@
 #import "MCSharedBill.h"
 #import "MCPaymentViewController.h"
 #import "MCPeople.h"
+#import "MCAllTripsTableViewCell.h"
 
 @interface MCAllTripsTableViewController ()
 
 @end
 
 @implementation MCAllTripsTableViewController
+
+#pragma mark - Actions
 
 - (void)reloadButton:(id)sender
 {
@@ -39,6 +42,10 @@
     MCSharedBillTableViewController *tvc = [[MCSharedBillTableViewController alloc] initWithSharedBill:newTrip];
     [[self navigationController] pushViewController:tvc animated:YES];
 }
+
+#pragma mark - New in this class.
+
+#pragma mark - Inherited from super
 
 - (id)init
 {
@@ -79,12 +86,12 @@
 - (void)viewDidLoad
 {
     [super viewDidLoad];
-
-    // Uncomment the following line to preserve selection between presentations.
-    // self.clearsSelectionOnViewWillAppear = NO;
- 
-    // Uncomment the following line to display an Edit button in the navigation bar for this view controller.
-    // self.navigationItem.rightBarButtonItem = self.editButtonItem;
+    
+    // Load the nib file
+    UINib *nib = [UINib nibWithNibName:@"MCAllTripsTableViewCell" bundle:nil];
+    
+    // Register this nib that contains the cell.
+    [[self tableView] registerNib:nib forCellReuseIdentifier:@"MCAllTripsTableViewCell"];
 }
 
 - (void)didReceiveMemoryWarning
@@ -107,19 +114,22 @@
 
 - (UITableViewCell *)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath
 {
-    static NSString *CellIdentifier = @"MCAllTripsStoreCell";
-    UITableViewCell *cell = [tableView dequeueReusableCellWithIdentifier:CellIdentifier];
-    
-    if (!cell) {
-        cell = [[UITableViewCell alloc] initWithStyle:UITableViewCellStyleDefault reuseIdentifier:CellIdentifier];
-    }
-    
-    // Fill the cell text Label with the description of the trip.
     MCSharedBill *thisTrip = [[[MCAllTripsStore sharedList] allTrips] objectAtIndex:[indexPath row]];
-    [[cell textLabel] setText:[thisTrip description]];
-    [cell setAccessoryType:UITableViewCellAccessoryDetailDisclosureButton];
+    MCAllTripsTableViewCell *allTripsTableViewCell = [tableView dequeueReusableCellWithIdentifier:@"MCAllTripsTableViewCell"];
     
-    return cell;
+    [[allTripsTableViewCell tripLabel] setText:[thisTrip tripName]];
+    [[allTripsTableViewCell peoplePresentLabel] setText:[[thisTrip people] stringWithNamesOfPeoplePresent]];
+    
+    NSNumberFormatter *nf = [[NSNumberFormatter alloc] init];
+    [nf setNumberStyle:NSNumberFormatterCurrencyStyle];
+    NSNumber *m = [[NSNumber alloc] initWithDouble:[thisTrip totalSumOfMoneyOfThisSharedBill]];
+    NSString *moneyString = [nf stringFromNumber:m];
+    [[allTripsTableViewCell totalCostLabel] setText:moneyString];
+    [[allTripsTableViewCell extraLabel] setText:@""];
+    
+    [allTripsTableViewCell setAccessoryType:UITableViewCellAccessoryDetailDisclosureButton];
+    
+    return allTripsTableViewCell;
 }
 
 /*
@@ -158,6 +168,11 @@
 */
 
 #pragma mark - Table view delegate
+
+- (CGFloat)tableView:(UITableView *)tableView heightForRowAtIndexPath:(NSIndexPath *)indexPath
+{
+    return 60;
+}
 
 - (void)tableView:(UITableView *)tableView accessoryButtonTappedForRowWithIndexPath:(NSIndexPath *)indexPath
 {
