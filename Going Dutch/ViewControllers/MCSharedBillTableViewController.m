@@ -14,6 +14,8 @@
 #import "MCPaymentViewController.h"
 #import "MCAllTripsStore.h"
 #import "MCReturnPaymentViewController.h"
+#import "MCPaymentTableViewCell.h"
+#import "MCPerson.h"
 
 @interface MCSharedBillTableViewController ()
 
@@ -27,16 +29,6 @@
 
 - (void)addPayment:(id)sender
 {
-    /*MCPayment *newPayment = [MCPayment createRandomPaymentWithGroup:[tonightsBill people]];
-    if (newPayment) {
-        [tonightsBill addPayment:newPayment];
-    } else {
-        newPayment = [[MCPayment alloc] init];
-    }
-    NSInteger lastRow = [[tonightsBill allPayments] indexOfObject:newPayment];
-    NSIndexPath *ip = [NSIndexPath indexPathForRow:lastRow inSection:0];
-    [[self tableView] insertRowsAtIndexPaths:[NSArray arrayWithObject:ip] withRowAnimation:UITableViewRowAnimationTop];*/
-    
     MCPaymentViewController *pvc = [[MCPaymentViewController alloc] initWithExistingPayment:nil fromBill:tonightsBill];
     [[self navigationController] pushViewController:pvc animated:YES];
 }
@@ -131,6 +123,11 @@
 {
     [super viewDidLoad];
 
+    // Load nib for PaymentTableViewCell and register it to the TableView.
+    UINib *nib = [UINib nibWithNibName:@"MCPaymentTableViewCell" bundle:nil];
+    [[self tableView] registerNib:nib forCellReuseIdentifier:@"MCPaymentTableViewCell"];
+    
+    
     // if there are NO people on this SharedBill go to the people addscreen
     if (![tonightsBill areTherePeople]) {
         MCCreateNewTripViewController *pvc = [[MCCreateNewTripViewController alloc] initWithBill:tonightsBill isNew:YES];
@@ -172,6 +169,19 @@
 
 - (UITableViewCell *)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath
 {
+    MCPayment *thisCellsPayment = [[tonightsBill allPayments] objectAtIndex:[indexPath row]];
+    MCPaymentTableViewCell *paymentCell = [tableView dequeueReusableCellWithIdentifier:@"MCPaymentTableViewCell"];
+    
+    MCPerson *thisCellsPayer = [thisCellsPayment payingPerson];
+    [[paymentCell namePayerLabel] setText:[thisCellsPayer name]];
+    [[paymentCell whatPaidLabel] setText:[thisCellsPayment place]];
+    NSNumberFormatter *nf = [[NSNumberFormatter alloc] init];
+    [nf setNumberStyle:NSNumberFormatterCurrencyStyle];
+    NSNumber *thisCellsMoney = [[NSNumber alloc] initWithDouble:[thisCellsPayment money]];
+    [[paymentCell moneyPaidLabel] setText:[nf stringFromNumber:thisCellsMoney]];
+    
+    return paymentCell;
+    /*
     // Check to see if an unused cell is available if not make a new one.
     static NSString *CellIdentifier = @"TableViewCell";
     UITableViewCell *cell = [tableView dequeueReusableCellWithIdentifier:CellIdentifier];
@@ -181,7 +191,7 @@
     MCPayment *thisCellsPayment = [[tonightsBill allPayments] objectAtIndex:[indexPath row]];
     [[cell textLabel] setText:[thisCellsPayment description]];
     
-    return cell;
+    return cell;*/
 }
 
 /*
