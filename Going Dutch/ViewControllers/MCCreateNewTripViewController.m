@@ -12,6 +12,8 @@
 #import "MCSharedBill.h"
 #import "MCPersonViewController.h"
 #import "MCAllTripsStore.h"
+#import "MCPersonViewController.h"
+#import "MCPersonTableViewCell.h"
 
 @interface MCCreateNewTripViewController ()
 
@@ -176,19 +178,7 @@
 }
 
 - (void)viewWillAppear:(BOOL)animated
-{
-    [super viewWillAppear:animated];
-    [[self tableView] reloadData];
-    [tripNameField setText:[tonightsBill tripName]];
-    [[self navigationController] setToolbarHidden:NO animated:YES];
-    if (![[tonightsBill people] areTherePeople]) {
-        [tripNameField becomeFirstResponder];
-    }
-}
-
-- (void)viewWillDisappear:(BOOL)animated
-{
-    [super viewWillDisappear:animated];
+{    [super viewWillDisappear:animated];
     
     [[self view] endEditing:YES];
 }
@@ -217,6 +207,10 @@
                                                                                 action:nil];
     NSArray *toolBarButtons = [[NSArray alloc] initWithObjects:flexButton, addressBookButton, nil];
     [self setToolbarItems:toolBarButtons animated:YES];
+    
+    // Load and register Nib to the tableView for use.
+    UINib *nib = [UINib nibWithNibName:@"MCPersonTableViewCell" bundle:nil];
+    [[self tableView] registerNib:nib forCellReuseIdentifier:@"MCPersonTableViewCell"];
 }
 
 - (void)didReceiveMemoryWarning
@@ -274,6 +268,15 @@
 
 - (UITableViewCell *)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath
 {
+    MCPerson *thisCellsPerson = [[[tonightsBill people] allPeople] objectAtIndex:[indexPath row]];
+    MCPersonTableViewCell *thisCell = [tableView dequeueReusableCellWithIdentifier:@"MCPersonTableViewCell"];
+    
+    [[thisCell nameLabel] setText:[thisCellsPerson name]];
+    [[thisCell emailLabel] setText:[thisCellsPerson emailAddress]];
+    
+    return thisCell;
+    
+    /*
     // Reuse and empty tableViewCell or create a new one
     static NSString *CellIdentifier = @"TableViewCell";
     UITableViewCell *cell = [tableView dequeueReusableCellWithIdentifier:CellIdentifier];
@@ -282,7 +285,7 @@
     // Set the TableViewCell's label as the name of the person.
     [[cell textLabel] setText:[[[[tonightsBill people] allPeople] objectAtIndex:[indexPath row]] description]];
     [[cell detailTextLabel] setText:[[[[tonightsBill people] allPeople] objectAtIndex:[indexPath row]] emailAddress]];
-    return cell;
+    return cell;*/
 }
 
 - (UIView *)tableView:(UITableView *)tableView viewForHeaderInSection:(NSInteger)section
@@ -337,6 +340,11 @@
 */
 
 #pragma mark - Table view delegate
+
+- (CGFloat)tableView:(UITableView *)tableView heightForRowAtIndexPath:(NSIndexPath *)indexPath
+{
+    return 60;
+}
 
 - (void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath
 {

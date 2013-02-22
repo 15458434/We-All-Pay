@@ -17,6 +17,8 @@
     self.window = [[UIWindow alloc] initWithFrame:[[UIScreen mainScreen] bounds]];
     // Override point for customization after application launch.
     
+    NSLog(@"During the development of this app, I met a wonderful woman. Her name is Ilse Béguin.");
+    
     // Make the the TableView with all the trips the root view controller.
     MCAllTripsTableViewController *allTripsView = [[MCAllTripsTableViewController alloc] init];
     UINavigationController *navController = [[UINavigationController alloc] initWithRootViewController:allTripsView];
