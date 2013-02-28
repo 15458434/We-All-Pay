@@ -11,6 +11,8 @@
 @implementation MCPerson
 
 @synthesize uniquePersonId;
+@synthesize picture;
+@synthesize thumbnail;
 @synthesize name;
 @synthesize emailAddress;
 @synthesize allEmailAddressesFromAddressBook;
@@ -30,7 +32,7 @@
 
 + (MCPerson *)createRandomPerson
 {
-    NSArray *listOfNames = [[NSArray alloc] initWithObjects:@"Lieke", @"Marieke", @"Bas", @"Mark", @"Tineke", @"Merit", @"Arjen", @"Stefan", @"Jeroen", @"Susan", nil];
+    NSArray *listOfNames = [[NSArray alloc] initWithObjects:@"Lieke", @"Marieke", @"Bas", @"Mark", @"Tineke", @"Merit", @"Arjen", @"Stefan", @"Jeroen", @"Susan", @"Ilse", nil];
     NSUInteger randomNumber = rand() % [listOfNames count];
     return [[MCPerson alloc] initWithName:[listOfNames objectAtIndex:randomNumber] andMailAddress:nil];
 }

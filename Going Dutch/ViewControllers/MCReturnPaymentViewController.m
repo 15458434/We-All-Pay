@@ -10,6 +10,7 @@
 #import "MCSharedBill.h"
 #import "MCReturnPayment.h"
 #import "MCPerson.h"
+#import "MCReturnPaymentTableViewCell.h"
 
 @interface MCReturnPaymentViewController ()
 
@@ -55,6 +56,9 @@
  
     // Uncomment the following line to display an Edit button in the navigation bar for this view controller.
     // self.navigationItem.rightBarButtonItem = self.editButtonItem;
+    
+    UINib *nib = [UINib nibWithNibName:@"MCReturnPaymentTableViewCell" bundle:nil];
+    [[self tableView] registerNib:nib forCellReuseIdentifier:@"MCReturnPaymentTableViewCell"];
 }
 
 - (void)didReceiveMemoryWarning
@@ -77,16 +81,17 @@
 
 - (UITableViewCell *)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath
 {
-    // Check to see if an unused cell is available if not make a new one.
-    static NSString *CellIdentifier = @"TableViewCell";
-    UITableViewCell *cell = [tableView dequeueReusableCellWithIdentifier:CellIdentifier];
-    if (!cell) cell = [[UITableViewCell alloc] initWithStyle:UITableViewCellStyleSubtitle reuseIdentifier:CellIdentifier];
-    
-    // Get payment and put it's description in the cell.
     MCReturnPayment *thisCellsReturnPayment = [paymentsAfterwards objectAtIndex:[indexPath row]];
-    [[cell textLabel] setText:[thisCellsReturnPayment description]];
+    MCReturnPaymentTableViewCell *returnPaymentCell = [tableView dequeueReusableCellWithIdentifier:@"MCReturnPaymentTableViewCell"];
+    NSNumberFormatter *nf = [[NSNumberFormatter alloc] init];
+    [nf setNumberStyle:NSNumberFormatterCurrencyStyle];
+    NSNumber *moneyToConvert = [[NSNumber alloc] initWithDouble:[thisCellsReturnPayment money]];
+    [[returnPaymentCell moneyLabel] setText:[nf stringFromNumber:moneyToConvert]];
     
-    return cell;
+    NSString *whoOwesWho = [[NSString alloc] initWithFormat:@"%@ owes %@:", [thisCellsReturnPayment payer], [thisCellsReturnPayment receiver]];
+    [[returnPaymentCell whoOwesWho] setText:whoOwesWho];
+    
+    return returnPaymentCell;
 }
 
 /*

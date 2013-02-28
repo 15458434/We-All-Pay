@@ -133,14 +133,8 @@
 - (void)getPersonData:(ABRecordRef)person
 {
     MCPerson *newPerson = [[MCPerson alloc] init];
-    /*[newPerson setName:(__bridge_transfer NSString *)ABRecordCopyValue(person, kABPersonFirstNameProperty)];
-    ABMultiValueRef emailAddresses = ABRecordCopyValue(person, kABPersonEmailProperty);
-    if (ABMultiValueGetCount(emailAddresses)) {
-        [newPerson setEmailAddress:(__bridge_transfer NSString *)ABMultiValueCopyValueAtIndex(emailAddresses, 0)];
-    } else {
-        [newPerson setEmailAddress:nil];
-    }
-    CFRelease(emailAddresses);*/
+    [newPerson setThumbnail:[UIImage imageWithData:(__bridge_transfer NSData *)ABPersonCopyImageDataWithFormat(person, kABPersonImageFormatThumbnail)]];
+    [newPerson setPicture:[UIImage imageWithData:(__bridge_transfer NSData *)ABPersonCopyImageDataWithFormat(person, kABPersonImageFormatOriginalSize)]];
     [newPerson setName:(__bridge_transfer NSString *)ABRecordCopyValue(person, kABPersonFirstNameProperty)];
     ABMultiValueRef emailAddresses = ABRecordCopyValue(person, kABPersonEmailProperty);
     if (ABMultiValueGetCount(emailAddresses)) {
@@ -271,21 +265,11 @@
     MCPerson *thisCellsPerson = [[[tonightsBill people] allPeople] objectAtIndex:[indexPath row]];
     MCPersonTableViewCell *thisCell = [tableView dequeueReusableCellWithIdentifier:@"MCPersonTableViewCell"];
     
+    [[thisCell personImage] setImage:[thisCellsPerson thumbnail]];
     [[thisCell nameLabel] setText:[thisCellsPerson name]];
     [[thisCell emailLabel] setText:[thisCellsPerson emailAddress]];
     
     return thisCell;
-    
-    /*
-    // Reuse and empty tableViewCell or create a new one
-    static NSString *CellIdentifier = @"TableViewCell";
-    UITableViewCell *cell = [tableView dequeueReusableCellWithIdentifier:CellIdentifier];
-    if (!cell) cell = [[UITableViewCell alloc] initWithStyle:UITableViewCellStyleSubtitle reuseIdentifier:CellIdentifier];
-
-    // Set the TableViewCell's label as the name of the person.
-    [[cell textLabel] setText:[[[[tonightsBill people] allPeople] objectAtIndex:[indexPath row]] description]];
-    [[cell detailTextLabel] setText:[[[[tonightsBill people] allPeople] objectAtIndex:[indexPath row]] emailAddress]];
-    return cell;*/
 }
 
 - (UIView *)tableView:(UITableView *)tableView viewForHeaderInSection:(NSInteger)section
