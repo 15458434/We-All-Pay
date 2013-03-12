@@ -172,9 +172,17 @@
 }
 
 - (void)viewWillAppear:(BOOL)animated
-{    [super viewWillDisappear:animated];
+{
+    [super viewWillAppear:animated];
     
+    [[self navigationController] setToolbarHidden:NO animated:YES];
     [[self view] endEditing:YES];
+}
+
+-(void)viewDidAppear:(BOOL)animated
+{
+    [super viewDidAppear:animated];
+    [tripNameField setPlaceholder:[[NSString alloc] initWithFormat:@"Enter something to rename %@.", [tonightsBill tripName]]];    
 }
 
 - (void)viewDidLoad
@@ -186,6 +194,7 @@
  
     // Uncomment the following line to display an Edit button in the navigation bar for this view controller.
     // self.navigationItem.rightBarButtonItem = self.editButtonItem;
+    
     UIBarButtonItem *addressBookButton;
     if (kABAuthorizationStatusAuthorized == ABAddressBookGetAuthorizationStatus()) {
         addressBookButton = [[UIBarButtonItem alloc] initWithBarButtonSystemItem:UIBarButtonSystemItemBookmarks

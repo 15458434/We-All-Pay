@@ -7,6 +7,8 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		3801F89C16DFC62600DF8675 /* CoreData.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 3801F89B16DFC62600DF8675 /* CoreData.framework */; };
+		3801F8A016DFC70900DF8675 /* goingdutch.xcdatamodeld in Sources */ = {isa = PBXBuildFile; fileRef = 3801F89E16DFC70900DF8675 /* goingdutch.xcdatamodeld */; };
 		38175C1E16B6F31D00804914 /* NewTripHeaderView.xib in Resources */ = {isa = PBXBuildFile; fileRef = 38175C1D16B6F31D00804914 /* NewTripHeaderView.xib */; };
 		38572AD7169D437B00969C62 /* UIKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 38572AD6169D437B00969C62 /* UIKit.framework */; };
 		38572AD9169D437B00969C62 /* Foundation.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 38572AD8169D437B00969C62 /* Foundation.framework */; };
@@ -44,6 +46,8 @@
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
+		3801F89B16DFC62600DF8675 /* CoreData.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = CoreData.framework; path = System/Library/Frameworks/CoreData.framework; sourceTree = SDKROOT; };
+		3801F89F16DFC70900DF8675 /* goingdutch.xcdatamodel */ = {isa = PBXFileReference; lastKnownFileType = wrapper.xcdatamodel; path = goingdutch.xcdatamodel; sourceTree = "<group>"; };
 		38175C1D16B6F31D00804914 /* NewTripHeaderView.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; name = NewTripHeaderView.xib; path = Views/NewTripHeaderView.xib; sourceTree = "<group>"; };
 		38572AD2169D437B00969C62 /* Going Dutch.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = "Going Dutch.app"; sourceTree = BUILT_PRODUCTS_DIR; };
 		38572AD6169D437B00969C62 /* UIKit.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = UIKit.framework; path = System/Library/Frameworks/UIKit.framework; sourceTree = SDKROOT; };
@@ -105,6 +109,7 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				3801F89C16DFC62600DF8675 /* CoreData.framework in Frameworks */,
 				3886D3FD16B7A1CD00ECE64F /* AddressBook.framework in Frameworks */,
 				3886D3FE16B7A1CD00ECE64F /* AddressBookUI.framework in Frameworks */,
 				38572AD7169D437B00969C62 /* UIKit.framework in Frameworks */,
@@ -116,6 +121,14 @@
 /* End PBXFrameworksBuildPhase section */
 
 /* Begin PBXGroup section */
+		3801F89D16DFC6D400DF8675 /* DataStore */ = {
+			isa = PBXGroup;
+			children = (
+				3801F89E16DFC70900DF8675 /* goingdutch.xcdatamodeld */,
+			);
+			name = DataStore;
+			sourceTree = "<group>";
+		};
 		38572AC7169D437B00969C62 = {
 			isa = PBXGroup;
 			children = (
@@ -136,6 +149,7 @@
 		38572AD5169D437B00969C62 /* Frameworks */ = {
 			isa = PBXGroup;
 			children = (
+				3801F89B16DFC62600DF8675 /* CoreData.framework */,
 				3886D3FB16B7A1CD00ECE64F /* AddressBook.framework */,
 				3886D3FC16B7A1CD00ECE64F /* AddressBookUI.framework */,
 				38572AD6169D437B00969C62 /* UIKit.framework */,
@@ -148,6 +162,7 @@
 		38572ADC169D437B00969C62 /* Going Dutch */ = {
 			isa = PBXGroup;
 			children = (
+				3801F89D16DFC6D400DF8675 /* DataStore */,
 				38572AF5169D43A600969C62 /* DataModel */,
 				38572AF4169D439E00969C62 /* Views */,
 				38572AF3169D438E00969C62 /* ViewControllers */,
@@ -323,6 +338,7 @@
 				38EFF2DE16D68D1C001C8248 /* MCPaymentTableViewCell.m in Sources */,
 				38EFF2E116D69767001C8248 /* MCPersonTableViewCell.m in Sources */,
 				38F8B14916D7529B001037CA /* MCReturnPaymentTableViewCell.m in Sources */,
+				3801F8A016DFC70900DF8675 /* goingdutch.xcdatamodeld in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -434,6 +450,20 @@
 			defaultConfigurationName = Release;
 		};
 /* End XCConfigurationList section */
+
+/* Begin XCVersionGroup section */
+		3801F89E16DFC70900DF8675 /* goingdutch.xcdatamodeld */ = {
+			isa = XCVersionGroup;
+			children = (
+				3801F89F16DFC70900DF8675 /* goingdutch.xcdatamodel */,
+			);
+			currentVersion = 3801F89F16DFC70900DF8675 /* goingdutch.xcdatamodel */;
+			name = goingdutch.xcdatamodeld;
+			path = DataStore/goingdutch.xcdatamodeld;
+			sourceTree = "<group>";
+			versionGroupType = wrapper.xcdatamodel;
+		};
+/* End XCVersionGroup section */
 	};
 	rootObject = 38572AC9169D437B00969C62 /* Project object */;
 }
