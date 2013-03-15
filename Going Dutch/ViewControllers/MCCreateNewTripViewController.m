@@ -25,6 +25,7 @@
 @synthesize dismissYourSelf;
 
 @synthesize tonightsBill;
+@synthesize didSomethingChange;
 
 
 # pragma mark - actions of this class
@@ -105,6 +106,8 @@
                                          userInfo:nil];
         }
         UIBarButtonItem *bbi;
+        isInitAsNew = isNew;
+        didSomethingChange = NO;
         if (isNew) {
             bbi = [[UIBarButtonItem alloc] initWithBarButtonSystemItem:UIBarButtonSystemItemDone
                                                                 target:self
@@ -153,6 +156,9 @@
     NSInteger rowOfNewPerson = [[[tonightsBill people] allPeople] indexOfObject:newPerson];
     NSIndexPath *indexPathOfNewPerson = [NSIndexPath indexPathForRow:rowOfNewPerson inSection:0];
     [[self tableView] insertRowsAtIndexPaths:[NSArray arrayWithObject:indexPathOfNewPerson] withRowAnimation:UITableViewRowAnimationTop];
+    if (!didSomethingChange) {
+        didSomethingChange = YES;
+    }
 }
 
 - (BOOL)peoplePickerNavigationController:(ABPeoplePickerNavigationController *)peoplePicker shouldContinueAfterSelectingPerson:(ABRecordRef)person property:(ABPropertyID)property identifier:(ABMultiValueIdentifier)identifier
@@ -182,7 +188,9 @@
 -(void)viewDidAppear:(BOOL)animated
 {
     [super viewDidAppear:animated];
-    [tripNameField setPlaceholder:[[NSString alloc] initWithFormat:@"Enter something to rename %@.", [tonightsBill tripName]]];    
+    if (!isInitAsNew) {
+        [tripNameField setPlaceholder:[[NSString alloc] initWithFormat:@"Enter something to rename %@.", [tonightsBill tripName]]];
+    }
 }
 
 - (void)viewDidLoad
@@ -196,7 +204,8 @@
     // self.navigationItem.rightBarButtonItem = self.editButtonItem;
     
     UIBarButtonItem *addressBookButton;
-    if (kABAuthorizationStatusAuthorized == ABAddressBookGetAuthorizationStatus()) {
+    if (kABAuthorizationStatusAuthorized == ABAddressBookGetAuthorizationStatus() ||
+        kABAuthorizationStatusNotDetermined == ABAddressBookGetAuthorizationStatus()) {
         addressBookButton = [[UIBarButtonItem alloc] initWithBarButtonSystemItem:UIBarButtonSystemItemBookmarks
                                                             target:self
                                                             action:@selector(getPeopleFromAddressBook:)];
@@ -242,7 +251,8 @@
 {
     [textField resignFirstResponder];
     if ([[[tonightsBill people] allPeople] count] == 0) {
-        if (kABAuthorizationStatusAuthorized == ABAddressBookGetAuthorizationStatus()) {
+        if (kABAuthorizationStatusAuthorized == ABAddressBookGetAuthorizationStatus() ||
+            kABAuthorizationStatusNotDetermined == ABAddressBookGetAuthorizationStatus()) {
             [self getPeopleFromAddressBook:self];
         } else {
             [self addPerson:self];
@@ -254,6 +264,9 @@
 -(void)textFieldDidEndEditing:(UITextField *)textField
 {
     [tonightsBill setTripName:[textField text]];
+    if (!didSomethingChange) {
+        didSomethingChange = YES;
+    }
 }
 
 #pragma mark - Table view data source

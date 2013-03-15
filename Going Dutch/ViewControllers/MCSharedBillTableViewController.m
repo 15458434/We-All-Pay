@@ -16,6 +16,7 @@
 #import "MCReturnPaymentViewController.h"
 #import "MCPaymentTableViewCell.h"
 #import "MCPerson.h"
+#import "MCPeople.h"
 
 @interface MCSharedBillTableViewController ()
 
@@ -24,6 +25,7 @@
 @implementation MCSharedBillTableViewController
 
 @synthesize tonightsBill;
+@synthesize didSomethingChange;
 
 // Actions
 
@@ -47,7 +49,22 @@
 
 - (void)shareBill:(id)sender
 {
-    NSLog(@"Share this bill has not been implemented yet.");
+    
+    MFMailComposeViewController *mailViewController = [[MFMailComposeViewController alloc] init];
+    [mailViewController setMailComposeDelegate:self];
+    NSArray *allPeople = [[tonightsBill people] allPeople];
+    NSMutableArray *listOfMailAddresses = [[NSMutableArray alloc] init];
+    for (MCPerson *p in allPeople) {
+        [listOfMailAddresses addObject:[p emailAddress]];
+    }
+    [mailViewController setToRecipients:listOfMailAddresses];
+    [mailViewController setSubject:[[NSString alloc] initWithFormat:@"Bill overview of our trip to %@.", [tonightsBill tripName]]];
+    NSMutableString *mailBody = [[NSMutableString alloc] init];
+    [mailBody appendFormat:@"Dear %@\n", [[tonightsBill people] stringWithNamesOfPeoplePresent]];
+    [mailBody appendFormat:@"\n"];
+    
+    [mailViewController setMessageBody:mailBody isHTML:NO];
+    [self presentViewController:mailViewController animated:YES completion:nil];
 }
 
 - (id)initWithSharedBill:(MCSharedBill *)tBill
@@ -109,7 +126,12 @@
     UIBarButtonItem *solveButton = [[UIBarButtonItem alloc] initWithBarButtonSystemItem:UIBarButtonSystemItemOrganize
                                                                                  target:self
                                                                                  action:@selector(showWhoPaysWho:)];
-    NSArray *bottomButtonArray = [[NSArray alloc] initWithObjects:shareButton, flexibleSpace, solveButton, flexibleSpace, addButton, nil];
+    NSArray *bottomButtonArray;
+    if ([MFMailComposeViewController canSendMail]) {
+        bottomButtonArray = [[NSArray alloc] initWithObjects:shareButton, flexibleSpace, solveButton, flexibleSpace, addButton, nil];
+    } else {
+        bottomButtonArray = [[NSArray alloc] initWithObjects:flexibleSpace, solveButton, flexibleSpace, addButton, nil];
+    }
     [self setToolbarItems:bottomButtonArray animated:YES];
 }
 
@@ -153,6 +175,21 @@
 {
     [super didReceiveMemoryWarning];
     // Dispose of any resources that can be recreated.
+}
+
+#pragma mark - MFMailViewControllerDelegate
+
+- (void)mailComposeController:(MFMailComposeViewController *)controller didFinishWithResult:(MFMailComposeResult)result error:(NSError *)error
+{
+    if (result == MFMailComposeResultCancelled) {
+        [[self presentedViewController] dismissViewControllerAnimated:YES completion:nil];
+    } else if (result == MFMailComposeResultSent) {
+        [[self presentedViewController] dismissViewControllerAnimated:YES completion:nil];
+    } else if (result == MFMailComposeResultSaved) {
+        [[self presentedViewController] dismissViewControllerAnimated:YES completion:nil];
+    } else {
+        NSLog(@"Something went wrong: %@", [error localizedDescription]);
+    }
 }
 
 #pragma mark - Table view data source

@@ -67,7 +67,10 @@
             leftToReceive = [[NSNumber alloc] initWithDouble:ltr];
             [p replaceObjectAtIndex:3 withObject:leftToPay];
             [r replaceObjectAtIndex:3 withObject:leftToReceive];
-            [whoHasToPayWho addObject:rp];
+            
+            if ([rp money] > 0) {
+                [whoHasToPayWho addObject:rp];
+            }
         }
     }
     return whoHasToPayWho;

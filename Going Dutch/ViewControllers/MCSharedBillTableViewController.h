@@ -7,11 +7,12 @@
 //
 
 #import <UIKit/UIKit.h>
+#import <MessageUI/MessageUI.h>
 
 @class MCSharedBill;
 @class MCAllTripsTableViewController;
 
-@interface MCSharedBillTableViewController : UITableViewController
+@interface MCSharedBillTableViewController : UITableViewController <MFMailComposeViewControllerDelegate>
 {
     MCSharedBill *tonightsBill;
 }
@@ -20,5 +21,6 @@
 - (void)addPayment:(id)sender;
 
 @property (nonatomic, strong) MCSharedBill *tonightsBill;
+@property (nonatomic, readonly) BOOL didSomethingChange;
 
 @end

@@ -19,6 +19,7 @@
 @implementation MCPaymentViewController
 
 @synthesize thisPayment;
+@synthesize didSomethingChange;
 
 #pragma mark - actions
 
@@ -73,6 +74,7 @@
     
     if (self) {
         tonightsBill = bill;
+        didSomethingChange = NO;
         if (thePayment) {
             thisPayment = thePayment;
             withANewPayment = NO;

@@ -29,6 +29,7 @@
 }
 
 @property (nonatomic, strong) MCPayment *thisPayment;
+@property (nonatomic, readonly) BOOL didSomethingChange;
 
 - (id)initWithExistingPayment:(MCPayment *)thePayment fromBill:(MCSharedBill *)bill;
 
