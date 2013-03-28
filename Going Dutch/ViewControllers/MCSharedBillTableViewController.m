@@ -11,7 +11,6 @@
 #import "MCPayment.h"
 #import "MCAllTripsTableViewController.h"
 #import "MCCreateNewTripViewController.h"
-#import "MCPaymentViewController.h"
 #import "MCAllTripsStore.h"
 #import "MCReturnPaymentViewController.h"
 #import "MCPaymentTableViewCell.h"
@@ -33,6 +32,7 @@
 - (void)addPayment:(id)sender
 {
     MCPaymentViewController *pvc = [[MCPaymentViewController alloc] initWithExistingPayment:nil fromBill:tonightsBill];
+    [pvc setDelegate:self];
     [[self navigationController] pushViewController:pvc animated:YES];
 }
 
@@ -54,10 +54,12 @@
     MFMailComposeViewController *mailViewController = [[MFMailComposeViewController alloc] init];
     [mailViewController setMailComposeDelegate:self];
     NSArray *allPeople = [[tonightsBill people] allPeople];
+    // Create a list of all email addresses
     NSMutableArray *listOfMailAddresses = [[NSMutableArray alloc] init];
     for (MCPerson *p in allPeople) {
         [listOfMailAddresses addObject:[p emailAddress]];
     }
+    // Set the mail header.
     [mailViewController setToRecipients:listOfMailAddresses];
     [mailViewController setSubject:[[NSString alloc] initWithFormat:@"Bill overview of our trip to %@.", [tonightsBill tripName]]];
     
@@ -192,6 +194,16 @@
 {
     [super didReceiveMemoryWarning];
     // Dispose of any resources that can be recreated.
+}
+
+#pragma mark - MCPaymentViewControllerDelegate
+
+- (void)removePayment:(MCPayment *)payment fromPaymentViewController:(MCPaymentViewController *)pvc
+{
+    if (![pvc didSomethingChange]) {
+        [tonightsBill removePayment:payment];
+        [[self tableView] reloadData];
+    }
 }
 
 #pragma mark - MFMailViewControllerDelegate

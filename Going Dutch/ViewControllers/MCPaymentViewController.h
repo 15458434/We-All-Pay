@@ -11,12 +11,18 @@
 @class MCPayment;
 @class MCSharedBill;
 @class MCPerson;
+@class MCPaymentViewController;
+
+@protocol MCPaymentViewControllerDelegate <NSObject>
+
+- (void)removePayment:(MCPayment *)payment fromPaymentViewController:(MCPaymentViewController *)pvc;
+
+@end
 
 @interface MCPaymentViewController : UIViewController <UIPickerViewDataSource, UIPickerViewDelegate, UITextFieldDelegate>
 {
-    MCPayment *thisPayment;
-    MCSharedBill *tonightsBill;
-    BOOL withANewPayment;
+    UIBarButtonItem *doneButton;
+    UIBarButtonItem *cancelChangesForEntirePaymentButton;
     
     __weak IBOutlet UITextField *payerView;
     MCPerson *payerViewPerson;
@@ -29,7 +35,10 @@
 }
 
 @property (nonatomic, strong) MCPayment *thisPayment;
+@property (nonatomic, readonly) MCSharedBill *tonightsBill;
 @property (nonatomic, readonly) BOOL didSomethingChange;
+@property (nonatomic, readonly) BOOL withANewPayment;
+@property (nonatomic, weak) id delegate;
 
 - (id)initWithExistingPayment:(MCPayment *)thePayment fromBill:(MCSharedBill *)bill;
 

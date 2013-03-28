@@ -19,13 +19,24 @@
 @implementation MCPaymentViewController
 
 @synthesize thisPayment;
+@synthesize tonightsBill;
 @synthesize didSomethingChange;
+@synthesize withANewPayment;
+@synthesize delegate;
 
 #pragma mark - actions
 
+- (void)backButtonPressed:(id)selector
+{
+    NSLog(@"MCPaymentViewController: Done button pressed.");
+    if (didSomethingChange) {
+        [[self navigationController] popViewControllerAnimated:YES];
+    }
+}
+
 - (void)removePayment:(id)selector
 {
-    [tonightsBill removePayment:thisPayment];
+    [[self delegate] removePayment:thisPayment fromPaymentViewController:self];
     [[self navigationController] popViewControllerAnimated:YES];
 }
 
@@ -42,6 +53,8 @@
     payerViewPerson = [[[tonightsBill people] allPeople] objectAtIndex:row];
     [payerView setText:[payerViewPerson name]];
     [payerView resignFirstResponder];
+    didSomethingChange = YES;
+    [[self navigationItem] setRightBarButtonItem:doneButton animated:YES];
 }
 
 - (void)cancelNumberPad:(id)selector
@@ -61,7 +74,7 @@
 - (void)cancelChangesForEntirePayment:(id)selector
 {
     if (withANewPayment) {
-        [tonightsBill removePayment:thisPayment];
+        [[self delegate] removePayment:thisPayment fromPaymentViewController:self];
     }
     [[self navigationController] popViewControllerAnimated:YES];
 }
@@ -81,6 +94,7 @@
         } else {
             thisPayment = [[MCPayment alloc] init];
             [tonightsBill addPayment:thisPayment];
+            [thisPayment setPayingPerson:[[[tonightsBill people] allPeople] objectAtIndex:0]];
             withANewPayment = YES;
         }
     }
@@ -98,6 +112,7 @@
 {
     payerViewPerson = [[[tonightsBill people] allPeople] objectAtIndex:row];
     [payerView setText:[payerViewPerson name]];
+    didSomethingChange = YES;
 }
 
 #pragma mark - PickerViewDataSource
@@ -117,6 +132,8 @@
 {
     if (textField == placeView) {
         [textField resignFirstResponder];
+        didSomethingChange = YES;
+        [[self navigationItem] setRightBarButtonItem:doneButton animated:YES];
     }
     return YES;
 }
@@ -148,6 +165,8 @@
         
         [nf setNumberStyle:NSNumberFormatterCurrencyStyle];
         [paidView setText:[nf stringFromNumber:paidViewNumber]];
+        didSomethingChange = YES;
+        [[self navigationItem] setRightBarButtonItem:doneButton animated:YES];
     }
 }
 
@@ -162,10 +181,28 @@
     return self;
 }
 
+- (void)viewDidAppear:(BOOL)animated
+{
+    [super viewDidAppear:animated];
+    
+
+}
+
 - (void)viewWillAppear:(BOOL)animated
 {
     [super viewWillAppear:animated];
     
+    // Navigationbar stuff
+    doneButton = [[UIBarButtonItem alloc] initWithBarButtonSystemItem:UIBarButtonSystemItemDone
+                                                               target:self
+                                                               action:@selector(backButtonPressed:)];
+    if (didSomethingChange) {
+        [[self navigationItem] setRightBarButtonItem:doneButton];
+    }
+    cancelChangesForEntirePaymentButton = [[UIBarButtonItem alloc] initWithBarButtonSystemItem:UIBarButtonSystemItemCancel target:self action:@selector(cancelChangesForEntirePayment:)];
+    [[self navigationItem] setLeftBarButtonItem:cancelChangesForEntirePaymentButton];
+    
+    // Fill in the form if data is present.
     [payerView setText:[[thisPayment payingPerson] name]];
     [payerView setDelegate:self];
     [placeView setText:[thisPayment place]];
@@ -198,12 +235,13 @@
     // Do any additional setup after loading the view from its nib.
     
     // If tonight's bill was passed along.
-    if (tonightsBill) {
+    if (!withANewPayment) {
         [[self navigationController] setToolbarHidden:NO animated:YES];
         UIBarButtonItem *deleteButton = [[UIBarButtonItem alloc] initWithBarButtonSystemItem:UIBarButtonSystemItemTrash
                                                                                       target:self
                                                                                       action:@selector(removePayment:)];
         [self setToolbarItems:[[NSArray alloc] initWithObjects:deleteButton, nil] animated:YES];
+        [[self navigationController] setToolbarHidden:NO animated:YES];
     } else {
         [[self navigationController] setToolbarHidden:YES animated:YES];
     }
@@ -217,10 +255,10 @@
     UIBarButtonItem *flexButton = [[UIBarButtonItem alloc] initWithBarButtonSystemItem:UIBarButtonSystemItemFlexibleSpace
                                                                                 target:nil
                                                                                 action:nil];
-    UIBarButtonItem *doneButton = [[UIBarButtonItem alloc] initWithBarButtonSystemItem:UIBarButtonSystemItemDone
-                                                                                target:self
-                                                                                action:@selector(donePersonPicker:)];
-    NSArray *buttonArray = [[NSArray alloc] initWithObjects:cancelButton, flexButton, doneButton, nil];
+    UIBarButtonItem *doneButtonToolbar = [[UIBarButtonItem alloc] initWithBarButtonSystemItem:UIBarButtonSystemItemDone
+                                                                                       target:self
+                                                                                       action:@selector(donePersonPicker:)];
+    NSArray *buttonArray = [[NSArray alloc] initWithObjects:cancelButton, flexButton, doneButtonToolbar, nil];
     [inputAccessoryPickerView setItems:buttonArray animated:YES];
     personPickerView = [[UIPickerView alloc] init];
     [personPickerView setDelegate:self];
@@ -238,10 +276,10 @@
     [inputAccossoryNumberPad setItems:[[NSArray alloc] initWithObjects:cancelButton, flexButton, doneButton, nil] animated:YES];
     [paidView setInputAccessoryView:inputAccossoryNumberPad];
     [paidView setDelegate:self];
-    UIBarButtonItem *cancelChangesForEntirePaymentButton = [[UIBarButtonItem alloc] initWithBarButtonSystemItem:UIBarButtonSystemItemCancel target:self action:@selector(cancelChangesForEntirePayment:)];
-    [[self navigationItem] setRightBarButtonItem:cancelChangesForEntirePaymentButton];
+
     [placeView setDelegate:self];
     payerViewPerson = [thisPayment payingPerson];
+    
 }
 
 - (void)didReceiveMemoryWarning

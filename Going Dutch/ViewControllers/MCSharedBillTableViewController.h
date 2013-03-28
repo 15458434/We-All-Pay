@@ -8,11 +8,13 @@
 
 #import <UIKit/UIKit.h>
 #import <MessageUI/MessageUI.h>
+#import "MCPaymentViewController.h"
 
 @class MCSharedBill;
 @class MCAllTripsTableViewController;
+@class MCPaymentViewController;
 
-@interface MCSharedBillTableViewController : UITableViewController <MFMailComposeViewControllerDelegate>
+@interface MCSharedBillTableViewController : UITableViewController <MFMailComposeViewControllerDelegate, MCPaymentViewControllerDelegate>
 {
     MCSharedBill *tonightsBill;
 }

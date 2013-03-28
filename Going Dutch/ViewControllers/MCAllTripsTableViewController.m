@@ -10,7 +10,6 @@
 #import "MCAllTripsStore.h"
 #import "MCSharedBillTableViewController.h"
 #import "MCSharedBill.h"
-#import "MCPaymentViewController.h"
 #import "MCPeople.h"
 #import "MCAllTripsTableViewCell.h"
 
@@ -100,6 +99,15 @@
     // Dispose of any resources that can be recreated.
 }
 
+#pragma mark - MCReturnPaymentViewControllerDelegate
+
+- (void)removePayment:(MCPayment *)payment fromPaymentViewController:(MCPaymentViewController *)pvc
+{
+    NSLog(@"removePayment in AllTripsTableViewController.");
+    [[pvc tonightsBill] removePayment:payment];
+    [[self tableView] reloadData];
+}
+
 #pragma mark - Table view data source
 
 - (NSInteger)numberOfSectionsInTableView:(UITableView *)tableView
@@ -177,10 +185,8 @@
 - (void)tableView:(UITableView *)tableView accessoryButtonTappedForRowWithIndexPath:(NSIndexPath *)indexPath
 {
     MCSharedBill *thisBill = [[[MCAllTripsStore sharedList] allTrips] objectAtIndex:[indexPath row]];
-    MCPayment *newPayment = [[MCPayment alloc] init];
-    [newPayment setPayingPerson:[[[thisBill people] allPeople] objectAtIndex:0]];
-    [thisBill addPayment:newPayment];
-    MCPaymentViewController *pvc = [[MCPaymentViewController alloc] initWithExistingPayment:newPayment fromBill:thisBill];
+    MCPaymentViewController *pvc = [[MCPaymentViewController alloc] initWithExistingPayment:nil fromBill:thisBill];
+    [pvc setDelegate:self];
     [[self navigationController] pushViewController:pvc animated:YES];
 }
 

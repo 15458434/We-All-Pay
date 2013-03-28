@@ -7,10 +7,11 @@
 //
 
 #import <UIKit/UIKit.h>
+#import "MCPaymentViewController.h"
 
 @class MCAllTripsStore;
 
-@interface MCAllTripsTableViewController : UITableViewController
+@interface MCAllTripsTableViewController : UITableViewController <MCPaymentViewControllerDelegate>
 
 - (void)addTrip:(id)sender;
 - (void)reloadButton:(id)sender;
