@@ -27,7 +27,7 @@
 		38572B0D169FE73B00969C62 /* MCReturnPayment.m in Sources */ = {isa = PBXBuildFile; fileRef = 38572B0C169FE73B00969C62 /* MCReturnPayment.m */; };
 		38572B2A16AFC83000969C62 /* MCPeople.m in Sources */ = {isa = PBXBuildFile; fileRef = 38572B2916AFC82F00969C62 /* MCPeople.m */; };
 		38572B2E16B044E600969C62 /* MCPerson.m in Sources */ = {isa = PBXBuildFile; fileRef = 38572B2D16B044E600969C62 /* MCPerson.m */; };
-		38572B3116B2F84B00969C62 /* MCCreateNewTripViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 38572B3016B2F84B00969C62 /* MCCreateNewTripViewController.m */; };
+		38572B3116B2F84B00969C62 /* MCEditTripViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 38572B3016B2F84B00969C62 /* MCEditTripViewController.m */; };
 		3873A2A516F23AA1000832FD /* MessageUI.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 3873A2A416F23AA1000832FD /* MessageUI.framework */; };
 		3886D3FD16B7A1CD00ECE64F /* AddressBook.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 3886D3FB16B7A1CD00ECE64F /* AddressBook.framework */; };
 		3886D3FE16B7A1CD00ECE64F /* AddressBookUI.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 3886D3FC16B7A1CD00ECE64F /* AddressBookUI.framework */; };
@@ -79,8 +79,8 @@
 		38572B2916AFC82F00969C62 /* MCPeople.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = MCPeople.m; path = DataModel/MCPeople.m; sourceTree = "<group>"; };
 		38572B2C16B044E600969C62 /* MCPerson.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = MCPerson.h; path = DataModel/MCPerson.h; sourceTree = "<group>"; };
 		38572B2D16B044E600969C62 /* MCPerson.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = MCPerson.m; path = DataModel/MCPerson.m; sourceTree = "<group>"; };
-		38572B2F16B2F84A00969C62 /* MCCreateNewTripViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = MCCreateNewTripViewController.h; path = ViewControllers/MCCreateNewTripViewController.h; sourceTree = "<group>"; };
-		38572B3016B2F84B00969C62 /* MCCreateNewTripViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = MCCreateNewTripViewController.m; path = ViewControllers/MCCreateNewTripViewController.m; sourceTree = "<group>"; };
+		38572B2F16B2F84A00969C62 /* MCEditTripViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = MCEditTripViewController.h; path = ViewControllers/MCEditTripViewController.h; sourceTree = "<group>"; };
+		38572B3016B2F84B00969C62 /* MCEditTripViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = MCEditTripViewController.m; path = ViewControllers/MCEditTripViewController.m; sourceTree = "<group>"; };
 		3873A2A416F23AA1000832FD /* MessageUI.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = MessageUI.framework; path = System/Library/Frameworks/MessageUI.framework; sourceTree = SDKROOT; };
 		3873A2A616F2858A000832FD /* Going Dutch.entitlements */ = {isa = PBXFileReference; lastKnownFileType = text.xml; path = "Going Dutch.entitlements"; sourceTree = "<group>"; };
 		3886D3FB16B7A1CD00ECE64F /* AddressBook.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = AddressBook.framework; path = System/Library/Frameworks/AddressBook.framework; sourceTree = SDKROOT; };
@@ -204,8 +204,8 @@
 				38572B03169DD70100969C62 /* MCSharedBillTableViewController.m */,
 				3886D3FF16B7AA3100ECE64F /* MCPaymentViewController.h */,
 				3886D40016B7AA3100ECE64F /* MCPaymentViewController.m */,
-				38572B2F16B2F84A00969C62 /* MCCreateNewTripViewController.h */,
-				38572B3016B2F84B00969C62 /* MCCreateNewTripViewController.m */,
+				38572B2F16B2F84A00969C62 /* MCEditTripViewController.h */,
+				38572B3016B2F84B00969C62 /* MCEditTripViewController.m */,
 				38D7B68316BABAD800C609B8 /* MCPersonViewController.h */,
 				38D7B68416BABAD900C609B8 /* MCPersonViewController.m */,
 			);
@@ -336,7 +336,7 @@
 				38572B0D169FE73B00969C62 /* MCReturnPayment.m in Sources */,
 				38572B2A16AFC83000969C62 /* MCPeople.m in Sources */,
 				38572B2E16B044E600969C62 /* MCPerson.m in Sources */,
-				38572B3116B2F84B00969C62 /* MCCreateNewTripViewController.m in Sources */,
+				38572B3116B2F84B00969C62 /* MCEditTripViewController.m in Sources */,
 				3886D40216B7AA3100ECE64F /* MCPaymentViewController.m in Sources */,
 				38D7B68616BABAD900C609B8 /* MCPersonViewController.m in Sources */,
 				38EFF2C316C396CE001C8248 /* MCReturnPaymentViewController.m in Sources */,

@@ -10,7 +10,7 @@
 #import "MCSharedBill.h"
 #import "MCPayment.h"
 #import "MCAllTripsTableViewController.h"
-#import "MCCreateNewTripViewController.h"
+#import "MCEditTripViewController.h"
 #import "MCAllTripsStore.h"
 #import "MCReturnPaymentViewController.h"
 #import "MCPaymentTableViewCell.h"
@@ -38,52 +38,62 @@
 
 - (void)editBillData:(id)sender
 {
-    MCCreateNewTripViewController *tvc = [[MCCreateNewTripViewController alloc] initWithBill:tonightsBill isNew:NO];
+    MCEditTripViewController *tvc = [[MCEditTripViewController alloc] initWithBill:tonightsBill isNew:NO];
     [[self navigationController] pushViewController:tvc animated:YES];
 }
 
 - (void)showWhoPaysWho:(id)sender
 {
+    NSLog(@"%d", [[tonightsBill people] doesEveryoneHaveAMailAddress]);
     MCReturnPaymentViewController *rpvc = [[MCReturnPaymentViewController alloc] initWithBill:tonightsBill];
     [[self navigationController] pushViewController:rpvc animated:YES];
 }
 
 - (void)shareBill:(id)sender
 {
-    
-    MFMailComposeViewController *mailViewController = [[MFMailComposeViewController alloc] init];
-    [mailViewController setMailComposeDelegate:self];
-    NSArray *allPeople = [[tonightsBill people] allPeople];
-    // Create a list of all email addresses
-    NSMutableArray *listOfMailAddresses = [[NSMutableArray alloc] init];
-    for (MCPerson *p in allPeople) {
-        [listOfMailAddresses addObject:[p emailAddress]];
+    if ([[tonightsBill people] doesEveryoneHaveAMailAddress]) {
+        MFMailComposeViewController *mailViewController = [[MFMailComposeViewController alloc] init];
+        [mailViewController setMailComposeDelegate:self];
+        NSArray *allPeople = [[tonightsBill people] allPeople];
+        // Create a list of all email addresses
+        NSMutableArray *listOfMailAddresses = [[NSMutableArray alloc] init];
+        for (MCPerson *p in allPeople) {
+            [listOfMailAddresses addObject:[p emailAddress]];
+        }
+        // Set the mail header.
+        [mailViewController setToRecipients:listOfMailAddresses];
+        [mailViewController setSubject:[[NSString alloc] initWithFormat:@"Bill overview of our trip to %@.", [tonightsBill tripName]]];
+        
+        // Generate the text for the email.
+        NSMutableString *mailBody = [[NSMutableString alloc] init];
+        NSNumberFormatter *nf = [[NSNumberFormatter alloc] init];
+        [nf setNumberStyle:NSNumberFormatterCurrencyStyle];
+        [mailBody appendFormat:@"Dear %@\n", [[tonightsBill people] stringWithNamesOfPeoplePresent]];
+        [mailBody appendFormat:@"\n"];
+        [mailBody appendFormat:@"From a total of %@, which was spend on our last trip to %@. We all have to pay an equal share of %@.\n", [nf stringFromNumber:[[NSNumber alloc] initWithDouble:[tonightsBill totalSumOfMoneyOfThisSharedBill]]], [tonightsBill tripName], [nf stringFromNumber:[[NSNumber alloc] initWithDouble:[tonightsBill amountPeopleShouldHavePaid]]]];
+        [mailBody appendFormat:@"\n"];
+        [mailBody appendFormat:@"The persons who have paid are:\n"];
+        for (MCPayment *p in [tonightsBill allPayments]) {
+            [mailBody appendFormat:@"%@ has paid %@ for %@.\n", [[p payingPerson] firstName], [nf stringFromNumber:[[NSNumber alloc] initWithDouble:[p money]]], [p place]];
+        }
+        [mailBody appendFormat:@"\n"];
+        [mailBody appendFormat:@"To equalize and have everybody pay the average of %@, I'd suggest the following solution:\n", [nf stringFromNumber:[[NSNumber alloc] initWithDouble:[tonightsBill amountPeopleShouldHavePaid]]]];
+        for (MCReturnPayment *rp in [tonightsBill solveWhoHasToPayWhoFromThisBill]) {
+            [mailBody appendFormat:@"%@\n", [rp description]];
+        }
+        [mailBody appendFormat:@"\n"];
+        [mailBody appendFormat:@"If you have any remarks please let me know.\n"];
+        [mailViewController setMessageBody:mailBody isHTML:NO];
+        [self presentViewController:mailViewController animated:YES completion:nil];
+    } else {
+        NSLog(@"Not everyone has an email address");
+        UIAlertView *mailAddressesMissing = [[UIAlertView alloc] initWithTitle:@"Unable to send email to all people."
+                                                                       message:@"Reason: Not all people have a mail address."
+                                                                      delegate:self
+                                                             cancelButtonTitle:@"Cancel"
+                                                             otherButtonTitles:@"Edit", nil];
+        [mailAddressesMissing show];
     }
-    // Set the mail header.
-    [mailViewController setToRecipients:listOfMailAddresses];
-    [mailViewController setSubject:[[NSString alloc] initWithFormat:@"Bill overview of our trip to %@.", [tonightsBill tripName]]];
-    
-    // Generate the text for the email.
-    NSMutableString *mailBody = [[NSMutableString alloc] init];
-    NSNumberFormatter *nf = [[NSNumberFormatter alloc] init];
-    [nf setNumberStyle:NSNumberFormatterCurrencyStyle];
-    [mailBody appendFormat:@"Dear %@\n", [[tonightsBill people] stringWithNamesOfPeoplePresent]];
-    [mailBody appendFormat:@"\n"];
-    [mailBody appendFormat:@"From a total of %@, which was spend on our last trip to %@. We all have to pay an equal share of %@.\n", [nf stringFromNumber:[[NSNumber alloc] initWithDouble:[tonightsBill totalSumOfMoneyOfThisSharedBill]]], [tonightsBill tripName], [nf stringFromNumber:[[NSNumber alloc] initWithDouble:[tonightsBill amountPeopleShouldHavePaid]]]];
-    [mailBody appendFormat:@"\n"];
-    [mailBody appendFormat:@"The persons who have paid are:\n"];
-    for (MCPayment *p in [tonightsBill allPayments]) {
-        [mailBody appendFormat:@"%@ has paid %@ for %@.\n", [[p payingPerson] name], [nf stringFromNumber:[[NSNumber alloc] initWithDouble:[p money]]], [p place]];
-    }
-    [mailBody appendFormat:@"\n"];
-    [mailBody appendFormat:@"To equalize and have everybody pay the average of %@, I'd suggest the following solution:\n", [nf stringFromNumber:[[NSNumber alloc] initWithDouble:[tonightsBill amountPeopleShouldHavePaid]]]];
-    for (MCReturnPayment *rp in [tonightsBill solveWhoHasToPayWhoFromThisBill]) {
-        [mailBody appendFormat:@"%@\n", [rp description]];
-    }
-    [mailBody appendFormat:@"\n"];
-    [mailBody appendFormat:@"If you have any remarks please let me know.\n"];
-    [mailViewController setMessageBody:mailBody isHTML:NO];
-    [self presentViewController:mailViewController animated:YES completion:nil];
 }
 
 - (id)initWithSharedBill:(MCSharedBill *)tBill
@@ -171,7 +181,7 @@
     
     // if there are NO people on this SharedBill go to the people addscreen
     if (![tonightsBill areTherePeople]) {
-        MCCreateNewTripViewController *pvc = [[MCCreateNewTripViewController alloc] initWithBill:tonightsBill isNew:YES];
+        MCEditTripViewController *pvc = [[MCEditTripViewController alloc] initWithBill:tonightsBill isNew:YES];
         UINavigationController *navController = [[UINavigationController alloc] initWithRootViewController:pvc];
         [pvc setDismissblock:^{
             [[self tableView] reloadData];
@@ -203,6 +213,21 @@
     if (![pvc didSomethingChange]) {
         [tonightsBill removePayment:payment];
         [[self tableView] reloadData];
+    }
+}
+
+#pragma mark - UIAlertViewDelegate
+
+- (void)alertView:(UIAlertView *)alertView clickedButtonAtIndex:(NSInteger)buttonIndex
+{
+    switch (buttonIndex) {
+        case 0:
+            NSLog(@"Cancel button pressed");
+            break;
+        case 1:
+            [self editBillData:self];
+        default:
+            break;
     }
 }
 
@@ -239,7 +264,7 @@
     MCPaymentTableViewCell *paymentCell = [tableView dequeueReusableCellWithIdentifier:@"MCPaymentTableViewCell"];
     
     MCPerson *thisCellsPayer = [thisCellsPayment payingPerson];
-    [[paymentCell namePayerLabel] setText:[thisCellsPayer name]];
+    [[paymentCell namePayerLabel] setText:[thisCellsPayer getFullName]];
     [[paymentCell whatPaidLabel] setText:[thisCellsPayment place]];
     NSNumberFormatter *nf = [[NSNumberFormatter alloc] init];
     [nf setNumberStyle:NSNumberFormatterCurrencyStyle];

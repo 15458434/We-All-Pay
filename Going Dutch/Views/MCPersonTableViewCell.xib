@@ -2,10 +2,10 @@
 <archive type="com.apple.InterfaceBuilder3.CocoaTouch.XIB" version="8.00">
 	<data>
 		<int key="IBDocument.SystemTarget">1552</int>
-		<string key="IBDocument.SystemVersion">12C60</string>
+		<string key="IBDocument.SystemVersion">12D78</string>
 		<string key="IBDocument.InterfaceBuilderVersion">3084</string>
-		<string key="IBDocument.AppKitVersion">1187.34</string>
-		<string key="IBDocument.HIToolboxVersion">625.00</string>
+		<string key="IBDocument.AppKitVersion">1187.37</string>
+		<string key="IBDocument.HIToolboxVersion">626.00</string>
 		<object class="NSMutableDictionary" key="IBDocument.PluginVersions">
 			<string key="NS.key.0">com.apple.InterfaceBuilder.IBCocoaTouchPlugin</string>
 			<string key="NS.object.0">2083</string>
@@ -52,7 +52,7 @@
 							<object class="IBUILabel" id="854618807">
 								<reference key="NSNextResponder" ref="322338044"/>
 								<int key="NSvFlags">294</int>
-								<string key="NSFrame">{{61, 8}, {143, 21}}</string>
+								<string key="NSFrame">{{61, 8}, {219, 21}}</string>
 								<reference key="NSSuperview" ref="322338044"/>
 								<string key="NSReuseIdentifierKey">_NS:9</string>
 								<bool key="IBUIOpaque">NO</bool>
@@ -85,7 +85,7 @@
 							<object class="IBUILabel" id="989631825">
 								<reference key="NSNextResponder" ref="322338044"/>
 								<int key="NSvFlags">294</int>
-								<string key="NSFrame">{{61, 31}, {143, 21}}</string>
+								<string key="NSFrame">{{61, 31}, {175, 21}}</string>
 								<reference key="NSSuperview" ref="322338044"/>
 								<string key="NSReuseIdentifierKey">_NS:9</string>
 								<bool key="IBUIOpaque">NO</bool>

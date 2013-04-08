@@ -94,7 +94,7 @@
     NSNumber *moneyToConvert = [[NSNumber alloc] initWithDouble:[thisCellsReturnPayment money]];
     [[returnPaymentCell moneyLabel] setText:[nf stringFromNumber:moneyToConvert]];
     
-    NSString *whoOwesWho = [[NSString alloc] initWithFormat:@"%@ owes %@:", [thisCellsReturnPayment payer], [thisCellsReturnPayment receiver]];
+    NSString *whoOwesWho = [[NSString alloc] initWithFormat:@"%@ owes %@:", [[thisCellsReturnPayment payer] getName], [[thisCellsReturnPayment receiver] getName]];
     [[returnPaymentCell whoOwesWho] setText:whoOwesWho];
     
     return returnPaymentCell;

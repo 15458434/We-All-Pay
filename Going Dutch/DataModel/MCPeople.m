@@ -17,7 +17,7 @@
 {
     NSMutableString *returnString = [[NSMutableString alloc] init];
     for (MCPerson *p in people) {
-        NSString *nameString = [[NSString alloc] initWithFormat:@"%@, ", [p name]];
+        NSString *nameString = [[NSString alloc] initWithFormat:@"%@, ", [p getName]];
         [returnString appendString:nameString];
     }
     return returnString;
@@ -71,6 +71,30 @@
     [groep addPerson:[[MCPerson alloc] initWithName:@"Iva" andMailAddress:nil]];
     [groep addPerson:[[MCPerson alloc] initWithName:@"Mark" andMailAddress:nil]];
     return groep;
+}
+
+- (BOOL)doesEveryoneHaveAMailAddress
+{
+    BOOL theResult = YES;
+    for (MCPerson *p in people) {
+        if (![p emailAddress]) {
+            theResult = NO;
+            NSLog(@"%@ %@ has no mail address.", [p firstName], [p lastName]);
+        }
+    }
+    return theResult;
+}
+
+- (NSArray *)whoHasNoMailAddress
+{
+    NSMutableArray *peopleWithNoMailAddress = [[NSMutableArray alloc] init];
+    for (MCPerson *p in people) {
+        if (![p emailAddress]) {
+            NSLog(@"%@ %@ has no mail address.", [p firstName], [p lastName]);
+            [peopleWithNoMailAddress addObject:p];
+        }
+    }
+    return peopleWithNoMailAddress;
 }
 
 #pragma mark - Inherited from super class.

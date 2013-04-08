@@ -109,7 +109,8 @@
 {
     [thisPerson setThumbnail:[UIImage imageWithData:(__bridge_transfer NSData *)ABPersonCopyImageDataWithFormat(person, kABPersonImageFormatThumbnail)]];
     [thisPerson setPicture:[UIImage imageWithData:(__bridge_transfer NSData *)ABPersonCopyImageDataWithFormat(person, kABPersonImageFormatOriginalSize)]];
-    [thisPerson setName:(__bridge_transfer NSString *)ABRecordCopyValue(person, kABPersonFirstNameProperty)];
+    [thisPerson setFirstName:(__bridge_transfer NSString *)ABRecordCopyValue(person, kABPersonFirstNameProperty)];
+    [thisPerson setLastName:(__bridge_transfer NSString *)ABRecordCopyValue(person, kABPersonLastNameProperty)];
     ABMultiValueRef emailAddresses = ABRecordCopyValue(person, kABPersonEmailProperty);
     if (ABMultiValueGetCount(emailAddresses)) {
         NSMutableArray *allEmailAddresses= [[NSMutableArray alloc] init];
@@ -139,7 +140,7 @@
 {
     [super viewWillAppear:animated];
     
-    [nameField setText:[thisPerson name]];
+    [nameField setText:[thisPerson getFullName]];
     [emailField setText:[thisPerson emailAddress]];
 }
 

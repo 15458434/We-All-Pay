@@ -14,7 +14,7 @@
 @class MCAllTripsTableViewController;
 @class MCPaymentViewController;
 
-@interface MCSharedBillTableViewController : UITableViewController <MFMailComposeViewControllerDelegate, MCPaymentViewControllerDelegate>
+@interface MCSharedBillTableViewController : UITableViewController <MFMailComposeViewControllerDelegate, UIAlertViewDelegate, MCPaymentViewControllerDelegate>
 {
     MCSharedBill *tonightsBill;
 }

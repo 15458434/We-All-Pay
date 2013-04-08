@@ -6,7 +6,7 @@
 //  Copyright (c) 2013 Mark Cornelisse. All rights reserved.
 //
 
-#import "MCCreateNewTripViewController.h"
+#import "MCEditTripViewController.h"
 #import "MCPeople.h"
 #import "MCPerson.h"
 #import "MCSharedBill.h"
@@ -15,11 +15,11 @@
 #import "MCPersonViewController.h"
 #import "MCPersonTableViewCell.h"
 
-@interface MCCreateNewTripViewController ()
+@interface MCEditTripViewController ()
 
 @end
 
-@implementation MCCreateNewTripViewController
+@implementation MCEditTripViewController
 
 @synthesize dismissblock;
 @synthesize dismissYourSelf;
@@ -51,7 +51,15 @@
 - (void)doneEditingTrip:(id)selector
 {
     if ([[tonightsBill people] areTherePeople]) {
+        [tonightsBill setTripName:tripName];
         [[self navigationController] popViewControllerAnimated:YES];
+    } else {
+        UIAlertView *noPeoplePresentMessage = [[UIAlertView alloc] initWithTitle:@"No people present on this bill."
+                                                                         message:@"Please add the people who you'd like to share this bill with."
+                                                                        delegate:self
+                                                               cancelButtonTitle:@"Cancel"
+                                                               otherButtonTitles:@"Edit", nil];
+        [noPeoplePresentMessage show];
     }
 }
 
@@ -64,6 +72,7 @@
 - (void)cancelEditTrip:(id)selector
 {
     NSLog(@"Cancel Edit Trip pressed");
+    [[self navigationController] popViewControllerAnimated:YES];
 }
 
 - (void)getPeopleFromAddressBook:(id)selector
@@ -76,6 +85,7 @@
 - (IBAction)changeNameOfTrip:(id)sender {
     [tonightsBill setTripName:[tripNameField text]];
     [[self view] endEditing:YES];
+    [[self navigationItem] setRightBarButtonItem:doneButton];
 }
 
 - (IBAction)dismissKeyboard:(id)sender {
@@ -109,23 +119,23 @@
         isInitAsNew = isNew;
         didSomethingChange = NO;
         if (isNew) {
-            bbi = [[UIBarButtonItem alloc] initWithBarButtonSystemItem:UIBarButtonSystemItemDone
+            doneButton = [[UIBarButtonItem alloc] initWithBarButtonSystemItem:UIBarButtonSystemItemDone
                                                                 target:self
                                                                 action:@selector(doneAddingPeople:)];
             [[self navigationItem] setTitle:@"New bill data"];
-            [[self navigationItem] setLeftBarButtonItem:bbi animated:YES];
             bbi = [[UIBarButtonItem alloc] initWithBarButtonSystemItem:UIBarButtonSystemItemCancel
                                                                 target:self
                                                                 action:@selector(cancelNewTrip:)];
-            [[self navigationItem] setRightBarButtonItem:bbi];
+            [[self navigationItem] setLeftBarButtonItem:bbi];
         } else {
-            bbi = [[UIBarButtonItem alloc] initWithBarButtonSystemItem:UIBarButtonSystemItemDone
+            doneButton = [[UIBarButtonItem alloc] initWithBarButtonSystemItem:UIBarButtonSystemItemDone
                                                                 target:self
                                                                 action:@selector(doneEditingTrip:)];
             [[self navigationItem] setTitle:[tonightsBill tripName]];
             bbi = [[UIBarButtonItem alloc] initWithBarButtonSystemItem:UIBarButtonSystemItemCancel
                                                                 target:self
                                                                 action:@selector(cancelEditTrip:)];
+            [[self navigationItem] setLeftBarButtonItem:bbi];
         }
 
         [tripNameField setDelegate:self];
@@ -138,7 +148,8 @@
     MCPerson *newPerson = [[MCPerson alloc] init];
     [newPerson setThumbnail:[UIImage imageWithData:(__bridge_transfer NSData *)ABPersonCopyImageDataWithFormat(person, kABPersonImageFormatThumbnail)]];
     [newPerson setPicture:[UIImage imageWithData:(__bridge_transfer NSData *)ABPersonCopyImageDataWithFormat(person, kABPersonImageFormatOriginalSize)]];
-    [newPerson setName:(__bridge_transfer NSString *)ABRecordCopyValue(person, kABPersonFirstNameProperty)];
+    [newPerson setFirstName:(__bridge_transfer NSString *)ABRecordCopyValue(person, kABPersonFirstNameProperty)];
+    [newPerson setLastName:(__bridge_transfer NSString *)ABRecordCopyValue(person, kABPersonLastNameProperty)];
     ABMultiValueRef emailAddresses = ABRecordCopyValue(person, kABPersonEmailProperty);
     if (ABMultiValueGetCount(emailAddresses)) {
         NSMutableArray *allEmailAddresses= [[NSMutableArray alloc] init];
@@ -158,6 +169,7 @@
     [[self tableView] insertRowsAtIndexPaths:[NSArray arrayWithObject:indexPathOfNewPerson] withRowAnimation:UITableViewRowAnimationTop];
     if (!didSomethingChange) {
         didSomethingChange = YES;
+        [[self navigationItem] setRightBarButtonItem:doneButton];
     }
 }
 
@@ -203,21 +215,21 @@
     // Uncomment the following line to display an Edit button in the navigation bar for this view controller.
     // self.navigationItem.rightBarButtonItem = self.editButtonItem;
     
-    UIBarButtonItem *addressBookButton;
+    UIBarButtonItem *addPersonButton;
     if (kABAuthorizationStatusAuthorized == ABAddressBookGetAuthorizationStatus() ||
         kABAuthorizationStatusNotDetermined == ABAddressBookGetAuthorizationStatus()) {
-        addressBookButton = [[UIBarButtonItem alloc] initWithBarButtonSystemItem:UIBarButtonSystemItemBookmarks
+        addPersonButton = [[UIBarButtonItem alloc] initWithBarButtonSystemItem:UIBarButtonSystemItemBookmarks
                                                             target:self
                                                             action:@selector(getPeopleFromAddressBook:)];
     } else {
-        addressBookButton = [[UIBarButtonItem alloc] initWithBarButtonSystemItem:UIBarButtonSystemItemAdd
+        addPersonButton = [[UIBarButtonItem alloc] initWithBarButtonSystemItem:UIBarButtonSystemItemAdd
                                                             target:self
                                                             action:@selector(addPerson:)];
     }
     UIBarButtonItem *flexButton = [[UIBarButtonItem alloc] initWithBarButtonSystemItem:UIBarButtonSystemItemFlexibleSpace
                                                                                 target:self
                                                                                 action:nil];
-    NSArray *toolBarButtons = [[NSArray alloc] initWithObjects:flexButton, addressBookButton, nil];
+    NSArray *toolBarButtons = [[NSArray alloc] initWithObjects:flexButton, addPersonButton, nil];
     [self setToolbarItems:toolBarButtons animated:YES];
     
     // Load and register Nib to the tableView for use.
@@ -231,6 +243,27 @@
     // Dispose of any resources that can be recreated.
 }
 
+#pragma mark - UIAlertViewDelegate
+
+- (void)alertView:(UIAlertView *)alertView clickedButtonAtIndex:(NSInteger)buttonIndex
+{
+    switch (buttonIndex) {
+        case 0:
+            NSLog(@"Ok, in no people present message pressed.");
+            break;
+        case 1:
+            NSLog(@"Edit, in no people present message pressed.");
+            if (kABAuthorizationStatusAuthorized == ABAddressBookGetAuthorizationStatus() ||
+                kABAuthorizationStatusNotDetermined == ABAddressBookGetAuthorizationStatus()) {
+                [self getPeopleFromAddressBook:self];
+            } else {
+                [self addPerson:self];
+            }
+        default:
+            break;
+    }
+}
+
 #pragma mark - ABPeoplePickerNavigationControllerDelegate>
 
 - (void)peoplePickerNavigationControllerDidCancel:(ABPeoplePickerNavigationController *)peoplePicker
@@ -241,6 +274,7 @@
 - (BOOL)peoplePickerNavigationController:(ABPeoplePickerNavigationController *)peoplePicker shouldContinueAfterSelectingPerson:(ABRecordRef)person
 {
     [self getPersonData:person];
+    [[self navigationItem] setRightBarButtonItem:doneButton];
     [self dismissViewControllerAnimated:YES completion:nil];
     return NO;
 }
@@ -258,12 +292,14 @@
             [self addPerson:self];
         }
     }
+    didSomethingChange = YES;
+    [[self navigationItem] setRightBarButtonItem:doneButton];
     return YES;
 }
 
 -(void)textFieldDidEndEditing:(UITextField *)textField
 {
-    [tonightsBill setTripName:[textField text]];
+    tripName = [[NSString alloc] initWithString:[textField text]];
     if (!didSomethingChange) {
         didSomethingChange = YES;
     }
@@ -288,7 +324,7 @@
     MCPersonTableViewCell *thisCell = [tableView dequeueReusableCellWithIdentifier:@"MCPersonTableViewCell"];
     
     [[thisCell personImage] setImage:[thisCellsPerson thumbnail]];
-    [[thisCell nameLabel] setText:[thisCellsPerson name]];
+    [[thisCell nameLabel] setText:[thisCellsPerson getFullName]];
     [[thisCell emailLabel] setText:[thisCellsPerson emailAddress]];
     
     return thisCell;
@@ -325,6 +361,8 @@
             [tonightsBill removePerson:removablePerson];
             NSArray *indexPaths = [[NSArray alloc] initWithObjects:indexPath, nil];
             [[self tableView] deleteRowsAtIndexPaths:indexPaths withRowAnimation:UITableViewRowAnimationTop];
+            [[self navigationItem] setRightBarButtonItem:doneButton];
+            didSomethingChange = YES;
         }
     }
 }

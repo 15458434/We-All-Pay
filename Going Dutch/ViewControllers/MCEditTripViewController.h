@@ -13,13 +13,15 @@
 @class MCSharedBill;
 @class MCPersonViewController;
 
-@interface MCCreateNewTripViewController : UITableViewController <UITextFieldDelegate, ABPeoplePickerNavigationControllerDelegate>
+@interface MCEditTripViewController : UITableViewController <UITextFieldDelegate, ABPeoplePickerNavigationControllerDelegate, UIAlertViewDelegate>
 {
     IBOutlet UIControl *newTripHeaderView;
     IBOutlet UITextField *tripNameField;
+    UIBarButtonItem *doneButton;
     
     MCSharedBill *tonightsBill;
     BOOL isInitAsNew;
+    NSString *tripName;
 }
 
 @property (nonatomic, strong) MCSharedBill *tonightsBill;

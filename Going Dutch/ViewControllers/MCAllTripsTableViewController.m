@@ -21,11 +21,6 @@
 
 #pragma mark - Actions
 
-- (void)reloadButton:(id)sender
-{
-    [[self tableView] reloadData];
-}
-
 - (void)addTrip:(id)sender
 {
     // Create and add new Trip with a test group.
@@ -57,11 +52,6 @@
                                                                              target:self
                                                                              action:@selector(addTrip:)];
         [[self navigationItem] setRightBarButtonItem:bbi animated:YES];
-        
-        UIBarButtonItem *rb = [[UIBarButtonItem alloc] initWithBarButtonSystemItem:UIBarButtonSystemItemRefresh
-                                                                            target:self
-                                                                            action:@selector(reloadButton:)];
-        [[self navigationItem] setLeftBarButtonItem:rb animated:YES];
     }
     return self;
 }

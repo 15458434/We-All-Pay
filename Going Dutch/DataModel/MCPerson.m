@@ -13,7 +13,8 @@
 @synthesize uniquePersonId;
 @synthesize picture;
 @synthesize thumbnail;
-@synthesize name;
+@synthesize firstName;
+@synthesize lastName;
 @synthesize emailAddress;
 @synthesize allEmailAddressesFromAddressBook;
 
@@ -24,10 +25,38 @@
     self = [super init];
     
     if (self) {
-        name = n;
+        firstName = n;
         emailAddress = ea;
     }
     return self;
+}
+
+- (NSString *)getFullName
+{
+    if (firstName && lastName) {
+        return [[NSString alloc] initWithFormat:@"%@ %@", firstName, lastName];
+    } else if (firstName && !lastName) {
+        return firstName;
+    } else if (!firstName && lastName) {
+        return lastName;
+    } else  if (emailAddress) {
+        return emailAddress;
+    } else {
+        return @"...";
+    }
+}
+
+- (NSString *)getName
+{
+    if (firstName) {
+        return firstName;
+    } else if (lastName) {
+        return lastName;
+    } else if (emailAddress) {
+        return emailAddress;
+    } else {
+        return @"...";
+    }
 }
 
 + (MCPerson *)createRandomPerson
@@ -41,7 +70,7 @@
 
 - (NSString *)description
 {
-    return name;
+    return firstName;
 }
 
 #pragma mark - NSCoding
@@ -49,7 +78,8 @@
 - (void)encodeWithCoder:(NSCoder *)aCoder
 {
     [aCoder encodeObject:uniquePersonId forKey:@"uniquePersonID"];
-    [aCoder encodeObject:name forKey:@"name"];
+    [aCoder encodeObject:firstName forKey:@"name"];
+    [aCoder encodeObject:lastName forKey:@"lastName"];
     [aCoder encodeObject:emailAddress forKey:@"emailAddress"];
     [aCoder encodeObject:allEmailAddressesFromAddressBook forKey:@"allEmailAddressesFromAddressBook"];
 }
@@ -60,7 +90,8 @@
     
     if (self) {
         uniquePersonId = [aDecoder decodeObjectForKey:@"uniquePersonId"];
-        [self setName:[aDecoder decodeObjectForKey:@"name"]];
+        [self setFirstName:[aDecoder decodeObjectForKey:@"name"]];
+        [self setLastName:[aDecoder decodeObjectForKey:@"lastName"]];
         [self setEmailAddress:[aDecoder decodeObjectForKey:@"emailAddress"]];
         [self setAllEmailAddressesFromAddressBook:[aDecoder decodeObjectForKey:@"allEmailAddressesFromAddressBook"]];
     }

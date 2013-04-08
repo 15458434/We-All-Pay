@@ -34,7 +34,7 @@
     NSNumberFormatter *nf = [[NSNumberFormatter alloc] init];
     [nf setNumberStyle:NSNumberFormatterCurrencyStyle];
     
-    return [[NSString alloc] initWithFormat:@"%@ owes %@ to %@.", [payer name], [nf stringFromNumber:m], [receiver name]];
+    return [[NSString alloc] initWithFormat:@"%@ owes %@ to %@.", [payer firstName], [nf stringFromNumber:m], [receiver firstName]];
 }
 
 @end
