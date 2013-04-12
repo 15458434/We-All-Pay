@@ -19,6 +19,7 @@
 
 + (MCAllTripsStore *)sharedList;
 
+
 - (void)addTrip:(MCSharedBill *)trip;
 - (void)removeTrip:(MCSharedBill *)trip;
 - (NSArray *)allTrips;

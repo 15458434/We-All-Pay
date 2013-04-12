@@ -10,6 +10,7 @@
 #import "MCReturnPayment.h"
 #import "MCPeople.h"
 #import "MCPerson.h"
+#import "MCTools.h"
 
 @implementation MCPayment
 
@@ -83,6 +84,7 @@
     self = [super init];
     
     if (self) {
+        uniquePaymentID = [MCTools createUniqueIdentifierString];
         timePaid = [[NSDate alloc] init];
         money = 0.0;
     }

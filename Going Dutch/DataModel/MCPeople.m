@@ -23,6 +23,25 @@
     return returnString;
 }
 
+- (NSString *)stringOfApproxPeoplePresent
+{
+    NSMutableString *returnString = [[NSMutableString alloc] init];
+    if ([people count] == 0) {
+        return @"No people present.";
+    } else if ([people count] == 1) {
+        return [[people objectAtIndex:0] getName];
+    } else if ([people count] == 2) {
+        [returnString appendFormat:@"%@ and %@", [[people objectAtIndex:0] getName], [[people objectAtIndex:1] getName]];
+        return returnString;
+    } else if ([people count] >= 3) {
+        [returnString appendFormat:@"%@, %@ and others", [[people objectAtIndex:0] getName], [[people objectAtIndex:1] getName]];
+        return returnString;
+    } else {
+        @throw [NSException exceptionWithName:@"Negative amount of people." reason:@"Should not be possible." userInfo:nil];
+        return nil;
+    }
+}
+
 - (void)addPerson:(MCPerson *)newPerson
 {
     // add a person to the array of people

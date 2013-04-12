@@ -7,6 +7,8 @@
 //
 
 #import "MCPerson.h"
+#import "MCTools.h"
+#import "MCImageStoreController.h"
 
 @implementation MCPerson
 
@@ -20,11 +22,18 @@
 
 #pragma mark - New in this class
 
+- (void)setThumbnail:(UIImage *)image
+{
+    thumbnail = image;
+    [[MCImageStoreController sharedStore] addImageFromPerson:self];
+}
+
 - (id)initWithName:(NSString *)n andMailAddress:(NSString *)ea
 {
     self = [super init];
     
     if (self) {
+        uniquePersonId = [MCTools createUniqueIdentifierString];
         firstName = n;
         emailAddress = ea;
     }
@@ -68,9 +77,19 @@
 
 #pragma mark - Inherited from super.
 
+- (id)init
+{
+    self = [super init];
+    
+    if (self) {
+        uniquePersonId = [MCTools createUniqueIdentifierString];
+    }
+    return self;
+}
+
 - (NSString *)description
 {
-    return firstName;
+    return [self getName];
 }
 
 #pragma mark - NSCoding

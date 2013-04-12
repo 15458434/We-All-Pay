@@ -10,6 +10,7 @@
 #import "MCPeople.h"
 #import "MCReturnPayment.h"
 #import "MCPerson.h"
+#import "MCTools.h"
 
 @implementation MCSharedBill
 
@@ -174,6 +175,7 @@
     self = [super init];
     
     if (self) {
+        uniqueBillId = [MCTools createUniqueIdentifierString];
         payments = [[NSMutableArray alloc] init];
         people = [[MCPeople alloc] init];
         tripName = [[NSString alloc] initWithFormat:@""];

@@ -9,6 +9,7 @@
 #import "MCAppDelegate.h"
 #import "MCAllTripsTableViewController.h"
 #import "MCAllTripsStore.h"
+#import "MCImageStoreController.h"
 
 @implementation MCAppDelegate
 

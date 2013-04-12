@@ -21,6 +21,7 @@
 - (BOOL)areTherePeople;
 - (BOOL)isPersonWithNamePresent:(MCPerson *)person;
 - (NSString *)stringWithNamesOfPeoplePresent;
+- (NSString *)stringOfApproxPeoplePresent;
 - (BOOL)doesEveryoneHaveAMailAddress;
 - (NSArray *)whoHasNoMailAddress;
 

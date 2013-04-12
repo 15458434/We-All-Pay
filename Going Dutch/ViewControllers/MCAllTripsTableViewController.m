@@ -116,7 +116,7 @@
     MCAllTripsTableViewCell *allTripsTableViewCell = [tableView dequeueReusableCellWithIdentifier:@"MCAllTripsTableViewCell"];
     
     [[allTripsTableViewCell tripLabel] setText:[thisTrip tripName]];
-    [[allTripsTableViewCell peoplePresentLabel] setText:[[thisTrip people] stringWithNamesOfPeoplePresent]];
+    [[allTripsTableViewCell peoplePresentLabel] setText:[[thisTrip people] stringOfApproxPeoplePresent]];
     
     NSNumberFormatter *nf = [[NSNumberFormatter alloc] init];
     [nf setNumberStyle:NSNumberFormatterCurrencyStyle];
