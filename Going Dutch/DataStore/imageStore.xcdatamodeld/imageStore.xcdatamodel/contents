@@ -6,6 +6,6 @@
         <attribute name="uniqueIdentifier" attributeType="String" syncable="YES"/>
     </entity>
     <elements>
-        <element name="MCImage" positionX="160" positionY="192" width="128" height="88"/>
+        <element name="MCImage" positionX="160" positionY="192" width="128" height="90"/>
     </elements>
 </model>

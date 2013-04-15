@@ -8,6 +8,7 @@
 
 #import "MCPeople.h"
 #import "MCPerson.h"
+#import "MCImageStoreController.h"
 
 @implementation MCPeople
 

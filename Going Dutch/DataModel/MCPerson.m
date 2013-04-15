@@ -9,12 +9,12 @@
 #import "MCPerson.h"
 #import "MCTools.h"
 #import "MCImageStoreController.h"
+#import "MCImage.h"
 
 @implementation MCPerson
 
 @synthesize uniquePersonId;
 @synthesize picture;
-@synthesize thumbnail;
 @synthesize firstName;
 @synthesize lastName;
 @synthesize emailAddress;
@@ -22,10 +22,23 @@
 
 #pragma mark - New in this class
 
+- (void)removeThumbnail
+{
+    if (imageObjectFromStore) {
+        [[MCImageStoreController sharedStore] deleteImage:imageObjectFromStore];
+    } else {
+        NSLog(@"No thumbnail present.");
+    }
+}
+
+- (UIImage *)thumbnail
+{
+    return [imageObjectFromStore thumbnail];
+}
+
 - (void)setThumbnail:(UIImage *)image
 {
-    thumbnail = image;
-    [[MCImageStoreController sharedStore] addImageFromPerson:self];
+    imageObjectFromStore = [[MCImageStoreController sharedStore] addImageFromPerson:[self uniquePersonId] withThumbnail:image];
 }
 
 - (id)initWithName:(NSString *)n andMailAddress:(NSString *)ea
@@ -96,7 +109,7 @@
 
 - (void)encodeWithCoder:(NSCoder *)aCoder
 {
-    [aCoder encodeObject:uniquePersonId forKey:@"uniquePersonID"];
+    [aCoder encodeObject:uniquePersonId forKey:@"uniquePersonId"];
     [aCoder encodeObject:firstName forKey:@"name"];
     [aCoder encodeObject:lastName forKey:@"lastName"];
     [aCoder encodeObject:emailAddress forKey:@"emailAddress"];
@@ -113,6 +126,8 @@
         [self setLastName:[aDecoder decodeObjectForKey:@"lastName"]];
         [self setEmailAddress:[aDecoder decodeObjectForKey:@"emailAddress"]];
         [self setAllEmailAddressesFromAddressBook:[aDecoder decodeObjectForKey:@"allEmailAddressesFromAddressBook"]];
+        imageObjectFromStore = [[MCImageStoreController sharedStore] fetchImageFromIdString:uniquePersonId];
+
     }
     return self;
 }

@@ -9,12 +9,15 @@
 #import <Foundation/Foundation.h>
 #import <CoreData/CoreData.h>
 
-
 @interface MCImage : NSManagedObject
 
-@property (nonatomic, retain) NSString * uniqueIdentifier;
-@property (nonatomic, retain) NSData * thumbnail_data;
-@property (nonatomic, strong) UIImage * thumbnail;
+// Entity variables.
+@property (nonatomic, strong) NSString *uniqueIdentifier;
+@property (nonatomic, strong) NSData *thumbnail_data;
+@property (nonatomic, strong) UIImage *thumbnail;
+
+// Class variables.
+@property (nonatomic, strong) NSNumber *edgeRadius;
 
 - (void)setThumbnailDataFromImage:(UIImage *)image;
 

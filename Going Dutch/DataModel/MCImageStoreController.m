@@ -27,23 +27,53 @@
     return sharedStore;
 }
 
-- (void)addImageFromPerson:(MCPerson *)person
+- (MCImage *)addImageFromPerson:(NSString *)idString withThumbnail:(UIImage *)thumbnail
 {
     NSLog(@"addImageFromPerson executed.");
     MCImage *image = [NSEntityDescription insertNewObjectForEntityForName:@"MCImage" inManagedObjectContext:imageStoreContext];
-    [image setUniqueIdentifier:[person uniquePersonId]];
-    [image setThumbnailDataFromImage:[person thumbnail]];
+    [image setUniqueIdentifier:idString];
+    [image setThumbnailDataFromImage:thumbnail];
+    
+    NSError *error = nil;
+    BOOL successful = [imageStoreContext save:&error];
+    if (!successful) {
+        NSLog(@"Unable to save the image to the store.");
+    } else {
+        NSLog(@"Image save to store succesfully.");
+    }
+    return image;
 }
 
 - (UIImage *)fetchImageFromIdString:(NSString *)idString
 {
     NSLog(@"fetchImageFromIdString executed.");
-    return nil;
+    NSFetchRequest *request = [[NSFetchRequest alloc] init];
+    [request setEntity:[NSEntityDescription entityForName:@"MCImage" inManagedObjectContext:imageStoreContext]];
+    NSString *attributeName = @"uniqueIdentifier";
+    NSString *attributeValue = idString;
+    NSPredicate *predicate = [NSPredicate predicateWithFormat:@"%K == %@", attributeName, attributeValue];
+    [request setPredicate:predicate];
+    
+    NSError *error = nil;
+    NSMutableArray *fetchedResult = [[imageStoreContext executeFetchRequest:request error:&error] mutableCopy];
+    if (!fetchedResult) {
+        NSLog(@"Er ging iets fout bij het ophalen van de thumbnail.");
+        return nil;
+    } else {
+        if ([fetchedResult count] == 0) {
+            NSLog(@"No record was found with id:%@", idString);
+            return nil;
+        }
+    }
+    return [fetchedResult objectAtIndex:0];
 }
 
-- (void)deleteImage:(MCPerson *)person
+- (void)deleteImage:(MCImage *)image
 {
     NSLog(@"deleteImage executed.");
+    [imageStoreContext deleteObject:image];
+    
+    [self saveStore];
 }
 
 - (void)saveStore

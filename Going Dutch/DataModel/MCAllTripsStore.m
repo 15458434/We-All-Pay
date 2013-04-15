@@ -8,6 +8,8 @@
 
 #import "MCAllTripsStore.h"
 #import "MCSharedBill.h"
+#import "MCPerson.h"
+#import "MCPeople.h"
 
 @implementation MCAllTripsStore
 
@@ -33,6 +35,9 @@
 
 - (void)removeTrip:(MCSharedBill *)trip
 {
+    for (MCPerson *p in [[trip people] allPeople]) {
+        [p removeThumbnail];
+    }
     [allTrips removeObject:trip];
 }
 

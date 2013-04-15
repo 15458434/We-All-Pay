@@ -10,6 +10,7 @@
 #import <CoreData/CoreData.h>
 
 @class MCPerson;
+@class MCImage;
 
 @interface MCImageStoreController : NSObject
 {
@@ -21,9 +22,9 @@
 
 + (MCImageStoreController *)sharedStore;
 
-- (void)addImageFromPerson:(MCPerson *)person;
-- (UIImage *)fetchImageFromIdString:(NSString *)idString;
-- (void)deleteImage:(MCPerson *)person;
+- (MCImage *)addImageFromPerson:(NSString *)idString withThumbnail:(UIImage *)thumbnail;
+- (MCImage *)fetchImageFromIdString:(NSString *)idString;
+- (void)deleteImage:(MCImage *)image;
 - (void)saveStore;
 
 @end
