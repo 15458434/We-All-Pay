@@ -44,6 +44,7 @@
 - (void)doneAddingPeople:(id)selector
 {
     if ([[tonightsBill people] areTherePeople]) {
+        [tonightsBill setTripName:tripName];
         [[self presentingViewController] dismissViewControllerAnimated:YES completion:dismissblock];
     }
 }
@@ -195,6 +196,12 @@
     
     [[self navigationController] setToolbarHidden:NO animated:YES];
     [[self view] endEditing:YES];
+}
+
+- (void)viewWillDisappear:(BOOL)animated
+{
+    [[self navigationItem] setRightBarButtonItem:nil animated:animated];
+    [[self navigationItem] setLeftBarButtonItem:nil animated:animated];
 }
 
 -(void)viewDidAppear:(BOOL)animated

@@ -47,6 +47,15 @@
     return self;
 }
 
+- (void)viewWillAppear:(BOOL)animated
+{
+    [[self navigationController] setToolbarHidden:YES animated:animated];
+    NSNumber *averagePay = [[NSNumber alloc] initWithDouble:[tonightsBill amountPeopleShouldHavePaid]];
+    NSNumberFormatter *nf = [[NSNumberFormatter alloc] init];
+    [nf setNumberStyle:NSNumberFormatterCurrencyStyle];
+    [[self navigationItem] setTitle:[[NSString alloc] initWithFormat:@"To pay: %@", [nf stringFromNumber:averagePay]]];
+}
+
 - (void)viewDidLoad
 {
     [super viewDidLoad];
@@ -59,12 +68,6 @@
     
     UINib *nib = [UINib nibWithNibName:@"MCReturnPaymentTableViewCell" bundle:nil];
     [[self tableView] registerNib:nib forCellReuseIdentifier:@"MCReturnPaymentTableViewCell"];
-    
-    [[self navigationController] setToolbarHidden:YES animated:YES];
-    NSNumber *averagePay = [[NSNumber alloc] initWithDouble:[tonightsBill amountPeopleShouldHavePaid]];
-    NSNumberFormatter *nf = [[NSNumberFormatter alloc] init];
-    [nf setNumberStyle:NSNumberFormatterCurrencyStyle];
-    [[self navigationItem] setTitle:[[NSString alloc] initWithFormat:@"To pay: %@", [nf stringFromNumber:averagePay]]];
 }
 
 - (void)didReceiveMemoryWarning

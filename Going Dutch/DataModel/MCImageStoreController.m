@@ -34,13 +34,6 @@
     [image setUniqueIdentifier:idString];
     [image setThumbnailDataFromImage:thumbnail];
     
-    NSError *error = nil;
-    BOOL successful = [imageStoreContext save:&error];
-    if (!successful) {
-        NSLog(@"Unable to save the image to the store.");
-    } else {
-        NSLog(@"Image save to store succesfully.");
-    }
     return image;
 }
 
@@ -72,8 +65,6 @@
 {
     NSLog(@"deleteImage executed.");
     [imageStoreContext deleteObject:image];
-    
-    [self saveStore];
 }
 
 - (void)saveStore
@@ -112,6 +103,7 @@
         imageStoreContext = [[NSManagedObjectContext alloc] init];
         [imageStoreContext setPersistentStoreCoordinator:psc];
         [imageStoreContext setUndoManager:nil];
+        stillNeedsInit = 0;
     }
     return self;
 }

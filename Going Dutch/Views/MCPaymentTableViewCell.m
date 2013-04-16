@@ -13,6 +13,7 @@
 @synthesize namePayerLabel;
 @synthesize whatPaidLabel;
 @synthesize moneyPaidLabel;
+@synthesize pictureOfPayer;
 
 - (id)initWithStyle:(UITableViewCellStyle)style reuseIdentifier:(NSString *)reuseIdentifier
 {

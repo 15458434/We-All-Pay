@@ -38,6 +38,7 @@
 
 - (void)applicationDidEnterBackground:(UIApplication *)application
 {
+    [[MCImageStoreController sharedStore] saveStore];
     BOOL succes = [[MCAllTripsStore sharedList] saveChanges];
     if (succes) {
         NSLog(@"Archive has been saved.");

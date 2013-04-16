@@ -27,7 +27,7 @@
 @synthesize tonightsBill;
 @synthesize didSomethingChange;
 
-// Actions
+#pragma mark - Actions
 
 - (void)addPayment:(id)sender
 {
@@ -68,7 +68,7 @@
         NSMutableString *mailBody = [[NSMutableString alloc] init];
         NSNumberFormatter *nf = [[NSNumberFormatter alloc] init];
         [nf setNumberStyle:NSNumberFormatterCurrencyStyle];
-        [mailBody appendFormat:@"Dear %@\n", [[tonightsBill people] stringWithNamesOfPeoplePresent]];
+        [mailBody appendFormat:@"Dear %@\n", [[tonightsBill people] stringOfApproxPeoplePresent]];
         [mailBody appendFormat:@"\n"];
         [mailBody appendFormat:@"From a total of %@, which was spend on our last trip to %@. We all have to pay an equal share of %@.\n", [nf stringFromNumber:[[NSNumber alloc] initWithDouble:[tonightsBill totalSumOfMoneyOfThisSharedBill]]], [tonightsBill tripName], [nf stringFromNumber:[[NSNumber alloc] initWithDouble:[tonightsBill amountPeopleShouldHavePaid]]]];
         [mailBody appendFormat:@"\n"];
@@ -96,6 +96,8 @@
     }
 }
 
+#pragma mark - New in this class.
+
 - (id)initWithSharedBill:(MCSharedBill *)tBill
 {
     self = [super initWithStyle:UITableViewStyleGrouped];
@@ -111,6 +113,8 @@
     }
     return self;
 }
+
+#pragma mark - Inherited from super class.
 
 - (id)init
 {
@@ -265,6 +269,7 @@
     
     MCPerson *thisCellsPayer = [thisCellsPayment payingPerson];
     [[paymentCell namePayerLabel] setText:[thisCellsPayer getFullName]];
+    [[paymentCell pictureOfPayer] setImage:[thisCellsPayer thumbnail]];
     [[paymentCell whatPaidLabel] setText:[thisCellsPayment place]];
     NSNumberFormatter *nf = [[NSNumberFormatter alloc] init];
     [nf setNumberStyle:NSNumberFormatterCurrencyStyle];

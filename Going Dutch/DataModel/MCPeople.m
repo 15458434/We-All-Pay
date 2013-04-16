@@ -52,6 +52,7 @@
 - (void)removePerson:(MCPerson *)awfulPerson
 {
     // remove a person from the array of people
+    [awfulPerson removeThumbnail];
     [people removeObject:awfulPerson];
 }
 
