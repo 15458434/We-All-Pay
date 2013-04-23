@@ -14,6 +14,8 @@
 @dynamic uniqueIdentifier;
 @dynamic thumbnail_data;
 @dynamic thumbnail;
+@dynamic picture_data;
+@dynamic picture;
 
 @synthesize edgeRadius;
 
@@ -44,6 +46,31 @@
     UIGraphicsEndImageContext();
 }
 
+- (void)setPictureDataFromImage:(UIImage *)image
+{
+    CGSize imageSize = [image size];
+    CGRect thumbnailRect = CGRectMake(0, 0, 80, 80);
+    float ratio = MAX(thumbnailRect.size.width / imageSize.width, thumbnailRect.size.height / imageSize.height);
+    
+    UIGraphicsBeginImageContextWithOptions(thumbnailRect.size, NO, 0.0);
+    UIBezierPath *bezierPath = [UIBezierPath bezierPathWithRoundedRect:thumbnailRect cornerRadius:[edgeRadius doubleValue] * 1.9];
+    [bezierPath addClip];
+    
+    CGRect imageDrawRect;
+    imageDrawRect.size.width = ratio * imageSize.width;
+    imageDrawRect.size.height = ratio * imageSize.height;
+    imageDrawRect.origin.x = (thumbnailRect.size.width - imageDrawRect.size.width) / 2.0;
+    imageDrawRect.origin.y = (thumbnailRect.size.height - imageDrawRect.size.height) / 2.0;
+    
+    [image drawInRect:imageDrawRect];
+    UIImage *thumbnailWithRoundedCorners = UIGraphicsGetImageFromCurrentImageContext();
+    [self setPicture:thumbnailWithRoundedCorners];
+    
+    NSData *thumbnailWithRoundedCornersData = UIImagePNGRepresentation(thumbnailWithRoundedCorners);
+    [self setPicture_data:thumbnailWithRoundedCornersData];
+    UIGraphicsEndImageContext();
+}
+
 #pragma mark - Inherited from super.
 
 - (void)awakeFromInsert
@@ -58,8 +85,9 @@
     [super awakeFromFetch];
     
     // Extract the thumbnail image from the data.
-    UIImage *tn = [UIImage imageWithData:[self thumbnail_data]];
-    [self setPrimitiveValue:tn forKey:@"thumbnail"];
+    [self setPrimitiveValue:[UIImage imageWithData:[self thumbnail_data]] forKey:@"thumbnail"];
+    // Extract the picture image from the data
+    [self setPrimitiveValue:[UIImage imageWithData:[self picture_data]] forKey:@"picture"];
 }
 
 @end

@@ -8,12 +8,15 @@
 
 #import "MCPersonViewController.h"
 #import "MCPerson.h"
+#import "MCSharedBill.h"
 
 @interface MCPersonViewController ()
 
 @end
 
 @implementation MCPersonViewController
+
+@synthesize tonightsBill;
 
 #pragma mark - Actions
 
@@ -140,8 +143,14 @@
 {
     [super viewWillAppear:animated];
     
-    [nameField setText:[thisPerson getFullName]];
+    [firstNameField setText:[thisPerson firstName]];
+    [lastNameField setText:[thisPerson lastName]];
     [emailField setText:[thisPerson emailAddress]];
+    [pictureView setImage:[thisPerson picture]];
+    double moneySpendByThisPerson = [tonightsBill totalSumPaidBy:thisPerson];
+    NSNumberFormatter *nf = [[NSNumberFormatter alloc] init];
+    [nf setNumberStyle:NSNumberFormatterCurrencyStyle];
+    [totalSumSpendLabel setText:[NSString stringWithFormat:@"Spend %@.", [nf stringFromNumber:[NSNumber numberWithDouble:moneySpendByThisPerson]]]];
 }
 
 - (void)viewDidLoad

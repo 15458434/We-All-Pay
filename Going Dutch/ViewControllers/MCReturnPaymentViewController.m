@@ -31,7 +31,12 @@
             @throw [NSException exceptionWithName:@"InitWithNil" reason:@"thisBill is not allowed to point to nil." userInfo:nil];
         }
         tonightsBill = thisBill;
-        paymentsAfterwards = [tonightsBill solveWhoHasToPayWhoFromThisBill];
+        paymentsAfterwards = [[NSMutableArray alloc] init];
+        for (MCReturnPayment *rp in [tonightsBill solveWhoHasToPayWhoFromThisBill]) {
+            if ([rp receiver]) {
+                [paymentsAfterwards addObject:rp];
+            }
+        }
     }
     return self;
 }

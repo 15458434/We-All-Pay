@@ -182,7 +182,6 @@
     UINib *nib = [UINib nibWithNibName:@"MCPaymentTableViewCell" bundle:nil];
     [[self tableView] registerNib:nib forCellReuseIdentifier:@"MCPaymentTableViewCell"];
     
-    
     // if there are NO people on this SharedBill go to the people addscreen
     if (![tonightsBill areTherePeople]) {
         MCEditTripViewController *pvc = [[MCEditTripViewController alloc] initWithBill:tonightsBill isNew:YES];

@@ -13,7 +13,7 @@
 @interface MCReturnPaymentViewController : UITableViewController
 {
     MCSharedBill *tonightsBill;
-    NSArray *paymentsAfterwards;
+    NSMutableArray *paymentsAfterwards;
 }
 
 - (id)initWithBill:(MCSharedBill *)thisBill;

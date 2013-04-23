@@ -11,14 +11,17 @@
 
 @interface MCImage : NSManagedObject
 
-// Entity variables.
+// Entity properties.
 @property (nonatomic, strong) NSString *uniqueIdentifier;
 @property (nonatomic, strong) NSData *thumbnail_data;
 @property (nonatomic, strong) UIImage *thumbnail;
+@property (nonatomic, strong) NSData *picture_data;
+@property (nonatomic, strong) UIImage *picture;
 
-// Class variables.
+// Class properties.
 @property (nonatomic, strong) NSNumber *edgeRadius;
 
 - (void)setThumbnailDataFromImage:(UIImage *)image;
+- (void)setPictureDataFromImage:(UIImage *)image;
 
 @end

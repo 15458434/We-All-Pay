@@ -14,7 +14,6 @@
 @implementation MCPerson
 
 @synthesize uniquePersonId;
-@synthesize picture;
 @synthesize firstName;
 @synthesize lastName;
 @synthesize emailAddress;
@@ -25,7 +24,7 @@
 - (void)removeThumbnail
 {
     if (imageObjectFromStore) {
-        [[MCImageStoreController sharedStore] deleteImage:imageObjectFromStore];
+        [[MCImageStoreController sharedStore] deleteImageObjectFromStore:imageObjectFromStore];
     } else {
         NSLog(@"No thumbnail present.");
     }
@@ -38,7 +37,17 @@
 
 - (void)setThumbnail:(UIImage *)image
 {
-    imageObjectFromStore = [[MCImageStoreController sharedStore] addImageFromPerson:[self uniquePersonId] withThumbnail:image];
+    imageObjectFromStore = [[MCImageStoreController sharedStore] addThumbnailFromPersonWithId:[self uniquePersonId] withThumbnail:image];
+}
+
+- (UIImage *)picture
+{
+    return [imageObjectFromStore picture];
+}
+
+- (void)setPicture:(UIImage *)image
+{
+    [imageObjectFromStore setPictureDataFromImage:image];
 }
 
 - (id)initWithName:(NSString *)n andMailAddress:(NSString *)ea
@@ -126,8 +135,7 @@
         [self setLastName:[aDecoder decodeObjectForKey:@"lastName"]];
         [self setEmailAddress:[aDecoder decodeObjectForKey:@"emailAddress"]];
         [self setAllEmailAddressesFromAddressBook:[aDecoder decodeObjectForKey:@"allEmailAddressesFromAddressBook"]];
-        imageObjectFromStore = [[MCImageStoreController sharedStore] fetchImageFromIdString:uniquePersonId];
-
+        imageObjectFromStore = [[MCImageStoreController sharedStore] fetchImageFromPersonWithId:uniquePersonId];
     }
     return self;
 }

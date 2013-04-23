@@ -14,7 +14,6 @@
 @interface MCPerson : NSObject <NSCoding>
 {
     NSString *uniquePersonId;
-    UIImage *picture;
     MCImage *imageObjectFromStore;
     NSString *firstName;
     NSString *lastName;
@@ -24,7 +23,6 @@
 }
 
 @property (nonatomic, strong, readonly) NSString *uniquePersonId;
-@property (nonatomic, strong) UIImage *picture;
 @property (nonatomic, strong) NSString *firstName;
 @property (nonatomic, strong) NSString *lastName;
 @property (nonatomic, strong) NSString *emailAddress;
@@ -36,6 +34,8 @@
 - (NSString *)getName;
 - (UIImage *)thumbnail;
 - (void)setThumbnail:(UIImage *)image;
+- (UIImage *)picture;
+- (void)setPicture:(UIImage *)image;
 - (void)removeThumbnail;
 
 

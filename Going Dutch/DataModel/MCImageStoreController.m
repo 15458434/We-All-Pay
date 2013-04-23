@@ -27,9 +27,9 @@
     return sharedStore;
 }
 
-- (MCImage *)addImageFromPerson:(NSString *)idString withThumbnail:(UIImage *)thumbnail
+- (MCImage *)addThumbnailFromPersonWithId:(NSString *)idString withThumbnail:(UIImage *)thumbnail
 {
-    NSLog(@"addImageFromPerson executed.");
+    NSLog(@"addThumbnailFromPerson executed.");
     MCImage *image = [NSEntityDescription insertNewObjectForEntityForName:@"MCImage" inManagedObjectContext:imageStoreContext];
     [image setUniqueIdentifier:idString];
     [image setThumbnailDataFromImage:thumbnail];
@@ -37,7 +37,17 @@
     return image;
 }
 
-- (UIImage *)fetchImageFromIdString:(NSString *)idString
+- (MCImage *)addImageFromPersonWithId:(NSString *)idString withThumbnail:(UIImage *)thumbnail andPicture:(UIImage *)picture
+{
+    NSLog(@"addTImageFromPerson executed.");
+    MCImage *image = [NSEntityDescription insertNewObjectForEntityForName:@"MCImage" inManagedObjectContext:imageStoreContext];
+    [image setUniqueIdentifier:idString];
+    [image setThumbnailDataFromImage:thumbnail];
+    
+    return image;
+}
+
+- (UIImage *)fetchImageFromPersonWithId:(NSString *)idString
 {
     NSLog(@"fetchImageFromIdString executed.");
     NSFetchRequest *request = [[NSFetchRequest alloc] init];
@@ -61,7 +71,7 @@
     return [fetchedResult objectAtIndex:0];
 }
 
-- (void)deleteImage:(MCImage *)image
+- (void)deleteImageObjectFromStore:(MCImage *)image
 {
     NSLog(@"deleteImage executed.");
     [imageStoreContext deleteObject:image];

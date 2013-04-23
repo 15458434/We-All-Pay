@@ -148,7 +148,8 @@
 {
     MCPerson *newPerson = [[MCPerson alloc] init];
     [newPerson setThumbnail:[UIImage imageWithData:(__bridge_transfer NSData *)ABPersonCopyImageDataWithFormat(person, kABPersonImageFormatThumbnail)]];
-    [newPerson setPicture:[UIImage imageWithData:(__bridge_transfer NSData *)ABPersonCopyImageDataWithFormat(person, kABPersonImageFormatOriginalSize)]];
+//    [newPerson setPicture:[UIImage imageWithData:(__bridge_transfer NSData *)ABPersonCopyImageDataWithFormat(person, kABPersonImageFormatOriginalSize)]];
+    [newPerson setPicture:[UIImage imageWithData:(__bridge_transfer NSData *)ABPersonCopyImageDataWithFormat(person, kABPersonImageFormatThumbnail)]];
     [newPerson setFirstName:(__bridge_transfer NSString *)ABRecordCopyValue(person, kABPersonFirstNameProperty)];
     [newPerson setLastName:(__bridge_transfer NSString *)ABRecordCopyValue(person, kABPersonLastNameProperty)];
     ABMultiValueRef emailAddresses = ABRecordCopyValue(person, kABPersonEmailProperty);
@@ -194,14 +195,16 @@
 {
     [super viewWillAppear:animated];
     
+    [[[self navigationItem] rightBarButtonItem] setEnabled:YES];
+    [[[self navigationItem] leftBarButtonItem] setEnabled:YES];
     [[self navigationController] setToolbarHidden:NO animated:YES];
     [[self view] endEditing:YES];
 }
 
 - (void)viewWillDisappear:(BOOL)animated
 {
-    [[self navigationItem] setRightBarButtonItem:nil animated:animated];
-    [[self navigationItem] setLeftBarButtonItem:nil animated:animated];
+    [[[self navigationItem] rightBarButtonItem] setEnabled:NO];
+    [[[self navigationItem] leftBarButtonItem] setEnabled:NO];
 }
 
 -(void)viewDidAppear:(BOOL)animated
@@ -401,6 +404,7 @@
 {
     MCPerson *selectedPerson = [[[tonightsBill people] allPeople] objectAtIndex:[indexPath row]];
     MCPersonViewController *pvc = [[MCPersonViewController alloc] initWithPerson:selectedPerson];
+    [pvc setTonightsBill:tonightsBill];
     [[self navigationController] pushViewController:pvc animated:YES];
 }
 

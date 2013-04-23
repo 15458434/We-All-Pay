@@ -10,15 +10,21 @@
 #import <AddressBookUI/AddressBookUI.h>
 
 @class MCPerson;
+@class MCSharedBill;
 
 @interface MCPersonViewController : UIViewController <UITextFieldDelegate, ABPeoplePickerNavigationControllerDelegate, UIPickerViewDelegate, UIPickerViewDataSource>
 {
-    __weak IBOutlet UITextField *nameField;
+    __weak IBOutlet UIImageView *pictureView;
+    __weak IBOutlet UITextField *firstNameField;
+    __weak IBOutlet UITextField *lastNameField;
     __weak IBOutlet UITextField *emailField;
+    __weak IBOutlet UILabel *totalSumSpendLabel;
     
     MCPerson *thisPerson;
     UIPickerView *emailSelectionFromAddressBookPickerView;
 }
+
+@property (nonatomic, strong) MCSharedBill *tonightsBill;
 
 - (id)initWithPerson:(MCPerson *)person;
 
