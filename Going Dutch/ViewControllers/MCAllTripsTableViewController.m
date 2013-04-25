@@ -47,7 +47,7 @@
     
     if (self) {
         [MCAllTripsStore sharedList];
-        [[self navigationItem] setTitle:@"Going Dutch"];
+        [[self navigationItem] setTitle:@"Project X"];
         UIBarButtonItem *bbi = [[UIBarButtonItem alloc] initWithBarButtonSystemItem:UIBarButtonSystemItemAdd
                                                                              target:self
                                                                              action:@selector(addTrip:)];

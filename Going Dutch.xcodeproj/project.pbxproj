@@ -32,6 +32,13 @@
 		3886D3FE16B7A1CD00ECE64F /* AddressBookUI.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 3886D3FC16B7A1CD00ECE64F /* AddressBookUI.framework */; };
 		3886D40216B7AA3100ECE64F /* MCPaymentViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 3886D40016B7AA3100ECE64F /* MCPaymentViewController.m */; };
 		3886D40316B7AA3100ECE64F /* MCPaymentViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = 3886D40116B7AA3100ECE64F /* MCPaymentViewController.xib */; };
+		3898AAD81726EBAC008F947E /* iAd.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 3898AAD71726EBAC008F947E /* iAd.framework */; settings = {ATTRIBUTES = (Required, ); }; };
+		3898AADA172710D3008F947E /* square receipt first attempt.png in Resources */ = {isa = PBXBuildFile; fileRef = 3898AAD9172710D3008F947E /* square receipt first attempt.png */; };
+		3898AADC172710DB008F947E /* square receipt first attempt@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 3898AADB172710DB008F947E /* square receipt first attempt@2x.png */; };
+		3898AAE21727B50E008F947E /* toolbar is sign.png in Resources */ = {isa = PBXBuildFile; fileRef = 3898AAE01727B50E008F947E /* toolbar is sign.png */; };
+		3898AAE31727B50E008F947E /* toolbar is sign@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 3898AAE11727B50E008F947E /* toolbar is sign@2x.png */; };
+		3898AAE617297F80008F947E /* mail icon.png in Resources */ = {isa = PBXBuildFile; fileRef = 3898AAE417297F80008F947E /* mail icon.png */; };
+		3898AAE717297F80008F947E /* mail icon@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 3898AAE517297F80008F947E /* mail icon@2x.png */; };
 		38CDE90017135B6300387CAA /* MCTools.m in Sources */ = {isa = PBXBuildFile; fileRef = 38CDE8FF17135B6300387CAA /* MCTools.m */; };
 		38CDE903171477C200387CAA /* imageStore.xcdatamodeld in Sources */ = {isa = PBXBuildFile; fileRef = 38CDE901171477C200387CAA /* imageStore.xcdatamodeld */; };
 		38CDE9061715A9A800387CAA /* MCImageStoreController.m in Sources */ = {isa = PBXBuildFile; fileRef = 38CDE9051715A9A800387CAA /* MCImageStoreController.m */; };
@@ -90,6 +97,13 @@
 		3886D3FF16B7AA3100ECE64F /* MCPaymentViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = MCPaymentViewController.h; path = ViewControllers/MCPaymentViewController.h; sourceTree = "<group>"; };
 		3886D40016B7AA3100ECE64F /* MCPaymentViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = MCPaymentViewController.m; path = ViewControllers/MCPaymentViewController.m; sourceTree = "<group>"; };
 		3886D40116B7AA3100ECE64F /* MCPaymentViewController.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; name = MCPaymentViewController.xib; path = ViewControllers/MCPaymentViewController.xib; sourceTree = "<group>"; };
+		3898AAD71726EBAC008F947E /* iAd.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = iAd.framework; path = System/Library/Frameworks/iAd.framework; sourceTree = SDKROOT; };
+		3898AAD9172710D3008F947E /* square receipt first attempt.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "square receipt first attempt.png"; sourceTree = "<group>"; };
+		3898AADB172710DB008F947E /* square receipt first attempt@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "square receipt first attempt@2x.png"; sourceTree = "<group>"; };
+		3898AAE01727B50E008F947E /* toolbar is sign.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = "toolbar is sign.png"; path = "Going Dutch/icons/toolbar is sign.png"; sourceTree = "<group>"; };
+		3898AAE11727B50E008F947E /* toolbar is sign@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = "toolbar is sign@2x.png"; path = "Going Dutch/icons/toolbar is sign@2x.png"; sourceTree = "<group>"; };
+		3898AAE417297F80008F947E /* mail icon.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = "mail icon.png"; path = "Going Dutch/icons/mail icon.png"; sourceTree = "<group>"; };
+		3898AAE517297F80008F947E /* mail icon@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = "mail icon@2x.png"; path = "Going Dutch/icons/mail icon@2x.png"; sourceTree = "<group>"; };
 		38CDE8FE17135B6300387CAA /* MCTools.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = MCTools.h; sourceTree = "<group>"; };
 		38CDE8FF17135B6300387CAA /* MCTools.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = MCTools.m; sourceTree = "<group>"; };
 		38CDE902171477C200387CAA /* imageStore.xcdatamodel */ = {isa = PBXFileReference; lastKnownFileType = wrapper.xcdatamodel; path = imageStore.xcdatamodel; sourceTree = "<group>"; };
@@ -126,6 +140,7 @@
 				3801F89C16DFC62600DF8675 /* CoreData.framework in Frameworks */,
 				38572ADB169D437B00969C62 /* CoreGraphics.framework in Frameworks */,
 				38572AD9169D437B00969C62 /* Foundation.framework in Frameworks */,
+				3898AAD81726EBAC008F947E /* iAd.framework in Frameworks */,
 				3873A2A516F23AA1000832FD /* MessageUI.framework in Frameworks */,
 				38572AD7169D437B00969C62 /* UIKit.framework in Frameworks */,
 			);
@@ -164,6 +179,7 @@
 		38572AD5169D437B00969C62 /* Frameworks */ = {
 			isa = PBXGroup;
 			children = (
+				3898AAD71726EBAC008F947E /* iAd.framework */,
 				3873A2A416F23AA1000832FD /* MessageUI.framework */,
 				3801F89B16DFC62600DF8675 /* CoreData.framework */,
 				3886D3FB16B7A1CD00ECE64F /* AddressBook.framework */,
@@ -178,6 +194,7 @@
 		38572ADC169D437B00969C62 /* Going Dutch */ = {
 			isa = PBXGroup;
 			children = (
+				3898AADD17271157008F947E /* icons */,
 				3873A2A616F2858A000832FD /* Going Dutch.entitlements */,
 				3801F89D16DFC6D400DF8675 /* DataStore */,
 				38572AF5169D43A600969C62 /* DataModel */,
@@ -268,6 +285,44 @@
 			name = DataModel;
 			sourceTree = "<group>";
 		};
+		3898AADD17271157008F947E /* icons */ = {
+			isa = PBXGroup;
+			children = (
+				3898AAEA17298512008F947E /* App Icon */,
+				3898AAE917297FB3008F947E /* Is sign */,
+				3898AAE817297F94008F947E /* Mail icon */,
+			);
+			name = icons;
+			path = ..;
+			sourceTree = "<group>";
+		};
+		3898AAE817297F94008F947E /* Mail icon */ = {
+			isa = PBXGroup;
+			children = (
+				3898AAE417297F80008F947E /* mail icon.png */,
+				3898AAE517297F80008F947E /* mail icon@2x.png */,
+			);
+			name = "Mail icon";
+			sourceTree = "<group>";
+		};
+		3898AAE917297FB3008F947E /* Is sign */ = {
+			isa = PBXGroup;
+			children = (
+				3898AAE01727B50E008F947E /* toolbar is sign.png */,
+				3898AAE11727B50E008F947E /* toolbar is sign@2x.png */,
+			);
+			name = "Is sign";
+			sourceTree = "<group>";
+		};
+		3898AAEA17298512008F947E /* App Icon */ = {
+			isa = PBXGroup;
+			children = (
+				3898AAD9172710D3008F947E /* square receipt first attempt.png */,
+				3898AADB172710DB008F947E /* square receipt first attempt@2x.png */,
+			);
+			name = "App Icon";
+			sourceTree = "<group>";
+		};
 /* End PBXGroup section */
 
 /* Begin PBXNativeTarget section */
@@ -331,6 +386,12 @@
 				38EFF2DB16D35C23001C8248 /* MCPaymentTableViewCell.xib in Resources */,
 				38EFF2E716D697B5001C8248 /* MCPersonTableViewCell.xib in Resources */,
 				38F8B14B16D752DE001037CA /* MCReturnPaymentTableViewCell.xib in Resources */,
+				3898AADA172710D3008F947E /* square receipt first attempt.png in Resources */,
+				3898AADC172710DB008F947E /* square receipt first attempt@2x.png in Resources */,
+				3898AAE21727B50E008F947E /* toolbar is sign.png in Resources */,
+				3898AAE31727B50E008F947E /* toolbar is sign@2x.png in Resources */,
+				3898AAE617297F80008F947E /* mail icon.png in Resources */,
+				3898AAE717297F80008F947E /* mail icon@2x.png in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

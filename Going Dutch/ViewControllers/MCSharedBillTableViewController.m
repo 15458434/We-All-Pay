@@ -146,9 +146,10 @@
     [[self navigationItem] setTitle:[tonightsBill tripName]];
     
     [[self navigationController] setToolbarHidden:NO animated:YES];
-    UIBarButtonItem *shareButton = [[UIBarButtonItem alloc] initWithBarButtonSystemItem:UIBarButtonSystemItemAction
-                                                                                 target:self
-                                                                                 action:@selector(shareBill:)];
+    UIBarButtonItem *shareButton = [[UIBarButtonItem alloc] initWithImage:[UIImage imageNamed:@"mail icon"]
+                                                                    style:UIBarButtonItemStylePlain
+                                                                   target:self
+                                                                   action:@selector(shareBill:)];
     UIBarButtonItem *flexibleSpace = [[UIBarButtonItem alloc] initWithBarButtonSystemItem:UIBarButtonSystemItemFlexibleSpace
                                                                                    target:nil
                                                                                    action:nil];
@@ -156,9 +157,10 @@
     UIBarButtonItem *addButton = [[UIBarButtonItem alloc] initWithBarButtonSystemItem:UIBarButtonSystemItemAdd
                                                                                target:self
                                                                                action:@selector(addPayment:)];
-    UIBarButtonItem *solveButton = [[UIBarButtonItem alloc] initWithBarButtonSystemItem:UIBarButtonSystemItemOrganize
-                                                                                 target:self
-                                                                                 action:@selector(showWhoPaysWho:)];
+    UIBarButtonItem *solveButton = [[UIBarButtonItem alloc] initWithImage:[UIImage imageNamed:@"toolbar is sign"]
+                                                                    style:UIBarButtonItemStylePlain
+                                                                   target:self
+                                                                   action:@selector(showWhoPaysWho:)];
     NSArray *bottomButtonArray;
     if ([MFMailComposeViewController canSendMail]) {
         bottomButtonArray = [[NSArray alloc] initWithObjects:shareButton, flexibleSpace, solveButton, flexibleSpace, addButton, nil];
