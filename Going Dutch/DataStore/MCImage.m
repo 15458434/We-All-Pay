@@ -88,6 +88,8 @@
     [self setPrimitiveValue:[UIImage imageWithData:[self thumbnail_data]] forKey:@"thumbnail"];
     // Extract the picture image from the data
     [self setPrimitiveValue:[UIImage imageWithData:[self picture_data]] forKey:@"picture"];
+    
+    edgeRadius = [NSNumber numberWithDouble:5.0];
 }
 
 @end
