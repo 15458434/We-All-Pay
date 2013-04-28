@@ -9,6 +9,13 @@
 /* Begin PBXBuildFile section */
 		3801F89C16DFC62600DF8675 /* CoreData.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 3801F89B16DFC62600DF8675 /* CoreData.framework */; };
 		38175C1E16B6F31D00804914 /* NewTripHeaderView.xib in Resources */ = {isa = PBXBuildFile; fileRef = 38175C1D16B6F31D00804914 /* NewTripHeaderView.xib */; };
+		38334EB9172C2E050063B919 /* plus sign.png in Resources */ = {isa = PBXBuildFile; fileRef = 38334EB7172C2E050063B919 /* plus sign.png */; };
+		38334EBA172C2E050063B919 /* plus sign@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 38334EB8172C2E050063B919 /* plus sign@2x.png */; };
+		38334EBC172D1A770063B919 /* three peeps.png in Resources */ = {isa = PBXBuildFile; fileRef = 38334EBB172D1A770063B919 /* three peeps.png */; };
+		38334EBE172D1A8E0063B919 /* three peeps@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 38334EBD172D1A8E0063B919 /* three peeps@2x.png */; };
+		38334EC0172D319B0063B919 /* Default.png in Resources */ = {isa = PBXBuildFile; fileRef = 38334EBF172D319B0063B919 /* Default.png */; };
+		38334EC2172D31A50063B919 /* Default@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 38334EC1172D31A50063B919 /* Default@2x.png */; };
+		38334EC4172D31AF0063B919 /* Default-568h@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 38334EC3172D31AF0063B919 /* Default-568h@2x.png */; };
 		38572AD7169D437B00969C62 /* UIKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 38572AD6169D437B00969C62 /* UIKit.framework */; };
 		38572AD9169D437B00969C62 /* Foundation.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 38572AD8169D437B00969C62 /* Foundation.framework */; settings = {ATTRIBUTES = (Required, ); }; };
 		38572ADB169D437B00969C62 /* CoreGraphics.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 38572ADA169D437B00969C62 /* CoreGraphics.framework */; };
@@ -33,8 +40,6 @@
 		3886D40216B7AA3100ECE64F /* MCPaymentViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 3886D40016B7AA3100ECE64F /* MCPaymentViewController.m */; };
 		3886D40316B7AA3100ECE64F /* MCPaymentViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = 3886D40116B7AA3100ECE64F /* MCPaymentViewController.xib */; };
 		3898AAD81726EBAC008F947E /* iAd.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 3898AAD71726EBAC008F947E /* iAd.framework */; settings = {ATTRIBUTES = (Required, ); }; };
-		3898AADA172710D3008F947E /* square receipt first attempt.png in Resources */ = {isa = PBXBuildFile; fileRef = 3898AAD9172710D3008F947E /* square receipt first attempt.png */; };
-		3898AADC172710DB008F947E /* square receipt first attempt@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 3898AADB172710DB008F947E /* square receipt first attempt@2x.png */; };
 		3898AAE21727B50E008F947E /* toolbar is sign.png in Resources */ = {isa = PBXBuildFile; fileRef = 3898AAE01727B50E008F947E /* toolbar is sign.png */; };
 		3898AAE31727B50E008F947E /* toolbar is sign@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 3898AAE11727B50E008F947E /* toolbar is sign@2x.png */; };
 		3898AAE617297F80008F947E /* mail icon.png in Resources */ = {isa = PBXBuildFile; fileRef = 3898AAE417297F80008F947E /* mail icon.png */; };
@@ -59,14 +64,21 @@
 /* Begin PBXFileReference section */
 		3801F89B16DFC62600DF8675 /* CoreData.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = CoreData.framework; path = System/Library/Frameworks/CoreData.framework; sourceTree = SDKROOT; };
 		38175C1D16B6F31D00804914 /* NewTripHeaderView.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; name = NewTripHeaderView.xib; path = Views/NewTripHeaderView.xib; sourceTree = "<group>"; };
-		38572AD2169D437B00969C62 /* Going Dutch.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = "Going Dutch.app"; sourceTree = BUILT_PRODUCTS_DIR; };
+		38334EB7172C2E050063B919 /* plus sign.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = "plus sign.png"; path = "Going Dutch/icons/plus sign.png"; sourceTree = "<group>"; };
+		38334EB8172C2E050063B919 /* plus sign@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = "plus sign@2x.png"; path = "Going Dutch/icons/plus sign@2x.png"; sourceTree = "<group>"; };
+		38334EBB172D1A770063B919 /* three peeps.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "three peeps.png"; sourceTree = "<group>"; };
+		38334EBD172D1A8E0063B919 /* three peeps@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "three peeps@2x.png"; sourceTree = "<group>"; };
+		38334EBF172D319B0063B919 /* Default.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = Default.png; path = ../Default.png; sourceTree = "<group>"; };
+		38334EC1172D31A50063B919 /* Default@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = "Default@2x.png"; path = "../Default@2x.png"; sourceTree = "<group>"; };
+		38334EC3172D31AF0063B919 /* Default-568h@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = "Default-568h@2x.png"; path = "../Default-568h@2x.png"; sourceTree = "<group>"; };
+		38572AD2169D437B00969C62 /* We all pay.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = "We all pay.app"; sourceTree = BUILT_PRODUCTS_DIR; };
 		38572AD6169D437B00969C62 /* UIKit.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = UIKit.framework; path = System/Library/Frameworks/UIKit.framework; sourceTree = SDKROOT; };
 		38572AD8169D437B00969C62 /* Foundation.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Foundation.framework; path = System/Library/Frameworks/Foundation.framework; sourceTree = SDKROOT; };
 		38572ADA169D437B00969C62 /* CoreGraphics.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = CoreGraphics.framework; path = System/Library/Frameworks/CoreGraphics.framework; sourceTree = SDKROOT; };
-		38572ADE169D437B00969C62 /* Going Dutch-Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = "Going Dutch-Info.plist"; sourceTree = "<group>"; };
+		38572ADE169D437B00969C62 /* We all pay-Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = "We all pay-Info.plist"; sourceTree = "<group>"; };
 		38572AE0169D437B00969C62 /* en */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = en; path = en.lproj/InfoPlist.strings; sourceTree = "<group>"; };
 		38572AE2169D437B00969C62 /* main.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = main.m; sourceTree = "<group>"; };
-		38572AE4169D437B00969C62 /* Going Dutch-Prefix.pch */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = "Going Dutch-Prefix.pch"; sourceTree = "<group>"; };
+		38572AE4169D437B00969C62 /* We all pay-Prefix.pch */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = "We all pay-Prefix.pch"; sourceTree = "<group>"; };
 		38572AE5169D437B00969C62 /* MCAppDelegate.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = MCAppDelegate.h; sourceTree = "<group>"; };
 		38572AE6169D437B00969C62 /* MCAppDelegate.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = MCAppDelegate.m; sourceTree = "<group>"; usesTabs = 0; };
 		38572AE8169D437B00969C62 /* Default.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = Default.png; sourceTree = "<group>"; };
@@ -98,8 +110,6 @@
 		3886D40016B7AA3100ECE64F /* MCPaymentViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = MCPaymentViewController.m; path = ViewControllers/MCPaymentViewController.m; sourceTree = "<group>"; };
 		3886D40116B7AA3100ECE64F /* MCPaymentViewController.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; name = MCPaymentViewController.xib; path = ViewControllers/MCPaymentViewController.xib; sourceTree = "<group>"; };
 		3898AAD71726EBAC008F947E /* iAd.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = iAd.framework; path = System/Library/Frameworks/iAd.framework; sourceTree = SDKROOT; };
-		3898AAD9172710D3008F947E /* square receipt first attempt.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "square receipt first attempt.png"; sourceTree = "<group>"; };
-		3898AADB172710DB008F947E /* square receipt first attempt@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "square receipt first attempt@2x.png"; sourceTree = "<group>"; };
 		3898AAE01727B50E008F947E /* toolbar is sign.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = "toolbar is sign.png"; path = "Going Dutch/icons/toolbar is sign.png"; sourceTree = "<group>"; };
 		3898AAE11727B50E008F947E /* toolbar is sign@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = "toolbar is sign@2x.png"; path = "Going Dutch/icons/toolbar is sign@2x.png"; sourceTree = "<group>"; };
 		3898AAE417297F80008F947E /* mail icon.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = "mail icon.png"; path = "Going Dutch/icons/mail icon.png"; sourceTree = "<group>"; };
@@ -159,10 +169,29 @@
 			name = DataStore;
 			sourceTree = "<group>";
 		};
+		38334EB6172C2DEE0063B919 /* + sign */ = {
+			isa = PBXGroup;
+			children = (
+				38334EB7172C2E050063B919 /* plus sign.png */,
+				38334EB8172C2E050063B919 /* plus sign@2x.png */,
+			);
+			name = "+ sign";
+			sourceTree = "<group>";
+		};
+		38334EC5172D323D0063B919 /* Launch images */ = {
+			isa = PBXGroup;
+			children = (
+				38334EC3172D31AF0063B919 /* Default-568h@2x.png */,
+				38334EC1172D31A50063B919 /* Default@2x.png */,
+				38334EBF172D319B0063B919 /* Default.png */,
+			);
+			name = "Launch images";
+			sourceTree = "<group>";
+		};
 		38572AC7169D437B00969C62 = {
 			isa = PBXGroup;
 			children = (
-				38572ADC169D437B00969C62 /* Going Dutch */,
+				38572ADC169D437B00969C62 /* We all pay */,
 				38572AD5169D437B00969C62 /* Frameworks */,
 				38572AD3169D437B00969C62 /* Products */,
 			);
@@ -171,7 +200,7 @@
 		38572AD3169D437B00969C62 /* Products */ = {
 			isa = PBXGroup;
 			children = (
-				38572AD2169D437B00969C62 /* Going Dutch.app */,
+				38572AD2169D437B00969C62 /* We all pay.app */,
 			);
 			name = Products;
 			sourceTree = "<group>";
@@ -191,9 +220,10 @@
 			name = Frameworks;
 			sourceTree = "<group>";
 		};
-		38572ADC169D437B00969C62 /* Going Dutch */ = {
+		38572ADC169D437B00969C62 /* We all pay */ = {
 			isa = PBXGroup;
 			children = (
+				38334EC5172D323D0063B919 /* Launch images */,
 				3898AADD17271157008F947E /* icons */,
 				3873A2A616F2858A000832FD /* Going Dutch.entitlements */,
 				3801F89D16DFC6D400DF8675 /* DataStore */,
@@ -206,16 +236,17 @@
 				38572AE6169D437B00969C62 /* MCAppDelegate.m */,
 				38572ADD169D437B00969C62 /* Supporting Files */,
 			);
+			name = "We all pay";
 			path = "Going Dutch";
 			sourceTree = "<group>";
 		};
 		38572ADD169D437B00969C62 /* Supporting Files */ = {
 			isa = PBXGroup;
 			children = (
-				38572ADE169D437B00969C62 /* Going Dutch-Info.plist */,
+				38572ADE169D437B00969C62 /* We all pay-Info.plist */,
 				38572ADF169D437B00969C62 /* InfoPlist.strings */,
 				38572AE2169D437B00969C62 /* main.m */,
-				38572AE4169D437B00969C62 /* Going Dutch-Prefix.pch */,
+				38572AE4169D437B00969C62 /* We all pay-Prefix.pch */,
 				38572AE8169D437B00969C62 /* Default.png */,
 				38572AEA169D437B00969C62 /* Default@2x.png */,
 				38572AEC169D437B00969C62 /* Default-568h@2x.png */,
@@ -288,6 +319,7 @@
 		3898AADD17271157008F947E /* icons */ = {
 			isa = PBXGroup;
 			children = (
+				38334EB6172C2DEE0063B919 /* + sign */,
 				3898AAEA17298512008F947E /* App Icon */,
 				3898AAE917297FB3008F947E /* Is sign */,
 				3898AAE817297F94008F947E /* Mail icon */,
@@ -317,8 +349,8 @@
 		3898AAEA17298512008F947E /* App Icon */ = {
 			isa = PBXGroup;
 			children = (
-				3898AAD9172710D3008F947E /* square receipt first attempt.png */,
-				3898AADB172710DB008F947E /* square receipt first attempt@2x.png */,
+				38334EBD172D1A8E0063B919 /* three peeps@2x.png */,
+				38334EBB172D1A770063B919 /* three peeps.png */,
 			);
 			name = "App Icon";
 			sourceTree = "<group>";
@@ -326,9 +358,9 @@
 /* End PBXGroup section */
 
 /* Begin PBXNativeTarget section */
-		38572AD1169D437B00969C62 /* Going Dutch */ = {
+		38572AD1169D437B00969C62 /* We all pay */ = {
 			isa = PBXNativeTarget;
-			buildConfigurationList = 38572AF0169D437B00969C62 /* Build configuration list for PBXNativeTarget "Going Dutch" */;
+			buildConfigurationList = 38572AF0169D437B00969C62 /* Build configuration list for PBXNativeTarget "We all pay" */;
 			buildPhases = (
 				38572ACE169D437B00969C62 /* Sources */,
 				38572ACF169D437B00969C62 /* Frameworks */,
@@ -338,9 +370,9 @@
 			);
 			dependencies = (
 			);
-			name = "Going Dutch";
+			name = "We all pay";
 			productName = "Going Dutch";
-			productReference = 38572AD2169D437B00969C62 /* Going Dutch.app */;
+			productReference = 38572AD2169D437B00969C62 /* We all pay.app */;
 			productType = "com.apple.product-type.application";
 		};
 /* End PBXNativeTarget section */
@@ -353,7 +385,7 @@
 				LastUpgradeCheck = 0450;
 				ORGANIZATIONNAME = "Mark Cornelisse";
 			};
-			buildConfigurationList = 38572ACC169D437B00969C62 /* Build configuration list for PBXProject "Going Dutch" */;
+			buildConfigurationList = 38572ACC169D437B00969C62 /* Build configuration list for PBXProject "We all pay" */;
 			compatibilityVersion = "Xcode 3.2";
 			developmentRegion = English;
 			hasScannedForEncodings = 0;
@@ -365,7 +397,7 @@
 			projectDirPath = "";
 			projectRoot = "";
 			targets = (
-				38572AD1169D437B00969C62 /* Going Dutch */,
+				38572AD1169D437B00969C62 /* We all pay */,
 			);
 		};
 /* End PBXProject section */
@@ -386,12 +418,17 @@
 				38EFF2DB16D35C23001C8248 /* MCPaymentTableViewCell.xib in Resources */,
 				38EFF2E716D697B5001C8248 /* MCPersonTableViewCell.xib in Resources */,
 				38F8B14B16D752DE001037CA /* MCReturnPaymentTableViewCell.xib in Resources */,
-				3898AADA172710D3008F947E /* square receipt first attempt.png in Resources */,
-				3898AADC172710DB008F947E /* square receipt first attempt@2x.png in Resources */,
 				3898AAE21727B50E008F947E /* toolbar is sign.png in Resources */,
 				3898AAE31727B50E008F947E /* toolbar is sign@2x.png in Resources */,
 				3898AAE617297F80008F947E /* mail icon.png in Resources */,
 				3898AAE717297F80008F947E /* mail icon@2x.png in Resources */,
+				38334EB9172C2E050063B919 /* plus sign.png in Resources */,
+				38334EBA172C2E050063B919 /* plus sign@2x.png in Resources */,
+				38334EBC172D1A770063B919 /* three peeps.png in Resources */,
+				38334EBE172D1A8E0063B919 /* three peeps@2x.png in Resources */,
+				38334EC0172D319B0063B919 /* Default.png in Resources */,
+				38334EC2172D31A50063B919 /* Default@2x.png in Resources */,
+				38334EC4172D31AF0063B919 /* Default-568h@2x.png in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -495,8 +532,8 @@
 			isa = XCBuildConfiguration;
 			buildSettings = {
 				GCC_PRECOMPILE_PREFIX_HEADER = YES;
-				GCC_PREFIX_HEADER = "Going Dutch/Going Dutch-Prefix.pch";
-				INFOPLIST_FILE = "Going Dutch/Going Dutch-Info.plist";
+				GCC_PREFIX_HEADER = "Going Dutch/We all pay-Prefix.pch";
+				INFOPLIST_FILE = "Going Dutch/We all pay-Info.plist";
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				WRAPPER_EXTENSION = app;
 			};
@@ -506,8 +543,8 @@
 			isa = XCBuildConfiguration;
 			buildSettings = {
 				GCC_PRECOMPILE_PREFIX_HEADER = YES;
-				GCC_PREFIX_HEADER = "Going Dutch/Going Dutch-Prefix.pch";
-				INFOPLIST_FILE = "Going Dutch/Going Dutch-Info.plist";
+				GCC_PREFIX_HEADER = "Going Dutch/We all pay-Prefix.pch";
+				INFOPLIST_FILE = "Going Dutch/We all pay-Info.plist";
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				WRAPPER_EXTENSION = app;
 			};
@@ -516,7 +553,7 @@
 /* End XCBuildConfiguration section */
 
 /* Begin XCConfigurationList section */
-		38572ACC169D437B00969C62 /* Build configuration list for PBXProject "Going Dutch" */ = {
+		38572ACC169D437B00969C62 /* Build configuration list for PBXProject "We all pay" */ = {
 			isa = XCConfigurationList;
 			buildConfigurations = (
 				38572AEE169D437B00969C62 /* Debug */,
@@ -525,7 +562,7 @@
 			defaultConfigurationIsVisible = 0;
 			defaultConfigurationName = Release;
 		};
-		38572AF0169D437B00969C62 /* Build configuration list for PBXNativeTarget "Going Dutch" */ = {
+		38572AF0169D437B00969C62 /* Build configuration list for PBXNativeTarget "We all pay" */ = {
 			isa = XCConfigurationList;
 			buildConfigurations = (
 				38572AF1169D437B00969C62 /* Debug */,

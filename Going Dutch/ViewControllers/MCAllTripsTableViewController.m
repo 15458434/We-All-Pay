@@ -21,6 +21,18 @@
 
 #pragma mark - Actions
 
+- (void) addButtonFromTableViewCell:(id)sender event:(id)event
+{
+    NSSet *touches = [event allTouches];
+    UITouch *touch = [touches anyObject];
+    
+	NSIndexPath *indexPath = [[self tableView] indexPathForRowAtPoint: [touch locationInView:[self tableView]]];
+	if (indexPath != nil)
+	{
+        [self tableView:[self tableView] accessoryButtonTappedForRowWithIndexPath:indexPath];
+	}
+}
+
 - (void)addTrip:(id)sender
 {
     // Create and add new Trip with a test group.
@@ -47,7 +59,7 @@
     
     if (self) {
         [MCAllTripsStore sharedList];
-        [[self navigationItem] setTitle:@"Project X"];
+        [[self navigationItem] setTitle:@"We All Pay"];
         UIBarButtonItem *bbi = [[UIBarButtonItem alloc] initWithBarButtonSystemItem:UIBarButtonSystemItemAdd
                                                                              target:self
                                                                              action:@selector(addTrip:)];
@@ -125,7 +137,13 @@
     [[allTripsTableViewCell totalCostLabel] setText:moneyString];
     [[allTripsTableViewCell extraLabel] setText:@""];
     
-    [allTripsTableViewCell setAccessoryType:UITableViewCellAccessoryDetailDisclosureButton];
+    // [allTripsTableViewCell setAccessoryView:[[UIImageView alloc] initWithImage:[UIImage imageNamed:@"plus sign"]]];
+    CGRect buttonRect = CGRectMake(0, 0, 44, 44);
+    UIButton *accessoryButton = [[UIButton alloc] initWithFrame:buttonRect];
+    UIImage *plusSign = [UIImage imageNamed:@"plus sign"];
+    [accessoryButton setImage:plusSign forState:UIControlStateNormal];
+    [accessoryButton addTarget:self action:@selector(addButtonFromTableViewCell:event:) forControlEvents:UIControlEventTouchUpInside];
+    [allTripsTableViewCell setAccessoryView:accessoryButton];
     
     return allTripsTableViewCell;
 }
