@@ -268,6 +268,7 @@
     personPickerView = [[UIPickerView alloc] init];
     [personPickerView setDelegate:self];
     [personPickerView setDataSource:self];
+    [personPickerView setShowsSelectionIndicator:YES];
     [payerView setInputView:personPickerView];
     [payerView setInputAccessoryView:inputAccessoryPickerView];
     

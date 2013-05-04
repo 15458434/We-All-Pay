@@ -175,6 +175,7 @@
         emailSelectionFromAddressBookPickerView = [[UIPickerView alloc] init];
         [emailSelectionFromAddressBookPickerView setDelegate:self];
         [emailSelectionFromAddressBookPickerView setDataSource:self];
+        [emailSelectionFromAddressBookPickerView setShowsSelectionIndicator:YES];
         [emailField setInputView:emailSelectionFromAddressBookPickerView];
         [emailField setInputAccessoryView:inputAccessoryPickerView];
         
