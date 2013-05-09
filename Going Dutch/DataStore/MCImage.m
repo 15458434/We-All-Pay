@@ -23,6 +23,9 @@
 
 - (void)setThumbnailDataFromImage:(UIImage *)image
 {
+    if (!image) {
+        image = [UIImage imageNamed:@"girl 100x100"];
+    }
     CGSize imageSize = [image size];
     CGRect thumbnailRect = CGRectMake(0, 0, 44, 44);
     float ratio = MAX(thumbnailRect.size.width / imageSize.width, thumbnailRect.size.height / imageSize.height);
@@ -48,6 +51,9 @@
 
 - (void)setPictureDataFromImage:(UIImage *)image
 {
+    if (!image) {
+        image = [UIImage imageNamed:@"girl 100x100"];
+    }
     CGSize imageSize = [image size];
     CGRect thumbnailRect = CGRectMake(0, 0, 80, 80);
     float ratio = MAX(thumbnailRect.size.width / imageSize.width, thumbnailRect.size.height / imageSize.height);
