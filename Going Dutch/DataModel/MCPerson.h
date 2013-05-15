@@ -11,7 +11,7 @@
 
 @class MCImage;
 
-@interface MCPerson : NSObject <NSCoding>
+@interface MCPerson : NSObject <NSCoding, NSCopying>
 {
     NSString *uniquePersonId;
     MCImage *imageObjectFromStore;
@@ -27,7 +27,6 @@
 @property (nonatomic, strong) NSString *lastName;
 @property (nonatomic, strong) NSString *emailAddress;
 @property (nonatomic, strong) NSMutableArray *allEmailAddressesFromAddressBook;
-
 
 - (id)initWithName:(NSString *)n andMailAddress:(NSString *)ea;
 - (NSString *)getFullName;

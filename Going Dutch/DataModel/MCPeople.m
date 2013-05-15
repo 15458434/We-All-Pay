@@ -56,6 +56,13 @@
     [people removeObject:awfulPerson];
 }
 
+- (void)replacePerson:(MCPerson *)awfulPerson withPerson:(MCPerson *)sweetPerson
+{
+    // Replace the person with a new one.
+    NSUInteger indexOfPerson = [people indexOfObject:awfulPerson];
+    [people replaceObjectAtIndex:indexOfPerson withObject:sweetPerson];
+}
+
 - (NSArray *)allPeople
 {
     // Return allPeople as an array.

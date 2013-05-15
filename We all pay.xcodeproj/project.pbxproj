@@ -8,6 +8,7 @@
 
 /* Begin PBXBuildFile section */
 		3801F89C16DFC62600DF8675 /* CoreData.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 3801F89B16DFC62600DF8675 /* CoreData.framework */; };
+		38087BD317435D15002338BB /* MCSharedBillTitleView.xib in Resources */ = {isa = PBXBuildFile; fileRef = 38087BD217435D15002338BB /* MCSharedBillTitleView.xib */; };
 		38175C1E16B6F31D00804914 /* NewTripHeaderView.xib in Resources */ = {isa = PBXBuildFile; fileRef = 38175C1D16B6F31D00804914 /* NewTripHeaderView.xib */; };
 		38334EB9172C2E050063B919 /* plus sign.png in Resources */ = {isa = PBXBuildFile; fileRef = 38334EB7172C2E050063B919 /* plus sign.png */; };
 		38334EBA172C2E050063B919 /* plus sign@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 38334EB8172C2E050063B919 /* plus sign@2x.png */; };
@@ -60,6 +61,7 @@
 
 /* Begin PBXFileReference section */
 		3801F89B16DFC62600DF8675 /* CoreData.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = CoreData.framework; path = System/Library/Frameworks/CoreData.framework; sourceTree = SDKROOT; };
+		38087BD217435D15002338BB /* MCSharedBillTitleView.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; name = MCSharedBillTitleView.xib; path = Views/MCSharedBillTitleView.xib; sourceTree = "<group>"; };
 		38175C1D16B6F31D00804914 /* NewTripHeaderView.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; name = NewTripHeaderView.xib; path = Views/NewTripHeaderView.xib; sourceTree = "<group>"; };
 		38334EB7172C2E050063B919 /* plus sign.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = "plus sign.png"; path = "Going Dutch/icons/plus sign.png"; sourceTree = "<group>"; };
 		38334EB8172C2E050063B919 /* plus sign@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = "plus sign@2x.png"; path = "Going Dutch/icons/plus sign@2x.png"; sourceTree = "<group>"; };
@@ -218,9 +220,9 @@
 		38572ADC169D437B00969C62 /* We all pay */ = {
 			isa = PBXGroup;
 			children = (
+				3873A2A616F2858A000832FD /* Going Dutch.entitlements */,
 				38334EC5172D323D0063B919 /* Launch images */,
 				3898AADD17271157008F947E /* icons */,
-				3873A2A616F2858A000832FD /* Going Dutch.entitlements */,
 				3801F89D16DFC6D400DF8675 /* DataStore */,
 				38572AF5169D43A600969C62 /* DataModel */,
 				38572AF4169D439E00969C62 /* Views */,
@@ -286,6 +288,7 @@
 				38F8B14A16D752DD001037CA /* MCReturnPaymentTableViewCell.xib */,
 				38F8B14716D7529B001037CA /* MCReturnPaymentTableViewCell.h */,
 				38F8B14816D7529B001037CA /* MCReturnPaymentTableViewCell.m */,
+				38087BD217435D15002338BB /* MCSharedBillTitleView.xib */,
 			);
 			name = Views;
 			sourceTree = "<group>";
@@ -431,6 +434,7 @@
 				38334ECB1735523A0063B919 /* Default@2x.png in Resources */,
 				38334ECC173552410063B919 /* Default-568h@2x.png in Resources */,
 				38966DA6173BD71A0041484B /* girl 100x100.png in Resources */,
+				38087BD317435D15002338BB /* MCSharedBillTitleView.xib in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

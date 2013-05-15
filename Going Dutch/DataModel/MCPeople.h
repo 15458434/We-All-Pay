@@ -17,6 +17,7 @@
 
 - (void)addPerson:(MCPerson *)newPerson;
 - (void)removePerson:(MCPerson *)awfulPerson;
+- (void)replacePerson:(MCPerson *)awfulPerson withPerson:(MCPerson *)sweetPerson;
 - (NSArray *)allPeople;
 - (BOOL)areTherePeople;
 - (BOOL)isPersonWithNamePresent:(MCPerson *)person;

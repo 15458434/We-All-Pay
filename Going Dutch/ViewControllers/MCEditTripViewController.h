@@ -8,12 +8,12 @@
 
 #import <UIKit/UIKit.h>
 #import <AddressBookUI/AddressBookUI.h>
+#import "MCPersonViewController.h"
 
 @class MCPeople;
 @class MCSharedBill;
-@class MCPersonViewController;
 
-@interface MCEditTripViewController : UITableViewController <UITextFieldDelegate, ABPeoplePickerNavigationControllerDelegate, UIAlertViewDelegate>
+@interface MCEditTripViewController : UITableViewController <UITextFieldDelegate, ABPeoplePickerNavigationControllerDelegate, UIAlertViewDelegate, MCPersonViewChangeDelegate>
 {
     IBOutlet UIControl *newTripHeaderView;
     IBOutlet UITextField *tripNameField;

@@ -12,7 +12,6 @@
 #import "MCSharedBill.h"
 #import "MCPersonViewController.h"
 #import "MCAllTripsStore.h"
-#import "MCPersonViewController.h"
 #import "MCPersonTableViewCell.h"
 
 @interface MCEditTripViewController ()
@@ -52,7 +51,9 @@
 - (void)doneEditingTrip:(id)selector
 {
     if ([[tonightsBill people] areTherePeople]) {
-        [tonightsBill setTripName:tripName];
+        if (tripName) {
+            [tonightsBill setTripName:tripName];
+        }
         [[self navigationController] popViewControllerAnimated:YES];
     } else {
         UIAlertView *noPeoplePresentMessage = [[UIAlertView alloc] initWithTitle:@"No people present on this bill."
@@ -252,6 +253,14 @@
     // Dispose of any resources that can be recreated.
 }
 
+#pragma mark - MCPersonViewChangeDelegate
+
+- (void)sendDidSomethingChange:(BOOL)value
+{
+    didSomethingChange = value;
+    [[self tableView] reloadData];
+}
+
 #pragma mark - UIAlertViewDelegate
 
 - (void)alertView:(UIAlertView *)alertView clickedButtonAtIndex:(NSInteger)buttonIndex
@@ -404,6 +413,7 @@
     MCPerson *selectedPerson = [[[tonightsBill people] allPeople] objectAtIndex:[indexPath row]];
     MCPersonViewController *pvc = [[MCPersonViewController alloc] initWithPerson:selectedPerson];
     [pvc setTonightsBill:tonightsBill];
+    [pvc setChangeFlagDelegate:self];
     [[self navigationController] pushViewController:pvc animated:YES];
 }
 

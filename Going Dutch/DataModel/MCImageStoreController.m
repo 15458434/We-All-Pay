@@ -47,7 +47,7 @@
     return image;
 }
 
-- (UIImage *)fetchImageFromPersonWithId:(NSString *)idString
+- (MCImage *)fetchImageFromPersonWithId:(NSString *)idString
 {
     NSLog(@"fetchImageFromIdString executed.");
     NSFetchRequest *request = [[NSFetchRequest alloc] init];

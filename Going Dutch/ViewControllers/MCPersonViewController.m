@@ -9,6 +9,7 @@
 #import "MCPersonViewController.h"
 #import "MCPerson.h"
 #import "MCSharedBill.h"
+#import "MCPeople.h"
 
 @interface MCPersonViewController ()
 
@@ -17,8 +18,22 @@
 @implementation MCPersonViewController
 
 @synthesize tonightsBill;
+@synthesize editedPerson;
+@synthesize changeFlagDelegate;
 
 #pragma mark - Actions
+
+- (void)cancelButtonPressed:(id)selector
+{
+    [[self navigationController] popViewControllerAnimated:YES];
+}
+
+- (void)doneButtonPressed:(id)selector
+{
+    [[self changeFlagDelegate] sendDidSomethingChange:YES];
+    [[tonightsBill people] replacePerson:thisPerson withPerson:editedPerson];
+    [[self navigationController] popViewControllerAnimated:YES];
+}
 
 - (void)getSomeone:(id)selector
 {
@@ -31,6 +46,8 @@
 {
     [thisPerson setEmailAddress:[[thisPerson allEmailAddressesFromAddressBook] objectAtIndex:[emailSelectionFromAddressBookPickerView selectedRowInComponent:0]]];
     [emailField resignFirstResponder];
+    didSomethingChange = YES;
+    [[[self navigationItem] rightBarButtonItem] setEnabled:YES];
 }
 
 - (void)cancelEmailPicker:(id)selector
@@ -90,7 +107,7 @@
 
 #pragma mark - New in this class
 
-- (id)initWithPerson:(MCPerson *)person
+- (id)initWithPerson:(MCPerson *)person 
 {
     self = [super init];
     
@@ -99,21 +116,18 @@
             @throw [NSException exceptionWithName:@"nil" reason:@"person is nil" userInfo:nil];
         }
         thisPerson = person;
-        
-        if (kABAuthorizationStatusAuthorized == ABAddressBookGetAuthorizationStatus()) {
-            UIBarButtonItem *addressBookButton = [[UIBarButtonItem alloc] initWithBarButtonSystemItem:UIBarButtonSystemItemBookmarks target:self action:@selector(getSomeone:)];
-            [[self navigationItem] setRightBarButtonItem:addressBookButton];
-        }
+        [self setEditedPerson:thisPerson];
+        didSomethingChange = NO;
     }
     return self;
 }
 
 - (void)getPersonData:(ABRecordRef)person
 {
-    [thisPerson setThumbnail:[UIImage imageWithData:(__bridge_transfer NSData *)ABPersonCopyImageDataWithFormat(person, kABPersonImageFormatThumbnail)]];
-    [thisPerson setPicture:[UIImage imageWithData:(__bridge_transfer NSData *)ABPersonCopyImageDataWithFormat(person, kABPersonImageFormatOriginalSize)]];
-    [thisPerson setFirstName:(__bridge_transfer NSString *)ABRecordCopyValue(person, kABPersonFirstNameProperty)];
-    [thisPerson setLastName:(__bridge_transfer NSString *)ABRecordCopyValue(person, kABPersonLastNameProperty)];
+    [editedPerson setThumbnail:[UIImage imageWithData:(__bridge_transfer NSData *)ABPersonCopyImageDataWithFormat(person, kABPersonImageFormatThumbnail)]];
+    [editedPerson setPicture:[UIImage imageWithData:(__bridge_transfer NSData *)ABPersonCopyImageDataWithFormat(person, kABPersonImageFormatOriginalSize)]];
+    [editedPerson setFirstName:(__bridge_transfer NSString *)ABRecordCopyValue(person, kABPersonFirstNameProperty)];
+    [editedPerson setLastName:(__bridge_transfer NSString *)ABRecordCopyValue(person, kABPersonLastNameProperty)];
     ABMultiValueRef emailAddresses = ABRecordCopyValue(person, kABPersonEmailProperty);
     if (ABMultiValueGetCount(emailAddresses)) {
         NSMutableArray *allEmailAddresses= [[NSMutableArray alloc] init];
@@ -121,11 +135,13 @@
             NSString *emailAddressForArray=(__bridge_transfer NSString *)ABMultiValueCopyValueAtIndex(emailAddresses, i);
             [allEmailAddresses addObject:emailAddressForArray];
         }
-        [thisPerson setEmailAddress:(__bridge_transfer NSString *)ABMultiValueCopyValueAtIndex(emailAddresses, 0)];
+        [editedPerson setEmailAddress:(__bridge_transfer NSString *)ABMultiValueCopyValueAtIndex(emailAddresses, 0)];
     } else {
-        [thisPerson setEmailAddress:nil];
+        [editedPerson setEmailAddress:nil];
     }
     CFRelease(emailAddresses);
+    didSomethingChange = YES;
+    [[[self navigationItem] rightBarButtonItem] setEnabled:YES];
 }
 
 #pragma mark - Inherited from super.
@@ -143,14 +159,16 @@
 {
     [super viewWillAppear:animated];
     
-    [firstNameField setText:[thisPerson firstName]];
-    [lastNameField setText:[thisPerson lastName]];
-    [emailField setText:[thisPerson emailAddress]];
-    [pictureView setImage:[thisPerson picture]];
+    [[[self navigationItem] rightBarButtonItem] setEnabled:didSomethingChange];
+    [[self navigationController] setToolbarHidden:NO animated:animated];
+    [firstNameField setText:[editedPerson firstName]];
+    [lastNameField setText:[editedPerson lastName]];
+    [emailField setText:[editedPerson emailAddress]];
+    [pictureView setImage:[editedPerson picture]];
     double moneySpendByThisPerson = [tonightsBill totalSumPaidBy:thisPerson];
     NSNumberFormatter *nf = [[NSNumberFormatter alloc] init];
     [nf setNumberStyle:NSNumberFormatterCurrencyStyle];
-    [totalSumSpendLabel setText:[NSString stringWithFormat:@"Spend %@.", [nf stringFromNumber:[NSNumber numberWithDouble:moneySpendByThisPerson]]]];
+    [totalSumSpendLabel setText:[NSString stringWithFormat:@"Spent %@", [nf stringFromNumber:[NSNumber numberWithDouble:moneySpendByThisPerson]]]];
 }
 
 - (void)viewDidLoad
@@ -188,6 +206,21 @@
                                                                    action:@selector(doneNumberPad:)];
         [inputAccossoryNumberPad setItems:[[NSArray alloc] initWithObjects:cancelButton, flexButton, doneButton, nil] animated:YES];
     }
+    if (kABAuthorizationStatusAuthorized == ABAddressBookGetAuthorizationStatus()) {
+        UIBarButtonItem *addressBookButton = [[UIBarButtonItem alloc] initWithBarButtonSystemItem:UIBarButtonSystemItemBookmarks target:self action:@selector(getSomeone:)];
+        UIBarButtonItem *flexSpace = [[UIBarButtonItem alloc] initWithBarButtonSystemItem:UIBarButtonSystemItemFlexibleSpace
+                                                                                   target:nil
+                                                                                   action:nil];
+        [self setToolbarItems:[NSArray arrayWithObjects:flexSpace, addressBookButton, nil] animated:NO];
+    }
+    UIBarButtonItem *doneButton = [[UIBarButtonItem alloc] initWithBarButtonSystemItem:UIBarButtonSystemItemDone
+                                                                                target:self
+                                                                                action:@selector(doneButtonPressed:)];
+    [[self navigationItem] setRightBarButtonItem:doneButton];
+    UIBarButtonItem *cancelButton = [[UIBarButtonItem alloc] initWithBarButtonSystemItem:UIBarButtonSystemItemCancel
+                                                                                  target:self
+                                                                                  action:@selector(cancelButtonPressed:)];
+    [[self navigationItem] setLeftBarButtonItem:cancelButton];
 }
 
 - (void)didReceiveMemoryWarning

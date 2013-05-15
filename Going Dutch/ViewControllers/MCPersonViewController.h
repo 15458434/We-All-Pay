@@ -12,6 +12,12 @@
 @class MCPerson;
 @class MCSharedBill;
 
+@protocol MCPersonViewChangeDelegate <NSObject>
+
+- (void)sendDidSomethingChange:(BOOL)value;
+
+@end
+
 @interface MCPersonViewController : UIViewController <UITextFieldDelegate, ABPeoplePickerNavigationControllerDelegate, UIPickerViewDelegate, UIPickerViewDataSource>
 {
     __weak IBOutlet UIImageView *pictureView;
@@ -22,9 +28,13 @@
     
     MCPerson *thisPerson;
     UIPickerView *emailSelectionFromAddressBookPickerView;
+    
+    BOOL didSomethingChange;
 }
 
 @property (nonatomic, strong) MCSharedBill *tonightsBill;
+@property (nonatomic, copy) MCPerson *editedPerson;
+@property (nonatomic, weak) id changeFlagDelegate;
 
 - (id)initWithPerson:(MCPerson *)person;
 

@@ -144,6 +144,11 @@
 {
     [[self tableView] reloadData];
     [[self navigationItem] setTitle:[tonightsBill tripName]];
+    [tripName setText:[tonightsBill tripName]];
+    NSNumberFormatter *nf = [[NSNumberFormatter alloc] init];
+    [nf setNumberStyle:NSNumberFormatterCurrencyStyle];
+    [totalSpent setText:[NSString stringWithFormat:@"Total spent: %@", [nf stringFromNumber:[NSNumber numberWithDouble:[tonightsBill totalSumOfMoneyOfThisSharedBill]]]]];
+    [[self navigationItem] setTitleView:titleViewWithTotalSpent];
     
     [[self navigationController] setToolbarHidden:NO animated:YES];
     UIBarButtonItem *shareButton = [[UIBarButtonItem alloc] initWithImage:[UIImage imageNamed:@"mail icon"]
@@ -190,11 +195,15 @@
         UINavigationController *navController = [[UINavigationController alloc] initWithRootViewController:pvc];
         [pvc setDismissblock:^{
             [[self tableView] reloadData];
+            [[self navigationItem] setTitle:[tonightsBill tripName]];
         }];
         [pvc setDismissYourSelf:^{
             [[self navigationController] popViewControllerAnimated:YES];
         }];
         [self presentViewController:navController animated:YES completion:nil];
+    }
+    if (!titleViewWithTotalSpent) {
+        [[NSBundle mainBundle] loadNibNamed:@"MCSharedBillTitleView" owner:self options:nil];
     }
 }
 
@@ -215,10 +224,8 @@
 
 - (void)removePayment:(MCPayment *)payment fromPaymentViewController:(MCPaymentViewController *)pvc
 {
-    if (![pvc didSomethingChange]) {
-        [tonightsBill removePayment:payment];
-        [[self tableView] reloadData];
-    }
+    [tonightsBill removePayment:payment];
+    [[self tableView] reloadData];
 }
 
 #pragma mark - UIAlertViewDelegate
@@ -332,6 +339,7 @@
 - (void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath
 {
     MCPaymentViewController *pvc = [[MCPaymentViewController alloc] initWithExistingPayment:[[tonightsBill allPayments] objectAtIndex:[indexPath row]] fromBill:tonightsBill];
+    [pvc setDelegate:self];
     [[self navigationController] pushViewController:pvc animated:YES];
 }
 

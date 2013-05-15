@@ -105,6 +105,17 @@
     
     if (self) {
         uniquePersonId = [MCTools createUniqueIdentifierString];
+        
+    }
+    return self;
+}
+
+- (id)initWithIdString:(NSString *)idString
+{
+    self = [super init];
+    
+    if (self) {
+        uniquePersonId = idString;
     }
     return self;
 }
@@ -138,6 +149,21 @@
         imageObjectFromStore = [[MCImageStoreController sharedStore] fetchImageFromPersonWithId:uniquePersonId];
     }
     return self;
+}
+
+#pragma mark - NSCopying
+
+- (id)copyWithZone:(NSZone *)zone
+{
+    MCPerson *dublicate = [[MCPerson alloc] initWithIdString:uniquePersonId];
+    [dublicate setFirstName:[[self firstName] copy]];
+    [dublicate setLastName:[[self lastName ] copy]];
+    [dublicate setEmailAddress:[[self emailAddress] copy]];
+    [dublicate setAllEmailAddressesFromAddressBook:[[self allEmailAddressesFromAddressBook] copy]];
+    // This one is not copied, but retrieved again from the store.
+    imageObjectFromStore = [[MCImageStoreController sharedStore] fetchImageFromPersonWithId:uniquePersonId];
+    
+    return dublicate;
 }
 
 @end

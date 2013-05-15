@@ -227,7 +227,9 @@
     [nf setNumberStyle:NSNumberFormatterCurrencyStyle];
     [nf setFormatterBehavior:NSNumberFormatterCurrencyStyle];
     paidViewNumber = [[NSNumber alloc] initWithDouble:[thisPayment money]];
-    [paidView setText:[nf stringFromNumber:paidViewNumber]];
+    if (!withANewPayment) {
+        [paidView setText:[nf stringFromNumber:paidViewNumber]];
+    }
     NSDateFormatter *dateFormatter = [[NSDateFormatter alloc] init];
     [dateFormatter setDateStyle:NSDateFormatterMediumStyle];
     [dateFormatter setTimeStyle:NSDateFormatterMediumStyle];

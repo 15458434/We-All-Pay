@@ -16,7 +16,9 @@
 
 @interface MCSharedBillTableViewController : UITableViewController <MFMailComposeViewControllerDelegate, UIAlertViewDelegate, MCPaymentViewControllerDelegate>
 {
-    MCSharedBill *tonightsBill;
+    __weak IBOutlet UIView *titleViewWithTotalSpent;
+    __weak IBOutlet UILabel *tripName;
+    __weak IBOutlet UILabel *totalSpent;
 }
 
 - (id)initWithSharedBill:(MCSharedBill *)tBill;
