@@ -11,6 +11,7 @@
 #import "MCReturnPayment.h"
 #import "MCPerson.h"
 #import "MCReturnPaymentTableViewCell.h"
+#import "MCTwoLabelsTitleView.h"
 
 @interface MCReturnPaymentViewController ()
 
@@ -54,11 +55,19 @@
 
 - (void)viewWillAppear:(BOOL)animated
 {
-    [[self navigationController] setToolbarHidden:YES animated:animated];
-    NSNumber *averagePay = [[NSNumber alloc] initWithDouble:[tonightsBill amountPeopleShouldHavePaid]];
+    if (!titleViewTotalSpentToPayByPerson) {
+        titleViewTotalSpentToPayByPerson = [[[NSBundle mainBundle] loadNibNamed:@"MCTwoLabelsTitleView" owner:self options:nil] objectAtIndex:0];
+        [[self navigationItem] setTitleView:titleViewTotalSpentToPayByPerson];
+    }
+    NSNumber *averagePay = [NSNumber numberWithDouble:[tonightsBill amountPeopleShouldHavePaid]];
+    NSNumber *totalSpent = [NSNumber numberWithDouble:[tonightsBill totalSumOfMoneyOfThisSharedBill]];
     NSNumberFormatter *nf = [[NSNumberFormatter alloc] init];
     [nf setNumberStyle:NSNumberFormatterCurrencyStyle];
+    [[titleViewTotalSpentToPayByPerson mainLabel] setText:[NSString stringWithFormat:@"To pay: %@", [nf stringFromNumber:averagePay]]];
+    [[titleViewTotalSpentToPayByPerson subLabel] setText:[NSString stringWithFormat:@"Total spent: %@", [nf stringFromNumber:totalSpent]]];
     [[self navigationItem] setTitle:[[NSString alloc] initWithFormat:@"To pay: %@", [nf stringFromNumber:averagePay]]];
+
+    [[self navigationController] setToolbarHidden:YES animated:animated];
 }
 
 - (void)viewDidLoad
@@ -73,6 +82,8 @@
     
     UINib *nib = [UINib nibWithNibName:@"MCReturnPaymentTableViewCell" bundle:nil];
     [[self tableView] registerNib:nib forCellReuseIdentifier:@"MCReturnPaymentTableViewCell"];
+    
+    
 }
 
 - (void)didReceiveMemoryWarning

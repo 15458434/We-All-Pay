@@ -12,6 +12,7 @@
 #import "MCSharedBill.h"
 #import "MCPeople.h"
 #import "MCAllTripsTableViewCell.h"
+#import "MCTwoLabelsTitleView.h"
 
 @interface MCAllTripsTableViewController ()
 
@@ -80,6 +81,14 @@
 - (void)viewWillAppear:(BOOL)animated
 {
     [super viewWillAppear:animated];
+    
+    if (!titleView) {
+        titleView = [[[NSBundle mainBundle] loadNibNamed:@"MCTwoLabelsTitleView" owner:self options:nil] objectAtIndex:0];
+        [[self navigationItem] setTitleView:titleView];
+    }
+    [[titleView mainLabel] setText:@"We All Pay"];
+    [[titleView subLabel] setText:@"Version 0.7.1"];
+    
     [[self tableView] reloadData];
     [[self navigationController] setToolbarHidden:YES animated:YES];
 }
@@ -93,6 +102,7 @@
     
     // Register this nib that contains the cell.
     [[self tableView] registerNib:nib forCellReuseIdentifier:@"MCAllTripsTableViewCell"];
+    
 }
 
 - (void)didReceiveMemoryWarning

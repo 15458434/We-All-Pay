@@ -10,8 +10,12 @@
 #import "MCPaymentViewController.h"
 
 @class MCAllTripsStore;
+@class MCTwoLabelsTitleView;
 
 @interface MCAllTripsTableViewController : UITableViewController <MCPaymentViewControllerDelegate>
+{
+    __strong IBOutlet MCTwoLabelsTitleView *titleView;
+}
 
 - (void)addTrip:(id)sender;
 

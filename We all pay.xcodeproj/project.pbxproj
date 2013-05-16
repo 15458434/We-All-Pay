@@ -8,7 +8,9 @@
 
 /* Begin PBXBuildFile section */
 		3801F89C16DFC62600DF8675 /* CoreData.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 3801F89B16DFC62600DF8675 /* CoreData.framework */; };
-		38087BD317435D15002338BB /* MCSharedBillTitleView.xib in Resources */ = {isa = PBXBuildFile; fileRef = 38087BD217435D15002338BB /* MCSharedBillTitleView.xib */; };
+		38087BD317435D15002338BB /* MCTwoLabelsTitleView.xib in Resources */ = {isa = PBXBuildFile; fileRef = 38087BD217435D15002338BB /* MCTwoLabelsTitleView.xib */; };
+		38087BD51744B789002338BB /* MCTextFieldAndLabelTitleView.xib in Resources */ = {isa = PBXBuildFile; fileRef = 38087BD41744B789002338BB /* MCTextFieldAndLabelTitleView.xib */; };
+		38087BDB17456900002338BB /* MCTwoLabelsTitleView.m in Sources */ = {isa = PBXBuildFile; fileRef = 38087BDA17456900002338BB /* MCTwoLabelsTitleView.m */; };
 		38175C1E16B6F31D00804914 /* NewTripHeaderView.xib in Resources */ = {isa = PBXBuildFile; fileRef = 38175C1D16B6F31D00804914 /* NewTripHeaderView.xib */; };
 		38334EB9172C2E050063B919 /* plus sign.png in Resources */ = {isa = PBXBuildFile; fileRef = 38334EB7172C2E050063B919 /* plus sign.png */; };
 		38334EBA172C2E050063B919 /* plus sign@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 38334EB8172C2E050063B919 /* plus sign@2x.png */; };
@@ -61,7 +63,10 @@
 
 /* Begin PBXFileReference section */
 		3801F89B16DFC62600DF8675 /* CoreData.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = CoreData.framework; path = System/Library/Frameworks/CoreData.framework; sourceTree = SDKROOT; };
-		38087BD217435D15002338BB /* MCSharedBillTitleView.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; name = MCSharedBillTitleView.xib; path = Views/MCSharedBillTitleView.xib; sourceTree = "<group>"; };
+		38087BD217435D15002338BB /* MCTwoLabelsTitleView.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; name = MCTwoLabelsTitleView.xib; path = Views/MCTwoLabelsTitleView.xib; sourceTree = "<group>"; };
+		38087BD41744B789002338BB /* MCTextFieldAndLabelTitleView.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = MCTextFieldAndLabelTitleView.xib; sourceTree = "<group>"; };
+		38087BD917456900002338BB /* MCTwoLabelsTitleView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = MCTwoLabelsTitleView.h; path = Views/MCTwoLabelsTitleView.h; sourceTree = "<group>"; };
+		38087BDA17456900002338BB /* MCTwoLabelsTitleView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = MCTwoLabelsTitleView.m; path = Views/MCTwoLabelsTitleView.m; sourceTree = "<group>"; };
 		38175C1D16B6F31D00804914 /* NewTripHeaderView.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; name = NewTripHeaderView.xib; path = Views/NewTripHeaderView.xib; sourceTree = "<group>"; };
 		38334EB7172C2E050063B919 /* plus sign.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = "plus sign.png"; path = "Going Dutch/icons/plus sign.png"; sourceTree = "<group>"; };
 		38334EB8172C2E050063B919 /* plus sign@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = "plus sign@2x.png"; path = "Going Dutch/icons/plus sign@2x.png"; sourceTree = "<group>"; };
@@ -288,7 +293,10 @@
 				38F8B14A16D752DD001037CA /* MCReturnPaymentTableViewCell.xib */,
 				38F8B14716D7529B001037CA /* MCReturnPaymentTableViewCell.h */,
 				38F8B14816D7529B001037CA /* MCReturnPaymentTableViewCell.m */,
-				38087BD217435D15002338BB /* MCSharedBillTitleView.xib */,
+				38087BD217435D15002338BB /* MCTwoLabelsTitleView.xib */,
+				38087BD917456900002338BB /* MCTwoLabelsTitleView.h */,
+				38087BDA17456900002338BB /* MCTwoLabelsTitleView.m */,
+				38087BD41744B789002338BB /* MCTextFieldAndLabelTitleView.xib */,
 			);
 			name = Views;
 			sourceTree = "<group>";
@@ -434,7 +442,8 @@
 				38334ECB1735523A0063B919 /* Default@2x.png in Resources */,
 				38334ECC173552410063B919 /* Default-568h@2x.png in Resources */,
 				38966DA6173BD71A0041484B /* girl 100x100.png in Resources */,
-				38087BD317435D15002338BB /* MCSharedBillTitleView.xib in Resources */,
+				38087BD317435D15002338BB /* MCTwoLabelsTitleView.xib in Resources */,
+				38087BD51744B789002338BB /* MCTextFieldAndLabelTitleView.xib in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -467,6 +476,7 @@
 				38CDE903171477C200387CAA /* imageStore.xcdatamodeld in Sources */,
 				38CDE9061715A9A800387CAA /* MCImageStoreController.m in Sources */,
 				38CDE9151716F65100387CAA /* MCImage.m in Sources */,
+				38087BDB17456900002338BB /* MCTwoLabelsTitleView.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

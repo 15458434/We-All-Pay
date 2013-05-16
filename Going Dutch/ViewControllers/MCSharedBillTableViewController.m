@@ -17,6 +17,7 @@
 #import "MCPerson.h"
 #import "MCPeople.h"
 #import "MCReturnPayment.h"
+#import "MCTwoLabelsTitleView.h"
 
 @interface MCSharedBillTableViewController ()
 
@@ -144,10 +145,16 @@
 {
     [[self tableView] reloadData];
     [[self navigationItem] setTitle:[tonightsBill tripName]];
-    [tripName setText:[tonightsBill tripName]];
+    
+    // Load the custom titleView and add it to the screen.
+    if (!titleViewWithTotalSpent) {
+        titleViewWithTotalSpent = [[[NSBundle mainBundle] loadNibNamed:@"MCTwoLabelsTitleView" owner:self options:nil] objectAtIndex:0];
+        [[self navigationItem] setTitleView:titleViewWithTotalSpent];
+    }
+    [[titleViewWithTotalSpent mainLabel] setText:[tonightsBill tripName]];
     NSNumberFormatter *nf = [[NSNumberFormatter alloc] init];
     [nf setNumberStyle:NSNumberFormatterCurrencyStyle];
-    [totalSpent setText:[NSString stringWithFormat:@"Total spent: %@", [nf stringFromNumber:[NSNumber numberWithDouble:[tonightsBill totalSumOfMoneyOfThisSharedBill]]]]];
+    [[titleViewWithTotalSpent subLabel] setText:[NSString stringWithFormat:@"Total spent: %@", [nf stringFromNumber:[NSNumber numberWithDouble:[tonightsBill totalSumOfMoneyOfThisSharedBill]]]]];
     [[self navigationItem] setTitleView:titleViewWithTotalSpent];
     
     [[self navigationController] setToolbarHidden:NO animated:YES];
@@ -201,9 +208,6 @@
             [[self navigationController] popViewControllerAnimated:YES];
         }];
         [self presentViewController:navController animated:YES completion:nil];
-    }
-    if (!titleViewWithTotalSpent) {
-        [[NSBundle mainBundle] loadNibNamed:@"MCSharedBillTitleView" owner:self options:nil];
     }
 }
 

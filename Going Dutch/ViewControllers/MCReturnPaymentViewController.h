@@ -9,11 +9,14 @@
 #import <UIKit/UIKit.h>
 
 @class MCSharedBill;
+@class MCTwoLabelsTitleView;
 
 @interface MCReturnPaymentViewController : UITableViewController
 {
     MCSharedBill *tonightsBill;
     NSMutableArray *paymentsAfterwards;
+    
+    __strong IBOutlet MCTwoLabelsTitleView *titleViewTotalSpentToPayByPerson;
 }
 
 - (id)initWithBill:(MCSharedBill *)thisBill;
