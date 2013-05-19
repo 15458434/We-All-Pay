@@ -13,6 +13,7 @@
 #import "MCPersonViewController.h"
 #import "MCAllTripsStore.h"
 #import "MCPersonTableViewCell.h"
+#import "MCTwoLabelsTitleView.h"
 
 @interface MCEditTripViewController ()
 
@@ -34,6 +35,7 @@
     MCPerson *newPerson = [[MCPerson alloc] init];
     [[tonightsBill people] addPerson:newPerson];
     MCPersonViewController *pvc = [[MCPersonViewController alloc] initWithPerson:newPerson];
+    [pvc setIsNew:YES];
     [[self navigationController] pushViewController:pvc animated:YES];
     NSInteger lastRow = [[[tonightsBill people] allPeople] indexOfObject:newPerson];
     NSIndexPath *ip = [NSIndexPath indexPathForRow:lastRow inSection:0];
@@ -117,29 +119,8 @@
                                            reason:@"Tonightsbill not allowed to be nil"
                                          userInfo:nil];
         }
-        UIBarButtonItem *bbi;
         isInitAsNew = isNew;
         didSomethingChange = NO;
-        if (isNew) {
-            doneButton = [[UIBarButtonItem alloc] initWithBarButtonSystemItem:UIBarButtonSystemItemDone
-                                                                target:self
-                                                                action:@selector(doneAddingPeople:)];
-            [[self navigationItem] setTitle:@"New bill data"];
-            bbi = [[UIBarButtonItem alloc] initWithBarButtonSystemItem:UIBarButtonSystemItemCancel
-                                                                target:self
-                                                                action:@selector(cancelNewTrip:)];
-            [[self navigationItem] setLeftBarButtonItem:bbi];
-        } else {
-            doneButton = [[UIBarButtonItem alloc] initWithBarButtonSystemItem:UIBarButtonSystemItemDone
-                                                                target:self
-                                                                action:@selector(doneEditingTrip:)];
-            [[self navigationItem] setTitle:[tonightsBill tripName]];
-            bbi = [[UIBarButtonItem alloc] initWithBarButtonSystemItem:UIBarButtonSystemItemCancel
-                                                                target:self
-                                                                action:@selector(cancelEditTrip:)];
-            [[self navigationItem] setLeftBarButtonItem:bbi];
-        }
-
         [tripNameField setDelegate:self];
     }
     return self;
@@ -195,6 +176,33 @@
 {
     [super viewWillAppear:animated];
     
+    if (!twoLabelTitleView) {
+        twoLabelTitleView = [[[NSBundle mainBundle] loadNibNamed:@"MCTwoLabelsTitleView" owner:self options:nil] objectAtIndex:0];
+        [[self navigationItem] setTitleView:twoLabelTitleView];
+    }
+    [[twoLabelTitleView mainLabel] setText:[tonightsBill tripName]];
+    NSNumberFormatter *nf = [[NSNumberFormatter alloc] init];
+    [nf setNumberStyle:NSNumberFormatterCurrencyStyle];
+    [[twoLabelTitleView subLabel] setText:[NSString stringWithFormat:@"Total spent %@", [nf stringFromNumber:[NSNumber numberWithDouble:[tonightsBill totalSumOfMoneyOfThisSharedBill]]]]];
+    if (isInitAsNew) {
+        doneButton = [[UIBarButtonItem alloc] initWithBarButtonSystemItem:UIBarButtonSystemItemDone
+                                                                   target:self
+                                                                   action:@selector(doneAddingPeople:)];
+        [[self navigationItem] setTitle:@"New bill data"];
+        UIBarButtonItem *bbi = [[UIBarButtonItem alloc] initWithBarButtonSystemItem:UIBarButtonSystemItemCancel
+                                                                             target:self
+                                                                             action:@selector(cancelNewTrip:)];
+        [[self navigationItem] setLeftBarButtonItem:bbi];
+    } else {
+        doneButton = [[UIBarButtonItem alloc] initWithBarButtonSystemItem:UIBarButtonSystemItemDone
+                                                                   target:self
+                                                                   action:@selector(doneEditingTrip:)];
+        [[self navigationItem] setTitle:[tonightsBill tripName]];
+        UIBarButtonItem *bbi = [[UIBarButtonItem alloc] initWithBarButtonSystemItem:UIBarButtonSystemItemCancel
+                                                                             target:self
+                                                                             action:@selector(cancelEditTrip:)];
+        [[self navigationItem] setLeftBarButtonItem:bbi];
+    }
     [[[self navigationItem] rightBarButtonItem] setEnabled:YES];
     [[[self navigationItem] leftBarButtonItem] setEnabled:YES];
     [[self navigationController] setToolbarHidden:NO animated:YES];
@@ -344,6 +352,9 @@
     [[thisCell personImage] setImage:[thisCellsPerson thumbnail]];
     [[thisCell nameLabel] setText:[thisCellsPerson getFullName]];
     [[thisCell emailLabel] setText:[thisCellsPerson emailAddress]];
+    NSNumberFormatter *nf = [[NSNumberFormatter alloc] init];
+    [nf setNumberStyle:NSNumberFormatterCurrencyStyle];
+    [[thisCell totalSpent] setText:[nf stringFromNumber:[NSNumber numberWithDouble:[tonightsBill totalSumPaidBy:thisCellsPerson]]]];
     
     return thisCell;
 }
@@ -414,6 +425,7 @@
     MCPersonViewController *pvc = [[MCPersonViewController alloc] initWithPerson:selectedPerson];
     [pvc setTonightsBill:tonightsBill];
     [pvc setChangeFlagDelegate:self];
+    [pvc setIsNew:NO];
     [[self navigationController] pushViewController:pvc animated:YES];
 }
 

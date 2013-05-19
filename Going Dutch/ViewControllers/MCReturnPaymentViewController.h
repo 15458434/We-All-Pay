@@ -16,7 +16,7 @@
     MCSharedBill *tonightsBill;
     NSMutableArray *paymentsAfterwards;
     
-    __strong IBOutlet MCTwoLabelsTitleView *titleViewTotalSpentToPayByPerson;
+    __strong IBOutlet MCTwoLabelsTitleView *twoLabelTitleView;
 }
 
 - (id)initWithBill:(MCSharedBill *)thisBill;

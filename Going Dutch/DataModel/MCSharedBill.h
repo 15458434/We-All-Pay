@@ -29,6 +29,7 @@
 - (double)totalSumPaidBy:(MCPerson *)person;
 - (double)amountPeopleShouldHavePaid;
 - (BOOL)hasPersonPaidSomething:(MCPerson *)person;
+- (NSUInteger)totalAmountOfPeople;
 
 @property (nonatomic, strong) NSString *uniqueBillId;
 @property (nonatomic, strong) NSString *tripName;

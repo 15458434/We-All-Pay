@@ -18,6 +18,7 @@
 #import "MCPeople.h"
 #import "MCReturnPayment.h"
 #import "MCTwoLabelsTitleView.h"
+#import "MCTextFieldAndLabelTitleView.h"
 
 @interface MCSharedBillTableViewController ()
 
@@ -97,6 +98,11 @@
     }
 }
 
+- (void)dismissEdit:(id)selector
+{
+    NSLog(@"Mis");
+}
+
 #pragma mark - New in this class.
 
 - (id)initWithSharedBill:(MCSharedBill *)tBill
@@ -147,15 +153,17 @@
     [[self navigationItem] setTitle:[tonightsBill tripName]];
     
     // Load the custom titleView and add it to the screen.
-    if (!titleViewWithTotalSpent) {
-        titleViewWithTotalSpent = [[[NSBundle mainBundle] loadNibNamed:@"MCTwoLabelsTitleView" owner:self options:nil] objectAtIndex:0];
-        [[self navigationItem] setTitleView:titleViewWithTotalSpent];
+    if (!twoLabelTitleView) {
+        twoLabelTitleView = [[[NSBundle mainBundle] loadNibNamed:@"MCTextFieldAndLabelTitleView" owner:self options:nil] objectAtIndex:0];
+        [twoLabelTitleView setDelegate:self];
+        [[twoLabelTitleView mainLabel] addTarget:self action:@selector(dismissEdit:) forControlEvents:UIControlEventTouchUpOutside];
+        [[self navigationItem] setTitleView:twoLabelTitleView];
     }
-    [[titleViewWithTotalSpent mainLabel] setText:[tonightsBill tripName]];
+    [[twoLabelTitleView mainLabel] setText:[tonightsBill tripName]];
     NSNumberFormatter *nf = [[NSNumberFormatter alloc] init];
     [nf setNumberStyle:NSNumberFormatterCurrencyStyle];
-    [[titleViewWithTotalSpent subLabel] setText:[NSString stringWithFormat:@"Total spent: %@", [nf stringFromNumber:[NSNumber numberWithDouble:[tonightsBill totalSumOfMoneyOfThisSharedBill]]]]];
-    [[self navigationItem] setTitleView:titleViewWithTotalSpent];
+    [[twoLabelTitleView subLabel] setText:[NSString stringWithFormat:@"Total spent: %@", [nf stringFromNumber:[NSNumber numberWithDouble:[tonightsBill totalSumOfMoneyOfThisSharedBill]]]]];
+    [[self navigationItem] setTitleView:twoLabelTitleView];
     
     [[self navigationController] setToolbarHidden:NO animated:YES];
     UIBarButtonItem *shareButton = [[UIBarButtonItem alloc] initWithImage:[UIImage imageNamed:@"mail icon"]
@@ -222,6 +230,33 @@
 {
     [super didReceiveMemoryWarning];
     // Dispose of any resources that can be recreated.
+}
+
+#pragma mark - UITextFieldDelegate
+
+- (void)textFieldDidBeginEditing:(UITextField *)textField
+{
+    [[twoLabelTitleView mainLabel] setBackgroundColor:[UIColor colorWithWhite:1.0 alpha:1.0]];
+    [[twoLabelTitleView mainLabel] setTextColor:[UIColor colorWithWhite:0.0 alpha:1.0]];
+}
+
+- (void)textFieldDidEndEditing:(UITextField *)textField
+{
+    [[twoLabelTitleView mainLabel] setBackgroundColor:[UIColor colorWithWhite:0.0 alpha:0.0]];
+    [[twoLabelTitleView mainLabel] setTextColor:[UIColor colorWithWhite:1.0 alpha:1.0]];
+}
+
+- (BOOL)textFieldShouldReturn:(UITextField *)textField
+{
+    [tonightsBill setTripName:[[twoLabelTitleView mainLabel] text]];
+    [textField resignFirstResponder];
+    return YES;
+}
+
+- (BOOL)textFieldShouldClear:(UITextField *)textField
+{
+    [textField setText:@""];
+    return YES;
 }
 
 #pragma mark - MCPaymentViewControllerDelegate

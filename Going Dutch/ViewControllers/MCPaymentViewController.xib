@@ -40,7 +40,7 @@
 					<object class="IBUITextField" id="180992891">
 						<reference key="NSNextResponder" ref="191373211"/>
 						<int key="NSvFlags">290</int>
-						<string key="NSFrame">{{20, 20}, {280, 30}}</string>
+						<string key="NSFrame">{{20, 96}, {280, 30}}</string>
 						<reference key="NSSuperview" ref="191373211"/>
 						<reference key="NSNextKeyView" ref="94144744"/>
 						<string key="NSReuseIdentifierKey">_NS:9</string>
@@ -79,7 +79,7 @@
 					<object class="IBUITextField" id="1066798986">
 						<reference key="NSNextResponder" ref="191373211"/>
 						<int key="NSvFlags">290</int>
-						<string key="NSFrame">{{20, 96}, {280, 30}}</string>
+						<string key="NSFrame">{{20, 58}, {280, 30}}</string>
 						<reference key="NSSuperview" ref="191373211"/>
 						<reference key="NSNextKeyView" ref="558510724"/>
 						<string key="NSReuseIdentifierKey">_NS:9</string>
@@ -109,7 +109,6 @@
 						<int key="NSvFlags">292</int>
 						<string key="NSFrame">{{20, 134}, {280, 21}}</string>
 						<reference key="NSSuperview" ref="191373211"/>
-						<reference key="NSNextKeyView"/>
 						<string key="NSReuseIdentifierKey">_NS:9</string>
 						<bool key="IBUIOpaque">NO</bool>
 						<bool key="IBUIClipsSubviews">YES</bool>
@@ -139,7 +138,7 @@
 					<object class="IBUITextField" id="94144744">
 						<reference key="NSNextResponder" ref="191373211"/>
 						<int key="NSvFlags">290</int>
-						<string key="NSFrame">{{20, 58}, {280, 30}}</string>
+						<string key="NSFrame">{{20, 20}, {280, 30}}</string>
 						<reference key="NSSuperview" ref="191373211"/>
 						<reference key="NSNextKeyView" ref="1066798986"/>
 						<string key="NSReuseIdentifierKey">_NS:9</string>
@@ -159,6 +158,7 @@
 						<float key="IBUIMinimumFontSize">17</float>
 						<object class="IBUITextInputTraits" key="IBUITextInputTraits">
 							<int key="IBUIAutocapitalizationType">2</int>
+							<int key="IBUIAutocorrectionType">2</int>
 							<string key="targetRuntimeIdentifier">IBCocoaTouchFramework</string>
 						</object>
 						<reference key="IBUIFontDescription" ref="310567780"/>
@@ -171,7 +171,6 @@
 				<object class="NSColor" key="IBUIBackgroundColor">
 					<int key="NSColorSpace">3</int>
 					<bytes key="NSWhite">MQA</bytes>
-					<reference key="NSCustomColorSpace" ref="978285894"/>
 				</object>
 				<object class="IBUISimulatedStatusBarMetrics" key="IBUISimulatedStatusBarMetrics"/>
 				<object class="IBUIScreenMetrics" key="IBUISimulatedDestinationMetrics">
@@ -292,10 +291,10 @@
 						<int key="objectID">1</int>
 						<reference key="object" ref="191373211"/>
 						<array class="NSMutableArray" key="children">
-							<reference ref="180992891"/>
+							<reference ref="558510724"/>
 							<reference ref="94144744"/>
 							<reference ref="1066798986"/>
-							<reference ref="558510724"/>
+							<reference ref="180992891"/>
 						</array>
 						<reference key="parent" ref="0"/>
 					</object>

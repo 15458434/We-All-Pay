@@ -13,11 +13,11 @@
 @class MCSharedBill;
 @class MCAllTripsTableViewController;
 @class MCPaymentViewController;
-@class MCTwoLabelsTitleView;
+@class MCTextFieldAndLabelTitleView;
 
-@interface MCSharedBillTableViewController : UITableViewController <MFMailComposeViewControllerDelegate, UIAlertViewDelegate, MCPaymentViewControllerDelegate>
+@interface MCSharedBillTableViewController : UITableViewController <MFMailComposeViewControllerDelegate, UIAlertViewDelegate, MCPaymentViewControllerDelegate, UITextFieldDelegate>
 {
-    __strong IBOutlet MCTwoLabelsTitleView *titleViewWithTotalSpent;
+    __strong IBOutlet MCTextFieldAndLabelTitleView *twoLabelTitleView;
 }
 
 - (id)initWithSharedBill:(MCSharedBill *)tBill;

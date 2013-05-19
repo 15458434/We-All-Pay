@@ -44,6 +44,7 @@
 		3898AAE31727B50E008F947E /* toolbar is sign@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 3898AAE11727B50E008F947E /* toolbar is sign@2x.png */; };
 		3898AAE617297F80008F947E /* mail icon.png in Resources */ = {isa = PBXBuildFile; fileRef = 3898AAE417297F80008F947E /* mail icon.png */; };
 		3898AAE717297F80008F947E /* mail icon@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 3898AAE517297F80008F947E /* mail icon@2x.png */; };
+		38B66AB5174927A100890123 /* MCTextFieldAndLabelTitleView.m in Sources */ = {isa = PBXBuildFile; fileRef = 38B66AB4174927A100890123 /* MCTextFieldAndLabelTitleView.m */; };
 		38CDE90017135B6300387CAA /* MCTools.m in Sources */ = {isa = PBXBuildFile; fileRef = 38CDE8FF17135B6300387CAA /* MCTools.m */; };
 		38CDE903171477C200387CAA /* imageStore.xcdatamodeld in Sources */ = {isa = PBXBuildFile; fileRef = 38CDE901171477C200387CAA /* imageStore.xcdatamodeld */; };
 		38CDE9061715A9A800387CAA /* MCImageStoreController.m in Sources */ = {isa = PBXBuildFile; fileRef = 38CDE9051715A9A800387CAA /* MCImageStoreController.m */; };
@@ -118,6 +119,8 @@
 		3898AAE11727B50E008F947E /* toolbar is sign@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = "toolbar is sign@2x.png"; path = "Going Dutch/icons/toolbar is sign@2x.png"; sourceTree = "<group>"; };
 		3898AAE417297F80008F947E /* mail icon.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = "mail icon.png"; path = "Going Dutch/icons/mail icon.png"; sourceTree = "<group>"; };
 		3898AAE517297F80008F947E /* mail icon@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = "mail icon@2x.png"; path = "Going Dutch/icons/mail icon@2x.png"; sourceTree = "<group>"; };
+		38B66AB3174927A100890123 /* MCTextFieldAndLabelTitleView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = MCTextFieldAndLabelTitleView.h; path = Views/MCTextFieldAndLabelTitleView.h; sourceTree = "<group>"; };
+		38B66AB4174927A100890123 /* MCTextFieldAndLabelTitleView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = MCTextFieldAndLabelTitleView.m; path = Views/MCTextFieldAndLabelTitleView.m; sourceTree = "<group>"; };
 		38CDE8FE17135B6300387CAA /* MCTools.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = MCTools.h; sourceTree = "<group>"; };
 		38CDE8FF17135B6300387CAA /* MCTools.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = MCTools.m; sourceTree = "<group>"; };
 		38CDE902171477C200387CAA /* imageStore.xcdatamodel */ = {isa = PBXFileReference; lastKnownFileType = wrapper.xcdatamodel; path = imageStore.xcdatamodel; sourceTree = "<group>"; };
@@ -297,6 +300,8 @@
 				38087BD917456900002338BB /* MCTwoLabelsTitleView.h */,
 				38087BDA17456900002338BB /* MCTwoLabelsTitleView.m */,
 				38087BD41744B789002338BB /* MCTextFieldAndLabelTitleView.xib */,
+				38B66AB3174927A100890123 /* MCTextFieldAndLabelTitleView.h */,
+				38B66AB4174927A100890123 /* MCTextFieldAndLabelTitleView.m */,
 			);
 			name = Views;
 			sourceTree = "<group>";
@@ -477,6 +482,7 @@
 				38CDE9061715A9A800387CAA /* MCImageStoreController.m in Sources */,
 				38CDE9151716F65100387CAA /* MCImage.m in Sources */,
 				38087BDB17456900002338BB /* MCTwoLabelsTitleView.m in Sources */,
+				38B66AB5174927A100890123 /* MCTextFieldAndLabelTitleView.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

@@ -10,6 +10,7 @@
 #import "MCPerson.h"
 #import "MCSharedBill.h"
 #import "MCPeople.h"
+#import "MCTwoLabelsTitleView.h"
 
 @interface MCPersonViewController ()
 
@@ -20,6 +21,7 @@
 @synthesize tonightsBill;
 @synthesize editedPerson;
 @synthesize changeFlagDelegate;
+@synthesize isNew;
 
 #pragma mark - Actions
 
@@ -158,6 +160,18 @@
 - (void)viewWillAppear:(BOOL)animated
 {
     [super viewWillAppear:animated];
+    
+    if (!twoLabelTitleView) {
+        twoLabelTitleView = [[[NSBundle mainBundle] loadNibNamed:@"MCTwoLabelsTitleView" owner:self options:nil] objectAtIndex:0];
+        if (isNew) {
+            [[twoLabelTitleView mainLabel] setText:@"New person"];
+            [[twoLabelTitleView subLabel] setText:@"Add new person"];
+        } else {
+            [[twoLabelTitleView mainLabel] setText:@"Person"];
+            [[twoLabelTitleView subLabel] setText:@"Edit person"];
+        }
+        [[self navigationItem] setTitleView:twoLabelTitleView];
+    }
     
     [[[self navigationItem] rightBarButtonItem] setEnabled:didSomethingChange];
     [[self navigationController] setToolbarHidden:NO animated:animated];

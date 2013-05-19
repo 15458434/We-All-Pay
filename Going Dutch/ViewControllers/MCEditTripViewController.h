@@ -12,12 +12,14 @@
 
 @class MCPeople;
 @class MCSharedBill;
+@class MCTwoLabelsTitleView;
 
 @interface MCEditTripViewController : UITableViewController <UITextFieldDelegate, ABPeoplePickerNavigationControllerDelegate, UIAlertViewDelegate, MCPersonViewChangeDelegate>
 {
     IBOutlet UIControl *newTripHeaderView;
     IBOutlet UITextField *tripNameField;
     UIBarButtonItem *doneButton;
+    __strong IBOutlet MCTwoLabelsTitleView *twoLabelTitleView;
     
     MCSharedBill *tonightsBill;
     BOOL isInitAsNew;

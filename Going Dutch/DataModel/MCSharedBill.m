@@ -137,7 +137,7 @@
 
 - (void)addPayment:(MCPayment *)newPayment
 {
-    [payments addObject:newPayment];
+    [payments insertObject:newPayment atIndex:0];
 }
 
 - (void)removePayment:(MCPayment *)removePayment
@@ -166,6 +166,11 @@
         }
         return totalmoney;
     }
+}
+
+- (NSUInteger)totalAmountOfPeople
+{
+    return [[people allPeople] count];
 }
 
 #pragma mark - Inherited From super.

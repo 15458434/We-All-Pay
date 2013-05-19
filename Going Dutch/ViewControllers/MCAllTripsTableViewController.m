@@ -60,11 +60,7 @@
     
     if (self) {
         [MCAllTripsStore sharedList];
-        [[self navigationItem] setTitle:@"We All Pay"];
-        UIBarButtonItem *bbi = [[UIBarButtonItem alloc] initWithBarButtonSystemItem:UIBarButtonSystemItemAdd
-                                                                             target:self
-                                                                             action:@selector(addTrip:)];
-        [[self navigationItem] setRightBarButtonItem:bbi animated:YES];
+        [[self navigationItem] setTitle:@"back"];
     }
     return self;
 }
@@ -87,10 +83,17 @@
         [[self navigationItem] setTitleView:titleView];
     }
     [[titleView mainLabel] setText:@"We All Pay"];
-    [[titleView subLabel] setText:@"Version 0.7.1"];
+    [[titleView subLabel] setText:@"Version 0.7.2"];
     
     [[self tableView] reloadData];
-    [[self navigationController] setToolbarHidden:YES animated:YES];
+    UIBarButtonItem *flexButton = [[UIBarButtonItem alloc] initWithBarButtonSystemItem:UIBarButtonSystemItemFlexibleSpace
+                                                                                target:nil
+                                                                                action:nil];
+    UIBarButtonItem *bbi = [[UIBarButtonItem alloc] initWithBarButtonSystemItem:UIBarButtonSystemItemAdd
+                                                                         target:self
+                                                                         action:@selector(addTrip:)];
+    [self setToolbarItems:[NSArray arrayWithObjects:flexButton, bbi, nil] animated:YES];
+    [[self navigationController] setToolbarHidden:NO animated:YES];
 }
 
 - (void)viewDidLoad
@@ -102,7 +105,6 @@
     
     // Register this nib that contains the cell.
     [[self tableView] registerNib:nib forCellReuseIdentifier:@"MCAllTripsTableViewCell"];
-    
 }
 
 - (void)didReceiveMemoryWarning

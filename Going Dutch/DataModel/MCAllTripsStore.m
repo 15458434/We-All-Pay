@@ -30,7 +30,7 @@
 
 - (void)addTrip:(MCSharedBill *)trip
 {
-    [allTrips addObject:trip];
+    [allTrips insertObject:trip atIndex:0];
 }
 
 - (void)removeTrip:(MCSharedBill *)trip

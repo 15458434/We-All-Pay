@@ -12,6 +12,7 @@
 @class MCSharedBill;
 @class MCPerson;
 @class MCPaymentViewController;
+@class MCTwoLabelsTitleView;
 
 @protocol MCPaymentViewControllerDelegate <NSObject>
 
@@ -23,6 +24,7 @@
 {
     UIBarButtonItem *doneButton;
     UIBarButtonItem *cancelChangesForEntirePaymentButton;
+    MCTwoLabelsTitleView *twoLabelTitleView;
     
     __weak IBOutlet UITextField *payerView;
     MCPerson *payerViewPerson;
@@ -37,7 +39,7 @@
 @property (nonatomic, strong) MCPayment *thisPayment;
 @property (nonatomic, readonly) MCSharedBill *tonightsBill;
 @property (nonatomic, readonly) BOOL didSomethingChange;
-@property (nonatomic, readonly) BOOL withANewPayment;
+@property (nonatomic, readonly) BOOL isNew;
 @property (nonatomic, weak) id delegate;
 
 - (id)initWithExistingPayment:(MCPayment *)thePayment fromBill:(MCSharedBill *)bill;

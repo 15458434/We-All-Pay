@@ -11,6 +11,7 @@
 #import "MCPerson.h"    
 #import "MCSharedBill.h"
 #import "MCPeople.h"
+#import "MCTwoLabelsTitleView.h"
 
 @interface MCPaymentViewController ()
 
@@ -21,7 +22,7 @@
 @synthesize thisPayment;
 @synthesize tonightsBill;
 @synthesize didSomethingChange;
-@synthesize withANewPayment;
+@synthesize isNew;
 @synthesize delegate;
 
 #pragma mark - actions
@@ -88,7 +89,7 @@
 
 - (void)cancelChangesForEntirePayment:(id)selector
 {
-    if (withANewPayment) {
+    if (isNew) {
         [[self delegate] removePayment:thisPayment fromPaymentViewController:self];
     }
     [[self navigationController] popViewControllerAnimated:YES];
@@ -105,12 +106,12 @@
         didSomethingChange = NO;
         if (thePayment) {
             thisPayment = thePayment;
-            withANewPayment = NO;
+            isNew = NO;
         } else {
             thisPayment = [[MCPayment alloc] init];
             [tonightsBill addPayment:thisPayment];
-            [thisPayment setPayingPerson:[[[tonightsBill people] allPeople] objectAtIndex:0]];
-            withANewPayment = YES;
+            //[thisPayment setPayingPerson:[[[tonightsBill people] allPeople] objectAtIndex:0]];
+            isNew = YES;
         }
     }
     return self;
@@ -209,6 +210,17 @@
     [super viewWillAppear:animated];
     
     // Navigationbar stuff
+    if (!twoLabelTitleView) {
+        twoLabelTitleView = [[[NSBundle mainBundle] loadNibNamed:@"MCTwoLabelsTitleView" owner:self options:nil] objectAtIndex:0];
+        if (isNew) {
+            [[twoLabelTitleView mainLabel] setText:@"New payment"];
+            [[twoLabelTitleView subLabel] setText:@"Add payment data"];
+        } else {
+            [[twoLabelTitleView mainLabel] setText:@"Payment"];
+            [[twoLabelTitleView subLabel] setText:@"Edit payment data"];
+        }
+        [[self navigationItem] setTitleView:twoLabelTitleView];
+    }
     doneButton = [[UIBarButtonItem alloc] initWithBarButtonSystemItem:UIBarButtonSystemItemDone
                                                                target:self
                                                                action:@selector(backButtonPressed:)];
@@ -227,7 +239,7 @@
     [nf setNumberStyle:NSNumberFormatterCurrencyStyle];
     [nf setFormatterBehavior:NSNumberFormatterCurrencyStyle];
     paidViewNumber = [[NSNumber alloc] initWithDouble:[thisPayment money]];
-    if (!withANewPayment) {
+    if (!isNew) {
         [paidView setText:[nf stringFromNumber:paidViewNumber]];
     }
     NSDateFormatter *dateFormatter = [[NSDateFormatter alloc] init];
@@ -242,7 +254,7 @@
     // Do any additional setup after loading the view from its nib.
     
     // If tonight's bill was passed along.
-    if (!withANewPayment) {
+    if (!isNew) {
         [[self navigationController] setToolbarHidden:NO animated:YES];
         UIBarButtonItem *deleteButton = [[UIBarButtonItem alloc] initWithBarButtonSystemItem:UIBarButtonSystemItemTrash
                                                                                       target:self

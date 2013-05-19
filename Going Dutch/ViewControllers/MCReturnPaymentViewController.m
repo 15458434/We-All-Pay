@@ -55,16 +55,16 @@
 
 - (void)viewWillAppear:(BOOL)animated
 {
-    if (!titleViewTotalSpentToPayByPerson) {
-        titleViewTotalSpentToPayByPerson = [[[NSBundle mainBundle] loadNibNamed:@"MCTwoLabelsTitleView" owner:self options:nil] objectAtIndex:0];
-        [[self navigationItem] setTitleView:titleViewTotalSpentToPayByPerson];
+    if (!twoLabelTitleView) {
+        twoLabelTitleView = [[[NSBundle mainBundle] loadNibNamed:@"MCTwoLabelsTitleView" owner:self options:nil] objectAtIndex:0];
+        [[self navigationItem] setTitleView:twoLabelTitleView];
     }
     NSNumber *averagePay = [NSNumber numberWithDouble:[tonightsBill amountPeopleShouldHavePaid]];
     NSNumber *totalSpent = [NSNumber numberWithDouble:[tonightsBill totalSumOfMoneyOfThisSharedBill]];
     NSNumberFormatter *nf = [[NSNumberFormatter alloc] init];
     [nf setNumberStyle:NSNumberFormatterCurrencyStyle];
-    [[titleViewTotalSpentToPayByPerson mainLabel] setText:[NSString stringWithFormat:@"To pay: %@", [nf stringFromNumber:averagePay]]];
-    [[titleViewTotalSpentToPayByPerson subLabel] setText:[NSString stringWithFormat:@"Total spent: %@", [nf stringFromNumber:totalSpent]]];
+    [[twoLabelTitleView mainLabel] setText:[NSString stringWithFormat:@"To pay: %@", [nf stringFromNumber:averagePay]]];
+    [[twoLabelTitleView subLabel] setText:[NSString stringWithFormat:@"Total spent: %@", [nf stringFromNumber:totalSpent]]];
     [[self navigationItem] setTitle:[[NSString alloc] initWithFormat:@"To pay: %@", [nf stringFromNumber:averagePay]]];
 
     [[self navigationController] setToolbarHidden:YES animated:animated];

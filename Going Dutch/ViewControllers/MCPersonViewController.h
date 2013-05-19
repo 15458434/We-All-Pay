@@ -11,6 +11,7 @@
 
 @class MCPerson;
 @class MCSharedBill;
+@class MCTwoLabelsTitleView;
 
 @protocol MCPersonViewChangeDelegate <NSObject>
 
@@ -25,16 +26,19 @@
     __weak IBOutlet UITextField *lastNameField;
     __weak IBOutlet UITextField *emailField;
     __weak IBOutlet UILabel *totalSumSpendLabel;
+    MCTwoLabelsTitleView *twoLabelTitleView;
     
     MCPerson *thisPerson;
     UIPickerView *emailSelectionFromAddressBookPickerView;
     
     BOOL didSomethingChange;
+    BOOL isNew;
 }
 
 @property (nonatomic, strong) MCSharedBill *tonightsBill;
 @property (nonatomic, copy) MCPerson *editedPerson;
 @property (nonatomic, weak) id changeFlagDelegate;
+@property (nonatomic) BOOL isNew;
 
 - (id)initWithPerson:(MCPerson *)person;
 
