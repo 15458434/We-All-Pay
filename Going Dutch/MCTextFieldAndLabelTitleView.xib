@@ -185,6 +185,7 @@
 				<string key="-2.IBPluginDependency">com.apple.InterfaceBuilder.IBCocoaTouchPlugin</string>
 				<string key="2.CustomClassName">MCTextFieldAndLabelTitleView</string>
 				<string key="2.IBPluginDependency">com.apple.InterfaceBuilder.IBCocoaTouchPlugin</string>
+				<integer value="1" key="2.IBPropertyAccessControl"/>
 				<string key="4.IBPluginDependency">com.apple.InterfaceBuilder.IBCocoaTouchPlugin</string>
 				<string key="5.IBPluginDependency">com.apple.InterfaceBuilder.IBCocoaTouchPlugin</string>
 			</dictionary>
@@ -198,7 +199,7 @@
 			<array class="NSMutableArray" key="referencedPartialClassDescriptions">
 				<object class="IBPartialClassDescription">
 					<string key="className">MCTextFieldAndLabelTitleView</string>
-					<string key="superclassName">UIView</string>
+					<string key="superclassName">UIControl</string>
 					<dictionary class="NSMutableDictionary" key="outlets">
 						<string key="mainLabel">UITextField</string>
 						<string key="subLabel">UILabel</string>

@@ -60,6 +60,26 @@
 
 #pragma mark - UITextFieldDelegate
 
+- (BOOL)textFieldShouldReturn:(UITextField *)textField
+{
+    if (textField == firstNameField) {
+        [editedPerson setFirstName:[firstNameField text]];
+        didSomethingChange = YES;
+        [[[self navigationItem] rightBarButtonItem] setEnabled:YES];
+        return YES;
+    } else if (textField == lastNameField) {
+        [editedPerson setLastName:[lastNameField text]];
+        didSomethingChange = YES;
+        [[[self navigationItem] rightBarButtonItem] setEnabled:YES];
+    } else if (textField == emailField) {
+        [editedPerson setEmailAddress:[emailField text]];
+        didSomethingChange = YES;
+        [[[self navigationItem] rightBarButtonItem] setEnabled:YES];
+        return YES;
+    }
+    return NO;
+}
+
 #pragma mark - UIPickerViewDelegate
 
 - (NSString *)pickerView:(UIPickerView *)pickerView titleForRow:(NSInteger)row forComponent:(NSInteger)component
@@ -235,6 +255,9 @@
                                                                                   target:self
                                                                                   action:@selector(cancelButtonPressed:)];
     [[self navigationItem] setLeftBarButtonItem:cancelButton];
+    [firstNameField setDelegate:self];
+    [lastNameField setDelegate:self];
+    [emailField setDelegate:self];
 }
 
 - (void)didReceiveMemoryWarning

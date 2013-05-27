@@ -154,9 +154,9 @@
     
     // Load the custom titleView and add it to the screen.
     if (!twoLabelTitleView) {
-        twoLabelTitleView = [[[NSBundle mainBundle] loadNibNamed:@"MCTextFieldAndLabelTitleView" owner:self options:nil] objectAtIndex:0];
-        [twoLabelTitleView setDelegate:self];
-        [[twoLabelTitleView mainLabel] addTarget:self action:@selector(dismissEdit:) forControlEvents:UIControlEventTouchUpOutside];
+        twoLabelTitleView = [[[NSBundle mainBundle] loadNibNamed:@"MCTwoLabelsTitleView" owner:self options:nil] objectAtIndex:0];
+        //[twoLabelTitleView setDelegate:self];
+        //[[twoLabelTitleView mainLabel] addTarget:self action:@selector(dismissEdit:) forControlEvents:UIControlEventTouchUpOutside];
         [[self navigationItem] setTitleView:twoLabelTitleView];
     }
     [[twoLabelTitleView mainLabel] setText:[tonightsBill tripName]];

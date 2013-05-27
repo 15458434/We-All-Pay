@@ -32,6 +32,9 @@
 
 - (UIImage *)thumbnail
 {
+    if (!imageObjectFromStore) {
+        imageObjectFromStore = [[MCImageStoreController sharedStore] fetchImageFromPersonWithId:uniquePersonId];
+    }
     return [imageObjectFromStore thumbnail];
 }
 
@@ -42,6 +45,9 @@
 
 - (UIImage *)picture
 {
+    if (!imageObjectFromStore) {
+        imageObjectFromStore = [[MCImageStoreController sharedStore] fetchImageFromPersonWithId:uniquePersonId];
+    }
     return [imageObjectFromStore picture];
 }
 
@@ -155,13 +161,14 @@
 
 - (id)copyWithZone:(NSZone *)zone
 {
-    MCPerson *dublicate = [[MCPerson alloc] initWithIdString:uniquePersonId];
+    MCPerson *dublicate = [[MCPerson alloc] initWithIdString:[self uniquePersonId]];
     [dublicate setFirstName:[[self firstName] copy]];
     [dublicate setLastName:[[self lastName ] copy]];
     [dublicate setEmailAddress:[[self emailAddress] copy]];
     [dublicate setAllEmailAddressesFromAddressBook:[[self allEmailAddressesFromAddressBook] copy]];
     // This one is not copied, but retrieved again from the store.
-    imageObjectFromStore = [[MCImageStoreController sharedStore] fetchImageFromPersonWithId:uniquePersonId];
+    // imageObjectFromStore = [[MCImageStoreController sharedStore] fetchImageFromPersonWithId:[self uniquePersonId]];
+    
     
     return dublicate;
 }
