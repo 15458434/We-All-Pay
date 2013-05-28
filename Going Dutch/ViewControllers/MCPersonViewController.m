@@ -90,6 +90,7 @@
 - (void)pickerView:(UIPickerView *)pickerView didSelectRow:(NSInteger)row inComponent:(NSInteger)component
 {
     [emailField setText:[[thisPerson allEmailAddressesFromAddressBook] objectAtIndex:row]];
+    [editedPerson setEmailAddress:[emailField text]];
 }
 
 #pragma mark - UIPickerViewDataSource
