@@ -40,7 +40,10 @@
 - (void)getSomeone:(id)selector
 {
     ABPeoplePickerNavigationController *peoplePicker = [[ABPeoplePickerNavigationController alloc] init];
-    [peoplePicker setPeoplePickerDelegate:self];
+    if (!personReceiver) {
+        personReceiver = [[MCAddressBookDataReceiver alloc] initWithViewController:self andDelegate:self];
+    }
+    [peoplePicker setPeoplePickerDelegate:personReceiver];
     [self presentViewController:peoplePicker animated:YES completion:nil];
 }
 
@@ -84,12 +87,12 @@
 
 - (NSString *)pickerView:(UIPickerView *)pickerView titleForRow:(NSInteger)row forComponent:(NSInteger)component
 {
-    return [[thisPerson allEmailAddressesFromAddressBook] objectAtIndex:row];
+    return [[editedPerson allEmailAddressesFromAddressBook] objectAtIndex:row];
 }
 
 - (void)pickerView:(UIPickerView *)pickerView didSelectRow:(NSInteger)row inComponent:(NSInteger)component
 {
-    [emailField setText:[[thisPerson allEmailAddressesFromAddressBook] objectAtIndex:row]];
+    [emailField setText:[[editedPerson allEmailAddressesFromAddressBook] objectAtIndex:row]];
     [editedPerson setEmailAddress:[emailField text]];
 }
 
@@ -103,29 +106,18 @@
 - (NSInteger)pickerView:(UIPickerView *)pickerView numberOfRowsInComponent:(NSInteger)component
 {
     if (kABAuthorizationStatusAuthorized == ABAddressBookGetAuthorizationStatus()) {
-        return [[thisPerson allEmailAddressesFromAddressBook] count];
+        return [[editedPerson allEmailAddressesFromAddressBook] count];
     } else {
         return 1;
     }
 }
 
-#pragma mark - ABPeoplePickerNavigationControllerDelegate
+#pragma mark - MCAddressBookReceiverDelegate
 
-- (void)peoplePickerNavigationControllerDidCancel:(ABPeoplePickerNavigationController *)peoplePicker
+- (void)receiveANewPersonFromAddressBook:(MCPerson *)newPerson
 {
-    [self dismissViewControllerAnimated:YES completion:nil];
-}
-
-- (BOOL)peoplePickerNavigationController:(ABPeoplePickerNavigationController *)peoplePicker shouldContinueAfterSelectingPerson:(ABRecordRef)person
-{
-    [self getPersonData:person];
-    [self dismissViewControllerAnimated:YES completion:nil];
-    return NO;
-}
-
-- (BOOL)peoplePickerNavigationController:(ABPeoplePickerNavigationController *)peoplePicker shouldContinueAfterSelectingPerson:(ABRecordRef)person property:(ABPropertyID)property identifier:(ABMultiValueIdentifier)identifier
-{
-    return NO;
+    editedPerson = newPerson;
+    didSomethingChange = YES;
 }
 
 #pragma mark - New in this class
@@ -147,6 +139,7 @@
 
 - (void)getPersonData:(ABRecordRef)person
 {
+    editedPerson = [[MCPerson alloc] init];
     [editedPerson setThumbnail:[UIImage imageWithData:(__bridge_transfer NSData *)ABPersonCopyImageDataWithFormat(person, kABPersonImageFormatThumbnail)]];
     [editedPerson setPicture:[UIImage imageWithData:(__bridge_transfer NSData *)ABPersonCopyImageDataWithFormat(person, kABPersonImageFormatOriginalSize)]];
     [editedPerson setFirstName:(__bridge_transfer NSString *)ABRecordCopyValue(person, kABPersonFirstNameProperty)];

@@ -15,7 +15,7 @@
     NSMutableArray *people;
 }
 
-- (void)addPerson:(MCPerson *)newPerson;
+- (NSUInteger)addPerson:(MCPerson *)newPerson;
 - (void)removePerson:(MCPerson *)awfulPerson;
 - (void)replacePerson:(MCPerson *)awfulPerson withPerson:(MCPerson *)sweetPerson;
 - (NSArray *)allPeople;

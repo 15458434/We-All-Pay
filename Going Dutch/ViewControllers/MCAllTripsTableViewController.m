@@ -83,7 +83,7 @@
         [[self navigationItem] setTitleView:titleView];
     }
     [[titleView mainLabel] setText:@"We All Pay"];
-    [[titleView subLabel] setText:@"Version 0.7.4"];
+    [[titleView subLabel] setText:[NSString stringWithFormat:@"%@ build %@", [[[NSBundle mainBundle] infoDictionary] objectForKey:@"CFBundleShortVersionString"], [[[NSBundle mainBundle] infoDictionary] objectForKey:@"CFBundleVersion"]]];
     
     [[self tableView] reloadData];
     UIBarButtonItem *flexButton = [[UIBarButtonItem alloc] initWithBarButtonSystemItem:UIBarButtonSystemItemFlexibleSpace

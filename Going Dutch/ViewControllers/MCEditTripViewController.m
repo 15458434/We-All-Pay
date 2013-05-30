@@ -82,7 +82,10 @@
 - (void)getPeopleFromAddressBook:(id)selector
 {
     ABPeoplePickerNavigationController *peoplePicker = [[ABPeoplePickerNavigationController alloc] init];
-    [peoplePicker setPeoplePickerDelegate:self];
+    if (!personReceiver) {
+        personReceiver = [[MCAddressBookDataReceiver alloc] initWithViewController:self andDelegate:self];
+    }
+    [peoplePicker setPeoplePickerDelegate:personReceiver];
     [self presentViewController:peoplePicker animated:YES completion:nil];
 }
 
@@ -154,11 +157,6 @@
         didSomethingChange = YES;
         [[self navigationItem] setRightBarButtonItem:doneButton];
     }
-}
-
-- (BOOL)peoplePickerNavigationController:(ABPeoplePickerNavigationController *)peoplePicker shouldContinueAfterSelectingPerson:(ABRecordRef)person property:(ABPropertyID)property identifier:(ABMultiValueIdentifier)identifier
-{
-    return NO;
 }
 
 #pragma mark - inherited from super
@@ -290,19 +288,14 @@
     }
 }
 
-#pragma mark - ABPeoplePickerNavigationControllerDelegate>
+#pragma mark - MCAddressBookReceiverDelegate
 
-- (void)peoplePickerNavigationControllerDidCancel:(ABPeoplePickerNavigationController *)peoplePicker
+- (void)receiveANewPersonFromAddressBook:(MCPerson *)newPerson
 {
-    [self dismissViewControllerAnimated:YES completion:nil];
-}
-
-- (BOOL)peoplePickerNavigationController:(ABPeoplePickerNavigationController *)peoplePicker shouldContinueAfterSelectingPerson:(ABRecordRef)person
-{
-    [self getPersonData:person];
-    [[self navigationItem] setRightBarButtonItem:doneButton];
-    [self dismissViewControllerAnimated:YES completion:nil];
-    return NO;
+    NSUInteger rowNumber = [[tonightsBill people] addPerson:newPerson];
+    NSIndexPath *ip = [NSIndexPath indexPathForItem:rowNumber inSection:0];
+    [[self tableView] insertRowsAtIndexPaths:[NSArray arrayWithObject:ip] withRowAnimation:UITableViewRowAnimationTop];
+    didSomethingChange = YES;
 }
 
 #pragma mark - UITextFieldDelegate

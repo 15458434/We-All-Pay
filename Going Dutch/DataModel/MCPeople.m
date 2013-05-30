@@ -43,10 +43,11 @@
     }
 }
 
-- (void)addPerson:(MCPerson *)newPerson
+- (NSUInteger)addPerson:(MCPerson *)newPerson
 {
-    // add a person to the array of people
+    // add a person to the array of people and return it's row number.
     [people addObject:newPerson];
+    return [people indexOfObject:newPerson];
 }
 
 - (void)removePerson:(MCPerson *)awfulPerson

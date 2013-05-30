@@ -111,7 +111,6 @@
     
     if (self) {
         uniquePersonId = [MCTools createUniqueIdentifierString];
-        
     }
     return self;
 }

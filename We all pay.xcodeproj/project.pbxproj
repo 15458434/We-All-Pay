@@ -9,7 +9,6 @@
 /* Begin PBXBuildFile section */
 		3801F89C16DFC62600DF8675 /* CoreData.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 3801F89B16DFC62600DF8675 /* CoreData.framework */; };
 		38087BD317435D15002338BB /* MCTwoLabelsTitleView.xib in Resources */ = {isa = PBXBuildFile; fileRef = 38087BD217435D15002338BB /* MCTwoLabelsTitleView.xib */; };
-		38087BD51744B789002338BB /* MCTextFieldAndLabelTitleView.xib in Resources */ = {isa = PBXBuildFile; fileRef = 38087BD41744B789002338BB /* MCTextFieldAndLabelTitleView.xib */; };
 		38087BDB17456900002338BB /* MCTwoLabelsTitleView.m in Sources */ = {isa = PBXBuildFile; fileRef = 38087BDA17456900002338BB /* MCTwoLabelsTitleView.m */; };
 		38175C1E16B6F31D00804914 /* NewTripHeaderView.xib in Resources */ = {isa = PBXBuildFile; fileRef = 38175C1D16B6F31D00804914 /* NewTripHeaderView.xib */; };
 		38334EB9172C2E050063B919 /* plus sign.png in Resources */ = {isa = PBXBuildFile; fileRef = 38334EB7172C2E050063B919 /* plus sign.png */; };
@@ -39,6 +38,7 @@
 		3886D3FE16B7A1CD00ECE64F /* AddressBookUI.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 3886D3FC16B7A1CD00ECE64F /* AddressBookUI.framework */; };
 		3886D40216B7AA3100ECE64F /* MCPaymentViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 3886D40016B7AA3100ECE64F /* MCPaymentViewController.m */; };
 		3886D40316B7AA3100ECE64F /* MCPaymentViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = 3886D40116B7AA3100ECE64F /* MCPaymentViewController.xib */; };
+		388F21EE175545E700952D13 /* MCAddressBookDataReceiver.m in Sources */ = {isa = PBXBuildFile; fileRef = 388F21ED175545E700952D13 /* MCAddressBookDataReceiver.m */; };
 		38966DA6173BD71A0041484B /* girl 100x100.png in Resources */ = {isa = PBXBuildFile; fileRef = 38966DA5173BD71A0041484B /* girl 100x100.png */; };
 		3898AAE21727B50E008F947E /* toolbar is sign.png in Resources */ = {isa = PBXBuildFile; fileRef = 3898AAE01727B50E008F947E /* toolbar is sign.png */; };
 		3898AAE31727B50E008F947E /* toolbar is sign@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 3898AAE11727B50E008F947E /* toolbar is sign@2x.png */; };
@@ -60,12 +60,12 @@
 		38EFF2E716D697B5001C8248 /* MCPersonTableViewCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 38EFF2E616D697B4001C8248 /* MCPersonTableViewCell.xib */; };
 		38F8B14916D7529B001037CA /* MCReturnPaymentTableViewCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 38F8B14816D7529B001037CA /* MCReturnPaymentTableViewCell.m */; };
 		38F8B14B16D752DE001037CA /* MCReturnPaymentTableViewCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 38F8B14A16D752DD001037CA /* MCReturnPaymentTableViewCell.xib */; };
+		38FCA98F17552DDB0099C3C9 /* MCTextFieldAndLabelTitleView.xib in Resources */ = {isa = PBXBuildFile; fileRef = 38FCA98E17552DDB0099C3C9 /* MCTextFieldAndLabelTitleView.xib */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
 		3801F89B16DFC62600DF8675 /* CoreData.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = CoreData.framework; path = System/Library/Frameworks/CoreData.framework; sourceTree = SDKROOT; };
 		38087BD217435D15002338BB /* MCTwoLabelsTitleView.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; name = MCTwoLabelsTitleView.xib; path = Views/MCTwoLabelsTitleView.xib; sourceTree = "<group>"; };
-		38087BD41744B789002338BB /* MCTextFieldAndLabelTitleView.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = MCTextFieldAndLabelTitleView.xib; sourceTree = "<group>"; };
 		38087BD917456900002338BB /* MCTwoLabelsTitleView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = MCTwoLabelsTitleView.h; path = Views/MCTwoLabelsTitleView.h; sourceTree = "<group>"; };
 		38087BDA17456900002338BB /* MCTwoLabelsTitleView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = MCTwoLabelsTitleView.m; path = Views/MCTwoLabelsTitleView.m; sourceTree = "<group>"; };
 		38175C1D16B6F31D00804914 /* NewTripHeaderView.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; name = NewTripHeaderView.xib; path = Views/NewTripHeaderView.xib; sourceTree = "<group>"; };
@@ -114,6 +114,8 @@
 		3886D3FF16B7AA3100ECE64F /* MCPaymentViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = MCPaymentViewController.h; path = ViewControllers/MCPaymentViewController.h; sourceTree = "<group>"; };
 		3886D40016B7AA3100ECE64F /* MCPaymentViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = MCPaymentViewController.m; path = ViewControllers/MCPaymentViewController.m; sourceTree = "<group>"; };
 		3886D40116B7AA3100ECE64F /* MCPaymentViewController.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; name = MCPaymentViewController.xib; path = ViewControllers/MCPaymentViewController.xib; sourceTree = "<group>"; };
+		388F21EC175545E600952D13 /* MCAddressBookDataReceiver.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = MCAddressBookDataReceiver.h; sourceTree = "<group>"; };
+		388F21ED175545E700952D13 /* MCAddressBookDataReceiver.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = MCAddressBookDataReceiver.m; sourceTree = "<group>"; };
 		38966DA5173BD71A0041484B /* girl 100x100.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = "girl 100x100.png"; path = "Going Dutch/icons/no picture image/girl 100x100.png"; sourceTree = "<group>"; };
 		3898AAE01727B50E008F947E /* toolbar is sign.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = "toolbar is sign.png"; path = "Going Dutch/icons/toolbar is sign.png"; sourceTree = "<group>"; };
 		3898AAE11727B50E008F947E /* toolbar is sign@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = "toolbar is sign@2x.png"; path = "Going Dutch/icons/toolbar is sign@2x.png"; sourceTree = "<group>"; };
@@ -145,6 +147,7 @@
 		38F8B14716D7529B001037CA /* MCReturnPaymentTableViewCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = MCReturnPaymentTableViewCell.h; path = Views/MCReturnPaymentTableViewCell.h; sourceTree = "<group>"; };
 		38F8B14816D7529B001037CA /* MCReturnPaymentTableViewCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = MCReturnPaymentTableViewCell.m; path = Views/MCReturnPaymentTableViewCell.m; sourceTree = "<group>"; };
 		38F8B14A16D752DD001037CA /* MCReturnPaymentTableViewCell.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; name = MCReturnPaymentTableViewCell.xib; path = Views/MCReturnPaymentTableViewCell.xib; sourceTree = "<group>"; };
+		38FCA98E17552DDB0099C3C9 /* MCTextFieldAndLabelTitleView.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; name = MCTextFieldAndLabelTitleView.xib; path = Views/MCTextFieldAndLabelTitleView.xib; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -237,6 +240,8 @@
 				38572AF3169D438E00969C62 /* ViewControllers */,
 				38CDE8FE17135B6300387CAA /* MCTools.h */,
 				38CDE8FF17135B6300387CAA /* MCTools.m */,
+				388F21EC175545E600952D13 /* MCAddressBookDataReceiver.h */,
+				388F21ED175545E700952D13 /* MCAddressBookDataReceiver.m */,
 				38572AE5169D437B00969C62 /* MCAppDelegate.h */,
 				38572AE6169D437B00969C62 /* MCAppDelegate.m */,
 				38572ADD169D437B00969C62 /* Supporting Files */,
@@ -299,7 +304,7 @@
 				38087BD217435D15002338BB /* MCTwoLabelsTitleView.xib */,
 				38087BD917456900002338BB /* MCTwoLabelsTitleView.h */,
 				38087BDA17456900002338BB /* MCTwoLabelsTitleView.m */,
-				38087BD41744B789002338BB /* MCTextFieldAndLabelTitleView.xib */,
+				38FCA98E17552DDB0099C3C9 /* MCTextFieldAndLabelTitleView.xib */,
 				38B66AB3174927A100890123 /* MCTextFieldAndLabelTitleView.h */,
 				38B66AB4174927A100890123 /* MCTextFieldAndLabelTitleView.m */,
 			);
@@ -448,7 +453,7 @@
 				38334ECC173552410063B919 /* Default-568h@2x.png in Resources */,
 				38966DA6173BD71A0041484B /* girl 100x100.png in Resources */,
 				38087BD317435D15002338BB /* MCTwoLabelsTitleView.xib in Resources */,
-				38087BD51744B789002338BB /* MCTextFieldAndLabelTitleView.xib in Resources */,
+				38FCA98F17552DDB0099C3C9 /* MCTextFieldAndLabelTitleView.xib in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -483,6 +488,7 @@
 				38CDE9151716F65100387CAA /* MCImage.m in Sources */,
 				38087BDB17456900002338BB /* MCTwoLabelsTitleView.m in Sources */,
 				38B66AB5174927A100890123 /* MCTextFieldAndLabelTitleView.m in Sources */,
+				388F21EE175545E700952D13 /* MCAddressBookDataReceiver.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
