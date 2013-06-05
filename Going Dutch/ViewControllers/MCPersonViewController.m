@@ -49,7 +49,7 @@
 
 - (void)doneEmailPicker:(id)selector
 {
-    [thisPerson setEmailAddress:[[thisPerson allEmailAddressesFromAddressBook] objectAtIndex:[emailSelectionFromAddressBookPickerView selectedRowInComponent:0]]];
+    [editedPerson setEmailAddress:[[editedPerson allEmailAddressesFromAddressBook] objectAtIndex:[emailSelectionFromAddressBookPickerView selectedRowInComponent:0]]];
     [emailField resignFirstResponder];
     didSomethingChange = YES;
     [[[self navigationItem] rightBarButtonItem] setEnabled:YES];
@@ -118,6 +118,7 @@
 {
     editedPerson = newPerson;
     didSomethingChange = YES;
+    [emailSelectionFromAddressBookPickerView reloadComponent:0];
 }
 
 #pragma mark - New in this class
@@ -137,7 +138,7 @@
     return self;
 }
 
-- (void)getPersonData:(ABRecordRef)person
+/*- (void)getPersonData:(ABRecordRef)person
 {
     editedPerson = [[MCPerson alloc] init];
     [editedPerson setThumbnail:[UIImage imageWithData:(__bridge_transfer NSData *)ABPersonCopyImageDataWithFormat(person, kABPersonImageFormatThumbnail)]];
@@ -158,7 +159,7 @@
     CFRelease(emailAddresses);
     didSomethingChange = YES;
     [[[self navigationItem] rightBarButtonItem] setEnabled:YES];
-}
+}*/
 
 #pragma mark - Inherited from super.
 
