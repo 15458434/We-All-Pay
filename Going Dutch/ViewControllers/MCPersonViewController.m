@@ -63,6 +63,44 @@
 
 #pragma mark - UITextFieldDelegate
 
+- (void)textFieldDidBeginEditing:(UITextField *)textField
+{
+    if (textField == emailField) {
+        // Set the UIPickerView as keyboard for the emailfield if Access to the AddressBook is authorized.
+        if (kABAuthorizationStatusAuthorized == ABAddressBookGetAuthorizationStatus() && [editedPerson emailAddress]) {
+            CGRect toolbarRect = CGRectMake(0, 0, [[self view] bounds].size.width, 44);
+            UIToolbar *inputAccessoryPickerView = [[UIToolbar alloc] initWithFrame:toolbarRect];
+            UIBarButtonItem *cancelButton = [[UIBarButtonItem alloc] initWithBarButtonSystemItem:UIBarButtonSystemItemCancel
+                                                                                          target:self
+                                                                                          action:@selector(cancelEmailPicker:)];
+            UIBarButtonItem *flexButton = [[UIBarButtonItem alloc] initWithBarButtonSystemItem:UIBarButtonSystemItemFlexibleSpace
+                                                                                        target:nil
+                                                                                        action:nil];
+            UIBarButtonItem *doneButton = [[UIBarButtonItem alloc] initWithBarButtonSystemItem:UIBarButtonSystemItemDone
+                                                                                        target:self
+                                                                                        action:@selector(doneEmailPicker:)];
+            NSArray *buttonArray = [[NSArray alloc] initWithObjects:cancelButton, flexButton, doneButton, nil];
+            [inputAccessoryPickerView setItems:buttonArray animated:YES];
+            if (!emailSelectionFromAddressBookPickerView) {
+                emailSelectionFromAddressBookPickerView = [[UIPickerView alloc] init];
+                [emailSelectionFromAddressBookPickerView setDelegate:self];
+                [emailSelectionFromAddressBookPickerView setDataSource:self];
+                [emailSelectionFromAddressBookPickerView setShowsSelectionIndicator:YES];
+                [emailField setInputView:emailSelectionFromAddressBookPickerView];
+                [emailField setInputAccessoryView:inputAccessoryPickerView];
+            }
+            UIToolbar *inputAccossoryNumberPad = [[UIToolbar alloc] initWithFrame:toolbarRect];
+            cancelButton = [[UIBarButtonItem alloc] initWithBarButtonSystemItem:UIBarButtonSystemItemCancel
+                                                                         target:self
+                                                                         action:@selector(cancelNumberPad:)];
+            doneButton = [[UIBarButtonItem alloc] initWithBarButtonSystemItem:UIBarButtonSystemItemDone
+                                                                       target:self
+                                                                       action:@selector(doneNumberPad:)];
+            [inputAccossoryNumberPad setItems:[[NSArray alloc] initWithObjects:cancelButton, flexButton, doneButton, nil] animated:YES];
+        }
+    }
+}
+
 - (BOOL)textFieldShouldReturn:(UITextField *)textField
 {
     if (textField == firstNameField) {
@@ -77,6 +115,7 @@
     } else if (textField == emailField) {
         [editedPerson setEmailAddress:[emailField text]];
         didSomethingChange = YES;
+        [emailField resignFirstResponder];
         [[[self navigationItem] rightBarButtonItem] setEnabled:YES];
         return YES;
     }
@@ -204,37 +243,6 @@
 {
     [super viewDidLoad];
     
-    // Set the UIPickerView as keyboard for the emailfield if Access to the AddressBook is authorized.
-    if (kABAuthorizationStatusAuthorized == ABAddressBookGetAuthorizationStatus()) {
-        CGRect toolbarRect = CGRectMake(0, 0, [[self view] bounds].size.width, 44);
-        UIToolbar *inputAccessoryPickerView = [[UIToolbar alloc] initWithFrame:toolbarRect];
-        UIBarButtonItem *cancelButton = [[UIBarButtonItem alloc] initWithBarButtonSystemItem:UIBarButtonSystemItemCancel
-                                                                                      target:self
-                                                                                      action:@selector(cancelEmailPicker:)];
-        UIBarButtonItem *flexButton = [[UIBarButtonItem alloc] initWithBarButtonSystemItem:UIBarButtonSystemItemFlexibleSpace
-                                                                                    target:nil
-                                                                                    action:nil];
-        UIBarButtonItem *doneButton = [[UIBarButtonItem alloc] initWithBarButtonSystemItem:UIBarButtonSystemItemDone
-                                                                                    target:self
-                                                                                    action:@selector(doneEmailPicker:)];
-        NSArray *buttonArray = [[NSArray alloc] initWithObjects:cancelButton, flexButton, doneButton, nil];
-        [inputAccessoryPickerView setItems:buttonArray animated:YES];
-        emailSelectionFromAddressBookPickerView = [[UIPickerView alloc] init];
-        [emailSelectionFromAddressBookPickerView setDelegate:self];
-        [emailSelectionFromAddressBookPickerView setDataSource:self];
-        [emailSelectionFromAddressBookPickerView setShowsSelectionIndicator:YES];
-        [emailField setInputView:emailSelectionFromAddressBookPickerView];
-        [emailField setInputAccessoryView:inputAccessoryPickerView];
-        
-        UIToolbar *inputAccossoryNumberPad = [[UIToolbar alloc] initWithFrame:toolbarRect];
-        cancelButton = [[UIBarButtonItem alloc] initWithBarButtonSystemItem:UIBarButtonSystemItemCancel
-                                                                     target:self
-                                                                     action:@selector(cancelNumberPad:)];
-        doneButton = [[UIBarButtonItem alloc] initWithBarButtonSystemItem:UIBarButtonSystemItemDone
-                                                                   target:self
-                                                                   action:@selector(doneNumberPad:)];
-        [inputAccossoryNumberPad setItems:[[NSArray alloc] initWithObjects:cancelButton, flexButton, doneButton, nil] animated:YES];
-    }
     if (kABAuthorizationStatusAuthorized == ABAddressBookGetAuthorizationStatus()) {
         UIBarButtonItem *addressBookButton = [[UIBarButtonItem alloc] initWithBarButtonSystemItem:UIBarButtonSystemItemBookmarks target:self action:@selector(getSomeone:)];
         UIBarButtonItem *flexSpace = [[UIBarButtonItem alloc] initWithBarButtonSystemItem:UIBarButtonSystemItemFlexibleSpace
