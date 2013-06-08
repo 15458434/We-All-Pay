@@ -74,12 +74,18 @@
         [mailBody appendFormat:@"\n"];
         [mailBody appendFormat:@"From a total of %@, which was spend on our last trip to %@. We all have to pay an equal share of %@.\n", [nf stringFromNumber:[[NSNumber alloc] initWithDouble:[tonightsBill totalSumOfMoneyOfThisSharedBill]]], [tonightsBill tripName], [nf stringFromNumber:[[NSNumber alloc] initWithDouble:[tonightsBill amountPeopleShouldHavePaid]]]];
         [mailBody appendFormat:@"\n"];
-        [mailBody appendFormat:@"The persons who have paid are:\n"];
+        if ([tonightsBill totalAmountOfPeopleWhoHavePaid] == 0) {
+            [mailBody appendFormat:@"Nobody has paid so far.\n"];
+        } else if ([tonightsBill totalAmountOfPeopleWhoHavePaid] == 1) {
+            [mailBody appendFormat:@"The person who has payed:\n"];
+        } else {
+            [mailBody appendFormat:@"The persons who have paid are:\n"];
+        }
         for (MCPayment *p in [tonightsBill allPayments]) {
             [mailBody appendFormat:@"%@ has paid %@ for %@.\n", [[p payingPerson] firstName], [nf stringFromNumber:[[NSNumber alloc] initWithDouble:[p money]]], [p place]];
         }
         [mailBody appendFormat:@"\n"];
-        [mailBody appendFormat:@"To equalize and have everybody pay the average of %@, I'd suggest the following solution:\n", [nf stringFromNumber:[[NSNumber alloc] initWithDouble:[tonightsBill amountPeopleShouldHavePaid]]]];
+        [mailBody appendFormat:@"To equalize and have everybody pay the average of %@, I suggest the following solution:\n", [nf stringFromNumber:[[NSNumber alloc] initWithDouble:[tonightsBill amountPeopleShouldHavePaid]]]];
         for (MCReturnPayment *rp in [tonightsBill solveWhoHasToPayWhoFromThisBill]) {
             [mailBody appendFormat:@"%@\n", [rp description]];
         }

@@ -175,6 +175,22 @@
     return [[people allPeople] count];
 }
 
+- (NSUInteger)totalAmountOfPeopleWhoHavePaid
+{
+    NSMutableArray *payersForEachPayment = [[NSMutableArray alloc] init];
+    for (MCPayment *payment in payments) {
+        MCPerson *person = [payment payingPerson];
+        [payersForEachPayment addObject:person];
+    }
+    NSMutableArray *peopleWhoHavePayed = [[NSMutableArray alloc] init];
+    for (MCPerson *person in [people allPeople]) {
+        if ([payersForEachPayment containsObject:person]) {
+            [peopleWhoHavePayed addObject:person];
+        }
+    }
+    return [peopleWhoHavePayed count];
+}
+
 #pragma mark - Inherited From super.
 
 - (id)init

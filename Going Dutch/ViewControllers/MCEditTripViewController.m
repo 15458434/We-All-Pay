@@ -34,6 +34,7 @@
 {
     MCPerson *newPerson = [[MCPerson alloc] init];
     [[tonightsBill people] addPerson:newPerson];
+    [self updateSubLabel];
     MCPersonViewController *pvc = [[MCPersonViewController alloc] initWithPerson:newPerson];
     [pvc setIsNew:YES];
     [[self navigationController] pushViewController:pvc animated:YES];
@@ -159,6 +160,15 @@
     }
 }
 
+- (void)updateSubLabel
+{
+    if ([tonightsBill totalAmountOfPeople] == 1) {
+        [[twoLabelTitleView subLabel] setText:[NSString stringWithFormat:@"%d person present", [tonightsBill totalAmountOfPeople]]];
+    } else {
+        [[twoLabelTitleView subLabel] setText:[NSString stringWithFormat:@"%d people present", [tonightsBill totalAmountOfPeople]]];
+    }
+}
+
 #pragma mark - inherited from super
 
 - (id)initWithStyle:(UITableViewStyle)style
@@ -179,9 +189,8 @@
         [[self navigationItem] setTitleView:twoLabelTitleView];
     }
     [[twoLabelTitleView mainLabel] setText:[tonightsBill tripName]];
-    NSNumberFormatter *nf = [[NSNumberFormatter alloc] init];
-    [nf setNumberStyle:NSNumberFormatterCurrencyStyle];
-    [[twoLabelTitleView subLabel] setText:[NSString stringWithFormat:@"Total spent %@", [nf stringFromNumber:[NSNumber numberWithDouble:[tonightsBill totalSumOfMoneyOfThisSharedBill]]]]];
+    [self updateSubLabel];
+    
     if (isInitAsNew) {
         doneButton = [[UIBarButtonItem alloc] initWithBarButtonSystemItem:UIBarButtonSystemItemDone
                                                                    target:self
@@ -381,6 +390,7 @@
         MCPerson *removablePerson = [[[tonightsBill people] allPeople] objectAtIndex:[indexPath row]];
         if (![tonightsBill hasPersonPaidSomething:removablePerson]) {
             [tonightsBill removePerson:removablePerson];
+            [self updateSubLabel];
             NSArray *indexPaths = [[NSArray alloc] initWithObjects:indexPath, nil];
             [[self tableView] deleteRowsAtIndexPaths:indexPaths withRowAnimation:UITableViewRowAnimationTop];
             [[self navigationItem] setRightBarButtonItem:doneButton];

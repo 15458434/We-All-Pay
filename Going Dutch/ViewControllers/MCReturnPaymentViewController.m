@@ -63,7 +63,7 @@
     NSNumber *totalSpent = [NSNumber numberWithDouble:[tonightsBill totalSumOfMoneyOfThisSharedBill]];
     NSNumberFormatter *nf = [[NSNumberFormatter alloc] init];
     [nf setNumberStyle:NSNumberFormatterCurrencyStyle];
-    [[twoLabelTitleView mainLabel] setText:[NSString stringWithFormat:@"To pay: %@", [nf stringFromNumber:averagePay]]];
+    [[twoLabelTitleView mainLabel] setText:[NSString stringWithFormat:@"Each pays: %@", [nf stringFromNumber:averagePay]]];
     [[twoLabelTitleView subLabel] setText:[NSString stringWithFormat:@"Total spent: %@", [nf stringFromNumber:totalSpent]]];
     [[self navigationItem] setTitle:[[NSString alloc] initWithFormat:@"To pay: %@", [nf stringFromNumber:averagePay]]];
 

@@ -60,7 +60,7 @@
     
     if (self) {
         [MCAllTripsStore sharedList];
-        [[self navigationItem] setTitle:@"back"];
+        [[self navigationItem] setTitle:@"Back"];
     }
     return self;
 }
