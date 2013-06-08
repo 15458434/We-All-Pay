@@ -34,5 +34,7 @@
 @property (nonatomic, strong) NSString *uniqueBillId;
 @property (nonatomic, strong) NSString *tripName;
 @property (nonatomic, strong) MCPeople *people;
+@property (nonatomic, strong) NSDate *dateCreated;
+@property (nonatomic, strong) NSDate *dateModified;
 
 @end

@@ -15,6 +15,8 @@
 @interface MCAllTripsTableViewController : UITableViewController <MCPaymentViewControllerDelegate>
 {
     __strong IBOutlet MCTwoLabelsTitleView *titleView;
+    
+    NSDateFormatter *df;
 }
 
 - (void)addTrip:(id)sender;

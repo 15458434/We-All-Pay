@@ -141,13 +141,21 @@
     
     [[allTripsTableViewCell tripLabel] setText:[thisTrip tripName]];
     [[allTripsTableViewCell peoplePresentLabel] setText:[[thisTrip people] stringOfApproxPeoplePresent]];
-    
+
     NSNumberFormatter *nf = [[NSNumberFormatter alloc] init];
     [nf setNumberStyle:NSNumberFormatterCurrencyStyle];
     NSNumber *m = [[NSNumber alloc] initWithDouble:[thisTrip totalSumOfMoneyOfThisSharedBill]];
     NSString *moneyString = [nf stringFromNumber:m];
     [[allTripsTableViewCell totalCostLabel] setText:moneyString];
-    [[allTripsTableViewCell extraLabel] setText:@""];
+    
+    // fill extraLabel with dateModified.
+    if (!df) {
+        df = [[NSDateFormatter alloc] init];
+        [df setDateStyle:NSDateFormatterMediumStyle];
+        [df setTimeStyle:NSDateFormatterShortStyle];
+    }
+    [[allTripsTableViewCell extraLabel] setText:[df stringFromDate:[thisTrip dateModified]]];
+    //[[allTripsTableViewCell extraLabel] setText:@"Ilse is lief."];
     
     // [allTripsTableViewCell setAccessoryView:[[UIImageView alloc] initWithImage:[UIImage imageNamed:@"plus sign"]]];
     CGRect buttonRect = CGRectMake(0, 0, 44, 44);

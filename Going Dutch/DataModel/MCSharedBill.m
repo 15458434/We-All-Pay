@@ -17,6 +17,8 @@
 @synthesize tripName;
 @synthesize people;
 @synthesize uniqueBillId;
+@synthesize dateCreated;
+@synthesize dateModified;
 
 #pragma mark - New in this class
 
@@ -184,6 +186,8 @@
         payments = [[NSMutableArray alloc] init];
         people = [[MCPeople alloc] init];
         tripName = [[NSString alloc] initWithFormat:@""];
+        dateCreated = [[NSDate alloc] init];
+        dateModified = [dateCreated copy];
     }
     
     return self;
@@ -207,6 +211,8 @@
     [aCoder encodeObject:payments forKey:@"payments"];
     [aCoder encodeObject:people forKey:@"people"];
     [aCoder encodeObject:tripName forKey:@"tripName"];
+    [aCoder encodeObject:dateCreated forKey:@"dateCreated"];
+    [aCoder encodeObject:dateModified forKey:@"dateModified"];
 }
 
 - (id)initWithCoder:(NSCoder *)aDecoder
@@ -218,6 +224,14 @@
         payments = [aDecoder decodeObjectForKey:@"payments"];
         people = [aDecoder decodeObjectForKey:@"people"];
         tripName = [aDecoder decodeObjectForKey:@"tripName"];
+        dateCreated = [aDecoder decodeObjectForKey:@"dateCreated"];
+        if (!dateCreated) {
+            dateCreated = [[NSDate alloc] init];
+        }
+        dateModified = [aDecoder decodeObjectForKey:@"dateModified"];
+        if (!dateModified) {
+            dateModified = [[NSDate alloc] init];
+        }
     }
     return self;
 }
