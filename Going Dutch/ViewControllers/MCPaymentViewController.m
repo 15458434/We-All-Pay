@@ -60,7 +60,7 @@
     [payerView setText:[payerViewPerson getFullName]];
     [payerView resignFirstResponder];
     didSomethingChange = YES;
-    [[self navigationItem] setRightBarButtonItem:doneButton animated:YES];
+    [[[self navigationItem] rightBarButtonItem] setEnabled:YES];
 }
 
 - (void)cancelNumberPad:(id)selector
@@ -84,7 +84,7 @@
     [paidView setText:[nf stringFromNumber:paidViewNumber]];
     didSomethingChange = YES;
     [paidView resignFirstResponder];
-    [[self navigationItem] setRightBarButtonItem:doneButton animated:YES];
+    [[[self navigationItem] rightBarButtonItem] setEnabled:YES];
 }
 
 - (void)cancelChangesForEntirePayment:(id)selector
@@ -149,7 +149,7 @@
     if (textField == placeView) {
         [textField resignFirstResponder];
         didSomethingChange = YES;
-        [[self navigationItem] setRightBarButtonItem:doneButton animated:YES];
+        [[[self navigationItem] rightBarButtonItem] setEnabled:YES];
     }
     return YES;
 }
@@ -224,9 +224,10 @@
     doneButton = [[UIBarButtonItem alloc] initWithBarButtonSystemItem:UIBarButtonSystemItemDone
                                                                target:self
                                                                action:@selector(backButtonPressed:)];
-    if (didSomethingChange) {
+    if (![[self navigationItem] rightBarButtonItem]) {
         [[self navigationItem] setRightBarButtonItem:doneButton];
     }
+    [[[self navigationItem] rightBarButtonItem] setEnabled:didSomethingChange];
     cancelChangesForEntirePaymentButton = [[UIBarButtonItem alloc] initWithBarButtonSystemItem:UIBarButtonSystemItemCancel target:self action:@selector(cancelChangesForEntirePayment:)];
     [[self navigationItem] setLeftBarButtonItem:cancelChangesForEntirePaymentButton];
     

@@ -93,7 +93,7 @@
 - (IBAction)changeNameOfTrip:(id)sender {
     [tonightsBill setTripName:[tripNameField text]];
     [[self view] endEditing:YES];
-    [[self navigationItem] setRightBarButtonItem:doneButton];
+    [[[self navigationItem] rightBarButtonItem] setEnabled:YES];
 }
 
 - (IBAction)dismissKeyboard:(id)sender {
@@ -156,7 +156,7 @@
     [[self tableView] insertRowsAtIndexPaths:[NSArray arrayWithObject:indexPathOfNewPerson] withRowAnimation:UITableViewRowAnimationTop];
     if (!didSomethingChange) {
         didSomethingChange = YES;
-        [[self navigationItem] setRightBarButtonItem:doneButton];
+        [[[self navigationItem] rightBarButtonItem] setEnabled:YES];
     }
 }
 
@@ -190,28 +190,8 @@
     }
     [[twoLabelTitleView mainLabel] setText:[tonightsBill tripName]];
     [self updateSubLabel];
-    
-    if (isInitAsNew) {
-        doneButton = [[UIBarButtonItem alloc] initWithBarButtonSystemItem:UIBarButtonSystemItemDone
-                                                                   target:self
-                                                                   action:@selector(doneAddingPeople:)];
-        [[self navigationItem] setTitle:@"New bill data"];
-        UIBarButtonItem *bbi = [[UIBarButtonItem alloc] initWithBarButtonSystemItem:UIBarButtonSystemItemCancel
-                                                                             target:self
-                                                                             action:@selector(cancelNewTrip:)];
-        [[self navigationItem] setLeftBarButtonItem:bbi];
-    } else {
-        doneButton = [[UIBarButtonItem alloc] initWithBarButtonSystemItem:UIBarButtonSystemItemDone
-                                                                   target:self
-                                                                   action:@selector(doneEditingTrip:)];
-        [[self navigationItem] setTitle:[tonightsBill tripName]];
-        UIBarButtonItem *bbi = [[UIBarButtonItem alloc] initWithBarButtonSystemItem:UIBarButtonSystemItemCancel
-                                                                             target:self
-                                                                             action:@selector(cancelEditTrip:)];
-        [[self navigationItem] setLeftBarButtonItem:bbi];
-    }
-    [[[self navigationItem] rightBarButtonItem] setEnabled:YES];
     [[[self navigationItem] leftBarButtonItem] setEnabled:YES];
+    
     [[self navigationController] setToolbarHidden:NO animated:YES];
     [[self view] endEditing:YES];
 }
@@ -239,6 +219,29 @@
  
     // Uncomment the following line to display an Edit button in the navigation bar for this view controller.
     // self.navigationItem.rightBarButtonItem = self.editButtonItem;
+    
+    if (isInitAsNew) {
+        doneButton = [[UIBarButtonItem alloc] initWithBarButtonSystemItem:UIBarButtonSystemItemDone
+                                                                   target:self
+                                                                   action:@selector(doneAddingPeople:)];
+        [[self navigationItem] setTitle:@"New bill data"];
+        UIBarButtonItem *bbi = [[UIBarButtonItem alloc] initWithBarButtonSystemItem:UIBarButtonSystemItemCancel
+                                                                             target:self
+                                                                             action:@selector(cancelNewTrip:)];
+        [[self navigationItem] setLeftBarButtonItem:bbi];
+    } else {
+        doneButton = [[UIBarButtonItem alloc] initWithBarButtonSystemItem:UIBarButtonSystemItemDone
+                                                                   target:self
+                                                                   action:@selector(doneEditingTrip:)];
+        [[self navigationItem] setTitle:[tonightsBill tripName]];
+        UIBarButtonItem *bbi = [[UIBarButtonItem alloc] initWithBarButtonSystemItem:UIBarButtonSystemItemCancel
+                                                                             target:self
+                                                                             action:@selector(cancelEditTrip:)];
+        [[self navigationItem] setLeftBarButtonItem:bbi];
+    }
+    [[self navigationItem] setRightBarButtonItem:doneButton];
+    [[[self navigationItem] rightBarButtonItem] setEnabled:NO];
+    [[[self navigationItem] leftBarButtonItem] setEnabled:YES];
     
     UIBarButtonItem *addPersonButton;
     if (kABAuthorizationStatusAuthorized == ABAddressBookGetAuthorizationStatus() ||
@@ -305,6 +308,7 @@
     NSIndexPath *ip = [NSIndexPath indexPathForItem:rowNumber inSection:0];
     [[self tableView] insertRowsAtIndexPaths:[NSArray arrayWithObject:ip] withRowAnimation:UITableViewRowAnimationTop];
     didSomethingChange = YES;
+    [[[self navigationItem] rightBarButtonItem] setEnabled:YES];
 }
 
 #pragma mark - UITextFieldDelegate
@@ -321,7 +325,7 @@
         }
     }
     didSomethingChange = YES;
-    [[self navigationItem] setRightBarButtonItem:doneButton];
+    [[[self navigationItem] rightBarButtonItem] setEnabled:YES];
     return YES;
 }
 
@@ -393,7 +397,7 @@
             [self updateSubLabel];
             NSArray *indexPaths = [[NSArray alloc] initWithObjects:indexPath, nil];
             [[self tableView] deleteRowsAtIndexPaths:indexPaths withRowAnimation:UITableViewRowAnimationTop];
-            [[self navigationItem] setRightBarButtonItem:doneButton];
+            [[[self navigationItem] rightBarButtonItem] setEnabled:YES];
             didSomethingChange = YES;
         }
     }

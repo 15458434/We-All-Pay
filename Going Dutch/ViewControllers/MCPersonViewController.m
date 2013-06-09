@@ -157,6 +157,7 @@
 {
     editedPerson = newPerson;
     didSomethingChange = YES;
+    [[[self navigationItem] rightBarButtonItem] setEnabled:YES];
     [emailSelectionFromAddressBookPickerView reloadComponent:0];
 }
 
