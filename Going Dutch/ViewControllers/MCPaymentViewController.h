@@ -33,6 +33,8 @@
     NSNumber *paidViewNumber;
     __weak IBOutlet UILabel *dateAndTimeLabel;
     
+    BOOL switchInputField;
+    
     UIPickerView *personPickerView;
 }
 

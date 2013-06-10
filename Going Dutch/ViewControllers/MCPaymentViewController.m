@@ -180,10 +180,43 @@
     }
 }
 
-- (void)textFieldDidEndEditing:(UITextField *)textField
+- (BOOL)textFieldShouldBeginEditing:(UITextField *)textField
+{
+    if ([paidView isFirstResponder] || [payerView isFirstResponder] || [placeView isFirstResponder]) {
+        switchInputField = YES;
+    } else {
+        switchInputField = NO;
+    }
+    return YES;
+}
+
+- (BOOL)textFieldShouldEndEditing:(UITextField *)textField
 {
     if (textField == paidView) {
-        NSLog(@"Stuk?");
+        if (switchInputField) {
+            switchInputField = NO;
+            NSNumberFormatter *nf = [[NSNumberFormatter alloc] init];
+            [nf setFormatterBehavior:NSNumberFormatterBehaviorDefault];
+            [nf setLocale:[NSLocale currentLocale]];
+            [nf setNumberStyle:NSNumberFormatterDecimalStyle];
+            paidViewNumber = [nf numberFromString:[paidView text]];
+            
+            [nf setNumberStyle:NSNumberFormatterCurrencyStyle];
+            [paidView setText:[nf stringFromNumber:paidViewNumber]];
+            didSomethingChange = YES;
+            [[[self navigationItem] rightBarButtonItem] setEnabled:YES];
+            return YES;
+        } else {
+            return NO;
+        }
+    } else {
+        if (switchInputField) {
+            switchInputField = NO;
+            return YES;
+        } else {
+            return NO;
+        }
+        
     }
 }
 
