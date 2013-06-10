@@ -35,7 +35,7 @@
 - (void)setThumbnail:(UIImage *)image;
 - (UIImage *)picture;
 - (void)setPicture:(UIImage *)image;
-- (void)removeThumbnail;
+- (void)removePictureData;
 
 
 + (MCPerson *)createRandomPerson;

@@ -212,11 +212,8 @@
     } else {
         if (switchInputField) {
             switchInputField = NO;
-            return YES;
-        } else {
-            return NO;
         }
-        
+        return YES;
     }
 }
 

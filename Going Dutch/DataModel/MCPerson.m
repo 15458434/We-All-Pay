@@ -21,7 +21,7 @@
 
 #pragma mark - New in this class
 
-- (void)removeThumbnail
+- (void)removePictureData
 {
     if (imageObjectFromStore) {
         [[MCImageStoreController sharedStore] deleteImageObjectFromStore:imageObjectFromStore];

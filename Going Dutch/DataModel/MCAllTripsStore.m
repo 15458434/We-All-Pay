@@ -36,7 +36,7 @@
 - (void)removeTrip:(MCSharedBill *)trip
 {
     for (MCPerson *p in [[trip people] allPeople]) {
-        [p removeThumbnail];
+        [p removePictureData];
     }
     [allTrips removeObject:trip];
 }

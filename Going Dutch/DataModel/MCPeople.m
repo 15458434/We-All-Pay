@@ -53,7 +53,7 @@
 - (void)removePerson:(MCPerson *)awfulPerson
 {
     // remove a person from the array of people
-    [awfulPerson removeThumbnail];
+    [awfulPerson removePictureData];
     [people removeObject:awfulPerson];
 }
 
@@ -62,6 +62,16 @@
     // Replace the person with a new one.
     NSUInteger indexOfPerson = [people indexOfObject:awfulPerson];
     [people replaceObjectAtIndex:indexOfPerson withObject:sweetPerson];
+}
+
+- (void)changeIdentity:(MCPerson *)oldPersonality withIdentity:(MCPerson *)newPersonality
+{
+    [oldPersonality setFirstName:[newPersonality firstName]];
+    [oldPersonality setLastName:[newPersonality lastName]];
+    [oldPersonality setEmailAddress:[newPersonality emailAddress]];
+    [oldPersonality setAllEmailAddressesFromAddressBook:[newPersonality allEmailAddressesFromAddressBook]];
+    [oldPersonality removePictureData];
+    @throw [NSException exceptionWithName:@"Not finished." reason:@"The pictures need to be moved to the oldPersonality object." userInfo:nil];
 }
 
 - (NSArray *)allPeople
