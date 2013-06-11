@@ -10,16 +10,17 @@
 
 @class MCPerson;
 
-@interface MCPeople : NSObject <NSCoding>
+@interface MCPeople : NSObject <NSCoding, NSCopying>
 {
-    NSMutableArray *people;
+    
 }
+
+@property (nonatomic, strong) NSMutableArray *allPeople;
 
 - (NSUInteger)addPerson:(MCPerson *)newPerson;
 - (void)removePerson:(MCPerson *)awfulPerson;
 - (void)replacePerson:(MCPerson *)awfulPerson withPerson:(MCPerson *)sweetPerson;
 - (void)changeIdentity:(MCPerson *)oldPersonality withIdentity:(MCPerson *)newPersonality;
-- (NSArray *)allPeople;
 - (BOOL)areTherePeople;
 - (BOOL)isPersonWithNamePresent:(MCPerson *)person;
 - (NSString *)stringWithNamesOfPeoplePresent;

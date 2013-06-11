@@ -19,11 +19,11 @@
 
 @interface MCAddressBookDataReceiver : NSObject <ABPeoplePickerNavigationControllerDelegate>
 {
-    MCPerson *editedPerson;
     __weak UIViewController *viewController;    
 }
 
 @property (nonatomic, strong) id delegate;
+@property (nonatomic, copy) MCPerson *editedPerson;
 
 - (id)initWithDelegate:(id)delegateUsedOnInit;
 - (id)initWithViewController:(UIViewController *)newViewController andDelegate:(id)newDelegate;

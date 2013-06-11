@@ -12,12 +12,14 @@
 
 @implementation MCPeople
 
+@synthesize allPeople;
+
 #pragma mark - New in this class
 
 - (NSString *)stringWithNamesOfPeoplePresent
 {
     NSMutableString *returnString = [[NSMutableString alloc] init];
-    for (MCPerson *p in people) {
+    for (MCPerson *p in allPeople) {
         NSString *nameString = [[NSString alloc] initWithFormat:@"%@, ", [p getName]];
         [returnString appendString:nameString];
     }
@@ -27,15 +29,15 @@
 - (NSString *)stringOfApproxPeoplePresent
 {
     NSMutableString *returnString = [[NSMutableString alloc] init];
-    if ([people count] == 0) {
+    if ([allPeople count] == 0) {
         return @"No people present.";
-    } else if ([people count] == 1) {
-        return [[people objectAtIndex:0] getName];
-    } else if ([people count] == 2) {
-        [returnString appendFormat:@"%@ and %@", [[people objectAtIndex:0] getName], [[people objectAtIndex:1] getName]];
+    } else if ([allPeople count] == 1) {
+        return [[allPeople objectAtIndex:0] getName];
+    } else if ([allPeople count] == 2) {
+        [returnString appendFormat:@"%@ and %@", [[allPeople objectAtIndex:0] getName], [[allPeople objectAtIndex:1] getName]];
         return returnString;
-    } else if ([people count] >= 3) {
-        [returnString appendFormat:@"%@, %@ and others", [[people objectAtIndex:0] getName], [[people objectAtIndex:1] getName]];
+    } else if ([allPeople count] >= 3) {
+        [returnString appendFormat:@"%@, %@ and others", [[allPeople objectAtIndex:0] getName], [[allPeople objectAtIndex:1] getName]];
         return returnString;
     } else {
         @throw [NSException exceptionWithName:@"Negative amount of people." reason:@"Should not be possible." userInfo:nil];
@@ -46,46 +48,41 @@
 - (NSUInteger)addPerson:(MCPerson *)newPerson
 {
     // add a person to the array of people and return it's row number.
-    [people addObject:newPerson];
-    return [people indexOfObject:newPerson];
+    [allPeople addObject:newPerson];
+    return [allPeople indexOfObject:newPerson];
 }
 
 - (void)removePerson:(MCPerson *)awfulPerson
 {
     // remove a person from the array of people
     [awfulPerson removePictureData];
-    [people removeObject:awfulPerson];
+    [allPeople removeObject:awfulPerson];
 }
 
 - (void)replacePerson:(MCPerson *)awfulPerson withPerson:(MCPerson *)sweetPerson
 {
     // Replace the person with a new one.
-    NSUInteger indexOfPerson = [people indexOfObject:awfulPerson];
-    [people replaceObjectAtIndex:indexOfPerson withObject:sweetPerson];
+    NSUInteger indexOfPerson = [allPeople indexOfObject:awfulPerson];
+    [allPeople replaceObjectAtIndex:indexOfPerson withObject:sweetPerson];
 }
 
 - (void)changeIdentity:(MCPerson *)oldPersonality withIdentity:(MCPerson *)newPersonality
 {
-    [oldPersonality setFirstName:[newPersonality firstName]];
-    [oldPersonality setLastName:[newPersonality lastName]];
-    [oldPersonality setEmailAddress:[newPersonality emailAddress]];
-    [oldPersonality setAllEmailAddressesFromAddressBook:[newPersonality allEmailAddressesFromAddressBook]];
-    [oldPersonality removePictureData];
-    @throw [NSException exceptionWithName:@"Not finished." reason:@"The pictures need to be moved to the oldPersonality object." userInfo:nil];
-}
-
-- (NSArray *)allPeople
-{
-    // Return allPeople as an array.
-    return people;
+    // bla bla bla dit is poep.
+    MCPerson *newPerson = [oldPersonality copyWithZone:nil];
+    [newPerson setFirstName:[newPersonality firstName]];
+    [newPerson setLastName:[newPersonality lastName]];
+    [newPerson setEmailAddress:[newPersonality emailAddress]];
+    [newPerson setAllEmailAddressesFromAddressBook:[newPersonality allEmailAddressesFromAddressBook]];
+    [newPerson removePictureData];
 }
 
 - (BOOL)areTherePeople
 {
-    if (people == nil) {
+    if (allPeople == nil) {
         return NO;
     } else {
-        if ([people count] == 0) {
+        if ([allPeople count] == 0) {
             return NO;
         } else {
             return YES;
@@ -115,7 +112,7 @@
 - (BOOL)doesEveryoneHaveAMailAddress
 {
     BOOL theResult = YES;
-    for (MCPerson *p in people) {
+    for (MCPerson *p in allPeople) {
         if (![p emailAddress]) {
             theResult = NO;
             NSLog(@"%@ %@ has no mail address.", [p firstName], [p lastName]);
@@ -127,7 +124,7 @@
 - (NSArray *)whoHasNoMailAddress
 {
     NSMutableArray *peopleWithNoMailAddress = [[NSMutableArray alloc] init];
-    for (MCPerson *p in people) {
+    for (MCPerson *p in allPeople) {
         if (![p emailAddress]) {
             NSLog(@"%@ %@ has no mail address.", [p firstName], [p lastName]);
             [peopleWithNoMailAddress addObject:p];
@@ -143,7 +140,7 @@
     self = [super init];
     
     if (self) {
-        people = [[NSMutableArray alloc] init];
+        allPeople = [[NSMutableArray alloc] init];
     }
     
     return self;
@@ -153,7 +150,7 @@
 
 - (void)encodeWithCoder:(NSCoder *)aCoder
 {
-    [aCoder encodeObject:people forKey:@"people"];
+    [aCoder encodeObject:allPeople forKey:@"people"];
 }
 
 - (id)initWithCoder:(NSCoder *)aDecoder
@@ -161,9 +158,22 @@
     self = [super init];
     
     if (self) {
-        people = [aDecoder decodeObjectForKey:@"people"];
+        allPeople = [aDecoder decodeObjectForKey:@"people"];
     }
     return self;
+}
+
+#pragma mark - NSCopying
+
+- (id)copyWithZone:(NSZone *)zone
+{
+    MCPeople *dublicate = [super init];
+    
+    if (dublicate) {
+        [dublicate setAllPeople:[allPeople copyWithZone:nil]];
+        
+    }
+    return dublicate;
 }
 
 @end

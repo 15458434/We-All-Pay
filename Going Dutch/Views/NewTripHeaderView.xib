@@ -83,7 +83,6 @@
 						<int key="IBUIContentVerticalAlignment">0</int>
 						<string key="IBUIText"/>
 						<int key="IBUIBorderStyle">3</int>
-						<string key="IBUIPlaceholder">Description of the receipt(s).</string>
 						<object class="NSColor" key="IBUITextColor">
 							<int key="NSColorSpace">3</int>
 							<bytes key="NSWhite">MAA</bytes>
@@ -100,13 +99,13 @@
 							<bool key="IBUIEnablesReturnKeyAutomatically">YES</bool>
 							<string key="targetRuntimeIdentifier">IBCocoaTouchFramework</string>
 						</object>
-						<object class="IBUIFontDescription" key="IBUIFontDescription" id="252054772">
+						<object class="IBUIFontDescription" key="IBUIFontDescription" id="623049460">
 							<string key="name">HelveticaNeue-Medium</string>
 							<string key="family">Helvetica Neue</string>
 							<int key="traits">0</int>
 							<double key="pointSize">17</double>
 						</object>
-						<object class="NSFont" key="IBUIFont" id="477652331">
+						<object class="NSFont" key="IBUIFont" id="787125367">
 							<string key="NSName">HelveticaNeue-Medium</string>
 							<double key="NSSize">17</double>
 							<int key="NSfFlags">16</int>
@@ -118,6 +117,7 @@
 						<string key="NSFrame">{{28, 68}, {272, 21}}</string>
 						<reference key="NSSuperview" ref="167885755"/>
 						<reference key="NSWindow"/>
+						<reference key="NSNextKeyView"/>
 						<string key="NSReuseIdentifierKey">_NS:9</string>
 						<bool key="IBUIOpaque">NO</bool>
 						<bool key="IBUIClipsSubviews">YES</bool>
@@ -132,8 +132,8 @@
 						</object>
 						<nil key="IBUIHighlightedColor"/>
 						<int key="IBUIBaselineAdjustment">0</int>
-						<reference key="IBUIFontDescription" ref="252054772"/>
-						<reference key="IBUIFont" ref="477652331"/>
+						<reference key="IBUIFontDescription" ref="623049460"/>
+						<reference key="IBUIFont" ref="787125367"/>
 						<bool key="IBUIAdjustsFontSizeToFit">NO</bool>
 					</object>
 				</array>

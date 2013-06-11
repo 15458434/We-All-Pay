@@ -37,7 +37,6 @@
 - (void)setPicture:(UIImage *)image;
 - (void)removePictureData;
 
-
 + (MCPerson *)createRandomPerson;
 
 @end

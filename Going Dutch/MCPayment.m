@@ -77,6 +77,16 @@
     return self;
 }
 
+- (BOOL)setTimePaid:(NSDate *)tp
+{
+    if (![self timePaid]) {
+        self.timePaid = tp;
+        return YES;
+    } else {
+        return NO;
+    }
+}
+
 #pragma mark - Inherited From Super
 
 - (id)init
@@ -124,6 +134,22 @@
         timePaid = [aDecoder decodeObjectForKey:@"timePaid"];
     }
     return self;
+}
+
+#pragma mark - NSCopying
+
+- (id)copyWithZone:(NSZone *)zone
+{
+    MCPayment *dublicate = [super init];
+    
+    if (dublicate) {
+        [dublicate setUniquePaymentID:[uniquePaymentID copy]];
+        [dublicate setMoney:money];
+        [dublicate setPayingPerson:[payingPerson copy]];
+        [dublicate setPlace:[place copy]];
+        [dublicate setTimePaid:timePaid];
+    }
+    return dublicate;
 }
 
 @end

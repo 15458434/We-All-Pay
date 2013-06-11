@@ -12,7 +12,7 @@
 @class MCPeople;
 @class MCPerson;
 
-@interface MCPayment : NSObject <NSCoding>
+@interface MCPayment : NSObject <NSCoding, NSCopying>
 {
     NSString *uniquePaymentID;
     double money;
@@ -33,5 +33,6 @@
 - (id)initWithPerson:(MCPerson *)person place:(NSString *)location money:(double)currency;
 
 - (double)amountPeopleShouldHavePaid:(NSArray *)peoplePresent;
+- (BOOL)setTimePaid:(NSDate *)tp;
 
 @end

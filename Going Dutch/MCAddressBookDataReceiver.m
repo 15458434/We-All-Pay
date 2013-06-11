@@ -12,12 +12,16 @@
 @implementation MCAddressBookDataReceiver
 
 @synthesize delegate;
+@synthesize editedPerson;
 
 #pragma mark - New in this class.
 
 - (void)getPersonData:(ABRecordRef)person
 {
-    editedPerson = [[MCPerson alloc] init];
+    if (!editedPerson) {
+        editedPerson = [[MCPerson alloc] init];
+    }
+    [editedPerson removePictureData];
     [editedPerson setThumbnail:[UIImage imageWithData:(__bridge_transfer NSData *)ABPersonCopyImageDataWithFormat(person, kABPersonImageFormatThumbnail)]];
     [editedPerson setPicture:[UIImage imageWithData:(__bridge_transfer NSData *)ABPersonCopyImageDataWithFormat(person, kABPersonImageFormatOriginalSize)]];
     [editedPerson setFirstName:(__bridge_transfer NSString *)ABRecordCopyValue(person, kABPersonFirstNameProperty)];
