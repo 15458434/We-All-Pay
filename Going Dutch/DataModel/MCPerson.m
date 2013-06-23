@@ -165,7 +165,7 @@
     [dublicate setLastName:[[self lastName ] copy]];
     [dublicate setEmailAddress:[[self emailAddress] copy]];
     [dublicate setAllEmailAddressesFromAddressBook:[[self allEmailAddressesFromAddressBook] copy]];
-    // This one is not copied, but retrieved again from the store.
+    // This one is not copied, but retrieved again from the store, when needed.
     // imageObjectFromStore = [[MCImageStoreController sharedStore] fetchImageFromPersonWithId:[self uniquePersonId]];
     
     

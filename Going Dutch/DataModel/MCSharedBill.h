@@ -24,11 +24,13 @@
 - (void)addPayment:(MCPayment *)newPayment;
 - (void)removePayment:(MCPayment *)removePayment;
 - (void)removePerson:(MCPerson *)awfulPerson;
+- (void)replacePerson:(MCPerson *)awfulperson withBetterPerson:(MCPerson *)nicePerson;
 - (NSArray *)solveWhoHasToPayWhoFromThisBill;
 - (double)totalSumOfMoneyOfThisSharedBill;
 - (double)totalSumPaidBy:(MCPerson *)person;
 - (double)amountPeopleShouldHavePaid;
 - (BOOL)hasPersonPaidSomething:(MCPerson *)person;
+- (NSArray *)whatHasPersonPaid:(MCPerson *)person;
 - (NSUInteger)totalAmountOfPeople;
 - (NSUInteger)totalAmountOfPeopleWhoHavePaid;
 

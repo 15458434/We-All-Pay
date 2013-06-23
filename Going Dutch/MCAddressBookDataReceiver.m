@@ -20,8 +20,9 @@
 {
     if (!editedPerson) {
         editedPerson = [[MCPerson alloc] init];
+    } else {
+        [editedPerson removePictureData];
     }
-    [editedPerson removePictureData];
     [editedPerson setThumbnail:[UIImage imageWithData:(__bridge_transfer NSData *)ABPersonCopyImageDataWithFormat(person, kABPersonImageFormatThumbnail)]];
     [editedPerson setPicture:[UIImage imageWithData:(__bridge_transfer NSData *)ABPersonCopyImageDataWithFormat(person, kABPersonImageFormatOriginalSize)]];
     [editedPerson setFirstName:(__bridge_transfer NSString *)ABRecordCopyValue(person, kABPersonFirstNameProperty)];

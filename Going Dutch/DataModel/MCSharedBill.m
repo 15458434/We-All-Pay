@@ -92,7 +92,7 @@
 {
     double total = 0.0;
     for (MCPayment *p in payments) {
-        if (person == [p payingPerson]) {
+        if ([[person uniquePersonId] isEqualToString:[[p payingPerson] uniquePersonId]]) {
             total += [p money];
         }
     }
@@ -147,14 +147,37 @@
     [payments removeObject:removePayment];
 }
 
+- (void)replacePerson:(MCPerson *)awfulperson withBetterPerson:(MCPerson *)nicePerson
+{
+    for (MCPayment *p in payments) {
+        if (awfulperson == [p payingPerson]) {
+            [p setPayingPerson:nicePerson];
+        }
+        [people replacePerson:awfulperson withPerson:nicePerson];
+    }
+}
+
 - (BOOL)hasPersonPaidSomething:(MCPerson *)person
 {
     for (MCPayment *iPayment in payments) {
         if (person == [iPayment payingPerson]) {
             return YES;
+        } else if ([[person uniquePersonId] isEqualToString:[[iPayment payingPerson] uniquePersonId]]) {
+            return YES;
         }
     }
     return NO;
+}
+
+- (NSArray *)whatHasPersonPaid:(MCPerson *)person
+{
+    NSMutableArray *paidByPeron = [[NSMutableArray alloc] init];
+    for (MCPayment *p in payments) {
+        if (person == [p payingPerson]) {
+            [paidByPeron addObject:p];
+        }
+    }
+    return paidByPeron;
 }
 
 - (double)money

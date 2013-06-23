@@ -33,30 +33,34 @@
 - (void)addPerson:(id)selector
 {
     MCPerson *newPerson = [[MCPerson alloc] init];
-    [[tonightsBill people] addPerson:newPerson];
+    [editedPeople addPerson:newPerson];
     [self updateSubLabel];
     MCPersonViewController *pvc = [[MCPersonViewController alloc] initWithPerson:newPerson];
     [pvc setIsNew:YES];
     [[self navigationController] pushViewController:pvc animated:YES];
-    NSInteger lastRow = [[[tonightsBill people] allPeople] indexOfObject:newPerson];
+    NSInteger lastRow = [[editedPeople allPeople] indexOfObject:newPerson];
     NSIndexPath *ip = [NSIndexPath indexPathForRow:lastRow inSection:0];
     [[self tableView] insertRowsAtIndexPaths:[NSArray arrayWithObject:ip] withRowAnimation:UITableViewRowAnimationTop];
 }
 
 - (void)doneAddingPeople:(id)selector
 {
-    if ([[tonightsBill people] areTherePeople]) {
+    if ([editedPeople areTherePeople]) {
         [tonightsBill setTripName:tripName];
+        [editedPeople setEditing:NO];
+        [tonightsBill setPeople:editedPeople];
         [[self presentingViewController] dismissViewControllerAnimated:YES completion:dismissblock];
     }
 }
 
 - (void)doneEditingTrip:(id)selector
 {
-    if ([[tonightsBill people] areTherePeople]) {
+    if ([editedPeople areTherePeople]) {
         if (tripName) {
             [tonightsBill setTripName:tripName];
         }
+        [editedPeople setEditing:NO];
+        [tonightsBill setPeople:editedPeople];
         [[self navigationController] popViewControllerAnimated:YES];
     } else {
         UIAlertView *noPeoplePresentMessage = [[UIAlertView alloc] initWithTitle:@"No people present on this bill."
@@ -76,7 +80,6 @@
 
 - (void)cancelEditTrip:(id)selector
 {
-    NSLog(@"Cancel Edit Trip pressed");
     [[self navigationController] popViewControllerAnimated:YES];
 }
 
@@ -103,6 +106,13 @@
 
 #pragma mark - new in this class.
 
+- (void)setTonightsBill:(MCSharedBill *)tBill
+{
+    tonightsBill = tBill;
+    editedPeople = [[tonightsBill people] copy];
+    [editedPeople setEditing:YES];
+}
+
 - (UIView *)NewTripHeaderView
 {
     if (!newTripHeaderView) {
@@ -118,6 +128,8 @@
     if (self) {
         if (newBill) {
             tonightsBill = newBill;
+            editedPeople = [[tonightsBill people] copy];
+            [editedPeople setEditing:YES];
         } else {
             @throw [NSException exceptionWithName:@"Nil"
                                            reason:@"Tonightsbill not allowed to be nil"
@@ -130,42 +142,12 @@
     return self;
 }
 
-- (void)getPersonData:(ABRecordRef)person
-{
-    MCPerson *newPerson = [[MCPerson alloc] init];
-    [newPerson setThumbnail:[UIImage imageWithData:(__bridge_transfer NSData *)ABPersonCopyImageDataWithFormat(person, kABPersonImageFormatThumbnail)]];
-    [newPerson setPicture:[UIImage imageWithData:(__bridge_transfer NSData *)ABPersonCopyImageDataWithFormat(person, kABPersonImageFormatOriginalSize)]];
-    [newPerson setFirstName:(__bridge_transfer NSString *)ABRecordCopyValue(person, kABPersonFirstNameProperty)];
-    [newPerson setLastName:(__bridge_transfer NSString *)ABRecordCopyValue(person, kABPersonLastNameProperty)];
-    ABMultiValueRef emailAddresses = ABRecordCopyValue(person, kABPersonEmailProperty);
-    if (ABMultiValueGetCount(emailAddresses)) {
-        NSMutableArray *allEmailAddresses= [[NSMutableArray alloc] init];
-        for (NSUInteger i = 0; i < ABMultiValueGetCount(emailAddresses); i++) {
-            NSString *emailAddressForArray=(__bridge_transfer NSString *)ABMultiValueCopyValueAtIndex(emailAddresses, i);
-            [allEmailAddresses addObject:emailAddressForArray];
-            [newPerson setAllEmailAddressesFromAddressBook:allEmailAddresses];
-        }
-        [newPerson setEmailAddress:(__bridge_transfer NSString *)ABMultiValueCopyValueAtIndex(emailAddresses, 0)];
-    } else {
-        [newPerson setEmailAddress:nil];
-    }
-    CFRelease(emailAddresses);
-    [[tonightsBill people] addPerson:newPerson];
-    NSInteger rowOfNewPerson = [[[tonightsBill people] allPeople] indexOfObject:newPerson];
-    NSIndexPath *indexPathOfNewPerson = [NSIndexPath indexPathForRow:rowOfNewPerson inSection:0];
-    [[self tableView] insertRowsAtIndexPaths:[NSArray arrayWithObject:indexPathOfNewPerson] withRowAnimation:UITableViewRowAnimationTop];
-    if (!didSomethingChange) {
-        didSomethingChange = YES;
-        [[[self navigationItem] rightBarButtonItem] setEnabled:YES];
-    }
-}
-
 - (void)updateSubLabel
 {
     if ([tonightsBill totalAmountOfPeople] == 1) {
-        [[twoLabelTitleView subLabel] setText:[NSString stringWithFormat:@"%d person present", [tonightsBill totalAmountOfPeople]]];
+        [[twoLabelTitleView subLabel] setText:[NSString stringWithFormat:@"%d person present", [editedPeople howManyPeople]]];
     } else {
-        [[twoLabelTitleView subLabel] setText:[NSString stringWithFormat:@"%d people present", [tonightsBill totalAmountOfPeople]]];
+        [[twoLabelTitleView subLabel] setText:[NSString stringWithFormat:@"%d people present", [editedPeople howManyPeople]]];
     }
 }
 
@@ -275,7 +257,10 @@
 
 - (void)sendDidSomethingChange:(BOOL)value
 {
-    didSomethingChange = value;
+    if(!didSomethingChange && value) {
+        didSomethingChange = YES;
+        [[[self navigationItem] rightBarButtonItem] setEnabled:YES];
+    }
     [[self tableView] reloadData];
 }
 
@@ -304,10 +289,11 @@
 
 - (void)receiveANewPersonFromAddressBook:(MCPerson *)newPerson
 {
-    NSUInteger rowNumber = [[tonightsBill people] addPerson:newPerson];
+    NSUInteger rowNumber = [editedPeople addPerson:newPerson];
     NSIndexPath *ip = [NSIndexPath indexPathForItem:rowNumber inSection:0];
     [[self tableView] insertRowsAtIndexPaths:[NSArray arrayWithObject:ip] withRowAnimation:UITableViewRowAnimationTop];
     didSomethingChange = YES;
+    [personReceiver setEditedPerson:nil];
     [[[self navigationItem] rightBarButtonItem] setEnabled:YES];
 }
 
@@ -316,7 +302,7 @@
 - (BOOL)textFieldShouldReturn:(UITextField *)textField
 {
     [textField resignFirstResponder];
-    if ([[[tonightsBill people] allPeople] count] == 0) {
+    if ([[editedPeople allPeople] count] == 0) {
         if (kABAuthorizationStatusAuthorized == ABAddressBookGetAuthorizationStatus() ||
             kABAuthorizationStatusNotDetermined == ABAddressBookGetAuthorizationStatus()) {
             [self getPeopleFromAddressBook:self];
@@ -347,12 +333,12 @@
 - (NSInteger)tableView:(UITableView *)tableView numberOfRowsInSection:(NSInteger)section
 {
     // Return the number of rows in the section.
-    return [[[tonightsBill people] allPeople] count];
+    return [[editedPeople allPeople] count];
 }
 
 - (UITableViewCell *)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath
 {
-    MCPerson *thisCellsPerson = [[[tonightsBill people] allPeople] objectAtIndex:[indexPath row]];
+    MCPerson *thisCellsPerson = [[editedPeople allPeople] objectAtIndex:[indexPath row]];
     MCPersonTableViewCell *thisCell = [tableView dequeueReusableCellWithIdentifier:@"MCPersonTableViewCell"];
     
     [[thisCell personImage] setImage:[thisCellsPerson thumbnail]];
@@ -378,7 +364,7 @@
 // Override to support conditional editing of the table view.
 - (BOOL)tableView:(UITableView *)tableView canEditRowAtIndexPath:(NSIndexPath *)indexPath
 {
-    MCPerson *person = [[[tonightsBill people] allPeople] objectAtIndex:[indexPath row]];
+    MCPerson *person = [[editedPeople allPeople] objectAtIndex:[indexPath row]];
     if ([tonightsBill hasPersonPaidSomething:person]) {
         return NO;
     } else {
@@ -391,9 +377,9 @@
 - (void)tableView:(UITableView *)tableView commitEditingStyle:(UITableViewCellEditingStyle)editingStyle forRowAtIndexPath:(NSIndexPath *)indexPath
 {
     if (editingStyle == UITableViewCellEditingStyleDelete) {
-        MCPerson *removablePerson = [[[tonightsBill people] allPeople] objectAtIndex:[indexPath row]];
+        MCPerson *removablePerson = [[editedPeople allPeople] objectAtIndex:[indexPath row]];
         if (![tonightsBill hasPersonPaidSomething:removablePerson]) {
-            [tonightsBill removePerson:removablePerson];
+            [editedPeople removePerson:removablePerson];
             [self updateSubLabel];
             NSArray *indexPaths = [[NSArray alloc] initWithObjects:indexPath, nil];
             [[self tableView] deleteRowsAtIndexPaths:indexPaths withRowAnimation:UITableViewRowAnimationTop];
@@ -428,7 +414,7 @@
 
 - (void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath
 {
-    MCPerson *selectedPerson = [[[tonightsBill people] allPeople] objectAtIndex:[indexPath row]];
+    MCPerson *selectedPerson = [[editedPeople allPeople] objectAtIndex:[indexPath row]];
     MCPersonViewController *pvc = [[MCPersonViewController alloc] initWithPerson:selectedPerson];
     [pvc setTonightsBill:tonightsBill];
     [pvc setChangeFlagDelegate:self];

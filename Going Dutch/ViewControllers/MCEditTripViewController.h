@@ -24,7 +24,7 @@
     
     MCAddressBookDataReceiver *personReceiver;
     
-    MCSharedBill *tonightsBill;
+    MCPeople *editedPeople;
     BOOL isInitAsNew;
     NSString *tripName;
 }

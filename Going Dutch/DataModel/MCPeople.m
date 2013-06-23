@@ -55,7 +55,11 @@
 - (void)removePerson:(MCPerson *)awfulPerson
 {
     // remove a person from the array of people
-    [awfulPerson removePictureData];
+    if (!removedPeople) {
+        [awfulPerson removePictureData];
+    } else {
+        [removedPeople addObject:awfulPerson];
+    }
     [allPeople removeObject:awfulPerson];
 }
 
@@ -133,6 +137,37 @@
     return peopleWithNoMailAddress;
 }
 
+- (NSUInteger)howManyPeople
+{
+    return [allPeople count];
+}
+
+- (void)setEditing:(BOOL)editing
+{
+    if (editing) {
+        if (!removedPeople) {
+            removedPeople = [[NSMutableArray alloc] init];
+        }
+    } else {
+        if (removedPeople) {
+            // When editing switched off remove pictures and throw away removePeople array.
+            for (MCPerson *p in removedPeople) {
+                [p removePictureData];
+            }
+        }
+        removedPeople = nil;
+    }
+}
+
+- (BOOL)editing
+{
+    if (removedPeople) {
+        return YES;
+    } else {
+        return NO;
+    }
+}
+
 #pragma mark - Inherited from super class.
 
 - (id)init
@@ -167,11 +202,9 @@
 
 - (id)copyWithZone:(NSZone *)zone
 {
-    MCPeople *dublicate = [super init];
-    
-    if (dublicate) {
-        [dublicate setAllPeople:[allPeople copyWithZone:nil]];
-        
+    MCPeople *dublicate = [[MCPeople alloc] init];
+    for (MCPerson *p in allPeople) {
+        [dublicate addPerson:[p copy]];
     }
     return dublicate;
 }

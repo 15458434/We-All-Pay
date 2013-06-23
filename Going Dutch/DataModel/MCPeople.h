@@ -12,7 +12,7 @@
 
 @interface MCPeople : NSObject <NSCoding, NSCopying>
 {
-    
+    NSMutableArray *removedPeople;
 }
 
 @property (nonatomic, strong) NSMutableArray *allPeople;
@@ -22,11 +22,14 @@
 - (void)replacePerson:(MCPerson *)awfulPerson withPerson:(MCPerson *)sweetPerson;
 - (void)changeIdentity:(MCPerson *)oldPersonality withIdentity:(MCPerson *)newPersonality;
 - (BOOL)areTherePeople;
+- (NSUInteger)howManyPeople;
 - (BOOL)isPersonWithNamePresent:(MCPerson *)person;
 - (NSString *)stringWithNamesOfPeoplePresent;
 - (NSString *)stringOfApproxPeoplePresent;
 - (BOOL)doesEveryoneHaveAMailAddress;
 - (NSArray *)whoHasNoMailAddress;
+- (void)setEditing:(BOOL)editing;
+- (BOOL)editing;
 
 + (MCPeople *)createTestGroup;
 
