@@ -183,8 +183,9 @@
     if (editingStyle == UITableViewCellEditingStyleDelete) {
         MCAllTripsStore *allTripStore = [MCAllTripsStore sharedList];
         [allTripStore removeTrip:[[allTripStore allTrips] objectAtIndex:[indexPath row]]];
+        NSArray *indexPaths = [[NSArray alloc] initWithObjects:indexPath, nil];
+        [[self tableView] deleteRowsAtIndexPaths:indexPaths withRowAnimation:UITableViewRowAnimationTop];
     }
-    [[self tableView] reloadData];
 }
 
 /*

@@ -358,8 +358,9 @@
     if (editingStyle == UITableViewCellEditingStyleDelete) {
         MCPayment *toBeDeletedPayment = [[tonightsBill allPayments] objectAtIndex:[indexPath row]];
         [tonightsBill removePayment:toBeDeletedPayment];
+        NSArray *indexPaths = [[NSArray alloc] initWithObjects:indexPath, nil];
+        [[self tableView] deleteRowsAtIndexPaths:indexPaths withRowAnimation:UITableViewRowAnimationTop];
     }
-    [[self tableView] reloadData];
 }
 
 

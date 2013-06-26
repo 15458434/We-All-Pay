@@ -68,14 +68,17 @@
     // Restore Paidview and resignFirstResponder.
     NSNumberFormatter *nf = [[NSNumberFormatter alloc] init];
     [nf setNumberStyle:NSNumberFormatterCurrencyStyle];
-    [paidView setText:[nf stringFromNumber:[[NSNumber alloc] initWithDouble:[thisPayment money]]]];
+    if ([paidViewNumber isEqualToNumber:[NSNumber numberWithDouble:[thisPayment money]]]) {
+        paidViewNumber = [NSNumber numberWithDouble:[thisPayment money]];
+    }
+    [paidView setText:[nf stringFromNumber:paidViewNumber]];
     [paidView resignFirstResponder];
 }
 
 - (void)doneNumberPad:(id)selector
 {
     NSNumberFormatter *nf = [[NSNumberFormatter alloc] init];
-    [nf setFormatterBehavior:NSNumberFormatterBehaviorDefault];
+    // [nf setFormatterBehavior:NSNumberFormatterBehaviorDefault];
     [nf setLocale:[NSLocale currentLocale]];
     [nf setNumberStyle:NSNumberFormatterDecimalStyle];
     paidViewNumber = [nf numberFromString:[paidView text]];
@@ -194,7 +197,6 @@
 {
     if (textField == paidView) {
         if (switchInputField) {
-            switchInputField = NO;
             NSNumberFormatter *nf = [[NSNumberFormatter alloc] init];
             [nf setFormatterBehavior:NSNumberFormatterBehaviorDefault];
             [nf setLocale:[NSLocale currentLocale]];
@@ -205,16 +207,10 @@
             [paidView setText:[nf stringFromNumber:paidViewNumber]];
             didSomethingChange = YES;
             [[[self navigationItem] rightBarButtonItem] setEnabled:YES];
-            return YES;
-        } else {
-            return NO;
-        }
-    } else {
-        if (switchInputField) {
             switchInputField = NO;
-        }
-        return YES;
+        } 
     }
+    return YES;
 }
 
 #pragma mark - Inherited from super
