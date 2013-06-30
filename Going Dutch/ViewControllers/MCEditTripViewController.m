@@ -287,6 +287,11 @@
 
 #pragma mark - MCAddressBookReceiverDelegate
 
+- (BOOL) isNewPersonFromAddressBookAlreadyPresent:(MCPerson *)newPerson
+{
+    return [editedPeople isPersonPresent:newPerson];
+}
+
 - (void)receiveANewPersonFromAddressBook:(MCPerson *)newPerson
 {
     NSUInteger rowNumber = [editedPeople addPerson:newPerson];

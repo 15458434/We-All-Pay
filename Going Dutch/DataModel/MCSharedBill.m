@@ -132,6 +132,16 @@
     return [people areTherePeople];
 }
 
+- (BOOL)addPerson:(MCPerson *)newPerson
+{
+    if ([people isPersonPresent:newPerson]) {
+        return NO;
+    } else {
+        [people addPerson:newPerson];
+        return YES;
+    }
+}
+
 - (void)removePerson:(MCPerson *)awfulPerson
 {
     [people removePerson:awfulPerson];

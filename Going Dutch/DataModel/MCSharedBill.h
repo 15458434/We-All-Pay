@@ -21,6 +21,7 @@
 - (id)initWithTestGroup;
 - (NSArray *)allPayments;
 - (BOOL)areTherePeople;
+- (BOOL)addPerson:(MCPerson *)newPerson;
 - (void)addPayment:(MCPayment *)newPayment;
 - (void)removePayment:(MCPayment *)removePayment;
 - (void)removePerson:(MCPerson *)awfulPerson;

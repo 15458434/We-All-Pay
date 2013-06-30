@@ -23,7 +23,7 @@
 - (void)changeIdentity:(MCPerson *)oldPersonality withIdentity:(MCPerson *)newPersonality;
 - (BOOL)areTherePeople;
 - (NSUInteger)howManyPeople;
-- (BOOL)isPersonWithNamePresent:(MCPerson *)person;
+- (BOOL)isPersonPresent:(MCPerson *)person;
 - (NSString *)stringWithNamesOfPeoplePresent;
 - (NSString *)stringOfApproxPeoplePresent;
 - (BOOL)doesEveryoneHaveAMailAddress;

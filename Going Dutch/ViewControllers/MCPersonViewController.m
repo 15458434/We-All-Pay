@@ -173,6 +173,11 @@
 
 #pragma mark - MCAddressBookReceiverDelegate
 
+- (BOOL)isNewPersonFromAddressBookAlreadyPresent:(MCPerson *)newPerson
+{
+    return [[tonightsBill people] isPersonPresent:newPerson];
+}
+
 - (void)receiveANewPersonFromAddressBook:(MCPerson *)newPerson
 {
     firstName = [newPerson firstName];
@@ -238,7 +243,7 @@
     }
     
     [[[self navigationItem] rightBarButtonItem] setEnabled:didSomethingChange];
-    [addressBookButton setEnabled:thisPersonHasPaidSomething];
+    [addressBookButton setEnabled:!thisPersonHasPaidSomething];
     [[self navigationController] setToolbarHidden:NO animated:animated];
     [firstNameField setText:firstName];
     [lastNameField setText:lastName];

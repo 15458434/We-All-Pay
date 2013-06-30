@@ -40,7 +40,6 @@
         [editedPerson setEmailAddress:nil];
     }
     CFRelease(emailAddresses);
-    [delegate receiveANewPersonFromAddressBook:editedPerson];
 }
 
 #pragma mark - Inherited from super.
@@ -83,8 +82,13 @@
 - (BOOL)peoplePickerNavigationController:(ABPeoplePickerNavigationController *)peoplePicker shouldContinueAfterSelectingPerson:(ABRecordRef)person
 {
     [self getPersonData:person];
-    [[[viewController navigationItem] rightBarButtonItem] setEnabled:YES];
-    [viewController dismissViewControllerAnimated:YES completion:nil];
+    if ([delegate isNewPersonFromAddressBookAlreadyPresent:editedPerson]) {
+        return YES;
+    } else {
+        [delegate receiveANewPersonFromAddressBook:editedPerson];
+        [[[viewController navigationItem] rightBarButtonItem] setEnabled:YES];
+        [viewController dismissViewControllerAnimated:YES completion:nil];
+    }
     return NO;
 }
 

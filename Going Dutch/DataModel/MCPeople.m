@@ -98,10 +98,34 @@
     }
 }
 
-- (BOOL)isPersonWithNamePresent:(MCPerson *)person
+- (BOOL)isPersonPresent:(MCPerson *)person
 {
-    @throw [NSException exceptionWithName:@"Error" reason:@"isPersonWithNamePresent not implemented yet" userInfo:nil];
-    return NO;
+    BOOL sameFirstName;
+    BOOL sameLastName;
+    BOOL sameEmailAddresses;
+    for (MCPerson *p in allPeople) {
+        sameFirstName = [[p firstName] isEqualToString:[person firstName]];
+        sameLastName = [[p lastName] isEqualToString:[person lastName]];
+        sameEmailAddresses = NO;
+        NSUInteger *amountOfSameEmailAddresses = 0;
+        for (NSString *ep in [p allEmailAddressesFromAddressBook]) {
+            for (NSString *ePerson in [person allEmailAddressesFromAddressBook]) {
+                if ([ep isEqualToString:ePerson]) {
+                    amountOfSameEmailAddresses++;
+                }
+            }
+        }
+        if (amountOfSameEmailAddresses > 0) {
+            sameEmailAddresses = YES;
+            break;
+        }
+    }
+    if (sameFirstName && sameLastName && sameEmailAddresses) {
+        return YES;
+    } else {
+        return NO;
+    }
+    
 }
 
 + (MCPeople *)createTestGroup
