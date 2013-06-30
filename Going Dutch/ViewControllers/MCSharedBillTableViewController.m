@@ -127,6 +127,13 @@
     return self;
 }
 
+- (void)updateSubLabel
+{
+    NSNumberFormatter *nf = [[NSNumberFormatter alloc] init];
+    [nf setNumberStyle:NSNumberFormatterCurrencyStyle];
+    [[twoLabelTitleView subLabel] setText:[NSString stringWithFormat:@"Total spent: %@", [nf stringFromNumber:[NSNumber numberWithDouble:[tonightsBill totalSumOfMoneyOfThisSharedBill]]]]];
+}
+
 #pragma mark - Inherited from super class.
 
 - (id)init
@@ -166,9 +173,7 @@
         [[self navigationItem] setTitleView:twoLabelTitleView];
     }
     [[twoLabelTitleView mainLabel] setText:[tonightsBill tripName]];
-    NSNumberFormatter *nf = [[NSNumberFormatter alloc] init];
-    [nf setNumberStyle:NSNumberFormatterCurrencyStyle];
-    [[twoLabelTitleView subLabel] setText:[NSString stringWithFormat:@"Total spent: %@", [nf stringFromNumber:[NSNumber numberWithDouble:[tonightsBill totalSumOfMoneyOfThisSharedBill]]]]];
+    [self updateSubLabel];
     [[self navigationItem] setTitleView:twoLabelTitleView];
     
     [[self navigationController] setToolbarHidden:NO animated:YES];
@@ -360,9 +365,9 @@
         [tonightsBill removePayment:toBeDeletedPayment];
         NSArray *indexPaths = [[NSArray alloc] initWithObjects:indexPath, nil];
         [[self tableView] deleteRowsAtIndexPaths:indexPaths withRowAnimation:UITableViewRowAnimationTop];
+        [self updateSubLabel];
     }
 }
-
 
 /*
 // Override to support rearranging the table view.
