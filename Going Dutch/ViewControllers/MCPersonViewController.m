@@ -180,29 +180,6 @@
     return self;
 }
 
-/*- (void)getPersonData:(ABRecordRef)person
-{
-    editedPerson = [[MCPerson alloc] init];
-    [editedPerson setThumbnail:[UIImage imageWithData:(__bridge_transfer NSData *)ABPersonCopyImageDataWithFormat(person, kABPersonImageFormatThumbnail)]];
-    [editedPerson setPicture:[UIImage imageWithData:(__bridge_transfer NSData *)ABPersonCopyImageDataWithFormat(person, kABPersonImageFormatOriginalSize)]];
-    [editedPerson setFirstName:(__bridge_transfer NSString *)ABRecordCopyValue(person, kABPersonFirstNameProperty)];
-    [editedPerson setLastName:(__bridge_transfer NSString *)ABRecordCopyValue(person, kABPersonLastNameProperty)];
-    ABMultiValueRef emailAddresses = ABRecordCopyValue(person, kABPersonEmailProperty);
-    if (ABMultiValueGetCount(emailAddresses)) {
-        NSMutableArray *allEmailAddresses= [[NSMutableArray alloc] init];
-        for (NSUInteger i = 0; i < ABMultiValueGetCount(emailAddresses); i++) {
-            NSString *emailAddressForArray=(__bridge_transfer NSString *)ABMultiValueCopyValueAtIndex(emailAddresses, i);
-            [allEmailAddresses addObject:emailAddressForArray];
-        }
-        [editedPerson setEmailAddress:(__bridge_transfer NSString *)ABMultiValueCopyValueAtIndex(emailAddresses, 0)];
-    } else {
-        [editedPerson setEmailAddress:nil];
-    }
-    CFRelease(emailAddresses);
-    didSomethingChange = YES;
-    [[[self navigationItem] rightBarButtonItem] setEnabled:YES];
-}*/
-
 #pragma mark - Inherited from super.
 
 - (id)initWithNibName:(NSString *)nibNameOrNil bundle:(NSBundle *)nibBundleOrNil

@@ -66,14 +66,18 @@
 - (void)replacePerson:(MCPerson *)awfulPerson withPerson:(MCPerson *)sweetPerson
 {
     // Replace the person with a new one.
-    NSUInteger indexOfPerson = [allPeople indexOfObject:awfulPerson];
-    [allPeople replaceObjectAtIndex:indexOfPerson withObject:sweetPerson];
+    for (__strong MCPerson *p in allPeople) {
+        if ([[awfulPerson uniquePersonId] isEqualToString:[p uniquePersonId]]) {
+            [p removePictureData];
+            p = sweetPerson;
+        }
+    }
 }
 
 - (void)changeIdentity:(MCPerson *)oldPersonality withIdentity:(MCPerson *)newPersonality
 {
     // bla bla bla dit is poep.
-    MCPerson *newPerson = [oldPersonality copyWithZone:nil];
+    MCPerson *newPerson = [oldPersonality copy];
     [newPerson setFirstName:[newPersonality firstName]];
     [newPerson setLastName:[newPersonality lastName]];
     [newPerson setEmailAddress:[newPersonality emailAddress]];

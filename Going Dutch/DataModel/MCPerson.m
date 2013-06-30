@@ -125,10 +125,10 @@
     return self;
 }
 
-- (NSString *)description
+/*- (NSString *)description
 {
     return [self getName];
-}
+}*/
 
 #pragma mark - NSCoding
 

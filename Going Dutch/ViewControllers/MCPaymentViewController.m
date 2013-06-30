@@ -29,6 +29,15 @@
 
 - (void)backButtonPressed:(id)selector
 {
+    if ([payerView isFirstResponder]) {
+        [self donePersonPicker:self];
+    }
+    if ([paidView isFirstResponder]) {
+        [self doneNumberPad:self];
+    }
+    if ([placeView isFirstResponder]) {
+        [self storePlaceViewData];
+    }
     NSLog(@"MCPaymentViewController: Done button pressed.");
     if (didSomethingChange) {
         if (thisPayment != nil) {
@@ -98,6 +107,13 @@
     [[self navigationController] popViewControllerAnimated:YES];
 }
 
+- (void)storePlaceViewData
+{
+    [placeView resignFirstResponder];
+    didSomethingChange = YES;
+    [[[self navigationItem] rightBarButtonItem] setEnabled:YES];
+}
+
 #pragma mark - new in this class
 
 - (id)initWithExistingPayment:(MCPayment *)thePayment fromBill:(MCSharedBill *)bill
@@ -150,9 +166,7 @@
 - (BOOL)textFieldShouldReturn:(UITextField *)textField
 {
     if (textField == placeView) {
-        [textField resignFirstResponder];
-        didSomethingChange = YES;
-        [[[self navigationItem] rightBarButtonItem] setEnabled:YES];
+        [self storePlaceViewData];
     }
     return YES;
 }
@@ -185,7 +199,14 @@
 
 - (BOOL)textFieldShouldBeginEditing:(UITextField *)textField
 {
-    if ([paidView isFirstResponder] || [payerView isFirstResponder] || [placeView isFirstResponder]) {
+    if ([payerView isFirstResponder]) {
+        [self donePersonPicker:self];
+        switchInputField = YES;
+    } else if ([paidView isFirstResponder]) {
+        [self doneNumberPad:self];
+        switchInputField = YES;
+    } else if ([placeView isFirstResponder]) {
+        [self storePlaceViewData];
         switchInputField = YES;
     } else {
         switchInputField = NO;
