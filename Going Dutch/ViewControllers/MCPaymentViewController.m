@@ -86,17 +86,8 @@
 
 - (void)doneNumberPad:(id)selector
 {
-    NSNumberFormatter *nf = [[NSNumberFormatter alloc] init];
-    // [nf setFormatterBehavior:NSNumberFormatterBehaviorDefault];
-    [nf setLocale:[NSLocale currentLocale]];
-    [nf setNumberStyle:NSNumberFormatterDecimalStyle];
-    paidViewNumber = [nf numberFromString:[paidView text]];
-    
-    [nf setNumberStyle:NSNumberFormatterCurrencyStyle];
-    [paidView setText:[nf stringFromNumber:paidViewNumber]];
-    didSomethingChange = YES;
+    [self storeMoneySpent];
     [paidView resignFirstResponder];
-    [[[self navigationItem] rightBarButtonItem] setEnabled:YES];
 }
 
 - (void)cancelChangesForEntirePayment:(id)selector
@@ -112,6 +103,20 @@
     [placeView resignFirstResponder];
     didSomethingChange = YES;
     [[[self navigationItem] rightBarButtonItem] setEnabled:YES];
+}
+
+- (void)storeMoneySpent
+{
+    NSNumberFormatter *nf = [[NSNumberFormatter alloc] init];
+    // [nf setFormatterBehavior:NSNumberFormatterBehaviorDefault];
+    [nf setLocale:[NSLocale currentLocale]];
+    [nf setNumberStyle:NSNumberFormatterDecimalStyle];
+    paidViewNumber = [nf numberFromString:[paidView text]];
+    
+    [nf setNumberStyle:NSNumberFormatterCurrencyStyle];
+    [paidView setText:[nf stringFromNumber:paidViewNumber]];
+    [[[self navigationItem] rightBarButtonItem] setEnabled:YES];
+    didSomethingChange = YES;
 }
 
 #pragma mark - new in this class
@@ -199,39 +204,39 @@
 
 - (BOOL)textFieldShouldBeginEditing:(UITextField *)textField
 {
-    if ([payerView isFirstResponder]) {
-        [self donePersonPicker:self];
+    if ([payerView isFirstResponder] || [paidView isFirstResponder] || [placeView isFirstResponder]) {
         switchInputField = YES;
-    } else if ([paidView isFirstResponder]) {
-        [self doneNumberPad:self];
-        switchInputField = YES;
-    } else if ([placeView isFirstResponder]) {
-        [self storePlaceViewData];
-        switchInputField = YES;
+        return YES;
     } else {
         switchInputField = NO;
+        return YES;
     }
-    return YES;
 }
 
 - (BOOL)textFieldShouldEndEditing:(UITextField *)textField
 {
+    return YES;
+}
+
+- (void)textFieldDidEndEditing:(UITextField *)textField
+{
     if (textField == paidView) {
         if (switchInputField) {
-            NSNumberFormatter *nf = [[NSNumberFormatter alloc] init];
-            [nf setFormatterBehavior:NSNumberFormatterBehaviorDefault];
-            [nf setLocale:[NSLocale currentLocale]];
-            [nf setNumberStyle:NSNumberFormatterDecimalStyle];
-            paidViewNumber = [nf numberFromString:[paidView text]];
-            
-            [nf setNumberStyle:NSNumberFormatterCurrencyStyle];
-            [paidView setText:[nf stringFromNumber:paidViewNumber]];
-            didSomethingChange = YES;
-            [[[self navigationItem] rightBarButtonItem] setEnabled:YES];
+            [self storeMoneySpent];
             switchInputField = NO;
-        } 
+        }
+    } else if (textField == payerView) {
+        if (switchInputField) {
+            [self donePersonPicker:self];
+            switchInputField = NO;
+        }
+    } else if (textField == placeView) {
+        // Do something to store value of placeview.
+        if (switchInputField) {
+            [self storePlaceViewData];
+            switchInputField = NO;
+        }
     }
-    return YES;
 }
 
 #pragma mark - Inherited from super
