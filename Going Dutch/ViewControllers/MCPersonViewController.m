@@ -19,7 +19,6 @@
 @implementation MCPersonViewController
 
 @synthesize tonightsBill;
-@synthesize editedPerson;
 @synthesize changeFlagDelegate;
 @synthesize isNew;
 
@@ -33,7 +32,12 @@
 - (void)doneButtonPressed:(id)selector
 {
     [[self changeFlagDelegate] sendDidSomethingChange:YES];
-    [[tonightsBill people] replacePerson:thisPerson withPerson:editedPerson];
+    [thisPerson setFirstName:firstName];
+    [thisPerson setLastName:lastName];
+    [thisPerson setEmailAddress:emailAddress];
+    [thisPerson setAllEmailAddressesFromAddressBook:allEmailAddressesFromAddressBook];
+    [thisPerson setPicture:picture];
+    [thisPerson setThumbnail:thumbnail];
     [[self navigationController] popViewControllerAnimated:YES];
 }
 
@@ -42,7 +46,7 @@
     ABPeoplePickerNavigationController *peoplePicker = [[ABPeoplePickerNavigationController alloc] init];
     if (!personReceiver) {
         personReceiver = [[MCAddressBookDataReceiver alloc] initWithViewController:self andDelegate:self];
-        [personReceiver setEditedPerson:editedPerson];
+        [personReceiver setEditedPerson:thisPerson];
     }
     
     [peoplePicker setPeoplePickerDelegate:personReceiver];
@@ -51,7 +55,7 @@
 
 - (void)doneEmailPicker:(id)selector
 {
-    [editedPerson setEmailAddress:[[editedPerson allEmailAddressesFromAddressBook] objectAtIndex:[emailSelectionFromAddressBookPickerView selectedRowInComponent:0]]];
+    emailAddress = [allEmailAddressesFromAddressBook objectAtIndex:[emailSelectionFromAddressBookPickerView selectedRowInComponent:0]];
     [emailField resignFirstResponder];
     didSomethingChange = YES;
     [[[self navigationItem] rightBarButtonItem] setEnabled:YES];
@@ -60,6 +64,7 @@
 - (void)cancelEmailPicker:(id)selector
 {
     [emailField setText:[thisPerson emailAddress]];
+    emailAddress = nil;
     [emailField resignFirstResponder];
 }
 
@@ -82,7 +87,7 @@
 {
     if (textField == emailField) {
         // Set the UIPickerView as keyboard for the emailfield if Access to the AddressBook is authorized.
-        if (kABAuthorizationStatusAuthorized == ABAddressBookGetAuthorizationStatus() && [editedPerson emailAddress]) {
+        if (kABAuthorizationStatusAuthorized == ABAddressBookGetAuthorizationStatus() && [thisPerson emailAddress]) {
             CGRect toolbarRect = CGRectMake(0, 0, [[self view] bounds].size.width, 44);
             UIToolbar *inputAccessoryPickerView = [[UIToolbar alloc] initWithFrame:toolbarRect];
             UIBarButtonItem *cancelButton = [[UIBarButtonItem alloc] initWithBarButtonSystemItem:UIBarButtonSystemItemCancel
@@ -119,16 +124,16 @@
 - (BOOL)textFieldShouldReturn:(UITextField *)textField
 {
     if (textField == firstNameField) {
-        [editedPerson setFirstName:[firstNameField text]];
+        firstName = [firstNameField text];
         didSomethingChange = YES;
         [[[self navigationItem] rightBarButtonItem] setEnabled:YES];
         return YES;
     } else if (textField == lastNameField) {
-        [editedPerson setLastName:[lastNameField text]];
+        lastName = [lastNameField text];
         didSomethingChange = YES;
         [[[self navigationItem] rightBarButtonItem] setEnabled:YES];
     } else if (textField == emailField) {
-        [editedPerson setEmailAddress:[emailField text]];
+        emailAddress = [emailField text];
         didSomethingChange = YES;
         [emailField resignFirstResponder];
         [[[self navigationItem] rightBarButtonItem] setEnabled:YES];
@@ -141,13 +146,13 @@
 
 - (NSString *)pickerView:(UIPickerView *)pickerView titleForRow:(NSInteger)row forComponent:(NSInteger)component
 {
-    return [[editedPerson allEmailAddressesFromAddressBook] objectAtIndex:row];
+    return [allEmailAddressesFromAddressBook objectAtIndex:row];
 }
 
 - (void)pickerView:(UIPickerView *)pickerView didSelectRow:(NSInteger)row inComponent:(NSInteger)component
 {
-    [emailField setText:[[editedPerson allEmailAddressesFromAddressBook] objectAtIndex:row]];
-    [editedPerson setEmailAddress:[emailField text]];
+    [emailField setText:[allEmailAddressesFromAddressBook objectAtIndex:row]];
+    emailAddress = [emailField text];
 }
 
 #pragma mark - UIPickerViewDataSource
@@ -160,7 +165,7 @@
 - (NSInteger)pickerView:(UIPickerView *)pickerView numberOfRowsInComponent:(NSInteger)component
 {
     if (kABAuthorizationStatusAuthorized == ABAddressBookGetAuthorizationStatus()) {
-        return [[editedPerson allEmailAddressesFromAddressBook] count];
+        return [allEmailAddressesFromAddressBook count];
     } else {
         return 1;
     }
@@ -170,7 +175,13 @@
 
 - (void)receiveANewPersonFromAddressBook:(MCPerson *)newPerson
 {
-    editedPerson = newPerson;
+    firstName = [newPerson firstName];
+    lastName = [newPerson lastName];
+    emailAddress = [newPerson emailAddress];
+    allEmailAddressesFromAddressBook = [newPerson allEmailAddressesFromAddressBook];
+    thumbnail = [newPerson thumbnail];
+    picture = [newPerson picture];
+    [newPerson removePictureData];
     didSomethingChange = YES;
     [[[self navigationItem] rightBarButtonItem] setEnabled:YES];
     [emailSelectionFromAddressBookPickerView reloadComponent:0];
@@ -187,7 +198,12 @@
             @throw [NSException exceptionWithName:@"nil" reason:@"person is nil" userInfo:nil];
         }
         thisPerson = person;
-        [self setEditedPerson:thisPerson];
+        firstName = [[person firstName] copy];
+        lastName = [[person lastName] copy];
+        emailAddress = [[person emailAddress] copy];
+        allEmailAddressesFromAddressBook = [[person allEmailAddressesFromAddressBook] copy];
+        picture = [[person picture] copy];
+        thumbnail = [[person picture] copy];
         
         didSomethingChange = NO;
     }
@@ -224,10 +240,10 @@
     [[[self navigationItem] rightBarButtonItem] setEnabled:didSomethingChange];
     [addressBookButton setEnabled:thisPersonHasPaidSomething];
     [[self navigationController] setToolbarHidden:NO animated:animated];
-    [firstNameField setText:[editedPerson firstName]];
-    [lastNameField setText:[editedPerson lastName]];
-    [emailField setText:[editedPerson emailAddress]];
-    [pictureView setImage:[editedPerson picture]];
+    [firstNameField setText:firstName];
+    [lastNameField setText:lastName];
+    [emailField setText:emailAddress];
+    [pictureView setImage:picture];
     double moneySpendByThisPerson = [tonightsBill totalSumPaidBy:thisPerson];
     NSNumberFormatter *nf = [[NSNumberFormatter alloc] init];
     [nf setNumberStyle:NSNumberFormatterCurrencyStyle];

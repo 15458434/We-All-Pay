@@ -38,10 +38,17 @@
     BOOL didSomethingChange;
     BOOL isNew;
     BOOL thisPersonHasPaidSomething;
+    
+    //editedPersonStuff.
+    UIImage *thumbnail;
+    UIImage *picture;
+    NSString *firstName;
+    NSString *lastName;
+    NSString *emailAddress;
+    NSMutableArray *allEmailAddressesFromAddressBook;
 }
 
 @property (nonatomic, strong) MCSharedBill *tonightsBill;
-@property (nonatomic, copy) MCPerson *editedPerson;
 @property (nonatomic, weak) id changeFlagDelegate;
 @property (nonatomic) BOOL isNew;
 
