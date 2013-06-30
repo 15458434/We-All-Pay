@@ -160,9 +160,7 @@
 - (BOOL)hasPersonPaidSomething:(MCPerson *)person
 {
     for (MCPayment *iPayment in payments) {
-        if (person == [iPayment payingPerson]) {
-            return YES;
-        } else if ([[person uniquePersonId] isEqualToString:[[iPayment payingPerson] uniquePersonId]]) {
+        if ([[person uniquePersonId] isEqualToString:[[iPayment payingPerson] uniquePersonId]]) {
             return YES;
         }
     }
@@ -173,7 +171,7 @@
 {
     NSMutableArray *paidByPeron = [[NSMutableArray alloc] init];
     for (MCPayment *p in payments) {
-        if (person == [p payingPerson]) {
+        if ([[person uniquePersonId] isEqualToString:[[p payingPerson] uniquePersonId]]) {
             [paidByPeron addObject:p];
         }
     }

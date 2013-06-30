@@ -65,6 +65,19 @@
 
 #pragma mark - UITextFieldDelegate
 
+-(BOOL)textFieldShouldBeginEditing:(UITextField *)textField
+{
+    if (thisPersonHasPaidSomething) {
+        if (textField == firstNameField || textField == lastNameField) {
+            return NO;
+        } else {
+            return YES;
+        }
+    } else {
+        return YES;
+    }
+}
+
 - (void)textFieldDidBeginEditing:(UITextField *)textField
 {
     if (textField == emailField) {
@@ -176,12 +189,6 @@
         thisPerson = person;
         [self setEditedPerson:thisPerson];
         
-        // Check to see if thisPerson has paid something.
-        if ([tonightsBill hasPersonPaidSomething:thisPerson]) {
-            thisPersonHasPaidSomething = YES;
-        } else {
-            thisPersonHasPaidSomething = NO;
-        }
         didSomethingChange = NO;
     }
     return self;
@@ -231,6 +238,13 @@
 {
     [super viewDidLoad];
     
+    // Check to see if thisPerson has paid something.
+    if ([tonightsBill hasPersonPaidSomething:thisPerson]) {
+        thisPersonHasPaidSomething = YES;
+    } else {
+        thisPersonHasPaidSomething = NO;
+    }
+    
     if (kABAuthorizationStatusAuthorized == ABAddressBookGetAuthorizationStatus()) {
         addressBookButton = [[UIBarButtonItem alloc] initWithBarButtonSystemItem:UIBarButtonSystemItemBookmarks target:self action:@selector(getSomeone:)];
         [addressBookButton setEnabled:thisPersonHasPaidSomething];
@@ -250,6 +264,7 @@
     [firstNameField setDelegate:self];
     [lastNameField setDelegate:self];
     [emailField setDelegate:self];
+    
 }
 
 - (void)didReceiveMemoryWarning
