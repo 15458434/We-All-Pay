@@ -263,7 +263,7 @@
     
     if (kABAuthorizationStatusAuthorized == ABAddressBookGetAuthorizationStatus()) {
         addressBookButton = [[UIBarButtonItem alloc] initWithBarButtonSystemItem:UIBarButtonSystemItemBookmarks target:self action:@selector(getSomeone:)];
-        [addressBookButton setEnabled:thisPersonHasPaidSomething];
+        [addressBookButton setEnabled:!thisPersonHasPaidSomething];
         UIBarButtonItem *flexSpace = [[UIBarButtonItem alloc] initWithBarButtonSystemItem:UIBarButtonSystemItemFlexibleSpace
                                                                                    target:nil
                                                                                    action:nil];
@@ -280,7 +280,6 @@
     [firstNameField setDelegate:self];
     [lastNameField setDelegate:self];
     [emailField setDelegate:self];
-    
 }
 
 - (void)didReceiveMemoryWarning

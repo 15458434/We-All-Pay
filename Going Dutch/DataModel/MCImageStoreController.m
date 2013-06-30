@@ -37,6 +37,16 @@
     return image;
 }
 
+- (MCImage *)addPictureFromPersonWithId:(NSString *)idString withPicture:(UIImage *)picture
+{
+    NSLog(@"addThumbnailFromPerson executed.");
+    MCImage *image = [NSEntityDescription insertNewObjectForEntityForName:@"MCImage" inManagedObjectContext:imageStoreContext];
+    [image setUniqueIdentifier:idString];
+    [image setPictureDataFromImage:picture];
+    
+    return image;
+}
+
 - (MCImage *)addImageFromPersonWithId:(NSString *)idString withThumbnail:(UIImage *)thumbnail andPicture:(UIImage *)picture
 {
     NSLog(@"addTImageFromPerson executed.");

@@ -40,7 +40,14 @@
 
 - (void)setThumbnail:(UIImage *)image
 {
-    imageObjectFromStore = [[MCImageStoreController sharedStore] addThumbnailFromPersonWithId:[self uniquePersonId] withThumbnail:image];
+    if (!imageObjectFromStore) {
+        imageObjectFromStore = [[MCImageStoreController sharedStore] fetchImageFromPersonWithId:uniquePersonId];
+    }
+    if (!imageObjectFromStore) {
+        imageObjectFromStore = [[MCImageStoreController sharedStore] addThumbnailFromPersonWithId:[self uniquePersonId] withThumbnail:image];
+    } else {
+        [imageObjectFromStore setThumbnail:image];
+    }
 }
 
 - (UIImage *)picture
@@ -53,7 +60,14 @@
 
 - (void)setPicture:(UIImage *)image
 {
-    [imageObjectFromStore setPictureDataFromImage:image];
+    if (!imageObjectFromStore) {
+        imageObjectFromStore = [[MCImageStoreController sharedStore] fetchImageFromPersonWithId:uniquePersonId];
+    }
+    if (!imageObjectFromStore) {
+        imageObjectFromStore = [[MCImageStoreController sharedStore] addPictureFromPersonWithId:uniquePersonId withPicture:image];
+    } else {
+        [imageObjectFromStore setPictureDataFromImage:image];
+    }
 }
 
 - (id)initWithName:(NSString *)n andMailAddress:(NSString *)ea

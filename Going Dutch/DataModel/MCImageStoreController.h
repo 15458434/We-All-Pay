@@ -24,6 +24,7 @@
 
 - (MCImage *)addThumbnailFromPersonWithId:(NSString *)idString withThumbnail:(UIImage *)thumbnail;
 - (MCImage *)addImageFromPersonWithId:(NSString *)idString withThumbnail:(UIImage *)thumbnail andPicture:(UIImage *)picture;
+- (MCImage *)addPictureFromPersonWithId:(NSString *)idString withPicture:(UIImage *)picture;
 - (MCImage *)fetchImageFromPersonWithId:(NSString *)idString;
 
 - (void)deleteImageObjectFromStore:(MCImage *)image;
