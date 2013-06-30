@@ -175,6 +175,13 @@
         }
         thisPerson = person;
         [self setEditedPerson:thisPerson];
+        
+        // Check to see if thisPerson has paid something.
+        if ([tonightsBill hasPersonPaidSomething:thisPerson]) {
+            thisPersonHasPaidSomething = YES;
+        } else {
+            thisPersonHasPaidSomething = NO;
+        }
         didSomethingChange = NO;
     }
     return self;
@@ -208,6 +215,7 @@
     }
     
     [[[self navigationItem] rightBarButtonItem] setEnabled:didSomethingChange];
+    [addressBookButton setEnabled:thisPersonHasPaidSomething];
     [[self navigationController] setToolbarHidden:NO animated:animated];
     [firstNameField setText:[editedPerson firstName]];
     [lastNameField setText:[editedPerson lastName]];
@@ -224,7 +232,8 @@
     [super viewDidLoad];
     
     if (kABAuthorizationStatusAuthorized == ABAddressBookGetAuthorizationStatus()) {
-        UIBarButtonItem *addressBookButton = [[UIBarButtonItem alloc] initWithBarButtonSystemItem:UIBarButtonSystemItemBookmarks target:self action:@selector(getSomeone:)];
+        addressBookButton = [[UIBarButtonItem alloc] initWithBarButtonSystemItem:UIBarButtonSystemItemBookmarks target:self action:@selector(getSomeone:)];
+        [addressBookButton setEnabled:thisPersonHasPaidSomething];
         UIBarButtonItem *flexSpace = [[UIBarButtonItem alloc] initWithBarButtonSystemItem:UIBarButtonSystemItemFlexibleSpace
                                                                                    target:nil
                                                                                    action:nil];

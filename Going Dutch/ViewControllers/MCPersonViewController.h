@@ -28,6 +28,7 @@
     __weak IBOutlet UITextField *emailField;
     __weak IBOutlet UILabel *totalSumSpendLabel;
     MCTwoLabelsTitleView *twoLabelTitleView;
+    UIBarButtonItem *addressBookButton;
     
     MCPerson *thisPerson;
     UIPickerView *emailSelectionFromAddressBookPickerView;
@@ -36,6 +37,7 @@
     
     BOOL didSomethingChange;
     BOOL isNew;
+    BOOL thisPersonHasPaidSomething;
 }
 
 @property (nonatomic, strong) MCSharedBill *tonightsBill;
