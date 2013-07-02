@@ -58,7 +58,7 @@
 - (void)cancelPersonPicker:(id)selector
 {
     // Set the text of the textView back and resign first responder
-    [payerView setText:[[thisPayment payingPerson] firstName]];
+    [payerView setText:[[thisPayment payingPerson] getFullName]];
     [payerView resignFirstResponder];
 }
 
