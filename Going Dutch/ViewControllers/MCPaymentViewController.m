@@ -25,7 +25,23 @@
 @synthesize isNew;
 @synthesize delegate;
 
-#pragma mark - actions
+#pragma mark - action
+
+- (IBAction)dismissKeyboard:(id)sender
+{
+    if ([placeView isFirstResponder]) {
+        [placeView endEditing:YES];
+        [placeView setText:[thisPayment place]];
+    }
+    if ([payerView isFirstResponder]) {
+        //[payerView endEditing:YES];
+        [self cancelPersonPicker:self];
+    }
+    if ([paidView isFirstResponder]) {
+        //[paidView endEditing:YES];
+        [self cancelNumberPad:self];
+    }
+}
 
 - (void)backButtonPressed:(id)selector
 {
