@@ -23,6 +23,18 @@
 @synthesize isNew;
 
 #pragma mark - Actions
+- (IBAction)dismissKeyboard:(id)sender
+{
+    if ([firstNameField isFirstResponder]) {
+        [firstNameField endEditing:YES];
+    }
+    if ([lastNameField isFirstResponder]) {
+        [lastNameField endEditing:YES];
+    }
+    if ([emailField isFirstResponder]) {
+        [self cancelEmailPicker:self];
+    }
+}
 
 - (void)cancelButtonPressed:(id)selector
 {
