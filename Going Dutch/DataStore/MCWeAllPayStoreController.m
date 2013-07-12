@@ -33,7 +33,25 @@
     static BOOL stillNeedsInit = 1;
     
     if (self && stillNeedsInit) {
-        weAllPayStoreDocument = [[UIManagedDocument alloc] initWithFileURL:[MCTools documentPathAsURLTo:@"WeAllPayStore"]];
+        NSURL *weAllPayURL = [MCTools documentPathAsURLTo:@"WeAllPayStore"];
+        weAllPayStoreDocument = [[UIManagedDocument alloc] initWithFileURL:weAllPayURL];
+        if ([[NSFileManager defaultManager] fileExistsAtPath:[weAllPayURL path]]) {
+            [weAllPayStoreDocument openWithCompletionHandler:^(BOOL success){
+                if (!success) {
+                    // Handle the error.
+                    NSLog(@"Unable to open WeAllPayStore");
+                }
+            }];
+        }
+        else {
+            // If file doesn't exist. Create it.
+            [weAllPayStoreDocument saveToURL:weAllPayURL forSaveOperation:UIDocumentSaveForCreating completionHandler:^(BOOL success){
+                if (!success) {
+                    // Handle the error.
+                    NSLog(@"Unable to create WeAllPayStore");
+                }
+            }];
+        }
         stillNeedsInit = 0;
     }
     return self;
