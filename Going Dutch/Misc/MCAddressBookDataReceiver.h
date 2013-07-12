@@ -24,7 +24,7 @@
 }
 
 @property (nonatomic, strong) id delegate;
-@property (nonatomic, copy) MCPerson *editedPerson;
+@property (nonatomic, strong) MCPerson *thisPerson;
 
 - (id)initWithDelegate:(id)delegateUsedOnInit;
 - (id)initWithViewController:(UIViewController *)newViewController andDelegate:(id)newDelegate;

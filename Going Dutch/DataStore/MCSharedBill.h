@@ -45,7 +45,7 @@
 
 - (NSArray *)solveWhoHasToPayWhoFromThisBill;
 - (double)totalSumOfMoneyOfThisSharedBill;
-- (double)totalSumPaidBy:(MCPerson *)person;
+- (NSNumber *)totalSumPaidBy:(MCPerson *)person;
 - (double)amountPeopleShouldHavePaid;
 - (BOOL)hasPersonPaidSomething:(MCPerson *)person;
 - (NSArray *)whatHasPersonPaid:(MCPerson *)person;

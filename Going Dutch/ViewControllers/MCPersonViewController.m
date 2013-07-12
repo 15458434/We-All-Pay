@@ -7,9 +7,11 @@
 //
 
 #import "MCPersonViewController.h"
+
+#import "MCWeAllPayStoreController.h"
 #import "MCPerson.h"
 #import "MCSharedBill.h"
-#import "MCPeople.h"
+
 #import "MCTwoLabelsTitleView.h"
 
 @interface MCPersonViewController ()
@@ -23,6 +25,7 @@
 @synthesize isNew;
 
 #pragma mark - Actions
+
 - (IBAction)dismissKeyboard:(id)sender
 {
     if ([firstNameField isFirstResponder]) {
@@ -38,11 +41,13 @@
 
 - (void)cancelButtonPressed:(id)selector
 {
+    [[[[MCWeAllPayStoreController sharedStore] weAllPayStoreDocument] managedObjectContext] rollback];
     [[self navigationController] popViewControllerAnimated:YES];
 }
 
 - (void)doneButtonPressed:(id)selector
 {
+    /*
     [[self changeFlagDelegate] sendDidSomethingChange:YES];
     [thisPerson setFirstName:firstName];
     [thisPerson setLastName:lastName];
@@ -50,6 +55,8 @@
     [thisPerson setAllEmailAddressesFromAddressBook:allEmailAddressesFromAddressBook];
     [thisPerson setPicture:picture];
     [thisPerson setThumbnail:thumbnail];
+     */
+    [[[[MCWeAllPayStoreController sharedStore] weAllPayStoreDocument] managedObjectContext] processPendingChanges];
     [[self navigationController] popViewControllerAnimated:YES];
 }
 
@@ -67,23 +74,28 @@
 
 - (void)doneEmailPicker:(id)selector
 {
+    /*
     emailAddress = [allEmailAddressesFromAddressBook objectAtIndex:[emailSelectionFromAddressBookPickerView selectedRowInComponent:0]];
     [emailField resignFirstResponder];
     didSomethingChange = YES;
     [[[self navigationItem] rightBarButtonItem] setEnabled:YES];
+     */
 }
 
 - (void)cancelEmailPicker:(id)selector
 {
+    /*
     [emailField setText:[thisPerson emailAddress]];
     emailAddress = nil;
     [emailField resignFirstResponder];
+     */
 }
 
 #pragma mark - UITextFieldDelegate
 
 -(BOOL)textFieldShouldBeginEditing:(UITextField *)textField
 {
+    /*
     if (thisPersonHasPaidSomething) {
         if (textField == firstNameField || textField == lastNameField) {
             return NO;
@@ -93,10 +105,13 @@
     } else {
         return YES;
     }
+     */
+    return YES;
 }
 
 - (void)textFieldDidBeginEditing:(UITextField *)textField
 {
+    /*
     if (textField == emailField) {
         // Set the UIPickerView as keyboard for the emailfield if Access to the AddressBook is authorized.
         if (kABAuthorizationStatusAuthorized == ABAddressBookGetAuthorizationStatus() && [thisPerson emailAddress]) {
@@ -131,21 +146,22 @@
             [inputAccossoryNumberPad setItems:[[NSArray alloc] initWithObjects:cancelButton, flexButton, doneButton, nil] animated:YES];
         }
     }
+     */
 }
 
 - (BOOL)textFieldShouldReturn:(UITextField *)textField
 {
     if (textField == firstNameField) {
-        firstName = [firstNameField text];
+        [thisPerson setFirstName:[firstNameField text]];
         didSomethingChange = YES;
         [[[self navigationItem] rightBarButtonItem] setEnabled:YES];
         return YES;
     } else if (textField == lastNameField) {
-        lastName = [lastNameField text];
+        [thisPerson setLastName:[lastNameField text]];
         didSomethingChange = YES;
         [[[self navigationItem] rightBarButtonItem] setEnabled:YES];
     } else if (textField == emailField) {
-        emailAddress = [emailField text];
+        [thisPerson setEmailAddress:[emailField text]];
         didSomethingChange = YES;
         [emailField resignFirstResponder];
         [[[self navigationItem] rightBarButtonItem] setEnabled:YES];
@@ -158,13 +174,14 @@
 
 - (NSString *)pickerView:(UIPickerView *)pickerView titleForRow:(NSInteger)row forComponent:(NSInteger)component
 {
-    return [allEmailAddressesFromAddressBook objectAtIndex:row];
+    // return [allEmailAddressesFromAddressBook objectAtIndex:row];
+    return @"someone@earth";
 }
 
 - (void)pickerView:(UIPickerView *)pickerView didSelectRow:(NSInteger)row inComponent:(NSInteger)component
 {
-    [emailField setText:[allEmailAddressesFromAddressBook objectAtIndex:row]];
-    emailAddress = [emailField text];
+    //[emailField setText:[allEmailAddressesFromAddressBook objectAtIndex:row]];
+    //[thisPerson emailAddress] = [emailField text];
 }
 
 #pragma mark - UIPickerViewDataSource
@@ -176,22 +193,27 @@
 
 - (NSInteger)pickerView:(UIPickerView *)pickerView numberOfRowsInComponent:(NSInteger)component
 {
+    /*
     if (kABAuthorizationStatusAuthorized == ABAddressBookGetAuthorizationStatus()) {
         return [allEmailAddressesFromAddressBook count];
     } else {
         return 1;
     }
+     */
+    return 1;
 }
 
 #pragma mark - MCAddressBookReceiverDelegate
 
 - (BOOL)isNewPersonFromAddressBookAlreadyPresent:(MCPerson *)newPerson
 {
-    return [[tonightsBill people] isPersonPresent:newPerson];
+    // return [tonightsBill isPersonPresent:newPerson];
+    return YES;
 }
 
 - (void)receiveANewPersonFromAddressBook:(MCPerson *)newPerson
 {
+    /*
     firstName = [newPerson firstName];
     lastName = [newPerson lastName];
     emailAddress = [newPerson emailAddress];
@@ -199,6 +221,7 @@
     thumbnail = [newPerson thumbnail];
     picture = [newPerson picture];
     [newPerson removePictureData];
+     */
     didSomethingChange = YES;
     [[[self navigationItem] rightBarButtonItem] setEnabled:YES];
     [emailSelectionFromAddressBookPickerView reloadComponent:0];
@@ -215,13 +238,6 @@
             @throw [NSException exceptionWithName:@"nil" reason:@"person is nil" userInfo:nil];
         }
         thisPerson = person;
-        firstName = [[person firstName] copy];
-        lastName = [[person lastName] copy];
-        emailAddress = [[person emailAddress] copy];
-        allEmailAddressesFromAddressBook = [[person allEmailAddressesFromAddressBook] copy];
-        picture = [[person picture] copy];
-        thumbnail = [[person picture] copy];
-        
         didSomethingChange = NO;
     }
     return self;
@@ -257,14 +273,13 @@
     [[[self navigationItem] rightBarButtonItem] setEnabled:didSomethingChange];
     [addressBookButton setEnabled:!thisPersonHasPaidSomething];
     [[self navigationController] setToolbarHidden:NO animated:animated];
-    [firstNameField setText:firstName];
-    [lastNameField setText:lastName];
-    [emailField setText:emailAddress];
-    [pictureView setImage:picture];
-    double moneySpendByThisPerson = [tonightsBill totalSumPaidBy:thisPerson];
+    [firstNameField setText:[thisPerson firstName]];
+    [lastNameField setText:[thisPerson lastName]];
+    [emailField setText:[thisPerson emailAddress]];
+    NSNumber *moneySpendByThisPerson = [tonightsBill totalSumPaidBy:thisPerson];
     NSNumberFormatter *nf = [[NSNumberFormatter alloc] init];
     [nf setNumberStyle:NSNumberFormatterCurrencyStyle];
-    [totalSumSpendLabel setText:[NSString stringWithFormat:@"Spent %@", [nf stringFromNumber:[NSNumber numberWithDouble:moneySpendByThisPerson]]]];
+    [totalSumSpendLabel setText:[NSString stringWithFormat:@"Spent %@", [nf stringFromNumber:moneySpendByThisPerson]]];
 }
 
 - (void)viewDidLoad

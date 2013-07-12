@@ -1,5 +1,11 @@
 <?xml version="1.0" encoding="UTF-8" standalone="yes"?>
 <model name="" userDefinedModelVersionIdentifier="" type="com.apple.IDECoreDataModeler.DataModel" documentVersion="1.0" lastSavedToolsVersion="2061" systemVersion="12E55" minimumToolsVersion="Xcode 4.3" macOSVersion="Automatic" iOSVersion="Automatic">
+    <entity name="MCEmailAddress" representedClassName="MCEmailAddress" syncable="YES">
+        <attribute name="emailAddress" attributeType="String" syncable="YES"/>
+        <attribute name="selected" attributeType="Boolean" syncable="YES"/>
+        <attribute name="uniqueEmailId" optional="YES" attributeType="String" syncable="YES"/>
+        <relationship name="owner" minCount="1" maxCount="1" deletionRule="Nullify" destinationEntity="MCPerson" inverseName="emailAddress" inverseEntity="MCPerson" syncable="YES"/>
+    </entity>
     <entity name="MCPayment" representedClassName="MCPayment" syncable="YES">
         <attribute name="dateCreated" optional="YES" attributeType="Date" syncable="YES"/>
         <attribute name="dateModified" optional="YES" attributeType="Date" syncable="YES"/>
@@ -12,7 +18,7 @@
     <entity name="MCPerson" representedClassName="MCPerson" syncable="YES">
         <attribute name="dateCreated" optional="YES" attributeType="Date" syncable="YES"/>
         <attribute name="dateModified" optional="YES" attributeType="Date" syncable="YES"/>
-        <attribute name="emailAddress" optional="YES" attributeType="String" syncable="YES"/>
+        <attribute name="defaultEmailAddress" optional="YES" transient="YES" attributeType="String" syncable="YES"/>
         <attribute name="firstName" optional="YES" attributeType="String" syncable="YES"/>
         <attribute name="lastName" optional="YES" attributeType="String" syncable="YES"/>
         <attribute name="phoneNumber" optional="YES" attributeType="String" syncable="YES"/>
@@ -21,6 +27,7 @@
         <attribute name="thumbnail" optional="YES" transient="YES" syncable="YES"/>
         <attribute name="thumbnailData" optional="YES" attributeType="Binary" syncable="YES"/>
         <attribute name="uniquePersonId" attributeType="String" syncable="YES"/>
+        <relationship name="emailAddress" optional="YES" toMany="YES" deletionRule="Nullify" destinationEntity="MCEmailAddress" inverseName="owner" inverseEntity="MCEmailAddress" syncable="YES"/>
         <relationship name="payments" optional="YES" toMany="YES" deletionRule="Nullify" destinationEntity="MCPayment" inverseName="payingPerson" inverseEntity="MCPayment" syncable="YES"/>
         <relationship name="sharedBill" optional="YES" toMany="YES" deletionRule="Nullify" destinationEntity="MCSharedBill" inverseName="peoplePresent" inverseEntity="MCSharedBill" syncable="YES"/>
     </entity>
@@ -34,8 +41,9 @@
         <relationship name="peoplePresent" optional="YES" toMany="YES" deletionRule="Nullify" destinationEntity="MCPerson" inverseName="sharedBill" inverseEntity="MCPerson" syncable="YES"/>
     </entity>
     <elements>
+        <element name="MCEmailAddress" positionX="160" positionY="192" width="128" height="105"/>
         <element name="MCPayment" positionX="144" positionY="-477" width="128" height="148"/>
-        <element name="MCPerson" positionX="-27" positionY="-252" width="128" height="238"/>
-        <element name="MCSharedBill" positionX="313" positionY="-261" width="128" height="148"/>
+        <element name="MCPerson" positionX="-27" positionY="-252" width="128" height="255"/>
+        <element name="MCSharedBill" positionX="313" positionY="-261" width="128" height="150"/>
     </elements>
 </model>

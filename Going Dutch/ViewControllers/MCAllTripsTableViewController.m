@@ -38,10 +38,6 @@
     // Create and add new Trip with a test group.
     MCSharedBill *newTrip = [MCSharedBill addSharedBill];
     
-    NSArray *listOfTripNames = [NSArray arrayWithObjects:@"Bier", @"Sauna", @"Nataraj", @"Kamperen", nil];
-    NSUInteger randomNumber = rand() % [listOfTripNames count];
-    [newTrip setTripName:[listOfTripNames objectAtIndex:randomNumber]];
-    
     [[[[MCWeAllPayStoreController sharedStore] weAllPayStoreDocument] managedObjectContext] processPendingChanges];
     
     MCSharedBillTableViewController *tvc = [[MCSharedBillTableViewController alloc] initWithSharedBill:newTrip];
@@ -111,11 +107,6 @@
         // Create the FetchedResultsController.
         dataController = [[NSFetchedResultsController alloc] initWithFetchRequest:request managedObjectContext:[[[MCWeAllPayStoreController sharedStore] weAllPayStoreDocument] managedObjectContext] sectionNameKeyPath:nil cacheName:@"All trips cache."];
         [dataController setDelegate:self];
-        NSError *error;
-        BOOL success = [dataController performFetch:&error];
-        if (!success) {
-            NSLog(@"Something went wrong");
-        }
     }
     
     // Load the nib file

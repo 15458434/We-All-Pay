@@ -31,17 +31,11 @@
 
 - (void)addPerson:(id)selector
 {
-    /*
-    MCPerson *newPerson = [[MCPerson alloc] init];
-    [editedPeople addPerson:newPerson];
+    MCPerson *newPerson = [MCPerson addPerson];
     [self updateSubLabel];
     MCPersonViewController *pvc = [[MCPersonViewController alloc] initWithPerson:newPerson];
     [pvc setIsNew:YES];
     [[self navigationController] pushViewController:pvc animated:YES];
-    NSInteger lastRow = [[editedPeople allPeople] indexOfObject:newPerson];
-    NSIndexPath *ip = [NSIndexPath indexPathForRow:lastRow inSection:0];
-    [[self tableView] insertRowsAtIndexPaths:[NSArray arrayWithObject:ip] withRowAnimation:UITableViewRowAnimationTop];
-     */
 }
 
 - (void)doneAddingPeople:(id)selector
@@ -93,14 +87,10 @@
 
 - (void)getPeopleFromAddressBook:(id)selector
 {
-    /*
     ABPeoplePickerNavigationController *peoplePicker = [[ABPeoplePickerNavigationController alloc] init];
-    if (!personReceiver) {
-        personReceiver = [[MCAddressBookDataReceiver alloc] initWithViewController:self andDelegate:self];
-    }
+    MCAddressBookDataReceiver *personReceiver = [[MCAddressBookDataReceiver alloc] initWithViewController:self andDelegate:self];
     [peoplePicker setPeoplePickerDelegate:personReceiver];
     [self presentViewController:peoplePicker animated:YES completion:nil];
-     */
 }
 
 - (IBAction)changeNameOfTrip:(id)sender {

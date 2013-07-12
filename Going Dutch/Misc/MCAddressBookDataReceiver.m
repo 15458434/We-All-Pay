@@ -12,32 +12,30 @@
 @implementation MCAddressBookDataReceiver
 
 @synthesize delegate;
-@synthesize editedPerson;
+@synthesize thisPerson;
 
 #pragma mark - New in this class.
 
 - (void)getPersonData:(ABRecordRef)person
 {
-    if (!editedPerson) {
-        editedPerson = [[MCPerson alloc] init];
-    } else {
-        [editedPerson removePictureData];
-    }
-    [editedPerson setThumbnail:[UIImage imageWithData:(__bridge_transfer NSData *)ABPersonCopyImageDataWithFormat(person, kABPersonImageFormatThumbnail)]];
-    [editedPerson setPicture:[UIImage imageWithData:(__bridge_transfer NSData *)ABPersonCopyImageDataWithFormat(person, kABPersonImageFormatOriginalSize)]];
-    [editedPerson setFirstName:(__bridge_transfer NSString *)ABRecordCopyValue(person, kABPersonFirstNameProperty)];
-    [editedPerson setLastName:(__bridge_transfer NSString *)ABRecordCopyValue(person, kABPersonLastNameProperty)];
+    if (!thisPerson) {
+        thisPerson = [MCPerson addPerson];
+    } 
+    [thisPerson setThumbnail:[UIImage imageWithData:(__bridge_transfer NSData *)ABPersonCopyImageDataWithFormat(person, kABPersonImageFormatThumbnail)]];
+    [thisPerson setPicture:[UIImage imageWithData:(__bridge_transfer NSData *)ABPersonCopyImageDataWithFormat(person, kABPersonImageFormatOriginalSize)]];
+    [thisPerson setFirstName:(__bridge_transfer NSString *)ABRecordCopyValue(person, kABPersonFirstNameProperty)];
+    [thisPerson setLastName:(__bridge_transfer NSString *)ABRecordCopyValue(person, kABPersonLastNameProperty)];
     ABMultiValueRef emailAddresses = ABRecordCopyValue(person, kABPersonEmailProperty);
     if (ABMultiValueGetCount(emailAddresses)) {
         NSMutableArray *allEmailAddresses= [[NSMutableArray alloc] init];
         for (NSUInteger i = 0; i < ABMultiValueGetCount(emailAddresses); i++) {
             NSString *emailAddressForArray=(__bridge_transfer NSString *)ABMultiValueCopyValueAtIndex(emailAddresses, i);
             [allEmailAddresses addObject:emailAddressForArray];
-            [editedPerson setAllEmailAddressesFromAddressBook:allEmailAddresses];
+            [thisPerson setAllEmailAddressesFromAddressBook:allEmailAddresses];
         }
-        [editedPerson setEmailAddress:(__bridge_transfer NSString *)ABMultiValueCopyValueAtIndex(emailAddresses, 0)];
+        [thisPerson setEmailAddress:(__bridge_transfer NSString *)ABMultiValueCopyValueAtIndex(emailAddresses, 0)];
     } else {
-        [editedPerson setEmailAddress:nil];
+        [thisPerson setEmailAddress:nil];
     }
     CFRelease(emailAddresses);
 }

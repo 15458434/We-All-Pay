@@ -74,4 +74,10 @@
     return [[self peoplePresent] count];
 }
 
+- (NSNumber *)totalSumPaidBy:(MCPerson *)person
+{
+    // Just return the number 1000.
+    return [NSNumber numberWithDouble:1000.0];
+}
+
 @end

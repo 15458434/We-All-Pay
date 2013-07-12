@@ -30,8 +30,10 @@
 		3886D40316B7AA3100ECE64F /* MCPaymentViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = 3886D40116B7AA3100ECE64F /* MCPaymentViewController.xib */; };
 		3892E3A417903EF00038894B /* MCEditTripViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 3892E3A317903EF00038894B /* MCEditTripViewController.m */; };
 		3892E3AA17904A240038894B /* MCPersonViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 3892E3A917904A240038894B /* MCPersonViewController.m */; };
+		3892E3AE179056420038894B /* MCReturnPayment.m in Sources */ = {isa = PBXBuildFile; fileRef = 3892E3AD179056420038894B /* MCReturnPayment.m */; };
+		3892E3B117906B5E0038894B /* MCAddressBookDataReceiver.m in Sources */ = {isa = PBXBuildFile; fileRef = 3892E3B017906B5E0038894B /* MCAddressBookDataReceiver.m */; };
+		3892E3B717906FC90038894B /* MCPerson.m in Sources */ = {isa = PBXBuildFile; fileRef = 3892E3B617906FC90038894B /* MCPerson.m */; };
 		38955048178B4FCA0077A95A /* MCWeAllPayStoreController.m in Sources */ = {isa = PBXBuildFile; fileRef = 38955047178B4FCA0077A95A /* MCWeAllPayStoreController.m */; };
-		3895504B178DF77D0077A95A /* MCPerson.m in Sources */ = {isa = PBXBuildFile; fileRef = 3895504A178DF77D0077A95A /* MCPerson.m */; };
 		3895504E178DF7B80077A95A /* MCSharedBill.m in Sources */ = {isa = PBXBuildFile; fileRef = 3895504D178DF7B80077A95A /* MCSharedBill.m */; };
 		38955051178DF8300077A95A /* MCPayment.m in Sources */ = {isa = PBXBuildFile; fileRef = 38955050178DF8300077A95A /* MCPayment.m */; };
 		38966DA6173BD71A0041484B /* girl 100x100.png in Resources */ = {isa = PBXBuildFile; fileRef = 38966DA5173BD71A0041484B /* girl 100x100.png */; };
@@ -54,6 +56,7 @@
 		38D7B68716BABAD900C609B8 /* MCPersonViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = 38D7B68516BABAD900C609B8 /* MCPersonViewController.xib */; };
 		38EFF2D416D215BE001C8248 /* MCAllTripsTableViewCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 38EFF2D316D215BE001C8248 /* MCAllTripsTableViewCell.m */; };
 		38EFF2D616D215FB001C8248 /* MCAllTripsTableViewCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 38EFF2D516D215FB001C8248 /* MCAllTripsTableViewCell.xib */; };
+		38F51593179071E6000039BA /* MCEmailAddress.m in Sources */ = {isa = PBXBuildFile; fileRef = 38F51592179071E6000039BA /* MCEmailAddress.m */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -91,10 +94,14 @@
 		3892E3A317903EF00038894B /* MCEditTripViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = MCEditTripViewController.m; path = ViewControllers/MCEditTripViewController.m; sourceTree = "<group>"; };
 		3892E3A817904A240038894B /* MCPersonViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = MCPersonViewController.h; path = ViewControllers/MCPersonViewController.h; sourceTree = "<group>"; };
 		3892E3A917904A240038894B /* MCPersonViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = MCPersonViewController.m; path = ViewControllers/MCPersonViewController.m; sourceTree = "<group>"; };
+		3892E3AC179056420038894B /* MCReturnPayment.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = MCReturnPayment.h; path = DataModel/MCReturnPayment.h; sourceTree = "<group>"; };
+		3892E3AD179056420038894B /* MCReturnPayment.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = MCReturnPayment.m; path = DataModel/MCReturnPayment.m; sourceTree = "<group>"; };
+		3892E3AF17906B5D0038894B /* MCAddressBookDataReceiver.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = MCAddressBookDataReceiver.h; path = Misc/MCAddressBookDataReceiver.h; sourceTree = "<group>"; };
+		3892E3B017906B5E0038894B /* MCAddressBookDataReceiver.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = MCAddressBookDataReceiver.m; path = Misc/MCAddressBookDataReceiver.m; sourceTree = "<group>"; };
+		3892E3B517906FC90038894B /* MCPerson.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = MCPerson.h; path = DataStore/MCPerson.h; sourceTree = "<group>"; };
+		3892E3B617906FC90038894B /* MCPerson.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = MCPerson.m; path = DataStore/MCPerson.m; sourceTree = "<group>"; };
 		38955046178B4FCA0077A95A /* MCWeAllPayStoreController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = MCWeAllPayStoreController.h; path = DataStore/MCWeAllPayStoreController.h; sourceTree = "<group>"; };
 		38955047178B4FCA0077A95A /* MCWeAllPayStoreController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = MCWeAllPayStoreController.m; path = DataStore/MCWeAllPayStoreController.m; sourceTree = "<group>"; };
-		38955049178DF77D0077A95A /* MCPerson.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = MCPerson.h; path = DataStore/MCPerson.h; sourceTree = "<group>"; };
-		3895504A178DF77D0077A95A /* MCPerson.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = MCPerson.m; path = DataStore/MCPerson.m; sourceTree = "<group>"; };
 		3895504C178DF7B80077A95A /* MCSharedBill.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = MCSharedBill.h; path = DataStore/MCSharedBill.h; sourceTree = "<group>"; };
 		3895504D178DF7B80077A95A /* MCSharedBill.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = MCSharedBill.m; path = DataStore/MCSharedBill.m; sourceTree = "<group>"; };
 		3895504F178DF8300077A95A /* MCPayment.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = MCPayment.h; path = DataStore/MCPayment.h; sourceTree = "<group>"; };
@@ -127,6 +134,8 @@
 		38EFF2D216D215BE001C8248 /* MCAllTripsTableViewCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = MCAllTripsTableViewCell.h; path = Views/MCAllTripsTableViewCell.h; sourceTree = "<group>"; };
 		38EFF2D316D215BE001C8248 /* MCAllTripsTableViewCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = MCAllTripsTableViewCell.m; path = Views/MCAllTripsTableViewCell.m; sourceTree = "<group>"; };
 		38EFF2D516D215FB001C8248 /* MCAllTripsTableViewCell.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; name = MCAllTripsTableViewCell.xib; path = Views/MCAllTripsTableViewCell.xib; sourceTree = "<group>"; };
+		38F51591179071E6000039BA /* MCEmailAddress.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = MCEmailAddress.h; path = DataStore/MCEmailAddress.h; sourceTree = "<group>"; };
+		38F51592179071E6000039BA /* MCEmailAddress.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = MCEmailAddress.m; path = DataStore/MCEmailAddress.m; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -155,8 +164,10 @@
 				38955050178DF8300077A95A /* MCPayment.m */,
 				3895504C178DF7B80077A95A /* MCSharedBill.h */,
 				3895504D178DF7B80077A95A /* MCSharedBill.m */,
-				38955049178DF77D0077A95A /* MCPerson.h */,
-				3895504A178DF77D0077A95A /* MCPerson.m */,
+				3892E3B517906FC90038894B /* MCPerson.h */,
+				3892E3B617906FC90038894B /* MCPerson.m */,
+				38F51591179071E6000039BA /* MCEmailAddress.h */,
+				38F51592179071E6000039BA /* MCEmailAddress.m */,
 				38955046178B4FCA0077A95A /* MCWeAllPayStoreController.h */,
 				38955047178B4FCA0077A95A /* MCWeAllPayStoreController.m */,
 			);
@@ -220,10 +231,13 @@
 				38334EC5172D323D0063B919 /* Launch images */,
 				3898AADD17271157008F947E /* icons */,
 				3801F89D16DFC6D400DF8675 /* DataStore */,
+				3892E3AB179055F40038894B /* DataModel */,
 				38572AF4169D439E00969C62 /* Views */,
 				38572AF3169D438E00969C62 /* ViewControllers */,
 				38CDE8FE17135B6300387CAA /* MCTools.h */,
 				38CDE8FF17135B6300387CAA /* MCTools.m */,
+				3892E3AF17906B5D0038894B /* MCAddressBookDataReceiver.h */,
+				3892E3B017906B5E0038894B /* MCAddressBookDataReceiver.m */,
 				38572AE5169D437B00969C62 /* MCAppDelegate.h */,
 				38572AE6169D437B00969C62 /* MCAppDelegate.m */,
 				38572ADD169D437B00969C62 /* Supporting Files */,
@@ -287,6 +301,15 @@
 				3897158517901D55005BE03E /* MCReturnPaymentTableViewCell.m */,
 			);
 			name = Views;
+			sourceTree = "<group>";
+		};
+		3892E3AB179055F40038894B /* DataModel */ = {
+			isa = PBXGroup;
+			children = (
+				3892E3AC179056420038894B /* MCReturnPayment.h */,
+				3892E3AD179056420038894B /* MCReturnPayment.m */,
+			);
+			name = DataModel;
 			sourceTree = "<group>";
 		};
 		38966DA4173BD7050041484B /* No image icon */ = {
@@ -428,7 +451,6 @@
 				38CDE90017135B6300387CAA /* MCTools.m in Sources */,
 				3829AD0F178B41320025969D /* WeAllPayStore.xcdatamodeld in Sources */,
 				38955048178B4FCA0077A95A /* MCWeAllPayStoreController.m in Sources */,
-				3895504B178DF77D0077A95A /* MCPerson.m in Sources */,
 				3895504E178DF7B80077A95A /* MCSharedBill.m in Sources */,
 				38955051178DF8300077A95A /* MCPayment.m in Sources */,
 				3897157A17901D0F005BE03E /* MCTextFieldAndLabelTitleView.m in Sources */,
@@ -439,6 +461,10 @@
 				3897159217902E35005BE03E /* MCSharedBillTableViewController.m in Sources */,
 				3892E3A417903EF00038894B /* MCEditTripViewController.m in Sources */,
 				3892E3AA17904A240038894B /* MCPersonViewController.m in Sources */,
+				3892E3AE179056420038894B /* MCReturnPayment.m in Sources */,
+				3892E3B117906B5E0038894B /* MCAddressBookDataReceiver.m in Sources */,
+				3892E3B717906FC90038894B /* MCPerson.m in Sources */,
+				38F51593179071E6000039BA /* MCEmailAddress.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

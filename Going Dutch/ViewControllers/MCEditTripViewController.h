@@ -24,8 +24,6 @@
     
     NSFetchedResultsController *dataController;
     
-    // MCAddressBookDataReceiver *personReceiver;
-    
     BOOL isInitAsNew;
 }
 
