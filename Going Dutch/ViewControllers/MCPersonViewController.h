@@ -8,7 +8,7 @@
 
 #import <UIKit/UIKit.h>
 #import <AddressBookUI/AddressBookUI.h>
-#import "MCAddressBookDataReceiver.h"
+//#import "MCAddressBookDataReceiver.h"
 
 @class MCPerson;
 @class MCSharedBill;
@@ -20,7 +20,7 @@
 
 @end
 
-@interface MCPersonViewController : UIViewController <UITextFieldDelegate, MCAddressBookReceiverDelegate, UIPickerViewDelegate, UIPickerViewDataSource>
+@interface MCPersonViewController : UIViewController <UITextFieldDelegate, UIPickerViewDelegate, UIPickerViewDataSource>
 {
     __weak IBOutlet UIImageView *pictureView;
     __weak IBOutlet UITextField *firstNameField;
@@ -33,7 +33,7 @@
     MCPerson *thisPerson;
     UIPickerView *emailSelectionFromAddressBookPickerView;
     
-    MCAddressBookDataReceiver *personReceiver;
+    // MCAddressBookDataReceiver *personReceiver;
     
     BOOL didSomethingChange;
     BOOL isNew;

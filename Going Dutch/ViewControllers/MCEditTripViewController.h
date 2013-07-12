@@ -7,26 +7,26 @@
 //
 
 #import <UIKit/UIKit.h>
+#import <CoreData/CoreData.h>
 #import <AddressBookUI/AddressBookUI.h>
 #import "MCPersonViewController.h"
-#import "MCAddressBookDataReceiver.h"
 
 @class MCPeople;
 @class MCSharedBill;
 @class MCTwoLabelsTitleView;
 
-@interface MCEditTripViewController : UITableViewController <UITextFieldDelegate, MCAddressBookReceiverDelegate, UIAlertViewDelegate, MCPersonViewChangeDelegate>
+@interface MCEditTripViewController : UITableViewController <NSFetchedResultsControllerDelegate, UITextFieldDelegate, UIAlertViewDelegate, MCPersonViewChangeDelegate>
 {
     IBOutlet UIControl *newTripHeaderView;
     IBOutlet UITextField *tripNameField;
     UIBarButtonItem *doneButton;
     __strong IBOutlet MCTwoLabelsTitleView *twoLabelTitleView;
     
-    MCAddressBookDataReceiver *personReceiver;
+    NSFetchedResultsController *dataController;
     
-    MCPeople *editedPeople;
+    // MCAddressBookDataReceiver *personReceiver;
+    
     BOOL isInitAsNew;
-    NSString *tripName;
 }
 
 @property (nonatomic, strong) MCSharedBill *tonightsBill;

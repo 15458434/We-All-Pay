@@ -7,11 +7,10 @@
 //
 
 #import "MCEditTripViewController.h"
-#import "MCPeople.h"
+#import "MCPersonViewController.h"
+#import "MCWeAllPayStoreController.h"
 #import "MCPerson.h"
 #import "MCSharedBill.h"
-#import "MCPersonViewController.h"
-#import "MCAllTripsStore.h"
 #import "MCPersonTableViewCell.h"
 #import "MCTwoLabelsTitleView.h"
 
@@ -32,6 +31,7 @@
 
 - (void)addPerson:(id)selector
 {
+    /*
     MCPerson *newPerson = [[MCPerson alloc] init];
     [editedPeople addPerson:newPerson];
     [self updateSubLabel];
@@ -41,20 +41,26 @@
     NSInteger lastRow = [[editedPeople allPeople] indexOfObject:newPerson];
     NSIndexPath *ip = [NSIndexPath indexPathForRow:lastRow inSection:0];
     [[self tableView] insertRowsAtIndexPaths:[NSArray arrayWithObject:ip] withRowAnimation:UITableViewRowAnimationTop];
+     */
 }
 
 - (void)doneAddingPeople:(id)selector
 {
+    /*
     if ([editedPeople areTherePeople]) {
         [tonightsBill setTripName:tripName];
         [editedPeople setEditing:NO];
         [tonightsBill setPeople:editedPeople];
         [[self presentingViewController] dismissViewControllerAnimated:YES completion:dismissblock];
     }
+     */
+    [[self presentingViewController] dismissViewControllerAnimated:YES completion:dismissblock];
 }
 
 - (void)doneEditingTrip:(id)selector
 {
+    [[self navigationController] popViewControllerAnimated:YES];
+    /*
     if ([editedPeople areTherePeople]) {
         if (tripName) {
             [tonightsBill setTripName:tripName];
@@ -70,11 +76,13 @@
                                                                otherButtonTitles:@"Edit", nil];
         [noPeoplePresentMessage show];
     }
+     */
 }
 
 - (void)cancelNewTrip:(id)selector
 {
-    [[MCAllTripsStore sharedList] removeTrip:tonightsBill];
+    [MCSharedBill deleteSharedbill:tonightsBill];
+    [[[[MCWeAllPayStoreController sharedStore] weAllPayStoreDocument] managedObjectContext] processPendingChanges];
     [[self presentingViewController] dismissViewControllerAnimated:YES completion:dismissYourSelf];
 }
 
@@ -85,32 +93,40 @@
 
 - (void)getPeopleFromAddressBook:(id)selector
 {
+    /*
     ABPeoplePickerNavigationController *peoplePicker = [[ABPeoplePickerNavigationController alloc] init];
     if (!personReceiver) {
         personReceiver = [[MCAddressBookDataReceiver alloc] initWithViewController:self andDelegate:self];
     }
     [peoplePicker setPeoplePickerDelegate:personReceiver];
     [self presentViewController:peoplePicker animated:YES completion:nil];
+     */
 }
 
 - (IBAction)changeNameOfTrip:(id)sender {
+    /*
     [tonightsBill setTripName:[tripNameField text]];
     [[self view] endEditing:YES];
     [[[self navigationItem] rightBarButtonItem] setEnabled:YES];
+     */
 }
 
 - (IBAction)dismissKeyboard:(id)sender {
+    /*
     [tonightsBill setTripName:[tripNameField text]];
     [[self view] endEditing:YES];
+     */
 }
 
 #pragma mark - new in this class.
 
 - (void)setTonightsBill:(MCSharedBill *)tBill
 {
+    /*
     tonightsBill = tBill;
     editedPeople = [[tonightsBill people] copy];
     [editedPeople setEditing:YES];
+     */
 }
 
 - (UIView *)NewTripHeaderView
@@ -128,8 +144,6 @@
     if (self) {
         if (newBill) {
             tonightsBill = newBill;
-            editedPeople = [[tonightsBill people] copy];
-            [editedPeople setEditing:YES];
         } else {
             @throw [NSException exceptionWithName:@"Nil"
                                            reason:@"Tonightsbill not allowed to be nil"
@@ -137,18 +151,19 @@
         }
         isInitAsNew = isNew;
         didSomethingChange = NO;
-        [tripNameField setDelegate:self];
     }
     return self;
 }
 
 - (void)updateSubLabel
 {
+    /*
     if ([tonightsBill totalAmountOfPeople] == 1) {
         [[twoLabelTitleView subLabel] setText:[NSString stringWithFormat:@"%d person present", [editedPeople howManyPeople]]];
     } else {
         [[twoLabelTitleView subLabel] setText:[NSString stringWithFormat:@"%d people present", [editedPeople howManyPeople]]];
     }
+     */
 }
 
 #pragma mark - inherited from super
@@ -165,6 +180,8 @@
 - (void)viewWillAppear:(BOOL)animated
 {
     [super viewWillAppear:animated];
+    
+    [tripNameField setDelegate:self];
     
     if (!twoLabelTitleView) {
         twoLabelTitleView = [[[NSBundle mainBundle] loadNibNamed:@"MCTwoLabelsTitleView" owner:self options:nil] objectAtIndex:0];
@@ -201,6 +218,27 @@
  
     // Uncomment the following line to display an Edit button in the navigation bar for this view controller.
     // self.navigationItem.rightBarButtonItem = self.editButtonItem;
+    
+    if (!dataController) {
+        // What entities will be fetched.
+        NSFetchRequest *request = [NSFetchRequest fetchRequestWithEntityName:@"MCPerson"];
+        // How to sort the data.
+        NSSortDescriptor *sortDescriptor = [NSSortDescriptor sortDescriptorWithKey:@"dateCreated" ascending:NO];
+        NSArray *sortDescriptorArray = [NSArray arrayWithObject:sortDescriptor];
+        [request setSortDescriptors:sortDescriptorArray];
+        // Select only people from tonightsBill.
+        NSPredicate *predicate = [NSPredicate predicateWithFormat:@"sharedBill = %@", tonightsBill];
+        [request setPredicate:predicate];
+        
+        // Create the FetchedResultsController.
+        dataController = [[NSFetchedResultsController alloc] initWithFetchRequest:request managedObjectContext:[[[MCWeAllPayStoreController sharedStore] weAllPayStoreDocument] managedObjectContext] sectionNameKeyPath:nil cacheName:@"All trips cache."];
+        [dataController setDelegate:self];
+        NSError *error;
+        BOOL success = [dataController performFetch:&error];
+        if (!success) {
+            NSLog(@"Something went wrong");
+        }
+    }
     
     if (isInitAsNew) {
         doneButton = [[UIBarButtonItem alloc] initWithBarButtonSystemItem:UIBarButtonSystemItemDone
@@ -289,17 +327,20 @@
 
 - (BOOL) isNewPersonFromAddressBookAlreadyPresent:(MCPerson *)newPerson
 {
-    return [editedPeople isPersonPresent:newPerson];
+    //return [editedPeople isPersonPresent:newPerson];
+    return NO;
 }
 
 - (void)receiveANewPersonFromAddressBook:(MCPerson *)newPerson
 {
+    /*
     NSUInteger rowNumber = [editedPeople addPerson:newPerson];
     NSIndexPath *ip = [NSIndexPath indexPathForItem:rowNumber inSection:0];
     [[self tableView] insertRowsAtIndexPaths:[NSArray arrayWithObject:ip] withRowAnimation:UITableViewRowAnimationTop];
     didSomethingChange = YES;
     [personReceiver setEditedPerson:nil];
     [[[self navigationItem] rightBarButtonItem] setEnabled:YES];
+     */
 }
 
 #pragma mark - UITextFieldDelegate
@@ -307,6 +348,7 @@
 - (BOOL)textFieldShouldReturn:(UITextField *)textField
 {
     [textField resignFirstResponder];
+    /*
     if ([[editedPeople allPeople] count] == 0) {
         if (kABAuthorizationStatusAuthorized == ABAddressBookGetAuthorizationStatus() ||
             kABAuthorizationStatusNotDetermined == ABAddressBookGetAuthorizationStatus()) {
@@ -315,6 +357,7 @@
             [self addPerson:self];
         }
     }
+     */
     didSomethingChange = YES;
     [[[self navigationItem] rightBarButtonItem] setEnabled:YES];
     return YES;
@@ -322,9 +365,53 @@
 
 -(void)textFieldDidEndEditing:(UITextField *)textField
 {
-    tripName = [[NSString alloc] initWithString:[textField text]];
+    //tripName = [[NSString alloc] initWithString:[textField text]];
+    [tonightsBill setTripName:[textField text]];
+    [[[[MCWeAllPayStoreController sharedStore] weAllPayStoreDocument] managedObjectContext] processPendingChanges];
     if (!didSomethingChange) {
         didSomethingChange = YES;
+    }
+}
+
+#pragma mark - NSFetchedResultsControllerDelegat
+
+- (void)controllerWillChangeContent:(NSFetchedResultsController *)controller
+{
+    [[self tableView] beginUpdates];
+}
+
+- (void)controllerDidChangeContent:(NSFetchedResultsController *)controller
+{
+    [[self tableView] endUpdates];
+}
+
+- (void)controller:(NSFetchedResultsController *)controller didChangeObject:(id)anObject atIndexPath:(NSIndexPath *)indexPath forChangeType:(NSFetchedResultsChangeType)type newIndexPath:(NSIndexPath *)newIndexPath
+{
+    switch(type) {
+            
+        case NSFetchedResultsChangeInsert:
+            [[self tableView] insertRowsAtIndexPaths:[NSArray arrayWithObject:newIndexPath]
+                                    withRowAnimation:UITableViewRowAnimationFade];
+            [self updateSubLabel];
+            break;
+            
+        case NSFetchedResultsChangeDelete:
+            [[self tableView] deleteRowsAtIndexPaths:[NSArray arrayWithObject:indexPath]
+                                    withRowAnimation:UITableViewRowAnimationFade];
+            [self updateSubLabel];
+            break;
+            
+        case NSFetchedResultsChangeUpdate:
+            /*[self configureCell:[[self tableView] cellForRowAtIndexPath:indexPath]
+             atIndexPath:indexPath];*/
+            break;
+            
+        case NSFetchedResultsChangeMove:
+            [[self tableView] deleteRowsAtIndexPaths:[NSArray arrayWithObject:indexPath]
+                                    withRowAnimation:UITableViewRowAnimationFade];
+            [[self tableView] insertRowsAtIndexPaths:[NSArray arrayWithObject:newIndexPath]
+                                    withRowAnimation:UITableViewRowAnimationFade];
+            break;
     }
 }
 
@@ -332,26 +419,26 @@
 
 - (NSInteger)numberOfSectionsInTableView:(UITableView *)tableView
 {
-    return 1;
+    return [[dataController sections] count];
 }
 
 - (NSInteger)tableView:(UITableView *)tableView numberOfRowsInSection:(NSInteger)section
 {
     // Return the number of rows in the section.
-    return [[editedPeople allPeople] count];
+    return [[[dataController sections] objectAtIndex:section] numberOfObjects];
 }
 
 - (UITableViewCell *)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath
 {
-    MCPerson *thisCellsPerson = [[editedPeople allPeople] objectAtIndex:[indexPath row]];
+    MCPerson *thisCellsPerson = [dataController objectAtIndexPath:indexPath];
     MCPersonTableViewCell *thisCell = [tableView dequeueReusableCellWithIdentifier:@"MCPersonTableViewCell"];
     
-    [[thisCell personImage] setImage:[thisCellsPerson thumbnail]];
+    //[[thisCell personImage] setImage:[thisCellsPerson thumbnail]];
     [[thisCell nameLabel] setText:[thisCellsPerson getFullName]];
     [[thisCell emailLabel] setText:[thisCellsPerson emailAddress]];
     NSNumberFormatter *nf = [[NSNumberFormatter alloc] init];
     [nf setNumberStyle:NSNumberFormatterCurrencyStyle];
-    [[thisCell totalSpent] setText:[nf stringFromNumber:[NSNumber numberWithDouble:[tonightsBill totalSumPaidBy:thisCellsPerson]]]];
+    //[[thisCell totalSpent] setText:[nf stringFromNumber:[NSNumber numberWithDouble:[tonightsBill totalSumPaidBy:thisCellsPerson]]]];
     
     return thisCell;
 }
@@ -369,18 +456,21 @@
 // Override to support conditional editing of the table view.
 - (BOOL)tableView:(UITableView *)tableView canEditRowAtIndexPath:(NSIndexPath *)indexPath
 {
+    /*
     MCPerson *person = [[editedPeople allPeople] objectAtIndex:[indexPath row]];
     if ([tonightsBill hasPersonPaidSomething:person]) {
         return NO;
     } else {
         return YES;
     }
+     */
 }
 
 
 // Override to support editing the table view.
 - (void)tableView:(UITableView *)tableView commitEditingStyle:(UITableViewCellEditingStyle)editingStyle forRowAtIndexPath:(NSIndexPath *)indexPath
 {
+    /*
     if (editingStyle == UITableViewCellEditingStyleDelete) {
         MCPerson *removablePerson = [[editedPeople allPeople] objectAtIndex:[indexPath row]];
         if (![tonightsBill hasPersonPaidSomething:removablePerson]) {
@@ -392,6 +482,7 @@
             didSomethingChange = YES;
         }
     }
+     */
 }
 
 /*
@@ -419,12 +510,14 @@
 
 - (void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath
 {
+    /*
     MCPerson *selectedPerson = [[editedPeople allPeople] objectAtIndex:[indexPath row]];
     MCPersonViewController *pvc = [[MCPersonViewController alloc] initWithPerson:selectedPerson];
     [pvc setTonightsBill:tonightsBill];
     [pvc setChangeFlagDelegate:self];
     [pvc setIsNew:NO];
     [[self navigationController] pushViewController:pvc animated:YES];
+     */
 }
 
 @end

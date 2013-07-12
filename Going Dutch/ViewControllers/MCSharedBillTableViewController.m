@@ -14,8 +14,9 @@
 #import "MCPayment.h"
 
 #import "MCAllTripsTableViewController.h"
-#import "MCPaymentTableViewCell.h"
+#import "MCEditTripViewController.h"
 
+#import "MCPaymentTableViewCell.h"
 #import "MCTwoLabelsTitleView.h"
 #import "MCTextFieldAndLabelTitleView.h"
 
@@ -40,10 +41,8 @@
 
 - (void)editBillData:(id)sender
 {
-    /*
      MCEditTripViewController *tvc = [[MCEditTripViewController alloc] initWithBill:tonightsBill isNew:NO];
     [[self navigationController] pushViewController:tvc animated:YES];
-     */
 }
 
 - (void)showWhoPaysWho:(id)sender
@@ -246,7 +245,7 @@
     // if there are NO people on this SharedBill go to the people addscreen
     if (![tonightsBill areTherePeople]) {
         NSLog(@"No people present.");
-        /*MCEditTripViewController *pvc = [[MCEditTripViewController alloc] initWithBill:tonightsBill isNew:YES];
+        MCEditTripViewController *pvc = [[MCEditTripViewController alloc] initWithBill:tonightsBill isNew:YES];
         UINavigationController *navController = [[UINavigationController alloc] initWithRootViewController:pvc];
         [pvc setDismissblock:^{
             [[self tableView] reloadData];
@@ -256,7 +255,6 @@
             [[self navigationController] popViewControllerAnimated:YES];
         }];
         [self presentViewController:navController animated:YES completion:nil];
-         */
     }
 }
 
@@ -341,9 +339,45 @@
      */
 }
     
-#pragma mark - NSFetchedResultsController
-    
-    
+#pragma mark - NSFetchedResultsControllerDelegate
+
+- (void)controllerWillChangeContent:(NSFetchedResultsController *)controller
+{
+    [[self tableView] beginUpdates];
+}
+
+- (void)controllerDidChangeContent:(NSFetchedResultsController *)controller
+{
+    [[self tableView] endUpdates];
+}
+
+- (void)controller:(NSFetchedResultsController *)controller didChangeObject:(id)anObject atIndexPath:(NSIndexPath *)indexPath forChangeType:(NSFetchedResultsChangeType)type newIndexPath:(NSIndexPath *)newIndexPath
+{
+    switch(type) {
+            
+        case NSFetchedResultsChangeInsert:
+            [[self tableView] insertRowsAtIndexPaths:[NSArray arrayWithObject:newIndexPath]
+                                    withRowAnimation:UITableViewRowAnimationFade];
+            break;
+            
+        case NSFetchedResultsChangeDelete:
+            [[self tableView] deleteRowsAtIndexPaths:[NSArray arrayWithObject:indexPath]
+                                    withRowAnimation:UITableViewRowAnimationFade];
+            break;
+            
+        case NSFetchedResultsChangeUpdate:
+            /*[self configureCell:[[self tableView] cellForRowAtIndexPath:indexPath]
+             atIndexPath:indexPath];*/
+            break;
+            
+        case NSFetchedResultsChangeMove:
+            [[self tableView] deleteRowsAtIndexPaths:[NSArray arrayWithObject:indexPath]
+                                    withRowAnimation:UITableViewRowAnimationFade];
+            [[self tableView] insertRowsAtIndexPaths:[NSArray arrayWithObject:newIndexPath]
+                                    withRowAnimation:UITableViewRowAnimationFade];
+            break;
+    }
+}
 
 #pragma mark - Table view data source
 
