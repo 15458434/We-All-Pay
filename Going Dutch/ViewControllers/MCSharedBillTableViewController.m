@@ -245,6 +245,7 @@
     
     // if there are NO people on this SharedBill go to the people addscreen
     if (![tonightsBill areTherePeople]) {
+        NSLog(@"No people present.");
         /*MCEditTripViewController *pvc = [[MCEditTripViewController alloc] initWithBill:tonightsBill isNew:YES];
         UINavigationController *navController = [[UINavigationController alloc] initWithRootViewController:pvc];
         [pvc setDismissblock:^{

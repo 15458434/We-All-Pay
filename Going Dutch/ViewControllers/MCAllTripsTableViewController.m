@@ -44,8 +44,8 @@
     
     [[[[MCWeAllPayStoreController sharedStore] weAllPayStoreDocument] managedObjectContext] processPendingChanges];
     
-    // MCSharedBillTableViewController *tvc = [[MCSharedBillTableViewController alloc] initWithSharedBill:newTrip];
-    // [[self navigationController] pushViewController:tvc animated:YES];
+    MCSharedBillTableViewController *tvc = [[MCSharedBillTableViewController alloc] initWithSharedBill:newTrip];
+    [[self navigationController] pushViewController:tvc animated:YES];
 }
 
 #pragma mark - New in this class.
