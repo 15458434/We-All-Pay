@@ -143,19 +143,16 @@
 
 - (void)controllerWillChangeContent:(NSFetchedResultsController *)controller
 {
-    NSLog(@"Will change content");
     [[self tableView] beginUpdates];
 }
 
 - (void)controllerDidChangeContent:(NSFetchedResultsController *)controller
 {
-    NSLog(@"Did changed content");
     [[self tableView] endUpdates];
 }
 
 - (void)controller:(NSFetchedResultsController *)controller didChangeObject:(id)anObject atIndexPath:(NSIndexPath *)indexPath forChangeType:(NSFetchedResultsChangeType)type newIndexPath:(NSIndexPath *)newIndexPath
 {
-    NSLog(@"Gets called");
     switch(type) {
             
         case NSFetchedResultsChangeInsert:
@@ -208,6 +205,7 @@
     NSNumber *m = [[NSNumber alloc] initWithDouble:[thisTrip totalSumOfMoneyOfThisSharedBill]];
     NSString *moneyString = [nf stringFromNumber:m];
     [[allTripsTableViewCell totalCostLabel] setText:moneyString];
+    */
     
     // fill extraLabel with dateModified.
     if (!df) {
@@ -216,8 +214,6 @@
         [df setTimeStyle:NSDateFormatterShortStyle];
     }
     [[allTripsTableViewCell extraLabel] setText:[df stringFromDate:[thisTrip dateModified]]];
-    //[[allTripsTableViewCell extraLabel] setText:@"Ilse is lief."];
-    */
     
     // [allTripsTableViewCell setAccessoryView:[[UIImageView alloc] initWithImage:[UIImage imageNamed:@"plus sign"]]];
     CGRect buttonRect = CGRectMake(0, 0, 44, 44);
@@ -239,18 +235,16 @@
 }
 */
 
-/*
+
 // Override to support editing the table view.
 - (void)tableView:(UITableView *)tableView commitEditingStyle:(UITableViewCellEditingStyle)editingStyle forRowAtIndexPath:(NSIndexPath *)indexPath
 {
     if (editingStyle == UITableViewCellEditingStyleDelete) {
-        MCAllTripsStore *allTripStore = [MCAllTripsStore sharedList];
-        [allTripStore removeTrip:[[allTripStore allTrips] objectAtIndex:[indexPath row]]];
-        NSArray *indexPaths = [[NSArray alloc] initWithObjects:indexPath, nil];
-        [[self tableView] deleteRowsAtIndexPaths:indexPaths withRowAnimation:UITableViewRowAnimationTop];
+        MCSharedBill *toBeDeleteSharedBill = [dataController objectAtIndexPath:indexPath];
+        [MCSharedBill deleteSharedbill:toBeDeleteSharedBill];
+        [[[[MCWeAllPayStoreController sharedStore] weAllPayStoreDocument] managedObjectContext] processPendingChanges];
     }
 }
-*/
 
 /*
 // Override to support rearranging the table view.
