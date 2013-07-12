@@ -7,10 +7,9 @@
 //
 
 #import "MCAllTripsTableViewController.h"
-#import "MCAllTripsStore.h"
+#import "MCWeAllPayStoreController.h"
 #import "MCSharedBillTableViewController.h"
 #import "MCSharedBill.h"
-#import "MCPeople.h"
 #import "MCAllTripsTableViewCell.h"
 #import "MCTwoLabelsTitleView.h"
 
@@ -37,15 +36,8 @@
 - (void)addTrip:(id)sender
 {
     // Create and add new Trip with a test group.
-    MCSharedBill *newTrip = [[MCSharedBill alloc] init];
-    [[MCAllTripsStore sharedList] addTrip:newTrip];
+    MCSharedBill *newTrip = [MCSharedBill addSharedBill];
     
-    // Find the NSArray index of where the object is present and put it in a NSIndexPath object.
-    NSInteger lastRow = [[[MCAllTripsStore sharedList] allTrips] indexOfObject:newTrip];
-    NSIndexPath *ip = [NSIndexPath indexPathForRow:lastRow inSection:0];
-    
-    // Tell the table view to insert the cell.
-    [[self tableView] insertRowsAtIndexPaths:[NSArray arrayWithObject:ip] withRowAnimation:UITableViewRowAnimationTop];
     MCSharedBillTableViewController *tvc = [[MCSharedBillTableViewController alloc] initWithSharedBill:newTrip];
     [[self navigationController] pushViewController:tvc animated:YES];
 }
@@ -59,7 +51,6 @@
     self = [super initWithStyle:UITableViewStylePlain];
     
     if (self) {
-        [MCAllTripsStore sharedList];
         [[self navigationItem] setTitle:@"Back"];
     }
     return self;
@@ -100,6 +91,20 @@
 {
     [super viewDidLoad];
     
+    // Load the NSFetchResultsController
+    if (!dataController) {
+        // What entities will be fetched.
+        NSFetchRequest *request = [NSFetchRequest fetchRequestWithEntityName:@"MCSharedBill"];
+        // How to sort the data.
+        NSSortDescriptor *sortDescriptor = [NSSortDescriptor sortDescriptorWithKey:@"dateCreated" ascending:NO];
+        NSArray *sortDescriptorArray = [NSArray arrayWithObject:sortDescriptor];
+        [request setSortDescriptors:sortDescriptorArray];
+        
+        // Create the FetchedResultsController.
+        dataController = [[NSFetchedResultsController alloc] initWithFetchRequest:request managedObjectContext:[[[MCWeAllPayStoreController sharedStore] weAllPayStoreDocument] managedObjectContext] sectionNameKeyPath:nil cacheName:@"All trips cache."];
+        [dataController setDelegate:self];
+    }
+    
     // Load the nib file
     UINib *nib = [UINib nibWithNibName:@"MCAllTripsTableViewCell" bundle:nil];
     
@@ -122,25 +127,65 @@
     [[self tableView] reloadData];
 }
 
+#pragma mark - NSFetchedResultsControllerDelegate
+
+- (void)controllerWillChangeContent:(NSFetchedResultsController *)controller
+{
+    [[self tableView] beginUpdates];
+}
+
+- (void)controllerDidChangeContent:(NSFetchedResultsController *)controller
+{
+    [[self tableView] endUpdates];
+}
+
+- (void)controller:(NSFetchedResultsController *)controller didChangeObject:(id)anObject atIndexPath:(NSIndexPath *)indexPath forChangeType:(NSFetchedResultsChangeType)type newIndexPath:(NSIndexPath *)newIndexPath
+{
+    switch(type) {
+            
+        case NSFetchedResultsChangeInsert:
+            [[self tableView] insertRowsAtIndexPaths:[NSArray arrayWithObject:newIndexPath]
+                                    withRowAnimation:UITableViewRowAnimationFade];
+            break;
+            
+        case NSFetchedResultsChangeDelete:
+            [[self tableView] deleteRowsAtIndexPaths:[NSArray arrayWithObject:indexPath]
+                                    withRowAnimation:UITableViewRowAnimationFade];
+            break;
+            
+        case NSFetchedResultsChangeUpdate:
+            [self configureCell:[[self tableView] cellForRowAtIndexPath:indexPath]
+                    atIndexPath:indexPath];
+            break;
+            
+        case NSFetchedResultsChangeMove:
+            [[self tableView] deleteRowsAtIndexPaths:[NSArray arrayWithObject:indexPath]
+                                    withRowAnimation:UITableViewRowAnimationFade];
+            [[self tableView] insertRowsAtIndexPaths:[NSArray arrayWithObject:newIndexPath]
+                                    withRowAnimation:UITableViewRowAnimationFade];
+            break;
+    }
+}
+
 #pragma mark - Table view data source
 
 - (NSInteger)numberOfSectionsInTableView:(UITableView *)tableView
 {
-    return 1;
+    return [[dataController sections] count];
 }
 
 - (NSInteger)tableView:(UITableView *)tableView numberOfRowsInSection:(NSInteger)section
 {
-    return [[[MCAllTripsStore sharedList] allTrips] count];
+    return [[[dataController sections] objectAtIndex:section] numberOfObjects];
 }
 
 - (UITableViewCell *)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath
 {
-    MCSharedBill *thisTrip = [[[MCAllTripsStore sharedList] allTrips] objectAtIndex:[indexPath row]];
+    MCSharedBill *thisTrip = [dataController objectAtIndexPath:indexPath];
     MCAllTripsTableViewCell *allTripsTableViewCell = [tableView dequeueReusableCellWithIdentifier:@"MCAllTripsTableViewCell"];
     
     [[allTripsTableViewCell tripLabel] setText:[thisTrip tripName]];
-    [[allTripsTableViewCell peoplePresentLabel] setText:[[thisTrip people] stringOfApproxPeoplePresent]];
+    // [[allTripsTableViewCell peoplePresentLabel] setText:[[thisTrip people] stringOfApproxPeoplePresent]];
 
     NSNumberFormatter *nf = [[NSNumberFormatter alloc] init];
     [nf setNumberStyle:NSNumberFormatterCurrencyStyle];
@@ -177,6 +222,7 @@
 }
 */
 
+/*
 // Override to support editing the table view.
 - (void)tableView:(UITableView *)tableView commitEditingStyle:(UITableViewCellEditingStyle)editingStyle forRowAtIndexPath:(NSIndexPath *)indexPath
 {
@@ -187,6 +233,7 @@
         [[self tableView] deleteRowsAtIndexPaths:indexPaths withRowAnimation:UITableViewRowAnimationTop];
     }
 }
+*/
 
 /*
 // Override to support rearranging the table view.

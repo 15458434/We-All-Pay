@@ -7,16 +7,18 @@
 //
 
 #import <UIKit/UIKit.h>
+#import <CoreData/CoreData.h>
 #import "MCPaymentViewController.h"
 
-@class MCAllTripsStore;
+@class MCWeAllPayStoreController;
 @class MCTwoLabelsTitleView;
 
-@interface MCAllTripsTableViewController : UITableViewController <MCPaymentViewControllerDelegate>
+@interface MCAllTripsTableViewController : UITableViewController <MCPaymentViewControllerDelegate, NSFetchedResultsControllerDelegate>
 {
     __strong IBOutlet MCTwoLabelsTitleView *titleView;
     
     NSDateFormatter *df;
+    NSFetchedResultsController *dataController;
 }
 
 - (void)addTrip:(id)sender;

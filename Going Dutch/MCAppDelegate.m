@@ -8,10 +8,18 @@
 
 #import "MCAppDelegate.h"
 #import "MCAllTripsTableViewController.h"
-#import "MCAllTripsStore.h"
-#import "MCImageStoreController.h"
+#import "MCWeAllPayStoreController.h"
 
 @implementation MCAppDelegate
+
+- (void)showRootView:(NSNotification *)notification;
+{
+    if ([[notification name] isEqualToString:@"Start views."]) {
+        [[self window] setRootViewController:navController];
+    } else {
+        NSLog(@"Received wrong notification.");
+    }
+}
 
 - (BOOL)application:(UIApplication *)application didFinishLaunchingWithOptions:(NSDictionary *)launchOptions
 {
@@ -21,8 +29,9 @@
     
     // Make the the TableView with all the trips the root view controller.
     MCAllTripsTableViewController *allTripsView = [[MCAllTripsTableViewController alloc] init];
-    UINavigationController *navController = [[UINavigationController alloc] initWithRootViewController:allTripsView];
-    [[self window] setRootViewController:navController];
+    navController = [[UINavigationController alloc] initWithRootViewController:allTripsView];
+    NSNotificationCenter *nc = [NSNotificationCenter defaultCenter];
+    [nc addObserver:self selector:@selector(showRootView:) name:@"Start views" object:nil];
     
     self.window.backgroundColor = [UIColor whiteColor];
     [self.window makeKeyAndVisible];
@@ -37,13 +46,7 @@
 
 - (void)applicationDidEnterBackground:(UIApplication *)application
 {
-    [[MCImageStoreController sharedStore] saveStore];
-    BOOL succes = [[MCAllTripsStore sharedList] saveChanges];
-    if (succes) {
-        NSLog(@"Archive has been saved.");
-    } else {
-        NSLog(@"Error saving archive.");
-    }
+    [[MCWeAllPayStoreController sharedStore] saveStore];
 }
 
 - (void)applicationWillEnterForeground:(UIApplication *)application
@@ -59,6 +62,11 @@
 - (void)applicationWillTerminate:(UIApplication *)application
 {
     // Called when the application is about to terminate. Save data if appropriate. See also applicationDidEnterBackground:.
+}
+
+- (void)dealloc
+{
+    [[NSNotificationCenter defaultCenter] removeObserver:self name:@"Start views" object:nil];
 }
 
 @end

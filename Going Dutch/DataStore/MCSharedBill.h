@@ -11,6 +11,7 @@
 
 @class MCPerson;
 @class MCPayment;
+@class MCWeAllPayStoreController;
 
 @interface MCSharedBill : NSManagedObject
 
@@ -29,7 +30,9 @@
 
 - (NSArray *)fetchAllPayments;
 
+- (NSString *)stringOfApproxPeoplePresent;
 - (BOOL)areTherePeople;
+
 - (BOOL)addPerson:(MCPerson *)newPerson;
 - (void)removePerson:(MCPerson *)awfulPerson;
 - (NSUInteger)totalAmountOfPeople;
@@ -60,8 +63,8 @@
 - (void)addPeoplePresent:(NSSet *)values;
 - (void)removePeoplePresent:(NSSet *)values;
 
-@interface MCSharedBill (TestMethods)
+@end
 
-- (id)initWithTestGroup;
+@interface MCSharedBill (TestMessages)
 
 @end

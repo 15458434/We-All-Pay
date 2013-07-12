@@ -9,6 +9,10 @@
 #import <Foundation/Foundation.h>
 #import <CoreData/CoreData.h>
 
+@class MCPayment;
+@class MCPerson;
+@class MCSharedBill;
+
 @interface MCWeAllPayStoreController : NSObject
 {
     
@@ -17,5 +21,7 @@
 @property (nonatomic, strong, readonly) UIManagedDocument *weAllPayStoreDocument;
 
 + (MCWeAllPayStoreController *)sharedStore;
+
+- (void)saveStore;
 
 @end

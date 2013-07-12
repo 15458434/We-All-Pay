@@ -8,10 +8,22 @@
 
 #import "MCWeAllPayStoreController.h"
 #import "MCTools.h"
+#import "MCPerson.h"
+#import "MCPayment.h"
+#import "MCSharedBill.h"
 
 @implementation MCWeAllPayStoreController
 
 @synthesize weAllPayStoreDocument;
+
+#pragma mark - Internal methods
+
+- (void)documentIsReady
+{
+    NSNotificationCenter *nc = [NSNotificationCenter defaultCenter];
+    NSNotification *n = [NSNotification notificationWithName:@"Start views" object:self];
+    [nc postNotification:n];
+}
 
 #pragma mark - New in this class
 
@@ -22,6 +34,15 @@
         sharedStore = [[super allocWithZone:nil] init];
     }
     return sharedStore;
+}
+
+- (void)saveStore
+{
+    [weAllPayStoreDocument saveToURL:[weAllPayStoreDocument fileURL] forSaveOperation:UIDocumentSaveForOverwriting completionHandler:^(BOOL success){
+        if (!success) {
+            NSLog(@"Save not possible for document at %@", [weAllPayStoreDocument fileURL]);
+        }
+    }];
 }
 
 #pragma mark - Inherited from super class
@@ -37,18 +58,24 @@
         weAllPayStoreDocument = [[UIManagedDocument alloc] initWithFileURL:weAllPayURL];
         if ([[NSFileManager defaultManager] fileExistsAtPath:[weAllPayURL path]]) {
             [weAllPayStoreDocument openWithCompletionHandler:^(BOOL success){
-                if (!success) {
-                    // Handle the error.
-                    NSLog(@"Unable to open WeAllPayStore");
+                if (success) {
+                    // The document is ready to use.
+                    [self documentIsReady];
+                } else {
+                    // The document is is not ready to use.
+                    NSLog(@"Couldn't open storage file at %@", weAllPayURL);
                 }
             }];
         }
         else {
             // If file doesn't exist. Create it.
             [weAllPayStoreDocument saveToURL:weAllPayURL forSaveOperation:UIDocumentSaveForCreating completionHandler:^(BOOL success){
-                if (!success) {
-                    // Handle the error.
-                    NSLog(@"Unable to create WeAllPayStore");
+                if (success) {
+                    // The document is ready to use.
+                    [self documentIsReady];
+                } else {
+                    // The document is not ready to use.
+                    NSLog(@"Couldn't create storage file at %@", weAllPayURL);
                 }
             }];
         }
