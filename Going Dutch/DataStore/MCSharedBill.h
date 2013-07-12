@@ -31,12 +31,14 @@
 - (NSArray *)fetchAllPayments;
 
 - (NSString *)stringOfApproxPeoplePresent;
+
 - (BOOL)areTherePeople;
+- (NSUInteger)totalAmountOfPeoplePresent;
+- (NSUInteger)totalAmountOfPeopleWhoHavePaid;
 
 - (BOOL)addPerson:(MCPerson *)newPerson;
 - (void)removePerson:(MCPerson *)awfulPerson;
-- (NSUInteger)totalAmountOfPeople;
-- (NSUInteger)totalAmountOfPeopleWhoHavePaid;
+
 
 - (void)addPayment:(MCPayment *)newPayment;
 - (void)removePayment:(MCPayment *)removePayment;

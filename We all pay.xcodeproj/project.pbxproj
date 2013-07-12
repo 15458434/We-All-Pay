@@ -43,6 +43,7 @@
 		3897158A17901D55005BE03E /* MCPersonTableViewCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 3897158317901D55005BE03E /* MCPersonTableViewCell.xib */; };
 		3897158B17901D55005BE03E /* MCReturnPaymentTableViewCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 3897158517901D55005BE03E /* MCReturnPaymentTableViewCell.m */; };
 		3897158C17901D55005BE03E /* MCReturnPaymentTableViewCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 3897158617901D55005BE03E /* MCReturnPaymentTableViewCell.xib */; };
+		3897159217902E35005BE03E /* MCSharedBillTableViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 3897159117902E35005BE03E /* MCSharedBillTableViewController.m */; };
 		3898AAE21727B50E008F947E /* toolbar is sign.png in Resources */ = {isa = PBXBuildFile; fileRef = 3898AAE01727B50E008F947E /* toolbar is sign.png */; };
 		3898AAE31727B50E008F947E /* toolbar is sign@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 3898AAE11727B50E008F947E /* toolbar is sign@2x.png */; };
 		3898AAE617297F80008F947E /* mail icon.png in Resources */ = {isa = PBXBuildFile; fileRef = 3898AAE417297F80008F947E /* mail icon.png */; };
@@ -108,6 +109,8 @@
 		3897158417901D55005BE03E /* MCReturnPaymentTableViewCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = MCReturnPaymentTableViewCell.h; path = Views/MCReturnPaymentTableViewCell.h; sourceTree = "<group>"; };
 		3897158517901D55005BE03E /* MCReturnPaymentTableViewCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = MCReturnPaymentTableViewCell.m; path = Views/MCReturnPaymentTableViewCell.m; sourceTree = "<group>"; };
 		3897158617901D55005BE03E /* MCReturnPaymentTableViewCell.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; name = MCReturnPaymentTableViewCell.xib; path = Views/MCReturnPaymentTableViewCell.xib; sourceTree = "<group>"; };
+		3897159017902E35005BE03E /* MCSharedBillTableViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = MCSharedBillTableViewController.h; path = ViewControllers/MCSharedBillTableViewController.h; sourceTree = "<group>"; };
+		3897159117902E35005BE03E /* MCSharedBillTableViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = MCSharedBillTableViewController.m; path = ViewControllers/MCSharedBillTableViewController.m; sourceTree = "<group>"; };
 		3898AAE01727B50E008F947E /* toolbar is sign.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = "toolbar is sign.png"; path = "Going Dutch/icons/toolbar is sign.png"; sourceTree = "<group>"; };
 		3898AAE11727B50E008F947E /* toolbar is sign@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = "toolbar is sign@2x.png"; path = "Going Dutch/icons/toolbar is sign@2x.png"; sourceTree = "<group>"; };
 		3898AAE417297F80008F947E /* mail icon.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = "mail icon.png"; path = "Going Dutch/icons/mail icon.png"; sourceTree = "<group>"; };
@@ -242,6 +245,8 @@
 			children = (
 				38572AF6169D443C00969C62 /* MCAllTripsTableViewController.h */,
 				38572B09169F3D2700969C62 /* MCAllTripsTableViewController.m */,
+				3897159017902E35005BE03E /* MCSharedBillTableViewController.h */,
+				3897159117902E35005BE03E /* MCSharedBillTableViewController.m */,
 			);
 			name = ViewControllers;
 			sourceTree = "<group>";
@@ -421,6 +426,7 @@
 				3897158717901D55005BE03E /* MCPaymentTableViewCell.m in Sources */,
 				3897158917901D55005BE03E /* MCPersonTableViewCell.m in Sources */,
 				3897158B17901D55005BE03E /* MCReturnPaymentTableViewCell.m in Sources */,
+				3897159217902E35005BE03E /* MCSharedBillTableViewController.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

@@ -60,4 +60,18 @@
     }
 }
 
+- (BOOL)areTherePeople
+{
+    if ([[self peoplePresent] count] == 0) {
+        return NO;
+    } else {
+        return YES;
+    }
+}
+
+- (NSUInteger)totalAmountOfPeoplePresent
+{
+    return [[self peoplePresent] count];
+}
+
 @end

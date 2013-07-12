@@ -7,6 +7,7 @@
 //
 
 #import "MCAllTripsTableViewController.h"
+#import "MCSharedBillTableViewController.h"
 #import "MCWeAllPayStoreController.h"
 #import "MCSharedBill.h"
 #import "MCAllTripsTableViewCell.h"
@@ -281,10 +282,8 @@
 
 - (void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath
 {
-    /*
-    MCSharedBillTableViewController *tonightsTripView = [[MCSharedBillTableViewController alloc] initWithSharedBill:[[[MCAllTripsStore sharedList] allTrips] objectAtIndex:[indexPath row]]];
+    MCSharedBillTableViewController *tonightsTripView = [[MCSharedBillTableViewController alloc] initWithSharedBill:[dataController objectAtIndexPath:indexPath]];
     [self.navigationController pushViewController:tonightsTripView animated:YES];
-     */
 }
 
 @end
