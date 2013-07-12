@@ -8,7 +8,6 @@
 
 #import "MCAllTripsTableViewController.h"
 #import "MCWeAllPayStoreController.h"
-#import "MCSharedBillTableViewController.h"
 #import "MCSharedBill.h"
 #import "MCAllTripsTableViewCell.h"
 #import "MCTwoLabelsTitleView.h"
@@ -38,8 +37,14 @@
     // Create and add new Trip with a test group.
     MCSharedBill *newTrip = [MCSharedBill addSharedBill];
     
-    MCSharedBillTableViewController *tvc = [[MCSharedBillTableViewController alloc] initWithSharedBill:newTrip];
-    [[self navigationController] pushViewController:tvc animated:YES];
+    NSArray *listOfTripNames = [NSArray arrayWithObjects:@"Bier", @"Sauna", @"Nataraj", @"Kamperen", nil];
+    NSUInteger randomNumber = rand() % [listOfTripNames count];
+    [newTrip setTripName:[listOfTripNames objectAtIndex:randomNumber]];
+    
+    [[[[MCWeAllPayStoreController sharedStore] weAllPayStoreDocument] managedObjectContext] processPendingChanges];
+    
+    // MCSharedBillTableViewController *tvc = [[MCSharedBillTableViewController alloc] initWithSharedBill:newTrip];
+    // [[self navigationController] pushViewController:tvc animated:YES];
 }
 
 #pragma mark - New in this class.
@@ -100,9 +105,16 @@
         NSArray *sortDescriptorArray = [NSArray arrayWithObject:sortDescriptor];
         [request setSortDescriptors:sortDescriptorArray];
         
+        
+        
         // Create the FetchedResultsController.
         dataController = [[NSFetchedResultsController alloc] initWithFetchRequest:request managedObjectContext:[[[MCWeAllPayStoreController sharedStore] weAllPayStoreDocument] managedObjectContext] sectionNameKeyPath:nil cacheName:@"All trips cache."];
         [dataController setDelegate:self];
+        NSError *error;
+        BOOL success = [dataController performFetch:&error];
+        if (!success) {
+            NSLog(@"Something went wrong");
+        }
     }
     
     // Load the nib file
@@ -120,27 +132,30 @@
 
 #pragma mark - MCReturnPaymentViewControllerDelegate
 
-- (void)removePayment:(MCPayment *)payment fromPaymentViewController:(MCPaymentViewController *)pvc
+/*- (void)removePayment:(MCPayment *)payment fromPaymentViewController:(MCPaymentViewController *)pvc
 {
     NSLog(@"removePayment in AllTripsTableViewController.");
     [[pvc tonightsBill] removePayment:payment];
     [[self tableView] reloadData];
-}
+}*/
 
 #pragma mark - NSFetchedResultsControllerDelegate
 
 - (void)controllerWillChangeContent:(NSFetchedResultsController *)controller
 {
+    NSLog(@"Will change content");
     [[self tableView] beginUpdates];
 }
 
 - (void)controllerDidChangeContent:(NSFetchedResultsController *)controller
 {
+    NSLog(@"Did changed content");
     [[self tableView] endUpdates];
 }
 
 - (void)controller:(NSFetchedResultsController *)controller didChangeObject:(id)anObject atIndexPath:(NSIndexPath *)indexPath forChangeType:(NSFetchedResultsChangeType)type newIndexPath:(NSIndexPath *)newIndexPath
 {
+    NSLog(@"Gets called");
     switch(type) {
             
         case NSFetchedResultsChangeInsert:
@@ -154,8 +169,8 @@
             break;
             
         case NSFetchedResultsChangeUpdate:
-            [self configureCell:[[self tableView] cellForRowAtIndexPath:indexPath]
-                    atIndexPath:indexPath];
+            /*[self configureCell:[[self tableView] cellForRowAtIndexPath:indexPath]
+                    atIndexPath:indexPath];*/
             break;
             
         case NSFetchedResultsChangeMove:
@@ -187,6 +202,7 @@
     [[allTripsTableViewCell tripLabel] setText:[thisTrip tripName]];
     // [[allTripsTableViewCell peoplePresentLabel] setText:[[thisTrip people] stringOfApproxPeoplePresent]];
 
+    /*
     NSNumberFormatter *nf = [[NSNumberFormatter alloc] init];
     [nf setNumberStyle:NSNumberFormatterCurrencyStyle];
     NSNumber *m = [[NSNumber alloc] initWithDouble:[thisTrip totalSumOfMoneyOfThisSharedBill]];
@@ -201,6 +217,7 @@
     }
     [[allTripsTableViewCell extraLabel] setText:[df stringFromDate:[thisTrip dateModified]]];
     //[[allTripsTableViewCell extraLabel] setText:@"Ilse is lief."];
+    */
     
     // [allTripsTableViewCell setAccessoryView:[[UIImageView alloc] initWithImage:[UIImage imageNamed:@"plus sign"]]];
     CGRect buttonRect = CGRectMake(0, 0, 44, 44);
@@ -260,16 +277,20 @@
 
 - (void)tableView:(UITableView *)tableView accessoryButtonTappedForRowWithIndexPath:(NSIndexPath *)indexPath
 {
+    /*
     MCSharedBill *thisBill = [[[MCAllTripsStore sharedList] allTrips] objectAtIndex:[indexPath row]];
     MCPaymentViewController *pvc = [[MCPaymentViewController alloc] initWithExistingPayment:nil fromBill:thisBill];
     [pvc setDelegate:self];
     [[self navigationController] pushViewController:pvc animated:YES];
+     */
 }
 
 - (void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath
 {
+    /*
     MCSharedBillTableViewController *tonightsTripView = [[MCSharedBillTableViewController alloc] initWithSharedBill:[[[MCAllTripsStore sharedList] allTrips] objectAtIndex:[indexPath row]]];
     [self.navigationController pushViewController:tonightsTripView animated:YES];
+     */
 }
 
 @end

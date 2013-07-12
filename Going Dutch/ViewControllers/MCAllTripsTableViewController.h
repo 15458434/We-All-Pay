@@ -8,12 +8,11 @@
 
 #import <UIKit/UIKit.h>
 #import <CoreData/CoreData.h>
-#import "MCPaymentViewController.h"
 
 @class MCWeAllPayStoreController;
 @class MCTwoLabelsTitleView;
 
-@interface MCAllTripsTableViewController : UITableViewController <MCPaymentViewControllerDelegate, NSFetchedResultsControllerDelegate>
+@interface MCAllTripsTableViewController : UITableViewController < NSFetchedResultsControllerDelegate>
 {
     __strong IBOutlet MCTwoLabelsTitleView *titleView;
     

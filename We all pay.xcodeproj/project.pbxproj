@@ -23,7 +23,6 @@
 		38572AE1169D437B00969C62 /* InfoPlist.strings in Resources */ = {isa = PBXBuildFile; fileRef = 38572ADF169D437B00969C62 /* InfoPlist.strings */; };
 		38572AE3169D437B00969C62 /* main.m in Sources */ = {isa = PBXBuildFile; fileRef = 38572AE2169D437B00969C62 /* main.m */; };
 		38572AE7169D437B00969C62 /* MCAppDelegate.m in Sources */ = {isa = PBXBuildFile; fileRef = 38572AE6169D437B00969C62 /* MCAppDelegate.m */; };
-		38572B04169DD70100969C62 /* MCSharedBillTableViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 38572B03169DD70100969C62 /* MCSharedBillTableViewController.m */; };
 		38572B0A169F3D2700969C62 /* MCAllTripsTableViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 38572B09169F3D2700969C62 /* MCAllTripsTableViewController.m */; };
 		3873A2A516F23AA1000832FD /* MessageUI.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 3873A2A416F23AA1000832FD /* MessageUI.framework */; };
 		3886D3FD16B7A1CD00ECE64F /* AddressBook.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 3886D3FB16B7A1CD00ECE64F /* AddressBook.framework */; };
@@ -79,8 +78,6 @@
 		38572AEA169D437B00969C62 /* Default@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "Default@2x.png"; sourceTree = "<group>"; };
 		38572AEC169D437B00969C62 /* Default-568h@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "Default-568h@2x.png"; sourceTree = "<group>"; };
 		38572AF6169D443C00969C62 /* MCAllTripsTableViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = MCAllTripsTableViewController.h; path = ViewControllers/MCAllTripsTableViewController.h; sourceTree = "<group>"; };
-		38572B02169DD70100969C62 /* MCSharedBillTableViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = MCSharedBillTableViewController.h; path = ViewControllers/MCSharedBillTableViewController.h; sourceTree = "<group>"; };
-		38572B03169DD70100969C62 /* MCSharedBillTableViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = MCSharedBillTableViewController.m; path = ViewControllers/MCSharedBillTableViewController.m; sourceTree = "<group>"; };
 		38572B09169F3D2700969C62 /* MCAllTripsTableViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = MCAllTripsTableViewController.m; path = ViewControllers/MCAllTripsTableViewController.m; sourceTree = "<group>"; };
 		3873A2A416F23AA1000832FD /* MessageUI.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = MessageUI.framework; path = System/Library/Frameworks/MessageUI.framework; sourceTree = SDKROOT; };
 		3873A2A616F2858A000832FD /* Going Dutch.entitlements */ = {isa = PBXFileReference; lastKnownFileType = text.xml; path = "Going Dutch.entitlements"; sourceTree = "<group>"; };
@@ -245,8 +242,6 @@
 			children = (
 				38572AF6169D443C00969C62 /* MCAllTripsTableViewController.h */,
 				38572B09169F3D2700969C62 /* MCAllTripsTableViewController.m */,
-				38572B02169DD70100969C62 /* MCSharedBillTableViewController.h */,
-				38572B03169DD70100969C62 /* MCSharedBillTableViewController.m */,
 			);
 			name = ViewControllers;
 			sourceTree = "<group>";
@@ -413,7 +408,6 @@
 			files = (
 				38572AE3169D437B00969C62 /* main.m in Sources */,
 				38572AE7169D437B00969C62 /* MCAppDelegate.m in Sources */,
-				38572B04169DD70100969C62 /* MCSharedBillTableViewController.m in Sources */,
 				38572B0A169F3D2700969C62 /* MCAllTripsTableViewController.m in Sources */,
 				38EFF2D416D215BE001C8248 /* MCAllTripsTableViewCell.m in Sources */,
 				38CDE90017135B6300387CAA /* MCTools.m in Sources */,

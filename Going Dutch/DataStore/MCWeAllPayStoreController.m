@@ -18,12 +18,7 @@
 
 #pragma mark - Internal methods
 
-- (void)documentIsReady
-{
-    NSNotificationCenter *nc = [NSNotificationCenter defaultCenter];
-    NSNotification *n = [NSNotification notificationWithName:@"Start views" object:self];
-    [nc postNotification:n];
-}
+
 
 #pragma mark - New in this class
 
@@ -60,7 +55,7 @@
             [weAllPayStoreDocument openWithCompletionHandler:^(BOOL success){
                 if (success) {
                     // The document is ready to use.
-                    [self documentIsReady];
+                    
                 } else {
                     // The document is is not ready to use.
                     NSLog(@"Couldn't open storage file at %@", weAllPayURL);
@@ -72,7 +67,7 @@
             [weAllPayStoreDocument saveToURL:weAllPayURL forSaveOperation:UIDocumentSaveForCreating completionHandler:^(BOOL success){
                 if (success) {
                     // The document is ready to use.
-                    [self documentIsReady];
+                    
                 } else {
                     // The document is not ready to use.
                     NSLog(@"Couldn't create storage file at %@", weAllPayURL);

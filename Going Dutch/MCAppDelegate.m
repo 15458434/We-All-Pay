@@ -12,15 +12,6 @@
 
 @implementation MCAppDelegate
 
-- (void)showRootView:(NSNotification *)notification;
-{
-    if ([[notification name] isEqualToString:@"Start views."]) {
-        [[self window] setRootViewController:navController];
-    } else {
-        NSLog(@"Received wrong notification.");
-    }
-}
-
 - (BOOL)application:(UIApplication *)application didFinishLaunchingWithOptions:(NSDictionary *)launchOptions
 {
     self.window = [[UIWindow alloc] initWithFrame:[[UIScreen mainScreen] bounds]];
@@ -29,9 +20,8 @@
     
     // Make the the TableView with all the trips the root view controller.
     MCAllTripsTableViewController *allTripsView = [[MCAllTripsTableViewController alloc] init];
-    navController = [[UINavigationController alloc] initWithRootViewController:allTripsView];
-    NSNotificationCenter *nc = [NSNotificationCenter defaultCenter];
-    [nc addObserver:self selector:@selector(showRootView:) name:@"Start views" object:nil];
+    UINavigationController *navController = [[UINavigationController alloc] initWithRootViewController:allTripsView];
+    [[self window] setRootViewController:navController];
     
     self.window.backgroundColor = [UIColor whiteColor];
     [self.window makeKeyAndVisible];
