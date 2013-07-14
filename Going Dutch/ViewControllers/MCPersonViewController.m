@@ -65,7 +65,7 @@
     ABPeoplePickerNavigationController *peoplePicker = [[ABPeoplePickerNavigationController alloc] init];
     if (!personReceiver) {
         personReceiver = [[MCAddressBookDataReceiver alloc] initWithViewController:self andDelegate:self];
-        [personReceiver setEditedPerson:thisPerson];
+        [personReceiver setThisPerson:thisPerson];
     }
     
     [peoplePicker setPeoplePickerDelegate:personReceiver];

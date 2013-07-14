@@ -7,6 +7,7 @@
 //
 
 #import "MCAddressBookDataReceiver.h"
+#import "MCEmailAddress.h"
 #import "MCPerson.h"
 
 @implementation MCAddressBookDataReceiver
@@ -27,16 +28,17 @@
     [thisPerson setLastName:(__bridge_transfer NSString *)ABRecordCopyValue(person, kABPersonLastNameProperty)];
     ABMultiValueRef emailAddresses = ABRecordCopyValue(person, kABPersonEmailProperty);
     if (ABMultiValueGetCount(emailAddresses)) {
-        NSMutableArray *allEmailAddresses= [[NSMutableArray alloc] init];
         for (NSUInteger i = 0; i < ABMultiValueGetCount(emailAddresses); i++) {
-            NSString *emailAddressForArray=(__bridge_transfer NSString *)ABMultiValueCopyValueAtIndex(emailAddresses, i);
-            [allEmailAddresses addObject:emailAddressForArray];
-            [thisPerson setAllEmailAddressesFromAddressBook:allEmailAddresses];
+            NSString *emailAddressForPerson=(__bridge_transfer NSString *)ABMultiValueCopyValueAtIndex(emailAddresses, i);
+            MCEmailAddress *emailAddressFound = [MCEmailAddress addEmailAddressFor:thisPerson];
+            [emailAddressFound setEmailAddress:emailAddressForPerson];
+            if (i == 0) {
+                [emailAddressFound setSelected:[NSNumber numberWithBool:YES]];
+            } else {
+                [emailAddressFound setSelected:[NSNumber numberWithBool:NO]];
+            }
         }
-        [thisPerson setEmailAddress:(__bridge_transfer NSString *)ABMultiValueCopyValueAtIndex(emailAddresses, 0)];
-    } else {
-        [thisPerson setEmailAddress:nil];
-    }
+    } 
     CFRelease(emailAddresses);
 }
 
@@ -80,10 +82,10 @@
 - (BOOL)peoplePickerNavigationController:(ABPeoplePickerNavigationController *)peoplePicker shouldContinueAfterSelectingPerson:(ABRecordRef)person
 {
     [self getPersonData:person];
-    if ([delegate isNewPersonFromAddressBookAlreadyPresent:editedPerson]) {
+    if ([delegate isNewPersonFromAddressBookAlreadyPresent:thisPerson]) {
         return YES;
     } else {
-        [delegate receiveANewPersonFromAddressBook:editedPerson];
+        [delegate receiveANewPersonFromAddressBook:thisPerson];
         [[[viewController navigationItem] rightBarButtonItem] setEnabled:YES];
         [viewController dismissViewControllerAnimated:YES completion:nil];
     }

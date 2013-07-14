@@ -34,7 +34,7 @@
     MCPerson *thisPerson;
     UIPickerView *emailSelectionFromAddressBookPickerView;
     
-    // MCAddressBookDataReceiver *personReceiver;
+    MCAddressBookDataReceiver *personReceiver;
     
     BOOL didSomethingChange;
     BOOL isNew;

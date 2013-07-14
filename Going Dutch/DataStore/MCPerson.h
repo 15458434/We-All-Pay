@@ -12,6 +12,9 @@
 @class MCPayment, MCSharedBill;
 
 @interface MCPerson : NSManagedObject
+{
+    
+}
 
 @property (nonatomic, retain) NSDate * dateCreated;
 @property (nonatomic, retain) NSDate * dateModified;
@@ -28,10 +31,15 @@
 @property (nonatomic, retain) NSSet *sharedBill;
 @property (nonatomic, retain) NSSet *emailAddress;
 
+@property (nonatomic, strong) NSNumber *edgeRadius;
+
 + (MCPerson *)addPerson;
 + (void)deletePerson:(MCPerson *)delPerson;
 
 + (MCPerson *)fetchPersonWithUniqueId:(NSString *)uuid;
+
+- (void)setThumbnailDataFromImage:(UIImage *)image;
+- (void)setPictureDataFromImage:(UIImage *)image;
 
 - (NSString *)getFullName;
 - (NSString *)getName;
