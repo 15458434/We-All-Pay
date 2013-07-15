@@ -26,19 +26,25 @@
 
 + (MCSharedBill *)addSharedBill
 {
-    MCSharedBill *sharedBill = [NSEntityDescription insertNewObjectForEntityForName:@"MCSharedBill" inManagedObjectContext:[[[MCWeAllPayStoreController sharedStore] weAllPayStoreDocument] managedObjectContext]];
-    [sharedBill setUniqueBillId:[MCTools createUniqueIdentifierString]];
-    [sharedBill setHasTheMailBeenSent:[NSNumber numberWithBool:NO]];
-    NSDate *nu = [NSDate date];
-    [sharedBill setDateCreated:nu];
-    [sharedBill setDateModified:nu];
+    NSManagedObjectContext *context = [[[MCWeAllPayStoreController sharedStore] weAllPayStoreDocument] managedObjectContext];
+    __block MCSharedBill *sharedBill;
+    [context performBlockAndWait:^{
+        sharedBill = [NSEntityDescription insertNewObjectForEntityForName:@"MCSharedBill" inManagedObjectContext:[[[MCWeAllPayStoreController sharedStore] weAllPayStoreDocument] managedObjectContext]];
+        [sharedBill setUniqueBillId:[MCTools createUniqueIdentifierString]];
+        [sharedBill setHasTheMailBeenSent:[NSNumber numberWithBool:NO]];
+        NSDate *nu = [NSDate date];
+        [sharedBill setDateCreated:nu];
+        [sharedBill setDateModified:nu];
+    }];
     return sharedBill;
 }
 
 + (void)deleteSharedbill:(MCSharedBill *)deleteBill
 {
-    // Wat te doen met mogelijke payments en personen die aanwezig zijn?
-    [[[[MCWeAllPayStoreController sharedStore] weAllPayStoreDocument] managedObjectContext] deleteObject:deleteBill];
+    NSManagedObjectContext *context = [[[MCWeAllPayStoreController sharedStore] weAllPayStoreDocument] managedObjectContext];
+    [context performBlock:^{
+        [context deleteObject:deleteBill];
+    }];
 }
 
 + (MCSharedBill *)fetchSharedBillWithUniqueId:(NSString *)uuid

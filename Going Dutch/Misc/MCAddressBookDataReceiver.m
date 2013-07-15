@@ -7,6 +7,8 @@
 //
 
 #import "MCAddressBookDataReceiver.h"
+
+#import "MCWeAllPayStoreController.h"
 #import "MCEmailAddress.h"
 #import "MCPerson.h"
 
@@ -82,13 +84,9 @@
 - (BOOL)peoplePickerNavigationController:(ABPeoplePickerNavigationController *)peoplePicker shouldContinueAfterSelectingPerson:(ABRecordRef)person
 {
     [self getPersonData:person];
-    if ([delegate isNewPersonFromAddressBookAlreadyPresent:thisPerson]) {
-        return YES;
-    } else {
-        [delegate receiveANewPersonFromAddressBook:thisPerson];
-        [[[viewController navigationItem] rightBarButtonItem] setEnabled:YES];
-        [viewController dismissViewControllerAnimated:YES completion:nil];
-    }
+    [delegate receiveANewPersonFromAddressBook:thisPerson];
+    [[[viewController navigationItem] rightBarButtonItem] setEnabled:YES];
+    [viewController dismissViewControllerAnimated:YES completion:nil];
     return NO;
 }
 

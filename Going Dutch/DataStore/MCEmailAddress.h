@@ -21,4 +21,6 @@
 + (MCEmailAddress *)addEmailAddressFor:(MCPerson *)person;
 + (void)deleteEmailAddress:(MCEmailAddress *)eAddress;
 
++ (MCEmailAddress *)fetchEmailAddressFor:(MCPerson *)person;
+
 @end

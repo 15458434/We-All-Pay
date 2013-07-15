@@ -391,16 +391,12 @@
     MCPayment *thisCellsPayment = [dataController objectAtIndexPath:indexPath];
     MCPaymentTableViewCell *paymentCell = [tableView dequeueReusableCellWithIdentifier:@"MCPaymentTableViewCell"];
     
-    /*
-    MCPerson *thisCellsPayer = [thisCellsPayment payingPerson];
-    [[paymentCell namePayerLabel] setText:[thisCellsPayer getFullName]];
-    [[paymentCell pictureOfPayer] setImage:[thisCellsPayer thumbnail]];
-    [[paymentCell whatPaidLabel] setText:[thisCellsPayment place]];
+    [[paymentCell namePayerLabel] setText:[[thisCellsPayment payingPerson] getFullName]];
+    [[paymentCell pictureOfPayer] setImage:[[thisCellsPayment payingPerson] thumbnail]];
+    [[paymentCell whatPaidLabel] setText:[thisCellsPayment descriptionOfPayment]];
     NSNumberFormatter *nf = [[NSNumberFormatter alloc] init];
     [nf setNumberStyle:NSNumberFormatterCurrencyStyle];
-    NSNumber *thisCellsMoney = [[NSNumber alloc] initWithDouble:[thisCellsPayment money]];
-    [[paymentCell moneyPaidLabel] setText:[nf stringFromNumber:thisCellsMoney]];
-     */
+    [[paymentCell moneyPaidLabel] setText:[nf stringFromNumber:[thisCellsPayment money]]];
     
     return paymentCell;
     /*

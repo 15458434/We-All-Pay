@@ -11,6 +11,7 @@
 #import "MCWeAllPayStoreController.h"
 #import "MCPerson.h"
 #import "MCSharedBill.h"
+#import "MCEmailAddress.h"
 
 #import "MCTwoLabelsTitleView.h"
 
@@ -67,7 +68,6 @@
         personReceiver = [[MCAddressBookDataReceiver alloc] initWithViewController:self andDelegate:self];
         [personReceiver setThisPerson:thisPerson];
     }
-    
     [peoplePicker setPeoplePickerDelegate:personReceiver];
     [self presentViewController:peoplePicker animated:YES completion:nil];
 }
@@ -161,7 +161,7 @@
         didSomethingChange = YES;
         [[[self navigationItem] rightBarButtonItem] setEnabled:YES];
     } else if (textField == emailField) {
-        [thisPerson setEmailAddress:[emailField text]];
+        //[thisPerson setEmailAddress:[emailField text]];
         didSomethingChange = YES;
         [emailField resignFirstResponder];
         [[[self navigationItem] rightBarButtonItem] setEnabled:YES];
@@ -208,7 +208,7 @@
 - (BOOL)isNewPersonFromAddressBookAlreadyPresent:(MCPerson *)newPerson
 {
     // return [tonightsBill isPersonPresent:newPerson];
-    return YES;
+    return NO;
 }
 
 - (void)receiveANewPersonFromAddressBook:(MCPerson *)newPerson
@@ -275,7 +275,8 @@
     [[self navigationController] setToolbarHidden:NO animated:animated];
     [firstNameField setText:[thisPerson firstName]];
     [lastNameField setText:[thisPerson lastName]];
-    [emailField setText:[thisPerson emailAddress]];
+    MCEmailAddress *emailAddress = [MCEmailAddress fetchEmailAddressFor:thisPerson];
+    [emailField setText:[emailAddress emailAddress]];
     NSNumber *moneySpendByThisPerson = [tonightsBill totalSumPaidBy:thisPerson];
     NSNumberFormatter *nf = [[NSNumberFormatter alloc] init];
     [nf setNumberStyle:NSNumberFormatterCurrencyStyle];

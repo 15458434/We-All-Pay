@@ -37,12 +37,24 @@
 
 + (MCPerson *)addPerson
 {
-    MCPerson *newPerson = [NSEntityDescription insertNewObjectForEntityForName:@"MCPerson" inManagedObjectContext:[[[MCWeAllPayStoreController sharedStore] weAllPayStoreDocument] managedObjectContext]];
-    [newPerson setUniquePersonId:[MCTools createUniqueIdentifierString]];
-    NSDate *nu = [NSDate date];
-    [newPerson setDateCreated:nu];
-    [newPerson setDateModified:nu];
+    __block MCPerson *newPerson;
+    NSManagedObjectContext *context = [[[MCWeAllPayStoreController sharedStore] weAllPayStoreDocument] managedObjectContext];
+    [context performBlockAndWait:^{
+        newPerson = [NSEntityDescription insertNewObjectForEntityForName:@"MCPerson" inManagedObjectContext:context];
+        [newPerson setUniquePersonId:[MCTools createUniqueIdentifierString]];
+        NSDate *nu = [NSDate date];
+        [newPerson setDateCreated:nu];
+        [newPerson setDateModified:nu];
+    }];
     return newPerson;
+}
+
++ (void)deletePerson:(MCPerson *)delPerson
+{
+    NSManagedObjectContext *context = [[[MCWeAllPayStoreController sharedStore] weAllPayStoreDocument] managedObjectContext];
+    [context performBlock:^{
+        [context deleteObject:delPerson];
+    }];
 }
 
 - (void)setThumbnailDataFromImage:(UIImage *)image

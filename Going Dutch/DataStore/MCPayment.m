@@ -24,15 +24,22 @@
 
 + (MCPayment *)addPayment
 {
-    MCPayment *newPayment = [NSEntityDescription insertNewObjectForEntityForName:@"MCPayment" inManagedObjectContext:[[[MCWeAllPayStoreController sharedStore] weAllPayStoreDocument] managedObjectContext]];
-    [newPayment setUniquePaymentId:[MCTools createUniqueIdentifierString]];
+    NSManagedObjectContext *context = [[[MCWeAllPayStoreController sharedStore] weAllPayStoreDocument] managedObjectContext];
+    MCPayment *newPayment;
+    [context performBlockAndWait:^{
+        MCPayment *newPayment = [NSEntityDescription insertNewObjectForEntityForName:@"MCPayment" inManagedObjectContext:[[[MCWeAllPayStoreController sharedStore] weAllPayStoreDocument] managedObjectContext]];
+        [newPayment setUniquePaymentId:[MCTools createUniqueIdentifierString]];
+    }];
     return newPayment;
 }
 
 + (void)deletePayment:(MCPayment *)payment
 {
     // Wat te doen met mogelijke sharedBills en personen die aanwezig zijn?
-    [[[[MCWeAllPayStoreController sharedStore] weAllPayStoreDocument] managedObjectContext] deleteObject:payment];
+    NSManagedObjectContext *context = [[[MCWeAllPayStoreController sharedStore] weAllPayStoreDocument] managedObjectContext];
+    [context performBlock:^{
+        [context deleteObject:payment];
+    }];
 }
 
 + (MCPayment *)fetchPaymentWithUniqueId:(NSString *)uuid
