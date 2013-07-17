@@ -429,7 +429,7 @@
     MCPerson *thisCellsPerson = [dataController objectAtIndexPath:indexPath];
     MCPersonTableViewCell *thisCell = [tableView dequeueReusableCellWithIdentifier:@"MCPersonTableViewCell"];
     
-    //[[thisCell personImage] setImage:[thisCellsPerson thumbnail]];
+    [[thisCell personImage] setImage:[thisCellsPerson thumbnail]];
     [[thisCell nameLabel] setText:[thisCellsPerson getFullName]];
     [[thisCell emailLabel] setText:[thisCellsPerson defaultEmailAddress]];
     NSNumberFormatter *nf = [[NSNumberFormatter alloc] init];
