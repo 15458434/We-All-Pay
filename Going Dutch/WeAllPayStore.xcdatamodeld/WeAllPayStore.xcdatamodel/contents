@@ -41,9 +41,9 @@
         <relationship name="peoplePresent" optional="YES" toMany="YES" deletionRule="Nullify" destinationEntity="MCPerson" inverseName="sharedBill" inverseEntity="MCPerson" syncable="YES"/>
     </entity>
     <elements>
-        <element name="MCEmailAddress" positionX="160" positionY="192" width="128" height="105"/>
-        <element name="MCPayment" positionX="144" positionY="-477" width="128" height="148"/>
-        <element name="MCPerson" positionX="-27" positionY="-252" width="128" height="255"/>
-        <element name="MCSharedBill" positionX="313" positionY="-261" width="128" height="150"/>
+        <element name="MCEmailAddress" positionX="-209" positionY="-189" width="128" height="105"/>
+        <element name="MCPayment" positionX="124" positionY="-477" width="128" height="148"/>
+        <element name="MCPerson" positionX="-378" positionY="-252" width="128" height="255"/>
+        <element name="MCSharedBill" positionX="342" positionY="-270" width="128" height="150"/>
     </elements>
 </model>

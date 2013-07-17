@@ -9,6 +9,7 @@
 #import "MCPerson.h"
 #import "MCPayment.h"
 #import "MCSharedBill.h"
+#import "MCEmailAddress.h"
 #import "MCWeAllPayStoreController.h"
 
 #import "MCTools.h"
@@ -144,6 +145,29 @@
     } else {
         return @"...";
     }
+}
+
+- (NSString *)defaultEmailAddress
+{
+    NSFetchRequest *request = [NSFetchRequest fetchRequestWithEntityName:@"MCEmailAddress"];
+    NSPredicate *predicate = [NSPredicate predicateWithFormat:@"owner = %@ AND selected = YES", self];
+    
+    [request setPredicate:predicate];
+    NSError *error;
+    NSArray *emailAddresses;
+    NSManagedObjectContext *context = [[[MCWeAllPayStoreController sharedStore] weAllPayStoreDocument] managedObjectContext];
+    emailAddresses = [context executeFetchRequest:request error:&error];
+    if (!emailAddresses) {
+        NSLog(@"There was error fetching email addresses for %@", [self getFullName]);
+        return nil;
+    } else {
+        if ([emailAddresses count] == 0) {
+            return nil;
+        } else {
+            return [[emailAddresses objectAtIndex:0] emailAddress];
+        }
+    }
+
 }
 
 - (void)addSharedBillObject:(MCSharedBill *)value

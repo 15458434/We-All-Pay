@@ -21,16 +21,22 @@
 
 + (MCEmailAddress *)addEmailAddressFor:(MCPerson *)person
 {
-    MCEmailAddress *newEmailAddress = [NSEntityDescription insertNewObjectForEntityForName:@"MCEmailAddress" inManagedObjectContext:[[[MCWeAllPayStoreController sharedStore] weAllPayStoreDocument] managedObjectContext]];
-    [newEmailAddress setUniqueEmailId:[MCTools createUniqueIdentifierString]];
-    [newEmailAddress setOwner:person];
-    
+    __block MCEmailAddress *newEmailAddress;
+    NSManagedObjectContext *context = [[[MCWeAllPayStoreController sharedStore] weAllPayStoreDocument] managedObjectContext];
+    [context performBlockAndWait:^{
+        newEmailAddress = [NSEntityDescription insertNewObjectForEntityForName:@"MCEmailAddress" inManagedObjectContext:context];
+        [newEmailAddress setUniqueEmailId:[MCTools createUniqueIdentifierString]];
+        [newEmailAddress setOwner:person];
+    }];
     return newEmailAddress;
 }
 
 + (void)deleteEmailAddress:(MCEmailAddress *)eAddress
 {
-    [[[[MCWeAllPayStoreController sharedStore] weAllPayStoreDocument ] managedObjectContext] deleteObject:eAddress];
+    NSManagedObjectContext *context = [[[MCWeAllPayStoreController sharedStore] weAllPayStoreDocument] managedObjectContext];
+    [context performBlock:^{
+        [context delete:eAddress];
+    }];
 }
 
 + (MCSharedBill *)fetchSharedBillWithUniqueId:(NSString *)uuid
@@ -58,17 +64,15 @@
     NSFetchRequest *request = [NSFetchRequest fetchRequestWithEntityName:@"MCEmailAddress"];
     
     // Select only emailAddresses for person
-    NSPredicate *predicate1 = [NSPredicate predicateWithFormat:@"owner = %@", person];
-    NSPredicate *predicate2 = [NSPredicate predicateWithFormat:@"selected = %@", [NSNumber numberWithBool:YES]];
+    NSPredicate *predicate1 = [NSPredicate predicateWithFormat:@"ANY owner = %@", person];
+    NSPredicate *predicate2 = [NSPredicate predicateWithFormat:@"ANY selected = %@", [NSNumber numberWithBool:YES]];
     NSPredicate *compoundPredicate = [NSCompoundPredicate andPredicateWithSubpredicates:[NSArray arrayWithObjects:predicate1, predicate2, nil]];
     [request setPredicate:compoundPredicate];
     
-    __block NSError *error;
-    __block NSArray *emailAddresses;
+    NSError *error;
+    NSArray *emailAddresses;
     NSManagedObjectContext *context = [[[MCWeAllPayStoreController sharedStore] weAllPayStoreDocument] managedObjectContext];
-    [context performBlockAndWait:^{
-        emailAddresses = [[[[MCWeAllPayStoreController sharedStore] weAllPayStoreDocument] managedObjectContext] executeFetchRequest:request error:&error];
-    }];
+    emailAddresses = [context executeFetchRequest:request error:&error];
     if (!emailAddresses) {
         NSLog(@"There was error fetching email addresses for %@", [person getFullName]);
         return nil;

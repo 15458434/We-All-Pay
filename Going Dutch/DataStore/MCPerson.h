@@ -43,6 +43,7 @@
 
 - (NSString *)getFullName;
 - (NSString *)getName;
+- (NSString *)defaultEmailAddress;
 
 @end
 

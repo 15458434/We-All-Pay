@@ -18,6 +18,7 @@
 @property (nonatomic, retain) NSNumber * selected;
 @property (nonatomic, retain) MCPerson *owner;
 
++ (MCEmailAddress *)addEmailaddress;
 + (MCEmailAddress *)addEmailAddressFor:(MCPerson *)person;
 + (void)deleteEmailAddress:(MCEmailAddress *)eAddress;
 
