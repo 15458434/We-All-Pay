@@ -40,14 +40,10 @@
 
 - (void)doneAddingPeople:(id)selector
 {
-    /*
-    if ([editedPeople areTherePeople]) {
-        [tonightsBill setTripName:tripName];
-        [editedPeople setEditing:NO];
-        [tonightsBill setPeople:editedPeople];
-        [[self presentingViewController] dismissViewControllerAnimated:YES completion:dismissblock];
-    }
-     */
+    NSManagedObjectContext *context = [[[MCWeAllPayStoreController sharedStore] weAllPayStoreDocument] managedObjectContext];
+    [context performBlock:^{
+        [context processPendingChanges];
+    }];
     [[self presentingViewController] dismissViewControllerAnimated:YES completion:dismissblock];
 }
 
@@ -88,7 +84,9 @@
 - (void)getPeopleFromAddressBook:(id)selector
 {
     ABPeoplePickerNavigationController *peoplePicker = [[ABPeoplePickerNavigationController alloc] init];
-    MCAddressBookDataReceiver *personReceiver = [[MCAddressBookDataReceiver alloc] initWithViewController:self andDelegate:self];
+    if (!personReceiver) {
+        personReceiver = [[MCAddressBookDataReceiver alloc] initWithViewController:self andDelegate:self];
+    }
     [peoplePicker setPeoplePickerDelegate:personReceiver];
     [self presentViewController:peoplePicker animated:YES completion:nil];
 }
@@ -333,24 +331,19 @@
 
 -(void)textFieldDidEndEditing:(UITextField *)textField
 {
-    NSManagedObjectContext *context = [[[MCWeAllPayStoreController sharedStore] weAllPayStoreDocument] managedObjectContext];
-    [context performBlock:^{
-        if (isInitAsNew) {
-            if (kABAuthorizationStatusAuthorized == ABAddressBookGetAuthorizationStatus() ||
-                kABAuthorizationStatusNotDetermined == ABAddressBookGetAuthorizationStatus()) {
-                [self getPeopleFromAddressBook:self];
-            } else {
-                [self addPerson:self];
-            }
-        }
+    [tonightsBill setTripName:[textField text]];
+    if (!didSomethingChange) {
         didSomethingChange = YES;
-        [tonightsBill setTripName:[textField text]];
-        [context processPendingChanges];
-        if (!didSomethingChange) {
-            didSomethingChange = YES;
-            [[[self navigationItem] rightBarButtonItem] setEnabled:YES];
+        [[[self navigationItem] rightBarButtonItem] setEnabled:YES];
+    }
+    if (isInitAsNew) {
+        if (kABAuthorizationStatusAuthorized == ABAddressBookGetAuthorizationStatus() ||
+            kABAuthorizationStatusNotDetermined == ABAddressBookGetAuthorizationStatus()) {
+            [self getPeopleFromAddressBook:self];
+        } else {
+            [self addPerson:self];
         }
-    }];
+    }
 }
 
 #pragma mark - NSFetchedResultsControllerDelegat
@@ -447,19 +440,20 @@
 // Override to support editing the table view.
 - (void)tableView:(UITableView *)tableView commitEditingStyle:(UITableViewCellEditingStyle)editingStyle forRowAtIndexPath:(NSIndexPath *)indexPath
 {
-    /*
+    
     if (editingStyle == UITableViewCellEditingStyleDelete) {
-        MCPerson *removablePerson = [[editedPeople allPeople] objectAtIndex:[indexPath row]];
+        MCPerson *removablePerson = [dataController objectAtIndexPath:indexPath];
         if (![tonightsBill hasPersonPaidSomething:removablePerson]) {
-            [editedPeople removePerson:removablePerson];
-            [self updateSubLabel];
-            NSArray *indexPaths = [[NSArray alloc] initWithObjects:indexPath, nil];
-            [[self tableView] deleteRowsAtIndexPaths:indexPaths withRowAnimation:UITableViewRowAnimationTop];
-            [[[self navigationItem] rightBarButtonItem] setEnabled:YES];
-            didSomethingChange = YES;
+            NSManagedObjectContext *context = [[[MCWeAllPayStoreController sharedStore] weAllPayStoreDocument] managedObjectContext];
+            [context performBlock:^{
+                [context deleteObject:removablePerson];
+                [self updateSubLabel];
+                didSomethingChange = YES;
+                [[[self navigationItem] rightBarButtonItem] setEnabled:YES];
+            }];
         }
     }
-     */
+    
 }
 
 /*

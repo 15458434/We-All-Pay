@@ -57,6 +57,11 @@
     }];
 }
 
++ (MCPerson *)fetchPersonWithUniqueId:(NSString *)uuid
+{
+    return nil;
+}
+
 - (void)setThumbnailDataFromImage:(UIImage *)image
 {
     if (!image) {
@@ -111,6 +116,34 @@
     NSData *thumbnailWithRoundedCornersData = UIImagePNGRepresentation(thumbnailWithRoundedCorners);
     [self setPictureData:thumbnailWithRoundedCornersData];
     UIGraphicsEndImageContext();
+}
+
+- (NSString *)getFullName
+{
+    if ([self firstName ] && [self lastName]) {
+        return [[NSString alloc] initWithFormat:@"%@ %@", [self firstName], [self lastName]];
+    } else if ([self firstName] && ![self lastName]) {
+        return [self firstName];
+    } else if (![self firstName] && [self lastName]) {
+        return [self lastName];
+    } else  if ([self defaultEmailAddress]) {
+        return [self defaultEmailAddress];
+    } else {
+        return @"...";
+    }
+}
+
+- (NSString *)getName
+{
+    if ([self firstName]) {
+        return [self firstName];
+    } else if ([self lastName]) {
+        return [self lastName];
+    } else if ([self defaultEmailAddress]) {
+        return [self defaultEmailAddress];
+    } else {
+        return @"...";
+    }
 }
 
 #pragma mark - Inherited From Super

@@ -8,6 +8,7 @@
 
 #import <Foundation/Foundation.h>
 #import <AddressBookUI/AddressBookUI.h>
+#import <AddressBook/AddressBook.h>
 
 @class MCPerson;
 

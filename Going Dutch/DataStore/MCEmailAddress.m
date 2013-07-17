@@ -63,13 +63,21 @@
     NSPredicate *compoundPredicate = [NSCompoundPredicate andPredicateWithSubpredicates:[NSArray arrayWithObjects:predicate1, predicate2, nil]];
     [request setPredicate:compoundPredicate];
     
-    NSError *error;
-    NSArray *emailAddresses = [[[[MCWeAllPayStoreController sharedStore] weAllPayStoreDocument] managedObjectContext] executeFetchRequest:request error:&error];
+    __block NSError *error;
+    __block NSArray *emailAddresses;
+    NSManagedObjectContext *context = [[[MCWeAllPayStoreController sharedStore] weAllPayStoreDocument] managedObjectContext];
+    [context performBlockAndWait:^{
+        emailAddresses = [[[[MCWeAllPayStoreController sharedStore] weAllPayStoreDocument] managedObjectContext] executeFetchRequest:request error:&error];
+    }];
     if (!emailAddresses) {
         NSLog(@"There was error fetching email addresses for %@", [person getFullName]);
         return nil;
     } else {
-        return [emailAddresses objectAtIndex:0];
+        if ([emailAddresses count] == 0) {
+            return nil;
+        } else {
+            return [emailAddresses objectAtIndex:0];
+        }
     }
 }
 

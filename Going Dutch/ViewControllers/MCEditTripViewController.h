@@ -23,6 +23,7 @@
     __strong IBOutlet MCTwoLabelsTitleView *twoLabelTitleView;
     
     NSFetchedResultsController *dataController;
+    MCAddressBookDataReceiver *personReceiver;
     
     BOOL isInitAsNew;
 }
