@@ -11,6 +11,7 @@
 #import <AddressBook/AddressBook.h>
 
 @class MCPerson;
+@class MCSharedBill;
 
 @protocol MCAddressBookReceiverDelegate <NSObject>
 
@@ -26,6 +27,7 @@
 
 @property (nonatomic, strong) id delegate;
 @property (nonatomic, strong) MCPerson *thisPerson;
+@property (nonatomic, strong) MCSharedBill *tonightsBill;
 
 - (id)initWithDelegate:(id)delegateUsedOnInit;
 - (id)initWithViewController:(UIViewController *)newViewController andDelegate:(id)newDelegate;

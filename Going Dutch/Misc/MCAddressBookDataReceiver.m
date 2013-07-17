@@ -11,11 +11,13 @@
 #import "MCWeAllPayStoreController.h"
 #import "MCEmailAddress.h"
 #import "MCPerson.h"
+#import "MCSharedBill.h"
 
 @implementation MCAddressBookDataReceiver
 
 @synthesize delegate;
 @synthesize thisPerson;
+@synthesize tonightsBill;
 
 #pragma mark - New in this class.
 
@@ -23,6 +25,9 @@
 {
     if (!thisPerson) {
         thisPerson = [MCPerson addPerson];
+        if (tonightsBill) {
+            [thisPerson addSharedBillObject:tonightsBill];
+        }
     } 
     //[thisPerson setThumbnail:[UIImage imageWithData:(__bridge_transfer NSData *)ABPersonCopyImageDataWithFormat(person, kABPersonImageFormatThumbnail)]];
     //[thisPerson setPicture:[UIImage imageWithData:(__bridge_transfer NSData *)ABPersonCopyImageDataWithFormat(person, kABPersonImageFormatOriginalSize)]];
@@ -84,10 +89,11 @@
 - (BOOL)peoplePickerNavigationController:(ABPeoplePickerNavigationController *)peoplePicker shouldContinueAfterSelectingPerson:(ABRecordRef)person
 {
     [self getPersonData:person];
-    [delegate receiveANewPersonFromAddressBook:thisPerson];
     [viewController dismissViewControllerAnimated:YES completion:^{
         [[[viewController navigationItem] rightBarButtonItem] setEnabled:YES];
+        [delegate receiveANewPersonFromAddressBook:thisPerson];
     }];
+    thisPerson = nil;
     return NO;
 }
 

@@ -32,6 +32,7 @@
 - (void)addPerson:(id)selector
 {
     MCPerson *newPerson = [MCPerson addPerson];
+    [tonightsBill addPeoplePresentObject:newPerson];
     [self updateSubLabel];
     MCPersonViewController *pvc = [[MCPersonViewController alloc] initWithPerson:newPerson];
     [pvc setIsNew:YES];
@@ -86,6 +87,7 @@
     ABPeoplePickerNavigationController *peoplePicker = [[ABPeoplePickerNavigationController alloc] init];
     if (!personReceiver) {
         personReceiver = [[MCAddressBookDataReceiver alloc] initWithViewController:self andDelegate:self];
+        [personReceiver setTonightsBill:tonightsBill];
     }
     [peoplePicker setPeoplePickerDelegate:personReceiver];
     [self presentViewController:peoplePicker animated:YES completion:nil];
@@ -168,6 +170,27 @@
     
     [[self navigationController] setToolbarHidden:NO animated:YES];
     [[self view] endEditing:YES];
+    
+    if (!dataController) {
+        // What entities will be fetched.
+        NSFetchRequest *request = [NSFetchRequest fetchRequestWithEntityName:@"MCPerson"];
+        // How to sort the data.
+        NSSortDescriptor *sortDescriptor = [NSSortDescriptor sortDescriptorWithKey:@"dateCreated" ascending:NO];
+        NSArray *sortDescriptorArray = [NSArray arrayWithObject:sortDescriptor];
+        [request setSortDescriptors:sortDescriptorArray];
+        // Select only people from tonightsBill.
+        NSPredicate *predicate = [NSPredicate predicateWithFormat:@"sharedBill = %@", tonightsBill];
+        //[request setPredicate:predicate];
+        
+        // Create the FetchedResultsController.
+        dataController = [[NSFetchedResultsController alloc] initWithFetchRequest:request managedObjectContext:[[[MCWeAllPayStoreController sharedStore] weAllPayStoreDocument] managedObjectContext] sectionNameKeyPath:nil cacheName:@"All persons cache."];
+        [dataController setDelegate:self];
+        NSError *error;
+        BOOL success = [dataController performFetch:&error];
+        if (!success) {
+            NSLog(@"Something went wrong");
+        }
+    }
 }
 
 - (void)viewWillDisappear:(BOOL)animated
@@ -202,12 +225,12 @@
         NSArray *sortDescriptorArray = [NSArray arrayWithObject:sortDescriptor];
         [request setSortDescriptors:sortDescriptorArray];
         // Select only people from tonightsBill.
-        NSPredicate *predicate = [NSPredicate predicateWithFormat:@"sharedBill = %@", tonightsBill];
+        NSPredicate *predicate = [NSPredicate predicateWithFormat:@"ANY sharedBill = %@", tonightsBill];
         [request setPredicate:predicate];
         
         // Create the FetchedResultsController.
-        dataController = [[NSFetchedResultsController alloc] initWithFetchRequest:request managedObjectContext:[[[MCWeAllPayStoreController sharedStore] weAllPayStoreDocument] managedObjectContext] sectionNameKeyPath:nil cacheName:@"All trips cache."];
-        //[dataController setDelegate:self];
+        dataController = [[NSFetchedResultsController alloc] initWithFetchRequest:request managedObjectContext:[[[MCWeAllPayStoreController sharedStore] weAllPayStoreDocument] managedObjectContext] sectionNameKeyPath:nil cacheName:@"people on this trip."];
+        [dataController setDelegate:self];
         NSError *error;
         BOOL success = [dataController performFetch:&error];
         if (!success) {

@@ -146,6 +146,13 @@
     }
 }
 
+- (void)addSharedBillObject:(MCSharedBill *)value
+{
+    NSMutableSet *sharedbills = [[self sharedBill] mutableCopy];
+    [sharedbills addObject:value];
+    [self setSharedBill:sharedbills];
+}
+
 #pragma mark - Inherited From Super
 
 - (void)awakeFromInsert

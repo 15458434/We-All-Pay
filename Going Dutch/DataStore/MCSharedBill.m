@@ -66,6 +66,20 @@
     }
 }
 
+- (void)addPeoplePresentObject:(MCPerson *)value
+{
+    NSMutableSet *mutableListOfPeople = [[self peoplePresent] mutableCopy];
+    [mutableListOfPeople addObject:value];
+    [self setPeoplePresent:mutableListOfPeople];
+}
+
+- (void)removePeoplePresentObject:(MCPerson *)value
+{
+    NSMutableSet *mutableListOfPeople = [[self peoplePresent] mutableCopy];
+    [mutableListOfPeople removeObject:value];
+    [self setPeoplePresent:mutableListOfPeople];
+}
+
 - (BOOL)areTherePeople
 {
     if ([[self peoplePresent] count] == 0) {
@@ -84,6 +98,11 @@
 {
     // Just return the number 1000.
     return [NSNumber numberWithDouble:1000.0];
+}
+
+- (BOOL)hasPersonPaidSomething:(MCPerson *)person
+{
+    return NO;
 }
 
 @end
