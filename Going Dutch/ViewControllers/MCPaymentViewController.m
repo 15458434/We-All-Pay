@@ -82,49 +82,34 @@
 
 - (void)cancelPersonPicker:(id)selector
 {
-    NSLog(@"cancelPersonPicker");
-    /*
     // Set the text of the textView back and resign first responder
     [payerView setText:[[thisPayment payingPerson] getFullName]];
     [payerView resignFirstResponder];
-     */
 }
 
 - (void)donePersonPicker:(id)selector
 {
-    NSLog(@"donePersonPicker");
-    /*
     NSInteger row = [personPickerView selectedRowInComponent:0];
-    payerViewPerson = [[[tonightsBill people] allPeople] objectAtIndex:row];
-    [payerView setText:[payerViewPerson getFullName]];
+    [thisPayment setPayingPerson:[listOfPeople objectAtIndex:row]];
+    [payerView setText:[[thisPayment payingPerson] getFullName]];
     [payerView resignFirstResponder];
     didSomethingChange = YES;
     [[[self navigationItem] rightBarButtonItem] setEnabled:YES];
-     */
 }
 
 - (void)cancelNumberPad:(id)selector
 {
-    NSLog(@"cancelNumberPad");
-    /*
     // Restore Paidview and resignFirstResponder.
     NSNumberFormatter *nf = [[NSNumberFormatter alloc] init];
     [nf setNumberStyle:NSNumberFormatterCurrencyStyle];
-    if ([paidViewNumber isEqualToNumber:[NSNumber numberWithDouble:[thisPayment money]]]) {
-        paidViewNumber = [NSNumber numberWithDouble:[thisPayment money]];
-    }
-    [paidView setText:[nf stringFromNumber:paidViewNumber]];
+    [paidView setText:[nf stringFromNumber:[thisPayment money]]];
     [paidView resignFirstResponder];
-     */
 }
 
 - (void)doneNumberPad:(id)selector
 {
-    NSLog(@"doneNumberPad.");
-    /*
     [self storeMoneySpent];
     [paidView resignFirstResponder];
-     */
 }
 
 - (void)cancelChangesForEntirePayment:(id)selector
@@ -140,29 +125,25 @@
 
 - (void)storePlaceViewData
 {
-    NSLog(@"storePlaceViewData");
-    /*
     [placeView resignFirstResponder];
+    [thisPayment setDescriptionOfPayment:[placeView text]];
     didSomethingChange = YES;
     [[[self navigationItem] rightBarButtonItem] setEnabled:YES];
-     */
 }
 
 - (void)storeMoneySpent
 {
-    NSLog(@"storeMoneySpent");
-    /*
     NSNumberFormatter *nf = [[NSNumberFormatter alloc] init];
     // [nf setFormatterBehavior:NSNumberFormatterBehaviorDefault];
     [nf setLocale:[NSLocale currentLocale]];
     [nf setNumberStyle:NSNumberFormatterDecimalStyle];
-    paidViewNumber = [nf numberFromString:[paidView text]];
+    [thisPayment setMoney:[nf numberFromString:[paidView text]]];
     
     [nf setNumberStyle:NSNumberFormatterCurrencyStyle];
-    [paidView setText:[nf stringFromNumber:paidViewNumber]];
+    [paidView setText:[nf stringFromNumber:[thisPayment money]]];
+    
     [[[self navigationItem] rightBarButtonItem] setEnabled:YES];
     didSomethingChange = YES;
-     */
 }
 
 #pragma mark - new in this class
@@ -178,9 +159,8 @@
             thisPayment = thePayment;
             isNew = NO;
         } else {
-            thisPayment = [[MCPayment alloc] init];
-            [tonightsBill addPayment:thisPayment];
-            //[thisPayment setPayingPerson:[[[tonightsBill people] allPeople] objectAtIndex:0]];
+            thisPayment = [MCPayment addPayment];
+            [thisPayment setOnWhichBill:bill];
             isNew = YES;
         }
     }
@@ -197,12 +177,7 @@
 
 - (void)pickerView:(UIPickerView *)pickerView didSelectRow:(NSInteger)row inComponent:(NSInteger)component
 {
-    NSLog(@"didSelect row &i", row);
-    /*
-    payerViewPerson = [[[tonightsBill people] allPeople] objectAtIndex:row];
-    [payerView setText:[payerViewPerson getFullName]];
-    didSomethingChange = YES;
-     */
+    [payerView setText:[[listOfPeople objectAtIndex:row] getFullName]];
 }
 
 #pragma mark - PickerViewDataSource
@@ -235,17 +210,14 @@
 
 - (BOOL)textFieldShouldReturn:(UITextField *)textField
 {
-    /*
     if (textField == placeView) {
         [self storePlaceViewData];
     }
-     */
     return YES;
 }
 
 - (void)textFieldDidBeginEditing:(UITextField *)textField
 {
-    /*
     if (textField == paidView) {
         NSNumberFormatter *nf = [[NSNumberFormatter alloc] init];
         [nf setFormatterBehavior:NSNumberFormatterBehaviorDefault];
@@ -254,21 +226,21 @@
         if (didSomethingChange) {
             [paidView setText:[nf stringFromNumber:paidViewNumber]];
         } else {
-            [paidView setText:[nf stringFromNumber:[[NSNumber alloc] initWithDouble:[thisPayment money]]]];
+            [paidView setText:[nf stringFromNumber:[thisPayment money]]];
         }
     }
+    
     if (textField == payerView) {
         NSInteger row = 0;
         if ([thisPayment payingPerson]) {
-            row = [[[tonightsBill people] allPeople] indexOfObject:[thisPayment payingPerson]];
+            row = [listOfPeople indexOfObject:[thisPayment payingPerson]];
         } else {
             row = [personPickerView selectedRowInComponent:0];
         }
-        MCPerson *theSelectedPerson = [[[tonightsBill people] allPeople] objectAtIndex:row];
-        [payerView setText:[theSelectedPerson getFullName]];
+        [thisPayment setPayingPerson:[listOfPeople objectAtIndex:row]];
+        [payerView setText:[[thisPayment payingPerson] getFullName]];
         [personPickerView selectRow:row inComponent:0 animated:YES];
     }
-     */
 }
 
 - (BOOL)textFieldShouldBeginEditing:(UITextField *)textField
@@ -289,7 +261,6 @@
 
 - (void)textFieldDidEndEditing:(UITextField *)textField
 {
-    /*
     if (textField == paidView) {
         if (switchInputField) {
             [self storeMoneySpent];
@@ -307,7 +278,6 @@
             switchInputField = NO;
         }
     }
-     */
 }
 
 #pragma mark - Inherited from super

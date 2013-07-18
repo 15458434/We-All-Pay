@@ -15,6 +15,7 @@
 
 #import "MCAllTripsTableViewController.h"
 #import "MCEditTripViewController.h"
+#import "MCPaymentViewController.h"
 
 #import "MCPaymentTableViewCell.h"
 #import "MCTwoLabelsTitleView.h"
@@ -33,10 +34,8 @@
 
 - (void)addPayment:(id)sender
 {
-    /*MCPaymentViewController *pvc = [[MCPaymentViewController alloc] initWithExistingPayment:nil fromBill:tonightsBill];
-    [pvc setDelegate:self];
+    MCPaymentViewController *pvc = [[MCPaymentViewController alloc] initWithExistingPayment:nil fromBill:tonightsBill];
     [[self navigationController] pushViewController:pvc animated:YES];
-     */
 }
 
 - (void)editBillData:(id)sender

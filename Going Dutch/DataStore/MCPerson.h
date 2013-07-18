@@ -9,7 +9,7 @@
 #import <Foundation/Foundation.h>
 #import <CoreData/CoreData.h>
 
-@class MCPayment, MCSharedBill;
+@class MCPayment, MCSharedBill, MCEmailAddress;
 
 @interface MCPerson : NSManagedObject
 {
@@ -59,8 +59,8 @@
 - (void)addSharedBill:(NSSet *)values;
 - (void)removeSharedBill:(NSSet *)values;
 
-- (void)addEmailAddressObject:(NSManagedObject *)value;
-- (void)removeEmailAddressObject:(NSManagedObject *)value;
+- (void)addEmailAddressObject:(MCEmailAddress *)value;
+- (void)removeEmailAddressObject:(MCEmailAddress *)value;
 - (void)addEmailAddress:(NSSet *)values;
 - (void)removeEmailAddress:(NSSet *)values;
 

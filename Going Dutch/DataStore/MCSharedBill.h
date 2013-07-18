@@ -39,7 +39,6 @@
 - (BOOL)addPerson:(MCPerson *)newPerson;
 - (void)removePerson:(MCPerson *)awfulPerson;
 
-
 - (void)addPayment:(MCPayment *)newPayment;
 - (void)removePayment:(MCPayment *)removePayment;
 
@@ -55,8 +54,8 @@
 
 @interface MCSharedBill (CoreDataGeneratedAccessors)
 
-- (void)addPaymentsObject:(NSManagedObject *)value;
-- (void)removePaymentsObject:(NSManagedObject *)value;
+- (void)addPaymentsObject:(MCPayment *)value;
+- (void)removePaymentsObject:(MCPayment *)value;
 - (void)addPayments:(NSSet *)values;
 - (void)removePayments:(NSSet *)values;
 
