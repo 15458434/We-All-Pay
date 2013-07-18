@@ -38,8 +38,6 @@
     // Create and add new Trip with a test group.
     MCSharedBill *newTrip = [MCSharedBill addSharedBill];
     
-    [[[[MCWeAllPayStoreController sharedStore] weAllPayStoreDocument] managedObjectContext] processPendingChanges];
-    
     MCSharedBillTableViewController *tvc = [[MCSharedBillTableViewController alloc] initWithSharedBill:newTrip];
     [[self navigationController] pushViewController:tvc animated:YES];
 }
@@ -71,6 +69,19 @@
 {
     [super viewWillAppear:animated];
     
+    // Load the NSFetchResultsController
+    // What entities will be fetched.
+    NSFetchRequest *request = [NSFetchRequest fetchRequestWithEntityName:@"MCSharedBill"];
+    // How to sort the data.
+    NSSortDescriptor *sortDescriptor = [NSSortDescriptor sortDescriptorWithKey:@"dateCreated" ascending:NO];
+    NSArray *sortDescriptorArray = [NSArray arrayWithObject:sortDescriptor];
+    [request setSortDescriptors:sortDescriptorArray];
+    
+    // Create the FetchedResultsController.
+    dataController = [[NSFetchedResultsController alloc] initWithFetchRequest:request managedObjectContext:[[[MCWeAllPayStoreController sharedStore] weAllPayStoreDocument] managedObjectContext] sectionNameKeyPath:nil cacheName:@"All trips cache."];
+    [dataController setDelegate:self];
+    
+    // Set the titleView.
     if (!titleView) {
         titleView = [[[NSBundle mainBundle] loadNibNamed:@"MCTwoLabelsTitleView" owner:self options:nil] objectAtIndex:0];
         [[self navigationItem] setTitleView:titleView];
@@ -89,25 +100,16 @@
     [[self navigationController] setToolbarHidden:NO animated:YES];
 }
 
+- (void)viewDidDisappear:(BOOL)animated
+{
+    [super viewDidDisappear:animated];
+    
+    dataController = nil;
+}
+
 - (void)viewDidLoad
 {
     [super viewDidLoad];
-    
-    // Load the NSFetchResultsController
-    if (!dataController) {
-        // What entities will be fetched.
-        NSFetchRequest *request = [NSFetchRequest fetchRequestWithEntityName:@"MCSharedBill"];
-        // How to sort the data.
-        NSSortDescriptor *sortDescriptor = [NSSortDescriptor sortDescriptorWithKey:@"dateCreated" ascending:NO];
-        NSArray *sortDescriptorArray = [NSArray arrayWithObject:sortDescriptor];
-        [request setSortDescriptors:sortDescriptorArray];
-        
-        
-        
-        // Create the FetchedResultsController.
-        dataController = [[NSFetchedResultsController alloc] initWithFetchRequest:request managedObjectContext:[[[MCWeAllPayStoreController sharedStore] weAllPayStoreDocument] managedObjectContext] sectionNameKeyPath:nil cacheName:@"All trips cache."];
-        [dataController setDelegate:self];
-    }
     
     // Load the nib file
     UINib *nib = [UINib nibWithNibName:@"MCAllTripsTableViewCell" bundle:nil];
@@ -189,7 +191,7 @@
     MCAllTripsTableViewCell *allTripsTableViewCell = [tableView dequeueReusableCellWithIdentifier:@"MCAllTripsTableViewCell"];
     
     [[allTripsTableViewCell tripLabel] setText:[thisTrip tripName]];
-    // [[allTripsTableViewCell peoplePresentLabel] setText:[[thisTrip people] stringOfApproxPeoplePresent]];
+    [[allTripsTableViewCell peoplePresentLabel] setText:[thisTrip stringOfApproxPeoplePresent]];
 
     /*
     NSNumberFormatter *nf = [[NSNumberFormatter alloc] init];
@@ -207,7 +209,7 @@
     }
     [[allTripsTableViewCell extraLabel] setText:[df stringFromDate:[thisTrip dateModified]]];
     
-    // [allTripsTableViewCell setAccessoryView:[[UIImageView alloc] initWithImage:[UIImage imageNamed:@"plus sign"]]];
+    //[allTripsTableViewCell setAccessoryView:[[UIImageView alloc] initWithImage:[UIImage imageNamed:@"plus sign"]]];
     CGRect buttonRect = CGRectMake(0, 0, 44, 44);
     UIButton *accessoryButton = [[UIButton alloc] initWithFrame:buttonRect];
     UIImage *plusSign = [UIImage imageNamed:@"plus sign"];

@@ -36,6 +36,7 @@
     BOOL switchInputField;
     
     UIPickerView *personPickerView;
+    NSArray *listOfPeople;
 }
 
 @property (nonatomic, strong) MCPayment *thisPayment;

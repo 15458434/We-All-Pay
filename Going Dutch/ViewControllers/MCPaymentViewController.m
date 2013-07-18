@@ -10,7 +10,7 @@
 #import "MCPayment.h"
 #import "MCPerson.h"    
 #import "MCSharedBill.h"
-#import "MCPeople.h"
+#import "MCWeAllPayStoreController.h"
 #import "MCTwoLabelsTitleView.h"
 
 @interface MCPaymentViewController ()
@@ -29,6 +29,8 @@
 
 - (IBAction)dismissKeyboard:(id)sender
 {
+    NSLog(@"dismissKeyboard wordt uitgevoerd.");
+    /*
     if ([placeView isFirstResponder]) {
         [placeView endEditing:YES];
         [placeView setText:[thisPayment place]];
@@ -41,10 +43,13 @@
         //[paidView endEditing:YES];
         [self cancelNumberPad:self];
     }
+     */
 }
 
 - (void)backButtonPressed:(id)selector
 {
+    NSLog(@"backButtonPresses wordt uitgevoerd.");
+    /*
     if ([payerView isFirstResponder]) {
         [self donePersonPicker:self];
     }
@@ -63,33 +68,45 @@
         }
         [[self navigationController] popViewControllerAnimated:YES];
     }
+     */
 }
 
 - (void)removePayment:(id)selector
 {
+    NSLog(@"removePayment is being executed.");
+    /*
     [[self delegate] removePayment:thisPayment fromPaymentViewController:self];
     [[self navigationController] popViewControllerAnimated:YES];
+     */
 }
 
 - (void)cancelPersonPicker:(id)selector
 {
+    NSLog(@"cancelPersonPicker");
+    /*
     // Set the text of the textView back and resign first responder
     [payerView setText:[[thisPayment payingPerson] getFullName]];
     [payerView resignFirstResponder];
+     */
 }
 
 - (void)donePersonPicker:(id)selector
 {
+    NSLog(@"donePersonPicker");
+    /*
     NSInteger row = [personPickerView selectedRowInComponent:0];
     payerViewPerson = [[[tonightsBill people] allPeople] objectAtIndex:row];
     [payerView setText:[payerViewPerson getFullName]];
     [payerView resignFirstResponder];
     didSomethingChange = YES;
     [[[self navigationItem] rightBarButtonItem] setEnabled:YES];
+     */
 }
 
 - (void)cancelNumberPad:(id)selector
 {
+    NSLog(@"cancelNumberPad");
+    /*
     // Restore Paidview and resignFirstResponder.
     NSNumberFormatter *nf = [[NSNumberFormatter alloc] init];
     [nf setNumberStyle:NSNumberFormatterCurrencyStyle];
@@ -98,31 +115,43 @@
     }
     [paidView setText:[nf stringFromNumber:paidViewNumber]];
     [paidView resignFirstResponder];
+     */
 }
 
 - (void)doneNumberPad:(id)selector
 {
+    NSLog(@"doneNumberPad.");
+    /*
     [self storeMoneySpent];
     [paidView resignFirstResponder];
+     */
 }
 
 - (void)cancelChangesForEntirePayment:(id)selector
 {
+    NSLog(@"cancelchangesForEntirePayment.");
+    /*
     if (isNew) {
         [[self delegate] removePayment:thisPayment fromPaymentViewController:self];
     }
     [[self navigationController] popViewControllerAnimated:YES];
+     */
 }
 
 - (void)storePlaceViewData
 {
+    NSLog(@"storePlaceViewData");
+    /*
     [placeView resignFirstResponder];
     didSomethingChange = YES;
     [[[self navigationItem] rightBarButtonItem] setEnabled:YES];
+     */
 }
 
 - (void)storeMoneySpent
 {
+    NSLog(@"storeMoneySpent");
+    /*
     NSNumberFormatter *nf = [[NSNumberFormatter alloc] init];
     // [nf setFormatterBehavior:NSNumberFormatterBehaviorDefault];
     [nf setLocale:[NSLocale currentLocale]];
@@ -133,6 +162,7 @@
     [paidView setText:[nf stringFromNumber:paidViewNumber]];
     [[[self navigationItem] rightBarButtonItem] setEnabled:YES];
     didSomethingChange = YES;
+     */
 }
 
 #pragma mark - new in this class
@@ -161,14 +191,18 @@
 
 - (NSString *)pickerView:(UIPickerView *)pickerView titleForRow:(NSInteger)row forComponent:(NSInteger)component
 {
-    return [[[[tonightsBill people] allPeople] objectAtIndex:row] getFullName];
+    //return [[[[tonightsBill people] allPeople] objectAtIndex:row] getFullName];
+    return @"Ilse is lief";
 }
 
 - (void)pickerView:(UIPickerView *)pickerView didSelectRow:(NSInteger)row inComponent:(NSInteger)component
 {
+    NSLog(@"didSelect row &i", row);
+    /*
     payerViewPerson = [[[tonightsBill people] allPeople] objectAtIndex:row];
     [payerView setText:[payerViewPerson getFullName]];
     didSomethingChange = YES;
+     */
 }
 
 #pragma mark - PickerViewDataSource
@@ -179,21 +213,39 @@
 }
 - (NSInteger)pickerView:(UIPickerView *)pickerView numberOfRowsInComponent:(NSInteger)component
 {
-    return [[[tonightsBill people] allPeople] count];
+    NSFetchRequest *request = [NSFetchRequest fetchRequestWithEntityName:@"MCPerson"];
+    NSPredicate *predicate = [NSPredicate predicateWithFormat:@"ANY sharedBill = %@", tonightsBill];
+    [request setPredicate:predicate];
+    NSSortDescriptor *sortDescriptor = [NSSortDescriptor sortDescriptorWithKey:@"getFullName" ascending:YES];
+    [request setSortDescriptors:[NSArray arrayWithObject:sortDescriptor]];
+    NSManagedObjectContext *context = [[[MCWeAllPayStoreController sharedStore] weAllPayStoreDocument] managedObjectContext];
+    __block NSArray *result;
+    [context performBlockAndWait:^{
+        NSError *error;
+        result = [context executeFetchRequest:request error:&error];
+        if (!result) {
+            NSLog(@"An error occured during fetching people on this sharedBill: %@", [error localizedDescription]);
+        }
+    }];
+    
+    return result;
 }
 
 #pragma mark - UITextFieldDelegate
 
 - (BOOL)textFieldShouldReturn:(UITextField *)textField
 {
+    /*
     if (textField == placeView) {
         [self storePlaceViewData];
     }
+     */
     return YES;
 }
 
 - (void)textFieldDidBeginEditing:(UITextField *)textField
 {
+    /*
     if (textField == paidView) {
         NSNumberFormatter *nf = [[NSNumberFormatter alloc] init];
         [nf setFormatterBehavior:NSNumberFormatterBehaviorDefault];
@@ -216,6 +268,7 @@
         [payerView setText:[theSelectedPerson getFullName]];
         [personPickerView selectRow:row inComponent:0 animated:YES];
     }
+     */
 }
 
 - (BOOL)textFieldShouldBeginEditing:(UITextField *)textField
@@ -236,6 +289,7 @@
 
 - (void)textFieldDidEndEditing:(UITextField *)textField
 {
+    /*
     if (textField == paidView) {
         if (switchInputField) {
             [self storeMoneySpent];
@@ -253,6 +307,7 @@
             switchInputField = NO;
         }
     }
+     */
 }
 
 #pragma mark - Inherited from super
@@ -302,19 +357,18 @@
     // Fill in the form if data is present.
     [payerView setText:[[thisPayment payingPerson] getFullName]];
     [payerView setDelegate:self];
-    [placeView setText:[thisPayment place]];
+    [placeView setText:[thisPayment descriptionOfPayment]];
     NSNumberFormatter *nf = [[NSNumberFormatter alloc] init];
     [nf setLocale:[NSLocale currentLocale]];
     [nf setNumberStyle:NSNumberFormatterCurrencyStyle];
     [nf setFormatterBehavior:NSNumberFormatterCurrencyStyle];
-    paidViewNumber = [[NSNumber alloc] initWithDouble:[thisPayment money]];
     if (!isNew) {
-        [paidView setText:[nf stringFromNumber:paidViewNumber]];
+        [paidView setText:[nf stringFromNumber:[thisPayment money]]];
     }
     NSDateFormatter *dateFormatter = [[NSDateFormatter alloc] init];
     [dateFormatter setDateStyle:NSDateFormatterMediumStyle];
     [dateFormatter setTimeStyle:NSDateFormatterMediumStyle];
-    [dateAndTimeLabel setText:[dateFormatter stringFromDate:[thisPayment timePaid]]];
+    [dateAndTimeLabel setText:[dateFormatter stringFromDate:[thisPayment dateModified]]];
 }
 
 - (void)viewDidLoad
@@ -367,7 +421,6 @@
     [paidView setDelegate:self];
 
     [placeView setDelegate:self];
-    payerViewPerson = [thisPayment payingPerson];
     
 }
 

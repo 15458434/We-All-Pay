@@ -51,13 +51,12 @@
 - (void)doneEditingTrip:(id)selector
 {
     [[self navigationController] popViewControllerAnimated:YES];
-    /*
-    if ([editedPeople areTherePeople]) {
-        if (tripName) {
-            [tonightsBill setTripName:tripName];
-        }
-        [editedPeople setEditing:NO];
-        [tonightsBill setPeople:editedPeople];
+
+    if ([tonightsBill areTherePeople]) {
+        NSManagedObjectContext *context = [[[MCWeAllPayStoreController sharedStore] weAllPayStoreDocument] managedObjectContext];
+        [context performBlock:^{
+            [context processPendingChanges];
+        }];
         [[self navigationController] popViewControllerAnimated:YES];
     } else {
         UIAlertView *noPeoplePresentMessage = [[UIAlertView alloc] initWithTitle:@"No people present on this bill."
@@ -67,7 +66,6 @@
                                                                otherButtonTitles:@"Edit", nil];
         [noPeoplePresentMessage show];
     }
-     */
 }
 
 - (void)cancelNewTrip:(id)selector
@@ -180,7 +178,7 @@
         [request setSortDescriptors:sortDescriptorArray];
         // Select only people from tonightsBill.
         NSPredicate *predicate = [NSPredicate predicateWithFormat:@"sharedBill = %@", tonightsBill];
-        //[request setPredicate:predicate];
+        [request setPredicate:predicate];
         
         // Create the FetchedResultsController.
         dataController = [[NSFetchedResultsController alloc] initWithFetchRequest:request managedObjectContext:[[[MCWeAllPayStoreController sharedStore] weAllPayStoreDocument] managedObjectContext] sectionNameKeyPath:nil cacheName:@"All persons cache."];
@@ -229,7 +227,7 @@
         [request setPredicate:predicate];
         
         // Create the FetchedResultsController.
-        dataController = [[NSFetchedResultsController alloc] initWithFetchRequest:request managedObjectContext:[[[MCWeAllPayStoreController sharedStore] weAllPayStoreDocument] managedObjectContext] sectionNameKeyPath:nil cacheName:@"people on this trip."];
+        dataController = [[NSFetchedResultsController alloc] initWithFetchRequest:request managedObjectContext:[[[MCWeAllPayStoreController sharedStore] weAllPayStoreDocument] managedObjectContext] sectionNameKeyPath:nil cacheName:@"All persons cache."];
         [dataController setDelegate:self];
         NSError *error;
         BOOL success = [dataController performFetch:&error];

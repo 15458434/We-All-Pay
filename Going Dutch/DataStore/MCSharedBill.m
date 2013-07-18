@@ -29,7 +29,7 @@
     NSManagedObjectContext *context = [[[MCWeAllPayStoreController sharedStore] weAllPayStoreDocument] managedObjectContext];
     __block MCSharedBill *sharedBill;
     [context performBlockAndWait:^{
-        sharedBill = [NSEntityDescription insertNewObjectForEntityForName:@"MCSharedBill" inManagedObjectContext:[[[MCWeAllPayStoreController sharedStore] weAllPayStoreDocument] managedObjectContext]];
+        sharedBill = [NSEntityDescription insertNewObjectForEntityForName:@"MCSharedBill" inManagedObjectContext:context];
         [sharedBill setUniqueBillId:[MCTools createUniqueIdentifierString]];
         [sharedBill setHasTheMailBeenSent:[NSNumber numberWithBool:NO]];
         NSDate *nu = [NSDate date];
@@ -64,6 +64,11 @@
     } else {
         return [sharedBills objectAtIndex:0];
     }
+}
+
+- (NSString *)stringOfApproxPeoplePresent
+{
+    return @"Test string of Approx People Present";
 }
 
 - (void)addPeoplePresentObject:(MCPerson *)value

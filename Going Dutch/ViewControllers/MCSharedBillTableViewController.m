@@ -146,7 +146,7 @@
     self = [super initWithStyle:UITableViewStyleGrouped];
     
     if (self) {
-        [[self navigationController] setTitle:@"Test"];
+        [[self navigationController] setTitle:@"SharedBill"];
         UIBarButtonItem *bbi = [[UIBarButtonItem alloc] initWithBarButtonSystemItem:UIBarButtonSystemItemAdd
                                                                              target:self
                                                                              action:@selector(addPayment:)];
@@ -166,7 +166,24 @@
 
 - (void)viewWillAppear:(BOOL)animated
 {
-    [[self tableView] reloadData];
+    [super viewWillAppear:animated];
+    
+    if (!dataController) {
+        // What entities will be fetched.
+        NSFetchRequest *request = [NSFetchRequest fetchRequestWithEntityName:@"MCPayment"];
+        // How to sort the data.
+        NSSortDescriptor *sortDescriptor = [NSSortDescriptor sortDescriptorWithKey:@"dateCreated" ascending:NO];
+        NSArray *sortDescriptorArray = [NSArray arrayWithObject:sortDescriptor];
+        [request setSortDescriptors:sortDescriptorArray];
+        // Select only people from tonightsBill.
+        NSPredicate *predicate = [NSPredicate predicateWithFormat:@"any sharedBill = %@", tonightsBill];
+        [request setPredicate:predicate];
+        
+        // Create the FetchedResultsController.
+        dataController = [[NSFetchedResultsController alloc] initWithFetchRequest:request managedObjectContext:[[[MCWeAllPayStoreController sharedStore] weAllPayStoreDocument] managedObjectContext] sectionNameKeyPath:nil cacheName:@"All payments cache"];
+        [dataController setDelegate:self];
+    }
+    
     [[self navigationItem] setTitle:[tonightsBill tripName]];
     
     // Load the custom titleView and add it to the screen.
@@ -217,22 +234,6 @@
 {
     [super viewDidLoad];
     
-    if (!dataController) {
-        // What entities will be fetched.
-        NSFetchRequest *request = [NSFetchRequest fetchRequestWithEntityName:@"MCPayment"];
-        // How to sort the data.
-        NSSortDescriptor *sortDescriptor = [NSSortDescriptor sortDescriptorWithKey:@"dateCreated" ascending:NO];
-        NSArray *sortDescriptorArray = [NSArray arrayWithObject:sortDescriptor];
-        [request setSortDescriptors:sortDescriptorArray];
-        // Select only people from tonightsBill.
-        NSPredicate *predicate = [NSPredicate predicateWithFormat:@"sharedBill = %@", tonightsBill];
-        [request setPredicate:predicate];
-        
-        // Create the FetchedResultsController.
-        dataController = [[NSFetchedResultsController alloc] initWithFetchRequest:request managedObjectContext:[[[MCWeAllPayStoreController sharedStore] weAllPayStoreDocument] managedObjectContext] sectionNameKeyPath:nil cacheName:@"All trips cache."];
-        [dataController setDelegate:self];
-    }
-    
     // Load nib for PaymentTableViewCell and register it to the TableView.
     UINib *nib = [UINib nibWithNibName:@"MCPaymentTableViewCell" bundle:nil];
     [[self tableView] registerNib:nib forCellReuseIdentifier:@"MCPaymentTableViewCell"];
@@ -256,6 +257,11 @@
 - (void)viewWillDisappear:(BOOL)animated
 {
     [super viewWillDisappear:animated];
+    
+    NSManagedObjectContext *context = [[[MCWeAllPayStoreController sharedStore] weAllPayStoreDocument] managedObjectContext];
+    [context performBlock:^{
+        [context processPendingChanges];
+    }];
     
     [[self view] endEditing:YES];
 }
@@ -361,8 +367,7 @@
             break;
             
         case NSFetchedResultsChangeUpdate:
-            /*[self configureCell:[[self tableView] cellForRowAtIndexPath:indexPath]
-             atIndexPath:indexPath];*/
+            [[self tableView] cellForRowAtIndexPath:indexPath];
             break;
             
         case NSFetchedResultsChangeMove:
