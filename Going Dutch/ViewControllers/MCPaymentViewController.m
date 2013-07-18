@@ -29,27 +29,22 @@
 
 - (IBAction)dismissKeyboard:(id)sender
 {
-    NSLog(@"dismissKeyboard wordt uitgevoerd.");
-    /*
     if ([placeView isFirstResponder]) {
         [placeView endEditing:YES];
-        [placeView setText:[thisPayment place]];
+        [placeView setText:[thisPayment descriptionOfPayment]];
     }
     if ([payerView isFirstResponder]) {
-        //[payerView endEditing:YES];
         [self cancelPersonPicker:self];
     }
     if ([paidView isFirstResponder]) {
-        //[paidView endEditing:YES];
         [self cancelNumberPad:self];
     }
-     */
 }
 
 - (void)backButtonPressed:(id)selector
 {
     NSLog(@"backButtonPresses wordt uitgevoerd.");
-    /*
+
     if ([payerView isFirstResponder]) {
         [self donePersonPicker:self];
     }
@@ -61,14 +56,16 @@
     }
     NSLog(@"MCPaymentViewController: Done button pressed.");
     if (didSomethingChange) {
-        if (thisPayment != nil) {
-            [thisPayment setPlace:[placeView text]];
-            [thisPayment setMoney:[paidViewNumber doubleValue]];
-            [thisPayment setPayingPerson:payerViewPerson];
-        }
+        NSManagedObjectContext *context = [[[MCWeAllPayStoreController sharedStore] weAllPayStoreDocument] managedObjectContext];
+        [context performBlock:^{
+            NSError *error;
+            [context save:&error];
+            if (error) {
+                NSLog(@"Error saving: %@", [error localizedDescription]);
+            }
+        }];
         [[self navigationController] popViewControllerAnimated:YES];
     }
-     */
 }
 
 - (void)removePayment:(id)selector
@@ -135,7 +132,7 @@
 {
     NSNumberFormatter *nf = [[NSNumberFormatter alloc] init];
     // [nf setFormatterBehavior:NSNumberFormatterBehaviorDefault];
-    [nf setLocale:[NSLocale currentLocale]];
+    // [nf setLocale:[NSLocale currentLocale]];
     [nf setNumberStyle:NSNumberFormatterDecimalStyle];
     [thisPayment setMoney:[nf numberFromString:[paidView text]]];
     
@@ -171,8 +168,7 @@
 
 - (NSString *)pickerView:(UIPickerView *)pickerView titleForRow:(NSInteger)row forComponent:(NSInteger)component
 {
-    //return [[[[tonightsBill people] allPeople] objectAtIndex:row] getFullName];
-    return @"Ilse is lief";
+    return [[listOfPeople objectAtIndex:row] getFullName];
 }
 
 - (void)pickerView:(UIPickerView *)pickerView didSelectRow:(NSInteger)row inComponent:(NSInteger)component
@@ -189,7 +185,7 @@
 - (NSInteger)pickerView:(UIPickerView *)pickerView numberOfRowsInComponent:(NSInteger)component
 {
     NSFetchRequest *request = [NSFetchRequest fetchRequestWithEntityName:@"MCPerson"];
-    NSPredicate *predicate = [NSPredicate predicateWithFormat:@"ANY sharedBill = %@", tonightsBill];
+    NSPredicate *predicate = [NSPredicate predicateWithFormat:@"ALL sharedBill = %@", tonightsBill];
     [request setPredicate:predicate];
     NSSortDescriptor *sortDescriptor = [NSSortDescriptor sortDescriptorWithKey:@"getFullName" ascending:YES];
     [request setSortDescriptors:[NSArray arrayWithObject:sortDescriptor]];
@@ -203,7 +199,7 @@
         }
     }];
     
-    return result;
+    return [result count];
 }
 
 #pragma mark - UITextFieldDelegate
