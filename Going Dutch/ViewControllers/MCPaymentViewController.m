@@ -71,10 +71,8 @@
 - (void)removePayment:(id)selector
 {
     NSLog(@"removePayment is being executed.");
-    /*
-    [[self delegate] removePayment:thisPayment fromPaymentViewController:self];
+    //[[self delegate] removePayment:thisPayment fromPaymentViewController:self];
     [[self navigationController] popViewControllerAnimated:YES];
-     */
 }
 
 - (void)cancelPersonPicker:(id)selector
@@ -116,8 +114,8 @@
     if (isNew) {
         [[self delegate] removePayment:thisPayment fromPaymentViewController:self];
     }
-    [[self navigationController] popViewControllerAnimated:YES];
      */
+    [[self navigationController] popViewControllerAnimated:YES];
 }
 
 - (void)storePlaceViewData
