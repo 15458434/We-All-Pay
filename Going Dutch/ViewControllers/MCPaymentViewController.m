@@ -166,12 +166,15 @@
 
 - (NSString *)pickerView:(UIPickerView *)pickerView titleForRow:(NSInteger)row forComponent:(NSInteger)component
 {
+    NSSortDescriptor *sortDescriptor = [NSSortDescriptor sortDescriptorWithKey:@"getFullName" ascending:YES];
+    listOfPeople = [[tonightsBill peoplePresent] sortedArrayUsingDescriptors:[NSArray arrayWithObject:sortDescriptor]];
     return [[listOfPeople objectAtIndex:row] getFullName];
 }
 
 - (void)pickerView:(UIPickerView *)pickerView didSelectRow:(NSInteger)row inComponent:(NSInteger)component
 {
     [payerView setText:[[listOfPeople objectAtIndex:row] getFullName]];
+    [thisPayment setPayingPerson:[listOfPeople objectAtIndex:row]];
 }
 
 #pragma mark - PickerViewDataSource
@@ -182,22 +185,7 @@
 }
 - (NSInteger)pickerView:(UIPickerView *)pickerView numberOfRowsInComponent:(NSInteger)component
 {
-    NSFetchRequest *request = [NSFetchRequest fetchRequestWithEntityName:@"MCPerson"];
-    NSPredicate *predicate = [NSPredicate predicateWithFormat:@"ALL sharedBill = %@", tonightsBill];
-    [request setPredicate:predicate];
-    NSSortDescriptor *sortDescriptor = [NSSortDescriptor sortDescriptorWithKey:@"getFullName" ascending:YES];
-    [request setSortDescriptors:[NSArray arrayWithObject:sortDescriptor]];
-    NSManagedObjectContext *context = [[[MCWeAllPayStoreController sharedStore] weAllPayStoreDocument] managedObjectContext];
-    __block NSArray *result;
-    [context performBlockAndWait:^{
-        NSError *error;
-        result = [context executeFetchRequest:request error:&error];
-        if (!result) {
-            NSLog(@"An error occured during fetching people on this sharedBill: %@", [error localizedDescription]);
-        }
-    }];
-    
-    return [result count];
+    return [[tonightsBill peoplePresent] count];
 }
 
 #pragma mark - UITextFieldDelegate
