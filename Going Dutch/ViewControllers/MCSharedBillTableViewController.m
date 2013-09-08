@@ -135,7 +135,7 @@
     NSNumberFormatter *nf = [[NSNumberFormatter alloc] init];
     [nf setNumberStyle:NSNumberFormatterCurrencyStyle];
     [[twoLabelTitleView subLabel] setText:[NSString stringWithFormat:@"Total spent: %@", [nf stringFromNumber:[NSNumber numberWithDouble:[tonightsBill totalSumOfMoneyOfThisSharedBill]]]]];
-     */
+    */
 }
 
 #pragma mark - Inherited from super class.
@@ -175,7 +175,7 @@
         NSArray *sortDescriptorArray = [NSArray arrayWithObject:sortDescriptor];
         [request setSortDescriptors:sortDescriptorArray];
         // Select only people from tonightsBill.
-        NSPredicate *predicate = [NSPredicate predicateWithFormat:@"any sharedBill = %@", tonightsBill];
+        NSPredicate *predicate = [NSPredicate predicateWithFormat:@"onWhichBill = %@", tonightsBill];
         [request setPredicate:predicate];
         
         // Create the FetchedResultsController.
@@ -349,6 +349,7 @@
 - (void)controllerDidChangeContent:(NSFetchedResultsController *)controller
 {
     [[self tableView] endUpdates];
+    [self updateSubLabel];
 }
 
 - (void)controller:(NSFetchedResultsController *)controller didChangeObject:(id)anObject atIndexPath:(NSIndexPath *)indexPath forChangeType:(NSFetchedResultsChangeType)type newIndexPath:(NSIndexPath *)newIndexPath

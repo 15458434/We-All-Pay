@@ -25,9 +25,10 @@
 + (MCPayment *)addPayment
 {
     NSManagedObjectContext *context = [[[MCWeAllPayStoreController sharedStore] weAllPayStoreDocument] managedObjectContext];
-    MCPayment *newPayment;
+    __block MCPayment *newPayment;
     [context performBlockAndWait:^{
-        MCPayment *newPayment = [NSEntityDescription insertNewObjectForEntityForName:@"MCPayment" inManagedObjectContext:[[[MCWeAllPayStoreController sharedStore] weAllPayStoreDocument] managedObjectContext]];
+        newPayment = [NSEntityDescription insertNewObjectForEntityForName:@"MCPayment" inManagedObjectContext:[[[MCWeAllPayStoreController sharedStore] weAllPayStoreDocument] managedObjectContext]];
+        
         [newPayment setUniquePaymentId:[MCTools createUniqueIdentifierString]];
     }];
     return newPayment;
