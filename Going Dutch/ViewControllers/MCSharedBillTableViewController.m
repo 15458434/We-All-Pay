@@ -180,6 +180,11 @@
         
         // Create the FetchedResultsController.
         dataController = [[NSFetchedResultsController alloc] initWithFetchRequest:request managedObjectContext:[[[MCWeAllPayStoreController sharedStore] weAllPayStoreDocument] managedObjectContext] sectionNameKeyPath:nil cacheName:@"All payments cache"];
+        NSError *error;
+        BOOL success = [dataController performFetch:&error];
+        if (!success) {
+            NSLog(@"Something went wrong fetching the payments");
+        }
         [dataController setDelegate:self];
     }
     

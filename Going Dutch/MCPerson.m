@@ -2,11 +2,15 @@
 //  MCPerson.m
 //  We all pay
 //
-//  Created by Mark Cornelisse on 12-07-13.
+//  Created by Mark Cornelisse on 14-09-13.
 //  Copyright (c) 2013 Mark Cornelisse. All rights reserved.
 //
 
 #import "MCPerson.h"
+#import "MCEmailAddress.h"
+#import "MCPayment.h"
+#import "MCSharedBill.h"
+
 
 @implementation MCPerson
 
@@ -14,6 +18,7 @@
 @dynamic dateModified;
 @dynamic defaultEmailAddress;
 @dynamic firstName;
+@dynamic getFullName;
 @dynamic lastName;
 @dynamic phoneNumber;
 @dynamic picture;
@@ -21,26 +26,8 @@
 @dynamic thumbnail;
 @dynamic thumbnailData;
 @dynamic uniquePersonId;
+@dynamic emailAddress;
 @dynamic payments;
 @dynamic sharedBill;
-@dynamic emailAddress;
-
-@synthesize edgeRadius;
-
-#pragma mark - Inherited From Super
-
-- (void)awakeFromInsert
-{
-    [super awakeFromInsert];
-    
-    edgeRadius = [NSNumber numberWithDouble:5.0];
-}
-
-- (void)awakeFromFetch
-{
-    [super awakeFromFetch];
-    
-    edgeRadius = [NSNumber numberWithDouble:5.0];
-}
 
 @end

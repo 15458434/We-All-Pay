@@ -2,7 +2,7 @@
 //  MCEmailAddress.h
 //  We all pay
 //
-//  Created by Mark Cornelisse on 12-07-13.
+//  Created by Mark Cornelisse on 14-09-13.
 //  Copyright (c) 2013 Mark Cornelisse. All rights reserved.
 //
 
@@ -13,9 +13,9 @@
 
 @interface MCEmailAddress : NSManagedObject
 
-@property (nonatomic, retain) NSString * uniqueEmailId;
 @property (nonatomic, retain) NSString * emailAddress;
 @property (nonatomic, retain) NSNumber * selected;
+@property (nonatomic, retain) NSString * uniqueEmailId;
 @property (nonatomic, retain) MCPerson *owner;
 
 @end

@@ -35,12 +35,12 @@
 
 - (void)addTrip:(id)sender
 {
+    NSLog(@"AddTripPressed");
     // Create and add new Trip with a test group.
     MCSharedBill *newTrip = [MCSharedBill addSharedBill];
-    [newTrip setTripName:@"Neuken is lekker"];
-    
-    //MCSharedBillTableViewController *tvc = [[MCSharedBillTableViewController alloc] initWithSharedBill:newTrip];
-    //[[self navigationController] pushViewController:tvc animated:YES];
+    NSLog(@"trip: %@", [newTrip uniqueBillId]);
+    MCSharedBillTableViewController *tvc = [[MCSharedBillTableViewController alloc] initWithSharedBill:newTrip];
+    [[self navigationController] pushViewController:tvc animated:YES];
 }
 
 #pragma mark - New in this class.
@@ -71,20 +71,22 @@
     [super viewWillAppear:animated];
     
     if (!dataController) {
-        // Load the NSFetchResultsController
-        // What entities will be fetched.
+        NSManagedObjectContext *context = [[[MCWeAllPayStoreController sharedStore] weAllPayStoreDocument] managedObjectContext];
         NSFetchRequest *request = [NSFetchRequest fetchRequestWithEntityName:@"MCSharedBill"];
-        // How to sort the data.
-        NSSortDescriptor *sortDescriptor = [NSSortDescriptor sortDescriptorWithKey:@"dateCreated" ascending:NO];
-        NSArray *sortDescriptorArray = [NSArray arrayWithObject:sortDescriptor];
-        [request setSortDescriptors:sortDescriptorArray];
+        [request setSortDescriptors:[NSArray arrayWithObject:[NSSortDescriptor sortDescriptorWithKey:@"dateCreated" ascending:NO]]];
         
-        // Create the FetchedResultsController.
-        dataController = [[NSFetchedResultsController alloc] initWithFetchRequest:request managedObjectContext:[[[MCWeAllPayStoreController sharedStore] weAllPayStoreDocument] managedObjectContext] sectionNameKeyPath:nil cacheName:@"All trips cache."];
+        dataController = [[NSFetchedResultsController alloc] initWithFetchRequest:request
+                                                             managedObjectContext:context
+                                                               sectionNameKeyPath:nil
+                                                                        cacheName:nil];
         [dataController setDelegate:self];
+        NSError *error;
+        BOOL success = [dataController performFetch:&error];
+        if (!success) {
+            NSLog(@"Something went wrong");
+        }
     }
 
-    
     // Set the titleView.
     if (!titleView) {
         titleView = [[[NSBundle mainBundle] loadNibNamed:@"MCTwoLabelsTitleView" owner:self options:nil] objectAtIndex:0];
@@ -107,8 +109,6 @@
 - (void)viewDidDisappear:(BOOL)animated
 {
     [super viewDidDisappear:animated];
-    
-    dataController = nil;
 }
 
 - (void)viewDidLoad

@@ -18,7 +18,7 @@
 
 + (MCSharedBill *)addSharedBill
 {
-    NSManagedObjectContext *context = [[[MCWeAllPayStoreController sharedStore] weAllPayStoreDocument] managedObjectContext];
+    __block NSManagedObjectContext *context = [[[MCWeAllPayStoreController sharedStore] weAllPayStoreDocument] managedObjectContext];
     __block MCSharedBill *sharedBill;
     [context performBlockAndWait:^{
         sharedBill = [NSEntityDescription insertNewObjectForEntityForName:@"MCSharedBill" inManagedObjectContext:context];

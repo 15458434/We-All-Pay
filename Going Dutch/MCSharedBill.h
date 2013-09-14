@@ -2,16 +2,14 @@
 //  MCSharedBill.h
 //  We all pay
 //
-//  Created by Mark Cornelisse on 10-07-13.
+//  Created by Mark Cornelisse on 14-09-13.
 //  Copyright (c) 2013 Mark Cornelisse. All rights reserved.
 //
 
 #import <Foundation/Foundation.h>
 #import <CoreData/CoreData.h>
 
-@class MCPerson;
-@class MCPayment;
-@class MCWeAllPayStoreController;
+@class MCPayment, MCPerson;
 
 @interface MCSharedBill : NSManagedObject
 
@@ -22,7 +20,6 @@
 @property (nonatomic, retain) NSString * uniqueBillId;
 @property (nonatomic, retain) NSSet *payments;
 @property (nonatomic, retain) NSSet *peoplePresent;
-
 @end
 
 @interface MCSharedBill (CoreDataGeneratedAccessors)
@@ -36,9 +33,5 @@
 - (void)removePeoplePresentObject:(MCPerson *)value;
 - (void)addPeoplePresent:(NSSet *)values;
 - (void)removePeoplePresent:(NSSet *)values;
-
-@end
-
-@interface MCSharedBill (TestMessages)
 
 @end

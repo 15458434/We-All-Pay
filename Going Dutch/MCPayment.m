@@ -2,19 +2,22 @@
 //  MCPayment.m
 //  We all pay
 //
-//  Created by Mark Cornelisse on 10-07-13.
+//  Created by Mark Cornelisse on 14-09-13.
 //  Copyright (c) 2013 Mark Cornelisse. All rights reserved.
 //
 
 #import "MCPayment.h"
+#import "MCPerson.h"
+#import "MCSharedBill.h"
+
 
 @implementation MCPayment
 
+@dynamic dateCreated;
+@dynamic dateModified;
 @dynamic descriptionOfPayment;
 @dynamic money;
-@dynamic dateCreated;
 @dynamic uniquePaymentId;
-@dynamic dateModified;
 @dynamic onWhichBill;
 @dynamic payingPerson;
 
