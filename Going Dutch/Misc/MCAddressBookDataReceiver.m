@@ -9,8 +9,8 @@
 #import "MCAddressBookDataReceiver.h"
 
 #import "MCWeAllPayStoreController.h"
-#import "MCEmailAddress.h"
-#import "MCPerson.h"
+#import "MCEmailAddress+addons.h"
+#import "MCPerson+addons.h"
 #import "MCSharedBill.h"
 
 @implementation MCAddressBookDataReceiver

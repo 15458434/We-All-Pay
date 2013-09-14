@@ -9,7 +9,7 @@
 #import "MCAllTripsTableViewController.h"
 #import "MCSharedBillTableViewController.h"
 #import "MCWeAllPayStoreController.h"
-#import "MCSharedBill.h"
+#import "MCSharedBill+addons.h"
 #import "MCAllTripsTableViewCell.h"
 #import "MCTwoLabelsTitleView.h"
 
@@ -37,9 +37,10 @@
 {
     // Create and add new Trip with a test group.
     MCSharedBill *newTrip = [MCSharedBill addSharedBill];
+    [newTrip setTripName:@"Neuken is lekker"];
     
-    MCSharedBillTableViewController *tvc = [[MCSharedBillTableViewController alloc] initWithSharedBill:newTrip];
-    [[self navigationController] pushViewController:tvc animated:YES];
+    //MCSharedBillTableViewController *tvc = [[MCSharedBillTableViewController alloc] initWithSharedBill:newTrip];
+    //[[self navigationController] pushViewController:tvc animated:YES];
 }
 
 #pragma mark - New in this class.
@@ -69,17 +70,20 @@
 {
     [super viewWillAppear:animated];
     
-    // Load the NSFetchResultsController
-    // What entities will be fetched.
-    NSFetchRequest *request = [NSFetchRequest fetchRequestWithEntityName:@"MCSharedBill"];
-    // How to sort the data.
-    NSSortDescriptor *sortDescriptor = [NSSortDescriptor sortDescriptorWithKey:@"dateCreated" ascending:NO];
-    NSArray *sortDescriptorArray = [NSArray arrayWithObject:sortDescriptor];
-    [request setSortDescriptors:sortDescriptorArray];
-    
-    // Create the FetchedResultsController.
-    dataController = [[NSFetchedResultsController alloc] initWithFetchRequest:request managedObjectContext:[[[MCWeAllPayStoreController sharedStore] weAllPayStoreDocument] managedObjectContext] sectionNameKeyPath:nil cacheName:@"All trips cache."];
-    [dataController setDelegate:self];
+    if (!dataController) {
+        // Load the NSFetchResultsController
+        // What entities will be fetched.
+        NSFetchRequest *request = [NSFetchRequest fetchRequestWithEntityName:@"MCSharedBill"];
+        // How to sort the data.
+        NSSortDescriptor *sortDescriptor = [NSSortDescriptor sortDescriptorWithKey:@"dateCreated" ascending:NO];
+        NSArray *sortDescriptorArray = [NSArray arrayWithObject:sortDescriptor];
+        [request setSortDescriptors:sortDescriptorArray];
+        
+        // Create the FetchedResultsController.
+        dataController = [[NSFetchedResultsController alloc] initWithFetchRequest:request managedObjectContext:[[[MCWeAllPayStoreController sharedStore] weAllPayStoreDocument] managedObjectContext] sectionNameKeyPath:nil cacheName:@"All trips cache."];
+        [dataController setDelegate:self];
+    }
+
     
     // Set the titleView.
     if (!titleView) {

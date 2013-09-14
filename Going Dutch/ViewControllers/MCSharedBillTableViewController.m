@@ -9,9 +9,9 @@
 #import "MCSharedBillTableViewController.h"
 
 #import "MCWeAllPayStoreController.h"
-#import "MCSharedBill.h"
-#import "MCPerson.h"
-#import "MCPayment.h"
+#import "MCSharedBill+addons.h"
+#import "MCPerson+addons.h"
+#import "MCPayment+addons.h"
 
 #import "MCAllTripsTableViewController.h"
 #import "MCEditTripViewController.h"

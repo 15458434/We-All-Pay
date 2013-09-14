@@ -9,8 +9,8 @@
 #import "MCEditTripViewController.h"
 #import "MCPersonViewController.h"
 #import "MCWeAllPayStoreController.h"
-#import "MCPerson.h"
-#import "MCSharedBill.h"
+#import "MCPerson+addons.h"
+#import "MCSharedBill+addons.h"
 #import "MCPersonTableViewCell.h"
 #import "MCTwoLabelsTitleView.h"
 

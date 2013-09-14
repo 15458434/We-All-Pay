@@ -33,18 +33,6 @@
 
 @property (nonatomic, strong) NSNumber *edgeRadius;
 
-+ (MCPerson *)addPerson;
-+ (void)deletePerson:(MCPerson *)delPerson;
-
-+ (MCPerson *)fetchPersonWithUniqueId:(NSString *)uuid;
-
-- (void)setThumbnailDataFromImage:(UIImage *)image;
-- (void)setPictureDataFromImage:(UIImage *)image;
-
-- (NSString *)getFullName;
-- (NSString *)getName;
-- (NSString *)defaultEmailAddress;
-
 @end
 
 @interface MCPerson (CoreDataGeneratedAccessors)

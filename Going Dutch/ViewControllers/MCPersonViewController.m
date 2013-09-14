@@ -10,8 +10,8 @@
 
 #import "MCWeAllPayStoreController.h"
 #import "MCPerson.h"
-#import "MCSharedBill.h"
-#import "MCEmailAddress.h"
+#import "MCSharedBill+addons.h"
+#import "MCEmailAddress+addons.h"
 
 #import "MCTwoLabelsTitleView.h"
 

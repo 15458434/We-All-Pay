@@ -21,9 +21,5 @@
 @property (nonatomic, retain) MCSharedBill *onWhichBill;
 @property (nonatomic, retain) MCPerson *payingPerson;
 
-+ (MCPayment *)addPayment;
-+ (void)deletePayment:(MCPayment *)payment;
-
-+ (MCPayment *)fetchPaymentWithUniqueId:(NSString *)uuid;
 
 @end

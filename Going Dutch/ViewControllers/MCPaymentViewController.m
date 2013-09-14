@@ -7,8 +7,8 @@
 //
 
 #import "MCPaymentViewController.h"
-#import "MCPayment.h"
-#import "MCPerson.h"    
+#import "MCPayment+addons.h"
+#import "MCPerson+addons.h"    
 #import "MCSharedBill.h"
 #import "MCWeAllPayStoreController.h"
 #import "MCTwoLabelsTitleView.h"
@@ -64,8 +64,8 @@
                 NSLog(@"Error saving: %@", [error localizedDescription]);
             }
         }];
-        [[self navigationController] popViewControllerAnimated:YES];
     }
+    [[self navigationController] popViewControllerAnimated:YES];
 }
 
 - (void)removePayment:(id)selector
