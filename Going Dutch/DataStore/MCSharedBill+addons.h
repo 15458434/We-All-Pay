@@ -30,7 +30,7 @@
 - (void)removePayment:(MCPayment *)removePayment;
 
 - (NSArray *)solveWhoHasToPayWhoFromThisBill;
-- (double)totalSumOfMoneyOfThisSharedBill;
+- (NSNumber *)totalSumOfMoneyOfThisSharedBill;
 - (NSNumber *)totalSumPaidBy:(MCPerson *)person;
 - (double)amountPeopleShouldHavePaid;
 - (BOOL)hasPersonPaidSomething:(MCPerson *)person;

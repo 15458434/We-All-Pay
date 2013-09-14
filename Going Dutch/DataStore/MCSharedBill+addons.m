@@ -64,7 +64,7 @@
     __block NSArray *allPeople;
     [context performBlockAndWait:^{
         NSFetchRequest *request = [NSFetchRequest fetchRequestWithEntityName:@"MCPerson"];
-        [request setPredicate:[NSPredicate predicateWithFormat:@"all sharedBill = %@", self]];
+        [request setPredicate:[NSPredicate predicateWithFormat:@"any sharedBill = %@", self]];
         [request setSortDescriptors:[NSArray arrayWithObject:[NSSortDescriptor sortDescriptorWithKey:@"dateCreated" ascending:YES]]];
         NSError *error = nil;
         allPeople = [context executeFetchRequest:request error:&error];
@@ -116,6 +116,28 @@
 - (NSUInteger)totalAmountOfPeoplePresent
 {
     return [[self peoplePresent] count];
+}
+
+-(NSNumber *)totalSumOfMoneyOfThisSharedBill
+{
+    NSManagedObjectContext *context = [[[MCWeAllPayStoreController sharedStore] weAllPayStoreDocument] managedObjectContext];
+    __block NSArray *thePayments = nil;
+    [context performBlockAndWait:^{
+        NSFetchRequest *request = [NSFetchRequest fetchRequestWithEntityName:@"MCPayment"];
+        [request setPredicate:[NSPredicate predicateWithFormat:@"onWhichBill = %@", self]];
+        [request setSortDescriptors:[NSArray arrayWithObject:[NSSortDescriptor sortDescriptorWithKey:@"dateCreated" ascending:NO]]];
+        NSError *error = nil;
+        thePayments = [context executeFetchRequest:request error:&error];
+        if (!thePayments) {
+            NSLog(@"Error fetching payments on this bill");
+        }
+        
+    }];
+    double sumOfMoney = 0.0;
+    for (MCPayment *p in thePayments) {
+        sumOfMoney += [[p money] doubleValue];
+    }
+    return [NSNumber numberWithDouble:sumOfMoney];
 }
 
 - (NSNumber *)totalSumPaidBy:(MCPerson *)person

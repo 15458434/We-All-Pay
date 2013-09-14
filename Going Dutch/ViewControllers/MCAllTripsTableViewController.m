@@ -200,13 +200,11 @@
     [[allTripsTableViewCell tripLabel] setText:[thisTrip tripName]];
     [[allTripsTableViewCell peoplePresentLabel] setText:[thisTrip stringOfApproxPeoplePresent]];
 
-    /*
     NSNumberFormatter *nf = [[NSNumberFormatter alloc] init];
     [nf setNumberStyle:NSNumberFormatterCurrencyStyle];
-    NSNumber *m = [[NSNumber alloc] initWithDouble:[thisTrip totalSumOfMoneyOfThisSharedBill]];
-    NSString *moneyString = [nf stringFromNumber:m];
+    NSString *moneyString = [nf stringFromNumber:[thisTrip totalSumOfMoneyOfThisSharedBill]];
     [[allTripsTableViewCell totalCostLabel] setText:moneyString];
-    */
+    
     
     // fill extraLabel with dateModified.
     if (!df) {
