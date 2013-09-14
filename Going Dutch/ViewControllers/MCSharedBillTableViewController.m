@@ -461,11 +461,9 @@
 
 - (void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath
 {
-    /*
-    MCPaymentViewController *pvc = [[MCPaymentViewController alloc] initWithExistingPayment:[[tonightsBill allPayments] objectAtIndex:[indexPath row]] fromBill:tonightsBill];
+    MCPaymentViewController *pvc = [[MCPaymentViewController alloc] initWithExistingPayment:[dataController objectAtIndexPath:indexPath] fromBill:tonightsBill];
     [pvc setDelegate:self];
     [[self navigationController] pushViewController:pvc animated:YES];
-     */
 }
 
 @end

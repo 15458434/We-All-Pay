@@ -61,26 +61,32 @@
 - (NSString *)stringOfApproxPeoplePresent;
 {
     NSManagedObjectContext *context = [[[MCWeAllPayStoreController sharedStore] weAllPayStoreDocument] managedObjectContext];
-    NSFetchRequest *request = [NSFetchRequest fetchRequestWithEntityName:@"MCPerson"];
-    [request setPredicate:[NSPredicate predicateWithFormat:@"sharedBill = %@", self]];
-    
-    NSError *error = nil;
-    NSArray *allPeople = [context executeFetchRequest:request error:&error];
+    __block NSArray *allPeople;
+    [context performBlockAndWait:^{
+        NSFetchRequest *request = [NSFetchRequest fetchRequestWithEntityName:@"MCPerson"];
+        [request setPredicate:[NSPredicate predicateWithFormat:@"all sharedBill = %@", self]];
+        [request setSortDescriptors:[NSArray arrayWithObject:[NSSortDescriptor sortDescriptorWithKey:@"dateCreated" ascending:YES]]];
+        NSError *error = nil;
+        allPeople = [context executeFetchRequest:request error:&error];
+        if (!allPeople) {
+            NSLog(@"something went wrong fetching");
+        }
+    }];
     
     NSMutableString *returnString = [[NSMutableString alloc] init];
     if ([allPeople count] == 0) {
         return @"No people present.";
     } else if ([allPeople count] == 1) {
-        return [[allPeople objectAtIndex:0] getName];
+            return [[allPeople objectAtIndex:0] getName];
     } else if ([allPeople count] == 2) {
-        [returnString appendFormat:@"%@ and %@", [[allPeople objectAtIndex:0] getName], [[allPeople objectAtIndex:1] getName]];
-        return returnString;
+            [returnString appendFormat:@"%@ and %@", [[allPeople objectAtIndex:0] getName], [[allPeople objectAtIndex:1] getName]];
+            return returnString;
     } else if ([allPeople count] >= 3) {
-        [returnString appendFormat:@"%@, %@ and others", [[allPeople objectAtIndex:0] getName], [[allPeople objectAtIndex:1] getName]];
-        return returnString;
+            [returnString appendFormat:@"%@, %@ and others", [[allPeople objectAtIndex:0] getName], [[allPeople objectAtIndex:1] getName]];
+            return returnString;
     } else {
-        @throw [NSException exceptionWithName:@"Negative amount of people." reason:@"Should not be possible." userInfo:nil];
-        return nil;
+            @throw [NSException exceptionWithName:@"Negative amount of people." reason:@"Should not be possible." userInfo:nil];
+            return nil;
     }
 }
 
@@ -115,11 +121,13 @@
 - (NSNumber *)totalSumPaidBy:(MCPerson *)person
 {
     // Just return the number 1000.
+    NSLog(@"totSumPaidBy has not been implemented yet.");
     return [NSNumber numberWithDouble:1000.0];
 }
 
 - (BOOL)hasPersonPaidSomething:(MCPerson *)person
 {
+    NSLog(@"hasPersonPaidSomething is not implemented yet.");
     return NO;
 }
 

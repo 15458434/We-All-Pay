@@ -167,8 +167,8 @@
             break;
             
         case NSFetchedResultsChangeUpdate:
-            /*[self configureCell:[[self tableView] cellForRowAtIndexPath:indexPath]
-                    atIndexPath:indexPath];*/
+            //[self configureCell:[[self tableView] cellForRowAtIndexPath:indexPath] atIndexPath:indexPath];
+            [[self tableView] reloadRowsAtIndexPaths:[NSArray arrayWithObject:indexPath] withRowAnimation:UITableViewRowAnimationAutomatic];
             break;
             
         case NSFetchedResultsChangeMove:
