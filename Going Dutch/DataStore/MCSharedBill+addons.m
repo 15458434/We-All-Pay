@@ -7,7 +7,7 @@
 //
 
 #import "MCSharedBill+addons.h"
-#import "MCPerson.h"
+#import "MCPerson+addons.h"
 #import "MCPayment.h"
 #import "MCWeAllPayStoreController.h"
 #import "MCTools.h"
@@ -58,9 +58,30 @@
     }
 }
 
-- (NSString *)stringOfApproxPeoplePresent
+- (NSString *)stringOfApproxPeoplePresent;
 {
-    return @"Test string of Approx People Present";
+    NSManagedObjectContext *context = [[[MCWeAllPayStoreController sharedStore] weAllPayStoreDocument] managedObjectContext];
+    NSFetchRequest *request = [NSFetchRequest fetchRequestWithEntityName:@"MCPerson"];
+    [request setPredicate:[NSPredicate predicateWithFormat:@"sharedBill = %@", self]];
+    
+    NSError *error = nil;
+    NSArray *allPeople = [context executeFetchRequest:request error:&error];
+    
+    NSMutableString *returnString = [[NSMutableString alloc] init];
+    if ([allPeople count] == 0) {
+        return @"No people present.";
+    } else if ([allPeople count] == 1) {
+        return [[allPeople objectAtIndex:0] getName];
+    } else if ([allPeople count] == 2) {
+        [returnString appendFormat:@"%@ and %@", [[allPeople objectAtIndex:0] getName], [[allPeople objectAtIndex:1] getName]];
+        return returnString;
+    } else if ([allPeople count] >= 3) {
+        [returnString appendFormat:@"%@, %@ and others", [[allPeople objectAtIndex:0] getName], [[allPeople objectAtIndex:1] getName]];
+        return returnString;
+    } else {
+        @throw [NSException exceptionWithName:@"Negative amount of people." reason:@"Should not be possible." userInfo:nil];
+        return nil;
+    }
 }
 
 - (void)addPeoplePresentObject:(MCPerson *)value

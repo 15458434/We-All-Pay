@@ -8,10 +8,13 @@
 
 #import "MCAllTripsTableViewController.h"
 #import "MCSharedBillTableViewController.h"
-#import "MCWeAllPayStoreController.h"
-#import "MCSharedBill+addons.h"
+
 #import "MCAllTripsTableViewCell.h"
 #import "MCTwoLabelsTitleView.h"
+
+#import "MCWeAllPayStoreController.h"
+#import "MCSharedBill+addons.h"
+#import "MCPerson+addons.h"
 
 @interface MCAllTripsTableViewController ()
 
