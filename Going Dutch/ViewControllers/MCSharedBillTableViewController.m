@@ -46,8 +46,8 @@
 
 - (void)showWhoPaysWho:(id)sender
 {
-    /*NSLog(@"%d", [[tonightsBill people] doesEveryoneHaveAMailAddress]);
-    MCReturnPaymentViewController *rpvc = [[MCReturnPaymentViewController alloc] initWithBill:tonightsBill];
+    NSLog(@"%d", [tonightsBill doesEveryoneHaveAnEmailAddress]);
+    /*MCReturnPaymentViewController *rpvc = [[MCReturnPaymentViewController alloc] initWithBill:tonightsBill];
     [[self navigationController] pushViewController:rpvc animated:YES];
      */
 }

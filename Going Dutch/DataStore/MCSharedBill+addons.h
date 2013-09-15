@@ -35,5 +35,6 @@
 - (double)amountPeopleShouldHavePaid;
 - (BOOL)hasPersonPaidSomething:(MCPerson *)person;
 - (NSArray *)whatHasPersonPaid:(MCPerson *)person;
+- (BOOL)doesEveryoneHaveAnEmailAddress;
 
 @end

@@ -21,5 +21,6 @@
 - (NSString *)getFullName;
 - (NSString *)getName;
 - (NSString *)defaultEmailAddress;
+- (BOOL)isThereAnEmailAddress;
 
 @end

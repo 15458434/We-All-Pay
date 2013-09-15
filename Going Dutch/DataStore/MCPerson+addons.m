@@ -133,8 +133,9 @@
 {
     NSFetchRequest *request = [NSFetchRequest fetchRequestWithEntityName:@"MCEmailAddress"];
     NSPredicate *predicate = [NSPredicate predicateWithFormat:@"owner = %@ AND selected = YES", self];
-    
+    NSSortDescriptor *sortDescriptor = [NSSortDescriptor sortDescriptorWithKey:@"uniqueEmailId" ascending:YES];
     [request setPredicate:predicate];
+    [request setSortDescriptors:[NSArray arrayWithObject:sortDescriptor]];
     NSError *error;
     NSArray *emailAddresses;
     NSManagedObjectContext *context = [[[MCWeAllPayStoreController defaultStore] weAllPayStoreDocument] managedObjectContext];
@@ -157,6 +158,27 @@
     NSMutableSet *sharedbills = [[self sharedBill] mutableCopy];
     [sharedbills addObject:value];
     [self setSharedBill:sharedbills];
+}
+
+- (BOOL)isThereAnEmailAddress
+{
+    NSFetchRequest *request = [NSFetchRequest fetchRequestWithEntityName:@"MCEmailAddress"];
+    request.predicate = [NSPredicate predicateWithFormat:@"owner = %@", self];
+    NSSortDescriptor *sortDescriptor = [NSSortDescriptor sortDescriptorWithKey:@"emailAddress" ascending:YES];
+    request.sortDescriptors = [NSArray arrayWithObject:sortDescriptor];
+    NSError *error = nil;
+    NSManagedObjectContext *context = [[[MCWeAllPayStoreController defaultStore] weAllPayStoreDocument] managedObjectContext];
+    NSArray *emailAdresses = [context executeFetchRequest:request error:&error];
+    if (!emailAdresses) {
+        NSLog(@"There was an error fetching EmailAddresses.");
+        return NO;
+    } else {
+        if ([emailAdresses count] == 0) {
+            return NO;
+        } else {
+            return YES;
+        }
+    }
 }
 
 @end
