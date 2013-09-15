@@ -8,6 +8,7 @@
 
 #import "MCAllTripsTableViewController.h"
 #import "MCSharedBillTableViewController.h"
+#import "MCPaymentViewController.h"
 
 #import "MCAllTripsTableViewCell.h"
 #import "MCTwoLabelsTitleView.h"
@@ -291,12 +292,9 @@
 
 - (void)tableView:(UITableView *)tableView accessoryButtonTappedForRowWithIndexPath:(NSIndexPath *)indexPath
 {
-    /*
-    MCSharedBill *thisBill = [[[MCAllTripsStore sharedList] allTrips] objectAtIndex:[indexPath row]];
+    MCSharedBill *thisBill = [dataController objectAtIndexPath:indexPath];
     MCPaymentViewController *pvc = [[MCPaymentViewController alloc] initWithExistingPayment:nil fromBill:thisBill];
-    [pvc setDelegate:self];
     [[self navigationController] pushViewController:pvc animated:YES];
-     */
 }
 
 - (void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath
