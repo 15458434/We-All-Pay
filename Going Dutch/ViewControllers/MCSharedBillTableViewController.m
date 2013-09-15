@@ -16,6 +16,7 @@
 #import "MCAllTripsTableViewController.h"
 #import "MCEditTripViewController.h"
 #import "MCPaymentViewController.h"
+#import "MCReturnPaymentViewController.h"
 
 #import "MCPaymentTableViewCell.h"
 #import "MCTwoLabelsTitleView.h"
@@ -47,9 +48,8 @@
 - (void)showWhoPaysWho:(id)sender
 {
     NSLog(@"%d", [tonightsBill doesEveryoneHaveAnEmailAddress]);
-    /*MCReturnPaymentViewController *rpvc = [[MCReturnPaymentViewController alloc] initWithBill:tonightsBill];
+    MCReturnPaymentViewController *rpvc = [[MCReturnPaymentViewController alloc] initWithBill:tonightsBill];
     [[self navigationController] pushViewController:rpvc animated:YES];
-     */
 }
 
 - (void)shareBill:(id)sender

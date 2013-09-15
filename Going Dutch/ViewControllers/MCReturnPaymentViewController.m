@@ -7,9 +7,9 @@
 //
 
 #import "MCReturnPaymentViewController.h"
-#import "MCSharedBill.h"
+#import "MCSharedBill+addons.h"
 #import "MCReturnPayment.h"
-#import "MCPerson.h"
+#import "MCPerson+addons.h"
 #import "MCReturnPaymentTableViewCell.h"
 #import "MCTwoLabelsTitleView.h"
 
@@ -59,8 +59,8 @@
         twoLabelTitleView = [[[NSBundle mainBundle] loadNibNamed:@"MCTwoLabelsTitleView" owner:self options:nil] objectAtIndex:0];
         [[self navigationItem] setTitleView:twoLabelTitleView];
     }
-    NSNumber *averagePay = [NSNumber numberWithDouble:[tonightsBill amountPeopleShouldHavePaid]];
-    NSNumber *totalSpent = [NSNumber numberWithDouble:[tonightsBill totalSumOfMoneyOfThisSharedBill]];
+    NSNumber *averagePay = [tonightsBill amountPeopleShouldHavePaid];
+    NSNumber *totalSpent = [tonightsBill totalSumOfMoneyOfThisSharedBill];
     NSNumberFormatter *nf = [[NSNumberFormatter alloc] init];
     [nf setNumberStyle:NSNumberFormatterCurrencyStyle];
     [[twoLabelTitleView mainLabel] setText:[NSString stringWithFormat:@"Each pays: %@", [nf stringFromNumber:averagePay]]];
@@ -110,7 +110,7 @@
     MCReturnPaymentTableViewCell *returnPaymentCell = [tableView dequeueReusableCellWithIdentifier:@"MCReturnPaymentTableViewCell"];
     NSNumberFormatter *nf = [[NSNumberFormatter alloc] init];
     [nf setNumberStyle:NSNumberFormatterCurrencyStyle];
-    NSNumber *moneyToConvert = [[NSNumber alloc] initWithDouble:[thisCellsReturnPayment money]];
+    NSNumber *moneyToConvert = [thisCellsReturnPayment money];
     [[returnPaymentCell moneyLabel] setText:[nf stringFromNumber:moneyToConvert]];
     
     NSString *whoOwesWho = [[NSString alloc] initWithFormat:@"%@ owes %@:", [[thisCellsReturnPayment payer] getName], [[thisCellsReturnPayment receiver] getName]];

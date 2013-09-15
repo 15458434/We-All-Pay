@@ -32,7 +32,7 @@
 - (NSArray *)solveWhoHasToPayWhoFromThisBill;
 - (NSNumber *)totalSumOfMoneyOfThisSharedBill;
 - (NSNumber *)totalSumPaidBy:(MCPerson *)person;
-- (double)amountPeopleShouldHavePaid;
+- (NSNumber *)amountPeopleShouldHavePaid;
 - (BOOL)hasPersonPaidSomething:(MCPerson *)person;
 - (NSArray *)whatHasPersonPaid:(MCPerson *)person;
 - (BOOL)doesEveryoneHaveAnEmailAddress;
