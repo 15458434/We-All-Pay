@@ -9,6 +9,7 @@
 #import "MCAllTripsTableViewController.h"
 #import "MCSharedBillTableViewController.h"
 #import "MCPaymentViewController.h"
+#import "MCEditTripViewController.h"
 
 #import "MCAllTripsTableViewCell.h"
 #import "MCTwoLabelsTitleView.h"
@@ -44,7 +45,17 @@
     MCSharedBill *newTrip = [MCSharedBill addSharedBill];
     NSLog(@"trip: %@", [newTrip uniqueBillId]);
     MCSharedBillTableViewController *tvc = [[MCSharedBillTableViewController alloc] initWithSharedBill:newTrip];
-    [[self navigationController] pushViewController:tvc animated:YES];
+    MCEditTripViewController *etvc = [[MCEditTripViewController alloc] initWithBill:newTrip isNew:YES];
+    UINavigationController *navController = [[UINavigationController alloc] initWithRootViewController:etvc];
+    [etvc setDismissOnDone:^{
+        [[self navigationController] pushViewController:tvc animated:YES];
+    }];
+    [etvc setDismissOnCancel:^{
+        NSLog(@"Do nothing");
+    }];
+    [self presentViewController:navController animated:YES completion:^{
+        //[[self navigationController] pushViewController:tvc animated:YES];
+    }];
 }
 
 #pragma mark - New in this class.

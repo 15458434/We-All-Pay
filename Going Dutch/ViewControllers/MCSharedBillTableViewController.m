@@ -243,6 +243,7 @@
         [dataController setDelegate:self];
     }
     
+    /*
     // if there are NO people on this SharedBill go to the people addscreen
     if (![tonightsBill areTherePeople]) {
         NSLog(@"No people present.");
@@ -256,7 +257,7 @@
             [[self navigationController] popViewControllerAnimated:YES];
         }];
         [self presentViewController:navController animated:YES completion:nil];
-    }
+    }*/
 }
 
 - (void)viewWillDisappear:(BOOL)animated
@@ -341,6 +342,7 @@
     } else {
         NSLog(@"Something went wrong: %@", [error localizedDescription]);
     }
+
 }
     
 #pragma mark - NSFetchedResultsControllerDelegate

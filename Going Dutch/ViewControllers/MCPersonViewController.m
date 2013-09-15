@@ -48,15 +48,6 @@
 
 - (void)doneButtonPressed:(id)selector
 {
-    /*
-    [[self changeFlagDelegate] sendDidSomethingChange:YES];
-    [thisPerson setFirstName:firstName];
-    [thisPerson setLastName:lastName];
-    [thisPerson setEmailAddress:emailAddress];
-    [thisPerson setAllEmailAddressesFromAddressBook:allEmailAddressesFromAddressBook];
-    [thisPerson setPicture:picture];
-    [thisPerson setThumbnail:thumbnail];
-     */
     [[[[MCWeAllPayStoreController defaultStore] weAllPayStoreDocument] managedObjectContext] processPendingChanges];
     [[self navigationController] popViewControllerAnimated:YES];
 }
@@ -277,6 +268,7 @@
     [lastNameField setText:[thisPerson lastName]];
     MCEmailAddress *emailAddress = [MCEmailAddress fetchEmailAddressFor:thisPerson];
     [emailField setText:[emailAddress emailAddress]];
+    [pictureView setImage:[thisPerson picture]];
     NSNumber *moneySpendByThisPerson = [tonightsBill totalSumPaidBy:thisPerson];
     NSNumberFormatter *nf = [[NSNumberFormatter alloc] init];
     [nf setNumberStyle:NSNumberFormatterCurrencyStyle];

@@ -8,6 +8,8 @@
 
 #import "MCEditTripViewController.h"
 #import "MCPersonViewController.h"
+#import "MCSharedBillTableViewController.h"
+
 #import "MCWeAllPayStoreController.h"
 #import "MCPerson+addons.h"
 #import "MCSharedBill+addons.h"
@@ -20,8 +22,8 @@
 
 @implementation MCEditTripViewController
 
-@synthesize dismissblock;
-@synthesize dismissYourSelf;
+@synthesize dismissOnDone;
+@synthesize dismissOnCancel;
 
 @synthesize tonightsBill;
 @synthesize didSomethingChange;
@@ -45,7 +47,7 @@
     [context performBlock:^{
         [context processPendingChanges];
     }];
-    [[self presentingViewController] dismissViewControllerAnimated:YES completion:dismissblock];
+    [[self presentingViewController] dismissViewControllerAnimated:YES completion:dismissOnDone];
 }
 
 - (void)doneEditingTrip:(id)selector
@@ -70,13 +72,16 @@
 
 - (void)cancelNewTrip:(id)selector
 {
+    cancelPressed = YES;
     [MCSharedBill deleteSharedbill:tonightsBill];
+    tonightsBill = nil;
     [[[[MCWeAllPayStoreController defaultStore] weAllPayStoreDocument] managedObjectContext] processPendingChanges];
-    [[self presentingViewController] dismissViewControllerAnimated:YES completion:dismissYourSelf];
+    [[self presentingViewController] dismissViewControllerAnimated:YES completion:dismissOnCancel];
 }
 
 - (void)cancelEditTrip:(id)selector
 {
+    cancelPressed = YES;
     [[self navigationController] popViewControllerAnimated:YES];
 }
 
@@ -127,6 +132,7 @@
                                          userInfo:nil];
         }
         isInitAsNew = isNew;
+        cancelPressed = NO;
         didSomethingChange = NO;
     }
     return self;
@@ -360,7 +366,7 @@
         didSomethingChange = YES;
         [[[self navigationItem] rightBarButtonItem] setEnabled:YES];
     }
-    if (isInitAsNew) {
+    if (isInitAsNew && !cancelPressed) {
         if (kABAuthorizationStatusAuthorized == ABAddressBookGetAuthorizationStatus() ||
             kABAuthorizationStatusNotDetermined == ABAddressBookGetAuthorizationStatus()) {
             [self getPeopleFromAddressBook:self];

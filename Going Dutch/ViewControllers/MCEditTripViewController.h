@@ -26,11 +26,12 @@
     MCAddressBookDataReceiver *personReceiver;
     
     BOOL isInitAsNew;
+    BOOL cancelPressed;
 }
 
 @property (nonatomic, strong) MCSharedBill *tonightsBill;
-@property (nonatomic, copy) void (^dismissblock)(void);
-@property (nonatomic, copy) void (^dismissYourSelf)(void);
+@property (nonatomic, copy) void (^dismissOnDone)(void);
+@property (nonatomic, copy) void (^dismissOnCancel)(void);
 @property (nonatomic, readonly) BOOL didSomethingChange;
 
 - (id)initWithBill:(MCSharedBill *)newBill isNew:(BOOL)isNew;
