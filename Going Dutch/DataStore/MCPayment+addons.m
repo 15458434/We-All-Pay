@@ -16,10 +16,10 @@
 
 + (MCPayment *)addPayment
 {
-    NSManagedObjectContext *context = [[[MCWeAllPayStoreController sharedStore] weAllPayStoreDocument] managedObjectContext];
+    NSManagedObjectContext *context = [[[MCWeAllPayStoreController defaultStore] weAllPayStoreDocument] managedObjectContext];
     __block MCPayment *newPayment;
     [context performBlockAndWait:^{
-        newPayment = [NSEntityDescription insertNewObjectForEntityForName:@"MCPayment" inManagedObjectContext:[[[MCWeAllPayStoreController sharedStore] weAllPayStoreDocument] managedObjectContext]];
+        newPayment = [NSEntityDescription insertNewObjectForEntityForName:@"MCPayment" inManagedObjectContext:[[[MCWeAllPayStoreController defaultStore] weAllPayStoreDocument] managedObjectContext]];
         
         [newPayment setUniquePaymentId:[MCTools createUniqueIdentifierString]];
         [newPayment setDateCreated:[NSDate date]];
@@ -31,7 +31,7 @@
 + (void)deletePayment:(MCPayment *)payment
 {
     // Wat te doen met mogelijke sharedBills en personen die aanwezig zijn?
-    NSManagedObjectContext *context = [[[MCWeAllPayStoreController sharedStore] weAllPayStoreDocument] managedObjectContext];
+    NSManagedObjectContext *context = [[[MCWeAllPayStoreController defaultStore] weAllPayStoreDocument] managedObjectContext];
     [context performBlock:^{
         [context deleteObject:payment];
     }];
@@ -47,7 +47,7 @@
     [request setPredicate:predicate];
     
     NSError *error;
-    NSArray *payments = [[[[MCWeAllPayStoreController sharedStore] weAllPayStoreDocument] managedObjectContext] executeFetchRequest:request error:&error];
+    NSArray *payments = [[[[MCWeAllPayStoreController defaultStore] weAllPayStoreDocument] managedObjectContext] executeFetchRequest:request error:&error];
     if (!payments) {
         // There was an error.
         return nil;

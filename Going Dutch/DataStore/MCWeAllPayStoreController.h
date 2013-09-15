@@ -20,7 +20,7 @@
 
 @property (nonatomic, strong, readonly) UIManagedDocument *weAllPayStoreDocument;
 
-+ (MCWeAllPayStoreController *)sharedStore;
++ (MCWeAllPayStoreController *)defaultStore;
 
 - (void)saveStore;
 - (void)closeDocument;

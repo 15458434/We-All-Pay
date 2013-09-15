@@ -42,7 +42,7 @@
 
 - (void)cancelButtonPressed:(id)selector
 {
-    [[[[MCWeAllPayStoreController sharedStore] weAllPayStoreDocument] managedObjectContext] rollback];
+    [[[[MCWeAllPayStoreController defaultStore] weAllPayStoreDocument] managedObjectContext] rollback];
     [[self navigationController] popViewControllerAnimated:YES];
 }
 
@@ -57,7 +57,7 @@
     [thisPerson setPicture:picture];
     [thisPerson setThumbnail:thumbnail];
      */
-    [[[[MCWeAllPayStoreController sharedStore] weAllPayStoreDocument] managedObjectContext] processPendingChanges];
+    [[[[MCWeAllPayStoreController defaultStore] weAllPayStoreDocument] managedObjectContext] processPendingChanges];
     [[self navigationController] popViewControllerAnimated:YES];
 }
 

@@ -21,11 +21,11 @@
     // Make the the TableView with all the trips the root view controller.
     MCAllTripsTableViewController *allTripsView = [[MCAllTripsTableViewController alloc] init];
     UINavigationController *navController = [[UINavigationController alloc] initWithRootViewController:allTripsView];
-    [navController setEdgesForExtendedLayout:UIRectEdgeNone];
     [[self window] setRootViewController:navController];
     
     self.window.backgroundColor = [UIColor whiteColor];
     [self.window makeKeyAndVisible];
+    
     return YES;
 }
 
@@ -37,7 +37,7 @@
 
 - (void)applicationDidEnterBackground:(UIApplication *)application
 {
-    [[MCWeAllPayStoreController sharedStore] closeDocument];
+    [[MCWeAllPayStoreController defaultStore] saveStore];
 }
 
 - (void)applicationWillEnterForeground:(UIApplication *)application
@@ -53,7 +53,7 @@
 - (void)applicationWillTerminate:(UIApplication *)application
 {
     // Called when the application is about to terminate. Save data if appropriate. See also applicationDidEnterBackground:.
-    [[MCWeAllPayStoreController sharedStore] closeDocument];
+    [[MCWeAllPayStoreController defaultStore] closeDocument];
 }
 
 - (void)dealloc

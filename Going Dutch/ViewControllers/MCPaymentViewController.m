@@ -56,7 +56,7 @@
     }
     NSLog(@"MCPaymentViewController: Done button pressed.");
     if (didSomethingChange) {
-        NSManagedObjectContext *context = [[[MCWeAllPayStoreController sharedStore] weAllPayStoreDocument] managedObjectContext];
+        NSManagedObjectContext *context = [[[MCWeAllPayStoreController defaultStore] weAllPayStoreDocument] managedObjectContext];
         [context performBlock:^{
             NSError *error;
             [context save:&error];

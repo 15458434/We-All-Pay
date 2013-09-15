@@ -22,12 +22,19 @@
 
 #pragma mark - New in this class
 
-+ (MCWeAllPayStoreController *)sharedStore
+- (void)storeIsReady:(NSNotification *)notification
+{
+    if ([weAllPayStoreDocument documentState] == UIDocumentStateNormal) {
+        NSLog(@"Document is ready to use.");
+    }
+}
+
++ (MCWeAllPayStoreController *)defaultStore
 {
     static MCWeAllPayStoreController *sharedStore = nil;
     if (!sharedStore) {
         sharedStore = [[super allocWithZone:nil] init];
-    } else {
+    } /*else {
         if ([[sharedStore weAllPayStoreDocument] documentState] == UIDocumentStateClosed) {
             [[sharedStore weAllPayStoreDocument] openWithCompletionHandler:^(BOOL success){
                 if (!success) {
@@ -35,7 +42,7 @@
                 }
             }];
         }
-    }
+    }*/
     return sharedStore;
 }
 
@@ -76,7 +83,7 @@
             [weAllPayStoreDocument openWithCompletionHandler:^(BOOL success){
                 if (success) {
                     // The document is ready to use.
-                    
+                    [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(storeIsReady:) name:UIDocumentStateChangedNotification object:weAllPayStoreDocument];
                 } else {
                     // The document is is not ready to use.
                     NSLog(@"Couldn't open storage file at %@", weAllPayURL);
@@ -88,7 +95,7 @@
             [weAllPayStoreDocument saveToURL:weAllPayURL forSaveOperation:UIDocumentSaveForCreating completionHandler:^(BOOL success){
                 if (success) {
                     // The document is ready to use.
-                    
+                    [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(storeIsReady:) name:UIDocumentStateChangedNotification object:weAllPayStoreDocument];
                 } else {
                     // The document is not ready to use.
                     NSLog(@"Couldn't create storage file at %@", weAllPayURL);
@@ -102,7 +109,7 @@
 
 + (id)allocWithZone:(NSZone *)zone
 {
-    return [self sharedStore];
+    return [self defaultStore];
 }
 
 @end

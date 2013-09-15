@@ -21,7 +21,7 @@
 + (MCPerson *)addPerson
 {
     __block MCPerson *newPerson;
-    NSManagedObjectContext *context = [[[MCWeAllPayStoreController sharedStore] weAllPayStoreDocument] managedObjectContext];
+    NSManagedObjectContext *context = [[[MCWeAllPayStoreController defaultStore] weAllPayStoreDocument] managedObjectContext];
     [context performBlockAndWait:^{
         newPerson = [NSEntityDescription insertNewObjectForEntityForName:@"MCPerson" inManagedObjectContext:context];
         [newPerson setUniquePersonId:[MCTools createUniqueIdentifierString]];
@@ -34,7 +34,7 @@
 
 + (void)deletePerson:(MCPerson *)delPerson
 {
-    NSManagedObjectContext *context = [[[MCWeAllPayStoreController sharedStore] weAllPayStoreDocument] managedObjectContext];
+    NSManagedObjectContext *context = [[[MCWeAllPayStoreController defaultStore] weAllPayStoreDocument] managedObjectContext];
     [context performBlock:^{
         [context deleteObject:delPerson];
     }];
@@ -137,7 +137,7 @@
     [request setPredicate:predicate];
     NSError *error;
     NSArray *emailAddresses;
-    NSManagedObjectContext *context = [[[MCWeAllPayStoreController sharedStore] weAllPayStoreDocument] managedObjectContext];
+    NSManagedObjectContext *context = [[[MCWeAllPayStoreController defaultStore] weAllPayStoreDocument] managedObjectContext];
     emailAddresses = [context executeFetchRequest:request error:&error];
     if (!emailAddresses) {
         NSLog(@"There was error fetching email addresses for %@", [self getFullName]);

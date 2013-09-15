@@ -41,7 +41,7 @@
 
 - (void)doneAddingPeople:(id)selector
 {
-    NSManagedObjectContext *context = [[[MCWeAllPayStoreController sharedStore] weAllPayStoreDocument] managedObjectContext];
+    NSManagedObjectContext *context = [[[MCWeAllPayStoreController defaultStore] weAllPayStoreDocument] managedObjectContext];
     [context performBlock:^{
         [context processPendingChanges];
     }];
@@ -53,7 +53,7 @@
     [[self navigationController] popViewControllerAnimated:YES];
 
     if ([tonightsBill areTherePeople]) {
-        NSManagedObjectContext *context = [[[MCWeAllPayStoreController sharedStore] weAllPayStoreDocument] managedObjectContext];
+        NSManagedObjectContext *context = [[[MCWeAllPayStoreController defaultStore] weAllPayStoreDocument] managedObjectContext];
         [context performBlock:^{
             [context processPendingChanges];
         }];
@@ -71,7 +71,7 @@
 - (void)cancelNewTrip:(id)selector
 {
     [MCSharedBill deleteSharedbill:tonightsBill];
-    [[[[MCWeAllPayStoreController sharedStore] weAllPayStoreDocument] managedObjectContext] processPendingChanges];
+    [[[[MCWeAllPayStoreController defaultStore] weAllPayStoreDocument] managedObjectContext] processPendingChanges];
     [[self presentingViewController] dismissViewControllerAnimated:YES completion:dismissYourSelf];
 }
 
@@ -181,7 +181,7 @@
         [request setPredicate:predicate];
         
         // Create the FetchedResultsController.
-        dataController = [[NSFetchedResultsController alloc] initWithFetchRequest:request managedObjectContext:[[[MCWeAllPayStoreController sharedStore] weAllPayStoreDocument] managedObjectContext] sectionNameKeyPath:nil cacheName:@"All persons cache."];
+        dataController = [[NSFetchedResultsController alloc] initWithFetchRequest:request managedObjectContext:[[[MCWeAllPayStoreController defaultStore] weAllPayStoreDocument] managedObjectContext] sectionNameKeyPath:nil cacheName:@"All persons cache."];
         [dataController setDelegate:self];
         NSError *error;
         BOOL success = [dataController performFetch:&error];
@@ -230,7 +230,7 @@
         [request setPredicate:predicate];
         
         // Create the FetchedResultsController.
-        dataController = [[NSFetchedResultsController alloc] initWithFetchRequest:request managedObjectContext:[[[MCWeAllPayStoreController sharedStore] weAllPayStoreDocument] managedObjectContext] sectionNameKeyPath:nil cacheName:@"All persons cache."];
+        dataController = [[NSFetchedResultsController alloc] initWithFetchRequest:request managedObjectContext:[[[MCWeAllPayStoreController defaultStore] weAllPayStoreDocument] managedObjectContext] sectionNameKeyPath:nil cacheName:@"All persons cache."];
         [dataController setDelegate:self];
         NSError *error;
         BOOL success = [dataController performFetch:&error];
@@ -332,10 +332,10 @@
 
 - (void)receiveANewPersonFromAddressBook:(MCPerson *)newPerson
 {
-    NSManagedObjectContext *context = [[[MCWeAllPayStoreController sharedStore] weAllPayStoreDocument] managedObjectContext];
+    NSManagedObjectContext *context = [[[MCWeAllPayStoreController defaultStore] weAllPayStoreDocument] managedObjectContext];
     [context performBlock:^{
         NSError *error;
-        [[[[MCWeAllPayStoreController sharedStore] weAllPayStoreDocument] managedObjectContext] save:&error];
+        [[[[MCWeAllPayStoreController defaultStore] weAllPayStoreDocument] managedObjectContext] save:&error];
         if (error) {
             NSLog(@"Unable to store or something.");
         }
@@ -467,7 +467,7 @@
     if (editingStyle == UITableViewCellEditingStyleDelete) {
         MCPerson *removablePerson = [dataController objectAtIndexPath:indexPath];
         if (![tonightsBill hasPersonPaidSomething:removablePerson]) {
-            NSManagedObjectContext *context = [[[MCWeAllPayStoreController sharedStore] weAllPayStoreDocument] managedObjectContext];
+            NSManagedObjectContext *context = [[[MCWeAllPayStoreController defaultStore] weAllPayStoreDocument] managedObjectContext];
             [context performBlock:^{
                 [context deleteObject:removablePerson];
                 [self updateSubLabel];

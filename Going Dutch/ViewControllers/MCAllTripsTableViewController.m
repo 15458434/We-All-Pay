@@ -50,7 +50,7 @@
 
 - (void)setDataController
 {
-    NSManagedObjectContext *context = [[[MCWeAllPayStoreController sharedStore] weAllPayStoreDocument]managedObjectContext];
+    NSManagedObjectContext *context = [[[MCWeAllPayStoreController defaultStore] weAllPayStoreDocument]managedObjectContext];
     NSFetchRequest *request = [NSFetchRequest fetchRequestWithEntityName:@"MCSharedBill"];
     [request setSortDescriptors:[NSArray arrayWithObject:[NSSortDescriptor sortDescriptorWithKey:@"dateCreated" ascending:NO]]];
     
@@ -59,6 +59,22 @@
                                                            sectionNameKeyPath:nil
                                                                     cacheName:nil];
     [dataController setDelegate:self];
+    UIManagedDocument *weAllPayDocument = [[MCWeAllPayStoreController defaultStore] weAllPayStoreDocument];
+    [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(performFetchAndReloadTableView:) name:UIDocumentStateChangedNotification object:weAllPayDocument];
+}
+
+- (void)performFetchAndReloadTableView:(NSNotification *)notification
+{
+    UIManagedDocument *weAllPayDocument = [[MCWeAllPayStoreController defaultStore] weAllPayStoreDocument];
+    if ([weAllPayDocument documentState] == UIDocumentStateNormal) {
+        [self performFetch];
+        [[self tableView] reloadData];
+        [[NSNotificationCenter defaultCenter] removeObserver:self];
+    }
+}
+
+- (void)performFetch
+{
     NSError *error;
     BOOL success = [dataController performFetch:&error];
     if (!success) {
@@ -246,7 +262,7 @@
     if (editingStyle == UITableViewCellEditingStyleDelete) {
         MCSharedBill *toBeDeleteSharedBill = [dataController objectAtIndexPath:indexPath];
         [MCSharedBill deleteSharedbill:toBeDeleteSharedBill];
-        [[[[MCWeAllPayStoreController sharedStore] weAllPayStoreDocument] managedObjectContext] processPendingChanges];
+        [[[[MCWeAllPayStoreController defaultStore] weAllPayStoreDocument] managedObjectContext] processPendingChanges];
     }
 }
 

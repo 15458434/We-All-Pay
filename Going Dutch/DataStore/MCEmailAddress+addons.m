@@ -16,7 +16,7 @@
 + (MCEmailAddress *)addEmailAddressFor:(MCPerson *)person
 {
     __block MCEmailAddress *newEmailAddress;
-    NSManagedObjectContext *context = [[[MCWeAllPayStoreController sharedStore] weAllPayStoreDocument] managedObjectContext];
+    NSManagedObjectContext *context = [[[MCWeAllPayStoreController defaultStore] weAllPayStoreDocument] managedObjectContext];
     [context performBlockAndWait:^{
         newEmailAddress = [NSEntityDescription insertNewObjectForEntityForName:@"MCEmailAddress" inManagedObjectContext:context];
         [newEmailAddress setUniqueEmailId:[MCTools createUniqueIdentifierString]];
@@ -27,7 +27,7 @@
 
 + (void)deleteEmailAddress:(MCEmailAddress *)eAddress
 {
-    NSManagedObjectContext *context = [[[MCWeAllPayStoreController sharedStore] weAllPayStoreDocument] managedObjectContext];
+    NSManagedObjectContext *context = [[[MCWeAllPayStoreController defaultStore] weAllPayStoreDocument] managedObjectContext];
     [context performBlock:^{
         [context delete:eAddress];
     }];
@@ -43,7 +43,7 @@
     [request setPredicate:predicate];
     
     NSError *error;
-    NSArray *sharedBills = [[[[MCWeAllPayStoreController sharedStore] weAllPayStoreDocument] managedObjectContext] executeFetchRequest:request error:&error];
+    NSArray *sharedBills = [[[[MCWeAllPayStoreController defaultStore] weAllPayStoreDocument] managedObjectContext] executeFetchRequest:request error:&error];
     if (!sharedBills) {
         // There was an error.
         return nil;
@@ -65,7 +65,7 @@
     
     NSError *error;
     NSArray *emailAddresses;
-    NSManagedObjectContext *context = [[[MCWeAllPayStoreController sharedStore] weAllPayStoreDocument] managedObjectContext];
+    NSManagedObjectContext *context = [[[MCWeAllPayStoreController defaultStore] weAllPayStoreDocument] managedObjectContext];
     emailAddresses = [context executeFetchRequest:request error:&error];
     if (!emailAddresses) {
         NSLog(@"There was error fetching email addresses for %@", [person getFullName]);

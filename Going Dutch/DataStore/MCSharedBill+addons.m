@@ -18,7 +18,7 @@
 
 + (MCSharedBill *)addSharedBill
 {
-    __block NSManagedObjectContext *context = [[[MCWeAllPayStoreController sharedStore] weAllPayStoreDocument] managedObjectContext];
+    __block NSManagedObjectContext *context = [[[MCWeAllPayStoreController defaultStore] weAllPayStoreDocument] managedObjectContext];
     __block MCSharedBill *sharedBill;
     [context performBlockAndWait:^{
         sharedBill = [NSEntityDescription insertNewObjectForEntityForName:@"MCSharedBill" inManagedObjectContext:context];
@@ -33,7 +33,7 @@
 
 + (void)deleteSharedbill:(MCSharedBill *)deleteBill
 {
-    NSManagedObjectContext *context = [[[MCWeAllPayStoreController sharedStore] weAllPayStoreDocument] managedObjectContext];
+    NSManagedObjectContext *context = [[[MCWeAllPayStoreController defaultStore] weAllPayStoreDocument] managedObjectContext];
     [context performBlock:^{
         [context deleteObject:deleteBill];
     }];
@@ -49,7 +49,7 @@
     [request setPredicate:predicate];
     
     NSError *error;
-    NSArray *sharedBills = [[[[MCWeAllPayStoreController sharedStore] weAllPayStoreDocument] managedObjectContext] executeFetchRequest:request error:&error];
+    NSArray *sharedBills = [[[[MCWeAllPayStoreController defaultStore] weAllPayStoreDocument] managedObjectContext] executeFetchRequest:request error:&error];
     if (!sharedBills) {
         // There was an error.
         return nil;
@@ -60,7 +60,7 @@
 
 - (NSString *)stringOfApproxPeoplePresent;
 {
-    NSManagedObjectContext *context = [[[MCWeAllPayStoreController sharedStore] weAllPayStoreDocument] managedObjectContext];
+    NSManagedObjectContext *context = [[[MCWeAllPayStoreController defaultStore] weAllPayStoreDocument] managedObjectContext];
     __block NSArray *allPeople;
     [context performBlockAndWait:^{
         NSFetchRequest *request = [NSFetchRequest fetchRequestWithEntityName:@"MCPerson"];
@@ -120,7 +120,7 @@
 
 -(NSNumber *)totalSumOfMoneyOfThisSharedBill
 {
-    NSManagedObjectContext *context = [[[MCWeAllPayStoreController sharedStore] weAllPayStoreDocument] managedObjectContext];
+    NSManagedObjectContext *context = [[[MCWeAllPayStoreController defaultStore] weAllPayStoreDocument] managedObjectContext];
     __block NSArray *payments = nil;
     [context performBlockAndWait:^{
         NSFetchRequest *request = [NSFetchRequest fetchRequestWithEntityName:@"MCPayment"];
