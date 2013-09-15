@@ -119,6 +119,25 @@
     return [[self peoplePresent] count];
 }
 
+- (NSUInteger)totalAmountOfPeopleWhoHavePaid
+{
+    NSLog(@"totalAmountOfPeoplewWhoHavePaid is not implemented yet.");
+    NSFetchRequest *request = [NSFetchRequest fetchRequestWithEntityName:@"MCPerson"];
+    //request.predicate = [NSPredicate predicateWithFormat:@"sharedBill = %@ AND payments.onWhichBill = %@", self, self];
+    request.predicate = [NSPredicate predicateWithFormat:@"some payments.onWhichBill == %@", self];
+    NSSortDescriptor *sd = [NSSortDescriptor sortDescriptorWithKey:@"uniquePersonId" ascending:YES];
+    [request setSortDescriptors:[NSArray arrayWithObject:sd]];
+    NSManagedObjectContext *context = [[[MCWeAllPayStoreController defaultStore] weAllPayStoreDocument] managedObjectContext];
+    NSError *error = nil;
+    NSArray *listOfPeopleWhoHavePaid = [context executeFetchRequest:request error:&error];
+    if (!listOfPeopleWhoHavePaid) {
+        NSLog(@"totalAmountOfPeopleWhoHavPaid fetch error: %@", [error localizedDescription]);
+        return 0;
+    } else {
+        return [listOfPeopleWhoHavePaid count];
+    }
+}
+
 -(NSNumber *)totalSumOfMoneyOfThisSharedBill
 {
     NSManagedObjectContext *context = [[[MCWeAllPayStoreController defaultStore] weAllPayStoreDocument] managedObjectContext];

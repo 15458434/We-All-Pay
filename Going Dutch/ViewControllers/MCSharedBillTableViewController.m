@@ -22,6 +22,8 @@
 #import "MCTwoLabelsTitleView.h"
 #import "MCTextFieldAndLabelTitleView.h"
 
+#import "MCReturnPayment.h"
+
 @interface MCSharedBillTableViewController ()
 
 @end
@@ -54,15 +56,15 @@
 
 - (void)shareBill:(id)sender
 {
-    /*
-    if ([[tonightsBill people] doesEveryoneHaveAMailAddress]) {
+    if ([tonightsBill doesEveryoneHaveAnEmailAddress]) {
         MFMailComposeViewController *mailViewController = [[MFMailComposeViewController alloc] init];
         [mailViewController setMailComposeDelegate:self];
-        NSArray *allPeople = [[tonightsBill people] allPeople];
+        NSArray *sda = [NSArray arrayWithObject:[NSSortDescriptor sortDescriptorWithKey:@"dateCreated" ascending:YES]];
+        NSArray *allPeople = [[tonightsBill peoplePresent] sortedArrayUsingDescriptors:sda];
         // Create a list of all email addresses
         NSMutableArray *listOfMailAddresses = [[NSMutableArray alloc] init];
         for (MCPerson *p in allPeople) {
-            [listOfMailAddresses addObject:[p emailAddress]];
+            [listOfMailAddresses addObject:[p defaultEmailAddress]];
         }
         // Set the mail header.
         [mailViewController setToRecipients:listOfMailAddresses];
@@ -72,9 +74,9 @@
         NSMutableString *mailBody = [[NSMutableString alloc] init];
         NSNumberFormatter *nf = [[NSNumberFormatter alloc] init];
         [nf setNumberStyle:NSNumberFormatterCurrencyStyle];
-        [mailBody appendFormat:@"Dear %@\n", [[tonightsBill people] stringOfApproxPeoplePresent]];
+        [mailBody appendFormat:@"Dear %@\n", [tonightsBill stringOfApproxPeoplePresent]];
         [mailBody appendFormat:@"\n"];
-        [mailBody appendFormat:@"From a total of %@, which was spend on our last trip to %@. We all have to pay an equal share of %@.\n", [nf stringFromNumber:[[NSNumber alloc] initWithDouble:[tonightsBill totalSumOfMoneyOfThisSharedBill]]], [tonightsBill tripName], [nf stringFromNumber:[[NSNumber alloc] initWithDouble:[tonightsBill amountPeopleShouldHavePaid]]]];
+        [mailBody appendFormat:@"From a total of %@, which was spend on our last trip to %@. We all have to pay an equal share of %@.\n", [nf stringFromNumber:[tonightsBill totalSumOfMoneyOfThisSharedBill]], [tonightsBill tripName], [nf stringFromNumber:[tonightsBill amountPeopleShouldHavePaid]]];
         [mailBody appendFormat:@"\n"];
         if ([tonightsBill totalAmountOfPeopleWhoHavePaid] == 0) {
             [mailBody appendFormat:@"Nobody has paid so far.\n"];
@@ -83,11 +85,12 @@
         } else {
             [mailBody appendFormat:@"The persons who have paid are:\n"];
         }
-        for (MCPayment *p in [tonightsBill allPayments]) {
-            [mailBody appendFormat:@"%@ has paid %@ for %@.\n", [[p payingPerson] firstName], [nf stringFromNumber:[[NSNumber alloc] initWithDouble:[p money]]], [p place]];
+        NSArray * allPayments = [[tonightsBill payments] sortedArrayUsingDescriptors:sda];
+        for (MCPayment *p in allPayments) {
+            [mailBody appendFormat:@"%@ has paid %@ for %@.\n", [[p payingPerson] getName], [nf stringFromNumber:[p money]], [p descriptionOfPayment]];
         }
         [mailBody appendFormat:@"\n"];
-        [mailBody appendFormat:@"To equalize and have everybody pay the average of %@, I suggest the following solution:\n", [nf stringFromNumber:[[NSNumber alloc] initWithDouble:[tonightsBill amountPeopleShouldHavePaid]]]];
+        [mailBody appendFormat:@"To equalize and have everybody pay the average of %@, I suggest the following solution:\n", [nf stringFromNumber:[tonightsBill amountPeopleShouldHavePaid]]];
         for (MCReturnPayment *rp in [tonightsBill solveWhoHasToPayWhoFromThisBill]) {
             [mailBody appendFormat:@"%@\n", [rp description]];
         }
@@ -103,7 +106,7 @@
                                                              cancelButtonTitle:@"Cancel"
                                                              otherButtonTitles:@"Edit", nil];
         [mailAddressesMissing show];
-    }*/
+    }
 }
 
 - (void)dismissEdit:(id)selector
@@ -329,7 +332,6 @@
 
 - (void)mailComposeController:(MFMailComposeViewController *)controller didFinishWithResult:(MFMailComposeResult)result error:(NSError *)error
 {
-    /*
     if (result == MFMailComposeResultCancelled) {
         [[self presentedViewController] dismissViewControllerAnimated:YES completion:nil];
     } else if (result == MFMailComposeResultSent) {
@@ -339,7 +341,6 @@
     } else {
         NSLog(@"Something went wrong: %@", [error localizedDescription]);
     }
-     */
 }
     
 #pragma mark - NSFetchedResultsControllerDelegate

@@ -30,7 +30,6 @@
 
 - (NSString *)description
 {
-    
     NSNumberFormatter *nf = [[NSNumberFormatter alloc] init];
     [nf setNumberStyle:NSNumberFormatterCurrencyStyle];
     
