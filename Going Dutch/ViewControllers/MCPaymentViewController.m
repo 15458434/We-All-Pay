@@ -328,6 +328,8 @@
     [super viewDidLoad];
     // Do any additional setup after loading the view from its nib.
     
+    [self setEdgesForExtendedLayout:UIRectEdgeNone];
+    
     // If tonight's bill was passed along.
     if (!isNew) {
         [[self navigationController] setToolbarHidden:NO animated:YES];

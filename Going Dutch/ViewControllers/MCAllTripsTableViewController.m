@@ -48,6 +48,24 @@
 
 #pragma mark - New in this class.
 
+- (void)setDataController
+{
+    NSManagedObjectContext *context = [[[MCWeAllPayStoreController sharedStore] weAllPayStoreDocument]managedObjectContext];
+    NSFetchRequest *request = [NSFetchRequest fetchRequestWithEntityName:@"MCSharedBill"];
+    [request setSortDescriptors:[NSArray arrayWithObject:[NSSortDescriptor sortDescriptorWithKey:@"dateCreated" ascending:NO]]];
+    
+    dataController = [[NSFetchedResultsController alloc] initWithFetchRequest:request
+                                                         managedObjectContext:context
+                                                           sectionNameKeyPath:nil
+                                                                    cacheName:nil];
+    [dataController setDelegate:self];
+    NSError *error;
+    BOOL success = [dataController performFetch:&error];
+    if (!success) {
+        NSLog(@"Something went wrong");
+    }
+}
+
 #pragma mark - Inherited from super
 
 - (id)init
@@ -72,23 +90,6 @@
 - (void)viewWillAppear:(BOOL)animated
 {
     [super viewWillAppear:animated];
-    
-    if (!dataController) {
-        NSManagedObjectContext *context = [[[MCWeAllPayStoreController sharedStore] weAllPayStoreDocument] managedObjectContext];
-        NSFetchRequest *request = [NSFetchRequest fetchRequestWithEntityName:@"MCSharedBill"];
-        [request setSortDescriptors:[NSArray arrayWithObject:[NSSortDescriptor sortDescriptorWithKey:@"dateCreated" ascending:NO]]];
-        
-        dataController = [[NSFetchedResultsController alloc] initWithFetchRequest:request
-                                                             managedObjectContext:context
-                                                               sectionNameKeyPath:nil
-                                                                        cacheName:nil];
-        [dataController setDelegate:self];
-        NSError *error;
-        BOOL success = [dataController performFetch:&error];
-        if (!success) {
-            NSLog(@"Something went wrong");
-        }
-    }
 
     // Set the titleView.
     if (!titleView) {
@@ -117,6 +118,10 @@
 - (void)viewDidLoad
 {
     [super viewDidLoad];
+    
+    if (!dataController) {
+        [self setDataController];
+    }
     
     // Load the nib file
     UINib *nib = [UINib nibWithNibName:@"MCAllTripsTableViewCell" bundle:nil];

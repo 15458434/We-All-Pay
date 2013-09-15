@@ -165,27 +165,6 @@
 {
     [super viewWillAppear:animated];
     
-    if (!dataController) {
-        // What entities will be fetched.
-        NSFetchRequest *request = [NSFetchRequest fetchRequestWithEntityName:@"MCPayment"];
-        // How to sort the data.
-        NSSortDescriptor *sortDescriptor = [NSSortDescriptor sortDescriptorWithKey:@"dateCreated" ascending:NO];
-        NSArray *sortDescriptorArray = [NSArray arrayWithObject:sortDescriptor];
-        [request setSortDescriptors:sortDescriptorArray];
-        // Select only people from tonightsBill.
-        NSPredicate *predicate = [NSPredicate predicateWithFormat:@"onWhichBill = %@", tonightsBill];
-        [request setPredicate:predicate];
-        
-        // Create the FetchedResultsController.
-        dataController = [[NSFetchedResultsController alloc] initWithFetchRequest:request managedObjectContext:[[[MCWeAllPayStoreController sharedStore] weAllPayStoreDocument] managedObjectContext] sectionNameKeyPath:nil cacheName:@"All payments cache"];
-        NSError *error;
-        BOOL success = [dataController performFetch:&error];
-        if (!success) {
-            NSLog(@"Something went wrong fetching the payments");
-        }
-        [dataController setDelegate:self];
-    }
-    
     [[self navigationItem] setTitle:[tonightsBill tripName]];
     
     // Load the custom titleView and add it to the screen.
@@ -239,6 +218,27 @@
     // Load nib for PaymentTableViewCell and register it to the TableView.
     UINib *nib = [UINib nibWithNibName:@"MCPaymentTableViewCell" bundle:nil];
     [[self tableView] registerNib:nib forCellReuseIdentifier:@"MCPaymentTableViewCell"];
+    
+    if (!dataController) {
+        // What entities will be fetched.
+        NSFetchRequest *request = [NSFetchRequest fetchRequestWithEntityName:@"MCPayment"];
+        // How to sort the data.
+        NSSortDescriptor *sortDescriptor = [NSSortDescriptor sortDescriptorWithKey:@"dateCreated" ascending:NO];
+        NSArray *sortDescriptorArray = [NSArray arrayWithObject:sortDescriptor];
+        [request setSortDescriptors:sortDescriptorArray];
+        // Select only people from tonightsBill.
+        NSPredicate *predicate = [NSPredicate predicateWithFormat:@"onWhichBill = %@", tonightsBill];
+        [request setPredicate:predicate];
+        
+        // Create the FetchedResultsController.
+        dataController = [[NSFetchedResultsController alloc] initWithFetchRequest:request managedObjectContext:[[[MCWeAllPayStoreController sharedStore] weAllPayStoreDocument] managedObjectContext] sectionNameKeyPath:nil cacheName:@"All payments cache"];
+        NSError *error;
+        BOOL success = [dataController performFetch:&error];
+        if (!success) {
+            NSLog(@"Something went wrong fetching the payments");
+        }
+        [dataController setDelegate:self];
+    }
     
     // if there are NO people on this SharedBill go to the people addscreen
     if (![tonightsBill areTherePeople]) {

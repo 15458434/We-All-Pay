@@ -27,6 +27,14 @@
     static MCWeAllPayStoreController *sharedStore = nil;
     if (!sharedStore) {
         sharedStore = [[super allocWithZone:nil] init];
+    } else {
+        if ([[sharedStore weAllPayStoreDocument] documentState] == UIDocumentStateClosed) {
+            [[sharedStore weAllPayStoreDocument] openWithCompletionHandler:^(BOOL success){
+                if (!success) {
+                    NSLog(@"Something went wrong opening your document.");
+                }
+            }];
+        }
     }
     return sharedStore;
 }
@@ -36,6 +44,19 @@
     [weAllPayStoreDocument saveToURL:[weAllPayStoreDocument fileURL] forSaveOperation:UIDocumentSaveForOverwriting completionHandler:^(BOOL success){
         if (!success) {
             NSLog(@"Save not possible for document at %@", [weAllPayStoreDocument fileURL]);
+        } else {
+            NSLog(@"Succesfully saved.");
+        }
+    }];
+}
+
+- (void)closeDocument
+{
+    [weAllPayStoreDocument closeWithCompletionHandler:^(BOOL success){
+        if (!success) {
+            NSLog(@"Close not possible for document at %@", [weAllPayStoreDocument fileURL]);
+        } else {
+            NSLog(@"UIManagedDocument was succesfully closed.");
         }
     }];
 }

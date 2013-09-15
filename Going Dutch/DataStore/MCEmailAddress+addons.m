@@ -58,8 +58,8 @@
     NSFetchRequest *request = [NSFetchRequest fetchRequestWithEntityName:@"MCEmailAddress"];
     
     // Select only emailAddresses for person
-    NSPredicate *predicate1 = [NSPredicate predicateWithFormat:@"ANY owner = %@", person];
-    NSPredicate *predicate2 = [NSPredicate predicateWithFormat:@"ANY selected = %@", [NSNumber numberWithBool:YES]];
+    NSPredicate *predicate1 = [NSPredicate predicateWithFormat:@"owner = %@", person];
+    NSPredicate *predicate2 = [NSPredicate predicateWithFormat:@"selected = %@", [NSNumber numberWithBool:YES]];
     NSPredicate *compoundPredicate = [NSCompoundPredicate andPredicateWithSubpredicates:[NSArray arrayWithObjects:predicate1, predicate2, nil]];
     [request setPredicate:compoundPredicate];
     

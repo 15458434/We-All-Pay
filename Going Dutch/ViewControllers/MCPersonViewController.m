@@ -287,6 +287,8 @@
 {
     [super viewDidLoad];
     
+    [self setEdgesForExtendedLayout:UIRectEdgeNone];
+    
     // Check to see if thisPerson has paid something.
     if ([tonightsBill hasPersonPaidSomething:thisPerson]) {
         thisPersonHasPaidSomething = YES;

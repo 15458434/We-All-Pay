@@ -23,5 +23,6 @@
 + (MCWeAllPayStoreController *)sharedStore;
 
 - (void)saveStore;
+- (void)closeDocument;
 
 @end

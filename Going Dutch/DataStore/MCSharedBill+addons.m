@@ -121,20 +121,19 @@
 -(NSNumber *)totalSumOfMoneyOfThisSharedBill
 {
     NSManagedObjectContext *context = [[[MCWeAllPayStoreController sharedStore] weAllPayStoreDocument] managedObjectContext];
-    __block NSArray *thePayments = nil;
+    __block NSArray *payments = nil;
     [context performBlockAndWait:^{
         NSFetchRequest *request = [NSFetchRequest fetchRequestWithEntityName:@"MCPayment"];
         [request setPredicate:[NSPredicate predicateWithFormat:@"onWhichBill = %@", self]];
         [request setSortDescriptors:[NSArray arrayWithObject:[NSSortDescriptor sortDescriptorWithKey:@"dateCreated" ascending:NO]]];
         NSError *error = nil;
-        thePayments = [context executeFetchRequest:request error:&error];
-        if (!thePayments) {
+        payments = [context executeFetchRequest:request error:&error];
+        if (!payments) {
             NSLog(@"Error fetching payments on this bill");
         }
-        
     }];
     double sumOfMoney = 0.0;
-    for (MCPayment *p in thePayments) {
+    for (MCPayment *p in payments) {
         sumOfMoney += [[p money] doubleValue];
     }
     return [NSNumber numberWithDouble:sumOfMoney];
