@@ -145,6 +145,10 @@
     } else {
         [[twoLabelTitleView subLabel] setText:[NSString stringWithFormat:@"%d people present", [[dataController fetchedObjects] count]]];
     }
+    if (SYSTEM_VERSION_LESS_THAN(@"7.0")) {
+        [[twoLabelTitleView mainLabel] setTextColor:[UIColor whiteColor]];
+        [[twoLabelTitleView subLabel] setTextColor:[UIColor whiteColor]];
+    }
 }
 
 #pragma mark - inherited from super

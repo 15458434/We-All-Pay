@@ -7,7 +7,7 @@
 //
 
 #import "MCWeAllPayStoreController.h"
-#import "MCTools.h"
+//#import "MCTools.h"
 #import "MCPerson.h"
 #import "MCPayment.h"
 #import "MCSharedBill.h"

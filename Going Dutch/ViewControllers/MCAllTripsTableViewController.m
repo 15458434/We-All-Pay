@@ -126,6 +126,10 @@
     }
     [[titleView mainLabel] setText:@"We All Pay"];
     [[titleView subLabel] setText:[NSString stringWithFormat:@"%@ build %@", [[[NSBundle mainBundle] infoDictionary] objectForKey:@"CFBundleShortVersionString"], [[[NSBundle mainBundle] infoDictionary] objectForKey:@"CFBundleVersion"]]];
+    if (SYSTEM_VERSION_LESS_THAN(@"7.0")) {
+        [[titleView mainLabel] setTextColor:[UIColor whiteColor]];
+        [[titleView subLabel] setTextColor:[UIColor whiteColor]];
+    }
     
     [[self tableView] reloadData];
     UIBarButtonItem *flexButton = [[UIBarButtonItem alloc] initWithBarButtonSystemItem:UIBarButtonSystemItemFlexibleSpace
@@ -200,7 +204,6 @@
             break;
             
         case NSFetchedResultsChangeUpdate:
-            //[self configureCell:[[self tableView] cellForRowAtIndexPath:indexPath] atIndexPath:indexPath];
             [[self tableView] reloadRowsAtIndexPaths:[NSArray arrayWithObject:indexPath] withRowAnimation:UITableViewRowAnimationAutomatic];
             break;
             

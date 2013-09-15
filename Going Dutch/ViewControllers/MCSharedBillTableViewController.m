@@ -137,6 +137,10 @@
     NSNumberFormatter *nf = [[NSNumberFormatter alloc] init];
     [nf setNumberStyle:NSNumberFormatterCurrencyStyle];
     [[twoLabelTitleView subLabel] setText:[NSString stringWithFormat:@"Total spent: %@", [nf stringFromNumber:[tonightsBill totalSumOfMoneyOfThisSharedBill]]]];
+    if (SYSTEM_VERSION_LESS_THAN(@"7.0")) {
+        [[twoLabelTitleView mainLabel] setTextColor:[UIColor whiteColor]];
+        [[twoLabelTitleView subLabel] setTextColor:[UIColor whiteColor]];
+    }
 }
 
 #pragma mark - Inherited from super class.

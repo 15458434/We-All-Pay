@@ -9,7 +9,6 @@
 #import "MCEmailAddress+addons.h"
 #import "MCPerson+addons.h"
 #import "MCWeAllPayStoreController.h"
-#import "MCTools.h"
 
 @implementation MCEmailAddress (addons)
 

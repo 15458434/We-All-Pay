@@ -65,6 +65,10 @@
     [nf setNumberStyle:NSNumberFormatterCurrencyStyle];
     [[twoLabelTitleView mainLabel] setText:[NSString stringWithFormat:@"Each pays: %@", [nf stringFromNumber:averagePay]]];
     [[twoLabelTitleView subLabel] setText:[NSString stringWithFormat:@"Total spent: %@", [nf stringFromNumber:totalSpent]]];
+    if (SYSTEM_VERSION_LESS_THAN(@"7.0")) {
+        [[twoLabelTitleView mainLabel] setTextColor:[UIColor whiteColor]];
+        [[twoLabelTitleView subLabel] setTextColor:[UIColor whiteColor]];
+    }
     [[self navigationItem] setTitle:[[NSString alloc] initWithFormat:@"To pay: %@", [nf stringFromNumber:averagePay]]];
 
     [[self navigationController] setToolbarHidden:YES animated:animated];

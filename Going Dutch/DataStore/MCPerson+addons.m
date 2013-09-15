@@ -12,8 +12,6 @@
 #import "MCEmailAddress.h"
 #import "MCWeAllPayStoreController.h"
 
-#import "MCTools.h"
-
 @implementation MCPerson (addons)
 
 #pragma mark - Core Data Mutations

@@ -10,7 +10,6 @@
 #import "MCPerson.h"
 #import "MCSharedBill.h"
 #import "MCWeAllPayStoreController.h"
-#import "MCTools.h"
 
 @implementation MCPayment (addons)
 

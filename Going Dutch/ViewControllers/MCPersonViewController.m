@@ -258,6 +258,10 @@
             [[twoLabelTitleView mainLabel] setText:@"Person"];
             [[twoLabelTitleView subLabel] setText:@"Edit person"];
         }
+        if (SYSTEM_VERSION_LESS_THAN(@"7.0")) {
+            [[twoLabelTitleView mainLabel] setTextColor:[UIColor whiteColor]];
+            [[twoLabelTitleView subLabel] setTextColor:[UIColor whiteColor]];
+        }
         [[self navigationItem] setTitleView:twoLabelTitleView];
     }
     

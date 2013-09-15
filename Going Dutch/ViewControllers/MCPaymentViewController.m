@@ -292,6 +292,10 @@
             [[twoLabelTitleView mainLabel] setText:@"Payment"];
             [[twoLabelTitleView subLabel] setText:@"Edit payment data"];
         }
+        if (SYSTEM_VERSION_LESS_THAN(@"7.0")) {
+            [[twoLabelTitleView mainLabel] setTextColor:[UIColor whiteColor]];
+            [[twoLabelTitleView subLabel] setTextColor:[UIColor whiteColor]];
+        }
         [[self navigationItem] setTitleView:twoLabelTitleView];
     }
     doneButton = [[UIBarButtonItem alloc] initWithBarButtonSystemItem:UIBarButtonSystemItemDone
