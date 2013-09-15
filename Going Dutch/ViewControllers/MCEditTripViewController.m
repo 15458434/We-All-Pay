@@ -435,7 +435,7 @@
     [[thisCell emailLabel] setText:[thisCellsPerson defaultEmailAddress]];
     NSNumberFormatter *nf = [[NSNumberFormatter alloc] init];
     [nf setNumberStyle:NSNumberFormatterCurrencyStyle];
-    //[[thisCell totalSpent] setText:[nf stringFromNumber:[NSNumber numberWithDouble:[tonightsBill totalSumPaidBy:thisCellsPerson]]]];
+    [[thisCell totalSpent] setText:[nf stringFromNumber:[tonightsBill totalSumPaidBy:thisCellsPerson]]];
     
     return thisCell;
 }

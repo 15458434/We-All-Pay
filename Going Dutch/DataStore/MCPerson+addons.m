@@ -79,25 +79,25 @@
         image = [UIImage imageNamed:@"girl 100x100"];
     }
     CGSize imageSize = [image size];
-    CGRect thumbnailRect = CGRectMake(0, 0, 80, 80);
-    float ratio = MAX(thumbnailRect.size.width / imageSize.width, thumbnailRect.size.height / imageSize.height);
+    CGRect pictureRect = CGRectMake(0, 0, 80, 80);
+    float ratio = MAX(pictureRect.size.width / imageSize.width, pictureRect.size.height / imageSize.height);
     
-    UIGraphicsBeginImageContextWithOptions(thumbnailRect.size, NO, 0.0);
-    UIBezierPath *bezierPath = [UIBezierPath bezierPathWithRoundedRect:thumbnailRect cornerRadius:5.0 * 1.9];
+    UIGraphicsBeginImageContextWithOptions(pictureRect.size, NO, 0.0);
+    UIBezierPath *bezierPath = [UIBezierPath bezierPathWithRoundedRect:pictureRect cornerRadius:5.0 * 1.9];
     [bezierPath addClip];
     
     CGRect imageDrawRect;
     imageDrawRect.size.width = ratio * imageSize.width;
     imageDrawRect.size.height = ratio * imageSize.height;
-    imageDrawRect.origin.x = (thumbnailRect.size.width - imageDrawRect.size.width) / 2.0;
-    imageDrawRect.origin.y = (thumbnailRect.size.height - imageDrawRect.size.height) / 2.0;
+    imageDrawRect.origin.x = (pictureRect.size.width - imageDrawRect.size.width) / 2.0;
+    imageDrawRect.origin.y = (pictureRect.size.height - imageDrawRect.size.height) / 2.0;
     
     [image drawInRect:imageDrawRect];
-    UIImage *thumbnailWithRoundedCorners = UIGraphicsGetImageFromCurrentImageContext();
-    [self setPicture:thumbnailWithRoundedCorners];
+    UIImage *pictureWithRoundedCorners = UIGraphicsGetImageFromCurrentImageContext();
+    [self setPicture:pictureWithRoundedCorners];
     
-    NSData *thumbnailWithRoundedCornersData = UIImagePNGRepresentation(thumbnailWithRoundedCorners);
-    [self setPictureData:thumbnailWithRoundedCornersData];
+    NSData *pictureWithRoundedCornersData = UIImagePNGRepresentation(pictureWithRoundedCorners);
+    [self setPictureData:pictureWithRoundedCornersData];
     UIGraphicsEndImageContext();
 }
 
@@ -137,9 +137,8 @@
     [request setPredicate:predicate];
     [request setSortDescriptors:[NSArray arrayWithObject:sortDescriptor]];
     NSError *error;
-    NSArray *emailAddresses;
     NSManagedObjectContext *context = [[[MCWeAllPayStoreController defaultStore] weAllPayStoreDocument] managedObjectContext];
-    emailAddresses = [context executeFetchRequest:request error:&error];
+    NSArray *emailAddresses = [context executeFetchRequest:request error:&error];
     if (!emailAddresses) {
         NSLog(@"There was error fetching email addresses for %@", [self getFullName]);
         return nil;
@@ -179,6 +178,16 @@
             return YES;
         }
     }
+}
+
+- (void)awakeFromFetch
+{
+    [super awakeFromFetch];
+    
+    // Extract the thumbnail image from the data.
+    [self setPrimitiveValue:[UIImage imageWithData:[self thumbnailData]] forKey:@"thumbnail"];
+    // Extract the picture image from the data
+    [self setPrimitiveValue:[UIImage imageWithData:[self pictureData]] forKey:@"picture"];
 }
 
 @end
