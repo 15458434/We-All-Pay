@@ -110,11 +110,9 @@
 - (void)cancelChangesForEntirePayment:(id)selector
 {
     NSLog(@"cancelchangesForEntirePayment.");
-    /*
     if (isNew) {
-        [[self delegate] removePayment:thisPayment fromPaymentViewController:self];
+        [MCPayment deletePayment:thisPayment];
     }
-     */
     [[self navigationController] popViewControllerAnimated:YES];
 }
 
