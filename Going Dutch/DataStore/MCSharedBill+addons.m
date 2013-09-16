@@ -35,6 +35,9 @@
 {
     NSManagedObjectContext *context = [[[MCWeAllPayStoreController defaultStore] weAllPayStoreDocument] managedObjectContext];
     [context performBlock:^{
+        for (MCPayment *p in [deleteBill payments]) {
+            [context deleteObject:p];
+        }
         [context deleteObject:deleteBill];
     }];
 }
