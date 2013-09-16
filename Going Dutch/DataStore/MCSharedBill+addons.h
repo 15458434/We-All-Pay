@@ -15,7 +15,7 @@
 
 + (MCSharedBill *)fetchSharedBillWithUniqueId:(NSString *)uuid;
 
-- (NSArray *)fetchAllPayments;
+// - (NSArray *)fetchAllPayments;
 
 - (NSString *)stringOfApproxPeoplePresent;
 
@@ -23,18 +23,11 @@
 - (NSUInteger)totalAmountOfPeoplePresent;
 - (NSUInteger)totalAmountOfPeopleWhoHavePaid;
 
-- (BOOL)addPerson:(MCPerson *)newPerson;
-- (void)removePerson:(MCPerson *)awfulPerson;
-
-- (void)addPayment:(MCPayment *)newPayment;
-- (void)removePayment:(MCPayment *)removePayment;
-
 - (NSArray *)solveWhoHasToPayWhoFromThisBill;
 - (NSNumber *)totalSumOfMoneyOfThisSharedBill;
 - (NSNumber *)totalSumPaidBy:(MCPerson *)person;
 - (NSNumber *)amountPeopleShouldHavePaid;
 - (BOOL)hasPersonPaidSomething:(MCPerson *)person;
-- (NSArray *)whatHasPersonPaid:(MCPerson *)person;
 - (BOOL)doesEveryoneHaveAnEmailAddress;
 
 @end
