@@ -65,21 +65,21 @@
 
 - (void)doneEmailPicker:(id)selector
 {
-    /*
-    emailAddress = [allEmailAddressesFromAddressBook objectAtIndex:[emailSelectionFromAddressBookPickerView selectedRowInComponent:0]];
+    MCEmailAddress *newDefaultEmailAddress = [[dataController fetchedObjects] objectAtIndex:[emailSelectionFromAddressBookPickerView selectedRowInComponent:0]];
+    MCEmailAddress *oldDefaulEmailAddress = [MCEmailAddress fetchEmailAddressFor:thisPerson];
+    [oldDefaulEmailAddress setSelected:[NSNumber numberWithBool:NO]];
+    [newDefaultEmailAddress setSelected:[NSNumber numberWithBool:YES]];
+    [emailField setText:[thisPerson defaultEmailAddress]];
+    
     [emailField resignFirstResponder];
     didSomethingChange = YES;
     [[[self navigationItem] rightBarButtonItem] setEnabled:YES];
-     */
 }
 
 - (void)cancelEmailPicker:(id)selector
 {
-    /*
-    [emailField setText:[thisPerson emailAddress]];
-    emailAddress = nil;
+    [emailField setText:[thisPerson defaultEmailAddress]];
     [emailField resignFirstResponder];
-     */
 }
 
 #pragma mark - UITextFieldDelegate
@@ -169,11 +169,8 @@
 
 - (void)pickerView:(UIPickerView *)pickerView didSelectRow:(NSInteger)row inComponent:(NSInteger)component
 {
-    MCEmailAddress *newDefaultEmailAddress = [[dataController fetchedObjects] objectAtIndex:row];
-    MCEmailAddress *oldDefaulEmailAddress = [MCEmailAddress fetchEmailAddressFor:thisPerson];
-    [oldDefaulEmailAddress setSelected:[NSNumber numberWithBool:NO]];
-    [newDefaultEmailAddress setSelected:[NSNumber numberWithBool:YES]];
-    [emailField setText:[thisPerson defaultEmailAddress]];
+    MCEmailAddress *pickedEmailAddress = [[dataController fetchedObjects] objectAtIndex:row];
+    [emailField setText:[pickedEmailAddress emailAddress]];
 }
 
 #pragma mark - UIPickerViewDataSource
