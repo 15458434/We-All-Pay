@@ -129,6 +129,12 @@
 
 - (NSString *)defaultEmailAddress
 {
+    MCEmailAddress *emailAddress = [self getDefaultEmailAddressObject];
+    return [emailAddress emailAddress];
+}
+
+- (MCEmailAddress *)getDefaultEmailAddressObject
+{
     NSFetchRequest *request = [NSFetchRequest fetchRequestWithEntityName:@"MCEmailAddress"];
     NSPredicate *predicate = [NSPredicate predicateWithFormat:@"owner = %@ AND selected = YES", self];
     NSSortDescriptor *sortDescriptor = [NSSortDescriptor sortDescriptorWithKey:@"uniqueEmailId" ascending:YES];
@@ -138,16 +144,11 @@
     NSManagedObjectContext *context = [[[MCWeAllPayStoreController defaultStore] weAllPayStoreDocument] managedObjectContext];
     NSArray *emailAddresses = [context executeFetchRequest:request error:&error];
     if (!emailAddresses) {
-        NSLog(@"There was error fetching email addresses for %@", [self getFullName]);
-        return nil;
-    } else {
-        if ([emailAddresses count] == 0) {
-            return nil;
-        } else {
-            return [[emailAddresses objectAtIndex:0] emailAddress];
-        }
+        NSLog(@"Something went wrong on fetching emailAddresses: %@", [error localizedDescription]);
+    } else if ([emailAddresses count] != 1) {
+        NSLog(@"%d defaultEmailAddresses found.", [emailAddresses count]);
     }
-    
+    return [emailAddresses firstObject];
 }
 
 - (void)addSharedBillObject:(MCSharedBill *)value

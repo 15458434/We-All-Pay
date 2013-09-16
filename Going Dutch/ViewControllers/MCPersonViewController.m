@@ -9,7 +9,7 @@
 #import "MCPersonViewController.h"
 
 #import "MCWeAllPayStoreController.h"
-#import "MCPerson.h"
+#import "MCPerson+addons.h"
 #import "MCSharedBill+addons.h"
 #import "MCEmailAddress+addons.h"
 
@@ -126,6 +126,8 @@
                 [emailField setInputView:emailSelectionFromAddressBookPickerView];
                 [emailField setInputAccessoryView:inputAccessoryPickerView];
             }
+            NSUInteger indexOfDefaultEmailAddress = [[dataController fetchedObjects] indexOfObject:[thisPerson getDefaultEmailAddressObject]];
+            [emailSelectionFromAddressBookPickerView selectRow:indexOfDefaultEmailAddress inComponent:0 animated:YES];
             UIToolbar *inputAccossoryNumberPad = [[UIToolbar alloc] initWithFrame:toolbarRect];
             cancelButton = [[UIBarButtonItem alloc] initWithBarButtonSystemItem:UIBarButtonSystemItemCancel
                                                                          target:self
