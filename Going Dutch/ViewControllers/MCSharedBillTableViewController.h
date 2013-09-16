@@ -20,6 +20,9 @@
     __strong IBOutlet MCTwoLabelsTitleView *twoLabelTitleView;
     
     NSFetchedResultsController *dataController;
+    
+    UIBarButtonItem *mailButton;
+    UIBarButtonItem *returnPaymentButton;
 }
 
 - (id)initWithSharedBill:(MCSharedBill *)tBill;

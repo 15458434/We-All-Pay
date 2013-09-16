@@ -52,11 +52,9 @@
 
 - (void)doneEditingTrip:(id)selector
 {
-    [[self navigationController] popViewControllerAnimated:YES];
-
     if ([tonightsBill areTherePeople]) {
         NSManagedObjectContext *context = [[[MCWeAllPayStoreController defaultStore] weAllPayStoreDocument] managedObjectContext];
-        [context performBlock:^{
+        [context performBlockAndWait:^{
             [context processPendingChanges];
         }];
         [[self navigationController] popViewControllerAnimated:YES];
@@ -68,6 +66,8 @@
                                                                otherButtonTitles:@"Edit", nil];
         [noPeoplePresentMessage show];
     }
+
+    //[[self navigationController] popViewControllerAnimated:YES];
 }
 
 - (void)cancelNewTrip:(id)selector
@@ -240,7 +240,8 @@
         [request setPredicate:predicate];
         
         // Create the FetchedResultsController.
-        dataController = [[NSFetchedResultsController alloc] initWithFetchRequest:request managedObjectContext:[[[MCWeAllPayStoreController defaultStore] weAllPayStoreDocument] managedObjectContext] sectionNameKeyPath:nil cacheName:@"All persons cache."];
+        
+        dataController = [[NSFetchedResultsController alloc] initWithFetchRequest:request managedObjectContext:[[[MCWeAllPayStoreController defaultStore] weAllPayStoreDocument] managedObjectContext] sectionNameKeyPath:nil cacheName:[NSString stringWithFormat:@"All persons cache of trip: %@", [tonightsBill uniqueBillId]]];
         [dataController setDelegate:self];
         NSError *error;
         BOOL success = [dataController performFetch:&error];

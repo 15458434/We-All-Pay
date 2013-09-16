@@ -143,6 +143,27 @@
     }
 }
 
+- (void)updateToolbarButtons
+{
+    if ([[dataController fetchedObjects] count] > 0) {
+        // enable mail and solve buttons.
+        if (mailButton) {
+            [mailButton setEnabled:YES];
+        }
+        if (returnPaymentButton) {
+            [returnPaymentButton setEnabled:YES];
+        }
+    } else {
+        // disable mail and solve buttons.
+        if (mailButton) {
+            [mailButton setEnabled:NO];
+        }
+        if (returnPaymentButton) {
+            [returnPaymentButton setEnabled:NO];
+        }
+    }
+}
+
 #pragma mark - Inherited from super class.
 
 - (id)init
@@ -205,10 +226,14 @@
     NSArray *bottomButtonArray;
     if ([MFMailComposeViewController canSendMail]) {
         bottomButtonArray = [[NSArray alloc] initWithObjects:shareButton, flexibleSpace, solveButton, flexibleSpace, addButton, nil];
+        mailButton = shareButton;
+        returnPaymentButton = solveButton;
     } else {
-        bottomButtonArray = [[NSArray alloc] initWithObjects:flexibleSpace, solveButton, flexibleSpace, addButton, nil];
+        bottomButtonArray = [[NSArray alloc] initWithObjects:flexibleSpace, flexibleSpace, solveButton, flexibleSpace, addButton, nil];
+        returnPaymentButton = solveButton;
     }
     [self setToolbarItems:bottomButtonArray animated:YES];
+    [self updateToolbarButtons];
 }
 
 - (void)viewDidAppear:(BOOL)animated
@@ -238,7 +263,7 @@
         [request setPredicate:predicate];
         
         // Create the FetchedResultsController.
-        dataController = [[NSFetchedResultsController alloc] initWithFetchRequest:request managedObjectContext:[[[MCWeAllPayStoreController defaultStore] weAllPayStoreDocument] managedObjectContext] sectionNameKeyPath:nil cacheName:@"All payments cache"];
+        dataController = [[NSFetchedResultsController alloc] initWithFetchRequest:request managedObjectContext:[[[MCWeAllPayStoreController defaultStore] weAllPayStoreDocument] managedObjectContext] sectionNameKeyPath:nil cacheName:[NSString stringWithFormat:@"All payments cache of trip: %@", [tonightsBill uniqueBillId]]];
         NSError *error;
         BOOL success = [dataController performFetch:&error];
         if (!success) {
@@ -247,21 +272,6 @@
         [dataController setDelegate:self];
     }
     
-    /*
-    // if there are NO people on this SharedBill go to the people addscreen
-    if (![tonightsBill areTherePeople]) {
-        NSLog(@"No people present.");
-        MCEditTripViewController *pvc = [[MCEditTripViewController alloc] initWithBill:tonightsBill isNew:YES];
-        UINavigationController *navController = [[UINavigationController alloc] initWithRootViewController:pvc];
-        [pvc setDismissblock:^{
-            [[self tableView] reloadData];
-            [[self navigationItem] setTitle:[tonightsBill tripName]];
-        }];
-        [pvc setDismissYourSelf:^{
-            [[self navigationController] popViewControllerAnimated:YES];
-        }];
-        [self presentViewController:navController animated:YES completion:nil];
-    }*/
 }
 
 - (void)viewWillDisappear:(BOOL)animated
@@ -346,7 +356,6 @@
     } else {
         NSLog(@"Something went wrong: %@", [error localizedDescription]);
     }
-
 }
     
 #pragma mark - NSFetchedResultsControllerDelegate
@@ -387,6 +396,7 @@
                                     withRowAnimation:UITableViewRowAnimationFade];
             break;
     }
+    [self updateToolbarButtons];
 }
 
 #pragma mark - Table view data source
