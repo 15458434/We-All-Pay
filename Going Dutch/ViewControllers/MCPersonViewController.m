@@ -48,7 +48,11 @@
 
 - (void)doneButtonPressed:(id)selector
 {
-    [[[[MCWeAllPayStoreController defaultStore] weAllPayStoreDocument] managedObjectContext] processPendingChanges];
+    NSManagedObjectContext *context = [[[MCWeAllPayStoreController defaultStore] weAllPayStoreDocument] managedObjectContext];
+    [context performBlock:^{
+        [thisPerson setDateModified:[NSDate date]];
+        [context processPendingChanges];
+    }];
     [[self navigationController] popViewControllerAnimated:YES];
 }
 
