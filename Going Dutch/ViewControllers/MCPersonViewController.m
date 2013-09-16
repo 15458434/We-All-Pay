@@ -102,10 +102,9 @@
 
 - (void)textFieldDidBeginEditing:(UITextField *)textField
 {
-    /*
     if (textField == emailField) {
         // Set the UIPickerView as keyboard for the emailfield if Access to the AddressBook is authorized.
-        if (kABAuthorizationStatusAuthorized == ABAddressBookGetAuthorizationStatus() && [thisPerson emailAddress]) {
+        if (kABAuthorizationStatusAuthorized == ABAddressBookGetAuthorizationStatus() && [[thisPerson emailAddress] count] > 0) {
             CGRect toolbarRect = CGRectMake(0, 0, [[self view] bounds].size.width, 44);
             UIToolbar *inputAccessoryPickerView = [[UIToolbar alloc] initWithFrame:toolbarRect];
             UIBarButtonItem *cancelButton = [[UIBarButtonItem alloc] initWithBarButtonSystemItem:UIBarButtonSystemItemCancel
@@ -137,7 +136,6 @@
             [inputAccossoryNumberPad setItems:[[NSArray alloc] initWithObjects:cancelButton, flexButton, doneButton, nil] animated:YES];
         }
     }
-     */
 }
 
 - (BOOL)textFieldShouldReturn:(UITextField *)textField
@@ -165,14 +163,17 @@
 
 - (NSString *)pickerView:(UIPickerView *)pickerView titleForRow:(NSInteger)row forComponent:(NSInteger)component
 {
-    // return [allEmailAddressesFromAddressBook objectAtIndex:row];
-    return @"someone@earth";
+    MCEmailAddress *emailAddressObject = [[dataController fetchedObjects] objectAtIndex:row];
+    return [emailAddressObject emailAddress];
 }
 
 - (void)pickerView:(UIPickerView *)pickerView didSelectRow:(NSInteger)row inComponent:(NSInteger)component
 {
-    //[emailField setText:[allEmailAddressesFromAddressBook objectAtIndex:row]];
-    //[thisPerson emailAddress] = [emailField text];
+    MCEmailAddress *newDefaultEmailAddress = [[dataController fetchedObjects] objectAtIndex:row];
+    MCEmailAddress *oldDefaulEmailAddress = [MCEmailAddress fetchEmailAddressFor:thisPerson];
+    [oldDefaulEmailAddress setSelected:[NSNumber numberWithBool:NO]];
+    [newDefaultEmailAddress setSelected:[NSNumber numberWithBool:YES]];
+    [emailField setText:[thisPerson defaultEmailAddress]];
 }
 
 #pragma mark - UIPickerViewDataSource
@@ -184,14 +185,11 @@
 
 - (NSInteger)pickerView:(UIPickerView *)pickerView numberOfRowsInComponent:(NSInteger)component
 {
-    /*
     if (kABAuthorizationStatusAuthorized == ABAddressBookGetAuthorizationStatus()) {
-        return [allEmailAddressesFromAddressBook count];
+        return [[dataController fetchedObjects] count];
     } else {
         return 1;
     }
-     */
-    return 1;
 }
 
 #pragma mark - MCAddressBookReceiverDelegate
@@ -285,6 +283,19 @@
     
     [self setEdgesForExtendedLayout:UIRectEdgeNone];
     
+    // Set dataController for EmailPicker
+    NSFetchRequest *request = [NSFetchRequest fetchRequestWithEntityName:@"MCEmailAddress"];
+    [request setPredicate:[NSPredicate predicateWithFormat:@"owner = %@", thisPerson]];
+    NSSortDescriptor *sd = [NSSortDescriptor sortDescriptorWithKey:@"emailAddress" ascending:YES];
+    [request setSortDescriptors:[NSArray arrayWithObject:sd]];
+    NSManagedObjectContext *context = [[[MCWeAllPayStoreController defaultStore] weAllPayStoreDocument] managedObjectContext];
+    dataController = [[NSFetchedResultsController alloc] initWithFetchRequest:request managedObjectContext:context sectionNameKeyPath:nil cacheName:nil];
+    NSError *error = nil;
+    [dataController performFetch:&error];
+    if (error) {
+        NSLog(@"Something went wrong fetching email addresses: %@", [error localizedDescription]);
+    }
+    
     // Check to see if thisPerson has paid something.
     if ([tonightsBill hasPersonPaidSomething:thisPerson]) {
         thisPersonHasPaidSomething = YES;
@@ -293,7 +304,9 @@
     }
     
     if (kABAuthorizationStatusAuthorized == ABAddressBookGetAuthorizationStatus()) {
-        addressBookButton = [[UIBarButtonItem alloc] initWithBarButtonSystemItem:UIBarButtonSystemItemBookmarks target:self action:@selector(getSomeone:)];
+        addressBookButton = [[UIBarButtonItem alloc] initWithBarButtonSystemItem:UIBarButtonSystemItemBookmarks
+                                                                          target:self
+                                                                          action:@selector(getSomeone:)];
         [addressBookButton setEnabled:!thisPersonHasPaidSomething];
         UIBarButtonItem *flexSpace = [[UIBarButtonItem alloc] initWithBarButtonSystemItem:UIBarButtonSystemItemFlexibleSpace
                                                                                    target:nil

@@ -35,6 +35,7 @@
     UIPickerView *emailSelectionFromAddressBookPickerView;
     
     MCAddressBookDataReceiver *personReceiver;
+    NSFetchedResultsController *dataController;
     
     BOOL didSomethingChange;
     BOOL isNew;
