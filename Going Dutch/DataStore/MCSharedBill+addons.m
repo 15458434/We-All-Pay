@@ -123,9 +123,7 @@
 
 - (NSUInteger)totalAmountOfPeopleWhoHavePaid
 {
-    NSLog(@"totalAmountOfPeoplewWhoHavePaid is not implemented yet.");
     NSFetchRequest *request = [NSFetchRequest fetchRequestWithEntityName:@"MCPerson"];
-    //request.predicate = [NSPredicate predicateWithFormat:@"sharedBill = %@ AND payments.onWhichBill = %@", self, self];
     request.predicate = [NSPredicate predicateWithFormat:@"some payments.onWhichBill == %@", self];
     NSSortDescriptor *sd = [NSSortDescriptor sortDescriptorWithKey:@"uniquePersonId" ascending:YES];
     [request setSortDescriptors:[NSArray arrayWithObject:sd]];

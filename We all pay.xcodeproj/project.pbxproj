@@ -64,6 +64,7 @@
 		38DB85E917E46FE2006237CF /* MCPerson.m in Sources */ = {isa = PBXBuildFile; fileRef = 38DB85E817E46FE2006237CF /* MCPerson.m */; };
 		38EFF2D416D215BE001C8248 /* MCAllTripsTableViewCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 38EFF2D316D215BE001C8248 /* MCAllTripsTableViewCell.m */; };
 		38EFF2D616D215FB001C8248 /* MCAllTripsTableViewCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 38EFF2D516D215FB001C8248 /* MCAllTripsTableViewCell.xib */; };
+		38F7FFBA17E9C2BA00913F62 /* iAd.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 38F7FFB917E9C2BA00913F62 /* iAd.framework */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -156,6 +157,7 @@
 		38EFF2D216D215BE001C8248 /* MCAllTripsTableViewCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = MCAllTripsTableViewCell.h; path = Views/MCAllTripsTableViewCell.h; sourceTree = "<group>"; };
 		38EFF2D316D215BE001C8248 /* MCAllTripsTableViewCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = MCAllTripsTableViewCell.m; path = Views/MCAllTripsTableViewCell.m; sourceTree = "<group>"; };
 		38EFF2D516D215FB001C8248 /* MCAllTripsTableViewCell.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; name = MCAllTripsTableViewCell.xib; path = Views/MCAllTripsTableViewCell.xib; sourceTree = "<group>"; };
+		38F7FFB917E9C2BA00913F62 /* iAd.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = iAd.framework; path = System/Library/Frameworks/iAd.framework; sourceTree = SDKROOT; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -163,6 +165,7 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				38F7FFBA17E9C2BA00913F62 /* iAd.framework in Frameworks */,
 				3886D3FD16B7A1CD00ECE64F /* AddressBook.framework in Frameworks */,
 				3886D3FE16B7A1CD00ECE64F /* AddressBookUI.framework in Frameworks */,
 				3801F89C16DFC62600DF8675 /* CoreData.framework in Frameworks */,
@@ -241,6 +244,7 @@
 		38572AD5169D437B00969C62 /* Frameworks */ = {
 			isa = PBXGroup;
 			children = (
+				38F7FFB917E9C2BA00913F62 /* iAd.framework */,
 				3873A2A416F23AA1000832FD /* MessageUI.framework */,
 				3801F89B16DFC62600DF8675 /* CoreData.framework */,
 				3886D3FB16B7A1CD00ECE64F /* AddressBook.framework */,
