@@ -284,6 +284,7 @@
 {
     [super viewDidLoad];
     
+    [self setCanDisplayBannerAds:YES];
     [self setEdgesForExtendedLayout:UIRectEdgeNone];
     
     // Set dataController for EmailPicker

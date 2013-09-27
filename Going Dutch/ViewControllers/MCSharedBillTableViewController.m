@@ -247,6 +247,8 @@
 {
     [super viewDidLoad];
     
+    [self setCanDisplayBannerAds:YES];
+    
     // Load nib for PaymentTableViewCell and register it to the TableView.
     UINib *nib = [UINib nibWithNibName:@"MCPaymentTableViewCell" bundle:nil];
     [[self tableView] registerNib:nib forCellReuseIdentifier:@"MCPaymentTableViewCell"];

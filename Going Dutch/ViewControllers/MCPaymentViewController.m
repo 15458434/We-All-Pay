@@ -330,6 +330,8 @@
     [super viewDidLoad];
     // Do any additional setup after loading the view from its nib.
     
+    [self setCanDisplayBannerAds:YES];
+    
     [self setEdgesForExtendedLayout:UIRectEdgeNone];
     
     // If tonight's bill was passed along.

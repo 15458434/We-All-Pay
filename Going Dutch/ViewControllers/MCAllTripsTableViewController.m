@@ -102,6 +102,8 @@
     
     if (self) {
         [[self navigationItem] setTitle:@"Back"];
+        
+        [self setCanDisplayBannerAds:YES];
     }
     return self;
 }
@@ -118,7 +120,7 @@
 - (void)viewWillAppear:(BOOL)animated
 {
     [super viewWillAppear:animated];
-
+    
     // Set the titleView.
     if (!titleView) {
         titleView = [[[NSBundle mainBundle] loadNibNamed:@"MCTwoLabelsTitleView" owner:self options:nil] objectAtIndex:0];
