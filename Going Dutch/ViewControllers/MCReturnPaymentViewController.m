@@ -32,12 +32,6 @@
             @throw [NSException exceptionWithName:@"InitWithNil" reason:@"thisBill is not allowed to point to nil." userInfo:nil];
         }
         tonightsBill = thisBill;
-        paymentsAfterwards = [[NSMutableArray alloc] init];
-        for (MCReturnPayment *rp in [tonightsBill solveWhoHasToPayWhoFromThisBill]) {
-            if ([rp receiver]) {
-                [paymentsAfterwards addObject:rp];
-            }
-        }
     }
     return self;
 }
@@ -85,6 +79,14 @@
     // self.navigationItem.rightBarButtonItem = self.editButtonItem;
     
     [self setCanDisplayBannerAds:YES];
+    
+    paymentsAfterwards = [[NSMutableArray alloc] init];
+    for (MCReturnPayment *rp in [tonightsBill solveWhoHasToPayWhoFromThisBill]) {
+        if ([rp receiver]) {
+            [paymentsAfterwards addObject:rp];
+        }
+    }
+    [[self tableView] reloadData];
     
     UINib *nib = [UINib nibWithNibName:@"MCReturnPaymentTableViewCell" bundle:nil];
     [[self tableView] registerNib:nib forCellReuseIdentifier:@"MCReturnPaymentTableViewCell"];
