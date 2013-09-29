@@ -28,6 +28,14 @@
     return self;
 }
 
+- (NSString *)stringForMail
+{
+    NSNumberFormatter *nf = [[NSNumberFormatter alloc] init];
+    [nf setNumberStyle:NSNumberFormatterCurrencyStyle];
+    
+    return [[NSString alloc] initWithFormat:@"%@ pays %@ to %@.", [payer firstName], [nf stringFromNumber:money], [receiver firstName]];
+}
+
 - (NSString *)description
 {
     NSNumberFormatter *nf = [[NSNumberFormatter alloc] init];

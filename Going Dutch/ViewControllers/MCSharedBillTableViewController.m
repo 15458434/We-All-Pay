@@ -92,7 +92,7 @@
         [mailBody appendFormat:@"\n"];
         [mailBody appendFormat:@"To equalize and have everybody pay the average of %@, I suggest the following solution:\n", [nf stringFromNumber:[tonightsBill amountPeopleShouldHavePaid]]];
         for (MCReturnPayment *rp in [tonightsBill solveWhoHasToPayWhoFromThisBill]) {
-            [mailBody appendFormat:@"%@\n", [rp description]];
+            [mailBody appendFormat:@"%@\n", [rp stringForMail]];
         }
         [mailBody appendFormat:@"\n"];
         [mailBody appendFormat:@"If you have any remarks please let me know.\n"];

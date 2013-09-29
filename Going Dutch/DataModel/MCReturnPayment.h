@@ -16,6 +16,7 @@
 }
 
 - (id)initWithPayer:(MCPerson *)p paysTo:(MCPerson *)r amountOfMoney:(NSNumber *)m;
+- (NSString *)stringForMail;
 
 @property (nonatomic, strong) MCPerson *payer;
 @property (nonatomic, strong) MCPerson *receiver;
