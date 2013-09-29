@@ -218,7 +218,7 @@
     NSArray *people = [[self peoplePresent] sortedArrayUsingDescriptors:sda1];
     
     for (MCPerson *p in people) {
-        NSLog(@"%@", [self totalSumPaidBy:p]);
+        NSLog(@"%@ paid %@", [p getName], [self totalSumPaidBy:p]);
     }
     
     for (MCPerson *p in people) {
@@ -262,7 +262,7 @@
             [p replaceObjectAtIndex:3 withObject:leftToPay];
             [r replaceObjectAtIndex:3 withObject:leftToReceive];
             
-            if ([rp money] > 0) {
+            if ([[rp money] doubleValue] > 0) {
                 [whoHasToPayWho addObject:rp];
             }
         }
