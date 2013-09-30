@@ -36,6 +36,7 @@
     MCPerson *newPerson = [MCPerson addPerson];
     [tonightsBill addPeoplePresentObject:newPerson];
     [self updateSubLabel];
+    [doneButton setEnabled:YES];
     MCPersonViewController *pvc = [[MCPersonViewController alloc] initWithPerson:newPerson];
     [pvc setIsNew:YES];
     [[self navigationController] pushViewController:pvc animated:YES];
@@ -66,8 +67,6 @@
                                                                otherButtonTitles:@"Edit", nil];
         [noPeoplePresentMessage show];
     }
-
-    //[[self navigationController] popViewControllerAnimated:YES];
 }
 
 - (void)cancelNewTrip:(id)selector
@@ -203,7 +202,7 @@
 
 - (void)viewWillDisappear:(BOOL)animated
 {
-    [[[self navigationItem] rightBarButtonItem] setEnabled:NO];
+    //[[[self navigationItem] rightBarButtonItem] setEnabled:NO];
     [[[self navigationItem] leftBarButtonItem] setEnabled:NO];
 }
 

@@ -62,11 +62,11 @@
             ignoreCount = "0"
             continueAfterRunningActions = "No"
             filePath = "Going Dutch/ViewControllers/MCEditTripViewController.m"
-            timestampString = "402001826.356038"
+            timestampString = "402262184.430356"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "400"
-            endingLineNumber = "400"
+            startingLineNumber = "399"
+            endingLineNumber = "399"
             landmarkName = "-controller:didChangeObject:atIndexPath:forChangeType:newIndexPath:"
             landmarkType = "5">
          </BreakpointContent>
@@ -125,7 +125,7 @@
                   symbolName = "-[MCSharedBill(addons) solveWhoHasToPayWhoFromThisBill]"
                   moduleName = "We all pay"
                   urlString = "file://localhost/Users/markcornelisse/Programming/Going%20Dutch/Going%20Dutch/DataStore/MCSharedBill+addons.m"
-                  timestampString = "402260495.981344"
+                  timestampString = "402261602.685386"
                   startingColumnNumber = "9223372036854775807"
                   endingColumnNumber = "9223372036854775807"
                   startingLineNumber = "246"
@@ -139,7 +139,7 @@
                   symbolName = "-[MCSharedBill(addons) solveWhoHasToPayWhoFromThisBill]"
                   moduleName = "We all pay"
                   urlString = "file://localhost/Users/markcornelisse/Programming/Going%20Dutch/Going%20Dutch/DataStore/MCSharedBill+addons.m"
-                  timestampString = "402260495.981809"
+                  timestampString = "402261602.68617"
                   startingColumnNumber = "9223372036854775807"
                   endingColumnNumber = "9223372036854775807"
                   startingLineNumber = "246"
@@ -194,6 +194,22 @@
             startingLineNumber = "36"
             endingLineNumber = "36"
             landmarkName = "-addPerson:"
+            landmarkType = "5">
+         </BreakpointContent>
+      </BreakpointProxy>
+      <BreakpointProxy
+         BreakpointExtensionID = "Xcode.Breakpoint.FileBreakpoint">
+         <BreakpointContent
+            shouldBeEnabled = "Yes"
+            ignoreCount = "0"
+            continueAfterRunningActions = "No"
+            filePath = "Going Dutch/ViewControllers/MCPersonViewController.m"
+            timestampString = "402261294.312138"
+            startingColumnNumber = "9223372036854775807"
+            endingColumnNumber = "9223372036854775807"
+            startingLineNumber = "149"
+            endingLineNumber = "149"
+            landmarkName = "-textFieldDidEndEditing:"
             landmarkType = "5">
          </BreakpointContent>
       </BreakpointProxy>
