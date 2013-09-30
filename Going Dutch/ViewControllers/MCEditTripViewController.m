@@ -39,6 +39,7 @@
     [doneButton setEnabled:YES];
     MCPersonViewController *pvc = [[MCPersonViewController alloc] initWithPerson:newPerson];
     [pvc setIsNew:YES];
+    [pvc setTonightsBill:tonightsBill];
     [[self navigationController] pushViewController:pvc animated:YES];
 }
 
