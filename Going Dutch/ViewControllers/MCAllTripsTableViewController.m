@@ -51,7 +51,7 @@
         [[self navigationController] pushViewController:tvc animated:YES];
     }];
     [etvc setDismissOnCancel:^{
-        NSLog(@"Do nothing");
+        [MCSharedBill deleteSharedbill:newTrip];
     }];
     [self presentViewController:navController animated:YES completion:^{
         //[[self navigationController] pushViewController:tvc animated:YES];

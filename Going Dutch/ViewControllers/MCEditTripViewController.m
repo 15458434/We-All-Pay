@@ -72,9 +72,8 @@
 - (void)cancelNewTrip:(id)selector
 {
     cancelPressed = YES;
-    [MCSharedBill deleteSharedbill:tonightsBill];
-    tonightsBill = nil;
-    [[[[MCWeAllPayStoreController defaultStore] weAllPayStoreDocument] managedObjectContext] processPendingChanges];
+    // [MCSharedBill deleteSharedbill:tonightsBill];
+    // tonightsBill = nil;
     [[self presentingViewController] dismissViewControllerAnimated:YES completion:dismissOnCancel];
 }
 
@@ -197,6 +196,10 @@
         if (!success) {
             NSLog(@"Something went wrong");
         }
+    }
+    
+    if (isInitAsNew && [[dataController fetchedObjects] count] == 0) {
+        [doneButton setEnabled:NO];
     }
 }
 

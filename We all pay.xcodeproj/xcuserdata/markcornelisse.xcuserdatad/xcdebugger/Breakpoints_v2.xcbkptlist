@@ -62,11 +62,11 @@
             ignoreCount = "0"
             continueAfterRunningActions = "No"
             filePath = "Going Dutch/ViewControllers/MCEditTripViewController.m"
-            timestampString = "402262184.430356"
+            timestampString = "402264524.729681"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "399"
-            endingLineNumber = "399"
+            startingLineNumber = "402"
+            endingLineNumber = "402"
             landmarkName = "-controller:didChangeObject:atIndexPath:forChangeType:newIndexPath:"
             landmarkType = "5">
          </BreakpointContent>
