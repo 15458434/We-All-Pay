@@ -59,6 +59,7 @@
     if ([tonightsBill doesEveryoneHaveAnEmailAddress]) {
         MFMailComposeViewController *mailViewController = [[MFMailComposeViewController alloc] init];
         [mailViewController setMailComposeDelegate:self];
+        [[[mailViewController viewControllers] objectAtIndex:0] setCanDisplayBannerAds:YES];
         NSArray *sda = [NSArray arrayWithObject:[NSSortDescriptor sortDescriptorWithKey:@"dateCreated" ascending:YES]];
         NSArray *allPeople = [[tonightsBill peoplePresent] sortedArrayUsingDescriptors:sda];
         // Create a list of all email addresses
