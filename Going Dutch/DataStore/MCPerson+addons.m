@@ -9,7 +9,7 @@
 #import "MCPerson+addons.h"
 #import "MCPayment.h"
 #import "MCSharedBill.h"
-#import "MCEmailAddress.h"
+#import "MCEmailAddress+addons.h"
 #import "MCWeAllPayStoreController.h"
 
 @implementation MCPerson (addons)
@@ -125,6 +125,15 @@
     } else {
         return @"...";
     }
+}
+
+- (void)addOneEmailAddressFromAString:(NSString *)emailAddressAsString
+{
+    MCEmailAddress *newEmailAddress = [MCEmailAddress addEmailAddressFor:self];
+    if ([[self emailAddress] count] == 1) {
+        [newEmailAddress setSelected:[NSNumber numberWithBool:YES]];
+    }
+    [newEmailAddress setEmailAddress:emailAddressAsString];
 }
 
 - (NSString *)defaultEmailAddress

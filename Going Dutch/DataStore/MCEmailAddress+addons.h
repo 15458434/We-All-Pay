@@ -15,4 +15,5 @@
 
 + (MCEmailAddress *)fetchEmailAddressFor:(MCPerson *)person;
 
+
 @end

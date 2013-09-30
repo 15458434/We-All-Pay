@@ -144,22 +144,37 @@
     }
 }
 
-- (BOOL)textFieldShouldReturn:(UITextField *)textField
+- (void)textFieldDidEndEditing:(UITextField *)textField
 {
     if (textField == firstNameField) {
         [thisPerson setFirstName:[firstNameField text]];
         didSomethingChange = YES;
         [[[self navigationItem] rightBarButtonItem] setEnabled:YES];
-        return YES;
+        [lastNameField becomeFirstResponder];
     } else if (textField == lastNameField) {
         [thisPerson setLastName:[lastNameField text]];
         didSomethingChange = YES;
         [[[self navigationItem] rightBarButtonItem] setEnabled:YES];
+        [emailField becomeFirstResponder];
     } else if (textField == emailField) {
-        //[thisPerson setEmailAddress:[emailField text]];
+        if (kABAuthorizationStatusDenied == ABAddressBookGetAuthorizationStatus() || kABAuthorizationStatusRestricted == ABAddressBookGetAuthorizationStatus()) {
+            [thisPerson addOneEmailAddressFromAString:[emailField text]];
+        }
         didSomethingChange = YES;
-        [emailField resignFirstResponder];
         [[[self navigationItem] rightBarButtonItem] setEnabled:YES];
+    }
+}
+
+- (BOOL)textFieldShouldReturn:(UITextField *)textField
+{
+    if (textField == firstNameField) {
+        [firstNameField resignFirstResponder];
+        return YES;
+    } else if (textField == lastNameField) {
+        [lastNameField resignFirstResponder];
+        return YES;
+    } else if (textField == emailField) {
+        [emailField resignFirstResponder];
         return YES;
     }
     return NO;

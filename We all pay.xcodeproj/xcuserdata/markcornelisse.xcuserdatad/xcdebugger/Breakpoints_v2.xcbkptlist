@@ -125,12 +125,12 @@
                   symbolName = "-[MCSharedBill(addons) solveWhoHasToPayWhoFromThisBill]"
                   moduleName = "We all pay"
                   urlString = "file://localhost/Users/markcornelisse/Programming/Going%20Dutch/Going%20Dutch/DataStore/MCSharedBill+addons.m"
-                  timestampString = "402171060.063985"
+                  timestampString = "402260495.981344"
                   startingColumnNumber = "9223372036854775807"
                   endingColumnNumber = "9223372036854775807"
                   startingLineNumber = "246"
                   endingLineNumber = "246"
-                  offsetFromSymbolStart = "2450">
+                  offsetFromSymbolStart = "2966">
                </Location>
                <Location
                   shouldBeEnabled = "Yes"
@@ -139,14 +139,62 @@
                   symbolName = "-[MCSharedBill(addons) solveWhoHasToPayWhoFromThisBill]"
                   moduleName = "We all pay"
                   urlString = "file://localhost/Users/markcornelisse/Programming/Going%20Dutch/Going%20Dutch/DataStore/MCSharedBill+addons.m"
-                  timestampString = "402171060.064431"
+                  timestampString = "402260495.981809"
                   startingColumnNumber = "9223372036854775807"
                   endingColumnNumber = "9223372036854775807"
                   startingLineNumber = "246"
                   endingLineNumber = "246"
-                  offsetFromSymbolStart = "4332">
+                  offsetFromSymbolStart = "5370">
                </Location>
             </Locations>
+         </BreakpointContent>
+      </BreakpointProxy>
+      <BreakpointProxy
+         BreakpointExtensionID = "Xcode.Breakpoint.FileBreakpoint">
+         <BreakpointContent
+            shouldBeEnabled = "Yes"
+            ignoreCount = "0"
+            continueAfterRunningActions = "No"
+            filePath = "Going Dutch/ViewControllers/MCPersonViewController.m"
+            timestampString = "402260867.574255"
+            startingColumnNumber = "9223372036854775807"
+            endingColumnNumber = "9223372036854775807"
+            startingLineNumber = "170"
+            endingLineNumber = "170"
+            landmarkName = "-textFieldShouldReturn:"
+            landmarkType = "5">
+         </BreakpointContent>
+      </BreakpointProxy>
+      <BreakpointProxy
+         BreakpointExtensionID = "Xcode.Breakpoint.FileBreakpoint">
+         <BreakpointContent
+            shouldBeEnabled = "Yes"
+            ignoreCount = "0"
+            continueAfterRunningActions = "No"
+            filePath = "Going Dutch/ViewControllers/MCPersonViewController.m"
+            timestampString = "402257271.680197"
+            startingColumnNumber = "9223372036854775807"
+            endingColumnNumber = "9223372036854775807"
+            startingLineNumber = "51"
+            endingLineNumber = "51"
+            landmarkName = "-doneButtonPressed:"
+            landmarkType = "5">
+         </BreakpointContent>
+      </BreakpointProxy>
+      <BreakpointProxy
+         BreakpointExtensionID = "Xcode.Breakpoint.FileBreakpoint">
+         <BreakpointContent
+            shouldBeEnabled = "No"
+            ignoreCount = "0"
+            continueAfterRunningActions = "No"
+            filePath = "Going Dutch/ViewControllers/MCEditTripViewController.m"
+            timestampString = "402257509.981521"
+            startingColumnNumber = "9223372036854775807"
+            endingColumnNumber = "9223372036854775807"
+            startingLineNumber = "36"
+            endingLineNumber = "36"
+            landmarkName = "-addPerson:"
+            landmarkType = "5">
          </BreakpointContent>
       </BreakpointProxy>
    </Breakpoints>
