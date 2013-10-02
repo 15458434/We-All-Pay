@@ -48,6 +48,7 @@
     NSManagedObjectContext *context = [[[MCWeAllPayStoreController defaultStore] weAllPayStoreDocument] managedObjectContext];
     [context performBlock:^{
         [context processPendingChanges];
+        [[context undoManager] disableUndoRegistration];
     }];
     [[self presentingViewController] dismissViewControllerAnimated:YES completion:dismissOnDone];
 }
@@ -58,6 +59,7 @@
         NSManagedObjectContext *context = [[[MCWeAllPayStoreController defaultStore] weAllPayStoreDocument] managedObjectContext];
         [context performBlockAndWait:^{
             [context processPendingChanges];
+            [[context undoManager] disableUndoRegistration];
         }];
         [[self navigationController] popViewControllerAnimated:YES];
     } else {
@@ -73,14 +75,22 @@
 - (void)cancelNewTrip:(id)selector
 {
     cancelPressed = YES;
-    // [MCSharedBill deleteSharedbill:tonightsBill];
-    // tonightsBill = nil;
+    NSManagedObjectContext *context = [[[MCWeAllPayStoreController defaultStore] weAllPayStoreDocument] managedObjectContext];
+    [context performBlock:^{
+        [context reset];
+        [[context undoManager] disableUndoRegistration];
+    }];
     [[self presentingViewController] dismissViewControllerAnimated:YES completion:dismissOnCancel];
 }
 
 - (void)cancelEditTrip:(id)selector
 {
     cancelPressed = YES;
+    NSManagedObjectContext *context = [[[MCWeAllPayStoreController defaultStore] weAllPayStoreDocument] managedObjectContext];
+    [context performBlock:^{
+        [context reset];
+        [[context undoManager] disableUndoRegistration];
+    }];
     [[self navigationController] popViewControllerAnimated:YES];
 }
 
@@ -232,6 +242,8 @@
     // self.navigationItem.rightBarButtonItem = self.editButtonItem;
     
     [self setCanDisplayBannerAds:YES];
+    
+    [[[[[MCWeAllPayStoreController defaultStore] weAllPayStoreDocument] managedObjectContext] undoManager] enableUndoRegistration];
     
     if (!dataController) {
         // What entities will be fetched.

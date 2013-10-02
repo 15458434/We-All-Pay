@@ -42,7 +42,12 @@
 
 - (void)cancelButtonPressed:(id)selector
 {
-    [[[[MCWeAllPayStoreController defaultStore] weAllPayStoreDocument] managedObjectContext] rollback];
+    //[[[[MCWeAllPayStoreController defaultStore] weAllPayStoreDocument] managedObjectContext] rollback];
+    NSManagedObjectContext *context = [[[MCWeAllPayStoreController defaultStore] weAllPayStoreDocument] managedObjectContext];
+    [context performBlock:^{
+        [[context undoManager] undoNestedGroup];
+        [[context undoManager] endUndoGrouping];
+    }];
     [[self navigationController] popViewControllerAnimated:YES];
 }
 
@@ -51,7 +56,7 @@
     NSManagedObjectContext *context = [[[MCWeAllPayStoreController defaultStore] weAllPayStoreDocument] managedObjectContext];
     [context performBlock:^{
         [thisPerson setDateModified:[NSDate date]];
-        [context processPendingChanges];
+        [[context undoManager] endUndoGrouping];
     }];
     [[self navigationController] popViewControllerAnimated:YES];
 }
@@ -294,12 +299,14 @@
     [self setCanDisplayBannerAds:YES];
     [self setEdgesForExtendedLayout:UIRectEdgeNone];
     
+    NSManagedObjectContext *context = [[[MCWeAllPayStoreController defaultStore] weAllPayStoreDocument] managedObjectContext];
+    [[context undoManager] beginUndoGrouping];
+    
     // Set dataController for EmailPicker
     NSFetchRequest *request = [NSFetchRequest fetchRequestWithEntityName:@"MCEmailAddress"];
     [request setPredicate:[NSPredicate predicateWithFormat:@"owner = %@", thisPerson]];
     NSSortDescriptor *sd = [NSSortDescriptor sortDescriptorWithKey:@"emailAddress" ascending:YES];
     [request setSortDescriptors:[NSArray arrayWithObject:sd]];
-    NSManagedObjectContext *context = [[[MCWeAllPayStoreController defaultStore] weAllPayStoreDocument] managedObjectContext];
     dataController = [[NSFetchedResultsController alloc] initWithFetchRequest:request managedObjectContext:context sectionNameKeyPath:nil cacheName:nil];
     NSError *error = nil;
     [dataController performFetch:&error];

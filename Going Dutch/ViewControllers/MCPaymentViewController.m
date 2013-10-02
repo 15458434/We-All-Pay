@@ -331,8 +331,10 @@
     // Do any additional setup after loading the view from its nib.
     
     [self setCanDisplayBannerAds:YES];
-    
     [self setEdgesForExtendedLayout:UIRectEdgeNone];
+    
+    NSManagedObjectContext *context = [[[MCWeAllPayStoreController defaultStore] weAllPayStoreDocument] managedObjectContext];
+    [[context undoManager] enableUndoRegistration];
     
     // If tonight's bill was passed along.
     if (!isNew) {
