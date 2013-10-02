@@ -37,6 +37,7 @@
     
     MCAddressBookDataReceiver *personReceiver;
     NSFetchedResultsController *dataController;
+    NSUndoManager *undoManager;
     
     BOOL didSomethingChange;
     BOOL isNew;

@@ -215,20 +215,12 @@
 - (BOOL)isNewPersonFromAddressBookAlreadyPresent:(MCPerson *)newPerson
 {
     // return [tonightsBill isPersonPresent:newPerson];
+    NSLog(@"isNewPersonFromAddressBookAlreadyPresent is not implemented yet.");
     return NO;
 }
 
 - (void)receiveANewPersonFromAddressBook:(MCPerson *)newPerson
 {
-    /*
-    firstName = [newPerson firstName];
-    lastName = [newPerson lastName];
-    emailAddress = [newPerson emailAddress];
-    allEmailAddressesFromAddressBook = [newPerson allEmailAddressesFromAddressBook];
-    thumbnail = [newPerson thumbnail];
-    picture = [newPerson picture];
-    [newPerson removePictureData];
-     */
     didSomethingChange = YES;
     [[[self navigationItem] rightBarButtonItem] setEnabled:YES];
     [emailSelectionFromAddressBookPickerView reloadComponent:0];

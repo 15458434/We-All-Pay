@@ -79,11 +79,13 @@
     if (self && stillNeedsInit) {
         NSURL *weAllPayURL = [MCTools documentPathAsURLTo:@"WeAllPayStore"];
         weAllPayStoreDocument = [[UIManagedDocument alloc] initWithFileURL:weAllPayURL];
+        [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(storeIsReady:) name:UIDocumentStateChangedNotification object:weAllPayStoreDocument];
         if ([[NSFileManager defaultManager] fileExistsAtPath:[weAllPayURL path]]) {
             [weAllPayStoreDocument openWithCompletionHandler:^(BOOL success){
                 if (success) {
                     // The document is ready to use.
-                    [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(storeIsReady:) name:UIDocumentStateChangedNotification object:weAllPayStoreDocument];
+                    [[weAllPayStoreDocument managedObjectContext] setUndoManager:[[NSUndoManager alloc] init]];
+                    [[[weAllPayStoreDocument managedObjectContext] undoManager] disableUndoRegistration];
                 } else {
                     // The document is is not ready to use.
                     NSLog(@"Couldn't open storage file at %@", weAllPayURL);
@@ -95,7 +97,8 @@
             [weAllPayStoreDocument saveToURL:weAllPayURL forSaveOperation:UIDocumentSaveForCreating completionHandler:^(BOOL success){
                 if (success) {
                     // The document is ready to use.
-                    [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(storeIsReady:) name:UIDocumentStateChangedNotification object:weAllPayStoreDocument];
+                    [[weAllPayStoreDocument managedObjectContext] setUndoManager:[[NSUndoManager alloc] init]];
+                    [[[weAllPayStoreDocument managedObjectContext] undoManager] disableUndoRegistration];
                 } else {
                     // The document is not ready to use.
                     NSLog(@"Couldn't create storage file at %@", weAllPayURL);

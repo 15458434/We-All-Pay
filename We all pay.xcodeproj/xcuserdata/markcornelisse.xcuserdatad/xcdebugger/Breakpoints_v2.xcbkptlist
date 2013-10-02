@@ -125,7 +125,7 @@
                   symbolName = "-[MCSharedBill(addons) solveWhoHasToPayWhoFromThisBill]"
                   moduleName = "We all pay"
                   urlString = "file://localhost/Users/markcornelisse/Programming/Going%20Dutch/Going%20Dutch/DataStore/MCSharedBill+addons.m"
-                  timestampString = "402264998.739253"
+                  timestampString = "402428851.899847"
                   startingColumnNumber = "9223372036854775807"
                   endingColumnNumber = "9223372036854775807"
                   startingLineNumber = "246"
@@ -139,7 +139,7 @@
                   symbolName = "-[MCSharedBill(addons) solveWhoHasToPayWhoFromThisBill]"
                   moduleName = "We all pay"
                   urlString = "file://localhost/Users/markcornelisse/Programming/Going%20Dutch/Going%20Dutch/DataStore/MCSharedBill+addons.m"
-                  timestampString = "402264998.739702"
+                  timestampString = "402428851.900473"
                   startingColumnNumber = "9223372036854775807"
                   endingColumnNumber = "9223372036854775807"
                   startingLineNumber = "246"
@@ -210,6 +210,22 @@
             startingLineNumber = "149"
             endingLineNumber = "149"
             landmarkName = "-textFieldDidEndEditing:"
+            landmarkType = "5">
+         </BreakpointContent>
+      </BreakpointProxy>
+      <BreakpointProxy
+         BreakpointExtensionID = "Xcode.Breakpoint.FileBreakpoint">
+         <BreakpointContent
+            shouldBeEnabled = "No"
+            ignoreCount = "0"
+            continueAfterRunningActions = "No"
+            filePath = "Going Dutch/DataStore/MCWeAllPayStoreController.m"
+            timestampString = "402428851.545988"
+            startingColumnNumber = "9223372036854775807"
+            endingColumnNumber = "9223372036854775807"
+            startingLineNumber = "75"
+            endingLineNumber = "75"
+            landmarkName = "-init"
             landmarkType = "5">
          </BreakpointContent>
       </BreakpointProxy>
