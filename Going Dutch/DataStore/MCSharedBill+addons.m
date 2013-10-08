@@ -243,32 +243,34 @@
     }
     
     // Solve who has to pay who.
-    for (NSMutableArray *p in payers) {
-        for (NSMutableArray *r in receivers) {
-            double ltp = [[p objectAtIndex:3] doubleValue];
-            double ltr = [[r objectAtIndex:3] doubleValue];
-            MCReturnPayment *rp;
-            if (ltp >= ltr) {
-                rp = [[MCReturnPayment alloc] initWithPayer:[p objectAtIndex:0] paysTo:[r objectAtIndex:0] amountOfMoney:[NSNumber numberWithDouble:ltr]];
-                ltp -= ltr;
-                ltr = 0;
-            } else {
-                rp = [[MCReturnPayment alloc] initWithPayer:[p objectAtIndex:0] paysTo:[r objectAtIndex:0] amountOfMoney:[NSNumber numberWithDouble:ltp]];
-                ltr -= ltp;
-                ltp = 0;
-            }
-            leftToPay = [[NSNumber alloc] initWithDouble:ltp];
-            leftToReceive = [[NSNumber alloc] initWithDouble:ltr];
-            [p replaceObjectAtIndex:3 withObject:leftToPay];
-            [r replaceObjectAtIndex:3 withObject:leftToReceive];
-            
-            if ([[rp money] doubleValue] > 0) {
-                [whoHasToPayWho addObject:rp];
+    if ([payers count] > 0) {
+        for (NSMutableArray *p in payers) {
+            for (NSMutableArray *r in receivers) {
+                double ltp = [[p objectAtIndex:3] doubleValue];
+                double ltr = [[r objectAtIndex:3] doubleValue];
+                MCReturnPayment *rp;
+                if (ltp >= ltr) {
+                    rp = [[MCReturnPayment alloc] initWithPayer:[p objectAtIndex:0] paysTo:[r objectAtIndex:0] amountOfMoney:[NSNumber numberWithDouble:ltr]];
+                    ltp -= ltr;
+                    ltr = 0;
+                } else {
+                    rp = [[MCReturnPayment alloc] initWithPayer:[p objectAtIndex:0] paysTo:[r objectAtIndex:0] amountOfMoney:[NSNumber numberWithDouble:ltp]];
+                    ltr -= ltp;
+                    ltp = 0;
+                }
+                leftToPay = [[NSNumber alloc] initWithDouble:ltp];
+                leftToReceive = [[NSNumber alloc] initWithDouble:ltr];
+                [p replaceObjectAtIndex:3 withObject:leftToPay];
+                [r replaceObjectAtIndex:3 withObject:leftToReceive];
+                
+                if ([[rp money] doubleValue] > 0) {
+                    [whoHasToPayWho addObject:rp];
+                }
             }
         }
+    } else {
     }
     return whoHasToPayWho;
-
 }
 
 @end

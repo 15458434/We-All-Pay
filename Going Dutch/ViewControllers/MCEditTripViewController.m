@@ -46,7 +46,7 @@
 - (void)doneAddingPeople:(id)selector
 {
     NSManagedObjectContext *context = [[[MCWeAllPayStoreController defaultStore] weAllPayStoreDocument] managedObjectContext];
-    [context performBlock:^{
+    [context performBlockAndWait:^{
         [context processPendingChanges];
         [[context undoManager] disableUndoRegistration];
     }];
@@ -77,8 +77,11 @@
     cancelPressed = YES;
     NSManagedObjectContext *context = [[[MCWeAllPayStoreController defaultStore] weAllPayStoreDocument] managedObjectContext];
     [context performBlock:^{
-        [context reset];
         [[context undoManager] disableUndoRegistration];
+        if (didSomethingChange) {
+            [[context undoManager] undoNestedGroup];
+        }
+        [MCSharedBill deleteSharedbill:tonightsBill];
     }];
     [[self presentingViewController] dismissViewControllerAnimated:YES completion:dismissOnCancel];
 }
@@ -88,8 +91,10 @@
     cancelPressed = YES;
     NSManagedObjectContext *context = [[[MCWeAllPayStoreController defaultStore] weAllPayStoreDocument] managedObjectContext];
     [context performBlock:^{
-        [context reset];
         [[context undoManager] disableUndoRegistration];
+        if (didSomethingChange) {
+            [[context undoManager] undoNestedGroup];
+        }
     }];
     [[self navigationController] popViewControllerAnimated:YES];
 }
@@ -102,6 +107,7 @@
         [personReceiver setTonightsBill:tonightsBill];
     }
     [peoplePicker setPeoplePickerDelegate:personReceiver];
+    [[[peoplePicker viewControllers] objectAtIndex:0] setCanDisplayBannerAds:YES];
     [self presentViewController:peoplePicker animated:YES completion:nil];
 }
 

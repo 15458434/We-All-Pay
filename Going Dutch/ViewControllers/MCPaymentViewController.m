@@ -57,12 +57,9 @@
     NSLog(@"MCPaymentViewController: Done button pressed.");
     if (didSomethingChange) {
         NSManagedObjectContext *context = [[[MCWeAllPayStoreController defaultStore] weAllPayStoreDocument] managedObjectContext];
-        [context performBlock:^{
-            NSError *error;
-            [context save:&error];
-            if (error) {
-                NSLog(@"Error saving: %@", [error localizedDescription]);
-            }
+        [context performBlockAndWait:^{
+            [[context undoManager] disableUndoRegistration];
+            [context processPendingChanges];
         }];
     }
     [[self navigationController] popViewControllerAnimated:YES];
@@ -70,8 +67,13 @@
 
 - (void)removePayment:(id)selector
 {
-    NSLog(@"removePayment is being executed.");
+    NSLog(@"Remove Paymentbutton is not implemented.");
     //[[self delegate] removePayment:thisPayment fromPaymentViewController:self];
+    NSManagedObjectContext *context = [[[MCWeAllPayStoreController defaultStore] weAllPayStoreDocument] managedObjectContext];
+    [context performBlockAndWait:^{
+        [MCPayment deletePayment:thisPayment];
+        [[context undoManager] disableUndoRegistration];
+    }];
     [[self navigationController] popViewControllerAnimated:YES];
 }
 
@@ -113,6 +115,13 @@
     if (isNew) {
         [MCPayment deletePayment:thisPayment];
     }
+    NSManagedObjectContext *context = [[[MCWeAllPayStoreController defaultStore] weAllPayStoreDocument] managedObjectContext];
+    [context performBlockAndWait:^{
+        [[context undoManager] disableUndoRegistration];
+        if (didSomethingChange) {
+            [[context undoManager] undoNestedGroup];
+        }
+    }];
     [[self navigationController] popViewControllerAnimated:YES];
 }
 
@@ -334,7 +343,9 @@
     [self setEdgesForExtendedLayout:UIRectEdgeNone];
     
     NSManagedObjectContext *context = [[[MCWeAllPayStoreController defaultStore] weAllPayStoreDocument] managedObjectContext];
-    [[context undoManager] enableUndoRegistration];
+    [context performBlockAndWait:^{
+        [[context undoManager] enableUndoRegistration];
+    }];
     
     // If tonight's bill was passed along.
     if (!isNew) {

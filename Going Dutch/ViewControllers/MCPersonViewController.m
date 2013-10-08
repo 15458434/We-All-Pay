@@ -45,8 +45,8 @@
     //[[[[MCWeAllPayStoreController defaultStore] weAllPayStoreDocument] managedObjectContext] rollback];
     NSManagedObjectContext *context = [[[MCWeAllPayStoreController defaultStore] weAllPayStoreDocument] managedObjectContext];
     [context performBlock:^{
-        [[context undoManager] undoNestedGroup];
         [[context undoManager] endUndoGrouping];
+        [[context undoManager] undoNestedGroup];
     }];
     [[self navigationController] popViewControllerAnimated:YES];
 }
@@ -69,6 +69,7 @@
         [personReceiver setThisPerson:thisPerson];
     }
     [peoplePicker setPeoplePickerDelegate:personReceiver];
+    [[[peoplePicker viewControllers] objectAtIndex:0] setCanDisplayBannerAds:YES];
     [self presentViewController:peoplePicker animated:YES completion:nil];
 }
 
