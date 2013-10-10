@@ -90,7 +90,7 @@
 {
     cancelPressed = YES;
     NSManagedObjectContext *context = [[[MCWeAllPayStoreController defaultStore] weAllPayStoreDocument] managedObjectContext];
-    [context performBlock:^{
+    [context performBlockAndWait:^{
         [[context undoManager] disableUndoRegistration];
         if (didSomethingChange) {
             [[context undoManager] undoNestedGroup];

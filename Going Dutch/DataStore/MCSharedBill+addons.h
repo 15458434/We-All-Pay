@@ -30,4 +30,6 @@
 - (BOOL)hasPersonPaidSomething:(MCPerson *)person;
 - (BOOL)doesEveryoneHaveAnEmailAddress;
 
+- (NSArray *)getArrayOfFullNamesOfPeoplePresent;
+
 @end

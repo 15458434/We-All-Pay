@@ -15,4 +15,6 @@
 
 + (MCPayment *)fetchPaymentWithUniqueId:(NSString *)uuid;
 
+- (BOOL)hasPayer;
+
 @end

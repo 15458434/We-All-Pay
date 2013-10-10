@@ -9,7 +9,7 @@
 #import "MCPaymentViewController.h"
 #import "MCPayment+addons.h"
 #import "MCPerson+addons.h"    
-#import "MCSharedBill.h"
+#import "MCSharedBill+addons.h"
 #import "MCWeAllPayStoreController.h"
 #import "MCTwoLabelsTitleView.h"
 
@@ -67,8 +67,6 @@
 
 - (void)removePayment:(id)selector
 {
-    NSLog(@"Remove Paymentbutton is not implemented.");
-    //[[self delegate] removePayment:thisPayment fromPaymentViewController:self];
     NSManagedObjectContext *context = [[[MCWeAllPayStoreController defaultStore] weAllPayStoreDocument] managedObjectContext];
     [context performBlockAndWait:^{
         [MCPayment deletePayment:thisPayment];
@@ -173,8 +171,9 @@
 
 - (NSString *)pickerView:(UIPickerView *)pickerView titleForRow:(NSInteger)row forComponent:(NSInteger)component
 {
-    NSSortDescriptor *sortDescriptor = [NSSortDescriptor sortDescriptorWithKey:@"getFullName" ascending:YES];
-    listOfPeople = [[tonightsBill peoplePresent] sortedArrayUsingDescriptors:[NSArray arrayWithObject:sortDescriptor]];
+    if (listOfPeople == nil) {
+        listOfPeople = [tonightsBill getArrayOfFullNamesOfPeoplePresent];
+    }
     return [[listOfPeople objectAtIndex:row] getFullName];
 }
 
@@ -212,21 +211,20 @@
         [nf setFormatterBehavior:NSNumberFormatterBehaviorDefault];
         [nf setLocale:[NSLocale currentLocale]];
         [nf setNumberStyle:NSNumberFormatterDecimalStyle];
-        if (didSomethingChange) {
-            [paidView setText:[nf stringFromNumber:paidViewNumber]];
-        } else {
-            [paidView setText:[nf stringFromNumber:[thisPayment money]]];
-        }
+        [paidView setText:[nf stringFromNumber:[thisPayment money]]];
     }
     
     if (textField == payerView) {
         NSInteger row = 0;
-        if ([thisPayment payingPerson]) {
-            row = [listOfPeople indexOfObject:[thisPayment payingPerson]];
+        MCPerson *payingPerson = [thisPayment payingPerson];
+        if (listOfPeople == nil) {
+            listOfPeople = [tonightsBill getArrayOfFullNamesOfPeoplePresent];
+        }
+        if (payingPerson) {
+            row = [listOfPeople indexOfObject:payingPerson];
         } else {
             row = [personPickerView selectedRowInComponent:0];
         }
-        [thisPayment setPayingPerson:[listOfPeople objectAtIndex:row]];
         [payerView setText:[[thisPayment payingPerson] getFullName]];
         [personPickerView selectRow:row inComponent:0 animated:YES];
     }

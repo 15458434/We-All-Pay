@@ -55,4 +55,13 @@
     }
 }
 
+- (BOOL)hasPayer
+{
+    MCPerson *thisPayer = [self payingPerson];
+    NSLog(@"Firstname: %@", [thisPayer firstName]);
+    NSLog(@"Lastname: %@", [thisPayer lastName]);
+    NSLog(@"defaultEmailAddress: %@", [thisPayer defaultEmailAddress]);
+    return YES;
+}
+
 @end
