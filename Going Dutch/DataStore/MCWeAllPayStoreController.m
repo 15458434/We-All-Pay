@@ -49,10 +49,10 @@
 - (void)saveStore
 {
     [weAllPayStoreDocument saveToURL:[weAllPayStoreDocument fileURL] forSaveOperation:UIDocumentSaveForOverwriting completionHandler:^(BOOL success){
-        if (!success) {
-            NSLog(@"Save not possible for document at %@", [weAllPayStoreDocument fileURL]);
-        } else {
+        if (success) {
             NSLog(@"Succesfully saved.");
+        } else {
+            NSLog(@"Save not possible for document at %@", [weAllPayStoreDocument fileURL]);
         }
     }];
 }
@@ -60,10 +60,10 @@
 - (void)closeDocument
 {
     [weAllPayStoreDocument closeWithCompletionHandler:^(BOOL success){
-        if (!success) {
-            NSLog(@"Close not possible for document at %@", [weAllPayStoreDocument fileURL]);
-        } else {
+        if (success) {
             NSLog(@"UIManagedDocument was succesfully closed.");
+        } else {
+            NSLog(@"Close not possible for document at %@", [weAllPayStoreDocument fileURL]);
         }
     }];
 }
@@ -80,7 +80,36 @@
         NSURL *weAllPayURL = [MCTools documentPathAsURLTo:@"WeAllPayStore"];
         weAllPayStoreDocument = [[UIManagedDocument alloc] initWithFileURL:weAllPayURL];
         [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(storeIsReady:) name:UIDocumentStateChangedNotification object:weAllPayStoreDocument];
-        if ([[NSFileManager defaultManager] fileExistsAtPath:[weAllPayURL path]]) {
+        
+        if (![[NSFileManager defaultManager] fileExistsAtPath:[[weAllPayStoreDocument fileURL] path]]) {
+            [weAllPayStoreDocument saveToURL:[weAllPayStoreDocument fileURL] forSaveOperation:UIDocumentSaveForCreating completionHandler:^(BOOL success) {
+                if (success) {
+                    NSLog(@"Successful SaveForCreating");
+                    [[weAllPayStoreDocument managedObjectContext] setUndoManager:[[NSUndoManager alloc] init]];
+                    [[[weAllPayStoreDocument managedObjectContext] undoManager] disableUndoRegistration];
+                } else {
+                    NSLog(@"SaveForCreating not successful.");
+                }
+            }];
+        } else if ([weAllPayStoreDocument documentState] == UIDocumentStateClosed) {
+            [weAllPayStoreDocument openWithCompletionHandler:^(BOOL success) {
+                if (success) {
+                    NSLog(@"Succesful Open");
+                    [[weAllPayStoreDocument managedObjectContext] setUndoManager:[[NSUndoManager alloc] init]];
+                    [[[weAllPayStoreDocument managedObjectContext] undoManager] disableUndoRegistration];
+                } else {
+                    NSLog(@"Open not successful");
+                }
+            }];
+        } else if ([weAllPayStoreDocument documentState] == UIDocumentStateNormal) {
+            NSLog(@"DocumentState is already normal.");
+            [[weAllPayStoreDocument managedObjectContext] setUndoManager:[[NSUndoManager alloc] init]];
+            [[[weAllPayStoreDocument managedObjectContext] undoManager] disableUndoRegistration];
+        } else {
+            NSLog(@"Something went wrong opening your document.");
+        }
+        
+        /*if ([[NSFileManager defaultManager] fileExistsAtPath:[weAllPayURL path]]) {
             [weAllPayStoreDocument openWithCompletionHandler:^(BOOL success){
                 if (success) {
                     // The document is ready to use.
@@ -104,7 +133,7 @@
                     NSLog(@"Couldn't create storage file at %@", weAllPayURL);
                 }
             }];
-        }
+        }*/
         stillNeedsInit = 0;
     }
     return self;

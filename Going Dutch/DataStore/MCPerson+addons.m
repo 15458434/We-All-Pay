@@ -132,6 +132,8 @@
     MCEmailAddress *newEmailAddress = [MCEmailAddress addEmailAddressFor:self];
     if ([[self emailAddress] count] == 1) {
         [newEmailAddress setSelected:[NSNumber numberWithBool:YES]];
+    } else {
+        [newEmailAddress setSelected:[NSNumber numberWithBool:NO]];
     }
     [newEmailAddress setEmailAddress:emailAddressAsString];
 }
