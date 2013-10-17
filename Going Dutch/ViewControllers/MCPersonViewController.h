@@ -12,6 +12,12 @@
 #import <AddressBookUI/AddressBookUI.h>
 #import "MCAddressBookDataReceiver.h"
 
+typedef enum _emailFieldEditStatus {
+    MCEmailFieldEditNormal = 0,
+    MCEmailFieldEditAdd = 1,
+    MCEmailFieldSelectDefaultAddress = 2,
+}emailFieldEditStatus;
+
 @class MCPerson;
 @class MCSharedBill;
 @class MCTwoLabelsTitleView;
@@ -42,6 +48,7 @@
     BOOL didSomethingChange;
     BOOL isNew;
     BOOL thisPersonHasPaidSomething;
+    NSUInteger emailEditFieldStatus;
 }
 
 @property (nonatomic, strong) MCSharedBill *tonightsBill;

@@ -36,7 +36,11 @@
         [lastNameField endEditing:YES];
     }
     if ([emailField isFirstResponder]) {
-        [self cancelEmailPicker:self];
+        if (ABAddressBookGetAuthorizationStatus() == kABAuthorizationStatusAuthorized) {
+            [self cancelEmailPicker:self];
+        } else {
+            [emailField endEditing:YES];
+        }
     }
 }
 
@@ -53,6 +57,15 @@
 
 - (void)doneButtonPressed:(id)selector
 {
+    if (isNew && (ABAddressBookGetAuthorizationStatus() == kABAuthorizationStatusDenied || ABAddressBookGetAuthorizationStatus() == kABAuthorizationStatusNotDetermined)) {
+        if ([firstNameField isFirstResponder]) {
+            [firstNameField resignFirstResponder];
+        } else if ([lastNameField isFirstResponder]) {
+            [lastNameField resignFirstResponder];
+        } else if ([emailField isFirstResponder]) {
+            [emailField resignFirstResponder];
+        }
+    }
     NSManagedObjectContext *context = [[[MCWeAllPayStoreController defaultStore] weAllPayStoreDocument] managedObjectContext];
     [context performBlock:^{
         [thisPerson setDateModified:[NSDate date]];
@@ -92,6 +105,11 @@
     [emailField resignFirstResponder];
 }
 
+- (void)actionButtonForEmailAddresses:(id)selector
+{
+    [emailField setInputView:nil];
+}
+
 #pragma mark - UITextFieldDelegate
 
 -(BOOL)textFieldShouldBeginEditing:(UITextField *)textField
@@ -123,10 +141,11 @@
             UIBarButtonItem *flexButton = [[UIBarButtonItem alloc] initWithBarButtonSystemItem:UIBarButtonSystemItemFlexibleSpace
                                                                                         target:nil
                                                                                         action:nil];
+            UIBarButtonItem *editButton = [[UIBarButtonItem alloc] initWithBarButtonSystemItem:UIBarButtonSystemItemEdit target:self action:@selector(actionButtonForEmailAddresses:)];
             UIBarButtonItem *doneButton = [[UIBarButtonItem alloc] initWithBarButtonSystemItem:UIBarButtonSystemItemDone
                                                                                         target:self
                                                                                         action:@selector(doneEmailPicker:)];
-            NSArray *buttonArray = [[NSArray alloc] initWithObjects:cancelButton, flexButton, doneButton, nil];
+            NSArray *buttonArray = [[NSArray alloc] initWithObjects:cancelButton, flexButton, editButton, flexButton, doneButton, nil];
             [inputAccessoryPickerView setItems:buttonArray animated:YES];
             if (!emailSelectionFromAddressBookPickerView) {
                 emailSelectionFromAddressBookPickerView = [[UIPickerView alloc] init];
@@ -164,7 +183,16 @@
         [emailField becomeFirstResponder];
     } else if (textField == emailField) {
         if (kABAuthorizationStatusDenied == ABAddressBookGetAuthorizationStatus() || kABAuthorizationStatusRestricted == ABAddressBookGetAuthorizationStatus()) {
-            [thisPerson addOneEmailAddressFromAString:[emailField text]];
+            if (isNew) {
+                [thisPerson addOneEmailAddressFromAString:[emailField text]];
+            } else {
+                MCEmailAddress *defaultEmail = [thisPerson getDefaultEmailAddressObject];
+                if (!defaultEmail) {
+                    [thisPerson addOneEmailAddressFromAString:[emailField text]];
+                } else {
+                    [defaultEmail setEmailAddress:[emailField text]];
+                }
+            }
         }
         didSomethingChange = YES;
         [[[self navigationItem] rightBarButtonItem] setEnabled:YES];
@@ -244,6 +272,7 @@
         }
         thisPerson = person;
         didSomethingChange = NO;
+        emailEditFieldStatus = 0;
     }
     return self;
 }

@@ -8,6 +8,10 @@
 
 /* Begin PBXBuildFile section */
 		3801F89C16DFC62600DF8675 /* CoreData.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 3801F89B16DFC62600DF8675 /* CoreData.framework */; };
+		380BF82318107879008A8B74 /* MCCoreDataTableViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 380BF82218107879008A8B74 /* MCCoreDataTableViewController.m */; };
+		380BF82618107A3D008A8B74 /* MCEmailAddressesViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 380BF82518107A3D008A8B74 /* MCEmailAddressesViewController.m */; };
+		380BF82E18108898008A8B74 /* MCEmailAddressTableViewCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 380BF82D18108898008A8B74 /* MCEmailAddressTableViewCell.xib */; };
+		380BF831181088B9008A8B74 /* MCEmailAddressTableViewCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 380BF830181088B9008A8B74 /* MCEmailAddressTableViewCell.m */; };
 		38175C1E16B6F31D00804914 /* NewTripHeaderView.xib in Resources */ = {isa = PBXBuildFile; fileRef = 38175C1D16B6F31D00804914 /* NewTripHeaderView.xib */; };
 		3829AD0F178B41320025969D /* WeAllPayStore.xcdatamodeld in Sources */ = {isa = PBXBuildFile; fileRef = 3829AD0D178B41320025969D /* WeAllPayStore.xcdatamodeld */; };
 		382E7BDD17E5E57500A1040A /* MCReturnPaymentViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 382E7BDC17E5E57500A1040A /* MCReturnPaymentViewController.m */; };
@@ -69,6 +73,13 @@
 
 /* Begin PBXFileReference section */
 		3801F89B16DFC62600DF8675 /* CoreData.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = CoreData.framework; path = System/Library/Frameworks/CoreData.framework; sourceTree = SDKROOT; };
+		380BF82118107879008A8B74 /* MCCoreDataTableViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = MCCoreDataTableViewController.h; path = ViewControllers/MCCoreDataTableViewController.h; sourceTree = "<group>"; };
+		380BF82218107879008A8B74 /* MCCoreDataTableViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = MCCoreDataTableViewController.m; path = ViewControllers/MCCoreDataTableViewController.m; sourceTree = "<group>"; };
+		380BF82418107A3D008A8B74 /* MCEmailAddressesViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = MCEmailAddressesViewController.h; path = ViewControllers/MCEmailAddressesViewController.h; sourceTree = "<group>"; };
+		380BF82518107A3D008A8B74 /* MCEmailAddressesViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = MCEmailAddressesViewController.m; path = ViewControllers/MCEmailAddressesViewController.m; sourceTree = "<group>"; };
+		380BF82D18108898008A8B74 /* MCEmailAddressTableViewCell.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; name = MCEmailAddressTableViewCell.xib; path = Views/MCEmailAddressTableViewCell.xib; sourceTree = "<group>"; };
+		380BF82F181088B9008A8B74 /* MCEmailAddressTableViewCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = MCEmailAddressTableViewCell.h; path = Views/MCEmailAddressTableViewCell.h; sourceTree = "<group>"; };
+		380BF830181088B9008A8B74 /* MCEmailAddressTableViewCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = MCEmailAddressTableViewCell.m; path = Views/MCEmailAddressTableViewCell.m; sourceTree = "<group>"; };
 		38175C1D16B6F31D00804914 /* NewTripHeaderView.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; name = NewTripHeaderView.xib; path = Views/NewTripHeaderView.xib; sourceTree = "<group>"; };
 		3829AD0E178B41320025969D /* WeAllPayStore.xcdatamodel */ = {isa = PBXFileReference; lastKnownFileType = wrapper.xcdatamodel; path = WeAllPayStore.xcdatamodel; sourceTree = "<group>"; };
 		382E7BDB17E5E57500A1040A /* MCReturnPaymentViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = MCReturnPaymentViewController.h; path = ViewControllers/MCReturnPaymentViewController.h; sourceTree = "<group>"; };
@@ -308,6 +319,10 @@
 				3892E3A317903EF00038894B /* MCEditTripViewController.m */,
 				3892E3A817904A240038894B /* MCPersonViewController.h */,
 				3892E3A917904A240038894B /* MCPersonViewController.m */,
+				380BF82118107879008A8B74 /* MCCoreDataTableViewController.h */,
+				380BF82218107879008A8B74 /* MCCoreDataTableViewController.m */,
+				380BF82418107A3D008A8B74 /* MCEmailAddressesViewController.h */,
+				380BF82518107A3D008A8B74 /* MCEmailAddressesViewController.m */,
 			);
 			name = ViewControllers;
 			sourceTree = "<group>";
@@ -336,6 +351,9 @@
 				3897158617901D55005BE03E /* MCReturnPaymentTableViewCell.xib */,
 				3897158417901D55005BE03E /* MCReturnPaymentTableViewCell.h */,
 				3897158517901D55005BE03E /* MCReturnPaymentTableViewCell.m */,
+				380BF82D18108898008A8B74 /* MCEmailAddressTableViewCell.xib */,
+				380BF82F181088B9008A8B74 /* MCEmailAddressTableViewCell.h */,
+				380BF830181088B9008A8B74 /* MCEmailAddressTableViewCell.m */,
 			);
 			name = Views;
 			sourceTree = "<group>";
@@ -463,6 +481,7 @@
 				3898AAE21727B50E008F947E /* toolbar is sign.png in Resources */,
 				3898AAE31727B50E008F947E /* toolbar is sign@2x.png in Resources */,
 				3898AAE617297F80008F947E /* mail icon.png in Resources */,
+				380BF82E18108898008A8B74 /* MCEmailAddressTableViewCell.xib in Resources */,
 				3898AAE717297F80008F947E /* mail icon@2x.png in Resources */,
 				38334EB9172C2E050063B919 /* plus sign.png in Resources */,
 				38334EBA172C2E050063B919 /* plus sign@2x.png in Resources */,
@@ -495,8 +514,10 @@
 				38CDE90017135B6300387CAA /* MCTools.m in Sources */,
 				3829AD0F178B41320025969D /* WeAllPayStore.xcdatamodeld in Sources */,
 				38DB85D717E45CA4006237CF /* MCSharedBill+addons.m in Sources */,
+				380BF82318107879008A8B74 /* MCCoreDataTableViewController.m in Sources */,
 				38DB85E317E46FE1006237CF /* MCPayment.m in Sources */,
 				38DB85DD17E45FB7006237CF /* MCEmailAddress+addons.m in Sources */,
+				380BF831181088B9008A8B74 /* MCEmailAddressTableViewCell.m in Sources */,
 				38955048178B4FCA0077A95A /* MCWeAllPayStoreController.m in Sources */,
 				38DB85E917E46FE2006237CF /* MCPerson.m in Sources */,
 				3897157A17901D0F005BE03E /* MCTextFieldAndLabelTitleView.m in Sources */,
@@ -508,6 +529,7 @@
 				382E7BDD17E5E57500A1040A /* MCReturnPaymentViewController.m in Sources */,
 				38DB85E617E46FE2006237CF /* MCSharedBill.m in Sources */,
 				3892E3A417903EF00038894B /* MCEditTripViewController.m in Sources */,
+				380BF82618107A3D008A8B74 /* MCEmailAddressesViewController.m in Sources */,
 				38DB85D417E45BCA006237CF /* MCPayment+addons.m in Sources */,
 				3892E3AA17904A240038894B /* MCPersonViewController.m in Sources */,
 				3892E3AE179056420038894B /* MCReturnPayment.m in Sources */,
