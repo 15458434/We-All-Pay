@@ -28,7 +28,7 @@
 {
     NSManagedObjectContext *context = [[[MCWeAllPayStoreController defaultStore] weAllPayStoreDocument] managedObjectContext];
     [context performBlock:^{
-        [context delete:eAddress];
+        [context deleteObject:eAddress];
     }];
 }
 

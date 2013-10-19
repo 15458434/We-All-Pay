@@ -8,10 +8,9 @@
 
 /* Begin PBXBuildFile section */
 		3801F89C16DFC62600DF8675 /* CoreData.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 3801F89B16DFC62600DF8675 /* CoreData.framework */; };
-		380BF82318107879008A8B74 /* MCCoreDataTableViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 380BF82218107879008A8B74 /* MCCoreDataTableViewController.m */; };
-		380BF82618107A3D008A8B74 /* MCEmailAddressesViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 380BF82518107A3D008A8B74 /* MCEmailAddressesViewController.m */; };
 		380BF82E18108898008A8B74 /* MCEmailAddressTableViewCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 380BF82D18108898008A8B74 /* MCEmailAddressTableViewCell.xib */; };
 		380BF831181088B9008A8B74 /* MCEmailAddressTableViewCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 380BF830181088B9008A8B74 /* MCEmailAddressTableViewCell.m */; };
+		380F44F21813250600FF7E10 /* No picture image 2 - We All Pay.png in Resources */ = {isa = PBXBuildFile; fileRef = 380F44F11813250600FF7E10 /* No picture image 2 - We All Pay.png */; };
 		38175C1E16B6F31D00804914 /* NewTripHeaderView.xib in Resources */ = {isa = PBXBuildFile; fileRef = 38175C1D16B6F31D00804914 /* NewTripHeaderView.xib */; };
 		3829AD0F178B41320025969D /* WeAllPayStore.xcdatamodeld in Sources */ = {isa = PBXBuildFile; fileRef = 3829AD0D178B41320025969D /* WeAllPayStore.xcdatamodeld */; };
 		382E7BDD17E5E57500A1040A /* MCReturnPaymentViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 382E7BDC17E5E57500A1040A /* MCReturnPaymentViewController.m */; };
@@ -40,7 +39,6 @@
 		3892E3AE179056420038894B /* MCReturnPayment.m in Sources */ = {isa = PBXBuildFile; fileRef = 3892E3AD179056420038894B /* MCReturnPayment.m */; };
 		3892E3B117906B5E0038894B /* MCAddressBookDataReceiver.m in Sources */ = {isa = PBXBuildFile; fileRef = 3892E3B017906B5E0038894B /* MCAddressBookDataReceiver.m */; };
 		38955048178B4FCA0077A95A /* MCWeAllPayStoreController.m in Sources */ = {isa = PBXBuildFile; fileRef = 38955047178B4FCA0077A95A /* MCWeAllPayStoreController.m */; };
-		38966DA6173BD71A0041484B /* girl 100x100.png in Resources */ = {isa = PBXBuildFile; fileRef = 38966DA5173BD71A0041484B /* girl 100x100.png */; };
 		3897157A17901D0F005BE03E /* MCTextFieldAndLabelTitleView.m in Sources */ = {isa = PBXBuildFile; fileRef = 3897157517901D0F005BE03E /* MCTextFieldAndLabelTitleView.m */; };
 		3897157B17901D0F005BE03E /* MCTextFieldAndLabelTitleView.xib in Resources */ = {isa = PBXBuildFile; fileRef = 3897157617901D0F005BE03E /* MCTextFieldAndLabelTitleView.xib */; };
 		3897157C17901D0F005BE03E /* MCTwoLabelsTitleView.m in Sources */ = {isa = PBXBuildFile; fileRef = 3897157817901D0F005BE03E /* MCTwoLabelsTitleView.m */; };
@@ -73,13 +71,10 @@
 
 /* Begin PBXFileReference section */
 		3801F89B16DFC62600DF8675 /* CoreData.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = CoreData.framework; path = System/Library/Frameworks/CoreData.framework; sourceTree = SDKROOT; };
-		380BF82118107879008A8B74 /* MCCoreDataTableViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = MCCoreDataTableViewController.h; path = ViewControllers/MCCoreDataTableViewController.h; sourceTree = "<group>"; };
-		380BF82218107879008A8B74 /* MCCoreDataTableViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = MCCoreDataTableViewController.m; path = ViewControllers/MCCoreDataTableViewController.m; sourceTree = "<group>"; };
-		380BF82418107A3D008A8B74 /* MCEmailAddressesViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = MCEmailAddressesViewController.h; path = ViewControllers/MCEmailAddressesViewController.h; sourceTree = "<group>"; };
-		380BF82518107A3D008A8B74 /* MCEmailAddressesViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = MCEmailAddressesViewController.m; path = ViewControllers/MCEmailAddressesViewController.m; sourceTree = "<group>"; };
 		380BF82D18108898008A8B74 /* MCEmailAddressTableViewCell.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; name = MCEmailAddressTableViewCell.xib; path = Views/MCEmailAddressTableViewCell.xib; sourceTree = "<group>"; };
 		380BF82F181088B9008A8B74 /* MCEmailAddressTableViewCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = MCEmailAddressTableViewCell.h; path = Views/MCEmailAddressTableViewCell.h; sourceTree = "<group>"; };
 		380BF830181088B9008A8B74 /* MCEmailAddressTableViewCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = MCEmailAddressTableViewCell.m; path = Views/MCEmailAddressTableViewCell.m; sourceTree = "<group>"; };
+		380F44F11813250600FF7E10 /* No picture image 2 - We All Pay.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = "No picture image 2 - We All Pay.png"; path = "Going Dutch/icons/no picture image/No picture image 2 - We All Pay.png"; sourceTree = "<group>"; };
 		38175C1D16B6F31D00804914 /* NewTripHeaderView.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; name = NewTripHeaderView.xib; path = Views/NewTripHeaderView.xib; sourceTree = "<group>"; };
 		3829AD0E178B41320025969D /* WeAllPayStore.xcdatamodel */ = {isa = PBXFileReference; lastKnownFileType = wrapper.xcdatamodel; path = WeAllPayStore.xcdatamodel; sourceTree = "<group>"; };
 		382E7BDB17E5E57500A1040A /* MCReturnPaymentViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = MCReturnPaymentViewController.h; path = ViewControllers/MCReturnPaymentViewController.h; sourceTree = "<group>"; };
@@ -124,7 +119,6 @@
 		3892E3B017906B5E0038894B /* MCAddressBookDataReceiver.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = MCAddressBookDataReceiver.m; path = Misc/MCAddressBookDataReceiver.m; sourceTree = "<group>"; };
 		38955046178B4FCA0077A95A /* MCWeAllPayStoreController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = MCWeAllPayStoreController.h; path = DataStore/MCWeAllPayStoreController.h; sourceTree = "<group>"; };
 		38955047178B4FCA0077A95A /* MCWeAllPayStoreController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = MCWeAllPayStoreController.m; path = DataStore/MCWeAllPayStoreController.m; sourceTree = "<group>"; };
-		38966DA5173BD71A0041484B /* girl 100x100.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = "girl 100x100.png"; path = "Going Dutch/icons/no picture image/girl 100x100.png"; sourceTree = "<group>"; };
 		3897157417901D0F005BE03E /* MCTextFieldAndLabelTitleView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = MCTextFieldAndLabelTitleView.h; path = Views/MCTextFieldAndLabelTitleView.h; sourceTree = "<group>"; };
 		3897157517901D0F005BE03E /* MCTextFieldAndLabelTitleView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = MCTextFieldAndLabelTitleView.m; path = Views/MCTextFieldAndLabelTitleView.m; sourceTree = "<group>"; };
 		3897157617901D0F005BE03E /* MCTextFieldAndLabelTitleView.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; name = MCTextFieldAndLabelTitleView.xib; path = Views/MCTextFieldAndLabelTitleView.xib; sourceTree = "<group>"; };
@@ -319,10 +313,6 @@
 				3892E3A317903EF00038894B /* MCEditTripViewController.m */,
 				3892E3A817904A240038894B /* MCPersonViewController.h */,
 				3892E3A917904A240038894B /* MCPersonViewController.m */,
-				380BF82118107879008A8B74 /* MCCoreDataTableViewController.h */,
-				380BF82218107879008A8B74 /* MCCoreDataTableViewController.m */,
-				380BF82418107A3D008A8B74 /* MCEmailAddressesViewController.h */,
-				380BF82518107A3D008A8B74 /* MCEmailAddressesViewController.m */,
 			);
 			name = ViewControllers;
 			sourceTree = "<group>";
@@ -370,7 +360,7 @@
 		38966DA4173BD7050041484B /* No image icon */ = {
 			isa = PBXGroup;
 			children = (
-				38966DA5173BD71A0041484B /* girl 100x100.png */,
+				380F44F11813250600FF7E10 /* No picture image 2 - We All Pay.png */,
 			);
 			name = "No image icon";
 			sourceTree = "<group>";
@@ -490,9 +480,9 @@
 				38334ECA173552330063B919 /* Default.png in Resources */,
 				38334ECB1735523A0063B919 /* Default@2x.png in Resources */,
 				38334ECC173552410063B919 /* Default-568h@2x.png in Resources */,
-				38966DA6173BD71A0041484B /* girl 100x100.png in Resources */,
 				3897157B17901D0F005BE03E /* MCTextFieldAndLabelTitleView.xib in Resources */,
 				3897157D17901D0F005BE03E /* MCTwoLabelsTitleView.xib in Resources */,
+				380F44F21813250600FF7E10 /* No picture image 2 - We All Pay.png in Resources */,
 				3897158817901D55005BE03E /* MCPaymentTableViewCell.xib in Resources */,
 				3897158A17901D55005BE03E /* MCPersonTableViewCell.xib in Resources */,
 				3897158C17901D55005BE03E /* MCReturnPaymentTableViewCell.xib in Resources */,
@@ -514,7 +504,6 @@
 				38CDE90017135B6300387CAA /* MCTools.m in Sources */,
 				3829AD0F178B41320025969D /* WeAllPayStore.xcdatamodeld in Sources */,
 				38DB85D717E45CA4006237CF /* MCSharedBill+addons.m in Sources */,
-				380BF82318107879008A8B74 /* MCCoreDataTableViewController.m in Sources */,
 				38DB85E317E46FE1006237CF /* MCPayment.m in Sources */,
 				38DB85DD17E45FB7006237CF /* MCEmailAddress+addons.m in Sources */,
 				380BF831181088B9008A8B74 /* MCEmailAddressTableViewCell.m in Sources */,
@@ -529,7 +518,6 @@
 				382E7BDD17E5E57500A1040A /* MCReturnPaymentViewController.m in Sources */,
 				38DB85E617E46FE2006237CF /* MCSharedBill.m in Sources */,
 				3892E3A417903EF00038894B /* MCEditTripViewController.m in Sources */,
-				380BF82618107A3D008A8B74 /* MCEmailAddressesViewController.m in Sources */,
 				38DB85D417E45BCA006237CF /* MCPayment+addons.m in Sources */,
 				3892E3AA17904A240038894B /* MCPersonViewController.m in Sources */,
 				3892E3AE179056420038894B /* MCReturnPayment.m in Sources */,
@@ -618,7 +606,7 @@
 				IPHONEOS_DEPLOYMENT_TARGET = 7.0;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				PROVISIONING_PROFILE = "";
-				TARGETED_DEVICE_FAMILY = "1,2";
+				TARGETED_DEVICE_FAMILY = 1;
 				WRAPPER_EXTENSION = app;
 			};
 			name = Debug;
@@ -637,7 +625,7 @@
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				PROVISIONING_PROFILE = "";
 				"PROVISIONING_PROFILE[sdk=iphoneos*]" = "";
-				TARGETED_DEVICE_FAMILY = "1,2";
+				TARGETED_DEVICE_FAMILY = 1;
 				WRAPPER_EXTENSION = app;
 			};
 			name = Release;

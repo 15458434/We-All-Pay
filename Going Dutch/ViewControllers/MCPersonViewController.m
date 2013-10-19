@@ -105,11 +105,6 @@
     [emailField resignFirstResponder];
 }
 
-- (void)actionButtonForEmailAddresses:(id)selector
-{
-    [emailField setInputView:nil];
-}
-
 #pragma mark - UITextFieldDelegate
 
 -(BOOL)textFieldShouldBeginEditing:(UITextField *)textField
@@ -132,7 +127,7 @@
 {
     if (textField == emailField) {
         // Set the UIPickerView as keyboard for the emailfield if Access to the AddressBook is authorized.
-        if (kABAuthorizationStatusAuthorized == ABAddressBookGetAuthorizationStatus() && [[thisPerson emailAddress] count] > 0) {
+        if (kABAuthorizationStatusAuthorized == ABAddressBookGetAuthorizationStatus() /*&& [[thisPerson emailAddress] count] > 0*/) {
             CGRect toolbarRect = CGRectMake(0, 0, [[self view] bounds].size.width, 44);
             UIToolbar *inputAccessoryPickerView = [[UIToolbar alloc] initWithFrame:toolbarRect];
             UIBarButtonItem *cancelButton = [[UIBarButtonItem alloc] initWithBarButtonSystemItem:UIBarButtonSystemItemCancel
@@ -141,11 +136,10 @@
             UIBarButtonItem *flexButton = [[UIBarButtonItem alloc] initWithBarButtonSystemItem:UIBarButtonSystemItemFlexibleSpace
                                                                                         target:nil
                                                                                         action:nil];
-            UIBarButtonItem *editButton = [[UIBarButtonItem alloc] initWithBarButtonSystemItem:UIBarButtonSystemItemEdit target:self action:@selector(actionButtonForEmailAddresses:)];
             UIBarButtonItem *doneButton = [[UIBarButtonItem alloc] initWithBarButtonSystemItem:UIBarButtonSystemItemDone
                                                                                         target:self
                                                                                         action:@selector(doneEmailPicker:)];
-            NSArray *buttonArray = [[NSArray alloc] initWithObjects:cancelButton, flexButton, editButton, flexButton, doneButton, nil];
+            NSArray *buttonArray = [[NSArray alloc] initWithObjects:cancelButton, flexButton, doneButton, nil];
             [inputAccessoryPickerView setItems:buttonArray animated:YES];
             if (!emailSelectionFromAddressBookPickerView) {
                 emailSelectionFromAddressBookPickerView = [[UIPickerView alloc] init];
@@ -191,6 +185,7 @@
                     [thisPerson addOneEmailAddressFromAString:[emailField text]];
                 } else {
                     [defaultEmail setEmailAddress:[emailField text]];
+                    [thisPerson setDateModified:[NSDate date]];
                 }
             }
         }

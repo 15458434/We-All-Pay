@@ -46,7 +46,8 @@
 - (void)setThumbnailDataFromImage:(UIImage *)image
 {
     if (!image) {
-        image = [UIImage imageNamed:@"girl 100x100"];
+        //image = [UIImage imageNamed:@"girl 100x100"];
+        image = [UIImage imageNamed:@"No picture image 2 - We All Pay"];
     }
     CGSize imageSize = [image size];
     CGRect thumbnailRect = CGRectMake(0, 0, 44, 44);
@@ -74,7 +75,8 @@
 - (void)setPictureDataFromImage:(UIImage *)image
 {
     if (!image) {
-        image = [UIImage imageNamed:@"girl 100x100"];
+        //image = [UIImage imageNamed:@"girl 100x100"];
+        image = [UIImage imageNamed:@"No picture image 2 - We All Pay"];
     }
     CGSize imageSize = [image size];
     CGRect pictureRect = CGRectMake(0, 0, 80, 80);
@@ -160,6 +162,15 @@
         NSLog(@"%d defaultEmailAddresses found.", [emailAddresses count]);
     }
     return [emailAddresses firstObject];
+}
+
+- (void)deleteEmailAddress:(MCEmailAddress *)eAddress
+{
+    if (![[eAddress selected] boolValue]) {
+        [MCEmailAddress deleteEmailAddress:eAddress];
+    } else {
+        NSLog(@"Unable to delete a selected emailAddress.");
+    }
 }
 
 - (void)addSharedBillObject:(MCSharedBill *)value

@@ -34,6 +34,8 @@
 - (void)addPerson:(id)selector
 {
     MCPerson *newPerson = [MCPerson addPerson];
+    [newPerson setThumbnailDataFromImage:nil];
+    [newPerson setPictureDataFromImage:nil];
     [tonightsBill addPeoplePresentObject:newPerson];
     [self updateSubLabel];
     [doneButton setEnabled:YES];
@@ -434,6 +436,8 @@
             
         case NSFetchedResultsChangeUpdate:
             [[self tableView] reloadRowsAtIndexPaths:[NSArray arrayWithObject:indexPath] withRowAnimation:UITableViewRowAnimationAutomatic];
+            didSomethingChange = YES;
+            [doneButton setEnabled:YES];
             break;
             
         case NSFetchedResultsChangeMove:

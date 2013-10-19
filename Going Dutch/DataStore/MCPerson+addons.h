@@ -23,6 +23,7 @@
 - (NSString *)defaultEmailAddress;
 - (void)addOneEmailAddressFromAString:(NSString *)emailAddressAsString;
 - (MCEmailAddress *)getDefaultEmailAddressObject;
+- (void)deleteEmailAddress:(MCEmailAddress *)eAddress;
 - (BOOL)isThereAnEmailAddress;
 
 @end
