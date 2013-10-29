@@ -368,16 +368,8 @@
 
 - (void)receiveANewPersonFromAddressBook:(MCPerson *)newPerson
 {
-    NSManagedObjectContext *context = [[[MCWeAllPayStoreController defaultStore] weAllPayStoreDocument] managedObjectContext];
-    [context performBlock:^{
-        NSError *error;
-        [[[[MCWeAllPayStoreController defaultStore] weAllPayStoreDocument] managedObjectContext] save:&error];
-        if (error) {
-            NSLog(@"Unable to store or something.");
-        }
-        didSomethingChange = YES;
-        [[[self navigationItem] rightBarButtonItem] setEnabled:YES];
-    }];
+    didSomethingChange = YES;
+    [[[self navigationItem] rightBarButtonItem] setEnabled:YES];
 }
 
 #pragma mark - UITextFieldDelegate

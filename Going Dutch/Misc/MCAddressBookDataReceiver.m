@@ -23,30 +23,34 @@
 
 - (void)getPersonData:(ABRecordRef)person
 {
-    if (!thisPerson) {
-        thisPerson = [MCPerson addPerson];
-        if (tonightsBill) {
-            [thisPerson addSharedBillObject:tonightsBill];
-        }
-    } 
+    // Get all linked ABRecords from AddressBook
+    CFArrayRef allLinkedPeople = ABPersonCopyArrayOfAllLinkedPeople(person);
+    
+    thisPerson = [MCPerson addPerson];
+    if (tonightsBill) {
+        [thisPerson addSharedBillObject:tonightsBill];
+    }
     [thisPerson setThumbnailDataFromImage:[UIImage imageWithData:(__bridge_transfer NSData *)ABPersonCopyImageDataWithFormat(person, kABPersonImageFormatThumbnail)]];
     [thisPerson setPictureDataFromImage:[UIImage imageWithData:(__bridge_transfer NSData *)ABPersonCopyImageDataWithFormat(person, kABPersonImageFormatOriginalSize)]];
     [thisPerson setFirstName:(__bridge_transfer NSString *)ABRecordCopyValue(person, kABPersonFirstNameProperty)];
     [thisPerson setLastName:(__bridge_transfer NSString *)ABRecordCopyValue(person, kABPersonLastNameProperty)];
-    ABMultiValueRef emailAddresses = ABRecordCopyValue(person, kABPersonEmailProperty);
-    if (ABMultiValueGetCount(emailAddresses)) {
-        for (NSUInteger i = 0; i < ABMultiValueGetCount(emailAddresses); i++) {
-            NSString *emailAddressForPerson=(__bridge_transfer NSString *)ABMultiValueCopyValueAtIndex(emailAddresses, i);
-            MCEmailAddress *emailAddressFound = [MCEmailAddress addEmailAddressFor:thisPerson];
-            [emailAddressFound setEmailAddress:emailAddressForPerson];
-            if (i == 0) {
-                [emailAddressFound setSelected:[NSNumber numberWithBool:YES]];
-            } else {
-                [emailAddressFound setSelected:[NSNumber numberWithBool:NO]];
+    
+    // Retrieve all possible mail addresses by going through the list of linked ABRecords and through the list of EmailAddresses.
+    if (CFArrayGetCount(allLinkedPeople)) {
+        for (NSUInteger j = 0 ; j < CFArrayGetCount(allLinkedPeople); j++) {
+            ABRecordRef personRecord = CFArrayGetValueAtIndex(allLinkedPeople, j);
+            ABMultiValueRef emailAddresses = ABRecordCopyValue(personRecord, kABPersonEmailProperty);
+            if (ABMultiValueGetCount(emailAddresses)) {
+                for (NSUInteger i = 0 ; i < ABMultiValueGetCount(emailAddresses); i++) {
+                    NSString *emailAddressForPerson=(__bridge_transfer NSString *)ABMultiValueCopyValueAtIndex(emailAddresses, i);
+                    [thisPerson addOneEmailAddressFromAString:emailAddressForPerson];
+                }
             }
+            CFRelease(emailAddresses);
+            CFRelease(personRecord);
         }
-    } 
-    CFRelease(emailAddresses);
+    }
+    CFRelease(allLinkedPeople);
 }
 
 #pragma mark - Inherited from super.
