@@ -250,11 +250,20 @@
 
 #pragma mark - MCAddressBookReceiverDelegate
 
-- (BOOL)isNewPersonFromAddressBookAlreadyPresent:(MCPerson *)newPerson
+- (BOOL)isPersonAlreadyPresent:(MCPerson *)newPerson
 {
     // return [tonightsBill isPersonPresent:newPerson];
     NSLog(@"isNewPersonFromAddressBookAlreadyPresent is not implemented yet.");
     return NO;
+}
+
+- (MCPerson *)personRecordToUse
+{
+    if (!isNew) {
+        return thisPerson;
+    } else {
+        return nil;
+    }
 }
 
 - (void)receiveANewPersonFromAddressBook:(MCPerson *)newPerson
@@ -371,7 +380,7 @@
         addressBookButton = [[UIBarButtonItem alloc] initWithBarButtonSystemItem:UIBarButtonSystemItemBookmarks
                                                                           target:self
                                                                           action:@selector(getSomeone:)];
-        [addressBookButton setEnabled:!thisPersonHasPaidSomething];
+        //[addressBookButton setEnabled:!thisPersonHasPaidSomething];
         UIBarButtonItem *flexSpace = [[UIBarButtonItem alloc] initWithBarButtonSystemItem:UIBarButtonSystemItemFlexibleSpace
                                                                                    target:nil
                                                                                    action:nil];

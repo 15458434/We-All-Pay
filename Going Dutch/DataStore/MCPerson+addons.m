@@ -201,6 +201,13 @@
     }
 }
 
+- (void)deletAllEmailAddresses
+{
+    for (MCEmailAddress *ea in [self emailAddress]) {
+        [MCEmailAddress deleteEmailAddress:ea];
+    }
+}
+
 - (void)awakeFromFetch
 {
     [super awakeFromFetch];

@@ -27,7 +27,7 @@
 + (void)deleteEmailAddress:(MCEmailAddress *)eAddress
 {
     NSManagedObjectContext *context = [[[MCWeAllPayStoreController defaultStore] weAllPayStoreDocument] managedObjectContext];
-    [context performBlock:^{
+    [context performBlockAndWait:^{
         [context deleteObject:eAddress];
     }];
 }

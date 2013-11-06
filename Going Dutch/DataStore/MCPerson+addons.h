@@ -24,6 +24,7 @@
 - (void)addOneEmailAddressFromAString:(NSString *)emailAddressAsString;
 - (MCEmailAddress *)getDefaultEmailAddressObject;
 - (void)deleteEmailAddress:(MCEmailAddress *)eAddress;
+- (void)deletAllEmailAddresses;
 - (BOOL)isThereAnEmailAddress;
 
 @end

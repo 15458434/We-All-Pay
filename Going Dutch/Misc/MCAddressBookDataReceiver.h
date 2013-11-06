@@ -15,7 +15,8 @@
 
 @protocol MCAddressBookReceiverDelegate <NSObject>
 
-- (BOOL) isNewPersonFromAddressBookAlreadyPresent:(MCPerson *)newPerson;
+- (BOOL) isPersonAlreadyPresent:(MCPerson *)newPerson;
+- (MCPerson *)personRecordToUse;
 - (void) receiveANewPersonFromAddressBook:(MCPerson *)newPerson;
 
 @end

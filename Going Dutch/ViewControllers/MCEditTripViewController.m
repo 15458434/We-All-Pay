@@ -366,6 +366,11 @@
     return NO;
 }
 
+- (MCPerson *)personRecordToUse
+{
+    return nil;
+}
+
 - (void)receiveANewPersonFromAddressBook:(MCPerson *)newPerson
 {
     didSomethingChange = YES;

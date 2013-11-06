@@ -26,10 +26,16 @@
     // Get all linked ABRecords from AddressBook
     CFArrayRef allLinkedPeople = ABPersonCopyArrayOfAllLinkedPeople(person);
     
-    thisPerson = [MCPerson addPerson];
-    if (tonightsBill) {
-        [thisPerson addSharedBillObject:tonightsBill];
+    thisPerson = [delegate personRecordToUse];
+    if (!thisPerson) {
+        thisPerson = [MCPerson addPerson];
+        if (tonightsBill) {
+            [thisPerson addSharedBillObject:tonightsBill];
+        }
+    } else {
+        [thisPerson deletAllEmailAddresses];
     }
+
     [thisPerson setThumbnailDataFromImage:[UIImage imageWithData:(__bridge_transfer NSData *)ABPersonCopyImageDataWithFormat(person, kABPersonImageFormatThumbnail)]];
     [thisPerson setPictureDataFromImage:[UIImage imageWithData:(__bridge_transfer NSData *)ABPersonCopyImageDataWithFormat(person, kABPersonImageFormatOriginalSize)]];
     [thisPerson setFirstName:(__bridge_transfer NSString *)ABRecordCopyValue(person, kABPersonFirstNameProperty)];
