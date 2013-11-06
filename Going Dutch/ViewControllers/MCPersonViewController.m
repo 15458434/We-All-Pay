@@ -329,13 +329,13 @@
         twoLabelTitleView = [[[NSBundle mainBundle] loadNibNamed:@"MCTwoLabelsTitleView" owner:self options:nil] objectAtIndex:0];
         if (isNew) {
             [[twoLabelTitleView mainLabel] setText:@"New person"];
-            [[twoLabelTitleView subLabel] setText:@"Add new person"];
+            [[twoLabelTitleView subLabel] setText:@"Add"];
         } else {
             [[twoLabelTitleView mainLabel] setText:@"Person"];
             if (kABAuthorizationStatusAuthorized == ABAddressBookGetAuthorizationStatus()) {
-                [[twoLabelTitleView subLabel] setText:@"Person Details"];
+                [[twoLabelTitleView subLabel] setText:@"Show details"];
             } else {
-                [[twoLabelTitleView subLabel] setText:@"Edit person"];
+                [[twoLabelTitleView subLabel] setText:@"Edit details"];
             }
         }
         if (SYSTEM_VERSION_LESS_THAN(@"7.0")) {
