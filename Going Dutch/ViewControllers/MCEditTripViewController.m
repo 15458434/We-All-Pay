@@ -233,7 +233,7 @@
     [super viewDidAppear:animated];
     
     if (!isInitAsNew) {
-        [tripNameField setPlaceholder:[[NSString alloc] initWithFormat:@"Enter something to rename %@.", [tonightsBill tripName]]];
+        [tripNameField setPlaceholder:[[NSString alloc] initWithFormat:@"Enter something to rename %@", [tonightsBill tripName]]];
     } else if ([[dataController fetchedObjects] count] == 0){
         [tripNameField becomeFirstResponder];
     }

@@ -290,6 +290,26 @@
     return self;
 }
 
+- (void)prepareDataController
+{
+    NSManagedObjectContext *context = [[[MCWeAllPayStoreController defaultStore] weAllPayStoreDocument] managedObjectContext];
+    // Set dataController for EmailPicker
+    NSFetchRequest *request = [NSFetchRequest fetchRequestWithEntityName:@"MCEmailAddress"];
+    [request setPredicate:[NSPredicate predicateWithFormat:@"owner = %@", thisPerson]];
+    NSSortDescriptor *sd = [NSSortDescriptor sortDescriptorWithKey:@"emailAddress" ascending:YES];
+    [request setSortDescriptors:[NSArray arrayWithObject:sd]];
+    dataController = [[NSFetchedResultsController alloc] initWithFetchRequest:request managedObjectContext:context sectionNameKeyPath:nil cacheName:nil];
+}
+
+- (void)performFetch
+{
+    NSError *error = nil;
+    [dataController performFetch:&error];
+    if (error) {
+        NSLog(@"Something went wrong fetching email addresses: %@", [error localizedDescription]);
+    }
+}
+
 #pragma mark - Inherited from super.
 
 - (id)initWithNibName:(NSString *)nibNameOrNil bundle:(NSBundle *)nibBundleOrNil
@@ -325,6 +345,18 @@
         [[self navigationItem] setTitleView:twoLabelTitleView];
     }
     
+    [self performFetch];
+    if (kABAuthorizationStatusAuthorized == ABAddressBookGetAuthorizationStatus()) {
+        // When dataController is empty there are no email addresses.
+        if ([[dataController fetchedObjects] count] <= 1) {
+            [emailField setPlaceholder:@"no emailaddresses"];
+            [emailField setEnabled:NO];
+        } else {
+            [emailField setPlaceholder:@"e-mail address"];
+            [emailField setEnabled:YES];
+        }
+    }
+    
     [[[self navigationItem] rightBarButtonItem] setEnabled:didSomethingChange];
     [addressBookButton setEnabled:!thisPersonHasPaidSomething];
     [[self navigationController] setToolbarHidden:NO animated:animated];
@@ -349,17 +381,7 @@
     NSManagedObjectContext *context = [[[MCWeAllPayStoreController defaultStore] weAllPayStoreDocument] managedObjectContext];
     [[context undoManager] beginUndoGrouping];
     
-    // Set dataController for EmailPicker
-    NSFetchRequest *request = [NSFetchRequest fetchRequestWithEntityName:@"MCEmailAddress"];
-    [request setPredicate:[NSPredicate predicateWithFormat:@"owner = %@", thisPerson]];
-    NSSortDescriptor *sd = [NSSortDescriptor sortDescriptorWithKey:@"emailAddress" ascending:YES];
-    [request setSortDescriptors:[NSArray arrayWithObject:sd]];
-    dataController = [[NSFetchedResultsController alloc] initWithFetchRequest:request managedObjectContext:context sectionNameKeyPath:nil cacheName:nil];
-    NSError *error = nil;
-    [dataController performFetch:&error];
-    if (error) {
-        NSLog(@"Something went wrong fetching email addresses: %@", [error localizedDescription]);
-    }
+    [self prepareDataController];
     
     // Check to see if thisPerson has paid something.
     if ([tonightsBill hasPersonPaidSomething:thisPerson]) {
@@ -373,14 +395,9 @@
         [firstNameField setEnabled:NO];
         [lastNameField setEnabled:NO];
         
-        // When dataController is empty there are no email addresses.
-        if ([[dataController fetchedObjects] count] == 0) {
-            [emailField setPlaceholder:@"no emailaddress"];
-        }
         addressBookButton = [[UIBarButtonItem alloc] initWithBarButtonSystemItem:UIBarButtonSystemItemBookmarks
                                                                           target:self
                                                                           action:@selector(getSomeone:)];
-        //[addressBookButton setEnabled:!thisPersonHasPaidSomething];
         UIBarButtonItem *flexSpace = [[UIBarButtonItem alloc] initWithBarButtonSystemItem:UIBarButtonSystemItemFlexibleSpace
                                                                                    target:nil
                                                                                    action:nil];
