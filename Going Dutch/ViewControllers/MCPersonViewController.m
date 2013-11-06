@@ -303,7 +303,11 @@
             [[twoLabelTitleView subLabel] setText:@"Add new person"];
         } else {
             [[twoLabelTitleView mainLabel] setText:@"Person"];
-            [[twoLabelTitleView subLabel] setText:@"Edit person"];
+            if (kABAuthorizationStatusAuthorized == ABAddressBookGetAuthorizationStatus()) {
+                [[twoLabelTitleView subLabel] setText:@"Person Details"];
+            } else {
+                [[twoLabelTitleView subLabel] setText:@"Edit person"];
+            }
         }
         if (SYSTEM_VERSION_LESS_THAN(@"7.0")) {
             [[twoLabelTitleView mainLabel] setTextColor:[UIColor whiteColor]];
@@ -356,6 +360,14 @@
     }
     
     if (kABAuthorizationStatusAuthorized == ABAddressBookGetAuthorizationStatus()) {
+        
+        [firstNameField setEnabled:NO];
+        [lastNameField setEnabled:NO];
+        
+        // When dataController is empty there are no email addresses.
+        if ([[dataController fetchedObjects] count] == 0) {
+            [emailField setPlaceholder:@"no emailaddress"];
+        }
         addressBookButton = [[UIBarButtonItem alloc] initWithBarButtonSystemItem:UIBarButtonSystemItemBookmarks
                                                                           target:self
                                                                           action:@selector(getSomeone:)];
