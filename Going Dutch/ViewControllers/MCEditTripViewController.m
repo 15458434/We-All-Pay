@@ -219,12 +219,16 @@
     
     if (isInitAsNew && [[dataController fetchedObjects] count] == 0) {
         [doneButton setEnabled:NO];
+        [tripNameField setPlaceholder:@"Enter the activity of group."];
+        [[twoLabelTitleView mainLabel] setText:@"New activity"];
+        [[twoLabelTitleView subLabel] setText:@""];
     }
 }
 
 - (void)viewWillDisappear:(BOOL)animated
 {
-    //[[[self navigationItem] rightBarButtonItem] setEnabled:NO];
+    [super viewWillDisappear:animated];
+
     [[[self navigationItem] leftBarButtonItem] setEnabled:NO];
 }
 
