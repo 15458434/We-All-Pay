@@ -393,6 +393,8 @@
 -(void)textFieldDidEndEditing:(UITextField *)textField
 {
     [tonightsBill setTripName:[textField text]];
+    NSDate *nu = [NSDate date];
+    [tonightsBill setDateModified:nu];
     if (!didSomethingChange) {
         didSomethingChange = YES;
         [[[self navigationItem] rightBarButtonItem] setEnabled:YES];

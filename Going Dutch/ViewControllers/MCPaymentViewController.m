@@ -89,6 +89,9 @@
     [payerView setText:[[thisPayment payingPerson] getFullName]];
     [payerView resignFirstResponder];
     didSomethingChange = YES;
+    NSDate *nu = [NSDate date];
+    [tonightsBill setDateModified:nu];
+    [thisPayment setDateModified:nu];
     [[[self navigationItem] rightBarButtonItem] setEnabled:YES];
 }
 
@@ -251,6 +254,9 @@
     if (textField == paidView) {
         if (switchInputField) {
             [self storeMoneySpent];
+            NSDate *nu = [NSDate date];
+            [tonightsBill setDateModified:nu];
+            [thisPayment setDateModified:nu];
             switchInputField = NO;
         }
     } else if (textField == payerView) {
@@ -262,6 +268,9 @@
         // Do something to store value of placeview.
         if (switchInputField) {
             [self storePlaceViewData];
+            NSDate *nu = [NSDate date];
+            [tonightsBill setDateModified:nu];
+            [thisPayment setDateModified:nu];
             switchInputField = NO;
         }
     }
