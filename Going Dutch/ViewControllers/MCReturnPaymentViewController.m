@@ -121,6 +121,7 @@
     
     NSString *whoOwesWho = [[NSString alloc] initWithFormat:@"%@ owes %@:", [[thisCellsReturnPayment payer] getName], [[thisCellsReturnPayment receiver] getName]];
     [[returnPaymentCell whoOwesWho] setText:whoOwesWho];
+    [returnPaymentCell setSelectionStyle:UITableViewCellSelectionStyleNone];
     
     return returnPaymentCell;
 }
