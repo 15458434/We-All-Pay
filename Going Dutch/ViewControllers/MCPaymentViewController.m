@@ -214,7 +214,11 @@
         [nf setFormatterBehavior:NSNumberFormatterBehaviorDefault];
         [nf setLocale:[NSLocale currentLocale]];
         [nf setNumberStyle:NSNumberFormatterDecimalStyle];
-        [paidView setText:[nf stringFromNumber:[thisPayment money]]];
+        NSString *ms = [nf stringFromNumber:[thisPayment money]];
+        if ([ms isEqualToString:@"0"]) {
+            ms = nil;
+        }
+        [paidView setText:ms];
     }
     
     if (textField == payerView) {
