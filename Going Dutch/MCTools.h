@@ -7,6 +7,7 @@
 //
 
 #import <Foundation/Foundation.h>
+#import <iAd/iAd.h>
 
 #define SYSTEM_VERSION_EQUAL_TO(v)                  ([[[UIDevice currentDevice] systemVersion] compare:v options:NSNumericSearch] == NSOrderedSame)
 #define SYSTEM_VERSION_GREATER_THAN(v)              ([[[UIDevice currentDevice] systemVersion] compare:v options:NSNumericSearch] == NSOrderedDescending)
@@ -18,5 +19,6 @@
 
 + (NSString *)createUniqueIdentifierString;
 + (NSURL *)documentPathAsURLTo:(NSString *)fileName;
++ (void)setAdBannerIfNotPaid:(UIViewController *)viewController;
 
 @end

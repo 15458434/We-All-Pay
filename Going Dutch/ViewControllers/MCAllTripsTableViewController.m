@@ -103,7 +103,7 @@
     if (self) {
         [[self navigationItem] setTitle:@"Back"];
         
-        [self setCanDisplayBannerAds:YES];
+        [MCTools setAdBannerIfNotPaid:self];
     }
     return self;
 }

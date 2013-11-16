@@ -28,4 +28,9 @@
     return [NSURL fileURLWithPath:[documentDirectory stringByAppendingPathComponent:fileName]];
 }
 
++ (void)setAdBannerIfNotPaid:(UIViewController *)viewController
+{
+    [viewController setCanDisplayBannerAds:YES];
+}
+
 @end

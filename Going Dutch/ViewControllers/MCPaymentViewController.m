@@ -350,7 +350,7 @@
     [super viewDidLoad];
     // Do any additional setup after loading the view from its nib.
     
-    [self setCanDisplayBannerAds:YES];
+    [MCTools setAdBannerIfNotPaid:self];
     [self setEdgesForExtendedLayout:UIRectEdgeNone];
     
     NSManagedObjectContext *context = [[[MCWeAllPayStoreController defaultStore] weAllPayStoreDocument] managedObjectContext];

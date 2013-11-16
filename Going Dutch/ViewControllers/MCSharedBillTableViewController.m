@@ -59,7 +59,7 @@
     if ([tonightsBill doesEveryoneHaveAnEmailAddress]) {
         MFMailComposeViewController *mailViewController = [[MFMailComposeViewController alloc] init];
         [mailViewController setMailComposeDelegate:self];
-        [[[mailViewController viewControllers] objectAtIndex:0] setCanDisplayBannerAds:YES];
+        [MCTools setAdBannerIfNotPaid:[[mailViewController viewControllers] objectAtIndex:0]];
         NSArray *sda = [NSArray arrayWithObject:[NSSortDescriptor sortDescriptorWithKey:@"dateCreated" ascending:YES]];
         NSArray *allPeople = [[tonightsBill peoplePresent] sortedArrayUsingDescriptors:sda];
         // Create a list of all email addresses
@@ -248,7 +248,7 @@
 {
     [super viewDidLoad];
     
-    [self setCanDisplayBannerAds:YES];
+    [MCTools setAdBannerIfNotPaid:self];
     
     // Load nib for PaymentTableViewCell and register it to the TableView.
     UINib *nib = [UINib nibWithNibName:@"MCPaymentTableViewCell" bundle:nil];

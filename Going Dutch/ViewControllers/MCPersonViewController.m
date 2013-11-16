@@ -82,7 +82,7 @@
         [personReceiver setThisPerson:thisPerson];
     }
     [peoplePicker setPeoplePickerDelegate:personReceiver];
-    [[[peoplePicker viewControllers] objectAtIndex:0] setCanDisplayBannerAds:YES];
+    [MCTools setAdBannerIfNotPaid:[[peoplePicker viewControllers] objectAtIndex:0]];
     [self presentViewController:peoplePicker animated:YES completion:nil];
 }
 
@@ -382,7 +382,7 @@
 {
     [super viewDidLoad];
     
-    [self setCanDisplayBannerAds:YES];
+    [MCTools setAdBannerIfNotPaid:self];
     [self setEdgesForExtendedLayout:UIRectEdgeNone];
     
     NSManagedObjectContext *context = [[[MCWeAllPayStoreController defaultStore] weAllPayStoreDocument] managedObjectContext];

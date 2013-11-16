@@ -78,7 +78,7 @@
     // Uncomment the following line to display an Edit button in the navigation bar for this view controller.
     // self.navigationItem.rightBarButtonItem = self.editButtonItem;
     
-    [self setCanDisplayBannerAds:YES];
+    [MCTools setAdBannerIfNotPaid:self];
     
     paymentsAfterwards = [[NSMutableArray alloc] init];
     for (MCReturnPayment *rp in [tonightsBill solveWhoHasToPayWhoFromThisBill]) {
