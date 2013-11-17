@@ -60,7 +60,7 @@
         MFMailComposeViewController *mailViewController = [[MFMailComposeViewController alloc] init];
         [mailViewController setMailComposeDelegate:self];
         [mailViewController setEdgesForExtendedLayout:UIRectEdgeNone];
-        [MCTools setAdBannerIfNotPaid:[[mailViewController viewControllers] objectAtIndex:0]];
+        [[[mailViewController viewControllers] objectAtIndex:0] setEdgesForExtendedLayout:UIRectEdgeNone];
         NSArray *sda = [NSArray arrayWithObject:[NSSortDescriptor sortDescriptorWithKey:@"dateCreated" ascending:YES]];
         NSArray *allPeople = [[tonightsBill peoplePresent] sortedArrayUsingDescriptors:sda];
         // Create a list of all email addresses
@@ -99,7 +99,9 @@
         [mailBody appendFormat:@"\n"];
         [mailBody appendFormat:@"If you have any remarks please let me know.\n"];
         [mailViewController setMessageBody:mailBody isHTML:NO];
-        [self presentViewController:mailViewController animated:YES completion:nil];
+        [self presentViewController:mailViewController animated:YES completion:^{
+            [MCTools setAdBannerIfNotPaid:[[mailViewController viewControllers] objectAtIndex:0]];
+        }];
     } else {
         NSLog(@"Not everyone has an email address");
         UIAlertView *mailAddressesMissing = [[UIAlertView alloc] initWithTitle:@"Unable to send email to all people."
