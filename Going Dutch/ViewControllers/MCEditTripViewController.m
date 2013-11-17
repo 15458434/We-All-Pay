@@ -109,6 +109,7 @@
         [personReceiver setTonightsBill:tonightsBill];
     }
     [peoplePicker setPeoplePickerDelegate:personReceiver];
+    [peoplePicker setEdgesForExtendedLayout:UIRectEdgeNone];
     [MCTools setAdBannerIfNotPaid:[[peoplePicker viewControllers] objectAtIndex:0]];
     [self presentViewController:peoplePicker animated:YES completion:nil];
 }
@@ -253,6 +254,7 @@
     // Uncomment the following line to display an Edit button in the navigation bar for this view controller.
     // self.navigationItem.rightBarButtonItem = self.editButtonItem;
     
+    [self setEdgesForExtendedLayout:UIRectEdgeNone];
     [MCTools setAdBannerIfNotPaid:self];
     
     [[[[[MCWeAllPayStoreController defaultStore] weAllPayStoreDocument] managedObjectContext] undoManager] enableUndoRegistration];

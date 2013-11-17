@@ -153,6 +153,8 @@
 {
     [super viewDidLoad];
     
+    [self setEdgesForExtendedLayout:UIRectEdgeNone];
+    
     if (!dataController) {
         [self setDataController];
     }
