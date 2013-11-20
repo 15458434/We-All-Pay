@@ -271,8 +271,7 @@
 				3892E3AB179055F40038894B /* DataModel */,
 				38572AF4169D439E00969C62 /* Views */,
 				38572AF3169D438E00969C62 /* ViewControllers */,
-				38CDE8FE17135B6300387CAA /* MCTools.h */,
-				38CDE8FF17135B6300387CAA /* MCTools.m */,
+				38CC9814183D520C006EC35D /* MC SDK */,
 				3892E3AF17906B5D0038894B /* MCAddressBookDataReceiver.h */,
 				3892E3B017906B5E0038894B /* MCAddressBookDataReceiver.m */,
 				38572AE5169D437B00969C62 /* MCAppDelegate.h */,
@@ -403,6 +402,15 @@
 				38334EBB172D1A770063B919 /* three peeps.png */,
 			);
 			name = "App Icon";
+			sourceTree = "<group>";
+		};
+		38CC9814183D520C006EC35D /* MC SDK */ = {
+			isa = PBXGroup;
+			children = (
+				38CDE8FE17135B6300387CAA /* MCTools.h */,
+				38CDE8FF17135B6300387CAA /* MCTools.m */,
+			);
+			name = "MC SDK";
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
