@@ -254,7 +254,6 @@
     }
     [[allTripsTableViewCell extraLabel] setText:[df stringFromDate:[thisTrip dateModified]]];
     
-    //[allTripsTableViewCell setAccessoryView:[[UIImageView alloc] initWithImage:[UIImage imageNamed:@"plus sign"]]];
     CGRect buttonRect = CGRectMake(0, 0, 44, 44);
     UIButton *accessoryButton = [[UIButton alloc] initWithFrame:buttonRect];
     UIImage *plusSign = [UIImage imageNamed:@"plus sign"];
