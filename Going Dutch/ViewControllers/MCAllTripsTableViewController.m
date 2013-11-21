@@ -103,7 +103,7 @@
     if (self) {
         [[self navigationItem] setTitle:@"Back"];
         
-        [self setCanDisplayBannerAds:YES];
+        [MCTools setAdBannerIfNotPaid:self];
     }
     return self;
 }
@@ -152,6 +152,8 @@
 - (void)viewDidLoad
 {
     [super viewDidLoad];
+    
+    [self setEdgesForExtendedLayout:UIRectEdgeNone];
     
     if (!dataController) {
         [self setDataController];
@@ -252,7 +254,6 @@
     }
     [[allTripsTableViewCell extraLabel] setText:[df stringFromDate:[thisTrip dateModified]]];
     
-    //[allTripsTableViewCell setAccessoryView:[[UIImageView alloc] initWithImage:[UIImage imageNamed:@"plus sign"]]];
     CGRect buttonRect = CGRectMake(0, 0, 44, 44);
     UIButton *accessoryButton = [[UIButton alloc] initWithFrame:buttonRect];
     UIImage *plusSign = [UIImage imageNamed:@"plus sign"];

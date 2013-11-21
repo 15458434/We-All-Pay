@@ -109,8 +109,11 @@
         [personReceiver setTonightsBill:tonightsBill];
     }
     [peoplePicker setPeoplePickerDelegate:personReceiver];
-    [[[peoplePicker viewControllers] objectAtIndex:0] setCanDisplayBannerAds:YES];
-    [self presentViewController:peoplePicker animated:YES completion:nil];
+    [peoplePicker setEdgesForExtendedLayout:UIRectEdgeNone];
+    [[[peoplePicker viewControllers] objectAtIndex:0] setEdgesForExtendedLayout:UIRectEdgeNone];
+    [self presentViewController:peoplePicker animated:YES completion:^{
+        [MCTools setAdBannerIfNotPaid:[[peoplePicker viewControllers] objectAtIndex:0]];
+    }];
 }
 
 - (IBAction)changeNameOfTrip:(id)sender {
@@ -219,12 +222,16 @@
     
     if (isInitAsNew && [[dataController fetchedObjects] count] == 0) {
         [doneButton setEnabled:NO];
+        [tripNameField setPlaceholder:@"Enter the activity of group."];
+        [[twoLabelTitleView mainLabel] setText:@"New activity"];
+        [[twoLabelTitleView subLabel] setText:@""];
     }
 }
 
 - (void)viewWillDisappear:(BOOL)animated
 {
-    //[[[self navigationItem] rightBarButtonItem] setEnabled:NO];
+    [super viewWillDisappear:animated];
+
     [[[self navigationItem] leftBarButtonItem] setEnabled:NO];
 }
 
@@ -249,7 +256,8 @@
     // Uncomment the following line to display an Edit button in the navigation bar for this view controller.
     // self.navigationItem.rightBarButtonItem = self.editButtonItem;
     
-    [self setCanDisplayBannerAds:YES];
+    [self setEdgesForExtendedLayout:UIRectEdgeNone];
+    [MCTools setAdBannerIfNotPaid:self];
     
     [[[[[MCWeAllPayStoreController defaultStore] weAllPayStoreDocument] managedObjectContext] undoManager] enableUndoRegistration];
     
@@ -389,6 +397,8 @@
 -(void)textFieldDidEndEditing:(UITextField *)textField
 {
     [tonightsBill setTripName:[textField text]];
+    NSDate *nu = [NSDate date];
+    [tonightsBill setDateModified:nu];
     if (!didSomethingChange) {
         didSomethingChange = YES;
         [[[self navigationItem] rightBarButtonItem] setEnabled:YES];

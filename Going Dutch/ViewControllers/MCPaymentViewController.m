@@ -89,6 +89,9 @@
     [payerView setText:[[thisPayment payingPerson] getFullName]];
     [payerView resignFirstResponder];
     didSomethingChange = YES;
+    NSDate *nu = [NSDate date];
+    [tonightsBill setDateModified:nu];
+    [thisPayment setDateModified:nu];
     [[[self navigationItem] rightBarButtonItem] setEnabled:YES];
 }
 
@@ -211,7 +214,11 @@
         [nf setFormatterBehavior:NSNumberFormatterBehaviorDefault];
         [nf setLocale:[NSLocale currentLocale]];
         [nf setNumberStyle:NSNumberFormatterDecimalStyle];
-        [paidView setText:[nf stringFromNumber:[thisPayment money]]];
+        NSString *ms = [nf stringFromNumber:[thisPayment money]];
+        if ([ms isEqualToString:@"0"]) {
+            ms = nil;
+        }
+        [paidView setText:ms];
     }
     
     if (textField == payerView) {
@@ -251,6 +258,9 @@
     if (textField == paidView) {
         if (switchInputField) {
             [self storeMoneySpent];
+            NSDate *nu = [NSDate date];
+            [tonightsBill setDateModified:nu];
+            [thisPayment setDateModified:nu];
             switchInputField = NO;
         }
     } else if (textField == payerView) {
@@ -262,6 +272,9 @@
         // Do something to store value of placeview.
         if (switchInputField) {
             [self storePlaceViewData];
+            NSDate *nu = [NSDate date];
+            [tonightsBill setDateModified:nu];
+            [thisPayment setDateModified:nu];
             switchInputField = NO;
         }
     }
@@ -337,7 +350,7 @@
     [super viewDidLoad];
     // Do any additional setup after loading the view from its nib.
     
-    [self setCanDisplayBannerAds:YES];
+    [MCTools setAdBannerIfNotPaid:self];
     [self setEdgesForExtendedLayout:UIRectEdgeNone];
     
     NSManagedObjectContext *context = [[[MCWeAllPayStoreController defaultStore] weAllPayStoreDocument] managedObjectContext];

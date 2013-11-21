@@ -82,7 +82,9 @@
         [personReceiver setThisPerson:thisPerson];
     }
     [peoplePicker setPeoplePickerDelegate:personReceiver];
-    [[[peoplePicker viewControllers] objectAtIndex:0] setCanDisplayBannerAds:YES];
+    [peoplePicker setEdgesForExtendedLayout:UIRectEdgeNone];
+    [[[peoplePicker viewControllers] objectAtIndex:0] setEdgesForExtendedLayout:UIRectEdgeNone];
+    [MCTools setAdBannerIfNotPaid:[[peoplePicker viewControllers] objectAtIndex:0]];
     [self presentViewController:peoplePicker animated:YES completion:nil];
 }
 
@@ -171,11 +173,17 @@
     if (textField == firstNameField) {
         [thisPerson setFirstName:[firstNameField text]];
         didSomethingChange = YES;
+        NSDate *nu = [NSDate date];
+        [tonightsBill setDateModified:nu];
+        [thisPerson setDateModified:nu];
         [[[self navigationItem] rightBarButtonItem] setEnabled:YES];
         [lastNameField becomeFirstResponder];
     } else if (textField == lastNameField) {
         [thisPerson setLastName:[lastNameField text]];
         didSomethingChange = YES;
+        NSDate *nu = [NSDate date];
+        [tonightsBill setDateModified:nu];
+        [thisPerson setDateModified:nu];
         [[[self navigationItem] rightBarButtonItem] setEnabled:YES];
         [emailField becomeFirstResponder];
     } else if (textField == emailField) {
@@ -188,7 +196,6 @@
                     [thisPerson addOneEmailAddressFromAString:[emailField text]];
                 } else {
                     [defaultEmail setEmailAddress:[emailField text]];
-                    [thisPerson setDateModified:[NSDate date]];
                 }
             }
         } else if (kABAuthorizationStatusAuthorized == ABAddressBookGetAuthorizationStatus()) {
@@ -197,7 +204,9 @@
                 [thisPerson addOneEmailAddressFromAString:[emailField text]];
             }
         }
-        [thisPerson setDateModified:[NSDate date]];
+        NSDate *nu = [NSDate date];
+        [tonightsBill setDateModified:nu];
+        [thisPerson setDateModified:nu];
         didSomethingChange = YES;
         [[[self navigationItem] rightBarButtonItem] setEnabled:YES];
     }
@@ -375,7 +384,7 @@
 {
     [super viewDidLoad];
     
-    [self setCanDisplayBannerAds:YES];
+    [MCTools setAdBannerIfNotPaid:self];
     [self setEdgesForExtendedLayout:UIRectEdgeNone];
     
     NSManagedObjectContext *context = [[[MCWeAllPayStoreController defaultStore] weAllPayStoreDocument] managedObjectContext];

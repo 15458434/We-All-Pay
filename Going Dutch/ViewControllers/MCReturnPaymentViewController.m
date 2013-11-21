@@ -78,7 +78,8 @@
     // Uncomment the following line to display an Edit button in the navigation bar for this view controller.
     // self.navigationItem.rightBarButtonItem = self.editButtonItem;
     
-    [self setCanDisplayBannerAds:YES];
+    [self setEdgesForExtendedLayout:UIRectEdgeNone];
+    [MCTools setAdBannerIfNotPaid:self];
     
     paymentsAfterwards = [[NSMutableArray alloc] init];
     for (MCReturnPayment *rp in [tonightsBill solveWhoHasToPayWhoFromThisBill]) {
@@ -121,6 +122,7 @@
     
     NSString *whoOwesWho = [[NSString alloc] initWithFormat:@"%@ owes %@:", [[thisCellsReturnPayment payer] getName], [[thisCellsReturnPayment receiver] getName]];
     [[returnPaymentCell whoOwesWho] setText:whoOwesWho];
+    [returnPaymentCell setSelectionStyle:UITableViewCellSelectionStyleNone];
     
     return returnPaymentCell;
 }
