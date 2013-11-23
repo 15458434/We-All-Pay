@@ -62,7 +62,7 @@
             [context processPendingChanges];
         }];
     }
-    [[self navigationController] popViewControllerAnimated:YES];
+    [[[self navigationController] presentingViewController] dismissViewControllerAnimated:YES completion:nil];
 }
 
 - (void)removePayment:(id)selector
@@ -123,7 +123,7 @@
             [[context undoManager] undoNestedGroup];
         }
     }];
-    [[self navigationController] popViewControllerAnimated:YES];
+    [[[self navigationController] presentingViewController] dismissViewControllerAnimated:YES completion:nil];
 }
 
 - (void)storePlaceViewData

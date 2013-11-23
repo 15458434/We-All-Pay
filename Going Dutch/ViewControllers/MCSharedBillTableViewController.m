@@ -38,7 +38,11 @@
 - (void)addPayment:(id)sender
 {
     MCPaymentViewController *pvc = [[MCPaymentViewController alloc] initWithExistingPayment:nil fromBill:tonightsBill];
-    [[self navigationController] pushViewController:pvc animated:YES];
+    UINavigationController *navController = [[UINavigationController alloc] initWithRootViewController:pvc];
+    if ([[UIDevice currentDevice] userInterfaceIdiom] == UIUserInterfaceIdiomPad) {
+        [navController setModalPresentationStyle:UIModalPresentationFormSheet];
+    }
+    [self presentViewController:navController animated:YES completion:nil];
 }
 
 - (void)editBillData:(id)sender
@@ -485,7 +489,11 @@
 {
     MCPaymentViewController *pvc = [[MCPaymentViewController alloc] initWithExistingPayment:[dataController objectAtIndexPath:indexPath] fromBill:tonightsBill];
     [pvc setDelegate:self];
-    [[self navigationController] pushViewController:pvc animated:YES];
+    UINavigationController *navController = [[UINavigationController alloc] initWithRootViewController:pvc];
+    if ([[UIDevice currentDevice] userInterfaceIdiom] == UIUserInterfaceIdiomPad) {
+        [navController setModalPresentationStyle:UIModalPresentationFormSheet];
+    }
+    [[self navigationController] presentViewController:navController animated:YES completion:nil];
 }
 
 @end
