@@ -115,7 +115,8 @@
     [peoplePicker setPeoplePickerDelegate:personReceiver];
     [peoplePicker setEdgesForExtendedLayout:UIRectEdgeNone];
     [[[peoplePicker viewControllers] objectAtIndex:0] setEdgesForExtendedLayout:UIRectEdgeNone];
-    [self presentViewController:peoplePicker animated:YES completion:^{
+    [peoplePicker setModalPresentationStyle:UIModalPresentationFormSheet];
+    [[self navigationController] presentViewController:peoplePicker animated:YES completion:^{
         [MCTools setAdBannerIfNotPaid:[[peoplePicker viewControllers] objectAtIndex:0]];
     }];
 }

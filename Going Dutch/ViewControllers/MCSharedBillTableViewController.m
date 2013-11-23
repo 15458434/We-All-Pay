@@ -68,6 +68,7 @@
         MFMailComposeViewController *mailViewController = [[MFMailComposeViewController alloc] init];
         [mailViewController setMailComposeDelegate:self];
         [mailViewController setEdgesForExtendedLayout:UIRectEdgeNone];
+        [mailViewController setModalPresentationStyle:UIModalPresentationFormSheet];
         [[[mailViewController viewControllers] objectAtIndex:0] setEdgesForExtendedLayout:UIRectEdgeNone];
         NSArray *sda = [NSArray arrayWithObject:[NSSortDescriptor sortDescriptorWithKey:@"dateCreated" ascending:YES]];
         NSArray *allPeople = [[tonightsBill peoplePresent] sortedArrayUsingDescriptors:sda];
@@ -107,7 +108,7 @@
         [mailBody appendFormat:@"\n"];
         [mailBody appendFormat:@"If you have any remarks please let me know.\n"];
         [mailViewController setMessageBody:mailBody isHTML:NO];
-        [self presentViewController:mailViewController animated:YES completion:^{
+        [[self navigationController] presentViewController:mailViewController animated:YES completion:^{
             [MCTools setAdBannerIfNotPaid:[[mailViewController viewControllers] objectAtIndex:0]];
         }];
     } else {

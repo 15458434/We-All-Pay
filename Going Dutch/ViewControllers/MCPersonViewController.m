@@ -84,8 +84,9 @@
     [peoplePicker setPeoplePickerDelegate:personReceiver];
     [peoplePicker setEdgesForExtendedLayout:UIRectEdgeNone];
     [[[peoplePicker viewControllers] objectAtIndex:0] setEdgesForExtendedLayout:UIRectEdgeNone];
+    [peoplePicker setModalPresentationStyle:UIModalPresentationFormSheet];
     [MCTools setAdBannerIfNotPaid:[[peoplePicker viewControllers] objectAtIndex:0]];
-    [self presentViewController:peoplePicker animated:YES completion:nil];
+    [[self navigationController] presentViewController:peoplePicker animated:YES completion:nil];
 }
 
 - (void)doneEmailPicker:(id)selector
