@@ -42,7 +42,11 @@
     MCPersonViewController *pvc = [[MCPersonViewController alloc] initWithPerson:newPerson];
     [pvc setIsNew:YES];
     [pvc setTonightsBill:tonightsBill];
-    [[self navigationController] pushViewController:pvc animated:YES];
+    UINavigationController *navController = [[UINavigationController alloc] initWithRootViewController:pvc];
+    if ([[UIDevice currentDevice] userInterfaceIdiom] == UIUserInterfaceIdiomPad) {
+        [navController setModalPresentationStyle:UIModalPresentationFormSheet];
+    }
+    [[self navigationController] presentViewController:navController animated:YES completion:nil];
 }
 
 - (void)doneAddingPeople:(id)selector
@@ -553,7 +557,11 @@
     [pvc setTonightsBill:tonightsBill];
     [pvc setChangeFlagDelegate:self];
     [pvc setIsNew:NO];
-    [[self navigationController] pushViewController:pvc animated:YES];
+    UINavigationController *navController = [[UINavigationController alloc] initWithRootViewController:pvc];
+    if ([[UIDevice currentDevice] userInterfaceIdiom] == UIUserInterfaceIdiomPad) {
+        [navController setModalPresentationStyle:UIModalPresentationFormSheet];
+    }
+    [[self navigationController] presentViewController:navController animated:YES completion:nil];
 }
 
 @end

@@ -55,7 +55,11 @@
 {
     NSLog(@"%d", [tonightsBill doesEveryoneHaveAnEmailAddress]);
     MCReturnPaymentViewController *rpvc = [[MCReturnPaymentViewController alloc] initWithBill:tonightsBill];
-    [[self navigationController] pushViewController:rpvc animated:YES];
+    UINavigationController *navController = [[UINavigationController alloc] initWithRootViewController:rpvc];
+    if ([[UIDevice currentDevice] userInterfaceIdiom] == UIUserInterfaceIdiomPad) {
+        [navController setModalPresentationStyle:UIModalPresentationFormSheet];
+    }
+    [[self navigationController] presentViewController:navController animated:YES completion:nil];
 }
 
 - (void)shareBill:(id)sender

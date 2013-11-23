@@ -52,7 +52,7 @@
         [[context undoManager] endUndoGrouping];
         [[context undoManager] undoNestedGroup];
     }];
-    [[self navigationController] popViewControllerAnimated:YES];
+    [[[self navigationController] presentingViewController] dismissViewControllerAnimated:YES completion:nil];
 }
 
 - (void)doneButtonPressed:(id)selector
@@ -71,7 +71,7 @@
         [thisPerson setDateModified:[NSDate date]];
         [[context undoManager] endUndoGrouping];
     }];
-    [[self navigationController] popViewControllerAnimated:YES];
+    [[[self navigationController] presentingViewController] dismissViewControllerAnimated:YES completion:nil];
 }
 
 - (void)getSomeone:(id)selector

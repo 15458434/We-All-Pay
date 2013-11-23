@@ -21,6 +21,13 @@
 
 @synthesize tonightsBill;
 
+#pragma mark - Actions
+
+- (void)mainCancelButtonPressed:(id)selector
+{
+    [[[self navigationController] presentingViewController] dismissViewControllerAnimated:YES completion:nil];
+}
+
 #pragma mark - New in this Class
 
 - (id)initWithBill:(MCSharedBill *)thisBill
@@ -32,6 +39,7 @@
             @throw [NSException exceptionWithName:@"InitWithNil" reason:@"thisBill is not allowed to point to nil." userInfo:nil];
         }
         tonightsBill = thisBill;
+        [self setWillShowButtons:NO];
     }
     return self;
 }
@@ -65,6 +73,9 @@
     }
     [[self navigationItem] setTitle:[[NSString alloc] initWithFormat:@"To pay: %@", [nf stringFromNumber:averagePay]]];
 
+    UIBarButtonItem *backButton = [[UIBarButtonItem alloc] initWithBarButtonSystemItem:UIBarButtonSystemItemCancel target:self action:@selector(mainCancelButtonPressed:)];
+    [[self navigationItem] setLeftBarButtonItem:backButton];
+    
     [[self navigationController] setToolbarHidden:YES animated:animated];
 }
 

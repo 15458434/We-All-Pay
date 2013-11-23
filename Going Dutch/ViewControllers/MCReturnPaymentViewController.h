@@ -9,10 +9,12 @@
 #import <UIKit/UIKit.h>
 #import <iAd/iAd.h>
 
+#import "MCCancelDoneTableViewController.h"
+
 @class MCSharedBill;
 @class MCTwoLabelsTitleView;
 
-@interface MCReturnPaymentViewController : UITableViewController
+@interface MCReturnPaymentViewController : MCCancelDoneTableViewController
 {
     MCSharedBill *tonightsBill;
     NSMutableArray *paymentsAfterwards;
