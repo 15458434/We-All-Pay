@@ -12,6 +12,7 @@
 		380BF831181088B9008A8B74 /* MCEmailAddressTableViewCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 380BF830181088B9008A8B74 /* MCEmailAddressTableViewCell.m */; };
 		380F44F21813250600FF7E10 /* No picture image 2 - We All Pay.png in Resources */ = {isa = PBXBuildFile; fileRef = 380F44F11813250600FF7E10 /* No picture image 2 - We All Pay.png */; };
 		38175C1E16B6F31D00804914 /* NewTripHeaderView.xib in Resources */ = {isa = PBXBuildFile; fileRef = 38175C1D16B6F31D00804914 /* NewTripHeaderView.xib */; };
+		38295AE818425E74009FB5DE /* MCCancelDoneViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 38295AE718425E74009FB5DE /* MCCancelDoneViewController.m */; };
 		3829AD0F178B41320025969D /* WeAllPayStore.xcdatamodeld in Sources */ = {isa = PBXBuildFile; fileRef = 3829AD0D178B41320025969D /* WeAllPayStore.xcdatamodeld */; };
 		382E7BDD17E5E57500A1040A /* MCReturnPaymentViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 382E7BDC17E5E57500A1040A /* MCReturnPaymentViewController.m */; };
 		3830F6F6179872B400904FAF /* MCPaymentViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 3830F6F5179872B400904FAF /* MCPaymentViewController.m */; };
@@ -77,6 +78,8 @@
 		380BF830181088B9008A8B74 /* MCEmailAddressTableViewCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = MCEmailAddressTableViewCell.m; path = Views/MCEmailAddressTableViewCell.m; sourceTree = "<group>"; };
 		380F44F11813250600FF7E10 /* No picture image 2 - We All Pay.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = "No picture image 2 - We All Pay.png"; path = "Going Dutch/icons/no picture image/No picture image 2 - We All Pay.png"; sourceTree = "<group>"; };
 		38175C1D16B6F31D00804914 /* NewTripHeaderView.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; name = NewTripHeaderView.xib; path = Views/NewTripHeaderView.xib; sourceTree = "<group>"; };
+		38295AE618425E74009FB5DE /* MCCancelDoneViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = MCCancelDoneViewController.h; sourceTree = "<group>"; };
+		38295AE718425E74009FB5DE /* MCCancelDoneViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = MCCancelDoneViewController.m; sourceTree = "<group>"; };
 		3829AD0E178B41320025969D /* WeAllPayStore.xcdatamodel */ = {isa = PBXFileReference; lastKnownFileType = wrapper.xcdatamodel; path = WeAllPayStore.xcdatamodel; sourceTree = "<group>"; };
 		382E7BDB17E5E57500A1040A /* MCReturnPaymentViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = MCReturnPaymentViewController.h; path = ViewControllers/MCReturnPaymentViewController.h; sourceTree = "<group>"; };
 		382E7BDC17E5E57500A1040A /* MCReturnPaymentViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = MCReturnPaymentViewController.m; path = ViewControllers/MCReturnPaymentViewController.m; sourceTree = "<group>"; };
@@ -410,6 +413,8 @@
 		38CC9814183D520C006EC35D /* MC SDK */ = {
 			isa = PBXGroup;
 			children = (
+				38295AE618425E74009FB5DE /* MCCancelDoneViewController.h */,
+				38295AE718425E74009FB5DE /* MCCancelDoneViewController.m */,
 				3876EF571840E86900C9546A /* MCCancelDoneTableViewController.h */,
 				3876EF581840E86900C9546A /* MCCancelDoneTableViewController.m */,
 				38CDE8FE17135B6300387CAA /* MCTools.h */,
@@ -519,6 +524,7 @@
 				38DB85D717E45CA4006237CF /* MCSharedBill+addons.m in Sources */,
 				38DB85E317E46FE1006237CF /* MCPayment.m in Sources */,
 				38DB85DD17E45FB7006237CF /* MCEmailAddress+addons.m in Sources */,
+				38295AE818425E74009FB5DE /* MCCancelDoneViewController.m in Sources */,
 				380BF831181088B9008A8B74 /* MCEmailAddressTableViewCell.m in Sources */,
 				38955048178B4FCA0077A95A /* MCWeAllPayStoreController.m in Sources */,
 				38DB85E917E46FE2006237CF /* MCPerson.m in Sources */,

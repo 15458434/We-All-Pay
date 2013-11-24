@@ -45,7 +45,7 @@
 {
     NSLog(@"backButtonPresses wordt uitgevoerd.");
 
-    switchInputField = NO;
+    self.switchInputField = NO;
     if ([payerView isFirstResponder]) {
         [self donePersonPicker:self];
     }
@@ -94,6 +94,7 @@
     [tonightsBill setDateModified:nu];
     [thisPayment setDateModified:nu];
     [[[self navigationItem] rightBarButtonItem] setEnabled:YES];
+    [itemView becomeFirstResponder];
 }
 
 - (void)cancelNumberPad:(id)selector
@@ -146,6 +147,9 @@
     [paidView setText:[nf stringFromNumber:[thisPayment money]]];
     
     [[[self navigationItem] rightBarButtonItem] setEnabled:YES];
+    NSDate *nu = [NSDate date];
+    [tonightsBill setDateModified:nu];
+    [thisPayment setDateModified:nu];
     didSomethingChange = YES;
 }
 
@@ -239,37 +243,25 @@
 
 - (BOOL)textFieldShouldBeginEditing:(UITextField *)textField
 {
-    if ([payerView isFirstResponder] || [paidView isFirstResponder] || [itemView isFirstResponder]) {
-        switchInputField = YES;
+    /*if ([payerView isFirstResponder] || [paidView isFirstResponder] || [itemView isFirstResponder]) {
+        [self setSwitchInputField:YES];
         return YES;
     } else {
-        switchInputField = NO;
+        self.switchInputField = NO;
         return YES;
-    }
+    }*/
+    return YES;
 }
 
 - (BOOL)textFieldShouldEndEditing:(UITextField *)textField
 {
-    if (textField == payerView) {
-        if (switchInputField) {
-            [itemView becomeFirstResponder];
-        }
-    } else if (textField == itemView) {
-        if (switchInputField) {
-            [paidView becomeFirstResponder];
-        }
-    }
-
     return YES;
 }
 
 - (void)textFieldDidEndEditing:(UITextField *)textField
 {
     if (textField == paidView) {
-        [self storeMoneySpent];
-        NSDate *nu = [NSDate date];
-        [tonightsBill setDateModified:nu];
-        [thisPayment setDateModified:nu];
+        /*[self storeMoneySpent];*/
     } else if (textField == payerView) {
         [self donePersonPicker:self];
 
@@ -280,6 +272,7 @@
         [tonightsBill setDateModified:nu];
         [thisPayment setDateModified:nu];
     }
+    [self selectNextUITextField:textField];
 }
 
 #pragma mark - Inherited from super
@@ -351,11 +344,12 @@
 {
     [super viewDidLoad];
     // Do any additional setup after loading the view from its nib.
+        
+    [self setWillShowButtons:NO];
     
-    [MCTools setAdBannerIfNotPaid:self];
-    [self setEdgesForExtendedLayout:UIRectEdgeNone];
-    
-    switchInputField = YES;
+    // Prepare the switch input mechanism.
+    [self setSwitchInputField:YES];
+    listOfInputs = [NSArray arrayWithObjects:payerView, itemView, paidView, nil];
     
     NSManagedObjectContext *context = [[[MCWeAllPayStoreController defaultStore] weAllPayStoreDocument] managedObjectContext];
     [context performBlockAndWait:^{

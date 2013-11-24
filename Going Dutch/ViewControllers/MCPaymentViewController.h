@@ -9,11 +9,14 @@
 #import <UIKit/UIKit.h>
 #import <iAd/iAd.h>
 
+#import "MCCancelDoneViewController.h"
+
 @class MCPayment;
 @class MCSharedBill;
 @class MCPerson;
 @class MCPaymentViewController;
 @class MCTwoLabelsTitleView;
+
 
 @protocol MCPaymentViewControllerDelegate <NSObject>
 
@@ -21,7 +24,7 @@
 
 @end
 
-@interface MCPaymentViewController : UIViewController <UIPickerViewDataSource, UIPickerViewDelegate, UITextFieldDelegate>
+@interface MCPaymentViewController : MCCancelDoneViewController <UIPickerViewDataSource, UIPickerViewDelegate, UITextFieldDelegate>
 {
     UIBarButtonItem *doneButton;
     UIBarButtonItem *cancelChangesForEntirePaymentButton;
@@ -33,8 +36,6 @@
     __weak IBOutlet UITextField *paidView;
     NSNumber *paidViewNumber;
     __weak IBOutlet UILabel *dateAndTimeLabel;
-    
-    BOOL switchInputField;
     
     UIPickerView *personPickerView;
     NSArray *listOfPeople;
