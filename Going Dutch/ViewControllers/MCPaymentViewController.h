@@ -29,7 +29,7 @@
     
     __weak IBOutlet UITextField *payerView;
     MCPerson *payerViewPerson;
-    __weak IBOutlet UITextField *placeView;
+    __weak IBOutlet UITextField *itemView;
     __weak IBOutlet UITextField *paidView;
     NSNumber *paidViewNumber;
     __weak IBOutlet UILabel *dateAndTimeLabel;

@@ -29,9 +29,9 @@
 
 - (IBAction)dismissKeyboard:(id)sender
 {
-    if ([placeView isFirstResponder]) {
-        [placeView endEditing:YES];
-        [placeView setText:[thisPayment descriptionOfPayment]];
+    if ([itemView isFirstResponder]) {
+        [itemView endEditing:YES];
+        [itemView setText:[thisPayment descriptionOfPayment]];
     }
     if ([payerView isFirstResponder]) {
         [self cancelPersonPicker:self];
@@ -45,13 +45,14 @@
 {
     NSLog(@"backButtonPresses wordt uitgevoerd.");
 
+    switchInputField = NO;
     if ([payerView isFirstResponder]) {
         [self donePersonPicker:self];
     }
     if ([paidView isFirstResponder]) {
         [self doneNumberPad:self];
     }
-    if ([placeView isFirstResponder]) {
+    if ([itemView isFirstResponder]) {
         [self storePlaceViewData];
     }
     NSLog(@"MCPaymentViewController: Done button pressed.");
@@ -128,8 +129,8 @@
 
 - (void)storePlaceViewData
 {
-    [placeView resignFirstResponder];
-    [thisPayment setDescriptionOfPayment:[placeView text]];
+    [itemView resignFirstResponder];
+    [thisPayment setDescriptionOfPayment:[itemView text]];
     didSomethingChange = YES;
     [[[self navigationItem] rightBarButtonItem] setEnabled:YES];
 }
@@ -137,8 +138,7 @@
 - (void)storeMoneySpent
 {
     NSNumberFormatter *nf = [[NSNumberFormatter alloc] init];
-    // [nf setFormatterBehavior:NSNumberFormatterBehaviorDefault];
-    // [nf setLocale:[NSLocale currentLocale]];
+
     [nf setNumberStyle:NSNumberFormatterDecimalStyle];
     [thisPayment setMoney:[nf numberFromString:[paidView text]]];
     
@@ -201,7 +201,7 @@
 
 - (BOOL)textFieldShouldReturn:(UITextField *)textField
 {
-    if (textField == placeView) {
+    if (textField == itemView) {
         [self storePlaceViewData];
     }
     return YES;
@@ -239,7 +239,7 @@
 
 - (BOOL)textFieldShouldBeginEditing:(UITextField *)textField
 {
-    if ([payerView isFirstResponder] || [paidView isFirstResponder] || [placeView isFirstResponder]) {
+    if ([payerView isFirstResponder] || [paidView isFirstResponder] || [itemView isFirstResponder]) {
         switchInputField = YES;
         return YES;
     } else {
@@ -250,33 +250,35 @@
 
 - (BOOL)textFieldShouldEndEditing:(UITextField *)textField
 {
+    if (textField == payerView) {
+        if (switchInputField) {
+            [itemView becomeFirstResponder];
+        }
+    } else if (textField == itemView) {
+        if (switchInputField) {
+            [paidView becomeFirstResponder];
+        }
+    }
+
     return YES;
 }
 
 - (void)textFieldDidEndEditing:(UITextField *)textField
 {
     if (textField == paidView) {
-        if (switchInputField) {
-            [self storeMoneySpent];
-            NSDate *nu = [NSDate date];
-            [tonightsBill setDateModified:nu];
-            [thisPayment setDateModified:nu];
-            switchInputField = NO;
-        }
+        [self storeMoneySpent];
+        NSDate *nu = [NSDate date];
+        [tonightsBill setDateModified:nu];
+        [thisPayment setDateModified:nu];
     } else if (textField == payerView) {
-        if (switchInputField) {
-            [self donePersonPicker:self];
-            switchInputField = NO;
-        }
-    } else if (textField == placeView) {
+        [self donePersonPicker:self];
+
+    } else if (textField == itemView) {
         // Do something to store value of placeview.
-        if (switchInputField) {
-            [self storePlaceViewData];
-            NSDate *nu = [NSDate date];
-            [tonightsBill setDateModified:nu];
-            [thisPayment setDateModified:nu];
-            switchInputField = NO;
-        }
+        [self storePlaceViewData];
+        NSDate *nu = [NSDate date];
+        [tonightsBill setDateModified:nu];
+        [thisPayment setDateModified:nu];
     }
 }
 
@@ -331,7 +333,7 @@
     // Fill in the form if data is present.
     [payerView setText:[[thisPayment payingPerson] getFullName]];
     [payerView setDelegate:self];
-    [placeView setText:[thisPayment descriptionOfPayment]];
+    [itemView setText:[thisPayment descriptionOfPayment]];
     NSNumberFormatter *nf = [[NSNumberFormatter alloc] init];
     [nf setLocale:[NSLocale currentLocale]];
     [nf setNumberStyle:NSNumberFormatterCurrencyStyle];
@@ -352,6 +354,8 @@
     
     [MCTools setAdBannerIfNotPaid:self];
     [self setEdgesForExtendedLayout:UIRectEdgeNone];
+    
+    switchInputField = YES;
     
     NSManagedObjectContext *context = [[[MCWeAllPayStoreController defaultStore] weAllPayStoreDocument] managedObjectContext];
     [context performBlockAndWait:^{
@@ -402,7 +406,7 @@
     [paidView setInputAccessoryView:inputAccossoryNumberPad];
     [paidView setDelegate:self];
 
-    [placeView setDelegate:self];
+    [itemView setDelegate:self];
     
 }
 
