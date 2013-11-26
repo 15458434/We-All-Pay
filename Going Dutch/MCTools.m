@@ -30,10 +30,12 @@
 
 + (void)setAdBannerIfNotPaid:(BOOL)show forViewController:(UIViewController *)viewController
 {
-    /*if (![[[UIDevice currentDevice] model] isEqualToString:@"iPad"]) {
-        [viewController setCanDisplayBannerAds:YES];
-    }*/
-    [viewController setCanDisplayBannerAds:show];
+    if ([[[UIDevice currentDevice] model] isEqualToString:@"iPad"] && [[UIDevice currentDevice] userInterfaceIdiom] == UIUserInterfaceIdiomPhone) {
+        [viewController setCanDisplayBannerAds:NO];
+    } else {
+        [viewController setCanDisplayBannerAds:show];
+    }
+    //[viewController setCanDisplayBannerAds:show];
 }
 
 @end
