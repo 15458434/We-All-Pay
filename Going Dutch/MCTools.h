@@ -19,6 +19,6 @@
 
 + (NSString *)createUniqueIdentifierString;
 + (NSURL *)documentPathAsURLTo:(NSString *)fileName;
-+ (void)setAdBannerIfNotPaid:(UIViewController *)viewController;
++ (void)setAdBannerIfNotPaid:(BOOL)show forViewController:(UIViewController *)viewController;
 
 @end
