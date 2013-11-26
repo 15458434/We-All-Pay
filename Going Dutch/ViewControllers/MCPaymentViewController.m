@@ -203,14 +203,6 @@
 
 #pragma mark - UITextFieldDelegate
 
-- (BOOL)textFieldShouldReturn:(UITextField *)textField
-{
-    if (textField == itemView) {
-        [self storePlaceViewData];
-    }
-    return YES;
-}
-
 - (void)textFieldDidBeginEditing:(UITextField *)textField
 {
     if (textField == paidView) {
@@ -250,6 +242,11 @@
         self.switchInputField = NO;
         return YES;
     }*/
+    return YES;
+}
+
+- (BOOL)textFieldShouldReturn:(UITextField *)textField
+{
     return YES;
 }
 
