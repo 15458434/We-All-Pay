@@ -103,7 +103,7 @@
     if (self) {
         [[self navigationItem] setTitle:@"Back"];
         
-        [MCTools setAdBannerIfNotPaid:self];
+        [MCTools setAdBannerIfNotPaid:YES forViewController:self];
     }
     return self;
 }
@@ -313,7 +313,11 @@
 {
     MCSharedBill *thisBill = [dataController objectAtIndexPath:indexPath];
     MCPaymentViewController *pvc = [[MCPaymentViewController alloc] initWithExistingPayment:nil fromBill:thisBill];
-    [[self navigationController] pushViewController:pvc animated:YES];
+    UINavigationController *navController = [[UINavigationController alloc] initWithRootViewController:pvc];
+    if ([[UIDevice currentDevice] userInterfaceIdiom] == UIUserInterfaceIdiomPad) {
+        [navController setModalPresentationStyle:UIModalPresentationFormSheet];
+    }
+    [self presentViewController:navController animated:YES completion:nil];
 }
 
 - (void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath

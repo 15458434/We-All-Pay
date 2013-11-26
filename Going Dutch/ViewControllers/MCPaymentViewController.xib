@@ -7,9 +7,9 @@
         <placeholder placeholderIdentifier="IBFilesOwner" id="-1" userLabel="File's Owner" customClass="MCPaymentViewController">
             <connections>
                 <outlet property="dateAndTimeLabel" destination="37" id="46"/>
-                <outlet property="paidView" destination="21" id="45"/>
-                <outlet property="payerView" destination="9" id="44"/>
-                <outlet property="placeView" destination="69" id="136"/>
+                <outlet property="itemView" destination="69" id="prt-Cs-6jC"/>
+                <outlet property="paidView" destination="21" id="v9J-Tt-eKz"/>
+                <outlet property="payerView" destination="9" id="vXj-SM-haV"/>
                 <outlet property="searchDisplayController" destination="52" id="54"/>
                 <outlet property="view" destination="1" id="3"/>
             </connections>
@@ -26,13 +26,13 @@
                         <accessibilityTraits key="traits" none="YES" searchField="YES"/>
                     </accessibility>
                     <fontDescription key="fontDescription" name="HelveticaNeue-Medium" family="Helvetica Neue" pointSize="17"/>
-                    <textInputTraits key="textInputTraits"/>
+                    <textInputTraits key="textInputTraits" autocorrectionType="no" enablesReturnKeyAutomatically="YES"/>
                 </textField>
                 <textField opaque="NO" clipsSubviews="YES" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" borderStyle="roundedRect" placeholder="How much is spent?" minimumFontSize="17" id="21">
                     <rect key="frame" x="20" y="96" width="280" height="30"/>
                     <autoresizingMask key="autoresizingMask" widthSizable="YES" flexibleMaxY="YES"/>
                     <fontDescription key="fontDescription" name="HelveticaNeue-Medium" family="Helvetica Neue" pointSize="17"/>
-                    <textInputTraits key="textInputTraits" keyboardType="decimalPad"/>
+                    <textInputTraits key="textInputTraits" keyboardType="decimalPad" returnKeyType="done" enablesReturnKeyAutomatically="YES"/>
                 </textField>
                 <label opaque="NO" clipsSubviews="YES" userInteractionEnabled="NO" contentMode="left" text="" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" id="37">
                     <rect key="frame" x="20" y="134" width="280" height="21"/>
@@ -45,7 +45,7 @@
                     <rect key="frame" x="20" y="58" width="280" height="30"/>
                     <autoresizingMask key="autoresizingMask" widthSizable="YES" flexibleMaxY="YES"/>
                     <fontDescription key="fontDescription" name="HelveticaNeue-Medium" family="Helvetica Neue" pointSize="17"/>
-                    <textInputTraits key="textInputTraits" autocapitalizationType="sentences" autocorrectionType="yes"/>
+                    <textInputTraits key="textInputTraits" autocapitalizationType="sentences" autocorrectionType="yes" returnKeyType="next" enablesReturnKeyAutomatically="YES"/>
                 </textField>
             </subviews>
             <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>

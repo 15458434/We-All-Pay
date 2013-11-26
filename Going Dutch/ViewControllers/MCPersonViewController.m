@@ -52,7 +52,7 @@
         [[context undoManager] endUndoGrouping];
         [[context undoManager] undoNestedGroup];
     }];
-    [[self navigationController] popViewControllerAnimated:YES];
+    [[[self navigationController] presentingViewController] dismissViewControllerAnimated:YES completion:nil];
 }
 
 - (void)doneButtonPressed:(id)selector
@@ -71,7 +71,7 @@
         [thisPerson setDateModified:[NSDate date]];
         [[context undoManager] endUndoGrouping];
     }];
-    [[self navigationController] popViewControllerAnimated:YES];
+    [[[self navigationController] presentingViewController] dismissViewControllerAnimated:YES completion:nil];
 }
 
 - (void)getSomeone:(id)selector
@@ -84,8 +84,13 @@
     [peoplePicker setPeoplePickerDelegate:personReceiver];
     [peoplePicker setEdgesForExtendedLayout:UIRectEdgeNone];
     [[[peoplePicker viewControllers] objectAtIndex:0] setEdgesForExtendedLayout:UIRectEdgeNone];
-    [MCTools setAdBannerIfNotPaid:[[peoplePicker viewControllers] objectAtIndex:0]];
-    [self presentViewController:peoplePicker animated:YES completion:nil];
+    [peoplePicker setModalPresentationStyle:UIModalPresentationFormSheet];
+    if ([[UIDevice currentDevice] userInterfaceIdiom] == UIUserInterfaceIdiomPad) {
+        [MCTools setAdBannerIfNotPaid:NO forViewController:[[peoplePicker viewControllers] objectAtIndex:0]];
+    } else {
+        [MCTools setAdBannerIfNotPaid:YES forViewController:[[peoplePicker viewControllers] objectAtIndex:0]];
+    }
+    [[self navigationController] presentViewController:peoplePicker animated:YES completion:nil];
 }
 
 - (void)doneEmailPicker:(id)selector
@@ -384,7 +389,13 @@
 {
     [super viewDidLoad];
     
-    [MCTools setAdBannerIfNotPaid:self];
+    // When on iPhone show a banner.
+    if ([[UIDevice currentDevice] userInterfaceIdiom] == UIUserInterfaceIdiomPad) {
+        [MCTools setAdBannerIfNotPaid:NO forViewController:self];
+    } else {
+        [MCTools setAdBannerIfNotPaid:YES forViewController:self];
+    }
+
     [self setEdgesForExtendedLayout:UIRectEdgeNone];
     
     NSManagedObjectContext *context = [[[MCWeAllPayStoreController defaultStore] weAllPayStoreDocument] managedObjectContext];

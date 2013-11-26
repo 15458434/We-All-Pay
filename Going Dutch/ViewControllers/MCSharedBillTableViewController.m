@@ -38,7 +38,11 @@
 - (void)addPayment:(id)sender
 {
     MCPaymentViewController *pvc = [[MCPaymentViewController alloc] initWithExistingPayment:nil fromBill:tonightsBill];
-    [[self navigationController] pushViewController:pvc animated:YES];
+    UINavigationController *navController = [[UINavigationController alloc] initWithRootViewController:pvc];
+    if ([[UIDevice currentDevice] userInterfaceIdiom] == UIUserInterfaceIdiomPad) {
+        [navController setModalPresentationStyle:UIModalPresentationFormSheet];
+    }
+    [self presentViewController:navController animated:YES completion:nil];
 }
 
 - (void)editBillData:(id)sender
@@ -51,7 +55,11 @@
 {
     NSLog(@"%d", [tonightsBill doesEveryoneHaveAnEmailAddress]);
     MCReturnPaymentViewController *rpvc = [[MCReturnPaymentViewController alloc] initWithBill:tonightsBill];
-    [[self navigationController] pushViewController:rpvc animated:YES];
+    UINavigationController *navController = [[UINavigationController alloc] initWithRootViewController:rpvc];
+    if ([[UIDevice currentDevice] userInterfaceIdiom] == UIUserInterfaceIdiomPad) {
+        [navController setModalPresentationStyle:UIModalPresentationFormSheet];
+    }
+    [[self navigationController] presentViewController:navController animated:YES completion:nil];
 }
 
 - (void)shareBill:(id)sender
@@ -60,6 +68,7 @@
         MFMailComposeViewController *mailViewController = [[MFMailComposeViewController alloc] init];
         [mailViewController setMailComposeDelegate:self];
         [mailViewController setEdgesForExtendedLayout:UIRectEdgeNone];
+        [mailViewController setModalPresentationStyle:UIModalPresentationFormSheet];
         [[[mailViewController viewControllers] objectAtIndex:0] setEdgesForExtendedLayout:UIRectEdgeNone];
         NSArray *sda = [NSArray arrayWithObject:[NSSortDescriptor sortDescriptorWithKey:@"dateCreated" ascending:YES]];
         NSArray *allPeople = [[tonightsBill peoplePresent] sortedArrayUsingDescriptors:sda];
@@ -99,9 +108,12 @@
         [mailBody appendFormat:@"\n"];
         [mailBody appendFormat:@"If you have any remarks please let me know.\n"];
         [mailViewController setMessageBody:mailBody isHTML:NO];
-        [self presentViewController:mailViewController animated:YES completion:^{
-            [MCTools setAdBannerIfNotPaid:[[mailViewController viewControllers] objectAtIndex:0]];
-        }];
+        if ([[UIDevice currentDevice] userInterfaceIdiom] == UIUserInterfaceIdiomPad) {
+            [MCTools setAdBannerIfNotPaid:NO forViewController:[[mailViewController viewControllers] objectAtIndex:0]];
+        } else {
+            [MCTools setAdBannerIfNotPaid:YES forViewController:[[mailViewController viewControllers] objectAtIndex:0]];
+        }
+        [[self navigationController] presentViewController:mailViewController animated:YES completion:nil];
     } else {
         NSLog(@"Not everyone has an email address");
         UIAlertView *mailAddressesMissing = [[UIAlertView alloc] initWithTitle:@"Unable to send email to all people."
@@ -252,7 +264,7 @@
     [super viewDidLoad];
     
     [self setEdgesForExtendedLayout:UIRectEdgeNone];
-    [MCTools setAdBannerIfNotPaid:self];
+    [MCTools setAdBannerIfNotPaid:YES forViewController:self];
     
     // Load nib for PaymentTableViewCell and register it to the TableView.
     UINib *nib = [UINib nibWithNibName:@"MCPaymentTableViewCell" bundle:nil];
@@ -485,7 +497,11 @@
 {
     MCPaymentViewController *pvc = [[MCPaymentViewController alloc] initWithExistingPayment:[dataController objectAtIndexPath:indexPath] fromBill:tonightsBill];
     [pvc setDelegate:self];
-    [[self navigationController] pushViewController:pvc animated:YES];
+    UINavigationController *navController = [[UINavigationController alloc] initWithRootViewController:pvc];
+    if ([[UIDevice currentDevice] userInterfaceIdiom] == UIUserInterfaceIdiomPad) {
+        [navController setModalPresentationStyle:UIModalPresentationFormSheet];
+    }
+    [[self navigationController] presentViewController:navController animated:YES completion:nil];
 }
 
 @end

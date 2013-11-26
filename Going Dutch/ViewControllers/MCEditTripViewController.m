@@ -42,7 +42,11 @@
     MCPersonViewController *pvc = [[MCPersonViewController alloc] initWithPerson:newPerson];
     [pvc setIsNew:YES];
     [pvc setTonightsBill:tonightsBill];
-    [[self navigationController] pushViewController:pvc animated:YES];
+    UINavigationController *navController = [[UINavigationController alloc] initWithRootViewController:pvc];
+    if ([[UIDevice currentDevice] userInterfaceIdiom] == UIUserInterfaceIdiomPad) {
+        [navController setModalPresentationStyle:UIModalPresentationFormSheet];
+    }
+    [[self navigationController] presentViewController:navController animated:YES completion:nil];
 }
 
 - (void)doneAddingPeople:(id)selector
@@ -111,9 +115,15 @@
     [peoplePicker setPeoplePickerDelegate:personReceiver];
     [peoplePicker setEdgesForExtendedLayout:UIRectEdgeNone];
     [[[peoplePicker viewControllers] objectAtIndex:0] setEdgesForExtendedLayout:UIRectEdgeNone];
-    [self presentViewController:peoplePicker animated:YES completion:^{
-        [MCTools setAdBannerIfNotPaid:[[peoplePicker viewControllers] objectAtIndex:0]];
-    }];
+    [peoplePicker setModalPresentationStyle:UIModalPresentationFormSheet];
+    
+    // Show adBanner on the iPhone not on the iPad.
+    if ([[UIDevice currentDevice] userInterfaceIdiom] == UIUserInterfaceIdiomPad) {
+        [MCTools setAdBannerIfNotPaid:NO forViewController:[[peoplePicker viewControllers] objectAtIndex:0]];
+    } else {
+        [MCTools setAdBannerIfNotPaid:YES forViewController:[[peoplePicker viewControllers] objectAtIndex:0]];
+    }
+    [[self navigationController] presentViewController:peoplePicker animated:YES completion:nil];
 }
 
 - (IBAction)changeNameOfTrip:(id)sender {
@@ -257,7 +267,7 @@
     // self.navigationItem.rightBarButtonItem = self.editButtonItem;
     
     [self setEdgesForExtendedLayout:UIRectEdgeNone];
-    [MCTools setAdBannerIfNotPaid:self];
+    [MCTools setAdBannerIfNotPaid:YES forViewController:self];
     
     [[[[[MCWeAllPayStoreController defaultStore] weAllPayStoreDocument] managedObjectContext] undoManager] enableUndoRegistration];
     
@@ -553,7 +563,11 @@
     [pvc setTonightsBill:tonightsBill];
     [pvc setChangeFlagDelegate:self];
     [pvc setIsNew:NO];
-    [[self navigationController] pushViewController:pvc animated:YES];
+    UINavigationController *navController = [[UINavigationController alloc] initWithRootViewController:pvc];
+    if ([[UIDevice currentDevice] userInterfaceIdiom] == UIUserInterfaceIdiomPad) {
+        [navController setModalPresentationStyle:UIModalPresentationFormSheet];
+    }
+    [[self navigationController] presentViewController:navController animated:YES completion:nil];
 }
 
 @end
