@@ -28,12 +28,12 @@
     return [NSURL fileURLWithPath:[documentDirectory stringByAppendingPathComponent:fileName]];
 }
 
-+ (void)setAdBannerIfNotPaid:(UIViewController *)viewController
++ (void)setAdBannerIfNotPaid:(BOOL)show forViewController:(UIViewController *)viewController
 {
     /*if (![[[UIDevice currentDevice] model] isEqualToString:@"iPad"]) {
         [viewController setCanDisplayBannerAds:YES];
     }*/
-    [viewController setCanDisplayBannerAds:YES];
+    [viewController setCanDisplayBannerAds:show];
 }
 
 @end

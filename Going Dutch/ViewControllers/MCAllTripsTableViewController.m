@@ -103,7 +103,7 @@
     if (self) {
         [[self navigationItem] setTitle:@"Back"];
         
-        [MCTools setAdBannerIfNotPaid:self];
+        [MCTools setAdBannerIfNotPaid:YES forViewController:self];
     }
     return self;
 }

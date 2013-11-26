@@ -109,7 +109,11 @@
         [mailBody appendFormat:@"If you have any remarks please let me know.\n"];
         [mailViewController setMessageBody:mailBody isHTML:NO];
         [[self navigationController] presentViewController:mailViewController animated:YES completion:^{
-            [MCTools setAdBannerIfNotPaid:[[mailViewController viewControllers] objectAtIndex:0]];
+            if ([[UIDevice currentDevice] userInterfaceIdiom] == UIUserInterfaceIdiomPad) {
+                [MCTools setAdBannerIfNotPaid:NO forViewController:[[mailViewController viewControllers] objectAtIndex:0]];
+            } else {
+                [MCTools setAdBannerIfNotPaid:YES forViewController:[[mailViewController viewControllers] objectAtIndex:0]];
+            }
         }];
     } else {
         NSLog(@"Not everyone has an email address");
@@ -261,7 +265,7 @@
     [super viewDidLoad];
     
     [self setEdgesForExtendedLayout:UIRectEdgeNone];
-    [MCTools setAdBannerIfNotPaid:self];
+    [MCTools setAdBannerIfNotPaid:YES forViewController:self];
     
     // Load nib for PaymentTableViewCell and register it to the TableView.
     UINib *nib = [UINib nibWithNibName:@"MCPaymentTableViewCell" bundle:nil];

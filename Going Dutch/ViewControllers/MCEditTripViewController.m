@@ -117,7 +117,7 @@
     [[[peoplePicker viewControllers] objectAtIndex:0] setEdgesForExtendedLayout:UIRectEdgeNone];
     [peoplePicker setModalPresentationStyle:UIModalPresentationFormSheet];
     [[self navigationController] presentViewController:peoplePicker animated:YES completion:^{
-        [MCTools setAdBannerIfNotPaid:[[peoplePicker viewControllers] objectAtIndex:0]];
+        [MCTools setAdBannerIfNotPaid:YES forViewController:[[peoplePicker viewControllers] objectAtIndex:0]];
     }];
 }
 
@@ -262,7 +262,7 @@
     // self.navigationItem.rightBarButtonItem = self.editButtonItem;
     
     [self setEdgesForExtendedLayout:UIRectEdgeNone];
-    [MCTools setAdBannerIfNotPaid:self];
+    [MCTools setAdBannerIfNotPaid:YES forViewController:self];
     
     [[[[[MCWeAllPayStoreController defaultStore] weAllPayStoreDocument] managedObjectContext] undoManager] enableUndoRegistration];
     

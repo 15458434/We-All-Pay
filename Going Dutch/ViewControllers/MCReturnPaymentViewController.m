@@ -90,7 +90,12 @@
     // self.navigationItem.rightBarButtonItem = self.editButtonItem;
     
     [self setEdgesForExtendedLayout:UIRectEdgeNone];
-    [MCTools setAdBannerIfNotPaid:self];
+    
+    if ([[UIDevice currentDevice] userInterfaceIdiom] == UIUserInterfaceIdiomPad) {
+        [MCTools setAdBannerIfNotPaid:NO forViewController:self];
+    } else {
+        [MCTools setAdBannerIfNotPaid:YES forViewController:self];
+    }
     
     paymentsAfterwards = [[NSMutableArray alloc] init];
     for (MCReturnPayment *rp in [tonightsBill solveWhoHasToPayWhoFromThisBill]) {
