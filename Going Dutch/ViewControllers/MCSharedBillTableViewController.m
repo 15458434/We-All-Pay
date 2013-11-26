@@ -108,13 +108,12 @@
         [mailBody appendFormat:@"\n"];
         [mailBody appendFormat:@"If you have any remarks please let me know.\n"];
         [mailViewController setMessageBody:mailBody isHTML:NO];
-        [[self navigationController] presentViewController:mailViewController animated:YES completion:^{
-            if ([[UIDevice currentDevice] userInterfaceIdiom] == UIUserInterfaceIdiomPad) {
-                [MCTools setAdBannerIfNotPaid:NO forViewController:[[mailViewController viewControllers] objectAtIndex:0]];
-            } else {
-                [MCTools setAdBannerIfNotPaid:YES forViewController:[[mailViewController viewControllers] objectAtIndex:0]];
-            }
-        }];
+        if ([[UIDevice currentDevice] userInterfaceIdiom] == UIUserInterfaceIdiomPad) {
+            [MCTools setAdBannerIfNotPaid:NO forViewController:[[mailViewController viewControllers] objectAtIndex:0]];
+        } else {
+            [MCTools setAdBannerIfNotPaid:YES forViewController:[[mailViewController viewControllers] objectAtIndex:0]];
+        }
+        [[self navigationController] presentViewController:mailViewController animated:YES completion:nil];
     } else {
         NSLog(@"Not everyone has an email address");
         UIAlertView *mailAddressesMissing = [[UIAlertView alloc] initWithTitle:@"Unable to send email to all people."

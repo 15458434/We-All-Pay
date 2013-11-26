@@ -30,11 +30,11 @@
             ignoreCount = "0"
             continueAfterRunningActions = "No"
             filePath = "Going Dutch/ViewControllers/MCPersonViewController.m"
-            timestampString = "407156865.837635"
+            timestampString = "407159586.140327"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "137"
-            endingLineNumber = "137"
+            startingLineNumber = "139"
+            endingLineNumber = "139"
             landmarkName = "-textFieldDidBeginEditing:"
             landmarkType = "5">
          </BreakpointContent>
@@ -46,11 +46,11 @@
             ignoreCount = "0"
             continueAfterRunningActions = "No"
             filePath = "Going Dutch/ViewControllers/MCPersonViewController.m"
-            timestampString = "407156865.837635"
+            timestampString = "407159586.140327"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "160"
-            endingLineNumber = "160"
+            startingLineNumber = "162"
+            endingLineNumber = "162"
             landmarkName = "-textFieldDidBeginEditing:"
             landmarkType = "5">
          </BreakpointContent>
@@ -62,11 +62,11 @@
             ignoreCount = "0"
             continueAfterRunningActions = "No"
             filePath = "Going Dutch/ViewControllers/MCEditTripViewController.m"
-            timestampString = "406908484.483558"
+            timestampString = "407159586.140327"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "435"
-            endingLineNumber = "435"
+            startingLineNumber = "440"
+            endingLineNumber = "440"
             landmarkName = "-controller:didChangeObject:atIndexPath:forChangeType:newIndexPath:"
             landmarkType = "5">
          </BreakpointContent>
@@ -108,11 +108,11 @@
             ignoreCount = "0"
             continueAfterRunningActions = "No"
             filePath = "Going Dutch/ViewControllers/MCPersonViewController.m"
-            timestampString = "407156865.837635"
+            timestampString = "407159586.140327"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "215"
-            endingLineNumber = "215"
+            startingLineNumber = "217"
+            endingLineNumber = "217"
             landmarkName = "-textFieldDidEndEditing:"
             landmarkType = "5">
          </BreakpointContent>
@@ -156,11 +156,11 @@
             ignoreCount = "0"
             continueAfterRunningActions = "No"
             filePath = "Going Dutch/ViewControllers/MCPersonViewController.m"
-            timestampString = "407156865.837635"
+            timestampString = "407159586.140327"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "175"
-            endingLineNumber = "175"
+            startingLineNumber = "177"
+            endingLineNumber = "177"
             landmarkName = "-textFieldDidEndEditing:"
             landmarkType = "5">
          </BreakpointContent>

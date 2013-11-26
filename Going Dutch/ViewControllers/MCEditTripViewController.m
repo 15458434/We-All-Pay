@@ -116,9 +116,14 @@
     [peoplePicker setEdgesForExtendedLayout:UIRectEdgeNone];
     [[[peoplePicker viewControllers] objectAtIndex:0] setEdgesForExtendedLayout:UIRectEdgeNone];
     [peoplePicker setModalPresentationStyle:UIModalPresentationFormSheet];
-    [[self navigationController] presentViewController:peoplePicker animated:YES completion:^{
+    
+    // Show adBanner on the iPhone not on the iPad.
+    if ([[UIDevice currentDevice] userInterfaceIdiom] == UIUserInterfaceIdiomPad) {
+        [MCTools setAdBannerIfNotPaid:NO forViewController:[[peoplePicker viewControllers] objectAtIndex:0]];
+    } else {
         [MCTools setAdBannerIfNotPaid:YES forViewController:[[peoplePicker viewControllers] objectAtIndex:0]];
-    }];
+    }
+    [[self navigationController] presentViewController:peoplePicker animated:YES completion:nil];
 }
 
 - (IBAction)changeNameOfTrip:(id)sender {
