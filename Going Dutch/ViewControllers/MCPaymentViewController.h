@@ -25,7 +25,7 @@
 
 @interface MCPaymentViewController : MCCancelDoneViewController <UIPickerViewDataSource, UIPickerViewDelegate, UITextFieldDelegate>
 {
-    UIBarButtonItem *doneButton;
+    UIBarButtonItem *theDoneButton;
     UIBarButtonItem *cancelChangesForEntirePaymentButton;
     MCTwoLabelsTitleView *twoLabelTitleView;
     

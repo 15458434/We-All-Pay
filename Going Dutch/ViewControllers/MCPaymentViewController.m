@@ -310,11 +310,11 @@
         }
         [[self navigationItem] setTitleView:twoLabelTitleView];
     }
-    doneButton = [[UIBarButtonItem alloc] initWithBarButtonSystemItem:UIBarButtonSystemItemDone
+    theDoneButton = [[UIBarButtonItem alloc] initWithBarButtonSystemItem:UIBarButtonSystemItemDone
                                                                target:self
                                                                action:@selector(backButtonPressed:)];
     if (![[self navigationItem] rightBarButtonItem]) {
-        [[self navigationItem] setRightBarButtonItem:doneButton];
+        [[self navigationItem] setRightBarButtonItem:theDoneButton];
     }
     [[[self navigationItem] rightBarButtonItem] setEnabled:didSomethingChange];
     cancelChangesForEntirePaymentButton = [[UIBarButtonItem alloc] initWithBarButtonSystemItem:UIBarButtonSystemItemCancel target:self action:@selector(cancelChangesForEntirePayment:)];
@@ -390,10 +390,10 @@
     cancelButton = [[UIBarButtonItem alloc] initWithBarButtonSystemItem:UIBarButtonSystemItemCancel
                                                                  target:self
                                                                  action:@selector(cancelNumberPad:)];
-    doneButton = [[UIBarButtonItem alloc] initWithBarButtonSystemItem:UIBarButtonSystemItemDone
+    theDoneButton = [[UIBarButtonItem alloc] initWithBarButtonSystemItem:UIBarButtonSystemItemDone
                                                                target:self
                                                                action:@selector(doneNumberPad:)];
-    [inputAccossoryNumberPad setItems:[[NSArray alloc] initWithObjects:cancelButton, flexButton, doneButton, nil] animated:YES];
+    [inputAccossoryNumberPad setItems:[[NSArray alloc] initWithObjects:cancelButton, flexButton, theDoneButton, nil] animated:YES];
     [paidView setInputAccessoryView:inputAccossoryNumberPad];
     [paidView setDelegate:self];
 
