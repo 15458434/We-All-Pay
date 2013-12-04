@@ -8,7 +8,7 @@
 
 #import "MCPaymentViewController.h"
 #import "MCPayment+addons.h"
-#import "MCPerson+addons.h"    
+#import "MCPerson+addons.h"
 #import "MCSharedBill+addons.h"
 #import "MCWeAllPayStoreController.h"
 #import "MCTwoLabelsTitleView.h"
@@ -44,7 +44,7 @@
 - (void)backButtonPressed:(id)selector
 {
     NSLog(@"backButtonPresses wordt uitgevoerd.");
-
+    
     self.switchInputField = NO;
     if ([payerView isFirstResponder]) {
         [self donePersonPicker:self];
@@ -94,7 +94,7 @@
     [tonightsBill setDateModified:nu];
     [thisPayment setDateModified:nu];
     [[[self navigationItem] rightBarButtonItem] setEnabled:YES];
-    [itemView becomeFirstResponder];
+    //[itemView becomeFirstResponder];
 }
 
 - (void)cancelNumberPad:(id)selector
@@ -139,7 +139,7 @@
 - (void)storeMoneySpent
 {
     NSNumberFormatter *nf = [[NSNumberFormatter alloc] init];
-
+    
     [nf setNumberStyle:NSNumberFormatterDecimalStyle];
     [thisPayment setMoney:[nf numberFromString:[paidView text]]];
     
@@ -203,6 +203,14 @@
 
 #pragma mark - UITextFieldDelegate
 
+- (BOOL)textFieldShouldReturn:(UITextField *)textField
+{
+    if (textField == itemView) {
+        [self storePlaceViewData];
+    }
+    return YES;
+}
+
 - (void)textFieldDidBeginEditing:(UITextField *)textField
 {
     if (textField == paidView) {
@@ -236,17 +244,12 @@
 - (BOOL)textFieldShouldBeginEditing:(UITextField *)textField
 {
     /*if ([payerView isFirstResponder] || [paidView isFirstResponder] || [itemView isFirstResponder]) {
-        [self setSwitchInputField:YES];
-        return YES;
-    } else {
-        self.switchInputField = NO;
-        return YES;
-    }*/
-    return YES;
-}
-
-- (BOOL)textFieldShouldReturn:(UITextField *)textField
-{
+     [self setSwitchInputField:YES];
+     return YES;
+     } else {
+     self.switchInputField = NO;
+     return YES;
+     }*/
     return YES;
 }
 
@@ -261,7 +264,7 @@
         /*[self storeMoneySpent];*/
     } else if (textField == payerView) {
         [self donePersonPicker:self];
-
+        
     } else if (textField == itemView) {
         // Do something to store value of placeview.
         [self storePlaceViewData];
@@ -287,7 +290,7 @@
 {
     [super viewDidAppear:animated];
     
-
+    
 }
 
 - (void)viewWillAppear:(BOOL)animated
@@ -341,7 +344,7 @@
 {
     [super viewDidLoad];
     // Do any additional setup after loading the view from its nib.
-        
+    
     [self setWillShowButtons:NO];
     
     // Prepare the switch input mechanism.
@@ -396,9 +399,14 @@
     [inputAccossoryNumberPad setItems:[[NSArray alloc] initWithObjects:cancelButton, flexButton, theDoneButton, nil] animated:YES];
     [paidView setInputAccessoryView:inputAccossoryNumberPad];
     [paidView setDelegate:self];
-
+    
     [itemView setDelegate:self];
     
+}
+
+- (BOOL)disablesAutomaticKeyboardDismissal
+{
+    return NO;
 }
 
 - (void)didReceiveMemoryWarning
