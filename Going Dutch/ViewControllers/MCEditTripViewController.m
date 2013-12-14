@@ -171,9 +171,9 @@
 - (void)updateSubLabel
 {
     if ([[dataController fetchedObjects] count] == 1) {
-        [[twoLabelTitleView subLabel] setText:[NSString stringWithFormat:@"%lu person present", [[dataController fetchedObjects] count]]];
+        [[twoLabelTitleView subLabel] setText:[NSString stringWithFormat:@"%lu person present", (unsigned long)[[dataController fetchedObjects] count]]];
     } else {
-        [[twoLabelTitleView subLabel] setText:[NSString stringWithFormat:@"%lu people present", [[dataController fetchedObjects] count]]];
+        [[twoLabelTitleView subLabel] setText:[NSString stringWithFormat:@"%lu people present", (unsigned long)[[dataController fetchedObjects] count]]];
     }
     if (SYSTEM_VERSION_LESS_THAN(@"7.0")) {
         [[twoLabelTitleView mainLabel] setTextColor:[UIColor whiteColor]];

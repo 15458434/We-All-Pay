@@ -159,7 +159,7 @@
     if (!emailAddresses) {
         NSLog(@"Something went wrong on fetching emailAddresses: %@", [error localizedDescription]);
     } else if ([emailAddresses count] != 1) {
-        NSLog(@"%lu defaultEmailAddresses found.", [emailAddresses count]);
+        NSLog(@"%lu defaultEmailAddresses found.", (unsigned long)[emailAddresses count]);
     }
     return [emailAddresses firstObject];
 }
