@@ -435,9 +435,9 @@
     MCPayment *thisCellsPayment = [dataController objectAtIndexPath:indexPath];
     MCPaymentTableViewCell *paymentCell = [tableView dequeueReusableCellWithIdentifier:@"MCPaymentTableViewCell"];
     
-    [[paymentCell namePayerLabel] setText:[[thisCellsPayment payingPerson] getFullName]];
+    [[paymentCell namePayerLabel] setText:[NSString stringWithFormat:@"%@ paid", [[thisCellsPayment payingPerson] getFullName]]];
     [[paymentCell pictureOfPayer] setImage:[[thisCellsPayment payingPerson] thumbnail]];
-    [[paymentCell whatPaidLabel] setText:[thisCellsPayment descriptionOfPayment]];
+    [[paymentCell whatPaidLabel] setText:[NSString stringWithFormat:@"for %@", [thisCellsPayment descriptionOfPayment]]];
     NSNumberFormatter *nf = [[NSNumberFormatter alloc] init];
     [nf setNumberStyle:NSNumberFormatterCurrencyStyle];
     [[paymentCell moneyPaidLabel] setText:[nf stringFromNumber:[thisCellsPayment money]]];
@@ -492,6 +492,11 @@
 */
 
 #pragma mark - Table view delegate
+
+- (CGFloat)tableView:(UITableView *)tableView heightForRowAtIndexPath:(NSIndexPath *)indexPath
+{
+    return 50;
+}
 
 - (void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath
 {
