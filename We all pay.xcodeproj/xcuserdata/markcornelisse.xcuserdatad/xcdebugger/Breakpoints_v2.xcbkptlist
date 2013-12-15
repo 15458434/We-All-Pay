@@ -78,11 +78,11 @@
             ignoreCount = "0"
             continueAfterRunningActions = "No"
             filePath = "Going Dutch/ViewControllers/MCAllTripsTableViewController.m"
-            timestampString = "408806939.562644"
+            timestampString = "408811008.232063"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "341"
-            endingLineNumber = "341">
+            startingLineNumber = "351"
+            endingLineNumber = "351">
          </BreakpointContent>
       </BreakpointProxy>
       <BreakpointProxy

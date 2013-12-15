@@ -332,4 +332,14 @@
     [self.navigationController pushViewController:tonightsTripView animated:YES];
 }
 
+#pragma mark - UIStoryboard
+
+- (void)prepareForSegue:(UIStoryboardSegue *)segue sender:(id)sender
+{
+    MCSharedBill *theBill;
+    if ([[segue destinationViewController] respondsToSelector:@selector(setTonightsBill:)]) {
+        [[segue destinationViewController] setTonightsBill:theBill];
+    }
+}
+
 @end
