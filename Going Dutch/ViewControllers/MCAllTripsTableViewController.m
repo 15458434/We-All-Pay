@@ -58,6 +58,10 @@
     }];
 }
 
+- (IBAction)addTripActionHeader:(id)sender {
+    [self addTrip:self];
+}
+
 #pragma mark - New in this class.
 
 - (void)setDataController
@@ -141,7 +145,7 @@
                                                                          target:self
                                                                          action:@selector(addTrip:)];
     [self setToolbarItems:[NSArray arrayWithObjects:flexButton, bbi, nil] animated:YES];
-    [[self navigationController] setToolbarHidden:NO animated:YES];
+    [[self navigationController] setToolbarHidden:YES animated:YES];
 }
 
 - (void)viewDidDisappear:(BOOL)animated
@@ -303,6 +307,8 @@
 */
 
 #pragma mark - Table view delegate
+
+
 
 - (CGFloat)tableView:(UITableView *)tableView heightForRowAtIndexPath:(NSIndexPath *)indexPath
 {

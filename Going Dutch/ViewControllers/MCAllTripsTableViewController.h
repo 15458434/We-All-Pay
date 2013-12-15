@@ -22,5 +22,7 @@
 }
 
 - (void)addTrip:(id)sender;
+- (IBAction)addTripActionHeader:(id)sender;
+
 
 @end
