@@ -160,11 +160,11 @@
     [super viewDidLoad];
     
     [self setEdgesForExtendedLayout:UIRectEdgeNone];
+    [MCTools setAdBannerIfNotPaid:YES forViewController:self];
     
     if (!dataController) {
         [self setDataController];
     }
-    
     
     // Load the nib file
     UINib *nib = [UINib nibWithNibName:@"MCAllTripsTableViewCell" bundle:nil];
