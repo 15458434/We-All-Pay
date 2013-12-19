@@ -74,7 +74,7 @@
     [[self navigationItem] setTitle:[[NSString alloc] initWithFormat:@"To pay: %@", [nf stringFromNumber:averagePay]]];
 
     UIBarButtonItem *backButton = [[UIBarButtonItem alloc] initWithBarButtonSystemItem:UIBarButtonSystemItemCancel target:self action:@selector(mainCancelButtonPressed:)];
-    [[self navigationItem] setLeftBarButtonItem:backButton];
+    [[self navigationItem] setRightBarButtonItem:backButton];
     
     [[self navigationController] setToolbarHidden:YES animated:animated];
 }
