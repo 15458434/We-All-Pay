@@ -7,6 +7,7 @@
 //
 
 #import "MCReturnPaymentViewController.h"
+#import "MCSharedBillTableViewController.h"
 #import "MCSharedBill+addons.h"
 #import "MCReturnPayment.h"
 #import "MCPerson+addons.h"
@@ -20,10 +21,16 @@
 @implementation MCReturnPaymentViewController
 
 @synthesize tonightsBill;
+@synthesize sendMailObject;
 
 #pragma mark - Actions
 
-- (void)mainCancelButtonPressed:(id)selector
+- (IBAction)sendAsEmailButtonPressed:(id)sender
+{
+    [sendMailObject shareBill:self];
+}
+
+- (IBAction)mainCancelButtonPressed:(id)sender
 {
     [[[self navigationController] presentingViewController] dismissViewControllerAnimated:YES completion:nil];
 }
@@ -39,7 +46,7 @@
             @throw [NSException exceptionWithName:@"InitWithNil" reason:@"thisBill is not allowed to point to nil." userInfo:nil];
         }
         tonightsBill = thisBill;
-        [self setWillShowButtons:NO];
+
     }
     return self;
 }
@@ -72,11 +79,6 @@
         [[twoLabelTitleView subLabel] setTextColor:[UIColor whiteColor]];
     }
     [[self navigationItem] setTitle:[[NSString alloc] initWithFormat:@"To pay: %@", [nf stringFromNumber:averagePay]]];
-
-    UIBarButtonItem *backButton = [[UIBarButtonItem alloc] initWithBarButtonSystemItem:UIBarButtonSystemItemCancel target:self action:@selector(mainCancelButtonPressed:)];
-    [[self navigationItem] setRightBarButtonItem:backButton];
-    
-    [[self navigationController] setToolbarHidden:YES animated:animated];
 }
 
 - (void)viewDidLoad
@@ -88,6 +90,8 @@
  
     // Uncomment the following line to display an Edit button in the navigation bar for this view controller.
     // self.navigationItem.rightBarButtonItem = self.editButtonItem;
+    
+    [self setWillShowButtons:NO];
     
     [self setEdgesForExtendedLayout:UIRectEdgeNone];
     

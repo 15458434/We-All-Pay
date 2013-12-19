@@ -14,16 +14,21 @@
 @class MCSharedBill;
 @class MCTwoLabelsTitleView;
 
+@class MCSharedBillTableViewController;
+
 @interface MCReturnPaymentViewController : MCCancelDoneTableViewController
 {
-    MCSharedBill *tonightsBill;
     NSMutableArray *paymentsAfterwards;
     
     __strong IBOutlet MCTwoLabelsTitleView *twoLabelTitleView;
 }
 
+- (IBAction)sendAsEmailButtonPressed:(id)sender;
+- (IBAction)mainCancelButtonPressed:(id)sender;
+
 - (id)initWithBill:(MCSharedBill *)thisBill;
 
 @property (nonatomic, strong) MCSharedBill *tonightsBill;
+@property (nonatomic, weak) MCSharedBillTableViewController *sendMailObject;
 
 @end

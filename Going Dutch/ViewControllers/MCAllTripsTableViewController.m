@@ -38,6 +38,7 @@
 	}
 }
 
+/*
 - (void)addTrip:(id)sender
 {
     NSLog(@"AddTripPressed");
@@ -57,6 +58,7 @@
         //[[self navigationController] pushViewController:tvc animated:YES];
     }];
 }
+ */
 
 - (IBAction)addTripActionHeader:(id)sender {
     [self addTrip:self];

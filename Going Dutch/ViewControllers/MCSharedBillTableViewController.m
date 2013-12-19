@@ -61,7 +61,7 @@
     [[self navigationController] presentViewController:navController animated:YES completion:nil];
 }
 
-- (void)openMailView:(id)sender
+- (void)openMailView:(id)sender;
 {
     MFMailComposeViewController *mailViewController = [[MFMailComposeViewController alloc] init];
     [mailViewController setMailComposeDelegate:self];
@@ -138,7 +138,8 @@
 
 #pragma mark - New in this class.
 
-- (id)initWithSharedBill:(MCSharedBill *)tBill
+/*
+ - (id)initWithSharedBill:(MCSharedBill *)tBill
 {
     self = [super initWithStyle:UITableViewStyleGrouped];
     
@@ -153,6 +154,7 @@
     }
     return self;
 }
+*/
 
 - (void)updateSubLabel
 {
@@ -228,31 +230,7 @@
     
     [self updateSubLabel];
     [[self navigationItem] setTitleView:twoLabelTitleView];
-    
-    [[self navigationController] setToolbarHidden:NO animated:YES];
-    UIBarButtonItem *shareButton = [[UIBarButtonItem alloc] initWithImage:[UIImage imageNamed:@"mail icon"]
-                                                                    style:UIBarButtonItemStylePlain
-                                                                   target:self
-                                                                   action:@selector(shareBill:)];
-    UIBarButtonItem *flexibleSpace = [[UIBarButtonItem alloc] initWithBarButtonSystemItem:UIBarButtonSystemItemFlexibleSpace
-                                                                                   target:nil
-                                                                                   action:nil];
-
-    UIBarButtonItem *solveButton = [[UIBarButtonItem alloc] initWithImage:[UIImage imageNamed:@"toolbar is sign"]
-                                                                    style:UIBarButtonItemStylePlain
-                                                                   target:self
-                                                                   action:@selector(showWhoPaysWho:)];
-    NSArray *bottomButtonArray;
-    if ([MFMailComposeViewController canSendMail]) {
-        bottomButtonArray = [[NSArray alloc] initWithObjects:shareButton, flexibleSpace, solveButton, flexibleSpace, nil];
-        mailButton = shareButton;
-        returnPaymentButton = solveButton;
-    } else {
-        bottomButtonArray = [[NSArray alloc] initWithObjects:flexibleSpace, flexibleSpace, solveButton, flexibleSpace, nil];
-        returnPaymentButton = solveButton;
-    }
-    [self setToolbarItems:bottomButtonArray animated:YES];
-    [self updateToolbarButtons];
+    [[self navigationController] setToolbarHidden:NO];
 }
 
 - (void)viewDidAppear:(BOOL)animated
@@ -514,6 +492,20 @@
         [navController setModalPresentationStyle:UIModalPresentationFormSheet];
     }
     [[self navigationController] presentViewController:navController animated:YES completion:nil];
+}
+
+#pragma mark - Storyboard stuff
+
+- (void)prepareForSegue:(UIStoryboardSegue *)segue sender:(id)sender
+{
+    if ([[segue destinationViewController] respondsToSelector:@selector(setTonightsBill)]) {
+        NSLog(@"prepareForSegue");
+        [[segue destinationViewController] setTonightsBill:tonightsBill];
+    }
+    if ([[segue destinationViewController] respondsToSelector:@selector(setSendMailObject)]) {
+        NSLog(@"prepareForSegue2");
+        [[segue destinationViewController] setSendMailObject:self];
+    }
 }
 
 @end

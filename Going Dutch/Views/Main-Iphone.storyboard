@@ -120,13 +120,36 @@
         <scene sceneID="608-i5-b2Z">
             <objects>
                 <tableViewController storyboardIdentifier="MCReturnPaymentViewController" useStoryboardIdentifierAsRestorationIdentifier="YES" id="Wal-rm-jmd" customClass="MCReturnPaymentViewController" sceneMemberID="viewController">
-                    <tableView key="view" opaque="NO" clipsSubviews="YES" clearsContextBeforeDrawing="NO" contentMode="scaleToFill" alwaysBounceVertical="YES" dataMode="prototypes" style="plain" separatorStyle="default" rowHeight="44" sectionHeaderHeight="22" sectionFooterHeight="22" id="zpp-aB-s1w">
+                    <tableView key="view" opaque="NO" clipsSubviews="YES" clearsContextBeforeDrawing="NO" contentMode="scaleToFill" alwaysBounceVertical="YES" dataMode="prototypes" style="plain" separatorStyle="default" allowsSelection="NO" rowHeight="44" sectionHeaderHeight="22" sectionFooterHeight="22" id="zpp-aB-s1w">
                         <rect key="frame" x="0.0" y="0.0" width="320" height="568"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                        <view key="tableHeaderView" contentMode="scaleToFill" restorationIdentifier="sendEmailButtonView" id="kmK-CE-AdT" customClass="UITableViewHeaderFooterView">
+                            <rect key="frame" x="0.0" y="64" width="320" height="70"/>
+                            <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                            <subviews>
+                                <button opaque="NO" contentMode="scaleToFill" misplaced="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="ROW-vp-ekh">
+                                    <rect key="frame" x="112" y="20" width="97" height="30"/>
+                                    <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                                    <state key="normal" title="Send as email">
+                                        <color key="titleShadowColor" white="0.5" alpha="1" colorSpace="calibratedWhite"/>
+                                    </state>
+                                    <connections>
+                                        <action selector="sendAsEmailButtonPressed:" destination="Wal-rm-jmd" eventType="touchUpInside" id="ykl-BS-3Wc"/>
+                                    </connections>
+                                </button>
+                            </subviews>
+                            <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="calibratedWhite"/>
+                            <constraints>
+                                <constraint firstAttribute="trailing" relation="lessThanOrEqual" secondItem="ROW-vp-ekh" secondAttribute="trailing" constant="20" symbolic="YES" id="Qbn-bl-Ii1"/>
+                                <constraint firstItem="ROW-vp-ekh" firstAttribute="leading" relation="lessThanOrEqual" secondItem="kmK-CE-AdT" secondAttribute="leading" constant="20" symbolic="YES" id="fRp-ka-yWr"/>
+                                <constraint firstItem="ROW-vp-ekh" firstAttribute="top" secondItem="kmK-CE-AdT" secondAttribute="top" constant="20" id="ipA-bX-VvO"/>
+                                <constraint firstAttribute="bottom" secondItem="ROW-vp-ekh" secondAttribute="bottom" constant="20" id="vZv-JN-GPw"/>
+                            </constraints>
+                        </view>
                         <prototypes>
                             <tableViewCell contentMode="scaleToFill" selectionStyle="blue" hidesAccessoryWhenEditing="NO" indentationLevel="1" indentationWidth="0.0" id="VgN-oW-rR3">
-                                <rect key="frame" x="0.0" y="86" width="320" height="44"/>
+                                <rect key="frame" x="0.0" y="156" width="320" height="44"/>
                                 <autoresizingMask key="autoresizingMask"/>
                                 <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" tableViewCell="VgN-oW-rR3" id="ag3-d7-1gk">
                                     <rect key="frame" x="0.0" y="0.0" width="320" height="43"/>
@@ -139,7 +162,13 @@
                             <outlet property="delegate" destination="Wal-rm-jmd" id="uFT-bB-DdA"/>
                         </connections>
                     </tableView>
-                    <navigationItem key="navigationItem" id="cWM-Oj-MA0"/>
+                    <navigationItem key="navigationItem" id="cWM-Oj-MA0">
+                        <barButtonItem key="rightBarButtonItem" systemItem="cancel" id="Fxs-Kw-Mmm">
+                            <connections>
+                                <action selector="mainCancelButtonPressed:" destination="Wal-rm-jmd" id="XQM-KM-9UT"/>
+                            </connections>
+                        </barButtonItem>
+                    </navigationItem>
                     <nil key="simulatedBottomBarMetrics"/>
                 </tableViewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="Ohk-bB-ROF" userLabel="First Responder" sceneMemberID="firstResponder"/>
