@@ -234,6 +234,15 @@
         [[twoLabelTitleView mainLabel] setText:@"New activity"];
         [[twoLabelTitleView subLabel] setText:@""];
     }
+    
+    if (kABAuthorizationStatusDenied == ABAddressBookGetAuthorizationStatus()) {
+        [addressBookButton setAlpha:0.0];
+        CGRect addPersonButtonRect = [addPersonButton frame];
+        CGRect viewBounds = [[[self tableView] tableHeaderView] bounds];
+        CGPoint newPosition = CGPointMake( (viewBounds.size.width / 2.0) - (addPersonButtonRect.size.width / 2.0), addPersonButtonRect.origin.y);
+        addPersonButtonRect.origin = newPosition;
+        [addPersonButton setFrame:addPersonButtonRect];
+    }
 }
 
 - (void)viewWillDisappear:(BOOL)animated

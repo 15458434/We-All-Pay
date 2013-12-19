@@ -35,8 +35,7 @@
 
 #pragma mark - Actions
 
-- (void)addPayment:(id)sender
-{
+- (IBAction)addPaymentButtonPressed:(id)sender {
     MCPaymentViewController *pvc = [[MCPaymentViewController alloc] initWithExistingPayment:nil fromBill:tonightsBill];
     UINavigationController *navController = [[UINavigationController alloc] initWithRootViewController:pvc];
     if ([[UIDevice currentDevice] userInterfaceIdiom] == UIUserInterfaceIdiomPad) {
@@ -239,20 +238,17 @@
                                                                                    target:nil
                                                                                    action:nil];
 
-    UIBarButtonItem *addButton = [[UIBarButtonItem alloc] initWithBarButtonSystemItem:UIBarButtonSystemItemAdd
-                                                                               target:self
-                                                                               action:@selector(addPayment:)];
     UIBarButtonItem *solveButton = [[UIBarButtonItem alloc] initWithImage:[UIImage imageNamed:@"toolbar is sign"]
                                                                     style:UIBarButtonItemStylePlain
                                                                    target:self
                                                                    action:@selector(showWhoPaysWho:)];
     NSArray *bottomButtonArray;
     if ([MFMailComposeViewController canSendMail]) {
-        bottomButtonArray = [[NSArray alloc] initWithObjects:shareButton, flexibleSpace, solveButton, flexibleSpace, addButton, nil];
+        bottomButtonArray = [[NSArray alloc] initWithObjects:shareButton, flexibleSpace, solveButton, flexibleSpace, nil];
         mailButton = shareButton;
         returnPaymentButton = solveButton;
     } else {
-        bottomButtonArray = [[NSArray alloc] initWithObjects:flexibleSpace, flexibleSpace, solveButton, flexibleSpace, addButton, nil];
+        bottomButtonArray = [[NSArray alloc] initWithObjects:flexibleSpace, flexibleSpace, solveButton, flexibleSpace, nil];
         returnPaymentButton = solveButton;
     }
     [self setToolbarItems:bottomButtonArray animated:YES];

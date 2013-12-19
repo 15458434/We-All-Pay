@@ -18,6 +18,9 @@
 
 @interface MCEditTripViewController : UITableViewController <NSFetchedResultsControllerDelegate, UITextFieldDelegate, UIAlertViewDelegate, MCPersonViewChangeDelegate>
 {
+    __weak IBOutlet UIButton *addressBookButton;    
+    __weak IBOutlet UIButton *addPersonButton;
+    
     IBOutlet UIControl *newTripHeaderView;
     IBOutlet UITextField *tripNameField;
     UIBarButtonItem *doneButton;

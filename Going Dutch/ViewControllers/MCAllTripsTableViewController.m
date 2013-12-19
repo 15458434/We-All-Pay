@@ -163,11 +163,12 @@
         [self setDataController];
     }
     
+    
     // Load the nib file
     UINib *nib = [UINib nibWithNibName:@"MCAllTripsTableViewCell" bundle:nil];
     
     // Register this nib that contains the cell.
-    [[self tableView] registerNib:nib forCellReuseIdentifier:@"MCAllTripsTableViewCell"];
+    [[ self tableView] registerNib:nib forCellReuseIdentifier:@"MCAllTripsTableViewCell"];
 }
 
 - (void)didReceiveMemoryWarning
@@ -328,8 +329,7 @@
 
 - (void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath
 {
-    MCSharedBillTableViewController *tonightsTripView = [[MCSharedBillTableViewController alloc] initWithSharedBill:[dataController objectAtIndexPath:indexPath]];
-    [self.navigationController pushViewController:tonightsTripView animated:YES];
+    [self performSegueWithIdentifier:@"openTonightsBill" sender:self];
 }
 
 #pragma mark - UIStoryboard
@@ -337,6 +337,10 @@
 - (void)prepareForSegue:(UIStoryboardSegue *)segue sender:(id)sender
 {
     MCSharedBill *theBill;
+    NSIndexPath *indexPathOfSelectedRow = [[self tableView] indexPathForSelectedRow];
+    if (indexPathOfSelectedRow) {
+        theBill = [dataController objectAtIndexPath:indexPathOfSelectedRow];
+    }
     if ([[segue destinationViewController] respondsToSelector:@selector(setTonightsBill:)]) {
         [[segue destinationViewController] setTonightsBill:theBill];
     }
