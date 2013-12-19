@@ -29,6 +29,7 @@
 - (void)shareBill:(id)sender;
 
 - (IBAction)addPaymentButtonPressed:(id)sender;
+- (IBAction)mailButtonPressed:(id)sender;
 
 @property (nonatomic, strong) MCSharedBill *tonightsBill;
 @property (nonatomic, readonly) BOOL didSomethingChange;

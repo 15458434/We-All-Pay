@@ -44,6 +44,11 @@
     [self presentViewController:navController animated:YES completion:nil];
 }
 
+- (IBAction)mailButtonPressed:(id)sender
+{
+    [self shareBill:self];
+}
+
 - (void)editBillData:(id)sender
 {
      MCEditTripViewController *tvc = [[MCEditTripViewController alloc] initWithBill:tonightsBill isNew:NO];
