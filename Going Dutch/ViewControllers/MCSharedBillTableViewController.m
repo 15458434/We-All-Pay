@@ -64,7 +64,7 @@
 - (void)openMailView:(id)sender;
 {
     MFMailComposeViewController *mailViewController = [[MFMailComposeViewController alloc] init];
-    [mailViewController setMailComposeDelegate:self];
+    [mailViewController setMailComposeDelegate:sender];
     [mailViewController setEdgesForExtendedLayout:UIRectEdgeNone];
     [mailViewController setModalPresentationStyle:UIModalPresentationFormSheet];
     [[[mailViewController viewControllers] objectAtIndex:0] setEdgesForExtendedLayout:UIRectEdgeNone];
@@ -113,13 +113,17 @@
     } else {
         [MCTools setAdBannerIfNotPaid:YES forViewController:[[mailViewController viewControllers] objectAtIndex:0]];
     }
-    [[self navigationController] presentViewController:mailViewController animated:YES completion:nil];
+    if (sender!=self) {
+        [sender presentViewController:mailViewController animated:YES completion:nil];
+    } else {
+        [[self navigationController] presentViewController:mailViewController animated:YES completion:nil];
+    }
 }
 
 - (void)shareBill:(id)sender
 {
     if ([tonightsBill doesEveryoneHaveAnEmailAddress]) {
-        [self openMailView:self];
+        [self openMailView:sender];
     } else {
         NSLog(@"Not everyone has an email address");
         UIAlertView *mailAddressesMissing = [[UIAlertView alloc] initWithTitle:@"Unable to send email to all people."
@@ -498,13 +502,11 @@
 
 - (void)prepareForSegue:(UIStoryboardSegue *)segue sender:(id)sender
 {
-    if ([[segue destinationViewController] respondsToSelector:@selector(setTonightsBill)]) {
-        NSLog(@"prepareForSegue");
-        [[segue destinationViewController] setTonightsBill:tonightsBill];
+    if ([[[[segue destinationViewController] viewControllers] objectAtIndex:0] respondsToSelector:@selector(setTonightsBill:)]) {
+        [[[[segue destinationViewController] viewControllers] objectAtIndex:0] setTonightsBill:tonightsBill];
     }
-    if ([[segue destinationViewController] respondsToSelector:@selector(setSendMailObject)]) {
-        NSLog(@"prepareForSegue2");
-        [[segue destinationViewController] setSendMailObject:self];
+    if ([[[[segue destinationViewController] viewControllers] objectAtIndex:0] respondsToSelector:@selector(setSendMailObject:)]) {
+        [[[[segue destinationViewController] viewControllers] objectAtIndex:0] setSendMailObject:self];
     }
 }
 

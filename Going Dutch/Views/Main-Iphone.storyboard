@@ -104,7 +104,7 @@
                         <barButtonItem image="toolbar is sign.png" id="DYe-sU-xma">
                             <connections>
                                 <action selector="showSolvedMoneyProblem:" destination="iz5-ZP-pZr" id="kxq-wW-zU7"/>
-                                <segue destination="xE7-4k-wb6" kind="modal" identifier="showSolvedMoneyProblem" id="ZwP-zn-icq"/>
+                                <segue destination="HxE-bK-sSq" kind="modal" identifier="openSolution" id="1WY-OR-gfx"/>
                             </connections>
                         </barButtonItem>
                         <barButtonItem style="plain" systemItem="flexibleSpace" id="wXa-go-EbV"/>
@@ -121,11 +121,11 @@
             <objects>
                 <tableViewController storyboardIdentifier="MCReturnPaymentViewController" useStoryboardIdentifierAsRestorationIdentifier="YES" id="Wal-rm-jmd" customClass="MCReturnPaymentViewController" sceneMemberID="viewController">
                     <tableView key="view" opaque="NO" clipsSubviews="YES" clearsContextBeforeDrawing="NO" contentMode="scaleToFill" alwaysBounceVertical="YES" dataMode="prototypes" style="plain" separatorStyle="default" allowsSelection="NO" rowHeight="44" sectionHeaderHeight="22" sectionFooterHeight="22" id="zpp-aB-s1w">
-                        <rect key="frame" x="0.0" y="0.0" width="320" height="568"/>
+                        <rect key="frame" x="0.0" y="64" width="320" height="504"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                         <view key="tableHeaderView" contentMode="scaleToFill" restorationIdentifier="sendEmailButtonView" id="kmK-CE-AdT" customClass="UITableViewHeaderFooterView">
-                            <rect key="frame" x="0.0" y="64" width="320" height="70"/>
+                            <rect key="frame" x="0.0" y="0.0" width="320" height="70"/>
                             <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                             <subviews>
                                 <button opaque="NO" contentMode="scaleToFill" misplaced="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="ROW-vp-ekh">
@@ -148,10 +148,10 @@
                             </constraints>
                         </view>
                         <prototypes>
-                            <tableViewCell contentMode="scaleToFill" selectionStyle="blue" hidesAccessoryWhenEditing="NO" indentationLevel="1" indentationWidth="0.0" id="VgN-oW-rR3">
-                                <rect key="frame" x="0.0" y="156" width="320" height="44"/>
+                            <tableViewCell contentMode="scaleToFill" selectionStyle="blue" hidesAccessoryWhenEditing="NO" indentationLevel="1" indentationWidth="0.0" id="AeB-PX-SS3">
+                                <rect key="frame" x="0.0" y="92" width="320" height="44"/>
                                 <autoresizingMask key="autoresizingMask"/>
-                                <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" tableViewCell="VgN-oW-rR3" id="ag3-d7-1gk">
+                                <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" tableViewCell="AeB-PX-SS3">
                                     <rect key="frame" x="0.0" y="0.0" width="320" height="43"/>
                                     <autoresizingMask key="autoresizingMask"/>
                                 </tableViewCellContentView>
@@ -169,11 +169,12 @@
                             </connections>
                         </barButtonItem>
                     </navigationItem>
+                    <simulatedNavigationBarMetrics key="simulatedTopBarMetrics" translucent="NO" prompted="NO"/>
                     <nil key="simulatedBottomBarMetrics"/>
                 </tableViewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="Ohk-bB-ROF" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="2313" y="683"/>
+            <point key="canvasLocation" x="2314" y="684"/>
         </scene>
         <!--Edit Trip View Controller-->
         <scene sceneID="oI0-bg-Ai3">
@@ -292,22 +293,22 @@
             <point key="canvasLocation" x="1262" y="-1"/>
         </scene>
         <!--Navigation Controller-->
-        <scene sceneID="EvU-gL-U6K">
+        <scene sceneID="qWC-0I-5hi">
             <objects>
-                <navigationController automaticallyAdjustsScrollViewInsets="NO" id="xE7-4k-wb6" sceneMemberID="viewController">
+                <navigationController automaticallyAdjustsScrollViewInsets="NO" id="HxE-bK-sSq" sceneMemberID="viewController">
                     <toolbarItems/>
-                    <navigationBar key="navigationBar" contentMode="scaleToFill" id="oyA-8J-igc">
+                    <navigationBar key="navigationBar" contentMode="scaleToFill" id="vuj-va-uXf">
                         <rect key="frame" x="0.0" y="0.0" width="320" height="44"/>
                         <autoresizingMask key="autoresizingMask"/>
                     </navigationBar>
                     <nil name="viewControllers"/>
                     <connections>
-                        <segue destination="Wal-rm-jmd" kind="relationship" relationship="rootViewController" id="QLT-gh-g32"/>
+                        <segue destination="Wal-rm-jmd" kind="relationship" relationship="rootViewController" id="fjZ-Yl-IVR"/>
                     </connections>
                 </navigationController>
-                <placeholder placeholderIdentifier="IBFirstResponder" id="1Ml-g7-SbS" userLabel="First Responder" sceneMemberID="firstResponder"/>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="WYW-P2-ana" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="1787" y="683"/>
+            <point key="canvasLocation" x="1788" y="684"/>
         </scene>
     </scenes>
     <resources>

@@ -119,6 +119,21 @@
     // Dispose of any resources that can be recreated.
 }
 
+#pragma mark - MFMailComposeViewControllerDelegate
+
+- (void)mailComposeController:(MFMailComposeViewController *)controller didFinishWithResult:(MFMailComposeResult)result error:(NSError *)error
+{
+    if (result == MFMailComposeResultCancelled) {
+        [[self presentedViewController] dismissViewControllerAnimated:YES completion:nil];
+    } else if (result == MFMailComposeResultSent) {
+        [[self presentedViewController] dismissViewControllerAnimated:YES completion:nil];
+    } else if (result == MFMailComposeResultSaved) {
+        [[self presentedViewController] dismissViewControllerAnimated:YES completion:nil];
+    } else {
+        NSLog(@"Something went wrong: %@", [error localizedDescription]);
+    }
+}
+
 #pragma mark - Table view data source
 
 - (NSInteger)numberOfSectionsInTableView:(UITableView *)tableView
