@@ -166,6 +166,11 @@
     return self;
 }
 
+- (void)updateMainLabel
+{
+    [[twoLabelTitleView mainLabel] setText:[tonightsBill tripName]];
+}
+
 - (void)updateSubLabel
 {
     if ([[dataController fetchedObjects] count] == 1) {
@@ -400,6 +405,7 @@
 -(void)textFieldDidEndEditing:(UITextField *)textField
 {
     [tonightsBill setTripName:[textField text]];
+    [self updateMainLabel];
     NSDate *nu = [NSDate date];
     [tonightsBill setDateModified:nu];
     if (!didSomethingChange) {
