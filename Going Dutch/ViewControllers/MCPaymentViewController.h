@@ -40,6 +40,8 @@
     NSArray *listOfPeople;
 }
 
+
+
 @property (nonatomic, strong) MCPayment *thisPayment;
 @property (nonatomic, readonly) MCSharedBill *tonightsBill;
 @property (nonatomic, readonly) BOOL didSomethingChange;

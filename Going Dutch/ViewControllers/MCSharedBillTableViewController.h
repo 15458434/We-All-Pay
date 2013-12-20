@@ -28,7 +28,6 @@
 //- (id)initWithSharedBill:(MCSharedBill *)tBill;
 - (void)shareBill:(id)sender;
 
-- (IBAction)addPaymentButtonPressed:(id)sender;
 - (IBAction)mailButtonPressed:(id)sender;
 
 @property (nonatomic, strong) MCSharedBill *tonightsBill;

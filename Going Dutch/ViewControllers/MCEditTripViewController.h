@@ -23,7 +23,7 @@
     
     IBOutlet UIControl *newTripHeaderView;
     IBOutlet UITextField *tripNameField;
-    UIBarButtonItem *doneButton;
+    IBOutlet UIBarButtonItem *doneButton;
     __strong IBOutlet MCTwoLabelsTitleView *twoLabelTitleView;
     
     NSFetchedResultsController *dataController;

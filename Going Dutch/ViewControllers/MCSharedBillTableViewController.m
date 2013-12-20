@@ -35,15 +35,6 @@
 
 #pragma mark - Actions
 
-- (IBAction)addPaymentButtonPressed:(id)sender {
-    MCPaymentViewController *pvc = [[MCPaymentViewController alloc] initWithExistingPayment:nil fromBill:tonightsBill];
-    UINavigationController *navController = [[UINavigationController alloc] initWithRootViewController:pvc];
-    if ([[UIDevice currentDevice] userInterfaceIdiom] == UIUserInterfaceIdiomPad) {
-        [navController setModalPresentationStyle:UIModalPresentationFormSheet];
-    }
-    [self presentViewController:navController animated:YES completion:nil];
-}
-
 - (IBAction)mailButtonPressed:(id)sender
 {
     [self shareBill:self];

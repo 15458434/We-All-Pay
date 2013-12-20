@@ -357,7 +357,7 @@
     }];
     
     // If tonight's bill was passed along.
-    if (!isNew) {
+    if (tonightsBill) {
         [[self navigationController] setToolbarHidden:NO animated:YES];
         UIBarButtonItem *deleteButton = [[UIBarButtonItem alloc] initWithBarButtonSystemItem:UIBarButtonSystemItemTrash
                                                                                       target:self
@@ -365,6 +365,7 @@
         [self setToolbarItems:[[NSArray alloc] initWithObjects:deleteButton, nil] animated:YES];
         [[self navigationController] setToolbarHidden:NO animated:YES];
     } else {
+        tonightsBill = [MCSharedBill addSharedBill];
         [[self navigationController] setToolbarHidden:YES animated:YES];
     }
     

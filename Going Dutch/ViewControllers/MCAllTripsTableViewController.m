@@ -114,6 +114,7 @@
     }
     
     [[self tableView] reloadData];
+    [[self navigationController] setToolbarHidden:YES];
 }
 
 - (void)viewDidDisappear:(BOOL)animated

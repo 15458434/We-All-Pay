@@ -78,11 +78,11 @@
             ignoreCount = "0"
             continueAfterRunningActions = "No"
             filePath = "Going Dutch/ViewControllers/MCAllTripsTableViewController.m"
-            timestampString = "409255556.979253"
+            timestampString = "409261772.512041"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "325"
-            endingLineNumber = "325">
+            startingLineNumber = "326"
+            endingLineNumber = "326">
          </BreakpointContent>
       </BreakpointProxy>
       <BreakpointProxy
@@ -242,6 +242,22 @@
             startingLineNumber = "104"
             endingLineNumber = "104"
             landmarkName = "-viewDidLoad"
+            landmarkType = "5">
+         </BreakpointContent>
+      </BreakpointProxy>
+      <BreakpointProxy
+         BreakpointExtensionID = "Xcode.Breakpoint.FileBreakpoint">
+         <BreakpointContent
+            shouldBeEnabled = "Yes"
+            ignoreCount = "0"
+            continueAfterRunningActions = "No"
+            filePath = "Going Dutch/ViewControllers/MCEditTripViewController.m"
+            timestampString = "409262768.817506"
+            startingColumnNumber = "9223372036854775807"
+            endingColumnNumber = "9223372036854775807"
+            startingLineNumber = "113"
+            endingLineNumber = "113"
+            landmarkName = "-cancelButtonPressed:"
             landmarkType = "5">
          </BreakpointContent>
       </BreakpointProxy>
