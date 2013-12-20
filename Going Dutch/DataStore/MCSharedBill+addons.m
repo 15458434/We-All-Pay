@@ -107,6 +107,13 @@
     [self setPeoplePresent:mutableListOfPeople];
 }
 
+- (MCPerson *)addPerson
+{
+    MCPerson *newPerson = [MCPerson addPerson];
+    [newPerson addSharedBillObject:self];
+    return newPerson;
+}
+
 - (BOOL)areTherePeople
 {
     if ([[self peoplePresent] count] == 0) {

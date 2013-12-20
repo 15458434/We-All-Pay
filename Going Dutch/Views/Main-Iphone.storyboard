@@ -269,6 +269,7 @@
                     <connections>
                         <outlet property="addPersonButton" destination="gfv-ln-Tgv" id="kQ0-08-UfA"/>
                         <outlet property="addressBookButton" destination="AlH-w9-wjE" id="xCM-aT-d8k"/>
+                        <outlet property="doneButton" destination="G6p-BM-1mu" id="1Hx-np-ia5"/>
                         <outlet property="tripNameField" destination="BJS-wA-qlM" id="mRl-pt-rEN"/>
                     </connections>
                 </tableViewController>
@@ -329,7 +330,18 @@
                         </subviews>
                         <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="calibratedWhite"/>
                     </view>
-                    <navigationItem key="navigationItem" id="Mk3-cw-HW7"/>
+                    <navigationItem key="navigationItem" id="Mk3-cw-HW7">
+                        <barButtonItem key="leftBarButtonItem" systemItem="cancel" id="oJb-TP-76X">
+                            <connections>
+                                <action selector="cancelButtonPressed:" destination="X5i-vZ-dYW" id="6tQ-2E-XRC"/>
+                            </connections>
+                        </barButtonItem>
+                        <barButtonItem key="rightBarButtonItem" systemItem="done" id="7Pt-zo-ZpA">
+                            <connections>
+                                <action selector="doneButtonPressed:" destination="X5i-vZ-dYW" id="D1N-Zu-jf8"/>
+                            </connections>
+                        </barButtonItem>
+                    </navigationItem>
                     <connections>
                         <outlet property="emailField" destination="4YY-Cv-Jxg" id="fKA-0D-uQj"/>
                         <outlet property="firstNameField" destination="Tln-WZ-m8Z" id="wmK-IR-h3f"/>

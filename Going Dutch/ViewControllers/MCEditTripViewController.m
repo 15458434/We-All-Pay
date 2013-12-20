@@ -139,33 +139,6 @@
 
 #pragma mark - new in this class.
 
-- (UIView *)NewTripHeaderView
-{
-    if (!newTripHeaderView) {
-        [[NSBundle mainBundle] loadNibNamed:@"NewTripHeaderView" owner:self options:nil];
-    }
-    return newTripHeaderView;
-}
-
-- (id)initWithBill:(MCSharedBill *)newBill isNew:(BOOL)isNew
-{
-    self = [super initWithStyle:UITableViewStyleGrouped];
-    
-    if (self) {
-        if (newBill) {
-            tonightsBill = newBill;
-        } else {
-            @throw [NSException exceptionWithName:@"Nil"
-                                           reason:@"Tonightsbill not allowed to be nil"
-                                         userInfo:nil];
-        }
-        isInitAsNew = isNew;
-        cancelPressed = NO;
-        didSomethingChange = NO;
-    }
-    return self;
-}
-
 - (void)updateMainLabel
 {
     [[twoLabelTitleView mainLabel] setText:[tonightsBill tripName]];
@@ -547,16 +520,31 @@
 
 - (void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath
 {
-    MCPerson *selectedPerson = [dataController objectAtIndexPath:indexPath];
-    MCPersonViewController *pvc = [[MCPersonViewController alloc] initWithPerson:selectedPerson];
-    [pvc setTonightsBill:tonightsBill];
-    [pvc setChangeFlagDelegate:self];
-    [pvc setIsNew:NO];
-    UINavigationController *navController = [[UINavigationController alloc] initWithRootViewController:pvc];
-    if ([[UIDevice currentDevice] userInterfaceIdiom] == UIUserInterfaceIdiomPad) {
-        [navController setModalPresentationStyle:UIModalPresentationFormSheet];
+    [self performSegueWithIdentifier:@"openEditPerson" sender:self];
+}
+
+#pragma mark - UIStoryboard
+
+- (void)prepareForSegue:(UIStoryboardSegue *)segue sender:(id)sender
+{
+    MCPerson *thePerson;
+    if ([[[[segue destinationViewController] viewControllers] objectAtIndex:0] respondsToSelector:@selector(setChangeFlagDelegate:)]) {
+        [[[[segue destinationViewController] viewControllers] objectAtIndex:0] setChangeFlagDelegate:self];
     }
-    [[self navigationController] presentViewController:navController animated:YES completion:nil];
+    if ([[[[segue destinationViewController] viewControllers] objectAtIndex:0] respondsToSelector:@selector(setTonightsBill:)]) {
+        [[[[segue destinationViewController] viewControllers] objectAtIndex:0] setTonightsBill:tonightsBill];
+    }
+    NSIndexPath *indexPathOfSelectedRow = [[self tableView] indexPathForSelectedRow];
+    if (indexPathOfSelectedRow) {
+        thePerson = [dataController objectAtIndexPath:indexPathOfSelectedRow];
+        if ([[[[segue destinationViewController] viewControllers] objectAtIndex:0] respondsToSelector:@selector(setIsNew:)]) {
+            [[[[segue destinationViewController] viewControllers] objectAtIndex:0] setIsNew:NO];
+        }
+    }
+    if ([[[[segue destinationViewController] viewControllers] objectAtIndex:0] respondsToSelector:@selector(setThisPerson:)]) {
+        [[[[segue destinationViewController] viewControllers] objectAtIndex:0] setThisPerson:thePerson];
+    }
+    
 }
 
 @end

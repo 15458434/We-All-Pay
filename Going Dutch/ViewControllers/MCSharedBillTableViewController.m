@@ -42,8 +42,7 @@
 
 - (void)editBillData:(id)sender
 {
-     MCEditTripViewController *tvc = [[MCEditTripViewController alloc] initWithBill:tonightsBill isNew:NO];
-    [[self navigationController] pushViewController:tvc animated:YES];
+    [self performSegueWithIdentifier:@"openTripInfo" sender:self];
 }
 
 - (void)showWhoPaysWho:(id)sender

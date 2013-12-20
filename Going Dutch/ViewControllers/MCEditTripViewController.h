@@ -21,7 +21,6 @@
     __weak IBOutlet UIButton *addressBookButton;    
     __weak IBOutlet UIButton *addPersonButton;
     
-    IBOutlet UIControl *newTripHeaderView;
     IBOutlet UITextField *tripNameField;
     IBOutlet UIBarButtonItem *doneButton;
     __strong IBOutlet MCTwoLabelsTitleView *twoLabelTitleView;
@@ -37,9 +36,6 @@
 @property (nonatomic, copy) void (^dismissOnDone)(void);
 @property (nonatomic, copy) void (^dismissOnCancel)(void);
 @property (nonatomic, readonly) BOOL didSomethingChange;
-
-- (id)initWithBill:(MCSharedBill *)newBill isNew:(BOOL)isNew;
-- (UIView *)NewTripHeaderView;
 
 - (IBAction)changeNameOfTrip:(id)sender;
 - (IBAction)dismissKeyboard:(id)sender;

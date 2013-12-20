@@ -24,6 +24,7 @@
 @synthesize tonightsBill;
 @synthesize changeFlagDelegate;
 @synthesize isNew;
+@synthesize thisPerson;
 
 #pragma mark - Actions
 
@@ -44,7 +45,7 @@
     }
 }
 
-- (void)cancelButtonPressed:(id)selector
+- (IBAction)cancelButtonPressed:(id)sender
 {
     //[[[[MCWeAllPayStoreController defaultStore] weAllPayStoreDocument] managedObjectContext] rollback];
     NSManagedObjectContext *context = [[[MCWeAllPayStoreController defaultStore] weAllPayStoreDocument] managedObjectContext];
@@ -55,7 +56,7 @@
     [[[self navigationController] presentingViewController] dismissViewControllerAnimated:YES completion:nil];
 }
 
-- (void)doneButtonPressed:(id)selector
+- (IBAction)doneButtonPressed:(id)sender
 {
     if (isNew && (ABAddressBookGetAuthorizationStatus() == kABAuthorizationStatusDenied || ABAddressBookGetAuthorizationStatus() == kABAuthorizationStatusNotDetermined)) {
         if ([firstNameField isFirstResponder]) {
@@ -395,45 +396,20 @@
     } else {
         [MCTools setAdBannerIfNotPaid:YES forViewController:self];
     }
-
-    [self setEdgesForExtendedLayout:UIRectEdgeNone];
     
     NSManagedObjectContext *context = [[[MCWeAllPayStoreController defaultStore] weAllPayStoreDocument] managedObjectContext];
     [[context undoManager] beginUndoGrouping];
     
     [self prepareDataController];
     
-    // Check to see if thisPerson has paid something.
-    if ([tonightsBill hasPersonPaidSomething:thisPerson]) {
+    if (!thisPerson) {
+        thisPerson = [tonightsBill addPerson];
+        thisPersonHasPaidSomething = NO;
+    } else if ([tonightsBill hasPersonPaidSomething:thisPerson]) { // Check to see if thisPerson has paid something.
         thisPersonHasPaidSomething = YES;
     } else {
         thisPersonHasPaidSomething = NO;
     }
-    
-    if (kABAuthorizationStatusAuthorized == ABAddressBookGetAuthorizationStatus()) {
-        
-        [firstNameField setEnabled:NO];
-        [lastNameField setEnabled:NO];
-        
-        addressBookButton = [[UIBarButtonItem alloc] initWithBarButtonSystemItem:UIBarButtonSystemItemBookmarks
-                                                                          target:self
-                                                                          action:@selector(getSomeone:)];
-        UIBarButtonItem *flexSpace = [[UIBarButtonItem alloc] initWithBarButtonSystemItem:UIBarButtonSystemItemFlexibleSpace
-                                                                                   target:nil
-                                                                                   action:nil];
-        [self setToolbarItems:[NSArray arrayWithObjects:flexSpace, addressBookButton, nil] animated:NO];
-    }
-    UIBarButtonItem *doneButton = [[UIBarButtonItem alloc] initWithBarButtonSystemItem:UIBarButtonSystemItemDone
-                                                                                target:self
-                                                                                action:@selector(doneButtonPressed:)];
-    [[self navigationItem] setRightBarButtonItem:doneButton];
-    UIBarButtonItem *cancelButton = [[UIBarButtonItem alloc] initWithBarButtonSystemItem:UIBarButtonSystemItemCancel
-                                                                                  target:self
-                                                                                  action:@selector(cancelButtonPressed:)];
-    [[self navigationItem] setLeftBarButtonItem:cancelButton];
-    [firstNameField setDelegate:self];
-    [lastNameField setDelegate:self];
-    [emailField setDelegate:self];
 }
 
 - (void)didReceiveMemoryWarning
