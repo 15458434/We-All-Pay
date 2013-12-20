@@ -38,32 +38,6 @@
 	}
 }
 
-/*
-- (void)addTrip:(id)sender
-{
-    NSLog(@"AddTripPressed");
-    // Create and add new Trip with a test group.
-    MCSharedBill *newTrip = [MCSharedBill addSharedBill];
-    NSLog(@"trip: %@", [newTrip uniqueBillId]);
-    MCSharedBillTableViewController *tvc = [[MCSharedBillTableViewController alloc] initWithSharedBill:newTrip];
-    MCEditTripViewController *etvc = [[MCEditTripViewController alloc] initWithBill:newTrip isNew:YES];
-    UINavigationController *navController = [[UINavigationController alloc] initWithRootViewController:etvc];
-    [etvc setDismissOnDone:^{
-        [[self navigationController] pushViewController:tvc animated:YES];
-    }];
-    [etvc setDismissOnCancel:^{
-        [MCSharedBill deleteSharedbill:newTrip];
-    }];
-    [self presentViewController:navController animated:YES completion:^{
-        //[[self navigationController] pushViewController:tvc animated:YES];
-    }];
-}
- */
-
-- (IBAction)addTripActionHeader:(id)sender {
-    [self addTrip:self];
-}
-
 #pragma mark - New in this class.
 
 - (void)setDataController
@@ -140,14 +114,6 @@
     }
     
     [[self tableView] reloadData];
-    UIBarButtonItem *flexButton = [[UIBarButtonItem alloc] initWithBarButtonSystemItem:UIBarButtonSystemItemFlexibleSpace
-                                                                                target:nil
-                                                                                action:nil];
-    UIBarButtonItem *bbi = [[UIBarButtonItem alloc] initWithBarButtonSystemItem:UIBarButtonSystemItemAdd
-                                                                         target:self
-                                                                         action:@selector(addTrip:)];
-    [self setToolbarItems:[NSArray arrayWithObjects:flexButton, bbi, nil] animated:YES];
-    [[self navigationController] setToolbarHidden:YES animated:YES];
 }
 
 - (void)viewDidDisappear:(BOOL)animated
