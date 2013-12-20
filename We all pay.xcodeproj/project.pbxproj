@@ -56,7 +56,6 @@
 		3898AAE617297F80008F947E /* mail icon.png in Resources */ = {isa = PBXBuildFile; fileRef = 3898AAE417297F80008F947E /* mail icon.png */; };
 		3898AAE717297F80008F947E /* mail icon@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 3898AAE517297F80008F947E /* mail icon@2x.png */; };
 		38CDE90017135B6300387CAA /* MCTools.m in Sources */ = {isa = PBXBuildFile; fileRef = 38CDE8FF17135B6300387CAA /* MCTools.m */; };
-		38D7B68716BABAD900C609B8 /* MCPersonViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = 38D7B68516BABAD900C609B8 /* MCPersonViewController.xib */; };
 		38DB85D417E45BCA006237CF /* MCPayment+addons.m in Sources */ = {isa = PBXBuildFile; fileRef = 38DB85D317E45BCA006237CF /* MCPayment+addons.m */; };
 		38DB85D717E45CA4006237CF /* MCSharedBill+addons.m in Sources */ = {isa = PBXBuildFile; fileRef = 38DB85D617E45CA4006237CF /* MCSharedBill+addons.m */; };
 		38DB85DA17E45DEA006237CF /* MCPerson+addons.m in Sources */ = {isa = PBXBuildFile; fileRef = 38DB85D917E45DEA006237CF /* MCPerson+addons.m */; };
@@ -146,7 +145,6 @@
 		3898AAE517297F80008F947E /* mail icon@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = "mail icon@2x.png"; path = "Going Dutch/icons/mail icon@2x.png"; sourceTree = "<group>"; };
 		38CDE8FE17135B6300387CAA /* MCTools.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = MCTools.h; sourceTree = "<group>"; };
 		38CDE8FF17135B6300387CAA /* MCTools.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = MCTools.m; sourceTree = "<group>"; };
-		38D7B68516BABAD900C609B8 /* MCPersonViewController.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; name = MCPersonViewController.xib; path = ViewControllers/MCPersonViewController.xib; sourceTree = "<group>"; };
 		38DB85D217E45BCA006237CF /* MCPayment+addons.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = "MCPayment+addons.h"; path = "DataStore/MCPayment+addons.h"; sourceTree = "<group>"; };
 		38DB85D317E45BCA006237CF /* MCPayment+addons.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = "MCPayment+addons.m"; path = "DataStore/MCPayment+addons.m"; sourceTree = "<group>"; };
 		38DB85D517E45CA4006237CF /* MCSharedBill+addons.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = "MCSharedBill+addons.h"; path = "DataStore/MCSharedBill+addons.h"; sourceTree = "<group>"; };
@@ -323,7 +321,6 @@
 		38572AF4169D439E00969C62 /* Views */ = {
 			isa = PBXGroup;
 			children = (
-				38D7B68516BABAD900C609B8 /* MCPersonViewController.xib */,
 				3897157617901D0F005BE03E /* MCTextFieldAndLabelTitleView.xib */,
 				3897157417901D0F005BE03E /* MCTextFieldAndLabelTitleView.h */,
 				3897157517901D0F005BE03E /* MCTextFieldAndLabelTitleView.m */,
@@ -479,7 +476,6 @@
 			files = (
 				38572AE1169D437B00969C62 /* InfoPlist.strings in Resources */,
 				385FEE6317CBF77B001013E3 /* Images.xcassets in Resources */,
-				38D7B68716BABAD900C609B8 /* MCPersonViewController.xib in Resources */,
 				38EFF2D616D215FB001C8248 /* MCAllTripsTableViewCell.xib in Resources */,
 				3898AAE21727B50E008F947E /* toolbar is sign.png in Resources */,
 				3898AAE31727B50E008F947E /* toolbar is sign@2x.png in Resources */,
