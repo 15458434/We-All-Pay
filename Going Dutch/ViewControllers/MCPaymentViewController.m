@@ -31,6 +31,7 @@
 {
     NSManagedObjectContext *context = [[[MCWeAllPayStoreController defaultStore] weAllPayStoreDocument] managedObjectContext];
     [context performBlockAndWait:^{
+        [[context undoManager] endUndoGrouping];
         [[context undoManager] disableUndoRegistration];
         if (didSomethingChange) {
             [[context undoManager] undoNestedGroup];
@@ -56,6 +57,7 @@
     if (didSomethingChange) {
         NSManagedObjectContext *context = [[[MCWeAllPayStoreController defaultStore] weAllPayStoreDocument] managedObjectContext];
         [context performBlockAndWait:^{
+            [[context undoManager] endUndoGrouping];
             [[context undoManager] disableUndoRegistration];
             [context processPendingChanges];
         }];
@@ -330,12 +332,14 @@
     NSManagedObjectContext *context = [[[MCWeAllPayStoreController defaultStore] weAllPayStoreDocument] managedObjectContext];
     [context performBlockAndWait:^{
         [[context undoManager] enableUndoRegistration];
+        [[context undoManager] beginUndoGrouping];
     }];
     
     // When thisPayment was not passed along a new one should be created.
     if (!thisPayment) {
         thisPayment = [tonightsBill addPayment];
         isNew = YES;
+        didSomethingChange = YES;
     } else {
         isNew = NO;
     }
