@@ -146,7 +146,7 @@
     return [emailAddress emailAddress];
 }
 
-- (void)setNewDefaultEmailAddressFromAString:(NSString *)newEmailAddressString
+- (void)addNewDefaultEmailAddressFromAString:(NSString *)newEmailAddressString
 {
     MCEmailAddress *oldDefaultEmailAddress = [self getDefaultEmailAddressObject];
     if (oldDefaultEmailAddress) {
