@@ -369,10 +369,7 @@
                                                                                       action:@selector(removePayment:)];
         [self setToolbarItems:[[NSArray alloc] initWithObjects:deleteButton, nil] animated:YES];
         [[self navigationController] setToolbarHidden:NO animated:YES];
-    } /*else {
-        tonightsBill = [MCSharedBill addSharedBill];
-        [[self navigationController] setToolbarHidden:YES animated:YES];
-    }*/
+    } 
     
     // Create Toolbar for the input accessory of payerView
     CGRect toolbarRect = CGRectMake(0, 0, [[self view] bounds].size.width, 44);

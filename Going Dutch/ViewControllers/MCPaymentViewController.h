@@ -43,7 +43,7 @@
 
 
 @property (nonatomic, strong) MCPayment *thisPayment;
-@property (nonatomic, readonly) MCSharedBill *tonightsBill;
+@property (nonatomic, strong) MCSharedBill *tonightsBill;
 @property (nonatomic, readonly) BOOL didSomethingChange;
 @property (nonatomic, readonly) BOOL isNew;
 @property (nonatomic, weak) id delegate;
