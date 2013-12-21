@@ -146,6 +146,17 @@
     return [emailAddress emailAddress];
 }
 
+- (void)setNewDefaultEmailAddressFromAString:(NSString *)newEmailAddressString
+{
+    MCEmailAddress *oldDefaultEmailAddress = [self getDefaultEmailAddressObject];
+    if (oldDefaultEmailAddress) {
+        [oldDefaultEmailAddress setSelected:[NSNumber numberWithBool:NO]];
+    }
+    MCEmailAddress *newEmailAddress = [MCEmailAddress addEmailAddressFor:self];
+    [newEmailAddress setEmailAddress:newEmailAddressString];
+    [newEmailAddress setSelected:[NSNumber numberWithBool:YES]];
+}
+
 - (MCEmailAddress *)getDefaultEmailAddressObject
 {
     NSFetchRequest *request = [NSFetchRequest fetchRequestWithEntityName:@"MCEmailAddress"];
