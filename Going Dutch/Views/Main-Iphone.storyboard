@@ -99,11 +99,6 @@
                         </connections>
                     </tableView>
                     <toolbarItems>
-                        <barButtonItem image="mail icon.png" id="dM6-5Q-fLA">
-                            <connections>
-                                <action selector="mailButtonPressed:" destination="iz5-ZP-pZr" id="OCE-fE-4Ka"/>
-                            </connections>
-                        </barButtonItem>
                         <barButtonItem style="plain" systemItem="flexibleSpace" id="r8r-JF-GS2"/>
                         <barButtonItem image="toolbar is sign.png" id="DYe-sU-xma">
                             <connections>
@@ -528,7 +523,6 @@
         </scene>
     </scenes>
     <resources>
-        <image name="mail icon.png" width="22" height="22"/>
         <image name="toolbar is sign.png" width="22" height="22"/>
     </resources>
     <simulatedMetricsContainer key="defaultSimulatedMetrics">
