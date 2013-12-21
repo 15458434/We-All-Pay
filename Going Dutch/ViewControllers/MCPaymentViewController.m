@@ -77,16 +77,6 @@
     }
 }
 
-- (void)removePayment:(id)selector
-{
-    NSManagedObjectContext *context = [[[MCWeAllPayStoreController defaultStore] weAllPayStoreDocument] managedObjectContext];
-    [context performBlockAndWait:^{
-        [MCPayment deletePayment:thisPayment];
-        [[context undoManager] disableUndoRegistration];
-    }];
-    [[self navigationController] popViewControllerAnimated:YES];
-}
-
 - (void)cancelPersonPicker:(id)selector
 {
     // Set the text of the textView back and resign first responder
@@ -346,21 +336,12 @@
     if (!thisPayment) {
         thisPayment = [tonightsBill addPayment];
         isNew = YES;
-        [[self navigationController] setToolbarHidden:YES animated:YES];
     } else {
         isNew = NO;
-        [[self navigationController] setToolbarHidden:NO animated:YES];
     }
     
-    // If tonight's bill was passed along.
-    if (tonightsBill) {
-        [[self navigationController] setToolbarHidden:NO animated:YES];
-        UIBarButtonItem *deleteButton = [[UIBarButtonItem alloc] initWithBarButtonSystemItem:UIBarButtonSystemItemTrash
-                                                                                      target:self
-                                                                                      action:@selector(removePayment:)];
-        [self setToolbarItems:[[NSArray alloc] initWithObjects:deleteButton, nil] animated:YES];
-        [[self navigationController] setToolbarHidden:NO animated:YES];
-    } else {
+    // If tonight's bill wasn't passed along.
+    if (!tonightsBill) {
         NSLog(@"tonightsBill wasn't passed along.");
         @throw [NSException exceptionWithName:@"tonightsBill missing" reason:@"thisPayment didn't receive tonightsBill." userInfo:nil];
     }
