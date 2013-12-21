@@ -56,6 +56,14 @@
     [[[self navigationController] presentingViewController] dismissViewControllerAnimated:YES completion:nil];
 }
 
+- (IBAction)selectEmailAddressPressed:(id)sender
+{
+    // select the emailField and pop-up it's keyboard with the UIPickerView
+    isSelectEmail = YES;
+    [emailField resignFirstResponder];
+    [emailField becomeFirstResponder];
+}
+
 - (IBAction)doneButtonPressed:(id)sender
 {
     if (isNew && (ABAddressBookGetAuthorizationStatus() == kABAuthorizationStatusDenied || ABAddressBookGetAuthorizationStatus() == kABAuthorizationStatusNotDetermined)) {
@@ -117,59 +125,14 @@
 
 -(BOOL)textFieldShouldBeginEditing:(UITextField *)textField
 {
-    /*
-    if (thisPersonHasPaidSomething) {
-        if (textField == firstNameField || textField == lastNameField) {
-            return NO;
-        } else {
-            return YES;
-        }
-    } else {
-        return YES;
-    }
-     */
     return YES;
 }
 
 - (void)textFieldDidBeginEditing:(UITextField *)textField
 {
     if (textField == emailField) {
-        // Set the UIPickerView as keyboard for the emailfield if Access to the AddressBook is authorized.
-        if (kABAuthorizationStatusAuthorized == ABAddressBookGetAuthorizationStatus() /*&& [[thisPerson emailAddress] count] > 0*/) {
-            NSUInteger indexOfDefaultEmailAddress = [[dataController fetchedObjects] indexOfObject:[thisPerson getDefaultEmailAddressObject]];
-            if (indexOfDefaultEmailAddress < [[dataController fetchedObjects] count]) {
-                CGRect toolbarRect = CGRectMake(0, 0, [[self view] bounds].size.width, 44);
-                UIToolbar *inputAccessoryPickerView = [[UIToolbar alloc] initWithFrame:toolbarRect];
-                UIBarButtonItem *cancelButton = [[UIBarButtonItem alloc] initWithBarButtonSystemItem:UIBarButtonSystemItemCancel
-                                                                                              target:self
-                                                                                              action:@selector(cancelEmailPicker:)];
-                UIBarButtonItem *flexButton = [[UIBarButtonItem alloc] initWithBarButtonSystemItem:UIBarButtonSystemItemFlexibleSpace
-                                                                                            target:nil
-                                                                                            action:nil];
-                UIBarButtonItem *doneButton = [[UIBarButtonItem alloc] initWithBarButtonSystemItem:UIBarButtonSystemItemDone
-                                                                                            target:self
-                                                                                            action:@selector(doneEmailPicker:)];
-                NSArray *buttonArray = [[NSArray alloc] initWithObjects:cancelButton, flexButton, doneButton, nil];
-                [inputAccessoryPickerView setItems:buttonArray animated:YES];
-                if (!emailSelectionFromAddressBookPickerView) {
-                    emailSelectionFromAddressBookPickerView = [[UIPickerView alloc] init];
-                    [emailSelectionFromAddressBookPickerView setDelegate:self];
-                    [emailSelectionFromAddressBookPickerView setDataSource:self];
-                    [emailSelectionFromAddressBookPickerView setShowsSelectionIndicator:YES];
-                    [emailField setInputView:emailSelectionFromAddressBookPickerView];
-                    [emailField setInputAccessoryView:inputAccessoryPickerView];
-                }
-                
-                [emailSelectionFromAddressBookPickerView selectRow:indexOfDefaultEmailAddress inComponent:0 animated:YES];
-                UIToolbar *inputAccossoryNumberPad = [[UIToolbar alloc] initWithFrame:toolbarRect];
-                cancelButton = [[UIBarButtonItem alloc] initWithBarButtonSystemItem:UIBarButtonSystemItemCancel
-                                                                             target:self
-                                                                             action:@selector(cancelNumberPad:)];
-                doneButton = [[UIBarButtonItem alloc] initWithBarButtonSystemItem:UIBarButtonSystemItemDone
-                                                                           target:self
-                                                                           action:@selector(doneNumberPad:)];
-                [inputAccossoryNumberPad setItems:[[NSArray alloc] initWithObjects:cancelButton, flexButton, doneButton, nil] animated:YES];
-            }
+        if (isSelectEmail) {
+            [self prepareEmailFieldAsSelector];
         }
     }
 }
@@ -193,7 +156,10 @@
         [[[self navigationItem] rightBarButtonItem] setEnabled:YES];
         [emailField becomeFirstResponder];
     } else if (textField == emailField) {
-        if (kABAuthorizationStatusDenied == ABAddressBookGetAuthorizationStatus() || kABAuthorizationStatusRestricted == ABAddressBookGetAuthorizationStatus()) {
+        if (!isSelectEmail) {
+            isSelectEmail = YES;
+            [emailField setInputView:nil];
+            [emailField setInputAccessoryView:nil];
             if (isNew) {
                 [thisPerson addOneEmailAddressFromAString:[emailField text]];
             } else {
@@ -203,11 +169,6 @@
                 } else {
                     [defaultEmail setEmailAddress:[emailField text]];
                 }
-            }
-        } else if (kABAuthorizationStatusAuthorized == ABAddressBookGetAuthorizationStatus()) {
-            NSUInteger indexOfDefaultEmailAddress = [[dataController fetchedObjects] indexOfObject:[thisPerson getDefaultEmailAddressObject]];
-            if (indexOfDefaultEmailAddress > [[dataController fetchedObjects] count]) {
-                [thisPerson addOneEmailAddressFromAString:[emailField text]];
             }
         }
         NSDate *nu = [NSDate date];
@@ -325,6 +286,44 @@
     }
 }
 
+- (void)prepareEmailFieldAsSelector
+{
+    NSUInteger indexOfDefaultEmailAddress = [[dataController fetchedObjects] indexOfObject:[thisPerson getDefaultEmailAddressObject]];
+    if (indexOfDefaultEmailAddress < [[dataController fetchedObjects] count]) {
+        CGRect toolbarRect = CGRectMake(0, 0, [[self view] bounds].size.width, 44);
+        UIToolbar *inputAccessoryPickerView = [[UIToolbar alloc] initWithFrame:toolbarRect];
+        UIBarButtonItem *cancelButton = [[UIBarButtonItem alloc] initWithBarButtonSystemItem:UIBarButtonSystemItemCancel
+                                                                                      target:self
+                                                                                      action:@selector(cancelEmailPicker:)];
+        UIBarButtonItem *flexButton = [[UIBarButtonItem alloc] initWithBarButtonSystemItem:UIBarButtonSystemItemFlexibleSpace
+                                                                                    target:nil
+                                                                                    action:nil];
+        UIBarButtonItem *doneButton = [[UIBarButtonItem alloc] initWithBarButtonSystemItem:UIBarButtonSystemItemDone
+                                                                                    target:self
+                                                                                    action:@selector(doneEmailPicker:)];
+        NSArray *buttonArray = [[NSArray alloc] initWithObjects:cancelButton, flexButton, doneButton, nil];
+        [inputAccessoryPickerView setItems:buttonArray animated:YES];
+        if (!emailSelectionFromAddressBookPickerView) {
+            emailSelectionFromAddressBookPickerView = [[UIPickerView alloc] init];
+            [emailSelectionFromAddressBookPickerView setDelegate:self];
+            [emailSelectionFromAddressBookPickerView setDataSource:self];
+            [emailSelectionFromAddressBookPickerView setShowsSelectionIndicator:YES];
+            [emailField setInputView:emailSelectionFromAddressBookPickerView];
+            [emailField setInputAccessoryView:inputAccessoryPickerView];
+        }
+        
+        [emailSelectionFromAddressBookPickerView selectRow:indexOfDefaultEmailAddress inComponent:0 animated:YES];
+        UIToolbar *inputAccossoryNumberPad = [[UIToolbar alloc] initWithFrame:toolbarRect];
+        cancelButton = [[UIBarButtonItem alloc] initWithBarButtonSystemItem:UIBarButtonSystemItemCancel
+                                                                     target:self
+                                                                     action:@selector(cancelNumberPad:)];
+        doneButton = [[UIBarButtonItem alloc] initWithBarButtonSystemItem:UIBarButtonSystemItemDone
+                                                                   target:self
+                                                                   action:@selector(doneNumberPad:)];
+        [inputAccossoryNumberPad setItems:[[NSArray alloc] initWithObjects:cancelButton, flexButton, doneButton, nil] animated:YES];
+    }
+}
+
 #pragma mark - Inherited from super.
 
 - (id)initWithNibName:(NSString *)nibNameOrNil bundle:(NSBundle *)nibBundleOrNil
@@ -361,6 +360,7 @@
     }
     
     [self performFetch];
+    /*
     if (kABAuthorizationStatusAuthorized == ABAddressBookGetAuthorizationStatus()) {
         // When dataController is empty there are no email addresses.
         if ([[dataController fetchedObjects] count] <= 1) {
@@ -371,6 +371,7 @@
             [emailField setEnabled:YES];
         }
     }
+     */
     
     [[[self navigationItem] rightBarButtonItem] setEnabled:didSomethingChange];
     [addressBookButton setEnabled:!thisPersonHasPaidSomething];
@@ -397,6 +398,8 @@
         [MCTools setAdBannerIfNotPaid:YES forViewController:self];
     }
     
+    [[self navigationController] setToolbarHidden:YES];
+    
     NSManagedObjectContext *context = [[[MCWeAllPayStoreController defaultStore] weAllPayStoreDocument] managedObjectContext];
     [[context undoManager] beginUndoGrouping];
     
@@ -413,6 +416,8 @@
     } else {
         thisPersonHasPaidSomething = NO;
     }
+    
+    isSelectEmail = NO;
 }
 
 - (void)didReceiveMemoryWarning

@@ -40,6 +40,7 @@ typedef enum _emailFieldEditStatus {
     
 
     UIPickerView *emailSelectionFromAddressBookPickerView;
+    BOOL isSelectEmail;
     
     MCAddressBookDataReceiver *personReceiver;
     NSFetchedResultsController *dataController;
@@ -60,5 +61,6 @@ typedef enum _emailFieldEditStatus {
 
 - (IBAction)doneButtonPressed:(id)sender;
 - (IBAction)cancelButtonPressed:(id)sender;
+- (IBAction)selectEmailAddressPressed:(id)sender;
 
 @end
