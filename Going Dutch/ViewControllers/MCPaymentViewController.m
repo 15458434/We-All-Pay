@@ -308,17 +308,6 @@
         }
         [[self navigationItem] setTitleView:twoLabelTitleView];
     }
-    /*
-    theDoneButton = [[UIBarButtonItem alloc] initWithBarButtonSystemItem:UIBarButtonSystemItemDone
-                                                               target:self
-                                                               action:@selector(backButtonPressed:)];
-    if (![[self navigationItem] rightBarButtonItem]) {
-        [[self navigationItem] setRightBarButtonItem:theDoneButton];
-    }
-    [[[self navigationItem] rightBarButtonItem] setEnabled:didSomethingChange];
-    cancelChangesForEntirePaymentButton = [[UIBarButtonItem alloc] initWithBarButtonSystemItem:UIBarButtonSystemItemCancel target:self action:@selector(cancelChangesForEntirePayment:)];
-    [[self navigationItem] setLeftBarButtonItem:cancelChangesForEntirePaymentButton];
-     */
     
     // Fill in the form if data is present.
     [payerView setText:[[thisPayment payingPerson] getFullName]];
@@ -357,8 +346,10 @@
     if (!thisPayment) {
         thisPayment = [tonightsBill addPayment];
         isNew = YES;
+        [[self navigationController] setToolbarHidden:YES animated:YES];
     } else {
         isNew = NO;
+        [[self navigationController] setToolbarHidden:NO animated:YES];
     }
     
     // If tonight's bill was passed along.
@@ -369,7 +360,10 @@
                                                                                       action:@selector(removePayment:)];
         [self setToolbarItems:[[NSArray alloc] initWithObjects:deleteButton, nil] animated:YES];
         [[self navigationController] setToolbarHidden:NO animated:YES];
-    } 
+    } else {
+        NSLog(@"tonightsBill wasn't passed along.");
+        @throw [NSException exceptionWithName:@"tonightsBill missing" reason:@"thisPayment didn't receive tonightsBill." userInfo:nil];
+    }
     
     // Create Toolbar for the input accessory of payerView
     CGRect toolbarRect = CGRectMake(0, 0, [[self view] bounds].size.width, 44);
