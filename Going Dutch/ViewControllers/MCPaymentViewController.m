@@ -27,6 +27,42 @@
 
 #pragma mark - action
 
+- (IBAction)mainCancelButtonPressed:(id)sender
+{
+    NSManagedObjectContext *context = [[[MCWeAllPayStoreController defaultStore] weAllPayStoreDocument] managedObjectContext];
+    [context performBlockAndWait:^{
+        [[context undoManager] disableUndoRegistration];
+        if (didSomethingChange) {
+            [[context undoManager] undoNestedGroup];
+        }
+    }];
+    [[[self navigationController] presentingViewController] dismissViewControllerAnimated:YES completion:nil];
+}
+
+- (IBAction)mainDoneButtonPressed:(id)sender
+{
+    NSLog(@"MCPaymentViewController: Done button pressed.");
+    self.switchInputField = NO;
+    if ([payerView isFirstResponder]) {
+        [self donePersonPicker:self];
+    }
+    if ([paidView isFirstResponder]) {
+        [self doneNumberPad:self];
+    }
+    if ([itemView isFirstResponder]) {
+        [self storePlaceViewData];
+    }
+
+    if (didSomethingChange) {
+        NSManagedObjectContext *context = [[[MCWeAllPayStoreController defaultStore] weAllPayStoreDocument] managedObjectContext];
+        [context performBlockAndWait:^{
+            [[context undoManager] disableUndoRegistration];
+            [context processPendingChanges];
+        }];
+    }
+    [[[self navigationController] presentingViewController] dismissViewControllerAnimated:YES completion:nil];
+}
+
 - (IBAction)dismissKeyboard:(id)sender
 {
     if ([itemView isFirstResponder]) {
@@ -39,31 +75,6 @@
     if ([paidView isFirstResponder]) {
         [self cancelNumberPad:self];
     }
-}
-
-- (void)backButtonPressed:(id)selector
-{
-    NSLog(@"backButtonPresses wordt uitgevoerd.");
-    
-    self.switchInputField = NO;
-    if ([payerView isFirstResponder]) {
-        [self donePersonPicker:self];
-    }
-    if ([paidView isFirstResponder]) {
-        [self doneNumberPad:self];
-    }
-    if ([itemView isFirstResponder]) {
-        [self storePlaceViewData];
-    }
-    NSLog(@"MCPaymentViewController: Done button pressed.");
-    if (didSomethingChange) {
-        NSManagedObjectContext *context = [[[MCWeAllPayStoreController defaultStore] weAllPayStoreDocument] managedObjectContext];
-        [context performBlockAndWait:^{
-            [[context undoManager] disableUndoRegistration];
-            [context processPendingChanges];
-        }];
-    }
-    [[[self navigationController] presentingViewController] dismissViewControllerAnimated:YES completion:nil];
 }
 
 - (void)removePayment:(id)selector
@@ -110,22 +121,6 @@
 {
     [self storeMoneySpent];
     [paidView resignFirstResponder];
-}
-
-- (void)cancelChangesForEntirePayment:(id)selector
-{
-    NSLog(@"cancelchangesForEntirePayment.");
-    if (isNew) {
-        [MCPayment deletePayment:thisPayment];
-    }
-    NSManagedObjectContext *context = [[[MCWeAllPayStoreController defaultStore] weAllPayStoreDocument] managedObjectContext];
-    [context performBlockAndWait:^{
-        [[context undoManager] disableUndoRegistration];
-        if (didSomethingChange) {
-            [[context undoManager] undoNestedGroup];
-        }
-    }];
-    [[[self navigationController] presentingViewController] dismissViewControllerAnimated:YES completion:nil];
 }
 
 - (void)storePlaceViewData
@@ -211,6 +206,18 @@
     return YES;
 }
 
+- (BOOL)textFieldShouldBeginEditing:(UITextField *)textField
+{
+    /*if ([payerView isFirstResponder] || [paidView isFirstResponder] || [itemView isFirstResponder]) {
+     [self setSwitchInputField:YES];
+     return YES;
+     } else {
+     self.switchInputField = NO;
+     return YES;
+     }*/
+    return YES;
+}
+
 - (void)textFieldDidBeginEditing:(UITextField *)textField
 {
     if (textField == paidView) {
@@ -239,18 +246,6 @@
         [payerView setText:[[thisPayment payingPerson] getFullName]];
         [personPickerView selectRow:row inComponent:0 animated:YES];
     }
-}
-
-- (BOOL)textFieldShouldBeginEditing:(UITextField *)textField
-{
-    /*if ([payerView isFirstResponder] || [paidView isFirstResponder] || [itemView isFirstResponder]) {
-     [self setSwitchInputField:YES];
-     return YES;
-     } else {
-     self.switchInputField = NO;
-     return YES;
-     }*/
-    return YES;
 }
 
 - (BOOL)textFieldShouldEndEditing:(UITextField *)textField
@@ -313,6 +308,7 @@
         }
         [[self navigationItem] setTitleView:twoLabelTitleView];
     }
+    /*
     theDoneButton = [[UIBarButtonItem alloc] initWithBarButtonSystemItem:UIBarButtonSystemItemDone
                                                                target:self
                                                                action:@selector(backButtonPressed:)];
@@ -322,6 +318,7 @@
     [[[self navigationItem] rightBarButtonItem] setEnabled:didSomethingChange];
     cancelChangesForEntirePaymentButton = [[UIBarButtonItem alloc] initWithBarButtonSystemItem:UIBarButtonSystemItemCancel target:self action:@selector(cancelChangesForEntirePayment:)];
     [[self navigationItem] setLeftBarButtonItem:cancelChangesForEntirePaymentButton];
+     */
     
     // Fill in the form if data is present.
     [payerView setText:[[thisPayment payingPerson] getFullName]];
@@ -356,6 +353,14 @@
         [[context undoManager] enableUndoRegistration];
     }];
     
+    // When thisPayment was not passed along a new one should be created.
+    if (!thisPayment) {
+        thisPayment = [tonightsBill addPayment];
+        isNew = YES;
+    } else {
+        isNew = NO;
+    }
+    
     // If tonight's bill was passed along.
     if (tonightsBill) {
         [[self navigationController] setToolbarHidden:NO animated:YES];
@@ -364,10 +369,10 @@
                                                                                       action:@selector(removePayment:)];
         [self setToolbarItems:[[NSArray alloc] initWithObjects:deleteButton, nil] animated:YES];
         [[self navigationController] setToolbarHidden:NO animated:YES];
-    } else {
+    } /*else {
         tonightsBill = [MCSharedBill addSharedBill];
         [[self navigationController] setToolbarHidden:YES animated:YES];
-    }
+    }*/
     
     // Create Toolbar for the input accessory of payerView
     CGRect toolbarRect = CGRectMake(0, 0, [[self view] bounds].size.width, 44);

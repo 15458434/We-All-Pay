@@ -48,6 +48,9 @@
 @property (nonatomic, readonly) BOOL isNew;
 @property (nonatomic, weak) id delegate;
 
+- (IBAction)mainCancelButtonPressed:(id)sender;
+- (IBAction)mainDoneButtonPressed:(id)sender;
+
 - (id)initWithExistingPayment:(MCPayment *)thePayment fromBill:(MCSharedBill *)bill;
 
 @end

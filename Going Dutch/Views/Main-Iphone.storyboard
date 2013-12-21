@@ -450,14 +450,22 @@
                         <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="calibratedWhite"/>
                     </view>
                     <navigationItem key="navigationItem" id="UEk-pu-Nfg">
-                        <barButtonItem key="leftBarButtonItem" systemItem="cancel" id="gtr-oM-Fq8"/>
-                        <barButtonItem key="rightBarButtonItem" systemItem="done" id="LDD-Pa-DI2"/>
+                        <barButtonItem key="leftBarButtonItem" systemItem="cancel" id="gtr-oM-Fq8">
+                            <connections>
+                                <action selector="mainCancelButtonPressed:" destination="vM4-YK-kO8" id="KED-TC-JLN"/>
+                            </connections>
+                        </barButtonItem>
+                        <barButtonItem key="rightBarButtonItem" systemItem="done" id="LDD-Pa-DI2">
+                            <connections>
+                                <action selector="mainDoneButtonPressed:" destination="vM4-YK-kO8" id="bgp-nC-GOn"/>
+                            </connections>
+                        </barButtonItem>
                     </navigationItem>
                     <connections>
                         <outlet property="dateAndTimeLabel" destination="cvx-xv-4K0" id="dYN-e0-W01"/>
                         <outlet property="itemView" destination="ga1-Zt-7fC" id="WZM-vD-YR6"/>
                         <outlet property="paidView" destination="tHo-ke-Wsb" id="C26-ke-VYd"/>
-                        <outlet property="payerView" destination="1pE-Xb-V7e" id="AR4-HY-P9R"/>
+                        <outlet property="payerView" destination="1pE-Xb-V7e" id="KzA-Ms-SjB"/>
                     </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="5pv-m3-ko6" userLabel="First Responder" sceneMemberID="firstResponder"/>
