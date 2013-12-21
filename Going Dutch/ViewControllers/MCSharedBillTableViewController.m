@@ -484,15 +484,6 @@
 
 - (void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath
 {
-    /*
-    MCPaymentViewController *pvc = [[MCPaymentViewController alloc] initWithExistingPayment:[dataController objectAtIndexPath:indexPath] fromBill:tonightsBill];
-    [pvc setDelegate:self];
-    UINavigationController *navController = [[UINavigationController alloc] initWithRootViewController:pvc];
-    if ([[UIDevice currentDevice] userInterfaceIdiom] == UIUserInterfaceIdiomPad) {
-        [navController setModalPresentationStyle:UIModalPresentationFormSheet];
-    }
-    [[self navigationController] presentViewController:navController animated:YES completion:nil];
-     */
     [self performSegueWithIdentifier:@"openPaymentView" sender:self];
 }
 
@@ -521,6 +512,7 @@
             }
         }
         [[[[segue destinationViewController] viewControllers] objectAtIndex:0] setThisPayment:thePayment];
+        [[[[segue destinationViewController] viewControllers] objectAtIndex:0] setDelegate:self];
     }
 }
 

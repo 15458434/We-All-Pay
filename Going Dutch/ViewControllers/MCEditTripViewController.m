@@ -89,6 +89,7 @@
 }
 
 - (IBAction)addPersonButton:(id)sender {
+    /*
     MCPerson *newPerson = [MCPerson addPerson];
     [newPerson setThumbnailDataFromImage:nil];
     [newPerson setPictureDataFromImage:nil];
@@ -103,6 +104,7 @@
         [navController setModalPresentationStyle:UIModalPresentationFormSheet];
     }
     [[self navigationController] presentViewController:navController animated:YES completion:nil];
+     */
 }
 
 - (IBAction)cancelButtonPressed:(id)sender {
@@ -540,6 +542,11 @@
         if ([[[[segue destinationViewController] viewControllers] objectAtIndex:0] respondsToSelector:@selector(setIsNew:)]) {
             [[[[segue destinationViewController] viewControllers] objectAtIndex:0] setIsNew:NO];
         }
+    } else {
+        if ([[[[segue destinationViewController] viewControllers] objectAtIndex:0] respondsToSelector:@selector(setIsNew:)]) {
+            [[[[segue destinationViewController] viewControllers] objectAtIndex:0] setIsNew:YES];
+        }
+        [doneButton setEnabled:YES];
     }
     if ([[[[segue destinationViewController] viewControllers] objectAtIndex:0] respondsToSelector:@selector(setThisPerson:)]) {
         [[[[segue destinationViewController] viewControllers] objectAtIndex:0] setThisPerson:thePerson];

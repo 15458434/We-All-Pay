@@ -404,6 +404,9 @@
     
     if (!thisPerson) {
         thisPerson = [tonightsBill addPerson];
+        [thisPerson setThumbnailDataFromImage:nil];
+        [thisPerson setPictureDataFromImage:nil];
+        [tonightsBill addPeoplePresentObject:thisPerson];
         thisPersonHasPaidSomething = NO;
     } else if ([tonightsBill hasPersonPaidSomething:thisPerson]) { // Check to see if thisPerson has paid something.
         thisPersonHasPaidSomething = YES;
