@@ -506,6 +506,22 @@
     if ([[[[segue destinationViewController] viewControllers] objectAtIndex:0] respondsToSelector:@selector(setSendMailObject:)]) {
         [[[[segue destinationViewController] viewControllers] objectAtIndex:0] setSendMailObject:self];
     }
+
+    if ([[[[segue destinationViewController] viewControllers] objectAtIndex:0] respondsToSelector:@selector(setThisPayment:)]) {
+        MCPayment *thePayment;
+        NSIndexPath *indexPathOfSelectedRow = [[self tableView] indexPathForSelectedRow];
+        if (indexPathOfSelectedRow) {
+            thePayment = [dataController objectAtIndexPath:indexPathOfSelectedRow];
+        }
+        if ([[[[segue destinationViewController] viewControllers] objectAtIndex:0] respondsToSelector:@selector(setIsNew:)]) {
+            if (thePayment) {
+                [[[[segue destinationViewController] viewControllers] objectAtIndex:0] setIsNew:YES];
+            } else {
+                [[[[segue destinationViewController] viewControllers] objectAtIndex:0] setIsNew:NO];
+            }
+        }
+        [[[[segue destinationViewController] viewControllers] objectAtIndex:0] setThisPayment:thePayment];
+    }
 }
 
 @end

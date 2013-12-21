@@ -399,10 +399,6 @@
                                                                action:@selector(doneNumberPad:)];
     [inputAccossoryNumberPad setItems:[[NSArray alloc] initWithObjects:cancelButton, flexButton, theDoneButton, nil] animated:YES];
     [paidView setInputAccessoryView:inputAccossoryNumberPad];
-    [paidView setDelegate:self];
-    
-    [itemView setDelegate:self];
-    
 }
 
 - (BOOL)disablesAutomaticKeyboardDismissal
