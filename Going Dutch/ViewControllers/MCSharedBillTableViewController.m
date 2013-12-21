@@ -484,6 +484,7 @@
 
 - (void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath
 {
+    /*
     MCPaymentViewController *pvc = [[MCPaymentViewController alloc] initWithExistingPayment:[dataController objectAtIndexPath:indexPath] fromBill:tonightsBill];
     [pvc setDelegate:self];
     UINavigationController *navController = [[UINavigationController alloc] initWithRootViewController:pvc];
@@ -491,6 +492,8 @@
         [navController setModalPresentationStyle:UIModalPresentationFormSheet];
     }
     [[self navigationController] presentViewController:navController animated:YES completion:nil];
+     */
+    [self performSegueWithIdentifier:@"openPaymentView" sender:self];
 }
 
 #pragma mark - Storyboard stuff
