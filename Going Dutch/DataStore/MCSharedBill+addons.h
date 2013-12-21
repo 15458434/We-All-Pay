@@ -20,6 +20,7 @@
 
 - (NSString *)stringOfApproxPeoplePresent;
 
+- (MCPayment *)addPayment;
 - (MCPerson *)addPerson;
 - (BOOL)areTherePeople;
 - (NSUInteger)totalAmountOfPeoplePresent;
