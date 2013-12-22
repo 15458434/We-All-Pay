@@ -38,7 +38,7 @@
                                     <autoresizingMask key="autoresizingMask"/>
                                 </tableViewCellContentView>
                                 <connections>
-                                    <segue destination="iz5-ZP-pZr" kind="push" identifier="openTonightsBill" id="mLI-qa-fQe"/>
+                                    <segue destination="4g7-52-2bw" kind="push" identifier="openTonightsBill" id="2gl-Zp-3Wa"/>
                                 </connections>
                             </tableViewCell>
                         </prototypes>
@@ -58,14 +58,14 @@
                 </tableViewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="dgz-Pk-24M" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="703" y="-1"/>
+            <point key="canvasLocation" x="121" y="684"/>
         </scene>
         <!--Shared Bill Table View Controller-->
         <scene sceneID="9lm-V0-rkF">
             <objects>
                 <tableViewController storyboardIdentifier="MCSharedBillTableViewController" useStoryboardIdentifierAsRestorationIdentifier="YES" id="iz5-ZP-pZr" customClass="MCSharedBillTableViewController" sceneMemberID="viewController">
                     <tableView key="view" opaque="NO" clipsSubviews="YES" clearsContextBeforeDrawing="NO" contentMode="scaleToFill" alwaysBounceVertical="YES" pagingEnabled="YES" showsHorizontalScrollIndicator="NO" dataMode="prototypes" style="grouped" separatorStyle="default" rowHeight="44" sectionHeaderHeight="10" sectionFooterHeight="10" id="ING-BM-Jf7">
-                        <rect key="frame" x="0.0" y="64" width="320" height="460"/>
+                        <rect key="frame" x="0.0" y="0.0" width="320" height="524"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <color key="backgroundColor" cocoaTouchSystemColor="groupTableViewBackgroundColor"/>
                         <view key="tableHeaderView" contentMode="scaleToFill" restorationIdentifier="MCSharedBillHeaderView" id="eaE-b1-r5K" customClass="UITableViewHeaderFooterView">
@@ -131,6 +131,39 @@
                 <placeholder placeholderIdentifier="IBFirstResponder" id="aDR-YO-8As" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
             <point key="canvasLocation" x="1244" y="684"/>
+        </scene>
+        <!--Shared Bill Page View Controller-->
+        <scene sceneID="BLZ-lN-WQF">
+            <objects>
+                <pageViewController storyboardIdentifier="MCSharedBillPageViewController" autoresizesArchivedViewToFullSize="NO" useStoryboardIdentifierAsRestorationIdentifier="YES" transitionStyle="scroll" navigationOrientation="horizontal" spineLocation="none" id="4g7-52-2bw" customClass="MCSharedBillPageViewController" sceneMemberID="viewController">
+                    <navigationItem key="navigationItem" id="7AH-VZ-PW3">
+                        <nil key="title"/>
+                        <view key="titleView" contentMode="scaleToFill" id="HDn-dn-fhY">
+                            <rect key="frame" x="96" y="6" width="128" height="33"/>
+                            <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                            <subviews>
+                                <label opaque="NO" clipsSubviews="YES" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" text="Label" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="oKh-Bm-aHC">
+                                    <rect key="frame" x="0.0" y="0.0" width="128" height="21"/>
+                                    <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                                    <fontDescription key="fontDescription" name="HelveticaNeue-Bold" family="Helvetica Neue" pointSize="17"/>
+                                    <color key="textColor" cocoaTouchSystemColor="darkTextColor"/>
+                                    <nil key="highlightedColor"/>
+                                </label>
+                                <pageControl opaque="NO" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" numberOfPages="3" translatesAutoresizingMaskIntoConstraints="NO" id="kwG-GX-r14">
+                                    <rect key="frame" x="45" y="7" width="39" height="37"/>
+                                    <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                                    <color key="pageIndicatorTintColor" white="0.66666666666666663" alpha="1" colorSpace="calibratedWhite"/>
+                                    <color key="currentPageIndicatorTintColor" white="0.0" alpha="1" colorSpace="calibratedWhite"/>
+                                </pageControl>
+                            </subviews>
+                            <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="calibratedWhite"/>
+                        </view>
+                        <barButtonItem key="rightBarButtonItem" systemItem="edit" id="HQG-ef-Hpe"/>
+                    </navigationItem>
+                </pageViewController>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="PBZ-5Z-30b" userLabel="First Responder" sceneMemberID="firstResponder"/>
+            </objects>
+            <point key="canvasLocation" x="703" y="684"/>
         </scene>
         <!--Return Payment View Controller-->
         <scene sceneID="608-i5-b2Z">
@@ -387,7 +420,7 @@
                 </navigationController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="EZm-Yu-kd9" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="160" y="-1"/>
+            <point key="canvasLocation" x="-422" y="684"/>
         </scene>
         <!--Navigation Controller-->
         <scene sceneID="fk9-Jf-0eL">
