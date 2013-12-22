@@ -38,6 +38,14 @@
 	}
 }
 
+
+- (IBAction)tellAFriendAboutWeAllPay:(id)sender
+{
+    NSArray *dataToShare = [NSArray arrayWithObject:[NSString stringWithFormat:@"Hi, I found We All Pay this easy to use app to share a bill with a group of friends."]];
+    UIActivityViewController *shareMe = [[UIActivityViewController alloc] initWithActivityItems:dataToShare applicationActivities:nil];
+    [self presentViewController:shareMe animated:YES completion:nil];
+}
+
 #pragma mark - New in this class.
 
 - (void)setDataController
@@ -102,7 +110,7 @@
     }
     
     [[self tableView] reloadData];
-    [[self navigationController] setToolbarHidden:YES];
+    //[[self navigationController] setToolbarHidden:YES];
 }
 
 - (void)viewDidDisappear:(BOOL)animated
