@@ -33,16 +33,19 @@
 
 - (void)doneAddingPeople:(id)selector
 {
+    /*
     NSManagedObjectContext *context = [[[MCWeAllPayStoreController defaultStore] weAllPayStoreDocument] managedObjectContext];
     [context performBlockAndWait:^{
         [context processPendingChanges];
         [[context undoManager] disableUndoRegistration];
     }];
+     */
     [[self presentingViewController] dismissViewControllerAnimated:YES completion:dismissOnDone];
 }
 
 - (void)cancelNewTrip:(id)selector
 {
+    /*
     cancelPressed = YES;
     NSManagedObjectContext *context = [[[MCWeAllPayStoreController defaultStore] weAllPayStoreDocument] managedObjectContext];
     [context performBlock:^{
@@ -52,6 +55,7 @@
         }
         [MCSharedBill deleteSharedbill:tonightsBill];
     }];
+     */
     [[self presentingViewController] dismissViewControllerAnimated:YES completion:dismissOnCancel];
 }
 
@@ -254,8 +258,9 @@
     [self setEdgesForExtendedLayout:UIRectEdgeNone];
     [MCTools setAdBannerIfNotPaid:YES forViewController:self];
     
+    /*
     [[[[[MCWeAllPayStoreController defaultStore] weAllPayStoreDocument] managedObjectContext] undoManager] enableUndoRegistration];
-    
+     */
     if (!tonightsBill) {
         didSomethingChange = YES;
         tonightsBill = [MCSharedBill addSharedBill];

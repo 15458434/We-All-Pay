@@ -13,6 +13,8 @@
 
 #import "MCSharedBill.h"
 
+#import "MCWeAllPayStoreController.h"
+
 @interface MCSharedBillPageViewController ()
 
 @end
