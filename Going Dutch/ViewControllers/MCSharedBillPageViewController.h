@@ -10,7 +10,7 @@
 
 @interface MCSharedBillPageViewController : UIPageViewController
 {
-    
+    __weak IBOutlet UIPageControl *pageViewIndicator;
 }
 
 

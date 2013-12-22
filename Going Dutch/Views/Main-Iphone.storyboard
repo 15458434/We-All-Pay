@@ -160,6 +160,9 @@
                         </view>
                         <barButtonItem key="rightBarButtonItem" systemItem="edit" id="HQG-ef-Hpe"/>
                     </navigationItem>
+                    <connections>
+                        <outlet property="pageViewIndicator" destination="kwG-GX-r14" id="qX0-jx-g1R"/>
+                    </connections>
                 </pageViewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="PBZ-5Z-30b" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
