@@ -8,10 +8,13 @@
 
 #import <UIKit/UIKit.h>
 
-@interface MCSharedBillPageViewController : UIPageViewController
+@class MCSharedBill;
+
+@interface MCSharedBillPageViewController : UIPageViewController <UIPageViewControllerDataSource, UIPageViewControllerDelegate>
 {
     __weak IBOutlet UIPageControl *pageViewIndicator;
 }
 
+@property (nonatomic, strong) MCSharedBill *tonightsBill;
 
 @end
