@@ -228,12 +228,14 @@
     }
     [[allTripsTableViewCell extraLabel] setText:[df stringFromDate:[thisTrip dateModified]]];
     
+    /*
     CGRect buttonRect = CGRectMake(0, 0, 44, 44);
     UIButton *accessoryButton = [[UIButton alloc] initWithFrame:buttonRect];
     UIImage *plusSign = [UIImage imageNamed:@"plus sign"];
     [accessoryButton setImage:plusSign forState:UIControlStateNormal];
     [accessoryButton addTarget:self action:@selector(addButtonFromTableViewCell:event:) forControlEvents:UIControlEventTouchUpInside];
     [allTripsTableViewCell setAccessoryView:accessoryButton];
+     */
     
     return allTripsTableViewCell;
 }
