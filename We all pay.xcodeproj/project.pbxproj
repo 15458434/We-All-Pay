@@ -90,6 +90,7 @@
 		38334EBF172D319B0063B919 /* Default.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = Default.png; path = ../Default.png; sourceTree = "<group>"; };
 		38334EC1172D31A50063B919 /* Default@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = "Default@2x.png"; path = "../Default@2x.png"; sourceTree = "<group>"; };
 		38334EC3172D31AF0063B919 /* Default-568h@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = "Default-568h@2x.png"; path = "../Default-568h@2x.png"; sourceTree = "<group>"; };
+		383E0C561867079900AA688D /* Social.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Social.framework; path = System/Library/Frameworks/Social.framework; sourceTree = SDKROOT; };
 		38572AD2169D437B00969C62 /* We all pay.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = "We all pay.app"; sourceTree = BUILT_PRODUCTS_DIR; };
 		38572AD6169D437B00969C62 /* UIKit.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = UIKit.framework; path = System/Library/Frameworks/UIKit.framework; sourceTree = SDKROOT; };
 		38572AD8169D437B00969C62 /* Foundation.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Foundation.framework; path = System/Library/Frameworks/Foundation.framework; sourceTree = SDKROOT; };
@@ -172,12 +173,12 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				38F7FFBA17E9C2BA00913F62 /* iAd.framework in Frameworks */,
 				3886D3FD16B7A1CD00ECE64F /* AddressBook.framework in Frameworks */,
 				3886D3FE16B7A1CD00ECE64F /* AddressBookUI.framework in Frameworks */,
 				3801F89C16DFC62600DF8675 /* CoreData.framework in Frameworks */,
 				38572ADB169D437B00969C62 /* CoreGraphics.framework in Frameworks */,
 				38572AD9169D437B00969C62 /* Foundation.framework in Frameworks */,
+				38F7FFBA17E9C2BA00913F62 /* iAd.framework in Frameworks */,
 				3873A2A516F23AA1000832FD /* MessageUI.framework in Frameworks */,
 				38572AD7169D437B00969C62 /* UIKit.framework in Frameworks */,
 			);
@@ -251,6 +252,7 @@
 		38572AD5169D437B00969C62 /* Frameworks */ = {
 			isa = PBXGroup;
 			children = (
+				383E0C561867079900AA688D /* Social.framework */,
 				38F7FFB917E9C2BA00913F62 /* iAd.framework */,
 				3873A2A416F23AA1000832FD /* MessageUI.framework */,
 				3801F89B16DFC62600DF8675 /* CoreData.framework */,

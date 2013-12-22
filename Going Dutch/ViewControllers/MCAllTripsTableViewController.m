@@ -38,6 +38,14 @@
 	}
 }
 
+
+- (IBAction)tellAFriendAboutWeAllPay:(id)sender
+{
+    NSArray *dataToShare = [NSArray arrayWithObject:[NSString stringWithFormat:@"Hi, I found We All Pay this easy to use app to share a bill with a group of friends."]];
+    UIActivityViewController *shareMe = [[UIActivityViewController alloc] initWithActivityItems:dataToShare applicationActivities:nil];
+    [self presentViewController:shareMe animated:YES completion:nil];
+}
+
 #pragma mark - New in this class.
 
 - (void)setDataController
@@ -76,18 +84,6 @@
 
 #pragma mark - Inherited from super
 
-- (id)init
-{
-    self = [super initWithStyle:UITableViewStylePlain];
-    
-    if (self) {
-        [[self navigationItem] setTitle:@"Back"];
-        
-        [MCTools setAdBannerIfNotPaid:YES forViewController:self];
-    }
-    return self;
-}
-
 - (id)initWithStyle:(UITableViewStyle)style
 {
     self = [super initWithStyle:style];
@@ -114,7 +110,7 @@
     }
     
     [[self tableView] reloadData];
-    [[self navigationController] setToolbarHidden:YES];
+    //[[self navigationController] setToolbarHidden:YES];
 }
 
 - (void)viewDidDisappear:(BOOL)animated
@@ -128,6 +124,8 @@
     
     [self setEdgesForExtendedLayout:UIRectEdgeNone];
     [MCTools setAdBannerIfNotPaid:YES forViewController:self];
+    
+    [[self navigationItem] setTitle:@"back"];
     
     if (!dataController) {
         [self setDataController];
@@ -228,12 +226,14 @@
     }
     [[allTripsTableViewCell extraLabel] setText:[df stringFromDate:[thisTrip dateModified]]];
     
+    /*
     CGRect buttonRect = CGRectMake(0, 0, 44, 44);
     UIButton *accessoryButton = [[UIButton alloc] initWithFrame:buttonRect];
     UIImage *plusSign = [UIImage imageNamed:@"plus sign"];
     [accessoryButton setImage:plusSign forState:UIControlStateNormal];
     [accessoryButton addTarget:self action:@selector(addButtonFromTableViewCell:event:) forControlEvents:UIControlEventTouchUpInside];
     [allTripsTableViewCell setAccessoryView:accessoryButton];
+     */
     
     return allTripsTableViewCell;
 }
