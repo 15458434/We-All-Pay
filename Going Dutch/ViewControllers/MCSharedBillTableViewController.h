@@ -25,8 +25,10 @@
     UIBarButtonItem *returnPaymentButton;
 }
 
-- (id)initWithSharedBill:(MCSharedBill *)tBill;
-- (void)addPayment:(id)sender;
+//- (id)initWithSharedBill:(MCSharedBill *)tBill;
+- (void)shareBill:(id)sender;
+
+- (IBAction)mailButtonPressed:(id)sender;
 
 @property (nonatomic, strong) MCSharedBill *tonightsBill;
 @property (nonatomic, readonly) BOOL didSomethingChange;

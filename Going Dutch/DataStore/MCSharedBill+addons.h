@@ -7,6 +7,7 @@
 //
 
 #import "MCSharedBill.h"
+#import "MCPerson+addons.h"
 
 @interface MCSharedBill (addons)
 
@@ -19,6 +20,8 @@
 
 - (NSString *)stringOfApproxPeoplePresent;
 
+- (MCPayment *)addPayment;
+- (MCPerson *)addPerson;
 - (BOOL)areTherePeople;
 - (NSUInteger)totalAmountOfPeoplePresent;
 - (NSUInteger)totalAmountOfPeopleWhoHavePaid;

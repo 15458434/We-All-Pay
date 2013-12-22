@@ -21,6 +21,4 @@
     NSFetchedResultsController *dataController;
 }
 
-- (void)addTrip:(id)sender;
-
 @end

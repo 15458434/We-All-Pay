@@ -53,7 +53,6 @@
                 }
             }
             CFRelease(emailAddresses);
-            CFRelease(personRecord);
         }
     }
     CFRelease(allLinkedPeople);

@@ -146,6 +146,17 @@
     return [emailAddress emailAddress];
 }
 
+- (void)addNewDefaultEmailAddressFromAString:(NSString *)newEmailAddressString
+{
+    MCEmailAddress *oldDefaultEmailAddress = [self getDefaultEmailAddressObject];
+    if (oldDefaultEmailAddress) {
+        [oldDefaultEmailAddress setSelected:[NSNumber numberWithBool:NO]];
+    }
+    MCEmailAddress *newEmailAddress = [MCEmailAddress addEmailAddressFor:self];
+    [newEmailAddress setEmailAddress:newEmailAddressString];
+    [newEmailAddress setSelected:[NSNumber numberWithBool:YES]];
+}
+
 - (MCEmailAddress *)getDefaultEmailAddressObject
 {
     NSFetchRequest *request = [NSFetchRequest fetchRequestWithEntityName:@"MCEmailAddress"];
@@ -159,7 +170,7 @@
     if (!emailAddresses) {
         NSLog(@"Something went wrong on fetching emailAddresses: %@", [error localizedDescription]);
     } else if ([emailAddresses count] != 1) {
-        NSLog(@"%d defaultEmailAddresses found.", [emailAddresses count]);
+        NSLog(@"%lu defaultEmailAddresses found.", (unsigned long)[emailAddresses count]);
     }
     return [emailAddresses firstObject];
 }

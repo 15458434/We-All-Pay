@@ -18,9 +18,11 @@
 
 @interface MCEditTripViewController : UITableViewController <NSFetchedResultsControllerDelegate, UITextFieldDelegate, UIAlertViewDelegate, MCPersonViewChangeDelegate>
 {
-    IBOutlet UIControl *newTripHeaderView;
+    __weak IBOutlet UIButton *addressBookButton;    
+    __weak IBOutlet UIButton *addPersonButton;
+    
     IBOutlet UITextField *tripNameField;
-    UIBarButtonItem *doneButton;
+    IBOutlet UIBarButtonItem *doneButton;
     __strong IBOutlet MCTwoLabelsTitleView *twoLabelTitleView;
     
     NSFetchedResultsController *dataController;
@@ -35,10 +37,16 @@
 @property (nonatomic, copy) void (^dismissOnCancel)(void);
 @property (nonatomic, readonly) BOOL didSomethingChange;
 
-- (id)initWithBill:(MCSharedBill *)newBill isNew:(BOOL)isNew;
-- (UIView *)NewTripHeaderView;
-
 - (IBAction)changeNameOfTrip:(id)sender;
 - (IBAction)dismissKeyboard:(id)sender;
+
+- (IBAction)addressBookButton:(id)sender;
+- (IBAction)addPersonButton:(id)sender;
+
+- (IBAction)doneButtonPressed:(id)sender;
+- (IBAction)cancelButtonPressed:(id)sender;
+
+
+
 
 @end

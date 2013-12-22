@@ -74,8 +74,6 @@
     } else {
         [MCTools setAdBannerIfNotPaid:YES forViewController:self];
     }
-
-    [self setEdgesForExtendedLayout:UIRectEdgeNone];
 }
 
 - (void)viewWillAppear:(BOOL)animated

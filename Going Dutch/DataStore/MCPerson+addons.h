@@ -21,6 +21,7 @@
 - (NSString *)getFullName;
 - (NSString *)getName;
 - (NSString *)defaultEmailAddress;
+- (void)addNewDefaultEmailAddressFromAString:(NSString *)newEmailAddressString;
 - (void)addOneEmailAddressFromAString:(NSString *)emailAddressAsString;
 - (MCEmailAddress *)getDefaultEmailAddressObject;
 - (void)deleteEmailAddress:(MCEmailAddress *)eAddress;

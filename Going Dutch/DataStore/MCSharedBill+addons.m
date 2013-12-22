@@ -8,7 +8,7 @@
 
 #import "MCSharedBill+addons.h"
 #import "MCPerson+addons.h"
-#import "MCPayment.h"
+#import "MCPayment+addons.h"
 #import "MCWeAllPayStoreController.h"
 #import "MCReturnPayment.h"
 
@@ -105,6 +105,20 @@
     NSMutableSet *mutableListOfPeople = [[self peoplePresent] mutableCopy];
     [mutableListOfPeople removeObject:value];
     [self setPeoplePresent:mutableListOfPeople];
+}
+
+- (MCPayment *)addPayment
+{
+    MCPayment *payment = [MCPayment addPayment];
+    [payment setOnWhichBill:self];
+    return payment;
+}
+
+- (MCPerson *)addPerson
+{
+    MCPerson *newPerson = [MCPerson addPerson];
+    [newPerson addSharedBillObject:self];
+    return newPerson;
 }
 
 - (BOOL)areTherePeople

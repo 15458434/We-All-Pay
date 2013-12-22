@@ -25,7 +25,7 @@
 
 @interface MCPaymentViewController : MCCancelDoneViewController <UIPickerViewDataSource, UIPickerViewDelegate, UITextFieldDelegate>
 {
-    UIBarButtonItem *doneButton;
+    UIBarButtonItem *theDoneButton;
     UIBarButtonItem *cancelChangesForEntirePaymentButton;
     MCTwoLabelsTitleView *twoLabelTitleView;
     
@@ -40,11 +40,16 @@
     NSArray *listOfPeople;
 }
 
+
+
 @property (nonatomic, strong) MCPayment *thisPayment;
-@property (nonatomic, readonly) MCSharedBill *tonightsBill;
+@property (nonatomic, strong) MCSharedBill *tonightsBill;
 @property (nonatomic, readonly) BOOL didSomethingChange;
 @property (nonatomic, readonly) BOOL isNew;
 @property (nonatomic, weak) id delegate;
+
+- (IBAction)mainCancelButtonPressed:(id)sender;
+- (IBAction)mainDoneButtonPressed:(id)sender;
 
 - (id)initWithExistingPayment:(MCPayment *)thePayment fromBill:(MCSharedBill *)bill;
 

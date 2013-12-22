@@ -38,8 +38,9 @@ typedef enum _emailFieldEditStatus {
     MCTwoLabelsTitleView *twoLabelTitleView;
     UIBarButtonItem *addressBookButton;
     
-    MCPerson *thisPerson;
+
     UIPickerView *emailSelectionFromAddressBookPickerView;
+    BOOL isSelectEmail;
     
     MCAddressBookDataReceiver *personReceiver;
     NSFetchedResultsController *dataController;
@@ -54,8 +55,12 @@ typedef enum _emailFieldEditStatus {
 @property (nonatomic, strong) MCSharedBill *tonightsBill;
 @property (nonatomic, weak) id changeFlagDelegate;
 @property (nonatomic) BOOL isNew;
+@property (nonatomic, strong) MCPerson *thisPerson;
 
 - (id)initWithPerson:(MCPerson *)person;
 
+- (IBAction)doneButtonPressed:(id)sender;
+- (IBAction)cancelButtonPressed:(id)sender;
+- (IBAction)selectEmailAddressPressed:(id)sender;
 
 @end

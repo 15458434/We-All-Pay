@@ -38,26 +38,6 @@
 	}
 }
 
-- (void)addTrip:(id)sender
-{
-    NSLog(@"AddTripPressed");
-    // Create and add new Trip with a test group.
-    MCSharedBill *newTrip = [MCSharedBill addSharedBill];
-    NSLog(@"trip: %@", [newTrip uniqueBillId]);
-    MCSharedBillTableViewController *tvc = [[MCSharedBillTableViewController alloc] initWithSharedBill:newTrip];
-    MCEditTripViewController *etvc = [[MCEditTripViewController alloc] initWithBill:newTrip isNew:YES];
-    UINavigationController *navController = [[UINavigationController alloc] initWithRootViewController:etvc];
-    [etvc setDismissOnDone:^{
-        [[self navigationController] pushViewController:tvc animated:YES];
-    }];
-    [etvc setDismissOnCancel:^{
-        [MCSharedBill deleteSharedbill:newTrip];
-    }];
-    [self presentViewController:navController animated:YES completion:^{
-        //[[self navigationController] pushViewController:tvc animated:YES];
-    }];
-}
-
 #pragma mark - New in this class.
 
 - (void)setDataController
@@ -134,14 +114,7 @@
     }
     
     [[self tableView] reloadData];
-    UIBarButtonItem *flexButton = [[UIBarButtonItem alloc] initWithBarButtonSystemItem:UIBarButtonSystemItemFlexibleSpace
-                                                                                target:nil
-                                                                                action:nil];
-    UIBarButtonItem *bbi = [[UIBarButtonItem alloc] initWithBarButtonSystemItem:UIBarButtonSystemItemAdd
-                                                                         target:self
-                                                                         action:@selector(addTrip:)];
-    [self setToolbarItems:[NSArray arrayWithObjects:flexButton, bbi, nil] animated:YES];
-    [[self navigationController] setToolbarHidden:NO animated:YES];
+    [[self navigationController] setToolbarHidden:YES];
 }
 
 - (void)viewDidDisappear:(BOOL)animated
@@ -154,6 +127,7 @@
     [super viewDidLoad];
     
     [self setEdgesForExtendedLayout:UIRectEdgeNone];
+    [MCTools setAdBannerIfNotPaid:YES forViewController:self];
     
     if (!dataController) {
         [self setDataController];
@@ -163,7 +137,7 @@
     UINib *nib = [UINib nibWithNibName:@"MCAllTripsTableViewCell" bundle:nil];
     
     // Register this nib that contains the cell.
-    [[self tableView] registerNib:nib forCellReuseIdentifier:@"MCAllTripsTableViewCell"];
+    [[ self tableView] registerNib:nib forCellReuseIdentifier:@"MCAllTripsTableViewCell"];
 }
 
 - (void)didReceiveMemoryWarning
@@ -304,6 +278,8 @@
 
 #pragma mark - Table view delegate
 
+
+
 - (CGFloat)tableView:(UITableView *)tableView heightForRowAtIndexPath:(NSIndexPath *)indexPath
 {
     return 60;
@@ -322,8 +298,21 @@
 
 - (void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath
 {
-    MCSharedBillTableViewController *tonightsTripView = [[MCSharedBillTableViewController alloc] initWithSharedBill:[dataController objectAtIndexPath:indexPath]];
-    [self.navigationController pushViewController:tonightsTripView animated:YES];
+    [self performSegueWithIdentifier:@"openTonightsBill" sender:self];
+}
+
+#pragma mark - UIStoryboard
+
+- (void)prepareForSegue:(UIStoryboardSegue *)segue sender:(id)sender
+{
+    MCSharedBill *theBill;
+    NSIndexPath *indexPathOfSelectedRow = [[self tableView] indexPathForSelectedRow];
+    if (indexPathOfSelectedRow) {
+        theBill = [dataController objectAtIndexPath:indexPathOfSelectedRow];
+    }
+    if ([[segue destinationViewController] respondsToSelector:@selector(setTonightsBill:)]) {
+        [[segue destinationViewController] setTonightsBill:theBill];
+    }
 }
 
 @end
