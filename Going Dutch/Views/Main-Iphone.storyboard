@@ -117,9 +117,6 @@
                         <barButtonItem key="rightBarButtonItem" title="info" id="eFV-hJ-XhB"/>
                     </navigationItem>
                     <simulatedToolbarMetrics key="simulatedBottomBarMetrics" translucent="NO"/>
-                    <refreshControl key="refreshControl" opaque="NO" multipleTouchEnabled="YES" contentMode="center" enabled="NO" contentHorizontalAlignment="center" contentVerticalAlignment="center" id="aui-4o-ecr">
-                        <autoresizingMask key="autoresizingMask"/>
-                    </refreshControl>
                 </tableViewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="aDR-YO-8As" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
@@ -155,6 +152,7 @@
                     </navigationItem>
                     <connections>
                         <outlet property="pageViewIndicator" destination="kwG-GX-r14" id="qX0-jx-g1R"/>
+                        <outlet property="titleLabel" destination="oKh-Bm-aHC" id="w8r-dO-U8y"/>
                     </connections>
                 </pageViewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="PBZ-5Z-30b" userLabel="First Responder" sceneMemberID="firstResponder"/>

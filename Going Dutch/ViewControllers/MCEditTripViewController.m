@@ -9,6 +9,7 @@
 #import "MCEditTripViewController.h"
 #import "MCPersonViewController.h"
 #import "MCSharedBillTableViewController.h"
+#import "MCSharedBillPageViewController.h"
 
 #import "MCWeAllPayStoreController.h"
 #import "MCPerson+addons.h"
@@ -28,6 +29,7 @@
 @synthesize tonightsBill;
 @synthesize didSomethingChange;
 
+@synthesize delegate;
 
 # pragma mark - actions of this class
 
@@ -177,6 +179,12 @@
 - (void)viewWillAppear:(BOOL)animated
 {
     [super viewWillAppear:animated];
+    
+    if ([tonightsBill tripName]) {
+        [[delegate titleLabel] setText:[tonightsBill tripName]];
+    } else {
+        [[delegate titleLabel] setText:@"..."];
+    }
     
     [tripNameField setDelegate:self];
     

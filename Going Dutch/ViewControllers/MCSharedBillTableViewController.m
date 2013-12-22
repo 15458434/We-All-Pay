@@ -17,6 +17,7 @@
 #import "MCEditTripViewController.h"
 #import "MCPaymentViewController.h"
 #import "MCReturnPaymentViewController.h"
+#import "MCSharedBillPageViewController.h"
 
 #import "MCPaymentTableViewCell.h"
 #import "MCTwoLabelsTitleView.h"
@@ -32,6 +33,7 @@
 
 @synthesize tonightsBill;
 @synthesize didSomethingChange;
+@synthesize delegate;
 
 #pragma mark - Actions
 
@@ -216,6 +218,12 @@
 {
     [super viewWillAppear:animated];
     
+    if ([tonightsBill tripName]) {
+        [[delegate titleLabel] setText:[tonightsBill tripName]];
+    } else {
+        [[delegate titleLabel] setText:@"..."];
+    }
+    
     [[self navigationItem] setTitle:[tonightsBill tripName]];
     
     // Load the custom titleView and add it to the screen.
@@ -308,6 +316,7 @@
 - (BOOL)textFieldShouldReturn:(UITextField *)textField
 {
     [tonightsBill setTripName:[[twoLabelTitleView mainLabel] text]];
+    [[delegate titleLabel] setText:[tonightsBill tripName]];
     [textField resignFirstResponder];
     return YES;
 }

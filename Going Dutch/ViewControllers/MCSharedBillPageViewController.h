@@ -10,10 +10,20 @@
 
 @class MCSharedBill;
 
-@interface MCSharedBillPageViewController : UIPageViewController <UIPageViewControllerDataSource, UIPageViewControllerDelegate>
+@protocol MCTonightsBillTitleDelegate <NSObject>
+
+- (UILabel *)titleLabel;
+- (void)setTitleLabel:(UILabel *)titleLabel;
+
+@end
+
+@interface MCSharedBillPageViewController : UIPageViewController <UIPageViewControllerDataSource, UIPageViewControllerDelegate, MCTonightsBillTitleDelegate>
 {
     __weak IBOutlet UIPageControl *pageViewIndicator;
+    NSUInteger newPageNumber;
 }
+
+@property (weak, nonatomic) IBOutlet UILabel *titleLabel;
 
 @property (nonatomic, strong) MCSharedBill *tonightsBill;
 

@@ -57,6 +57,13 @@
 	// Do any additional setup after loading the view.
     
     [self setViewControllersFromStoryboard];
+    
+    
+    if ([tonightsBill tripName]) {
+        [titleLabel setText:[tonightsBill tripName]];
+    } else {
+        [titleLabel setText:@"..."];
+    }
 }
 
 - (void)didReceiveMemoryWarning
@@ -65,15 +72,21 @@
     // Dispose of any resources that can be recreated.
 }
 
+#pragma mark - MCTonightsBillTitleDelegate
+
+@synthesize titleLabel;
+
 #pragma mark - UIPageViewControllerDataSource
 
 - (UIViewController *)pageViewController:(UIPageViewController *)pageViewController viewControllerBeforeViewController:(UIViewController *)viewController
 {
     if ([pageViewIndicator currentPage] == 1) {
+        newPageNumber = 0;
         UIStoryboard *storyboard = [UIStoryboard storyboardWithName:@"Main-Iphone" bundle:nil];
         MCSharedBillTableViewController *sharedBillView = [storyboard instantiateViewControllerWithIdentifier:@"MCSharedBillTableViewController"];
         [sharedBillView setTonightsBill:tonightsBill];
-        return sharedBillView;
+        [sharedBillView setDelegate:self];
+        return nil;
     } else {
         return nil;
     }
@@ -82,9 +95,11 @@
 - (UIViewController *)pageViewController:(UIPageViewController *)pageViewController viewControllerAfterViewController:(UIViewController *)viewController
 {
     if ([pageViewIndicator currentPage] == 0) {
+        newPageNumber = 1;
         UIStoryboard *storyboard = [UIStoryboard storyboardWithName:@"Main-Iphone" bundle:nil];
         MCEditTripViewController *editTripView = [storyboard instantiateViewControllerWithIdentifier:@"MCEditTripViewController"];
         [editTripView setTonightsBill:tonightsBill];
+        [editTripView setDelegate:self];
         return editTripView;
     } else {
         return nil;
@@ -93,6 +108,11 @@
 
 #pragma mark - UIPageViewControllerDelegate
 
-
+- (void)pageViewController:(UIPageViewController *)pageViewController didFinishAnimating:(BOOL)finished previousViewControllers:(NSArray *)previousViewControllers transitionCompleted:(BOOL)completed
+{
+    if (completed) {
+        [pageViewIndicator setCurrentPage:newPageNumber];
+    }
+}
 
 @end

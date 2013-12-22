@@ -30,6 +30,7 @@
 
 - (IBAction)mailButtonPressed:(id)sender;
 
+@property (nonatomic, weak) id delegate;
 @property (nonatomic, strong) MCSharedBill *tonightsBill;
 @property (nonatomic, readonly) BOOL didSomethingChange;
 
