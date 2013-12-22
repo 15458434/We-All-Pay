@@ -76,18 +76,6 @@
 
 #pragma mark - Inherited from super
 
-- (id)init
-{
-    self = [super initWithStyle:UITableViewStylePlain];
-    
-    if (self) {
-        [[self navigationItem] setTitle:@"Back"];
-        
-        [MCTools setAdBannerIfNotPaid:YES forViewController:self];
-    }
-    return self;
-}
-
 - (id)initWithStyle:(UITableViewStyle)style
 {
     self = [super initWithStyle:style];
@@ -128,6 +116,8 @@
     
     [self setEdgesForExtendedLayout:UIRectEdgeNone];
     [MCTools setAdBannerIfNotPaid:YES forViewController:self];
+    
+    [[self navigationItem] setTitle:@"back"];
     
     if (!dataController) {
         [self setDataController];
