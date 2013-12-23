@@ -25,6 +25,18 @@
 
 #pragma mark - actions
 
+- (IBAction)toggleEdit:(id)sender
+{
+    static BOOL isEditing = NO;
+    if (isEditing) {
+        [[[[self viewControllers] objectAtIndex:0] tableView] setEditing:NO animated:YES];
+        isEditing = NO;
+    } else {
+        [[[[self viewControllers] objectAtIndex:0] tableView] setEditing:YES animated:YES];
+        isEditing = YES;
+    }
+}
+
 #pragma mark - new in this class
 
 - (void)setViewControllersFromStoryboard
@@ -35,7 +47,7 @@
     MCEditTripViewController *editTripView = [storyboard instantiateViewControllerWithIdentifier:@"MCEditTripViewController"];
     [editTripView setTonightsBill:tonightsBill];
     NSArray *views = [NSArray arrayWithObjects:sharedBillView, nil];
-    [self setViewControllers:views direction:UIPageViewControllerNavigationOrientationHorizontal animated:YES completion:nil];
+    [self setViewControllers:views direction:UIPageViewControllerNavigationDirectionForward animated:YES completion:nil];
     [self setDelegate:self];
     [self setDataSource:self];
 }
@@ -80,13 +92,12 @@
 
 - (UIViewController *)pageViewController:(UIPageViewController *)pageViewController viewControllerBeforeViewController:(UIViewController *)viewController
 {
-    if ([pageViewIndicator currentPage] == 1) {
-        newPageNumber = 0;
+    if ([[[self viewControllers] objectAtIndex:0] isKindOfClass:[MCEditTripViewController class]]) {
         UIStoryboard *storyboard = [UIStoryboard storyboardWithName:@"Main-Iphone" bundle:nil];
         MCSharedBillTableViewController *sharedBillView = [storyboard instantiateViewControllerWithIdentifier:@"MCSharedBillTableViewController"];
         [sharedBillView setTonightsBill:tonightsBill];
         [sharedBillView setDelegate:self];
-        return nil;
+        return sharedBillView;
     } else {
         return nil;
     }
@@ -94,8 +105,7 @@
 
 - (UIViewController *)pageViewController:(UIPageViewController *)pageViewController viewControllerAfterViewController:(UIViewController *)viewController
 {
-    if ([pageViewIndicator currentPage] == 0) {
-        newPageNumber = 1;
+    if ([[[self viewControllers] objectAtIndex:0] isKindOfClass:[MCSharedBillTableViewController class]]) {
         UIStoryboard *storyboard = [UIStoryboard storyboardWithName:@"Main-Iphone" bundle:nil];
         MCEditTripViewController *editTripView = [storyboard instantiateViewControllerWithIdentifier:@"MCEditTripViewController"];
         [editTripView setTonightsBill:tonightsBill];
@@ -110,8 +120,12 @@
 
 - (void)pageViewController:(UIPageViewController *)pageViewController didFinishAnimating:(BOOL)finished previousViewControllers:(NSArray *)previousViewControllers transitionCompleted:(BOOL)completed
 {
-    if (completed) {
-        [pageViewIndicator setCurrentPage:newPageNumber];
+    if (completed && finished) {
+        if ([[[self viewControllers] objectAtIndex:0] isKindOfClass:[MCEditTripViewController class]]) {
+            [pageViewIndicator setCurrentPage:1];
+        } else if ([[[self viewControllers] objectAtIndex:0] isKindOfClass:[MCSharedBillTableViewController class]]) {
+            [pageViewIndicator setCurrentPage:0];
+        }
     }
 }
 

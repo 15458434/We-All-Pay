@@ -24,7 +24,8 @@
 }
 
 @property (weak, nonatomic) IBOutlet UILabel *titleLabel;
-
 @property (nonatomic, strong) MCSharedBill *tonightsBill;
+
+- (IBAction)toggleEdit:(id)sender;
 
 @end

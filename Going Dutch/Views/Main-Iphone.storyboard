@@ -125,7 +125,7 @@
         <!--Shared Bill Page View Controller-->
         <scene sceneID="BLZ-lN-WQF">
             <objects>
-                <pageViewController storyboardIdentifier="MCSharedBillPageViewController" autoresizesArchivedViewToFullSize="NO" useStoryboardIdentifierAsRestorationIdentifier="YES" transitionStyle="scroll" navigationOrientation="horizontal" spineLocation="none" id="4g7-52-2bw" customClass="MCSharedBillPageViewController" sceneMemberID="viewController">
+                <pageViewController storyboardIdentifier="MCSharedBillPageViewController" autoresizesArchivedViewToFullSize="NO" useStoryboardIdentifierAsRestorationIdentifier="YES" transitionStyle="scroll" pageSpacing="2" navigationOrientation="horizontal" spineLocation="none" id="4g7-52-2bw" customClass="MCSharedBillPageViewController" sceneMemberID="viewController">
                     <navigationItem key="navigationItem" id="7AH-VZ-PW3">
                         <nil key="title"/>
                         <view key="titleView" contentMode="scaleToFill" id="HDn-dn-fhY">
@@ -148,7 +148,11 @@
                             </subviews>
                             <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="calibratedWhite"/>
                         </view>
-                        <barButtonItem key="rightBarButtonItem" systemItem="edit" id="HQG-ef-Hpe"/>
+                        <barButtonItem key="rightBarButtonItem" systemItem="edit" id="HQG-ef-Hpe">
+                            <connections>
+                                <action selector="toggleEdit:" destination="4g7-52-2bw" id="z9o-3o-mkf"/>
+                            </connections>
+                        </barButtonItem>
                     </navigationItem>
                     <connections>
                         <outlet property="pageViewIndicator" destination="kwG-GX-r14" id="qX0-jx-g1R"/>
