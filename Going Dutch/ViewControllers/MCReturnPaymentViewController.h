@@ -15,7 +15,7 @@
 @class MCSharedBill;
 @class MCTwoLabelsTitleView;
 
-@class MCSharedBillTableViewController;
+@class MCSharedBillPageViewController;
 
 @interface MCReturnPaymentViewController : MCCancelDoneTableViewController <MFMailComposeViewControllerDelegate>
 {
@@ -30,6 +30,6 @@
 - (id)initWithBill:(MCSharedBill *)thisBill;
 
 @property (nonatomic, strong) MCSharedBill *tonightsBill;
-@property (nonatomic, weak) MCSharedBillTableViewController *sendMailObject;
+@property (nonatomic, weak) MCSharedBillPageViewController *sendMailObject;
 
 @end

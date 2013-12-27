@@ -9,6 +9,7 @@
 #import "MCEditTripViewController.h"
 #import "MCPersonViewController.h"
 #import "MCSharedBillTableViewController.h"
+#import "MCSharedBillPageViewController.h"
 
 #import "MCWeAllPayStoreController.h"
 #import "MCPerson+addons.h"
@@ -28,21 +29,25 @@
 @synthesize tonightsBill;
 @synthesize didSomethingChange;
 
+@synthesize delegate;
 
 # pragma mark - actions of this class
 
 - (void)doneAddingPeople:(id)selector
 {
+    /*
     NSManagedObjectContext *context = [[[MCWeAllPayStoreController defaultStore] weAllPayStoreDocument] managedObjectContext];
     [context performBlockAndWait:^{
         [context processPendingChanges];
         [[context undoManager] disableUndoRegistration];
     }];
+     */
     [[self presentingViewController] dismissViewControllerAnimated:YES completion:dismissOnDone];
 }
 
 - (void)cancelNewTrip:(id)selector
 {
+    /*
     cancelPressed = YES;
     NSManagedObjectContext *context = [[[MCWeAllPayStoreController defaultStore] weAllPayStoreDocument] managedObjectContext];
     [context performBlock:^{
@@ -52,6 +57,7 @@
         }
         [MCSharedBill deleteSharedbill:tonightsBill];
     }];
+     */
     [[self presentingViewController] dismissViewControllerAnimated:YES completion:dismissOnCancel];
 }
 
@@ -174,6 +180,7 @@
 {
     [super viewWillAppear:animated];
     
+    [tripNameField setText:[tonightsBill tripName]];
     [tripNameField setDelegate:self];
     
     if (!twoLabelTitleView) {
@@ -254,8 +261,6 @@
     [self setEdgesForExtendedLayout:UIRectEdgeNone];
     [MCTools setAdBannerIfNotPaid:YES forViewController:self];
     
-    [[[[[MCWeAllPayStoreController defaultStore] weAllPayStoreDocument] managedObjectContext] undoManager] enableUndoRegistration];
-    
     if (!tonightsBill) {
         didSomethingChange = YES;
         tonightsBill = [MCSharedBill addSharedBill];
@@ -286,25 +291,6 @@
     
     [[[self navigationItem] rightBarButtonItem] setEnabled:NO];
     [[[self navigationItem] leftBarButtonItem] setEnabled:YES];
-    
-    /*
-    UIBarButtonItem *addPersonButton;
-    if (kABAuthorizationStatusAuthorized == ABAddressBookGetAuthorizationStatus() ||
-        kABAuthorizationStatusNotDetermined == ABAddressBookGetAuthorizationStatus()) {
-        addPersonButton = [[UIBarButtonItem alloc] initWithBarButtonSystemItem:UIBarButtonSystemItemBookmarks
-                                                            target:self
-                                                            action:@selector(getPeopleFromAddressBook:)];
-    } else {
-        addPersonButton = [[UIBarButtonItem alloc] initWithBarButtonSystemItem:UIBarButtonSystemItemAdd
-                                                            target:self
-                                                            action:@selector(addPerson:)];
-    }
-    UIBarButtonItem *flexButton = [[UIBarButtonItem alloc] initWithBarButtonSystemItem:UIBarButtonSystemItemFlexibleSpace
-                                                                                target:self
-                                                                                action:nil];
-    NSArray *toolBarButtons = [[NSArray alloc] initWithObjects:flexButton, addPersonButton, nil];
-    [self setToolbarItems:toolBarButtons animated:YES];
-     */
     
     // Load and register Nib to the tableView for use.
     UINib *nib = [UINib nibWithNibName:@"MCPersonTableViewCell" bundle:nil];
@@ -471,11 +457,15 @@
 // Override to support conditional editing of the table view.
 - (BOOL)tableView:(UITableView *)tableView canEditRowAtIndexPath:(NSIndexPath *)indexPath
 {
-    MCPerson *person = [dataController objectAtIndexPath:indexPath];
-    if ([tonightsBill hasPersonPaidSomething:person]) {
-        return NO;
+    if ([[self tableView] isEditing]) {
+        MCPerson *person = [dataController objectAtIndexPath:indexPath];
+        if ([tonightsBill hasPersonPaidSomething:person]) {
+            return NO;
+        } else {
+            return YES;
+        }
     } else {
-        return YES;
+        return NO;
     }
 }
 

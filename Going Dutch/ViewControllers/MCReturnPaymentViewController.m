@@ -8,6 +8,7 @@
 
 #import "MCReturnPaymentViewController.h"
 #import "MCSharedBillTableViewController.h"
+#import "MCSharedBillPageViewController.h"
 #import "MCSharedBill+addons.h"
 #import "MCReturnPayment.h"
 #import "MCPerson+addons.h"

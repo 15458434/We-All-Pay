@@ -15,6 +15,12 @@
 @class MCTwoLabelsTitleView;
 @class MCTextFieldAndLabelTitleView;
 
+@protocol MCReturnPaymentViewControllerDelegate <NSObject>
+
+- (void)sendAsMail:(id)sender;
+
+@end
+
 @interface MCSharedBillTableViewController : UITableViewController <NSFetchedResultsControllerDelegate, MFMailComposeViewControllerDelegate, UIAlertViewDelegate, UITextFieldDelegate>
 {
     __strong IBOutlet MCTwoLabelsTitleView *twoLabelTitleView;
@@ -26,10 +32,11 @@
 }
 
 //- (id)initWithSharedBill:(MCSharedBill *)tBill;
-- (void)shareBill:(id)sender;
+
 
 - (IBAction)mailButtonPressed:(id)sender;
 
+@property (nonatomic, weak) id delegate;
 @property (nonatomic, strong) MCSharedBill *tonightsBill;
 @property (nonatomic, readonly) BOOL didSomethingChange;
 

@@ -33,7 +33,7 @@
 + (void)deletePerson:(MCPerson *)delPerson
 {
     NSManagedObjectContext *context = [[[MCWeAllPayStoreController defaultStore] weAllPayStoreDocument] managedObjectContext];
-    [context performBlock:^{
+    [context performBlockAndWait:^{
         [context deleteObject:delPerson];
     }];
 }
@@ -193,23 +193,13 @@
 
 - (BOOL)isThereAnEmailAddress
 {
-    NSFetchRequest *request = [NSFetchRequest fetchRequestWithEntityName:@"MCEmailAddress"];
-    request.predicate = [NSPredicate predicateWithFormat:@"owner = %@", self];
-    NSSortDescriptor *sortDescriptor = [NSSortDescriptor sortDescriptorWithKey:@"emailAddress" ascending:YES];
-    request.sortDescriptors = [NSArray arrayWithObject:sortDescriptor];
-    NSError *error = nil;
-    NSManagedObjectContext *context = [[[MCWeAllPayStoreController defaultStore] weAllPayStoreDocument] managedObjectContext];
-    NSArray *emailAdresses = [context executeFetchRequest:request error:&error];
-    if (!emailAdresses) {
-        NSLog(@"There was an error fetching EmailAddresses.");
+    NSLog(@"%@", [self getName]);
+    if (![self emailAddress]) {
         return NO;
-    } else {
-        if ([emailAdresses count] == 0) {
-            return NO;
-        } else {
-            return YES;
-        }
-    }
+    } else if ([[self emailAddress] count] == 0) {
+        return NO;
+    } else
+        return YES;
 }
 
 - (void)deletAllEmailAddresses

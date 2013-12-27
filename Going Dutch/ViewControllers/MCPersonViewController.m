@@ -360,18 +360,6 @@
     }
     
     [self performFetch];
-    /*
-    if (kABAuthorizationStatusAuthorized == ABAddressBookGetAuthorizationStatus()) {
-        // When dataController is empty there are no email addresses.
-        if ([[dataController fetchedObjects] count] <= 1) {
-            [emailField setPlaceholder:@"no emailaddresses"];
-            [emailField setEnabled:NO];
-        } else {
-            [emailField setPlaceholder:@"e-mail address"];
-            [emailField setEnabled:YES];
-        }
-    }
-     */
     
     [[[self navigationItem] rightBarButtonItem] setEnabled:didSomethingChange];
     [addressBookButton setEnabled:!thisPersonHasPaidSomething];

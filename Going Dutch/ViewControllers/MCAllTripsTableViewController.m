@@ -38,7 +38,6 @@
 	}
 }
 
-
 - (IBAction)tellAFriendAboutWeAllPay:(id)sender
 {
     NSArray *dataToShare = [NSArray arrayWithObject:[NSString stringWithFormat:@"Hi, I found We All Pay this easy to use app to share a bill with a group of friends."]];
