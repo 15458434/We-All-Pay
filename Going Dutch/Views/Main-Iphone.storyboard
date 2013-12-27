@@ -45,6 +45,7 @@
                         </connections>
                     </tableView>
                     <toolbarItems>
+                        <barButtonItem style="plain" systemItem="flexibleSpace" id="P8L-7L-QEK"/>
                         <barButtonItem systemItem="action" id="fil-0u-gaE">
                             <connections>
                                 <action selector="tellAFriendAboutWeAllPay:" destination="v9b-wE-q9L" id="QeB-TE-tg0"/>
@@ -154,6 +155,7 @@
                             </connections>
                         </barButtonItem>
                     </navigationItem>
+                    <nil key="simulatedBottomBarMetrics"/>
                     <connections>
                         <outlet property="pageViewIndicator" destination="kwG-GX-r14" id="qX0-jx-g1R"/>
                         <outlet property="titleLabel" destination="oKh-Bm-aHC" id="w8r-dO-U8y"/>
