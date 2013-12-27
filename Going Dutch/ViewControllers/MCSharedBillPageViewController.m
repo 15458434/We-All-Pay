@@ -176,6 +176,8 @@
     [super viewDidLoad];
 	// Do any additional setup after loading the view.
     
+    [[self view] setBackgroundColor:[UIColor groupTableViewBackgroundColor]];
+    
     if (!tonightsBill) {
         tonightsBill = [MCSharedBill addSharedBill];
         [self setEditTripViewControllerFromStoryboard];
