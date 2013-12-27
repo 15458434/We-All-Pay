@@ -26,6 +26,7 @@
 @implementation MCSharedBillPageViewController
 
 @synthesize tonightsBill;
+@synthesize isNew;
 
 #pragma mark - actions
 
@@ -54,14 +55,25 @@
 
 #pragma mark - new in this class
 
-- (void)setViewControllersFromStoryboard
+- (void)setSharedBillViewControllerFromStoryboard
 {
     UIStoryboard *storyboard = [UIStoryboard storyboardWithName:@"Main-Iphone" bundle:nil];
     MCSharedBillTableViewController *sharedBillView = [storyboard instantiateViewControllerWithIdentifier:@"MCSharedBillTableViewController"];
     [sharedBillView setTonightsBill:tonightsBill];
+    [pageViewIndicator setCurrentPage:1];
+    NSArray *views = [NSArray arrayWithObjects:sharedBillView, nil];
+    [self setViewControllers:views direction:UIPageViewControllerNavigationDirectionReverse animated:YES completion:nil];
+    [self setDelegate:self];
+    [self setDataSource:self];
+}
+
+- (void)setEditTripViewControllerFromStoryboard
+{
+    UIStoryboard *storyboard = [UIStoryboard storyboardWithName:@"Main-Iphone" bundle:nil];
     MCEditTripViewController *editTripView = [storyboard instantiateViewControllerWithIdentifier:@"MCEditTripViewController"];
     [editTripView setTonightsBill:tonightsBill];
-    NSArray *views = [NSArray arrayWithObjects:sharedBillView, nil];
+    NSArray *views = [NSArray arrayWithObjects:editTripView, nil];
+    [pageViewIndicator setCurrentPage:0];
     [self setViewControllers:views direction:UIPageViewControllerNavigationDirectionForward animated:YES completion:nil];
     [self setDelegate:self];
     [self setDataSource:self];
@@ -162,11 +174,16 @@
     [super viewDidLoad];
 	// Do any additional setup after loading the view.
     
-    [self setViewControllersFromStoryboard];
+    if (!tonightsBill) {
+        tonightsBill = [MCSharedBill addSharedBill];
+        [self setEditTripViewControllerFromStoryboard];
+        [titleLabel setText:@"People present"];
+    } else {
+        [self setSharedBillViewControllerFromStoryboard];
+        [titleLabel setText:@"Payments"];
+    }
     
     [[self navigationController] setToolbarHidden:NO];
-    
-    [titleLabel setText:@"Payments"];
 }
 
 - (void)didReceiveMemoryWarning
@@ -202,19 +219,6 @@
 
 - (UIViewController *)pageViewController:(UIPageViewController *)pageViewController viewControllerBeforeViewController:(UIViewController *)viewController
 {
-    if ([[[self viewControllers] objectAtIndex:0] isKindOfClass:[MCEditTripViewController class]]) {
-        UIStoryboard *storyboard = [UIStoryboard storyboardWithName:@"Main-Iphone" bundle:nil];
-        MCSharedBillTableViewController *sharedBillView = [storyboard instantiateViewControllerWithIdentifier:@"MCSharedBillTableViewController"];
-        [sharedBillView setTonightsBill:tonightsBill];
-        [sharedBillView setDelegate:self];
-        return sharedBillView;
-    } else {
-        return nil;
-    }
-}
-
-- (UIViewController *)pageViewController:(UIPageViewController *)pageViewController viewControllerAfterViewController:(UIViewController *)viewController
-{
     if ([[[self viewControllers] objectAtIndex:0] isKindOfClass:[MCSharedBillTableViewController class]]) {
         UIStoryboard *storyboard = [UIStoryboard storyboardWithName:@"Main-Iphone" bundle:nil];
         MCEditTripViewController *editTripView = [storyboard instantiateViewControllerWithIdentifier:@"MCEditTripViewController"];
@@ -226,16 +230,29 @@
     }
 }
 
+- (UIViewController *)pageViewController:(UIPageViewController *)pageViewController viewControllerAfterViewController:(UIViewController *)viewController
+{
+    if ([[[self viewControllers] objectAtIndex:0] isKindOfClass:[MCEditTripViewController class]]) {
+        UIStoryboard *storyboard = [UIStoryboard storyboardWithName:@"Main-Iphone" bundle:nil];
+        MCSharedBillTableViewController *sharedbillView = [storyboard instantiateViewControllerWithIdentifier:@"MCSharedBillTableViewController"];
+        [sharedbillView setTonightsBill:tonightsBill];
+        [sharedbillView setDelegate:self];
+        return sharedbillView;
+    } else {
+        return nil;
+    }
+}
+
 #pragma mark - UIPageViewControllerDelegate
 
 - (void)pageViewController:(UIPageViewController *)pageViewController didFinishAnimating:(BOOL)finished previousViewControllers:(NSArray *)previousViewControllers transitionCompleted:(BOOL)completed
 {
     if (completed && finished) {
         if ([[[self viewControllers] objectAtIndex:0] isKindOfClass:[MCEditTripViewController class]]) {
-            [pageViewIndicator setCurrentPage:1];
+            [pageViewIndicator setCurrentPage:0];
             [titleLabel setText:@"People present"];
         } else if ([[[self viewControllers] objectAtIndex:0] isKindOfClass:[MCSharedBillTableViewController class]]) {
-            [pageViewIndicator setCurrentPage:0];
+            [pageViewIndicator setCurrentPage:1];
             [titleLabel setText:@"Payments"];
         }
     }
