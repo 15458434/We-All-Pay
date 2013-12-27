@@ -297,25 +297,6 @@
     [[[self navigationItem] rightBarButtonItem] setEnabled:NO];
     [[[self navigationItem] leftBarButtonItem] setEnabled:YES];
     
-    /*
-    UIBarButtonItem *addPersonButton;
-    if (kABAuthorizationStatusAuthorized == ABAddressBookGetAuthorizationStatus() ||
-        kABAuthorizationStatusNotDetermined == ABAddressBookGetAuthorizationStatus()) {
-        addPersonButton = [[UIBarButtonItem alloc] initWithBarButtonSystemItem:UIBarButtonSystemItemBookmarks
-                                                            target:self
-                                                            action:@selector(getPeopleFromAddressBook:)];
-    } else {
-        addPersonButton = [[UIBarButtonItem alloc] initWithBarButtonSystemItem:UIBarButtonSystemItemAdd
-                                                            target:self
-                                                            action:@selector(addPerson:)];
-    }
-    UIBarButtonItem *flexButton = [[UIBarButtonItem alloc] initWithBarButtonSystemItem:UIBarButtonSystemItemFlexibleSpace
-                                                                                target:self
-                                                                                action:nil];
-    NSArray *toolBarButtons = [[NSArray alloc] initWithObjects:flexButton, addPersonButton, nil];
-    [self setToolbarItems:toolBarButtons animated:YES];
-     */
-    
     // Load and register Nib to the tableView for use.
     UINib *nib = [UINib nibWithNibName:@"MCPersonTableViewCell" bundle:nil];
     [[self tableView] registerNib:nib forCellReuseIdentifier:@"MCPersonTableViewCell"];
