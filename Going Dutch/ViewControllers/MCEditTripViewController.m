@@ -470,7 +470,7 @@
     
     [[thisCell personImage] setImage:[thisCellsPerson thumbnail]];
     [[thisCell nameLabel] setText:[thisCellsPerson getFullName]];
-    [[thisCell emailLabel] setText:[thisCellsPerson defaultEmailAddress]
+    [[thisCell emailLabel] setText:[thisCellsPerson defaultEmailAddress]];
     NSNumberFormatter *nf = [[NSNumberFormatter alloc] init];
     [nf setNumberStyle:NSNumberFormatterCurrencyStyle];
     [[thisCell totalSpent] setText:[nf stringFromNumber:[tonightsBill totalSumPaidBy:thisCellsPerson]]];
