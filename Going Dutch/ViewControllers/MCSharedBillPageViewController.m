@@ -26,8 +26,6 @@
 @implementation MCSharedBillPageViewController
 
 @synthesize tonightsBill;
-@synthesize isNew;
-@synthesize isEditing;
 
 #pragma mark - actions
 
@@ -172,8 +170,6 @@
     [super viewDidLoad];
 	// Do any additional setup after loading the view.
     
-    isEditing = NO;
-    
     if (!tonightsBill) {
         tonightsBill = [MCSharedBill addSharedBill];
         [self setEditTripViewControllerFromStoryboard];
@@ -224,7 +220,6 @@
         MCEditTripViewController *editTripView = [storyboard instantiateViewControllerWithIdentifier:@"MCEditTripViewController"];
         [editTripView setTonightsBill:tonightsBill];
         [editTripView setDelegate:self];
-        [editTripView setEditing:isEditing animated:YES];
         return editTripView;
     } else {
         return nil;
@@ -238,7 +233,6 @@
         MCSharedBillTableViewController *sharedbillView = [storyboard instantiateViewControllerWithIdentifier:@"MCSharedBillTableViewController"];
         [sharedbillView setTonightsBill:tonightsBill];
         [sharedbillView setDelegate:self];
-        [sharedbillView setEditing:isEditing animated:YES];
         return sharedbillView;
     } else {
         return nil;

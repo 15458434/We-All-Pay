@@ -25,8 +25,6 @@
 
 @property (weak, nonatomic) IBOutlet UILabel *titleLabel;
 @property (nonatomic, strong) MCSharedBill *tonightsBill;
-@property (nonatomic) BOOL isNew;
-@property (nonatomic, readonly) BOOL isEditing;
 
 - (IBAction)toggleEdit:(id)sender;
 - (IBAction)solveBill:(id)sender;
