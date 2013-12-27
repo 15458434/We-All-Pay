@@ -27,5 +27,8 @@
 @property (nonatomic, strong) MCSharedBill *tonightsBill;
 
 - (IBAction)toggleEdit:(id)sender;
+- (IBAction)solveBill:(id)sender;
+
+- (void)shareBill:(id)sender;
 
 @end

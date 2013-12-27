@@ -39,12 +39,7 @@
 
 - (IBAction)mailButtonPressed:(id)sender
 {
-    [self shareBill:self];
-}
-
-- (void)editBillData:(id)sender
-{
-    [self performSegueWithIdentifier:@"openTripInfo" sender:self];
+    //[self shareBill:self];
 }
 
 - (void)showWhoPaysWho:(id)sender
@@ -56,80 +51,6 @@
         [navController setModalPresentationStyle:UIModalPresentationFormSheet];
     }
     [[self navigationController] presentViewController:navController animated:YES completion:nil];
-}
-
-- (void)openMailView:(id)sender;
-{
-    MFMailComposeViewController *mailViewController = [[MFMailComposeViewController alloc] init];
-    [mailViewController setMailComposeDelegate:sender];
-    [mailViewController setEdgesForExtendedLayout:UIRectEdgeNone];
-    [mailViewController setModalPresentationStyle:UIModalPresentationFormSheet];
-    [[[mailViewController viewControllers] objectAtIndex:0] setEdgesForExtendedLayout:UIRectEdgeNone];
-    NSArray *sda = [NSArray arrayWithObject:[NSSortDescriptor sortDescriptorWithKey:@"dateCreated" ascending:YES]];
-    NSArray *allPeople = [[tonightsBill peoplePresent] sortedArrayUsingDescriptors:sda];
-    // Create a list of all email addresses
-    NSMutableArray *listOfMailAddresses = [[NSMutableArray alloc] init];
-    for (MCPerson *p in allPeople) {
-        if ([p defaultEmailAddress]) {
-            [listOfMailAddresses addObject:[p defaultEmailAddress]];
-        }
-    }
-    // Set the mail header.
-    [mailViewController setToRecipients:listOfMailAddresses];
-    [mailViewController setSubject:[[NSString alloc] initWithFormat:@"Bill overview of our trip to %@.", [tonightsBill tripName]]];
-    
-    // Generate the text for the email.
-    NSMutableString *mailBody = [[NSMutableString alloc] init];
-    NSNumberFormatter *nf = [[NSNumberFormatter alloc] init];
-    [nf setNumberStyle:NSNumberFormatterCurrencyStyle];
-    [mailBody appendFormat:@"Dear %@\n", [tonightsBill stringOfApproxPeoplePresent]];
-    [mailBody appendFormat:@"\n"];
-    [mailBody appendFormat:@"From a total of %@, which was spend on our last trip to %@. We all have to pay an equal share of %@.\n", [nf stringFromNumber:[tonightsBill totalSumOfMoneyOfThisSharedBill]], [tonightsBill tripName], [nf stringFromNumber:[tonightsBill amountPeopleShouldHavePaid]]];
-    [mailBody appendFormat:@"\n"];
-    if ([tonightsBill totalAmountOfPeopleWhoHavePaid] == 0) {
-        [mailBody appendFormat:@"Nobody has paid so far.\n"];
-    } else if ([tonightsBill totalAmountOfPeopleWhoHavePaid] == 1) {
-        [mailBody appendFormat:@"The person who has payed:\n"];
-    } else {
-        [mailBody appendFormat:@"The persons who have paid are:\n"];
-    }
-    NSArray * allPayments = [[tonightsBill payments] sortedArrayUsingDescriptors:sda];
-    for (MCPayment *p in allPayments) {
-        [mailBody appendFormat:@"%@ has paid %@ for %@.\n", [[p payingPerson] getName], [nf stringFromNumber:[p money]], [p descriptionOfPayment]];
-    }
-    [mailBody appendFormat:@"\n"];
-    [mailBody appendFormat:@"To equalize and have everybody pay the average of %@, I suggest the following solution:\n", [nf stringFromNumber:[tonightsBill amountPeopleShouldHavePaid]]];
-    for (MCReturnPayment *rp in [tonightsBill solveWhoHasToPayWhoFromThisBill]) {
-        [mailBody appendFormat:@"%@\n", [rp stringForMail]];
-    }
-    [mailBody appendFormat:@"\n"];
-    [mailBody appendFormat:@"If you have any remarks please let me know.\n"];
-    [mailViewController setMessageBody:mailBody isHTML:NO];
-    if ([[UIDevice currentDevice] userInterfaceIdiom] == UIUserInterfaceIdiomPad) {
-        [MCTools setAdBannerIfNotPaid:NO forViewController:[[mailViewController viewControllers] objectAtIndex:0]];
-    } else {
-        [MCTools setAdBannerIfNotPaid:YES forViewController:[[mailViewController viewControllers] objectAtIndex:0]];
-    }
-    if (sender!=self) {
-        [sender presentViewController:mailViewController animated:YES completion:nil];
-    } else {
-        [[self navigationController] presentViewController:mailViewController animated:YES completion:nil];
-    }
-}
-
-- (void)shareBill:(id)sender
-{
-    if ([tonightsBill doesEveryoneHaveAnEmailAddress]) {
-        [self openMailView:sender];
-    } else {
-        NSLog(@"Not everyone has an email address");
-        UIAlertView *mailAddressesMissing = [[UIAlertView alloc] initWithTitle:@"Unable to send email to all people."
-                                                                       message:@"Reason: Not all people have a mail address."
-                                                                      delegate:self
-                                                             cancelButtonTitle:@"Cancel"
-                                                             otherButtonTitles:@"Send anyway", @"Edit", nil];
-        [mailAddressesMissing show];
-    }
 }
 
 - (void)dismissEdit:(id)selector
@@ -338,25 +259,6 @@
     [[self tableView] reloadData];
 }
  */
-
-#pragma mark - UIAlertViewDelegate
-
-- (void)alertView:(UIAlertView *)alertView clickedButtonAtIndex:(NSInteger)buttonIndex
-{
-    switch (buttonIndex) {
-        case 0:
-            NSLog(@"Cancel button pressed");
-            break;
-        case 1:
-            [self openMailView:self];
-            break;
-        case 2:
-            [self editBillData:self];
-            break;
-        default:
-            break;
-    }
-}
 
 #pragma mark - MFMailViewControllerDelegate
 

@@ -63,7 +63,7 @@
             <objects>
                 <tableViewController storyboardIdentifier="MCSharedBillTableViewController" useStoryboardIdentifierAsRestorationIdentifier="YES" id="iz5-ZP-pZr" customClass="MCSharedBillTableViewController" sceneMemberID="viewController">
                     <tableView key="view" opaque="NO" clipsSubviews="YES" clearsContextBeforeDrawing="NO" contentMode="scaleToFill" alwaysBounceVertical="YES" pagingEnabled="YES" showsHorizontalScrollIndicator="NO" dataMode="prototypes" style="grouped" separatorStyle="default" rowHeight="44" sectionHeaderHeight="10" sectionFooterHeight="10" id="ING-BM-Jf7">
-                        <rect key="frame" x="0.0" y="0.0" width="320" height="524"/>
+                        <rect key="frame" x="0.0" y="0.0" width="320" height="568"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <color key="backgroundColor" cocoaTouchSystemColor="groupTableViewBackgroundColor"/>
                         <view key="tableHeaderView" contentMode="scaleToFill" restorationIdentifier="MCSharedBillHeaderView" id="eaE-b1-r5K" customClass="UITableViewHeaderFooterView">
@@ -117,7 +117,7 @@
                         <nil key="title"/>
                         <barButtonItem key="rightBarButtonItem" title="info" id="eFV-hJ-XhB"/>
                     </navigationItem>
-                    <simulatedToolbarMetrics key="simulatedBottomBarMetrics" translucent="NO"/>
+                    <nil key="simulatedBottomBarMetrics"/>
                 </tableViewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="aDR-YO-8As" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
@@ -126,7 +126,17 @@
         <!--Shared Bill Page View Controller-->
         <scene sceneID="BLZ-lN-WQF">
             <objects>
-                <pageViewController storyboardIdentifier="MCSharedBillPageViewController" autoresizesArchivedViewToFullSize="NO" useStoryboardIdentifierAsRestorationIdentifier="YES" transitionStyle="scroll" pageSpacing="2" navigationOrientation="horizontal" spineLocation="none" id="4g7-52-2bw" customClass="MCSharedBillPageViewController" sceneMemberID="viewController">
+                <pageViewController storyboardIdentifier="MCSharedBillPageViewController" autoresizesArchivedViewToFullSize="NO" useStoryboardIdentifierAsRestorationIdentifier="YES" transitionStyle="scroll" navigationOrientation="horizontal" spineLocation="none" id="4g7-52-2bw" customClass="MCSharedBillPageViewController" sceneMemberID="viewController">
+                    <toolbarItems>
+                        <barButtonItem style="plain" systemItem="flexibleSpace" id="Eaf-vv-RrD"/>
+                        <barButtonItem image="toolbar is sign.png" id="7g4-Fl-FUQ">
+                            <connections>
+                                <action selector="solveBill:" destination="4g7-52-2bw" id="osO-5R-EqU"/>
+                                <segue destination="HxE-bK-sSq" kind="modal" identifier="=buttonPressed" id="9j8-CS-9SP"/>
+                            </connections>
+                        </barButtonItem>
+                        <barButtonItem style="plain" systemItem="flexibleSpace" id="dwT-I4-mXf"/>
+                    </toolbarItems>
                     <navigationItem key="navigationItem" id="7AH-VZ-PW3">
                         <nil key="title"/>
                         <view key="titleView" contentMode="scaleToFill" id="HDn-dn-fhY">
@@ -155,7 +165,7 @@
                             </connections>
                         </barButtonItem>
                     </navigationItem>
-                    <nil key="simulatedBottomBarMetrics"/>
+                    <simulatedToolbarMetrics key="simulatedBottomBarMetrics" translucent="NO"/>
                     <connections>
                         <outlet property="pageViewIndicator" destination="kwG-GX-r14" id="qX0-jx-g1R"/>
                         <outlet property="titleLabel" destination="oKh-Bm-aHC" id="w8r-dO-U8y"/>
@@ -301,6 +311,7 @@
                         </barButtonItem>
                     </navigationItem>
                     <simulatedNavigationBarMetrics key="simulatedTopBarMetrics" translucent="NO" prompted="NO"/>
+                    <nil key="simulatedBottomBarMetrics"/>
                     <connections>
                         <outlet property="addPersonButton" destination="gfv-ln-Tgv" id="kQ0-08-UfA"/>
                         <outlet property="addressBookButton" destination="AlH-w9-wjE" id="xCM-aT-d8k"/>
@@ -558,4 +569,7 @@
         <simulatedOrientationMetrics key="orientation"/>
         <simulatedScreenMetrics key="destination" type="retina4"/>
     </simulatedMetricsContainer>
+    <inferredMetricsTieBreakers>
+        <segue reference="9j8-CS-9SP"/>
+    </inferredMetricsTieBreakers>
 </document>

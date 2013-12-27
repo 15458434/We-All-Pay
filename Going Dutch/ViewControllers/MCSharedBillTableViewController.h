@@ -26,7 +26,7 @@
 }
 
 //- (id)initWithSharedBill:(MCSharedBill *)tBill;
-- (void)shareBill:(id)sender;
+
 
 - (IBAction)mailButtonPressed:(id)sender;
 

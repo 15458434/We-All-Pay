@@ -27,7 +27,7 @@
 
 - (IBAction)sendAsEmailButtonPressed:(id)sender
 {
-    [sendMailObject shareBill:self];
+    //[sendMailObject shareBill:self];
 }
 
 - (IBAction)mainCancelButtonPressed:(id)sender
