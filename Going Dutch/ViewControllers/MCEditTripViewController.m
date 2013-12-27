@@ -481,7 +481,7 @@
 // Override to support conditional editing of the table view.
 - (BOOL)tableView:(UITableView *)tableView canEditRowAtIndexPath:(NSIndexPath *)indexPath
 {
-    if ([self isEditing]) {
+    if ([[self tableView] isEditing]) {
         MCPerson *person = [dataController objectAtIndexPath:indexPath];
         if ([tonightsBill hasPersonPaidSomething:person]) {
             return NO;

@@ -27,18 +27,16 @@
 
 @synthesize tonightsBill;
 @synthesize isNew;
+@synthesize isEditing;
 
 #pragma mark - actions
 
 - (IBAction)toggleEdit:(id)sender
 {
-    static BOOL isEditing = NO;
-    if (isEditing) {
+    if ([[[[self viewControllers] objectAtIndex:0] tableView] isEditing]) {
         [[[[self viewControllers] objectAtIndex:0] tableView] setEditing:NO animated:YES];
-        isEditing = NO;
     } else {
         [[[[self viewControllers] objectAtIndex:0] tableView] setEditing:YES animated:YES];
-        isEditing = YES;
     }
 }
 
@@ -174,6 +172,8 @@
     [super viewDidLoad];
 	// Do any additional setup after loading the view.
     
+    isEditing = NO;
+    
     if (!tonightsBill) {
         tonightsBill = [MCSharedBill addSharedBill];
         [self setEditTripViewControllerFromStoryboard];
@@ -224,6 +224,7 @@
         MCEditTripViewController *editTripView = [storyboard instantiateViewControllerWithIdentifier:@"MCEditTripViewController"];
         [editTripView setTonightsBill:tonightsBill];
         [editTripView setDelegate:self];
+        [editTripView setEditing:isEditing animated:YES];
         return editTripView;
     } else {
         return nil;
@@ -237,6 +238,7 @@
         MCSharedBillTableViewController *sharedbillView = [storyboard instantiateViewControllerWithIdentifier:@"MCSharedBillTableViewController"];
         [sharedbillView setTonightsBill:tonightsBill];
         [sharedbillView setDelegate:self];
+        [sharedbillView setEditing:isEditing animated:YES];
         return sharedbillView;
     } else {
         return nil;
