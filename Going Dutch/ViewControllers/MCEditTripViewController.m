@@ -181,8 +181,6 @@
     [super viewWillAppear:animated];
     
     [tripNameField setText:[tonightsBill tripName]];
-    [[delegate titleLabel] setText:@"People present"];
-    
     [tripNameField setDelegate:self];
     
     if (!twoLabelTitleView) {
@@ -263,9 +261,6 @@
     [self setEdgesForExtendedLayout:UIRectEdgeNone];
     [MCTools setAdBannerIfNotPaid:YES forViewController:self];
     
-    /*
-    [[[[[MCWeAllPayStoreController defaultStore] weAllPayStoreDocument] managedObjectContext] undoManager] enableUndoRegistration];
-     */
     if (!tonightsBill) {
         didSomethingChange = YES;
         tonightsBill = [MCSharedBill addSharedBill];
