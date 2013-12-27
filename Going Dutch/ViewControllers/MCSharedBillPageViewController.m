@@ -48,7 +48,8 @@
 
 - (void)editBillData:(id)sender
 {
-    [self performSegueWithIdentifier:@"openTripInfo" sender:self];
+    //[self performSegueWithIdentifier:@"openTripInfo" sender:self];
+    NSLog(@"Not implemented yet.");
 }
 
 #pragma mark - new in this class
@@ -138,6 +139,11 @@
                                                              otherButtonTitles:@"Send anyway", @"Edit", nil];
         [mailAddressesMissing show];
     }
+}
+
+- (void)sendMail:(id)sender
+{
+    
 }
 
 #pragma mark - Inherited from super
@@ -239,11 +245,13 @@
 
 - (void)prepareForSegue:(UIStoryboardSegue *)segue sender:(id)sender
 {
-    if ([[[[segue destinationViewController] viewControllers] objectAtIndex:0] respondsToSelector:@selector(setTonightsBill:)]) {
-        [[[[segue destinationViewController] viewControllers] objectAtIndex:0] setTonightsBill:tonightsBill];
-    }
-    if ([[[[segue destinationViewController] viewControllers] objectAtIndex:0] respondsToSelector:@selector(setSendMailObject:)]) {
-        [[[[segue destinationViewController] viewControllers] objectAtIndex:0] setSendMailObject:self];
+    if ([[segue destinationViewController] respondsToSelector:@selector(viewControllers)]) {
+        if ([[[[segue destinationViewController] viewControllers] objectAtIndex:0] respondsToSelector:@selector(setTonightsBill:)]) {
+            [[[[segue destinationViewController] viewControllers] objectAtIndex:0] setTonightsBill:tonightsBill];
+        }
+        if ([[[[segue destinationViewController] viewControllers] objectAtIndex:0] respondsToSelector:@selector(setSendMailObject:)]) {
+            [[[[segue destinationViewController] viewControllers] objectAtIndex:0] setSendMailObject:self];
+        }
     }
 }
 

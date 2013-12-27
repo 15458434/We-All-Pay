@@ -17,7 +17,7 @@
 
 @end
 
-@interface MCSharedBillPageViewController : UIPageViewController <UIPageViewControllerDataSource, UIPageViewControllerDelegate, MCTonightsBillTitleDelegate>
+@interface MCSharedBillPageViewController : UIPageViewController <UIPageViewControllerDataSource, UIPageViewControllerDelegate, UIAlertViewDelegate ,MCTonightsBillTitleDelegate>
 {
     __weak IBOutlet UIPageControl *pageViewIndicator;
     NSUInteger newPageNumber;
@@ -30,5 +30,6 @@
 - (IBAction)solveBill:(id)sender;
 
 - (void)shareBill:(id)sender;
+- (void)sendMail:(id)sender;
 
 @end

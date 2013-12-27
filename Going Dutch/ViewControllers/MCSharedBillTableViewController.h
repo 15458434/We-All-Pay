@@ -15,6 +15,12 @@
 @class MCTwoLabelsTitleView;
 @class MCTextFieldAndLabelTitleView;
 
+@protocol MCReturnPaymentViewControllerDelegate <NSObject>
+
+- (void)sendAsMail:(id)sender;
+
+@end
+
 @interface MCSharedBillTableViewController : UITableViewController <NSFetchedResultsControllerDelegate, MFMailComposeViewControllerDelegate, UIAlertViewDelegate, UITextFieldDelegate>
 {
     __strong IBOutlet MCTwoLabelsTitleView *twoLabelTitleView;

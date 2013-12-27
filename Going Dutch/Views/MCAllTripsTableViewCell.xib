@@ -37,7 +37,7 @@
                         <color key="textColor" white="0.33333333333333331" alpha="1" colorSpace="calibratedWhite"/>
                         <color key="highlightedColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                     </label>
-                    <label opaque="NO" clipsSubviews="YES" userInteractionEnabled="NO" contentMode="left" misplaced="YES" text="Label" textAlignment="right" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="28">
+                    <label opaque="NO" clipsSubviews="YES" userInteractionEnabled="NO" contentMode="left" text="Label" textAlignment="right" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="28">
                         <rect key="frame" x="228" y="5" width="72" height="21"/>
                         <autoresizingMask key="autoresizingMask" flexibleMinX="YES" flexibleMaxY="YES"/>
                         <constraints>
@@ -53,7 +53,7 @@
                     <constraint firstItem="3" firstAttribute="top" secondItem="0Bp-j2-w0M" secondAttribute="top" constant="5" id="E8S-Ly-MRW"/>
                     <constraint firstItem="19" firstAttribute="leading" secondItem="3" secondAttribute="leading" constant="34" id="FsX-yn-wmr"/>
                     <constraint firstItem="3" firstAttribute="leading" secondItem="0Bp-j2-w0M" secondAttribute="leading" constant="20" id="I7v-fi-v8y"/>
-                    <constraint firstAttribute="trailing" secondItem="28" secondAttribute="trailing" constant="11" id="VhB-yh-4Rk"/>
+                    <constraint firstAttribute="trailing" secondItem="28" secondAttribute="trailing" constant="20" id="VhB-yh-4Rk"/>
                     <constraint firstAttribute="trailing" secondItem="19" secondAttribute="trailing" constant="68" id="ahZ-ck-xLx"/>
                     <constraint firstItem="28" firstAttribute="top" secondItem="0Bp-j2-w0M" secondAttribute="top" constant="5" id="dCh-rt-KbP"/>
                     <constraint firstAttribute="trailing" relation="greaterThanOrEqual" secondItem="28" secondAttribute="trailing" constant="20" id="fj8-0e-X3h"/>

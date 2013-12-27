@@ -8,6 +8,7 @@
 
 #import "MCReturnPaymentViewController.h"
 #import "MCSharedBillTableViewController.h"
+#import "MCSharedBillPageViewController.h"
 #import "MCSharedBill+addons.h"
 #import "MCReturnPayment.h"
 #import "MCPerson+addons.h"
@@ -27,7 +28,7 @@
 
 - (IBAction)sendAsEmailButtonPressed:(id)sender
 {
-    //[sendMailObject shareBill:self];
+    [sendMailObject shareBill:self];
 }
 
 - (IBAction)mainCancelButtonPressed:(id)sender
