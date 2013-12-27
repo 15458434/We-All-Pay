@@ -470,7 +470,7 @@
     
     [[thisCell personImage] setImage:[thisCellsPerson thumbnail]];
     [[thisCell nameLabel] setText:[thisCellsPerson getFullName]];
-    [[thisCell emailLabel] setText:[thisCellsPerson defaultEmailAddress]];
+    [[thisCell emailLabel] setText:[thisCellsPerson defaultEmailAddress]
     NSNumberFormatter *nf = [[NSNumberFormatter alloc] init];
     [nf setNumberStyle:NSNumberFormatterCurrencyStyle];
     [[thisCell totalSpent] setText:[nf stringFromNumber:[tonightsBill totalSumPaidBy:thisCellsPerson]]];
@@ -481,11 +481,15 @@
 // Override to support conditional editing of the table view.
 - (BOOL)tableView:(UITableView *)tableView canEditRowAtIndexPath:(NSIndexPath *)indexPath
 {
-    MCPerson *person = [dataController objectAtIndexPath:indexPath];
-    if ([tonightsBill hasPersonPaidSomething:person]) {
-        return NO;
+    if ([self isEditing]) {
+        MCPerson *person = [dataController objectAtIndexPath:indexPath];
+        if ([tonightsBill hasPersonPaidSomething:person]) {
+            return NO;
+        } else {
+            return YES;
+        }
     } else {
-        return YES;
+        return NO;
     }
 }
 
