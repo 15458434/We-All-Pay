@@ -218,11 +218,14 @@
 {
     [super viewWillAppear:animated];
     
+    /*
     if ([tonightsBill tripName]) {
         [[delegate titleLabel] setText:[tonightsBill tripName]];
     } else {
         [[delegate titleLabel] setText:@"..."];
     }
+     */
+    [[delegate titleLabel] setText:@"Payment"];
     
     [[self navigationItem] setTitle:[tonightsBill tripName]];
     

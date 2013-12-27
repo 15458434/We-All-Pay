@@ -180,11 +180,8 @@
 {
     [super viewWillAppear:animated];
     
-    if ([tonightsBill tripName]) {
-        [[delegate titleLabel] setText:[tonightsBill tripName]];
-    } else {
-        [[delegate titleLabel] setText:@"..."];
-    }
+    [tripNameField setText:[tonightsBill tripName]];
+    [[delegate titleLabel] setText:@"People present"];
     
     [tripNameField setDelegate:self];
     

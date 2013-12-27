@@ -70,12 +70,7 @@
     
     [self setViewControllersFromStoryboard];
     
-    
-    if ([tonightsBill tripName]) {
-        [titleLabel setText:[tonightsBill tripName]];
-    } else {
-        [titleLabel setText:@"..."];
-    }
+    [titleLabel setText:@"Payments"];
 }
 
 - (void)didReceiveMemoryWarning
@@ -123,8 +118,10 @@
     if (completed && finished) {
         if ([[[self viewControllers] objectAtIndex:0] isKindOfClass:[MCEditTripViewController class]]) {
             [pageViewIndicator setCurrentPage:1];
+            [titleLabel setText:@"People present"];
         } else if ([[[self viewControllers] objectAtIndex:0] isKindOfClass:[MCSharedBillTableViewController class]]) {
             [pageViewIndicator setCurrentPage:0];
+            [titleLabel setText:@"Payments"];
         }
     }
 }
