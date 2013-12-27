@@ -46,7 +46,10 @@
 - (void)editBillData:(id)sender
 {
     //[self performSegueWithIdentifier:@"openTripInfo" sender:self];
-    NSLog(@"Not implemented yet.");
+    [[self presentedViewController] dismissViewControllerAnimated:YES completion:nil];
+    if ([[[self viewControllers] objectAtIndex:0] isKindOfClass:[MCSharedBillTableViewController class]]) {
+        
+    }
 }
 
 #pragma mark - new in this class
@@ -57,6 +60,7 @@
     MCSharedBillTableViewController *sharedBillView = [storyboard instantiateViewControllerWithIdentifier:@"MCSharedBillTableViewController"];
     [sharedBillView setTonightsBill:tonightsBill];
     [pageViewIndicator setCurrentPage:1];
+    [titleLabel setText:@"Payments"];
     NSArray *views = [NSArray arrayWithObjects:sharedBillView, nil];
     [self setViewControllers:views direction:UIPageViewControllerNavigationDirectionReverse animated:YES completion:nil];
     [self setDelegate:self];
@@ -70,6 +74,7 @@
     [editTripView setTonightsBill:tonightsBill];
     NSArray *views = [NSArray arrayWithObjects:editTripView, nil];
     [pageViewIndicator setCurrentPage:0];
+    [titleLabel setText:@"People present"];
     [self setViewControllers:views direction:UIPageViewControllerNavigationDirectionForward animated:YES completion:nil];
     [self setDelegate:self];
     [self setDataSource:self];
@@ -144,7 +149,8 @@
                                                                        message:@"Reason: Not all people have a mail address."
                                                                       delegate:self
                                                              cancelButtonTitle:@"Cancel"
-                                                             otherButtonTitles:@"Send anyway", @"Edit", nil];
+                                                             otherButtonTitles:@"Send anyway", nil];
+        [mailAddressesMissing setDelegate:self];
         [mailAddressesMissing show];
     }
 }
@@ -173,10 +179,8 @@
     if (!tonightsBill) {
         tonightsBill = [MCSharedBill addSharedBill];
         [self setEditTripViewControllerFromStoryboard];
-        [titleLabel setText:@"People present"];
     } else {
         [self setSharedBillViewControllerFromStoryboard];
-        [titleLabel setText:@"Payments"];
     }
     
     [[self navigationController] setToolbarHidden:NO];
