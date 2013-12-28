@@ -82,7 +82,8 @@
 - (void)cancelPersonPicker:(id)selector
 {
     // Set the text of the textView back and resign first responder
-    [payerView setText:[[thisPayment payingPerson] getFullName]];
+    peoplePickerCancelled = YES;
+    //[payerView setText:[[thisPayment payingPerson] getFullName]];
     [payerView resignFirstResponder];
 }
 
@@ -225,6 +226,9 @@
     }
     
     if (textField == payerView) {
+        NSManagedObjectContext *context = [[[MCWeAllPayStoreController defaultStore] weAllPayStoreDocument] managedObjectContext];
+        [[context undoManager] beginUndoGrouping];
+        peoplePickerCancelled = NO;
         NSInteger row = 0;
         MCPerson *payingPerson = [thisPayment payingPerson];
         if (listOfPeople == nil) {
@@ -250,8 +254,19 @@
     if (textField == paidView) {
         /*[self storeMoneySpent];*/
     } else if (textField == payerView) {
-        [self donePersonPicker:self];
-        
+        NSManagedObjectContext *context = [[[MCWeAllPayStoreController defaultStore] weAllPayStoreDocument] managedObjectContext];
+        [context performBlockAndWait:^{
+            [[context undoManager] endUndoGrouping];
+        }];
+        if (!peoplePickerCancelled) {
+            [self donePersonPicker:self];
+        } else {
+            peoplePickerCancelled = YES;
+            [context performBlock:^{
+                [[context undoManager] undoNestedGroup];
+            }];
+            [payerView setText:[[thisPayment payingPerson] getFullName]];
+        }
     } else if (textField == itemView) {
         // Do something to store value of placeview.
         [self storePlaceViewData];

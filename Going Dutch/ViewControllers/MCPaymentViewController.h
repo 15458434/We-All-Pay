@@ -38,6 +38,7 @@
     
     UIPickerView *personPickerView;
     NSArray *listOfPeople;
+    BOOL peoplePickerCancelled;
 }
 
 
