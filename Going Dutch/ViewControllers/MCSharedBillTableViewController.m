@@ -152,7 +152,7 @@
     
     [self updateSubLabel];
     [[self navigationItem] setTitleView:twoLabelTitleView];
-    [[self navigationController] setToolbarHidden:NO];
+    [[self navigationController] setToolbarHidden:YES animated:YES];
 }
 
 - (void)viewDidAppear:(BOOL)animated

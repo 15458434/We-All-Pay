@@ -191,7 +191,7 @@
     [self updateSubLabel];
     [[[self navigationItem] leftBarButtonItem] setEnabled:YES];
     
-    //[[self navigationController] setToolbarHidden:NO animated:YES];
+    [[self navigationController] setToolbarHidden:YES animated:YES];
     [[self view] endEditing:YES];
     
     if (!dataController) {

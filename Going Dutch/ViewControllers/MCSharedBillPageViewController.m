@@ -185,7 +185,7 @@
         [self setSharedBillViewControllerFromStoryboard];
     }
     
-    [[self navigationController] setToolbarHidden:NO];
+    [[self navigationController] setToolbarHidden:YES animated:YES];
 }
 
 - (void)didReceiveMemoryWarning
