@@ -369,10 +369,12 @@
     MCEmailAddress *emailAddress = [MCEmailAddress fetchEmailAddressFor:thisPerson];
     [emailField setText:[emailAddress emailAddress]];
     [pictureView setImage:[thisPerson picture]];
+    /*
     NSNumber *moneySpendByThisPerson = [tonightsBill totalSumPaidBy:thisPerson];
     NSNumberFormatter *nf = [[NSNumberFormatter alloc] init];
     [nf setNumberStyle:NSNumberFormatterCurrencyStyle];
     [totalSumSpendLabel setText:[NSString stringWithFormat:@"Spent %@", [nf stringFromNumber:moneySpendByThisPerson]]];
+     */
 }
 
 - (void)viewDidLoad

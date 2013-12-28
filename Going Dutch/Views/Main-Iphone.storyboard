@@ -129,7 +129,7 @@
         <!--Shared Bill Page View Controller-->
         <scene sceneID="BLZ-lN-WQF">
             <objects>
-                <pageViewController storyboardIdentifier="MCSharedBillPageViewController" autoresizesArchivedViewToFullSize="NO" useStoryboardIdentifierAsRestorationIdentifier="YES" transitionStyle="scroll" navigationOrientation="horizontal" spineLocation="none" id="4g7-52-2bw" customClass="MCSharedBillPageViewController" sceneMemberID="viewController">
+                <pageViewController storyboardIdentifier="MCSharedBillPageViewController" autoresizesArchivedViewToFullSize="NO" useStoryboardIdentifierAsRestorationIdentifier="YES" transitionStyle="scroll" pageSpacing="6" navigationOrientation="horizontal" spineLocation="none" id="4g7-52-2bw" customClass="MCSharedBillPageViewController" sceneMemberID="viewController">
                     <toolbarItems>
                         <barButtonItem style="plain" systemItem="flexibleSpace" id="Eaf-vv-RrD"/>
                         <barButtonItem image="toolbar is sign.png" id="7g4-Fl-FUQ">
@@ -369,13 +369,6 @@
                                     <outlet property="delegate" destination="X5i-vZ-dYW" id="wp0-mA-qfb"/>
                                 </connections>
                             </textField>
-                            <label opaque="NO" clipsSubviews="YES" userInteractionEnabled="NO" contentMode="left" fixedFrame="YES" text="" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="XXs-Lt-VEV">
-                                <rect key="frame" x="101" y="236" width="199" height="21"/>
-                                <autoresizingMask key="autoresizingMask" widthSizable="YES" flexibleMaxY="YES"/>
-                                <fontDescription key="fontDescription" name="HelveticaNeue-Medium" family="Helvetica Neue" pointSize="17"/>
-                                <color key="textColor" cocoaTouchSystemColor="darkTextColor"/>
-                                <nil key="highlightedColor"/>
-                            </label>
                             <button opaque="NO" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="Iac-jb-ETA">
                                 <rect key="frame" x="101" y="198" width="199" height="30"/>
                                 <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
@@ -406,7 +399,6 @@
                         <outlet property="firstNameField" destination="Tln-WZ-m8Z" id="wmK-IR-h3f"/>
                         <outlet property="lastNameField" destination="E8v-zR-iZl" id="RFg-BC-pwo"/>
                         <outlet property="pictureView" destination="BPi-hy-YkK" id="1zt-Ru-6N7"/>
-                        <outlet property="totalSumSpendLabel" destination="XXs-Lt-VEV" id="4HA-k5-jUc"/>
                     </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="Uxq-pJ-OBM" userLabel="First Responder" sceneMemberID="firstResponder"/>
@@ -574,6 +566,6 @@
     </simulatedMetricsContainer>
     <inferredMetricsTieBreakers>
         <segue reference="fdF-mo-JgV"/>
-        <segue reference="dMp-Gm-vjg"/>
+        <segue reference="9j8-CS-9SP"/>
     </inferredMetricsTieBreakers>
 </document>
