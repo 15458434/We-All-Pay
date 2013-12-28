@@ -32,6 +32,8 @@
 		38572AE7169D437B00969C62 /* MCAppDelegate.m in Sources */ = {isa = PBXBuildFile; fileRef = 38572AE6169D437B00969C62 /* MCAppDelegate.m */; };
 		38572B0A169F3D2700969C62 /* MCAllTripsTableViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 38572B09169F3D2700969C62 /* MCAllTripsTableViewController.m */; };
 		385FEE6317CBF77B001013E3 /* Images.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 385FEE6217CBF77B001013E3 /* Images.xcassets */; };
+		38690701186F0E6E006A5C11 /* libTestFlight.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 386906FD186F0E6E006A5C11 /* libTestFlight.a */; };
+		38690703186F0EEF006A5C11 /* libz.dylib in Frameworks */ = {isa = PBXBuildFile; fileRef = 38690702186F0EEF006A5C11 /* libz.dylib */; };
 		3873A2A516F23AA1000832FD /* MessageUI.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 3873A2A416F23AA1000832FD /* MessageUI.framework */; };
 		3876EF591840E86900C9546A /* MCCancelDoneTableViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 3876EF581840E86900C9546A /* MCCancelDoneTableViewController.m */; };
 		3886D3FD16B7A1CD00ECE64F /* AddressBook.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 3886D3FB16B7A1CD00ECE64F /* AddressBook.framework */; };
@@ -110,6 +112,11 @@
 		38572AF6169D443C00969C62 /* MCAllTripsTableViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = MCAllTripsTableViewController.h; path = ViewControllers/MCAllTripsTableViewController.h; sourceTree = "<group>"; };
 		38572B09169F3D2700969C62 /* MCAllTripsTableViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = MCAllTripsTableViewController.m; path = ViewControllers/MCAllTripsTableViewController.m; sourceTree = "<group>"; };
 		385FEE6217CBF77B001013E3 /* Images.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; name = Images.xcassets; path = "We all pay/Images.xcassets"; sourceTree = SOURCE_ROOT; };
+		386906FD186F0E6E006A5C11 /* libTestFlight.a */ = {isa = PBXFileReference; lastKnownFileType = archive.ar; path = libTestFlight.a; sourceTree = "<group>"; };
+		386906FE186F0E6E006A5C11 /* TestFlight.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = TestFlight.h; sourceTree = "<group>"; };
+		386906FF186F0E6E006A5C11 /* TestFlight+AsyncLogging.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "TestFlight+AsyncLogging.h"; sourceTree = "<group>"; };
+		38690700186F0E6E006A5C11 /* TestFlight+ManualSessions.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "TestFlight+ManualSessions.h"; sourceTree = "<group>"; };
+		38690702186F0EEF006A5C11 /* libz.dylib */ = {isa = PBXFileReference; lastKnownFileType = "compiled.mach-o.dylib"; name = libz.dylib; path = usr/lib/libz.dylib; sourceTree = SDKROOT; };
 		3873A2A416F23AA1000832FD /* MessageUI.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = MessageUI.framework; path = System/Library/Frameworks/MessageUI.framework; sourceTree = SDKROOT; };
 		3873A2A616F2858A000832FD /* Going Dutch.entitlements */ = {isa = PBXFileReference; lastKnownFileType = text.xml; path = "Going Dutch.entitlements"; sourceTree = "<group>"; };
 		3876EF571840E86900C9546A /* MCCancelDoneTableViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = MCCancelDoneTableViewController.h; path = ../MCCancelDoneTableViewController.h; sourceTree = "<group>"; };
@@ -176,6 +183,8 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				38690703186F0EEF006A5C11 /* libz.dylib in Frameworks */,
+				38690701186F0E6E006A5C11 /* libTestFlight.a in Frameworks */,
 				3886D3FD16B7A1CD00ECE64F /* AddressBook.framework in Frameworks */,
 				3886D3FE16B7A1CD00ECE64F /* AddressBookUI.framework in Frameworks */,
 				3801F89C16DFC62600DF8675 /* CoreData.framework in Frameworks */,
@@ -255,6 +264,7 @@
 		38572AD5169D437B00969C62 /* Frameworks */ = {
 			isa = PBXGroup;
 			children = (
+				38690702186F0EEF006A5C11 /* libz.dylib */,
 				383E0C561867079900AA688D /* Social.framework */,
 				38F7FFB917E9C2BA00913F62 /* iAd.framework */,
 				3873A2A416F23AA1000832FD /* MessageUI.framework */,
@@ -279,6 +289,7 @@
 				38572AF4169D439E00969C62 /* Views */,
 				38572AF3169D438E00969C62 /* ViewControllers */,
 				38CC9814183D520C006EC35D /* MC SDK */,
+				386906F7186F0D09006A5C11 /* Testflight SDK */,
 				3892E3AF17906B5D0038894B /* MCAddressBookDataReceiver.h */,
 				3892E3B017906B5E0038894B /* MCAddressBookDataReceiver.m */,
 				38572AE5169D437B00969C62 /* MCAppDelegate.h */,
@@ -352,6 +363,17 @@
 				380E02F6185DCF90005DBA33 /* Main-Iphone.storyboard */,
 			);
 			name = Views;
+			sourceTree = "<group>";
+		};
+		386906F7186F0D09006A5C11 /* Testflight SDK */ = {
+			isa = PBXGroup;
+			children = (
+				386906FD186F0E6E006A5C11 /* libTestFlight.a */,
+				386906FE186F0E6E006A5C11 /* TestFlight.h */,
+				386906FF186F0E6E006A5C11 /* TestFlight+AsyncLogging.h */,
+				38690700186F0E6E006A5C11 /* TestFlight+ManualSessions.h */,
+			);
+			name = "Testflight SDK";
 			sourceTree = "<group>";
 		};
 		3892E3AB179055F40038894B /* DataModel */ = {
@@ -624,6 +646,10 @@
 				GCC_PREFIX_HEADER = "Going Dutch/We all pay-Prefix.pch";
 				INFOPLIST_FILE = "Going Dutch/We all pay-Info.plist";
 				IPHONEOS_DEPLOYMENT_TARGET = 7.0;
+				LIBRARY_SEARCH_PATHS = (
+					"$(inherited)",
+					"/Users/markcornelisse/Programming/Going\\ Dutch/Going\\ Dutch",
+				);
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				PROVISIONING_PROFILE = "";
 				TARGETED_DEVICE_FAMILY = 1;
@@ -642,6 +668,10 @@
 				GCC_PREFIX_HEADER = "Going Dutch/We all pay-Prefix.pch";
 				INFOPLIST_FILE = "Going Dutch/We all pay-Info.plist";
 				IPHONEOS_DEPLOYMENT_TARGET = 7.0;
+				LIBRARY_SEARCH_PATHS = (
+					"$(inherited)",
+					"/Users/markcornelisse/Programming/Going\\ Dutch/Going\\ Dutch",
+				);
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				PROVISIONING_PROFILE = "";
 				"PROVISIONING_PROFILE[sdk=iphoneos*]" = "";
