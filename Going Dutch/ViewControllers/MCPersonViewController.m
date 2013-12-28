@@ -49,7 +49,7 @@
 {
     //[[[[MCWeAllPayStoreController defaultStore] weAllPayStoreDocument] managedObjectContext] rollback];
     NSManagedObjectContext *context = [[[MCWeAllPayStoreController defaultStore] weAllPayStoreDocument] managedObjectContext];
-    [context performBlock:^{
+    [context performBlockAndWait:^{
         [[context undoManager] endUndoGrouping];
         [[context undoManager] undoNestedGroup];
     }];
@@ -76,9 +76,10 @@
         }
     }
     NSManagedObjectContext *context = [[[MCWeAllPayStoreController defaultStore] weAllPayStoreDocument] managedObjectContext];
-    [context performBlock:^{
+    [context performBlockAndWait:^{
         [thisPerson setDateModified:[NSDate date]];
         [[context undoManager] endUndoGrouping];
+        [context processPendingChanges];
     }];
     [[[self navigationController] presentingViewController] dismissViewControllerAnimated:YES completion:nil];
 }
