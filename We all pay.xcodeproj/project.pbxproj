@@ -67,6 +67,8 @@
 		38DB85E317E46FE1006237CF /* MCPayment.m in Sources */ = {isa = PBXBuildFile; fileRef = 38DB85E217E46FE1006237CF /* MCPayment.m */; };
 		38DB85E617E46FE2006237CF /* MCSharedBill.m in Sources */ = {isa = PBXBuildFile; fileRef = 38DB85E517E46FE2006237CF /* MCSharedBill.m */; };
 		38DB85E917E46FE2006237CF /* MCPerson.m in Sources */ = {isa = PBXBuildFile; fileRef = 38DB85E817E46FE2006237CF /* MCPerson.m */; };
+		38E63CF0186F904B00904D82 /* MCTableEmptyMessage.m in Sources */ = {isa = PBXBuildFile; fileRef = 38E63CEF186F904B00904D82 /* MCTableEmptyMessage.m */; };
+		38E63CF2186F907400904D82 /* MCTableEmptyMessage.xib in Resources */ = {isa = PBXBuildFile; fileRef = 38E63CF1186F907400904D82 /* MCTableEmptyMessage.xib */; };
 		38EFF2D416D215BE001C8248 /* MCAllTripsTableViewCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 38EFF2D316D215BE001C8248 /* MCAllTripsTableViewCell.m */; };
 		38EFF2D616D215FB001C8248 /* MCAllTripsTableViewCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 38EFF2D516D215FB001C8248 /* MCAllTripsTableViewCell.xib */; };
 		38F7FFBA17E9C2BA00913F62 /* iAd.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 38F7FFB917E9C2BA00913F62 /* iAd.framework */; };
@@ -172,6 +174,9 @@
 		38DB85E517E46FE2006237CF /* MCSharedBill.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = MCSharedBill.m; sourceTree = "<group>"; };
 		38DB85E717E46FE2006237CF /* MCPerson.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = MCPerson.h; sourceTree = "<group>"; };
 		38DB85E817E46FE2006237CF /* MCPerson.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = MCPerson.m; sourceTree = "<group>"; };
+		38E63CEE186F904B00904D82 /* MCTableEmptyMessage.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = MCTableEmptyMessage.h; path = Views/MCTableEmptyMessage.h; sourceTree = "<group>"; };
+		38E63CEF186F904B00904D82 /* MCTableEmptyMessage.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = MCTableEmptyMessage.m; path = Views/MCTableEmptyMessage.m; sourceTree = "<group>"; };
+		38E63CF1186F907400904D82 /* MCTableEmptyMessage.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; name = MCTableEmptyMessage.xib; path = Views/MCTableEmptyMessage.xib; sourceTree = "<group>"; };
 		38EFF2D216D215BE001C8248 /* MCAllTripsTableViewCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = MCAllTripsTableViewCell.h; path = Views/MCAllTripsTableViewCell.h; sourceTree = "<group>"; };
 		38EFF2D316D215BE001C8248 /* MCAllTripsTableViewCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = MCAllTripsTableViewCell.m; path = Views/MCAllTripsTableViewCell.m; sourceTree = "<group>"; };
 		38EFF2D516D215FB001C8248 /* MCAllTripsTableViewCell.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; name = MCAllTripsTableViewCell.xib; path = Views/MCAllTripsTableViewCell.xib; sourceTree = "<group>"; };
@@ -361,6 +366,9 @@
 				380BF82F181088B9008A8B74 /* MCEmailAddressTableViewCell.h */,
 				380BF830181088B9008A8B74 /* MCEmailAddressTableViewCell.m */,
 				380E02F6185DCF90005DBA33 /* Main-Iphone.storyboard */,
+				38E63CF1186F907400904D82 /* MCTableEmptyMessage.xib */,
+				38E63CEE186F904B00904D82 /* MCTableEmptyMessage.h */,
+				38E63CEF186F904B00904D82 /* MCTableEmptyMessage.m */,
 			);
 			name = Views;
 			sourceTree = "<group>";
@@ -510,6 +518,7 @@
 				3898AAE31727B50E008F947E /* toolbar is sign@2x.png in Resources */,
 				3898AAE617297F80008F947E /* mail icon.png in Resources */,
 				380BF82E18108898008A8B74 /* MCEmailAddressTableViewCell.xib in Resources */,
+				38E63CF2186F907400904D82 /* MCTableEmptyMessage.xib in Resources */,
 				3898AAE717297F80008F947E /* mail icon@2x.png in Resources */,
 				38334EB9172C2E050063B919 /* plus sign.png in Resources */,
 				38334EBA172C2E050063B919 /* plus sign@2x.png in Resources */,
@@ -563,6 +572,7 @@
 				38DB85D417E45BCA006237CF /* MCPayment+addons.m in Sources */,
 				3892E3AA17904A240038894B /* MCPersonViewController.m in Sources */,
 				3892E3AE179056420038894B /* MCReturnPayment.m in Sources */,
+				38E63CF0186F904B00904D82 /* MCTableEmptyMessage.m in Sources */,
 				3892E3B117906B5E0038894B /* MCAddressBookDataReceiver.m in Sources */,
 				38DB85E017E46FE1006237CF /* MCEmailAddress.m in Sources */,
 				3830F6F6179872B400904FAF /* MCPaymentViewController.m in Sources */,

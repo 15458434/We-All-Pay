@@ -13,10 +13,13 @@
 
 @class MCWeAllPayStoreController;
 @class MCTwoLabelsTitleView;
+@class MCTableEmptyMessage;
 
 @interface MCAllTripsTableViewController : UITableViewController < NSFetchedResultsControllerDelegate>
 {
     __strong IBOutlet MCTwoLabelsTitleView *titleView;
+    __weak IBOutlet UIView *emptyMessageView;
+    MCTableEmptyMessage *emptyMessage;
     
     NSDateFormatter *df;
     NSFetchedResultsController *dataController;

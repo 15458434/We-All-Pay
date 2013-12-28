@@ -13,6 +13,7 @@
 
 #import "MCAllTripsTableViewCell.h"
 #import "MCTwoLabelsTitleView.h"
+#import "MCTableEmptyMessage.h"
 
 #import "MCWeAllPayStoreController.h"
 #import "MCSharedBill+addons.h"
@@ -62,6 +63,21 @@
     [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(performFetchAndReloadTableView:) name:UIDocumentStateChangedNotification object:weAllPayDocument];
 }
 
+- (void)setEmptyMessage
+{
+    if (![[dataController fetchedObjects] count] == 0) {
+        [UIView animateWithDuration:1.0 animations:^{
+            [[emptyMessage bigMessage] setAlpha:0.0];
+            [[self tableView] setSeparatorStyle:UITableViewCellSeparatorStyleSingleLine];
+        } completion:nil];
+    } else {
+        [UIView animateWithDuration:1.0 animations:^{
+            [[emptyMessage bigMessage] setAlpha:1.0];
+            [[self tableView] setSeparatorStyle:UITableViewCellSeparatorStyleNone];
+        } completion:nil];
+    }
+}
+
 - (void)performFetchAndReloadTableView:(NSNotification *)notification
 {
     UIManagedDocument *weAllPayDocument = [[MCWeAllPayStoreController defaultStore] weAllPayStoreDocument];
@@ -69,6 +85,7 @@
         [self performFetch];
         [[self tableView] reloadData];
         [[NSNotificationCenter defaultCenter] removeObserver:self];
+        [self setEmptyMessage];
     }
 }
 
@@ -95,6 +112,8 @@
 - (void)viewWillAppear:(BOOL)animated
 {
     [super viewWillAppear:animated];
+    
+    
     
     // Set the titleView.
     if (!titleView) {
@@ -135,6 +154,10 @@
     
     // Register this nib that contains the cell.
     [[ self tableView] registerNib:nib forCellReuseIdentifier:@"MCAllTripsTableViewCell"];
+    
+    emptyMessage = [[[NSBundle mainBundle] loadNibNamed:@"MCTableEmptyMessage" owner:self options:nil] objectAtIndex:0];
+    [[emptyMessage bigMessage] setAlpha:0.0];
+    [[self tableView] setBackgroundView:emptyMessage];
 }
 
 - (void)didReceiveMemoryWarning
@@ -171,15 +194,18 @@
         case NSFetchedResultsChangeInsert:
             [[self tableView] insertRowsAtIndexPaths:[NSArray arrayWithObject:newIndexPath]
                                     withRowAnimation:UITableViewRowAnimationFade];
+            [self setEmptyMessage];
             break;
             
         case NSFetchedResultsChangeDelete:
             [[self tableView] deleteRowsAtIndexPaths:[NSArray arrayWithObject:indexPath]
                                     withRowAnimation:UITableViewRowAnimationFade];
+            [self setEmptyMessage];
             break;
             
         case NSFetchedResultsChangeUpdate:
             [[self tableView] reloadRowsAtIndexPaths:[NSArray arrayWithObject:indexPath] withRowAnimation:UITableViewRowAnimationAutomatic];
+            [self setEmptyMessage];
             break;
             
         case NSFetchedResultsChangeMove:
