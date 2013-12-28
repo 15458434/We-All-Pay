@@ -54,14 +54,14 @@
         [self storePlaceViewData];
     }
 
-    if (didSomethingChange) {
-        NSManagedObjectContext *context = [[[MCWeAllPayStoreController defaultStore] weAllPayStoreDocument] managedObjectContext];
-        [context performBlockAndWait:^{
-            [[context undoManager] endUndoGrouping];
-            [[context undoManager] disableUndoRegistration];
+    NSManagedObjectContext *context = [[[MCWeAllPayStoreController defaultStore] weAllPayStoreDocument] managedObjectContext];
+    [context performBlockAndWait:^{
+        [[context undoManager] endUndoGrouping];
+        [[context undoManager] disableUndoRegistration];
+        if (didSomethingChange) {
             [context processPendingChanges];
-        }];
-    }
+        }
+    }];
     [[[self navigationController] presentingViewController] dismissViewControllerAnimated:YES completion:nil];
 }
 
@@ -262,7 +262,7 @@
             [self donePersonPicker:self];
         } else {
             peoplePickerCancelled = YES;
-            [context performBlock:^{
+            [context performBlockAndWait:^{
                 [[context undoManager] undoNestedGroup];
             }];
             [payerView setText:[[thisPayment payingPerson] getFullName]];
