@@ -339,6 +339,8 @@
 {
     [super viewWillAppear:animated];
     
+    [[self navigationController] setToolbarHidden:YES animated:YES];
+    
     if (!twoLabelTitleView) {
         twoLabelTitleView = [[[NSBundle mainBundle] loadNibNamed:@"MCTwoLabelsTitleView" owner:self options:nil] objectAtIndex:0];
         if (isNew) {
@@ -363,7 +365,7 @@
     
     [[[self navigationItem] rightBarButtonItem] setEnabled:didSomethingChange];
     [addressBookButton setEnabled:!thisPersonHasPaidSomething];
-    [[self navigationController] setToolbarHidden:NO animated:animated];
+
     [firstNameField setText:[thisPerson firstName]];
     [lastNameField setText:[thisPerson lastName]];
     MCEmailAddress *emailAddress = [MCEmailAddress fetchEmailAddressFor:thisPerson];
@@ -387,8 +389,6 @@
     } else {
         [MCTools setAdBannerIfNotPaid:YES forViewController:self];
     }
-    
-    [[self navigationController] setToolbarHidden:YES];
     
     NSManagedObjectContext *context = [[[MCWeAllPayStoreController defaultStore] weAllPayStoreDocument] managedObjectContext];
     [[context undoManager] beginUndoGrouping];
