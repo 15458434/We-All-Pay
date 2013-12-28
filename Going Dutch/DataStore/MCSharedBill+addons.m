@@ -216,8 +216,12 @@
 - (NSNumber *)amountPeopleShouldHavePaid
 {
     double sumOfMoney = [[self totalSumOfMoneyOfThisSharedBill] doubleValue];
-    double average = sumOfMoney / [[self peoplePresent] count];
-    return [NSNumber numberWithDouble:average];
+    if ([[self peoplePresent] count] > 0) {
+        double average = sumOfMoney / [[self peoplePresent] count];
+        return [NSNumber numberWithDouble:average];
+    } else {
+        return [NSNumber numberWithDouble:0.0];
+    }
 }
 
 - (NSArray *)solveWhoHasToPayWhoFromThisBill
