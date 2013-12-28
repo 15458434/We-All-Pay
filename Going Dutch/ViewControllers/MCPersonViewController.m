@@ -363,7 +363,7 @@
     
     [self performFetch];
     
-    [[[self navigationItem] rightBarButtonItem] setEnabled:didSomethingChange];
+    // [[[self navigationItem] rightBarButtonItem] setEnabled:didSomethingChange];
     [addressBookButton setEnabled:!thisPersonHasPaidSomething];
 
     [firstNameField setText:[thisPerson firstName]];
