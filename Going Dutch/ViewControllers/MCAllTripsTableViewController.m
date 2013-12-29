@@ -205,7 +205,6 @@
             
         case NSFetchedResultsChangeUpdate:
             [[self tableView] reloadRowsAtIndexPaths:[NSArray arrayWithObject:indexPath] withRowAnimation:UITableViewRowAnimationAutomatic];
-            [self setEmptyMessage];
             break;
             
         case NSFetchedResultsChangeMove:

@@ -14,8 +14,10 @@
 #import "MCWeAllPayStoreController.h"
 #import "MCPerson+addons.h"
 #import "MCSharedBill+addons.h"
+
 #import "MCPersonTableViewCell.h"
 #import "MCTwoLabelsTitleView.h"
+#import "MCTableEmptyMessage.h"
 
 @interface MCEditTripViewController ()
 
@@ -165,6 +167,21 @@
     }
 }
 
+- (void)setEmptyMessage
+{
+    if (![[dataController fetchedObjects] count] == 0) {
+        [UIView animateWithDuration:1.0 animations:^{
+            [[emptyMessage bigMessage] setAlpha:0.0];
+            [[self tableView] setSeparatorStyle:UITableViewCellSeparatorStyleSingleLine];
+        } completion:nil];
+    } else {
+        [UIView animateWithDuration:1.0 animations:^{
+            [[emptyMessage bigMessage] setAlpha:1.0];
+            [[self tableView] setSeparatorStyle:UITableViewCellSeparatorStyleNone];
+        } completion:nil];
+    }
+}
+
 #pragma mark - inherited from super
 
 - (id)initWithStyle:(UITableViewStyle)style
@@ -295,6 +312,13 @@
     // Load and register Nib to the tableView for use.
     UINib *nib = [UINib nibWithNibName:@"MCPersonTableViewCell" bundle:nil];
     [[self tableView] registerNib:nib forCellReuseIdentifier:@"MCPersonTableViewCell"];
+    
+    emptyMessage = [[[NSBundle mainBundle] loadNibNamed:@"MCTableEmptyMessage" owner:self options:nil] objectAtIndex:0];
+    [[emptyMessage bigMessage] setText:@"Press \"add Person\" to add a person who you'd like to share this bill with."];
+    if ([[dataController fetchedObjects] count] > 0) {
+        [[emptyMessage bigMessage] setAlpha:0.0];
+    }
+    [[self tableView] setBackgroundView:emptyMessage];
 }
 
 - (void)didReceiveMemoryWarning
@@ -403,12 +427,14 @@
             [[self tableView] insertRowsAtIndexPaths:[NSArray arrayWithObject:newIndexPath]
                                     withRowAnimation:UITableViewRowAnimationFade];
             [self updateSubLabel];
+            [self setEmptyMessage];
             break;
             
         case NSFetchedResultsChangeDelete:
             [[self tableView] deleteRowsAtIndexPaths:[NSArray arrayWithObject:indexPath]
                                     withRowAnimation:UITableViewRowAnimationFade];
             [self updateSubLabel];
+            [self setEmptyMessage];
             break;
             
         case NSFetchedResultsChangeUpdate:

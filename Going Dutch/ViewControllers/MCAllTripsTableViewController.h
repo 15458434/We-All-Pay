@@ -18,7 +18,6 @@
 @interface MCAllTripsTableViewController : UITableViewController < NSFetchedResultsControllerDelegate>
 {
     __strong IBOutlet MCTwoLabelsTitleView *titleView;
-    __weak IBOutlet UIView *emptyMessageView;
     MCTableEmptyMessage *emptyMessage;
     
     NSDateFormatter *df;

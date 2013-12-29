@@ -21,7 +21,7 @@
 
 #import "MCPaymentTableViewCell.h"
 #import "MCTwoLabelsTitleView.h"
-#import "MCTextFieldAndLabelTitleView.h"
+#import "MCTableEmptyMessage.h"
 
 #import "MCReturnPayment.h"
 
@@ -110,6 +110,21 @@
     }
 }
 
+- (void)setEmptyMessage
+{
+    if (![[dataController fetchedObjects] count] == 0) {
+        [UIView animateWithDuration:1.0 animations:^{
+            [[emptyMessage bigMessage] setAlpha:0.0];
+            [[self tableView] setSeparatorStyle:UITableViewCellSeparatorStyleSingleLine];
+        } completion:nil];
+    } else {
+        [UIView animateWithDuration:1.0 animations:^{
+            [[emptyMessage bigMessage] setAlpha:1.0];
+            [[self tableView] setSeparatorStyle:UITableViewCellSeparatorStyleNone];
+        } completion:nil];
+    }
+}
+
 #pragma mark - Inherited from super class.
 
 - (id)init
@@ -194,6 +209,14 @@
         [dataController setDelegate:self];
     }
     
+    emptyMessage = [[[NSBundle mainBundle] loadNibNamed:@"MCTableEmptyMessage" owner:self options:nil] objectAtIndex:0];
+    [[self tableView] setBackgroundView:emptyMessage];
+    [[emptyMessage bigMessage] setText:@"Press \"add payment\" to add a payment to this event."];
+    [[emptyMessage bigMessage] setTextColor:[UIColor lightGrayColor]];
+    [emptyMessage setBackgroundColor:[UIColor groupTableViewBackgroundColor]];
+    if ([[dataController fetchedObjects] count] > 0) {
+        [[emptyMessage bigMessage] setAlpha:0.0];
+    }
 }
 
 - (void)viewWillDisappear:(BOOL)animated
@@ -286,11 +309,13 @@
         case NSFetchedResultsChangeInsert:
             [[self tableView] insertRowsAtIndexPaths:[NSArray arrayWithObject:newIndexPath]
                                     withRowAnimation:UITableViewRowAnimationFade];
+            [self setEmptyMessage];
             break;
             
         case NSFetchedResultsChangeDelete:
             [[self tableView] deleteRowsAtIndexPaths:[NSArray arrayWithObject:indexPath]
                                     withRowAnimation:UITableViewRowAnimationFade];
+            [self setEmptyMessage];
             break;
             
         case NSFetchedResultsChangeUpdate:

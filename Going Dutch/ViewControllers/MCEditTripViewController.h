@@ -15,6 +15,7 @@
 @class MCPeople;
 @class MCSharedBill;
 @class MCTwoLabelsTitleView;
+@class MCTableEmptyMessage;
 
 @interface MCEditTripViewController : UITableViewController <NSFetchedResultsControllerDelegate, UITextFieldDelegate, UIAlertViewDelegate, MCPersonViewChangeDelegate>
 {
@@ -24,6 +25,7 @@
     IBOutlet UITextField *tripNameField;
     IBOutlet UIBarButtonItem *doneButton;
     __strong IBOutlet MCTwoLabelsTitleView *twoLabelTitleView;
+    MCTableEmptyMessage *emptyMessage;
     
     NSFetchedResultsController *dataController;
     MCAddressBookDataReceiver *personReceiver;

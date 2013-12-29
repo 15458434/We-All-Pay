@@ -14,6 +14,7 @@
 @class MCAllTripsTableViewController;
 @class MCTwoLabelsTitleView;
 @class MCTextFieldAndLabelTitleView;
+@class MCTableEmptyMessage;
 
 @protocol MCReturnPaymentViewControllerDelegate <NSObject>
 
@@ -24,6 +25,7 @@
 @interface MCSharedBillTableViewController : UITableViewController <NSFetchedResultsControllerDelegate, MFMailComposeViewControllerDelegate, UIAlertViewDelegate, UITextFieldDelegate>
 {
     __strong IBOutlet MCTwoLabelsTitleView *twoLabelTitleView;
+    MCTableEmptyMessage *emptyMessage;
     
     NSFetchedResultsController *dataController;
     
