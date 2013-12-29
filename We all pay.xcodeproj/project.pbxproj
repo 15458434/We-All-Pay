@@ -114,6 +114,7 @@
 		38572AF6169D443C00969C62 /* MCAllTripsTableViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = MCAllTripsTableViewController.h; path = ViewControllers/MCAllTripsTableViewController.h; sourceTree = "<group>"; };
 		38572B09169F3D2700969C62 /* MCAllTripsTableViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = MCAllTripsTableViewController.m; path = ViewControllers/MCAllTripsTableViewController.m; sourceTree = "<group>"; };
 		385FEE6217CBF77B001013E3 /* Images.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; name = Images.xcassets; path = "We all pay/Images.xcassets"; sourceTree = SOURCE_ROOT; };
+		3867CE4018703E9A001EC222 /* nl */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = nl; path = nl.lproj/InfoPlist.strings; sourceTree = "<group>"; };
 		386906FD186F0E6E006A5C11 /* libTestFlight.a */ = {isa = PBXFileReference; lastKnownFileType = archive.ar; path = libTestFlight.a; sourceTree = "<group>"; };
 		386906FE186F0E6E006A5C11 /* TestFlight.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = TestFlight.h; sourceTree = "<group>"; };
 		386906FF186F0E6E006A5C11 /* TestFlight+AsyncLogging.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "TestFlight+AsyncLogging.h"; sourceTree = "<group>"; };
@@ -495,6 +496,7 @@
 			hasScannedForEncodings = 0;
 			knownRegions = (
 				en,
+				nl,
 			);
 			mainGroup = 38572AC7169D437B00969C62;
 			productRefGroup = 38572AD3169D437B00969C62 /* Products */;
@@ -586,6 +588,7 @@
 			isa = PBXVariantGroup;
 			children = (
 				38572AE0169D437B00969C62 /* en */,
+				3867CE4018703E9A001EC222 /* nl */,
 			);
 			name = InfoPlist.strings;
 			sourceTree = "<group>";

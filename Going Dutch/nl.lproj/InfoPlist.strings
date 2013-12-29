@@ -1,0 +1,17 @@
+/* Localized versions of Info.plist keys */
+
+NSContactsUsageDescription = "Voeg direct vrienden toe aan een rekening vanuit Contacten.";
+
+/* MCAllTripsTableView */
+
+/* SharedBillPageView */
+
+/* SharedBillTableView */
+
+/* EditTripView */
+
+/* PaymentView */
+
+/* PersonView */
+
+/* ReturnPaymentView */
