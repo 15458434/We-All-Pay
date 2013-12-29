@@ -73,7 +73,7 @@
                             <rect key="frame" x="0.0" y="0.0" width="320" height="70"/>
                             <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                             <subviews>
-                                <button opaque="NO" contentMode="scaleToFill" ambiguous="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="x8t-7z-SNG">
+                                <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="x8t-7z-SNG">
                                     <rect key="frame" x="20" y="20" width="92" height="30"/>
                                     <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                                     <constraints>
@@ -86,7 +86,7 @@
                                         <segue destination="nev-wB-yEW" kind="modal" identifier="openPaymentView" id="VXj-2a-az5"/>
                                     </connections>
                                 </button>
-                                <button opaque="NO" contentMode="scaleToFill" ambiguous="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="Prv-KL-M67">
+                                <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="Prv-KL-M67">
                                     <rect key="frame" x="208" y="20" width="92" height="30"/>
                                     <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                                     <constraints>
@@ -102,6 +102,9 @@
                             </subviews>
                             <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="calibratedWhite"/>
                             <constraints>
+                                <constraint firstItem="x8t-7z-SNG" firstAttribute="leading" secondItem="eaE-b1-r5K" secondAttribute="leading" constant="20" id="6gT-g5-kUV"/>
+                                <constraint firstAttribute="trailing" secondItem="Prv-KL-M67" secondAttribute="trailing" constant="20" id="Hl2-OH-SVQ"/>
+                                <constraint firstItem="Prv-KL-M67" firstAttribute="top" secondItem="eaE-b1-r5K" secondAttribute="top" constant="20" id="mMZ-vE-0bY"/>
                                 <constraint firstItem="x8t-7z-SNG" firstAttribute="top" secondItem="eaE-b1-r5K" secondAttribute="top" constant="20" id="nGr-ii-M42"/>
                             </constraints>
                         </view>
@@ -204,11 +207,11 @@
                             <rect key="frame" x="0.0" y="0.0" width="320" height="70"/>
                             <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                             <subviews>
-                                <button opaque="NO" contentMode="scaleToFill" misplaced="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="ROW-vp-ekh">
+                                <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="ROW-vp-ekh">
                                     <rect key="frame" x="112" y="20" width="97" height="30"/>
                                     <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                                     <constraints>
-                                        <constraint firstAttribute="width" priority="900" constant="97" id="U75-QN-6Hy"/>
+                                        <constraint firstAttribute="width" constant="97" id="BT0-AI-MoG"/>
                                     </constraints>
                                     <state key="normal" title="send as email">
                                         <color key="titleShadowColor" white="0.5" alpha="1" colorSpace="calibratedWhite"/>
@@ -220,9 +223,9 @@
                             </subviews>
                             <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="calibratedWhite"/>
                             <constraints>
-                                <constraint firstAttribute="trailing" secondItem="ROW-vp-ekh" secondAttribute="trailing" constant="20" symbolic="YES" id="Qbn-bl-Ii1"/>
-                                <constraint firstItem="ROW-vp-ekh" firstAttribute="leading" secondItem="kmK-CE-AdT" secondAttribute="leading" constant="20" symbolic="YES" id="fRp-ka-yWr"/>
+                                <constraint firstAttribute="trailing" secondItem="ROW-vp-ekh" secondAttribute="trailing" constant="111" id="7Y1-4R-wSV"/>
                                 <constraint firstItem="ROW-vp-ekh" firstAttribute="top" secondItem="kmK-CE-AdT" secondAttribute="top" constant="20" id="ipA-bX-VvO"/>
+                                <constraint firstItem="ROW-vp-ekh" firstAttribute="leading" secondItem="kmK-CE-AdT" secondAttribute="leading" constant="112" id="u5n-yv-hul"/>
                                 <constraint firstAttribute="bottom" secondItem="ROW-vp-ekh" secondAttribute="bottom" constant="20" id="vZv-JN-GPw"/>
                             </constraints>
                         </view>
@@ -276,7 +279,7 @@
                                         <outlet property="delegate" destination="AUO-87-nmq" id="I8H-Dv-Zcm"/>
                                     </connections>
                                 </textField>
-                                <button opaque="NO" contentMode="scaleToFill" ambiguous="YES" placeholderIntrinsicWidth="127" placeholderIntrinsicHeight="30" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="gfv-ln-Tgv">
+                                <button opaque="NO" contentMode="scaleToFill" placeholderIntrinsicWidth="127" placeholderIntrinsicHeight="30" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="gfv-ln-Tgv">
                                     <rect key="frame" x="20" y="58" width="127" height="30"/>
                                     <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                                     <constraints>
@@ -290,7 +293,7 @@
                                         <segue destination="9Lr-fw-GBI" kind="modal" identifier="openEditPerson" id="tvm-Nk-i56"/>
                                     </connections>
                                 </button>
-                                <button opaque="NO" contentMode="scaleToFill" ambiguous="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="AlH-w9-wjE">
+                                <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="AlH-w9-wjE">
                                     <rect key="frame" x="173" y="58" width="127" height="30"/>
                                     <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                                     <constraints>
@@ -305,6 +308,12 @@
                                 </button>
                             </subviews>
                             <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="calibratedWhite"/>
+                            <constraints>
+                                <constraint firstAttribute="trailing" secondItem="AlH-w9-wjE" secondAttribute="trailing" constant="20" id="3HB-d0-fYN"/>
+                                <constraint firstItem="AlH-w9-wjE" firstAttribute="top" secondItem="wmR-8m-HJR" secondAttribute="top" constant="58" id="Hzx-Va-YOR"/>
+                                <constraint firstItem="gfv-ln-Tgv" firstAttribute="leading" secondItem="wmR-8m-HJR" secondAttribute="leading" constant="20" id="QBN-x3-F4v"/>
+                                <constraint firstItem="gfv-ln-Tgv" firstAttribute="top" secondItem="wmR-8m-HJR" secondAttribute="top" constant="58" id="Xt8-vQ-iwI"/>
+                            </constraints>
                         </view>
                         <prototypes>
                             <tableViewCell contentMode="scaleToFill" selectionStyle="blue" hidesAccessoryWhenEditing="NO" indentationLevel="1" indentationWidth="0.0" id="i9Y-ku-g7W">
