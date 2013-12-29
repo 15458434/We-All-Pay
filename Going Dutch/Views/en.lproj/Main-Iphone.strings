@@ -1,0 +1,51 @@
+
+/* Class = "IBUITextField"; placeholder = "Who paid?"; ObjectID = "1pE-Xb-V7e"; */
+"1pE-Xb-V7e.placeholder" = "Who paid?";
+
+/* Class = "IBUITextField"; placeholder = "e-mail address"; ObjectID = "4YY-Cv-Jxg"; */
+"4YY-Cv-Jxg.placeholder" = "e-mail address";
+
+/* Class = "IBUIButton"; normalTitle = "addressbook"; ObjectID = "AlH-w9-wjE"; */
+"AlH-w9-wjE.normalTitle" = "addressbook";
+
+/* Class = "IBUITextField"; placeholder = "Activity name"; ObjectID = "BJS-wA-qlM"; */
+"BJS-wA-qlM.placeholder" = "Activity name";
+
+/* Class = "IBUITextField"; placeholder = "Last name"; ObjectID = "E8v-zR-iZl"; */
+"E8v-zR-iZl.placeholder" = "Last name";
+
+/* Class = "IBUIButton"; normalTitle = "Select emailaddress"; ObjectID = "Iac-jb-ETA"; */
+"Iac-jb-ETA.normalTitle" = "Select emailaddress";
+
+/* Class = "IBUIButton"; normalTitle = "new event"; ObjectID = "PRz-eP-dNH"; */
+"PRz-eP-dNH.normalTitle" = "new event";
+
+/* Class = "IBUIButton"; normalTitle = "solve"; ObjectID = "Prv-KL-M67"; */
+"Prv-KL-M67.normalTitle" = "solve";
+
+/* Class = "IBUIButton"; normalTitle = "send as email"; ObjectID = "ROW-vp-ekh"; */
+"ROW-vp-ekh.normalTitle" = "send as email";
+
+/* Class = "IBUITextField"; placeholder = "First Name"; ObjectID = "Tln-WZ-m8Z"; */
+"Tln-WZ-m8Z.placeholder" = "First Name";
+
+/* Class = "IBUILabel"; text = "Label"; ObjectID = "cvx-xv-4K0"; */
+"cvx-xv-4K0.text" = "Label";
+
+/* Class = "IBUIBarButtonItem"; title = "info"; ObjectID = "eFV-hJ-XhB"; */
+"eFV-hJ-XhB.title" = "info";
+
+/* Class = "IBUITextField"; placeholder = "What got paid?"; ObjectID = "ga1-Zt-7fC"; */
+"ga1-Zt-7fC.placeholder" = "What got paid?";
+
+/* Class = "IBUIButton"; normalTitle = "add person"; ObjectID = "gfv-ln-Tgv"; */
+"gfv-ln-Tgv.normalTitle" = "add person";
+
+/* Class = "IBUILabel"; text = "Label"; ObjectID = "oKh-Bm-aHC"; */
+"oKh-Bm-aHC.text" = "Label";
+
+/* Class = "IBUITextField"; placeholder = "How much is spent?"; ObjectID = "tHo-ke-Wsb"; */
+"tHo-ke-Wsb.placeholder" = "How much is spent?";
+
+/* Class = "IBUIButton"; normalTitle = "add payment"; ObjectID = "x8t-7z-SNG"; */
+"x8t-7z-SNG.normalTitle" = "add payment";
