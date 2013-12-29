@@ -41,7 +41,7 @@
 
 - (IBAction)tellAFriendAboutWeAllPay:(id)sender
 {
-    NSArray *dataToShare = [NSArray arrayWithObject:[NSString stringWithFormat:@"Hi, I found We All Pay this easy to use app to share a bill with a group of friends."]];
+    NSArray *dataToShare = [NSArray arrayWithObject:[NSString stringWithFormat:@"Hi, I found this easy to use iPhone app to share a bill amongst friends. It's called \"We All Pay\"."]];
     UIActivityViewController *shareMe = [[UIActivityViewController alloc] initWithActivityItems:dataToShare applicationActivities:nil];
     [self presentViewController:shareMe animated:YES completion:nil];
 }
