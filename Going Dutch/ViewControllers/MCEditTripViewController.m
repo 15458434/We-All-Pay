@@ -314,7 +314,7 @@
     [[self tableView] registerNib:nib forCellReuseIdentifier:@"MCPersonTableViewCell"];
     
     emptyMessage = [[[NSBundle mainBundle] loadNibNamed:@"MCTableEmptyMessage" owner:self options:nil] objectAtIndex:0];
-    [[emptyMessage bigMessage] setText:@"Press \"add Person\" to add a person who you'd like to share this bill with."];
+    [[emptyMessage bigMessage] setText:NSLocalizedString(@"PEOPLE_LIST_EMPTY_MESSAGE", @"Press \"add Person\" to add a person who you'd like to share this bill with.")];
     if ([[dataController fetchedObjects] count] > 0) {
         [[emptyMessage bigMessage] setAlpha:0.0];
     }

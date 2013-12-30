@@ -34,3 +34,7 @@
 "TOTAL_SPENT" = "Total spent:";
 /* As in Mark owes Arjen, but then just the word owes. */
 "OWES" = "owes";
+
+/* MCEditTripView */
+/* Press \"add Person\" to add a person who you'd like to share this bill with. */
+"PEOPLE_LIST_EMPTY_MESSAGE" = "Press \"add Person\" to add a person who you'd like to share this bill with.";
