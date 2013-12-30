@@ -32,3 +32,5 @@
 "EACH_PAYS" = "Per persoon:";
 /* Total spent: $ string inside the header of the solution screen */
 "TOTAL_SPENT" = "Totaal:";
+/* As in Mark owes Arjen, but then just the word owes. */
+"OWES" = "betaalt";
