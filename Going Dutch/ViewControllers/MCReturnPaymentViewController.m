@@ -73,8 +73,10 @@
     NSNumber *totalSpent = [tonightsBill totalSumOfMoneyOfThisSharedBill];
     NSNumberFormatter *nf = [[NSNumberFormatter alloc] init];
     [nf setNumberStyle:NSNumberFormatterCurrencyStyle];
-    [[twoLabelTitleView mainLabel] setText:[NSString stringWithFormat:@"Each pays: %@", [nf stringFromNumber:averagePay]]];
-    [[twoLabelTitleView subLabel] setText:[NSString stringWithFormat:@"Total spent: %@", [nf stringFromNumber:totalSpent]]];
+    NSString *eachPays = NSLocalizedString(@"EACH_PAYS", @"Each pays: $ string inside the header of the solution screen");
+    [[twoLabelTitleView mainLabel] setText:[NSString stringWithFormat:@"%@ %@", eachPays, [nf stringFromNumber:averagePay]]];
+    NSString *totalSpentString = NSLocalizedString(@"TOTAL_SPENT", @"Total spent: $ string inside the header of the solution screen.");
+    [[twoLabelTitleView subLabel] setText:[NSString stringWithFormat:@"%@ %@", totalSpentString, [nf stringFromNumber:totalSpent]]];
     if (SYSTEM_VERSION_LESS_THAN(@"7.0")) {
         [[twoLabelTitleView mainLabel] setTextColor:[UIColor whiteColor]];
         [[twoLabelTitleView subLabel] setTextColor:[UIColor whiteColor]];

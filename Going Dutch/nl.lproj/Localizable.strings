@@ -27,4 +27,8 @@
 "PAYMENTCELL_PAYERNAME_EXTRA" = "";
 "PAYMENT_CELL_PAIDFOR_EXTRA" = "betaalde ";
 
-/* ReturnPaymentView */
+/* MCReturnPaymentView */
+/* Each pays: $ string inside the header of the solution screen. */
+"EACH_PAYS" = "Per persoon:";
+/* Total spent: $ string inside the header of the solution screen */
+"TOTAL_SPENT" = "Totaal:";
