@@ -13,35 +13,35 @@
                 <rect key="frame" x="0.0" y="0.0" width="320" height="59"/>
                 <autoresizingMask key="autoresizingMask"/>
                 <subviews>
-                    <label opaque="NO" clipsSubviews="YES" userInteractionEnabled="NO" contentMode="left" misplaced="YES" text="Label" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="3">
-                        <rect key="frame" x="20" y="5" width="189" height="21"/>
+                    <label opaque="NO" clipsSubviews="YES" userInteractionEnabled="NO" contentMode="left" ambiguous="YES" misplaced="YES" text="1" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="3">
+                        <rect key="frame" x="20" y="5" width="239" height="21"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                        <constraints>
+                            <constraint firstAttribute="width" relation="lessThanOrEqual" priority="1" constant="239" id="avM-SX-HGk"/>
+                        </constraints>
                         <fontDescription key="fontDescription" name="HelveticaNeue-Medium" family="Helvetica Neue" pointSize="17"/>
                         <color key="textColor" cocoaTouchSystemColor="darkTextColor"/>
                         <color key="highlightedColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                     </label>
-                    <label opaque="NO" clipsSubviews="YES" userInteractionEnabled="NO" contentMode="left" text="Label" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="8">
-                        <rect key="frame" x="54" y="25" width="198" height="15"/>
+                    <label opaque="NO" clipsSubviews="YES" userInteractionEnabled="NO" contentMode="left" placeholderIntrinsicWidth="246" placeholderIntrinsicHeight="15" text="3" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="8">
+                        <rect key="frame" x="54" y="25" width="246" height="15"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" flexibleMaxX="YES" flexibleMaxY="YES"/>
-                        <constraints>
-                            <constraint firstAttribute="height" constant="15" id="TJz-zr-hhe"/>
-                        </constraints>
                         <fontDescription key="fontDescription" name="HelveticaNeue-Medium" family="Helvetica Neue" pointSize="12"/>
                         <color key="textColor" white="0.33333333333333331" alpha="1" colorSpace="calibratedWhite"/>
                         <color key="highlightedColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                     </label>
-                    <label opaque="NO" clipsSubviews="YES" userInteractionEnabled="NO" contentMode="left" text="Label" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="19">
-                        <rect key="frame" x="54" y="40" width="198" height="15"/>
+                    <label opaque="NO" clipsSubviews="YES" userInteractionEnabled="NO" contentMode="left" misplaced="YES" text="4" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="19">
+                        <rect key="frame" x="54" y="40" width="246" height="15"/>
                         <autoresizingMask key="autoresizingMask" flexibleMaxY="YES"/>
                         <fontDescription key="fontDescription" name="HelveticaNeue-MediumItalic" family="Helvetica Neue" pointSize="12"/>
                         <color key="textColor" white="0.33333333333333331" alpha="1" colorSpace="calibratedWhite"/>
                         <color key="highlightedColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                     </label>
-                    <label opaque="NO" clipsSubviews="YES" userInteractionEnabled="NO" contentMode="left" text="Label" textAlignment="right" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="28">
-                        <rect key="frame" x="228" y="5" width="72" height="21"/>
+                    <label opaque="NO" clipsSubviews="YES" userInteractionEnabled="NO" contentMode="left" horizontalCompressionResistancePriority="736" ambiguous="YES" misplaced="YES" text="2" textAlignment="right" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="28">
+                        <rect key="frame" x="267" y="5" width="34" height="21"/>
                         <autoresizingMask key="autoresizingMask" flexibleMinX="YES" flexibleMaxY="YES"/>
                         <constraints>
-                            <constraint firstAttribute="width" constant="72" id="j82-TN-hjI"/>
+                            <constraint firstAttribute="width" relation="greaterThanOrEqual" constant="34" id="azp-gn-MRm"/>
                         </constraints>
                         <fontDescription key="fontDescription" name="HelveticaNeue-Medium" family="Helvetica Neue" pointSize="17"/>
                         <color key="textColor" cocoaTouchSystemColor="darkTextColor"/>
@@ -49,17 +49,15 @@
                     </label>
                 </subviews>
                 <constraints>
-                    <constraint firstItem="8" firstAttribute="top" secondItem="3" secondAttribute="top" constant="20" id="5Wg-2O-sv4"/>
-                    <constraint firstItem="3" firstAttribute="top" secondItem="0Bp-j2-w0M" secondAttribute="top" constant="5" id="E8S-Ly-MRW"/>
-                    <constraint firstItem="19" firstAttribute="leading" secondItem="3" secondAttribute="leading" constant="34" id="FsX-yn-wmr"/>
-                    <constraint firstItem="3" firstAttribute="leading" secondItem="0Bp-j2-w0M" secondAttribute="leading" constant="20" id="I7v-fi-v8y"/>
-                    <constraint firstAttribute="trailing" secondItem="28" secondAttribute="trailing" constant="20" id="VhB-yh-4Rk"/>
-                    <constraint firstAttribute="trailing" secondItem="19" secondAttribute="trailing" constant="68" id="ahZ-ck-xLx"/>
-                    <constraint firstItem="28" firstAttribute="top" secondItem="0Bp-j2-w0M" secondAttribute="top" constant="5" id="dCh-rt-KbP"/>
-                    <constraint firstAttribute="trailing" relation="greaterThanOrEqual" secondItem="28" secondAttribute="trailing" constant="20" id="fj8-0e-X3h"/>
-                    <constraint firstAttribute="trailing" secondItem="8" secondAttribute="trailing" constant="68" id="kI8-pJ-vi7"/>
-                    <constraint firstItem="19" firstAttribute="top" secondItem="8" secondAttribute="top" constant="15" id="xDV-Pm-GHv"/>
-                    <constraint firstItem="8" firstAttribute="leading" secondItem="3" secondAttribute="leading" constant="34" id="xMO-ue-LwA"/>
+                    <constraint firstAttribute="trailing" secondItem="28" secondAttribute="trailing" constant="19" id="ASU-KR-EPG"/>
+                    <constraint firstItem="3" firstAttribute="leading" secondItem="0Bp-j2-w0M" secondAttribute="leading" constant="20" id="OhL-bw-cLk"/>
+                    <constraint firstItem="28" firstAttribute="top" secondItem="0Bp-j2-w0M" secondAttribute="top" constant="5" id="W0S-ff-Hri"/>
+                    <constraint firstItem="19" firstAttribute="leading" secondItem="0Bp-j2-w0M" secondAttribute="leading" constant="54" id="WQb-RE-DLl"/>
+                    <constraint firstItem="28" firstAttribute="leading" secondItem="3" secondAttribute="trailing" constant="8" id="bzv-Qt-sx2"/>
+                    <constraint firstItem="8" firstAttribute="top" secondItem="0Bp-j2-w0M" secondAttribute="top" constant="25" id="c2e-Kn-Dmj"/>
+                    <constraint firstItem="19" firstAttribute="top" secondItem="0Bp-j2-w0M" secondAttribute="top" constant="40" id="mfd-dP-8wv"/>
+                    <constraint firstItem="3" firstAttribute="top" secondItem="0Bp-j2-w0M" secondAttribute="top" constant="5" id="v2M-aZ-vJ0"/>
+                    <constraint firstItem="8" firstAttribute="leading" secondItem="0Bp-j2-w0M" secondAttribute="leading" constant="54" id="x76-Ws-S71"/>
                 </constraints>
             </tableViewCellContentView>
             <connections>
