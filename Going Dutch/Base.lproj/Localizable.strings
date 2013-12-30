@@ -53,6 +53,8 @@
 "EMPTY_PAYMENT_LIST_MESSAGE" = "Press \"add payment\" to add a payment to this event.";
 "PAYMENTCELL_PAYERNAME_EXTRA" = " paid";
 "PAYMENT_CELL_PAIDFOR_EXTRA" = "for ";
+"THISPAYMENTCELL_NOPAYERNAME" = "Someone";
+"THISPAYMENTCELL_NOOBJECT" = "something";
 
 /* MCReturnPaymentView */
 /* Each pays: $ string inside the header of the solution screen. */

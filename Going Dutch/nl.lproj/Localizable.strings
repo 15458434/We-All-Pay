@@ -54,6 +54,8 @@
 "EMPTY_PAYMENT_LIST_MESSAGE" = "Druk op \"nieuwe betaling\" op een betaling toe te voegen op deze rekening.";
 "PAYMENTCELL_PAYERNAME_EXTRA" = "";
 "PAYMENT_CELL_PAIDFOR_EXTRA" = "betaalde ";
+"THISPAYMENTCELL_NOPAYERNAME" = "Iemand";
+"THISPAYMENTCELL_NOOBJECT" = "iets";
 
 /* MCReturnPaymentView */
 /* Each pays: $ string inside the header of the solution screen. */

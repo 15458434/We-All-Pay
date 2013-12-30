@@ -348,11 +348,24 @@
 - (UITableViewCell *)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath
 {
     MCPayment *thisCellsPayment = [dataController objectAtIndexPath:indexPath];
+    if (!thisCellsPayment) {
+    }
     MCPaymentTableViewCell *paymentCell = [tableView dequeueReusableCellWithIdentifier:@"MCPaymentTableViewCell"];
     
-    [[paymentCell namePayerLabel] setText:[NSString stringWithFormat:@"%@%@", [[thisCellsPayment payingPerson] getFullName], NSLocalizedString(@"PAYMENTCELL_PAYERNAME_EXTRA", @" paid") ]];
+    NSString *thisCellsPayerName;
+    if ([thisCellsPayment payingPerson]) {
+        thisCellsPayerName = [[thisCellsPayment payingPerson] getFullName];
+    } else {
+        thisCellsPayerName = NSLocalizedString(@"THISPAYMENTCELL_NOPAYERNAME", @"Someone");
+    }
+    [[paymentCell namePayerLabel] setText:[NSString stringWithFormat:@"%@%@", thisCellsPayerName, NSLocalizedString(@"PAYMENTCELL_PAYERNAME_EXTRA", @" paid") ]];
     [[paymentCell pictureOfPayer] setImage:[[thisCellsPayment payingPerson] thumbnail]];
-    [[paymentCell whatPaidLabel] setText:[NSString stringWithFormat:@"%@%@", NSLocalizedString(@"PAYMENT_CELL_PAIDFOR_EXTRA", @"for ") ,[thisCellsPayment descriptionOfPayment]]];
+    
+    NSString *thisCellsDescriptionOfPayment = [thisCellsPayment descriptionOfPayment];
+    if (!thisCellsDescriptionOfPayment) {
+        thisCellsDescriptionOfPayment = NSLocalizedString(@"THISPAYMENTCELL_NOOBJECT", @"Something");
+    }
+    [[paymentCell whatPaidLabel] setText:[NSString stringWithFormat:@"%@%@", NSLocalizedString(@"PAYMENT_CELL_PAIDFOR_EXTRA", @"for ") , thisCellsDescriptionOfPayment]];
     NSNumberFormatter *nf = [[NSNumberFormatter alloc] init];
     [nf setNumberStyle:NSNumberFormatterCurrencyStyle];
     [[paymentCell moneyPaidLabel] setText:[nf stringFromNumber:[thisCellsPayment money]]];
