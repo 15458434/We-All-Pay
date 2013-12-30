@@ -81,7 +81,7 @@
     [self setDataSource:self];
 }
 
-- (void)openMailView:(id)sender;
+- (void)openMailView:(id)sender
 {
     MFMailComposeViewController *mailViewController = [[MFMailComposeViewController alloc] init];
     [mailViewController setMailComposeDelegate:sender];

@@ -205,9 +205,7 @@
 
 - (BOOL)doesEveryoneHaveAnEmailAddress
 {
-    NSArray *sortDescriptors = [NSArray arrayWithObject:[NSSortDescriptor sortDescriptorWithKey:@"dateCreated" ascending:YES]];
-    NSArray *people = [self.peoplePresent sortedArrayUsingDescriptors:sortDescriptors];
-    for (MCPerson *person in people) {
+    for (MCPerson *person in [self peoplePresent]) {
         if (![person isThereAnEmailAddress]) {
             return NO;
         }

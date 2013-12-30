@@ -32,4 +32,6 @@
 - (void)shareBill:(id)sender;
 - (void)sendMail:(id)sender;
 
+- (void)openMailView:(id)sender;
+
 @end

@@ -193,13 +193,13 @@
 
 - (BOOL)isThereAnEmailAddress
 {
-    NSLog(@"%@", [self getName]);
     if (![self emailAddress]) {
         return NO;
     } else if ([[self emailAddress] count] == 0) {
         return NO;
-    } else
+    } else {
         return YES;
+    }
 }
 
 - (void)deletAllEmailAddresses

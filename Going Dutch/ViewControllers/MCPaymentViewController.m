@@ -89,16 +89,17 @@
 
 - (void)donePersonPicker:(id)selector
 {
-    NSInteger row = [personPickerView selectedRowInComponent:0];
-    [thisPayment setPayingPerson:[listOfPeople objectAtIndex:row]];
-    [payerView setText:[[thisPayment payingPerson] getFullName]];
+    if ([[tonightsBill peoplePresent] count] > 0) {
+        NSInteger row = [personPickerView selectedRowInComponent:0];
+        [thisPayment setPayingPerson:[listOfPeople objectAtIndex:row]];
+        [payerView setText:[[thisPayment payingPerson] getFullName]];
+        didSomethingChange = YES;
+        NSDate *nu = [NSDate date];
+        [tonightsBill setDateModified:nu];
+        [thisPayment setDateModified:nu];
+        [[[self navigationItem] rightBarButtonItem] setEnabled:YES];
+    }
     [payerView resignFirstResponder];
-    didSomethingChange = YES;
-    NSDate *nu = [NSDate date];
-    [tonightsBill setDateModified:nu];
-    [thisPayment setDateModified:nu];
-    [[[self navigationItem] rightBarButtonItem] setEnabled:YES];
-    //[itemView becomeFirstResponder];
 }
 
 - (void)cancelNumberPad:(id)selector

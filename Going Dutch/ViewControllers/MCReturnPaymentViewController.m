@@ -121,6 +121,26 @@
     // Dispose of any resources that can be recreated.
 }
 
+#pragma mark - UIAlertViewDelegate
+
+- (void)alertView:(UIAlertView *)alertView clickedButtonAtIndex:(NSInteger)buttonIndex
+{
+    switch (buttonIndex) {
+        case 0:
+            NSLog(@"Cancel button pressed");
+            break;
+        case 1:
+            [[self sendMailObject] openMailView:self];
+            break;
+        case 2:
+            //[[self sendMailObject ] editBillData:self];
+            NSLog(@"If you see this there was a button that shouldn't be there.");
+            break;
+        default:
+            break;
+    }
+}
+
 #pragma mark - MFMailComposeViewControllerDelegate
 
 - (void)mailComposeController:(MFMailComposeViewController *)controller didFinishWithResult:(MFMailComposeResult)result error:(NSError *)error
