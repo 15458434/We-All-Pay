@@ -23,8 +23,31 @@
 "PAYMENTS_PAGEVIEWCONTROLLER" = "payments";
 
 /* Email */
+/* Bill overview of our trip to "movies" */
+"EMAIL_SUBJECT_PART_ONE" = "Expenses overview of our trip to";
 /* Just Dear as in \"Dear Mark\" */
 "EMAIL_DEAR" = "Dear";
+/* From a total of \"$ 20,45\", which was spend on our last trip to \"Movies\". We all have to pay an equal share of \"$6,82\". */
+"EMAIL_INTRO_PART_ONE" = "From a total of";
+"EMAIL_INTRO_PART_TWO" = "which was spend on our last trip to";
+"EMAIL_INTRO_PART_THREE" = "We all have to pay an equal share of";
+/* The message that nobody has paid so far */
+"EMAIL_NOBODY_HAS_PAID" = "Nobody has paid so far.";
+/* The message The person who has payed */
+"EMAIL_ONE_PERSON_HAS_PAID" = "The person who has payed";
+/* The people who have paid are */
+"EMAIL_MULTIPLE_PEOPLE_HAVE_PAID" = "The people who have paid are";
+/* The sentence: Mark paid $24 for "beer". */
+"EMAIL_WHO_HAS_PAID_ONE" = "paid";
+"EMAIL_WHO_HAS_PAID_TWO" = "for";
+/* Part one of: To have everybody pay the average of $7.00, I suggest the following solution */
+"EMAIL_AVERAGE_SENTENCES_ONE" = "When everybody pays the average of";
+"EMAIL_AVERAGE_SENTENCES_TWO" = ", I suggest the following solution";
+/* The sentence: "Mark" pays $6.80 to Ilse. */
+"EMAIL_OWES_PART_ONE" = "pays";
+"EMAIL_OWES_PART_TWO" = "to";
+/* Closing sentence of the email: If you have any remarks please let me know. */
+"EMAIL_FINAL SENTENCE" = "If you have any remarks, please let me know";
 
 /* SharedBillTableView */
 "EMPTY_PAYMENT_LIST_MESSAGE" = "Press \"add payment\" to add a payment to this event.";

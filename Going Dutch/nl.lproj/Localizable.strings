@@ -23,8 +23,32 @@
 "PAYMENTS_PAGEVIEWCONTROLLER" = "betalingen";
 
 /* Email */
+/* Bill overview of our trip to "movies" */
+"EMAIL_SUBJECT_PART_ONE" = "Onkosten overzicht van ons uitje naar";
 /* Just Dear as in \"Dear Mark\" */
 "EMAIL_DEAR" = "Beste";
+/* From a total of \"$ 20,45\", which was spend on our last trip to \"Movies\". We all have to pay an equal share of \"$6,82\". */
+"EMAIL_INTRO_PART_ONE" = "Van de totale kosten van";
+"EMAIL_INTRO_PART_TWO" = "die we uitgegeven hebben van onze laatste bezoek aan";
+"EMAIL_INTRO_PART_THREE" = "Hebben we besloten en gelijk deel te betalen van";
+/* The message that nobody has paid so far */
+"EMAIL_NOBODY_HAS_PAID" = "Niemand heeft tot nu toe nog betaald.";
+/* The message The person who has payed */
+"EMAIL_ONE_PERSON_HAS_PAID" = "Degene die betaald heeft, is";
+/* The people who have paid are */
+"EMAIL_MULTIPLE_PEOPLE_HAVE_PAID" = "Diegenen die betaald hebben, zijn";
+/* The sentence: Mark paid $24 for "beer". */
+"EMAIL_WHO_HAS_PAID_ONE" = "betaalde";
+"EMAIL_WHO_HAS_PAID_TWO" = "voor";
+/* Part one of: To have everybody pay the average of $7.00, I suggest the following solution */
+"EMAIL_AVERAGE_SENTENCES_ONE" = "Als we iedereen het gemiddelde van";
+"EMAIL_AVERAGE_SENTENCES_TWO" = " laten betalen, dan stel ik volgende oplossing voor";
+/* The sentence: "Mark" pays $6.80 to Ilse. */
+"EMAIL_OWES_PART_ONE" = "geeft";
+"EMAIL_OWES_PART_TWO" = "aan";
+/* Closing sentence of the email: If you have any remarks please let me know. */
+"EMAIL_FINAL SENTENCE" = "Als jullie nog opmerkingen hebben dan hoor ik dat graag";
+
 
 /* SharedBillTableView */
 "EMPTY_PAYMENT_LIST_MESSAGE" = "Druk op \"nieuwe betaling\" op een betaling toe te voegen op deze rekening.";
