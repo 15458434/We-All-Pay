@@ -38,3 +38,13 @@
 /* MCEditTripView */
 /* Press \"add Person\" to add a person who you'd like to share this bill with. */
 "PEOPLE_LIST_EMPTY_MESSAGE" = "Druk op \"Nieuwe persoon\" om iemand toe te voegen waarmee je de rekening wilt delen.";
+
+/* PaymentView */
+/* Header in the paymentView which state new Payment. */
+"NEW_PAYMENT_HEADER" = "nieuwe betaling";
+/* Sub header in the paymentView which states Add payment data */
+"NEW_PAYMENT_SUBHEADER" = "vul gegevens in";
+/* Header in the paymentView which states payment */
+"EXISTING_PAYMENT_HEADER" = "betaling";
+/* Sub header in the paymentView which states edit data */
+"EXISTING_PAYMENT_SUBHEADER" = "bewerk gegevens";

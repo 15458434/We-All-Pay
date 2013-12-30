@@ -38,3 +38,13 @@
 /* MCEditTripView */
 /* Press \"add Person\" to add a person who you'd like to share this bill with. */
 "PEOPLE_LIST_EMPTY_MESSAGE" = "Press \"add Person\" to add a person who you'd like to share this bill with.";
+
+/* PaymentView */
+/* Header in the paymentView which state new Payment. */
+"NEW_PAYMENT_HEADER" = "new payment";
+/* Sub header in the paymentView which states Add payment data */
+"NEW_PAYMENT_SUBHEADER" = "add payment data";
+/* Header in the paymentView which states payment */
+"EXISTING_PAYMENT_HEADER" = "payment";
+/* Sub header in the paymentView which states edit data */
+"EXISTING_PAYMENT_SUBHEADER" = "edit payment data";

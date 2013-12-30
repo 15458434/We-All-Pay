@@ -303,11 +303,11 @@
     if (!twoLabelTitleView) {
         twoLabelTitleView = [[[NSBundle mainBundle] loadNibNamed:@"MCTwoLabelsTitleView" owner:self options:nil] objectAtIndex:0];
         if (isNew) {
-            [[twoLabelTitleView mainLabel] setText:@"New payment"];
-            [[twoLabelTitleView subLabel] setText:@"Add payment data"];
+            [[twoLabelTitleView mainLabel] setText:NSLocalizedString(@"NEW_PAYMENT_HEADER", @"Header in the paymentView which state new Payment")];
+            [[twoLabelTitleView subLabel] setText:NSLocalizedString(@"NEW_PAYMENT_SUBHEADER", @"Sub header in the paymentView which states Add payment data")];
         } else {
-            [[twoLabelTitleView mainLabel] setText:@"Payment"];
-            [[twoLabelTitleView subLabel] setText:@"Edit payment data"];
+            [[twoLabelTitleView mainLabel] setText:NSLocalizedString(@"EXISTING_PAYMENT_HEADER", @"Header in the paymentView which states payment")];
+            [[twoLabelTitleView subLabel] setText:NSLocalizedString(@"EXISTING_PAYMENT_SUBHEADER", @"Sub header in the paymentView which states edit payment data")];
         }
         if (SYSTEM_VERSION_LESS_THAN(@"7.0")) {
             [[twoLabelTitleView mainLabel] setTextColor:[UIColor whiteColor]];
