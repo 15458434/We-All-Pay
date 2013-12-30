@@ -133,6 +133,7 @@
     emptyMessage = [[[NSBundle mainBundle] loadNibNamed:@"MCTableEmptyMessage" owner:self options:nil] objectAtIndex:0];
     [[self tableView] setBackgroundView:emptyMessage];
     [[emptyMessage bigMessage] setText:NSLocalizedString(@"RETURNPAYMENTSVIEW_NOPAYMENTS", @"Please add payments and/or people if you want a solution on who owes who.")];
+    [[emptyMessage bigMessage] setAlpha:0.0];
     [[self tableView] reloadData];
     
     UINib *nib = [UINib nibWithNibName:@"MCReturnPaymentTableViewCell" bundle:nil];

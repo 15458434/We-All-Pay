@@ -33,7 +33,6 @@
 		385FEE6317CBF77B001013E3 /* Images.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 385FEE6217CBF77B001013E3 /* Images.xcassets */; };
 		3867CE4718704B2E001EC222 /* Main-Iphone.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 3867CE4918704B2E001EC222 /* Main-Iphone.storyboard */; };
 		3867CE5118704DAF001EC222 /* MCTableEmptyMessage.xib in Resources */ = {isa = PBXBuildFile; fileRef = 3867CE5318704DAF001EC222 /* MCTableEmptyMessage.xib */; };
-		38690701186F0E6E006A5C11 /* libTestFlight.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 386906FD186F0E6E006A5C11 /* libTestFlight.a */; };
 		38690703186F0EEF006A5C11 /* libz.dylib in Frameworks */ = {isa = PBXBuildFile; fileRef = 38690702186F0EEF006A5C11 /* libz.dylib */; };
 		3873A2A516F23AA1000832FD /* MessageUI.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 3873A2A416F23AA1000832FD /* MessageUI.framework */; };
 		3876EF591840E86900C9546A /* MCCancelDoneTableViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 3876EF581840E86900C9546A /* MCCancelDoneTableViewController.m */; };
@@ -120,10 +119,6 @@
 		3867CE4D18704C60001EC222 /* Base */ = {isa = PBXFileReference; fileEncoding = 10; lastKnownFileType = text.plist.strings; name = Base; path = Base.lproj/InfoPlist.strings; sourceTree = "<group>"; };
 		3867CE5218704DAF001EC222 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.xib; name = Base; path = Base.lproj/MCTableEmptyMessage.xib; sourceTree = "<group>"; };
 		3867CE5518704DB9001EC222 /* nl */ = {isa = PBXFileReference; fileEncoding = 10; lastKnownFileType = text.plist.strings; name = nl; path = nl.lproj/MCTableEmptyMessage.strings; sourceTree = "<group>"; };
-		386906FD186F0E6E006A5C11 /* libTestFlight.a */ = {isa = PBXFileReference; lastKnownFileType = archive.ar; path = libTestFlight.a; sourceTree = "<group>"; };
-		386906FE186F0E6E006A5C11 /* TestFlight.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = TestFlight.h; sourceTree = "<group>"; };
-		386906FF186F0E6E006A5C11 /* TestFlight+AsyncLogging.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "TestFlight+AsyncLogging.h"; sourceTree = "<group>"; };
-		38690700186F0E6E006A5C11 /* TestFlight+ManualSessions.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "TestFlight+ManualSessions.h"; sourceTree = "<group>"; };
 		38690702186F0EEF006A5C11 /* libz.dylib */ = {isa = PBXFileReference; lastKnownFileType = "compiled.mach-o.dylib"; name = libz.dylib; path = usr/lib/libz.dylib; sourceTree = SDKROOT; };
 		3873A2A416F23AA1000832FD /* MessageUI.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = MessageUI.framework; path = System/Library/Frameworks/MessageUI.framework; sourceTree = SDKROOT; };
 		3873A2A616F2858A000832FD /* Going Dutch.entitlements */ = {isa = PBXFileReference; lastKnownFileType = text.xml; path = "Going Dutch.entitlements"; sourceTree = "<group>"; };
@@ -195,7 +190,6 @@
 			buildActionMask = 2147483647;
 			files = (
 				38690703186F0EEF006A5C11 /* libz.dylib in Frameworks */,
-				38690701186F0E6E006A5C11 /* libTestFlight.a in Frameworks */,
 				3886D3FD16B7A1CD00ECE64F /* AddressBook.framework in Frameworks */,
 				3886D3FE16B7A1CD00ECE64F /* AddressBookUI.framework in Frameworks */,
 				3801F89C16DFC62600DF8675 /* CoreData.framework in Frameworks */,
@@ -300,7 +294,6 @@
 				38572AF4169D439E00969C62 /* Views */,
 				38572AF3169D438E00969C62 /* ViewControllers */,
 				38CC9814183D520C006EC35D /* MC SDK */,
-				386906F7186F0D09006A5C11 /* Testflight SDK */,
 				3892E3AF17906B5D0038894B /* MCAddressBookDataReceiver.h */,
 				3892E3B017906B5E0038894B /* MCAddressBookDataReceiver.m */,
 				38572AE5169D437B00969C62 /* MCAppDelegate.h */,
@@ -386,17 +379,6 @@
 				3867CE4918704B2E001EC222 /* Main-Iphone.storyboard */,
 			);
 			name = Storyboard;
-			sourceTree = "<group>";
-		};
-		386906F7186F0D09006A5C11 /* Testflight SDK */ = {
-			isa = PBXGroup;
-			children = (
-				386906FD186F0E6E006A5C11 /* libTestFlight.a */,
-				386906FE186F0E6E006A5C11 /* TestFlight.h */,
-				386906FF186F0E6E006A5C11 /* TestFlight+AsyncLogging.h */,
-				38690700186F0E6E006A5C11 /* TestFlight+ManualSessions.h */,
-			);
-			name = "Testflight SDK";
 			sourceTree = "<group>";
 		};
 		3892E3AB179055F40038894B /* DataModel */ = {
@@ -645,6 +627,7 @@
 			isa = XCBuildConfiguration;
 			buildSettings = {
 				ALWAYS_SEARCH_USER_PATHS = NO;
+				ARCHS = "$(ARCHS_STANDARD_INCLUDING_64_BIT)";
 				CLANG_CXX_LANGUAGE_STANDARD = "gnu++0x";
 				CLANG_CXX_LIBRARY = "libc++";
 				CLANG_ENABLE_OBJC_ARC = YES;
@@ -674,6 +657,7 @@
 			isa = XCBuildConfiguration;
 			buildSettings = {
 				ALWAYS_SEARCH_USER_PATHS = NO;
+				ARCHS = "$(ARCHS_STANDARD_INCLUDING_64_BIT)";
 				CLANG_CXX_LANGUAGE_STANDARD = "gnu++0x";
 				CLANG_CXX_LIBRARY = "libc++";
 				CLANG_ENABLE_OBJC_ARC = YES;

@@ -9,13 +9,13 @@
 #import "MCAppDelegate.h"
 #import "MCAllTripsTableViewController.h"
 #import "MCWeAllPayStoreController.h"
-#import "TestFlight.h"
+// #import "TestFlight.h"
 
 @implementation MCAppDelegate
 
 - (BOOL)application:(UIApplication *)application didFinishLaunchingWithOptions:(NSDictionary *)launchOptions
 {
-    [TestFlight takeOff:@"f2224673-b632-44ae-8feb-3c1cfe59e1f5"];
+    // [TestFlight takeOff:@"f2224673-b632-44ae-8feb-3c1cfe59e1f5"];
     // Override point for customization after application launch.
     NSLog(@"%@", [[UIDevice currentDevice] model]);
     NSLog(@"I dedicate this program to Ilse Béguin, the most wonderful woman in the world who brought herself into my life, when I was developing this App.");
