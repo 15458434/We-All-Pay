@@ -60,7 +60,7 @@
     MCSharedBillTableViewController *sharedBillView = [storyboard instantiateViewControllerWithIdentifier:@"MCSharedBillTableViewController"];
     [sharedBillView setTonightsBill:tonightsBill];
     [pageViewIndicator setCurrentPage:1];
-    [titleLabel setText:@"Payments"];
+    [titleLabel setText:NSLocalizedString(@"PAYMENTS_PAGEVIEWCONTROLLER", @"Payments")];
     NSArray *views = [NSArray arrayWithObjects:sharedBillView, nil];
     [self setViewControllers:views direction:UIPageViewControllerNavigationDirectionReverse animated:YES completion:nil];
     [self setDelegate:self];
@@ -74,7 +74,7 @@
     [editTripView setTonightsBill:tonightsBill];
     NSArray *views = [NSArray arrayWithObjects:editTripView, nil];
     [pageViewIndicator setCurrentPage:0];
-    [titleLabel setText:@"People present"];
+    [titleLabel setText:NSLocalizedString(@"PEOPLE_PRESENT_PAGEVIEWCONTROLLER", @"People present")];
     [self setViewControllers:views direction:UIPageViewControllerNavigationDirectionForward animated:YES completion:nil];
     [self setDelegate:self];
     [self setDataSource:self];
@@ -252,10 +252,10 @@
     if (completed && finished) {
         if ([[[self viewControllers] objectAtIndex:0] isKindOfClass:[MCEditTripViewController class]]) {
             [pageViewIndicator setCurrentPage:0];
-            [titleLabel setText:@"People present"];
+            [titleLabel setText:NSLocalizedString(@"PEOPLE_PRESENT_PAGEVIEWCONTROLLER", @"People present")];
         } else if ([[[self viewControllers] objectAtIndex:0] isKindOfClass:[MCSharedBillTableViewController class]]) {
             [pageViewIndicator setCurrentPage:1];
-            [titleLabel setText:@"Payments"];
+            [titleLabel setText:NSLocalizedString(@"PAYMENTS_PAGEVIEWCONTROLLER", @"Payments")];
         }
     }
 }

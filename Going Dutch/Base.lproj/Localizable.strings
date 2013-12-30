@@ -1,0 +1,28 @@
+/* 
+  Localizable.strings
+  We all pay
+
+  Created by Mark Cornelisse on 29-12-13.
+  Copyright (c) 2013 Mark Cornelisse. All rights reserved.
+*/
+
+/* AllTripsTableView */
+"BACK_TITLE_ALL_TRIPS_VIEW" = "back";
+"I_FOUND_WE_ALL_PAY" = "Hi, I found this easy to use iPhone app to share a bill amongst friends. It is called We All Pay.";
+
+/* MCSharedBill+addons */
+/* A message when there are no people present inside this shared bill */
+"NO_PEOPLE_PRESENT" = "No people present";
+/* The word \"and\" between two people */
+"AND_STRING" = "and";
+/* A list of people like Mark, Ilse and other where the \"and others\" needs to be translated. */
+"AND_OTHERS" = "and others";
+
+/* SharedBillPageView */
+"PEOPLE_PRESENT_PAGEVIEWCONTROLLER" = "people present";
+"PAYMENTS_PAGEVIEWCONTROLLER" = "payments";
+
+/* SharedBillTableView */
+"EMPTY_PAYMENT_LIST_MESSAGE" = "Press \"add payment\" to add a payment to this event.";
+"PAYMENTCELL_PAYERNAME_EXTRA" = " paid";
+"PAYMENT_CELL_PAIDFOR_EXTRA" = "for ";

@@ -79,7 +79,6 @@
         [[twoLabelTitleView mainLabel] setTextColor:[UIColor whiteColor]];
         [[twoLabelTitleView subLabel] setTextColor:[UIColor whiteColor]];
     }
-    [[self navigationItem] setTitle:[[NSString alloc] initWithFormat:@"To pay: %@", [nf stringFromNumber:averagePay]]];
 }
 
 - (void)viewDidLoad
@@ -131,7 +130,7 @@
     } else if (result == MFMailComposeResultSaved) {
         [[self presentedViewController] dismissViewControllerAnimated:YES completion:nil];
     } else {
-        NSLog(@"Something went wrong: %@", [error localizedDescription]);
+        NSLog(@"Sending email went wrong: %@", [error localizedDescription]);
     }
 }
 

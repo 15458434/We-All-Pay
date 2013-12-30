@@ -78,18 +78,20 @@
     
     NSMutableString *returnString = [[NSMutableString alloc] init];
     if ([allPeople count] == 0) {
-        return @"No people present.";
+        return NSLocalizedString(@"NO_PEOPLE_PRESENT", @"A message when there are no people present inside this shared bill");
     } else if ([allPeople count] == 1) {
-            return [[allPeople objectAtIndex:0] getName];
+        return [[allPeople objectAtIndex:0] getName];
     } else if ([allPeople count] == 2) {
-            [returnString appendFormat:@"%@ and %@", [[allPeople objectAtIndex:0] getName], [[allPeople objectAtIndex:1] getName]];
-            return returnString;
+        NSString *enString = [NSString stringWithFormat:NSLocalizedString(@"AND_STRING", @"The word \"and\" between two people")];
+        [returnString appendFormat:@"%@ %@ %@", [[allPeople objectAtIndex:0] getName], enString,[[allPeople objectAtIndex:1] getName]];
+        return returnString;
     } else if ([allPeople count] >= 3) {
-            [returnString appendFormat:@"%@, %@ and others", [[allPeople objectAtIndex:0] getName], [[allPeople objectAtIndex:1] getName]];
-            return returnString;
+        NSString *andOthers = [NSString stringWithFormat:NSLocalizedString(@"AND_OTHERS", @"A list of people like Mark, Ilse and other where the \"and others\" needs to be translated.")];
+        [returnString appendFormat:@"%@, %@ %@", [[allPeople objectAtIndex:0] getName], [[allPeople objectAtIndex:1] getName], andOthers];
+        return returnString;
     } else {
-            @throw [NSException exceptionWithName:@"Negative amount of people." reason:@"Should not be possible." userInfo:nil];
-            return nil;
+        @throw [NSException exceptionWithName:@"Negative amount of people." reason:@"Should not be possible." userInfo:nil];
+        return nil;
     }
 }
 

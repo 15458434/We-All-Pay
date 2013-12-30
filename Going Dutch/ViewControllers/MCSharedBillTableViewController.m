@@ -211,7 +211,7 @@
     
     emptyMessage = [[[NSBundle mainBundle] loadNibNamed:@"MCTableEmptyMessage" owner:self options:nil] objectAtIndex:0];
     [[self tableView] setBackgroundView:emptyMessage];
-    [[emptyMessage bigMessage] setText:@"Press \"add payment\" to add a payment to this event."];
+    [[emptyMessage bigMessage] setText:NSLocalizedString(@"EMPTY_PAYMENT_LIST_MESSAGE", @"Press \"add payment\" to add a payment to this event.")];
     [[emptyMessage bigMessage] setTextColor:[UIColor lightGrayColor]];
     [emptyMessage setBackgroundColor:[UIColor groupTableViewBackgroundColor]];
     if ([[dataController fetchedObjects] count] > 0) {
@@ -349,9 +349,9 @@
     MCPayment *thisCellsPayment = [dataController objectAtIndexPath:indexPath];
     MCPaymentTableViewCell *paymentCell = [tableView dequeueReusableCellWithIdentifier:@"MCPaymentTableViewCell"];
     
-    [[paymentCell namePayerLabel] setText:[NSString stringWithFormat:@"%@ paid", [[thisCellsPayment payingPerson] getFullName]]];
+    [[paymentCell namePayerLabel] setText:[NSString stringWithFormat:@"%@%@", [[thisCellsPayment payingPerson] getFullName], NSLocalizedString(@"PAYMENTCELL_PAYERNAME_EXTRA", @" paid") ]];
     [[paymentCell pictureOfPayer] setImage:[[thisCellsPayment payingPerson] thumbnail]];
-    [[paymentCell whatPaidLabel] setText:[NSString stringWithFormat:@"for %@", [thisCellsPayment descriptionOfPayment]]];
+    [[paymentCell whatPaidLabel] setText:[NSString stringWithFormat:@"%@%@", NSLocalizedString(@"PAYMENT_CELL_PAIDFOR_EXTRA", @"for ") ,[thisCellsPayment descriptionOfPayment]]];
     NSNumberFormatter *nf = [[NSNumberFormatter alloc] init];
     [nf setNumberStyle:NSNumberFormatterCurrencyStyle];
     [[paymentCell moneyPaidLabel] setText:[nf stringFromNumber:[thisCellsPayment money]]];

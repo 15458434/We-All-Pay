@@ -37,6 +37,7 @@
 		38690703186F0EEF006A5C11 /* libz.dylib in Frameworks */ = {isa = PBXBuildFile; fileRef = 38690702186F0EEF006A5C11 /* libz.dylib */; };
 		3873A2A516F23AA1000832FD /* MessageUI.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 3873A2A416F23AA1000832FD /* MessageUI.framework */; };
 		3876EF591840E86900C9546A /* MCCancelDoneTableViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 3876EF581840E86900C9546A /* MCCancelDoneTableViewController.m */; };
+		387D3A911870652B0060FAF8 /* Localizable.strings in Resources */ = {isa = PBXBuildFile; fileRef = 387D3A931870652B0060FAF8 /* Localizable.strings */; };
 		3886D3FD16B7A1CD00ECE64F /* AddressBook.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 3886D3FB16B7A1CD00ECE64F /* AddressBook.framework */; };
 		3886D3FE16B7A1CD00ECE64F /* AddressBookUI.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 3886D3FC16B7A1CD00ECE64F /* AddressBookUI.framework */; };
 		3892E3A417903EF00038894B /* MCEditTripViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 3892E3A317903EF00038894B /* MCEditTripViewController.m */; };
@@ -80,6 +81,8 @@
 		380BF82F181088B9008A8B74 /* MCEmailAddressTableViewCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = MCEmailAddressTableViewCell.h; path = Views/MCEmailAddressTableViewCell.h; sourceTree = "<group>"; };
 		380BF830181088B9008A8B74 /* MCEmailAddressTableViewCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = MCEmailAddressTableViewCell.m; path = Views/MCEmailAddressTableViewCell.m; sourceTree = "<group>"; };
 		380F44F11813250600FF7E10 /* No picture image 2 - We All Pay.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = "No picture image 2 - We All Pay.png"; path = "Going Dutch/icons/no picture image/No picture image 2 - We All Pay.png"; sourceTree = "<group>"; };
+		38156B2818706B750047AEEF /* nl */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.strings; name = nl; path = nl.lproj/Localizable.strings; sourceTree = "<group>"; };
+		38156B2918706BAC0047AEEF /* Base */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = Base; path = Base.lproj/Localizable.strings; sourceTree = "<group>"; };
 		38295AE618425E74009FB5DE /* MCCancelDoneViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = MCCancelDoneViewController.h; sourceTree = "<group>"; };
 		38295AE718425E74009FB5DE /* MCCancelDoneViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = MCCancelDoneViewController.m; sourceTree = "<group>"; };
 		3829AD0E178B41320025969D /* WeAllPayStore.xcdatamodel */ = {isa = PBXFileReference; lastKnownFileType = wrapper.xcdatamodel; path = WeAllPayStore.xcdatamodel; sourceTree = "<group>"; };
@@ -112,11 +115,11 @@
 		38572AF6169D443C00969C62 /* MCAllTripsTableViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = MCAllTripsTableViewController.h; path = ViewControllers/MCAllTripsTableViewController.h; sourceTree = "<group>"; };
 		38572B09169F3D2700969C62 /* MCAllTripsTableViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = MCAllTripsTableViewController.m; path = ViewControllers/MCAllTripsTableViewController.m; sourceTree = "<group>"; };
 		385FEE6217CBF77B001013E3 /* Images.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; name = Images.xcassets; path = "We all pay/Images.xcassets"; sourceTree = SOURCE_ROOT; };
-		3867CE4018703E9A001EC222 /* nl */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = nl; path = nl.lproj/InfoPlist.strings; sourceTree = "<group>"; };
+		3867CE4018703E9A001EC222 /* nl */ = {isa = PBXFileReference; fileEncoding = 10; lastKnownFileType = text.plist.strings; name = nl; path = nl.lproj/InfoPlist.strings; sourceTree = "<group>"; };
 		3867CE4A18704B48001EC222 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = "Base.lproj/Main-Iphone.storyboard"; sourceTree = "<group>"; };
-		3867CE4D18704C60001EC222 /* Base */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = Base; path = Base.lproj/InfoPlist.strings; sourceTree = "<group>"; };
+		3867CE4D18704C60001EC222 /* Base */ = {isa = PBXFileReference; fileEncoding = 10; lastKnownFileType = text.plist.strings; name = Base; path = Base.lproj/InfoPlist.strings; sourceTree = "<group>"; };
 		3867CE5218704DAF001EC222 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.xib; name = Base; path = Base.lproj/MCTableEmptyMessage.xib; sourceTree = "<group>"; };
-		3867CE5518704DB9001EC222 /* nl */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = nl; path = nl.lproj/MCTableEmptyMessage.strings; sourceTree = "<group>"; };
+		3867CE5518704DB9001EC222 /* nl */ = {isa = PBXFileReference; fileEncoding = 10; lastKnownFileType = text.plist.strings; name = nl; path = nl.lproj/MCTableEmptyMessage.strings; sourceTree = "<group>"; };
 		386906FD186F0E6E006A5C11 /* libTestFlight.a */ = {isa = PBXFileReference; lastKnownFileType = archive.ar; path = libTestFlight.a; sourceTree = "<group>"; };
 		386906FE186F0E6E006A5C11 /* TestFlight.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = TestFlight.h; sourceTree = "<group>"; };
 		386906FF186F0E6E006A5C11 /* TestFlight+AsyncLogging.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "TestFlight+AsyncLogging.h"; sourceTree = "<group>"; };
@@ -126,7 +129,7 @@
 		3873A2A616F2858A000832FD /* Going Dutch.entitlements */ = {isa = PBXFileReference; lastKnownFileType = text.xml; path = "Going Dutch.entitlements"; sourceTree = "<group>"; };
 		3876EF571840E86900C9546A /* MCCancelDoneTableViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = MCCancelDoneTableViewController.h; path = ../MCCancelDoneTableViewController.h; sourceTree = "<group>"; };
 		3876EF581840E86900C9546A /* MCCancelDoneTableViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = MCCancelDoneTableViewController.m; path = ../MCCancelDoneTableViewController.m; sourceTree = "<group>"; };
-		387D3A8E187053BA0060FAF8 /* nl */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = nl; path = "nl.lproj/Main-Iphone.strings"; sourceTree = "<group>"; };
+		387D3A8E187053BA0060FAF8 /* nl */ = {isa = PBXFileReference; fileEncoding = 10; lastKnownFileType = text.plist.strings; name = nl; path = "nl.lproj/Main-Iphone.strings"; sourceTree = "<group>"; };
 		3886D3FB16B7A1CD00ECE64F /* AddressBook.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = AddressBook.framework; path = System/Library/Frameworks/AddressBook.framework; sourceTree = SDKROOT; };
 		3886D3FC16B7A1CD00ECE64F /* AddressBookUI.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = AddressBookUI.framework; path = System/Library/Frameworks/AddressBookUI.framework; sourceTree = SDKROOT; };
 		3892E3A217903EF00038894B /* MCEditTripViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = MCEditTripViewController.h; path = ViewControllers/MCEditTripViewController.h; sourceTree = "<group>"; };
@@ -312,6 +315,7 @@
 		38572ADD169D437B00969C62 /* Supporting Files */ = {
 			isa = PBXGroup;
 			children = (
+				387D3A931870652B0060FAF8 /* Localizable.strings */,
 				38572ADE169D437B00969C62 /* We all pay-Info.plist */,
 				38572ADF169D437B00969C62 /* InfoPlist.strings */,
 				38572AE2169D437B00969C62 /* main.m */,
@@ -537,6 +541,7 @@
 				38334EBA172C2E050063B919 /* plus sign@2x.png in Resources */,
 				38334EBC172D1A770063B919 /* three peeps.png in Resources */,
 				38334EBE172D1A8E0063B919 /* three peeps@2x.png in Resources */,
+				387D3A911870652B0060FAF8 /* Localizable.strings in Resources */,
 				38334ECA173552330063B919 /* Default.png in Resources */,
 				38334ECB1735523A0063B919 /* Default@2x.png in Resources */,
 				3867CE4718704B2E001EC222 /* Main-Iphone.storyboard in Resources */,
@@ -622,6 +627,15 @@
 			);
 			name = MCTableEmptyMessage.xib;
 			path = Views;
+			sourceTree = "<group>";
+		};
+		387D3A931870652B0060FAF8 /* Localizable.strings */ = {
+			isa = PBXVariantGroup;
+			children = (
+				38156B2818706B750047AEEF /* nl */,
+				38156B2918706BAC0047AEEF /* Base */,
+			);
+			name = Localizable.strings;
 			sourceTree = "<group>";
 		};
 /* End PBXVariantGroup section */

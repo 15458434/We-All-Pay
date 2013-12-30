@@ -41,7 +41,7 @@
 
 - (IBAction)tellAFriendAboutWeAllPay:(id)sender
 {
-    NSArray *dataToShare = [NSArray arrayWithObject:[NSString stringWithFormat:@"Hi, I found this easy to use iPhone app to share a bill amongst friends. It's called \"We All Pay\"."]];
+    NSArray *dataToShare = [NSArray arrayWithObject:[NSString stringWithString:NSLocalizedString(@"I_FOUND_WE_ALL_PAY", @"Hi, I found this easy to use iPhone app to share a bill amongst friends. It is called We All Pay.")]];
     UIActivityViewController *shareMe = [[UIActivityViewController alloc] initWithActivityItems:dataToShare applicationActivities:nil];
     [self presentViewController:shareMe animated:YES completion:nil];
 }
@@ -143,7 +143,7 @@
     [self setEdgesForExtendedLayout:UIRectEdgeNone];
     [MCTools setAdBannerIfNotPaid:YES forViewController:self];
     
-    [[self navigationItem] setTitle:@"back"];
+    [[self navigationItem] setTitle:NSLocalizedString(@"BACK_TITLE_ALL_TRIPS_VIEW", @"back")];
     
     if (!dataController) {
         [self setDataController];
@@ -158,6 +158,7 @@
     emptyMessage = [[[NSBundle mainBundle] loadNibNamed:@"MCTableEmptyMessage" owner:self options:nil] objectAtIndex:0];
     [[emptyMessage bigMessage] setAlpha:0.0];
     [[self tableView] setBackgroundView:emptyMessage];
+    
 }
 
 - (void)didReceiveMemoryWarning
