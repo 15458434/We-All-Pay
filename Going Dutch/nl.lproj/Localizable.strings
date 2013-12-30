@@ -22,6 +22,10 @@
 "PEOPLE_PRESENT_PAGEVIEWCONTROLLER" = "aanwezigen";
 "PAYMENTS_PAGEVIEWCONTROLLER" = "betalingen";
 
+/* Email */
+/* Just Dear as in \"Dear Mark\" */
+"EMAIL_DEAR" = "Beste";
+
 /* SharedBillTableView */
 "EMPTY_PAYMENT_LIST_MESSAGE" = "Druk op \"nieuwe betaling\" op een betaling toe te voegen op deze rekening.";
 "PAYMENTCELL_PAYERNAME_EXTRA" = "";

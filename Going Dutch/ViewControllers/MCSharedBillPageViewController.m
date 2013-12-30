@@ -59,6 +59,7 @@
     UIStoryboard *storyboard = [UIStoryboard storyboardWithName:@"Main-Iphone" bundle:nil];
     MCSharedBillTableViewController *sharedBillView = [storyboard instantiateViewControllerWithIdentifier:@"MCSharedBillTableViewController"];
     [sharedBillView setTonightsBill:tonightsBill];
+    [sharedBillView setMailDelegate:self];
     [pageViewIndicator setCurrentPage:1];
     [titleLabel setText:NSLocalizedString(@"PAYMENTS_PAGEVIEWCONTROLLER", @"Payments")];
     NSArray *views = [NSArray arrayWithObjects:sharedBillView, nil];
@@ -104,7 +105,7 @@
     NSMutableString *mailBody = [[NSMutableString alloc] init];
     NSNumberFormatter *nf = [[NSNumberFormatter alloc] init];
     [nf setNumberStyle:NSNumberFormatterCurrencyStyle];
-    [mailBody appendFormat:@"Dear %@\n", [tonightsBill stringOfApproxPeoplePresent]];
+    [mailBody appendFormat:@"%@ %@,\n", NSLocalizedString(@"EMAIL_DEAR", @"Just Dear as in \"Dear Mark\""), [tonightsBill stringOfApproxPeoplePresent]];
     [mailBody appendFormat:@"\n"];
     [mailBody appendFormat:@"From a total of %@, which was spend on our last trip to %@. We all have to pay an equal share of %@.\n", [nf stringFromNumber:[tonightsBill totalSumOfMoneyOfThisSharedBill]], [tonightsBill tripName], [nf stringFromNumber:[tonightsBill amountPeopleShouldHavePaid]]];
     [mailBody appendFormat:@"\n"];
@@ -239,6 +240,7 @@
         MCSharedBillTableViewController *sharedbillView = [storyboard instantiateViewControllerWithIdentifier:@"MCSharedBillTableViewController"];
         [sharedbillView setTonightsBill:tonightsBill];
         [sharedbillView setDelegate:self];
+        [sharedbillView setMailDelegate:self];
         return sharedbillView;
     } else {
         return nil;

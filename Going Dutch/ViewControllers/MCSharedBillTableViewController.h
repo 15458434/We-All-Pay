@@ -15,6 +15,7 @@
 @class MCTwoLabelsTitleView;
 @class MCTextFieldAndLabelTitleView;
 @class MCTableEmptyMessage;
+@class MCSharedBillPageViewController;
 
 @protocol MCReturnPaymentViewControllerDelegate <NSObject>
 
@@ -39,6 +40,7 @@
 - (IBAction)mailButtonPressed:(id)sender;
 
 @property (nonatomic, weak) id delegate;
+@property (nonatomic, weak) MCSharedBillPageViewController *mailDelegate;
 @property (nonatomic, strong) MCSharedBill *tonightsBill;
 @property (nonatomic, readonly) BOOL didSomethingChange;
 

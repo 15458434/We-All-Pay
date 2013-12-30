@@ -34,6 +34,7 @@
 @synthesize tonightsBill;
 @synthesize didSomethingChange;
 @synthesize delegate;
+@synthesize mailDelegate;
 
 #pragma mark - Actions
 
@@ -426,7 +427,7 @@
         [[[[segue destinationViewController] viewControllers] objectAtIndex:0] setTonightsBill:tonightsBill];
     }
     if ([[[[segue destinationViewController] viewControllers] objectAtIndex:0] respondsToSelector:@selector(setSendMailObject:)]) {
-        [[[[segue destinationViewController] viewControllers] objectAtIndex:0] setSendMailObject:self];
+        [[[[segue destinationViewController] viewControllers] objectAtIndex:0] setSendMailObject:[self mailDelegate]];
     }
 
     if ([[[[segue destinationViewController] viewControllers] objectAtIndex:0] respondsToSelector:@selector(setThisPayment:)]) {
