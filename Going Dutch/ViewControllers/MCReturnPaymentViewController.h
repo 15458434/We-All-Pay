@@ -13,7 +13,9 @@
 #import "MCCancelDoneTableViewController.h"
 
 @class MCSharedBill;
+
 @class MCTwoLabelsTitleView;
+@class MCTableEmptyMessage;
 
 @class MCSharedBillPageViewController;
 
@@ -22,6 +24,7 @@
     NSMutableArray *paymentsAfterwards;
     
     __strong IBOutlet MCTwoLabelsTitleView *twoLabelTitleView;
+    MCTableEmptyMessage *emptyMessage;
 }
 
 - (IBAction)sendAsEmailButtonPressed:(id)sender;

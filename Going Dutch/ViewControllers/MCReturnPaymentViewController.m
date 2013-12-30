@@ -9,11 +9,14 @@
 #import "MCReturnPaymentViewController.h"
 #import "MCSharedBillTableViewController.h"
 #import "MCSharedBillPageViewController.h"
+
 #import "MCSharedBill+addons.h"
 #import "MCReturnPayment.h"
 #import "MCPerson+addons.h"
+
 #import "MCReturnPaymentTableViewCell.h"
 #import "MCTwoLabelsTitleView.h"
+#import "MCTableEmptyMessage.h"
 
 @interface MCReturnPaymentViewController ()
 
@@ -52,6 +55,21 @@
     return self;
 }
 
+- (void)setEmptyMessage
+{
+    if (![paymentsAfterwards count] == 0) {
+        [UIView animateWithDuration:1.0 animations:^{
+            [[emptyMessage bigMessage] setAlpha:0.0];
+            [[self tableView] setSeparatorStyle:UITableViewCellSeparatorStyleSingleLine];
+        } completion:nil];
+    } else {
+        [UIView animateWithDuration:1.0 animations:^{
+            [[emptyMessage bigMessage] setAlpha:1.0];
+            [[self tableView] setSeparatorStyle:UITableViewCellSeparatorStyleNone];
+        } completion:nil];
+    }
+}
+
 #pragma mark - Inherited from super.
 
 - (id)initWithStyle:(UITableViewStyle)style
@@ -81,6 +99,8 @@
         [[twoLabelTitleView mainLabel] setTextColor:[UIColor whiteColor]];
         [[twoLabelTitleView subLabel] setTextColor:[UIColor whiteColor]];
     }
+    
+    [self setEmptyMessage];
 }
 
 - (void)viewDidLoad
@@ -109,6 +129,10 @@
             [paymentsAfterwards addObject:rp];
         }
     }
+    
+    emptyMessage = [[[NSBundle mainBundle] loadNibNamed:@"MCTableEmptyMessage" owner:self options:nil] objectAtIndex:0];
+    [[self tableView] setBackgroundView:emptyMessage];
+    [[emptyMessage bigMessage] setText:NSLocalizedString(@"RETURNPAYMENTSVIEW_NOPAYMENTS", @"Please add payments and/or people if you want a solution on who owes who.")];
     [[self tableView] reloadData];
     
     UINib *nib = [UINib nibWithNibName:@"MCReturnPaymentTableViewCell" bundle:nil];

@@ -64,6 +64,8 @@
 "TOTAL_SPENT" = "Totaal:";
 /* As in Mark owes Arjen, but then just the word owes. */
 "OWES" = "betaalt";
+/* Please add payments and/or people if you want a solution on who owes who. */
+"RETURNPAYMENTSVIEW_NOPAYMENTS" = "Druk op \"Annuleer\" en voeg mensen en/of betaling toe.";
 
 /* MCEditTripView */
 /* Press \"add Person\" to add a person who you'd like to share this bill with. */
