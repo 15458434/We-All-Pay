@@ -345,15 +345,11 @@
     if (!twoLabelTitleView) {
         twoLabelTitleView = [[[NSBundle mainBundle] loadNibNamed:@"MCTwoLabelsTitleView" owner:self options:nil] objectAtIndex:0];
         if (isNew) {
-            [[twoLabelTitleView mainLabel] setText:@"New person"];
-            [[twoLabelTitleView subLabel] setText:@"Add"];
+            [[twoLabelTitleView mainLabel] setText:NSLocalizedString(@"NEW_PERSON_HEADER", @"Header in the personView which state new person.")];
+            [[twoLabelTitleView subLabel] setText:NSLocalizedString(@"NEW_PERSON_SUBHEADER", @"Sub header in the personView which states add new data")];
         } else {
-            [[twoLabelTitleView mainLabel] setText:@"Person"];
-            if (kABAuthorizationStatusAuthorized == ABAddressBookGetAuthorizationStatus()) {
-                [[twoLabelTitleView subLabel] setText:@"Show details"];
-            } else {
-                [[twoLabelTitleView subLabel] setText:@"Edit details"];
-            }
+            [[twoLabelTitleView mainLabel] setText:NSLocalizedString(@"EXISTING_PERSON_HEADER", @"Header in the personView which states person")];
+            [[twoLabelTitleView subLabel] setText:NSLocalizedString(@"EXISTING_PERSON_SUBHEADER", @"Sub header in the personView which state edit data")];
         }
         if (SYSTEM_VERSION_LESS_THAN(@"7.0")) {
             [[twoLabelTitleView mainLabel] setTextColor:[UIColor whiteColor]];

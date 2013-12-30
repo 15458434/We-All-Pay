@@ -48,3 +48,13 @@
 "EXISTING_PAYMENT_HEADER" = "betaling";
 /* Sub header in the paymentView which states edit data */
 "EXISTING_PAYMENT_SUBHEADER" = "bewerk gegevens";
+
+/* PersonView */
+/* Header in the personView which state new person. */
+"NEW_PERSON_HEADER" = "nieuw persoon";
+/* Sub header in the personView which states add new data */
+"NEW_PERSON_SUBHEADER" = "vul gegevens in";
+/* Header in the personView which states person */
+"EXISTING_PERSON_HEADER" = "persoon";
+/* Sub header in the personView which state edit data */
+"EXISTING_PERSON_SUBHEADER" = "bewerk gegevens";
