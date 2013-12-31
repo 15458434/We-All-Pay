@@ -363,7 +363,7 @@
                         <viewControllerLayoutGuide type="top" id="cIH-wB-q4j"/>
                         <viewControllerLayoutGuide type="bottom" id="7ck-Y1-fdd"/>
                     </layoutGuides>
-                    <view key="view" contentMode="scaleToFill" id="YgD-ot-OKq">
+                    <view key="view" contentMode="scaleToFill" id="YgD-ot-OKq" customClass="UIControl">
                         <rect key="frame" x="0.0" y="0.0" width="320" height="568"/>
                         <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                         <subviews>
@@ -410,6 +410,9 @@
                             </button>
                         </subviews>
                         <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="calibratedWhite"/>
+                        <connections>
+                            <action selector="dismissKeyboard:" destination="X5i-vZ-dYW" eventType="touchUpInside" id="NYd-JH-u2A"/>
+                        </connections>
                     </view>
                     <navigationItem key="navigationItem" id="Mk3-cw-HW7">
                         <barButtonItem key="leftBarButtonItem" systemItem="cancel" id="oJb-TP-76X">

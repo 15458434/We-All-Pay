@@ -37,7 +37,7 @@
         [lastNameField endEditing:YES];
     }
     if ([emailField isFirstResponder]) {
-        if (ABAddressBookGetAuthorizationStatus() == kABAuthorizationStatusAuthorized) {
+        if (isSelectEmail) {
             [self cancelEmailPicker:self];
         } else {
             [emailField endEditing:YES];
