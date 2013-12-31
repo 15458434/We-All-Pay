@@ -27,6 +27,19 @@
 
 #pragma mark - action
 
+- (IBAction)tabElseWhereAndDismissKeyboard:(id)sender {
+    if ([itemView isFirstResponder]) {
+        [itemView endEditing:YES];
+        [itemView setText:[thisPayment descriptionOfPayment]];
+    }
+    if ([payerView isFirstResponder]) {
+        [self cancelPersonPicker:self];
+    }
+    if ([paidView isFirstResponder]) {
+        [self cancelNumberPad:self];
+    }
+}
+
 - (IBAction)mainCancelButtonPressed:(id)sender
 {
     NSManagedObjectContext *context = [[[MCWeAllPayStoreController defaultStore] weAllPayStoreDocument] managedObjectContext];
@@ -63,20 +76,6 @@
         }
     }];
     [[[self navigationController] presentingViewController] dismissViewControllerAnimated:YES completion:nil];
-}
-
-- (IBAction)dismissKeyboard:(id)sender
-{
-    if ([itemView isFirstResponder]) {
-        [itemView endEditing:YES];
-        [itemView setText:[thisPayment descriptionOfPayment]];
-    }
-    if ([payerView isFirstResponder]) {
-        [self cancelPersonPicker:self];
-    }
-    if ([paidView isFirstResponder]) {
-        [self cancelNumberPad:self];
-    }
 }
 
 - (void)cancelPersonPicker:(id)selector

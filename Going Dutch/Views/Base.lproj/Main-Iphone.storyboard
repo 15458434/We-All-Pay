@@ -506,6 +506,9 @@
                             </label>
                         </subviews>
                         <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="calibratedWhite"/>
+                        <connections>
+                            <action selector="tabElseWhereAndDismissKeyboard:" destination="vM4-YK-kO8" eventType="touchUpInside" id="8pz-B0-pau"/>
+                        </connections>
                     </view>
                     <navigationItem key="navigationItem" id="UEk-pu-Nfg">
                         <barButtonItem key="leftBarButtonItem" systemItem="cancel" id="gtr-oM-Fq8">
