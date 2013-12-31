@@ -49,6 +49,7 @@ typedef enum _emailFieldEditStatus {
     BOOL didSomethingChange;
     BOOL isNew;
     BOOL thisPersonHasPaidSomething;
+    BOOL mainCancelPressed;
     NSUInteger emailEditFieldStatus;
 }
 
