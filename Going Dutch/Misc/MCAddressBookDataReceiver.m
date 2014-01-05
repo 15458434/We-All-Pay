@@ -23,39 +23,42 @@
 
 - (void)getPersonData:(ABRecordRef)person
 {
-    // Get all linked ABRecords from AddressBook
-    CFArrayRef allLinkedPeople = ABPersonCopyArrayOfAllLinkedPeople(person);
-    
-    thisPerson = [delegate personRecordToUse];
-    if (!thisPerson) {
-        thisPerson = [MCPerson addPerson];
-        if (tonightsBill) {
-            [thisPerson addSharedBillObject:tonightsBill];
-        }
-    } else {
-        [thisPerson deletAllEmailAddresses];
-    }
-
-    [thisPerson setThumbnailDataFromImage:[UIImage imageWithData:(__bridge_transfer NSData *)ABPersonCopyImageDataWithFormat(person, kABPersonImageFormatThumbnail)]];
-    [thisPerson setPictureDataFromImage:[UIImage imageWithData:(__bridge_transfer NSData *)ABPersonCopyImageDataWithFormat(person, kABPersonImageFormatOriginalSize)]];
-    [thisPerson setFirstName:(__bridge_transfer NSString *)ABRecordCopyValue(person, kABPersonFirstNameProperty)];
-    [thisPerson setLastName:(__bridge_transfer NSString *)ABRecordCopyValue(person, kABPersonLastNameProperty)];
-    
-    // Retrieve all possible mail addresses by going through the list of linked ABRecords and through the list of EmailAddresses.
-    if (CFArrayGetCount(allLinkedPeople)) {
-        for (NSUInteger j = 0 ; j < CFArrayGetCount(allLinkedPeople); j++) {
-            ABRecordRef personRecord = CFArrayGetValueAtIndex(allLinkedPeople, j);
-            ABMultiValueRef emailAddresses = ABRecordCopyValue(personRecord, kABPersonEmailProperty);
-            if (ABMultiValueGetCount(emailAddresses)) {
-                for (NSUInteger i = 0 ; i < ABMultiValueGetCount(emailAddresses); i++) {
-                    NSString *emailAddressForPerson=(__bridge_transfer NSString *)ABMultiValueCopyValueAtIndex(emailAddresses, i);
-                    [thisPerson addOneEmailAddressFromAString:emailAddressForPerson];
-                }
+    NSManagedObjectContext *parentContext = [[[[MCWeAllPayStoreController defaultStore] weAllPayStoreDocument] managedObjectContext] parentContext];
+    [parentContext performBlock:^{
+        // Get all linked ABRecords from AddressBook
+        CFArrayRef allLinkedPeople = ABPersonCopyArrayOfAllLinkedPeople(person);
+        
+        thisPerson = [delegate personRecordToUse];
+        if (!thisPerson) {
+            thisPerson = [MCPerson addPerson];
+            if (tonightsBill) {
+                [thisPerson addSharedBillObject:tonightsBill];
             }
-            CFRelease(emailAddresses);
+        } else {
+            [thisPerson deletAllEmailAddresses];
         }
-    }
-    CFRelease(allLinkedPeople);
+        
+        [thisPerson setThumbnailDataFromImage:[UIImage imageWithData:(__bridge_transfer NSData *)ABPersonCopyImageDataWithFormat(person, kABPersonImageFormatThumbnail)]];
+        [thisPerson setPictureDataFromImage:[UIImage imageWithData:(__bridge_transfer NSData *)ABPersonCopyImageDataWithFormat(person, kABPersonImageFormatOriginalSize)]];
+        [thisPerson setFirstName:(__bridge_transfer NSString *)ABRecordCopyValue(person, kABPersonFirstNameProperty)];
+        [thisPerson setLastName:(__bridge_transfer NSString *)ABRecordCopyValue(person, kABPersonLastNameProperty)];
+        
+        // Retrieve all possible mail addresses by going through the list of linked ABRecords and through the list of EmailAddresses.
+        if (CFArrayGetCount(allLinkedPeople)) {
+            for (NSUInteger j = 0 ; j < CFArrayGetCount(allLinkedPeople); j++) {
+                ABRecordRef personRecord = CFArrayGetValueAtIndex(allLinkedPeople, j);
+                ABMultiValueRef emailAddresses = ABRecordCopyValue(personRecord, kABPersonEmailProperty);
+                if (ABMultiValueGetCount(emailAddresses)) {
+                    for (NSUInteger i = 0 ; i < ABMultiValueGetCount(emailAddresses); i++) {
+                        NSString *emailAddressForPerson=(__bridge_transfer NSString *)ABMultiValueCopyValueAtIndex(emailAddresses, i);
+                        [thisPerson addOneEmailAddressFromAString:emailAddressForPerson];
+                    }
+                }
+                CFRelease(emailAddresses);
+            }
+        }
+        CFRelease(allLinkedPeople);
+    }];
 }
 
 #pragma mark - Inherited from super.

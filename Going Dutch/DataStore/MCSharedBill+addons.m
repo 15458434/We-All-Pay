@@ -123,6 +123,19 @@
     return newPerson;
 }
 
+- (MCPerson *)addPersonInPrivateQueue
+{
+    MCPerson *newPerson = [MCPerson addPersonInPrivateQueue];
+    if ([newPerson managedObjectContext] == [self managedObjectContext]) {
+        [newPerson addSharedBillObject:self];
+        return newPerson;
+    } else {
+        NSLog(@"tonightsBill is from a different queue than newPerson");
+        return nil;
+    }
+
+}
+
 - (BOOL)areTherePeople
 {
     if ([[self peoplePresent] count] == 0) {
@@ -295,6 +308,24 @@
 {
     NSSortDescriptor *sortDescriptor = [NSSortDescriptor sortDescriptorWithKey:@"getFullName" ascending:YES];
     return [[self peoplePresent] sortedArrayUsingDescriptors:[NSArray arrayWithObject:sortDescriptor]];
+}
+
+- (MCSharedBill *)getTonightsBillFromParentContext:(MCSharedBill *)tonightsBillFromContext
+{
+    __block MCSharedBill *tonightsBillFromParentContext;
+    NSManagedObjectContext *parentContext = [[tonightsBillFromContext managedObjectContext] parentContext];
+    [parentContext performBlockAndWait:^{
+        NSFetchRequest *request = [NSFetchRequest fetchRequestWithEntityName:@"MCSharedBill"];
+        [request setPredicate:[NSPredicate predicateWithFormat:@"self in %@", tonightsBillFromContext]];
+        [request setSortDescriptors:[NSArray arrayWithObject:[NSSortDescriptor sortDescriptorWithKey:@"uniqueBillId" ascending:YES]]];
+        NSError *error = nil;
+        NSArray *fetchedBills = [parentContext executeFetchRequest:request error:&error];
+        if (!fetchedBills) {
+            NSLog(@"Error fetching tonightsBill from parentContext: %@", [error localizedDescription]);
+        }
+        tonightsBillFromParentContext = [fetchedBills objectAtIndex:0];
+    }];
+    return tonightsBillFromParentContext;
 }
 
 @end

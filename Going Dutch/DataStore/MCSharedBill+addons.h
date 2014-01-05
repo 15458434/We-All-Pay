@@ -22,6 +22,7 @@
 
 - (MCPayment *)addPayment;
 - (MCPerson *)addPerson;
+- (MCPerson *)addPersonInPrivateQueue;
 - (BOOL)areTherePeople;
 - (NSUInteger)totalAmountOfPeoplePresent;
 - (NSUInteger)totalAmountOfPeopleWhoHavePaid;
@@ -34,5 +35,6 @@
 - (BOOL)doesEveryoneHaveAnEmailAddress;
 
 - (NSArray *)getArrayOfFullNamesOfPeoplePresent;
+- (MCSharedBill *)getTonightsBillFromParentContext:(MCSharedBill *)tonightsBillFromContext;
 
 @end
