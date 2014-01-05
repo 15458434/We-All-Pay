@@ -35,6 +35,6 @@
 - (BOOL)doesEveryoneHaveAnEmailAddress;
 
 - (NSArray *)getArrayOfFullNamesOfPeoplePresent;
-- (MCSharedBill *)getTonightsBillFromParentContext:(MCSharedBill *)tonightsBillFromContext;
+- (MCSharedBill *)getTonightsBillFromParentContext;
 
 @end

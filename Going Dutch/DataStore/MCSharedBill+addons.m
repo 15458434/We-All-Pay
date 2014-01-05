@@ -310,13 +310,13 @@
     return [[self peoplePresent] sortedArrayUsingDescriptors:[NSArray arrayWithObject:sortDescriptor]];
 }
 
-- (MCSharedBill *)getTonightsBillFromParentContext:(MCSharedBill *)tonightsBillFromContext
+- (MCSharedBill *)getTonightsBillFromParentContext
 {
     __block MCSharedBill *tonightsBillFromParentContext;
-    NSManagedObjectContext *parentContext = [[tonightsBillFromContext managedObjectContext] parentContext];
+    NSManagedObjectContext *parentContext = [[self managedObjectContext] parentContext];
     [parentContext performBlockAndWait:^{
         NSFetchRequest *request = [NSFetchRequest fetchRequestWithEntityName:@"MCSharedBill"];
-        [request setPredicate:[NSPredicate predicateWithFormat:@"self in %@", tonightsBillFromContext]];
+        [request setPredicate:[NSPredicate predicateWithFormat:@"self in %@", self]];
         [request setSortDescriptors:[NSArray arrayWithObject:[NSSortDescriptor sortDescriptorWithKey:@"uniqueBillId" ascending:YES]]];
         NSError *error = nil;
         NSArray *fetchedBills = [parentContext executeFetchRequest:request error:&error];
