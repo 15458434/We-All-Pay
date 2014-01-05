@@ -167,6 +167,30 @@
     }
 }
 
+- (void)prepareDataControllerAndFetch
+{
+    // What entities will be fetched.
+    NSFetchRequest *request = [NSFetchRequest fetchRequestWithEntityName:@"MCPerson"];
+    // How to sort the data.
+    [request setRelationshipKeyPathsForPrefetching:@[ @"emailAddress", @"payments" ]];
+    NSSortDescriptor *sortDescriptor = [NSSortDescriptor sortDescriptorWithKey:@"dateCreated" ascending:NO];
+    NSArray *sortDescriptorArray = [NSArray arrayWithObject:sortDescriptor];
+    [request setSortDescriptors:sortDescriptorArray];
+    // Select only people from tonightsBill.
+    NSPredicate *predicate = [NSPredicate predicateWithFormat:@"ANY sharedBill = %@", tonightsBill];
+    [request setPredicate:predicate];
+    
+    // Create the FetchedResultsController.
+    
+    dataController = [[NSFetchedResultsController alloc] initWithFetchRequest:request managedObjectContext:[[[MCWeAllPayStoreController defaultStore] weAllPayStoreDocument] managedObjectContext] sectionNameKeyPath:nil cacheName:[NSString stringWithFormat:@"All persons cache of trip: %@", [tonightsBill uniqueBillId]]];
+    [dataController setDelegate:self];
+    NSError *error;
+    BOOL success = [dataController performFetch:&error];
+    if (!success) {
+        NSLog(@"Something went wrong");
+    }
+}
+
 - (void)setEmptyMessage
 {
     if (![[dataController fetchedObjects] count] == 0) {
@@ -212,26 +236,7 @@
     [[self view] endEditing:YES];
     
     if (!dataController) {
-        // What entities will be fetched.
-        NSFetchRequest *request = [NSFetchRequest fetchRequestWithEntityName:@"MCPerson"];
-        [request setRelationshipKeyPathsForPrefetching:@[ @"emailAddress" , @"payments" ]];
-        
-        // How to sort the data.
-        NSSortDescriptor *sortDescriptor = [NSSortDescriptor sortDescriptorWithKey:@"dateCreated" ascending:NO];
-        NSArray *sortDescriptorArray = [NSArray arrayWithObject:sortDescriptor];
-        [request setSortDescriptors:sortDescriptorArray];
-        // Select only people from tonightsBill.
-        NSPredicate *predicate = [NSPredicate predicateWithFormat:@"sharedBill = %@", tonightsBill];
-        [request setPredicate:predicate];
-        
-        // Create the FetchedResultsController.
-        dataController = [[NSFetchedResultsController alloc] initWithFetchRequest:request managedObjectContext:[[[MCWeAllPayStoreController defaultStore] weAllPayStoreDocument] managedObjectContext] sectionNameKeyPath:nil cacheName:@"All persons cache."];
-        [dataController setDelegate:self];
-        NSError *error;
-        BOOL success = [dataController performFetch:&error];
-        if (!success) {
-            NSLog(@"Something went wrong");
-        }
+        [self prepareDataControllerAndFetch];
     }
     
     if (isInitAsNew && [[dataController fetchedObjects] count] == 0) {
@@ -287,26 +292,7 @@
     }
     
     if (!dataController) {
-        // What entities will be fetched.
-        NSFetchRequest *request = [NSFetchRequest fetchRequestWithEntityName:@"MCPerson"];
-        // How to sort the data.
-        [request setRelationshipKeyPathsForPrefetching:@[ @"emailAddress" ]];
-        NSSortDescriptor *sortDescriptor = [NSSortDescriptor sortDescriptorWithKey:@"dateCreated" ascending:NO];
-        NSArray *sortDescriptorArray = [NSArray arrayWithObject:sortDescriptor];
-        [request setSortDescriptors:sortDescriptorArray];
-        // Select only people from tonightsBill.
-        NSPredicate *predicate = [NSPredicate predicateWithFormat:@"ANY sharedBill = %@", tonightsBill];
-        [request setPredicate:predicate];
-        
-        // Create the FetchedResultsController.
-        
-        dataController = [[NSFetchedResultsController alloc] initWithFetchRequest:request managedObjectContext:[[[MCWeAllPayStoreController defaultStore] weAllPayStoreDocument] managedObjectContext] sectionNameKeyPath:nil cacheName:[NSString stringWithFormat:@"All persons cache of trip: %@", [tonightsBill uniqueBillId]]];
-        [dataController setDelegate:self];
-        NSError *error;
-        BOOL success = [dataController performFetch:&error];
-        if (!success) {
-            NSLog(@"Something went wrong");
-        }
+        [self prepareDataControllerAndFetch];
     }
     
     [[[self navigationItem] rightBarButtonItem] setEnabled:NO];

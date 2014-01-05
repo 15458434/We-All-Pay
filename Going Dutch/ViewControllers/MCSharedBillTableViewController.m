@@ -61,24 +61,6 @@
 
 #pragma mark - New in this class.
 
-/*
- - (id)initWithSharedBill:(MCSharedBill *)tBill
-{
-    self = [super initWithStyle:UITableViewStyleGrouped];
-    
-    if (self) {
-        tonightsBill = tBill;
-        [[self navigationItem] setTitle:[tBill tripName]];
-        UIBarButtonItem *editButton = [[UIBarButtonItem alloc] initWithBarButtonSystemItem:UIBarButtonSystemItemEdit
-                                                                                    target:self
-                                                                                    action:@selector(editBillData:)];
-        [[self navigationItem] setRightBarButtonItem:editButton animated:YES];
-
-    }
-    return self;
-}
-*/
-
 - (void)updateSubLabel
 {
     NSNumberFormatter *nf = [[NSNumberFormatter alloc] init];
@@ -109,6 +91,29 @@
             [returnPaymentButton setEnabled:NO];
         }
     }
+}
+
+- (void)prepareDataControllerAndFetch
+{
+    // What entities will be fetched.
+    NSFetchRequest *request = [NSFetchRequest fetchRequestWithEntityName:@"MCPayment"];
+    [request setRelationshipKeyPathsForPrefetching:@[ @"payingPerson" ]];
+    // How to sort the data.
+    NSSortDescriptor *sortDescriptor = [NSSortDescriptor sortDescriptorWithKey:@"dateCreated" ascending:NO];
+    NSArray *sortDescriptorArray = [NSArray arrayWithObject:sortDescriptor];
+    [request setSortDescriptors:sortDescriptorArray];
+    // Select only people from tonightsBill.
+    NSPredicate *predicate = [NSPredicate predicateWithFormat:@"onWhichBill = %@", tonightsBill];
+    [request setPredicate:predicate];
+    
+    // Create the FetchedResultsController.
+    dataController = [[NSFetchedResultsController alloc] initWithFetchRequest:request managedObjectContext:[[[MCWeAllPayStoreController defaultStore] weAllPayStoreDocument] managedObjectContext] sectionNameKeyPath:nil cacheName:[NSString stringWithFormat:@"All payments cache of trip: %@", [tonightsBill uniqueBillId]]];
+    NSError *error;
+    BOOL success = [dataController performFetch:&error];
+    if (!success) {
+        NSLog(@"Something went wrong fetching the payments");
+    }
+    [dataController setDelegate:self];
 }
 
 - (void)setEmptyMessage
@@ -190,25 +195,7 @@
     [[self tableView] registerNib:nib forCellReuseIdentifier:@"MCPaymentTableViewCell"];
     
     if (!dataController) {
-        // What entities will be fetched.
-        NSFetchRequest *request = [NSFetchRequest fetchRequestWithEntityName:@"MCPayment"];
-        [request setRelationshipKeyPathsForPrefetching:@[ @"payingPerson" ]];
-        // How to sort the data.
-        NSSortDescriptor *sortDescriptor = [NSSortDescriptor sortDescriptorWithKey:@"dateCreated" ascending:NO];
-        NSArray *sortDescriptorArray = [NSArray arrayWithObject:sortDescriptor];
-        [request setSortDescriptors:sortDescriptorArray];
-        // Select only people from tonightsBill.
-        NSPredicate *predicate = [NSPredicate predicateWithFormat:@"onWhichBill = %@", tonightsBill];
-        [request setPredicate:predicate];
-        
-        // Create the FetchedResultsController.
-        dataController = [[NSFetchedResultsController alloc] initWithFetchRequest:request managedObjectContext:[[[MCWeAllPayStoreController defaultStore] weAllPayStoreDocument] managedObjectContext] sectionNameKeyPath:nil cacheName:[NSString stringWithFormat:@"All payments cache of trip: %@", [tonightsBill uniqueBillId]]];
-        NSError *error;
-        BOOL success = [dataController performFetch:&error];
-        if (!success) {
-            NSLog(@"Something went wrong fetching the payments");
-        }
-        [dataController setDelegate:self];
+        [self prepareDataControllerAndFetch];
     }
     
     emptyMessage = [[[NSBundle mainBundle] loadNibNamed:@"MCTableEmptyMessage" owner:self options:nil] objectAtIndex:0];
