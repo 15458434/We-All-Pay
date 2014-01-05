@@ -125,6 +125,7 @@
 
 - (MCPerson *)addPersonInPrivateQueue
 {
+    NSLog(@"Warning: addPersonInPrivateQueue is not tested.");
     MCPerson *newPerson = [MCPerson addPersonInPrivateQueue];
     if ([newPerson managedObjectContext] == [self managedObjectContext]) {
         [newPerson addSharedBillObject:self];
@@ -133,7 +134,6 @@
         NSLog(@"tonightsBill is from a different queue than newPerson");
         return nil;
     }
-
 }
 
 - (BOOL)areTherePeople
@@ -312,18 +312,21 @@
 
 - (MCSharedBill *)getTonightsBillFromParentContext
 {
+    NSLog(@"getTonightsBillFromParentContext is not working.");
     __block MCSharedBill *tonightsBillFromParentContext;
-    NSManagedObjectContext *parentContext = [[self managedObjectContext] parentContext];
+    NSString *uuidCopy = [[self uniqueBillId] copy];
+    NSManagedObjectContext *parentContext = [self managedObjectContext];
     [parentContext performBlockAndWait:^{
         NSFetchRequest *request = [NSFetchRequest fetchRequestWithEntityName:@"MCSharedBill"];
-        [request setPredicate:[NSPredicate predicateWithFormat:@"self in %@", self]];
+        [request setPredicate:[NSPredicate predicateWithFormat:@"uniqueBillId = %@", uuidCopy]];
         [request setSortDescriptors:[NSArray arrayWithObject:[NSSortDescriptor sortDescriptorWithKey:@"uniqueBillId" ascending:YES]]];
         NSError *error = nil;
         NSArray *fetchedBills = [parentContext executeFetchRequest:request error:&error];
         if (!fetchedBills) {
             NSLog(@"Error fetching tonightsBill from parentContext: %@", [error localizedDescription]);
+        } else {
+            tonightsBillFromParentContext = [fetchedBills objectAtIndex:0];
         }
-        tonightsBillFromParentContext = [fetchedBills objectAtIndex:0];
     }];
     return tonightsBillFromParentContext;
 }

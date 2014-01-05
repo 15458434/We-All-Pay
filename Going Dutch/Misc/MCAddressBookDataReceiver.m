@@ -23,8 +23,8 @@
 
 - (void)getPersonData:(ABRecordRef)person
 {
-    NSManagedObjectContext *parentContext = [[[[MCWeAllPayStoreController defaultStore] weAllPayStoreDocument] managedObjectContext] parentContext];
-    [parentContext performBlock:^{
+    NSManagedObjectContext *parentContext = [[[MCWeAllPayStoreController defaultStore] weAllPayStoreDocument] managedObjectContext];
+    [parentContext performBlockAndWait:^{
         // Get all linked ABRecords from AddressBook
         CFArrayRef allLinkedPeople = ABPersonCopyArrayOfAllLinkedPeople(person);
         
