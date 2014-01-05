@@ -18,16 +18,14 @@
 
 + (MCSharedBill *)addSharedBill
 {
-    __block NSManagedObjectContext *context = [[[MCWeAllPayStoreController defaultStore] weAllPayStoreDocument] managedObjectContext];
-    __block MCSharedBill *sharedBill;
-    [context performBlockAndWait:^{
-        sharedBill = [NSEntityDescription insertNewObjectForEntityForName:@"MCSharedBill" inManagedObjectContext:context];
-        [sharedBill setUniqueBillId:[MCTools createUniqueIdentifierString]];
-        [sharedBill setHasTheMailBeenSent:[NSNumber numberWithBool:NO]];
-        NSDate *nu = [NSDate date];
-        [sharedBill setDateCreated:nu];
-        [sharedBill setDateModified:nu];
-    }];
+    NSManagedObjectContext *context = [[[MCWeAllPayStoreController defaultStore] weAllPayStoreDocument] managedObjectContext];
+    MCSharedBill *sharedBill;
+    sharedBill = [NSEntityDescription insertNewObjectForEntityForName:@"MCSharedBill" inManagedObjectContext:context];
+    [sharedBill setUniqueBillId:[MCTools createUniqueIdentifierString]];
+    [sharedBill setHasTheMailBeenSent:[NSNumber numberWithBool:NO]];
+    NSDate *nu = [NSDate date];
+    [sharedBill setDateCreated:nu];
+    [sharedBill setDateModified:nu];
     return sharedBill;
 }
 
@@ -64,17 +62,15 @@
 - (NSString *)stringOfApproxPeoplePresent;
 {
     NSManagedObjectContext *context = [[[MCWeAllPayStoreController defaultStore] weAllPayStoreDocument] managedObjectContext];
-    __block NSArray *allPeople;
-    [context performBlockAndWait:^{
-        NSFetchRequest *request = [NSFetchRequest fetchRequestWithEntityName:@"MCPerson"];
-        [request setPredicate:[NSPredicate predicateWithFormat:@"any sharedBill = %@", self]];
-        [request setSortDescriptors:[NSArray arrayWithObject:[NSSortDescriptor sortDescriptorWithKey:@"dateCreated" ascending:YES]]];
-        NSError *error = nil;
-        allPeople = [context executeFetchRequest:request error:&error];
-        if (!allPeople) {
-            NSLog(@"something went wrong fetching");
-        }
-    }];
+    NSArray *allPeople;
+    NSFetchRequest *request = [NSFetchRequest fetchRequestWithEntityName:@"MCPerson"];
+    [request setPredicate:[NSPredicate predicateWithFormat:@"any sharedBill = %@", self]];
+    [request setSortDescriptors:[NSArray arrayWithObject:[NSSortDescriptor sortDescriptorWithKey:@"dateCreated" ascending:YES]]];
+    NSError *error = nil;
+    allPeople = [context executeFetchRequest:request error:&error];
+    if (!allPeople) {
+        NSLog(@"something went wrong fetching");
+    }
     
     NSMutableString *returnString = [[NSMutableString alloc] init];
     if ([allPeople count] == 0) {
@@ -170,17 +166,15 @@
 -(NSNumber *)totalSumOfMoneyOfThisSharedBill
 {
     NSManagedObjectContext *context = [[[MCWeAllPayStoreController defaultStore] weAllPayStoreDocument] managedObjectContext];
-    __block NSArray *payments = nil;
-    [context performBlockAndWait:^{
-        NSFetchRequest *request = [NSFetchRequest fetchRequestWithEntityName:@"MCPayment"];
-        [request setPredicate:[NSPredicate predicateWithFormat:@"onWhichBill = %@", self]];
-        [request setSortDescriptors:[NSArray arrayWithObject:[NSSortDescriptor sortDescriptorWithKey:@"dateCreated" ascending:NO]]];
-        NSError *error = nil;
-        payments = [context executeFetchRequest:request error:&error];
-        if (!payments) {
-            NSLog(@"Error fetching payments on this bill");
-        }
-    }];
+    NSArray *payments = nil;
+    NSFetchRequest *request = [NSFetchRequest fetchRequestWithEntityName:@"MCPayment"];
+    [request setPredicate:[NSPredicate predicateWithFormat:@"onWhichBill = %@", self]];
+    [request setSortDescriptors:[NSArray arrayWithObject:[NSSortDescriptor sortDescriptorWithKey:@"dateCreated" ascending:NO]]];
+    NSError *error = nil;
+    payments = [context executeFetchRequest:request error:&error];
+    if (!payments) {
+        NSLog(@"Error fetching payments on this bill");
+    }
     double sumOfMoney = 0.0;
     for (MCPayment *p in payments) {
         sumOfMoney += [[p money] doubleValue];

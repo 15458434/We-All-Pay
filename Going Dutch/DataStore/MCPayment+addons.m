@@ -16,14 +16,11 @@
 + (MCPayment *)addPayment
 {
     NSManagedObjectContext *context = [[[MCWeAllPayStoreController defaultStore] weAllPayStoreDocument] managedObjectContext];
-    __block MCPayment *newPayment;
-    [context performBlockAndWait:^{
-        newPayment = [NSEntityDescription insertNewObjectForEntityForName:@"MCPayment" inManagedObjectContext:[[[MCWeAllPayStoreController defaultStore] weAllPayStoreDocument] managedObjectContext]];
-        
-        [newPayment setUniquePaymentId:[MCTools createUniqueIdentifierString]];
-        [newPayment setDateCreated:[NSDate date]];
-        [newPayment setDateModified:[newPayment dateCreated]];
-    }];
+     MCPayment *newPayment;
+    newPayment = [NSEntityDescription insertNewObjectForEntityForName:@"MCPayment" inManagedObjectContext:context];
+    [newPayment setUniquePaymentId:[MCTools createUniqueIdentifierString]];
+    [newPayment setDateCreated:[NSDate date]];
+    [newPayment setDateModified:[newPayment dateCreated]];
     return newPayment;
 }
 
@@ -31,9 +28,7 @@
 {
     // Wat te doen met mogelijke sharedBills en personen die aanwezig zijn?
     NSManagedObjectContext *context = [[[MCWeAllPayStoreController defaultStore] weAllPayStoreDocument] managedObjectContext];
-    [context performBlock:^{
-        [context deleteObject:payment];
-    }];
+    [context deleteObject:payment];
 }
 
 + (MCPayment *)fetchPaymentWithUniqueId:(NSString *)uuid

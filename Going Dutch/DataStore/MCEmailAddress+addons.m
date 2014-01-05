@@ -14,22 +14,18 @@
 
 + (MCEmailAddress *)addEmailAddressFor:(MCPerson *)person
 {
-    __block MCEmailAddress *newEmailAddress;
+    MCEmailAddress *newEmailAddress;
     NSManagedObjectContext *context = [[[MCWeAllPayStoreController defaultStore] weAllPayStoreDocument] managedObjectContext];
-    [context performBlockAndWait:^{
-        newEmailAddress = [NSEntityDescription insertNewObjectForEntityForName:@"MCEmailAddress" inManagedObjectContext:context];
-        [newEmailAddress setUniqueEmailId:[MCTools createUniqueIdentifierString]];
-        [newEmailAddress setOwner:person];
-    }];
+    newEmailAddress = [NSEntityDescription insertNewObjectForEntityForName:@"MCEmailAddress" inManagedObjectContext:context];
+    [newEmailAddress setUniqueEmailId:[MCTools createUniqueIdentifierString]];
+    [newEmailAddress setOwner:person];
     return newEmailAddress;
 }
 
 + (void)deleteEmailAddress:(MCEmailAddress *)eAddress
 {
     NSManagedObjectContext *context = [[[MCWeAllPayStoreController defaultStore] weAllPayStoreDocument] managedObjectContext];
-    [context performBlockAndWait:^{
-        [context deleteObject:eAddress];
-    }];
+    [context deleteObject:eAddress];
 }
 
 + (MCSharedBill *)fetchSharedBillWithUniqueId:(NSString *)uuid

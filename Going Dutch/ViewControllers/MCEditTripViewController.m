@@ -288,6 +288,7 @@
         // What entities will be fetched.
         NSFetchRequest *request = [NSFetchRequest fetchRequestWithEntityName:@"MCPerson"];
         // How to sort the data.
+        [request setRelationshipKeyPathsForPrefetching:@[ @"emailAddress" ]];
         NSSortDescriptor *sortDescriptor = [NSSortDescriptor sortDescriptorWithKey:@"dateCreated" ascending:NO];
         NSArray *sortDescriptorArray = [NSArray arrayWithObject:sortDescriptor];
         [request setSortDescriptors:sortDescriptorArray];

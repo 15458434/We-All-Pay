@@ -43,9 +43,7 @@
 + (void)deletePerson:(MCPerson *)delPerson
 {
     NSManagedObjectContext *context = [[[MCWeAllPayStoreController defaultStore] weAllPayStoreDocument] managedObjectContext];
-    [context performBlockAndWait:^{
-        [context deleteObject:delPerson];
-    }];
+    [context deleteObject:delPerson];
 }
 
 + (MCPerson *)fetchPersonWithUniqueId:(NSString *)uuid
