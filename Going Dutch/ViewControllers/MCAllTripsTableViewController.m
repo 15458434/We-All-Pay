@@ -53,7 +53,7 @@
     NSManagedObjectContext *context = [[[MCWeAllPayStoreController defaultStore] weAllPayStoreDocument]managedObjectContext];
     NSFetchRequest *request = [NSFetchRequest fetchRequestWithEntityName:@"MCSharedBill"];
     [request setSortDescriptors:[NSArray arrayWithObject:[NSSortDescriptor sortDescriptorWithKey:@"dateCreated" ascending:NO]]];
-    [request setRelationshipKeyPathsForPrefetching:@[ @"payments" ]];
+    [request setRelationshipKeyPathsForPrefetching:@[ @"payments", @"peoplePresent" ]];
     dataController = [[NSFetchedResultsController alloc] initWithFetchRequest:request
                                                          managedObjectContext:context
                                                            sectionNameKeyPath:nil

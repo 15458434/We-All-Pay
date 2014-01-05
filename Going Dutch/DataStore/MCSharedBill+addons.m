@@ -32,12 +32,10 @@
 + (void)deleteSharedbill:(MCSharedBill *)deleteBill
 {
     NSManagedObjectContext *context = [[[MCWeAllPayStoreController defaultStore] weAllPayStoreDocument] managedObjectContext];
-    [context performBlock:^{
-        for (MCPayment *p in [deleteBill payments]) {
-            [context deleteObject:p];
-        }
-        [context deleteObject:deleteBill];
-    }];
+    for (MCPayment *p in [deleteBill payments]) {
+        [context deleteObject:p];
+    }
+    [context deleteObject:deleteBill];
 }
 
 + (MCSharedBill *)fetchSharedBillWithUniqueId:(NSString *)uuid
@@ -61,6 +59,7 @@
 
 - (NSString *)stringOfApproxPeoplePresent;
 {
+    /*
     NSManagedObjectContext *context = [[[MCWeAllPayStoreController defaultStore] weAllPayStoreDocument] managedObjectContext];
     NSArray *allPeople;
     NSFetchRequest *request = [NSFetchRequest fetchRequestWithEntityName:@"MCPerson"];
@@ -71,7 +70,11 @@
     if (!allPeople) {
         NSLog(@"something went wrong fetching");
     }
+     */
     
+    NSArray *allPeople;
+    NSArray *sda = [NSArray arrayWithObject:[NSSortDescriptor sortDescriptorWithKey:@"dateCreated" ascending:YES]];
+    allPeople = [[self peoplePresent] sortedArrayUsingDescriptors:sda];
     NSMutableString *returnString = [[NSMutableString alloc] init];
     if ([allPeople count] == 0) {
         return NSLocalizedString(@"NO_PEOPLE_PRESENT", @"A message when there are no people present inside this shared bill");

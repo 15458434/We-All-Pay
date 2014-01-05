@@ -214,6 +214,8 @@
     if (!dataController) {
         // What entities will be fetched.
         NSFetchRequest *request = [NSFetchRequest fetchRequestWithEntityName:@"MCPerson"];
+        [request setRelationshipKeyPathsForPrefetching:@[ @"emailAddress" , @"payments" ]];
+        
         // How to sort the data.
         NSSortDescriptor *sortDescriptor = [NSSortDescriptor sortDescriptorWithKey:@"dateCreated" ascending:NO];
         NSArray *sortDescriptorArray = [NSArray arrayWithObject:sortDescriptor];
