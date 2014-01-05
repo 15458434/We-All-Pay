@@ -49,11 +49,9 @@
 {
     //[[[[MCWeAllPayStoreController defaultStore] weAllPayStoreDocument] managedObjectContext] rollback];
     NSManagedObjectContext *context = [[[MCWeAllPayStoreController defaultStore] weAllPayStoreDocument] managedObjectContext];
-    [context performBlockAndWait:^{
-        [[context undoManager] endUndoGrouping];
-        [[context undoManager] undoNestedGroup];
-        [[context undoManager] disableUndoRegistration];
-    }];
+    [[context undoManager] endUndoGrouping];
+    [[context undoManager] undoNestedGroup];
+    [[context undoManager] disableUndoRegistration];
     [[[self navigationController] presentingViewController] dismissViewControllerAnimated:YES completion:nil];
 }
 
@@ -77,12 +75,10 @@
         }
     }
     NSManagedObjectContext *context = [[[MCWeAllPayStoreController defaultStore] weAllPayStoreDocument] managedObjectContext];
-    [context performBlockAndWait:^{
-        [thisPerson setDateModified:[NSDate date]];
-        [[context undoManager] endUndoGrouping];
-        [[context undoManager] disableUndoRegistration];
-        [context processPendingChanges];
-    }];
+    [thisPerson setDateModified:[NSDate date]];
+    [[context undoManager] endUndoGrouping];
+    [[context undoManager] disableUndoRegistration];
+    [context processPendingChanges];
     [[[self navigationController] presentingViewController] dismissViewControllerAnimated:YES completion:nil];
 }
 
@@ -393,10 +389,8 @@
     }
     
     NSManagedObjectContext *context = [[[MCWeAllPayStoreController defaultStore] weAllPayStoreDocument] managedObjectContext];
-    [context performBlockAndWait:^{
-        [[context undoManager] enableUndoRegistration];
-        [[context undoManager] beginUndoGrouping];
-    }];
+    [[context undoManager] enableUndoRegistration];
+    [[context undoManager] beginUndoGrouping];
     
     [self prepareDataController];
     

@@ -345,10 +345,8 @@
     listOfInputs = [NSArray arrayWithObjects:payerView, itemView, paidView, nil];
     
     NSManagedObjectContext *context = [[[MCWeAllPayStoreController defaultStore] weAllPayStoreDocument] managedObjectContext];
-    [context performBlockAndWait:^{
-        [[context undoManager] enableUndoRegistration];
-        [[context undoManager] beginUndoGrouping];
-    }];
+    [[context undoManager] enableUndoRegistration];
+    [[context undoManager] beginUndoGrouping];
     
     // When thisPayment was not passed along a new one should be created.
     if (!thisPayment) {
