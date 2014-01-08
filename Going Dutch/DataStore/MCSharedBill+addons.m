@@ -178,6 +178,7 @@
 - (NSNumber *)totalSumPaidBy:(MCPerson *)person
 {
     NSFetchRequest *request = [NSFetchRequest fetchRequestWithEntityName:@"MCPayment"];
+    [request setRelationshipKeyPathsForPrefetching:@[ @"payingPerson" ]];
     [request setPredicate:[NSPredicate predicateWithFormat:@"onWhichBill = %@ AND payingPerson = %@", self, person]];
     [request setSortDescriptors:[NSArray arrayWithObject:[NSSortDescriptor sortDescriptorWithKey:@"dateCreated" ascending:YES]]];
     NSManagedObjectContext *context = [[[MCWeAllPayStoreController defaultStore] weAllPayStoreDocument] managedObjectContext];
