@@ -53,60 +53,73 @@
 
 - (void)setThumbnailDataFromImage:(UIImage *)image
 {
-    if (!image) {
-        //image = [UIImage imageNamed:@"girl 100x100"];
-        image = [UIImage imageNamed:@"No picture image 2 - We All Pay"];
-    }
-    CGSize imageSize = [image size];
-    CGRect thumbnailRect = CGRectMake(0, 0, 44, 44);
-    float ratio = MAX(thumbnailRect.size.width / imageSize.width, thumbnailRect.size.height / imageSize.height);
-    
-    UIGraphicsBeginImageContextWithOptions(thumbnailRect.size, NO, 0.0);
-    UIBezierPath *bezierPath = [UIBezierPath bezierPathWithRoundedRect:thumbnailRect cornerRadius:5.0];
-    [bezierPath addClip];
-    
-    CGRect imageDrawRect;
-    imageDrawRect.size.width = ratio * imageSize.width;
-    imageDrawRect.size.height = ratio * imageSize.height;
-    imageDrawRect.origin.x = (thumbnailRect.size.width - imageDrawRect.size.width) / 2.0;
-    imageDrawRect.origin.y = (thumbnailRect.size.height - imageDrawRect.size.height) / 2.0;
-    
-    [image drawInRect:imageDrawRect];
-    UIImage *thumbnailWithRoundedCorners = UIGraphicsGetImageFromCurrentImageContext();
-    [self setThumbnail:thumbnailWithRoundedCorners];
-    
-    NSData *thumbnailWithRoundedCornersData = UIImagePNGRepresentation(thumbnailWithRoundedCorners);
-    [self setThumbnailData:thumbnailWithRoundedCornersData];
-    UIGraphicsEndImageContext();
+    __block UIImage *thisImage = image;
+    dispatch_queue_t imageProcessQueue = dispatch_queue_create("Thumbnail Process Queue", NULL);
+    dispatch_async(imageProcessQueue, ^{
+        if (!thisImage) {
+            //image = [UIImage imageNamed:@"girl 100x100"];
+            thisImage = [UIImage imageNamed:@"No picture image 2 - We All Pay"];
+        }
+        CGSize imageSize = [thisImage size];
+        CGRect thumbnailRect = CGRectMake(0, 0, 44, 44);
+        float ratio = MAX(thumbnailRect.size.width / imageSize.width, thumbnailRect.size.height / imageSize.height);
+        
+        UIGraphicsBeginImageContextWithOptions(thumbnailRect.size, NO, 0.0);
+        UIBezierPath *bezierPath = [UIBezierPath bezierPathWithRoundedRect:thumbnailRect cornerRadius:5.0];
+        [bezierPath addClip];
+        
+        CGRect imageDrawRect;
+        imageDrawRect.size.width = ratio * imageSize.width;
+        imageDrawRect.size.height = ratio * imageSize.height;
+        imageDrawRect.origin.x = (thumbnailRect.size.width - imageDrawRect.size.width) / 2.0;
+        imageDrawRect.origin.y = (thumbnailRect.size.height - imageDrawRect.size.height) / 2.0;
+        
+        [thisImage drawInRect:imageDrawRect];
+        UIImage *thumbnailWithRoundedCorners = UIGraphicsGetImageFromCurrentImageContext();
+
+        
+        NSData *thumbnailWithRoundedCornersData = UIImagePNGRepresentation(thumbnailWithRoundedCorners);
+        UIGraphicsEndImageContext();
+        dispatch_async(dispatch_get_main_queue(), ^{
+            [self setThumbnail:thumbnailWithRoundedCorners];
+            [self setThumbnailData:thumbnailWithRoundedCornersData];
+        });
+    });
 }
 
 - (void)setPictureDataFromImage:(UIImage *)image
 {
-    if (!image) {
-        //image = [UIImage imageNamed:@"girl 100x100"];
-        image = [UIImage imageNamed:@"No picture image 2 - We All Pay"];
-    }
-    CGSize imageSize = [image size];
-    CGRect pictureRect = CGRectMake(0, 0, 80, 80);
-    float ratio = MAX(pictureRect.size.width / imageSize.width, pictureRect.size.height / imageSize.height);
-    
-    UIGraphicsBeginImageContextWithOptions(pictureRect.size, NO, 0.0);
-    UIBezierPath *bezierPath = [UIBezierPath bezierPathWithRoundedRect:pictureRect cornerRadius:5.0 * 1.9];
-    [bezierPath addClip];
-    
-    CGRect imageDrawRect;
-    imageDrawRect.size.width = ratio * imageSize.width;
-    imageDrawRect.size.height = ratio * imageSize.height;
-    imageDrawRect.origin.x = (pictureRect.size.width - imageDrawRect.size.width) / 2.0;
-    imageDrawRect.origin.y = (pictureRect.size.height - imageDrawRect.size.height) / 2.0;
-    
-    [image drawInRect:imageDrawRect];
-    UIImage *pictureWithRoundedCorners = UIGraphicsGetImageFromCurrentImageContext();
-    [self setPicture:pictureWithRoundedCorners];
-    
-    NSData *pictureWithRoundedCornersData = UIImagePNGRepresentation(pictureWithRoundedCorners);
-    [self setPictureData:pictureWithRoundedCornersData];
-    UIGraphicsEndImageContext();
+    __block UIImage *thisImage = image;
+    dispatch_queue_t imageProcessQueue = dispatch_queue_create("Image Process Queue", NULL);
+    dispatch_async(imageProcessQueue, ^{
+        if (!thisImage) {
+            //image = [UIImage imageNamed:@"girl 100x100"];
+            thisImage = [UIImage imageNamed:@"No picture image 2 - We All Pay"];
+        }
+        CGSize imageSize = [thisImage size];
+        CGRect pictureRect = CGRectMake(0, 0, 80, 80);
+        float ratio = MAX(pictureRect.size.width / imageSize.width, pictureRect.size.height / imageSize.height);
+        
+        UIGraphicsBeginImageContextWithOptions(pictureRect.size, NO, 0.0);
+        UIBezierPath *bezierPath = [UIBezierPath bezierPathWithRoundedRect:pictureRect cornerRadius:5.0 * 1.9];
+        [bezierPath addClip];
+        
+        CGRect imageDrawRect;
+        imageDrawRect.size.width = ratio * imageSize.width;
+        imageDrawRect.size.height = ratio * imageSize.height;
+        imageDrawRect.origin.x = (pictureRect.size.width - imageDrawRect.size.width) / 2.0;
+        imageDrawRect.origin.y = (pictureRect.size.height - imageDrawRect.size.height) / 2.0;
+        
+        [thisImage drawInRect:imageDrawRect];
+        UIImage *pictureWithRoundedCorners = UIGraphicsGetImageFromCurrentImageContext();
+        NSData *pictureWithRoundedCornersData = UIImagePNGRepresentation(pictureWithRoundedCorners);
+
+        UIGraphicsEndImageContext();
+        dispatch_async(dispatch_get_main_queue(), ^{
+            [self setPicture:pictureWithRoundedCorners];
+            [self setPictureData:pictureWithRoundedCornersData];
+        });
+    });
 }
 
 - (NSString *)getFullName
