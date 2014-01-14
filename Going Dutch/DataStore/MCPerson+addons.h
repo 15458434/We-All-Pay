@@ -11,7 +11,7 @@
 @interface MCPerson (addons)
 
 + (MCPerson *)addPerson;
-+ (MCPerson *)addPersonInPrivateQueue;
++ (MCPerson *)addPersonInContext:(NSManagedObjectContext *)context
 + (void)deletePerson:(MCPerson *)delPerson;
 
 + (MCPerson *)fetchPersonWithUniqueId:(NSString *)uuid;

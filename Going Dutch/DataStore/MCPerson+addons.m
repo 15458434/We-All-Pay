@@ -28,10 +28,9 @@
     return newPerson;
 }
 
-+ (MCPerson *)addPersonInPrivateQueue
++ (MCPerson *)addPersonInContext:(NSManagedObjectContext *)context
 {
     MCPerson *newPerson;
-    NSManagedObjectContext *context = [[[[MCWeAllPayStoreController defaultStore] weAllPayStoreDocument] managedObjectContext] parentContext];
     newPerson = [NSEntityDescription insertNewObjectForEntityForName:@"MCPerson" inManagedObjectContext:context];
     [newPerson setUniquePersonId:[MCTools createUniqueIdentifierString]];
     NSDate *nu = [NSDate date];
