@@ -79,7 +79,12 @@
     [[context undoManager] endUndoGrouping];
     [[context undoManager] disableUndoRegistration];
     [context processPendingChanges];
-    [[[self navigationController] presentingViewController] dismissViewControllerAnimated:YES completion:nil];
+    [[[self navigationController] presentingViewController] dismissViewControllerAnimated:YES completion:^{
+        NSManagedObjectContext *parentContext = [[[[MCWeAllPayStoreController defaultStore] weAllPayStoreDocument] managedObjectContext] parentContext];
+        [parentContext performBlock:^{
+            [parentContext processPendingChanges];
+        }];
+    }];
 }
 
 - (void)getSomeone:(id)selector
