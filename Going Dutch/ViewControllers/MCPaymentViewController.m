@@ -68,14 +68,16 @@
     }
 
     NSManagedObjectContext *context = [[[MCWeAllPayStoreController defaultStore] weAllPayStoreDocument] managedObjectContext];
-    [context performBlockAndWait:^{
-        [[context undoManager] endUndoGrouping];
-        [[context undoManager] disableUndoRegistration];
+    [[context undoManager] endUndoGrouping];
+    [[context undoManager] disableUndoRegistration];
+    [[[self navigationController] presentingViewController] dismissViewControllerAnimated:YES completion:^{
         if (didSomethingChange) {
-            [context processPendingChanges];
+            NSManagedObjectContext *parentContext = [[[[MCWeAllPayStoreController defaultStore] weAllPayStoreDocument] managedObjectContext] parentContext];
+            [parentContext performBlock:^{
+                [parentContext processPendingChanges];
+            }];
         }
     }];
-    [[[self navigationController] presentingViewController] dismissViewControllerAnimated:YES completion:nil];
 }
 
 - (void)cancelPersonPicker:(id)selector
