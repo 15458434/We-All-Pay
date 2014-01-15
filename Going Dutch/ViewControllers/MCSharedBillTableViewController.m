@@ -72,27 +72,6 @@
     }
 }
 
-- (void)updateToolbarButtons
-{
-    if ([[dataController fetchedObjects] count] > 0) {
-        // enable mail and solve buttons.
-        if (mailButton) {
-            [mailButton setEnabled:YES];
-        }
-        if (returnPaymentButton) {
-            [returnPaymentButton setEnabled:YES];
-        }
-    } else {
-        // disable mail and solve buttons.
-        if (mailButton) {
-            [mailButton setEnabled:NO];
-        }
-        if (returnPaymentButton) {
-            [returnPaymentButton setEnabled:NO];
-        }
-    }
-}
-
 - (void)prepareDataControllerAndFetch
 {
     // What entities will be fetched.
@@ -164,19 +143,6 @@
 {
     [super viewWillAppear:animated];
     
-    [[self navigationItem] setTitle:[tonightsBill tripName]];
-    
-    // Load the custom titleView and add it to the screen.
-    if (!twoLabelTitleView) {
-        twoLabelTitleView = [[[NSBundle mainBundle] loadNibNamed:@"MCTwoLabelsTitleView" owner:self options:nil] objectAtIndex:0];
-        //[twoLabelTitleView setDelegate:self];
-        //[[twoLabelTitleView mainLabel] addTarget:self action:@selector(dismissEdit:) forControlEvents:UIControlEventTouchUpOutside];
-        [[self navigationItem] setTitleView:twoLabelTitleView];
-    }
-    [[twoLabelTitleView mainLabel] setText:[tonightsBill tripName]];
-    
-    [self updateSubLabel];
-    [[self navigationItem] setTitleView:twoLabelTitleView];
     [[self navigationController] setToolbarHidden:YES animated:YES];
     
     if (!dataController) {
@@ -232,20 +198,17 @@
 
 - (void)textFieldDidBeginEditing:(UITextField *)textField
 {
-    [[twoLabelTitleView mainLabel] setBackgroundColor:[UIColor colorWithWhite:1.0 alpha:1.0]];
-    [[twoLabelTitleView mainLabel] setTextColor:[UIColor colorWithWhite:0.0 alpha:1.0]];
+
 }
 
 - (void)textFieldDidEndEditing:(UITextField *)textField
 {
-    [[twoLabelTitleView mainLabel] setBackgroundColor:[UIColor colorWithWhite:0.0 alpha:0.0]];
-    [[twoLabelTitleView mainLabel] setTextColor:[UIColor colorWithWhite:1.0 alpha:1.0]];
+
 }
 
 - (BOOL)textFieldShouldReturn:(UITextField *)textField
 {
     [tonightsBill setTripName:[[twoLabelTitleView mainLabel] text]];
-    [[delegate titleLabel] setText:[tonightsBill tripName]];
     [textField resignFirstResponder];
     return YES;
 }
@@ -290,7 +253,7 @@
 - (void)controllerDidChangeContent:(NSFetchedResultsController *)controller
 {
     [[self tableView] endUpdates];
-    [self updateSubLabel];
+    //[self updateSubLabel];
 }
 
 - (void)controller:(NSFetchedResultsController *)controller didChangeObject:(id)anObject atIndexPath:(NSIndexPath *)indexPath forChangeType:(NSFetchedResultsChangeType)type newIndexPath:(NSIndexPath *)newIndexPath
@@ -320,7 +283,6 @@
                                     withRowAnimation:UITableViewRowAnimationFade];
             break;
     }
-    [self updateToolbarButtons];
 }
 
 #pragma mark - Table view data source
