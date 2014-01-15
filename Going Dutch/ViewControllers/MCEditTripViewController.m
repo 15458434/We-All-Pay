@@ -91,26 +91,6 @@
 
 #pragma mark - new in this class.
 
-/*
-- (void)updateMainLabel
-{
-    [[twoLabelTitleView mainLabel] setText:[tonightsBill tripName]];
-}
-
-- (void)updateSubLabel
-{
-    if ([[dataController fetchedObjects] count] == 1) {
-        [[twoLabelTitleView subLabel] setText:[NSString stringWithFormat:@"%lu person present", (unsigned long)[[dataController fetchedObjects] count]]];
-    } else {
-        [[twoLabelTitleView subLabel] setText:[NSString stringWithFormat:@"%lu people present", (unsigned long)[[dataController fetchedObjects] count]]];
-    }
-    if (SYSTEM_VERSION_LESS_THAN(@"7.0")) {
-        [[twoLabelTitleView mainLabel] setTextColor:[UIColor whiteColor]];
-        [[twoLabelTitleView subLabel] setTextColor:[UIColor whiteColor]];
-    }
-}
- */
-
 - (void)prepareDataControllerAndFetch
 {
     // What entities will be fetched.
@@ -173,27 +153,10 @@
     [tripNameField setText:[tonightsBill tripName]];
     [tripNameField setDelegate:self];
     
-    if (!twoLabelTitleView) {
-        twoLabelTitleView = [[[NSBundle mainBundle] loadNibNamed:@"MCTwoLabelsTitleView" owner:self options:nil] objectAtIndex:0];
-        [[self navigationItem] setTitleView:twoLabelTitleView];
-    }
-    [[twoLabelTitleView mainLabel] setText:[tonightsBill tripName]];
-    //[self updateSubLabel];
-    //[[[self navigationItem] leftBarButtonItem] setEnabled:YES];
-    
-    //[[self navigationController] setToolbarHidden:YES animated:YES];
-    //[self view] endEditing:YES];
-    
     if (!dataController) {
         [self prepareDataControllerAndFetch];
+        [[self tableView] reloadData];
     }
-    
-    //if (isInitAsNew && [[dataController fetchedObjects] count] == 0) {
-        //[doneButton setEnabled:NO];
-        //[tripNameField setPlaceholder:@"Enter the activity of group."];
-        //[[twoLabelTitleView mainLabel] setText:@"New activity"];
-        //[[twoLabelTitleView subLabel] setText:@""];
-    //}
     
     if (kABAuthorizationStatusDenied == ABAddressBookGetAuthorizationStatus()) {
         [addressBookButton setAlpha:0.0];
@@ -214,19 +177,18 @@
     }
 }
 
-
 - (void)viewWillDisappear:(BOOL)animated
 {
     [super viewWillDisappear:animated];
     
-    [[[self navigationItem] leftBarButtonItem] setEnabled:NO];
+    dataController = nil;
 }
 
 - (void)viewDidDisappear:(BOOL)animated
 {
     [super viewDidDisappear:animated];
     
-    dataController = nil;
+    //dataController = nil;
 }
 
 - (void)viewDidLoad
