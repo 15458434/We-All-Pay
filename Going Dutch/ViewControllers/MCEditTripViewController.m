@@ -35,47 +35,6 @@
 
 # pragma mark - actions of this class
 
-- (void)doneAddingPeople:(id)selector
-{
-    /*
-    NSManagedObjectContext *context = [[[MCWeAllPayStoreController defaultStore] weAllPayStoreDocument] managedObjectContext];
-    [context performBlockAndWait:^{
-        [context processPendingChanges];
-        [[context undoManager] disableUndoRegistration];
-    }];
-     */
-    [[self presentingViewController] dismissViewControllerAnimated:YES completion:dismissOnDone];
-}
-
-- (void)cancelNewTrip:(id)selector
-{
-    /*
-    cancelPressed = YES;
-    NSManagedObjectContext *context = [[[MCWeAllPayStoreController defaultStore] weAllPayStoreDocument] managedObjectContext];
-    [context performBlock:^{
-        [[context undoManager] disableUndoRegistration];
-        if (didSomethingChange) {
-            [[context undoManager] undoNestedGroup];
-        }
-        [MCSharedBill deleteSharedbill:tonightsBill];
-    }];
-     */
-    [[self presentingViewController] dismissViewControllerAnimated:YES completion:dismissOnCancel];
-}
-
-- (IBAction)changeNameOfTrip:(id)sender {
-    [tonightsBill setTripName:[tripNameField text]];
-    [[self view] endEditing:YES];
-    [[[self navigationItem] rightBarButtonItem] setEnabled:YES];
-}
-
-- (IBAction)dismissKeyboard:(id)sender {
-    /*
-    [tonightsBill setTripName:[tripNameField text]];
-    [[self view] endEditing:YES];
-     */
-}
-
 - (IBAction)addressBookButton:(id)sender {
     ABPeoplePickerNavigationController *peoplePicker = [[ABPeoplePickerNavigationController alloc] init];
     if (!personReceiver) {
@@ -97,22 +56,7 @@
 }
 
 - (IBAction)addPersonButton:(id)sender {
-    /*
-    MCPerson *newPerson = [MCPerson addPerson];
-    [newPerson setThumbnailDataFromImage:nil];
-    [newPerson setPictureDataFromImage:nil];
-    [tonightsBill addPeoplePresentObject:newPerson];
-    [self updateSubLabel];
-    [doneButton setEnabled:YES];
-    MCPersonViewController *pvc = [[MCPersonViewController alloc] initWithPerson:newPerson];
-    [pvc setIsNew:YES];
-    [pvc setTonightsBill:tonightsBill];
-    UINavigationController *navController = [[UINavigationController alloc] initWithRootViewController:pvc];
-    if ([[UIDevice currentDevice] userInterfaceIdiom] == UIUserInterfaceIdiomPad) {
-        [navController setModalPresentationStyle:UIModalPresentationFormSheet];
-    }
-    [[self navigationController] presentViewController:navController animated:YES completion:nil];
-     */
+
 }
 
 - (IBAction)cancelButtonPressed:(id)sender {
@@ -145,10 +89,9 @@
     }
 }
 
-
-
 #pragma mark - new in this class.
 
+/*
 - (void)updateMainLabel
 {
     [[twoLabelTitleView mainLabel] setText:[tonightsBill tripName]];
@@ -166,6 +109,7 @@
         [[twoLabelTitleView subLabel] setTextColor:[UIColor whiteColor]];
     }
 }
+ */
 
 - (void)prepareDataControllerAndFetch
 {
@@ -234,22 +178,22 @@
         [[self navigationItem] setTitleView:twoLabelTitleView];
     }
     [[twoLabelTitleView mainLabel] setText:[tonightsBill tripName]];
-    [self updateSubLabel];
-    [[[self navigationItem] leftBarButtonItem] setEnabled:YES];
+    //[self updateSubLabel];
+    //[[[self navigationItem] leftBarButtonItem] setEnabled:YES];
     
-    [[self navigationController] setToolbarHidden:YES animated:YES];
-    [[self view] endEditing:YES];
+    //[[self navigationController] setToolbarHidden:YES animated:YES];
+    //[self view] endEditing:YES];
     
     if (!dataController) {
         [self prepareDataControllerAndFetch];
     }
     
-    if (isInitAsNew && [[dataController fetchedObjects] count] == 0) {
-        [doneButton setEnabled:NO];
-        [tripNameField setPlaceholder:@"Enter the activity of group."];
-        [[twoLabelTitleView mainLabel] setText:@"New activity"];
-        [[twoLabelTitleView subLabel] setText:@""];
-    }
+    //if (isInitAsNew && [[dataController fetchedObjects] count] == 0) {
+        //[doneButton setEnabled:NO];
+        //[tripNameField setPlaceholder:@"Enter the activity of group."];
+        //[[twoLabelTitleView mainLabel] setText:@"New activity"];
+        //[[twoLabelTitleView subLabel] setText:@""];
+    //}
     
     if (kABAuthorizationStatusDenied == ABAddressBookGetAuthorizationStatus()) {
         [addressBookButton setAlpha:0.0];
@@ -332,7 +276,7 @@
 {
     if(!didSomethingChange && value) {
         didSomethingChange = YES;
-        [[[self navigationItem] rightBarButtonItem] setEnabled:YES];
+        // [[[self navigationItem] rightBarButtonItem] setEnabled:YES];
     }
     [[self tableView] reloadData];
 }
@@ -374,7 +318,7 @@
 - (void)receiveANewPersonFromAddressBook:(MCPerson *)newPerson
 {
     didSomethingChange = YES;
-    [[[self navigationItem] rightBarButtonItem] setEnabled:YES];
+    //[[[self navigationItem] rightBarButtonItem] setEnabled:YES];
 }
 
 #pragma mark - UITextFieldDelegate
@@ -389,12 +333,12 @@
 -(void)textFieldDidEndEditing:(UITextField *)textField
 {
     [tonightsBill setTripName:[textField text]];
-    [self updateMainLabel];
+    //[self updateMainLabel];
     NSDate *nu = [NSDate date];
     [tonightsBill setDateModified:nu];
     if (!didSomethingChange) {
         didSomethingChange = YES;
-        [[[self navigationItem] rightBarButtonItem] setEnabled:YES];
+        //[[[self navigationItem] rightBarButtonItem] setEnabled:YES];
     }
     if (isInitAsNew && !cancelPressed) {
         if (kABAuthorizationStatusAuthorized == ABAddressBookGetAuthorizationStatus() ||
@@ -425,21 +369,21 @@
         case NSFetchedResultsChangeInsert:
             [[self tableView] insertRowsAtIndexPaths:[NSArray arrayWithObject:newIndexPath]
                                     withRowAnimation:UITableViewRowAnimationFade];
-            [self updateSubLabel];
+            //[self updateSubLabel];
             [self setEmptyMessage];
             break;
             
         case NSFetchedResultsChangeDelete:
             [[self tableView] deleteRowsAtIndexPaths:[NSArray arrayWithObject:indexPath]
                                     withRowAnimation:UITableViewRowAnimationFade];
-            [self updateSubLabel];
+            //[self updateSubLabel];
             [self setEmptyMessage];
             break;
             
         case NSFetchedResultsChangeUpdate:
             [[self tableView] reloadRowsAtIndexPaths:[NSArray arrayWithObject:indexPath] withRowAnimation:UITableViewRowAnimationAutomatic];
             didSomethingChange = YES;
-            [doneButton setEnabled:YES];
+            //[doneButton setEnabled:YES];
             break;
             
         case NSFetchedResultsChangeMove:
@@ -501,12 +445,10 @@
         MCPerson *removablePerson = [dataController objectAtIndexPath:indexPath];
         if (![tonightsBill hasPersonPaidSomething:removablePerson]) {
             NSManagedObjectContext *context = [[[MCWeAllPayStoreController defaultStore] weAllPayStoreDocument] managedObjectContext];
-            [context performBlock:^{
-                [context deleteObject:removablePerson];
-                [self updateSubLabel];
-                didSomethingChange = YES;
-                [[[self navigationItem] rightBarButtonItem] setEnabled:YES];
-            }];
+            [context deleteObject:removablePerson];
+            //[self updateSubLabel];
+            didSomethingChange = YES;
+            //[[[self navigationItem] rightBarButtonItem];
         }
     }
     

@@ -40,16 +40,10 @@
 @property (nonatomic, copy) void (^dismissOnCancel)(void);
 @property (nonatomic, readonly) BOOL didSomethingChange;
 
-- (IBAction)changeNameOfTrip:(id)sender;
-- (IBAction)dismissKeyboard:(id)sender;
-
 - (IBAction)addressBookButton:(id)sender;
 - (IBAction)addPersonButton:(id)sender;
 
 - (IBAction)doneButtonPressed:(id)sender;
 - (IBAction)cancelButtonPressed:(id)sender;
-
-
-
 
 @end
