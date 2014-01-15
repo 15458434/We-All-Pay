@@ -119,15 +119,19 @@
 - (void)setEmptyMessage
 {
     if (![[dataController fetchedObjects] count] == 0) {
-        [UIView animateWithDuration:1.0 animations:^{
-            [[emptyMessage bigMessage] setAlpha:0.0];
-            [[self tableView] setSeparatorStyle:UITableViewCellSeparatorStyleSingleLine];
-        } completion:nil];
+        if ([[emptyMessage bigMessage] alpha] > 0.0) {
+            [UIView animateWithDuration:1.0 animations:^{
+                [[emptyMessage bigMessage] setAlpha:0.0];
+                [[self tableView] setSeparatorStyle:UITableViewCellSeparatorStyleSingleLine];
+            } completion:nil];
+        }
     } else {
-        [UIView animateWithDuration:1.0 animations:^{
-            [[emptyMessage bigMessage] setAlpha:1.0];
-            [[self tableView] setSeparatorStyle:UITableViewCellSeparatorStyleNone];
-        } completion:nil];
+        if ([[emptyMessage bigMessage] alpha] < 1.0) {
+            [UIView animateWithDuration:1.0 animations:^{
+                [[emptyMessage bigMessage] setAlpha:1.0];
+                [[self tableView] setSeparatorStyle:UITableViewCellSeparatorStyleNone];
+            } completion:nil];
+        }
     }
 }
 
@@ -174,6 +178,14 @@
     [self updateSubLabel];
     [[self navigationItem] setTitleView:twoLabelTitleView];
     [[self navigationController] setToolbarHidden:YES animated:YES];
+    
+    if (!dataController) {
+        [self prepareDataControllerAndFetch];
+        [[self tableView] reloadData];
+    }
+    if ([[dataController fetchedObjects] count] > 0) {
+        [[emptyMessage bigMessage] setAlpha:0.0];
+    }
 }
 
 - (void)viewDidAppear:(BOOL)animated
@@ -194,28 +206,18 @@
     UINib *nib = [UINib nibWithNibName:@"MCPaymentTableViewCell" bundle:nil];
     [[self tableView] registerNib:nib forCellReuseIdentifier:@"MCPaymentTableViewCell"];
     
-    if (!dataController) {
-        [self prepareDataControllerAndFetch];
-    }
-    
     emptyMessage = [[[NSBundle mainBundle] loadNibNamed:@"MCTableEmptyMessage" owner:self options:nil] objectAtIndex:0];
     [[self tableView] setBackgroundView:emptyMessage];
     [[emptyMessage bigMessage] setText:NSLocalizedString(@"EMPTY_PAYMENT_LIST_MESSAGE", @"Press \"add payment\" to add a payment to this event.")];
     [[emptyMessage bigMessage] setTextColor:[UIColor lightGrayColor]];
     [emptyMessage setBackgroundColor:[UIColor groupTableViewBackgroundColor]];
-    if ([[dataController fetchedObjects] count] > 0) {
-        [[emptyMessage bigMessage] setAlpha:0.0];
-    }
 }
 
 - (void)viewWillDisappear:(BOOL)animated
 {
     [super viewWillDisappear:animated];
     
-    NSManagedObjectContext *context = [[[MCWeAllPayStoreController defaultStore] weAllPayStoreDocument] managedObjectContext];
-    [context performBlock:^{
-        [context processPendingChanges];
-    }];
+    dataController = nil;
     
     [[self view] endEditing:YES];
 }

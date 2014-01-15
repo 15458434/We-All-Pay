@@ -172,7 +172,7 @@
     // What entities will be fetched.
     NSFetchRequest *request = [NSFetchRequest fetchRequestWithEntityName:@"MCPerson"];
     // How to sort the data.
-    [request setRelationshipKeyPathsForPrefetching:@[ @"emailAddress", @"payments" ]];
+    [request setRelationshipKeyPathsForPrefetching:@[ @"emailAddress", @"payments", @"sharedBill" ]];
     NSSortDescriptor *sortDescriptor = [NSSortDescriptor sortDescriptorWithKey:@"dateCreated" ascending:NO];
     NSArray *sortDescriptorArray = [NSArray arrayWithObject:sortDescriptor];
     [request setSortDescriptors:sortDescriptorArray];
@@ -194,15 +194,20 @@
 - (void)setEmptyMessage
 {
     if (![[dataController fetchedObjects] count] == 0) {
-        [UIView animateWithDuration:1.0 animations:^{
-            [[emptyMessage bigMessage] setAlpha:0.0];
-            [[self tableView] setSeparatorStyle:UITableViewCellSeparatorStyleSingleLine];
-        } completion:nil];
+        if ([[emptyMessage bigMessage] alpha] > 0.0) {
+            [UIView animateWithDuration:1.0 animations:^{
+                [[emptyMessage bigMessage] setAlpha:0.0];
+                [[self tableView] setSeparatorStyle:UITableViewCellSeparatorStyleSingleLine];
+            } completion:nil];
+        }
     } else {
-        [UIView animateWithDuration:1.0 animations:^{
-            [[emptyMessage bigMessage] setAlpha:1.0];
-            [[self tableView] setSeparatorStyle:UITableViewCellSeparatorStyleNone];
-        } completion:nil];
+        if ([[emptyMessage bigMessage] alpha] < 1.0) {
+            [UIView animateWithDuration:1.0 animations:^{
+                [[emptyMessage bigMessage] setAlpha:1.0];
+                [[self tableView] setSeparatorStyle:UITableViewCellSeparatorStyleNone];
+            } completion:nil];
+        }
+
     }
 }
 
@@ -256,13 +261,6 @@
     }
 }
 
-- (void)viewWillDisappear:(BOOL)animated
-{
-    [super viewWillDisappear:animated];
-
-    [[[self navigationItem] leftBarButtonItem] setEnabled:NO];
-}
-
 -(void)viewDidAppear:(BOOL)animated
 {
     [super viewDidAppear:animated];
@@ -270,6 +268,21 @@
     if ([tonightsBill tripName]) {
         [tripNameField setPlaceholder:[[NSString alloc] initWithFormat:@"Enter something to rename %@", [tonightsBill tripName]]];
     }
+}
+
+
+- (void)viewWillDisappear:(BOOL)animated
+{
+    [super viewWillDisappear:animated];
+    
+    [[[self navigationItem] leftBarButtonItem] setEnabled:NO];
+}
+
+- (void)viewDidDisappear:(BOOL)animated
+{
+    [super viewDidDisappear:animated];
+    
+    dataController = nil;
 }
 
 - (void)viewDidLoad
@@ -294,9 +307,6 @@
     if (!dataController) {
         [self prepareDataControllerAndFetch];
     }
-    
-    [[[self navigationItem] rightBarButtonItem] setEnabled:NO];
-    [[[self navigationItem] leftBarButtonItem] setEnabled:YES];
     
     // Load and register Nib to the tableView for use.
     UINib *nib = [UINib nibWithNibName:@"MCPersonTableViewCell" bundle:nil];
