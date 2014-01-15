@@ -57,6 +57,25 @@
     }
 }
 
++ (MCSharedBill *)fetchSharedBillWithUniqueId:(NSString *)uuid fromContext:(NSManagedObjectContext *)context
+{
+    // Create a fetch request for MCSharedBills.
+    NSFetchRequest *request = [NSFetchRequest fetchRequestWithEntityName:@"MCSharedBill"];
+    
+    // Select only the sharedBill with uuid as uniqueBillId
+    NSPredicate *predicate = [NSPredicate predicateWithFormat:@"uniqueBillId = %@", uuid];
+    [request setPredicate:predicate];
+    
+    NSError *error;
+    NSArray *sharedBills = [context executeFetchRequest:request error:&error];
+    if (!sharedBills) {
+        // There was an error.
+        return nil;
+    } else {
+        return [sharedBills objectAtIndex:0];
+    }
+}
+
 - (NSString *)stringOfApproxPeoplePresent;
 {
     /*
@@ -120,19 +139,6 @@
     MCPerson *newPerson = [MCPerson addPerson];
     [newPerson addSharedBillObject:self];
     return newPerson;
-}
-
-- (MCPerson *)addPersonInPrivateQueue
-{
-    NSLog(@"Warning: addPersonInPrivateQueue is not tested.");
-    MCPerson *newPerson = [MCPerson addPersonInPrivateQueue];
-    if ([newPerson managedObjectContext] == [self managedObjectContext]) {
-        [newPerson addSharedBillObject:self];
-        return newPerson;
-    } else {
-        NSLog(@"tonightsBill is from a different queue than newPerson");
-        return nil;
-    }
 }
 
 - (BOOL)areTherePeople

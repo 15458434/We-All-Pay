@@ -71,10 +71,12 @@
             [[self tableView] setSeparatorStyle:UITableViewCellSeparatorStyleSingleLine];
         } completion:nil];
     } else {
-        [UIView animateWithDuration:1.0 animations:^{
-            [[emptyMessage bigMessage] setAlpha:1.0];
-            [[self tableView] setSeparatorStyle:UITableViewCellSeparatorStyleNone];
-        } completion:nil];
+        if ([[emptyMessage bigMessage] alpha] < 1.0) {
+            [UIView animateWithDuration:1.0 animations:^{
+                [[emptyMessage bigMessage] setAlpha:1.0];
+                [[self tableView] setSeparatorStyle:UITableViewCellSeparatorStyleNone];
+            } completion:nil];
+        }
     }
 }
 
@@ -113,8 +115,6 @@
 {
     [super viewWillAppear:animated];
     
-    
-    
     // Set the titleView.
     if (!titleView) {
         titleView = [[[NSBundle mainBundle] loadNibNamed:@"MCTwoLabelsTitleView" owner:self options:nil] objectAtIndex:0];
@@ -127,13 +127,13 @@
         [[titleView subLabel] setTextColor:[UIColor whiteColor]];
     }
     
+    if (!dataController) {
+        [self setDataController];
+        [self performFetch];
+    }
+    
     [[self tableView] reloadData];
     [[self navigationController] setToolbarHidden:NO animated:YES];
-}
-
-- (void)viewDidDisappear:(BOOL)animated
-{
-    [super viewDidDisappear:animated];
 }
 
 - (void)viewDidLoad
@@ -145,10 +145,6 @@
     
     [[self navigationItem] setTitle:NSLocalizedString(@"BACK_TITLE_ALL_TRIPS_VIEW", @"back")];
     
-    if (!dataController) {
-        [self setDataController];
-    }
-    
     // Load the nib file
     UINib *nib = [UINib nibWithNibName:@"MCAllTripsTableViewCell" bundle:nil];
     
@@ -159,6 +155,13 @@
     [[emptyMessage bigMessage] setAlpha:0.0];
     [[self tableView] setBackgroundView:emptyMessage];
     
+}
+
+- (void)viewWillDisappear:(BOOL)animated
+{
+    [super viewWillDisappear:animated];
+    
+    dataController = nil;
 }
 
 - (void)didReceiveMemoryWarning

@@ -15,14 +15,13 @@
 + (void)deleteSharedbill:(MCSharedBill *)deleteBill;
 
 + (MCSharedBill *)fetchSharedBillWithUniqueId:(NSString *)uuid;
-
++ (MCSharedBill *)fetchSharedBillWithUniqueId:(NSString *)uuid fromContext:(NSManagedObjectContext *)context;
 // - (NSArray *)fetchAllPayments;
 
 - (NSString *)stringOfApproxPeoplePresent;
 
 - (MCPayment *)addPayment;
 - (MCPerson *)addPerson;
-- (MCPerson *)addPersonInPrivateQueue;
 - (BOOL)areTherePeople;
 - (NSUInteger)totalAmountOfPeoplePresent;
 - (NSUInteger)totalAmountOfPeopleWhoHavePaid;
