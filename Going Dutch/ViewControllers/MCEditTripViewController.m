@@ -56,7 +56,9 @@
 }
 
 - (IBAction)addPersonButton:(id)sender {
-
+    if ([tripNameField isEditing]) {
+        [tripNameField resignFirstResponder];
+    }
 }
 
 - (IBAction)cancelButtonPressed:(id)sender {
@@ -181,7 +183,7 @@
 {
     [super viewWillDisappear:animated];
     
-    dataController = nil;
+    //dataController = nil;
 }
 
 - (void)viewDidDisappear:(BOOL)animated
@@ -295,20 +297,10 @@
 -(void)textFieldDidEndEditing:(UITextField *)textField
 {
     [tonightsBill setTripName:[textField text]];
-    //[self updateMainLabel];
     NSDate *nu = [NSDate date];
     [tonightsBill setDateModified:nu];
     if (!didSomethingChange) {
         didSomethingChange = YES;
-        //[[[self navigationItem] rightBarButtonItem] setEnabled:YES];
-    }
-    if (isInitAsNew && !cancelPressed) {
-        if (kABAuthorizationStatusAuthorized == ABAddressBookGetAuthorizationStatus() ||
-            kABAuthorizationStatusNotDetermined == ABAddressBookGetAuthorizationStatus()) {
-            [self addressBookButton:self];
-        } else {
-            [self addPersonButton:self];
-        }
     }
 }
 
@@ -331,21 +323,18 @@
         case NSFetchedResultsChangeInsert:
             [[self tableView] insertRowsAtIndexPaths:[NSArray arrayWithObject:newIndexPath]
                                     withRowAnimation:UITableViewRowAnimationFade];
-            //[self updateSubLabel];
             [self setEmptyMessage];
             break;
             
         case NSFetchedResultsChangeDelete:
             [[self tableView] deleteRowsAtIndexPaths:[NSArray arrayWithObject:indexPath]
                                     withRowAnimation:UITableViewRowAnimationFade];
-            //[self updateSubLabel];
             [self setEmptyMessage];
             break;
             
         case NSFetchedResultsChangeUpdate:
             [[self tableView] reloadRowsAtIndexPaths:[NSArray arrayWithObject:indexPath] withRowAnimation:UITableViewRowAnimationAutomatic];
             didSomethingChange = YES;
-            //[doneButton setEnabled:YES];
             break;
             
         case NSFetchedResultsChangeMove:
