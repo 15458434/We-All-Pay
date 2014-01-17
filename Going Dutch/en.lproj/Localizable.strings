@@ -1,0 +1,91 @@
+/* 
+  Localizable.strings
+  We all pay
+
+  Created by Mark Cornelisse on 29-12-13.
+  Copyright (c) 2013 Mark Cornelisse. All rights reserved.
+*/
+
+/* AllTripsTableView */
+"BACK_TITLE_ALL_TRIPS_VIEW" = "back";
+"I_FOUND_WE_ALL_PAY" = "Hi, I found this easy to use iPhone app to share a bill amongst friends. It is called We All Pay.";
+
+/* MCSharedBill+addons */
+/* A message when there are no people present inside this shared bill */
+"NO_PEOPLE_PRESENT" = "No people present";
+/* The word \"and\" between two people */
+"AND_STRING" = "and";
+/* A list of people like Mark, Ilse and other where the \"and others\" needs to be translated. */
+"AND_OTHERS" = "and others";
+
+/* SharedBillPageView */
+"PEOPLE_PRESENT_PAGEVIEWCONTROLLER" = "people present";
+"PAYMENTS_PAGEVIEWCONTROLLER" = "payments";
+
+/* Email */
+/* Bill overview of our trip to "movies" */
+"EMAIL_SUBJECT_PART_ONE" = "Expenses overview of our trip to";
+/* Just Dear as in \"Dear Mark\" */
+"EMAIL_DEAR" = "Dear";
+/* From a total of \"$ 20,45\", which was spend on our last trip to \"Movies\". We all have to pay an equal share of \"$6,82\". */
+"EMAIL_INTRO_PART_ONE" = "From a total of";
+"EMAIL_INTRO_PART_TWO" = "which was spend on our last trip to";
+"EMAIL_INTRO_PART_THREE" = "We all have to pay an equal share of";
+/* The message that nobody has paid so far */
+"EMAIL_NOBODY_HAS_PAID" = "Nobody has paid so far.";
+/* The message The person who has payed */
+"EMAIL_ONE_PERSON_HAS_PAID" = "The person who has payed";
+/* The people who have paid are */
+"EMAIL_MULTIPLE_PEOPLE_HAVE_PAID" = "The people who have paid are";
+/* The sentence: Mark paid $24 for "beer". */
+"EMAIL_WHO_HAS_PAID_ONE" = "paid";
+"EMAIL_WHO_HAS_PAID_TWO" = "for";
+/* Part one of: To have everybody pay the average of $7.00, I suggest the following solution */
+"EMAIL_AVERAGE_SENTENCES_ONE" = "When everybody pays the average of";
+"EMAIL_AVERAGE_SENTENCES_TWO" = ", I suggest the following solution";
+/* The sentence: "Mark" pays $6.80 to Ilse. */
+"EMAIL_OWES_PART_ONE" = "pays";
+"EMAIL_OWES_PART_TWO" = "to";
+/* Closing sentence of the email: If you have any remarks please let me know. */
+"EMAIL_FINAL SENTENCE" = "If you have any remarks, please let me know";
+
+/* SharedBillTableView */
+"EMPTY_PAYMENT_LIST_MESSAGE" = "Press \"add payment\" to add a payment to this event.";
+"PAYMENTCELL_PAYERNAME_EXTRA" = " paid";
+"PAYMENT_CELL_PAIDFOR_EXTRA" = "for ";
+"THISPAYMENTCELL_NOPAYERNAME" = "Someone";
+"THISPAYMENTCELL_NOOBJECT" = "something";
+
+/* MCReturnPaymentView */
+/* Each pays: $ string inside the header of the solution screen. */
+"EACH_PAYS" = "Each pays:";
+/* Total spent: $ string inside the header of the solution screen */
+"TOTAL_SPENT" = "Total spent:";
+/* As in Mark owes Arjen, but then just the word owes. */
+"OWES" = "owes";
+/* Please add payments and/or people if you want a solution on who owes who.*/
+"RETURNPAYMENTSVIEW_NOPAYMENTS" = "Please add payments and/or people if you want a solution on who owes who.";
+
+/* MCEditTripView */
+/* Press \"add Person\" to add a person who you'd like to share this bill with. */
+"PEOPLE_LIST_EMPTY_MESSAGE" = "Press \"add Person\" to add a person who you'd like to share this bill with.";
+
+/* PaymentView */
+/* Header in the paymentView which state new Payment. */
+"NEW_PAYMENT_HEADER" = "new payment";
+/* Sub header in the paymentView which states Add payment data */
+"NEW_PAYMENT_SUBHEADER" = "add payment data";
+/* Header in the paymentView which states payment */
+"EXISTING_PAYMENT_HEADER" = "payment";
+/* Sub header in the paymentView which states edit data */
+"EXISTING_PAYMENT_SUBHEADER" = "edit payment data";
+
+/* PersonView */
+/* Header in the personView which state new person. */
+"NEW_PERSON_HEADER" = "new person";
+/* Sub header in the personView which states add new data */
+"NEW_PERSON_SUBHEADER" = "add new data";
+/* Header in the personView which states person */
+"EXISTING_PERSON_HEADER" = "person";
+/* Sub header in the personView which state edit data */
+"EXISTING_PERSON_SUBHEADER" = "edit data";

@@ -146,6 +146,10 @@
 		3897158617901D55005BE03E /* MCReturnPaymentTableViewCell.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; name = MCReturnPaymentTableViewCell.xib; path = Views/MCReturnPaymentTableViewCell.xib; sourceTree = "<group>"; };
 		3897159017902E35005BE03E /* MCSharedBillTableViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = MCSharedBillTableViewController.h; path = ViewControllers/MCSharedBillTableViewController.h; sourceTree = "<group>"; };
 		3897159117902E35005BE03E /* MCSharedBillTableViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = MCSharedBillTableViewController.m; path = ViewControllers/MCSharedBillTableViewController.m; sourceTree = "<group>"; };
+		389E92621889E5A60005F063 /* en */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = en; path = "en.lproj/Main-Iphone.strings"; sourceTree = "<group>"; };
+		389E92631889E5A60005F063 /* en */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = en; path = en.lproj/MCTableEmptyMessage.strings; sourceTree = "<group>"; };
+		389E92641889E5A60005F063 /* en */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = en; path = en.lproj/Localizable.strings; sourceTree = "<group>"; };
+		389E92651889E6CC0005F063 /* en */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = en; path = en.lproj/InfoPlist.strings; sourceTree = "<group>"; };
 		38CDE8FE17135B6300387CAA /* MCTools.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = MCTools.h; sourceTree = "<group>"; };
 		38CDE8FF17135B6300387CAA /* MCTools.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = MCTools.m; sourceTree = "<group>"; };
 		38DB85D217E45BCA006237CF /* MCPayment+addons.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = "MCPayment+addons.h"; path = "DataStore/MCPayment+addons.h"; sourceTree = "<group>"; };
@@ -539,6 +543,7 @@
 			children = (
 				3867CE4018703E9A001EC222 /* nl */,
 				3867CE4D18704C60001EC222 /* Base */,
+				389E92651889E6CC0005F063 /* en */,
 			);
 			name = InfoPlist.strings;
 			sourceTree = "<group>";
@@ -548,6 +553,7 @@
 			children = (
 				3867CE4A18704B48001EC222 /* Base */,
 				387D3A8E187053BA0060FAF8 /* nl */,
+				389E92621889E5A60005F063 /* en */,
 			);
 			name = "Main-Iphone.storyboard";
 			path = Views;
@@ -558,6 +564,7 @@
 			children = (
 				3867CE5218704DAF001EC222 /* Base */,
 				3867CE5518704DB9001EC222 /* nl */,
+				389E92631889E5A60005F063 /* en */,
 			);
 			name = MCTableEmptyMessage.xib;
 			path = Views;
@@ -568,6 +575,7 @@
 			children = (
 				38156B2818706B750047AEEF /* nl */,
 				38156B2918706BAC0047AEEF /* Base */,
+				389E92641889E5A60005F063 /* en */,
 			);
 			name = Localizable.strings;
 			sourceTree = "<group>";
