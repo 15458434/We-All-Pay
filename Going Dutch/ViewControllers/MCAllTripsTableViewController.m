@@ -80,6 +80,23 @@
     }
 }
 
+- (void)setEmptyMessageNow
+{
+    if (![[dataController fetchedObjects] count] == 0) {
+        [UIView animateWithDuration:0.0 animations:^{
+            [[emptyMessage bigMessage] setAlpha:0.0];
+            [[self tableView] setSeparatorStyle:UITableViewCellSeparatorStyleSingleLine];
+        } completion:nil];
+    } else {
+        if ([[emptyMessage bigMessage] alpha] < 1.0) {
+            [UIView animateWithDuration:0.0 animations:^{
+                [[emptyMessage bigMessage] setAlpha:1.0];
+                [[self tableView] setSeparatorStyle:UITableViewCellSeparatorStyleNone];
+            } completion:nil];
+        }
+    }
+}
+
 - (void)performFetchAndReloadTableView:(NSNotification *)notification
 {
     UIManagedDocument *weAllPayDocument = [[MCWeAllPayStoreController defaultStore] weAllPayStoreDocument];
@@ -87,7 +104,7 @@
         [self performFetch];
         [[self tableView] reloadData];
         [[NSNotificationCenter defaultCenter] removeObserver:self];
-        [self setEmptyMessage];
+        [self setEmptyMessageNow];
     }
 }
 
@@ -131,6 +148,8 @@
         [self setDataController];
         [self performFetch];
     }
+    
+    [self setEmptyMessage];
     
     [[self tableView] reloadData];
     [[self navigationController] setToolbarHidden:NO animated:YES];
