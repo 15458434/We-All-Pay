@@ -22,6 +22,8 @@
 
 + (MCWeAllPayStoreController *)defaultStore;
 
+- (BOOL)isDocumentStateNormal;
+
 - (void)saveStore;
 - (void)closeDocument;
 

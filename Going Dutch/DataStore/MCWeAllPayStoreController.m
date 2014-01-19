@@ -68,6 +68,15 @@
     }];
 }
 
+- (BOOL)isDocumentStateNormal
+{
+    if ([weAllPayStoreDocument documentState] == UIDocumentStateNormal) {
+        return YES;
+    } else {
+        return NO;
+    }
+}
+
 #pragma mark - Inherited from super class
 
 - (id)init

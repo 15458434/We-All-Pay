@@ -149,7 +149,9 @@
         [self performFetch];
     }
     
-    [self setEmptyMessage];
+    if ([[MCWeAllPayStoreController defaultStore] isDocumentStateNormal]) {
+        [self setEmptyMessage];
+    }
     
     [[self tableView] reloadData];
     [[self navigationController] setToolbarHidden:NO animated:YES];
