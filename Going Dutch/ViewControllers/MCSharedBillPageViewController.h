@@ -10,6 +10,9 @@
 
 @class MCSharedBill;
 
+@class MCEditTripViewController;
+@class MCSharedBillTableViewController;
+
 @protocol MCTonightsBillTitleDelegate <NSObject>
 
 - (UILabel *)titleLabel;
@@ -19,6 +22,9 @@
 
 @interface MCSharedBillPageViewController : UIPageViewController <UIPageViewControllerDataSource, UIPageViewControllerDelegate, UIAlertViewDelegate ,MCTonightsBillTitleDelegate>
 {
+    MCSharedBillTableViewController *sharedBillTableViewController;
+    MCEditTripViewController *editTripTableViewController;
+    
     __weak IBOutlet UIPageControl *pageViewIndicator;
     NSUInteger newPageNumber;
 }

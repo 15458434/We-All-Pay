@@ -148,6 +148,42 @@
     return self;
 }
 
+- (void)viewDidLoad
+{
+    [super viewDidLoad];
+    
+    // Uncomment the following line to preserve selection between presentations.
+    // self.clearsSelectionOnViewWillAppear = NO;
+    
+    // Uncomment the following line to display an Edit button in the navigation bar for this view controller.
+    // self.navigationItem.rightBarButtonItem = self.editButtonItem;
+    
+    [self setEdgesForExtendedLayout:UIRectEdgeNone];
+    [MCTools setAdBannerIfNotPaid:YES forViewController:self];
+    
+    if (!tonightsBill) {
+        didSomethingChange = YES;
+        tonightsBill = [MCSharedBill addSharedBill];
+        [tripNameField setPlaceholder:@"Enter activity"];
+    }
+    
+    if (!dataController) {
+        [self prepareDataControllerAndFetch];
+    }
+    
+    // Load and register Nib to the tableView for use.
+    UINib *nib = [UINib nibWithNibName:@"MCPersonTableViewCell" bundle:nil];
+    [[self tableView] registerNib:nib forCellReuseIdentifier:@"MCPersonTableViewCell"];
+    
+    emptyMessage = [[[NSBundle mainBundle] loadNibNamed:@"MCTableEmptyMessage" owner:self options:nil] objectAtIndex:0];
+    [[emptyMessage bigMessage] setText:NSLocalizedString(@"PEOPLE_LIST_EMPTY_MESSAGE", @"Press \"add Person\" to add a person who you'd like to share this bill with.")];
+    if ([[dataController fetchedObjects] count] > 0) {
+        [[emptyMessage bigMessage] setAlpha:0.0];
+    }
+    [[self tableView] setBackgroundView:emptyMessage];
+}
+
+
 - (void)viewWillAppear:(BOOL)animated
 {
     [super viewWillAppear:animated];
@@ -182,50 +218,13 @@
 - (void)viewWillDisappear:(BOOL)animated
 {
     [super viewWillDisappear:animated];
-    
-    //dataController = nil;
 }
 
 - (void)viewDidDisappear:(BOOL)animated
 {
     [super viewDidDisappear:animated];
     
-    //dataController = nil;
-}
-
-- (void)viewDidLoad
-{
-    [super viewDidLoad];
-
-    // Uncomment the following line to preserve selection between presentations.
-    // self.clearsSelectionOnViewWillAppear = NO;
- 
-    // Uncomment the following line to display an Edit button in the navigation bar for this view controller.
-    // self.navigationItem.rightBarButtonItem = self.editButtonItem;
-    
-    [self setEdgesForExtendedLayout:UIRectEdgeNone];
-    [MCTools setAdBannerIfNotPaid:YES forViewController:self];
-    
-    if (!tonightsBill) {
-        didSomethingChange = YES;
-        tonightsBill = [MCSharedBill addSharedBill];
-        [tripNameField setPlaceholder:@"Enter activity"];
-    }
-    
-    if (!dataController) {
-        [self prepareDataControllerAndFetch];
-    }
-    
-    // Load and register Nib to the tableView for use.
-    UINib *nib = [UINib nibWithNibName:@"MCPersonTableViewCell" bundle:nil];
-    [[self tableView] registerNib:nib forCellReuseIdentifier:@"MCPersonTableViewCell"];
-    
-    emptyMessage = [[[NSBundle mainBundle] loadNibNamed:@"MCTableEmptyMessage" owner:self options:nil] objectAtIndex:0];
-    [[emptyMessage bigMessage] setText:NSLocalizedString(@"PEOPLE_LIST_EMPTY_MESSAGE", @"Press \"add Person\" to add a person who you'd like to share this bill with.")];
-    if ([[dataController fetchedObjects] count] > 0) {
-        [[emptyMessage bigMessage] setAlpha:0.0];
-    }
-    [[self tableView] setBackgroundView:emptyMessage];
+    dataController = nil;
 }
 
 - (void)didReceiveMemoryWarning

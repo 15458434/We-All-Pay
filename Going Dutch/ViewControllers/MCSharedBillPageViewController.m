@@ -57,12 +57,12 @@
 - (void)setSharedBillViewControllerFromStoryboard
 {
     UIStoryboard *storyboard = [UIStoryboard storyboardWithName:@"Main-Iphone" bundle:nil];
-    MCSharedBillTableViewController *sharedBillView = [storyboard instantiateViewControllerWithIdentifier:@"MCSharedBillTableViewController"];
-    [sharedBillView setTonightsBill:tonightsBill];
-    [sharedBillView setMailDelegate:self];
+    sharedBillTableViewController = [storyboard instantiateViewControllerWithIdentifier:@"MCSharedBillTableViewController"];
+    [sharedBillTableViewController setTonightsBill:tonightsBill];
+    [sharedBillTableViewController setMailDelegate:self];
     [pageViewIndicator setCurrentPage:1];
     [titleLabel setText:NSLocalizedString(@"PAYMENTS_PAGEVIEWCONTROLLER", @"Payments")];
-    NSArray *views = [NSArray arrayWithObjects:sharedBillView, nil];
+    NSArray *views = [NSArray arrayWithObjects:sharedBillTableViewController, nil];
     [self setViewControllers:views direction:UIPageViewControllerNavigationDirectionReverse animated:YES completion:nil];
     [self setDelegate:self];
     [self setDataSource:self];
@@ -71,9 +71,9 @@
 - (void)setEditTripViewControllerFromStoryboard
 {
     UIStoryboard *storyboard = [UIStoryboard storyboardWithName:@"Main-Iphone" bundle:nil];
-    MCEditTripViewController *editTripView = [storyboard instantiateViewControllerWithIdentifier:@"MCEditTripViewController"];
-    [editTripView setTonightsBill:tonightsBill];
-    NSArray *views = [NSArray arrayWithObjects:editTripView, nil];
+    editTripTableViewController = [storyboard instantiateViewControllerWithIdentifier:@"MCEditTripViewController"];
+    [editTripTableViewController setTonightsBill:tonightsBill];
+    NSArray *views = [NSArray arrayWithObjects:editTripTableViewController, nil];
     [pageViewIndicator setCurrentPage:0];
     [titleLabel setText:NSLocalizedString(@"PEOPLE_PRESENT_PAGEVIEWCONTROLLER", @"People present")];
     [self setViewControllers:views direction:UIPageViewControllerNavigationDirectionForward animated:YES completion:nil];
@@ -197,6 +197,20 @@
     [[self navigationController] setToolbarHidden:YES animated:YES];
 }
 
+- (void)viewWillDisappear:(BOOL)animated
+{
+    [super viewWillDisappear:animated];
+    
+}
+
+- (void)viewDidDisappear:(BOOL)animated
+{
+    [super viewDidDisappear:animated];
+    
+    [MCTools setAdBannerIfNotPaid:NO forViewController:sharedBillTableViewController];
+    [MCTools setAdBannerIfNotPaid:NO forViewController:editTripTableViewController];
+}
+
 - (void)didReceiveMemoryWarning
 {
     [super didReceiveMemoryWarning];
@@ -231,11 +245,13 @@
 - (UIViewController *)pageViewController:(UIPageViewController *)pageViewController viewControllerBeforeViewController:(UIViewController *)viewController
 {
     if ([[[self viewControllers] objectAtIndex:0] isKindOfClass:[MCSharedBillTableViewController class]]) {
-        UIStoryboard *storyboard = [UIStoryboard storyboardWithName:@"Main-Iphone" bundle:nil];
-        MCEditTripViewController *editTripView = [storyboard instantiateViewControllerWithIdentifier:@"MCEditTripViewController"];
-        [editTripView setTonightsBill:tonightsBill];
-        [editTripView setDelegate:self];
-        return editTripView;
+        if (!editTripTableViewController) {
+            UIStoryboard *storyboard = [UIStoryboard storyboardWithName:@"Main-Iphone" bundle:nil];
+            editTripTableViewController = [storyboard instantiateViewControllerWithIdentifier:@"MCEditTripViewController"];
+            [editTripTableViewController setTonightsBill:tonightsBill];
+            [editTripTableViewController setDelegate:self];
+        }
+        return editTripTableViewController;
     } else {
         return nil;
     }
@@ -244,12 +260,14 @@
 - (UIViewController *)pageViewController:(UIPageViewController *)pageViewController viewControllerAfterViewController:(UIViewController *)viewController
 {
     if ([[[self viewControllers] objectAtIndex:0] isKindOfClass:[MCEditTripViewController class]]) {
-        UIStoryboard *storyboard = [UIStoryboard storyboardWithName:@"Main-Iphone" bundle:nil];
-        MCSharedBillTableViewController *sharedbillView = [storyboard instantiateViewControllerWithIdentifier:@"MCSharedBillTableViewController"];
-        [sharedbillView setTonightsBill:tonightsBill];
-        [sharedbillView setDelegate:self];
-        [sharedbillView setMailDelegate:self];
-        return sharedbillView;
+        if (!sharedBillTableViewController) {
+            UIStoryboard *storyboard = [UIStoryboard storyboardWithName:@"Main-Iphone" bundle:nil];
+            sharedBillTableViewController = [storyboard instantiateViewControllerWithIdentifier:@"MCSharedBillTableViewController"];
+            [sharedBillTableViewController setTonightsBill:tonightsBill];
+            [sharedBillTableViewController setDelegate:self];
+            [sharedBillTableViewController setMailDelegate:self];
+        }
+        return sharedBillTableViewController;
     } else {
         return nil;
     }

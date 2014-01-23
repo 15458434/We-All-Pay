@@ -139,28 +139,6 @@
     return self;
 }
 
-- (void)viewWillAppear:(BOOL)animated
-{
-    [super viewWillAppear:animated];
-    
-    [[self navigationController] setToolbarHidden:YES animated:YES];
-    
-    if (!dataController) {
-        [self prepareDataControllerAndFetch];
-        [[self tableView] reloadData];
-    }
-    if ([[dataController fetchedObjects] count] > 0) {
-        [[emptyMessage bigMessage] setAlpha:0.0];
-    }
-}
-
-- (void)viewDidAppear:(BOOL)animated
-{
-    [super viewDidAppear:animated];
-    
-    
-}
-
 - (void)viewDidLoad
 {
     [super viewDidLoad];
@@ -179,13 +157,38 @@
     [emptyMessage setBackgroundColor:[UIColor groupTableViewBackgroundColor]];
 }
 
+- (void)viewWillAppear:(BOOL)animated
+{
+    [super viewWillAppear:animated];
+    
+    [[self navigationController] setToolbarHidden:YES animated:YES];
+    
+    if (!dataController) {
+        [self prepareDataControllerAndFetch];
+        [[self tableView] reloadData];
+    }
+    if ([[dataController fetchedObjects] count] > 0) {
+        [[emptyMessage bigMessage] setAlpha:0.0];
+    }
+}
+
+- (void)viewDidAppear:(BOOL)animated
+{
+    [super viewDidAppear:animated];
+}
+
 - (void)viewWillDisappear:(BOOL)animated
 {
     [super viewWillDisappear:animated];
     
-    dataController = nil;
-    
     [[self view] endEditing:YES];
+}
+
+- (void)viewDidDisappear:(BOOL)animated
+{
+    [super viewDidDisappear:animated];
+    
+    dataController = nil;
 }
 
 - (void)didReceiveMemoryWarning
