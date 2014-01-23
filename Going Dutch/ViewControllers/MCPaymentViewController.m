@@ -290,51 +290,6 @@
     return self;
 }
 
-- (void)viewDidAppear:(BOOL)animated
-{
-    [super viewDidAppear:animated];
-    
-    
-}
-
-- (void)viewWillAppear:(BOOL)animated
-{
-    [super viewWillAppear:animated];
-    
-    // Navigationbar stuff
-    if (!twoLabelTitleView) {
-        twoLabelTitleView = [[[NSBundle mainBundle] loadNibNamed:@"MCTwoLabelsTitleView" owner:self options:nil] objectAtIndex:0];
-        if (isNew) {
-            [[twoLabelTitleView mainLabel] setText:NSLocalizedString(@"NEW_PAYMENT_HEADER", @"Header in the paymentView which state new Payment")];
-            [[twoLabelTitleView subLabel] setText:NSLocalizedString(@"NEW_PAYMENT_SUBHEADER", @"Sub header in the paymentView which states Add payment data")];
-        } else {
-            [[twoLabelTitleView mainLabel] setText:NSLocalizedString(@"EXISTING_PAYMENT_HEADER", @"Header in the paymentView which states payment")];
-            [[twoLabelTitleView subLabel] setText:NSLocalizedString(@"EXISTING_PAYMENT_SUBHEADER", @"Sub header in the paymentView which states edit payment data")];
-        }
-        if (SYSTEM_VERSION_LESS_THAN(@"7.0")) {
-            [[twoLabelTitleView mainLabel] setTextColor:[UIColor whiteColor]];
-            [[twoLabelTitleView subLabel] setTextColor:[UIColor whiteColor]];
-        }
-        [[self navigationItem] setTitleView:twoLabelTitleView];
-    }
-    
-    // Fill in the form if data is present.
-    [payerView setText:[[thisPayment payingPerson] getFullName]];
-    [payerView setDelegate:self];
-    [itemView setText:[thisPayment descriptionOfPayment]];
-    NSNumberFormatter *nf = [[NSNumberFormatter alloc] init];
-    [nf setLocale:[NSLocale currentLocale]];
-    [nf setNumberStyle:NSNumberFormatterCurrencyStyle];
-    [nf setFormatterBehavior:NSNumberFormatterCurrencyStyle];
-    if (!isNew) {
-        [paidView setText:[nf stringFromNumber:[thisPayment money]]];
-    }
-    NSDateFormatter *dateFormatter = [[NSDateFormatter alloc] init];
-    [dateFormatter setDateStyle:NSDateFormatterMediumStyle];
-    [dateFormatter setTimeStyle:NSDateFormatterMediumStyle];
-    [dateAndTimeLabel setText:[dateFormatter stringFromDate:[thisPayment dateModified]]];
-}
-
 - (void)viewDidLoad
 {
     [super viewDidLoad];
@@ -391,10 +346,57 @@
                                                                  target:self
                                                                  action:@selector(cancelNumberPad:)];
     theDoneButton = [[UIBarButtonItem alloc] initWithBarButtonSystemItem:UIBarButtonSystemItemDone
-                                                               target:self
-                                                               action:@selector(doneNumberPad:)];
+                                                                  target:self
+                                                                  action:@selector(doneNumberPad:)];
     [inputAccossoryNumberPad setItems:[[NSArray alloc] initWithObjects:cancelButton, flexButton, theDoneButton, nil] animated:YES];
     [paidView setInputAccessoryView:inputAccossoryNumberPad];
+}
+
+- (void)viewWillAppear:(BOOL)animated
+{
+    [super viewWillAppear:animated];
+    
+    [MCTools setAdBannerIfNotPaid:YES forViewController:self];
+    
+    // Navigationbar stuff
+    if (!twoLabelTitleView) {
+        twoLabelTitleView = [[[NSBundle mainBundle] loadNibNamed:@"MCTwoLabelsTitleView" owner:self options:nil] objectAtIndex:0];
+        if (isNew) {
+            [[twoLabelTitleView mainLabel] setText:NSLocalizedString(@"NEW_PAYMENT_HEADER", @"Header in the paymentView which state new Payment")];
+            [[twoLabelTitleView subLabel] setText:NSLocalizedString(@"NEW_PAYMENT_SUBHEADER", @"Sub header in the paymentView which states Add payment data")];
+        } else {
+            [[twoLabelTitleView mainLabel] setText:NSLocalizedString(@"EXISTING_PAYMENT_HEADER", @"Header in the paymentView which states payment")];
+            [[twoLabelTitleView subLabel] setText:NSLocalizedString(@"EXISTING_PAYMENT_SUBHEADER", @"Sub header in the paymentView which states edit payment data")];
+        }
+        if (SYSTEM_VERSION_LESS_THAN(@"7.0")) {
+            [[twoLabelTitleView mainLabel] setTextColor:[UIColor whiteColor]];
+            [[twoLabelTitleView subLabel] setTextColor:[UIColor whiteColor]];
+        }
+        [[self navigationItem] setTitleView:twoLabelTitleView];
+    }
+    
+    // Fill in the form if data is present.
+    [payerView setText:[[thisPayment payingPerson] getFullName]];
+    [payerView setDelegate:self];
+    [itemView setText:[thisPayment descriptionOfPayment]];
+    NSNumberFormatter *nf = [[NSNumberFormatter alloc] init];
+    [nf setLocale:[NSLocale currentLocale]];
+    [nf setNumberStyle:NSNumberFormatterCurrencyStyle];
+    [nf setFormatterBehavior:NSNumberFormatterCurrencyStyle];
+    if (!isNew) {
+        [paidView setText:[nf stringFromNumber:[thisPayment money]]];
+    }
+    NSDateFormatter *dateFormatter = [[NSDateFormatter alloc] init];
+    [dateFormatter setDateStyle:NSDateFormatterMediumStyle];
+    [dateFormatter setTimeStyle:NSDateFormatterMediumStyle];
+    [dateAndTimeLabel setText:[dateFormatter stringFromDate:[thisPayment dateModified]]];
+}
+
+- (void)viewDidDisappear:(BOOL)animated
+{
+    [super viewDidDisappear:animated];
+    
+    [MCTools setAdBannerIfNotPaid:NO forViewController:self];
 }
 
 - (BOOL)disablesAutomaticKeyboardDismissal

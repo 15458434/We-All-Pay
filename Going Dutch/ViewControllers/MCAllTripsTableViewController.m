@@ -128,9 +128,33 @@
     return self;
 }
 
+- (void)viewDidLoad
+{
+    [super viewDidLoad];
+    
+    [self setEdgesForExtendedLayout:UIRectEdgeNone];
+    [MCTools setAdBannerIfNotPaid:YES forViewController:self];
+    
+    [[self navigationItem] setTitle:NSLocalizedString(@"BACK_TITLE_ALL_TRIPS_VIEW", @"back")];
+    
+    // Load the nib file
+    UINib *nib = [UINib nibWithNibName:@"MCAllTripsTableViewCell" bundle:nil];
+    
+    // Register this nib that contains the cell.
+    [[ self tableView] registerNib:nib forCellReuseIdentifier:@"MCAllTripsTableViewCell"];
+    
+    emptyMessage = [[[NSBundle mainBundle] loadNibNamed:@"MCTableEmptyMessage" owner:self options:nil] objectAtIndex:0];
+    [[emptyMessage bigMessage] setAlpha:0.0];
+    [[self tableView] setBackgroundView:emptyMessage];
+    
+}
+
+
 - (void)viewWillAppear:(BOOL)animated
 {
     [super viewWillAppear:animated];
+    
+    [MCTools setAdBannerIfNotPaid:YES forViewController:self];
     
     // Set the titleView.
     if (!titleView) {
@@ -157,32 +181,18 @@
     [[self navigationController] setToolbarHidden:NO animated:YES];
 }
 
-- (void)viewDidLoad
-{
-    [super viewDidLoad];
-    
-    [self setEdgesForExtendedLayout:UIRectEdgeNone];
-    [MCTools setAdBannerIfNotPaid:YES forViewController:self];
-    
-    [[self navigationItem] setTitle:NSLocalizedString(@"BACK_TITLE_ALL_TRIPS_VIEW", @"back")];
-    
-    // Load the nib file
-    UINib *nib = [UINib nibWithNibName:@"MCAllTripsTableViewCell" bundle:nil];
-    
-    // Register this nib that contains the cell.
-    [[ self tableView] registerNib:nib forCellReuseIdentifier:@"MCAllTripsTableViewCell"];
-    
-    emptyMessage = [[[NSBundle mainBundle] loadNibNamed:@"MCTableEmptyMessage" owner:self options:nil] objectAtIndex:0];
-    [[emptyMessage bigMessage] setAlpha:0.0];
-    [[self tableView] setBackgroundView:emptyMessage];
-    
-}
-
 - (void)viewWillDisappear:(BOOL)animated
 {
     [super viewWillDisappear:animated];
     
     dataController = nil;
+}
+
+- (void)viewDidDisappear:(BOOL)animated
+{
+    [super viewDidDisappear:animated];
+    
+    [MCTools setAdBannerIfNotPaid:NO forViewController:self];
 }
 
 - (void)didReceiveMemoryWarning
