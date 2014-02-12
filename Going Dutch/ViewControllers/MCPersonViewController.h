@@ -7,7 +7,6 @@
 //
 
 #import <UIKit/UIKit.h>
-#import <iAd/iAd.h>
 #import <CoreData/CoreData.h>
 #import <AddressBookUI/AddressBookUI.h>
 #import "MCAddressBookDataReceiver.h"

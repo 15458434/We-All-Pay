@@ -8,7 +8,6 @@
 
 #import <UIKit/UIKit.h>
 #import <CoreData/CoreData.h>
-#import <iAd/iAd.h>
 #import <Social/Social.h>
 
 @class MCWeAllPayStoreController;

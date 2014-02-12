@@ -7,7 +7,6 @@
 //
 
 #import <UIKit/UIKit.h>
-#import <iAd/iAd.h>
 #import <MessageUI/MessageUI.h>
 
 #import "MCCancelDoneTableViewController.h"

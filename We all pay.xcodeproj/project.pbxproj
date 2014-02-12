@@ -11,6 +11,7 @@
 		380BF82E18108898008A8B74 /* MCEmailAddressTableViewCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 380BF82D18108898008A8B74 /* MCEmailAddressTableViewCell.xib */; };
 		380BF831181088B9008A8B74 /* MCEmailAddressTableViewCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 380BF830181088B9008A8B74 /* MCEmailAddressTableViewCell.m */; };
 		380F44F21813250600FF7E10 /* No picture image 2 - We All Pay.png in Resources */ = {isa = PBXBuildFile; fileRef = 380F44F11813250600FF7E10 /* No picture image 2 - We All Pay.png */; };
+		3826BDDA18A65CB300747993 /* libTestFlight.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 3826BDD618A65CB300747993 /* libTestFlight.a */; };
 		38295AE818425E74009FB5DE /* MCCancelDoneViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 38295AE718425E74009FB5DE /* MCCancelDoneViewController.m */; };
 		3829AD0F178B41320025969D /* WeAllPayStore.xcdatamodeld in Sources */ = {isa = PBXBuildFile; fileRef = 3829AD0D178B41320025969D /* WeAllPayStore.xcdatamodeld */; };
 		382E7BDD17E5E57500A1040A /* MCReturnPaymentViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 382E7BDC17E5E57500A1040A /* MCReturnPaymentViewController.m */; };
@@ -76,6 +77,10 @@
 		380F44F11813250600FF7E10 /* No picture image 2 - We All Pay.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = "No picture image 2 - We All Pay.png"; path = "Going Dutch/icons/no picture image/No picture image 2 - We All Pay.png"; sourceTree = "<group>"; };
 		38156B2818706B750047AEEF /* nl */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.strings; name = nl; path = nl.lproj/Localizable.strings; sourceTree = "<group>"; };
 		38156B2918706BAC0047AEEF /* Base */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = Base; path = Base.lproj/Localizable.strings; sourceTree = "<group>"; };
+		3826BDD618A65CB300747993 /* libTestFlight.a */ = {isa = PBXFileReference; lastKnownFileType = archive.ar; name = libTestFlight.a; path = "TestFlight SDK/libTestFlight.a"; sourceTree = "<group>"; };
+		3826BDD718A65CB300747993 /* TestFlight.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = TestFlight.h; path = "TestFlight SDK/TestFlight.h"; sourceTree = "<group>"; };
+		3826BDD818A65CB300747993 /* TestFlight+AsyncLogging.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = "TestFlight+AsyncLogging.h"; path = "TestFlight SDK/TestFlight+AsyncLogging.h"; sourceTree = "<group>"; };
+		3826BDD918A65CB300747993 /* TestFlight+ManualSessions.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = "TestFlight+ManualSessions.h"; path = "TestFlight SDK/TestFlight+ManualSessions.h"; sourceTree = "<group>"; };
 		38295AE618425E74009FB5DE /* MCCancelDoneViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = MCCancelDoneViewController.h; sourceTree = "<group>"; };
 		38295AE718425E74009FB5DE /* MCCancelDoneViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = MCCancelDoneViewController.m; sourceTree = "<group>"; };
 		3829AD0E178B41320025969D /* WeAllPayStore.xcdatamodel */ = {isa = PBXFileReference; lastKnownFileType = wrapper.xcdatamodel; path = WeAllPayStore.xcdatamodel; sourceTree = "<group>"; };
@@ -186,6 +191,7 @@
 				3886D3FE16B7A1CD00ECE64F /* AddressBookUI.framework in Frameworks */,
 				3801F89C16DFC62600DF8675 /* CoreData.framework in Frameworks */,
 				38572ADB169D437B00969C62 /* CoreGraphics.framework in Frameworks */,
+				3826BDDA18A65CB300747993 /* libTestFlight.a in Frameworks */,
 				38572AD9169D437B00969C62 /* Foundation.framework in Frameworks */,
 				38F7FFBA17E9C2BA00913F62 /* iAd.framework in Frameworks */,
 				3873A2A516F23AA1000832FD /* MessageUI.framework in Frameworks */,
@@ -220,6 +226,17 @@
 				38955047178B4FCA0077A95A /* MCWeAllPayStoreController.m */,
 			);
 			name = DataStore;
+			sourceTree = "<group>";
+		};
+		3826BDDB18A65CBC00747993 /* Testflight SDK */ = {
+			isa = PBXGroup;
+			children = (
+				3826BDD618A65CB300747993 /* libTestFlight.a */,
+				3826BDD718A65CB300747993 /* TestFlight.h */,
+				3826BDD818A65CB300747993 /* TestFlight+AsyncLogging.h */,
+				3826BDD918A65CB300747993 /* TestFlight+ManualSessions.h */,
+			);
+			name = "Testflight SDK";
 			sourceTree = "<group>";
 		};
 		38334EC5172D323D0063B919 /* Launch images */ = {
@@ -277,6 +294,7 @@
 				38572AF4169D439E00969C62 /* Views */,
 				38572AF3169D438E00969C62 /* ViewControllers */,
 				38CC9814183D520C006EC35D /* MC SDK */,
+				3826BDDB18A65CBC00747993 /* Testflight SDK */,
 				3892E3AF17906B5D0038894B /* MCAddressBookDataReceiver.h */,
 				3892E3B017906B5E0038894B /* MCAddressBookDataReceiver.m */,
 				38572AE5169D437B00969C62 /* MCAppDelegate.h */,
@@ -626,6 +644,7 @@
 				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Distribution: Mark Cornelisse";
 				COPY_PHASE_STRIP = YES;
 				GCC_C_LANGUAGE_STANDARD = gnu99;
+				GCC_OPTIMIZATION_LEVEL = s;
 				GCC_WARN_ABOUT_RETURN_TYPE = YES;
 				GCC_WARN_UNINITIALIZED_AUTOS = YES;
 				GCC_WARN_UNUSED_VARIABLE = YES;
@@ -651,6 +670,8 @@
 				LIBRARY_SEARCH_PATHS = (
 					"$(inherited)",
 					"/Users/markcornelisse/Programming/Going\\ Dutch/Going\\ Dutch",
+					"/Users/markcornelisse/Programming/Going\\ Dutch/Going\\ Dutch/TestFlightSDK2.1.4",
+					"/Users/markcornelisse/Programming/Going\\ Dutch/Going\\ Dutch/TestFlight\\ SDK",
 				);
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				PROVISIONING_PROFILE = "";
@@ -673,6 +694,8 @@
 				LIBRARY_SEARCH_PATHS = (
 					"$(inherited)",
 					"/Users/markcornelisse/Programming/Going\\ Dutch/Going\\ Dutch",
+					"/Users/markcornelisse/Programming/Going\\ Dutch/Going\\ Dutch/TestFlightSDK2.1.4",
+					"/Users/markcornelisse/Programming/Going\\ Dutch/Going\\ Dutch/TestFlight\\ SDK",
 				);
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				PROVISIONING_PROFILE = "";

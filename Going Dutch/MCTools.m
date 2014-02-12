@@ -33,9 +33,9 @@
     if ([[[UIDevice currentDevice] model] isEqualToString:@"iPad"] && [[UIDevice currentDevice] userInterfaceIdiom] == UIUserInterfaceIdiomPhone) {
         [viewController setCanDisplayBannerAds:NO];
     } else {
-        [viewController setCanDisplayBannerAds:show];
+        //[viewController setCanDisplayBannerAds:show];
+        [viewController setCanDisplayBannerAds:NO];
     }
-    //[viewController setCanDisplayBannerAds:show];
 }
 
 @end
