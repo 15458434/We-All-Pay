@@ -180,7 +180,9 @@
     if (result == MFMailComposeResultCancelled) {
         [[self presentedViewController] dismissViewControllerAnimated:YES completion:nil];
     } else if (result == MFMailComposeResultSent) {
-        [[self presentedViewController] dismissViewControllerAnimated:YES completion:nil];
+        [[self presentedViewController] dismissViewControllerAnimated:YES completion:^{
+            [tonightsBill setHasTheMailBeenSent:[NSNumber numberWithBool:YES]];
+        }];
     } else if (result == MFMailComposeResultSaved) {
         [[self presentedViewController] dismissViewControllerAnimated:YES completion:nil];
     } else {
