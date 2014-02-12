@@ -7,7 +7,8 @@
 //
 
 #import <Foundation/Foundation.h>
-#import <iAd/iAd.h>
+#import <UIKit/UIKit.h>
+//#import <iAd/iAd.h>
 
 #define SYSTEM_VERSION_EQUAL_TO(v)                  ([[[UIDevice currentDevice] systemVersion] compare:v options:NSNumericSearch] == NSOrderedSame)
 #define SYSTEM_VERSION_GREATER_THAN(v)              ([[[UIDevice currentDevice] systemVersion] compare:v options:NSNumericSearch] == NSOrderedDescending)
