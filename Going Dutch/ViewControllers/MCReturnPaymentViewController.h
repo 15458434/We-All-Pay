@@ -22,7 +22,7 @@
 {
     NSMutableArray *paymentsAfterwards;
     
-    __strong IBOutlet MCTwoLabelsTitleView *twoLabelTitleView;
+    MCTwoLabelsTitleView *twoLabelTitleView;
     MCTableEmptyMessage *emptyMessage;
 }
 
