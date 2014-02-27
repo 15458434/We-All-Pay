@@ -13,6 +13,11 @@
 
 @implementation MCAppDelegate
 
+- (BOOL)application:(UIApplication *)application shouldRestoreApplicationState:(NSCoder *)coder
+{
+    return YES;
+}
+
 - (BOOL)application:(UIApplication *)application didFinishLaunchingWithOptions:(NSDictionary *)launchOptions
 {
     [TestFlight takeOff:@"f2224673-b632-44ae-8feb-3c1cfe59e1f5"];
@@ -49,6 +54,11 @@
 {
     // Called when the application is about to terminate. Save data if appropriate. See also applicationDidEnterBackground:.
     [[MCWeAllPayStoreController defaultStore] closeDocument];
+}
+
+- (BOOL)application:(UIApplication *)application shouldSaveApplicationState:(NSCoder *)coder
+{
+    return YES;
 }
 
 - (void)dealloc
