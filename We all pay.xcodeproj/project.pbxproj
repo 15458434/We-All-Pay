@@ -66,7 +66,6 @@
 		38E63CF0186F904B00904D82 /* MCTableEmptyMessage.m in Sources */ = {isa = PBXBuildFile; fileRef = 38E63CEF186F904B00904D82 /* MCTableEmptyMessage.m */; };
 		38EFF2D416D215BE001C8248 /* MCAllTripsTableViewCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 38EFF2D316D215BE001C8248 /* MCAllTripsTableViewCell.m */; };
 		38EFF2D616D215FB001C8248 /* MCAllTripsTableViewCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 38EFF2D516D215FB001C8248 /* MCAllTripsTableViewCell.xib */; };
-		38F7FFBA17E9C2BA00913F62 /* iAd.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 38F7FFB917E9C2BA00913F62 /* iAd.framework */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -178,7 +177,6 @@
 		38EFF2D216D215BE001C8248 /* MCAllTripsTableViewCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = MCAllTripsTableViewCell.h; path = Views/MCAllTripsTableViewCell.h; sourceTree = "<group>"; };
 		38EFF2D316D215BE001C8248 /* MCAllTripsTableViewCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = MCAllTripsTableViewCell.m; path = Views/MCAllTripsTableViewCell.m; sourceTree = "<group>"; };
 		38EFF2D516D215FB001C8248 /* MCAllTripsTableViewCell.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; name = MCAllTripsTableViewCell.xib; path = Views/MCAllTripsTableViewCell.xib; sourceTree = "<group>"; };
-		38F7FFB917E9C2BA00913F62 /* iAd.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = iAd.framework; path = System/Library/Frameworks/iAd.framework; sourceTree = SDKROOT; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -193,7 +191,6 @@
 				38572ADB169D437B00969C62 /* CoreGraphics.framework in Frameworks */,
 				3826BDDA18A65CB300747993 /* libTestFlight.a in Frameworks */,
 				38572AD9169D437B00969C62 /* Foundation.framework in Frameworks */,
-				38F7FFBA17E9C2BA00913F62 /* iAd.framework in Frameworks */,
 				3873A2A516F23AA1000832FD /* MessageUI.framework in Frameworks */,
 				38572AD7169D437B00969C62 /* UIKit.framework in Frameworks */,
 			);
@@ -271,7 +268,6 @@
 			children = (
 				38690702186F0EEF006A5C11 /* libz.dylib */,
 				383E0C561867079900AA688D /* Social.framework */,
-				38F7FFB917E9C2BA00913F62 /* iAd.framework */,
 				3873A2A416F23AA1000832FD /* MessageUI.framework */,
 				3801F89B16DFC62600DF8675 /* CoreData.framework */,
 				3886D3FB16B7A1CD00ECE64F /* AddressBook.framework */,
