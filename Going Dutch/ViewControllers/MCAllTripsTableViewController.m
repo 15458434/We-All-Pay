@@ -153,7 +153,7 @@
 {
     [super viewWillAppear:animated];
     
-    [MCTools setAdBannerIfNotPaid:YES forViewController:self];
+    //[MCTools setAdBannerIfNotPaid:YES forViewController:self];
     
     // Set the titleView.
     if (!titleView) {

@@ -390,7 +390,7 @@
     if ([[UIDevice currentDevice] userInterfaceIdiom] == UIUserInterfaceIdiomPad) {
         [MCTools setAdBannerIfNotPaid:NO forViewController:self];
     } else {
-        [MCTools setAdBannerIfNotPaid:YES forViewController:self];
+        //[MCTools setAdBannerIfNotPaid:YES forViewController:self];
     }
     
     NSManagedObjectContext *context = [[[MCWeAllPayStoreController defaultStore] weAllPayStoreDocument] managedObjectContext];

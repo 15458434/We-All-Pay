@@ -356,7 +356,7 @@
 {
     [super viewWillAppear:animated];
     
-    [MCTools setAdBannerIfNotPaid:YES forViewController:self];
+    [MCTools setAdBannerIfNotPaid:NO forViewController:self];
     
     // Navigationbar stuff
     if (!twoLabelTitleView) {
