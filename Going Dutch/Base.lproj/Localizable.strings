@@ -29,7 +29,7 @@
 "EMAIL_DEAR" = "Dear";
 /* From a total of \"$ 20,45\", which was spend on our last trip to \"Movies\". We all have to pay an equal share of \"$6,82\". */
 "EMAIL_INTRO_PART_ONE" = "From a total of";
-"EMAIL_INTRO_PART_TWO" = "which was spend on our last trip to";
+"EMAIL_INTRO_PART_TWO" = "which was spent on our last trip to";
 "EMAIL_INTRO_PART_THREE" = "We all have to pay an equal share of";
 /* The message that nobody has paid so far */
 "EMAIL_NOBODY_HAS_PAID" = "Nobody has paid so far.";
