@@ -15,7 +15,7 @@
 		3829AD0F178B41320025969D /* WeAllPayStore.xcdatamodeld in Sources */ = {isa = PBXBuildFile; fileRef = 3829AD0D178B41320025969D /* WeAllPayStore.xcdatamodeld */; };
 		382E7BDD17E5E57500A1040A /* MCReturnPaymentViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 382E7BDC17E5E57500A1040A /* MCReturnPaymentViewController.m */; };
 		3830F6F6179872B400904FAF /* MCPaymentViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 3830F6F5179872B400904FAF /* MCPaymentViewController.m */; };
-		38321B7D18CFA70800F77120 /* libTestFlight.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 38321B7918CFA70800F77120 /* libTestFlight.a */; };
+		38321B7E18CFA81300F77120 /* libTestFlight.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 38321B7918CFA70800F77120 /* libTestFlight.a */; };
 		38334EBC172D1A770063B919 /* three peeps.png in Resources */ = {isa = PBXBuildFile; fileRef = 38334EBB172D1A770063B919 /* three peeps.png */; };
 		38334EBE172D1A8E0063B919 /* three peeps@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 38334EBD172D1A8E0063B919 /* three peeps@2x.png */; };
 		38334ECA173552330063B919 /* Default.png in Resources */ = {isa = PBXBuildFile; fileRef = 38334EBF172D319B0063B919 /* Default.png */; };
@@ -186,12 +186,12 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				38321B7E18CFA81300F77120 /* libTestFlight.a in Frameworks */,
 				3883D5D418C509150019D7DF /* iAd.framework in Frameworks */,
 				38690703186F0EEF006A5C11 /* libz.dylib in Frameworks */,
 				3886D3FD16B7A1CD00ECE64F /* AddressBook.framework in Frameworks */,
 				3886D3FE16B7A1CD00ECE64F /* AddressBookUI.framework in Frameworks */,
 				3801F89C16DFC62600DF8675 /* CoreData.framework in Frameworks */,
-				38321B7D18CFA70800F77120 /* libTestFlight.a in Frameworks */,
 				38572ADB169D437B00969C62 /* CoreGraphics.framework in Frameworks */,
 				38572AD9169D437B00969C62 /* Foundation.framework in Frameworks */,
 				3873A2A516F23AA1000832FD /* MessageUI.framework in Frameworks */,
