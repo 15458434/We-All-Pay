@@ -21,6 +21,7 @@
 		38334ECB1735523A0063B919 /* Default@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 38334EC1172D31A50063B919 /* Default@2x.png */; };
 		38334ECC173552410063B919 /* Default-568h@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 38334EC3172D31AF0063B919 /* Default-568h@2x.png */; };
 		383E0C5D186737EB00AA688D /* MCSharedBillPageViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 383E0C5C186737EB00AA688D /* MCSharedBillPageViewController.m */; };
+		38522E1E18DAFB99007BDB3F /* libTestFlight.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 3857304B18DAF2F100A900EA /* libTestFlight.a */; };
 		38572AD7169D437B00969C62 /* UIKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 38572AD6169D437B00969C62 /* UIKit.framework */; };
 		38572AD9169D437B00969C62 /* Foundation.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 38572AD8169D437B00969C62 /* Foundation.framework */; settings = {ATTRIBUTES = (Required, ); }; };
 		38572ADB169D437B00969C62 /* CoreGraphics.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 38572ADA169D437B00969C62 /* CoreGraphics.framework */; };
@@ -28,7 +29,6 @@
 		38572AE3169D437B00969C62 /* main.m in Sources */ = {isa = PBXBuildFile; fileRef = 38572AE2169D437B00969C62 /* main.m */; };
 		38572AE7169D437B00969C62 /* MCAppDelegate.m in Sources */ = {isa = PBXBuildFile; fileRef = 38572AE6169D437B00969C62 /* MCAppDelegate.m */; };
 		38572B0A169F3D2700969C62 /* MCAllTripsTableViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 38572B09169F3D2700969C62 /* MCAllTripsTableViewController.m */; };
-		3857304C18DAF2F100A900EA /* libTestFlight.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 3857304B18DAF2F100A900EA /* libTestFlight.a */; };
 		385FEE6317CBF77B001013E3 /* Images.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 385FEE6217CBF77B001013E3 /* Images.xcassets */; };
 		3867CE4718704B2E001EC222 /* Main-Iphone.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 3867CE4918704B2E001EC222 /* Main-Iphone.storyboard */; };
 		3867CE5118704DAF001EC222 /* MCTableEmptyMessage.xib in Resources */ = {isa = PBXBuildFile; fileRef = 3867CE5318704DAF001EC222 /* MCTableEmptyMessage.xib */; };
@@ -184,7 +184,7 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				3857304C18DAF2F100A900EA /* libTestFlight.a in Frameworks */,
+				38522E1E18DAFB99007BDB3F /* libTestFlight.a in Frameworks */,
 				38690703186F0EEF006A5C11 /* libz.dylib in Frameworks */,
 				3886D3FD16B7A1CD00ECE64F /* AddressBook.framework in Frameworks */,
 				3886D3FE16B7A1CD00ECE64F /* AddressBookUI.framework in Frameworks */,
@@ -663,18 +663,6 @@
 				IPHONEOS_DEPLOYMENT_TARGET = 7.0;
 				LIBRARY_SEARCH_PATHS = (
 					"$(inherited)",
-					/Users/markcornelisse/Programming/Going,
-					Dutch/Going,
-					Dutch,
-					/Users/markcornelisse/Programming/Going,
-					Dutch/Going,
-					Dutch/TestFlightSDK2.1.4,
-					/Users/markcornelisse/Programming/Going,
-					Dutch/Going,
-					Dutch/TestFlight,
-					SDK,
-					"$(PROJECT_DIR)/Going",
-					Dutch,
 					"$(PROJECT_DIR)/Going",
 					Dutch/TestFlight,
 					SDK,
@@ -699,18 +687,6 @@
 				IPHONEOS_DEPLOYMENT_TARGET = 7.0;
 				LIBRARY_SEARCH_PATHS = (
 					"$(inherited)",
-					/Users/markcornelisse/Programming/Going,
-					Dutch/Going,
-					Dutch,
-					/Users/markcornelisse/Programming/Going,
-					Dutch/Going,
-					Dutch/TestFlightSDK2.1.4,
-					/Users/markcornelisse/Programming/Going,
-					Dutch/Going,
-					Dutch/TestFlight,
-					SDK,
-					"$(PROJECT_DIR)/Going",
-					Dutch,
 					"$(PROJECT_DIR)/Going",
 					Dutch/TestFlight,
 					SDK,
