@@ -21,7 +21,6 @@
 		38334ECB1735523A0063B919 /* Default@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 38334EC1172D31A50063B919 /* Default@2x.png */; };
 		38334ECC173552410063B919 /* Default-568h@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 38334EC3172D31AF0063B919 /* Default-568h@2x.png */; };
 		383E0C5D186737EB00AA688D /* MCSharedBillPageViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 383E0C5C186737EB00AA688D /* MCSharedBillPageViewController.m */; };
-		38522E1E18DAFB99007BDB3F /* libTestFlight.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 3857304B18DAF2F100A900EA /* libTestFlight.a */; };
 		38572AD7169D437B00969C62 /* UIKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 38572AD6169D437B00969C62 /* UIKit.framework */; };
 		38572AD9169D437B00969C62 /* Foundation.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 38572AD8169D437B00969C62 /* Foundation.framework */; settings = {ATTRIBUTES = (Required, ); }; };
 		38572ADB169D437B00969C62 /* CoreGraphics.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 38572ADA169D437B00969C62 /* CoreGraphics.framework */; };
@@ -55,6 +54,7 @@
 		3897158C17901D55005BE03E /* MCReturnPaymentTableViewCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 3897158617901D55005BE03E /* MCReturnPaymentTableViewCell.xib */; };
 		3897159217902E35005BE03E /* MCSharedBillTableViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 3897159117902E35005BE03E /* MCSharedBillTableViewController.m */; };
 		38CDE90017135B6300387CAA /* MCTools.m in Sources */ = {isa = PBXBuildFile; fileRef = 38CDE8FF17135B6300387CAA /* MCTools.m */; };
+		38D785ED18DB66030074B670 /* libTestFlight.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 3857304B18DAF2F100A900EA /* libTestFlight.a */; };
 		38DB85D417E45BCA006237CF /* MCPayment+addons.m in Sources */ = {isa = PBXBuildFile; fileRef = 38DB85D317E45BCA006237CF /* MCPayment+addons.m */; };
 		38DB85D717E45CA4006237CF /* MCSharedBill+addons.m in Sources */ = {isa = PBXBuildFile; fileRef = 38DB85D617E45CA4006237CF /* MCSharedBill+addons.m */; };
 		38DB85DA17E45DEA006237CF /* MCPerson+addons.m in Sources */ = {isa = PBXBuildFile; fileRef = 38DB85D917E45DEA006237CF /* MCPerson+addons.m */; };
@@ -91,6 +91,12 @@
 		383E0C561867079900AA688D /* Social.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Social.framework; path = System/Library/Frameworks/Social.framework; sourceTree = SDKROOT; };
 		383E0C5B186737EB00AA688D /* MCSharedBillPageViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = MCSharedBillPageViewController.h; path = ViewControllers/MCSharedBillPageViewController.h; sourceTree = "<group>"; };
 		383E0C5C186737EB00AA688D /* MCSharedBillPageViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = MCSharedBillPageViewController.m; path = ViewControllers/MCSharedBillPageViewController.m; sourceTree = "<group>"; };
+		38522E2418DB3F01007BDB3F /* XCTest.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = XCTest.framework; path = Library/Frameworks/XCTest.framework; sourceTree = DEVELOPER_DIR; };
+		38522E2A18DB3F01007BDB3F /* We all pay Model Tests-Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = "We all pay Model Tests-Info.plist"; sourceTree = "<group>"; };
+		38522E2C18DB3F01007BDB3F /* en */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = en; path = en.lproj/InfoPlist.strings; sourceTree = "<group>"; };
+		38522E2E18DB3F01007BDB3F /* We_all_pay_Model_Tests.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = We_all_pay_Model_Tests.m; sourceTree = "<group>"; };
+		38522E3018DB3F01007BDB3F /* We all pay Model Tests-Prefix.pch */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = "We all pay Model Tests-Prefix.pch"; sourceTree = "<group>"; };
+		38522E3418DB3F42007BDB3F /* MCWeAllPayStoreTest.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = MCWeAllPayStoreTest.m; sourceTree = "<group>"; };
 		38572AD2169D437B00969C62 /* We all pay.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = "We all pay.app"; sourceTree = BUILT_PRODUCTS_DIR; };
 		38572AD6169D437B00969C62 /* UIKit.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = UIKit.framework; path = System/Library/Frameworks/UIKit.framework; sourceTree = SDKROOT; };
 		38572AD8169D437B00969C62 /* Foundation.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Foundation.framework; path = System/Library/Frameworks/Foundation.framework; sourceTree = SDKROOT; };
@@ -184,7 +190,7 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				38522E1E18DAFB99007BDB3F /* libTestFlight.a in Frameworks */,
+				38D785ED18DB66030074B670 /* libTestFlight.a in Frameworks */,
 				38690703186F0EEF006A5C11 /* libz.dylib in Frameworks */,
 				3886D3FD16B7A1CD00ECE64F /* AddressBook.framework in Frameworks */,
 				3886D3FE16B7A1CD00ECE64F /* AddressBookUI.framework in Frameworks */,
@@ -246,10 +252,31 @@
 			name = "Launch images";
 			sourceTree = "<group>";
 		};
+		38522E2818DB3F01007BDB3F /* We all pay Model Tests */ = {
+			isa = PBXGroup;
+			children = (
+				38522E3418DB3F42007BDB3F /* MCWeAllPayStoreTest.m */,
+				38522E2E18DB3F01007BDB3F /* We_all_pay_Model_Tests.m */,
+				38522E2918DB3F01007BDB3F /* Supporting Files */,
+			);
+			path = "We all pay Model Tests";
+			sourceTree = "<group>";
+		};
+		38522E2918DB3F01007BDB3F /* Supporting Files */ = {
+			isa = PBXGroup;
+			children = (
+				38522E2A18DB3F01007BDB3F /* We all pay Model Tests-Info.plist */,
+				38522E2B18DB3F01007BDB3F /* InfoPlist.strings */,
+				38522E3018DB3F01007BDB3F /* We all pay Model Tests-Prefix.pch */,
+			);
+			name = "Supporting Files";
+			sourceTree = "<group>";
+		};
 		38572AC7169D437B00969C62 = {
 			isa = PBXGroup;
 			children = (
 				38572ADC169D437B00969C62 /* We all pay */,
+				38522E2818DB3F01007BDB3F /* We all pay Model Tests */,
 				38572AD5169D437B00969C62 /* Frameworks */,
 				38572AD3169D437B00969C62 /* Products */,
 			);
@@ -275,6 +302,7 @@
 				38572AD6169D437B00969C62 /* UIKit.framework */,
 				38572AD8169D437B00969C62 /* Foundation.framework */,
 				38572ADA169D437B00969C62 /* CoreGraphics.framework */,
+				38522E2418DB3F01007BDB3F /* XCTest.framework */,
 			);
 			name = Frameworks;
 			sourceTree = "<group>";
@@ -552,6 +580,14 @@
 /* End PBXSourcesBuildPhase section */
 
 /* Begin PBXVariantGroup section */
+		38522E2B18DB3F01007BDB3F /* InfoPlist.strings */ = {
+			isa = PBXVariantGroup;
+			children = (
+				38522E2C18DB3F01007BDB3F /* en */,
+			);
+			name = InfoPlist.strings;
+			sourceTree = "<group>";
+		};
 		38572ADF169D437B00969C62 /* InfoPlist.strings */ = {
 			isa = PBXVariantGroup;
 			children = (
