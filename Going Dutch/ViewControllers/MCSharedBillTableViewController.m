@@ -144,7 +144,6 @@
     [super viewDidLoad];
     
     [self setEdgesForExtendedLayout:UIRectEdgeNone];
-    [MCTools setAdBannerIfNotPaid:YES forViewController:self];
     
     // Load nib for PaymentTableViewCell and register it to the TableView.
     UINib *nib = [UINib nibWithNibName:@"MCPaymentTableViewCell" bundle:nil];

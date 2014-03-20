@@ -159,7 +159,6 @@
     // self.navigationItem.rightBarButtonItem = self.editButtonItem;
     
     [self setEdgesForExtendedLayout:UIRectEdgeNone];
-    [MCTools setAdBannerIfNotPaid:YES forViewController:self];
     
     if (!tonightsBill) {
         didSomethingChange = YES;

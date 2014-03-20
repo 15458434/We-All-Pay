@@ -144,7 +144,6 @@
 {
     [super viewDidDisappear:animated];
     
-    [MCTools setAdBannerIfNotPaid:NO forViewController:self];
 }
 
 - (void)didReceiveMemoryWarning

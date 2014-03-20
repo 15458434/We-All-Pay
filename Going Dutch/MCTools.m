@@ -32,9 +32,9 @@
 {
     NSLog(@"iAd support has been disabled.");
     if ([[[UIDevice currentDevice] model] isEqualToString:@"iPad"] && [[UIDevice currentDevice] userInterfaceIdiom] == UIUserInterfaceIdiomPhone) {
-        [viewController setCanDisplayBannerAds:NO];
+        //[viewController setCanDisplayBannerAds:NO];
     } else {
-        [viewController setCanDisplayBannerAds:show];
+        //[viewController setCanDisplayBannerAds:show];
     }
 }
 
