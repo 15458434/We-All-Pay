@@ -50,6 +50,26 @@
     }
 }
 
++ (BOOL)isTableInDatabaseEmpty
+{
+    NSFetchRequest *request = [NSFetchRequest fetchRequestWithEntityName:@"MCPayment"];
+    NSSortDescriptor *sd = [NSSortDescriptor sortDescriptorWithKey:@"money" ascending:YES];
+    NSArray *sda = [NSArray arrayWithObject:sd];
+    [request setSortDescriptors:sda];
+    NSError *error;
+    NSManagedObjectContext *context = [[[MCWeAllPayStoreController defaultStore] weAllPayStoreDocument] managedObjectContext];
+    NSArray *allPayments = [context executeFetchRequest:request error:&error];
+    if (allPayments) {
+        if ([allPayments count] == 0) {
+            return YES;
+        } else {
+            return NO;
+        }
+    } else {
+        return NO;
+    }
+}
+
 - (BOOL)hasPayer
 {
     MCPerson *thisPayer = [self payingPerson];

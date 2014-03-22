@@ -16,7 +16,7 @@
 @interface WeAllPayStoreTests : XCTestCase
 {
     MCWeAllPayStoreController *mainController;
-    //NSManagedObjectContext *context;
+    NSManagedObjectContext *context;
 }
 
 @end
@@ -28,6 +28,7 @@
     [super setUp];
     // Put setup code here. This method is called before the invocation of each test method in the class.
     mainController = [MCWeAllPayStoreController defaultStore];
+    context = [[[MCWeAllPayStoreController defaultStore] weAllPayStoreDocument] managedObjectContext];
     
     /*
     // ObjectModel from any models in app bundle
@@ -90,7 +91,6 @@
     [request setPredicate:compoundPredicate];
     NSError *error;
     NSArray *emailAddresses;
-    NSManagedObjectContext *context = [[[MCWeAllPayStoreController defaultStore] weAllPayStoreDocument] managedObjectContext];
     emailAddresses = [context executeFetchRequest:request error:&error];
     if (!emailAddresses) {
         XCTFail(@"No list of email addresses generated");
@@ -106,20 +106,25 @@
     XCTAssertFalse([thisPerson isThereAnEmailAddress], @"There is an emailAddress present when two has been added.");
     
     [MCPerson deletePerson:thisPerson];
-    request = [NSFetchRequest fetchRequestWithEntityName:@"MCPerson"];
-    NSSortDescriptor *sd = [NSSortDescriptor sortDescriptorWithKey:@"firstName" ascending:YES];
-    NSArray *sda = [NSArray arrayWithObjects:sd, nil];
-    [request setSortDescriptors:sda];
-    NSArray *people = [context executeFetchRequest:request error:&error];
-    if (people) {
-        XCTAssertTrue([people count] == 0, @"Still %lu people present in the database.", [people count]);
-    } else {
-        XCTFail(@"There should be an empty array of people");
-    }
+    XCTAssertTrue([MCPerson isTableInDatabaseEmpty], @"No people left in the database");
 }
 
 - (void)testMCPaymentAddons
 {
+    MCPerson *thisPerson = [MCPerson addPerson];
+    [thisPerson setFirstName:@"Mark"];
+    [thisPerson setLastName:@"Cornelisse"];
+    [thisPerson addNewDefaultEmailAddressFromAString:@"support@markcornelisse.nl"];
+    MCPayment *thisPayment = [MCPayment addPayment];
+    [thisPayment setPayingPerson:thisPerson];
+    [thisPayment setDescriptionOfPayment:@"Beer"];
+    [thisPayment setMoney:[NSNumber numberWithDouble:3.25]];
+    XCTAssertTrue([thisPayment hasPayer], @"No payer present on thisPayment");
+    
+    [MCPayment deletePayment:thisPayment];
+    XCTAssertTrue([MCPayment isTableInDatabaseEmpty], @"MCPayment table is not empty");
+    
+    [MCPerson deletePerson:thisPerson];
     
 }
 

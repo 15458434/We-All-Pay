@@ -14,6 +14,7 @@
 + (void)deleteEmailAddress:(MCEmailAddress *)eAddress;
 
 + (MCEmailAddress *)fetchEmailAddressFor:(MCPerson *)person;
++ (BOOL)isTableInDatabaseEmpty;
 
 
 @end

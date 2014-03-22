@@ -50,6 +50,26 @@
     return nil;
 }
 
++ (BOOL)isTableInDatabaseEmpty
+{
+    NSFetchRequest *request = [NSFetchRequest fetchRequestWithEntityName:@"MCPerson"];
+    NSSortDescriptor *sd = [NSSortDescriptor sortDescriptorWithKey:@"firstName" ascending:YES];
+    NSArray *sda = [NSArray arrayWithObjects:sd, nil];
+    [request setSortDescriptors:sda];
+    NSManagedObjectContext *context = [[[MCWeAllPayStoreController defaultStore] weAllPayStoreDocument] managedObjectContext];
+    NSError *error;
+    NSArray *people = [context executeFetchRequest:request error:&error];
+    if (people) {
+        if ([people count] == 0) {
+            return YES;
+        } else {
+            return NO;
+        }
+    } else {
+        return NO;
+    }
+}
+
 - (void)setThumbnailDataFromImage:(UIImage *)image
 {
     __block UIImage *thisImage = image;

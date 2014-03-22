@@ -14,6 +14,7 @@
 + (void)deletePayment:(MCPayment *)payment;
 
 + (MCPayment *)fetchPaymentWithUniqueId:(NSString *)uuid;
++ (BOOL)isTableInDatabaseEmpty;
 
 - (BOOL)hasPayer;
 

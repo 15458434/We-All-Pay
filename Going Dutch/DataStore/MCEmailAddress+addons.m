@@ -47,6 +47,26 @@
     }
 }
 
++ (BOOL)isTableInDatabaseEmpty
+{
+    NSFetchRequest *request = [NSFetchRequest fetchRequestWithEntityName:@"MCEmailAddress"];
+    NSSortDescriptor *sd = [NSSortDescriptor sortDescriptorWithKey:@"emailAddress" ascending:YES];
+    NSArray *sda = [NSArray arrayWithObjects:sd, nil];
+    [request setSortDescriptors:sda];
+    NSManagedObjectContext *context = [[[MCWeAllPayStoreController defaultStore] weAllPayStoreDocument] managedObjectContext];
+    NSError *error;
+    NSArray *people = [context executeFetchRequest:request error:&error];
+    if (people) {
+        if ([people count] == 0) {
+            return YES;
+        } else {
+            return NO;
+        }
+    } else {
+        return NO;
+    }
+}
+
 + (MCEmailAddress *)fetchEmailAddressFor:(MCPerson *)person
 {
     // Create a fetch request for MCEmailAddress

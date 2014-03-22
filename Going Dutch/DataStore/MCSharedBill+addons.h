@@ -17,6 +17,7 @@
 + (MCSharedBill *)fetchSharedBillWithUniqueId:(NSString *)uuid;
 + (MCSharedBill *)fetchSharedBillWithUniqueId:(NSString *)uuid fromContext:(NSManagedObjectContext *)context;
 // - (NSArray *)fetchAllPayments;
++ (BOOL)isTableInDatabaseEmpty;
 
 - (NSString *)stringOfApproxPeoplePresent;
 
