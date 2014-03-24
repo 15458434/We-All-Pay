@@ -130,7 +130,7 @@
     MCPayment *thisPayment = [MCPayment addPayment];
     [thisPayment setDescriptionOfPayment:@"Beer"];
     [thisPayment setMoney:[NSNumber numberWithDouble:3.25]];
-    XCTAssertFalse(thisPayment, @"PayerPresent");
+    XCTAssertFalse([thisPayment hasPayer], @"PayerPresent");
     [thisPayment setPayingPerson:thisPerson];
     XCTAssertTrue([thisPayment hasPayer], @"No payer present on thisPayment");
     
