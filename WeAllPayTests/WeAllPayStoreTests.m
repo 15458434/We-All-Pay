@@ -12,6 +12,8 @@
 #import "MCPerson+addons.h"
 #import "MCPayment+addons.h"
 #import "MCSharedBill+addons.h"
+#import "MCEmailAddress+addons.h"
+#import "MCReturnPayment.h"
 
 @interface WeAllPayStoreTests : XCTestCase
 {
@@ -29,20 +31,6 @@
     // Put setup code here. This method is called before the invocation of each test method in the class.
     mainController = [MCWeAllPayStoreController defaultStore];
     context = [[[MCWeAllPayStoreController defaultStore] weAllPayStoreDocument] managedObjectContext];
-    
-    /*
-    // ObjectModel from any models in app bundle
-    NSManagedObjectModel *managedObjectModel = [NSManagedObjectModel mergedModelFromBundles:nil];
-    
-    // Coordinator with in-mem store type
-    NSPersistentStoreCoordinator *coordinator = [[NSPersistentStoreCoordinator alloc] initWithManagedObjectModel:managedObjectModel];
-    [coordinator addPersistentStoreWithType:NSInMemoryStoreType configuration:nil URL:nil options:nil error:nil];
-    
-    // Context with private queue
-    context = [[NSManagedObjectContext alloc] initWithConcurrencyType:NSPrivateQueueConcurrencyType];
-    // Choose your concurrency type, or leave it off entirely
-    context.persistentStoreCoordinator = coordinator;
-     */
 }
 
 - (void)tearDown
@@ -60,7 +48,7 @@
     XCTAssertEqualObjects(testController, mainController, @"MCWeAllPayStoreController defaultStore gives not the defaultStore.");
 }
 
-- (void)testMCPersonAddons
+- (void)testMCPersonAddonsAddAndDeleteEmailAddress
 {
     MCPerson *thisPerson = [MCPerson addPerson];
     [thisPerson setFirstName:@"Mark"];
@@ -98,15 +86,39 @@
     XCTAssertTrue([emailAddresses count] == 1, @"More or less then one defaulEmailAddress present.");
     XCTAssertTrue([[thisPerson emailAddress] count] == 3, @"All emailAddresses have been entered.");
     
+    
+    
     MCEmailAddress *toBeDeletedEmailAddress = [thisPerson getDefaultEmailAddressObject];
     [thisPerson deleteEmailAddress:toBeDeletedEmailAddress];
     XCTAssertTrue([[thisPerson emailAddress] count] == 2, @"Different amount of emailAddresses then expected.");
     XCTAssertTrue([thisPerson getDefaultEmailAddressObject], @"No new defaultEmailAddress present");
+    XCTAssertFalse([MCEmailAddress isTableInDatabaseEmpty], @"No emailAddresses left in the database.");
     [thisPerson deletAllEmailAddresses];
+    XCTAssertTrue([MCEmailAddress isTableInDatabaseEmpty], @"Email addresses left in the database.");
     XCTAssertFalse([thisPerson isThereAnEmailAddress], @"There is an emailAddress present when two has been added.");
     
+    XCTAssertFalse([MCPerson isTableInDatabaseEmpty], @"No people left in the database");
     [MCPerson deletePerson:thisPerson];
-    XCTAssertTrue([MCPerson isTableInDatabaseEmpty], @"No people left in the database");
+    XCTAssertTrue([MCPerson isTableInDatabaseEmpty], @"People left in the database");
+}
+
+- (void)testMCPersonAddonsGetName
+{
+    MCPerson *thisPerson = [MCPerson addPerson];
+    [thisPerson setFirstName:@"Connie"];
+    [thisPerson setLastName:@"Carter"];
+    [thisPerson addOneEmailAddressFromAString:@"connie@markcornelisse.nl"];
+    XCTAssertTrue([[thisPerson getName] isEqualToString:@"Connie"], @"First name is not selected when it's available.");
+    XCTAssertTrue([[thisPerson getFullName] isEqualToString:@"Connie Carter"]);
+    MCPerson *thisPersonWithMissingFirstName = [MCPerson addPerson];
+    [thisPersonWithMissingFirstName setLastName:@"Carter"];
+    [thisPersonWithMissingFirstName addOneEmailAddressFromAString:@"connie@markcornelisse.nl"];
+    XCTAssertTrue([[thisPersonWithMissingFirstName getName] isEqualToString:@"Carter"], @"Last is not selected when first name is not available");
+    XCTAssertTrue([[thisPersonWithMissingFirstName getFullName] isEqualToString:@"Carter"], @"Fullname is wrong when first name is missing.");
+    MCPerson *thisPersonWithMissingFirstAndLastName = [MCPerson addPerson];
+    [thisPersonWithMissingFirstAndLastName addOneEmailAddressFromAString:@"connie@markcornelisse.nl"];
+    XCTAssertTrue([[thisPersonWithMissingFirstAndLastName getName] isEqualToString:@"connie@markcornelisse.nl"], @"emailAddress is not selected when both first and lastname are not selected.");
+    XCTAssertTrue([[thisPersonWithMissingFirstAndLastName getFullName] isEqualToString:@"connie@markcornelisse.nl"], @"emailAddress is not selected when both first and lastnames are not selected.");
 }
 
 - (void)testMCPaymentAddons
@@ -116,22 +128,75 @@
     [thisPerson setLastName:@"Cornelisse"];
     [thisPerson addNewDefaultEmailAddressFromAString:@"support@markcornelisse.nl"];
     MCPayment *thisPayment = [MCPayment addPayment];
-    [thisPayment setPayingPerson:thisPerson];
     [thisPayment setDescriptionOfPayment:@"Beer"];
     [thisPayment setMoney:[NSNumber numberWithDouble:3.25]];
+    XCTAssertFalse(thisPayment, @"PayerPresent");
+    [thisPayment setPayingPerson:thisPerson];
     XCTAssertTrue([thisPayment hasPayer], @"No payer present on thisPayment");
     
     [MCPayment deletePayment:thisPayment];
     XCTAssertTrue([MCPayment isTableInDatabaseEmpty], @"MCPayment table is not empty");
     
     [MCPerson deletePerson:thisPerson];
-    
 }
 
-- (void)testMCSharedBillAddOns
+- (void)testMCSharedBillAddOns1
 {
-    MCSharedBill *theBill = [MCSharedBill addSharedBill];
-    
+    XCTAssertTrue([MCSharedBill isTableInDatabaseEmpty], @"There is a sharedBill present in the empty table?");
+    MCSharedBill *movie = [MCSharedBill addSharedBill];
+    [movie setTripName:@"Movie"];
+    XCTAssertFalse([movie areTherePeople], @"There are people on a new event?");
+    MCPerson *markmovie = [movie addPerson];
+    [markmovie setFirstName:@"Mark"];
+    [markmovie setLastName:@"Cornelisse"];
+    [markmovie addOneEmailAddressFromAString:@"info@markcornelisse.nl"];
+    [markmovie addOneEmailAddressFromAString:@"support@markcornelisse.nl"];
+    MCPerson *ilsemovie = [movie addPerson];
+    [ilsemovie setFirstName:@"Ilse"];
+    [ilsemovie setLastName:@"Béguin"];
+    [ilsemovie addOneEmailAddressFromAString:@"ilse@markcornelisse.nl"];
+    MCPerson *conniemovie = [movie addPerson];
+    [conniemovie setFirstName:@"Connie"];
+    [conniemovie setLastName:@"Carter"];
+    [conniemovie addOneEmailAddressFromAString:@"connie@markcornelisse.nl"];
+    MCPerson *liekemovie = [movie addPerson];
+    [liekemovie setFirstName:@"Lieke"];
+    [liekemovie setLastName:@"Koopman"];
+    [liekemovie addOneEmailAddressFromAString:@"lieke@markcornelisse.nl"];
+    [liekemovie addNewDefaultEmailAddressFromAString:@"liekeNewDefault@markcornelisse.nl"];
+    MCPayment *tickets = [movie addPayment];
+    [tickets setPayingPerson:markmovie];
+    [tickets setMoney:[NSNumber numberWithDouble:8.90*4]];
+    [tickets setDescriptionOfPayment:@"Tickets"];
+    MCPayment *drinksAndPopcorn = [movie addPayment];
+    [drinksAndPopcorn setPayingPerson:liekemovie];
+    [drinksAndPopcorn setMoney:[NSNumber numberWithDouble:34.40]];
+    [drinksAndPopcorn setDescriptionOfPayment:@"Drinks and popcorn for the movie."];
+    MCPayment *parking = [movie addPayment];
+    [parking setPayingPerson:liekemovie];
+    [parking setMoney:[NSNumber numberWithDouble:6.00]];
+    [parking setDescriptionOfPayment:@"Parking"];
+    XCTAssertTrue([movie areTherePeople], @"There are no people when 4 people should have been added?");
+    XCTAssertTrue([movie totalAmountOfPeoplePresent] == 4, @"4 people were added, but the returned amount it not 4?");
+    XCTAssertTrue([movie totalAmountOfPeopleWhoHavePaid] == 2, @"Total amount of people who have paid is not 3");
+    XCTAssertTrue([[movie totalSumPaidBy:liekemovie] doubleValue] == 40.40, @"Total sum is wrong when adding multiple payments.");
+    XCTAssertTrue([[movie totalSumOfMoneyOfThisSharedBill] doubleValue] == 8.90*4+34.40+6.00, @"Total sum is wrong when adding multiple payments.");
+    XCTAssertTrue([movie hasPersonPaidSomething:liekemovie], @"This person should have paid something.");
+    XCTAssertTrue([movie hasPersonPaidSomething:markmovie], @"This person should have paid something.");
+    XCTAssertFalse([movie hasPersonPaidSomething:ilsemovie], @"This person shouldn't have paid something.");
+    XCTAssertFalse([movie hasPersonPaidSomething:conniemovie], @"This person shouldn't have paid something.");
+    XCTAssertTrue([movie doesEveryoneHaveAnEmailAddress], @"Everyone should have an email address");
+    XCTAssertTrue([[movie amountPeopleShouldHavePaid] doubleValue] == (8.90*4+34.40+6.00)/4, @"The average calculated amount is wrong.");
+    NSArray *solution = [movie solveWhoHasToPayWhoFromThisBill];
+    XCTAssertEqual([solution count], 3, @"Amount of MCReturnPayment on solved bill is not ok.");
+    MCReturnPayment *one = [solution objectAtIndex:0];
+    XCTAssertEqualObjects(@"Ilse pays $16.60 to Mark.", [one stringForMail], @"Solution for 1st object is not ok.");
+    MCReturnPayment *two = [solution objectAtIndex:1];
+    XCTAssertEqualObjects(@"Ilse pays $2.40 to Lieke.", [two stringForMail], @"Solution for 2nd object is not ok.");
+    MCReturnPayment *three = [solution objectAtIndex:2];
+    XCTAssertEqualObjects(@"Connie pays $19.00 to Lieke.", [three stringForMail], @"Solution for 3rd object is not ok.");
+    [MCSharedBill deleteSharedbill:movie];
+    XCTAssertTrue([MCSharedBill isTableInDatabaseEmpty], @"There are still MCShardBills present");
 }
 
 
