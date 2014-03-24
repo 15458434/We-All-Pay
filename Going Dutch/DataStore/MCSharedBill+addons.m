@@ -77,25 +77,6 @@
     }
 }
 
-+ (MCSharedBill *)fetchSharedBillWithUniqueId:(NSString *)uuid fromContext:(NSManagedObjectContext *)context
-{
-    // Create a fetch request for MCSharedBills.
-    NSFetchRequest *request = [NSFetchRequest fetchRequestWithEntityName:@"MCSharedBill"];
-    
-    // Select only the sharedBill with uuid as uniqueBillId
-    NSPredicate *predicate = [NSPredicate predicateWithFormat:@"uniqueBillId = %@", uuid];
-    [request setPredicate:predicate];
-    
-    NSError *error;
-    NSArray *sharedBills = [context executeFetchRequest:request error:&error];
-    if (!sharedBills) {
-        // There was an error.
-        return nil;
-    } else {
-        return [sharedBills objectAtIndex:0];
-    }
-}
-
 - (NSString *)stringOfApproxPeoplePresent;
 {
     /*
@@ -322,27 +303,6 @@
 {
     NSSortDescriptor *sortDescriptor = [NSSortDescriptor sortDescriptorWithKey:@"getFullName" ascending:YES];
     return [[self peoplePresent] sortedArrayUsingDescriptors:[NSArray arrayWithObject:sortDescriptor]];
-}
-
-- (MCSharedBill *)getTonightsBillFromParentContext
-{
-    NSLog(@"getTonightsBillFromParentContext is not working.");
-    __block MCSharedBill *tonightsBillFromParentContext;
-    NSString *uuidCopy = [[self uniqueBillId] copy];
-    NSManagedObjectContext *parentContext = [self managedObjectContext];
-    [parentContext performBlockAndWait:^{
-        NSFetchRequest *request = [NSFetchRequest fetchRequestWithEntityName:@"MCSharedBill"];
-        [request setPredicate:[NSPredicate predicateWithFormat:@"uniqueBillId = %@", uuidCopy]];
-        [request setSortDescriptors:[NSArray arrayWithObject:[NSSortDescriptor sortDescriptorWithKey:@"uniqueBillId" ascending:YES]]];
-        NSError *error = nil;
-        NSArray *fetchedBills = [parentContext executeFetchRequest:request error:&error];
-        if (!fetchedBills) {
-            NSLog(@"Error fetching tonightsBill from parentContext: %@", [error localizedDescription]);
-        } else {
-            tonightsBillFromParentContext = [fetchedBills objectAtIndex:0];
-        }
-    }];
-    return tonightsBillFromParentContext;
 }
 
 @end

@@ -28,7 +28,7 @@
     [context deleteObject:eAddress];
 }
 
-+ (MCSharedBill *)fetchSharedBillWithUniqueId:(NSString *)uuid
++ (MCEmailAddress *)fetchEmailAddressWithUniqueId:(NSString *)uuid
 {
     // Create a fetch request for MCSharedBills.
     NSFetchRequest *request = [NSFetchRequest fetchRequestWithEntityName:@"MCSharedBill"];

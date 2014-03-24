@@ -11,6 +11,7 @@
 @interface MCEmailAddress (addons)
 
 + (MCEmailAddress *)addEmailAddressFor:(MCPerson *)person;
++ (MCEmailAddress *)fetchEmailAddressWithUniqueId:(NSString *)uuid;
 + (void)deleteEmailAddress:(MCEmailAddress *)eAddress;
 
 + (MCEmailAddress *)fetchEmailAddressFor:(MCPerson *)person;
