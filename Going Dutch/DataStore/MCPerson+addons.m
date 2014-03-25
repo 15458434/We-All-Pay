@@ -160,13 +160,28 @@
 
 - (void)addOneEmailAddressFromAString:(NSString *)emailAddressAsString
 {
-    MCEmailAddress *newEmailAddress = [MCEmailAddress addEmailAddressFor:self];
-    if ([[self emailAddress] count] == 1) {
-        [newEmailAddress setSelected:[NSNumber numberWithBool:YES]];
-    } else {
-        [newEmailAddress setSelected:[NSNumber numberWithBool:NO]];
+    NSFetchRequest *request = [NSFetchRequest fetchRequestWithEntityName:@"MCEmailAddress"];
+    NSSortDescriptor *sd = [NSSortDescriptor sortDescriptorWithKey:@"emailAddress" ascending:YES];
+    NSArray *sda = [NSArray arrayWithObject:sd];
+    [request setSortDescriptors:sda];
+    NSPredicate *predicate = [NSPredicate predicateWithFormat:@"emailAddress = %@ AND owner = %@", emailAddressAsString, self];
+    [request setPredicate:predicate];
+    NSManagedObjectContext *context = [[[MCWeAllPayStoreController defaultStore] weAllPayStoreDocument] managedObjectContext];
+    NSError *error;
+    NSArray *equalEmailAddresses = [context executeFetchRequest:request error:&error];
+    if (error) {
+        NSLog(@"something went wrong in the search for equal email addresses");
     }
-    [newEmailAddress setEmailAddress:emailAddressAsString];
+    MCEmailAddress *newEmailAddress;
+    if ([equalEmailAddresses count] == 0) {
+        newEmailAddress = [MCEmailAddress addEmailAddressFor:self];
+        if ([[self emailAddress] count] == 1) {
+            [newEmailAddress setSelected:[NSNumber numberWithBool:YES]];
+        } else {
+            [newEmailAddress setSelected:[NSNumber numberWithBool:NO]];
+        }
+        [newEmailAddress setEmailAddress:emailAddressAsString];
+    }
 }
 
 - (NSString *)defaultEmailAddress
@@ -206,10 +221,19 @@
 
 - (void)deleteEmailAddress:(MCEmailAddress *)eAddress
 {
-    if (![[eAddress selected] boolValue]) {
+    if ([[eAddress selected] boolValue]) {
+        NSString *emailAddressString = [eAddress emailAddress];
         [MCEmailAddress deleteEmailAddress:eAddress];
+        MCEmailAddress *newDefault;
+        for (MCEmailAddress *ea in [self emailAddress]) {
+            if (![[ea emailAddress] isEqualToString:emailAddressString]) {
+                newDefault = ea;
+                break;
+            }
+        }
+        [newDefault setSelected:[NSNumber numberWithBool:YES]];
     } else {
-        NSLog(@"Unable to delete a selected emailAddress.");
+        [MCEmailAddress deleteEmailAddress:eAddress];
     }
 }
 
@@ -227,13 +251,23 @@
     } else if ([[self emailAddress] count] == 0) {
         return NO;
     } else {
+        NSUInteger i = 0;
+        for (MCEmailAddress *ea in [self emailAddress]) {
+            if ([ea isDeleted]) {
+                i++;
+            }
+        }
+        if (i == [[self emailAddress] count]) {
+            return NO;
+        }
         return YES;
     }
 }
 
 - (void)deletAllEmailAddresses
 {
-    for (MCEmailAddress *ea in [self emailAddress]) {
+    NSSet *copyOfEmailAddresses = [[self emailAddress] copy];
+    for (MCEmailAddress *ea in copyOfEmailAddresses) {
         [MCEmailAddress deleteEmailAddress:ea];
     }
 }

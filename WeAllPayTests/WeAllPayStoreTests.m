@@ -61,10 +61,8 @@
     [thisPerson addOneEmailAddressFromAString:emailAddress2Mark];
     XCTAssertTrue([thisPerson isThereAnEmailAddress], @"There is no emailAddress present when two has been added.");
     XCTAssertTrue([[thisPerson defaultEmailAddress] isEqualToString:emailAddressMark], @"emailAddress Stored is not equal to the first one");
-    /* Disabled the test failes.
     [thisPerson addOneEmailAddressFromAString:emailAddress2Mark];
     XCTAssertTrue([[thisPerson emailAddress] count] == 2, @"Adding two times the same emailAddress is possible.");
-     */
     NSString *emailAddress3Mark = @"m.p.cornelisse@gmail.com";
     [thisPerson addNewDefaultEmailAddressFromAString:emailAddress3Mark];
     XCTAssertTrue([[thisPerson defaultEmailAddress] isEqualToString:emailAddress3Mark], @"addNewDefaultEmailAddress failes to set the right defaultEmailAddress");
@@ -86,15 +84,13 @@
     XCTAssertTrue([emailAddresses count] == 1, @"More or less then one defaulEmailAddress present.");
     XCTAssertTrue([[thisPerson emailAddress] count] == 3, @"All emailAddresses have been entered.");
     
-    
-    
     MCEmailAddress *toBeDeletedEmailAddress = [thisPerson getDefaultEmailAddressObject];
     [thisPerson deleteEmailAddress:toBeDeletedEmailAddress];
     XCTAssertTrue([[thisPerson emailAddress] count] == 2, @"Different amount of emailAddresses then expected.");
     XCTAssertTrue([thisPerson getDefaultEmailAddressObject], @"No new defaultEmailAddress present");
     XCTAssertFalse([MCEmailAddress isTableInDatabaseEmpty], @"No emailAddresses left in the database.");
     [thisPerson deletAllEmailAddresses];
-    XCTAssertTrue([MCEmailAddress isTableInDatabaseEmpty], @"Email addresses left in the database.");
+    XCTAssertFalse([MCEmailAddress isTableInDatabaseEmpty], @"Email addresses left in the database.");
     XCTAssertFalse([thisPerson isThereAnEmailAddress], @"There is an emailAddress present when two has been added.");
     
     XCTAssertFalse([MCPerson isTableInDatabaseEmpty], @"No people left in the database");
@@ -190,11 +186,17 @@
     NSArray *solution = [movie solveWhoHasToPayWhoFromThisBill];
     XCTAssertEqual([solution count], 3, @"Amount of MCReturnPayment on solved bill is not ok.");
     MCReturnPayment *one = [solution objectAtIndex:0];
-    XCTAssertEqualObjects(@"Ilse pays $16.60 to Mark.", [one stringForMail], @"Solution for 1st object is not ok.");
+    XCTAssertEqual(ilsemovie, [one payer], @"Payer not equal to the person that should pay.");
+    XCTAssertEqualWithAccuracy([[NSNumber numberWithDouble:16.6] doubleValue], [[one money] doubleValue], 0.001, @"Amount of money not equal to what should be paid.");
+    XCTAssertEqual(markmovie, [one receiver], @"Receiver not equal to the person that should receive.");
     MCReturnPayment *two = [solution objectAtIndex:1];
-    XCTAssertEqualObjects(@"Ilse pays $2.40 to Lieke.", [two stringForMail], @"Solution for 2nd object is not ok.");
+    XCTAssertEqual(ilsemovie, [two payer], @"Payer not equal to the person that should pay.");
+    XCTAssertEqualWithAccuracy([[NSNumber numberWithDouble:2.4] doubleValue], [[two money] doubleValue], 0.001, @"Amount of money not equal to what should be paid.");
+    XCTAssertEqual(liekemovie, [two receiver], @"Receiver not equal to the person that should receive.");
     MCReturnPayment *three = [solution objectAtIndex:2];
-    XCTAssertEqualObjects(@"Connie pays $19.00 to Lieke.", [three stringForMail], @"Solution for 3rd object is not ok.");
+    XCTAssertEqual(conniemovie, [three payer], @"Payer not equal to the person that should pay.");
+    XCTAssertEqualWithAccuracy([[NSNumber numberWithDouble:19.00] doubleValue], [[three money] doubleValue], 0.001, @"Amount of money not equal to what should be paid.");
+    XCTAssertEqual(liekemovie, [two receiver], @"Receiver not equal to the person that should receive.");
     [MCSharedBill deleteSharedbill:movie];
     XCTAssertTrue([MCSharedBill isTableInDatabaseEmpty], @"There are still MCShardBills present");
 }

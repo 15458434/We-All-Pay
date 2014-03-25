@@ -25,7 +25,10 @@
 + (void)deleteEmailAddress:(MCEmailAddress *)eAddress
 {
     NSManagedObjectContext *context = [[[MCWeAllPayStoreController defaultStore] weAllPayStoreDocument] managedObjectContext];
+    MCPerson *owner = [eAddress owner];
+    [eAddress setOwner:nil];
     [context deleteObject:eAddress];
+    [context refreshObject:owner mergeChanges:YES];
 }
 
 + (MCEmailAddress *)fetchEmailAddressWithUniqueId:(NSString *)uuid
