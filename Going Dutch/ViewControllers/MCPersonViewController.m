@@ -96,22 +96,22 @@
     }
     [peoplePicker setPeoplePickerDelegate:personReceiver];
     [peoplePicker setEdgesForExtendedLayout:UIRectEdgeNone];
-    [[[peoplePicker viewControllers] objectAtIndex:0] setEdgesForExtendedLayout:UIRectEdgeNone];
+    [[peoplePicker viewControllers][0] setEdgesForExtendedLayout:UIRectEdgeNone];
     [peoplePicker setModalPresentationStyle:UIModalPresentationFormSheet];
     if ([[UIDevice currentDevice] userInterfaceIdiom] == UIUserInterfaceIdiomPad) {
-        [MCTools setAdBannerIfNotPaid:NO forViewController:[[peoplePicker viewControllers] objectAtIndex:0]];
+        [MCTools setAdBannerIfNotPaid:NO forViewController:[peoplePicker viewControllers][0]];
     } else {
-        [MCTools setAdBannerIfNotPaid:YES forViewController:[[peoplePicker viewControllers] objectAtIndex:0]];
+        [MCTools setAdBannerIfNotPaid:YES forViewController:[peoplePicker viewControllers][0]];
     }
     [[self navigationController] presentViewController:peoplePicker animated:YES completion:nil];
 }
 
 - (void)doneEmailPicker:(id)selector
 {
-    MCEmailAddress *newDefaultEmailAddress = [[dataController fetchedObjects] objectAtIndex:[emailSelectionFromAddressBookPickerView selectedRowInComponent:0]];
+    MCEmailAddress *newDefaultEmailAddress = [dataController fetchedObjects][[emailSelectionFromAddressBookPickerView selectedRowInComponent:0]];
     MCEmailAddress *oldDefaulEmailAddress = [MCEmailAddress fetchEmailAddressFor:thisPerson];
-    [oldDefaulEmailAddress setSelected:[NSNumber numberWithBool:NO]];
-    [newDefaultEmailAddress setSelected:[NSNumber numberWithBool:YES]];
+    [oldDefaulEmailAddress setSelected:@NO];
+    [newDefaultEmailAddress setSelected:@YES];
     [emailField setText:[thisPerson defaultEmailAddress]];
     
     [emailField resignFirstResponder];
@@ -205,13 +205,13 @@
 
 - (NSString *)pickerView:(UIPickerView *)pickerView titleForRow:(NSInteger)row forComponent:(NSInteger)component
 {
-    MCEmailAddress *emailAddressObject = [[dataController fetchedObjects] objectAtIndex:row];
+    MCEmailAddress *emailAddressObject = [dataController fetchedObjects][row];
     return [emailAddressObject emailAddress];
 }
 
 - (void)pickerView:(UIPickerView *)pickerView didSelectRow:(NSInteger)row inComponent:(NSInteger)component
 {
-    MCEmailAddress *pickedEmailAddress = [[dataController fetchedObjects] objectAtIndex:row];
+    MCEmailAddress *pickedEmailAddress = [dataController fetchedObjects][row];
     [emailField setText:[pickedEmailAddress emailAddress]];
 }
 
@@ -280,7 +280,7 @@
     NSFetchRequest *request = [NSFetchRequest fetchRequestWithEntityName:@"MCEmailAddress"];
     [request setPredicate:[NSPredicate predicateWithFormat:@"owner = %@", thisPerson]];
     NSSortDescriptor *sd = [NSSortDescriptor sortDescriptorWithKey:@"emailAddress" ascending:YES];
-    [request setSortDescriptors:[NSArray arrayWithObject:sd]];
+    [request setSortDescriptors:@[sd]];
     dataController = [[NSFetchedResultsController alloc] initWithFetchRequest:request managedObjectContext:context sectionNameKeyPath:nil cacheName:nil];
 }
 
@@ -308,7 +308,7 @@
         UIBarButtonItem *doneButton = [[UIBarButtonItem alloc] initWithBarButtonSystemItem:UIBarButtonSystemItemDone
                                                                                     target:self
                                                                                     action:@selector(doneEmailPicker:)];
-        NSArray *buttonArray = [[NSArray alloc] initWithObjects:cancelButton, flexButton, doneButton, nil];
+        NSArray *buttonArray = @[cancelButton, flexButton, doneButton];
         [inputAccessoryPickerView setItems:buttonArray animated:YES];
         if (!emailSelectionFromAddressBookPickerView) {
             emailSelectionFromAddressBookPickerView = [[UIPickerView alloc] init];
@@ -327,7 +327,7 @@
         doneButton = [[UIBarButtonItem alloc] initWithBarButtonSystemItem:UIBarButtonSystemItemDone
                                                                    target:self
                                                                    action:@selector(doneNumberPad:)];
-        [inputAccossoryNumberPad setItems:[[NSArray alloc] initWithObjects:cancelButton, flexButton, doneButton, nil] animated:YES];
+        [inputAccossoryNumberPad setItems:@[cancelButton, flexButton, doneButton] animated:YES];
     }
 }
 
@@ -349,7 +349,7 @@
     [[self navigationController] setToolbarHidden:YES animated:YES];
     
     if (!twoLabelTitleView) {
-        twoLabelTitleView = [[[NSBundle mainBundle] loadNibNamed:@"MCTwoLabelsTitleView" owner:self options:nil] objectAtIndex:0];
+        twoLabelTitleView = [[NSBundle mainBundle] loadNibNamed:@"MCTwoLabelsTitleView" owner:self options:nil][0];
         if (isNew) {
             [[twoLabelTitleView mainLabel] setText:NSLocalizedString(@"NEW_PERSON_HEADER", @"Header in the personView which state new person.")];
             [[twoLabelTitleView subLabel] setText:NSLocalizedString(@"NEW_PERSON_SUBHEADER", @"Sub header in the personView which states add new data")];

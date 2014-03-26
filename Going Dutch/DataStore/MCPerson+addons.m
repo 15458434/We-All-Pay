@@ -54,7 +54,7 @@
 {
     NSFetchRequest *request = [NSFetchRequest fetchRequestWithEntityName:@"MCPerson"];
     NSSortDescriptor *sd = [NSSortDescriptor sortDescriptorWithKey:@"firstName" ascending:YES];
-    NSArray *sda = [NSArray arrayWithObjects:sd, nil];
+    NSArray *sda = @[sd];
     [request setSortDescriptors:sda];
     NSManagedObjectContext *context = [[[MCWeAllPayStoreController defaultStore] weAllPayStoreDocument] managedObjectContext];
     NSError *error;
@@ -162,7 +162,7 @@
 {
     NSFetchRequest *request = [NSFetchRequest fetchRequestWithEntityName:@"MCEmailAddress"];
     NSSortDescriptor *sd = [NSSortDescriptor sortDescriptorWithKey:@"emailAddress" ascending:YES];
-    NSArray *sda = [NSArray arrayWithObject:sd];
+    NSArray *sda = @[sd];
     [request setSortDescriptors:sda];
     NSPredicate *predicate = [NSPredicate predicateWithFormat:@"emailAddress = %@ AND owner = %@", emailAddressAsString, self];
     [request setPredicate:predicate];
@@ -176,9 +176,9 @@
     if ([equalEmailAddresses count] == 0) {
         newEmailAddress = [MCEmailAddress addEmailAddressFor:self];
         if ([[self emailAddress] count] == 1) {
-            [newEmailAddress setSelected:[NSNumber numberWithBool:YES]];
+            [newEmailAddress setSelected:@YES];
         } else {
-            [newEmailAddress setSelected:[NSNumber numberWithBool:NO]];
+            [newEmailAddress setSelected:@NO];
         }
         [newEmailAddress setEmailAddress:emailAddressAsString];
     }
@@ -194,11 +194,11 @@
 {
     MCEmailAddress *oldDefaultEmailAddress = [self getDefaultEmailAddressObject];
     if (oldDefaultEmailAddress) {
-        [oldDefaultEmailAddress setSelected:[NSNumber numberWithBool:NO]];
+        [oldDefaultEmailAddress setSelected:@NO];
     }
     MCEmailAddress *newEmailAddress = [MCEmailAddress addEmailAddressFor:self];
     [newEmailAddress setEmailAddress:newEmailAddressString];
-    [newEmailAddress setSelected:[NSNumber numberWithBool:YES]];
+    [newEmailAddress setSelected:@YES];
 }
 
 - (MCEmailAddress *)getDefaultEmailAddressObject
@@ -207,7 +207,7 @@
     NSPredicate *predicate = [NSPredicate predicateWithFormat:@"owner = %@ AND selected = YES", self];
     NSSortDescriptor *sortDescriptor = [NSSortDescriptor sortDescriptorWithKey:@"uniqueEmailId" ascending:YES];
     [request setPredicate:predicate];
-    [request setSortDescriptors:[NSArray arrayWithObject:sortDescriptor]];
+    [request setSortDescriptors:@[sortDescriptor]];
     NSError *error;
     NSManagedObjectContext *context = [[[MCWeAllPayStoreController defaultStore] weAllPayStoreDocument] managedObjectContext];
     NSArray *emailAddresses = [context executeFetchRequest:request error:&error];
@@ -231,7 +231,7 @@
                 break;
             }
         }
-        [newDefault setSelected:[NSNumber numberWithBool:YES]];
+        [newDefault setSelected:@YES];
     } else {
         [MCEmailAddress deleteEmailAddress:eAddress];
     }

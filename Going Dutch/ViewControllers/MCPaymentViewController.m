@@ -92,7 +92,7 @@
 {
     if ([[tonightsBill peoplePresent] count] > 0) {
         NSInteger row = [personPickerView selectedRowInComponent:0];
-        [thisPayment setPayingPerson:[listOfPeople objectAtIndex:row]];
+        [thisPayment setPayingPerson:listOfPeople[row]];
         [payerView setText:[[thisPayment payingPerson] getFullName]];
         didSomethingChange = YES;
         NSDate *nu = [NSDate date];
@@ -171,13 +171,13 @@
     if (listOfPeople == nil) {
         listOfPeople = [tonightsBill getArrayOfFullNamesOfPeoplePresent];
     }
-    return [[listOfPeople objectAtIndex:row] getFullName];
+    return [listOfPeople[row] getFullName];
 }
 
 - (void)pickerView:(UIPickerView *)pickerView didSelectRow:(NSInteger)row inComponent:(NSInteger)component
 {
-    [payerView setText:[[listOfPeople objectAtIndex:row] getFullName]];
-    [thisPayment setPayingPerson:[listOfPeople objectAtIndex:row]];
+    [payerView setText:[listOfPeople[row] getFullName]];
+    [thisPayment setPayingPerson:listOfPeople[row]];
 }
 
 #pragma mark - PickerViewDataSource
@@ -299,7 +299,7 @@
     
     // Prepare the switch input mechanism.
     [self setSwitchInputField:YES];
-    listOfInputs = [NSArray arrayWithObjects:payerView, itemView, paidView, nil];
+    listOfInputs = @[payerView, itemView, paidView];
     
     NSManagedObjectContext *context = [[[MCWeAllPayStoreController defaultStore] weAllPayStoreDocument] managedObjectContext];
     [[context undoManager] enableUndoRegistration];
@@ -332,7 +332,7 @@
     UIBarButtonItem *doneButtonToolbar = [[UIBarButtonItem alloc] initWithBarButtonSystemItem:UIBarButtonSystemItemDone
                                                                                        target:self
                                                                                        action:@selector(donePersonPicker:)];
-    NSArray *buttonArray = [[NSArray alloc] initWithObjects:cancelButton, flexButton, doneButtonToolbar, nil];
+    NSArray *buttonArray = @[cancelButton, flexButton, doneButtonToolbar];
     [inputAccessoryPickerView setItems:buttonArray animated:YES];
     personPickerView = [[UIPickerView alloc] init];
     [personPickerView setDelegate:self];
@@ -348,7 +348,7 @@
     theDoneButton = [[UIBarButtonItem alloc] initWithBarButtonSystemItem:UIBarButtonSystemItemDone
                                                                   target:self
                                                                   action:@selector(doneNumberPad:)];
-    [inputAccossoryNumberPad setItems:[[NSArray alloc] initWithObjects:cancelButton, flexButton, theDoneButton, nil] animated:YES];
+    [inputAccossoryNumberPad setItems:@[cancelButton, flexButton, theDoneButton] animated:YES];
     [paidView setInputAccessoryView:inputAccossoryNumberPad];
 }
 
@@ -360,7 +360,7 @@
     
     // Navigationbar stuff
     if (!twoLabelTitleView) {
-        twoLabelTitleView = [[[NSBundle mainBundle] loadNibNamed:@"MCTwoLabelsTitleView" owner:self options:nil] objectAtIndex:0];
+        twoLabelTitleView = [[NSBundle mainBundle] loadNibNamed:@"MCTwoLabelsTitleView" owner:self options:nil][0];
         if (isNew) {
             [[twoLabelTitleView mainLabel] setText:NSLocalizedString(@"NEW_PAYMENT_HEADER", @"Header in the paymentView which state new Payment")];
             [[twoLabelTitleView subLabel] setText:NSLocalizedString(@"NEW_PAYMENT_SUBHEADER", @"Sub header in the paymentView which states Add payment data")];

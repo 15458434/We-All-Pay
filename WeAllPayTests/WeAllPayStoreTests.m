@@ -72,8 +72,8 @@
     
     // Select only emailAddresses for person
     NSPredicate *predicate1 = [NSPredicate predicateWithFormat:@"owner = %@", thisPerson];
-    NSPredicate *predicate2 = [NSPredicate predicateWithFormat:@"selected = %@", [NSNumber numberWithBool:YES]];
-    NSPredicate *compoundPredicate = [NSCompoundPredicate andPredicateWithSubpredicates:[NSArray arrayWithObjects:predicate1, predicate2, nil]];
+    NSPredicate *predicate2 = [NSPredicate predicateWithFormat:@"selected = %@", @YES];
+    NSPredicate *compoundPredicate = [NSCompoundPredicate andPredicateWithSubpredicates:@[predicate1, predicate2]];
     [request setPredicate:compoundPredicate];
     NSError *error;
     NSArray *emailAddresses;
@@ -125,7 +125,7 @@
     [thisPerson addNewDefaultEmailAddressFromAString:@"support@markcornelisse.nl"];
     MCPayment *thisPayment = [MCPayment addPayment];
     [thisPayment setDescriptionOfPayment:@"Beer"];
-    [thisPayment setMoney:[NSNumber numberWithDouble:3.25]];
+    [thisPayment setMoney:@3.25];
     XCTAssertFalse([thisPayment hasPayer], @"PayerPresent");
     [thisPayment setPayingPerson:thisPerson];
     XCTAssertTrue([thisPayment hasPayer], @"No payer present on thisPayment");
@@ -162,15 +162,15 @@
     [liekemovie addNewDefaultEmailAddressFromAString:@"liekeNewDefault@markcornelisse.nl"];
     MCPayment *tickets = [movie addPayment];
     [tickets setPayingPerson:markmovie];
-    [tickets setMoney:[NSNumber numberWithDouble:8.90*4]];
+    [tickets setMoney:@(8.90*4)];
     [tickets setDescriptionOfPayment:@"Tickets"];
     MCPayment *drinksAndPopcorn = [movie addPayment];
     [drinksAndPopcorn setPayingPerson:liekemovie];
-    [drinksAndPopcorn setMoney:[NSNumber numberWithDouble:34.40]];
+    [drinksAndPopcorn setMoney:@34.40];
     [drinksAndPopcorn setDescriptionOfPayment:@"Drinks and popcorn for the movie."];
     MCPayment *parking = [movie addPayment];
     [parking setPayingPerson:liekemovie];
-    [parking setMoney:[NSNumber numberWithDouble:6.00]];
+    [parking setMoney:@6.00];
     [parking setDescriptionOfPayment:@"Parking"];
     XCTAssertTrue([movie areTherePeople], @"There are no people when 4 people should have been added?");
     XCTAssertTrue([movie totalAmountOfPeoplePresent] == 4, @"4 people were added, but the returned amount it not 4?");
@@ -185,17 +185,17 @@
     XCTAssertTrue([[movie amountPeopleShouldHavePaid] doubleValue] == (8.90*4+34.40+6.00)/4, @"The average calculated amount is wrong.");
     NSArray *solution = [movie solveWhoHasToPayWhoFromThisBill];
     XCTAssertEqual([solution count], 3, @"Amount of MCReturnPayment on solved bill is not ok.");
-    MCReturnPayment *one = [solution objectAtIndex:0];
+    MCReturnPayment *one = solution[0];
     XCTAssertEqual(ilsemovie, [one payer], @"Payer not equal to the person that should pay.");
-    XCTAssertEqualWithAccuracy([[NSNumber numberWithDouble:16.6] doubleValue], [[one money] doubleValue], 0.001, @"Amount of money not equal to what should be paid.");
+    XCTAssertEqualWithAccuracy([@16.6 doubleValue], [[one money] doubleValue], 0.001, @"Amount of money not equal to what should be paid.");
     XCTAssertEqual(markmovie, [one receiver], @"Receiver not equal to the person that should receive.");
-    MCReturnPayment *two = [solution objectAtIndex:1];
+    MCReturnPayment *two = solution[1];
     XCTAssertEqual(ilsemovie, [two payer], @"Payer not equal to the person that should pay.");
-    XCTAssertEqualWithAccuracy([[NSNumber numberWithDouble:2.4] doubleValue], [[two money] doubleValue], 0.001, @"Amount of money not equal to what should be paid.");
+    XCTAssertEqualWithAccuracy([@2.4 doubleValue], [[two money] doubleValue], 0.001, @"Amount of money not equal to what should be paid.");
     XCTAssertEqual(liekemovie, [two receiver], @"Receiver not equal to the person that should receive.");
-    MCReturnPayment *three = [solution objectAtIndex:2];
+    MCReturnPayment *three = solution[2];
     XCTAssertEqual(conniemovie, [three payer], @"Payer not equal to the person that should pay.");
-    XCTAssertEqualWithAccuracy([[NSNumber numberWithDouble:19.00] doubleValue], [[three money] doubleValue], 0.001, @"Amount of money not equal to what should be paid.");
+    XCTAssertEqualWithAccuracy([@19.00 doubleValue], [[three money] doubleValue], 0.001, @"Amount of money not equal to what should be paid.");
     XCTAssertEqual(liekemovie, [two receiver], @"Receiver not equal to the person that should receive.");
     [MCSharedBill deleteSharedbill:movie];
     XCTAssertTrue([MCSharedBill isTableInDatabaseEmpty], @"There are still MCShardBills present");
@@ -214,12 +214,11 @@
     NSString *markFirstName = @"Mark";
     NSString *markLastName = @"Cornelisse";
     NSString *markDefaultEmailAddress = @"m.p.cornelisse@gmail.com";
-    // NSArray *markEmailAddresses = @[ @"info@markcornelisse.nl" , @"support@markcornelisse.nl" , markDefaultEmailAddress];
-    XCTAssertTrue([sharedbill isPresentWithFirstName:markFirstName withLastName:markLastName andEmailAddress:markDefaultEmailAddress], @"Person is not present.");
+    XCTAssertTrue([sharedbill isPresentWithFirstName:markFirstName andLastName:markLastName andEmailAddress:markDefaultEmailAddress], @"Person is not present.");
     NSString *ilseFirstName = @"Ilse";
     NSString *ilseLastName = @"Béguin";
     NSString *ilseDefaultEmailAddress = @"ilse.beguin@hotmail.com";
-    XCTAssertFalse([sharedbill isPresentWithFirstName:ilseFirstName withLastName:ilseLastName andEmailAddress:ilseDefaultEmailAddress], @"Person is present");
+    XCTAssertFalse([sharedbill isPresentWithFirstName:ilseFirstName andLastName:ilseLastName andEmailAddress:ilseDefaultEmailAddress], @"Person is present.");
 }
 
 @end

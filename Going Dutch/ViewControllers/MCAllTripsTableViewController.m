@@ -41,7 +41,7 @@
 
 - (IBAction)tellAFriendAboutWeAllPay:(id)sender
 {
-    NSArray *dataToShare = [NSArray arrayWithObject:[NSString stringWithString:NSLocalizedString(@"I_FOUND_WE_ALL_PAY", @"Hi, I found this easy to use iPhone app to share a bill amongst friends. It is called We All Pay.")]];
+    NSArray *dataToShare = @[[NSString stringWithString:NSLocalizedString(@"I_FOUND_WE_ALL_PAY", @"Hi, I found this easy to use iPhone app to share a bill amongst friends. It is called We All Pay.")]];
     UIActivityViewController *shareMe = [[UIActivityViewController alloc] initWithActivityItems:dataToShare applicationActivities:nil];
     [self presentViewController:shareMe animated:YES completion:nil];
 }
@@ -52,7 +52,7 @@
 {
     NSManagedObjectContext *context = [[[MCWeAllPayStoreController defaultStore] weAllPayStoreDocument]managedObjectContext];
     NSFetchRequest *request = [NSFetchRequest fetchRequestWithEntityName:@"MCSharedBill"];
-    [request setSortDescriptors:[NSArray arrayWithObject:[NSSortDescriptor sortDescriptorWithKey:@"dateCreated" ascending:NO]]];
+    [request setSortDescriptors:@[[NSSortDescriptor sortDescriptorWithKey:@"dateCreated" ascending:NO]]];
     [request setRelationshipKeyPathsForPrefetching:@[ @"payments", @"peoplePresent" ]];
     dataController = [[NSFetchedResultsController alloc] initWithFetchRequest:request
                                                          managedObjectContext:context
@@ -142,7 +142,7 @@
     // Register this nib that contains the cell.
     [[ self tableView] registerNib:nib forCellReuseIdentifier:@"MCAllTripsTableViewCell"];
     
-    emptyMessage = [[[NSBundle mainBundle] loadNibNamed:@"MCTableEmptyMessage" owner:self options:nil] objectAtIndex:0];
+    emptyMessage = [[NSBundle mainBundle] loadNibNamed:@"MCTableEmptyMessage" owner:self options:nil][0];
     [[emptyMessage bigMessage] setAlpha:0.0];
     [[self tableView] setBackgroundView:emptyMessage];
     
@@ -157,11 +157,11 @@
     
     // Set the titleView.
     if (!titleView) {
-        titleView = [[[NSBundle mainBundle] loadNibNamed:@"MCTwoLabelsTitleView" owner:self options:nil] objectAtIndex:0];
+        titleView = [[NSBundle mainBundle] loadNibNamed:@"MCTwoLabelsTitleView" owner:self options:nil][0];
         [[self navigationItem] setTitleView:titleView];
     }
     [[titleView mainLabel] setText:@"We All Pay"];
-    [[titleView subLabel] setText:[NSString stringWithFormat:@"%@ build %@", [[[NSBundle mainBundle] infoDictionary] objectForKey:@"CFBundleShortVersionString"], [[[NSBundle mainBundle] infoDictionary] objectForKey:@"CFBundleVersion"]]];
+    [[titleView subLabel] setText:[NSString stringWithFormat:@"%@ build %@", [[NSBundle mainBundle] infoDictionary][@"CFBundleShortVersionString"], [[NSBundle mainBundle] infoDictionary][@"CFBundleVersion"]]];
     if (SYSTEM_VERSION_LESS_THAN(@"7.0")) {
         [[titleView mainLabel] setTextColor:[UIColor whiteColor]];
         [[titleView subLabel] setTextColor:[UIColor whiteColor]];
@@ -236,25 +236,25 @@
     switch(type) {
             
         case NSFetchedResultsChangeInsert:
-            [[self tableView] insertRowsAtIndexPaths:[NSArray arrayWithObject:newIndexPath]
+            [[self tableView] insertRowsAtIndexPaths:@[newIndexPath]
                                     withRowAnimation:UITableViewRowAnimationFade];
             [self setEmptyMessage];
             break;
             
         case NSFetchedResultsChangeDelete:
-            [[self tableView] deleteRowsAtIndexPaths:[NSArray arrayWithObject:indexPath]
+            [[self tableView] deleteRowsAtIndexPaths:@[indexPath]
                                     withRowAnimation:UITableViewRowAnimationFade];
             [self setEmptyMessage];
             break;
             
         case NSFetchedResultsChangeUpdate:
-            [[self tableView] reloadRowsAtIndexPaths:[NSArray arrayWithObject:indexPath] withRowAnimation:UITableViewRowAnimationAutomatic];
+            [[self tableView] reloadRowsAtIndexPaths:@[indexPath] withRowAnimation:UITableViewRowAnimationAutomatic];
             break;
             
         case NSFetchedResultsChangeMove:
-            [[self tableView] deleteRowsAtIndexPaths:[NSArray arrayWithObject:indexPath]
+            [[self tableView] deleteRowsAtIndexPaths:@[indexPath]
                                     withRowAnimation:UITableViewRowAnimationFade];
-            [[self tableView] insertRowsAtIndexPaths:[NSArray arrayWithObject:newIndexPath]
+            [[self tableView] insertRowsAtIndexPaths:@[newIndexPath]
                                     withRowAnimation:UITableViewRowAnimationFade];
             break;
     }
@@ -269,7 +269,7 @@
 
 - (NSInteger)tableView:(UITableView *)tableView numberOfRowsInSection:(NSInteger)section
 {
-    return [[[dataController sections] objectAtIndex:section] numberOfObjects];
+    return [[dataController sections][section] numberOfObjects];
 }
 
 - (UITableViewCell *)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath

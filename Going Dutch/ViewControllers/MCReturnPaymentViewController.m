@@ -84,7 +84,7 @@
 - (void)viewWillAppear:(BOOL)animated
 {
     if (!twoLabelTitleView) {
-        twoLabelTitleView = [[[NSBundle mainBundle] loadNibNamed:@"MCTwoLabelsTitleView" owner:self options:nil] objectAtIndex:0];
+        twoLabelTitleView = [[NSBundle mainBundle] loadNibNamed:@"MCTwoLabelsTitleView" owner:self options:nil][0];
         [[self navigationItem] setTitleView:twoLabelTitleView];
     }
     NSNumber *averagePay = [tonightsBill amountPeopleShouldHavePaid];
@@ -130,7 +130,7 @@
         }
     }
     
-    emptyMessage = [[[NSBundle mainBundle] loadNibNamed:@"MCTableEmptyMessage" owner:self options:nil] objectAtIndex:0];
+    emptyMessage = [[NSBundle mainBundle] loadNibNamed:@"MCTableEmptyMessage" owner:self options:nil][0];
     [[self tableView] setBackgroundView:emptyMessage];
     [[emptyMessage bigMessage] setText:NSLocalizedString(@"RETURNPAYMENTSVIEW_NOPAYMENTS", @"Please add payments and/or people if you want a solution on who owes who.")];
     [[emptyMessage bigMessage] setAlpha:0.0];
@@ -190,7 +190,7 @@
         [[self presentedViewController] dismissViewControllerAnimated:YES completion:nil];
     } else if (result == MFMailComposeResultSent) {
         [[self presentedViewController] dismissViewControllerAnimated:YES completion:^{
-            [tonightsBill setHasTheMailBeenSent:[NSNumber numberWithBool:YES]];
+            [tonightsBill setHasTheMailBeenSent:@YES];
         }];
     } else if (result == MFMailComposeResultSaved) {
         [[self presentedViewController] dismissViewControllerAnimated:YES completion:nil];
@@ -213,7 +213,7 @@
 
 - (UITableViewCell *)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath
 {
-    MCReturnPayment *thisCellsReturnPayment = [paymentsAfterwards objectAtIndex:[indexPath row]];
+    MCReturnPayment *thisCellsReturnPayment = paymentsAfterwards[[indexPath row]];
     MCReturnPaymentTableViewCell *returnPaymentCell = [tableView dequeueReusableCellWithIdentifier:@"MCReturnPaymentTableViewCell"];
     NSNumberFormatter *nf = [[NSNumberFormatter alloc] init];
     [nf setNumberStyle:NSNumberFormatterCurrencyStyle];

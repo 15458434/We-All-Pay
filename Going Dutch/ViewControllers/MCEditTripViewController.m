@@ -43,14 +43,14 @@
     }
     [peoplePicker setPeoplePickerDelegate:personReceiver];
     [peoplePicker setEdgesForExtendedLayout:UIRectEdgeNone];
-    [[[peoplePicker viewControllers] objectAtIndex:0] setEdgesForExtendedLayout:UIRectEdgeNone];
+    [[peoplePicker viewControllers][0] setEdgesForExtendedLayout:UIRectEdgeNone];
     [peoplePicker setModalPresentationStyle:UIModalPresentationFormSheet];
     
     // Show adBanner on the iPhone not on the iPad.
     if ([[UIDevice currentDevice] userInterfaceIdiom] == UIUserInterfaceIdiomPad) {
-        [MCTools setAdBannerIfNotPaid:NO forViewController:[[peoplePicker viewControllers] objectAtIndex:0]];
+        [MCTools setAdBannerIfNotPaid:NO forViewController:[peoplePicker viewControllers][0]];
     } else {
-        [MCTools setAdBannerIfNotPaid:NO forViewController:[[peoplePicker viewControllers] objectAtIndex:0]];
+        [MCTools setAdBannerIfNotPaid:NO forViewController:[peoplePicker viewControllers][0]];
     }
     [[self navigationController] presentViewController:peoplePicker animated:YES completion:nil];
 }
@@ -100,7 +100,7 @@
     // How to sort the data.
     [request setRelationshipKeyPathsForPrefetching:@[ @"emailAddress", @"payments", @"sharedBill" ]];
     NSSortDescriptor *sortDescriptor = [NSSortDescriptor sortDescriptorWithKey:@"dateCreated" ascending:NO];
-    NSArray *sortDescriptorArray = [NSArray arrayWithObject:sortDescriptor];
+    NSArray *sortDescriptorArray = @[sortDescriptor];
     [request setSortDescriptors:sortDescriptorArray];
     // Select only people from tonightsBill.
     NSPredicate *predicate = [NSPredicate predicateWithFormat:@"ANY sharedBill = %@", tonightsBill];
@@ -174,7 +174,7 @@
     UINib *nib = [UINib nibWithNibName:@"MCPersonTableViewCell" bundle:nil];
     [[self tableView] registerNib:nib forCellReuseIdentifier:@"MCPersonTableViewCell"];
     
-    emptyMessage = [[[NSBundle mainBundle] loadNibNamed:@"MCTableEmptyMessage" owner:self options:nil] objectAtIndex:0];
+    emptyMessage = [[NSBundle mainBundle] loadNibNamed:@"MCTableEmptyMessage" owner:self options:nil][0];
     [[emptyMessage bigMessage] setText:NSLocalizedString(@"PEOPLE_LIST_EMPTY_MESSAGE", @"Press \"add Person\" to add a person who you'd like to share this bill with.")];
     if ([[dataController fetchedObjects] count] > 0) {
         [[emptyMessage bigMessage] setAlpha:0.0];
@@ -329,26 +329,26 @@
     switch(type) {
             
         case NSFetchedResultsChangeInsert:
-            [[self tableView] insertRowsAtIndexPaths:[NSArray arrayWithObject:newIndexPath]
+            [[self tableView] insertRowsAtIndexPaths:@[newIndexPath]
                                     withRowAnimation:UITableViewRowAnimationFade];
             [self setEmptyMessage];
             break;
             
         case NSFetchedResultsChangeDelete:
-            [[self tableView] deleteRowsAtIndexPaths:[NSArray arrayWithObject:indexPath]
+            [[self tableView] deleteRowsAtIndexPaths:@[indexPath]
                                     withRowAnimation:UITableViewRowAnimationFade];
             [self setEmptyMessage];
             break;
             
         case NSFetchedResultsChangeUpdate:
-            [[self tableView] reloadRowsAtIndexPaths:[NSArray arrayWithObject:indexPath] withRowAnimation:UITableViewRowAnimationAutomatic];
+            [[self tableView] reloadRowsAtIndexPaths:@[indexPath] withRowAnimation:UITableViewRowAnimationAutomatic];
             didSomethingChange = YES;
             break;
             
         case NSFetchedResultsChangeMove:
-            [[self tableView] deleteRowsAtIndexPaths:[NSArray arrayWithObject:indexPath]
+            [[self tableView] deleteRowsAtIndexPaths:@[indexPath]
                                     withRowAnimation:UITableViewRowAnimationFade];
-            [[self tableView] insertRowsAtIndexPaths:[NSArray arrayWithObject:newIndexPath]
+            [[self tableView] insertRowsAtIndexPaths:@[newIndexPath]
                                     withRowAnimation:UITableViewRowAnimationFade];
             break;
     }
@@ -364,7 +364,7 @@
 - (NSInteger)tableView:(UITableView *)tableView numberOfRowsInSection:(NSInteger)section
 {
     // Return the number of rows in the section.
-    return [[[dataController sections] objectAtIndex:section] numberOfObjects];
+    return [[dataController sections][section] numberOfObjects];
 }
 
 - (UITableViewCell *)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath
@@ -446,26 +446,26 @@
 - (void)prepareForSegue:(UIStoryboardSegue *)segue sender:(id)sender
 {
     MCPerson *thePerson;
-    if ([[[[segue destinationViewController] viewControllers] objectAtIndex:0] respondsToSelector:@selector(setChangeFlagDelegate:)]) {
-        [[[[segue destinationViewController] viewControllers] objectAtIndex:0] setChangeFlagDelegate:self];
+    if ([[[segue destinationViewController] viewControllers][0] respondsToSelector:@selector(setChangeFlagDelegate:)]) {
+        [[[segue destinationViewController] viewControllers][0] setChangeFlagDelegate:self];
     }
-    if ([[[[segue destinationViewController] viewControllers] objectAtIndex:0] respondsToSelector:@selector(setTonightsBill:)]) {
-        [[[[segue destinationViewController] viewControllers] objectAtIndex:0] setTonightsBill:tonightsBill];
+    if ([[[segue destinationViewController] viewControllers][0] respondsToSelector:@selector(setTonightsBill:)]) {
+        [[[segue destinationViewController] viewControllers][0] setTonightsBill:tonightsBill];
     }
     NSIndexPath *indexPathOfSelectedRow = [[self tableView] indexPathForSelectedRow];
     if (indexPathOfSelectedRow) {
         thePerson = [dataController objectAtIndexPath:indexPathOfSelectedRow];
-        if ([[[[segue destinationViewController] viewControllers] objectAtIndex:0] respondsToSelector:@selector(setIsNew:)]) {
-            [[[[segue destinationViewController] viewControllers] objectAtIndex:0] setIsNew:NO];
+        if ([[[segue destinationViewController] viewControllers][0] respondsToSelector:@selector(setIsNew:)]) {
+            [[[segue destinationViewController] viewControllers][0] setIsNew:NO];
         }
     } else {
-        if ([[[[segue destinationViewController] viewControllers] objectAtIndex:0] respondsToSelector:@selector(setIsNew:)]) {
-            [[[[segue destinationViewController] viewControllers] objectAtIndex:0] setIsNew:YES];
+        if ([[[segue destinationViewController] viewControllers][0] respondsToSelector:@selector(setIsNew:)]) {
+            [[[segue destinationViewController] viewControllers][0] setIsNew:YES];
         }
         [doneButton setEnabled:YES];
     }
-    if ([[[[segue destinationViewController] viewControllers] objectAtIndex:0] respondsToSelector:@selector(setThisPerson:)]) {
-        [[[[segue destinationViewController] viewControllers] objectAtIndex:0] setThisPerson:thePerson];
+    if ([[[segue destinationViewController] viewControllers][0] respondsToSelector:@selector(setThisPerson:)]) {
+        [[[segue destinationViewController] viewControllers][0] setThisPerson:thePerson];
     }
     
 }

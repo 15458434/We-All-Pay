@@ -36,7 +36,7 @@
     NSUInteger index = [listOfInputs indexOfObject:currentInput];
     index++;
     if (index < [listOfInputs count] && switchInputField) {
-        return [listOfInputs objectAtIndex:index];
+        return listOfInputs[index];
     } else {
         return nil;
     }

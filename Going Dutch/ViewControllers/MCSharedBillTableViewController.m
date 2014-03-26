@@ -79,7 +79,7 @@
     [request setRelationshipKeyPathsForPrefetching:@[ @"payingPerson" ]];
     // How to sort the data.
     NSSortDescriptor *sortDescriptor = [NSSortDescriptor sortDescriptorWithKey:@"dateCreated" ascending:NO];
-    NSArray *sortDescriptorArray = [NSArray arrayWithObject:sortDescriptor];
+    NSArray *sortDescriptorArray = @[sortDescriptor];
     [request setSortDescriptors:sortDescriptorArray];
     // Select only people from tonightsBill.
     NSPredicate *predicate = [NSPredicate predicateWithFormat:@"onWhichBill = %@", tonightsBill];
@@ -149,7 +149,7 @@
     UINib *nib = [UINib nibWithNibName:@"MCPaymentTableViewCell" bundle:nil];
     [[self tableView] registerNib:nib forCellReuseIdentifier:@"MCPaymentTableViewCell"];
     
-    emptyMessage = [[[NSBundle mainBundle] loadNibNamed:@"MCTableEmptyMessage" owner:self options:nil] objectAtIndex:0];
+    emptyMessage = [[NSBundle mainBundle] loadNibNamed:@"MCTableEmptyMessage" owner:self options:nil][0];
     [[self tableView] setBackgroundView:emptyMessage];
     [[emptyMessage bigMessage] setText:NSLocalizedString(@"EMPTY_PAYMENT_LIST_MESSAGE", @"Press \"add payment\" to add a payment to this event.")];
     [[emptyMessage bigMessage] setTextColor:[UIColor lightGrayColor]];
@@ -273,25 +273,25 @@
     switch(type) {
             
         case NSFetchedResultsChangeInsert:
-            [[self tableView] insertRowsAtIndexPaths:[NSArray arrayWithObject:newIndexPath]
+            [[self tableView] insertRowsAtIndexPaths:@[newIndexPath]
                                     withRowAnimation:UITableViewRowAnimationFade];
             [self setEmptyMessage];
             break;
             
         case NSFetchedResultsChangeDelete:
-            [[self tableView] deleteRowsAtIndexPaths:[NSArray arrayWithObject:indexPath]
+            [[self tableView] deleteRowsAtIndexPaths:@[indexPath]
                                     withRowAnimation:UITableViewRowAnimationFade];
             [self setEmptyMessage];
             break;
             
         case NSFetchedResultsChangeUpdate:
-            [[self tableView] reloadRowsAtIndexPaths:[NSArray arrayWithObject:indexPath] withRowAnimation:UITableViewRowAnimationAutomatic];
+            [[self tableView] reloadRowsAtIndexPaths:@[indexPath] withRowAnimation:UITableViewRowAnimationAutomatic];
             break;
             
         case NSFetchedResultsChangeMove:
-            [[self tableView] deleteRowsAtIndexPaths:[NSArray arrayWithObject:indexPath]
+            [[self tableView] deleteRowsAtIndexPaths:@[indexPath]
                                     withRowAnimation:UITableViewRowAnimationFade];
-            [[self tableView] insertRowsAtIndexPaths:[NSArray arrayWithObject:newIndexPath]
+            [[self tableView] insertRowsAtIndexPaths:@[newIndexPath]
                                     withRowAnimation:UITableViewRowAnimationFade];
             break;
     }
@@ -306,7 +306,7 @@
 
 - (NSInteger)tableView:(UITableView *)tableView numberOfRowsInSection:(NSInteger)section
 {
-    return [[[dataController sections] objectAtIndex:section] numberOfObjects];
+    return [[dataController sections][section] numberOfObjects];
 }
 
 - (UITableViewCell *)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath
@@ -400,28 +400,28 @@
 
 - (void)prepareForSegue:(UIStoryboardSegue *)segue sender:(id)sender
 {
-    if ([[[[segue destinationViewController] viewControllers] objectAtIndex:0] respondsToSelector:@selector(setTonightsBill:)]) {
-        [[[[segue destinationViewController] viewControllers] objectAtIndex:0] setTonightsBill:tonightsBill];
+    if ([[[segue destinationViewController] viewControllers][0] respondsToSelector:@selector(setTonightsBill:)]) {
+        [[[segue destinationViewController] viewControllers][0] setTonightsBill:tonightsBill];
     }
-    if ([[[[segue destinationViewController] viewControllers] objectAtIndex:0] respondsToSelector:@selector(setSendMailObject:)]) {
-        [[[[segue destinationViewController] viewControllers] objectAtIndex:0] setSendMailObject:[self mailDelegate]];
+    if ([[[segue destinationViewController] viewControllers][0] respondsToSelector:@selector(setSendMailObject:)]) {
+        [[[segue destinationViewController] viewControllers][0] setSendMailObject:[self mailDelegate]];
     }
 
-    if ([[[[segue destinationViewController] viewControllers] objectAtIndex:0] respondsToSelector:@selector(setThisPayment:)]) {
+    if ([[[segue destinationViewController] viewControllers][0] respondsToSelector:@selector(setThisPayment:)]) {
         MCPayment *thePayment;
         NSIndexPath *indexPathOfSelectedRow = [[self tableView] indexPathForSelectedRow];
         if (indexPathOfSelectedRow) {
             thePayment = [dataController objectAtIndexPath:indexPathOfSelectedRow];
         }
-        if ([[[[segue destinationViewController] viewControllers] objectAtIndex:0] respondsToSelector:@selector(setIsNew:)]) {
+        if ([[[segue destinationViewController] viewControllers][0] respondsToSelector:@selector(setIsNew:)]) {
             if (thePayment) {
-                [[[[segue destinationViewController] viewControllers] objectAtIndex:0] setIsNew:YES];
+                [[[segue destinationViewController] viewControllers][0] setIsNew:YES];
             } else {
-                [[[[segue destinationViewController] viewControllers] objectAtIndex:0] setIsNew:NO];
+                [[[segue destinationViewController] viewControllers][0] setIsNew:NO];
             }
         }
-        [[[[segue destinationViewController] viewControllers] objectAtIndex:0] setThisPayment:thePayment];
-        [[[[segue destinationViewController] viewControllers] objectAtIndex:0] setDelegate:self];
+        [[[segue destinationViewController] viewControllers][0] setThisPayment:thePayment];
+        [[[segue destinationViewController] viewControllers][0] setDelegate:self];
     }
 }
 

@@ -46,7 +46,7 @@
         // There was an error.
         return nil;
     } else {
-        return [sharedBills objectAtIndex:0];
+        return sharedBills[0];
     }
 }
 
@@ -54,7 +54,7 @@
 {
     NSFetchRequest *request = [NSFetchRequest fetchRequestWithEntityName:@"MCEmailAddress"];
     NSSortDescriptor *sd = [NSSortDescriptor sortDescriptorWithKey:@"emailAddress" ascending:YES];
-    NSArray *sda = [NSArray arrayWithObjects:sd, nil];
+    NSArray *sda = @[sd];
     [request setSortDescriptors:sda];
     NSManagedObjectContext *context = [[[MCWeAllPayStoreController defaultStore] weAllPayStoreDocument] managedObjectContext];
     NSError *error;
@@ -77,8 +77,8 @@
     
     // Select only emailAddresses for person
     NSPredicate *predicate1 = [NSPredicate predicateWithFormat:@"owner = %@", person];
-    NSPredicate *predicate2 = [NSPredicate predicateWithFormat:@"selected = %@", [NSNumber numberWithBool:YES]];
-    NSPredicate *compoundPredicate = [NSCompoundPredicate andPredicateWithSubpredicates:[NSArray arrayWithObjects:predicate1, predicate2, nil]];
+    NSPredicate *predicate2 = [NSPredicate predicateWithFormat:@"selected = %@", @YES];
+    NSPredicate *compoundPredicate = [NSCompoundPredicate andPredicateWithSubpredicates:@[predicate1, predicate2]];
     [request setPredicate:compoundPredicate];
     
     NSError *error;
@@ -92,7 +92,7 @@
         if ([emailAddresses count] == 0) {
             return nil;
         } else {
-            return [emailAddresses objectAtIndex:0];
+            return emailAddresses[0];
         }
     }
 }

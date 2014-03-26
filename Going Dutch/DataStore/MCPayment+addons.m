@@ -46,7 +46,7 @@
         // There was an error.
         return nil;
     } else {
-        return [payments objectAtIndex:0];
+        return payments[0];
     }
 }
 
@@ -54,7 +54,7 @@
 {
     NSFetchRequest *request = [NSFetchRequest fetchRequestWithEntityName:@"MCPayment"];
     NSSortDescriptor *sd = [NSSortDescriptor sortDescriptorWithKey:@"money" ascending:YES];
-    NSArray *sda = [NSArray arrayWithObject:sd];
+    NSArray *sda = @[sd];
     [request setSortDescriptors:sda];
     NSError *error;
     NSManagedObjectContext *context = [[[MCWeAllPayStoreController defaultStore] weAllPayStoreDocument] managedObjectContext];
