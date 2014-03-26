@@ -201,6 +201,25 @@
     XCTAssertTrue([MCSharedBill isTableInDatabaseEmpty], @"There are still MCShardBills present");
 }
 
-
+- (void)testPersonExistenceOnSharedBill
+{
+    MCSharedBill *sharedbill = [MCSharedBill addSharedBill];
+    MCPerson *mark = [sharedbill addPerson];
+    [mark setFirstName:@"Mark"];
+    [mark setLastName:@"Cornelisse"];
+    [mark addOneEmailAddressFromAString:@"info@markcornelisse.nl"];
+    [mark addOneEmailAddressFromAString:@"support@markcornelisse.nl"];
+    [mark addNewDefaultEmailAddressFromAString:@"m.p.cornelisse@gmail.com"];
+    XCTAssertEqualObjects(@"m.p.cornelisse@gmail.com", [mark defaultEmailAddress], @"Default emailAddress is not right.");
+    NSString *markFirstName = @"Mark";
+    NSString *markLastName = @"Cornelisse";
+    NSString *markDefaultEmailAddress = @"m.p.cornelisse@gmail.com";
+    // NSArray *markEmailAddresses = @[ @"info@markcornelisse.nl" , @"support@markcornelisse.nl" , markDefaultEmailAddress];
+    XCTAssertTrue([sharedbill isPresentWithFirstName:markFirstName withLastName:markLastName andEmailAddress:markDefaultEmailAddress], @"Person is not present.");
+    NSString *ilseFirstName = @"Ilse";
+    NSString *ilseLastName = @"Béguin";
+    NSString *ilseDefaultEmailAddress = @"ilse.beguin@hotmail.com";
+    XCTAssertFalse([sharedbill isPresentWithFirstName:ilseFirstName withLastName:ilseLastName andEmailAddress:ilseDefaultEmailAddress], @"Person is present");
+}
 
 @end

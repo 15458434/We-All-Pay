@@ -142,6 +142,30 @@
     return newPerson;
 }
 
+- (BOOL)isPresentWithFirstName:(NSString *)firstName withLastName:(NSString *)lastName andEmailAddress:(NSString *)emailAddress
+{
+    NSFetchRequest *request = [NSFetchRequest fetchRequestWithEntityName:@"MCPerson"];
+    NSSortDescriptor *sd1 = [NSSortDescriptor sortDescriptorWithKey:@"firstName" ascending:YES];
+    NSSortDescriptor *sd2 = [NSSortDescriptor sortDescriptorWithKey:@"lastName" ascending:YES];
+    NSArray *sda = @[sd1,sd2];
+    [request setSortDescriptors:sda];
+    // NSPredicate *predicate = [NSPredicate predicateWithFormat:@"firstName = %@ AND lastName = %@ AND ANY emailAddess.emailAddress = %@", firstName, lastName, emailAddress];
+    NSPredicate *predicate = [NSPredicate predicateWithFormat:@"ANY sharedBill = %@ AND firstName = %@ AND lastName = %@ AND ANY emailAddress.emailAddress = %@", self, firstName, lastName, emailAddress];
+    [request setPredicate:predicate];
+    NSError *error;
+    NSArray *result = [[self managedObjectContext] executeFetchRequest:request error:&error];
+    if (!result) {
+        NSLog(@"Error checking if person is present: %@", [error localizedDescription]);
+        return NO;
+    } else {
+        if ([result count] == 0) {
+            return NO;
+        } else {
+            return YES;
+        }
+    }
+}
+
 - (BOOL)areTherePeople
 {
     if ([[self peoplePresent] count] == 0) {

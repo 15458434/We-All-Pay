@@ -22,6 +22,7 @@
 - (MCPayment *)addPayment;
 
 - (MCPerson *)addPerson;
+- (BOOL)isPresentWithFirstName:(NSString *)firstName withLastName:(NSString *)lastName andEmailAddress:(NSString *)emailAddress;
 - (BOOL)areTherePeople;
 - (NSUInteger)totalAmountOfPeoplePresent;
 - (NSUInteger)totalAmountOfPeopleWhoHavePaid;
