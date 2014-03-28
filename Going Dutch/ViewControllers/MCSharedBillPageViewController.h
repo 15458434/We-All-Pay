@@ -8,6 +8,8 @@
 
 #import <UIKit/UIKit.h>
 
+#import "MCTonightsBillTransfer.h"
+
 @class MCSharedBill;
 
 @class MCEditTripViewController;
@@ -29,7 +31,7 @@
     NSUInteger newPageNumber;
 }
 
-@property (nonatomic, strong) MCSharedBill *tonightsBill;
+// @property (nonatomic, strong) MCSharedBill *tonightsBill;
 
 - (IBAction)toggleEdit:(id)sender;
 - (IBAction)solveBill:(id)sender;

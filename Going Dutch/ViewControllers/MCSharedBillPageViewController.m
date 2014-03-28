@@ -27,8 +27,6 @@
 
 @implementation MCSharedBillPageViewController
 
-@synthesize tonightsBill;
-
 #pragma mark - actions
 
 - (IBAction)toggleEdit:(id)sender
@@ -60,7 +58,7 @@
 {
     UIStoryboard *storyboard = [UIStoryboard storyboardWithName:@"Main-Iphone" bundle:nil];
     sharedBillTableViewController = [storyboard instantiateViewControllerWithIdentifier:@"MCSharedBillTableViewController"];
-    [sharedBillTableViewController setTonightsBill:tonightsBill];
+    [sharedBillTableViewController setTonightsBill:[self tonightsBill]];
     [sharedBillTableViewController setMailDelegate:self];
     [[self pageViewIndicator] setCurrentPage:1];
     [[self titleLabel] setText:NSLocalizedString(@"PAYMENTS_PAGEVIEWCONTROLLER", @"Payments")];
@@ -74,7 +72,7 @@
 {
     UIStoryboard *storyboard = [UIStoryboard storyboardWithName:@"Main-Iphone" bundle:nil];
     editTripTableViewController = [storyboard instantiateViewControllerWithIdentifier:@"MCEditTripViewController"];
-    [editTripTableViewController setTonightsBill:tonightsBill];
+    [editTripTableViewController setTonightsBill:[self tonightsBill]];
     NSArray *views = @[editTripTableViewController];
     [[self pageViewIndicator] setCurrentPage:0];
     [[self titleLabel] setText:NSLocalizedString(@"PEOPLE_PRESENT_PAGEVIEWCONTROLLER", @"People present")];
@@ -91,7 +89,7 @@
     [mailViewController setModalPresentationStyle:UIModalPresentationFormSheet];
     [[mailViewController viewControllers][0] setEdgesForExtendedLayout:UIRectEdgeNone];
     NSArray *sda = @[[NSSortDescriptor sortDescriptorWithKey:@"dateCreated" ascending:YES]];
-    NSArray *allPeople = [[tonightsBill peoplePresent] sortedArrayUsingDescriptors:sda];
+    NSArray *allPeople = [[[self tonightsBill] peoplePresent] sortedArrayUsingDescriptors:sda];
     // Create a list of all email addresses
     NSMutableArray *listOfMailAddresses = [[NSMutableArray alloc] init];
     for (MCPerson *p in allPeople) {
@@ -102,27 +100,27 @@
     // Set the mail header.
     [mailViewController setToRecipients:listOfMailAddresses];
     NSString *subject1 = NSLocalizedString(@"EMAIL_SUBJECT_PART_ONE", @"Bill overview of our trip to %@");
-    [mailViewController setSubject:[[NSString alloc] initWithFormat:@"%@ %@.", subject1, [tonightsBill tripName]]];
+    [mailViewController setSubject:[[NSString alloc] initWithFormat:@"%@ %@.", subject1, [[self tonightsBill] tripName]]];
     
     // Generate the text for the email.
     NSMutableString *mailBody = [[NSMutableString alloc] init];
     NSNumberFormatter *nf = [[NSNumberFormatter alloc] init];
     [nf setNumberStyle:NSNumberFormatterCurrencyStyle];
-    [mailBody appendFormat:@"%@ %@,\n", NSLocalizedString(@"EMAIL_DEAR", @"Just Dear as in \"Dear Mark\""), [tonightsBill stringOfApproxPeoplePresent]];
+    [mailBody appendFormat:@"%@ %@,\n", NSLocalizedString(@"EMAIL_DEAR", @"Just Dear as in \"Dear Mark\""), [[self tonightsBill] stringOfApproxPeoplePresent]];
     [mailBody appendFormat:@"\n"];
     NSString *intro1 = NSLocalizedString(@"EMAIL_INTRO_PART_ONE", @"From a total of \"$ 20,45\", which was spend on our last trip to \"Movies\". We all have to pay an equal share of \"$6,82\".");
     NSString *intro2 = NSLocalizedString(@"EMAIL_INTRO_PART_TWO", @"From a total of \"$ 20,45\", which was spend on our last trip to \"Movies\". We all have to pay an equal share of \"$6,82\".");
     NSString *intro3 = NSLocalizedString(@"EMAIL_INTRO_PART_THREE", @"From a total of \"$ 20,45\", which was spend on our last trip to \"Movies\". We all have to pay an equal share of \"$6,82\".");
-    [mailBody appendFormat:@"%@ %@, %@ %@. %@ %@.\n", intro1, [nf stringFromNumber:[tonightsBill totalSumOfMoneyOfThisSharedBill]], intro2,[tonightsBill tripName], intro3, [nf stringFromNumber:[tonightsBill amountPeopleShouldHavePaid]]];
+    [mailBody appendFormat:@"%@ %@, %@ %@. %@ %@.\n", intro1, [nf stringFromNumber:[[self tonightsBill] totalSumOfMoneyOfThisSharedBill]], intro2,[[self tonightsBill] tripName], intro3, [nf stringFromNumber:[[self tonightsBill] amountPeopleShouldHavePaid]]];
     [mailBody appendFormat:@"\n"];
-    if ([tonightsBill totalAmountOfPeopleWhoHavePaid] == 0) {
+    if ([[self tonightsBill] totalAmountOfPeopleWhoHavePaid] == 0) {
         [mailBody appendFormat:@"%@\n", NSLocalizedString(@"EMAIL_NOBODY_HAS_PAID", @"The message that nobody has paid so far")];
-    } else if ([tonightsBill totalAmountOfPeopleWhoHavePaid] == 1) {
+    } else if ([[self tonightsBill] totalAmountOfPeopleWhoHavePaid] == 1) {
         [mailBody appendFormat:@"%@:\n", NSLocalizedString(@"EMAIL_ONE_PERSON_HAS_PAID", @"The person who has payed")];
     } else {
         [mailBody appendFormat:@"%@:\n", NSLocalizedString(@"EMAIL_MULTIPLE_PEOPLE_HAVE_PAID", @"The people who have paid are")];
     }
-    NSArray * allPayments = [[tonightsBill payments] sortedArrayUsingDescriptors:sda];
+    NSArray * allPayments = [[[self tonightsBill] payments] sortedArrayUsingDescriptors:sda];
     for (MCPayment *p in allPayments) {
         NSString *whoHasPaid1 = NSLocalizedString(@"EMAIL_WHO_HAS_PAID_ONE", @"Part one of the sentence: Mark has paid $24 for beer.");
         NSString *whoHasPaid2 = NSLocalizedString(@"EMAIL_WHO_HAS_PAID_TWO", @"Part two of the sentence: Mark has paid $24 for beer.");
@@ -131,8 +129,8 @@
     [mailBody appendFormat:@"\n"];
     NSString *average1 = NSLocalizedString(@"EMAIL_AVERAGE_SENTENCES_ONE", @"Part one of: To have everybody pay the average of $7.00, I suggest the following solution:");
     NSString *average2 = NSLocalizedString(@"EMAIL_AVERAGE_SENTENCES_TWO", @"Part two of: To have everybody pay the average of $7.00, I suggest the following solution:");
-    [mailBody appendFormat:@"%@ %@%@:\n", average1, [nf stringFromNumber:[tonightsBill amountPeopleShouldHavePaid]], average2];
-    for (MCReturnPayment *rp in [tonightsBill solveWhoHasToPayWhoFromThisBill]) {
+    [mailBody appendFormat:@"%@ %@%@:\n", average1, [nf stringFromNumber:[[self tonightsBill] amountPeopleShouldHavePaid]], average2];
+    for (MCReturnPayment *rp in [[self tonightsBill] solveWhoHasToPayWhoFromThisBill]) {
         [mailBody appendFormat:@"%@\n", [rp stringForMail]];
     }
     [mailBody appendFormat:@"\n"];
@@ -152,7 +150,7 @@
 
 - (void)shareBill:(id)sender
 {
-    if ([tonightsBill doesEveryoneHaveAnEmailAddress]) {
+    if ([[self tonightsBill] doesEveryoneHaveAnEmailAddress]) {
         [self openMailView:sender];
     } else {
         NSLog(@"Not everyone has an email address");
@@ -207,8 +205,14 @@
 {
     [super viewWillAppear:animated];
     
-    if (!tonightsBill) {
-        tonightsBill = [MCSharedBill addSharedBill];
+    id destination = [self parentViewController];
+    BOOL conformsPut = [destination conformsToProtocol:@protocol(MCTonightsBillPut)];
+    BOOL conformsGet = [destination conformsToProtocol:@protocol(MCTonightsBillGet)];
+    NSParameterAssert(conformsGet && conformsPut);
+    if (![self tonightsBill]) {
+        if ([destination conformsToProtocol:@protocol(MCTonightsBillPut)]) {
+            [destination setTonightsBill:[MCSharedBill addSharedBill]];
+        }
         [self setEditTripViewControllerFromStoryboard];
     } else {
         [self setSharedBillViewControllerFromStoryboard];
@@ -249,6 +253,19 @@
     
 }
 
+#pragma mark - MCTonightsBillGet
+
+- (MCSharedBill *)tonightsBill
+{
+    id destination = [self parentViewController];
+    if ([destination conformsToProtocol:@protocol(MCTonightsBillGet)]) {
+        return [destination tonightsBill];
+    } else {
+        NSLog(@"The destination object doesn't conform tonightsBill.");
+        return nil;
+    }
+}
+
 #pragma mark - UIAlertViewDelegate
 
 - (void)alertView:(UIAlertView *)alertView clickedButtonAtIndex:(NSInteger)buttonIndex
@@ -276,7 +293,7 @@
         if (!editTripTableViewController) {
             UIStoryboard *storyboard = [UIStoryboard storyboardWithName:@"Main-Iphone" bundle:nil];
             editTripTableViewController = [storyboard instantiateViewControllerWithIdentifier:@"MCEditTripViewController"];
-            [editTripTableViewController setTonightsBill:tonightsBill];
+            [editTripTableViewController setTonightsBill:[self tonightsBill]];
             [editTripTableViewController setDelegate:self];
         }
         return editTripTableViewController;
@@ -291,7 +308,7 @@
         if (!sharedBillTableViewController) {
             UIStoryboard *storyboard = [UIStoryboard storyboardWithName:@"Main-Iphone" bundle:nil];
             sharedBillTableViewController = [storyboard instantiateViewControllerWithIdentifier:@"MCSharedBillTableViewController"];
-            [sharedBillTableViewController setTonightsBill:tonightsBill];
+            [sharedBillTableViewController setTonightsBill:[self tonightsBill]];
             [sharedBillTableViewController setDelegate:self];
             [sharedBillTableViewController setMailDelegate:self];
         }
@@ -322,7 +339,7 @@
 {
     if ([[segue destinationViewController] respondsToSelector:@selector(viewControllers)]) {
         if ([[[segue destinationViewController] viewControllers][0] respondsToSelector:@selector(setTonightsBill:)]) {
-            [[[segue destinationViewController] viewControllers][0] setTonightsBill:tonightsBill];
+            [[[segue destinationViewController] viewControllers][0] setTonightsBill:[self tonightsBill]];
         }
         if ([[[segue destinationViewController] viewControllers][0] respondsToSelector:@selector(setSendMailObject:)]) {
             [[[segue destinationViewController] viewControllers][0] setSendMailObject:self];

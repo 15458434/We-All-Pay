@@ -19,6 +19,8 @@
 #import "MCSharedBill+addons.h"
 #import "MCPerson+addons.h"
 
+#import "MCTonightsBillTransfer.h"
+
 @interface MCAllTripsTableViewController ()
 
 @end
@@ -378,7 +380,7 @@
     if (indexPathOfSelectedRow) {
         theBill = [dataController objectAtIndexPath:indexPathOfSelectedRow];
     }
-    if ([[segue destinationViewController] respondsToSelector:@selector(setTonightsBill:)]) {
+    if ([[segue destinationViewController] conformsToProtocol:@protocol(MCTonightsBillPut)]) {
         [[segue destinationViewController] setTonightsBill:theBill];
     }
 }

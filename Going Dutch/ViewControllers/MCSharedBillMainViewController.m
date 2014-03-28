@@ -8,8 +8,6 @@
 
 #import "MCSharedBillMainViewController.h"
 
-#import "MCSharedBillPageViewController.h"
-
 #import "MCSharedBill+addons.h"
 
 
@@ -18,8 +16,6 @@
 @end
 
 @implementation MCSharedBillMainViewController
-
-@synthesize tonightsBill;
 
 #pragma mark - private functions
 
