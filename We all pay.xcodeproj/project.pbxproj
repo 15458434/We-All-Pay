@@ -11,7 +11,6 @@
 		380BF82E18108898008A8B74 /* MCEmailAddressTableViewCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 380BF82D18108898008A8B74 /* MCEmailAddressTableViewCell.xib */; };
 		380BF831181088B9008A8B74 /* MCEmailAddressTableViewCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 380BF830181088B9008A8B74 /* MCEmailAddressTableViewCell.m */; };
 		380F44F21813250600FF7E10 /* No picture image 2 - We All Pay.png in Resources */ = {isa = PBXBuildFile; fileRef = 380F44F11813250600FF7E10 /* No picture image 2 - We All Pay.png */; };
-		381A968218E4CB82002F0B51 /* libTestFlight.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 3857304B18DAF2F100A900EA /* libTestFlight.a */; };
 		38295AE818425E74009FB5DE /* MCCancelDoneViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 38295AE718425E74009FB5DE /* MCCancelDoneViewController.m */; };
 		3829AD0F178B41320025969D /* WeAllPayStore.xcdatamodeld in Sources */ = {isa = PBXBuildFile; fileRef = 3829AD0D178B41320025969D /* WeAllPayStore.xcdatamodeld */; };
 		382E7BDD17E5E57500A1040A /* MCReturnPaymentViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 382E7BDC17E5E57500A1040A /* MCReturnPaymentViewController.m */; };
@@ -33,6 +32,8 @@
 		3867CE4718704B2E001EC222 /* Main-Iphone.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 3867CE4918704B2E001EC222 /* Main-Iphone.storyboard */; };
 		3867CE5118704DAF001EC222 /* MCTableEmptyMessage.xib in Resources */ = {isa = PBXBuildFile; fileRef = 3867CE5318704DAF001EC222 /* MCTableEmptyMessage.xib */; };
 		38690703186F0EEF006A5C11 /* libz.dylib in Frameworks */ = {isa = PBXBuildFile; fileRef = 38690702186F0EEF006A5C11 /* libz.dylib */; };
+		386FC32518E5855400428294 /* MCSharedBillMainViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 386FC32418E5855400428294 /* MCSharedBillMainViewController.m */; };
+		386FC37018E5BE1900428294 /* iAd.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 386FC36F18E5BE1900428294 /* iAd.framework */; };
 		3873A2A516F23AA1000832FD /* MessageUI.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 3873A2A416F23AA1000832FD /* MessageUI.framework */; };
 		3876EF591840E86900C9546A /* MCCancelDoneTableViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 3876EF581840E86900C9546A /* MCCancelDoneTableViewController.m */; };
 		387D3A911870652B0060FAF8 /* Localizable.strings in Resources */ = {isa = PBXBuildFile; fileRef = 387D3A931870652B0060FAF8 /* Localizable.strings */; };
@@ -68,6 +69,7 @@
 		38DB85E317E46FE1006237CF /* MCPayment.m in Sources */ = {isa = PBXBuildFile; fileRef = 38DB85E217E46FE1006237CF /* MCPayment.m */; };
 		38DB85E617E46FE2006237CF /* MCSharedBill.m in Sources */ = {isa = PBXBuildFile; fileRef = 38DB85E517E46FE2006237CF /* MCSharedBill.m */; };
 		38DB85E917E46FE2006237CF /* MCPerson.m in Sources */ = {isa = PBXBuildFile; fileRef = 38DB85E817E46FE2006237CF /* MCPerson.m */; };
+		38E0C5DD18E5C2E7005A3F17 /* libTestFlight.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 3857304B18DAF2F100A900EA /* libTestFlight.a */; };
 		38E63CF0186F904B00904D82 /* MCTableEmptyMessage.m in Sources */ = {isa = PBXBuildFile; fileRef = 38E63CEF186F904B00904D82 /* MCTableEmptyMessage.m */; };
 		38EFF2D416D215BE001C8248 /* MCAllTripsTableViewCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 38EFF2D316D215BE001C8248 /* MCAllTripsTableViewCell.m */; };
 		38EFF2D616D215FB001C8248 /* MCAllTripsTableViewCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 38EFF2D516D215FB001C8248 /* MCAllTripsTableViewCell.xib */; };
@@ -132,6 +134,10 @@
 		3867CE5218704DAF001EC222 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.xib; name = Base; path = Base.lproj/MCTableEmptyMessage.xib; sourceTree = "<group>"; };
 		3867CE5518704DB9001EC222 /* nl */ = {isa = PBXFileReference; fileEncoding = 10; lastKnownFileType = text.plist.strings; name = nl; path = nl.lproj/MCTableEmptyMessage.strings; sourceTree = "<group>"; };
 		38690702186F0EEF006A5C11 /* libz.dylib */ = {isa = PBXFileReference; lastKnownFileType = "compiled.mach-o.dylib"; name = libz.dylib; path = usr/lib/libz.dylib; sourceTree = SDKROOT; };
+		386FC32318E5855400428294 /* MCSharedBillMainViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = MCSharedBillMainViewController.h; path = ViewControllers/MCSharedBillMainViewController.h; sourceTree = "<group>"; };
+		386FC32418E5855400428294 /* MCSharedBillMainViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = MCSharedBillMainViewController.m; path = ViewControllers/MCSharedBillMainViewController.m; sourceTree = "<group>"; };
+		386FC36E18E5B8FE00428294 /* MCTitleViewDelegate.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = MCTitleViewDelegate.h; path = ViewControllers/MCTitleViewDelegate.h; sourceTree = "<group>"; };
+		386FC36F18E5BE1900428294 /* iAd.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = iAd.framework; path = System/Library/Frameworks/iAd.framework; sourceTree = SDKROOT; };
 		3873A2A416F23AA1000832FD /* MessageUI.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = MessageUI.framework; path = System/Library/Frameworks/MessageUI.framework; sourceTree = SDKROOT; };
 		3873A2A616F2858A000832FD /* Going Dutch.entitlements */ = {isa = PBXFileReference; lastKnownFileType = text.xml; path = "Going Dutch.entitlements"; sourceTree = "<group>"; };
 		3876EF571840E86900C9546A /* MCCancelDoneTableViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = MCCancelDoneTableViewController.h; path = ../MCCancelDoneTableViewController.h; sourceTree = "<group>"; };
@@ -205,7 +211,8 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				381A968218E4CB82002F0B51 /* libTestFlight.a in Frameworks */,
+				38E0C5DD18E5C2E7005A3F17 /* libTestFlight.a in Frameworks */,
+				386FC37018E5BE1900428294 /* iAd.framework in Frameworks */,
 				38690703186F0EEF006A5C11 /* libz.dylib in Frameworks */,
 				3886D3FD16B7A1CD00ECE64F /* AddressBook.framework in Frameworks */,
 				3886D3FE16B7A1CD00ECE64F /* AddressBookUI.framework in Frameworks */,
@@ -299,6 +306,7 @@
 		38572AD5169D437B00969C62 /* Frameworks */ = {
 			isa = PBXGroup;
 			children = (
+				386FC36F18E5BE1900428294 /* iAd.framework */,
 				38690702186F0EEF006A5C11 /* libz.dylib */,
 				383E0C561867079900AA688D /* Social.framework */,
 				3873A2A416F23AA1000832FD /* MessageUI.framework */,
@@ -356,6 +364,8 @@
 			children = (
 				38572AF6169D443C00969C62 /* MCAllTripsTableViewController.h */,
 				38572B09169F3D2700969C62 /* MCAllTripsTableViewController.m */,
+				386FC32318E5855400428294 /* MCSharedBillMainViewController.h */,
+				386FC32418E5855400428294 /* MCSharedBillMainViewController.m */,
 				383E0C5B186737EB00AA688D /* MCSharedBillPageViewController.h */,
 				383E0C5C186737EB00AA688D /* MCSharedBillPageViewController.m */,
 				3897159017902E35005BE03E /* MCSharedBillTableViewController.h */,
@@ -368,6 +378,7 @@
 				3892E3A317903EF00038894B /* MCEditTripViewController.m */,
 				3892E3A817904A240038894B /* MCPersonViewController.h */,
 				3892E3A917904A240038894B /* MCPersonViewController.m */,
+				386FC36E18E5B8FE00428294 /* MCTitleViewDelegate.h */,
 			);
 			name = ViewControllers;
 			sourceTree = "<group>";
@@ -600,6 +611,7 @@
 				38572AE3169D437B00969C62 /* main.m in Sources */,
 				38572AE7169D437B00969C62 /* MCAppDelegate.m in Sources */,
 				38572B0A169F3D2700969C62 /* MCAllTripsTableViewController.m in Sources */,
+				386FC32518E5855400428294 /* MCSharedBillMainViewController.m in Sources */,
 				38EFF2D416D215BE001C8248 /* MCAllTripsTableViewCell.m in Sources */,
 				38DB85DA17E45DEA006237CF /* MCPerson+addons.m in Sources */,
 				38CDE90017135B6300387CAA /* MCTools.m in Sources */,
@@ -769,6 +781,10 @@
 				INFOPLIST_FILE = "Going Dutch/We all pay-Info.plist";
 				IPHONEOS_DEPLOYMENT_TARGET = 7.0;
 				LIBRARY_SEARCH_PATHS = (
+					"$(inherited)",
+					"$(PROJECT_DIR)/Going",
+					Dutch/TestFlight,
+					SDK,
 					"$(PROJECT_DIR)/Going",
 					Dutch/TestFlight,
 					SDK,
@@ -795,6 +811,10 @@
 				INFOPLIST_FILE = "Going Dutch/We all pay-Info.plist";
 				IPHONEOS_DEPLOYMENT_TARGET = 7.0;
 				LIBRARY_SEARCH_PATHS = (
+					"$(inherited)",
+					"$(PROJECT_DIR)/Going",
+					Dutch/TestFlight,
+					SDK,
 					"$(PROJECT_DIR)/Going",
 					Dutch/TestFlight,
 					SDK,

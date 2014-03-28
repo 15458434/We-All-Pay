@@ -25,11 +25,10 @@
     MCSharedBillTableViewController *sharedBillTableViewController;
     MCEditTripViewController *editTripTableViewController;
     
-    __weak IBOutlet UIPageControl *pageViewIndicator;
+    //__weak IBOutlet UIPageControl *pageViewIndicator;
     NSUInteger newPageNumber;
 }
 
-@property (weak, nonatomic) IBOutlet UILabel *titleLabel;
 @property (nonatomic, strong) MCSharedBill *tonightsBill;
 
 - (IBAction)toggleEdit:(id)sender;
@@ -39,5 +38,7 @@
 - (void)sendMail:(id)sender;
 
 - (void)openMailView:(id)sender;
+
+- (UIPageControl *)pageViewIndicator;
 
 @end

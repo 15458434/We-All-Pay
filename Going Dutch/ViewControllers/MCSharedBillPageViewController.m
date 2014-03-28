@@ -19,6 +19,8 @@
 #import "MCWeAllPayStoreController.h"
 #import "MCReturnPayment.h"
 
+#import "MCTitleViewDelegate.h"
+
 @interface MCSharedBillPageViewController ()
 
 @end
@@ -60,8 +62,8 @@
     sharedBillTableViewController = [storyboard instantiateViewControllerWithIdentifier:@"MCSharedBillTableViewController"];
     [sharedBillTableViewController setTonightsBill:tonightsBill];
     [sharedBillTableViewController setMailDelegate:self];
-    [pageViewIndicator setCurrentPage:1];
-    [titleLabel setText:NSLocalizedString(@"PAYMENTS_PAGEVIEWCONTROLLER", @"Payments")];
+    [[self pageViewIndicator] setCurrentPage:1];
+    [[self titleLabel] setText:NSLocalizedString(@"PAYMENTS_PAGEVIEWCONTROLLER", @"Payments")];
     NSArray *views = @[sharedBillTableViewController];
     [self setViewControllers:views direction:UIPageViewControllerNavigationDirectionReverse animated:YES completion:nil];
     [self setDelegate:self];
@@ -74,8 +76,8 @@
     editTripTableViewController = [storyboard instantiateViewControllerWithIdentifier:@"MCEditTripViewController"];
     [editTripTableViewController setTonightsBill:tonightsBill];
     NSArray *views = @[editTripTableViewController];
-    [pageViewIndicator setCurrentPage:0];
-    [titleLabel setText:NSLocalizedString(@"PEOPLE_PRESENT_PAGEVIEWCONTROLLER", @"People present")];
+    [[self pageViewIndicator] setCurrentPage:0];
+    [[self titleLabel] setText:NSLocalizedString(@"PEOPLE_PRESENT_PAGEVIEWCONTROLLER", @"People present")];
     [self setViewControllers:views direction:UIPageViewControllerNavigationDirectionForward animated:YES completion:nil];
     [self setDelegate:self];
     [self setDataSource:self];
@@ -169,6 +171,17 @@
     
 }
 
+- (UIPageControl *)pageViewIndicator
+{
+    id destination = [self parentViewController];
+    if ([destination conformsToProtocol:@protocol(MCTitleViewDelegate)]) {
+        return [destination pageIndicator];
+    } else {
+        NSLog(@"Something is broken in the protocol.");
+        return nil;
+    }
+}
+
 #pragma mark - Inherited from super
 
 - (id)initWithNibName:(NSString *)nibNameOrNil bundle:(NSBundle *)nibBundleOrNil
@@ -187,28 +200,19 @@
     
     [[self view] setBackgroundColor:[UIColor groupTableViewBackgroundColor]];
     
+    [[self navigationController] setToolbarHidden:YES animated:YES];
+}
+
+- (void)viewWillAppear:(BOOL)animated
+{
+    [super viewWillAppear:animated];
+    
     if (!tonightsBill) {
         tonightsBill = [MCSharedBill addSharedBill];
         [self setEditTripViewControllerFromStoryboard];
     } else {
         [self setSharedBillViewControllerFromStoryboard];
     }
-    
-    [[self navigationController] setToolbarHidden:YES animated:YES];
-}
-
-- (void)viewWillDisappear:(BOOL)animated
-{
-    [super viewWillDisappear:animated];
-    
-}
-
-- (void)viewDidDisappear:(BOOL)animated
-{
-    [super viewDidDisappear:animated];
-    
-    [MCTools setAdBannerIfNotPaid:NO forViewController:sharedBillTableViewController];
-    [MCTools setAdBannerIfNotPaid:NO forViewController:editTripTableViewController];
 }
 
 - (void)didReceiveMemoryWarning
@@ -229,7 +233,21 @@
 
 #pragma mark - MCTonightsBillTitleDelegate
 
-@synthesize titleLabel;
+- (UILabel *)titleLabel
+{
+    id destination = [self parentViewController];
+    if ([destination conformsToProtocol:@protocol(MCTitleViewDelegate)]) {
+        return [destination mainTitleLabel];
+    } else {
+        NSLog(@"mainTitle not askable.");
+        return nil;
+    }
+}
+
+- (void)setTitleLabel:(UILabel *)titleLabel
+{
+    
+}
 
 #pragma mark - UIAlertViewDelegate
 
@@ -289,11 +307,11 @@
 {
     if (completed && finished) {
         if ([[self viewControllers][0] isKindOfClass:[MCEditTripViewController class]]) {
-            [pageViewIndicator setCurrentPage:0];
-            [titleLabel setText:NSLocalizedString(@"PEOPLE_PRESENT_PAGEVIEWCONTROLLER", @"People present")];
+            [[self pageViewIndicator] setCurrentPage:0];
+            [[self titleLabel] setText:NSLocalizedString(@"PEOPLE_PRESENT_PAGEVIEWCONTROLLER", @"People present")];
         } else if ([[self viewControllers][0] isKindOfClass:[MCSharedBillTableViewController class]]) {
-            [pageViewIndicator setCurrentPage:1];
-            [titleLabel setText:NSLocalizedString(@"PAYMENTS_PAGEVIEWCONTROLLER", @"Payments")];
+            [[self pageViewIndicator] setCurrentPage:1];
+            [[self titleLabel] setText:NSLocalizedString(@"PAYMENTS_PAGEVIEWCONTROLLER", @"Payments")];
         }
     }
 }
