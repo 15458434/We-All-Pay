@@ -322,6 +322,19 @@
 
 - (void)pageViewController:(UIPageViewController *)pageViewController didFinishAnimating:(BOOL)finished previousViewControllers:(NSArray *)previousViewControllers transitionCompleted:(BOOL)completed
 {
+    if (completed) {
+        id destination = [self parentViewController];
+        if ([[self viewControllers][0] isKindOfClass:[MCEditTripViewController class]]) {
+            if ([destination conformsToProtocol:@protocol(MCCurrentViewDelegate)]) {
+                [destination setCurrentView:MCSelectEditTripTableView];
+            }
+        } else {
+            if ([destination conformsToProtocol:@protocol(MCCurrentViewDelegate)]) {
+                [destination setCurrentView:MCSelectSharedBillTableView];
+            }
+        }
+    }
+    
     if (completed && finished) {
         if ([[self viewControllers][0] isKindOfClass:[MCEditTripViewController class]]) {
             [[self pageViewIndicator] setCurrentPage:0];
