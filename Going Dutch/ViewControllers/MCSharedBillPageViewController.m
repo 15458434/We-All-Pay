@@ -322,7 +322,7 @@
 
 - (void)pageViewController:(UIPageViewController *)pageViewController didFinishAnimating:(BOOL)finished previousViewControllers:(NSArray *)previousViewControllers transitionCompleted:(BOOL)completed
 {
-    if (completed) {
+    if (finished) {
         id destination = [self parentViewController];
         if ([[self viewControllers][0] isKindOfClass:[MCEditTripViewController class]]) {
             if ([destination conformsToProtocol:@protocol(MCCurrentViewDelegate)]) {
@@ -335,7 +335,7 @@
         }
     }
     
-    if (completed && finished) {
+    if (finished) {
         if ([[self viewControllers][0] isKindOfClass:[MCEditTripViewController class]]) {
             [[self pageViewIndicator] setCurrentPage:0];
             [[self titleLabel] setText:NSLocalizedString(@"PEOPLE_PRESENT_PAGEVIEWCONTROLLER", @"People present")];
