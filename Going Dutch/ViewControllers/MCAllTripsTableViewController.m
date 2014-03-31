@@ -279,7 +279,11 @@
     MCSharedBill *thisTrip = [dataController objectAtIndexPath:indexPath];
     MCAllTripsTableViewCell *allTripsTableViewCell = [tableView dequeueReusableCellWithIdentifier:@"MCAllTripsTableViewCell"];
     
-    [[allTripsTableViewCell tripLabel] setText:[thisTrip tripName]];
+    if (![thisTrip tripName]) {
+        [[allTripsTableViewCell tripLabel] setText:@"..."];
+    } else {
+        [[allTripsTableViewCell tripLabel] setText:[thisTrip tripName]];
+    }
     [[allTripsTableViewCell peoplePresentLabel] setText:[thisTrip stringOfApproxPeoplePresent]];
 
     NSNumberFormatter *nf = [[NSNumberFormatter alloc] init];
