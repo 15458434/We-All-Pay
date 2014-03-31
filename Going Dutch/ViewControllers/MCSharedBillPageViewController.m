@@ -20,6 +20,7 @@
 #import "MCReturnPayment.h"
 
 #import "MCTitleViewDelegate.h"
+#import "MCCurrentViewDelegate.h"
 
 @interface MCSharedBillPageViewController ()
 
@@ -206,16 +207,15 @@
     [super viewWillAppear:animated];
     
     id destination = [self parentViewController];
-    BOOL conformsPut = [destination conformsToProtocol:@protocol(MCTonightsBillPut)];
     BOOL conformsGet = [destination conformsToProtocol:@protocol(MCTonightsBillGet)];
-    NSParameterAssert(conformsGet && conformsPut);
-    if (![self tonightsBill]) {
-        if ([destination conformsToProtocol:@protocol(MCTonightsBillPut)]) {
-            [destination setTonightsBill:[MCSharedBill addSharedBill]];
-        }
-        [self setEditTripViewControllerFromStoryboard];
-    } else {
+    NSParameterAssert(conformsGet);
+    BOOL conformsCurrentView = [destination conformsToProtocol:@protocol(MCCurrentViewDelegate)];
+    NSParameterAssert(conformsCurrentView);
+    
+    if ([destination currentView] == MCSelectSharedBillTableView) {
         [self setSharedBillViewControllerFromStoryboard];
+    } else {
+        [self setEditTripViewControllerFromStoryboard];
     }
 }
 

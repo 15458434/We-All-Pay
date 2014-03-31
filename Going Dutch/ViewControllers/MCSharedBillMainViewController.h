@@ -10,14 +10,16 @@
 
 #import "MCTitleViewDelegate.h"
 #import "MCTonightsBillTransfer.h"
+#import "MCCurrentViewDelegate.h"
 
 @class MCSharedBill;
 
-@interface MCSharedBillMainViewController : UIViewController <MCTitleViewDelegate, MCTonightsBillPut, MCTonightsBillGet>
+@interface MCSharedBillMainViewController : UIViewController <MCTitleViewDelegate, MCTonightsBillPut, MCTonightsBillGet, MCCurrentViewDelegate>
 {
     
 }
 
+@property (nonatomic) MCSharedBillViewSelector currentView;
 @property (strong, nonatomic) MCSharedBill *tonightsBill;
 @property (weak, nonatomic) IBOutlet UILabel *mainTitleLabel;
 @property (weak, nonatomic) IBOutlet UIPageControl *pageIndicator;

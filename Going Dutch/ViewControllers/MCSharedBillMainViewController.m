@@ -38,6 +38,13 @@
     // Do any additional setup after loading the view.
     [[self navigationController] setToolbarHidden:YES animated:YES];
     [MCTools setAdBannerIfNotPaid:YES forViewController:self];
+    
+    if (![self tonightsBill]) {
+        _tonightsBill = [MCSharedBill addSharedBill];
+        _currentView = MCSelectEditTripTableView;
+    } else {
+        _currentView = MCSelectSharedBillTableView;
+    }
 }
 
 - (void)viewWillAppear:(BOOL)animated
