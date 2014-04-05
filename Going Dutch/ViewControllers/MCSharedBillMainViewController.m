@@ -19,6 +19,10 @@
 
 #pragma mark - private functions
 
+- (IBAction)toggleEdit:(id)sender
+{
+    [[self childViewControllers][0] toggleEdit:sender];
+}
 
 
 #pragma mark - Inherited from super
