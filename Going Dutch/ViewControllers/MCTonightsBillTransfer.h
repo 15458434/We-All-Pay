@@ -7,7 +7,8 @@
 //
 
 #import <Foundation/Foundation.h>
-#import "MCSharedBill.h"
+
+@class MCSharedBill;
 
 @protocol MCTonightsBillPut <NSObject>
 

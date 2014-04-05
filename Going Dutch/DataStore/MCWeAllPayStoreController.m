@@ -12,6 +12,8 @@
 #import "MCPayment.h"
 #import "MCSharedBill.h"
 
+#import "MCTonightsBillTransfer.h"
+
 @implementation MCWeAllPayStoreController
 
 @synthesize weAllPayStoreDocument;
@@ -46,6 +48,61 @@
     return sharedStore;
 }
 
+- (void)openStore:(void (^)(BOOL))completionHandler
+{
+    if (!weAllPayStoreDocument) {
+        NSURL *weAllPayURL = [MCTools documentPathAsURLTo:@"WeAllPayStore"];
+        weAllPayStoreDocument = [[UIManagedDocument alloc] initWithFileURL:weAllPayURL];
+        [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(storeIsReady:) name:UIDocumentStateChangedNotification object:weAllPayStoreDocument];
+        
+        if (![[NSFileManager defaultManager] fileExistsAtPath:[[weAllPayStoreDocument fileURL] path]]) {
+            [weAllPayStoreDocument saveToURL:[weAllPayStoreDocument fileURL] forSaveOperation:UIDocumentSaveForCreating completionHandler:^(BOOL success) {
+                if (success) {
+                    NSLog(@"Successful SaveForCreating");
+                    [[weAllPayStoreDocument managedObjectContext] setUndoManager:[[NSUndoManager alloc] init]];
+                    [[[weAllPayStoreDocument managedObjectContext] undoManager] disableUndoRegistration];
+                    if (completionHandler) {
+                        completionHandler(YES);
+                    }
+                } else {
+                    NSLog(@"SaveForCreating not successful.");
+                    if (completionHandler) {
+                        completionHandler(NO);
+                    }
+                }
+            }];
+        } else if ([weAllPayStoreDocument documentState] == UIDocumentStateClosed) {
+            [weAllPayStoreDocument openWithCompletionHandler:^(BOOL success) {
+                if (success) {
+                    NSLog(@"Succesful Open");
+                    [[weAllPayStoreDocument managedObjectContext] setUndoManager:[[NSUndoManager alloc] init]];
+                    [[[weAllPayStoreDocument managedObjectContext] undoManager] disableUndoRegistration];
+                    if (completionHandler) {
+                        completionHandler(YES);
+                    }
+                } else {
+                    NSLog(@"Open not successful");
+                    if (completionHandler) {
+                        completionHandler(NO);
+                    }
+                }
+            }];
+        } else if ([weAllPayStoreDocument documentState] == UIDocumentStateNormal) {
+            NSLog(@"DocumentState is already normal.");
+            [[weAllPayStoreDocument managedObjectContext] setUndoManager:[[NSUndoManager alloc] init]];
+            [[[weAllPayStoreDocument managedObjectContext] undoManager] disableUndoRegistration];
+            if (completionHandler) {
+                completionHandler(YES);
+            }
+        } else {
+            NSLog(@"Something went wrong opening your document.");
+            if ((completionHandler)) {
+                completionHandler(NO);
+            }
+        }
+    }
+}
+
 - (void)saveStore
 {
     [weAllPayStoreDocument saveToURL:[weAllPayStoreDocument fileURL] forSaveOperation:UIDocumentSaveForOverwriting completionHandler:^(BOOL success){
@@ -77,6 +134,109 @@
     }
 }
 
+- (void)beginUndoGroup
+{
+    NSManagedObjectContext *context = [weAllPayStoreDocument managedObjectContext];
+    [[context undoManager] enableUndoRegistration];
+    [[context undoManager] beginUndoGrouping];
+}
+
+- (void)endUndoGroup
+{
+    NSManagedObjectContext *context = [weAllPayStoreDocument managedObjectContext];
+    [[context undoManager] endUndoGrouping];
+    [[context undoManager] disableUndoRegistration];
+}
+
+- (void)endUndoGroupAndProcess
+{
+    NSManagedObjectContext *context = [weAllPayStoreDocument managedObjectContext];
+    [[context undoManager] endUndoGrouping];
+    [[context undoManager] disableUndoRegistration];
+    [context processPendingChanges];
+}
+
+- (void)endUndoGroupAndUndo
+{
+    NSManagedObjectContext *context = [weAllPayStoreDocument managedObjectContext];
+    [[context undoManager] endUndoGrouping];
+    [[context undoManager] undoNestedGroup];
+    [[context undoManager] disableUndoRegistration];
+}
+
+- (NSFetchedResultsController *)allTripsDataControllerForDelegate:(id)delegate
+{
+    NSParameterAssert([delegate conformsToProtocol:@protocol(NSFetchedResultsControllerDelegate)]);
+    NSManagedObjectContext *context = [weAllPayStoreDocument managedObjectContext];
+    NSFetchRequest *request = [NSFetchRequest fetchRequestWithEntityName:@"MCSharedBill"];
+    [request setSortDescriptors:@[[NSSortDescriptor sortDescriptorWithKey:@"dateCreated" ascending:NO]]];
+    [request setRelationshipKeyPathsForPrefetching:@[ @"payments", @"peoplePresent" ]];
+    NSFetchedResultsController *dataController = [[NSFetchedResultsController alloc] initWithFetchRequest:request
+                                                         managedObjectContext:context
+                                                           sectionNameKeyPath:nil
+                                                                    cacheName:nil];
+    [dataController setDelegate:delegate];
+    
+    return dataController;
+}
+
+- (NSFetchedResultsController *)sharedBillPaymentsDataControllerForDelegate:(id)delegate
+{
+    NSParameterAssert([delegate conformsToProtocol:@protocol(NSFetchedResultsControllerDelegate)]);
+    NSParameterAssert([delegate conformsToProtocol:@protocol(MCTonightsBillGet)]);
+    NSManagedObjectContext *context = [weAllPayStoreDocument managedObjectContext];
+    MCSharedBill *tonightsBill = [delegate tonightsBill];
+    // What entities will be fetched.
+    NSFetchRequest *request = [NSFetchRequest fetchRequestWithEntityName:@"MCPayment"];
+    [request setRelationshipKeyPathsForPrefetching:@[ @"payingPerson" ]];
+    // How to sort the data.
+    NSSortDescriptor *sortDescriptor = [NSSortDescriptor sortDescriptorWithKey:@"dateCreated" ascending:NO];
+    NSArray *sortDescriptorArray = @[sortDescriptor];
+    [request setSortDescriptors:sortDescriptorArray];
+    // Select only people from tonightsBill.
+    NSPredicate *predicate = [NSPredicate predicateWithFormat:@"onWhichBill = %@", tonightsBill];
+    [request setPredicate:predicate];
+    
+    NSString *cacheName = [NSString stringWithFormat:@"All payments cache of trip: %@", [tonightsBill tripName]];
+    // Create the FetchedResultsController.
+    NSFetchedResultsController *dataController = [[NSFetchedResultsController alloc] initWithFetchRequest:request managedObjectContext:context sectionNameKeyPath:nil cacheName:cacheName];
+    NSError *error;
+    BOOL success = [dataController performFetch:&error];
+    if (!success) {
+        NSLog(@"Something went wrong fetching the payments");
+    }
+    [dataController setDelegate:delegate];
+    return dataController;
+}
+
+- (NSFetchedResultsController *)sharedBillPeoplePresentDataControllerForDelegate:(id)delegate
+{
+    NSParameterAssert([delegate conformsToProtocol:@protocol(NSFetchedResultsControllerDelegate)]);
+    NSParameterAssert([delegate conformsToProtocol:@protocol(MCTonightsBillGet)]);
+    NSManagedObjectContext *context = [weAllPayStoreDocument managedObjectContext];
+    MCSharedBill *tonightsBill = [delegate tonightsBill];
+    // What entities will be fetched.
+    NSFetchRequest *request = [NSFetchRequest fetchRequestWithEntityName:@"MCPerson"];
+    // How to sort the data.
+    [request setRelationshipKeyPathsForPrefetching:@[ @"emailAddress", @"payments", @"sharedBill" ]];
+    NSSortDescriptor *sortDescriptor = [NSSortDescriptor sortDescriptorWithKey:@"dateCreated" ascending:NO];
+    NSArray *sortDescriptorArray = @[sortDescriptor];
+    [request setSortDescriptors:sortDescriptorArray];
+    // Select only people from tonightsBill.
+    NSPredicate *predicate = [NSPredicate predicateWithFormat:@"ANY sharedBill = %@", tonightsBill];
+    [request setPredicate:predicate];
+    
+    // Create the FetchedResultsController.
+    NSFetchedResultsController *dataController = [[NSFetchedResultsController alloc] initWithFetchRequest:request managedObjectContext:context sectionNameKeyPath:nil cacheName:[NSString stringWithFormat:@"All persons cache of trip: %@", [tonightsBill uniqueBillId]]];
+    [dataController setDelegate:delegate];
+    NSError *error;
+    BOOL success = [dataController performFetch:&error];
+    if (!success) {
+        NSLog(@"Something went wrong");
+    }
+    return dataController;
+}
+
 #pragma mark - Inherited from super class
 
 - (id)init
@@ -86,63 +246,8 @@
     static BOOL stillNeedsInit = 1;
     
     if (self && stillNeedsInit) {
-        NSURL *weAllPayURL = [MCTools documentPathAsURLTo:@"WeAllPayStore"];
-        weAllPayStoreDocument = [[UIManagedDocument alloc] initWithFileURL:weAllPayURL];
-        [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(storeIsReady:) name:UIDocumentStateChangedNotification object:weAllPayStoreDocument];
+        [self openStore:nil];
         
-        if (![[NSFileManager defaultManager] fileExistsAtPath:[[weAllPayStoreDocument fileURL] path]]) {
-            [weAllPayStoreDocument saveToURL:[weAllPayStoreDocument fileURL] forSaveOperation:UIDocumentSaveForCreating completionHandler:^(BOOL success) {
-                if (success) {
-                    NSLog(@"Successful SaveForCreating");
-                    [[weAllPayStoreDocument managedObjectContext] setUndoManager:[[NSUndoManager alloc] init]];
-                    [[[weAllPayStoreDocument managedObjectContext] undoManager] disableUndoRegistration];
-                } else {
-                    NSLog(@"SaveForCreating not successful.");
-                }
-            }];
-        } else if ([weAllPayStoreDocument documentState] == UIDocumentStateClosed) {
-            [weAllPayStoreDocument openWithCompletionHandler:^(BOOL success) {
-                if (success) {
-                    NSLog(@"Succesful Open");
-                    [[weAllPayStoreDocument managedObjectContext] setUndoManager:[[NSUndoManager alloc] init]];
-                    [[[weAllPayStoreDocument managedObjectContext] undoManager] disableUndoRegistration];
-                } else {
-                    NSLog(@"Open not successful");
-                }
-            }];
-        } else if ([weAllPayStoreDocument documentState] == UIDocumentStateNormal) {
-            NSLog(@"DocumentState is already normal.");
-            [[weAllPayStoreDocument managedObjectContext] setUndoManager:[[NSUndoManager alloc] init]];
-            [[[weAllPayStoreDocument managedObjectContext] undoManager] disableUndoRegistration];
-        } else {
-            NSLog(@"Something went wrong opening your document.");
-        }
-        
-        /*if ([[NSFileManager defaultManager] fileExistsAtPath:[weAllPayURL path]]) {
-            [weAllPayStoreDocument openWithCompletionHandler:^(BOOL success){
-                if (success) {
-                    // The document is ready to use.
-                    [[weAllPayStoreDocument managedObjectContext] setUndoManager:[[NSUndoManager alloc] init]];
-                    [[[weAllPayStoreDocument managedObjectContext] undoManager] disableUndoRegistration];
-                } else {
-                    // The document is is not ready to use.
-                    NSLog(@"Couldn't open storage file at %@", weAllPayURL);
-                }
-            }];
-        }
-        else {
-            // If file doesn't exist. Create it.
-            [weAllPayStoreDocument saveToURL:weAllPayURL forSaveOperation:UIDocumentSaveForCreating completionHandler:^(BOOL success){
-                if (success) {
-                    // The document is ready to use.
-                    [[weAllPayStoreDocument managedObjectContext] setUndoManager:[[NSUndoManager alloc] init]];
-                    [[[weAllPayStoreDocument managedObjectContext] undoManager] disableUndoRegistration];
-                } else {
-                    // The document is not ready to use.
-                    NSLog(@"Couldn't create storage file at %@", weAllPayURL);
-                }
-            }];
-        }*/
         stillNeedsInit = 0;
     }
     return self;

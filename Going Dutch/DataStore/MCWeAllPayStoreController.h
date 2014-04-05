@@ -24,7 +24,17 @@
 
 - (BOOL)isDocumentStateNormal;
 
+- (void)openStore:(void (^)(BOOL success))completionHandler;
 - (void)saveStore;
 - (void)closeDocument;
+
+- (void)beginUndoGroup;
+- (void)endUndoGroup;
+- (void)endUndoGroupAndProcess;
+- (void)endUndoGroupAndUndo;
+
+- (NSFetchedResultsController *)allTripsDataControllerForDelegate:(id)delegate;
+- (NSFetchedResultsController *)sharedBillPaymentsDataControllerForDelegate:(id)delegate;
+- (NSFetchedResultsController *)sharedBillPeoplePresentDataControllerForDelegate:(id)delegate;
 
 @end
