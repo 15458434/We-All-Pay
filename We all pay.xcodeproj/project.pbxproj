@@ -55,6 +55,7 @@
 		3897158B17901D55005BE03E /* MCReturnPaymentTableViewCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 3897158517901D55005BE03E /* MCReturnPaymentTableViewCell.m */; };
 		3897158C17901D55005BE03E /* MCReturnPaymentTableViewCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 3897158617901D55005BE03E /* MCReturnPaymentTableViewCell.xib */; };
 		3897159217902E35005BE03E /* MCSharedBillTableViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 3897159117902E35005BE03E /* MCSharedBillTableViewController.m */; };
+		3898F32E18F0400A00BFFC61 /* libTestFlight.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 3857304B18DAF2F100A900EA /* libTestFlight.a */; };
 		38CDE90017135B6300387CAA /* MCTools.m in Sources */ = {isa = PBXBuildFile; fileRef = 38CDE8FF17135B6300387CAA /* MCTools.m */; };
 		38D785F318DC53C30074B670 /* XCTest.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 38522E2418DB3F01007BDB3F /* XCTest.framework */; };
 		38D785F418DC53C30074B670 /* Foundation.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 38572AD8169D437B00969C62 /* Foundation.framework */; };
@@ -69,7 +70,6 @@
 		38DB85E317E46FE1006237CF /* MCPayment.m in Sources */ = {isa = PBXBuildFile; fileRef = 38DB85E217E46FE1006237CF /* MCPayment.m */; };
 		38DB85E617E46FE2006237CF /* MCSharedBill.m in Sources */ = {isa = PBXBuildFile; fileRef = 38DB85E517E46FE2006237CF /* MCSharedBill.m */; };
 		38DB85E917E46FE2006237CF /* MCPerson.m in Sources */ = {isa = PBXBuildFile; fileRef = 38DB85E817E46FE2006237CF /* MCPerson.m */; };
-		38E0C5DD18E5C2E7005A3F17 /* libTestFlight.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 3857304B18DAF2F100A900EA /* libTestFlight.a */; };
 		38E63CF0186F904B00904D82 /* MCTableEmptyMessage.m in Sources */ = {isa = PBXBuildFile; fileRef = 38E63CEF186F904B00904D82 /* MCTableEmptyMessage.m */; };
 		38EFF2D416D215BE001C8248 /* MCAllTripsTableViewCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 38EFF2D316D215BE001C8248 /* MCAllTripsTableViewCell.m */; };
 		38EFF2D616D215FB001C8248 /* MCAllTripsTableViewCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 38EFF2D516D215FB001C8248 /* MCAllTripsTableViewCell.xib */; };
@@ -213,7 +213,7 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				38E0C5DD18E5C2E7005A3F17 /* libTestFlight.a in Frameworks */,
+				3898F32E18F0400A00BFFC61 /* libTestFlight.a in Frameworks */,
 				386FC37018E5BE1900428294 /* iAd.framework in Frameworks */,
 				38690703186F0EEF006A5C11 /* libz.dylib in Frameworks */,
 				3886D3FD16B7A1CD00ECE64F /* AddressBook.framework in Frameworks */,
@@ -789,12 +789,6 @@
 					"$(PROJECT_DIR)/Going",
 					Dutch/TestFlight,
 					SDK,
-					"$(PROJECT_DIR)/Going",
-					Dutch/TestFlight,
-					SDK,
-					"$(PROJECT_DIR)/Going",
-					Dutch/TestFlight,
-					SDK,
 				);
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				PROVISIONING_PROFILE = "";
@@ -816,12 +810,6 @@
 				IPHONEOS_DEPLOYMENT_TARGET = 7.0;
 				LIBRARY_SEARCH_PATHS = (
 					"$(inherited)",
-					"$(PROJECT_DIR)/Going",
-					Dutch/TestFlight,
-					SDK,
-					"$(PROJECT_DIR)/Going",
-					Dutch/TestFlight,
-					SDK,
 					"$(PROJECT_DIR)/Going",
 					Dutch/TestFlight,
 					SDK,

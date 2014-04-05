@@ -196,7 +196,7 @@
                         </view>
                         <barButtonItem key="rightBarButtonItem" systemItem="edit" id="HQG-ef-Hpe">
                             <connections>
-                                <action selector="toggleEdit:" destination="4g7-52-2bw" id="z9o-3o-mkf"/>
+                                <action selector="toggleEdit:" destination="Ltx-xd-qSj" id="fwm-gY-6om"/>
                             </connections>
                         </barButtonItem>
                     </navigationItem>
