@@ -82,9 +82,18 @@
 - (NSString *)getMoneyValueAsAString
 {
     NSNumberFormatter *nf = [[NSNumberFormatter alloc] init];
+    [nf setFormatterBehavior:NSNumberFormatterBehaviorDefault];
+    [nf setLocale:[NSLocale currentLocale]];
+    [nf setNumberStyle:NSNumberFormatterDecimalStyle];
+    return [nf stringFromNumber:[self money]];
+}
+
+- (NSString *)getMoneyValueInCurrencyAsAString
+{
+    NSNumberFormatter *nf = [[NSNumberFormatter alloc] init];
     [nf setLocale:[NSLocale currentLocale]];
     [nf setNumberStyle:NSNumberFormatterCurrencyStyle];
-    [nf setFormatterBehavior:NSNumberFormatterCurrencyStyle];
+    [nf setFormatterBehavior:NSNumberFormatterBehaviorDefault];
     return [nf stringFromNumber:[self money]];
 }
 
@@ -92,9 +101,19 @@
 {
     NSNumberFormatter *nf = [[NSNumberFormatter alloc] init];
     [nf setLocale:[NSLocale currentLocale]];
+    [nf setNumberStyle:NSNumberFormatterDecimalStyle];
+    [nf setFormatterBehavior:NSNumberFormatterBehaviorDefault];
+    [self setMoney:[nf numberFromString:moneyString]];
+}
+
+- (void)putMoneyValueInCurrencyAsAString:(NSString *)moneyString
+{
+    NSNumberFormatter *nf = [[NSNumberFormatter alloc] init];
+    [nf setLocale:[NSLocale currentLocale]];
     [nf setNumberStyle:NSNumberFormatterCurrencyStyle];
     [nf setFormatterBehavior:NSNumberFormatterCurrencyStyle];
     [self setMoney:[nf numberFromString:moneyString]];
+
 }
 
 @end

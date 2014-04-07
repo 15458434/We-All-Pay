@@ -19,6 +19,8 @@
 - (BOOL)hasPayer;
 
 - (NSString *)getMoneyValueAsAString;
+- (NSString *)getMoneyValueInCurrencyAsAString;
 - (void)putMoneyValueAsAString:(NSString *)moneyString;
+- (void)putMoneyValueInCurrencyAsAString:(NSString *)moneyString;
 
 @end
