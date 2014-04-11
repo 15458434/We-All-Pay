@@ -32,6 +32,7 @@
 - (NSNumber *)totalSumPaidBy:(MCPerson *)person;
 - (NSNumber *)totalAmountOfCreditBy:(MCPerson *)person;
 - (NSNumber *)amountPeopleShouldHavePaid;
+- (NSString *)amountPeopleShouldHavePaidAsCurrencyString;
 - (BOOL)hasPersonPaidSomething:(MCPerson *)person;
 - (BOOL)doesEveryoneHaveAnEmailAddress;
 

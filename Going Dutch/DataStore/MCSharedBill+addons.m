@@ -263,6 +263,16 @@
     }
 }
 
+- (NSString *)amountPeopleShouldHavePaidAsCurrencyString
+{
+    NSNumber *averageSpentByPerson = [self amountPeopleShouldHavePaid];
+    NSNumberFormatter *nf = [[NSNumberFormatter alloc] init];
+    [nf setLocale:[NSLocale currentLocale]];
+    [nf setNumberStyle:NSNumberFormatterCurrencyStyle];
+    [nf setFormatterBehavior:NSNumberFormatterBehaviorDefault];
+    return [nf stringFromNumber:averageSpentByPerson];
+}
+
 - (NSArray *)solveWhoHasToPayWhoFromThisBill
 {
     // Create two array's one of peope who should pay and one with people that should receive.
