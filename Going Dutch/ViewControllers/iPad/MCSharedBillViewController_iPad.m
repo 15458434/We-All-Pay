@@ -122,6 +122,14 @@
             [destination setTonightsBill:_tonightsBill];
         }
     }
+    
+    // When newPerson segue is used to add a new payment to tonightsbill.
+    if ([[segue identifier] isEqualToString:@"newPayment"]) {
+        id destination = [[segue destinationViewController] viewControllers][0];
+        if ([destination conformsToProtocol:@protocol(MCTonightsBillPut)]) {
+            [destination setTonightsBill:_tonightsBill];
+        }
+    }
 }
 
 @end

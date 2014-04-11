@@ -37,6 +37,7 @@
 		3873A2A516F23AA1000832FD /* MessageUI.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 3873A2A416F23AA1000832FD /* MessageUI.framework */; };
 		3876EF591840E86900C9546A /* MCCancelDoneTableViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 3876EF581840E86900C9546A /* MCCancelDoneTableViewController.m */; };
 		387D3A911870652B0060FAF8 /* Localizable.strings in Resources */ = {isa = PBXBuildFile; fileRef = 387D3A931870652B0060FAF8 /* Localizable.strings */; };
+		3880E7E218F72C79006C4518 /* libTestFlight.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 3857304B18DAF2F100A900EA /* libTestFlight.a */; };
 		3886D3FD16B7A1CD00ECE64F /* AddressBook.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 3886D3FB16B7A1CD00ECE64F /* AddressBook.framework */; };
 		3886D3FE16B7A1CD00ECE64F /* AddressBookUI.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 3886D3FC16B7A1CD00ECE64F /* AddressBookUI.framework */; };
 		3892E3A417903EF00038894B /* MCEditTripViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 3892E3A317903EF00038894B /* MCEditTripViewController.m */; };
@@ -55,7 +56,12 @@
 		3897158B17901D55005BE03E /* MCReturnPaymentTableViewCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 3897158517901D55005BE03E /* MCReturnPaymentTableViewCell.m */; };
 		3897158C17901D55005BE03E /* MCReturnPaymentTableViewCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 3897158617901D55005BE03E /* MCReturnPaymentTableViewCell.xib */; };
 		3897159217902E35005BE03E /* MCSharedBillTableViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 3897159117902E35005BE03E /* MCSharedBillTableViewController.m */; };
-		3898F32C18EEA27900BFFC61 /* libTestFlight.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 3857304B18DAF2F100A900EA /* libTestFlight.a */; };
+		3898F33218F180B500BFFC61 /* MCPaymentTableViewController_iPad.m in Sources */ = {isa = PBXBuildFile; fileRef = 3898F33118F180B500BFFC61 /* MCPaymentTableViewController_iPad.m */; };
+		3898F33618F2CB6700BFFC61 /* MCSelectPayerTableViewController_iPad.m in Sources */ = {isa = PBXBuildFile; fileRef = 3898F33518F2CB6700BFFC61 /* MCSelectPayerTableViewController_iPad.m */; };
+		3898F33A18F2CC0D00BFFC61 /* MCSelectPayerTableViewCell_iPad.m in Sources */ = {isa = PBXBuildFile; fileRef = 3898F33918F2CC0D00BFFC61 /* MCSelectPayerTableViewCell_iPad.m */; };
+		3898F33C18F40B9D00BFFC61 /* MCSharedBillAddOnsTest.m in Sources */ = {isa = PBXBuildFile; fileRef = 3898F33B18F40B9D00BFFC61 /* MCSharedBillAddOnsTest.m */; };
+		3898F33E18F40CC100BFFC61 /* MCPersonAddonsTest.m in Sources */ = {isa = PBXBuildFile; fileRef = 3898F33D18F40CC100BFFC61 /* MCPersonAddonsTest.m */; };
+		3898F34018F40E7700BFFC61 /* MCPaymentAddonsTest.m in Sources */ = {isa = PBXBuildFile; fileRef = 3898F33F18F40E7700BFFC61 /* MCPaymentAddonsTest.m */; };
 		38AAFB9F18EC404200CD3E12 /* MCSharedBillPaymentsTableViewController-iPad.m in Sources */ = {isa = PBXBuildFile; fileRef = 38AAFB9E18EC404200CD3E12 /* MCSharedBillPaymentsTableViewController-iPad.m */; };
 		38AAFBA218EC406300CD3E12 /* MCSharedBillPeoplePresentTableViewController-iPad.m in Sources */ = {isa = PBXBuildFile; fileRef = 38AAFBA118EC406300CD3E12 /* MCSharedBillPeoplePresentTableViewController-iPad.m */; };
 		38AAFBA518EC529300CD3E12 /* MCSharedBillViewController_iPad.m in Sources */ = {isa = PBXBuildFile; fileRef = 38AAFBA418EC529300CD3E12 /* MCSharedBillViewController_iPad.m */; };
@@ -104,6 +110,7 @@
 		3829AD0E178B41320025969D /* WeAllPayStore.xcdatamodel */ = {isa = PBXFileReference; lastKnownFileType = wrapper.xcdatamodel; path = WeAllPayStore.xcdatamodel; sourceTree = "<group>"; };
 		382E7BDB17E5E57500A1040A /* MCReturnPaymentViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = MCReturnPaymentViewController.h; path = ViewControllers/MCReturnPaymentViewController.h; sourceTree = "<group>"; };
 		382E7BDC17E5E57500A1040A /* MCReturnPaymentViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = MCReturnPaymentViewController.m; path = ViewControllers/MCReturnPaymentViewController.m; sourceTree = "<group>"; };
+		382F9BD118F7285400818276 /* MCDismissMeBlockProtocol.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = MCDismissMeBlockProtocol.h; path = ViewControllers/MCDismissMeBlockProtocol.h; sourceTree = "<group>"; };
 		3830F6F4179872B400904FAF /* MCPaymentViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = MCPaymentViewController.h; path = ViewControllers/MCPaymentViewController.h; sourceTree = "<group>"; };
 		3830F6F5179872B400904FAF /* MCPaymentViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = MCPaymentViewController.m; path = ViewControllers/MCPaymentViewController.m; sourceTree = "<group>"; };
 		38334EBB172D1A770063B919 /* three peeps.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "three peeps.png"; sourceTree = "<group>"; };
@@ -179,6 +186,16 @@
 		3897159017902E35005BE03E /* MCSharedBillTableViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = MCSharedBillTableViewController.h; path = ViewControllers/MCSharedBillTableViewController.h; sourceTree = "<group>"; };
 		3897159117902E35005BE03E /* MCSharedBillTableViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = MCSharedBillTableViewController.m; path = ViewControllers/MCSharedBillTableViewController.m; sourceTree = "<group>"; };
 		3898F32D18EEB38400BFFC61 /* MCThisPersonProtocol.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = MCThisPersonProtocol.h; path = ViewControllers/MCThisPersonProtocol.h; sourceTree = "<group>"; };
+		3898F33018F180B500BFFC61 /* MCPaymentTableViewController_iPad.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = MCPaymentTableViewController_iPad.h; path = ViewControllers/iPad/MCPaymentTableViewController_iPad.h; sourceTree = "<group>"; };
+		3898F33118F180B500BFFC61 /* MCPaymentTableViewController_iPad.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = MCPaymentTableViewController_iPad.m; path = ViewControllers/iPad/MCPaymentTableViewController_iPad.m; sourceTree = "<group>"; };
+		3898F33318F1820600BFFC61 /* MCThisPaymentProtocol.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = MCThisPaymentProtocol.h; path = ViewControllers/iPad/MCThisPaymentProtocol.h; sourceTree = "<group>"; };
+		3898F33418F2CB6700BFFC61 /* MCSelectPayerTableViewController_iPad.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = MCSelectPayerTableViewController_iPad.h; path = ViewControllers/iPad/MCSelectPayerTableViewController_iPad.h; sourceTree = "<group>"; };
+		3898F33518F2CB6700BFFC61 /* MCSelectPayerTableViewController_iPad.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = MCSelectPayerTableViewController_iPad.m; path = ViewControllers/iPad/MCSelectPayerTableViewController_iPad.m; sourceTree = "<group>"; };
+		3898F33818F2CC0D00BFFC61 /* MCSelectPayerTableViewCell_iPad.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = MCSelectPayerTableViewCell_iPad.h; path = Views/iPad/MCSelectPayerTableViewCell_iPad.h; sourceTree = "<group>"; };
+		3898F33918F2CC0D00BFFC61 /* MCSelectPayerTableViewCell_iPad.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = MCSelectPayerTableViewCell_iPad.m; path = Views/iPad/MCSelectPayerTableViewCell_iPad.m; sourceTree = "<group>"; };
+		3898F33B18F40B9D00BFFC61 /* MCSharedBillAddOnsTest.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = MCSharedBillAddOnsTest.m; sourceTree = "<group>"; };
+		3898F33D18F40CC100BFFC61 /* MCPersonAddonsTest.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = MCPersonAddonsTest.m; sourceTree = "<group>"; };
+		3898F33F18F40E7700BFFC61 /* MCPaymentAddonsTest.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = MCPaymentAddonsTest.m; sourceTree = "<group>"; };
 		389E92621889E5A60005F063 /* en */ = {isa = PBXFileReference; fileEncoding = 10; lastKnownFileType = text.plist.strings; name = en; path = "en.lproj/Main-Iphone.strings"; sourceTree = "<group>"; };
 		389E92631889E5A60005F063 /* en */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = en; path = en.lproj/MCTableEmptyMessage.strings; sourceTree = "<group>"; };
 		389E92641889E5A60005F063 /* en */ = {isa = PBXFileReference; fileEncoding = 10; lastKnownFileType = text.plist.strings; name = en; path = en.lproj/Localizable.strings; sourceTree = "<group>"; };
@@ -231,7 +248,7 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				3898F32C18EEA27900BFFC61 /* libTestFlight.a in Frameworks */,
+				3880E7E218F72C79006C4518 /* libTestFlight.a in Frameworks */,
 				386FC37018E5BE1900428294 /* iAd.framework in Frameworks */,
 				38690703186F0EEF006A5C11 /* libz.dylib in Frameworks */,
 				3886D3FD16B7A1CD00ECE64F /* AddressBook.framework in Frameworks */,
@@ -388,6 +405,8 @@
 				38E0C5DE18E5C94D005A3F17 /* MCTonightsBillTransfer.h */,
 				38E0C5DF18E97A8A005A3F17 /* MCCurrentViewDelegate.h */,
 				3898F32D18EEB38400BFFC61 /* MCThisPersonProtocol.h */,
+				3898F33318F1820600BFFC61 /* MCThisPaymentProtocol.h */,
+				382F9BD118F7285400818276 /* MCDismissMeBlockProtocol.h */,
 			);
 			name = ViewControllers;
 			sourceTree = "<group>";
@@ -395,6 +414,7 @@
 		38572AF4169D439E00969C62 /* Views */ = {
 			isa = PBXGroup;
 			children = (
+				3898F33718F2CBCD00BFFC61 /* iPad */,
 				3897157617901D0F005BE03E /* MCTextFieldAndLabelTitleView.xib */,
 				3897157417901D0F005BE03E /* MCTextFieldAndLabelTitleView.h */,
 				3897157517901D0F005BE03E /* MCTextFieldAndLabelTitleView.m */,
@@ -469,6 +489,15 @@
 			name = "App Icon";
 			sourceTree = "<group>";
 		};
+		3898F33718F2CBCD00BFFC61 /* iPad */ = {
+			isa = PBXGroup;
+			children = (
+				3898F33818F2CC0D00BFFC61 /* MCSelectPayerTableViewCell_iPad.h */,
+				3898F33918F2CC0D00BFFC61 /* MCSelectPayerTableViewCell_iPad.m */,
+			);
+			name = iPad;
+			sourceTree = "<group>";
+		};
 		38CC9814183D520C006EC35D /* MC SDK */ = {
 			isa = PBXGroup;
 			children = (
@@ -485,6 +514,9 @@
 		38D785F618DC53C30074B670 /* WeAllPayTests */ = {
 			isa = PBXGroup;
 			children = (
+				3898F33F18F40E7700BFFC61 /* MCPaymentAddonsTest.m */,
+				3898F33D18F40CC100BFFC61 /* MCPersonAddonsTest.m */,
+				3898F33B18F40B9D00BFFC61 /* MCSharedBillAddOnsTest.m */,
 				38D785FC18DC53C30074B670 /* WeAllPayStoreTests.m */,
 				38D785F718DC53C30074B670 /* Supporting Files */,
 			);
@@ -531,12 +563,16 @@
 				38E0C5E918E9B2BD005A3F17 /* MCAllTripsTableViewController-iPad.m */,
 				38AAFBA318EC529300CD3E12 /* MCSharedBillViewController_iPad.h */,
 				38AAFBA418EC529300CD3E12 /* MCSharedBillViewController_iPad.m */,
-				38AAFB9D18EC404200CD3E12 /* MCSharedBillPaymentsTableViewController-iPad.h */,
-				38AAFB9E18EC404200CD3E12 /* MCSharedBillPaymentsTableViewController-iPad.m */,
 				38AAFBA018EC406300CD3E12 /* MCSharedBillPeoplePresentTableViewController-iPad.h */,
 				38AAFBA118EC406300CD3E12 /* MCSharedBillPeoplePresentTableViewController-iPad.m */,
+				38AAFB9D18EC404200CD3E12 /* MCSharedBillPaymentsTableViewController-iPad.h */,
+				38AAFB9E18EC404200CD3E12 /* MCSharedBillPaymentsTableViewController-iPad.m */,
 				38CC8C4818ED61FD006D99E7 /* MCPersonTableViewController_iPad.h */,
 				38CC8C4918ED61FD006D99E7 /* MCPersonTableViewController_iPad.m */,
+				3898F33018F180B500BFFC61 /* MCPaymentTableViewController_iPad.h */,
+				3898F33118F180B500BFFC61 /* MCPaymentTableViewController_iPad.m */,
+				3898F33418F2CB6700BFFC61 /* MCSelectPayerTableViewController_iPad.h */,
+				3898F33518F2CB6700BFFC61 /* MCSelectPayerTableViewController_iPad.m */,
 			);
 			name = iPad;
 			sourceTree = "<group>";
@@ -665,6 +701,8 @@
 				386FC32518E5855400428294 /* MCSharedBillMainViewController.m in Sources */,
 				38EFF2D416D215BE001C8248 /* MCAllTripsTableViewCell.m in Sources */,
 				38DB85DA17E45DEA006237CF /* MCPerson+addons.m in Sources */,
+				3898F33218F180B500BFFC61 /* MCPaymentTableViewController_iPad.m in Sources */,
+				3898F33618F2CB6700BFFC61 /* MCSelectPayerTableViewController_iPad.m in Sources */,
 				38CDE90017135B6300387CAA /* MCTools.m in Sources */,
 				3829AD0F178B41320025969D /* WeAllPayStore.xcdatamodeld in Sources */,
 				38DB85D717E45CA4006237CF /* MCSharedBill+addons.m in Sources */,
@@ -688,6 +726,7 @@
 				38DB85E617E46FE2006237CF /* MCSharedBill.m in Sources */,
 				38E0C5EA18E9B2BD005A3F17 /* MCAllTripsTableViewController-iPad.m in Sources */,
 				3892E3A417903EF00038894B /* MCEditTripViewController.m in Sources */,
+				3898F33A18F2CC0D00BFFC61 /* MCSelectPayerTableViewCell_iPad.m in Sources */,
 				3876EF591840E86900C9546A /* MCCancelDoneTableViewController.m in Sources */,
 				38DB85D417E45BCA006237CF /* MCPayment+addons.m in Sources */,
 				3892E3AA17904A240038894B /* MCPersonViewController.m in Sources */,
@@ -704,7 +743,10 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				3898F33C18F40B9D00BFFC61 /* MCSharedBillAddOnsTest.m in Sources */,
+				3898F33E18F40CC100BFFC61 /* MCPersonAddonsTest.m in Sources */,
 				38D785FD18DC53C30074B670 /* WeAllPayStoreTests.m in Sources */,
+				3898F34018F40E7700BFFC61 /* MCPaymentAddonsTest.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

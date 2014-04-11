@@ -36,5 +36,6 @@
 - (NSFetchedResultsController *)allTripsDataControllerForDelegate:(id)delegate;
 - (NSFetchedResultsController *)sharedBillPaymentsDataControllerForDelegate:(id)delegate;
 - (NSFetchedResultsController *)sharedBillPeoplePresentDataControllerForDelegate:(id)delegate;
+- (NSArray *)getPeopleOnSharedBill:(MCSharedBill *)thisBill;
 
 @end

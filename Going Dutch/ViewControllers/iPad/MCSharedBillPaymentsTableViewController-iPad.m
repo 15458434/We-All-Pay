@@ -16,6 +16,8 @@
 #import "MCPerson+addons.h"
 
 #import "MCTonightsBillTransfer.h"
+#import "MCThisPaymentProtocol.h"
+#import "MCDismissMeBlockProtocol.h"
 
 @interface MCSharedBillPaymentsTableViewController_iPad ()
 
@@ -146,6 +148,13 @@
     }
 }
 
+#pragma mark - Table view delegate
+
+-(void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath
+{
+    [self performSegueWithIdentifier:@"openPayment" sender:self];
+}
+
 #pragma mark - Table view data source
 
 - (NSInteger)numberOfSectionsInTableView:(UITableView *)tableView
@@ -222,7 +231,6 @@
 }
 */
 
-/*
 #pragma mark - Navigation
 
 // In a storyboard-based application, you will often want to do a little preparation before navigation
@@ -230,7 +238,27 @@
 {
     // Get the new view controller using [segue destinationViewController].
     // Pass the selected object to the new view controller.
+    
+    if ([[segue identifier] isEqualToString:@"openPayment"]) {
+        NSIndexPath *ip = [[self tableView] indexPathForSelectedRow];
+        MCPayment *thisPayment =[dataController objectAtIndexPath:ip];
+        id<MCThisPaymentProtocol, MCTonightsBillPut, MCDismissMeBlockProtocol> destination = [[segue destinationViewController] viewControllers][0];
+        if ([destination conformsToProtocol:@protocol(MCThisPaymentProtocol)]) {
+            [destination setThisPayment:thisPayment];
+        }
+        if ([destination conformsToProtocol:@protocol(MCTonightsBillPut)]) {
+            [destination setTonightsBill:_tonightsBill];
+        }
+        if ([destination conformsToProtocol:@protocol(MCDismissMeBlockProtocol)]) {
+            __weak MCSharedBillPaymentsTableViewController_iPad *weakSelf = self;
+            [destination setDismissMe:^{
+                __strong MCSharedBillPaymentsTableViewController_iPad *strongSelf = weakSelf;
+                if (strongSelf) {
+                    [[strongSelf tableView] deselectRowAtIndexPath:ip animated:YES];
+                }
+            }];
+        }
+    }
 }
-*/
 
 @end

@@ -237,6 +237,25 @@
     return dataController;
 }
 
+- (NSArray *)getPeopleOnSharedBill:(MCSharedBill *)thisBill
+{
+    NSParameterAssert(thisBill);
+    NSManagedObjectContext *context = [weAllPayStoreDocument managedObjectContext];
+    NSFetchRequest *request = [NSFetchRequest fetchRequestWithEntityName:@"MCPerson"];
+    NSSortDescriptor *sda = [NSSortDescriptor sortDescriptorWithKey:@"firstName" ascending:YES];
+    [request setSortDescriptors:@[sda]];
+    NSPredicate *predicate = [NSPredicate predicateWithFormat:@"ANY sharedBill = %@", thisBill];
+    [request setPredicate:predicate];
+    NSError *error;
+    NSArray *result = [context executeFetchRequest:request error:&error];
+    if (!result) {
+        NSLog(@"Error fetching people: %@", [error localizedDescription]);
+        return nil;
+    } else {
+        return result;
+    }
+}
+
 #pragma mark - Inherited from super class
 
 - (id)init
