@@ -205,6 +205,16 @@
     return @(sumOfMoney);
 }
 
+- (NSString *)totalSumOfMoneyOfThisSharedBillAsCurrencyString
+{
+    NSNumber *totalSpent = [self totalSumOfMoneyOfThisSharedBill];
+    NSNumberFormatter *nf = [[NSNumberFormatter alloc] init];
+    [nf setLocale:[NSLocale currentLocale]];
+    [nf setNumberStyle:NSNumberFormatterCurrencyStyle];
+    [nf setFormatterBehavior:NSNumberFormatterBehaviorDefault];
+    return [nf stringFromNumber:totalSpent];
+}
+
 - (NSNumber *)totalSumPaidBy:(MCPerson *)person
 {
     NSFetchRequest *request = [NSFetchRequest fetchRequestWithEntityName:@"MCPayment"];

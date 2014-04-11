@@ -12,6 +12,7 @@
 #import "MCSharedBill+addons.h"
 
 #import "MCTools.h"
+#import "MCDismissMeBlockProtocol.h"
 
 @interface MCSharedBillViewController_iPad ()
 
@@ -128,6 +129,23 @@
         id destination = [[segue destinationViewController] viewControllers][0];
         if ([destination conformsToProtocol:@protocol(MCTonightsBillPut)]) {
             [destination setTonightsBill:_tonightsBill];
+        }
+    }
+    
+    // When openSolutionView is used to go to the solution screen.
+    if ([[segue identifier] isEqualToString:@"openSolutionView"]) {
+        id destination = [[segue destinationViewController] viewControllers][0];
+        if ([destination conformsToProtocol:@protocol(MCTonightsBillPut)]) {
+            [destination setTonightsBill:_tonightsBill];
+        }
+        if ([destination conformsToProtocol:@protocol(MCDismissMeBlockProtocol)]) {
+            __weak MCSharedBillViewController_iPad *weakSelf = self;
+            [destination setDismissMe:^{
+                MCSharedBillViewController_iPad *strongSelf = weakSelf;
+                if (strongSelf) {
+                    [weakSelf dismissViewControllerAnimated:YES completion:nil];
+                }
+            }];
         }
     }
 }

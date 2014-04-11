@@ -29,6 +29,7 @@
 
 - (NSArray *)solveWhoHasToPayWhoFromThisBill;
 - (NSNumber *)totalSumOfMoneyOfThisSharedBill;
+- (NSString *)totalSumOfMoneyOfThisSharedBillAsCurrencyString;
 - (NSNumber *)totalSumPaidBy:(MCPerson *)person;
 - (NSNumber *)totalAmountOfCreditBy:(MCPerson *)person;
 - (NSNumber *)amountPeopleShouldHavePaid;
