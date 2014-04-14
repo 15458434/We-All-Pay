@@ -8,7 +8,7 @@
 
 #import "MCAllTripsTableViewController-iPad.h"
 
-#import "MCAllTripsTableViewCell.h"
+#import "MCAllTripsTableViewCell_iPad.h"
 
 #import "MCWeAllPayStoreController.h"
 #import "MCSharedBill+addons.h"
@@ -63,12 +63,6 @@
     
     // Uncomment the following line to display an Edit button in the navigation bar for this view controller.
     // self.navigationItem.rightBarButtonItem = self.editButtonItem;
-    
-    // Load the AllTripsTableViewCell
-    // Load the nib file
-    UINib *nib = [UINib nibWithNibName:@"MCAllTripsTableViewCell" bundle:nil];
-    // Register this nib that contains the cell.
-    [[ self tableView] registerNib:nib forCellReuseIdentifier:@"MCAllTripsTableViewCell"];
 }
 
 - (void)viewWillAppear:(BOOL)animated
@@ -145,6 +139,7 @@
 
 #pragma mark - UITableView Delegate
 
+/*
 - (CGFloat)tableView:(UITableView *)tableView heightForRowAtIndexPath:(NSIndexPath *)indexPath
 {
     return 64;
@@ -154,6 +149,7 @@
 {
     [self performSegueWithIdentifier:@"openEvent" sender:self];
 }
+ */
 
 #pragma mark - Table view data source
 
@@ -173,14 +169,14 @@
 - (UITableViewCell *)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath
 {
     MCSharedBill *thisTrip = [dataController objectAtIndexPath:indexPath];
-    MCAllTripsTableViewCell *allTripsTableViewCell = [tableView dequeueReusableCellWithIdentifier:@"MCAllTripsTableViewCell"];
+    MCAllTripsTableViewCell_iPad *allTripsTableViewCell = [tableView dequeueReusableCellWithIdentifier:@"MCAllTripsTableViewCell_iPad"];
     
     if (![thisTrip tripName]) {
         [[allTripsTableViewCell tripLabel] setText:@"..."];
     } else {
         [[allTripsTableViewCell tripLabel] setText:[thisTrip tripName]];
     }
-    [[allTripsTableViewCell peoplePresentLabel] setText:[thisTrip stringOfApproxPeoplePresent]];
+    [[allTripsTableViewCell peoplePresentLabel] setText:[thisTrip stringOfApproxPeoplePresentWithFullNames]];
     
     NSNumberFormatter *nf = [[NSNumberFormatter alloc] init];
     [nf setNumberStyle:NSNumberFormatterCurrencyStyle];
@@ -191,8 +187,8 @@
     // fill extraLabel with dateModified.
     if (!df) {
         df = [[NSDateFormatter alloc] init];
-        [df setDateStyle:NSDateFormatterMediumStyle];
-        [df setTimeStyle:NSDateFormatterShortStyle];
+        [df setDateStyle:NSDateFormatterFullStyle];
+        // [df setTimeStyle:NSDateFormatterShortStyle];
     }
     [[allTripsTableViewCell extraLabel] setText:[df stringFromDate:[thisTrip dateModified]]];
     

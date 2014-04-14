@@ -47,7 +47,25 @@
 
 #pragma mark - New in this class
 
-
+- (void)setCircularImageOnPictureView:(UIImage *)image
+{
+    __weak MCPersonTableViewController_iPad *weakSelf = self;
+    
+    dispatch_queue_t imageProcessQueue;
+    imageProcessQueue = dispatch_queue_create("imageProcessQueue", NULL);
+    
+    dispatch_async(imageProcessQueue, ^{
+        CGRect circularImageRect = CGRectMake(0, 0, 160, 160);
+        UIImage *circularImage = [MCTools cutCircularImageFrom:image toDestinationRect:circularImageRect];
+        dispatch_async(dispatch_get_main_queue(), ^{
+            MCPersonTableViewController_iPad *strongSelf = weakSelf;
+            if (strongSelf) {
+                [[strongSelf pictureView] setImage:circularImage];
+                [[strongSelf pictureView] setNeedsDisplay];
+            }
+        });
+    });
+}
 
 #pragma mark - Inherited From Super
 
@@ -87,7 +105,8 @@
     [firstNameField setText:[_thisPerson firstName]];
     [lastNameField setText:[_thisPerson lastName]];
     [emailField setText:[_thisPerson defaultEmailAddress]];
-    [pictureView setImage:[_thisPerson picture]];
+    //[_pictureView setImage:[_thisPerson picture]];
+    [self setCircularImageOnPictureView:[_thisPerson picture]];
 }
 
 - (void)didReceiveMemoryWarning

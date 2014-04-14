@@ -18,6 +18,7 @@
 + (BOOL)isTableInDatabaseEmpty;
 
 - (NSString *)stringOfApproxPeoplePresent;
+- (NSString *)stringOfApproxPeoplePresentWithFullNames;
 
 - (MCPayment *)addPayment;
 

@@ -16,7 +16,7 @@
 
 @interface MCPersonTableViewController_iPad : UITableViewController <UITextFieldDelegate, MCThisPersonProtocol, MCTonightsBillPut>
 {
-    __weak IBOutlet UIImageView *pictureView;
+    //__weak IBOutlet UIImageView *_pictureView;
     __weak IBOutlet UITextField *firstNameField;
     __weak IBOutlet UITextField *lastNameField;
     __weak IBOutlet UITextField *emailField;
@@ -26,6 +26,9 @@
     
     BOOL didSomethingChange;
 }
+
+@property (weak, nonatomic) IBOutlet UIImageView *pictureView;
+
 @property (strong, nonatomic) MCPerson *thisPerson;
 @property (strong, nonatomic) MCSharedBill *tonightsBill;
 

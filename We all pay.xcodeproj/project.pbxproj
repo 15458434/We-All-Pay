@@ -68,6 +68,8 @@
 		38C2BC9618F7F11100233D24 /* libTestFlight.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 3857304B18DAF2F100A900EA /* libTestFlight.a */; };
 		38C2BC9918F7F69A00233D24 /* MCWhoOwesWhoTableViewCell_iPad.m in Sources */ = {isa = PBXBuildFile; fileRef = 38C2BC9818F7F69A00233D24 /* MCWhoOwesWhoTableViewCell_iPad.m */; };
 		38C2BC9C18F7F6EB00233D24 /* MCSolutionOverViewTableViewCell_iPad.m in Sources */ = {isa = PBXBuildFile; fileRef = 38C2BC9B18F7F6EB00233D24 /* MCSolutionOverViewTableViewCell_iPad.m */; };
+		38C2BC9F18FBD89400233D24 /* MCAllTripsTableViewCell_iPad.m in Sources */ = {isa = PBXBuildFile; fileRef = 38C2BC9E18FBD89400233D24 /* MCAllTripsTableViewCell_iPad.m */; };
+		38C2BCA218FBEC5200233D24 /* MCPersonTableViewCell_iPad.m in Sources */ = {isa = PBXBuildFile; fileRef = 38C2BCA118FBEC5200233D24 /* MCPersonTableViewCell_iPad.m */; };
 		38CC8C4A18ED61FD006D99E7 /* MCPersonTableViewController_iPad.m in Sources */ = {isa = PBXBuildFile; fileRef = 38CC8C4918ED61FD006D99E7 /* MCPersonTableViewController_iPad.m */; };
 		38CDE90017135B6300387CAA /* MCTools.m in Sources */ = {isa = PBXBuildFile; fileRef = 38CDE8FF17135B6300387CAA /* MCTools.m */; };
 		38D785F318DC53C30074B670 /* XCTest.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 38522E2418DB3F01007BDB3F /* XCTest.framework */; };
@@ -215,6 +217,10 @@
 		38C2BC9818F7F69A00233D24 /* MCWhoOwesWhoTableViewCell_iPad.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = MCWhoOwesWhoTableViewCell_iPad.m; sourceTree = "<group>"; };
 		38C2BC9A18F7F6EB00233D24 /* MCSolutionOverViewTableViewCell_iPad.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = MCSolutionOverViewTableViewCell_iPad.h; path = Views/iPad/MCSolutionOverViewTableViewCell_iPad.h; sourceTree = "<group>"; };
 		38C2BC9B18F7F6EB00233D24 /* MCSolutionOverViewTableViewCell_iPad.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = MCSolutionOverViewTableViewCell_iPad.m; path = Views/iPad/MCSolutionOverViewTableViewCell_iPad.m; sourceTree = "<group>"; };
+		38C2BC9D18FBD89400233D24 /* MCAllTripsTableViewCell_iPad.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = MCAllTripsTableViewCell_iPad.h; path = Views/iPad/MCAllTripsTableViewCell_iPad.h; sourceTree = "<group>"; };
+		38C2BC9E18FBD89400233D24 /* MCAllTripsTableViewCell_iPad.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = MCAllTripsTableViewCell_iPad.m; path = Views/iPad/MCAllTripsTableViewCell_iPad.m; sourceTree = "<group>"; };
+		38C2BCA018FBEC5200233D24 /* MCPersonTableViewCell_iPad.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = MCPersonTableViewCell_iPad.h; path = Views/iPad/MCPersonTableViewCell_iPad.h; sourceTree = "<group>"; };
+		38C2BCA118FBEC5200233D24 /* MCPersonTableViewCell_iPad.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = MCPersonTableViewCell_iPad.m; path = Views/iPad/MCPersonTableViewCell_iPad.m; sourceTree = "<group>"; };
 		38CC8C4818ED61FD006D99E7 /* MCPersonTableViewController_iPad.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = MCPersonTableViewController_iPad.h; path = ViewControllers/iPad/MCPersonTableViewController_iPad.h; sourceTree = "<group>"; };
 		38CC8C4918ED61FD006D99E7 /* MCPersonTableViewController_iPad.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = MCPersonTableViewController_iPad.m; path = ViewControllers/iPad/MCPersonTableViewController_iPad.m; sourceTree = "<group>"; };
 		38CDE8FE17135B6300387CAA /* MCTools.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = MCTools.h; sourceTree = "<group>"; };
@@ -507,6 +513,10 @@
 				38C2BC9B18F7F6EB00233D24 /* MCSolutionOverViewTableViewCell_iPad.m */,
 				38C2BC9718F7F69A00233D24 /* MCWhoOwesWhoTableViewCell_iPad.h */,
 				38C2BC9818F7F69A00233D24 /* MCWhoOwesWhoTableViewCell_iPad.m */,
+				38C2BC9D18FBD89400233D24 /* MCAllTripsTableViewCell_iPad.h */,
+				38C2BC9E18FBD89400233D24 /* MCAllTripsTableViewCell_iPad.m */,
+				38C2BCA018FBEC5200233D24 /* MCPersonTableViewCell_iPad.h */,
+				38C2BCA118FBEC5200233D24 /* MCPersonTableViewCell_iPad.m */,
 			);
 			name = iPad;
 			sourceTree = "<group>";
@@ -718,6 +728,7 @@
 				38EFF2D416D215BE001C8248 /* MCAllTripsTableViewCell.m in Sources */,
 				38DB85DA17E45DEA006237CF /* MCPerson+addons.m in Sources */,
 				3898F33218F180B500BFFC61 /* MCPaymentTableViewController_iPad.m in Sources */,
+				38C2BCA218FBEC5200233D24 /* MCPersonTableViewCell_iPad.m in Sources */,
 				3898F33618F2CB6700BFFC61 /* MCSelectPayerTableViewController_iPad.m in Sources */,
 				38CDE90017135B6300387CAA /* MCTools.m in Sources */,
 				3829AD0F178B41320025969D /* WeAllPayStore.xcdatamodeld in Sources */,
@@ -730,6 +741,7 @@
 				38DB85E917E46FE2006237CF /* MCPerson.m in Sources */,
 				3897157A17901D0F005BE03E /* MCTextFieldAndLabelTitleView.m in Sources */,
 				38AAFBA218EC406300CD3E12 /* MCSharedBillPeoplePresentTableViewController-iPad.m in Sources */,
+				38C2BC9F18FBD89400233D24 /* MCAllTripsTableViewCell_iPad.m in Sources */,
 				38C2BC9918F7F69A00233D24 /* MCWhoOwesWhoTableViewCell_iPad.m in Sources */,
 				3897157C17901D0F005BE03E /* MCTwoLabelsTitleView.m in Sources */,
 				3897158717901D55005BE03E /* MCPaymentTableViewCell.m in Sources */,

@@ -8,7 +8,7 @@
 
 #import "MCSharedBillPeoplePresentTableViewController-iPad.h"
 
-#import "MCPersonTableViewCell.h"
+#import "MCPersonTableViewCell_iPad.h"
 
 #import "MCPerson+addons.h"
 #import "MCSharedBill+addons.h"
@@ -63,12 +63,6 @@
     
     // Uncomment the following line to display an Edit button in the navigation bar for this view controller.
     // self.navigationItem.rightBarButtonItem = self.editButtonItem;
-    
-    // Load the AllTripsTableViewCell
-    // Load the nib file
-    UINib *nib = [UINib nibWithNibName:@"MCPersonTableViewCell" bundle:nil];
-    // Register this nib that contains the cell.
-    [[ self tableView] registerNib:nib forCellReuseIdentifier:@"MCPersonTableViewCell"];
 }
 
 - (void)viewWillAppear:(BOOL)animated
@@ -160,10 +154,12 @@
 
 #pragma mark - UITableViewDelegate
 
+/*
 - (CGFloat)tableView:(UITableView *)tableView heightForRowAtIndexPath:(NSIndexPath *)indexPath
 {
     return 60;
 }
+ */
 
 - (void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath
 {
@@ -188,9 +184,10 @@
 - (UITableViewCell *)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath
 {
     MCPerson *thisCellsPerson = [dataController objectAtIndexPath:indexPath];
-    MCPersonTableViewCell *thisCell = [tableView dequeueReusableCellWithIdentifier:@"MCPersonTableViewCell"];
+    MCPersonTableViewCell_iPad *thisCell = [tableView dequeueReusableCellWithIdentifier:@"MCPersonTableViewCell_iPad"];
     
-    [[thisCell personImage] setImage:[thisCellsPerson thumbnail]];
+    [thisCell setCircularImage:[thisCellsPerson picture]];
+    //[[thisCell personImage] setImage:[thisCellsPerson picture]];
     [[thisCell nameLabel] setText:[thisCellsPerson getFullName]];
     [[thisCell emailLabel] setText:[thisCellsPerson defaultEmailAddress]];
     NSNumberFormatter *nf = [[NSNumberFormatter alloc] init];

@@ -37,4 +37,32 @@
     }
 }
 
++ (UIImage *)cutCircularImageFrom:(UIImage *)sourceImage toDestinationRect:(CGRect)newPictureRect
+{
+    UIImage *thisImage = sourceImage;
+    NSParameterAssert(thisImage);
+    NSParameterAssert(newPictureRect.size.height);
+    NSParameterAssert(newPictureRect.size.width);
+    CGSize imageSize = [thisImage size];
+    float ratio = MAX(newPictureRect.size.width / imageSize.width, newPictureRect.size.height / imageSize.height);
+    
+    UIGraphicsBeginImageContextWithOptions(newPictureRect.size, NO, 0.0);
+    UIBezierPath *circularBezierPath = [UIBezierPath bezierPathWithOvalInRect:newPictureRect];
+    [circularBezierPath addClip];
+    
+    CGRect imageDrawRect;
+    imageDrawRect.size.width = ratio * imageSize.width;
+    imageDrawRect.size.height = ratio * imageSize.height;
+    imageDrawRect.origin.x = (newPictureRect.size.width - imageDrawRect.size.width) / 2.0;
+    imageDrawRect.origin.y = (newPictureRect.size.height - imageDrawRect.size.height) / 2.0;
+    
+    [thisImage drawInRect:imageDrawRect];
+    
+    UIImage *newPicture = UIGraphicsGetImageFromCurrentImageContext();
+    
+    UIGraphicsEndImageContext();
+    
+    return newPicture;
+}
+
 @end
