@@ -8,7 +8,7 @@
 
 #import "MCSharedBillPaymentsTableViewController-iPad.h"
 
-#import "MCPaymentTableViewCell.h"
+#import "MCPaymentTableViewCell_iPad.h"
 
 #import "MCWeAllPayStoreController.h"
 #import "MCPayment+addons.h"
@@ -67,12 +67,6 @@
     
     // Uncomment the following line to display an Edit button in the navigation bar for this view controller.
     // self.navigationItem.rightBarButtonItem = self.editButtonItem;
-    
-    // Load the MCPaymentTableViewCell
-    // Load the nib file
-    UINib *nib = [UINib nibWithNibName:@"MCPaymentTableViewCell" bundle:nil];
-    // Register this nib that contains the cell.
-    [[ self tableView] registerNib:nib forCellReuseIdentifier:@"MCPaymentTableViewCell"];
 }
 
 - (void)viewWillAppear:(BOOL)animated
@@ -174,7 +168,7 @@
     MCPayment *thisCellsPayment = [dataController objectAtIndexPath:indexPath];
     if (!thisCellsPayment) {
     }
-    MCPaymentTableViewCell *paymentCell = [tableView dequeueReusableCellWithIdentifier:@"MCPaymentTableViewCell"];
+    MCPaymentTableViewCell_iPad *paymentCell = [tableView dequeueReusableCellWithIdentifier:@"MCPaymentTableViewCell_iPad"];
     
     NSString *thisCellsPayerName;
     if ([thisCellsPayment payingPerson]) {
@@ -183,7 +177,8 @@
         thisCellsPayerName = NSLocalizedString(@"THISPAYMENTCELL_NOPAYERNAME", @"Someone");
     }
     [[paymentCell namePayerLabel] setText:[NSString stringWithFormat:@"%@%@", thisCellsPayerName, NSLocalizedString(@"PAYMENTCELL_PAYERNAME_EXTRA", @" paid") ]];
-    [[paymentCell pictureOfPayer] setImage:[[thisCellsPayment payingPerson] thumbnail]];
+    //[[paymentCell pictureOfPayer] setImage:[[thisCellsPayment payingPerson] thumbnail]];
+    [paymentCell setCircularImage:[[thisCellsPayment payingPerson] picture]];
     
     NSString *thisCellsDescriptionOfPayment = [thisCellsPayment descriptionOfPayment];
     if (!thisCellsDescriptionOfPayment) {

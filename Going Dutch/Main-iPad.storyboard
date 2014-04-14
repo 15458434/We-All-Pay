@@ -484,19 +484,71 @@
         <scene sceneID="qG2-Zg-IFZ">
             <objects>
                 <tableViewController storyboardIdentifier="MCSharedBillPaymentsTableViewController_iPad" useStoryboardIdentifierAsRestorationIdentifier="YES" id="NKD-wF-4e4" customClass="MCSharedBillPaymentsTableViewController_iPad" sceneMemberID="viewController">
-                    <tableView key="view" clipsSubviews="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" dataMode="prototypes" style="grouped" separatorStyle="default" rowHeight="44" sectionHeaderHeight="10" sectionFooterHeight="10" id="hse-0g-6ne">
+                    <tableView key="view" clipsSubviews="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" dataMode="prototypes" style="grouped" separatorStyle="default" rowHeight="83" sectionHeaderHeight="10" sectionFooterHeight="10" id="hse-0g-6ne">
                         <rect key="frame" x="0.0" y="0.0" width="768" height="1024"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <color key="backgroundColor" cocoaTouchSystemColor="groupTableViewBackgroundColor"/>
+                        <inset key="separatorInset" minX="90" minY="0.0" maxX="0.0" maxY="0.0"/>
                         <prototypes>
-                            <tableViewCell contentMode="scaleToFill" selectionStyle="blue" hidesAccessoryWhenEditing="NO" indentationLevel="1" indentationWidth="0.0" reuseIdentifier="paymentTableViewCelll" id="18w-nV-pxt">
-                                <rect key="frame" x="0.0" y="55" width="768" height="44"/>
+                            <tableViewCell contentMode="scaleToFill" selectionStyle="blue" hidesAccessoryWhenEditing="NO" indentationLevel="1" indentationWidth="0.0" reuseIdentifier="MCPaymentTableViewCell_iPad" rowHeight="80" id="18w-nV-pxt" customClass="MCPaymentTableViewCell_iPad">
+                                <rect key="frame" x="0.0" y="55" width="768" height="80"/>
                                 <autoresizingMask key="autoresizingMask"/>
                                 <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" tableViewCell="18w-nV-pxt" id="k1I-hi-NZL">
-                                    <rect key="frame" x="0.0" y="0.0" width="768" height="43"/>
+                                    <rect key="frame" x="0.0" y="0.0" width="768" height="79"/>
                                     <autoresizingMask key="autoresizingMask"/>
+                                    <subviews>
+                                        <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" translatesAutoresizingMaskIntoConstraints="NO" id="gvW-A9-uVj">
+                                            <rect key="frame" x="20" y="10" width="59" height="59"/>
+                                            <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+                                            <constraints>
+                                                <constraint firstAttribute="width" secondItem="gvW-A9-uVj" secondAttribute="height" multiplier="1:1" id="MDb-wW-TsC"/>
+                                            </constraints>
+                                        </imageView>
+                                        <label opaque="NO" clipsSubviews="YES" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="payerField" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="xU7-yf-2N6">
+                                            <rect key="frame" x="87" y="23" width="573" height="21"/>
+                                            <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                                            <fontDescription key="fontDescription" name="HelveticaNeue-Thin" family="Helvetica Neue" pointSize="17"/>
+                                            <nil key="highlightedColor"/>
+                                        </label>
+                                        <label opaque="NO" clipsSubviews="YES" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="itemField" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="LTB-3b-Z1S">
+                                            <rect key="frame" x="87" y="52" width="573" height="17"/>
+                                            <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                                            <constraints>
+                                                <constraint firstAttribute="width" priority="750" constant="400" id="97K-OH-OzM"/>
+                                            </constraints>
+                                            <fontDescription key="fontDescription" name="HelveticaNeue-Bold" family="Helvetica Neue" pointSize="14"/>
+                                            <color key="textColor" white="0.33333333333333331" alpha="1" colorSpace="calibratedWhite"/>
+                                            <nil key="highlightedColor"/>
+                                        </label>
+                                        <label opaque="NO" clipsSubviews="YES" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="moneyLabel" textAlignment="right" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="Bus-qo-pqC">
+                                            <rect key="frame" x="668" y="50" width="80" height="21"/>
+                                            <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                                            <constraints>
+                                                <constraint firstAttribute="width" constant="80" id="BII-9a-zJ6"/>
+                                            </constraints>
+                                            <fontDescription key="fontDescription" name="HelveticaNeue-Thin" family="Helvetica Neue" pointSize="17"/>
+                                            <nil key="highlightedColor"/>
+                                        </label>
+                                    </subviews>
+                                    <constraints>
+                                        <constraint firstItem="LTB-3b-Z1S" firstAttribute="top" secondItem="xU7-yf-2N6" secondAttribute="bottom" constant="8" symbolic="YES" id="HKj-w8-aaT"/>
+                                        <constraint firstItem="Bus-qo-pqC" firstAttribute="baseline" secondItem="LTB-3b-Z1S" secondAttribute="baseline" id="IKL-bC-SAw"/>
+                                        <constraint firstAttribute="bottom" secondItem="gvW-A9-uVj" secondAttribute="bottom" constant="10" id="KMX-nh-ALI"/>
+                                        <constraint firstItem="Bus-qo-pqC" firstAttribute="leading" secondItem="LTB-3b-Z1S" secondAttribute="trailing" constant="8" symbolic="YES" id="Lkc-dS-9J0"/>
+                                        <constraint firstItem="xU7-yf-2N6" firstAttribute="trailing" secondItem="LTB-3b-Z1S" secondAttribute="trailing" id="PWr-x8-dG9"/>
+                                        <constraint firstItem="LTB-3b-Z1S" firstAttribute="bottom" secondItem="gvW-A9-uVj" secondAttribute="bottom" id="gl1-Vn-A9Y"/>
+                                        <constraint firstItem="gvW-A9-uVj" firstAttribute="leading" secondItem="k1I-hi-NZL" secondAttribute="leading" constant="20" symbolic="YES" id="kQA-p3-bfk"/>
+                                        <constraint firstItem="gvW-A9-uVj" firstAttribute="top" secondItem="k1I-hi-NZL" secondAttribute="top" constant="10" id="mTk-HK-XIt"/>
+                                        <constraint firstAttribute="trailing" secondItem="Bus-qo-pqC" secondAttribute="trailing" constant="20" symbolic="YES" id="nFX-Xg-LOr"/>
+                                        <constraint firstItem="LTB-3b-Z1S" firstAttribute="leading" secondItem="gvW-A9-uVj" secondAttribute="trailing" constant="8" id="pVw-E5-myZ"/>
+                                        <constraint firstItem="xU7-yf-2N6" firstAttribute="leading" secondItem="LTB-3b-Z1S" secondAttribute="leading" id="tng-H7-qDY"/>
+                                    </constraints>
                                 </tableViewCellContentView>
                                 <connections>
+                                    <outlet property="moneyPaidLabel" destination="Bus-qo-pqC" id="Bsz-hI-5RG"/>
+                                    <outlet property="namePayerLabel" destination="xU7-yf-2N6" id="Ds2-x7-Wiz"/>
+                                    <outlet property="pictureOfPayer" destination="gvW-A9-uVj" id="V8N-41-Ip6"/>
+                                    <outlet property="whatPaidLabel" destination="LTB-3b-Z1S" id="coN-2L-gYD"/>
                                     <segue destination="cne-yA-g1T" kind="modal" identifier="openPayment" modalPresentationStyle="formSheet" id="pZQ-Y2-0Nm"/>
                                 </connections>
                             </tableViewCell>
@@ -511,7 +563,7 @@
                 </tableViewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="nvc-UM-iSY" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="3178" y="1108"/>
+            <point key="canvasLocation" x="3178" y="1095"/>
         </scene>
         <!--Payment Table View Controller i Pad - payment details-->
         <scene sceneID="8de-96-T7W">
@@ -884,8 +936,8 @@
         <simulatedScreenMetrics key="destination"/>
     </simulatedMetricsContainer>
     <inferredMetricsTieBreakers>
-        <segue reference="8Cc-ux-2co"/>
+        <segue reference="1Uw-eh-0NI"/>
         <segue reference="M2f-Ug-Ooc"/>
-        <segue reference="oh3-5j-dZ9"/>
+        <segue reference="pZQ-Y2-0Nm"/>
     </inferredMetricsTieBreakers>
 </document>
