@@ -16,4 +16,6 @@
 @property (weak, nonatomic) IBOutlet UIImageView *thumbnailView;
 @property (weak, nonatomic) IBOutlet UILabel *fullNameLabel;
 
+- (void)setCircularImage:(UIImage *)personImage;
+
 @end

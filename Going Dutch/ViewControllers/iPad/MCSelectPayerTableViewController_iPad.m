@@ -22,6 +22,12 @@
 
 @implementation MCSelectPayerTableViewController_iPad
 
+#pragma mark - New in this class
+
+
+
+#pragma mark - Inherited from super
+
 - (id)initWithStyle:(UITableViewStyle)style
 {
     self = [super initWithStyle:style];
@@ -80,7 +86,7 @@
     MCSelectPayerTableViewCell_iPad *cell = [tableView dequeueReusableCellWithIdentifier:@"selectPayerTableViewCell" forIndexPath:indexPath];
     
     MCPerson *thisPerson = [people objectAtIndex:[indexPath row]];
-    [[cell thumbnailView] setImage:[thisPerson thumbnail]];
+    [cell setCircularImage:[thisPerson thumbnail]];
     [[cell fullNameLabel] setText:[thisPerson getFullName]];
     
     return cell;

@@ -59,8 +59,29 @@
 
 - (void)reloadPayerLabel
 {
-    [payerLabel setText:[[_thisPayment payingPerson] getFullName]];
+    [selectButton setTitle:[[_thisPayment payingPerson] getFullName] forState:UIControlStateNormal];
+    [self setCircularImageOnPictureView:[[_thisPayment payingPerson] picture]];
     _didSomethingChange = MCSomethingHasChanged;
+}
+
+- (void)setCircularImageOnPictureView:(UIImage *)image
+{
+    __weak MCPaymentTableViewController_iPad *weakSelf = self;
+    
+    dispatch_queue_t imageProcessQueue;
+    imageProcessQueue = dispatch_queue_create("imageProcessQueue", NULL);
+    
+    dispatch_async(imageProcessQueue, ^{
+        CGRect circularImageRect = CGRectMake(0, 0, 160, 160);
+        UIImage *circularImage = [MCTools cutCircularImageFrom:image toDestinationRect:circularImageRect];
+        dispatch_async(dispatch_get_main_queue(), ^{
+            MCPaymentTableViewController_iPad *strongSelf = weakSelf;
+            if (strongSelf) {
+                [[strongSelf payerPicture] setImage:circularImage];
+                [[strongSelf payerPicture] setNeedsDisplay];
+            }
+        });
+    });
 }
 
 #pragma mark - Inherited from super
@@ -100,10 +121,13 @@
         _thisPayment = [_tonightsBill addPayment];
         _didSomethingChange = MCSomethingHasChanged;
     } else {
-        [payerLabel setText:[[_thisPayment payingPerson] getFullName]];
+        [selectButton setTitle:[[_thisPayment payingPerson] getFullName] forState:UIControlStateNormal];
         [itemField setText:[_thisPayment descriptionOfPayment]];
         if ([_thisPayment money]) {
             [paidField setText:[_thisPayment getMoneyValueInCurrencyAsAString]];
+        }
+        if ([[_thisPayment payingPerson] picture]) {
+            [self setCircularImageOnPictureView:[[_thisPayment payingPerson] picture]];
         }
     }
 }
@@ -171,7 +195,12 @@
 
 - (void)popoverControllerDidDismissPopover:(UIPopoverController *)popoverController
 {
-    [payerLabel setText:[[_thisPayment payingPerson] getFullName]];
+    if ([_thisPayment payingPerson]) {
+        [selectButton setTitle:[[_thisPayment payingPerson] getFullName] forState:UIControlStateNormal];
+        if ([[_thisPayment payingPerson] picture]) {
+            [self setCircularImageOnPictureView:[[_thisPayment payingPerson] picture]];
+        }
+    }
 }
 
 #pragma mark - Table view delegate

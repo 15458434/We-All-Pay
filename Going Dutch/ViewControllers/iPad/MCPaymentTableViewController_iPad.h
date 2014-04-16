@@ -25,9 +25,12 @@ typedef NS_ENUM(BOOL, MCDidSomethingChange) {
     __weak IBOutlet UILabel *payerLabel;
     __weak IBOutlet UITextField *itemField;
     __weak IBOutlet UITextField *paidField;
+    __weak IBOutlet UIButton *selectButton;
     
     MCDidSomethingChange _didSomethingChange;
 }
+
+@property (weak, nonatomic) IBOutlet UIImageView *payerPicture;
 
 @property (strong, nonatomic) MCPayment *thisPayment;
 @property (strong, nonatomic) MCSharedBill *tonightsBill;
