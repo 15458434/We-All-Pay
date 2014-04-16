@@ -177,8 +177,10 @@
         thisCellsPayerName = NSLocalizedString(@"THISPAYMENTCELL_NOPAYERNAME", @"Someone");
     }
     [[paymentCell namePayerLabel] setText:[NSString stringWithFormat:@"%@%@", thisCellsPayerName, NSLocalizedString(@"PAYMENTCELL_PAYERNAME_EXTRA", @" paid") ]];
-    //[[paymentCell pictureOfPayer] setImage:[[thisCellsPayment payingPerson] thumbnail]];
-    [paymentCell setCircularImage:[[thisCellsPayment payingPerson] picture]];
+    
+    if ([[thisCellsPayment payingPerson] picture]) {
+        [paymentCell setCircularImage:[[thisCellsPayment payingPerson] picture]];
+    }
     
     NSString *thisCellsDescriptionOfPayment = [thisCellsPayment descriptionOfPayment];
     if (!thisCellsDescriptionOfPayment) {
