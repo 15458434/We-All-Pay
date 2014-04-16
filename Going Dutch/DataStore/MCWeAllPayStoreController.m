@@ -134,6 +134,8 @@
     }
 }
 
+#pragma mark - Undomanager stuff.
+
 - (void)beginUndoGroup
 {
     NSManagedObjectContext *context = [weAllPayStoreDocument managedObjectContext];
@@ -163,6 +165,8 @@
     [[context undoManager] undoNestedGroup];
     [[context undoManager] disableUndoRegistration];
 }
+
+#pragma mark - TableView fill sources.
 
 - (NSFetchedResultsController *)allTripsDataControllerForDelegate:(id)delegate
 {
@@ -250,6 +254,25 @@
     NSArray *result = [context executeFetchRequest:request error:&error];
     if (!result) {
         NSLog(@"Error fetching people: %@", [error localizedDescription]);
+        return nil;
+    } else {
+        return result;
+    }
+}
+
+- (NSArray *)getEmailaddressesFrom:(MCPerson *)thisPerson
+{
+    NSParameterAssert(thisPerson);
+    NSManagedObjectContext *context = [weAllPayStoreDocument managedObjectContext];
+    NSFetchRequest *request = [NSFetchRequest fetchRequestWithEntityName:@"MCEmailAddress"];
+    NSSortDescriptor *sd = [NSSortDescriptor sortDescriptorWithKey:@"emailAddress" ascending:YES];
+    [request setSortDescriptors:@[sd]];
+    NSPredicate *predicate = [NSPredicate predicateWithFormat:@"owner = %@", thisPerson];
+    [request setPredicate:predicate];
+    NSError *error;
+    NSArray *result = [context executeFetchRequest:request error:&error];
+    if (!result) {
+        NSLog(@"Error fetching this person emailAddresses.");
         return nil;
     } else {
         return result;

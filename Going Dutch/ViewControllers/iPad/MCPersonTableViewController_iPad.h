@@ -14,7 +14,7 @@
 @class MCPerson;
 @class MCSharedBill;
 
-@interface MCPersonTableViewController_iPad : UITableViewController <UITextFieldDelegate, MCThisPersonProtocol, MCTonightsBillPut>
+@interface MCPersonTableViewController_iPad : UITableViewController <UITextFieldDelegate, UIPopoverControllerDelegate, MCThisPersonProtocol, MCTonightsBillPut>
 {
     //__weak IBOutlet UIImageView *_pictureView;
     __weak IBOutlet UITextField *firstNameField;

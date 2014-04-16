@@ -12,6 +12,7 @@
 #import "MCSharedBill+addons.h"
 
 #import "MCTonightsBillTransfer.h"
+#import "MCDismissMeBlockProtocol.h"
 
 #import "MCWeAllPayStoreController.h"
 
@@ -115,6 +116,23 @@
     // Dispose of any resources that can be recreated.
 }
 
+#pragma mark - UIPopoverControllerDelegate
+
+- (void)popoverController:(UIPopoverController *)popoverController willRepositionPopoverToRect:(inout CGRect *)rect inView:(inout UIView *__autoreleasing *)view
+{
+    
+}
+
+- (BOOL)popoverControllerShouldDismissPopover:(UIPopoverController *)popoverController
+{
+    return YES;
+}
+
+- (void)popoverControllerDidDismissPopover:(UIPopoverController *)popoverController
+{
+    [emailField setText:[_thisPerson defaultEmailAddress]];
+}
+
 #pragma mark - UITextFieldDelegate
 
 - (BOOL)textFieldShouldEndEditing:(UITextField *)textField
@@ -200,7 +218,6 @@
 }
 */
 
-/*
 #pragma mark - Navigation
 
 // In a storyboard-based application, you will often want to do a little preparation before navigation
@@ -208,7 +225,22 @@
 {
     // Get the new view controller using [segue destinationViewController].
     // Pass the selected object to the new view controller.
+    if ([[segue identifier] isEqualToString:@"openSelectEmailAddress"]) {
+        id destination = [segue destinationViewController];
+        if ([destination conformsToProtocol:@protocol(MCThisPersonProtocol) ]) {
+            [destination setThisPerson:_thisPerson];
+        }
+        
+        UIPopoverController *myPopover = [(UIStoryboardPopoverSegue *)segue popoverController];
+        [myPopover setDelegate:self];
+        
+        if ([destination conformsToProtocol:@protocol(MCDismissMeBlockProtocol)]) {
+            [destination setDismissMe:^{
+                [myPopover dismissPopoverAnimated:YES];
+                [emailField setText:[_thisPerson defaultEmailAddress]];
+            }];
+        }
+    }
 }
-*/
 
 @end

@@ -88,4 +88,30 @@
     XCTAssertTrue([MCPerson isTableInDatabaseEmpty], @"People left in the database");
 }
 
+- (void)testSetNewDefaultEmailaddressObject
+{
+    MCPerson *thisPerson = [MCPerson addPerson];
+    [thisPerson setFirstName:@"Mark"];
+    [thisPerson setLastName:@"Cornelisse"];
+    NSString *emailAddressMark = @"info@markcornelisse.nl";
+    [thisPerson addOneEmailAddressFromAString:emailAddressMark];
+    XCTAssertTrue([thisPerson isThereAnEmailAddress], @"There is no emailAddress present when one had just been added.");
+    XCTAssertTrue([[thisPerson defaultEmailAddress] isEqualToString:emailAddressMark], @"emailAddress Stored is not equal to the new default one");
+    MCEmailAddress *firstEmailAddressObject = [thisPerson getDefaultEmailAddressObject];
+    XCTAssertTrue([[firstEmailAddressObject emailAddress] isEqualToString:emailAddressMark], @"Emailaddress stored is not the one retrieved.");
+    NSString *emailAddress2Mark = @"mark.cornelisse@yahoo.com";
+    [thisPerson addOneEmailAddressFromAString:emailAddress2Mark];
+    XCTAssertTrue([thisPerson isThereAnEmailAddress], @"There is no emailAddress present when two has been added.");
+    XCTAssertTrue([[thisPerson defaultEmailAddress] isEqualToString:emailAddressMark], @"emailAddress Stored is not equal to the first one");
+    [thisPerson addOneEmailAddressFromAString:emailAddress2Mark];
+    XCTAssertTrue([[thisPerson emailAddress] count] == 2, @"Adding two times the same emailAddress is possible.");
+    NSString *emailAddress3Mark = @"m.p.cornelisse@gmail.com";
+    [thisPerson addNewDefaultEmailAddressFromAString:emailAddress3Mark];
+    XCTAssertTrue([[thisPerson defaultEmailAddress] isEqualToString:emailAddress3Mark], @"addNewDefaultEmailAddress failes to set the right defaultEmailAddress");
+    [thisPerson setNewDefaultEmailaddressObject:firstEmailAddressObject];
+    XCTAssertTrue([[thisPerson defaultEmailAddress] isEqualToString:emailAddressMark], @"setNewDefaultEmailaddressObject failes to set the correct defaultEmailAddress");
+    [thisPerson deletAllEmailAddresses];
+    [MCPerson deletePerson:thisPerson];
+}
+
 @end

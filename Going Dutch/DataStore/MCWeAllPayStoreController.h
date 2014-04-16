@@ -33,9 +33,11 @@
 - (void)endUndoGroupAndProcess;
 - (void)endUndoGroupAndUndo;
 
+// TableView fill sources.
 - (NSFetchedResultsController *)allTripsDataControllerForDelegate:(id)delegate;
 - (NSFetchedResultsController *)sharedBillPaymentsDataControllerForDelegate:(id)delegate;
 - (NSFetchedResultsController *)sharedBillPeoplePresentDataControllerForDelegate:(id)delegate;
 - (NSArray *)getPeopleOnSharedBill:(MCSharedBill *)thisBill;
+- (NSArray *)getEmailaddressesFrom:(MCPerson *)thisPerson;
 
 @end

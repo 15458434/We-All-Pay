@@ -108,4 +108,24 @@
     [MCSharedBill deleteSharedbill:tonightsBill];
 }
 
+- (void)testGetEmailaddressesFrom
+{
+    MCPerson *thisPerson = [MCPerson addPerson];
+    [thisPerson setFirstName:@"Mark"];
+    [thisPerson setLastName:@"Cornelisse"];
+    NSString *emailAddressMark = @"info@markcornelisse.nl";
+    [thisPerson addOneEmailAddressFromAString:emailAddressMark];
+    MCEmailAddress *firstEmailAddressObject = [thisPerson getDefaultEmailAddressObject];
+    NSString *emailAddress2Mark = @"mark.cornelisse@yahoo.com";
+    [thisPerson addOneEmailAddressFromAString:emailAddress2Mark];
+    [thisPerson addOneEmailAddressFromAString:emailAddress2Mark];
+    NSString *emailAddress3Mark = @"m.p.cornelisse@gmail.com";
+    [thisPerson addNewDefaultEmailAddressFromAString:emailAddress3Mark];
+    [thisPerson setNewDefaultEmailaddressObject:firstEmailAddressObject];
+    NSArray *theEmailAddressObjects = [[MCWeAllPayStoreController defaultStore] getEmailaddressesFrom:thisPerson];
+    XCTAssertTrue([theEmailAddressObjects count] == 3, @"The wrong amount of objects is present.");
+    [thisPerson deletAllEmailAddresses];
+    [MCPerson deletePerson:thisPerson];
+}
+
 @end

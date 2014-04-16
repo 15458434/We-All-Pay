@@ -219,6 +219,16 @@
     return [emailAddresses firstObject];
 }
 
+- (void)setNewDefaultEmailaddressObject:(MCEmailAddress *)newDefaultEmailAddress
+{
+    // Get current defaultEmailAddressObject.
+    MCEmailAddress *currentDefaultEmailAddress = [self getDefaultEmailAddressObject];
+    [currentDefaultEmailAddress setSelected:@NO];
+    [newDefaultEmailAddress setSelected:@YES];
+    NSDate *now = [NSDate date];
+    [self setDateModified:now];
+}
+
 - (void)deleteEmailAddress:(MCEmailAddress *)eAddress
 {
     if ([[eAddress selected] boolValue]) {

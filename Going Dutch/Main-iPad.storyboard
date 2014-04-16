@@ -435,6 +435,9 @@
                                     </state>
                                     <connections>
                                         <action selector="selectEmailAddressButtonPressed:" destination="ULr-7Y-8VH" eventType="touchUpInside" id="cvR-2M-q2x"/>
+                                        <segue destination="Xu3-9f-Jho" kind="popover" identifier="openSelectEmailAddress" popoverAnchorView="Z0f-Hu-kcp" id="XF6-bM-0hX">
+                                            <popoverArrowDirection key="popoverArrowDirection" up="YES" down="YES" left="YES" right="YES"/>
+                                        </segue>
                                     </connections>
                                 </button>
                             </subviews>
@@ -479,6 +482,54 @@
                 <placeholder placeholderIdentifier="IBFirstResponder" id="zsu-bI-OEB" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
             <point key="canvasLocation" x="5080" y="-1378"/>
+        </scene>
+        <!--Select Email Address Table View Controller i Pad-->
+        <scene sceneID="cSm-9q-ez4">
+            <objects>
+                <tableViewController storyboardIdentifier="MCSelectEmailAddressTableViewController_iPad" useStoryboardIdentifierAsRestorationIdentifier="YES" id="Xu3-9f-Jho" customClass="MCSelectEmailAddressTableViewController_iPad" sceneMemberID="viewController">
+                    <tableView key="view" clipsSubviews="YES" contentMode="scaleToFill" restorationIdentifier="selectEmailTableView" alwaysBounceVertical="YES" dataMode="prototypes" style="plain" separatorStyle="default" rowHeight="44" sectionHeaderHeight="22" sectionFooterHeight="22" id="GQd-6t-K1V">
+                        <rect key="frame" x="0.0" y="0.0" width="320" height="480"/>
+                        <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+                        <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                        <prototypes>
+                            <tableViewCell contentMode="scaleToFill" restorationIdentifier="MCSelectEmailAddressTableViewCell_iPad" selectionStyle="blue" hidesAccessoryWhenEditing="NO" indentationLevel="1" indentationWidth="0.0" reuseIdentifier="MCSelectEmailAddressTableViewCell_iPad" id="4r6-PB-WJw" customClass="MCSelectEmailAddressTableViewCell_iPad">
+                                <rect key="frame" x="0.0" y="22" width="320" height="44"/>
+                                <autoresizingMask key="autoresizingMask"/>
+                                <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" restorationIdentifier="emailAddressContentView" tableViewCell="4r6-PB-WJw" id="bd1-y0-CA7">
+                                    <rect key="frame" x="0.0" y="0.0" width="320" height="43"/>
+                                    <autoresizingMask key="autoresizingMask"/>
+                                    <subviews>
+                                        <label opaque="NO" clipsSubviews="YES" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" restorationIdentifier="emailAddressLabel" text="emailAddress" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="KBE-ZP-DFn">
+                                            <rect key="frame" x="20" y="11" width="280" height="21"/>
+                                            <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                                            <fontDescription key="fontDescription" name="HelveticaNeue-Thin" family="Helvetica Neue" pointSize="17"/>
+                                            <color key="textColor" cocoaTouchSystemColor="darkTextColor"/>
+                                            <nil key="highlightedColor"/>
+                                        </label>
+                                    </subviews>
+                                    <constraints>
+                                        <constraint firstAttribute="trailing" secondItem="KBE-ZP-DFn" secondAttribute="trailing" constant="20" id="5zu-Gv-VPe"/>
+                                        <constraint firstAttribute="bottom" secondItem="KBE-ZP-DFn" secondAttribute="bottom" constant="11" id="ICs-eB-9In"/>
+                                        <constraint firstItem="KBE-ZP-DFn" firstAttribute="top" secondItem="bd1-y0-CA7" secondAttribute="top" constant="11" id="uVu-0a-ejT"/>
+                                        <constraint firstItem="KBE-ZP-DFn" firstAttribute="leading" secondItem="bd1-y0-CA7" secondAttribute="leading" constant="20" id="wKl-jr-hd8"/>
+                                    </constraints>
+                                </tableViewCellContentView>
+                                <connections>
+                                    <outlet property="emailAddressLabel" destination="KBE-ZP-DFn" id="Pb4-YT-otx"/>
+                                </connections>
+                            </tableViewCell>
+                        </prototypes>
+                        <connections>
+                            <outlet property="dataSource" destination="Xu3-9f-Jho" id="665-cG-obW"/>
+                            <outlet property="delegate" destination="Xu3-9f-Jho" id="yYp-7a-9b1"/>
+                        </connections>
+                    </tableView>
+                    <freeformSimulatedSizeMetrics key="simulatedDestinationMetrics"/>
+                    <size key="freeformSize" width="320" height="480"/>
+                </tableViewController>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="7M6-xh-WQ9" userLabel="First Responder" sceneMemberID="firstResponder"/>
+            </objects>
+            <point key="canvasLocation" x="5814" y="-1308"/>
         </scene>
         <!--Shared Bill Payments Table View Controller i Pad-->
         <scene sceneID="qG2-Zg-IFZ">
