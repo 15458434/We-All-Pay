@@ -45,7 +45,6 @@
     if (!success) {
         NSLog(@"Something went wrong");
     }
-    [[self tableView] reloadData];
 }
 
 #pragma mark - Inherited from super
@@ -88,6 +87,7 @@
         [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(performFetchAndReloadTableView:) name:UIDocumentStateChangedNotification object:weAllPayDocument];
     } else {
         [self performFetch];
+        [[self tableView] reloadData];
     }
 }
 
