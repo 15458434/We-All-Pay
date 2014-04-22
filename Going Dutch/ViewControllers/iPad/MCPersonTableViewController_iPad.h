@@ -25,6 +25,7 @@
     BOOL isSelectEmail;
     
     BOOL didSomethingChange;
+    BOOL isNew;
 }
 
 @property (weak, nonatomic) IBOutlet UIImageView *pictureView;

@@ -10,6 +10,7 @@
 
 #import "MCPerson+addons.h"
 #import "MCSharedBill+addons.h"
+#import "MCEmailAddress+addons.h"
 
 #import "MCTonightsBillTransfer.h"
 #import "MCDismissMeBlockProtocol.h"
@@ -104,11 +105,16 @@
         [_thisPerson setPictureDataFromImage:nil];
         [_thisPerson setThumbnailDataFromImage:nil];
         didSomethingChange = YES;
+        isNew = YES;
+        NSString *newHeaderTitle = NSLocalizedString(@"NEW_PERSON_HEADER", @"new person");
+        [self setTitle:newHeaderTitle];
+    } else {
+        isNew = NO;
     }
     [firstNameField setText:[_thisPerson firstName]];
     [lastNameField setText:[_thisPerson lastName]];
     [emailField setText:[_thisPerson defaultEmailAddress]];
-    //[_pictureView setImage:[_thisPerson picture]];
+    
     [self setCircularImageOnPictureView:[_thisPerson picture]];
 }
 
@@ -139,6 +145,9 @@
 
 - (BOOL)textFieldShouldEndEditing:(UITextField *)textField
 {
+    if (textField == emailField) {
+        return [MCTools isStringAnEmailAddress:[emailField text]];
+    }
     return YES;
 }
 
@@ -151,7 +160,19 @@
         [_thisPerson setLastName:[textField text]];
         didSomethingChange = YES;
     } else if (textField == emailField) {
-        NSLog(@"EmailField is not implemented yet.");
+        if (isNew) {
+            NSManagedObjectContext *context = [_thisPerson managedObjectContext];
+            [context performBlock:^{
+                [_thisPerson addOneEmailAddressFromAString:[emailField text]];
+            }];
+        } else {
+            MCEmailAddress *defaultEmail = [_thisPerson getDefaultEmailAddressObject];
+            if (!defaultEmail) {
+                [_thisPerson addOneEmailAddressFromAString:[emailField text]];
+            } else {
+                [defaultEmail setEmailAddress:[emailField text]];
+            }
+        }
     }
 }
 

@@ -122,6 +122,9 @@
     if (!_thisPayment) {
         _thisPayment = [_tonightsBill addPayment];
         _didSomethingChange = MCSomethingHasChanged;
+        _isNew = isNew;
+        NSString *newTitle = NSLocalizedString(@"NEW_PAYMENT_HEADER", "new payment");
+        [self setTitle:newTitle];
     } else {
         [selectButton setTitle:[[_thisPayment payingPerson] getFullName] forState:UIControlStateNormal];
         [itemField setText:[_thisPayment descriptionOfPayment]];
@@ -131,6 +134,7 @@
         if ([[_thisPayment payingPerson] picture]) {
             [self setCircularImageOnPictureView:[[_thisPayment payingPerson] picture]];
         }
+        _isNew = isNotNew;
     }
 }
 

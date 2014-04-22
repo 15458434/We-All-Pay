@@ -68,7 +68,7 @@
 
 /* MCEditTripView */
 /* Press \"add Person\" to add a person who you'd like to share this bill with. */
-"PEOPLE_LIST_EMPTY_MESSAGE" = "Press \"add Person\" to add a person who you'd like to share this bill with.";
+"PEOPLE_LIST_EMPTY_MESSAGE" = "Press \"add person\" to add a person who you'd like to share this bill with.";
 
 /* PaymentView */
 /* Header in the paymentView which state new Payment. */

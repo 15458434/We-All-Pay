@@ -125,137 +125,6 @@
     [emailField resignFirstResponder];
 }
 
-#pragma mark - UITextFieldDelegate
-
--(BOOL)textFieldShouldBeginEditing:(UITextField *)textField
-{
-    return YES;
-}
-
-- (void)textFieldDidBeginEditing:(UITextField *)textField
-{
-    if (textField == emailField) {
-        if (isSelectEmail) {
-            [self prepareEmailFieldAsSelector];
-        }
-    }
-}
-
-- (void)textFieldDidEndEditing:(UITextField *)textField
-{
-    if (textField == firstNameField) {
-        [thisPerson setFirstName:[firstNameField text]];
-        didSomethingChange = YES;
-        NSDate *nu = [NSDate date];
-        [tonightsBill setDateModified:nu];
-        [thisPerson setDateModified:nu];
-        [[[self navigationItem] rightBarButtonItem] setEnabled:YES];
-        [lastNameField becomeFirstResponder];
-    } else if (textField == lastNameField) {
-        [thisPerson setLastName:[lastNameField text]];
-        didSomethingChange = YES;
-        NSDate *nu = [NSDate date];
-        [tonightsBill setDateModified:nu];
-        [thisPerson setDateModified:nu];
-        [[[self navigationItem] rightBarButtonItem] setEnabled:YES];
-        [emailField becomeFirstResponder];
-    } else if (textField == emailField) {
-        if (!isSelectEmail) {
-            isSelectEmail = YES;
-            [emailField setInputView:nil];
-            [emailField setInputAccessoryView:nil];
-            if (isNew) {
-                NSManagedObjectContext *context = [thisPerson managedObjectContext];
-                [context performBlock:^{
-                    [thisPerson addOneEmailAddressFromAString:[emailField text]];
-                }];
-            } else {
-                MCEmailAddress *defaultEmail = [thisPerson getDefaultEmailAddressObject];
-                if (!defaultEmail) {
-                    [thisPerson addOneEmailAddressFromAString:[emailField text]];
-                } else {
-                    [defaultEmail setEmailAddress:[emailField text]];
-                }
-            }
-        }
-        NSDate *nu = [NSDate date];
-        [tonightsBill setDateModified:nu];
-        [thisPerson setDateModified:nu];
-        didSomethingChange = YES;
-        [[[self navigationItem] rightBarButtonItem] setEnabled:YES];
-    }
-}
-
-- (BOOL)textFieldShouldReturn:(UITextField *)textField
-{
-    if (textField == firstNameField) {
-        [firstNameField resignFirstResponder];
-        return YES;
-    } else if (textField == lastNameField) {
-        [lastNameField resignFirstResponder];
-        return YES;
-    } else if (textField == emailField) {
-        [emailField resignFirstResponder];
-        return YES;
-    }
-    return NO;
-}
-
-#pragma mark - UIPickerViewDelegate
-
-- (NSString *)pickerView:(UIPickerView *)pickerView titleForRow:(NSInteger)row forComponent:(NSInteger)component
-{
-    MCEmailAddress *emailAddressObject = [dataController fetchedObjects][row];
-    return [emailAddressObject emailAddress];
-}
-
-- (void)pickerView:(UIPickerView *)pickerView didSelectRow:(NSInteger)row inComponent:(NSInteger)component
-{
-    MCEmailAddress *pickedEmailAddress = [dataController fetchedObjects][row];
-    [emailField setText:[pickedEmailAddress emailAddress]];
-}
-
-#pragma mark - UIPickerViewDataSource
-
-- (NSInteger)numberOfComponentsInPickerView:(UIPickerView *)pickerView
-{
-    return 1;
-}
-
-- (NSInteger)pickerView:(UIPickerView *)pickerView numberOfRowsInComponent:(NSInteger)component
-{
-    if (kABAuthorizationStatusAuthorized == ABAddressBookGetAuthorizationStatus()) {
-        return [[dataController fetchedObjects] count];
-    } else {
-        return 1;
-    }
-}
-
-#pragma mark - MCAddressBookReceiverDelegate
-
-- (BOOL)isPersonAlreadyPresent:(MCPerson *)newPerson
-{
-    // return [tonightsBill isPersonPresent:newPerson];
-    NSLog(@"isNewPersonFromAddressBookAlreadyPresent is not implemented yet.");
-    return NO;
-}
-
-- (MCPerson *)personRecordToUse
-{
-    if (!isNew) {
-        return thisPerson;
-    } else {
-        return nil;
-    }
-}
-
-- (void)receiveANewPersonFromAddressBook:(MCPerson *)newPerson
-{
-    didSomethingChange = YES;
-    [[[self navigationItem] rightBarButtonItem] setEnabled:YES];
-    [emailSelectionFromAddressBookPickerView reloadComponent:0];
-}
-
 #pragma mark - New in this class
 
 - (id)initWithPerson:(MCPerson *)person 
@@ -435,6 +304,137 @@
 - (void)decodeRestorableStateWithCoder:(NSCoder *)coder
 {
     [super decodeRestorableStateWithCoder:coder];
+}
+
+#pragma mark - UITextFieldDelegate
+
+-(BOOL)textFieldShouldBeginEditing:(UITextField *)textField
+{
+    return YES;
+}
+
+- (void)textFieldDidBeginEditing:(UITextField *)textField
+{
+    if (textField == emailField) {
+        if (isSelectEmail) {
+            [self prepareEmailFieldAsSelector];
+        }
+    }
+}
+
+- (void)textFieldDidEndEditing:(UITextField *)textField
+{
+    if (textField == firstNameField) {
+        [thisPerson setFirstName:[firstNameField text]];
+        didSomethingChange = YES;
+        NSDate *nu = [NSDate date];
+        [tonightsBill setDateModified:nu];
+        [thisPerson setDateModified:nu];
+        [[[self navigationItem] rightBarButtonItem] setEnabled:YES];
+        [lastNameField becomeFirstResponder];
+    } else if (textField == lastNameField) {
+        [thisPerson setLastName:[lastNameField text]];
+        didSomethingChange = YES;
+        NSDate *nu = [NSDate date];
+        [tonightsBill setDateModified:nu];
+        [thisPerson setDateModified:nu];
+        [[[self navigationItem] rightBarButtonItem] setEnabled:YES];
+        [emailField becomeFirstResponder];
+    } else if (textField == emailField) {
+        if (!isSelectEmail) {
+            isSelectEmail = YES;
+            [emailField setInputView:nil];
+            [emailField setInputAccessoryView:nil];
+            if (isNew) {
+                NSManagedObjectContext *context = [thisPerson managedObjectContext];
+                [context performBlock:^{
+                    [thisPerson addOneEmailAddressFromAString:[emailField text]];
+                }];
+            } else {
+                MCEmailAddress *defaultEmail = [thisPerson getDefaultEmailAddressObject];
+                if (!defaultEmail) {
+                    [thisPerson addOneEmailAddressFromAString:[emailField text]];
+                } else {
+                    [defaultEmail setEmailAddress:[emailField text]];
+                }
+            }
+        }
+        NSDate *nu = [NSDate date];
+        [tonightsBill setDateModified:nu];
+        [thisPerson setDateModified:nu];
+        didSomethingChange = YES;
+        [[[self navigationItem] rightBarButtonItem] setEnabled:YES];
+    }
+}
+
+- (BOOL)textFieldShouldReturn:(UITextField *)textField
+{
+    if (textField == firstNameField) {
+        [firstNameField resignFirstResponder];
+        return YES;
+    } else if (textField == lastNameField) {
+        [lastNameField resignFirstResponder];
+        return YES;
+    } else if (textField == emailField) {
+        [emailField resignFirstResponder];
+        return YES;
+    }
+    return NO;
+}
+
+#pragma mark - UIPickerViewDelegate
+
+- (NSString *)pickerView:(UIPickerView *)pickerView titleForRow:(NSInteger)row forComponent:(NSInteger)component
+{
+    MCEmailAddress *emailAddressObject = [dataController fetchedObjects][row];
+    return [emailAddressObject emailAddress];
+}
+
+- (void)pickerView:(UIPickerView *)pickerView didSelectRow:(NSInteger)row inComponent:(NSInteger)component
+{
+    MCEmailAddress *pickedEmailAddress = [dataController fetchedObjects][row];
+    [emailField setText:[pickedEmailAddress emailAddress]];
+}
+
+#pragma mark - UIPickerViewDataSource
+
+- (NSInteger)numberOfComponentsInPickerView:(UIPickerView *)pickerView
+{
+    return 1;
+}
+
+- (NSInteger)pickerView:(UIPickerView *)pickerView numberOfRowsInComponent:(NSInteger)component
+{
+    if (kABAuthorizationStatusAuthorized == ABAddressBookGetAuthorizationStatus()) {
+        return [[dataController fetchedObjects] count];
+    } else {
+        return 1;
+    }
+}
+
+#pragma mark - MCAddressBookReceiverDelegate
+
+- (BOOL)isPersonAlreadyPresent:(MCPerson *)newPerson
+{
+    // return [tonightsBill isPersonPresent:newPerson];
+    NSLog(@"isNewPersonFromAddressBookAlreadyPresent is not implemented yet.");
+    return NO;
+}
+
+- (MCPerson *)personRecordToUse
+{
+    if (!isNew) {
+        return thisPerson;
+    } else {
+        return nil;
+    }
+}
+
+- (void)receiveANewPersonFromAddressBook:(MCPerson *)newPerson
+{
+    didSomethingChange = YES;
+    [[[self navigationItem] rightBarButtonItem] setEnabled:YES];
+    [emailSelectionFromAddressBookPickerView reloadComponent:0];
 }
 
 @end
