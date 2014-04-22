@@ -12,9 +12,12 @@
 #import "MCTonightsBillTransfer.h"
 
 @class MCSharedBill;
+@class MCTableEmptyMessage_iPad;
 
 @interface MCSharedBillPaymentsTableViewController_iPad : UITableViewController <NSFetchedResultsControllerDelegate, MCTonightsBillGet>
 {
+    MCTableEmptyMessage_iPad *emptyMessage;
+    
     NSFetchedResultsController *dataController;
 }
 

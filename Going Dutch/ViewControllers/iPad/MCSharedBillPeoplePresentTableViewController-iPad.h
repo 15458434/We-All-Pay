@@ -13,9 +13,12 @@
 #import "MCThisPersonProtocol.h"
 
 @class MCSharedBill;
+@class MCTableEmptyMessage_iPad;
 
 @interface MCSharedBillPeoplePresentTableViewController_iPad : UITableViewController <NSFetchedResultsControllerDelegate, MCTonightsBillGet>
 {
+    MCTableEmptyMessage_iPad *emptyMessage;
+    
     NSFetchedResultsController *dataController;
 }
 

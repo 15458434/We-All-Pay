@@ -9,6 +9,7 @@
 #import "MCSharedBillPeoplePresentTableViewController-iPad.h"
 
 #import "MCPersonTableViewCell_iPad.h"
+#import "MCTableEmptyMessage_iPad.h"
 
 #import "MCPerson+addons.h"
 #import "MCSharedBill+addons.h"
@@ -30,7 +31,7 @@
         [self performFetch];
         [[self tableView] reloadData];
         [[NSNotificationCenter defaultCenter] removeObserver:self];
-        //[self setEmptyMessageNow];
+        [self setEmptyMessageNow];
     }
 }
 
@@ -40,6 +41,40 @@
     BOOL success = [dataController performFetch:&error];
     if (!success) {
         NSLog(@"Something went wrong");
+    }
+}
+
+- (void)setEmptyMessage
+{
+    if (![[dataController fetchedObjects] count] == 0) {
+        [UIView animateWithDuration:1.0 animations:^{
+            [[emptyMessage bigMessage] setAlpha:0.0];
+            [[self tableView] setSeparatorStyle:UITableViewCellSeparatorStyleSingleLine];
+        } completion:nil];
+    } else {
+        if ([[emptyMessage bigMessage] alpha] < 1.0) {
+            [UIView animateWithDuration:1.0 animations:^{
+                [[emptyMessage bigMessage] setAlpha:1.0];
+                [[self tableView] setSeparatorStyle:UITableViewCellSeparatorStyleNone];
+            } completion:nil];
+        }
+    }
+}
+
+- (void)setEmptyMessageNow
+{
+    if (![[dataController fetchedObjects] count] == 0) {
+        [UIView animateWithDuration:0.0 animations:^{
+            [[emptyMessage bigMessage] setAlpha:0.0];
+            [[self tableView] setSeparatorStyle:UITableViewCellSeparatorStyleSingleLine];
+        } completion:nil];
+    } else {
+        if ([[emptyMessage bigMessage] alpha] < 1.0) {
+            [UIView animateWithDuration:0.0 animations:^{
+                [[emptyMessage bigMessage] setAlpha:1.0];
+                [[self tableView] setSeparatorStyle:UITableViewCellSeparatorStyleNone];
+            } completion:nil];
+        }
     }
 }
 
@@ -63,6 +98,11 @@
     
     // Uncomment the following line to display an Edit button in the navigation bar for this view controller.
     // self.navigationItem.rightBarButtonItem = self.editButtonItem;
+    
+    emptyMessage = [[NSBundle mainBundle] loadNibNamed:@"MCTableEmptyMessage_iPad" owner:self options:nil][0];
+    [[emptyMessage bigMessage] setText:NSLocalizedString(@"PEOPLE_LIST_EMPTY_MESSAGE", @"Press \"add Person\" to add a person who you'd like to share this bill with.")];
+    [[emptyMessage bigMessage] setAlpha:0.0];
+    [[self tableView] setBackgroundView:emptyMessage];
 }
 
 - (void)viewWillAppear:(BOOL)animated
@@ -84,6 +124,7 @@
     } else {
         [self performFetch];
         [[self tableView] reloadData];
+        [self setEmptyMessageNow];
     }
 }
 
@@ -131,13 +172,13 @@
         case NSFetchedResultsChangeInsert:
             [[self tableView] insertRowsAtIndexPaths:@[newIndexPath]
                                     withRowAnimation:UITableViewRowAnimationFade];
-            //[self setEmptyMessage];
+            [self setEmptyMessage];
             break;
             
         case NSFetchedResultsChangeDelete:
             [[self tableView] deleteRowsAtIndexPaths:@[indexPath]
                                     withRowAnimation:UITableViewRowAnimationFade];
-            //[self setEmptyMessage];
+            [self setEmptyMessage];
             break;
             
         case NSFetchedResultsChangeUpdate:

@@ -64,7 +64,7 @@
 /* As in Mark owes Arjen, but then just the word owes. */
 "OWES" = "owes";
 /* Please add payments and/or people if you want a solution on who owes who.*/
-"RETURNPAYMENTSVIEW_NOPAYMENTS" = "Please add payments and/or people if you want a solution on who owes who.";
+"RETURNPAYMENTSVIEW_NOPAYMENTS" = "Please add people and payments if you want a solution on who owes who.";
 
 /* MCEditTripView */
 /* Press \"add Person\" to add a person who you'd like to share this bill with. */

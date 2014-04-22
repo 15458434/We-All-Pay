@@ -44,7 +44,6 @@
     }
 }
 
-
 - (void)setEmptyMessage
 {
     if (![[dataController fetchedObjects] count] == 0) {
@@ -118,6 +117,7 @@
     } else {
         [self performFetch];
         [[self tableView] reloadData];
+        [self setEmptyMessageNow];
     }
 }
 

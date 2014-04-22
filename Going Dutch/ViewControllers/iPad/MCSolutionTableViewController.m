@@ -10,6 +10,7 @@
 
 #import "MCWhoOwesWhoTableViewCell_iPad.h"
 #import "MCSolutionOverViewTableViewCell_iPad.h"
+#import "MCTableEmptyMessage_iPad.h"
 
 #import "MCWeAllPayStoreController.h"
 #import "MCSharedBill+addons.h"
@@ -99,7 +100,22 @@
     }
 }
 
-
+- (void)setEmptyMessageNow
+{
+    if (![_solution count] == 0) {
+        [UIView animateWithDuration:0.0 animations:^{
+            [[emptyMessage bigMessage] setAlpha:0.0];
+            [[self tableView] setSeparatorStyle:UITableViewCellSeparatorStyleSingleLine];
+        } completion:nil];
+    } else {
+        if ([[emptyMessage bigMessage] alpha] < 1.0) {
+            [UIView animateWithDuration:0.0 animations:^{
+                [[emptyMessage bigMessage] setAlpha:1.0];
+                [[self tableView] setSeparatorStyle:UITableViewCellSeparatorStyleNone];
+            } completion:nil];
+        }
+    }
+}
 
 #pragma mark - Inherited from super
 
@@ -123,6 +139,10 @@
     // self.navigationItem.rightBarButtonItem = self.editButtonItem;
     
     _solution = [_tonightsBill solveWhoHasToPayWhoFromThisBill];
+    emptyMessage = [[NSBundle mainBundle] loadNibNamed:@"MCTableEmptyMessage_iPad" owner:self options:nil][0];
+    [[emptyMessage bigMessage] setText:NSLocalizedString(@"RETURNPAYMENTSVIEW_NOPAYMENTS", @"Please add payments and/or people if you want a solution on who owes who.")];
+    [[self tableView] setBackgroundView:emptyMessage];
+    [self setEmptyMessageNow];
 }
 
 - (void)didReceiveMemoryWarning

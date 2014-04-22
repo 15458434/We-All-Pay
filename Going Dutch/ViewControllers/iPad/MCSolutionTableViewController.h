@@ -13,9 +13,12 @@
 #import "MCDismissMeBlockProtocol.h"
 
 @class MCSharedBill;
+@class MCTableEmptyMessage_iPad;
 
 @interface MCSolutionTableViewController : UITableViewController <MFMailComposeViewControllerDelegate, MCTonightsBillPut, MCDismissMeBlockProtocol>
 {
+    MCTableEmptyMessage_iPad *emptyMessage;
+    
     NSArray *_solution;
     
     MFMailComposeViewController *mailController;
