@@ -426,7 +426,7 @@
                                     <rect key="frame" x="188" y="188" width="332" height="30"/>
                                     <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                                     <fontDescription key="fontDescription" type="system" pointSize="14"/>
-                                    <textInputTraits key="textInputTraits"/>
+                                    <textInputTraits key="textInputTraits" keyboardType="emailAddress"/>
                                     <connections>
                                         <outlet property="delegate" destination="ULr-7Y-8VH" id="KHm-EH-bnf"/>
                                     </connections>
@@ -1065,8 +1065,8 @@
         <simulatedScreenMetrics key="destination"/>
     </simulatedMetricsContainer>
     <inferredMetricsTieBreakers>
-        <segue reference="oh3-5j-dZ9"/>
         <segue reference="M2f-Ug-Ooc"/>
-        <segue reference="8Cc-ux-2co"/>
+        <segue reference="oh3-5j-dZ9"/>
+        <segue reference="1Uw-eh-0NI"/>
     </inferredMetricsTieBreakers>
 </document>

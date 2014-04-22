@@ -19,7 +19,7 @@ typedef NS_ENUM(BOOL, MCIsEditing) {
     isEditing
 };
 
-@interface MCPersonTableViewController_iPad : UITableViewController <UITextFieldDelegate, UIPopoverControllerDelegate, MCThisPersonProtocol, MCTonightsBillPut>
+@interface MCPersonTableViewController_iPad : UITableViewController <UITextFieldDelegate, UIPopoverControllerDelegate, UIAlertViewDelegate, MCThisPersonProtocol, MCTonightsBillPut>
 {
     //__weak IBOutlet UIImageView *_pictureView;
     __weak IBOutlet UITextField *firstNameField;

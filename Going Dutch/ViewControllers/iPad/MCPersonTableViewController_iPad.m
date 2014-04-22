@@ -38,6 +38,7 @@
 
 - (IBAction)mainDoneButtonPressed:(id)sender
 {
+    /*
     if (isEditingEmailField == isEditing) {
         if ([MCTools isStringAnEmailAddress:[emailField text]]) {
             NSDate *now = [NSDate date];
@@ -53,6 +54,15 @@
         [[MCWeAllPayStoreController defaultStore] endUndoGroupAndProcess];
         [[[self navigationController] presentingViewController] dismissViewControllerAnimated:YES completion:nil];
     }
+     */
+    if ([MCTools isStringAnEmailAddress:[emailField text]]) {
+        [self dismissFromDone];
+    } else {
+        NSString *alertViewTitle = @"Invalid email address";
+        NSString *alertViewMessage = @"The email address you provided doesn't appear to be an email address. This might cause improper behavior. Are you sure you want to continu?";
+        UIAlertView *alertView = [[UIAlertView alloc] initWithTitle:alertViewTitle message:alertViewMessage delegate:self cancelButtonTitle:@"no" otherButtonTitles:@"yes", nil];
+        [alertView show];
+    }
 }
 
 - (IBAction)selectEmailAddressButtonPressed:(id)sender
@@ -61,6 +71,14 @@
 }
 
 #pragma mark - New in this class
+
+- (void)dismissFromDone
+{
+    NSDate *now = [NSDate date];
+    [_tonightsBill setDateModified:now];
+    [[MCWeAllPayStoreController defaultStore] endUndoGroupAndProcess];
+    [[[self navigationController] presentingViewController] dismissViewControllerAnimated:YES completion:nil];
+}
 
 - (void)setCircularImageOnPictureView:(UIImage *)image
 {
@@ -136,6 +154,24 @@
     // Dispose of any resources that can be recreated.
 }
 
+#pragma mark - UIAlertViewDelegate
+
+- (void)alertView:(UIAlertView *)alertView clickedButtonAtIndex:(NSInteger)buttonIndex
+{
+    if ([[alertView title] isEqualToString:@"Invalid email address"]) {
+        switch (buttonIndex) {
+            case 0:
+                // don't do anything.
+                break;
+            case 1:
+                [self dismissFromDone];
+                break;
+            default:
+                break;
+        }
+    }
+}
+
 #pragma mark - UIPopoverControllerDelegate
 
 - (void)popoverController:(UIPopoverController *)popoverController willRepositionPopoverToRect:(inout CGRect *)rect inView:(inout UIView *__autoreleasing *)view
@@ -164,8 +200,12 @@
 
 - (BOOL)textFieldShouldEndEditing:(UITextField *)textField
 {
+    /*
     if (textField == emailField) {
         if ([MCTools isStringAnEmailAddress:[emailField text]]) {
+            [emailField setTextColor:[UIColor blackColor]];
+            return YES;
+        } else if ([[emailField text] length] == 0) {
             [emailField setTextColor:[UIColor blackColor]];
             return YES;
         } else {
@@ -173,6 +213,7 @@
             return NO;
         }
     }
+     */
     return YES;
 }
 
