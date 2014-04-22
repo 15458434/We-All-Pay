@@ -117,7 +117,15 @@
         [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(performFetchAndReloadTableView:) name:UIDocumentStateChangedNotification object:weAllPayDocument];
     } else {
         [self performFetch];
+        [[self tableView] reloadData];
     }
+}
+
+- (void)viewWillDisappear:(BOOL)animated
+{
+    [super viewWillDisappear:animated];
+    
+    dataController = nil;
 }
 
 - (void)didReceiveMemoryWarning
