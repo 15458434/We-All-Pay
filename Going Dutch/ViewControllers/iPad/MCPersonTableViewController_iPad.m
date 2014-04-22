@@ -38,10 +38,21 @@
 
 - (IBAction)mainDoneButtonPressed:(id)sender
 {
-    NSDate *now = [NSDate date];
-    [_tonightsBill setDateModified:now];
-    [[MCWeAllPayStoreController defaultStore] endUndoGroupAndProcess];
-    [[[self navigationController] presentingViewController] dismissViewControllerAnimated:YES completion:nil];
+    if (isEditingEmailField == isEditing) {
+        if ([MCTools isStringAnEmailAddress:[emailField text]]) {
+            NSDate *now = [NSDate date];
+            [_tonightsBill setDateModified:now];
+            [[MCWeAllPayStoreController defaultStore] endUndoGroupAndProcess];
+            [[[self navigationController] presentingViewController] dismissViewControllerAnimated:YES completion:nil];
+        } else {
+            [emailField resignFirstResponder];
+        }
+    } else {
+        NSDate *now = [NSDate date];
+        [_tonightsBill setDateModified:now];
+        [[MCWeAllPayStoreController defaultStore] endUndoGroupAndProcess];
+        [[[self navigationController] presentingViewController] dismissViewControllerAnimated:YES completion:nil];
+    }
 }
 
 - (IBAction)selectEmailAddressButtonPressed:(id)sender
@@ -93,6 +104,7 @@
     // self.navigationItem.rightBarButtonItem = self.editButtonItem;
     
     didSomethingChange = NO;
+    isEditingEmailField = isNotEditing;
     [[MCWeAllPayStoreController defaultStore] beginUndoGroup];
 }
 
@@ -143,10 +155,23 @@
 
 #pragma mark - UITextFieldDelegate
 
+-(void)textFieldDidBeginEditing:(UITextField *)textField
+{
+    if (textField == emailField) {
+        isEditingEmailField = isEditing;
+    }
+}
+
 - (BOOL)textFieldShouldEndEditing:(UITextField *)textField
 {
     if (textField == emailField) {
-        return [MCTools isStringAnEmailAddress:[emailField text]];
+        if ([MCTools isStringAnEmailAddress:[emailField text]]) {
+            [emailField setTextColor:[UIColor blackColor]];
+            return YES;
+        } else {
+            [emailField setTextColor:[UIColor redColor]];
+            return NO;
+        }
     }
     return YES;
 }
@@ -161,10 +186,7 @@
         didSomethingChange = YES;
     } else if (textField == emailField) {
         if (isNew) {
-            NSManagedObjectContext *context = [_thisPerson managedObjectContext];
-            [context performBlock:^{
-                [_thisPerson addOneEmailAddressFromAString:[emailField text]];
-            }];
+            [_thisPerson addOneEmailAddressFromAString:[emailField text]];
         } else {
             MCEmailAddress *defaultEmail = [_thisPerson getDefaultEmailAddressObject];
             if (!defaultEmail) {
@@ -173,6 +195,7 @@
                 [defaultEmail setEmailAddress:[emailField text]];
             }
         }
+        isEditingEmailField = isNotEditing;
     }
 }
 

@@ -14,6 +14,11 @@
 @class MCPerson;
 @class MCSharedBill;
 
+typedef NS_ENUM(BOOL, MCIsEditing) {
+    isNotEditing,
+    isEditing
+};
+
 @interface MCPersonTableViewController_iPad : UITableViewController <UITextFieldDelegate, UIPopoverControllerDelegate, MCThisPersonProtocol, MCTonightsBillPut>
 {
     //__weak IBOutlet UIImageView *_pictureView;
@@ -26,6 +31,7 @@
     
     BOOL didSomethingChange;
     BOOL isNew;
+    MCIsEditing *isEditingEmailField;
 }
 
 @property (weak, nonatomic) IBOutlet UIImageView *pictureView;
