@@ -37,6 +37,8 @@
 
 - (IBAction)mainDoneButtonPressed:(id)sender
 {
+    NSDate *now = [NSDate date];
+    [_tonightsBill setDateModified:now];
     [[MCWeAllPayStoreController defaultStore] endUndoGroupAndProcess];
     [[[self navigationController] presentingViewController] dismissViewControllerAnimated:YES completion:nil];
 }
