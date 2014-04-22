@@ -90,3 +90,11 @@
 "EXISTING_PERSON_HEADER" = "persoon";
 /* Sub header in the personView which state edit data */
 "EXISTING_PERSON_SUBHEADER" = "bewerk gegevens";
+
+/* Invalid email address alertView */
+/* Title */
+"INVALID_EMAIL_ADDRESS" = "Ongeldig emailadres";
+/* Message */
+"INVALID_EMAIL_ADDRESS_MESSAGE" = "Het ingevoerde emailadres lijkt niet op een geldig email adres. Dit kan ongewenst gedrag veroorzaken. Weet u zeker dat u door wilt gaan?";
+"YES" = "ja";
+"NO" = "nee";

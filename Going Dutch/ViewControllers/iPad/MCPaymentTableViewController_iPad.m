@@ -24,6 +24,7 @@
 
 - (IBAction)mainCancelPressed:(id)sender
 {
+    _mainCancelPressed = cancelIsPressed;
     if (_didSomethingChange == MCSomethingHasChanged) {
         [[MCWeAllPayStoreController defaultStore] endUndoGroupAndUndo];
     } else {
@@ -111,8 +112,8 @@
     NSParameterAssert(_tonightsBill);
     
     _didSomethingChange = MCNothingHasChanged;
+    _mainCancelPressed = cancelIsNotPressed;
     [[MCWeAllPayStoreController defaultStore] beginUndoGroup];
-    
 }
 
 - (void)viewWillAppear:(BOOL)animated
@@ -175,15 +176,17 @@
 
 - (void)textFieldDidEndEditing:(UITextField *)textField
 {
-    if (textField == itemField) {
-        [_thisPayment setDescriptionOfPayment:[itemField text]];
-        _didSomethingChange = MCSomethingHasChanged;
-    }
-    
-    if (textField == paidField) {
-        [_thisPayment putMoneyValueAsAString:[paidField text]];
-        [paidField setText:[_thisPayment getMoneyValueInCurrencyAsAString]];
-        _didSomethingChange = MCSomethingHasChanged;
+    if (_mainCancelPressed == cancelIsNotPressed) {
+        if (textField == itemField) {
+            [_thisPayment setDescriptionOfPayment:[itemField text]];
+            _didSomethingChange = MCSomethingHasChanged;
+        }
+        
+        if (textField == paidField) {
+            [_thisPayment putMoneyValueAsAString:[paidField text]];
+            [paidField setText:[_thisPayment getMoneyValueInCurrencyAsAString]];
+            _didSomethingChange = MCSomethingHasChanged;
+        }
     }
 }
 

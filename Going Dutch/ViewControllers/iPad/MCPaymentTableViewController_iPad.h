@@ -25,6 +25,11 @@ typedef NS_ENUM(BOOL, MCIsNew) {
     isNotNew
 };
 
+typedef NS_ENUM(BOOL, MCCancelButtonPressed) {
+    cancelIsNotPressed,
+    cancelIsPressed
+};
+
 @interface MCPaymentTableViewController_iPad : UITableViewController <MCTonightsBillPut, MCThisPaymentProtocol, MCDismissMeBlockProtocol, UITextFieldDelegate, UIPopoverControllerDelegate>
 {
     __weak IBOutlet UILabel *payerLabel;
@@ -34,6 +39,7 @@ typedef NS_ENUM(BOOL, MCIsNew) {
     
     MCDidSomethingChange _didSomethingChange;
     MCIsNew _isNew;
+    MCCancelButtonPressed _mainCancelPressed;
 }
 
 @property (weak, nonatomic) IBOutlet UIImageView *payerPicture;

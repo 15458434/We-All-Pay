@@ -27,6 +27,8 @@
 
 - (IBAction)mainCancelButtonPressed:(id)sender
 {
+    [[self view] resignFirstResponder];
+    mainCancelPressed = cancelIsPressed;
     if (didSomethingChange) {
         [[MCWeAllPayStoreController defaultStore] endUndoGroupAndUndo];
     } else {
@@ -38,29 +40,15 @@
 
 - (IBAction)mainDoneButtonPressed:(id)sender
 {
-    /*
-    if (isEditingEmailField == isEditing) {
-        if ([MCTools isStringAnEmailAddress:[emailField text]]) {
-            NSDate *now = [NSDate date];
-            [_tonightsBill setDateModified:now];
-            [[MCWeAllPayStoreController defaultStore] endUndoGroupAndProcess];
-            [[[self navigationController] presentingViewController] dismissViewControllerAnimated:YES completion:nil];
-        } else {
-            [emailField resignFirstResponder];
-        }
-    } else {
-        NSDate *now = [NSDate date];
-        [_tonightsBill setDateModified:now];
-        [[MCWeAllPayStoreController defaultStore] endUndoGroupAndProcess];
-        [[[self navigationController] presentingViewController] dismissViewControllerAnimated:YES completion:nil];
-    }
-     */
+    [[self view] resignFirstResponder];
     if ([MCTools isStringAnEmailAddress:[emailField text]]) {
         [self dismissFromDone];
     } else {
-        NSString *alertViewTitle = @"Invalid email address";
-        NSString *alertViewMessage = @"The email address you provided doesn't appear to be an email address. This might cause improper behavior. Are you sure you want to continu?";
-        UIAlertView *alertView = [[UIAlertView alloc] initWithTitle:alertViewTitle message:alertViewMessage delegate:self cancelButtonTitle:@"no" otherButtonTitles:@"yes", nil];
+        NSString *alertViewTitle = NSLocalizedString(@"INVALID_EMAIL_ADDRESS", "Invalid email address");
+        NSString *alertViewMessage = NSLocalizedString(@"INVALID_EMAIL_ADDRESS_MESSAGE", @"The email address you provided doesn't appear to be an email address. This might cause improper behavior. Are you sure you want to continu?");
+        NSString *alertViewYes = NSLocalizedString(@"YES", @"yes");
+        NSString *alertViewNo = NSLocalizedString(@"NO", @"no");
+        UIAlertView *alertView = [[UIAlertView alloc] initWithTitle:alertViewTitle message:alertViewMessage delegate:self cancelButtonTitle:alertViewNo otherButtonTitles:alertViewYes, nil];
         [alertView show];
     }
 }
@@ -123,6 +111,7 @@
     
     didSomethingChange = NO;
     isEditingEmailField = isNotEditing;
+    mainCancelPressed = cancelIsNotPressed;
     [[MCWeAllPayStoreController defaultStore] beginUndoGroup];
 }
 
@@ -167,6 +156,7 @@
                 [self dismissFromDone];
                 break;
             default:
+                NSLog(@"This is not supposed to be happening.");
                 break;
         }
     }
@@ -200,43 +190,33 @@
 
 - (BOOL)textFieldShouldEndEditing:(UITextField *)textField
 {
-    /*
-    if (textField == emailField) {
-        if ([MCTools isStringAnEmailAddress:[emailField text]]) {
-            [emailField setTextColor:[UIColor blackColor]];
-            return YES;
-        } else if ([[emailField text] length] == 0) {
-            [emailField setTextColor:[UIColor blackColor]];
-            return YES;
-        } else {
-            [emailField setTextColor:[UIColor redColor]];
-            return NO;
-        }
-    }
-     */
     return YES;
 }
 
 - (void)textFieldDidEndEditing:(UITextField *)textField
 {
-    if (textField == firstNameField) {
-        [_thisPerson setFirstName:[textField text]];
-        didSomethingChange = YES;
-    } else if (textField == lastNameField) {
-        [_thisPerson setLastName:[textField text]];
-        didSomethingChange = YES;
-    } else if (textField == emailField) {
-        if (isNew) {
-            [_thisPerson addOneEmailAddressFromAString:[emailField text]];
-        } else {
-            MCEmailAddress *defaultEmail = [_thisPerson getDefaultEmailAddressObject];
-            if (!defaultEmail) {
+    // First check is mainCancel has been pressed. In that case this will be executed after the textField has been dismissed.
+    if (mainCancelPressed == cancelIsNotPressed) {
+        if (textField == firstNameField) {
+            [_thisPerson setFirstName:[textField text]];
+            didSomethingChange = YES;
+        } else if (textField == lastNameField) {
+            [_thisPerson setLastName:[textField text]];
+            didSomethingChange = YES;
+        } else if (textField == emailField) {
+            if (isNew) {
                 [_thisPerson addOneEmailAddressFromAString:[emailField text]];
             } else {
-                [defaultEmail setEmailAddress:[emailField text]];
+                MCEmailAddress *defaultEmail = [_thisPerson getDefaultEmailAddressObject];
+                if (!defaultEmail) {
+                    [_thisPerson addOneEmailAddressFromAString:[emailField text]];
+                } else {
+                    [defaultEmail setEmailAddress:[emailField text]];
+                }
             }
+            didSomethingChange = YES;
+            isEditingEmailField = isNotEditing;
         }
-        isEditingEmailField = isNotEditing;
     }
 }
 

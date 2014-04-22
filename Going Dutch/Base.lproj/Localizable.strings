@@ -89,3 +89,11 @@
 "EXISTING_PERSON_HEADER" = "person";
 /* Sub header in the personView which state edit data */
 "EXISTING_PERSON_SUBHEADER" = "edit data";
+
+/* Invalid email address alertView */
+/* Title */
+"INVALID_EMAIL_ADDRESS" = "Invalid email address";
+/* Message */
+"INVALID_EMAIL_ADDRESS_MESSAGE" = "The email address you provided doesn't appear to be an email address. This might cause improper behavior. Are you sure you want to continu?";
+"YES" = "yes";
+"NO" = "no";

@@ -19,6 +19,11 @@ typedef NS_ENUM(BOOL, MCIsEditing) {
     isEditing
 };
 
+typedef NS_ENUM(BOOL, MCCancelButtonPressed) {
+    cancelIsNotPressed,
+    cancelIsPressed
+};
+
 @interface MCPersonTableViewController_iPad : UITableViewController <UITextFieldDelegate, UIPopoverControllerDelegate, UIAlertViewDelegate, MCThisPersonProtocol, MCTonightsBillPut>
 {
     //__weak IBOutlet UIImageView *_pictureView;
@@ -31,7 +36,8 @@ typedef NS_ENUM(BOOL, MCIsEditing) {
     
     BOOL didSomethingChange;
     BOOL isNew;
-    MCIsEditing *isEditingEmailField;
+    MCIsEditing isEditingEmailField;
+    MCCancelButtonPressed mainCancelPressed;
 }
 
 @property (weak, nonatomic) IBOutlet UIImageView *pictureView;
