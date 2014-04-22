@@ -38,6 +38,8 @@
 		3872C0CE18FEA392008C54D7 /* libTestFlight.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 3857304B18DAF2F100A900EA /* libTestFlight.a */; };
 		3872C0D118FF0A5E008C54D7 /* MCSelectEmailAddressTableViewController_iPad.m in Sources */ = {isa = PBXBuildFile; fileRef = 3872C0D018FF0A5D008C54D7 /* MCSelectEmailAddressTableViewController_iPad.m */; };
 		3872C0D718FF1363008C54D7 /* MCSelectEmailAddressTableViewCell_iPad.m in Sources */ = {isa = PBXBuildFile; fileRef = 3872C0D618FF1363008C54D7 /* MCSelectEmailAddressTableViewCell_iPad.m */; };
+		3872C0DC19041725008C54D7 /* MCTableEmptyMessage_iPad.m in Sources */ = {isa = PBXBuildFile; fileRef = 3872C0DB19041725008C54D7 /* MCTableEmptyMessage_iPad.m */; };
+		3872C0DD19041C95008C54D7 /* MCTableEmptyMessage_iPad.xib in Resources */ = {isa = PBXBuildFile; fileRef = 3872C0DF19041C95008C54D7 /* MCTableEmptyMessage_iPad.xib */; };
 		3873A2A516F23AA1000832FD /* MessageUI.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 3873A2A416F23AA1000832FD /* MessageUI.framework */; };
 		3876EF591840E86900C9546A /* MCCancelDoneTableViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 3876EF581840E86900C9546A /* MCCancelDoneTableViewController.m */; };
 		387D3A911870652B0060FAF8 /* Localizable.strings in Resources */ = {isa = PBXBuildFile; fileRef = 387D3A931870652B0060FAF8 /* Localizable.strings */; };
@@ -165,6 +167,11 @@
 		3872C0D018FF0A5D008C54D7 /* MCSelectEmailAddressTableViewController_iPad.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = MCSelectEmailAddressTableViewController_iPad.m; path = ViewControllers/iPad/MCSelectEmailAddressTableViewController_iPad.m; sourceTree = "<group>"; };
 		3872C0D518FF1363008C54D7 /* MCSelectEmailAddressTableViewCell_iPad.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = MCSelectEmailAddressTableViewCell_iPad.h; path = Views/iPad/MCSelectEmailAddressTableViewCell_iPad.h; sourceTree = "<group>"; };
 		3872C0D618FF1363008C54D7 /* MCSelectEmailAddressTableViewCell_iPad.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = MCSelectEmailAddressTableViewCell_iPad.m; path = Views/iPad/MCSelectEmailAddressTableViewCell_iPad.m; sourceTree = "<group>"; };
+		3872C0DA19041725008C54D7 /* MCTableEmptyMessage_iPad.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = MCTableEmptyMessage_iPad.h; path = Views/iPad/MCTableEmptyMessage_iPad.h; sourceTree = "<group>"; };
+		3872C0DB19041725008C54D7 /* MCTableEmptyMessage_iPad.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = MCTableEmptyMessage_iPad.m; path = Views/iPad/MCTableEmptyMessage_iPad.m; sourceTree = "<group>"; };
+		3872C0E019041CA6008C54D7 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.xib; name = Base; path = Base.lproj/MCTableEmptyMessage_iPad.xib; sourceTree = "<group>"; };
+		3872C0E119041CAE008C54D7 /* en */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = en; path = en.lproj/MCTableEmptyMessage_iPad.strings; sourceTree = "<group>"; };
+		3872C0E319041CB3008C54D7 /* nl */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = nl; path = nl.lproj/MCTableEmptyMessage_iPad.strings; sourceTree = "<group>"; };
 		3873A2A416F23AA1000832FD /* MessageUI.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = MessageUI.framework; path = System/Library/Frameworks/MessageUI.framework; sourceTree = SDKROOT; };
 		3873A2A616F2858A000832FD /* Going Dutch.entitlements */ = {isa = PBXFileReference; lastKnownFileType = text.xml; path = "Going Dutch.entitlements"; sourceTree = "<group>"; };
 		3876EF571840E86900C9546A /* MCCancelDoneTableViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = MCCancelDoneTableViewController.h; path = ../MCCancelDoneTableViewController.h; sourceTree = "<group>"; };
@@ -530,6 +537,9 @@
 				38C2BCA418FC3CD400233D24 /* MCPaymentTableViewCell_iPad.m */,
 				3872C0D518FF1363008C54D7 /* MCSelectEmailAddressTableViewCell_iPad.h */,
 				3872C0D618FF1363008C54D7 /* MCSelectEmailAddressTableViewCell_iPad.m */,
+				3872C0DF19041C95008C54D7 /* MCTableEmptyMessage_iPad.xib */,
+				3872C0DA19041725008C54D7 /* MCTableEmptyMessage_iPad.h */,
+				3872C0DB19041725008C54D7 /* MCTableEmptyMessage_iPad.m */,
 			);
 			name = iPad;
 			sourceTree = "<group>";
@@ -712,6 +722,7 @@
 				3867CE4718704B2E001EC222 /* Main-Iphone.storyboard in Resources */,
 				38334ECC173552410063B919 /* Default-568h@2x.png in Resources */,
 				3897157B17901D0F005BE03E /* MCTextFieldAndLabelTitleView.xib in Resources */,
+				3872C0DD19041C95008C54D7 /* MCTableEmptyMessage_iPad.xib in Resources */,
 				3897157D17901D0F005BE03E /* MCTwoLabelsTitleView.xib in Resources */,
 				380F44F21813250600FF7E10 /* No picture image 2 - We All Pay.png in Resources */,
 				3897158817901D55005BE03E /* MCPaymentTableViewCell.xib in Resources */,
@@ -769,6 +780,7 @@
 				382E7BDD17E5E57500A1040A /* MCReturnPaymentViewController.m in Sources */,
 				383E0C5D186737EB00AA688D /* MCSharedBillPageViewController.m in Sources */,
 				38DB85E617E46FE2006237CF /* MCSharedBill.m in Sources */,
+				3872C0DC19041725008C54D7 /* MCTableEmptyMessage_iPad.m in Sources */,
 				38E0C5EA18E9B2BD005A3F17 /* MCAllTripsTableViewController-iPad.m in Sources */,
 				3892E3A417903EF00038894B /* MCEditTripViewController.m in Sources */,
 				3898F33A18F2CC0D00BFFC61 /* MCSelectPayerTableViewCell_iPad.m in Sources */,
@@ -839,6 +851,17 @@
 			);
 			name = MCTableEmptyMessage.xib;
 			path = Views;
+			sourceTree = "<group>";
+		};
+		3872C0DF19041C95008C54D7 /* MCTableEmptyMessage_iPad.xib */ = {
+			isa = PBXVariantGroup;
+			children = (
+				3872C0E019041CA6008C54D7 /* Base */,
+				3872C0E119041CAE008C54D7 /* en */,
+				3872C0E319041CB3008C54D7 /* nl */,
+			);
+			name = MCTableEmptyMessage_iPad.xib;
+			path = Views/iPad;
 			sourceTree = "<group>";
 		};
 		387D3A931870652B0060FAF8 /* Localizable.strings */ = {

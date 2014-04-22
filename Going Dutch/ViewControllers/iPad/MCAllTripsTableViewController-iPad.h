@@ -9,8 +9,12 @@
 #import <UIKit/UIKit.h>
 #import <CoreData/CoreData.h>
 
+@class MCTableEmptyMessage_iPad;
+
 @interface MCAllTripsTableViewController_iPad : UITableViewController <NSFetchedResultsControllerDelegate>
 {
+    MCTableEmptyMessage_iPad *emptyMessage;
+    
     NSFetchedResultsController *dataController;
     NSDateFormatter *df;
 }

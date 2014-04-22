@@ -45,6 +45,7 @@
     if (!success) {
         NSLog(@"Something went wrong");
     }
+    [[self tableView] reloadData];
 }
 
 #pragma mark - Inherited from super

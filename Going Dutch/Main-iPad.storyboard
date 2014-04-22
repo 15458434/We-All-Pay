@@ -133,7 +133,7 @@
                                     <segue destination="NKD-wF-4e4" kind="embed" id="rOa-zk-LNb"/>
                                 </connections>
                             </containerView>
-                            <containerView contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="cqE-dH-zdR">
+                            <containerView contentMode="scaleToFill" misplaced="YES" translatesAutoresizingMaskIntoConstraints="NO" id="cqE-dH-zdR">
                                 <rect key="frame" x="0.0" y="172" width="384" height="852"/>
                                 <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                                 <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="calibratedWhite"/>
@@ -141,7 +141,7 @@
                                     <segue destination="YMW-gY-bCa" kind="embed" id="00m-OO-9HG"/>
                                 </connections>
                             </containerView>
-                            <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="rqj-np-zHP">
+                            <view contentMode="scaleToFill" misplaced="YES" translatesAutoresizingMaskIntoConstraints="NO" id="rqj-np-zHP">
                                 <rect key="frame" x="0.0" y="64" width="384" height="108"/>
                                 <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                                 <subviews>
@@ -978,7 +978,7 @@
                         <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                         <subviews>
                             <containerView contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="gUW-zw-Cm7">
-                                <rect key="frame" x="0.0" y="20" width="768" height="996"/>
+                                <rect key="frame" x="0.0" y="0.0" width="768" height="1024"/>
                                 <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                                 <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="calibratedWhite"/>
                                 <constraints>
@@ -991,10 +991,10 @@
                         </subviews>
                         <color key="backgroundColor" cocoaTouchSystemColor="groupTableViewBackgroundColor"/>
                         <constraints>
-                            <constraint firstItem="gUW-zw-Cm7" firstAttribute="top" secondItem="MWP-w9-Yoh" secondAttribute="top" constant="20" symbolic="YES" id="cgh-vf-0m2"/>
+                            <constraint firstItem="gUW-zw-Cm7" firstAttribute="top" secondItem="MWP-w9-Yoh" secondAttribute="top" id="cgh-vf-0m2"/>
                             <constraint firstAttribute="centerX" secondItem="gUW-zw-Cm7" secondAttribute="centerX" id="goH-Tb-mgK"/>
                             <constraint firstAttribute="centerY" secondItem="gUW-zw-Cm7" secondAttribute="centerY" id="mT7-yc-MeT"/>
-                            <constraint firstItem="eQn-cZ-eIt" firstAttribute="top" secondItem="gUW-zw-Cm7" secondAttribute="bottom" constant="20" symbolic="YES" id="zP9-bY-Ydx"/>
+                            <constraint firstItem="eQn-cZ-eIt" firstAttribute="top" secondItem="gUW-zw-Cm7" secondAttribute="bottom" id="zP9-bY-Ydx"/>
                         </constraints>
                     </view>
                     <navigationItem key="navigationItem" title="events" id="T8K-rj-EA0"/>
