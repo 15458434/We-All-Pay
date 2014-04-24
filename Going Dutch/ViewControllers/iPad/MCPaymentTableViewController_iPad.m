@@ -127,7 +127,9 @@
         NSString *newTitle = NSLocalizedString(@"NEW_PAYMENT_HEADER", "new payment");
         [self setTitle:newTitle];
     } else {
-        [selectButton setTitle:[[_thisPayment payingPerson] getFullName] forState:UIControlStateNormal];
+        if ([_thisPayment payingPerson]) {
+            [selectButton setTitle:[[_thisPayment payingPerson] getFullName] forState:UIControlStateNormal];
+        }
         [itemField setText:[_thisPayment descriptionOfPayment]];
         if ([_thisPayment money]) {
             [paidField setText:[_thisPayment getMoneyValueInCurrencyAsAString]];

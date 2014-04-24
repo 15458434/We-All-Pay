@@ -9,7 +9,7 @@
 "4LN-EL-yNj.text" = "peoplePresent";
 
 /* Class = "IBUIButton"; normalTitle = "solve"; ObjectID = "9og-gt-gwG"; */
-"9og-gt-gwG.normalTitle" = "oplossing";
+"9og-gt-gwG.normalTitle" = "Oplossing";
 
 /* Class = "IBUINavigationItem"; title = "people and payments"; ObjectID = "Ajb-WY-VLi"; */
 "Ajb-WY-VLi.title" = "mensen en betalingen";
@@ -24,7 +24,7 @@
 "Du0-aV-eeD.title" = "betalingsdetails";
 
 /* Class = "IBUIButton"; normalTitle = "new event"; ObjectID = "EuC-uT-5WX"; */
-"EuC-uT-5WX.normalTitle" = "rekening";
+"EuC-uT-5WX.normalTitle" = "Nieuwe rekening";
 
 /* Class = "IBUINavigationItem"; title = "events"; ObjectID = "Gep-Z6-3Aj"; */
 "Gep-Z6-3Aj.title" = "rekeningen";
@@ -33,7 +33,7 @@
 "GfK-Qn-5Kr.title" = "Item";
 
 /* Class = "IBUIButton"; normalTitle = "addressbook"; ObjectID = "H3d-ki-tdJ"; */
-"H3d-ki-tdJ.normalTitle" = "adresboek";
+"H3d-ki-tdJ.normalTitle" = "Adresboek";
 
 /* Class = "IBUITextField"; placeholder = "last name"; ObjectID = "JRX-hO-2n8"; */
 "JRX-hO-2n8.placeholder" = "achternaam";
@@ -51,10 +51,10 @@
 "MCZ-yM-Hrf.text" = "emailLabel";
 
 /* Class = "IBUIButton"; normalTitle = "add person"; ObjectID = "Nxq-6f-abw"; */
-"Nxq-6f-abw.normalTitle" = "nieuwe persoon";
+"Nxq-6f-abw.normalTitle" = "Nieuwe persoon";
 
 /* Class = "IBUINavigationItem"; title = "events"; ObjectID = "T8K-rj-EA0"; */
-"T8K-rj-EA0.title" = "rekening";
+"T8K-rj-EA0.title" = "rekeningen";
 
 /* Class = "IBUILabel"; text = "moneyLabel"; ObjectID = "UjB-LL-77p"; */
 "UjB-LL-77p.text" = "moneyLabel";
@@ -63,10 +63,10 @@
 "V6H-03-85K.text" = "tripNameLabel";
 
 /* Class = "IBUINavigationItem"; title = "Solution"; ObjectID = "Vay-2v-DoQ"; */
-"Vay-2v-DoQ.title" = "Oplossing";
+"Vay-2v-DoQ.title" = "oplossing";
 
 /* Class = "IBUIButton"; normalTitle = "Select email address"; ObjectID = "Z0f-Hu-kcp"; */
-"Z0f-Hu-kcp.normalTitle" = "Selecteer emailadres";
+"Z0f-Hu-kcp.normalTitle" = "selecteer emailadres";
 
 /* Class = "IBUILabel"; text = "Label"; ObjectID = "ZFw-P0-QBI"; */
 "ZFw-P0-QBI.text" = "Label";
