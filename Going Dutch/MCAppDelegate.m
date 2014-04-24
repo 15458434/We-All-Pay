@@ -61,6 +61,8 @@
     // Set the sectionIndex color in the people picker
     [[UITableView appearance] setSectionIndexColor:[MCColors getButtonColor]];
     
+    [[UINavigationBar appearance] setBarStyle:UIBarStyleBlack];
+    
     /*
     // Set the sectionColor
     UIView *sectionViewInPicker = [UIView appearanceWhenContainedIn:[UITableViewHeaderFooterView class], [ABPeoplePickerNavigationController class], nil];

@@ -45,13 +45,8 @@
     [peoplePicker setEdgesForExtendedLayout:UIRectEdgeNone];
     [[peoplePicker viewControllers][0] setEdgesForExtendedLayout:UIRectEdgeNone];
     [peoplePicker setModalPresentationStyle:UIModalPresentationFormSheet];
+    [[[peoplePicker navigationController] navigationBar] setBarStyle:UIBarStyleBlack];
     
-    // Show adBanner on the iPhone not on the iPad.
-    if ([[UIDevice currentDevice] userInterfaceIdiom] == UIUserInterfaceIdiomPad) {
-        [MCTools setAdBannerIfNotPaid:NO forViewController:[peoplePicker viewControllers][0]];
-    } else {
-        [MCTools setAdBannerIfNotPaid:NO forViewController:[peoplePicker viewControllers][0]];
-    }
     [[self navigationController] presentViewController:peoplePicker animated:YES completion:nil];
 }
 

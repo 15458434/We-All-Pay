@@ -164,6 +164,11 @@
     return self;
 }
 
+- (UIStatusBarStyle)preferredStatusBarStyle
+{
+    return UIStatusBarStyleLightContent;
+}
+
 #pragma mark - PickerViewDelegate
 
 - (NSString *)pickerView:(UIPickerView *)pickerView titleForRow:(NSInteger)row forComponent:(NSInteger)component
@@ -357,6 +362,8 @@
     [super viewWillAppear:animated];
     
     [MCTools setAdBannerIfNotPaid:NO forViewController:self];
+    
+    [self setNeedsStatusBarAppearanceUpdate];
     
     // Navigationbar stuff
     if (!twoLabelTitleView) {
