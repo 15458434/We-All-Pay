@@ -208,17 +208,15 @@
     if ([indexPath section] == 0) {
         MCSolutionOverViewTableViewCell_iPad *cell = [tableView dequeueReusableCellWithIdentifier:@"MCSolutionOverViewTableViewCell_iPad" forIndexPath:indexPath];
         
-        // Configure the cell...
-        
-        switch ([indexPath row]) {
-            case 0:
-                [[cell firstLabel] setText:@"Total spent:"];
-                [[cell lastLabel] setText:[_tonightsBill totalSumOfMoneyOfThisSharedBillAsCurrencyString]];
-                break;
-            case 1:
-                [[cell firstLabel] setText:@"Total spent by each:"];
-                [[cell lastLabel] setText:[_tonightsBill amountPeopleShouldHavePaidAsCurrencyString]];
-                break;
+        if ([indexPath row] == 0) {
+            NSString *totalSpentString = NSLocalizedString(@"TOTAL_SPENT", @"Total spent:");
+            [[cell firstLabel] setText:totalSpentString];
+            [[cell lastLabel] setText:[_tonightsBill totalSumOfMoneyOfThisSharedBillAsCurrencyString]];
+        }
+        if ([indexPath row] == 1) {
+            NSString *eachPaysString = NSLocalizedString(@"EACH_PAYS", @"Each pays:");
+            [[cell firstLabel] setText:eachPaysString];
+            [[cell lastLabel] setText:[_tonightsBill amountPeopleShouldHavePaidAsCurrencyString]];
         }
         [cell setSelectionStyle:UITableViewCellSelectionStyleNone];
         return cell;

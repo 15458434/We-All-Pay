@@ -152,8 +152,8 @@
     emptyMessage = [[NSBundle mainBundle] loadNibNamed:@"MCTableEmptyMessage" owner:self options:nil][0];
     [[self tableView] setBackgroundView:emptyMessage];
     [[emptyMessage bigMessage] setText:NSLocalizedString(@"EMPTY_PAYMENT_LIST_MESSAGE", @"Press \"add payment\" to add a payment to this event.")];
-    [[emptyMessage bigMessage] setTextColor:[UIColor lightGrayColor]];
-    [emptyMessage setBackgroundColor:[UIColor groupTableViewBackgroundColor]];
+    // [[emptyMessage bigMessage] setTextColor:[UIColor lightGrayColor]];
+    // [emptyMessage setBackgroundColor:[UIColor groupTableViewBackgroundColor]];
 }
 
 - (void)viewWillAppear:(BOOL)animated

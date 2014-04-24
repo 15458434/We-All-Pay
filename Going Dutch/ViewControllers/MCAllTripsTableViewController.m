@@ -164,10 +164,8 @@
     }
     [[titleView mainLabel] setText:@"We All Pay"];
     [[titleView subLabel] setText:[NSString stringWithFormat:@"%@ build %@", [[NSBundle mainBundle] infoDictionary][@"CFBundleShortVersionString"], [[NSBundle mainBundle] infoDictionary][@"CFBundleVersion"]]];
-    if (SYSTEM_VERSION_LESS_THAN(@"7.0")) {
-        [[titleView mainLabel] setTextColor:[UIColor whiteColor]];
-        [[titleView subLabel] setTextColor:[UIColor whiteColor]];
-    }
+    [[titleView mainLabel] setTextColor:[UIColor whiteColor]];
+    [[titleView subLabel] setTextColor:[UIColor whiteColor]];
     
     if (!dataController) {
         [self setDataController];

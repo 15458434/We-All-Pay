@@ -15,6 +15,7 @@
 #import "MCPerson+addons.h"
 
 #import "MCReturnPaymentTableViewCell.h"
+#import "MCSolutionOverViewTableViewCell_iPhone.h"
 #import "MCTwoLabelsTitleView.h"
 #import "MCTableEmptyMessage.h"
 
@@ -81,28 +82,6 @@
     return self;
 }
 
-- (void)viewWillAppear:(BOOL)animated
-{
-    if (!twoLabelTitleView) {
-        twoLabelTitleView = [[NSBundle mainBundle] loadNibNamed:@"MCTwoLabelsTitleView" owner:self options:nil][0];
-        [[self navigationItem] setTitleView:twoLabelTitleView];
-    }
-    NSNumber *averagePay = [tonightsBill amountPeopleShouldHavePaid];
-    NSNumber *totalSpent = [tonightsBill totalSumOfMoneyOfThisSharedBill];
-    NSNumberFormatter *nf = [[NSNumberFormatter alloc] init];
-    [nf setNumberStyle:NSNumberFormatterCurrencyStyle];
-    NSString *eachPays = NSLocalizedString(@"EACH_PAYS", @"Each pays: $ string inside the header of the solution screen");
-    [[twoLabelTitleView mainLabel] setText:[NSString stringWithFormat:@"%@ %@", eachPays, [nf stringFromNumber:averagePay]]];
-    NSString *totalSpentString = NSLocalizedString(@"TOTAL_SPENT", @"Total spent: $ string inside the header of the solution screen.");
-    [[twoLabelTitleView subLabel] setText:[NSString stringWithFormat:@"%@ %@", totalSpentString, [nf stringFromNumber:totalSpent]]];
-    if (SYSTEM_VERSION_LESS_THAN(@"7.0")) {
-        [[twoLabelTitleView mainLabel] setTextColor:[UIColor whiteColor]];
-        [[twoLabelTitleView subLabel] setTextColor:[UIColor whiteColor]];
-    }
-    
-    [self setEmptyMessage];
-}
-
 - (void)viewDidLoad
 {
     [super viewDidLoad];
@@ -138,6 +117,32 @@
     
     UINib *nib = [UINib nibWithNibName:@"MCReturnPaymentTableViewCell" bundle:nil];
     [[self tableView] registerNib:nib forCellReuseIdentifier:@"MCReturnPaymentTableViewCell"];
+}
+
+- (void)viewWillAppear:(BOOL)animated
+{
+    [super viewWillAppear:animated];
+    
+    /*
+     if (!twoLabelTitleView) {
+     twoLabelTitleView = [[NSBundle mainBundle] loadNibNamed:@"MCTwoLabelsTitleView" owner:self options:nil][0];
+     [[self navigationItem] setTitleView:twoLabelTitleView];
+     }
+     NSNumber *averagePay = [tonightsBill amountPeopleShouldHavePaid];
+     NSNumber *totalSpent = [tonightsBill totalSumOfMoneyOfThisSharedBill];
+     NSNumberFormatter *nf = [[NSNumberFormatter alloc] init];
+     [nf setNumberStyle:NSNumberFormatterCurrencyStyle];
+     NSString *eachPays = NSLocalizedString(@"EACH_PAYS", @"Each pays: $ string inside the header of the solution screen");
+     [[twoLabelTitleView mainLabel] setText:[NSString stringWithFormat:@"%@ %@", eachPays, [nf stringFromNumber:averagePay]]];
+     NSString *totalSpentString = NSLocalizedString(@"TOTAL_SPENT", @"Total spent: $ string inside the header of the solution screen.");
+     [[twoLabelTitleView subLabel] setText:[NSString stringWithFormat:@"%@ %@", totalSpentString, [nf stringFromNumber:totalSpent]]];
+     if (SYSTEM_VERSION_LESS_THAN(@"7.0")) {
+     [[twoLabelTitleView mainLabel] setTextColor:[UIColor whiteColor]];
+     [[twoLabelTitleView subLabel] setTextColor:[UIColor whiteColor]];
+     }
+     */
+    
+    [self setEmptyMessage];
 }
 
 - (void)viewDidAppear:(BOOL)animated
@@ -208,33 +213,73 @@
     }
 }
 
+#pragma mark - UITableViewDelegate
+
+- (CGFloat)tableView:(UITableView *)tableView heightForRowAtIndexPath:(NSIndexPath *)indexPath
+{
+    return 46.0;
+}
+
 #pragma mark - Table view data source
 
 - (NSInteger)numberOfSectionsInTableView:(UITableView *)tableView
 {
-    return 1;
+    return 2;
 }
 
 - (NSInteger)tableView:(UITableView *)tableView numberOfRowsInSection:(NSInteger)section
 {
-    return [paymentsAfterwards count];
+    switch (section) {
+        case 0:
+            if ([paymentsAfterwards count] == 0) {
+                return 0;
+            } else {
+                return 2;
+            }
+            break;
+        case 1:
+            return [paymentsAfterwards count];
+        default:
+            return 0;
+    }
 }
 
 - (UITableViewCell *)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath
 {
-    MCReturnPayment *thisCellsReturnPayment = paymentsAfterwards[[indexPath row]];
-    MCReturnPaymentTableViewCell *returnPaymentCell = [tableView dequeueReusableCellWithIdentifier:@"MCReturnPaymentTableViewCell"];
-    NSNumberFormatter *nf = [[NSNumberFormatter alloc] init];
-    [nf setNumberStyle:NSNumberFormatterCurrencyStyle];
-    NSNumber *moneyToConvert = [thisCellsReturnPayment money];
-    [[returnPaymentCell moneyLabel] setText:[nf stringFromNumber:moneyToConvert]];
+    if ([indexPath section] == 0) {
+        MCSolutionOverViewTableViewCell_iPhone *cell = [tableView dequeueReusableCellWithIdentifier:@"MCSolutionOverViewTableViewCell_iPhone"];
+        
+
+        if ([indexPath row] == 0) {
+            NSString *totalSpentString = NSLocalizedString(@"TOTAL_SPENT", @"Total spent:");
+            [[cell totalLabel] setText:totalSpentString];
+            [[cell moneyLabel] setText:[tonightsBill totalSumOfMoneyOfThisSharedBillAsCurrencyString]];
+        }
+        if ([indexPath row] == 1) {
+            NSString *eachPaysString = NSLocalizedString(@"EACH_PAYS", @"Each pays");
+            [[cell totalLabel] setText:eachPaysString];
+            [[cell moneyLabel] setText:[tonightsBill amountPeopleShouldHavePaidAsCurrencyString]];
+        }
+        return cell;
+    }
     
-    NSString *owesString = NSLocalizedString(@"OWES", @"As in Mark owes Arjen, but then just the word owes.");
-    NSString *whoOwesWho = [[NSString alloc] initWithFormat:@"%@ %@ %@:", [[thisCellsReturnPayment payer] getName], owesString, [[thisCellsReturnPayment receiver] getName]];
-    [[returnPaymentCell whoOwesWho] setText:whoOwesWho];
-    [returnPaymentCell setSelectionStyle:UITableViewCellSelectionStyleNone];
+    if ([indexPath section] == 1) {
+        MCReturnPayment *thisCellsReturnPayment = paymentsAfterwards[[indexPath row]];
+        MCReturnPaymentTableViewCell *returnPaymentCell = [tableView dequeueReusableCellWithIdentifier:@"MCReturnPaymentTableViewCell"];
+        NSNumberFormatter *nf = [[NSNumberFormatter alloc] init];
+        [nf setNumberStyle:NSNumberFormatterCurrencyStyle];
+        NSNumber *moneyToConvert = [thisCellsReturnPayment money];
+        [[returnPaymentCell moneyLabel] setText:[nf stringFromNumber:moneyToConvert]];
+        
+        NSString *owesString = NSLocalizedString(@"OWES", @"As in Mark owes Arjen, but then just the word owes.");
+        NSString *whoOwesWho = [[NSString alloc] initWithFormat:@"%@ %@ %@:", [[thisCellsReturnPayment payer] getName], owesString, [[thisCellsReturnPayment receiver] getName]];
+        [[returnPaymentCell whoOwesWho] setText:whoOwesWho];
+        [returnPaymentCell setSelectionStyle:UITableViewCellSelectionStyleNone];
+        
+        return returnPaymentCell;
+    }
     
-    return returnPaymentCell;
+    return nil;
 }
 
 /*
