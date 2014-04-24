@@ -1,0 +1,114 @@
+
+/* Class = "IBUINavigationItem"; title = "Person Details"; ObjectID = "1ZS-Vk-Q4D"; */
+"1ZS-Vk-Q4D.title" = "persoonsdetails";
+
+/* Class = "IBUILabel"; text = "Label"; ObjectID = "31L-di-50d"; */
+"31L-di-50d.text" = "Label";
+
+/* Class = "IBUILabel"; text = "peoplePresent"; ObjectID = "4LN-EL-yNj"; */
+"4LN-EL-yNj.text" = "peoplePresent";
+
+/* Class = "IBUIButton"; normalTitle = "solve"; ObjectID = "9og-gt-gwG"; */
+"9og-gt-gwG.normalTitle" = "oplossing";
+
+/* Class = "IBUINavigationItem"; title = "people and payments"; ObjectID = "Ajb-WY-VLi"; */
+"Ajb-WY-VLi.title" = "mensen en betalingen";
+
+/* Class = "IBUITextField"; placeholder = "Event name"; ObjectID = "AkR-Sr-Oah"; */
+"AkR-Sr-Oah.placeholder" = "Naam van de totaal rekening";
+
+/* Class = "IBUILabel"; text = "moneyLabel"; ObjectID = "Bus-qo-pqC"; */
+"Bus-qo-pqC.text" = "moneyLabel";
+
+/* Class = "IBUINavigationItem"; title = "payment details"; ObjectID = "Du0-aV-eeD"; */
+"Du0-aV-eeD.title" = "betalingsdetails";
+
+/* Class = "IBUIButton"; normalTitle = "new event"; ObjectID = "EuC-uT-5WX"; */
+"EuC-uT-5WX.normalTitle" = "rekening";
+
+/* Class = "IBUINavigationItem"; title = "events"; ObjectID = "Gep-Z6-3Aj"; */
+"Gep-Z6-3Aj.title" = "rekeningen";
+
+/* Class = "IBUIBarButtonItem"; title = "Item"; ObjectID = "GfK-Qn-5Kr"; */
+"GfK-Qn-5Kr.title" = "Item";
+
+/* Class = "IBUIButton"; normalTitle = "addressbook"; ObjectID = "H3d-ki-tdJ"; */
+"H3d-ki-tdJ.normalTitle" = "adresboek";
+
+/* Class = "IBUITextField"; placeholder = "last name"; ObjectID = "JRX-hO-2n8"; */
+"JRX-hO-2n8.placeholder" = "achternaam";
+
+/* Class = "IBUILabel"; text = "emailAddress"; ObjectID = "KBE-ZP-DFn"; */
+"KBE-ZP-DFn.text" = "emailAddress";
+
+/* Class = "IBUITextField"; placeholder = "What was paid?"; ObjectID = "LDs-9i-ZRZ"; */
+"LDs-9i-ZRZ.placeholder" = "Wat is er betaald?";
+
+/* Class = "IBUILabel"; text = "itemField"; ObjectID = "LTB-3b-Z1S"; */
+"LTB-3b-Z1S.text" = "itemField";
+
+/* Class = "IBUILabel"; text = "emailLabel"; ObjectID = "MCZ-yM-Hrf"; */
+"MCZ-yM-Hrf.text" = "emailLabel";
+
+/* Class = "IBUIButton"; normalTitle = "add person"; ObjectID = "Nxq-6f-abw"; */
+"Nxq-6f-abw.normalTitle" = "nieuwe persoon";
+
+/* Class = "IBUINavigationItem"; title = "events"; ObjectID = "T8K-rj-EA0"; */
+"T8K-rj-EA0.title" = "rekening";
+
+/* Class = "IBUILabel"; text = "moneyLabel"; ObjectID = "UjB-LL-77p"; */
+"UjB-LL-77p.text" = "moneyLabel";
+
+/* Class = "IBUILabel"; text = "tripNameLabel"; ObjectID = "V6H-03-85K"; */
+"V6H-03-85K.text" = "tripNameLabel";
+
+/* Class = "IBUINavigationItem"; title = "Solution"; ObjectID = "Vay-2v-DoQ"; */
+"Vay-2v-DoQ.title" = "Oplossing";
+
+/* Class = "IBUIButton"; normalTitle = "Select email address"; ObjectID = "Z0f-Hu-kcp"; */
+"Z0f-Hu-kcp.normalTitle" = "Selecteer emailadres";
+
+/* Class = "IBUILabel"; text = "Label"; ObjectID = "ZFw-P0-QBI"; */
+"ZFw-P0-QBI.text" = "Label";
+
+/* Class = "IBUITextField"; placeholder = "How much was spent?"; ObjectID = "ZlS-5v-dlc"; */
+"ZlS-5v-dlc.placeholder" = "Hoeveel is er betaald?";
+
+/* Class = "IBUIButton"; normalTitle = "select payer"; ObjectID = "al5-Gb-hhI"; */
+"al5-Gb-hhI.normalTitle" = "selecteer wie betaalt";
+
+/* Class = "IBUILabel"; text = "Label"; ObjectID = "cb9-ow-Za9"; */
+"cb9-ow-Za9.text" = "Label";
+
+/* Class = "IBUILabel"; text = "nameLabel"; ObjectID = "eD2-1r-4uR"; */
+"eD2-1r-4uR.text" = "nameLabel";
+
+/* Class = "IBUITextField"; placeholder = "emailaddress"; ObjectID = "eax-dw-aIf"; */
+"eax-dw-aIf.placeholder" = "emailaddress";
+
+/* Class = "IBUIButton"; normalTitle = "add payment"; ObjectID = "egw-0d-cT1"; */
+"egw-0d-cT1.normalTitle" = "nieuwe betaling";
+
+/* Class = "IBUIButton"; normalTitle = "Send Email"; ObjectID = "fi4-m8-emE"; */
+"fi4-m8-emE.normalTitle" = "Stuur email";
+
+/* Class = "IBUILabel"; text = "extraLabel"; ObjectID = "hKu-l5-7vA"; */
+"hKu-l5-7vA.text" = "extraLabel";
+
+/* Class = "IBUITextField"; placeholder = "first name"; ObjectID = "nPF-0g-HeJ"; */
+"nPF-0g-HeJ.placeholder" = "voornaam";
+
+/* Class = "IBUILabel"; text = "Label"; ObjectID = "pSW-A7-HzN"; */
+"pSW-A7-HzN.text" = "Label";
+
+/* Class = "IBUILabel"; text = "totalSpentLabel"; ObjectID = "pkK-xC-uPv"; */
+"pkK-xC-uPv.text" = "totalSpentLabel";
+
+/* Class = "IBUILabel"; text = "Label"; ObjectID = "rt5-oo-0IR"; */
+"rt5-oo-0IR.text" = "Label";
+
+/* Class = "IBUILabel"; text = "full name"; ObjectID = "vSV-5M-Ipk"; */
+"vSV-5M-Ipk.text" = "full name";
+
+/* Class = "IBUILabel"; text = "payerField"; ObjectID = "xU7-yf-2N6"; */
+"xU7-yf-2N6.text" = "payerField";

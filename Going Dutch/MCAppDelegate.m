@@ -41,6 +41,35 @@
     [[UINavigationBar appearance] setBarTintColor:[MCColors getNavigationColor]];
     [[UINavigationBar appearance] setTintColor:[MCColors getButtonColor]];
     [[UINavigationBar appearance] setTitleTextAttributes:@{NSForegroundColorAttributeName: [UIColor whiteColor]}];
+    [[UIButton appearance] setTitleColor:[MCColors getButtonColor] forState:UIControlStateNormal];
+    [[UIButton appearance] setTitleColor:[MCColors getButtonDisabledColor] forState:UIControlStateDisabled];
+    
+    
+    // Set the background color in the peoplepicker.
+    [[UISearchBar appearance] setBarTintColor:[MCColors getbackgroundColor]];
+    
+    // Set the color of the cancelButton of the search bar
+    UIBarButtonItem *addressBookSearchBarCancelButton = [UIBarButtonItem appearanceWhenContainedIn:[UISearchBar class], nil];
+    UIColor *addressBookSearchBarCancelButtonColor = [MCColors getButtonColor];
+    NSMutableDictionary *colorDictionary = [NSMutableDictionary dictionaryWithObjectsAndKeys:
+                                            addressBookSearchBarCancelButtonColor,
+                                            NSForegroundColorAttributeName,
+                                            nil];
+    [colorDictionary setObject:addressBookSearchBarCancelButtonColor forKey:NSForegroundColorAttributeName];
+    [addressBookSearchBarCancelButton setTitleTextAttributes:colorDictionary forState:UIControlStateNormal];
+    
+    // Set the sectionIndex color in the people picker
+    [[UITableView appearance] setSectionIndexColor:[MCColors getButtonColor]];
+    
+    /*
+    // Set the sectionColor
+    UIView *sectionViewInPicker = [UIView appearanceWhenContainedIn:[UITableViewHeaderFooterView class], [ABPeoplePickerNavigationController class], nil];
+    [sectionViewInPicker setBackgroundColor:[MCColors getbackgroundColor]];
+     */
+    
+    // Set the labelColor of the section in peoplepicker
+    UILabel *pickerLabels = [UILabel appearanceWhenContainedIn:[UITableViewHeaderFooterView class], nil];
+    [pickerLabels setTextColor:[MCColors getEmptyMessageTextColor]];
 }
 
 #pragma mark - UIApplicationDelegate

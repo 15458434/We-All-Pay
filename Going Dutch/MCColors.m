@@ -20,6 +20,11 @@
     return [MCTools colorWith8BitRed:255 green:135 blue:173 alpha:1.0];
 }
 
++ (UIColor *)getButtonDisabledColor
+{
+    return [MCTools colorWith8BitRed:255 green:222 blue:228 alpha:1.0];
+}
+
 + (UIColor *)getNavigationColor
 {
     return [MCTools colorWith8BitRed:0 green:51 blue:102 alpha:1.0];

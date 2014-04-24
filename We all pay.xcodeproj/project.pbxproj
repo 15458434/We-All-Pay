@@ -94,7 +94,7 @@
 		38DC8B3419081EB800762235 /* libGoogleAnalyticsServices.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 38DC8B3319081EB800762235 /* libGoogleAnalyticsServices.a */; };
 		38DC8B3619084ABE00762235 /* SystemConfiguration.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 38DC8B3519084ABE00762235 /* SystemConfiguration.framework */; };
 		38DC8B421909508800762235 /* MCColors.m in Sources */ = {isa = PBXBuildFile; fileRef = 38DC8B411909508800762235 /* MCColors.m */; };
-		38E0C5E118E9A284005A3F17 /* Main-iPad.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 38E0C5E018E9A284005A3F17 /* Main-iPad.storyboard */; };
+		38DC8B4319097FEA00762235 /* Main-iPad.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 38DC8B4519097FEA00762235 /* Main-iPad.storyboard */; };
 		38E0C5EA18E9B2BD005A3F17 /* MCAllTripsTableViewController-iPad.m in Sources */ = {isa = PBXBuildFile; fileRef = 38E0C5E918E9B2BD005A3F17 /* MCAllTripsTableViewController-iPad.m */; };
 		38E63CF0186F904B00904D82 /* MCTableEmptyMessage.m in Sources */ = {isa = PBXBuildFile; fileRef = 38E63CEF186F904B00904D82 /* MCTableEmptyMessage.m */; };
 		38EFF2D416D215BE001C8248 /* MCAllTripsTableViewCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 38EFF2D316D215BE001C8248 /* MCAllTripsTableViewCell.m */; };
@@ -278,9 +278,11 @@
 		38DC8B3519084ABE00762235 /* SystemConfiguration.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = SystemConfiguration.framework; path = System/Library/Frameworks/SystemConfiguration.framework; sourceTree = SDKROOT; };
 		38DC8B401909508800762235 /* MCColors.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = MCColors.h; sourceTree = "<group>"; };
 		38DC8B411909508800762235 /* MCColors.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = MCColors.m; sourceTree = "<group>"; };
+		38DC8B4419097FEA00762235 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = "Base.lproj/Main-iPad.storyboard"; sourceTree = "<group>"; };
+		38DC8B4719097FF700762235 /* en */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = en; path = "en.lproj/Main-iPad.strings"; sourceTree = "<group>"; };
+		38DC8B4919097FFE00762235 /* nl */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.strings; name = nl; path = "nl.lproj/Main-iPad.strings"; sourceTree = "<group>"; };
 		38E0C5DE18E5C94D005A3F17 /* MCTonightsBillTransfer.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = MCTonightsBillTransfer.h; path = ViewControllers/MCTonightsBillTransfer.h; sourceTree = "<group>"; };
 		38E0C5DF18E97A8A005A3F17 /* MCCurrentViewDelegate.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = MCCurrentViewDelegate.h; path = ViewControllers/MCCurrentViewDelegate.h; sourceTree = "<group>"; };
-		38E0C5E018E9A284005A3F17 /* Main-iPad.storyboard */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.storyboard; path = "Main-iPad.storyboard"; sourceTree = "<group>"; };
 		38E0C5E818E9B2BD005A3F17 /* MCAllTripsTableViewController-iPad.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = "MCAllTripsTableViewController-iPad.h"; path = "ViewControllers/iPad/MCAllTripsTableViewController-iPad.h"; sourceTree = "<group>"; };
 		38E0C5E918E9B2BD005A3F17 /* MCAllTripsTableViewController-iPad.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = "MCAllTripsTableViewController-iPad.m"; path = "ViewControllers/iPad/MCAllTripsTableViewController-iPad.m"; sourceTree = "<group>"; };
 		38E63CEE186F904B00904D82 /* MCTableEmptyMessage.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = MCTableEmptyMessage.h; path = Views/MCTableEmptyMessage.h; sourceTree = "<group>"; };
@@ -481,7 +483,7 @@
 			isa = PBXGroup;
 			children = (
 				3867CE4918704B2E001EC222 /* Main-Iphone.storyboard */,
-				38E0C5E018E9A284005A3F17 /* Main-iPad.storyboard */,
+				38DC8B4519097FEA00762235 /* Main-iPad.storyboard */,
 			);
 			name = Storyboard;
 			sourceTree = "<group>";
@@ -772,7 +774,7 @@
 				387D3A911870652B0060FAF8 /* Localizable.strings in Resources */,
 				38334ECA173552330063B919 /* Default.png in Resources */,
 				38334ECB1735523A0063B919 /* Default@2x.png in Resources */,
-				38E0C5E118E9A284005A3F17 /* Main-iPad.storyboard in Resources */,
+				38DC8B4319097FEA00762235 /* Main-iPad.storyboard in Resources */,
 				3867CE4718704B2E001EC222 /* Main-Iphone.storyboard in Resources */,
 				38334ECC173552410063B919 /* Default-568h@2x.png in Resources */,
 				3897157B17901D0F005BE03E /* MCTextFieldAndLabelTitleView.xib in Resources */,
@@ -936,6 +938,16 @@
 				38D785FA18DC53C30074B670 /* en */,
 			);
 			name = InfoPlist.strings;
+			sourceTree = "<group>";
+		};
+		38DC8B4519097FEA00762235 /* Main-iPad.storyboard */ = {
+			isa = PBXVariantGroup;
+			children = (
+				38DC8B4419097FEA00762235 /* Base */,
+				38DC8B4719097FF700762235 /* en */,
+				38DC8B4919097FFE00762235 /* nl */,
+			);
+			name = "Main-iPad.storyboard";
 			sourceTree = "<group>";
 		};
 /* End PBXVariantGroup section */

@@ -14,8 +14,8 @@
                     <rect key="frame" x="154" y="352" width="460" height="320"/>
                     <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                     <constraints>
-                        <constraint firstAttribute="height" constant="320" id="UUf-mb-7NZ"/>
-                        <constraint firstAttribute="width" constant="460" id="g09-WN-Cud"/>
+                        <constraint firstAttribute="height" priority="750" constant="320" id="UUf-mb-7NZ"/>
+                        <constraint firstAttribute="width" priority="750" constant="460" id="g09-WN-Cud"/>
                     </constraints>
                     <fontDescription key="fontDescription" name="HelveticaNeue" family="Helvetica Neue" pointSize="27"/>
                     <color key="textColor" red="0.45490199327468872" green="0.58823531866073608" blue="0.72156864404678345" alpha="1" colorSpace="deviceRGB"/>

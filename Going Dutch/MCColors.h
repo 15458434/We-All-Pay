@@ -11,6 +11,7 @@
 @interface MCColors : NSObject
 
 + (UIColor *)getButtonColor;
++ (UIColor *)getButtonDisabledColor;
 + (UIColor *)getNavigationColor;
 + (UIColor *)getbackgroundColor;
 + (UIColor *)getEmptyMessageTextColor;
