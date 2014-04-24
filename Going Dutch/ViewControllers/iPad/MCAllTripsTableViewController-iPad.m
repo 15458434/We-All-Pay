@@ -102,6 +102,8 @@
     emptyMessage = [[NSBundle mainBundle] loadNibNamed:@"MCTableEmptyMessage_iPad" owner:self options:nil][0];
     [[emptyMessage bigMessage] setAlpha:0.0];
     [[self tableView] setBackgroundView:emptyMessage];
+    
+    [self setNeedsStatusBarAppearanceUpdate];
 }
 
 - (void)viewWillAppear:(BOOL)animated
@@ -119,6 +121,15 @@
         [[self tableView] reloadData];
         [self setEmptyMessageNow];
     }
+}
+
+- (void)viewDidAppear:(BOOL)animated
+{
+    [super viewDidAppear:animated];
+    
+    id<GAITracker> tracker = [[GAI sharedInstance] defaultTracker];
+    [tracker set:kGAIScreenName value:@"AllTripsViewController_iPad"];
+    [tracker send:[[GAIDictionaryBuilder createAppView] build]];
 }
 
 - (void)viewWillDisappear:(BOOL)animated

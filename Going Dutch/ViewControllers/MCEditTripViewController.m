@@ -212,6 +212,10 @@
     if ([tonightsBill tripName]) {
         [tripNameField setPlaceholder:[[NSString alloc] initWithFormat:@"Enter something to rename %@", [tonightsBill tripName]]];
     }
+    
+    id<GAITracker> tracker = [[GAI sharedInstance] defaultTracker];
+    [tracker set:kGAIScreenName value:@"MCPeoplePresentTableView_iPhone"];
+    [tracker send:[[GAIDictionaryBuilder createAppView] build]];
 }
 
 - (void)viewWillDisappear:(BOOL)animated

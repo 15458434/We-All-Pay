@@ -35,7 +35,6 @@
 		38690703186F0EEF006A5C11 /* libz.dylib in Frameworks */ = {isa = PBXBuildFile; fileRef = 38690702186F0EEF006A5C11 /* libz.dylib */; };
 		386FC32518E5855400428294 /* MCSharedBillMainViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 386FC32418E5855400428294 /* MCSharedBillMainViewController.m */; };
 		386FC37018E5BE1900428294 /* iAd.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 386FC36F18E5BE1900428294 /* iAd.framework */; };
-		3872C0CE18FEA392008C54D7 /* libTestFlight.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 3857304B18DAF2F100A900EA /* libTestFlight.a */; };
 		3872C0D118FF0A5E008C54D7 /* MCSelectEmailAddressTableViewController_iPad.m in Sources */ = {isa = PBXBuildFile; fileRef = 3872C0D018FF0A5D008C54D7 /* MCSelectEmailAddressTableViewController_iPad.m */; };
 		3872C0D718FF1363008C54D7 /* MCSelectEmailAddressTableViewCell_iPad.m in Sources */ = {isa = PBXBuildFile; fileRef = 3872C0D618FF1363008C54D7 /* MCSelectEmailAddressTableViewCell_iPad.m */; };
 		3872C0DC19041725008C54D7 /* MCTableEmptyMessage_iPad.m in Sources */ = {isa = PBXBuildFile; fileRef = 3872C0DB19041725008C54D7 /* MCTableEmptyMessage_iPad.m */; };
@@ -90,6 +89,10 @@
 		38DB85E317E46FE1006237CF /* MCPayment.m in Sources */ = {isa = PBXBuildFile; fileRef = 38DB85E217E46FE1006237CF /* MCPayment.m */; };
 		38DB85E617E46FE2006237CF /* MCSharedBill.m in Sources */ = {isa = PBXBuildFile; fileRef = 38DB85E517E46FE2006237CF /* MCSharedBill.m */; };
 		38DB85E917E46FE2006237CF /* MCPerson.m in Sources */ = {isa = PBXBuildFile; fileRef = 38DB85E817E46FE2006237CF /* MCPerson.m */; };
+		38DC8B271907048D00762235 /* libTestFlight.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 3857304B18DAF2F100A900EA /* libTestFlight.a */; };
+		38DC8B2A1907145A00762235 /* MCRootViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 38DC8B291907145A00762235 /* MCRootViewController.m */; };
+		38DC8B3419081EB800762235 /* libGoogleAnalyticsServices.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 38DC8B3319081EB800762235 /* libGoogleAnalyticsServices.a */; };
+		38DC8B3619084ABE00762235 /* SystemConfiguration.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 38DC8B3519084ABE00762235 /* SystemConfiguration.framework */; };
 		38E0C5E118E9A284005A3F17 /* Main-iPad.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 38E0C5E018E9A284005A3F17 /* Main-iPad.storyboard */; };
 		38E0C5EA18E9B2BD005A3F17 /* MCAllTripsTableViewController-iPad.m in Sources */ = {isa = PBXBuildFile; fileRef = 38E0C5E918E9B2BD005A3F17 /* MCAllTripsTableViewController-iPad.m */; };
 		38E63CF0186F904B00904D82 /* MCTableEmptyMessage.m in Sources */ = {isa = PBXBuildFile; fileRef = 38E63CEF186F904B00904D82 /* MCTableEmptyMessage.m */; };
@@ -262,6 +265,16 @@
 		38DB85E517E46FE2006237CF /* MCSharedBill.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = MCSharedBill.m; sourceTree = "<group>"; };
 		38DB85E717E46FE2006237CF /* MCPerson.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = MCPerson.h; sourceTree = "<group>"; };
 		38DB85E817E46FE2006237CF /* MCPerson.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = MCPerson.m; sourceTree = "<group>"; };
+		38DC8B281907145A00762235 /* MCRootViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = MCRootViewController.h; path = ViewControllers/iPad/MCRootViewController.h; sourceTree = "<group>"; };
+		38DC8B291907145A00762235 /* MCRootViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = MCRootViewController.m; path = ViewControllers/iPad/MCRootViewController.m; sourceTree = "<group>"; };
+		38DC8B2D19081E9100762235 /* GAI.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = GAI.h; sourceTree = "<group>"; };
+		38DC8B2E19081E9100762235 /* GAIDictionaryBuilder.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = GAIDictionaryBuilder.h; sourceTree = "<group>"; };
+		38DC8B2F19081E9100762235 /* GAIFields.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = GAIFields.h; sourceTree = "<group>"; };
+		38DC8B3019081E9100762235 /* GAILogger.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = GAILogger.h; sourceTree = "<group>"; };
+		38DC8B3119081E9100762235 /* GAITrackedViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = GAITrackedViewController.h; sourceTree = "<group>"; };
+		38DC8B3219081E9100762235 /* GAITracker.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = GAITracker.h; sourceTree = "<group>"; };
+		38DC8B3319081EB800762235 /* libGoogleAnalyticsServices.a */ = {isa = PBXFileReference; lastKnownFileType = archive.ar; path = libGoogleAnalyticsServices.a; sourceTree = "<group>"; };
+		38DC8B3519084ABE00762235 /* SystemConfiguration.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = SystemConfiguration.framework; path = System/Library/Frameworks/SystemConfiguration.framework; sourceTree = SDKROOT; };
 		38E0C5DE18E5C94D005A3F17 /* MCTonightsBillTransfer.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = MCTonightsBillTransfer.h; path = ViewControllers/MCTonightsBillTransfer.h; sourceTree = "<group>"; };
 		38E0C5DF18E97A8A005A3F17 /* MCCurrentViewDelegate.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = MCCurrentViewDelegate.h; path = ViewControllers/MCCurrentViewDelegate.h; sourceTree = "<group>"; };
 		38E0C5E018E9A284005A3F17 /* Main-iPad.storyboard */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.storyboard; path = "Main-iPad.storyboard"; sourceTree = "<group>"; };
@@ -279,7 +292,8 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				3872C0CE18FEA392008C54D7 /* libTestFlight.a in Frameworks */,
+				38DC8B3619084ABE00762235 /* SystemConfiguration.framework in Frameworks */,
+				38DC8B271907048D00762235 /* libTestFlight.a in Frameworks */,
 				386FC37018E5BE1900428294 /* iAd.framework in Frameworks */,
 				38690703186F0EEF006A5C11 /* libz.dylib in Frameworks */,
 				3886D3FD16B7A1CD00ECE64F /* AddressBook.framework in Frameworks */,
@@ -287,6 +301,7 @@
 				3801F89C16DFC62600DF8675 /* CoreData.framework in Frameworks */,
 				38572ADB169D437B00969C62 /* CoreGraphics.framework in Frameworks */,
 				38572AD9169D437B00969C62 /* Foundation.framework in Frameworks */,
+				38DC8B3419081EB800762235 /* libGoogleAnalyticsServices.a in Frameworks */,
 				3873A2A516F23AA1000832FD /* MessageUI.framework in Frameworks */,
 				38572AD7169D437B00969C62 /* UIKit.framework in Frameworks */,
 			);
@@ -374,6 +389,8 @@
 		38572AD5169D437B00969C62 /* Frameworks */ = {
 			isa = PBXGroup;
 			children = (
+				38DC8B3519084ABE00762235 /* SystemConfiguration.framework */,
+				38DC8B3319081EB800762235 /* libGoogleAnalyticsServices.a */,
 				386FC36F18E5BE1900428294 /* iAd.framework */,
 				38690702186F0EEF006A5C11 /* libz.dylib */,
 				383E0C561867079900AA688D /* Social.framework */,
@@ -401,6 +418,7 @@
 				38572AF3169D438E00969C62 /* ViewControllers */,
 				38CC9814183D520C006EC35D /* MC SDK */,
 				3826BDDB18A65CBC00747993 /* Testflight SDK */,
+				38DC8B2C19081E6400762235 /* Google Analytics */,
 				3892E3AF17906B5D0038894B /* MCAddressBookDataReceiver.h */,
 				3892E3B017906B5E0038894B /* MCAddressBookDataReceiver.m */,
 				38572AE5169D437B00969C62 /* MCAppDelegate.h */,
@@ -432,12 +450,7 @@
 			children = (
 				38E0C5E418E9B244005A3F17 /* iPad */,
 				38E0C5E218E9B22E005A3F17 /* iPhone */,
-				386FC36E18E5B8FE00428294 /* MCTitleViewDelegate.h */,
-				38E0C5DE18E5C94D005A3F17 /* MCTonightsBillTransfer.h */,
-				38E0C5DF18E97A8A005A3F17 /* MCCurrentViewDelegate.h */,
-				3898F32D18EEB38400BFFC61 /* MCThisPersonProtocol.h */,
-				3898F33318F1820600BFFC61 /* MCThisPaymentProtocol.h */,
-				382F9BD118F7285400818276 /* MCDismissMeBlockProtocol.h */,
+				38DC8B371909064A00762235 /* ViewController Protocols */,
 			);
 			name = ViewControllers;
 			sourceTree = "<group>";
@@ -579,6 +592,32 @@
 			name = "Supporting Files";
 			sourceTree = "<group>";
 		};
+		38DC8B2C19081E6400762235 /* Google Analytics */ = {
+			isa = PBXGroup;
+			children = (
+				38DC8B2D19081E9100762235 /* GAI.h */,
+				38DC8B2E19081E9100762235 /* GAIDictionaryBuilder.h */,
+				38DC8B2F19081E9100762235 /* GAIFields.h */,
+				38DC8B3019081E9100762235 /* GAILogger.h */,
+				38DC8B3119081E9100762235 /* GAITrackedViewController.h */,
+				38DC8B3219081E9100762235 /* GAITracker.h */,
+			);
+			name = "Google Analytics";
+			sourceTree = "<group>";
+		};
+		38DC8B371909064A00762235 /* ViewController Protocols */ = {
+			isa = PBXGroup;
+			children = (
+				386FC36E18E5B8FE00428294 /* MCTitleViewDelegate.h */,
+				38E0C5DE18E5C94D005A3F17 /* MCTonightsBillTransfer.h */,
+				38E0C5DF18E97A8A005A3F17 /* MCCurrentViewDelegate.h */,
+				3898F32D18EEB38400BFFC61 /* MCThisPersonProtocol.h */,
+				3898F33318F1820600BFFC61 /* MCThisPaymentProtocol.h */,
+				382F9BD118F7285400818276 /* MCDismissMeBlockProtocol.h */,
+			);
+			name = "ViewController Protocols";
+			sourceTree = "<group>";
+		};
 		38E0C5E218E9B22E005A3F17 /* iPhone */ = {
 			isa = PBXGroup;
 			children = (
@@ -605,6 +644,8 @@
 		38E0C5E418E9B244005A3F17 /* iPad */ = {
 			isa = PBXGroup;
 			children = (
+				38DC8B281907145A00762235 /* MCRootViewController.h */,
+				38DC8B291907145A00762235 /* MCRootViewController.m */,
 				38E0C5E818E9B2BD005A3F17 /* MCAllTripsTableViewController-iPad.h */,
 				38E0C5E918E9B2BD005A3F17 /* MCAllTripsTableViewController-iPad.m */,
 				38AAFBA318EC529300CD3E12 /* MCSharedBillViewController_iPad.h */,
@@ -771,6 +812,7 @@
 				38C2BC9918F7F69A00233D24 /* MCWhoOwesWhoTableViewCell_iPad.m in Sources */,
 				3897157C17901D0F005BE03E /* MCTwoLabelsTitleView.m in Sources */,
 				3897158717901D55005BE03E /* MCPaymentTableViewCell.m in Sources */,
+				38DC8B2A1907145A00762235 /* MCRootViewController.m in Sources */,
 				3897158917901D55005BE03E /* MCPersonTableViewCell.m in Sources */,
 				38AAFB9F18EC404200CD3E12 /* MCSharedBillPaymentsTableViewController-iPad.m in Sources */,
 				3897158B17901D55005BE03E /* MCReturnPaymentTableViewCell.m in Sources */,
@@ -954,6 +996,7 @@
 					"$(PROJECT_DIR)/Going",
 					Dutch/TestFlight,
 					SDK,
+					"$(PROJECT_DIR)",
 				);
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				PROVISIONING_PROFILE = "";
@@ -978,6 +1021,7 @@
 					"$(PROJECT_DIR)/Going",
 					Dutch/TestFlight,
 					SDK,
+					"$(PROJECT_DIR)",
 				);
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				PROVISIONING_PROFILE = "";

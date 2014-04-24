@@ -255,13 +255,6 @@
 {
     [super viewDidLoad];
     
-    // When on iPhone show a banner.
-    if ([[UIDevice currentDevice] userInterfaceIdiom] == UIUserInterfaceIdiomPad) {
-        [MCTools setAdBannerIfNotPaid:NO forViewController:self];
-    } else {
-        //[MCTools setAdBannerIfNotPaid:YES forViewController:self];
-    }
-    
     NSManagedObjectContext *context = [[[MCWeAllPayStoreController defaultStore] weAllPayStoreDocument] managedObjectContext];
     [[context undoManager] enableUndoRegistration];
     [[context undoManager] beginUndoGrouping];
@@ -281,6 +274,19 @@
     }
     
     isSelectEmail = NO;
+}
+
+- (void)viewDidAppear:(BOOL)animated
+{
+    [super viewDidAppear:animated];
+    
+    id<GAITracker> tracker = [[GAI sharedInstance] defaultTracker];
+    if (isNew) {
+        [tracker set:kGAIScreenName value:@"MCPersonNewView_iPhone"];
+    } else {
+        [tracker set:kGAIScreenName value:@"MCPersonDetails_iPhone"];
+    }
+    [tracker send:[[GAIDictionaryBuilder createAppView] build]];
 }
 
 - (void)viewDidDisappear:(BOOL)animated

@@ -9,6 +9,9 @@
 #import <UIKit/UIKit.h>
 
 @interface MCAppDelegate : UIResponder <UIApplicationDelegate>
+{
+    dispatch_once_t executeOnlyOnce;
+}
 
 @property (strong, nonatomic) UIWindow *window;
 

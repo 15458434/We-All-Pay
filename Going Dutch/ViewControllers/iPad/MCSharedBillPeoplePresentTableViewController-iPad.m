@@ -16,6 +16,8 @@
 
 #import "MCWeAllPayStoreController.h"
 
+#import "MCDismissMeBlockProtocol.h"
+
 @interface MCSharedBillPeoplePresentTableViewController_iPad ()
 
 @end
@@ -196,12 +198,10 @@
 
 #pragma mark - UITableViewDelegate
 
-/*
 - (CGFloat)tableView:(UITableView *)tableView heightForRowAtIndexPath:(NSIndexPath *)indexPath
 {
-    return 60;
+    return 120;
 }
- */
 
 - (void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath
 {
@@ -290,6 +290,17 @@
             NSIndexPath *ip = [[self tableView] indexPathForSelectedRow];
             [destination setThisPerson:[dataController objectAtIndexPath:ip]];
             [[self tableView] deselectRowAtIndexPath:ip animated:YES];
+        }
+        if ([destination conformsToProtocol:@protocol(MCDismissMeBlockProtocol)]) {
+            __weak MCSharedBillPeoplePresentTableViewController_iPad *weakSelf = self;
+            [destination setDismissMe:^{
+                MCSharedBillPeoplePresentTableViewController_iPad *strongSelf = weakSelf;
+                if (strongSelf) {
+                    id<GAITracker> tracker = [[GAI sharedInstance] defaultTracker];
+                    [tracker set:kGAIScreenName value:@"MCSharedBillMainViewController_iPad"];
+                    [tracker send:[[GAIDictionaryBuilder createAppView] build]];
+                }
+            }];
         }
     }
 }

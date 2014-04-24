@@ -392,6 +392,19 @@
     [dateAndTimeLabel setText:[dateFormatter stringFromDate:[thisPayment dateModified]]];
 }
 
+- (void)viewDidAppear:(BOOL)animated
+{
+    [super viewDidAppear:animated];
+    
+    id<GAITracker> tracker = [[GAI sharedInstance] defaultTracker];
+    if (isNew) {
+        [tracker set:kGAIScreenName value:@"MCPaymentNewView_iPhone"];
+    } else {
+        [tracker set:kGAIScreenName value:@"MCPaymentDetailsView_iPhone"];
+    }
+    [tracker send:[[GAIDictionaryBuilder createAppView] build]];
+}
+
 - (void)viewDidDisappear:(BOOL)animated
 {
     [super viewDidDisappear:animated];

@@ -10,7 +10,6 @@
 
 #import "MCSharedBill+addons.h"
 
-
 @interface MCSharedBillMainViewController ()
 
 @end
@@ -55,6 +54,17 @@
 {
     [super viewWillAppear:animated];
     
+}
+
+- (void)viewDidAppear:(BOOL)animated
+{
+    [super viewDidAppear:animated];
+    
+    /*
+    id<GAITracker> tracker = [[GAI sharedInstance] defaultTracker];
+    [tracker set:kGAIScreenName value:@"MCSharedBillMainViewController_iPhone"];
+    [tracker send:[[GAIDictionaryBuilder createAppView] build]];
+     */
 }
 
 - (void)didReceiveMemoryWarning

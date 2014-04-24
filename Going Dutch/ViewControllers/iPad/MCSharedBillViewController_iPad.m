@@ -81,6 +81,15 @@
     [tripNameField setText:[_tonightsBill tripName]];
 }
 
+- (void)viewDidAppear:(BOOL)animated
+{
+    [super viewDidAppear:animated];
+    
+    id<GAITracker> tracker = [[GAI sharedInstance] defaultTracker];
+    [tracker set:kGAIScreenName value:@"MCSharedBillMainViewController_iPad"];
+    [tracker send:[[GAIDictionaryBuilder createAppView] build]];
+}
+
 - (void)didReceiveMemoryWarning
 {
     [super didReceiveMemoryWarning];
@@ -122,6 +131,17 @@
         if ([destination conformsToProtocol:@protocol(MCTonightsBillPut)]) {
             [destination setTonightsBill:_tonightsBill];
         }
+        if ([destination conformsToProtocol:@protocol(MCDismissMeBlockProtocol)]) {
+            __weak MCSharedBillViewController_iPad *weakSelf = self;
+            [destination setDismissMe:^{
+                MCSharedBillViewController_iPad *strongSelf = weakSelf;
+                if (strongSelf) {
+                    id<GAITracker> tracker = [[GAI sharedInstance] defaultTracker];
+                    [tracker set:kGAIScreenName value:@"MCSharedBillMainViewController_iPad"];
+                    [tracker send:[[GAIDictionaryBuilder createAppView] build]];
+                }
+            }];
+        }
     }
     
     // When newPerson segue is used to add a new payment to tonightsbill.
@@ -129,6 +149,17 @@
         id destination = [[segue destinationViewController] viewControllers][0];
         if ([destination conformsToProtocol:@protocol(MCTonightsBillPut)]) {
             [destination setTonightsBill:_tonightsBill];
+        }
+        if ([destination conformsToProtocol:@protocol(MCDismissMeBlockProtocol)]) {
+            __weak MCSharedBillViewController_iPad *weakSelf = self;
+            [destination setDismissMe:^{
+                MCSharedBillViewController_iPad *strongSelf = weakSelf;
+                if (strongSelf) {
+                    id<GAITracker> tracker = [[GAI sharedInstance] defaultTracker];
+                    [tracker set:kGAIScreenName value:@"MCSharedBillMainViewController_iPad"];
+                    [tracker send:[[GAIDictionaryBuilder createAppView] build]];
+                }
+            }];
         }
     }
     
@@ -143,7 +174,11 @@
             [destination setDismissMe:^{
                 MCSharedBillViewController_iPad *strongSelf = weakSelf;
                 if (strongSelf) {
-                    [weakSelf dismissViewControllerAnimated:YES completion:nil];
+                    [weakSelf dismissViewControllerAnimated:YES completion:^{
+                        id<GAITracker> tracker = [[GAI sharedInstance] defaultTracker];
+                        [tracker set:kGAIScreenName value:@"MCSharedBillMainViewController_iPad"];
+                        [tracker send:[[GAIDictionaryBuilder createAppView] build]];
+                    }];
                 }
             }];
         }

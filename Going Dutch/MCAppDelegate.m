@@ -13,17 +13,51 @@
 
 @implementation MCAppDelegate
 
+#pragma mark - New in this class
+
+- (void)setupGoogleAnalytics
+{
+    // Optional: automatically send uncaught exceptions to Google Analytics.
+    [GAI sharedInstance].trackUncaughtExceptions = YES;
+    
+    // Optional: set Google Analytics dispatch interval to e.g. 20 seconds.
+    [GAI sharedInstance].dispatchInterval = 20;
+    
+    // Optional: set Logger to VERBOSE for debug information.
+    [[[GAI sharedInstance] logger] setLogLevel:kGAILogLevelNone];
+    
+    // Initialize tracker. Replace with your tracking ID.
+    [[GAI sharedInstance] trackerWithTrackingId:@"UA-50304745-1"];
+}
+
+#pragma mark - UIApplicationDelegate
+
 - (BOOL)application:(UIApplication *)application shouldRestoreApplicationState:(NSCoder *)coder
 {
     return NO;
 }
 
+- (BOOL)application:(UIApplication *)application willFinishLaunchingWithOptions:(NSDictionary *)launchOptions
+{
+    dispatch_once(&executeOnlyOnce, ^{
+        [self setupGoogleAnalytics];
+        [TestFlight takeOff:@"f2224673-b632-44ae-8feb-3c1cfe59e1f5"];
+        // Override point for customization after application launch.
+        NSLog(@"%@", [[UIDevice currentDevice] model]);
+        NSLog(@"I dedicate this program to Ilse Béguin, the most wonderful woman in the world who brought herself into my life, when I was developing this App.");
+    });
+    return YES;
+}
+
 - (BOOL)application:(UIApplication *)application didFinishLaunchingWithOptions:(NSDictionary *)launchOptions
 {
-    [TestFlight takeOff:@"f2224673-b632-44ae-8feb-3c1cfe59e1f5"];
-    // Override point for customization after application launch.
-    NSLog(@"%@", [[UIDevice currentDevice] model]);
-    NSLog(@"I dedicate this program to Ilse Béguin, the most wonderful woman in the world who brought herself into my life, when I was developing this App.");
+    dispatch_once(&executeOnlyOnce, ^{
+        [self setupGoogleAnalytics];
+        [TestFlight takeOff:@"f2224673-b632-44ae-8feb-3c1cfe59e1f5"];
+        // Override point for customization after application launch.
+        NSLog(@"%@", [[UIDevice currentDevice] model]);
+        NSLog(@"I dedicate this program to Ilse Béguin, the most wonderful woman in the world who brought herself into my life, when I was developing this App.");
+    });
     
     return YES;
 }
