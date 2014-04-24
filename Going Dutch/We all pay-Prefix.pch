@@ -4,6 +4,7 @@
 
 #import <Availability.h>
 #import "MCTools.h"
+#import "MCColors.h"
 
 // Google Analytics 
 #import "GAI.h"

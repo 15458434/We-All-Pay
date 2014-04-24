@@ -101,7 +101,11 @@
 
 - (void)peoplePickerNavigationControllerDidCancel:(ABPeoplePickerNavigationController *)peoplePicker
 {
-    [viewController dismissViewControllerAnimated:YES completion:nil];
+    [viewController dismissViewControllerAnimated:YES completion:^{
+        id<GAITracker> tracker = [[GAI sharedInstance] defaultTracker];
+        [tracker set:kGAIScreenName value:@"MCSharedBillMainViewController_iPad"];
+        [tracker send:[[GAIDictionaryBuilder createAppView] build]];
+    }];
 }
 
 - (BOOL)peoplePickerNavigationController:(ABPeoplePickerNavigationController *)peoplePicker shouldContinueAfterSelectingPerson:(ABRecordRef)person
@@ -109,6 +113,10 @@
     [viewController dismissViewControllerAnimated:YES completion:^{
         [[[viewController navigationItem] rightBarButtonItem] setEnabled:YES];
         [delegate receiveANewPersonFromAddressBook:thisPerson];
+        
+        id<GAITracker> tracker = [[GAI sharedInstance] defaultTracker];
+        [tracker set:kGAIScreenName value:@"MCSharedBillMainViewController_iPad"];
+        [tracker send:[[GAIDictionaryBuilder createAppView] build]];
     }];
     [self getPersonData:person];
     thisPerson = nil;

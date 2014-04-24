@@ -93,6 +93,7 @@
 		38DC8B2A1907145A00762235 /* MCRootViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 38DC8B291907145A00762235 /* MCRootViewController.m */; };
 		38DC8B3419081EB800762235 /* libGoogleAnalyticsServices.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 38DC8B3319081EB800762235 /* libGoogleAnalyticsServices.a */; };
 		38DC8B3619084ABE00762235 /* SystemConfiguration.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 38DC8B3519084ABE00762235 /* SystemConfiguration.framework */; };
+		38DC8B421909508800762235 /* MCColors.m in Sources */ = {isa = PBXBuildFile; fileRef = 38DC8B411909508800762235 /* MCColors.m */; };
 		38E0C5E118E9A284005A3F17 /* Main-iPad.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 38E0C5E018E9A284005A3F17 /* Main-iPad.storyboard */; };
 		38E0C5EA18E9B2BD005A3F17 /* MCAllTripsTableViewController-iPad.m in Sources */ = {isa = PBXBuildFile; fileRef = 38E0C5E918E9B2BD005A3F17 /* MCAllTripsTableViewController-iPad.m */; };
 		38E63CF0186F904B00904D82 /* MCTableEmptyMessage.m in Sources */ = {isa = PBXBuildFile; fileRef = 38E63CEF186F904B00904D82 /* MCTableEmptyMessage.m */; };
@@ -154,7 +155,7 @@
 		3857304818DAF2C900A900EA /* TestFlight+ManualSessions.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = "TestFlight+ManualSessions.h"; path = "TestFlight SDK/TestFlight+ManualSessions.h"; sourceTree = "<group>"; };
 		3857304918DAF2E600A900EA /* TestFlight.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = TestFlight.h; path = "TestFlight SDK/TestFlight.h"; sourceTree = "<group>"; };
 		3857304A18DAF2E600A900EA /* TestFlight+AsyncLogging.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = "TestFlight+AsyncLogging.h"; path = "TestFlight SDK/TestFlight+AsyncLogging.h"; sourceTree = "<group>"; };
-		3857304B18DAF2F100A900EA /* libTestFlight.a */ = {isa = PBXFileReference; lastKnownFileType = archive.ar; name = libTestFlight.a; path = "TestFlight SDK/libTestFlight.a"; sourceTree = "<group>"; };
+		3857304B18DAF2F100A900EA /* libTestFlight.a */ = {isa = PBXFileReference; lastKnownFileType = archive.ar; name = libTestFlight.a; path = "Going Dutch/TestFlight SDK/libTestFlight.a"; sourceTree = "<group>"; };
 		385FEE6217CBF77B001013E3 /* Images.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; name = Images.xcassets; path = "We all pay/Images.xcassets"; sourceTree = SOURCE_ROOT; };
 		3867CE4018703E9A001EC222 /* nl */ = {isa = PBXFileReference; fileEncoding = 10; lastKnownFileType = text.plist.strings; name = nl; path = nl.lproj/InfoPlist.strings; sourceTree = "<group>"; };
 		3867CE4A18704B48001EC222 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = "Base.lproj/Main-Iphone.storyboard"; sourceTree = "<group>"; };
@@ -275,6 +276,8 @@
 		38DC8B3219081E9100762235 /* GAITracker.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = GAITracker.h; sourceTree = "<group>"; };
 		38DC8B3319081EB800762235 /* libGoogleAnalyticsServices.a */ = {isa = PBXFileReference; lastKnownFileType = archive.ar; path = libGoogleAnalyticsServices.a; sourceTree = "<group>"; };
 		38DC8B3519084ABE00762235 /* SystemConfiguration.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = SystemConfiguration.framework; path = System/Library/Frameworks/SystemConfiguration.framework; sourceTree = SDKROOT; };
+		38DC8B401909508800762235 /* MCColors.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = MCColors.h; sourceTree = "<group>"; };
+		38DC8B411909508800762235 /* MCColors.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = MCColors.m; sourceTree = "<group>"; };
 		38E0C5DE18E5C94D005A3F17 /* MCTonightsBillTransfer.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = MCTonightsBillTransfer.h; path = ViewControllers/MCTonightsBillTransfer.h; sourceTree = "<group>"; };
 		38E0C5DF18E97A8A005A3F17 /* MCCurrentViewDelegate.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = MCCurrentViewDelegate.h; path = ViewControllers/MCCurrentViewDelegate.h; sourceTree = "<group>"; };
 		38E0C5E018E9A284005A3F17 /* Main-iPad.storyboard */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.storyboard; path = "Main-iPad.storyboard"; sourceTree = "<group>"; };
@@ -349,7 +352,6 @@
 		3826BDDB18A65CBC00747993 /* Testflight SDK */ = {
 			isa = PBXGroup;
 			children = (
-				3857304B18DAF2F100A900EA /* libTestFlight.a */,
 				3857304918DAF2E600A900EA /* TestFlight.h */,
 				3857304A18DAF2E600A900EA /* TestFlight+AsyncLogging.h */,
 				3857304818DAF2C900A900EA /* TestFlight+ManualSessions.h */,
@@ -389,6 +391,7 @@
 		38572AD5169D437B00969C62 /* Frameworks */ = {
 			isa = PBXGroup;
 			children = (
+				3857304B18DAF2F100A900EA /* libTestFlight.a */,
 				38DC8B3519084ABE00762235 /* SystemConfiguration.framework */,
 				38DC8B3319081EB800762235 /* libGoogleAnalyticsServices.a */,
 				386FC36F18E5BE1900428294 /* iAd.framework */,
@@ -465,21 +468,7 @@
 				3897157917901D0F005BE03E /* MCTwoLabelsTitleView.xib */,
 				3897157717901D0F005BE03E /* MCTwoLabelsTitleView.h */,
 				3897157817901D0F005BE03E /* MCTwoLabelsTitleView.m */,
-				38EFF2D516D215FB001C8248 /* MCAllTripsTableViewCell.xib */,
-				38EFF2D216D215BE001C8248 /* MCAllTripsTableViewCell.h */,
-				38EFF2D316D215BE001C8248 /* MCAllTripsTableViewCell.m */,
-				3897158017901D55005BE03E /* MCPaymentTableViewCell.xib */,
-				3897157E17901D55005BE03E /* MCPaymentTableViewCell.h */,
-				3897157F17901D55005BE03E /* MCPaymentTableViewCell.m */,
-				3897158317901D55005BE03E /* MCPersonTableViewCell.xib */,
-				3897158117901D55005BE03E /* MCPersonTableViewCell.h */,
-				3897158217901D55005BE03E /* MCPersonTableViewCell.m */,
-				3897158617901D55005BE03E /* MCReturnPaymentTableViewCell.xib */,
-				3897158417901D55005BE03E /* MCReturnPaymentTableViewCell.h */,
-				3897158517901D55005BE03E /* MCReturnPaymentTableViewCell.m */,
-				380BF82D18108898008A8B74 /* MCEmailAddressTableViewCell.xib */,
-				380BF82F181088B9008A8B74 /* MCEmailAddressTableViewCell.h */,
-				380BF830181088B9008A8B74 /* MCEmailAddressTableViewCell.m */,
+				38DC8B38190911BE00762235 /* iPhone */,
 				3867CE4218704161001EC222 /* Storyboard */,
 				3867CE5318704DAF001EC222 /* MCTableEmptyMessage.xib */,
 				38E63CEE186F904B00904D82 /* MCTableEmptyMessage.h */,
@@ -566,6 +555,8 @@
 				3876EF581840E86900C9546A /* MCCancelDoneTableViewController.m */,
 				38CDE8FE17135B6300387CAA /* MCTools.h */,
 				38CDE8FF17135B6300387CAA /* MCTools.m */,
+				38DC8B401909508800762235 /* MCColors.h */,
+				38DC8B411909508800762235 /* MCColors.m */,
 			);
 			name = "MC SDK";
 			sourceTree = "<group>";
@@ -616,6 +607,28 @@
 				382F9BD118F7285400818276 /* MCDismissMeBlockProtocol.h */,
 			);
 			name = "ViewController Protocols";
+			sourceTree = "<group>";
+		};
+		38DC8B38190911BE00762235 /* iPhone */ = {
+			isa = PBXGroup;
+			children = (
+				38EFF2D516D215FB001C8248 /* MCAllTripsTableViewCell.xib */,
+				38EFF2D216D215BE001C8248 /* MCAllTripsTableViewCell.h */,
+				38EFF2D316D215BE001C8248 /* MCAllTripsTableViewCell.m */,
+				3897158017901D55005BE03E /* MCPaymentTableViewCell.xib */,
+				3897157E17901D55005BE03E /* MCPaymentTableViewCell.h */,
+				3897157F17901D55005BE03E /* MCPaymentTableViewCell.m */,
+				3897158317901D55005BE03E /* MCPersonTableViewCell.xib */,
+				3897158117901D55005BE03E /* MCPersonTableViewCell.h */,
+				3897158217901D55005BE03E /* MCPersonTableViewCell.m */,
+				3897158617901D55005BE03E /* MCReturnPaymentTableViewCell.xib */,
+				3897158417901D55005BE03E /* MCReturnPaymentTableViewCell.h */,
+				3897158517901D55005BE03E /* MCReturnPaymentTableViewCell.m */,
+				380BF82D18108898008A8B74 /* MCEmailAddressTableViewCell.xib */,
+				380BF82F181088B9008A8B74 /* MCEmailAddressTableViewCell.h */,
+				380BF830181088B9008A8B74 /* MCEmailAddressTableViewCell.m */,
+			);
+			name = iPhone;
 			sourceTree = "<group>";
 		};
 		38E0C5E218E9B22E005A3F17 /* iPhone */ = {
@@ -822,6 +835,7 @@
 				382E7BDD17E5E57500A1040A /* MCReturnPaymentViewController.m in Sources */,
 				383E0C5D186737EB00AA688D /* MCSharedBillPageViewController.m in Sources */,
 				38DB85E617E46FE2006237CF /* MCSharedBill.m in Sources */,
+				38DC8B421909508800762235 /* MCColors.m in Sources */,
 				3872C0DC19041725008C54D7 /* MCTableEmptyMessage_iPad.m in Sources */,
 				38E0C5EA18E9B2BD005A3F17 /* MCAllTripsTableViewController-iPad.m in Sources */,
 				3892E3A417903EF00038894B /* MCEditTripViewController.m in Sources */,
