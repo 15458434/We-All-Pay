@@ -136,7 +136,7 @@
     
     [self setEdgesForExtendedLayout:UIRectEdgeNone];
     
-    [[self navigationItem] setTitle:NSLocalizedString(@"BACK_TITLE_ALL_TRIPS_VIEW", @"back")];
+    // [[self navigationItem] setTitle:NSLocalizedString(@"BACK_TITLE_ALL_TRIPS_VIEW", @"back")];
     
     // Load the nib file
     UINib *nib = [UINib nibWithNibName:@"MCAllTripsTableViewCell" bundle:nil];
@@ -157,6 +157,7 @@
     
     //[MCTools setAdBannerIfNotPaid:YES forViewController:self];
     
+    /*
     // Set the titleView.
     if (!titleView) {
         titleView = [[NSBundle mainBundle] loadNibNamed:@"MCTwoLabelsTitleView" owner:self options:nil][0];
@@ -166,6 +167,7 @@
     [[titleView subLabel] setText:[NSString stringWithFormat:@"%@ build %@", [[NSBundle mainBundle] infoDictionary][@"CFBundleShortVersionString"], [[NSBundle mainBundle] infoDictionary][@"CFBundleVersion"]]];
     [[titleView mainLabel] setTextColor:[UIColor whiteColor]];
     [[titleView subLabel] setTextColor:[UIColor whiteColor]];
+     */
     
     if (!dataController) {
         [self setDataController];
