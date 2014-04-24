@@ -65,11 +65,11 @@
     // Set the sectionColor
     UIView *sectionViewInPicker = [UIView appearanceWhenContainedIn:[UITableViewHeaderFooterView class], [ABPeoplePickerNavigationController class], nil];
     [sectionViewInPicker setBackgroundColor:[MCColors getbackgroundColor]];
-     */
     
     // Set the labelColor of the section in peoplepicker
     UILabel *pickerLabels = [UILabel appearanceWhenContainedIn:[UITableViewHeaderFooterView class], nil];
     [pickerLabels setTextColor:[MCColors getEmptyMessageTextColor]];
+     */
 }
 
 #pragma mark - UIApplicationDelegate

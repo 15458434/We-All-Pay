@@ -87,7 +87,7 @@
 "eax-dw-aIf.placeholder" = "emailaddress";
 
 /* Class = "IBUIButton"; normalTitle = "add payment"; ObjectID = "egw-0d-cT1"; */
-"egw-0d-cT1.normalTitle" = "nieuwe betaling";
+"egw-0d-cT1.normalTitle" = "Nieuwe betaling";
 
 /* Class = "IBUIButton"; normalTitle = "Send Email"; ObjectID = "fi4-m8-emE"; */
 "fi4-m8-emE.normalTitle" = "Stuur email";
