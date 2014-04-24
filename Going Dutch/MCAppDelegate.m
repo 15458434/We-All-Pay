@@ -30,6 +30,19 @@
     [[GAI sharedInstance] trackerWithTrackingId:@"UA-50304745-1"];
 }
 
+- (void)executeOnlyOnceDuringStartup
+{
+    [self setupGoogleAnalytics];
+    [TestFlight takeOff:@"f2224673-b632-44ae-8feb-3c1cfe59e1f5"];
+    // Override point for customization after application launch.
+    NSLog(@"%@", [[UIDevice currentDevice] model]);
+    NSLog(@"I dedicate this program to Ilse Béguin, the most wonderful woman in the world who brought herself into my life, when I was developing this App.");
+    
+    [[UINavigationBar appearance] setBarTintColor:[MCColors getNavigationColor]];
+    [[UINavigationBar appearance] setTintColor:[MCColors getButtonColor]];
+    [[UINavigationBar appearance] setTitleTextAttributes:@{NSForegroundColorAttributeName: [UIColor whiteColor]}];
+}
+
 #pragma mark - UIApplicationDelegate
 
 - (BOOL)application:(UIApplication *)application shouldRestoreApplicationState:(NSCoder *)coder
@@ -40,11 +53,7 @@
 - (BOOL)application:(UIApplication *)application willFinishLaunchingWithOptions:(NSDictionary *)launchOptions
 {
     dispatch_once(&executeOnlyOnce, ^{
-        [self setupGoogleAnalytics];
-        [TestFlight takeOff:@"f2224673-b632-44ae-8feb-3c1cfe59e1f5"];
-        // Override point for customization after application launch.
-        NSLog(@"%@", [[UIDevice currentDevice] model]);
-        NSLog(@"I dedicate this program to Ilse Béguin, the most wonderful woman in the world who brought herself into my life, when I was developing this App.");
+        [self executeOnlyOnceDuringStartup];
     });
     return YES;
 }
@@ -52,11 +61,7 @@
 - (BOOL)application:(UIApplication *)application didFinishLaunchingWithOptions:(NSDictionary *)launchOptions
 {
     dispatch_once(&executeOnlyOnce, ^{
-        [self setupGoogleAnalytics];
-        [TestFlight takeOff:@"f2224673-b632-44ae-8feb-3c1cfe59e1f5"];
-        // Override point for customization after application launch.
-        NSLog(@"%@", [[UIDevice currentDevice] model]);
-        NSLog(@"I dedicate this program to Ilse Béguin, the most wonderful woman in the world who brought herself into my life, when I was developing this App.");
+        [self executeOnlyOnceDuringStartup];
     });
     
     return YES;

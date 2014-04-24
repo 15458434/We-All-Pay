@@ -44,6 +44,11 @@
     [_mailViewController setEdgesForExtendedLayout:UIRectEdgeNone];
     [_mailViewController setModalPresentationStyle:UIModalPresentationFormSheet];
     [[_mailViewController viewControllers][0] setEdgesForExtendedLayout:UIRectEdgeNone];
+    
+    NSMutableDictionary *textAttributes = [[NSMutableDictionary alloc] initWithDictionary:[self navigationController].navigationBar.titleTextAttributes];
+    [textAttributes setValue:[UIColor whiteColor] forKey:NSForegroundColorAttributeName];
+    [[_mailViewController navigationBar] setTitleTextAttributes:textAttributes];
+    
     NSArray *sda = @[[NSSortDescriptor sortDescriptorWithKey:@"dateCreated" ascending:YES]];
     NSArray *allPeople = [[[self tonightsBill] peoplePresent] sortedArrayUsingDescriptors:sda];
     // Create a list of all email addresses
