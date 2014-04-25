@@ -36,7 +36,7 @@
                             </constraints>
                         </view>
                         <prototypes>
-                            <tableViewCell contentMode="scaleToFill" restorationIdentifier="MCAllTripsTableViewCell_iPad" selectionStyle="blue" accessoryType="disclosureIndicator" hidesAccessoryWhenEditing="NO" indentationLevel="1" indentationWidth="0.0" reuseIdentifier="MCAllTripsTableViewCell_iPad" rowHeight="118" id="Exj-8b-og9" customClass="MCAllTripsTableViewCell_iPad">
+                            <tableViewCell contentMode="scaleToFill" restorationIdentifier="MCAllTripsTableViewCell_iPad" selectionStyle="blue" accessoryType="disclosureIndicator" hidesAccessoryWhenEditing="NO" indentationLevel="1" indentationWidth="0.0" reuseIdentifier="MCAllTripsTableViewCell_iPad" editingAccessoryType="detailDisclosureButton" rowHeight="118" id="Exj-8b-og9" customClass="MCAllTripsTableViewCell_iPad">
                                 <rect key="frame" x="0.0" y="74" width="768" height="118"/>
                                 <autoresizingMask key="autoresizingMask"/>
                                 <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" restorationIdentifier="allTripsTableViewCellContent" tableViewCell="Exj-8b-og9" id="FR1-Vx-C0j">
@@ -996,11 +996,11 @@
                         <viewControllerLayoutGuide type="bottom" id="eQn-cZ-eIt"/>
                     </layoutGuides>
                     <view key="view" contentMode="scaleToFill" restorationIdentifier="eventViewBackground" id="MWP-w9-Yoh">
-                        <rect key="frame" x="0.0" y="64" width="768" height="960"/>
+                        <rect key="frame" x="0.0" y="64" width="768" height="916"/>
                         <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                         <subviews>
                             <containerView contentMode="scaleToFill" restorationIdentifier="eventViewContainer" translatesAutoresizingMaskIntoConstraints="NO" id="gUW-zw-Cm7">
-                                <rect key="frame" x="0.0" y="0.0" width="768" height="960"/>
+                                <rect key="frame" x="0.0" y="0.0" width="768" height="916"/>
                                 <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                                 <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="calibratedWhite"/>
                                 <constraints>
@@ -1019,7 +1019,17 @@
                             <constraint firstItem="eQn-cZ-eIt" firstAttribute="top" secondItem="gUW-zw-Cm7" secondAttribute="bottom" id="zP9-bY-Ydx"/>
                         </constraints>
                     </view>
+                    <toolbarItems>
+                        <barButtonItem style="plain" systemItem="flexibleSpace" id="MmJ-5Q-Z4b"/>
+                        <barButtonItem systemItem="action" id="7IQ-dc-geY">
+                            <color key="tintColor" red="1" green="0.54509806630000002" blue="0.59607845540000004" alpha="1" colorSpace="deviceRGB"/>
+                            <connections>
+                                <action selector="shareThisAppPressed:" destination="LcN-QB-1Nf" id="3Xn-qD-Stf"/>
+                            </connections>
+                        </barButtonItem>
+                    </toolbarItems>
                     <navigationItem key="navigationItem" title="events" id="T8K-rj-EA0"/>
+                    <simulatedToolbarMetrics key="simulatedBottomBarMetrics" translucent="NO"/>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="h3E-GA-raJ" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>

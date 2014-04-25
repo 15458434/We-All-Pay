@@ -9,13 +9,12 @@
 #import <UIKit/UIKit.h>
 
 @interface MCPersonTableViewCell : UITableViewCell
-{
-    
-}
 
 @property (weak, nonatomic) IBOutlet UIImageView *personImage;
 @property (weak, nonatomic) IBOutlet UILabel *nameLabel;
 @property (weak, nonatomic) IBOutlet UILabel *emailLabel;
 @property (weak, nonatomic) IBOutlet UILabel *totalSpent;
+
+- (void)setCircularImage:(UIImage *)personImage;
 
 @end

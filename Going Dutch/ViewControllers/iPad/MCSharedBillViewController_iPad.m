@@ -76,6 +76,8 @@
     [super viewDidLoad];
     // Do any additional setup after loading the view.
     [MCTools setAdBannerIfNotPaid:YES forViewController:self];
+    
+    [[self navigationController] setToolbarHidden:YES animated:YES];
 }
 
 - (void)viewWillAppear:(BOOL)animated

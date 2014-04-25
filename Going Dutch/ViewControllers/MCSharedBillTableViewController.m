@@ -327,7 +327,9 @@
         thisCellsPayerName = NSLocalizedString(@"THISPAYMENTCELL_NOPAYERNAME", @"Someone");
     }
     [[paymentCell namePayerLabel] setText:[NSString stringWithFormat:@"%@%@", thisCellsPayerName, NSLocalizedString(@"PAYMENTCELL_PAYERNAME_EXTRA", @" paid") ]];
-    [[paymentCell pictureOfPayer] setImage:[[thisCellsPayment payingPerson] thumbnail]];
+    if ([[thisCellsPayment payingPerson] thumbnail]) {
+        [paymentCell setCircularImage:[[thisCellsPayment payingPerson] thumbnail]];
+    }
     
     NSString *thisCellsDescriptionOfPayment = [thisCellsPayment descriptionOfPayment];
     if (!thisCellsDescriptionOfPayment) {
@@ -339,17 +341,6 @@
     [[paymentCell moneyPaidLabel] setText:[nf stringFromNumber:[thisCellsPayment money]]];
     
     return paymentCell;
-    /*
-    // Check to see if an unused cell is available if not make a new one.
-    static NSString *CellIdentifier = @"TableViewCell";
-    UITableViewCell *cell = [tableView dequeueReusableCellWithIdentifier:CellIdentifier];
-    if (!cell) cell = [[UITableViewCell alloc] initWithStyle:UITableViewCellStyleDefault reuseIdentifier:CellIdentifier];
-    
-    // Get payment and put it's description in the cell.
-    MCPayment *thisCellsPayment = [[tonightsBill allPayments] objectAtIndex:[indexPath row]];
-    [[cell textLabel] setText:[thisCellsPayment description]];
-    
-    return cell;*/
 }
 
 // Override to support conditional editing of the table view.

@@ -14,6 +14,18 @@
 
 @implementation MCRootViewController
 
+#pragma mark - actions
+
+- (IBAction)shareThisAppPressed:(id)sender
+{
+    NSArray *dataToShare = @[[NSString stringWithString:NSLocalizedString(@"I_FOUND_WE_ALL_PAY", @"Hi, I found this easy to use iPhone app to share a bill amongst friends. It is called We All Pay.")]];
+    UIActivityViewController *shareMe = [[UIActivityViewController alloc] initWithActivityItems:dataToShare applicationActivities:nil];
+    [self presentViewController:shareMe animated:YES completion:nil];
+}
+
+
+#pragma mark - Inherited From super
+
 - (id)initWithNibName:(NSString *)nibNameOrNil bundle:(NSBundle *)nibBundleOrNil
 {
     self = [super initWithNibName:nibNameOrNil bundle:nibBundleOrNil];
@@ -34,6 +46,7 @@
     [super viewWillAppear:animated];
     
     [self setNeedsStatusBarAppearanceUpdate];
+    [[self navigationController] setToolbarHidden:NO animated:YES];
 }
 
 - (void)didReceiveMemoryWarning
