@@ -16,6 +16,7 @@
 
 #import "MCReturnPaymentTableViewCell.h"
 #import "MCSolutionOverViewTableViewCell_iPhone.h"
+#import "MCWhoOwesWhoTableViewCell_iPhone.h"
 #import "MCTwoLabelsTitleView.h"
 #import "MCTableEmptyMessage.h"
 
@@ -115,8 +116,10 @@
     [[emptyMessage bigMessage] setAlpha:0.0];
     [[self tableView] reloadData];
     
+    /*
     UINib *nib = [UINib nibWithNibName:@"MCReturnPaymentTableViewCell" bundle:nil];
     [[self tableView] registerNib:nib forCellReuseIdentifier:@"MCReturnPaymentTableViewCell"];
+     */
 }
 
 - (void)viewWillAppear:(BOOL)animated
@@ -265,7 +268,7 @@
     
     if ([indexPath section] == 1) {
         MCReturnPayment *thisCellsReturnPayment = paymentsAfterwards[[indexPath row]];
-        MCReturnPaymentTableViewCell *returnPaymentCell = [tableView dequeueReusableCellWithIdentifier:@"MCReturnPaymentTableViewCell"];
+        MCWhoOwesWhoTableViewCell_iPhone *returnPaymentCell = [tableView dequeueReusableCellWithIdentifier:@"MCWhoOwesWhoTableViewCell_iPhone"];
         NSNumberFormatter *nf = [[NSNumberFormatter alloc] init];
         [nf setNumberStyle:NSNumberFormatterCurrencyStyle];
         NSNumber *moneyToConvert = [thisCellsReturnPayment money];
@@ -273,7 +276,7 @@
         
         NSString *owesString = NSLocalizedString(@"OWES", @"As in Mark owes Arjen, but then just the word owes.");
         NSString *whoOwesWho = [[NSString alloc] initWithFormat:@"%@ %@ %@:", [[thisCellsReturnPayment payer] getName], owesString, [[thisCellsReturnPayment receiver] getName]];
-        [[returnPaymentCell whoOwesWho] setText:whoOwesWho];
+        [[returnPaymentCell whoOwesWhoLabel] setText:whoOwesWho];
         [returnPaymentCell setSelectionStyle:UITableViewCellSelectionStyleNone];
         
         return returnPaymentCell;
