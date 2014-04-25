@@ -19,7 +19,7 @@
                                 <button opaque="NO" contentMode="scaleToFill" fixedFrame="YES" restorationIdentifier="newEventButton" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="PRz-eP-dNH">
                                     <rect key="frame" x="95" y="15" width="131" height="30"/>
                                     <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
-                                    <state key="normal" title="new event">
+                                    <state key="normal" title="New event">
                                         <color key="titleShadowColor" white="0.5" alpha="1" colorSpace="calibratedWhite"/>
                                     </state>
                                     <connections>
@@ -80,7 +80,7 @@
                                     <constraints>
                                         <constraint firstAttribute="width" relation="greaterThanOrEqual" constant="92" id="pvF-EA-v7U"/>
                                     </constraints>
-                                    <state key="normal" title="add payment">
+                                    <state key="normal" title="Add payment">
                                         <color key="titleShadowColor" white="0.5" alpha="1" colorSpace="calibratedWhite"/>
                                     </state>
                                     <connections>
@@ -93,7 +93,7 @@
                                     <constraints>
                                         <constraint firstAttribute="width" constant="92" id="zEE-fy-gT6"/>
                                     </constraints>
-                                    <state key="normal" title="solve">
+                                    <state key="normal" title="Solve">
                                         <color key="titleShadowColor" white="0.5" alpha="1" colorSpace="calibratedWhite"/>
                                     </state>
                                     <connections>
@@ -384,7 +384,7 @@
                                     <constraints>
                                         <constraint firstAttribute="width" constant="127" id="Lmg-bJ-KJf"/>
                                     </constraints>
-                                    <state key="normal" title="add person">
+                                    <state key="normal" title="Add person">
                                         <color key="titleShadowColor" white="0.5" alpha="1" colorSpace="calibratedWhite"/>
                                     </state>
                                     <connections>
@@ -398,7 +398,7 @@
                                     <constraints>
                                         <constraint firstAttribute="width" constant="127" id="Zsj-nH-bjE"/>
                                     </constraints>
-                                    <state key="normal" title="addressbook">
+                                    <state key="normal" title="Addressbook">
                                         <color key="titleShadowColor" white="0.5" alpha="1" colorSpace="calibratedWhite"/>
                                     </state>
                                     <connections>
