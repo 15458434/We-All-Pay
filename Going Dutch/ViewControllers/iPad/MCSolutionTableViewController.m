@@ -194,9 +194,9 @@
     // Return the number of rows in the section.
     switch (section) {
         case 0:
-            return 2;
-        case 1:
             return [_solution count];
+        case 1:
+            return 2;
         default:
             @throw [NSException exceptionWithName:@"TableView broken" reason:@"There are no more than 2 sections in this tableView." userInfo:nil];
             return nil;
@@ -206,23 +206,6 @@
 - (UITableViewCell *)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath
 {
     if ([indexPath section] == 0) {
-        MCSolutionOverViewTableViewCell_iPad *cell = [tableView dequeueReusableCellWithIdentifier:@"MCSolutionOverViewTableViewCell_iPad" forIndexPath:indexPath];
-        
-        if ([indexPath row] == 0) {
-            NSString *totalSpentString = NSLocalizedString(@"TOTAL_SPENT", @"Total spent:");
-            [[cell firstLabel] setText:totalSpentString];
-            [[cell lastLabel] setText:[_tonightsBill totalSumOfMoneyOfThisSharedBillAsCurrencyString]];
-        }
-        if ([indexPath row] == 1) {
-            NSString *eachPaysString = NSLocalizedString(@"EACH_PAYS", @"Each pays:");
-            [[cell firstLabel] setText:eachPaysString];
-            [[cell lastLabel] setText:[_tonightsBill amountPeopleShouldHavePaidAsCurrencyString]];
-        }
-        [cell setSelectionStyle:UITableViewCellSelectionStyleNone];
-        return cell;
-    }
-    
-    if ([indexPath section] == 1) {
         MCWhoOwesWhoTableViewCell_iPad *cell = [tableView dequeueReusableCellWithIdentifier:@"MCWhoOwesWhoTableViewCell_iPad" forIndexPath:indexPath];
         
         // Configure the cell...
@@ -239,6 +222,25 @@
         [cell setSelectionStyle:UITableViewCellSelectionStyleNone];
         return cell;
     }
+    
+    if ([indexPath section] == 1) {
+        MCSolutionOverViewTableViewCell_iPad *cell = [tableView dequeueReusableCellWithIdentifier:@"MCSolutionOverViewTableViewCell_iPad" forIndexPath:indexPath];
+        
+        if ([indexPath row] == 0) {
+            NSString *eachPaysString = NSLocalizedString(@"EACH_PAYS", @"Each pays:");
+            [[cell firstLabel] setText:eachPaysString];
+            [[cell lastLabel] setText:[_tonightsBill amountPeopleShouldHavePaidAsCurrencyString]];
+        }
+        
+        if ([indexPath row] == 1) {
+            NSString *totalSpentString = NSLocalizedString(@"TOTAL_SPENT", @"Total spent:");
+            [[cell firstLabel] setText:totalSpentString];
+            [[cell lastLabel] setText:[_tonightsBill totalSumOfMoneyOfThisSharedBillAsCurrencyString]];
+        }
+        [cell setSelectionStyle:UITableViewCellSelectionStyleNone];
+        return cell;
+    }
+    
     return nil;
 }
 

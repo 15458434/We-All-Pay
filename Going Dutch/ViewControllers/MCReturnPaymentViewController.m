@@ -220,7 +220,7 @@
 
 - (CGFloat)tableView:(UITableView *)tableView heightForRowAtIndexPath:(NSIndexPath *)indexPath
 {
-    return 46.0;
+    return 44.0;
 }
 
 #pragma mark - Table view data source
@@ -234,14 +234,13 @@
 {
     switch (section) {
         case 0:
+            return [paymentsAfterwards count];
+        case 1:
             if ([paymentsAfterwards count] == 0) {
                 return 0;
             } else {
                 return 2;
             }
-            break;
-        case 1:
-            return [paymentsAfterwards count];
         default:
             return 0;
     }
@@ -250,23 +249,6 @@
 - (UITableViewCell *)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath
 {
     if ([indexPath section] == 0) {
-        MCSolutionOverViewTableViewCell_iPhone *cell = [tableView dequeueReusableCellWithIdentifier:@"MCSolutionOverViewTableViewCell_iPhone"];
-        
-
-        if ([indexPath row] == 0) {
-            NSString *totalSpentString = NSLocalizedString(@"TOTAL_SPENT", @"Total spent:");
-            [[cell totalLabel] setText:totalSpentString];
-            [[cell moneyLabel] setText:[tonightsBill totalSumOfMoneyOfThisSharedBillAsCurrencyString]];
-        }
-        if ([indexPath row] == 1) {
-            NSString *eachPaysString = NSLocalizedString(@"EACH_PAYS", @"Each pays");
-            [[cell totalLabel] setText:eachPaysString];
-            [[cell moneyLabel] setText:[tonightsBill amountPeopleShouldHavePaidAsCurrencyString]];
-        }
-        return cell;
-    }
-    
-    if ([indexPath section] == 1) {
         MCReturnPayment *thisCellsReturnPayment = paymentsAfterwards[[indexPath row]];
         MCWhoOwesWhoTableViewCell_iPhone *returnPaymentCell = [tableView dequeueReusableCellWithIdentifier:@"MCWhoOwesWhoTableViewCell_iPhone"];
         NSNumberFormatter *nf = [[NSNumberFormatter alloc] init];
@@ -280,6 +262,24 @@
         [returnPaymentCell setSelectionStyle:UITableViewCellSelectionStyleNone];
         
         return returnPaymentCell;
+    }
+    
+    if ([indexPath section] == 1) {
+        MCSolutionOverViewTableViewCell_iPhone *cell = [tableView dequeueReusableCellWithIdentifier:@"MCSolutionOverViewTableViewCell_iPhone"];
+        
+        if ([indexPath row] == 0) {
+            NSString *eachPaysString = NSLocalizedString(@"EACH_PAYS", @"Each pays");
+            [[cell totalLabel] setText:eachPaysString];
+            [[cell moneyLabel] setText:[tonightsBill amountPeopleShouldHavePaidAsCurrencyString]];
+        }
+
+        if ([indexPath row] == 1) {
+            NSString *totalSpentString = NSLocalizedString(@"TOTAL_SPENT", @"Total spent:");
+            [[cell totalLabel] setText:totalSpentString];
+            [[cell moneyLabel] setText:[tonightsBill totalSumOfMoneyOfThisSharedBillAsCurrencyString]];
+        }
+
+        return cell;
     }
     
     return nil;
