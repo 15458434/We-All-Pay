@@ -29,7 +29,6 @@ typedef enum _emailFieldEditStatus {
 
 @interface MCPersonViewController : UIViewController <UITextFieldDelegate, UIPickerViewDelegate, UIPickerViewDataSource, MCAddressBookReceiverDelegate>
 {
-    __weak IBOutlet UIImageView *pictureView;
     __weak IBOutlet UITextField *firstNameField;
     __weak IBOutlet UITextField *lastNameField;
     __weak IBOutlet UITextField *emailField;
@@ -51,6 +50,8 @@ typedef enum _emailFieldEditStatus {
     BOOL mainCancelPressed;
     NSUInteger emailEditFieldStatus;
 }
+
+@property (weak, nonatomic) IBOutlet UIImageView *pictureView;
 
 @property (nonatomic, strong) MCSharedBill *tonightsBill;
 @property (nonatomic, weak) id changeFlagDelegate;

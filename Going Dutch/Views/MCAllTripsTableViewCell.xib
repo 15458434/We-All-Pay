@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="UTF-8" standalone="no"?>
-<document type="com.apple.InterfaceBuilder3.CocoaTouch.XIB" version="3.0" toolsVersion="5053" systemVersion="13C64" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES">
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.XIB" version="3.0" toolsVersion="5056" systemVersion="13C1021" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES">
     <dependencies>
         <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="3733"/>
     </dependencies>
@@ -19,19 +19,19 @@
                         <constraints>
                             <constraint firstAttribute="width" priority="1" constant="239" id="avM-SX-HGk"/>
                         </constraints>
-                        <fontDescription key="fontDescription" name="HelveticaNeue-Medium" family="Helvetica Neue" pointSize="17"/>
+                        <fontDescription key="fontDescription" name="HelveticaNeue-Thin" family="Helvetica Neue" pointSize="17"/>
                         <color key="textColor" cocoaTouchSystemColor="darkTextColor"/>
                         <color key="highlightedColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                     </label>
                     <label opaque="NO" clipsSubviews="YES" userInteractionEnabled="NO" contentMode="left" placeholderIntrinsicWidth="246" placeholderIntrinsicHeight="15" text="3" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="8">
-                        <rect key="frame" x="54" y="27" width="246" height="15"/>
+                        <rect key="frame" x="20" y="27" width="280" height="15"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" flexibleMaxX="YES" flexibleMaxY="YES"/>
                         <fontDescription key="fontDescription" name="HelveticaNeue-Medium" family="Helvetica Neue" pointSize="12"/>
                         <color key="textColor" white="0.33333333333333331" alpha="1" colorSpace="calibratedWhite"/>
                         <color key="highlightedColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                     </label>
                     <label opaque="NO" clipsSubviews="YES" userInteractionEnabled="NO" contentMode="left" text="4" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="19">
-                        <rect key="frame" x="54" y="43" width="246" height="15"/>
+                        <rect key="frame" x="20" y="43" width="280" height="15"/>
                         <autoresizingMask key="autoresizingMask" flexibleMaxY="YES"/>
                         <fontDescription key="fontDescription" name="HelveticaNeue-MediumItalic" family="Helvetica Neue" pointSize="12"/>
                         <color key="textColor" white="0.33333333333333331" alpha="1" colorSpace="calibratedWhite"/>
@@ -43,7 +43,7 @@
                         <constraints>
                             <constraint firstAttribute="width" relation="greaterThanOrEqual" constant="34" id="azp-gn-MRm"/>
                         </constraints>
-                        <fontDescription key="fontDescription" name="HelveticaNeue-Medium" family="Helvetica Neue" pointSize="17"/>
+                        <fontDescription key="fontDescription" name="HelveticaNeue-Thin" family="Helvetica Neue" pointSize="17"/>
                         <color key="textColor" cocoaTouchSystemColor="darkTextColor"/>
                         <color key="highlightedColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                     </label>
@@ -51,12 +51,12 @@
                 <constraints>
                     <constraint firstAttribute="trailing" secondItem="28" secondAttribute="trailing" constant="19" id="ASU-KR-EPG"/>
                     <constraint firstItem="8" firstAttribute="top" secondItem="3" secondAttribute="top" constant="22" id="JO5-kd-KMX"/>
+                    <constraint firstItem="3" firstAttribute="baseline" secondItem="28" secondAttribute="baseline" id="Lk2-i4-ctf"/>
                     <constraint firstItem="3" firstAttribute="leading" secondItem="0Bp-j2-w0M" secondAttribute="leading" constant="20" id="OhL-bw-cLk"/>
                     <constraint firstItem="8" firstAttribute="leading" secondItem="19" secondAttribute="leading" id="Ryv-1f-r8j"/>
-                    <constraint firstItem="28" firstAttribute="top" secondItem="0Bp-j2-w0M" secondAttribute="top" constant="5" id="W0S-ff-Hri"/>
-                    <constraint firstItem="19" firstAttribute="leading" secondItem="0Bp-j2-w0M" secondAttribute="leading" constant="54" id="WQb-RE-DLl"/>
                     <constraint firstItem="28" firstAttribute="leading" secondItem="3" secondAttribute="trailing" constant="8" id="bzv-Qt-sx2"/>
                     <constraint firstItem="3" firstAttribute="top" secondItem="0Bp-j2-w0M" secondAttribute="top" constant="5" id="d9m-pt-GfS"/>
+                    <constraint firstItem="3" firstAttribute="leading" secondItem="8" secondAttribute="leading" id="fs8-IE-SIM"/>
                     <constraint firstItem="19" firstAttribute="width" secondItem="8" secondAttribute="width" id="iKA-G1-hDE"/>
                     <constraint firstItem="19" firstAttribute="top" secondItem="8" secondAttribute="bottom" constant="1" id="t4K-Dr-uVl"/>
                     <constraint firstAttribute="trailing" secondItem="8" secondAttribute="trailing" constant="20" symbolic="YES" id="tr5-QK-l0G"/>
