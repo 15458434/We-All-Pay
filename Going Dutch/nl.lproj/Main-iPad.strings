@@ -33,7 +33,7 @@
 "GfK-Qn-5Kr.title" = "Item";
 
 /* Class = "IBUIButton"; normalTitle = "addressbook"; ObjectID = "H3d-ki-tdJ"; */
-"H3d-ki-tdJ.normalTitle" = "Adresboek";
+"H3d-ki-tdJ.normalTitle" = "Contacten";
 
 /* Class = "IBUITextField"; placeholder = "last name"; ObjectID = "JRX-hO-2n8"; */
 "JRX-hO-2n8.placeholder" = "achternaam";
@@ -66,7 +66,7 @@
 "Vay-2v-DoQ.title" = "oplossing";
 
 /* Class = "IBUIButton"; normalTitle = "Select email address"; ObjectID = "Z0f-Hu-kcp"; */
-"Z0f-Hu-kcp.normalTitle" = "selecteer emailadres";
+"Z0f-Hu-kcp.normalTitle" = "Selecteer emailadres";
 
 /* Class = "IBUILabel"; text = "Label"; ObjectID = "ZFw-P0-QBI"; */
 "ZFw-P0-QBI.text" = "Label";
@@ -75,7 +75,7 @@
 "ZlS-5v-dlc.placeholder" = "Hoeveel is er betaald?";
 
 /* Class = "IBUIButton"; normalTitle = "select payer"; ObjectID = "al5-Gb-hhI"; */
-"al5-Gb-hhI.normalTitle" = "selecteer wie betaalt";
+"al5-Gb-hhI.normalTitle" = "Selecteer wie betaalt";
 
 /* Class = "IBUILabel"; text = "Label"; ObjectID = "cb9-ow-Za9"; */
 "cb9-ow-Za9.text" = "Label";

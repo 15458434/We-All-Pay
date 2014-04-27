@@ -9,7 +9,7 @@
 "4LN-EL-yNj.text" = "peoplePresent";
 
 /* Class = "IBUIButton"; normalTitle = "solve"; ObjectID = "9og-gt-gwG"; */
-"9og-gt-gwG.normalTitle" = "solve";
+"9og-gt-gwG.normalTitle" = "Solve";
 
 /* Class = "IBUINavigationItem"; title = "people and payments"; ObjectID = "Ajb-WY-VLi"; */
 "Ajb-WY-VLi.title" = "people and payments";
@@ -24,7 +24,7 @@
 "Du0-aV-eeD.title" = "payment details";
 
 /* Class = "IBUIButton"; normalTitle = "new event"; ObjectID = "EuC-uT-5WX"; */
-"EuC-uT-5WX.normalTitle" = "new event";
+"EuC-uT-5WX.normalTitle" = "New event";
 
 /* Class = "IBUINavigationItem"; title = "events"; ObjectID = "Gep-Z6-3Aj"; */
 "Gep-Z6-3Aj.title" = "events";
@@ -33,7 +33,7 @@
 "GfK-Qn-5Kr.title" = "Item";
 
 /* Class = "IBUIButton"; normalTitle = "addressbook"; ObjectID = "H3d-ki-tdJ"; */
-"H3d-ki-tdJ.normalTitle" = "addressbook";
+"H3d-ki-tdJ.normalTitle" = "Contacts";
 
 /* Class = "IBUITextField"; placeholder = "last name"; ObjectID = "JRX-hO-2n8"; */
 "JRX-hO-2n8.placeholder" = "last name";
@@ -51,7 +51,7 @@
 "MCZ-yM-Hrf.text" = "emailLabel";
 
 /* Class = "IBUIButton"; normalTitle = "add person"; ObjectID = "Nxq-6f-abw"; */
-"Nxq-6f-abw.normalTitle" = "add person";
+"Nxq-6f-abw.normalTitle" = "Add person";
 
 /* Class = "IBUINavigationItem"; title = "events"; ObjectID = "T8K-rj-EA0"; */
 "T8K-rj-EA0.title" = "events";
@@ -75,7 +75,7 @@
 "ZlS-5v-dlc.placeholder" = "How much was spent?";
 
 /* Class = "IBUIButton"; normalTitle = "select payer"; ObjectID = "al5-Gb-hhI"; */
-"al5-Gb-hhI.normalTitle" = "select payer";
+"al5-Gb-hhI.normalTitle" = "Select payer";
 
 /* Class = "IBUILabel"; text = "Label"; ObjectID = "cb9-ow-Za9"; */
 "cb9-ow-Za9.text" = "Label";
@@ -87,7 +87,7 @@
 "eax-dw-aIf.placeholder" = "emailaddress";
 
 /* Class = "IBUIButton"; normalTitle = "add payment"; ObjectID = "egw-0d-cT1"; */
-"egw-0d-cT1.normalTitle" = "add payment";
+"egw-0d-cT1.normalTitle" = "Add payment";
 
 /* Class = "IBUIButton"; normalTitle = "Send Email"; ObjectID = "fi4-m8-emE"; */
 "fi4-m8-emE.normalTitle" = "Send Email";
