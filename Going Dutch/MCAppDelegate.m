@@ -28,11 +28,27 @@
     
     // Initialize tracker. Replace with your tracking ID.
     [[GAI sharedInstance] trackerWithTrackingId:@"UA-50304745-1"];
+    
+    // Set to YES if during test versions.
+    [[GAI sharedInstance] setDryRun:YES];
+}
+
+- (void)startGoogleAnalyticsSession
+{
+    id<GAITracker> tracker = [[GAI sharedInstance] defaultTracker];
+    [tracker set:kGAISessionControl value:@"start"];
+}
+
+- (void)stopGoogleAnalyticsSession
+{
+    id<GAITracker> tracker = [[GAI sharedInstance] defaultTracker];
+    [tracker set:kGAISessionControl value:@"stop"];
 }
 
 - (void)executeOnlyOnceDuringStartup
 {
     [self setupGoogleAnalytics];
+    [self startGoogleAnalyticsSession];
     [TestFlight takeOff:@"f2224673-b632-44ae-8feb-3c1cfe59e1f5"];
     // Override point for customization after application launch.
     NSLog(@"%@", [[UIDevice currentDevice] model]);
@@ -107,7 +123,7 @@
 
 - (void)applicationDidEnterBackground:(UIApplication *)application
 {
-    
+    [self stopGoogleAnalyticsSession];
 }
 
 - (void)applicationWillEnterForeground:(UIApplication *)application
@@ -118,12 +134,14 @@
 - (void)applicationDidBecomeActive:(UIApplication *)application
 {
     // Restart any tasks that were paused (or not yet started) while the application was inactive. If the application was previously in the background, optionally refresh the user interface.
+    [self startGoogleAnalyticsSession];
 }
 
 - (void)applicationWillTerminate:(UIApplication *)application
 {
     // Called when the application is about to terminate. Save data if appropriate. See also applicationDidEnterBackground:.
     [[MCWeAllPayStoreController defaultStore] closeDocument];
+    [[GAI sharedInstance] dispatch];
 }
 
 - (BOOL)application:(UIApplication *)application shouldSaveApplicationState:(NSCoder *)coder

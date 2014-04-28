@@ -50,7 +50,7 @@
 "EMAIL_FINAL SENTENCE" = "If you have any remarks, please let me know";
 
 /* SharedBillTableView */
-"EMPTY_PAYMENT_LIST_MESSAGE" = "Press \"add payment\" to add a payment to this event.";
+"EMPTY_PAYMENT_LIST_MESSAGE" = "Press \"Add payment\" to add a payment to this event.";
 "PAYMENTCELL_PAYERNAME_EXTRA" = " paid";
 "PAYMENT_CELL_PAIDFOR_EXTRA" = "for ";
 "THISPAYMENTCELL_NOPAYERNAME" = "Someone";
@@ -68,7 +68,7 @@
 
 /* MCEditTripView */
 /* Press \"add Person\" to add a person who you'd like to share this bill with. */
-"PEOPLE_LIST_EMPTY_MESSAGE" = "Press \"add person\" to add a person who you'd like to share this bill with.";
+"PEOPLE_LIST_EMPTY_MESSAGE" = "Press \"Add person\" to add a person who you'd like to share this bill with.";
 
 /* PaymentView */
 /* Header in the paymentView which state new Payment. */

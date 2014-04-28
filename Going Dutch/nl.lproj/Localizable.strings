@@ -51,7 +51,7 @@
 
 
 /* SharedBillTableView */
-"EMPTY_PAYMENT_LIST_MESSAGE" = "Druk op \"nieuwe betaling\" op een betaling toe te voegen op deze rekening.";
+"EMPTY_PAYMENT_LIST_MESSAGE" = "Druk op \"Nieuwe betaling\" op een betaling toe te voegen op deze rekening.";
 "PAYMENTCELL_PAYERNAME_EXTRA" = "";
 "PAYMENT_CELL_PAIDFOR_EXTRA" = "betaalde ";
 "THISPAYMENTCELL_NOPAYERNAME" = "Iemand";
