@@ -2,8 +2,8 @@
 //  MCPayment.m
 //  We all pay
 //
-//  Created by Mark Cornelisse on 14-09-13.
-//  Copyright (c) 2013 Mark Cornelisse. All rights reserved.
+//  Created by Mark Cornelisse on 07-05-14.
+//  Copyright (c) 2014 Mark Cornelisse. All rights reserved.
 //
 
 #import "MCPayment.h"
@@ -20,5 +20,6 @@
 @dynamic uniquePaymentId;
 @dynamic onWhichBill;
 @dynamic payingPerson;
+@dynamic peopleSharingPayment;
 
 @end

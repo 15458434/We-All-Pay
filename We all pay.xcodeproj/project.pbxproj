@@ -22,6 +22,7 @@
 		38334ECC173552410063B919 /* Default-568h@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 38334EC3172D31AF0063B919 /* Default-568h@2x.png */; };
 		383A86C518F7EE48001F128E /* MCSolutionTableViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 383A86C418F7EE48001F128E /* MCSolutionTableViewController.m */; };
 		383E0C5D186737EB00AA688D /* MCSharedBillPageViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 383E0C5C186737EB00AA688D /* MCSharedBillPageViewController.m */; };
+		38506874191CCDD10089A043 /* libGoogleAnalyticsServices.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 38CC48DE190A9E7000741201 /* libGoogleAnalyticsServices.a */; };
 		38572AD7169D437B00969C62 /* UIKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 38572AD6169D437B00969C62 /* UIKit.framework */; };
 		38572AD9169D437B00969C62 /* Foundation.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 38572AD8169D437B00969C62 /* Foundation.framework */; settings = {ATTRIBUTES = (Required, ); }; };
 		38572ADB169D437B00969C62 /* CoreGraphics.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 38572ADA169D437B00969C62 /* CoreGraphics.framework */; };
@@ -29,6 +30,15 @@
 		38572AE3169D437B00969C62 /* main.m in Sources */ = {isa = PBXBuildFile; fileRef = 38572AE2169D437B00969C62 /* main.m */; };
 		38572AE7169D437B00969C62 /* MCAppDelegate.m in Sources */ = {isa = PBXBuildFile; fileRef = 38572AE6169D437B00969C62 /* MCAppDelegate.m */; };
 		38572B0A169F3D2700969C62 /* MCAllTripsTableViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 38572B09169F3D2700969C62 /* MCAllTripsTableViewController.m */; };
+		385F52FE191C2C360012773D /* XCTest.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 38522E2418DB3F01007BDB3F /* XCTest.framework */; };
+		385F52FF191C2C360012773D /* Foundation.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 38572AD8169D437B00969C62 /* Foundation.framework */; };
+		385F5300191C2C360012773D /* UIKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 38572AD6169D437B00969C62 /* UIKit.framework */; };
+		385F5306191C2C360012773D /* InfoPlist.strings in Resources */ = {isa = PBXBuildFile; fileRef = 385F5304191C2C360012773D /* InfoPlist.strings */; };
+		385F530F191C2D140012773D /* MCPaymentPresenceTest.m in Sources */ = {isa = PBXBuildFile; fileRef = 389950AA191A9469000B00BC /* MCPaymentPresenceTest.m */; };
+		385F5310191C2D140012773D /* MCPaymentAddonsTest.m in Sources */ = {isa = PBXBuildFile; fileRef = 3898F33F18F40E7700BFFC61 /* MCPaymentAddonsTest.m */; };
+		385F5311191C2D140012773D /* MCPersonAddonsTest.m in Sources */ = {isa = PBXBuildFile; fileRef = 3898F33D18F40CC100BFFC61 /* MCPersonAddonsTest.m */; };
+		385F5312191C2D140012773D /* MCSharedBillAddOnsTest.m in Sources */ = {isa = PBXBuildFile; fileRef = 3898F33B18F40B9D00BFFC61 /* MCSharedBillAddOnsTest.m */; };
+		385F5313191C2D140012773D /* WeAllPayStoreTests.m in Sources */ = {isa = PBXBuildFile; fileRef = 38D785FC18DC53C30074B670 /* WeAllPayStoreTests.m */; };
 		385FEE6317CBF77B001013E3 /* Images.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 385FEE6217CBF77B001013E3 /* Images.xcassets */; };
 		3867CE4718704B2E001EC222 /* Main-Iphone.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 3867CE4918704B2E001EC222 /* Main-Iphone.storyboard */; };
 		3867CE5118704DAF001EC222 /* MCTableEmptyMessage.xib in Resources */ = {isa = PBXBuildFile; fileRef = 3867CE5318704DAF001EC222 /* MCTableEmptyMessage.xib */; };
@@ -44,6 +54,8 @@
 		387D3A911870652B0060FAF8 /* Localizable.strings in Resources */ = {isa = PBXBuildFile; fileRef = 387D3A931870652B0060FAF8 /* Localizable.strings */; };
 		3886D3FD16B7A1CD00ECE64F /* AddressBook.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 3886D3FB16B7A1CD00ECE64F /* AddressBook.framework */; };
 		3886D3FE16B7A1CD00ECE64F /* AddressBookUI.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 3886D3FC16B7A1CD00ECE64F /* AddressBookUI.framework */; };
+		3886FE88191CF140004D88FB /* libTestFlight.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 3857304B18DAF2F100A900EA /* libTestFlight.a */; };
+		3886FE8B191CF35F004D88FB /* MCPaymentPresence.m in Sources */ = {isa = PBXBuildFile; fileRef = 3886FE8A191CF35F004D88FB /* MCPaymentPresence.m */; };
 		3892E3A417903EF00038894B /* MCEditTripViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 3892E3A317903EF00038894B /* MCEditTripViewController.m */; };
 		3892E3AA17904A240038894B /* MCPersonViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 3892E3A917904A240038894B /* MCPersonViewController.m */; };
 		3892E3AE179056420038894B /* MCReturnPayment.m in Sources */ = {isa = PBXBuildFile; fileRef = 3892E3AD179056420038894B /* MCReturnPayment.m */; };
@@ -63,11 +75,9 @@
 		3898F33218F180B500BFFC61 /* MCPaymentTableViewController_iPad.m in Sources */ = {isa = PBXBuildFile; fileRef = 3898F33118F180B500BFFC61 /* MCPaymentTableViewController_iPad.m */; };
 		3898F33618F2CB6700BFFC61 /* MCSelectPayerTableViewController_iPad.m in Sources */ = {isa = PBXBuildFile; fileRef = 3898F33518F2CB6700BFFC61 /* MCSelectPayerTableViewController_iPad.m */; };
 		3898F33A18F2CC0D00BFFC61 /* MCSelectPayerTableViewCell_iPad.m in Sources */ = {isa = PBXBuildFile; fileRef = 3898F33918F2CC0D00BFFC61 /* MCSelectPayerTableViewCell_iPad.m */; };
-		3898F33C18F40B9D00BFFC61 /* MCSharedBillAddOnsTest.m in Sources */ = {isa = PBXBuildFile; fileRef = 3898F33B18F40B9D00BFFC61 /* MCSharedBillAddOnsTest.m */; };
-		3898F33E18F40CC100BFFC61 /* MCPersonAddonsTest.m in Sources */ = {isa = PBXBuildFile; fileRef = 3898F33D18F40CC100BFFC61 /* MCPersonAddonsTest.m */; };
-		3898F34018F40E7700BFFC61 /* MCPaymentAddonsTest.m in Sources */ = {isa = PBXBuildFile; fileRef = 3898F33F18F40E7700BFFC61 /* MCPaymentAddonsTest.m */; };
-		389C5E7E190AAD00007D963D /* libTestFlight.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 3857304B18DAF2F100A900EA /* libTestFlight.a */; };
-		389C5E7F190AAD25007D963D /* libGoogleAnalyticsServices.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 38CC48DE190A9E7000741201 /* libGoogleAnalyticsServices.a */; };
+		38995098191A9048000B00BC /* MCPayment.m in Sources */ = {isa = PBXBuildFile; fileRef = 38995097191A9048000B00BC /* MCPayment.m */; };
+		389950A0191A9049000B00BC /* MCPerson.m in Sources */ = {isa = PBXBuildFile; fileRef = 3899509F191A9049000B00BC /* MCPerson.m */; };
+		389950A4191A90F1000B00BC /* MCPaymentPresence+addons.m in Sources */ = {isa = PBXBuildFile; fileRef = 389950A3191A90F1000B00BC /* MCPaymentPresence+addons.m */; };
 		38AAFB9F18EC404200CD3E12 /* MCSharedBillPaymentsTableViewController-iPad.m in Sources */ = {isa = PBXBuildFile; fileRef = 38AAFB9E18EC404200CD3E12 /* MCSharedBillPaymentsTableViewController-iPad.m */; };
 		38AAFBA218EC406300CD3E12 /* MCSharedBillPeoplePresentTableViewController-iPad.m in Sources */ = {isa = PBXBuildFile; fileRef = 38AAFBA118EC406300CD3E12 /* MCSharedBillPeoplePresentTableViewController-iPad.m */; };
 		38AAFBA518EC529300CD3E12 /* MCSharedBillViewController_iPad.m in Sources */ = {isa = PBXBuildFile; fileRef = 38AAFBA418EC529300CD3E12 /* MCSharedBillViewController_iPad.m */; };
@@ -78,19 +88,12 @@
 		38C2BCA518FC3CD400233D24 /* MCPaymentTableViewCell_iPad.m in Sources */ = {isa = PBXBuildFile; fileRef = 38C2BCA418FC3CD400233D24 /* MCPaymentTableViewCell_iPad.m */; };
 		38CC8C4A18ED61FD006D99E7 /* MCPersonTableViewController_iPad.m in Sources */ = {isa = PBXBuildFile; fileRef = 38CC8C4918ED61FD006D99E7 /* MCPersonTableViewController_iPad.m */; };
 		38CDE90017135B6300387CAA /* MCTools.m in Sources */ = {isa = PBXBuildFile; fileRef = 38CDE8FF17135B6300387CAA /* MCTools.m */; };
-		38D785F318DC53C30074B670 /* XCTest.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 38522E2418DB3F01007BDB3F /* XCTest.framework */; };
-		38D785F418DC53C30074B670 /* Foundation.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 38572AD8169D437B00969C62 /* Foundation.framework */; };
-		38D785F518DC53C30074B670 /* UIKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 38572AD6169D437B00969C62 /* UIKit.framework */; };
-		38D785FB18DC53C30074B670 /* InfoPlist.strings in Resources */ = {isa = PBXBuildFile; fileRef = 38D785F918DC53C30074B670 /* InfoPlist.strings */; };
-		38D785FD18DC53C30074B670 /* WeAllPayStoreTests.m in Sources */ = {isa = PBXBuildFile; fileRef = 38D785FC18DC53C30074B670 /* WeAllPayStoreTests.m */; };
 		38DB85D417E45BCA006237CF /* MCPayment+addons.m in Sources */ = {isa = PBXBuildFile; fileRef = 38DB85D317E45BCA006237CF /* MCPayment+addons.m */; };
 		38DB85D717E45CA4006237CF /* MCSharedBill+addons.m in Sources */ = {isa = PBXBuildFile; fileRef = 38DB85D617E45CA4006237CF /* MCSharedBill+addons.m */; };
 		38DB85DA17E45DEA006237CF /* MCPerson+addons.m in Sources */ = {isa = PBXBuildFile; fileRef = 38DB85D917E45DEA006237CF /* MCPerson+addons.m */; };
 		38DB85DD17E45FB7006237CF /* MCEmailAddress+addons.m in Sources */ = {isa = PBXBuildFile; fileRef = 38DB85DC17E45FB7006237CF /* MCEmailAddress+addons.m */; };
 		38DB85E017E46FE1006237CF /* MCEmailAddress.m in Sources */ = {isa = PBXBuildFile; fileRef = 38DB85DF17E46FE1006237CF /* MCEmailAddress.m */; };
-		38DB85E317E46FE1006237CF /* MCPayment.m in Sources */ = {isa = PBXBuildFile; fileRef = 38DB85E217E46FE1006237CF /* MCPayment.m */; };
 		38DB85E617E46FE2006237CF /* MCSharedBill.m in Sources */ = {isa = PBXBuildFile; fileRef = 38DB85E517E46FE2006237CF /* MCSharedBill.m */; };
-		38DB85E917E46FE2006237CF /* MCPerson.m in Sources */ = {isa = PBXBuildFile; fileRef = 38DB85E817E46FE2006237CF /* MCPerson.m */; };
 		38DC8B2A1907145A00762235 /* MCRootViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 38DC8B291907145A00762235 /* MCRootViewController.m */; };
 		38DC8B3619084ABE00762235 /* SystemConfiguration.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 38DC8B3519084ABE00762235 /* SystemConfiguration.framework */; };
 		38DC8B421909508800762235 /* MCColors.m in Sources */ = {isa = PBXBuildFile; fileRef = 38DC8B411909508800762235 /* MCColors.m */; };
@@ -104,7 +107,7 @@
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
-		38D785FF18DC53C30074B670 /* PBXContainerItemProxy */ = {
+		385F530A191C2C360012773D /* PBXContainerItemProxy */ = {
 			isa = PBXContainerItemProxy;
 			containerPortal = 38572AC9169D437B00969C62 /* Project object */;
 			proxyType = 1;
@@ -158,6 +161,11 @@
 		3857304918DAF2E600A900EA /* TestFlight.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = TestFlight.h; path = "TestFlight SDK/TestFlight.h"; sourceTree = "<group>"; };
 		3857304A18DAF2E600A900EA /* TestFlight+AsyncLogging.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = "TestFlight+AsyncLogging.h"; path = "TestFlight SDK/TestFlight+AsyncLogging.h"; sourceTree = "<group>"; };
 		3857304B18DAF2F100A900EA /* libTestFlight.a */ = {isa = PBXFileReference; lastKnownFileType = archive.ar; name = libTestFlight.a; path = "Going Dutch/TestFlight SDK/libTestFlight.a"; sourceTree = "<group>"; };
+		385F52FD191C2C360012773D /* We all pay Tests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = "We all pay Tests.xctest"; sourceTree = BUILT_PRODUCTS_DIR; };
+		385F5303191C2C360012773D /* We all pay Tests-Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = "We all pay Tests-Info.plist"; sourceTree = "<group>"; };
+		385F5305191C2C360012773D /* en */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = en; path = en.lproj/InfoPlist.strings; sourceTree = "<group>"; };
+		385F5307191C2C360012773D /* We_all_pay_Tests.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = We_all_pay_Tests.m; sourceTree = "<group>"; };
+		385F5309191C2C360012773D /* We all pay Tests-Prefix.pch */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = "We all pay Tests-Prefix.pch"; sourceTree = "<group>"; };
 		385FEE6217CBF77B001013E3 /* Images.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; name = Images.xcassets; path = "We all pay/Images.xcassets"; sourceTree = SOURCE_ROOT; };
 		3867CE4018703E9A001EC222 /* nl */ = {isa = PBXFileReference; fileEncoding = 10; lastKnownFileType = text.plist.strings; name = nl; path = nl.lproj/InfoPlist.strings; sourceTree = "<group>"; };
 		3867CE4A18704B48001EC222 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = "Base.lproj/Main-Iphone.storyboard"; sourceTree = "<group>"; };
@@ -185,6 +193,8 @@
 		387D3A8E187053BA0060FAF8 /* nl */ = {isa = PBXFileReference; fileEncoding = 10; lastKnownFileType = text.plist.strings; name = nl; path = "nl.lproj/Main-Iphone.strings"; sourceTree = "<group>"; };
 		3886D3FB16B7A1CD00ECE64F /* AddressBook.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = AddressBook.framework; path = System/Library/Frameworks/AddressBook.framework; sourceTree = SDKROOT; };
 		3886D3FC16B7A1CD00ECE64F /* AddressBookUI.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = AddressBookUI.framework; path = System/Library/Frameworks/AddressBookUI.framework; sourceTree = SDKROOT; };
+		3886FE89191CF35F004D88FB /* MCPaymentPresence.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = MCPaymentPresence.h; sourceTree = "<group>"; };
+		3886FE8A191CF35F004D88FB /* MCPaymentPresence.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = MCPaymentPresence.m; sourceTree = "<group>"; };
 		3892E3A217903EF00038894B /* MCEditTripViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = MCEditTripViewController.h; path = ViewControllers/MCEditTripViewController.h; sourceTree = "<group>"; };
 		3892E3A317903EF00038894B /* MCEditTripViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = MCEditTripViewController.m; path = ViewControllers/MCEditTripViewController.m; sourceTree = "<group>"; };
 		3892E3A817904A240038894B /* MCPersonViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = MCPersonViewController.h; path = ViewControllers/MCPersonViewController.h; sourceTree = "<group>"; };
@@ -220,9 +230,17 @@
 		3898F33518F2CB6700BFFC61 /* MCSelectPayerTableViewController_iPad.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = MCSelectPayerTableViewController_iPad.m; path = ViewControllers/iPad/MCSelectPayerTableViewController_iPad.m; sourceTree = "<group>"; };
 		3898F33818F2CC0D00BFFC61 /* MCSelectPayerTableViewCell_iPad.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = MCSelectPayerTableViewCell_iPad.h; path = Views/iPad/MCSelectPayerTableViewCell_iPad.h; sourceTree = "<group>"; };
 		3898F33918F2CC0D00BFFC61 /* MCSelectPayerTableViewCell_iPad.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = MCSelectPayerTableViewCell_iPad.m; path = Views/iPad/MCSelectPayerTableViewCell_iPad.m; sourceTree = "<group>"; };
-		3898F33B18F40B9D00BFFC61 /* MCSharedBillAddOnsTest.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = MCSharedBillAddOnsTest.m; sourceTree = "<group>"; };
-		3898F33D18F40CC100BFFC61 /* MCPersonAddonsTest.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = MCPersonAddonsTest.m; sourceTree = "<group>"; };
-		3898F33F18F40E7700BFFC61 /* MCPaymentAddonsTest.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = MCPaymentAddonsTest.m; sourceTree = "<group>"; };
+		3898F33B18F40B9D00BFFC61 /* MCSharedBillAddOnsTest.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = MCSharedBillAddOnsTest.m; path = ../WeAllPayTests/MCSharedBillAddOnsTest.m; sourceTree = "<group>"; };
+		3898F33D18F40CC100BFFC61 /* MCPersonAddonsTest.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = MCPersonAddonsTest.m; path = ../WeAllPayTests/MCPersonAddonsTest.m; sourceTree = "<group>"; };
+		3898F33F18F40E7700BFFC61 /* MCPaymentAddonsTest.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = MCPaymentAddonsTest.m; path = ../WeAllPayTests/MCPaymentAddonsTest.m; sourceTree = "<group>"; };
+		3899508E191A7282000B00BC /* WeAllPayStore 2.xcdatamodel */ = {isa = PBXFileReference; lastKnownFileType = wrapper.xcdatamodel; path = "WeAllPayStore 2.xcdatamodel"; sourceTree = "<group>"; };
+		38995096191A9048000B00BC /* MCPayment.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = MCPayment.h; sourceTree = "<group>"; };
+		38995097191A9048000B00BC /* MCPayment.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = MCPayment.m; sourceTree = "<group>"; };
+		3899509E191A9049000B00BC /* MCPerson.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = MCPerson.h; sourceTree = "<group>"; };
+		3899509F191A9049000B00BC /* MCPerson.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = MCPerson.m; sourceTree = "<group>"; };
+		389950A2191A90F1000B00BC /* MCPaymentPresence+addons.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = "MCPaymentPresence+addons.h"; path = "DataStore/MCPaymentPresence+addons.h"; sourceTree = "<group>"; };
+		389950A3191A90F1000B00BC /* MCPaymentPresence+addons.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = "MCPaymentPresence+addons.m"; path = "DataStore/MCPaymentPresence+addons.m"; sourceTree = "<group>"; };
+		389950AA191A9469000B00BC /* MCPaymentPresenceTest.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = MCPaymentPresenceTest.m; path = ../WeAllPayTests/MCPaymentPresenceTest.m; sourceTree = "<group>"; };
 		389E92621889E5A60005F063 /* en */ = {isa = PBXFileReference; fileEncoding = 10; lastKnownFileType = text.plist.strings; name = en; path = "en.lproj/Main-Iphone.strings"; sourceTree = "<group>"; };
 		389E92631889E5A60005F063 /* en */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = en; path = en.lproj/MCTableEmptyMessage.strings; sourceTree = "<group>"; };
 		389E92641889E5A60005F063 /* en */ = {isa = PBXFileReference; fileEncoding = 10; lastKnownFileType = text.plist.strings; name = en; path = en.lproj/Localizable.strings; sourceTree = "<group>"; };
@@ -248,10 +266,9 @@
 		38CC8C4918ED61FD006D99E7 /* MCPersonTableViewController_iPad.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = MCPersonTableViewController_iPad.m; path = ViewControllers/iPad/MCPersonTableViewController_iPad.m; sourceTree = "<group>"; };
 		38CDE8FE17135B6300387CAA /* MCTools.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = MCTools.h; sourceTree = "<group>"; };
 		38CDE8FF17135B6300387CAA /* MCTools.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = MCTools.m; sourceTree = "<group>"; };
-		38D785F218DC53C30074B670 /* WeAllPayTests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = WeAllPayTests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
 		38D785F818DC53C30074B670 /* WeAllPayTests-Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = "WeAllPayTests-Info.plist"; sourceTree = "<group>"; };
 		38D785FA18DC53C30074B670 /* en */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = en; path = en.lproj/InfoPlist.strings; sourceTree = "<group>"; };
-		38D785FC18DC53C30074B670 /* WeAllPayStoreTests.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = WeAllPayStoreTests.m; sourceTree = "<group>"; };
+		38D785FC18DC53C30074B670 /* WeAllPayStoreTests.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; name = WeAllPayStoreTests.m; path = ../WeAllPayTests/WeAllPayStoreTests.m; sourceTree = "<group>"; };
 		38D785FE18DC53C30074B670 /* WeAllPayTests-Prefix.pch */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = "WeAllPayTests-Prefix.pch"; sourceTree = "<group>"; };
 		38DB85D217E45BCA006237CF /* MCPayment+addons.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = "MCPayment+addons.h"; path = "DataStore/MCPayment+addons.h"; sourceTree = "<group>"; };
 		38DB85D317E45BCA006237CF /* MCPayment+addons.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = "MCPayment+addons.m"; path = "DataStore/MCPayment+addons.m"; sourceTree = "<group>"; };
@@ -263,12 +280,8 @@
 		38DB85DC17E45FB7006237CF /* MCEmailAddress+addons.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = "MCEmailAddress+addons.m"; path = "DataStore/MCEmailAddress+addons.m"; sourceTree = "<group>"; };
 		38DB85DE17E46FE1006237CF /* MCEmailAddress.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = MCEmailAddress.h; sourceTree = "<group>"; };
 		38DB85DF17E46FE1006237CF /* MCEmailAddress.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = MCEmailAddress.m; sourceTree = "<group>"; };
-		38DB85E117E46FE1006237CF /* MCPayment.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = MCPayment.h; sourceTree = "<group>"; };
-		38DB85E217E46FE1006237CF /* MCPayment.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = MCPayment.m; sourceTree = "<group>"; };
 		38DB85E417E46FE2006237CF /* MCSharedBill.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = MCSharedBill.h; sourceTree = "<group>"; };
 		38DB85E517E46FE2006237CF /* MCSharedBill.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = MCSharedBill.m; sourceTree = "<group>"; };
-		38DB85E717E46FE2006237CF /* MCPerson.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = MCPerson.h; sourceTree = "<group>"; };
-		38DB85E817E46FE2006237CF /* MCPerson.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = MCPerson.m; sourceTree = "<group>"; };
 		38DC8B281907145A00762235 /* MCRootViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = MCRootViewController.h; path = ViewControllers/iPad/MCRootViewController.h; sourceTree = "<group>"; };
 		38DC8B291907145A00762235 /* MCRootViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = MCRootViewController.m; path = ViewControllers/iPad/MCRootViewController.m; sourceTree = "<group>"; };
 		38DC8B2D19081E9100762235 /* GAI.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = GAI.h; sourceTree = "<group>"; };
@@ -303,8 +316,8 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				389C5E7F190AAD25007D963D /* libGoogleAnalyticsServices.a in Frameworks */,
-				389C5E7E190AAD00007D963D /* libTestFlight.a in Frameworks */,
+				3886FE88191CF140004D88FB /* libTestFlight.a in Frameworks */,
+				38506874191CCDD10089A043 /* libGoogleAnalyticsServices.a in Frameworks */,
 				38DC8B3619084ABE00762235 /* SystemConfiguration.framework in Frameworks */,
 				386FC37018E5BE1900428294 /* iAd.framework in Frameworks */,
 				38690703186F0EEF006A5C11 /* libz.dylib in Frameworks */,
@@ -318,13 +331,13 @@
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
-		38D785EF18DC53C30074B670 /* Frameworks */ = {
+		385F52FA191C2C360012773D /* Frameworks */ = {
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				38D785F318DC53C30074B670 /* XCTest.framework in Frameworks */,
-				38D785F518DC53C30074B670 /* UIKit.framework in Frameworks */,
-				38D785F418DC53C30074B670 /* Foundation.framework in Frameworks */,
+				385F52FE191C2C360012773D /* XCTest.framework in Frameworks */,
+				385F5300191C2C360012773D /* UIKit.framework in Frameworks */,
+				385F52FF191C2C360012773D /* Foundation.framework in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -335,18 +348,22 @@
 			isa = PBXGroup;
 			children = (
 				3829AD0D178B41320025969D /* WeAllPayStore.xcdatamodeld */,
-				38DB85E717E46FE2006237CF /* MCPerson.h */,
-				38DB85E817E46FE2006237CF /* MCPerson.m */,
+				3886FE89191CF35F004D88FB /* MCPaymentPresence.h */,
+				3886FE8A191CF35F004D88FB /* MCPaymentPresence.m */,
+				3899509E191A9049000B00BC /* MCPerson.h */,
+				3899509F191A9049000B00BC /* MCPerson.m */,
+				38995096191A9048000B00BC /* MCPayment.h */,
+				38995097191A9048000B00BC /* MCPayment.m */,
 				38DB85E417E46FE2006237CF /* MCSharedBill.h */,
 				38DB85E517E46FE2006237CF /* MCSharedBill.m */,
-				38DB85E117E46FE1006237CF /* MCPayment.h */,
-				38DB85E217E46FE1006237CF /* MCPayment.m */,
 				38DB85DE17E46FE1006237CF /* MCEmailAddress.h */,
 				38DB85DF17E46FE1006237CF /* MCEmailAddress.m */,
 				38DB85D217E45BCA006237CF /* MCPayment+addons.h */,
 				38DB85D317E45BCA006237CF /* MCPayment+addons.m */,
 				38DB85D517E45CA4006237CF /* MCSharedBill+addons.h */,
 				38DB85D617E45CA4006237CF /* MCSharedBill+addons.m */,
+				389950A2191A90F1000B00BC /* MCPaymentPresence+addons.h */,
+				389950A3191A90F1000B00BC /* MCPaymentPresence+addons.m */,
 				38DB85D817E45DEA006237CF /* MCPerson+addons.h */,
 				38DB85D917E45DEA006237CF /* MCPerson+addons.m */,
 				38DB85DB17E45FB7006237CF /* MCEmailAddress+addons.h */,
@@ -382,6 +399,7 @@
 			children = (
 				38572ADC169D437B00969C62 /* We all pay */,
 				38D785F618DC53C30074B670 /* WeAllPayTests */,
+				385F5301191C2C360012773D /* We all pay Tests */,
 				38572AD5169D437B00969C62 /* Frameworks */,
 				38572AD3169D437B00969C62 /* Products */,
 			);
@@ -391,7 +409,7 @@
 			isa = PBXGroup;
 			children = (
 				38572AD2169D437B00969C62 /* We all pay.app */,
-				38D785F218DC53C30074B670 /* WeAllPayTests.xctest */,
+				385F52FD191C2C360012773D /* We all pay Tests.xctest */,
 			);
 			name = Products;
 			sourceTree = "<group>";
@@ -485,6 +503,30 @@
 			name = Views;
 			sourceTree = "<group>";
 		};
+		385F5301191C2C360012773D /* We all pay Tests */ = {
+			isa = PBXGroup;
+			children = (
+				389950AA191A9469000B00BC /* MCPaymentPresenceTest.m */,
+				3898F33F18F40E7700BFFC61 /* MCPaymentAddonsTest.m */,
+				3898F33D18F40CC100BFFC61 /* MCPersonAddonsTest.m */,
+				3898F33B18F40B9D00BFFC61 /* MCSharedBillAddOnsTest.m */,
+				38D785FC18DC53C30074B670 /* WeAllPayStoreTests.m */,
+				385F5307191C2C360012773D /* We_all_pay_Tests.m */,
+				385F5302191C2C360012773D /* Supporting Files */,
+			);
+			path = "We all pay Tests";
+			sourceTree = "<group>";
+		};
+		385F5302191C2C360012773D /* Supporting Files */ = {
+			isa = PBXGroup;
+			children = (
+				385F5303191C2C360012773D /* We all pay Tests-Info.plist */,
+				385F5304191C2C360012773D /* InfoPlist.strings */,
+				385F5309191C2C360012773D /* We all pay Tests-Prefix.pch */,
+			);
+			name = "Supporting Files";
+			sourceTree = "<group>";
+		};
 		3867CE4218704161001EC222 /* Storyboard */ = {
 			isa = PBXGroup;
 			children = (
@@ -572,10 +614,6 @@
 		38D785F618DC53C30074B670 /* WeAllPayTests */ = {
 			isa = PBXGroup;
 			children = (
-				3898F33F18F40E7700BFFC61 /* MCPaymentAddonsTest.m */,
-				3898F33D18F40CC100BFFC61 /* MCPersonAddonsTest.m */,
-				3898F33B18F40B9D00BFFC61 /* MCSharedBillAddOnsTest.m */,
-				38D785FC18DC53C30074B670 /* WeAllPayStoreTests.m */,
 				38D785F718DC53C30074B670 /* Supporting Files */,
 			);
 			path = WeAllPayTests;
@@ -713,22 +751,22 @@
 			productReference = 38572AD2169D437B00969C62 /* We all pay.app */;
 			productType = "com.apple.product-type.application";
 		};
-		38D785F118DC53C30074B670 /* WeAllPayTests */ = {
+		385F52FC191C2C360012773D /* We all pay Tests */ = {
 			isa = PBXNativeTarget;
-			buildConfigurationList = 38D7860118DC53C30074B670 /* Build configuration list for PBXNativeTarget "WeAllPayTests" */;
+			buildConfigurationList = 385F530C191C2C360012773D /* Build configuration list for PBXNativeTarget "We all pay Tests" */;
 			buildPhases = (
-				38D785EE18DC53C30074B670 /* Sources */,
-				38D785EF18DC53C30074B670 /* Frameworks */,
-				38D785F018DC53C30074B670 /* Resources */,
+				385F52F9191C2C360012773D /* Sources */,
+				385F52FA191C2C360012773D /* Frameworks */,
+				385F52FB191C2C360012773D /* Resources */,
 			);
 			buildRules = (
 			);
 			dependencies = (
-				38D7860018DC53C30074B670 /* PBXTargetDependency */,
+				385F530B191C2C360012773D /* PBXTargetDependency */,
 			);
-			name = WeAllPayTests;
-			productName = WeAllPayTests;
-			productReference = 38D785F218DC53C30074B670 /* WeAllPayTests.xctest */;
+			name = "We all pay Tests";
+			productName = "We all pay Tests";
+			productReference = 385F52FD191C2C360012773D /* We all pay Tests.xctest */;
 			productType = "com.apple.product-type.bundle.unit-test";
 		};
 /* End PBXNativeTarget section */
@@ -744,7 +782,7 @@
 					38572AD1169D437B00969C62 = {
 						DevelopmentTeam = Z6JP26PUUY;
 					};
-					38D785F118DC53C30074B670 = {
+					385F52FC191C2C360012773D = {
 						TestTargetID = 38572AD1169D437B00969C62;
 					};
 				};
@@ -764,7 +802,7 @@
 			projectRoot = "";
 			targets = (
 				38572AD1169D437B00969C62 /* We all pay */,
-				38D785F118DC53C30074B670 /* WeAllPayTests */,
+				385F52FC191C2C360012773D /* We all pay Tests */,
 			);
 		};
 /* End PBXProject section */
@@ -797,11 +835,11 @@
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
-		38D785F018DC53C30074B670 /* Resources */ = {
+		385F52FB191C2C360012773D /* Resources */ = {
 			isa = PBXResourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				38D785FB18DC53C30074B670 /* InfoPlist.strings in Resources */,
+				385F5306191C2C360012773D /* InfoPlist.strings in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -824,13 +862,12 @@
 				3898F33618F2CB6700BFFC61 /* MCSelectPayerTableViewController_iPad.m in Sources */,
 				38CDE90017135B6300387CAA /* MCTools.m in Sources */,
 				3829AD0F178B41320025969D /* WeAllPayStore.xcdatamodeld in Sources */,
+				389950A0191A9049000B00BC /* MCPerson.m in Sources */,
 				38DB85D717E45CA4006237CF /* MCSharedBill+addons.m in Sources */,
-				38DB85E317E46FE1006237CF /* MCPayment.m in Sources */,
 				38DB85DD17E45FB7006237CF /* MCEmailAddress+addons.m in Sources */,
 				38295AE818425E74009FB5DE /* MCCancelDoneViewController.m in Sources */,
 				380BF831181088B9008A8B74 /* MCEmailAddressTableViewCell.m in Sources */,
 				38955048178B4FCA0077A95A /* MCWeAllPayStoreController.m in Sources */,
-				38DB85E917E46FE2006237CF /* MCPerson.m in Sources */,
 				3897157A17901D0F005BE03E /* MCTextFieldAndLabelTitleView.m in Sources */,
 				38AAFBA218EC406300CD3E12 /* MCSharedBillPeoplePresentTableViewController-iPad.m in Sources */,
 				38C2BC9F18FBD89400233D24 /* MCAllTripsTableViewCell_iPad.m in Sources */,
@@ -838,6 +875,7 @@
 				3897157C17901D0F005BE03E /* MCTwoLabelsTitleView.m in Sources */,
 				3897158717901D55005BE03E /* MCPaymentTableViewCell.m in Sources */,
 				38DC8B2A1907145A00762235 /* MCRootViewController.m in Sources */,
+				3886FE8B191CF35F004D88FB /* MCPaymentPresence.m in Sources */,
 				3897158917901D55005BE03E /* MCPersonTableViewCell.m in Sources */,
 				38AAFB9F18EC404200CD3E12 /* MCSharedBillPaymentsTableViewController-iPad.m in Sources */,
 				3897158B17901D55005BE03E /* MCReturnPaymentTableViewCell.m in Sources */,
@@ -857,36 +895,39 @@
 				38DB85D417E45BCA006237CF /* MCPayment+addons.m in Sources */,
 				383A86C518F7EE48001F128E /* MCSolutionTableViewController.m in Sources */,
 				3892E3AA17904A240038894B /* MCPersonViewController.m in Sources */,
+				389950A4191A90F1000B00BC /* MCPaymentPresence+addons.m in Sources */,
 				3892E3AE179056420038894B /* MCReturnPayment.m in Sources */,
 				38E63CF0186F904B00904D82 /* MCTableEmptyMessage.m in Sources */,
 				3872C0D718FF1363008C54D7 /* MCSelectEmailAddressTableViewCell_iPad.m in Sources */,
 				3872C0D118FF0A5E008C54D7 /* MCSelectEmailAddressTableViewController_iPad.m in Sources */,
 				3892E3B117906B5E0038894B /* MCAddressBookDataReceiver.m in Sources */,
 				38CC8C4A18ED61FD006D99E7 /* MCPersonTableViewController_iPad.m in Sources */,
+				38995098191A9048000B00BC /* MCPayment.m in Sources */,
 				38DB85E017E46FE1006237CF /* MCEmailAddress.m in Sources */,
 				3830F6F6179872B400904FAF /* MCPaymentViewController.m in Sources */,
 				38DC8B4C19098C1B00762235 /* MCSolutionOverViewTableViewCell_iPhone.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
-		38D785EE18DC53C30074B670 /* Sources */ = {
+		385F52F9191C2C360012773D /* Sources */ = {
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				3898F33C18F40B9D00BFFC61 /* MCSharedBillAddOnsTest.m in Sources */,
-				3898F33E18F40CC100BFFC61 /* MCPersonAddonsTest.m in Sources */,
-				38D785FD18DC53C30074B670 /* WeAllPayStoreTests.m in Sources */,
-				3898F34018F40E7700BFFC61 /* MCPaymentAddonsTest.m in Sources */,
+				385F530F191C2D140012773D /* MCPaymentPresenceTest.m in Sources */,
+				385F5310191C2D140012773D /* MCPaymentAddonsTest.m in Sources */,
+				385F5311191C2D140012773D /* MCPersonAddonsTest.m in Sources */,
+				385F5312191C2D140012773D /* MCSharedBillAddOnsTest.m in Sources */,
+				385F5313191C2D140012773D /* WeAllPayStoreTests.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
 /* End PBXSourcesBuildPhase section */
 
 /* Begin PBXTargetDependency section */
-		38D7860018DC53C30074B670 /* PBXTargetDependency */ = {
+		385F530B191C2C360012773D /* PBXTargetDependency */ = {
 			isa = PBXTargetDependency;
 			target = 38572AD1169D437B00969C62 /* We all pay */;
-			targetProxy = 38D785FF18DC53C30074B670 /* PBXContainerItemProxy */;
+			targetProxy = 385F530A191C2C360012773D /* PBXContainerItemProxy */;
 		};
 /* End PBXTargetDependency section */
 
@@ -897,6 +938,14 @@
 				3867CE4018703E9A001EC222 /* nl */,
 				3867CE4D18704C60001EC222 /* Base */,
 				389E92651889E6CC0005F063 /* en */,
+			);
+			name = InfoPlist.strings;
+			sourceTree = "<group>";
+		};
+		385F5304191C2C360012773D /* InfoPlist.strings */ = {
+			isa = PBXVariantGroup;
+			children = (
+				385F5305191C2C360012773D /* en */,
 			);
 			name = InfoPlist.strings;
 			sourceTree = "<group>";
@@ -1029,6 +1078,7 @@
 				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer";
 				GCC_PRECOMPILE_PREFIX_HEADER = YES;
 				GCC_PREFIX_HEADER = "Going Dutch/We all pay-Prefix.pch";
+				GCC_SYMBOLS_PRIVATE_EXTERN = NO;
 				INFOPLIST_FILE = "Going Dutch/We all pay-Info.plist";
 				IPHONEOS_DEPLOYMENT_TARGET = 7.0;
 				LIBRARY_SEARCH_PATHS = (
@@ -1037,6 +1087,15 @@
 					Dutch/TestFlight,
 					SDK,
 					"$(PROJECT_DIR)",
+					"$(PROJECT_DIR)/Going",
+					Dutch/TestFlight,
+					SDK,
+					"$(PROJECT_DIR)/Going",
+					Dutch/TestFlight,
+					SDK,
+					"$(PROJECT_DIR)/Going",
+					Dutch/TestFlight,
+					SDK,
 					"$(PROJECT_DIR)/Going",
 					Dutch/TestFlight,
 					SDK,
@@ -1057,6 +1116,7 @@
 				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer";
 				GCC_PRECOMPILE_PREFIX_HEADER = YES;
 				GCC_PREFIX_HEADER = "Going Dutch/We all pay-Prefix.pch";
+				GCC_SYMBOLS_PRIVATE_EXTERN = YES;
 				INFOPLIST_FILE = "Going Dutch/We all pay-Info.plist";
 				IPHONEOS_DEPLOYMENT_TARGET = 7.0;
 				LIBRARY_SEARCH_PATHS = (
@@ -1065,6 +1125,15 @@
 					Dutch/TestFlight,
 					SDK,
 					"$(PROJECT_DIR)",
+					"$(PROJECT_DIR)/Going",
+					Dutch/TestFlight,
+					SDK,
+					"$(PROJECT_DIR)/Going",
+					Dutch/TestFlight,
+					SDK,
+					"$(PROJECT_DIR)/Going",
+					Dutch/TestFlight,
+					SDK,
 					"$(PROJECT_DIR)/Going",
 					Dutch/TestFlight,
 					SDK,
@@ -1077,7 +1146,7 @@
 			};
 			name = Release;
 		};
-		38D7860218DC53C30074B670 /* Debug */ = {
+		385F530D191C2C360012773D /* Debug */ = {
 			isa = XCBuildConfiguration;
 			buildSettings = {
 				BUNDLE_LOADER = "$(BUILT_PRODUCTS_DIR)/We all pay.app/We all pay";
@@ -1094,7 +1163,7 @@
 					"$(DEVELOPER_FRAMEWORKS_DIR)",
 				);
 				GCC_PRECOMPILE_PREFIX_HEADER = YES;
-				GCC_PREFIX_HEADER = "WeAllPayTests/WeAllPayTests-Prefix.pch";
+				GCC_PREFIX_HEADER = "We all pay Tests/We all pay Tests-Prefix.pch";
 				GCC_PREPROCESSOR_DEFINITIONS = (
 					"DEBUG=1",
 					"$(inherited)",
@@ -1104,7 +1173,7 @@
 				GCC_WARN_UNDECLARED_SELECTOR = YES;
 				GCC_WARN_UNINITIALIZED_AUTOS = YES_AGGRESSIVE;
 				GCC_WARN_UNUSED_FUNCTION = YES;
-				INFOPLIST_FILE = "WeAllPayTests/WeAllPayTests-Info.plist";
+				INFOPLIST_FILE = "We all pay Tests/We all pay Tests-Info.plist";
 				IPHONEOS_DEPLOYMENT_TARGET = 7.1;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				TEST_HOST = "$(BUNDLE_LOADER)";
@@ -1112,7 +1181,7 @@
 			};
 			name = Debug;
 		};
-		38D7860318DC53C30074B670 /* Release */ = {
+		385F530E191C2C360012773D /* Release */ = {
 			isa = XCBuildConfiguration;
 			buildSettings = {
 				BUNDLE_LOADER = "$(BUILT_PRODUCTS_DIR)/We all pay.app/We all pay";
@@ -1130,13 +1199,13 @@
 					"$(DEVELOPER_FRAMEWORKS_DIR)",
 				);
 				GCC_PRECOMPILE_PREFIX_HEADER = YES;
-				GCC_PREFIX_HEADER = "WeAllPayTests/WeAllPayTests-Prefix.pch";
+				GCC_PREFIX_HEADER = "We all pay Tests/We all pay Tests-Prefix.pch";
 				GCC_WARN_64_TO_32_BIT_CONVERSION = YES;
 				GCC_WARN_ABOUT_RETURN_TYPE = YES_ERROR;
 				GCC_WARN_UNDECLARED_SELECTOR = YES;
 				GCC_WARN_UNINITIALIZED_AUTOS = YES_AGGRESSIVE;
 				GCC_WARN_UNUSED_FUNCTION = YES;
-				INFOPLIST_FILE = "WeAllPayTests/WeAllPayTests-Info.plist";
+				INFOPLIST_FILE = "We all pay Tests/We all pay Tests-Info.plist";
 				IPHONEOS_DEPLOYMENT_TARGET = 7.1;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				TEST_HOST = "$(BUNDLE_LOADER)";
@@ -1165,11 +1234,11 @@
 			defaultConfigurationIsVisible = 0;
 			defaultConfigurationName = Release;
 		};
-		38D7860118DC53C30074B670 /* Build configuration list for PBXNativeTarget "WeAllPayTests" */ = {
+		385F530C191C2C360012773D /* Build configuration list for PBXNativeTarget "We all pay Tests" */ = {
 			isa = XCConfigurationList;
 			buildConfigurations = (
-				38D7860218DC53C30074B670 /* Debug */,
-				38D7860318DC53C30074B670 /* Release */,
+				385F530D191C2C360012773D /* Debug */,
+				385F530E191C2C360012773D /* Release */,
 			);
 			defaultConfigurationIsVisible = 0;
 			defaultConfigurationName = Release;
@@ -1180,9 +1249,10 @@
 		3829AD0D178B41320025969D /* WeAllPayStore.xcdatamodeld */ = {
 			isa = XCVersionGroup;
 			children = (
+				3899508E191A7282000B00BC /* WeAllPayStore 2.xcdatamodel */,
 				3829AD0E178B41320025969D /* WeAllPayStore.xcdatamodel */,
 			);
-			currentVersion = 3829AD0E178B41320025969D /* WeAllPayStore.xcdatamodel */;
+			currentVersion = 3899508E191A7282000B00BC /* WeAllPayStore 2.xcdatamodel */;
 			path = WeAllPayStore.xcdatamodeld;
 			sourceTree = "<group>";
 			versionGroupType = wrapper.xcdatamodel;

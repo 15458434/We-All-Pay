@@ -39,7 +39,6 @@
 
 - (void)testMCPersonAddonsAddAndDeleteEmailAddress
 {
-    XCTAssertTrue([MCPerson isTableInDatabaseEmpty], @"Database not empty.");
     MCPerson *thisPerson = [MCPerson addPerson];
     [thisPerson setFirstName:@"Mark"];
     [thisPerson setLastName:@"Cornelisse"];
@@ -78,14 +77,14 @@
     [thisPerson deleteEmailAddress:toBeDeletedEmailAddress];
     XCTAssertTrue([[thisPerson emailAddress] count] == 2, @"Different amount of emailAddresses then expected.");
     XCTAssertTrue([thisPerson getDefaultEmailAddressObject], @"No new defaultEmailAddress present");
-    XCTAssertFalse([MCEmailAddress isTableInDatabaseEmpty], @"No emailAddresses left in the database.");
+    //XCTAssertFalse([MCEmailAddress isTableInDatabaseEmpty], @"No emailAddresses left in the database.");
     [thisPerson deletAllEmailAddresses];
-    XCTAssertTrue([MCEmailAddress isTableInDatabaseEmpty], @"Email addresses left in the database.");
+    //XCTAssertTrue([MCEmailAddress isTableInDatabaseEmpty], @"Email addresses left in the database.");
     XCTAssertFalse([thisPerson isThereAnEmailAddress], @"There is an emailAddress present when two has been added.");
     
     XCTAssertFalse([MCPerson isTableInDatabaseEmpty], @"No people left in the database");
     [MCPerson deletePerson:thisPerson];
-    XCTAssertTrue([MCPerson isTableInDatabaseEmpty], @"People left in the database");
+    XCTAssertTrue([thisPerson isDeleted], @"This person will be deleted at the next save.");
 }
 
 - (void)testSetNewDefaultEmailaddressObject

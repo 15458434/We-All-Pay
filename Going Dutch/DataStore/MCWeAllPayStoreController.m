@@ -55,6 +55,11 @@
         weAllPayStoreDocument = [[UIManagedDocument alloc] initWithFileURL:weAllPayURL];
         [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(storeIsReady:) name:UIDocumentStateChangedNotification object:weAllPayStoreDocument];
         
+        // Auto migrate when possible.
+        NSDictionary *options = @{NSMigratePersistentStoresAutomaticallyOption:@YES,
+                                  NSInferMappingModelAutomaticallyOption:@YES};
+        [weAllPayStoreDocument setPersistentStoreOptions:options];
+        
         if (![[NSFileManager defaultManager] fileExistsAtPath:[[weAllPayStoreDocument fileURL] path]]) {
             [weAllPayStoreDocument saveToURL:[weAllPayStoreDocument fileURL] forSaveOperation:UIDocumentSaveForCreating completionHandler:^(BOOL success) {
                 if (success) {
@@ -143,11 +148,23 @@
     [[context undoManager] beginUndoGrouping];
 }
 
+- (void)beginUndoGroupWithoutRegistration
+{
+    NSManagedObjectContext *context = [weAllPayStoreDocument managedObjectContext];
+    [[context undoManager] beginUndoGrouping];
+}
+
 - (void)endUndoGroup
 {
     NSManagedObjectContext *context = [weAllPayStoreDocument managedObjectContext];
     [[context undoManager] endUndoGrouping];
     [[context undoManager] disableUndoRegistration];
+}
+
+- (void)endUndoGroupWithoutRegistration
+{
+    NSManagedObjectContext *context = [weAllPayStoreDocument managedObjectContext];
+    [[context undoManager] endUndoGrouping];
 }
 
 - (void)endUndoGroupAndProcess

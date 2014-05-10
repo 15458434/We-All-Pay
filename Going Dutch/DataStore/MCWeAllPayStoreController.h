@@ -29,7 +29,9 @@
 - (void)closeDocument;
 
 - (void)beginUndoGroup;
+- (void)beginUndoGroupWithoutRegistration;
 - (void)endUndoGroup;
+- (void)endUndoGroupWithoutRegistration;
 - (void)endUndoGroupAndProcess;
 - (void)endUndoGroupAndUndo;
 

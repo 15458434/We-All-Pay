@@ -21,6 +21,7 @@
 - (NSString *)stringOfApproxPeoplePresentWithFullNames;
 
 - (MCPayment *)addPayment;
+- (void)deletePayment:(MCPayment *)toBeDeletePayment;
 
 - (MCPerson *)addPerson;
 - (BOOL)isPresentWithFirstName:(NSString *)firstName andLastName:(NSString *)lastName andEmailAddress:(NSString *)emailAddress;
@@ -35,6 +36,7 @@
 - (NSNumber *)totalAmountOfCreditBy:(MCPerson *)person;
 - (NSNumber *)amountPeopleShouldHavePaid;
 - (NSString *)amountPeopleShouldHavePaidAsCurrencyString;
+- (NSNumber *)amountShouldHavePaidBy:(MCPerson *)person;
 - (BOOL)hasPersonPaidSomething:(MCPerson *)person;
 - (BOOL)doesEveryoneHaveAnEmailAddress;
 

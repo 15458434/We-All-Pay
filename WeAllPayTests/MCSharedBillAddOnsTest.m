@@ -42,7 +42,7 @@
 
 - (void)testMCSharedBillAddOns1
 {
-    XCTAssertTrue([MCSharedBill isTableInDatabaseEmpty], @"There is a sharedBill present in the empty table?");
+    // XCTAssertTrue([MCSharedBill isTableInDatabaseEmpty], @"There is a sharedBill present in the empty table?");
     MCSharedBill *movie = [MCSharedBill addSharedBill];
     [movie setTripName:@"Movie"];
     XCTAssertFalse([movie areTherePeople], @"There are people on a new event?");
@@ -102,7 +102,7 @@
     XCTAssertEqualWithAccuracy([@19.00 doubleValue], [[three money] doubleValue], 0.001, @"Amount of money not equal to what should be paid.");
     XCTAssertEqual(liekemovie, [two receiver], @"Receiver not equal to the person that should receive.");
     [MCSharedBill deleteSharedbill:movie];
-    XCTAssertTrue([MCSharedBill isTableInDatabaseEmpty], @"There are still MCShardBills present");
+    XCTAssertTrue([movie isDeleted], @"Movie is not deleted");
 }
 
 @end

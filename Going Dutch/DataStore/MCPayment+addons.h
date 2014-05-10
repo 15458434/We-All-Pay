@@ -8,6 +8,8 @@
 
 #import "MCPayment.h"
 
+@class MCPaymentPresence;
+
 @interface MCPayment (addons)
 
 + (MCPayment *)addPayment;
@@ -18,6 +20,11 @@
 
 - (BOOL)hasPayer;
 
+- (MCPaymentPresence *)fetchPaymentPresenceForPerson:(MCPerson *)person;
+- (void)thisPerson:(MCPerson *)person setIsPresent:(NSNumber *)isPresent;
+- (NSNumber *)peoplePresentOnThisPayment;
+- (NSNumber *)averageAmountPeopleShouldHavePaidOnThisPayment;
+- (void)recalculateAveragePeopleOweAndStore;
 - (NSString *)getMoneyValueAsAString;
 - (NSString *)getMoneyValueInCurrencyAsAString;
 - (void)putMoneyValueAsAString:(NSString *)moneyString;

@@ -9,6 +9,7 @@
 #import "MCPayment+addons.h"
 #import "MCPerson.h"
 #import "MCSharedBill.h"
+#import "MCPaymentPresence+addons.h"
 #import "MCWeAllPayStoreController.h"
 
 @implementation MCPayment (addons)
@@ -79,6 +80,65 @@
     }
 }
 
+- (MCPaymentPresence *)fetchPaymentPresenceForPerson:(MCPerson *)person
+{
+    NSFetchRequest *request = [NSFetchRequest fetchRequestWithEntityName:@"MCPaymentPresence"];
+    NSPredicate *predicate = [NSPredicate predicateWithFormat:@"payment = %@ AND person = %@", self, person];
+    [request setPredicate:predicate];
+    NSSortDescriptor *sd = [NSSortDescriptor sortDescriptorWithKey:@"averageOweFromPayment" ascending:YES];
+    [request setSortDescriptors:@[sd]];
+    
+    NSError *error;
+    NSArray *fetchResults = [[self managedObjectContext] executeFetchRequest:request error:&error];
+    if (error) {
+        NSLog(@"Something went wrong fetching MCPaymentPresence: %@", [error localizedDescription]);
+    }
+    return [fetchResults objectAtIndex:0];
+}
+
+- (void)thisPerson:(MCPerson *)person setIsPresent:(NSNumber *)isPresent
+{
+    MCPaymentPresence *thisPersonsPresence = [self fetchPaymentPresenceForPerson:person];
+    [[MCWeAllPayStoreController defaultStore] beginUndoGroupWithoutRegistration];
+    [thisPersonsPresence setIsPersonPresent:isPresent];
+    [self recalculateAveragePeopleOweAndStore];
+    [[MCWeAllPayStoreController defaultStore] endUndoGroupWithoutRegistration];
+}
+
+- (NSNumber *)peoplePresentOnThisPayment
+{
+    NSFetchRequest *request = [NSFetchRequest fetchRequestWithEntityName:@"MCPaymentPresence"];
+    NSPredicate *predicate = [NSPredicate predicateWithFormat:@"payment = %@ AND isPersonPresent = %@", self, @YES];
+    [request setPredicate:predicate];
+    NSSortDescriptor *sd = [NSSortDescriptor sortDescriptorWithKey:@"averageOweFromPayment" ascending:YES];
+    [request setSortDescriptors:@[sd]];
+    NSError *error;
+    NSUInteger *countInteger = [[self managedObjectContext] countForFetchRequest:request error:&error];
+    if (error) {
+        NSLog(@"Something went wrong counting people present: %@", [error localizedDescription]);
+    }
+    return [NSNumber numberWithUnsignedInteger:countInteger];
+}
+
+- (NSNumber *)averageAmountPeopleShouldHavePaidOnThisPayment
+{
+    double peoplePresentOnThisPayment = [[self peoplePresentOnThisPayment] doubleValue];
+    double result = [[self money] doubleValue] / peoplePresentOnThisPayment;
+    return [NSNumber numberWithDouble:result];
+}
+
+- (void)recalculateAveragePeopleOweAndStore
+{
+    NSNumber *averagePayedByPeoplePresent = [self averageAmountPeopleShouldHavePaidOnThisPayment];
+    for (MCPaymentPresence *pp in [self peopleSharingPayment]) {
+        if ([[pp isPersonPresent] boolValue]) {
+            [pp setAverageOweFromPayment:averagePayedByPeoplePresent];
+        } else {
+            [pp setAverageOweFromPayment:@0.00];
+        }
+    }
+}
+
 - (NSString *)getMoneyValueAsAString
 {
     NSNumberFormatter *nf = [[NSNumberFormatter alloc] init];
@@ -103,7 +163,10 @@
     [nf setLocale:[NSLocale currentLocale]];
     [nf setNumberStyle:NSNumberFormatterDecimalStyle];
     [nf setFormatterBehavior:NSNumberFormatterBehaviorDefault];
+    [[MCWeAllPayStoreController defaultStore] beginUndoGroupWithoutRegistration];
     [self setMoney:[nf numberFromString:moneyString]];
+    [self recalculateAveragePeopleOweAndStore];
+    [[MCWeAllPayStoreController defaultStore] endUndoGroupWithoutRegistration];
 }
 
 - (void)putMoneyValueInCurrencyAsAString:(NSString *)moneyString
@@ -111,9 +174,12 @@
     NSNumberFormatter *nf = [[NSNumberFormatter alloc] init];
     [nf setLocale:[NSLocale currentLocale]];
     [nf setNumberStyle:NSNumberFormatterCurrencyStyle];
-    [nf setFormatterBehavior:NSNumberFormatterCurrencyStyle];
+    [nf setFormatterBehavior:NSNumberFormatterBehaviorDefault];
+    
+    [[MCWeAllPayStoreController defaultStore] beginUndoGroupWithoutRegistration];
     [self setMoney:[nf numberFromString:moneyString]];
-
+    [self recalculateAveragePeopleOweAndStore];
+    [[MCWeAllPayStoreController defaultStore] endUndoGroupWithoutRegistration];
 }
 
 @end

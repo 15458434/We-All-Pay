@@ -9,6 +9,7 @@
 #import "MCSharedBill+addons.h"
 #import "MCPerson+addons.h"
 #import "MCPayment+addons.h"
+#import "MCPaymentPresence+addons.h"
 #import "MCWeAllPayStoreController.h"
 #import "MCReturnPayment.h"
 
@@ -33,7 +34,8 @@
 {
     NSManagedObjectContext *context = [[[MCWeAllPayStoreController defaultStore] weAllPayStoreDocument] managedObjectContext];
     for (MCPayment *p in [deleteBill payments]) {
-        [context deleteObject:p];
+        // [context deleteObject:p];
+        [deleteBill deletePayment:p];
     }
     [context deleteObject:deleteBill];
 }
@@ -143,7 +145,28 @@
 {
     MCPayment *payment = [MCPayment addPayment];
     [payment setOnWhichBill:self];
+    for (MCPerson *person in [self peoplePresent]) {
+        MCPaymentPresence *paymentPresence = [MCPaymentPresence addPaymentPresence];
+        [paymentPresence setPayment:payment];
+        [paymentPresence setPerson:person];
+        [paymentPresence setIsPersonPresent:@YES];
+    }
     return payment;
+}
+
+- (void)deletePayment:(MCPayment *)toBeDeletePayment
+{
+    // It is not allowed to delete a payment belonging to another sharedBill.
+    NSParameterAssert([toBeDeletePayment onWhichBill] == self);
+    
+    // First delete the people presence on payment data.
+    NSSet *ppSet = [toBeDeletePayment peopleSharingPayment];
+    for (MCPaymentPresence *pp in ppSet) {
+        [MCPaymentPresence deletePaymentPresence:pp];
+    }
+    
+    // Then delete the payment.
+    [MCPayment deletePayment:toBeDeletePayment];
 }
 
 - (MCPerson *)addPerson
@@ -284,6 +307,39 @@
     }
 }
 
+- (NSNumber *)amountShouldHavePaidBy:(MCPerson *)person
+{
+    NSLog(@"This is not implemented yet.")
+    /*
+    // Fetch the sum of all paymentPresences for person
+    NSFetchRequest *request = [NSFetchRequest fetchRequestWithEntityName:@"MCPaymentPresence"];
+    NSPredicate *predicate = [NSPredicate predicateWithFormat:@"isPersonPresent = %@ AND person = %@ AND payment.onWhichBill = %@",  @YES, person, self];
+    [request setPredicate:predicate];
+    NSSortDescriptor *sd = [NSSortDescriptor sortDescriptorWithKey:@"person" ascending:YES];
+    [request setSortDescriptors:@[sd]];
+    
+    [request setResultType:NSDictionaryResultType];
+    
+    NSExpression *sumExpression = [NSExpression expressionForFunction:@"sum:" arguments:@[ [NSExpression expressionForKeyPath:@"averageOweFromPayment"] ]];
+    
+    NSExpressionDescription *ed = [[NSExpressionDescription alloc] init];
+    [ed setName:@"bier"];
+    [ed setExpression:sumExpression];
+    
+    [request setPropertiesToFetch:@[@"person", ed] ];
+    [request setPropertiesToGroupBy:@[ @"person" ]];
+    
+    NSError *error;
+    NSArray *results = [[self managedObjectContext] executeFetchRequest:request error:&error];
+    if (error) {
+        NSLog(@"Something went wrong fetching sumOfAverageFromEachPayment: %@", error);
+    }
+    NSLog(@"fuckzoooi");
+     */
+    return nil;
+}
+
+
 - (NSString *)amountPeopleShouldHavePaidAsCurrencyString
 {
     NSNumber *averageSpentByPerson = [self amountPeopleShouldHavePaid];
@@ -294,7 +350,7 @@
     return [nf stringFromNumber:averageSpentByPerson];
 }
 
-- (NSArray *)solveWhoHasToPayWhoFromThisBill
+- (NSArray *)originalSolveWhoHasToPayWhoFromThisBill
 {
     // Create two array's one of peope who should pay and one with people that should receive.
     NSMutableArray *payers = [[NSMutableArray alloc] init];
@@ -325,7 +381,7 @@
             [receivers addObject:creditValueOfThisPerson];
         } else {
             // This person has already paid enough.
-            MCReturnPayment *notDepted = [[MCReturnPayment alloc] initWithPayer:p paysTo:nil amountOfMoney:@0.0];
+            MCReturnPayment *notDepted = [[MCReturnPayment alloc] initWithPayer:p paysTo:nil amountOfMoney:@0.00];
             [whoHasToPayWho addObject:notDepted];
         }
     }
@@ -359,6 +415,11 @@
     } else {
     }
     return whoHasToPayWho;
+}
+
+- (NSArray *)solveWhoHasToPayWhoFromThisBill
+{
+    return [self originalSolveWhoHasToPayWhoFromThisBill];
 }
 
 - (NSArray *)getArrayOfFullNamesOfPeoplePresent
