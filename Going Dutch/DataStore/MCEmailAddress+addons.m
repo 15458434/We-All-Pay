@@ -15,7 +15,7 @@
 + (MCEmailAddress *)addEmailAddressFor:(MCPerson *)person
 {
     MCEmailAddress *newEmailAddress;
-    NSManagedObjectContext *context = [[[MCWeAllPayStoreController defaultStore] weAllPayStoreDocument] managedObjectContext];
+    NSManagedObjectContext *context = [person managedObjectContext];
     newEmailAddress = [NSEntityDescription insertNewObjectForEntityForName:@"MCEmailAddress" inManagedObjectContext:context];
     [newEmailAddress setUniqueEmailId:[MCTools createUniqueIdentifierString]];
     [newEmailAddress setOwner:person];
@@ -24,7 +24,7 @@
 
 + (void)deleteEmailAddress:(MCEmailAddress *)eAddress
 {
-    NSManagedObjectContext *context = [[[MCWeAllPayStoreController defaultStore] weAllPayStoreDocument] managedObjectContext];
+    NSManagedObjectContext *context = [eAddress managedObjectContext];
     MCPerson *owner = [eAddress owner];
     [eAddress setOwner:nil];
     [context deleteObject:eAddress];
@@ -83,8 +83,8 @@
     
     NSError *error;
     NSArray *emailAddresses;
-    NSManagedObjectContext *context = [[[MCWeAllPayStoreController defaultStore] weAllPayStoreDocument] managedObjectContext];
-    emailAddresses = [context executeFetchRequest:request error:&error];
+//    NSManagedObjectContext *context = [[[MCWeAllPayStoreController defaultStore] weAllPayStoreDocument] managedObjectContext];
+    emailAddresses = [[person managedObjectContext] executeFetchRequest:request error:&error];
     if (!emailAddresses) {
         NSLog(@"There was error fetching email addresses for %@", [person getFullName]);
         return nil;

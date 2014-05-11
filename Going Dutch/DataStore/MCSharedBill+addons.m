@@ -20,6 +20,11 @@
 + (MCSharedBill *)addSharedBill
 {
     NSManagedObjectContext *context = [[[MCWeAllPayStoreController defaultStore] weAllPayStoreDocument] managedObjectContext];
+    return [MCSharedBill addSharedBillToContext:context];
+}
+
++ (MCSharedBill *)addSharedBillToContext:(NSManagedObjectContext *)context
+{
     MCSharedBill *sharedBill;
     sharedBill = [NSEntityDescription insertNewObjectForEntityForName:@"MCSharedBill" inManagedObjectContext:context];
     [sharedBill setUniqueBillId:[MCTools createUniqueIdentifierString]];
@@ -32,15 +37,13 @@
 
 + (void)deleteSharedbill:(MCSharedBill *)deleteBill
 {
-    NSManagedObjectContext *context = [[[MCWeAllPayStoreController defaultStore] weAllPayStoreDocument] managedObjectContext];
     for (MCPayment *p in [deleteBill payments]) {
-        // [context deleteObject:p];
         [deleteBill deletePayment:p];
     }
-    [context deleteObject:deleteBill];
+    [[deleteBill managedObjectContext] deleteObject:deleteBill];
 }
 
-+ (MCSharedBill *)fetchSharedBillWithUniqueId:(NSString *)uuid
++ (MCSharedBill *)fetchSharedBillWithUniqueId:(NSString *)uuid inContext:(NSManagedObjectContext *)context
 {
     // Create a fetch request for MCSharedBills.
     NSFetchRequest *request = [NSFetchRequest fetchRequestWithEntityName:@"MCSharedBill"];
@@ -50,7 +53,7 @@
     [request setPredicate:predicate];
     
     NSError *error;
-    NSArray *sharedBills = [[[[MCWeAllPayStoreController defaultStore] weAllPayStoreDocument] managedObjectContext] executeFetchRequest:request error:&error];
+    NSArray *sharedBills = [context executeFetchRequest:request error:&error];
     if (!sharedBills) {
         // There was an error.
         return nil;
@@ -61,11 +64,17 @@
 
 + (BOOL)isTableInDatabaseEmpty
 {
-    NSFetchRequest *request = [NSFetchRequest fetchRequestWithEntityName:@"MCSharedBill"];
-    NSSortDescriptor *sd = [NSSortDescriptor sortDescriptorWithKey:@"dateCreated" ascending:YES];
-    NSArray *sda = @[sd];
-    [request setSortDescriptors:sda];
     NSManagedObjectContext *context = [[[MCWeAllPayStoreController defaultStore] weAllPayStoreDocument] managedObjectContext];
+    return [self isTableInDatabaseEmptyForContext:context];
+}
+
++ (BOOL)isTableInDatabaseEmptyForContext:(NSManagedObjectContext *)context
+{
+    NSFetchRequest *request = [NSFetchRequest fetchRequestWithEntityName:@"MCSharedBill"];
+    NSSortDescriptor *sortDescriptor = [NSSortDescriptor sortDescriptorWithKey:@"dateCreated" ascending:YES];
+    NSArray *sortDescriptorArray = @[sortDescriptor];
+    [request setSortDescriptors:sortDescriptorArray];
+
     NSError *error;
     NSArray *people = [context executeFetchRequest:request error:&error];
     if (people) {
@@ -166,7 +175,8 @@
     }
     
     // Then delete the payment.
-    [MCPayment deletePayment:toBeDeletePayment];
+    [[self managedObjectContext] deleteObject:toBeDeletePayment];
+    
 }
 
 - (MCPerson *)addPerson
@@ -219,7 +229,7 @@
     request.predicate = [NSPredicate predicateWithFormat:@"some payments.onWhichBill == %@", self];
     NSSortDescriptor *sd = [NSSortDescriptor sortDescriptorWithKey:@"uniquePersonId" ascending:YES];
     [request setSortDescriptors:@[sd]];
-    NSManagedObjectContext *context = [[[MCWeAllPayStoreController defaultStore] weAllPayStoreDocument] managedObjectContext];
+    NSManagedObjectContext *context = [self managedObjectContext];
     NSError *error = nil;
     NSArray *listOfPeopleWhoHavePaid = [context executeFetchRequest:request error:&error];
     if (!listOfPeopleWhoHavePaid) {
@@ -255,7 +265,7 @@
     [request setRelationshipKeyPathsForPrefetching:@[ @"payingPerson" ]];
     [request setPredicate:[NSPredicate predicateWithFormat:@"onWhichBill = %@ AND payingPerson = %@", self, person]];
     [request setSortDescriptors:@[[NSSortDescriptor sortDescriptorWithKey:@"dateCreated" ascending:YES]]];
-    NSManagedObjectContext *context = [[[MCWeAllPayStoreController defaultStore] weAllPayStoreDocument] managedObjectContext];
+    NSManagedObjectContext *context = [self managedObjectContext];
     NSError *error = nil;
     NSArray *paymentsOfPerson = [context executeFetchRequest:request error:&error];
     if (!paymentsOfPerson) {
@@ -309,33 +319,31 @@
 
 - (NSNumber *)amountShouldHavePaidBy:(MCPerson *)person
 {
-    NSLog(@"This is not implemented yet.")
-    /*
-    // Fetch the sum of all paymentPresences for person
-    NSFetchRequest *request = [NSFetchRequest fetchRequestWithEntityName:@"MCPaymentPresence"];
-    NSPredicate *predicate = [NSPredicate predicateWithFormat:@"isPersonPresent = %@ AND person = %@ AND payment.onWhichBill = %@",  @YES, person, self];
-    [request setPredicate:predicate];
-    NSSortDescriptor *sd = [NSSortDescriptor sortDescriptorWithKey:@"person" ascending:YES];
-    [request setSortDescriptors:@[sd]];
-    
-    [request setResultType:NSDictionaryResultType];
-    
-    NSExpression *sumExpression = [NSExpression expressionForFunction:@"sum:" arguments:@[ [NSExpression expressionForKeyPath:@"averageOweFromPayment"] ]];
-    
-    NSExpressionDescription *ed = [[NSExpressionDescription alloc] init];
-    [ed setName:@"bier"];
-    [ed setExpression:sumExpression];
-    
-    [request setPropertiesToFetch:@[@"person", ed] ];
-    [request setPropertiesToGroupBy:@[ @"person" ]];
-    
-    NSError *error;
-    NSArray *results = [[self managedObjectContext] executeFetchRequest:request error:&error];
-    if (error) {
-        NSLog(@"Something went wrong fetching sumOfAverageFromEachPayment: %@", error);
-    }
-    NSLog(@"fuckzoooi");
-     */
+    NSLog(@"This is not implemented yet.");
+//    // Fetch the sum of all paymentPresences for person
+//    NSFetchRequest *request = [NSFetchRequest fetchRequestWithEntityName:@"MCPaymentPresence"];
+//    NSPredicate *predicate = [NSPredicate predicateWithFormat:@"isPersonPresent = %@ AND person = %@ AND payment.onWhichBill = %@",  @YES, person, self];
+//    [request setPredicate:predicate];
+//    NSSortDescriptor *sd = [NSSortDescriptor sortDescriptorWithKey:@"person" ascending:YES];
+//    [request setSortDescriptors:@[sd]];
+//    
+//    [request setResultType:NSDictionaryResultType];
+//    
+//    NSExpression *sumExpression = [NSExpression expressionForFunction:@"sum:" arguments:@[ [NSExpression expressionForKeyPath:@"averageOweFromPayment"] ]];
+//    
+//    NSExpressionDescription *ed = [[NSExpressionDescription alloc] init];
+//    [ed setName:@"bier"];
+//    [ed setExpression:sumExpression];
+//    
+//    [request setPropertiesToFetch:@[@"person", ed] ];
+//    [request setPropertiesToGroupBy:@[ @"person" ]];
+//    
+//    NSError *error;
+//    NSArray *results = [[self managedObjectContext] executeFetchRequest:request error:&error];
+//    if (error) {
+//        NSLog(@"Something went wrong fetching sumOfAverageFromEachPayment: %@", error);
+//    }
+//    NSLog(@"fuckzoooi");
     return nil;
 }
 

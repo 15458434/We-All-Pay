@@ -15,6 +15,11 @@
 + (MCPaymentPresence *)addPaymentPresence
 {
     NSManagedObjectContext *context = [[[MCWeAllPayStoreController defaultStore] weAllPayStoreDocument] managedObjectContext];
+    return [MCPaymentPresence addPaymentPresenceInContext:context];
+}
+
++ (MCPaymentPresence *)addPaymentPresenceInContext:(NSManagedObjectContext *)context
+{
     MCPaymentPresence *newPaymentPresence;
     newPaymentPresence = [NSEntityDescription insertNewObjectForEntityForName:@"MCPaymentPresence" inManagedObjectContext:context];
     [newPaymentPresence setUniqueId:[[NSUUID UUID] UUIDString]];
@@ -23,8 +28,7 @@
 
 + (void)deletePaymentPresence:(MCPaymentPresence *)paymentPresence
 {
-    NSManagedObjectContext *context = [[[MCWeAllPayStoreController defaultStore] weAllPayStoreDocument] managedObjectContext];
-    [context deleteObject:paymentPresence];
+    [[paymentPresence managedObjectContext] deleteObject:paymentPresence];
 }
 
 @end

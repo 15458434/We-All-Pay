@@ -13,10 +13,14 @@
 @interface MCPayment (addons)
 
 + (MCPayment *)addPayment;
++ (MCPayment *)addPaymentInContext:(NSManagedObjectContext *)context;
+
 + (void)deletePayment:(MCPayment *)payment;
 
 + (MCPayment *)fetchPaymentWithUniqueId:(NSString *)uuid;
++ (MCPayment *)fetchPaymentWithUniqueId:(NSString *)uuid fromContext:(NSManagedObjectContext *)context;
 + (BOOL)isTableInDatabaseEmpty;
++ (BOOL)isTableInDatabaseEmptyForContext:(NSManagedObjectContext *)context;
 
 - (BOOL)hasPayer;
 

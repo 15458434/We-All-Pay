@@ -12,10 +12,14 @@
 @interface MCSharedBill (addons)
 
 + (MCSharedBill *)addSharedBill;
-+ (void)deleteSharedbill:(MCSharedBill *)deleteBill;
++ (MCSharedBill *)addSharedBillToContext:(NSManagedObjectContext *)context;
 
-+ (MCSharedBill *)fetchSharedBillWithUniqueId:(NSString *)uuid;
++ (void)deleteSharedbill:(MCSharedBill *)deleteBill;
++ (void)deleteSharedBill:(MCSharedBill *)deleteBill inContext:(NSManagedObjectContext *)context;
+
++ (MCSharedBill *)fetchSharedBillWithUniqueId:(NSString *)uuid inContext:(NSManagedObjectContext *)context;
 + (BOOL)isTableInDatabaseEmpty;
++ (BOOL)isTableInDatabaseEmptyForContext:(NSManagedObjectContext *)context;
 
 - (NSString *)stringOfApproxPeoplePresent;
 - (NSString *)stringOfApproxPeoplePresentWithFullNames;

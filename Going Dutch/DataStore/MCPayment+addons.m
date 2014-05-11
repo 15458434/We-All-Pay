@@ -17,7 +17,12 @@
 + (MCPayment *)addPayment
 {
     NSManagedObjectContext *context = [[[MCWeAllPayStoreController defaultStore] weAllPayStoreDocument] managedObjectContext];
-     MCPayment *newPayment;
+    return [MCPayment addPaymentInContext:context];
+}
+
++ (MCPayment *)addPaymentInContext:(NSManagedObjectContext *)context
+{
+    MCPayment *newPayment;
     newPayment = [NSEntityDescription insertNewObjectForEntityForName:@"MCPayment" inManagedObjectContext:context];
     [newPayment setUniquePaymentId:[MCTools createUniqueIdentifierString]];
     [newPayment setDateCreated:[NSDate date]];
@@ -28,11 +33,16 @@
 + (void)deletePayment:(MCPayment *)payment
 {
     // Wat te doen met mogelijke sharedBills en personen die aanwezig zijn?
-    NSManagedObjectContext *context = [[[MCWeAllPayStoreController defaultStore] weAllPayStoreDocument] managedObjectContext];
-    [context deleteObject:payment];
+    [[payment managedObjectContext] deleteObject:payment];
 }
 
 + (MCPayment *)fetchPaymentWithUniqueId:(NSString *)uuid
+{
+    NSManagedObjectContext *context = [[[MCWeAllPayStoreController defaultStore] weAllPayStoreDocument] managedObjectContext];
+    return [MCPayment fetchPaymentWithUniqueId:uuid fromContext:context];
+}
+
++ (MCPayment *)fetchPaymentWithUniqueId:(NSString *)uuid fromContext:(NSManagedObjectContext *)context
 {
     // Create a fetch request for MCSharedBills.
     NSFetchRequest *request = [NSFetchRequest fetchRequestWithEntityName:@"MCPayment"];
@@ -42,7 +52,7 @@
     [request setPredicate:predicate];
     
     NSError *error;
-    NSArray *payments = [[[[MCWeAllPayStoreController defaultStore] weAllPayStoreDocument] managedObjectContext] executeFetchRequest:request error:&error];
+    NSArray *payments = [context executeFetchRequest:request error:&error];
     if (!payments) {
         // There was an error.
         return nil;
@@ -53,12 +63,18 @@
 
 + (BOOL)isTableInDatabaseEmpty
 {
+    NSManagedObjectContext *context = [[[MCWeAllPayStoreController defaultStore] weAllPayStoreDocument] managedObjectContext];
+    return [self isTableInDatabaseEmptyForContext:context];
+}
+
++ (BOOL)isTableInDatabaseEmptyForContext:(NSManagedObjectContext *)context
+{
     NSFetchRequest *request = [NSFetchRequest fetchRequestWithEntityName:@"MCPayment"];
     NSSortDescriptor *sd = [NSSortDescriptor sortDescriptorWithKey:@"money" ascending:YES];
     NSArray *sda = @[sd];
     [request setSortDescriptors:sda];
     NSError *error;
-    NSManagedObjectContext *context = [[[MCWeAllPayStoreController defaultStore] weAllPayStoreDocument] managedObjectContext];
+    
     NSArray *allPayments = [context executeFetchRequest:request error:&error];
     if (allPayments) {
         if ([allPayments count] == 0) {

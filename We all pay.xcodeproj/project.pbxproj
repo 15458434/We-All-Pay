@@ -266,10 +266,7 @@
 		38CC8C4918ED61FD006D99E7 /* MCPersonTableViewController_iPad.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = MCPersonTableViewController_iPad.m; path = ViewControllers/iPad/MCPersonTableViewController_iPad.m; sourceTree = "<group>"; };
 		38CDE8FE17135B6300387CAA /* MCTools.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = MCTools.h; sourceTree = "<group>"; };
 		38CDE8FF17135B6300387CAA /* MCTools.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = MCTools.m; sourceTree = "<group>"; };
-		38D785F818DC53C30074B670 /* WeAllPayTests-Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = "WeAllPayTests-Info.plist"; sourceTree = "<group>"; };
-		38D785FA18DC53C30074B670 /* en */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = en; path = en.lproj/InfoPlist.strings; sourceTree = "<group>"; };
 		38D785FC18DC53C30074B670 /* WeAllPayStoreTests.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; name = WeAllPayStoreTests.m; path = ../WeAllPayTests/WeAllPayStoreTests.m; sourceTree = "<group>"; };
-		38D785FE18DC53C30074B670 /* WeAllPayTests-Prefix.pch */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = "WeAllPayTests-Prefix.pch"; sourceTree = "<group>"; };
 		38DB85D217E45BCA006237CF /* MCPayment+addons.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = "MCPayment+addons.h"; path = "DataStore/MCPayment+addons.h"; sourceTree = "<group>"; };
 		38DB85D317E45BCA006237CF /* MCPayment+addons.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = "MCPayment+addons.m"; path = "DataStore/MCPayment+addons.m"; sourceTree = "<group>"; };
 		38DB85D517E45CA4006237CF /* MCSharedBill+addons.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = "MCSharedBill+addons.h"; path = "DataStore/MCSharedBill+addons.h"; sourceTree = "<group>"; };
@@ -398,7 +395,6 @@
 			isa = PBXGroup;
 			children = (
 				38572ADC169D437B00969C62 /* We all pay */,
-				38D785F618DC53C30074B670 /* WeAllPayTests */,
 				385F5301191C2C360012773D /* We all pay Tests */,
 				38572AD5169D437B00969C62 /* Frameworks */,
 				38572AD3169D437B00969C62 /* Products */,
@@ -609,24 +605,6 @@
 				38DC8B411909508800762235 /* MCColors.m */,
 			);
 			name = "MC SDK";
-			sourceTree = "<group>";
-		};
-		38D785F618DC53C30074B670 /* WeAllPayTests */ = {
-			isa = PBXGroup;
-			children = (
-				38D785F718DC53C30074B670 /* Supporting Files */,
-			);
-			path = WeAllPayTests;
-			sourceTree = "<group>";
-		};
-		38D785F718DC53C30074B670 /* Supporting Files */ = {
-			isa = PBXGroup;
-			children = (
-				38D785F818DC53C30074B670 /* WeAllPayTests-Info.plist */,
-				38D785F918DC53C30074B670 /* InfoPlist.strings */,
-				38D785FE18DC53C30074B670 /* WeAllPayTests-Prefix.pch */,
-			);
-			name = "Supporting Files";
 			sourceTree = "<group>";
 		};
 		38DC8B2C19081E6400762235 /* Google Analytics */ = {
@@ -993,14 +971,6 @@
 			name = Localizable.strings;
 			sourceTree = "<group>";
 		};
-		38D785F918DC53C30074B670 /* InfoPlist.strings */ = {
-			isa = PBXVariantGroup;
-			children = (
-				38D785FA18DC53C30074B670 /* en */,
-			);
-			name = InfoPlist.strings;
-			sourceTree = "<group>";
-		};
 		38DC8B4519097FEA00762235 /* Main-iPad.storyboard */ = {
 			isa = PBXVariantGroup;
 			children = (
@@ -1083,22 +1053,7 @@
 				IPHONEOS_DEPLOYMENT_TARGET = 7.0;
 				LIBRARY_SEARCH_PATHS = (
 					"$(inherited)",
-					"$(PROJECT_DIR)/Going",
-					Dutch/TestFlight,
-					SDK,
-					"$(PROJECT_DIR)",
-					"$(PROJECT_DIR)/Going",
-					Dutch/TestFlight,
-					SDK,
-					"$(PROJECT_DIR)/Going",
-					Dutch/TestFlight,
-					SDK,
-					"$(PROJECT_DIR)/Going",
-					Dutch/TestFlight,
-					SDK,
-					"$(PROJECT_DIR)/Going",
-					Dutch/TestFlight,
-					SDK,
+					"$(PROJECT_DIR)/**",
 				);
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				PROVISIONING_PROFILE = "7CC91C5F-447E-472B-8417-58702E550D04";
@@ -1121,22 +1076,7 @@
 				IPHONEOS_DEPLOYMENT_TARGET = 7.0;
 				LIBRARY_SEARCH_PATHS = (
 					"$(inherited)",
-					"$(PROJECT_DIR)/Going",
-					Dutch/TestFlight,
-					SDK,
-					"$(PROJECT_DIR)",
-					"$(PROJECT_DIR)/Going",
-					Dutch/TestFlight,
-					SDK,
-					"$(PROJECT_DIR)/Going",
-					Dutch/TestFlight,
-					SDK,
-					"$(PROJECT_DIR)/Going",
-					Dutch/TestFlight,
-					SDK,
-					"$(PROJECT_DIR)/Going",
-					Dutch/TestFlight,
-					SDK,
+					"$(PROJECT_DIR)/**",
 				);
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				PROVISIONING_PROFILE = "7CC91C5F-447E-472B-8417-58702E550D04";

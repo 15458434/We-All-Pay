@@ -18,14 +18,8 @@
 
 + (MCPerson *)addPerson
 {
-    MCPerson *newPerson;
     NSManagedObjectContext *context = [[[MCWeAllPayStoreController defaultStore] weAllPayStoreDocument] managedObjectContext];
-    newPerson = [NSEntityDescription insertNewObjectForEntityForName:@"MCPerson" inManagedObjectContext:context];
-    [newPerson setUniquePersonId:[MCTools createUniqueIdentifierString]];
-    NSDate *nu = [NSDate date];
-    [newPerson setDateCreated:nu];
-    [newPerson setDateModified:nu];
-    return newPerson;
+    return [MCPerson addPersonInContext:context];
 }
 
 + (MCPerson *)addPersonInContext:(NSManagedObjectContext *)context
@@ -41,22 +35,30 @@
 
 + (void)deletePerson:(MCPerson *)delPerson
 {
-    NSManagedObjectContext *context = [[[MCWeAllPayStoreController defaultStore] weAllPayStoreDocument] managedObjectContext];
-    [context deleteObject:delPerson];
+//    NSManagedObjectContext *context = [[[MCWeAllPayStoreController defaultStore] weAllPayStoreDocument] managedObjectContext];
+//    [context deleteObject:delPerson];
+    [[delPerson managedObjectContext] deleteObject:delPerson];
 }
 
 + (MCPerson *)fetchPersonWithUniqueId:(NSString *)uuid
 {
+    NSLog(@"Has not been implemented yet.");
     return nil;
 }
 
 + (BOOL)isTableInDatabaseEmpty
 {
-    NSFetchRequest *request = [NSFetchRequest fetchRequestWithEntityName:@"MCPerson"];
-    NSSortDescriptor *sd = [NSSortDescriptor sortDescriptorWithKey:@"firstName" ascending:YES];
-    NSArray *sda = @[sd];
-    [request setSortDescriptors:sda];
     NSManagedObjectContext *context = [[[MCWeAllPayStoreController defaultStore] weAllPayStoreDocument] managedObjectContext];
+    [MCPerson isTableInDatabaseEmptyForContext:context];
+}
+
++ (BOOL)isTableInDatabaseEmptyForContext:(NSManagedObjectContext *)context
+{
+    NSFetchRequest *request = [NSFetchRequest fetchRequestWithEntityName:@"MCPerson"];
+    NSSortDescriptor *sortDiscriptor = [NSSortDescriptor sortDescriptorWithKey:@"firstName" ascending:YES];
+    NSArray *sortDescriptorArray = @[sortDiscriptor];
+    [request setSortDescriptors:sortDescriptorArray];
+
     NSError *error;
     NSArray *people = [context executeFetchRequest:request error:&error];
     if (people) {
@@ -166,9 +168,9 @@
     [request setSortDescriptors:sda];
     NSPredicate *predicate = [NSPredicate predicateWithFormat:@"emailAddress = %@ AND owner = %@", emailAddressAsString, self];
     [request setPredicate:predicate];
-    NSManagedObjectContext *context = [[[MCWeAllPayStoreController defaultStore] weAllPayStoreDocument] managedObjectContext];
+
     NSError *error;
-    NSArray *equalEmailAddresses = [context executeFetchRequest:request error:&error];
+    NSArray *equalEmailAddresses = [[self managedObjectContext] executeFetchRequest:request error:&error];
     if (error) {
         NSLog(@"something went wrong in the search for equal email addresses");
     }
@@ -209,8 +211,8 @@
     [request setPredicate:predicate];
     [request setSortDescriptors:@[sortDescriptor]];
     NSError *error;
-    NSManagedObjectContext *context = [[[MCWeAllPayStoreController defaultStore] weAllPayStoreDocument] managedObjectContext];
-    NSArray *emailAddresses = [context executeFetchRequest:request error:&error];
+    
+    NSArray *emailAddresses = [[self managedObjectContext] executeFetchRequest:request error:&error];
     if (!emailAddresses) {
         NSLog(@"Something went wrong on fetching emailAddresses: %@", [error localizedDescription]);
     } else if ([emailAddresses count] != 1) {
