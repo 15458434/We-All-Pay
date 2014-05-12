@@ -181,7 +181,7 @@
 
 - (void)updatePaymentForSupportWithPaymentPresence
 {
-    NSManagedObjectContext *context = [self managedObjectContext];
+    // Always executed to maintain unit test compatibility.
     for (MCPayment *payment in [self payments]) {
         [payment recalculateAveragePeopleOweAndStore];
     }
