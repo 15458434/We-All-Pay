@@ -9,10 +9,13 @@
 #import "MCPaymentTableViewController_iPad.h"
 #import "MCSelectPayerTableViewController_iPad.h"
 
+#import "MCPaymentPresenceTableViewCell.h"
+
 #import "MCWeAllPayStoreController.h"
 #import "MCSharedBill+addons.h"
 #import "MCPayment+addons.h"
 #import "MCPerson+addons.h"
+#import "MCpaymentPresence+addons.h"
 
 @interface MCPaymentTableViewController_iPad ()
 
@@ -59,6 +62,26 @@
 
 
 #pragma mark - New in this class
+
+//- (void)performFetchAndReloadTableView:(NSNotification *)notification
+//{
+//    UIManagedDocument *weAllPayDocument = [[MCWeAllPayStoreController defaultStore] weAllPayStoreDocument];
+//    if ([weAllPayDocument documentState] == UIDocumentStateNormal) {
+//        [self performFetch];
+//        [[self tableView] reloadData];
+//        [[NSNotificationCenter defaultCenter] removeObserver:self];
+//    }
+//}
+//
+//- (void)performFetch
+//{
+//    NSError *error;
+//    BOOL success = [_dataController performFetch:&error];
+//    if (!success) {
+//        NSLog(@"Something went wrong");
+//    }
+//}
+
 
 - (void)reloadPayerLabel
 {
@@ -139,6 +162,17 @@
         }
         _isNew = isNotNew;
     }
+    
+    NSSortDescriptor *sortDescriptor = [NSSortDescriptor sortDescriptorWithKey:@"person.firstName" ascending:YES];
+    _paymentPresenceArray = [[_thisPayment peopleSharingPayment] sortedArrayUsingDescriptors:@[sortDescriptor]];
+    
+//    _dataController = [[MCWeAllPayStoreController defaultStore] paymentPresenceDataControllerForDelegate:self];
+//    UIManagedDocument *weAllPayDocument = [[MCWeAllPayStoreController defaultStore] weAllPayStoreDocument];
+//    if (![[MCWeAllPayStoreController defaultStore] isDocumentStateNormal]) {
+//        [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(performFetchAndReloadTableView:) name:UIDocumentStateChangedNotification object:weAllPayDocument];
+//    } else {
+//        [self performFetch];
+//    }
 }
 
 - (void)viewDidAppear:(BOOL)animated
@@ -152,6 +186,13 @@
         [tracker set:kGAIScreenName value:@"MCPaymentDetailsView_iPad"];
     }
     [tracker send:[[GAIDictionaryBuilder createAppView] build]];
+}
+
+- (void)viewDidDisappear:(BOOL)animated
+{
+    [[NSNotificationCenter defaultCenter] removeObserver:self];
+    
+    [super viewDidDisappear:animated];
 }
 
 - (void)didReceiveMemoryWarning
@@ -227,34 +268,42 @@
     }
 }
 
+
 #pragma mark - Table view delegate
+
+- (CGFloat)tableView:(UITableView *)tableView heightForRowAtIndexPath:(NSIndexPath *)indexPath
+{
+    return 71;
+}
 
 #pragma mark - Table view data source
 
 - (NSInteger)numberOfSectionsInTableView:(UITableView *)tableView
 {
-#warning Potentially incomplete method implementation.
     // Return the number of sections.
-    return 0;
+    return 1;
 }
 
 - (NSInteger)tableView:(UITableView *)tableView numberOfRowsInSection:(NSInteger)section
 {
-#warning Incomplete method implementation.
     // Return the number of rows in the section.
-    return 0;
+    return [_paymentPresenceArray count];
 }
 
-/*
 - (UITableViewCell *)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath
 {
-    UITableViewCell *cell = [tableView dequeueReusableCellWithIdentifier:<#@"reuseIdentifier"#> forIndexPath:indexPath];
+    MCPaymentPresenceTableViewCell *cell = [tableView dequeueReusableCellWithIdentifier:@"paymentPresenceTableViewCell" forIndexPath:indexPath];
     
-    // Configure the cell...
+    MCPaymentPresence *paymentPresenceForThisCell = [_paymentPresenceArray objectAtIndex:[indexPath row]];
+    [[cell nameLabel] setText:[[paymentPresenceForThisCell person] getFullName]];
+    [cell setCircularImage:[[paymentPresenceForThisCell person] thumbnail]];
+    [[cell theSwitch] setOn:[[paymentPresenceForThisCell isPersonPresent] boolValue] animated:YES];
+    [cell setThisCellsPaymentPresence:paymentPresenceForThisCell];
+    
+    
     
     return cell;
 }
-*/
 
 /*
 // Override to support conditional editing of the table view.

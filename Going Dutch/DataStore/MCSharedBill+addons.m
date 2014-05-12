@@ -153,13 +153,13 @@
 - (MCPayment *)addPayment
 {
     MCPayment *payment = [MCPayment addPaymentInContext:[self managedObjectContext]];
-    [payment setOnWhichBill:self];
     for (MCPerson *person in [self peoplePresent]) {
         MCPaymentPresence *paymentPresence = [MCPaymentPresence addPaymentPresenceInContext:[self managedObjectContext]];
         [paymentPresence setPayment:payment];
         [paymentPresence setPerson:person];
         [paymentPresence setIsPersonPresent:@YES];
     }
+    [payment setOnWhichBill:self];
     return payment;
 }
 

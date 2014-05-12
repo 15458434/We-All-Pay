@@ -656,10 +656,11 @@
         <scene sceneID="8de-96-T7W">
             <objects>
                 <tableViewController storyboardIdentifier="MCPaymentTableViewController_iPad" useStoryboardIdentifierAsRestorationIdentifier="YES" id="3NB-dQ-HNX" customClass="MCPaymentTableViewController_iPad" sceneMemberID="viewController">
-                    <tableView key="view" clipsSubviews="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" scrollEnabled="NO" dataMode="prototypes" style="plain" separatorStyle="none" rowHeight="71" sectionHeaderHeight="22" sectionFooterHeight="22" id="FMb-15-8zu">
+                    <tableView key="view" clipsSubviews="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" dataMode="prototypes" style="grouped" separatorStyle="none" rowHeight="44" sectionHeaderHeight="10" sectionFooterHeight="10" id="FMb-15-8zu">
                         <rect key="frame" x="0.0" y="44" width="540" height="576"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
-                        <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                        <color key="backgroundColor" cocoaTouchSystemColor="groupTableViewBackgroundColor"/>
+                        <inset key="separatorInset" minX="15" minY="0.0" maxX="0.0" maxY="0.0"/>
                         <view key="tableHeaderView" contentMode="scaleToFill" id="zfO-fv-PpY" customClass="UITableViewHeaderFooterView">
                             <rect key="frame" x="0.0" y="0.0" width="540" height="238"/>
                             <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
@@ -740,8 +741,8 @@
                             </constraints>
                         </view>
                         <prototypes>
-                            <tableViewCell contentMode="scaleToFill" selectionStyle="blue" hidesAccessoryWhenEditing="NO" indentationLevel="1" indentationWidth="0.0" rowHeight="71" id="SXa-Nq-OdV">
-                                <rect key="frame" x="0.0" y="260" width="540" height="71"/>
+                            <tableViewCell contentMode="scaleToFill" restorationIdentifier="paymentPresenceTableViewCell" selectionStyle="blue" hidesAccessoryWhenEditing="NO" indentationLevel="1" indentationWidth="0.0" reuseIdentifier="paymentPresenceTableViewCell" rowHeight="71" id="SXa-Nq-OdV" customClass="MCPaymentPresenceTableViewCell">
+                                <rect key="frame" x="0.0" y="293" width="540" height="71"/>
                                 <autoresizingMask key="autoresizingMask"/>
                                 <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" tableViewCell="SXa-Nq-OdV" id="qHN-Ki-paQ">
                                     <rect key="frame" x="0.0" y="0.0" width="540" height="71"/>
@@ -754,6 +755,9 @@
                                                 <constraint firstAttribute="height" constant="31" id="84g-uF-Z1W"/>
                                                 <constraint firstAttribute="width" constant="49" id="oUY-G4-87Z"/>
                                             </constraints>
+                                            <connections>
+                                                <action selector="switchPresence:" destination="SXa-Nq-OdV" eventType="valueChanged" id="Xil-JC-2hr"/>
+                                            </connections>
                                         </switch>
                                         <label opaque="NO" clipsSubviews="YES" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" misplaced="YES" text="full name" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="vSV-5M-Ipk">
                                             <rect key="frame" x="78" y="25" width="385" height="21"/>
@@ -777,11 +781,16 @@
                                         <constraint firstAttribute="bottom" secondItem="9MV-Ie-wK3" secondAttribute="bottom" constant="10" id="RHo-lZ-QTj"/>
                                         <constraint firstAttribute="bottom" secondItem="eAH-Vw-oDl" secondAttribute="bottom" constant="20" symbolic="YES" id="Xih-Sb-uhy"/>
                                         <constraint firstItem="eAH-Vw-oDl" firstAttribute="leading" secondItem="vSV-5M-Ipk" secondAttribute="trailing" constant="8" id="b8Q-qg-DrV"/>
-                                        <constraint firstItem="9MV-Ie-wK3" firstAttribute="leading" secondItem="qHN-Ki-paQ" secondAttribute="leading" constant="20" symbolic="YES" id="eUw-fg-Xdd"/>
+                                        <constraint firstItem="9MV-Ie-wK3" firstAttribute="leading" secondItem="qHN-Ki-paQ" secondAttribute="leading" priority="250" constant="20" symbolic="YES" id="eUw-fg-Xdd"/>
                                         <constraint firstAttribute="trailing" secondItem="eAH-Vw-oDl" secondAttribute="trailing" constant="20" symbolic="YES" id="iq1-Zw-uyE"/>
                                         <constraint firstItem="eAH-Vw-oDl" firstAttribute="top" secondItem="qHN-Ki-paQ" secondAttribute="top" constant="20" symbolic="YES" id="xDE-QM-7L3"/>
                                     </constraints>
                                 </tableViewCellContentView>
+                                <connections>
+                                    <outlet property="nameLabel" destination="vSV-5M-Ipk" id="8S1-zg-Q5a"/>
+                                    <outlet property="personView" destination="9MV-Ie-wK3" id="BGJ-2M-N0a"/>
+                                    <outlet property="theSwitch" destination="eAH-Vw-oDl" id="lVi-BR-WNX"/>
+                                </connections>
                             </tableViewCell>
                         </prototypes>
                         <connections>

@@ -40,6 +40,8 @@ typedef NS_ENUM(BOOL, MCCancelButtonPressed) {
     MCDidSomethingChange _didSomethingChange;
     MCIsNew _isNew;
     MCCancelButtonPressed _mainCancelPressed;
+    
+    NSArray *_paymentPresenceArray;
 }
 
 @property (weak, nonatomic) IBOutlet UIImageView *payerPicture;

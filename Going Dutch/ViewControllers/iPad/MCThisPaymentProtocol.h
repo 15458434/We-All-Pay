@@ -12,6 +12,7 @@
 
 @protocol MCThisPaymentProtocol <NSObject>
 
+- (MCPayment *)thisPayment;
 - (void)setThisPayment:(MCPayment *)payment;
 
 @end

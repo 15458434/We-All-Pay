@@ -39,6 +39,7 @@
 - (NSFetchedResultsController *)allTripsDataControllerForDelegate:(id)delegate;
 - (NSFetchedResultsController *)sharedBillPaymentsDataControllerForDelegate:(id)delegate;
 - (NSFetchedResultsController *)sharedBillPeoplePresentDataControllerForDelegate:(id)delegate;
+- (NSFetchedResultsController *)paymentPresenceDataControllerForDelegate:(id)delegate;
 - (NSArray *)getPeopleOnSharedBill:(MCSharedBill *)thisBill;
 - (NSArray *)getEmailaddressesFrom:(MCPerson *)thisPerson;
 

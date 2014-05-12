@@ -12,6 +12,7 @@
 
 @protocol MCThisPersonProtocol <NSObject>
 
+- (MCPerson *)thisPerson;
 - (void)setThisPerson:(MCPerson *)person;
 
 @end

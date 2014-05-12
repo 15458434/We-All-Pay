@@ -7,12 +7,13 @@
 //
 
 #import "MCWeAllPayStoreController.h"
-//#import "MCTools.h"
+
 #import "MCPerson.h"
 #import "MCPayment.h"
 #import "MCSharedBill.h"
 
 #import "MCTonightsBillTransfer.h"
+#import "MCThisPaymentProtocol.h"
 
 @implementation MCWeAllPayStoreController
 
@@ -250,6 +251,34 @@
     // Create the FetchedResultsController.
     NSFetchedResultsController *dataController = [[NSFetchedResultsController alloc] initWithFetchRequest:request managedObjectContext:context sectionNameKeyPath:nil cacheName:[NSString stringWithFormat:@"All persons cache of trip: %@", [tonightsBill uniqueBillId]]];
     [dataController setDelegate:delegate];
+    NSError *error;
+    BOOL success = [dataController performFetch:&error];
+    if (!success) {
+        NSLog(@"Something went wrong");
+    }
+    return dataController;
+}
+
+- (NSFetchedResultsController *)paymentPresenceDataControllerForDelegate:(id)delegate
+{
+    NSParameterAssert([delegate conformsToProtocol:@protocol(NSFetchedResultsControllerDelegate)]);
+    NSParameterAssert([delegate conformsToProtocol:@protocol(MCThisPaymentProtocol)]);
+    NSManagedObjectContext *context = [weAllPayStoreDocument managedObjectContext];
+    MCPayment *thisPayment = [delegate thisPayment];
+    // What entities will be fetched.
+    NSFetchRequest *request = [NSFetchRequest fetchRequestWithEntityName:@"MCPaymentPresence"];
+    // How to sort the data.
+    [request setRelationshipKeyPathsForPrefetching:@[ @"person", @"payment" ]];
+    NSSortDescriptor *sortDescriptor = [NSSortDescriptor sortDescriptorWithKey:@"dateCreated" ascending:NO];
+    NSArray *sortDescriptorArray = @[sortDescriptor];
+    [request setSortDescriptors:sortDescriptorArray];
+    // Select only people from tonightsBill.
+    NSPredicate *predicate = [NSPredicate predicateWithFormat:@"payment = %@", thisPayment];
+    [request setPredicate:predicate];
+    
+    // Create the FetchedResultsController.
+    NSFetchedResultsController *dataController = [[NSFetchedResultsController alloc] initWithFetchRequest:request managedObjectContext:context sectionNameKeyPath:nil cacheName:[NSString stringWithFormat:@"All payment presence cache for payment: %@", [thisPayment uniquePaymentId]]];
+//    [dataController setDelegate:delegate];
     NSError *error;
     BOOL success = [dataController performFetch:&error];
     if (!success) {

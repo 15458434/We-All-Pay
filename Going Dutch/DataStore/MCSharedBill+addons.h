@@ -15,7 +15,6 @@
 + (MCSharedBill *)addSharedBillToContext:(NSManagedObjectContext *)context;
 
 + (void)deleteSharedbill:(MCSharedBill *)deleteBill;
-+ (void)deleteSharedBill:(MCSharedBill *)deleteBill inContext:(NSManagedObjectContext *)context;
 
 + (MCSharedBill *)fetchSharedBillWithUniqueId:(NSString *)uuid inContext:(NSManagedObjectContext *)context;
 + (BOOL)isTableInDatabaseEmpty;
