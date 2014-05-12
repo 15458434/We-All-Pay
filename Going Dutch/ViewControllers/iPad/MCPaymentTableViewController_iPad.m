@@ -300,8 +300,9 @@
     [[cell theSwitch] setOn:[[paymentPresenceForThisCell isPersonPresent] boolValue] animated:YES];
     [cell setThisCellsPaymentPresence:paymentPresenceForThisCell];
     
+    // Constraint for alignment with headerView of the tableView.
     NSLayoutConstraint *constraintBetweenNameLabelAndSelectButton = [NSLayoutConstraint constraintWithItem:selectButton attribute:NSLayoutAttributeLeading relatedBy:NSLayoutRelationEqual toItem:[cell nameLabel] attribute:NSLayoutAttributeLeading multiplier:1.0 constant:0.0];
-    NSLayoutConstraint *constraintBetweenPictureInCellAndPictureOfPayer = [NSLayoutConstraint constraintWithItem:[cell personView] attribute:NSLayoutAttributeCenterX relatedBy:NSLayoutRelationEqual toItem:_payerPicture attribute:NSLayoutAttributeCenterX multiplier:1.0 constant:0.0];
+    NSLayoutConstraint *constraintBetweenPictureInCellAndPictureOfPayer = [NSLayoutConstraint constraintWithItem:[cell personView] attribute:NSLayoutAttributeLeading relatedBy:NSLayoutRelationEqual toItem:_payerPicture attribute:NSLayoutAttributeCenterX multiplier:1.0 constant:0.0];
     [[self tableView] addConstraints:@[constraintBetweenNameLabelAndSelectButton, constraintBetweenPictureInCellAndPictureOfPayer]];
     
     return cell;
