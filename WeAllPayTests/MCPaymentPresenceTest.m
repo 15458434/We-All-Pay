@@ -218,4 +218,43 @@
     XCTAssertEqualWithAccuracy([sumOfAllOwesOnPaymentsForIlse doubleValue], 31.00, 0.001, @"Sum of all PaymentsPresence is not equal.");
 }
 
+- (void)testSolveWhoOwesWhoWithPaymentPresence
+{
+    MCSharedBill *thisBill = [MCSharedBill addSharedBillToContext:_context];
+    MCPerson *mark = [thisBill addPerson];
+    [mark setFirstName:@"Mark"];
+    [mark setLastName:@"Cornelisse"];
+    [mark addOneEmailAddressFromAString:@"info@markcornelisse.nl"];
+    MCPerson *ilse = [thisBill addPerson];
+    [ilse setFirstName:@"Ilse"];
+    [ilse setLastName:@"Béguin"];
+    [ilse addOneEmailAddressFromAString:@"ilse.beguin@hotmail.com"];
+    MCPerson *iva = [thisBill addPerson];
+    [iva setFirstName:@"Iva"];
+    [iva setLastName:@"Moslavac"];
+    [iva addOneEmailAddressFromAString:@"ivamavi2002@yahoo.co.uk"];
+    
+    MCPayment *thisPayment = [thisBill addPayment];
+    [thisPayment setPayingPerson:mark];
+    [thisPayment setDescriptionOfPayment:@"Drinken op een terras."];
+    [thisPayment putMoneyValueAsAString:@"9,00"];
+    [thisPayment thisPerson:ilse setIsPresent:@NO];
+    
+    MCPayment *thisPayment2 = [thisBill addPayment];
+    [thisPayment2 setPayingPerson:iva];
+    [thisPayment2 setDescriptionOfPayment:@"Food"];
+    [thisPayment2 putMoneyValueAsAString:@"30,00"];
+    
+    MCPayment *thisPayment3 = [thisBill addPayment];
+    [thisPayment3 setPayingPerson:ilse];
+    [thisPayment3 setDescriptionOfPayment:@"Movie"];
+    [thisPayment3 putMoneyValueAsAString:@"36,00"];
+    [thisPayment3 thisPerson:mark setIsPresent:@NO];
+    
+    NSArray *solution = [thisBill solveWhoHasToPayWhoFromThisBill];
+    XCTAssertTrue([solution count] == 2, @"The amount of objects in the solution is not ok.");
+    XCTAssertEqualWithAccuracy([[[solution objectAtIndex:0] money] doubleValue], 5.50, 0.001, @"The amount Mark should pay is not 5.50.");
+    XCTAssertEqualWithAccuracy([[[solution objectAtIndex:1] money] doubleValue], 2.50, 0.001, @"The amount Iva should pay is not 2.50.");
+}
+
 @end
