@@ -26,7 +26,8 @@
 {
     MCPerson *newPerson;
     newPerson = [NSEntityDescription insertNewObjectForEntityForName:@"MCPerson" inManagedObjectContext:context];
-    [newPerson setUniquePersonId:[MCTools createUniqueIdentifierString]];
+//    [newPerson setUniquePersonId:[MCTools createUniqueIdentifierString]];
+    [newPerson setUniquePersonId:[[NSUUID UUID] UUIDString]];
     NSDate *nu = [NSDate date];
     [newPerson setDateCreated:nu];
     [newPerson setDateModified:nu];
@@ -163,9 +164,9 @@
 - (void)addOneEmailAddressFromAString:(NSString *)emailAddressAsString
 {
     NSFetchRequest *request = [NSFetchRequest fetchRequestWithEntityName:@"MCEmailAddress"];
-    NSSortDescriptor *sd = [NSSortDescriptor sortDescriptorWithKey:@"emailAddress" ascending:YES];
-    NSArray *sda = @[sd];
-    [request setSortDescriptors:sda];
+    NSSortDescriptor *sortDescriptor = [NSSortDescriptor sortDescriptorWithKey:@"emailAddress" ascending:YES];
+    NSArray *sortDescriptorArray = @[sortDescriptor];
+    [request setSortDescriptors:sortDescriptorArray];
     NSPredicate *predicate = [NSPredicate predicateWithFormat:@"emailAddress = %@ AND owner = %@", emailAddressAsString, self];
     [request setPredicate:predicate];
 
@@ -183,6 +184,9 @@
             [newEmailAddress setSelected:@NO];
         }
         [newEmailAddress setEmailAddress:emailAddressAsString];
+        NSDate *nu = [NSDate date];
+        [newEmailAddress setDateModified:nu];
+        [self setDateModified:nu];
     }
 }
 
@@ -197,10 +201,13 @@
     MCEmailAddress *oldDefaultEmailAddress = [self getDefaultEmailAddressObject];
     if (oldDefaultEmailAddress) {
         [oldDefaultEmailAddress setSelected:@NO];
+        [oldDefaultEmailAddress setDateModified:[NSDate date]];
     }
     MCEmailAddress *newEmailAddress = [MCEmailAddress addEmailAddressFor:self];
     [newEmailAddress setEmailAddress:newEmailAddressString];
     [newEmailAddress setSelected:@YES];
+    [self setDateModified:[NSDate date]];
+    
 }
 
 - (MCEmailAddress *)getDefaultEmailAddressObject
@@ -227,8 +234,10 @@
     MCEmailAddress *currentDefaultEmailAddress = [self getDefaultEmailAddressObject];
     [currentDefaultEmailAddress setSelected:@NO];
     [newDefaultEmailAddress setSelected:@YES];
-    NSDate *now = [NSDate date];
-    [self setDateModified:now];
+    NSDate *nu = [NSDate date];
+    [self setDateModified:nu];
+    [newDefaultEmailAddress setDateModified:nu];
+    [currentDefaultEmailAddress setDateModified:nu];
 }
 
 - (void)deleteEmailAddress:(MCEmailAddress *)eAddress

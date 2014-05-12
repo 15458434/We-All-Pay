@@ -29,19 +29,29 @@
 {
     [super setUp];
     // Put setup code here. This method is called before the invocation of each test method in the class.
-    _mainController = [MCWeAllPayStoreController defaultStore];
-    _context = [[_mainController weAllPayStoreDocument] managedObjectContext];
+//    _mainController = [MCWeAllPayStoreController defaultStore];
+//    _context = [[_mainController weAllPayStoreDocument] managedObjectContext];
+    
+    NSManagedObjectModel *managedObjectModel = [NSManagedObjectModel mergedModelFromBundles:nil];
+    NSPersistentStoreCoordinator *persistentStoreCoordinator = [[NSPersistentStoreCoordinator alloc] initWithManagedObjectModel:managedObjectModel];
+    NSError *error;
+    NSPersistentStore *persistentStore = [persistentStoreCoordinator addPersistentStoreWithType:NSInMemoryStoreType configuration:nil URL:nil options:nil error:&error];
+    XCTAssertTrue(persistentStore, @"Something went wrong opening the In Memory Store: %@", [error localizedDescription]);
+    _context = [[NSManagedObjectContext alloc] init];
+    [_context setPersistentStoreCoordinator:persistentStoreCoordinator];
 }
 
 - (void)tearDown
 {
+    [_context reset];
     // Put teardown code here. This method is called after the invocation of each test method in the class.
     [super tearDown];
 }
 
 - (void)testAddAndDelete
 {
-    MCSharedBill *thisBill = [MCSharedBill addSharedBill];
+    MCSharedBill *thisBill = [MCSharedBill addSharedBillToContext:_context];
+    [thisBill setTripName:@"testAddAndDelete"];
     MCPerson *mark = [thisBill addPerson];
     [mark setFirstName:@"Mark"];
     [mark setLastName:@"Cornelisse"];
@@ -77,7 +87,7 @@
 
 - (void)testPeoplePresent
 {
-    MCSharedBill *thisBill = [MCSharedBill addSharedBill];
+    MCSharedBill *thisBill = [MCSharedBill addSharedBillToContext:_context];
     MCPerson *mark = [thisBill addPerson];
     [mark setFirstName:@"Mark"];
     [mark setLastName:@"Cornelisse"];
@@ -101,7 +111,7 @@
 
 - (void)testAveragePeopleShouldPay
 {
-    MCSharedBill *thisBill = [MCSharedBill addSharedBill];
+    MCSharedBill *thisBill = [MCSharedBill addSharedBillToContext:_context];
     MCPerson *mark = [thisBill addPerson];
     [mark setFirstName:@"Mark"];
     [mark setLastName:@"Cornelisse"];
@@ -164,9 +174,9 @@
     }
 }
 
-- (void)testaAountShouldHavePaidBy
+- (void)testAmountShouldHavePaidBy
 {
-    MCSharedBill *thisBill = [MCSharedBill addSharedBill];
+    MCSharedBill *thisBill = [MCSharedBill addSharedBillToContext:_context];
     MCPerson *mark = [thisBill addPerson];
     [mark setFirstName:@"Mark"];
     [mark setLastName:@"Cornelisse"];
@@ -181,38 +191,31 @@
     [iva addOneEmailAddressFromAString:@"ivamavi2002@yahoo.co.uk"];
     
     MCPayment *thisPayment = [thisBill addPayment];
-    [thisPayment putMoneyValueAsAString:@"9,00"];
     [thisPayment setPayingPerson:mark];
     [thisPayment setDescriptionOfPayment:@"Drinken op een terras."];
+    [thisPayment putMoneyValueAsAString:@"9,00"];
     // [thisPayment thisPerson:ilse setIsPresent:@NO];
     
     MCPayment *thisPayment2 = [thisBill addPayment];
-    [thisPayment2 putMoneyValueAsAString:@"30,00"];
     [thisPayment2 setPayingPerson:iva];
     [thisPayment2 setDescriptionOfPayment:@"Food"];
+    [thisPayment2 putMoneyValueAsAString:@"30,00"];
     
     MCPayment *thisPayment3 = [thisBill addPayment];
-    [thisPayment3 putMoneyValueAsAString:@"36.00"];
     [thisPayment3 setPayingPerson:ilse];
     [thisPayment3 setDescriptionOfPayment:@"Movie"];
-    // [thisPayment3 thisPerson:mark setIsPresent:@NO];
+    [thisPayment3 putMoneyValueAsAString:@"36,00"];
     
-    NSNumber *iets = [thisBill amountShouldHavePaidBy:ilse];
-}
-
-- (void)testIetsOfZo
-{
-    NSNumber *number1 = @20;
-    NSNumber *number2 = @40;
-    NSArray *numberArray = @[number1, number2];
+    // Does the sum function work correct when everybody is always present.
+    NSNumber *sumOfAllOwesOnPaymentsForIlse = [thisBill amountShouldHavePaidBy:ilse];
+    XCTAssertEqualWithAccuracy([sumOfAllOwesOnPaymentsForIlse doubleValue], 25.00, 0.001, @"Sum of all PaymentsPresence is not equal.");
     
-    NSExpression *arrayExpression = [NSExpression expressionForConstantValue: numberArray];
-    NSArray *argumentArray = @[arrayExpression];
-    
-    NSExpression* expression = [NSExpression expressionForFunction:@"sum:" arguments:argumentArray];
-    id result = [expression expressionValueWithObject:nil context:nil];
-    
-    BOOL ok = [result isEqual: [NSNumber numberWithInt: 60]]; // ok == YES
+    // Does the sum function work correct when someone is not present on one payment.
+    [thisPayment3 thisPerson:mark setIsPresent:@NO];
+    NSNumber *sumOfAllOwesOnPaymentsForMark = [thisBill amountShouldHavePaidBy:mark];
+    XCTAssertEqualWithAccuracy([sumOfAllOwesOnPaymentsForMark doubleValue], 13.00, 0.001, @"Sum of all PaymentsPresence is not equal.");
+    sumOfAllOwesOnPaymentsForIlse = [thisBill amountShouldHavePaidBy:ilse];
+    XCTAssertEqualWithAccuracy([sumOfAllOwesOnPaymentsForIlse doubleValue], 31.00, 0.001, @"Sum of all PaymentsPresence is not equal.");
 }
 
 @end

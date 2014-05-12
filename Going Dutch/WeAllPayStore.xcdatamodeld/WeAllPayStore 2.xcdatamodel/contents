@@ -1,9 +1,11 @@
 <?xml version="1.0" encoding="UTF-8" standalone="yes"?>
 <model userDefinedModelVersionIdentifier="1" type="com.apple.IDECoreDataModeler.DataModel" documentVersion="1.0" lastSavedToolsVersion="5064" systemVersion="13C1021" minimumToolsVersion="Xcode 4.3" macOSVersion="Automatic" iOSVersion="Automatic">
     <entity name="MCEmailAddress" representedClassName="MCEmailAddress" syncable="YES">
+        <attribute name="dateCreated" optional="YES" attributeType="Date" syncable="YES"/>
+        <attribute name="dateModified" optional="YES" attributeType="Date" syncable="YES"/>
         <attribute name="emailAddress" attributeType="String" syncable="YES"/>
         <attribute name="selected" attributeType="Boolean" syncable="YES"/>
-        <attribute name="uniqueEmailId" optional="YES" attributeType="String" syncable="YES"/>
+        <attribute name="uniqueEmailId" attributeType="String" syncable="YES"/>
         <relationship name="owner" minCount="1" maxCount="1" deletionRule="Nullify" destinationEntity="MCPerson" inverseName="emailAddress" inverseEntity="MCPerson" syncable="YES"/>
     </entity>
     <entity name="MCPayment" representedClassName="MCPayment" syncable="YES">
@@ -18,8 +20,10 @@
     </entity>
     <entity name="MCPaymentPresence" representedClassName="MCPaymentPresence" syncable="YES">
         <attribute name="averageOweFromPayment" optional="YES" attributeType="Double" defaultValueString="0.0" syncable="YES"/>
+        <attribute name="dateCreated" optional="YES" attributeType="Date" syncable="YES"/>
+        <attribute name="dateModified" optional="YES" attributeType="Date" syncable="YES"/>
         <attribute name="isPersonPresent" optional="YES" attributeType="Boolean" defaultValueString="YES" syncable="YES"/>
-        <attribute name="uniqueId" optional="YES" attributeType="String" syncable="YES"/>
+        <attribute name="uniqueId" attributeType="String" syncable="YES"/>
         <relationship name="payment" optional="YES" maxCount="1" deletionRule="Nullify" destinationEntity="MCPayment" inverseName="peopleSharingPayment" inverseEntity="MCPayment" syncable="YES"/>
         <relationship name="person" optional="YES" maxCount="1" deletionRule="Nullify" destinationEntity="MCPerson" inverseName="sharingPayment" inverseEntity="MCPerson" syncable="YES"/>
     </entity>
@@ -32,9 +36,9 @@
         <attribute name="lastName" optional="YES" attributeType="String" syncable="YES"/>
         <attribute name="phoneNumber" optional="YES" attributeType="String" syncable="YES"/>
         <attribute name="picture" optional="YES" transient="YES" syncable="YES"/>
-        <attribute name="pictureData" optional="YES" attributeType="Binary" syncable="YES"/>
+        <attribute name="pictureData" optional="YES" attributeType="Binary" allowsExternalBinaryDataStorage="YES" syncable="YES"/>
         <attribute name="thumbnail" optional="YES" transient="YES" syncable="YES"/>
-        <attribute name="thumbnailData" optional="YES" attributeType="Binary" syncable="YES"/>
+        <attribute name="thumbnailData" optional="YES" attributeType="Binary" allowsExternalBinaryDataStorage="YES" syncable="YES"/>
         <attribute name="uniquePersonId" attributeType="String" syncable="YES"/>
         <relationship name="emailAddress" optional="YES" toMany="YES" deletionRule="Nullify" destinationEntity="MCEmailAddress" inverseName="owner" inverseEntity="MCEmailAddress" syncable="YES"/>
         <relationship name="payments" optional="YES" toMany="YES" deletionRule="Nullify" destinationEntity="MCPayment" inverseName="payingPerson" inverseEntity="MCPayment" syncable="YES"/>
@@ -51,10 +55,10 @@
         <relationship name="peoplePresent" optional="YES" toMany="YES" deletionRule="Nullify" destinationEntity="MCPerson" inverseName="sharedBill" inverseEntity="MCPerson" syncable="YES"/>
     </entity>
     <elements>
-        <element name="MCEmailAddress" positionX="-1118" positionY="9" width="128" height="105"/>
+        <element name="MCEmailAddress" positionX="-1118" positionY="9" width="128" height="135"/>
         <element name="MCPayment" positionX="-342" positionY="-0" width="128" height="163"/>
-        <element name="MCPaymentPresence" positionX="-533" positionY="-27" width="128" height="118"/>
-        <element name="MCPerson" positionX="-837" positionY="-54" width="128" height="283"/>
+        <element name="MCPaymentPresence" positionX="-533" positionY="-27" width="128" height="150"/>
+        <element name="MCPerson" positionX="-837" positionY="-54" width="128" height="28"/>
         <element name="MCSharedBill" positionX="-558" positionY="225" width="128" height="148"/>
     </elements>
 </model>

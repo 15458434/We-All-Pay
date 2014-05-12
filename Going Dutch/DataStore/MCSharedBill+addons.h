@@ -26,6 +26,7 @@
 
 - (MCPayment *)addPayment;
 - (void)deletePayment:(MCPayment *)toBeDeletePayment;
+- (void)updatePaymentForSupportWithPaymentPresence;
 
 - (MCPerson *)addPerson;
 - (BOOL)isPresentWithFirstName:(NSString *)firstName andLastName:(NSString *)lastName andEmailAddress:(NSString *)emailAddress;

@@ -17,8 +17,11 @@
     MCEmailAddress *newEmailAddress;
     NSManagedObjectContext *context = [person managedObjectContext];
     newEmailAddress = [NSEntityDescription insertNewObjectForEntityForName:@"MCEmailAddress" inManagedObjectContext:context];
-    [newEmailAddress setUniqueEmailId:[MCTools createUniqueIdentifierString]];
+    [newEmailAddress setUniqueEmailId:[[NSUUID UUID] UUIDString] ];
     [newEmailAddress setOwner:person];
+    NSDate *nu = [NSDate date];
+    [newEmailAddress setDateCreated:nu];
+    [newEmailAddress setDateModified:nu];
     return newEmailAddress;
 }
 

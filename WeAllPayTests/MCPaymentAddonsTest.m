@@ -53,7 +53,7 @@
     XCTAssertTrue([thisPayment hasPayer], @"No payer present on thisPayment");
     
     [MCPayment deletePayment:thisPayment];
-    XCTAssertTrue([MCPayment isTableInDatabaseEmpty], @"MCPayment table is not empty");
+    XCTAssertTrue([thisPayment isDeleted], @"MCPayment table is not empty");
     
     [MCPerson deletePerson:thisPerson];
 }

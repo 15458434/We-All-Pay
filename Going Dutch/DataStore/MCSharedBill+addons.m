@@ -152,10 +152,10 @@
 
 - (MCPayment *)addPayment
 {
-    MCPayment *payment = [MCPayment addPayment];
+    MCPayment *payment = [MCPayment addPaymentInContext:[self managedObjectContext]];
     [payment setOnWhichBill:self];
     for (MCPerson *person in [self peoplePresent]) {
-        MCPaymentPresence *paymentPresence = [MCPaymentPresence addPaymentPresence];
+        MCPaymentPresence *paymentPresence = [MCPaymentPresence addPaymentPresenceInContext:[self managedObjectContext]];
         [paymentPresence setPayment:payment];
         [paymentPresence setPerson:person];
         [paymentPresence setIsPersonPresent:@YES];
@@ -179,9 +179,18 @@
     
 }
 
+- (void)updatePaymentForSupportWithPaymentPresence
+{
+    NSManagedObjectContext *context = [self managedObjectContext];
+    for (MCPayment *payment in [self payments]) {
+        [payment recalculateAveragePeopleOweAndStore];
+    }
+}
+
 - (MCPerson *)addPerson
 {
-    MCPerson *newPerson = [MCPerson addPerson];
+    NSManagedObjectContext *context = [self managedObjectContext];
+    MCPerson *newPerson = [MCPerson addPersonInContext:context];
     [newPerson addSharedBillObject:self];
     return newPerson;
 }
@@ -189,9 +198,9 @@
 - (BOOL)isPresentWithFirstName:(NSString *)firstName andLastName:(NSString *)lastName andEmailAddress:(NSString *)emailAddress
 {
     NSFetchRequest *request = [NSFetchRequest fetchRequestWithEntityName:@"MCPerson"];
-    NSSortDescriptor *sd1 = [NSSortDescriptor sortDescriptorWithKey:@"firstName" ascending:YES];
-    NSSortDescriptor *sd2 = [NSSortDescriptor sortDescriptorWithKey:@"lastName" ascending:YES];
-    NSArray *sda = @[sd1, sd2];
+    NSSortDescriptor *sortDescriptor1 = [NSSortDescriptor sortDescriptorWithKey:@"firstName" ascending:YES];
+    NSSortDescriptor *sortDescriptor2 = [NSSortDescriptor sortDescriptorWithKey:@"lastName" ascending:YES];
+    NSArray *sda = @[sortDescriptor1, sortDescriptor2];
     [request setSortDescriptors:sda];
     NSPredicate *predicate = [NSPredicate predicateWithFormat:@"ANY sharedBill = %@ AND firstName = %@ AND lastName = %@ AND ANY emailAddress.emailAddress = %@", self, firstName, lastName, emailAddress];
     [request setPredicate:predicate];
@@ -320,31 +329,25 @@
 - (NSNumber *)amountShouldHavePaidBy:(MCPerson *)person
 {
     NSLog(@"This is not implemented yet.");
-//    // Fetch the sum of all paymentPresences for person
-//    NSFetchRequest *request = [NSFetchRequest fetchRequestWithEntityName:@"MCPaymentPresence"];
-//    NSPredicate *predicate = [NSPredicate predicateWithFormat:@"isPersonPresent = %@ AND person = %@ AND payment.onWhichBill = %@",  @YES, person, self];
-//    [request setPredicate:predicate];
-//    NSSortDescriptor *sd = [NSSortDescriptor sortDescriptorWithKey:@"person" ascending:YES];
-//    [request setSortDescriptors:@[sd]];
-//    
-//    [request setResultType:NSDictionaryResultType];
-//    
-//    NSExpression *sumExpression = [NSExpression expressionForFunction:@"sum:" arguments:@[ [NSExpression expressionForKeyPath:@"averageOweFromPayment"] ]];
-//    
-//    NSExpressionDescription *ed = [[NSExpressionDescription alloc] init];
-//    [ed setName:@"bier"];
-//    [ed setExpression:sumExpression];
-//    
-//    [request setPropertiesToFetch:@[@"person", ed] ];
-//    [request setPropertiesToGroupBy:@[ @"person" ]];
-//    
-//    NSError *error;
-//    NSArray *results = [[self managedObjectContext] executeFetchRequest:request error:&error];
-//    if (error) {
-//        NSLog(@"Something went wrong fetching sumOfAverageFromEachPayment: %@", error);
-//    }
-//    NSLog(@"fuckzoooi");
-    return nil;
+    // Fetch the sum of all paymentPresences for person
+    NSFetchRequest *request = [NSFetchRequest fetchRequestWithEntityName:@"MCPaymentPresence"];
+    NSPredicate *predicate = [NSPredicate predicateWithFormat:@"payment.onWhichBill = %@ AND person = %@ AND isPersonPresent = %@", self, person, @YES];
+    [request setPredicate:predicate];
+    NSSortDescriptor *sortDescriptor = [NSSortDescriptor sortDescriptorWithKey:@"person" ascending:YES];
+    [request setSortDescriptors:@[sortDescriptor]];
+
+    NSError *error;
+    NSArray *results = [[self managedObjectContext] executeFetchRequest:request error:&error];
+    if (error) {
+        NSLog(@"Something went wrong fetching sumOfAverageFromEachPayment: %@", error);
+    }
+    
+    double sumOfAllOwes = 0;
+    for (MCPaymentPresence *pp in results) {
+        sumOfAllOwes += [[pp averageOweFromPayment] doubleValue];
+    }
+    
+    return @(sumOfAllOwes);
 }
 
 
@@ -366,54 +369,54 @@
     NSNumber *leftToReceive;
     NSMutableArray *receivers = [[NSMutableArray alloc] init];
     NSMutableArray *whoHasToPayWho = [[NSMutableArray alloc] init];
-    NSArray *sda1 = @[[NSSortDescriptor sortDescriptorWithKey:@"dateCreated" ascending:YES]];
-    NSArray *people = [[self peoplePresent] sortedArrayUsingDescriptors:sda1];
+    NSArray *sortDescriptorArray1 = @[[NSSortDescriptor sortDescriptorWithKey:@"dateCreated" ascending:YES]];
+    NSArray *people = [[self peoplePresent] sortedArrayUsingDescriptors:sortDescriptorArray1];
     
-    for (MCPerson *p in people) {
-        NSLog(@"%@ paid %@", [p getName], [self totalSumPaidBy:p]);
-    }
+    // Update the database to the current version.
+    [self updatePaymentForSupportWithPaymentPresence];
     
-    for (MCPerson *p in people) {
-        NSNumber *sumOfWhatWasPaidBy = [self totalSumPaidBy:p];
-        NSNumber *sumOfWhatShouldBePaid = [self amountPeopleShouldHavePaid];
+    for (MCPerson *person in people) {
+        NSLog(@"%@ paid %@", [person getName], [self totalSumPaidBy:person]);
+        NSNumber *sumOfWhatWasPaidByPerson = [self totalSumPaidBy:person];
+        NSNumber *sumOfWhatShouldBePaidPerson = [self amountShouldHavePaidBy:person];
         
-        if ([sumOfWhatWasPaidBy doubleValue] < [sumOfWhatShouldBePaid doubleValue]) {
+        if ([sumOfWhatWasPaidByPerson doubleValue] < [sumOfWhatShouldBePaidPerson doubleValue]) {
             // This person should pay to someone.
-            leftToPay = @([sumOfWhatShouldBePaid doubleValue] - [sumOfWhatWasPaidBy doubleValue]);
-            NSArray *creditValueOfThisPerson = [[NSMutableArray alloc] initWithObjects:p, sumOfWhatShouldBePaid, sumOfWhatWasPaidBy, leftToPay, nil];
+            leftToPay = @([sumOfWhatShouldBePaidPerson doubleValue] - [sumOfWhatWasPaidByPerson doubleValue]);
+            NSArray *creditValueOfThisPerson = [[NSMutableArray alloc] initWithObjects:person, sumOfWhatShouldBePaidPerson, sumOfWhatWasPaidByPerson, leftToPay, nil];
             [payers addObject:creditValueOfThisPerson];
-        } else if ([sumOfWhatWasPaidBy doubleValue] > [sumOfWhatShouldBePaid doubleValue]){
+        } else if ([sumOfWhatWasPaidByPerson doubleValue] > [sumOfWhatShouldBePaidPerson doubleValue]){
             // This person should receive from someone.
-            leftToReceive = @([sumOfWhatWasPaidBy doubleValue] - [sumOfWhatShouldBePaid doubleValue]);
-            NSArray *creditValueOfThisPerson = [[NSMutableArray alloc] initWithObjects:p, sumOfWhatShouldBePaid, sumOfWhatWasPaidBy, leftToReceive, nil];
+            leftToReceive = @([sumOfWhatWasPaidByPerson doubleValue] - [sumOfWhatShouldBePaidPerson doubleValue]);
+            NSArray *creditValueOfThisPerson = [[NSMutableArray alloc] initWithObjects:person, sumOfWhatShouldBePaidPerson, sumOfWhatWasPaidByPerson, leftToReceive, nil];
             [receivers addObject:creditValueOfThisPerson];
         } else {
             // This person has already paid enough.
-            MCReturnPayment *notDepted = [[MCReturnPayment alloc] initWithPayer:p paysTo:nil amountOfMoney:@0.00];
+            MCReturnPayment *notDepted = [[MCReturnPayment alloc] initWithPayer:person paysTo:nil amountOfMoney:@0.00];
             [whoHasToPayWho addObject:notDepted];
         }
     }
     
     // Solve who has to pay who.
     if ([payers count] > 0) {
-        for (NSMutableArray *p in payers) {
-            for (NSMutableArray *r in receivers) {
-                double ltp = [p[3] doubleValue];
-                double ltr = [r[3] doubleValue];
+        for (NSMutableArray *payer in payers) {
+            for (NSMutableArray *receiver in receivers) {
+                double ltp = [payer[3] doubleValue];
+                double ltr = [receiver[3] doubleValue];
                 MCReturnPayment *rp;
                 if (ltp >= ltr) {
-                    rp = [[MCReturnPayment alloc] initWithPayer:p[0] paysTo:r[0] amountOfMoney:@(ltr)];
+                    rp = [[MCReturnPayment alloc] initWithPayer:payer[0] paysTo:receiver[0] amountOfMoney:@(ltr)];
                     ltp -= ltr;
                     ltr = 0;
                 } else {
-                    rp = [[MCReturnPayment alloc] initWithPayer:p[0] paysTo:r[0] amountOfMoney:@(ltp)];
+                    rp = [[MCReturnPayment alloc] initWithPayer:payer[0] paysTo:receiver[0] amountOfMoney:@(ltp)];
                     ltr -= ltp;
                     ltp = 0;
                 }
                 leftToPay = @(ltp);
                 leftToReceive = @(ltr);
-                p[3] = leftToPay;
-                r[3] = leftToReceive;
+                payer[3] = leftToPay;
+                receiver[3] = leftToReceive;
                 
                 if ([[rp money] doubleValue] > 0) {
                     [whoHasToPayWho addObject:rp];

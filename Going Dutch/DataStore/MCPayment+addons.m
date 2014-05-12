@@ -146,11 +146,14 @@
 - (void)recalculateAveragePeopleOweAndStore
 {
     NSNumber *averagePayedByPeoplePresent = [self averageAmountPeopleShouldHavePaidOnThisPayment];
+    NSDate *nu = [NSDate date];
     for (MCPaymentPresence *pp in [self peopleSharingPayment]) {
         if ([[pp isPersonPresent] boolValue]) {
             [pp setAverageOweFromPayment:averagePayedByPeoplePresent];
+            [pp setDateModified:nu];
         } else {
             [pp setAverageOweFromPayment:@0.00];
+            [pp setDateModified:nu];
         }
     }
 }
