@@ -60,6 +60,8 @@
 /* MCReturnPaymentView */
 /* Each pays: $ string inside the header of the solution screen. */
 "EACH_PAYS" = "Per persoon:";
+/* Ilse total paid: inside the solution screen. */
+"TOTAL_PAID" ="totaal uitgegeven:";
 /* Total spent: $ string inside the header of the solution screen */
 "TOTAL_SPENT" = "Totaal:";
 /* As in Mark owes Arjen, but then just the word owes. */

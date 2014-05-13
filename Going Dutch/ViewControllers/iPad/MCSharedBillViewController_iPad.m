@@ -119,6 +119,12 @@
     // Not implemented.
 }
 
+- (BOOL)isPersonAlreadyPresent:(MCPerson *)newPerson
+{
+    // Function is not used at the moment.
+    return NO;
+}
+
 #pragma mark - UITextFieldDelegate
 
 - (void)textFieldDidEndEditing:(UITextField *)textField

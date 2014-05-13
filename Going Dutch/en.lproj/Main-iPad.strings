@@ -112,3 +112,7 @@
 
 /* Class = "IBUILabel"; text = "payerField"; ObjectID = "xU7-yf-2N6"; */
 "xU7-yf-2N6.text" = "payerField";
+
+/* Class = "IBUILabel"; text = "People sharing this payment"; ObjectID = "Lbm-k4-s3a"; */
+"Lbm-k4-s3a.text" = "People sharing this payment";
+

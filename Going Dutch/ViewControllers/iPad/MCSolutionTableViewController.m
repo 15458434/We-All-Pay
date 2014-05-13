@@ -15,6 +15,7 @@
 #import "MCWeAllPayStoreController.h"
 #import "MCSharedBill+addons.h"
 #import "MCPayment+addons.h"
+#import "MCPerson+addons.h"
 #import "MCReturnPayment.h"
 
 @interface MCSolutionTableViewController ()
@@ -144,6 +145,9 @@
     // self.navigationItem.rightBarButtonItem = self.editButtonItem;
     
     _solution = [_tonightsBill solveWhoHasToPayWhoFromThisBill];
+    NSSortDescriptor *sortDescriptor = [NSSortDescriptor sortDescriptorWithKey:@"firstName" ascending:YES];
+    _peoplePresent = [[_tonightsBill peoplePresent] sortedArrayUsingDescriptors:@[sortDescriptor]];
+    
     emptyMessage = [[NSBundle mainBundle] loadNibNamed:@"MCTableEmptyMessage_iPad" owner:self options:nil][0];
     [[emptyMessage bigMessage] setText:NSLocalizedString(@"RETURNPAYMENTSVIEW_NOPAYMENTS", @"Please add payments and/or people if you want a solution on who owes who.")];
     [[self tableView] setBackgroundView:emptyMessage];
@@ -186,7 +190,7 @@
 - (NSInteger)numberOfSectionsInTableView:(UITableView *)tableView
 {
     // Return the number of sections.
-    return 2;
+    return 3;
 }
 
 - (NSInteger)tableView:(UITableView *)tableView numberOfRowsInSection:(NSInteger)section
@@ -196,7 +200,9 @@
         case 0:
             return [_solution count];
         case 1:
-            return 2;
+            return [_peoplePresent count];
+        case 2:
+            return 1;
         default:
             @throw [NSException exceptionWithName:@"TableView broken" reason:@"There are no more than 2 sections in this tableView." userInfo:nil];
             return nil;
@@ -226,18 +232,30 @@
     if ([indexPath section] == 1) {
         MCSolutionOverViewTableViewCell_iPad *cell = [tableView dequeueReusableCellWithIdentifier:@"MCSolutionOverViewTableViewCell_iPad" forIndexPath:indexPath];
         
-        if ([indexPath row] == 0) {
-            NSString *eachPaysString = NSLocalizedString(@"EACH_PAYS", @"Each pays:");
-            [[cell firstLabel] setText:eachPaysString];
-            [[cell lastLabel] setText:[_tonightsBill amountPeopleShouldHavePaidAsCurrencyString]];
-        }
+//        if ([indexPath row] < [_peoplePresent count]) {
+//            NSString *eachPaysString = NSLocalizedString(@"EACH_PAYS", @"Each pays:");
+            NSString *paidString = NSLocalizedString(@"TOTAL_PAID", @"total paid:");
+            NSString *thisPersonPaidString = [NSString stringWithFormat:@"%@ %@", [[_peoplePresent objectAtIndex:[indexPath row]] getFullName], paidString];
+            [[cell firstLabel] setText:thisPersonPaidString];
+            MCPerson *thisPerson = [_peoplePresent objectAtIndex:[indexPath row]];
+            NSNumber *sumSpentByPerson = [_tonightsBill totalSumPaidBy:thisPerson];
+            NSNumberFormatter *nf = [[NSNumberFormatter alloc] init];
+            [nf setLocale:[NSLocale currentLocale]];
+            [nf setNumberStyle:NSNumberFormatterCurrencyStyle];
+            [nf setFormatterBehavior:NSNumberFormatterBehaviorDefault];
+            [[cell lastLabel] setText:[nf stringFromNumber:sumSpentByPerson]];
+//        }
         
-        if ([indexPath row] == 1) {
-            NSString *totalSpentString = NSLocalizedString(@"TOTAL_SPENT", @"Total spent:");
-            [[cell firstLabel] setText:totalSpentString];
-            [[cell lastLabel] setText:[_tonightsBill totalSumOfMoneyOfThisSharedBillAsCurrencyString]];
-        }
+
         [cell setSelectionStyle:UITableViewCellSelectionStyleNone];
+        return cell;
+    }
+    
+    if ([indexPath section] == 2) {
+        MCSolutionOverViewTableViewCell_iPad *cell = [tableView dequeueReusableCellWithIdentifier:@"MCSolutionOverViewTableViewCell_iPad" forIndexPath:indexPath];
+        NSString *totalSpentString = NSLocalizedString(@"TOTAL_SPENT", @"Total spent:");
+        [[cell firstLabel] setText:totalSpentString];
+        [[cell lastLabel] setText:[_tonightsBill totalSumOfMoneyOfThisSharedBillAsCurrencyString]];
         return cell;
     }
     

@@ -328,7 +328,6 @@
 
 - (NSNumber *)amountShouldHavePaidBy:(MCPerson *)person
 {
-    NSLog(@"This is not implemented yet.");
     // Fetch the sum of all paymentPresences for person
     NSFetchRequest *request = [NSFetchRequest fetchRequestWithEntityName:@"MCPaymentPresence"];
     NSPredicate *predicate = [NSPredicate predicateWithFormat:@"payment.onWhichBill = %@ AND person = %@ AND isPersonPresent = %@", self, person, @YES];
@@ -392,8 +391,8 @@
             [receivers addObject:creditValueOfThisPerson];
         } else {
             // This person has already paid enough.
-            MCReturnPayment *notDepted = [[MCReturnPayment alloc] initWithPayer:person paysTo:nil amountOfMoney:@0.00];
-            [whoHasToPayWho addObject:notDepted];
+//            MCReturnPayment *notDepted = [[MCReturnPayment alloc] initWithPayer:person paysTo:nil amountOfMoney:@0.00];
+//            [whoHasToPayWho addObject:notDepted];
         }
     }
     

@@ -50,7 +50,7 @@
 + (BOOL)isTableInDatabaseEmpty
 {
     NSManagedObjectContext *context = [[[MCWeAllPayStoreController defaultStore] weAllPayStoreDocument] managedObjectContext];
-    [MCPerson isTableInDatabaseEmptyForContext:context];
+    return [MCPerson isTableInDatabaseEmptyForContext:context];
 }
 
 + (BOOL)isTableInDatabaseEmptyForContext:(NSManagedObjectContext *)context
