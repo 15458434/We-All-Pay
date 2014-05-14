@@ -11,6 +11,7 @@
 		380396351920CD3900FA8CC2 /* MCPaymentPresence.m in Sources */ = {isa = PBXBuildFile; fileRef = 380396341920CD3900FA8CC2 /* MCPaymentPresence.m */; };
 		380396381920D19D00FA8CC2 /* MCEmailAddress.m in Sources */ = {isa = PBXBuildFile; fileRef = 380396371920D19D00FA8CC2 /* MCEmailAddress.m */; };
 		3803963F192114D700FA8CC2 /* MCPaymentPresenceTableViewCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 3803963E192114D700FA8CC2 /* MCPaymentPresenceTableViewCell.m */; };
+		380396451923766100FA8CC2 /* MCMailComposer.m in Sources */ = {isa = PBXBuildFile; fileRef = 380396441923766100FA8CC2 /* MCMailComposer.m */; };
 		380BF82E18108898008A8B74 /* MCEmailAddressTableViewCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 380BF82D18108898008A8B74 /* MCEmailAddressTableViewCell.xib */; };
 		380BF831181088B9008A8B74 /* MCEmailAddressTableViewCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 380BF830181088B9008A8B74 /* MCEmailAddressTableViewCell.m */; };
 		380F44F21813250600FF7E10 /* No picture image 2 - We All Pay.png in Resources */ = {isa = PBXBuildFile; fileRef = 380F44F11813250600FF7E10 /* No picture image 2 - We All Pay.png */; };
@@ -125,12 +126,14 @@
 		380396371920D19D00FA8CC2 /* MCEmailAddress.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = MCEmailAddress.m; sourceTree = "<group>"; };
 		3803963D192114D700FA8CC2 /* MCPaymentPresenceTableViewCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = MCPaymentPresenceTableViewCell.h; sourceTree = "<group>"; };
 		3803963E192114D700FA8CC2 /* MCPaymentPresenceTableViewCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = MCPaymentPresenceTableViewCell.m; sourceTree = "<group>"; };
+		380396431923766100FA8CC2 /* MCMailComposer.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = MCMailComposer.h; sourceTree = "<group>"; };
+		380396441923766100FA8CC2 /* MCMailComposer.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = MCMailComposer.m; sourceTree = "<group>"; };
 		380BF82D18108898008A8B74 /* MCEmailAddressTableViewCell.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; name = MCEmailAddressTableViewCell.xib; path = Views/MCEmailAddressTableViewCell.xib; sourceTree = "<group>"; };
 		380BF82F181088B9008A8B74 /* MCEmailAddressTableViewCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = MCEmailAddressTableViewCell.h; path = Views/MCEmailAddressTableViewCell.h; sourceTree = "<group>"; };
 		380BF830181088B9008A8B74 /* MCEmailAddressTableViewCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = MCEmailAddressTableViewCell.m; path = Views/MCEmailAddressTableViewCell.m; sourceTree = "<group>"; };
 		380F44F11813250600FF7E10 /* No picture image 2 - We All Pay.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = "No picture image 2 - We All Pay.png"; path = "Going Dutch/icons/no picture image/No picture image 2 - We All Pay.png"; sourceTree = "<group>"; };
-		38156B2818706B750047AEEF /* nl */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.strings; name = nl; path = nl.lproj/Localizable.strings; sourceTree = "<group>"; };
-		38156B2918706BAC0047AEEF /* Base */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = Base; path = Base.lproj/Localizable.strings; sourceTree = "<group>"; };
+		38156B2818706B750047AEEF /* nl */ = {isa = PBXFileReference; fileEncoding = 10; lastKnownFileType = text.plist.strings; name = nl; path = nl.lproj/Localizable.strings; sourceTree = "<group>"; };
+		38156B2918706BAC0047AEEF /* Base */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.strings; lineEnding = 0; name = Base; path = Base.lproj/Localizable.strings; sourceTree = "<group>"; };
 		38295AE618425E74009FB5DE /* MCCancelDoneViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = MCCancelDoneViewController.h; sourceTree = "<group>"; };
 		38295AE718425E74009FB5DE /* MCCancelDoneViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = MCCancelDoneViewController.m; sourceTree = "<group>"; };
 		3829AD0E178B41320025969D /* WeAllPayStore.xcdatamodel */ = {isa = PBXFileReference; lastKnownFileType = wrapper.xcdatamodel; path = WeAllPayStore.xcdatamodel; sourceTree = "<group>"; };
@@ -621,6 +624,8 @@
 				38DC8B3019081E9100762235 /* GAILogger.h */,
 				38DC8B3119081E9100762235 /* GAITrackedViewController.h */,
 				38DC8B3219081E9100762235 /* GAITracker.h */,
+				380396431923766100FA8CC2 /* MCMailComposer.h */,
+				380396441923766100FA8CC2 /* MCMailComposer.m */,
 			);
 			name = "Google Analytics";
 			sourceTree = "<group>";
@@ -857,6 +862,7 @@
 				38AAFBA218EC406300CD3E12 /* MCSharedBillPeoplePresentTableViewController-iPad.m in Sources */,
 				38C2BC9F18FBD89400233D24 /* MCAllTripsTableViewCell_iPad.m in Sources */,
 				38C2BC9918F7F69A00233D24 /* MCWhoOwesWhoTableViewCell_iPad.m in Sources */,
+				380396451923766100FA8CC2 /* MCMailComposer.m in Sources */,
 				3897157C17901D0F005BE03E /* MCTwoLabelsTitleView.m in Sources */,
 				3897158717901D55005BE03E /* MCPaymentTableViewCell.m in Sources */,
 				38DC8B2A1907145A00762235 /* MCRootViewController.m in Sources */,

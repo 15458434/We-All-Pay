@@ -12,6 +12,8 @@
 #import "MCSolutionOverViewTableViewCell_iPad.h"
 #import "MCTableEmptyMessage_iPad.h"
 
+#import "MCMailComposer.h"
+
 #import "MCWeAllPayStoreController.h"
 #import "MCSharedBill+addons.h"
 #import "MCPayment+addons.h"
@@ -40,6 +42,13 @@
 
 - (void)openMailView:(id)sender
 {
+    // Init the mailComposer
+    MCMailComposer *mailComposer = [[MCMailComposer alloc] init];
+    [mailComposer setTonightsBill:_tonightsBill];
+    [mailComposer setIsHTML:NO];
+    [mailComposer setSolution:_solution];
+    
+    // Init the mail ViewController
     MFMailComposeViewController *_mailViewController = [[MFMailComposeViewController alloc] init];
     [_mailViewController setMailComposeDelegate:sender];
     [_mailViewController setEdgesForExtendedLayout:UIRectEdgeNone];
@@ -50,54 +59,10 @@
     [textAttributes setValue:[UIColor whiteColor] forKey:NSForegroundColorAttributeName];
     [[_mailViewController navigationBar] setTitleTextAttributes:textAttributes];
     
-    NSArray *sda = @[[NSSortDescriptor sortDescriptorWithKey:@"dateCreated" ascending:YES]];
-    NSArray *allPeople = [[[self tonightsBill] peoplePresent] sortedArrayUsingDescriptors:sda];
-    // Create a list of all email addresses
-    NSMutableArray *listOfMailAddresses = [[NSMutableArray alloc] init];
-    for (MCPerson *p in allPeople) {
-        if ([p defaultEmailAddress]) {
-            [listOfMailAddresses addObject:[p defaultEmailAddress]];
-        }
-    }
-    // Set the mail header.
-    [_mailViewController setToRecipients:listOfMailAddresses];
-    NSString *subject1 = NSLocalizedString(@"EMAIL_SUBJECT_PART_ONE", @"Bill overview of our trip to %@");
-    [_mailViewController setSubject:[[NSString alloc] initWithFormat:@"%@ %@.", subject1, [[self tonightsBill] tripName]]];
-    
-    // Generate the text for the email.
-    NSMutableString *mailBody = [[NSMutableString alloc] init];
-    NSNumberFormatter *nf = [[NSNumberFormatter alloc] init];
-    [nf setNumberStyle:NSNumberFormatterCurrencyStyle];
-    [mailBody appendFormat:@"%@ %@,\n", NSLocalizedString(@"EMAIL_DEAR", @"Just Dear as in \"Dear Mark\""), [[self tonightsBill] stringOfApproxPeoplePresent]];
-    [mailBody appendFormat:@"\n"];
-    NSString *intro1 = NSLocalizedString(@"EMAIL_INTRO_PART_ONE", @"From a total of \"$ 20,45\", which was spend on our last trip to \"Movies\". We all have to pay an equal share of \"$6,82\".");
-    NSString *intro2 = NSLocalizedString(@"EMAIL_INTRO_PART_TWO", @"From a total of \"$ 20,45\", which was spend on our last trip to \"Movies\". We all have to pay an equal share of \"$6,82\".");
-    NSString *intro3 = NSLocalizedString(@"EMAIL_INTRO_PART_THREE", @"From a total of \"$ 20,45\", which was spend on our last trip to \"Movies\". We all have to pay an equal share of \"$6,82\".");
-    [mailBody appendFormat:@"%@ %@, %@ %@. %@ %@.\n", intro1, [nf stringFromNumber:[[self tonightsBill] totalSumOfMoneyOfThisSharedBill]], intro2,[[self tonightsBill] tripName], intro3, [nf stringFromNumber:[[self tonightsBill] amountPeopleShouldHavePaid]]];
-    [mailBody appendFormat:@"\n"];
-    if ([[self tonightsBill] totalAmountOfPeopleWhoHavePaid] == 0) {
-        [mailBody appendFormat:@"%@\n", NSLocalizedString(@"EMAIL_NOBODY_HAS_PAID", @"The message that nobody has paid so far")];
-    } else if ([[self tonightsBill] totalAmountOfPeopleWhoHavePaid] == 1) {
-        [mailBody appendFormat:@"%@:\n", NSLocalizedString(@"EMAIL_ONE_PERSON_HAS_PAID", @"The person who has payed")];
-    } else {
-        [mailBody appendFormat:@"%@:\n", NSLocalizedString(@"EMAIL_MULTIPLE_PEOPLE_HAVE_PAID", @"The people who have paid are")];
-    }
-    NSArray *allPayments = [[[self tonightsBill] payments] sortedArrayUsingDescriptors:sda];
-    for (MCPayment *p in allPayments) {
-        NSString *whoHasPaid1 = NSLocalizedString(@"EMAIL_WHO_HAS_PAID_ONE", @"Part one of the sentence: Mark has paid $24 for beer.");
-        NSString *whoHasPaid2 = NSLocalizedString(@"EMAIL_WHO_HAS_PAID_TWO", @"Part two of the sentence: Mark has paid $24 for beer.");
-        [mailBody appendFormat:@"%@ %@ %@ %@ %@.\n", [[p payingPerson] getName], whoHasPaid1, [nf stringFromNumber:[p money]], whoHasPaid2, [p descriptionOfPayment]];
-    }
-    [mailBody appendFormat:@"\n"];
-    NSString *average1 = NSLocalizedString(@"EMAIL_AVERAGE_SENTENCES_ONE", @"Part one of: To have everybody pay the average of $7.00, I suggest the following solution:");
-    NSString *average2 = NSLocalizedString(@"EMAIL_AVERAGE_SENTENCES_TWO", @"Part two of: To have everybody pay the average of $7.00, I suggest the following solution:");
-    [mailBody appendFormat:@"%@ %@%@:\n", average1, [nf stringFromNumber:[[self tonightsBill] amountPeopleShouldHavePaid]], average2];
-    for (MCReturnPayment *rp in _solution) {
-        [mailBody appendFormat:@"%@\n", [rp stringForMail]];
-    }
-    [mailBody appendFormat:@"\n"];
-    [mailBody appendFormat:@"%@.", NSLocalizedString(@"EMAIL_FINAL SENTENCE", @"If you have any remarks please let me know.")];
-    [_mailViewController setMessageBody:mailBody isHTML:NO];
+    // Set the mail.
+    [_mailViewController setToRecipients:[mailComposer getMailAddresses]];
+    [_mailViewController setSubject:[mailComposer getSubject]];
+    [_mailViewController setMessageBody:[mailComposer getMailBody] isHTML:NO];
     
     if (sender!=self) {
         [sender presentViewController:_mailViewController animated:YES completion:nil];

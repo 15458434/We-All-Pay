@@ -349,6 +349,17 @@
     return @(sumOfAllOwes);
 }
 
+- (NSString *)amountShouldHavePaidAsCurrencyStringBy:(MCPerson *)person
+{
+    // Still has no Unit test.
+    NSNumber *shouldHavePaid = [self amountShouldHavePaidBy:person];
+    NSNumberFormatter *nf = [[NSNumberFormatter alloc] init];
+    [nf setLocale:[NSLocale currentLocale]];
+    [nf setNumberStyle:NSNumberFormatterCurrencyStyle];
+    [nf setFormatterBehavior:NSNumberFormatterBehaviorDefault];
+    return [nf stringFromNumber:shouldHavePaid];
+}
+
 
 - (NSString *)amountPeopleShouldHavePaidAsCurrencyString
 {

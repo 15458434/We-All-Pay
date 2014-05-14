@@ -41,6 +41,7 @@
 - (NSNumber *)amountPeopleShouldHavePaid;
 - (NSString *)amountPeopleShouldHavePaidAsCurrencyString;
 - (NSNumber *)amountShouldHavePaidBy:(MCPerson *)person;
+- (NSString *)amountShouldHavePaidAsCurrencyStringBy:(MCPerson *)person;
 - (BOOL)hasPersonPaidSomething:(MCPerson *)person;
 - (BOOL)doesEveryoneHaveAnEmailAddress;
 

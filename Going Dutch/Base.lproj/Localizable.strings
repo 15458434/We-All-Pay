@@ -43,6 +43,10 @@
 /* Part one of: To have everybody pay the average of $7.00, I suggest the following solution */
 "EMAIL_AVERAGE_SENTENCES_ONE" = "When everybody pays the average of";
 "EMAIL_AVERAGE_SENTENCES_TWO" = ", I suggest the following solution";
+
+"EMAIL_AVERAGE_OF_USE_SENTENCE_ONE" = "We agreed to pay an equal share of what we use.";
+"EMAIL_AMOUNT_USED" = "totally used";
+"EMAIL_I_SUGGEST" = "Based on al this, I suggest the following solution:";
 /* The sentence: "Mark" pays $6.80 to Ilse. */
 "EMAIL_OWES_PART_ONE" = "pays";
 "EMAIL_OWES_PART_TWO" = "to";
