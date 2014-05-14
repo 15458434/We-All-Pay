@@ -78,6 +78,16 @@
                ReferencedContainer = "container:We all pay.xcodeproj">
             </BuildableReference>
          </TestableReference>
+         <TestableReference
+            skipped = "NO">
+            <BuildableReference
+               BuildableIdentifier = "primary"
+               BlueprintIdentifier = "3877591C1923D3EE0027A7F1"
+               BuildableName = "We all pay for MacTests.xctest"
+               BlueprintName = "We all pay for MacTests"
+               ReferencedContainer = "container:We all pay.xcodeproj">
+            </BuildableReference>
+         </TestableReference>
       </Testables>
       <MacroExpansion>
          <BuildableReference
