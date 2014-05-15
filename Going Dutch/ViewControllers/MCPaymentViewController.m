@@ -87,7 +87,12 @@
 {
     // Set the text of the textView back and resign first responder
     peoplePickerCancelled = YES;
-    //[payerView setText:[[thisPayment payingPerson] getFullName]];
+    [payerView setText:[[thisPayment payingPerson] getFullName]];
+    if ([thisPayment payingPerson]) {
+        [self setCircularImageOnPictureView:[[thisPayment payingPerson] picture]];
+    } else {
+        [_payerPicture setImage:nil];
+    }
     [payerView resignFirstResponder];
 }
 
@@ -96,7 +101,7 @@
     if ([[tonightsBill peoplePresent] count] > 0) {
         NSInteger row = [personPickerView selectedRowInComponent:0];
         [thisPayment setPayingPerson:listOfPeople[row]];
-        [payerView setText:[[thisPayment payingPerson] getFullName]];
+//        [payerView setText:[[thisPayment payingPerson] getFullName]];
         didSomethingChange = YES;
         NSDate *nu = [NSDate date];
         [tonightsBill setDateModified:nu];
@@ -206,7 +211,7 @@
 {
     [payerView setText:[listOfPeople[row] getFullName]];
     [thisPayment setPayingPerson:listOfPeople[row]];
-    [self setCircularImageOnPictureView:[[thisPayment payingPerson] picture]];
+    [self setCircularImageOnPictureView:[listOfPeople[row] picture]];
 }
 
 #pragma mark - PickerViewDataSource
@@ -215,6 +220,7 @@
 {
     return 1;
 }
+
 - (NSInteger)pickerView:(UIPickerView *)pickerView numberOfRowsInComponent:(NSInteger)component
 {
     return [[tonightsBill peoplePresent] count];
@@ -245,15 +251,15 @@
 - (void)textFieldDidBeginEditing:(UITextField *)textField
 {
     if (textField == paidView) {
-        NSNumberFormatter *nf = [[NSNumberFormatter alloc] init];
-        [nf setFormatterBehavior:NSNumberFormatterBehaviorDefault];
-        [nf setLocale:[NSLocale currentLocale]];
-        [nf setNumberStyle:NSNumberFormatterDecimalStyle];
-        NSString *ms = [nf stringFromNumber:[thisPayment money]];
-        if ([ms isEqualToString:@"0"]) {
-            ms = nil;
+        NSNumberFormatter *numberFormatter = [[NSNumberFormatter alloc] init];
+        [numberFormatter setFormatterBehavior:NSNumberFormatterBehaviorDefault];
+        [numberFormatter setLocale:[NSLocale currentLocale]];
+        [numberFormatter setNumberStyle:NSNumberFormatterDecimalStyle];
+        NSString *thisPaymentMoneyString = [numberFormatter stringFromNumber:[thisPayment money]];
+        if ([thisPaymentMoneyString isEqualToString:@"0"]) {
+            thisPaymentMoneyString = nil;
         }
-        [paidView setText:ms];
+        [paidView setText:thisPaymentMoneyString];
     }
     
     if (textField == payerView) {
@@ -270,7 +276,8 @@
         } else {
             row = [personPickerView selectedRowInComponent:0];
         }
-        [payerView setText:[[thisPayment payingPerson] getFullName]];
+        [payerView setText:[listOfPeople[row] getFullName]];
+        [self setCircularImageOnPictureView:[listOfPeople[row] picture]];
         [personPickerView selectRow:row inComponent:0 animated:YES];
     }
 }
