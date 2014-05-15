@@ -20,9 +20,9 @@
 @property (nonatomic, retain) NSString * getFullName;
 @property (nonatomic, retain) NSString * lastName;
 @property (nonatomic, retain) NSString * phoneNumber;
-@property (nonatomic, retain) CIImage * picture;
+@property (nonatomic, retain) UIImage * picture;
 @property (nonatomic, retain) NSData * pictureData;
-@property (nonatomic, retain) CIImage * thumbnail;
+@property (nonatomic, retain) UIImage * thumbnail;
 @property (nonatomic, retain) NSData * thumbnailData;
 @property (nonatomic, retain) NSString * uniquePersonId;
 @property (nonatomic, retain) NSSet *emailAddress;
