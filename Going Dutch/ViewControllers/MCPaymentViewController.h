@@ -23,7 +23,7 @@
 
 @end
 
-@interface MCPaymentViewController : MCCancelDoneViewController <UIPickerViewDataSource, UIPickerViewDelegate, UITextFieldDelegate>
+@interface MCPaymentViewController : UITableViewController <UIPickerViewDataSource, UIPickerViewDelegate, UITextFieldDelegate>
 {
     UIBarButtonItem *theDoneButton;
     UIBarButtonItem *cancelChangesForEntirePaymentButton;
@@ -34,15 +34,16 @@
     __weak IBOutlet UITextField *itemView;
     __weak IBOutlet UITextField *paidView;
     NSNumber *paidViewNumber;
-    __weak IBOutlet UILabel *dateAndTimeLabel;
+//    __weak IBOutlet UILabel *dateAndTimeLabel;
     
     UIPickerView *personPickerView;
     NSArray *listOfPeople;
     BOOL peoplePickerCancelled;
+    
+    NSArray *_paymentPresenceArray;
 }
 
-
-
+@property (weak, nonatomic) IBOutlet UIImageView *payerPicture;
 @property (nonatomic, strong) MCPayment *thisPayment;
 @property (nonatomic, strong) MCSharedBill *tonightsBill;
 @property (nonatomic, readonly) BOOL didSomethingChange;

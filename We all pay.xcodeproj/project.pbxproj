@@ -55,41 +55,7 @@
 		3872C0DD19041C95008C54D7 /* MCTableEmptyMessage_iPad.xib in Resources */ = {isa = PBXBuildFile; fileRef = 3872C0DF19041C95008C54D7 /* MCTableEmptyMessage_iPad.xib */; };
 		3873A2A516F23AA1000832FD /* MessageUI.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 3873A2A416F23AA1000832FD /* MessageUI.framework */; };
 		3876EF591840E86900C9546A /* MCCancelDoneTableViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 3876EF581840E86900C9546A /* MCCancelDoneTableViewController.m */; };
-		387759001923D3EE0027A7F1 /* Cocoa.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 387758FF1923D3EE0027A7F1 /* Cocoa.framework */; };
-		3877590A1923D3EE0027A7F1 /* InfoPlist.strings in Resources */ = {isa = PBXBuildFile; fileRef = 387759081923D3EE0027A7F1 /* InfoPlist.strings */; };
-		3877590C1923D3EE0027A7F1 /* main.m in Sources */ = {isa = PBXBuildFile; fileRef = 3877590B1923D3EE0027A7F1 /* main.m */; };
-		387759101923D3EE0027A7F1 /* Credits.rtf in Resources */ = {isa = PBXBuildFile; fileRef = 3877590E1923D3EE0027A7F1 /* Credits.rtf */; };
-		387759131923D3EE0027A7F1 /* MCAppDelegate.m in Sources */ = {isa = PBXBuildFile; fileRef = 387759121923D3EE0027A7F1 /* MCAppDelegate.m */; };
-		387759161923D3EE0027A7F1 /* MainMenu.xib in Resources */ = {isa = PBXBuildFile; fileRef = 387759141923D3EE0027A7F1 /* MainMenu.xib */; };
-		387759181923D3EE0027A7F1 /* Images.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 387759171923D3EE0027A7F1 /* Images.xcassets */; };
-		3877591E1923D3EE0027A7F1 /* XCTest.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 38522E2418DB3F01007BDB3F /* XCTest.framework */; };
-		3877591F1923D3EE0027A7F1 /* Cocoa.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 387758FF1923D3EE0027A7F1 /* Cocoa.framework */; };
-		387759271923D3EE0027A7F1 /* InfoPlist.strings in Resources */ = {isa = PBXBuildFile; fileRef = 387759251923D3EE0027A7F1 /* InfoPlist.strings */; };
-		387759291923D3EE0027A7F1 /* We_all_pay_for_MacTests.m in Sources */ = {isa = PBXBuildFile; fileRef = 387759281923D3EE0027A7F1 /* We_all_pay_for_MacTests.m */; };
-		387759301923D3FF0027A7F1 /* WeAllPayStore.xcdatamodeld in Sources */ = {isa = PBXBuildFile; fileRef = 3829AD0D178B41320025969D /* WeAllPayStore.xcdatamodeld */; };
-		3877593B1923D3FF0027A7F1 /* MCPayment+addons.h in Sources */ = {isa = PBXBuildFile; fileRef = 38DB85D217E45BCA006237CF /* MCPayment+addons.h */; };
-		3877593C1923D3FF0027A7F1 /* MCPayment+addons.m in Sources */ = {isa = PBXBuildFile; fileRef = 38DB85D317E45BCA006237CF /* MCPayment+addons.m */; };
-		3877593D1923D3FF0027A7F1 /* MCSharedBill+addons.h in Sources */ = {isa = PBXBuildFile; fileRef = 38DB85D517E45CA4006237CF /* MCSharedBill+addons.h */; };
-		3877593E1923D3FF0027A7F1 /* MCSharedBill+addons.m in Sources */ = {isa = PBXBuildFile; fileRef = 38DB85D617E45CA4006237CF /* MCSharedBill+addons.m */; };
-		3877593F1923D3FF0027A7F1 /* MCPaymentPresence+addons.h in Sources */ = {isa = PBXBuildFile; fileRef = 389950A2191A90F1000B00BC /* MCPaymentPresence+addons.h */; };
-		387759401923D3FF0027A7F1 /* MCPaymentPresence+addons.m in Sources */ = {isa = PBXBuildFile; fileRef = 389950A3191A90F1000B00BC /* MCPaymentPresence+addons.m */; };
-		387759411923D3FF0027A7F1 /* MCPerson+addons.h in Sources */ = {isa = PBXBuildFile; fileRef = 38DB85D817E45DEA006237CF /* MCPerson+addons.h */; };
-		387759421923D3FF0027A7F1 /* MCPerson+addons.m in Sources */ = {isa = PBXBuildFile; fileRef = 38DB85D917E45DEA006237CF /* MCPerson+addons.m */; };
-		387759431923D3FF0027A7F1 /* MCEmailAddress+addons.h in Sources */ = {isa = PBXBuildFile; fileRef = 38DB85DB17E45FB7006237CF /* MCEmailAddress+addons.h */; };
-		387759441923D3FF0027A7F1 /* MCEmailAddress+addons.m in Sources */ = {isa = PBXBuildFile; fileRef = 38DB85DC17E45FB7006237CF /* MCEmailAddress+addons.m */; };
-		387759451923D3FF0027A7F1 /* MCWeAllPayStoreController.h in Sources */ = {isa = PBXBuildFile; fileRef = 38955046178B4FCA0077A95A /* MCWeAllPayStoreController.h */; };
-		387759461923D3FF0027A7F1 /* MCWeAllPayStoreController.m in Sources */ = {isa = PBXBuildFile; fileRef = 38955047178B4FCA0077A95A /* MCWeAllPayStoreController.m */; };
-		387759481923D45C0027A7F1 /* CoreData.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 387759471923D45C0027A7F1 /* CoreData.framework */; };
-		3877594B1923D5F70027A7F1 /* MCPerson.m in Sources */ = {isa = PBXBuildFile; fileRef = 3877594A1923D5F70027A7F1 /* MCPerson.m */; };
-		3877594C1923D5F70027A7F1 /* MCPerson.m in Sources */ = {isa = PBXBuildFile; fileRef = 3877594A1923D5F70027A7F1 /* MCPerson.m */; };
-		3877594F1923D5F80027A7F1 /* MCSharedBill.m in Sources */ = {isa = PBXBuildFile; fileRef = 3877594E1923D5F80027A7F1 /* MCSharedBill.m */; };
-		387759501923D5F80027A7F1 /* MCSharedBill.m in Sources */ = {isa = PBXBuildFile; fileRef = 3877594E1923D5F80027A7F1 /* MCSharedBill.m */; };
-		387759531923D5F80027A7F1 /* MCEmailAddress.m in Sources */ = {isa = PBXBuildFile; fileRef = 387759521923D5F80027A7F1 /* MCEmailAddress.m */; };
-		387759541923D5F80027A7F1 /* MCEmailAddress.m in Sources */ = {isa = PBXBuildFile; fileRef = 387759521923D5F80027A7F1 /* MCEmailAddress.m */; };
-		387759571923D5F80027A7F1 /* MCPayment.m in Sources */ = {isa = PBXBuildFile; fileRef = 387759561923D5F80027A7F1 /* MCPayment.m */; };
-		387759581923D5F80027A7F1 /* MCPayment.m in Sources */ = {isa = PBXBuildFile; fileRef = 387759561923D5F80027A7F1 /* MCPayment.m */; };
-		3877595B1923D5F80027A7F1 /* MCPaymentPresence.m in Sources */ = {isa = PBXBuildFile; fileRef = 3877595A1923D5F80027A7F1 /* MCPaymentPresence.m */; };
-		3877595C1923D5F80027A7F1 /* MCPaymentPresence.m in Sources */ = {isa = PBXBuildFile; fileRef = 3877595A1923D5F80027A7F1 /* MCPaymentPresence.m */; };
+		3877596A1924DBE50027A7F1 /* MCPaymentPresenceTableViewCell_iPhone.m in Sources */ = {isa = PBXBuildFile; fileRef = 387759691924DBE50027A7F1 /* MCPaymentPresenceTableViewCell_iPhone.m */; };
 		387D3A911870652B0060FAF8 /* Localizable.strings in Resources */ = {isa = PBXBuildFile; fileRef = 387D3A931870652B0060FAF8 /* Localizable.strings */; };
 		3886D3FD16B7A1CD00ECE64F /* AddressBook.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 3886D3FB16B7A1CD00ECE64F /* AddressBook.framework */; };
 		3886D3FE16B7A1CD00ECE64F /* AddressBookUI.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 3886D3FC16B7A1CD00ECE64F /* AddressBookUI.framework */; };
@@ -150,13 +116,6 @@
 			proxyType = 1;
 			remoteGlobalIDString = 38572AD1169D437B00969C62;
 			remoteInfo = "We all pay";
-		};
-		387759201923D3EE0027A7F1 /* PBXContainerItemProxy */ = {
-			isa = PBXContainerItemProxy;
-			containerPortal = 38572AC9169D437B00969C62 /* Project object */;
-			proxyType = 1;
-			remoteGlobalIDString = 387758FD1923D3EE0027A7F1;
-			remoteInfo = "We all pay for Mac";
 		};
 /* End PBXContainerItemProxy section */
 
@@ -242,35 +201,11 @@
 		3873A2A616F2858A000832FD /* Going Dutch.entitlements */ = {isa = PBXFileReference; lastKnownFileType = text.xml; path = "Going Dutch.entitlements"; sourceTree = "<group>"; };
 		3876EF571840E86900C9546A /* MCCancelDoneTableViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = MCCancelDoneTableViewController.h; path = ../MCCancelDoneTableViewController.h; sourceTree = "<group>"; };
 		3876EF581840E86900C9546A /* MCCancelDoneTableViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = MCCancelDoneTableViewController.m; path = ../MCCancelDoneTableViewController.m; sourceTree = "<group>"; };
-		387758FE1923D3EE0027A7F1 /* We all pay for Mac.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = "We all pay for Mac.app"; sourceTree = BUILT_PRODUCTS_DIR; };
-		387758FF1923D3EE0027A7F1 /* Cocoa.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Cocoa.framework; path = Library/Frameworks/Cocoa.framework; sourceTree = DEVELOPER_DIR; };
 		387759021923D3EE0027A7F1 /* AppKit.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = AppKit.framework; path = Library/Frameworks/AppKit.framework; sourceTree = SDKROOT; };
 		387759031923D3EE0027A7F1 /* CoreData.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = CoreData.framework; path = Library/Frameworks/CoreData.framework; sourceTree = SDKROOT; };
 		387759041923D3EE0027A7F1 /* Foundation.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Foundation.framework; path = Library/Frameworks/Foundation.framework; sourceTree = SDKROOT; };
-		387759071923D3EE0027A7F1 /* We all pay for Mac-Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = "We all pay for Mac-Info.plist"; sourceTree = "<group>"; };
-		387759091923D3EE0027A7F1 /* en */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = en; path = en.lproj/InfoPlist.strings; sourceTree = "<group>"; };
-		3877590B1923D3EE0027A7F1 /* main.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = main.m; sourceTree = "<group>"; };
-		3877590D1923D3EE0027A7F1 /* We all pay for Mac-Prefix.pch */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = "We all pay for Mac-Prefix.pch"; sourceTree = "<group>"; };
-		3877590F1923D3EE0027A7F1 /* en */ = {isa = PBXFileReference; lastKnownFileType = text.rtf; name = en; path = en.lproj/Credits.rtf; sourceTree = "<group>"; };
-		387759111923D3EE0027A7F1 /* MCAppDelegate.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = MCAppDelegate.h; sourceTree = "<group>"; };
-		387759121923D3EE0027A7F1 /* MCAppDelegate.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = MCAppDelegate.m; sourceTree = "<group>"; };
-		387759151923D3EE0027A7F1 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.xib; name = Base; path = Base.lproj/MainMenu.xib; sourceTree = "<group>"; };
-		387759171923D3EE0027A7F1 /* Images.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Images.xcassets; sourceTree = "<group>"; };
-		3877591D1923D3EE0027A7F1 /* We all pay for MacTests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = "We all pay for MacTests.xctest"; sourceTree = BUILT_PRODUCTS_DIR; };
-		387759241923D3EE0027A7F1 /* We all pay for MacTests-Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = "We all pay for MacTests-Info.plist"; sourceTree = "<group>"; };
-		387759261923D3EE0027A7F1 /* en */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = en; path = en.lproj/InfoPlist.strings; sourceTree = "<group>"; };
-		387759281923D3EE0027A7F1 /* We_all_pay_for_MacTests.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = We_all_pay_for_MacTests.m; sourceTree = "<group>"; };
-		387759471923D45C0027A7F1 /* CoreData.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = CoreData.framework; path = Platforms/MacOSX.platform/Developer/SDKs/MacOSX10.9.sdk/System/Library/Frameworks/CoreData.framework; sourceTree = DEVELOPER_DIR; };
-		387759491923D5F70027A7F1 /* MCPerson.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = MCPerson.h; path = "We all pay for Mac/DataModel/MCPerson.h"; sourceTree = SOURCE_ROOT; };
-		3877594A1923D5F70027A7F1 /* MCPerson.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = MCPerson.m; path = "We all pay for Mac/DataModel/MCPerson.m"; sourceTree = SOURCE_ROOT; };
-		3877594D1923D5F80027A7F1 /* MCSharedBill.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = MCSharedBill.h; path = "We all pay for Mac/DataModel/MCSharedBill.h"; sourceTree = SOURCE_ROOT; };
-		3877594E1923D5F80027A7F1 /* MCSharedBill.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = MCSharedBill.m; path = "We all pay for Mac/DataModel/MCSharedBill.m"; sourceTree = SOURCE_ROOT; };
-		387759511923D5F80027A7F1 /* MCEmailAddress.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = MCEmailAddress.h; path = "We all pay for Mac/DataModel/MCEmailAddress.h"; sourceTree = SOURCE_ROOT; };
-		387759521923D5F80027A7F1 /* MCEmailAddress.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = MCEmailAddress.m; path = "We all pay for Mac/DataModel/MCEmailAddress.m"; sourceTree = SOURCE_ROOT; };
-		387759551923D5F80027A7F1 /* MCPayment.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = MCPayment.h; path = "We all pay for Mac/DataModel/MCPayment.h"; sourceTree = SOURCE_ROOT; };
-		387759561923D5F80027A7F1 /* MCPayment.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = MCPayment.m; path = "We all pay for Mac/DataModel/MCPayment.m"; sourceTree = SOURCE_ROOT; };
-		387759591923D5F80027A7F1 /* MCPaymentPresence.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = MCPaymentPresence.h; path = "We all pay for Mac/DataModel/MCPaymentPresence.h"; sourceTree = SOURCE_ROOT; };
-		3877595A1923D5F80027A7F1 /* MCPaymentPresence.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = MCPaymentPresence.m; path = "We all pay for Mac/DataModel/MCPaymentPresence.m"; sourceTree = SOURCE_ROOT; };
+		387759681924DBE50027A7F1 /* MCPaymentPresenceTableViewCell_iPhone.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = MCPaymentPresenceTableViewCell_iPhone.h; path = Views/iPhone/MCPaymentPresenceTableViewCell_iPhone.h; sourceTree = "<group>"; };
+		387759691924DBE50027A7F1 /* MCPaymentPresenceTableViewCell_iPhone.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = MCPaymentPresenceTableViewCell_iPhone.m; path = Views/iPhone/MCPaymentPresenceTableViewCell_iPhone.m; sourceTree = "<group>"; };
 		387D3A8E187053BA0060FAF8 /* nl */ = {isa = PBXFileReference; fileEncoding = 10; lastKnownFileType = text.plist.strings; name = nl; path = "nl.lproj/Main-Iphone.strings"; sourceTree = "<group>"; };
 		3886D3FB16B7A1CD00ECE64F /* AddressBook.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = AddressBook.framework; path = System/Library/Frameworks/AddressBook.framework; sourceTree = SDKROOT; };
 		3886D3FC16B7A1CD00ECE64F /* AddressBookUI.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = AddressBookUI.framework; path = System/Library/Frameworks/AddressBookUI.framework; sourceTree = SDKROOT; };
@@ -415,24 +350,6 @@
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
-		387758FB1923D3EE0027A7F1 /* Frameworks */ = {
-			isa = PBXFrameworksBuildPhase;
-			buildActionMask = 2147483647;
-			files = (
-				387759481923D45C0027A7F1 /* CoreData.framework in Frameworks */,
-				387759001923D3EE0027A7F1 /* Cocoa.framework in Frameworks */,
-			);
-			runOnlyForDeploymentPostprocessing = 0;
-		};
-		3877591A1923D3EE0027A7F1 /* Frameworks */ = {
-			isa = PBXFrameworksBuildPhase;
-			buildActionMask = 2147483647;
-			files = (
-				3877591F1923D3EE0027A7F1 /* Cocoa.framework in Frameworks */,
-				3877591E1923D3EE0027A7F1 /* XCTest.framework in Frameworks */,
-			);
-			runOnlyForDeploymentPostprocessing = 0;
-		};
 /* End PBXFrameworksBuildPhase section */
 
 /* Begin PBXGroup section */
@@ -491,8 +408,6 @@
 			children = (
 				38572ADC169D437B00969C62 /* We all pay */,
 				385F5301191C2C360012773D /* We all pay Tests */,
-				387759051923D3EE0027A7F1 /* We all pay for Mac */,
-				387759221923D3EE0027A7F1 /* We all pay for MacTests */,
 				38572AD5169D437B00969C62 /* Frameworks */,
 				38572AD3169D437B00969C62 /* Products */,
 			);
@@ -503,8 +418,6 @@
 			children = (
 				38572AD2169D437B00969C62 /* We all pay.app */,
 				385F52FD191C2C360012773D /* We all pay Tests.xctest */,
-				387758FE1923D3EE0027A7F1 /* We all pay for Mac.app */,
-				3877591D1923D3EE0027A7F1 /* We all pay for MacTests.xctest */,
 			);
 			name = Products;
 			sourceTree = "<group>";
@@ -512,7 +425,6 @@
 		38572AD5169D437B00969C62 /* Frameworks */ = {
 			isa = PBXGroup;
 			children = (
-				387759471923D45C0027A7F1 /* CoreData.framework */,
 				38CC48DE190A9E7000741201 /* libGoogleAnalyticsServices.a */,
 				3857304B18DAF2F100A900EA /* libTestFlight.a */,
 				38DC8B3519084ABE00762235 /* SystemConfiguration.framework */,
@@ -527,7 +439,6 @@
 				38572AD8169D437B00969C62 /* Foundation.framework */,
 				38572ADA169D437B00969C62 /* CoreGraphics.framework */,
 				38522E2418DB3F01007BDB3F /* XCTest.framework */,
-				387758FF1923D3EE0027A7F1 /* Cocoa.framework */,
 				387759011923D3EE0027A7F1 /* Other Frameworks */,
 			);
 			name = Frameworks;
@@ -642,67 +553,6 @@
 				387759041923D3EE0027A7F1 /* Foundation.framework */,
 			);
 			name = "Other Frameworks";
-			sourceTree = "<group>";
-		};
-		387759051923D3EE0027A7F1 /* We all pay for Mac */ = {
-			isa = PBXGroup;
-			children = (
-				3877595D1923D6130027A7F1 /* DataModel */,
-				387759111923D3EE0027A7F1 /* MCAppDelegate.h */,
-				387759121923D3EE0027A7F1 /* MCAppDelegate.m */,
-				387759141923D3EE0027A7F1 /* MainMenu.xib */,
-				387759171923D3EE0027A7F1 /* Images.xcassets */,
-				387759061923D3EE0027A7F1 /* Supporting Files */,
-			);
-			path = "We all pay for Mac";
-			sourceTree = "<group>";
-		};
-		387759061923D3EE0027A7F1 /* Supporting Files */ = {
-			isa = PBXGroup;
-			children = (
-				387759071923D3EE0027A7F1 /* We all pay for Mac-Info.plist */,
-				387759081923D3EE0027A7F1 /* InfoPlist.strings */,
-				3877590B1923D3EE0027A7F1 /* main.m */,
-				3877590D1923D3EE0027A7F1 /* We all pay for Mac-Prefix.pch */,
-				3877590E1923D3EE0027A7F1 /* Credits.rtf */,
-			);
-			name = "Supporting Files";
-			sourceTree = "<group>";
-		};
-		387759221923D3EE0027A7F1 /* We all pay for MacTests */ = {
-			isa = PBXGroup;
-			children = (
-				387759281923D3EE0027A7F1 /* We_all_pay_for_MacTests.m */,
-				387759231923D3EE0027A7F1 /* Supporting Files */,
-			);
-			path = "We all pay for MacTests";
-			sourceTree = "<group>";
-		};
-		387759231923D3EE0027A7F1 /* Supporting Files */ = {
-			isa = PBXGroup;
-			children = (
-				387759241923D3EE0027A7F1 /* We all pay for MacTests-Info.plist */,
-				387759251923D3EE0027A7F1 /* InfoPlist.strings */,
-			);
-			name = "Supporting Files";
-			sourceTree = "<group>";
-		};
-		3877595D1923D6130027A7F1 /* DataModel */ = {
-			isa = PBXGroup;
-			children = (
-				387759591923D5F80027A7F1 /* MCPaymentPresence.h */,
-				3877595A1923D5F80027A7F1 /* MCPaymentPresence.m */,
-				387759551923D5F80027A7F1 /* MCPayment.h */,
-				387759561923D5F80027A7F1 /* MCPayment.m */,
-				387759511923D5F80027A7F1 /* MCEmailAddress.h */,
-				387759521923D5F80027A7F1 /* MCEmailAddress.m */,
-				3877594D1923D5F80027A7F1 /* MCSharedBill.h */,
-				3877594E1923D5F80027A7F1 /* MCSharedBill.m */,
-				387759491923D5F70027A7F1 /* MCPerson.h */,
-				3877594A1923D5F70027A7F1 /* MCPerson.m */,
-			);
-			name = DataModel;
-			path = "../Going Dutch";
 			sourceTree = "<group>";
 		};
 		3892E3AB179055F40038894B /* DataModel */ = {
@@ -832,6 +682,8 @@
 				38DC8B4B19098C1B00762235 /* MCSolutionOverViewTableViewCell_iPhone.m */,
 				38E02787190A533500865FDD /* MCWhoOwesWhoTableViewCell_iPhone.h */,
 				38E02788190A533500865FDD /* MCWhoOwesWhoTableViewCell_iPhone.m */,
+				387759681924DBE50027A7F1 /* MCPaymentPresenceTableViewCell_iPhone.h */,
+				387759691924DBE50027A7F1 /* MCPaymentPresenceTableViewCell_iPhone.m */,
 			);
 			name = iPhone;
 			sourceTree = "<group>";
@@ -924,41 +776,6 @@
 			productReference = 385F52FD191C2C360012773D /* We all pay Tests.xctest */;
 			productType = "com.apple.product-type.bundle.unit-test";
 		};
-		387758FD1923D3EE0027A7F1 /* We all pay for Mac */ = {
-			isa = PBXNativeTarget;
-			buildConfigurationList = 3877592E1923D3EE0027A7F1 /* Build configuration list for PBXNativeTarget "We all pay for Mac" */;
-			buildPhases = (
-				387758FA1923D3EE0027A7F1 /* Sources */,
-				387758FB1923D3EE0027A7F1 /* Frameworks */,
-				387758FC1923D3EE0027A7F1 /* Resources */,
-			);
-			buildRules = (
-			);
-			dependencies = (
-			);
-			name = "We all pay for Mac";
-			productName = "We all pay for Mac";
-			productReference = 387758FE1923D3EE0027A7F1 /* We all pay for Mac.app */;
-			productType = "com.apple.product-type.application";
-		};
-		3877591C1923D3EE0027A7F1 /* We all pay for MacTests */ = {
-			isa = PBXNativeTarget;
-			buildConfigurationList = 3877592F1923D3EE0027A7F1 /* Build configuration list for PBXNativeTarget "We all pay for MacTests" */;
-			buildPhases = (
-				387759191923D3EE0027A7F1 /* Sources */,
-				3877591A1923D3EE0027A7F1 /* Frameworks */,
-				3877591B1923D3EE0027A7F1 /* Resources */,
-			);
-			buildRules = (
-			);
-			dependencies = (
-				387759211923D3EE0027A7F1 /* PBXTargetDependency */,
-			);
-			name = "We all pay for MacTests";
-			productName = "We all pay for MacTests";
-			productReference = 3877591D1923D3EE0027A7F1 /* We all pay for MacTests.xctest */;
-			productType = "com.apple.product-type.bundle.unit-test";
-		};
 /* End PBXNativeTarget section */
 
 /* Begin PBXProject section */
@@ -973,9 +790,6 @@
 						DevelopmentTeam = Z6JP26PUUY;
 					};
 					385F52FC191C2C360012773D = {
-						TestTargetID = 38572AD1169D437B00969C62;
-					};
-					3877591C1923D3EE0027A7F1 = {
 						TestTargetID = 38572AD1169D437B00969C62;
 					};
 				};
@@ -996,8 +810,6 @@
 			targets = (
 				38572AD1169D437B00969C62 /* We all pay */,
 				385F52FC191C2C360012773D /* We all pay Tests */,
-				387758FD1923D3EE0027A7F1 /* We all pay for Mac */,
-				3877591C1923D3EE0027A7F1 /* We all pay for MacTests */,
 			);
 		};
 /* End PBXProject section */
@@ -1035,25 +847,6 @@
 			buildActionMask = 2147483647;
 			files = (
 				385F5306191C2C360012773D /* InfoPlist.strings in Resources */,
-			);
-			runOnlyForDeploymentPostprocessing = 0;
-		};
-		387758FC1923D3EE0027A7F1 /* Resources */ = {
-			isa = PBXResourcesBuildPhase;
-			buildActionMask = 2147483647;
-			files = (
-				3877590A1923D3EE0027A7F1 /* InfoPlist.strings in Resources */,
-				387759181923D3EE0027A7F1 /* Images.xcassets in Resources */,
-				387759101923D3EE0027A7F1 /* Credits.rtf in Resources */,
-				387759161923D3EE0027A7F1 /* MainMenu.xib in Resources */,
-			);
-			runOnlyForDeploymentPostprocessing = 0;
-		};
-		3877591B1923D3EE0027A7F1 /* Resources */ = {
-			isa = PBXResourcesBuildPhase;
-			buildActionMask = 2147483647;
-			files = (
-				387759271923D3EE0027A7F1 /* InfoPlist.strings in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -1105,6 +898,7 @@
 				38DB85E617E46FE2006237CF /* MCSharedBill.m in Sources */,
 				38DC8B421909508800762235 /* MCColors.m in Sources */,
 				3872C0DC19041725008C54D7 /* MCTableEmptyMessage_iPad.m in Sources */,
+				3877596A1924DBE50027A7F1 /* MCPaymentPresenceTableViewCell_iPhone.m in Sources */,
 				38E0C5EA18E9B2BD005A3F17 /* MCAllTripsTableViewController-iPad.m in Sources */,
 				3892E3A417903EF00038894B /* MCEditTripViewController.m in Sources */,
 				3898F33A18F2CC0D00BFFC61 /* MCSelectPayerTableViewCell_iPad.m in Sources */,
@@ -1137,46 +931,6 @@
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
-		387758FA1923D3EE0027A7F1 /* Sources */ = {
-			isa = PBXSourcesBuildPhase;
-			buildActionMask = 2147483647;
-			files = (
-				3877594F1923D5F80027A7F1 /* MCSharedBill.m in Sources */,
-				387759301923D3FF0027A7F1 /* WeAllPayStore.xcdatamodeld in Sources */,
-				3877593B1923D3FF0027A7F1 /* MCPayment+addons.h in Sources */,
-				3877593C1923D3FF0027A7F1 /* MCPayment+addons.m in Sources */,
-				3877593D1923D3FF0027A7F1 /* MCSharedBill+addons.h in Sources */,
-				3877595B1923D5F80027A7F1 /* MCPaymentPresence.m in Sources */,
-				387759531923D5F80027A7F1 /* MCEmailAddress.m in Sources */,
-				3877593E1923D3FF0027A7F1 /* MCSharedBill+addons.m in Sources */,
-				3877593F1923D3FF0027A7F1 /* MCPaymentPresence+addons.h in Sources */,
-				387759401923D3FF0027A7F1 /* MCPaymentPresence+addons.m in Sources */,
-				387759411923D3FF0027A7F1 /* MCPerson+addons.h in Sources */,
-				387759421923D3FF0027A7F1 /* MCPerson+addons.m in Sources */,
-				387759571923D5F80027A7F1 /* MCPayment.m in Sources */,
-				387759431923D3FF0027A7F1 /* MCEmailAddress+addons.h in Sources */,
-				387759441923D3FF0027A7F1 /* MCEmailAddress+addons.m in Sources */,
-				387759451923D3FF0027A7F1 /* MCWeAllPayStoreController.h in Sources */,
-				3877594B1923D5F70027A7F1 /* MCPerson.m in Sources */,
-				387759461923D3FF0027A7F1 /* MCWeAllPayStoreController.m in Sources */,
-				387759131923D3EE0027A7F1 /* MCAppDelegate.m in Sources */,
-				3877590C1923D3EE0027A7F1 /* main.m in Sources */,
-			);
-			runOnlyForDeploymentPostprocessing = 0;
-		};
-		387759191923D3EE0027A7F1 /* Sources */ = {
-			isa = PBXSourcesBuildPhase;
-			buildActionMask = 2147483647;
-			files = (
-				387759501923D5F80027A7F1 /* MCSharedBill.m in Sources */,
-				3877595C1923D5F80027A7F1 /* MCPaymentPresence.m in Sources */,
-				387759581923D5F80027A7F1 /* MCPayment.m in Sources */,
-				387759541923D5F80027A7F1 /* MCEmailAddress.m in Sources */,
-				3877594C1923D5F70027A7F1 /* MCPerson.m in Sources */,
-				387759291923D3EE0027A7F1 /* We_all_pay_for_MacTests.m in Sources */,
-			);
-			runOnlyForDeploymentPostprocessing = 0;
-		};
 /* End PBXSourcesBuildPhase section */
 
 /* Begin PBXTargetDependency section */
@@ -1184,11 +938,6 @@
 			isa = PBXTargetDependency;
 			target = 38572AD1169D437B00969C62 /* We all pay */;
 			targetProxy = 385F530A191C2C360012773D /* PBXContainerItemProxy */;
-		};
-		387759211923D3EE0027A7F1 /* PBXTargetDependency */ = {
-			isa = PBXTargetDependency;
-			target = 387758FD1923D3EE0027A7F1 /* We all pay for Mac */;
-			targetProxy = 387759201923D3EE0027A7F1 /* PBXContainerItemProxy */;
 		};
 /* End PBXTargetDependency section */
 
@@ -1242,38 +991,6 @@
 			);
 			name = MCTableEmptyMessage_iPad.xib;
 			path = Views/iPad;
-			sourceTree = "<group>";
-		};
-		387759081923D3EE0027A7F1 /* InfoPlist.strings */ = {
-			isa = PBXVariantGroup;
-			children = (
-				387759091923D3EE0027A7F1 /* en */,
-			);
-			name = InfoPlist.strings;
-			sourceTree = "<group>";
-		};
-		3877590E1923D3EE0027A7F1 /* Credits.rtf */ = {
-			isa = PBXVariantGroup;
-			children = (
-				3877590F1923D3EE0027A7F1 /* en */,
-			);
-			name = Credits.rtf;
-			sourceTree = "<group>";
-		};
-		387759141923D3EE0027A7F1 /* MainMenu.xib */ = {
-			isa = PBXVariantGroup;
-			children = (
-				387759151923D3EE0027A7F1 /* Base */,
-			);
-			name = MainMenu.xib;
-			sourceTree = "<group>";
-		};
-		387759251923D3EE0027A7F1 /* InfoPlist.strings */ = {
-			isa = PBXVariantGroup;
-			children = (
-				387759261923D3EE0027A7F1 /* en */,
-			);
-			name = InfoPlist.strings;
 			sourceTree = "<group>";
 		};
 		387D3A931870652B0060FAF8 /* Localizable.strings */ = {
@@ -1468,148 +1185,6 @@
 			};
 			name = Release;
 		};
-		3877592A1923D3EE0027A7F1 /* Debug */ = {
-			isa = XCBuildConfiguration;
-			buildSettings = {
-				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
-				CLANG_ENABLE_MODULES = YES;
-				CLANG_WARN_BOOL_CONVERSION = YES;
-				CLANG_WARN_CONSTANT_CONVERSION = YES;
-				CLANG_WARN_DIRECT_OBJC_ISA_USAGE = YES_ERROR;
-				CLANG_WARN_ENUM_CONVERSION = YES;
-				CLANG_WARN_INT_CONVERSION = YES;
-				CLANG_WARN_OBJC_ROOT_CLASS = YES_ERROR;
-				COMBINE_HIDPI_IMAGES = YES;
-				FRAMEWORK_SEARCH_PATHS = (
-					"$(inherited)",
-					"$(DEVELOPER_FRAMEWORKS_DIR)",
-				);
-				GCC_ENABLE_OBJC_EXCEPTIONS = YES;
-				GCC_PRECOMPILE_PREFIX_HEADER = YES;
-				GCC_PREFIX_HEADER = "We all pay for Mac/We all pay for Mac-Prefix.pch";
-				GCC_PREPROCESSOR_DEFINITIONS = (
-					"DEBUG=1",
-					"$(inherited)",
-				);
-				GCC_WARN_64_TO_32_BIT_CONVERSION = YES;
-				GCC_WARN_ABOUT_RETURN_TYPE = YES_ERROR;
-				GCC_WARN_UNDECLARED_SELECTOR = YES;
-				GCC_WARN_UNINITIALIZED_AUTOS = YES_AGGRESSIVE;
-				GCC_WARN_UNUSED_FUNCTION = YES;
-				INFOPLIST_FILE = "We all pay for Mac/We all pay for Mac-Info.plist";
-				MACOSX_DEPLOYMENT_TARGET = 10.9;
-				PRODUCT_NAME = "$(TARGET_NAME)";
-				SDKROOT = macosx;
-				WRAPPER_EXTENSION = app;
-			};
-			name = Debug;
-		};
-		3877592B1923D3EE0027A7F1 /* Release */ = {
-			isa = XCBuildConfiguration;
-			buildSettings = {
-				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
-				CLANG_ENABLE_MODULES = YES;
-				CLANG_WARN_BOOL_CONVERSION = YES;
-				CLANG_WARN_CONSTANT_CONVERSION = YES;
-				CLANG_WARN_DIRECT_OBJC_ISA_USAGE = YES_ERROR;
-				CLANG_WARN_ENUM_CONVERSION = YES;
-				CLANG_WARN_INT_CONVERSION = YES;
-				CLANG_WARN_OBJC_ROOT_CLASS = YES_ERROR;
-				COMBINE_HIDPI_IMAGES = YES;
-				DEBUG_INFORMATION_FORMAT = "dwarf-with-dsym";
-				ENABLE_NS_ASSERTIONS = NO;
-				FRAMEWORK_SEARCH_PATHS = (
-					"$(inherited)",
-					"$(DEVELOPER_FRAMEWORKS_DIR)",
-				);
-				GCC_ENABLE_OBJC_EXCEPTIONS = YES;
-				GCC_PRECOMPILE_PREFIX_HEADER = YES;
-				GCC_PREFIX_HEADER = "We all pay for Mac/We all pay for Mac-Prefix.pch";
-				GCC_WARN_64_TO_32_BIT_CONVERSION = YES;
-				GCC_WARN_ABOUT_RETURN_TYPE = YES_ERROR;
-				GCC_WARN_UNDECLARED_SELECTOR = YES;
-				GCC_WARN_UNINITIALIZED_AUTOS = YES_AGGRESSIVE;
-				GCC_WARN_UNUSED_FUNCTION = YES;
-				INFOPLIST_FILE = "We all pay for Mac/We all pay for Mac-Info.plist";
-				MACOSX_DEPLOYMENT_TARGET = 10.9;
-				PRODUCT_NAME = "$(TARGET_NAME)";
-				SDKROOT = macosx;
-				WRAPPER_EXTENSION = app;
-			};
-			name = Release;
-		};
-		3877592C1923D3EE0027A7F1 /* Debug */ = {
-			isa = XCBuildConfiguration;
-			buildSettings = {
-				BUNDLE_LOADER = "$(BUILT_PRODUCTS_DIR)/We all pay.app/We all pay";
-				CLANG_ENABLE_MODULES = YES;
-				CLANG_WARN_BOOL_CONVERSION = YES;
-				CLANG_WARN_CONSTANT_CONVERSION = YES;
-				CLANG_WARN_DIRECT_OBJC_ISA_USAGE = YES_ERROR;
-				CLANG_WARN_ENUM_CONVERSION = YES;
-				CLANG_WARN_INT_CONVERSION = YES;
-				CLANG_WARN_OBJC_ROOT_CLASS = YES_ERROR;
-				COMBINE_HIDPI_IMAGES = YES;
-				FRAMEWORK_SEARCH_PATHS = (
-					"$(DEVELOPER_FRAMEWORKS_DIR)",
-					"$(inherited)",
-				);
-				GCC_ENABLE_OBJC_EXCEPTIONS = YES;
-				GCC_PRECOMPILE_PREFIX_HEADER = YES;
-				GCC_PREFIX_HEADER = "We all pay for Mac/We all pay for Mac-Prefix.pch";
-				GCC_PREPROCESSOR_DEFINITIONS = (
-					"DEBUG=1",
-					"$(inherited)",
-				);
-				GCC_WARN_64_TO_32_BIT_CONVERSION = YES;
-				GCC_WARN_ABOUT_RETURN_TYPE = YES_ERROR;
-				GCC_WARN_UNDECLARED_SELECTOR = YES;
-				GCC_WARN_UNINITIALIZED_AUTOS = YES_AGGRESSIVE;
-				GCC_WARN_UNUSED_FUNCTION = YES;
-				INFOPLIST_FILE = "We all pay for MacTests/We all pay for MacTests-Info.plist";
-				MACOSX_DEPLOYMENT_TARGET = 10.9;
-				PRODUCT_NAME = "$(TARGET_NAME)";
-				SDKROOT = macosx;
-				TEST_HOST = "$(BUNDLE_LOADER)";
-				WRAPPER_EXTENSION = xctest;
-			};
-			name = Debug;
-		};
-		3877592D1923D3EE0027A7F1 /* Release */ = {
-			isa = XCBuildConfiguration;
-			buildSettings = {
-				BUNDLE_LOADER = "$(BUILT_PRODUCTS_DIR)/We all pay.app/We all pay";
-				CLANG_ENABLE_MODULES = YES;
-				CLANG_WARN_BOOL_CONVERSION = YES;
-				CLANG_WARN_CONSTANT_CONVERSION = YES;
-				CLANG_WARN_DIRECT_OBJC_ISA_USAGE = YES_ERROR;
-				CLANG_WARN_ENUM_CONVERSION = YES;
-				CLANG_WARN_INT_CONVERSION = YES;
-				CLANG_WARN_OBJC_ROOT_CLASS = YES_ERROR;
-				COMBINE_HIDPI_IMAGES = YES;
-				DEBUG_INFORMATION_FORMAT = "dwarf-with-dsym";
-				ENABLE_NS_ASSERTIONS = NO;
-				FRAMEWORK_SEARCH_PATHS = (
-					"$(DEVELOPER_FRAMEWORKS_DIR)",
-					"$(inherited)",
-				);
-				GCC_ENABLE_OBJC_EXCEPTIONS = YES;
-				GCC_PRECOMPILE_PREFIX_HEADER = YES;
-				GCC_PREFIX_HEADER = "We all pay for Mac/We all pay for Mac-Prefix.pch";
-				GCC_WARN_64_TO_32_BIT_CONVERSION = YES;
-				GCC_WARN_ABOUT_RETURN_TYPE = YES_ERROR;
-				GCC_WARN_UNDECLARED_SELECTOR = YES;
-				GCC_WARN_UNINITIALIZED_AUTOS = YES_AGGRESSIVE;
-				GCC_WARN_UNUSED_FUNCTION = YES;
-				INFOPLIST_FILE = "We all pay for MacTests/We all pay for MacTests-Info.plist";
-				MACOSX_DEPLOYMENT_TARGET = 10.9;
-				PRODUCT_NAME = "$(TARGET_NAME)";
-				SDKROOT = macosx;
-				TEST_HOST = "$(BUNDLE_LOADER)";
-				WRAPPER_EXTENSION = xctest;
-			};
-			name = Release;
-		};
 /* End XCBuildConfiguration section */
 
 /* Begin XCConfigurationList section */
@@ -1639,22 +1214,6 @@
 			);
 			defaultConfigurationIsVisible = 0;
 			defaultConfigurationName = Release;
-		};
-		3877592E1923D3EE0027A7F1 /* Build configuration list for PBXNativeTarget "We all pay for Mac" */ = {
-			isa = XCConfigurationList;
-			buildConfigurations = (
-				3877592A1923D3EE0027A7F1 /* Debug */,
-				3877592B1923D3EE0027A7F1 /* Release */,
-			);
-			defaultConfigurationIsVisible = 0;
-		};
-		3877592F1923D3EE0027A7F1 /* Build configuration list for PBXNativeTarget "We all pay for MacTests" */ = {
-			isa = XCConfigurationList;
-			buildConfigurations = (
-				3877592C1923D3EE0027A7F1 /* Debug */,
-				3877592D1923D3EE0027A7F1 /* Release */,
-			);
-			defaultConfigurationIsVisible = 0;
 		};
 /* End XCConfigurationList section */
 

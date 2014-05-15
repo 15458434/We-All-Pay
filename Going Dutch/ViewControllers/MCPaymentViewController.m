@@ -10,8 +10,11 @@
 #import "MCPayment+addons.h"
 #import "MCPerson+addons.h"
 #import "MCSharedBill+addons.h"
+#import "MCPaymentPresence+addons.h"
 #import "MCWeAllPayStoreController.h"
 #import "MCTwoLabelsTitleView.h"
+
+#import "MCPaymentPresenceTableViewCell_iPhone.h"
 
 @interface MCPaymentViewController ()
 
@@ -56,7 +59,7 @@
 - (IBAction)mainDoneButtonPressed:(id)sender
 {
     NSLog(@"MCPaymentViewController: Done button pressed.");
-    self.switchInputField = NO;
+//    self.switchInputField = NO;
     if ([payerView isFirstResponder]) {
         [self donePersonPicker:self];
     }
@@ -169,6 +172,26 @@
     return UIStatusBarStyleLightContent;
 }
 
+- (void)setCircularImageOnPictureView:(UIImage *)image
+{
+    __weak MCPaymentViewController *weakSelf = self;
+    
+    dispatch_queue_t imageProcessQueue;
+    imageProcessQueue = dispatch_queue_create("imageProcessQueue", NULL);
+    
+    dispatch_async(imageProcessQueue, ^{
+        CGRect circularImageRect = CGRectMake(0, 0, 60, 60);
+        UIImage *circularImage = [MCTools cutCircularImageFrom:image toDestinationRect:circularImageRect];
+        dispatch_async(dispatch_get_main_queue(), ^{
+            MCPaymentViewController *strongSelf = weakSelf;
+            if (strongSelf) {
+                [[strongSelf payerPicture] setImage:circularImage];
+                [[strongSelf payerPicture] setNeedsDisplay];
+            }
+        });
+    });
+}
+
 #pragma mark - PickerViewDelegate
 
 - (NSString *)pickerView:(UIPickerView *)pickerView titleForRow:(NSInteger)row forComponent:(NSInteger)component
@@ -183,6 +206,7 @@
 {
     [payerView setText:[listOfPeople[row] getFullName]];
     [thisPayment setPayingPerson:listOfPeople[row]];
+    [self setCircularImageOnPictureView:[[thisPayment payingPerson] picture]];
 }
 
 #pragma mark - PickerViewDataSource
@@ -281,14 +305,14 @@
         [tonightsBill setDateModified:nu];
         [thisPayment setDateModified:nu];
     }
-    [self selectNextUITextField:textField];
+//    [self selectNextUITextField:textField];
 }
 
 #pragma mark - Inherited from super
 
-- (id)initWithNibName:(NSString *)nibNameOrNil bundle:(NSBundle *)nibBundleOrNil
+- (id)initWithStyle:(UITableViewStyle)style
 {
-    self = [super initWithNibName:nibNameOrNil bundle:nibBundleOrNil];
+    self = [super initWithStyle:style];
     if (self) {
         // Custom initialization
     }
@@ -300,11 +324,11 @@
     [super viewDidLoad];
     // Do any additional setup after loading the view from its nib.
     
-    [self setWillShowButtons:NO];
+//    [self setWillShowButtons:NO];
     
     // Prepare the switch input mechanism.
-    [self setSwitchInputField:YES];
-    listOfInputs = @[payerView, itemView, paidView];
+//    [self setSwitchInputField:YES];
+//    listOfInputs = @[payerView, itemView, paidView];
     
     NSManagedObjectContext *context = [[[MCWeAllPayStoreController defaultStore] weAllPayStoreDocument] managedObjectContext];
     [[context undoManager] enableUndoRegistration];
@@ -324,6 +348,10 @@
         NSLog(@"tonightsBill wasn't passed along.");
         @throw [NSException exceptionWithName:@"tonightsBill missing" reason:@"thisPayment didn't receive tonightsBill." userInfo:nil];
     }
+    
+    // Create an array sorted on people's firstName.
+    NSSortDescriptor *sortDescriptor = [NSSortDescriptor sortDescriptorWithKey:@"person.firstName" ascending:YES];
+    _paymentPresenceArray = [[thisPayment peopleSharingPayment] sortedArrayUsingDescriptors:@[sortDescriptor]];
     
     // Create Toolbar for the input accessory of payerView
     CGRect toolbarRect = CGRectMake(0, 0, [[self view] bounds].size.width, 44);
@@ -386,6 +414,10 @@
     [payerView setText:[[thisPayment payingPerson] getFullName]];
     [payerView setDelegate:self];
     [itemView setText:[thisPayment descriptionOfPayment]];
+    if ([thisPayment payingPerson]) {
+        [self setCircularImageOnPictureView:[[thisPayment payingPerson] picture]];
+    }
+
     NSNumberFormatter *nf = [[NSNumberFormatter alloc] init];
     [nf setLocale:[NSLocale currentLocale]];
     [nf setNumberStyle:NSNumberFormatterCurrencyStyle];
@@ -393,10 +425,10 @@
     if (!isNew) {
         [paidView setText:[nf stringFromNumber:[thisPayment money]]];
     }
-    NSDateFormatter *dateFormatter = [[NSDateFormatter alloc] init];
-    [dateFormatter setDateStyle:NSDateFormatterMediumStyle];
-    [dateFormatter setTimeStyle:NSDateFormatterMediumStyle];
-    [dateAndTimeLabel setText:[dateFormatter stringFromDate:[thisPayment dateModified]]];
+//    NSDateFormatter *dateFormatter = [[NSDateFormatter alloc] init];
+//    [dateFormatter setDateStyle:NSDateFormatterMediumStyle];
+//    [dateFormatter setTimeStyle:NSDateFormatterMediumStyle];
+//    [dateAndTimeLabel setText:[dateFormatter stringFromDate:[thisPayment dateModified]]];
 }
 
 - (void)viewDidAppear:(BOOL)animated
@@ -439,5 +471,88 @@
 {
     [super decodeRestorableStateWithCoder:coder];
 }
+
+#pragma mark - Table view data source
+
+- (NSInteger)numberOfSectionsInTableView:(UITableView *)tableView
+{
+    // Return the number of sections.
+    return 1;
+}
+
+- (NSInteger)tableView:(UITableView *)tableView numberOfRowsInSection:(NSInteger)section
+{
+    // Return the number of rows in the section.
+    return [_paymentPresenceArray count];
+}
+
+- (UITableViewCell *)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath
+{
+    MCPaymentPresenceTableViewCell_iPhone *cell = [tableView dequeueReusableCellWithIdentifier:@"paymentPresenceCell_iPhone" forIndexPath:indexPath];
+    
+    // Set the cell contents
+    MCPaymentPresence *thisCellsPresence = [_paymentPresenceArray objectAtIndex:[indexPath row]];
+    [[cell nameLabel] setText:[[thisCellsPresence person] getFullName]];
+    [cell setCircularImage:[[thisCellsPresence person] thumbnail]];
+    [[cell isPresentSwitch] setOn:[[thisCellsPresence isPersonPresent] boolValue]];
+    [cell setThisCellsPaymentPresence:thisCellsPresence];
+    
+    // Set the cell alignment to headerView stuff
+    NSLayoutConstraint *bazinga = [NSLayoutConstraint constraintWithItem:payerView attribute:NSLayoutAttributeLeading relatedBy:NSLayoutRelationEqual toItem:[cell nameLabel] attribute:NSLayoutAttributeLeading multiplier:1.0 constant:-6.0];
+    NSLayoutConstraint *payerPictureToUser = [NSLayoutConstraint constraintWithItem:_payerPicture attribute:NSLayoutAttributeTrailing relatedBy:NSLayoutRelationEqual toItem:[cell personView] attribute:NSLayoutAttributeTrailing multiplier:1.0 constant:0.0];
+    [[self tableView] addConstraints:@[bazinga, payerPictureToUser]];
+    
+    return cell;
+}
+
+
+/*
+ // Override to support conditional editing of the table view.
+ - (BOOL)tableView:(UITableView *)tableView canEditRowAtIndexPath:(NSIndexPath *)indexPath
+ {
+ // Return NO if you do not want the specified item to be editable.
+ return YES;
+ }
+ */
+
+/*
+ // Override to support editing the table view.
+ - (void)tableView:(UITableView *)tableView commitEditingStyle:(UITableViewCellEditingStyle)editingStyle forRowAtIndexPath:(NSIndexPath *)indexPath
+ {
+ if (editingStyle == UITableViewCellEditingStyleDelete) {
+ // Delete the row from the data source
+ [tableView deleteRowsAtIndexPaths:@[indexPath] withRowAnimation:UITableViewRowAnimationFade];
+ } else if (editingStyle == UITableViewCellEditingStyleInsert) {
+ // Create a new instance of the appropriate class, insert it into the array, and add a new row to the table view
+ }
+ }
+ */
+
+/*
+ // Override to support rearranging the table view.
+ - (void)tableView:(UITableView *)tableView moveRowAtIndexPath:(NSIndexPath *)fromIndexPath toIndexPath:(NSIndexPath *)toIndexPath
+ {
+ }
+ */
+
+/*
+ // Override to support conditional rearranging of the table view.
+ - (BOOL)tableView:(UITableView *)tableView canMoveRowAtIndexPath:(NSIndexPath *)indexPath
+ {
+ // Return NO if you do not want the item to be re-orderable.
+ return YES;
+ }
+ */
+
+/*
+ #pragma mark - Navigation
+ 
+ // In a storyboard-based application, you will often want to do a little preparation before navigation
+ - (void)prepareForSegue:(UIStoryboardSegue *)segue sender:(id)sender
+ {
+ // Get the new view controller using [segue destinationViewController].
+ // Pass the selected object to the new view controller.
+ }
+ */
 
 @end
