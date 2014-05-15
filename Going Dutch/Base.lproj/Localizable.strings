@@ -61,6 +61,8 @@
 "THISPAYMENTCELL_NOOBJECT" = "something";
 
 /* MCReturnPaymentView */
+/* "EACH_USED", "Mark used:" */
+"EACH_USED" = "used:";
 /* Each pays: $ string inside the header of the solution screen. */
 "EACH_PAYS" = "Each pays:";
 /* Ilse total paid: inside the solution screen. */

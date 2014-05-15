@@ -17,8 +17,10 @@
 #import "MCReturnPaymentTableViewCell.h"
 #import "MCSolutionOverViewTableViewCell_iPhone.h"
 #import "MCWhoOwesWhoTableViewCell_iPhone.h"
+#import "MCWhoPaidHowMuchTableViewCell_iPhone.h"
 #import "MCTwoLabelsTitleView.h"
 #import "MCTableEmptyMessage.h"
+
 
 @interface MCReturnPaymentViewController ()
 
@@ -102,6 +104,9 @@
     } else {
         [MCTools setAdBannerIfNotPaid:YES forViewController:self];
     }
+    
+    NSSortDescriptor *sortDescriptor = [NSSortDescriptor sortDescriptorWithKey:@"firstName" ascending:YES];
+    peoplePresent = [[tonightsBill peoplePresent] sortedArrayUsingDescriptors:@[sortDescriptor]];
     
     paymentsAfterwards = [[NSMutableArray alloc] init];
     for (MCReturnPayment *rp in [tonightsBill solveWhoHasToPayWhoFromThisBill]) {
@@ -227,7 +232,7 @@
 
 - (NSInteger)numberOfSectionsInTableView:(UITableView *)tableView
 {
-    return 2;
+    return 3;
 }
 
 - (NSInteger)tableView:(UITableView *)tableView numberOfRowsInSection:(NSInteger)section
@@ -236,10 +241,12 @@
         case 0:
             return [paymentsAfterwards count];
         case 1:
+            return [peoplePresent count];
+        case 2:
             if ([paymentsAfterwards count] == 0) {
                 return 0;
             } else {
-                return 2;
+                return [[tonightsBill peoplePresent] count] + 1;
             }
         default:
             return 0;
@@ -265,21 +272,39 @@
     }
     
     if ([indexPath section] == 1) {
-        MCSolutionOverViewTableViewCell_iPhone *cell = [tableView dequeueReusableCellWithIdentifier:@"MCSolutionOverViewTableViewCell_iPhone"];
+        MCWhoPaidHowMuchTableViewCell_iPhone *cell = [tableView dequeueReusableCellWithIdentifier:@"MCWhoPaidHowMuchTableViewCell_iPhone"];
         
-        if ([indexPath row] == 0) {
-            NSString *eachPaysString = NSLocalizedString(@"EACH_PAYS", @"Each pays");
-            [[cell totalLabel] setText:eachPaysString];
-            [[cell moneyLabel] setText:[tonightsBill amountPeopleShouldHavePaidAsCurrencyString]];
-        }
-
-        if ([indexPath row] == 1) {
+        MCPerson *person = [peoplePresent objectAtIndex:[indexPath row]];
+        [[cell whoPaidHowMuchLabel] setText:[person getFullName]];
+        NSNumber *sumSpentByPerson = @(-[[tonightsBill amountShouldHavePaidBy:person] doubleValue]);
+        NSNumberFormatter *nf = [[NSNumberFormatter alloc] init];
+        [nf setLocale:[NSLocale currentLocale]];
+        [nf setNumberStyle:NSNumberFormatterCurrencyStyle];
+        [nf setFormatterBehavior:NSNumberFormatterBehaviorDefault];
+        [[cell moneyLabel] setText:[nf stringFromNumber:sumSpentByPerson]];
+        return cell;
+    }
+    
+    if ([indexPath section] == 2) {
+        if ([indexPath row] < [peoplePresent count]) {
+            MCWhoPaidHowMuchTableViewCell_iPhone *cell = [tableView dequeueReusableCellWithIdentifier:@"MCWhoPaidHowMuchTableViewCell_iPhone"];
+            
+            MCPerson *person = [peoplePresent objectAtIndex:[indexPath row]];
+            [[cell whoPaidHowMuchLabel] setText:[person getFullName]];
+            NSNumber *sumSpentByPerson = [tonightsBill totalSumPaidBy:person];
+            NSNumberFormatter *nf = [[NSNumberFormatter alloc] init];
+            [nf setLocale:[NSLocale currentLocale]];
+            [nf setNumberStyle:NSNumberFormatterCurrencyStyle];
+            [nf setFormatterBehavior:NSNumberFormatterBehaviorDefault];
+            [[cell moneyLabel] setText:[nf stringFromNumber:sumSpentByPerson]];
+            return cell;
+        } else {
+            MCSolutionOverViewTableViewCell_iPhone *cell = [tableView dequeueReusableCellWithIdentifier:@"MCSolutionOverViewTableViewCell_iPhone"];
             NSString *totalSpentString = NSLocalizedString(@"TOTAL_SPENT", @"Total spent:");
             [[cell totalLabel] setText:totalSpentString];
             [[cell moneyLabel] setText:[tonightsBill totalSumOfMoneyOfThisSharedBillAsCurrencyString]];
+            return cell;
         }
-
-        return cell;
     }
     
     return nil;
