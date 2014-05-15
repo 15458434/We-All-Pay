@@ -54,12 +54,15 @@
     NSLog(@"%@", [[UIDevice currentDevice] model]);
     NSLog(@"I dedicate this program to Ilse Béguin, the most wonderful woman in the world who brought herself into my life, when I was developing this App.");
     
+    // Set colors throughout the App.
     [[UINavigationBar appearance] setBarTintColor:[MCColors getNavigationColor]];
     [[UINavigationBar appearance] setTintColor:[MCColors getButtonColor]];
     [[UINavigationBar appearance] setTitleTextAttributes:@{NSForegroundColorAttributeName: [UIColor whiteColor]}];
     [[UIButton appearance] setTitleColor:[MCColors getButtonColor] forState:UIControlStateNormal];
     [[UIButton appearance] setTitleColor:[MCColors getButtonDisabledColor] forState:UIControlStateDisabled];
-    
+    [[UIBarButtonItem appearance] setTintColor:[MCColors getButtonColor]];
+    [[UINavigationBar appearance] setBarStyle:UIBarStyleBlackTranslucent];
+    [[UIApplication sharedApplication] setStatusBarStyle:UIStatusBarStyleLightContent];
     
     // Set the background color in the peoplepicker.
     [[UISearchBar appearance] setBarTintColor:[MCColors getbackgroundColor]];

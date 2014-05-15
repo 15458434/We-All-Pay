@@ -88,6 +88,8 @@
     [mailViewController setMailComposeDelegate:sender];
     [mailViewController setEdgesForExtendedLayout:UIRectEdgeNone];
     [mailViewController setModalPresentationStyle:UIModalPresentationFormSheet];
+//    [[mailViewController navigationBar] setBarStyle:UIBarStyleBlack];
+//    [[[mailViewController navigationController] navigationBar] setBarStyle:UIBarStyleBlack];
     [[mailViewController viewControllers][0] setEdgesForExtendedLayout:UIRectEdgeNone];
     NSArray *sda = @[[NSSortDescriptor sortDescriptorWithKey:@"dateCreated" ascending:YES]];
     NSArray *allPeople = [[[self tonightsBill] peoplePresent] sortedArrayUsingDescriptors:sda];
@@ -143,9 +145,15 @@
         //[MCTools setAdBannerIfNotPaid:YES forViewController:[[mailViewController viewControllers] objectAtIndex:0]];
     }
     if (sender!=self) {
-        [sender presentViewController:mailViewController animated:YES completion:nil];
+        [sender presentViewController:mailViewController animated:YES completion:^{
+            [[UIApplication sharedApplication] setStatusBarStyle:UIStatusBarStyleLightContent];
+            [mailViewController setNeedsStatusBarAppearanceUpdate];
+        }];
     } else {
-        [[self navigationController] presentViewController:mailViewController animated:YES completion:nil];
+        [[self navigationController] presentViewController:mailViewController animated:YES completion:^{
+            [[UIApplication sharedApplication] setStatusBarStyle:UIStatusBarStyleLightContent];
+            [mailViewController setNeedsStatusBarAppearanceUpdate];
+        }];
     }
 }
 
