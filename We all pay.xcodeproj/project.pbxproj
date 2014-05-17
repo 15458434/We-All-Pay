@@ -396,6 +396,28 @@
 			name = "Testflight SDK";
 			sourceTree = "<group>";
 		};
+		3829C61B192628C100DE91D4 /* iOS */ = {
+			isa = PBXGroup;
+			children = (
+				38CC48DE190A9E7000741201 /* libGoogleAnalyticsServices.a */,
+				3857304B18DAF2F100A900EA /* libTestFlight.a */,
+				38DC8B3519084ABE00762235 /* SystemConfiguration.framework */,
+				386FC36F18E5BE1900428294 /* iAd.framework */,
+				38690702186F0EEF006A5C11 /* libz.dylib */,
+				383E0C561867079900AA688D /* Social.framework */,
+				3873A2A416F23AA1000832FD /* MessageUI.framework */,
+				3801F89B16DFC62600DF8675 /* CoreData.framework */,
+				3886D3FB16B7A1CD00ECE64F /* AddressBook.framework */,
+				3886D3FC16B7A1CD00ECE64F /* AddressBookUI.framework */,
+				38572AD6169D437B00969C62 /* UIKit.framework */,
+				38572AD8169D437B00969C62 /* Foundation.framework */,
+				38572ADA169D437B00969C62 /* CoreGraphics.framework */,
+				38522E2418DB3F01007BDB3F /* XCTest.framework */,
+				387759011923D3EE0027A7F1 /* Other Frameworks */,
+			);
+			name = iOS;
+			sourceTree = "<group>";
+		};
 		38334EC5172D323D0063B919 /* Launch images */ = {
 			isa = PBXGroup;
 			children = (
@@ -428,21 +450,7 @@
 		38572AD5169D437B00969C62 /* Frameworks */ = {
 			isa = PBXGroup;
 			children = (
-				38CC48DE190A9E7000741201 /* libGoogleAnalyticsServices.a */,
-				3857304B18DAF2F100A900EA /* libTestFlight.a */,
-				38DC8B3519084ABE00762235 /* SystemConfiguration.framework */,
-				386FC36F18E5BE1900428294 /* iAd.framework */,
-				38690702186F0EEF006A5C11 /* libz.dylib */,
-				383E0C561867079900AA688D /* Social.framework */,
-				3873A2A416F23AA1000832FD /* MessageUI.framework */,
-				3801F89B16DFC62600DF8675 /* CoreData.framework */,
-				3886D3FB16B7A1CD00ECE64F /* AddressBook.framework */,
-				3886D3FC16B7A1CD00ECE64F /* AddressBookUI.framework */,
-				38572AD6169D437B00969C62 /* UIKit.framework */,
-				38572AD8169D437B00969C62 /* Foundation.framework */,
-				38572ADA169D437B00969C62 /* CoreGraphics.framework */,
-				38522E2418DB3F01007BDB3F /* XCTest.framework */,
-				387759011923D3EE0027A7F1 /* Other Frameworks */,
+				3829C61B192628C100DE91D4 /* iOS */,
 			);
 			name = Frameworks;
 			sourceTree = "<group>";

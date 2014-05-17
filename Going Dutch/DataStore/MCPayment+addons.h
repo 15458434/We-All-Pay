@@ -24,6 +24,9 @@
 
 - (BOOL)hasPayer;
 
+- (void)addPaymentPresenceFor:(MCPerson *)person;
+- (void)addLateArrivalPaymentPresenceFor:(MCPerson *)person;
+
 - (MCPaymentPresence *)fetchPaymentPresenceForPerson:(MCPerson *)person;
 - (void)thisPerson:(MCPerson *)person setIsPresent:(NSNumber *)isPresent;
 - (NSNumber *)peoplePresentOnThisPayment;

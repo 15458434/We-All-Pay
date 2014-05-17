@@ -56,6 +56,7 @@
     [mark setFirstName:@"Mark"];
     [mark setLastName:@"Cornelisse"];
     [mark addOneEmailAddressFromAString:@"info@markcornelisse.nl"];
+    MCPayment *dummE = [thisBill addPayment];
     MCPerson *ilse = [thisBill addPerson];
     [ilse setFirstName:@"Ilse"];
     [ilse setLastName:@"Béguin"];
@@ -255,6 +256,79 @@
     XCTAssertTrue([solution count] == 2, @"The amount of objects in the solution is not ok.");
     XCTAssertEqualWithAccuracy([[[solution objectAtIndex:0] money] doubleValue], 5.50, 0.001, @"The amount Mark should pay is not 5.50.");
     XCTAssertEqualWithAccuracy([[[solution objectAtIndex:1] money] doubleValue], 2.50, 0.001, @"The amount Iva should pay is not 2.50.");
+}
+
+- (void)testaddLateArrivalPaymentPresenceFor
+{
+    MCSharedBill *thisBill = [MCSharedBill addSharedBillToContext:_context];
+    [thisBill setTripName:@"Movie"];
+    MCPerson *mark = [thisBill addPerson];
+    [mark setFirstName:@"Mark"];
+    [mark setLastName:@"Cornelisse"];
+    [mark addOneEmailAddressFromAString:@"info@markcornelisse.nl"];
+    MCPerson *ilse = [thisBill addPerson];
+    [ilse setFirstName:@"Ilse"];
+    [ilse setLastName:@"Béguin"];
+    [ilse addOneEmailAddressFromAString:@"ilse.beguin@hotmail.com"];
+    
+    MCPayment *thisPayment = [thisBill addPayment];
+    [thisPayment setPayingPerson:mark];
+    [thisPayment setDescriptionOfPayment:@"Movie tickets"];
+    [thisPayment setMoney:@26.70];
+    [thisPayment setOnWhichBill:thisBill];
+    
+    MCPerson *iva = [thisBill addPerson];
+    [iva setFirstName:@"Iva"];
+    [iva setLastName:@"Moslavac"];
+    [iva addOneEmailAddressFromAString:@"ivamavi2002@yahoo.co.uk"];
+    
+    XCTAssertEqual([[thisPayment peopleSharingPayment] count], 3, @"There can only be 3 people sharing this payment.");
+    MCPaymentPresence *presenceOfIva = [[iva sharingPayment] anyObject];
+    XCTAssertFalse([[presenceOfIva isPersonPresent] boolValue], @"Iva should not be present.");
+}
+
+- (void)testDeletePersonWithPresences
+{
+    MCSharedBill *thisBill = [MCSharedBill addSharedBillToContext:_context];
+    MCPerson *mark = [thisBill addPerson];
+    [mark setFirstName:@"Mark"];
+    [mark setLastName:@"Cornelisse"];
+    [mark addOneEmailAddressFromAString:@"info@markcornelisse.nl"];
+    MCPerson *ilse = [thisBill addPerson];
+    [ilse setFirstName:@"Ilse"];
+    [ilse setLastName:@"Béguin"];
+    [ilse addOneEmailAddressFromAString:@"ilse.beguin@hotmail.com"];
+    MCPerson *iva = [thisBill addPerson];
+    [iva setFirstName:@"Iva"];
+    [iva setLastName:@"Moslavac"];
+    [iva addOneEmailAddressFromAString:@"ivamavi2002@yahoo.co.uk"];
+    
+    MCPayment *thisPayment = [thisBill addPayment];
+    [thisPayment setPayingPerson:mark];
+    [thisPayment setDescriptionOfPayment:@"Drinken op een terras."];
+    [thisPayment setMoney:@9.00];
+    
+    MCPayment *thisPayment2 = [thisBill addPayment];
+    [thisPayment2 setPayingPerson:iva];
+    [thisPayment2 setDescriptionOfPayment:@"Food"];
+    [thisPayment2 setMoney:@30.00];
+    
+    MCPayment *thisPayment3 = [thisBill addPayment];
+    [thisPayment3 setPayingPerson:ilse];
+    [thisPayment3 setDescriptionOfPayment:@"Movie"];
+    [thisPayment3 setMoney:@36.00];
+    
+    XCTAssertEqual([[iva sharingPayment] count], 3, @"There should be 3 paymentPresences for Iva.");
+    NSSet *paymentPresencesIva= [iva sharingPayment];
+    XCTAssertEqual([[thisPayment peopleSharingPayment] count], 3, @"There should be 3 paymentPresences on the first payment.");
+    [thisBill deletePerson:iva];
+    XCTAssertEqual([[thisPayment peopleSharingPayment] count], 2, @"There should be 2 paymentPresences left on this payment.");
+    XCTAssertTrue([iva isDeleted], @"Iva should be removed.");
+    for (MCPaymentPresence *paymentPresence in paymentPresencesIva) {
+        XCTAssertTrue([paymentPresence isDeleted], @"Payment presence of Iva should be deleted.");
+    }
+//    [thisBill amountShouldHavePaidBy:mark];
+    XCTAssertEqualWithAccuracy([[thisBill amountShouldHavePaidBy:mark] doubleValue], 37.5, 0.001, @"payment presence not updated after deletion.");
 }
 
 @end

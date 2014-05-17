@@ -96,6 +96,25 @@
     }
 }
 
+- (void)addPaymentPresenceFor:(MCPerson *)person
+{
+    // When the App goes through an update cycle to version two for eacht payment the presences need to be added.
+    MCPaymentPresence *paymentPresence = [MCPaymentPresence addPaymentPresenceInContext:[self managedObjectContext]];
+    [paymentPresence setPerson:person];
+    [paymentPresence setIsPersonPresent:@YES];
+    [paymentPresence setPayment:self];
+}
+
+- (void)addLateArrivalPaymentPresenceFor:(MCPerson *)person
+{
+    // When someone arrives late and is added later to tonightsBill the presence of this person will be set to nil.
+    MCPaymentPresence *paymentPresence = [MCPaymentPresence addPaymentPresenceInContext:[self managedObjectContext]];
+    [paymentPresence setPerson:person];
+    [paymentPresence setIsPersonPresent:@NO];
+    [paymentPresence setPayment:self];
+    [self setDateModified:[paymentPresence dateCreated]];
+}
+
 - (MCPaymentPresence *)fetchPaymentPresenceForPerson:(MCPerson *)person
 {
     NSFetchRequest *request = [NSFetchRequest fetchRequestWithEntityName:@"MCPaymentPresence"];
@@ -147,13 +166,13 @@
 {
     NSNumber *averagePayedByPeoplePresent = [self averageAmountPeopleShouldHavePaidOnThisPayment];
     NSDate *nu = [NSDate date];
-    for (MCPaymentPresence *pp in [self peopleSharingPayment]) {
-        if ([[pp isPersonPresent] boolValue]) {
-            [pp setAverageOweFromPayment:averagePayedByPeoplePresent];
-            [pp setDateModified:nu];
+    for (MCPaymentPresence *paymentPresence in [self peopleSharingPayment]) {
+        if ([[paymentPresence isPersonPresent] boolValue]) {
+            [paymentPresence setAverageOweFromPayment:averagePayedByPeoplePresent];
+            [paymentPresence setDateModified:nu];
         } else {
-            [pp setAverageOweFromPayment:@0.00];
-            [pp setDateModified:nu];
+            [paymentPresence setAverageOweFromPayment:@0.00];
+            [paymentPresence setDateModified:nu];
         }
     }
 }
@@ -200,5 +219,14 @@
     [self recalculateAveragePeopleOweAndStore];
     [[MCWeAllPayStoreController defaultStore] endUndoGroupWithoutRegistration];
 }
+
+#pragma mark - NSManagedObject stuff
+
+//- (void)didChangeValueForKey:(NSString *)key
+//{
+//    if ([key isEqualToString:@"peopleSharingPayment"]) {
+//        [self recalculateAveragePeopleOweAndStore];
+//    }
+//}
 
 @end

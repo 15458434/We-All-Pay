@@ -191,8 +191,23 @@
 {
     NSManagedObjectContext *context = [self managedObjectContext];
     MCPerson *newPerson = [MCPerson addPersonInContext:context];
+    for (MCPayment *payment in [self payments]) {
+        // Presence of all the exisiting payments on this sharedBill will be created and set tot NO.
+        [payment addLateArrivalPaymentPresenceFor:newPerson];
+    }
     [newPerson addSharedBillObject:self];
     return newPerson;
+}
+
+- (void)deletePerson:(MCPerson *)toBeDeletedPerson
+{
+    NSSet *presences = [[toBeDeletedPerson sharingPayment] copy];
+    for (MCPaymentPresence *paymentPresence in presences) {
+        MCPayment *payment = [paymentPresence payment];
+        [MCPaymentPresence deletePaymentPresence:paymentPresence];
+        [payment recalculateAveragePeopleOweAndStore];
+    }
+    [MCPerson deletePerson:toBeDeletedPerson];
 }
 
 - (BOOL)isPresentWithFirstName:(NSString *)firstName andLastName:(NSString *)lastName andEmailAddress:(NSString *)emailAddress
@@ -448,5 +463,7 @@
     NSSortDescriptor *sortDescriptor = [NSSortDescriptor sortDescriptorWithKey:@"getFullName" ascending:YES];
     return [[self peoplePresent] sortedArrayUsingDescriptors:@[sortDescriptor]];
 }
+
+
 
 @end

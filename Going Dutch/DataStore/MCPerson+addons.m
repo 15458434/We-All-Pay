@@ -293,6 +293,8 @@
     }
 }
 
+#pragma mark - NSManagedObject stuff
+
 - (void)awakeFromFetch
 {
     [super awakeFromFetch];

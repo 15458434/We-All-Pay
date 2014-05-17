@@ -11,7 +11,7 @@
 #import "MCWeAllPayStoreController.h"
 #import "MCEmailAddress+addons.h"
 #import "MCPerson+addons.h"
-#import "MCSharedBill.h"
+#import "MCSharedBill+addons.h"
 
 @implementation MCAddressBookDataReceiver
 
@@ -23,15 +23,14 @@
 
 - (void)getPersonData:(ABRecordRef)person
 {
+    // tonightsBill should be present.
+    NSParameterAssert(tonightsBill);
     // Get all linked ABRecords from AddressBook
     CFArrayRef allLinkedPeople = ABPersonCopyArrayOfAllLinkedPeople(person);
     
     thisPerson = [delegate personRecordToUse];
     if (!thisPerson) {
-        thisPerson = [MCPerson addPerson];
-        if (tonightsBill) {
-            [thisPerson addSharedBillObject:tonightsBill];
-        }
+        thisPerson = [tonightsBill addPerson];
     } else {
         [thisPerson deletAllEmailAddresses];
     }

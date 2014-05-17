@@ -28,6 +28,7 @@
 - (void)updatePaymentForSupportWithPaymentPresence;
 
 - (MCPerson *)addPerson;
+- (void)deletePerson:(MCPerson *)toBeDeletedPerson;
 - (BOOL)isPresentWithFirstName:(NSString *)firstName andLastName:(NSString *)lastName andEmailAddress:(NSString *)emailAddress;
 - (BOOL)areTherePeople;
 - (NSUInteger)totalAmountOfPeoplePresent;
