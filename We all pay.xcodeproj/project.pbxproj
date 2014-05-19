@@ -204,9 +204,6 @@
 		3873A2A616F2858A000832FD /* Going Dutch.entitlements */ = {isa = PBXFileReference; lastKnownFileType = text.xml; path = "Going Dutch.entitlements"; sourceTree = "<group>"; };
 		3876EF571840E86900C9546A /* MCCancelDoneTableViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = MCCancelDoneTableViewController.h; path = ../MCCancelDoneTableViewController.h; sourceTree = "<group>"; };
 		3876EF581840E86900C9546A /* MCCancelDoneTableViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = MCCancelDoneTableViewController.m; path = ../MCCancelDoneTableViewController.m; sourceTree = "<group>"; };
-		387759021923D3EE0027A7F1 /* AppKit.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = AppKit.framework; path = Library/Frameworks/AppKit.framework; sourceTree = SDKROOT; };
-		387759031923D3EE0027A7F1 /* CoreData.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = CoreData.framework; path = Library/Frameworks/CoreData.framework; sourceTree = SDKROOT; };
-		387759041923D3EE0027A7F1 /* Foundation.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Foundation.framework; path = Library/Frameworks/Foundation.framework; sourceTree = SDKROOT; };
 		387759681924DBE50027A7F1 /* MCPaymentPresenceTableViewCell_iPhone.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = MCPaymentPresenceTableViewCell_iPhone.h; path = Views/iPhone/MCPaymentPresenceTableViewCell_iPhone.h; sourceTree = "<group>"; };
 		387759691924DBE50027A7F1 /* MCPaymentPresenceTableViewCell_iPhone.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = MCPaymentPresenceTableViewCell_iPhone.m; path = Views/iPhone/MCPaymentPresenceTableViewCell_iPhone.m; sourceTree = "<group>"; };
 		387D3A8E187053BA0060FAF8 /* nl */ = {isa = PBXFileReference; fileEncoding = 10; lastKnownFileType = text.plist.strings; name = nl; path = "nl.lproj/Main-Iphone.strings"; sourceTree = "<group>"; };
@@ -413,7 +410,6 @@
 				38572AD8169D437B00969C62 /* Foundation.framework */,
 				38572ADA169D437B00969C62 /* CoreGraphics.framework */,
 				38522E2418DB3F01007BDB3F /* XCTest.framework */,
-				387759011923D3EE0027A7F1 /* Other Frameworks */,
 			);
 			name = iOS;
 			sourceTree = "<group>";
@@ -554,16 +550,6 @@
 				38DC8B4519097FEA00762235 /* Main-iPad.storyboard */,
 			);
 			name = Storyboard;
-			sourceTree = "<group>";
-		};
-		387759011923D3EE0027A7F1 /* Other Frameworks */ = {
-			isa = PBXGroup;
-			children = (
-				387759021923D3EE0027A7F1 /* AppKit.framework */,
-				387759031923D3EE0027A7F1 /* CoreData.framework */,
-				387759041923D3EE0027A7F1 /* Foundation.framework */,
-			);
-			name = "Other Frameworks";
 			sourceTree = "<group>";
 		};
 		3892E3AB179055F40038894B /* DataModel */ = {

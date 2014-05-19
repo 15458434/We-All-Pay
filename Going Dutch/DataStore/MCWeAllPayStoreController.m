@@ -49,7 +49,7 @@
     return sharedStore;
 }
 
-- (void)openStore:(void (^)(BOOL))completionHandler
+- (void)openStore:(void (^)(BOOL success))completionHandler
 {
     if (!weAllPayStoreDocument) {
         NSURL *weAllPayURL = [MCTools documentPathAsURLTo:@"WeAllPayStore"];
