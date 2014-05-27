@@ -197,6 +197,8 @@
                                                                    target:self
                                                                    action:@selector(doneNumberPad:)];
         [inputAccossoryNumberPad setItems:@[cancelButton, flexButton, doneButton] animated:YES];
+    } else {
+        isSelectEmail = NO;
     }
 }
 
