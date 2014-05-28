@@ -376,10 +376,7 @@
             [emailField setInputView:nil];
             [emailField setInputAccessoryView:nil];
             if (isNew) {
-                NSManagedObjectContext *context = [thisPerson managedObjectContext];
-                [context performBlock:^{
-                    [thisPerson addOneEmailAddressFromAString:[emailField text]];
-                }];
+                [thisPerson addOneEmailAddressFromAString:[emailField text]];
             } else {
                 MCEmailAddress *defaultEmail = [thisPerson getDefaultEmailAddressObject];
                 if (!defaultEmail) {

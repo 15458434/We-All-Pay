@@ -8,6 +8,7 @@
 
 #import "MCSharedBill+addons.h"
 #import "MCPerson+addons.h"
+#import "MCEmailAddress+addons.h"
 #import "MCPayment+addons.h"
 #import "MCPaymentPresence+addons.h"
 #import "MCWeAllPayStoreController.h"
@@ -37,10 +38,29 @@
 
 + (void)deleteSharedbill:(MCSharedBill *)deleteBill
 {
-    for (MCPayment *p in [deleteBill payments]) {
-        [deleteBill deletePayment:p];
+    NSManagedObjectContext *context = [deleteBill managedObjectContext];
+    // Delete all paymentPresences of all payments.
+    for (MCPayment *payment in [deleteBill payments]) {
+        for (MCPaymentPresence *paymentPresence in [payment peopleSharingPayment]) {
+            [context deleteObject:paymentPresence];
+        }
     }
-    [[deleteBill managedObjectContext] deleteObject:deleteBill];
+    // Delete all payments of the to be deleted sharedbill
+    for (MCPayment *payment in [deleteBill payments]) {
+        [context deleteObject:payment];
+    }
+    // Delete all emailaddresses of all people of the sharedbill.
+    for (MCPerson *person in [deleteBill peoplePresent]) {
+        for (MCEmailAddress *emailAddress in [person emailAddress]) {
+            [context deleteObject:emailAddress];
+        }
+    }
+    // Delete all people of the sharedbill.
+    for (MCPerson *person in [deleteBill peoplePresent]) {
+        [context deleteObject:person];
+    }
+    // Delete the sharedBill itself.
+    [context deleteObject:deleteBill];
 }
 
 + (MCSharedBill *)fetchSharedBillWithUniqueId:(NSString *)uuid inContext:(NSManagedObjectContext *)context
@@ -169,9 +189,9 @@
     NSParameterAssert([toBeDeletePayment onWhichBill] == self);
     
     // First delete the people presence on payment data.
-    NSSet *ppSet = [toBeDeletePayment peopleSharingPayment];
-    for (MCPaymentPresence *pp in ppSet) {
-        [MCPaymentPresence deletePaymentPresence:pp];
+    NSSet *paymentPresences = [toBeDeletePayment peopleSharingPayment];
+    for (MCPaymentPresence *paymentPresence in paymentPresences) {
+        [MCPaymentPresence deletePaymentPresence:paymentPresence];
     }
     
     // Then delete the payment.

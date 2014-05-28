@@ -78,8 +78,14 @@
     }
     
     MCPayment *secondPayment = [thisBill addPayment];
+    [secondPayment setMoney:@8.90];
+    [secondPayment setPayingPerson:iva];
+    [secondPayment setDescriptionOfPayment:@"Ice cream"];
     NSSet *ppSecondPayment = [secondPayment peopleSharingPayment];
     [MCSharedBill deleteSharedbill:thisBill];
+    for (MCPayment *payment in [thisBill payments]) {
+        XCTAssertTrue([payment isDeleted], @"Payment should have been deleted.");
+    }
     XCTAssertTrue([secondPayment isDeleted], @"The secondPayment should be deleted.");
     for (MCPaymentPresence *pp in ppSecondPayment) {
         XCTAssertTrue([pp isDeleted], @"People presence is not deleted on MCSharedbill delete.");

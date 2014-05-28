@@ -118,6 +118,16 @@
             NSLog(@"Save not possible for document at %@", [weAllPayStoreDocument fileURL]);
         }
     }];
+    // Basically does the same as the original saveStore code. However now a more useful error message is logged.
+//    NSManagedObjectContext *context = [weAllPayStoreDocument managedObjectContext];
+//    NSError *error;
+//    BOOL succes = [context save:&error];
+//    if (succes) {
+//        NSLog(@"Succesfully saved.");
+//    } else {
+//        NSLog(@"Save not possible for document at %@", [weAllPayStoreDocument fileURL]);
+//        NSLog(@"Save not possible: %@", [error localizedDescription]);
+//    }
 }
 
 - (void)closeDocument

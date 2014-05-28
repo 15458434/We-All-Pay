@@ -18,8 +18,8 @@
 
 @interface MCSharedBillAddOnsTest : XCTestCase
 {
-    MCWeAllPayStoreController *mainController;
-    NSManagedObjectContext *context;
+    MCWeAllPayStoreController *_mainController;
+    NSManagedObjectContext *_context;
 }
 
 @end
@@ -30,8 +30,15 @@
 {
     [super setUp];
     // Put setup code here. This method is called before the invocation of each test method in the class.
-    mainController = [MCWeAllPayStoreController defaultStore];
-    context = [[[MCWeAllPayStoreController defaultStore] weAllPayStoreDocument] managedObjectContext];
+    
+    NSManagedObjectModel *managedObjectModel = [NSManagedObjectModel mergedModelFromBundles:nil];
+    NSPersistentStoreCoordinator *persistentStoreCoordinator = [[NSPersistentStoreCoordinator alloc] initWithManagedObjectModel:managedObjectModel];
+    NSError *error;
+    NSPersistentStore *persistentStore = [persistentStoreCoordinator addPersistentStoreWithType:NSInMemoryStoreType configuration:nil URL:nil options:nil error:&error];
+    XCTAssertTrue(persistentStore, @"Something went wrong opening the In Memory Store: %@", [error localizedDescription]);
+    _context = [[NSManagedObjectContext alloc] init];
+    [_context setPersistentStoreCoordinator:persistentStoreCoordinator];
+
 }
 
 - (void)tearDown
@@ -42,7 +49,7 @@
 
 - (void)testMCSharedBillAddOns1
 {
-    // XCTAssertTrue([MCSharedBill isTableInDatabaseEmpty], @"There is a sharedBill present in the empty table?");
+//    XCTAssertTrue([MCSharedBill isTableInDatabaseEmpty], @"There is a sharedBill present in the empty table?");
     MCSharedBill *movie = [MCSharedBill addSharedBill];
     [movie setTripName:@"Movie"];
     XCTAssertFalse([movie areTherePeople], @"There are people on a new event?");
@@ -103,6 +110,21 @@
     XCTAssertEqual(liekemovie, [two receiver], @"Receiver not equal to the person that should receive.");
     [MCSharedBill deleteSharedbill:movie];
     XCTAssertTrue([movie isDeleted], @"Movie is not deleted");
+}
+
+- (void)testToCheckIfEmailAddressesAreProperlyDeletedWhenDeletingASharedBill
+{
+    // This test is to check to see the MCEmailAddressObjects which are of the people on the MCSharedBill are properly deleted.
+    MCSharedBill *movie = [MCSharedBill addSharedBill];
+    [movie setTripName:@"Movie"];
+    XCTAssertFalse([movie areTherePeople], @"There are people on a new event?");
+    MCPerson *markmovie = [movie addPerson];
+    [markmovie setFirstName:@"Mark"];
+    [markmovie setLastName:@"Cornelisse"];
+    [markmovie addOneEmailAddressFromAString:@"info@markcornelisse.nl"];
+    MCEmailAddress *marksOnlyEmailAddress = [[markmovie emailAddress] anyObject];
+    [MCSharedBill deleteSharedbill:movie];
+    XCTAssertTrue([marksOnlyEmailAddress isDeleted], @"marks email address is not properly deleted.");
 }
 
 @end
