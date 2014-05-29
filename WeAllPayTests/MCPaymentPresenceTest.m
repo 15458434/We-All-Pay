@@ -66,15 +66,15 @@
     [iva setLastName:@"Moslavac"];
     [iva addOneEmailAddressFromAString:@"ivamavi2002@yahoo.co.uk"];
     
-    MCPayment *thisPayment = [thisBill addPayment];
-    XCTAssertTrue([[thisPayment peopleSharingPayment] count] == [[thisBill peoplePresent] count], @"Amount of people from the sharedBill is not correct.");
-    NSSet *thesePeopleOnThisPayment = [thisPayment peopleSharingPayment];
+    MCPayment *firstPayment = [thisBill addPayment];
+    XCTAssertTrue([[firstPayment peopleSharingPayment] count] == [[thisBill peoplePresent] count], @"Amount of people from the sharedBill is not correct.");
+    NSSet *thesePeopleOnThisPayment = [firstPayment peopleSharingPayment];
     for (MCPaymentPresence *pp in thesePeopleOnThisPayment) {
         XCTAssertTrue([[pp isPersonPresent] boolValue], @"Person should be present on first creation of the payment.");
     }
-    [thisBill deletePayment:thisPayment];
-    for (MCPaymentPresence *pp in thesePeopleOnThisPayment) {
-        XCTAssertTrue([pp isDeleted], @"This person should be deleted.");
+    [thisBill deletePayment:firstPayment];
+    for (MCPaymentPresence *paymentPresence in thesePeopleOnThisPayment) {
+        XCTAssertTrue([paymentPresence isDeleted], @"This person should be deleted.");
     }
     
     MCPayment *secondPayment = [thisBill addPayment];
@@ -83,10 +83,10 @@
     [secondPayment setDescriptionOfPayment:@"Ice cream"];
     NSSet *ppSecondPayment = [secondPayment peopleSharingPayment];
     [MCSharedBill deleteSharedbill:thisBill];
+    XCTAssertTrue([secondPayment isDeleted], @"The secondPayment should be deleted.");
     for (MCPayment *payment in [thisBill payments]) {
         XCTAssertTrue([payment isDeleted], @"Payment should have been deleted.");
     }
-    XCTAssertTrue([secondPayment isDeleted], @"The secondPayment should be deleted.");
     for (MCPaymentPresence *pp in ppSecondPayment) {
         XCTAssertTrue([pp isDeleted], @"People presence is not deleted on MCSharedbill delete.");
     }

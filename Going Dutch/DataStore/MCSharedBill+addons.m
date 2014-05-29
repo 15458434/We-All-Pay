@@ -191,7 +191,7 @@
     // First delete the people presence on payment data.
     NSSet *paymentPresences = [toBeDeletePayment peopleSharingPayment];
     for (MCPaymentPresence *paymentPresence in paymentPresences) {
-        [MCPaymentPresence deletePaymentPresence:paymentPresence];
+        [[self managedObjectContext] deleteObject:paymentPresence];
     }
     
     // Then delete the payment.
@@ -224,7 +224,7 @@
     NSSet *presences = [[toBeDeletedPerson sharingPayment] copy];
     for (MCPaymentPresence *paymentPresence in presences) {
         MCPayment *payment = [paymentPresence payment];
-        [MCPaymentPresence deletePaymentPresence:paymentPresence];
+        [[self managedObjectContext] deleteObject:paymentPresence];
         [payment recalculateAveragePeopleOweAndStore];
     }
     [MCPerson deletePerson:toBeDeletedPerson];
