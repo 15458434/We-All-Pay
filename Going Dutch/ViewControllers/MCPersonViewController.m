@@ -361,7 +361,7 @@
         [tonightsBill setDateModified:nu];
         [thisPerson setDateModified:nu];
         [[[self navigationItem] rightBarButtonItem] setEnabled:YES];
-        [lastNameField becomeFirstResponder];
+//        [lastNameField becomeFirstResponder];
     } else if (textField == lastNameField) {
         [thisPerson setLastName:[lastNameField text]];
         didSomethingChange = YES;
@@ -369,7 +369,7 @@
         [tonightsBill setDateModified:nu];
         [thisPerson setDateModified:nu];
         [[[self navigationItem] rightBarButtonItem] setEnabled:YES];
-        [emailField becomeFirstResponder];
+//        [emailField becomeFirstResponder];
     } else if (textField == emailField) {
         if (!isSelectEmail) {
             isSelectEmail = YES;
