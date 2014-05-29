@@ -578,6 +578,7 @@
                         <outlet property="firstNameField" destination="Tln-WZ-m8Z" id="wmK-IR-h3f"/>
                         <outlet property="lastNameField" destination="E8v-zR-iZl" id="RFg-BC-pwo"/>
                         <outlet property="pictureView" destination="BPi-hy-YkK" id="vQx-k3-STo"/>
+                        <outlet property="selectEmailAddressButton" destination="Iac-jb-ETA" id="4sH-Qs-4D4"/>
                     </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="Uxq-pJ-OBM" userLabel="First Responder" sceneMemberID="firstResponder"/>

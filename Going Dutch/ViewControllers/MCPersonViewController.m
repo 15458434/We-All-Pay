@@ -57,9 +57,17 @@
 
 - (IBAction)selectEmailAddressPressed:(id)sender
 {
+    // If any of the fields is first responder resign them first.
+    if ([firstNameField isFirstResponder]) {
+        [firstNameField resignFirstResponder];
+    } else if ([lastNameField isFirstResponder]) {
+        [lastNameField resignFirstResponder];
+    } else if ([emailField isFirstResponder]) {
+        [emailField resignFirstResponder];
+    }
+    
     // select the emailField and pop-up it's keyboard with the UIPickerView
     isSelectEmail = YES;
-    [emailField resignFirstResponder];
     [emailField becomeFirstResponder];
 }
 
@@ -184,9 +192,9 @@
             [emailSelectionFromAddressBookPickerView setDelegate:self];
             [emailSelectionFromAddressBookPickerView setDataSource:self];
             [emailSelectionFromAddressBookPickerView setShowsSelectionIndicator:YES];
-            [emailField setInputView:emailSelectionFromAddressBookPickerView];
-            [emailField setInputAccessoryView:inputAccessoryPickerView];
         }
+        [emailField setInputView:emailSelectionFromAddressBookPickerView];
+        [emailField setInputAccessoryView:inputAccessoryPickerView];
         
         [emailSelectionFromAddressBookPickerView selectRow:indexOfDefaultEmailAddress inComponent:0 animated:YES];
         UIToolbar *inputAccossoryNumberPad = [[UIToolbar alloc] initWithFrame:toolbarRect];
@@ -234,47 +242,6 @@
     return self;
 }
 
-- (void)viewWillAppear:(BOOL)animated
-{
-    [super viewWillAppear:animated];
-    
-    [[self navigationController] setToolbarHidden:YES animated:YES];
-    
-    if (!twoLabelTitleView) {
-        twoLabelTitleView = [[NSBundle mainBundle] loadNibNamed:@"MCTwoLabelsTitleView" owner:self options:nil][0];
-        if (isNew) {
-            [[twoLabelTitleView mainLabel] setText:NSLocalizedString(@"NEW_PERSON_HEADER", @"Header in the personView which state new person.")];
-            [[twoLabelTitleView subLabel] setText:NSLocalizedString(@"NEW_PERSON_SUBHEADER", @"Sub header in the personView which states add new data")];
-        } else {
-            [[twoLabelTitleView mainLabel] setText:NSLocalizedString(@"EXISTING_PERSON_HEADER", @"Header in the personView which states person")];
-            [[twoLabelTitleView subLabel] setText:NSLocalizedString(@"EXISTING_PERSON_SUBHEADER", @"Sub header in the personView which state edit data")];
-        }
-        if (SYSTEM_VERSION_LESS_THAN(@"7.0")) {
-            [[twoLabelTitleView mainLabel] setTextColor:[UIColor whiteColor]];
-            [[twoLabelTitleView subLabel] setTextColor:[UIColor whiteColor]];
-        }
-        [[self navigationItem] setTitleView:twoLabelTitleView];
-    }
-    
-    [self performFetch];
-    
-    // [[[self navigationItem] rightBarButtonItem] setEnabled:didSomethingChange];
-    [addressBookButton setEnabled:!thisPersonHasPaidSomething];
-
-    [firstNameField setText:[thisPerson firstName]];
-    [lastNameField setText:[thisPerson lastName]];
-    MCEmailAddress *emailAddress = [MCEmailAddress fetchEmailAddressFor:thisPerson];
-    [emailField setText:[emailAddress emailAddress]];
-    // [_pictureView setImage:[thisPerson picture]];
-    [self setCircularImageOnPictureView:[thisPerson picture]];
-    /*
-    NSNumber *moneySpendByThisPerson = [tonightsBill totalSumPaidBy:thisPerson];
-    NSNumberFormatter *nf = [[NSNumberFormatter alloc] init];
-    [nf setNumberStyle:NSNumberFormatterCurrencyStyle];
-    [totalSumSpendLabel setText:[NSString stringWithFormat:@"Spent %@", [nf stringFromNumber:moneySpendByThisPerson]]];
-     */
-}
-
 - (void)viewDidLoad
 {
     [super viewDidLoad];
@@ -298,6 +265,42 @@
     }
     
     isSelectEmail = NO;
+}
+
+- (void)viewWillAppear:(BOOL)animated
+{
+    [super viewWillAppear:animated];
+    
+    [[self navigationController] setToolbarHidden:YES animated:YES];
+    
+    if (!twoLabelTitleView) {
+        twoLabelTitleView = [[NSBundle mainBundle] loadNibNamed:@"MCTwoLabelsTitleView" owner:self options:nil][0];
+        if (isNew) {
+            [[twoLabelTitleView mainLabel] setText:NSLocalizedString(@"NEW_PERSON_HEADER", @"Header in the personView which state new person.")];
+            [[twoLabelTitleView subLabel] setText:NSLocalizedString(@"NEW_PERSON_SUBHEADER", @"Sub header in the personView which states add new data")];
+        } else {
+            [[twoLabelTitleView mainLabel] setText:NSLocalizedString(@"EXISTING_PERSON_HEADER", @"Header in the personView which states person")];
+            [[twoLabelTitleView subLabel] setText:NSLocalizedString(@"EXISTING_PERSON_SUBHEADER", @"Sub header in the personView which state edit data")];
+        }
+        if (SYSTEM_VERSION_LESS_THAN(@"7.0")) {
+            [[twoLabelTitleView mainLabel] setTextColor:[UIColor whiteColor]];
+            [[twoLabelTitleView subLabel] setTextColor:[UIColor whiteColor]];
+        }
+        [[self navigationItem] setTitleView:twoLabelTitleView];
+    }
+    
+    [self performFetch];
+
+    [firstNameField setText:[thisPerson firstName]];
+    [lastNameField setText:[thisPerson lastName]];
+    MCEmailAddress *emailAddress = [MCEmailAddress fetchEmailAddressFor:thisPerson];
+    [emailField setText:[emailAddress emailAddress]];
+    [self setCircularImageOnPictureView:[thisPerson picture]];
+    if ([[thisPerson emailAddress] count] < 2) {
+        [selectEmailAddressButton setHidden:YES];
+    } else {
+        [selectEmailAddressButton setHidden:NO];
+    }
 }
 
 - (void)viewDidAppear:(BOOL)animated
@@ -348,6 +351,9 @@
     if (textField == emailField) {
         if (isSelectEmail) {
             [self prepareEmailFieldAsSelector];
+        } else {
+            [emailField setInputView:nil];
+            [emailField setInputAccessoryView:nil];
         }
     }
 }
@@ -372,7 +378,6 @@
 //        [emailField becomeFirstResponder];
     } else if (textField == emailField) {
         if (!isSelectEmail) {
-            isSelectEmail = YES;
             [emailField setInputView:nil];
             [emailField setInputAccessoryView:nil];
             if (isNew) {
@@ -386,10 +391,12 @@
                 }
             }
         }
+        isSelectEmail = NO;
         NSDate *nu = [NSDate date];
         [tonightsBill setDateModified:nu];
         [thisPerson setDateModified:nu];
         didSomethingChange = YES;
+
         [[[self navigationItem] rightBarButtonItem] setEnabled:YES];
     }
 }

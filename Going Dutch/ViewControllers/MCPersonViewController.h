@@ -32,6 +32,8 @@ typedef enum _emailFieldEditStatus {
     __weak IBOutlet UITextField *firstNameField;
     __weak IBOutlet UITextField *lastNameField;
     __weak IBOutlet UITextField *emailField;
+    __weak IBOutlet UIButton *selectEmailAddressButton;
+    
     // __weak IBOutlet UILabel *totalSumSpendLabel;
     MCTwoLabelsTitleView *twoLabelTitleView;
     UIBarButtonItem *addressBookButton;
