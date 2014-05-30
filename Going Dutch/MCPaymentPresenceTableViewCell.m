@@ -19,6 +19,7 @@
 - (IBAction)switchPresence:(id)sender
 {
     [_thisCellsPaymentPresence setIsPersonPresent:@([sender isOn])];
+    [[_thisCellsPaymentPresence payment] recalculateAveragePeopleOweAndStore];
 }
 
 #pragma mark - New in this class.
@@ -37,7 +38,6 @@
             MCPaymentPresenceTableViewCell *strongSelf = weakSelf;
             if (strongSelf) {
                 [[strongSelf personView] setImage:circularImage];
-                [strongSelf setNeedsDisplay];
             }
         });
     });

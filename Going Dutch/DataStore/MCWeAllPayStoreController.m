@@ -288,7 +288,7 @@
     
     // Create the FetchedResultsController.
     NSFetchedResultsController *dataController = [[NSFetchedResultsController alloc] initWithFetchRequest:request managedObjectContext:context sectionNameKeyPath:nil cacheName:[NSString stringWithFormat:@"All payment presence cache for payment: %@", [thisPayment uniquePaymentId]]];
-//    [dataController setDelegate:delegate];
+    [dataController setDelegate:delegate];
     NSError *error;
     BOOL success = [dataController performFetch:&error];
     if (!success) {

@@ -7,6 +7,7 @@
 //
 
 #import <UIKit/UIKit.h>
+#import <CoreData/CoreData.h>
 
 #import "MCTonightsBillTransfer.h"
 #import "MCThisPaymentProtocol.h"
@@ -30,7 +31,7 @@ typedef NS_ENUM(BOOL, MCCancelButtonPressed) {
     cancelIsPressed
 };
 
-@interface MCPaymentTableViewController_iPad : UITableViewController <MCTonightsBillPut, MCThisPaymentProtocol, MCDismissMeBlockProtocol, UITextFieldDelegate, UIPopoverControllerDelegate>
+@interface MCPaymentTableViewController_iPad : UITableViewController <MCTonightsBillPut, MCThisPaymentProtocol, MCDismissMeBlockProtocol, UITextFieldDelegate, UIPopoverControllerDelegate, NSFetchedResultsControllerDelegate>
 {
     __weak IBOutlet UILabel *payerLabel;
     __weak IBOutlet UITextField *itemField;
@@ -41,6 +42,7 @@ typedef NS_ENUM(BOOL, MCCancelButtonPressed) {
     MCIsNew _isNew;
     MCCancelButtonPressed _mainCancelPressed;
     
+    NSFetchedResultsController *_dataController;
     NSArray *_paymentPresenceArray;
 }
 

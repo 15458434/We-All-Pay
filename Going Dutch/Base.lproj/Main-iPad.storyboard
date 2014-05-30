@@ -801,29 +801,38 @@
                                                 <action selector="switchPresence:" destination="SXa-Nq-OdV" eventType="valueChanged" id="Xil-JC-2hr"/>
                                             </connections>
                                         </switch>
-                                        <label opaque="NO" clipsSubviews="YES" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="full name" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="vSV-5M-Ipk">
-                                            <rect key="frame" x="399" y="19" width="64" height="21"/>
+                                        <label opaque="NO" clipsSubviews="YES" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" misplaced="YES" text="full name" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="vSV-5M-Ipk">
+                                            <rect key="frame" x="399" y="16" width="64" height="21"/>
                                             <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
-                                            <fontDescription key="fontDescription" name="HelveticaNeue-Thin" family="Helvetica Neue" pointSize="17"/>
+                                            <fontDescription key="fontDescription" name="HelveticaNeue-Thin" family="Helvetica Neue" pointSize="18"/>
                                             <color key="textColor" cocoaTouchSystemColor="darkTextColor"/>
                                             <nil key="highlightedColor"/>
                                         </label>
-                                        <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" translatesAutoresizingMaskIntoConstraints="NO" id="9MV-Ie-wK3">
+                                        <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" misplaced="YES" translatesAutoresizingMaskIntoConstraints="NO" id="9MV-Ie-wK3">
                                             <rect key="frame" x="340" y="4" width="51" height="51"/>
                                             <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                                             <constraints>
                                                 <constraint firstAttribute="width" secondItem="9MV-Ie-wK3" secondAttribute="height" multiplier="1:1" id="ZIY-EF-1OP"/>
                                             </constraints>
                                         </imageView>
+                                        <label opaque="NO" clipsSubviews="YES" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" misplaced="YES" text="Label" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="nuz-9n-IsM">
+                                            <rect key="frame" x="399" y="39" width="64" height="16"/>
+                                            <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                                            <fontDescription key="fontDescription" name="HelveticaNeue-Medium" family="Helvetica Neue" pointSize="13"/>
+                                            <nil key="highlightedColor"/>
+                                        </label>
                                     </subviews>
                                     <constraints>
                                         <constraint firstItem="9MV-Ie-wK3" firstAttribute="top" secondItem="qHN-Ki-paQ" secondAttribute="top" constant="4" id="50g-4F-s4Y"/>
-                                        <constraint firstItem="vSV-5M-Ipk" firstAttribute="centerY" secondItem="eAH-Vw-oDl" secondAttribute="centerY" id="FpQ-fj-fdl"/>
+                                        <constraint firstAttribute="centerY" secondItem="eAH-Vw-oDl" secondAttribute="centerY" id="8kT-a3-W0v"/>
                                         <constraint firstItem="vSV-5M-Ipk" firstAttribute="leading" secondItem="9MV-Ie-wK3" secondAttribute="trailing" priority="250" constant="8" id="IYs-O1-x3Z"/>
-                                        <constraint firstItem="9MV-Ie-wK3" firstAttribute="centerY" secondItem="vSV-5M-Ipk" secondAttribute="centerY" id="Stk-v3-skd"/>
                                         <constraint firstAttribute="centerY" secondItem="9MV-Ie-wK3" secondAttribute="centerY" id="TV0-oL-heg"/>
+                                        <constraint firstItem="nuz-9n-IsM" firstAttribute="trailing" secondItem="vSV-5M-Ipk" secondAttribute="trailing" id="UF6-Xn-3J6"/>
+                                        <constraint firstItem="nuz-9n-IsM" firstAttribute="leading" secondItem="vSV-5M-Ipk" secondAttribute="leading" id="WBV-7u-7Uq"/>
+                                        <constraint firstAttribute="centerY" secondItem="vSV-5M-Ipk" secondAttribute="centerY" constant="3" id="Y5Z-kG-Wpo"/>
                                         <constraint firstItem="eAH-Vw-oDl" firstAttribute="leading" secondItem="vSV-5M-Ipk" secondAttribute="trailing" constant="8" id="b8Q-qg-DrV"/>
                                         <constraint firstItem="9MV-Ie-wK3" firstAttribute="leading" secondItem="qHN-Ki-paQ" secondAttribute="leading" priority="249" constant="20" symbolic="YES" id="eUw-fg-Xdd"/>
+                                        <constraint firstItem="nuz-9n-IsM" firstAttribute="top" secondItem="vSV-5M-Ipk" secondAttribute="bottom" constant="2" id="hJ6-Ug-mU5"/>
                                         <constraint firstAttribute="trailing" secondItem="eAH-Vw-oDl" secondAttribute="trailing" constant="20" symbolic="YES" id="iq1-Zw-uyE"/>
                                         <constraint firstAttribute="bottom" secondItem="9MV-Ie-wK3" secondAttribute="bottom" constant="4" id="tQt-Rl-vfS"/>
                                     </constraints>
@@ -831,6 +840,7 @@
                                 <inset key="separatorInset" minX="188" minY="0.0" maxX="0.0" maxY="0.0"/>
                                 <connections>
                                     <outlet property="nameLabel" destination="vSV-5M-Ipk" id="8S1-zg-Q5a"/>
+                                    <outlet property="owesMoneyLabel" destination="nuz-9n-IsM" id="PUs-X3-IBn"/>
                                     <outlet property="personView" destination="9MV-Ie-wK3" id="BGJ-2M-N0a"/>
                                     <outlet property="theSwitch" destination="eAH-Vw-oDl" id="lVi-BR-WNX"/>
                                 </connections>

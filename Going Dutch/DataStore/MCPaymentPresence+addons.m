@@ -34,4 +34,13 @@
     [[paymentPresence managedObjectContext] deleteObject:paymentPresence];
 }
 
+- (NSString *)getCurrencyStringOfAverageOwe
+{
+    NSNumberFormatter *nf = [[NSNumberFormatter alloc] init];
+    [nf setLocale:[NSLocale currentLocale]];
+    [nf setNumberStyle:NSNumberFormatterCurrencyStyle];
+    [nf setFormatterBehavior:NSNumberFormatterBehaviorDefault];
+    return [nf stringFromNumber:[self averageOweFromPayment]];
+}
+
 @end

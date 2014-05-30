@@ -73,24 +73,24 @@
 
 #pragma mark - New in this class
 
-//- (void)performFetchAndReloadTableView:(NSNotification *)notification
-//{
-//    UIManagedDocument *weAllPayDocument = [[MCWeAllPayStoreController defaultStore] weAllPayStoreDocument];
-//    if ([weAllPayDocument documentState] == UIDocumentStateNormal) {
-//        [self performFetch];
-//        [[self tableView] reloadData];
-//        [[NSNotificationCenter defaultCenter] removeObserver:self];
-//    }
-//}
-//
-//- (void)performFetch
-//{
-//    NSError *error;
-//    BOOL success = [_dataController performFetch:&error];
-//    if (!success) {
-//        NSLog(@"Something went wrong");
-//    }
-//}
+- (void)performFetchAndReloadTableView:(NSNotification *)notification
+{
+    UIManagedDocument *weAllPayDocument = [[MCWeAllPayStoreController defaultStore] weAllPayStoreDocument];
+    if ([weAllPayDocument documentState] == UIDocumentStateNormal) {
+        [self performFetch];
+        [[self tableView] reloadData];
+        [[NSNotificationCenter defaultCenter] removeObserver:self];
+    }
+}
+
+- (void)performFetch
+{
+    NSError *error;
+    BOOL success = [_dataController performFetch:&error];
+    if (!success) {
+        NSLog(@"Something went wrong");
+    }
+}
 
 
 - (void)reloadPayerLabel
@@ -176,13 +176,13 @@
     NSSortDescriptor *sortDescriptor = [NSSortDescriptor sortDescriptorWithKey:@"person.firstName" ascending:YES];
     _paymentPresenceArray = [[_thisPayment peopleSharingPayment] sortedArrayUsingDescriptors:@[sortDescriptor]];
     
-//    _dataController = [[MCWeAllPayStoreController defaultStore] paymentPresenceDataControllerForDelegate:self];
-//    UIManagedDocument *weAllPayDocument = [[MCWeAllPayStoreController defaultStore] weAllPayStoreDocument];
-//    if (![[MCWeAllPayStoreController defaultStore] isDocumentStateNormal]) {
-//        [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(performFetchAndReloadTableView:) name:UIDocumentStateChangedNotification object:weAllPayDocument];
-//    } else {
-//        [self performFetch];
-//    }
+    _dataController = [[MCWeAllPayStoreController defaultStore] paymentPresenceDataControllerForDelegate:self];
+    UIManagedDocument *weAllPayDocument = [[MCWeAllPayStoreController defaultStore] weAllPayStoreDocument];
+    if (![[MCWeAllPayStoreController defaultStore] isDocumentStateNormal]) {
+        [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(performFetchAndReloadTableView:) name:UIDocumentStateChangedNotification object:weAllPayDocument];
+    } else {
+        [self performFetch];
+    }
 }
 
 - (void)viewDidAppear:(BOOL)animated
@@ -278,6 +278,44 @@
     }
 }
 
+#pragma mark - NSFetchedResultsControllerDelegate
+
+- (void)controllerWillChangeContent:(NSFetchedResultsController *)controller
+{
+    [[self tableView] beginUpdates];
+}
+
+- (void)controllerDidChangeContent:(NSFetchedResultsController *)controller
+{
+    [[self tableView] endUpdates];
+}
+
+- (void)controller:(NSFetchedResultsController *)controller didChangeObject:(id)anObject atIndexPath:(NSIndexPath *)indexPath forChangeType:(NSFetchedResultsChangeType)type newIndexPath:(NSIndexPath *)newIndexPath
+{
+    switch(type) {
+            
+        case NSFetchedResultsChangeInsert:
+            [[self tableView] insertRowsAtIndexPaths:@[newIndexPath]
+                                    withRowAnimation:UITableViewRowAnimationFade];
+            break;
+            
+        case NSFetchedResultsChangeDelete:
+            [[self tableView] deleteRowsAtIndexPaths:@[indexPath]
+                                    withRowAnimation:UITableViewRowAnimationFade];
+            break;
+            
+        case NSFetchedResultsChangeUpdate:
+            [[self tableView] reloadRowsAtIndexPaths:@[indexPath] withRowAnimation:UITableViewRowAnimationAutomatic];
+            break;
+            
+        case NSFetchedResultsChangeMove:
+            [[self tableView] deleteRowsAtIndexPaths:@[indexPath]
+                                    withRowAnimation:UITableViewRowAnimationFade];
+            [[self tableView] insertRowsAtIndexPaths:@[newIndexPath]
+                                    withRowAnimation:UITableViewRowAnimationFade];
+            break;
+    }
+}
 
 #pragma mark - Table view delegate
 
@@ -304,10 +342,12 @@
 {
     MCPaymentPresenceTableViewCell *cell = [tableView dequeueReusableCellWithIdentifier:@"paymentPresenceTableViewCell" forIndexPath:indexPath];
     
-    MCPaymentPresence *paymentPresenceForThisCell = [_paymentPresenceArray objectAtIndex:[indexPath row]];
+    MCPaymentPresence *paymentPresenceForThisCell = [_dataController objectAtIndexPath:indexPath];
     [[cell nameLabel] setText:[[paymentPresenceForThisCell person] getFullName]];
     [cell setCircularImage:[[paymentPresenceForThisCell person] thumbnail]];
-    [[cell theSwitch] setOn:[[paymentPresenceForThisCell isPersonPresent] boolValue] animated:YES];
+    [[cell theSwitch] setOn:[[paymentPresenceForThisCell isPersonPresent] boolValue] animated:NO];
+    NSString *owesLabelString = [NSString stringWithFormat:@"owes %@",[paymentPresenceForThisCell getCurrencyStringOfAverageOwe]];
+    [[cell owesMoneyLabel] setText:owesLabelString];
     [cell setThisCellsPaymentPresence:paymentPresenceForThisCell];
     
     // Constraint for alignment with headerView of the tableView.

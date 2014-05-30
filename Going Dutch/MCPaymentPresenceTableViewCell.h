@@ -16,6 +16,7 @@
 @property (weak, nonatomic) IBOutlet UILabel *nameLabel;
 @property (weak, nonatomic) IBOutlet UIImageView *personView;
 @property (strong, nonatomic) MCPaymentPresence *thisCellsPaymentPresence;
+@property (weak, nonatomic) IBOutlet UILabel *owesMoneyLabel;
 
 - (IBAction)switchPresence:(id)sender;
 
