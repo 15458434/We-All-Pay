@@ -62,11 +62,7 @@
 }
 - (IBAction)dismissKeyboardWhenTappedOutsideAUITextField:(id)sender
 {
-    if ([itemField isFirstResponder]) {
-        [itemField resignFirstResponder];
-    } else if ([paidField isFirstResponder]) {
-        [paidField resignFirstResponder];
-    }
+    [self dismissTheKeyboard];
 }
 
 
@@ -211,6 +207,17 @@
     // Dispose of any resources that can be recreated.
 }
 
+#pragma mark - MCDismissKeyboardProtocol
+
+- (void)dismissTheKeyboard
+{
+    if ([itemField isFirstResponder]) {
+        [itemField resignFirstResponder];
+    } else if ([paidField isFirstResponder]) {
+        [paidField resignFirstResponder];
+    }
+}
+
 #pragma mark - UITextFieldDelegate
 
 - (BOOL)textFieldShouldBeginEditing:(UITextField *)textField
@@ -349,6 +356,9 @@
     NSString *owesLabelString = [NSString stringWithFormat:@"owes %@",[paymentPresenceForThisCell getCurrencyStringOfAverageOwe]];
     [[cell owesMoneyLabel] setText:owesLabelString];
     [cell setThisCellsPaymentPresence:paymentPresenceForThisCell];
+    
+    // When touch in background of a tableViewCell the keyboard will be dismissed.
+    [cell setKeyboardDismissDelegate:self];
     
     // Constraint for alignment with headerView of the tableView.
     NSLayoutConstraint *constraintBetweenNameLabelAndSelectButton = [NSLayoutConstraint constraintWithItem:selectButton attribute:NSLayoutAttributeLeading relatedBy:NSLayoutRelationEqual toItem:[cell nameLabel] attribute:NSLayoutAttributeLeading multiplier:1.0 constant:0.0];

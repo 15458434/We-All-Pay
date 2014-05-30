@@ -124,6 +124,7 @@
 /* End PBXContainerItemProxy section */
 
 /* Begin PBXFileReference section */
+		3801881A1938D8E70085A5AE /* MCDismissKeyboardProtocol.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = MCDismissKeyboardProtocol.h; path = ViewControllers/MCDismissKeyboardProtocol.h; sourceTree = "<group>"; };
 		3801F89B16DFC62600DF8675 /* CoreData.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = CoreData.framework; path = System/Library/Frameworks/CoreData.framework; sourceTree = SDKROOT; };
 		380396331920CD3900FA8CC2 /* MCPaymentPresence.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = MCPaymentPresence.h; sourceTree = "<group>"; };
 		380396341920CD3900FA8CC2 /* MCPaymentPresence.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = MCPaymentPresence.m; sourceTree = "<group>"; };
@@ -664,6 +665,7 @@
 				3898F32D18EEB38400BFFC61 /* MCThisPersonProtocol.h */,
 				3898F33318F1820600BFFC61 /* MCThisPaymentProtocol.h */,
 				382F9BD118F7285400818276 /* MCDismissMeBlockProtocol.h */,
+				3801881A1938D8E70085A5AE /* MCDismissKeyboardProtocol.h */,
 			);
 			name = "ViewController Protocols";
 			sourceTree = "<group>";

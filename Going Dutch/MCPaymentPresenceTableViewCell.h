@@ -7,6 +7,7 @@
 //
 
 #import <UIKit/UIKit.h>
+#import "MCDismissKeyboardProtocol.h"
 
 @class MCPaymentPresence;
 
@@ -17,7 +18,7 @@
 @property (weak, nonatomic) IBOutlet UIImageView *personView;
 @property (strong, nonatomic) MCPaymentPresence *thisCellsPaymentPresence;
 @property (weak, nonatomic) IBOutlet UILabel *owesMoneyLabel;
-
+@property (weak, nonatomic) id<MCDismissKeyboardProtocol> keyboardDismissDelegate;
 - (IBAction)switchPresence:(id)sender;
 
 - (void)setCircularImage:(UIImage *)personImage;

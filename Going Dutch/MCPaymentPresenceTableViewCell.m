@@ -22,6 +22,12 @@
     [[_thisCellsPaymentPresence payment] recalculateAveragePeopleOweAndStore];
 }
 
+- (IBAction)backgroundTappedToDismissKeyboard:(id)sender
+{
+    // Keyboard should be dismissed through the viewController
+    [_keyboardDismissDelegate dismissTheKeyboard];
+}
+
 #pragma mark - New in this class.
 
 - (void)setCircularImage:(UIImage *)personImage

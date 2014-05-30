@@ -12,6 +12,7 @@
 #import "MCTonightsBillTransfer.h"
 #import "MCThisPaymentProtocol.h"
 #import "MCDismissMeBlockProtocol.h"
+#import "MCDismissKeyboardProtocol.h"
 
 @class MCPayment;
 @class MCSharedBill;
@@ -31,7 +32,7 @@ typedef NS_ENUM(BOOL, MCCancelButtonPressed) {
     cancelIsPressed
 };
 
-@interface MCPaymentTableViewController_iPad : UITableViewController <MCTonightsBillPut, MCThisPaymentProtocol, MCDismissMeBlockProtocol, UITextFieldDelegate, UIPopoverControllerDelegate, NSFetchedResultsControllerDelegate>
+@interface MCPaymentTableViewController_iPad : UITableViewController <MCTonightsBillPut, MCThisPaymentProtocol, MCDismissMeBlockProtocol, MCDismissKeyboardProtocol, UITextFieldDelegate, UIPopoverControllerDelegate, NSFetchedResultsControllerDelegate>
 {
     __weak IBOutlet UILabel *payerLabel;
     __weak IBOutlet UITextField *itemField;
