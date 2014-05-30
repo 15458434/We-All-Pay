@@ -62,13 +62,7 @@
 
 - (IBAction)backgroundTappedToDismissKeyboard:(id)sender
 {
-    if ([firstNameField isFirstResponder]) {
-        [firstNameField resignFirstResponder];
-    } else if ([lastNameField isFirstResponder]) {
-        [lastNameField resignFirstResponder];
-    } else if ([emailField isFirstResponder]) {
-        [emailField resignFirstResponder];
-    }
+    [self dismissTheKeyboard];
 }
 
 #pragma mark - New in this class
@@ -101,6 +95,22 @@
     });
 }
 
+- (void)tappedInTheBackground:(id)selector
+{
+    [self dismissTheKeyboard];
+}
+
+- (void) dismissTheKeyboard
+{
+    if ([firstNameField isFirstResponder]) {
+        [firstNameField resignFirstResponder];
+    } else if ([lastNameField isFirstResponder]) {
+        [lastNameField resignFirstResponder];
+    } else if ([emailField isFirstResponder]) {
+        [emailField resignFirstResponder];
+    }
+}
+
 #pragma mark - Inherited From Super
 
 - (id)initWithStyle:(UITableViewStyle)style
@@ -126,6 +136,11 @@
     isEditingEmailField = isNotEditing;
     mainCancelPressed = cancelIsNotPressed;
     [[MCWeAllPayStoreController defaultStore] beginUndoGroup];
+    
+    // Make sure a tap in the background dimisses the keyboard as well.
+    UITapGestureRecognizer *thatTickles = [[UITapGestureRecognizer alloc] initWithTarget:self action:@selector(tappedInTheBackground:)];
+    [thatTickles setCancelsTouchesInView:NO];
+    [[self tableView] addGestureRecognizer:thatTickles];
 }
 
 - (void)viewWillAppear:(BOOL)animated
