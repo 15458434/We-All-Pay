@@ -130,6 +130,14 @@
     } else {
         isNew = NO;
     }
+    
+    // If there is none or only one emailAddress the button for an email address should not be shown.
+    if ([[_thisPerson emailAddress] count] < 2) {
+        [selectEmailAddressButton setHidden:YES];
+    } else {
+        [selectEmailAddressButton setHidden:NO];
+    }
+    
     [firstNameField setText:[_thisPerson firstName]];
     [lastNameField setText:[_thisPerson lastName]];
     [emailField setText:[_thisPerson defaultEmailAddress]];

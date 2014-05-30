@@ -30,6 +30,7 @@ typedef NS_ENUM(BOOL, MCCancelButtonPressed) {
     __weak IBOutlet UITextField *firstNameField;
     __weak IBOutlet UITextField *lastNameField;
     __weak IBOutlet UITextField *emailField;
+    __weak IBOutlet UIButton *selectEmailAddressButton;
     
     UIPickerView *emailSelectionFromAddressBookPickerView;
     BOOL isSelectEmail;

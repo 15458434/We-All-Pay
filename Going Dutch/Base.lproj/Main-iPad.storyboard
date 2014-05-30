@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="UTF-8" standalone="no"?>
-<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="5056" systemVersion="13C1021" targetRuntime="iOS.CocoaTouch.iPad" propertyAccessControl="none" useAutolayout="YES" initialViewController="zVB-NT-1S4">
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="5056" systemVersion="13D65" targetRuntime="iOS.CocoaTouch.iPad" propertyAccessControl="none" useAutolayout="YES" initialViewController="zVB-NT-1S4">
     <dependencies>
         <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="3733"/>
         <capability name="Aspect ratio constraints" minToolsVersion="5.1"/>
@@ -521,6 +521,7 @@
                         <outlet property="firstNameField" destination="nPF-0g-HeJ" id="6Rv-Sb-joB"/>
                         <outlet property="lastNameField" destination="JRX-hO-2n8" id="GZn-BY-HJR"/>
                         <outlet property="pictureView" destination="8kg-qg-sql" id="wNy-n9-5wf"/>
+                        <outlet property="selectEmailAddressButton" destination="Z0f-Hu-kcp" id="MX3-jZ-fgo"/>
                     </connections>
                 </tableViewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="zsu-bI-OEB" userLabel="First Responder" sceneMemberID="firstResponder"/>
