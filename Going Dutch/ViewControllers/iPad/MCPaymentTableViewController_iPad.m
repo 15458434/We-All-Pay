@@ -8,6 +8,7 @@
 
 #import "MCPaymentTableViewController_iPad.h"
 #import "MCSelectPayerTableViewController_iPad.h"
+#import "UINavigationController+KeyboardDismiss.h"
 
 #import "MCPaymentPresenceTableViewCell.h"
 
@@ -59,6 +60,15 @@
 {
 
 }
+- (IBAction)dismissKeyboardWhenTappedOutsideAUITextField:(id)sender
+{
+    if ([itemField isFirstResponder]) {
+        [itemField resignFirstResponder];
+    } else if ([paidField isFirstResponder]) {
+        [paidField resignFirstResponder];
+    }
+}
+
 
 
 #pragma mark - New in this class

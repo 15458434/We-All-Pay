@@ -8,6 +8,8 @@
 
 #import "MCPersonTableViewController_iPad.h"
 
+#import "UINavigationController+KeyboardDismiss.h"
+
 #import "MCPerson+addons.h"
 #import "MCSharedBill+addons.h"
 #import "MCEmailAddress+addons.h"
@@ -56,6 +58,17 @@
 - (IBAction)selectEmailAddressButtonPressed:(id)sender
 {
     
+}
+
+- (IBAction)backgroundTappedToDismissKeyboard:(id)sender
+{
+    if ([firstNameField isFirstResponder]) {
+        [firstNameField resignFirstResponder];
+    } else if ([lastNameField isFirstResponder]) {
+        [lastNameField resignFirstResponder];
+    } else if ([emailField isFirstResponder]) {
+        [emailField resignFirstResponder];
+    }
 }
 
 #pragma mark - New in this class
