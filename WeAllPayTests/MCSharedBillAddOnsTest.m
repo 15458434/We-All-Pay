@@ -13,6 +13,7 @@
 #import "MCPerson+addons.h"
 #import "MCEmailAddress+addons.h"
 #import "MCPayment+addons.h"
+#import "MCPaymentPresence+addons.h"
 #import "MCReturnPayment.h"
 
 
@@ -125,6 +126,39 @@
     MCEmailAddress *marksOnlyEmailAddress = [[markmovie emailAddress] anyObject];
     [MCSharedBill deleteSharedbill:movie];
     XCTAssertTrue([marksOnlyEmailAddress isDeleted], @"marks email address is not properly deleted.");
+}
+
+- (void)testToCheckCalculationWhenEverybodyIsNotPresentOnPayment
+{
+    // This test is to check to see if the - (NSArray *)solveWhoHasToPayWhoFromThisBill still solves the bill correctly if there is a payment present no presences.
+    MCSharedBill *tonightsBill = [MCSharedBill addSharedBillToContext:_context];
+    [tonightsBill setTripName:@"No presences test."];
+    MCPerson *mark = [tonightsBill addPerson];
+    [mark setFirstName:@"Mark"];
+    [mark setLastName:@"Cornelisse"];
+    [mark addOneEmailAddressFromAString:@"info@markcornelisse.nl"];
+    MCPerson *ilse = [tonightsBill addPerson];
+    [ilse setFirstName:@"Ilse"];
+    [ilse setLastName:@"Beguin"];
+    [ilse addOneEmailAddressFromAString:@"ilse.beguin@hotmail.com"];
+    MCPayment *paymentWithNoPresences = [tonightsBill addPayment];
+    [paymentWithNoPresences setMoney:@6.00];
+    [paymentWithNoPresences setPayingPerson:ilse];
+    [paymentWithNoPresences setDescriptionOfPayment:@"Nobody is present on this payment."];
+    for (MCPaymentPresence *paymentPresence in [paymentWithNoPresences peopleSharingPayment]) {
+        [paymentPresence setIsPersonPresent:@NO];
+    }
+    [paymentWithNoPresences recalculateAveragePeopleOweAndStore];
+    MCPayment *paymentWithPresences = [tonightsBill addPayment];
+    [paymentWithPresences setMoney:@5.00];
+    [paymentWithPresences setPayingPerson:mark];
+    [paymentWithPresences setDescriptionOfPayment:@"Everybody is present on this payment."];
+    NSArray *result = [tonightsBill solveWhoHasToPayWhoFromThisBill];
+    XCTAssertTrue([result count] == 1, @"There should be one solution.");
+    MCReturnPayment *returnPayment = [result lastObject];
+    XCTAssertEqualWithAccuracy([[returnPayment money] doubleValue], 2.5, 0.001, @"The amount of money owed should be 2.5");
+    XCTAssertTrue([returnPayment payer] == ilse, @"Ilse should be paying.");
+    XCTAssertTrue([returnPayment receiver] == mark, @"Mark should be receiving.");
 }
 
 @end

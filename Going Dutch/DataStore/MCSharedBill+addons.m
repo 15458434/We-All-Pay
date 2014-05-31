@@ -307,7 +307,7 @@
 {
     NSFetchRequest *request = [NSFetchRequest fetchRequestWithEntityName:@"MCPayment"];
     [request setRelationshipKeyPathsForPrefetching:@[ @"payingPerson" ]];
-    [request setPredicate:[NSPredicate predicateWithFormat:@"onWhichBill = %@ AND payingPerson = %@", self, person]];
+    [request setPredicate:[NSPredicate predicateWithFormat:@"onWhichBill = %@ AND payingPerson = %@ AND ANY peopleSharingPayment.isPersonPresent = YES", self, person]];
     [request setSortDescriptors:@[[NSSortDescriptor sortDescriptorWithKey:@"dateCreated" ascending:YES]]];
     NSManagedObjectContext *context = [self managedObjectContext];
     NSError *error = nil;
@@ -421,7 +421,7 @@
     [self updatePaymentForSupportWithPaymentPresence];
     
     for (MCPerson *person in people) {
-        NSLog(@"%@ paid %@", [person getName], [self totalSumPaidBy:person]);
+//        NSLog(@"%@ paid %@", [person getName], [self totalSumPaidBy:person]);
         NSNumber *sumOfWhatWasPaidByPerson = [self totalSumPaidBy:person];
         NSNumber *sumOfWhatShouldBePaidPerson = [self amountShouldHavePaidBy:person];
         
