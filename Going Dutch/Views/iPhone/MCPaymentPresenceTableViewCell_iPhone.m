@@ -9,6 +9,7 @@
 #import "MCPaymentPresenceTableViewCell_iPhone.h"
 
 #import "MCPaymentPresence+addons.h"
+#import "MCPayment+addons.h"
 
 @implementation MCPaymentPresenceTableViewCell_iPhone
 
@@ -17,6 +18,7 @@
 - (IBAction)presenceIsSwitched:(id)sender
 {
     [_thisCellsPaymentPresence setIsPersonPresent:@([_isPresentSwitch isOn])];
+    [[_thisCellsPaymentPresence payment] recalculateAveragePeopleOweAndStore];
 }
 
 #pragma mark - New in this class

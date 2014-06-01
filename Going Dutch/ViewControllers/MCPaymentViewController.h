@@ -7,8 +7,11 @@
 //
 
 #import <UIKit/UIKit.h>
+#import <CoreData/CoreData.h>
 
 #import "MCCancelDoneViewController.h"
+
+#import "MCThisPaymentProtocol.h"
 
 @class MCPayment;
 @class MCSharedBill;
@@ -23,7 +26,7 @@
 
 @end
 
-@interface MCPaymentViewController : UITableViewController <UIPickerViewDataSource, UIPickerViewDelegate, UITextFieldDelegate>
+@interface MCPaymentViewController : UITableViewController <UIPickerViewDataSource, UIPickerViewDelegate, UITextFieldDelegate, NSFetchedResultsControllerDelegate, MCThisPaymentProtocol>
 {
     UIBarButtonItem *theDoneButton;
     UIBarButtonItem *cancelChangesForEntirePaymentButton;
@@ -41,6 +44,7 @@
     BOOL peoplePickerCancelled;
     
     NSArray *_paymentPresenceArray;
+    NSFetchedResultsController *_dataController;
 }
 
 @property (weak, nonatomic) IBOutlet UIImageView *payerPicture;

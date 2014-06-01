@@ -56,7 +56,7 @@
     [mark setFirstName:@"Mark"];
     [mark setLastName:@"Cornelisse"];
     [mark addOneEmailAddressFromAString:@"info@markcornelisse.nl"];
-    MCPayment *dummE = [thisBill addPayment];
+//    MCPayment *dummE = [thisBill addPayment];
     MCPerson *ilse = [thisBill addPerson];
     [ilse setFirstName:@"Ilse"];
     [ilse setLastName:@"Béguin"];

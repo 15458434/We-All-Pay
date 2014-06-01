@@ -651,7 +651,7 @@
                                     </connections>
                                 </textField>
                                 <label opaque="NO" clipsSubviews="YES" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" restorationIdentifier="dateLabel" text="Presence on payment" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="mh0-5W-fIa">
-                                    <rect key="frame" x="94" y="188" width="206" height="18"/>
+                                    <rect key="frame" x="94" y="186" width="206" height="18"/>
                                     <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                                     <fontDescription key="fontDescription" name="HelveticaNeue" family="Helvetica Neue" pointSize="15"/>
                                     <color key="textColor" cocoaTouchSystemColor="darkTextColor"/>
@@ -677,7 +677,7 @@
                                 <constraint firstItem="ZTv-D4-TBc" firstAttribute="leading" secondItem="Zmm-zR-L97" secondAttribute="leading" id="L0c-CG-jtD"/>
                                 <constraint firstItem="ZTv-D4-TBc" firstAttribute="trailing" secondItem="Zmm-zR-L97" secondAttribute="trailing" id="M8p-gD-0hW"/>
                                 <constraint firstItem="Gtj-b7-bzJ" firstAttribute="leading" secondItem="Zmm-zR-L97" secondAttribute="leading" id="bJX-b6-08O"/>
-                                <constraint firstAttribute="bottom" secondItem="mh0-5W-fIa" secondAttribute="bottom" constant="2" id="gfv-LV-ueE"/>
+                                <constraint firstAttribute="bottom" secondItem="mh0-5W-fIa" secondAttribute="bottom" constant="4" id="gfv-LV-ueE"/>
                                 <constraint firstItem="Zmm-zR-L97" firstAttribute="leading" secondItem="rmI-7G-oMX" secondAttribute="trailing" constant="8" symbolic="YES" id="hlK-1F-bSD"/>
                                 <constraint firstItem="mh0-5W-fIa" firstAttribute="leading" secondItem="Zmm-zR-L97" secondAttribute="leading" constant="6" id="m3E-a9-2a0"/>
                                 <constraint firstItem="rmI-7G-oMX" firstAttribute="top" secondItem="msZ-li-bka" secondAttribute="top" constant="20" id="qvo-vN-lBg"/>
@@ -685,32 +685,39 @@
                             </constraints>
                         </view>
                         <prototypes>
-                            <tableViewCell contentMode="scaleToFill" restorationIdentifier="paymentPresenceCell" selectionStyle="blue" hidesAccessoryWhenEditing="NO" indentationLevel="1" indentationWidth="0.0" reuseIdentifier="paymentPresenceCell_iPhone" rowHeight="46" id="AcN-yE-tRP" customClass="MCPaymentPresenceTableViewCell_iPhone">
-                                <rect key="frame" x="0.0" y="230" width="320" height="46"/>
+                            <tableViewCell contentMode="scaleToFill" restorationIdentifier="paymentPresenceCell" selectionStyle="blue" hidesAccessoryWhenEditing="NO" indentationLevel="1" indentationWidth="0.0" reuseIdentifier="paymentPresenceCell_iPhone" rowHeight="52" id="AcN-yE-tRP" customClass="MCPaymentPresenceTableViewCell_iPhone">
+                                <rect key="frame" x="0.0" y="230" width="320" height="52"/>
                                 <autoresizingMask key="autoresizingMask"/>
                                 <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" restorationIdentifier="tableViewCellContent" tableViewCell="AcN-yE-tRP" id="WHI-GF-nBf">
-                                    <rect key="frame" x="0.0" y="0.0" width="320" height="45"/>
+                                    <rect key="frame" x="0.0" y="0.0" width="320" height="51"/>
                                     <autoresizingMask key="autoresizingMask"/>
                                     <subviews>
                                         <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" translatesAutoresizingMaskIntoConstraints="NO" id="Y6i-cu-NDo">
-                                            <rect key="frame" x="105" y="5" width="36" height="36"/>
+                                            <rect key="frame" x="130" y="6" width="40" height="40"/>
                                             <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                                             <constraints>
-                                                <constraint firstAttribute="width" constant="36" id="4Ko-rK-sT7"/>
-                                                <constraint firstAttribute="height" constant="36" id="VbT-mz-0dr"/>
+                                                <constraint firstAttribute="width" constant="40" id="4Ko-rK-sT7"/>
+                                                <constraint firstAttribute="height" constant="40" id="VbT-mz-0dr"/>
                                             </constraints>
                                         </imageView>
                                         <switch opaque="NO" contentMode="scaleToFill" horizontalHuggingPriority="750" verticalHuggingPriority="750" contentHorizontalAlignment="center" contentVerticalAlignment="center" on="YES" translatesAutoresizingMaskIntoConstraints="NO" id="yeA-rP-ZR9">
-                                            <rect key="frame" x="251" y="7" width="51" height="31"/>
+                                            <rect key="frame" x="251" y="10" width="51" height="31"/>
                                             <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                                             <connections>
                                                 <action selector="presenceIsSwitched:" destination="AcN-yE-tRP" eventType="valueChanged" id="9T0-kB-rFX"/>
                                             </connections>
                                         </switch>
                                         <label opaque="NO" clipsSubviews="YES" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" horizontalCompressionResistancePriority="250" text="some person" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="6uD-Ru-yqC">
-                                            <rect key="frame" x="149" y="12" width="94" height="21"/>
+                                            <rect key="frame" x="178" y="10" width="65" height="21"/>
                                             <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                                             <fontDescription key="fontDescription" name="HelveticaNeue-Thin" family="Helvetica Neue" pointSize="17"/>
+                                            <color key="textColor" cocoaTouchSystemColor="darkTextColor"/>
+                                            <nil key="highlightedColor"/>
+                                        </label>
+                                        <label opaque="NO" clipsSubviews="YES" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="owesLabel" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="yrk-Pa-PsW">
+                                            <rect key="frame" x="178" y="31" width="65" height="16"/>
+                                            <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                                            <fontDescription key="fontDescription" name="HelveticaNeue-Medium" family="Helvetica Neue" pointSize="13"/>
                                             <color key="textColor" cocoaTouchSystemColor="darkTextColor"/>
                                             <nil key="highlightedColor"/>
                                         </label>
@@ -718,16 +725,20 @@
                                     <constraints>
                                         <constraint firstItem="yeA-rP-ZR9" firstAttribute="centerY" secondItem="Y6i-cu-NDo" secondAttribute="centerY" id="0ix-FJ-Qae"/>
                                         <constraint firstAttribute="centerY" secondItem="Y6i-cu-NDo" secondAttribute="centerY" id="2Sl-Ac-QQ3"/>
+                                        <constraint firstItem="yrk-Pa-PsW" firstAttribute="top" secondItem="6uD-Ru-yqC" secondAttribute="bottom" id="5GT-Rs-s0m"/>
                                         <constraint firstItem="6uD-Ru-yqC" firstAttribute="leading" secondItem="Y6i-cu-NDo" secondAttribute="trailing" priority="251" constant="8" symbolic="YES" id="5fh-RZ-edz"/>
-                                        <constraint firstItem="6uD-Ru-yqC" firstAttribute="centerY" secondItem="Y6i-cu-NDo" secondAttribute="centerY" id="799-23-PdV"/>
+                                        <constraint firstItem="6uD-Ru-yqC" firstAttribute="centerY" secondItem="Y6i-cu-NDo" secondAttribute="centerY" constant="-5" id="799-23-PdV"/>
                                         <constraint firstItem="yeA-rP-ZR9" firstAttribute="leading" secondItem="6uD-Ru-yqC" secondAttribute="trailing" constant="8" symbolic="YES" id="AE0-8a-i5I"/>
                                         <constraint firstItem="Y6i-cu-NDo" firstAttribute="leading" secondItem="WHI-GF-nBf" secondAttribute="leading" priority="250" constant="20" symbolic="YES" id="B2o-ut-u0a"/>
+                                        <constraint firstItem="6uD-Ru-yqC" firstAttribute="trailing" secondItem="yrk-Pa-PsW" secondAttribute="trailing" id="Puh-IQ-2RF"/>
+                                        <constraint firstItem="6uD-Ru-yqC" firstAttribute="leading" secondItem="yrk-Pa-PsW" secondAttribute="leading" id="WC8-mX-YDU"/>
                                         <constraint firstAttribute="trailing" secondItem="yeA-rP-ZR9" secondAttribute="trailing" constant="20" symbolic="YES" id="fae-bo-9kD"/>
                                     </constraints>
                                 </tableViewCellContentView>
                                 <connections>
                                     <outlet property="isPresentSwitch" destination="yeA-rP-ZR9" id="jgR-tp-rEq"/>
                                     <outlet property="nameLabel" destination="6uD-Ru-yqC" id="RcF-Jc-u4V"/>
+                                    <outlet property="owesLabel" destination="yrk-Pa-PsW" id="9Ty-6z-mUr"/>
                                     <outlet property="personView" destination="Y6i-cu-NDo" id="2XA-zk-YiB"/>
                                 </connections>
                             </tableViewCell>
