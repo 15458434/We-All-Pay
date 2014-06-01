@@ -201,10 +201,10 @@
     [nf setLocale:[NSLocale currentLocale]];
     [nf setNumberStyle:NSNumberFormatterDecimalStyle];
     [nf setFormatterBehavior:NSNumberFormatterBehaviorDefault];
-    [[MCWeAllPayStoreController defaultStore] beginUndoGroupWithoutRegistration];
+//    [[MCWeAllPayStoreController defaultStore] beginUndoGroupWithoutRegistration];
     [self setMoney:[nf numberFromString:moneyString]];
     [self recalculateAveragePeopleOweAndStore];
-    [[MCWeAllPayStoreController defaultStore] endUndoGroupWithoutRegistration];
+//    [[MCWeAllPayStoreController defaultStore] endUndoGroupWithoutRegistration];
 }
 
 - (void)putMoneyValueInCurrencyAsAString:(NSString *)moneyString
@@ -214,10 +214,10 @@
     [nf setNumberStyle:NSNumberFormatterCurrencyStyle];
     [nf setFormatterBehavior:NSNumberFormatterBehaviorDefault];
     
-    [[MCWeAllPayStoreController defaultStore] beginUndoGroupWithoutRegistration];
+//    [[MCWeAllPayStoreController defaultStore] beginUndoGroupWithoutRegistration];
     [self setMoney:[nf numberFromString:moneyString]];
     [self recalculateAveragePeopleOweAndStore];
-    [[MCWeAllPayStoreController defaultStore] endUndoGroupWithoutRegistration];
+//    [[MCWeAllPayStoreController defaultStore] endUndoGroupWithoutRegistration];
 }
 
 #pragma mark - NSManagedObject stuff

@@ -49,7 +49,7 @@
     [context performBlockAndWait:^{
         [[context undoManager] endUndoGrouping];
         [[context undoManager] disableUndoRegistration];
-        if (didSomethingChange) {
+        if ([[context undoManager] canUndo]) {
             [[context undoManager] undoNestedGroup];
         }
     }];
@@ -59,7 +59,6 @@
 - (IBAction)mainDoneButtonPressed:(id)sender
 {
     NSLog(@"MCPaymentViewController: Done button pressed.");
-//    self.switchInputField = NO;
     if ([payerView isFirstResponder]) {
         [self donePersonPicker:self];
     }
