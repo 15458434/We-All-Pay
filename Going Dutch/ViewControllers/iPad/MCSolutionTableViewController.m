@@ -165,9 +165,17 @@
         case 0:
             return [_solution count];
         case 1:
-            return [_peoplePresent count];
+            if ([_solution count] == 0) {
+                return 0;
+            } else {
+                return [_peoplePresent count];
+            }
         case 2:
-            return [_peoplePresent count] + 1;
+            if ([_solution count] == 0) {
+                return 0;
+            } else {
+                return [_peoplePresent count] + 1;
+            }
         default:
             @throw [NSException exceptionWithName:@"TableView broken" reason:@"There are no more than 2 sections in this tableView." userInfo:nil];
             return nil;
