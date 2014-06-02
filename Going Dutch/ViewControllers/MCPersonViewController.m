@@ -43,13 +43,7 @@
 - (IBAction)selectEmailAddressPressed:(id)sender
 {
     // If any of the fields is first responder resign them first.
-    if ([firstNameField isFirstResponder]) {
-        [firstNameField resignFirstResponder];
-    } else if ([lastNameField isFirstResponder]) {
-        [lastNameField resignFirstResponder];
-    } else if ([emailField isFirstResponder]) {
-        [emailField resignFirstResponder];
-    }
+    [self dismissKeyboard];
     
     // select the emailField and pop-up it's keyboard with the UIPickerView
     isSelectEmail = YES;
@@ -58,16 +52,7 @@
 
 - (IBAction)doneButtonPressed:(id)sender
 {
-    if (isNew && (ABAddressBookGetAuthorizationStatus() == kABAuthorizationStatusDenied || ABAddressBookGetAuthorizationStatus() == kABAuthorizationStatusNotDetermined)) {
-        if ([firstNameField isFirstResponder]) {
-            [firstNameField resignFirstResponder];
-        } else if ([lastNameField isFirstResponder]) {
-            [lastNameField resignFirstResponder];
-        } else if ([emailField isFirstResponder]) {
-            [emailField resignFirstResponder];
-        }
-    }
-    
+    [self dismissKeyboard];
     [_thisPerson setDateModified:[NSDate date]];
     [[MCWeAllPayStoreController defaultStore] endUndoGroupAndProcess];
     [[[self navigationController] presentingViewController] dismissViewControllerAnimated:YES completion:nil];
