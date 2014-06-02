@@ -538,7 +538,8 @@
     [[cell nameLabel] setText:[[thisCellsPresence person] getFullName]];
     [cell setCircularImage:[[thisCellsPresence person] thumbnail]];
     [[cell isPresentSwitch] setOn:[[thisCellsPresence isPersonPresent] boolValue]];
-    NSString *owesString = [NSString stringWithFormat:@"owes %@", [thisCellsPresence getCurrencyStringOfAverageOwe]];
+    NSString *owesPreString = NSLocalizedString(@"OWES_FROM_THIS_PAYMENT", @"owes");
+    NSString *owesString = [NSString stringWithFormat:@"%@ %@", owesPreString, [thisCellsPresence getCurrencyStringOfAverageOwe]];
     [[cell owesLabel] setText:owesString];
     [cell setThisCellsPaymentPresence:thisCellsPresence];
     
