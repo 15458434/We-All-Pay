@@ -105,7 +105,7 @@
         NSDate *nu = [NSDate date];
         [tonightsBill setDateModified:nu];
         [_thisPayment setDateModified:nu];
-        [[[self navigationItem] rightBarButtonItem] setEnabled:YES];
+//        [[[self navigationItem] rightBarButtonItem] setEnabled:YES];
     }
     [payerView resignFirstResponder];
 }
@@ -293,6 +293,12 @@
             peoplePickerCancelled = YES;
             [[MCWeAllPayStoreController defaultStore] endUndoGroupAndUndoWithoutRegistration];
             [payerView setText:[[_thisPayment payingPerson] getFullName]];
+            if ([_thisPayment payingPerson]) {
+                [self setCircularImageOnPictureView:[[_thisPayment payingPerson] picture]];
+            } else {
+                NSLog(@"Is het stuk?");
+                [self setCircularImageOnPictureView:nil];
+            }
         }
     } else if (textField == itemView) {
         // Do something to store value of placeview.
