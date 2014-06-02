@@ -150,20 +150,32 @@
     }
 }
 
+#pragma mark - UITableViewDelegate
+
+- (void)tableView:(UITableView *)tableView willDisplayHeaderView:(UIView *)view forSection:(NSInteger)section
+{
+    [view setTintColor:[MCColors getbackgroundColor]];
+    UITableViewHeaderFooterView *sectionTitleHeader = (UITableViewHeaderFooterView *)view;
+    [[sectionTitleHeader textLabel] setTextColor:[MCColors getEmptyMessageTextColor]];
+}
+
 #pragma mark - Table view data source
 
 - (NSString *)tableView:(UITableView *)tableView titleForHeaderInSection:(NSInteger)section
 {
-    switch (section) {
-        case 0:
-            return NSLocalizedString(@"SOLUTION_SECTION_WHO_OWES_WHO", @"Who ows who");
-        case 1:
-            return NSLocalizedString(@"SOLUTION_SECTION_TOTAL_OWES", @"Total owes");
-        case 2:
-            return NSLocalizedString(@"SOLUTION_SECTION_TOTAL_PAID", @"Total paid");
-        default:
-            return nil;
+    if ([_solution count] > 0) {
+        switch (section) {
+            case 0:
+                return NSLocalizedString(@"SOLUTION_SECTION_WHO_OWES_WHO", @"Who ows who");
+            case 1:
+                return NSLocalizedString(@"SOLUTION_SECTION_TOTAL_OWES", @"Total owes");
+            case 2:
+                return NSLocalizedString(@"SOLUTION_SECTION_TOTAL_PAID", @"Total paid");
+            default:
+                return nil;
+        }
     }
+    return nil;
 }
 
 - (NSInteger)numberOfSectionsInTableView:(UITableView *)tableView

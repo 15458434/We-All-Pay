@@ -120,35 +120,11 @@
     [[emptyMessage bigMessage] setText:NSLocalizedString(@"RETURNPAYMENTSVIEW_NOPAYMENTS", @"Please add payments and/or people if you want a solution on who owes who.")];
     [[emptyMessage bigMessage] setAlpha:0.0];
     [[self tableView] reloadData];
-    
-    /*
-    UINib *nib = [UINib nibWithNibName:@"MCReturnPaymentTableViewCell" bundle:nil];
-    [[self tableView] registerNib:nib forCellReuseIdentifier:@"MCReturnPaymentTableViewCell"];
-     */
 }
 
 - (void)viewWillAppear:(BOOL)animated
 {
     [super viewWillAppear:animated];
-    
-    /*
-     if (!twoLabelTitleView) {
-     twoLabelTitleView = [[NSBundle mainBundle] loadNibNamed:@"MCTwoLabelsTitleView" owner:self options:nil][0];
-     [[self navigationItem] setTitleView:twoLabelTitleView];
-     }
-     NSNumber *averagePay = [tonightsBill amountPeopleShouldHavePaid];
-     NSNumber *totalSpent = [tonightsBill totalSumOfMoneyOfThisSharedBill];
-     NSNumberFormatter *nf = [[NSNumberFormatter alloc] init];
-     [nf setNumberStyle:NSNumberFormatterCurrencyStyle];
-     NSString *eachPays = NSLocalizedString(@"EACH_PAYS", @"Each pays: $ string inside the header of the solution screen");
-     [[twoLabelTitleView mainLabel] setText:[NSString stringWithFormat:@"%@ %@", eachPays, [nf stringFromNumber:averagePay]]];
-     NSString *totalSpentString = NSLocalizedString(@"TOTAL_SPENT", @"Total spent: $ string inside the header of the solution screen.");
-     [[twoLabelTitleView subLabel] setText:[NSString stringWithFormat:@"%@ %@", totalSpentString, [nf stringFromNumber:totalSpent]]];
-     if (SYSTEM_VERSION_LESS_THAN(@"7.0")) {
-     [[twoLabelTitleView mainLabel] setTextColor:[UIColor whiteColor]];
-     [[twoLabelTitleView subLabel] setTextColor:[UIColor whiteColor]];
-     }
-     */
     
     [self setEmptyMessage];
 }
@@ -228,20 +204,30 @@
     return 44.0;
 }
 
+- (void)tableView:(UITableView *)tableView willDisplayHeaderView:(UIView *)view forSection:(NSInteger)section
+{
+    [view setTintColor:[MCColors getbackgroundColor]];
+    UITableViewHeaderFooterView *sectionTitleHeader = (UITableViewHeaderFooterView *)view;
+    [[sectionTitleHeader textLabel] setTextColor:[MCColors getEmptyMessageTextColor]];
+}
+
 #pragma mark - Table view data source
 
 - (NSString *)tableView:(UITableView *)tableView titleForHeaderInSection:(NSInteger)section
 {
-    switch (section) {
-        case 0:
-            return NSLocalizedString(@"SOLUTION_SECTION_WHO_OWES_WHO", @"Who ows who");
-        case 1:
-            return NSLocalizedString(@"SOLUTION_SECTION_TOTAL_OWES", @"Total owes");
-        case 2:
-            return NSLocalizedString(@"SOLUTION_SECTION_TOTAL_PAID", @"Total paid");
-        default:
-            return nil;
+    if ([paymentsAfterwards count] > 0) {
+        switch (section) {
+            case 0:
+                return NSLocalizedString(@"SOLUTION_SECTION_WHO_OWES_WHO", @"Who ows who");
+            case 1:
+                return NSLocalizedString(@"SOLUTION_SECTION_TOTAL_OWES", @"Total owes");
+            case 2:
+                return NSLocalizedString(@"SOLUTION_SECTION_TOTAL_PAID", @"Total paid");
+            default:
+                return nil;
+        }
     }
+    return nil;
 }
 
 - (NSInteger)numberOfSectionsInTableView:(UITableView *)tableView

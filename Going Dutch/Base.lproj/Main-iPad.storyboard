@@ -280,7 +280,7 @@
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <color key="backgroundColor" red="0.80000007149999997" green="0.86666673419999996" blue="0.94117653369999998" alpha="1" colorSpace="deviceRGB"/>
                         <view key="tableHeaderView" contentMode="scaleToFill" restorationIdentifier="solutionHeaderView" id="mI7-Ux-H5Q" customClass="UITableViewHeaderFooterView">
-                            <rect key="frame" x="0.0" y="44" width="768" height="70"/>
+                            <rect key="frame" x="0.0" y="44" width="768" height="50"/>
                             <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                             <subviews>
                                 <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="fi4-m8-emE">
@@ -299,13 +299,11 @@
                             <constraints>
                                 <constraint firstAttribute="centerX" secondItem="fi4-m8-emE" secondAttribute="centerX" id="5wa-pG-1nu"/>
                                 <constraint firstItem="fi4-m8-emE" firstAttribute="top" secondItem="mI7-Ux-H5Q" secondAttribute="top" constant="20" symbolic="YES" id="8Be-Ab-QYi"/>
-                                <constraint firstAttribute="centerY" secondItem="fi4-m8-emE" secondAttribute="centerY" id="hlS-Av-yK2"/>
-                                <constraint firstAttribute="bottom" secondItem="fi4-m8-emE" secondAttribute="bottom" constant="20" symbolic="YES" id="rlB-cK-cgo"/>
                             </constraints>
                         </view>
                         <prototypes>
                             <tableViewCell contentMode="scaleToFill" selectionStyle="none" indentationWidth="10" reuseIdentifier="MCSolutionOverViewTableViewCell_iPad" id="6bn-7S-zsf" customClass="MCSolutionOverViewTableViewCell_iPad">
-                                <rect key="frame" x="0.0" y="169" width="768" height="44"/>
+                                <rect key="frame" x="0.0" y="149" width="768" height="44"/>
                                 <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                                 <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" tableViewCell="6bn-7S-zsf" id="IND-hG-Cc2">
                                     <rect key="frame" x="0.0" y="0.0" width="768" height="43"/>
@@ -344,7 +342,7 @@
                                 </connections>
                             </tableViewCell>
                             <tableViewCell contentMode="scaleToFill" restorationIdentifier="MCWhoOwesWhoTableViewCell_iPad" selectionStyle="none" indentationWidth="10" reuseIdentifier="MCWhoOwesWhoTableViewCell_iPad" id="w1V-qq-Jfl" customClass="MCWhoOwesWhoTableViewCell_iPad">
-                                <rect key="frame" x="0.0" y="213" width="768" height="44"/>
+                                <rect key="frame" x="0.0" y="193" width="768" height="44"/>
                                 <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                                 <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" tableViewCell="w1V-qq-Jfl" id="EWV-5Z-WfL">
                                     <rect key="frame" x="0.0" y="0.0" width="768" height="43"/>
