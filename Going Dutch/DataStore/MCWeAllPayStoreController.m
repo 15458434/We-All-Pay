@@ -186,12 +186,26 @@
     [context processPendingChanges];
 }
 
+- (void)endUndoGroupAndProcessWithoutRegistration
+{
+    NSManagedObjectContext *context = [weAllPayStoreDocument managedObjectContext];
+    [[context undoManager] endUndoGrouping];
+    [context processPendingChanges];
+}
+
 - (void)endUndoGroupAndUndo
 {
     NSManagedObjectContext *context = [weAllPayStoreDocument managedObjectContext];
     [[context undoManager] endUndoGrouping];
     [[context undoManager] undoNestedGroup];
     [[context undoManager] disableUndoRegistration];
+}
+
+- (void)endUndoGroupAndUndoWithoutRegistration
+{
+    NSManagedObjectContext *context = [weAllPayStoreDocument managedObjectContext];
+    [[context undoManager] endUndoGrouping];
+    [[context undoManager] undoNestedGroup];    
 }
 
 #pragma mark - TableView fill sources.

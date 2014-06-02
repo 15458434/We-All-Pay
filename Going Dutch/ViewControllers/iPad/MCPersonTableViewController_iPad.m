@@ -31,7 +31,7 @@
 {
     [[self view] resignFirstResponder];
     mainCancelPressed = cancelIsPressed;
-    if (didSomethingChange) {
+    if ([[[_thisPerson managedObjectContext] undoManager] canUndo]) {
         [[MCWeAllPayStoreController defaultStore] endUndoGroupAndUndo];
     } else {
         [[MCWeAllPayStoreController defaultStore] endUndoGroup];

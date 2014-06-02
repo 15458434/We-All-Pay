@@ -45,14 +45,19 @@
 
 - (IBAction)mainCancelButtonPressed:(id)sender
 {
-    NSManagedObjectContext *context = [[[MCWeAllPayStoreController defaultStore] weAllPayStoreDocument] managedObjectContext];
-    [context performBlockAndWait:^{
-        [[context undoManager] endUndoGrouping];
-        [[context undoManager] disableUndoRegistration];
-        if ([[context undoManager] canUndo]) {
-            [[context undoManager] undoNestedGroup];
-        }
-    }];
+//    NSManagedObjectContext *context = [[[MCWeAllPayStoreController defaultStore] weAllPayStoreDocument] managedObjectContext];
+//    [context performBlockAndWait:^{
+//        [[context undoManager] endUndoGrouping];
+//        [[context undoManager] disableUndoRegistration];
+//        if ([[context undoManager] canUndo]) {
+//            [[context undoManager] undoNestedGroup];
+//        }
+//    }];
+    if ([[[_thisPayment managedObjectContext] undoManager] canUndo]) {
+        [[MCWeAllPayStoreController defaultStore] endUndoGroupAndUndo];
+    } else {
+        [[MCWeAllPayStoreController defaultStore] endUndoGroup];
+    }
     [[[self navigationController] presentingViewController] dismissViewControllerAnimated:YES completion:nil];
 }
 
@@ -69,17 +74,12 @@
         [self storePlaceViewData];
     }
 
-    NSManagedObjectContext *context = [[[MCWeAllPayStoreController defaultStore] weAllPayStoreDocument] managedObjectContext];
-    [[context undoManager] endUndoGrouping];
-    [[context undoManager] disableUndoRegistration];
-    [[[self navigationController] presentingViewController] dismissViewControllerAnimated:YES completion:^{
-        if (didSomethingChange) {
-            NSManagedObjectContext *parentContext = [[[[MCWeAllPayStoreController defaultStore] weAllPayStoreDocument] managedObjectContext] parentContext];
-            [parentContext performBlock:^{
-                [parentContext processPendingChanges];
-            }];
-        }
-    }];
+    if ([[[_thisPayment managedObjectContext] undoManager] canUndo]) {
+        [[MCWeAllPayStoreController defaultStore] endUndoGroupAndProcess];
+    } else {
+        [[MCWeAllPayStoreController defaultStore] endUndoGroup];
+    }
+    [[[self navigationController] presentingViewController] dismissViewControllerAnimated:YES completion:nil];
 }
 
 - (void)cancelPersonPicker:(id)selector
@@ -258,8 +258,7 @@
     }
     
     if (textField == payerView) {
-        NSManagedObjectContext *context = [[[MCWeAllPayStoreController defaultStore] weAllPayStoreDocument] managedObjectContext];
-        [[context undoManager] beginUndoGrouping];
+        [[MCWeAllPayStoreController defaultStore] beginUndoGroupWithoutRegistration];
         peoplePickerCancelled = NO;
         NSInteger row = 0;
         MCPerson *payingPerson = [_thisPayment payingPerson];
@@ -287,17 +286,12 @@
     if (textField == paidView) {
         /*[self storeMoneySpent];*/
     } else if (textField == payerView) {
-        NSManagedObjectContext *context = [[[MCWeAllPayStoreController defaultStore] weAllPayStoreDocument] managedObjectContext];
-        [context performBlockAndWait:^{
-            [[context undoManager] endUndoGrouping];
-        }];
         if (!peoplePickerCancelled) {
+            [[MCWeAllPayStoreController defaultStore] endUndoGroupAndProcessWithoutRegistration];
             [self donePersonPicker:self];
         } else {
             peoplePickerCancelled = YES;
-            [context performBlockAndWait:^{
-                [[context undoManager] undoNestedGroup];
-            }];
+            [[MCWeAllPayStoreController defaultStore] endUndoGroupAndUndoWithoutRegistration];
             [payerView setText:[[_thisPayment payingPerson] getFullName]];
         }
     } else if (textField == itemView) {

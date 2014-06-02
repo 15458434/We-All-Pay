@@ -33,7 +33,9 @@
 - (void)endUndoGroup;
 - (void)endUndoGroupWithoutRegistration;
 - (void)endUndoGroupAndProcess;
+- (void)endUndoGroupAndProcessWithoutRegistration;
 - (void)endUndoGroupAndUndo;
+- (void)endUndoGroupAndUndoWithoutRegistration;
 
 // TableView fill sources.
 - (NSFetchedResultsController *)allTripsDataControllerForDelegate:(id)delegate;

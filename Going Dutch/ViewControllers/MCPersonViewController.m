@@ -24,34 +24,19 @@
 @synthesize tonightsBill;
 @synthesize changeFlagDelegate;
 @synthesize isNew;
-@synthesize thisPerson;
+//@synthesize thisPerson;
 
 #pragma mark - Actions
 
 - (IBAction)dismissKeyboard:(id)sender
 {
-    if ([firstNameField isFirstResponder]) {
-        [firstNameField endEditing:YES];
-    }
-    if ([lastNameField isFirstResponder]) {
-        [lastNameField endEditing:YES];
-    }
-    if ([emailField isFirstResponder]) {
-        if (isSelectEmail) {
-            [self cancelEmailPicker:self];
-        } else {
-            [emailField endEditing:YES];
-        }
-    }
+    [self dismissKeyboard];
 }
 
 - (IBAction)cancelButtonPressed:(id)sender
 {
-    //[[[[MCWeAllPayStoreController defaultStore] weAllPayStoreDocument] managedObjectContext] rollback];
-    NSManagedObjectContext *context = [[[MCWeAllPayStoreController defaultStore] weAllPayStoreDocument] managedObjectContext];
-    [[context undoManager] endUndoGrouping];
-    [[context undoManager] undoNestedGroup];
-    [[context undoManager] disableUndoRegistration];
+    [self dismissKeyboard];
+    [[MCWeAllPayStoreController defaultStore] endUndoGroupAndUndo];
     [[[self navigationController] presentingViewController] dismissViewControllerAnimated:YES completion:nil];
 }
 
@@ -82,17 +67,10 @@
             [emailField resignFirstResponder];
         }
     }
-    NSManagedObjectContext *context = [[[MCWeAllPayStoreController defaultStore] weAllPayStoreDocument] managedObjectContext];
-    [thisPerson setDateModified:[NSDate date]];
-    [[context undoManager] endUndoGrouping];
-    [[context undoManager] disableUndoRegistration];
-    [context processPendingChanges];
-    [[[self navigationController] presentingViewController] dismissViewControllerAnimated:YES completion:^{
-        NSManagedObjectContext *parentContext = [[[[MCWeAllPayStoreController defaultStore] weAllPayStoreDocument] managedObjectContext] parentContext];
-        [parentContext performBlock:^{
-            [parentContext processPendingChanges];
-        }];
-    }];
+    
+    [_thisPerson setDateModified:[NSDate date]];
+    [[MCWeAllPayStoreController defaultStore] endUndoGroupAndProcess];
+    [[[self navigationController] presentingViewController] dismissViewControllerAnimated:YES completion:nil];
 }
 
 - (void)getSomeone:(id)selector
@@ -100,7 +78,7 @@
     ABPeoplePickerNavigationController *peoplePicker = [[ABPeoplePickerNavigationController alloc] init];
     if (!personReceiver) {
         personReceiver = [[MCAddressBookDataReceiver alloc] initWithViewController:self andDelegate:self];
-        [personReceiver setThisPerson:thisPerson];
+        [personReceiver setThisPerson:_thisPerson];
     }
     [peoplePicker setPeoplePickerDelegate:personReceiver];
     [peoplePicker setEdgesForExtendedLayout:UIRectEdgeNone];
@@ -117,10 +95,10 @@
 - (void)doneEmailPicker:(id)selector
 {
     MCEmailAddress *newDefaultEmailAddress = [dataController fetchedObjects][[emailSelectionFromAddressBookPickerView selectedRowInComponent:0]];
-    MCEmailAddress *oldDefaulEmailAddress = [MCEmailAddress fetchEmailAddressFor:thisPerson];
+    MCEmailAddress *oldDefaulEmailAddress = [MCEmailAddress fetchEmailAddressFor:_thisPerson];
     [oldDefaulEmailAddress setSelected:@NO];
     [newDefaultEmailAddress setSelected:@YES];
-    [emailField setText:[thisPerson defaultEmailAddress]];
+    [emailField setText:[_thisPerson defaultEmailAddress]];
     
     [emailField resignFirstResponder];
     didSomethingChange = YES;
@@ -129,7 +107,7 @@
 
 - (void)cancelEmailPicker:(id)selector
 {
-    [emailField setText:[thisPerson defaultEmailAddress]];
+    [emailField setText:[_thisPerson defaultEmailAddress]];
     [emailField resignFirstResponder];
 }
 
@@ -143,11 +121,28 @@
         if (!person) {
             @throw [NSException exceptionWithName:@"nil" reason:@"person is nil" userInfo:nil];
         }
-        thisPerson = person;
+        _thisPerson = person;
         didSomethingChange = NO;
         emailEditFieldStatus = 0;
     }
     return self;
+}
+
+- (void)dismissKeyboard
+{
+    if ([firstNameField isFirstResponder]) {
+        [firstNameField endEditing:YES];
+    }
+    if ([lastNameField isFirstResponder]) {
+        [lastNameField endEditing:YES];
+    }
+    if ([emailField isFirstResponder]) {
+        if (isSelectEmail) {
+            [self cancelEmailPicker:self];
+        } else {
+            [emailField endEditing:YES];
+        }
+    }
 }
 
 - (void)prepareDataController
@@ -155,7 +150,7 @@
     NSManagedObjectContext *context = [[[MCWeAllPayStoreController defaultStore] weAllPayStoreDocument] managedObjectContext];
     // Set dataController for EmailPicker
     NSFetchRequest *request = [NSFetchRequest fetchRequestWithEntityName:@"MCEmailAddress"];
-    [request setPredicate:[NSPredicate predicateWithFormat:@"owner = %@", thisPerson]];
+    [request setPredicate:[NSPredicate predicateWithFormat:@"owner = %@", _thisPerson]];
     NSSortDescriptor *sd = [NSSortDescriptor sortDescriptorWithKey:@"emailAddress" ascending:YES];
     [request setSortDescriptors:@[sd]];
     dataController = [[NSFetchedResultsController alloc] initWithFetchRequest:request managedObjectContext:context sectionNameKeyPath:nil cacheName:nil];
@@ -172,7 +167,7 @@
 
 - (void)prepareEmailFieldAsSelector
 {
-    NSUInteger indexOfDefaultEmailAddress = [[dataController fetchedObjects] indexOfObject:[thisPerson getDefaultEmailAddressObject]];
+    NSUInteger indexOfDefaultEmailAddress = [[dataController fetchedObjects] indexOfObject:[_thisPerson getDefaultEmailAddressObject]];
     if (indexOfDefaultEmailAddress < [[dataController fetchedObjects] count]) {
         CGRect toolbarRect = CGRectMake(0, 0, [[self view] bounds].size.width, 44);
         UIToolbar *inputAccessoryPickerView = [[UIToolbar alloc] initWithFrame:toolbarRect];
@@ -246,19 +241,17 @@
 {
     [super viewDidLoad];
     
-    NSManagedObjectContext *context = [[[MCWeAllPayStoreController defaultStore] weAllPayStoreDocument] managedObjectContext];
-    [[context undoManager] enableUndoRegistration];
-    [[context undoManager] beginUndoGrouping];
+    [[MCWeAllPayStoreController defaultStore] beginUndoGroup];
     
     [self prepareDataController];
     
-    if (!thisPerson) {
-        thisPerson = [tonightsBill addPerson];
-        [thisPerson setThumbnailDataFromImage:nil];
-        [thisPerson setPictureDataFromImage:nil];
-        [tonightsBill addPeoplePresentObject:thisPerson];
+    if (!_thisPerson) {
+        _thisPerson = [tonightsBill addPerson];
+        [_thisPerson setThumbnailDataFromImage:nil];
+        [_thisPerson setPictureDataFromImage:nil];
+        [tonightsBill addPeoplePresentObject:_thisPerson];
         thisPersonHasPaidSomething = NO;
-    } else if ([tonightsBill hasPersonPaidSomething:thisPerson]) { // Check to see if thisPerson has paid something.
+    } else if ([tonightsBill hasPersonPaidSomething:_thisPerson]) { // Check to see if thisPerson has paid something.
         thisPersonHasPaidSomething = YES;
     } else {
         thisPersonHasPaidSomething = NO;
@@ -291,12 +284,12 @@
     
     [self performFetch];
 
-    [firstNameField setText:[thisPerson firstName]];
-    [lastNameField setText:[thisPerson lastName]];
-    MCEmailAddress *emailAddress = [MCEmailAddress fetchEmailAddressFor:thisPerson];
+    [firstNameField setText:[_thisPerson firstName]];
+    [lastNameField setText:[_thisPerson lastName]];
+    MCEmailAddress *emailAddress = [MCEmailAddress fetchEmailAddressFor:_thisPerson];
     [emailField setText:[emailAddress emailAddress]];
-    [self setCircularImageOnPictureView:[thisPerson picture]];
-    if ([[thisPerson emailAddress] count] < 2) {
+    [self setCircularImageOnPictureView:[_thisPerson picture]];
+    if ([[_thisPerson emailAddress] count] < 2) {
         [selectEmailAddressButton setHidden:YES];
     } else {
         [selectEmailAddressButton setHidden:NO];
@@ -361,31 +354,31 @@
 - (void)textFieldDidEndEditing:(UITextField *)textField
 {
     if (textField == firstNameField) {
-        [thisPerson setFirstName:[firstNameField text]];
+        [_thisPerson setFirstName:[firstNameField text]];
         didSomethingChange = YES;
         NSDate *nu = [NSDate date];
         [tonightsBill setDateModified:nu];
-        [thisPerson setDateModified:nu];
-        [[[self navigationItem] rightBarButtonItem] setEnabled:YES];
+        [_thisPerson setDateModified:nu];
+//        [[[self navigationItem] rightBarButtonItem] setEnabled:YES];
 //        [lastNameField becomeFirstResponder];
     } else if (textField == lastNameField) {
-        [thisPerson setLastName:[lastNameField text]];
+        [_thisPerson setLastName:[lastNameField text]];
         didSomethingChange = YES;
         NSDate *nu = [NSDate date];
         [tonightsBill setDateModified:nu];
-        [thisPerson setDateModified:nu];
-        [[[self navigationItem] rightBarButtonItem] setEnabled:YES];
+        [_thisPerson setDateModified:nu];
+//        [[[self navigationItem] rightBarButtonItem] setEnabled:YES];
 //        [emailField becomeFirstResponder];
     } else if (textField == emailField) {
         if (!isSelectEmail) {
             [emailField setInputView:nil];
             [emailField setInputAccessoryView:nil];
             if (isNew) {
-                [thisPerson addOneEmailAddressFromAString:[emailField text]];
+                [_thisPerson addOneEmailAddressFromAString:[emailField text]];
             } else {
-                MCEmailAddress *defaultEmail = [thisPerson getDefaultEmailAddressObject];
+                MCEmailAddress *defaultEmail = [_thisPerson getDefaultEmailAddressObject];
                 if (!defaultEmail) {
-                    [thisPerson addOneEmailAddressFromAString:[emailField text]];
+                    [_thisPerson addOneEmailAddressFromAString:[emailField text]];
                 } else {
                     [defaultEmail setEmailAddress:[emailField text]];
                 }
@@ -394,10 +387,10 @@
         isSelectEmail = NO;
         NSDate *nu = [NSDate date];
         [tonightsBill setDateModified:nu];
-        [thisPerson setDateModified:nu];
+        [_thisPerson setDateModified:nu];
         didSomethingChange = YES;
 
-        [[[self navigationItem] rightBarButtonItem] setEnabled:YES];
+//        [[[self navigationItem] rightBarButtonItem] setEnabled:YES];
     }
 }
 
@@ -450,7 +443,6 @@
 
 - (BOOL)isPersonAlreadyPresent:(MCPerson *)newPerson
 {
-    // return [tonightsBill isPersonPresent:newPerson];
     NSLog(@"isNewPersonFromAddressBookAlreadyPresent is not implemented yet.");
     return NO;
 }
@@ -458,7 +450,7 @@
 - (MCPerson *)personRecordToUse
 {
     if (!isNew) {
-        return thisPerson;
+        return _thisPerson;
     } else {
         return nil;
     }
@@ -467,7 +459,7 @@
 - (void)receiveANewPersonFromAddressBook:(MCPerson *)newPerson
 {
     didSomethingChange = YES;
-    [[[self navigationItem] rightBarButtonItem] setEnabled:YES];
+//    [[[self navigationItem] rightBarButtonItem] setEnabled:YES];
     [emailSelectionFromAddressBookPickerView reloadComponent:0];
 }
 
