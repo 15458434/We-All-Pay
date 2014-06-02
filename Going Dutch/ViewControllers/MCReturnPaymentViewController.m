@@ -241,7 +241,11 @@
         case 0:
             return [paymentsAfterwards count];
         case 1:
-            return [peoplePresent count];
+            if ([paymentsAfterwards count] == 0) {
+                return 0;
+            } else {
+                return [peoplePresent count];
+            }
         case 2:
             if ([paymentsAfterwards count] == 0) {
                 return 0;
