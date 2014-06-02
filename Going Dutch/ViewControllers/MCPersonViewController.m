@@ -86,7 +86,7 @@
     [emailField setText:[_thisPerson defaultEmailAddress]];
     
     [emailField resignFirstResponder];
-    didSomethingChange = YES;
+//    didSomethingChange = YES;
     [[[self navigationItem] rightBarButtonItem] setEnabled:YES];
 }
 
@@ -107,7 +107,7 @@
             @throw [NSException exceptionWithName:@"nil" reason:@"person is nil" userInfo:nil];
         }
         _thisPerson = person;
-        didSomethingChange = NO;
+//        didSomethingChange = NO;
         emailEditFieldStatus = 0;
     }
     return self;
@@ -340,7 +340,7 @@
 {
     if (textField == firstNameField) {
         [_thisPerson setFirstName:[firstNameField text]];
-        didSomethingChange = YES;
+//        didSomethingChange = YES;
         NSDate *nu = [NSDate date];
         [tonightsBill setDateModified:nu];
         [_thisPerson setDateModified:nu];
@@ -348,7 +348,7 @@
 //        [lastNameField becomeFirstResponder];
     } else if (textField == lastNameField) {
         [_thisPerson setLastName:[lastNameField text]];
-        didSomethingChange = YES;
+//        didSomethingChange = YES;
         NSDate *nu = [NSDate date];
         [tonightsBill setDateModified:nu];
         [_thisPerson setDateModified:nu];
@@ -373,7 +373,7 @@
         NSDate *nu = [NSDate date];
         [tonightsBill setDateModified:nu];
         [_thisPerson setDateModified:nu];
-        didSomethingChange = YES;
+//        didSomethingChange = YES;
 
 //        [[[self navigationItem] rightBarButtonItem] setEnabled:YES];
     }
@@ -443,8 +443,7 @@
 
 - (void)receiveANewPersonFromAddressBook:(MCPerson *)newPerson
 {
-    didSomethingChange = YES;
-//    [[[self navigationItem] rightBarButtonItem] setEnabled:YES];
+//    didSomethingChange = YES;
     [emailSelectionFromAddressBookPickerView reloadComponent:0];
 }
 

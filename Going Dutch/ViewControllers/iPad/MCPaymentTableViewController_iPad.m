@@ -93,7 +93,7 @@
 {
     [selectButton setTitle:[[_thisPayment payingPerson] getFullName] forState:UIControlStateNormal];
     [self setCircularImageOnPictureView:[[_thisPayment payingPerson] picture]];
-    _didSomethingChange = MCSomethingHasChanged;
+//    _didSomethingChange = MCSomethingHasChanged;
 }
 
 - (void)setCircularImageOnPictureView:(UIImage *)image
@@ -145,7 +145,7 @@
     // _tonightsBill should be present.
     NSParameterAssert(_tonightsBill);
     
-    _didSomethingChange = MCNothingHasChanged;
+//    _didSomethingChange = MCNothingHasChanged;
     _mainCancelPressed = cancelIsNotPressed;
     [[MCWeAllPayStoreController defaultStore] beginUndoGroup];
     
@@ -161,7 +161,7 @@
 
     if (!_thisPayment) {
         _thisPayment = [_tonightsBill addPayment];
-        _didSomethingChange = MCSomethingHasChanged;
+//        _didSomethingChange = MCSomethingHasChanged;
         _isNew = isNew;
         NSString *newTitle = NSLocalizedString(@"NEW_PAYMENT_HEADER", "new payment");
         [self setTitle:newTitle];
@@ -262,13 +262,13 @@
     if (_mainCancelPressed == cancelIsNotPressed) {
         if (textField == itemField) {
             [_thisPayment setDescriptionOfPayment:[itemField text]];
-            _didSomethingChange = MCSomethingHasChanged;
+//            _didSomethingChange = MCSomethingHasChanged;
         }
         
         if (textField == paidField) {
             [_thisPayment putMoneyValueAsAString:[paidField text]];
             [paidField setText:[_thisPayment getMoneyValueInCurrencyAsAString]];
-            _didSomethingChange = MCSomethingHasChanged;
+//            _didSomethingChange = MCSomethingHasChanged;
         }
     }
 }

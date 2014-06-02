@@ -132,7 +132,7 @@
     // Uncomment the following line to display an Edit button in the navigation bar for this view controller.
     // self.navigationItem.rightBarButtonItem = self.editButtonItem;
     
-    didSomethingChange = NO;
+//    didSomethingChange = NO;
     isEditingEmailField = isNotEditing;
     mainCancelPressed = cancelIsNotPressed;
     [[MCWeAllPayStoreController defaultStore] beginUndoGroup];
@@ -151,7 +151,7 @@
         _thisPerson = [_tonightsBill addPerson];
         [_thisPerson setPictureDataFromImage:nil];
         [_thisPerson setThumbnailDataFromImage:nil];
-        didSomethingChange = YES;
+//        didSomethingChange = YES;
         isNew = YES;
         NSString *newHeaderTitle = NSLocalizedString(@"NEW_PERSON_HEADER", @"new person");
         [self setTitle:newHeaderTitle];
@@ -248,10 +248,10 @@
     if (mainCancelPressed == cancelIsNotPressed) {
         if (textField == firstNameField) {
             [_thisPerson setFirstName:[textField text]];
-            didSomethingChange = YES;
+//            didSomethingChange = YES;
         } else if (textField == lastNameField) {
             [_thisPerson setLastName:[textField text]];
-            didSomethingChange = YES;
+//            didSomethingChange = YES;
         } else if (textField == emailField) {
             if (isNew) {
                 [_thisPerson addOneEmailAddressFromAString:[emailField text]];
@@ -263,7 +263,7 @@
                     [defaultEmail setEmailAddress:[emailField text]];
                 }
             }
-            didSomethingChange = YES;
+//            didSomethingChange = YES;
             isEditingEmailField = isNotEditing;
         }
     }

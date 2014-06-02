@@ -24,7 +24,7 @@
 
 //@synthesize thisPayment;
 @synthesize tonightsBill;
-@synthesize didSomethingChange;
+//@synthesize didSomethingChange;
 @synthesize isNew;
 @synthesize delegate;
 
@@ -101,7 +101,7 @@
         NSInteger row = [personPickerView selectedRowInComponent:0];
         [_thisPayment setPayingPerson:listOfPeople[row]];
 //        [payerView setText:[[_thisPayment payingPerson] getFullName]];
-        didSomethingChange = YES;
+//        didSomethingChange = YES;
         NSDate *nu = [NSDate date];
         [tonightsBill setDateModified:nu];
         [_thisPayment setDateModified:nu];
@@ -129,7 +129,7 @@
 {
     [itemView resignFirstResponder];
     [_thisPayment setDescriptionOfPayment:[itemView text]];
-    didSomethingChange = YES;
+//    didSomethingChange = YES;
     [[[self navigationItem] rightBarButtonItem] setEnabled:YES];
 }
 
@@ -143,7 +143,7 @@
     NSDate *nu = [NSDate date];
     [tonightsBill setDateModified:nu];
     [_thisPayment setDateModified:nu];
-    didSomethingChange = YES;
+//    didSomethingChange = YES;
 }
 
 #pragma mark - new in this class
@@ -154,7 +154,7 @@
     
     if (self) {
         tonightsBill = bill;
-        didSomethingChange = NO;
+//        didSomethingChange = NO;
         if (thePayment) {
             _thisPayment = thePayment;
             isNew = NO;
@@ -327,7 +327,7 @@
     if (!_thisPayment) {
         _thisPayment = [tonightsBill addPayment];
         isNew = YES;
-        didSomethingChange = YES;
+//        didSomethingChange = YES;
     } else {
         isNew = NO;
     }
