@@ -286,8 +286,18 @@
 
 - (NSNumber *)totalSumOfMoneyOfThisSharedBill
 {
+    NSFetchRequest *request = [NSFetchRequest fetchRequestWithEntityName:@"MCPayment"];
+    [request setRelationshipKeyPathsForPrefetching:@[ @"payingPerson" ]];
+    [request setPredicate:[NSPredicate predicateWithFormat:@"onWhichBill = %@ AND ANY peopleSharingPayment.isPersonPresent = YES", self]];
+    [request setSortDescriptors:@[[NSSortDescriptor sortDescriptorWithKey:@"dateCreated" ascending:YES]]];
+    NSManagedObjectContext *context = [self managedObjectContext];
+    NSError *error = nil;
+    NSArray *paymentsOfPerson = [context executeFetchRequest:request error:&error];
+    if (!paymentsOfPerson) {
+        NSLog(@"Error fetching paymentofPerson: %@", [error localizedDescription]);
+    }
     double sumOfMoney = 0.0;
-    for (MCPayment *p in [self payments]) {
+    for (MCPayment *p in paymentsOfPerson) {
         sumOfMoney += [[p money] doubleValue];
     }
     return @(sumOfMoney);

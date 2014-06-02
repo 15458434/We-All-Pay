@@ -159,6 +159,7 @@
     XCTAssertEqualWithAccuracy([[returnPayment money] doubleValue], 2.5, 0.001, @"The amount of money owed should be 2.5");
     XCTAssertTrue([returnPayment payer] == ilse, @"Ilse should be paying.");
     XCTAssertTrue([returnPayment receiver] == mark, @"Mark should be receiving.");
+    XCTAssertEqualWithAccuracy([[tonightsBill totalSumOfMoneyOfThisSharedBill] doubleValue], 5.00, 0.001, @"A total of 5 spent should be present.");
 }
 
 @end
