@@ -19,6 +19,12 @@
 @class MCPaymentViewController;
 @class MCTwoLabelsTitleView;
 
+typedef NS_ENUM(NSUInteger, MCMoneyValueFieldDismissStatus) {
+    cancelIsPressed,
+    doneIsPressed,
+    otherTextFieldSelected,
+    backgroundTapped
+};
 
 @protocol MCPaymentViewControllerDelegate <NSObject>
 
@@ -42,6 +48,7 @@
     UIPickerView *personPickerView;
     NSArray *listOfPeople;
     BOOL peoplePickerCancelled;
+    MCMoneyValueFieldDismissStatus kindOfPaidFieldDismiss;
     
     NSArray *_paymentPresenceArray;
     NSFetchedResultsController *_dataController;

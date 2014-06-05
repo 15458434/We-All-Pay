@@ -116,12 +116,14 @@
     NSNumberFormatter *nf = [[NSNumberFormatter alloc] init];
     [nf setNumberStyle:NSNumberFormatterCurrencyStyle];
     [paidView setText:[nf stringFromNumber:[_thisPayment money]]];
+    kindOfPaidFieldDismiss = cancelIsPressed;
     [paidView resignFirstResponder];
 }
 
 - (void)doneNumberPad:(id)selector
 {
-    [self storeMoneySpent];
+//    [self storeMoneySpent];
+    kindOfPaidFieldDismiss = doneIsPressed;
     [paidView resignFirstResponder];
 }
 
@@ -233,19 +235,13 @@
 
 - (BOOL)textFieldShouldBeginEditing:(UITextField *)textField
 {
-    /*if ([payerView isFirstResponder] || [paidView isFirstResponder] || [itemView isFirstResponder]) {
-     [self setSwitchInputField:YES];
-     return YES;
-     } else {
-     self.switchInputField = NO;
-     return YES;
-     }*/
     return YES;
 }
 
 - (void)textFieldDidBeginEditing:(UITextField *)textField
 {
     if (textField == paidView) {
+        [[MCWeAllPayStoreController defaultStore] beginUndoGroupWithoutRegistration];
         NSNumberFormatter *numberFormatter = [[NSNumberFormatter alloc] init];
         [numberFormatter setFormatterBehavior:NSNumberFormatterBehaviorDefault];
         [numberFormatter setLocale:[NSLocale currentLocale]];
@@ -273,6 +269,11 @@
         [payerView setText:[listOfPeople[row] getFullName]];
         [self setCircularImageOnPictureView:[listOfPeople[row] picture]];
         [personPickerView selectRow:row inComponent:0 animated:YES];
+        kindOfPaidFieldDismiss = otherTextFieldSelected;
+    }
+    
+    if (textField == itemView) {
+        kindOfPaidFieldDismiss = otherTextFieldSelected;
     }
 }
 
@@ -284,7 +285,16 @@
 - (void)textFieldDidEndEditing:(UITextField *)textField
 {
     if (textField == paidView) {
-        /*[self storeMoneySpent];*/
+        if (kindOfPaidFieldDismiss == cancelIsPressed) {
+            // Restore stored value
+            [paidView setText:[_thisPayment getMoneyValueInCurrencyAsAString]];
+        } else if (kindOfPaidFieldDismiss == doneIsPressed) {
+            [self storeMoneySpent];
+        } else if (kindOfPaidFieldDismiss == otherTextFieldSelected) {
+            [self storeMoneySpent];
+        } else if (kindOfPaidFieldDismiss == backgroundTapped){
+            [self storeMoneySpent];
+        }
     } else if (textField == payerView) {
         if (!peoplePickerCancelled) {
             [[MCWeAllPayStoreController defaultStore] endUndoGroupAndProcessWithoutRegistration];
