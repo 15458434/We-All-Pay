@@ -183,14 +183,20 @@
     NSManagedObjectContext *context = [weAllPayStoreDocument managedObjectContext];
     [[context undoManager] endUndoGrouping];
     [[context undoManager] disableUndoRegistration];
-    [context processPendingChanges];
+    [self saveStore];
+//    NSError *saveError;
+//    BOOL saveSuccesful = [context save:&saveError];
+//    if (!saveSuccesful) {
+//        NSLog(@"Save unsuccesful: %@", [saveError localizedDescription]);
+//    }
 }
 
 - (void)endUndoGroupAndProcessWithoutRegistration
 {
     NSManagedObjectContext *context = [weAllPayStoreDocument managedObjectContext];
     [[context undoManager] endUndoGrouping];
-    [context processPendingChanges];
+//    [context processPendingChanges];
+    [self saveStore];
 }
 
 - (void)endUndoGroupAndUndo

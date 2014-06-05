@@ -27,10 +27,13 @@
     [[[GAI sharedInstance] logger] setLogLevel:kGAILogLevelNone];
     
     // Initialize tracker. Replace with your tracking ID.
-    [[GAI sharedInstance] trackerWithTrackingId:@"UA-50304745-1"];
+//    [[GAI sharedInstance] trackerWithTrackingId:@"UA-50304745-1"];
+    
+    // Tracker for development environment.
+    [[GAI sharedInstance] trackerWithTrackingId:@"UA-50304745-2"];
     
     // Set to YES if during test versions.
-    [[GAI sharedInstance] setDryRun:YES];
+    [[GAI sharedInstance] setDryRun:NO];
 }
 
 - (void)startGoogleAnalyticsSession
@@ -43,13 +46,14 @@
 {
     id<GAITracker> tracker = [[GAI sharedInstance] defaultTracker];
     [tracker set:kGAISessionControl value:@"stop"];
+    [[GAI sharedInstance] dispatch];
 }
 
 - (void)executeOnlyOnceDuringStartup
 {
     [self setupGoogleAnalytics];
     [self startGoogleAnalyticsSession];
-    [TestFlight takeOff:@"f2224673-b632-44ae-8feb-3c1cfe59e1f5"];
+//    [TestFlight takeOff:@"f2224673-b632-44ae-8feb-3c1cfe59e1f5"];
     // Override point for customization after application launch.
     NSLog(@"%@", [[UIDevice currentDevice] model]);
     NSLog(@"I dedicate this program to Ilse Béguin, the most wonderful woman in the world who brought herself into my life, when I was developing this App.");
@@ -125,6 +129,10 @@
 
 - (void)applicationDidEnterBackground:(UIApplication *)application
 {
+    __block UIBackgroundTaskIdentifier bgTask = [application beginBackgroundTaskWithExpirationHandler:^{
+        [application endBackgroundTask:bgTask];
+        bgTask = UIBackgroundTaskInvalid;
+    }];
     [[MCWeAllPayStoreController defaultStore] saveStore];
     [self stopGoogleAnalyticsSession];
 }
