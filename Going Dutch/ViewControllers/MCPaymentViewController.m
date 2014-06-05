@@ -194,6 +194,23 @@
     });
 }
 
+- (void)tappedInTheBackground:(id)selector
+{
+    kindOfPaidFieldDismiss = backgroundTapped;
+    [self dismissKeyboard];
+}
+
+- (void)dismissKeyboard
+{
+    if ([paidView isFirstResponder]) {
+        [paidView resignFirstResponder];
+    } else if ([itemView isFirstResponder]) {
+        [itemView resignFirstResponder];
+    } else if ([payerView isFirstResponder]) {
+        [payerView resignFirstResponder];
+    }
+}
+
 #pragma mark - PickerViewDelegate
 
 - (NSString *)pickerView:(UIPickerView *)pickerView titleForRow:(NSInteger)row forComponent:(NSInteger)component
@@ -293,7 +310,8 @@
         } else if (kindOfPaidFieldDismiss == otherTextFieldSelected) {
             [self storeMoneySpent];
         } else if (kindOfPaidFieldDismiss == backgroundTapped){
-            [self storeMoneySpent];
+            // Restore stored value
+            [paidView setText:[_thisPayment getMoneyValueInCurrencyAsAString]];
         }
     } else if (textField == payerView) {
         if (!peoplePickerCancelled) {
@@ -390,6 +408,11 @@
                                                                   action:@selector(doneNumberPad:)];
     [inputAccossoryNumberPad setItems:@[cancelButton, flexButton, theDoneButton] animated:YES];
     [paidView setInputAccessoryView:inputAccossoryNumberPad];
+    
+    // Make sure a tap in the background dimisses the keyboard as well.
+    UITapGestureRecognizer *thatTickles = [[UITapGestureRecognizer alloc] initWithTarget:self action:@selector(tappedInTheBackground:)];
+    [thatTickles setCancelsTouchesInView:NO];
+    [[self tableView] addGestureRecognizer:thatTickles];
 }
 
 - (void)viewWillAppear:(BOOL)animated
