@@ -32,8 +32,13 @@
     // Tracker for development environment.
     [[GAI sharedInstance] trackerWithTrackingId:@"UA-50304745-2"];
     
+    // Get opt-in value
+    // Get user preference
+    NSUserDefaults *defaults = [NSUserDefaults standardUserDefaults];
+    BOOL optInValue = [defaults boolForKey:@"googleAnalyticsOptIn"];
+    
     // Set to YES if during test versions.
-    [[GAI sharedInstance] setDryRun:NO];
+    [[GAI sharedInstance] setDryRun:!optInValue];
 }
 
 - (void)startGoogleAnalyticsSession
@@ -49,8 +54,18 @@
     [[GAI sharedInstance] dispatch];
 }
 
+- (void)getAppSettings
+{
+    // Set the application defaults
+    NSUserDefaults *defaults = [NSUserDefaults standardUserDefaults];
+    NSDictionary *appDefaults = @{ @"googleAnalyticsOptIn" : @YES};
+    [defaults registerDefaults:appDefaults];
+    [defaults synchronize];
+}
+
 - (void)executeOnlyOnceDuringStartup
 {
+    [self getAppSettings];
     [self setupGoogleAnalytics];
     [self startGoogleAnalyticsSession];
 //    [TestFlight takeOff:@"f2224673-b632-44ae-8feb-3c1cfe59e1f5"];
