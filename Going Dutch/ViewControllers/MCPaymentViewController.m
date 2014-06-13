@@ -45,14 +45,7 @@
 
 - (IBAction)mainCancelButtonPressed:(id)sender
 {
-//    NSManagedObjectContext *context = [[[MCWeAllPayStoreController defaultStore] weAllPayStoreDocument] managedObjectContext];
-//    [context performBlockAndWait:^{
-//        [[context undoManager] endUndoGrouping];
-//        [[context undoManager] disableUndoRegistration];
-//        if ([[context undoManager] canUndo]) {
-//            [[context undoManager] undoNestedGroup];
-//        }
-//    }];
+    [self dismissKeyboard];
     if ([[[_thisPayment managedObjectContext] undoManager] canUndo]) {
         [[MCWeAllPayStoreController defaultStore] endUndoGroupAndUndo];
     } else {
