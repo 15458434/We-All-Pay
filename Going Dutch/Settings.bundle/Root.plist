@@ -9,6 +9,8 @@
 			<string>Google Analytics</string>
 			<key>Type</key>
 			<string>PSGroupSpecifier</string>
+			<key>FooterText</key>
+			<string>Google Analytics Footer</string>
 		</dict>
 		<dict>
 			<key>DefaultValue</key>
