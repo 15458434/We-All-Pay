@@ -8,6 +8,9 @@
 
 #import "MCiScreenTableViewController.h"
 
+#import "MCOneLabelIScreenTableViewCell.h"
+#import "MCTwoLabelIscreenTableViewCell.h"
+
 @interface MCiScreenTableViewController ()
 
 @end
@@ -58,30 +61,53 @@
 
 #pragma mark - Table view data source
 
-//- (NSInteger)numberOfSectionsInTableView:(UITableView *)tableView
-//{
-//#warning Potentially incomplete method implementation.
-//    // Return the number of sections.
-//    return 0;
-//}
-//
-//- (NSInteger)tableView:(UITableView *)tableView numberOfRowsInSection:(NSInteger)section
-//{
-//#warning Incomplete method implementation.
-//    // Return the number of rows in the section.
-//    return 0;
-//}
+- (NSInteger)numberOfSectionsInTableView:(UITableView *)tableView
+{
+    // Return the number of sections.
+    return 2;
+}
 
-/*
+- (NSInteger)tableView:(UITableView *)tableView numberOfRowsInSection:(NSInteger)section
+{
+    // Return the number of rows in the section.
+    switch (section) {
+        case 0:
+            return 2;
+            break;
+        case 1:
+            return 1;
+            break;
+        default:
+            return 0;
+            break;
+    }
+    return 0;
+}
+
 - (UITableViewCell *)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath
 {
-    UITableViewCell *cell = [tableView dequeueReusableCellWithIdentifier:<#@"reuseIdentifier"#> forIndexPath:indexPath];
-    
-    // Configure the cell...
-    
-    return cell;
+    if ([indexPath section] == 0) {
+        if ([indexPath row] == 0) {
+            MCOneLabelIScreenTableViewCell *cell = [tableView dequeueReusableCellWithIdentifier:@"MCOneLabelIScreenTableViewCell" forIndexPath:indexPath];
+            [[cell oneTextLabel] setText:@"Restore previous purchases"];
+            return cell;
+        } else if ([indexPath row] == 1) {
+            MCTwoLabelIscreenTableViewCell *cell = [tableView dequeueReusableCellWithIdentifier:@"MCTwoLabelIscreenTableViewCell" forIndexPath:indexPath];
+            [[cell leftLabel] setText:@"Buy Pro"];
+            [[cell rightLabel] setText:@"€ 0,89"];
+            return cell;
+        }
+    } else if ([indexPath section] == 1) {
+        if ([indexPath row] == 0) {
+            MCOneLabelIScreenTableViewCell *cell = [tableView dequeueReusableCellWithIdentifier:@"MCOneLabelIScreenTableViewCell" forIndexPath:indexPath];
+            [[cell oneTextLabel] setText:@"Feedback"];
+            return cell;
+        }
+    } else {
+        NSLog(@"This should not be happening.");
+    }
+    return nil;
 }
-*/
 
 /*
 // Override to support conditional editing of the table view.

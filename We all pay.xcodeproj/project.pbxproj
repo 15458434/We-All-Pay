@@ -18,6 +18,8 @@
 		380BF831181088B9008A8B74 /* MCEmailAddressTableViewCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 380BF830181088B9008A8B74 /* MCEmailAddressTableViewCell.m */; };
 		380F44F21813250600FF7E10 /* No picture image 2 - We All Pay.png in Resources */ = {isa = PBXBuildFile; fileRef = 380F44F11813250600FF7E10 /* No picture image 2 - We All Pay.png */; };
 		381AB0EF1924FCC2004A02C6 /* MCWhoPaidHowMuchTableViewCell_iPhone.m in Sources */ = {isa = PBXBuildFile; fileRef = 381AB0EE1924FCC2004A02C6 /* MCWhoPaidHowMuchTableViewCell_iPhone.m */; };
+		381F693E194EE54700F465FC /* MCOneLabelIScreenTableViewCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 381F693D194EE54700F465FC /* MCOneLabelIScreenTableViewCell.m */; };
+		381F6941194EE5A800F465FC /* MCTwoLabelIscreenTableViewCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 381F6940194EE5A800F465FC /* MCTwoLabelIscreenTableViewCell.m */; };
 		38295AE818425E74009FB5DE /* MCCancelDoneViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 38295AE718425E74009FB5DE /* MCCancelDoneViewController.m */; };
 		3829AD0F178B41320025969D /* WeAllPayStore.xcdatamodeld in Sources */ = {isa = PBXBuildFile; fileRef = 3829AD0D178B41320025969D /* WeAllPayStore.xcdatamodeld */; };
 		382E7BDD17E5E57500A1040A /* MCReturnPaymentViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 382E7BDC17E5E57500A1040A /* MCReturnPaymentViewController.m */; };
@@ -147,6 +149,10 @@
 		38156B2918706BAC0047AEEF /* Base */ = {isa = PBXFileReference; fileEncoding = 10; lastKnownFileType = text.plist.strings; lineEnding = 0; name = Base; path = Base.lproj/Localizable.strings; sourceTree = "<group>"; };
 		381AB0ED1924FCC2004A02C6 /* MCWhoPaidHowMuchTableViewCell_iPhone.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = MCWhoPaidHowMuchTableViewCell_iPhone.h; path = Views/iPhone/MCWhoPaidHowMuchTableViewCell_iPhone.h; sourceTree = "<group>"; };
 		381AB0EE1924FCC2004A02C6 /* MCWhoPaidHowMuchTableViewCell_iPhone.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = MCWhoPaidHowMuchTableViewCell_iPhone.m; path = Views/iPhone/MCWhoPaidHowMuchTableViewCell_iPhone.m; sourceTree = "<group>"; };
+		381F693C194EE54700F465FC /* MCOneLabelIScreenTableViewCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = MCOneLabelIScreenTableViewCell.h; path = Views/iPhone/MCOneLabelIScreenTableViewCell.h; sourceTree = "<group>"; };
+		381F693D194EE54700F465FC /* MCOneLabelIScreenTableViewCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = MCOneLabelIScreenTableViewCell.m; path = Views/iPhone/MCOneLabelIScreenTableViewCell.m; sourceTree = "<group>"; };
+		381F693F194EE5A800F465FC /* MCTwoLabelIscreenTableViewCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = MCTwoLabelIscreenTableViewCell.h; path = Views/iPhone/MCTwoLabelIscreenTableViewCell.h; sourceTree = "<group>"; };
+		381F6940194EE5A800F465FC /* MCTwoLabelIscreenTableViewCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = MCTwoLabelIscreenTableViewCell.m; path = Views/iPhone/MCTwoLabelIscreenTableViewCell.m; sourceTree = "<group>"; };
 		38295AE618425E74009FB5DE /* MCCancelDoneViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = MCCancelDoneViewController.h; sourceTree = "<group>"; };
 		38295AE718425E74009FB5DE /* MCCancelDoneViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = MCCancelDoneViewController.m; sourceTree = "<group>"; };
 		3829AD0E178B41320025969D /* WeAllPayStore.xcdatamodel */ = {isa = PBXFileReference; lastKnownFileType = wrapper.xcdatamodel; path = WeAllPayStore.xcdatamodel; sourceTree = "<group>"; };
@@ -702,6 +708,10 @@
 				387759691924DBE50027A7F1 /* MCPaymentPresenceTableViewCell_iPhone.m */,
 				381AB0ED1924FCC2004A02C6 /* MCWhoPaidHowMuchTableViewCell_iPhone.h */,
 				381AB0EE1924FCC2004A02C6 /* MCWhoPaidHowMuchTableViewCell_iPhone.m */,
+				381F693C194EE54700F465FC /* MCOneLabelIScreenTableViewCell.h */,
+				381F693D194EE54700F465FC /* MCOneLabelIScreenTableViewCell.m */,
+				381F693F194EE5A800F465FC /* MCTwoLabelIscreenTableViewCell.h */,
+				381F6940194EE5A800F465FC /* MCTwoLabelIscreenTableViewCell.m */,
 			);
 			name = iPhone;
 			sourceTree = "<group>";
@@ -896,6 +906,7 @@
 				389950A0191A9049000B00BC /* MCPerson.m in Sources */,
 				38DB85D717E45CA4006237CF /* MCSharedBill+addons.m in Sources */,
 				38DB85DD17E45FB7006237CF /* MCEmailAddress+addons.m in Sources */,
+				381F6941194EE5A800F465FC /* MCTwoLabelIscreenTableViewCell.m in Sources */,
 				38295AE818425E74009FB5DE /* MCCancelDoneViewController.m in Sources */,
 				38EF31451938BA07004912F0 /* UINavigationController+KeyboardDismiss.m in Sources */,
 				380BF831181088B9008A8B74 /* MCEmailAddressTableViewCell.m in Sources */,
@@ -937,6 +948,7 @@
 				38E63CF0186F904B00904D82 /* MCTableEmptyMessage.m in Sources */,
 				3872C0D718FF1363008C54D7 /* MCSelectEmailAddressTableViewCell_iPad.m in Sources */,
 				3872C0D118FF0A5E008C54D7 /* MCSelectEmailAddressTableViewController_iPad.m in Sources */,
+				381F693E194EE54700F465FC /* MCOneLabelIScreenTableViewCell.m in Sources */,
 				38001C97194DA3D8008ACD94 /* MCiScreenTableViewController.m in Sources */,
 				3892E3B117906B5E0038894B /* MCAddressBookDataReceiver.m in Sources */,
 				38CC8C4A18ED61FD006D99E7 /* MCPersonTableViewController_iPad.m in Sources */,
