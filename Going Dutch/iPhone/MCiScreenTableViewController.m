@@ -26,7 +26,10 @@
 
 - (IBAction)tweetAboutUsPressed:(id)sender
 {
-    
+    SLComposeViewController *twitterComposer= [SLComposeViewController composeViewControllerForServiceType:SLServiceTypeTwitter];
+    [twitterComposer setInitialText:@"@MarkCornelisse Thank you for creating We all pay. #ios #app"];
+    [twitterComposer addURL:[NSURL URLWithString:@"https://itunes.apple.com/us/app/we-all-pay/id642135963?ls=1&mt=8"]];
+    [self presentViewController:twitterComposer animated:YES completion:nil];
 }
 
 #pragma mark - New in this class
@@ -68,18 +71,18 @@
     switch (result) {
         case MFMailComposeResultCancelled:
             // Cancelled by user.
-            [[self presentingViewController] dismissViewControllerAnimated:YES completion:nil];
+            [self dismissViewControllerAnimated:YES completion:nil];
             break;
         case MFMailComposeResultFailed:
             // Failed somehow.
             break;
         case MFMailComposeResultSaved:
             // Succesfully saved.
-            [[self presentingViewController] dismissViewControllerAnimated:YES completion:nil];
+            [self dismissViewControllerAnimated:YES completion:nil];
             break;
         case MFMailComposeResultSent:
             // Yay succesfully sent.
-            [[self presentingViewController] dismissViewControllerAnimated:YES completion:nil];
+            [self dismissViewControllerAnimated:YES completion:nil];
             break;
         default:
             NSLog(@"This should not be possible.");

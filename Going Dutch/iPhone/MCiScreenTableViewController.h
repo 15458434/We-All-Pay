@@ -8,6 +8,7 @@
 
 @import UIKit;
 @import MessageUI;
+@import Social;
 
 @interface MCiScreenTableViewController : UITableViewController <MFMailComposeViewControllerDelegate>
 {
