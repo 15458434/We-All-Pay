@@ -6,9 +6,10 @@
 //  Copyright (c) 2014 Mark Cornelisse. All rights reserved.
 //
 
-#import <UIKit/UIKit.h>
+@import UIKit;
+@import MessageUI;
 
-@interface MCiScreenTableViewController : UITableViewController
+@interface MCiScreenTableViewController : UITableViewController <MFMailComposeViewControllerDelegate>
 {
     __weak IBOutlet UILabel *versionLabel;
 }

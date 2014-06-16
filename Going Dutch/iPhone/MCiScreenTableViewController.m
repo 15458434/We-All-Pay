@@ -24,7 +24,9 @@
     [[[self navigationController] presentingViewController] dismissViewControllerAnimated:YES completion:nil];
 }
 
-- (IBAction)tweetAboutUsPressed:(id)sender {
+- (IBAction)tweetAboutUsPressed:(id)sender
+{
+    
 }
 
 #pragma mark - New in this class
@@ -57,6 +59,52 @@
 {
     [super didReceiveMemoryWarning];
     // Dispose of any resources that can be recreated.
+}
+
+#pragma mark - MFMailComposeDelegate
+
+- (void)mailComposeController:(MFMailComposeViewController *)controller didFinishWithResult:(MFMailComposeResult)result error:(NSError *)error
+{
+    switch (result) {
+        case MFMailComposeResultCancelled:
+            // Cancelled by user.
+            [[self presentingViewController] dismissViewControllerAnimated:YES completion:nil];
+            break;
+        case MFMailComposeResultFailed:
+            // Failed somehow.
+            break;
+        case MFMailComposeResultSaved:
+            // Succesfully saved.
+            [[self presentingViewController] dismissViewControllerAnimated:YES completion:nil];
+            break;
+        case MFMailComposeResultSent:
+            // Yay succesfully sent.
+            [[self presentingViewController] dismissViewControllerAnimated:YES completion:nil];
+            break;
+        default:
+            NSLog(@"This should not be possible.");
+            break;
+    }
+}
+
+#pragma mark - Table view delegate
+
+- (void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath
+{
+    if ([indexPath section] == 0) {
+        // If something in section one is pressed.
+    } else if ([indexPath section] == 1) {
+        if ([indexPath row] == 0) {
+            MFMailComposeViewController *mailComposer = [[MFMailComposeViewController alloc] init];
+            [mailComposer setToRecipients:@[ @"support@markcornelisse.nl" ]];
+            [mailComposer setSubject:@"Feedback on We all pay"];
+            [mailComposer setMailComposeDelegate:self];
+            [self presentViewController:mailComposer animated:YES completion:^{
+                [[UIApplication sharedApplication] setStatusBarStyle:UIStatusBarStyleLightContent];
+                [mailComposer setNeedsStatusBarAppearanceUpdate];
+            }];
+        }
+    }
 }
 
 #pragma mark - Table view data source
