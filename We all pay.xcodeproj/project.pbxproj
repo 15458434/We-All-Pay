@@ -7,6 +7,8 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		38001C97194DA3D8008ACD94 /* MCiScreenTableViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 38001C96194DA3D8008ACD94 /* MCiScreenTableViewController.m */; };
+		38001C9B194EE284008ACD94 /* Images.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 38001C9A194EE284008ACD94 /* Images.xcassets */; };
 		3801F89C16DFC62600DF8675 /* CoreData.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 3801F89B16DFC62600DF8675 /* CoreData.framework */; };
 		380396351920CD3900FA8CC2 /* MCPaymentPresence.m in Sources */ = {isa = PBXBuildFile; fileRef = 380396341920CD3900FA8CC2 /* MCPaymentPresence.m */; };
 		380396381920D19D00FA8CC2 /* MCEmailAddress.m in Sources */ = {isa = PBXBuildFile; fileRef = 380396371920D19D00FA8CC2 /* MCEmailAddress.m */; };
@@ -44,7 +46,6 @@
 		385F5311191C2D140012773D /* MCPersonAddonsTest.m in Sources */ = {isa = PBXBuildFile; fileRef = 3898F33D18F40CC100BFFC61 /* MCPersonAddonsTest.m */; };
 		385F5312191C2D140012773D /* MCSharedBillAddOnsTest.m in Sources */ = {isa = PBXBuildFile; fileRef = 3898F33B18F40B9D00BFFC61 /* MCSharedBillAddOnsTest.m */; };
 		385F5313191C2D140012773D /* WeAllPayStoreTests.m in Sources */ = {isa = PBXBuildFile; fileRef = 38D785FC18DC53C30074B670 /* WeAllPayStoreTests.m */; };
-		385FEE6317CBF77B001013E3 /* Images.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 385FEE6217CBF77B001013E3 /* Images.xcassets */; };
 		3867CE4718704B2E001EC222 /* Main-Iphone.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 3867CE4918704B2E001EC222 /* Main-Iphone.storyboard */; };
 		3867CE5118704DAF001EC222 /* MCTableEmptyMessage.xib in Resources */ = {isa = PBXBuildFile; fileRef = 3867CE5318704DAF001EC222 /* MCTableEmptyMessage.xib */; };
 		38690703186F0EEF006A5C11 /* libz.dylib in Frameworks */ = {isa = PBXBuildFile; fileRef = 38690702186F0EEF006A5C11 /* libz.dylib */; };
@@ -125,6 +126,9 @@
 /* End PBXContainerItemProxy section */
 
 /* Begin PBXFileReference section */
+		38001C95194DA3D8008ACD94 /* MCiScreenTableViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = MCiScreenTableViewController.h; path = iPhone/MCiScreenTableViewController.h; sourceTree = "<group>"; };
+		38001C96194DA3D8008ACD94 /* MCiScreenTableViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = MCiScreenTableViewController.m; path = iPhone/MCiScreenTableViewController.m; sourceTree = "<group>"; };
+		38001C9A194EE284008ACD94 /* Images.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Images.xcassets; sourceTree = "<group>"; };
 		3801881A1938D8E70085A5AE /* MCDismissKeyboardProtocol.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = MCDismissKeyboardProtocol.h; path = ViewControllers/MCDismissKeyboardProtocol.h; sourceTree = "<group>"; };
 		3801F89B16DFC62600DF8675 /* CoreData.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = CoreData.framework; path = System/Library/Frameworks/CoreData.framework; sourceTree = SDKROOT; };
 		380396331920CD3900FA8CC2 /* MCPaymentPresence.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = MCPaymentPresence.h; sourceTree = "<group>"; };
@@ -185,7 +189,6 @@
 		385F5305191C2C360012773D /* en */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = en; path = en.lproj/InfoPlist.strings; sourceTree = "<group>"; };
 		385F5307191C2C360012773D /* We_all_pay_Tests.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = We_all_pay_Tests.m; sourceTree = "<group>"; };
 		385F5309191C2C360012773D /* We all pay Tests-Prefix.pch */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = "We all pay Tests-Prefix.pch"; sourceTree = "<group>"; };
-		385FEE6217CBF77B001013E3 /* Images.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; name = Images.xcassets; path = "We all pay/Images.xcassets"; sourceTree = SOURCE_ROOT; };
 		3867CE4018703E9A001EC222 /* nl */ = {isa = PBXFileReference; fileEncoding = 10; lastKnownFileType = text.plist.strings; name = nl; path = nl.lproj/InfoPlist.strings; sourceTree = "<group>"; };
 		3867CE4A18704B48001EC222 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = "Base.lproj/Main-Iphone.storyboard"; sourceTree = "<group>"; };
 		3867CE4D18704C60001EC222 /* Base */ = {isa = PBXFileReference; fileEncoding = 10; lastKnownFileType = text.plist.strings; name = Base; path = Base.lproj/InfoPlist.strings; sourceTree = "<group>"; };
@@ -482,7 +485,7 @@
 				3892E3B017906B5E0038894B /* MCAddressBookDataReceiver.m */,
 				38572AE5169D437B00969C62 /* MCAppDelegate.h */,
 				38572AE6169D437B00969C62 /* MCAppDelegate.m */,
-				385FEE6217CBF77B001013E3 /* Images.xcassets */,
+				38001C9A194EE284008ACD94 /* Images.xcassets */,
 				38572ADD169D437B00969C62 /* Supporting Files */,
 				38D24B21194B30C000E4946E /* Settings.bundle */,
 			);
@@ -708,6 +711,8 @@
 			children = (
 				38572AF6169D443C00969C62 /* MCAllTripsTableViewController.h */,
 				38572B09169F3D2700969C62 /* MCAllTripsTableViewController.m */,
+				38001C95194DA3D8008ACD94 /* MCiScreenTableViewController.h */,
+				38001C96194DA3D8008ACD94 /* MCiScreenTableViewController.m */,
 				386FC32318E5855400428294 /* MCSharedBillMainViewController.h */,
 				386FC32418E5855400428294 /* MCSharedBillMainViewController.m */,
 				383E0C5B186737EB00AA688D /* MCSharedBillPageViewController.h */,
@@ -837,7 +842,6 @@
 			buildActionMask = 2147483647;
 			files = (
 				38572AE1169D437B00969C62 /* InfoPlist.strings in Resources */,
-				385FEE6317CBF77B001013E3 /* Images.xcassets in Resources */,
 				38EFF2D616D215FB001C8248 /* MCAllTripsTableViewCell.xib in Resources */,
 				380BF82E18108898008A8B74 /* MCEmailAddressTableViewCell.xib in Resources */,
 				3867CE5118704DAF001EC222 /* MCTableEmptyMessage.xib in Resources */,
@@ -846,6 +850,7 @@
 				387D3A911870652B0060FAF8 /* Localizable.strings in Resources */,
 				38334ECA173552330063B919 /* Default.png in Resources */,
 				38334ECB1735523A0063B919 /* Default@2x.png in Resources */,
+				38001C9B194EE284008ACD94 /* Images.xcassets in Resources */,
 				38DC8B4319097FEA00762235 /* Main-iPad.storyboard in Resources */,
 				3867CE4718704B2E001EC222 /* Main-Iphone.storyboard in Resources */,
 				38334ECC173552410063B919 /* Default-568h@2x.png in Resources */,
@@ -932,6 +937,7 @@
 				38E63CF0186F904B00904D82 /* MCTableEmptyMessage.m in Sources */,
 				3872C0D718FF1363008C54D7 /* MCSelectEmailAddressTableViewCell_iPad.m in Sources */,
 				3872C0D118FF0A5E008C54D7 /* MCSelectEmailAddressTableViewController_iPad.m in Sources */,
+				38001C97194DA3D8008ACD94 /* MCiScreenTableViewController.m in Sources */,
 				3892E3B117906B5E0038894B /* MCAddressBookDataReceiver.m in Sources */,
 				38CC8C4A18ED61FD006D99E7 /* MCPersonTableViewController_iPad.m in Sources */,
 				38995098191A9048000B00BC /* MCPayment.m in Sources */,
