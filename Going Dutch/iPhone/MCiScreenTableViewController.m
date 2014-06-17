@@ -132,7 +132,7 @@
     // Return the number of rows in the section.
     switch (section) {
         case 0:
-            if ([MCStoreInterface canMakePayments]) {
+            if ([MCStoreInterface canMakePayments] && ![[MCStoreInterface defaultStoreInterface] isProProductPurchased]) {
                 return 2;
             } else {
                 return 0;

@@ -58,6 +58,7 @@
 {
     // Verify is ProProduct is Purchased.
     NSString *productIdentifier = [[self getProProductIdentifier] firstObject];
+    // If there is no value for that key or when the value for that key is no NO should be the return value.
     return [[NSUserDefaults standardUserDefaults] valueForKey:productIdentifier];
 }
 

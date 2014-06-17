@@ -22,7 +22,6 @@
 + (BOOL)canMakePayments;
 
 - (void)validateProductIdentifiers;
-- (NSString *)getProProductCurrencyString;
 - (void)buyProProduct;
 - (void)restorePreviousPurchases;
 

@@ -7,6 +7,7 @@
 //
 
 #import "MCTools.h"
+#import "MCStoreInterface.h"
 
 @implementation MCTools
 
@@ -33,7 +34,13 @@
     if ([[[UIDevice currentDevice] model] isEqualToString:@"iPad"] && [[UIDevice currentDevice] userInterfaceIdiom] == UIUserInterfaceIdiomPhone) {
         [viewController setCanDisplayBannerAds:NO];
     } else {
-        [viewController setCanDisplayBannerAds:show];
+        // If proProduct is not purchased show banner.
+        if (![[MCStoreInterface defaultStoreInterface] isProProductPurchased]) {
+            NSLog(@"Ads will show.");
+            [viewController setCanDisplayBannerAds:show];
+        } else {
+            NSLog(@"Ads will not show.");
+        }
     }
 }
 
