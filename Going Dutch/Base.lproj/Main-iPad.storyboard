@@ -610,6 +610,9 @@
                                     <state key="normal" title="Button" image="Tweet about us button">
                                         <color key="titleShadowColor" white="0.5" alpha="1" colorSpace="calibratedWhite"/>
                                     </state>
+                                    <connections>
+                                        <action selector="tweetUsPressed:" destination="zKy-vN-cPg" eventType="touchUpInside" id="DvA-Io-LMg"/>
+                                    </connections>
                                 </button>
                             </subviews>
                             <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="calibratedWhite"/>

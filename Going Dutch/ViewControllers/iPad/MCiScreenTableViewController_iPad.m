@@ -20,6 +20,19 @@
 
 @implementation MCiScreenTableViewController_iPad
 
+#pragma mark - Actions
+
+
+- (IBAction)tweetUsPressed:(id)sender
+{
+    SLComposeViewController *twitterComposer= [SLComposeViewController composeViewControllerForServiceType:SLServiceTypeTwitter];
+    [twitterComposer setInitialText:@"@MarkCornelisse Thank you for creating We all pay. #ios #app"];
+    [twitterComposer addURL:[NSURL URLWithString:@"https://itunes.apple.com/us/app/we-all-pay/id642135963?ls=1&mt=8"]];
+    [self presentViewController:twitterComposer animated:YES completion:nil];
+}
+
+#pragma mark - Inherited froms super.
+
 - (id)initWithStyle:(UITableViewStyle)style
 {
     self = [super initWithStyle:style];
@@ -46,6 +59,60 @@
 {
     [super didReceiveMemoryWarning];
     // Dispose of any resources that can be recreated.
+}
+
+#pragma mark - MFMailComposeDelegate
+
+- (void)mailComposeController:(MFMailComposeViewController *)controller didFinishWithResult:(MFMailComposeResult)result error:(NSError *)error
+{
+    switch (result) {
+        case MFMailComposeResultCancelled:
+            // Cancelled by user.
+            [self dismissViewControllerAnimated:YES completion:nil];
+            break;
+        case MFMailComposeResultFailed:
+            // Failed somehow.
+            break;
+        case MFMailComposeResultSaved:
+            // Succesfully saved.
+            [self dismissViewControllerAnimated:YES completion:nil];
+            break;
+        case MFMailComposeResultSent:
+            // Yay succesfully sent.
+            [self dismissViewControllerAnimated:YES completion:nil];
+            break;
+        default:
+            NSLog(@"This should not be possible.");
+            break;
+    }
+}
+
+#pragma mark - Table view delegate
+
+- (void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath
+{
+    if ([indexPath section] == 0) {
+        // If something in section one is pressed.
+        if ([indexPath row] == 0) {
+            [[MCStoreInterface defaultStoreInterface] restorePreviousPurchases];
+        }
+        if ([indexPath row] == 1) {
+            [[MCStoreInterface defaultStoreInterface] buyProProduct];
+        }
+    } else if ([indexPath section] == 1) {
+        if ([indexPath row] == 0) {
+            MFMailComposeViewController *mailComposer = [[MFMailComposeViewController alloc] init];
+            [mailComposer setToRecipients:@[ @"support@markcornelisse.nl" ]];
+            [mailComposer setSubject:@"Feedback on We all pay"];
+            [mailComposer setMailComposeDelegate:self];
+            [self presentViewController:mailComposer animated:YES completion:^{
+                [[UIApplication sharedApplication] setStatusBarStyle:UIStatusBarStyleLightContent];
+                [mailComposer setNeedsStatusBarAppearanceUpdate];
+            }];
+        }
+    }
+    UITableViewCell *thisCell = [[self tableView] cellForRowAtIndexPath:indexPath];
+    [thisCell setSelected:NO];
 }
 
 #pragma mark - Table view data source

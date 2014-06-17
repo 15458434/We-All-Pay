@@ -7,7 +7,12 @@
 //
 
 @import UIKit;
+@import MessageUI;
+@import Social;
+@import StoreKit;
 
-@interface MCiScreenTableViewController_iPad : UITableViewController
+@interface MCiScreenTableViewController_iPad : UITableViewController <MFMailComposeViewControllerDelegate>
+
+- (IBAction)tweetUsPressed:(id)sender;
 
 @end
