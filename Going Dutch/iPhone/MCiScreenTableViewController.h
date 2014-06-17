@@ -9,6 +9,7 @@
 @import UIKit;
 @import MessageUI;
 @import Social;
+@import StoreKit;
 
 @interface MCiScreenTableViewController : UITableViewController <MFMailComposeViewControllerDelegate>
 {
@@ -17,6 +18,5 @@
 
 - (IBAction)mainCancelButtonPressed:(id)sender;
 - (IBAction)tweetAboutUsPressed:(id)sender;
-
 
 @end

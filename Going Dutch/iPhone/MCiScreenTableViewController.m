@@ -11,6 +11,9 @@
 #import "MCOneLabelIScreenTableViewCell.h"
 #import "MCTwoLabelIscreenTableViewCell.h"
 
+#import "MCStoreInterface.h"
+#import "SKProduct+MCStoreInterface.h"
+
 @interface MCiScreenTableViewController ()
 
 @end
@@ -96,6 +99,12 @@
 {
     if ([indexPath section] == 0) {
         // If something in section one is pressed.
+        if ([indexPath row] == 0) {
+            [[MCStoreInterface defaultStoreInterface] restorePreviousPurchases];
+        }
+        if ([indexPath row] == 1) {
+            [[MCStoreInterface defaultStoreInterface] buyProProduct];
+        }
     } else if ([indexPath section] == 1) {
         if ([indexPath row] == 0) {
             MFMailComposeViewController *mailComposer = [[MFMailComposeViewController alloc] init];
@@ -123,7 +132,11 @@
     // Return the number of rows in the section.
     switch (section) {
         case 0:
-            return 2;
+            if ([MCStoreInterface canMakePayments]) {
+                return 2;
+            } else {
+                return 0;
+            }
             break;
         case 1:
             return 1;
@@ -145,7 +158,7 @@
         } else if ([indexPath row] == 1) {
             MCTwoLabelIscreenTableViewCell *cell = [tableView dequeueReusableCellWithIdentifier:@"MCTwoLabelIscreenTableViewCell" forIndexPath:indexPath];
             [[cell leftLabel] setText:@"Buy Pro"];
-            [[cell rightLabel] setText:@"€ 0,89"];
+            [[cell rightLabel] setText:[[[MCStoreInterface defaultStoreInterface] proProduct] priceString]];
             return cell;
         }
     } else if ([indexPath section] == 1) {
