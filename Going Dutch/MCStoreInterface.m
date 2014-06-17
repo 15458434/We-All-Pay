@@ -12,7 +12,7 @@
 
 #pragma mark - Private in this class
 
-- (NSArray *)getProProductIdentifier
+- (NSArray *)getProProductIdentifiers
 {
     if (!productIdentifiers) {
         // They are stored in a property list.
@@ -25,10 +25,10 @@
 - (void)applyProVersion
 {
     // The first string is the Pro Version
-    NSString *productIdentifier = [[self getProProductIdentifier] firstObject];
+    NSString *productIdentifier = [[self getProProductIdentifiers] firstObject];
     [[NSUserDefaults standardUserDefaults] setBool:YES forKey:productIdentifier];
     [[NSUserDefaults standardUserDefaults] synchronize];
-    [[NSNotificationCenter defaultCenter] postNotificationName:[NSString stringWithFormat:@"%@", productIdentifier] object:productIdentifier userInfo:nil];
+    [[NSNotificationCenter defaultCenter] postNotificationName:@"Apply pro version" object:self userInfo:nil];
 }
 
 - (void)completeTransaction:(SKPaymentTransaction *)transaction
@@ -57,7 +57,7 @@
 - (BOOL)isProProductPurchased
 {
     // Verify is ProProduct is Purchased.
-    NSString *productIdentifier = [[self getProProductIdentifier] firstObject];
+    NSString *productIdentifier = [[self getProProductIdentifiers] firstObject];
     // If there is no value for that key or when the value for that key is no NO should be the return value.
     return [[NSUserDefaults standardUserDefaults] valueForKey:productIdentifier];
 }
@@ -71,7 +71,7 @@
 - (void)validateProductIdentifiers
 {
     NSLog(@"Validating product identifiers.");
-    SKProductsRequest *productsRequest = [[SKProductsRequest alloc] initWithProductIdentifiers:[NSSet setWithArray:[self getProProductIdentifier]]];
+    SKProductsRequest *productsRequest = [[SKProductsRequest alloc] initWithProductIdentifiers:[NSSet setWithArray:[self getProProductIdentifiers]]];
     productsRequest.delegate = self;
     [productsRequest start];
 }

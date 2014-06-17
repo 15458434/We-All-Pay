@@ -31,6 +31,25 @@
     [self presentViewController:twitterComposer animated:YES completion:nil];
 }
 
+#pragma mark - Private in this class
+
+- (NSUInteger)getAmountOfRowsInSection0
+{
+    if ([MCStoreInterface canMakePayments] && ![[MCStoreInterface defaultStoreInterface] isProProductPurchased]) {
+        return 2;
+    } else {
+        return 0;
+    }
+}
+
+- (void)applyProVersion:(NSNotification *)notification
+{
+    numberOfRowsInSection0 = [self getAmountOfRowsInSection0];
+    [[self tableView] deleteRowsAtIndexPaths:@[ [NSIndexPath indexPathForRow:0 inSection:0], [NSIndexPath indexPathForRow:1 inSection:0] ] withRowAnimation:UITableViewRowAnimationAutomatic];
+    UIAlertView *thankYouForPurchasingPopup = [[UIAlertView alloc] initWithTitle:@"Thank you for purchasing." message:nil delegate:self cancelButtonTitle:@"Dismiss" otherButtonTitles:nil];
+    [thankYouForPurchasingPopup show];
+}
+
 #pragma mark - Inherited froms super.
 
 - (id)initWithStyle:(UITableViewStyle)style
@@ -53,12 +72,35 @@
     // self.navigationItem.rightBarButtonItem = self.editButtonItem;
     
     [[self tableView] setBackgroundColor:[MCColors getbackgroundColor]];
+    
+    numberOfRowsInSection0 = [self getAmountOfRowsInSection0];
+}
+
+- (void)viewDidAppear:(BOOL)animated
+{
+    [super viewDidAppear:animated];
+    
+    [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(applyProVersion:) name:@"Apply pro version" object:[MCStoreInterface defaultStoreInterface]];
+}
+
+- (void)viewDidDisappear:(BOOL)animated
+{
+    [super viewDidDisappear:animated];
+    
+    [[NSNotificationCenter defaultCenter] removeObserver:self];
 }
 
 - (void)didReceiveMemoryWarning
 {
     [super didReceiveMemoryWarning];
     // Dispose of any resources that can be recreated.
+}
+
+#pragma mark - UIAlertViewDelegate
+
+- (void)alertView:(UIAlertView *)alertView clickedButtonAtIndex:(NSInteger)buttonIndex
+{
+    NSLog(@"AlertView is dismissed.");
 }
 
 #pragma mark - MFMailComposeDelegate
@@ -115,6 +157,7 @@
     [thisCell setSelected:NO];
 }
 
+
 #pragma mark - Table view data source
 
 - (NSInteger)numberOfSectionsInTableView:(UITableView *)tableView
@@ -125,14 +168,10 @@
 
 - (NSInteger)tableView:(UITableView *)tableView numberOfRowsInSection:(NSInteger)section
 {
-    // Return the number of rows in the section.
+// Return the number of rows in the section.
     switch (section) {
         case 0:
-            if ([MCStoreInterface canMakePayments] && ![[MCStoreInterface defaultStoreInterface] isProProductPurchased]) {
-                return 2;
-            } else {
-                return 0;
-            }
+            return numberOfRowsInSection0;
             break;
         case 1:
             return 1;

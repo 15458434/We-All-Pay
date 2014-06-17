@@ -11,7 +11,10 @@
 @import Social;
 @import StoreKit;
 
-@interface MCiScreenTableViewController_iPad : UITableViewController <MFMailComposeViewControllerDelegate>
+@interface MCiScreenTableViewController_iPad : UITableViewController <MFMailComposeViewControllerDelegate, UIAlertViewDelegate>
+{
+    NSUInteger numberOfRowsInSection0;
+}
 
 - (IBAction)tweetUsPressed:(id)sender;
 
