@@ -46,7 +46,7 @@
     [super viewWillAppear:animated];
     
     [self setNeedsStatusBarAppearanceUpdate];
-    [[self navigationController] setToolbarHidden:NO animated:YES];
+    [[self navigationController] setToolbarHidden:YES animated:YES];
 }
 
 - (void)didReceiveMemoryWarning

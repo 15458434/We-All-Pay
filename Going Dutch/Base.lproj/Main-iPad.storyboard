@@ -585,6 +585,116 @@
             </objects>
             <point key="canvasLocation" x="5814" y="-1188"/>
         </scene>
+        <!--Ci Screen Table View Controller i Pad-->
+        <scene sceneID="o8z-Nc-xfe">
+            <objects>
+                <tableViewController storyboardIdentifier="MCiScreenTableViewController_iPad" useStoryboardIdentifierAsRestorationIdentifier="YES" id="zKy-vN-cPg" customClass="MCiScreenTableViewController_iPad" sceneMemberID="viewController">
+                    <tableView key="view" clipsSubviews="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" dataMode="prototypes" style="grouped" separatorStyle="default" rowHeight="44" sectionHeaderHeight="10" sectionFooterHeight="10" id="0ro-oF-XIG">
+                        <rect key="frame" x="0.0" y="0.0" width="320" height="480"/>
+                        <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+                        <color key="backgroundColor" red="0.80000007149999997" green="0.86666673419999996" blue="0.94117653369999998" alpha="1" colorSpace="deviceRGB"/>
+                        <color key="separatorColor" red="0.80000007149999997" green="0.86666673419999996" blue="0.94117653369999998" alpha="1" colorSpace="deviceRGB"/>
+                        <color key="sectionIndexBackgroundColor" red="0.80000007149999997" green="0.86666673419999996" blue="0.94117653369999998" alpha="1" colorSpace="deviceRGB"/>
+                        <view key="tableFooterView" contentMode="scaleToFill" restorationIdentifier="tableViewFooterView" id="G6S-iI-HVI" customClass="UITableViewHeaderFooterView">
+                            <rect key="frame" x="0.0" y="153" width="320" height="100"/>
+                            <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                            <subviews>
+                                <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="Nv8-Pr-YVa">
+                                    <rect key="frame" x="130" y="20" width="60" height="60"/>
+                                    <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                                    <constraints>
+                                        <constraint firstAttribute="width" constant="60" id="95E-O6-ezc"/>
+                                        <constraint firstAttribute="width" secondItem="Nv8-Pr-YVa" secondAttribute="height" multiplier="1:1" id="qV2-9x-32n"/>
+                                        <constraint firstAttribute="height" constant="60" id="w0T-WE-Tsn"/>
+                                    </constraints>
+                                    <state key="normal" title="Button" image="Tweet about us button">
+                                        <color key="titleShadowColor" white="0.5" alpha="1" colorSpace="calibratedWhite"/>
+                                    </state>
+                                </button>
+                            </subviews>
+                            <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="calibratedWhite"/>
+                            <constraints>
+                                <constraint firstAttribute="centerX" secondItem="Nv8-Pr-YVa" secondAttribute="centerX" id="1Xs-iF-nlM"/>
+                                <constraint firstItem="Nv8-Pr-YVa" firstAttribute="top" secondItem="G6S-iI-HVI" secondAttribute="top" constant="20" symbolic="YES" id="JMX-3P-YOX"/>
+                                <constraint firstAttribute="bottom" secondItem="Nv8-Pr-YVa" secondAttribute="bottom" priority="750" constant="20" symbolic="YES" id="fyy-LW-BFG"/>
+                            </constraints>
+                        </view>
+                        <prototypes>
+                            <tableViewCell contentMode="scaleToFill" restorationIdentifier="MCOneLabelTableViewCell_iPad" selectionStyle="blue" hidesAccessoryWhenEditing="NO" indentationLevel="1" indentationWidth="0.0" reuseIdentifier="MCOneLabelTableViewCell_iPad" id="law-me-3pD" customClass="MCOneLabelTableViewCell_iPad">
+                                <rect key="frame" x="0.0" y="55" width="320" height="44"/>
+                                <autoresizingMask key="autoresizingMask"/>
+                                <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" tableViewCell="law-me-3pD" id="iem-q6-2pS">
+                                    <rect key="frame" x="0.0" y="0.0" width="320" height="43"/>
+                                    <autoresizingMask key="autoresizingMask"/>
+                                    <subviews>
+                                        <label opaque="NO" clipsSubviews="YES" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Label" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="9mn-vQ-mtm">
+                                            <rect key="frame" x="20" y="11" width="280" height="21"/>
+                                            <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                                            <fontDescription key="fontDescription" name="HelveticaNeue-Thin" family="Helvetica Neue" pointSize="17"/>
+                                            <color key="textColor" cocoaTouchSystemColor="darkTextColor"/>
+                                            <nil key="highlightedColor"/>
+                                        </label>
+                                    </subviews>
+                                    <constraints>
+                                        <constraint firstAttribute="trailing" secondItem="9mn-vQ-mtm" secondAttribute="trailing" constant="20" symbolic="YES" id="B2G-MS-6gX"/>
+                                        <constraint firstItem="9mn-vQ-mtm" firstAttribute="leading" secondItem="iem-q6-2pS" secondAttribute="leading" constant="20" symbolic="YES" id="o7A-Q3-KFW"/>
+                                        <constraint firstAttribute="centerY" secondItem="9mn-vQ-mtm" secondAttribute="centerY" id="yOV-KV-QBx"/>
+                                    </constraints>
+                                </tableViewCellContentView>
+                                <connections>
+                                    <outlet property="oneTextLabel" destination="9mn-vQ-mtm" id="VhV-4q-9Br"/>
+                                </connections>
+                            </tableViewCell>
+                            <tableViewCell contentMode="scaleToFill" restorationIdentifier="MCTwoLabelTableViewCell_iPad" selectionStyle="blue" hidesAccessoryWhenEditing="NO" indentationLevel="1" indentationWidth="0.0" reuseIdentifier="MCTwoLabelTableViewCell_iPad" id="Pug-dk-lX2" customClass="MCTwoLabelTableViewCell_iPad">
+                                <rect key="frame" x="0.0" y="99" width="320" height="44"/>
+                                <autoresizingMask key="autoresizingMask"/>
+                                <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" tableViewCell="Pug-dk-lX2" id="nuv-1N-bnt">
+                                    <rect key="frame" x="0.0" y="0.0" width="320" height="43"/>
+                                    <autoresizingMask key="autoresizingMask"/>
+                                    <subviews>
+                                        <label opaque="NO" clipsSubviews="YES" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Label" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="3tl-Bm-2JN">
+                                            <rect key="frame" x="20" y="11" width="210" height="21"/>
+                                            <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                                            <fontDescription key="fontDescription" name="HelveticaNeue-Thin" family="Helvetica Neue" pointSize="17"/>
+                                            <nil key="highlightedColor"/>
+                                        </label>
+                                        <label opaque="NO" clipsSubviews="YES" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Label" textAlignment="right" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="mlf-8m-v7R">
+                                            <rect key="frame" x="238" y="11" width="62" height="21"/>
+                                            <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                                            <constraints>
+                                                <constraint firstAttribute="width" constant="62" id="wtL-cK-oEw"/>
+                                            </constraints>
+                                            <fontDescription key="fontDescription" name="HelveticaNeue-Thin" family="Helvetica Neue" pointSize="17"/>
+                                            <nil key="highlightedColor"/>
+                                        </label>
+                                    </subviews>
+                                    <constraints>
+                                        <constraint firstAttribute="centerY" secondItem="3tl-Bm-2JN" secondAttribute="centerY" id="Cqf-r2-G2B"/>
+                                        <constraint firstAttribute="trailing" secondItem="mlf-8m-v7R" secondAttribute="trailing" constant="20" id="LvP-Of-FJh"/>
+                                        <constraint firstItem="mlf-8m-v7R" firstAttribute="leading" secondItem="3tl-Bm-2JN" secondAttribute="trailing" constant="8" id="PqZ-dK-59D"/>
+                                        <constraint firstItem="mlf-8m-v7R" firstAttribute="baseline" secondItem="3tl-Bm-2JN" secondAttribute="baseline" id="ap5-5n-4ZR"/>
+                                        <constraint firstItem="3tl-Bm-2JN" firstAttribute="leading" secondItem="nuv-1N-bnt" secondAttribute="leading" constant="20" id="vcc-Rl-LZ3"/>
+                                    </constraints>
+                                </tableViewCellContentView>
+                                <connections>
+                                    <outlet property="leftLabel" destination="3tl-Bm-2JN" id="YOD-vQ-0v6"/>
+                                    <outlet property="rightLabel" destination="mlf-8m-v7R" id="DQ5-Go-ce7"/>
+                                </connections>
+                            </tableViewCell>
+                        </prototypes>
+                        <connections>
+                            <outlet property="dataSource" destination="zKy-vN-cPg" id="slc-my-ds5"/>
+                            <outlet property="delegate" destination="zKy-vN-cPg" id="8b7-ZX-Box"/>
+                        </connections>
+                    </tableView>
+                    <navigationItem key="navigationItem" id="mCr-Bz-8bX"/>
+                    <freeformSimulatedSizeMetrics key="simulatedDestinationMetrics"/>
+                    <size key="freeformSize" width="320" height="480"/>
+                </tableViewController>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="hEd-8J-dBz" userLabel="First Responder" sceneMemberID="firstResponder"/>
+            </objects>
+            <point key="canvasLocation" x="1099" y="1095"/>
+        </scene>
         <!--Shared Bill Payments Table View Controller i Pad-->
         <scene sceneID="qG2-Zg-IFZ">
             <objects>
@@ -669,7 +779,7 @@
                 </tableViewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="nvc-UM-iSY" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="3178" y="1095"/>
+            <point key="canvasLocation" x="4152" y="1095"/>
         </scene>
         <!--Payment Table View Controller i Pad - payment details-->
         <scene sceneID="8de-96-T7W">
@@ -887,7 +997,7 @@
                 </tableViewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="Qvw-hj-044" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="5080" y="1297"/>
+            <point key="canvasLocation" x="6054" y="1297"/>
         </scene>
         <!--Select Payer Table View Controller i Pad-->
         <scene sceneID="vkK-vr-OvF">
@@ -952,7 +1062,7 @@
                 </tableViewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="Es4-LX-ASU" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="5814" y="1367"/>
+            <point key="canvasLocation" x="6788" y="1367"/>
         </scene>
         <!--Shared Bill People Present Table View Controller i Pad-->
         <scene sceneID="Yvv-Fb-1pz">
@@ -1068,11 +1178,11 @@
                         <viewControllerLayoutGuide type="bottom" id="eQn-cZ-eIt"/>
                     </layoutGuides>
                     <view key="view" contentMode="scaleToFill" restorationIdentifier="eventViewBackground" id="MWP-w9-Yoh">
-                        <rect key="frame" x="0.0" y="64" width="768" height="916"/>
+                        <rect key="frame" x="0.0" y="64" width="768" height="960"/>
                         <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                         <subviews>
                             <containerView contentMode="scaleToFill" restorationIdentifier="eventViewContainer" translatesAutoresizingMaskIntoConstraints="NO" id="gUW-zw-Cm7">
-                                <rect key="frame" x="0.0" y="0.0" width="768" height="916"/>
+                                <rect key="frame" x="0.0" y="0.0" width="768" height="960"/>
                                 <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                                 <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="calibratedWhite"/>
                                 <constraints>
@@ -1100,8 +1210,16 @@
                             </connections>
                         </barButtonItem>
                     </toolbarItems>
-                    <navigationItem key="navigationItem" title="events" id="T8K-rj-EA0"/>
-                    <simulatedToolbarMetrics key="simulatedBottomBarMetrics" translucent="NO"/>
+                    <navigationItem key="navigationItem" title="events" id="T8K-rj-EA0">
+                        <barButtonItem key="leftBarButtonItem" image="iScreen button" id="mQW-My-2QR">
+                            <connections>
+                                <segue destination="zKy-vN-cPg" kind="popover" identifier="iScreenSegue" popoverAnchorBarButtonItem="mQW-My-2QR" id="vQB-Js-dqW">
+                                    <popoverArrowDirection key="popoverArrowDirection" up="YES" down="YES" left="YES" right="YES"/>
+                                </segue>
+                            </connections>
+                        </barButtonItem>
+                    </navigationItem>
+                    <nil key="simulatedBottomBarMetrics"/>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="h3E-GA-raJ" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
@@ -1150,7 +1268,7 @@
                 </navigationController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="OdW-7h-FHg" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="4326" y="1297"/>
+            <point key="canvasLocation" x="5300" y="1297"/>
         </scene>
         <!--Navigation Controller-->
         <scene sceneID="smb-5d-tMh">
@@ -1175,6 +1293,10 @@
             <point key="canvasLocation" x="3178" y="-125"/>
         </scene>
     </scenes>
+    <resources>
+        <image name="Tweet about us button" width="154" height="154"/>
+        <image name="iScreen button" width="26" height="26"/>
+    </resources>
     <simulatedMetricsContainer key="defaultSimulatedMetrics">
         <simulatedStatusBarMetrics key="statusBar"/>
         <simulatedOrientationMetrics key="orientation"/>
