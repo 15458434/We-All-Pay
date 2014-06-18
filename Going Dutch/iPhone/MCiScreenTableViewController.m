@@ -153,18 +153,21 @@
     if ([indexPath section] == 0) {
         if ([indexPath row] == 0) {
             MCOneLabelIScreenTableViewCell *cell = [tableView dequeueReusableCellWithIdentifier:@"MCOneLabelIScreenTableViewCell" forIndexPath:indexPath];
-            [[cell oneTextLabel] setText:@"Restore previous purchases"];
+            NSString *restorePurchaseString = NSLocalizedString(@"RESTORE_PREVIOUS_PURCHASES", @"Restore previous purchases");
+            [[cell oneTextLabel] setText:restorePurchaseString];
             return cell;
         } else if ([indexPath row] == 1) {
             MCTwoLabelIscreenTableViewCell *cell = [tableView dequeueReusableCellWithIdentifier:@"MCTwoLabelIscreenTableViewCell" forIndexPath:indexPath];
-            [[cell leftLabel] setText:@"Buy Pro"];
+            NSString *buyProString = NSLocalizedString(@"BUY_PRO", @"Buy Pro Version");
+            [[cell leftLabel] setText:buyProString];
             [[cell rightLabel] setText:[[[MCStoreInterface defaultStoreInterface] proProduct] priceString]];
             return cell;
         }
     } else if ([indexPath section] == 1) {
         if ([indexPath row] == 0) {
             MCOneLabelIScreenTableViewCell *cell = [tableView dequeueReusableCellWithIdentifier:@"MCOneLabelIScreenTableViewCell" forIndexPath:indexPath];
-            [[cell oneTextLabel] setText:@"Feedback"];
+            NSString *feedbackString = NSLocalizedString(@"GIVE_FEEDBACK", @"Give feedback");
+            [[cell oneTextLabel] setText:feedbackString];
             return cell;
         }
     } else {
