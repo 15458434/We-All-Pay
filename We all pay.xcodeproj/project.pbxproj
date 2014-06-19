@@ -93,6 +93,7 @@
 		38AAFB9F18EC404200CD3E12 /* MCSharedBillPaymentsTableViewController-iPad.m in Sources */ = {isa = PBXBuildFile; fileRef = 38AAFB9E18EC404200CD3E12 /* MCSharedBillPaymentsTableViewController-iPad.m */; };
 		38AAFBA218EC406300CD3E12 /* MCSharedBillPeoplePresentTableViewController-iPad.m in Sources */ = {isa = PBXBuildFile; fileRef = 38AAFBA118EC406300CD3E12 /* MCSharedBillPeoplePresentTableViewController-iPad.m */; };
 		38AAFBA518EC529300CD3E12 /* MCSharedBillViewController_iPad.m in Sources */ = {isa = PBXBuildFile; fileRef = 38AAFBA418EC529300CD3E12 /* MCSharedBillViewController_iPad.m */; };
+		38AB487119531F760090457A /* UIView+MCAddons.m in Sources */ = {isa = PBXBuildFile; fileRef = 38AB487019531F760090457A /* UIView+MCAddons.m */; };
 		38C2BC9918F7F69A00233D24 /* MCWhoOwesWhoTableViewCell_iPad.m in Sources */ = {isa = PBXBuildFile; fileRef = 38C2BC9818F7F69A00233D24 /* MCWhoOwesWhoTableViewCell_iPad.m */; };
 		38C2BC9C18F7F6EB00233D24 /* MCSolutionOverViewTableViewCell_iPad.m in Sources */ = {isa = PBXBuildFile; fileRef = 38C2BC9B18F7F6EB00233D24 /* MCSolutionOverViewTableViewCell_iPad.m */; };
 		38C2BC9F18FBD89400233D24 /* MCAllTripsTableViewCell_iPad.m in Sources */ = {isa = PBXBuildFile; fileRef = 38C2BC9E18FBD89400233D24 /* MCAllTripsTableViewCell_iPad.m */; };
@@ -291,6 +292,8 @@
 		38AAFBA118EC406300CD3E12 /* MCSharedBillPeoplePresentTableViewController-iPad.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = "MCSharedBillPeoplePresentTableViewController-iPad.m"; path = "ViewControllers/iPad/MCSharedBillPeoplePresentTableViewController-iPad.m"; sourceTree = "<group>"; };
 		38AAFBA318EC529300CD3E12 /* MCSharedBillViewController_iPad.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = MCSharedBillViewController_iPad.h; path = ViewControllers/iPad/MCSharedBillViewController_iPad.h; sourceTree = "<group>"; };
 		38AAFBA418EC529300CD3E12 /* MCSharedBillViewController_iPad.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = MCSharedBillViewController_iPad.m; path = ViewControllers/iPad/MCSharedBillViewController_iPad.m; sourceTree = "<group>"; };
+		38AB486F19531F760090457A /* UIView+MCAddons.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "UIView+MCAddons.h"; sourceTree = "<group>"; };
+		38AB487019531F760090457A /* UIView+MCAddons.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "UIView+MCAddons.m"; sourceTree = "<group>"; };
 		38C2BC9718F7F69A00233D24 /* MCWhoOwesWhoTableViewCell_iPad.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = MCWhoOwesWhoTableViewCell_iPad.h; sourceTree = "<group>"; };
 		38C2BC9818F7F69A00233D24 /* MCWhoOwesWhoTableViewCell_iPad.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = MCWhoOwesWhoTableViewCell_iPad.m; sourceTree = "<group>"; };
 		38C2BC9A18F7F6EB00233D24 /* MCSolutionOverViewTableViewCell_iPad.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = MCSolutionOverViewTableViewCell_iPad.h; path = Views/iPad/MCSolutionOverViewTableViewCell_iPad.h; sourceTree = "<group>"; };
@@ -681,6 +684,8 @@
 				38CDE8FF17135B6300387CAA /* MCTools.m */,
 				38DC8B401909508800762235 /* MCColors.h */,
 				38DC8B411909508800762235 /* MCColors.m */,
+				38AB486F19531F760090457A /* UIView+MCAddons.h */,
+				38AB487019531F760090457A /* UIView+MCAddons.m */,
 				38E95DAD194F62C500069414 /* SKProduct+MCStoreInterface.h */,
 				38E95DAE194F62C500069414 /* SKProduct+MCStoreInterface.m */,
 			);
@@ -928,6 +933,7 @@
 			buildActionMask = 2147483647;
 			files = (
 				38572AE3169D437B00969C62 /* main.m in Sources */,
+				38AB487119531F760090457A /* UIView+MCAddons.m in Sources */,
 				38C2BC9C18F7F6EB00233D24 /* MCSolutionOverViewTableViewCell_iPad.m in Sources */,
 				38572AE7169D437B00969C62 /* MCAppDelegate.m in Sources */,
 				38E95DB81950731600069414 /* MCOneLabelTableViewCell_iPad.m in Sources */,

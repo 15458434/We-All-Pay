@@ -162,4 +162,33 @@
     XCTAssertEqualWithAccuracy([[tonightsBill totalSumOfMoneyOfThisSharedBill] doubleValue], 5.00, 0.001, @"A total of 5 spent should be present.");
 }
 
+- (void)testDeleteIfStillNew
+{
+    MCSharedBill *tonightsBill = [MCSharedBill addSharedBillToContext:_context];
+    [tonightsBill deleteIfStillNew];
+    XCTAssertTrue([tonightsBill isDeleted], @"tonightsBill should be deleted when tripname is nil, people present count is 0 and payment counts is 0.");
+    
+    tonightsBill = [MCSharedBill addSharedBillToContext:_context];
+    [tonightsBill setTripName:@""];
+    [tonightsBill deleteIfStillNew];
+    XCTAssertTrue([tonightsBill isDeleted], @"tonightsBill should be deleted when tripName length is 0 characters, people present count is 0 and payments count is 0.");
+    
+    tonightsBill = [MCSharedBill addSharedBillToContext:_context];
+    [tonightsBill setTripName:@"Strip club"];
+    [tonightsBill deleteIfStillNew];
+    XCTAssertFalse([tonightsBill isDeleted], @"tonightsbill should not be deleted when tripname is present.");
+    [MCSharedBill deleteSharedbill:tonightsBill];
+    
+    tonightsBill = [MCSharedBill addSharedBillToContext:_context];
+    [tonightsBill addPerson];
+    [tonightsBill deleteIfStillNew];
+    XCTAssertFalse([tonightsBill isDeleted], @"tonightsbill should not be deleted when a person is present.");
+    [MCSharedBill deleteSharedbill:tonightsBill];
+    
+    tonightsBill = [MCSharedBill addSharedBillToContext:_context];
+    [tonightsBill addPayment];
+    [tonightsBill deleteIfStillNew];
+    XCTAssertFalse([tonightsBill isDeleted], @"tonightsbill should not be deleted when a person is present.");
+}
+
 @end

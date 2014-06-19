@@ -494,6 +494,20 @@
     return [[self peoplePresent] sortedArrayUsingDescriptors:@[sortDescriptor]];
 }
 
+- (void)deleteIfStillNew
+{
+    // Check to see if tripname is still 0 in length or nil.
+    if (![self tripName] || [[self tripName] length] == 0) {
+            // Check to see if payments count is still 0
+        if ([[self payments] count] == 0) {
+            // Check to see if people present is still 0
+            if ([[self peoplePresent] count] == 0) {
+                [MCSharedBill deleteSharedbill:self];
+            }
+        }
+    }
+}
+
 #pragma mark - NSManagedObject Stuff
 
 - (void)prepareForDeletion

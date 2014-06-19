@@ -10,6 +10,8 @@
 
 #import "MCSharedBill+addons.h"
 
+#import "UIView+MCAddons.h"
+
 @interface MCSharedBillMainViewController ()
 
 @end
@@ -65,6 +67,19 @@
     [tracker set:kGAIScreenName value:@"MCSharedBillMainViewController_iPhone"];
     [tracker send:[[GAIDictionaryBuilder createAppView] build]];
      */
+}
+
+- (void)willMoveToParentViewController:(UIViewController *)parent
+{
+    if (!parent) {
+        // Parent is null when back button is pressed in navigationbar
+        
+        UIView *firstResponder = [[self view] getFirstResponder];
+        if (firstResponder) {
+            [firstResponder resignFirstResponder];
+        }
+        [_tonightsBill deleteIfStillNew];
+    }
 }
 
 - (void)didReceiveMemoryWarning

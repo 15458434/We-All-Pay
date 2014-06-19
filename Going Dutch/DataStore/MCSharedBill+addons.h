@@ -48,4 +48,6 @@
 
 - (NSArray *)getArrayOfFullNamesOfPeoplePresent;
 
+- (void)deleteIfStillNew;
+
 @end
