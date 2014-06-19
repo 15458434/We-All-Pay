@@ -8,6 +8,8 @@
 
 #import "MCSharedBillViewController_iPad.h"
 
+#import "UIView+MCAddons.h"
+
 #import "MCPerson+addons.h"
 #import "MCSharedBill+addons.h"
 
@@ -99,6 +101,19 @@
     id<GAITracker> tracker = [[GAI sharedInstance] defaultTracker];
     [tracker set:kGAIScreenName value:@"MCSharedBillMainViewController_iPad"];
     [tracker send:[[GAIDictionaryBuilder createAppView] build]];
+}
+
+- (void)willMoveToParentViewController:(UIViewController *)parent
+{
+    if (!parent) {
+        // Parent is null when back button is pressed in navigationbar
+        
+        UIView *firstResponder = [[self view] getFirstResponder];
+        if (firstResponder) {
+            [firstResponder resignFirstResponder];
+        }
+        [_tonightsBill deleteIfStillNew];
+    }
 }
 
 - (void)didReceiveMemoryWarning
