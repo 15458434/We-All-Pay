@@ -88,6 +88,11 @@
     [super viewDidAppear:animated];
     
     [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(applyProVersion:) name:@"Apply pro version" object:[MCStoreInterface defaultStoreInterface]];
+    
+    // Set the current screen in Google Analytics
+    id<GAITracker> tracker = [[GAI sharedInstance] defaultTracker];
+    [tracker set:kGAIScreenName value:@"MCiScreenViewController_iPhone"];
+    [tracker send:[[GAIDictionaryBuilder createAppView] build]];
 }
 
 - (void)viewDidDisappear:(BOOL)animated
