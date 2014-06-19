@@ -14,6 +14,8 @@
 @interface MCiScreenTableViewController : UITableViewController <MFMailComposeViewControllerDelegate>
 {
     __weak IBOutlet UILabel *versionLabel;
+    
+    NSUInteger numberOfRowsInSection0;
 }
 
 - (IBAction)mainCancelButtonPressed:(id)sender;

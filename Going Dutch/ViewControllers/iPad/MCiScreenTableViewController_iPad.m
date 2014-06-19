@@ -46,7 +46,12 @@
 {
     numberOfRowsInSection0 = [self getAmountOfRowsInSection0];
     [[self tableView] deleteRowsAtIndexPaths:@[ [NSIndexPath indexPathForRow:0 inSection:0], [NSIndexPath indexPathForRow:1 inSection:0] ] withRowAnimation:UITableViewRowAnimationAutomatic];
-    UIAlertView *thankYouForPurchasingPopup = [[UIAlertView alloc] initWithTitle:@"Thank you for purchasing." message:nil delegate:self cancelButtonTitle:@"Dismiss" otherButtonTitles:nil];
+    UIAlertView *thankYouForPurchasingPopup;
+    if ([[[notification userInfo] valueForKeyPath:@"Kind of purchase"] isEqualToString:@"new buy"]) {
+        thankYouForPurchasingPopup = [[UIAlertView alloc] initWithTitle:@"Thank you for purchasing." message:nil delegate:self cancelButtonTitle:@"Dismiss" otherButtonTitles:nil];
+    } else if ([[[notification userInfo] valueForKeyPath:@"Kind of purchase"] isEqualToString:@"restore purchase"]) {
+        thankYouForPurchasingPopup = [[UIAlertView alloc] initWithTitle:@"Pro version restored." message:nil delegate:self cancelButtonTitle:@"Dismiss" otherButtonTitles:nil];
+    }
     [thankYouForPurchasingPopup show];
 }
 

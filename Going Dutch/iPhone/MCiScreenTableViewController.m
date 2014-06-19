@@ -35,7 +35,29 @@
     [self presentViewController:twitterComposer animated:YES completion:nil];
 }
 
-#pragma mark - New in this class
+#pragma mark - Private in this class
+
+- (NSUInteger)getAmountOfRowsInSection0
+{
+    if ([MCStoreInterface canMakePayments] && ![[MCStoreInterface defaultStoreInterface] isProProductPurchased]) {
+        return 2;
+    } else {
+        return 0;
+    }
+}
+
+- (void)applyProVersion:(NSNotification *)notification
+{
+    numberOfRowsInSection0 = [self getAmountOfRowsInSection0];
+    [[self tableView] deleteRowsAtIndexPaths:@[ [NSIndexPath indexPathForRow:0 inSection:0], [NSIndexPath indexPathForRow:1 inSection:0] ] withRowAnimation:UITableViewRowAnimationAutomatic];
+    UIAlertView *thankYouForPurchasingPopup;
+    if ([[[notification userInfo] valueForKeyPath:@"Kind of purchase"] isEqualToString:@"new buy"]) {
+        thankYouForPurchasingPopup = [[UIAlertView alloc] initWithTitle:@"Thank you for purchasing." message:nil delegate:self cancelButtonTitle:@"Dismiss" otherButtonTitles:nil];
+    } else if ([[[notification userInfo] valueForKeyPath:@"Kind of purchase"] isEqualToString:@"restore purchase"]) {
+        thankYouForPurchasingPopup = [[UIAlertView alloc] initWithTitle:@"Pro version restored." message:nil delegate:self cancelButtonTitle:@"Dismiss" otherButtonTitles:nil];
+    }
+    [thankYouForPurchasingPopup show];
+}
 
 #pragma mark - Inherited from super
 
@@ -59,6 +81,20 @@
     // self.navigationItem.rightBarButtonItem = self.editButtonItem;
     
     [versionLabel setText:[NSString stringWithFormat:@"%@ build %@", [[NSBundle mainBundle] infoDictionary][@"CFBundleShortVersionString"], [[NSBundle mainBundle] infoDictionary][@"CFBundleVersion"]]];
+}
+
+- (void)viewDidAppear:(BOOL)animated
+{
+    [super viewDidAppear:animated];
+    
+    [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(applyProVersion:) name:@"Apply pro version" object:[MCStoreInterface defaultStoreInterface]];
+}
+
+- (void)viewDidDisappear:(BOOL)animated
+{
+    [super viewDidDisappear:animated];
+    
+    [[NSNotificationCenter defaultCenter] removeObserver:self];
 }
 
 - (void)didReceiveMemoryWarning
@@ -117,6 +153,8 @@
             }];
         }
     }
+    UITableViewCell *thisCell = [[self tableView] cellForRowAtIndexPath:indexPath];
+    [thisCell setSelected:NO];
 }
 
 #pragma mark - Table view data source

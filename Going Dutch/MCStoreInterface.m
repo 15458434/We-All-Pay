@@ -28,13 +28,13 @@
     NSString *productIdentifier = [[self getProProductIdentifiers] firstObject];
     [[NSUserDefaults standardUserDefaults] setBool:YES forKey:productIdentifier];
     [[NSUserDefaults standardUserDefaults] synchronize];
-    [[NSNotificationCenter defaultCenter] postNotificationName:@"Apply pro version" object:self userInfo:nil];
 }
 
 - (void)completeTransaction:(SKPaymentTransaction *)transaction
 {
     NSLog(@"The product was bought.");
     [self applyProVersion];
+    [[NSNotificationCenter defaultCenter] postNotificationName:@"Apply pro version" object:self userInfo:@{@"Kind of purchase" : @"new buy"} ];
     [[SKPaymentQueue defaultQueue] finishTransaction:transaction];
 }
 
@@ -48,6 +48,7 @@
 {
     NSLog(@"The sale was restored.");
     [self applyProVersion];
+    [[NSNotificationCenter defaultCenter] postNotificationName:@"Apply pro version" object:self userInfo:@{@"Kind of purchase" : @"restore purchase"} ];
     [[SKPaymentQueue defaultQueue] finishTransaction:transaction];
 }
 
