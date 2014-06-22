@@ -36,7 +36,7 @@
 - (NSUInteger)getAmountOfRowsInSection0
 {
     if ([MCStoreInterface canMakePayments] && ![[MCStoreInterface defaultStoreInterface] isProProductPurchased]) {
-        return 2;
+        return 3;
     } else {
         return 0;
     }
@@ -146,11 +146,12 @@
     if ([indexPath section] == 0) {
         // If something in section one is pressed.
         if ([indexPath row] == 0) {
-            [[MCStoreInterface defaultStoreInterface] restorePreviousPurchases];
-        }
-        if ([indexPath row] == 1) {
             [[MCStoreInterface defaultStoreInterface] buyProProduct];
         }
+        if ([indexPath row] == 1) {
+            [[MCStoreInterface defaultStoreInterface] restorePreviousPurchases];
+        }
+
     } else if ([indexPath section] == 1) {
         if ([indexPath row] == 0) {
             MFMailComposeViewController *mailComposer = [[MFMailComposeViewController alloc] init];
@@ -198,14 +199,17 @@
     if ([indexPath section] == 0) {
         if ([indexPath row] == 0) {
             MCOneLabelTableViewCell_iPad *cell = [tableView dequeueReusableCellWithIdentifier:@"MCOneLabelTableViewCell_iPad" forIndexPath:indexPath];
-            NSString *restorePurchaseString = NSLocalizedString(@"RESTORE_PREVIOUS_PURCHASES", @"Restore previous purchases");
-            [[cell oneTextLabel] setText:restorePurchaseString];
             return cell;
         } else if ([indexPath row] == 1) {
             MCTwoLabelTableViewCell_iPad *cell = [tableView dequeueReusableCellWithIdentifier:@"MCTwoLabelTableViewCell_iPad" forIndexPath:indexPath];
             NSString *buyProString = NSLocalizedString(@"BUY_PRO", @"Buy Pro Version");
             [[cell leftLabel] setText:buyProString];
             [[cell rightLabel] setText:[[[MCStoreInterface defaultStoreInterface] proProduct] priceString]];
+            return cell;
+        } else if ([indexPath row] == 2) {
+            MCOneLabelTableViewCell_iPad *cell = [tableView dequeueReusableCellWithIdentifier:@"MCOneLabelTableViewCell_iPad" forIndexPath:indexPath];
+            NSString *restorePurchaseString = NSLocalizedString(@"RESTORE_PREVIOUS_PURCHASES", @"Restore previous purchases");
+            [[cell oneTextLabel] setText:restorePurchaseString];
             return cell;
         }
     } else if ([indexPath section] == 1) {

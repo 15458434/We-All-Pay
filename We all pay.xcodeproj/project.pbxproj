@@ -122,6 +122,20 @@
 		38EF31451938BA07004912F0 /* UINavigationController+KeyboardDismiss.m in Sources */ = {isa = PBXBuildFile; fileRef = 38EF31441938BA07004912F0 /* UINavigationController+KeyboardDismiss.m */; };
 		38EFF2D416D215BE001C8248 /* MCAllTripsTableViewCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 38EFF2D316D215BE001C8248 /* MCAllTripsTableViewCell.m */; };
 		38EFF2D616D215FB001C8248 /* MCAllTripsTableViewCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 38EFF2D516D215FB001C8248 /* MCAllTripsTableViewCell.xib */; };
+		38FE87C6195721670008EE74 /* Cocoa.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 3899F9DF1955D47100DE08C6 /* Cocoa.framework */; };
+		38FE87CC195721670008EE74 /* InfoPlist.strings in Resources */ = {isa = PBXBuildFile; fileRef = 38FE87CA195721670008EE74 /* InfoPlist.strings */; };
+		38FE87CE195721670008EE74 /* main.m in Sources */ = {isa = PBXBuildFile; fileRef = 38FE87CD195721670008EE74 /* main.m */; };
+		38FE87D2195721670008EE74 /* Credits.rtf in Resources */ = {isa = PBXBuildFile; fileRef = 38FE87D0195721670008EE74 /* Credits.rtf */; };
+		38FE87D5195721670008EE74 /* MCAppDelegate.m in Sources */ = {isa = PBXBuildFile; fileRef = 38FE87D4195721670008EE74 /* MCAppDelegate.m */; };
+		38FE87D8195721670008EE74 /* MainMenu.xib in Resources */ = {isa = PBXBuildFile; fileRef = 38FE87D6195721670008EE74 /* MainMenu.xib */; };
+		38FE87DA195721670008EE74 /* Images.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 38FE87D9195721670008EE74 /* Images.xcassets */; };
+		38FE87E0195721670008EE74 /* XCTest.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 3815BD9A1955CE9900A28316 /* XCTest.framework */; };
+		38FE87E1195721670008EE74 /* Cocoa.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 3899F9DF1955D47100DE08C6 /* Cocoa.framework */; };
+		38FE87E9195721670008EE74 /* InfoPlist.strings in Resources */ = {isa = PBXBuildFile; fileRef = 38FE87E7195721670008EE74 /* InfoPlist.strings */; };
+		38FE87EB195721670008EE74 /* X_RatesTests.m in Sources */ = {isa = PBXBuildFile; fileRef = 38FE87EA195721670008EE74 /* X_RatesTests.m */; };
+		38FE87F6195721860008EE74 /* MCMainXRatesViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = 38FE87F3195721860008EE74 /* MCMainXRatesViewController.xib */; };
+		38FE87F7195721860008EE74 /* MCMainXRatesViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 38FE87F4195721860008EE74 /* MCMainXRatesViewController.m */; };
+		38FE87FB195723420008EE74 /* MCxRatesController.m in Sources */ = {isa = PBXBuildFile; fileRef = 38FE87FA195723420008EE74 /* MCxRatesController.m */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -131,6 +145,13 @@
 			proxyType = 1;
 			remoteGlobalIDString = 38572AD1169D437B00969C62;
 			remoteInfo = "We all pay";
+		};
+		38FE87E2195721670008EE74 /* PBXContainerItemProxy */ = {
+			isa = PBXContainerItemProxy;
+			containerPortal = 38572AC9169D437B00969C62 /* Project object */;
+			proxyType = 1;
+			remoteGlobalIDString = 38FE87C4195721660008EE74;
+			remoteInfo = "X-Rates";
 		};
 /* End PBXContainerItemProxy section */
 
@@ -154,6 +175,11 @@
 		380F44F11813250600FF7E10 /* No picture image 2 - We All Pay.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = "No picture image 2 - We All Pay.png"; path = "Going Dutch/icons/no picture image/No picture image 2 - We All Pay.png"; sourceTree = "<group>"; };
 		38156B2818706B750047AEEF /* nl */ = {isa = PBXFileReference; fileEncoding = 10; lastKnownFileType = text.plist.strings; lineEnding = 0; name = nl; path = nl.lproj/Localizable.strings; sourceTree = "<group>"; };
 		38156B2918706BAC0047AEEF /* Base */ = {isa = PBXFileReference; fileEncoding = 10; lastKnownFileType = text.plist.strings; lineEnding = 0; name = Base; path = Base.lproj/Localizable.strings; sourceTree = "<group>"; };
+		3815BD7B1955CE9800A28316 /* Cocoa.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Cocoa.framework; path = Library/Frameworks/Cocoa.framework; sourceTree = DEVELOPER_DIR; };
+		3815BD7E1955CE9800A28316 /* AppKit.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = AppKit.framework; path = Library/Frameworks/AppKit.framework; sourceTree = SDKROOT; };
+		3815BD7F1955CE9800A28316 /* CoreData.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = CoreData.framework; path = Library/Frameworks/CoreData.framework; sourceTree = SDKROOT; };
+		3815BD801955CE9800A28316 /* Foundation.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Foundation.framework; path = Library/Frameworks/Foundation.framework; sourceTree = SDKROOT; };
+		3815BD9A1955CE9900A28316 /* XCTest.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = XCTest.framework; path = Library/Frameworks/XCTest.framework; sourceTree = DEVELOPER_DIR; };
 		381AB0ED1924FCC2004A02C6 /* MCWhoPaidHowMuchTableViewCell_iPhone.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = MCWhoPaidHowMuchTableViewCell_iPhone.h; path = Views/iPhone/MCWhoPaidHowMuchTableViewCell_iPhone.h; sourceTree = "<group>"; };
 		381AB0EE1924FCC2004A02C6 /* MCWhoPaidHowMuchTableViewCell_iPhone.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = MCWhoPaidHowMuchTableViewCell_iPhone.m; path = Views/iPhone/MCWhoPaidHowMuchTableViewCell_iPhone.m; sourceTree = "<group>"; };
 		381F693C194EE54700F465FC /* MCOneLabelIScreenTableViewCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = MCOneLabelIScreenTableViewCell.h; path = Views/iPhone/MCOneLabelIScreenTableViewCell.h; sourceTree = "<group>"; };
@@ -279,6 +305,8 @@
 		3899D3F3194F43AF00893323 /* Product ids.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; name = "Product ids.plist"; path = "../Product ids.plist"; sourceTree = "<group>"; };
 		3899D3F6194F453D00893323 /* MCStoreInterface.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = MCStoreInterface.h; sourceTree = "<group>"; };
 		3899D3F7194F453D00893323 /* MCStoreInterface.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = MCStoreInterface.m; sourceTree = "<group>"; };
+		3899F9DD1955D46600DE08C6 /* AppKit.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = AppKit.framework; path = System/Library/Frameworks/AppKit.framework; sourceTree = SDKROOT; };
+		3899F9DF1955D47100DE08C6 /* Cocoa.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Cocoa.framework; path = System/Library/Frameworks/Cocoa.framework; sourceTree = SDKROOT; };
 		389C2F521933916B00BB9F3E /* WeAllPayStore.xcmappingmodel */ = {isa = PBXFileReference; lastKnownFileType = wrapper.xcmappingmodel; path = WeAllPayStore.xcmappingmodel; sourceTree = "<group>"; };
 		389C2F54193391E300BB9F3E /* MCPaymentPresenceEntityMigrationPolicy.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = MCPaymentPresenceEntityMigrationPolicy.h; path = DataStore/MCPaymentPresenceEntityMigrationPolicy.h; sourceTree = "<group>"; };
 		389C2F55193391E300BB9F3E /* MCPaymentPresenceEntityMigrationPolicy.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = MCPaymentPresenceEntityMigrationPolicy.m; path = DataStore/MCPaymentPresenceEntityMigrationPolicy.m; sourceTree = "<group>"; };
@@ -358,6 +386,25 @@
 		38EFF2D216D215BE001C8248 /* MCAllTripsTableViewCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = MCAllTripsTableViewCell.h; path = Views/MCAllTripsTableViewCell.h; sourceTree = "<group>"; };
 		38EFF2D316D215BE001C8248 /* MCAllTripsTableViewCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = MCAllTripsTableViewCell.m; path = Views/MCAllTripsTableViewCell.m; sourceTree = "<group>"; };
 		38EFF2D516D215FB001C8248 /* MCAllTripsTableViewCell.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; name = MCAllTripsTableViewCell.xib; path = Views/MCAllTripsTableViewCell.xib; sourceTree = "<group>"; };
+		38FE87C5195721660008EE74 /* X-Rates.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = "X-Rates.app"; sourceTree = BUILT_PRODUCTS_DIR; };
+		38FE87C9195721670008EE74 /* X-Rates-Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = "X-Rates-Info.plist"; sourceTree = "<group>"; };
+		38FE87CB195721670008EE74 /* en */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = en; path = en.lproj/InfoPlist.strings; sourceTree = "<group>"; };
+		38FE87CD195721670008EE74 /* main.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = main.m; sourceTree = "<group>"; };
+		38FE87CF195721670008EE74 /* X-Rates-Prefix.pch */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = "X-Rates-Prefix.pch"; sourceTree = "<group>"; };
+		38FE87D1195721670008EE74 /* en */ = {isa = PBXFileReference; lastKnownFileType = text.rtf; name = en; path = en.lproj/Credits.rtf; sourceTree = "<group>"; };
+		38FE87D3195721670008EE74 /* MCAppDelegate.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = MCAppDelegate.h; sourceTree = "<group>"; };
+		38FE87D4195721670008EE74 /* MCAppDelegate.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = MCAppDelegate.m; sourceTree = "<group>"; };
+		38FE87D7195721670008EE74 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.xib; name = Base; path = Base.lproj/MainMenu.xib; sourceTree = "<group>"; };
+		38FE87D9195721670008EE74 /* Images.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Images.xcassets; sourceTree = "<group>"; };
+		38FE87DF195721670008EE74 /* X-RatesTests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = "X-RatesTests.xctest"; sourceTree = BUILT_PRODUCTS_DIR; };
+		38FE87E6195721670008EE74 /* X-RatesTests-Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = "X-RatesTests-Info.plist"; sourceTree = "<group>"; };
+		38FE87E8195721670008EE74 /* en */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = en; path = en.lproj/InfoPlist.strings; sourceTree = "<group>"; };
+		38FE87EA195721670008EE74 /* X_RatesTests.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = X_RatesTests.m; sourceTree = "<group>"; };
+		38FE87F3195721860008EE74 /* MCMainXRatesViewController.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = MCMainXRatesViewController.xib; sourceTree = "<group>"; };
+		38FE87F4195721860008EE74 /* MCMainXRatesViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = MCMainXRatesViewController.m; sourceTree = "<group>"; };
+		38FE87F5195721860008EE74 /* MCMainXRatesViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = MCMainXRatesViewController.h; sourceTree = "<group>"; };
+		38FE87F9195723420008EE74 /* MCxRatesController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = MCxRatesController.h; path = Model/MCxRatesController.h; sourceTree = "<group>"; };
+		38FE87FA195723420008EE74 /* MCxRatesController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = MCxRatesController.m; path = Model/MCxRatesController.m; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -387,6 +434,23 @@
 				385F52FE191C2C360012773D /* XCTest.framework in Frameworks */,
 				385F5300191C2C360012773D /* UIKit.framework in Frameworks */,
 				385F52FF191C2C360012773D /* Foundation.framework in Frameworks */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+		38FE87C2195721660008EE74 /* Frameworks */ = {
+			isa = PBXFrameworksBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				38FE87C6195721670008EE74 /* Cocoa.framework in Frameworks */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+		38FE87DC195721670008EE74 /* Frameworks */ = {
+			isa = PBXFrameworksBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				38FE87E1195721670008EE74 /* Cocoa.framework in Frameworks */,
+				38FE87E0195721670008EE74 /* XCTest.framework in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -424,6 +488,16 @@
 				38955047178B4FCA0077A95A /* MCWeAllPayStoreController.m */,
 			);
 			name = DataStore;
+			sourceTree = "<group>";
+		};
+		3815BD7D1955CE9800A28316 /* Other Frameworks */ = {
+			isa = PBXGroup;
+			children = (
+				3815BD7E1955CE9800A28316 /* AppKit.framework */,
+				3815BD7F1955CE9800A28316 /* CoreData.framework */,
+				3815BD801955CE9800A28316 /* Foundation.framework */,
+			);
+			name = "Other Frameworks";
 			sourceTree = "<group>";
 		};
 		3826BDDB18A65CBC00747993 /* Testflight SDK */ = {
@@ -472,6 +546,8 @@
 			children = (
 				38572ADC169D437B00969C62 /* We all pay */,
 				385F5301191C2C360012773D /* We all pay Tests */,
+				38FE87C7195721670008EE74 /* X-Rates */,
+				38FE87E4195721670008EE74 /* X-RatesTests */,
 				38572AD5169D437B00969C62 /* Frameworks */,
 				38572AD3169D437B00969C62 /* Products */,
 			);
@@ -482,6 +558,8 @@
 			children = (
 				38572AD2169D437B00969C62 /* We all pay.app */,
 				385F52FD191C2C360012773D /* We all pay Tests.xctest */,
+				38FE87C5195721660008EE74 /* X-Rates.app */,
+				38FE87DF195721670008EE74 /* X-RatesTests.xctest */,
 			);
 			name = Products;
 			sourceTree = "<group>";
@@ -489,7 +567,12 @@
 		38572AD5169D437B00969C62 /* Frameworks */ = {
 			isa = PBXGroup;
 			children = (
+				3899F9DF1955D47100DE08C6 /* Cocoa.framework */,
+				3899F9DD1955D46600DE08C6 /* AppKit.framework */,
 				3829C61B192628C100DE91D4 /* iOS */,
+				3815BD7B1955CE9800A28316 /* Cocoa.framework */,
+				3815BD9A1955CE9900A28316 /* XCTest.framework */,
+				3815BD7D1955CE9800A28316 /* Other Frameworks */,
 			);
 			name = Frameworks;
 			sourceTree = "<group>";
@@ -811,6 +894,69 @@
 			name = iPad;
 			sourceTree = "<group>";
 		};
+		38FE87C7195721670008EE74 /* X-Rates */ = {
+			isa = PBXGroup;
+			children = (
+				38FE87F8195722D90008EE74 /* Model */,
+				38FE87F21957216F0008EE74 /* viewController */,
+				38FE87D3195721670008EE74 /* MCAppDelegate.h */,
+				38FE87D4195721670008EE74 /* MCAppDelegate.m */,
+				38FE87D6195721670008EE74 /* MainMenu.xib */,
+				38FE87D9195721670008EE74 /* Images.xcassets */,
+				38FE87C8195721670008EE74 /* Supporting Files */,
+			);
+			path = "X-Rates";
+			sourceTree = "<group>";
+		};
+		38FE87C8195721670008EE74 /* Supporting Files */ = {
+			isa = PBXGroup;
+			children = (
+				38FE87C9195721670008EE74 /* X-Rates-Info.plist */,
+				38FE87CA195721670008EE74 /* InfoPlist.strings */,
+				38FE87CD195721670008EE74 /* main.m */,
+				38FE87CF195721670008EE74 /* X-Rates-Prefix.pch */,
+				38FE87D0195721670008EE74 /* Credits.rtf */,
+			);
+			name = "Supporting Files";
+			sourceTree = "<group>";
+		};
+		38FE87E4195721670008EE74 /* X-RatesTests */ = {
+			isa = PBXGroup;
+			children = (
+				38FE87EA195721670008EE74 /* X_RatesTests.m */,
+				38FE87E5195721670008EE74 /* Supporting Files */,
+			);
+			path = "X-RatesTests";
+			sourceTree = "<group>";
+		};
+		38FE87E5195721670008EE74 /* Supporting Files */ = {
+			isa = PBXGroup;
+			children = (
+				38FE87E6195721670008EE74 /* X-RatesTests-Info.plist */,
+				38FE87E7195721670008EE74 /* InfoPlist.strings */,
+			);
+			name = "Supporting Files";
+			sourceTree = "<group>";
+		};
+		38FE87F21957216F0008EE74 /* viewController */ = {
+			isa = PBXGroup;
+			children = (
+				38FE87F3195721860008EE74 /* MCMainXRatesViewController.xib */,
+				38FE87F4195721860008EE74 /* MCMainXRatesViewController.m */,
+				38FE87F5195721860008EE74 /* MCMainXRatesViewController.h */,
+			);
+			name = viewController;
+			sourceTree = "<group>";
+		};
+		38FE87F8195722D90008EE74 /* Model */ = {
+			isa = PBXGroup;
+			children = (
+				38FE87F9195723420008EE74 /* MCxRatesController.h */,
+				38FE87FA195723420008EE74 /* MCxRatesController.m */,
+			);
+			name = Model;
+			sourceTree = "<group>";
+		};
 /* End PBXGroup section */
 
 /* Begin PBXNativeTarget section */
@@ -849,6 +995,41 @@
 			productReference = 385F52FD191C2C360012773D /* We all pay Tests.xctest */;
 			productType = "com.apple.product-type.bundle.unit-test";
 		};
+		38FE87C4195721660008EE74 /* X-Rates */ = {
+			isa = PBXNativeTarget;
+			buildConfigurationList = 38FE87EC195721670008EE74 /* Build configuration list for PBXNativeTarget "X-Rates" */;
+			buildPhases = (
+				38FE87C1195721660008EE74 /* Sources */,
+				38FE87C2195721660008EE74 /* Frameworks */,
+				38FE87C3195721660008EE74 /* Resources */,
+			);
+			buildRules = (
+			);
+			dependencies = (
+			);
+			name = "X-Rates";
+			productName = "X-Rates";
+			productReference = 38FE87C5195721660008EE74 /* X-Rates.app */;
+			productType = "com.apple.product-type.application";
+		};
+		38FE87DE195721670008EE74 /* X-RatesTests */ = {
+			isa = PBXNativeTarget;
+			buildConfigurationList = 38FE87EF195721670008EE74 /* Build configuration list for PBXNativeTarget "X-RatesTests" */;
+			buildPhases = (
+				38FE87DB195721670008EE74 /* Sources */,
+				38FE87DC195721670008EE74 /* Frameworks */,
+				38FE87DD195721670008EE74 /* Resources */,
+			);
+			buildRules = (
+			);
+			dependencies = (
+				38FE87E3195721670008EE74 /* PBXTargetDependency */,
+			);
+			name = "X-RatesTests";
+			productName = "X-RatesTests";
+			productReference = 38FE87DF195721670008EE74 /* X-RatesTests.xctest */;
+			productType = "com.apple.product-type.bundle.unit-test";
+		};
 /* End PBXNativeTarget section */
 
 /* Begin PBXProject section */
@@ -863,6 +1044,12 @@
 						DevelopmentTeam = Z6JP26PUUY;
 					};
 					385F52FC191C2C360012773D = {
+						TestTargetID = 38572AD1169D437B00969C62;
+					};
+					38FE87C4195721660008EE74 = {
+						DevelopmentTeam = Z6JP26PUUY;
+					};
+					38FE87DE195721670008EE74 = {
 						TestTargetID = 38572AD1169D437B00969C62;
 					};
 				};
@@ -883,6 +1070,8 @@
 			targets = (
 				38572AD1169D437B00969C62 /* We all pay */,
 				385F52FC191C2C360012773D /* We all pay Tests */,
+				38FE87C4195721660008EE74 /* X-Rates */,
+				38FE87DE195721670008EE74 /* X-RatesTests */,
 			);
 		};
 /* End PBXProject section */
@@ -922,6 +1111,26 @@
 			buildActionMask = 2147483647;
 			files = (
 				385F5306191C2C360012773D /* InfoPlist.strings in Resources */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+		38FE87C3195721660008EE74 /* Resources */ = {
+			isa = PBXResourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				38FE87F6195721860008EE74 /* MCMainXRatesViewController.xib in Resources */,
+				38FE87CC195721670008EE74 /* InfoPlist.strings in Resources */,
+				38FE87DA195721670008EE74 /* Images.xcassets in Resources */,
+				38FE87D2195721670008EE74 /* Credits.rtf in Resources */,
+				38FE87D8195721670008EE74 /* MainMenu.xib in Resources */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+		38FE87DD195721670008EE74 /* Resources */ = {
+			isa = PBXResourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				38FE87E9195721670008EE74 /* InfoPlist.strings in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -1019,6 +1228,25 @@
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
+		38FE87C1195721660008EE74 /* Sources */ = {
+			isa = PBXSourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				38FE87D5195721670008EE74 /* MCAppDelegate.m in Sources */,
+				38FE87CE195721670008EE74 /* main.m in Sources */,
+				38FE87FB195723420008EE74 /* MCxRatesController.m in Sources */,
+				38FE87F7195721860008EE74 /* MCMainXRatesViewController.m in Sources */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+		38FE87DB195721670008EE74 /* Sources */ = {
+			isa = PBXSourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				38FE87EB195721670008EE74 /* X_RatesTests.m in Sources */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
 /* End PBXSourcesBuildPhase section */
 
 /* Begin PBXTargetDependency section */
@@ -1026,6 +1254,11 @@
 			isa = PBXTargetDependency;
 			target = 38572AD1169D437B00969C62 /* We all pay */;
 			targetProxy = 385F530A191C2C360012773D /* PBXContainerItemProxy */;
+		};
+		38FE87E3195721670008EE74 /* PBXTargetDependency */ = {
+			isa = PBXTargetDependency;
+			target = 38FE87C4195721660008EE74 /* X-Rates */;
+			targetProxy = 38FE87E2195721670008EE74 /* PBXContainerItemProxy */;
 		};
 /* End PBXTargetDependency section */
 
@@ -1101,6 +1334,38 @@
 			name = "Main-iPad.storyboard";
 			sourceTree = "<group>";
 		};
+		38FE87CA195721670008EE74 /* InfoPlist.strings */ = {
+			isa = PBXVariantGroup;
+			children = (
+				38FE87CB195721670008EE74 /* en */,
+			);
+			name = InfoPlist.strings;
+			sourceTree = "<group>";
+		};
+		38FE87D0195721670008EE74 /* Credits.rtf */ = {
+			isa = PBXVariantGroup;
+			children = (
+				38FE87D1195721670008EE74 /* en */,
+			);
+			name = Credits.rtf;
+			sourceTree = "<group>";
+		};
+		38FE87D6195721670008EE74 /* MainMenu.xib */ = {
+			isa = PBXVariantGroup;
+			children = (
+				38FE87D7195721670008EE74 /* Base */,
+			);
+			name = MainMenu.xib;
+			sourceTree = "<group>";
+		};
+		38FE87E7195721670008EE74 /* InfoPlist.strings */ = {
+			isa = PBXVariantGroup;
+			children = (
+				38FE87E8195721670008EE74 /* en */,
+			);
+			name = InfoPlist.strings;
+			sourceTree = "<group>";
+		};
 /* End PBXVariantGroup section */
 
 /* Begin XCBuildConfiguration section */
@@ -1131,7 +1396,7 @@
 				ONLY_ACTIVE_ARCH = YES;
 				PROVISIONING_PROFILE = "7CC91C5F-447E-472B-8417-58702E550D04";
 				"PROVISIONING_PROFILE[sdk=iphoneos*]" = "B94E8C95-CC30-48E1-8C88-29D87CBE246A";
-				SDKROOT = iphoneos;
+				SDKROOT = iphoneos7.1;
 			};
 			name = Debug;
 		};
@@ -1156,7 +1421,7 @@
 				OTHER_CFLAGS = "-DNS_BLOCK_ASSERTIONS=1";
 				PROVISIONING_PROFILE = "7CC91C5F-447E-472B-8417-58702E550D04";
 				"PROVISIONING_PROFILE[sdk=iphoneos*]" = "9DAD15D5-9963-4941-9B33-0106F4B87C81";
-				SDKROOT = iphoneos;
+				SDKROOT = iphoneos7.1;
 				VALIDATE_PRODUCT = YES;
 			};
 			name = Release;
@@ -1167,8 +1432,9 @@
 				ASSETCATALOG_COMPILER_APPICON_NAME = "iPhone And iPad icons";
 				ASSETCATALOG_COMPILER_LAUNCHIMAGE_NAME = LaunchImage;
 				CLANG_ENABLE_MODULES = YES;
-				CODE_SIGN_IDENTITY = "iPhone Developer";
+				CODE_SIGN_IDENTITY = "Mac Developer";
 				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer: Mark Cornelisse (B9ZEEP43C6)";
+				"CODE_SIGN_IDENTITY[sdk=macosx*]" = "Mac Developer";
 				GCC_PRECOMPILE_PREFIX_HEADER = YES;
 				GCC_PREFIX_HEADER = "Going Dutch/We all pay-Prefix.pch";
 				GCC_SYMBOLS_PRIVATE_EXTERN = NO;
@@ -1179,7 +1445,7 @@
 					"$(PROJECT_DIR)/**",
 				);
 				PRODUCT_NAME = "$(TARGET_NAME)";
-				PROVISIONING_PROFILE = "7CC91C5F-447E-472B-8417-58702E550D04";
+				PROVISIONING_PROFILE = "";
 				"PROVISIONING_PROFILE[sdk=iphoneos*]" = "B94E8C95-CC30-48E1-8C88-29D87CBE246A";
 				TARGETED_DEVICE_FAMILY = "1,2";
 				WRAPPER_EXTENSION = app;
@@ -1192,8 +1458,9 @@
 				ASSETCATALOG_COMPILER_APPICON_NAME = "iPhone And iPad icons";
 				ASSETCATALOG_COMPILER_LAUNCHIMAGE_NAME = LaunchImage;
 				CLANG_ENABLE_MODULES = YES;
-				CODE_SIGN_IDENTITY = "iPhone Developer";
+				CODE_SIGN_IDENTITY = "Mac Developer";
 				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer";
+				"CODE_SIGN_IDENTITY[sdk=macosx*]" = "Mac Developer";
 				GCC_PRECOMPILE_PREFIX_HEADER = YES;
 				GCC_PREFIX_HEADER = "Going Dutch/We all pay-Prefix.pch";
 				GCC_SYMBOLS_PRIVATE_EXTERN = YES;
@@ -1204,7 +1471,7 @@
 					"$(PROJECT_DIR)/**",
 				);
 				PRODUCT_NAME = "$(TARGET_NAME)";
-				PROVISIONING_PROFILE = "7CC91C5F-447E-472B-8417-58702E550D04";
+				PROVISIONING_PROFILE = "";
 				"PROVISIONING_PROFILE[sdk=iphoneos*]" = "7CC91C5F-447E-472B-8417-58702E550D04";
 				TARGETED_DEVICE_FAMILY = "1,2";
 				WRAPPER_EXTENSION = app;
@@ -1278,6 +1545,142 @@
 			};
 			name = Release;
 		};
+		38FE87ED195721670008EE74 /* Debug */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
+				CLANG_WARN_BOOL_CONVERSION = YES;
+				CLANG_WARN_CONSTANT_CONVERSION = YES;
+				CLANG_WARN_DIRECT_OBJC_ISA_USAGE = YES_ERROR;
+				CLANG_WARN_ENUM_CONVERSION = YES;
+				CLANG_WARN_INT_CONVERSION = YES;
+				CLANG_WARN_OBJC_ROOT_CLASS = YES_ERROR;
+				CODE_SIGN_IDENTITY = "Mac Developer";
+				"CODE_SIGN_IDENTITY[sdk=macosx*]" = "Mac Developer";
+				COMBINE_HIDPI_IMAGES = YES;
+				GCC_ENABLE_OBJC_EXCEPTIONS = YES;
+				GCC_PRECOMPILE_PREFIX_HEADER = YES;
+				GCC_PREFIX_HEADER = "X-Rates/X-Rates-Prefix.pch";
+				GCC_PREPROCESSOR_DEFINITIONS = (
+					"DEBUG=1",
+					"$(inherited)",
+				);
+				GCC_WARN_64_TO_32_BIT_CONVERSION = YES;
+				GCC_WARN_ABOUT_RETURN_TYPE = YES_ERROR;
+				GCC_WARN_UNDECLARED_SELECTOR = YES;
+				GCC_WARN_UNINITIALIZED_AUTOS = YES_AGGRESSIVE;
+				GCC_WARN_UNUSED_FUNCTION = YES;
+				INFOPLIST_FILE = "X-Rates/X-Rates-Info.plist";
+				MACOSX_DEPLOYMENT_TARGET = 10.9;
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				PROVISIONING_PROFILE = "";
+				SDKROOT = macosx;
+				WRAPPER_EXTENSION = app;
+			};
+			name = Debug;
+		};
+		38FE87EE195721670008EE74 /* Release */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
+				CLANG_WARN_BOOL_CONVERSION = YES;
+				CLANG_WARN_CONSTANT_CONVERSION = YES;
+				CLANG_WARN_DIRECT_OBJC_ISA_USAGE = YES_ERROR;
+				CLANG_WARN_ENUM_CONVERSION = YES;
+				CLANG_WARN_INT_CONVERSION = YES;
+				CLANG_WARN_OBJC_ROOT_CLASS = YES_ERROR;
+				CODE_SIGN_IDENTITY = "Mac Developer";
+				"CODE_SIGN_IDENTITY[sdk=macosx*]" = "Mac Developer: Mark Cornelisse (B9ZEEP43C6)";
+				COMBINE_HIDPI_IMAGES = YES;
+				DEBUG_INFORMATION_FORMAT = "dwarf-with-dsym";
+				ENABLE_NS_ASSERTIONS = NO;
+				GCC_ENABLE_OBJC_EXCEPTIONS = YES;
+				GCC_PRECOMPILE_PREFIX_HEADER = YES;
+				GCC_PREFIX_HEADER = "X-Rates/X-Rates-Prefix.pch";
+				GCC_WARN_64_TO_32_BIT_CONVERSION = YES;
+				GCC_WARN_ABOUT_RETURN_TYPE = YES_ERROR;
+				GCC_WARN_UNDECLARED_SELECTOR = YES;
+				GCC_WARN_UNINITIALIZED_AUTOS = YES_AGGRESSIVE;
+				GCC_WARN_UNUSED_FUNCTION = YES;
+				INFOPLIST_FILE = "X-Rates/X-Rates-Info.plist";
+				MACOSX_DEPLOYMENT_TARGET = 10.9;
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				PROVISIONING_PROFILE = "";
+				SDKROOT = macosx;
+				WRAPPER_EXTENSION = app;
+			};
+			name = Release;
+		};
+		38FE87F0195721670008EE74 /* Debug */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				BUNDLE_LOADER = "$(BUILT_PRODUCTS_DIR)/We all pay.app/We all pay";
+				CLANG_WARN_BOOL_CONVERSION = YES;
+				CLANG_WARN_CONSTANT_CONVERSION = YES;
+				CLANG_WARN_DIRECT_OBJC_ISA_USAGE = YES_ERROR;
+				CLANG_WARN_ENUM_CONVERSION = YES;
+				CLANG_WARN_INT_CONVERSION = YES;
+				CLANG_WARN_OBJC_ROOT_CLASS = YES_ERROR;
+				COMBINE_HIDPI_IMAGES = YES;
+				FRAMEWORK_SEARCH_PATHS = (
+					"$(DEVELOPER_FRAMEWORKS_DIR)",
+					"$(inherited)",
+				);
+				GCC_ENABLE_OBJC_EXCEPTIONS = YES;
+				GCC_PRECOMPILE_PREFIX_HEADER = YES;
+				GCC_PREFIX_HEADER = "X-Rates/X-Rates-Prefix.pch";
+				GCC_PREPROCESSOR_DEFINITIONS = (
+					"DEBUG=1",
+					"$(inherited)",
+				);
+				GCC_WARN_64_TO_32_BIT_CONVERSION = YES;
+				GCC_WARN_ABOUT_RETURN_TYPE = YES_ERROR;
+				GCC_WARN_UNDECLARED_SELECTOR = YES;
+				GCC_WARN_UNINITIALIZED_AUTOS = YES_AGGRESSIVE;
+				GCC_WARN_UNUSED_FUNCTION = YES;
+				INFOPLIST_FILE = "X-RatesTests/X-RatesTests-Info.plist";
+				MACOSX_DEPLOYMENT_TARGET = 10.9;
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				SDKROOT = macosx;
+				TEST_HOST = "$(BUNDLE_LOADER)";
+				WRAPPER_EXTENSION = xctest;
+			};
+			name = Debug;
+		};
+		38FE87F1195721670008EE74 /* Release */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				BUNDLE_LOADER = "$(BUILT_PRODUCTS_DIR)/We all pay.app/We all pay";
+				CLANG_WARN_BOOL_CONVERSION = YES;
+				CLANG_WARN_CONSTANT_CONVERSION = YES;
+				CLANG_WARN_DIRECT_OBJC_ISA_USAGE = YES_ERROR;
+				CLANG_WARN_ENUM_CONVERSION = YES;
+				CLANG_WARN_INT_CONVERSION = YES;
+				CLANG_WARN_OBJC_ROOT_CLASS = YES_ERROR;
+				COMBINE_HIDPI_IMAGES = YES;
+				DEBUG_INFORMATION_FORMAT = "dwarf-with-dsym";
+				ENABLE_NS_ASSERTIONS = NO;
+				FRAMEWORK_SEARCH_PATHS = (
+					"$(DEVELOPER_FRAMEWORKS_DIR)",
+					"$(inherited)",
+				);
+				GCC_ENABLE_OBJC_EXCEPTIONS = YES;
+				GCC_PRECOMPILE_PREFIX_HEADER = YES;
+				GCC_PREFIX_HEADER = "X-Rates/X-Rates-Prefix.pch";
+				GCC_WARN_64_TO_32_BIT_CONVERSION = YES;
+				GCC_WARN_ABOUT_RETURN_TYPE = YES_ERROR;
+				GCC_WARN_UNDECLARED_SELECTOR = YES;
+				GCC_WARN_UNINITIALIZED_AUTOS = YES_AGGRESSIVE;
+				GCC_WARN_UNUSED_FUNCTION = YES;
+				INFOPLIST_FILE = "X-RatesTests/X-RatesTests-Info.plist";
+				MACOSX_DEPLOYMENT_TARGET = 10.9;
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				SDKROOT = macosx;
+				TEST_HOST = "$(BUNDLE_LOADER)";
+				WRAPPER_EXTENSION = xctest;
+			};
+			name = Release;
+		};
 /* End XCBuildConfiguration section */
 
 /* Begin XCConfigurationList section */
@@ -1307,6 +1710,22 @@
 			);
 			defaultConfigurationIsVisible = 0;
 			defaultConfigurationName = Release;
+		};
+		38FE87EC195721670008EE74 /* Build configuration list for PBXNativeTarget "X-Rates" */ = {
+			isa = XCConfigurationList;
+			buildConfigurations = (
+				38FE87ED195721670008EE74 /* Debug */,
+				38FE87EE195721670008EE74 /* Release */,
+			);
+			defaultConfigurationIsVisible = 0;
+		};
+		38FE87EF195721670008EE74 /* Build configuration list for PBXNativeTarget "X-RatesTests" */ = {
+			isa = XCConfigurationList;
+			buildConfigurations = (
+				38FE87F0195721670008EE74 /* Debug */,
+				38FE87F1195721670008EE74 /* Release */,
+			);
+			defaultConfigurationIsVisible = 0;
 		};
 /* End XCConfigurationList section */
 

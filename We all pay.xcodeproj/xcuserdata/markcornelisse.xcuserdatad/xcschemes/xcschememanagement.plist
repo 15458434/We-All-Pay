@@ -14,9 +14,34 @@
 			<key>orderHint</key>
 			<integer>0</integer>
 		</dict>
+		<key>X-Rates.xcscheme</key>
+		<dict>
+			<key>orderHint</key>
+			<integer>1</integer>
+		</dict>
 	</dict>
 	<key>SuppressBuildableAutocreation</key>
 	<dict>
+		<key>3815BD791955CE9800A28316</key>
+		<dict>
+			<key>primary</key>
+			<true/>
+		</dict>
+		<key>3815BD981955CE9900A28316</key>
+		<dict>
+			<key>primary</key>
+			<true/>
+		</dict>
+		<key>3815BDB01955CFD400A28316</key>
+		<dict>
+			<key>primary</key>
+			<true/>
+		</dict>
+		<key>3815BDCA1955CFD400A28316</key>
+		<dict>
+			<key>primary</key>
+			<true/>
+		</dict>
 		<key>38522E2218DB3F01007BDB3F</key>
 		<dict>
 			<key>primary</key>
@@ -52,7 +77,37 @@
 			<key>primary</key>
 			<true/>
 		</dict>
+		<key>3899F9A21955D12F00DE08C6</key>
+		<dict>
+			<key>primary</key>
+			<true/>
+		</dict>
+		<key>3899F9BC1955D12F00DE08C6</key>
+		<dict>
+			<key>primary</key>
+			<true/>
+		</dict>
+		<key>3899F9E41957130300DE08C6</key>
+		<dict>
+			<key>primary</key>
+			<true/>
+		</dict>
+		<key>3899FA001957130400DE08C6</key>
+		<dict>
+			<key>primary</key>
+			<true/>
+		</dict>
 		<key>38D785F118DC53C30074B670</key>
+		<dict>
+			<key>primary</key>
+			<true/>
+		</dict>
+		<key>38FE87C4195721660008EE74</key>
+		<dict>
+			<key>primary</key>
+			<true/>
+		</dict>
+		<key>38FE87DE195721670008EE74</key>
 		<dict>
 			<key>primary</key>
 			<true/>
