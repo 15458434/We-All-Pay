@@ -49,7 +49,7 @@
 - (void)applyProVersion:(NSNotification *)notification
 {
     numberOfRowsInSection0 = [self getAmountOfRowsInSection0];
-    [[self tableView] deleteRowsAtIndexPaths:@[ [NSIndexPath indexPathForRow:0 inSection:0], [NSIndexPath indexPathForRow:1 inSection:0] ] withRowAnimation:UITableViewRowAnimationAutomatic];
+    [[self tableView] deleteRowsAtIndexPaths:@[ [NSIndexPath indexPathForRow:0 inSection:0], [NSIndexPath indexPathForRow:1 inSection:0], [NSIndexPath indexPathForRow:2 inSection:0] ] withRowAnimation:UITableViewRowAnimationAutomatic];
     UIAlertView *thankYouForPurchasingPopup;
     if ([[[notification userInfo] valueForKeyPath:@"Kind of purchase"] isEqualToString:@"new buy"]) {
         thankYouForPurchasingPopup = [[UIAlertView alloc] initWithTitle:@"Thank you for purchasing." message:nil delegate:self cancelButtonTitle:@"Dismiss" otherButtonTitles:nil];
