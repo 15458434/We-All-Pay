@@ -18,7 +18,9 @@
 
 @property (nonatomic, strong) id<MCxRatesReceiverProtocol> xRatesReceiverDelegate;
 
-+ (NSArray *)getAvailableCurrencies;
++ (NSArray *)getAvailableCurrenciesISOCodesOrderedOnCurrencyName;
++ (NSDictionary *)getCurrencyDictionary;
++ (NSString *)getSymbolForCurrencyISOCode:(NSString *)currencyISOCode;
 
 - (void)getExchangeRateFrom:(NSString *)fromCountryISOCode to:(NSString *)toCountryISOCode withCompletionHandler:(void (^)(NSDictionary *exchangeRateResult))completionBlock;
 

@@ -31,6 +31,20 @@
     }
 }
 
+- (void)updateCurrencyValue
+{
+    MCxRatesController *thisXRatesController = [self getXRatesController];
+    NSInteger indexOfSelectedFromCurrency = [_fromCurrencySelector indexOfSelectedItem];
+    NSInteger indexOfSelectedToCurrency = [_toCurrencySelector indexOfSelectedItem];
+    NSString *fromCurrencyISOCode = [_sortedCurrencies objectAtIndex:indexOfSelectedFromCurrency];
+    NSString *toCurrencyISOCode = [_sortedCurrencies objectAtIndex:indexOfSelectedToCurrency];
+    
+    [thisXRatesController getExchangeRateFrom:fromCurrencyISOCode to:toCurrencyISOCode withCompletionHandler:^(NSDictionary *exchangeRateResult) {
+        NSString *rate = [exchangeRateResult valueForKeyPath:@"query.results.row.rate"];
+        [_exchangeRate setStringValue:rate];
+    }];
+}
+
 #pragma mark - Inherited from super.
 
 - (id)initWithNibName:(NSString *)nibNameOrNil bundle:(NSBundle *)nibBundleOrNil
@@ -46,28 +60,28 @@
 {
     [super awakeFromNib];
     
+    NSMutableArray *arrayOfSortedCurrencyNames = [NSMutableArray new];
+    _sortedCurrencies = [MCxRatesController getAvailableCurrenciesISOCodesOrderedOnCurrencyName];
+    for (NSString *currencyISOCode in _sortedCurrencies) {
+        NSMutableString *currencyName = [[[NSLocale currentLocale] displayNameForKey:NSLocaleCurrencyCode value:currencyISOCode] mutableCopy];
+        [currencyName appendFormat:@" (%@)", [MCxRatesController getSymbolForCurrencyISOCode:currencyISOCode]];
+        [arrayOfSortedCurrencyNames addObject:currencyName];
+    }
+    
     [_toCurrencySelector removeAllItems];
-    [_toCurrencySelector addItemsWithTitles:[MCxRatesController getAvailableCurrencies]];
+    [_toCurrencySelector addItemsWithTitles:arrayOfSortedCurrencyNames];
     [_fromCurrencySelector removeAllItems];
-    [_fromCurrencySelector addItemsWithTitles:[MCxRatesController getAvailableCurrencies]];
+    [_fromCurrencySelector addItemsWithTitles:arrayOfSortedCurrencyNames];
 }
 
 - (IBAction)fromCurrencySelected:(id)sender
 {
-    MCxRatesController *thisXRatesController = [self getXRatesController];
-    [thisXRatesController getExchangeRateFrom:[_toCurrencySelector titleOfSelectedItem] to:[_fromCurrencySelector titleOfSelectedItem] withCompletionHandler:^(NSDictionary *exchangeRateResult) {
-        NSString *rate = [exchangeRateResult valueForKeyPath:@"query.results.row.rate"];
-        [_exchangeRate setStringValue:rate];
-    }];
+    [self updateCurrencyValue];
 }
 
 - (IBAction)toCurrencySelected:(id)sender
 {
-    MCxRatesController *thisXRatesController = [self getXRatesController];
-    [thisXRatesController getExchangeRateFrom:[_toCurrencySelector titleOfSelectedItem] to:[_fromCurrencySelector titleOfSelectedItem] withCompletionHandler:^(NSDictionary *exchangeRateResult) {
-        NSString *rate = [exchangeRateResult valueForKeyPath:@"query.results.row.rate"];
-        [_exchangeRate setStringValue:rate];
-    }];
+    [self updateCurrencyValue];
 }
 
 

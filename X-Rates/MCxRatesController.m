@@ -19,9 +19,29 @@
 
 #pragma mark - Class Methods
 
-+ (NSArray *)getAvailableCurrencies
++ (NSArray *)getAvailableCurrenciesISOCodesOrderedOnCurrencyName
 {
-    return [NSLocale ISOCurrencyCodes];
+    NSDictionary *dictOfValidISOCodes = [MCxRatesController getCurrencyDictionary];
+    NSArray *sortedArray = [dictOfValidISOCodes keysSortedByValueUsingComparator:^NSComparisonResult(NSDictionary* obj1, NSDictionary* obj2) {
+        return [obj1[@"name"] compare:obj2[@"name"]];
+    }];
+    
+    return sortedArray;
+}
+
++ (NSDictionary *)getCurrencyDictionary
+{
+    // Find out the path of recipes.plist
+    NSString *path = [[NSBundle mainBundle] pathForResource:@"Currency info" ofType:@"plist"];
+    
+    // Load the file content and read the data into arrays
+    return [[NSDictionary alloc] initWithContentsOfFile:path];
+}
+
++ (NSString *)getSymbolForCurrencyISOCode:(NSString *)currencyISOCode
+{
+    NSString *currencySymbol = [[NSLocale systemLocale] displayNameForKey:NSLocaleCurrencySymbol value:currencyISOCode];
+    return currencySymbol;
 }
 
 #pragma mark - Private methods
@@ -48,7 +68,17 @@
     NSString *urlString = [NSString stringWithFormat:@"%@%@%@%@", firstPartOfURLString, fromCountryISOCode, toCountryISOCode, secondPartOfURLString];
 
     NSURL *url = [NSURL URLWithString:urlString];
+#if TARGET_OS_IPHONE
+    [[UIApplication sharedApplication] setNetworkActivityIndicatorVisible:YES];
+#elif TARGET_OS_MAC
+    // There is no networkActivityIndicator on Mac OS X
+#endif
     NSURLSessionDataTask *dataTask = [ [self session] dataTaskWithURL:url completionHandler:^(NSData *data, NSURLResponse *response, NSError *error) {
+#if TARGET_OS_IPHONE
+        [[UIApplication sharedApplication] setNetworkActivityIndicatorVisible:NO];
+#elif TARGET_OS_MAC
+        // There is no networkActivityIndicator on Mac OS X
+#endif
         if (!error) {
             NSHTTPURLResponse *httpResp = (NSHTTPURLResponse *)response;
             if ([httpResp statusCode] == 200) {

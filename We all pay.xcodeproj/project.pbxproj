@@ -17,6 +17,10 @@
 		380BF82E18108898008A8B74 /* MCEmailAddressTableViewCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 380BF82D18108898008A8B74 /* MCEmailAddressTableViewCell.xib */; };
 		380BF831181088B9008A8B74 /* MCEmailAddressTableViewCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 380BF830181088B9008A8B74 /* MCEmailAddressTableViewCell.m */; };
 		380F44F21813250600FF7E10 /* No picture image 2 - We All Pay.png in Resources */ = {isa = PBXBuildFile; fileRef = 380F44F11813250600FF7E10 /* No picture image 2 - We All Pay.png */; };
+		381248591959D22600C0447C /* Currency info.plist in Resources */ = {isa = PBXBuildFile; fileRef = 381248561959D22600C0447C /* Currency info.plist */; };
+		3812485A1959D22600C0447C /* MCxRatesController.m in Sources */ = {isa = PBXBuildFile; fileRef = 381248581959D22600C0447C /* MCxRatesController.m */; };
+		3812485B1959D40900C0447C /* MCxRatesController.m in Sources */ = {isa = PBXBuildFile; fileRef = 381248581959D22600C0447C /* MCxRatesController.m */; };
+		3812485C1959D41700C0447C /* Currency info.plist in Resources */ = {isa = PBXBuildFile; fileRef = 381248561959D22600C0447C /* Currency info.plist */; };
 		381AB0EF1924FCC2004A02C6 /* MCWhoPaidHowMuchTableViewCell_iPhone.m in Sources */ = {isa = PBXBuildFile; fileRef = 381AB0EE1924FCC2004A02C6 /* MCWhoPaidHowMuchTableViewCell_iPhone.m */; };
 		381F693E194EE54700F465FC /* MCOneLabelIScreenTableViewCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 381F693D194EE54700F465FC /* MCOneLabelIScreenTableViewCell.m */; };
 		381F6941194EE5A800F465FC /* MCTwoLabelIscreenTableViewCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 381F6940194EE5A800F465FC /* MCTwoLabelIscreenTableViewCell.m */; };
@@ -135,7 +139,6 @@
 		38FE87EB195721670008EE74 /* X_RatesTests.m in Sources */ = {isa = PBXBuildFile; fileRef = 38FE87EA195721670008EE74 /* X_RatesTests.m */; };
 		38FE87F6195721860008EE74 /* MCMainXRatesViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = 38FE87F3195721860008EE74 /* MCMainXRatesViewController.xib */; };
 		38FE87F7195721860008EE74 /* MCMainXRatesViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 38FE87F4195721860008EE74 /* MCMainXRatesViewController.m */; };
-		38FE87FB195723420008EE74 /* MCxRatesController.m in Sources */ = {isa = PBXBuildFile; fileRef = 38FE87FA195723420008EE74 /* MCxRatesController.m */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -173,6 +176,9 @@
 		380BF82F181088B9008A8B74 /* MCEmailAddressTableViewCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = MCEmailAddressTableViewCell.h; path = Views/MCEmailAddressTableViewCell.h; sourceTree = "<group>"; };
 		380BF830181088B9008A8B74 /* MCEmailAddressTableViewCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = MCEmailAddressTableViewCell.m; path = Views/MCEmailAddressTableViewCell.m; sourceTree = "<group>"; };
 		380F44F11813250600FF7E10 /* No picture image 2 - We All Pay.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = "No picture image 2 - We All Pay.png"; path = "Going Dutch/icons/no picture image/No picture image 2 - We All Pay.png"; sourceTree = "<group>"; };
+		381248561959D22600C0447C /* Currency info.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; path = "Currency info.plist"; sourceTree = "<group>"; };
+		381248571959D22600C0447C /* MCxRatesController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = MCxRatesController.h; sourceTree = "<group>"; };
+		381248581959D22600C0447C /* MCxRatesController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = MCxRatesController.m; sourceTree = "<group>"; };
 		38156B2818706B750047AEEF /* nl */ = {isa = PBXFileReference; fileEncoding = 10; lastKnownFileType = text.plist.strings; lineEnding = 0; name = nl; path = nl.lproj/Localizable.strings; sourceTree = "<group>"; };
 		38156B2918706BAC0047AEEF /* Base */ = {isa = PBXFileReference; fileEncoding = 10; lastKnownFileType = text.plist.strings; lineEnding = 0; name = Base; path = Base.lproj/Localizable.strings; sourceTree = "<group>"; };
 		3815BD7B1955CE9800A28316 /* Cocoa.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Cocoa.framework; path = Library/Frameworks/Cocoa.framework; sourceTree = DEVELOPER_DIR; };
@@ -403,8 +409,6 @@
 		38FE87F3195721860008EE74 /* MCMainXRatesViewController.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = MCMainXRatesViewController.xib; sourceTree = "<group>"; };
 		38FE87F4195721860008EE74 /* MCMainXRatesViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = MCMainXRatesViewController.m; sourceTree = "<group>"; };
 		38FE87F5195721860008EE74 /* MCMainXRatesViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = MCMainXRatesViewController.h; sourceTree = "<group>"; };
-		38FE87F9195723420008EE74 /* MCxRatesController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = MCxRatesController.h; path = Model/MCxRatesController.h; sourceTree = "<group>"; };
-		38FE87FA195723420008EE74 /* MCxRatesController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = MCxRatesController.m; path = Model/MCxRatesController.m; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -951,8 +955,9 @@
 		38FE87F8195722D90008EE74 /* Model */ = {
 			isa = PBXGroup;
 			children = (
-				38FE87F9195723420008EE74 /* MCxRatesController.h */,
-				38FE87FA195723420008EE74 /* MCxRatesController.m */,
+				381248561959D22600C0447C /* Currency info.plist */,
+				381248571959D22600C0447C /* MCxRatesController.h */,
+				381248581959D22600C0447C /* MCxRatesController.m */,
 			);
 			name = Model;
 			sourceTree = "<group>";
@@ -1081,6 +1086,7 @@
 			isa = PBXResourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				3812485C1959D41700C0447C /* Currency info.plist in Resources */,
 				38572AE1169D437B00969C62 /* InfoPlist.strings in Resources */,
 				38EFF2D616D215FB001C8248 /* MCAllTripsTableViewCell.xib in Resources */,
 				380BF82E18108898008A8B74 /* MCEmailAddressTableViewCell.xib in Resources */,
@@ -1118,6 +1124,7 @@
 			isa = PBXResourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				381248591959D22600C0447C /* Currency info.plist in Resources */,
 				38FE87F6195721860008EE74 /* MCMainXRatesViewController.xib in Resources */,
 				38FE87CC195721670008EE74 /* InfoPlist.strings in Resources */,
 				38FE87DA195721670008EE74 /* Images.xcassets in Resources */,
@@ -1141,6 +1148,7 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				3812485B1959D40900C0447C /* MCxRatesController.m in Sources */,
 				38572AE3169D437B00969C62 /* main.m in Sources */,
 				38AB487119531F760090457A /* UIView+MCAddons.m in Sources */,
 				38C2BC9C18F7F6EB00233D24 /* MCSolutionOverViewTableViewCell_iPad.m in Sources */,
@@ -1234,7 +1242,7 @@
 			files = (
 				38FE87D5195721670008EE74 /* MCAppDelegate.m in Sources */,
 				38FE87CE195721670008EE74 /* main.m in Sources */,
-				38FE87FB195723420008EE74 /* MCxRatesController.m in Sources */,
+				3812485A1959D22600C0447C /* MCxRatesController.m in Sources */,
 				38FE87F7195721860008EE74 /* MCMainXRatesViewController.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
@@ -1432,8 +1440,8 @@
 				ASSETCATALOG_COMPILER_APPICON_NAME = "iPhone And iPad icons";
 				ASSETCATALOG_COMPILER_LAUNCHIMAGE_NAME = LaunchImage;
 				CLANG_ENABLE_MODULES = YES;
-				CODE_SIGN_IDENTITY = "Mac Developer";
-				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer: Mark Cornelisse (B9ZEEP43C6)";
+				CODE_SIGN_IDENTITY = "iPhone Developer";
+				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer";
 				"CODE_SIGN_IDENTITY[sdk=macosx*]" = "Mac Developer";
 				GCC_PRECOMPILE_PREFIX_HEADER = YES;
 				GCC_PREFIX_HEADER = "Going Dutch/We all pay-Prefix.pch";
@@ -1458,7 +1466,7 @@
 				ASSETCATALOG_COMPILER_APPICON_NAME = "iPhone And iPad icons";
 				ASSETCATALOG_COMPILER_LAUNCHIMAGE_NAME = LaunchImage;
 				CLANG_ENABLE_MODULES = YES;
-				CODE_SIGN_IDENTITY = "Mac Developer";
+				CODE_SIGN_IDENTITY = "iPhone Developer";
 				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer";
 				"CODE_SIGN_IDENTITY[sdk=macosx*]" = "Mac Developer";
 				GCC_PRECOMPILE_PREFIX_HEADER = YES;
@@ -1555,7 +1563,7 @@
 				CLANG_WARN_ENUM_CONVERSION = YES;
 				CLANG_WARN_INT_CONVERSION = YES;
 				CLANG_WARN_OBJC_ROOT_CLASS = YES_ERROR;
-				CODE_SIGN_IDENTITY = "Mac Developer";
+				CODE_SIGN_IDENTITY = "Developer ID Application";
 				"CODE_SIGN_IDENTITY[sdk=macosx*]" = "Mac Developer";
 				COMBINE_HIDPI_IMAGES = YES;
 				GCC_ENABLE_OBJC_EXCEPTIONS = YES;
@@ -1589,7 +1597,7 @@
 				CLANG_WARN_ENUM_CONVERSION = YES;
 				CLANG_WARN_INT_CONVERSION = YES;
 				CLANG_WARN_OBJC_ROOT_CLASS = YES_ERROR;
-				CODE_SIGN_IDENTITY = "Mac Developer";
+				CODE_SIGN_IDENTITY = "Developer ID Application";
 				"CODE_SIGN_IDENTITY[sdk=macosx*]" = "Mac Developer: Mark Cornelisse (B9ZEEP43C6)";
 				COMBINE_HIDPI_IMAGES = YES;
 				DEBUG_INFORMATION_FORMAT = "dwarf-with-dsym";
@@ -1718,6 +1726,7 @@
 				38FE87EE195721670008EE74 /* Release */,
 			);
 			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
 		};
 		38FE87EF195721670008EE74 /* Build configuration list for PBXNativeTarget "X-RatesTests" */ = {
 			isa = XCConfigurationList;
@@ -1726,6 +1735,7 @@
 				38FE87F1195721670008EE74 /* Release */,
 			);
 			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
 		};
 /* End XCConfigurationList section */
 

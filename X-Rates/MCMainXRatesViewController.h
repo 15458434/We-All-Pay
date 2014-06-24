@@ -16,6 +16,8 @@
 @property (weak) IBOutlet NSPopUpButton *toCurrencySelector;
 @property (weak) IBOutlet NSTextField *exchangeRate;
 
+@property (strong) NSArray *sortedCurrencies;
+
 - (IBAction)fromCurrencySelected:(id)sender;
 - (IBAction)toCurrencySelected:(id)sender;
 
