@@ -40,7 +40,7 @@
 - (NSUInteger)getAmountOfRowsInSection0
 {
     if ([MCStoreInterface canMakePayments] && ![[MCStoreInterface defaultStoreInterface] isProProductPurchased]) {
-        return 3;
+        return 2;
     } else {
         return 0;
     }
@@ -49,7 +49,7 @@
 - (void)applyProVersion:(NSNotification *)notification
 {
     numberOfRowsInSection0 = [self getAmountOfRowsInSection0];
-    [[self tableView] deleteRowsAtIndexPaths:@[ [NSIndexPath indexPathForRow:0 inSection:0], [NSIndexPath indexPathForRow:1 inSection:0], [NSIndexPath indexPathForRow:2 inSection:0] ] withRowAnimation:UITableViewRowAnimationAutomatic];
+    [[self tableView] deleteRowsAtIndexPaths:@[ [NSIndexPath indexPathForRow:0 inSection:0], [NSIndexPath indexPathForRow:1 inSection:0] ] withRowAnimation:UITableViewRowAnimationAutomatic];
     UIAlertView *thankYouForPurchasingPopup;
     if ([[[notification userInfo] valueForKeyPath:@"Kind of purchase"] isEqualToString:@"new buy"]) {
         thankYouForPurchasingPopup = [[UIAlertView alloc] initWithTitle:@"Thank you for purchasing." message:nil delegate:self cancelButtonTitle:@"Dismiss" otherButtonTitles:nil];
@@ -143,8 +143,8 @@
     if ([indexPath section] == 0) {
         // If something in section one is pressed.
         if ([indexPath row] == 0) {
-            // nothing yet.
-        } else if ([indexPath row] == 1) {
+//            // nothing yet.
+//        } else if ([indexPath row] == 1) {
             [[MCStoreInterface defaultStoreInterface] buyProProduct];
         } else if ([indexPath row] == 2) {
             [[MCStoreInterface defaultStoreInterface] restorePreviousPurchases];
@@ -198,17 +198,17 @@
 {
     if ([indexPath section] == 0) {
         if ([indexPath row] == 0) {
-            MCOneLabelIScreenTableViewCell *cell = [tableView dequeueReusableCellWithIdentifier:@"MCOneLabelIScreenTableViewCell" forIndexPath:indexPath];
-            NSString *whatIsProString = NSLocalizedString(@"WHAT_IS_PRO", @"What is the Pro Version");
-            [[cell oneTextLabel] setText:whatIsProString];
-            return cell;
-        } else if ([indexPath row] == 1) {
+//            MCOneLabelIScreenTableViewCell *cell = [tableView dequeueReusableCellWithIdentifier:@"MCOneLabelIScreenTableViewCell" forIndexPath:indexPath];
+//            NSString *whatIsProString = NSLocalizedString(@"WHAT_IS_PRO", @"What is the Pro Version");
+//            [[cell oneTextLabel] setText:whatIsProString];
+//            return cell;
+//        } else if ([indexPath row] == 1) {
             MCTwoLabelIscreenTableViewCell *cell = [tableView dequeueReusableCellWithIdentifier:@"MCTwoLabelIscreenTableViewCell" forIndexPath:indexPath];
             NSString *buyProString = NSLocalizedString(@"BUY_PRO", @"Buy Pro Version");
             [[cell leftLabel] setText:buyProString];
             [[cell rightLabel] setText:[[[MCStoreInterface defaultStoreInterface] proProduct] priceString]];
             return cell;
-        } else if ([indexPath row] == 2) {
+        } else if ([indexPath row] == 1) {
             MCOneLabelIScreenTableViewCell *cell = [tableView dequeueReusableCellWithIdentifier:@"MCOneLabelIScreenTableViewCell" forIndexPath:indexPath];
             NSString *restorePurchaseString = NSLocalizedString(@"RESTORE_PREVIOUS_PURCHASES", @"Restore previous purchases");
             [[cell oneTextLabel] setText:restorePurchaseString];

@@ -36,7 +36,7 @@
 - (NSUInteger)getAmountOfRowsInSection0
 {
     if ([MCStoreInterface canMakePayments] && ![[MCStoreInterface defaultStoreInterface] isProProductPurchased]) {
-        return 3;
+        return 2;
     } else {
         return 0;
     }
@@ -146,6 +146,9 @@
     if ([indexPath section] == 0) {
         // If something in section one is pressed.
         if ([indexPath row] == 0) {
+//            // Not implemented yet.
+//        }
+//        if ([indexPath row] == 1) {
             [[MCStoreInterface defaultStoreInterface] buyProProduct];
         }
         if ([indexPath row] == 1) {
@@ -198,15 +201,17 @@
 {
     if ([indexPath section] == 0) {
         if ([indexPath row] == 0) {
-            MCOneLabelTableViewCell_iPad *cell = [tableView dequeueReusableCellWithIdentifier:@"MCOneLabelTableViewCell_iPad" forIndexPath:indexPath];
-            return cell;
-        } else if ([indexPath row] == 1) {
+//            MCOneLabelTableViewCell_iPad *cell = [tableView dequeueReusableCellWithIdentifier:@"MCOneLabelTableViewCell_iPad" forIndexPath:indexPath];
+//            NSString *whatIsProString = NSLocalizedString(@"WHAT_IS_PRO", @"What is the Pro Version");
+//            [[cell oneTextLabel] setText:whatIsProString];
+//            return cell;
+//        } else if ([indexPath row] == 1) {
             MCTwoLabelTableViewCell_iPad *cell = [tableView dequeueReusableCellWithIdentifier:@"MCTwoLabelTableViewCell_iPad" forIndexPath:indexPath];
             NSString *buyProString = NSLocalizedString(@"BUY_PRO", @"Buy Pro Version");
             [[cell leftLabel] setText:buyProString];
             [[cell rightLabel] setText:[[[MCStoreInterface defaultStoreInterface] proProduct] priceString]];
             return cell;
-        } else if ([indexPath row] == 2) {
+        } else if ([indexPath row] == 1) {
             MCOneLabelTableViewCell_iPad *cell = [tableView dequeueReusableCellWithIdentifier:@"MCOneLabelTableViewCell_iPad" forIndexPath:indexPath];
             NSString *restorePurchaseString = NSLocalizedString(@"RESTORE_PREVIOUS_PURCHASES", @"Restore previous purchases");
             [[cell oneTextLabel] setText:restorePurchaseString];
