@@ -52,6 +52,8 @@
 {
     id<GAITracker> tracker = [[GAI sharedInstance] defaultTracker];
     [tracker set:kGAISessionControl value:@"stop"];
+    [tracker set:kGAIScreenName value:@"Leaving"];
+    [tracker send:[[GAIDictionaryBuilder createAppView] build]];
     [[GAI sharedInstance] dispatch];
 }
 
