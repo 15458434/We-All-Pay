@@ -59,6 +59,12 @@
     [thankYouForPurchasingPopup show];
 }
 
+- (void)postProductPrice:(NSNotification *)notification
+{
+    MCTwoLabelIscreenTableViewCell *cell = (MCTwoLabelIscreenTableViewCell *)[[self tableView] cellForRowAtIndexPath:[NSIndexPath indexPathForRow:0 inSection:0]];
+    [[cell rightLabel] setText:[[[MCStoreInterface defaultStoreInterface] proProduct] priceString]];
+}
+
 #pragma mark - Inherited from super
 
 - (id)initWithStyle:(UITableViewStyle)style
@@ -90,6 +96,7 @@
     [super viewDidAppear:animated];
     
     [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(applyProVersion:) name:@"Apply pro version" object:[MCStoreInterface defaultStoreInterface]];
+    [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(postProductPrice:) name:@"Product price" object:[MCStoreInterface defaultStoreInterface]];
     
     // Set the current screen in Google Analytics
     id<GAITracker> tracker = [[GAI sharedInstance] defaultTracker];
@@ -146,7 +153,7 @@
 //            // nothing yet.
 //        } else if ([indexPath row] == 1) {
             [[MCStoreInterface defaultStoreInterface] buyProProduct];
-        } else if ([indexPath row] == 2) {
+        } else if ([indexPath row] == 1) {
             [[MCStoreInterface defaultStoreInterface] restorePreviousPurchases];
         }
     } else if ([indexPath section] == 1) {

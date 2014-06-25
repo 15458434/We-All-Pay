@@ -32,10 +32,12 @@
 
 - (void)completeTransaction:(SKPaymentTransaction *)transaction
 {
-    NSLog(@"The product was bought.");
-    [self applyProVersion];
-    [[NSNotificationCenter defaultCenter] postNotificationName:@"Apply pro version" object:self userInfo:@{@"Kind of purchase" : @"new buy"} ];
-    [[SKPaymentQueue defaultQueue] finishTransaction:transaction];
+    if ([[[transaction payment] productIdentifier] isEqualToString:@"com.Greenhair.We_all_pay.pro"]) {
+        NSLog(@"%@ was bought.", [[transaction payment] productIdentifier]);
+        [self applyProVersion];
+        [[NSNotificationCenter defaultCenter] postNotificationName:@"Apply pro version" object:self userInfo:@{@"Kind of purchase" : @"new buy"} ];
+        [[SKPaymentQueue defaultQueue] finishTransaction:transaction];
+    }
 }
 
 - (void)failedTransaction:(SKPaymentTransaction *)transaction
@@ -46,10 +48,12 @@
 
 - (void)restoreTransaction:(SKPaymentTransaction *)transaction
 {
-    NSLog(@"The sale was restored.");
-    [self applyProVersion];
-    [[NSNotificationCenter defaultCenter] postNotificationName:@"Apply pro version" object:self userInfo:@{@"Kind of purchase" : @"restore purchase"} ];
-    [[SKPaymentQueue defaultQueue] finishTransaction:transaction];
+    if ([[[[transaction originalTransaction] payment] productIdentifier] isEqualToString:@"com.Greenhair.We_all_pay.pro"]) {
+        NSLog(@"The sale of %@ was restored.", [[[transaction originalTransaction] payment] productIdentifier]);
+        [self applyProVersion];
+        [[NSNotificationCenter defaultCenter] postNotificationName:@"Apply pro version" object:self userInfo:@{@"Kind of purchase" : @"restore purchase"} ];
+        [[SKPaymentQueue defaultQueue] finishTransaction:transaction];
+    }
 }
 
 #pragma mark - New and public in this class
@@ -98,6 +102,7 @@
         NSLog(@"Invalid product: %@", invalidIdentifier);
     }
     _proProduct = [[response products] firstObject];
+    [[NSNotificationCenter defaultCenter] postNotificationName:@"Product price" object:self userInfo:@{[_proProduct productIdentifier] : [_proProduct price] } ];
 }
 
 #pragma mark - SKPaymentTransactionObserver
