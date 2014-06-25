@@ -52,7 +52,9 @@
     [[self tableView] deleteRowsAtIndexPaths:@[ [NSIndexPath indexPathForRow:0 inSection:0], [NSIndexPath indexPathForRow:1 inSection:0] ] withRowAnimation:UITableViewRowAnimationAutomatic];
     UIAlertView *thankYouForPurchasingPopup;
     if ([[[notification userInfo] valueForKeyPath:@"Kind of purchase"] isEqualToString:@"new buy"]) {
-        thankYouForPurchasingPopup = [[UIAlertView alloc] initWithTitle:@"Thank you for purchasing." message:nil delegate:self cancelButtonTitle:@"Dismiss" otherButtonTitles:nil];
+        NSString *thankYouTitleString = NSLocalizedString(@"THANK_YOU_FOR_PURCHASING", @"Thank you for purchasing.");
+        NSString *noAdsString = NSLocalizedString(@"I_WILL_SHOW_NO_ADS", @"We all pay is now free of any ads.");
+        thankYouForPurchasingPopup = [[UIAlertView alloc] initWithTitle:thankYouTitleString message:noAdsString delegate:self cancelButtonTitle:@"Dismiss" otherButtonTitles:nil];
     } else if ([[[notification userInfo] valueForKeyPath:@"Kind of purchase"] isEqualToString:@"restore purchase"]) {
         thankYouForPurchasingPopup = [[UIAlertView alloc] initWithTitle:@"Pro version restored." message:nil delegate:self cancelButtonTitle:@"Dismiss" otherButtonTitles:nil];
     }
