@@ -52,7 +52,8 @@
         NSString *noAdsString = NSLocalizedString(@"I_WILL_SHOW_NO_ADS", @"We all pay is now free of any ads.");
         thankYouForPurchasingPopup = [[UIAlertView alloc] initWithTitle:thankYouTitleString message:noAdsString delegate:self cancelButtonTitle:@"Dismiss" otherButtonTitles:nil];
     } else if ([[[notification userInfo] valueForKeyPath:@"Kind of purchase"] isEqualToString:@"restore purchase"]) {
-        thankYouForPurchasingPopup = [[UIAlertView alloc] initWithTitle:@"Pro version restored." message:nil delegate:self cancelButtonTitle:@"Dismiss" otherButtonTitles:nil];
+        NSString *restoredString = NSLocalizedString(@"PURCHASE_RESTORED", @"Ad free version restored.");
+        thankYouForPurchasingPopup = [[UIAlertView alloc] initWithTitle:restoredString message:nil delegate:self cancelButtonTitle:@"Dismiss" otherButtonTitles:nil];
     }
     [thankYouForPurchasingPopup show];
 }
