@@ -592,9 +592,7 @@
                     <tableView key="view" clipsSubviews="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" dataMode="prototypes" style="grouped" separatorStyle="default" rowHeight="44" sectionHeaderHeight="10" sectionFooterHeight="10" id="0ro-oF-XIG">
                         <rect key="frame" x="0.0" y="0.0" width="320" height="480"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
-                        <color key="backgroundColor" red="0.80000007149999997" green="0.86666673419999996" blue="0.94117653369999998" alpha="1" colorSpace="deviceRGB"/>
-                        <color key="separatorColor" red="0.80000007149999997" green="0.86666673419999996" blue="0.94117653369999998" alpha="1" colorSpace="deviceRGB"/>
-                        <color key="sectionIndexBackgroundColor" red="0.80000007149999997" green="0.86666673419999996" blue="0.94117653369999998" alpha="1" colorSpace="deviceRGB"/>
+                        <color key="backgroundColor" cocoaTouchSystemColor="groupTableViewBackgroundColor"/>
                         <view key="tableFooterView" contentMode="scaleToFill" restorationIdentifier="tableViewFooterView" id="G6S-iI-HVI" customClass="UITableViewHeaderFooterView">
                             <rect key="frame" x="0.0" y="153" width="320" height="100"/>
                             <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
@@ -695,6 +693,58 @@
                     <size key="freeformSize" width="320" height="480"/>
                 </tableViewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="hEd-8J-dBz" userLabel="First Responder" sceneMemberID="firstResponder"/>
+            </objects>
+            <point key="canvasLocation" x="1547" y="1095"/>
+        </scene>
+        <!--Ci Screen Root View Controller i Pad-->
+        <scene sceneID="yly-yv-znR">
+            <objects>
+                <viewController storyboardIdentifier="MCiScreenRootViewController_iPad" useStoryboardIdentifierAsRestorationIdentifier="YES" id="aDp-IF-sxb" customClass="MCiScreenRootViewController_iPad" sceneMemberID="viewController">
+                    <layoutGuides>
+                        <viewControllerLayoutGuide type="top" id="rUh-QP-5uw"/>
+                        <viewControllerLayoutGuide type="bottom" id="tMq-is-erq"/>
+                    </layoutGuides>
+                    <view key="view" contentMode="scaleToFill" id="CEE-bk-i1E">
+                        <rect key="frame" x="0.0" y="0.0" width="320" height="480"/>
+                        <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                        <subviews>
+                            <label opaque="NO" clipsSubviews="YES" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Label" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="6KC-0i-Ccp">
+                                <rect key="frame" x="0.0" y="462" width="320" height="13"/>
+                                <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                                <fontDescription key="fontDescription" name="HelveticaNeue-Italic" family="Helvetica Neue" pointSize="11"/>
+                                <color key="textColor" red="0.45490199327468872" green="0.58823531866073608" blue="0.72156864404678345" alpha="1" colorSpace="deviceRGB"/>
+                                <nil key="highlightedColor"/>
+                            </label>
+                            <containerView contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="pco-Nf-lnX">
+                                <rect key="frame" x="0.0" y="0.0" width="320" height="462"/>
+                                <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                                <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="calibratedWhite"/>
+                                <connections>
+                                    <segue destination="zKy-vN-cPg" kind="embed" id="hsU-V5-XfZ"/>
+                                </connections>
+                            </containerView>
+                        </subviews>
+                        <color key="backgroundColor" red="0.80000007152557373" green="0.86666673421859741" blue="0.94117653369903564" alpha="1" colorSpace="deviceRGB"/>
+                        <constraints>
+                            <constraint firstItem="6KC-0i-Ccp" firstAttribute="top" secondItem="pco-Nf-lnX" secondAttribute="bottom" id="6WE-4E-KJb"/>
+                            <constraint firstAttribute="trailing" secondItem="pco-Nf-lnX" secondAttribute="trailing" id="Cfu-BY-R2g"/>
+                            <constraint firstItem="pco-Nf-lnX" firstAttribute="leading" secondItem="CEE-bk-i1E" secondAttribute="leading" id="EAB-6K-9nB"/>
+                            <constraint firstItem="tMq-is-erq" firstAttribute="top" secondItem="6KC-0i-Ccp" secondAttribute="bottom" constant="5" id="JFI-xH-egJ"/>
+                            <constraint firstItem="6KC-0i-Ccp" firstAttribute="leading" secondItem="CEE-bk-i1E" secondAttribute="leading" id="Zmo-lv-0br"/>
+                            <constraint firstItem="pco-Nf-lnX" firstAttribute="top" secondItem="rUh-QP-5uw" secondAttribute="bottom" id="h61-TI-9WK"/>
+                            <constraint firstAttribute="trailing" secondItem="6KC-0i-Ccp" secondAttribute="trailing" id="oQI-rl-2vM"/>
+                        </constraints>
+                    </view>
+                    <nil key="simulatedStatusBarMetrics"/>
+                    <nil key="simulatedTopBarMetrics"/>
+                    <nil key="simulatedBottomBarMetrics"/>
+                    <freeformSimulatedSizeMetrics key="simulatedDestinationMetrics"/>
+                    <size key="freeformSize" width="320" height="480"/>
+                    <connections>
+                        <outlet property="weAllPayVersionLabel" destination="6KC-0i-Ccp" id="B8a-H0-NCH"/>
+                    </connections>
+                </viewController>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="BBb-aa-oAJ" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
             <point key="canvasLocation" x="1099" y="1095"/>
         </scene>
@@ -1216,7 +1266,7 @@
                     <navigationItem key="navigationItem" title="events" id="T8K-rj-EA0">
                         <barButtonItem key="leftBarButtonItem" image="iScreen button" id="mQW-My-2QR">
                             <connections>
-                                <segue destination="zKy-vN-cPg" kind="popover" identifier="iScreenSegue" popoverAnchorBarButtonItem="mQW-My-2QR" id="vQB-Js-dqW">
+                                <segue destination="aDp-IF-sxb" kind="popover" identifier="iScreenSegue" popoverAnchorBarButtonItem="mQW-My-2QR" id="DKp-Bx-3Ur">
                                     <popoverArrowDirection key="popoverArrowDirection" up="YES" down="YES" left="YES" right="YES"/>
                                 </segue>
                             </connections>
@@ -1306,8 +1356,8 @@
         <simulatedScreenMetrics key="destination"/>
     </simulatedMetricsContainer>
     <inferredMetricsTieBreakers>
+        <segue reference="oh3-5j-dZ9"/>
         <segue reference="M2f-Ug-Ooc"/>
         <segue reference="8Cc-ux-2co"/>
-        <segue reference="oh3-5j-dZ9"/>
     </inferredMetricsTieBreakers>
 </document>
