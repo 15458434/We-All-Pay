@@ -55,6 +55,12 @@
     [thankYouForPurchasingPopup show];
 }
 
+- (void)postProductPrice:(NSNotification *)notification
+{
+    MCTwoLabelTableViewCell_iPad *cell = (MCTwoLabelTableViewCell_iPad *)[[self tableView] cellForRowAtIndexPath:[NSIndexPath indexPathForRow:0 inSection:0]];
+    [[cell rightLabel] setText:[[[MCStoreInterface defaultStoreInterface] proProduct] priceString]];
+}
+
 #pragma mark - Inherited froms super.
 
 - (id)initWithStyle:(UITableViewStyle)style
@@ -86,6 +92,7 @@
     [super viewDidAppear:animated];
     
     [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(applyProVersion:) name:@"Apply pro version" object:[MCStoreInterface defaultStoreInterface]];
+    [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(postProductPrice:) name:@"Product price" object:[MCStoreInterface defaultStoreInterface]];
     
     // Set the current screen in Google Analytics
     id<GAITracker> tracker = [[GAI sharedInstance] defaultTracker];
