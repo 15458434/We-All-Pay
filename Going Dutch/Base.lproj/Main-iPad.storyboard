@@ -724,7 +724,6 @@
                                 </connections>
                             </containerView>
                         </subviews>
-                        <color key="backgroundColor" red="0.80000007152557373" green="0.86666673421859741" blue="0.94117653369903564" alpha="1" colorSpace="deviceRGB"/>
                         <constraints>
                             <constraint firstItem="6KC-0i-Ccp" firstAttribute="top" secondItem="pco-Nf-lnX" secondAttribute="bottom" id="6WE-4E-KJb"/>
                             <constraint firstAttribute="trailing" secondItem="pco-Nf-lnX" secondAttribute="trailing" id="Cfu-BY-R2g"/>
