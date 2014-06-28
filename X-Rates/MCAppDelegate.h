@@ -8,11 +8,11 @@
 
 @import Cocoa;
 
-@class MCMainXRatesViewController;
+@class MCxRatesViewController;
 
 @interface MCAppDelegate : NSObject <NSApplicationDelegate>
 
 @property (assign) IBOutlet NSWindow *window;
-@property (nonatomic, strong) IBOutlet MCMainXRatesViewController *masterViewController;
+@property (nonatomic, strong) IBOutlet MCxRatesViewController *masterViewController;
 
 @end
