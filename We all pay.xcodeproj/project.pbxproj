@@ -26,7 +26,6 @@
 		381F6941194EE5A800F465FC /* MCTwoLabelIscreenTableViewCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 381F6940194EE5A800F465FC /* MCTwoLabelIscreenTableViewCell.m */; };
 		38295AE818425E74009FB5DE /* MCCancelDoneViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 38295AE718425E74009FB5DE /* MCCancelDoneViewController.m */; };
 		3829AD0F178B41320025969D /* WeAllPayStore.xcdatamodeld in Sources */ = {isa = PBXBuildFile; fileRef = 3829AD0D178B41320025969D /* WeAllPayStore.xcdatamodeld */; };
-		382B56E3195EEF1E002BE1D7 /* MCexchangeRateTransformer.m in Sources */ = {isa = PBXBuildFile; fileRef = 382B56E2195EEF1D002BE1D7 /* MCexchangeRateTransformer.m */; };
 		382E7BDD17E5E57500A1040A /* MCReturnPaymentViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 382E7BDC17E5E57500A1040A /* MCReturnPaymentViewController.m */; };
 		3830F6F6179872B400904FAF /* MCPaymentViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 3830F6F5179872B400904FAF /* MCPaymentViewController.m */; };
 		38334EBC172D1A770063B919 /* three peeps.png in Resources */ = {isa = PBXBuildFile; fileRef = 38334EBB172D1A770063B919 /* three peeps.png */; };
@@ -198,8 +197,6 @@
 		38295AE618425E74009FB5DE /* MCCancelDoneViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = MCCancelDoneViewController.h; sourceTree = "<group>"; };
 		38295AE718425E74009FB5DE /* MCCancelDoneViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = MCCancelDoneViewController.m; sourceTree = "<group>"; };
 		3829AD0E178B41320025969D /* WeAllPayStore.xcdatamodel */ = {isa = PBXFileReference; lastKnownFileType = wrapper.xcdatamodel; path = WeAllPayStore.xcdatamodel; sourceTree = "<group>"; };
-		382B56E1195EEF1D002BE1D7 /* MCexchangeRateTransformer.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = MCexchangeRateTransformer.h; sourceTree = "<group>"; };
-		382B56E2195EEF1D002BE1D7 /* MCexchangeRateTransformer.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = MCexchangeRateTransformer.m; sourceTree = "<group>"; };
 		382E7BDB17E5E57500A1040A /* MCReturnPaymentViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = MCReturnPaymentViewController.h; path = ViewControllers/MCReturnPaymentViewController.h; sourceTree = "<group>"; };
 		382E7BDC17E5E57500A1040A /* MCReturnPaymentViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = MCReturnPaymentViewController.m; path = ViewControllers/MCReturnPaymentViewController.m; sourceTree = "<group>"; };
 		382F9BD118F7285400818276 /* MCDismissMeBlockProtocol.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = MCDismissMeBlockProtocol.h; path = ViewControllers/MCDismissMeBlockProtocol.h; sourceTree = "<group>"; };
@@ -971,8 +968,6 @@
 				38974AF9195E8C4B00BBEA9C /* MCxRatesController+X_RatesAddOn.m */,
 				38974AF5195E8B3000BBEA9C /* MCCurrency.h */,
 				38974AF6195E8B3000BBEA9C /* MCCurrency.m */,
-				382B56E1195EEF1D002BE1D7 /* MCexchangeRateTransformer.h */,
-				382B56E2195EEF1D002BE1D7 /* MCexchangeRateTransformer.m */,
 				38974AFB195E8E9900BBEA9C /* MCDataStorage.h */,
 				38974AFC195E8E9900BBEA9C /* MCDataStorage.m */,
 			);
@@ -1260,7 +1255,6 @@
 				38974AFA195E8C4B00BBEA9C /* MCxRatesController+X_RatesAddOn.m in Sources */,
 				38974AFD195E8E9900BBEA9C /* MCDataStorage.m in Sources */,
 				38FE87D5195721670008EE74 /* MCAppDelegate.m in Sources */,
-				382B56E3195EEF1E002BE1D7 /* MCexchangeRateTransformer.m in Sources */,
 				38FE87CE195721670008EE74 /* main.m in Sources */,
 				38974AF7195E8B3000BBEA9C /* MCCurrency.m in Sources */,
 				3812485A1959D22600C0447C /* MCxRatesController.m in Sources */,

@@ -19,13 +19,13 @@
         <customObject id="YLy-65-1bz" customClass="NSFontManager"/>
         <customObject id="dX5-ZC-kzm" customClass="MCDataStorage">
             <connections>
-                <outlet property="destinationAmount" destination="Acx-WI-fPD" id="IWf-8b-6xr"/>
+                <outlet property="convertedAmountField" destination="Acx-WI-fPD" id="V5s-HX-4yO"/>
                 <outlet property="destinationController" destination="ZtZ-p4-4RK" id="hgc-2Q-wTV"/>
-                <outlet property="sourceAmount" destination="LWb-qd-YJK" id="o2W-Ey-4MJ"/>
+                <outlet property="exchangeRateField" destination="VLS-y4-9EG" id="ilY-y6-OUf"/>
+                <outlet property="originalAmountField" destination="LWb-qd-YJK" id="SKS-w9-Um5"/>
                 <outlet property="sourceController" destination="LS5-be-Lkv" id="rNf-6y-0yO"/>
             </connections>
         </customObject>
-        <customObject id="Is5-9w-Lle" customClass="MCexchangeRateTransformer"/>
         <arrayController id="LS5-be-Lkv" userLabel="Source Array Controller">
             <declaredKeys>
                 <string>currencyName</string>
@@ -866,18 +866,15 @@
                     <textField verticalHuggingPriority="750" fixedFrame="YES" translatesAutoresizingMaskIntoConstraints="NO" id="LWb-qd-YJK" userLabel="Original Amount">
                         <rect key="frame" x="183" y="75" width="96" height="22"/>
                         <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMinY="YES"/>
-                        <textFieldCell key="cell" scrollable="YES" lineBreakMode="clipping" selectable="YES" editable="YES" sendsActionOnEndEditing="YES" state="on" borderStyle="bezel" drawsBackground="YES" id="cOa-2E-ECV">
+                        <textFieldCell key="cell" scrollable="YES" lineBreakMode="clipping" selectable="YES" editable="YES" sendsActionOnEndEditing="YES" state="on" borderStyle="bezel" alignment="right" drawsBackground="YES" id="cOa-2E-ECV">
                             <numberFormatter key="formatter" formatterBehavior="default10_4" localizesFormat="NO" numberStyle="decimal" minimumIntegerDigits="1" maximumIntegerDigits="309" maximumFractionDigits="3" id="mWS-Zq-gg7"/>
                             <font key="font" metaFont="system"/>
                             <color key="textColor" name="textColor" catalog="System" colorSpace="catalog"/>
                             <color key="backgroundColor" name="textBackgroundColor" catalog="System" colorSpace="catalog"/>
                         </textFieldCell>
                         <connections>
-                            <binding destination="dX5-ZC-kzm" name="value" keyPath="destinationAmount" id="ga0-ke-IJz">
-                                <dictionary key="options">
-                                    <string key="NSValueTransformerName">MCexchangeRateTransformer</string>
-                                </dictionary>
-                            </binding>
+                            <binding destination="dX5-ZC-kzm" name="value" keyPath="sourceAmount" id="r0Q-TV-QPl"/>
+                            <outlet property="delegate" destination="dX5-ZC-kzm" id="bf0-ct-nJI"/>
                         </connections>
                     </textField>
                     <textField horizontalHuggingPriority="251" verticalHuggingPriority="750" fixedFrame="YES" translatesAutoresizingMaskIntoConstraints="NO" id="p9m-5X-LcY">
@@ -910,7 +907,7 @@
                     <textField verticalHuggingPriority="750" fixedFrame="YES" translatesAutoresizingMaskIntoConstraints="NO" id="Acx-WI-fPD" userLabel="Converted Amount">
                         <rect key="frame" x="621" y="75" width="96" height="22"/>
                         <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMinY="YES"/>
-                        <textFieldCell key="cell" scrollable="YES" lineBreakMode="clipping" selectable="YES" editable="YES" sendsActionOnEndEditing="YES" state="on" borderStyle="bezel" drawsBackground="YES" id="n8O-Pa-bKQ">
+                        <textFieldCell key="cell" scrollable="YES" lineBreakMode="clipping" selectable="YES" editable="YES" sendsActionOnEndEditing="YES" state="on" borderStyle="bezel" alignment="right" drawsBackground="YES" id="n8O-Pa-bKQ">
                             <numberFormatter key="formatter" formatterBehavior="default10_4" numberStyle="decimal" minimumIntegerDigits="1" maximumIntegerDigits="309" maximumFractionDigits="3" id="r6K-vZ-axT">
                                 <metadata>
                                     <real key="inspectorSampleValue" value="1.234"/>
@@ -920,11 +917,15 @@
                             <color key="textColor" name="textColor" catalog="System" colorSpace="catalog"/>
                             <color key="backgroundColor" name="textBackgroundColor" catalog="System" colorSpace="catalog"/>
                         </textFieldCell>
+                        <connections>
+                            <binding destination="dX5-ZC-kzm" name="value" keyPath="destinationAmount" id="hMU-pq-tK9"/>
+                            <outlet property="delegate" destination="dX5-ZC-kzm" id="Jjc-Zn-D5T"/>
+                        </connections>
                     </textField>
                     <textField horizontalHuggingPriority="251" verticalHuggingPriority="750" fixedFrame="YES" translatesAutoresizingMaskIntoConstraints="NO" id="VLS-y4-9EG" userLabel="Exchange Rate Value">
-                        <rect key="frame" x="431" y="78" width="38" height="17"/>
+                        <rect key="frame" x="402" y="77" width="96" height="17"/>
                         <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMinY="YES"/>
-                        <textFieldCell key="cell" scrollable="YES" lineBreakMode="clipping" sendsActionOnEndEditing="YES" id="w1t-De-0bY">
+                        <textFieldCell key="cell" scrollable="YES" lineBreakMode="clipping" sendsActionOnEndEditing="YES" alignment="center" id="w1t-De-0bY">
                             <font key="font" metaFont="system"/>
                             <color key="textColor" name="controlTextColor" catalog="System" colorSpace="catalog"/>
                             <color key="backgroundColor" name="controlColor" catalog="System" colorSpace="catalog"/>
@@ -942,21 +943,6 @@
                     </box>
                 </subviews>
             </view>
-            <toolbar key="toolbar" implicitIdentifier="27B8C162-E653-47DC-96BE-5A487BE65A8C" autosavesConfiguration="NO" displayMode="iconAndLabel" sizeMode="regular" id="J7s-nS-CrZ">
-                <allowedToolbarItems>
-                    <toolbarItem implicitItemIdentifier="NSToolbarShowColorsItem" id="8gm-qw-Rvt"/>
-                    <toolbarItem implicitItemIdentifier="NSToolbarShowFontsItem" id="9H1-zY-cBX"/>
-                    <toolbarItem implicitItemIdentifier="NSToolbarPrintItem" id="S1x-25-AVF"/>
-                    <toolbarItem implicitItemIdentifier="NSToolbarSpaceItem" id="aNx-Ra-n2z"/>
-                    <toolbarItem implicitItemIdentifier="NSToolbarFlexibleSpaceItem" id="eQ7-ur-yGn"/>
-                </allowedToolbarItems>
-                <defaultToolbarItems>
-                    <toolbarItem reference="8gm-qw-Rvt"/>
-                    <toolbarItem reference="9H1-zY-cBX"/>
-                    <toolbarItem reference="eQ7-ur-yGn"/>
-                    <toolbarItem reference="S1x-25-AVF"/>
-                </defaultToolbarItems>
-            </toolbar>
         </window>
     </objects>
 </document>
