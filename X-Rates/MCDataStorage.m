@@ -13,6 +13,38 @@
 
 @implementation MCDataStorage
 
+#pragma mark - Actions
+
+- (IBAction)reverseConversion:(id)sender
+{
+    NSUInteger sourceSelectionIndex = [_sourceController selectionIndex];
+    NSUInteger destinationSelectionIndex = [_destinationController selectionIndex];
+    
+    [self getXRate];
+}
+
+#pragma mark - New in this class.
+
+- (void)getXRate
+{
+    _xRatesController = [MCxRatesController new];
+    NSString *sourceCurrencyISOCode = [[[_sourceController selectedObjects] firstObject] valueForKeyPath:@"currencyISOCode"];
+    NSString *destinationCurrencyISOCode = [[[_destinationController selectedObjects] firstObject] valueForKey:@"currencyISOCode"];
+    [_xRatesController getExchangeRateFrom:sourceCurrencyISOCode to:destinationCurrencyISOCode withCompletionHandler:^(NSDictionary *exchangeRateResult) {
+        NSNumberFormatter *numberFormatter = [NSNumberFormatter new];
+        NSString *localeIdentifier = [exchangeRateResult valueForKeyPath:@"query.lang"];
+        [numberFormatter setLocale:[NSLocale localeWithLocaleIdentifier:localeIdentifier]];
+        [numberFormatter setNumberStyle:NSNumberFormatterDecimalStyle];
+        [self setExchangeRate:[numberFormatter numberFromString:[exchangeRateResult valueForKeyPath:@"query.results.row.rate"]]];
+        //        self.exchangeRate = [exchangeRateResult valueForKeyPath:@"query.results.row.rate"];
+        if (_exchangeRate) {
+            dispatch_async(dispatch_get_main_queue(), ^{
+                [self setDestinationAmount:@([_sourceAmount doubleValue] * [_exchangeRate doubleValue])];
+            });
+        }
+    }];
+}
+
 #pragma mark - Inherited from super.
 
 - (void)awakeFromNib
@@ -29,22 +61,7 @@
 
 - (void)tableViewSelectionDidChange:(NSNotification *)aNotification
 {
-    _xRatesController = [MCxRatesController new];
-    NSString *sourceCurrencyISOCode = [[[_sourceController selectedObjects] firstObject] valueForKeyPath:@"currencyISOCode"];
-    NSString *destinationCurrencyISOCode = [[[_destinationController selectedObjects] firstObject] valueForKey:@"currencyISOCode"];
-    [_xRatesController getExchangeRateFrom:sourceCurrencyISOCode to:destinationCurrencyISOCode withCompletionHandler:^(NSDictionary *exchangeRateResult) {
-        NSNumberFormatter *numberFormatter = [NSNumberFormatter new];
-        NSString *localeIdentifier = [exchangeRateResult valueForKeyPath:@"query.lang"];
-        [numberFormatter setLocale:[NSLocale localeWithLocaleIdentifier:localeIdentifier]];
-        [numberFormatter setNumberStyle:NSNumberFormatterDecimalStyle];
-        [self setExchangeRate:[numberFormatter numberFromString:[exchangeRateResult valueForKeyPath:@"query.results.row.rate"]]];
-//        self.exchangeRate = [exchangeRateResult valueForKeyPath:@"query.results.row.rate"];
-        if (_exchangeRate) {
-            dispatch_async(dispatch_get_main_queue(), ^{
-                [self setDestinationAmount:@([_sourceAmount doubleValue] * [_exchangeRate doubleValue])];
-            });
-        }
-    }];
+    [self getXRate];
 }
 
 #pragma mark - NSTextFieldDelegate
@@ -60,6 +77,5 @@
         [self setSourceAmount:@([_destinationAmount doubleValue] / [_exchangeRate doubleValue])];
     }
 }
-
 
 @end

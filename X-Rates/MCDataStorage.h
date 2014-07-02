@@ -33,4 +33,7 @@
 @property (weak) IBOutlet NSTextField *originalAmountField;
 @property (weak) IBOutlet NSTextField *convertedAmountField;
 @property (weak) IBOutlet NSTextField *exchangeRateField;
+
+- (IBAction)reverseConversion:(id)sender;
+
 @end

@@ -14,12 +14,12 @@
 
 - (void)giveFeedBackPressed:(id)sender
 {
-    NSString *body = @"Dear Mark, \n\n";
-    NSArray *shareItems=@[body];
     NSSharingService *service = [NSSharingService sharingServiceNamed:NSSharingServiceNameComposeEmail];
     service.delegate = self;
-    service.recipients=@[@"support@markcornelisse.nl"];
-    service.subject= [ NSString stringWithFormat:@"Feedback on X-Rates"];
+    service.recipients = @[@"support@markcornelisse.nl"];
+    service.subject = [ NSString stringWithFormat:@"Feedback on X-Rates"];
+    NSString *body = @"Dear Mark, \n\n";
+    NSArray *shareItems = @[body];
     [service performWithItems:shareItems];
 }
 
@@ -35,7 +35,7 @@
 
 - (void)applicationDidFinishLaunching:(NSNotification *)aNotification
 {
-
+    
 }
 
 #pragma mark - NSSharedServicesDelegate

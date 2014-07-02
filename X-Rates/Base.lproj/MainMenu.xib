@@ -716,7 +716,7 @@
                 <rect key="frame" x="0.0" y="0.0" width="900" height="473"/>
                 <autoresizingMask key="autoresizingMask"/>
                 <subviews>
-                    <searchField verticalHuggingPriority="750" fixedFrame="YES" translatesAutoresizingMaskIntoConstraints="NO" id="Ugk-3S-IaP" userLabel="Source Search Field">
+                    <searchField verticalHuggingPriority="750" translatesAutoresizingMaskIntoConstraints="NO" id="Ugk-3S-IaP" userLabel="Source Search Field">
                         <rect key="frame" x="20" y="431" width="422" height="22"/>
                         <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMinY="YES"/>
                         <searchFieldCell key="cell" scrollable="YES" lineBreakMode="clipping" selectable="YES" editable="YES" borderStyle="bezel" usesSingleLineMode="YES" bezelStyle="round" id="X70-qG-VGX">
@@ -725,14 +725,14 @@
                             <color key="backgroundColor" name="textBackgroundColor" catalog="System" colorSpace="catalog"/>
                         </searchFieldCell>
                     </searchField>
-                    <box autoresizesSubviews="NO" horizontalHuggingPriority="750" fixedFrame="YES" title="Box" boxType="separator" titlePosition="noTitle" translatesAutoresizingMaskIntoConstraints="NO" id="PLg-vK-JTW">
-                        <rect key="frame" x="448" y="130" width="5" height="323"/>
+                    <box autoresizesSubviews="NO" horizontalHuggingPriority="750" title="Box" boxType="separator" titlePosition="noTitle" translatesAutoresizingMaskIntoConstraints="NO" id="PLg-vK-JTW">
+                        <rect key="frame" x="448" y="110" width="5" height="363"/>
                         <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMinY="YES"/>
                         <color key="borderColor" white="0.0" alpha="0.41999999999999998" colorSpace="calibratedWhite"/>
                         <color key="fillColor" white="0.0" alpha="0.0" colorSpace="calibratedWhite"/>
                         <font key="titleFont" metaFont="system"/>
                     </box>
-                    <searchField verticalHuggingPriority="750" fixedFrame="YES" translatesAutoresizingMaskIntoConstraints="NO" id="RaN-pA-2fg" userLabel="Destination Source Field">
+                    <searchField verticalHuggingPriority="750" translatesAutoresizingMaskIntoConstraints="NO" id="RaN-pA-2fg" userLabel="Destination Source Field">
                         <rect key="frame" x="459" y="431" width="421" height="22"/>
                         <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMinY="YES"/>
                         <searchFieldCell key="cell" scrollable="YES" lineBreakMode="clipping" selectable="YES" editable="YES" borderStyle="bezel" usesSingleLineMode="YES" bezelStyle="round" id="4HU-LD-yP8">
@@ -741,21 +741,21 @@
                             <color key="backgroundColor" name="textBackgroundColor" catalog="System" colorSpace="catalog"/>
                         </searchFieldCell>
                     </searchField>
-                    <scrollView fixedFrame="YES" autohidesScrollers="YES" horizontalLineScroll="19" horizontalPageScroll="10" verticalLineScroll="19" verticalPageScroll="10" usesPredominantAxisScrolling="NO" translatesAutoresizingMaskIntoConstraints="NO" id="zA5-q3-iiW">
-                        <rect key="frame" x="20" y="169" width="422" height="254"/>
+                    <scrollView autohidesScrollers="YES" horizontalLineScroll="19" horizontalPageScroll="10" verticalLineScroll="19" verticalPageScroll="10" usesPredominantAxisScrolling="NO" translatesAutoresizingMaskIntoConstraints="NO" id="zA5-q3-iiW">
+                        <rect key="frame" x="20" y="130" width="422" height="293"/>
                         <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMinY="YES"/>
-                        <clipView key="contentView" ambiguous="YES" misplaced="YES" id="Ly7-xF-pb3">
-                            <rect key="frame" x="1" y="17" width="420" height="236"/>
+                        <clipView key="contentView" id="Ly7-xF-pb3">
+                            <rect key="frame" x="1" y="17" width="420" height="275"/>
                             <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                             <subviews>
                                 <tableView verticalHuggingPriority="750" allowsExpansionToolTips="YES" columnAutoresizingStyle="lastColumnOnly" alternatingRowBackgroundColors="YES" columnSelection="YES" multipleSelection="NO" autosaveColumns="NO" headerView="eN8-nV-Idz" id="L80-AB-JdV" userLabel="Source TableView">
-                                    <rect key="frame" x="0.0" y="0.0" width="420" height="236"/>
+                                    <rect key="frame" x="0.0" y="0.0" width="420" height="275"/>
                                     <autoresizingMask key="autoresizingMask"/>
                                     <size key="intercellSpacing" width="3" height="2"/>
                                     <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                                     <color key="gridColor" name="gridColor" catalog="System" colorSpace="catalog"/>
                                     <tableColumns>
-                                        <tableColumn width="322.80859375" minWidth="40" maxWidth="1000" id="eWz-GP-QU8">
+                                        <tableColumn width="276.02734375" minWidth="40" maxWidth="1000" id="eWz-GP-QU8">
                                             <tableHeaderCell key="headerCell" lineBreakMode="truncatingTail" borderStyle="border" alignment="left" title="Currency Name">
                                                 <font key="font" metaFont="smallSystem"/>
                                                 <color key="textColor" name="headerTextColor" catalog="System" colorSpace="catalog"/>
@@ -771,7 +771,7 @@
                                                 <binding destination="LS5-be-Lkv" name="value" keyPath="arrangedObjects.currencyName" id="iLu-bW-HaP"/>
                                             </connections>
                                         </tableColumn>
-                                        <tableColumn width="91" minWidth="40" maxWidth="1000" id="Vgx-s8-6DB">
+                                        <tableColumn width="138" minWidth="40" maxWidth="1000" id="Vgx-s8-6DB">
                                             <tableHeaderCell key="headerCell" lineBreakMode="truncatingTail" borderStyle="border" alignment="left" title="Symbol">
                                                 <font key="font" metaFont="smallSystem"/>
                                                 <color key="textColor" name="headerTextColor" catalog="System" colorSpace="catalog"/>
@@ -808,21 +808,21 @@
                             <autoresizingMask key="autoresizingMask"/>
                         </tableHeaderView>
                     </scrollView>
-                    <scrollView fixedFrame="YES" autohidesScrollers="YES" horizontalLineScroll="19" horizontalPageScroll="10" verticalLineScroll="19" verticalPageScroll="10" usesPredominantAxisScrolling="NO" translatesAutoresizingMaskIntoConstraints="NO" id="xUe-Fg-Azh">
-                        <rect key="frame" x="459" y="169" width="421" height="254"/>
+                    <scrollView autohidesScrollers="YES" horizontalLineScroll="19" horizontalPageScroll="10" verticalLineScroll="19" verticalPageScroll="10" usesPredominantAxisScrolling="NO" translatesAutoresizingMaskIntoConstraints="NO" id="xUe-Fg-Azh">
+                        <rect key="frame" x="459" y="130" width="421" height="293"/>
                         <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMinY="YES"/>
-                        <clipView key="contentView" ambiguous="YES" misplaced="YES" id="ekh-Hz-aBv">
-                            <rect key="frame" x="1" y="17" width="419" height="236"/>
+                        <clipView key="contentView" id="ekh-Hz-aBv">
+                            <rect key="frame" x="1" y="17" width="419" height="275"/>
                             <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                             <subviews>
                                 <tableView verticalHuggingPriority="750" allowsExpansionToolTips="YES" columnAutoresizingStyle="lastColumnOnly" alternatingRowBackgroundColors="YES" columnSelection="YES" multipleSelection="NO" autosaveColumns="NO" headerView="ft2-Uy-sqQ" id="YMW-An-4Mu" userLabel="Destination TableView">
-                                    <rect key="frame" x="0.0" y="0.0" width="419" height="236"/>
+                                    <rect key="frame" x="0.0" y="0.0" width="419" height="275"/>
                                     <autoresizingMask key="autoresizingMask"/>
                                     <size key="intercellSpacing" width="3" height="2"/>
                                     <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                                     <color key="gridColor" name="gridColor" catalog="System" colorSpace="catalog"/>
                                     <tableColumns>
-                                        <tableColumn width="324.7890625" minWidth="40" maxWidth="1000" id="Z5g-0y-TUL">
+                                        <tableColumn width="289.49609375" minWidth="40" maxWidth="1000" id="Z5g-0y-TUL">
                                             <tableHeaderCell key="headerCell" lineBreakMode="truncatingTail" borderStyle="border" alignment="left" title="Currency Name">
                                                 <font key="font" metaFont="smallSystem"/>
                                                 <color key="textColor" name="headerTextColor" catalog="System" colorSpace="catalog"/>
@@ -838,7 +838,7 @@
                                                 <binding destination="ZtZ-p4-4RK" name="value" keyPath="arrangedObjects.currencyName" id="1aS-Pm-WHg"/>
                                             </connections>
                                         </tableColumn>
-                                        <tableColumn width="88" minWidth="40" maxWidth="1000" id="dKC-06-7MR">
+                                        <tableColumn width="124" minWidth="40" maxWidth="1000" id="dKC-06-7MR">
                                             <tableHeaderCell key="headerCell" lineBreakMode="truncatingTail" borderStyle="border" alignment="left" title="Symbol">
                                                 <font key="font" metaFont="smallSystem"/>
                                                 <color key="textColor" name="headerTextColor" catalog="System" colorSpace="catalog"/>
@@ -875,10 +875,13 @@
                             <autoresizingMask key="autoresizingMask"/>
                         </tableHeaderView>
                     </scrollView>
-                    <textField verticalHuggingPriority="750" fixedFrame="YES" translatesAutoresizingMaskIntoConstraints="NO" id="LWb-qd-YJK" userLabel="Original Amount">
-                        <rect key="frame" x="183" y="75" width="96" height="22"/>
+                    <textField verticalHuggingPriority="750" translatesAutoresizingMaskIntoConstraints="NO" id="LWb-qd-YJK" userLabel="Original Amount">
+                        <rect key="frame" x="181" y="36" width="100" height="22"/>
                         <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMinY="YES"/>
-                        <textFieldCell key="cell" scrollable="YES" lineBreakMode="clipping" selectable="YES" editable="YES" sendsActionOnEndEditing="YES" state="on" borderStyle="bezel" alignment="right" drawsBackground="YES" id="cOa-2E-ECV">
+                        <constraints>
+                            <constraint firstAttribute="width" constant="100" id="jcS-Rr-Iqj"/>
+                        </constraints>
+                        <textFieldCell key="cell" lineBreakMode="truncatingTail" selectable="YES" editable="YES" sendsActionOnEndEditing="YES" state="on" borderStyle="bezel" alignment="right" drawsBackground="YES" id="cOa-2E-ECV">
                             <numberFormatter key="formatter" formatterBehavior="default10_4" localizesFormat="NO" numberStyle="decimal" minimumIntegerDigits="1" maximumIntegerDigits="309" maximumFractionDigits="3" id="mWS-Zq-gg7"/>
                             <font key="font" metaFont="system"/>
                             <color key="textColor" name="textColor" catalog="System" colorSpace="catalog"/>
@@ -889,8 +892,8 @@
                             <outlet property="delegate" destination="dX5-ZC-kzm" id="bf0-ct-nJI"/>
                         </connections>
                     </textField>
-                    <textField horizontalHuggingPriority="251" verticalHuggingPriority="750" fixedFrame="YES" translatesAutoresizingMaskIntoConstraints="NO" id="p9m-5X-LcY">
-                        <rect key="frame" x="402" y="105" width="96" height="17"/>
+                    <textField horizontalHuggingPriority="251" verticalHuggingPriority="750" translatesAutoresizingMaskIntoConstraints="NO" id="p9m-5X-LcY">
+                        <rect key="frame" x="402" y="66" width="96" height="17"/>
                         <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMinY="YES"/>
                         <textFieldCell key="cell" scrollable="YES" lineBreakMode="clipping" sendsActionOnEndEditing="YES" title="Exchange Rate" id="ve1-gb-CeS">
                             <font key="font" metaFont="system"/>
@@ -898,8 +901,8 @@
                             <color key="backgroundColor" name="controlColor" catalog="System" colorSpace="catalog"/>
                         </textFieldCell>
                     </textField>
-                    <textField horizontalHuggingPriority="251" verticalHuggingPriority="750" fixedFrame="YES" translatesAutoresizingMaskIntoConstraints="NO" id="Lrv-tW-vSz">
-                        <rect key="frame" x="178" y="105" width="107" height="17"/>
+                    <textField horizontalHuggingPriority="251" verticalHuggingPriority="750" translatesAutoresizingMaskIntoConstraints="NO" id="Lrv-tW-vSz">
+                        <rect key="frame" x="177" y="66" width="107" height="17"/>
                         <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMinY="YES"/>
                         <textFieldCell key="cell" scrollable="YES" lineBreakMode="clipping" sendsActionOnEndEditing="YES" title="Source Currency" id="ad9-NZ-4ev">
                             <font key="font" metaFont="system"/>
@@ -907,8 +910,8 @@
                             <color key="backgroundColor" name="controlColor" catalog="System" colorSpace="catalog"/>
                         </textFieldCell>
                     </textField>
-                    <textField horizontalHuggingPriority="251" verticalHuggingPriority="750" fixedFrame="YES" translatesAutoresizingMaskIntoConstraints="NO" id="Y5b-Ey-pc3">
-                        <rect key="frame" x="601" y="105" width="136" height="17"/>
+                    <textField horizontalHuggingPriority="251" verticalHuggingPriority="750" translatesAutoresizingMaskIntoConstraints="NO" id="Y5b-Ey-pc3">
+                        <rect key="frame" x="601" y="66" width="136" height="17"/>
                         <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMinY="YES"/>
                         <textFieldCell key="cell" scrollable="YES" lineBreakMode="clipping" sendsActionOnEndEditing="YES" title="Destination Currency" id="ezA-Ux-GpV">
                             <font key="font" metaFont="system"/>
@@ -916,10 +919,10 @@
                             <color key="backgroundColor" name="controlColor" catalog="System" colorSpace="catalog"/>
                         </textFieldCell>
                     </textField>
-                    <textField verticalHuggingPriority="750" fixedFrame="YES" translatesAutoresizingMaskIntoConstraints="NO" id="Acx-WI-fPD" userLabel="Converted Amount">
-                        <rect key="frame" x="621" y="75" width="96" height="22"/>
+                    <textField verticalHuggingPriority="750" translatesAutoresizingMaskIntoConstraints="NO" id="Acx-WI-fPD" userLabel="Converted Amount">
+                        <rect key="frame" x="619" y="36" width="100" height="22"/>
                         <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMinY="YES"/>
-                        <textFieldCell key="cell" scrollable="YES" lineBreakMode="clipping" selectable="YES" editable="YES" sendsActionOnEndEditing="YES" state="on" borderStyle="bezel" alignment="right" drawsBackground="YES" id="n8O-Pa-bKQ">
+                        <textFieldCell key="cell" lineBreakMode="truncatingTail" selectable="YES" editable="YES" sendsActionOnEndEditing="YES" state="on" borderStyle="bezel" alignment="right" drawsBackground="YES" id="n8O-Pa-bKQ">
                             <numberFormatter key="formatter" formatterBehavior="default10_4" numberStyle="decimal" minimumIntegerDigits="1" maximumIntegerDigits="309" maximumFractionDigits="3" id="r6K-vZ-axT">
                                 <metadata>
                                     <real key="inspectorSampleValue" value="1.234"/>
@@ -934,8 +937,8 @@
                             <outlet property="delegate" destination="dX5-ZC-kzm" id="Jjc-Zn-D5T"/>
                         </connections>
                     </textField>
-                    <textField horizontalHuggingPriority="251" verticalHuggingPriority="750" fixedFrame="YES" translatesAutoresizingMaskIntoConstraints="NO" id="VLS-y4-9EG" userLabel="Exchange Rate Value">
-                        <rect key="frame" x="402" y="77" width="96" height="17"/>
+                    <textField horizontalHuggingPriority="251" verticalHuggingPriority="750" misplaced="YES" translatesAutoresizingMaskIntoConstraints="NO" id="VLS-y4-9EG" userLabel="Exchange Rate Value">
+                        <rect key="frame" x="446" y="38" width="8" height="17"/>
                         <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMinY="YES"/>
                         <textFieldCell key="cell" scrollable="YES" lineBreakMode="clipping" sendsActionOnEndEditing="YES" alignment="center" id="w1t-De-0bY">
                             <font key="font" metaFont="system"/>
@@ -946,15 +949,76 @@
                             <binding destination="dX5-ZC-kzm" name="value" keyPath="exchangeRate" id="uv6-Bh-P8e"/>
                         </connections>
                     </textField>
-                    <box autoresizesSubviews="NO" horizontalHuggingPriority="750" fixedFrame="YES" title="Box" boxType="separator" titlePosition="noTitle" translatesAutoresizingMaskIntoConstraints="NO" id="6gy-ID-TJu">
-                        <rect key="frame" x="448" y="12" width="5" height="58"/>
+                    <box autoresizesSubviews="NO" verticalHuggingPriority="750" title="Box" boxType="separator" titlePosition="noTitle" translatesAutoresizingMaskIntoConstraints="NO" id="xe1-xy-pie">
+                        <rect key="frame" x="0.0" y="107" width="900" height="5"/>
                         <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMinY="YES"/>
                         <color key="borderColor" white="0.0" alpha="0.41999999999999998" colorSpace="calibratedWhite"/>
                         <color key="fillColor" white="0.0" alpha="0.0" colorSpace="calibratedWhite"/>
                         <font key="titleFont" metaFont="system"/>
                     </box>
                 </subviews>
+                <constraints>
+                    <constraint firstItem="PLg-vK-JTW" firstAttribute="top" secondItem="EiT-Mj-1SZ" secondAttribute="top" id="0Oi-VN-8E4"/>
+                    <constraint firstItem="zA5-q3-iiW" firstAttribute="leading" secondItem="EiT-Mj-1SZ" secondAttribute="leading" constant="20" symbolic="YES" id="1xK-gf-dTA"/>
+                    <constraint firstAttribute="trailing" secondItem="RaN-pA-2fg" secondAttribute="trailing" constant="20" id="2eO-E6-NuR"/>
+                    <constraint firstItem="xe1-xy-pie" firstAttribute="leading" secondItem="EiT-Mj-1SZ" secondAttribute="leading" id="6QX-na-mH4"/>
+                    <constraint firstItem="Acx-WI-fPD" firstAttribute="baseline" secondItem="LWb-qd-YJK" secondAttribute="baseline" id="8Ka-qI-lAk"/>
+                    <constraint firstItem="Lrv-tW-vSz" firstAttribute="baseline" secondItem="p9m-5X-LcY" secondAttribute="baseline" id="9zo-Or-enr"/>
+                    <constraint firstItem="Lrv-tW-vSz" firstAttribute="baseline" secondItem="Y5b-Ey-pc3" secondAttribute="baseline" id="ASk-Gt-bY1"/>
+                    <constraint firstItem="Acx-WI-fPD" firstAttribute="baseline" secondItem="VLS-y4-9EG" secondAttribute="baseline" id="AaG-Aa-ezJ"/>
+                    <constraint firstAttribute="centerX" secondItem="PLg-vK-JTW" secondAttribute="centerX" id="BVj-CG-veP"/>
+                    <constraint firstItem="RaN-pA-2fg" firstAttribute="top" secondItem="EiT-Mj-1SZ" secondAttribute="top" constant="20" id="CP7-UJ-bLo"/>
+                    <constraint firstItem="PLg-vK-JTW" firstAttribute="bottom" secondItem="zA5-q3-iiW" secondAttribute="bottom" constant="20" id="G8a-WK-bT5"/>
+                    <constraint firstItem="PLg-vK-JTW" firstAttribute="leading" secondItem="zA5-q3-iiW" secondAttribute="trailing" constant="8" symbolic="YES" id="M8K-mA-X6c"/>
+                    <constraint firstItem="xUe-Fg-Azh" firstAttribute="top" secondItem="RaN-pA-2fg" secondAttribute="bottom" constant="8" id="Q97-m9-6LF"/>
+                    <constraint firstItem="LWb-qd-YJK" firstAttribute="top" secondItem="Lrv-tW-vSz" secondAttribute="bottom" constant="8" symbolic="YES" id="QQC-pH-CWm"/>
+                    <constraint firstItem="PLg-vK-JTW" firstAttribute="centerX" secondItem="p9m-5X-LcY" secondAttribute="centerX" id="Sch-7W-fIi"/>
+                    <constraint firstItem="zA5-q3-iiW" firstAttribute="bottom" secondItem="xUe-Fg-Azh" secondAttribute="bottom" id="UEd-K8-6RM"/>
+                    <constraint firstAttribute="bottom" secondItem="zA5-q3-iiW" secondAttribute="bottom" constant="130" id="UUL-12-oy4"/>
+                    <constraint firstItem="Ugk-3S-IaP" firstAttribute="top" secondItem="EiT-Mj-1SZ" secondAttribute="top" constant="20" id="V8a-Ya-asS"/>
+                    <constraint firstItem="LWb-qd-YJK" firstAttribute="width" secondItem="VLS-y4-9EG" secondAttribute="width" id="VYc-6u-egd"/>
+                    <constraint firstAttribute="trailing" secondItem="xUe-Fg-Azh" secondAttribute="trailing" constant="20" symbolic="YES" id="YGd-5c-sWH"/>
+                    <constraint firstItem="LWb-qd-YJK" firstAttribute="width" secondItem="Acx-WI-fPD" secondAttribute="width" id="ap3-YK-qLv"/>
+                    <constraint firstAttribute="trailing" secondItem="xe1-xy-pie" secondAttribute="trailing" id="eoe-em-rSK"/>
+                    <constraint firstItem="RaN-pA-2fg" firstAttribute="leading" secondItem="PLg-vK-JTW" secondAttribute="trailing" constant="8" id="h7x-Ur-7NQ"/>
+                    <constraint firstItem="xUe-Fg-Azh" firstAttribute="leading" secondItem="PLg-vK-JTW" secondAttribute="trailing" constant="8" symbolic="YES" id="jwO-Tb-C9L"/>
+                    <constraint firstItem="Lrv-tW-vSz" firstAttribute="centerX" secondItem="LWb-qd-YJK" secondAttribute="centerX" id="qDN-Rv-yEt"/>
+                    <constraint firstItem="Lrv-tW-vSz" firstAttribute="top" secondItem="zA5-q3-iiW" secondAttribute="bottom" constant="47" id="qZs-C9-9vO"/>
+                    <constraint firstItem="xUe-Fg-Azh" firstAttribute="centerX" secondItem="Y5b-Ey-pc3" secondAttribute="centerX" id="qly-j4-o2W"/>
+                    <constraint firstItem="zA5-q3-iiW" firstAttribute="centerX" secondItem="Lrv-tW-vSz" secondAttribute="centerX" id="sVV-Nr-iiP"/>
+                    <constraint firstItem="PLg-vK-JTW" firstAttribute="centerX" secondItem="VLS-y4-9EG" secondAttribute="centerX" id="sal-do-ivE"/>
+                    <constraint firstItem="zA5-q3-iiW" firstAttribute="top" secondItem="Ugk-3S-IaP" secondAttribute="bottom" constant="8" id="tEU-TQ-bII"/>
+                    <constraint firstItem="xe1-xy-pie" firstAttribute="top" secondItem="xUe-Fg-Azh" secondAttribute="bottom" constant="20" id="ubs-fh-izT"/>
+                    <constraint firstItem="Ugk-3S-IaP" firstAttribute="leading" secondItem="EiT-Mj-1SZ" secondAttribute="leading" constant="20" id="z1n-cS-fdy"/>
+                    <constraint firstItem="Acx-WI-fPD" firstAttribute="centerX" secondItem="Y5b-Ey-pc3" secondAttribute="centerX" id="zOa-SS-3bR"/>
+                    <constraint firstItem="PLg-vK-JTW" firstAttribute="leading" secondItem="Ugk-3S-IaP" secondAttribute="trailing" constant="8" id="zuD-R4-4CL"/>
+                </constraints>
             </view>
+            <toolbar key="toolbar" implicitIdentifier="ADC47BA3-DD3D-45D9-BD41-8DF8D7CD16F1" autosavesConfiguration="NO" displayMode="iconAndLabel" sizeMode="regular" id="Fyx-Aw-Q9n">
+                <allowedToolbarItems>
+                    <toolbarItem implicitItemIdentifier="NSToolbarSpaceItem" id="dur-As-kZT"/>
+                    <toolbarItem implicitItemIdentifier="NSToolbarFlexibleSpaceItem" id="2KO-rP-FjT"/>
+                    <toolbarItem implicitItemIdentifier="61072A6E-B1AA-4DD6-8676-3543B0B61453" label="Reverse" paletteLabel="Toolbar Item" tag="-1" image="reverse conversion button" id="rjP-dz-htR">
+                        <connections>
+                            <action selector="reverseConversion:" target="dX5-ZC-kzm" id="vml-W7-Yvc"/>
+                        </connections>
+                    </toolbarItem>
+                    <toolbarItem implicitItemIdentifier="NSToolbarSeparatorItem" id="fEJ-Tn-yOr"/>
+                </allowedToolbarItems>
+                <defaultToolbarItems>
+                    <toolbarItem reference="2KO-rP-FjT"/>
+                    <toolbarItem reference="rjP-dz-htR"/>
+                    <toolbarItem reference="fEJ-Tn-yOr"/>
+                    <toolbarItem reference="2KO-rP-FjT"/>
+                    <toolbarItem reference="dur-As-kZT"/>
+                </defaultToolbarItems>
+                <connections>
+                    <outlet property="delegate" destination="dX5-ZC-kzm" id="3gQ-vN-9rj"/>
+                </connections>
+            </toolbar>
         </window>
     </objects>
+    <resources>
+        <image name="reverse conversion button" width="32" height="32"/>
+    </resources>
 </document>
