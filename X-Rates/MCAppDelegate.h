@@ -8,11 +8,10 @@
 
 @import Cocoa;
 
-@class MCxRatesViewController;
-
-@interface MCAppDelegate : NSObject <NSApplicationDelegate>
+@interface MCAppDelegate : NSObject <NSApplicationDelegate, NSSharingServiceDelegate>
 
 @property (assign) IBOutlet NSWindow *window;
-@property (nonatomic, strong) IBOutlet MCxRatesViewController *masterViewController;
+
+- (IBAction)giveFeedBackPressed:(id)sender;
 
 @end

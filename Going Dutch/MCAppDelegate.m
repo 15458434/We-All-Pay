@@ -185,4 +185,6 @@
     [[NSNotificationCenter defaultCenter] removeObserver:self name:@"Start views" object:nil];
 }
 
+- (IBAction)giveFeedBackPressed:(id)sender {
+}
 @end
