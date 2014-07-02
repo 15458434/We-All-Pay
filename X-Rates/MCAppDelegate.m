@@ -23,11 +23,19 @@
     [service performWithItems:shareItems];
 }
 
+- (void)tweetThankYouPressed:(id)sender
+{
+    NSSharingService *service = [NSSharingService sharingServiceNamed:NSSharingServiceNamePostOnTwitter];
+    [service setDelegate:self];
+    NSString *tweet = @"@MarkCornelisse Thank you for creating X-Rates. #osx #app";
+    [service performWithItems:@[tweet]];
+}
+
 #pragma mark - Inherited from super
 
 - (void)applicationDidFinishLaunching:(NSNotification *)aNotification
 {
-    
+
 }
 
 #pragma mark - NSSharedServicesDelegate

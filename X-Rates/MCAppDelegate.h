@@ -13,5 +13,7 @@
 @property (assign) IBOutlet NSWindow *window;
 
 - (IBAction)giveFeedBackPressed:(id)sender;
+- (IBAction)tweetThankYouPressed:(id)sender;
+
 
 @end
