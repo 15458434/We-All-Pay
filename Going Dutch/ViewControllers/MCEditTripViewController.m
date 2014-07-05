@@ -364,6 +364,7 @@
 {
     // Return the number of rows in the section.
     return [[dataController sections][section] numberOfObjects];
+//    return [[dataController fetchedObjects] count];
 }
 
 - (UITableViewCell *)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath
