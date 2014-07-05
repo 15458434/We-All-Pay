@@ -183,7 +183,8 @@
     NSManagedObjectContext *context = [weAllPayStoreDocument managedObjectContext];
     [[context undoManager] endUndoGrouping];
     [[context undoManager] disableUndoRegistration];
-    [self saveStore];
+    [context processPendingChanges];
+//    [self saveStore];
 //    NSError *saveError;
 //    BOOL saveSuccesful = [context save:&saveError];
 //    if (!saveSuccesful) {
@@ -195,8 +196,8 @@
 {
     NSManagedObjectContext *context = [weAllPayStoreDocument managedObjectContext];
     [[context undoManager] endUndoGrouping];
-//    [context processPendingChanges];
-    [self saveStore];
+    [context processPendingChanges];
+//    [self saveStore];
 }
 
 - (void)endUndoGroupAndUndo

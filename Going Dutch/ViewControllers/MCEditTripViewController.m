@@ -88,23 +88,19 @@
 
 #pragma mark - new in this class.
 
-- (void)prepareDataControllerAndFetch
+- (void)performFetchAndReloadTableView:(NSNotification *)notification
 {
-    // What entities will be fetched.
-    NSFetchRequest *request = [NSFetchRequest fetchRequestWithEntityName:@"MCPerson"];
-    // How to sort the data.
-    [request setRelationshipKeyPathsForPrefetching:@[ @"emailAddress", @"payments", @"sharedBill" ]];
-    NSSortDescriptor *sortDescriptor = [NSSortDescriptor sortDescriptorWithKey:@"dateCreated" ascending:NO];
-    NSArray *sortDescriptorArray = @[sortDescriptor];
-    [request setSortDescriptors:sortDescriptorArray];
-    // Select only people from tonightsBill.
-    NSPredicate *predicate = [NSPredicate predicateWithFormat:@"ANY sharedBill = %@", tonightsBill];
-    [request setPredicate:predicate];
-    
-    // Create the FetchedResultsController.
-    
-    dataController = [[NSFetchedResultsController alloc] initWithFetchRequest:request managedObjectContext:[[[MCWeAllPayStoreController defaultStore] weAllPayStoreDocument] managedObjectContext] sectionNameKeyPath:nil cacheName:[NSString stringWithFormat:@"All persons cache of trip: %@", [tonightsBill uniqueBillId]]];
-    [dataController setDelegate:self];
+    UIManagedDocument *weAllPayDocument = [[MCWeAllPayStoreController defaultStore] weAllPayStoreDocument];
+    if ([weAllPayDocument documentState] == UIDocumentStateNormal) {
+        [self performFetch];
+        [[self tableView] reloadData];
+        [[NSNotificationCenter defaultCenter] removeObserver:self];
+        [self setEmptyMessageNow];
+    }
+}
+
+- (void)performFetch
+{
     NSError *error;
     BOOL success = [dataController performFetch:&error];
     if (!success) {
@@ -128,9 +124,26 @@
                 [[self tableView] setSeparatorStyle:UITableViewCellSeparatorStyleNone];
             } completion:nil];
         }
-
     }
 }
+
+- (void)setEmptyMessageNow
+{
+    if (![[dataController fetchedObjects] count] == 0) {
+        [UIView animateWithDuration:0.0 animations:^{
+            [[emptyMessage bigMessage] setAlpha:0.0];
+            [[self tableView] setSeparatorStyle:UITableViewCellSeparatorStyleSingleLine];
+        } completion:nil];
+    } else {
+        if ([[emptyMessage bigMessage] alpha] < 1.0) {
+            [UIView animateWithDuration:0.0 animations:^{
+                [[emptyMessage bigMessage] setAlpha:1.0];
+                [[self tableView] setSeparatorStyle:UITableViewCellSeparatorStyleNone];
+            } completion:nil];
+        }
+    }
+}
+
 
 #pragma mark - inherited from super
 
@@ -161,10 +174,6 @@
         [tripNameField setPlaceholder:@"Enter activity"];
     }
     
-    if (!dataController) {
-        [self prepareDataControllerAndFetch];
-    }
-    
     // Load and register Nib to the tableView for use.
     UINib *nib = [UINib nibWithNibName:@"MCPersonTableViewCell" bundle:nil];
     [[self tableView] registerNib:nib forCellReuseIdentifier:@"MCPersonTableViewCell"];
@@ -186,8 +195,15 @@
     [tripNameField setDelegate:self];
     
     if (!dataController) {
-        [self prepareDataControllerAndFetch];
+        dataController = [[MCWeAllPayStoreController defaultStore] sharedBillPeoplePresentDataControllerForDelegate:self];
+    }
+    UIManagedDocument *weAllPayDocument = [[MCWeAllPayStoreController defaultStore] weAllPayStoreDocument];
+    if (![[MCWeAllPayStoreController defaultStore] isDocumentStateNormal]) {
+        [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(performFetchAndReloadTableView:) name:UIDocumentStateChangedNotification object:weAllPayDocument];
+    } else {
+        [self performFetch];
         [[self tableView] reloadData];
+        [self setEmptyMessageNow];
     }
     
     if (kABAuthorizationStatusDenied == ABAddressBookGetAuthorizationStatus()) {
@@ -363,8 +379,8 @@
 - (NSInteger)tableView:(UITableView *)tableView numberOfRowsInSection:(NSInteger)section
 {
     // Return the number of rows in the section.
-    return [[dataController sections][section] numberOfObjects];
-//    return [[dataController fetchedObjects] count];
+//    return [[dataController sections][section] numberOfObjects];
+    return [[dataController fetchedObjects] count];
 }
 
 - (UITableViewCell *)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath

@@ -28,10 +28,10 @@
     [[[GAI sharedInstance] logger] setLogLevel:kGAILogLevelNone];
     
     // Initialize tracker. Replace with your tracking ID.
-//    [[GAI sharedInstance] trackerWithTrackingId:@"UA-50304745-1"];
+    [[GAI sharedInstance] trackerWithTrackingId:@"UA-50304745-1"];
     
     // Tracker for development environment.
-    [[GAI sharedInstance] trackerWithTrackingId:@"UA-50304745-2"];
+//    [[GAI sharedInstance] trackerWithTrackingId:@"UA-50304745-2"];
     
     // Get opt-in value
     // Get user preference
@@ -44,16 +44,16 @@
 
 - (void)startGoogleAnalyticsSession
 {
-    id<GAITracker> tracker = [[GAI sharedInstance] defaultTracker];
-    [tracker set:kGAISessionControl value:@"start"];
+//    id<GAITracker> tracker = [[GAI sharedInstance] defaultTracker];
+//    [tracker set:kGAISessionControl value:@"start"];
 }
 
 - (void)stopGoogleAnalyticsSession
 {
-    id<GAITracker> tracker = [[GAI sharedInstance] defaultTracker];
-    [tracker set:kGAISessionControl value:@"stop"];
-    [tracker set:kGAIScreenName value:@"Leaving"];
-    [tracker send:[[GAIDictionaryBuilder createAppView] build]];
+//    id<GAITracker> tracker = [[GAI sharedInstance] defaultTracker];
+//    [tracker set:kGAISessionControl value:@"stop"];
+//    [tracker set:kGAIScreenName value:@"Leaving"];
+//    [tracker send:[[GAIDictionaryBuilder createAppView] build]];
     [[GAI sharedInstance] dispatch];
 }
 

@@ -10,13 +10,14 @@
 #import <CoreData/CoreData.h>
 #import <AddressBookUI/AddressBookUI.h>
 #import "MCPersonViewController.h"
+#import "MCTonightsBillTransfer.h"
 
 @class MCPeople;
 @class MCSharedBill;
 @class MCTwoLabelsTitleView;
 @class MCTableEmptyMessage;
 
-@interface MCEditTripViewController : UITableViewController <NSFetchedResultsControllerDelegate, UITextFieldDelegate, UIAlertViewDelegate, MCPersonViewChangeDelegate>
+@interface MCEditTripViewController : UITableViewController <NSFetchedResultsControllerDelegate, UITextFieldDelegate, UIAlertViewDelegate, MCPersonViewChangeDelegate, MCTonightsBillGet>
 {
     __weak IBOutlet UIButton *addressBookButton;    
     __weak IBOutlet UIButton *addPersonButton;
