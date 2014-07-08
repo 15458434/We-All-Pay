@@ -64,6 +64,16 @@
     [[cell rightLabel] setText:[[[MCStoreInterface defaultStoreInterface] proProduct] priceString]];
 }
 
+- (void)restorePreviousPurchasesFailed:(NSNotification *)notification
+{
+    if ([[[notification userInfo] valueForKey:@"status"] isEqualToString:@"Not restored"]) {
+        UIAlertView *restorePurchaseFailed;
+        NSString *restorePurchaseFailedString = NSLocalizedString(@"RESTORE_PURCHASE_FAILED", @"Nothing to restore");
+        restorePurchaseFailed = [[UIAlertView alloc] initWithTitle:restorePurchaseFailedString message:nil delegate:self cancelButtonTitle:@"Dismiss" otherButtonTitles:nil];
+        [restorePurchaseFailed show];
+    }
+}
+
 #pragma mark - Inherited froms super.
 
 - (id)initWithStyle:(UITableViewStyle)style
@@ -96,6 +106,7 @@
     
     [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(applyProVersion:) name:@"Apply pro version" object:[MCStoreInterface defaultStoreInterface]];
     [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(postProductPrice:) name:@"Product price" object:[MCStoreInterface defaultStoreInterface]];
+    [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(restorePreviousPurchasesFailed:) name:@"Restore previous purchases" object:[MCStoreInterface defaultStoreInterface]];
     
     // Set the current screen in Google Analytics
     id<GAITracker> tracker = [[GAI sharedInstance] defaultTracker];

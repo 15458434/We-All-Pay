@@ -42,8 +42,8 @@
 
 - (void)failedTransaction:(SKPaymentTransaction *)transaction
 {
-    NSLog(@"The sale went bad.");
     [[SKPaymentQueue defaultQueue] finishTransaction:transaction];
+    NSLog(@"The sale went bad: %@", [[transaction error] localizedDescription]);
 }
 
 - (void)restoreTransaction:(SKPaymentTransaction *)transaction
@@ -113,6 +113,8 @@
     for (SKPaymentTransaction *transaction in transactions) {
         switch (transaction.transactionState) {
                 // Call the appropriate custom method.
+            case SKPaymentTransactionStatePurchasing:
+                break;
             case SKPaymentTransactionStatePurchased:
                 [self completeTransaction:transaction];
                 break;
@@ -139,7 +141,11 @@
 
 - (void)paymentQueueRestoreCompletedTransactionsFinished:(SKPaymentQueue *)queue
 {
-    NSLog(@"paymentQueueRestoreCompletedTransactionsFinished");
+    NSLog(@"paymentQueueRestoreCompletedTransactionsFinished %d", [[queue transactions] count]);
+    if ([[queue transactions] count] == 0) {
+        NSLog(@"No previous purchases were restored.");
+        [[NSNotificationCenter defaultCenter] postNotificationName:@"Restore previous purchases" object:self userInfo:@{@"status" : @"Not restored"} ];
+    }
 }
 
 - (void)paymentQueue:(SKPaymentQueue *)queue updatedDownloads:(NSArray *)downloads
