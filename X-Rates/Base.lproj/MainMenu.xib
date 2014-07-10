@@ -58,7 +58,7 @@
                                     <action selector="orderFrontStandardAboutPanel:" target="-1" id="Exp-CZ-Vem"/>
                                 </connections>
                             </menuItem>
-                            <menuItem title="Tweet Thank You" id="aLS-l0-9HY">
+                            <menuItem title="Show gratitude" id="aLS-l0-9HY">
                                 <modifierMask key="keyEquivalentModifierMask"/>
                                 <connections>
                                     <action selector="tweetThankYouPressed:" target="Voe-Tx-rLC" id="oeH-FA-Yzf"/>
