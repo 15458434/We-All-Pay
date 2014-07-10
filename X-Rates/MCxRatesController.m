@@ -11,6 +11,7 @@
 @interface MCxRatesController ()
 {
     NSURLSession *_session;
+    NSURLSessionDataTask *_fetchXRatesDataTask;
 }
 
 @end
@@ -77,7 +78,11 @@
 #elif TARGET_OS_MAC
     // There is no networkActivityIndicator on Mac OS X
 #endif
-    NSURLSessionDataTask *dataTask = [ [self session] dataTaskWithURL:url completionHandler:^(NSData *data, NSURLResponse *response, NSError *error) {
+    if (_fetchXRatesDataTask) {
+        [_fetchXRatesDataTask cancel];
+        _fetchXRatesDataTask = nil;
+    }
+    _fetchXRatesDataTask = [ [self session] dataTaskWithURL:url completionHandler:^(NSData *data, NSURLResponse *response, NSError *error) {
 #if TARGET_OS_IPHONE
         [[UIApplication sharedApplication] setNetworkActivityIndicatorVisible:NO];
 #elif TARGET_OS_MAC
@@ -100,7 +105,12 @@
             NSLog(@"NSURLSessionDataTask error: %@", [error localizedDescription]);
         }
     }];
-    [dataTask resume];
+    [_fetchXRatesDataTask resume];
+}
+
+- (void)cancelAllRunningDataTasks
+{
+    
 }
 
 @end
