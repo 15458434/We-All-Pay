@@ -11,7 +11,7 @@
 
 @class MCxRatesController;
 
-@interface MCDataStorage : NSObject <NSTableViewDelegate>
+@interface MCDataStorage : NSViewController <NSTableViewDelegate>
 {
     __weak NSTextField *_originalAmountField;
     __weak NSTextField *_exchangeRateField;
@@ -29,11 +29,15 @@
 @property (weak) IBOutlet NSArrayController *sourceController;
 @property (weak) IBOutlet NSArrayController *destinationController;
 
+@property (weak) IBOutlet NSScrollView *sourceScrollView;
+@property (weak) IBOutlet NSScrollView *destinationScrollView;
 
 @property (weak) IBOutlet NSTextField *originalAmountField;
 @property (weak) IBOutlet NSTextField *convertedAmountField;
 @property (weak) IBOutlet NSTextField *exchangeRateField;
 
 - (IBAction)reverseConversion:(id)sender;
+- (IBAction)refreshCurrentExchangeRateValue:(id)sender;
+
 
 @end

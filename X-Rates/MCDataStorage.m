@@ -23,6 +23,11 @@
     [self getXRate];
 }
 
+- (IBAction)refreshCurrentExchangeRateValue:(id)sender
+{
+    [self getXRate];
+}
+
 #pragma mark - New in this class.
 
 - (void)getXRate
@@ -40,6 +45,7 @@
         if (_exchangeRate) {
             dispatch_async(dispatch_get_main_queue(), ^{
                 [self setDestinationAmount:@([_sourceAmount doubleValue] * [_exchangeRate doubleValue])];
+                NSLog(@"Refetch done.");
             });
         }
     }];
@@ -55,6 +61,17 @@
     self.sourceCurrencies = [MCxRatesController getAllCurrencies];
     self.destinationCurrencies = [MCxRatesController getAllCurrencies];
     [self setSourceAmount:@1.0];
+    
+    NSLayoutConstraint *left= [NSLayoutConstraint constraintWithItem:_sourceScrollView attribute:NSLayoutAttributeCenterX relatedBy:NSLayoutRelationEqual toItem:_originalAmountField attribute:NSLayoutAttributeCenterX multiplier:1.0 constant:0.0];
+    NSLayoutConstraint *right = [NSLayoutConstraint constraintWithItem:_destinationScrollView attribute:NSLayoutAttributeCenterX relatedBy:NSLayoutRelationEqual toItem:_convertedAmountField attribute:NSLayoutAttributeCenterX multiplier:1.0 constant:0.0];
+    [[self view] addConstraints:@[left, right]];
+}
+
+- (void)loadView
+{
+    [super loadView];
+    
+    // Constraint for alignment of the sourceAmountField and destinationField to the center of the sourceScrollView and destinationScrollView.
 }
 
 #pragma mark - NSTableViewDelegate
