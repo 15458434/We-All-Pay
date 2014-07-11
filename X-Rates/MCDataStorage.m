@@ -11,14 +11,27 @@
 #import "MCxRatesController+X_RatesAddOn.h"
 #import "MCCurrency.h"
 
+typedef NS_ENUM(NSUInteger, MCLeftRightSwitched){
+    leftIsLeft,
+    leftIsRight
+};
+
 @implementation MCDataStorage
+{
+    MCLeftRightSwitched whereIsLeft;
+}
 
 #pragma mark - Actions
 
 - (IBAction)reverseConversion:(id)sender
 {
-    NSUInteger sourceSelectionIndex = [_sourceController selectionIndex];
-    NSUInteger destinationSelectionIndex = [_destinationController selectionIndex];
+//    NSUInteger sourceSelectionIndex = [_sourceController selectionIndex];
+//    NSUInteger destinationSelectionIndex = [_destinationController selectionIndex];
+    
+    MCCurrency *selectedSourceCurrency = [[_sourceController selectedObjects] firstObject];
+    MCCurrency *selectedDestinationCurrency = [[_destinationController selectedObjects] firstObject];
+    
+    
     
     [self getXRate];
 }
@@ -62,6 +75,7 @@
     self.destinationCurrencies = [MCxRatesController getAllCurrencies];
     [self setSourceAmount:@1.0];
     
+    // LayoutConstraints for the source and destination currency amount.
     NSLayoutConstraint *left= [NSLayoutConstraint constraintWithItem:_sourceScrollView attribute:NSLayoutAttributeCenterX relatedBy:NSLayoutRelationEqual toItem:_originalAmountField attribute:NSLayoutAttributeCenterX multiplier:1.0 constant:0.0];
     NSLayoutConstraint *right = [NSLayoutConstraint constraintWithItem:_destinationScrollView attribute:NSLayoutAttributeCenterX relatedBy:NSLayoutRelationEqual toItem:_convertedAmountField attribute:NSLayoutAttributeCenterX multiplier:1.0 constant:0.0];
     [[self view] addConstraints:@[left, right]];

@@ -4,6 +4,11 @@
 <dict>
 	<key>SchemeUserState</key>
 	<dict>
+		<key>Test.xcscheme</key>
+		<dict>
+			<key>orderHint</key>
+			<integer>2</integer>
+		</dict>
 		<key>We all pay for Mac.xcscheme</key>
 		<dict>
 			<key>orderHint</key>
@@ -93,6 +98,16 @@
 			<true/>
 		</dict>
 		<key>3899FA001957130400DE08C6</key>
+		<dict>
+			<key>primary</key>
+			<true/>
+		</dict>
+		<key>38AD6E5D196FE90E000D21C9</key>
+		<dict>
+			<key>primary</key>
+			<true/>
+		</dict>
+		<key>38AD6E7A196FE90F000D21C9</key>
 		<dict>
 			<key>primary</key>
 			<true/>

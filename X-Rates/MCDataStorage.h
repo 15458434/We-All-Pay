@@ -31,6 +31,8 @@
 
 @property (weak) IBOutlet NSScrollView *sourceScrollView;
 @property (weak) IBOutlet NSScrollView *destinationScrollView;
+@property (weak) IBOutlet NSTableView *sourceTableView;
+@property (weak) IBOutlet NSTableView *destinationTableView;
 
 @property (weak) IBOutlet NSTextField *originalAmountField;
 @property (weak) IBOutlet NSTextField *convertedAmountField;
