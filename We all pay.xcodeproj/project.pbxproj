@@ -911,7 +911,6 @@
 			isa = PBXGroup;
 			children = (
 				38FE87F8195722D90008EE74 /* Model */,
-				38FE87F21957216F0008EE74 /* viewController */,
 				38FE87D3195721670008EE74 /* MCAppDelegate.h */,
 				38FE87D4195721670008EE74 /* MCAppDelegate.m */,
 				38FE87D6195721670008EE74 /* MainMenu.xib */,
@@ -949,13 +948,6 @@
 				38FE87E7195721670008EE74 /* InfoPlist.strings */,
 			);
 			name = "Supporting Files";
-			sourceTree = "<group>";
-		};
-		38FE87F21957216F0008EE74 /* viewController */ = {
-			isa = PBXGroup;
-			children = (
-			);
-			name = viewController;
 			sourceTree = "<group>";
 		};
 		38FE87F8195722D90008EE74 /* Model */ = {
