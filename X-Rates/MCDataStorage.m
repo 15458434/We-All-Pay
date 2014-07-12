@@ -99,10 +99,9 @@ typedef NS_ENUM(BOOL, MCReversing) {
 
 - (void)tableViewSelectionDidChange:(NSNotification *)aNotification
 {
+    // If Reverse is pressed don't do anything. 
     if (reversing == isNotReversing) {
         [self getXRate];
-    } else {
-        NSLog(@"Not doing anything.");
     }
 }
 

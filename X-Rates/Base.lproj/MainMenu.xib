@@ -386,6 +386,23 @@
                         </items>
                     </menu>
                 </menuItem>
+                <menuItem title="Currency" id="XPf-EA-wc7">
+                    <modifierMask key="keyEquivalentModifierMask"/>
+                    <menu key="submenu" title="Currency" id="Oy0-3P-8v0">
+                        <items>
+                            <menuItem title="Reverse conversion" keyEquivalent="r" id="5Cz-Qd-U9z">
+                                <connections>
+                                    <action selector="reverseConversion:" target="dX5-ZC-kzm" id="q3F-Uh-JeN"/>
+                                </connections>
+                            </menuItem>
+                            <menuItem title="Refresh exchange rate" keyEquivalent="R" id="6VF-cq-y5d">
+                                <connections>
+                                    <action selector="refreshCurrentExchangeRateValue:" target="dX5-ZC-kzm" id="JMq-7J-ioB"/>
+                                </connections>
+                            </menuItem>
+                        </items>
+                    </menu>
+                </menuItem>
                 <menuItem title="Format" id="jxT-CU-nIS">
                     <modifierMask key="keyEquivalentModifierMask"/>
                     <menu key="submenu" title="Format" id="GEO-Iw-cKr">
