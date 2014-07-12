@@ -11,29 +11,34 @@
 #import "MCxRatesController+X_RatesAddOn.h"
 #import "MCCurrency.h"
 
-typedef NS_ENUM(NSUInteger, MCLeftRightSwitched){
-    leftIsLeft,
-    leftIsRight
+typedef NS_ENUM(BOOL, MCReversing) {
+    isNotReversing,
+    isReversing
 };
 
 @implementation MCDataStorage
 {
-    MCLeftRightSwitched whereIsLeft;
+    MCReversing reversing;
 }
 
 #pragma mark - Actions
 
 - (IBAction)reverseConversion:(id)sender
 {
-//    NSUInteger sourceSelectionIndex = [_sourceController selectionIndex];
-//    NSUInteger destinationSelectionIndex = [_destinationController selectionIndex];
+    reversing = isReversing;
     
     MCCurrency *selectedSourceCurrency = [[_sourceController selectedObjects] firstObject];
     MCCurrency *selectedDestinationCurrency = [[_destinationController selectedObjects] firstObject];
+    [_sourceController setSelectedObjects:@[selectedDestinationCurrency]];
+    [_destinationController setSelectedObjects:@[selectedSourceCurrency]];
     
-    
+    NSInteger selectedRowSourceCurrency = [_sourceTableView selectedRow];
+    NSInteger selectedRowDestinationCurrency = [_destinationTableView selectedRow];
+    [_sourceTableView scrollRowToVisible:selectedRowSourceCurrency];
+    [_destinationTableView scrollRowToVisible:selectedRowDestinationCurrency];
     
     [self getXRate];
+    reversing = isNotReversing;
 }
 
 - (IBAction)refreshCurrentExchangeRateValue:(id)sender
@@ -70,6 +75,8 @@ typedef NS_ENUM(NSUInteger, MCLeftRightSwitched){
 {
     [super awakeFromNib];
     
+    reversing = isNotReversing;
+    
     // Don't use instance variables.
     self.sourceCurrencies = [MCxRatesController getAllCurrencies];
     self.destinationCurrencies = [MCxRatesController getAllCurrencies];
@@ -92,7 +99,11 @@ typedef NS_ENUM(NSUInteger, MCLeftRightSwitched){
 
 - (void)tableViewSelectionDidChange:(NSNotification *)aNotification
 {
-    [self getXRate];
+    if (reversing == isNotReversing) {
+        [self getXRate];
+    } else {
+        NSLog(@"Not doing anything.");
+    }
 }
 
 #pragma mark - NSTextFieldDelegate

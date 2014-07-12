@@ -10,4 +10,28 @@
 
 @implementation MCCurrency
 
+#pragma mark - Inherited from super
+
+- (BOOL)isEqual:(id)object
+{
+    if (self == object) {
+        return YES;
+    }
+    
+    if (![object isKindOfClass:[MCCurrency class]]) {
+        return NO;
+    }
+    
+    if (![_currencyISOCode isEqualToString:[object currencyISOCode]]) {
+        return NO;
+    }
+    
+    return YES;
+}
+
+- (NSUInteger)hash
+{
+    return [_currencyISOCode hash];
+}
+
 @end
