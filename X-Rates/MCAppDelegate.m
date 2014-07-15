@@ -7,6 +7,7 @@
 //
 
 #import "MCAppDelegate.h"
+#import "Countly.h"
 
 @implementation MCAppDelegate
 
@@ -35,7 +36,7 @@
 
 - (void)applicationDidFinishLaunching:(NSNotification *)aNotification
 {
-    
+    [[Countly sharedInstance] startOnCloudWithAppKey:@"b82580f508600a702d0eec03adb26319a8c2c1c9"];
 }
 
 #pragma mark - NSSharedServicesDelegate
