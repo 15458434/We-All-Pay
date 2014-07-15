@@ -963,7 +963,11 @@
                                         <color key="backgroundColor" name="textBackgroundColor" catalog="System" colorSpace="catalog"/>
                                     </textFieldCell>
                                     <connections>
-                                        <binding destination="dX5-ZC-kzm" name="value" keyPath="sourceAmount" id="r0Q-TV-QPl"/>
+                                        <binding destination="dX5-ZC-kzm" name="value" keyPath="sourceAmount" id="xUS-YH-n6v">
+                                            <dictionary key="options">
+                                                <bool key="NSContinuouslyUpdatesValue" value="YES"/>
+                                            </dictionary>
+                                        </binding>
                                         <outlet property="delegate" destination="dX5-ZC-kzm" id="bf0-ct-nJI"/>
                                     </connections>
                                 </textField>

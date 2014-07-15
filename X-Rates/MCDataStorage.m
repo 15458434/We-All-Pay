@@ -107,7 +107,7 @@ typedef NS_ENUM(BOOL, MCReversing) {
 
 #pragma mark - NSTextFieldDelegate
 
-- (void)controlTextDidEndEditing:(NSNotification *)notification
+- (void)controlTextDidChange:(NSNotification *)notification
 {
     if([notification object] == _originalAmountField)
     {
