@@ -15,6 +15,7 @@
 + (NSMutableArray *)getAllCurrencies
 {
     NSArray *isoCodes = [MCxRatesController getAvailableCurrenciesISOCodesOrderedOnCurrencyName];
+    NSLog(@"%lu", isoCodes.count);
     NSDictionary *currencyDictionary = [MCxRatesController getCurrencyDictionary];
     NSMutableArray *currencies = [NSMutableArray new];
     for (NSString *isoCode in isoCodes) {

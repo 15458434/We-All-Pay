@@ -30,7 +30,7 @@
 - (IBAction)tweetAboutUsPressed:(id)sender
 {
     SLComposeViewController *twitterComposer= [SLComposeViewController composeViewControllerForServiceType:SLServiceTypeTwitter];
-    [twitterComposer setInitialText:@"@MarkCornelisse Thank you for creating We all pay. #ios #app"];
+    [twitterComposer setInitialText:@".@MarkCornelisse Thank you for creating We all pay. #ios #app"];
     [twitterComposer addURL:[NSURL URLWithString:@"https://itunes.apple.com/us/app/we-all-pay/id642135963?ls=1&mt=8"]];
     [self presentViewController:twitterComposer animated:YES completion:nil];
 }
