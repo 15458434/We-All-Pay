@@ -2,6 +2,167 @@
 <!DOCTYPE plist PUBLIC "-//Apple//DTD PLIST 1.0//EN" "http://www.apple.com/DTDs/PropertyList-1.0.dtd">
 <plist version="1.0">
 <dict>
+	<key>ZWD</key>
+	<dict>
+		<key>name</key>
+		<string>Zimbabwe dollar</string>
+		<key>type</key>
+		<string>currency</string>
+	</dict>
+	<key>XUA</key>
+	<dict>
+		<key>name</key>
+		<string>ADB Unit of Account</string>
+		<key>type</key>
+		<string>currency</string>
+	</dict>
+	<key>XSU</key>
+	<dict>
+		<key>name</key>
+		<string>SUCRE</string>
+		<key>type</key>
+		<string>currency</string>
+	</dict>
+	<key>XPT</key>
+	<dict>
+		<key>name</key>
+		<string>Platinum</string>
+		<key>type</key>
+		<string>one troy ounce</string>
+	</dict>
+	<key>XFU</key>
+	<dict>
+		<key>name</key>
+		<string>UIC franc</string>
+		<key>type</key>
+		<string>special settlement currency</string>
+	</dict>
+	<key>XDR</key>
+	<dict>
+		<key>name</key>
+		<string>Special drawing rights</string>
+		<key>type</key>
+		<string>foreing exchange reserve asset</string>
+	</dict>
+	<key>XBD</key>
+	<dict>
+		<key>name</key>
+		<string>Europen Unit of Account 17</string>
+		<key>type</key>
+		<string>bond market unit</string>
+	</dict>
+	<key>XBC</key>
+	<dict>
+		<key>name</key>
+		<string>European Unit of Account 9</string>
+		<key>type</key>
+		<string>bond market unit</string>
+	</dict>
+	<key>XBB</key>
+	<dict>
+		<key>name</key>
+		<string>Europen Monetary Unit</string>
+		<key>type</key>
+		<string>bond market unit</string>
+	</dict>
+	<key>XBA</key>
+	<dict>
+		<key>name</key>
+		<string>European Composite Unit</string>
+		<key>type</key>
+		<string>bond market unit</string>
+	</dict>
+	<key>XAU</key>
+	<dict>
+		<key>name</key>
+		<string>Gold</string>
+		<key>type</key>
+		<string>one troy ounce</string>
+	</dict>
+	<key>XAG</key>
+	<dict>
+		<key>name</key>
+		<string>Silver</string>
+		<key>type</key>
+		<string>one troy ounce</string>
+	</dict>
+	<key>UYI</key>
+	<dict>
+		<key>name</key>
+		<string>Uruguay Peso en Unidades</string>
+		<key>type</key>
+		<string>funds code</string>
+	</dict>
+	<key>USS</key>
+	<dict>
+		<key>name</key>
+		<string>United States dollar</string>
+		<key>type</key>
+		<string>funds code</string>
+	</dict>
+	<key>USN</key>
+	<dict>
+		<key>name</key>
+		<string>United States dollar</string>
+		<key>type</key>
+		<string>funds code</string>
+	</dict>
+	<key>MXV</key>
+	<dict>
+		<key>name</key>
+		<string>Mexican Unidad de Inversion</string>
+		<key>type</key>
+		<string>funds code</string>
+	</dict>
+	<key>COU</key>
+	<dict>
+		<key>name</key>
+		<string>Unidad de Valor Real</string>
+		<key>type</key>
+		<string>funds code</string>
+	</dict>
+	<key>CLF</key>
+	<dict>
+		<key>name</key>
+		<string>Unidad de Fomento</string>
+		<key>type</key>
+		<string>funds code</string>
+	</dict>
+	<key>CHW</key>
+	<dict>
+		<key>name</key>
+		<string>WIR Franc</string>
+		<key>type</key>
+		<string>complementary currency</string>
+	</dict>
+	<key>BOV</key>
+	<dict>
+		<key>name</key>
+		<string>Bolivian Mvdol</string>
+		<key>type</key>
+		<string>funds code</string>
+	</dict>
+	<key>BYR</key>
+	<dict>
+		<key>name</key>
+		<string>Belarusian ruble</string>
+		<key>type</key>
+		<string>currency</string>
+	</dict>
+	<key>CHE</key>
+	<dict>
+		<key>name</key>
+		<string>WIR Euro</string>
+		<key>type</key>
+		<string>complementary currency</string>
+	</dict>
+	<key>AZN</key>
+	<dict>
+		<key>name</key>
+		<string>Azerbaijani manat</string>
+		<key>type</key>
+		<string>currency</string>
+	</dict>
 	<key>ZMW</key>
 	<dict>
 		<key>name</key>
