@@ -28,7 +28,7 @@
 {
     NSSharingService *service = [NSSharingService sharingServiceNamed:NSSharingServiceNamePostOnTwitter];
     [service setDelegate:self];
-    NSString *tweet = @"@MarkCornelisse Thank you for creating X-Rates. #osx #app";
+    NSString *tweet = @".@MarkCornelisse Thank you for creating X-Rates. #osx #app";
     [service performWithItems:@[tweet]];
 }
 
