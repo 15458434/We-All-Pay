@@ -333,6 +333,7 @@
 		389C2F521933916B00BB9F3E /* WeAllPayStore.xcmappingmodel */ = {isa = PBXFileReference; lastKnownFileType = wrapper.xcmappingmodel; path = WeAllPayStore.xcmappingmodel; sourceTree = "<group>"; };
 		389C2F54193391E300BB9F3E /* MCPaymentPresenceEntityMigrationPolicy.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = MCPaymentPresenceEntityMigrationPolicy.h; path = DataStore/MCPaymentPresenceEntityMigrationPolicy.h; sourceTree = "<group>"; };
 		389C2F55193391E300BB9F3E /* MCPaymentPresenceEntityMigrationPolicy.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = MCPaymentPresenceEntityMigrationPolicy.m; path = DataStore/MCPaymentPresenceEntityMigrationPolicy.m; sourceTree = "<group>"; };
+		389E2CBA1977162600729F61 /* CoreData.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = CoreData.framework; path = Platforms/MacOSX.platform/Developer/SDKs/MacOSX10.9.sdk/System/Library/Frameworks/CoreData.framework; sourceTree = DEVELOPER_DIR; };
 		389E92621889E5A60005F063 /* en */ = {isa = PBXFileReference; fileEncoding = 10; lastKnownFileType = text.plist.strings; name = en; path = "en.lproj/Main-Iphone.strings"; sourceTree = "<group>"; };
 		389E92631889E5A60005F063 /* en */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = en; path = en.lproj/MCTableEmptyMessage.strings; sourceTree = "<group>"; };
 		389E92641889E5A60005F063 /* en */ = {isa = PBXFileReference; fileEncoding = 10; lastKnownFileType = text.plist.strings; lineEnding = 0; name = en; path = en.lproj/Localizable.strings; sourceTree = "<group>"; };
@@ -595,6 +596,7 @@
 		38572AD5169D437B00969C62 /* Frameworks */ = {
 			isa = PBXGroup;
 			children = (
+				389E2CBA1977162600729F61 /* CoreData.framework */,
 				3899F9DF1955D47100DE08C6 /* Cocoa.framework */,
 				3899F9DD1955D46600DE08C6 /* AppKit.framework */,
 				3829C61B192628C100DE91D4 /* iOS */,

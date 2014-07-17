@@ -54,12 +54,7 @@ typedef NS_ENUM(BOOL, MCReversing) {
     NSString *sourceCurrencyISOCode = [[[_sourceController selectedObjects] firstObject] valueForKeyPath:@"currencyISOCode"];
     NSString *destinationCurrencyISOCode = [[[_destinationController selectedObjects] firstObject] valueForKey:@"currencyISOCode"];
     [_xRatesController getExchangeRateFrom:sourceCurrencyISOCode to:destinationCurrencyISOCode withCompletionHandler:^(NSDictionary *exchangeRateResult) {
-        NSNumberFormatter *numberFormatter = [NSNumberFormatter new];
-        NSString *localeIdentifier = [exchangeRateResult valueForKeyPath:@"query.lang"];
-        [numberFormatter setLocale:[NSLocale localeWithLocaleIdentifier:localeIdentifier]];
-        [numberFormatter setNumberStyle:NSNumberFormatterDecimalStyle];
-        [self setExchangeRate:[numberFormatter numberFromString:[exchangeRateResult valueForKeyPath:@"query.results.row.rate"]]];
-        //        self.exchangeRate = [exchangeRateResult valueForKeyPath:@"query.results.row.rate"];
+        [self setExchangeRate:[exchangeRateResult objectForKey:MCExchangeRate]];
         if (_exchangeRate) {
             dispatch_async(dispatch_get_main_queue(), ^{
                 [self setDestinationAmount:@([_sourceAmount doubleValue] * [_exchangeRate doubleValue])];

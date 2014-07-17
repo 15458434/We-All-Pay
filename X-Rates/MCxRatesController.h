@@ -8,6 +8,20 @@
 
 @import Foundation;
 
+// fetchedResult Dictionary keys
+extern NSString * const MCExchangeRate;
+extern NSString * const MCFromCountryISOCode;
+extern NSString * const MCToCountryISOCode;
+extern NSString * const MCSource;
+
+extern NSUInteger const MCCurrencyTypeCurrency;
+extern NSUInteger const MCCurrencyTypeFundsCode;
+extern NSUInteger const MCCurrencyTypeReverseAsset;
+extern NSUInteger const MCCurrencyTypeCrypto;
+extern NSUInteger const MCCurrencyTypeOneTroyOunce;
+extern NSUInteger const MCCurrencyTypeBondMarketUnit;
+extern NSUInteger const MCCurrencyTypeComplementaryCurrency;
+
 @protocol MCxRatesReceiverProtocol <NSObject>
 
 - (void)postExchangeRate:(NSDictionary *)exchangeRateDictionary;
