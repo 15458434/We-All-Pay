@@ -28,7 +28,7 @@
                 <outlet property="sourceController" destination="LS5-be-Lkv" id="rNf-6y-0yO"/>
                 <outlet property="sourceScrollView" destination="zA5-q3-iiW" id="QmL-Me-mjj"/>
                 <outlet property="sourceTableView" destination="L80-AB-JdV" id="ReR-ey-0Mg"/>
-                <outlet property="view" destination="EiT-Mj-1SZ" id="Ril-qX-0Uq"/>
+                <outlet property="view" destination="EiT-Mj-1SZ" id="mEm-Oa-Jqd"/>
             </connections>
         </customObject>
         <arrayController id="LS5-be-Lkv" userLabel="Source Array Controller">

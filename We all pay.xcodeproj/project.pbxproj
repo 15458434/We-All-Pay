@@ -98,6 +98,7 @@
 		3899D3F8194F453D00893323 /* MCStoreInterface.m in Sources */ = {isa = PBXBuildFile; fileRef = 3899D3F7194F453D00893323 /* MCStoreInterface.m */; };
 		389C2F531933916B00BB9F3E /* WeAllPayStore.xcmappingmodel in Sources */ = {isa = PBXBuildFile; fileRef = 389C2F521933916B00BB9F3E /* WeAllPayStore.xcmappingmodel */; };
 		389C2F56193391E300BB9F3E /* MCPaymentPresenceEntityMigrationPolicy.m in Sources */ = {isa = PBXBuildFile; fileRef = 389C2F55193391E300BB9F3E /* MCPaymentPresenceEntityMigrationPolicy.m */; };
+		389E2D0019792D7600729F61 /* MCNetworkTools.m in Sources */ = {isa = PBXBuildFile; fileRef = 389E2CFF19792D7600729F61 /* MCNetworkTools.m */; };
 		38A4ACEC1975625600C0636E /* Countly_OpenUDID.m in Sources */ = {isa = PBXBuildFile; fileRef = 38A4ACE21975625600C0636E /* Countly_OpenUDID.m */; settings = {COMPILER_FLAGS = "-fno-objc-arc"; }; };
 		38A4ACED1975625600C0636E /* Countly.m in Sources */ = {isa = PBXBuildFile; fileRef = 38A4ACE41975625600C0636E /* Countly.m */; settings = {COMPILER_FLAGS = "-fno-objc-arc"; }; };
 		38A4ACEE1975625600C0636E /* Countly.podspec in Resources */ = {isa = PBXBuildFile; fileRef = 38A4ACE51975625600C0636E /* Countly.podspec */; };
@@ -334,6 +335,8 @@
 		389C2F54193391E300BB9F3E /* MCPaymentPresenceEntityMigrationPolicy.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = MCPaymentPresenceEntityMigrationPolicy.h; path = DataStore/MCPaymentPresenceEntityMigrationPolicy.h; sourceTree = "<group>"; };
 		389C2F55193391E300BB9F3E /* MCPaymentPresenceEntityMigrationPolicy.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = MCPaymentPresenceEntityMigrationPolicy.m; path = DataStore/MCPaymentPresenceEntityMigrationPolicy.m; sourceTree = "<group>"; };
 		389E2CBA1977162600729F61 /* CoreData.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = CoreData.framework; path = Platforms/MacOSX.platform/Developer/SDKs/MacOSX10.9.sdk/System/Library/Frameworks/CoreData.framework; sourceTree = DEVELOPER_DIR; };
+		389E2CFE19792D7600729F61 /* MCNetworkTools.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = MCNetworkTools.h; path = MC/MCNetworkTools.h; sourceTree = "<group>"; };
+		389E2CFF19792D7600729F61 /* MCNetworkTools.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = MCNetworkTools.m; path = MC/MCNetworkTools.m; sourceTree = "<group>"; };
 		389E92621889E5A60005F063 /* en */ = {isa = PBXFileReference; fileEncoding = 10; lastKnownFileType = text.plist.strings; name = en; path = "en.lproj/Main-Iphone.strings"; sourceTree = "<group>"; };
 		389E92631889E5A60005F063 /* en */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = en; path = en.lproj/MCTableEmptyMessage.strings; sourceTree = "<group>"; };
 		389E92641889E5A60005F063 /* en */ = {isa = PBXFileReference; fileEncoding = 10; lastKnownFileType = text.plist.strings; lineEnding = 0; name = en; path = en.lproj/Localizable.strings; sourceTree = "<group>"; };
@@ -786,6 +789,15 @@
 			name = "In-App Purchase";
 			sourceTree = "<group>";
 		};
+		389E2CF719792C1E00729F61 /* MC SDK */ = {
+			isa = PBXGroup;
+			children = (
+				389E2CFE19792D7600729F61 /* MCNetworkTools.h */,
+				389E2CFF19792D7600729F61 /* MCNetworkTools.m */,
+			);
+			name = "MC SDK";
+			sourceTree = "<group>";
+		};
 		38A4ACE01975624100C0636E /* Countly */ = {
 			isa = PBXGroup;
 			children = (
@@ -946,6 +958,7 @@
 		38FE87C7195721670008EE74 /* X-Rates */ = {
 			isa = PBXGroup;
 			children = (
+				389E2CF719792C1E00729F61 /* MC SDK */,
 				38A4ACE01975624100C0636E /* Countly */,
 				38FE87F8195722D90008EE74 /* Model */,
 				38FE87D3195721670008EE74 /* MCAppDelegate.h */,
@@ -1287,6 +1300,7 @@
 				38A4ACEF1975625600C0636E /* Countly.xcdatamodeld in Sources */,
 				38974AFA195E8C4B00BBEA9C /* MCxRatesController+X_RatesAddOn.m in Sources */,
 				38974AFD195E8E9900BBEA9C /* MCDataStorage.m in Sources */,
+				389E2D0019792D7600729F61 /* MCNetworkTools.m in Sources */,
 				38A4ACED1975625600C0636E /* Countly.m in Sources */,
 				38A4ACF01975625600C0636E /* CountlyDB.m in Sources */,
 				38FE87D5195721670008EE74 /* MCAppDelegate.m in Sources */,

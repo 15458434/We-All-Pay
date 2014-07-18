@@ -7,6 +7,7 @@
 //
 
 #import "MCxRatesController.h"
+#import "MCNetworkTools.h"
 
 // fetchedResult Dictionary keys
 NSString * const MCExchangeRate = @"exchangeRate";
@@ -174,26 +175,31 @@ NSUInteger const MCCurrencyTypeSelection = MCCurrencyTypeCurrency | MCCurrencyTy
             if ([httpResp statusCode] == 200) {
                 NSError *jsonError;
                 NSDictionary *exchangeRateJSON = [NSJSONSerialization JSONObjectWithData:data options:NSJSONReadingAllowFragments error:&jsonError];
-                
-                NSNumberFormatter *numberFormatter = [NSNumberFormatter new];
-                NSString *localeIdentifier = [exchangeRateJSON valueForKeyPath:@"query.lang"];
-                [numberFormatter setLocale:[NSLocale localeWithLocaleIdentifier:localeIdentifier]];
-                [numberFormatter setNumberStyle:NSNumberFormatterDecimalStyle];
-                NSNumber *exchangeRate = [numberFormatter numberFromString:[exchangeRateJSON valueForKeyPath:@"query.results.row.rate"]];
-                NSDictionary *fetchedResult = @{MCExchangeRate: exchangeRate,
-                                                MCFromCountryISOCode: fromCountryISOCode,
-                                                MCToCountryISOCode: toCountryISOCode,
-                                                MCSource: @"YQL"};
-                if (completionBlock) {
-                    completionBlock(fetchedResult);
-                } else if (_xRatesReceiverDelegate) {
-                    [_xRatesReceiverDelegate postExchangeRate:fetchedResult];
+                if (jsonError) {
+                    NSAlert *jsonAlert = [NSAlert alertWithError:jsonError];
+                    [jsonAlert runModal];
+                } else {
+                    NSNumberFormatter *numberFormatter = [NSNumberFormatter new];
+                    NSString *localeIdentifier = [exchangeRateJSON valueForKeyPath:@"query.lang"];
+                    [numberFormatter setLocale:[NSLocale localeWithLocaleIdentifier:localeIdentifier]];
+                    [numberFormatter setNumberStyle:NSNumberFormatterDecimalStyle];
+                    NSNumber *exchangeRate = [numberFormatter numberFromString:[exchangeRateJSON valueForKeyPath:@"query.results.row.rate"]];
+                    NSDictionary *fetchedResult = @{MCExchangeRate: exchangeRate,
+                                                    MCFromCountryISOCode: fromCountryISOCode,
+                                                    MCToCountryISOCode: toCountryISOCode,
+                                                    MCSource: @"YQL"};
+                    if (completionBlock) {
+                        completionBlock(fetchedResult);
+                    } else if (_xRatesReceiverDelegate) {
+                        [_xRatesReceiverDelegate postExchangeRate:fetchedResult];
+                    }
                 }
             } else {
                 NSLog(@"http response error %ld", (long)[httpResp statusCode]);
             }
         } else {
-            NSLog(@"NSURLSessionDataTask error: %@", [error localizedDescription]);
+            NSAlert *alert = [NSAlert alertWithError:error];
+            [alert runModal];
         }
     }];
     [_fetchXRatesDataTask resume];
@@ -239,33 +245,40 @@ NSUInteger const MCCurrencyTypeSelection = MCCurrencyTypeCurrency | MCCurrencyTy
             if ([httpResp statusCode] == 200) {
                 NSError *jsonError;
                 NSDictionary *exchangeRateJSON = [NSJSONSerialization JSONObjectWithData:data options:NSJSONReadingAllowFragments error:&jsonError];
-//                NSNumber *avg24h = [exchangeRateJSON objectForKey:@"24h_avg"];
-//                NSNumber *ask = [exchangeRateJSON objectForKey:@"ask"];
-//                NSNumber *bid = [exchangeRateJSON objectForKey:@"bid"];
-                NSNumber *last = [exchangeRateJSON objectForKey:@"last"];
-//                NSString *timestampString = [exchangeRateJSON objectForKey:@"timestamp"];
-//                NSNumber *volume_btc = [exchangeRateJSON objectForKey:@"volume_btc"];
-//                NSNumber *volume_percent = [exchangeRateJSON objectForKey:@"volume_percent"];
-                NSNumber *exchangeRate;
-                if ([fromCountryISOCode isEqualToString:@"BTC"]) {
-                    exchangeRate = @([last doubleValue]);
-                } else if ([toCountryISOCode isEqualToString:@"BTC"]) {
-                    exchangeRate = @((double)1.0000 / [last doubleValue]);
+                if (jsonError) {
+                    NSAlert *jsonAlert = [NSAlert alertWithError:jsonError];
+                    [jsonAlert runModal];
+                } else {
+//                    NSNumber *avg24h = [exchangeRateJSON objectForKey:@"24h_avg"];
+//                    NSNumber *ask = [exchangeRateJSON objectForKey:@"ask"];
+//                    NSNumber *bid = [exchangeRateJSON objectForKey:@"bid"];
+                    NSNumber *last = [exchangeRateJSON objectForKey:@"last"];
+//                    NSString *timestampString = [exchangeRateJSON objectForKey:@"timestamp"];
+//                    NSNumber *volume_btc = [exchangeRateJSON objectForKey:@"volume_btc"];
+//                    NSNumber *volume_percent = [exchangeRateJSON objectForKey:@"volume_percent"];
+                    NSNumber *exchangeRate;
+                    if ([fromCountryISOCode isEqualToString:@"BTC"]) {
+                        exchangeRate = @([last doubleValue]);
+                    } else if ([toCountryISOCode isEqualToString:@"BTC"]) {
+                        exchangeRate = @((double)1.0000 / [last doubleValue]);
+                    }
+                    NSDictionary *fetchedResult = @{MCExchangeRate: exchangeRate,
+                                                    MCFromCountryISOCode: fromCountryISOCode,
+                                                    MCToCountryISOCode: toCountryISOCode,
+                                                    MCSource: @"BitcoinAverage"};
+                    if (completionBlock) {
+                        completionBlock(fetchedResult);
+                    } else if (_xRatesReceiverDelegate) {
+                        [_xRatesReceiverDelegate postExchangeRate:fetchedResult];
+                    }
                 }
-                NSDictionary *fetchedResult = @{MCExchangeRate: exchangeRate,
-                                                MCFromCountryISOCode: fromCountryISOCode,
-                                                MCToCountryISOCode: toCountryISOCode,
-                                                MCSource: @"BitcoinAverage"};
-                if (completionBlock) {
-                    completionBlock(fetchedResult);
-                } else if (_xRatesReceiverDelegate) {
-                    [_xRatesReceiverDelegate postExchangeRate:fetchedResult];
-                }
+
             } else {
                 NSLog(@"http response error %ld", (long)[httpResp statusCode]);
             }
         } else {
-            NSLog(@"NSURLSessionDataTask error: %@", [error localizedDescription]);
+            NSAlert *alert = [NSAlert alertWithError:error];
+            [alert runModal];
         }
     }];
     [_fetchXRatesDataTask resume];
@@ -275,10 +288,21 @@ NSUInteger const MCCurrencyTypeSelection = MCCurrencyTypeCurrency | MCCurrencyTy
 
 - (void)getExchangeRateFrom:(NSString *)fromCountryISOCode to:(NSString *)toCountryISOCode withCompletionHandler:(void (^)(NSDictionary *))completionBlock
 {
-    if ([fromCountryISOCode isEqualToString:@"BTC"] || [toCountryISOCode isEqualToString:@"BTC"]) {
-        [self getExchangeRateFromBitcoinAverage:fromCountryISOCode to:toCountryISOCode withCompletionHandler:completionBlock];
+    // Don't fetch if not two codes are applied.
+    if (toCountryISOCode == nil) {
+        return;
+    }
+    if (fromCountryISOCode == nil) {
+        return;
+    }
+    if (isInternetConnection()) {
+        if ([fromCountryISOCode isEqualToString:@"BTC"] || [toCountryISOCode isEqualToString:@"BTC"]) {
+            [self getExchangeRateFromBitcoinAverage:fromCountryISOCode to:toCountryISOCode withCompletionHandler:completionBlock];
+        } else {
+            [self getExchangeRateFromYahoo:fromCountryISOCode to:toCountryISOCode withCompletionHandler:completionBlock];
+        }
     } else {
-        [self getExchangeRateFromYahoo:fromCountryISOCode to:toCountryISOCode withCompletionHandler:completionBlock];
+
     }
 }
 

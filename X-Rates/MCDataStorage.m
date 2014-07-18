@@ -11,6 +11,8 @@
 #import "MCxRatesController+X_RatesAddOn.h"
 #import "MCCurrency.h"
 
+#import "MCNetworkTools.h"
+
 typedef NS_ENUM(BOOL, MCReversing) {
     isNotReversing,
     isReversing
@@ -50,18 +52,33 @@ typedef NS_ENUM(BOOL, MCReversing) {
 
 - (void)getXRate
 {
-    _xRatesController = [MCxRatesController new];
     NSString *sourceCurrencyISOCode = [[[_sourceController selectedObjects] firstObject] valueForKeyPath:@"currencyISOCode"];
     NSString *destinationCurrencyISOCode = [[[_destinationController selectedObjects] firstObject] valueForKey:@"currencyISOCode"];
-    [_xRatesController getExchangeRateFrom:sourceCurrencyISOCode to:destinationCurrencyISOCode withCompletionHandler:^(NSDictionary *exchangeRateResult) {
-        [self setExchangeRate:[exchangeRateResult objectForKey:MCExchangeRate]];
-        if (_exchangeRate) {
-            dispatch_async(dispatch_get_main_queue(), ^{
-                [self setDestinationAmount:@([_sourceAmount doubleValue] * [_exchangeRate doubleValue])];
-                NSLog(@"Refetch done.");
-            });
+    if (isInternetConnection()) {
+        _xRatesController = [MCxRatesController new];
+        [_xRatesController getExchangeRateFrom:sourceCurrencyISOCode to:destinationCurrencyISOCode withCompletionHandler:^(NSDictionary *exchangeRateResult) {
+            [self setExchangeRate:[exchangeRateResult objectForKey:MCExchangeRate]];
+            if (_exchangeRate) {
+                dispatch_async(dispatch_get_main_queue(), ^{
+                    [self setDestinationAmount:@([_sourceAmount doubleValue] * [_exchangeRate doubleValue])];
+                    NSLog(@"Refetch done.");
+                });
+            }
+        }];
+    } else {
+        if (sourceCurrencyISOCode == nil) {
+            return;
         }
-    }];
+        if (destinationCurrencyISOCode == nil) {
+            return;
+        }
+        NSError *error = [NSError errorWithDomain:@"com.greenhair" code:1 userInfo:@{NSLocalizedDescriptionKey: @"No internet connection."}];
+        NSAlert *alert = [NSAlert alertWithError:error];
+        [alert setDelegate:self];
+        [alert beginSheetModalForWindow:[[NSApplication sharedApplication] keyWindow] completionHandler:^(NSModalResponse returnCode) {
+            NSLog(@"Return code: %ld", (long)returnCode);
+        }];
+    }
 }
 
 #pragma mark - Inherited from super.
@@ -113,5 +130,9 @@ typedef NS_ENUM(BOOL, MCReversing) {
         [self setSourceAmount:@([_destinationAmount doubleValue] / [_exchangeRate doubleValue])];
     }
 }
+
+#pragma mark - NSAlertDelegate
+
+
 
 @end

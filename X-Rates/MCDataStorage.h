@@ -11,7 +11,7 @@
 
 @class MCxRatesController;
 
-@interface MCDataStorage : NSViewController <NSTableViewDelegate>
+@interface MCDataStorage : NSViewController <NSTableViewDelegate, NSAlertDelegate>
 {
     __weak NSTextField *_originalAmountField;
     __weak NSTextField *_exchangeRateField;
