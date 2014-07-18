@@ -8,7 +8,7 @@
 
 @import Foundation;
 
-@interface MCCurrency : NSObject
+@interface MCCurrency : NSObject <NSCoding>
 
 @property (readwrite) NSString *currencyName;
 @property (readwrite) NSString *currencySymbol;

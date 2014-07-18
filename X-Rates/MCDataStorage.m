@@ -18,6 +18,13 @@ typedef NS_ENUM(BOOL, MCReversing) {
     isReversing
 };
 
+// State Restoration Strings
+NSString * const MCStateRestoreSourceAmount = @"MCStateRestoreSourceAmount";
+NSString * const MCStateRestoreExchangeRate = @"MCStateRestoreExchangeRate";
+NSString * const MCStateRestoreDestinationAmount = @"MCStateRestoreDesinationAmount";
+NSString * const MCStateRestoreSourceCurrencyObject = @"MCStateRestoreSourceCurrencyObject";
+NSString * const MCStateRestoreDestinationCurrencyObject = @"MCStateRestoreDestinationCurrencyObject";
+
 @implementation MCDataStorage
 {
     MCReversing reversing;
@@ -90,9 +97,15 @@ typedef NS_ENUM(BOOL, MCReversing) {
     reversing = isNotReversing;
     
     // Don't use instance variables.
-    self.sourceCurrencies = [MCxRatesController getAllCurrencies];
-    self.destinationCurrencies = [MCxRatesController getAllCurrencies];
-    [self setSourceAmount:@1.0];
+    if (![self sourceCurrencies]) {
+        self.sourceCurrencies = [MCxRatesController getAllCurrencies];
+    }
+    if (![self destinationCurrencies]) {
+        self.destinationCurrencies = [MCxRatesController getAllCurrencies];
+    }
+    if (![self sourceAmount]) {
+        [self setSourceAmount:@1.0];
+    }
     
     // LayoutConstraints for the source and destination currency amount.
     NSLayoutConstraint *left= [NSLayoutConstraint constraintWithItem:_sourceScrollView attribute:NSLayoutAttributeCenterX relatedBy:NSLayoutRelationEqual toItem:_originalAmountField attribute:NSLayoutAttributeCenterX multiplier:1.0 constant:0.0];
@@ -131,8 +144,27 @@ typedef NS_ENUM(BOOL, MCReversing) {
     }
 }
 
-#pragma mark - NSAlertDelegate
+#pragma mark - NSWindowDelegate
 
+- (void)window:(NSWindow *)window didDecodeRestorableState:(NSCoder *)state
+{
+    NSLog(@"Yes, it worked.");
+    self.sourceCurrencies = [MCxRatesController getAllCurrencies];
+    self.destinationCurrencies = [MCxRatesController getAllCurrencies];
+    [self setSourceAmount:[state decodeObjectForKey:MCStateRestoreSourceAmount]];
+    [self setDestinationAmount:[state decodeObjectForKey:MCStateRestoreDestinationAmount]];
+    [[self sourceController] setSelectedObjects:[state decodeObjectForKey:MCStateRestoreSourceCurrencyObject]];
+    [[self destinationController] setSelectedObjects:[state decodeObjectForKey:MCStateRestoreDestinationCurrencyObject]];
+}
 
+- (void)window:(NSWindow *)window willEncodeRestorableState:(NSCoder *)state
+{
+    NSLog(@"Does this work?");
+    [state encodeObject:_sourceAmount forKey:MCStateRestoreSourceAmount];
+    [state encodeObject:_destinationAmount forKey:MCStateRestoreDestinationAmount];
+    [state encodeObject:[_sourceController selectedObjects] forKey:MCStateRestoreSourceCurrencyObject];
+    [state encodeObject:[_destinationController selectedObjects] forKey:MCStateRestoreDestinationCurrencyObject];
+    [state encodeObject:_exchangeRate forKey:MCExchangeRate];
+}
 
 @end
