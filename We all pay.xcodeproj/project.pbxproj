@@ -271,6 +271,7 @@
 		3876EF581840E86900C9546A /* MCCancelDoneTableViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = MCCancelDoneTableViewController.m; path = ../MCCancelDoneTableViewController.m; sourceTree = "<group>"; };
 		387759681924DBE50027A7F1 /* MCPaymentPresenceTableViewCell_iPhone.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = MCPaymentPresenceTableViewCell_iPhone.h; path = Views/iPhone/MCPaymentPresenceTableViewCell_iPhone.h; sourceTree = "<group>"; };
 		387759691924DBE50027A7F1 /* MCPaymentPresenceTableViewCell_iPhone.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = MCPaymentPresenceTableViewCell_iPhone.m; path = Views/iPhone/MCPaymentPresenceTableViewCell_iPhone.m; sourceTree = "<group>"; };
+		3879E78B19798F8B009E5D57 /* X-Rates.entitlements */ = {isa = PBXFileReference; lastKnownFileType = text.xml; path = "X-Rates.entitlements"; sourceTree = "<group>"; };
 		387D3A8E187053BA0060FAF8 /* nl */ = {isa = PBXFileReference; fileEncoding = 10; lastKnownFileType = text.plist.strings; name = nl; path = "nl.lproj/Main-Iphone.strings"; sourceTree = "<group>"; };
 		3886D3FB16B7A1CD00ECE64F /* AddressBook.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = AddressBook.framework; path = System/Library/Frameworks/AddressBook.framework; sourceTree = SDKROOT; };
 		3886D3FC16B7A1CD00ECE64F /* AddressBookUI.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = AddressBookUI.framework; path = System/Library/Frameworks/AddressBookUI.framework; sourceTree = SDKROOT; };
@@ -958,6 +959,7 @@
 		38FE87C7195721670008EE74 /* X-Rates */ = {
 			isa = PBXGroup;
 			children = (
+				3879E78B19798F8B009E5D57 /* X-Rates.entitlements */,
 				389E2CF719792C1E00729F61 /* MC SDK */,
 				38A4ACE01975624100C0636E /* Countly */,
 				38FE87F8195722D90008EE74 /* Model */,
@@ -1107,6 +1109,11 @@
 					};
 					38FE87C4195721660008EE74 = {
 						DevelopmentTeam = Z6JP26PUUY;
+						SystemCapabilities = {
+							com.apple.Sandbox = {
+								enabled = 1;
+							};
+						};
 					};
 					38FE87DE195721670008EE74 = {
 						TestTargetID = 38572AD1169D437B00969C62;
@@ -1627,7 +1634,8 @@
 				CLANG_WARN_ENUM_CONVERSION = YES;
 				CLANG_WARN_INT_CONVERSION = YES;
 				CLANG_WARN_OBJC_ROOT_CLASS = YES_ERROR;
-				CODE_SIGN_IDENTITY = "Developer ID Application";
+				CODE_SIGN_ENTITLEMENTS = "X-Rates/X-Rates.entitlements";
+				CODE_SIGN_IDENTITY = "Mac Developer";
 				"CODE_SIGN_IDENTITY[sdk=macosx*]" = "Mac Developer";
 				COMBINE_HIDPI_IMAGES = YES;
 				GCC_ENABLE_OBJC_EXCEPTIONS = YES;
@@ -1661,7 +1669,8 @@
 				CLANG_WARN_ENUM_CONVERSION = YES;
 				CLANG_WARN_INT_CONVERSION = YES;
 				CLANG_WARN_OBJC_ROOT_CLASS = YES_ERROR;
-				CODE_SIGN_IDENTITY = "Developer ID Application";
+				CODE_SIGN_ENTITLEMENTS = "X-Rates/X-Rates.entitlements";
+				CODE_SIGN_IDENTITY = "Mac Developer";
 				"CODE_SIGN_IDENTITY[sdk=macosx*]" = "Mac Developer: Mark Cornelisse (B9ZEEP43C6)";
 				COMBINE_HIDPI_IMAGES = YES;
 				DEBUG_INFORMATION_FORMAT = "dwarf-with-dsym";

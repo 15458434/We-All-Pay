@@ -110,7 +110,7 @@
 	<key>USN</key>
 	<dict>
 		<key>name</key>
-		<string>United States dollar</string>
+		<string>United States dollar (next day)</string>
 		<key>type</key>
 		<string>funds code</string>
 	</dict>
