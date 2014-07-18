@@ -81,7 +81,6 @@ NSString * const MCStateRestoreDestinationCurrencyObject = @"MCStateRestoreDesti
         }
         NSError *error = [NSError errorWithDomain:@"com.greenhair" code:1 userInfo:@{NSLocalizedDescriptionKey: @"No internet connection."}];
         NSAlert *alert = [NSAlert alertWithError:error];
-        [alert setDelegate:self];
         [alert beginSheetModalForWindow:[[NSApplication sharedApplication] keyWindow] completionHandler:^(NSModalResponse returnCode) {
             NSLog(@"Return code: %ld", (long)returnCode);
         }];
@@ -124,7 +123,11 @@ NSString * const MCStateRestoreDestinationCurrencyObject = @"MCStateRestoreDesti
 
 - (void)tableViewSelectionDidChange:(NSNotification *)aNotification
 {
-    // If Reverse is pressed don't do anything. 
+    // If Reverse is pressed don't do anything.
+    NSString *sourceName = [[[_sourceController selectedObjects] firstObject] currencyName];
+    NSString *destinationName = [[[_destinationController selectedObjects] firstObject] currencyName];
+    [self setSourceAmountLabel:sourceName];
+    [self setDestinationAmountlabel:destinationName];
     if (reversing == isNotReversing) {
         [self getXRate];
     }

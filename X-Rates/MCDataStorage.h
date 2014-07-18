@@ -26,6 +26,9 @@
 @property (readwrite) NSNumber *sourceAmount;
 @property (readwrite) NSNumber *destinationAmount;
 
+@property (readwrite) NSString *sourceAmountLabel;
+@property (readwrite) NSString *destinationAmountlabel;
+
 @property (weak) IBOutlet NSArrayController *sourceController;
 @property (weak) IBOutlet NSArrayController *destinationController;
 
