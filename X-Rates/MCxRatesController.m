@@ -176,8 +176,12 @@ NSUInteger const MCCurrencyTypeSelection = MCCurrencyTypeCurrency | MCCurrencyTy
                 NSError *jsonError;
                 NSDictionary *exchangeRateJSON = [NSJSONSerialization JSONObjectWithData:data options:NSJSONReadingAllowFragments error:&jsonError];
                 if (jsonError) {
+#if TARGET_OS_IPHONE
+                    NSLog(@"JSON Error: %@", [jsonError localizedDescription]);
+#elif TARGET_OS_MAC
                     NSAlert *jsonAlert = [NSAlert alertWithError:jsonError];
                     [jsonAlert runModal];
+#endif
                 } else {
                     NSNumberFormatter *numberFormatter = [NSNumberFormatter new];
                     NSString *localeIdentifier = [exchangeRateJSON valueForKeyPath:@"query.lang"];
@@ -246,8 +250,12 @@ NSUInteger const MCCurrencyTypeSelection = MCCurrencyTypeCurrency | MCCurrencyTy
                 NSError *jsonError;
                 NSDictionary *exchangeRateJSON = [NSJSONSerialization JSONObjectWithData:data options:NSJSONReadingAllowFragments error:&jsonError];
                 if (jsonError) {
+#if TARGET_OS_IPHONE
+                    NSLog(@"JSON Error: %@", [jsonError localizedDescription]);
+#elif TARGET_OS_MAC
                     NSAlert *jsonAlert = [NSAlert alertWithError:jsonError];
                     [jsonAlert runModal];
+#endif
                 } else {
 //                    NSNumber *avg24h = [exchangeRateJSON objectForKey:@"24h_avg"];
 //                    NSNumber *ask = [exchangeRateJSON objectForKey:@"ask"];
