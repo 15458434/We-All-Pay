@@ -25,6 +25,7 @@
         [currency setCurrencyName:[currencyDictionary valueForKeyPath:nameKeyPath]];
         [currency setCurrencySymbol:[MCxRatesController getSymbolForCurrencyISOCode:isoCode]];
         [currencies addObject:currency];
+//        NSLog(@"Currency Added: %@", [currency currencyName]);
     }
     return currencies;
 }

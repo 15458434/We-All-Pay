@@ -10,6 +10,7 @@
 
 #import "MCxRatesController+X_RatesAddOn.h"
 #import "MCCurrency.h"
+#import "Countly.h"
 
 #import "MCNetworkTools.h"
 
@@ -61,6 +62,17 @@ NSString * const MCStateRestoreDestinationCurrencyObject = @"MCStateRestoreDesti
 {
     NSString *sourceCurrencyISOCode = [[[_sourceController selectedObjects] firstObject] valueForKeyPath:@"currencyISOCode"];
     NSString *destinationCurrencyISOCode = [[[_destinationController selectedObjects] firstObject] valueForKey:@"currencyISOCode"];
+    if (sourceCurrencyISOCode == nil) {
+        return;
+    }
+    if (destinationCurrencyISOCode == nil) {
+        return;
+    }
+    // For conversion rate statistics.
+    NSDictionary *dictionary = @{@"fromCurrency": sourceCurrencyISOCode,
+                                 @"toCurrency": destinationCurrencyISOCode};
+    [[Countly sharedInstance] recordEvent:@"Get conversion rate" segmentation:dictionary count:1];
+    
     if (isInternetConnection()) {
         _xRatesController = [MCxRatesController new];
         [_xRatesController getExchangeRateFrom:sourceCurrencyISOCode to:destinationCurrencyISOCode withCompletionHandler:^(NSDictionary *exchangeRateResult) {
@@ -73,12 +85,6 @@ NSString * const MCStateRestoreDestinationCurrencyObject = @"MCStateRestoreDesti
             }
         }];
     } else {
-        if (sourceCurrencyISOCode == nil) {
-            return;
-        }
-        if (destinationCurrencyISOCode == nil) {
-            return;
-        }
         NSError *error = [NSError errorWithDomain:@"com.greenhair" code:1 userInfo:@{NSLocalizedDescriptionKey: @"No internet connection."}];
         NSAlert *alert = [NSAlert alertWithError:error];
         [alert beginSheetModalForWindow:[[NSApplication sharedApplication] keyWindow] completionHandler:^(NSModalResponse returnCode) {
@@ -96,15 +102,20 @@ NSString * const MCStateRestoreDestinationCurrencyObject = @"MCStateRestoreDesti
     reversing = isNotReversing;
     
     // Don't use instance variables.
-    if (![self sourceCurrencies]) {
-        self.sourceCurrencies = [MCxRatesController getAllCurrencies];
-    }
-    if (![self destinationCurrencies]) {
-        self.destinationCurrencies = [MCxRatesController getAllCurrencies];
-    }
-    if (![self sourceAmount]) {
-        [self setSourceAmount:@1.0];
-    }
+//    if (![self sourceCurrencies]) {
+//        self.sourceCurrencies = [MCxRatesController getAllCurrencies];
+//    }
+//    if (![self destinationCurrencies]) {
+//        self.destinationCurrencies = [MCxRatesController getAllCurrencies];
+//    }
+//    if (![self sourceAmount]) {
+//        [self setSourceAmount:@1.0];
+//    }
+    [self willChangeValueForKey:@"sourceCurrencies"];
+    _sourceCurrencies = [MCxRatesController getAllCurrencies];
+    [self didChangeValueForKey:@"sourceCurrencies"];
+    _destinationCurrencies = [MCxRatesController getAllCurrencies];
+    _sourceAmount = @1.0;
     
     // LayoutConstraints for the source and destination currency amount.
     NSLayoutConstraint *left= [NSLayoutConstraint constraintWithItem:_sourceScrollView attribute:NSLayoutAttributeCenterX relatedBy:NSLayoutRelationEqual toItem:_originalAmountField attribute:NSLayoutAttributeCenterX multiplier:1.0 constant:0.0];
@@ -117,6 +128,11 @@ NSString * const MCStateRestoreDestinationCurrencyObject = @"MCStateRestoreDesti
     [super loadView];
     
     // Constraint for alignment of the sourceAmountField and destinationField to the center of the sourceScrollView and destinationScrollView.
+}
+
+- (void)setNilValueForKey:(NSString *)key
+{
+    NSLog(@"Ik heb een fiets!");
 }
 
 #pragma mark - NSTableViewDelegate
@@ -139,10 +155,12 @@ NSString * const MCStateRestoreDestinationCurrencyObject = @"MCStateRestoreDesti
 {
     if([notification object] == _originalAmountField)
     {
+        [[Countly sharedInstance] recordEvent:@"Conversion Amount" segmentation:@{@"Amount Field Type": @"source amount"} count:1];
         [self setDestinationAmount:@(_sourceAmount.doubleValue * _exchangeRate.doubleValue)];
     }
     if([notification object] == _convertedAmountField)
     {
+        [[Countly sharedInstance] recordEvent:@"Conversion Amount" segmentation:@{@"Amount Field Type": @"destination amount"} count:1];
         [self setSourceAmount:@([_destinationAmount doubleValue] / [_exchangeRate doubleValue])];
     }
 }

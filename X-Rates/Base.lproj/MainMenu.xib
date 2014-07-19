@@ -301,7 +301,12 @@
                                             </textFieldCell>
                                             <tableColumnResizingMask key="resizingMask" resizeWithTable="YES" userResizable="YES"/>
                                             <connections>
-                                                <binding destination="LS5-be-Lkv" name="value" keyPath="arrangedObjects.currencySymbol" id="Us4-hb-ifO"/>
+                                                <binding destination="LS5-be-Lkv" name="value" keyPath="arrangedObjects.currencySymbol" id="XmT-8X-hvy">
+                                                    <dictionary key="options">
+                                                        <bool key="NSConditionallySetsEditable" value="NO"/>
+                                                        <string key="NSNullPlaceholder">&lt;broken&gt;</string>
+                                                    </dictionary>
+                                                </binding>
                                             </connections>
                                         </tableColumn>
                                     </tableColumns>
