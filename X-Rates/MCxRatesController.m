@@ -202,8 +202,11 @@ NSUInteger const MCCurrencyTypeSelection = MCCurrencyTypeCurrency | MCCurrencyTy
                 NSLog(@"http response error %ld", (long)[httpResp statusCode]);
             }
         } else {
+#if TARGET_OS_IPHONE
+#elif TARGET_OS_MAC
             NSAlert *alert = [NSAlert alertWithError:error];
             [alert runModal];
+#endif
         }
     }];
     [_fetchXRatesDataTask resume];
@@ -285,8 +288,11 @@ NSUInteger const MCCurrencyTypeSelection = MCCurrencyTypeCurrency | MCCurrencyTy
                 NSLog(@"http response error %ld", (long)[httpResp statusCode]);
             }
         } else {
+#if TARGET_OS_IPHONE
+#elif TARGET_OS_MAC
             NSAlert *alert = [NSAlert alertWithError:error];
             [alert runModal];
+#endif
         }
     }];
     [_fetchXRatesDataTask resume];

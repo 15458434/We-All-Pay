@@ -110,6 +110,7 @@
 		38AAFBA218EC406300CD3E12 /* MCSharedBillPeoplePresentTableViewController-iPad.m in Sources */ = {isa = PBXBuildFile; fileRef = 38AAFBA118EC406300CD3E12 /* MCSharedBillPeoplePresentTableViewController-iPad.m */; };
 		38AAFBA518EC529300CD3E12 /* MCSharedBillViewController_iPad.m in Sources */ = {isa = PBXBuildFile; fileRef = 38AAFBA418EC529300CD3E12 /* MCSharedBillViewController_iPad.m */; };
 		38AB487119531F760090457A /* UIView+MCAddons.m in Sources */ = {isa = PBXBuildFile; fileRef = 38AB487019531F760090457A /* UIView+MCAddons.m */; };
+		38AD59BC197D3DF000BBC797 /* MCNetworkTools.m in Sources */ = {isa = PBXBuildFile; fileRef = 389E2CFF19792D7600729F61 /* MCNetworkTools.m */; };
 		38C2BC9918F7F69A00233D24 /* MCWhoOwesWhoTableViewCell_iPad.m in Sources */ = {isa = PBXBuildFile; fileRef = 38C2BC9818F7F69A00233D24 /* MCWhoOwesWhoTableViewCell_iPad.m */; };
 		38C2BC9C18F7F6EB00233D24 /* MCSolutionOverViewTableViewCell_iPad.m in Sources */ = {isa = PBXBuildFile; fileRef = 38C2BC9B18F7F6EB00233D24 /* MCSolutionOverViewTableViewCell_iPad.m */; };
 		38C2BC9F18FBD89400233D24 /* MCAllTripsTableViewCell_iPad.m in Sources */ = {isa = PBXBuildFile; fileRef = 38C2BC9E18FBD89400233D24 /* MCAllTripsTableViewCell_iPad.m */; };
@@ -1211,6 +1212,7 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				38AD59BC197D3DF000BBC797 /* MCNetworkTools.m in Sources */,
 				3812485B1959D40900C0447C /* MCxRatesController.m in Sources */,
 				38572AE3169D437B00969C62 /* main.m in Sources */,
 				38AB487119531F760090457A /* UIView+MCAddons.m in Sources */,
