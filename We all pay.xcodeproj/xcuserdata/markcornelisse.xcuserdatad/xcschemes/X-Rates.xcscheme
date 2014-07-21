@@ -14,9 +14,9 @@
             buildForAnalyzing = "YES">
             <BuildableReference
                BuildableIdentifier = "primary"
-               BlueprintIdentifier = "3815BD791955CE9800A28316"
+               BlueprintIdentifier = "38FE87C4195721660008EE74"
                BuildableName = "X-Rates.app"
-               BlueprintName = "X-Rates"
+               BlueprintName = "EMC"
                ReferencedContainer = "container:We all pay.xcodeproj">
             </BuildableReference>
          </BuildActionEntry>
@@ -32,9 +32,9 @@
       <MacroExpansion>
          <BuildableReference
             BuildableIdentifier = "primary"
-            BlueprintIdentifier = "3815BD791955CE9800A28316"
+            BlueprintIdentifier = "38FE87C4195721660008EE74"
             BuildableName = "X-Rates.app"
-            BlueprintName = "X-Rates"
+            BlueprintName = "EMC"
             ReferencedContainer = "container:We all pay.xcodeproj">
          </BuildableReference>
       </MacroExpansion>
@@ -51,9 +51,9 @@
       <BuildableProductRunnable>
          <BuildableReference
             BuildableIdentifier = "primary"
-            BlueprintIdentifier = "3815BD791955CE9800A28316"
+            BlueprintIdentifier = "38FE87C4195721660008EE74"
             BuildableName = "X-Rates.app"
-            BlueprintName = "X-Rates"
+            BlueprintName = "EMC"
             ReferencedContainer = "container:We all pay.xcodeproj">
          </BuildableReference>
       </BuildableProductRunnable>
@@ -69,9 +69,9 @@
       <BuildableProductRunnable>
          <BuildableReference
             BuildableIdentifier = "primary"
-            BlueprintIdentifier = "3815BD791955CE9800A28316"
+            BlueprintIdentifier = "38FE87C4195721660008EE74"
             BuildableName = "X-Rates.app"
-            BlueprintName = "X-Rates"
+            BlueprintName = "EMC"
             ReferencedContainer = "container:We all pay.xcodeproj">
          </BuildableReference>
       </BuildableProductRunnable>
@@ -81,6 +81,7 @@
    </AnalyzeAction>
    <ArchiveAction
       buildConfiguration = "Release"
+      customArchiveName = "EMC"
       revealArchiveInOrganizer = "YES">
    </ArchiveAction>
 </Scheme>

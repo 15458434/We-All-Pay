@@ -1056,9 +1056,9 @@
 			productReference = 385F52FD191C2C360012773D /* We all pay Tests.xctest */;
 			productType = "com.apple.product-type.bundle.unit-test";
 		};
-		38FE87C4195721660008EE74 /* X-Rates */ = {
+		38FE87C4195721660008EE74 /* EMC */ = {
 			isa = PBXNativeTarget;
-			buildConfigurationList = 38FE87EC195721670008EE74 /* Build configuration list for PBXNativeTarget "X-Rates" */;
+			buildConfigurationList = 38FE87EC195721670008EE74 /* Build configuration list for PBXNativeTarget "EMC" */;
 			buildPhases = (
 				38FE87C1195721660008EE74 /* Sources */,
 				38FE87C2195721660008EE74 /* Frameworks */,
@@ -1068,14 +1068,14 @@
 			);
 			dependencies = (
 			);
-			name = "X-Rates";
+			name = EMC;
 			productName = "X-Rates";
 			productReference = 38FE87C5195721660008EE74 /* X-Rates.app */;
 			productType = "com.apple.product-type.application";
 		};
-		38FE87DE195721670008EE74 /* X-RatesTests */ = {
+		38FE87DE195721670008EE74 /* EMCTests */ = {
 			isa = PBXNativeTarget;
-			buildConfigurationList = 38FE87EF195721670008EE74 /* Build configuration list for PBXNativeTarget "X-RatesTests" */;
+			buildConfigurationList = 38FE87EF195721670008EE74 /* Build configuration list for PBXNativeTarget "EMCTests" */;
 			buildPhases = (
 				38FE87DB195721670008EE74 /* Sources */,
 				38FE87DC195721670008EE74 /* Frameworks */,
@@ -1086,7 +1086,7 @@
 			dependencies = (
 				38FE87E3195721670008EE74 /* PBXTargetDependency */,
 			);
-			name = "X-RatesTests";
+			name = EMCTests;
 			productName = "X-RatesTests";
 			productReference = 38FE87DF195721670008EE74 /* X-RatesTests.xctest */;
 			productType = "com.apple.product-type.bundle.unit-test";
@@ -1136,8 +1136,8 @@
 			targets = (
 				38572AD1169D437B00969C62 /* We all pay */,
 				385F52FC191C2C360012773D /* We all pay Tests */,
-				38FE87C4195721660008EE74 /* X-Rates */,
-				38FE87DE195721670008EE74 /* X-RatesTests */,
+				38FE87C4195721660008EE74 /* EMC */,
+				38FE87DE195721670008EE74 /* EMCTests */,
 			);
 		};
 /* End PBXProject section */
@@ -1336,7 +1336,7 @@
 		};
 		38FE87E3195721670008EE74 /* PBXTargetDependency */ = {
 			isa = PBXTargetDependency;
-			target = 38FE87C4195721660008EE74 /* X-Rates */;
+			target = 38FE87C4195721660008EE74 /* EMC */;
 			targetProxy = 38FE87E2195721670008EE74 /* PBXContainerItemProxy */;
 		};
 /* End PBXTargetDependency section */
@@ -1792,7 +1792,7 @@
 			defaultConfigurationIsVisible = 0;
 			defaultConfigurationName = Release;
 		};
-		38FE87EC195721670008EE74 /* Build configuration list for PBXNativeTarget "X-Rates" */ = {
+		38FE87EC195721670008EE74 /* Build configuration list for PBXNativeTarget "EMC" */ = {
 			isa = XCConfigurationList;
 			buildConfigurations = (
 				38FE87ED195721670008EE74 /* Debug */,
@@ -1801,7 +1801,7 @@
 			defaultConfigurationIsVisible = 0;
 			defaultConfigurationName = Release;
 		};
-		38FE87EF195721670008EE74 /* Build configuration list for PBXNativeTarget "X-RatesTests" */ = {
+		38FE87EF195721670008EE74 /* Build configuration list for PBXNativeTarget "EMCTests" */ = {
 			isa = XCConfigurationList;
 			buildConfigurations = (
 				38FE87F0195721670008EE74 /* Debug */,

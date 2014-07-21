@@ -18,7 +18,7 @@
     NSSharingService *service = [NSSharingService sharingServiceNamed:NSSharingServiceNameComposeEmail];
     service.delegate = self;
     service.recipients = @[@"support@markcornelisse.nl"];
-    service.subject = [ NSString stringWithFormat:@"Feedback on X-Rates"];
+    service.subject = [ NSString stringWithFormat:@"Feedback on EMC"];
     NSString *body = @"Dear Mark, \n\n";
     NSArray *shareItems = @[body];
     [service performWithItems:shareItems];
@@ -28,7 +28,7 @@
 {
     NSSharingService *service = [NSSharingService sharingServiceNamed:NSSharingServiceNamePostOnTwitter];
     [service setDelegate:self];
-    NSString *tweet = @".@MarkCornelisse Thank you for creating X-Rates. #osx #app";
+    NSString *tweet = @".@MarkCornelisse Thank you for creating EMC. #osx #app";
     [service performWithItems:@[tweet]];
 }
 

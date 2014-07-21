@@ -173,8 +173,10 @@ NSString * const MCStateRestoreDestinationCurrencyObject = @"MCStateRestoreDesti
     self.destinationCurrencies = [MCxRatesController getAllCurrencies];
     [self setSourceAmount:[state decodeObjectForKey:MCStateRestoreSourceAmount]];
     [self setDestinationAmount:[state decodeObjectForKey:MCStateRestoreDestinationAmount]];
+    [self setExchangeRate:[state decodeObjectForKey:MCStateRestoreExchangeRate]];
     [[self sourceController] setSelectedObjects:[state decodeObjectForKey:MCStateRestoreSourceCurrencyObject]];
     [[self destinationController] setSelectedObjects:[state decodeObjectForKey:MCStateRestoreDestinationCurrencyObject]];
+    [self getXRate];
 }
 
 - (void)window:(NSWindow *)window willEncodeRestorableState:(NSCoder *)state
