@@ -15,7 +15,7 @@
             <BuildableReference
                BuildableIdentifier = "primary"
                BlueprintIdentifier = "38FE87C4195721660008EE74"
-               BuildableName = "X-Rates.app"
+               BuildableName = "EMC.app"
                BlueprintName = "EMC"
                ReferencedContainer = "container:We all pay.xcodeproj">
             </BuildableReference>
@@ -33,7 +33,7 @@
          <BuildableReference
             BuildableIdentifier = "primary"
             BlueprintIdentifier = "38FE87C4195721660008EE74"
-            BuildableName = "X-Rates.app"
+            BuildableName = "EMC.app"
             BlueprintName = "EMC"
             ReferencedContainer = "container:We all pay.xcodeproj">
          </BuildableReference>
@@ -52,7 +52,7 @@
          <BuildableReference
             BuildableIdentifier = "primary"
             BlueprintIdentifier = "38FE87C4195721660008EE74"
-            BuildableName = "X-Rates.app"
+            BuildableName = "EMC.app"
             BlueprintName = "EMC"
             ReferencedContainer = "container:We all pay.xcodeproj">
          </BuildableReference>
@@ -70,7 +70,7 @@
          <BuildableReference
             BuildableIdentifier = "primary"
             BlueprintIdentifier = "38FE87C4195721660008EE74"
-            BuildableName = "X-Rates.app"
+            BuildableName = "EMC.app"
             BlueprintName = "EMC"
             ReferencedContainer = "container:We all pay.xcodeproj">
          </BuildableReference>

@@ -93,7 +93,7 @@
             <BuildableReference
                BuildableIdentifier = "primary"
                BlueprintIdentifier = "38FE87DE195721670008EE74"
-               BuildableName = "X-RatesTests.xctest"
+               BuildableName = "EMCTests.xctest"
                BlueprintName = "EMCTests"
                ReferencedContainer = "container:We all pay.xcodeproj">
             </BuildableReference>

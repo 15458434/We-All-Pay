@@ -2,7 +2,7 @@
 //  MCPaymentPresence.m
 //  We all pay
 //
-//  Created by Mark Cornelisse on 12-05-14.
+//  Created by Mark Cornelisse on 22/07/14.
 //  Copyright (c) 2014 Mark Cornelisse. All rights reserved.
 //
 
@@ -14,10 +14,10 @@
 @implementation MCPaymentPresence
 
 @dynamic averageOweFromPayment;
-@dynamic isPersonPresent;
-@dynamic uniqueId;
 @dynamic dateCreated;
 @dynamic dateModified;
+@dynamic isPersonPresent;
+@dynamic uniqueId;
 @dynamic payment;
 @dynamic person;
 

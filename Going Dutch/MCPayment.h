@@ -2,14 +2,14 @@
 //  MCPayment.h
 //  We all pay
 //
-//  Created by Mark Cornelisse on 07-05-14.
+//  Created by Mark Cornelisse on 22/07/14.
 //  Copyright (c) 2014 Mark Cornelisse. All rights reserved.
 //
 
 #import <Foundation/Foundation.h>
 #import <CoreData/CoreData.h>
 
-@class MCPerson, MCSharedBill;
+@class MCPaymentPresence, MCPerson, MCSharedBill;
 
 @interface MCPayment : NSManagedObject
 
@@ -25,8 +25,8 @@
 
 @interface MCPayment (CoreDataGeneratedAccessors)
 
-- (void)addPeopleSharingPaymentObject:(NSManagedObject *)value;
-- (void)removePeopleSharingPaymentObject:(NSManagedObject *)value;
+- (void)addPeopleSharingPaymentObject:(MCPaymentPresence *)value;
+- (void)removePeopleSharingPaymentObject:(MCPaymentPresence *)value;
 - (void)addPeopleSharingPayment:(NSSet *)values;
 - (void)removePeopleSharingPayment:(NSSet *)values;
 

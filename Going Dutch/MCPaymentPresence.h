@@ -2,7 +2,7 @@
 //  MCPaymentPresence.h
 //  We all pay
 //
-//  Created by Mark Cornelisse on 12-05-14.
+//  Created by Mark Cornelisse on 22/07/14.
 //  Copyright (c) 2014 Mark Cornelisse. All rights reserved.
 //
 
@@ -14,10 +14,10 @@
 @interface MCPaymentPresence : NSManagedObject
 
 @property (nonatomic, retain) NSNumber * averageOweFromPayment;
-@property (nonatomic, retain) NSNumber * isPersonPresent;
-@property (nonatomic, retain) NSString * uniqueId;
 @property (nonatomic, retain) NSDate * dateCreated;
 @property (nonatomic, retain) NSDate * dateModified;
+@property (nonatomic, retain) NSNumber * isPersonPresent;
+@property (nonatomic, retain) NSString * uniqueId;
 @property (nonatomic, retain) MCPayment *payment;
 @property (nonatomic, retain) MCPerson *person;
 
