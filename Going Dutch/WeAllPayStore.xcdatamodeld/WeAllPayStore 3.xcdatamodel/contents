@@ -10,6 +10,7 @@
         <attribute name="uniqueID" optional="YES" attributeType="String" syncable="YES"/>
         <relationship name="exchangeRateFromCurrency" optional="YES" toMany="YES" deletionRule="Deny" destinationEntity="MCExchangeRate" inverseName="fromCurrency" inverseEntity="MCExchangeRate" syncable="YES"/>
         <relationship name="exchangeRateToCurrency" optional="YES" toMany="YES" deletionRule="Deny" destinationEntity="MCExchangeRate" inverseName="toCurrency" inverseEntity="MCExchangeRate" syncable="YES"/>
+        <relationship name="payment" optional="YES" toMany="YES" deletionRule="Nullify" destinationEntity="MCPayment" inverseName="currency" inverseEntity="MCPayment" syncable="YES"/>
         <relationship name="sharedBill" optional="YES" toMany="YES" deletionRule="Deny" destinationEntity="MCSharedBill" inverseName="mainCurrency" inverseEntity="MCSharedBill" syncable="YES"/>
     </entity>
     <entity name="MCEmailAddress" representedClassName="MCEmailAddress" syncable="YES">
@@ -20,7 +21,7 @@
         <attribute name="uniqueEmailId" attributeType="String" syncable="YES"/>
         <relationship name="owner" minCount="1" maxCount="1" deletionRule="Nullify" destinationEntity="MCPerson" inverseName="emailAddress" inverseEntity="MCPerson" syncable="YES"/>
     </entity>
-    <entity name="MCExchangeRate" syncable="YES">
+    <entity name="MCExchangeRate" representedClassName="MCExchangeRate" syncable="YES">
         <attribute name="dateCreated" optional="YES" attributeType="Date" syncable="YES"/>
         <attribute name="dateFetched" optional="YES" attributeType="Date" syncable="YES"/>
         <attribute name="dateModified" optional="YES" attributeType="Date" syncable="YES"/>
@@ -37,6 +38,7 @@
         <attribute name="descriptionOfPayment" optional="YES" attributeType="String" syncable="YES"/>
         <attribute name="money" optional="YES" attributeType="Double" defaultValueString="0.0" syncable="YES"/>
         <attribute name="uniquePaymentId" attributeType="String" syncable="YES"/>
+        <relationship name="currency" optional="YES" maxCount="1" deletionRule="Nullify" destinationEntity="MCCurrency" inverseName="payment" inverseEntity="MCCurrency" syncable="YES"/>
         <relationship name="exchangeRate" optional="YES" maxCount="1" deletionRule="Nullify" destinationEntity="MCExchangeRate" inverseName="payment" inverseEntity="MCExchangeRate" syncable="YES"/>
         <relationship name="onWhichBill" optional="YES" minCount="1" maxCount="1" deletionRule="Nullify" destinationEntity="MCSharedBill" inverseName="payments" inverseEntity="MCSharedBill" syncable="YES"/>
         <relationship name="payingPerson" optional="YES" minCount="1" maxCount="1" deletionRule="Nullify" destinationEntity="MCPerson" inverseName="payments" inverseEntity="MCPerson" syncable="YES"/>
@@ -80,12 +82,12 @@
         <relationship name="peoplePresent" optional="YES" toMany="YES" deletionRule="Cascade" destinationEntity="MCPerson" inverseName="sharedBill" inverseEntity="MCPerson" syncable="YES"/>
     </entity>
     <elements>
+        <element name="MCCurrency" positionX="-900" positionY="108" width="128" height="210"/>
         <element name="MCEmailAddress" positionX="-1118" positionY="9" width="128" height="135"/>
-        <element name="MCPayment" positionX="-342" positionY="-0" width="128" height="178"/>
+        <element name="MCExchangeRate" positionX="-891" positionY="117" width="128" height="178"/>
+        <element name="MCPayment" positionX="-342" positionY="-0" width="128" height="193"/>
         <element name="MCPaymentPresence" positionX="-533" positionY="-27" width="128" height="150"/>
         <element name="MCPerson" positionX="-837" positionY="-54" width="128" height="285"/>
         <element name="MCSharedBill" positionX="-558" positionY="225" width="128" height="165"/>
-        <element name="MCCurrency" positionX="-900" positionY="108" width="128" height="28"/>
-        <element name="MCExchangeRate" positionX="-891" positionY="117" width="128" height="28"/>
     </elements>
 </model>

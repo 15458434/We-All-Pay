@@ -2,14 +2,14 @@
 //  MCPayment.h
 //  We all pay
 //
-//  Created by Mark Cornelisse on 22/07/14.
+//  Created by Mark Cornelisse on 23/07/14.
 //  Copyright (c) 2014 Mark Cornelisse. All rights reserved.
 //
 
 #import <Foundation/Foundation.h>
 #import <CoreData/CoreData.h>
 
-@class MCPaymentPresence, MCPerson, MCSharedBill;
+@class MCCurrency, MCExchangeRate, MCPaymentPresence, MCPerson, MCSharedBill;
 
 @interface MCPayment : NSManagedObject
 
@@ -18,6 +18,8 @@
 @property (nonatomic, retain) NSString * descriptionOfPayment;
 @property (nonatomic, retain) NSNumber * money;
 @property (nonatomic, retain) NSString * uniquePaymentId;
+@property (nonatomic, retain) MCCurrency *currency;
+@property (nonatomic, retain) MCExchangeRate *exchangeRate;
 @property (nonatomic, retain) MCSharedBill *onWhichBill;
 @property (nonatomic, retain) MCPerson *payingPerson;
 @property (nonatomic, retain) NSSet *peopleSharingPayment;

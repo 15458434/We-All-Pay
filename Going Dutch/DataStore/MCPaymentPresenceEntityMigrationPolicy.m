@@ -7,6 +7,9 @@
 //
 
 #import "MCPaymentPresenceEntityMigrationPolicy.h"
+#import "MCSharedBill.h"
+#import "MCPayment.h"
+#import "MCCurrency.h"
 
 @implementation MCPaymentPresenceEntityMigrationPolicy
 
@@ -33,6 +36,25 @@
         [paymentPresence setValue:person forKey:@"person"];
         [paymentPresence setValue:[[NSUUID UUID] UUIDString] forKeyPath:@"uniqueId"];
     }
+    
+    // Fetch current currency from OS.
+    NSString *currentCurrencyCode = [[NSLocale currentLocale] objectForKey:NSLocaleCurrencyCode];
+    NSFetchRequest *currencyFetchRequest = [NSFetchRequest fetchRequestWithEntityName:@"MCCurrency"];
+    NSSortDescriptor *sortDescriptor = [NSSortDescriptor sortDescriptorWithKey:@"dateCreated" ascending:YES];
+    [currencyFetchRequest setSortDescriptors:@[sortDescriptor]];
+    NSPredicate *currentCurrencyPredicate = [NSPredicate predicateWithFormat:@"code like %@", currentCurrencyCode];
+    [currencyFetchRequest setPredicate:currentCurrencyPredicate];
+    NSError *currencyFetchError;
+    NSArray *currencyFetchResults = [context executeFetchRequest:currencyFetchRequest error:&currencyFetchError];
+    if (!currencyFetchResults) {
+        NSLog(@"currencyFetchError: %@", [currencyFetchError localizedDescription]);
+        return NO;
+    }
+    MCCurrency *currentCurrency = currencyFetchResults[0];
+    
+    // payments to be in current currency.
+    MCPayment *thisPayment = (MCPayment *)dInstance;
+    [thisPayment setCurrency:currentCurrency];
     
     return returnedFromSuper;
 }

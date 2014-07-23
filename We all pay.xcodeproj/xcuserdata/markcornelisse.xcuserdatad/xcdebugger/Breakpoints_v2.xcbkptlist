@@ -23,7 +23,7 @@
             shouldBeEnabled = "No"
             ignoreCount = "0"
             continueAfterRunningActions = "No"
-            filePath = "X-Rates/Model/MCCurrency.m"
+            filePath = "X-Rates/Model/MCxRatesCurrency.m"
             timestampString = "427380818.595232"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"

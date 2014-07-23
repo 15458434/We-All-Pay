@@ -1,29 +1,26 @@
 //
-//  MCCurrency.m
+//  MCExchangeRate.m
 //  We all pay
 //
 //  Created by Mark Cornelisse on 23/07/14.
 //  Copyright (c) 2014 Mark Cornelisse. All rights reserved.
 //
 
-#import "MCCurrency.h"
 #import "MCExchangeRate.h"
+#import "MCCurrency.h"
 #import "MCPayment.h"
-#import "MCSharedBill.h"
 
 
-@implementation MCCurrency
+@implementation MCExchangeRate
 
-@dynamic code;
 @dynamic dateCreated;
+@dynamic dateFetched;
 @dynamic dateModified;
-@dynamic isStillValid;
-@dynamic name;
-@dynamic symbol;
+@dynamic exchangeRate;
+@dynamic source;
 @dynamic uniqueID;
-@dynamic exchangeRateFromCurrency;
-@dynamic exchangeRateToCurrency;
+@dynamic fromCurrency;
 @dynamic payment;
-@dynamic sharedBill;
+@dynamic toCurrency;
 
 @end
