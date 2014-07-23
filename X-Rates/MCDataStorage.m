@@ -9,7 +9,7 @@
 #import "MCDataStorage.h"
 
 #import "MCxRatesController+X_RatesAddOn.h"
-#import "MCCurrency.h"
+#import "MCxRatesCurrency.h"
 #import "Countly.h"
 
 #import "MCNetworkTools.h"
@@ -37,8 +37,8 @@ NSString * const MCStateRestoreDestinationCurrencyObject = @"MCStateRestoreDesti
 {
     reversing = isReversing;
     
-    MCCurrency *selectedSourceCurrency = [[_sourceController selectedObjects] firstObject];
-    MCCurrency *selectedDestinationCurrency = [[_destinationController selectedObjects] firstObject];
+    MCxRatesCurrency *selectedSourceCurrency = [[_sourceController selectedObjects] firstObject];
+    MCxRatesCurrency *selectedDestinationCurrency = [[_destinationController selectedObjects] firstObject];
     [_sourceController setSelectedObjects:@[selectedDestinationCurrency]];
     [_destinationController setSelectedObjects:@[selectedSourceCurrency]];
     
@@ -76,7 +76,7 @@ NSString * const MCStateRestoreDestinationCurrencyObject = @"MCStateRestoreDesti
     if (isInternetConnection()) {
         _xRatesController = [MCxRatesController new];
         [_xRatesController getExchangeRateFrom:sourceCurrencyISOCode to:destinationCurrencyISOCode withCompletionHandler:^(NSDictionary *exchangeRateResult) {
-            [self setExchangeRate:[exchangeRateResult objectForKey:MCExchangeRate]];
+            [self setExchangeRate:[exchangeRateResult objectForKey:MCCurrencyExchangeRate]];
             if (_exchangeRate) {
                 dispatch_async(dispatch_get_main_queue(), ^{
                     [self setDestinationAmount:@([_sourceAmount doubleValue] * [_exchangeRate doubleValue])];
@@ -185,7 +185,7 @@ NSString * const MCStateRestoreDestinationCurrencyObject = @"MCStateRestoreDesti
     [state encodeObject:_destinationAmount forKey:MCStateRestoreDestinationAmount];
     [state encodeObject:[_sourceController selectedObjects] forKey:MCStateRestoreSourceCurrencyObject];
     [state encodeObject:[_destinationController selectedObjects] forKey:MCStateRestoreDestinationCurrencyObject];
-    [state encodeObject:_exchangeRate forKey:MCExchangeRate];
+    [state encodeObject:_exchangeRate forKey:MCCurrencyExchangeRate];
 }
 
 @end

@@ -8,7 +8,7 @@
 
 #import "MCxRatesController+X_RatesAddOn.h"
 
-#import "MCCurrency.h"
+#import "MCxRatesCurrency.h"
 
 @implementation MCxRatesController (X_RatesAddOn)
 
@@ -19,7 +19,7 @@
     NSDictionary *currencyDictionary = [MCxRatesController getCurrencyDictionary];
     NSMutableArray *currencies = [NSMutableArray new];
     for (NSString *isoCode in isoCodes) {
-        MCCurrency *currency = [MCCurrency new];
+        MCxRatesCurrency *currency = [MCxRatesCurrency new];
         [currency setCurrencyISOCode:isoCode];
         NSString *nameKeyPath = [NSString stringWithFormat:@"%@.name", isoCode];
         [currency setCurrencyName:[currencyDictionary valueForKeyPath:nameKeyPath]];

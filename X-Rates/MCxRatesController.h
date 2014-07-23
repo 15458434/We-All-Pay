@@ -9,7 +9,7 @@
 @import Foundation;
 
 // fetchedResult Dictionary keys
-extern NSString * const MCExchangeRate;
+extern NSString * const MCCurrencyExchangeRate;
 extern NSString * const MCFromCountryISOCode;
 extern NSString * const MCToCountryISOCode;
 extern NSString * const MCSource;

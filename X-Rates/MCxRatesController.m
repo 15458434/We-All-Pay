@@ -10,7 +10,7 @@
 #import "MCNetworkTools.h"
 
 // fetchedResult Dictionary keys
-NSString * const MCExchangeRate = @"exchangeRate";
+NSString * const MCCurrencyExchangeRate = @"exchangeRate";
 NSString * const MCFromCountryISOCode = @"from";
 NSString * const MCToCountryISOCode = @"to";
 NSString * const MCSource = @"source";
@@ -188,7 +188,7 @@ NSUInteger const MCCurrencyTypeSelection = MCCurrencyTypeCurrency | MCCurrencyTy
                     [numberFormatter setLocale:[NSLocale localeWithLocaleIdentifier:localeIdentifier]];
                     [numberFormatter setNumberStyle:NSNumberFormatterDecimalStyle];
                     NSNumber *exchangeRate = [numberFormatter numberFromString:[exchangeRateJSON valueForKeyPath:@"query.results.row.rate"]];
-                    NSDictionary *fetchedResult = @{MCExchangeRate: exchangeRate,
+                    NSDictionary *fetchedResult = @{MCCurrencyExchangeRate: exchangeRate,
                                                     MCFromCountryISOCode: fromCountryISOCode,
                                                     MCToCountryISOCode: toCountryISOCode,
                                                     MCSource: @"YQL"};
@@ -273,7 +273,7 @@ NSUInteger const MCCurrencyTypeSelection = MCCurrencyTypeCurrency | MCCurrencyTy
                     } else if ([toCountryISOCode isEqualToString:@"BTC"]) {
                         exchangeRate = @((double)1.0000 / [last doubleValue]);
                     }
-                    NSDictionary *fetchedResult = @{MCExchangeRate: exchangeRate,
+                    NSDictionary *fetchedResult = @{MCCurrencyExchangeRate: exchangeRate,
                                                     MCFromCountryISOCode: fromCountryISOCode,
                                                     MCToCountryISOCode: toCountryISOCode,
                                                     MCSource: @"BitcoinAverage"};
