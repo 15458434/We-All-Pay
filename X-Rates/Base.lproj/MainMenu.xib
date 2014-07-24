@@ -219,6 +219,17 @@
                                     <action selector="arrangeInFront:" target="-1" id="DRN-fu-gQh"/>
                                 </connections>
                             </menuItem>
+                            <menuItem isSeparatorItem="YES" id="OjA-Yb-I3t"/>
+                            <menuItem title="Main Window" keyEquivalent="n" id="268-sO-BWr">
+                                <connections>
+                                    <action selector="newWindowPressed:" target="Voe-Tx-rLC" id="awP-hk-aTd"/>
+                                </connections>
+                            </menuItem>
+                            <menuItem title="Close Window" keyEquivalent="w" id="h8c-Jo-gUs">
+                                <connections>
+                                    <action selector="performClose:" target="QvC-M9-y7g" id="Snq-IS-MZ2"/>
+                                </connections>
+                            </menuItem>
                         </items>
                     </menu>
                 </menuItem>

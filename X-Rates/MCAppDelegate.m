@@ -32,6 +32,11 @@
     [service performWithItems:@[tweet]];
 }
 
+- (IBAction)newWindowPressed:(id)sender
+{
+    [_window makeKeyAndOrderFront:self];
+}
+
 #pragma mark - Inherited from super
 
 - (BOOL)applicationShouldHandleReopen:(NSApplication *)sender hasVisibleWindows:(BOOL)flag
