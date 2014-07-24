@@ -28,10 +28,10 @@
     [[[GAI sharedInstance] logger] setLogLevel:kGAILogLevelNone];
     
     // Initialize tracker. Replace with your tracking ID.
-//    [[GAI sharedInstance] trackerWithTrackingId:@"UA-50304745-1"];
+    [[GAI sharedInstance] trackerWithTrackingId:@"UA-50304745-1"];
     
     // Tracker for development environment.
-    [[GAI sharedInstance] trackerWithTrackingId:@"UA-50304745-2"];
+//    [[GAI sharedInstance] trackerWithTrackingId:@"UA-50304745-2"];
     
     // Get opt-in value
     // Get user preference
