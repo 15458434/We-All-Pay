@@ -19,6 +19,11 @@ typedef NS_ENUM(BOOL, MCReversing) {
     isReversing
 };
 
+typedef NS_ENUM(BOOL, MCStillBooting) {
+    isStillBooting,
+    isNotBooting
+};
+
 // State Restoration Strings
 NSString * const MCStateRestoreSourceAmount = @"MCStateRestoreSourceAmount";
 NSString * const MCStateRestoreExchangeRate = @"MCStateRestoreExchangeRate";
@@ -29,6 +34,7 @@ NSString * const MCStateRestoreDestinationCurrencyObject = @"MCStateRestoreDesti
 @implementation MCDataStorage
 {
     MCReversing reversing;
+    MCStillBooting stillBooting;
 }
 
 #pragma mark - Actions
@@ -100,22 +106,13 @@ NSString * const MCStateRestoreDestinationCurrencyObject = @"MCStateRestoreDesti
     [super awakeFromNib];
     
     reversing = isNotReversing;
+    stillBooting = isStillBooting;
     
     // Don't use instance variables.
-//    if (![self sourceCurrencies]) {
-//        self.sourceCurrencies = [MCxRatesController getAllCurrencies];
-//    }
-//    if (![self destinationCurrencies]) {
-//        self.destinationCurrencies = [MCxRatesController getAllCurrencies];
-//    }
-//    if (![self sourceAmount]) {
-//        [self setSourceAmount:@1.0];
-//    }
-    [self willChangeValueForKey:@"sourceCurrencies"];
-    _sourceCurrencies = [MCxRatesController getAllCurrencies];
-    [self didChangeValueForKey:@"sourceCurrencies"];
-    _destinationCurrencies = [MCxRatesController getAllCurrencies];
-    _sourceAmount = @1.0;
+    self.sourceCurrencies = [MCxRatesController getAllCurrencies];
+    self.destinationCurrencies = [MCxRatesController getAllCurrencies];
+    self.sourceAmount = @1.0;
+    [self getXRate];
     
     // LayoutConstraints for the source and destination currency amount.
     NSLayoutConstraint *left= [NSLayoutConstraint constraintWithItem:_sourceScrollView attribute:NSLayoutAttributeCenterX relatedBy:NSLayoutRelationEqual toItem:_originalAmountField attribute:NSLayoutAttributeCenterX multiplier:1.0 constant:0.0];
@@ -145,7 +142,11 @@ NSString * const MCStateRestoreDestinationCurrencyObject = @"MCStateRestoreDesti
     [self setSourceAmountLabel:sourceName];
     [self setDestinationAmountlabel:destinationName];
     if (reversing == isNotReversing) {
-        [self getXRate];
+        if (stillBooting == isStillBooting) {
+            stillBooting = isNotBooting;
+        } else {
+            [self getXRate];
+        }
     }
 }
 

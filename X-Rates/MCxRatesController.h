@@ -21,6 +21,7 @@ extern NSUInteger const MCCurrencyTypeCrypto;
 extern NSUInteger const MCCurrencyTypeOneTroyOunce;
 extern NSUInteger const MCCurrencyTypeBondMarketUnit;
 extern NSUInteger const MCCurrencyTypeComplementaryCurrency;
+extern NSUInteger const MCCurrencyTypeUnitOfAccount;
 
 @protocol MCxRatesReceiverProtocol <NSObject>
 

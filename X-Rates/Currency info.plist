@@ -21,7 +21,7 @@
 		<key>name</key>
 		<string>ADB Unit of Account</string>
 		<key>type</key>
-		<string>currency</string>
+		<string>Unit of Account</string>
 	</dict>
 	<key>XSU</key>
 	<dict>
