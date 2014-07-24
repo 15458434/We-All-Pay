@@ -1,7 +1,7 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <Scheme
    LastUpgradeVersion = "0510"
-   version = "1.3">
+   version = "1.7">
    <BuildAction
       parallelizeBuildables = "YES"
       buildImplicitDependencies = "YES">
@@ -32,64 +32,18 @@
             skipped = "NO">
             <BuildableReference
                BuildableIdentifier = "primary"
-               BlueprintIdentifier = "38522E2218DB3F01007BDB3F"
-               BuildableName = "We all pay Model Tests.xctest"
-               BlueprintName = "We all pay Model Tests"
-               ReferencedContainer = "container:We all pay.xcodeproj">
-            </BuildableReference>
-         </TestableReference>
-         <TestableReference
-            skipped = "NO">
-            <BuildableReference
-               BuildableIdentifier = "primary"
-               BlueprintIdentifier = "38D785F118DC53C30074B670"
-               BuildableName = "WeAllPayTests.xctest"
-               BlueprintName = "WeAllPayTests"
-               ReferencedContainer = "container:We all pay.xcodeproj">
-            </BuildableReference>
-         </TestableReference>
-         <TestableReference
-            skipped = "NO">
-            <BuildableReference
-               BuildableIdentifier = "primary"
-               BlueprintIdentifier = "385F52D0191C2ADE0012773D"
-               BuildableName = "kutzooi.xctest"
-               BlueprintName = "kutzooi"
-               ReferencedContainer = "container:We all pay.xcodeproj">
-            </BuildableReference>
-         </TestableReference>
-         <TestableReference
-            skipped = "NO">
-            <BuildableReference
-               BuildableIdentifier = "primary"
-               BlueprintIdentifier = "385F52E6191C2C110012773D"
-               BuildableName = "bazinga.xctest"
-               BlueprintName = "bazinga"
-               ReferencedContainer = "container:We all pay.xcodeproj">
-            </BuildableReference>
-         </TestableReference>
-         <TestableReference
-            skipped = "NO">
-            <BuildableReference
-               BuildableIdentifier = "primary"
                BlueprintIdentifier = "385F52FC191C2C360012773D"
                BuildableName = "We all pay Tests.xctest"
                BlueprintName = "We all pay Tests"
                ReferencedContainer = "container:We all pay.xcodeproj">
             </BuildableReference>
+            <LocationScenarioReference
+               identifier = "com.apple.dt.IDEFoundation.CurrentLocationScenarioIdentifier"
+               referenceType = "1">
+            </LocationScenarioReference>
          </TestableReference>
          <TestableReference
-            skipped = "NO">
-            <BuildableReference
-               BuildableIdentifier = "primary"
-               BlueprintIdentifier = "3877591C1923D3EE0027A7F1"
-               BuildableName = "We all pay for MacTests.xctest"
-               BlueprintName = "We all pay for MacTests"
-               ReferencedContainer = "container:We all pay.xcodeproj">
-            </BuildableReference>
-         </TestableReference>
-         <TestableReference
-            skipped = "NO">
+            skipped = "YES">
             <BuildableReference
                BuildableIdentifier = "primary"
                BlueprintIdentifier = "38FE87DE195721670008EE74"
@@ -97,16 +51,11 @@
                BlueprintName = "EMCTests"
                ReferencedContainer = "container:We all pay.xcodeproj">
             </BuildableReference>
-         </TestableReference>
-         <TestableReference
-            skipped = "NO">
-            <BuildableReference
-               BuildableIdentifier = "primary"
-               BlueprintIdentifier = "38AD6E7A196FE90F000D21C9"
-               BuildableName = "TestTests.xctest"
-               BlueprintName = "TestTests"
-               ReferencedContainer = "container:We all pay.xcodeproj">
-            </BuildableReference>
+            <SkippedTests>
+               <Test
+                  Identifier = "X_RatesTests">
+               </Test>
+            </SkippedTests>
          </TestableReference>
       </Testables>
       <MacroExpansion>

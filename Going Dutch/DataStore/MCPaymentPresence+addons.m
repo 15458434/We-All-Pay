@@ -7,6 +7,10 @@
 //
 
 #import "MCPaymentPresence+addons.h"
+#import "MCPayment+addons.h"
+#import "MCSharedBill+addons.h"
+#import "MCCurrency+addons.h"
+#import "MCExchangeRate+addons.h"
 
 #import "MCWeAllPayStoreController.h"
 
@@ -41,6 +45,20 @@
     [nf setNumberStyle:NSNumberFormatterCurrencyStyle];
     [nf setFormatterBehavior:NSNumberFormatterBehaviorDefault];
     return [nf stringFromNumber:[self averageOweFromPayment]];
+}
+
+- (NSNumber *)getAverageOweFromPaymentInMainCurrency
+{
+    double averageOweFromPaymentDouble = [[self averageOweFromPayment] doubleValue];
+    double exchangeRateDouble = 0.0;
+    MCCurrency *sharedBillCurrency = [[[self payment] onWhichBill] mainCurrency];
+    MCCurrency *thisPaymentCurrency = [[self payment] currency];
+    if ([[sharedBillCurrency uniqueID] isEqualToString:[thisPaymentCurrency uniqueID]]) {
+        exchangeRateDouble = 1;
+    } else {
+        exchangeRateDouble = [[[[self payment] exchangeRate] exchangeRate] doubleValue];
+    }
+    return @(averageOweFromPaymentDouble * exchangeRateDouble);
 }
 
 @end

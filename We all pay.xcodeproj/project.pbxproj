@@ -103,6 +103,11 @@
 		389DE900197FB2BA00169645 /* MCSharedBill.m in Sources */ = {isa = PBXBuildFile; fileRef = 389DE8FF197FB2BA00169645 /* MCSharedBill.m */; };
 		389DE902197FB4CD00169645 /* WeAllPayStore1to3.xcmappingmodel in Sources */ = {isa = PBXBuildFile; fileRef = 389DE901197FB4CD00169645 /* WeAllPayStore1to3.xcmappingmodel */; };
 		389DE904197FB55300169645 /* WeAllPayStore2to3.xcmappingmodel in Sources */ = {isa = PBXBuildFile; fileRef = 389DE903197FB55300169645 /* WeAllPayStore2to3.xcmappingmodel */; };
+		389DE907197FBE8400169645 /* MCExchangeRate+addons.m in Sources */ = {isa = PBXBuildFile; fileRef = 389DE906197FBE8400169645 /* MCExchangeRate+addons.m */; };
+		389DE909197FC5E900169645 /* MCExchangeRateTest.m in Sources */ = {isa = PBXBuildFile; fileRef = 389DE908197FC5E900169645 /* MCExchangeRateTest.m */; };
+		389DE90B197FC7B600169645 /* Cocoa.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 389DE90A197FC7B600169645 /* Cocoa.framework */; };
+		389DE90E197FD41900169645 /* MCCurrency+addons.m in Sources */ = {isa = PBXBuildFile; fileRef = 389DE90D197FD41900169645 /* MCCurrency+addons.m */; };
+		389DE910197FD6DF00169645 /* MCCurrencyTest.m in Sources */ = {isa = PBXBuildFile; fileRef = 389DE90F197FD6DF00169645 /* MCCurrencyTest.m */; };
 		389E2D0019792D7600729F61 /* MCNetworkTools.m in Sources */ = {isa = PBXBuildFile; fileRef = 389E2CFF19792D7600729F61 /* MCNetworkTools.m */; };
 		38A4ACEC1975625600C0636E /* Countly_OpenUDID.m in Sources */ = {isa = PBXBuildFile; fileRef = 38A4ACE21975625600C0636E /* Countly_OpenUDID.m */; settings = {COMPILER_FLAGS = "-fno-objc-arc"; }; };
 		38A4ACED1975625600C0636E /* Countly.m in Sources */ = {isa = PBXBuildFile; fileRef = 38A4ACE41975625600C0636E /* Countly.m */; settings = {COMPILER_FLAGS = "-fno-objc-arc"; }; };
@@ -152,7 +157,6 @@
 		38FE87D8195721670008EE74 /* MainMenu.xib in Resources */ = {isa = PBXBuildFile; fileRef = 38FE87D6195721670008EE74 /* MainMenu.xib */; };
 		38FE87DA195721670008EE74 /* Images.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 38FE87D9195721670008EE74 /* Images.xcassets */; };
 		38FE87E0195721670008EE74 /* XCTest.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 3815BD9A1955CE9900A28316 /* XCTest.framework */; };
-		38FE87E1195721670008EE74 /* Cocoa.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 3899F9DF1955D47100DE08C6 /* Cocoa.framework */; };
 		38FE87E9195721670008EE74 /* InfoPlist.strings in Resources */ = {isa = PBXBuildFile; fileRef = 38FE87E7195721670008EE74 /* InfoPlist.strings */; };
 		38FE87EB195721670008EE74 /* X_RatesTests.m in Sources */ = {isa = PBXBuildFile; fileRef = 38FE87EA195721670008EE74 /* X_RatesTests.m */; };
 /* End PBXBuildFile section */
@@ -349,6 +353,13 @@
 		389DE8FF197FB2BA00169645 /* MCSharedBill.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = MCSharedBill.m; sourceTree = "<group>"; };
 		389DE901197FB4CD00169645 /* WeAllPayStore1to3.xcmappingmodel */ = {isa = PBXFileReference; lastKnownFileType = wrapper.xcmappingmodel; path = WeAllPayStore1to3.xcmappingmodel; sourceTree = "<group>"; };
 		389DE903197FB55300169645 /* WeAllPayStore2to3.xcmappingmodel */ = {isa = PBXFileReference; lastKnownFileType = wrapper.xcmappingmodel; path = WeAllPayStore2to3.xcmappingmodel; sourceTree = "<group>"; };
+		389DE905197FBE8400169645 /* MCExchangeRate+addons.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = "MCExchangeRate+addons.h"; path = "DataStore/MCExchangeRate+addons.h"; sourceTree = "<group>"; };
+		389DE906197FBE8400169645 /* MCExchangeRate+addons.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = "MCExchangeRate+addons.m"; path = "DataStore/MCExchangeRate+addons.m"; sourceTree = "<group>"; };
+		389DE908197FC5E900169645 /* MCExchangeRateTest.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = MCExchangeRateTest.m; sourceTree = "<group>"; };
+		389DE90A197FC7B600169645 /* Cocoa.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Cocoa.framework; path = Platforms/MacOSX.platform/Developer/SDKs/MacOSX10.9.sdk/System/Library/Frameworks/Cocoa.framework; sourceTree = DEVELOPER_DIR; };
+		389DE90C197FD41900169645 /* MCCurrency+addons.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = "MCCurrency+addons.h"; path = "DataStore/MCCurrency+addons.h"; sourceTree = "<group>"; };
+		389DE90D197FD41900169645 /* MCCurrency+addons.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = "MCCurrency+addons.m"; path = "DataStore/MCCurrency+addons.m"; sourceTree = "<group>"; };
+		389DE90F197FD6DF00169645 /* MCCurrencyTest.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = MCCurrencyTest.m; sourceTree = "<group>"; };
 		389E2CBA1977162600729F61 /* CoreData.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = CoreData.framework; path = Platforms/MacOSX.platform/Developer/SDKs/MacOSX10.9.sdk/System/Library/Frameworks/CoreData.framework; sourceTree = DEVELOPER_DIR; };
 		389E2CFE19792D7600729F61 /* MCNetworkTools.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = MCNetworkTools.h; path = MC/MCNetworkTools.h; sourceTree = "<group>"; };
 		389E2CFF19792D7600729F61 /* MCNetworkTools.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = MCNetworkTools.m; path = MC/MCNetworkTools.m; sourceTree = "<group>"; };
@@ -449,7 +460,7 @@
 		38FE87D4195721670008EE74 /* MCAppDelegate.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = MCAppDelegate.m; sourceTree = "<group>"; };
 		38FE87D7195721670008EE74 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.xib; name = Base; path = Base.lproj/MainMenu.xib; sourceTree = "<group>"; };
 		38FE87D9195721670008EE74 /* Images.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Images.xcassets; sourceTree = "<group>"; };
-		38FE87DF195721670008EE74 /* X-RatesTests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; name = "X-RatesTests.xctest"; path = EMCTests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
+		38FE87DF195721670008EE74 /* EMCTests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = EMCTests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
 		38FE87E6195721670008EE74 /* X-RatesTests-Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = "X-RatesTests-Info.plist"; sourceTree = "<group>"; };
 		38FE87E8195721670008EE74 /* en */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = en; path = en.lproj/InfoPlist.strings; sourceTree = "<group>"; };
 		38FE87EA195721670008EE74 /* X_RatesTests.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = X_RatesTests.m; sourceTree = "<group>"; };
@@ -497,7 +508,7 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				38FE87E1195721670008EE74 /* Cocoa.framework in Frameworks */,
+				389DE90B197FC7B600169645 /* Cocoa.framework in Frameworks */,
 				38FE87E0195721670008EE74 /* XCTest.framework in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
@@ -530,6 +541,10 @@
 				389DE8F0197FB2B900169645 /* MCPerson.m */,
 				389DE8EC197FB2B900169645 /* MCExchangeRate.h */,
 				389DE8ED197FB2B900169645 /* MCExchangeRate.m */,
+				389DE90C197FD41900169645 /* MCCurrency+addons.h */,
+				389DE90D197FD41900169645 /* MCCurrency+addons.m */,
+				389DE905197FBE8400169645 /* MCExchangeRate+addons.h */,
+				389DE906197FBE8400169645 /* MCExchangeRate+addons.m */,
 				38DB85D217E45BCA006237CF /* MCPayment+addons.h */,
 				38DB85D317E45BCA006237CF /* MCPayment+addons.m */,
 				38DB85D517E45CA4006237CF /* MCSharedBill+addons.h */,
@@ -615,7 +630,7 @@
 				38572AD2169D437B00969C62 /* We all pay.app */,
 				385F52FD191C2C360012773D /* We all pay Tests.xctest */,
 				38FE87C5195721660008EE74 /* X-Rates.app */,
-				38FE87DF195721670008EE74 /* X-RatesTests.xctest */,
+				38FE87DF195721670008EE74 /* EMCTests.xctest */,
 			);
 			name = Products;
 			sourceTree = "<group>";
@@ -623,6 +638,7 @@
 		38572AD5169D437B00969C62 /* Frameworks */ = {
 			isa = PBXGroup;
 			children = (
+				389DE90A197FC7B600169645 /* Cocoa.framework */,
 				389E2CBA1977162600729F61 /* CoreData.framework */,
 				3899F9DF1955D47100DE08C6 /* Cocoa.framework */,
 				3899F9DD1955D46600DE08C6 /* AppKit.framework */,
@@ -711,6 +727,8 @@
 		385F5301191C2C360012773D /* We all pay Tests */ = {
 			isa = PBXGroup;
 			children = (
+				389DE90F197FD6DF00169645 /* MCCurrencyTest.m */,
+				389DE908197FC5E900169645 /* MCExchangeRateTest.m */,
 				389950AA191A9469000B00BC /* MCPaymentPresenceTest.m */,
 				3898F33F18F40E7700BFFC61 /* MCPaymentAddonsTest.m */,
 				3898F33D18F40CC100BFFC61 /* MCPersonAddonsTest.m */,
@@ -1111,7 +1129,7 @@
 			);
 			name = EMCTests;
 			productName = "X-RatesTests";
-			productReference = 38FE87DF195721670008EE74 /* X-RatesTests.xctest */;
+			productReference = 38FE87DF195721670008EE74 /* EMCTests.xctest */;
 			productType = "com.apple.product-type.bundle.unit-test";
 		};
 /* End PBXNativeTarget section */
@@ -1139,7 +1157,7 @@
 						};
 					};
 					38FE87DE195721670008EE74 = {
-						TestTargetID = 38572AD1169D437B00969C62;
+						TestTargetID = 38FE87C4195721660008EE74;
 					};
 				};
 			};
@@ -1270,6 +1288,7 @@
 				3897157A17901D0F005BE03E /* MCTextFieldAndLabelTitleView.m in Sources */,
 				389DE8FA197FB2BA00169645 /* MCPayment.m in Sources */,
 				38AAFBA218EC406300CD3E12 /* MCSharedBillPeoplePresentTableViewController-iPad.m in Sources */,
+				389DE907197FBE8400169645 /* MCExchangeRate+addons.m in Sources */,
 				389DE904197FB55300169645 /* WeAllPayStore2to3.xcmappingmodel in Sources */,
 				389C2F531933916B00BB9F3E /* WeAllPayStore.xcmappingmodel in Sources */,
 				38C2BC9F18FBD89400233D24 /* MCAllTripsTableViewCell_iPad.m in Sources */,
@@ -1306,6 +1325,7 @@
 				3892E3AE179056420038894B /* MCReturnPayment.m in Sources */,
 				38E63CF0186F904B00904D82 /* MCTableEmptyMessage.m in Sources */,
 				3872C0D718FF1363008C54D7 /* MCSelectEmailAddressTableViewCell_iPad.m in Sources */,
+				389DE90E197FD41900169645 /* MCCurrency+addons.m in Sources */,
 				3872C0D118FF0A5E008C54D7 /* MCSelectEmailAddressTableViewController_iPad.m in Sources */,
 				381F693E194EE54700F465FC /* MCOneLabelIScreenTableViewCell.m in Sources */,
 				38001C97194DA3D8008ACD94 /* MCiScreenTableViewController.m in Sources */,
@@ -1321,9 +1341,11 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				389DE909197FC5E900169645 /* MCExchangeRateTest.m in Sources */,
 				385F530F191C2D140012773D /* MCPaymentPresenceTest.m in Sources */,
 				385F5310191C2D140012773D /* MCPaymentAddonsTest.m in Sources */,
 				385F5311191C2D140012773D /* MCPersonAddonsTest.m in Sources */,
+				389DE910197FD6DF00169645 /* MCCurrencyTest.m in Sources */,
 				385F5312191C2D140012773D /* MCSharedBillAddOnsTest.m in Sources */,
 				385F5313191C2D140012773D /* WeAllPayStoreTests.m in Sources */,
 			);
@@ -1502,7 +1524,7 @@
 				GCC_WARN_UNUSED_VARIABLE = YES;
 				IPHONEOS_DEPLOYMENT_TARGET = 7.0;
 				ONLY_ACTIVE_ARCH = YES;
-				PROVISIONING_PROFILE = "7CC91C5F-447E-472B-8417-58702E550D04";
+				PROVISIONING_PROFILE = "B94E8C95-CC30-48E1-8C88-29D87CBE246A";
 				"PROVISIONING_PROFILE[sdk=iphoneos*]" = "B94E8C95-CC30-48E1-8C88-29D87CBE246A";
 				SDKROOT = iphoneos7.1;
 			};
@@ -1527,7 +1549,7 @@
 				GCC_WARN_UNUSED_VARIABLE = YES;
 				IPHONEOS_DEPLOYMENT_TARGET = 7.0;
 				OTHER_CFLAGS = "-DNS_BLOCK_ASSERTIONS=1";
-				PROVISIONING_PROFILE = "7CC91C5F-447E-472B-8417-58702E550D04";
+				PROVISIONING_PROFILE = "B94E8C95-CC30-48E1-8C88-29D87CBE246A";
 				"PROVISIONING_PROFILE[sdk=iphoneos*]" = "B94E8C95-CC30-48E1-8C88-29D87CBE246A";
 				SDKROOT = iphoneos7.1;
 				VALIDATE_PRODUCT = YES;
@@ -1553,7 +1575,7 @@
 					"$(PROJECT_DIR)/**",
 				);
 				PRODUCT_NAME = "$(TARGET_NAME)";
-				PROVISIONING_PROFILE = "";
+				PROVISIONING_PROFILE = "B94E8C95-CC30-48E1-8C88-29D87CBE246A";
 				"PROVISIONING_PROFILE[sdk=iphoneos*]" = "B94E8C95-CC30-48E1-8C88-29D87CBE246A";
 				TARGETED_DEVICE_FAMILY = "1,2";
 				WRAPPER_EXTENSION = app;
@@ -1579,7 +1601,7 @@
 					"$(PROJECT_DIR)/**",
 				);
 				PRODUCT_NAME = "$(TARGET_NAME)";
-				PROVISIONING_PROFILE = "";
+				PROVISIONING_PROFILE = "B94E8C95-CC30-48E1-8C88-29D87CBE246A";
 				"PROVISIONING_PROFILE[sdk=iphoneos*]" = "B94E8C95-CC30-48E1-8C88-29D87CBE246A";
 				TARGETED_DEVICE_FAMILY = "1,2";
 				WRAPPER_EXTENSION = app;
@@ -1724,7 +1746,7 @@
 		38FE87F0195721670008EE74 /* Debug */ = {
 			isa = XCBuildConfiguration;
 			buildSettings = {
-				BUNDLE_LOADER = "$(BUILT_PRODUCTS_DIR)/We all pay.app/We all pay";
+				BUNDLE_LOADER = "$(BUILT_PRODUCTS_DIR)/EMC.app/Contents/MacOS/EMC";
 				CLANG_WARN_BOOL_CONVERSION = YES;
 				CLANG_WARN_CONSTANT_CONVERSION = YES;
 				CLANG_WARN_DIRECT_OBJC_ISA_USAGE = YES_ERROR;
@@ -1760,7 +1782,7 @@
 		38FE87F1195721670008EE74 /* Release */ = {
 			isa = XCBuildConfiguration;
 			buildSettings = {
-				BUNDLE_LOADER = "$(BUILT_PRODUCTS_DIR)/We all pay.app/We all pay";
+				BUNDLE_LOADER = "$(BUILT_PRODUCTS_DIR)/EMC.app/Contents/MacOS/EMC";
 				CLANG_WARN_BOOL_CONVERSION = YES;
 				CLANG_WARN_CONSTANT_CONVERSION = YES;
 				CLANG_WARN_DIRECT_OBJC_ISA_USAGE = YES_ERROR;

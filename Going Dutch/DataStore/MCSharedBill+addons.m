@@ -13,6 +13,7 @@
 #import "MCPaymentPresence+addons.h"
 #import "MCWeAllPayStoreController.h"
 #import "MCReturnPayment.h"
+#import "MCCurrency+addons.h"
 
 @implementation MCSharedBill (addons)
 
@@ -33,6 +34,7 @@
     NSDate *nu = [NSDate date];
     [sharedBill setDateCreated:nu];
     [sharedBill setDateModified:nu];
+    [sharedBill setMainCurrency:[MCCurrency getCurrencySelectedInCurrentLocaleFromContext:context]];
     return sharedBill;
 }
 
@@ -509,6 +511,13 @@
 }
 
 #pragma mark - NSManagedObject Stuff
+
+- (void)awakeFromInsert
+{
+    [super awakeFromInsert];
+    
+    
+}
 
 - (void)prepareForDeletion
 {

@@ -15,6 +15,8 @@
 #import "MCEmailAddress+addons.h"
 #import "MCReturnPayment.h"
 #import "MCPaymentPresence+addons.h"
+#import "MCCurrency+addons.h"
+#import "MCExchangeRate+addons.h"
 
 @interface MCPaymentPresenceTest : XCTestCase
 {
@@ -39,6 +41,8 @@
     XCTAssertTrue(persistentStore, @"Something went wrong opening the In Memory Store: %@", [error localizedDescription]);
     _context = [[NSManagedObjectContext alloc] init];
     [_context setPersistentStoreCoordinator:persistentStoreCoordinator];
+    
+    [MCCurrency addAllAvailableCurrenciesToContext:_context];
 }
 
 - (void)tearDown
@@ -335,6 +339,34 @@
     }
 //    [thisBill amountShouldHavePaidBy:mark];
     XCTAssertEqualWithAccuracy([[thisBill amountShouldHavePaidBy:mark] doubleValue], 37.5, 0.001, @"payment presence not updated after deletion.");
+}
+
+- (void)testGetAverageOweFromPaymentInMainCurrency
+{
+    MCSharedBill *tonightsBill = [MCSharedBill addSharedBillToContext:_context];
+    MCCurrency *mainCurrency = [MCCurrency getCurrencySelectedInCurrentLocaleFromContext:_context];
+    [tonightsBill setMainCurrency:mainCurrency];
+    MCPerson *marieke = [tonightsBill addPerson];
+    [marieke setFirstName:@"Marieke"];
+    [marieke setLastName:@"Siemensma"];
+    MCPerson *merit = [tonightsBill addPerson];
+    [merit setFirstName:@"Merit"];
+    [merit setLastName:@"Koelink"];
+    MCPayment *thisPayment = [tonightsBill addPayment];
+    MCCurrency *paymentCurrency = [MCCurrency getCurrencyWithCode:@"USD" FromContext:_context];
+    [thisPayment setCurrency:paymentCurrency];
+    [thisPayment setDescriptionOfPayment:@"Thee and cookies"];
+    [thisPayment setPayingPerson:marieke];
+    [thisPayment setMoney:@4.50];
+    [thisPayment recalculateAveragePeopleOweAndStore];
+    MCExchangeRate *exchangeRate = [MCExchangeRate addExchangeRateForContext:_context];
+    [exchangeRate setToCurrency:mainCurrency];
+    [exchangeRate setFromCurrency:paymentCurrency];
+    [exchangeRate setExchangeRate:@0.72];
+    [exchangeRate setPayment:thisPayment];
+    for (MCPaymentPresence *pp in [thisPayment peopleSharingPayment]) {
+        XCTAssertEqualWithAccuracy([[pp getAverageOweFromPaymentInMainCurrency] doubleValue], [@(2.25 * 0.72) doubleValue], 0.001, @"Invalid value for getAverageOweFromPaymentInMainCurrency.");
+    }
 }
 
 @end

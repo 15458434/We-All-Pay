@@ -15,6 +15,7 @@
 #import "MCPayment+addons.h"
 #import "MCPaymentPresence+addons.h"
 #import "MCReturnPayment.h"
+#import "MCCurrency+addons.h"
 
 
 @interface MCSharedBillAddOnsTest : XCTestCase
@@ -39,7 +40,8 @@
     XCTAssertTrue(persistentStore, @"Something went wrong opening the In Memory Store: %@", [error localizedDescription]);
     _context = [[NSManagedObjectContext alloc] init];
     [_context setPersistentStoreCoordinator:persistentStoreCoordinator];
-
+    
+    [MCCurrency addAllAvailableCurrenciesToContext:_context];
 }
 
 - (void)tearDown
@@ -189,6 +191,22 @@
     [tonightsBill addPayment];
     [tonightsBill deleteIfStillNew];
     XCTAssertFalse([tonightsBill isDeleted], @"tonightsbill should not be deleted when a person is present.");
+}
+
+- (void)testmainCurrency
+{
+    // This test validates the adding of the default currency
+    MCSharedBill *tonightsBill = [MCSharedBill addSharedBillToContext:_context];
+    NSString *currentLocaleCurrencyCode = [[NSLocale currentLocale] objectForKey:NSLocaleCurrencyCode];
+    XCTAssertTrue([[[tonightsBill mainCurrency] code] isEqualToString:currentLocaleCurrencyCode], @"%@ is not equal to %@", [[tonightsBill mainCurrency] code], currentLocaleCurrencyCode);
+}
+
+- (void)testInitialPaymentCurrency
+{
+    MCSharedBill *tonightsBill = [MCSharedBill addSharedBillToContext:_context];
+    MCPayment *thisPayment = [tonightsBill addPayment];
+    NSString *currentLocaleCurrencyCode = [[NSLocale currentLocale] objectForKey:NSLocaleCurrencyCode];
+    XCTAssertTrue([[[thisPayment currency] code] isEqualToString:currentLocaleCurrencyCode], @"%@ is not equal to %@", [[thisPayment currency] code], currentLocaleCurrencyCode);
 }
 
 @end

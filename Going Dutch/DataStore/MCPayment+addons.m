@@ -10,6 +10,8 @@
 #import "MCPerson.h"
 #import "MCSharedBill.h"
 #import "MCPaymentPresence+addons.h"
+#import "MCCurrency+addons.h"
+#import "MCExchangeRate+addons.h"
 #import "MCWeAllPayStoreController.h"
 
 @implementation MCPayment (addons)
@@ -27,6 +29,7 @@
     [newPayment setUniquePaymentId:[MCTools createUniqueIdentifierString]];
     [newPayment setDateCreated:[NSDate date]];
     [newPayment setDateModified:[newPayment dateCreated]];
+    [newPayment setCurrency:[MCCurrency getCurrencySelectedInCurrentLocaleFromContext:context]];
     return newPayment;
 }
 
@@ -218,6 +221,29 @@
     [self setMoney:[nf numberFromString:moneyString]];
     [self recalculateAveragePeopleOweAndStore];
 //    [[MCWeAllPayStoreController defaultStore] endUndoGroupWithoutRegistration];
+}
+
+- (NSNumber *)moneyInMainCurrency
+{
+    double moneyDouble = [[self money] doubleValue];
+    double exchangeRateDouble = 0.0;
+    MCCurrency *sharedBillCurrency = [[self onWhichBill] mainCurrency];
+    MCCurrency *thisPaymentCurrency = [self currency];
+    if ([[sharedBillCurrency uniqueID] isEqualToString:[thisPaymentCurrency uniqueID]]) {
+        exchangeRateDouble = 1;
+    } else {
+        exchangeRateDouble = [[[self exchangeRate] exchangeRate] doubleValue];
+    }
+    return @(moneyDouble * exchangeRateDouble);
+}
+
+- (MCExchangeRate *)addExchangeRate
+{
+    [self setExchangeRate:[MCExchangeRate addExchangeRateForContext:[self managedObjectContext]]];
+    [[self exchangeRate] setToCurrency:[[self onWhichBill] mainCurrency]];
+    [[self exchangeRate] setFromCurrency:[self currency]];
+    
+    return [self exchangeRate];
 }
 
 #pragma mark - NSManagedObject stuff

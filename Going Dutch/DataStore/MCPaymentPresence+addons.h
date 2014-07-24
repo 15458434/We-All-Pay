@@ -15,5 +15,7 @@
 + (void)deletePaymentPresence:(MCPaymentPresence *)paymentPresence;
 
 - (NSString *)getCurrencyStringOfAverageOwe;
+- (NSNumber *)getAverageOweFromPaymentInMainCurrency;
+
 
 @end

@@ -36,5 +36,7 @@
 - (NSString *)getMoneyValueInCurrencyAsAString;
 - (void)putMoneyValueAsAString:(NSString *)moneyString;
 - (void)putMoneyValueInCurrencyAsAString:(NSString *)moneyString;
+- (NSNumber *)moneyInMainCurrency;
+- (MCExchangeRate *)addExchangeRate;
 
 @end

@@ -14,11 +14,13 @@
 #import "MCPerson+addons.h"
 #import "MCEmailAddress+addons.h"
 #import "MCReturnPayment.h"
+#import "MCCurrency+addons.h"
+#import "MCExchangeRate+addons.h"
 
 @interface MCPaymentAddonsTest : XCTestCase
 {
-    MCWeAllPayStoreController *mainController;
-    NSManagedObjectContext *context;
+    MCWeAllPayStoreController *_mainController;
+    NSManagedObjectContext *_context;
 }
 
 @end
@@ -29,8 +31,19 @@
 {
     [super setUp];
     // Put setup code here. This method is called before the invocation of each test method in the class.
-    mainController = [MCWeAllPayStoreController defaultStore];
-    context = [[mainController weAllPayStoreDocument] managedObjectContext];
+//    _mainController = [MCWeAllPayStoreController defaultStore];
+//    _context = [[mainController weAllPayStoreDocument] managedObjectContext];
+    
+    NSManagedObjectModel *managedObjectModel = [NSManagedObjectModel mergedModelFromBundles:nil];
+    NSPersistentStoreCoordinator *persistentStoreCoordinator = [[NSPersistentStoreCoordinator alloc] initWithManagedObjectModel:managedObjectModel];
+    NSError *error;
+    NSPersistentStore *persistentStore = [persistentStoreCoordinator addPersistentStoreWithType:NSInMemoryStoreType configuration:nil URL:nil options:nil error:&error];
+    XCTAssertTrue(persistentStore, @"Something went wrong opening the In Memory Store: %@", [error localizedDescription]);
+    _context = [[NSManagedObjectContext alloc] init];
+    [_context setPersistentStoreCoordinator:persistentStoreCoordinator];
+    
+    [MCCurrency addAllAvailableCurrenciesToContext:_context];
+
 }
 
 - (void)tearDown
@@ -84,6 +97,28 @@
     XCTAssertEqualWithAccuracy([verifyNumber doubleValue], [[thisPayment money] doubleValue], 0.005, @"thisPayment value no the same as the original currency");
     XCTAssert([verifyCurrencyString isEqualToString:[thisPayment getMoneyValueInCurrencyAsAString]], @"thisPayment currency string not equal to the string the way it should be");
     [MCSharedBill deleteSharedbill:tonightsBill];
+}
+
+- (void)testCurrency
+{
+    // This test checks to see if currency is being setup when a new payment is being made.
+    MCPayment *thisPayment = [MCPayment addPaymentInContext:_context];
+    NSString *currentCurrencyCode = [[NSLocale currentLocale] objectForKey:NSLocaleCurrencyCode];
+    XCTAssertTrue([[[thisPayment currency] code] isEqualToString:currentCurrencyCode], @"%@ should be the same as %@", [[thisPayment currency] code], currentCurrencyCode);
+}
+
+- (void)testMoneyInMainCurrency
+{
+    // This test checks to see if currency is correctly converted to the mainCurrency of the sharedBill.
+    MCSharedBill *tonightsBill = [MCSharedBill addSharedBillToContext:_context];
+    [tonightsBill setMainCurrency:[MCCurrency getCurrencyWithCode:@"EUR" FromContext:_context]];
+    MCPayment *thisPayment = [tonightsBill addPayment];
+    [thisPayment setCurrency:[MCCurrency getCurrencyWithCode:@"USD" FromContext:_context]];
+    MCExchangeRate *exchangeRate = [thisPayment addExchangeRate];
+    [exchangeRate setExchangeRate:@0.7424];
+    [thisPayment setMoney:@2.97];
+    NSNumber *valueInMainCurrency = [thisPayment moneyInMainCurrency];
+    XCTAssertEqualWithAccuracy([valueInMainCurrency doubleValue], [@(0.7424) doubleValue] * [@(2.97) doubleValue], 0.001, @"Main value after conversion not ok. %@ = %@", valueInMainCurrency, @((double)0.7424 * (double)2.97));
 }
 
 @end
