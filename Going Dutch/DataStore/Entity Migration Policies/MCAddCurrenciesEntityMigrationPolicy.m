@@ -10,6 +10,8 @@
 #import "MCxRatesController.h"
 #import "MCCurrency.h"
 #import "MCSharedBill.h"
+#import "MCExchangeRate.h"
+#import "MCPayment.h"
 
 @implementation MCAddCurrenciesEntityMigrationPolicy
 
@@ -72,6 +74,21 @@
     NSLog(@"The current selected Currency is: %@", theCurrentCurrency.code);
     for (MCSharedBill *sharedBill in allSharedBills) {
         [sharedBill setMainCurrency:theCurrentCurrency];
+        for (MCPayment *payment in [sharedBill payments]) {
+            // Create exchangeRate objects for each payment
+            MCExchangeRate *exchangeRate = [NSEntityDescription insertNewObjectForEntityForName:@"MCExchangeRate" inManagedObjectContext:destinationContext];
+            [exchangeRate setUniqueID:[[NSUUID UUID] UUIDString]];
+            NSDate *now = [NSDate date];
+            [exchangeRate setDateCreated:[payment dateCreated]];
+            [exchangeRate setDateModified:now];
+            [exchangeRate setDateFetched:[payment dateModified]];
+            [exchangeRate setExchangeRate:@1.00];
+            [exchangeRate setToCurrency:[[payment onWhichBill] mainCurrency]];
+            [exchangeRate setFromCurrency:[payment currency]];
+            [exchangeRate setSource:@"WeAllPayStore Migration"];
+            [exchangeRate setPayment:payment];
+            NSLog(@"Payment %@ got exchangeRate %@",payment, exchangeRate);
+        }
     }
     
     return returnedFromSuper;
