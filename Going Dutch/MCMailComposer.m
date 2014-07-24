@@ -54,7 +54,7 @@
     NSString *intro1 = NSLocalizedString(@"EMAIL_INTRO_PART_ONE", @"From a total of \"$ 20,45\", which was spend on our last trip to \"Movies\". We all have to pay an equal share of \"$6,82\".");
     NSString *intro2 = NSLocalizedString(@"EMAIL_INTRO_PART_TWO", @"From a total of \"$ 20,45\", which was spend on our last trip to \"Movies\". We all have to pay an equal share of \"$6,82\".");
     NSString *intro3 = NSLocalizedString(@"EMAIL_INTRO_PART_THREE", @"From a total of \"$ 20,45\", which was spend on our last trip to \"Movies\". We all have to pay an equal share of \"$6,82\".");
-    [mailBody appendFormat:@"%@ %@, %@ %@. %@ %@.\n", intro1, [nf stringFromNumber:[[self tonightsBill] totalSumOfMoneyOfThisSharedBill]], intro2,[[self tonightsBill] tripName], intro3, [nf stringFromNumber:[[self tonightsBill] amountPeopleShouldHavePaid]]];
+    [mailBody appendFormat:@"%@ %@, %@ %@, %@ %@.\n", intro1, [nf stringFromNumber:[[self tonightsBill] totalSumOfMoneyOfThisSharedBill]], intro2,[[self tonightsBill] tripName], intro3, [nf stringFromNumber:[[self tonightsBill] amountPeopleShouldHavePaid]]];
     [mailBody appendFormat:@"\n"];
     
     if ([[self tonightsBill] totalAmountOfPeopleWhoHavePaid] == 0) {
