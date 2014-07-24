@@ -141,7 +141,7 @@
 
 - (void)paymentQueueRestoreCompletedTransactionsFinished:(SKPaymentQueue *)queue
 {
-    NSLog(@"paymentQueueRestoreCompletedTransactionsFinished %d", [[queue transactions] count]);
+    NSLog(@"paymentQueueRestoreCompletedTransactionsFinished %lu", (unsigned long)[[queue transactions] count]);
     if ([[queue transactions] count] == 0) {
         NSLog(@"No previous purchases were restored.");
         [[NSNotificationCenter defaultCenter] postNotificationName:@"Restore previous purchases" object:self userInfo:@{@"status" : @"Not restored"} ];

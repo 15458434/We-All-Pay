@@ -11,6 +11,7 @@
 #import "MCPerson.h"
 #import "MCPayment.h"
 #import "MCSharedBill.h"
+#import "MCCurrency+addons.h"
 
 #import "MCTonightsBillTransfer.h"
 #import "MCThisPaymentProtocol.h"
@@ -65,6 +66,8 @@
             [weAllPayStoreDocument saveToURL:[weAllPayStoreDocument fileURL] forSaveOperation:UIDocumentSaveForCreating completionHandler:^(BOOL success) {
                 if (success) {
                     NSLog(@"Successful SaveForCreating");
+                    // Add all availableCurrencies to the we all pay store when you're creating.
+                    [MCCurrency addAllAvailableCurrenciesToContext:[weAllPayStoreDocument managedObjectContext]];
                     [[weAllPayStoreDocument managedObjectContext] setUndoManager:[[NSUndoManager alloc] init]];
                     [[[weAllPayStoreDocument managedObjectContext] undoManager] disableUndoRegistration];
                     if (completionHandler) {
