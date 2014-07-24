@@ -30,6 +30,9 @@
     [newPayment setDateCreated:[NSDate date]];
     [newPayment setDateModified:[newPayment dateCreated]];
     [newPayment setCurrency:[MCCurrency getCurrencySelectedInCurrentLocaleFromContext:context]];
+    MCExchangeRate *exchangeRate = [newPayment addExchangeRate];
+    [exchangeRate setExchangeRate:@1];
+    [exchangeRate setSource:@"Payment Creation"];
     return newPayment;
 }
 
@@ -225,15 +228,11 @@
 
 - (NSNumber *)moneyInMainCurrency
 {
-    double moneyDouble = [[self money] doubleValue];
-    double exchangeRateDouble = 0.0;
-    MCCurrency *sharedBillCurrency = [[self onWhichBill] mainCurrency];
-    MCCurrency *thisPaymentCurrency = [self currency];
-    if ([[sharedBillCurrency uniqueID] isEqualToString:[thisPaymentCurrency uniqueID]]) {
-        exchangeRateDouble = 1;
-    } else {
-        exchangeRateDouble = [[[self exchangeRate] exchangeRate] doubleValue];
+    if (![self exchangeRate]) {
+        NSLog(@"Bazinga");
     }
+    double moneyDouble = [[self money] doubleValue];
+    double exchangeRateDouble = [[[self exchangeRate] exchangeRate] doubleValue];
     return @(moneyDouble * exchangeRateDouble);
 }
 
@@ -247,6 +246,13 @@
 }
 
 #pragma mark - NSManagedObject stuff
+
+- (void)awakeFromInsert
+{
+    [super awakeFromInsert];
+    
+//    [self setPrimitiveValue:[MCExchangeRate addExchangeRateForContext:[self managedObjectContext]] forKey:@"exchangeRate"];
+}
 
 //- (void)didChangeValueForKey:(NSString *)key
 //{

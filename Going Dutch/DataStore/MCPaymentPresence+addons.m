@@ -51,13 +51,7 @@
 {
     double averageOweFromPaymentDouble = [[self averageOweFromPayment] doubleValue];
     double exchangeRateDouble = 0.0;
-    MCCurrency *sharedBillCurrency = [[[self payment] onWhichBill] mainCurrency];
-    MCCurrency *thisPaymentCurrency = [[self payment] currency];
-    if ([[sharedBillCurrency uniqueID] isEqualToString:[thisPaymentCurrency uniqueID]]) {
-        exchangeRateDouble = 1;
-    } else {
-        exchangeRateDouble = [[[[self payment] exchangeRate] exchangeRate] doubleValue];
-    }
+    exchangeRateDouble = [[[[self payment] exchangeRate] exchangeRate] doubleValue];
     return @(averageOweFromPaymentDouble * exchangeRateDouble);
 }
 
