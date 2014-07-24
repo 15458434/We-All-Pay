@@ -16,7 +16,7 @@
 #import "MCPaymentPresence+addons.h"
 #import "MCReturnPayment.h"
 #import "MCCurrency+addons.h"
-
+#import "MCExchangeRate+addons.h"
 
 @interface MCSharedBillAddOnsTest : XCTestCase
 {
@@ -207,6 +207,101 @@
     MCPayment *thisPayment = [tonightsBill addPayment];
     NSString *currentLocaleCurrencyCode = [[NSLocale currentLocale] objectForKey:NSLocaleCurrencyCode];
     XCTAssertTrue([[[thisPayment currency] code] isEqualToString:currentLocaleCurrencyCode], @"%@ is not equal to %@", [[thisPayment currency] code], currentLocaleCurrencyCode);
+}
+
+- (void)testAmountShouldHavePaidBy
+{
+    // Test to see if amountShouldHavePaidBy delivers the correct amount.
+    MCSharedBill *tonightsBill = [MCSharedBill addSharedBillToContext:_context];
+    MCCurrency *mainCurrency = [MCCurrency getCurrencyWithCode:@"EUR" FromContext:_context];
+    MCPerson *mieke = [tonightsBill addPerson];
+    [mieke setFirstName:@"Mieke"];
+    [mieke setLastName:@"Mooi"];
+    MCPerson *anne = [tonightsBill addPerson];
+    [anne setFirstName:@"Anne"];
+    [anne setLastName:@"Lief"];
+    MCPerson *mark = [tonightsBill addPerson];
+    [mark setFirstName:@"Mark"];
+    [mark setLastName:@"De grootte"];
+    MCCurrency *currencyFirstPayment = [MCCurrency getCurrencyWithCode:@"USD" FromContext:_context];
+    MCPayment *firstPayment = [tonightsBill addPayment];
+    [firstPayment setDescriptionOfPayment:@"Movie"];
+    [firstPayment setPayingPerson:mark];
+    [firstPayment setMoney:@32.00];
+    [firstPayment setCurrency:currencyFirstPayment];
+    [firstPayment recalculateAveragePeopleOweAndStore];
+    MCExchangeRate *usdToEur = [MCExchangeRate addExchangeRateForContext:_context];
+    [usdToEur setToCurrency:mainCurrency];
+    [usdToEur setFromCurrency:currencyFirstPayment];
+    [usdToEur setExchangeRate:@0.742];
+    [firstPayment setExchangeRate:usdToEur];
+    NSNumber *amountMiekeShouldPay = [tonightsBill amountShouldHavePaidBy:mieke];
+    XCTAssertEqualWithAccuracy([@(32.00 * 0.742 / 3.0) doubleValue], [amountMiekeShouldPay doubleValue], 0.001, @"Mieke should pay something else?");
+}
+
+- (void)testOriginalSolveWhoHasToPayWhoFromThisBill
+{
+    // Test to see if calculation containing foreign currency is done the right way.
+    MCSharedBill *tonightsBill = [MCSharedBill addSharedBillToContext:_context];
+    MCCurrency *mainCurrency = [MCCurrency getCurrencyWithCode:@"EUR" FromContext:_context];
+    MCPerson *mieke = [tonightsBill addPerson];
+    [mieke setFirstName:@"Mieke"];
+    [mieke setLastName:@"Mooi"];
+    MCPerson *anne = [tonightsBill addPerson];
+    [anne setFirstName:@"Anne"];
+    [anne setLastName:@"Lief"];
+    MCPerson *mark = [tonightsBill addPerson];
+    [mark setFirstName:@"Mark"];
+    [mark setLastName:@"Leuk"];
+    MCCurrency *currencyFirstPayment = [MCCurrency getCurrencyWithCode:@"USD" FromContext:_context];
+    MCPayment *firstPayment = [tonightsBill addPayment];
+    [firstPayment setDescriptionOfPayment:@"Movie"];
+    [firstPayment setPayingPerson:mark];
+    [firstPayment setMoney:@30.0];
+    [firstPayment setCurrency:currencyFirstPayment];
+    [firstPayment recalculateAveragePeopleOweAndStore];
+    MCExchangeRate *usdToEur = [MCExchangeRate addExchangeRateForContext:_context];
+    [usdToEur setToCurrency:mainCurrency];
+    [usdToEur setFromCurrency:currencyFirstPayment];
+    [usdToEur setExchangeRate:@0.72];
+    [firstPayment setExchangeRate:usdToEur];
+    NSArray *resultsWithOnlyOnePayment = [tonightsBill solveWhoHasToPayWhoFromThisBill];
+    for (MCReturnPayment *rp in resultsWithOnlyOnePayment) {
+        XCTAssertEqualWithAccuracy([[rp money] doubleValue], [@(30.0 * 0.72 / 3) doubleValue], 0.001, @"Basic split amount with conversion not ok.");
+    }
+    MCCurrency *currencySecondPayment = [MCCurrency getCurrencyWithCode:@"GBP" FromContext:_context];
+    MCPayment *secondPayment = [tonightsBill addPayment];
+    [secondPayment setDescriptionOfPayment:@"Drinks"];
+    [secondPayment setPayingPerson:anne];
+    [secondPayment setMoney:@14.50];
+    [secondPayment setCurrency:currencySecondPayment];
+    NSFetchRequest *request = [NSFetchRequest fetchRequestWithEntityName:@"MCPaymentPresence"];
+    NSSortDescriptor *sortDescriptor = [NSSortDescriptor sortDescriptorWithKey:@"dateCreated" ascending:YES];
+    [request setSortDescriptors:@[sortDescriptor]];
+    NSPredicate *predicate = [NSPredicate predicateWithFormat:@"payment = %@ AND person.firstName = %@", secondPayment, [mieke firstName]];
+    [request setPredicate:predicate];
+    NSError *fetchError;
+    NSArray *arrayWithOnlyMiekesPaymentPresence = [_context executeFetchRequest:request error:&fetchError];
+    XCTAssertNil(fetchError, @"Fetch error: %@", [fetchError localizedDescription]);
+    XCTAssertEqual([arrayWithOnlyMiekesPaymentPresence count], 1, @"More than one Mieke present.");
+    MCPaymentPresence *miekesPaymentPresence = [arrayWithOnlyMiekesPaymentPresence firstObject];
+    [miekesPaymentPresence setIsPersonPresent:@NO];
+    [secondPayment recalculateAveragePeopleOweAndStore];
+    MCExchangeRate *gbpToEur = [MCExchangeRate addExchangeRateForContext:_context];
+    [gbpToEur setToCurrency:mainCurrency];
+    [gbpToEur setFromCurrency:currencySecondPayment];
+    [gbpToEur setExchangeRate:@1.2625];
+    [secondPayment setExchangeRate:gbpToEur];
+    NSArray *results = [tonightsBill solveWhoHasToPayWhoFromThisBill];
+    for (MCReturnPayment *returnPayment in results) {
+        if ([[[returnPayment receiver] firstName] isEqualToString:@"Anne"]) {
+            XCTAssertEqualWithAccuracy([[returnPayment money] doubleValue], [@(14.50*1.2625 - ((14.50 * 1.2625/2) + (30*0.72/3))) doubleValue], 0.001, @"Anne is not receiving the right amount.");
+        } else if ([[[returnPayment receiver] firstName] isEqualToString:@"Mark"]) {
+            XCTAssertEqualWithAccuracy([[returnPayment money] doubleValue], [@(30.0 * 0.72 - ((14.50 * 1.2625/2) + (30*0.72/3))) doubleValue], 0.001, @"Mark is not receiving the right amount.");
+        } else {
+            XCTAssertFalse([[[returnPayment receiver] firstName] isEqualToString:@"Mieke"], @"Mieke should not be a receiver of money.");
+        }
+    }
 }
 
 @end

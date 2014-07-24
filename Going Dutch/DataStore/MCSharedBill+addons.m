@@ -299,8 +299,8 @@
         NSLog(@"Error fetching paymentofPerson: %@", [error localizedDescription]);
     }
     double sumOfMoney = 0.0;
-    for (MCPayment *p in paymentsOfPerson) {
-        sumOfMoney += [[p money] doubleValue];
+    for (MCPayment *payment in paymentsOfPerson) {
+        sumOfMoney += [[payment moneyInMainCurrency] doubleValue];
     }
     return @(sumOfMoney);
 }
@@ -329,7 +329,7 @@
     }
     double sumOfMoney = 0.0;
     for (MCPayment *p in paymentsOfPerson) {
-        sumOfMoney += [[p money] doubleValue];
+        sumOfMoney += [[p moneyInMainCurrency] doubleValue];
     }
     return @(sumOfMoney);
 }
@@ -389,8 +389,8 @@
     }
     
     double sumOfAllOwes = 0;
-    for (MCPaymentPresence *pp in results) {
-        sumOfAllOwes += [[pp averageOweFromPayment] doubleValue];
+    for (MCPaymentPresence *paymentPresence in results) {
+        sumOfAllOwes += [[paymentPresence getAverageOweFromPaymentInMainCurrency] doubleValue];
     }
     
     return @(sumOfAllOwes);
@@ -460,13 +460,13 @@
             for (NSMutableArray *receiver in receivers) {
                 double ltp = [payer[3] doubleValue];
                 double ltr = [receiver[3] doubleValue];
-                MCReturnPayment *rp;
+                MCReturnPayment *returnPayment;
                 if (ltp >= ltr) {
-                    rp = [[MCReturnPayment alloc] initWithPayer:payer[0] paysTo:receiver[0] amountOfMoney:@(ltr)];
+                    returnPayment = [[MCReturnPayment alloc] initWithPayer:payer[0] paysTo:receiver[0] amountOfMoney:@(ltr)];
                     ltp -= ltr;
                     ltr = 0;
                 } else {
-                    rp = [[MCReturnPayment alloc] initWithPayer:payer[0] paysTo:receiver[0] amountOfMoney:@(ltp)];
+                    returnPayment = [[MCReturnPayment alloc] initWithPayer:payer[0] paysTo:receiver[0] amountOfMoney:@(ltp)];
                     ltr -= ltp;
                     ltp = 0;
                 }
@@ -475,8 +475,8 @@
                 payer[3] = leftToPay;
                 receiver[3] = leftToReceive;
                 
-                if ([[rp money] doubleValue] > 0) {
-                    [whoHasToPayWho addObject:rp];
+                if ([[returnPayment money] doubleValue] > 0) {
+                    [whoHasToPayWho addObject:returnPayment];
                 }
             }
         }
