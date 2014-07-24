@@ -121,4 +121,11 @@
     XCTAssertEqualWithAccuracy([valueInMainCurrency doubleValue], [@(0.7424) doubleValue] * [@(2.97) doubleValue], 0.001, @"Main value after conversion not ok. %@ = %@", valueInMainCurrency, @((double)0.7424 * (double)2.97));
 }
 
+- testAddPaymentForExchangeRateCreation
+{
+    MCPayment *thisPayment = [MCPayment addPaymentInContext:_context];
+    XCTAssertNotNil([thisPayment exchangeRate], @"There should be an exchangeRate in this payment.");
+    XCTAssertEqualWithAccuracy([[[thisPayment exchangeRate] exchangeRate] doubleValue], 1.000, 0.0001, @"Value of exchangeRate should be 1.");
+}
+
 @end

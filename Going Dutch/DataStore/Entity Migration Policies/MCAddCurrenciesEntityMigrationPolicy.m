@@ -76,6 +76,9 @@
         [sharedBill setMainCurrency:theCurrentCurrency];
         for (MCPayment *payment in [sharedBill payments]) {
             // Create exchangeRate objects for each payment
+            if (![payment currency]) {
+                [payment setCurrency:theCurrentCurrency];
+            }
             MCExchangeRate *exchangeRate = [NSEntityDescription insertNewObjectForEntityForName:@"MCExchangeRate" inManagedObjectContext:destinationContext];
             [exchangeRate setUniqueID:[[NSUUID UUID] UUIDString]];
             NSDate *now = [NSDate date];
