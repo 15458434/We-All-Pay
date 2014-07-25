@@ -14,4 +14,6 @@
 + (void) addAllAvailableCurrenciesToContext:(NSManagedObjectContext *)context;
 + (MCCurrency *) getCurrencyWithCode:(NSString *)code FromContext:(NSManagedObjectContext *)context;
 
+- (NSNumberFormatter *)numberFormatter;
+
 @end

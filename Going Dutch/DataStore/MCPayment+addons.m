@@ -185,26 +185,21 @@
 
 - (NSString *)getMoneyValueAsAString
 {
-    NSNumberFormatter *nf = [[NSNumberFormatter alloc] init];
-    [nf setFormatterBehavior:NSNumberFormatterBehaviorDefault];
-    [nf setLocale:[NSLocale currentLocale]];
+    NSNumberFormatter *nf = [[self currency] numberFormatter];
     [nf setNumberStyle:NSNumberFormatterDecimalStyle];
     return [nf stringFromNumber:[self money]];
 }
 
 - (NSString *)getMoneyValueInCurrencyAsAString
 {
-    NSNumberFormatter *nf = [[NSNumberFormatter alloc] init];
-    [nf setLocale:[NSLocale currentLocale]];
-    [nf setNumberStyle:NSNumberFormatterCurrencyStyle];
+    NSNumberFormatter *nf = [[self currency] numberFormatter];
     [nf setFormatterBehavior:NSNumberFormatterBehaviorDefault];
     return [nf stringFromNumber:[self money]];
 }
 
 - (void)putMoneyValueAsAString:(NSString *)moneyString
 {
-    NSNumberFormatter *nf = [[NSNumberFormatter alloc] init];
-    [nf setLocale:[NSLocale currentLocale]];
+    NSNumberFormatter *nf = [[self currency] numberFormatter];
     [nf setNumberStyle:NSNumberFormatterDecimalStyle];
     [nf setFormatterBehavior:NSNumberFormatterBehaviorDefault];
 //    [[MCWeAllPayStoreController defaultStore] beginUndoGroupWithoutRegistration];
@@ -215,9 +210,7 @@
 
 - (void)putMoneyValueInCurrencyAsAString:(NSString *)moneyString
 {
-    NSNumberFormatter *nf = [[NSNumberFormatter alloc] init];
-    [nf setLocale:[NSLocale currentLocale]];
-    [nf setNumberStyle:NSNumberFormatterCurrencyStyle];
+    NSNumberFormatter *nf = [[self currency] numberFormatter];
     [nf setFormatterBehavior:NSNumberFormatterBehaviorDefault];
     
 //    [[MCWeAllPayStoreController defaultStore] beginUndoGroupWithoutRegistration];
