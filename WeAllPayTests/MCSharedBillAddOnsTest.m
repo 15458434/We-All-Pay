@@ -304,4 +304,13 @@
     }
 }
 
+- (void)testAddPaymentAddToCurrencyToExchangeRate
+{
+    MCSharedBill *tonightsBill = [MCSharedBill addSharedBillToContext:_context];
+    MCPerson *mark = [tonightsBill addPayment];
+    MCPerson *ilse = [tonightsBill addPayment];
+    MCPayment *thisPayment = [tonightsBill addPayment];
+    XCTAssertNotNil([[thisPayment exchangeRate] toCurrency], @"toCurrency in ExchangeRate cannot be nil after creation.");
+}
+
 @end

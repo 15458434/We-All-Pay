@@ -33,6 +33,9 @@
 		38334ECC173552410063B919 /* Default-568h@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 38334EC3172D31AF0063B919 /* Default-568h@2x.png */; };
 		383A86C518F7EE48001F128E /* MCSolutionTableViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 383A86C418F7EE48001F128E /* MCSolutionTableViewController.m */; };
 		383E0C5D186737EB00AA688D /* MCSharedBillPageViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 383E0C5C186737EB00AA688D /* MCSharedBillPageViewController.m */; };
+		384512F41986D498008D17AB /* MCSelectCurrencyTableViewController_iPad.m in Sources */ = {isa = PBXBuildFile; fileRef = 384512F11986D498008D17AB /* MCSelectCurrencyTableViewController_iPad.m */; };
+		384512F51986D498008D17AB /* MCSelectCurrencyViewController_iPad.m in Sources */ = {isa = PBXBuildFile; fileRef = 384512F31986D498008D17AB /* MCSelectCurrencyViewController_iPad.m */; };
+		384512F81986D4CE008D17AB /* MCSelectCurrencyTableViewCell_iPad.m in Sources */ = {isa = PBXBuildFile; fileRef = 384512F71986D4CE008D17AB /* MCSelectCurrencyTableViewCell_iPad.m */; };
 		38506874191CCDD10089A043 /* libGoogleAnalyticsServices.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 38CC48DE190A9E7000741201 /* libGoogleAnalyticsServices.a */; };
 		38572AD7169D437B00969C62 /* UIKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 38572AD6169D437B00969C62 /* UIKit.framework */; };
 		38572AD9169D437B00969C62 /* Foundation.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 38572AD8169D437B00969C62 /* Foundation.framework */; settings = {ATTRIBUTES = (Required, ); }; };
@@ -226,6 +229,12 @@
 		383E0C561867079900AA688D /* Social.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Social.framework; path = System/Library/Frameworks/Social.framework; sourceTree = SDKROOT; };
 		383E0C5B186737EB00AA688D /* MCSharedBillPageViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = MCSharedBillPageViewController.h; path = ViewControllers/MCSharedBillPageViewController.h; sourceTree = "<group>"; };
 		383E0C5C186737EB00AA688D /* MCSharedBillPageViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = MCSharedBillPageViewController.m; path = ViewControllers/MCSharedBillPageViewController.m; sourceTree = "<group>"; };
+		384512F01986D498008D17AB /* MCSelectCurrencyTableViewController_iPad.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = MCSelectCurrencyTableViewController_iPad.h; path = ViewControllers/iPad/MCSelectCurrencyTableViewController_iPad.h; sourceTree = "<group>"; };
+		384512F11986D498008D17AB /* MCSelectCurrencyTableViewController_iPad.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = MCSelectCurrencyTableViewController_iPad.m; path = ViewControllers/iPad/MCSelectCurrencyTableViewController_iPad.m; sourceTree = "<group>"; };
+		384512F21986D498008D17AB /* MCSelectCurrencyViewController_iPad.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = MCSelectCurrencyViewController_iPad.h; path = ViewControllers/iPad/MCSelectCurrencyViewController_iPad.h; sourceTree = "<group>"; };
+		384512F31986D498008D17AB /* MCSelectCurrencyViewController_iPad.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = MCSelectCurrencyViewController_iPad.m; path = ViewControllers/iPad/MCSelectCurrencyViewController_iPad.m; sourceTree = "<group>"; };
+		384512F61986D4CE008D17AB /* MCSelectCurrencyTableViewCell_iPad.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = MCSelectCurrencyTableViewCell_iPad.h; path = Views/iPad/MCSelectCurrencyTableViewCell_iPad.h; sourceTree = "<group>"; };
+		384512F71986D4CE008D17AB /* MCSelectCurrencyTableViewCell_iPad.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = MCSelectCurrencyTableViewCell_iPad.m; path = Views/iPad/MCSelectCurrencyTableViewCell_iPad.m; sourceTree = "<group>"; };
 		38522E2418DB3F01007BDB3F /* XCTest.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = XCTest.framework; path = Library/Frameworks/XCTest.framework; sourceTree = DEVELOPER_DIR; };
 		38572AD2169D437B00969C62 /* We all pay.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = "We all pay.app"; sourceTree = BUILT_PRODUCTS_DIR; };
 		38572AD6169D437B00969C62 /* UIKit.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = UIKit.framework; path = System/Library/Frameworks/UIKit.framework; sourceTree = SDKROOT; };
@@ -450,7 +459,7 @@
 		38EFF2D216D215BE001C8248 /* MCAllTripsTableViewCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = MCAllTripsTableViewCell.h; path = Views/MCAllTripsTableViewCell.h; sourceTree = "<group>"; };
 		38EFF2D316D215BE001C8248 /* MCAllTripsTableViewCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = MCAllTripsTableViewCell.m; path = Views/MCAllTripsTableViewCell.m; sourceTree = "<group>"; };
 		38EFF2D516D215FB001C8248 /* MCAllTripsTableViewCell.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; name = MCAllTripsTableViewCell.xib; path = Views/MCAllTripsTableViewCell.xib; sourceTree = "<group>"; };
-		38FE87C5195721660008EE74 /* X-Rates.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; name = "X-Rates.app"; path = EMC.app; sourceTree = BUILT_PRODUCTS_DIR; };
+		38FE87C5195721660008EE74 /* EMC.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = EMC.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		38FE87C9195721670008EE74 /* X-Rates-Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = "X-Rates-Info.plist"; sourceTree = "<group>"; };
 		38FE87CB195721670008EE74 /* en */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = en; path = en.lproj/InfoPlist.strings; sourceTree = "<group>"; };
 		38FE87CD195721670008EE74 /* main.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = main.m; sourceTree = "<group>"; };
@@ -629,7 +638,7 @@
 			children = (
 				38572AD2169D437B00969C62 /* We all pay.app */,
 				385F52FD191C2C360012773D /* We all pay Tests.xctest */,
-				38FE87C5195721660008EE74 /* X-Rates.app */,
+				38FE87C5195721660008EE74 /* EMC.app */,
 				38FE87DF195721670008EE74 /* EMCTests.xctest */,
 			);
 			name = Products;
@@ -812,6 +821,8 @@
 				38C2BCA418FC3CD400233D24 /* MCPaymentTableViewCell_iPad.m */,
 				3803963D192114D700FA8CC2 /* MCPaymentPresenceTableViewCell.h */,
 				3803963E192114D700FA8CC2 /* MCPaymentPresenceTableViewCell.m */,
+				384512F61986D4CE008D17AB /* MCSelectCurrencyTableViewCell_iPad.h */,
+				384512F71986D4CE008D17AB /* MCSelectCurrencyTableViewCell_iPad.m */,
 				3872C0D518FF1363008C54D7 /* MCSelectEmailAddressTableViewCell_iPad.h */,
 				3872C0D618FF1363008C54D7 /* MCSelectEmailAddressTableViewCell_iPad.m */,
 				3872C0DF19041C95008C54D7 /* MCTableEmptyMessage_iPad.xib */,
@@ -987,6 +998,10 @@
 				3872C0D018FF0A5D008C54D7 /* MCSelectEmailAddressTableViewController_iPad.m */,
 				3898F33018F180B500BFFC61 /* MCPaymentTableViewController_iPad.h */,
 				3898F33118F180B500BFFC61 /* MCPaymentTableViewController_iPad.m */,
+				384512F01986D498008D17AB /* MCSelectCurrencyTableViewController_iPad.h */,
+				384512F11986D498008D17AB /* MCSelectCurrencyTableViewController_iPad.m */,
+				384512F21986D498008D17AB /* MCSelectCurrencyViewController_iPad.h */,
+				384512F31986D498008D17AB /* MCSelectCurrencyViewController_iPad.m */,
 				3898F33418F2CB6700BFFC61 /* MCSelectPayerTableViewController_iPad.h */,
 				3898F33518F2CB6700BFFC61 /* MCSelectPayerTableViewController_iPad.m */,
 				383A86C318F7EE48001F128E /* MCSolutionTableViewController.h */,
@@ -1111,7 +1126,7 @@
 			);
 			name = EMC;
 			productName = "X-Rates";
-			productReference = 38FE87C5195721660008EE74 /* X-Rates.app */;
+			productReference = 38FE87C5195721660008EE74 /* EMC.app */;
 			productType = "com.apple.product-type.application";
 		};
 		38FE87DE195721670008EE74 /* EMCTests */ = {
@@ -1303,6 +1318,7 @@
 				38AAFBA518EC529300CD3E12 /* MCSharedBillViewController_iPad.m in Sources */,
 				38C2BCA518FC3CD400233D24 /* MCPaymentTableViewCell_iPad.m in Sources */,
 				3897159217902E35005BE03E /* MCSharedBillTableViewController.m in Sources */,
+				384512F81986D4CE008D17AB /* MCSelectCurrencyTableViewCell_iPad.m in Sources */,
 				382E7BDD17E5E57500A1040A /* MCReturnPaymentViewController.m in Sources */,
 				383E0C5D186737EB00AA688D /* MCSharedBillPageViewController.m in Sources */,
 				38E02789190A533500865FDD /* MCWhoOwesWhoTableViewCell_iPhone.m in Sources */,
@@ -1311,6 +1327,7 @@
 				3872C0DC19041725008C54D7 /* MCTableEmptyMessage_iPad.m in Sources */,
 				3877596A1924DBE50027A7F1 /* MCPaymentPresenceTableViewCell_iPhone.m in Sources */,
 				38E0C5EA18E9B2BD005A3F17 /* MCAllTripsTableViewController-iPad.m in Sources */,
+				384512F51986D498008D17AB /* MCSelectCurrencyViewController_iPad.m in Sources */,
 				3892E3A417903EF00038894B /* MCEditTripViewController.m in Sources */,
 				3898F33A18F2CC0D00BFFC61 /* MCSelectPayerTableViewCell_iPad.m in Sources */,
 				3876EF591840E86900C9546A /* MCCancelDoneTableViewController.m in Sources */,
@@ -1319,6 +1336,7 @@
 				389DE8F7197FB2B900169645 /* MCPaymentPresence.m in Sources */,
 				3892E3AA17904A240038894B /* MCPersonViewController.m in Sources */,
 				389DE902197FB4CD00169645 /* WeAllPayStore1to3.xcmappingmodel in Sources */,
+				384512F41986D498008D17AB /* MCSelectCurrencyTableViewController_iPad.m in Sources */,
 				389950A4191A90F1000B00BC /* MCPaymentPresence+addons.m in Sources */,
 				38E95DAF194F62C500069414 /* SKProduct+MCStoreInterface.m in Sources */,
 				3892E3AE179056420038894B /* MCReturnPayment.m in Sources */,
@@ -1509,7 +1527,7 @@
 				CLANG_ENABLE_OBJC_ARC = YES;
 				CLANG_WARN_EMPTY_BODY = YES;
 				CLANG_WARN__DUPLICATE_METHOD_MATCH = YES;
-				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer: Mark Cornelisse (B9ZEEP43C6)";
+				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer";
 				COPY_PHASE_STRIP = NO;
 				GCC_C_LANGUAGE_STANDARD = gnu99;
 				GCC_DYNAMIC_NO_PIC = NO;
@@ -1525,7 +1543,7 @@
 				IPHONEOS_DEPLOYMENT_TARGET = 7.0;
 				ONLY_ACTIVE_ARCH = YES;
 				PROVISIONING_PROFILE = "B94E8C95-CC30-48E1-8C88-29D87CBE246A";
-				"PROVISIONING_PROFILE[sdk=iphoneos*]" = "B94E8C95-CC30-48E1-8C88-29D87CBE246A";
+				"PROVISIONING_PROFILE[sdk=iphoneos*]" = "13471B49-730C-4E6B-B560-9F39C9E09C95";
 				SDKROOT = iphoneos7.1;
 			};
 			name = Debug;
@@ -1540,7 +1558,7 @@
 				CLANG_ENABLE_OBJC_ARC = YES;
 				CLANG_WARN_EMPTY_BODY = YES;
 				CLANG_WARN__DUPLICATE_METHOD_MATCH = YES;
-				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Distribution: Mark Cornelisse";
+				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Distribution";
 				COPY_PHASE_STRIP = YES;
 				GCC_C_LANGUAGE_STANDARD = gnu99;
 				GCC_OPTIMIZATION_LEVEL = s;
@@ -1550,7 +1568,7 @@
 				IPHONEOS_DEPLOYMENT_TARGET = 7.0;
 				OTHER_CFLAGS = "-DNS_BLOCK_ASSERTIONS=1";
 				PROVISIONING_PROFILE = "B94E8C95-CC30-48E1-8C88-29D87CBE246A";
-				"PROVISIONING_PROFILE[sdk=iphoneos*]" = "B94E8C95-CC30-48E1-8C88-29D87CBE246A";
+				"PROVISIONING_PROFILE[sdk=iphoneos*]" = "13471B49-730C-4E6B-B560-9F39C9E09C95";
 				SDKROOT = iphoneos7.1;
 				VALIDATE_PRODUCT = YES;
 			};
@@ -1575,8 +1593,8 @@
 					"$(PROJECT_DIR)/**",
 				);
 				PRODUCT_NAME = "$(TARGET_NAME)";
-				PROVISIONING_PROFILE = "B94E8C95-CC30-48E1-8C88-29D87CBE246A";
-				"PROVISIONING_PROFILE[sdk=iphoneos*]" = "B94E8C95-CC30-48E1-8C88-29D87CBE246A";
+				PROVISIONING_PROFILE = "";
+				"PROVISIONING_PROFILE[sdk=iphoneos*]" = "13471B49-730C-4E6B-B560-9F39C9E09C95";
 				TARGETED_DEVICE_FAMILY = "1,2";
 				WRAPPER_EXTENSION = app;
 			};
@@ -1601,8 +1619,8 @@
 					"$(PROJECT_DIR)/**",
 				);
 				PRODUCT_NAME = "$(TARGET_NAME)";
-				PROVISIONING_PROFILE = "B94E8C95-CC30-48E1-8C88-29D87CBE246A";
-				"PROVISIONING_PROFILE[sdk=iphoneos*]" = "B94E8C95-CC30-48E1-8C88-29D87CBE246A";
+				PROVISIONING_PROFILE = "";
+				"PROVISIONING_PROFILE[sdk=iphoneos*]" = "13471B49-730C-4E6B-B560-9F39C9E09C95";
 				TARGETED_DEVICE_FAMILY = "1,2";
 				WRAPPER_EXTENSION = app;
 			};

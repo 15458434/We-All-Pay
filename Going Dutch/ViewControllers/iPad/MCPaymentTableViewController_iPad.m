@@ -9,8 +9,11 @@
 #import "MCPaymentTableViewController_iPad.h"
 #import "MCSelectPayerTableViewController_iPad.h"
 #import "UINavigationController+KeyboardDismiss.h"
+#import "MCSelectCurrencyViewController_iPad.h"
 
 #import "MCPaymentPresenceTableViewCell.h"
+
+#import "MCThisPaymentProtocol.h"
 
 #import "MCWeAllPayStoreController.h"
 #import "MCSharedBill+addons.h"
@@ -323,6 +326,7 @@
             
         case NSFetchedResultsChangeUpdate:
             [[self tableView] reloadRowsAtIndexPaths:@[indexPath] withRowAnimation:UITableViewRowAnimationAutomatic];
+            paidField.text = [_thisPayment getMoneyValueInCurrencyAsAString];
             break;
             
         case NSFetchedResultsChangeMove:
@@ -445,6 +449,20 @@
                 if (strongSelf) {
                     [strongSelf reloadPayerLabel];
                 }
+            }];
+        }
+    }
+    if ([[segue identifier] isEqualToString:@"openSelectCurrency"]) {
+        id destination = [segue destinationViewController];
+        if ([destination conformsToProtocol:@protocol(MCThisPaymentProtocol)]) {
+            [destination setThisPayment:_thisPayment];
+        }
+        if ([destination conformsToProtocol:@protocol(MCDismissMeBlockProtocol)]) {
+            UIPopoverController *selectCurrencyPopover = [(UIStoryboardPopoverSegue *)segue popoverController];
+            selectCurrencyPopover.delegate = self;
+            [destination setDismissMe:^{
+                NSLog(@"Dismiss from paymentTableViewController.");
+                [selectCurrencyPopover dismissPopoverAnimated:YES];
             }];
         }
     }

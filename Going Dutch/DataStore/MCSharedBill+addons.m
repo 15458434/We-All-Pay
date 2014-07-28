@@ -14,6 +14,7 @@
 #import "MCWeAllPayStoreController.h"
 #import "MCReturnPayment.h"
 #import "MCCurrency+addons.h"
+#import "MCExchangeRate+addons.h"
 
 @implementation MCSharedBill (addons)
 
@@ -182,6 +183,7 @@
         [paymentPresence setIsPersonPresent:@YES];
     }
     [payment setOnWhichBill:self];
+    payment.exchangeRate.toCurrency = [self mainCurrency];
     return payment;
 }
 

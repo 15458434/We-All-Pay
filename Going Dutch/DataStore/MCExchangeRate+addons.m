@@ -7,6 +7,15 @@
 //
 
 #import "MCExchangeRate+addons.h"
+#import "MCxRatesController.h"
+#import "MCWeAllPayStoreController.h"
+#import "MCCurrency+addons.h"
+
+typedef NS_ENUM(NSUInteger, MCExchangeRateFetchStatus) {
+    exchangeRateFetching,
+    exchangeRateValid,
+    exchangeRateManual
+};
 
 @implementation MCExchangeRate (addons)
 
@@ -17,7 +26,8 @@
 
 - (BOOL)retrieveExchangeRateFromWeb
 {
-    return NO;
+    [[MCWeAllPayStoreController defaultStore] updateXRate:self withCompletionHandler:nil];
+    return YES;
 }
 
 #pragma mark - Inherited From Super

@@ -238,6 +238,18 @@
     return [self exchangeRate];
 }
 
+- (void)setNewCurrencyAndAutomaticallyUpdateExchangeRate:(MCCurrency *)newCurrency
+{
+    self.currency = newCurrency;
+    self.exchangeRate.fromCurrency = newCurrency;
+    BOOL success = [[self exchangeRate] retrieveExchangeRateFromWeb];
+    if (success) {
+        NSLog(@"ExchangeRate retrieval successful");
+    } else {
+        NSLog(@"ExchangeRate retrieval unsuccesful");
+    }
+}
+
 #pragma mark - NSManagedObject stuff
 
 - (void)awakeFromInsert

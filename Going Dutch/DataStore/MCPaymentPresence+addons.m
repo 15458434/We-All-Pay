@@ -40,10 +40,7 @@
 
 - (NSString *)getCurrencyStringOfAverageOwe
 {
-    NSNumberFormatter *nf = [[NSNumberFormatter alloc] init];
-    [nf setLocale:[NSLocale currentLocale]];
-    [nf setNumberStyle:NSNumberFormatterCurrencyStyle];
-    [nf setFormatterBehavior:NSNumberFormatterBehaviorDefault];
+    NSNumberFormatter *nf = [[[self payment] currency] numberFormatter];
     return [nf stringFromNumber:[self averageOweFromPayment]];
 }
 

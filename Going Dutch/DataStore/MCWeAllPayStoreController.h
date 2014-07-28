@@ -12,6 +12,7 @@
 @class MCPayment;
 @class MCPerson;
 @class MCSharedBill;
+@class MCExchangeRate;
 
 @interface MCWeAllPayStoreController : NSObject
 {
@@ -37,11 +38,16 @@
 - (void)endUndoGroupAndUndo;
 - (void)endUndoGroupAndUndoWithoutRegistration;
 
-// TableView fill sources.
+#pragma mark - Webinterface
+
+- (void)updateXRate:(MCExchangeRate *)exchangeRate withCompletionHandler:(void (^)(NSDictionary *exchangeRateResult))completionBlock;
+
+#pragma mark - TableViewSources
 - (NSFetchedResultsController *)allTripsDataControllerForDelegate:(id)delegate;
 - (NSFetchedResultsController *)sharedBillPaymentsDataControllerForDelegate:(id)delegate;
 - (NSFetchedResultsController *)sharedBillPeoplePresentDataControllerForDelegate:(id)delegate;
 - (NSFetchedResultsController *)paymentPresenceDataControllerForDelegate:(id)delegate;
+- (NSFetchedResultsController *)availableCurrencyControllerForDeleage:(id)delegate;
 - (NSArray *)getPeopleOnSharedBill:(MCSharedBill *)thisBill;
 - (NSArray *)getEmailaddressesFrom:(MCPerson *)thisPerson;
 

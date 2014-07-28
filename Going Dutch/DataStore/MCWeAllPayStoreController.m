@@ -12,9 +12,19 @@
 #import "MCPayment.h"
 #import "MCSharedBill.h"
 #import "MCCurrency+addons.h"
+#import "MCExchangeRate+addons.h"
+
+#import "MCxRatesController.h"
 
 #import "MCTonightsBillTransfer.h"
 #import "MCThisPaymentProtocol.h"
+
+@interface MCWeAllPayStoreController ()
+
+@property (nonatomic, strong) MCxRatesController *xRatesfetchController;
+@property (nonatomic, strong) NSMutableArray *exchangeRateQueue;
+
+@end
 
 @implementation MCWeAllPayStoreController
 
@@ -218,6 +228,38 @@
     [[context undoManager] undoNestedGroup];    
 }
 
+- (MCxRatesController *)xRatesfetchController
+{
+    if (!_xRatesfetchController) {
+        _xRatesfetchController = [MCxRatesController new];
+    }
+    return _xRatesfetchController;
+}
+
+#pragma mark - Webinterface
+
+- (void)updateXRate:(MCExchangeRate *)exchangeRate withCompletionHandler:(void (^)(NSDictionary *))completionBlock
+{
+    NSString *fromCode = [[exchangeRate fromCurrency] code];
+    NSString *toCode = [[exchangeRate toCurrency] code];
+    if (!_exchangeRateQueue) {
+        _exchangeRateQueue = [NSMutableArray new];
+    }
+    [_exchangeRateQueue addObject:exchangeRate];
+    __weak __typeof(self) weakSelf = self;
+    [[self xRatesfetchController] getExchangeRateFrom:fromCode to:toCode withCompletionHandler:^(NSDictionary *exchangeRateResult) {
+        NSLog(@"Fetched ExchangeRate: %@", exchangeRateResult);
+        __strong __typeof(self) strongSelf = weakSelf;
+        if (strongSelf) {
+            [exchangeRate setExchangeRate:[exchangeRateResult objectForKey:MCCurrencyExchangeRate]];
+            [exchangeRate setSource:[exchangeRateResult objectForKey:MCSource]];
+        } else {
+            NSLog(@"Default Controller does not exist anymore.");
+        }
+        [[strongSelf exchangeRateQueue] removeObject:exchangeRate];
+    }];
+}
+
 #pragma mark - TableView fill sources.
 
 - (NSFetchedResultsController *)allTripsDataControllerForDelegate:(id)delegate
@@ -317,6 +359,24 @@
     BOOL success = [dataController performFetch:&error];
     if (!success) {
         NSLog(@"Something went wrong");
+    }
+    return dataController;
+}
+
+- (NSFetchedResultsController *)availableCurrencyControllerForDeleage:(id)delegate
+{
+    NSParameterAssert([delegate conformsToProtocol:@protocol(NSFetchedResultsControllerDelegate)]);
+    NSManagedObjectContext *context = [weAllPayStoreDocument managedObjectContext];
+    NSFetchRequest *request = [NSFetchRequest fetchRequestWithEntityName:@"MCCurrency"];
+    request.sortDescriptors = @[[NSSortDescriptor sortDescriptorWithKey:@"name" ascending:YES]];
+    request.predicate = [NSPredicate predicateWithFormat:@"isStillValid = YES"];
+    request.fetchBatchSize = 20;
+    NSFetchedResultsController *dataController = [[NSFetchedResultsController alloc] initWithFetchRequest:request managedObjectContext:context sectionNameKeyPath:nil cacheName:@"All valid currencies."];
+    dataController.delegate = delegate;
+    NSError *fetchError;
+    BOOL success = [dataController performFetch:&fetchError];
+    if (!success) {
+        NSLog(@"Error fetching available currencies: %@", [fetchError localizedDescription]);
     }
     return dataController;
 }
