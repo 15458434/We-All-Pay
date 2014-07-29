@@ -1,26 +1,28 @@
 //
-//  MCSelectCurrencyTableViewController_iPad.m
+//  MCSelectCurrencyTableViewController.m
 //  We all pay
 //
-//  Created by Mark Cornelisse on 25/07/14.
+//  Created by Mark Cornelisse on 28/07/14.
 //  Copyright (c) 2014 Mark Cornelisse. All rights reserved.
 //
 
-#import "MCSelectCurrencyTableViewController_iPad.h"
-#import "MCSelectCurrencyTableViewCell_iPad.h"
+#import "MCSelectCurrencyTableViewController.h"
+
+#import "MCSelectCurrencyTableViewCell_iPhone.h"
 
 #import "MCCurrency+addons.h"
 #import "MCPayment+addons.h"
+#import "MCExchangeRate+addons.h"
 
 #import "MCWeAllPayStoreController.h"
 
-@interface MCSelectCurrencyTableViewController_iPad ()
+@interface MCSelectCurrencyTableViewController ()
 
 @property (nonatomic, strong) NSFetchedResultsController *dataController;
 
 @end
 
-@implementation MCSelectCurrencyTableViewController_iPad
+@implementation MCSelectCurrencyTableViewController
 
 - (id)initWithStyle:(UITableViewStyle)style
 {
@@ -40,6 +42,7 @@
     
     // Uncomment the following line to display an Edit button in the navigation bar for this view controller.
     // self.navigationItem.rightBarButtonItem = self.editButtonItem;
+    
     _dataController = [[MCWeAllPayStoreController defaultStore] availableCurrencyControllerForDelegate:self];
 }
 
@@ -53,8 +56,8 @@
 
 - (void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath
 {
-    _thisPayment.currency = [_dataController objectAtIndexPath:indexPath];
-    [_thisPayment setNewCurrencyAndAutomaticallyUpdateExchangeRate:[_dataController objectAtIndexPath:indexPath]];
+    MCCurrency *thisCellsCurrency = [_dataController objectAtIndexPath:indexPath];
+    [_thisPayment setNewCurrencyAndAutomaticallyUpdateExchangeRate:thisCellsCurrency];
     [_thisPayment recalculateAveragePeopleOweAndStore];
     self.dismissMe();
 }
@@ -73,17 +76,15 @@
     return [[_dataController fetchedObjects] count];
 }
 
-
 - (UITableViewCell *)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath
 {
-    MCSelectCurrencyTableViewCell_iPad *cell = [tableView dequeueReusableCellWithIdentifier:@"MCSelectCurrencyTableViewCell_iPad" forIndexPath:indexPath];
+    MCSelectCurrencyTableViewCell_iPhone *cell = [tableView dequeueReusableCellWithIdentifier:@"MCSelectCurrencyTableViewCell_iPhone" forIndexPath:indexPath];
     
-    // Configure the cell...
-    MCCurrency *thisCurrency = [_dataController objectAtIndexPath:indexPath];
-    cell.currencyNameLabel.text = [thisCurrency name];
-    cell.currencySymbolLabel.text = [thisCurrency symbol];
+    MCCurrency *thisCellsCurrency = [_dataController objectAtIndexPath:indexPath];
+    cell.currencyNameLabel.text = [thisCellsCurrency name];
+    cell.currencySymbolLabel.text = [thisCellsCurrency symbol];
     
-    if ([[thisCurrency code] isEqualToString:[[_thisPayment currency] code]]) {
+    if ([[[_thisPayment currency] code] isEqualToString:[thisCellsCurrency code]]) {
         cell.accessoryType = UITableViewCellAccessoryCheckmark;
     } else {
         cell.accessoryType = UITableViewCellAccessoryNone;
@@ -91,7 +92,6 @@
     
     return cell;
 }
-
 
 /*
 // Override to support conditional editing of the table view.

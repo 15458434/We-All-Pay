@@ -363,7 +363,7 @@
     return dataController;
 }
 
-- (NSFetchedResultsController *)availableCurrencyControllerForDeleage:(id)delegate
+- (NSFetchedResultsController *)availableCurrencyControllerForDelegate:(id)delegate
 {
     NSParameterAssert([delegate conformsToProtocol:@protocol(NSFetchedResultsControllerDelegate)]);
     NSManagedObjectContext *context = [weAllPayStoreDocument managedObjectContext];

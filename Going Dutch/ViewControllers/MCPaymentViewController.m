@@ -441,17 +441,9 @@
         [self setCircularImageOnPictureView:[[_thisPayment payingPerson] picture]];
     }
 
-    NSNumberFormatter *nf = [[NSNumberFormatter alloc] init];
-    [nf setLocale:[NSLocale currentLocale]];
-    [nf setNumberStyle:NSNumberFormatterCurrencyStyle];
-    [nf setFormatterBehavior:NSNumberFormatterCurrencyStyle];
     if (!isNew) {
-        [paidView setText:[nf stringFromNumber:[_thisPayment money]]];
+        paidView.text = [_thisPayment getMoneyValueInCurrencyAsAString];
     }
-//    NSDateFormatter *dateFormatter = [[NSDateFormatter alloc] init];
-//    [dateFormatter setDateStyle:NSDateFormatterMediumStyle];
-//    [dateFormatter setTimeStyle:NSDateFormatterMediumStyle];
-//    [dateAndTimeLabel setText:[dateFormatter stringFromDate:[_thisPayment dateModified]]];
 }
 
 - (void)viewDidAppear:(BOOL)animated
@@ -523,6 +515,7 @@
             
         case NSFetchedResultsChangeUpdate:
             [[self tableView] reloadRowsAtIndexPaths:@[indexPath] withRowAnimation:UITableViewRowAnimationAutomatic];
+            paidView.text = [_thisPayment getMoneyValueInCurrencyAsAString];
             break;
             
         case NSFetchedResultsChangeMove:
@@ -616,7 +609,6 @@
  }
  */
 
-/*
  #pragma mark - Navigation
  
  // In a storyboard-based application, you will often want to do a little preparation before navigation
@@ -624,7 +616,14 @@
  {
  // Get the new view controller using [segue destinationViewController].
  // Pass the selected object to the new view controller.
+     if ([[segue identifier] isEqualToString:@"openSelectCurrency"]) {
+         id destination = [segue destinationViewController];
+         if ([destination conformsToProtocol:@protocol(MCThisPaymentProtocol)]) {
+             [destination setThisPayment:_thisPayment];
+         }
+         __weak typeof(self) weakSelf = self;
+         
+     }
  }
- */
 
 @end
