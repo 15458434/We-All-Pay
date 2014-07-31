@@ -59,7 +59,7 @@
     MCCurrency *thisCellsCurrency = [_dataController objectAtIndexPath:indexPath];
     [_thisPayment setNewCurrencyAndAutomaticallyUpdateExchangeRate:thisCellsCurrency];
     [_thisPayment recalculateAveragePeopleOweAndStore];
-    self.dismissMe();
+    [[[self navigationController] presentingViewController] dismissViewControllerAnimated:YES completion:nil];
 }
 
 #pragma mark - Table view data source

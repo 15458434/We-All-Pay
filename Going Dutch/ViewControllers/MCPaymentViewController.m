@@ -15,6 +15,7 @@
 #import "MCTwoLabelsTitleView.h"
 
 #import "MCPaymentPresenceTableViewCell_iPhone.h"
+#import "MCDismissMeBlockProtocol.h"
 
 @interface MCPaymentViewController ()
 
@@ -617,7 +618,7 @@
  // Get the new view controller using [segue destinationViewController].
  // Pass the selected object to the new view controller.
      if ([[segue identifier] isEqualToString:@"openSelectCurrency"]) {
-         id destination = [segue destinationViewController];
+         id destination = [[segue destinationViewController] viewControllers][0];
          if ([destination conformsToProtocol:@protocol(MCThisPaymentProtocol)]) {
              [destination setThisPayment:_thisPayment];
          }

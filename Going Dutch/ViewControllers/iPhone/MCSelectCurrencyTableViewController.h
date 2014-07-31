@@ -13,7 +13,7 @@
 
 @class MCPayment;
 
-@interface MCSelectCurrencyTableViewController : UITableViewController <NSFetchedResultsControllerDelegate, MCThisPaymentProtocol, MCDismissMeBlockProtocol>
+@interface MCSelectCurrencyTableViewController : UITableViewController <NSFetchedResultsControllerDelegate, UISearchBarDelegate, MCThisPaymentProtocol, MCDismissMeBlockProtocol>
 
 @property (nonatomic, strong) MCPayment *thisPayment;
 @property (nonatomic, strong) void (^dismissMe)();
