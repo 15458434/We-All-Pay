@@ -10,6 +10,12 @@
 
 @interface MCExchangeRate (addons)
 
+typedef NS_ENUM(short, MCExchangeRateStatus){
+    valid,
+    invalid,
+    fetching
+};
+
 + (MCExchangeRate *)addExchangeRateForContext:(NSManagedObjectContext *)context;
 
 - (BOOL)retrieveExchangeRateFromWeb;

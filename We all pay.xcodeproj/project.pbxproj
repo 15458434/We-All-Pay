@@ -98,7 +98,6 @@
 		3899D3F8194F453D00893323 /* MCStoreInterface.m in Sources */ = {isa = PBXBuildFile; fileRef = 3899D3F7194F453D00893323 /* MCStoreInterface.m */; };
 		389C2F531933916B00BB9F3E /* WeAllPayStore.xcmappingmodel in Sources */ = {isa = PBXBuildFile; fileRef = 389C2F521933916B00BB9F3E /* WeAllPayStore.xcmappingmodel */; };
 		389C2F56193391E300BB9F3E /* MCPaymentPresenceEntityMigrationPolicy.m in Sources */ = {isa = PBXBuildFile; fileRef = 389C2F55193391E300BB9F3E /* MCPaymentPresenceEntityMigrationPolicy.m */; };
-		389DE8EE197FB2B900169645 /* MCExchangeRate.m in Sources */ = {isa = PBXBuildFile; fileRef = 389DE8ED197FB2B900169645 /* MCExchangeRate.m */; };
 		389DE8F1197FB2B900169645 /* MCPerson.m in Sources */ = {isa = PBXBuildFile; fileRef = 389DE8F0197FB2B900169645 /* MCPerson.m */; };
 		389DE8F4197FB2B900169645 /* MCEmailAddress.m in Sources */ = {isa = PBXBuildFile; fileRef = 389DE8F3197FB2B900169645 /* MCEmailAddress.m */; };
 		389DE8F7197FB2B900169645 /* MCPaymentPresence.m in Sources */ = {isa = PBXBuildFile; fileRef = 389DE8F6197FB2B900169645 /* MCPaymentPresence.m */; };
@@ -113,6 +112,7 @@
 		389DE910197FD6DF00169645 /* MCCurrencyTest.m in Sources */ = {isa = PBXBuildFile; fileRef = 389DE90F197FD6DF00169645 /* MCCurrencyTest.m */; };
 		389DE9161982540D00169645 /* MCCurrency.m in Sources */ = {isa = PBXBuildFile; fileRef = 389DE9151982540D00169645 /* MCCurrency.m */; };
 		389E2D0019792D7600729F61 /* MCNetworkTools.m in Sources */ = {isa = PBXBuildFile; fileRef = 389E2CFF19792D7600729F61 /* MCNetworkTools.m */; };
+		389FBD40198BDA1C003B4409 /* MCExchangeRate.m in Sources */ = {isa = PBXBuildFile; fileRef = 389FBD3F198BDA1C003B4409 /* MCExchangeRate.m */; };
 		38A4ACEC1975625600C0636E /* Countly_OpenUDID.m in Sources */ = {isa = PBXBuildFile; fileRef = 38A4ACE21975625600C0636E /* Countly_OpenUDID.m */; settings = {COMPILER_FLAGS = "-fno-objc-arc"; }; };
 		38A4ACED1975625600C0636E /* Countly.m in Sources */ = {isa = PBXBuildFile; fileRef = 38A4ACE41975625600C0636E /* Countly.m */; settings = {COMPILER_FLAGS = "-fno-objc-arc"; }; };
 		38A4ACEE1975625600C0636E /* Countly.podspec in Resources */ = {isa = PBXBuildFile; fileRef = 38A4ACE51975625600C0636E /* Countly.podspec */; };
@@ -349,8 +349,6 @@
 		389C2F521933916B00BB9F3E /* WeAllPayStore.xcmappingmodel */ = {isa = PBXFileReference; lastKnownFileType = wrapper.xcmappingmodel; path = WeAllPayStore.xcmappingmodel; sourceTree = "<group>"; };
 		389C2F54193391E300BB9F3E /* MCPaymentPresenceEntityMigrationPolicy.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = MCPaymentPresenceEntityMigrationPolicy.h; path = DataStore/MCPaymentPresenceEntityMigrationPolicy.h; sourceTree = "<group>"; };
 		389C2F55193391E300BB9F3E /* MCPaymentPresenceEntityMigrationPolicy.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = MCPaymentPresenceEntityMigrationPolicy.m; path = DataStore/MCPaymentPresenceEntityMigrationPolicy.m; sourceTree = "<group>"; };
-		389DE8EC197FB2B900169645 /* MCExchangeRate.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = MCExchangeRate.h; sourceTree = "<group>"; };
-		389DE8ED197FB2B900169645 /* MCExchangeRate.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = MCExchangeRate.m; sourceTree = "<group>"; };
 		389DE8EF197FB2B900169645 /* MCPerson.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = MCPerson.h; sourceTree = "<group>"; };
 		389DE8F0197FB2B900169645 /* MCPerson.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = MCPerson.m; sourceTree = "<group>"; };
 		389DE8F2197FB2B900169645 /* MCEmailAddress.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = MCEmailAddress.h; sourceTree = "<group>"; };
@@ -379,6 +377,8 @@
 		389E92631889E5A60005F063 /* en */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = en; path = en.lproj/MCTableEmptyMessage.strings; sourceTree = "<group>"; };
 		389E92641889E5A60005F063 /* en */ = {isa = PBXFileReference; fileEncoding = 10; lastKnownFileType = text.plist.strings; lineEnding = 0; name = en; path = en.lproj/Localizable.strings; sourceTree = "<group>"; };
 		389E92651889E6CC0005F063 /* en */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = en; path = en.lproj/InfoPlist.strings; sourceTree = "<group>"; };
+		389FBD3E198BDA1C003B4409 /* MCExchangeRate.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = MCExchangeRate.h; sourceTree = "<group>"; };
+		389FBD3F198BDA1C003B4409 /* MCExchangeRate.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = MCExchangeRate.m; sourceTree = "<group>"; };
 		38A4ACE11975625600C0636E /* Countly_OpenUDID.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = Countly_OpenUDID.h; sourceTree = "<group>"; };
 		38A4ACE21975625600C0636E /* Countly_OpenUDID.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = Countly_OpenUDID.m; sourceTree = "<group>"; };
 		38A4ACE31975625600C0636E /* Countly.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = Countly.h; sourceTree = "<group>"; };
@@ -532,6 +532,8 @@
 			isa = PBXGroup;
 			children = (
 				3829AD0D178B41320025969D /* WeAllPayStore.xcdatamodeld */,
+				389FBD3E198BDA1C003B4409 /* MCExchangeRate.h */,
+				389FBD3F198BDA1C003B4409 /* MCExchangeRate.m */,
 				389C2F521933916B00BB9F3E /* WeAllPayStore.xcmappingmodel */,
 				389DE903197FB55300169645 /* WeAllPayStore2to3.xcmappingmodel */,
 				389DE901197FB4CD00169645 /* WeAllPayStore1to3.xcmappingmodel */,
@@ -551,8 +553,6 @@
 				389DE8F3197FB2B900169645 /* MCEmailAddress.m */,
 				389DE8EF197FB2B900169645 /* MCPerson.h */,
 				389DE8F0197FB2B900169645 /* MCPerson.m */,
-				389DE8EC197FB2B900169645 /* MCExchangeRate.h */,
-				389DE8ED197FB2B900169645 /* MCExchangeRate.m */,
 				389DE90C197FD41900169645 /* MCCurrency+addons.h */,
 				389DE90D197FD41900169645 /* MCCurrency+addons.m */,
 				389DE905197FBE8400169645 /* MCExchangeRate+addons.h */,
@@ -1283,7 +1283,6 @@
 				38E95DB81950731600069414 /* MCOneLabelTableViewCell_iPad.m in Sources */,
 				38572B0A169F3D2700969C62 /* MCAllTripsTableViewController.m in Sources */,
 				389DE8F4197FB2B900169645 /* MCEmailAddress.m in Sources */,
-				389DE8EE197FB2B900169645 /* MCExchangeRate.m in Sources */,
 				386FC32518E5855400428294 /* MCSharedBillMainViewController.m in Sources */,
 				389DE8F1197FB2B900169645 /* MCPerson.m in Sources */,
 				381AB0EF1924FCC2004A02C6 /* MCWhoPaidHowMuchTableViewCell_iPhone.m in Sources */,
@@ -1315,6 +1314,7 @@
 				3864AA81195B0B6600831C93 /* MCiScreenRootViewController_iPad.m in Sources */,
 				38C2BC9918F7F69A00233D24 /* MCWhoOwesWhoTableViewCell_iPad.m in Sources */,
 				380396451923766100FA8CC2 /* MCMailComposer.m in Sources */,
+				389FBD40198BDA1C003B4409 /* MCExchangeRate.m in Sources */,
 				3897157C17901D0F005BE03E /* MCTwoLabelsTitleView.m in Sources */,
 				3897158717901D55005BE03E /* MCPaymentTableViewCell.m in Sources */,
 				38DC8B2A1907145A00762235 /* MCRootViewController.m in Sources */,

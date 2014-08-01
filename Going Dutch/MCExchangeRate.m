@@ -2,7 +2,7 @@
 //  MCExchangeRate.m
 //  We all pay
 //
-//  Created by Mark Cornelisse on 23/07/14.
+//  Created by Mark Cornelisse on 01/08/14.
 //  Copyright (c) 2014 Mark Cornelisse. All rights reserved.
 //
 
@@ -19,6 +19,7 @@
 @dynamic exchangeRate;
 @dynamic source;
 @dynamic uniqueID;
+@dynamic status;
 @dynamic fromCurrency;
 @dynamic payment;
 @dynamic toCurrency;

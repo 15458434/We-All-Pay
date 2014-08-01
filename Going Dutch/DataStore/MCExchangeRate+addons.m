@@ -11,12 +11,6 @@
 #import "MCWeAllPayStoreController.h"
 #import "MCCurrency+addons.h"
 
-typedef NS_ENUM(NSUInteger, MCExchangeRateFetchStatus) {
-    exchangeRateFetching,
-    exchangeRateValid,
-    exchangeRateManual
-};
-
 @implementation MCExchangeRate (addons)
 
 + (MCExchangeRate *)addExchangeRateForContext:(NSManagedObjectContext *)context
@@ -26,7 +20,14 @@ typedef NS_ENUM(NSUInteger, MCExchangeRateFetchStatus) {
 
 - (BOOL)retrieveExchangeRateFromWeb
 {
-    [[MCWeAllPayStoreController defaultStore] updateXRate:self withCompletionHandler:nil];
+    MCExchangeRateStatus fetchingStatus = fetching;
+    [self setStatus:[NSNumber numberWithShort:fetchingStatus]];
+    NSLog(@"MCExchangeRate Status is fetching.");
+    [[MCWeAllPayStoreController defaultStore] updateXRate:self withCompletionHandler:^(NSDictionary *exchangeRateResult) {
+        MCExchangeRateStatus exchangeRateFetchStatus = valid;
+        [self setStatus:[NSNumber numberWithShort:exchangeRateFetchStatus]];
+        NSLog(@"MCExchangeRate Status is valid.");
+    }];
     return YES;
 }
 

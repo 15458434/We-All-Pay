@@ -257,6 +257,7 @@
             NSLog(@"Default Controller does not exist anymore.");
         }
         [[strongSelf exchangeRateQueue] removeObject:exchangeRate];
+        completionBlock(exchangeRateResult);
     }];
 }
 
