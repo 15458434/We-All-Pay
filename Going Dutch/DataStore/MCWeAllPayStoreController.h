@@ -48,6 +48,7 @@
 - (NSFetchedResultsController *)sharedBillPeoplePresentDataControllerForDelegate:(id)delegate;
 - (NSFetchedResultsController *)paymentPresenceDataControllerForDelegate:(id)delegate;
 - (NSFetchedResultsController *)availableCurrencyControllerForDelegate:(id)delegate;
+- (NSFetchedResultsController *)searchCurrencyControllerWithSearchText:(NSString *)searchText withDelegate:(id)delegate;
 - (NSArray *)getPeopleOnSharedBill:(MCSharedBill *)thisBill;
 - (NSArray *)getEmailaddressesFrom:(MCPerson *)thisPerson;
 

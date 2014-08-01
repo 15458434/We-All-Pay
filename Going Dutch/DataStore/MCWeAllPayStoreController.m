@@ -381,6 +381,24 @@
     return dataController;
 }
 
+- (NSFetchedResultsController *)searchCurrencyControllerWithSearchText:(NSString *)searchText withDelegate:(id)delegate
+{
+    NSParameterAssert([delegate conformsToProtocol:@protocol(NSFetchedResultsControllerDelegate)]);
+    NSManagedObjectContext *context = [weAllPayStoreDocument managedObjectContext];
+    NSFetchRequest *request = [NSFetchRequest fetchRequestWithEntityName:@"MCCurrency"];
+    request.sortDescriptors = @[[NSSortDescriptor sortDescriptorWithKey:@"name" ascending:YES]];
+    request.predicate = [NSPredicate predicateWithFormat:@"isStillValid = YES AND name contains[c] %@", searchText];
+    request.fetchBatchSize = 20;
+    NSFetchedResultsController *dataController = [[NSFetchedResultsController alloc] initWithFetchRequest:request managedObjectContext:context sectionNameKeyPath:nil cacheName:@"All valid currencies."];
+    dataController.delegate = delegate;
+    NSError *fetchError;
+    BOOL success = [dataController performFetch:&fetchError];
+    if (!success) {
+        NSLog(@"Error fetching available currencies: %@", [fetchError localizedDescription]);
+    }
+    return dataController;
+}
+
 - (NSArray *)getPeopleOnSharedBill:(MCSharedBill *)thisBill
 {
     NSParameterAssert(thisBill);

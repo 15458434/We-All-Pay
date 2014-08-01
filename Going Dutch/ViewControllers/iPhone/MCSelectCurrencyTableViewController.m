@@ -16,13 +16,44 @@
 
 #import "MCWeAllPayStoreController.h"
 
-@interface MCSelectCurrencyTableViewController ()
+NSString * const cellIdentifier = @"MCSelectCurrencyTableViewCell_iPhone";
+
+@interface MCSelectCurrencyTableViewController () <UISearchDisplayDelegate, UISearchBarDelegate>
 
 @property (nonatomic, strong) NSFetchedResultsController *dataController;
+@property (nonatomic, strong) NSFetchedResultsController *searchDataController;
+@property (nonatomic, strong) NSMutableArray *seachResults;
 
 @end
 
 @implementation MCSelectCurrencyTableViewController
+
+#pragma mark - Actions
+
+- (IBAction)mainCancelPressed:(id)sender
+{
+    // Don't select anything just dismiss the currency view controller
+    [[[self navigationController] presentingViewController] dismissViewControllerAnimated:YES completion:nil];
+}
+
+#pragma mark - Private in this class
+
+-(void)filterContentForSearchText:(NSString*)searchText scope:(NSString*)scope {
+	// Update the filtered array based on the search text and scope.
+    // Remove all objects from the filtered search array
+	[_seachResults removeAllObjects];
+	// Filter the array using NSPredicate
+    NSPredicate *predicate = [NSPredicate predicateWithFormat:@"name contains[c] %@ || code contains[c] %@",searchText, searchText];
+    NSArray *tempArray = [[_dataController fetchedObjects] filteredArrayUsingPredicate:predicate];
+//    if (![scope isEqualToString:@"All"]) {
+//        // Further filter the array with the scope
+//        NSPredicate *scopePredicate = [NSPredicate predicateWithFormat:@"SELF.category contains[c] %@",scope];
+//        tempArray = [tempArray filteredArrayUsingPredicate:scopePredicate];
+//    }
+    _seachResults = [NSMutableArray arrayWithArray:tempArray];
+}
+
+#pragma mark - Inherited From Super
 
 - (id)initWithStyle:(UITableViewStyle)style
 {
@@ -52,14 +83,37 @@
     // Dispose of any resources that can be recreated.
 }
 
+#pragma mark - Search Display Controller
+
+-(BOOL)searchDisplayController:(UISearchDisplayController *)controller shouldReloadTableForSearchString:(NSString *)searchString
+{
+    // Tells the table data source to reload when text changes
+    [self filterContentForSearchText:searchString scope:
+     [[self.searchDisplayController.searchBar scopeButtonTitles] objectAtIndex:[self.searchDisplayController.searchBar selectedScopeButtonIndex]]];
+    // Return YES to cause the search result table view to be reloaded.
+    
+    return YES;
+}
+
 #pragma mark - Table view delegate
 
 - (void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath
 {
-    MCCurrency *thisCellsCurrency = [_dataController objectAtIndexPath:indexPath];
-    [_thisPayment setNewCurrencyAndAutomaticallyUpdateExchangeRate:thisCellsCurrency];
+    MCCurrency *thisCellsCurrency;
+    if (tableView != [[self searchDisplayController] searchResultsTableView]) {
+        thisCellsCurrency = [_dataController objectAtIndexPath:indexPath];
+        [_thisPayment setNewCurrencyAndAutomaticallyUpdateExchangeRate:thisCellsCurrency];
+    } else {
+        thisCellsCurrency = [_seachResults objectAtIndex:[indexPath row]];
+        [_thisPayment setNewCurrencyAndAutomaticallyUpdateExchangeRate:thisCellsCurrency];
+    }
     [_thisPayment recalculateAveragePeopleOweAndStore];
     [[[self navigationController] presentingViewController] dismissViewControllerAnimated:YES completion:nil];
+}
+
+-(CGFloat)tableView:(UITableView *)tableView heightForRowAtIndexPath:(NSIndexPath *)indexPath
+{
+    return 44;
 }
 
 #pragma mark - Table view data source
@@ -73,14 +127,26 @@
 - (NSInteger)tableView:(UITableView *)tableView numberOfRowsInSection:(NSInteger)section
 {
     // Return the number of rows in the section.
-    return [[_dataController fetchedObjects] count];
+    if (tableView != [[self searchDisplayController] searchResultsTableView]) {
+        return [[_dataController fetchedObjects] count];
+    } else {
+        return [_seachResults count];
+    }
 }
 
 - (UITableViewCell *)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath
 {
-    MCSelectCurrencyTableViewCell_iPhone *cell = [tableView dequeueReusableCellWithIdentifier:@"MCSelectCurrencyTableViewCell_iPhone" forIndexPath:indexPath];
-    
-    MCCurrency *thisCellsCurrency = [_dataController objectAtIndexPath:indexPath];
+    MCSelectCurrencyTableViewCell_iPhone *cell = (MCSelectCurrencyTableViewCell_iPhone *)[[self tableView] dequeueReusableCellWithIdentifier:cellIdentifier];
+    if (cell == nil) {
+        cell = [[MCSelectCurrencyTableViewCell_iPhone alloc] initWithStyle:UITableViewCellStyleDefault reuseIdentifier:cellIdentifier];
+    }
+
+    MCCurrency *thisCellsCurrency;
+    if (tableView != [[self searchDisplayController] searchResultsTableView]) {
+        thisCellsCurrency = [_dataController objectAtIndexPath:indexPath];
+    } else {
+        thisCellsCurrency = [_seachResults objectAtIndex:[indexPath row]];
+    }
     cell.currencyNameLabel.text = [thisCellsCurrency name];
     cell.currencySymbolLabel.text = [thisCellsCurrency symbol];
     
