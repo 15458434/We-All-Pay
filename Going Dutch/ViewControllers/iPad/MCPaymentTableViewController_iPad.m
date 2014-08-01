@@ -9,7 +9,7 @@
 #import "MCPaymentTableViewController_iPad.h"
 #import "MCSelectPayerTableViewController_iPad.h"
 #import "UINavigationController+KeyboardDismiss.h"
-#import "MCSelectCurrencyViewController_iPad.h"
+#import "MCSelectCurrencyTableViewController_iPad.h"
 
 #import "MCPaymentPresenceTableViewCell.h"
 
@@ -452,6 +452,7 @@
             }];
         }
     }
+    
     if ([[segue identifier] isEqualToString:@"openSelectCurrency"]) {
         id destination = [segue destinationViewController];
         if ([destination conformsToProtocol:@protocol(MCThisPaymentProtocol)]) {

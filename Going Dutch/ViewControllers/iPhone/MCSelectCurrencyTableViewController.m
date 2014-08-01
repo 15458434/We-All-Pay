@@ -16,13 +16,13 @@
 
 #import "MCWeAllPayStoreController.h"
 
-NSString * const cellIdentifier = @"MCSelectCurrencyTableViewCell_iPhone";
+NSString const * cellIdentifier = @"MCSelectCurrencyTableViewCell_iPhone";
 
 @interface MCSelectCurrencyTableViewController () <UISearchDisplayDelegate, UISearchBarDelegate>
 
 @property (nonatomic, strong) NSFetchedResultsController *dataController;
 @property (nonatomic, strong) NSFetchedResultsController *searchDataController;
-@property (nonatomic, strong) NSMutableArray *seachResults;
+@property (nonatomic, strong) NSMutableArray *searchResults;
 
 @end
 
@@ -41,7 +41,7 @@ NSString * const cellIdentifier = @"MCSelectCurrencyTableViewCell_iPhone";
 -(void)filterContentForSearchText:(NSString*)searchText scope:(NSString*)scope {
 	// Update the filtered array based on the search text and scope.
     // Remove all objects from the filtered search array
-	[_seachResults removeAllObjects];
+	[_searchResults removeAllObjects];
 	// Filter the array using NSPredicate
     NSPredicate *predicate = [NSPredicate predicateWithFormat:@"name contains[c] %@ || code contains[c] %@",searchText, searchText];
     NSArray *tempArray = [[_dataController fetchedObjects] filteredArrayUsingPredicate:predicate];
@@ -50,7 +50,7 @@ NSString * const cellIdentifier = @"MCSelectCurrencyTableViewCell_iPhone";
 //        NSPredicate *scopePredicate = [NSPredicate predicateWithFormat:@"SELF.category contains[c] %@",scope];
 //        tempArray = [tempArray filteredArrayUsingPredicate:scopePredicate];
 //    }
-    _seachResults = [NSMutableArray arrayWithArray:tempArray];
+    _searchResults = [NSMutableArray arrayWithArray:tempArray];
 }
 
 #pragma mark - Inherited From Super
@@ -104,7 +104,7 @@ NSString * const cellIdentifier = @"MCSelectCurrencyTableViewCell_iPhone";
         thisCellsCurrency = [_dataController objectAtIndexPath:indexPath];
         [_thisPayment setNewCurrencyAndAutomaticallyUpdateExchangeRate:thisCellsCurrency];
     } else {
-        thisCellsCurrency = [_seachResults objectAtIndex:[indexPath row]];
+        thisCellsCurrency = [_searchResults objectAtIndex:[indexPath row]];
         [_thisPayment setNewCurrencyAndAutomaticallyUpdateExchangeRate:thisCellsCurrency];
     }
     [_thisPayment recalculateAveragePeopleOweAndStore];
@@ -130,7 +130,7 @@ NSString * const cellIdentifier = @"MCSelectCurrencyTableViewCell_iPhone";
     if (tableView != [[self searchDisplayController] searchResultsTableView]) {
         return [[_dataController fetchedObjects] count];
     } else {
-        return [_seachResults count];
+        return [_searchResults count];
     }
 }
 
@@ -145,7 +145,7 @@ NSString * const cellIdentifier = @"MCSelectCurrencyTableViewCell_iPhone";
     if (tableView != [[self searchDisplayController] searchResultsTableView]) {
         thisCellsCurrency = [_dataController objectAtIndexPath:indexPath];
     } else {
-        thisCellsCurrency = [_seachResults objectAtIndex:[indexPath row]];
+        thisCellsCurrency = [_searchResults objectAtIndex:[indexPath row]];
     }
     cell.currencyNameLabel.text = [thisCellsCurrency name];
     cell.currencySymbolLabel.text = [thisCellsCurrency symbol];

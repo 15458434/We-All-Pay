@@ -846,7 +846,7 @@
                             <rect key="frame" x="0.0" y="0.0" width="540" height="281"/>
                             <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                             <subviews>
-                                <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="8ht-EA-kJE">
+                                <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="8ht-EA-kJE" userLabel="Currency - €$£¥">
                                     <rect key="frame" x="146" y="187" width="34" height="30"/>
                                     <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                                     <state key="normal" title="€$£¥">
@@ -854,7 +854,7 @@
                                         <color key="titleShadowColor" white="0.5" alpha="1" colorSpace="calibratedWhite"/>
                                     </state>
                                     <connections>
-                                        <segue destination="37P-BL-oXy" kind="popover" identifier="openSelectCurrency" popoverAnchorView="8ht-EA-kJE" id="3qe-zT-koR">
+                                        <segue destination="Z9a-Hu-qSZ" kind="popover" identifier="openSelectCurrency" popoverAnchorView="8ht-EA-kJE" id="aJ5-e8-dvs">
                                             <popoverArrowDirection key="popoverArrowDirection" up="YES" down="YES" left="YES" right="YES"/>
                                         </segue>
                                     </connections>
@@ -1119,68 +1119,25 @@
             </objects>
             <point key="canvasLocation" x="6814" y="1031"/>
         </scene>
-        <!--Select Currency View Controller i Pad-->
-        <scene sceneID="Mya-3v-5Kz">
-            <objects>
-                <viewController storyboardIdentifier="MCSelectCurrencyViewController_iPad" useStoryboardIdentifierAsRestorationIdentifier="YES" id="37P-BL-oXy" customClass="MCSelectCurrencyViewController_iPad" sceneMemberID="viewController">
-                    <layoutGuides>
-                        <viewControllerLayoutGuide type="top" id="2C6-sT-QQt"/>
-                        <viewControllerLayoutGuide type="bottom" id="NRE-5e-czX"/>
-                    </layoutGuides>
-                    <view key="view" contentMode="scaleToFill" id="CNe-GY-zeC">
-                        <rect key="frame" x="0.0" y="0.0" width="320" height="480"/>
-                        <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
-                        <subviews>
-                            <searchBar contentMode="redraw" fixedFrame="YES" translatesAutoresizingMaskIntoConstraints="NO" id="9En-pm-K3v">
-                                <rect key="frame" x="0.0" y="0.0" width="320" height="44"/>
-                                <autoresizingMask key="autoresizingMask" widthSizable="YES" flexibleMaxY="YES"/>
-                                <textInputTraits key="textInputTraits"/>
-                                <connections>
-                                    <outlet property="delegate" destination="37P-BL-oXy" id="bqY-kL-SDQ"/>
-                                </connections>
-                            </searchBar>
-                            <containerView contentMode="scaleToFill" fixedFrame="YES" translatesAutoresizingMaskIntoConstraints="NO" id="lfh-gy-ep9">
-                                <rect key="frame" x="0.0" y="44" width="320" height="436"/>
-                                <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
-                                <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="calibratedWhite"/>
-                                <connections>
-                                    <segue destination="Z9a-Hu-qSZ" kind="embed" identifier="putCurrencyListInContainer" id="BLf-iu-OWB"/>
-                                </connections>
-                            </containerView>
-                        </subviews>
-                        <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="calibratedWhite"/>
-                    </view>
-                    <nil key="simulatedStatusBarMetrics"/>
-                    <freeformSimulatedSizeMetrics key="simulatedDestinationMetrics"/>
-                    <size key="freeformSize" width="320" height="480"/>
-                    <connections>
-                        <outlet property="searchDisplayController" destination="KXj-ME-fns" id="FP3-qc-FwO"/>
-                    </connections>
-                </viewController>
-                <placeholder placeholderIdentifier="IBFirstResponder" id="APO-P4-pP6" userLabel="First Responder" sceneMemberID="firstResponder"/>
-                <searchDisplayController id="KXj-ME-fns">
-                    <connections>
-                        <outlet property="delegate" destination="37P-BL-oXy" id="Y5A-ap-ngu"/>
-                        <outlet property="searchBar" destination="9En-pm-K3v" id="ugT-rj-uCZ"/>
-                        <outlet property="searchContentsController" destination="37P-BL-oXy" id="22L-44-VE8"/>
-                        <outlet property="searchResultsDataSource" destination="37P-BL-oXy" id="0tN-xt-jXZ"/>
-                        <outlet property="searchResultsDelegate" destination="37P-BL-oXy" id="xTh-8I-Jaf"/>
-                    </connections>
-                </searchDisplayController>
-            </objects>
-            <point key="canvasLocation" x="6814" y="1703"/>
-        </scene>
         <!--Select Currency Table View Controller i Pad-->
         <scene sceneID="ThZ-ve-uHv">
             <objects>
                 <tableViewController storyboardIdentifier="MCSelectCurrencyTableViewController_iPad" useStoryboardIdentifierAsRestorationIdentifier="YES" id="Z9a-Hu-qSZ" customClass="MCSelectCurrencyTableViewController_iPad" sceneMemberID="viewController">
                     <tableView key="view" clipsSubviews="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" dataMode="prototypes" style="plain" separatorStyle="default" rowHeight="44" sectionHeaderHeight="22" sectionFooterHeight="22" id="rkF-gV-exG">
-                        <rect key="frame" x="0.0" y="0.0" width="320" height="436"/>
+                        <rect key="frame" x="0.0" y="0.0" width="320" height="480"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                        <searchBar key="tableHeaderView" contentMode="redraw" id="Sxt-5n-jx4">
+                            <rect key="frame" x="0.0" y="0.0" width="320" height="44"/>
+                            <autoresizingMask key="autoresizingMask" widthSizable="YES" flexibleMaxY="YES"/>
+                            <textInputTraits key="textInputTraits"/>
+                            <connections>
+                                <outlet property="delegate" destination="Z9a-Hu-qSZ" id="GIy-8U-oII"/>
+                            </connections>
+                        </searchBar>
                         <prototypes>
                             <tableViewCell contentMode="scaleToFill" horizontalCompressionResistancePriority="250" restorationIdentifier="MCSelectCurrencyTableViewCell_iPad" selectionStyle="blue" accessoryType="checkmark" hidesAccessoryWhenEditing="NO" indentationLevel="1" indentationWidth="0.0" reuseIdentifier="MCSelectCurrencyTableViewCell_iPad" id="nTN-I8-L2p" customClass="MCSelectCurrencyTableViewCell_iPad">
-                                <rect key="frame" x="0.0" y="22" width="320" height="44"/>
+                                <rect key="frame" x="0.0" y="66" width="320" height="44"/>
                                 <autoresizingMask key="autoresizingMask"/>
                                 <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" tableViewCell="nTN-I8-L2p" id="kZh-eJ-cZO">
                                     <rect key="frame" x="0.0" y="0.0" width="281" height="43"/>
@@ -1217,10 +1174,32 @@
                             <outlet property="delegate" destination="Z9a-Hu-qSZ" id="IOL-dm-mpM"/>
                         </connections>
                     </tableView>
+                    <freeformSimulatedSizeMetrics key="simulatedDestinationMetrics"/>
+                    <size key="freeformSize" width="320" height="480"/>
+                    <connections>
+                        <outlet property="searchDisplayController" destination="9Jp-be-5pl" id="R1f-mW-8gc"/>
+                    </connections>
                 </tableViewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="vTg-RC-oXr" userLabel="First Responder" sceneMemberID="firstResponder"/>
+                <searchDisplayController id="yU3-DS-GSE">
+                    <connections>
+                        <outlet property="delegate" destination="Z9a-Hu-qSZ" id="4J8-Kd-Sk7"/>
+                        <outlet property="searchContentsController" destination="Z9a-Hu-qSZ" id="tgS-09-mbK"/>
+                        <outlet property="searchResultsDataSource" destination="Z9a-Hu-qSZ" id="Wf0-1h-17D"/>
+                        <outlet property="searchResultsDelegate" destination="Z9a-Hu-qSZ" id="vgU-QY-Pf3"/>
+                    </connections>
+                </searchDisplayController>
+                <searchDisplayController id="9Jp-be-5pl">
+                    <connections>
+                        <outlet property="delegate" destination="Z9a-Hu-qSZ" id="cfU-mQ-yWn"/>
+                        <outlet property="searchBar" destination="Sxt-5n-jx4" id="t18-fk-FTB"/>
+                        <outlet property="searchContentsController" destination="Z9a-Hu-qSZ" id="f9p-Vm-hWM"/>
+                        <outlet property="searchResultsDataSource" destination="Z9a-Hu-qSZ" id="xwC-Gw-hEb"/>
+                        <outlet property="searchResultsDelegate" destination="Z9a-Hu-qSZ" id="3JI-On-kYw"/>
+                    </connections>
+                </searchDisplayController>
             </objects>
-            <point key="canvasLocation" x="7325" y="1747"/>
+            <point key="canvasLocation" x="6814" y="1707"/>
         </scene>
         <!--Shared Bill People Present Table View Controller i Pad-->
         <scene sceneID="Yvv-Fb-1pz">

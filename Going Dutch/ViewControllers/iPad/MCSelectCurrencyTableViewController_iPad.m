@@ -14,13 +14,27 @@
 
 #import "MCWeAllPayStoreController.h"
 
-@interface MCSelectCurrencyTableViewController_iPad ()
+NSString * const currencyCellIdentifier_iPad = @"MCSelectCurrencyTableViewCell_iPad";
+
+@interface MCSelectCurrencyTableViewController_iPad () <UISearchBarDelegate, UISearchDisplayDelegate>
 
 @property (nonatomic, strong) NSFetchedResultsController *dataController;
+@property (nonatomic, strong) NSMutableArray *searchResults;
 
 @end
 
 @implementation MCSelectCurrencyTableViewController_iPad
+
+#pragma mark - Private in this class
+
+- (void)filterContentForSearchText:(NSString*)searchText scope:(NSString*)scope {
+	[_searchResults removeAllObjects];
+    NSPredicate *predicate = [NSPredicate predicateWithFormat:@"name contains[c] %@ || code contains[c] %@",searchText, searchText];
+    NSArray *tempArray = [[_dataController fetchedObjects] filteredArrayUsingPredicate:predicate];
+    _searchResults = [NSMutableArray arrayWithArray:tempArray];
+}
+
+#pragma mark - Inherited from super
 
 - (id)initWithStyle:(UITableViewStyle)style
 {
@@ -49,12 +63,29 @@
     // Dispose of any resources that can be recreated.
 }
 
+#pragma mark - Search Display Controller
+
+-(BOOL)searchDisplayController:(UISearchDisplayController *)controller shouldReloadTableForSearchString:(NSString *)searchString
+{
+    // Tells the table data source to reload when text changes
+    [self filterContentForSearchText:searchString scope:
+     [[self.searchDisplayController.searchBar scopeButtonTitles] objectAtIndex:[self.searchDisplayController.searchBar selectedScopeButtonIndex]]];
+    // Return YES to cause the search result table view to be reloaded.
+    
+    return YES;
+}
+
 #pragma mark - Table view delegate
 
 - (void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath
 {
-    _thisPayment.currency = [_dataController objectAtIndexPath:indexPath];
-    [_thisPayment setNewCurrencyAndAutomaticallyUpdateExchangeRate:[_dataController objectAtIndexPath:indexPath]];
+    if (tableView != [[self searchDisplayController] searchResultsTableView]) {
+        _thisPayment.currency = [_dataController objectAtIndexPath:indexPath];
+        [_thisPayment setNewCurrencyAndAutomaticallyUpdateExchangeRate:[_dataController objectAtIndexPath:indexPath]];
+    } else {
+        _thisPayment.currency = [_searchResults objectAtIndex:[indexPath row]];
+        [_thisPayment setNewCurrencyAndAutomaticallyUpdateExchangeRate:[_searchResults objectAtIndex:[indexPath row]]];
+    }
     [_thisPayment recalculateAveragePeopleOweAndStore];
     self.dismissMe();
 }
@@ -70,20 +101,31 @@
 - (NSInteger)tableView:(UITableView *)tableView numberOfRowsInSection:(NSInteger)section
 {
     // Return the number of rows in the section.
-    return [[_dataController fetchedObjects] count];
+    if (tableView != [[self searchDisplayController] searchResultsTableView]) {
+        return [[_dataController fetchedObjects] count];
+    } else {
+        return [_searchResults count];
+    }
 }
 
 
 - (UITableViewCell *)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath
 {
-    MCSelectCurrencyTableViewCell_iPad *cell = [tableView dequeueReusableCellWithIdentifier:@"MCSelectCurrencyTableViewCell_iPad" forIndexPath:indexPath];
+    MCSelectCurrencyTableViewCell_iPad *cell = (MCSelectCurrencyTableViewCell_iPad *)[[self tableView] dequeueReusableCellWithIdentifier:currencyCellIdentifier_iPad];
+    if (cell == nil) {
+        cell = [[MCSelectCurrencyTableViewCell_iPad alloc] initWithStyle:UITableViewCellStyleDefault reuseIdentifier:currencyCellIdentifier_iPad];
+    }
     
-    // Configure the cell...
-    MCCurrency *thisCurrency = [_dataController objectAtIndexPath:indexPath];
-    cell.currencyNameLabel.text = [thisCurrency name];
-    cell.currencySymbolLabel.text = [thisCurrency symbol];
+    MCCurrency *thisCellsCurrency;
+    if (tableView != [[self searchDisplayController] searchResultsTableView]) {
+        thisCellsCurrency = [_dataController objectAtIndexPath:indexPath];
+    } else {
+        thisCellsCurrency = [_searchResults objectAtIndex:[indexPath row]];
+    }
+    cell.currencyNameLabel.text = [thisCellsCurrency name];
+    cell.currencySymbolLabel.text = [thisCellsCurrency symbol];
     
-    if ([[thisCurrency code] isEqualToString:[[_thisPayment currency] code]]) {
+    if ([[[_thisPayment currency] code] isEqualToString:[thisCellsCurrency code]]) {
         cell.accessoryType = UITableViewCellAccessoryCheckmark;
     } else {
         cell.accessoryType = UITableViewCellAccessoryNone;
