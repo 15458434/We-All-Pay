@@ -47,6 +47,7 @@
     XCTAssertNotNil([newlyInsertedExchangeRate uniqueID], @"unique ID not present.");
     XCTAssertNotNil([newlyInsertedExchangeRate dateCreated], @"dateCreated not present.");
     XCTAssertNotNil([newlyInsertedExchangeRate dateModified], @"dateModified not present.");
+    XCTAssert([[newlyInsertedExchangeRate status] shortValue] == valid, @"shortValue should be valid after creating");
 }
 
 @end

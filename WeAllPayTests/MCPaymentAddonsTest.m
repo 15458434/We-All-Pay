@@ -126,6 +126,7 @@
     MCPayment *thisPayment = [MCPayment addPaymentInContext:_context];
     XCTAssertNotNil([thisPayment exchangeRate], @"There should be an exchangeRate in this payment.");
     XCTAssertEqualWithAccuracy([[[thisPayment exchangeRate] exchangeRate] doubleValue], 1.000, 0.0001, @"Value of exchangeRate should be 1.");
+    XCTAssert([[[thisPayment exchangeRate] status] shortValue] == valid, @"exchangeRate status should be valid");
 }
 
 @end
