@@ -315,4 +315,15 @@
     XCTAssertNotNil([[thisPayment exchangeRate] toCurrency], @"toCurrency in ExchangeRate cannot be nil after creation.");
 }
 
+- (void)testAreAllExchangeRatesValid
+{
+    MCSharedBill *tonightsBill = [MCSharedBill addSharedBill];
+    MCPerson *mark = [tonightsBill addPerson];
+    mark.firstName = @"Mark";
+    MCPerson *ilse = [tonightsBill addPerson];
+    ilse.firstName = @"Ilse";
+    MCPayment *paymentWithValidExchangeRate = [tonightsBill addPayment];
+    XCTAssertTrue([tonightsBill areAllExchangeRatesValid], @"All Exchange Rate should be valid.");
+}
+
 @end

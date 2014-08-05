@@ -420,6 +420,52 @@
     return [nf stringFromNumber:averageSpentByPerson];
 }
 
+- (BOOL)areAllExchangeRatesValid
+{
+    // Fetch all exchangeRates that are invalid.
+    NSFetchRequest *request = [[NSFetchRequest alloc] initWithEntityName:@"MCExchangeRate"];
+    NSSortDescriptor *sortDescriptor = [NSSortDescriptor sortDescriptorWithKey:@"dateCreated" ascending:YES];
+    request.sortDescriptors = @[sortDescriptor];
+    
+    NSNumber *exchangeRateValidStatus = [NSNumber numberWithShort:valid];
+    NSPredicate *predicate = [NSPredicate predicateWithFormat:@"payment.onWhichBill = %@ and status != %@", self, exchangeRateValidStatus];
+    request.predicate = predicate;
+    NSError *fetchError;
+    NSUInteger *amountOfInvalidExchangeRates = [[self managedObjectContext] countForFetchRequest:request error:&fetchError];
+    if (fetchError) {
+        NSLog(@"Something went wrong counting invalid exchangeRates: %@", [fetchError localizedDescription]);
+    }
+    if (amountOfInvalidExchangeRates == 0) {
+        return YES;
+    } else {
+        return NO;
+    }
+}
+
+- (void)updateInvalidExchangeRatesWithCompletionBlock:(void (^)(NSArray *results))completionBlock
+{
+    // Fetch all exchangeRates that are invalid.
+    NSFetchRequest *request = [[NSFetchRequest alloc] initWithEntityName:@"MCExchangeRate"];
+    NSSortDescriptor *sortDescriptor = [NSSortDescriptor sortDescriptorWithKey:@"dateCreated" ascending:YES];
+    request.sortDescriptors = @[sortDescriptor];
+    
+    NSNumber *exchangeRateValidStatus = [NSNumber numberWithShort:valid];
+    NSPredicate *predicate = [NSPredicate predicateWithFormat:@"payment.onWhichBill = %@ and status != %@", self, exchangeRateValidStatus];
+    request.predicate = predicate;
+    NSError *fetchError;
+    NSArray *arrayOfInvalidExchangeRatesOfThisSharedBill = [[self managedObjectContext] executeFetchRequest:request error:&fetchError];
+    if (fetchError) {
+        NSLog(@"Something went wrong fetching invalid ExchangeRates: %@", [fetchError localizedDescription]);
+    }
+    for (MCExchangeRate *exchangeRate in arrayOfInvalidExchangeRatesOfThisSharedBill) {
+        [exchangeRate retrieveExchangeRateFromWebWithCompletionHandler:^(NSDictionary *exchangeRateResult) {
+            if ([self areAllExchangeRatesValid]) {
+                completionBlock([self solveWhoHasToPayWhoFromThisBill]);
+            }
+        }];
+    }
+}
+
 - (NSArray *)originalSolveWhoHasToPayWhoFromThisBill
 {
     // Create two array's one of peope who should pay and one with people that should receive.
@@ -492,6 +538,20 @@
     return [self originalSolveWhoHasToPayWhoFromThisBill];
 }
 
+- (NSArray *)solveWhoHasToPayWhoFromThisBillWithCompletionBlock:(void (^)(NSArray *))completionBlock
+{
+    // This function will either give an NSArray as return value or it will return nil and will execuute the completionBlock at a later time when all exchangeRates are valid.
+    if ([self areAllExchangeRatesValid]) {
+        return [self originalSolveWhoHasToPayWhoFromThisBill];
+    } else {
+        [self updateInvalidExchangeRatesWithCompletionBlock:^(NSArray *results){
+            NSArray *result = [self originalSolveWhoHasToPayWhoFromThisBill];
+            completionBlock(result);
+        }];
+        return nil;
+    }
+}
+
 - (NSArray *)getArrayOfFullNamesOfPeoplePresent
 {
     NSSortDescriptor *sortDescriptor = [NSSortDescriptor sortDescriptorWithKey:@"getFullName" ascending:YES];
@@ -517,8 +577,6 @@
 - (void)awakeFromInsert
 {
     [super awakeFromInsert];
-    
-    
 }
 
 - (void)prepareForDeletion

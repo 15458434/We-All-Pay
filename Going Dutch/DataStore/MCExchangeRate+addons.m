@@ -20,6 +20,11 @@
 
 - (BOOL)retrieveExchangeRateFromWeb
 {
+    return [self retrieveExchangeRateFromWebWithCompletionHandler:nil];
+}
+
+- (BOOL)retrieveExchangeRateFromWebWithCompletionHandler:(void (^)(NSDictionary *))completionBlock
+{
     MCExchangeRateStatus fetchingStatus = fetching;
     [self setStatus:[NSNumber numberWithShort:fetchingStatus]];
     NSLog(@"MCExchangeRate Status is fetching.");
@@ -27,6 +32,9 @@
         MCExchangeRateStatus exchangeRateFetchStatus = valid;
         [self setStatus:[NSNumber numberWithShort:exchangeRateFetchStatus]];
         NSLog(@"MCExchangeRate Status is valid.");
+        if (completionBlock) {
+            completionBlock(exchangeRateResult);
+        }
     }];
     return YES;
 }

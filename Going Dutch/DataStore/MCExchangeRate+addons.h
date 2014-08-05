@@ -19,5 +19,6 @@ typedef NS_ENUM(short, MCExchangeRateStatus){
 + (MCExchangeRate *)addExchangeRateForContext:(NSManagedObjectContext *)context;
 
 - (BOOL)retrieveExchangeRateFromWeb;
+- (BOOL)retrieveExchangeRateFromWebWithCompletionHandler:(void (^)(NSDictionary *exchangeRateResult))completionBlock;
 
 @end

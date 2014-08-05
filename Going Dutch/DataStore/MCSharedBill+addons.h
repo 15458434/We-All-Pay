@@ -34,7 +34,10 @@
 - (NSUInteger)totalAmountOfPeoplePresent;
 - (NSUInteger)totalAmountOfPeopleWhoHavePaid;
 
+- (BOOL)areAllExchangeRatesValid;
+- (void)updateInvalidExchangeRatesWithCompletionBlock:(void (^)(NSArray *results))completionBlock;
 - (NSArray *)solveWhoHasToPayWhoFromThisBill;
+- (NSArray *)solveWhoHasToPayWhoFromThisBillWithCompletionBlock:(void (^)(NSArray *))completionBlock;
 - (NSNumber *)totalSumOfMoneyOfThisSharedBill;
 - (NSString *)totalSumOfMoneyOfThisSharedBillAsCurrencyString;
 - (NSNumber *)totalSumPaidBy:(MCPerson *)person;
