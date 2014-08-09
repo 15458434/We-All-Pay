@@ -43,7 +43,7 @@
 - (IBAction)addressBookButton:(id)sender;
 - (IBAction)addPersonButton:(id)sender;
 
-- (IBAction)doneButtonPressed:(id)sender;
-- (IBAction)cancelButtonPressed:(id)sender;
+//- (IBAction)doneButtonPressed:(id)sender;
+//- (IBAction)cancelButtonPressed:(id)sender;
 
 @end

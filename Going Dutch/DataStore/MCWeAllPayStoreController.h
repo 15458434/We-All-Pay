@@ -20,6 +20,7 @@
 }
 
 @property (nonatomic, strong, readonly) UIManagedDocument *weAllPayStoreDocument;
+@property (nonatomic, strong, readonly) NSManagedObjectContext *mainThreadContext;
 
 + (MCWeAllPayStoreController *)defaultStore;
 

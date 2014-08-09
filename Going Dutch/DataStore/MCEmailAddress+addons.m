@@ -44,7 +44,7 @@
     [request setPredicate:predicate];
     
     NSError *error;
-    NSArray *sharedBills = [[[[MCWeAllPayStoreController defaultStore] weAllPayStoreDocument] managedObjectContext] executeFetchRequest:request error:&error];
+    NSArray *sharedBills = [[[MCWeAllPayStoreController defaultStore] mainThreadContext] executeFetchRequest:request error:&error];
     if (!sharedBills) {
         // There was an error.
         return nil;
@@ -59,7 +59,7 @@
     NSSortDescriptor *sd = [NSSortDescriptor sortDescriptorWithKey:@"emailAddress" ascending:YES];
     NSArray *sda = @[sd];
     [request setSortDescriptors:sda];
-    NSManagedObjectContext *context = [[[MCWeAllPayStoreController defaultStore] weAllPayStoreDocument] managedObjectContext];
+    NSManagedObjectContext *context = [[MCWeAllPayStoreController defaultStore] mainThreadContext];
     NSError *error;
     NSArray *people = [context executeFetchRequest:request error:&error];
     if (people) {
@@ -86,7 +86,6 @@
     
     NSError *error;
     NSArray *emailAddresses;
-//    NSManagedObjectContext *context = [[[MCWeAllPayStoreController defaultStore] weAllPayStoreDocument] managedObjectContext];
     emailAddresses = [[person managedObjectContext] executeFetchRequest:request error:&error];
     if (!emailAddresses) {
         NSLog(@"There was error fetching email addresses for %@", [person getFullName]);

@@ -31,19 +31,16 @@
 {
     [super setUp];
     // Put setup code here. This method is called before the invocation of each test method in the class.
-//    _mainController = [MCWeAllPayStoreController defaultStore];
-//    _context = [[mainController weAllPayStoreDocument] managedObjectContext];
     
     NSManagedObjectModel *managedObjectModel = [NSManagedObjectModel mergedModelFromBundles:nil];
     NSPersistentStoreCoordinator *persistentStoreCoordinator = [[NSPersistentStoreCoordinator alloc] initWithManagedObjectModel:managedObjectModel];
     NSError *error;
     NSPersistentStore *persistentStore = [persistentStoreCoordinator addPersistentStoreWithType:NSInMemoryStoreType configuration:nil URL:nil options:nil error:&error];
     XCTAssertTrue(persistentStore, @"Something went wrong opening the In Memory Store: %@", [error localizedDescription]);
-    _context = [[NSManagedObjectContext alloc] init];
+    _context = [[NSManagedObjectContext alloc] initWithConcurrencyType:NSMainQueueConcurrencyType];
     [_context setPersistentStoreCoordinator:persistentStoreCoordinator];
     
     [MCCurrency addAllAvailableCurrenciesToContext:_context];
-
 }
 
 - (void)tearDown

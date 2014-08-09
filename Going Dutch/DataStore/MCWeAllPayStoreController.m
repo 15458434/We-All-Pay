@@ -48,15 +48,7 @@
     static MCWeAllPayStoreController *sharedStore = nil;
     if (!sharedStore) {
         sharedStore = [[super allocWithZone:nil] init];
-    } /*else {
-        if ([[sharedStore weAllPayStoreDocument] documentState] == UIDocumentStateClosed) {
-            [[sharedStore weAllPayStoreDocument] openWithCompletionHandler:^(BOOL success){
-                if (!success) {
-                    NSLog(@"Something went wrong opening your document.");
-                }
-            }];
-        }
-    }*/
+    }
     return sharedStore;
 }
 
@@ -119,6 +111,7 @@
                 completionHandler(NO);
             }
         }
+        _mainThreadContext = [weAllPayStoreDocument managedObjectContext];
     }
 }
 

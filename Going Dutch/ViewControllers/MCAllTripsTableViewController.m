@@ -339,7 +339,7 @@
         [NSFetchedResultsController deleteCacheWithName:[NSString stringWithFormat:@"All persons cache of trip: %@", [toBeDeleteSharedBill uniqueBillId]]];
         [NSFetchedResultsController deleteCacheWithName:[NSString stringWithFormat:@"All payments cache of trip: %@", [toBeDeleteSharedBill uniqueBillId]]];
         [MCSharedBill deleteSharedbill:toBeDeleteSharedBill];
-        [[[[MCWeAllPayStoreController defaultStore] weAllPayStoreDocument] managedObjectContext] processPendingChanges];
+        [[[MCWeAllPayStoreController defaultStore] mainThreadContext] processPendingChanges];
     }
 }
 

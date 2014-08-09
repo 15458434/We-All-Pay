@@ -347,7 +347,7 @@
     [super viewDidLoad];
     // Do any additional setup after loading the view from its nib.
     
-    NSManagedObjectContext *context = [[[MCWeAllPayStoreController defaultStore] weAllPayStoreDocument] managedObjectContext];
+    NSManagedObjectContext *context = [[MCWeAllPayStoreController defaultStore] mainThreadContext];
     [[context undoManager] enableUndoRegistration];
     [[context undoManager] beginUndoGrouping];
     

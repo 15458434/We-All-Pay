@@ -18,7 +18,7 @@
 
 + (MCPerson *)addPerson
 {
-    NSManagedObjectContext *context = [[[MCWeAllPayStoreController defaultStore] weAllPayStoreDocument] managedObjectContext];
+    NSManagedObjectContext *context = [[MCWeAllPayStoreController defaultStore] mainThreadContext];
     return [MCPerson addPersonInContext:context];
 }
 
@@ -36,8 +36,6 @@
 
 + (void)deletePerson:(MCPerson *)delPerson
 {
-//    NSManagedObjectContext *context = [[[MCWeAllPayStoreController defaultStore] weAllPayStoreDocument] managedObjectContext];
-//    [context deleteObject:delPerson];
     [[delPerson managedObjectContext] deleteObject:delPerson];
 }
 
@@ -49,7 +47,7 @@
 
 + (BOOL)isTableInDatabaseEmpty
 {
-    NSManagedObjectContext *context = [[[MCWeAllPayStoreController defaultStore] weAllPayStoreDocument] managedObjectContext];
+    NSManagedObjectContext *context = [[MCWeAllPayStoreController defaultStore] mainThreadContext];
     return [MCPerson isTableInDatabaseEmptyForContext:context];
 }
 

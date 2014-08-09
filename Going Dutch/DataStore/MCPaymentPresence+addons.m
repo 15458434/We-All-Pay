@@ -18,7 +18,7 @@
 
 + (MCPaymentPresence *)addPaymentPresence
 {
-    NSManagedObjectContext *context = [[[MCWeAllPayStoreController defaultStore] weAllPayStoreDocument] managedObjectContext];
+    NSManagedObjectContext *context = [[MCWeAllPayStoreController defaultStore] mainThreadContext];
     return [MCPaymentPresence addPaymentPresenceInContext:context];
 }
 

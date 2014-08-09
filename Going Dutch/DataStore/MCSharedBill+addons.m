@@ -22,7 +22,7 @@
 
 + (MCSharedBill *)addSharedBill
 {
-    NSManagedObjectContext *context = [[[MCWeAllPayStoreController defaultStore] weAllPayStoreDocument] managedObjectContext];
+    NSManagedObjectContext *context = [[MCWeAllPayStoreController defaultStore] mainThreadContext];
     return [MCSharedBill addSharedBillToContext:context];
 }
 
@@ -87,7 +87,7 @@
 
 + (BOOL)isTableInDatabaseEmpty
 {
-    NSManagedObjectContext *context = [[[MCWeAllPayStoreController defaultStore] weAllPayStoreDocument] managedObjectContext];
+    NSManagedObjectContext *context = [[MCWeAllPayStoreController defaultStore] mainThreadContext];
     return [self isTableInDatabaseEmptyForContext:context];
 }
 

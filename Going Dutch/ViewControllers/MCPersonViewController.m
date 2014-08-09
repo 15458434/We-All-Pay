@@ -132,7 +132,7 @@
 
 - (void)prepareDataController
 {
-    NSManagedObjectContext *context = [[[MCWeAllPayStoreController defaultStore] weAllPayStoreDocument] managedObjectContext];
+    NSManagedObjectContext *context = [[MCWeAllPayStoreController defaultStore] mainThreadContext];
     // Set dataController for EmailPicker
     NSFetchRequest *request = [NSFetchRequest fetchRequestWithEntityName:@"MCEmailAddress"];
     [request setPredicate:[NSPredicate predicateWithFormat:@"owner = %@", _thisPerson]];

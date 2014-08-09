@@ -32,7 +32,7 @@
 - (IBAction)mainCancelPressed:(id)sender
 {
     _mainCancelPressed = cancelIsPressed;
-    if ([[[[[MCWeAllPayStoreController defaultStore] weAllPayStoreDocument] managedObjectContext] undoManager] canUndo]) {
+    if ([[[[MCWeAllPayStoreController defaultStore] mainThreadContext] undoManager] canUndo]) {
         [[MCWeAllPayStoreController defaultStore] endUndoGroupAndUndo];
     } else {
         [[MCWeAllPayStoreController defaultStore] endUndoGroup];

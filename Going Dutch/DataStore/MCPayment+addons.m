@@ -18,7 +18,7 @@
 
 + (MCPayment *)addPayment
 {
-    NSManagedObjectContext *context = [[[MCWeAllPayStoreController defaultStore] weAllPayStoreDocument] managedObjectContext];
+    NSManagedObjectContext *context = [[MCWeAllPayStoreController defaultStore] mainThreadContext];
     return [MCPayment addPaymentInContext:context];
 }
 
@@ -44,7 +44,7 @@
 
 + (MCPayment *)fetchPaymentWithUniqueId:(NSString *)uuid
 {
-    NSManagedObjectContext *context = [[[MCWeAllPayStoreController defaultStore] weAllPayStoreDocument] managedObjectContext];
+    NSManagedObjectContext *context = [[MCWeAllPayStoreController defaultStore] mainThreadContext];
     return [MCPayment fetchPaymentWithUniqueId:uuid fromContext:context];
 }
 
@@ -69,7 +69,7 @@
 
 + (BOOL)isTableInDatabaseEmpty
 {
-    NSManagedObjectContext *context = [[[MCWeAllPayStoreController defaultStore] weAllPayStoreDocument] managedObjectContext];
+    NSManagedObjectContext *context = [[MCWeAllPayStoreController defaultStore] mainThreadContext];
     return [self isTableInDatabaseEmptyForContext:context];
 }
 

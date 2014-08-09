@@ -30,10 +30,7 @@
 - (void)setUp
 {
     [super setUp];
-    // Put setup code here. This method is called before the invocation of each test method in the class.
-//    _mainController = [MCWeAllPayStoreController defaultStore];
-//    _context = [[_mainController weAllPayStoreDocument] managedObjectContext];
-    
+    // Put setup code here. This method is called before the invocation of each test method in the class.    
     NSManagedObjectModel *managedObjectModel = [NSManagedObjectModel mergedModelFromBundles:nil];
     NSPersistentStoreCoordinator *persistentStoreCoordinator = [[NSPersistentStoreCoordinator alloc] initWithManagedObjectModel:managedObjectModel];
     NSError *error;

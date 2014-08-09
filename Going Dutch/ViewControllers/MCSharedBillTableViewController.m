@@ -86,7 +86,7 @@
     [request setPredicate:predicate];
     
     // Create the FetchedResultsController.
-    dataController = [[NSFetchedResultsController alloc] initWithFetchRequest:request managedObjectContext:[[[MCWeAllPayStoreController defaultStore] weAllPayStoreDocument] managedObjectContext] sectionNameKeyPath:nil cacheName:[NSString stringWithFormat:@"All payments cache of trip: %@", [tonightsBill uniqueBillId]]];
+    dataController = [[NSFetchedResultsController alloc] initWithFetchRequest:request managedObjectContext:[[MCWeAllPayStoreController defaultStore] mainThreadContext] sectionNameKeyPath:nil cacheName:[NSString stringWithFormat:@"All payments cache of trip: %@", [tonightsBill uniqueBillId]]];
     NSError *error;
     BOOL success = [dataController performFetch:&error];
     if (!success) {
@@ -357,7 +357,7 @@
     if (editingStyle == UITableViewCellEditingStyleDelete) {
         MCPayment *toBeDeletedPayment = [dataController objectAtIndexPath:indexPath];
         [MCPayment deletePayment:toBeDeletedPayment];
-        [[[[MCWeAllPayStoreController defaultStore] weAllPayStoreDocument] managedObjectContext] processPendingChanges];
+        [[[MCWeAllPayStoreController defaultStore] mainThreadContext] processPendingChanges];
     }
 }
 

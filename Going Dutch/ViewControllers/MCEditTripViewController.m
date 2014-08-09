@@ -56,35 +56,35 @@
     }
 }
 
-- (IBAction)cancelButtonPressed:(id)sender {
-    cancelPressed = YES;
-    NSManagedObjectContext *context = [[[MCWeAllPayStoreController defaultStore] weAllPayStoreDocument] managedObjectContext];
-    [context performBlockAndWait:^{
-        [[context undoManager] disableUndoRegistration];
-        if (didSomethingChange) {
-            [[context undoManager] undoNestedGroup];
-        }
-    }];
-    [[self presentingViewController] dismissViewControllerAnimated:YES completion:nil];
-}
-
-- (IBAction)doneButtonPressed:(id)sender {
-    if ([tonightsBill areTherePeople]) {
-        NSManagedObjectContext *context = [[[MCWeAllPayStoreController defaultStore] weAllPayStoreDocument] managedObjectContext];
-        [context performBlockAndWait:^{
-            [context processPendingChanges];
-            [[context undoManager] disableUndoRegistration];
-        }];
-        [[self navigationController] dismissViewControllerAnimated:YES completion:nil];
-    } else {
-        UIAlertView *noPeoplePresentMessage = [[UIAlertView alloc] initWithTitle:@"No people present on this bill."
-                                                                         message:@"Please add the people who you'd like to share this bill with."
-                                                                        delegate:self
-                                                               cancelButtonTitle:@"Cancel"
-                                                               otherButtonTitles:@"Edit", nil];
-        [noPeoplePresentMessage show];
-    }
-}
+//- (IBAction)cancelButtonPressed:(id)sender {
+//    cancelPressed = YES;
+//    NSManagedObjectContext *context = [[MCWeAllPayStoreController defaultStore] mainThreadContext];
+//    [context performBlockAndWait:^{
+//        [[context undoManager] disableUndoRegistration];
+//        if (didSomethingChange) {
+//            [[context undoManager] undoNestedGroup];
+//        }
+//    }];
+//    [[self presentingViewController] dismissViewControllerAnimated:YES completion:nil];
+//}
+//
+//- (IBAction)doneButtonPressed:(id)sender {
+//    if ([tonightsBill areTherePeople]) {
+//        NSManagedObjectContext *context = [[[MCWeAllPayStoreController defaultStore] weAllPayStoreDocument] managedObjectContext];
+//        [context performBlockAndWait:^{
+//            [context processPendingChanges];
+//            [[context undoManager] disableUndoRegistration];
+//        }];
+//        [[self navigationController] dismissViewControllerAnimated:YES completion:nil];
+//    } else {
+//        UIAlertView *noPeoplePresentMessage = [[UIAlertView alloc] initWithTitle:@"No people present on this bill."
+//                                                                         message:@"Please add the people who you'd like to share this bill with."
+//                                                                        delegate:self
+//                                                               cancelButtonTitle:@"Cancel"
+//                                                               otherButtonTitles:@"Edit", nil];
+//        [noPeoplePresentMessage show];
+//    }
+//}
 
 #pragma mark - new in this class.
 
@@ -422,7 +422,7 @@
     if (editingStyle == UITableViewCellEditingStyleDelete) {
         MCPerson *removablePerson = [dataController objectAtIndexPath:indexPath];
         if (![tonightsBill hasPersonPaidSomething:removablePerson]) {
-            NSManagedObjectContext *context = [[[MCWeAllPayStoreController defaultStore] weAllPayStoreDocument] managedObjectContext];
+            NSManagedObjectContext *context = [[MCWeAllPayStoreController defaultStore] mainThreadContext];
             [context deleteObject:removablePerson];
             //[self updateSubLabel];
             didSomethingChange = YES;

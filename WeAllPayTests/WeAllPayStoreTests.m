@@ -30,7 +30,7 @@
     [super setUp];
     // Put setup code here. This method is called before the invocation of each test method in the class.
     mainController = [MCWeAllPayStoreController defaultStore];
-    context = [[[MCWeAllPayStoreController defaultStore] weAllPayStoreDocument] managedObjectContext];
+    context = [[MCWeAllPayStoreController defaultStore] mainThreadContext];
 }
 
 - (void)tearDown
