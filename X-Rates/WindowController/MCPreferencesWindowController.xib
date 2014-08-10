@@ -22,9 +22,9 @@
                 <autoresizingMask key="autoresizingMask"/>
                 <subviews>
                     <button fixedFrame="YES" translatesAutoresizingMaskIntoConstraints="NO" id="mjo-b6-KOW">
-                        <rect key="frame" x="103" y="116" width="120" height="18"/>
+                        <rect key="frame" x="69" y="116" width="189" height="18"/>
                         <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMinY="YES"/>
-                        <buttonCell key="cell" type="check" title="Analytics opt in" bezelStyle="regularSquare" imagePosition="left" state="on" inset="2" id="0ra-oY-vrN">
+                        <buttonCell key="cell" type="check" title="Diagnostics &amp; Usage OptIn" bezelStyle="regularSquare" imagePosition="left" state="on" inset="2" id="0ra-oY-vrN">
                             <behavior key="behavior" changeContents="YES" doesNotDimImage="YES" lightByContents="YES"/>
                             <font key="font" metaFont="system"/>
                         </buttonCell>
@@ -35,8 +35,9 @@
                     <textField verticalHuggingPriority="750" horizontalCompressionResistancePriority="250" fixedFrame="YES" setsMaxLayoutWidthAtFirstLayout="YES" translatesAutoresizingMaskIntoConstraints="NO" id="vGW-l6-kpU">
                         <rect key="frame" x="18" y="25" width="291" height="85"/>
                         <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMinY="YES"/>
-                        <textFieldCell key="cell" sendsActionOnEndEditing="YES" title="Analytics is only used to improve the next version of EMC. " id="bcm-gG-xWC">
+                        <textFieldCell key="cell" sendsActionOnEndEditing="YES" id="bcm-gG-xWC">
                             <font key="font" metaFont="system"/>
+                            <string key="title">Information about usage and diagnostics of how the EMC is used to improve this program to make EMC a better tool and give you as a user a better experience using it.</string>
                             <color key="textColor" name="controlTextColor" catalog="System" colorSpace="catalog"/>
                             <color key="backgroundColor" name="controlColor" catalog="System" colorSpace="catalog"/>
                         </textFieldCell>
