@@ -126,6 +126,8 @@
 		38AB487119531F760090457A /* UIView+MCAddons.m in Sources */ = {isa = PBXBuildFile; fileRef = 38AB487019531F760090457A /* UIView+MCAddons.m */; };
 		38AD59BC197D3DF000BBC797 /* MCNetworkTools.m in Sources */ = {isa = PBXBuildFile; fileRef = 389E2CFF19792D7600729F61 /* MCNetworkTools.m */; };
 		38AD8C12197E8926005C3436 /* MCAddCurrenciesEntityMigrationPolicy.m in Sources */ = {isa = PBXBuildFile; fileRef = 38AD8C11197E8926005C3436 /* MCAddCurrenciesEntityMigrationPolicy.m */; };
+		38BF02A71997993400606564 /* MCPreferencesWindowController.m in Sources */ = {isa = PBXBuildFile; fileRef = 38BF02A51997993400606564 /* MCPreferencesWindowController.m */; };
+		38BF02A81997993400606564 /* MCPreferencesWindowController.xib in Resources */ = {isa = PBXBuildFile; fileRef = 38BF02A61997993400606564 /* MCPreferencesWindowController.xib */; };
 		38C2BC9918F7F69A00233D24 /* MCWhoOwesWhoTableViewCell_iPad.m in Sources */ = {isa = PBXBuildFile; fileRef = 38C2BC9818F7F69A00233D24 /* MCWhoOwesWhoTableViewCell_iPad.m */; };
 		38C2BC9C18F7F6EB00233D24 /* MCSolutionOverViewTableViewCell_iPad.m in Sources */ = {isa = PBXBuildFile; fileRef = 38C2BC9B18F7F6EB00233D24 /* MCSolutionOverViewTableViewCell_iPad.m */; };
 		38C2BC9F18FBD89400233D24 /* MCAllTripsTableViewCell_iPad.m in Sources */ = {isa = PBXBuildFile; fileRef = 38C2BC9E18FBD89400233D24 /* MCAllTripsTableViewCell_iPad.m */; };
@@ -134,6 +136,7 @@
 		38CC8C4A18ED61FD006D99E7 /* MCPersonTableViewController_iPad.m in Sources */ = {isa = PBXBuildFile; fileRef = 38CC8C4918ED61FD006D99E7 /* MCPersonTableViewController_iPad.m */; };
 		38CDE90017135B6300387CAA /* MCTools.m in Sources */ = {isa = PBXBuildFile; fileRef = 38CDE8FF17135B6300387CAA /* MCTools.m */; };
 		38D24B22194B30C000E4946E /* Settings.bundle in Resources */ = {isa = PBXBuildFile; fileRef = 38D24B21194B30C000E4946E /* Settings.bundle */; };
+		38DAB1311997A1BF00B989BF /* MCAppDelegate.m in Sources */ = {isa = PBXBuildFile; fileRef = 38FE87D4195721670008EE74 /* MCAppDelegate.m */; };
 		38DB85D417E45BCA006237CF /* MCPayment+addons.m in Sources */ = {isa = PBXBuildFile; fileRef = 38DB85D317E45BCA006237CF /* MCPayment+addons.m */; };
 		38DB85D717E45CA4006237CF /* MCSharedBill+addons.m in Sources */ = {isa = PBXBuildFile; fileRef = 38DB85D617E45CA4006237CF /* MCSharedBill+addons.m */; };
 		38DB85DA17E45DEA006237CF /* MCPerson+addons.m in Sources */ = {isa = PBXBuildFile; fileRef = 38DB85D917E45DEA006237CF /* MCPerson+addons.m */; };
@@ -157,7 +160,6 @@
 		38FE87CC195721670008EE74 /* InfoPlist.strings in Resources */ = {isa = PBXBuildFile; fileRef = 38FE87CA195721670008EE74 /* InfoPlist.strings */; };
 		38FE87CE195721670008EE74 /* main.m in Sources */ = {isa = PBXBuildFile; fileRef = 38FE87CD195721670008EE74 /* main.m */; };
 		38FE87D2195721670008EE74 /* Credits.rtf in Resources */ = {isa = PBXBuildFile; fileRef = 38FE87D0195721670008EE74 /* Credits.rtf */; };
-		38FE87D5195721670008EE74 /* MCAppDelegate.m in Sources */ = {isa = PBXBuildFile; fileRef = 38FE87D4195721670008EE74 /* MCAppDelegate.m */; };
 		38FE87D8195721670008EE74 /* MainMenu.xib in Resources */ = {isa = PBXBuildFile; fileRef = 38FE87D6195721670008EE74 /* MainMenu.xib */; };
 		38FE87DA195721670008EE74 /* Images.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 38FE87D9195721670008EE74 /* Images.xcassets */; };
 		38FE87E0195721670008EE74 /* XCTest.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 3815BD9A1955CE9900A28316 /* XCTest.framework */; };
@@ -400,6 +402,9 @@
 		38AD8C0D197E85AA005C3436 /* WeAllPayStore 3.xcdatamodel */ = {isa = PBXFileReference; lastKnownFileType = wrapper.xcdatamodel; path = "WeAllPayStore 3.xcdatamodel"; sourceTree = "<group>"; };
 		38AD8C10197E8926005C3436 /* MCAddCurrenciesEntityMigrationPolicy.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = MCAddCurrenciesEntityMigrationPolicy.h; path = "DataStore/Entity Migration Policies/MCAddCurrenciesEntityMigrationPolicy.h"; sourceTree = "<group>"; };
 		38AD8C11197E8926005C3436 /* MCAddCurrenciesEntityMigrationPolicy.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = MCAddCurrenciesEntityMigrationPolicy.m; path = "DataStore/Entity Migration Policies/MCAddCurrenciesEntityMigrationPolicy.m"; sourceTree = "<group>"; };
+		38BF02A41997993400606564 /* MCPreferencesWindowController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = MCPreferencesWindowController.h; path = WindowController/MCPreferencesWindowController.h; sourceTree = "<group>"; };
+		38BF02A51997993400606564 /* MCPreferencesWindowController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = MCPreferencesWindowController.m; path = WindowController/MCPreferencesWindowController.m; sourceTree = "<group>"; };
+		38BF02A61997993400606564 /* MCPreferencesWindowController.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; name = MCPreferencesWindowController.xib; path = WindowController/MCPreferencesWindowController.xib; sourceTree = "<group>"; };
 		38C2BC9718F7F69A00233D24 /* MCWhoOwesWhoTableViewCell_iPad.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = MCWhoOwesWhoTableViewCell_iPad.h; sourceTree = "<group>"; };
 		38C2BC9818F7F69A00233D24 /* MCWhoOwesWhoTableViewCell_iPad.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = MCWhoOwesWhoTableViewCell_iPad.m; sourceTree = "<group>"; };
 		38C2BC9A18F7F6EB00233D24 /* MCSolutionOverViewTableViewCell_iPad.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = MCSolutionOverViewTableViewCell_iPad.h; path = Views/iPad/MCSolutionOverViewTableViewCell_iPad.h; sourceTree = "<group>"; };
@@ -1027,6 +1032,9 @@
 				38FE87D3195721670008EE74 /* MCAppDelegate.h */,
 				38FE87D4195721670008EE74 /* MCAppDelegate.m */,
 				38FE87D6195721670008EE74 /* MainMenu.xib */,
+				38BF02A41997993400606564 /* MCPreferencesWindowController.h */,
+				38BF02A51997993400606564 /* MCPreferencesWindowController.m */,
+				38BF02A61997993400606564 /* MCPreferencesWindowController.xib */,
 				38FE87D9195721670008EE74 /* Images.xcassets */,
 				38FE87C8195721670008EE74 /* Supporting Files */,
 			);
@@ -1254,6 +1262,7 @@
 				38FE87D2195721670008EE74 /* Credits.rtf in Resources */,
 				38A4ACF21975625600C0636E /* README.md in Resources */,
 				38FE87D8195721670008EE74 /* MainMenu.xib in Resources */,
+				38BF02A81997993400606564 /* MCPreferencesWindowController.xib in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -1379,13 +1388,14 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				38DAB1311997A1BF00B989BF /* MCAppDelegate.m in Sources */,
 				38A4ACEF1975625600C0636E /* Countly.xcdatamodeld in Sources */,
 				38974AFA195E8C4B00BBEA9C /* MCxRatesController+X_RatesAddOn.m in Sources */,
 				38974AFD195E8E9900BBEA9C /* MCDataStorage.m in Sources */,
 				389E2D0019792D7600729F61 /* MCNetworkTools.m in Sources */,
+				38BF02A71997993400606564 /* MCPreferencesWindowController.m in Sources */,
 				38A4ACED1975625600C0636E /* Countly.m in Sources */,
 				38A4ACF01975625600C0636E /* CountlyDB.m in Sources */,
-				38FE87D5195721670008EE74 /* MCAppDelegate.m in Sources */,
 				38A4ACEC1975625600C0636E /* Countly_OpenUDID.m in Sources */,
 				38FE87CE195721670008EE74 /* main.m in Sources */,
 				38974AF7195E8B3000BBEA9C /* MCxRatesCurrency.m in Sources */,
