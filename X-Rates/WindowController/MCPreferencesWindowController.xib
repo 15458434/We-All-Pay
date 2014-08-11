@@ -22,9 +22,9 @@
                 <autoresizingMask key="autoresizingMask"/>
                 <subviews>
                     <button fixedFrame="YES" translatesAutoresizingMaskIntoConstraints="NO" id="mjo-b6-KOW">
-                        <rect key="frame" x="69" y="116" width="189" height="18"/>
+                        <rect key="frame" x="69" y="116" width="193" height="18"/>
                         <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMinY="YES"/>
-                        <buttonCell key="cell" type="check" title="Diagnostics &amp; Usage OptIn" bezelStyle="regularSquare" imagePosition="left" state="on" inset="2" id="0ra-oY-vrN">
+                        <buttonCell key="cell" type="check" title="Diagnostics &amp; Usage Opt In" bezelStyle="regularSquare" imagePosition="left" state="on" inset="2" id="0ra-oY-vrN">
                             <behavior key="behavior" changeContents="YES" doesNotDimImage="YES" lightByContents="YES"/>
                             <font key="font" metaFont="system"/>
                         </buttonCell>
@@ -37,7 +37,7 @@
                         <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMinY="YES"/>
                         <textFieldCell key="cell" sendsActionOnEndEditing="YES" id="bcm-gG-xWC">
                             <font key="font" metaFont="system"/>
-                            <string key="title">Information about usage and diagnostics of how the EMC is used to improve this program to make EMC a better tool and give you as a user a better experience using it.</string>
+                            <string key="title">Information about usage and diagnostics of how the EMC is used to improve and to make EMC a better tool. So that you as a user will have a better experience with it in the future.</string>
                             <color key="textColor" name="controlTextColor" catalog="System" colorSpace="catalog"/>
                             <color key="backgroundColor" name="controlColor" catalog="System" colorSpace="catalog"/>
                         </textFieldCell>
