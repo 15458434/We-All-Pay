@@ -19,6 +19,12 @@
 #import "MCTonightsBillTransfer.h"
 #import "MCThisPaymentProtocol.h"
 
+// This is the name of the WeAllPayStoreFile. It's inherited from the location where UIManagedDocumentStores it's database file.
+NSString * const MCWeAllPayStoreFileName = @"persistentStore";
+NSString * const MCWeAllPayStoreDirectoryName = @"WeAllPayStore/StoreContent";
+// File of the WeAllPayStore Database model file.
+NSString * const MCWeAllPayStoreModelName = @"WeAllPayStore";
+
 @interface MCWeAllPayStoreController ()
 
 @property (nonatomic, strong) MCxRatesController *xRatesfetchController;
@@ -29,6 +35,11 @@
 @implementation MCWeAllPayStoreController
 
 @synthesize weAllPayStoreDocument;
+
+@synthesize managedObjectModel = _managedObjectModel;
+@synthesize mainThreadContext = _mainThreadContext;
+@synthesize backgroundThreadContext = _backgroundThreadContext;
+@synthesize persistentStoreCoordinator = _persistentStoreCoordinator;
 
 #pragma mark - Internal methods
 
@@ -54,86 +65,86 @@
 
 - (void)openStore:(void (^)(BOOL success))completionHandler
 {
-    if (!weAllPayStoreDocument) {
-        NSURL *weAllPayURL = [MCTools documentPathAsURLTo:@"WeAllPayStore"];
-        weAllPayStoreDocument = [[UIManagedDocument alloc] initWithFileURL:weAllPayURL];
-        [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(storeIsReady:) name:UIDocumentStateChangedNotification object:weAllPayStoreDocument];
-        
-        // Auto migrate when possible.
-        NSDictionary *options = @{NSMigratePersistentStoresAutomaticallyOption:@YES,
-                                  NSInferMappingModelAutomaticallyOption:@YES};
-        [weAllPayStoreDocument setPersistentStoreOptions:options];
-        
-        if (![[NSFileManager defaultManager] fileExistsAtPath:[[weAllPayStoreDocument fileURL] path]]) {
-            [weAllPayStoreDocument saveToURL:[weAllPayStoreDocument fileURL] forSaveOperation:UIDocumentSaveForCreating completionHandler:^(BOOL success) {
-                if (success) {
-                    NSLog(@"Successful SaveForCreating");
-                    // Add all availableCurrencies to the we all pay store when you're creating.
-                    [MCCurrency addAllAvailableCurrenciesToContext:[weAllPayStoreDocument managedObjectContext]];
-                    [[weAllPayStoreDocument managedObjectContext] setUndoManager:[[NSUndoManager alloc] init]];
-                    [[[weAllPayStoreDocument managedObjectContext] undoManager] disableUndoRegistration];
-                    if (completionHandler) {
-                        completionHandler(YES);
-                    }
-                } else {
-                    NSLog(@"SaveForCreating not successful.");
-                    if (completionHandler) {
-                        completionHandler(NO);
-                    }
-                }
-            }];
-        } else if ([weAllPayStoreDocument documentState] == UIDocumentStateClosed) {
-            [weAllPayStoreDocument openWithCompletionHandler:^(BOOL success) {
-                if (success) {
-                    NSLog(@"Succesful Open");
-                    [[weAllPayStoreDocument managedObjectContext] setUndoManager:[[NSUndoManager alloc] init]];
-                    [[[weAllPayStoreDocument managedObjectContext] undoManager] disableUndoRegistration];
-                    if (completionHandler) {
-                        completionHandler(YES);
-                    }
-                } else {
-                    NSLog(@"Open not successful");
-                    if (completionHandler) {
-                        completionHandler(NO);
-                    }
-                }
-            }];
-        } else if ([weAllPayStoreDocument documentState] == UIDocumentStateNormal) {
-            NSLog(@"DocumentState is already normal.");
-            [[weAllPayStoreDocument managedObjectContext] setUndoManager:[[NSUndoManager alloc] init]];
-            [[[weAllPayStoreDocument managedObjectContext] undoManager] disableUndoRegistration];
-            if (completionHandler) {
-                completionHandler(YES);
-            }
-        } else {
-            NSLog(@"Something went wrong opening your document.");
-            if ((completionHandler)) {
-                completionHandler(NO);
-            }
-        }
-        _mainThreadContext = [weAllPayStoreDocument managedObjectContext];
-    }
+    [self mainThreadContext];
+    [self backgroundThreadContext];
+//    if (!weAllPayStoreDocument) {
+//        NSURL *weAllPayURL = [MCTools documentPathAsURLTo:@"WeAllPayStore"];
+//        weAllPayStoreDocument = [[UIManagedDocument alloc] initWithFileURL:weAllPayURL];
+//        [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(storeIsReady:) name:UIDocumentStateChangedNotification object:weAllPayStoreDocument];
+//        
+//        // Auto migrate when possible.
+//        NSDictionary *options = @{NSMigratePersistentStoresAutomaticallyOption:@YES,
+//                                  NSInferMappingModelAutomaticallyOption:@YES};
+//        [weAllPayStoreDocument setPersistentStoreOptions:options];
+//        
+//        if (![[NSFileManager defaultManager] fileExistsAtPath:[[weAllPayStoreDocument fileURL] path]]) {
+//            [weAllPayStoreDocument saveToURL:[weAllPayStoreDocument fileURL] forSaveOperation:UIDocumentSaveForCreating completionHandler:^(BOOL success) {
+//                if (success) {
+//                    NSLog(@"Successful SaveForCreating");
+//                    // Add all availableCurrencies to the we all pay store when you're creating.
+//                    [MCCurrency addAllAvailableCurrenciesToContext:[weAllPayStoreDocument managedObjectContext]];
+//                    [[weAllPayStoreDocument managedObjectContext] setUndoManager:[[NSUndoManager alloc] init]];
+//                    [[[weAllPayStoreDocument managedObjectContext] undoManager] disableUndoRegistration];
+//                    if (completionHandler) {
+//                        completionHandler(YES);
+//                    }
+//                } else {
+//                    NSLog(@"SaveForCreating not successful.");
+//                    if (completionHandler) {
+//                        completionHandler(NO);
+//                    }
+//                }
+//            }];
+//        } else if ([weAllPayStoreDocument documentState] == UIDocumentStateClosed) {
+//            [weAllPayStoreDocument openWithCompletionHandler:^(BOOL success) {
+//                if (success) {
+//                    NSLog(@"Succesful Open");
+//                    [[weAllPayStoreDocument managedObjectContext] setUndoManager:[[NSUndoManager alloc] init]];
+//                    [[[weAllPayStoreDocument managedObjectContext] undoManager] disableUndoRegistration];
+//                    if (completionHandler) {
+//                        completionHandler(YES);
+//                    }
+//                } else {
+//                    NSLog(@"Open not successful");
+//                    if (completionHandler) {
+//                        completionHandler(NO);
+//                    }
+//                }
+//            }];
+//        } else if ([weAllPayStoreDocument documentState] == UIDocumentStateNormal) {
+//            NSLog(@"DocumentState is already normal.");
+//            [[weAllPayStoreDocument managedObjectContext] setUndoManager:[[NSUndoManager alloc] init]];
+//            [[[weAllPayStoreDocument managedObjectContext] undoManager] disableUndoRegistration];
+//            if (completionHandler) {
+//                completionHandler(YES);
+//            }
+//        } else {
+//            NSLog(@"Something went wrong opening your document.");
+//            if ((completionHandler)) {
+//                completionHandler(NO);
+//            }
+//        }
+//        _mainThreadContext = [weAllPayStoreDocument managedObjectContext];
+//    }
 }
 
 - (void)saveStore
 {
-    [weAllPayStoreDocument saveToURL:[weAllPayStoreDocument fileURL] forSaveOperation:UIDocumentSaveForOverwriting completionHandler:^(BOOL success){
-        if (success) {
-            NSLog(@"Succesfully saved.");
-        } else {
-            NSLog(@"Save not possible for document at %@", [weAllPayStoreDocument fileURL]);
-        }
-    }];
+//    [weAllPayStoreDocument saveToURL:[weAllPayStoreDocument fileURL] forSaveOperation:UIDocumentSaveForOverwriting completionHandler:^(BOOL success){
+//        if (success) {
+//            NSLog(@"Succesfully saved.");
+//        } else {
+//            NSLog(@"Save not possible for document at %@", [weAllPayStoreDocument fileURL]);
+//        }
+//    }];
     // Basically does the same as the original saveStore code. However now a more useful error message is logged.
-//    NSManagedObjectContext *context = [weAllPayStoreDocument managedObjectContext];
-//    NSError *error;
-//    BOOL succes = [context save:&error];
-//    if (succes) {
-//        NSLog(@"Succesfully saved.");
-//    } else {
-//        NSLog(@"Save not possible for document at %@", [weAllPayStoreDocument fileURL]);
-//        NSLog(@"Save not possible: %@", [error localizedDescription]);
-//    }
+    NSError *error;
+    BOOL succes = [_backgroundThreadContext save:&error];
+    if (succes) {
+        NSLog(@"Succesfully saved.");
+    } else {
+        NSLog(@"Save not possible: %@", [error localizedDescription]);
+    }
 }
 
 - (void)closeDocument
@@ -305,7 +316,6 @@
 {
     NSParameterAssert([delegate conformsToProtocol:@protocol(NSFetchedResultsControllerDelegate)]);
     NSParameterAssert([delegate conformsToProtocol:@protocol(MCTonightsBillGet)]);
-    NSManagedObjectContext *context = [weAllPayStoreDocument managedObjectContext];
     MCSharedBill *tonightsBill = [delegate tonightsBill];
     // What entities will be fetched.
     NSFetchRequest *request = [NSFetchRequest fetchRequestWithEntityName:@"MCPerson"];
@@ -319,7 +329,7 @@
     [request setPredicate:predicate];
     
     // Create the FetchedResultsController.
-    NSFetchedResultsController *dataController = [[NSFetchedResultsController alloc] initWithFetchRequest:request managedObjectContext:context sectionNameKeyPath:nil cacheName:[NSString stringWithFormat:@"All persons cache of trip: %@", [tonightsBill uniqueBillId]]];
+    NSFetchedResultsController *dataController = [[NSFetchedResultsController alloc] initWithFetchRequest:request managedObjectContext:_mainThreadContext sectionNameKeyPath:nil cacheName:[NSString stringWithFormat:@"All persons cache of trip: %@", [tonightsBill uniqueBillId]]];
     [dataController setDelegate:delegate];
     NSError *error;
     BOOL success = [dataController performFetch:&error];
@@ -450,6 +460,98 @@
 + (id)allocWithZone:(NSZone *)zone
 {
     return [self defaultStore];
+}
+
+#pragma mark - Core Data Stack
+
+// Returns the managed object context for the application.
+// If the context doesn't already exist, it is created and bound to the persistent store coordinator for the application.
+- (NSManagedObjectContext *)mainThreadContext
+{
+    if (_mainThreadContext != nil) {
+        return _mainThreadContext;
+    }
+    
+    NSPersistentStoreCoordinator *coordinator = [self persistentStoreCoordinator];
+    if (coordinator != nil) {
+        _mainThreadContext = [[NSManagedObjectContext alloc] init];
+        [_mainThreadContext setPersistentStoreCoordinator:coordinator];
+    }
+    return _mainThreadContext;
+}
+
+// Returns the managed object model for the application.
+// If the model doesn't already exist, it is created from the application's model.
+- (NSManagedObjectModel *)managedObjectModel
+{
+    if (_managedObjectModel != nil) {
+        return _managedObjectModel;
+    }
+    NSURL *modelURL = [[NSBundle mainBundle] URLForResource:MCWeAllPayStoreModelName withExtension:@"momd"];
+    _managedObjectModel = [[NSManagedObjectModel alloc] initWithContentsOfURL:modelURL];
+    return _managedObjectModel;
+}
+
+// Returns the persistent store coordinator for the application.
+// If the coordinator doesn't already exist, it is created and the application's store added to it.
+- (NSPersistentStoreCoordinator *)persistentStoreCoordinator
+{
+    if (_persistentStoreCoordinator != nil) {
+        return _persistentStoreCoordinator;
+    }
+    
+    NSURL *directoryURL = [[self applicationDocumentsDirectory] URLByAppendingPathComponent:MCWeAllPayStoreDirectoryName isDirectory:YES];
+    NSFileManager *fileManager = [NSFileManager defaultManager];
+    if (![fileManager fileExistsAtPath:directoryURL.path]) {
+        NSError *directoryCreationError;
+        if (![fileManager createDirectoryAtURL:directoryURL withIntermediateDirectories:YES attributes:nil error:&directoryCreationError ]){
+            NSLog(@"Unable to create base directory for WeAllPayStore: %@", directoryCreationError);
+        }
+    }
+    NSURL *storeURL = [directoryURL URLByAppendingPathComponent:MCWeAllPayStoreFileName];
+    
+    NSError *error = nil;
+    NSDictionary *storeOptions = @{NSInferMappingModelAutomaticallyOption: @YES,
+                                   NSMigratePersistentStoresAutomaticallyOption: @YES};
+//    NSDictionary *storeOptions = @{NSPersistentStoreUbiquitousContentNameKey: @"iCloudStore"};
+    _persistentStoreCoordinator = [[NSPersistentStoreCoordinator alloc] initWithManagedObjectModel:[self managedObjectModel]];
+    if (![_persistentStoreCoordinator addPersistentStoreWithType:NSSQLiteStoreType configuration:nil URL:storeURL options:storeOptions error:&error]) {
+        /*
+         Replace this implementation with code to handle the error appropriately.
+         
+         abort() causes the application to generate a crash log and terminate. You should not use this function in a shipping application, although it may be useful during development.
+         
+         Typical reasons for an error here include:
+         * The persistent store is not accessible;
+         * The schema for the persistent store is incompatible with current managed object model.
+         Check the error message to determine what the actual problem was.
+         
+         
+         If the persistent store is not accessible, there is typically something wrong with the file path. Often, a file URL is pointing into the application's resources directory instead of a writeable directory.
+         
+         If you encounter schema incompatibility errors during development, you can reduce their frequency by:
+         * Simply deleting the existing store:
+         [[NSFileManager defaultManager] removeItemAtURL:storeURL error:nil]
+         
+         * Performing automatic lightweight migration by passing the following dictionary as the options parameter:
+         @{NSMigratePersistentStoresAutomaticallyOption:@YES, NSInferMappingModelAutomaticallyOption:@YES}
+         
+         Lightweight migration will only work for a limited set of schema changes; consult "Core Data Model Versioning and Data Migration Programming Guide" for details.
+         
+         */
+        NSLog(@"Unresolved error %@, %@", error, [error userInfo]);
+        abort();
+    }
+    
+    return _persistentStoreCoordinator;
+}
+
+#pragma mark - Application's Documents directory
+
+// Returns the URL to the application's Documents directory.
+- (NSURL *)applicationDocumentsDirectory
+{
+    return [[[NSFileManager defaultManager] URLsForDirectory:NSDocumentDirectory inDomains:NSUserDomainMask] lastObject];
 }
 
 @end

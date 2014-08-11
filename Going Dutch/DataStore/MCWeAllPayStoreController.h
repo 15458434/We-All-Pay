@@ -6,8 +6,8 @@
 //  Copyright (c) 2013 Mark Cornelisse. All rights reserved.
 //
 
-#import <Foundation/Foundation.h>
-#import <CoreData/CoreData.h>
+@import Foundation;
+@import CoreData;
 
 @class MCPayment;
 @class MCPerson;
@@ -15,12 +15,12 @@
 @class MCExchangeRate;
 
 @interface MCWeAllPayStoreController : NSObject
-{
-    
-}
 
 @property (nonatomic, strong, readonly) UIManagedDocument *weAllPayStoreDocument;
 @property (nonatomic, strong, readonly) NSManagedObjectContext *mainThreadContext;
+@property (nonatomic, strong, readonly) NSManagedObjectContext *backgroundThreadContext;
+@property (nonatomic, strong, readonly) NSPersistentStoreCoordinator *persistentStoreCoordinator;
+@property (nonatomic, strong, readonly) NSManagedObjectModel *managedObjectModel;
 
 + (MCWeAllPayStoreController *)defaultStore;
 
