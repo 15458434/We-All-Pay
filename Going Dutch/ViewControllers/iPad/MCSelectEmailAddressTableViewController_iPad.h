@@ -20,4 +20,7 @@
 @property (strong, nonatomic) MCPerson *thisPerson;
 @property (strong, nonatomic) void (^dismissMe)();
 
+// Only accessible in the backgroundthread.
+@property (strong, nonatomic) MCPerson *writableThisPerson;
+
 @end

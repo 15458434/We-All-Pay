@@ -10,9 +10,15 @@
 
 @class MCPerson;
 
+// Notification Message that writableThisPerson is ready to be used.
+extern NSString * const MCWritableThisPersonReady;
+extern NSString * const MCwritableThisPersonKey;
+
 @protocol MCThisPersonProtocol <NSObject>
 
 - (MCPerson *)thisPerson;
 - (void)setThisPerson:(MCPerson *)person;
+- (MCPerson *)writableThisPerson;
+- (void)setWritableThisPerson;
 
 @end
