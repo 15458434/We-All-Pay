@@ -168,12 +168,6 @@
     
     [self setEdgesForExtendedLayout:UIRectEdgeNone];
     
-    if (!tonightsBill) {
-        didSomethingChange = YES;
-        tonightsBill = [MCSharedBill addSharedBill];
-        [tripNameField setPlaceholder:@"Enter activity"];
-    }
-    
     // Load and register Nib to the tableView for use.
     UINib *nib = [UINib nibWithNibName:@"MCPersonTableViewCell" bundle:nil];
     [[self tableView] registerNib:nib forCellReuseIdentifier:@"MCPersonTableViewCell"];
@@ -257,6 +251,21 @@
     [super decodeRestorableStateWithCoder:coder];
 }
 
+-(void)dealloc
+{
+    [[NSNotificationCenter defaultCenter] removeObserver:self];
+}
+
+#pragma mark - Notifications
+
+- (void)writeableTonightsBillIsCreated:(NSNotification *)notification
+{
+    // Should be executed on the background thread.
+    NSDictionary *userInfo = [notification userInfo];
+    _writableTonightsBill = [userInfo objectForKey:MCwritableTonightsBillKey];
+    NSLog(@"PeoplePresent: WritableTonightsBillIsCreated has been executed.");
+}
+
 #pragma mark - MCPersonViewChangeDelegate
 
 - (void)sendDidSomethingChange:(BOOL)value
@@ -319,9 +328,14 @@
 
 -(void)textFieldDidEndEditing:(UITextField *)textField
 {
-    [tonightsBill setTripName:[textField text]];
-    NSDate *nu = [NSDate date];
-    [tonightsBill setDateModified:nu];
+    NSManagedObjectContext *context = [[MCWeAllPayStoreController defaultStore] backgroundThreadContext];
+    NSString *newTripName = [textField text];
+    [context performBlock:^{
+        [_writableTonightsBill setTripName:newTripName];
+        NSDate *now = [NSDate date];
+        [_writableTonightsBill setDateModified:now];
+        [[MCWeAllPayStoreController defaultStore] saveStore];
+    }];
     if (!didSomethingChange) {
         didSomethingChange = YES;
     }
@@ -486,7 +500,6 @@
     if ([[[segue destinationViewController] viewControllers][0] respondsToSelector:@selector(setThisPerson:)]) {
         [[[segue destinationViewController] viewControllers][0] setThisPerson:thePerson];
     }
-    
 }
 
 @end

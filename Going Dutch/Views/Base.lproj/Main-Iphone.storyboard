@@ -158,7 +158,7 @@
                                 <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                                 <color key="backgroundColor" red="0.80000007149999997" green="0.86666673419999996" blue="0.94117653369999998" alpha="1" colorSpace="deviceRGB"/>
                                 <connections>
-                                    <segue destination="4g7-52-2bw" kind="embed" id="aSD-UO-zEs"/>
+                                    <segue destination="4g7-52-2bw" kind="embed" identifier="pageViewController" id="aSD-UO-zEs"/>
                                 </connections>
                             </containerView>
                         </subviews>

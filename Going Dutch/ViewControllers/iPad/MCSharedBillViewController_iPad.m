@@ -160,7 +160,7 @@
     // When newPerson segue is used add a person to tonightsBill.
     if ([[segue identifier] isEqualToString:@"newPerson"]) {
         id destination = [[segue destinationViewController] viewControllers][0];
-        if ([destination conformsToProtocol:@protocol(MCTonightsBillPut)]) {
+        if ([destination conformsToProtocol:@protocol(MCTonightsBillTransfer)]) {
             [destination setTonightsBill:_tonightsBill];
         }
         if ([destination conformsToProtocol:@protocol(MCDismissMeBlockProtocol)]) {
@@ -179,7 +179,7 @@
     // When newPerson segue is used to add a new payment to tonightsbill.
     if ([[segue identifier] isEqualToString:@"newPayment"]) {
         id destination = [[segue destinationViewController] viewControllers][0];
-        if ([destination conformsToProtocol:@protocol(MCTonightsBillPut)]) {
+        if ([destination conformsToProtocol:@protocol(MCTonightsBillTransfer)]) {
             [destination setTonightsBill:_tonightsBill];
         }
         if ([destination conformsToProtocol:@protocol(MCDismissMeBlockProtocol)]) {
@@ -198,7 +198,7 @@
     // When openSolutionView is used to go to the solution screen.
     if ([[segue identifier] isEqualToString:@"openSolutionView"]) {
         id destination = [[segue destinationViewController] viewControllers][0];
-        if ([destination conformsToProtocol:@protocol(MCTonightsBillPut)]) {
+        if ([destination conformsToProtocol:@protocol(MCTonightsBillTransfer)]) {
             [destination setTonightsBill:_tonightsBill];
         }
         if ([destination conformsToProtocol:@protocol(MCDismissMeBlockProtocol)]) {

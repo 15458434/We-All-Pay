@@ -12,9 +12,11 @@
 #import "MCTonightsBillTransfer.h"
 #import "MCCurrentViewDelegate.h"
 
+#import "UIViewController+WeAllPayStore.h"
+
 @class MCSharedBill;
 
-@interface MCSharedBillMainViewController : UIViewController <MCTitleViewDelegate, MCTonightsBillPut, MCTonightsBillGet, MCCurrentViewDelegate>
+@interface MCSharedBillMainViewController : UIViewController <MCTitleViewDelegate, MCTonightsBillTransfer, MCCurrentViewDelegate>
 {
     
 }

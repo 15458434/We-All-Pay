@@ -14,7 +14,7 @@
 @class MCSharedBill;
 @class MCTableEmptyMessage_iPad;
 
-@interface MCSharedBillPaymentsTableViewController_iPad : UITableViewController <NSFetchedResultsControllerDelegate, MCTonightsBillGet>
+@interface MCSharedBillPaymentsTableViewController_iPad : UITableViewController <NSFetchedResultsControllerDelegate, MCTonightsBillTransfer>
 {
     MCTableEmptyMessage_iPad *emptyMessage;
     
@@ -22,5 +22,6 @@
 }
 
 @property (strong, nonatomic) MCSharedBill *tonightsBill;
+@property (strong, nonatomic) MCSharedBill *writableTonightsBill;
 
 @end

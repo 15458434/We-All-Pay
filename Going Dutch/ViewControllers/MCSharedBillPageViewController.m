@@ -69,6 +69,14 @@
     [self setViewControllers:views direction:UIPageViewControllerNavigationDirectionReverse animated:YES completion:nil];
     [self setDelegate:self];
     [self setDataSource:self];
+    NSManagedObjectContext *backgroundContext = [[MCWeAllPayStoreController defaultStore] backgroundThreadContext];
+    [backgroundContext performBlock:^{
+        if (_writableTonightsBill) {
+            [sharedBillTableViewController setWritableTonightsBill:_writableTonightsBill];
+        } else {
+            [[NSNotificationCenter defaultCenter] addObserver:sharedBillTableViewController selector:@selector(writableTonightsBillIsCreated:) name:MCWritableTonightsBillReady object:self];
+        }
+    }];
 }
 
 - (void)setEditTripViewControllerFromStoryboard
@@ -82,6 +90,14 @@
     [self setViewControllers:views direction:UIPageViewControllerNavigationDirectionForward animated:YES completion:nil];
     [self setDelegate:self];
     [self setDataSource:self];
+    NSManagedObjectContext *backgroundContext = [[MCWeAllPayStoreController defaultStore] backgroundThreadContext];
+    [backgroundContext performBlock:^{
+        if (_writableTonightsBill) {
+            [editTripTableViewController setWritableTonightsBill:_writableTonightsBill];
+        } else {
+            [[NSNotificationCenter defaultCenter] addObserver:editTripTableViewController selector:@selector(writableTonightsBillIsCreated:) name:MCWritableTonightsBillReady object:self];
+        }
+    }];
 }
 
 - (void)openMailView:(id)sender
@@ -179,7 +195,7 @@
     [super viewWillAppear:animated];
     
     id destination = [self parentViewController];
-    BOOL conformsGet = [destination conformsToProtocol:@protocol(MCTonightsBillGet)];
+    BOOL conformsGet = [destination conformsToProtocol:@protocol(MCTonightsBillTransfer)];
     NSParameterAssert(conformsGet);
     BOOL conformsCurrentView = [destination conformsToProtocol:@protocol(MCCurrentViewDelegate)];
     NSParameterAssert(conformsCurrentView);
@@ -230,12 +246,32 @@
 - (MCSharedBill *)tonightsBill
 {
     id destination = [self parentViewController];
-    if ([destination conformsToProtocol:@protocol(MCTonightsBillGet)]) {
+    if ([destination conformsToProtocol:@protocol(MCTonightsBillTransfer)]) {
         return [destination tonightsBill];
     } else {
         NSLog(@"The destination object doesn't conform tonightsBill.");
         return nil;
     }
+}
+
+- (MCSharedBill *)writeableTonightsBill
+{
+    // This should be executed on the private thread.
+    id destination = [self parentViewController];
+    if ([destination conformsToProtocol:@protocol(MCTonightsBillTransfer)]) {
+        return [destination writeableTonightsBill];
+    } else {
+        NSLog(@"The destination object doesn't conform tonightsBill.");
+        return nil;
+    }
+}
+
+- (void)writeableTonightsBillIsCreated:(NSNotification *)notification
+{
+    // Should be executed on the background thread.
+    NSDictionary *userInfo = [notification userInfo];
+    _writableTonightsBill = [userInfo objectForKey:MCwritableTonightsBillKey];
+    NSLog(@"WritableTonightsBillIsCreated has been executed.");
 }
 
 #pragma mark - UIAlertViewDelegate
@@ -320,16 +356,16 @@
 
 #pragma mark - Storyboard stuff
 
-- (void)prepareForSegue:(UIStoryboardSegue *)segue sender:(id)sender
-{
-    if ([[segue destinationViewController] respondsToSelector:@selector(viewControllers)]) {
-        if ([[[segue destinationViewController] viewControllers][0] respondsToSelector:@selector(setTonightsBill:)]) {
-            [[[segue destinationViewController] viewControllers][0] setTonightsBill:[self tonightsBill]];
-        }
-        if ([[[segue destinationViewController] viewControllers][0] respondsToSelector:@selector(setSendMailObject:)]) {
-            [[[segue destinationViewController] viewControllers][0] setSendMailObject:self];
-        }
-    }
-}
+//- (void)prepareForSegue:(UIStoryboardSegue *)segue sender:(id)sender
+//{
+//    if ([[segue destinationViewController] respondsToSelector:@selector(viewControllers)]) {
+//        if ([[[segue destinationViewController] viewControllers][0] respondsToSelector:@selector(setTonightsBill:)]) {
+//            [[[segue destinationViewController] viewControllers][0] setTonightsBill:[self tonightsBill]];
+//        }
+//        if ([[[segue destinationViewController] viewControllers][0] respondsToSelector:@selector(setSendMailObject:)]) {
+//            [[[segue destinationViewController] viewControllers][0] setSendMailObject:self];
+//        }
+//    }
+//}
 
 @end

@@ -6,18 +6,22 @@
 //  Copyright (c) 2014 Mark Cornelisse. All rights reserved.
 //
 
-#import <Foundation/Foundation.h>
+@import Foundation;
 
 @class MCSharedBill;
 
-@protocol MCTonightsBillPut <NSObject>
+// Notification Message that writableTonightsBill is ready to be used.
+extern NSString * const MCWritableTonightsBillReady;
+extern NSString * const MCwritableTonightsBillKey;
 
-- (void)setTonightsBill:(MCSharedBill *)tonightsBill;
+@protocol MCTonightsBillTransfer <NSObject>
 
-@end
-@protocol MCTonightsBillGet <NSObject>
-
+// Accessed on mainThread.
 - (MCSharedBill *)tonightsBill;
+- (void)setTonightsBill:(MCSharedBill *)tonightsBill;
+// Accessed on privateThread
+- (MCSharedBill *)writableTonightsBill;
+- (void)setWritableTonightsBill:(MCSharedBill *)writeableTonightsBill;
 
 @end
 

@@ -66,7 +66,16 @@ NSString * const MCWeAllPayStoreModelName = @"WeAllPayStore";
 - (void)openStore:(void (^)(BOOL success))completionHandler
 {
     [self mainThreadContext];
-    [self backgroundThreadContext];
+    [self startRespondingToStoreChangeNotifications];
+    if (_mainThreadContext && _backgroundThreadContext) {
+        if (completionHandler) {
+            completionHandler(YES);
+        }
+    } else {
+        if (completionHandler) {
+            completionHandler(NO);
+        }
+    }
 //    if (!weAllPayStoreDocument) {
 //        NSURL *weAllPayURL = [MCTools documentPathAsURLTo:@"WeAllPayStore"];
 //        weAllPayStoreDocument = [[UIManagedDocument alloc] initWithFileURL:weAllPayURL];
@@ -137,7 +146,6 @@ NSString * const MCWeAllPayStoreModelName = @"WeAllPayStore";
 //            NSLog(@"Save not possible for document at %@", [weAllPayStoreDocument fileURL]);
 //        }
 //    }];
-    // Basically does the same as the original saveStore code. However now a more useful error message is logged.
     NSError *error;
     BOOL succes = [_backgroundThreadContext save:&error];
     if (succes) {
@@ -270,12 +278,11 @@ NSString * const MCWeAllPayStoreModelName = @"WeAllPayStore";
 - (NSFetchedResultsController *)allTripsDataControllerForDelegate:(id)delegate
 {
     NSParameterAssert([delegate conformsToProtocol:@protocol(NSFetchedResultsControllerDelegate)]);
-    NSManagedObjectContext *context = [weAllPayStoreDocument managedObjectContext];
     NSFetchRequest *request = [NSFetchRequest fetchRequestWithEntityName:@"MCSharedBill"];
     [request setSortDescriptors:@[[NSSortDescriptor sortDescriptorWithKey:@"dateCreated" ascending:NO]]];
     [request setRelationshipKeyPathsForPrefetching:@[ @"payments", @"peoplePresent" ]];
     NSFetchedResultsController *dataController = [[NSFetchedResultsController alloc] initWithFetchRequest:request
-                                                         managedObjectContext:context
+                                                         managedObjectContext:_mainThreadContext
                                                            sectionNameKeyPath:nil
                                                                     cacheName:nil];
     [dataController setDelegate:delegate];
@@ -286,8 +293,7 @@ NSString * const MCWeAllPayStoreModelName = @"WeAllPayStore";
 - (NSFetchedResultsController *)sharedBillPaymentsDataControllerForDelegate:(id)delegate
 {
     NSParameterAssert([delegate conformsToProtocol:@protocol(NSFetchedResultsControllerDelegate)]);
-    NSParameterAssert([delegate conformsToProtocol:@protocol(MCTonightsBillGet)]);
-    NSManagedObjectContext *context = [weAllPayStoreDocument managedObjectContext];
+    NSParameterAssert([delegate conformsToProtocol:@protocol(MCTonightsBillTransfer)]);
     MCSharedBill *tonightsBill = [delegate tonightsBill];
     // What entities will be fetched.
     NSFetchRequest *request = [NSFetchRequest fetchRequestWithEntityName:@"MCPayment"];
@@ -302,7 +308,7 @@ NSString * const MCWeAllPayStoreModelName = @"WeAllPayStore";
     
     NSString *cacheName = [NSString stringWithFormat:@"All payments cache of trip: %@", [tonightsBill tripName]];
     // Create the FetchedResultsController.
-    NSFetchedResultsController *dataController = [[NSFetchedResultsController alloc] initWithFetchRequest:request managedObjectContext:context sectionNameKeyPath:nil cacheName:cacheName];
+    NSFetchedResultsController *dataController = [[NSFetchedResultsController alloc] initWithFetchRequest:request managedObjectContext:_mainThreadContext sectionNameKeyPath:nil cacheName:cacheName];
     NSError *error;
     BOOL success = [dataController performFetch:&error];
     if (!success) {
@@ -315,7 +321,7 @@ NSString * const MCWeAllPayStoreModelName = @"WeAllPayStore";
 - (NSFetchedResultsController *)sharedBillPeoplePresentDataControllerForDelegate:(id)delegate
 {
     NSParameterAssert([delegate conformsToProtocol:@protocol(NSFetchedResultsControllerDelegate)]);
-    NSParameterAssert([delegate conformsToProtocol:@protocol(MCTonightsBillGet)]);
+    NSParameterAssert([delegate conformsToProtocol:@protocol(MCTonightsBillTransfer)]);
     MCSharedBill *tonightsBill = [delegate tonightsBill];
     // What entities will be fetched.
     NSFetchRequest *request = [NSFetchRequest fetchRequestWithEntityName:@"MCPerson"];
@@ -343,7 +349,6 @@ NSString * const MCWeAllPayStoreModelName = @"WeAllPayStore";
 {
     NSParameterAssert([delegate conformsToProtocol:@protocol(NSFetchedResultsControllerDelegate)]);
     NSParameterAssert([delegate conformsToProtocol:@protocol(MCThisPaymentProtocol)]);
-    NSManagedObjectContext *context = [weAllPayStoreDocument managedObjectContext];
     MCPayment *thisPayment = [delegate thisPayment];
     // What entities will be fetched.
     NSFetchRequest *request = [NSFetchRequest fetchRequestWithEntityName:@"MCPaymentPresence"];
@@ -357,7 +362,7 @@ NSString * const MCWeAllPayStoreModelName = @"WeAllPayStore";
     [request setPredicate:predicate];
     
     // Create the FetchedResultsController.
-    NSFetchedResultsController *dataController = [[NSFetchedResultsController alloc] initWithFetchRequest:request managedObjectContext:context sectionNameKeyPath:nil cacheName:[NSString stringWithFormat:@"All payment presence cache for payment: %@", [thisPayment uniquePaymentId]]];
+    NSFetchedResultsController *dataController = [[NSFetchedResultsController alloc] initWithFetchRequest:request managedObjectContext:_mainThreadContext sectionNameKeyPath:nil cacheName:[NSString stringWithFormat:@"All payment presence cache for payment: %@", [thisPayment uniquePaymentId]]];
     [dataController setDelegate:delegate];
     NSError *error;
     BOOL success = [dataController performFetch:&error];
@@ -462,6 +467,55 @@ NSString * const MCWeAllPayStoreModelName = @"WeAllPayStore";
     return [self defaultStore];
 }
 
+#pragma mark - Core Data Messages
+
+- (void)startRespondingToStoreChangeNotifications
+{
+    NSNotificationCenter *dc = [NSNotificationCenter defaultCenter];
+    [dc addObserver:self selector:@selector(storeWillChange:) name:NSManagedObjectContextWillSaveNotification object:_backgroundThreadContext];
+    [dc addObserver:self selector:@selector(storeDidChange:) name:NSManagedObjectContextDidSaveNotification object:_backgroundThreadContext];
+    [dc addObserver:self selector:@selector(storeWillBeSwapped:) name:NSPersistentStoreCoordinatorStoresWillChangeNotification object:_persistentStoreCoordinator];
+    [dc addObserver:self selector:@selector(storeDidSwap:) name:NSPersistentStoreCoordinatorStoresDidChangeNotification object:_persistentStoreCoordinator];
+    [dc addObserver:self selector:@selector(storedidUpdateFromUbiquitousContainer:) name:NSPersistentStoreDidImportUbiquitousContentChangesNotification object:_persistentStoreCoordinator];
+}
+
+- (void)stopRespondingToStorechangeNotifications
+{
+    NSNotificationCenter *dc = [NSNotificationCenter defaultCenter];
+    [dc removeObserver:self];
+}
+
+- (void)storeWillChange:(NSNotification *)notification
+{
+    NSLog(@"MCWeAllPayStoreController: Store will change.");
+}
+
+- (void)storeDidChange:(NSNotification *)notification
+{
+    NSLog(@"MCWeAllPayStoreController: Store did change: %@", notification);
+    if (notification.object != _mainThreadContext) {
+        [_mainThreadContext performBlockAndWait:^{
+            [_mainThreadContext mergeChangesFromContextDidSaveNotification:notification];
+        }];
+    }
+}
+
+- (void)storeWillBeSwapped:(NSNotification *)notification
+{
+    NSLog(@"MCWeAllPayStoreController: Store will be swapped.");
+}
+
+- (void)storeDidSwap:(NSNotification *)notification
+{
+    NSLog(@"MCWeAllPayStoreController: Store did swap.");
+}
+
+- (void)storedidUpdateFromUbiquitousContainer:(NSNotification *)notification
+{
+    NSLog(@"MCWeAllPayStoreController: Store did update from Ubiquitous Container.");
+}
+
+
 #pragma mark - Core Data Stack
 
 // Returns the managed object context for the application.
@@ -474,8 +528,10 @@ NSString * const MCWeAllPayStoreModelName = @"WeAllPayStore";
     
     NSPersistentStoreCoordinator *coordinator = [self persistentStoreCoordinator];
     if (coordinator != nil) {
-        _mainThreadContext = [[NSManagedObjectContext alloc] init];
+        _mainThreadContext = [[NSManagedObjectContext alloc] initWithConcurrencyType:NSMainQueueConcurrencyType];
         [_mainThreadContext setPersistentStoreCoordinator:coordinator];
+        _backgroundThreadContext = [[NSManagedObjectContext alloc] initWithConcurrencyType:NSPrivateQueueConcurrencyType];
+        [_backgroundThreadContext setPersistentStoreCoordinator:coordinator];
     }
     return _mainThreadContext;
 }

@@ -301,7 +301,7 @@
     if (indexPathOfSelectedRow) {
         theBill = [dataController objectAtIndexPath:indexPathOfSelectedRow];
     }
-    if ([[segue destinationViewController] conformsToProtocol:@protocol(MCTonightsBillPut)]) {
+    if ([[segue destinationViewController] conformsToProtocol:@protocol(MCTonightsBillTransfer)]) {
         if (theBill) {
             [[segue destinationViewController] setTonightsBill:theBill];
         } else {

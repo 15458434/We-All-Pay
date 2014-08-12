@@ -12,7 +12,11 @@
 
 #import "UIView+MCAddons.h"
 
+#import "MCWeAllPayStoreController.h"
+
 @interface MCSharedBillMainViewController ()
+
+@property (nonatomic, strong) MCSharedBill *writableTonightsBill;
 
 @end
 
@@ -25,6 +29,17 @@
     [[self childViewControllers][0] toggleEdit:sender];
 }
 
+#pragma mark - From UIViewController+WeAllPayStore
+
+- (void)storeDidChange:(NSNotification *)notification
+{
+    if (!_tonightsBill) {
+        NSManagedObjectContext *context = [[MCWeAllPayStoreController defaultStore] mainThreadContext];
+        [context performBlock:^{
+            _tonightsBill = (MCSharedBill *)[context objectWithID:[_writableTonightsBill objectID]];
+        }];
+    }
+}
 
 #pragma mark - Inherited from super
 
@@ -44,8 +59,16 @@
     [[self navigationController] setToolbarHidden:YES animated:YES];
     [MCTools setAdBannerIfNotPaid:YES forViewController:self];
     
+    [self startRespondingToStoreChangeNotifications];
+    
     if (![self tonightsBill]) {
-        _tonightsBill = [MCSharedBill addSharedBill];
+        NSManagedObjectContext *writeContext = [[MCWeAllPayStoreController defaultStore] backgroundThreadContext];
+        [writeContext performBlock:^{
+            _writableTonightsBill = [MCSharedBill addSharedBillToContext:writeContext];
+            [[MCWeAllPayStoreController defaultStore] saveStore];
+            NSNotificationCenter *dc = [NSNotificationCenter defaultCenter];
+            [dc postNotificationName:MCWritableTonightsBillReady object:self userInfo:@{MCwritableTonightsBillKey: _writableTonightsBill}];
+        }];
         _currentView = MCSelectEditTripTableView;
     } else {
         _currentView = MCSelectSharedBillTableView;
@@ -78,7 +101,11 @@
         if (firstResponder) {
             [firstResponder resignFirstResponder];
         }
-        [_tonightsBill deleteIfStillNew];
+        NSManagedObjectContext *context = [[MCWeAllPayStoreController defaultStore] backgroundThreadContext];
+        [context performBlock:^{
+            [_writableTonightsBill deleteIfStillNew];
+            [[MCWeAllPayStoreController defaultStore] saveStore];
+        }];
     }
 }
 
@@ -88,7 +115,11 @@
     // Dispose of any resources that can be recreated.
 }
 
-/*
+-(void)dealloc
+{
+    [self stopRespondingToStorechangeNotifications];
+}
+
 #pragma mark - Navigation
 
 // In a storyboard-based application, you will often want to do a little preparation before navigation
@@ -96,7 +127,18 @@
 {
     // Get the new view controller using [segue destinationViewController].
     // Pass the selected object to the new view controller.
+    
+    if ([[segue identifier] isEqualToString:@"pageViewController"]) {
+        NSManagedObjectContext *backgroundContext = [[MCWeAllPayStoreController defaultStore] backgroundThreadContext];
+        [backgroundContext performBlock:^{
+            id<MCTonightsBillTransfer> destination = [segue destinationViewController];
+            if (_writableTonightsBill) {
+                [destination setWritableTonightsBill:_writableTonightsBill];
+            } else {
+                [[NSNotificationCenter defaultCenter] addObserver:destination selector:@selector(writeableTonightsBillIsCreated:) name:MCWritableTonightsBillReady object:nil];
+            }
+        }];
+    }
 }
-*/
 
 @end

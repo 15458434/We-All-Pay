@@ -15,12 +15,13 @@
 
 @class MCSharedBill;
 
-@interface MCSharedBillViewController_iPad : UIViewController <MCTonightsBillPut, MCTonightsBillGet, MCAddressBookReceiverDelegate, UITextFieldDelegate>
+@interface MCSharedBillViewController_iPad : UIViewController <MCTonightsBillTransfer, MCAddressBookReceiverDelegate, UITextFieldDelegate>
 {
     __weak IBOutlet UITextField *tripNameField;
     
     MCAddressBookDataReceiver *personReceiver;
 }
 @property (strong, nonatomic) MCSharedBill *tonightsBill;
+@property (strong, nonatomic) MCSharedBill *writableTonightsBill;
 
 @end

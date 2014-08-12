@@ -21,6 +21,8 @@
 
 #import "MCTonightsBillTransfer.h"
 
+#import "UIViewController+WeAllPayStore.h"
+
 @interface MCAllTripsTableViewController ()
 
 @end
@@ -180,6 +182,8 @@
     
     [[self tableView] reloadData];
     [[self navigationController] setToolbarHidden:YES animated:YES];
+    
+    [self startRespondingToStoreChangeNotifications];
 }
 
 - (void)viewDidAppear:(BOOL)animated
@@ -195,7 +199,8 @@
 {
     [super viewWillDisappear:animated];
     
-    dataController = nil;
+//    dataController = nil;
+//    [self stopRespondingToStorechangeNotifications];
 }
 
 - (void)viewDidDisappear:(BOOL)animated
@@ -211,6 +216,11 @@
     // Dispose of any resources that can be recreated.
 }
 
+- (void)dealloc
+{
+    [self stopRespondingToStorechangeNotifications];
+}
+
 - (void)encodeRestorableStateWithCoder:(NSCoder *)coder
 {
     [super encodeRestorableStateWithCoder:coder];
@@ -220,6 +230,17 @@
 {
     [super decodeRestorableStateWithCoder:coder];
 }
+
+#pragma mark - UIViewController+WeAllPayStore
+
+//-(void)storeDidChange:(NSNotification *)notification
+//{
+//    NSError *fetchError;
+//    [dataController performFetch:&fetchError];
+//    if (fetchError) {
+//        NSLog(@"fetchError: %@", fetchError.localizedDescription);
+//    }
+//}
 
 #pragma mark - MCReturnPaymentViewControllerDelegate
 
@@ -338,8 +359,12 @@
         MCSharedBill *toBeDeleteSharedBill = [dataController objectAtIndexPath:indexPath];
         [NSFetchedResultsController deleteCacheWithName:[NSString stringWithFormat:@"All persons cache of trip: %@", [toBeDeleteSharedBill uniqueBillId]]];
         [NSFetchedResultsController deleteCacheWithName:[NSString stringWithFormat:@"All payments cache of trip: %@", [toBeDeleteSharedBill uniqueBillId]]];
-        [MCSharedBill deleteSharedbill:toBeDeleteSharedBill];
-        [[[MCWeAllPayStoreController defaultStore] mainThreadContext] processPendingChanges];
+        NSManagedObjectContext *context = [[MCWeAllPayStoreController defaultStore] backgroundThreadContext];
+        [context performBlock:^{
+            MCSharedBill *toBeDeletedSharedBillInBackgroundContext = (MCSharedBill *)[context objectWithID:[toBeDeleteSharedBill objectID]];
+            [MCSharedBill deleteSharedbill:toBeDeletedSharedBillInBackgroundContext];
+            [[MCWeAllPayStoreController defaultStore] saveStore];
+        }];
     }
 }
 
@@ -393,7 +418,7 @@
     if (indexPathOfSelectedRow) {
         theBill = [dataController objectAtIndexPath:indexPathOfSelectedRow];
     }
-    if ([[segue destinationViewController] conformsToProtocol:@protocol(MCTonightsBillPut)]) {
+    if ([[segue destinationViewController] conformsToProtocol:@protocol(MCTonightsBillTransfer)]) {
         [[segue destinationViewController] setTonightsBill:theBill];
     }
 }

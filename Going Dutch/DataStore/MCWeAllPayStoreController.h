@@ -14,6 +14,10 @@
 @class MCSharedBill;
 @class MCExchangeRate;
 
+/*
+The We All Pay Store Controller is designed to do writing in the background and fetching on the mainThread. This way write actions won't interfere with the user interface.
+ */
+
 @interface MCWeAllPayStoreController : NSObject
 
 @property (nonatomic, strong, readonly) UIManagedDocument *weAllPayStoreDocument;

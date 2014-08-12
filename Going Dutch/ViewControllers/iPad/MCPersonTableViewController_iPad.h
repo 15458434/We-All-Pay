@@ -6,7 +6,7 @@
 //  Copyright (c) 2014 Mark Cornelisse. All rights reserved.
 //
 
-#import <UIKit/UIKit.h>
+@import UIKit;
 
 #import "MCThisPersonProtocol.h"
 #import "MCTonightsBillTransfer.h"
@@ -24,7 +24,7 @@ typedef NS_ENUM(BOOL, MCCancelButtonPressed) {
     cancelIsPressed
 };
 
-@interface MCPersonTableViewController_iPad : UITableViewController <UITextFieldDelegate, UIPopoverControllerDelegate, UIAlertViewDelegate, MCThisPersonProtocol, MCTonightsBillPut>
+@interface MCPersonTableViewController_iPad : UITableViewController <UITextFieldDelegate, UIPopoverControllerDelegate, UIAlertViewDelegate, MCThisPersonProtocol, MCTonightsBillTransfer>
 {
     //__weak IBOutlet UIImageView *_pictureView;
     __weak IBOutlet UITextField *firstNameField;
@@ -45,5 +45,6 @@ typedef NS_ENUM(BOOL, MCCancelButtonPressed) {
 
 @property (strong, nonatomic) MCPerson *thisPerson;
 @property (strong, nonatomic) MCSharedBill *tonightsBill;
+@property (strong, nonatomic) MCSharedBill *writableTonightsBill;
 
 @end

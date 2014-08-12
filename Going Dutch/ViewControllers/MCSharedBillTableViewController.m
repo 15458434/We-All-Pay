@@ -122,10 +122,10 @@
     
     if (self) {
         [[self navigationController] setTitle:@"SharedBill"];
-        UIBarButtonItem *bbi = [[UIBarButtonItem alloc] initWithBarButtonSystemItem:UIBarButtonSystemItemAdd
-                                                                             target:self
-                                                                             action:@selector(addPayment:)];
-        [[self navigationItem] setRightBarButtonItem:bbi animated:YES];
+//        UIBarButtonItem *bbi = [[UIBarButtonItem alloc] initWithBarButtonSystemItem:UIBarButtonSystemItemAdd
+//                                                                             target:self
+//                                                                             action:@selector(addPayment:)];
+//        [[self navigationItem] setRightBarButtonItem:bbi animated:YES];
     }
     return self;
 }
@@ -208,6 +208,16 @@
 - (void)decodeRestorableStateWithCoder:(NSCoder *)coder
 {
     [super decodeRestorableStateWithCoder:coder];
+}
+
+#pragma mark - NSNotification
+
+- (void)writableTonightsBillIsCreated:(NSNotification *)notification
+{
+    // Should be executed on the background thread.
+    NSDictionary *userInfo = [notification userInfo];
+    _writableTonightsBill = [userInfo objectForKey:MCwritableTonightsBillKey];
+    NSLog(@"WritableTonightsBillIsCreated has been executed.");
 }
 
 #pragma mark - UITextFieldDelegate

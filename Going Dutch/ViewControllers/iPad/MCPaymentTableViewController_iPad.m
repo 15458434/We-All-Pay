@@ -429,7 +429,7 @@
     // Pass the selected object to the new view controller.
     if ([[segue identifier] isEqualToString:@"selectPayer"]) {
         id destination = [segue destinationViewController];
-        if ([destination conformsToProtocol:@protocol(MCTonightsBillPut)]) {
+        if ([destination conformsToProtocol:@protocol(MCTonightsBillTransfer)]) {
             [destination setTonightsBill:_tonightsBill];
         }
         if ([destination conformsToProtocol:@protocol(MCThisPaymentProtocol)]) {

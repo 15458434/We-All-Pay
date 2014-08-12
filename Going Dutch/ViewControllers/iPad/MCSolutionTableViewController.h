@@ -15,7 +15,7 @@
 @class MCSharedBill;
 @class MCTableEmptyMessage_iPad;
 
-@interface MCSolutionTableViewController : UITableViewController <MFMailComposeViewControllerDelegate, MCTonightsBillPut, MCDismissMeBlockProtocol>
+@interface MCSolutionTableViewController : UITableViewController <MFMailComposeViewControllerDelegate, MCTonightsBillTransfer, MCDismissMeBlockProtocol>
 {
     MCTableEmptyMessage_iPad *emptyMessage;
     
@@ -26,6 +26,7 @@
 }
 
 @property (strong, nonatomic) MCSharedBill *tonightsBill;
+@property (strong, nonatomic) MCSharedBill *writableTonightsBill;
 @property (strong, nonatomic) void (^dismissMe)();
 
 @end

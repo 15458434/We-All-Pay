@@ -113,7 +113,7 @@
     
     // Get tonightsBill from parentViewController
     id myParent = [self parentViewController];
-    if ([myParent conformsToProtocol:@protocol(MCTonightsBillGet)]) {
+    if ([myParent conformsToProtocol:@protocol(MCTonightsBillTransfer)]) {
         _tonightsBill = [myParent tonightsBill];
     }
     

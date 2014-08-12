@@ -22,7 +22,7 @@
 
 @end
 
-@interface MCSharedBillPageViewController : UIPageViewController <UIPageViewControllerDataSource, UIPageViewControllerDelegate, UIAlertViewDelegate ,MCTonightsBillTitleDelegate>
+@interface MCSharedBillPageViewController : UIPageViewController <UIPageViewControllerDataSource, UIPageViewControllerDelegate, UIAlertViewDelegate, MCTonightsBillTitleDelegate>
 {
     MCSharedBillTableViewController *sharedBillTableViewController;
     MCEditTripViewController *editTripTableViewController;
@@ -32,6 +32,7 @@
 }
 
 // @property (nonatomic, strong) MCSharedBill *tonightsBill;
+@property (nonatomic, strong) MCSharedBill *writableTonightsBill;
 
 - (IBAction)toggleEdit:(id)sender;
 - (IBAction)solveBill:(id)sender;
@@ -42,5 +43,7 @@
 - (void)openMailView:(id)sender;
 
 - (UIPageControl *)pageViewIndicator;
+
+//- (void)writeableTonightsBillIsCreated:(NSNotification *)notification;
 
 @end

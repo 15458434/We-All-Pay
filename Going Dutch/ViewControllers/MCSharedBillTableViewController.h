@@ -9,6 +9,7 @@
 #import <UIKit/UIKit.h>
 #import <CoreData/CoreData.h>
 #import <MessageUI/MessageUI.h>
+#import "MCTonightsBillTransfer.h"
 
 @class MCSharedBill;
 @class MCAllTripsTableViewController;
@@ -23,7 +24,7 @@
 
 @end
 
-@interface MCSharedBillTableViewController : UITableViewController <NSFetchedResultsControllerDelegate, MFMailComposeViewControllerDelegate, UIAlertViewDelegate, UITextFieldDelegate>
+@interface MCSharedBillTableViewController : UITableViewController <NSFetchedResultsControllerDelegate, MFMailComposeViewControllerDelegate, UIAlertViewDelegate, UITextFieldDelegate, MCTonightsBillTransfer>
 {
     __strong IBOutlet MCTwoLabelsTitleView *twoLabelTitleView;
     MCTableEmptyMessage *emptyMessage;
@@ -43,5 +44,10 @@
 @property (nonatomic, weak) MCSharedBillPageViewController *mailDelegate;
 @property (nonatomic, strong) MCSharedBill *tonightsBill;
 @property (nonatomic, readonly) BOOL didSomethingChange;
+
+// Only accessible through backgroundContext
+@property (nonatomic, strong) MCSharedBill *writableTonightsBill;
+
+- (void)writableTonightsBillIsCreated:(NSNotification *)notification;
 
 @end

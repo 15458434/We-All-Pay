@@ -32,7 +32,7 @@ typedef NS_ENUM(BOOL, MCCancelButtonPressed) {
     cancelIsPressed
 };
 
-@interface MCPaymentTableViewController_iPad : UITableViewController <MCTonightsBillPut, MCThisPaymentProtocol, MCDismissMeBlockProtocol, MCDismissKeyboardProtocol, UITextFieldDelegate, UIPopoverControllerDelegate, NSFetchedResultsControllerDelegate>
+@interface MCPaymentTableViewController_iPad : UITableViewController <MCTonightsBillTransfer, MCThisPaymentProtocol, MCDismissMeBlockProtocol, MCDismissKeyboardProtocol, UITextFieldDelegate, UIPopoverControllerDelegate, NSFetchedResultsControllerDelegate>
 {
     __weak IBOutlet UILabel *payerLabel;
     __weak IBOutlet UITextField *itemField;
@@ -51,6 +51,7 @@ typedef NS_ENUM(BOOL, MCCancelButtonPressed) {
 
 @property (strong, nonatomic) MCPayment *thisPayment;
 @property (strong, nonatomic) MCSharedBill *tonightsBill;
+@property (strong, nonatomic) MCSharedBill *writableTonightsBill;
 @property (strong, nonatomic) void (^dismissMe)();
 
 - (void) reloadPayerLabel;

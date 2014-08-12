@@ -15,12 +15,13 @@
 @class MCSharedBill;
 @class MCPayment;
 
-@interface MCSelectPayerTableViewController_iPad : UITableViewController <MCTonightsBillPut, MCThisPaymentProtocol>
+@interface MCSelectPayerTableViewController_iPad : UITableViewController <MCTonightsBillTransfer, MCThisPaymentProtocol>
 {
     NSArray *people;
 }
 
 @property (strong, nonatomic) MCSharedBill *tonightsBill;
+@property (strong, nonatomic) MCSharedBill *writableTonightsBill;
 @property (strong, nonatomic) MCPayment *thisPayment;
 @property (strong, nonatomic) void (^dismissMe)();
 

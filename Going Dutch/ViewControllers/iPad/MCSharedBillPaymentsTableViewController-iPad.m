@@ -115,7 +115,7 @@
     
     // Get tonightsBill from parentViewController
     id myParent = [self parentViewController];
-    if ([myParent conformsToProtocol:@protocol(MCTonightsBillGet)]) {
+    if ([myParent conformsToProtocol:@protocol(MCTonightsBillTransfer)]) {
         _tonightsBill = [myParent tonightsBill];
     }
     
@@ -279,11 +279,11 @@
     if ([[segue identifier] isEqualToString:@"openPayment"]) {
         NSIndexPath *ip = [[self tableView] indexPathForSelectedRow];
         MCPayment *thisPayment =[dataController objectAtIndexPath:ip];
-        id<MCThisPaymentProtocol, MCTonightsBillPut, MCDismissMeBlockProtocol> destination = [[segue destinationViewController] viewControllers][0];
+        id<MCThisPaymentProtocol, MCTonightsBillTransfer, MCDismissMeBlockProtocol> destination = [[segue destinationViewController] viewControllers][0];
         if ([destination conformsToProtocol:@protocol(MCThisPaymentProtocol)]) {
             [destination setThisPayment:thisPayment];
         }
-        if ([destination conformsToProtocol:@protocol(MCTonightsBillPut)]) {
+        if ([destination conformsToProtocol:@protocol(MCTonightsBillTransfer)]) {
             [destination setTonightsBill:_tonightsBill];
         }
         if ([destination conformsToProtocol:@protocol(MCDismissMeBlockProtocol)]) {

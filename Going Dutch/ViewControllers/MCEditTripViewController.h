@@ -17,7 +17,7 @@
 @class MCTwoLabelsTitleView;
 @class MCTableEmptyMessage;
 
-@interface MCEditTripViewController : UITableViewController <NSFetchedResultsControllerDelegate, UITextFieldDelegate, UIAlertViewDelegate, MCPersonViewChangeDelegate, MCTonightsBillGet>
+@interface MCEditTripViewController : UITableViewController <NSFetchedResultsControllerDelegate, UITextFieldDelegate, UIAlertViewDelegate, MCPersonViewChangeDelegate, MCTonightsBillTransfer>
 {
     __weak IBOutlet UIButton *addressBookButton;    
     __weak IBOutlet UIButton *addPersonButton;
@@ -36,6 +36,7 @@
 
 @property (nonatomic, weak) id delegate;
 @property (nonatomic, strong) MCSharedBill *tonightsBill;
+@property (nonatomic, strong) MCSharedBill *writableTonightsBill;
 @property (nonatomic, copy) void (^dismissOnDone)(void);
 @property (nonatomic, copy) void (^dismissOnCancel)(void);
 @property (nonatomic, readonly) BOOL didSomethingChange;
