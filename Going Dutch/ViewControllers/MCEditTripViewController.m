@@ -40,6 +40,16 @@
     if (!personReceiver) {
         personReceiver = [[MCAddressBookDataReceiver alloc] initWithViewController:self andDelegate:self];
         [personReceiver setTonightsBill:tonightsBill];
+        
+        NSManagedObjectContext *backgroundContext = [[MCWeAllPayStoreController defaultStore] backgroundThreadContext];
+        [backgroundContext performBlock:^{
+            if (_writableTonightsBill) {
+                [personReceiver setWritableTonightsBill:_writableTonightsBill];
+            } else {
+                NSNotificationCenter *dc = [NSNotificationCenter defaultCenter];
+                [dc addObserver:personReceiver selector:@selector(writableTonightsBillIsCreated:) name:MCWritableTonightsBillReady object:nil];
+            }
+        }];
     }
     [peoplePicker setPeoplePickerDelegate:personReceiver];
     [peoplePicker setEdgesForExtendedLayout:UIRectEdgeNone];
@@ -263,6 +273,11 @@
     // Should be executed on the background thread.
     NSDictionary *userInfo = [notification userInfo];
     _writableTonightsBill = [userInfo objectForKey:MCwritableTonightsBillKey];
+    NSManagedObjectContext *mainContext = [[MCWeAllPayStoreController defaultStore] mainThreadContext];
+    NSManagedObjectID *tonightsBillID = [_writableTonightsBill objectID];
+    [mainContext performBlock:^{
+        tonightsBill = (MCSharedBill *)[mainContext objectWithID:tonightsBillID];
+    }];
     NSLog(@"PeoplePresent: WritableTonightsBillIsCreated has been executed.");
 }
 
@@ -314,7 +329,6 @@
 - (void)receiveANewPersonFromAddressBook:(MCPerson *)newPerson
 {
     didSomethingChange = YES;
-    //[[[self navigationItem] rightBarButtonItem] setEnabled:YES];
 }
 
 #pragma mark - UITextFieldDelegate
@@ -435,13 +449,16 @@
 {
     if (editingStyle == UITableViewCellEditingStyleDelete) {
         MCPerson *removablePerson = [dataController objectAtIndexPath:indexPath];
-        if (![tonightsBill hasPersonPaidSomething:removablePerson]) {
-            NSManagedObjectContext *context = [[MCWeAllPayStoreController defaultStore] mainThreadContext];
-            [context deleteObject:removablePerson];
-            //[self updateSubLabel];
-            didSomethingChange = YES;
-            //[[[self navigationItem] rightBarButtonItem];
-        }
+        NSManagedObjectID *removablePersonID = [removablePerson objectID];
+        NSManagedObjectContext *backgroundContext = [[MCWeAllPayStoreController defaultStore] backgroundThreadContext];
+        [backgroundContext performBlock:^{
+            if (![_writableTonightsBill hasPersonPaidSomething:removablePerson]) {
+                MCPerson *removablePersonInBackgroundContext = (MCPerson *)[backgroundContext objectWithID:removablePersonID];
+                [_writableTonightsBill deletePerson:removablePersonInBackgroundContext];
+                [[MCWeAllPayStoreController defaultStore] saveStore];
+            }
+        }];
+        didSomethingChange = YES;
     }
     
 }
@@ -482,18 +499,43 @@
     if ([[[segue destinationViewController] viewControllers][0] respondsToSelector:@selector(setChangeFlagDelegate:)]) {
         [[[segue destinationViewController] viewControllers][0] setChangeFlagDelegate:self];
     }
-    if ([[[segue destinationViewController] viewControllers][0] respondsToSelector:@selector(setTonightsBill:)]) {
+    if ([[[segue destinationViewController] viewControllers][0] conformsToProtocol:@protocol(MCTonightsBillTransfer)]) {
         [[[segue destinationViewController] viewControllers][0] setTonightsBill:tonightsBill];
+        NSManagedObjectContext *backgroundContext = [[MCWeAllPayStoreController defaultStore] backgroundThreadContext];
+        id<MCTonightsBillTransfer> destination = [[segue destinationViewController] viewControllers][0];
+        [backgroundContext performBlock:^{
+            [destination setWritableTonightsBill:_writableTonightsBill];
+        }];
     }
     NSIndexPath *indexPathOfSelectedRow = [[self tableView] indexPathForSelectedRow];
     if (indexPathOfSelectedRow) {
         thePerson = [dataController objectAtIndexPath:indexPathOfSelectedRow];
         if ([[[segue destinationViewController] viewControllers][0] respondsToSelector:@selector(setIsNew:)]) {
             [[[segue destinationViewController] viewControllers][0] setIsNew:NO];
+            id destination = [[segue destinationViewController] viewControllers][0];
+            if ([destination conformsToProtocol:@protocol(MCThisPersonProtocol)]) {
+                NSManagedObjectContext *backgroundContext = [[MCWeAllPayStoreController defaultStore] backgroundThreadContext];
+                NSManagedObjectID *lookupID = [thePerson objectID];
+                [backgroundContext performBlock:^{
+                    MCPerson *thePersonInBackground = (MCPerson *)[backgroundContext objectWithID:lookupID];
+                    [destination setWritableThisPerson:thePersonInBackground];
+                }];
+            }
         }
     } else {
         if ([[[segue destinationViewController] viewControllers][0] respondsToSelector:@selector(setIsNew:)]) {
             [[[segue destinationViewController] viewControllers][0] setIsNew:YES];
+            id destination = [[segue destinationViewController] viewControllers][0];
+            if ([destination conformsToProtocol:@protocol(MCThisPersonProtocol)]) {
+                NSManagedObjectContext *backgroundContext = [[MCWeAllPayStoreController defaultStore] backgroundThreadContext];
+                [backgroundContext performBlock:^{
+                    if (_writableTonightsBill) {
+                        [destination setWritableThisPerson:[_writableTonightsBill addPerson]];
+                    } else {
+                        [[NSNotificationCenter defaultCenter] addObserver:destination selector:@selector(writableThisPersonIsCreated:) name:MCWritableTonightsBillReady object:self];
+                    }
+                }];
+            }
         }
         [doneButton setEnabled:YES];
     }

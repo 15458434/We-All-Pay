@@ -45,9 +45,9 @@ typedef NS_ENUM(BOOL, MCCancelButtonPressed) {
 
 @property (strong, nonatomic) MCPerson *thisPerson;
 @property (strong, nonatomic) MCSharedBill *tonightsBill;
-@property (strong, nonatomic) MCSharedBill *writableTonightsBill;
 
 // Only accessible in the background thread.
+@property (strong, nonatomic) MCSharedBill *writableTonightsBill;
 @property (strong, nonatomic) MCPerson *writableThisPerson;
 
 @end

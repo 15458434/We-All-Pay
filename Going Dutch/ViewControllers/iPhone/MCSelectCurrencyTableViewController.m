@@ -16,7 +16,7 @@
 
 #import "MCWeAllPayStoreController.h"
 
-NSString const * cellIdentifier = @"MCSelectCurrencyTableViewCell_iPhone";
+NSString * const cellIdentifier = @"MCSelectCurrencyTableViewCell_iPhone";
 
 @interface MCSelectCurrencyTableViewController () <UISearchDisplayDelegate, UISearchBarDelegate>
 

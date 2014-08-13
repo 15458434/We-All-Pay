@@ -75,7 +75,6 @@
 {
     __block UIImage *thisImage = image;
     if (!thisImage) {
-        //image = [UIImage imageNamed:@"girl 100x100"];
         thisImage = [UIImage imageNamed:@"No picture image 2 - We All Pay"];
     }
     CGSize imageSize = [thisImage size];

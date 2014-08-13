@@ -24,6 +24,7 @@
 		381F6941194EE5A800F465FC /* MCTwoLabelIscreenTableViewCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 381F6940194EE5A800F465FC /* MCTwoLabelIscreenTableViewCell.m */; };
 		3825A82419990BA400A8885D /* UIViewController+WeAllPayStore.m in Sources */ = {isa = PBXBuildFile; fileRef = 3825A82319990BA400A8885D /* UIViewController+WeAllPayStore.m */; };
 		3825A826199A2A5500A8885D /* MCTonightsBillTransfer.m in Sources */ = {isa = PBXBuildFile; fileRef = 3825A825199A2A5500A8885D /* MCTonightsBillTransfer.m */; };
+		3825A828199A4E1E00A8885D /* MCThisPersonProtocol.m in Sources */ = {isa = PBXBuildFile; fileRef = 3825A827199A4E1E00A8885D /* MCThisPersonProtocol.m */; };
 		38295AE818425E74009FB5DE /* MCCancelDoneViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 38295AE718425E74009FB5DE /* MCCancelDoneViewController.m */; };
 		3829AD0F178B41320025969D /* WeAllPayStore.xcdatamodeld in Sources */ = {isa = PBXBuildFile; fileRef = 3829AD0D178B41320025969D /* WeAllPayStore.xcdatamodeld */; };
 		382E7BDD17E5E57500A1040A /* MCReturnPaymentViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 382E7BDC17E5E57500A1040A /* MCReturnPaymentViewController.m */; };
@@ -220,6 +221,7 @@
 		3825A82219990BA400A8885D /* UIViewController+WeAllPayStore.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = "UIViewController+WeAllPayStore.h"; path = "Misc/UIViewController+WeAllPayStore.h"; sourceTree = "<group>"; };
 		3825A82319990BA400A8885D /* UIViewController+WeAllPayStore.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = "UIViewController+WeAllPayStore.m"; path = "Misc/UIViewController+WeAllPayStore.m"; sourceTree = "<group>"; };
 		3825A825199A2A5500A8885D /* MCTonightsBillTransfer.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = MCTonightsBillTransfer.m; path = ViewControllers/MCTonightsBillTransfer.m; sourceTree = "<group>"; };
+		3825A827199A4E1E00A8885D /* MCThisPersonProtocol.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = MCThisPersonProtocol.m; path = ViewControllers/MCThisPersonProtocol.m; sourceTree = "<group>"; };
 		38295AE618425E74009FB5DE /* MCCancelDoneViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = MCCancelDoneViewController.h; sourceTree = "<group>"; };
 		38295AE718425E74009FB5DE /* MCCancelDoneViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = MCCancelDoneViewController.m; sourceTree = "<group>"; };
 		3829AD0E178B41320025969D /* WeAllPayStore.xcdatamodel */ = {isa = PBXFileReference; lastKnownFileType = wrapper.xcdatamodel; path = WeAllPayStore.xcdatamodel; sourceTree = "<group>"; };
@@ -930,6 +932,7 @@
 				3825A825199A2A5500A8885D /* MCTonightsBillTransfer.m */,
 				38E0C5DF18E97A8A005A3F17 /* MCCurrentViewDelegate.h */,
 				3898F32D18EEB38400BFFC61 /* MCThisPersonProtocol.h */,
+				3825A827199A4E1E00A8885D /* MCThisPersonProtocol.m */,
 				3898F33318F1820600BFFC61 /* MCThisPaymentProtocol.h */,
 				382F9BD118F7285400818276 /* MCDismissMeBlockProtocol.h */,
 				3801881A1938D8E70085A5AE /* MCDismissKeyboardProtocol.h */,
@@ -1352,6 +1355,7 @@
 				382E7BDD17E5E57500A1040A /* MCReturnPaymentViewController.m in Sources */,
 				383E0C5D186737EB00AA688D /* MCSharedBillPageViewController.m in Sources */,
 				38E02789190A533500865FDD /* MCWhoOwesWhoTableViewCell_iPhone.m in Sources */,
+				3825A828199A4E1E00A8885D /* MCThisPersonProtocol.m in Sources */,
 				38DC8B421909508800762235 /* MCColors.m in Sources */,
 				38E95DBB195073A000069414 /* MCTwoLabelTableViewCell_iPad.m in Sources */,
 				3872C0DC19041725008C54D7 /* MCTableEmptyMessage_iPad.m in Sources */,

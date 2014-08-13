@@ -31,7 +31,7 @@
     NSUInteger newPageNumber;
 }
 
-// @property (nonatomic, strong) MCSharedBill *tonightsBill;
+@property (nonatomic, strong) MCSharedBill *tonightsBill;
 @property (nonatomic, strong) MCSharedBill *writableTonightsBill;
 
 - (IBAction)toggleEdit:(id)sender;

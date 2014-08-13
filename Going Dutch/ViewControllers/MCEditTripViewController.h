@@ -10,7 +10,9 @@
 #import <CoreData/CoreData.h>
 #import <AddressBookUI/AddressBookUI.h>
 #import "MCPersonViewController.h"
+
 #import "MCTonightsBillTransfer.h"
+#import "MCThisPersonProtocol.h"
 
 @class MCPeople;
 @class MCSharedBill;

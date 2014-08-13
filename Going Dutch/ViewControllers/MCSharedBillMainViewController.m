@@ -134,6 +134,10 @@
             id<MCTonightsBillTransfer> destination = [segue destinationViewController];
             if (_writableTonightsBill) {
                 [destination setWritableTonightsBill:_writableTonightsBill];
+                NSManagedObjectContext *mainContext = [[MCWeAllPayStoreController defaultStore] mainThreadContext];
+                [mainContext performBlock:^{
+                    [destination setTonightsBill:_tonightsBill];
+                }];
             } else {
                 [[NSNotificationCenter defaultCenter] addObserver:destination selector:@selector(writeableTonightsBillIsCreated:) name:MCWritableTonightsBillReady object:nil];
             }

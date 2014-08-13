@@ -17,37 +17,26 @@
 
 @synthesize delegate;
 @synthesize thisPerson;
-@synthesize tonightsBill;
 
 #pragma mark - New in this class.
 
 - (void)getPersonData:(ABRecordRef)person
 {
     // tonightsBill should be present.
-    NSParameterAssert(tonightsBill);
+    NSParameterAssert(_tonightsBill);
+    
     // Get all linked ABRecords from AddressBook
     CFArrayRef allLinkedPeople = ABPersonCopyArrayOfAllLinkedPeople(person);
     
-    thisPerson = [delegate personRecordToUse];
-    if (!thisPerson) {
-        thisPerson = [tonightsBill addPerson];
-    } else {
-        [thisPerson deletAllEmailAddresses];
-    }
-    
-    [thisPerson setThumbnailDataFromImage:[UIImage imageWithData:(__bridge_transfer NSData *)ABPersonCopyImageDataWithFormat(person, kABPersonImageFormatThumbnail)]];
-    [thisPerson setPictureDataFromImage:[UIImage imageWithData:(__bridge_transfer NSData *)ABPersonCopyImageDataWithFormat(person, kABPersonImageFormatOriginalSize)]];
-    [thisPerson setFirstName:(__bridge_transfer NSString *)ABRecordCopyValue(person, kABPersonFirstNameProperty)];
+    NSData *thumbnailData = (__bridge_transfer NSData *)ABPersonCopyImageDataWithFormat(person, kABPersonImageFormatThumbnail);
+    NSData *pictureData = (__bridge_transfer NSData *)ABPersonCopyImageDataWithFormat(person, kABPersonImageFormatOriginalSize);
+    NSString *firstName = (__bridge_transfer NSString *)ABRecordCopyValue(person, kABPersonFirstNameProperty);
     
     // Combine middle and Last name to create a name.
     NSString *middleName = (__bridge_transfer NSString *)ABRecordCopyValue(person, kABPersonMiddleNameProperty);
     NSString *lastName = (__bridge_transfer NSString *)ABRecordCopyValue(person, kABPersonLastNameProperty);
-    if (middleName) {
-        [thisPerson setLastName:[NSString stringWithFormat:@"%@ %@", middleName, lastName]];
-    } else {
-        [thisPerson setLastName:lastName];
-    }
-
+    
+    NSMutableSet *emailAddressesSet = [NSMutableSet new];
     
     // Retrieve all possible mail addresses by going through the list of linked ABRecords and through the list of EmailAddresses.
     if (CFArrayGetCount(allLinkedPeople)) {
@@ -57,13 +46,35 @@
             if (ABMultiValueGetCount(emailAddresses)) {
                 for (NSUInteger i = 0 ; i < ABMultiValueGetCount(emailAddresses); i++) {
                     NSString *emailAddressForPerson=(__bridge_transfer NSString *)ABMultiValueCopyValueAtIndex(emailAddresses, i);
-                    [thisPerson addOneEmailAddressFromAString:emailAddressForPerson];
+                    [emailAddressesSet addObject:emailAddressForPerson];
                 }
             }
             CFRelease(emailAddresses);
         }
     }
     CFRelease(allLinkedPeople);
+    
+    NSManagedObjectContext *backgroundContext = [[MCWeAllPayStoreController defaultStore] backgroundThreadContext];
+    [backgroundContext performBlock:^{
+        
+        _writableThisPerson = [_writableTonightsBill addPerson];
+        
+        _writableThisPerson.firstName = firstName;
+        if (middleName) {
+            _writableThisPerson.lastName = [NSString stringWithFormat:@"%@ %@", middleName, lastName];
+        } else {
+            _writableThisPerson.lastName = lastName;
+        }
+        
+        for (NSString *emailString in emailAddressesSet) {
+            [_writableThisPerson addOneEmailAddressFromAString:emailString];
+        }
+        
+        [_writableThisPerson setThumbnailData:thumbnailData];
+        [_writableThisPerson setPictureData:pictureData];
+        
+        [[MCWeAllPayStoreController defaultStore] saveStore];
+    }];
 }
 
 #pragma mark - Inherited from super.
@@ -96,6 +107,11 @@
     return self;
 }
 
+- (void)dealloc
+{
+    [[NSNotificationCenter defaultCenter] removeObserver:self];
+}
+
 #pragma mark - ABPeoplePickerNavigationControllerDelegate
 
 - (void)peoplePickerNavigationControllerDidCancel:(ABPeoplePickerNavigationController *)peoplePicker
@@ -110,7 +126,7 @@
 - (BOOL)peoplePickerNavigationController:(ABPeoplePickerNavigationController *)peoplePicker shouldContinueAfterSelectingPerson:(ABRecordRef)person
 {
     [viewController dismissViewControllerAnimated:YES completion:^{
-        [[[viewController navigationItem] rightBarButtonItem] setEnabled:YES];
+//        [[[viewController navigationItem] rightBarButtonItem] setEnabled:YES];
         [delegate receiveANewPersonFromAddressBook:thisPerson];
         id<GAITracker> tracker = [[GAI sharedInstance] defaultTracker];
         [tracker set:kGAIScreenName value:@"MCSharedBillMainViewController_iPad"];

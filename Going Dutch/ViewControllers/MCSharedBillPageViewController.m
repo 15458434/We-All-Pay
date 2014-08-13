@@ -94,6 +94,10 @@
     [backgroundContext performBlock:^{
         if (_writableTonightsBill) {
             [editTripTableViewController setWritableTonightsBill:_writableTonightsBill];
+            NSManagedObjectContext *mainContext = [[MCWeAllPayStoreController defaultStore] mainThreadContext];
+            [mainContext performBlock:^{
+                [editTripTableViewController setTonightsBill:_tonightsBill];
+            }];
         } else {
             [[NSNotificationCenter defaultCenter] addObserver:editTripTableViewController selector:@selector(writableTonightsBillIsCreated:) name:MCWritableTonightsBillReady object:self];
         }
@@ -271,6 +275,11 @@
     // Should be executed on the background thread.
     NSDictionary *userInfo = [notification userInfo];
     _writableTonightsBill = [userInfo objectForKey:MCwritableTonightsBillKey];
+    NSManagedObjectID *tonightsBillID = [_writableTonightsBill objectID];
+    NSManagedObjectContext *mainContext = [[MCWeAllPayStoreController defaultStore] mainThreadContext];
+    [mainContext performBlock:^{
+        _tonightsBill = (MCSharedBill *)[mainContext objectWithID:tonightsBillID];
+    }];
     NSLog(@"WritableTonightsBillIsCreated has been executed.");
 }
 

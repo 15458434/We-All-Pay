@@ -17,14 +17,20 @@
 
 @interface MCPersonViewController ()
 
+@property (atomic, copy) NSDate * dateModified;
+@property (atomic, copy) NSString * defaultEmailAddress;
+@property (atomic, copy) NSString * firstName;
+@property (atomic, copy) NSString * lastName;
+@property (atomic, strong) NSString * phoneNumber;
+@property (atomic, copy) UIImage * picture;
+@property (atomic, copy) UIImage * thumbnail;
+
 @end
 
 @implementation MCPersonViewController
 
-@synthesize tonightsBill;
 @synthesize changeFlagDelegate;
 @synthesize isNew;
-//@synthesize thisPerson;
 
 #pragma mark - Actions
 
@@ -211,6 +217,23 @@
     });
 }
 
+#pragma mark - Private in this class
+
+- (void)fillTheScreenWithInitialData
+{
+    // Should be execute on the mainThread.
+    [firstNameField setText:[_thisPerson firstName]];
+    [lastNameField setText:[_thisPerson lastName]];
+    MCEmailAddress *emailAddress = [MCEmailAddress fetchEmailAddressFor:_thisPerson];
+    [emailField setText:[emailAddress emailAddress]];
+    [self setCircularImageOnPictureView:[_thisPerson picture]];
+    if ([[_thisPerson emailAddress] count] < 2) {
+        [selectEmailAddressButton setHidden:YES];
+    } else {
+        [selectEmailAddressButton setHidden:NO];
+    }
+}
+
 #pragma mark - Inherited from super.
 
 - (id)initWithNibName:(NSString *)nibNameOrNil bundle:(NSBundle *)nibBundleOrNil
@@ -231,12 +254,13 @@
     [self prepareDataController];
     
     if (!_thisPerson) {
-        _thisPerson = [tonightsBill addPerson];
-        [_thisPerson setThumbnailDataFromImage:nil];
-        [_thisPerson setPictureDataFromImage:nil];
-        [tonightsBill addPeoplePresentObject:_thisPerson];
+//        _thisPerson = [tonightsBill addPerson];
+//        [_thisPerson setThumbnailDataFromImage:nil];
+//        [_thisPerson setPictureDataFromImage:nil];
+//        [tonightsBill addPeoplePresentObject:_thisPerson];
+        // A new person object will be delivered
         thisPersonHasPaidSomething = NO;
-    } else if ([tonightsBill hasPersonPaidSomething:_thisPerson]) { // Check to see if thisPerson has paid something.
+    } else if ([_tonightsBill hasPersonPaidSomething:_thisPerson]) { // Check to see if thisPerson has paid something.
         thisPersonHasPaidSomething = YES;
     } else {
         thisPersonHasPaidSomething = NO;
@@ -260,25 +284,19 @@
             [[twoLabelTitleView mainLabel] setText:NSLocalizedString(@"EXISTING_PERSON_HEADER", @"Header in the personView which states person")];
             [[twoLabelTitleView subLabel] setText:NSLocalizedString(@"EXISTING_PERSON_SUBHEADER", @"Sub header in the personView which state edit data")];
         }
-        if (SYSTEM_VERSION_LESS_THAN(@"7.0")) {
-            [[twoLabelTitleView mainLabel] setTextColor:[UIColor whiteColor]];
-            [[twoLabelTitleView subLabel] setTextColor:[UIColor whiteColor]];
-        }
+//        if (SYSTEM_VERSION_LESS_THAN(@"7.0")) {
+//            [[twoLabelTitleView mainLabel] setTextColor:[UIColor whiteColor]];
+//            [[twoLabelTitleView subLabel] setTextColor:[UIColor whiteColor]];
+//        }
         [[self navigationItem] setTitleView:twoLabelTitleView];
     }
     
     [self performFetch];
 
-    [firstNameField setText:[_thisPerson firstName]];
-    [lastNameField setText:[_thisPerson lastName]];
-    MCEmailAddress *emailAddress = [MCEmailAddress fetchEmailAddressFor:_thisPerson];
-    [emailField setText:[emailAddress emailAddress]];
-    [self setCircularImageOnPictureView:[_thisPerson picture]];
-    if ([[_thisPerson emailAddress] count] < 2) {
-        [selectEmailAddressButton setHidden:YES];
-    } else {
-        [selectEmailAddressButton setHidden:NO];
+    if (_thisPerson) {
+        [self fillTheScreenWithInitialData];
     }
+    [selectEmailAddressButton setHidden:YES];
 }
 
 - (void)viewDidAppear:(BOOL)animated
@@ -317,6 +335,28 @@
     [super decodeRestorableStateWithCoder:coder];
 }
 
+#pragma mark - NSNotifications
+
+//- (void)writableThisPersonIsCreated:(NSNotification *)notification
+//{
+//    // Should be executed on the background thread.
+//}
+
+- (void)writableTonightsBillIsCreated:(NSNotification *)notification
+{
+    // Should be executed on the background thread.
+    _writableTonightsBill = [[notification userInfo] objectForKey:MCwritableTonightsBillKey];
+    _writableThisPerson = [_writableTonightsBill addPerson];
+    NSLog(@"MCPersonViewController: writableTonightsBill is created.");
+    __weak typeof(self) weakSelf = self;
+    dispatch_async(dispatch_get_main_queue(), ^{
+        __strong typeof(self) strongSelf = weakSelf;
+        if (strongSelf) {
+            [strongSelf fillTheScreenWithInitialData];
+        }
+    });
+}
+
 #pragma mark - UITextFieldDelegate
 
 -(BOOL)textFieldShouldBeginEditing:(UITextField *)textField
@@ -342,7 +382,7 @@
         [_thisPerson setFirstName:[firstNameField text]];
 //        didSomethingChange = YES;
         NSDate *nu = [NSDate date];
-        [tonightsBill setDateModified:nu];
+        [_tonightsBill setDateModified:nu];
         [_thisPerson setDateModified:nu];
 //        [[[self navigationItem] rightBarButtonItem] setEnabled:YES];
 //        [lastNameField becomeFirstResponder];
@@ -350,7 +390,7 @@
         [_thisPerson setLastName:[lastNameField text]];
 //        didSomethingChange = YES;
         NSDate *nu = [NSDate date];
-        [tonightsBill setDateModified:nu];
+        [_tonightsBill setDateModified:nu];
         [_thisPerson setDateModified:nu];
 //        [[[self navigationItem] rightBarButtonItem] setEnabled:YES];
 //        [emailField becomeFirstResponder];
@@ -371,7 +411,7 @@
         }
         isSelectEmail = NO;
         NSDate *nu = [NSDate date];
-        [tonightsBill setDateModified:nu];
+        [_tonightsBill setDateModified:nu];
         [_thisPerson setDateModified:nu];
 //        didSomethingChange = YES;
 

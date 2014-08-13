@@ -10,6 +10,7 @@
 #import <CoreData/CoreData.h>
 #import <AddressBookUI/AddressBookUI.h>
 #import "MCAddressBookDataReceiver.h"
+#import "MCTonightsBillTransfer.h"
 
 typedef enum _emailFieldEditStatus {
     MCEmailFieldEditNormal = 0,
@@ -27,7 +28,7 @@ typedef enum _emailFieldEditStatus {
 
 @end
 
-@interface MCPersonViewController : UIViewController <UITextFieldDelegate, UIPickerViewDelegate, UIPickerViewDataSource, MCAddressBookReceiverDelegate>
+@interface MCPersonViewController : UIViewController <UITextFieldDelegate, UIPickerViewDelegate, UIPickerViewDataSource, MCAddressBookReceiverDelegate, MCTonightsBillTransfer>
 {
     __weak IBOutlet UITextField *firstNameField;
     __weak IBOutlet UITextField *lastNameField;
@@ -55,15 +56,24 @@ typedef enum _emailFieldEditStatus {
 
 @property (weak, nonatomic) IBOutlet UIImageView *pictureView;
 
-@property (nonatomic, strong) MCSharedBill *tonightsBill;
 @property (nonatomic, weak) id changeFlagDelegate;
 @property (nonatomic) BOOL isNew;
+
+// Only accessible on the mainThread.
+@property (nonatomic, strong) MCSharedBill *tonightsBill;
 @property (nonatomic, strong) MCPerson *thisPerson;
+
+// Only accessible on the background thread.
+@property (nonatomic, strong) MCSharedBill *writableTonightsBill;
+@property (nonatomic, strong) MCPerson *writableThisPerson;
 
 - (id)initWithPerson:(MCPerson *)person;
 
 - (IBAction)doneButtonPressed:(id)sender;
 - (IBAction)cancelButtonPressed:(id)sender;
 - (IBAction)selectEmailAddressPressed:(id)sender;
+
+//- (void)writableThisPersonIsCreated:(NSNotification *)notification;
+- (void)writableTonightsBillIsCreated:(NSNotification *)notification;
 
 @end
