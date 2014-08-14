@@ -24,6 +24,7 @@ NSString * const MCCurrencyTypeKeyPathReverseAsset = @"foreing exchange reserve 
 NSString * const MCCurrencyTypeKeyPathCrypto = @"crypto";
 NSString * const MCCurrencyTypeKeyPathComplementaryCurrency = @"complementary currency";
 NSString * const MCCurrencyTypeKeyPathUnitOfAccount = @"Unit of Account";
+NSString * const MCCurrencyTypeKeyPathSpecialSettlementCurrency = @"special settlement currency";
 
 // Currency type bitmasks.
 NSUInteger const MCCurrencyTypeCurrency = 0x01;
@@ -34,6 +35,7 @@ NSUInteger const MCCurrencyTypeOneTroyOunce = 0x10;
 NSUInteger const MCCurrencyTypeBondMarketUnit = 0x20;
 NSUInteger const MCCurrencyTypeComplementaryCurrency = 0x40;
 NSUInteger const MCCurrencyTypeUnitOfAccount = 0x80;
+NSUInteger const MCCurrencyTypeSpecialSettlementCurrency = 0x100;
 
 // Current hardcoded currencytype selections.
 NSUInteger const MCCurrencyTypeSelection = MCCurrencyTypeCurrency | MCCurrencyTypeCrypto;
@@ -122,6 +124,13 @@ NSUInteger const MCCurrencyTypeSelection = MCCurrencyTypeCurrency | MCCurrencyTy
         }
         if ((MCCurrencyTypeUnitOfAccount & MCCurrencyTypeSelection) == 0x00) {
             if ([type isEqualToString:MCCurrencyTypeKeyPathUnitOfAccount]) {
+                NSArray *keysFromObject = [currencyDictionaryFromPlist allKeysForObject:currencyObject];
+                [keyToBeDeletedObjects addObject:[keysFromObject firstObject]];
+                continue;
+            }
+        }
+        if ((MCCurrencyTypeSpecialSettlementCurrency & MCCurrencyTypeSelection) == 0x00) {
+            if ([type isEqualToString:MCCurrencyTypeKeyPathSpecialSettlementCurrency]) {
                 NSArray *keysFromObject = [currencyDictionaryFromPlist allKeysForObject:currencyObject];
                 [keyToBeDeletedObjects addObject:[keysFromObject firstObject]];
                 continue;
