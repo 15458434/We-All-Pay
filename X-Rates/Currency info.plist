@@ -28,7 +28,7 @@
 		<key>name</key>
 		<string>SUCRE</string>
 		<key>type</key>
-		<string>currency</string>
+		<string>Virtual Currency</string>
 	</dict>
 	<key>XPT</key>
 	<dict>
