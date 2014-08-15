@@ -61,10 +61,17 @@
     return NO;
 }
 
-- (void)applicationDidFinishLaunching:(NSNotification *)aNotification
+- (void)applicationWillFinishLaunching:(NSNotification *)notification
 {
     [MCPreferencesWindowController registerDefaultPreferences];
-//    [[Countly sharedInstance] startOnCloudWithAppKey:@"b82580f508600a702d0eec03adb26319a8c2c1c9"];
+    if ([MCPreferencesWindowController analyticsOptIn]) {
+        [[Countly sharedInstance] startOnCloudWithAppKey:@"b82580f508600a702d0eec03adb26319a8c2c1c9"];
+    }
+}
+
+- (void)applicationDidFinishLaunching:(NSNotification *)aNotification
+{
+
 }
 
 #pragma mark - NSSharedServicesDelegate
