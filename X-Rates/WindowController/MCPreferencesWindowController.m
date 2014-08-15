@@ -74,6 +74,12 @@ NSString * const MCCountlyOptIn = @"MCCountlyOptin";
 - (void)windowDidLoad
 {
     [super windowDidLoad];
+
+}
+
+- (void)awakeFromNib
+{
+    [super awakeFromNib];
     
     // Implement this method to handle any initialization after your window controller's window has been loaded from its nib file.
     [_analyticsOptIntCheckBox setState:[MCPreferencesWindowController analyticsOptIn]];
