@@ -8,6 +8,8 @@
 
 #import "MCSharedBillMainViewController.h"
 
+#import "MCSharedBillPageViewController.h"
+
 #import "MCSharedBill+addons.h"
 
 #import "UIView+MCAddons.h"
@@ -26,7 +28,15 @@
 
 - (IBAction)toggleEdit:(id)sender
 {
-    [[self childViewControllers][0] toggleEdit:sender];
+    if ([[self childViewControllers][0] toggleEditTableView:sender]) {
+        // Set Done Button
+        UIBarButtonItem *doneButton = [[UIBarButtonItem alloc] initWithBarButtonSystemItem:UIBarButtonSystemItemDone target:self action:@selector(toggleEdit:)];
+        [[self navigationItem] setRightBarButtonItem:doneButton];
+    } else {
+        // Set Edit Button
+        UIBarButtonItem *editButton = [[UIBarButtonItem alloc] initWithBarButtonSystemItem:UIBarButtonSystemItemEdit target:self action:@selector(toggleEdit:)];
+        [[self navigationItem] setRightBarButtonItem:editButton];
+    }
 }
 
 #pragma mark - From UIViewController+WeAllPayStore

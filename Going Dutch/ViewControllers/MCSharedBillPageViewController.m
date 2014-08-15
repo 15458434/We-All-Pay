@@ -32,12 +32,14 @@
 
 #pragma mark - actions
 
-- (IBAction)toggleEdit:(id)sender
+- (BOOL)toggleEditTableView:(id)sender
 {
     if ([[[self viewControllers][0] tableView] isEditing]) {
         [[[self viewControllers][0] tableView] setEditing:NO animated:YES];
+        return NO;
     } else {
         [[[self viewControllers][0] tableView] setEditing:YES animated:YES];
+        return YES;
     }
 }
 

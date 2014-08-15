@@ -34,7 +34,7 @@
 @property (nonatomic, strong) MCSharedBill *tonightsBill;
 @property (nonatomic, strong) MCSharedBill *writableTonightsBill;
 
-- (IBAction)toggleEdit:(id)sender;
+- (BOOL)toggleEditTableView:(id)sender;
 - (IBAction)solveBill:(id)sender;
 
 - (void)shareBill:(id)sender;
