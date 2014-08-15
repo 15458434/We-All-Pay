@@ -20,59 +20,62 @@
 
 #pragma mark - New in this class.
 
-- (void)getPersonData:(ABRecordRef)person
+- (void)importPersonDataAndSave:(ABRecordRef)person
 {
     // tonightsBill should be present.
     NSParameterAssert(_tonightsBill);
     
-    // Get all linked ABRecords from AddressBook
-    CFArrayRef allLinkedPeople = ABPersonCopyArrayOfAllLinkedPeople(person);
-    
-    NSData *thumbnailData = (__bridge_transfer NSData *)ABPersonCopyImageDataWithFormat(person, kABPersonImageFormatThumbnail);
-    NSData *pictureData = (__bridge_transfer NSData *)ABPersonCopyImageDataWithFormat(person, kABPersonImageFormatOriginalSize);
-    NSString *firstName = (__bridge_transfer NSString *)ABRecordCopyValue(person, kABPersonFirstNameProperty);
-    
-    // Combine middle and Last name to create a name.
-    NSString *middleName = (__bridge_transfer NSString *)ABRecordCopyValue(person, kABPersonMiddleNameProperty);
-    NSString *lastName = (__bridge_transfer NSString *)ABRecordCopyValue(person, kABPersonLastNameProperty);
-    
-    NSMutableSet *emailAddressesSet = [NSMutableSet new];
-    
-    // Retrieve all possible mail addresses by going through the list of linked ABRecords and through the list of EmailAddresses.
-    if (CFArrayGetCount(allLinkedPeople)) {
-        for (NSUInteger j = 0 ; j < CFArrayGetCount(allLinkedPeople); j++) {
-            ABRecordRef personRecord = CFArrayGetValueAtIndex(allLinkedPeople, j);
-            ABMultiValueRef emailAddresses = ABRecordCopyValue(personRecord, kABPersonEmailProperty);
-            if (ABMultiValueGetCount(emailAddresses)) {
-                for (NSUInteger i = 0 ; i < ABMultiValueGetCount(emailAddresses); i++) {
-                    NSString *emailAddressForPerson=(__bridge_transfer NSString *)ABMultiValueCopyValueAtIndex(emailAddresses, i);
-                    [emailAddressesSet addObject:emailAddressForPerson];
-                }
-            }
-            CFRelease(emailAddresses);
-        }
-    }
-    CFRelease(allLinkedPeople);
+    ABRecordID personID = ABRecordGetRecordID(person);
     
     NSManagedObjectContext *backgroundContext = [[MCWeAllPayStoreController defaultStore] backgroundThreadContext];
     [backgroundContext performBlock:^{
+        CFErrorRef error = NULL;
+        ABAddressBookRef addressBookRef = ABAddressBookCreateWithOptions(NULL, &error);
+        if (error) {
+            NSError *addressBookError = (__bridge_transfer NSError *)error;
+            NSLog(@"Unable to open addressBook: %@", addressBookError);
+        }
         
-        _writableThisPerson = [_writableTonightsBill addPerson];
+        ABRecordRef personInBackground = ABAddressBookGetPersonWithRecordID(addressBookRef, personID);
         
-        _writableThisPerson.firstName = firstName;
-        if (middleName) {
-            _writableThisPerson.lastName = [NSString stringWithFormat:@"%@ %@", middleName, lastName];
+        // Get all linked ABRecords from AddressBook
+        CFArrayRef allLinkedPeople = ABPersonCopyArrayOfAllLinkedPeople(personInBackground);
+        
+        thisPerson = [delegate personRecordToUse];
+        if (!thisPerson) {
+            thisPerson = [_writableTonightsBill addPerson];
         } else {
-            _writableThisPerson.lastName = lastName;
+            [thisPerson deletAllEmailAddresses];
         }
         
-        for (NSString *emailString in emailAddressesSet) {
-            [_writableThisPerson addOneEmailAddressFromAString:emailString];
+        [thisPerson setThumbnailDataFromImage:[UIImage imageWithData:(__bridge_transfer NSData *)ABPersonCopyImageDataWithFormat(personInBackground, kABPersonImageFormatThumbnail)]];
+        [thisPerson setPictureDataFromImage:[UIImage imageWithData:(__bridge_transfer NSData *)ABPersonCopyImageDataWithFormat(personInBackground, kABPersonImageFormatOriginalSize)]];
+        [thisPerson setFirstName:(__bridge_transfer NSString *)ABRecordCopyValue(personInBackground, kABPersonFirstNameProperty)];
+        
+        // Combine middle and Last name to create a name.
+        NSString *middleName = (__bridge_transfer NSString *)ABRecordCopyValue(personInBackground, kABPersonMiddleNameProperty);
+        NSString *lastName = (__bridge_transfer NSString *)ABRecordCopyValue(personInBackground, kABPersonLastNameProperty);
+        if (middleName) {
+            [thisPerson setLastName:[NSString stringWithFormat:@"%@ %@", middleName, lastName]];
+        } else {
+            [thisPerson setLastName:lastName];
         }
         
-        [_writableThisPerson setThumbnailData:thumbnailData];
-        [_writableThisPerson setPictureData:pictureData];
-        
+        // Retrieve all possible mail addresses by going through the list of linked ABRecords and through the list of EmailAddresses.
+        if (CFArrayGetCount(allLinkedPeople)) {
+            for (NSUInteger j = 0 ; j < CFArrayGetCount(allLinkedPeople); j++) {
+                ABRecordRef personRecord = CFArrayGetValueAtIndex(allLinkedPeople, j);
+                ABMultiValueRef emailAddresses = ABRecordCopyValue(personRecord, kABPersonEmailProperty);
+                if (ABMultiValueGetCount(emailAddresses)) {
+                    for (NSUInteger i = 0 ; i < ABMultiValueGetCount(emailAddresses); i++) {
+                        NSString *emailAddressForPerson=(__bridge_transfer NSString *)ABMultiValueCopyValueAtIndex(emailAddresses, i);
+                        [thisPerson addOneEmailAddressFromAString:emailAddressForPerson];
+                    }
+                }
+                CFRelease(emailAddresses);
+            }
+        }
+        CFRelease(allLinkedPeople);
         [[MCWeAllPayStoreController defaultStore] saveStore];
     }];
 }
@@ -132,7 +135,7 @@
         [tracker set:kGAIScreenName value:@"MCSharedBillMainViewController_iPad"];
         [tracker send:[[GAIDictionaryBuilder createAppView] build]];
     }];
-    [self getPersonData:person];
+    [self importPersonDataAndSave:person];
     thisPerson = nil;
     return NO;
 }
