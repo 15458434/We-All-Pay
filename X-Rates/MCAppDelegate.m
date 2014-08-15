@@ -63,8 +63,7 @@
 
 - (void)applicationDidFinishLaunching:(NSNotification *)aNotification
 {
-    NSDictionary *defaultValues = @{MCCountlyOptIn: @YES};
-    [[NSUserDefaults standardUserDefaults] registerDefaults:defaultValues];
+    [MCPreferencesWindowController registerDefaultPreferences];
 //    [[Countly sharedInstance] startOnCloudWithAppKey:@"b82580f508600a702d0eec03adb26319a8c2c1c9"];
 }
 

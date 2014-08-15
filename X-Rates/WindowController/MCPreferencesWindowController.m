@@ -24,6 +24,7 @@ NSString * const MCCountlyOptIn = @"MCCountlyOptin";
 {
     NSUserDefaults *userDefaults = [NSUserDefaults standardUserDefaults];
     NSNumber *optin = [userDefaults objectForKey:MCCountlyOptIn];
+    NSLog(@"Preference read: %@", optin);
     return optin.boolValue;
 }
 
@@ -31,6 +32,24 @@ NSString * const MCCountlyOptIn = @"MCCountlyOptin";
 {
     NSNumber *newOptInValue = [NSNumber numberWithBool:newValue];
     [[NSUserDefaults standardUserDefaults] setObject:newOptInValue forKey:MCCountlyOptIn];
+    if ([[NSUserDefaults standardUserDefaults] synchronize]) {
+        NSLog(@"Preference stored: %@", newOptInValue);
+    } else {
+        NSLog(@"Preference not stored: %@", newOptInValue);
+    }
+}
+
++ (void)registerDefaultPreferences
+{
+    // execute once.
+    static dispatch_once_t oneShot;
+    dispatch_once(&oneShot, ^{
+        NSDictionary *defaultValues = @{MCCountlyOptIn: @YES};
+        [[NSUserDefaults standardUserDefaults] registerDefaults:defaultValues];
+        if ([[NSUserDefaults standardUserDefaults] synchronize]) {
+            NSLog(@"Defaults registered.");
+        }
+    });
 }
 
 #pragma mark - Actions

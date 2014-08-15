@@ -12,6 +12,7 @@ extern NSString * const MCCountlyOptIn;
 
 @interface MCPreferencesWindowController : NSWindowController
 
++ (void)registerDefaultPreferences;
 + (BOOL)analyticsOptIn;
 + (void)setAnalyticsOptin:(BOOL)newValue;
 
