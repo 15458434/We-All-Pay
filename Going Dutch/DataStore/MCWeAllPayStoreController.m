@@ -471,8 +471,8 @@ NSString * const MCWeAllPayStoreModelName = @"WeAllPayStore";
 - (void)startRespondingToStoreChangeNotifications
 {
     NSNotificationCenter *dc = [NSNotificationCenter defaultCenter];
-    [dc addObserver:self selector:@selector(storeWillChange:) name:NSManagedObjectContextWillSaveNotification object:_backgroundThreadContext];
-    [dc addObserver:self selector:@selector(storeDidChange:) name:NSManagedObjectContextDidSaveNotification object:_backgroundThreadContext];
+    [dc addObserver:self selector:@selector(storeWillSave:) name:NSManagedObjectContextWillSaveNotification object:_backgroundThreadContext];
+    [dc addObserver:self selector:@selector(storeDidSave:) name:NSManagedObjectContextDidSaveNotification object:_backgroundThreadContext];
     [dc addObserver:self selector:@selector(storeWillBeSwapped:) name:NSPersistentStoreCoordinatorStoresWillChangeNotification object:_persistentStoreCoordinator];
     [dc addObserver:self selector:@selector(storeDidSwap:) name:NSPersistentStoreCoordinatorStoresDidChangeNotification object:_persistentStoreCoordinator];
     [dc addObserver:self selector:@selector(storedidUpdateFromUbiquitousContainer:) name:NSPersistentStoreDidImportUbiquitousContentChangesNotification object:_persistentStoreCoordinator];
@@ -484,17 +484,24 @@ NSString * const MCWeAllPayStoreModelName = @"WeAllPayStore";
     [dc removeObserver:self];
 }
 
-- (void)storeWillChange:(NSNotification *)notification
+- (void)storeWillSave:(NSNotification *)notification
 {
-    NSLog(@"MCWeAllPayStoreController: Store will change.");
+    NSLog(@"MCWeAllPayStoreController: Store will save.");
 }
 
-- (void)storeDidChange:(NSNotification *)notification
+- (void)storeDidSave:(NSNotification *)notification
 {
-    NSLog(@"MCWeAllPayStoreController: Store did change: %@", notification);
+    NSLog(@"MCWeAllPayStoreController: Store did save: %@", notification);
     if (notification.object != _mainThreadContext) {
         [_mainThreadContext performBlockAndWait:^{
+            NSLog(@"Merging changes into mainContext.");
             [_mainThreadContext mergeChangesFromContextDidSaveNotification:notification];
+        }];
+    }
+    if (notification.object != _backgroundThreadContext) {
+        [_backgroundThreadContext performBlockAndWait:^{
+            NSLog(@"Merging changes into backgroundContext.");
+            [_backgroundThreadContext mergeChangesFromContextDidSaveNotification:notification];
         }];
     }
 }
@@ -502,11 +509,16 @@ NSString * const MCWeAllPayStoreModelName = @"WeAllPayStore";
 - (void)storeWillBeSwapped:(NSNotification *)notification
 {
     NSLog(@"MCWeAllPayStoreController: Store will be swapped.");
+    // Has main Context changes if yes save.
+    // mainContext reset.
+    // Has backgroundContext changes if yes save.
+    // backgroundContext reset.
 }
 
 - (void)storeDidSwap:(NSNotification *)notification
 {
     NSLog(@"MCWeAllPayStoreController: Store did swap.");
+    
 }
 
 - (void)storedidUpdateFromUbiquitousContainer:(NSNotification *)notification

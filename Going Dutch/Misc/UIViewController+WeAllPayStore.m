@@ -15,8 +15,8 @@
 {
     NSManagedObjectContext *backgroundSaveContext = [[MCWeAllPayStoreController defaultStore] backgroundThreadContext];
     NSNotificationCenter *dc = [NSNotificationCenter defaultCenter];
-    [dc addObserver:self selector:@selector(storeWillChange:) name:NSManagedObjectContextWillSaveNotification object:backgroundSaveContext];
-    [dc addObserver:self selector:@selector(storeDidChange:) name:NSManagedObjectContextDidSaveNotification object:backgroundSaveContext];
+    [dc addObserver:self selector:@selector(storeWillSave:) name:NSManagedObjectContextWillSaveNotification object:backgroundSaveContext];
+    [dc addObserver:self selector:@selector(storeDidSave:) name:NSManagedObjectContextDidSaveNotification object:backgroundSaveContext];
     [dc addObserver:self selector:@selector(storeWillBeSwapped:) name:NSPersistentStoreCoordinatorStoresWillChangeNotification object:[[MCWeAllPayStoreController defaultStore] persistentStoreCoordinator]];
     [dc addObserver:self selector:@selector(storeDidSwap:) name:NSPersistentStoreCoordinatorStoresDidChangeNotification object:[[MCWeAllPayStoreController defaultStore] persistentStoreCoordinator]];
     [dc addObserver:self selector:@selector(storedidUpdateFromUbiquitousContainer:) name:NSPersistentStoreDidImportUbiquitousContentChangesNotification object:[[MCWeAllPayStoreController defaultStore] persistentStoreCoordinator]];
@@ -28,29 +28,31 @@
     [dc removeObserver:self];
 }
 
-- (void)storeWillChange:(NSNotification *)notification
+- (void)storeWillSave:(NSNotification *)notification
 {
-    NSLog(@"viewControlleraddon: Store will change.");
+    NSLog(@"%@addon: Store will save.", self);
 }
 
-- (void)storeDidChange:(NSNotification *)notification
+- (void)storeDidSave:(NSNotification *)notification
 {
-    NSLog(@"viewControlleraddon: Store did change.");
+    NSLog(@"%@addon: Store did save.", self);
 }
 
 - (void)storeWillBeSwapped:(NSNotification *)notification
 {
-    NSLog(@"viewControlleraddon: Store will be swapped.");
+    NSLog(@"%@addon: Store will be swapped.", self);
+    // Deactivate UI
 }
 
 - (void)storeDidSwap:(NSNotification *)notification
 {
-    NSLog(@"viewControlleraddon: Store did swap.");
+    NSLog(@"%@addon: Store did swap.", self);
+    // Reactivate UI and refetch.
 }
 
 - (void)storedidUpdateFromUbiquitousContainer:(NSNotification *)notification
 {
-    NSLog(@"viewController: Store did update from Ubiquitous Container.");
+    NSLog(@"%@addon: Store did update from Ubiquitous Container.", self);
 }
 
 @end

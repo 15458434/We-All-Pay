@@ -72,9 +72,10 @@
     [self startRespondingToStoreChangeNotifications];
     
     if (![self tonightsBill]) {
-        NSManagedObjectContext *writeContext = [[MCWeAllPayStoreController defaultStore] backgroundThreadContext];
-        [writeContext performBlock:^{
-            _writableTonightsBill = [MCSharedBill addSharedBillToContext:writeContext];
+        _tonightsBill = [MCSharedBill addSharedBillToContext:[[MCWeAllPayStoreController defaultStore] mainThreadContext]];
+        NSManagedObjectContext *backgroundContext = [[MCWeAllPayStoreController defaultStore] backgroundThreadContext];
+        [backgroundContext performBlock:^{
+            _writableTonightsBill = [MCSharedBill addSharedBillToContext:backgroundContext];
             [[MCWeAllPayStoreController defaultStore] saveStore];
             NSNotificationCenter *dc = [NSNotificationCenter defaultCenter];
             [dc postNotificationName:MCWritableTonightsBillReady object:self userInfo:@{MCwritableTonightsBillKey: _writableTonightsBill}];
@@ -127,7 +128,7 @@
 
 -(void)dealloc
 {
-    [self stopRespondingToStorechangeNotifications];
+    [[NSNotificationCenter defaultCenter] removeObserver:self];
 }
 
 #pragma mark - Navigation

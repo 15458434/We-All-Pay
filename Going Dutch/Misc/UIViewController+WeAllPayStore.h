@@ -12,8 +12,8 @@
 
 - (void)startRespondingToStoreChangeNotifications;
 - (void)stopRespondingToStorechangeNotifications;
-- (void)storeWillChange:(NSNotification *)notification;
-- (void)storeDidChange:(NSNotification *)notification;
+- (void)storeWillSave:(NSNotification *)notification;
+- (void)storeDidSave:(NSNotification *)notification;
 - (void)storeWillBeSwapped:(NSNotification *)notification;
 - (void)storeDidSwap:(NSNotification *)notification;
 - (void)storedidUpdateFromUbiquitousContainer:(NSNotification *)notification;
