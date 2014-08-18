@@ -306,9 +306,8 @@ NSString * const MCWeAllPayStoreModelName = @"WeAllPayStore";
     NSPredicate *predicate = [NSPredicate predicateWithFormat:@"onWhichBill = %@", tonightsBill];
     [request setPredicate:predicate];
     
-    NSString *cacheName = [NSString stringWithFormat:@"All payments cache of trip: %@", [tonightsBill tripName]];
     // Create the FetchedResultsController.
-    NSFetchedResultsController *dataController = [[NSFetchedResultsController alloc] initWithFetchRequest:request managedObjectContext:_mainThreadContext sectionNameKeyPath:nil cacheName:cacheName];
+    NSFetchedResultsController *dataController = [[NSFetchedResultsController alloc] initWithFetchRequest:request managedObjectContext:_mainThreadContext sectionNameKeyPath:nil cacheName:nil];
     NSError *error;
     BOOL success = [dataController performFetch:&error];
     if (!success) {
@@ -335,7 +334,7 @@ NSString * const MCWeAllPayStoreModelName = @"WeAllPayStore";
     [request setPredicate:predicate];
     
     // Create the FetchedResultsController.
-    NSFetchedResultsController *dataController = [[NSFetchedResultsController alloc] initWithFetchRequest:request managedObjectContext:_mainThreadContext sectionNameKeyPath:nil cacheName:[NSString stringWithFormat:@"All persons cache of trip: %@", [tonightsBill uniqueBillId]]];
+    NSFetchedResultsController *dataController = [[NSFetchedResultsController alloc] initWithFetchRequest:request managedObjectContext:_mainThreadContext sectionNameKeyPath:nil cacheName:nil];
     [dataController setDelegate:delegate];
     NSError *error;
     BOOL success = [dataController performFetch:&error];
@@ -362,7 +361,7 @@ NSString * const MCWeAllPayStoreModelName = @"WeAllPayStore";
     [request setPredicate:predicate];
     
     // Create the FetchedResultsController.
-    NSFetchedResultsController *dataController = [[NSFetchedResultsController alloc] initWithFetchRequest:request managedObjectContext:_mainThreadContext sectionNameKeyPath:nil cacheName:[NSString stringWithFormat:@"All payment presence cache for payment: %@", [thisPayment uniquePaymentId]]];
+    NSFetchedResultsController *dataController = [[NSFetchedResultsController alloc] initWithFetchRequest:request managedObjectContext:_mainThreadContext sectionNameKeyPath:nil cacheName:nil];
     [dataController setDelegate:delegate];
     NSError *error;
     BOOL success = [dataController performFetch:&error];
@@ -380,7 +379,7 @@ NSString * const MCWeAllPayStoreModelName = @"WeAllPayStore";
     request.sortDescriptors = @[[NSSortDescriptor sortDescriptorWithKey:@"name" ascending:YES]];
     request.predicate = [NSPredicate predicateWithFormat:@"isStillValid = YES"];
     request.fetchBatchSize = 20;
-    NSFetchedResultsController *dataController = [[NSFetchedResultsController alloc] initWithFetchRequest:request managedObjectContext:context sectionNameKeyPath:nil cacheName:@"All valid currencies."];
+    NSFetchedResultsController *dataController = [[NSFetchedResultsController alloc] initWithFetchRequest:request managedObjectContext:context sectionNameKeyPath:nil cacheName:nil];
     dataController.delegate = delegate;
     NSError *fetchError;
     BOOL success = [dataController performFetch:&fetchError];
@@ -398,7 +397,7 @@ NSString * const MCWeAllPayStoreModelName = @"WeAllPayStore";
     request.sortDescriptors = @[[NSSortDescriptor sortDescriptorWithKey:@"name" ascending:YES]];
     request.predicate = [NSPredicate predicateWithFormat:@"isStillValid = YES AND name contains[c] %@", searchText];
     request.fetchBatchSize = 20;
-    NSFetchedResultsController *dataController = [[NSFetchedResultsController alloc] initWithFetchRequest:request managedObjectContext:context sectionNameKeyPath:nil cacheName:@"All valid currencies."];
+    NSFetchedResultsController *dataController = [[NSFetchedResultsController alloc] initWithFetchRequest:request managedObjectContext:context sectionNameKeyPath:nil cacheName:nil];
     dataController.delegate = delegate;
     NSError *fetchError;
     BOOL success = [dataController performFetch:&fetchError];
