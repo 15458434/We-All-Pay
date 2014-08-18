@@ -73,13 +73,7 @@
     
     if (![self tonightsBill]) {
         _tonightsBill = [MCSharedBill addSharedBillToContext:[[MCWeAllPayStoreController defaultStore] mainThreadContext]];
-        NSManagedObjectContext *backgroundContext = [[MCWeAllPayStoreController defaultStore] backgroundThreadContext];
-        [backgroundContext performBlock:^{
-            _writableTonightsBill = [MCSharedBill addSharedBillToContext:backgroundContext];
-            [[MCWeAllPayStoreController defaultStore] saveStore];
-            NSNotificationCenter *dc = [NSNotificationCenter defaultCenter];
-            [dc postNotificationName:MCWritableTonightsBillReady object:self userInfo:@{MCwritableTonightsBillKey: _writableTonightsBill}];
-        }];
+        [[MCWeAllPayStoreController defaultStore] savebackgroundContext];
         _currentView = MCSelectEditTripTableView;
     } else {
         _currentView = MCSelectSharedBillTableView;
@@ -112,11 +106,14 @@
         if (firstResponder) {
             [firstResponder resignFirstResponder];
         }
-        NSManagedObjectContext *context = [[MCWeAllPayStoreController defaultStore] backgroundThreadContext];
-        [context performBlock:^{
-            [_writableTonightsBill deleteIfStillNew];
-            [[MCWeAllPayStoreController defaultStore] saveStore];
-        }];
+        [_tonightsBill deleteIfStillNew];
+    }
+}
+
+- (void)didMoveToParentViewController:(UIViewController *)parent
+{
+    if (!parent) {
+//        [[MCWeAllPayStoreController defaultStore] saveMainThreadContext];
     }
 }
 

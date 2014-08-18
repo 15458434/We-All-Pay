@@ -16,9 +16,14 @@ extern NSString * const MCwritableThisPersonKey;
 
 @protocol MCThisPersonProtocol <NSObject>
 
+// should be executed on the mainThread.
 - (MCPerson *)thisPerson;
 - (void)setThisPerson:(MCPerson *)person;
+
+// should be executed on the backgroundThread.
 - (MCPerson *)writableThisPerson;
 - (void)setWritableThisPerson;
+
+- (void)setIsNew:(BOOL)isNew;
 
 @end

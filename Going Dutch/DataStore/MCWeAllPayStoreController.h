@@ -31,7 +31,8 @@ The We All Pay Store Controller is designed to do writing in the background and 
 - (BOOL)isDocumentStateNormal;
 
 - (void)openStore:(void (^)(BOOL success))completionHandler;
-- (void)saveStore;
+- (void)saveMainThreadContext;
+- (void)savebackgroundContext;
 - (void)closeDocument;
 
 - (void)beginUndoGroup;

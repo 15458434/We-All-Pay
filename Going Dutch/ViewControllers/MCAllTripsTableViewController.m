@@ -52,21 +52,6 @@
 
 #pragma mark - New in this class.
 
-- (void)setDataController
-{
-    NSManagedObjectContext *context = [[MCWeAllPayStoreController defaultStore] mainThreadContext];
-    NSFetchRequest *request = [NSFetchRequest fetchRequestWithEntityName:@"MCSharedBill"];
-    [request setSortDescriptors:@[[NSSortDescriptor sortDescriptorWithKey:@"dateCreated" ascending:NO]]];
-    [request setRelationshipKeyPathsForPrefetching:@[ @"payments", @"peoplePresent" ]];
-    dataController = [[NSFetchedResultsController alloc] initWithFetchRequest:request
-                                                         managedObjectContext:context
-                                                           sectionNameKeyPath:nil
-                                                                    cacheName:nil];
-    [dataController setDelegate:self];
-    UIManagedDocument *weAllPayDocument = [[MCWeAllPayStoreController defaultStore] weAllPayStoreDocument];
-    [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(performFetchAndReloadTableView:) name:UIDocumentStateChangedNotification object:weAllPayDocument];
-}
-
 - (void)setEmptyMessage
 {
     if (![[dataController fetchedObjects] count] == 0) {
@@ -172,7 +157,7 @@
      */
     
     if (!dataController) {
-        [self setDataController];
+        [[MCWeAllPayStoreController defaultStore] allTripsDataControllerForDelegate:self];
         [self performFetch];
     }
     
@@ -199,8 +184,7 @@
 {
     [super viewWillDisappear:animated];
     
-//    dataController = nil;
-//    [self stopRespondingToStorechangeNotifications];
+    dataController = nil;
 }
 
 - (void)viewDidDisappear:(BOOL)animated
@@ -357,14 +341,8 @@
 {
     if (editingStyle == UITableViewCellEditingStyleDelete) {
         MCSharedBill *toBeDeleteSharedBill = [dataController objectAtIndexPath:indexPath];
-        [NSFetchedResultsController deleteCacheWithName:[NSString stringWithFormat:@"All persons cache of trip: %@", [toBeDeleteSharedBill uniqueBillId]]];
-        [NSFetchedResultsController deleteCacheWithName:[NSString stringWithFormat:@"All payments cache of trip: %@", [toBeDeleteSharedBill uniqueBillId]]];
-        NSManagedObjectContext *context = [[MCWeAllPayStoreController defaultStore] backgroundThreadContext];
-        [context performBlock:^{
-            MCSharedBill *toBeDeletedSharedBillInBackgroundContext = (MCSharedBill *)[context objectWithID:[toBeDeleteSharedBill objectID]];
-            [MCSharedBill deleteSharedbill:toBeDeletedSharedBillInBackgroundContext];
-            [[MCWeAllPayStoreController defaultStore] saveStore];
-        }];
+        [MCSharedBill deleteSharedbill:toBeDeleteSharedBill];
+        [[MCWeAllPayStoreController defaultStore] saveMainThreadContext];
     }
 }
 

@@ -137,19 +137,23 @@ NSString * const MCWeAllPayStoreModelName = @"WeAllPayStore";
 //    }
 }
 
-- (void)saveStore
+- (void)saveMainThreadContext
 {
-//    [weAllPayStoreDocument saveToURL:[weAllPayStoreDocument fileURL] forSaveOperation:UIDocumentSaveForOverwriting completionHandler:^(BOOL success){
-//        if (success) {
-//            NSLog(@"Succesfully saved.");
-//        } else {
-//            NSLog(@"Save not possible for document at %@", [weAllPayStoreDocument fileURL]);
-//        }
-//    }];
+    NSError *error;
+    BOOL succes = [_mainThreadContext save:&error];
+    if (succes) {
+        NSLog(@"Main Thread Context: Succesfully saved.");
+    } else {
+        NSLog(@"Save not possible: %@", [error localizedDescription]);
+    }
+}
+
+- (void)savebackgroundContext
+{
     NSError *error;
     BOOL succes = [_backgroundThreadContext save:&error];
     if (succes) {
-        NSLog(@"Succesfully saved.");
+        NSLog(@"Background Thread Context Succesfully saved.");
     } else {
         NSLog(@"Save not possible: %@", [error localizedDescription]);
     }

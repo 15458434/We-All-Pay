@@ -28,7 +28,6 @@
 @synthesize dismissOnDone;
 @synthesize dismissOnCancel;
 
-@synthesize tonightsBill;
 @synthesize didSomethingChange;
 
 @synthesize delegate;
@@ -39,17 +38,7 @@
     ABPeoplePickerNavigationController *peoplePicker = [[ABPeoplePickerNavigationController alloc] init];
     if (!personReceiver) {
         personReceiver = [[MCAddressBookDataReceiver alloc] initWithViewController:self andDelegate:self];
-        [personReceiver setTonightsBill:tonightsBill];
-        
-        NSManagedObjectContext *backgroundContext = [[MCWeAllPayStoreController defaultStore] backgroundThreadContext];
-        [backgroundContext performBlock:^{
-            if (_writableTonightsBill) {
-                [personReceiver setWritableTonightsBill:_writableTonightsBill];
-            } else {
-                NSNotificationCenter *dc = [NSNotificationCenter defaultCenter];
-                [dc addObserver:personReceiver selector:@selector(writableTonightsBillIsCreated:) name:MCWritableTonightsBillReady object:nil];
-            }
-        }];
+        [personReceiver setTonightsBill:_tonightsBill];
     }
     [peoplePicker setPeoplePickerDelegate:personReceiver];
     [peoplePicker setEdgesForExtendedLayout:UIRectEdgeNone];
@@ -65,36 +54,6 @@
         [tripNameField resignFirstResponder];
     }
 }
-
-//- (IBAction)cancelButtonPressed:(id)sender {
-//    cancelPressed = YES;
-//    NSManagedObjectContext *context = [[MCWeAllPayStoreController defaultStore] mainThreadContext];
-//    [context performBlockAndWait:^{
-//        [[context undoManager] disableUndoRegistration];
-//        if (didSomethingChange) {
-//            [[context undoManager] undoNestedGroup];
-//        }
-//    }];
-//    [[self presentingViewController] dismissViewControllerAnimated:YES completion:nil];
-//}
-//
-//- (IBAction)doneButtonPressed:(id)sender {
-//    if ([tonightsBill areTherePeople]) {
-//        NSManagedObjectContext *context = [[[MCWeAllPayStoreController defaultStore] weAllPayStoreDocument] managedObjectContext];
-//        [context performBlockAndWait:^{
-//            [context processPendingChanges];
-//            [[context undoManager] disableUndoRegistration];
-//        }];
-//        [[self navigationController] dismissViewControllerAnimated:YES completion:nil];
-//    } else {
-//        UIAlertView *noPeoplePresentMessage = [[UIAlertView alloc] initWithTitle:@"No people present on this bill."
-//                                                                         message:@"Please add the people who you'd like to share this bill with."
-//                                                                        delegate:self
-//                                                               cancelButtonTitle:@"Cancel"
-//                                                               otherButtonTitles:@"Edit", nil];
-//        [noPeoplePresentMessage show];
-//    }
-//}
 
 #pragma mark - new in this class.
 
@@ -195,7 +154,7 @@
 {
     [super viewWillAppear:animated];
     
-    [tripNameField setText:[tonightsBill tripName]];
+    [tripNameField setText:[_tonightsBill tripName]];
     [tripNameField setDelegate:self];
     
     if (!dataController) {
@@ -224,8 +183,8 @@
 {
     [super viewDidAppear:animated];
     
-    if ([tonightsBill tripName]) {
-        [tripNameField setPlaceholder:[[NSString alloc] initWithFormat:@"Enter something to rename %@", [tonightsBill tripName]]];
+    if ([_tonightsBill tripName]) {
+        [tripNameField setPlaceholder:[[NSString alloc] initWithFormat:@"Enter something to rename %@", [_tonightsBill tripName]]];
     }
     
     id<GAITracker> tracker = [[GAI sharedInstance] defaultTracker];
@@ -276,7 +235,7 @@
     NSManagedObjectContext *mainContext = [[MCWeAllPayStoreController defaultStore] mainThreadContext];
     NSManagedObjectID *tonightsBillID = [_writableTonightsBill objectID];
     [mainContext performBlock:^{
-        tonightsBill = (MCSharedBill *)[mainContext objectWithID:tonightsBillID];
+        _tonightsBill = (MCSharedBill *)[mainContext objectWithID:tonightsBillID];
     }];
     NSLog(@"PeoplePresent: WritableTonightsBillIsCreated has been executed.");
 }
@@ -342,14 +301,10 @@
 
 -(void)textFieldDidEndEditing:(UITextField *)textField
 {
-    NSManagedObjectContext *context = [[MCWeAllPayStoreController defaultStore] backgroundThreadContext];
-    NSString *newTripName = [textField text];
-    [context performBlock:^{
-        [_writableTonightsBill setTripName:newTripName];
-        NSDate *now = [NSDate date];
-        [_writableTonightsBill setDateModified:now];
-        [[MCWeAllPayStoreController defaultStore] saveStore];
-    }];
+    [_tonightsBill setTripName:[tripNameField text]];
+    NSDate *now = [NSDate date];
+    [_tonightsBill setDateModified:now];
+    [[MCWeAllPayStoreController defaultStore] saveMainThreadContext];
     if (!didSomethingChange) {
         didSomethingChange = YES;
     }
@@ -424,7 +379,7 @@
     [[thisCell emailLabel] setText:[thisCellsPerson defaultEmailAddress]];
     NSNumberFormatter *nf = [[NSNumberFormatter alloc] init];
     [nf setNumberStyle:NSNumberFormatterCurrencyStyle];
-    [[thisCell totalSpent] setText:[nf stringFromNumber:[tonightsBill totalSumPaidBy:thisCellsPerson]]];
+    [[thisCell totalSpent] setText:[nf stringFromNumber:[_tonightsBill totalSumPaidBy:thisCellsPerson]]];
     
     return thisCell;
 }
@@ -434,7 +389,7 @@
 {
     if ([[self tableView] isEditing]) {
         MCPerson *person = [dataController objectAtIndexPath:indexPath];
-        if ([tonightsBill hasPersonPaidSomething:person]) {
+        if ([_tonightsBill hasPersonPaidSomething:person]) {
             return NO;
         } else {
             return YES;
@@ -455,7 +410,7 @@
             if (![_writableTonightsBill hasPersonPaidSomething:removablePerson]) {
                 MCPerson *removablePersonInBackgroundContext = (MCPerson *)[backgroundContext objectWithID:removablePersonID];
                 [_writableTonightsBill deletePerson:removablePersonInBackgroundContext];
-                [[MCWeAllPayStoreController defaultStore] saveStore];
+                [[MCWeAllPayStoreController defaultStore] savebackgroundContext];
             }
         }];
         didSomethingChange = YES;
@@ -495,52 +450,27 @@
 
 - (void)prepareForSegue:(UIStoryboardSegue *)segue sender:(id)sender
 {
-    MCPerson *thePerson;
-    if ([[[segue destinationViewController] viewControllers][0] respondsToSelector:@selector(setChangeFlagDelegate:)]) {
-        [[[segue destinationViewController] viewControllers][0] setChangeFlagDelegate:self];
-    }
-    if ([[[segue destinationViewController] viewControllers][0] conformsToProtocol:@protocol(MCTonightsBillTransfer)]) {
-        [[[segue destinationViewController] viewControllers][0] setTonightsBill:tonightsBill];
-        NSManagedObjectContext *backgroundContext = [[MCWeAllPayStoreController defaultStore] backgroundThreadContext];
-        id<MCTonightsBillTransfer> destination = [[segue destinationViewController] viewControllers][0];
-        [backgroundContext performBlock:^{
-            [destination setWritableTonightsBill:_writableTonightsBill];
-        }];
-    }
-    NSIndexPath *indexPathOfSelectedRow = [[self tableView] indexPathForSelectedRow];
-    if (indexPathOfSelectedRow) {
-        thePerson = [dataController objectAtIndexPath:indexPathOfSelectedRow];
-        if ([[[segue destinationViewController] viewControllers][0] respondsToSelector:@selector(setIsNew:)]) {
-            [[[segue destinationViewController] viewControllers][0] setIsNew:NO];
-            id destination = [[segue destinationViewController] viewControllers][0];
-            if ([destination conformsToProtocol:@protocol(MCThisPersonProtocol)]) {
-                NSManagedObjectContext *backgroundContext = [[MCWeAllPayStoreController defaultStore] backgroundThreadContext];
-                NSManagedObjectID *lookupID = [thePerson objectID];
-                [backgroundContext performBlock:^{
-                    MCPerson *thePersonInBackground = (MCPerson *)[backgroundContext objectWithID:lookupID];
-                    [destination setWritableThisPerson:thePersonInBackground];
-                }];
+    if ([[segue identifier] isEqualToString:@"openEditPerson"]) {
+        id destination = [[segue destinationViewController] viewControllers][0];
+        if ([destination conformsToProtocol:@protocol(MCTonightsBillTransfer)] && [destination conformsToProtocol:@protocol(MCThisPersonProtocol)]) {
+            NSIndexPath *indexPathOfSelectedRow = [[self tableView] indexPathForSelectedRow];
+            MCPerson *thePerson = [dataController objectAtIndexPath:indexPathOfSelectedRow];
+            if (!thePerson) {
+                // No person present create a new one.
+                thePerson = [_tonightsBill addPerson];
+                [thePerson setThumbnailDataFromImage:nil];
+                [thePerson setPictureDataFromImage:nil];
+                [destination setThisPerson:thePerson];
+                [destination setIsNew:YES];
+            } else {
+                // Person present open it.
+                [destination setThisPerson:thePerson];
+                [destination setIsNew:NO];
             }
+        } else {
+            NSLog(@"%@: Unable to pass tonightsBill and thisPerson.", self);
         }
-    } else {
-        if ([[[segue destinationViewController] viewControllers][0] respondsToSelector:@selector(setIsNew:)]) {
-            [[[segue destinationViewController] viewControllers][0] setIsNew:YES];
-            id destination = [[segue destinationViewController] viewControllers][0];
-            if ([destination conformsToProtocol:@protocol(MCThisPersonProtocol)]) {
-                NSManagedObjectContext *backgroundContext = [[MCWeAllPayStoreController defaultStore] backgroundThreadContext];
-                [backgroundContext performBlock:^{
-                    if (_writableTonightsBill) {
-                        [destination setWritableThisPerson:[_writableTonightsBill addPerson]];
-                    } else {
-                        [[NSNotificationCenter defaultCenter] addObserver:destination selector:@selector(writableThisPersonIsCreated:) name:MCWritableTonightsBillReady object:self];
-                    }
-                }];
-            }
-        }
-        [doneButton setEnabled:YES];
-    }
-    if ([[[segue destinationViewController] viewControllers][0] respondsToSelector:@selector(setThisPerson:)]) {
-        [[[segue destinationViewController] viewControllers][0] setThisPerson:thePerson];
+
     }
 }
 

@@ -24,11 +24,15 @@
 {
     // tonightsBill should be present.
     NSParameterAssert(_tonightsBill);
+    NSManagedObjectID *tonightsBillID = [_tonightsBill objectID];
     
     ABRecordID personID = ABRecordGetRecordID(person);
     
     NSManagedObjectContext *backgroundContext = [[MCWeAllPayStoreController defaultStore] backgroundThreadContext];
     [backgroundContext performBlock:^{
+        _writableTonightsBill = (MCSharedBill *)[backgroundContext objectWithID:tonightsBillID];
+        NSParameterAssert(_writableTonightsBill);
+        
         CFErrorRef error = NULL;
         ABAddressBookRef addressBookRef = ABAddressBookCreateWithOptions(NULL, &error);
         if (error) {
@@ -41,12 +45,7 @@
         // Get all linked ABRecords from AddressBook
         CFArrayRef allLinkedPeople = ABPersonCopyArrayOfAllLinkedPeople(personInBackground);
         
-        thisPerson = [delegate personRecordToUse];
-        if (!thisPerson) {
-            thisPerson = [_writableTonightsBill addPerson];
-        } else {
-            [thisPerson deletAllEmailAddresses];
-        }
+        thisPerson = [_writableTonightsBill addPerson];
         
         [thisPerson setThumbnailDataFromImage:[UIImage imageWithData:(__bridge_transfer NSData *)ABPersonCopyImageDataWithFormat(personInBackground, kABPersonImageFormatThumbnail)]];
         [thisPerson setPictureDataFromImage:[UIImage imageWithData:(__bridge_transfer NSData *)ABPersonCopyImageDataWithFormat(personInBackground, kABPersonImageFormatOriginalSize)]];
@@ -76,7 +75,7 @@
             }
         }
         CFRelease(allLinkedPeople);
-        [[MCWeAllPayStoreController defaultStore] saveStore];
+        [[MCWeAllPayStoreController defaultStore] savebackgroundContext];
     }];
 }
 
@@ -136,7 +135,6 @@
         [tracker send:[[GAIDictionaryBuilder createAppView] build]];
     }];
     [self importPersonDataAndSave:person];
-    thisPerson = nil;
     return NO;
 }
 

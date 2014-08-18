@@ -10,7 +10,9 @@
 #import <CoreData/CoreData.h>
 #import <AddressBookUI/AddressBookUI.h>
 #import "MCAddressBookDataReceiver.h"
+
 #import "MCTonightsBillTransfer.h"
+#import "MCThisPersonProtocol.h"
 
 typedef enum _emailFieldEditStatus {
     MCEmailFieldEditNormal = 0,
@@ -28,7 +30,7 @@ typedef enum _emailFieldEditStatus {
 
 @end
 
-@interface MCPersonViewController : UIViewController <UITextFieldDelegate, UIPickerViewDelegate, UIPickerViewDataSource, MCAddressBookReceiverDelegate, MCTonightsBillTransfer>
+@interface MCPersonViewController : UIViewController <UITextFieldDelegate, UIPickerViewDelegate, UIPickerViewDataSource, MCAddressBookReceiverDelegate, MCTonightsBillTransfer, MCThisPersonProtocol>
 {
     __weak IBOutlet UITextField *firstNameField;
     __weak IBOutlet UITextField *lastNameField;

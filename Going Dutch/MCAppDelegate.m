@@ -153,7 +153,7 @@
         [application endBackgroundTask:bgTask];
         bgTask = UIBackgroundTaskInvalid;
     }];
-    [[MCWeAllPayStoreController defaultStore] saveStore];
+    [[MCWeAllPayStoreController defaultStore] savebackgroundContext];
     [self stopGoogleAnalyticsSession];
 }
 
