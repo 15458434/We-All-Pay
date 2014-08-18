@@ -19,6 +19,18 @@
 		3812485A1959D22600C0447C /* MCxRatesController.m in Sources */ = {isa = PBXBuildFile; fileRef = 381248581959D22600C0447C /* MCxRatesController.m */; };
 		3812485B1959D40900C0447C /* MCxRatesController.m in Sources */ = {isa = PBXBuildFile; fileRef = 381248581959D22600C0447C /* MCxRatesController.m */; };
 		3812485C1959D41700C0447C /* Currency info.plist in Resources */ = {isa = PBXBuildFile; fileRef = 381248561959D22600C0447C /* Currency info.plist */; };
+		381318BC19A250C600C821B0 /* XRCurrency.xcdatamodeld in Sources */ = {isa = PBXBuildFile; fileRef = 381318BA19A250C600C821B0 /* XRCurrency.xcdatamodeld */; };
+		381318BD19A250C600C821B0 /* XRCurrency.xcdatamodeld in Sources */ = {isa = PBXBuildFile; fileRef = 381318BA19A250C600C821B0 /* XRCurrency.xcdatamodeld */; };
+		381318BE19A250C600C821B0 /* XRCurrency.xcdatamodeld in Sources */ = {isa = PBXBuildFile; fileRef = 381318BA19A250C600C821B0 /* XRCurrency.xcdatamodeld */; };
+		381318BF19A250C600C821B0 /* XRCurrency.xcdatamodeld in Sources */ = {isa = PBXBuildFile; fileRef = 381318BA19A250C600C821B0 /* XRCurrency.xcdatamodeld */; };
+		381318C219A2531500C821B0 /* XRCurrencyStoreController.m in Sources */ = {isa = PBXBuildFile; fileRef = 381318C119A2531500C821B0 /* XRCurrencyStoreController.m */; };
+		381318C319A2531500C821B0 /* XRCurrencyStoreController.m in Sources */ = {isa = PBXBuildFile; fileRef = 381318C119A2531500C821B0 /* XRCurrencyStoreController.m */; };
+		381318C419A2531500C821B0 /* XRCurrencyStoreController.m in Sources */ = {isa = PBXBuildFile; fileRef = 381318C119A2531500C821B0 /* XRCurrencyStoreController.m */; };
+		381318C519A2531500C821B0 /* XRCurrencyStoreController.m in Sources */ = {isa = PBXBuildFile; fileRef = 381318C119A2531500C821B0 /* XRCurrencyStoreController.m */; };
+		381318CE19A2869600C821B0 /* XRCurrency.m in Sources */ = {isa = PBXBuildFile; fileRef = 381318CD19A2869600C821B0 /* XRCurrency.m */; };
+		381318CF19A2869600C821B0 /* XRCurrency.m in Sources */ = {isa = PBXBuildFile; fileRef = 381318CD19A2869600C821B0 /* XRCurrency.m */; };
+		381318D019A2869600C821B0 /* XRCurrency.m in Sources */ = {isa = PBXBuildFile; fileRef = 381318CD19A2869600C821B0 /* XRCurrency.m */; };
+		381318D119A2869600C821B0 /* XRCurrency.m in Sources */ = {isa = PBXBuildFile; fileRef = 381318CD19A2869600C821B0 /* XRCurrency.m */; };
 		381AB0EF1924FCC2004A02C6 /* MCWhoPaidHowMuchTableViewCell_iPhone.m in Sources */ = {isa = PBXBuildFile; fileRef = 381AB0EE1924FCC2004A02C6 /* MCWhoPaidHowMuchTableViewCell_iPhone.m */; };
 		381F693E194EE54700F465FC /* MCOneLabelIScreenTableViewCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 381F693D194EE54700F465FC /* MCOneLabelIScreenTableViewCell.m */; };
 		381F6941194EE5A800F465FC /* MCTwoLabelIscreenTableViewCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 381F6940194EE5A800F465FC /* MCTwoLabelIscreenTableViewCell.m */; };
@@ -205,6 +217,11 @@
 		381248561959D22600C0447C /* Currency info.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; path = "Currency info.plist"; sourceTree = "<group>"; };
 		381248571959D22600C0447C /* MCxRatesController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = MCxRatesController.h; sourceTree = "<group>"; };
 		381248581959D22600C0447C /* MCxRatesController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = MCxRatesController.m; sourceTree = "<group>"; };
+		381318BB19A250C600C821B0 /* XRCurrency.xcdatamodel */ = {isa = PBXFileReference; lastKnownFileType = wrapper.xcdatamodel; path = XRCurrency.xcdatamodel; sourceTree = "<group>"; };
+		381318C019A2531500C821B0 /* XRCurrencyStoreController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = XRCurrencyStoreController.h; path = Model/XRCurrencyStoreController.h; sourceTree = "<group>"; };
+		381318C119A2531500C821B0 /* XRCurrencyStoreController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = XRCurrencyStoreController.m; path = Model/XRCurrencyStoreController.m; sourceTree = "<group>"; };
+		381318CC19A2869600C821B0 /* XRCurrency.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = XRCurrency.h; sourceTree = "<group>"; };
+		381318CD19A2869600C821B0 /* XRCurrency.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = XRCurrency.m; sourceTree = "<group>"; };
 		38156B2818706B750047AEEF /* nl */ = {isa = PBXFileReference; fileEncoding = 10; lastKnownFileType = text.plist.strings; lineEnding = 0; name = nl; path = nl.lproj/Localizable.strings; sourceTree = "<group>"; };
 		38156B2918706BAC0047AEEF /* Base */ = {isa = PBXFileReference; fileEncoding = 10; lastKnownFileType = text.plist.strings; lineEnding = 0; name = Base; path = Base.lproj/Localizable.strings; sourceTree = "<group>"; };
 		3815BD7B1955CE9800A28316 /* Cocoa.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Cocoa.framework; path = Library/Frameworks/Cocoa.framework; sourceTree = DEVELOPER_DIR; };
@@ -1092,6 +1109,11 @@
 			isa = PBXGroup;
 			children = (
 				381248561959D22600C0447C /* Currency info.plist */,
+				381318BA19A250C600C821B0 /* XRCurrency.xcdatamodeld */,
+				381318CC19A2869600C821B0 /* XRCurrency.h */,
+				381318CD19A2869600C821B0 /* XRCurrency.m */,
+				381318C019A2531500C821B0 /* XRCurrencyStoreController.h */,
+				381318C119A2531500C821B0 /* XRCurrencyStoreController.m */,
 				381248571959D22600C0447C /* MCxRatesController.h */,
 				381248581959D22600C0447C /* MCxRatesController.m */,
 				38974AF8195E8C4B00BBEA9C /* MCxRatesController+X_RatesAddOn.h */,
@@ -1330,8 +1352,10 @@
 				3803963F192114D700FA8CC2 /* MCPaymentPresenceTableViewCell.m in Sources */,
 				38955048178B4FCA0077A95A /* MCWeAllPayStoreController.m in Sources */,
 				38E95DB219506F9700069414 /* MCiScreenTableViewController_iPad.m in Sources */,
+				381318BC19A250C600C821B0 /* XRCurrency.xcdatamodeld in Sources */,
 				3897157A17901D0F005BE03E /* MCTextFieldAndLabelTitleView.m in Sources */,
 				389DE8FA197FB2BA00169645 /* MCPayment.m in Sources */,
+				381318CE19A2869600C821B0 /* XRCurrency.m in Sources */,
 				38AAFBA218EC406300CD3E12 /* MCSharedBillPeoplePresentTableViewController-iPad.m in Sources */,
 				389DE907197FBE8400169645 /* MCExchangeRate+addons.m in Sources */,
 				389DE904197FB55300169645 /* WeAllPayStore2to3.xcmappingmodel in Sources */,
@@ -1367,6 +1391,7 @@
 				384513011986DEC0008D17AB /* MCSelectCurrencyTableViewController.m in Sources */,
 				38DB85D417E45BCA006237CF /* MCPayment+addons.m in Sources */,
 				3825A82419990BA400A8885D /* UIViewController+WeAllPayStore.m in Sources */,
+				381318C219A2531500C821B0 /* XRCurrencyStoreController.m in Sources */,
 				383A86C518F7EE48001F128E /* MCSolutionTableViewController.m in Sources */,
 				389DE8F7197FB2B900169645 /* MCPaymentPresence.m in Sources */,
 				3892E3AA17904A240038894B /* MCPersonViewController.m in Sources */,
@@ -1397,8 +1422,11 @@
 				389DE909197FC5E900169645 /* MCExchangeRateTest.m in Sources */,
 				385F530F191C2D140012773D /* MCPaymentPresenceTest.m in Sources */,
 				385F5310191C2D140012773D /* MCPaymentAddonsTest.m in Sources */,
+				381318C319A2531500C821B0 /* XRCurrencyStoreController.m in Sources */,
 				385F5311191C2D140012773D /* MCPersonAddonsTest.m in Sources */,
+				381318BD19A250C600C821B0 /* XRCurrency.xcdatamodeld in Sources */,
 				389DE910197FD6DF00169645 /* MCCurrencyTest.m in Sources */,
+				381318CF19A2869600C821B0 /* XRCurrency.m in Sources */,
 				385F5312191C2D140012773D /* MCSharedBillAddOnsTest.m in Sources */,
 				385F5313191C2D140012773D /* WeAllPayStoreTests.m in Sources */,
 			);
@@ -1408,6 +1436,7 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				381318C419A2531500C821B0 /* XRCurrencyStoreController.m in Sources */,
 				38DAB1311997A1BF00B989BF /* MCAppDelegate.m in Sources */,
 				38A4ACEF1975625600C0636E /* Countly.xcdatamodeld in Sources */,
 				38974AFA195E8C4B00BBEA9C /* MCxRatesController+X_RatesAddOn.m in Sources */,
@@ -1417,7 +1446,9 @@
 				38A4ACED1975625600C0636E /* Countly.m in Sources */,
 				38A4ACF01975625600C0636E /* CountlyDB.m in Sources */,
 				38A4ACEC1975625600C0636E /* Countly_OpenUDID.m in Sources */,
+				381318BE19A250C600C821B0 /* XRCurrency.xcdatamodeld in Sources */,
 				38FE87CE195721670008EE74 /* main.m in Sources */,
+				381318D019A2869600C821B0 /* XRCurrency.m in Sources */,
 				38974AF7195E8B3000BBEA9C /* MCxRatesCurrency.m in Sources */,
 				3812485A1959D22600C0447C /* MCxRatesController.m in Sources */,
 			);
@@ -1427,7 +1458,10 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				381318C519A2531500C821B0 /* XRCurrencyStoreController.m in Sources */,
+				381318BF19A250C600C821B0 /* XRCurrency.xcdatamodeld in Sources */,
 				38FE87EB195721670008EE74 /* X_RatesTests.m in Sources */,
+				381318D119A2869600C821B0 /* XRCurrency.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -1918,6 +1952,16 @@
 /* End XCConfigurationList section */
 
 /* Begin XCVersionGroup section */
+		381318BA19A250C600C821B0 /* XRCurrency.xcdatamodeld */ = {
+			isa = XCVersionGroup;
+			children = (
+				381318BB19A250C600C821B0 /* XRCurrency.xcdatamodel */,
+			);
+			currentVersion = 381318BB19A250C600C821B0 /* XRCurrency.xcdatamodel */;
+			path = XRCurrency.xcdatamodeld;
+			sourceTree = "<group>";
+			versionGroupType = wrapper.xcdatamodel;
+		};
 		3829AD0D178B41320025969D /* WeAllPayStore.xcdatamodeld */ = {
 			isa = XCVersionGroup;
 			children = (
