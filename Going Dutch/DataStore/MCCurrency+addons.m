@@ -66,4 +66,29 @@
     return newNumberFormatter;
 }
 
+#pragma mark - Inherited from super
+
+- (BOOL)isEqual:(id)object
+{
+    if (self == object) {
+        return YES;
+    }
+    
+    if (![object isKindOfClass:[MCCurrency class]]) {
+        return NO;
+    }
+    
+    MCCurrency *otherObject = (MCCurrency *)object;
+    if (![ [self code] isEqualToString:[otherObject code] ]) {
+        return NO;
+    }
+    
+    return YES;
+}
+
+- (NSUInteger)hash
+{
+    return [[self code] hash];
+}
+
 @end
