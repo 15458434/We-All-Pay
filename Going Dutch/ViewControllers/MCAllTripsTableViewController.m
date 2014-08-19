@@ -25,6 +25,8 @@
 
 @interface MCAllTripsTableViewController ()
 
+@property (nonatomic, strong) NSFetchedResultsController *dataController;
+
 @end
 
 @implementation MCAllTripsTableViewController
@@ -54,7 +56,7 @@
 
 - (void)setEmptyMessage
 {
-    if (![[dataController fetchedObjects] count] == 0) {
+    if (![[_dataController fetchedObjects] count] == 0) {
         [UIView animateWithDuration:1.0 animations:^{
             [[emptyMessage bigMessage] setAlpha:0.0];
             [[self tableView] setSeparatorStyle:UITableViewCellSeparatorStyleSingleLine];
@@ -71,7 +73,7 @@
 
 - (void)setEmptyMessageNow
 {
-    if (![[dataController fetchedObjects] count] == 0) {
+    if (![[_dataController fetchedObjects] count] == 0) {
         [UIView animateWithDuration:0.0 animations:^{
             [[emptyMessage bigMessage] setAlpha:0.0];
             [[self tableView] setSeparatorStyle:UITableViewCellSeparatorStyleSingleLine];
@@ -100,9 +102,9 @@
 - (void)performFetch
 {
     NSError *error;
-    BOOL success = [dataController performFetch:&error];
+    BOOL success = [_dataController performFetch:&error];
     if (!success) {
-        NSLog(@"Something went wrong");
+        NSLog(@"%@: performFetch went wrong: %@", self, error);
     }
 }
 
@@ -135,6 +137,7 @@
     [[emptyMessage bigMessage] setAlpha:0.0];
     [[self tableView] setBackgroundView:emptyMessage];
     
+    [self startRespondingToStoreChangeNotifications];
 }
 
 
@@ -156,8 +159,8 @@
     [[titleView subLabel] setTextColor:[UIColor whiteColor]];
      */
     
-    if (!dataController) {
-        [[MCWeAllPayStoreController defaultStore] allTripsDataControllerForDelegate:self];
+    if (!_dataController) {
+        _dataController = [[MCWeAllPayStoreController defaultStore] allTripsDataControllerForDelegate:self];
         [self performFetch];
     }
     
@@ -167,8 +170,6 @@
     
     [[self tableView] reloadData];
     [[self navigationController] setToolbarHidden:YES animated:YES];
-    
-    [self startRespondingToStoreChangeNotifications];
 }
 
 - (void)viewDidAppear:(BOOL)animated
@@ -183,8 +184,6 @@
 - (void)viewWillDisappear:(BOOL)animated
 {
     [super viewWillDisappear:animated];
-    
-    dataController = nil;
 }
 
 - (void)viewDidDisappear:(BOOL)animated
@@ -215,15 +214,11 @@
     [super decodeRestorableStateWithCoder:coder];
 }
 
-#pragma mark - UIViewController+WeAllPayStore
+#pragma mark - UIViewController+WeAllPayStore notifications
 
 //-(void)storeDidChange:(NSNotification *)notification
 //{
-//    NSError *fetchError;
-//    [dataController performFetch:&fetchError];
-//    if (fetchError) {
-//        NSLog(@"fetchError: %@", fetchError.localizedDescription);
-//    }
+//    NSLog(@"%@: store did change.", self);
 //}
 
 #pragma mark - MCReturnPaymentViewControllerDelegate
@@ -280,17 +275,17 @@
 
 - (NSInteger)numberOfSectionsInTableView:(UITableView *)tableView
 {
-    return [[dataController sections] count];
+    return [[_dataController sections] count];
 }
 
 - (NSInteger)tableView:(UITableView *)tableView numberOfRowsInSection:(NSInteger)section
 {
-    return [[dataController sections][section] numberOfObjects];
+    return [[_dataController sections][section] numberOfObjects];
 }
 
 - (UITableViewCell *)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath
 {
-    MCSharedBill *thisTrip = [dataController objectAtIndexPath:indexPath];
+    MCSharedBill *thisTrip = [_dataController objectAtIndexPath:indexPath];
     MCAllTripsTableViewCell *allTripsTableViewCell = [tableView dequeueReusableCellWithIdentifier:@"MCAllTripsTableViewCell"];
     
     if (![thisTrip tripName]) {
@@ -340,7 +335,7 @@
 - (void)tableView:(UITableView *)tableView commitEditingStyle:(UITableViewCellEditingStyle)editingStyle forRowAtIndexPath:(NSIndexPath *)indexPath
 {
     if (editingStyle == UITableViewCellEditingStyleDelete) {
-        MCSharedBill *toBeDeleteSharedBill = [dataController objectAtIndexPath:indexPath];
+        MCSharedBill *toBeDeleteSharedBill = [_dataController objectAtIndexPath:indexPath];
         [MCSharedBill deleteSharedbill:toBeDeleteSharedBill];
         [[MCWeAllPayStoreController defaultStore] saveMainThreadContext];
     }
@@ -373,7 +368,7 @@
 
 - (void)tableView:(UITableView *)tableView accessoryButtonTappedForRowWithIndexPath:(NSIndexPath *)indexPath
 {
-    MCSharedBill *thisBill = [dataController objectAtIndexPath:indexPath];
+    MCSharedBill *thisBill = [_dataController objectAtIndexPath:indexPath];
     MCPaymentViewController *pvc = [[MCPaymentViewController alloc] initWithExistingPayment:nil fromBill:thisBill];
     UINavigationController *navController = [[UINavigationController alloc] initWithRootViewController:pvc];
     if ([[UIDevice currentDevice] userInterfaceIdiom] == UIUserInterfaceIdiomPad) {
@@ -394,7 +389,7 @@
     MCSharedBill *theBill;
     NSIndexPath *indexPathOfSelectedRow = [[self tableView] indexPathForSelectedRow];
     if (indexPathOfSelectedRow) {
-        theBill = [dataController objectAtIndexPath:indexPathOfSelectedRow];
+        theBill = [_dataController objectAtIndexPath:indexPathOfSelectedRow];
     }
     if ([[segue destinationViewController] conformsToProtocol:@protocol(MCTonightsBillTransfer)]) {
         [[segue destinationViewController] setTonightsBill:theBill];

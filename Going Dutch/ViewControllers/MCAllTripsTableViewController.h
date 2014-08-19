@@ -20,7 +20,6 @@
     MCTableEmptyMessage *emptyMessage;
     
     NSDateFormatter *df;
-    NSFetchedResultsController *dataController;
 }
 
 - (IBAction)tellAFriendAboutWeAllPay:(id)sender;

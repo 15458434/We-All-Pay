@@ -73,7 +73,7 @@
     NSError *error;
     BOOL success = [dataController performFetch:&error];
     if (!success) {
-        NSLog(@"Something went wrong");
+        NSLog(@"Something went wrong: %@", error);
     }
 }
 
