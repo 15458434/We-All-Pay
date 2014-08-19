@@ -21,23 +21,20 @@
     
     NSManagedObjectContext *destinationContext = [manager destinationContext];
     NSDictionary *availableCurrencies = [MCxRatesController getCurrencyDictionary];
-    NSArray *availableCurrencyCodes = [availableCurrencies allKeys];
-    for (NSString *currencyCode in availableCurrencyCodes) {
-        // For each currencyCode add it.
-        MCCurrency *newCurrency = [NSEntityDescription insertNewObjectForEntityForName:@"MCCurrency" inManagedObjectContext:destinationContext];
-        NSString *uuidString = [[NSUUID UUID] UUIDString];
-        NSDate *now = [NSDate date];
-        NSString *currencyName = [[availableCurrencies objectForKey:currencyCode] objectForKey:@"name"];
-        NSString *currencySymbol = [MCxRatesController getSymbolForCurrencyISOCode:currencyCode];
-        [newCurrency setUniqueID:uuidString];
-        [newCurrency setDateCreated:now];
-        [newCurrency setDateModified:now];
-        [newCurrency setIsStillValid:@YES];
-        [newCurrency setName:currencyName];
-        [newCurrency setCode:currencyCode];
-        [newCurrency setSymbol:currencySymbol];
-        NSLog(@"Generated MCCurrency: %@", newCurrency);
-    }
+    NSString *currencyCode = [[NSLocale currentLocale] objectForKey:NSLocaleCurrencyCode];
+    MCCurrency *newCurrency = [NSEntityDescription insertNewObjectForEntityForName:@"MCCurrency" inManagedObjectContext:destinationContext];
+    NSString *uuidString = [[NSUUID UUID] UUIDString];
+    NSDate *now = [NSDate date];
+    NSString *currencyName = [[availableCurrencies objectForKey:currencyCode] objectForKey:@"name"];
+    NSString *currencySymbol = [MCxRatesController getSymbolForCurrencyISOCode:currencyCode];
+    [newCurrency setUniqueID:uuidString];
+    [newCurrency setDateCreated:now];
+    [newCurrency setDateModified:now];
+    [newCurrency setIsStillValid:@YES];
+    [newCurrency setName:currencyName];
+    [newCurrency setCode:currencyCode];
+    [newCurrency setSymbol:currencySymbol];
+    NSLog(@"Generated MCCurrency: %@", newCurrency);
     
     return returnedFromSuper;
 }
