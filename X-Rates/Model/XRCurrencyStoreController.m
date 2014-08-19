@@ -35,6 +35,46 @@ NSString * const XRCurrencyStoreFileExtension = @"sqlite";
     }
 }
 
++ (void)populateCurrencyDataBaseIfEmptyForContext:(NSManagedObjectContext *)context
+{
+    // Unit tested.
+    // Check to see if currency database is filled.
+    NSFetchRequest *request = [[NSFetchRequest alloc] initWithEntityName:@"XRCurrency"];
+    NSSortDescriptor *sortDecriptor = [NSSortDescriptor sortDescriptorWithKey:@"dateModified" ascending:YES];
+    request.sortDescriptors = @[sortDecriptor];
+    NSError *countError;
+    NSUInteger amountOfCurrencies = [context countForFetchRequest:request error:&countError];
+    if (countError) {
+        NSLog(@"Error counting currencies: %@", countError);
+    }
+    // If empty fill it.
+    if (amountOfCurrencies == 0) {
+        NSDictionary *availableCurrencies = [MCxRatesController getCurrencyDictionary];
+        NSArray *availableCurrencyCodes = [availableCurrencies allKeys];
+        for (NSString *currencyCode in availableCurrencyCodes) {
+            // For each currencyCode add it.
+            XRCurrency *newCurrency = [NSEntityDescription insertNewObjectForEntityForName:@"XRCurrency" inManagedObjectContext:context];
+            NSString *uuidString = [[NSUUID UUID] UUIDString];
+            NSDate *now = [NSDate date];
+            NSString *currencyName = [[availableCurrencies objectForKey:currencyCode] objectForKey:@"name"];
+            NSString *currencySymbol = [MCxRatesController getSymbolForCurrencyISOCode:currencyCode];
+            [newCurrency setUniqueID:uuidString];
+            [newCurrency setDateCreated:now];
+            [newCurrency setDateModified:now];
+            [newCurrency setIsStillValid:@YES];
+            [newCurrency setName:currencyName];
+            [newCurrency setCode:currencyCode];
+            [newCurrency setSymbol:currencySymbol];
+            NSLog(@"Generated MCCurrency: %@", newCurrency);
+        }
+        NSError *saveError;
+        if (![context save:&saveError]) {
+            NSLog(@"Something went wrong saving XRCurrencies: %@", saveError);
+            abort();
+        }
+    }
+}
+
 - (void)prepareStoreWithCompletionHandler:(void (^)())completionHandler
 {
     NSOperationQueue *thisQueue = [NSOperationQueue currentQueue];
@@ -43,40 +83,7 @@ NSString * const XRCurrencyStoreFileExtension = @"sqlite";
     [currencyDispatchQueue addOperationWithBlock:^{
         NSManagedObjectContext *context = [self backgroundContext];
         // Check to see if currency database is filled.
-        NSFetchRequest *request = [[NSFetchRequest alloc] initWithEntityName:@"XRCurrency"];
-        NSSortDescriptor *sortDecriptor = [NSSortDescriptor sortDescriptorWithKey:@"dateModified" ascending:YES];
-        request.sortDescriptors = @[sortDecriptor];
-        NSError *countError;
-        NSUInteger amountOfCurrencies = [context countForFetchRequest:request error:&countError];
-        if (countError) {
-            NSLog(@"Error counting currencies: %@", countError);
-        }
-        // If empty fill it.
-        if (amountOfCurrencies == 0) {
-            NSDictionary *availableCurrencies = [MCxRatesController getCurrencyDictionary];
-            NSArray *availableCurrencyCodes = [availableCurrencies allKeys];
-            for (NSString *currencyCode in availableCurrencyCodes) {
-                // For each currencyCode add it.
-                XRCurrency *newCurrency = [NSEntityDescription insertNewObjectForEntityForName:@"XRCurrency" inManagedObjectContext:context];
-                NSString *uuidString = [[NSUUID UUID] UUIDString];
-                NSDate *now = [NSDate date];
-                NSString *currencyName = [[availableCurrencies objectForKey:currencyCode] objectForKey:@"name"];
-                NSString *currencySymbol = [MCxRatesController getSymbolForCurrencyISOCode:currencyCode];
-                [newCurrency setUniqueID:uuidString];
-                [newCurrency setDateCreated:now];
-                [newCurrency setDateModified:now];
-                [newCurrency setIsStillValid:@YES];
-                [newCurrency setName:currencyName];
-                [newCurrency setCode:currencyCode];
-                [newCurrency setSymbol:currencySymbol];
-                NSLog(@"Generated MCCurrency: %@", newCurrency);
-            }
-            NSError *saveError;
-            if (![_backgroundContext save:&saveError]) {
-                NSLog(@"Something went wrong saving XRCurrencies: %@", saveError);
-                abort();
-            }
-        }
+        [XRCurrencyStoreController populateCurrencyDataBaseIfEmptyForContext:context];
         [thisQueue addOperationWithBlock:^{
             completionHandler();
         }];
@@ -84,10 +91,31 @@ NSString * const XRCurrencyStoreFileExtension = @"sqlite";
     }];
 }
 
-- (XRCurrency *)fetchCurrencyWithCode:(NSString *)code
+- (XRCurrency *)fetchCurrencyWithCode:(NSString *)code inContext:(NSManagedObjectContext *)context
 {
-    NSLog(@"Not implemented yet.");
-    return nil;
+    // should be executed in the queue of the context
+    NSFetchRequest *request = [[NSFetchRequest alloc] initWithEntityName:@"XRCurrency"];
+    NSSortDescriptor *sortDescriptor = [NSSortDescriptor sortDescriptorWithKey:@"dateCreated" ascending:YES];
+    request.sortDescriptors = @[sortDescriptor];
+    request.predicate = [NSPredicate predicateWithFormat:@"code like %@", code];
+    NSError *currencyFetchError;
+    NSArray *fetchCurrencies = [_backgroundContext executeFetchRequest:request error:&currencyFetchError];
+    if (currencyFetchError) {
+        NSLog(@"Error fetching XRCurrency %@", currencyFetchError);
+    }
+    return [fetchCurrencies firstObject];
+}
+
+- (void)fetchCurrencyWithCode:(NSString *)code withCompletionHandler:(void (^)(XRCurrency *))completionHandler
+{
+    NSOperationQueue *thisQueue = [NSOperationQueue currentQueue];
+    _backgroundContext = [self backgroundContext];
+    [_backgroundContext performBlock:^{
+        XRCurrency *fetchedCurrency = [self fetchCurrencyWithCode:code inContext:_backgroundContext];
+        [thisQueue addOperationWithBlock:^{
+            completionHandler(fetchedCurrency);
+        }];
+    }];
 }
 
 #if TARGET_OS_IPHONE
@@ -181,7 +209,7 @@ NSString * const XRCurrencyStoreFileExtension = @"sqlite";
     if (![fileManager fileExistsAtPath:directoryURL.path]) {
         NSError *directoryCreationError;
         if (![fileManager createDirectoryAtURL:directoryURL withIntermediateDirectories:YES attributes:nil error:&directoryCreationError ]){
-            NSLog(@"Unable to create base directory for WeAllPayStore: %@", directoryCreationError);
+            NSLog(@"Unable to create base directory for XRCurrencyStore: %@", directoryCreationError);
         }
     }
     NSString *languageCode = [[NSLocale systemLocale] objectForKey:NSLocaleLanguageCode];

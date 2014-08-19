@@ -19,10 +19,12 @@
 @property (nonatomic, strong) NSManagedObjectContext *mainQueueContext;
 
 + (BOOL)doesMyCurrencyDatabaseFileExist;
++ (void)populateCurrencyDataBaseIfEmptyForContext:(NSManagedObjectContext *)context;
 + (id)sharedStore;
 
 - (void)prepareStoreWithCompletionHandler:(void (^)())completionHandler;
-//- (XRCurrency *)fetchCurrencyWithCode:(NSString *)code;
+- (XRCurrency *)fetchCurrencyWithCode:(NSString *)code inContext:(NSManagedObjectContext *)context;
+- (void)fetchCurrencyWithCode:(NSString *)code withCompletionHandler:(void (^)(XRCurrency *fetchedCurrency))completionHandler;
 
 #if TARGET_OS_IPHONE
 - (NSFetchedResultsController *)getFetchedResultsControllerForDelegate:(id)delegate;
