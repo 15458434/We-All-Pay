@@ -15,6 +15,7 @@
 #import "MCExchangeRate+addons.h"
 
 #import "MCWeAllPayStoreController.h"
+#import "XRCurrencyStoreController.h"
 
 NSString * const cellIdentifier = @"MCSelectCurrencyTableViewCell_iPhone";
 

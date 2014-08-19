@@ -126,6 +126,7 @@
 {
     dispatch_once(&executeOnlyOnce, ^{
         [self executeOnlyOnceDuringStartup];
+        [MCWeAllPayStoreController prepareCurrencyStoreIfNecessary];
     });
     return YES;
 }
@@ -134,6 +135,7 @@
 {
     dispatch_once(&executeOnlyOnce, ^{
         [self executeOnlyOnceDuringStartup];
+        [MCWeAllPayStoreController prepareCurrencyStoreIfNecessary];
     });
     
     [[MCStoreInterface defaultStoreInterface] validateProductIdentifiers];

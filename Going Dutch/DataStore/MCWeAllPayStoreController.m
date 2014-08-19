@@ -15,6 +15,7 @@
 #import "MCExchangeRate+addons.h"
 
 #import "MCxRatesController.h"
+#import "XRCurrencyStoreController.h"
 
 #import "MCTonightsBillTransfer.h"
 #import "MCThisPaymentProtocol.h"
@@ -46,6 +47,19 @@ NSString * const MCWeAllPayStoreModelName = @"WeAllPayStore";
 
 
 #pragma mark - New in this class
+
++ (void)prepareCurrencyStoreIfNecessary
+{
+    NSOperationQueue *someQueue = [NSOperationQueue new];
+    [someQueue addOperationWithBlock:^{
+        if (![XRCurrencyStoreController doesMyCurrencyDatabaseFileExist]) {
+            XRCurrencyStoreController *defaultCurrencyStore = [XRCurrencyStoreController sharedStore];
+            [defaultCurrencyStore prepareStoreWithCompletionHandler:^{
+                NSLog(@"CurrencyStore available.");
+            }];
+        }
+    }];
+}
 
 - (void)storeIsReady:(NSNotification *)notification
 {

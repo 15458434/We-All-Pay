@@ -20,12 +20,28 @@ NSString * const XRCurrencyStoreFileExtension = @"sqlite";
 
 #pragma mark - New in this class
 
++ (BOOL)doesMyCurrencyDatabaseFileExist
+{
+    NSURL *applicationDocumentsDirectory = [[[NSFileManager defaultManager] URLsForDirectory:NSDocumentDirectory inDomains:NSUserDomainMask] lastObject];
+    NSURL *directoryURL = [applicationDocumentsDirectory URLByAppendingPathComponent:XRCurrencyBaseDirectory isDirectory:YES];
+    NSString *languageCode = [[NSLocale systemLocale] objectForKey:NSLocaleLanguageCode];
+    NSString *fullFileName = [NSString stringWithFormat:@"%@-%@.%@", XRCurrencyStoreFileName, languageCode ,XRCurrencyStoreFileExtension];
+    NSURL *storeURL = [directoryURL URLByAppendingPathComponent:fullFileName];
+    NSFileManager *fileManager = [NSFileManager defaultManager];
+    if ([fileManager fileExistsAtPath:storeURL.path]) {
+        return YES;
+    } else {
+        return NO;
+    }
+}
+
 - (void)prepareStoreWithCompletionHandler:(void (^)())completionHandler
 {
     NSOperationQueue *thisQueue = [NSOperationQueue currentQueue];
     NSOperationQueue *currencyDispatchQueue = [NSOperationQueue new];
+    [currencyDispatchQueue setName:@"currencyDispatchQueue"];
     [currencyDispatchQueue addOperationWithBlock:^{
-        NSManagedObjectContext *context = [self managedObjectContext];
+        NSManagedObjectContext *context = [self backgroundContext];
         // Check to see if currency database is filled.
         NSFetchRequest *request = [[NSFetchRequest alloc] initWithEntityName:@"XRCurrency"];
         NSSortDescriptor *sortDecriptor = [NSSortDescriptor sortDescriptorWithKey:@"dateModified" ascending:YES];
@@ -41,7 +57,7 @@ NSString * const XRCurrencyStoreFileExtension = @"sqlite";
             NSArray *availableCurrencyCodes = [availableCurrencies allKeys];
             for (NSString *currencyCode in availableCurrencyCodes) {
                 // For each currencyCode add it.
-                XRCurrency *newCurrency = [NSEntityDescription insertNewObjectForEntityForName:@"MCCurrency" inManagedObjectContext:context];
+                XRCurrency *newCurrency = [NSEntityDescription insertNewObjectForEntityForName:@"XRCurrency" inManagedObjectContext:context];
                 NSString *uuidString = [[NSUUID UUID] UUIDString];
                 NSDate *now = [NSDate date];
                 NSString *currencyName = [[availableCurrencies objectForKey:currencyCode] objectForKey:@"name"];
@@ -56,7 +72,7 @@ NSString * const XRCurrencyStoreFileExtension = @"sqlite";
                 NSLog(@"Generated MCCurrency: %@", newCurrency);
             }
             NSError *saveError;
-            if ([_managedObjectContext save:&saveError]) {
+            if (![_backgroundContext save:&saveError]) {
                 NSLog(@"Something went wrong saving XRCurrencies: %@", saveError);
                 abort();
             }
@@ -82,8 +98,9 @@ NSString * const XRCurrencyStoreFileExtension = @"sqlite";
     NSSortDescriptor *sortDescriptor = [NSSortDescriptor sortDescriptorWithKey:@"name" ascending:YES];
     request.sortDescriptors = @[sortDescriptor];
     
-    NSFetchedResultsController *dataController = [[NSFetchedResultsController alloc] initWithFetchRequest:request managedObjectContext:_managedObjectContext sectionNameKeyPath:nil cacheName:nil];
+    NSFetchedResultsController *dataController = [[NSFetchedResultsController alloc] initWithFetchRequest:request managedObjectContext:_mainQueueContext sectionNameKeyPath:nil cacheName:nil];
     dataController.delegate = delegate;
+    
     return dataController;
 }
 #elif TARGET_OS_MAC
@@ -109,20 +126,34 @@ NSString * const XRCurrencyStoreFileExtension = @"sqlite";
 
 #pragma mark - Core Data Stack
 
-// Returns the managed object context for the application.
-// If the context doesn't already exist, it is created and bound to the persistent store coordinator for the application.
-- (NSManagedObjectContext *)managedObjectContext
+- (NSManagedObjectContext *)mainQueueContext
 {
-    if (_managedObjectContext != nil) {
-        return _managedObjectContext;
+    if (_mainQueueContext != nil) {
+        return _mainQueueContext;
     }
     
     NSPersistentStoreCoordinator *coordinator = [self persistentStoreCoordinator];
     if (coordinator != nil) {
-        _managedObjectContext = [[NSManagedObjectContext alloc] initWithConcurrencyType:NSConfinementConcurrencyType];
-        [_managedObjectContext setPersistentStoreCoordinator:coordinator];
+        _mainQueueContext = [[NSManagedObjectContext alloc] initWithConcurrencyType:NSMainQueueConcurrencyType];
+        [_mainQueueContext setPersistentStoreCoordinator:coordinator];
     }
-    return _managedObjectContext;
+    return _mainQueueContext;
+}
+
+// Returns the managed object context for the application.
+// If the context doesn't already exist, it is created and bound to the persistent store coordinator for the application.
+- (NSManagedObjectContext *)backgroundContext
+{
+    if (_backgroundContext != nil) {
+        return _backgroundContext;
+    }
+    
+    NSPersistentStoreCoordinator *coordinator = [self persistentStoreCoordinator];
+    if (coordinator != nil) {
+        _backgroundContext = [[NSManagedObjectContext alloc] initWithConcurrencyType:NSConfinementConcurrencyType];
+        [_backgroundContext setPersistentStoreCoordinator:coordinator];
+    }
+    return _backgroundContext;
 }
 
 // Returns the managed object model for the application.

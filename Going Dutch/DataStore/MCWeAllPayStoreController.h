@@ -27,6 +27,7 @@ The We All Pay Store Controller is designed to do writing in the background and 
 @property (nonatomic, strong, readonly) NSManagedObjectModel *managedObjectModel;
 
 + (MCWeAllPayStoreController *)defaultStore;
++ (void)prepareCurrencyStoreIfNecessary;
 
 - (BOOL)isDocumentStateNormal;
 

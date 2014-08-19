@@ -15,12 +15,14 @@
 
 @property (nonatomic, strong) NSPersistentStoreCoordinator *persistentStoreCoordinator;
 @property (nonatomic, strong) NSManagedObjectModel *managedObjectModel;
-@property (nonatomic, strong) NSManagedObjectContext *managedObjectContext;
+@property (nonatomic, strong) NSManagedObjectContext *backgroundContext;
+@property (nonatomic, strong) NSManagedObjectContext *mainQueueContext;
 
++ (BOOL)doesMyCurrencyDatabaseFileExist;
 + (id)sharedStore;
 
 - (void)prepareStoreWithCompletionHandler:(void (^)())completionHandler;
-- (XRCurrency *)fetchCurrencyWithCode:(NSString *)code;
+//- (XRCurrency *)fetchCurrencyWithCode:(NSString *)code;
 
 #if TARGET_OS_IPHONE
 - (NSFetchedResultsController *)getFetchedResultsControllerForDelegate:(id)delegate;
