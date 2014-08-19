@@ -73,7 +73,7 @@
     
     if (![self tonightsBill]) {
         _tonightsBill = [MCSharedBill addSharedBillToContext:[[MCWeAllPayStoreController defaultStore] mainThreadContext]];
-        [[MCWeAllPayStoreController defaultStore] savebackgroundContext];
+        [[MCWeAllPayStoreController defaultStore] saveMainThreadContext];
         _currentView = MCSelectEditTripTableView;
     } else {
         _currentView = MCSelectSharedBillTableView;

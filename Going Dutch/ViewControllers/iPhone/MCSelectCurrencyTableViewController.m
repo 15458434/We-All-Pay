@@ -54,6 +54,13 @@ NSString * const cellIdentifier = @"MCSelectCurrencyTableViewCell_iPhone";
     _searchResults = [NSMutableArray arrayWithArray:tempArray];
 }
 
+- (void)putIntThisPayment:(XRCurrency *)xrCurrency
+{
+#warning Incomplete method implementation.
+    // If there is a currency on this payment update it with the new stuff.
+    
+}
+
 #pragma mark - Inherited From Super
 
 - (id)initWithStyle:(UITableViewStyle)style
@@ -75,7 +82,7 @@ NSString * const cellIdentifier = @"MCSelectCurrencyTableViewCell_iPhone";
     // Uncomment the following line to display an Edit button in the navigation bar for this view controller.
     // self.navigationItem.rightBarButtonItem = self.editButtonItem;
     
-    _dataController = [[MCWeAllPayStoreController defaultStore] availableCurrencyControllerForDelegate:self];
+    _dataController = [[XRCurrencyStoreController sharedStore] availableCurrencyControllerForDelegate:nil];
 }
 
 - (void)didReceiveMemoryWarning
@@ -100,13 +107,15 @@ NSString * const cellIdentifier = @"MCSelectCurrencyTableViewCell_iPhone";
 
 - (void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath
 {
-    MCCurrency *thisCellsCurrency;
+    XRCurrency *thisCellsCurrency;
     if (tableView != [[self searchDisplayController] searchResultsTableView]) {
         thisCellsCurrency = [_dataController objectAtIndexPath:indexPath];
-        [_thisPayment setNewCurrencyAndAutomaticallyUpdateExchangeRate:thisCellsCurrency];
+        [self putIntThisPayment:thisCellsCurrency];
+//        [_thisPayment setNewCurrencyAndAutomaticallyUpdateExchangeRate:thisCellsCurrency];
     } else {
         thisCellsCurrency = [_searchResults objectAtIndex:[indexPath row]];
-        [_thisPayment setNewCurrencyAndAutomaticallyUpdateExchangeRate:thisCellsCurrency];
+        [self putIntThisPayment:thisCellsCurrency];
+//        [_thisPayment setNewCurrencyAndAutomaticallyUpdateExchangeRate:thisCellsCurrency];
     }
     [_thisPayment recalculateAveragePeopleOweAndStore];
     [[[self navigationController] presentingViewController] dismissViewControllerAnimated:YES completion:nil];
