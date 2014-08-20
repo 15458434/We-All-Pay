@@ -414,18 +414,10 @@
 {
     if (editingStyle == UITableViewCellEditingStyleDelete) {
         MCPerson *removablePerson = [dataController objectAtIndexPath:indexPath];
-        NSManagedObjectID *removablePersonID = [removablePerson objectID];
-        NSManagedObjectContext *backgroundContext = [[MCWeAllPayStoreController defaultStore] backgroundThreadContext];
-        [backgroundContext performBlock:^{
-            if (![_writableTonightsBill hasPersonPaidSomething:removablePerson]) {
-                MCPerson *removablePersonInBackgroundContext = (MCPerson *)[backgroundContext objectWithID:removablePersonID];
-                [_writableTonightsBill deletePerson:removablePersonInBackgroundContext];
-                [[MCWeAllPayStoreController defaultStore] savebackgroundContext];
-            }
-        }];
+        [_tonightsBill deletePerson:removablePerson];
+        [[MCWeAllPayStoreController defaultStore] saveMainThreadContext];
         didSomethingChange = YES;
     }
-    
 }
 
 /*

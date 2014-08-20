@@ -58,7 +58,7 @@ NSString * const cellIdentifier = @"MCSelectCurrencyTableViewCell_iPhone";
 {
 #warning Incomplete method implementation.
     // If there is a currency on this payment update it with the new stuff.
-    
+    NSLog(@"Currency selected.");
 }
 
 #pragma mark - Inherited From Super
