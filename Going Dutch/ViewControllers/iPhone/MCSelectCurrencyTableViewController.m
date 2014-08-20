@@ -57,9 +57,15 @@ NSString * const cellIdentifier = @"MCSelectCurrencyTableViewCell_iPhone";
 
 - (void)putIntThisPayment:(XRCurrency *)xrCurrency
 {
-#warning Incomplete method implementation.
     // If there is a currency on this payment update it with the new stuff.
-    
+    NSManagedObjectContext *mainQueueContext = [[MCWeAllPayStoreController defaultStore] mainThreadContext];
+    MCCurrency *newCurrency = [MCCurrency getCurrencyFrom:xrCurrency FromContext:mainQueueContext];
+    MCCurrency *oldCurrency = [_thisPayment currency];
+    _thisPayment.currency = newCurrency;
+    if (oldCurrency.sharedBill.count == 0 && oldCurrency.payment.count == 0) {
+        [mainQueueContext deleteObject:oldCurrency];
+    }
+    [_thisPayment setNewCurrencyAndAutomaticallyUpdateExchangeRate:newCurrency];
 }
 
 #pragma mark - Inherited From Super
@@ -116,11 +122,9 @@ NSString * const cellIdentifier = @"MCSelectCurrencyTableViewCell_iPhone";
     if (tableView != [[self searchDisplayController] searchResultsTableView]) {
         thisCellsCurrency = [_dataController objectAtIndexPath:indexPath];
         [self putIntThisPayment:thisCellsCurrency];
-//        [_thisPayment setNewCurrencyAndAutomaticallyUpdateExchangeRate:thisCellsCurrency];
     } else {
         thisCellsCurrency = [_searchResults objectAtIndex:[indexPath row]];
         [self putIntThisPayment:thisCellsCurrency];
-//        [_thisPayment setNewCurrencyAndAutomaticallyUpdateExchangeRate:thisCellsCurrency];
     }
     [_thisPayment recalculateAveragePeopleOweAndStore];
     [[[self navigationController] presentingViewController] dismissViewControllerAnimated:YES completion:nil];

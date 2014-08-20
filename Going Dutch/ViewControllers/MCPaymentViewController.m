@@ -73,6 +73,7 @@
     } else {
         [[MCWeAllPayStoreController defaultStore] endUndoGroup];
     }
+    [[MCWeAllPayStoreController defaultStore] saveMainThreadContext];
     [[[self navigationController] presentingViewController] dismissViewControllerAnimated:YES completion:nil];
 }
 
