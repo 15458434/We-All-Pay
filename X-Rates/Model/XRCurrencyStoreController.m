@@ -99,7 +99,7 @@ NSString * const XRCurrencyStoreFileExtension = @"sqlite";
     request.sortDescriptors = @[sortDescriptor];
     request.predicate = [NSPredicate predicateWithFormat:@"code like %@", code];
     NSError *currencyFetchError;
-    NSArray *fetchCurrencies = [_backgroundContext executeFetchRequest:request error:&currencyFetchError];
+    NSArray *fetchCurrencies = [context executeFetchRequest:request error:&currencyFetchError];
     if (currencyFetchError) {
         NSLog(@"Error fetching XRCurrency %@", currencyFetchError);
     }
@@ -121,12 +121,15 @@ NSString * const XRCurrencyStoreFileExtension = @"sqlite";
 #if TARGET_OS_IPHONE
 - (NSFetchedResultsController *)getFetchedResultsControllerForDelegate:(id)delegate
 {
-    NSParameterAssert([delegate conformsToProtocol:@protocol(NSFetchedResultsControllerDelegate)]);
+    if (delegate) {
+        // Delegate should conform to NSFetchedResultsControllerDelegate.
+        NSParameterAssert([delegate conformsToProtocol:@protocol(NSFetchedResultsControllerDelegate)]);
+    }
     NSFetchRequest *request = [[NSFetchRequest alloc] initWithEntityName:@"XRCurrency"];
     NSSortDescriptor *sortDescriptor = [NSSortDescriptor sortDescriptorWithKey:@"name" ascending:YES];
     request.sortDescriptors = @[sortDescriptor];
     
-    NSFetchedResultsController *dataController = [[NSFetchedResultsController alloc] initWithFetchRequest:request managedObjectContext:_mainQueueContext sectionNameKeyPath:nil cacheName:nil];
+    NSFetchedResultsController *dataController = [[NSFetchedResultsController alloc] initWithFetchRequest:request managedObjectContext:[self mainQueueContext] sectionNameKeyPath:nil cacheName:nil];
     dataController.delegate = delegate;
     
     return dataController;

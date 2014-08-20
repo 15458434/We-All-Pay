@@ -10,6 +10,9 @@
 #import "MCWeAllPayStoreController.h"
 #import "MCxRatesController.h"
 
+#import "XRCurrencyStoreController.h"
+#import "XRCurrency.h"
+
 @implementation MCCurrency (addons)
 
 + (MCCurrency *)getCurrencySelectedInCurrentLocaleFromContext:(NSManagedObjectContext *)context
@@ -29,6 +32,20 @@
     newCurrency.name = [currencyDictionaryFromCurrencyCode objectForKey:@"name"];
     newCurrency.symbol = [MCxRatesController getSymbolForCurrencyISOCode:currencyCodeFromCurrentLocale];
     newCurrency.isStillValid = @YES;
+    return newCurrency;
+}
+
++ (MCCurrency *)getCurrencyFrom:(XRCurrency *)xrCurrency FromContext:(NSManagedObjectContext *)context
+{
+    MCCurrency *newCurrency = [NSEntityDescription insertNewObjectForEntityForName:@"MCCurrency" inManagedObjectContext:context];
+    NSDate *now = [NSDate date];
+    newCurrency.dateCreated = now;
+    newCurrency.dateModified = now;
+    newCurrency.uniqueID = [[NSUUID UUID] UUIDString];
+    newCurrency.name = xrCurrency.name;
+    newCurrency.symbol = xrCurrency.symbol;
+    newCurrency.code = xrCurrency.code;
+    newCurrency.isStillValid = xrCurrency.isStillValid;
     return newCurrency;
 }
 

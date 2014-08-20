@@ -83,6 +83,8 @@
 		3876EF591840E86900C9546A /* MCCancelDoneTableViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 3876EF581840E86900C9546A /* MCCancelDoneTableViewController.m */; };
 		3877596A1924DBE50027A7F1 /* MCPaymentPresenceTableViewCell_iPhone.m in Sources */ = {isa = PBXBuildFile; fileRef = 387759691924DBE50027A7F1 /* MCPaymentPresenceTableViewCell_iPhone.m */; };
 		387D3A911870652B0060FAF8 /* Localizable.strings in Resources */ = {isa = PBXBuildFile; fileRef = 387D3A931870652B0060FAF8 /* Localizable.strings */; };
+		388063EE19A4D00C000CF36B /* XRCurrencyStoreControllerTest.m in Sources */ = {isa = PBXBuildFile; fileRef = 388063ED19A4D00C000CF36B /* XRCurrencyStoreControllerTest.m */; };
+		388063EF19A4D00C000CF36B /* XRCurrencyStoreControllerTest.m in Sources */ = {isa = PBXBuildFile; fileRef = 388063ED19A4D00C000CF36B /* XRCurrencyStoreControllerTest.m */; };
 		3886D3FD16B7A1CD00ECE64F /* AddressBook.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 3886D3FB16B7A1CD00ECE64F /* AddressBook.framework */; };
 		3886D3FE16B7A1CD00ECE64F /* AddressBookUI.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 3886D3FC16B7A1CD00ECE64F /* AddressBookUI.framework */; };
 		3886FE88191CF140004D88FB /* libTestFlight.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 3857304B18DAF2F100A900EA /* libTestFlight.a */; };
@@ -318,6 +320,7 @@
 		387759691924DBE50027A7F1 /* MCPaymentPresenceTableViewCell_iPhone.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = MCPaymentPresenceTableViewCell_iPhone.m; path = Views/iPhone/MCPaymentPresenceTableViewCell_iPhone.m; sourceTree = "<group>"; };
 		3879E78B19798F8B009E5D57 /* X-Rates.entitlements */ = {isa = PBXFileReference; lastKnownFileType = text.xml; path = "X-Rates.entitlements"; sourceTree = "<group>"; };
 		387D3A8E187053BA0060FAF8 /* nl */ = {isa = PBXFileReference; fileEncoding = 10; lastKnownFileType = text.plist.strings; name = nl; path = "nl.lproj/Main-Iphone.strings"; sourceTree = "<group>"; };
+		388063ED19A4D00C000CF36B /* XRCurrencyStoreControllerTest.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = XRCurrencyStoreControllerTest.m; sourceTree = "<group>"; };
 		3886D3FB16B7A1CD00ECE64F /* AddressBook.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = AddressBook.framework; path = System/Library/Frameworks/AddressBook.framework; sourceTree = SDKROOT; };
 		3886D3FC16B7A1CD00ECE64F /* AddressBookUI.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = AddressBookUI.framework; path = System/Library/Frameworks/AddressBookUI.framework; sourceTree = SDKROOT; };
 		3892E3A217903EF00038894B /* MCEditTripViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = MCEditTripViewController.h; path = ViewControllers/MCEditTripViewController.h; sourceTree = "<group>"; };
@@ -773,6 +776,7 @@
 		385F5301191C2C360012773D /* We all pay Tests */ = {
 			isa = PBXGroup;
 			children = (
+				388063ED19A4D00C000CF36B /* XRCurrencyStoreControllerTest.m */,
 				389DE90F197FD6DF00169645 /* MCCurrencyTest.m */,
 				389DE908197FC5E900169645 /* MCExchangeRateTest.m */,
 				389950AA191A9469000B00BC /* MCPaymentPresenceTest.m */,
@@ -1420,6 +1424,7 @@
 			buildActionMask = 2147483647;
 			files = (
 				389DE909197FC5E900169645 /* MCExchangeRateTest.m in Sources */,
+				388063EE19A4D00C000CF36B /* XRCurrencyStoreControllerTest.m in Sources */,
 				385F530F191C2D140012773D /* MCPaymentPresenceTest.m in Sources */,
 				385F5310191C2D140012773D /* MCPaymentAddonsTest.m in Sources */,
 				381318C319A2531500C821B0 /* XRCurrencyStoreController.m in Sources */,
@@ -1460,6 +1465,7 @@
 			files = (
 				381318C519A2531500C821B0 /* XRCurrencyStoreController.m in Sources */,
 				381318BF19A250C600C821B0 /* XRCurrency.xcdatamodeld in Sources */,
+				388063EF19A4D00C000CF36B /* XRCurrencyStoreControllerTest.m in Sources */,
 				38FE87EB195721670008EE74 /* X_RatesTests.m in Sources */,
 				381318D119A2869600C821B0 /* XRCurrency.m in Sources */,
 			);

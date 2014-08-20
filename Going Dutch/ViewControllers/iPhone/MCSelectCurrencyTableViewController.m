@@ -13,8 +13,9 @@
 #import "MCCurrency+addons.h"
 #import "MCPayment+addons.h"
 #import "MCExchangeRate+addons.h"
-
 #import "MCWeAllPayStoreController.h"
+
+#import "XRCurrency.h"
 #import "XRCurrencyStoreController.h"
 
 NSString * const cellIdentifier = @"MCSelectCurrencyTableViewCell_iPhone";
@@ -58,7 +59,7 @@ NSString * const cellIdentifier = @"MCSelectCurrencyTableViewCell_iPhone";
 {
 #warning Incomplete method implementation.
     // If there is a currency on this payment update it with the new stuff.
-    NSLog(@"Currency selected.");
+    
 }
 
 #pragma mark - Inherited From Super
@@ -82,7 +83,11 @@ NSString * const cellIdentifier = @"MCSelectCurrencyTableViewCell_iPhone";
     // Uncomment the following line to display an Edit button in the navigation bar for this view controller.
     // self.navigationItem.rightBarButtonItem = self.editButtonItem;
     
-    _dataController = [[XRCurrencyStoreController sharedStore] availableCurrencyControllerForDelegate:nil];
+    _dataController = [[XRCurrencyStoreController sharedStore] getFetchedResultsControllerForDelegate:nil];
+    NSError *fetchError;
+    if (![_dataController performFetch:&fetchError]) {
+        NSLog(@"Error fetching XRCurrencies: %@", fetchError);
+    }
 }
 
 - (void)didReceiveMemoryWarning
@@ -151,7 +156,7 @@ NSString * const cellIdentifier = @"MCSelectCurrencyTableViewCell_iPhone";
         cell = [[MCSelectCurrencyTableViewCell_iPhone alloc] initWithStyle:UITableViewCellStyleDefault reuseIdentifier:cellIdentifier];
     }
 
-    MCCurrency *thisCellsCurrency;
+    XRCurrency *thisCellsCurrency;
     if (tableView != [[self searchDisplayController] searchResultsTableView]) {
         thisCellsCurrency = [_dataController objectAtIndexPath:indexPath];
     } else {
