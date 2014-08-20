@@ -427,8 +427,9 @@ NSString * const MCWeAllPayStoreModelName = @"WeAllPayStore";
 
 - (NSArray *)getPeopleOnSharedBill:(MCSharedBill *)thisBill
 {
+    // Should be run on the mainThread
     NSParameterAssert(thisBill);
-    NSManagedObjectContext *context = [weAllPayStoreDocument managedObjectContext];
+    NSManagedObjectContext *context = _mainThreadContext;
     NSFetchRequest *request = [NSFetchRequest fetchRequestWithEntityName:@"MCPerson"];
     NSSortDescriptor *sda = [NSSortDescriptor sortDescriptorWithKey:@"firstName" ascending:YES];
     [request setSortDescriptors:@[sda]];
@@ -446,8 +447,9 @@ NSString * const MCWeAllPayStoreModelName = @"WeAllPayStore";
 
 - (NSArray *)getEmailaddressesFrom:(MCPerson *)thisPerson
 {
+    // Should be run on the mainThread
     NSParameterAssert(thisPerson);
-    NSManagedObjectContext *context = [weAllPayStoreDocument managedObjectContext];
+    NSManagedObjectContext *context = _mainThreadContext;
     NSFetchRequest *request = [NSFetchRequest fetchRequestWithEntityName:@"MCEmailAddress"];
     NSSortDescriptor *sd = [NSSortDescriptor sortDescriptorWithKey:@"emailAddress" ascending:YES];
     [request setSortDescriptors:@[sd]];
