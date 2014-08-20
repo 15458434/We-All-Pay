@@ -35,7 +35,7 @@
     NSDate *nu = [NSDate date];
     [sharedBill setDateCreated:nu];
     [sharedBill setDateModified:nu];
-    [sharedBill setMainCurrency:[MCCurrency getCurrencySelectedInCurrentLocaleFromContext:context]];
+    [sharedBill setMainCurrency:[MCCurrency generateCurrencyFromSelectedLocaleForContext:context]];
     return sharedBill;
 }
 

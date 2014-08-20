@@ -19,6 +19,19 @@
     return [MCCurrency getCurrencyWithCode:currentCurrencyCode FromContext:context];
 }
 
++ (MCCurrency *)generateCurrencyFromSelectedLocaleForContext:(NSManagedObjectContext *)context;
+{
+    NSDictionary *allCurrenciesDictionary = [MCxRatesController getCurrencyDictionary];
+    NSString *currencyCodeFromCurrentLocale = [[NSLocale currentLocale] objectForKey:NSLocaleCurrencyCode];
+    NSDictionary *currencyDictionaryFromCurrencyCode = [allCurrenciesDictionary objectForKey:currencyCodeFromCurrentLocale];
+    MCCurrency *newCurrency = [NSEntityDescription insertNewObjectForEntityForName:@"MCCurrency" inManagedObjectContext:context];
+    newCurrency.code = currencyCodeFromCurrentLocale;
+    newCurrency.name = [currencyDictionaryFromCurrencyCode objectForKey:@"name"];
+    newCurrency.symbol = [MCxRatesController getSymbolForCurrencyISOCode:currencyCodeFromCurrentLocale];
+    newCurrency.isStillValid = @YES;
+    return newCurrency;
+}
+
 + (void)addAllAvailableCurrenciesToContext:(NSManagedObjectContext *)context
 {
     NSDictionary *availableCurrencies = [MCxRatesController getCurrencyDictionary];

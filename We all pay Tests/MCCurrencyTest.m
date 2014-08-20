@@ -47,7 +47,7 @@
     NSError *error;
     NSUInteger amountOfAvailableCurrencies = [_context countForFetchRequest:request error:&error];
     XCTAssertNil(error, @"Error counting availableCurrenciesInContext: %@", [error localizedDescription]);
-    XCTAssertEqual(amountOfAvailableCurrencies, 160, @"Amount of available currencies should be 161.");
+    XCTAssertEqual(amountOfAvailableCurrencies, 158, @"Amount of available currencies should be 158.");
 }
 
 - (void)testGetCurrencySelectedInCurrentLocaleFromContext
