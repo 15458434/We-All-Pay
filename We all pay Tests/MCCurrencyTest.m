@@ -10,6 +10,8 @@
 #import "MCWeAllPayStoreController.h"
 #import "MCCurrency+addons.h"
 
+#import "XRCurrencyStoreController.h"
+
 @interface MCCurrencyTest : XCTestCase
 {
     MCWeAllPayStoreController *_mainController;
@@ -32,22 +34,13 @@
     _context = [[NSManagedObjectContext alloc] init];
     [_context setPersistentStoreCoordinator:persistentStoreCoordinator];
     
-    [MCCurrency addAllAvailableCurrenciesToContext:_context];
+    [XRCurrencyStoreController populateCurrencyDataBaseIfEmptyForContext:_context];
 }
 
 - (void)tearDown
 {
     // Put teardown code here. This method is called after the invocation of each test method in the class.
     [super tearDown];
-}
-
-- (void)testVerifyAddAllAvailableCurrenciesToContext
-{
-    NSFetchRequest *request = [NSFetchRequest fetchRequestWithEntityName:@"MCCurrency"];
-    NSError *error;
-    NSUInteger amountOfAvailableCurrencies = [_context countForFetchRequest:request error:&error];
-    XCTAssertNil(error, @"Error counting availableCurrenciesInContext: %@", [error localizedDescription]);
-    XCTAssertEqual(amountOfAvailableCurrencies, 158, @"Amount of available currencies should be 158.");
 }
 
 - (void)testGetCurrencySelectedInCurrentLocaleFromContext
@@ -59,6 +52,8 @@
 
 - (void)testGetCurrencyWithCode
 {
+    NSManagedObjectContext *mainQueueContext = [[XRCurrencyStoreController sharedStore] mainQueueContext];
+    [XRCurrencyStoreController populateCurrencyDataBaseIfEmptyForContext:mainQueueContext];
     MCCurrency *selectedCurrency = [MCCurrency getCurrencyWithCode:@"USD" FromContext:_context];
     XCTAssertTrue([[selectedCurrency code] isEqualToString:@"USD"], @"Wrong currency selected.");
 }

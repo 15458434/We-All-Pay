@@ -18,11 +18,12 @@
 #import "MCCurrency+addons.h"
 #import "MCExchangeRate+addons.h"
 
+#import "XRCurrencyStoreController.h"
+
 @interface MCSharedBillAddOnsTest : XCTestCase
-{
-    MCWeAllPayStoreController *_mainController;
-    NSManagedObjectContext *_context;
-}
+
+@property (nonatomic, strong) MCWeAllPayStoreController *mainController;
+@property (nonatomic, strong) NSManagedObjectContext *context;
 
 @end
 
@@ -41,7 +42,8 @@
     _context = [[NSManagedObjectContext alloc] init];
     [_context setPersistentStoreCoordinator:persistentStoreCoordinator];
     
-    [MCCurrency addAllAvailableCurrenciesToContext:_context];
+//    [MCCurrency addAllAvailableCurrenciesToContext:_context];
+    [XRCurrencyStoreController populateCurrencyDataBaseIfEmptyForContext:_context];
 }
 
 - (void)tearDown

@@ -17,13 +17,13 @@
 
 + (MCCurrency *)getCurrencySelectedInCurrentLocaleFromContext:(NSManagedObjectContext *)context
 {
-    NSParameterAssert(context);
-    NSString *currentCurrencyCode = [[NSLocale currentLocale] objectForKey:NSLocaleCurrencyCode];
-    return [MCCurrency getCurrencyWithCode:currentCurrencyCode FromContext:context];
+    // Still present for downwards compatibility.
+    return [MCCurrency generateCurrencyFromSelectedLocaleForContext:context];
 }
 
 + (MCCurrency *)generateCurrencyFromSelectedLocaleForContext:(NSManagedObjectContext *)context;
 {
+    NSParameterAssert(context);
     NSDictionary *allCurrenciesDictionary = [MCxRatesController getCurrencyDictionary];
     NSString *currencyCodeFromCurrentLocale = [[NSLocale currentLocale] objectForKey:NSLocaleCurrencyCode];
     NSDictionary *currencyDictionaryFromCurrencyCode = [allCurrenciesDictionary objectForKey:currencyCodeFromCurrentLocale];
@@ -73,17 +73,29 @@
 
 + (MCCurrency *)getCurrencyWithCode:(NSString *)code FromContext:(NSManagedObjectContext *)context
 {
-    NSFetchRequest *request = [NSFetchRequest fetchRequestWithEntityName:@"MCCurrency"];
-    NSSortDescriptor *sortDescriptor = [NSSortDescriptor sortDescriptorWithKey:@"dateCreated" ascending:YES];
-    [request setSortDescriptors:@[sortDescriptor]];
-    NSPredicate *predicate = [NSPredicate predicateWithFormat:@"code like %@", code];
-    [request setPredicate:predicate];
-    NSError *fetchError;
-    NSArray *fetchResults = [context executeFetchRequest:request error:&fetchError];
-    if (!fetchResults) {
-        NSLog(@"Fetching currencySelectedInCurrentLocale did fail: %@", [fetchError localizedDescription]);
-    }
-    return [fetchResults firstObject];
+    NSManagedObjectContext *xrMainQueueContext = [[XRCurrencyStoreController sharedStore] mainQueueContext];
+    XRCurrency *xrCurrency = [[XRCurrencyStoreController sharedStore] fetchCurrencyWithCode:code inContext:xrMainQueueContext];
+    MCCurrency *mcCurrency = [NSEntityDescription insertNewObjectForEntityForName:@"MCCurrency" inManagedObjectContext:context];
+    NSDate *now = [NSDate date];
+    mcCurrency.dateCreated = now;
+    mcCurrency.dateModified = now;
+    mcCurrency.uniqueID = [[NSUUID UUID] UUIDString];
+    mcCurrency.name = xrCurrency.name;
+    mcCurrency.symbol = xrCurrency.symbol;
+    mcCurrency.code = xrCurrency.code;
+    mcCurrency.isStillValid = xrCurrency.isStillValid;
+    return mcCurrency;
+//    NSFetchRequest *request = [NSFetchRequest fetchRequestWithEntityName:@"MCCurrency"];
+//    NSSortDescriptor *sortDescriptor = [NSSortDescriptor sortDescriptorWithKey:@"dateCreated" ascending:YES];
+//    [request setSortDescriptors:@[sortDescriptor]];
+//    NSPredicate *predicate = [NSPredicate predicateWithFormat:@"code like %@", code];
+//    [request setPredicate:predicate];
+//    NSError *fetchError;
+//    NSArray *fetchResults = [context executeFetchRequest:request error:&fetchError];
+//    if (!fetchResults) {
+//        NSLog(@"Fetching currencySelectedInCurrentLocale did fail: %@", [fetchError localizedDescription]);
+//    }
+//    return [fetchResults firstObject];
 }
 
 - (NSNumberFormatter *)numberFormatter
