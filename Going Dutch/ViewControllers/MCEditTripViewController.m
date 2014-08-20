@@ -55,6 +55,11 @@
     }
 }
 
+- (void)tappedInTheBackground:(id)sender
+{
+    [tripNameField resignFirstResponder];
+}
+
 #pragma mark - new in this class.
 
 - (void)performFetchAndReloadTableView:(NSNotification *)notification
@@ -147,6 +152,11 @@
         [[emptyMessage bigMessage] setAlpha:0.0];
     }
     [[self tableView] setBackgroundView:emptyMessage];
+    
+    // Make sure a tap in the background dismisses the keyboard as well.
+    UITapGestureRecognizer *thatTickles = [[UITapGestureRecognizer alloc] initWithTarget:self action:@selector(tappedInTheBackground:)];
+    [thatTickles setCancelsTouchesInView:NO];
+    [[self tableView] addGestureRecognizer:thatTickles];
 }
 
 
