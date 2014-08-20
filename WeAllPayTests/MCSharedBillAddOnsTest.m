@@ -323,6 +323,7 @@
     MCPerson *ilse = [tonightsBill addPerson];
     ilse.firstName = @"Ilse";
     MCPayment *paymentWithValidExchangeRate = [tonightsBill addPayment];
+    XCTAssertNotNil(paymentWithValidExchangeRate, @"Should be present.");
     XCTAssertTrue([tonightsBill areAllExchangeRatesValid], @"All Exchange Rate should be valid.");
 }
 
