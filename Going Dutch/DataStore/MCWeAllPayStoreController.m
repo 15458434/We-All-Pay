@@ -26,7 +26,7 @@ NSString * const MCWeAllPayStoreDirectoryName = @"WeAllPayStore/StoreContent";
 // File of the WeAllPayStore Database model file.
 NSString * const MCWeAllPayStoreModelName = @"WeAllPayStore";
 
-NSString * const MCiCloudWeAllPayStoreName = @"iCloud-WeAllPayStore6";
+NSString * const MCiCloudWeAllPayStoreName = @"iCloud-WeAllPayStore";
 
 @interface MCWeAllPayStoreController ()
 
