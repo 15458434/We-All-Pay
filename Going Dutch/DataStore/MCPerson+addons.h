@@ -30,5 +30,6 @@
 - (void)deleteEmailAddress:(MCEmailAddress *)eAddress;
 - (void)deletAllEmailAddresses;
 - (BOOL)isThereAnEmailAddress;
+- (BOOL)hasPersonMadePaymentWithInvalidExchangeRates;
 
 @end

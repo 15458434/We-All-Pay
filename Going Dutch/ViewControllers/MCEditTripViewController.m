@@ -419,9 +419,18 @@
     }
     [[thisCell nameLabel] setText:[thisCellsPerson getFullName]];
     [[thisCell emailLabel] setText:[thisCellsPerson defaultEmailAddress]];
-    NSNumberFormatter *nf = [[NSNumberFormatter alloc] init];
-    [nf setNumberStyle:NSNumberFormatterCurrencyStyle];
-    [[thisCell totalSpent] setText:[nf stringFromNumber:[_tonightsBill totalSumPaidBy:thisCellsPerson]]];
+    
+    if (![thisCellsPerson hasPersonMadePaymentWithInvalidExchangeRates]) {
+        [thisCell.fetchingExchangeRateIndicator stopAnimating];
+        [[thisCell totalSpent] setHidden:NO];
+        NSNumberFormatter *nf = [[NSNumberFormatter alloc] init];
+        [nf setNumberStyle:NSNumberFormatterCurrencyStyle];
+        [[thisCell totalSpent] setText:[nf stringFromNumber:[_tonightsBill totalSumPaidBy:thisCellsPerson]]];
+    } else {
+        [thisCell.fetchingExchangeRateIndicator startAnimating];
+        [[thisCell totalSpent] setHidden:YES];
+    }
+
     
     return thisCell;
 }

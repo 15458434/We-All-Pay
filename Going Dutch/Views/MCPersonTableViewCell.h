@@ -10,6 +10,7 @@
 
 @interface MCPersonTableViewCell : UITableViewCell
 
+@property (weak, nonatomic) IBOutlet UIActivityIndicatorView *fetchingExchangeRateIndicator;
 @property (weak, nonatomic) IBOutlet UIImageView *personImage;
 @property (weak, nonatomic) IBOutlet UILabel *nameLabel;
 @property (weak, nonatomic) IBOutlet UILabel *emailLabel;

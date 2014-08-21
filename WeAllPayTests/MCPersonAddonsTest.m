@@ -13,12 +13,14 @@
 #import "MCPerson+addons.h"
 #import "MCEmailAddress+addons.h"
 #import "MCPayment+addons.h"
+#import "MCExchangeRate+addons.h"
 
 @interface MCPersonAddonsTest : XCTestCase
 {
     MCWeAllPayStoreController *mainController;
-    NSManagedObjectContext *context;
 }
+
+@property (nonatomic, strong) NSManagedObjectContext *context;
 @end
 
 @implementation MCPersonAddonsTest
@@ -28,7 +30,7 @@
     [super setUp];
     // Put setup code here. This method is called before the invocation of each test method in the class.
     mainController = [MCWeAllPayStoreController defaultStore];
-    context = [mainController mainThreadContext];
+    _context = [mainController mainThreadContext];
 }
 
 - (void)tearDown
@@ -66,7 +68,7 @@
     [request setPredicate:compoundPredicate];
     NSError *error;
     NSArray *emailAddresses;
-    emailAddresses = [context executeFetchRequest:request error:&error];
+    emailAddresses = [_context executeFetchRequest:request error:&error];
     if (!emailAddresses) {
         XCTFail(@"No list of email addresses generated");
     }
@@ -111,6 +113,20 @@
     XCTAssertTrue([[thisPerson defaultEmailAddress] isEqualToString:emailAddressMark], @"setNewDefaultEmailaddressObject failes to set the correct defaultEmailAddress");
     [thisPerson deletAllEmailAddresses];
     [MCPerson deletePerson:thisPerson];
+}
+
+- (void)testHasPersonMadePaymentWithInvalidExchangeRates
+{
+    MCSharedBill *tonightsBill = [MCSharedBill addSharedBillToContext:_context];
+    MCPerson *mark = [tonightsBill addPerson];
+    MCPayment *thisPayment = [tonightsBill addPayment];
+    thisPayment.payingPerson = mark;
+    thisPayment.exchangeRate.status = [NSNumber numberWithShort:valid];
+    XCTAssertFalse([mark hasPersonMadePaymentWithInvalidExchangeRates], @"All payments person has made should be valid.");
+    thisPayment.exchangeRate.status = [NSNumber numberWithShort:invalid];
+    XCTAssertTrue([mark hasPersonMadePaymentWithInvalidExchangeRates], @"No payment should be valid.");
+    thisPayment.exchangeRate.status = [NSNumber numberWithShort:fetching];
+    XCTAssertTrue([mark hasPersonMadePaymentWithInvalidExchangeRates], @"No payment should be valid.");
 }
 
 @end

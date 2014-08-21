@@ -282,6 +282,25 @@
     }
 }
 
+- (BOOL)hasPersonMadePaymentWithInvalidExchangeRates
+{
+    NSFetchRequest *request = [[NSFetchRequest alloc] initWithEntityName:@"MCExchangeRate"];
+    request.predicate = [NSPredicate predicateWithFormat:@"payment.payingPerson = %@ AND status != 0", self];
+    NSManagedObjectContext *context = [self managedObjectContext];
+    NSError *countError;
+    NSUInteger amountOfInvalidExchangeRates = [context countForFetchRequest:request error:&countError];
+    if (countError) {
+        NSLog(@"Error counting invalid ExchangeRates: %@", countError);
+    }
+//    request.sortDescriptors = @[[NSSortDescriptor sortDescriptorWithKey:@"dateCreated" ascending:YES]];
+//    NSArray *array = [context executeFetchRequest:request error:&countError];
+    if (amountOfInvalidExchangeRates > 0) {
+        return YES;
+    } else {
+        return NO;
+    }
+}
+
 - (void)deletAllEmailAddresses
 {
     NSSet *copyOfEmailAddresses = [[self emailAddress] copy];

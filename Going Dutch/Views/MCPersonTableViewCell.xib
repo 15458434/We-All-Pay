@@ -1,12 +1,12 @@
 <?xml version="1.0" encoding="UTF-8" standalone="no"?>
-<document type="com.apple.InterfaceBuilder3.CocoaTouch.XIB" version="3.0" toolsVersion="5056" systemVersion="13C1021" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES">
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.XIB" version="3.0" toolsVersion="5056" systemVersion="13E28" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES">
     <dependencies>
         <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="3733"/>
     </dependencies>
     <objects>
         <placeholder placeholderIdentifier="IBFilesOwner" id="-1" userLabel="File's Owner"/>
         <placeholder placeholderIdentifier="IBFirstResponder" id="-2" customClass="UIResponder"/>
-        <tableViewCell contentMode="scaleToFill" restorationIdentifier="personTableViewCell" selectionStyle="blue" indentationWidth="10" rowHeight="60" id="2" customClass="MCPersonTableViewCell">
+        <tableViewCell contentMode="scaleToFill" restorationIdentifier="personTableViewCell" selectionStyle="blue" indentationWidth="10" reuseIdentifier="MCPersonTableViewCell" rowHeight="60" id="2" customClass="MCPersonTableViewCell">
             <rect key="frame" x="0.0" y="0.0" width="320" height="60"/>
             <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
             <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" restorationIdentifier="MCPersonTableViewCell" tableViewCell="2" id="U3r-HY-eHh">
@@ -20,7 +20,7 @@
                             <constraint firstAttribute="width" constant="44" id="YUB-Xd-itF"/>
                         </constraints>
                     </imageView>
-                    <label opaque="NO" clipsSubviews="YES" userInteractionEnabled="NO" contentMode="left" restorationIdentifier="nameLabel" text="1" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="4">
+                    <label opaque="NO" clipsSubviews="YES" userInteractionEnabled="NO" contentMode="left" restorationIdentifier="nameLabel" text="1" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="4" userLabel="fullName">
                         <rect key="frame" x="61" y="13" width="239" height="21"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" flexibleMaxX="YES" flexibleMaxY="YES"/>
                         <constraints>
@@ -30,7 +30,7 @@
                         <color key="textColor" cocoaTouchSystemColor="darkTextColor"/>
                         <color key="highlightedColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                     </label>
-                    <label opaque="NO" clipsSubviews="YES" userInteractionEnabled="NO" contentMode="left" restorationIdentifier="emailAddressLabel" text="2" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="5">
+                    <label opaque="NO" clipsSubviews="YES" userInteractionEnabled="NO" contentMode="left" restorationIdentifier="emailAddressLabel" text="2" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="5" userLabel="emailAddress">
                         <rect key="frame" x="61" y="37" width="209" height="15"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" flexibleMaxX="YES" flexibleMaxY="YES"/>
                         <constraints>
@@ -40,7 +40,7 @@
                         <color key="textColor" white="0.33333333333333331" alpha="1" colorSpace="calibratedWhite"/>
                         <color key="highlightedColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                     </label>
-                    <label opaque="NO" clipsSubviews="YES" userInteractionEnabled="NO" contentMode="left" restorationIdentifier="amountSpentLabel" text="3" textAlignment="right" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="9">
+                    <label opaque="NO" clipsSubviews="YES" userInteractionEnabled="NO" contentMode="left" restorationIdentifier="amountSpentLabel" text="3" textAlignment="right" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="9" userLabel="moneySpent">
                         <rect key="frame" x="278" y="37" width="22" height="15"/>
                         <autoresizingMask key="autoresizingMask" flexibleMinX="YES" widthSizable="YES" flexibleMaxY="YES"/>
                         <constraints>
@@ -49,12 +49,18 @@
                         <fontDescription key="fontDescription" name="HelveticaNeue-ThinItalic" family="Helvetica Neue" pointSize="12"/>
                         <color key="highlightedColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                     </label>
+                    <activityIndicatorView hidden="YES" opaque="NO" contentMode="scaleToFill" horizontalHuggingPriority="750" verticalHuggingPriority="750" misplaced="YES" hidesWhenStopped="YES" style="gray" translatesAutoresizingMaskIntoConstraints="NO" id="xLP-Lg-FSe">
+                        <rect key="frame" x="271" y="26" width="20" height="20"/>
+                        <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                    </activityIndicatorView>
                 </subviews>
                 <constraints>
+                    <constraint firstItem="xLP-Lg-FSe" firstAttribute="centerY" secondItem="9" secondAttribute="centerY" id="3uo-Mf-A28"/>
                     <constraint firstItem="3" firstAttribute="top" secondItem="U3r-HY-eHh" secondAttribute="top" constant="8" id="Cke-9I-whu"/>
                     <constraint firstItem="3" firstAttribute="leading" secondItem="U3r-HY-eHh" secondAttribute="leading" constant="9" id="E31-Du-x1i"/>
                     <constraint firstItem="4" firstAttribute="leading" secondItem="5" secondAttribute="leading" id="IdP-yU-JIO"/>
                     <constraint firstItem="9" firstAttribute="baseline" secondItem="5" secondAttribute="baseline" id="Kgl-Z3-c5e"/>
+                    <constraint firstItem="xLP-Lg-FSe" firstAttribute="centerX" secondItem="9" secondAttribute="centerX" id="Np9-U7-WCo"/>
                     <constraint firstItem="3" firstAttribute="bottom" secondItem="5" secondAttribute="bottom" id="O0f-xL-c4z"/>
                     <constraint firstItem="4" firstAttribute="baseline" secondItem="5" secondAttribute="baseline" constant="-20" id="SdS-eU-fqS"/>
                     <constraint firstItem="9" firstAttribute="trailing" secondItem="4" secondAttribute="trailing" id="UVt-AO-3EG"/>
@@ -68,6 +74,7 @@
             <inset key="separatorInset" minX="63" minY="0.0" maxX="0.0" maxY="0.0"/>
             <connections>
                 <outlet property="emailLabel" destination="5" id="8"/>
+                <outlet property="fetchingExchangeRateIndicator" destination="xLP-Lg-FSe" id="D83-in-pCB"/>
                 <outlet property="nameLabel" destination="4" id="7"/>
                 <outlet property="personImage" destination="3" id="6"/>
                 <outlet property="totalSpent" destination="9" id="10"/>
