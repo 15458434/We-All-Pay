@@ -13,6 +13,8 @@
 #import "MCPayment+addons.h"
 
 #import "MCWeAllPayStoreController.h"
+#import "XRCurrencyStoreController.h"
+#import "XRCurrency.h"
 
 NSString * const currencyCellIdentifier_iPad = @"MCSelectCurrencyTableViewCell_iPad";
 
@@ -54,7 +56,12 @@ NSString * const currencyCellIdentifier_iPad = @"MCSelectCurrencyTableViewCell_i
     
     // Uncomment the following line to display an Edit button in the navigation bar for this view controller.
     // self.navigationItem.rightBarButtonItem = self.editButtonItem;
-    _dataController = [[MCWeAllPayStoreController defaultStore] availableCurrencyControllerForDelegate:self];
+//    _dataController = [[MCWeAllPayStoreController defaultStore] availableCurrencyControllerForDelegate:self];
+    _dataController = [[XRCurrencyStoreController sharedStore] getFetchedResultsControllerForDelegate:self];
+    NSError *fetchError;
+    if (![_dataController performFetch:&fetchError]) {
+        NSLog(@"Error fetching currencies: %@", fetchError);
+    }
 }
 
 - (void)didReceiveMemoryWarning
@@ -79,12 +86,14 @@ NSString * const currencyCellIdentifier_iPad = @"MCSelectCurrencyTableViewCell_i
 
 - (void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath
 {
+    XRCurrency *selectedCurrency;
+    NSManagedObjectContext *context = [[MCWeAllPayStoreController defaultStore] mainThreadContext];
     if (tableView != [[self searchDisplayController] searchResultsTableView]) {
-        _thisPayment.currency = [_dataController objectAtIndexPath:indexPath];
-        [_thisPayment setNewCurrencyAndAutomaticallyUpdateExchangeRate:[_dataController objectAtIndexPath:indexPath]];
+        selectedCurrency = [_dataController objectAtIndexPath:indexPath];
+        [_thisPayment setNewCurrencyAndAutomaticallyUpdateExchangeRate:[MCCurrency getCurrencyFrom:selectedCurrency FromContext:context]];
     } else {
-        _thisPayment.currency = [_searchResults objectAtIndex:[indexPath row]];
-        [_thisPayment setNewCurrencyAndAutomaticallyUpdateExchangeRate:[_searchResults objectAtIndex:[indexPath row]]];
+        selectedCurrency = [_searchResults objectAtIndex:[indexPath row]];
+        [_thisPayment setNewCurrencyAndAutomaticallyUpdateExchangeRate:[MCCurrency getCurrencyFrom:selectedCurrency FromContext:context]];
     }
     [_thisPayment recalculateAveragePeopleOweAndStore];
     self.dismissMe();
@@ -116,7 +125,7 @@ NSString * const currencyCellIdentifier_iPad = @"MCSelectCurrencyTableViewCell_i
         cell = [[MCSelectCurrencyTableViewCell_iPad alloc] initWithStyle:UITableViewCellStyleDefault reuseIdentifier:currencyCellIdentifier_iPad];
     }
     
-    MCCurrency *thisCellsCurrency;
+    XRCurrency *thisCellsCurrency;
     if (tableView != [[self searchDisplayController] searchResultsTableView]) {
         thisCellsCurrency = [_dataController objectAtIndexPath:indexPath];
     } else {

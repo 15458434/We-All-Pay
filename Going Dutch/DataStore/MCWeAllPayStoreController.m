@@ -625,7 +625,9 @@ NSString * const MCiCloudWeAllPayStoreName = @"iCloud-WeAllPayStore";
     NSDictionary *storeOptions = @{NSInferMappingModelAutomaticallyOption: @YES,
                                    NSMigratePersistentStoresAutomaticallyOption: @YES,
                                    NSPersistentStoreUbiquitousContentNameKey : MCiCloudWeAllPayStoreName};
-//    NSDictionary *storeOptions = @{NSPersistentStoreUbiquitousContentNameKey: @"iCloudStore"};
+//    if ([NSPersistentStoreCoordinator removeUbiquitousContentAndPersistentStoreAtURL:storeURL options:storeOptions error:&error]) {
+//        NSLog(@"Error removing ubiquitous content: %@", error);
+//    }
     _persistentStoreCoordinator = [[NSPersistentStoreCoordinator alloc] initWithManagedObjectModel:[self managedObjectModel]];
     if (![_persistentStoreCoordinator addPersistentStoreWithType:NSSQLiteStoreType configuration:nil URL:storeURL options:storeOptions error:&error]) {
         /*
