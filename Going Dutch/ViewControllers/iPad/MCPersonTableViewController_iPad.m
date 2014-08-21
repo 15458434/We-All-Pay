@@ -53,6 +53,7 @@
         UIAlertView *alertView = [[UIAlertView alloc] initWithTitle:alertViewTitle message:alertViewMessage delegate:self cancelButtonTitle:alertViewNo otherButtonTitles:alertViewYes, nil];
         [alertView show];
     }
+    [[MCWeAllPayStoreController defaultStore] saveMainThreadContext];
 }
 
 - (IBAction)selectEmailAddressButtonPressed:(id)sender

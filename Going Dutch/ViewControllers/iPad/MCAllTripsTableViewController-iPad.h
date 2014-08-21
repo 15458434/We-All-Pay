@@ -15,7 +15,6 @@
 {
     MCTableEmptyMessage_iPad *emptyMessage;
     
-    NSFetchedResultsController *dataController;
     NSDateFormatter *df;
 }
 

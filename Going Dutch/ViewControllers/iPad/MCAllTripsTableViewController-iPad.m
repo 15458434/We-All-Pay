@@ -7,6 +7,7 @@
 //
 
 #import "MCAllTripsTableViewController-iPad.h"
+#import "UIViewController+WeAllPayStore.h"
 
 #import "MCAllTripsTableViewCell_iPad.h"
 #import "MCTableEmptyMessage_iPad.h"
@@ -17,6 +18,8 @@
 #import "MCTonightsBillTransfer.h"
 
 @interface MCAllTripsTableViewController_iPad ()
+
+@property (nonatomic, strong) NSFetchedResultsController *dataController;
 
 @end
 
@@ -38,7 +41,7 @@
 - (void)performFetch
 {
     NSError *error;
-    BOOL success = [dataController performFetch:&error];
+    BOOL success = [_dataController performFetch:&error];
     if (!success) {
         NSLog(@"Something went wrong: %@", error);
     }
@@ -46,7 +49,7 @@
 
 - (void)setEmptyMessage
 {
-    if (![[dataController fetchedObjects] count] == 0) {
+    if (![[_dataController fetchedObjects] count] == 0) {
         [UIView animateWithDuration:1.0 animations:^{
             [[emptyMessage bigMessage] setAlpha:0.0];
             [[self tableView] setSeparatorStyle:UITableViewCellSeparatorStyleSingleLine];
@@ -63,7 +66,7 @@
 
 - (void)setEmptyMessageNow
 {
-    if (![[dataController fetchedObjects] count] == 0) {
+    if (![[_dataController fetchedObjects] count] == 0) {
         [UIView animateWithDuration:0.0 animations:^{
             [[emptyMessage bigMessage] setAlpha:0.0];
             [[self tableView] setSeparatorStyle:UITableViewCellSeparatorStyleSingleLine];
@@ -99,6 +102,8 @@
     // Uncomment the following line to display an Edit button in the navigation bar for this view controller.
     // self.navigationItem.rightBarButtonItem = self.editButtonItem;
     
+    [self startRespondingToStoreChangeNotifications];
+    
     emptyMessage = [[NSBundle mainBundle] loadNibNamed:@"MCTableEmptyMessage_iPad" owner:self options:nil][0];
     [[emptyMessage bigMessage] setAlpha:0.0];
     [[self tableView] setBackgroundView:emptyMessage];
@@ -110,8 +115,8 @@
 {
     [super viewWillAppear:animated];
     
-    if (!dataController) {
-        dataController = [[MCWeAllPayStoreController defaultStore] allTripsDataControllerForDelegate:self];
+    if (!_dataController) {
+        _dataController = [[MCWeAllPayStoreController defaultStore] allTripsDataControllerForDelegate:self];
     }
     UIManagedDocument *weAllPayDocument = [[MCWeAllPayStoreController defaultStore] weAllPayStoreDocument];
     if (![[MCWeAllPayStoreController defaultStore] isDocumentStateNormal]) {
@@ -136,7 +141,7 @@
 {
     [super viewWillDisappear:animated];
     
-    dataController = nil;
+    _dataController = nil;
 }
 
 - (void)didReceiveMemoryWarning
@@ -146,13 +151,39 @@
     
     // When view is not loaded it's not onscreen. Therefor the dataController can be nil;
     if (![self isViewLoaded]) {
-        dataController = nil;
+        _dataController = nil;
     }
 }
 
 - (void)dealloc
 {
     [[NSNotificationCenter defaultCenter] removeObserver:self];
+}
+
+#pragma mark - Core Data Notifications
+
+- (void)storeWillBeSwapped:(NSNotification *)notification
+{
+    [super storeWillBeSwapped:notification];
+    dispatch_sync(dispatch_get_main_queue(), ^{
+        [[self view] setUserInteractionEnabled:NO];
+    });
+}
+
+-(void)storeDidSwap:(NSNotification *)notification
+{
+    [super storeDidSwap:notification];
+    dispatch_sync(dispatch_get_main_queue(), ^{
+        if (_dataController) {
+            NSError *fetchError;
+            if (![_dataController performFetch:&fetchError]) {
+                NSLog(@"Error fetching: %@", fetchError);
+            }
+        }
+        [[self tableView] reloadData];
+        [self setEmptyMessage];
+        [[self view] setUserInteractionEnabled:YES];
+    });
 }
 
 #pragma mark - NSFetchedResultsController
@@ -221,13 +252,13 @@
 - (NSInteger)tableView:(UITableView *)tableView numberOfRowsInSection:(NSInteger)section
 {
     // Return the number of rows in the section.
-    return [[dataController fetchedObjects] count];
+    return [[_dataController fetchedObjects] count];
 }
 
 
 - (UITableViewCell *)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath
 {
-    MCSharedBill *thisTrip = [dataController objectAtIndexPath:indexPath];
+    MCSharedBill *thisTrip = [_dataController objectAtIndexPath:indexPath];
     MCAllTripsTableViewCell_iPad *allTripsTableViewCell = [tableView dequeueReusableCellWithIdentifier:@"MCAllTripsTableViewCell_iPad"];
     
     if (![thisTrip tripName]) {
@@ -266,7 +297,8 @@
 {
     if (editingStyle == UITableViewCellEditingStyleDelete) {
         // Delete the row from the data source
-        [MCSharedBill deleteSharedbill:[dataController objectAtIndexPath:indexPath]];
+        [MCSharedBill deleteSharedbill:[_dataController objectAtIndexPath:indexPath]];
+        [[MCWeAllPayStoreController defaultStore] saveMainThreadContext];
     } else if (editingStyle == UITableViewCellEditingStyleInsert) {
         // Create a new instance of the appropriate class, insert it into the array, and add a new row to the table view
     }   
@@ -299,13 +331,14 @@
     MCSharedBill *theBill;
     NSIndexPath *indexPathOfSelectedRow = [[self tableView] indexPathForSelectedRow];
     if (indexPathOfSelectedRow) {
-        theBill = [dataController objectAtIndexPath:indexPathOfSelectedRow];
+        theBill = [_dataController objectAtIndexPath:indexPathOfSelectedRow];
     }
     if ([[segue destinationViewController] conformsToProtocol:@protocol(MCTonightsBillTransfer)]) {
         if (theBill) {
             [[segue destinationViewController] setTonightsBill:theBill];
         } else {
             [[segue destinationViewController] setTonightsBill:[MCSharedBill addSharedBill]];
+            [[MCWeAllPayStoreController defaultStore] mainThreadContext];
         }
     }
 }

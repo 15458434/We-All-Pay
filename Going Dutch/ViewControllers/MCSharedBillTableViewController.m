@@ -7,6 +7,7 @@
 //
 
 #import "MCSharedBillTableViewController.h"
+#import "UIViewController+WeAllPayStore.h"
 
 #import "MCWeAllPayStoreController.h"
 #import "MCSharedBill+addons.h"
@@ -26,6 +27,8 @@
 #import "MCReturnPayment.h"
 
 @interface MCSharedBillTableViewController ()
+
+@property (nonatomic, strong) NSFetchedResultsController *dataController;
 
 @end
 
@@ -86,18 +89,18 @@
     [request setPredicate:predicate];
     
     // Create the FetchedResultsController.
-    dataController = [[NSFetchedResultsController alloc] initWithFetchRequest:request managedObjectContext:[[MCWeAllPayStoreController defaultStore] mainThreadContext] sectionNameKeyPath:nil cacheName:[NSString stringWithFormat:@"All payments cache of trip: %@", [tonightsBill uniqueBillId]]];
+    _dataController = [[NSFetchedResultsController alloc] initWithFetchRequest:request managedObjectContext:[[MCWeAllPayStoreController defaultStore] mainThreadContext] sectionNameKeyPath:nil cacheName:[NSString stringWithFormat:@"All payments cache of trip: %@", [tonightsBill uniqueBillId]]];
     NSError *error;
-    BOOL success = [dataController performFetch:&error];
+    BOOL success = [_dataController performFetch:&error];
     if (!success) {
         NSLog(@"Something went wrong fetching the payments");
     }
-    [dataController setDelegate:self];
+    [_dataController setDelegate:self];
 }
 
 - (void)setEmptyMessage
 {
-    if (![[dataController fetchedObjects] count] == 0) {
+    if (![[_dataController fetchedObjects] count] == 0) {
         if ([[emptyMessage bigMessage] alpha] > 0.0) {
             [UIView animateWithDuration:1.0 animations:^{
                 [[emptyMessage bigMessage] setAlpha:0.0];
@@ -145,6 +148,8 @@
     
     [self setEdgesForExtendedLayout:UIRectEdgeNone];
     
+    [self startRespondingToStoreChangeNotifications];
+    
     // Load nib for PaymentTableViewCell and register it to the TableView.
     UINib *nib = [UINib nibWithNibName:@"MCPaymentTableViewCell" bundle:nil];
     [[self tableView] registerNib:nib forCellReuseIdentifier:@"MCPaymentTableViewCell"];
@@ -162,11 +167,11 @@
     
     [[self navigationController] setToolbarHidden:YES animated:YES];
     
-    if (!dataController) {
+    if (!_dataController) {
         [self prepareDataControllerAndFetch];
         [[self tableView] reloadData];
     }
-    if ([[dataController fetchedObjects] count] > 0) {
+    if ([[_dataController fetchedObjects] count] > 0) {
         [[emptyMessage bigMessage] setAlpha:0.0];
     }
 }
@@ -191,7 +196,7 @@
 {
     [super viewDidDisappear:animated];
     
-    dataController = nil;
+    _dataController = nil;
 }
 
 - (void)didReceiveMemoryWarning
@@ -209,6 +214,38 @@
 {
     [super decodeRestorableStateWithCoder:coder];
 }
+
+- (void)dealloc
+{
+    [[NSNotificationCenter defaultCenter] removeObserver:self];
+}
+
+#pragma mark - UIViewController+WeAllPayStore notifications
+
+- (void)storeWillBeSwapped:(NSNotification *)notification
+{
+    [super storeWillBeSwapped:notification];
+    dispatch_sync(dispatch_get_main_queue(), ^{
+        [[self view] setUserInteractionEnabled:NO];
+    });
+}
+
+-(void)storeDidSwap:(NSNotification *)notification
+{
+    [super storeDidSwap:notification];
+    dispatch_sync(dispatch_get_main_queue(), ^{
+        if (_dataController) {
+            NSError *fetchError;
+            if (![_dataController performFetch:&fetchError]) {
+                NSLog(@"Error fetching: %@", fetchError);
+            }
+        }
+        [[self tableView] reloadData];
+        [self setEmptyMessage];
+        [[self view] setUserInteractionEnabled:YES];
+    });
+}
+
 
 #pragma mark - NSNotification
 
@@ -315,17 +352,17 @@
 
 - (NSInteger)numberOfSectionsInTableView:(UITableView *)tableView
 {
-    return [[dataController sections] count];
+    return [[_dataController sections] count];
 }
 
 - (NSInteger)tableView:(UITableView *)tableView numberOfRowsInSection:(NSInteger)section
 {
-    return [[dataController sections][section] numberOfObjects];
+    return [[_dataController sections][section] numberOfObjects];
 }
 
 - (UITableViewCell *)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath
 {
-    MCPayment *thisCellsPayment = [dataController objectAtIndexPath:indexPath];
+    MCPayment *thisCellsPayment = [_dataController objectAtIndexPath:indexPath];
     if (!thisCellsPayment) {
     }
     MCPaymentTableViewCell *paymentCell = [tableView dequeueReusableCellWithIdentifier:@"MCPaymentTableViewCell"];
@@ -365,7 +402,7 @@
 - (void)tableView:(UITableView *)tableView commitEditingStyle:(UITableViewCellEditingStyle)editingStyle forRowAtIndexPath:(NSIndexPath *)indexPath
 {
     if (editingStyle == UITableViewCellEditingStyleDelete) {
-        MCPayment *toBeDeletedPayment = [dataController objectAtIndexPath:indexPath];
+        MCPayment *toBeDeletedPayment = [_dataController objectAtIndexPath:indexPath];
         [MCPayment deletePayment:toBeDeletedPayment];
         [[[MCWeAllPayStoreController defaultStore] mainThreadContext] processPendingChanges];
     }
@@ -414,7 +451,7 @@
         MCPayment *thePayment;
         NSIndexPath *indexPathOfSelectedRow = [[self tableView] indexPathForSelectedRow];
         if (indexPathOfSelectedRow) {
-            thePayment = [dataController objectAtIndexPath:indexPathOfSelectedRow];
+            thePayment = [_dataController objectAtIndexPath:indexPathOfSelectedRow];
         }
         if ([[[segue destinationViewController] viewControllers][0] respondsToSelector:@selector(setIsNew:)]) {
             if (thePayment) {

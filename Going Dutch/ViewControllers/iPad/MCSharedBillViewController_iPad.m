@@ -12,6 +12,7 @@
 
 #import "MCPerson+addons.h"
 #import "MCSharedBill+addons.h"
+#import "MCWeAllPayStoreController.h"
 
 #import "MCTools.h"
 #import "MCDismissMeBlockProtocol.h"
@@ -113,6 +114,7 @@
             [firstResponder resignFirstResponder];
         }
         [_tonightsBill deleteIfStillNew];
+        [[MCWeAllPayStoreController defaultStore] saveMainThreadContext];
     }
 }
 

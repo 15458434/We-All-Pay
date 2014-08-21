@@ -235,6 +235,7 @@
             }
         }
         [[self tableView] reloadData];
+        [self setEmptyMessage];
         [[self view] setUserInteractionEnabled:YES];
     });
 }

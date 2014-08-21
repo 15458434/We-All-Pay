@@ -19,7 +19,6 @@
 {
     MCTableEmptyMessage_iPad *emptyMessage;
     
-    NSFetchedResultsController *dataController;
 }
 
 @property (strong, nonatomic) MCSharedBill *tonightsBill;

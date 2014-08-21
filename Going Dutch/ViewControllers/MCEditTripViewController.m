@@ -10,6 +10,7 @@
 #import "MCPersonViewController.h"
 #import "MCSharedBillTableViewController.h"
 #import "MCSharedBillPageViewController.h"
+#import "UIViewController+WeAllPayStore.h"
 
 #import "MCWeAllPayStoreController.h"
 #import "MCPerson+addons.h"
@@ -20,6 +21,8 @@
 #import "MCTableEmptyMessage.h"
 
 @interface MCEditTripViewController ()
+
+@property (nonatomic, strong) NSFetchedResultsController *dataController;
 
 @end
 
@@ -76,7 +79,7 @@
 - (void)performFetch
 {
     NSError *error;
-    BOOL success = [dataController performFetch:&error];
+    BOOL success = [_dataController performFetch:&error];
     if (!success) {
         NSLog(@"Something went wrong: %@", error);
     }
@@ -84,7 +87,7 @@
 
 - (void)setEmptyMessage
 {
-    if (![[dataController fetchedObjects] count] == 0) {
+    if (![[_dataController fetchedObjects] count] == 0) {
         if ([[emptyMessage bigMessage] alpha] > 0.0) {
             [UIView animateWithDuration:1.0 animations:^{
                 [[emptyMessage bigMessage] setAlpha:0.0];
@@ -103,7 +106,7 @@
 
 - (void)setEmptyMessageNow
 {
-    if (![[dataController fetchedObjects] count] == 0) {
+    if (![[_dataController fetchedObjects] count] == 0) {
         [UIView animateWithDuration:0.0 animations:^{
             [[emptyMessage bigMessage] setAlpha:0.0];
             [[self tableView] setSeparatorStyle:UITableViewCellSeparatorStyleSingleLine];
@@ -142,13 +145,15 @@
     
     [self setEdgesForExtendedLayout:UIRectEdgeNone];
     
+    [self startRespondingToStoreChangeNotifications];
+    
     // Load and register Nib to the tableView for use.
     UINib *nib = [UINib nibWithNibName:@"MCPersonTableViewCell" bundle:nil];
     [[self tableView] registerNib:nib forCellReuseIdentifier:@"MCPersonTableViewCell"];
     
     emptyMessage = [[NSBundle mainBundle] loadNibNamed:@"MCTableEmptyMessage" owner:self options:nil][0];
     [[emptyMessage bigMessage] setText:NSLocalizedString(@"PEOPLE_LIST_EMPTY_MESSAGE", @"Press \"add Person\" to add a person who you'd like to share this bill with.")];
-    if ([[dataController fetchedObjects] count] > 0) {
+    if ([[_dataController fetchedObjects] count] > 0) {
         [[emptyMessage bigMessage] setAlpha:0.0];
     }
     [[self tableView] setBackgroundView:emptyMessage];
@@ -167,8 +172,8 @@
     [tripNameField setText:[_tonightsBill tripName]];
     [tripNameField setDelegate:self];
     
-    if (!dataController) {
-        dataController = [[MCWeAllPayStoreController defaultStore] sharedBillPeoplePresentDataControllerForDelegate:self];
+    if (!_dataController) {
+        _dataController = [[MCWeAllPayStoreController defaultStore] sharedBillPeoplePresentDataControllerForDelegate:self];
     }
     UIManagedDocument *weAllPayDocument = [[MCWeAllPayStoreController defaultStore] weAllPayStoreDocument];
     if (![[MCWeAllPayStoreController defaultStore] isDocumentStateNormal]) {
@@ -211,7 +216,7 @@
 {
     [super viewDidDisappear:animated];
     
-    dataController = nil;
+    _dataController = nil;
 }
 
 - (void)didReceiveMemoryWarning
@@ -249,6 +254,33 @@
     }];
     NSLog(@"PeoplePresent: WritableTonightsBillIsCreated has been executed.");
 }
+
+#pragma mark - UIViewController+WeAllPayStore notifications
+
+- (void)storeWillBeSwapped:(NSNotification *)notification
+{
+    [super storeWillBeSwapped:notification];
+    dispatch_sync(dispatch_get_main_queue(), ^{
+        [[self view] setUserInteractionEnabled:NO];
+    });
+}
+
+-(void)storeDidSwap:(NSNotification *)notification
+{
+    [super storeDidSwap:notification];
+    dispatch_sync(dispatch_get_main_queue(), ^{
+        if (_dataController) {
+            NSError *fetchError;
+            if (![_dataController performFetch:&fetchError]) {
+                NSLog(@"Error fetching: %@", fetchError);
+            }
+        }
+        [[self tableView] reloadData];
+        [self setEmptyMessage];
+        [[self view] setUserInteractionEnabled:YES];
+    });
+}
+
 
 #pragma mark - MCPersonViewChangeDelegate
 
@@ -366,19 +398,19 @@
 
 - (NSInteger)numberOfSectionsInTableView:(UITableView *)tableView
 {
-    return [[dataController sections] count];
+    return [[_dataController sections] count];
 }
 
 - (NSInteger)tableView:(UITableView *)tableView numberOfRowsInSection:(NSInteger)section
 {
     // Return the number of rows in the section.
 //    return [[dataController sections][section] numberOfObjects];
-    return [[dataController fetchedObjects] count];
+    return [[_dataController fetchedObjects] count];
 }
 
 - (UITableViewCell *)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath
 {
-    MCPerson *thisCellsPerson = [dataController objectAtIndexPath:indexPath];
+    MCPerson *thisCellsPerson = [_dataController objectAtIndexPath:indexPath];
     MCPersonTableViewCell *thisCell = [tableView dequeueReusableCellWithIdentifier:@"MCPersonTableViewCell"];
     
     [[thisCell personImage] setImage:[thisCellsPerson thumbnail]];
@@ -398,7 +430,7 @@
 - (BOOL)tableView:(UITableView *)tableView canEditRowAtIndexPath:(NSIndexPath *)indexPath
 {
     if ([[self tableView] isEditing]) {
-        MCPerson *person = [dataController objectAtIndexPath:indexPath];
+        MCPerson *person = [_dataController objectAtIndexPath:indexPath];
         if ([_tonightsBill hasPersonPaidSomething:person]) {
             return NO;
         } else {
@@ -413,7 +445,7 @@
 - (void)tableView:(UITableView *)tableView commitEditingStyle:(UITableViewCellEditingStyle)editingStyle forRowAtIndexPath:(NSIndexPath *)indexPath
 {
     if (editingStyle == UITableViewCellEditingStyleDelete) {
-        MCPerson *removablePerson = [dataController objectAtIndexPath:indexPath];
+        MCPerson *removablePerson = [_dataController objectAtIndexPath:indexPath];
         [_tonightsBill deletePerson:removablePerson];
         [[MCWeAllPayStoreController defaultStore] saveMainThreadContext];
         didSomethingChange = YES;
@@ -456,7 +488,7 @@
         id destination = [[segue destinationViewController] viewControllers][0];
         if ([destination conformsToProtocol:@protocol(MCTonightsBillTransfer)] && [destination conformsToProtocol:@protocol(MCThisPersonProtocol)]) {
             NSIndexPath *indexPathOfSelectedRow = [[self tableView] indexPathForSelectedRow];
-            MCPerson *thePerson = [dataController objectAtIndexPath:indexPathOfSelectedRow];
+            MCPerson *thePerson = [_dataController objectAtIndexPath:indexPathOfSelectedRow];
             if (!thePerson) {
                 // No person present create a new one.
                 thePerson = [_tonightsBill addPerson];

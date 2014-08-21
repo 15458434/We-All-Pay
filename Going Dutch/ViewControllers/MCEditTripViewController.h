@@ -29,7 +29,6 @@
     __strong IBOutlet MCTwoLabelsTitleView *twoLabelTitleView;
     MCTableEmptyMessage *emptyMessage;
     
-    NSFetchedResultsController *dataController;
     MCAddressBookDataReceiver *personReceiver;
     
     BOOL isInitAsNew;

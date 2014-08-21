@@ -48,6 +48,7 @@
     NSDate *now = [NSDate date];
     [_tonightsBill setDateModified:now];
     [[MCWeAllPayStoreController defaultStore] endUndoGroupAndProcess];
+    [[MCWeAllPayStoreController defaultStore] saveMainThreadContext];
     [[[self navigationController] presentingViewController] dismissViewControllerAnimated:YES completion:nil];
     if (_dismissMe) {
         _dismissMe();

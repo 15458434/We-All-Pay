@@ -7,6 +7,7 @@
 //
 
 #import "MCSharedBillPeoplePresentTableViewController-iPad.h"
+#import "UIViewController+WeAllPayStore.h"
 
 #import "MCPersonTableViewCell_iPad.h"
 #import "MCTableEmptyMessage_iPad.h"
@@ -19,6 +20,8 @@
 #import "MCDismissMeBlockProtocol.h"
 
 @interface MCSharedBillPeoplePresentTableViewController_iPad ()
+
+@property (nonatomic, strong) NSFetchedResultsController *dataController;
 
 @end
 
@@ -40,7 +43,7 @@
 - (void)performFetch
 {
     NSError *error;
-    BOOL success = [dataController performFetch:&error];
+    BOOL success = [_dataController performFetch:&error];
     if (!success) {
         NSLog(@"Something went wrong");
     }
@@ -48,7 +51,7 @@
 
 - (void)setEmptyMessage
 {
-    if (![[dataController fetchedObjects] count] == 0) {
+    if (![[_dataController fetchedObjects] count] == 0) {
         [UIView animateWithDuration:1.0 animations:^{
             [[emptyMessage bigMessage] setAlpha:0.0];
             [[self tableView] setSeparatorStyle:UITableViewCellSeparatorStyleSingleLine];
@@ -65,7 +68,7 @@
 
 - (void)setEmptyMessageNow
 {
-    if (![[dataController fetchedObjects] count] == 0) {
+    if (![[_dataController fetchedObjects] count] == 0) {
         [UIView animateWithDuration:0.0 animations:^{
             [[emptyMessage bigMessage] setAlpha:0.0];
             [[self tableView] setSeparatorStyle:UITableViewCellSeparatorStyleSingleLine];
@@ -101,6 +104,8 @@
     // Uncomment the following line to display an Edit button in the navigation bar for this view controller.
     // self.navigationItem.rightBarButtonItem = self.editButtonItem;
     
+    [self startRespondingToStoreChangeNotifications];
+    
     emptyMessage = [[NSBundle mainBundle] loadNibNamed:@"MCTableEmptyMessage_iPad" owner:self options:nil][0];
     [[emptyMessage bigMessage] setText:NSLocalizedString(@"PEOPLE_LIST_EMPTY_MESSAGE", @"Press \"add Person\" to add a person who you'd like to share this bill with.")];
     [[emptyMessage bigMessage] setAlpha:0.0];
@@ -117,8 +122,8 @@
         _tonightsBill = [myParent tonightsBill];
     }
     
-    if (!dataController) {
-        dataController = [[MCWeAllPayStoreController defaultStore] sharedBillPeoplePresentDataControllerForDelegate:self];
+    if (!_dataController) {
+        _dataController = [[MCWeAllPayStoreController defaultStore] sharedBillPeoplePresentDataControllerForDelegate:self];
     }
     UIManagedDocument *weAllPayDocument = [[MCWeAllPayStoreController defaultStore] weAllPayStoreDocument];
     if (![[MCWeAllPayStoreController defaultStore] isDocumentStateNormal]) {
@@ -153,6 +158,31 @@
 - (void)dealloc
 {
     [[NSNotificationCenter defaultCenter] removeObserver:self];
+}
+
+#pragma mark - Core Data Notifications
+
+- (void)storeWillBeSwapped:(NSNotification *)notification
+{
+    [super storeWillBeSwapped:notification];
+    dispatch_sync(dispatch_get_main_queue(), ^{
+        [[self view] setUserInteractionEnabled:NO];
+    });
+}
+
+-(void)storeDidSwap:(NSNotification *)notification
+{
+    [super storeDidSwap:notification];
+    dispatch_sync(dispatch_get_main_queue(), ^{
+        if (_dataController) {
+            NSError *fetchError;
+            if (![_dataController performFetch:&fetchError]) {
+                NSLog(@"Error fetching: %@", fetchError);
+            }
+        }
+        [[self tableView] reloadData];
+        [[self view] setUserInteractionEnabled:YES];
+    });
 }
 
 #pragma mark - NSFetchedResultsControllerDelegate
@@ -220,12 +250,12 @@
 - (NSInteger)tableView:(UITableView *)tableView numberOfRowsInSection:(NSInteger)section
 {
     // Return the number of rows in the section.
-    return [[dataController fetchedObjects] count];
+    return [[_dataController fetchedObjects] count];
 }
 
 - (UITableViewCell *)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath
 {
-    MCPerson *thisCellsPerson = [dataController objectAtIndexPath:indexPath];
+    MCPerson *thisCellsPerson = [_dataController objectAtIndexPath:indexPath];
     MCPersonTableViewCell_iPad *thisCell = [tableView dequeueReusableCellWithIdentifier:@"MCPersonTableViewCell_iPad"];
     
     [thisCell setCircularImage:[thisCellsPerson picture]];
@@ -243,7 +273,7 @@
 - (BOOL)tableView:(UITableView *)tableView canEditRowAtIndexPath:(NSIndexPath *)indexPath
 {
     // Return NO if you do not want the specified item to be editable.
-    if ([_tonightsBill hasPersonPaidSomething:[dataController objectAtIndexPath:indexPath]]) {
+    if ([_tonightsBill hasPersonPaidSomething:[_dataController objectAtIndexPath:indexPath]]) {
         return NO;
     } else {
         return [tableView isEditing];
@@ -255,7 +285,8 @@
 {
     if (editingStyle == UITableViewCellEditingStyleDelete) {
         // Delete the row from the data source
-        [MCPerson deletePerson:[dataController objectAtIndexPath:indexPath]];
+        [MCPerson deletePerson:[_dataController objectAtIndexPath:indexPath]];
+        [[MCWeAllPayStoreController defaultStore] saveMainThreadContext];
     } else if (editingStyle == UITableViewCellEditingStyleInsert) {
         // Create a new instance of the appropriate class, insert it into the array, and add a new row to the table view
     }   
@@ -288,7 +319,7 @@
         id destination = [[segue destinationViewController] viewControllers][0];
         if ([destination conformsToProtocol:@protocol(MCThisPersonProtocol)]) {
             NSIndexPath *ip = [[self tableView] indexPathForSelectedRow];
-            [destination setThisPerson:[dataController objectAtIndexPath:ip]];
+            [destination setThisPerson:[_dataController objectAtIndexPath:ip]];
             [[self tableView] deselectRowAtIndexPath:ip animated:YES];
         }
         if ([destination conformsToProtocol:@protocol(MCDismissMeBlockProtocol)]) {

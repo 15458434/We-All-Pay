@@ -29,8 +29,6 @@
     __strong IBOutlet MCTwoLabelsTitleView *twoLabelTitleView;
     MCTableEmptyMessage *emptyMessage;
     
-    NSFetchedResultsController *dataController;
-    
     UIBarButtonItem *mailButton;
     UIBarButtonItem *returnPaymentButton;
 }

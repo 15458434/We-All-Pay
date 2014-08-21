@@ -17,8 +17,6 @@
 @interface MCSharedBillPaymentsTableViewController_iPad : UITableViewController <NSFetchedResultsControllerDelegate, MCTonightsBillTransfer>
 {
     MCTableEmptyMessage_iPad *emptyMessage;
-    
-    NSFetchedResultsController *dataController;
 }
 
 @property (strong, nonatomic) MCSharedBill *tonightsBill;
