@@ -13,9 +13,12 @@
 
 - (void)startRespondingToStoreChangeNotifications
 {
+    NSManagedObjectContext *mainQueueContext = [[MCWeAllPayStoreController defaultStore] mainThreadContext];
     NSManagedObjectContext *backgroundSaveContext = [[MCWeAllPayStoreController defaultStore] backgroundThreadContext];
     NSNotificationCenter *dc = [NSNotificationCenter defaultCenter];
+    [dc addObserver:self selector:@selector(storeWillSave:) name:NSManagedObjectContextWillSaveNotification object:mainQueueContext];
     [dc addObserver:self selector:@selector(storeWillSave:) name:NSManagedObjectContextWillSaveNotification object:backgroundSaveContext];
+    [dc addObserver:self selector:@selector(storeDidSave:) name:NSManagedObjectContextDidSaveNotification object:mainQueueContext];
     [dc addObserver:self selector:@selector(storeDidSave:) name:NSManagedObjectContextDidSaveNotification object:backgroundSaveContext];
     [dc addObserver:self selector:@selector(storeWillBeSwapped:) name:NSPersistentStoreCoordinatorStoresWillChangeNotification object:[[MCWeAllPayStoreController defaultStore] persistentStoreCoordinator]];
     [dc addObserver:self selector:@selector(storeDidSwap:) name:NSPersistentStoreCoordinatorStoresDidChangeNotification object:[[MCWeAllPayStoreController defaultStore] persistentStoreCoordinator]];

@@ -41,7 +41,6 @@
     _context = [[NSManagedObjectContext alloc] initWithConcurrencyType:NSMainQueueConcurrencyType];
     [_context setPersistentStoreCoordinator:persistentStoreCoordinator];
     
-//    [MCCurrency addAllAvailableCurrenciesToContext:_context];
     [XRCurrencyStoreController populateCurrencyDataBaseIfEmptyForContext:_context];
 }
 

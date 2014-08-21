@@ -42,26 +42,26 @@
 + (void)deleteSharedbill:(MCSharedBill *)deleteBill
 {
     NSManagedObjectContext *context = [deleteBill managedObjectContext];
-//    // Delete all paymentPresences of all payments.
-//    for (MCPayment *payment in [deleteBill payments]) {
-//        for (MCPaymentPresence *paymentPresence in [payment peopleSharingPayment]) {
-//            [context deleteObject:paymentPresence];
-//        }
-//    }
-//    // Delete all payments of the to be deleted sharedbill
-//    for (MCPayment *payment in [deleteBill payments]) {
-//        [context deleteObject:payment];
-//    }
-//    // Delete all emailaddresses of all people of the sharedbill.
-//    for (MCPerson *person in [deleteBill peoplePresent]) {
-//        for (MCEmailAddress *emailAddress in [person emailAddress]) {
-//            [context deleteObject:emailAddress];
-//        }
-//    }
-//    // Delete all people of the sharedbill.
-//    for (MCPerson *person in [deleteBill peoplePresent]) {
-//        [context deleteObject:person];
-//    }
+    // Delete all paymentPresences of all payments.
+    for (MCPayment *payment in [deleteBill payments]) {
+        for (MCPaymentPresence *paymentPresence in [payment peopleSharingPayment]) {
+            [context deleteObject:paymentPresence];
+        }
+    }
+    // Delete all payments of the to be deleted sharedbill
+    for (MCPayment *payment in [deleteBill payments]) {
+        [context deleteObject:payment];
+    }
+    // Delete all emailaddresses of all people of the sharedbill.
+    for (MCPerson *person in [deleteBill peoplePresent]) {
+        for (MCEmailAddress *emailAddress in [person emailAddress]) {
+            [context deleteObject:emailAddress];
+        }
+    }
+    // Delete all people of the sharedbill.
+    for (MCPerson *person in [deleteBill peoplePresent]) {
+        [context deleteObject:person];
+    }
     // Delete the sharedBill itself.
     [context deleteObject:deleteBill];
 }
@@ -581,27 +581,27 @@
 
 - (void)prepareForDeletion
 {
-    NSManagedObjectContext *context = [self managedObjectContext];
-    // Delete all paymentPresences of all payments.
-    for (MCPayment *payment in [self payments]) {
-        for (MCPaymentPresence *paymentPresence in [payment peopleSharingPayment]) {
-            [context deleteObject:paymentPresence];
-        }
-    }
-    // Delete all payments of the to be deleted sharedbill
-    for (MCPayment *payment in [self payments]) {
-        [context deleteObject:payment];
-    }
-    // Delete all emailaddresses of all people of the sharedbill.
-    for (MCPerson *person in [self peoplePresent]) {
-        for (MCEmailAddress *emailAddress in [person emailAddress]) {
-            [context deleteObject:emailAddress];
-        }
-    }
-    // Delete all people of the sharedbill.
-    for (MCPerson *person in [self peoplePresent]) {
-        [context deleteObject:person];
-    }
+//    NSManagedObjectContext *context = [self managedObjectContext];
+//    // Delete all paymentPresences of all payments.
+//    for (MCPayment *payment in [self payments]) {
+//        for (MCPaymentPresence *paymentPresence in [payment peopleSharingPayment]) {
+//            [context deleteObject:paymentPresence];
+//        }
+//    }
+//    // Delete all payments of the to be deleted sharedbill
+//    for (MCPayment *payment in [self payments]) {
+//        [context deleteObject:payment];
+//    }
+//    // Delete all emailaddresses of all people of the sharedbill.
+//    for (MCPerson *person in [self peoplePresent]) {
+//        for (MCEmailAddress *emailAddress in [person emailAddress]) {
+//            [context deleteObject:emailAddress];
+//        }
+//    }
+//    // Delete all people of the sharedbill.
+//    for (MCPerson *person in [self peoplePresent]) {
+//        [context deleteObject:person];
+//    }
 }
 
 @end

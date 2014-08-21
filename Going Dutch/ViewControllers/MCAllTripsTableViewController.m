@@ -216,10 +216,28 @@
 
 #pragma mark - UIViewController+WeAllPayStore notifications
 
-//-(void)storeDidChange:(NSNotification *)notification
-//{
-//    NSLog(@"%@: store did change.", self);
-//}
+- (void)storeWillBeSwapped:(NSNotification *)notification
+{
+    [super storeWillBeSwapped:notification];
+    dispatch_sync(dispatch_get_main_queue(), ^{
+        [[self view] setUserInteractionEnabled:NO];
+    });
+}
+
+-(void)storeDidSwap:(NSNotification *)notification
+{
+    [super storeDidSwap:notification];
+    dispatch_sync(dispatch_get_main_queue(), ^{
+        if (_dataController) {
+            NSError *fetchError;
+            if (![_dataController performFetch:&fetchError]) {
+                NSLog(@"Error fetching: %@", fetchError);
+            }
+        }
+        [[self tableView] reloadData];
+        [[self view] setUserInteractionEnabled:YES];
+    });
+}
 
 #pragma mark - MCReturnPaymentViewControllerDelegate
 

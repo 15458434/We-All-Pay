@@ -26,6 +26,8 @@ NSString * const MCWeAllPayStoreDirectoryName = @"WeAllPayStore/StoreContent";
 // File of the WeAllPayStore Database model file.
 NSString * const MCWeAllPayStoreModelName = @"WeAllPayStore";
 
+NSString * const MCiCloudWeAllPayStoreName = @"iCloud-WeAllPayStore5";
+
 @interface MCWeAllPayStoreController ()
 
 @property (nonatomic, strong) MCxRatesController *xRatesfetchController;
@@ -491,7 +493,9 @@ NSString * const MCWeAllPayStoreModelName = @"WeAllPayStore";
 - (void)startRespondingToStoreChangeNotifications
 {
     NSNotificationCenter *dc = [NSNotificationCenter defaultCenter];
+    [dc addObserver:self selector:@selector(storeWillSave:) name:NSManagedObjectContextWillSaveNotification object:_mainThreadContext];
     [dc addObserver:self selector:@selector(storeWillSave:) name:NSManagedObjectContextWillSaveNotification object:_backgroundThreadContext];
+    [dc addObserver:self selector:@selector(storeDidSave:) name:NSManagedObjectContextDidSaveNotification object:_mainThreadContext];
     [dc addObserver:self selector:@selector(storeDidSave:) name:NSManagedObjectContextDidSaveNotification object:_backgroundThreadContext];
     [dc addObserver:self selector:@selector(storeWillBeSwapped:) name:NSPersistentStoreCoordinatorStoresWillChangeNotification object:_persistentStoreCoordinator];
     [dc addObserver:self selector:@selector(storeDidSwap:) name:NSPersistentStoreCoordinatorStoresDidChangeNotification object:_persistentStoreCoordinator];
@@ -511,7 +515,7 @@ NSString * const MCWeAllPayStoreModelName = @"WeAllPayStore";
 
 - (void)storeDidSave:(NSNotification *)notification
 {
-    NSLog(@"MCWeAllPayStoreController: Store did save: %@", notification);
+    NSLog(@"MCWeAllPayStoreController: Store did save.");
     if (notification.object != _mainThreadContext) {
         [_mainThreadContext performBlockAndWait:^{
             NSLog(@"Merging changes into mainContext.");
@@ -530,20 +534,38 @@ NSString * const MCWeAllPayStoreModelName = @"WeAllPayStore";
 {
     NSLog(@"MCWeAllPayStoreController: Store will be swapped.");
     // Has main Context changes if yes save.
+    [_mainThreadContext performBlockAndWait:^{
+        if ([_mainThreadContext hasChanges]) {
+            [self saveMainThreadContext];
+        }
     // mainContext reset.
+        [_mainThreadContext reset];
+    }];
     // Has backgroundContext changes if yes save.
+    [_backgroundThreadContext performBlockAndWait:^{
+        if ([_backgroundThreadContext hasChanges]) {
+            [self savebackgroundContext];
+        }
     // backgroundContext reset.
+        [_backgroundThreadContext reset];
+    }];
+
 }
 
 - (void)storeDidSwap:(NSNotification *)notification
 {
     NSLog(@"MCWeAllPayStoreController: Store did swap.");
-    
 }
 
 - (void)storedidUpdateFromUbiquitousContainer:(NSNotification *)notification
 {
     NSLog(@"MCWeAllPayStoreController: Store did update from Ubiquitous Container.");
+    [_mainThreadContext performBlockAndWait:^{
+        [_mainThreadContext mergeChangesFromContextDidSaveNotification:notification];
+    }];
+    [_backgroundThreadContext performBlockAndWait:^{
+        [_backgroundThreadContext mergeChangesFromContextDidSaveNotification:notification];
+    }];
 }
 
 
@@ -560,8 +582,10 @@ NSString * const MCWeAllPayStoreModelName = @"WeAllPayStore";
     NSPersistentStoreCoordinator *coordinator = [self persistentStoreCoordinator];
     if (coordinator != nil) {
         _mainThreadContext = [[NSManagedObjectContext alloc] initWithConcurrencyType:NSMainQueueConcurrencyType];
+        _mainThreadContext.mergePolicy = NSMergeByPropertyObjectTrumpMergePolicy;
         [_mainThreadContext setPersistentStoreCoordinator:coordinator];
         _backgroundThreadContext = [[NSManagedObjectContext alloc] initWithConcurrencyType:NSPrivateQueueConcurrencyType];
+        _backgroundThreadContext.mergePolicy = NSMergeByPropertyObjectTrumpMergePolicy;
         [_backgroundThreadContext setPersistentStoreCoordinator:coordinator];
     }
     return _mainThreadContext;
@@ -599,7 +623,8 @@ NSString * const MCWeAllPayStoreModelName = @"WeAllPayStore";
     
     NSError *error = nil;
     NSDictionary *storeOptions = @{NSInferMappingModelAutomaticallyOption: @YES,
-                                   NSMigratePersistentStoresAutomaticallyOption: @YES};
+                                   NSMigratePersistentStoresAutomaticallyOption: @YES,
+                                   NSPersistentStoreUbiquitousContentNameKey : MCiCloudWeAllPayStoreName};
 //    NSDictionary *storeOptions = @{NSPersistentStoreUbiquitousContentNameKey: @"iCloudStore"};
     _persistentStoreCoordinator = [[NSPersistentStoreCoordinator alloc] initWithManagedObjectModel:[self managedObjectModel]];
     if (![_persistentStoreCoordinator addPersistentStoreWithType:NSSQLiteStoreType configuration:nil URL:storeURL options:storeOptions error:&error]) {
