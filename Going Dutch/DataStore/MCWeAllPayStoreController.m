@@ -160,7 +160,7 @@ NSString * const MCiCloudWeAllPayStoreName = @"iCloud-WeAllPayStore";
     if (succes) {
         NSLog(@"Main Thread Context: Succesfully saved.");
     } else {
-        NSLog(@"Save not possible: %@", [error localizedDescription]);
+        NSLog(@"MainQueue save not possible: %@", error);
     }
 }
 
@@ -171,7 +171,7 @@ NSString * const MCiCloudWeAllPayStoreName = @"iCloud-WeAllPayStore";
     if (succes) {
         NSLog(@"Background Thread Context Succesfully saved.");
     } else {
-        NSLog(@"Save not possible: %@", [error localizedDescription]);
+        NSLog(@"Background save not possible: %@", error);
     }
 }
 
@@ -622,6 +622,8 @@ NSString * const MCiCloudWeAllPayStoreName = @"iCloud-WeAllPayStore";
     NSURL *storeURL = [directoryURL URLByAppendingPathComponent:MCWeAllPayStoreFileName];
     
     NSError *error = nil;
+//    NSDictionary *storeOptions = @{NSInferMappingModelAutomaticallyOption: @YES,
+//                                   NSMigratePersistentStoresAutomaticallyOption: @YES};
     NSDictionary *storeOptions = @{NSInferMappingModelAutomaticallyOption: @YES,
                                    NSMigratePersistentStoresAutomaticallyOption: @YES,
                                    NSPersistentStoreUbiquitousContentNameKey : MCiCloudWeAllPayStoreName};

@@ -338,7 +338,7 @@
             [[segue destinationViewController] setTonightsBill:theBill];
         } else {
             [[segue destinationViewController] setTonightsBill:[MCSharedBill addSharedBill]];
-            [[MCWeAllPayStoreController defaultStore] mainThreadContext];
+            [[MCWeAllPayStoreController defaultStore] saveMainThreadContext];
         }
     }
 }
