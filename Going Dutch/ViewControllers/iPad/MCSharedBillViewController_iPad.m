@@ -39,6 +39,13 @@
         }
     }
     isEditingMode = !isEditingMode;
+    if (isEditingMode) {
+        UIBarButtonItem *doneButton = [[UIBarButtonItem alloc] initWithBarButtonSystemItem:UIBarButtonSystemItemDone target:self action:@selector(editButtonPressed:)];
+        [[self navigationItem] setRightBarButtonItem:doneButton];
+    } else {
+        UIBarButtonItem *editButton = [[UIBarButtonItem alloc] initWithBarButtonSystemItem:UIBarButtonSystemItemEdit target:self action:@selector(editButtonPressed:)];
+        [[self navigationItem] setRightBarButtonItem:editButton];
+    }
 }
 
 - (IBAction)addressBookButtonPressed:(id)sender
