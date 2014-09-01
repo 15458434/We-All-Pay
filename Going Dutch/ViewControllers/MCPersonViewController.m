@@ -249,8 +249,6 @@
 {
     [super viewDidLoad];
     
-    [[MCWeAllPayStoreController defaultStore] beginUndoGroup];
-    
     [self prepareDataController];
     
     if (!_thisPerson) {

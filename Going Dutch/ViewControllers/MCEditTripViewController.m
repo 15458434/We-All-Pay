@@ -498,6 +498,7 @@
         if ([destination conformsToProtocol:@protocol(MCTonightsBillTransfer)] && [destination conformsToProtocol:@protocol(MCThisPersonProtocol)]) {
             NSIndexPath *indexPathOfSelectedRow = [[self tableView] indexPathForSelectedRow];
             MCPerson *thePerson = [_dataController objectAtIndexPath:indexPathOfSelectedRow];
+            [[MCWeAllPayStoreController defaultStore] beginUndoGroup];
             if (!thePerson) {
                 // No person present create a new one.
                 thePerson = [_tonightsBill addPerson];
