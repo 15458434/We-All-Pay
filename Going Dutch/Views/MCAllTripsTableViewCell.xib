@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="UTF-8" standalone="no"?>
-<document type="com.apple.InterfaceBuilder3.CocoaTouch.XIB" version="3.0" toolsVersion="5056" systemVersion="13C1021" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES">
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.XIB" version="3.0" toolsVersion="5056" systemVersion="13E28" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES">
     <dependencies>
         <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="3733"/>
     </dependencies>
@@ -47,13 +47,19 @@
                         <color key="textColor" cocoaTouchSystemColor="darkTextColor"/>
                         <color key="highlightedColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                     </label>
+                    <activityIndicatorView hidden="YES" opaque="NO" contentMode="scaleToFill" horizontalHuggingPriority="750" verticalHuggingPriority="750" hidesWhenStopped="YES" style="gray" translatesAutoresizingMaskIntoConstraints="NO" id="3sr-sc-oUN">
+                        <rect key="frame" x="241" y="6" width="20" height="20"/>
+                        <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                    </activityIndicatorView>
                 </subviews>
                 <constraints>
                     <constraint firstAttribute="trailing" secondItem="28" secondAttribute="trailing" constant="19" id="ASU-KR-EPG"/>
+                    <constraint firstItem="3sr-sc-oUN" firstAttribute="centerX" secondItem="28" secondAttribute="centerX" id="E2y-WP-7nh"/>
                     <constraint firstItem="8" firstAttribute="top" secondItem="3" secondAttribute="top" constant="22" id="JO5-kd-KMX"/>
                     <constraint firstItem="3" firstAttribute="baseline" secondItem="28" secondAttribute="baseline" id="Lk2-i4-ctf"/>
                     <constraint firstItem="3" firstAttribute="leading" secondItem="0Bp-j2-w0M" secondAttribute="leading" constant="20" id="OhL-bw-cLk"/>
                     <constraint firstItem="8" firstAttribute="leading" secondItem="19" secondAttribute="leading" id="Ryv-1f-r8j"/>
+                    <constraint firstItem="3sr-sc-oUN" firstAttribute="centerY" secondItem="28" secondAttribute="centerY" id="U89-4S-pST"/>
                     <constraint firstItem="28" firstAttribute="leading" secondItem="3" secondAttribute="trailing" constant="8" id="bzv-Qt-sx2"/>
                     <constraint firstItem="3" firstAttribute="top" secondItem="0Bp-j2-w0M" secondAttribute="top" constant="5" id="d9m-pt-GfS"/>
                     <constraint firstItem="3" firstAttribute="leading" secondItem="8" secondAttribute="leading" id="fs8-IE-SIM"/>
@@ -68,6 +74,7 @@
                 <outlet property="peoplePresentLabel" destination="8" id="32"/>
                 <outlet property="totalCostLabel" destination="28" id="31"/>
                 <outlet property="tripLabel" destination="3" id="7"/>
+                <outlet property="waitingForXRatesIndicator" destination="3sr-sc-oUN" id="6bg-Nu-7Bc"/>
             </connections>
         </tableViewCell>
     </objects>

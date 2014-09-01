@@ -314,10 +314,19 @@
     }
     [[allTripsTableViewCell peoplePresentLabel] setText:[thisTrip stringOfApproxPeoplePresent]];
 
-    NSNumberFormatter *nf = [[NSNumberFormatter alloc] init];
-    [nf setNumberStyle:NSNumberFormatterCurrencyStyle];
-    NSString *moneyString = [nf stringFromNumber:[thisTrip totalSumOfMoneyOfThisSharedBill]];
-    [[allTripsTableViewCell totalCostLabel] setText:moneyString];
+    if ([thisTrip areAllExchangeRatesValid]) {
+        
+        NSNumberFormatter *nf = [[NSNumberFormatter alloc] init];
+        [nf setNumberStyle:NSNumberFormatterCurrencyStyle];
+        NSString *moneyString = [nf stringFromNumber:[thisTrip totalSumOfMoneyOfThisSharedBill]];
+        [[allTripsTableViewCell totalCostLabel] setHidden:NO];
+        [[allTripsTableViewCell waitingForXRatesIndicator] stopAnimating];
+        [[allTripsTableViewCell totalCostLabel] setText:moneyString];
+    } else {
+        [[allTripsTableViewCell totalCostLabel] setHidden:YES];
+        [[allTripsTableViewCell waitingForXRatesIndicator] startAnimating];
+    }
+
     
     
     // fill extraLabel with dateModified.
