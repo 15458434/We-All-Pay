@@ -202,10 +202,10 @@
     NSNumberFormatter *nf = [[self currency] numberFormatter];
     [nf setNumberStyle:NSNumberFormatterDecimalStyle];
     [nf setFormatterBehavior:NSNumberFormatterBehaviorDefault];
-//    [[MCWeAllPayStoreController defaultStore] beginUndoGroupWithoutRegistration];
+    [[MCWeAllPayStoreController defaultStore] beginUndoGroupWithoutRegistration];
     [self setMoney:[nf numberFromString:moneyString]];
     [self recalculateAveragePeopleOweAndStore];
-//    [[MCWeAllPayStoreController defaultStore] endUndoGroupWithoutRegistration];
+    [[MCWeAllPayStoreController defaultStore] endUndoGroupWithoutRegistration];
 }
 
 - (void)putMoneyValueInCurrencyAsAString:(NSString *)moneyString
@@ -213,10 +213,10 @@
     NSNumberFormatter *nf = [[self currency] numberFormatter];
     [nf setFormatterBehavior:NSNumberFormatterBehaviorDefault];
     
-//    [[MCWeAllPayStoreController defaultStore] beginUndoGroupWithoutRegistration];
+    [[MCWeAllPayStoreController defaultStore] beginUndoGroupWithoutRegistration];
     [self setMoney:[nf numberFromString:moneyString]];
     [self recalculateAveragePeopleOweAndStore];
-//    [[MCWeAllPayStoreController defaultStore] endUndoGroupWithoutRegistration];
+    [[MCWeAllPayStoreController defaultStore] endUndoGroupWithoutRegistration];
 }
 
 - (NSNumber *)moneyInMainCurrency

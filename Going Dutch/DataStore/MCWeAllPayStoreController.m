@@ -84,10 +84,13 @@ NSString * const MCiCloudWeAllPayStoreName = @"iCloud-WeAllPayStore";
     [self mainThreadContext];
     [self startRespondingToStoreChangeNotifications];
     if (_mainThreadContext && _backgroundThreadContext) {
+        _mainThreadContext.undoManager = [[NSUndoManager alloc] init];
+        [[_mainThreadContext undoManager] disableUndoRegistration];
         if (completionHandler) {
             completionHandler(YES);
         }
     } else {
+        NSLog(@"Unable to open We All Pay Store.");
         if (completionHandler) {
             completionHandler(NO);
         }
@@ -199,36 +202,31 @@ NSString * const MCiCloudWeAllPayStoreName = @"iCloud-WeAllPayStore";
 
 - (void)beginUndoGroup
 {
-    NSManagedObjectContext *context = [weAllPayStoreDocument managedObjectContext];
-    [[context undoManager] enableUndoRegistration];
-    [[context undoManager] beginUndoGrouping];
+    [[_mainThreadContext undoManager] enableUndoRegistration];
+    [[_mainThreadContext undoManager] beginUndoGrouping];
 }
 
 - (void)beginUndoGroupWithoutRegistration
 {
-    NSManagedObjectContext *context = [weAllPayStoreDocument managedObjectContext];
-    [[context undoManager] beginUndoGrouping];
+    [[_mainThreadContext undoManager] beginUndoGrouping];
 }
 
 - (void)endUndoGroup
 {
-    NSManagedObjectContext *context = [weAllPayStoreDocument managedObjectContext];
-    [[context undoManager] endUndoGrouping];
-    [[context undoManager] disableUndoRegistration];
+    [[_mainThreadContext undoManager] endUndoGrouping];
+    [[_mainThreadContext undoManager] disableUndoRegistration];
 }
 
 - (void)endUndoGroupWithoutRegistration
 {
-    NSManagedObjectContext *context = [weAllPayStoreDocument managedObjectContext];
-    [[context undoManager] endUndoGrouping];
+    [[_mainThreadContext undoManager] endUndoGrouping];
 }
 
 - (void)endUndoGroupAndProcess
 {
-    NSManagedObjectContext *context = [weAllPayStoreDocument managedObjectContext];
-    [[context undoManager] endUndoGrouping];
-    [[context undoManager] disableUndoRegistration];
-    [context processPendingChanges];
+    [[_mainThreadContext undoManager] endUndoGrouping];
+    [[_mainThreadContext undoManager] disableUndoRegistration];
+    [_mainThreadContext processPendingChanges];
 //    [self saveStore];
 //    NSError *saveError;
 //    BOOL saveSuccesful = [context save:&saveError];
@@ -239,25 +237,22 @@ NSString * const MCiCloudWeAllPayStoreName = @"iCloud-WeAllPayStore";
 
 - (void)endUndoGroupAndProcessWithoutRegistration
 {
-    NSManagedObjectContext *context = [weAllPayStoreDocument managedObjectContext];
-    [[context undoManager] endUndoGrouping];
-    [context processPendingChanges];
+    [[_mainThreadContext undoManager] endUndoGrouping];
+    [_mainThreadContext processPendingChanges];
 //    [self saveStore];
 }
 
 - (void)endUndoGroupAndUndo
 {
-    NSManagedObjectContext *context = [weAllPayStoreDocument managedObjectContext];
-    [[context undoManager] endUndoGrouping];
-    [[context undoManager] undoNestedGroup];
-    [[context undoManager] disableUndoRegistration];
+    [[_mainThreadContext undoManager] endUndoGrouping];
+    [[_mainThreadContext undoManager] undoNestedGroup];
+    [[_mainThreadContext undoManager] disableUndoRegistration];
 }
 
 - (void)endUndoGroupAndUndoWithoutRegistration
 {
-    NSManagedObjectContext *context = [weAllPayStoreDocument managedObjectContext];
-    [[context undoManager] endUndoGrouping];
-    [[context undoManager] undoNestedGroup];    
+    [[_mainThreadContext undoManager] endUndoGrouping];
+    [[_mainThreadContext undoManager] undoNestedGroup];
 }
 
 - (MCxRatesController *)xRatesfetchController

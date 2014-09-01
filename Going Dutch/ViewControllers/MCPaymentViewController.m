@@ -47,7 +47,7 @@
 - (IBAction)mainCancelButtonPressed:(id)sender
 {
     [self dismissKeyboard];
-    if ([[[_thisPayment managedObjectContext] undoManager] canUndo]) {
+    if ([[[[MCWeAllPayStoreController defaultStore] mainThreadContext] undoManager] canUndo]) {
         [[MCWeAllPayStoreController defaultStore] endUndoGroupAndUndo];
     } else {
         [[MCWeAllPayStoreController defaultStore] endUndoGroup];
@@ -68,7 +68,7 @@
         [self storePlaceViewData];
     }
 
-    if ([[[_thisPayment managedObjectContext] undoManager] canUndo]) {
+    if ([[[[MCWeAllPayStoreController defaultStore] mainThreadContext] undoManager] canUndo]) {
         [[MCWeAllPayStoreController defaultStore] endUndoGroupAndProcess];
     } else {
         [[MCWeAllPayStoreController defaultStore] endUndoGroup];
@@ -141,6 +141,7 @@
     [tonightsBill setDateModified:nu];
     [_thisPayment setDateModified:nu];
 //    didSomethingChange = YES;
+    [[MCWeAllPayStoreController defaultStore] endUndoGroupWithoutRegistration];
 }
 
 #pragma mark - new in this class
@@ -310,7 +311,7 @@
         }
     } else if (textField == payerView) {
         if (!peoplePickerCancelled) {
-            [[MCWeAllPayStoreController defaultStore] endUndoGroupAndProcessWithoutRegistration];
+            [[MCWeAllPayStoreController defaultStore] endUndoGroupWithoutRegistration];
             [self donePersonPicker:self];
         } else {
             peoplePickerCancelled = YES;
@@ -348,9 +349,7 @@
     [super viewDidLoad];
     // Do any additional setup after loading the view from its nib.
     
-    NSManagedObjectContext *context = [[MCWeAllPayStoreController defaultStore] mainThreadContext];
-    [[context undoManager] enableUndoRegistration];
-    [[context undoManager] beginUndoGrouping];
+    [[MCWeAllPayStoreController defaultStore] beginUndoGroup];
     
     // When _thisPayment was not passed along a new one should be created.
     if (!_thisPayment) {
@@ -427,10 +426,6 @@
         } else {
             [[twoLabelTitleView mainLabel] setText:NSLocalizedString(@"EXISTING_PAYMENT_HEADER", @"Header in the paymentView which states payment")];
             [[twoLabelTitleView subLabel] setText:NSLocalizedString(@"EXISTING_PAYMENT_SUBHEADER", @"Sub header in the paymentView which states edit payment data")];
-        }
-        if (SYSTEM_VERSION_LESS_THAN(@"7.0")) {
-            [[twoLabelTitleView mainLabel] setTextColor:[UIColor whiteColor]];
-            [[twoLabelTitleView subLabel] setTextColor:[UIColor whiteColor]];
         }
         [[self navigationItem] setTitleView:twoLabelTitleView];
     }
@@ -623,8 +618,6 @@
          if ([destination conformsToProtocol:@protocol(MCThisPaymentProtocol)]) {
              [destination setThisPayment:_thisPayment];
          }
-         __weak typeof(self) weakSelf = self;
-         
      }
  }
 
