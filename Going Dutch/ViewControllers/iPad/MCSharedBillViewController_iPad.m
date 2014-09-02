@@ -61,9 +61,9 @@
     [peoplePicker setModalPresentationStyle:UIModalPresentationFormSheet];
     
     [[self navigationController] presentViewController:peoplePicker animated:YES completion:^{
-        id<GAITracker> tracker = [[GAI sharedInstance] defaultTracker];
-        [tracker set:kGAIScreenName value:@"Peoplepicker_iPad"];
-        [tracker send:[[GAIDictionaryBuilder createAppView] build]];
+//        id<GAITracker> tracker = [[GAI sharedInstance] defaultTracker];
+//        [tracker set:kGAIScreenName value:@"Peoplepicker_iPad"];
+//        [tracker send:[[GAIDictionaryBuilder createAppView] build]];
     }];
 }
 
@@ -106,9 +106,9 @@
 {
     [super viewDidAppear:animated];
     
-    id<GAITracker> tracker = [[GAI sharedInstance] defaultTracker];
-    [tracker set:kGAIScreenName value:@"MCSharedBillMainViewController_iPad"];
-    [tracker send:[[GAIDictionaryBuilder createAppView] build]];
+//    id<GAITracker> tracker = [[GAI sharedInstance] defaultTracker];
+//    [tracker set:kGAIScreenName value:@"MCSharedBillMainViewController_iPad"];
+//    [tracker send:[[GAIDictionaryBuilder createAppView] build]];
 }
 
 - (void)willMoveToParentViewController:(UIViewController *)parent
@@ -177,9 +177,9 @@
             [destination setDismissMe:^{
                 MCSharedBillViewController_iPad *strongSelf = weakSelf;
                 if (strongSelf) {
-                    id<GAITracker> tracker = [[GAI sharedInstance] defaultTracker];
-                    [tracker set:kGAIScreenName value:@"MCSharedBillMainViewController_iPad"];
-                    [tracker send:[[GAIDictionaryBuilder createAppView] build]];
+//                    id<GAITracker> tracker = [[GAI sharedInstance] defaultTracker];
+//                    [tracker set:kGAIScreenName value:@"MCSharedBillMainViewController_iPad"];
+//                    [tracker send:[[GAIDictionaryBuilder createAppView] build]];
                 }
             }];
         }
@@ -196,9 +196,9 @@
             [destination setDismissMe:^{
                 MCSharedBillViewController_iPad *strongSelf = weakSelf;
                 if (strongSelf) {
-                    id<GAITracker> tracker = [[GAI sharedInstance] defaultTracker];
-                    [tracker set:kGAIScreenName value:@"MCSharedBillMainViewController_iPad"];
-                    [tracker send:[[GAIDictionaryBuilder createAppView] build]];
+//                    id<GAITracker> tracker = [[GAI sharedInstance] defaultTracker];
+//                    [tracker set:kGAIScreenName value:@"MCSharedBillMainViewController_iPad"];
+//                    [tracker send:[[GAIDictionaryBuilder createAppView] build]];
                 }
             }];
         }
@@ -216,9 +216,9 @@
                 MCSharedBillViewController_iPad *strongSelf = weakSelf;
                 if (strongSelf) {
                     [weakSelf dismissViewControllerAnimated:YES completion:^{
-                        id<GAITracker> tracker = [[GAI sharedInstance] defaultTracker];
-                        [tracker set:kGAIScreenName value:@"MCSharedBillMainViewController_iPad"];
-                        [tracker send:[[GAIDictionaryBuilder createAppView] build]];
+//                        id<GAITracker> tracker = [[GAI sharedInstance] defaultTracker];
+//                        [tracker set:kGAIScreenName value:@"MCSharedBillMainViewController_iPad"];
+//                        [tracker send:[[GAIDictionaryBuilder createAppView] build]];
                     }];
                 }
             }];

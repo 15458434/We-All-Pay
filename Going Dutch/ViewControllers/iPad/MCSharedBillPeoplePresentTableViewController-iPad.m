@@ -327,9 +327,9 @@
             [destination setDismissMe:^{
                 MCSharedBillPeoplePresentTableViewController_iPad *strongSelf = weakSelf;
                 if (strongSelf) {
-                    id<GAITracker> tracker = [[GAI sharedInstance] defaultTracker];
-                    [tracker set:kGAIScreenName value:@"MCSharedBillMainViewController_iPad"];
-                    [tracker send:[[GAIDictionaryBuilder createAppView] build]];
+//                    id<GAITracker> tracker = [[GAI sharedInstance] defaultTracker];
+//                    [tracker set:kGAIScreenName value:@"MCSharedBillMainViewController_iPad"];
+//                    [tracker send:[[GAIDictionaryBuilder createAppView] build]];
                 }
             }];
         }

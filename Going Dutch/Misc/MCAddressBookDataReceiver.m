@@ -119,9 +119,9 @@
 - (void)peoplePickerNavigationControllerDidCancel:(ABPeoplePickerNavigationController *)peoplePicker
 {
     [viewController dismissViewControllerAnimated:YES completion:^{
-        id<GAITracker> tracker = [[GAI sharedInstance] defaultTracker];
-        [tracker set:kGAIScreenName value:@"MCSharedBillMainViewController_iPad"];
-        [tracker send:[[GAIDictionaryBuilder createAppView] build]];
+//        id<GAITracker> tracker = [[GAI sharedInstance] defaultTracker];
+//        [tracker set:kGAIScreenName value:@"MCSharedBillMainViewController_iPad"];
+//        [tracker send:[[GAIDictionaryBuilder createAppView] build]];
     }];
 }
 
@@ -130,9 +130,9 @@
     [viewController dismissViewControllerAnimated:YES completion:^{
 //        [[[viewController navigationItem] rightBarButtonItem] setEnabled:YES];
         [delegate receiveANewPersonFromAddressBook:thisPerson];
-        id<GAITracker> tracker = [[GAI sharedInstance] defaultTracker];
-        [tracker set:kGAIScreenName value:@"MCSharedBillMainViewController_iPad"];
-        [tracker send:[[GAIDictionaryBuilder createAppView] build]];
+//        id<GAITracker> tracker = [[GAI sharedInstance] defaultTracker];
+//        [tracker set:kGAIScreenName value:@"MCSharedBillMainViewController_iPad"];
+//        [tracker send:[[GAIDictionaryBuilder createAppView] build]];
     }];
     [self importPersonDataAndSave:person];
     return NO;

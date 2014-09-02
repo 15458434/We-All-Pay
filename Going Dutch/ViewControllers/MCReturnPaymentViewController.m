@@ -184,9 +184,9 @@ typedef NS_ENUM(BOOL, MCXRatesMissing) {
 {
     [super viewDidAppear:animated];
     
-    id<GAITracker> tracker = [[GAI sharedInstance] defaultTracker];
-    [tracker set:kGAIScreenName value:@"MCSolutionScreen_iPhone"];
-    [tracker send:[[GAIDictionaryBuilder createAppView] build]];
+//    id<GAITracker> tracker = [[GAI sharedInstance] defaultTracker];
+//    [tracker set:kGAIScreenName value:@"MCSolutionScreen_iPhone"];
+//    [tracker send:[[GAIDictionaryBuilder createAppView] build]];
 }
 
 - (void)viewDidDisappear:(BOOL)animated

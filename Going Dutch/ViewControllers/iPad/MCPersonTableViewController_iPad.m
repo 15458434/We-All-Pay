@@ -178,13 +178,13 @@
 {
     [super viewDidAppear:animated];
     
-    id<GAITracker> tracker = [[GAI sharedInstance] defaultTracker];
-    if (isNew) {
-        [tracker set:kGAIScreenName value:@"MCPersonNewView_iPad"];
-    } else {
-        [tracker set:kGAIScreenName value:@"MCPersonDetailView_iPad"];
-    }
-    [tracker send:[[GAIDictionaryBuilder createAppView] build]];
+//    id<GAITracker> tracker = [[GAI sharedInstance] defaultTracker];
+//    if (isNew) {
+//        [tracker set:kGAIScreenName value:@"MCPersonNewView_iPad"];
+//    } else {
+//        [tracker set:kGAIScreenName value:@"MCPersonDetailView_iPad"];
+//    }
+//    [tracker send:[[GAIDictionaryBuilder createAppView] build]];
 }
 
 - (void)didReceiveMemoryWarning

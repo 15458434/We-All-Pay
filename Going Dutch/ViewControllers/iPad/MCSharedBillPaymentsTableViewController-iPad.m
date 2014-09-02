@@ -324,9 +324,9 @@
                 if (strongSelf) {
                     [[strongSelf tableView] deselectRowAtIndexPath:ip animated:YES];
                     
-                    id<GAITracker> tracker = [[GAI sharedInstance] defaultTracker];
-                    [tracker set:kGAIScreenName value:@"MCSharedBillMainViewController_iPad"];
-                    [tracker send:[[GAIDictionaryBuilder createAppView] build]];
+//                    id<GAITracker> tracker = [[GAI sharedInstance] defaultTracker];
+//                    [tracker set:kGAIScreenName value:@"MCSharedBillMainViewController_iPad"];
+//                    [tracker send:[[GAIDictionaryBuilder createAppView] build]];
                 }
             }];
         }

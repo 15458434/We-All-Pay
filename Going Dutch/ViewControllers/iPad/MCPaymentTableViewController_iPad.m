@@ -199,13 +199,13 @@
 {
     [super viewDidAppear:animated];
     
-    id<GAITracker> tracker = [[GAI sharedInstance] defaultTracker];
-    if (isNew) {
-        [tracker set:kGAIScreenName value:@"MCPaymentNewView_iPad"];
-    } else {
-        [tracker set:kGAIScreenName value:@"MCPaymentDetailsView_iPad"];
-    }
-    [tracker send:[[GAIDictionaryBuilder createAppView] build]];
+//    id<GAITracker> tracker = [[GAI sharedInstance] defaultTracker];
+//    if (isNew) {
+//        [tracker set:kGAIScreenName value:@"MCPaymentNewView_iPad"];
+//    } else {
+//        [tracker set:kGAIScreenName value:@"MCPaymentDetailsView_iPad"];
+//    }
+//    [tracker send:[[GAIDictionaryBuilder createAppView] build]];
 }
 
 - (void)viewDidDisappear:(BOOL)animated
