@@ -152,7 +152,6 @@
 		38C2BCA518FC3CD400233D24 /* MCPaymentTableViewCell_iPad.m in Sources */ = {isa = PBXBuildFile; fileRef = 38C2BCA418FC3CD400233D24 /* MCPaymentTableViewCell_iPad.m */; };
 		38CC8C4A18ED61FD006D99E7 /* MCPersonTableViewController_iPad.m in Sources */ = {isa = PBXBuildFile; fileRef = 38CC8C4918ED61FD006D99E7 /* MCPersonTableViewController_iPad.m */; };
 		38CDE90017135B6300387CAA /* MCTools.m in Sources */ = {isa = PBXBuildFile; fileRef = 38CDE8FF17135B6300387CAA /* MCTools.m */; };
-		38D24B22194B30C000E4946E /* Settings.bundle in Resources */ = {isa = PBXBuildFile; fileRef = 38D24B21194B30C000E4946E /* Settings.bundle */; };
 		38DAB1311997A1BF00B989BF /* MCAppDelegate.m in Sources */ = {isa = PBXBuildFile; fileRef = 38FE87D4195721670008EE74 /* MCAppDelegate.m */; };
 		38DAB1331997BCBE00B989BF /* Cocoa.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 389DE90A197FC7B600169645 /* Cocoa.framework */; };
 		38DAB1351997BCC500B989BF /* CFNetwork.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 38DAB1341997BCC500B989BF /* CFNetwork.framework */; };
@@ -446,7 +445,6 @@
 		38CDE8FE17135B6300387CAA /* MCTools.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = MCTools.h; sourceTree = "<group>"; };
 		38CDE8FF17135B6300387CAA /* MCTools.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = MCTools.m; sourceTree = "<group>"; };
 		38D2323719A4EF42004B1203 /* We all pay.entitlements */ = {isa = PBXFileReference; lastKnownFileType = text.xml; path = "We all pay.entitlements"; sourceTree = SOURCE_ROOT; };
-		38D24B21194B30C000E4946E /* Settings.bundle */ = {isa = PBXFileReference; lastKnownFileType = "wrapper.plug-in"; path = Settings.bundle; sourceTree = "<group>"; };
 		38D785FC18DC53C30074B670 /* WeAllPayStoreTests.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; name = WeAllPayStoreTests.m; path = ../WeAllPayTests/WeAllPayStoreTests.m; sourceTree = "<group>"; };
 		38DAB1341997BCC500B989BF /* CFNetwork.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = CFNetwork.framework; path = Platforms/MacOSX.platform/Developer/SDKs/MacOSX10.9.sdk/System/Library/Frameworks/CFNetwork.framework; sourceTree = DEVELOPER_DIR; };
 		38DAB1371997C21600B989BF /* EMC.entitlements */ = {isa = PBXFileReference; lastKnownFileType = text.xml; name = EMC.entitlements; path = ../EMC.entitlements; sourceTree = "<group>"; };
@@ -700,7 +698,6 @@
 				38572AE6169D437B00969C62 /* MCAppDelegate.m */,
 				38001C9A194EE284008ACD94 /* Images.xcassets */,
 				38572ADD169D437B00969C62 /* Supporting Files */,
-				38D24B21194B30C000E4946E /* Settings.bundle */,
 			);
 			name = "We all pay";
 			path = "Going Dutch";
@@ -1246,7 +1243,6 @@
 				38DC8B4319097FEA00762235 /* Main-iPad.storyboard in Resources */,
 				3867CE4718704B2E001EC222 /* Main-Iphone.storyboard in Resources */,
 				38334ECC173552410063B919 /* Default-568h@2x.png in Resources */,
-				38D24B22194B30C000E4946E /* Settings.bundle in Resources */,
 				3897157B17901D0F005BE03E /* MCTextFieldAndLabelTitleView.xib in Resources */,
 				3872C0DD19041C95008C54D7 /* MCTableEmptyMessage_iPad.xib in Resources */,
 				3897157D17901D0F005BE03E /* MCTwoLabelsTitleView.xib in Resources */,
