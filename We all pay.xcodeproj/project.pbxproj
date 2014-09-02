@@ -282,9 +282,6 @@
 		38572AEC169D437B00969C62 /* Default-568h@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "Default-568h@2x.png"; sourceTree = "<group>"; };
 		38572AF6169D443C00969C62 /* MCAllTripsTableViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = MCAllTripsTableViewController.h; path = ViewControllers/MCAllTripsTableViewController.h; sourceTree = "<group>"; };
 		38572B09169F3D2700969C62 /* MCAllTripsTableViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = MCAllTripsTableViewController.m; path = ViewControllers/MCAllTripsTableViewController.m; sourceTree = "<group>"; };
-		3857304818DAF2C900A900EA /* TestFlight+ManualSessions.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = "TestFlight+ManualSessions.h"; path = "TestFlight SDK/TestFlight+ManualSessions.h"; sourceTree = "<group>"; };
-		3857304918DAF2E600A900EA /* TestFlight.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = TestFlight.h; path = "TestFlight SDK/TestFlight.h"; sourceTree = "<group>"; };
-		3857304A18DAF2E600A900EA /* TestFlight+AsyncLogging.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = "TestFlight+AsyncLogging.h"; path = "TestFlight SDK/TestFlight+AsyncLogging.h"; sourceTree = "<group>"; };
 		3857304B18DAF2F100A900EA /* libTestFlight.a */ = {isa = PBXFileReference; lastKnownFileType = archive.ar; name = libTestFlight.a; path = "Going Dutch/TestFlight SDK/libTestFlight.a"; sourceTree = "<group>"; };
 		385F52FD191C2C360012773D /* We all pay Tests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = "We all pay Tests.xctest"; sourceTree = BUILT_PRODUCTS_DIR; };
 		385F5303191C2C360012773D /* We all pay Tests-Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = "We all pay Tests-Info.plist"; sourceTree = "<group>"; };
@@ -620,16 +617,6 @@
 			name = "Other Frameworks";
 			sourceTree = "<group>";
 		};
-		3826BDDB18A65CBC00747993 /* Testflight SDK */ = {
-			isa = PBXGroup;
-			children = (
-				3857304918DAF2E600A900EA /* TestFlight.h */,
-				3857304A18DAF2E600A900EA /* TestFlight+AsyncLogging.h */,
-				3857304818DAF2C900A900EA /* TestFlight+ManualSessions.h */,
-			);
-			name = "Testflight SDK";
-			sourceTree = "<group>";
-		};
 		3829C61B192628C100DE91D4 /* iOS */ = {
 			isa = PBXGroup;
 			children = (
@@ -713,7 +700,6 @@
 				38572AF3169D438E00969C62 /* ViewControllers */,
 				3899D3F5194F43C200893323 /* In-App Purchase */,
 				38CC9814183D520C006EC35D /* MC SDK */,
-				3826BDDB18A65CBC00747993 /* Testflight SDK */,
 				38DC8B2C19081E6400762235 /* Google Analytics */,
 				3892E3AF17906B5D0038894B /* MCAddressBookDataReceiver.h */,
 				3892E3B017906B5E0038894B /* MCAddressBookDataReceiver.m */,

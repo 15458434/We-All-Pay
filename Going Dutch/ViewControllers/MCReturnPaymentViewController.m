@@ -21,14 +21,23 @@
 #import "MCTwoLabelsTitleView.h"
 #import "MCTableEmptyMessage.h"
 
+typedef NS_ENUM(BOOL, MCXRatesMissing) {
+    xRatesPresent,
+    xRatesMissing
+};
 
-@interface MCReturnPaymentViewController ()
+@interface MCReturnPaymentViewController () <UIAlertViewDelegate>
+
+@property (nonatomic, strong) NSArray *peoplePresent;
+@property (nonatomic, strong) NSMutableArray *paymentsAfterwards;
+
+@property (nonatomic) MCXRatesMissing areXRatesMissing;
+@property (nonatomic, strong) UIAlertView *noXRatesAlert;
 
 @end
 
 @implementation MCReturnPaymentViewController
 
-@synthesize tonightsBill;
 @synthesize sendMailObject;
 
 #pragma mark - Actions
@@ -43,6 +52,33 @@
     [[[self navigationController] presentingViewController] dismissViewControllerAnimated:YES completion:nil];
 }
 
+#pragma mark - Private in this class
+
+- (NSArray *)giveSolution
+{
+    __weak typeof(self) weakSelf = self;
+    NSArray *directResults = [_tonightsBill solveWhoHasToPayWhoFromThisBillWithCompletionBlock:^(NSArray *results) {
+        // Update tableView.
+        __strong typeof(weakSelf) strongSelf = weakSelf;
+        if (strongSelf) {
+            strongSelf.areXRatesMissing = xRatesPresent;
+
+            // What the hell was I thinking during writing this???
+            strongSelf.paymentsAfterwards = [[NSMutableArray alloc] init];
+            for (MCReturnPayment *rp in results) {
+                if ([rp receiver]) {
+                    [[strongSelf paymentsAfterwards] addObject:rp];
+                }
+            }
+            dispatch_async(dispatch_get_main_queue(), ^{
+                [strongSelf setEmptyMessage];
+                [[strongSelf tableView] insertSections:[NSIndexSet indexSetWithIndexesInRange:NSMakeRange(0, 3)] withRowAnimation:UITableViewRowAnimationTop];
+            });
+        }
+    }];
+    return directResults;
+}
+
 #pragma mark - New in this Class
 
 - (id)initWithBill:(MCSharedBill *)thisBill
@@ -53,7 +89,7 @@
         if (!thisBill) {
             @throw [NSException exceptionWithName:@"InitWithNil" reason:@"thisBill is not allowed to point to nil." userInfo:nil];
         }
-        tonightsBill = thisBill;
+        _tonightsBill = thisBill;
 
     }
     return self;
@@ -61,7 +97,7 @@
 
 - (void)setEmptyMessage
 {
-    if (![paymentsAfterwards count] == 0) {
+    if (![_paymentsAfterwards count] == 0) {
         [UIView animateWithDuration:1.0 animations:^{
             [[emptyMessage bigMessage] setAlpha:0.0];
             [[self tableView] setSeparatorStyle:UITableViewCellSeparatorStyleSingleLine];
@@ -105,13 +141,19 @@
         [MCTools setAdBannerIfNotPaid:YES forViewController:self];
     }
     
-    NSSortDescriptor *sortDescriptor = [NSSortDescriptor sortDescriptorWithKey:@"firstName" ascending:YES];
-    peoplePresent = [[tonightsBill peoplePresent] sortedArrayUsingDescriptors:@[sortDescriptor]];
+    if ([_tonightsBill areAllExchangeRatesValid]) {
+        _areXRatesMissing = xRatesPresent;
+    } else {
+        _areXRatesMissing = xRatesMissing;
+    }
     
-    paymentsAfterwards = [[NSMutableArray alloc] init];
-    for (MCReturnPayment *rp in [tonightsBill solveWhoHasToPayWhoFromThisBill]) {
+    NSSortDescriptor *sortDescriptor = [NSSortDescriptor sortDescriptorWithKey:@"firstName" ascending:YES];
+    _peoplePresent = [[_tonightsBill peoplePresent] sortedArrayUsingDescriptors:@[sortDescriptor]];
+
+    _paymentsAfterwards = [[NSMutableArray alloc] init];
+    for (MCReturnPayment *rp in [self giveSolution]) {
         if ([rp receiver]) {
-            [paymentsAfterwards addObject:rp];
+            [_paymentsAfterwards addObject:rp];
         }
     }
     
@@ -125,6 +167,15 @@
 - (void)viewWillAppear:(BOOL)animated
 {
     [super viewWillAppear:animated];
+    
+//    if (_areXRatesMissing == xRatesMissing) {
+//        NSString *title = NSLocalizedString(@"UNABLE_TO_SOLVE", @"Unable to solve");
+//        NSString *message = NSLocalizedString(@"UNABLE_TO_SOLVE_MESSAGE", @"Exchange rates missing. Would you like to fetch them now?");
+//        NSString *cancelButton = NSLocalizedString(@"NO", @"No");
+//        NSString *firstButton = NSLocalizedString(@"YES", @"Yes");
+//        _noXRatesAlert = [[UIAlertView alloc] initWithTitle:title message:message delegate:self cancelButtonTitle:cancelButton otherButtonTitles:firstButton, nil];
+//        [_noXRatesAlert show];
+//    }
     
     [self setEmptyMessage];
 }
@@ -164,20 +215,35 @@
 
 - (void)alertView:(UIAlertView *)alertView clickedButtonAtIndex:(NSInteger)buttonIndex
 {
-    switch (buttonIndex) {
-        case 0:
-            NSLog(@"Cancel button pressed");
-            break;
-        case 1:
-            [[self sendMailObject] openMailView:self];
-            break;
-        case 2:
-            //[[self sendMailObject ] editBillData:self];
-            NSLog(@"If you see this there was a button that shouldn't be there.");
-            break;
-        default:
-            break;
+    if (alertView == _noXRatesAlert) {
+        switch (buttonIndex) {
+            case 0:
+                NSLog(@"No xRates Fetch.");
+                break;
+            case 1:
+                NSLog(@"Yes xRates Fetch.");
+                [self giveSolution];
+                break;
+            default:
+                break;
+        }
+    } else {
+        switch (buttonIndex) {
+            case 0:
+                NSLog(@"Cancel button pressed");
+                break;
+            case 1:
+                [[self sendMailObject] openMailView:self];
+                break;
+            case 2:
+                //[[self sendMailObject ] editBillData:self];
+                NSLog(@"If you see this there was a button that shouldn't be there.");
+                break;
+            default:
+                break;
+        }
     }
+
 }
 
 #pragma mark - MFMailComposeViewControllerDelegate
@@ -188,7 +254,7 @@
         [[self presentedViewController] dismissViewControllerAnimated:YES completion:nil];
     } else if (result == MFMailComposeResultSent) {
         [[self presentedViewController] dismissViewControllerAnimated:YES completion:^{
-            [tonightsBill setHasTheMailBeenSent:@YES];
+            [_tonightsBill setHasTheMailBeenSent:@YES];
         }];
     } else if (result == MFMailComposeResultSaved) {
         [[self presentedViewController] dismissViewControllerAnimated:YES completion:nil];
@@ -215,7 +281,7 @@
 
 - (NSString *)tableView:(UITableView *)tableView titleForHeaderInSection:(NSInteger)section
 {
-    if ([paymentsAfterwards count] > 0) {
+    if ([_paymentsAfterwards count] > 0) {
         switch (section) {
             case 0:
                 return NSLocalizedString(@"SOLUTION_SECTION_WHO_OWES_WHO", @"Who ows who");
@@ -232,25 +298,31 @@
 
 - (NSInteger)numberOfSectionsInTableView:(UITableView *)tableView
 {
-    return 3;
+    if (_areXRatesMissing == xRatesMissing) {
+        NSLog(@"Amount of sections is 0.");
+        return 0;
+    } else {
+        NSLog(@"Amount of sections is 3.");
+        return 3;
+    }
 }
 
 - (NSInteger)tableView:(UITableView *)tableView numberOfRowsInSection:(NSInteger)section
 {
     switch (section) {
         case 0:
-            return [paymentsAfterwards count];
+            return [_paymentsAfterwards count];
         case 1:
-            if ([paymentsAfterwards count] == 0) {
+            if ([_paymentsAfterwards count] == 0) {
                 return 0;
             } else {
-                return [peoplePresent count];
+                return [_peoplePresent count];
             }
         case 2:
-            if ([paymentsAfterwards count] == 0) {
+            if ([_paymentsAfterwards count] == 0) {
                 return 0;
             } else {
-                return [[tonightsBill peoplePresent] count] + 1;
+                return [[_tonightsBill peoplePresent] count] + 1;
             }
         default:
             return 0;
@@ -260,7 +332,7 @@
 - (UITableViewCell *)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath
 {
     if ([indexPath section] == 0) {
-        MCReturnPayment *thisCellsReturnPayment = paymentsAfterwards[[indexPath row]];
+        MCReturnPayment *thisCellsReturnPayment = _paymentsAfterwards[[indexPath row]];
         MCWhoOwesWhoTableViewCell_iPhone *returnPaymentCell = [tableView dequeueReusableCellWithIdentifier:@"MCWhoOwesWhoTableViewCell_iPhone"];
         NSNumberFormatter *nf = [[NSNumberFormatter alloc] init];
         [nf setNumberStyle:NSNumberFormatterCurrencyStyle];
@@ -278,9 +350,9 @@
     if ([indexPath section] == 1) {
         MCWhoPaidHowMuchTableViewCell_iPhone *cell = [tableView dequeueReusableCellWithIdentifier:@"MCWhoPaidHowMuchTableViewCell_iPhone"];
         
-        MCPerson *person = [peoplePresent objectAtIndex:[indexPath row]];
+        MCPerson *person = [_peoplePresent objectAtIndex:[indexPath row]];
         [[cell whoPaidHowMuchLabel] setText:[person getFullName]];
-        NSNumber *sumSpentByPerson = @(-[[tonightsBill amountShouldHavePaidBy:person] doubleValue]);
+        NSNumber *sumSpentByPerson = @(-[[_tonightsBill amountShouldHavePaidBy:person] doubleValue]);
         NSNumberFormatter *nf = [[NSNumberFormatter alloc] init];
         [nf setLocale:[NSLocale currentLocale]];
         [nf setNumberStyle:NSNumberFormatterCurrencyStyle];
@@ -290,12 +362,12 @@
     }
     
     if ([indexPath section] == 2) {
-        if ([indexPath row] < [peoplePresent count]) {
+        if ([indexPath row] < [_peoplePresent count]) {
             MCWhoPaidHowMuchTableViewCell_iPhone *cell = [tableView dequeueReusableCellWithIdentifier:@"MCWhoPaidHowMuchTableViewCell_iPhone"];
             
-            MCPerson *person = [peoplePresent objectAtIndex:[indexPath row]];
+            MCPerson *person = [_peoplePresent objectAtIndex:[indexPath row]];
             [[cell whoPaidHowMuchLabel] setText:[person getFullName]];
-            NSNumber *sumSpentByPerson = [tonightsBill totalSumPaidBy:person];
+            NSNumber *sumSpentByPerson = [_tonightsBill totalSumPaidBy:person];
             NSNumberFormatter *nf = [[NSNumberFormatter alloc] init];
             [nf setLocale:[NSLocale currentLocale]];
             [nf setNumberStyle:NSNumberFormatterCurrencyStyle];
@@ -306,7 +378,7 @@
             MCSolutionOverViewTableViewCell_iPhone *cell = [tableView dequeueReusableCellWithIdentifier:@"MCSolutionOverViewTableViewCell_iPhone"];
             NSString *totalSpentString = NSLocalizedString(@"TOTAL_SPENT", @"Total spent:");
             [[cell totalLabel] setText:totalSpentString];
-            [[cell moneyLabel] setText:[tonightsBill totalSumOfMoneyOfThisSharedBillAsCurrencyString]];
+            [[cell moneyLabel] setText:[_tonightsBill totalSumOfMoneyOfThisSharedBillAsCurrencyString]];
             return cell;
         }
     }

@@ -9,7 +9,6 @@
 #import "MCAppDelegate.h"
 #import "MCAllTripsTableViewController.h"
 #import "MCWeAllPayStoreController.h"
-#import "TestFlight.h"
 #import "MCStoreInterface.h"
 
 @implementation MCAppDelegate

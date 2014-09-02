@@ -20,9 +20,6 @@
 
 @interface MCReturnPaymentViewController : MCCancelDoneTableViewController <MFMailComposeViewControllerDelegate>
 {
-    NSMutableArray *paymentsAfterwards;
-    NSArray *peoplePresent;
-    
     MCTwoLabelsTitleView *twoLabelTitleView;
     MCTableEmptyMessage *emptyMessage;
 }
