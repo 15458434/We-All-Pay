@@ -34,6 +34,8 @@ typedef NS_ENUM(BOOL, MCXRatesMissing) {
 @property (nonatomic) MCXRatesMissing areXRatesMissing;
 @property (nonatomic, strong) UIAlertView *noXRatesAlert;
 
+@property (nonatomic, strong) MCTableEmptyMessage *emptyMessage;
+
 @end
 
 @implementation MCReturnPaymentViewController
@@ -71,11 +73,17 @@ typedef NS_ENUM(BOOL, MCXRatesMissing) {
                 }
             }
             dispatch_async(dispatch_get_main_queue(), ^{
+                NSLog(@"Stop animating.");
+                [[[strongSelf emptyMessage] activityIndicator] stopAnimating];
                 [strongSelf setEmptyMessage];
                 [[strongSelf tableView] insertSections:[NSIndexSet indexSetWithIndexesInRange:NSMakeRange(0, 3)] withRowAnimation:UITableViewRowAnimationTop];
             });
         }
     }];
+    if (!directResults) {
+        NSLog(@"Start animating");
+        [_emptyMessage.activityIndicator startAnimating];
+    }
     return directResults;
 }
 
@@ -97,14 +105,14 @@ typedef NS_ENUM(BOOL, MCXRatesMissing) {
 
 - (void)setEmptyMessage
 {
-    if (![_paymentsAfterwards count] == 0) {
+    if (![_paymentsAfterwards count] == 0 || _emptyMessage.activityIndicator.isAnimating) {
         [UIView animateWithDuration:1.0 animations:^{
-            [[emptyMessage bigMessage] setAlpha:0.0];
+            [[_emptyMessage bigMessage] setAlpha:0.0];
             [[self tableView] setSeparatorStyle:UITableViewCellSeparatorStyleSingleLine];
         } completion:nil];
     } else {
         [UIView animateWithDuration:1.0 animations:^{
-            [[emptyMessage bigMessage] setAlpha:1.0];
+            [[_emptyMessage bigMessage] setAlpha:1.0];
             [[self tableView] setSeparatorStyle:UITableViewCellSeparatorStyleNone];
         } completion:nil];
     }
@@ -150,17 +158,18 @@ typedef NS_ENUM(BOOL, MCXRatesMissing) {
     NSSortDescriptor *sortDescriptor = [NSSortDescriptor sortDescriptorWithKey:@"firstName" ascending:YES];
     _peoplePresent = [[_tonightsBill peoplePresent] sortedArrayUsingDescriptors:@[sortDescriptor]];
 
+    _emptyMessage = [[NSBundle mainBundle] loadNibNamed:@"MCTableEmptyMessage" owner:self options:nil][0];
+    [[self tableView] setBackgroundView:_emptyMessage];
+    [[_emptyMessage bigMessage] setText:NSLocalizedString(@"RETURNPAYMENTSVIEW_NOPAYMENTS", @"Please add payments and/or people if you want a solution on who owes who.")];
+    [[_emptyMessage bigMessage] setAlpha:0.0];
+    
     _paymentsAfterwards = [[NSMutableArray alloc] init];
     for (MCReturnPayment *rp in [self giveSolution]) {
         if ([rp receiver]) {
             [_paymentsAfterwards addObject:rp];
         }
     }
-    
-    emptyMessage = [[NSBundle mainBundle] loadNibNamed:@"MCTableEmptyMessage" owner:self options:nil][0];
-    [[self tableView] setBackgroundView:emptyMessage];
-    [[emptyMessage bigMessage] setText:NSLocalizedString(@"RETURNPAYMENTSVIEW_NOPAYMENTS", @"Please add payments and/or people if you want a solution on who owes who.")];
-    [[emptyMessage bigMessage] setAlpha:0.0];
+
     [[self tableView] reloadData];
 }
 

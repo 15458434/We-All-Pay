@@ -21,7 +21,6 @@
 @interface MCReturnPaymentViewController : MCCancelDoneTableViewController <MFMailComposeViewControllerDelegate>
 {
     MCTwoLabelsTitleView *twoLabelTitleView;
-    MCTableEmptyMessage *emptyMessage;
 }
 
 - (IBAction)sendAsEmailButtonPressed:(id)sender;
