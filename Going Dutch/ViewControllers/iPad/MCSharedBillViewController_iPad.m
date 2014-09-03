@@ -57,7 +57,7 @@
     }
     [peoplePicker setPeoplePickerDelegate:personReceiver];
     [peoplePicker setEdgesForExtendedLayout:UIRectEdgeNone];
-    [[peoplePicker viewControllers][0] setEdgesForExtendedLayout:UIRectEdgeNone];
+//    [[peoplePicker viewControllers][0] setEdgesForExtendedLayout:UIRectEdgeNone];
     [peoplePicker setModalPresentationStyle:UIModalPresentationFormSheet];
     
     [[self navigationController] presentViewController:peoplePicker animated:YES completion:^{
