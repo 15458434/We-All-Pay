@@ -125,8 +125,21 @@
     }];
 }
 
+#if __IPHONE_OS_VERSION_MAX_ALLOWED >= 80000
+- (void)peoplePickerNavigationController:(ABPeoplePickerNavigationController *)peoplePicker didSelectPerson:(ABRecordRef)person
+{
+    // iOS 8 code
+    [viewController dismissViewControllerAnimated:YES completion:^{
+        [delegate receiveANewPersonFromAddressBook:thisPerson];
+    }];
+    [self importPersonDataAndSave:person];
+}
+#endif
+
 - (BOOL)peoplePickerNavigationController:(ABPeoplePickerNavigationController *)peoplePicker shouldContinueAfterSelectingPerson:(ABRecordRef)person
 {
+    // iOS 7 code
+#if __IPHONE_OS_VERSION_MAX_ALLOWED < 80000
     [viewController dismissViewControllerAnimated:YES completion:^{
 //        [[[viewController navigationItem] rightBarButtonItem] setEnabled:YES];
         [delegate receiveANewPersonFromAddressBook:thisPerson];
@@ -135,6 +148,7 @@
 //        [tracker send:[[GAIDictionaryBuilder createAppView] build]];
     }];
     [self importPersonDataAndSave:person];
+#endif
     return NO;
 }
 

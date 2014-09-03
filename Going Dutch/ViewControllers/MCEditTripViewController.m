@@ -35,8 +35,25 @@
 
 @synthesize delegate;
 
-# pragma mark - actions of this class
+#pragma mark - actions of this class
 
+#if __IPHONE_OS_VERSION_MAX_ALLOWED >= 80000
+- (IBAction)addressBookButton:(id)sender {
+    ABPeoplePickerNavigationController *peoplePicker = [[ABPeoplePickerNavigationController alloc] init];
+    if (!personReceiver) {
+        personReceiver = [[MCAddressBookDataReceiver alloc] initWithViewController:self andDelegate:self];
+        [personReceiver setTonightsBill:_tonightsBill];
+    }
+    [peoplePicker setPeoplePickerDelegate:personReceiver];
+    [peoplePicker setPredicateForSelectionOfPerson:nil];
+    [peoplePicker setEdgesForExtendedLayout:UIRectEdgeNone];
+//    [[peoplePicker viewControllers][0] setEdgesForExtendedLayout:UIRectEdgeNone];
+    [peoplePicker setModalPresentationStyle:UIModalPresentationFormSheet];
+    [[[peoplePicker navigationController] navigationBar] setBarStyle:UIBarStyleBlack];
+    
+    [[self navigationController] presentViewController:peoplePicker animated:YES completion:nil];
+}
+#else
 - (IBAction)addressBookButton:(id)sender {
     ABPeoplePickerNavigationController *peoplePicker = [[ABPeoplePickerNavigationController alloc] init];
     if (!personReceiver) {
@@ -45,12 +62,13 @@
     }
     [peoplePicker setPeoplePickerDelegate:personReceiver];
     [peoplePicker setEdgesForExtendedLayout:UIRectEdgeNone];
-//    [[peoplePicker viewControllers][0] setEdgesForExtendedLayout:UIRectEdgeNone];
+    //    [[peoplePicker viewControllers][0] setEdgesForExtendedLayout:UIRectEdgeNone];
     [peoplePicker setModalPresentationStyle:UIModalPresentationFormSheet];
     [[[peoplePicker navigationController] navigationBar] setBarStyle:UIBarStyleBlack];
     
     [[self navigationController] presentViewController:peoplePicker animated:YES completion:nil];
 }
+#endif
 
 - (IBAction)addPersonButton:(id)sender {
     if ([tripNameField isEditing]) {
