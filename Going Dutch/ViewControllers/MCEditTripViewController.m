@@ -45,7 +45,7 @@
         [personReceiver setTonightsBill:_tonightsBill];
     }
     [peoplePicker setPeoplePickerDelegate:personReceiver];
-    [peoplePicker setPredicateForSelectionOfPerson:nil];
+//    [peoplePicker setPredicateForSelectionOfPerson:nil];
     [peoplePicker setEdgesForExtendedLayout:UIRectEdgeNone];
 //    [[peoplePicker viewControllers][0] setEdgesForExtendedLayout:UIRectEdgeNone];
     [peoplePicker setModalPresentationStyle:UIModalPresentationFormSheet];
