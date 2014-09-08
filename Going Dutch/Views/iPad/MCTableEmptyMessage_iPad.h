@@ -14,5 +14,6 @@
 }
 
 @property (weak, nonatomic) IBOutlet UILabel *bigMessage;
+@property (weak, nonatomic) IBOutlet UIActivityIndicatorView *activityIndicator;
 
 @end

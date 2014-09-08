@@ -20,7 +20,16 @@
 #import "MCPerson+addons.h"
 #import "MCReturnPayment.h"
 
+typedef NS_ENUM(BOOL, MCXRatesMissing) {
+    xRatesPresent,
+    xRatesMissing
+};
+
 @interface MCSolutionTableViewController ()
+
+@property (nonatomic, strong) NSArray *solution;
+@property (nonatomic, strong) MCTableEmptyMessage_iPad *emptyMessage;
+@property (nonatomic) MCXRatesMissing areXRatesMissing;
 
 @end
 
@@ -75,16 +84,46 @@
 {
     if (![_solution count] == 0) {
         [UIView animateWithDuration:0.0 animations:^{
-            [[emptyMessage bigMessage] setAlpha:0.0];
+            [[_emptyMessage bigMessage] setAlpha:0.0];
             [[self tableView] setSeparatorStyle:UITableViewCellSeparatorStyleSingleLine];
         } completion:nil];
     } else {
-        if ([[emptyMessage bigMessage] alpha] < 1.0) {
+        if ([[_emptyMessage bigMessage] alpha] < 1.0) {
             [UIView animateWithDuration:0.0 animations:^{
-                [[emptyMessage bigMessage] setAlpha:1.0];
+                [[_emptyMessage bigMessage] setAlpha:1.0];
                 [[self tableView] setSeparatorStyle:UITableViewCellSeparatorStyleNone];
             } completion:nil];
         }
+    }
+}
+
+- (void)giveSolution
+{
+    __weak typeof(self) weakSelf = self;
+    _solution = [_tonightsBill solveWhoHasToPayWhoFromThisBillWithCompletionBlock:^(NSArray *results) {
+        // Update tableView.
+        __strong typeof(weakSelf) strongSelf = weakSelf;
+        if (strongSelf) {
+            strongSelf.areXRatesMissing = xRatesPresent;
+            strongSelf.solution = results;
+            
+            dispatch_async(dispatch_get_main_queue(), ^{
+                NSSortDescriptor *sortDescriptor = [NSSortDescriptor sortDescriptorWithKey:@"firstName" ascending:YES];
+                _peoplePresent = [[_tonightsBill peoplePresent] sortedArrayUsingDescriptors:@[sortDescriptor]];
+                
+                NSLog(@"Stop animating.");
+                [[[strongSelf emptyMessage] activityIndicator] stopAnimating];
+                [strongSelf setEmptyMessageNow];
+                [[strongSelf tableView] insertSections:[NSIndexSet indexSetWithIndexesInRange:NSMakeRange(0, 3)] withRowAnimation:UITableViewRowAnimationTop];
+            });
+        }
+    }];
+    if (!_solution) {
+        NSLog(@"Start animating");
+        [_emptyMessage.activityIndicator startAnimating];
+    } else {
+        NSSortDescriptor *sortDescriptor = [NSSortDescriptor sortDescriptorWithKey:@"firstName" ascending:YES];
+        _peoplePresent = [[_tonightsBill peoplePresent] sortedArrayUsingDescriptors:@[sortDescriptor]];
     }
 }
 
@@ -108,14 +147,22 @@
     
     // Uncomment the following line to display an Edit button in the navigation bar for this view controller.
     // self.navigationItem.rightBarButtonItem = self.editButtonItem;
+
+    _emptyMessage = [[NSBundle mainBundle] loadNibNamed:@"MCTableEmptyMessage_iPad" owner:self options:nil][0];
     
-    _solution = [_tonightsBill solveWhoHasToPayWhoFromThisBill];
-    NSSortDescriptor *sortDescriptor = [NSSortDescriptor sortDescriptorWithKey:@"firstName" ascending:YES];
-    _peoplePresent = [[_tonightsBill peoplePresent] sortedArrayUsingDescriptors:@[sortDescriptor]];
+    [self giveSolution];
+    if ([_tonightsBill areAllExchangeRatesValid]) {
+        _areXRatesMissing = xRatesPresent;
+        [[_emptyMessage activityIndicator] stopAnimating];
+        [[_emptyMessage bigMessage] setHidden:NO];
+    } else {
+        _areXRatesMissing = xRatesMissing;
+        [[_emptyMessage activityIndicator] startAnimating];
+        [[_emptyMessage bigMessage] setHidden:YES];
+    }
     
-    emptyMessage = [[NSBundle mainBundle] loadNibNamed:@"MCTableEmptyMessage_iPad" owner:self options:nil][0];
-    [[emptyMessage bigMessage] setText:NSLocalizedString(@"RETURNPAYMENTSVIEW_NOPAYMENTS", @"Please add payments and/or people if you want a solution on who owes who.")];
-    [[self tableView] setBackgroundView:emptyMessage];
+    [[_emptyMessage bigMessage] setText:NSLocalizedString(@"RETURNPAYMENTSVIEW_NOPAYMENTS", @"Please add payments and/or people if you want a solution on who owes who.")];
+    [[self tableView] setBackgroundView:_emptyMessage];
     [self setEmptyMessageNow];
 }
 
@@ -186,7 +233,11 @@
 - (NSInteger)numberOfSectionsInTableView:(UITableView *)tableView
 {
     // Return the number of sections.
-    return 3;
+    if (_areXRatesMissing == xRatesMissing) {
+        return 0;
+    } else {
+        return 3;
+    }
 }
 
 - (NSInteger)tableView:(UITableView *)tableView numberOfRowsInSection:(NSInteger)section

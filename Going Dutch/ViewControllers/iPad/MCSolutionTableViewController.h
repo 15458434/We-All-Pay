@@ -17,9 +17,6 @@
 
 @interface MCSolutionTableViewController : UITableViewController <MFMailComposeViewControllerDelegate, MCTonightsBillTransfer, MCDismissMeBlockProtocol>
 {
-    MCTableEmptyMessage_iPad *emptyMessage;
-    
-    NSArray *_solution;
     NSArray *_peoplePresent;
     
     MFMailComposeViewController *mailController;
