@@ -36,6 +36,10 @@
     // Get user preference
     NSUserDefaults *defaults = [NSUserDefaults standardUserDefaults];
     BOOL optInValue = [defaults boolForKey:@"googleAnalyticsOptIn"];
+    BOOL success = [defaults synchronize];
+    if (!success) {
+        NSLog(@"Unable to write userDefaults.");
+    }
     
     // Set to YES if during test versions.
 //    [[GAI sharedInstance] setDryRun:!optInValue];
@@ -72,7 +76,7 @@
 //    [self startGoogleAnalyticsSession];
 //    [TestFlight takeOff:@"f2224673-b632-44ae-8feb-3c1cfe59e1f5"];
     // Override point for customization after application launch.
-    NSLog(@"%@", [[UIDevice currentDevice] model]);
+    NSLog(@"%@ running iOS %@", [[UIDevice currentDevice] model], [[UIDevice currentDevice] systemVersion]);
     NSLog(@"I dedicate this program to Ilse Béguin, the most wonderful woman in the world who brought herself into my life, when I was developing this App.");
     
     // Set colors throughout the App.

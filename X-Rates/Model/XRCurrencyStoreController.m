@@ -8,6 +8,7 @@
 
 #import "XRCurrencyStoreController.h"
 #import "XRCurrency.h"
+#import "XRCurrencyXRateFetcher.h"
 
 #import "MCxRatesController.h"
 
@@ -15,6 +16,10 @@ NSString * const XRCurrencyModel = @"XRCurrency";
 NSString * const XRCurrencyBaseDirectory = @"XRCurrency";
 NSString * const XRCurrencyStoreFileName = @"XRCurrencyStore";
 NSString * const XRCurrencyStoreFileExtension = @"sqlite";
+
+@interface XRCurrencyStoreController ()
+
+@end
 
 @implementation XRCurrencyStoreController
 
@@ -136,6 +141,14 @@ NSString * const XRCurrencyStoreFileExtension = @"sqlite";
 }
 #elif TARGET_OS_MAC
 #endif
+
+- (XRCurrencyXRateFetcher *)xRateFetcher
+{
+    if (!_xRateFetcher) {
+        _xRateFetcher = [[XRCurrencyXRateFetcher alloc] init];
+    }
+    return _xRateFetcher;
+}
 
 #pragma mark - SingleTon
 

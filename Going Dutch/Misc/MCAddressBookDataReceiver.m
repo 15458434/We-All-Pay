@@ -139,10 +139,10 @@
 - (BOOL)peoplePickerNavigationController:(ABPeoplePickerNavigationController *)peoplePicker shouldContinueAfterSelectingPerson:(ABRecordRef)person
 {
     // iOS 7 code
-#if __IPHONE_OS_VERSION_MAX_ALLOWED < 80000
+#if __IPHONE_OS_VERSION_MAX_ALLOWED >= 70000
     [viewController dismissViewControllerAnimated:YES completion:^{
 //        [[[viewController navigationItem] rightBarButtonItem] setEnabled:YES];
-        [delegate receiveANewPersonFromAddressBook:thisPerson];
+//        [delegate receiveANewPersonFromAddressBook:thisPerson];
 //        id<GAITracker> tracker = [[GAI sharedInstance] defaultTracker];
 //        [tracker set:kGAIScreenName value:@"MCSharedBillMainViewController_iPad"];
 //        [tracker send:[[GAIDictionaryBuilder createAppView] build]];

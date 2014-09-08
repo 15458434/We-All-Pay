@@ -323,12 +323,14 @@
         [[allTripsTableViewCell waitingForXRatesIndicator] stopAnimating];
         [[allTripsTableViewCell totalCostLabel] setText:moneyString];
     } else {
+        NSNumberFormatter *nf = [[NSNumberFormatter alloc] init];
+        [nf setNumberStyle:NSNumberFormatterCurrencyStyle];
+        NSString *moneyString = [nf stringFromNumber:[thisTrip totalSumOfMoneyOfThisSharedBill]];
+        [[allTripsTableViewCell totalCostLabel] setText:moneyString];
         [[allTripsTableViewCell totalCostLabel] setHidden:YES];
         [[allTripsTableViewCell waitingForXRatesIndicator] startAnimating];
     }
 
-    
-    
     // fill extraLabel with dateModified.
     if (!df) {
         df = [[NSDateFormatter alloc] init];

@@ -10,6 +10,7 @@
 @import CoreData;
 
 @class XRCurrency;
+@class XRCurrencyXRateFetcher;
 
 @interface XRCurrencyStoreController : NSObject
 
@@ -17,6 +18,7 @@
 @property (nonatomic, strong) NSManagedObjectModel *managedObjectModel;
 @property (nonatomic, strong) NSManagedObjectContext *backgroundContext;
 @property (nonatomic, strong) NSManagedObjectContext *mainQueueContext;
+@property (nonatomic, strong) XRCurrencyXRateFetcher *xRateFetcher;
 
 + (BOOL)doesMyCurrencyDatabaseFileExist;
 + (void)populateCurrencyDataBaseIfEmptyForContext:(NSManagedObjectContext *)context;

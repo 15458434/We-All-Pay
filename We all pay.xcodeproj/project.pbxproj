@@ -52,7 +52,6 @@
 		384512FB1986DDB7008D17AB /* MCSelectCurrencyTableViewCell_iPhone.m in Sources */ = {isa = PBXBuildFile; fileRef = 384512FA1986DDB7008D17AB /* MCSelectCurrencyTableViewCell_iPhone.m */; };
 		384513011986DEC0008D17AB /* MCSelectCurrencyTableViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 384513001986DEC0008D17AB /* MCSelectCurrencyTableViewController.m */; };
 		384B34AF19B603B900F0EF80 /* MCMailComposer.m in Sources */ = {isa = PBXBuildFile; fileRef = 384B34AE19B603B900F0EF80 /* MCMailComposer.m */; };
-		38506874191CCDD10089A043 /* libGoogleAnalyticsServices.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 38CC48DE190A9E7000741201 /* libGoogleAnalyticsServices.a */; };
 		38572AD7169D437B00969C62 /* UIKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 38572AD6169D437B00969C62 /* UIKit.framework */; };
 		38572AD9169D437B00969C62 /* Foundation.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 38572AD8169D437B00969C62 /* Foundation.framework */; settings = {ATTRIBUTES = (Required, ); }; };
 		38572ADB169D437B00969C62 /* CoreGraphics.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 38572ADA169D437B00969C62 /* CoreGraphics.framework */; };
@@ -72,7 +71,6 @@
 		3864AA81195B0B6600831C93 /* MCiScreenRootViewController_iPad.m in Sources */ = {isa = PBXBuildFile; fileRef = 3864AA80195B0B6600831C93 /* MCiScreenRootViewController_iPad.m */; };
 		3867CE4718704B2E001EC222 /* Main-Iphone.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 3867CE4918704B2E001EC222 /* Main-Iphone.storyboard */; };
 		3867CE5118704DAF001EC222 /* MCTableEmptyMessage.xib in Resources */ = {isa = PBXBuildFile; fileRef = 3867CE5318704DAF001EC222 /* MCTableEmptyMessage.xib */; };
-		38690703186F0EEF006A5C11 /* libz.dylib in Frameworks */ = {isa = PBXBuildFile; fileRef = 38690702186F0EEF006A5C11 /* libz.dylib */; };
 		386FC32518E5855400428294 /* MCSharedBillMainViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 386FC32418E5855400428294 /* MCSharedBillMainViewController.m */; };
 		386FC37018E5BE1900428294 /* iAd.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 386FC36F18E5BE1900428294 /* iAd.framework */; };
 		3872C0D118FF0A5E008C54D7 /* MCSelectEmailAddressTableViewController_iPad.m in Sources */ = {isa = PBXBuildFile; fileRef = 3872C0D018FF0A5D008C54D7 /* MCSelectEmailAddressTableViewController_iPad.m */; };
@@ -87,7 +85,6 @@
 		388063EF19A4D00C000CF36B /* XRCurrencyStoreControllerTest.m in Sources */ = {isa = PBXBuildFile; fileRef = 388063ED19A4D00C000CF36B /* XRCurrencyStoreControllerTest.m */; };
 		3886D3FD16B7A1CD00ECE64F /* AddressBook.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 3886D3FB16B7A1CD00ECE64F /* AddressBook.framework */; };
 		3886D3FE16B7A1CD00ECE64F /* AddressBookUI.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 3886D3FC16B7A1CD00ECE64F /* AddressBookUI.framework */; };
-		3886FE88191CF140004D88FB /* libTestFlight.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 3857304B18DAF2F100A900EA /* libTestFlight.a */; };
 		3892E3A417903EF00038894B /* MCEditTripViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 3892E3A317903EF00038894B /* MCEditTripViewController.m */; };
 		3892E3AA17904A240038894B /* MCPersonViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 3892E3A917904A240038894B /* MCPersonViewController.m */; };
 		3892E3AE179056420038894B /* MCReturnPayment.m in Sources */ = {isa = PBXBuildFile; fileRef = 3892E3AD179056420038894B /* MCReturnPayment.m */; };
@@ -143,6 +140,10 @@
 		38AB487119531F760090457A /* UIView+MCAddons.m in Sources */ = {isa = PBXBuildFile; fileRef = 38AB487019531F760090457A /* UIView+MCAddons.m */; };
 		38AD59BC197D3DF000BBC797 /* MCNetworkTools.m in Sources */ = {isa = PBXBuildFile; fileRef = 389E2CFF19792D7600729F61 /* MCNetworkTools.m */; };
 		38AD8C12197E8926005C3436 /* MCAddCurrenciesEntityMigrationPolicy.m in Sources */ = {isa = PBXBuildFile; fileRef = 38AD8C11197E8926005C3436 /* MCAddCurrenciesEntityMigrationPolicy.m */; };
+		38BDFD7E19B88D210026F4F8 /* XRCurrencyXRateFetcher.m in Sources */ = {isa = PBXBuildFile; fileRef = 38BDFD7D19B88D210026F4F8 /* XRCurrencyXRateFetcher.m */; };
+		38BDFD7F19B88D210026F4F8 /* XRCurrencyXRateFetcher.m in Sources */ = {isa = PBXBuildFile; fileRef = 38BDFD7D19B88D210026F4F8 /* XRCurrencyXRateFetcher.m */; };
+		38BDFD8219B88D8B0026F4F8 /* XRCurrencyXRate.m in Sources */ = {isa = PBXBuildFile; fileRef = 38BDFD8119B88D8B0026F4F8 /* XRCurrencyXRate.m */; };
+		38BDFD8319B88D8B0026F4F8 /* XRCurrencyXRate.m in Sources */ = {isa = PBXBuildFile; fileRef = 38BDFD8119B88D8B0026F4F8 /* XRCurrencyXRate.m */; };
 		38BF02A71997993400606564 /* MCPreferencesWindowController.m in Sources */ = {isa = PBXBuildFile; fileRef = 38BF02A51997993400606564 /* MCPreferencesWindowController.m */; };
 		38BF02A81997993400606564 /* MCPreferencesWindowController.xib in Resources */ = {isa = PBXBuildFile; fileRef = 38BF02A61997993400606564 /* MCPreferencesWindowController.xib */; };
 		38C2BC9918F7F69A00233D24 /* MCWhoOwesWhoTableViewCell_iPad.m in Sources */ = {isa = PBXBuildFile; fileRef = 38C2BC9818F7F69A00233D24 /* MCWhoOwesWhoTableViewCell_iPad.m */; };
@@ -426,6 +427,10 @@
 		38AD8C0D197E85AA005C3436 /* WeAllPayStore 3.xcdatamodel */ = {isa = PBXFileReference; lastKnownFileType = wrapper.xcdatamodel; path = "WeAllPayStore 3.xcdatamodel"; sourceTree = "<group>"; };
 		38AD8C10197E8926005C3436 /* MCAddCurrenciesEntityMigrationPolicy.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = MCAddCurrenciesEntityMigrationPolicy.h; path = "DataStore/Entity Migration Policies/MCAddCurrenciesEntityMigrationPolicy.h"; sourceTree = "<group>"; };
 		38AD8C11197E8926005C3436 /* MCAddCurrenciesEntityMigrationPolicy.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = MCAddCurrenciesEntityMigrationPolicy.m; path = "DataStore/Entity Migration Policies/MCAddCurrenciesEntityMigrationPolicy.m"; sourceTree = "<group>"; };
+		38BDFD7C19B88D210026F4F8 /* XRCurrencyXRateFetcher.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = XRCurrencyXRateFetcher.h; sourceTree = "<group>"; };
+		38BDFD7D19B88D210026F4F8 /* XRCurrencyXRateFetcher.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = XRCurrencyXRateFetcher.m; sourceTree = "<group>"; };
+		38BDFD8019B88D8B0026F4F8 /* XRCurrencyXRate.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = XRCurrencyXRate.h; sourceTree = "<group>"; };
+		38BDFD8119B88D8B0026F4F8 /* XRCurrencyXRate.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = XRCurrencyXRate.m; sourceTree = "<group>"; };
 		38BF02A41997993400606564 /* MCPreferencesWindowController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = MCPreferencesWindowController.h; path = WindowController/MCPreferencesWindowController.h; sourceTree = "<group>"; };
 		38BF02A51997993400606564 /* MCPreferencesWindowController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = MCPreferencesWindowController.m; path = WindowController/MCPreferencesWindowController.m; sourceTree = "<group>"; };
 		38BF02A61997993400606564 /* MCPreferencesWindowController.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; name = MCPreferencesWindowController.xib; path = WindowController/MCPreferencesWindowController.xib; sourceTree = "<group>"; };
@@ -508,11 +513,8 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				3886FE88191CF140004D88FB /* libTestFlight.a in Frameworks */,
-				38506874191CCDD10089A043 /* libGoogleAnalyticsServices.a in Frameworks */,
 				38DC8B3619084ABE00762235 /* SystemConfiguration.framework in Frameworks */,
 				386FC37018E5BE1900428294 /* iAd.framework in Frameworks */,
-				38690703186F0EEF006A5C11 /* libz.dylib in Frameworks */,
 				3886D3FD16B7A1CD00ECE64F /* AddressBook.framework in Frameworks */,
 				3886D3FE16B7A1CD00ECE64F /* AddressBookUI.framework in Frameworks */,
 				3801F89C16DFC62600DF8675 /* CoreData.framework in Frameworks */,
@@ -1083,6 +1085,10 @@
 				381318CD19A2869600C821B0 /* XRCurrency.m */,
 				381318C019A2531500C821B0 /* XRCurrencyStoreController.h */,
 				381318C119A2531500C821B0 /* XRCurrencyStoreController.m */,
+				38BDFD7C19B88D210026F4F8 /* XRCurrencyXRateFetcher.h */,
+				38BDFD7D19B88D210026F4F8 /* XRCurrencyXRateFetcher.m */,
+				38BDFD8019B88D8B0026F4F8 /* XRCurrencyXRate.h */,
+				38BDFD8119B88D8B0026F4F8 /* XRCurrencyXRate.m */,
 				381248571959D22600C0447C /* MCxRatesController.h */,
 				381248581959D22600C0447C /* MCxRatesController.m */,
 				38974AF8195E8C4B00BBEA9C /* MCxRatesController+X_RatesAddOn.h */,
@@ -1187,6 +1193,7 @@
 						};
 					};
 					385F52FC191C2C360012773D = {
+						DevelopmentTeam = Z6JP26PUUY;
 						TestTargetID = 38572AD1169D437B00969C62;
 					};
 					38FE87C4195721660008EE74 = {
@@ -1329,6 +1336,7 @@
 				381318BC19A250C600C821B0 /* XRCurrency.xcdatamodeld in Sources */,
 				3897157A17901D0F005BE03E /* MCTextFieldAndLabelTitleView.m in Sources */,
 				389DE8FA197FB2BA00169645 /* MCPayment.m in Sources */,
+				38BDFD7E19B88D210026F4F8 /* XRCurrencyXRateFetcher.m in Sources */,
 				381318CE19A2869600C821B0 /* XRCurrency.m in Sources */,
 				38AAFBA218EC406300CD3E12 /* MCSharedBillPeoplePresentTableViewController-iPad.m in Sources */,
 				389DE907197FBE8400169645 /* MCExchangeRate+addons.m in Sources */,
@@ -1353,6 +1361,7 @@
 				383E0C5D186737EB00AA688D /* MCSharedBillPageViewController.m in Sources */,
 				38E02789190A533500865FDD /* MCWhoOwesWhoTableViewCell_iPhone.m in Sources */,
 				3825A828199A4E1E00A8885D /* MCThisPersonProtocol.m in Sources */,
+				38BDFD8219B88D8B0026F4F8 /* XRCurrencyXRate.m in Sources */,
 				38DC8B421909508800762235 /* MCColors.m in Sources */,
 				38E95DBB195073A000069414 /* MCTwoLabelTableViewCell_iPad.m in Sources */,
 				3872C0DC19041725008C54D7 /* MCTableEmptyMessage_iPad.m in Sources */,
@@ -1413,6 +1422,7 @@
 				381318C419A2531500C821B0 /* XRCurrencyStoreController.m in Sources */,
 				38DAB1311997A1BF00B989BF /* MCAppDelegate.m in Sources */,
 				38A4ACEF1975625600C0636E /* Countly.xcdatamodeld in Sources */,
+				38BDFD8319B88D8B0026F4F8 /* XRCurrencyXRate.m in Sources */,
 				38974AFA195E8C4B00BBEA9C /* MCxRatesController+X_RatesAddOn.m in Sources */,
 				38974AFD195E8E9900BBEA9C /* MCDataStorage.m in Sources */,
 				389E2D0019792D7600729F61 /* MCNetworkTools.m in Sources */,
@@ -1423,6 +1433,7 @@
 				381318BE19A250C600C821B0 /* XRCurrency.xcdatamodeld in Sources */,
 				38FE87CE195721670008EE74 /* main.m in Sources */,
 				381318D019A2869600C821B0 /* XRCurrency.m in Sources */,
+				38BDFD7F19B88D210026F4F8 /* XRCurrencyXRateFetcher.m in Sources */,
 				38974AF7195E8B3000BBEA9C /* MCxRatesCurrency.m in Sources */,
 				3812485A1959D22600C0447C /* MCxRatesController.m in Sources */,
 			);
@@ -1634,6 +1645,7 @@
 				GCC_SYMBOLS_PRIVATE_EXTERN = NO;
 				INFOPLIST_FILE = "Going Dutch/We all pay-Info.plist";
 				IPHONEOS_DEPLOYMENT_TARGET = 7.1;
+				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
 				LIBRARY_SEARCH_PATHS = (
 					"$(inherited)",
 					"$(PROJECT_DIR)/**",
@@ -1641,6 +1653,8 @@
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				PROVISIONING_PROFILE = "";
 				"PROVISIONING_PROFILE[sdk=iphoneos*]" = "db310e78-2530-40f0-afcf-d2665761ba94";
+				SWIFT_OBJC_BRIDGING_HEADER = "X-Rates/We all pay-Bridging-Header.h";
+				SWIFT_OPTIMIZATION_LEVEL = "-Onone";
 				TARGETED_DEVICE_FAMILY = "1,2";
 				WRAPPER_EXTENSION = app;
 			};
@@ -1661,6 +1675,7 @@
 				GCC_SYMBOLS_PRIVATE_EXTERN = YES;
 				INFOPLIST_FILE = "Going Dutch/We all pay-Info.plist";
 				IPHONEOS_DEPLOYMENT_TARGET = 7.1;
+				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
 				LIBRARY_SEARCH_PATHS = (
 					"$(inherited)",
 					"$(PROJECT_DIR)/**",
@@ -1668,6 +1683,7 @@
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				PROVISIONING_PROFILE = "";
 				"PROVISIONING_PROFILE[sdk=iphoneos*]" = "db310e78-2530-40f0-afcf-d2665761ba94";
+				SWIFT_OBJC_BRIDGING_HEADER = "X-Rates/We all pay-Bridging-Header.h";
 				TARGETED_DEVICE_FAMILY = "1,2";
 				WRAPPER_EXTENSION = app;
 			};
@@ -1684,6 +1700,8 @@
 				CLANG_WARN_ENUM_CONVERSION = YES;
 				CLANG_WARN_INT_CONVERSION = YES;
 				CLANG_WARN_OBJC_ROOT_CLASS = YES_ERROR;
+				CODE_SIGN_IDENTITY = "iPhone Developer";
+				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer";
 				FRAMEWORK_SEARCH_PATHS = (
 					"$(SDKROOT)/Developer/Library/Frameworks",
 					"$(inherited)",
@@ -1703,6 +1721,7 @@
 				INFOPLIST_FILE = "We all pay Tests/We all pay Tests-Info.plist";
 				IPHONEOS_DEPLOYMENT_TARGET = 7.1;
 				PRODUCT_NAME = "$(TARGET_NAME)";
+				PROVISIONING_PROFILE = "";
 				TEST_HOST = "$(BUNDLE_LOADER)";
 				WRAPPER_EXTENSION = xctest;
 			};
@@ -1719,6 +1738,8 @@
 				CLANG_WARN_ENUM_CONVERSION = YES;
 				CLANG_WARN_INT_CONVERSION = YES;
 				CLANG_WARN_OBJC_ROOT_CLASS = YES_ERROR;
+				CODE_SIGN_IDENTITY = "iPhone Developer";
+				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer";
 				ENABLE_NS_ASSERTIONS = NO;
 				FRAMEWORK_SEARCH_PATHS = (
 					"$(SDKROOT)/Developer/Library/Frameworks",
@@ -1735,6 +1756,7 @@
 				INFOPLIST_FILE = "We all pay Tests/We all pay Tests-Info.plist";
 				IPHONEOS_DEPLOYMENT_TARGET = 7.1;
 				PRODUCT_NAME = "$(TARGET_NAME)";
+				PROVISIONING_PROFILE = "";
 				TEST_HOST = "$(BUNDLE_LOADER)";
 				WRAPPER_EXTENSION = xctest;
 			};
@@ -1744,6 +1766,7 @@
 			isa = XCBuildConfiguration;
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
+				CLANG_ENABLE_MODULES = YES;
 				CLANG_WARN_BOOL_CONVERSION = YES;
 				CLANG_WARN_CONSTANT_CONVERSION = YES;
 				CLANG_WARN_DIRECT_OBJC_ISA_USAGE = YES_ERROR;
@@ -1767,10 +1790,13 @@
 				GCC_WARN_UNINITIALIZED_AUTOS = YES_AGGRESSIVE;
 				GCC_WARN_UNUSED_FUNCTION = YES;
 				INFOPLIST_FILE = "X-Rates/X-Rates-Info.plist";
+				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/../Frameworks";
 				MACOSX_DEPLOYMENT_TARGET = 10.9;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				PROVISIONING_PROFILE = "";
 				SDKROOT = macosx;
+				SWIFT_OBJC_BRIDGING_HEADER = "X-Rates/EMC-Bridging-Header.h";
+				SWIFT_OPTIMIZATION_LEVEL = "-Onone";
 				WRAPPER_EXTENSION = app;
 			};
 			name = Debug;
@@ -1779,6 +1805,7 @@
 			isa = XCBuildConfiguration;
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
+				CLANG_ENABLE_MODULES = YES;
 				CLANG_WARN_BOOL_CONVERSION = YES;
 				CLANG_WARN_CONSTANT_CONVERSION = YES;
 				CLANG_WARN_DIRECT_OBJC_ISA_USAGE = YES_ERROR;
@@ -1800,10 +1827,12 @@
 				GCC_WARN_UNINITIALIZED_AUTOS = YES_AGGRESSIVE;
 				GCC_WARN_UNUSED_FUNCTION = YES;
 				INFOPLIST_FILE = "X-Rates/X-Rates-Info.plist";
+				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/../Frameworks";
 				MACOSX_DEPLOYMENT_TARGET = 10.9;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				PROVISIONING_PROFILE = "";
 				SDKROOT = macosx;
+				SWIFT_OBJC_BRIDGING_HEADER = "X-Rates/EMC-Bridging-Header.h";
 				WRAPPER_EXTENSION = app;
 			};
 			name = Release;

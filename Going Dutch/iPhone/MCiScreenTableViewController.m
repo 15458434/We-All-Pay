@@ -229,11 +229,6 @@
 {
     if ([indexPath section] == 0) {
         if ([indexPath row] == 0) {
-//            MCOneLabelIScreenTableViewCell *cell = [tableView dequeueReusableCellWithIdentifier:@"MCOneLabelIScreenTableViewCell" forIndexPath:indexPath];
-//            NSString *whatIsProString = NSLocalizedString(@"WHAT_IS_PRO", @"What is the Pro Version");
-//            [[cell oneTextLabel] setText:whatIsProString];
-//            return cell;
-//        } else if ([indexPath row] == 1) {
             MCTwoLabelIscreenTableViewCell *cell = [tableView dequeueReusableCellWithIdentifier:@"MCTwoLabelIscreenTableViewCell" forIndexPath:indexPath];
             NSString *buyProString = NSLocalizedString(@"BUY_PRO", @"Buy Pro Version");
             [[cell leftLabel] setText:buyProString];
