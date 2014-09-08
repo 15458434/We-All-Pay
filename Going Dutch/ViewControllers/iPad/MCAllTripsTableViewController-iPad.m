@@ -268,11 +268,17 @@
     }
     [[allTripsTableViewCell peoplePresentLabel] setText:[thisTrip stringOfApproxPeoplePresentWithFullNames]];
     
-    NSNumberFormatter *nf = [[NSNumberFormatter alloc] init];
-    [nf setNumberStyle:NSNumberFormatterCurrencyStyle];
-    NSString *moneyString = [nf stringFromNumber:[thisTrip totalSumOfMoneyOfThisSharedBill]];
-    [[allTripsTableViewCell totalCostLabel] setText:moneyString];
-    
+    if ([thisTrip areAllExchangeRatesValid]) {
+        [[allTripsTableViewCell activityIndicator] stopAnimating];
+        [[allTripsTableViewCell totalCostLabel] setHidden:NO];
+        NSNumberFormatter *nf = [[NSNumberFormatter alloc] init];
+        [nf setNumberStyle:NSNumberFormatterCurrencyStyle];
+        NSString *moneyString = [nf stringFromNumber:[thisTrip totalSumOfMoneyOfThisSharedBill]];
+        [[allTripsTableViewCell totalCostLabel] setText:moneyString];
+    } else {
+        [[allTripsTableViewCell activityIndicator] startAnimating];
+        [[allTripsTableViewCell totalCostLabel] setHidden:YES];
+    }
     
     // fill extraLabel with dateModified.
     if (!df) {

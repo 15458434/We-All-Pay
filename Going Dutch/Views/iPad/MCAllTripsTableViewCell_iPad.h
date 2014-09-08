@@ -14,5 +14,6 @@
 @property (weak, nonatomic) IBOutlet UILabel *totalCostLabel;
 @property (weak, nonatomic) IBOutlet UILabel *peoplePresentLabel;
 @property (weak, nonatomic) IBOutlet UILabel *extraLabel;
+@property (weak, nonatomic) IBOutlet UIActivityIndicatorView *activityIndicator;
 
 @end

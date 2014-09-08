@@ -1,11 +1,11 @@
 <?xml version="1.0" encoding="UTF-8" standalone="no"?>
-<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="6206.9" systemVersion="14A343f" targetRuntime="iOS.CocoaTouch.iPad" propertyAccessControl="none" useAutolayout="YES" initialViewController="zVB-NT-1S4">
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="5056" systemVersion="14A343f" targetRuntime="iOS.CocoaTouch.iPad" propertyAccessControl="none" useAutolayout="YES" initialViewController="zVB-NT-1S4">
     <dependencies>
-        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="7026.1"/>
+        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="3733"/>
         <capability name="Aspect ratio constraints" minToolsVersion="5.1"/>
     </dependencies>
     <scenes>
-        <!--events-->
+        <!--All Trips Table View Controller i Pad - events-->
         <scene sceneID="TmB-D7-Q0u">
             <objects>
                 <tableViewController storyboardIdentifier="MCAllTripsTableViewController_iPad" useStoryboardIdentifierAsRestorationIdentifier="YES" id="svo-bC-Qfm" customClass="MCAllTripsTableViewController_iPad" sceneMemberID="viewController">
@@ -78,6 +78,10 @@
                                             <color key="textColor" white="0.33333333333333331" alpha="1" colorSpace="calibratedWhite"/>
                                             <nil key="highlightedColor"/>
                                         </label>
+                                        <activityIndicatorView hidden="YES" appearanceType="aqua" opaque="NO" contentMode="scaleToFill" horizontalHuggingPriority="750" verticalHuggingPriority="750" hidesWhenStopped="YES" style="gray" translatesAutoresizingMaskIntoConstraints="NO" id="bFj-ve-7bb">
+                                            <rect key="frame" x="680" y="23" width="20" height="20"/>
+                                            <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                                        </activityIndicatorView>
                                     </subviews>
                                     <constraints>
                                         <constraint firstItem="4LN-EL-yNj" firstAttribute="leading" secondItem="V6H-03-85K" secondAttribute="leading" id="DXu-zf-di3"/>
@@ -86,7 +90,9 @@
                                         <constraint firstItem="4LN-EL-yNj" firstAttribute="trailing" secondItem="V6H-03-85K" secondAttribute="trailing" id="HU4-si-eLe"/>
                                         <constraint firstItem="UjB-LL-77p" firstAttribute="leading" secondItem="V6H-03-85K" secondAttribute="trailing" constant="8" symbolic="YES" id="JHD-Gj-QOE"/>
                                         <constraint firstItem="V6H-03-85K" firstAttribute="top" secondItem="FR1-Vx-C0j" secondAttribute="top" constant="20" symbolic="YES" id="Y2A-Ft-xei"/>
+                                        <constraint firstAttribute="trailing" secondItem="bFj-ve-7bb" secondAttribute="trailing" constant="35" id="giK-9x-WNt"/>
                                         <constraint firstItem="4LN-EL-yNj" firstAttribute="width" secondItem="hKu-l5-7vA" secondAttribute="width" priority="250" id="hdh-OQ-PEZ"/>
+                                        <constraint firstItem="bFj-ve-7bb" firstAttribute="centerY" secondItem="UjB-LL-77p" secondAttribute="centerY" id="hm6-8T-PP2"/>
                                         <constraint firstItem="4LN-EL-yNj" firstAttribute="top" secondItem="V6H-03-85K" secondAttribute="bottom" constant="8" symbolic="YES" id="idD-mp-VVx"/>
                                         <constraint firstItem="hKu-l5-7vA" firstAttribute="top" secondItem="4LN-EL-yNj" secondAttribute="bottom" constant="8" symbolic="YES" id="r41-6Y-dRI"/>
                                         <constraint firstItem="4LN-EL-yNj" firstAttribute="leading" secondItem="hKu-l5-7vA" secondAttribute="leading" id="w8P-e3-Xgu"/>
@@ -96,6 +102,7 @@
                                     </constraints>
                                 </tableViewCellContentView>
                                 <connections>
+                                    <outlet property="activityIndicator" destination="bFj-ve-7bb" id="dxe-cv-OAu"/>
                                     <outlet property="extraLabel" destination="hKu-l5-7vA" id="3dA-xx-9RP"/>
                                     <outlet property="peoplePresentLabel" destination="4LN-EL-yNj" id="1vQ-E8-Rcv"/>
                                     <outlet property="totalCostLabel" destination="UjB-LL-77p" id="69D-nw-u5j"/>
@@ -111,16 +118,13 @@
                     </tableView>
                     <navigationItem key="navigationItem" title="events" id="Gep-Z6-3Aj"/>
                     <value key="contentSizeForViewInPopover" type="size" width="320" height="480"/>
-                    <simulatedScreenMetrics key="simulatedDestinationMetrics">
-                        <size key="portraitSize" width="768" height="1024"/>
-                        <size key="landscapeSize" width="1024" height="768"/>
-                    </simulatedScreenMetrics>
+                    <simulatedScreenMetrics key="simulatedDestinationMetrics"/>
                 </tableViewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="CKt-S2-Izs" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
             <point key="canvasLocation" x="1099" y="-125"/>
         </scene>
-        <!--people and payments-->
+        <!--Shared Bill View Controller i Pad - people and payments-->
         <scene sceneID="Fvg-Rr-bFC">
             <objects>
                 <viewController storyboardIdentifier="MCSharedBillViewController_iPad" useStoryboardIdentifierAsRestorationIdentifier="YES" id="R7R-eq-O5O" customClass="MCSharedBillViewController_iPad" sceneMemberID="viewController">
@@ -259,7 +263,7 @@
             </objects>
             <point key="canvasLocation" x="2186" y="-125"/>
         </scene>
-        <!--Solution-->
+        <!--Solution Table View Controller - Solution-->
         <scene sceneID="qT0-D7-n5L">
             <objects>
                 <tableViewController storyboardIdentifier="MCSolutionTableViewController" modalPresentationStyle="pageSheet" useStoryboardIdentifierAsRestorationIdentifier="YES" id="70X-Xq-8Hw" customClass="MCSolutionTableViewController" sceneMemberID="viewController">
@@ -382,7 +386,7 @@
             </objects>
             <point key="canvasLocation" x="4152" y="-125"/>
         </scene>
-        <!--Person Details-->
+        <!--Person Table View Controller i Pad - Person Details-->
         <scene sceneID="Gor-rB-6iQ">
             <objects>
                 <tableViewController storyboardIdentifier="MCPersonViewController_iPadTableViewController" useStoryboardIdentifierAsRestorationIdentifier="YES" id="ULr-7Y-8VH" customClass="MCPersonTableViewController_iPad" sceneMemberID="viewController">
@@ -799,7 +803,7 @@
             </objects>
             <point key="canvasLocation" x="4152" y="1095"/>
         </scene>
-        <!--payment details-->
+        <!--Payment Table View Controller i Pad - payment details-->
         <scene sceneID="8de-96-T7W">
             <objects>
                 <tableViewController storyboardIdentifier="MCPaymentTableViewController_iPad" useStoryboardIdentifierAsRestorationIdentifier="YES" id="3NB-dQ-HNX" customClass="MCPaymentTableViewController_iPad" sceneMemberID="viewController">
@@ -1252,7 +1256,7 @@
             </objects>
             <point key="canvasLocation" x="-903" y="-125"/>
         </scene>
-        <!--events-->
+        <!--Root View Controller - events-->
         <scene sceneID="8rY-HI-7EW">
             <objects>
                 <viewController storyboardIdentifier="eventViewController" useStoryboardIdentifierAsRestorationIdentifier="YES" id="LcN-QB-1Nf" customClass="MCRootViewController" sceneMemberID="viewController">
@@ -1382,10 +1386,7 @@
     <simulatedMetricsContainer key="defaultSimulatedMetrics">
         <simulatedStatusBarMetrics key="statusBar"/>
         <simulatedOrientationMetrics key="orientation"/>
-        <simulatedScreenMetrics key="destination">
-            <size key="portraitSize" width="768" height="1024"/>
-            <size key="landscapeSize" width="1024" height="768"/>
-        </simulatedScreenMetrics>
+        <simulatedScreenMetrics key="destination"/>
     </simulatedMetricsContainer>
     <inferredMetricsTieBreakers>
         <segue reference="oh3-5j-dZ9"/>
