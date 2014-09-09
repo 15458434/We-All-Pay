@@ -1188,7 +1188,7 @@
 						DevelopmentTeam = Z6JP26PUUY;
 						SystemCapabilities = {
 							com.apple.iCloud = {
-								enabled = 1;
+								enabled = 0;
 							};
 						};
 					};

@@ -617,11 +617,11 @@ NSString * const MCiCloudWeAllPayStoreName = @"iCloud-WeAllPayStore";
     NSURL *storeURL = [directoryURL URLByAppendingPathComponent:MCWeAllPayStoreFileName];
     
     NSError *error = nil;
-//    NSDictionary *storeOptions = @{NSInferMappingModelAutomaticallyOption: @YES,
-//                                   NSMigratePersistentStoresAutomaticallyOption: @YES};
     NSDictionary *storeOptions = @{NSInferMappingModelAutomaticallyOption: @YES,
-                                   NSMigratePersistentStoresAutomaticallyOption: @YES,
-                                   NSPersistentStoreUbiquitousContentNameKey : MCiCloudWeAllPayStoreName};
+                                   NSMigratePersistentStoresAutomaticallyOption: @YES};
+//    NSDictionary *storeOptions = @{NSInferMappingModelAutomaticallyOption: @YES,
+//                                   NSMigratePersistentStoresAutomaticallyOption: @YES,
+//                                   NSPersistentStoreUbiquitousContentNameKey : MCiCloudWeAllPayStoreName};
 //    if ([NSPersistentStoreCoordinator removeUbiquitousContentAndPersistentStoreAtURL:storeURL options:storeOptions error:&error]) {
 //        NSLog(@"Error removing ubiquitous content: %@", error);
 //    }

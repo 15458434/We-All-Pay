@@ -88,6 +88,7 @@
     [[UIBarButtonItem appearance] setTintColor:[MCColors getButtonColor]];
     [[UINavigationBar appearance] setBarStyle:UIBarStyleBlackTranslucent];
     [[UIApplication sharedApplication] setStatusBarStyle:UIStatusBarStyleLightContent];
+    [[UIButton appearanceWhenContainedIn:[UITableViewCell class], nil] setTitleColor:[UIColor whiteColor] forState:UIControlStateNormal];
     
     // Set the background color in the peoplepicker.
     [[UISearchBar appearance] setBarTintColor:[MCColors getbackgroundColor]];
