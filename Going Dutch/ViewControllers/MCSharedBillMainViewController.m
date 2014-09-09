@@ -107,6 +107,7 @@
             [firstResponder resignFirstResponder];
         }
         [_tonightsBill deleteIfStillNew];
+        [[MCWeAllPayStoreController defaultStore] saveMainThreadContext];
     }
 }
 

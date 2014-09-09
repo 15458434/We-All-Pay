@@ -181,6 +181,8 @@
             [paymentPresence setDateModified:nu];
         }
     }
+    [self setDateModified:nu];
+    [[self onWhichBill] setDateModified:nu];
 }
 
 - (NSString *)getMoneyValueAsAString

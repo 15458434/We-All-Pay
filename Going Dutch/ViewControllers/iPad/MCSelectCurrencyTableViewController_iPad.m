@@ -11,6 +11,7 @@
 
 #import "MCCurrency+addons.h"
 #import "MCPayment+addons.h"
+#import "MCSharedBill+addons.h"
 
 #import "MCWeAllPayStoreController.h"
 #import "XRCurrencyStoreController.h"
