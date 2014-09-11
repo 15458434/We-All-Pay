@@ -135,20 +135,6 @@
     }
 }
 
-- (void)viewWillDisappear:(BOOL)animated
-{
-    [super viewWillDisappear:animated];
-    
-    NSLog(@"PeoplePresentTableViewController will disappear.");
-}
-
-- (void)viewDidDisappear:(BOOL)animated
-{
-    [super viewDidDisappear:animated];
-    
-    NSLog(@"PeoplePresentTableViewController did disappear.");
-}
-
 - (void)didReceiveMemoryWarning
 {
     [super didReceiveMemoryWarning];
@@ -322,17 +308,17 @@
             [destination setThisPerson:[_dataController objectAtIndexPath:ip]];
             [[self tableView] deselectRowAtIndexPath:ip animated:YES];
         }
-        if ([destination conformsToProtocol:@protocol(MCDismissMeBlockProtocol)]) {
-            __weak MCSharedBillPeoplePresentTableViewController_iPad *weakSelf = self;
-            [destination setDismissMe:^{
-                MCSharedBillPeoplePresentTableViewController_iPad *strongSelf = weakSelf;
-                if (strongSelf) {
-//                    id<GAITracker> tracker = [[GAI sharedInstance] defaultTracker];
-//                    [tracker set:kGAIScreenName value:@"MCSharedBillMainViewController_iPad"];
-//                    [tracker send:[[GAIDictionaryBuilder createAppView] build]];
-                }
-            }];
-        }
+//        if ([destination conformsToProtocol:@protocol(MCDismissMeBlockProtocol)]) {
+//            __weak MCSharedBillPeoplePresentTableViewController_iPad *weakSelf = self;
+//            [destination setDismissMe:^{
+//                MCSharedBillPeoplePresentTableViewController_iPad *strongSelf = weakSelf;
+//                if (strongSelf) {
+////                    id<GAITracker> tracker = [[GAI sharedInstance] defaultTracker];
+////                    [tracker set:kGAIScreenName value:@"MCSharedBillMainViewController_iPad"];
+////                    [tracker send:[[GAIDictionaryBuilder createAppView] build]];
+//                }
+//            }];
+//        }
     }
 }
 

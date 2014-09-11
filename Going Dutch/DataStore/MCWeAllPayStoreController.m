@@ -82,6 +82,7 @@ NSString * const MCiCloudWeAllPayStoreName = @"iCloud-WeAllPayStore";
 - (void)openStore:(void (^)(BOOL success))completionHandler
 {
     [self mainThreadContext];
+    [self backgroundThreadContext];
     [self startRespondingToStoreChangeNotifications];
     if (_mainThreadContext && _backgroundThreadContext) {
         _mainThreadContext.undoManager = [[NSUndoManager alloc] init];
@@ -471,7 +472,7 @@ NSString * const MCiCloudWeAllPayStoreName = @"iCloud-WeAllPayStore";
     static BOOL stillNeedsInit = 1;
     
     if (self && stillNeedsInit) {
-        [self openStore:nil];
+//        [self openStore:nil];
         
         stillNeedsInit = 0;
     }
@@ -579,11 +580,23 @@ NSString * const MCiCloudWeAllPayStoreName = @"iCloud-WeAllPayStore";
         _mainThreadContext = [[NSManagedObjectContext alloc] initWithConcurrencyType:NSMainQueueConcurrencyType];
         _mainThreadContext.mergePolicy = NSMergeByPropertyObjectTrumpMergePolicy;
         [_mainThreadContext setPersistentStoreCoordinator:coordinator];
+    }
+    return _mainThreadContext;
+}
+
+- (NSManagedObjectContext *)backgroundThreadContext
+{
+    if (_backgroundThreadContext != nil) {
+        return _backgroundThreadContext;
+    }
+    
+    NSPersistentStoreCoordinator *coordinator = [self persistentStoreCoordinator];
+    if (coordinator != nil) {
         _backgroundThreadContext = [[NSManagedObjectContext alloc] initWithConcurrencyType:NSPrivateQueueConcurrencyType];
         _backgroundThreadContext.mergePolicy = NSMergeByPropertyObjectTrumpMergePolicy;
         [_backgroundThreadContext setPersistentStoreCoordinator:coordinator];
     }
-    return _mainThreadContext;
+    return _backgroundThreadContext;
 }
 
 // Returns the managed object model for the application.
@@ -617,11 +630,11 @@ NSString * const MCiCloudWeAllPayStoreName = @"iCloud-WeAllPayStore";
     NSURL *storeURL = [directoryURL URLByAppendingPathComponent:MCWeAllPayStoreFileName];
     
     NSError *error = nil;
-    NSDictionary *storeOptions = @{NSInferMappingModelAutomaticallyOption: @YES,
-                                   NSMigratePersistentStoresAutomaticallyOption: @YES};
 //    NSDictionary *storeOptions = @{NSInferMappingModelAutomaticallyOption: @YES,
-//                                   NSMigratePersistentStoresAutomaticallyOption: @YES,
-//                                   NSPersistentStoreUbiquitousContentNameKey : MCiCloudWeAllPayStoreName};
+//                                   NSMigratePersistentStoresAutomaticallyOption: @YES};
+    NSDictionary *storeOptions = @{NSInferMappingModelAutomaticallyOption: @YES,
+                                   NSMigratePersistentStoresAutomaticallyOption: @YES,
+                                   NSPersistentStoreUbiquitousContentNameKey : MCiCloudWeAllPayStoreName};
 //    if ([NSPersistentStoreCoordinator removeUbiquitousContentAndPersistentStoreAtURL:storeURL options:storeOptions error:&error]) {
 //        NSLog(@"Error removing ubiquitous content: %@", error);
 //    }

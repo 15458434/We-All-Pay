@@ -317,19 +317,19 @@
         if ([destination conformsToProtocol:@protocol(MCTonightsBillTransfer)]) {
             [destination setTonightsBill:_tonightsBill];
         }
-        if ([destination conformsToProtocol:@protocol(MCDismissMeBlockProtocol)]) {
-            __weak MCSharedBillPaymentsTableViewController_iPad *weakSelf = self;
-            [destination setDismissMe:^{
-                __strong MCSharedBillPaymentsTableViewController_iPad *strongSelf = weakSelf;
-                if (strongSelf) {
-                    [[strongSelf tableView] deselectRowAtIndexPath:ip animated:YES];
-                    
-//                    id<GAITracker> tracker = [[GAI sharedInstance] defaultTracker];
-//                    [tracker set:kGAIScreenName value:@"MCSharedBillMainViewController_iPad"];
-//                    [tracker send:[[GAIDictionaryBuilder createAppView] build]];
-                }
-            }];
-        }
+//        if ([destination conformsToProtocol:@protocol(MCDismissMeBlockProtocol)]) {
+//            __weak MCSharedBillPaymentsTableViewController_iPad *weakSelf = self;
+//            [destination setDismissMe:^{
+//                __strong MCSharedBillPaymentsTableViewController_iPad *strongSelf = weakSelf;
+//                if (strongSelf) {
+//                    [[strongSelf tableView] deselectRowAtIndexPath:ip animated:YES];
+//                    
+////                    id<GAITracker> tracker = [[GAI sharedInstance] defaultTracker];
+////                    [tracker set:kGAIScreenName value:@"MCSharedBillMainViewController_iPad"];
+////                    [tracker send:[[GAIDictionaryBuilder createAppView] build]];
+//                }
+//            }];
+//        }
     }
 }
 
