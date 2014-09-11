@@ -124,15 +124,25 @@
     
     if (!_dataController) {
         _dataController = [[MCWeAllPayStoreController defaultStore] sharedBillPeoplePresentDataControllerForDelegate:self];
-    }
-    UIManagedDocument *weAllPayDocument = [[MCWeAllPayStoreController defaultStore] weAllPayStoreDocument];
-    if (![[MCWeAllPayStoreController defaultStore] isDocumentStateNormal]) {
-        [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(performFetchAndReloadTableView:) name:UIDocumentStateChangedNotification object:weAllPayDocument];
-    } else {
         [self performFetch];
         [[self tableView] reloadData];
         [self setEmptyMessageNow];
     }
+//    UIManagedDocument *weAllPayDocument = [[MCWeAllPayStoreController defaultStore] weAllPayStoreDocument];
+//    if (![[MCWeAllPayStoreController defaultStore] isDocumentStateNormal]) {
+//        [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(performFetchAndReloadTableView:) name:UIDocumentStateChangedNotification object:weAllPayDocument];
+//    } else {
+//        [self performFetch];
+//        [[self tableView] reloadData];
+//        [self setEmptyMessageNow];
+//    }
+}
+
+- (void)viewDidAppear:(BOOL)animated
+{
+    [super viewDidAppear:animated];
+    
+    NSLog(@"People on screen");
 }
 
 - (void)didReceiveMemoryWarning
@@ -151,23 +161,31 @@
 - (void)storeWillBeSwapped:(NSNotification *)notification
 {
     [super storeWillBeSwapped:notification];
+    typeof(self) weakSelf = self;
     dispatch_sync(dispatch_get_main_queue(), ^{
-        [[self view] setUserInteractionEnabled:NO];
+        typeof(weakSelf) strongSelf = weakSelf;
+        if (strongSelf) {
+            [[strongSelf view] setUserInteractionEnabled:NO];
+        }
     });
 }
 
 -(void)storeDidSwap:(NSNotification *)notification
 {
     [super storeDidSwap:notification];
+    typeof(self) weakSelf = self;
     dispatch_sync(dispatch_get_main_queue(), ^{
-        if (_dataController) {
-            NSError *fetchError;
-            if (![_dataController performFetch:&fetchError]) {
-                NSLog(@"Error fetching: %@", fetchError);
+        typeof(weakSelf) strongSelf = weakSelf;
+        if (strongSelf) {
+            if (strongSelf.dataController) {
+                NSError *fetchError;
+                if (![strongSelf.dataController performFetch:&fetchError]) {
+                    NSLog(@"Error fetching: %@", fetchError);
+                }
             }
+            [[strongSelf tableView] reloadData];
+            [[strongSelf view] setUserInteractionEnabled:YES];
         }
-        [[self tableView] reloadData];
-        [[self view] setUserInteractionEnabled:YES];
     });
 }
 

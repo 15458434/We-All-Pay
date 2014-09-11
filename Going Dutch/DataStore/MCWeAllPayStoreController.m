@@ -581,6 +581,7 @@ NSString * const MCiCloudWeAllPayStoreName = @"iCloud-WeAllPayStore";
         _mainThreadContext.mergePolicy = NSMergeByPropertyObjectTrumpMergePolicy;
         [_mainThreadContext setPersistentStoreCoordinator:coordinator];
     }
+    NSLog(@"mainThreadContext has been created.");
     return _mainThreadContext;
 }
 
@@ -596,6 +597,7 @@ NSString * const MCiCloudWeAllPayStoreName = @"iCloud-WeAllPayStore";
         _backgroundThreadContext.mergePolicy = NSMergeByPropertyObjectTrumpMergePolicy;
         [_backgroundThreadContext setPersistentStoreCoordinator:coordinator];
     }
+    NSLog(@"backgroundThreadContext has been created.");
     return _backgroundThreadContext;
 }
 

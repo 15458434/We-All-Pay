@@ -153,23 +153,31 @@
 - (void)storeWillBeSwapped:(NSNotification *)notification
 {
     [super storeWillBeSwapped:notification];
+    typeof(self) weakSelf = self;
     dispatch_sync(dispatch_get_main_queue(), ^{
-        [[self view] setUserInteractionEnabled:NO];
+        typeof(weakSelf) strongSelf = weakSelf;
+        if (strongSelf) {
+            [[self view] setUserInteractionEnabled:NO];
+        }
     });
 }
 
 -(void)storeDidSwap:(NSNotification *)notification
 {
     [super storeDidSwap:notification];
+    typeof(self) weakSelf = self;
     dispatch_sync(dispatch_get_main_queue(), ^{
-        if (_dataController) {
-            NSError *fetchError;
-            if (![_dataController performFetch:&fetchError]) {
-                NSLog(@"Error fetching: %@", fetchError);
+        typeof(self) strongSelf = weakSelf;
+        if (strongSelf) {
+            if (strongSelf.dataController) {
+                NSError *fetchError;
+                if (![strongSelf.dataController performFetch:&fetchError]) {
+                    NSLog(@"Error fetching: %@", fetchError);
+                }
             }
+            [[strongSelf tableView] reloadData];
+            [[strongSelf view] setUserInteractionEnabled:YES];
         }
-        [[self tableView] reloadData];
-        [[self view] setUserInteractionEnabled:YES];
     });
 }
 
