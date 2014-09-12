@@ -77,25 +77,13 @@
 
 - (void)prepareDataControllerAndFetch
 {
-    // What entities will be fetched.
-    NSFetchRequest *request = [NSFetchRequest fetchRequestWithEntityName:@"MCPayment"];
-    [request setRelationshipKeyPathsForPrefetching:@[ @"payingPerson" ]];
-    // How to sort the data.
-    NSSortDescriptor *sortDescriptor = [NSSortDescriptor sortDescriptorWithKey:@"dateCreated" ascending:NO];
-    NSArray *sortDescriptorArray = @[sortDescriptor];
-    [request setSortDescriptors:sortDescriptorArray];
-    // Select only people from tonightsBill.
-    NSPredicate *predicate = [NSPredicate predicateWithFormat:@"onWhichBill = %@", tonightsBill];
-    [request setPredicate:predicate];
-    
-    // Create the FetchedResultsController.
-    _dataController = [[NSFetchedResultsController alloc] initWithFetchRequest:request managedObjectContext:[[MCWeAllPayStoreController defaultStore] mainThreadContext] sectionNameKeyPath:nil cacheName:[NSString stringWithFormat:@"All payments cache of trip: %@", [tonightsBill uniqueBillId]]];
+    // TODO: Replace this with the NSFetchedResultsController coming from MCWeAllPayStoreController.
+    _dataController = [[MCWeAllPayStoreController defaultStore] sharedBillPaymentsDataControllerForDelegate:self];
     NSError *error;
     BOOL success = [_dataController performFetch:&error];
     if (!success) {
         NSLog(@"Something went wrong fetching the payments");
     }
-    [_dataController setDelegate:self];
 }
 
 - (void)setEmptyMessage
