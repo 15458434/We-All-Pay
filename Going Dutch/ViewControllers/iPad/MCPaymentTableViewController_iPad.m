@@ -32,6 +32,7 @@
 - (IBAction)mainCancelPressed:(id)sender
 {
     _mainCancelPressed = cancelIsPressed;
+    _dataController.delegate = nil;
     if ([[[[MCWeAllPayStoreController defaultStore] mainThreadContext] undoManager] canUndo]) {
         [[MCWeAllPayStoreController defaultStore] endUndoGroupAndUndo];
     } else {
