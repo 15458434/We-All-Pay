@@ -29,7 +29,7 @@ NSString * const XRCurrencyStoreFileExtension = @"sqlite";
 {
     NSURL *applicationDocumentsDirectory = [[[NSFileManager defaultManager] URLsForDirectory:NSDocumentDirectory inDomains:NSUserDomainMask] lastObject];
     NSURL *directoryURL = [applicationDocumentsDirectory URLByAppendingPathComponent:XRCurrencyBaseDirectory isDirectory:YES];
-    NSString *languageCode = [[NSLocale systemLocale] objectForKey:NSLocaleLanguageCode];
+    NSString *languageCode = [[NSLocale currentLocale] objectForKey:NSLocaleLanguageCode];
     NSString *fullFileName = [NSString stringWithFormat:@"%@-%@.%@", XRCurrencyStoreFileName, languageCode ,XRCurrencyStoreFileExtension];
     NSURL *storeURL = [directoryURL URLByAppendingPathComponent:fullFileName];
     NSFileManager *fileManager = [NSFileManager defaultManager];
@@ -228,7 +228,7 @@ NSString * const XRCurrencyStoreFileExtension = @"sqlite";
             NSLog(@"Unable to create base directory for XRCurrencyStore: %@", directoryCreationError);
         }
     }
-    NSString *languageCode = [[NSLocale systemLocale] objectForKey:NSLocaleLanguageCode];
+    NSString *languageCode = [[NSLocale currentLocale] objectForKey:NSLocaleLanguageCode];
     NSString *fullFileName = [NSString stringWithFormat:@"%@-%@.%@", XRCurrencyStoreFileName, languageCode ,XRCurrencyStoreFileExtension];
     NSURL *storeURL = [directoryURL URLByAppendingPathComponent:fullFileName];
     
