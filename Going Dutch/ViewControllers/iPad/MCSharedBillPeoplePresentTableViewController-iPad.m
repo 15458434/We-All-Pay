@@ -110,6 +110,7 @@
     [[emptyMessage bigMessage] setText:NSLocalizedString(@"PEOPLE_LIST_EMPTY_MESSAGE", @"Press \"add Person\" to add a person who you'd like to share this bill with.")];
     [[emptyMessage bigMessage] setAlpha:0.0];
     [[self tableView] setBackgroundView:emptyMessage];
+    self.tableView.estimatedRowHeight = 120.0;
 }
 
 - (void)viewWillAppear:(BOOL)animated

@@ -211,7 +211,8 @@ NSUInteger const MCCurrencyTypeSelection = MCCurrencyTypeCurrency | MCCurrencyTy
 #endif
                 } else {
                     NSNumberFormatter *numberFormatter = [NSNumberFormatter new];
-                    NSString *localeIdentifier = [exchangeRateJSON valueForKeyPath:@"query.lang"];
+//                    NSString *localeIdentifier = [exchangeRateJSON valueForKeyPath:@"query.lang"];
+                    NSString *localeIdentifier = @"en_US";
                     [numberFormatter setLocale:[NSLocale localeWithLocaleIdentifier:localeIdentifier]];
                     [numberFormatter setNumberStyle:NSNumberFormatterDecimalStyle];
                     NSNumber *exchangeRate = [numberFormatter numberFromString:[exchangeRateJSON valueForKeyPath:@"query.results.row.rate"]];
