@@ -20,6 +20,11 @@
 #import "MCTonightsBillTransfer.h"
 #import "MCThisPaymentProtocol.h"
 
+typedef NS_ENUM(BOOL, MCiCloudUse) {
+    iCloudIsNotUsed,
+    iCloudIsUsed
+};
+
 // This is the name of the WeAllPayStoreFile. It's inherited from the location where UIManagedDocumentStores it's database file.
 NSString * const MCWeAllPayStoreFileName = @"persistentStore";
 NSString * const MCWeAllPayStoreDirectoryName = @"WeAllPayStore/StoreContent";
@@ -27,6 +32,7 @@ NSString * const MCWeAllPayStoreDirectoryName = @"WeAllPayStore/StoreContent";
 NSString * const MCWeAllPayStoreModelName = @"WeAllPayStore";
 
 NSString * const MCiCloudWeAllPayStoreName = @"iCloud-WeAllPayStore";
+MCiCloudUse const isiCloudUsed = iCloudIsNotUsed;
 
 @interface MCWeAllPayStoreController ()
 
@@ -632,11 +638,17 @@ NSString * const MCiCloudWeAllPayStoreName = @"iCloud-WeAllPayStore";
     NSURL *storeURL = [directoryURL URLByAppendingPathComponent:MCWeAllPayStoreFileName];
     
     NSError *error = nil;
-//    NSDictionary *storeOptions = @{NSInferMappingModelAutomaticallyOption: @YES,
-//                                   NSMigratePersistentStoresAutomaticallyOption: @YES};
-    NSDictionary *storeOptions = @{NSInferMappingModelAutomaticallyOption: @YES,
-                                   NSMigratePersistentStoresAutomaticallyOption: @YES,
-                                   NSPersistentStoreUbiquitousContentNameKey : MCiCloudWeAllPayStoreName};
+    NSDictionary *storeOptions;
+    if (isiCloudUsed == iCloudIsUsed) {
+        NSLog(@"Store will be opened with iCloud support.");
+        storeOptions = @{NSInferMappingModelAutomaticallyOption: @YES,
+                         NSMigratePersistentStoresAutomaticallyOption: @YES,
+                         NSPersistentStoreUbiquitousContentNameKey: MCiCloudWeAllPayStoreName};
+    } else {
+        NSLog(@"Store will not be opened with iCloud support.");
+        storeOptions = @{NSInferMappingModelAutomaticallyOption: @YES,
+                         NSMigratePersistentStoresAutomaticallyOption: @YES};
+    }
 //    if ([NSPersistentStoreCoordinator removeUbiquitousContentAndPersistentStoreAtURL:storeURL options:storeOptions error:&error]) {
 //        NSLog(@"Error removing ubiquitous content: %@", error);
 //    }
