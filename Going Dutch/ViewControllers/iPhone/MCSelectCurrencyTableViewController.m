@@ -165,7 +165,11 @@ NSString * const cellIdentifier = @"MCSelectCurrencyTableViewCell_iPhone";
 
 - (NSString *)tableView:(UITableView *)tableView titleForHeaderInSection:(NSInteger)section
 {
-    return [[[UILocalizedIndexedCollation currentCollation] sectionTitles] objectAtIndex:section];
+    if (tableView != [[self searchDisplayController] searchResultsTableView]) {
+        return [[[UILocalizedIndexedCollation currentCollation] sectionTitles] objectAtIndex:section];
+    } else {
+        return @"";
+    }
 }
 
 - (NSArray *)sectionIndexTitlesForTableView:(UITableView *)tableView {
@@ -180,7 +184,11 @@ NSString * const cellIdentifier = @"MCSelectCurrencyTableViewCell_iPhone";
 - (NSInteger)numberOfSectionsInTableView:(UITableView *)tableView
 {
     // Return the number of sections.
-    return [[[UILocalizedIndexedCollation currentCollation] sectionTitles] count];
+    if (tableView != [[self searchDisplayController] searchResultsTableView]) {
+        return [[[UILocalizedIndexedCollation currentCollation] sectionTitles] count];
+    } else {
+        return 1;
+    }
 }
 
 - (NSInteger)tableView:(UITableView *)tableView numberOfRowsInSection:(NSInteger)section
