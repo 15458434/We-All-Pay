@@ -135,7 +135,11 @@ NSString * const currencyCellIdentifier_iPad = @"MCSelectCurrencyTableViewCell_i
 
 - (NSString *)tableView:(UITableView *)tableView titleForHeaderInSection:(NSInteger)section
 {
-    return [[[UILocalizedIndexedCollation currentCollation] sectionTitles] objectAtIndex:section];
+    if (tableView != [[self searchDisplayController] searchResultsTableView]) {
+        return [[[UILocalizedIndexedCollation currentCollation] sectionTitles] objectAtIndex:section];
+    } else {
+        return @"";
+    }
 }
 
 - (NSArray *)sectionIndexTitlesForTableView:(UITableView *)tableView
