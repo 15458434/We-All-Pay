@@ -23,6 +23,7 @@ NSString * const cellIdentifier = @"MCSelectCurrencyTableViewCell_iPhone";
 @interface MCSelectCurrencyTableViewController () <UISearchDisplayDelegate, UISearchBarDelegate>
 
 @property (nonatomic, strong) NSFetchedResultsController *dataController;
+@property (nonatomic, strong) NSMutableArray *sections;
 @property (nonatomic, strong) NSFetchedResultsController *searchDataController;
 @property (nonatomic, strong) NSMutableArray *searchResults;
 
@@ -68,6 +69,30 @@ NSString * const cellIdentifier = @"MCSelectCurrencyTableViewCell_iPhone";
     [_thisPayment setNewCurrencyAndAutomaticallyUpdateExchangeRate:newCurrency];
 }
 
+- (void)setObjects:(NSArray *)objects {
+    SEL selector = @selector(name);
+    NSInteger index, sectionTitlesCount = [[[UILocalizedIndexedCollation currentCollation] sectionTitles] count];
+    
+    NSMutableArray *mutableSections = [[NSMutableArray alloc] initWithCapacity:sectionTitlesCount];
+    for (NSUInteger idx = 0; idx < sectionTitlesCount; idx++) {
+        [mutableSections addObject:[NSMutableArray array]];
+    }
+    
+    for (id object in objects) {
+        NSInteger sectionNumber = [[UILocalizedIndexedCollation currentCollation] sectionForObject:object collationStringSelector:selector];
+        [[mutableSections objectAtIndex:sectionNumber] addObject:object];
+    }
+    
+    for (NSUInteger idx = 0; idx < sectionTitlesCount; idx++) {
+        NSArray *objectsForSection = [mutableSections objectAtIndex:idx];
+        [mutableSections replaceObjectAtIndex:idx withObject:[[UILocalizedIndexedCollation currentCollation] sortedArrayFromArray:objectsForSection collationStringSelector:selector]];
+    }
+    
+    self.sections = mutableSections;
+    
+    [self.tableView reloadData];
+}
+
 #pragma mark - Inherited From Super
 
 - (id)initWithStyle:(UITableViewStyle)style
@@ -94,6 +119,7 @@ NSString * const cellIdentifier = @"MCSelectCurrencyTableViewCell_iPhone";
     if (![_dataController performFetch:&fetchError]) {
         NSLog(@"Error fetching XRCurrencies: %@", fetchError);
     }
+    [self setObjects:[_dataController fetchedObjects]];
 }
 
 - (void)didReceiveMemoryWarning
@@ -137,17 +163,32 @@ NSString * const cellIdentifier = @"MCSelectCurrencyTableViewCell_iPhone";
 
 #pragma mark - Table view data source
 
+- (NSString *)tableView:(UITableView *)tableView titleForHeaderInSection:(NSInteger)section
+{
+    return [[[UILocalizedIndexedCollation currentCollation] sectionTitles] objectAtIndex:section];
+}
+
+- (NSArray *)sectionIndexTitlesForTableView:(UITableView *)tableView {
+    return [[UILocalizedIndexedCollation currentCollation] sectionIndexTitles];
+}
+
+- (NSInteger)tableView:(UITableView *)tableView sectionForSectionIndexTitle:(NSString *)title atIndex:(NSInteger)index
+{
+    return [[UILocalizedIndexedCollation currentCollation] sectionForSectionIndexTitleAtIndex:index];
+}
+
 - (NSInteger)numberOfSectionsInTableView:(UITableView *)tableView
 {
     // Return the number of sections.
-    return 1;
+    return [[[UILocalizedIndexedCollation currentCollation] sectionTitles] count];
 }
 
 - (NSInteger)tableView:(UITableView *)tableView numberOfRowsInSection:(NSInteger)section
 {
     // Return the number of rows in the section.
     if (tableView != [[self searchDisplayController] searchResultsTableView]) {
-        return [[_dataController fetchedObjects] count];
+//        return [[_dataController fetchedObjects] count];
+        return [_sections[section] count];
     } else {
         return [_searchResults count];
     }
@@ -162,7 +203,8 @@ NSString * const cellIdentifier = @"MCSelectCurrencyTableViewCell_iPhone";
 
     XRCurrency *thisCellsCurrency;
     if (tableView != [[self searchDisplayController] searchResultsTableView]) {
-        thisCellsCurrency = [_dataController objectAtIndexPath:indexPath];
+//        thisCellsCurrency = [_dataController objectAtIndexPath:indexPath];
+        thisCellsCurrency = _sections[[indexPath section]][[indexPath row]];
     } else {
         thisCellsCurrency = [_searchResults objectAtIndex:[indexPath row]];
     }
