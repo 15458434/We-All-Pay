@@ -22,6 +22,7 @@ NSString * const currencyCellIdentifier_iPad = @"MCSelectCurrencyTableViewCell_i
 @interface MCSelectCurrencyTableViewController_iPad () <UISearchBarDelegate, UISearchDisplayDelegate>
 
 @property (nonatomic, strong) NSFetchedResultsController *dataController;
+@property (nonatomic, strong) NSMutableArray *sections;
 @property (nonatomic, strong) NSMutableArray *searchResults;
 
 @end
@@ -29,6 +30,30 @@ NSString * const currencyCellIdentifier_iPad = @"MCSelectCurrencyTableViewCell_i
 @implementation MCSelectCurrencyTableViewController_iPad
 
 #pragma mark - Private in this class
+
+- (void)setObjects:(NSArray *)objects {
+    SEL selector = @selector(name);
+    NSInteger index, sectionTitlesCount = [[[UILocalizedIndexedCollation currentCollation] sectionTitles] count];
+    
+    NSMutableArray *mutableSections = [[NSMutableArray alloc] initWithCapacity:sectionTitlesCount];
+    for (NSUInteger idx = 0; idx < sectionTitlesCount; idx++) {
+        [mutableSections addObject:[NSMutableArray array]];
+    }
+    
+    for (id object in objects) {
+        NSInteger sectionNumber = [[UILocalizedIndexedCollation currentCollation] sectionForObject:object collationStringSelector:selector];
+        [[mutableSections objectAtIndex:sectionNumber] addObject:object];
+    }
+    
+    for (NSUInteger idx = 0; idx < sectionTitlesCount; idx++) {
+        NSArray *objectsForSection = [mutableSections objectAtIndex:idx];
+        [mutableSections replaceObjectAtIndex:idx withObject:[[UILocalizedIndexedCollation currentCollation] sortedArrayFromArray:objectsForSection collationStringSelector:selector]];
+    }
+    
+    self.sections = mutableSections;
+    
+    [self.tableView reloadData];
+}
 
 - (void)filterContentForSearchText:(NSString*)searchText scope:(NSString*)scope {
 	[_searchResults removeAllObjects];
@@ -63,6 +88,7 @@ NSString * const currencyCellIdentifier_iPad = @"MCSelectCurrencyTableViewCell_i
     if (![_dataController performFetch:&fetchError]) {
         NSLog(@"Error fetching currencies: %@", fetchError);
     }
+    [self setObjects:[_dataController fetchedObjects]];
 }
 
 - (void)didReceiveMemoryWarning
@@ -107,17 +133,36 @@ NSString * const currencyCellIdentifier_iPad = @"MCSelectCurrencyTableViewCell_i
 
 #pragma mark - Table view data source
 
+- (NSString *)tableView:(UITableView *)tableView titleForHeaderInSection:(NSInteger)section
+{
+    return [[[UILocalizedIndexedCollation currentCollation] sectionTitles] objectAtIndex:section];
+}
+
+- (NSArray *)sectionIndexTitlesForTableView:(UITableView *)tableView
+{
+    return [[UILocalizedIndexedCollation currentCollation] sectionIndexTitles];
+}
+
+- (NSInteger)tableView:(UITableView *)tableView sectionForSectionIndexTitle:(NSString *)title atIndex:(NSInteger)index
+{
+    return [[UILocalizedIndexedCollation currentCollation] sectionForSectionIndexTitleAtIndex:index];
+}
+
 - (NSInteger)numberOfSectionsInTableView:(UITableView *)tableView
 {
     // Return the number of sections.
-    return 1;
+    if (tableView != [[self searchDisplayController] searchResultsTableView]) {
+        return [[[UILocalizedIndexedCollation currentCollation] sectionTitles] count];
+    } else {
+        return 1;
+    }
 }
 
 - (NSInteger)tableView:(UITableView *)tableView numberOfRowsInSection:(NSInteger)section
 {
     // Return the number of rows in the section.
     if (tableView != [[self searchDisplayController] searchResultsTableView]) {
-        return [[_dataController fetchedObjects] count];
+        return [_sections[section] count];
     } else {
         return [_searchResults count];
     }
@@ -133,7 +178,8 @@ NSString * const currencyCellIdentifier_iPad = @"MCSelectCurrencyTableViewCell_i
     
     XRCurrency *thisCellsCurrency;
     if (tableView != [[self searchDisplayController] searchResultsTableView]) {
-        thisCellsCurrency = [_dataController objectAtIndexPath:indexPath];
+//        thisCellsCurrency = [_dataController objectAtIndexPath:indexPath];
+        thisCellsCurrency = _sections[[indexPath section]][[indexPath row]];
     } else {
         thisCellsCurrency = [_searchResults objectAtIndex:[indexPath row]];
     }
