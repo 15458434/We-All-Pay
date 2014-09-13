@@ -15,8 +15,8 @@
 
 #pragma mark - New in this class
 
-- (void)setupGoogleAnalytics
-{
+//- (void)setupGoogleAnalytics
+//{
     // Optional: automatically send uncaught exceptions to Google Analytics.
 //    [GAI sharedInstance].trackUncaughtExceptions = YES;
     
@@ -34,16 +34,16 @@
     
     // Get opt-in value
     // Get user preference
-    NSUserDefaults *defaults = [NSUserDefaults standardUserDefaults];
-    BOOL optInValue = [defaults boolForKey:@"googleAnalyticsOptIn"];
-    BOOL success = [defaults synchronize];
-    if (!success) {
-        NSLog(@"Unable to write userDefaults.");
-    }
+//    NSUserDefaults *defaults = [NSUserDefaults standardUserDefaults];
+//    BOOL optInValue = [defaults boolForKey:@"googleAnalyticsOptIn"];
+//    BOOL success = [defaults synchronize];
+//    if (!success) {
+//        NSLog(@"Unable to write userDefaults.");
+//    }
     
     // Set to YES if during test versions.
 //    [[GAI sharedInstance] setDryRun:!optInValue];
-}
+//}
 
 - (void)startGoogleAnalyticsSession
 {

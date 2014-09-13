@@ -19,16 +19,6 @@
     return (__bridge_transfer NSString *)UUIDString;
 }
 
-+ (NSString *)documentPathAsURLTo:(NSString *)fileName
-{
-    // Get the array of document directories.
-    NSArray *documentDirectories = NSSearchPathForDirectoriesInDomains(NSDocumentDirectory, NSUserDomainMask, YES);
-    // The first document directory in the array is the one used by iOS 6.1.
-    NSString *documentDirectory = documentDirectories[0];
-    // Add the fileName to the string and return it as a NSURL.
-    return [NSURL fileURLWithPath:[documentDirectory stringByAppendingPathComponent:fileName]];
-}
-
 + (void)setAdBannerIfNotPaid:(BOOL)show forViewController:(UIViewController *)viewController
 {
     if ([[[UIDevice currentDevice] model] isEqualToString:@"iPad"] && [[UIDevice currentDevice] userInterfaceIdiom] == UIUserInterfaceIdiomPhone) {

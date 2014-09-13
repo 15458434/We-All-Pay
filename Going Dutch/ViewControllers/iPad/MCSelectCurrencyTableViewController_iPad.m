@@ -33,7 +33,7 @@ NSString * const currencyCellIdentifier_iPad = @"MCSelectCurrencyTableViewCell_i
 
 - (void)setObjects:(NSArray *)objects {
     SEL selector = @selector(name);
-    NSInteger index, sectionTitlesCount = [[[UILocalizedIndexedCollation currentCollation] sectionTitles] count];
+    NSInteger sectionTitlesCount = [[[UILocalizedIndexedCollation currentCollation] sectionTitles] count];
     
     NSMutableArray *mutableSections = [[NSMutableArray alloc] initWithCapacity:sectionTitlesCount];
     for (NSUInteger idx = 0; idx < sectionTitlesCount; idx++) {
