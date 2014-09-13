@@ -13,6 +13,7 @@
 #import "MCSharedBill+addons.h"
 #import "MCReturnPayment.h"
 #import "MCPerson+addons.h"
+#import "MCWeAllPayStoreController.h"
 
 #import "MCReturnPaymentTableViewCell.h"
 #import "MCSolutionOverViewTableViewCell_iPhone.h"
@@ -33,6 +34,7 @@ typedef NS_ENUM(BOOL, MCXRatesMissing) {
 
 @property (nonatomic) MCXRatesMissing areXRatesMissing;
 @property (nonatomic, strong) UIAlertView *noXRatesAlert;
+@property (nonatomic, strong) UIAlertController *rateMeAlert;
 
 @property (nonatomic, strong) MCTableEmptyMessage *emptyMessage;
 
@@ -55,6 +57,24 @@ typedef NS_ENUM(BOOL, MCXRatesMissing) {
 }
 
 #pragma mark - Private in this class
+
+- (void)showRateMe
+{
+    _rateMeAlert = [UIAlertController alertControllerWithTitle:@"Please Rate Me" message:@"Do you like We all pay? If so please take some time to leave a rating in the App Store" preferredStyle:UIAlertControllerStyleAlert];
+    UIAlertAction *rateMe = [UIAlertAction actionWithTitle:@"rate me" style:UIAlertActionStyleDefault handler:^(UIAlertAction *action) {
+        NSLog(@"Rate me");
+    }];
+    UIAlertAction *later = [UIAlertAction actionWithTitle:@"later" style:UIAlertActionStyleDefault handler:^(UIAlertAction *action) {
+        NSLog(@"Later");
+    }];
+    UIAlertAction *never = [UIAlertAction actionWithTitle:@"never" style:UIAlertActionStyleDefault handler:^(UIAlertAction *action) {
+        NSLog(@"Never!!");
+    }];
+    [_rateMeAlert addAction:never];
+    [_rateMeAlert addAction:later];
+    [_rateMeAlert addAction:rateMe];
+    [self presentViewController:_rateMeAlert animated:YES completion:nil];
+}
 
 - (NSArray *)giveSolution
 {
@@ -262,9 +282,16 @@ typedef NS_ENUM(BOOL, MCXRatesMissing) {
     if (result == MFMailComposeResultCancelled) {
         [[self presentedViewController] dismissViewControllerAnimated:YES completion:nil];
     } else if (result == MFMailComposeResultSent) {
+        // TODO: add rate me here.
         [[self presentedViewController] dismissViewControllerAnimated:YES completion:^{
             [_tonightsBill setHasTheMailBeenSent:@YES];
+            [[MCWeAllPayStoreController defaultStore] saveMainThreadContext];
         }];
+//        if (1) {
+//            [self showRateMe];
+//        } else {
+//            
+//        }
     } else if (result == MFMailComposeResultSaved) {
         [[self presentedViewController] dismissViewControllerAnimated:YES completion:nil];
     } else {
