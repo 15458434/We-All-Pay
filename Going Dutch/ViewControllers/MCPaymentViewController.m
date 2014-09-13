@@ -23,9 +23,6 @@
 
 @implementation MCPaymentViewController
 
-//@synthesize thisPayment;
-@synthesize tonightsBill;
-//@synthesize didSomethingChange;
 @synthesize isNew;
 @synthesize delegate;
 
@@ -92,13 +89,13 @@
 
 - (void)donePersonPicker:(id)selector
 {
-    if ([[tonightsBill peoplePresent] count] > 0) {
+    if ([[_tonightsBill peoplePresent] count] > 0) {
         NSInteger row = [personPickerView selectedRowInComponent:0];
         [_thisPayment setPayingPerson:listOfPeople[row]];
 //        [payerView setText:[[_thisPayment payingPerson] getFullName]];
 //        didSomethingChange = YES;
         NSDate *nu = [NSDate date];
-        [tonightsBill setDateModified:nu];
+        [_tonightsBill setDateModified:nu];
         [_thisPayment setDateModified:nu];
 //        [[[self navigationItem] rightBarButtonItem] setEnabled:YES];
     }
@@ -138,7 +135,7 @@
     
     [[[self navigationItem] rightBarButtonItem] setEnabled:YES];
     NSDate *nu = [NSDate date];
-    [tonightsBill setDateModified:nu];
+    [_tonightsBill setDateModified:nu];
     [_thisPayment setDateModified:nu];
 //    didSomethingChange = YES;
     [[MCWeAllPayStoreController defaultStore] endUndoGroupWithoutRegistration];
@@ -151,7 +148,7 @@
     self = [super init];
     
     if (self) {
-        tonightsBill = bill;
+        _tonightsBill = bill;
 //        didSomethingChange = NO;
         if (thePayment) {
             _thisPayment = thePayment;
@@ -212,7 +209,7 @@
 - (NSString *)pickerView:(UIPickerView *)pickerView titleForRow:(NSInteger)row forComponent:(NSInteger)component
 {
     if (listOfPeople == nil) {
-        listOfPeople = [tonightsBill getArrayOfFullNamesOfPeoplePresent];
+        listOfPeople = [_tonightsBill getArrayOfFullNamesOfPeoplePresent];
     }
     return [listOfPeople[row] getFullName];
 }
@@ -233,7 +230,7 @@
 
 - (NSInteger)pickerView:(UIPickerView *)pickerView numberOfRowsInComponent:(NSInteger)component
 {
-    return [[tonightsBill peoplePresent] count];
+    return [[_tonightsBill peoplePresent] count];
 }
 
 #pragma mark - UITextFieldDelegate
@@ -248,6 +245,13 @@
 
 - (BOOL)textFieldShouldBeginEditing:(UITextField *)textField
 {
+    if (textField == payerView) {
+        // TODO: Better UI solution for the user.
+        if ([[_tonightsBill peoplePresent] count] == 0) {
+            NSLog(@"No people present on _tonightsBill, editing this textField is not allowed.");
+            return NO;
+        }
+    }
     return YES;
 }
 
@@ -272,7 +276,7 @@
         NSInteger row = 0;
         MCPerson *payingPerson = [_thisPayment payingPerson];
         if (listOfPeople == nil) {
-            listOfPeople = [tonightsBill getArrayOfFullNamesOfPeoplePresent];
+            listOfPeople = [_tonightsBill getArrayOfFullNamesOfPeoplePresent];
         }
         if (payingPerson) {
             row = [listOfPeople indexOfObject:payingPerson];
@@ -328,7 +332,7 @@
         // Do something to store value of placeview.
         [self storePlaceViewData];
         NSDate *nu = [NSDate date];
-        [tonightsBill setDateModified:nu];
+        [_tonightsBill setDateModified:nu];
         [_thisPayment setDateModified:nu];
     }
 }
@@ -353,7 +357,7 @@
     
     // When _thisPayment was not passed along a new one should be created.
     if (!_thisPayment) {
-        _thisPayment = [tonightsBill addPayment];
+        _thisPayment = [_tonightsBill addPayment];
         isNew = YES;
 //        didSomethingChange = YES;
     } else {
@@ -363,7 +367,7 @@
     _dataController = [[MCWeAllPayStoreController defaultStore] paymentPresenceDataControllerForDelegate:self];
     
     // If tonight's bill wasn't passed along.
-    if (!tonightsBill) {
+    if (!_tonightsBill) {
         NSLog(@"tonightsBill wasn't passed along.");
         @throw [NSException exceptionWithName:@"tonightsBill missing" reason:@"thisPayment didn't receive tonightsBill." userInfo:nil];
     }
