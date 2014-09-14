@@ -146,7 +146,7 @@ NSString * const cellIdentifier = @"MCSelectCurrencyTableViewCell_iPhone";
 {
     XRCurrency *thisCellsCurrency;
     if (tableView != [[self searchDisplayController] searchResultsTableView]) {
-        thisCellsCurrency = [_dataController objectAtIndexPath:indexPath];
+        thisCellsCurrency = _sections[[indexPath section]][[indexPath row]];
         [self putIntThisPayment:thisCellsCurrency];
     } else {
         thisCellsCurrency = [_searchResults objectAtIndex:[indexPath row]];

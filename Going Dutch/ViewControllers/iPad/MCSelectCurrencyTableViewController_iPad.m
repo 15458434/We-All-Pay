@@ -121,7 +121,7 @@ NSString * const currencyCellIdentifier_iPad = @"MCSelectCurrencyTableViewCell_i
     XRCurrency *selectedCurrency;
     NSManagedObjectContext *context = [[MCWeAllPayStoreController defaultStore] mainThreadContext];
     if (tableView != [[self searchDisplayController] searchResultsTableView]) {
-        selectedCurrency = [_dataController objectAtIndexPath:indexPath];
+        selectedCurrency = _sections[[indexPath section]][[indexPath row]];
         [_thisPayment setNewCurrencyAndAutomaticallyUpdateExchangeRate:[MCCurrency getCurrencyFrom:selectedCurrency FromContext:context]];
     } else {
         selectedCurrency = [_searchResults objectAtIndex:[indexPath row]];
