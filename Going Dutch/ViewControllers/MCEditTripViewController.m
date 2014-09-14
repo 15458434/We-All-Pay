@@ -41,6 +41,7 @@
 
 - (IBAction)addressBookButton:(id)sender {
     
+    // TODO: This can be done without the Switch case.
     switch (ABAddressBookGetAuthorizationStatus())
     {
             // Update our UI if the user has granted access to their Contacts
@@ -49,6 +50,9 @@
             break;
             // Prompt the user for access to Contacts if there is no definitive answer
         case  kABAuthorizationStatusNotDetermined :
+            // Display a message if the user has denied or restricted access to Contacts
+        case  kABAuthorizationStatusDenied:
+        case  kABAuthorizationStatusRestricted:
         {
             CFErrorRef error;
             ABAddressBookRef myAddressBook = ABAddressBookCreateWithOptions(NULL, &error);
@@ -57,6 +61,7 @@
             }
             
             typeof(self) __weak weakSelf = self;
+            // Popup for user will only appear once.
             ABAddressBookRequestAccessWithCompletion(myAddressBook, ^(bool granted, CFErrorRef error) {
                 if (granted) {
                     dispatch_async(dispatch_get_main_queue(), ^{
@@ -69,13 +74,7 @@
                 }
             });
         }
-            break;
-            // Display a message if the user has denied or restricted access to Contacts
-        case  kABAuthorizationStatusDenied:
-        case  kABAuthorizationStatusRestricted:
-        {
-            [self showContactsDisabledMessage];
-        }
+
             break;
         default:
             break;
@@ -117,7 +116,7 @@
 {
     NSString *title = NSLocalizedString(@"CONTACTS_DISABLED_TITLE", @"Contacts disabled");
     NSString *message = NSLocalizedString(@"CONTACTS_DISABLED_MESSAGE", @"Access to Contacts can be enable in Settings->We All Pay->Privacy");
-    NSString *cancelButtonTitle = NSLocalizedString(@"DISMISS_BUTTON", @"Dismiss");
+    NSString *cancelButtonTitle = NSLocalizedString(@"OK", @"Ok");
     UIAlertView *alert = [[UIAlertView alloc] initWithTitle:title
                                                     message:message
                                                    delegate:nil
@@ -246,7 +245,7 @@
     }
     
     if (kABAuthorizationStatusDenied == ABAddressBookGetAuthorizationStatus()) {
-        [_contactsButton setHidden:YES];
+//        [_contactsButton setHidden:YES];
     }
 }
 
