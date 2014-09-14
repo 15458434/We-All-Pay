@@ -19,10 +19,9 @@ extern NSString * const MCwritableThisPersonKey;
 // should be executed on the mainThread.
 - (MCPerson *)thisPerson;
 
-- (void)setIsNew:(BOOL)isNew;
-
 @optional
 // should be executed on the mainThread.
 - (void)setThisPerson:(MCPerson *)person;
+- (void)setIsNew:(BOOL)isNew;
 
 @end

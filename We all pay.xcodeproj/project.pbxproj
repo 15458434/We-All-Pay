@@ -66,6 +66,7 @@
 		385F5311191C2D140012773D /* MCPersonAddonsTest.m in Sources */ = {isa = PBXBuildFile; fileRef = 3898F33D18F40CC100BFFC61 /* MCPersonAddonsTest.m */; };
 		385F5312191C2D140012773D /* MCSharedBillAddOnsTest.m in Sources */ = {isa = PBXBuildFile; fileRef = 3898F33B18F40B9D00BFFC61 /* MCSharedBillAddOnsTest.m */; };
 		385F5313191C2D140012773D /* WeAllPayStoreTests.m in Sources */ = {isa = PBXBuildFile; fileRef = 38D785FC18DC53C30074B670 /* WeAllPayStoreTests.m */; };
+		3862444319C46D43004CA03F /* MCRateMeController.m in Sources */ = {isa = PBXBuildFile; fileRef = 3862444219C46D43004CA03F /* MCRateMeController.m */; };
 		3864AA81195B0B6600831C93 /* MCiScreenRootViewController_iPad.m in Sources */ = {isa = PBXBuildFile; fileRef = 3864AA80195B0B6600831C93 /* MCiScreenRootViewController_iPad.m */; };
 		3867CE4718704B2E001EC222 /* Main-Iphone.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 3867CE4918704B2E001EC222 /* Main-Iphone.storyboard */; };
 		3867CE5118704DAF001EC222 /* MCTableEmptyMessage.xib in Resources */ = {isa = PBXBuildFile; fileRef = 3867CE5318704DAF001EC222 /* MCTableEmptyMessage.xib */; };
@@ -287,6 +288,8 @@
 		385F5305191C2C360012773D /* en */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = en; path = en.lproj/InfoPlist.strings; sourceTree = "<group>"; };
 		385F5307191C2C360012773D /* We_all_pay_Tests.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = We_all_pay_Tests.m; sourceTree = "<group>"; };
 		385F5309191C2C360012773D /* We all pay Tests-Prefix.pch */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = "We all pay Tests-Prefix.pch"; sourceTree = "<group>"; };
+		3862444119C46D43004CA03F /* MCRateMeController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = MCRateMeController.h; path = Misc/MCRateMeController.h; sourceTree = "<group>"; };
+		3862444219C46D43004CA03F /* MCRateMeController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = MCRateMeController.m; path = Misc/MCRateMeController.m; sourceTree = "<group>"; };
 		3864AA7F195B0B6600831C93 /* MCiScreenRootViewController_iPad.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = MCiScreenRootViewController_iPad.h; path = ViewControllers/iPad/MCiScreenRootViewController_iPad.h; sourceTree = "<group>"; };
 		3864AA80195B0B6600831C93 /* MCiScreenRootViewController_iPad.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = MCiScreenRootViewController_iPad.m; path = ViewControllers/iPad/MCiScreenRootViewController_iPad.m; sourceTree = "<group>"; };
 		3867CE4018703E9A001EC222 /* nl */ = {isa = PBXFileReference; fileEncoding = 10; lastKnownFileType = text.plist.strings; name = nl; path = nl.lproj/InfoPlist.strings; sourceTree = "<group>"; };
@@ -911,6 +914,8 @@
 				38295AE718425E74009FB5DE /* MCCancelDoneViewController.m */,
 				3876EF571840E86900C9546A /* MCCancelDoneTableViewController.h */,
 				3876EF581840E86900C9546A /* MCCancelDoneTableViewController.m */,
+				3862444119C46D43004CA03F /* MCRateMeController.h */,
+				3862444219C46D43004CA03F /* MCRateMeController.m */,
 				38CDE8FE17135B6300387CAA /* MCTools.h */,
 				38CDE8FF17135B6300387CAA /* MCTools.m */,
 				38DC8B401909508800762235 /* MCColors.h */,
@@ -1322,6 +1327,7 @@
 				38E95DB81950731600069414 /* MCOneLabelTableViewCell_iPad.m in Sources */,
 				38572B0A169F3D2700969C62 /* MCAllTripsTableViewController.m in Sources */,
 				389DE8F4197FB2B900169645 /* MCEmailAddress.m in Sources */,
+				3862444319C46D43004CA03F /* MCRateMeController.m in Sources */,
 				386FC32518E5855400428294 /* MCSharedBillMainViewController.m in Sources */,
 				389DE8F1197FB2B900169645 /* MCPerson.m in Sources */,
 				381AB0EF1924FCC2004A02C6 /* MCWhoPaidHowMuchTableViewCell_iPhone.m in Sources */,

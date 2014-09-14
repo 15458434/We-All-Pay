@@ -2,6 +2,7 @@
 <document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="6245" systemVersion="14A343f" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" initialViewController="2iV-RF-WWF">
     <dependencies>
         <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="6238"/>
+        <capability name="Constraints to layout margins" minToolsVersion="6.0"/>
     </dependencies>
     <scenes>
         <!--events-->
@@ -572,7 +573,7 @@
                             <rect key="frame" x="0.0" y="0.0" width="320" height="108"/>
                             <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                             <subviews>
-                                <textField opaque="NO" clipsSubviews="YES" contentMode="scaleToFill" fixedFrame="YES" restorationIdentifier="eventNameLabel" contentHorizontalAlignment="left" contentVerticalAlignment="center" borderStyle="roundedRect" placeholder="Activity name" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="BJS-wA-qlM">
+                                <textField opaque="NO" clipsSubviews="YES" contentMode="scaleToFill" restorationIdentifier="eventNameLabel" contentHorizontalAlignment="left" contentVerticalAlignment="center" borderStyle="roundedRect" placeholder="Activity name" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="BJS-wA-qlM">
                                     <rect key="frame" x="20" y="20" width="280" height="30"/>
                                     <fontDescription key="fontDescription" type="system" pointSize="14"/>
                                     <textInputTraits key="textInputTraits" autocapitalizationType="sentences"/>
@@ -593,25 +594,28 @@
                                         <segue destination="9Lr-fw-GBI" kind="modal" identifier="openEditPerson" id="tvm-Nk-i56"/>
                                     </connections>
                                 </button>
-                                <button opaque="NO" contentMode="scaleToFill" restorationIdentifier="addressbookButton" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="AlH-w9-wjE">
+                                <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="asZ-Na-2wd">
                                     <rect key="frame" x="173" y="58" width="127" height="30"/>
                                     <constraints>
-                                        <constraint firstAttribute="width" constant="127" id="Zsj-nH-bjE"/>
+                                        <constraint firstAttribute="width" constant="127" id="xIl-jG-WPs"/>
                                     </constraints>
                                     <state key="normal" title="Contacts">
                                         <color key="titleShadowColor" white="0.5" alpha="1" colorSpace="calibratedWhite"/>
                                     </state>
                                     <connections>
-                                        <action selector="addressBookButton:" destination="AUO-87-nmq" eventType="touchUpInside" id="Fxe-cr-Mfn"/>
+                                        <action selector="addressBookButton:" destination="AUO-87-nmq" eventType="touchUpInside" id="fqX-Eq-4hv"/>
                                     </connections>
                                 </button>
                             </subviews>
                             <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="calibratedWhite"/>
                             <constraints>
-                                <constraint firstAttribute="trailing" secondItem="AlH-w9-wjE" secondAttribute="trailing" constant="20" id="3HB-d0-fYN"/>
-                                <constraint firstItem="AlH-w9-wjE" firstAttribute="top" secondItem="wmR-8m-HJR" secondAttribute="top" constant="58" id="Hzx-Va-YOR"/>
+                                <constraint firstItem="BJS-wA-qlM" firstAttribute="leading" secondItem="wmR-8m-HJR" secondAttribute="leadingMargin" constant="12" id="0xJ-gl-EEs"/>
+                                <constraint firstItem="gfv-ln-Tgv" firstAttribute="baseline" secondItem="asZ-Na-2wd" secondAttribute="baseline" id="C1c-Dw-9ce"/>
                                 <constraint firstItem="gfv-ln-Tgv" firstAttribute="leading" secondItem="wmR-8m-HJR" secondAttribute="leading" constant="20" id="QBN-x3-F4v"/>
-                                <constraint firstItem="gfv-ln-Tgv" firstAttribute="top" secondItem="wmR-8m-HJR" secondAttribute="top" constant="58" id="Xt8-vQ-iwI"/>
+                                <constraint firstItem="gfv-ln-Tgv" firstAttribute="top" secondItem="BJS-wA-qlM" secondAttribute="bottom" constant="8" id="Y9s-2b-a9h"/>
+                                <constraint firstAttribute="trailingMargin" secondItem="asZ-Na-2wd" secondAttribute="trailing" constant="12" id="epK-cr-e5u"/>
+                                <constraint firstAttribute="trailingMargin" secondItem="BJS-wA-qlM" secondAttribute="trailing" constant="12" id="kjM-ZT-xUG"/>
+                                <constraint firstItem="BJS-wA-qlM" firstAttribute="top" secondItem="wmR-8m-HJR" secondAttribute="topMargin" constant="12" id="vR9-mY-2aQ"/>
                             </constraints>
                         </view>
                         <prototypes>
@@ -634,13 +638,13 @@
                     <nil key="simulatedBottomBarMetrics"/>
                     <connections>
                         <outlet property="addPersonButton" destination="gfv-ln-Tgv" id="kQ0-08-UfA"/>
-                        <outlet property="addressBookButton" destination="AlH-w9-wjE" id="xCM-aT-d8k"/>
+                        <outlet property="contactsButton" destination="asZ-Na-2wd" id="LA0-ly-LPC"/>
                         <outlet property="tripNameField" destination="BJS-wA-qlM" id="mRl-pt-rEN"/>
                     </connections>
                 </tableViewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="RjQ-v9-WwD" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="1244" y="-45"/>
+            <point key="canvasLocation" x="1204" y="-45"/>
         </scene>
         <!--Person View Controller-->
         <scene sceneID="2My-iE-5dB">

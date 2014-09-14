@@ -22,6 +22,8 @@
 
 @interface MCEditTripViewController ()
 
+@property (weak, nonatomic) IBOutlet UIButton *contactsButton;
+
 @property (nonatomic, strong) NSFetchedResultsController *dataController;
 
 @end
@@ -37,38 +39,49 @@
 
 #pragma mark - actions of this class
 
-#if __IPHONE_OS_VERSION_MAX_ALLOWED >= 80000
 - (IBAction)addressBookButton:(id)sender {
-    ABPeoplePickerNavigationController *peoplePicker = [[ABPeoplePickerNavigationController alloc] init];
-    if (!personReceiver) {
-        personReceiver = [[MCAddressBookDataReceiver alloc] initWithViewController:self andDelegate:self];
-        [personReceiver setTonightsBill:_tonightsBill];
-    }
-    [peoplePicker setPeoplePickerDelegate:personReceiver];
-//    [peoplePicker setPredicateForSelectionOfPerson:nil];
-    [peoplePicker setEdgesForExtendedLayout:UIRectEdgeNone];
-//    [[peoplePicker viewControllers][0] setEdgesForExtendedLayout:UIRectEdgeNone];
-    [peoplePicker setModalPresentationStyle:UIModalPresentationFormSheet];
-    [[[peoplePicker navigationController] navigationBar] setBarStyle:UIBarStyleBlack];
     
-    [[self navigationController] presentViewController:peoplePicker animated:YES completion:nil];
-}
-#else
-- (IBAction)addressBookButton:(id)sender {
-    ABPeoplePickerNavigationController *peoplePicker = [[ABPeoplePickerNavigationController alloc] init];
-    if (!personReceiver) {
-        personReceiver = [[MCAddressBookDataReceiver alloc] initWithViewController:self andDelegate:self];
-        [personReceiver setTonightsBill:_tonightsBill];
+    switch (ABAddressBookGetAuthorizationStatus())
+    {
+            // Update our UI if the user has granted access to their Contacts
+        case  kABAuthorizationStatusAuthorized:
+            [self openPeoplePicker];
+            break;
+            // Prompt the user for access to Contacts if there is no definitive answer
+        case  kABAuthorizationStatusNotDetermined :
+        {
+            CFErrorRef error;
+            ABAddressBookRef myAddressBook = ABAddressBookCreateWithOptions(NULL, &error);
+            if (error) {
+                NSLog(@"Something went wrong opening myAddressBook.");
+            }
+            
+            typeof(self) __weak weakSelf = self;
+            ABAddressBookRequestAccessWithCompletion(myAddressBook, ^(bool granted, CFErrorRef error) {
+                if (granted) {
+                    dispatch_async(dispatch_get_main_queue(), ^{
+                        [weakSelf openPeoplePicker];
+                    });
+                } else {
+                    dispatch_async(dispatch_get_main_queue(), ^{
+                        [weakSelf showContactsDisabledMessage];
+                    });
+                }
+            });
+        }
+            break;
+            // Display a message if the user has denied or restricted access to Contacts
+        case  kABAuthorizationStatusDenied:
+        case  kABAuthorizationStatusRestricted:
+        {
+            [self showContactsDisabledMessage];
+        }
+            break;
+        default:
+            break;
     }
-    [peoplePicker setPeoplePickerDelegate:personReceiver];
-    [peoplePicker setEdgesForExtendedLayout:UIRectEdgeNone];
-    //    [[peoplePicker viewControllers][0] setEdgesForExtendedLayout:UIRectEdgeNone];
-    [peoplePicker setModalPresentationStyle:UIModalPresentationFormSheet];
-    [[[peoplePicker navigationController] navigationBar] setBarStyle:UIBarStyleBlack];
-    
-    [[self navigationController] presentViewController:peoplePicker animated:YES completion:nil];
 }
-#endif
+
 
 - (IBAction)addPersonButton:(id)sender {
     if ([tripNameField isEditing]) {
@@ -82,6 +95,36 @@
 }
 
 #pragma mark - new in this class.
+
+- (void)openPeoplePicker
+{
+    ABPeoplePickerNavigationController *peoplePicker = [[ABPeoplePickerNavigationController alloc] init];
+    if (!personReceiver) {
+        personReceiver = [[MCAddressBookDataReceiver alloc] initWithViewController:self andDelegate:self];
+        [personReceiver setTonightsBill:_tonightsBill];
+    }
+    [peoplePicker setPeoplePickerDelegate:personReceiver];
+    //    [peoplePicker setPredicateForSelectionOfPerson:nil];
+    [peoplePicker setEdgesForExtendedLayout:UIRectEdgeNone];
+    //    [[peoplePicker viewControllers][0] setEdgesForExtendedLayout:UIRectEdgeNone];
+    [peoplePicker setModalPresentationStyle:UIModalPresentationFormSheet];
+    [[[peoplePicker navigationController] navigationBar] setBarStyle:UIBarStyleBlack];
+    
+    [[self navigationController] presentViewController:peoplePicker animated:YES completion:nil];
+}
+
+- (void)showContactsDisabledMessage
+{
+    NSString *title = NSLocalizedString(@"CONTACTS_DISABLED_TITLE", @"Contacts disabled");
+    NSString *message = NSLocalizedString(@"CONTACTS_DISABLED_MESSAGE", @"Access to Contacts can be enable in Settings->We All Pay->Privacy");
+    NSString *cancelButtonTitle = NSLocalizedString(@"DISMISS_BUTTON", @"Dismiss");
+    UIAlertView *alert = [[UIAlertView alloc] initWithTitle:title
+                                                    message:message
+                                                   delegate:nil
+                                          cancelButtonTitle:cancelButtonTitle
+                                          otherButtonTitles:nil];
+    [alert show];
+}
 
 - (void)performFetchAndReloadTableView:(NSNotification *)notification
 {
@@ -203,12 +246,7 @@
     }
     
     if (kABAuthorizationStatusDenied == ABAddressBookGetAuthorizationStatus()) {
-        [addressBookButton setAlpha:0.0];
-        CGRect addPersonButtonRect = [addPersonButton frame];
-        CGRect viewBounds = [[[self tableView] tableHeaderView] bounds];
-        CGPoint newPosition = CGPointMake( (viewBounds.size.width / 2.0) - (addPersonButtonRect.size.width / 2.0), addPersonButtonRect.origin.y);
-        addPersonButtonRect.origin = newPosition;
-        [addPersonButton setFrame:addPersonButtonRect];
+        [_contactsButton setHidden:YES];
     }
 }
 
