@@ -50,6 +50,51 @@
 
 - (IBAction)addressBookButtonPressed:(id)sender
 {
+    // TODO: This can be done without the Switch case.
+    switch (ABAddressBookGetAuthorizationStatus())
+    {
+            // Update our UI if the user has granted access to their Contacts
+        case  kABAuthorizationStatusAuthorized:
+            [self openPeoplePicker];
+            break;
+            // Prompt the user for access to Contacts if there is no definitive answer
+        case  kABAuthorizationStatusNotDetermined :
+            // Display a message if the user has denied or restricted access to Contacts
+        case  kABAuthorizationStatusDenied:
+        case  kABAuthorizationStatusRestricted:
+        {
+            CFErrorRef error;
+            ABAddressBookRef myAddressBook = ABAddressBookCreateWithOptions(NULL, &error);
+            if (error) {
+                NSLog(@"Something went wrong opening myAddressBook.");
+            }
+            
+            typeof(self) __weak weakSelf = self;
+            // Popup for user will only appear once.
+            ABAddressBookRequestAccessWithCompletion(myAddressBook, ^(bool granted, CFErrorRef error) {
+                if (granted) {
+                    dispatch_async(dispatch_get_main_queue(), ^{
+                        [weakSelf openPeoplePicker];
+                    });
+                } else {
+                    dispatch_async(dispatch_get_main_queue(), ^{
+                        [weakSelf showContactsDisabledMessage];
+                    });
+                }
+            });
+        }
+            
+            break;
+        default:
+            break;
+    }
+}
+
+
+#pragma mark - New in this class
+
+- (void)openPeoplePicker
+{
     ABPeoplePickerNavigationController *peoplePicker = [[ABPeoplePickerNavigationController alloc] init];
     if (!personReceiver) {
         personReceiver = [[MCAddressBookDataReceiver alloc] initWithViewController:self andDelegate:self];
@@ -57,18 +102,28 @@
     }
     [peoplePicker setPeoplePickerDelegate:personReceiver];
     [peoplePicker setEdgesForExtendedLayout:UIRectEdgeNone];
-//    [[peoplePicker viewControllers][0] setEdgesForExtendedLayout:UIRectEdgeNone];
+    //    [[peoplePicker viewControllers][0] setEdgesForExtendedLayout:UIRectEdgeNone];
     [peoplePicker setModalPresentationStyle:UIModalPresentationFormSheet];
     
     [[self navigationController] presentViewController:peoplePicker animated:YES completion:^{
-//        id<GAITracker> tracker = [[GAI sharedInstance] defaultTracker];
-//        [tracker set:kGAIScreenName value:@"Peoplepicker_iPad"];
-//        [tracker send:[[GAIDictionaryBuilder createAppView] build]];
+        //        id<GAITracker> tracker = [[GAI sharedInstance] defaultTracker];
+        //        [tracker set:kGAIScreenName value:@"Peoplepicker_iPad"];
+        //        [tracker send:[[GAIDictionaryBuilder createAppView] build]];
     }];
 }
 
-
-#pragma mark - New in this class
+- (void)showContactsDisabledMessage
+{
+    NSString *title = NSLocalizedString(@"CONTACTS_DISABLED_TITLE", @"Contacts disabled");
+    NSString *message = NSLocalizedString(@"CONTACTS_DISABLED_MESSAGE", @"Access to Contacts can be enable in Settings->We All Pay->Privacy");
+    NSString *cancelButtonTitle = NSLocalizedString(@"OK", @"Ok");
+    UIAlertView *alert = [[UIAlertView alloc] initWithTitle:title
+                                                    message:message
+                                                   delegate:nil
+                                          cancelButtonTitle:cancelButtonTitle
+                                          otherButtonTitles:nil];
+    [alert show];
+}
 
 #pragma mark - Inherited From super
 
