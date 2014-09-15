@@ -40,7 +40,9 @@ NSString * const MCStateRestoreDestinationCurrencyObject = @"MCStateRestoreDesti
 @property (nonatomic) MCDecodingRestorableState decodingState;
 @property (nonatomic) MCReversing reversing;
 @property (nonatomic) MCStillBooting stillBooting;
+
 @property (nonatomic) short indicatorStartCount;
+@property (nonatomic, strong) NSDate *requestTimeOfLastReceivedExchangeRateResult;
 
 @end
 
@@ -107,11 +109,14 @@ NSString * const MCStateRestoreDestinationCurrencyObject = @"MCStateRestoreDesti
         return;
     }
     
+    NSDate *now = [NSDate date];
     if (isInternetConnection()) {
         _xRatesController = [MCxRatesController new];
         [self startIndicator];
         [_xRatesController getExchangeRateFrom:sourceCurrencyISOCode to:destinationCurrencyISOCode withCompletionHandler:^(NSDictionary *exchangeRateResult) {
-            [self setExchangeRate:[exchangeRateResult objectForKey:MCCurrencyExchangeRate]];
+            if ([_requestTimeOfLastReceivedExchangeRateResult isLessThan:now]) {
+                [self setExchangeRate:[exchangeRateResult objectForKey:MCCurrencyExchangeRate]];
+            }
             dispatch_async(dispatch_get_main_queue(), ^{
                 [self stopIndicator];
             });
@@ -135,6 +140,7 @@ NSString * const MCStateRestoreDestinationCurrencyObject = @"MCStateRestoreDesti
 - (void)awakeFromNib
 {
     _indicatorStartCount = 0;
+    _requestTimeOfLastReceivedExchangeRateResult = [NSDate date];
     [super awakeFromNib];
     
     _decodingState = isNotDecodingRestorableState;
