@@ -23,6 +23,11 @@ typedef NS_ENUM(BOOL, MCStillBooting) {
     isNotBooting
 };
 
+typedef NS_ENUM(BOOL, MCDecodingRestorableState) {
+    isNotDecodingRestorableState,
+    isDecodingRestorableState
+};
+
 // State Restoration Strings
 NSString * const MCStateRestoreSourceAmount = @"MCStateRestoreSourceAmount";
 NSString * const MCStateRestoreExchangeRate = @"MCStateRestoreExchangeRate";
@@ -30,17 +35,21 @@ NSString * const MCStateRestoreDestinationAmount = @"MCStateRestoreDesinationAmo
 NSString * const MCStateRestoreSourceCurrencyObject = @"MCStateRestoreSourceCurrencyObject";
 NSString * const MCStateRestoreDestinationCurrencyObject = @"MCStateRestoreDestinationCurrencyObject";
 
+@interface MCDataStorage ()
+
+@property (nonatomic) MCDecodingRestorableState decodingState;
+@property (nonatomic) MCReversing reversing;
+@property (nonatomic) MCStillBooting stillBooting;
+
+@end
+
 @implementation MCDataStorage
-{
-    MCReversing reversing;
-    MCStillBooting stillBooting;
-}
 
 #pragma mark - Actions
 
 - (IBAction)reverseConversion:(id)sender
 {
-    reversing = isReversing;
+    _reversing = isReversing;
     
     MCxRatesCurrency *selectedSourceCurrency = [[_sourceController selectedObjects] firstObject];
     MCxRatesCurrency *selectedDestinationCurrency = [[_destinationController selectedObjects] firstObject];
@@ -53,7 +62,7 @@ NSString * const MCStateRestoreDestinationCurrencyObject = @"MCStateRestoreDesti
     [_destinationTableView scrollRowToVisible:selectedRowDestinationCurrency];
     
     [self getXRate];
-    reversing = isNotReversing;
+    _reversing = isNotReversing;
 }
 
 - (IBAction)refreshCurrentExchangeRateValue:(id)sender
@@ -65,6 +74,9 @@ NSString * const MCStateRestoreDestinationCurrencyObject = @"MCStateRestoreDesti
 
 - (void)getXRate
 {
+    if (_decodingState == isNotDecodingRestorableState) {
+        return;
+    }
     NSString *sourceCurrencyISOCode = [[[_sourceController selectedObjects] firstObject] valueForKeyPath:@"currencyISOCode"];
     NSString *destinationCurrencyISOCode = [[[_destinationController selectedObjects] firstObject] valueForKey:@"currencyISOCode"];
     if (sourceCurrencyISOCode == nil) {
@@ -100,13 +112,14 @@ NSString * const MCStateRestoreDestinationCurrencyObject = @"MCStateRestoreDesti
 {
     [super awakeFromNib];
     
-    reversing = isNotReversing;
-    stillBooting = isStillBooting;
+    _reversing = isNotReversing;
+    _stillBooting = isStillBooting;
     
     // Don't use instance variables.
     self.sourceCurrencies = [MCxRatesController getAllCurrencies];
     self.destinationCurrencies = [MCxRatesController getAllCurrencies];
     self.sourceAmount = @1.0;
+    _stillBooting = isNotBooting;
     [self getXRate];
     
     // LayoutConstraints for the source and destination currency amount.
@@ -136,12 +149,12 @@ NSString * const MCStateRestoreDestinationCurrencyObject = @"MCStateRestoreDesti
     NSString *destinationName = [[[_destinationController selectedObjects] firstObject] currencyName];
     [self setSourceAmountLabel:sourceName];
     [self setDestinationAmountlabel:destinationName];
-    if (reversing == isNotReversing) {
-        if (stillBooting == isStillBooting) {
-            stillBooting = isNotBooting;
-        } else {
-            [self getXRate];
-        }
+    if (_reversing == isNotReversing) {
+//        if (_stillBooting == isStillBooting) {
+//            _stillBooting = isNotBooting;
+//        } else {
+        [self getXRate];
+//        }
     }
 }
 
@@ -163,6 +176,7 @@ NSString * const MCStateRestoreDestinationCurrencyObject = @"MCStateRestoreDesti
 
 - (void)window:(NSWindow *)window didDecodeRestorableState:(NSCoder *)state
 {
+    _decodingState = isDecodingRestorableState;
     self.sourceCurrencies = [MCxRatesController getAllCurrencies];
     self.destinationCurrencies = [MCxRatesController getAllCurrencies];
     [self setSourceAmount:[state decodeObjectForKey:MCStateRestoreSourceAmount]];
@@ -170,6 +184,7 @@ NSString * const MCStateRestoreDestinationCurrencyObject = @"MCStateRestoreDesti
     [self setExchangeRate:[state decodeObjectForKey:MCStateRestoreExchangeRate]];
     [[self sourceController] setSelectedObjects:[state decodeObjectForKey:MCStateRestoreSourceCurrencyObject]];
     [[self destinationController] setSelectedObjects:[state decodeObjectForKey:MCStateRestoreDestinationCurrencyObject]];
+    _decodingState = isNotDecodingRestorableState;
     [self getXRate];
 }
 
