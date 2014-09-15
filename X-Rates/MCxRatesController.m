@@ -203,6 +203,7 @@ NSUInteger const MCCurrencyTypeSelection = MCCurrencyTypeCurrency | MCCurrencyTy
                 NSError *jsonError;
                 NSDictionary *exchangeRateJSON = [NSJSONSerialization JSONObjectWithData:data options:NSJSONReadingAllowFragments error:&jsonError];
                 if (jsonError) {
+                    completionBlock(nil);
 #if TARGET_OS_IPHONE
                     NSLog(@"JSON Error: %@", [jsonError localizedDescription]);
 #elif TARGET_OS_MAC
@@ -227,13 +228,18 @@ NSUInteger const MCCurrencyTypeSelection = MCCurrencyTypeCurrency | MCCurrencyTy
                     }
                 }
             } else {
+                completionBlock(nil);
                 NSLog(@"http response error %ld", (long)[httpResp statusCode]);
             }
         } else {
+            completionBlock(nil);
 #if TARGET_OS_IPHONE
 #elif TARGET_OS_MAC
-            NSAlert *alert = [NSAlert alertWithError:error];
-            [alert runModal];
+            
+            dispatch_async(dispatch_get_main_queue(), ^{
+                NSAlert *alert = [NSAlert alertWithError:error];
+                [alert runModal];
+            });
 #endif
         }
     }];
@@ -285,6 +291,7 @@ NSUInteger const MCCurrencyTypeSelection = MCCurrencyTypeCurrency | MCCurrencyTy
                     NSLog(@"JSON Error: %@", [jsonError localizedDescription]);
 #elif TARGET_OS_MAC
                     dispatch_async(dispatch_get_main_queue(), ^{
+                        completionBlock(nil);
                         NSAlert *jsonAlert = [NSAlert alertWithError:jsonError];
                         [jsonAlert runModal];
                     });
@@ -315,6 +322,7 @@ NSUInteger const MCCurrencyTypeSelection = MCCurrencyTypeCurrency | MCCurrencyTy
                 }
 
             } else {
+                completionBlock(nil);
                 NSLog(@"http response error %ld", (long)[httpResp statusCode]);
             }
         } else {
