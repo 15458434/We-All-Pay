@@ -62,8 +62,8 @@ NSString * const MCStateRestoreDestinationCurrencyObject = @"MCStateRestoreDesti
     [_sourceTableView scrollRowToVisible:selectedRowSourceCurrency];
     [_destinationTableView scrollRowToVisible:selectedRowDestinationCurrency];
     
-    [self getXRate];
     _reversing = isNotReversing;
+    [self getXRate];
 }
 
 - (IBAction)refreshCurrentExchangeRateValue:(id)sender
@@ -95,7 +95,7 @@ NSString * const MCStateRestoreDestinationCurrencyObject = @"MCStateRestoreDesti
 
 - (void)getXRate
 {
-    if (_decodingState == isDecodingRestorableState || _stillBooting == isStillBooting) {
+    if (_decodingState == isDecodingRestorableState || _stillBooting == isStillBooting || _reversing == isReversing) {
         return;
     }
     NSString *sourceCurrencyISOCode = [[[_sourceController selectedObjects] firstObject] valueForKeyPath:@"currencyISOCode"];
@@ -178,7 +178,6 @@ NSString * const MCStateRestoreDestinationCurrencyObject = @"MCStateRestoreDesti
     if (_reversing == isNotReversing || _decodingState == isNotDecodingRestorableState) {
         [self getXRate];
         [self invalidateRestorableState];
-//        }
     }
 }
 
