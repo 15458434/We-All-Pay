@@ -13,7 +13,6 @@
 #import "Countly.h"
 
 #import "MCNetworkTools.h"
-#import "MCPreferencesWindowController.h"
 
 typedef NS_ENUM(BOOL, MCReversing) {
     isNotReversing,
@@ -75,13 +74,6 @@ NSString * const MCStateRestoreDestinationCurrencyObject = @"MCStateRestoreDesti
     if (destinationCurrencyISOCode == nil) {
         return;
     }
-    // For conversion rate statistics.
-    NSDictionary *dictionary = @{@"fromCurrency": sourceCurrencyISOCode,
-                                 @"toCurrency": destinationCurrencyISOCode};
-    if ([MCPreferencesWindowController analyticsOptIn]) {
-        [[Countly sharedInstance] recordEvent:@"Get conversion rate" segmentation:dictionary count:1];
-    }
-
     
     if (isInternetConnection()) {
         _xRatesController = [MCxRatesController new];
@@ -160,16 +152,10 @@ NSString * const MCStateRestoreDestinationCurrencyObject = @"MCStateRestoreDesti
 {
     if([notification object] == _originalAmountField)
     {
-        if ([MCPreferencesWindowController analyticsOptIn]) {
-            [[Countly sharedInstance] recordEvent:@"Conversion Amount" segmentation:@{@"Amount Field Type": @"source amount"} count:1];
-        }
         [self setDestinationAmount:@(_sourceAmount.doubleValue * _exchangeRate.doubleValue)];
     }
     if([notification object] == _convertedAmountField)
     {
-        if ([MCPreferencesWindowController analyticsOptIn]) {
-            [[Countly sharedInstance] recordEvent:@"Conversion Amount" segmentation:@{@"Amount Field Type": @"destination amount"} count:1];
-        }
         [self setSourceAmount:@([_destinationAmount doubleValue] / [_exchangeRate doubleValue])];
     }
 }
@@ -178,8 +164,6 @@ NSString * const MCStateRestoreDestinationCurrencyObject = @"MCStateRestoreDesti
 
 - (void)window:(NSWindow *)window didDecodeRestorableState:(NSCoder *)state
 {
-    [MCPreferencesWindowController registerDefaultPreferences];
-    
     self.sourceCurrencies = [MCxRatesController getAllCurrencies];
     self.destinationCurrencies = [MCxRatesController getAllCurrencies];
     [self setSourceAmount:[state decodeObjectForKey:MCStateRestoreSourceAmount]];

@@ -143,8 +143,6 @@
 		38BDFD7F19B88D210026F4F8 /* XRCurrencyXRateFetcher.m in Sources */ = {isa = PBXBuildFile; fileRef = 38BDFD7D19B88D210026F4F8 /* XRCurrencyXRateFetcher.m */; };
 		38BDFD8219B88D8B0026F4F8 /* XRCurrencyXRate.m in Sources */ = {isa = PBXBuildFile; fileRef = 38BDFD8119B88D8B0026F4F8 /* XRCurrencyXRate.m */; };
 		38BDFD8319B88D8B0026F4F8 /* XRCurrencyXRate.m in Sources */ = {isa = PBXBuildFile; fileRef = 38BDFD8119B88D8B0026F4F8 /* XRCurrencyXRate.m */; };
-		38BF02A71997993400606564 /* MCPreferencesWindowController.m in Sources */ = {isa = PBXBuildFile; fileRef = 38BF02A51997993400606564 /* MCPreferencesWindowController.m */; };
-		38BF02A81997993400606564 /* MCPreferencesWindowController.xib in Resources */ = {isa = PBXBuildFile; fileRef = 38BF02A61997993400606564 /* MCPreferencesWindowController.xib */; };
 		38C2BC9918F7F69A00233D24 /* MCWhoOwesWhoTableViewCell_iPad.m in Sources */ = {isa = PBXBuildFile; fileRef = 38C2BC9818F7F69A00233D24 /* MCWhoOwesWhoTableViewCell_iPad.m */; };
 		38C2BC9C18F7F6EB00233D24 /* MCSolutionOverViewTableViewCell_iPad.m in Sources */ = {isa = PBXBuildFile; fileRef = 38C2BC9B18F7F6EB00233D24 /* MCSolutionOverViewTableViewCell_iPad.m */; };
 		38C2BC9F18FBD89400233D24 /* MCAllTripsTableViewCell_iPad.m in Sources */ = {isa = PBXBuildFile; fileRef = 38C2BC9E18FBD89400233D24 /* MCAllTripsTableViewCell_iPad.m */; };
@@ -433,9 +431,6 @@
 		38BDFD7D19B88D210026F4F8 /* XRCurrencyXRateFetcher.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = XRCurrencyXRateFetcher.m; sourceTree = "<group>"; };
 		38BDFD8019B88D8B0026F4F8 /* XRCurrencyXRate.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = XRCurrencyXRate.h; sourceTree = "<group>"; };
 		38BDFD8119B88D8B0026F4F8 /* XRCurrencyXRate.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = XRCurrencyXRate.m; sourceTree = "<group>"; };
-		38BF02A41997993400606564 /* MCPreferencesWindowController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = MCPreferencesWindowController.h; path = WindowController/MCPreferencesWindowController.h; sourceTree = "<group>"; };
-		38BF02A51997993400606564 /* MCPreferencesWindowController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = MCPreferencesWindowController.m; path = WindowController/MCPreferencesWindowController.m; sourceTree = "<group>"; };
-		38BF02A61997993400606564 /* MCPreferencesWindowController.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; name = MCPreferencesWindowController.xib; path = WindowController/MCPreferencesWindowController.xib; sourceTree = "<group>"; };
 		38C2BC9718F7F69A00233D24 /* MCWhoOwesWhoTableViewCell_iPad.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = MCWhoOwesWhoTableViewCell_iPad.h; sourceTree = "<group>"; };
 		38C2BC9818F7F69A00233D24 /* MCWhoOwesWhoTableViewCell_iPad.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = MCWhoOwesWhoTableViewCell_iPad.m; sourceTree = "<group>"; };
 		38C2BC9A18F7F6EB00233D24 /* MCSolutionOverViewTableViewCell_iPad.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = MCSolutionOverViewTableViewCell_iPad.h; path = Views/iPad/MCSolutionOverViewTableViewCell_iPad.h; sourceTree = "<group>"; };
@@ -1052,9 +1047,6 @@
 				38FE87D3195721670008EE74 /* MCAppDelegate.h */,
 				38FE87D4195721670008EE74 /* MCAppDelegate.m */,
 				38FE87D6195721670008EE74 /* MainMenu.xib */,
-				38BF02A41997993400606564 /* MCPreferencesWindowController.h */,
-				38BF02A51997993400606564 /* MCPreferencesWindowController.m */,
-				38BF02A61997993400606564 /* MCPreferencesWindowController.xib */,
 				38FE87D9195721670008EE74 /* Images.xcassets */,
 				38FE87C8195721670008EE74 /* Supporting Files */,
 			);
@@ -1296,7 +1288,6 @@
 				38FE87D2195721670008EE74 /* Credits.rtf in Resources */,
 				38A4ACF21975625600C0636E /* README.md in Resources */,
 				38FE87D8195721670008EE74 /* MainMenu.xib in Resources */,
-				38BF02A81997993400606564 /* MCPreferencesWindowController.xib in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -1442,7 +1433,6 @@
 				38974AFA195E8C4B00BBEA9C /* MCxRatesController+X_RatesAddOn.m in Sources */,
 				38974AFD195E8E9900BBEA9C /* MCDataStorage.m in Sources */,
 				389E2D0019792D7600729F61 /* MCNetworkTools.m in Sources */,
-				38BF02A71997993400606564 /* MCPreferencesWindowController.m in Sources */,
 				38A4ACED1975625600C0636E /* Countly.m in Sources */,
 				38A4ACF01975625600C0636E /* CountlyDB.m in Sources */,
 				38A4ACEC1975625600C0636E /* Countly_OpenUDID.m in Sources */,

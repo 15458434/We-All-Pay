@@ -8,11 +8,8 @@
 
 #import "MCAppDelegate.h"
 #import "Countly.h"
-#import "MCPreferencesWindowController.h"
 
 @interface MCAppDelegate ()
-
-@property (nonatomic, strong) MCPreferencesWindowController *preferencesPanel;
 
 @end
 
@@ -39,15 +36,6 @@
     [service performWithItems:@[tweet]];
 }
 
-- (IBAction)showPreferencesPanel:(id)sender
-{
-    // Show preference panel to the user.
-    if (!_preferencesPanel) {
-        _preferencesPanel = [[MCPreferencesWindowController alloc] initWithWindowNibName:@"MCPreferencesWindowController"];
-    }
-    [_preferencesPanel showWindow:self];
-}
-
 - (IBAction)newWindowPressed:(id)sender
 {
     [_window makeKeyAndOrderFront:self];
@@ -63,10 +51,7 @@
 
 - (void)applicationWillFinishLaunching:(NSNotification *)notification
 {
-    [MCPreferencesWindowController registerDefaultPreferences];
-    if ([MCPreferencesWindowController analyticsOptIn]) {
-        [[Countly sharedInstance] startOnCloudWithAppKey:@"b82580f508600a702d0eec03adb26319a8c2c1c9"];
-    }
+
 }
 
 - (void)applicationDidFinishLaunching:(NSNotification *)aNotification
