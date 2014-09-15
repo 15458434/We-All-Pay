@@ -19,6 +19,7 @@
         <customObject id="YLy-65-1bz" customClass="NSFontManager"/>
         <customObject id="dX5-ZC-kzm" customClass="MCDataStorage">
             <connections>
+                <outlet property="activityIndicator" destination="l9l-iO-pQw" id="rNZ-2x-sjA"/>
                 <outlet property="convertedAmountField" destination="Acx-WI-fPD" id="V5s-HX-4yO"/>
                 <outlet property="destinationController" destination="ZtZ-p4-4RK" id="hgc-2Q-wTV"/>
                 <outlet property="destinationScrollView" destination="xUe-Fg-Azh" id="Sg3-kN-L6I"/>
@@ -495,6 +496,9 @@
                                         <outlet property="delegate" destination="dX5-ZC-kzm" id="bf0-ct-nJI"/>
                                     </connections>
                                 </textField>
+                                <progressIndicator horizontalHuggingPriority="750" verticalHuggingPriority="750" maxValue="100" displayedWhenStopped="NO" bezeled="NO" indeterminate="YES" controlSize="small" style="spinning" translatesAutoresizingMaskIntoConstraints="NO" id="l9l-iO-pQw">
+                                    <rect key="frame" x="424" y="26" width="16" height="16"/>
+                                </progressIndicator>
                             </subviews>
                         </view>
                         <constraints>
@@ -503,7 +507,9 @@
                             <constraint firstItem="LWb-qd-YJK" firstAttribute="centerX" secondItem="Lrv-tW-vSz" secondAttribute="centerX" id="GxY-Xs-ah2"/>
                             <constraint firstItem="VLS-y4-9EG" firstAttribute="baseline" secondItem="Acx-WI-fPD" secondAttribute="baseline" id="M9a-cN-7xV"/>
                             <constraint firstAttribute="centerY" secondItem="VLS-y4-9EG" secondAttribute="centerY" constant="-20" id="Mei-ij-8BH"/>
+                            <constraint firstItem="VLS-y4-9EG" firstAttribute="centerY" secondItem="l9l-iO-pQw" secondAttribute="centerY" id="N6C-3s-aAG"/>
                             <constraint firstAttribute="centerX" secondItem="VLS-y4-9EG" secondAttribute="centerX" id="cR6-fh-6iV"/>
+                            <constraint firstItem="VLS-y4-9EG" firstAttribute="centerX" secondItem="l9l-iO-pQw" secondAttribute="centerX" id="dtd-g6-Esf"/>
                             <constraint firstItem="VLS-y4-9EG" firstAttribute="baseline" secondItem="LWb-qd-YJK" secondAttribute="baseline" id="idE-cM-2fL"/>
                             <constraint firstItem="Lrv-tW-vSz" firstAttribute="baseline" secondItem="p9m-5X-LcY" secondAttribute="baseline" id="ikE-Rt-wPR"/>
                             <constraint firstItem="Y5b-Ey-pc3" firstAttribute="baseline" secondItem="p9m-5X-LcY" secondAttribute="baseline" id="tdT-7z-t9O"/>

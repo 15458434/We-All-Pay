@@ -40,6 +40,7 @@ NSString * const MCStateRestoreDestinationCurrencyObject = @"MCStateRestoreDesti
 @property (nonatomic) MCDecodingRestorableState decodingState;
 @property (nonatomic) MCReversing reversing;
 @property (nonatomic) MCStillBooting stillBooting;
+@property (nonatomic) short indicatorStartCount;
 
 @end
 
@@ -70,7 +71,25 @@ NSString * const MCStateRestoreDestinationCurrencyObject = @"MCStateRestoreDesti
     [self getXRate];
 }
 
-#pragma mark - New in this class.
+#pragma mark - Private in this class.
+
+- (void)startIndicator
+{
+    _indicatorStartCount++;
+    if (_indicatorStartCount == 1) {
+        [_activityIndicator startAnimation:self];
+        [_exchangeRateField setHidden:YES];
+    }
+}
+
+- (void)stopIndicator
+{
+    _indicatorStartCount--;
+    if (_indicatorStartCount == 0) {
+        [_activityIndicator stopAnimation:self];
+        [_exchangeRateField setHidden:NO];
+    }
+}
 
 - (void)getXRate
 {
@@ -89,10 +108,12 @@ NSString * const MCStateRestoreDestinationCurrencyObject = @"MCStateRestoreDesti
     if (isInternetConnection()) {
         _xRatesController = [MCxRatesController new];
         NSLog(@"Refetch Started.");
+        [self startIndicator];
         [_xRatesController getExchangeRateFrom:sourceCurrencyISOCode to:destinationCurrencyISOCode withCompletionHandler:^(NSDictionary *exchangeRateResult) {
             [self setExchangeRate:[exchangeRateResult objectForKey:MCCurrencyExchangeRate]];
             if (_exchangeRate) {
                 dispatch_async(dispatch_get_main_queue(), ^{
+                    [self stopIndicator];
                     [self setDestinationAmount:@([_sourceAmount doubleValue] * [_exchangeRate doubleValue])];
                     NSLog(@"Refetch done.");
                 });
@@ -111,8 +132,10 @@ NSString * const MCStateRestoreDestinationCurrencyObject = @"MCStateRestoreDesti
 
 - (void)awakeFromNib
 {
+    _indicatorStartCount = 0;
     [super awakeFromNib];
     
+    _decodingState = isNotDecodingRestorableState;
     _reversing = isNotReversing;
     _stillBooting = isStillBooting;
     
