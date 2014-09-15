@@ -7,21 +7,20 @@
 //
 
 #import <UIKit/UIKit.h>
-#import <iAd/iAd.h>
 #import <MessageUI/MessageUI.h>
 
 #import "MCCancelDoneTableViewController.h"
 
 @class MCSharedBill;
+
 @class MCTwoLabelsTitleView;
+@class MCTableEmptyMessage;
 
 @class MCSharedBillPageViewController;
 
 @interface MCReturnPaymentViewController : MCCancelDoneTableViewController <MFMailComposeViewControllerDelegate>
 {
-    NSMutableArray *paymentsAfterwards;
-    
-    __strong IBOutlet MCTwoLabelsTitleView *twoLabelTitleView;
+    MCTwoLabelsTitleView *twoLabelTitleView;
 }
 
 - (IBAction)sendAsEmailButtonPressed:(id)sender;

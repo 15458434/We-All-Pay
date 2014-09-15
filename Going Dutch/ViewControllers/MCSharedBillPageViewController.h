@@ -8,7 +8,12 @@
 
 #import <UIKit/UIKit.h>
 
+#import "MCTonightsBillTransfer.h"
+
 @class MCSharedBill;
+
+@class MCEditTripViewController;
+@class MCSharedBillTableViewController;
 
 @protocol MCTonightsBillTitleDelegate <NSObject>
 
@@ -17,19 +22,28 @@
 
 @end
 
-@interface MCSharedBillPageViewController : UIPageViewController <UIPageViewControllerDataSource, UIPageViewControllerDelegate, UIAlertViewDelegate ,MCTonightsBillTitleDelegate>
+@interface MCSharedBillPageViewController : UIPageViewController <UIPageViewControllerDataSource, UIPageViewControllerDelegate, UIAlertViewDelegate, MCTonightsBillTitleDelegate>
 {
-    __weak IBOutlet UIPageControl *pageViewIndicator;
+    MCSharedBillTableViewController *sharedBillTableViewController;
+    MCEditTripViewController *editTripTableViewController;
+    
+    //__weak IBOutlet UIPageControl *pageViewIndicator;
     NSUInteger newPageNumber;
 }
 
-@property (weak, nonatomic) IBOutlet UILabel *titleLabel;
 @property (nonatomic, strong) MCSharedBill *tonightsBill;
+@property (nonatomic, strong) MCSharedBill *writableTonightsBill;
 
-- (IBAction)toggleEdit:(id)sender;
+- (BOOL)toggleEditTableView:(id)sender;
 - (IBAction)solveBill:(id)sender;
 
 - (void)shareBill:(id)sender;
 - (void)sendMail:(id)sender;
+
+- (void)openMailView:(id)sender;
+
+- (UIPageControl *)pageViewIndicator;
+
+//- (void)writeableTonightsBillIsCreated:(NSNotification *)notification;
 
 @end

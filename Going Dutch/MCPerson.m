@@ -2,13 +2,14 @@
 //  MCPerson.m
 //  We all pay
 //
-//  Created by Mark Cornelisse on 14-09-13.
-//  Copyright (c) 2013 Mark Cornelisse. All rights reserved.
+//  Created by Mark Cornelisse on 23/07/14.
+//  Copyright (c) 2014 Mark Cornelisse. All rights reserved.
 //
 
 #import "MCPerson.h"
 #import "MCEmailAddress.h"
 #import "MCPayment.h"
+#import "MCPaymentPresence.h"
 #import "MCSharedBill.h"
 
 
@@ -29,5 +30,6 @@
 @dynamic emailAddress;
 @dynamic payments;
 @dynamic sharedBill;
+@dynamic sharingPayment;
 
 @end

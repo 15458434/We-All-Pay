@@ -13,12 +13,19 @@
 
 #import "MCAllTripsTableViewCell.h"
 #import "MCTwoLabelsTitleView.h"
+#import "MCTableEmptyMessage.h"
 
 #import "MCWeAllPayStoreController.h"
 #import "MCSharedBill+addons.h"
 #import "MCPerson+addons.h"
 
+#import "MCTonightsBillTransfer.h"
+
+#import "UIViewController+WeAllPayStore.h"
+
 @interface MCAllTripsTableViewController ()
+
+@property (nonatomic, strong) NSFetchedResultsController *dataController;
 
 @end
 
@@ -40,26 +47,45 @@
 
 - (IBAction)tellAFriendAboutWeAllPay:(id)sender
 {
-    NSArray *dataToShare = [NSArray arrayWithObject:[NSString stringWithFormat:@"Hi, I found We All Pay this easy to use app to share a bill with a group of friends."]];
+    NSArray *dataToShare = @[[NSString stringWithString:NSLocalizedString(@"I_FOUND_WE_ALL_PAY", @"Hi, I found this easy to use iPhone app to share a bill amongst friends. It is called We All Pay.")]];
     UIActivityViewController *shareMe = [[UIActivityViewController alloc] initWithActivityItems:dataToShare applicationActivities:nil];
     [self presentViewController:shareMe animated:YES completion:nil];
 }
 
 #pragma mark - New in this class.
 
-- (void)setDataController
+- (void)setEmptyMessage
 {
-    NSManagedObjectContext *context = [[[MCWeAllPayStoreController defaultStore] weAllPayStoreDocument]managedObjectContext];
-    NSFetchRequest *request = [NSFetchRequest fetchRequestWithEntityName:@"MCSharedBill"];
-    [request setSortDescriptors:[NSArray arrayWithObject:[NSSortDescriptor sortDescriptorWithKey:@"dateCreated" ascending:NO]]];
-    
-    dataController = [[NSFetchedResultsController alloc] initWithFetchRequest:request
-                                                         managedObjectContext:context
-                                                           sectionNameKeyPath:nil
-                                                                    cacheName:nil];
-    [dataController setDelegate:self];
-    UIManagedDocument *weAllPayDocument = [[MCWeAllPayStoreController defaultStore] weAllPayStoreDocument];
-    [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(performFetchAndReloadTableView:) name:UIDocumentStateChangedNotification object:weAllPayDocument];
+    if (![[_dataController fetchedObjects] count] == 0) {
+        [UIView animateWithDuration:1.0 animations:^{
+            [[emptyMessage bigMessage] setAlpha:0.0];
+            [[self tableView] setSeparatorStyle:UITableViewCellSeparatorStyleSingleLine];
+        } completion:nil];
+    } else {
+        if ([[emptyMessage bigMessage] alpha] < 1.0) {
+            [UIView animateWithDuration:1.0 animations:^{
+                [[emptyMessage bigMessage] setAlpha:1.0];
+                [[self tableView] setSeparatorStyle:UITableViewCellSeparatorStyleNone];
+            } completion:nil];
+        }
+    }
+}
+
+- (void)setEmptyMessageNow
+{
+    if (![[_dataController fetchedObjects] count] == 0) {
+        [UIView animateWithDuration:0.0 animations:^{
+            [[emptyMessage bigMessage] setAlpha:0.0];
+            [[self tableView] setSeparatorStyle:UITableViewCellSeparatorStyleSingleLine];
+        } completion:nil];
+    } else {
+        if ([[emptyMessage bigMessage] alpha] < 1.0) {
+            [UIView animateWithDuration:0.0 animations:^{
+                [[emptyMessage bigMessage] setAlpha:1.0];
+                [[self tableView] setSeparatorStyle:UITableViewCellSeparatorStyleNone];
+            } completion:nil];
+        }
+    }
 }
 
 - (void)performFetchAndReloadTableView:(NSNotification *)notification
@@ -69,15 +95,16 @@
         [self performFetch];
         [[self tableView] reloadData];
         [[NSNotificationCenter defaultCenter] removeObserver:self];
+        [self setEmptyMessageNow];
     }
 }
 
 - (void)performFetch
 {
     NSError *error;
-    BOOL success = [dataController performFetch:&error];
+    BOOL success = [_dataController performFetch:&error];
     if (!success) {
-        NSLog(@"Something went wrong");
+        NSLog(@"%@: performFetch went wrong: %@", self, error);
     }
 }
 
@@ -92,55 +119,125 @@
     return self;
 }
 
-- (void)viewWillAppear:(BOOL)animated
-{
-    [super viewWillAppear:animated];
-    
-    // Set the titleView.
-    if (!titleView) {
-        titleView = [[[NSBundle mainBundle] loadNibNamed:@"MCTwoLabelsTitleView" owner:self options:nil] objectAtIndex:0];
-        [[self navigationItem] setTitleView:titleView];
-    }
-    [[titleView mainLabel] setText:@"We All Pay"];
-    [[titleView subLabel] setText:[NSString stringWithFormat:@"%@ build %@", [[[NSBundle mainBundle] infoDictionary] objectForKey:@"CFBundleShortVersionString"], [[[NSBundle mainBundle] infoDictionary] objectForKey:@"CFBundleVersion"]]];
-    if (SYSTEM_VERSION_LESS_THAN(@"7.0")) {
-        [[titleView mainLabel] setTextColor:[UIColor whiteColor]];
-        [[titleView subLabel] setTextColor:[UIColor whiteColor]];
-    }
-    
-    [[self tableView] reloadData];
-    //[[self navigationController] setToolbarHidden:YES];
-}
-
-- (void)viewDidDisappear:(BOOL)animated
-{
-    [super viewDidDisappear:animated];
-}
-
 - (void)viewDidLoad
 {
     [super viewDidLoad];
     
     [self setEdgesForExtendedLayout:UIRectEdgeNone];
-    [MCTools setAdBannerIfNotPaid:YES forViewController:self];
     
-    [[self navigationItem] setTitle:@"back"];
-    
-    if (!dataController) {
-        [self setDataController];
-    }
+    // [[self navigationItem] setTitle:NSLocalizedString(@"BACK_TITLE_ALL_TRIPS_VIEW", @"back")];
     
     // Load the nib file
     UINib *nib = [UINib nibWithNibName:@"MCAllTripsTableViewCell" bundle:nil];
     
     // Register this nib that contains the cell.
     [[ self tableView] registerNib:nib forCellReuseIdentifier:@"MCAllTripsTableViewCell"];
+    
+    emptyMessage = [[NSBundle mainBundle] loadNibNamed:@"MCTableEmptyMessage" owner:self options:nil][0];
+    [[emptyMessage bigMessage] setAlpha:0.0];
+    [[self tableView] setBackgroundView:emptyMessage];
+    
+    [self startRespondingToStoreChangeNotifications];
+}
+
+
+- (void)viewWillAppear:(BOOL)animated
+{
+    [super viewWillAppear:animated];
+    
+    //[MCTools setAdBannerIfNotPaid:YES forViewController:self];
+    
+    /*
+    // Set the titleView.
+    if (!titleView) {
+        titleView = [[NSBundle mainBundle] loadNibNamed:@"MCTwoLabelsTitleView" owner:self options:nil][0];
+        [[self navigationItem] setTitleView:titleView];
+    }
+    [[titleView mainLabel] setText:@"We All Pay"];
+    [[titleView subLabel] setText:[NSString stringWithFormat:@"%@ build %@", [[NSBundle mainBundle] infoDictionary][@"CFBundleShortVersionString"], [[NSBundle mainBundle] infoDictionary][@"CFBundleVersion"]]];
+    [[titleView mainLabel] setTextColor:[UIColor whiteColor]];
+    [[titleView subLabel] setTextColor:[UIColor whiteColor]];
+     */
+    
+    if (!_dataController) {
+        _dataController = [[MCWeAllPayStoreController defaultStore] allTripsDataControllerForDelegate:self];
+        [self performFetch];
+    }
+    
+    if ([[MCWeAllPayStoreController defaultStore] isDocumentStateNormal]) {
+        [self setEmptyMessage];
+    }
+    
+    [[self tableView] reloadData];
+    [[self navigationController] setToolbarHidden:YES animated:YES];
+}
+
+- (void)viewDidAppear:(BOOL)animated
+{
+    [super viewDidAppear:animated];
+    
+//    id<GAITracker> tracker = [[GAI sharedInstance] defaultTracker];
+//    [tracker set:kGAIScreenName value:@"MCAllTripsTableView_iPhone"];
+//    [tracker send:[[GAIDictionaryBuilder createAppView] build]];
+}
+
+- (void)viewWillDisappear:(BOOL)animated
+{
+    [super viewWillDisappear:animated];
+}
+
+- (void)viewDidDisappear:(BOOL)animated
+{
+    [super viewDidDisappear:animated];
+    
+    [MCTools setAdBannerIfNotPaid:NO forViewController:self];
 }
 
 - (void)didReceiveMemoryWarning
 {
     [super didReceiveMemoryWarning];
     // Dispose of any resources that can be recreated.
+}
+
+- (void)dealloc
+{
+    [self stopRespondingToStorechangeNotifications];
+}
+
+- (void)encodeRestorableStateWithCoder:(NSCoder *)coder
+{
+    [super encodeRestorableStateWithCoder:coder];
+}
+
+- (void)decodeRestorableStateWithCoder:(NSCoder *)coder
+{
+    [super decodeRestorableStateWithCoder:coder];
+}
+
+#pragma mark - UIViewController+WeAllPayStore notifications
+
+- (void)storeWillBeSwapped:(NSNotification *)notification
+{
+    [super storeWillBeSwapped:notification];
+    dispatch_sync(dispatch_get_main_queue(), ^{
+        [[self view] setUserInteractionEnabled:NO];
+    });
+}
+
+-(void)storeDidSwap:(NSNotification *)notification
+{
+    [super storeDidSwap:notification];
+    dispatch_sync(dispatch_get_main_queue(), ^{
+        if (_dataController) {
+            NSError *fetchError;
+            if (![_dataController performFetch:&fetchError]) {
+                NSLog(@"Error fetching: %@", fetchError);
+            }
+        }
+        [[self tableView] reloadData];
+        [self setEmptyMessage];
+        [[self view] setUserInteractionEnabled:YES];
+    });
 }
 
 #pragma mark - MCReturnPaymentViewControllerDelegate
@@ -169,23 +266,25 @@
     switch(type) {
             
         case NSFetchedResultsChangeInsert:
-            [[self tableView] insertRowsAtIndexPaths:[NSArray arrayWithObject:newIndexPath]
+            [[self tableView] insertRowsAtIndexPaths:@[newIndexPath]
                                     withRowAnimation:UITableViewRowAnimationFade];
+            [self setEmptyMessage];
             break;
             
         case NSFetchedResultsChangeDelete:
-            [[self tableView] deleteRowsAtIndexPaths:[NSArray arrayWithObject:indexPath]
+            [[self tableView] deleteRowsAtIndexPaths:@[indexPath]
                                     withRowAnimation:UITableViewRowAnimationFade];
+            [self setEmptyMessage];
             break;
             
         case NSFetchedResultsChangeUpdate:
-            [[self tableView] reloadRowsAtIndexPaths:[NSArray arrayWithObject:indexPath] withRowAnimation:UITableViewRowAnimationAutomatic];
+            [[self tableView] reloadRowsAtIndexPaths:@[indexPath] withRowAnimation:UITableViewRowAnimationAutomatic];
             break;
             
         case NSFetchedResultsChangeMove:
-            [[self tableView] deleteRowsAtIndexPaths:[NSArray arrayWithObject:indexPath]
+            [[self tableView] deleteRowsAtIndexPaths:@[indexPath]
                                     withRowAnimation:UITableViewRowAnimationFade];
-            [[self tableView] insertRowsAtIndexPaths:[NSArray arrayWithObject:newIndexPath]
+            [[self tableView] insertRowsAtIndexPaths:@[newIndexPath]
                                     withRowAnimation:UITableViewRowAnimationFade];
             break;
     }
@@ -195,28 +294,43 @@
 
 - (NSInteger)numberOfSectionsInTableView:(UITableView *)tableView
 {
-    return [[dataController sections] count];
+    return [[_dataController sections] count];
 }
 
 - (NSInteger)tableView:(UITableView *)tableView numberOfRowsInSection:(NSInteger)section
 {
-    return [[[dataController sections] objectAtIndex:section] numberOfObjects];
+    return [[_dataController sections][section] numberOfObjects];
 }
 
 - (UITableViewCell *)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath
 {
-    MCSharedBill *thisTrip = [dataController objectAtIndexPath:indexPath];
+    MCSharedBill *thisTrip = [_dataController objectAtIndexPath:indexPath];
     MCAllTripsTableViewCell *allTripsTableViewCell = [tableView dequeueReusableCellWithIdentifier:@"MCAllTripsTableViewCell"];
     
-    [[allTripsTableViewCell tripLabel] setText:[thisTrip tripName]];
+    if (![thisTrip tripName]) {
+        [[allTripsTableViewCell tripLabel] setText:@"..."];
+    } else {
+        [[allTripsTableViewCell tripLabel] setText:[thisTrip tripName]];
+    }
     [[allTripsTableViewCell peoplePresentLabel] setText:[thisTrip stringOfApproxPeoplePresent]];
 
-    NSNumberFormatter *nf = [[NSNumberFormatter alloc] init];
-    [nf setNumberStyle:NSNumberFormatterCurrencyStyle];
-    NSString *moneyString = [nf stringFromNumber:[thisTrip totalSumOfMoneyOfThisSharedBill]];
-    [[allTripsTableViewCell totalCostLabel] setText:moneyString];
-    
-    
+    if ([thisTrip areAllExchangeRatesValid]) {
+        
+        NSNumberFormatter *nf = [[NSNumberFormatter alloc] init];
+        [nf setNumberStyle:NSNumberFormatterCurrencyStyle];
+        NSString *moneyString = [nf stringFromNumber:[thisTrip totalSumOfMoneyOfThisSharedBill]];
+        [[allTripsTableViewCell totalCostLabel] setHidden:NO];
+        [[allTripsTableViewCell waitingForXRatesIndicator] stopAnimating];
+        [[allTripsTableViewCell totalCostLabel] setText:moneyString];
+    } else {
+        NSNumberFormatter *nf = [[NSNumberFormatter alloc] init];
+        [nf setNumberStyle:NSNumberFormatterCurrencyStyle];
+        NSString *moneyString = [nf stringFromNumber:[thisTrip totalSumOfMoneyOfThisSharedBill]];
+        [[allTripsTableViewCell totalCostLabel] setText:moneyString];
+        [[allTripsTableViewCell totalCostLabel] setHidden:YES];
+        [[allTripsTableViewCell waitingForXRatesIndicator] startAnimating];
+    }
+
     // fill extraLabel with dateModified.
     if (!df) {
         df = [[NSDateFormatter alloc] init];
@@ -251,11 +365,9 @@
 - (void)tableView:(UITableView *)tableView commitEditingStyle:(UITableViewCellEditingStyle)editingStyle forRowAtIndexPath:(NSIndexPath *)indexPath
 {
     if (editingStyle == UITableViewCellEditingStyleDelete) {
-        MCSharedBill *toBeDeleteSharedBill = [dataController objectAtIndexPath:indexPath];
-        [NSFetchedResultsController deleteCacheWithName:[NSString stringWithFormat:@"All persons cache of trip: %@", [toBeDeleteSharedBill uniqueBillId]]];
-        [NSFetchedResultsController deleteCacheWithName:[NSString stringWithFormat:@"All payments cache of trip: %@", [toBeDeleteSharedBill uniqueBillId]]];
+        MCSharedBill *toBeDeleteSharedBill = [_dataController objectAtIndexPath:indexPath];
         [MCSharedBill deleteSharedbill:toBeDeleteSharedBill];
-        [[[[MCWeAllPayStoreController defaultStore] weAllPayStoreDocument] managedObjectContext] processPendingChanges];
+        [[MCWeAllPayStoreController defaultStore] saveMainThreadContext];
     }
 }
 
@@ -281,12 +393,12 @@
 
 - (CGFloat)tableView:(UITableView *)tableView heightForRowAtIndexPath:(NSIndexPath *)indexPath
 {
-    return 60;
+    return 64;
 }
 
 - (void)tableView:(UITableView *)tableView accessoryButtonTappedForRowWithIndexPath:(NSIndexPath *)indexPath
 {
-    MCSharedBill *thisBill = [dataController objectAtIndexPath:indexPath];
+    MCSharedBill *thisBill = [_dataController objectAtIndexPath:indexPath];
     MCPaymentViewController *pvc = [[MCPaymentViewController alloc] initWithExistingPayment:nil fromBill:thisBill];
     UINavigationController *navController = [[UINavigationController alloc] initWithRootViewController:pvc];
     if ([[UIDevice currentDevice] userInterfaceIdiom] == UIUserInterfaceIdiomPad) {
@@ -307,9 +419,9 @@
     MCSharedBill *theBill;
     NSIndexPath *indexPathOfSelectedRow = [[self tableView] indexPathForSelectedRow];
     if (indexPathOfSelectedRow) {
-        theBill = [dataController objectAtIndexPath:indexPathOfSelectedRow];
+        theBill = [_dataController objectAtIndexPath:indexPathOfSelectedRow];
     }
-    if ([[segue destinationViewController] respondsToSelector:@selector(setTonightsBill:)]) {
+    if ([[segue destinationViewController] conformsToProtocol:@protocol(MCTonightsBillTransfer)]) {
         [[segue destinationViewController] setTonightsBill:theBill];
     }
 }

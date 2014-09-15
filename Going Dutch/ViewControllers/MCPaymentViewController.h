@@ -7,8 +7,11 @@
 //
 
 #import <UIKit/UIKit.h>
+#import <CoreData/CoreData.h>
 
 #import "MCCancelDoneViewController.h"
+
+#import "MCThisPaymentProtocol.h"
 
 @class MCPayment;
 @class MCSharedBill;
@@ -16,6 +19,12 @@
 @class MCPaymentViewController;
 @class MCTwoLabelsTitleView;
 
+typedef NS_ENUM(NSUInteger, MCMoneyValueFieldDismissStatus) {
+    cancelIsPressed,
+    doneIsPressed,
+    otherTextFieldSelected,
+    backgroundTapped
+};
 
 @protocol MCPaymentViewControllerDelegate <NSObject>
 
@@ -23,7 +32,7 @@
 
 @end
 
-@interface MCPaymentViewController : MCCancelDoneViewController <UIPickerViewDataSource, UIPickerViewDelegate, UITextFieldDelegate>
+@interface MCPaymentViewController : UITableViewController <UIPickerViewDataSource, UIPickerViewDelegate, UITextFieldDelegate, NSFetchedResultsControllerDelegate, MCThisPaymentProtocol>
 {
     UIBarButtonItem *theDoneButton;
     UIBarButtonItem *cancelChangesForEntirePaymentButton;
@@ -34,14 +43,18 @@
     __weak IBOutlet UITextField *itemView;
     __weak IBOutlet UITextField *paidView;
     NSNumber *paidViewNumber;
-    __weak IBOutlet UILabel *dateAndTimeLabel;
+//    __weak IBOutlet UILabel *dateAndTimeLabel;
     
     UIPickerView *personPickerView;
     NSArray *listOfPeople;
+    BOOL peoplePickerCancelled;
+    MCMoneyValueFieldDismissStatus kindOfPaidFieldDismiss;
+    
+    NSArray *_paymentPresenceArray;
+    NSFetchedResultsController *_dataController;
 }
 
-
-
+@property (weak, nonatomic) IBOutlet UIImageView *payerPicture;
 @property (nonatomic, strong) MCPayment *thisPayment;
 @property (nonatomic, strong) MCSharedBill *tonightsBill;
 @property (nonatomic, readonly) BOOL didSomethingChange;

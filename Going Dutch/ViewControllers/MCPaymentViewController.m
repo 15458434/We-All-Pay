@@ -10,8 +10,12 @@
 #import "MCPayment+addons.h"
 #import "MCPerson+addons.h"
 #import "MCSharedBill+addons.h"
+#import "MCPaymentPresence+addons.h"
 #import "MCWeAllPayStoreController.h"
 #import "MCTwoLabelsTitleView.h"
+
+#import "MCPaymentPresenceTableViewCell_iPhone.h"
+#import "MCDismissMeBlockProtocol.h"
 
 @interface MCPaymentViewController ()
 
@@ -19,31 +23,38 @@
 
 @implementation MCPaymentViewController
 
-@synthesize thisPayment;
-@synthesize tonightsBill;
-@synthesize didSomethingChange;
 @synthesize isNew;
 @synthesize delegate;
 
 #pragma mark - action
 
+- (IBAction)tabElseWhereAndDismissKeyboard:(id)sender {
+    if ([itemView isFirstResponder]) {
+        [itemView endEditing:YES];
+        [itemView setText:[_thisPayment descriptionOfPayment]];
+    }
+    if ([payerView isFirstResponder]) {
+        [self cancelPersonPicker:self];
+    }
+    if ([paidView isFirstResponder]) {
+        [self cancelNumberPad:self];
+    }
+}
+
 - (IBAction)mainCancelButtonPressed:(id)sender
 {
-    NSManagedObjectContext *context = [[[MCWeAllPayStoreController defaultStore] weAllPayStoreDocument] managedObjectContext];
-    [context performBlockAndWait:^{
-        [[context undoManager] endUndoGrouping];
-        [[context undoManager] disableUndoRegistration];
-        if (didSomethingChange) {
-            [[context undoManager] undoNestedGroup];
-        }
-    }];
+    [self dismissKeyboard];
+    if ([[[[MCWeAllPayStoreController defaultStore] mainThreadContext] undoManager] canUndo]) {
+        [[MCWeAllPayStoreController defaultStore] endUndoGroupAndUndo];
+    } else {
+        [[MCWeAllPayStoreController defaultStore] endUndoGroup];
+    }
     [[[self navigationController] presentingViewController] dismissViewControllerAnimated:YES completion:nil];
 }
 
 - (IBAction)mainDoneButtonPressed:(id)sender
 {
     NSLog(@"MCPaymentViewController: Done button pressed.");
-    self.switchInputField = NO;
     if ([payerView isFirstResponder]) {
         [self donePersonPicker:self];
     }
@@ -54,50 +65,41 @@
         [self storePlaceViewData];
     }
 
-    if (didSomethingChange) {
-        NSManagedObjectContext *context = [[[MCWeAllPayStoreController defaultStore] weAllPayStoreDocument] managedObjectContext];
-        [context performBlockAndWait:^{
-            [[context undoManager] endUndoGrouping];
-            [[context undoManager] disableUndoRegistration];
-            [context processPendingChanges];
-        }];
+    if ([[[[MCWeAllPayStoreController defaultStore] mainThreadContext] undoManager] canUndo]) {
+        [[MCWeAllPayStoreController defaultStore] endUndoGroupAndProcess];
+    } else {
+        [[MCWeAllPayStoreController defaultStore] endUndoGroup];
     }
+    [[MCWeAllPayStoreController defaultStore] saveMainThreadContext];
     [[[self navigationController] presentingViewController] dismissViewControllerAnimated:YES completion:nil];
-}
-
-- (IBAction)dismissKeyboard:(id)sender
-{
-    if ([itemView isFirstResponder]) {
-        [itemView endEditing:YES];
-        [itemView setText:[thisPayment descriptionOfPayment]];
-    }
-    if ([payerView isFirstResponder]) {
-        [self cancelPersonPicker:self];
-    }
-    if ([paidView isFirstResponder]) {
-        [self cancelNumberPad:self];
-    }
 }
 
 - (void)cancelPersonPicker:(id)selector
 {
     // Set the text of the textView back and resign first responder
-    [payerView setText:[[thisPayment payingPerson] getFullName]];
+    peoplePickerCancelled = YES;
+    [payerView setText:[[_thisPayment payingPerson] getFullName]];
+    if ([_thisPayment payingPerson]) {
+        [self setCircularImageOnPictureView:[[_thisPayment payingPerson] picture]];
+    } else {
+        [_payerPicture setImage:nil];
+    }
     [payerView resignFirstResponder];
 }
 
 - (void)donePersonPicker:(id)selector
 {
-    NSInteger row = [personPickerView selectedRowInComponent:0];
-    [thisPayment setPayingPerson:[listOfPeople objectAtIndex:row]];
-    [payerView setText:[[thisPayment payingPerson] getFullName]];
+    if ([[_tonightsBill peoplePresent] count] > 0) {
+        NSInteger row = [personPickerView selectedRowInComponent:0];
+        [_thisPayment setPayingPerson:listOfPeople[row]];
+//        [payerView setText:[[_thisPayment payingPerson] getFullName]];
+//        didSomethingChange = YES;
+        NSDate *nu = [NSDate date];
+        [_tonightsBill setDateModified:nu];
+        [_thisPayment setDateModified:nu];
+//        [[[self navigationItem] rightBarButtonItem] setEnabled:YES];
+    }
     [payerView resignFirstResponder];
-    didSomethingChange = YES;
-    NSDate *nu = [NSDate date];
-    [tonightsBill setDateModified:nu];
-    [thisPayment setDateModified:nu];
-    [[[self navigationItem] rightBarButtonItem] setEnabled:YES];
-    //[itemView becomeFirstResponder];
 }
 
 - (void)cancelNumberPad:(id)selector
@@ -105,39 +107,38 @@
     // Restore Paidview and resignFirstResponder.
     NSNumberFormatter *nf = [[NSNumberFormatter alloc] init];
     [nf setNumberStyle:NSNumberFormatterCurrencyStyle];
-    [paidView setText:[nf stringFromNumber:[thisPayment money]]];
+    [paidView setText:[nf stringFromNumber:[_thisPayment money]]];
+    kindOfPaidFieldDismiss = cancelIsPressed;
     [paidView resignFirstResponder];
 }
 
 - (void)doneNumberPad:(id)selector
 {
-    [self storeMoneySpent];
+//    [self storeMoneySpent];
+    kindOfPaidFieldDismiss = doneIsPressed;
     [paidView resignFirstResponder];
 }
 
 - (void)storePlaceViewData
 {
     [itemView resignFirstResponder];
-    [thisPayment setDescriptionOfPayment:[itemView text]];
-    didSomethingChange = YES;
+    [_thisPayment setDescriptionOfPayment:[itemView text]];
+//    didSomethingChange = YES;
     [[[self navigationItem] rightBarButtonItem] setEnabled:YES];
 }
 
 - (void)storeMoneySpent
 {
-    NSNumberFormatter *nf = [[NSNumberFormatter alloc] init];
-    
-    [nf setNumberStyle:NSNumberFormatterDecimalStyle];
-    [thisPayment setMoney:[nf numberFromString:[paidView text]]];
-    
-    [nf setNumberStyle:NSNumberFormatterCurrencyStyle];
-    [paidView setText:[nf stringFromNumber:[thisPayment money]]];
+    [_thisPayment putMoneyValueAsAString:[paidView text]];
+
+    [paidView setText:[_thisPayment getMoneyValueInCurrencyAsAString]];
     
     [[[self navigationItem] rightBarButtonItem] setEnabled:YES];
     NSDate *nu = [NSDate date];
-    [tonightsBill setDateModified:nu];
-    [thisPayment setDateModified:nu];
-    didSomethingChange = YES;
+    [_tonightsBill setDateModified:nu];
+    [_thisPayment setDateModified:nu];
+//    didSomethingChange = YES;
+    [[MCWeAllPayStoreController defaultStore] endUndoGroupWithoutRegistration];
 }
 
 #pragma mark - new in this class
@@ -147,18 +148,60 @@
     self = [super init];
     
     if (self) {
-        tonightsBill = bill;
-        didSomethingChange = NO;
+        _tonightsBill = bill;
+//        didSomethingChange = NO;
         if (thePayment) {
-            thisPayment = thePayment;
+            _thisPayment = thePayment;
             isNew = NO;
         } else {
-            thisPayment = [MCPayment addPayment];
-            [thisPayment setOnWhichBill:bill];
+            _thisPayment = [MCPayment addPayment];
+            [_thisPayment setOnWhichBill:bill];
             isNew = YES;
         }
     }
     return self;
+}
+
+- (UIStatusBarStyle)preferredStatusBarStyle
+{
+    return UIStatusBarStyleLightContent;
+}
+
+- (void)setCircularImageOnPictureView:(UIImage *)image
+{
+    __weak MCPaymentViewController *weakSelf = self;
+    
+    dispatch_queue_t imageProcessQueue;
+    imageProcessQueue = dispatch_queue_create("imageProcessQueue", NULL);
+    
+    dispatch_async(imageProcessQueue, ^{
+        CGRect circularImageRect = CGRectMake(0, 0, 60, 60);
+        UIImage *circularImage = [MCTools cutCircularImageFrom:image toDestinationRect:circularImageRect];
+        dispatch_async(dispatch_get_main_queue(), ^{
+            MCPaymentViewController *strongSelf = weakSelf;
+            if (strongSelf) {
+                [[strongSelf payerPicture] setImage:circularImage];
+                [[strongSelf payerPicture] setNeedsDisplay];
+            }
+        });
+    });
+}
+
+- (void)tappedInTheBackground:(id)selector
+{
+    kindOfPaidFieldDismiss = backgroundTapped;
+    [self dismissKeyboard];
+}
+
+- (void)dismissKeyboard
+{
+    if ([paidView isFirstResponder]) {
+        [paidView resignFirstResponder];
+    } else if ([itemView isFirstResponder]) {
+        [itemView resignFirstResponder];
+    } else if ([payerView isFirstResponder]) {
+        [payerView resignFirstResponder];
+    }
 }
 
 #pragma mark - PickerViewDelegate
@@ -166,15 +209,16 @@
 - (NSString *)pickerView:(UIPickerView *)pickerView titleForRow:(NSInteger)row forComponent:(NSInteger)component
 {
     if (listOfPeople == nil) {
-        listOfPeople = [tonightsBill getArrayOfFullNamesOfPeoplePresent];
+        listOfPeople = [_tonightsBill getArrayOfFullNamesOfPeoplePresent];
     }
-    return [[listOfPeople objectAtIndex:row] getFullName];
+    return [listOfPeople[row] getFullName];
 }
 
 - (void)pickerView:(UIPickerView *)pickerView didSelectRow:(NSInteger)row inComponent:(NSInteger)component
 {
-    [payerView setText:[[listOfPeople objectAtIndex:row] getFullName]];
-    [thisPayment setPayingPerson:[listOfPeople objectAtIndex:row]];
+    [payerView setText:[listOfPeople[row] getFullName]];
+    [_thisPayment setPayingPerson:listOfPeople[row]];
+    [self setCircularImageOnPictureView:[listOfPeople[row] picture]];
 }
 
 #pragma mark - PickerViewDataSource
@@ -183,9 +227,10 @@
 {
     return 1;
 }
+
 - (NSInteger)pickerView:(UIPickerView *)pickerView numberOfRowsInComponent:(NSInteger)component
 {
-    return [[tonightsBill peoplePresent] count];
+    return [[_tonightsBill peoplePresent] count];
 }
 
 #pragma mark - UITextFieldDelegate
@@ -200,43 +245,52 @@
 
 - (BOOL)textFieldShouldBeginEditing:(UITextField *)textField
 {
-    /*if ([payerView isFirstResponder] || [paidView isFirstResponder] || [itemView isFirstResponder]) {
-     [self setSwitchInputField:YES];
-     return YES;
-     } else {
-     self.switchInputField = NO;
-     return YES;
-     }*/
+    if (textField == payerView) {
+        // TODO: Better UI solution for the user.
+        if ([[_tonightsBill peoplePresent] count] == 0) {
+            NSLog(@"No people present on _tonightsBill, editing this textField is not allowed.");
+            return NO;
+        }
+    }
     return YES;
 }
 
 - (void)textFieldDidBeginEditing:(UITextField *)textField
 {
     if (textField == paidView) {
-        NSNumberFormatter *nf = [[NSNumberFormatter alloc] init];
-        [nf setFormatterBehavior:NSNumberFormatterBehaviorDefault];
-        [nf setLocale:[NSLocale currentLocale]];
-        [nf setNumberStyle:NSNumberFormatterDecimalStyle];
-        NSString *ms = [nf stringFromNumber:[thisPayment money]];
-        if ([ms isEqualToString:@"0"]) {
-            ms = nil;
+        [[MCWeAllPayStoreController defaultStore] beginUndoGroupWithoutRegistration];
+        NSNumberFormatter *numberFormatter = [[NSNumberFormatter alloc] init];
+        [numberFormatter setFormatterBehavior:NSNumberFormatterBehaviorDefault];
+        [numberFormatter setLocale:[NSLocale currentLocale]];
+        [numberFormatter setNumberStyle:NSNumberFormatterDecimalStyle];
+        NSString *thisPaymentMoneyString = [numberFormatter stringFromNumber:[_thisPayment money]];
+        if ([thisPaymentMoneyString isEqualToString:@"0"]) {
+            thisPaymentMoneyString = nil;
         }
-        [paidView setText:ms];
+        [paidView setText:thisPaymentMoneyString];
     }
     
     if (textField == payerView) {
+        [[MCWeAllPayStoreController defaultStore] beginUndoGroupWithoutRegistration];
+        peoplePickerCancelled = NO;
         NSInteger row = 0;
-        MCPerson *payingPerson = [thisPayment payingPerson];
+        MCPerson *payingPerson = [_thisPayment payingPerson];
         if (listOfPeople == nil) {
-            listOfPeople = [tonightsBill getArrayOfFullNamesOfPeoplePresent];
+            listOfPeople = [_tonightsBill getArrayOfFullNamesOfPeoplePresent];
         }
         if (payingPerson) {
             row = [listOfPeople indexOfObject:payingPerson];
         } else {
             row = [personPickerView selectedRowInComponent:0];
         }
-        [payerView setText:[[thisPayment payingPerson] getFullName]];
+        [payerView setText:[listOfPeople[row] getFullName]];
+        [self setCircularImageOnPictureView:[listOfPeople[row] picture]];
         [personPickerView selectRow:row inComponent:0 animated:YES];
+        kindOfPaidFieldDismiss = otherTextFieldSelected;
+    }
+    
+    if (textField == itemView) {
+        kindOfPaidFieldDismiss = otherTextFieldSelected;
     }
 }
 
@@ -248,74 +302,50 @@
 - (void)textFieldDidEndEditing:(UITextField *)textField
 {
     if (textField == paidView) {
-        /*[self storeMoneySpent];*/
+        if (kindOfPaidFieldDismiss == cancelIsPressed) {
+            // Restore stored value
+            [paidView setText:[_thisPayment getMoneyValueInCurrencyAsAString]];
+        } else if (kindOfPaidFieldDismiss == doneIsPressed) {
+            [self storeMoneySpent];
+        } else if (kindOfPaidFieldDismiss == otherTextFieldSelected) {
+            [self storeMoneySpent];
+        } else if (kindOfPaidFieldDismiss == backgroundTapped){
+            // Restore stored value
+            [paidView setText:[_thisPayment getMoneyValueInCurrencyAsAString]];
+        }
     } else if (textField == payerView) {
-        [self donePersonPicker:self];
-        
+        if (!peoplePickerCancelled) {
+            [[MCWeAllPayStoreController defaultStore] endUndoGroupWithoutRegistration];
+            [self donePersonPicker:self];
+        } else {
+            peoplePickerCancelled = YES;
+            [[MCWeAllPayStoreController defaultStore] endUndoGroupAndUndoWithoutRegistration];
+            [payerView setText:[[_thisPayment payingPerson] getFullName]];
+            if ([_thisPayment payingPerson]) {
+                [self setCircularImageOnPictureView:[[_thisPayment payingPerson] picture]];
+            } else {
+                NSLog(@"Is het stuk?");
+                [self setCircularImageOnPictureView:nil];
+            }
+        }
     } else if (textField == itemView) {
         // Do something to store value of placeview.
         [self storePlaceViewData];
         NSDate *nu = [NSDate date];
-        [tonightsBill setDateModified:nu];
-        [thisPayment setDateModified:nu];
+        [_tonightsBill setDateModified:nu];
+        [_thisPayment setDateModified:nu];
     }
-    [self selectNextUITextField:textField];
 }
 
 #pragma mark - Inherited from super
 
-- (id)initWithNibName:(NSString *)nibNameOrNil bundle:(NSBundle *)nibBundleOrNil
+- (id)initWithStyle:(UITableViewStyle)style
 {
-    self = [super initWithNibName:nibNameOrNil bundle:nibBundleOrNil];
+    self = [super initWithStyle:style];
     if (self) {
         // Custom initialization
     }
     return self;
-}
-
-- (void)viewDidAppear:(BOOL)animated
-{
-    [super viewDidAppear:animated];
-    
-    
-}
-
-- (void)viewWillAppear:(BOOL)animated
-{
-    [super viewWillAppear:animated];
-    
-    // Navigationbar stuff
-    if (!twoLabelTitleView) {
-        twoLabelTitleView = [[[NSBundle mainBundle] loadNibNamed:@"MCTwoLabelsTitleView" owner:self options:nil] objectAtIndex:0];
-        if (isNew) {
-            [[twoLabelTitleView mainLabel] setText:@"New payment"];
-            [[twoLabelTitleView subLabel] setText:@"Add payment data"];
-        } else {
-            [[twoLabelTitleView mainLabel] setText:@"Payment"];
-            [[twoLabelTitleView subLabel] setText:@"Edit payment data"];
-        }
-        if (SYSTEM_VERSION_LESS_THAN(@"7.0")) {
-            [[twoLabelTitleView mainLabel] setTextColor:[UIColor whiteColor]];
-            [[twoLabelTitleView subLabel] setTextColor:[UIColor whiteColor]];
-        }
-        [[self navigationItem] setTitleView:twoLabelTitleView];
-    }
-    
-    // Fill in the form if data is present.
-    [payerView setText:[[thisPayment payingPerson] getFullName]];
-    [payerView setDelegate:self];
-    [itemView setText:[thisPayment descriptionOfPayment]];
-    NSNumberFormatter *nf = [[NSNumberFormatter alloc] init];
-    [nf setLocale:[NSLocale currentLocale]];
-    [nf setNumberStyle:NSNumberFormatterCurrencyStyle];
-    [nf setFormatterBehavior:NSNumberFormatterCurrencyStyle];
-    if (!isNew) {
-        [paidView setText:[nf stringFromNumber:[thisPayment money]]];
-    }
-    NSDateFormatter *dateFormatter = [[NSDateFormatter alloc] init];
-    [dateFormatter setDateStyle:NSDateFormatterMediumStyle];
-    [dateFormatter setTimeStyle:NSDateFormatterMediumStyle];
-    [dateAndTimeLabel setText:[dateFormatter stringFromDate:[thisPayment dateModified]]];
 }
 
 - (void)viewDidLoad
@@ -323,32 +353,28 @@
     [super viewDidLoad];
     // Do any additional setup after loading the view from its nib.
     
-    [self setWillShowButtons:NO];
+    [[MCWeAllPayStoreController defaultStore] beginUndoGroup];
     
-    // Prepare the switch input mechanism.
-    [self setSwitchInputField:YES];
-    listOfInputs = [NSArray arrayWithObjects:payerView, itemView, paidView, nil];
-    
-    NSManagedObjectContext *context = [[[MCWeAllPayStoreController defaultStore] weAllPayStoreDocument] managedObjectContext];
-    [context performBlockAndWait:^{
-        [[context undoManager] enableUndoRegistration];
-        [[context undoManager] beginUndoGrouping];
-    }];
-    
-    // When thisPayment was not passed along a new one should be created.
-    if (!thisPayment) {
-        thisPayment = [tonightsBill addPayment];
+    // When _thisPayment was not passed along a new one should be created.
+    if (!_thisPayment) {
+        _thisPayment = [_tonightsBill addPayment];
         isNew = YES;
-        didSomethingChange = YES;
+//        didSomethingChange = YES;
     } else {
         isNew = NO;
     }
     
+    _dataController = [[MCWeAllPayStoreController defaultStore] paymentPresenceDataControllerForDelegate:self];
+    
     // If tonight's bill wasn't passed along.
-    if (!tonightsBill) {
+    if (!_tonightsBill) {
         NSLog(@"tonightsBill wasn't passed along.");
         @throw [NSException exceptionWithName:@"tonightsBill missing" reason:@"thisPayment didn't receive tonightsBill." userInfo:nil];
     }
+    
+    // Create an array sorted on people's firstName.
+//    NSSortDescriptor *sortDescriptor = [NSSortDescriptor sortDescriptorWithKey:@"person.firstName" ascending:YES];
+//    _paymentPresenceArray = [[_thisPayment peopleSharingPayment] sortedArrayUsingDescriptors:@[sortDescriptor]];
     
     // Create Toolbar for the input accessory of payerView
     CGRect toolbarRect = CGRectMake(0, 0, [[self view] bounds].size.width, 44);
@@ -362,7 +388,7 @@
     UIBarButtonItem *doneButtonToolbar = [[UIBarButtonItem alloc] initWithBarButtonSystemItem:UIBarButtonSystemItemDone
                                                                                        target:self
                                                                                        action:@selector(donePersonPicker:)];
-    NSArray *buttonArray = [[NSArray alloc] initWithObjects:cancelButton, flexButton, doneButtonToolbar, nil];
+    NSArray *buttonArray = @[cancelButton, flexButton, doneButtonToolbar];
     [inputAccessoryPickerView setItems:buttonArray animated:YES];
     personPickerView = [[UIPickerView alloc] init];
     [personPickerView setDelegate:self];
@@ -376,10 +402,69 @@
                                                                  target:self
                                                                  action:@selector(cancelNumberPad:)];
     theDoneButton = [[UIBarButtonItem alloc] initWithBarButtonSystemItem:UIBarButtonSystemItemDone
-                                                               target:self
-                                                               action:@selector(doneNumberPad:)];
-    [inputAccossoryNumberPad setItems:[[NSArray alloc] initWithObjects:cancelButton, flexButton, theDoneButton, nil] animated:YES];
+                                                                  target:self
+                                                                  action:@selector(doneNumberPad:)];
+    [inputAccossoryNumberPad setItems:@[cancelButton, flexButton, theDoneButton] animated:YES];
     [paidView setInputAccessoryView:inputAccossoryNumberPad];
+    
+    // Make sure a tap in the background dimisses the keyboard as well.
+    UITapGestureRecognizer *thatTickles = [[UITapGestureRecognizer alloc] initWithTarget:self action:@selector(tappedInTheBackground:)];
+    [thatTickles setCancelsTouchesInView:NO];
+    [[self tableView] addGestureRecognizer:thatTickles];
+}
+
+- (void)viewWillAppear:(BOOL)animated
+{
+    [super viewWillAppear:animated];
+    
+    [MCTools setAdBannerIfNotPaid:NO forViewController:self];
+    
+    [self setNeedsStatusBarAppearanceUpdate];
+    
+    // Navigationbar stuff
+    if (!twoLabelTitleView) {
+        twoLabelTitleView = [[NSBundle mainBundle] loadNibNamed:@"MCTwoLabelsTitleView" owner:self options:nil][0];
+        if (isNew) {
+            [[twoLabelTitleView mainLabel] setText:NSLocalizedString(@"NEW_PAYMENT_HEADER", @"Header in the paymentView which state new Payment")];
+            [[twoLabelTitleView subLabel] setText:NSLocalizedString(@"NEW_PAYMENT_SUBHEADER", @"Sub header in the paymentView which states Add payment data")];
+        } else {
+            [[twoLabelTitleView mainLabel] setText:NSLocalizedString(@"EXISTING_PAYMENT_HEADER", @"Header in the paymentView which states payment")];
+            [[twoLabelTitleView subLabel] setText:NSLocalizedString(@"EXISTING_PAYMENT_SUBHEADER", @"Sub header in the paymentView which states edit payment data")];
+        }
+        [[self navigationItem] setTitleView:twoLabelTitleView];
+    }
+    
+    // Fill in the form if data is present.
+    [payerView setText:[[_thisPayment payingPerson] getFullName]];
+    [payerView setDelegate:self];
+    [itemView setText:[_thisPayment descriptionOfPayment]];
+    if ([_thisPayment payingPerson]) {
+        [self setCircularImageOnPictureView:[[_thisPayment payingPerson] picture]];
+    }
+
+    if (!isNew) {
+        paidView.text = [_thisPayment getMoneyValueInCurrencyAsAString];
+    }
+}
+
+- (void)viewDidAppear:(BOOL)animated
+{
+    [super viewDidAppear:animated];
+    
+//    id<GAITracker> tracker = [[GAI sharedInstance] defaultTracker];
+//    if (isNew) {
+//        [tracker set:kGAIScreenName value:@"MCPaymentNewView_iPhone"];
+//    } else {
+//        [tracker set:kGAIScreenName value:@"MCPaymentDetailsView_iPhone"];
+//    }
+//    [tracker send:[[GAIDictionaryBuilder createAppView] build]];
+}
+
+- (void)viewDidDisappear:(BOOL)animated
+{
+    [super viewDidDisappear:animated];
+    
+    [MCTools setAdBannerIfNotPaid:NO forViewController:self];
 }
 
 - (BOOL)disablesAutomaticKeyboardDismissal
@@ -392,5 +477,152 @@
     [super didReceiveMemoryWarning];
     // Dispose of any resources that can be recreated.
 }
+
+- (void)encodeRestorableStateWithCoder:(NSCoder *)coder
+{
+    [super encodeRestorableStateWithCoder:coder];
+}
+
+- (void)decodeRestorableStateWithCoder:(NSCoder *)coder
+{
+    [super decodeRestorableStateWithCoder:coder];
+}
+
+#pragma mark - NSFetchedResultsControllerDelegate
+
+- (void)controllerWillChangeContent:(NSFetchedResultsController *)controller
+{
+    [[self tableView] beginUpdates];
+}
+
+- (void)controllerDidChangeContent:(NSFetchedResultsController *)controller
+{
+    [[self tableView] endUpdates];
+}
+
+- (void)controller:(NSFetchedResultsController *)controller didChangeObject:(id)anObject atIndexPath:(NSIndexPath *)indexPath forChangeType:(NSFetchedResultsChangeType)type newIndexPath:(NSIndexPath *)newIndexPath
+{
+    switch(type) {
+            
+        case NSFetchedResultsChangeInsert:
+            [[self tableView] insertRowsAtIndexPaths:@[newIndexPath]
+                                    withRowAnimation:UITableViewRowAnimationFade];
+            break;
+            
+        case NSFetchedResultsChangeDelete:
+            [[self tableView] deleteRowsAtIndexPaths:@[indexPath]
+                                    withRowAnimation:UITableViewRowAnimationFade];
+            break;
+            
+        case NSFetchedResultsChangeUpdate:
+            [[self tableView] reloadRowsAtIndexPaths:@[indexPath] withRowAnimation:UITableViewRowAnimationAutomatic];
+            paidView.text = [_thisPayment getMoneyValueInCurrencyAsAString];
+            break;
+            
+        case NSFetchedResultsChangeMove:
+            [[self tableView] deleteRowsAtIndexPaths:@[indexPath]
+                                    withRowAnimation:UITableViewRowAnimationFade];
+            [[self tableView] insertRowsAtIndexPaths:@[newIndexPath]
+                                    withRowAnimation:UITableViewRowAnimationFade];
+            break;
+    }
+}
+
+#pragma mark - Table view delegate
+
+- (CGFloat)tableView:(UITableView *)tableView heightForRowAtIndexPath:(NSIndexPath *)indexPath
+{
+    return 52.0;
+}
+
+#pragma mark - Table view data source
+
+- (NSInteger)numberOfSectionsInTableView:(UITableView *)tableView
+{
+    // Return the number of sections.
+    return 1;
+}
+
+- (NSInteger)tableView:(UITableView *)tableView numberOfRowsInSection:(NSInteger)section
+{
+    // Return the number of rows in the section.
+    return [[_dataController fetchedObjects] count];
+}
+
+- (UITableViewCell *)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath
+{
+    MCPaymentPresenceTableViewCell_iPhone *cell = [tableView dequeueReusableCellWithIdentifier:@"paymentPresenceCell_iPhone" forIndexPath:indexPath];
+    
+    // Set the cell contents
+    MCPaymentPresence *thisCellsPresence = [_dataController objectAtIndexPath:indexPath];
+    [[cell nameLabel] setText:[[thisCellsPresence person] getFullName]];
+    [cell setCircularImage:[[thisCellsPresence person] thumbnail]];
+    [[cell isPresentSwitch] setOn:[[thisCellsPresence isPersonPresent] boolValue]];
+    NSString *owesPreString = NSLocalizedString(@"OWES_FROM_THIS_PAYMENT", @"owes");
+    NSString *owesString = [NSString stringWithFormat:@"%@ %@", owesPreString, [thisCellsPresence getCurrencyStringOfAverageOwe]];
+    [[cell owesLabel] setText:owesString];
+    [cell setThisCellsPaymentPresence:thisCellsPresence];
+    
+    // Set the cell alignment to headerView stuff
+    NSLayoutConstraint *bazinga = [NSLayoutConstraint constraintWithItem:payerView attribute:NSLayoutAttributeLeading relatedBy:NSLayoutRelationEqual toItem:[cell nameLabel] attribute:NSLayoutAttributeLeading multiplier:1.0 constant:-6.0];
+    NSLayoutConstraint *payerPictureToUser = [NSLayoutConstraint constraintWithItem:_payerPicture attribute:NSLayoutAttributeTrailing relatedBy:NSLayoutRelationEqual toItem:[cell personView] attribute:NSLayoutAttributeTrailing multiplier:1.0 constant:0.0];
+    [[self tableView] addConstraints:@[bazinga, payerPictureToUser]];
+    
+    return cell;
+}
+
+
+/*
+ // Override to support conditional editing of the table view.
+ - (BOOL)tableView:(UITableView *)tableView canEditRowAtIndexPath:(NSIndexPath *)indexPath
+ {
+ // Return NO if you do not want the specified item to be editable.
+ return YES;
+ }
+ */
+
+/*
+ // Override to support editing the table view.
+ - (void)tableView:(UITableView *)tableView commitEditingStyle:(UITableViewCellEditingStyle)editingStyle forRowAtIndexPath:(NSIndexPath *)indexPath
+ {
+ if (editingStyle == UITableViewCellEditingStyleDelete) {
+ // Delete the row from the data source
+ [tableView deleteRowsAtIndexPaths:@[indexPath] withRowAnimation:UITableViewRowAnimationFade];
+ } else if (editingStyle == UITableViewCellEditingStyleInsert) {
+ // Create a new instance of the appropriate class, insert it into the array, and add a new row to the table view
+ }
+ }
+ */
+
+/*
+ // Override to support rearranging the table view.
+ - (void)tableView:(UITableView *)tableView moveRowAtIndexPath:(NSIndexPath *)fromIndexPath toIndexPath:(NSIndexPath *)toIndexPath
+ {
+ }
+ */
+
+/*
+ // Override to support conditional rearranging of the table view.
+ - (BOOL)tableView:(UITableView *)tableView canMoveRowAtIndexPath:(NSIndexPath *)indexPath
+ {
+ // Return NO if you do not want the item to be re-orderable.
+ return YES;
+ }
+ */
+
+ #pragma mark - Navigation
+ 
+ // In a storyboard-based application, you will often want to do a little preparation before navigation
+ - (void)prepareForSegue:(UIStoryboardSegue *)segue sender:(id)sender
+ {
+ // Get the new view controller using [segue destinationViewController].
+ // Pass the selected object to the new view controller.
+     if ([[segue identifier] isEqualToString:@"openSelectCurrency"]) {
+         id destination = [[segue destinationViewController] viewControllers][0];
+         if ([destination conformsToProtocol:@protocol(MCThisPaymentProtocol)]) {
+             [destination setThisPayment:_thisPayment];
+         }
+     }
+ }
 
 @end

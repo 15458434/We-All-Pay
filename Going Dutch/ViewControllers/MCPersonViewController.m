@@ -17,69 +17,50 @@
 
 @interface MCPersonViewController ()
 
+@property (atomic, copy) NSDate * dateModified;
+@property (atomic, copy) NSString * defaultEmailAddress;
+@property (atomic, copy) NSString * firstName;
+@property (atomic, copy) NSString * lastName;
+@property (atomic, strong) NSString * phoneNumber;
+@property (atomic, copy) UIImage * picture;
+@property (atomic, copy) UIImage * thumbnail;
+
 @end
 
 @implementation MCPersonViewController
 
-@synthesize tonightsBill;
 @synthesize changeFlagDelegate;
 @synthesize isNew;
-@synthesize thisPerson;
 
 #pragma mark - Actions
 
 - (IBAction)dismissKeyboard:(id)sender
 {
-    if ([firstNameField isFirstResponder]) {
-        [firstNameField endEditing:YES];
-    }
-    if ([lastNameField isFirstResponder]) {
-        [lastNameField endEditing:YES];
-    }
-    if ([emailField isFirstResponder]) {
-        if (ABAddressBookGetAuthorizationStatus() == kABAuthorizationStatusAuthorized) {
-            [self cancelEmailPicker:self];
-        } else {
-            [emailField endEditing:YES];
-        }
-    }
+    [self dismissKeyboard];
 }
 
 - (IBAction)cancelButtonPressed:(id)sender
 {
-    //[[[[MCWeAllPayStoreController defaultStore] weAllPayStoreDocument] managedObjectContext] rollback];
-    NSManagedObjectContext *context = [[[MCWeAllPayStoreController defaultStore] weAllPayStoreDocument] managedObjectContext];
-    [context performBlock:^{
-        [[context undoManager] endUndoGrouping];
-        [[context undoManager] undoNestedGroup];
-    }];
+    [self dismissKeyboard];
+    [[MCWeAllPayStoreController defaultStore] endUndoGroupAndUndo];
     [[[self navigationController] presentingViewController] dismissViewControllerAnimated:YES completion:nil];
 }
 
 - (IBAction)selectEmailAddressPressed:(id)sender
 {
+    // If any of the fields is first responder resign them first.
+    [self dismissKeyboard];
+    
     // select the emailField and pop-up it's keyboard with the UIPickerView
     isSelectEmail = YES;
-    [emailField resignFirstResponder];
     [emailField becomeFirstResponder];
 }
 
 - (IBAction)doneButtonPressed:(id)sender
 {
-    if (isNew && (ABAddressBookGetAuthorizationStatus() == kABAuthorizationStatusDenied || ABAddressBookGetAuthorizationStatus() == kABAuthorizationStatusNotDetermined)) {
-        if ([firstNameField isFirstResponder]) {
-            [firstNameField resignFirstResponder];
-        } else if ([lastNameField isFirstResponder]) {
-            [lastNameField resignFirstResponder];
-        } else if ([emailField isFirstResponder]) {
-            [emailField resignFirstResponder];
-        }
-    }
-    NSManagedObjectContext *context = [[[MCWeAllPayStoreController defaultStore] weAllPayStoreDocument] managedObjectContext];
-    [context performBlock:^{
-        [thisPerson setDateModified:[NSDate date]];
-        [[context undoManager] endUndoGrouping];
-    }];
+    [self dismissKeyboard];
+    [_thisPerson setDateModified:[NSDate date]];
+    [[MCWeAllPayStoreController defaultStore] endUndoGroupAndProcess];
     [[[self navigationController] presentingViewController] dismissViewControllerAnimated:YES completion:nil];
 }
 
@@ -88,37 +69,290 @@
     ABPeoplePickerNavigationController *peoplePicker = [[ABPeoplePickerNavigationController alloc] init];
     if (!personReceiver) {
         personReceiver = [[MCAddressBookDataReceiver alloc] initWithViewController:self andDelegate:self];
-        [personReceiver setThisPerson:thisPerson];
+        [personReceiver setThisPerson:_thisPerson];
     }
     [peoplePicker setPeoplePickerDelegate:personReceiver];
     [peoplePicker setEdgesForExtendedLayout:UIRectEdgeNone];
-    [[[peoplePicker viewControllers] objectAtIndex:0] setEdgesForExtendedLayout:UIRectEdgeNone];
+    [[peoplePicker viewControllers][0] setEdgesForExtendedLayout:UIRectEdgeNone];
     [peoplePicker setModalPresentationStyle:UIModalPresentationFormSheet];
     if ([[UIDevice currentDevice] userInterfaceIdiom] == UIUserInterfaceIdiomPad) {
-        [MCTools setAdBannerIfNotPaid:NO forViewController:[[peoplePicker viewControllers] objectAtIndex:0]];
+        [MCTools setAdBannerIfNotPaid:NO forViewController:[peoplePicker viewControllers][0]];
     } else {
-        [MCTools setAdBannerIfNotPaid:YES forViewController:[[peoplePicker viewControllers] objectAtIndex:0]];
+        [MCTools setAdBannerIfNotPaid:YES forViewController:[peoplePicker viewControllers][0]];
     }
     [[self navigationController] presentViewController:peoplePicker animated:YES completion:nil];
 }
 
 - (void)doneEmailPicker:(id)selector
 {
-    MCEmailAddress *newDefaultEmailAddress = [[dataController fetchedObjects] objectAtIndex:[emailSelectionFromAddressBookPickerView selectedRowInComponent:0]];
-    MCEmailAddress *oldDefaulEmailAddress = [MCEmailAddress fetchEmailAddressFor:thisPerson];
-    [oldDefaulEmailAddress setSelected:[NSNumber numberWithBool:NO]];
-    [newDefaultEmailAddress setSelected:[NSNumber numberWithBool:YES]];
-    [emailField setText:[thisPerson defaultEmailAddress]];
+    MCEmailAddress *newDefaultEmailAddress = [dataController fetchedObjects][[emailSelectionFromAddressBookPickerView selectedRowInComponent:0]];
+    MCEmailAddress *oldDefaulEmailAddress = [MCEmailAddress fetchEmailAddressFor:_thisPerson];
+    [oldDefaulEmailAddress setSelected:@NO];
+    [newDefaultEmailAddress setSelected:@YES];
+    [emailField setText:[_thisPerson defaultEmailAddress]];
     
     [emailField resignFirstResponder];
-    didSomethingChange = YES;
+//    didSomethingChange = YES;
     [[[self navigationItem] rightBarButtonItem] setEnabled:YES];
 }
 
 - (void)cancelEmailPicker:(id)selector
 {
-    [emailField setText:[thisPerson defaultEmailAddress]];
+    [emailField setText:[_thisPerson defaultEmailAddress]];
     [emailField resignFirstResponder];
+}
+
+#pragma mark - New in this class
+
+- (id)initWithPerson:(MCPerson *)person 
+{
+    self = [super init];
+    
+    if (self) {
+        if (!person) {
+            @throw [NSException exceptionWithName:@"nil" reason:@"person is nil" userInfo:nil];
+        }
+        _thisPerson = person;
+//        didSomethingChange = NO;
+        emailEditFieldStatus = 0;
+    }
+    return self;
+}
+
+- (void)dismissKeyboard
+{
+    if ([firstNameField isFirstResponder]) {
+        [firstNameField endEditing:YES];
+    }
+    if ([lastNameField isFirstResponder]) {
+        [lastNameField endEditing:YES];
+    }
+    if ([emailField isFirstResponder]) {
+        if (isSelectEmail) {
+            [self cancelEmailPicker:self];
+        } else {
+            [emailField endEditing:YES];
+        }
+    }
+}
+
+- (void)prepareDataController
+{
+    NSManagedObjectContext *context = [[MCWeAllPayStoreController defaultStore] mainThreadContext];
+    // Set dataController for EmailPicker
+    NSFetchRequest *request = [NSFetchRequest fetchRequestWithEntityName:@"MCEmailAddress"];
+    [request setPredicate:[NSPredicate predicateWithFormat:@"owner = %@", _thisPerson]];
+    NSSortDescriptor *sd = [NSSortDescriptor sortDescriptorWithKey:@"emailAddress" ascending:YES];
+    [request setSortDescriptors:@[sd]];
+    dataController = [[NSFetchedResultsController alloc] initWithFetchRequest:request managedObjectContext:context sectionNameKeyPath:nil cacheName:nil];
+}
+
+- (void)performFetch
+{
+    NSError *error = nil;
+    [dataController performFetch:&error];
+    if (error) {
+        NSLog(@"Something went wrong fetching email addresses: %@", [error localizedDescription]);
+    }
+}
+
+- (void)prepareEmailFieldAsSelector
+{
+    NSUInteger indexOfDefaultEmailAddress = [[dataController fetchedObjects] indexOfObject:[_thisPerson getDefaultEmailAddressObject]];
+    if (indexOfDefaultEmailAddress < [[dataController fetchedObjects] count]) {
+        CGRect toolbarRect = CGRectMake(0, 0, [[self view] bounds].size.width, 44);
+        UIToolbar *inputAccessoryPickerView = [[UIToolbar alloc] initWithFrame:toolbarRect];
+        UIBarButtonItem *cancelButton = [[UIBarButtonItem alloc] initWithBarButtonSystemItem:UIBarButtonSystemItemCancel
+                                                                                      target:self
+                                                                                      action:@selector(cancelEmailPicker:)];
+        UIBarButtonItem *flexButton = [[UIBarButtonItem alloc] initWithBarButtonSystemItem:UIBarButtonSystemItemFlexibleSpace
+                                                                                    target:nil
+                                                                                    action:nil];
+        UIBarButtonItem *doneButton = [[UIBarButtonItem alloc] initWithBarButtonSystemItem:UIBarButtonSystemItemDone
+                                                                                    target:self
+                                                                                    action:@selector(doneEmailPicker:)];
+        NSArray *buttonArray = @[cancelButton, flexButton, doneButton];
+        [inputAccessoryPickerView setItems:buttonArray animated:YES];
+        if (!emailSelectionFromAddressBookPickerView) {
+            emailSelectionFromAddressBookPickerView = [[UIPickerView alloc] init];
+            [emailSelectionFromAddressBookPickerView setDelegate:self];
+            [emailSelectionFromAddressBookPickerView setDataSource:self];
+            [emailSelectionFromAddressBookPickerView setShowsSelectionIndicator:YES];
+        }
+        [emailField setInputView:emailSelectionFromAddressBookPickerView];
+        [emailField setInputAccessoryView:inputAccessoryPickerView];
+        
+        [emailSelectionFromAddressBookPickerView selectRow:indexOfDefaultEmailAddress inComponent:0 animated:YES];
+        UIToolbar *inputAccossoryNumberPad = [[UIToolbar alloc] initWithFrame:toolbarRect];
+        cancelButton = [[UIBarButtonItem alloc] initWithBarButtonSystemItem:UIBarButtonSystemItemCancel
+                                                                     target:self
+                                                                     action:@selector(cancelNumberPad:)];
+        doneButton = [[UIBarButtonItem alloc] initWithBarButtonSystemItem:UIBarButtonSystemItemDone
+                                                                   target:self
+                                                                   action:@selector(doneNumberPad:)];
+        [inputAccossoryNumberPad setItems:@[cancelButton, flexButton, doneButton] animated:YES];
+    } else {
+        isSelectEmail = NO;
+    }
+}
+
+- (void)setCircularImageOnPictureView:(UIImage *)image
+{
+    __weak MCPersonViewController *weakSelf = self;
+    
+    __block UIImage *copyOfImage = [image copy];
+    dispatch_queue_t imageProcessQueue;
+    imageProcessQueue = dispatch_queue_create("imageProcessQueue", NULL);
+    
+    dispatch_async(imageProcessQueue, ^{
+        CGRect circularImageRect = CGRectMake(0, 0, 160, 160);
+        UIImage *circularImage = [MCTools cutCircularImageFrom:copyOfImage toDestinationRect:circularImageRect];
+        dispatch_async(dispatch_get_main_queue(), ^{
+            MCPersonViewController *strongSelf = weakSelf;
+            if (strongSelf) {
+                [[strongSelf pictureView] setImage:circularImage];
+                [[strongSelf pictureView] setNeedsDisplay];
+            }
+        });
+    });
+}
+
+#pragma mark - Private in this class
+
+- (void)fillTheScreenWithInitialData
+{
+    // Should be execute on the mainThread.
+    [firstNameField setText:[_thisPerson firstName]];
+    [lastNameField setText:[_thisPerson lastName]];
+    MCEmailAddress *emailAddress = [MCEmailAddress fetchEmailAddressFor:_thisPerson];
+    [emailField setText:[emailAddress emailAddress]];
+    [self setCircularImageOnPictureView:[_thisPerson picture]];
+    if ([[_thisPerson emailAddress] count] < 2) {
+        [selectEmailAddressButton setHidden:YES];
+    } else {
+        [selectEmailAddressButton setHidden:NO];
+    }
+}
+
+#pragma mark - Inherited from super.
+
+- (id)initWithNibName:(NSString *)nibNameOrNil bundle:(NSBundle *)nibBundleOrNil
+{
+    self = [super initWithNibName:nibNameOrNil bundle:nibBundleOrNil];
+    if (self) {
+        // Custom initialization
+    }
+    return self;
+}
+
+- (void)viewDidLoad
+{
+    [super viewDidLoad];
+    
+    [self prepareDataController];
+    
+    if (!_thisPerson) {
+//        _thisPerson = [tonightsBill addPerson];
+//        [_thisPerson setThumbnailDataFromImage:nil];
+//        [_thisPerson setPictureDataFromImage:nil];
+//        [tonightsBill addPeoplePresentObject:_thisPerson];
+        // A new person object will be delivered
+        thisPersonHasPaidSomething = NO;
+    } else if ([_tonightsBill hasPersonPaidSomething:_thisPerson]) { // Check to see if thisPerson has paid something.
+        thisPersonHasPaidSomething = YES;
+    } else {
+        thisPersonHasPaidSomething = NO;
+    }
+    
+    isSelectEmail = NO;
+}
+
+- (void)viewWillAppear:(BOOL)animated
+{
+    [super viewWillAppear:animated];
+    
+    [[self navigationController] setToolbarHidden:YES animated:YES];
+    
+    if (!twoLabelTitleView) {
+        twoLabelTitleView = [[NSBundle mainBundle] loadNibNamed:@"MCTwoLabelsTitleView" owner:self options:nil][0];
+        if (isNew) {
+            [[twoLabelTitleView mainLabel] setText:NSLocalizedString(@"NEW_PERSON_HEADER", @"Header in the personView which state new person.")];
+            [[twoLabelTitleView subLabel] setText:NSLocalizedString(@"NEW_PERSON_SUBHEADER", @"Sub header in the personView which states add new data")];
+        } else {
+            [[twoLabelTitleView mainLabel] setText:NSLocalizedString(@"EXISTING_PERSON_HEADER", @"Header in the personView which states person")];
+            [[twoLabelTitleView subLabel] setText:NSLocalizedString(@"EXISTING_PERSON_SUBHEADER", @"Sub header in the personView which state edit data")];
+        }
+//        if (SYSTEM_VERSION_LESS_THAN(@"7.0")) {
+//            [[twoLabelTitleView mainLabel] setTextColor:[UIColor whiteColor]];
+//            [[twoLabelTitleView subLabel] setTextColor:[UIColor whiteColor]];
+//        }
+        [[self navigationItem] setTitleView:twoLabelTitleView];
+    }
+    
+    [self performFetch];
+
+    if (_thisPerson) {
+        [self fillTheScreenWithInitialData];
+    }
+    [selectEmailAddressButton setHidden:YES];
+}
+
+- (void)viewDidAppear:(BOOL)animated
+{
+    [super viewDidAppear:animated];
+    
+//    id<GAITracker> tracker = [[GAI sharedInstance] defaultTracker];
+//    if (isNew) {
+//        [tracker set:kGAIScreenName value:@"MCPersonNewView_iPhone"];
+//    } else {
+//        [tracker set:kGAIScreenName value:@"MCPersonDetails_iPhone"];
+//    }
+//    [tracker send:[[GAIDictionaryBuilder createAppView] build]];
+}
+
+- (void)viewDidDisappear:(BOOL)animated
+{
+    [super viewDidDisappear:animated];
+    
+    [MCTools setAdBannerIfNotPaid:NO forViewController:self];
+}
+
+- (void)didReceiveMemoryWarning
+{
+    [super didReceiveMemoryWarning];
+    // Dispose of any resources that can be recreated.
+}
+
+- (void)encodeRestorableStateWithCoder:(NSCoder *)coder
+{
+    [super encodeRestorableStateWithCoder:coder];
+}
+
+- (void)decodeRestorableStateWithCoder:(NSCoder *)coder
+{
+    [super decodeRestorableStateWithCoder:coder];
+}
+
+#pragma mark - NSNotifications
+
+//- (void)writableThisPersonIsCreated:(NSNotification *)notification
+//{
+//    // Should be executed on the background thread.
+//}
+
+- (void)writableTonightsBillIsCreated:(NSNotification *)notification
+{
+    // Should be executed on the background thread.
+    _writableTonightsBill = [[notification userInfo] objectForKey:MCwritableTonightsBillKey];
+    _writableThisPerson = [_writableTonightsBill addPerson];
+    NSLog(@"MCPersonViewController: writableTonightsBill is created.");
+    __weak typeof(self) weakSelf = self;
+    dispatch_async(dispatch_get_main_queue(), ^{
+        __strong typeof(self) strongSelf = weakSelf;
+        if (strongSelf) {
+            [strongSelf fillTheScreenWithInitialData];
+        }
+    });
 }
 
 #pragma mark - UITextFieldDelegate
@@ -133,6 +367,9 @@
     if (textField == emailField) {
         if (isSelectEmail) {
             [self prepareEmailFieldAsSelector];
+        } else {
+            [emailField setInputView:nil];
+            [emailField setInputAccessoryView:nil];
         }
     }
 }
@@ -140,42 +377,43 @@
 - (void)textFieldDidEndEditing:(UITextField *)textField
 {
     if (textField == firstNameField) {
-        [thisPerson setFirstName:[firstNameField text]];
-        didSomethingChange = YES;
+        [_thisPerson setFirstName:[firstNameField text]];
+//        didSomethingChange = YES;
         NSDate *nu = [NSDate date];
-        [tonightsBill setDateModified:nu];
-        [thisPerson setDateModified:nu];
-        [[[self navigationItem] rightBarButtonItem] setEnabled:YES];
-        [lastNameField becomeFirstResponder];
+        [_tonightsBill setDateModified:nu];
+        [_thisPerson setDateModified:nu];
+//        [[[self navigationItem] rightBarButtonItem] setEnabled:YES];
+//        [lastNameField becomeFirstResponder];
     } else if (textField == lastNameField) {
-        [thisPerson setLastName:[lastNameField text]];
-        didSomethingChange = YES;
+        [_thisPerson setLastName:[lastNameField text]];
+//        didSomethingChange = YES;
         NSDate *nu = [NSDate date];
-        [tonightsBill setDateModified:nu];
-        [thisPerson setDateModified:nu];
-        [[[self navigationItem] rightBarButtonItem] setEnabled:YES];
-        [emailField becomeFirstResponder];
+        [_tonightsBill setDateModified:nu];
+        [_thisPerson setDateModified:nu];
+//        [[[self navigationItem] rightBarButtonItem] setEnabled:YES];
+//        [emailField becomeFirstResponder];
     } else if (textField == emailField) {
         if (!isSelectEmail) {
-            isSelectEmail = YES;
             [emailField setInputView:nil];
             [emailField setInputAccessoryView:nil];
             if (isNew) {
-                [thisPerson addOneEmailAddressFromAString:[emailField text]];
+                [_thisPerson addOneEmailAddressFromAString:[emailField text]];
             } else {
-                MCEmailAddress *defaultEmail = [thisPerson getDefaultEmailAddressObject];
+                MCEmailAddress *defaultEmail = [_thisPerson getDefaultEmailAddressObject];
                 if (!defaultEmail) {
-                    [thisPerson addOneEmailAddressFromAString:[emailField text]];
+                    [_thisPerson addOneEmailAddressFromAString:[emailField text]];
                 } else {
                     [defaultEmail setEmailAddress:[emailField text]];
                 }
             }
         }
+        isSelectEmail = NO;
         NSDate *nu = [NSDate date];
-        [tonightsBill setDateModified:nu];
-        [thisPerson setDateModified:nu];
-        didSomethingChange = YES;
-        [[[self navigationItem] rightBarButtonItem] setEnabled:YES];
+        [_tonightsBill setDateModified:nu];
+        [_thisPerson setDateModified:nu];
+//        didSomethingChange = YES;
+
+//        [[[self navigationItem] rightBarButtonItem] setEnabled:YES];
     }
 }
 
@@ -198,13 +436,13 @@
 
 - (NSString *)pickerView:(UIPickerView *)pickerView titleForRow:(NSInteger)row forComponent:(NSInteger)component
 {
-    MCEmailAddress *emailAddressObject = [[dataController fetchedObjects] objectAtIndex:row];
+    MCEmailAddress *emailAddressObject = [dataController fetchedObjects][row];
     return [emailAddressObject emailAddress];
 }
 
 - (void)pickerView:(UIPickerView *)pickerView didSelectRow:(NSInteger)row inComponent:(NSInteger)component
 {
-    MCEmailAddress *pickedEmailAddress = [[dataController fetchedObjects] objectAtIndex:row];
+    MCEmailAddress *pickedEmailAddress = [dataController fetchedObjects][row];
     [emailField setText:[pickedEmailAddress emailAddress]];
 }
 
@@ -228,7 +466,6 @@
 
 - (BOOL)isPersonAlreadyPresent:(MCPerson *)newPerson
 {
-    // return [tonightsBill isPersonPresent:newPerson];
     NSLog(@"isNewPersonFromAddressBookAlreadyPresent is not implemented yet.");
     return NO;
 }
@@ -236,7 +473,7 @@
 - (MCPerson *)personRecordToUse
 {
     if (!isNew) {
-        return thisPerson;
+        return _thisPerson;
     } else {
         return nil;
     }
@@ -244,176 +481,8 @@
 
 - (void)receiveANewPersonFromAddressBook:(MCPerson *)newPerson
 {
-    didSomethingChange = YES;
-    [[[self navigationItem] rightBarButtonItem] setEnabled:YES];
+//    didSomethingChange = YES;
     [emailSelectionFromAddressBookPickerView reloadComponent:0];
-}
-
-#pragma mark - New in this class
-
-- (id)initWithPerson:(MCPerson *)person 
-{
-    self = [super init];
-    
-    if (self) {
-        if (!person) {
-            @throw [NSException exceptionWithName:@"nil" reason:@"person is nil" userInfo:nil];
-        }
-        thisPerson = person;
-        didSomethingChange = NO;
-        emailEditFieldStatus = 0;
-    }
-    return self;
-}
-
-- (void)prepareDataController
-{
-    NSManagedObjectContext *context = [[[MCWeAllPayStoreController defaultStore] weAllPayStoreDocument] managedObjectContext];
-    // Set dataController for EmailPicker
-    NSFetchRequest *request = [NSFetchRequest fetchRequestWithEntityName:@"MCEmailAddress"];
-    [request setPredicate:[NSPredicate predicateWithFormat:@"owner = %@", thisPerson]];
-    NSSortDescriptor *sd = [NSSortDescriptor sortDescriptorWithKey:@"emailAddress" ascending:YES];
-    [request setSortDescriptors:[NSArray arrayWithObject:sd]];
-    dataController = [[NSFetchedResultsController alloc] initWithFetchRequest:request managedObjectContext:context sectionNameKeyPath:nil cacheName:nil];
-}
-
-- (void)performFetch
-{
-    NSError *error = nil;
-    [dataController performFetch:&error];
-    if (error) {
-        NSLog(@"Something went wrong fetching email addresses: %@", [error localizedDescription]);
-    }
-}
-
-- (void)prepareEmailFieldAsSelector
-{
-    NSUInteger indexOfDefaultEmailAddress = [[dataController fetchedObjects] indexOfObject:[thisPerson getDefaultEmailAddressObject]];
-    if (indexOfDefaultEmailAddress < [[dataController fetchedObjects] count]) {
-        CGRect toolbarRect = CGRectMake(0, 0, [[self view] bounds].size.width, 44);
-        UIToolbar *inputAccessoryPickerView = [[UIToolbar alloc] initWithFrame:toolbarRect];
-        UIBarButtonItem *cancelButton = [[UIBarButtonItem alloc] initWithBarButtonSystemItem:UIBarButtonSystemItemCancel
-                                                                                      target:self
-                                                                                      action:@selector(cancelEmailPicker:)];
-        UIBarButtonItem *flexButton = [[UIBarButtonItem alloc] initWithBarButtonSystemItem:UIBarButtonSystemItemFlexibleSpace
-                                                                                    target:nil
-                                                                                    action:nil];
-        UIBarButtonItem *doneButton = [[UIBarButtonItem alloc] initWithBarButtonSystemItem:UIBarButtonSystemItemDone
-                                                                                    target:self
-                                                                                    action:@selector(doneEmailPicker:)];
-        NSArray *buttonArray = [[NSArray alloc] initWithObjects:cancelButton, flexButton, doneButton, nil];
-        [inputAccessoryPickerView setItems:buttonArray animated:YES];
-        if (!emailSelectionFromAddressBookPickerView) {
-            emailSelectionFromAddressBookPickerView = [[UIPickerView alloc] init];
-            [emailSelectionFromAddressBookPickerView setDelegate:self];
-            [emailSelectionFromAddressBookPickerView setDataSource:self];
-            [emailSelectionFromAddressBookPickerView setShowsSelectionIndicator:YES];
-            [emailField setInputView:emailSelectionFromAddressBookPickerView];
-            [emailField setInputAccessoryView:inputAccessoryPickerView];
-        }
-        
-        [emailSelectionFromAddressBookPickerView selectRow:indexOfDefaultEmailAddress inComponent:0 animated:YES];
-        UIToolbar *inputAccossoryNumberPad = [[UIToolbar alloc] initWithFrame:toolbarRect];
-        cancelButton = [[UIBarButtonItem alloc] initWithBarButtonSystemItem:UIBarButtonSystemItemCancel
-                                                                     target:self
-                                                                     action:@selector(cancelNumberPad:)];
-        doneButton = [[UIBarButtonItem alloc] initWithBarButtonSystemItem:UIBarButtonSystemItemDone
-                                                                   target:self
-                                                                   action:@selector(doneNumberPad:)];
-        [inputAccossoryNumberPad setItems:[[NSArray alloc] initWithObjects:cancelButton, flexButton, doneButton, nil] animated:YES];
-    }
-}
-
-#pragma mark - Inherited from super.
-
-- (id)initWithNibName:(NSString *)nibNameOrNil bundle:(NSBundle *)nibBundleOrNil
-{
-    self = [super initWithNibName:nibNameOrNil bundle:nibBundleOrNil];
-    if (self) {
-        // Custom initialization
-    }
-    return self;
-}
-
-- (void)viewWillAppear:(BOOL)animated
-{
-    [super viewWillAppear:animated];
-    
-    if (!twoLabelTitleView) {
-        twoLabelTitleView = [[[NSBundle mainBundle] loadNibNamed:@"MCTwoLabelsTitleView" owner:self options:nil] objectAtIndex:0];
-        if (isNew) {
-            [[twoLabelTitleView mainLabel] setText:@"New person"];
-            [[twoLabelTitleView subLabel] setText:@"Add"];
-        } else {
-            [[twoLabelTitleView mainLabel] setText:@"Person"];
-            if (kABAuthorizationStatusAuthorized == ABAddressBookGetAuthorizationStatus()) {
-                [[twoLabelTitleView subLabel] setText:@"Show details"];
-            } else {
-                [[twoLabelTitleView subLabel] setText:@"Edit details"];
-            }
-        }
-        if (SYSTEM_VERSION_LESS_THAN(@"7.0")) {
-            [[twoLabelTitleView mainLabel] setTextColor:[UIColor whiteColor]];
-            [[twoLabelTitleView subLabel] setTextColor:[UIColor whiteColor]];
-        }
-        [[self navigationItem] setTitleView:twoLabelTitleView];
-    }
-    
-    [self performFetch];
-    
-    [[[self navigationItem] rightBarButtonItem] setEnabled:didSomethingChange];
-    [addressBookButton setEnabled:!thisPersonHasPaidSomething];
-    [[self navigationController] setToolbarHidden:NO animated:animated];
-    [firstNameField setText:[thisPerson firstName]];
-    [lastNameField setText:[thisPerson lastName]];
-    MCEmailAddress *emailAddress = [MCEmailAddress fetchEmailAddressFor:thisPerson];
-    [emailField setText:[emailAddress emailAddress]];
-    [pictureView setImage:[thisPerson picture]];
-    /*
-    NSNumber *moneySpendByThisPerson = [tonightsBill totalSumPaidBy:thisPerson];
-    NSNumberFormatter *nf = [[NSNumberFormatter alloc] init];
-    [nf setNumberStyle:NSNumberFormatterCurrencyStyle];
-    [totalSumSpendLabel setText:[NSString stringWithFormat:@"Spent %@", [nf stringFromNumber:moneySpendByThisPerson]]];
-     */
-}
-
-- (void)viewDidLoad
-{
-    [super viewDidLoad];
-    
-    // When on iPhone show a banner.
-    if ([[UIDevice currentDevice] userInterfaceIdiom] == UIUserInterfaceIdiomPad) {
-        [MCTools setAdBannerIfNotPaid:NO forViewController:self];
-    } else {
-        [MCTools setAdBannerIfNotPaid:YES forViewController:self];
-    }
-    
-    [[self navigationController] setToolbarHidden:YES];
-    
-    NSManagedObjectContext *context = [[[MCWeAllPayStoreController defaultStore] weAllPayStoreDocument] managedObjectContext];
-    [[context undoManager] beginUndoGrouping];
-    
-    [self prepareDataController];
-    
-    if (!thisPerson) {
-        thisPerson = [tonightsBill addPerson];
-        [thisPerson setThumbnailDataFromImage:nil];
-        [thisPerson setPictureDataFromImage:nil];
-        [tonightsBill addPeoplePresentObject:thisPerson];
-        thisPersonHasPaidSomething = NO;
-    } else if ([tonightsBill hasPersonPaidSomething:thisPerson]) { // Check to see if thisPerson has paid something.
-        thisPersonHasPaidSomething = YES;
-    } else {
-        thisPersonHasPaidSomething = NO;
-    }
-    
-    isSelectEmail = NO;
-}
-
-- (void)didReceiveMemoryWarning
-{
-    [super didReceiveMemoryWarning];
-    // Dispose of any resources that can be recreated.
 }
 
 @end

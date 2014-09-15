@@ -2,14 +2,14 @@
 //  MCPerson.h
 //  We all pay
 //
-//  Created by Mark Cornelisse on 14-09-13.
-//  Copyright (c) 2013 Mark Cornelisse. All rights reserved.
+//  Created by Mark Cornelisse on 23/07/14.
+//  Copyright (c) 2014 Mark Cornelisse. All rights reserved.
 //
 
 #import <Foundation/Foundation.h>
 #import <CoreData/CoreData.h>
 
-@class MCEmailAddress, MCPayment, MCSharedBill;
+@class MCEmailAddress, MCPayment, MCPaymentPresence, MCSharedBill;
 
 @interface MCPerson : NSManagedObject
 
@@ -28,6 +28,7 @@
 @property (nonatomic, retain) NSSet *emailAddress;
 @property (nonatomic, retain) NSSet *payments;
 @property (nonatomic, retain) NSSet *sharedBill;
+@property (nonatomic, retain) NSSet *sharingPayment;
 @end
 
 @interface MCPerson (CoreDataGeneratedAccessors)
@@ -46,5 +47,10 @@
 - (void)removeSharedBillObject:(MCSharedBill *)value;
 - (void)addSharedBill:(NSSet *)values;
 - (void)removeSharedBill:(NSSet *)values;
+
+- (void)addSharingPaymentObject:(MCPaymentPresence *)value;
+- (void)removeSharingPaymentObject:(MCPaymentPresence *)value;
+- (void)addSharingPayment:(NSSet *)values;
+- (void)removeSharingPayment:(NSSet *)values;
 
 @end

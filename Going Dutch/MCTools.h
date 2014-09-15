@@ -7,6 +7,7 @@
 //
 
 #import <Foundation/Foundation.h>
+#import <UIKit/UIKit.h>
 #import <iAd/iAd.h>
 
 #define SYSTEM_VERSION_EQUAL_TO(v)                  ([[[UIDevice currentDevice] systemVersion] compare:v options:NSNumericSearch] == NSOrderedSame)
@@ -18,7 +19,10 @@
 @interface MCTools : NSObject
 
 + (NSString *)createUniqueIdentifierString;
-+ (NSURL *)documentPathAsURLTo:(NSString *)fileName;
 + (void)setAdBannerIfNotPaid:(BOOL)show forViewController:(UIViewController *)viewController;
++ (UIImage *)cutCircularImageFrom:(UIImage *)sourceImage toDestinationRect:(CGRect)newPictureRect;
++ (BOOL)isStringAnEmailAddress:(NSString *)stringThatIsSupposedToBeEmailAddress;
+
++ (UIColor *)colorWith8BitRed:(NSUInteger)red green:(NSUInteger)green blue:(NSUInteger)blue alpha:(CGFloat)alpha;
 
 @end

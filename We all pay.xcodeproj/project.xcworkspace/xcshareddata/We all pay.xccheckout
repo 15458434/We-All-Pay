@@ -5,27 +5,31 @@
 	<key>IDESourceControlProjectFavoriteDictionaryKey</key>
 	<false/>
 	<key>IDESourceControlProjectIdentifier</key>
-	<string>2DF30C34-78AB-48B7-B21A-0A9C6112B174</string>
+	<string>6E94A173-1BF4-4DDD-AEE7-E3E6C0FD2E11</string>
 	<key>IDESourceControlProjectName</key>
 	<string>We all pay</string>
 	<key>IDESourceControlProjectOriginsDictionary</key>
 	<dict>
+		<key>547E7682CC7A86EA499E4430886BB9DB55ABE127</key>
+		<string>https://bitbucket.org/15458434/going-dutch.git</string>
 		<key>A67527C2-FB7E-4C84-968D-644C640068E8</key>
 		<string>https://bitbucket.org/15458434/going-dutch.git</string>
 	</dict>
 	<key>IDESourceControlProjectPath</key>
-	<string>We all pay.xcodeproj/project.xcworkspace</string>
+	<string>We all pay.xcodeproj</string>
 	<key>IDESourceControlProjectRelativeInstallPathDictionary</key>
 	<dict>
-		<key>A67527C2-FB7E-4C84-968D-644C640068E8</key>
+		<key>547E7682CC7A86EA499E4430886BB9DB55ABE127</key>
 		<string>../..</string>
+		<key>A67527C2-FB7E-4C84-968D-644C640068E8</key>
+		<string>../../../Going Dutch</string>
 	</dict>
 	<key>IDESourceControlProjectURL</key>
 	<string>https://bitbucket.org/15458434/going-dutch.git</string>
 	<key>IDESourceControlProjectVersion</key>
-	<integer>110</integer>
+	<integer>111</integer>
 	<key>IDESourceControlProjectWCCIdentifier</key>
-	<string>A67527C2-FB7E-4C84-968D-644C640068E8</string>
+	<string>547E7682CC7A86EA499E4430886BB9DB55ABE127</string>
 	<key>IDESourceControlProjectWCConfigurations</key>
 	<array>
 		<dict>
@@ -35,6 +39,14 @@
 			<string>A67527C2-FB7E-4C84-968D-644C640068E8</string>
 			<key>IDESourceControlWCCName</key>
 			<string>Going Dutch</string>
+		</dict>
+		<dict>
+			<key>IDESourceControlRepositoryExtensionIdentifierKey</key>
+			<string>public.vcs.git</string>
+			<key>IDESourceControlWCCIdentifierKey</key>
+			<string>547E7682CC7A86EA499E4430886BB9DB55ABE127</string>
+			<key>IDESourceControlWCCName</key>
+			<string>Going%20Dutch</string>
 		</dict>
 	</array>
 </dict>

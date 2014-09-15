@@ -7,16 +7,19 @@
 //
 
 #import <UIKit/UIKit.h>
-#import <iAd/iAd.h>
 #import <CoreData/CoreData.h>
 #import <AddressBookUI/AddressBookUI.h>
 #import "MCPersonViewController.h"
 
+#import "MCTonightsBillTransfer.h"
+#import "MCThisPersonProtocol.h"
+
 @class MCPeople;
 @class MCSharedBill;
 @class MCTwoLabelsTitleView;
+@class MCTableEmptyMessage;
 
-@interface MCEditTripViewController : UITableViewController <NSFetchedResultsControllerDelegate, UITextFieldDelegate, UIAlertViewDelegate, MCPersonViewChangeDelegate>
+@interface MCEditTripViewController : UITableViewController <NSFetchedResultsControllerDelegate, UITextFieldDelegate, UIAlertViewDelegate, MCPersonViewChangeDelegate, MCTonightsBillTransfer>
 {
     __weak IBOutlet UIButton *addressBookButton;    
     __weak IBOutlet UIButton *addPersonButton;
@@ -24,8 +27,8 @@
     IBOutlet UITextField *tripNameField;
     IBOutlet UIBarButtonItem *doneButton;
     __strong IBOutlet MCTwoLabelsTitleView *twoLabelTitleView;
+    MCTableEmptyMessage *emptyMessage;
     
-    NSFetchedResultsController *dataController;
     MCAddressBookDataReceiver *personReceiver;
     
     BOOL isInitAsNew;
@@ -34,20 +37,15 @@
 
 @property (nonatomic, weak) id delegate;
 @property (nonatomic, strong) MCSharedBill *tonightsBill;
+@property (nonatomic, strong) MCSharedBill *writableTonightsBill;
 @property (nonatomic, copy) void (^dismissOnDone)(void);
 @property (nonatomic, copy) void (^dismissOnCancel)(void);
 @property (nonatomic, readonly) BOOL didSomethingChange;
 
-- (IBAction)changeNameOfTrip:(id)sender;
-- (IBAction)dismissKeyboard:(id)sender;
-
 - (IBAction)addressBookButton:(id)sender;
 - (IBAction)addPersonButton:(id)sender;
 
-- (IBAction)doneButtonPressed:(id)sender;
-- (IBAction)cancelButtonPressed:(id)sender;
-
-
-
+//- (IBAction)doneButtonPressed:(id)sender;
+//- (IBAction)cancelButtonPressed:(id)sender;
 
 @end

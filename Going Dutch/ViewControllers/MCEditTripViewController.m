@@ -10,14 +10,21 @@
 #import "MCPersonViewController.h"
 #import "MCSharedBillTableViewController.h"
 #import "MCSharedBillPageViewController.h"
+#import "UIViewController+WeAllPayStore.h"
 
 #import "MCWeAllPayStoreController.h"
 #import "MCPerson+addons.h"
 #import "MCSharedBill+addons.h"
+
 #import "MCPersonTableViewCell.h"
 #import "MCTwoLabelsTitleView.h"
+#import "MCTableEmptyMessage.h"
 
 @interface MCEditTripViewController ()
+
+@property (weak, nonatomic) IBOutlet UIButton *contactsButton;
+
+@property (nonatomic, strong) NSFetchedResultsController *dataController;
 
 @end
 
@@ -26,144 +33,154 @@
 @synthesize dismissOnDone;
 @synthesize dismissOnCancel;
 
-@synthesize tonightsBill;
 @synthesize didSomethingChange;
 
 @synthesize delegate;
 
-# pragma mark - actions of this class
-
-- (void)doneAddingPeople:(id)selector
-{
-    /*
-    NSManagedObjectContext *context = [[[MCWeAllPayStoreController defaultStore] weAllPayStoreDocument] managedObjectContext];
-    [context performBlockAndWait:^{
-        [context processPendingChanges];
-        [[context undoManager] disableUndoRegistration];
-    }];
-     */
-    [[self presentingViewController] dismissViewControllerAnimated:YES completion:dismissOnDone];
-}
-
-- (void)cancelNewTrip:(id)selector
-{
-    /*
-    cancelPressed = YES;
-    NSManagedObjectContext *context = [[[MCWeAllPayStoreController defaultStore] weAllPayStoreDocument] managedObjectContext];
-    [context performBlock:^{
-        [[context undoManager] disableUndoRegistration];
-        if (didSomethingChange) {
-            [[context undoManager] undoNestedGroup];
-        }
-        [MCSharedBill deleteSharedbill:tonightsBill];
-    }];
-     */
-    [[self presentingViewController] dismissViewControllerAnimated:YES completion:dismissOnCancel];
-}
-
-- (IBAction)changeNameOfTrip:(id)sender {
-    [tonightsBill setTripName:[tripNameField text]];
-    [[self view] endEditing:YES];
-    [[[self navigationItem] rightBarButtonItem] setEnabled:YES];
-}
-
-- (IBAction)dismissKeyboard:(id)sender {
-    /*
-    [tonightsBill setTripName:[tripNameField text]];
-    [[self view] endEditing:YES];
-     */
-}
+#pragma mark - actions of this class
 
 - (IBAction)addressBookButton:(id)sender {
-    ABPeoplePickerNavigationController *peoplePicker = [[ABPeoplePickerNavigationController alloc] init];
-    if (!personReceiver) {
-        personReceiver = [[MCAddressBookDataReceiver alloc] initWithViewController:self andDelegate:self];
-        [personReceiver setTonightsBill:tonightsBill];
-    }
-    [peoplePicker setPeoplePickerDelegate:personReceiver];
-    [peoplePicker setEdgesForExtendedLayout:UIRectEdgeNone];
-    [[[peoplePicker viewControllers] objectAtIndex:0] setEdgesForExtendedLayout:UIRectEdgeNone];
-    [peoplePicker setModalPresentationStyle:UIModalPresentationFormSheet];
     
-    // Show adBanner on the iPhone not on the iPad.
-    if ([[UIDevice currentDevice] userInterfaceIdiom] == UIUserInterfaceIdiomPad) {
-        [MCTools setAdBannerIfNotPaid:NO forViewController:[[peoplePicker viewControllers] objectAtIndex:0]];
-    } else {
-        [MCTools setAdBannerIfNotPaid:YES forViewController:[[peoplePicker viewControllers] objectAtIndex:0]];
+    // TODO: This can be done without the Switch case.
+    switch (ABAddressBookGetAuthorizationStatus())
+    {
+            // Update our UI if the user has granted access to their Contacts
+        case  kABAuthorizationStatusAuthorized:
+            [self openPeoplePicker];
+            break;
+            // Prompt the user for access to Contacts if there is no definitive answer
+        case  kABAuthorizationStatusNotDetermined :
+            // Display a message if the user has denied or restricted access to Contacts
+        case  kABAuthorizationStatusDenied:
+        case  kABAuthorizationStatusRestricted:
+        {
+            CFErrorRef error;
+            ABAddressBookRef myAddressBook = ABAddressBookCreateWithOptions(NULL, &error);
+            if (error) {
+                NSLog(@"Something went wrong opening myAddressBook.");
+            }
+            
+            typeof(self) __weak weakSelf = self;
+            // Popup for user will only appear once.
+            ABAddressBookRequestAccessWithCompletion(myAddressBook, ^(bool granted, CFErrorRef error) {
+                if (granted) {
+                    dispatch_async(dispatch_get_main_queue(), ^{
+                        [weakSelf openPeoplePicker];
+                    });
+                } else {
+                    dispatch_async(dispatch_get_main_queue(), ^{
+                        [weakSelf showContactsDisabledMessage];
+                    });
+                }
+            });
+        }
+
+            break;
+        default:
+            break;
     }
-    [[self navigationController] presentViewController:peoplePicker animated:YES completion:nil];
 }
+
 
 - (IBAction)addPersonButton:(id)sender {
-    /*
-    MCPerson *newPerson = [MCPerson addPerson];
-    [newPerson setThumbnailDataFromImage:nil];
-    [newPerson setPictureDataFromImage:nil];
-    [tonightsBill addPeoplePresentObject:newPerson];
-    [self updateSubLabel];
-    [doneButton setEnabled:YES];
-    MCPersonViewController *pvc = [[MCPersonViewController alloc] initWithPerson:newPerson];
-    [pvc setIsNew:YES];
-    [pvc setTonightsBill:tonightsBill];
-    UINavigationController *navController = [[UINavigationController alloc] initWithRootViewController:pvc];
-    if ([[UIDevice currentDevice] userInterfaceIdiom] == UIUserInterfaceIdiomPad) {
-        [navController setModalPresentationStyle:UIModalPresentationFormSheet];
-    }
-    [[self navigationController] presentViewController:navController animated:YES completion:nil];
-     */
-}
-
-- (IBAction)cancelButtonPressed:(id)sender {
-    cancelPressed = YES;
-    NSManagedObjectContext *context = [[[MCWeAllPayStoreController defaultStore] weAllPayStoreDocument] managedObjectContext];
-    [context performBlockAndWait:^{
-        [[context undoManager] disableUndoRegistration];
-        if (didSomethingChange) {
-            [[context undoManager] undoNestedGroup];
-        }
-    }];
-    [[self presentingViewController] dismissViewControllerAnimated:YES completion:nil];
-}
-
-- (IBAction)doneButtonPressed:(id)sender {
-    if ([tonightsBill areTherePeople]) {
-        NSManagedObjectContext *context = [[[MCWeAllPayStoreController defaultStore] weAllPayStoreDocument] managedObjectContext];
-        [context performBlockAndWait:^{
-            [context processPendingChanges];
-            [[context undoManager] disableUndoRegistration];
-        }];
-        [[self navigationController] dismissViewControllerAnimated:YES completion:nil];
-    } else {
-        UIAlertView *noPeoplePresentMessage = [[UIAlertView alloc] initWithTitle:@"No people present on this bill."
-                                                                         message:@"Please add the people who you'd like to share this bill with."
-                                                                        delegate:self
-                                                               cancelButtonTitle:@"Cancel"
-                                                               otherButtonTitles:@"Edit", nil];
-        [noPeoplePresentMessage show];
+    if ([tripNameField isEditing]) {
+        [tripNameField resignFirstResponder];
     }
 }
 
-
+- (void)tappedInTheBackground:(id)sender
+{
+    [tripNameField resignFirstResponder];
+}
 
 #pragma mark - new in this class.
 
-- (void)updateMainLabel
+- (void)openPeoplePicker
 {
-    [[twoLabelTitleView mainLabel] setText:[tonightsBill tripName]];
+    ABPeoplePickerNavigationController *peoplePicker = [[ABPeoplePickerNavigationController alloc] init];
+    if (!personReceiver) {
+        personReceiver = [[MCAddressBookDataReceiver alloc] initWithViewController:self andDelegate:self];
+        [personReceiver setTonightsBill:_tonightsBill];
+    }
+    [peoplePicker setPeoplePickerDelegate:personReceiver];
+    //    [peoplePicker setPredicateForSelectionOfPerson:nil];
+    [peoplePicker setEdgesForExtendedLayout:UIRectEdgeNone];
+    //    [[peoplePicker viewControllers][0] setEdgesForExtendedLayout:UIRectEdgeNone];
+    [peoplePicker setModalPresentationStyle:UIModalPresentationFormSheet];
+    [[[peoplePicker navigationController] navigationBar] setBarStyle:UIBarStyleBlack];
+    
+    [[self navigationController] presentViewController:peoplePicker animated:YES completion:nil];
 }
 
-- (void)updateSubLabel
+- (void)showContactsDisabledMessage
 {
-    if ([[dataController fetchedObjects] count] == 1) {
-        [[twoLabelTitleView subLabel] setText:[NSString stringWithFormat:@"%lu person present", (unsigned long)[[dataController fetchedObjects] count]]];
-    } else {
-        [[twoLabelTitleView subLabel] setText:[NSString stringWithFormat:@"%lu people present", (unsigned long)[[dataController fetchedObjects] count]]];
-    }
-    if (SYSTEM_VERSION_LESS_THAN(@"7.0")) {
-        [[twoLabelTitleView mainLabel] setTextColor:[UIColor whiteColor]];
-        [[twoLabelTitleView subLabel] setTextColor:[UIColor whiteColor]];
+    NSString *title = NSLocalizedString(@"CONTACTS_DISABLED_TITLE", @"Contacts disabled");
+    NSString *message = NSLocalizedString(@"CONTACTS_DISABLED_MESSAGE", @"Access to Contacts can be enable in Settings->We All Pay->Privacy");
+    NSString *cancelButtonTitle = NSLocalizedString(@"OK", @"Ok");
+    UIAlertView *alert = [[UIAlertView alloc] initWithTitle:title
+                                                    message:message
+                                                   delegate:nil
+                                          cancelButtonTitle:cancelButtonTitle
+                                          otherButtonTitles:nil];
+    [alert show];
+}
+
+- (void)performFetchAndReloadTableView:(NSNotification *)notification
+{
+    UIManagedDocument *weAllPayDocument = [[MCWeAllPayStoreController defaultStore] weAllPayStoreDocument];
+    if ([weAllPayDocument documentState] == UIDocumentStateNormal) {
+        [self performFetch];
+        [[self tableView] reloadData];
+        [[NSNotificationCenter defaultCenter] removeObserver:self];
+        [self setEmptyMessageNow];
     }
 }
+
+- (void)performFetch
+{
+    NSError *error;
+    BOOL success = [_dataController performFetch:&error];
+    if (!success) {
+        NSLog(@"Something went wrong: %@", error);
+    }
+}
+
+- (void)setEmptyMessage
+{
+    if (![[_dataController fetchedObjects] count] == 0) {
+        if ([[emptyMessage bigMessage] alpha] > 0.0) {
+            [UIView animateWithDuration:1.0 animations:^{
+                [[emptyMessage bigMessage] setAlpha:0.0];
+                [[self tableView] setSeparatorStyle:UITableViewCellSeparatorStyleSingleLine];
+            } completion:nil];
+        }
+    } else {
+        if ([[emptyMessage bigMessage] alpha] < 1.0) {
+            [UIView animateWithDuration:1.0 animations:^{
+                [[emptyMessage bigMessage] setAlpha:1.0];
+                [[self tableView] setSeparatorStyle:UITableViewCellSeparatorStyleNone];
+            } completion:nil];
+        }
+    }
+}
+
+- (void)setEmptyMessageNow
+{
+    if (![[_dataController fetchedObjects] count] == 0) {
+        [UIView animateWithDuration:0.0 animations:^{
+            [[emptyMessage bigMessage] setAlpha:0.0];
+            [[self tableView] setSeparatorStyle:UITableViewCellSeparatorStyleSingleLine];
+        } completion:nil];
+    } else {
+        if ([[emptyMessage bigMessage] alpha] < 1.0) {
+            [UIView animateWithDuration:0.0 animations:^{
+                [[emptyMessage bigMessage] setAlpha:1.0];
+                [[self tableView] setSeparatorStyle:UITableViewCellSeparatorStyleNone];
+            } completion:nil];
+        }
+    }
+}
+
 
 #pragma mark - inherited from super
 
@@ -176,125 +193,85 @@
     return self;
 }
 
+- (void)viewDidLoad
+{
+    [super viewDidLoad];
+    
+    // Uncomment the following line to preserve selection between presentations.
+    // self.clearsSelectionOnViewWillAppear = NO;
+    
+    // Uncomment the following line to display an Edit button in the navigation bar for this view controller.
+    // self.navigationItem.rightBarButtonItem = self.editButtonItem;
+    
+    [self setEdgesForExtendedLayout:UIRectEdgeNone];
+    
+    [self startRespondingToStoreChangeNotifications];
+    
+    // Load and register Nib to the tableView for use.
+    UINib *nib = [UINib nibWithNibName:@"MCPersonTableViewCell" bundle:nil];
+    [[self tableView] registerNib:nib forCellReuseIdentifier:@"MCPersonTableViewCell"];
+    
+    emptyMessage = [[NSBundle mainBundle] loadNibNamed:@"MCTableEmptyMessage" owner:self options:nil][0];
+    [[emptyMessage bigMessage] setText:NSLocalizedString(@"PEOPLE_LIST_EMPTY_MESSAGE", @"Press \"add Person\" to add a person who you'd like to share this bill with.")];
+    if ([[_dataController fetchedObjects] count] > 0) {
+        [[emptyMessage bigMessage] setAlpha:0.0];
+    }
+    [[self tableView] setBackgroundView:emptyMessage];
+    
+    // Make sure a tap in the background dismisses the keyboard as well.
+    UITapGestureRecognizer *thatTickles = [[UITapGestureRecognizer alloc] initWithTarget:self action:@selector(tappedInTheBackground:)];
+    [thatTickles setCancelsTouchesInView:NO];
+    [[self tableView] addGestureRecognizer:thatTickles];
+}
+
+
 - (void)viewWillAppear:(BOOL)animated
 {
     [super viewWillAppear:animated];
     
-    [tripNameField setText:[tonightsBill tripName]];
+    [tripNameField setText:[_tonightsBill tripName]];
     [tripNameField setDelegate:self];
     
-    if (!twoLabelTitleView) {
-        twoLabelTitleView = [[[NSBundle mainBundle] loadNibNamed:@"MCTwoLabelsTitleView" owner:self options:nil] objectAtIndex:0];
-        [[self navigationItem] setTitleView:twoLabelTitleView];
+    if (!_dataController) {
+        _dataController = [[MCWeAllPayStoreController defaultStore] sharedBillPeoplePresentDataControllerForDelegate:self];
     }
-    [[twoLabelTitleView mainLabel] setText:[tonightsBill tripName]];
-    [self updateSubLabel];
-    [[[self navigationItem] leftBarButtonItem] setEnabled:YES];
-    
-    //[[self navigationController] setToolbarHidden:NO animated:YES];
-    [[self view] endEditing:YES];
-    
-    if (!dataController) {
-        // What entities will be fetched.
-        NSFetchRequest *request = [NSFetchRequest fetchRequestWithEntityName:@"MCPerson"];
-        // How to sort the data.
-        NSSortDescriptor *sortDescriptor = [NSSortDescriptor sortDescriptorWithKey:@"dateCreated" ascending:NO];
-        NSArray *sortDescriptorArray = [NSArray arrayWithObject:sortDescriptor];
-        [request setSortDescriptors:sortDescriptorArray];
-        // Select only people from tonightsBill.
-        NSPredicate *predicate = [NSPredicate predicateWithFormat:@"sharedBill = %@", tonightsBill];
-        [request setPredicate:predicate];
-        
-        // Create the FetchedResultsController.
-        dataController = [[NSFetchedResultsController alloc] initWithFetchRequest:request managedObjectContext:[[[MCWeAllPayStoreController defaultStore] weAllPayStoreDocument] managedObjectContext] sectionNameKeyPath:nil cacheName:@"All persons cache."];
-        [dataController setDelegate:self];
-        NSError *error;
-        BOOL success = [dataController performFetch:&error];
-        if (!success) {
-            NSLog(@"Something went wrong");
-        }
-    }
-    
-    if (isInitAsNew && [[dataController fetchedObjects] count] == 0) {
-        [doneButton setEnabled:NO];
-        [tripNameField setPlaceholder:@"Enter the activity of group."];
-        [[twoLabelTitleView mainLabel] setText:@"New activity"];
-        [[twoLabelTitleView subLabel] setText:@""];
+    UIManagedDocument *weAllPayDocument = [[MCWeAllPayStoreController defaultStore] weAllPayStoreDocument];
+    if (![[MCWeAllPayStoreController defaultStore] isDocumentStateNormal]) {
+        [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(performFetchAndReloadTableView:) name:UIDocumentStateChangedNotification object:weAllPayDocument];
+    } else {
+        [self performFetch];
+        [[self tableView] reloadData];
+        [self setEmptyMessageNow];
     }
     
     if (kABAuthorizationStatusDenied == ABAddressBookGetAuthorizationStatus()) {
-        [addressBookButton setAlpha:0.0];
-        CGRect addPersonButtonRect = [addPersonButton frame];
-        CGRect viewBounds = [[[self tableView] tableHeaderView] bounds];
-        CGPoint newPosition = CGPointMake( (viewBounds.size.width / 2.0) - (addPersonButtonRect.size.width / 2.0), addPersonButtonRect.origin.y);
-        addPersonButtonRect.origin = newPosition;
-        [addPersonButton setFrame:addPersonButtonRect];
+//        [_contactsButton setHidden:YES];
     }
-}
-
-- (void)viewWillDisappear:(BOOL)animated
-{
-    [super viewWillDisappear:animated];
-
-    [[[self navigationItem] leftBarButtonItem] setEnabled:NO];
 }
 
 -(void)viewDidAppear:(BOOL)animated
 {
     [super viewDidAppear:animated];
     
-    if ([tonightsBill tripName]) {
-        [tripNameField setPlaceholder:[[NSString alloc] initWithFormat:@"Enter something to rename %@", [tonightsBill tripName]]];
+    if ([_tonightsBill tripName]) {
+        [tripNameField setPlaceholder:[[NSString alloc] initWithFormat:@"Enter something to rename %@", [_tonightsBill tripName]]];
     }
+    
+//    id<GAITracker> tracker = [[GAI sharedInstance] defaultTracker];
+//    [tracker set:kGAIScreenName value:@"MCPeoplePresentTableView_iPhone"];
+//    [tracker send:[[GAIDictionaryBuilder createAppView] build]];
 }
 
-- (void)viewDidLoad
+- (void)viewWillDisappear:(BOOL)animated
 {
-    [super viewDidLoad];
+    [super viewWillDisappear:animated];
+}
 
-    // Uncomment the following line to preserve selection between presentations.
-    // self.clearsSelectionOnViewWillAppear = NO;
- 
-    // Uncomment the following line to display an Edit button in the navigation bar for this view controller.
-    // self.navigationItem.rightBarButtonItem = self.editButtonItem;
+- (void)viewDidDisappear:(BOOL)animated
+{
+    [super viewDidDisappear:animated];
     
-    [self setEdgesForExtendedLayout:UIRectEdgeNone];
-    [MCTools setAdBannerIfNotPaid:YES forViewController:self];
-    
-    if (!tonightsBill) {
-        didSomethingChange = YES;
-        tonightsBill = [MCSharedBill addSharedBill];
-        [tripNameField setPlaceholder:@"Enter activity"];
-    }
-    
-    if (!dataController) {
-        // What entities will be fetched.
-        NSFetchRequest *request = [NSFetchRequest fetchRequestWithEntityName:@"MCPerson"];
-        // How to sort the data.
-        NSSortDescriptor *sortDescriptor = [NSSortDescriptor sortDescriptorWithKey:@"dateCreated" ascending:NO];
-        NSArray *sortDescriptorArray = [NSArray arrayWithObject:sortDescriptor];
-        [request setSortDescriptors:sortDescriptorArray];
-        // Select only people from tonightsBill.
-        NSPredicate *predicate = [NSPredicate predicateWithFormat:@"ANY sharedBill = %@", tonightsBill];
-        [request setPredicate:predicate];
-        
-        // Create the FetchedResultsController.
-        
-        dataController = [[NSFetchedResultsController alloc] initWithFetchRequest:request managedObjectContext:[[[MCWeAllPayStoreController defaultStore] weAllPayStoreDocument] managedObjectContext] sectionNameKeyPath:nil cacheName:[NSString stringWithFormat:@"All persons cache of trip: %@", [tonightsBill uniqueBillId]]];
-        [dataController setDelegate:self];
-        NSError *error;
-        BOOL success = [dataController performFetch:&error];
-        if (!success) {
-            NSLog(@"Something went wrong");
-        }
-    }
-    
-    [[[self navigationItem] rightBarButtonItem] setEnabled:NO];
-    [[[self navigationItem] leftBarButtonItem] setEnabled:YES];
-    
-    // Load and register Nib to the tableView for use.
-    UINib *nib = [UINib nibWithNibName:@"MCPersonTableViewCell" bundle:nil];
-    [[self tableView] registerNib:nib forCellReuseIdentifier:@"MCPersonTableViewCell"];
+    _dataController = nil;
 }
 
 - (void)didReceiveMemoryWarning
@@ -303,13 +280,70 @@
     // Dispose of any resources that can be recreated.
 }
 
+- (void)encodeRestorableStateWithCoder:(NSCoder *)coder
+{
+    [super encodeRestorableStateWithCoder:coder];
+}
+
+- (void)decodeRestorableStateWithCoder:(NSCoder *)coder
+{
+    [super decodeRestorableStateWithCoder:coder];
+}
+
+-(void)dealloc
+{
+    [[NSNotificationCenter defaultCenter] removeObserver:self];
+}
+
+#pragma mark - Notifications
+
+- (void)writeableTonightsBillIsCreated:(NSNotification *)notification
+{
+    // Should be executed on the background thread.
+    NSDictionary *userInfo = [notification userInfo];
+    _writableTonightsBill = [userInfo objectForKey:MCwritableTonightsBillKey];
+    NSManagedObjectContext *mainContext = [[MCWeAllPayStoreController defaultStore] mainThreadContext];
+    NSManagedObjectID *tonightsBillID = [_writableTonightsBill objectID];
+    [mainContext performBlock:^{
+        _tonightsBill = (MCSharedBill *)[mainContext objectWithID:tonightsBillID];
+    }];
+    NSLog(@"PeoplePresent: WritableTonightsBillIsCreated has been executed.");
+}
+
+#pragma mark - UIViewController+WeAllPayStore notifications
+
+- (void)storeWillBeSwapped:(NSNotification *)notification
+{
+    [super storeWillBeSwapped:notification];
+    dispatch_sync(dispatch_get_main_queue(), ^{
+        [[self view] setUserInteractionEnabled:NO];
+    });
+}
+
+-(void)storeDidSwap:(NSNotification *)notification
+{
+    [super storeDidSwap:notification];
+    dispatch_sync(dispatch_get_main_queue(), ^{
+        if (_dataController) {
+            NSError *fetchError;
+            if (![_dataController performFetch:&fetchError]) {
+                NSLog(@"Error fetching: %@", fetchError);
+            }
+        }
+        [[self tableView] reloadData];
+        [self setEmptyMessage];
+        [[self view] setUserInteractionEnabled:YES];
+    });
+}
+
+
 #pragma mark - MCPersonViewChangeDelegate
 
 - (void)sendDidSomethingChange:(BOOL)value
 {
     if(!didSomethingChange && value) {
         didSomethingChange = YES;
-        [[[self navigationItem] rightBarButtonItem] setEnabled:YES];
+        // [[[self navigationItem] rightBarButtonItem] setEnabled:YES];
     }
     [[self tableView] reloadData];
 }
@@ -351,7 +385,6 @@
 - (void)receiveANewPersonFromAddressBook:(MCPerson *)newPerson
 {
     didSomethingChange = YES;
-    [[[self navigationItem] rightBarButtonItem] setEnabled:YES];
 }
 
 #pragma mark - UITextFieldDelegate
@@ -365,21 +398,12 @@
 
 -(void)textFieldDidEndEditing:(UITextField *)textField
 {
-    [tonightsBill setTripName:[textField text]];
-    [self updateMainLabel];
-    NSDate *nu = [NSDate date];
-    [tonightsBill setDateModified:nu];
+    [_tonightsBill setTripName:[tripNameField text]];
+    NSDate *now = [NSDate date];
+    [_tonightsBill setDateModified:now];
+    [[MCWeAllPayStoreController defaultStore] saveMainThreadContext];
     if (!didSomethingChange) {
         didSomethingChange = YES;
-        [[[self navigationItem] rightBarButtonItem] setEnabled:YES];
-    }
-    if (isInitAsNew && !cancelPressed) {
-        if (kABAuthorizationStatusAuthorized == ABAddressBookGetAuthorizationStatus() ||
-            kABAuthorizationStatusNotDetermined == ABAddressBookGetAuthorizationStatus()) {
-            [self addressBookButton:self];
-        } else {
-            [self addPersonButton:self];
-        }
     }
 }
 
@@ -400,27 +424,26 @@
     switch(type) {
             
         case NSFetchedResultsChangeInsert:
-            [[self tableView] insertRowsAtIndexPaths:[NSArray arrayWithObject:newIndexPath]
+            [[self tableView] insertRowsAtIndexPaths:@[newIndexPath]
                                     withRowAnimation:UITableViewRowAnimationFade];
-            [self updateSubLabel];
+            [self setEmptyMessage];
             break;
             
         case NSFetchedResultsChangeDelete:
-            [[self tableView] deleteRowsAtIndexPaths:[NSArray arrayWithObject:indexPath]
+            [[self tableView] deleteRowsAtIndexPaths:@[indexPath]
                                     withRowAnimation:UITableViewRowAnimationFade];
-            [self updateSubLabel];
+            [self setEmptyMessage];
             break;
             
         case NSFetchedResultsChangeUpdate:
-            [[self tableView] reloadRowsAtIndexPaths:[NSArray arrayWithObject:indexPath] withRowAnimation:UITableViewRowAnimationAutomatic];
+            [[self tableView] reloadRowsAtIndexPaths:@[indexPath] withRowAnimation:UITableViewRowAnimationAutomatic];
             didSomethingChange = YES;
-            [doneButton setEnabled:YES];
             break;
             
         case NSFetchedResultsChangeMove:
-            [[self tableView] deleteRowsAtIndexPaths:[NSArray arrayWithObject:indexPath]
+            [[self tableView] deleteRowsAtIndexPaths:@[indexPath]
                                     withRowAnimation:UITableViewRowAnimationFade];
-            [[self tableView] insertRowsAtIndexPaths:[NSArray arrayWithObject:newIndexPath]
+            [[self tableView] insertRowsAtIndexPaths:@[newIndexPath]
                                     withRowAnimation:UITableViewRowAnimationFade];
             break;
     }
@@ -430,26 +453,39 @@
 
 - (NSInteger)numberOfSectionsInTableView:(UITableView *)tableView
 {
-    return [[dataController sections] count];
+    return [[_dataController sections] count];
 }
 
 - (NSInteger)tableView:(UITableView *)tableView numberOfRowsInSection:(NSInteger)section
 {
     // Return the number of rows in the section.
-    return [[[dataController sections] objectAtIndex:section] numberOfObjects];
+//    return [[dataController sections][section] numberOfObjects];
+    return [[_dataController fetchedObjects] count];
 }
 
 - (UITableViewCell *)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath
 {
-    MCPerson *thisCellsPerson = [dataController objectAtIndexPath:indexPath];
+    MCPerson *thisCellsPerson = [_dataController objectAtIndexPath:indexPath];
     MCPersonTableViewCell *thisCell = [tableView dequeueReusableCellWithIdentifier:@"MCPersonTableViewCell"];
     
     [[thisCell personImage] setImage:[thisCellsPerson thumbnail]];
+    if ([thisCellsPerson thumbnail]) {
+        [thisCell setCircularImage:[thisCellsPerson thumbnail]];
+    }
     [[thisCell nameLabel] setText:[thisCellsPerson getFullName]];
     [[thisCell emailLabel] setText:[thisCellsPerson defaultEmailAddress]];
-    NSNumberFormatter *nf = [[NSNumberFormatter alloc] init];
-    [nf setNumberStyle:NSNumberFormatterCurrencyStyle];
-    [[thisCell totalSpent] setText:[nf stringFromNumber:[tonightsBill totalSumPaidBy:thisCellsPerson]]];
+    
+    if (![thisCellsPerson hasPersonMadePaymentWithInvalidExchangeRates]) {
+        [thisCell.fetchingExchangeRateIndicator stopAnimating];
+        [[thisCell totalSpent] setHidden:NO];
+        NSNumberFormatter *nf = [[NSNumberFormatter alloc] init];
+        [nf setNumberStyle:NSNumberFormatterCurrencyStyle];
+        [[thisCell totalSpent] setText:[nf stringFromNumber:[_tonightsBill totalSumPaidBy:thisCellsPerson]]];
+    } else {
+        [thisCell.fetchingExchangeRateIndicator startAnimating];
+        [[thisCell totalSpent] setHidden:YES];
+    }
+
     
     return thisCell;
 }
@@ -458,8 +494,8 @@
 - (BOOL)tableView:(UITableView *)tableView canEditRowAtIndexPath:(NSIndexPath *)indexPath
 {
     if ([[self tableView] isEditing]) {
-        MCPerson *person = [dataController objectAtIndexPath:indexPath];
-        if ([tonightsBill hasPersonPaidSomething:person]) {
+        MCPerson *person = [_dataController objectAtIndexPath:indexPath];
+        if ([_tonightsBill hasPersonPaidSomething:person]) {
             return NO;
         } else {
             return YES;
@@ -473,18 +509,11 @@
 - (void)tableView:(UITableView *)tableView commitEditingStyle:(UITableViewCellEditingStyle)editingStyle forRowAtIndexPath:(NSIndexPath *)indexPath
 {
     if (editingStyle == UITableViewCellEditingStyleDelete) {
-        MCPerson *removablePerson = [dataController objectAtIndexPath:indexPath];
-        if (![tonightsBill hasPersonPaidSomething:removablePerson]) {
-            NSManagedObjectContext *context = [[[MCWeAllPayStoreController defaultStore] weAllPayStoreDocument] managedObjectContext];
-            [context performBlock:^{
-                [context deleteObject:removablePerson];
-                [self updateSubLabel];
-                didSomethingChange = YES;
-                [[[self navigationItem] rightBarButtonItem] setEnabled:YES];
-            }];
-        }
+        MCPerson *removablePerson = [_dataController objectAtIndexPath:indexPath];
+        [_tonightsBill deletePerson:removablePerson];
+        [[MCWeAllPayStoreController defaultStore] saveMainThreadContext];
+        didSomethingChange = YES;
     }
-    
 }
 
 /*
@@ -519,29 +548,29 @@
 
 - (void)prepareForSegue:(UIStoryboardSegue *)segue sender:(id)sender
 {
-    MCPerson *thePerson;
-    if ([[[[segue destinationViewController] viewControllers] objectAtIndex:0] respondsToSelector:@selector(setChangeFlagDelegate:)]) {
-        [[[[segue destinationViewController] viewControllers] objectAtIndex:0] setChangeFlagDelegate:self];
-    }
-    if ([[[[segue destinationViewController] viewControllers] objectAtIndex:0] respondsToSelector:@selector(setTonightsBill:)]) {
-        [[[[segue destinationViewController] viewControllers] objectAtIndex:0] setTonightsBill:tonightsBill];
-    }
-    NSIndexPath *indexPathOfSelectedRow = [[self tableView] indexPathForSelectedRow];
-    if (indexPathOfSelectedRow) {
-        thePerson = [dataController objectAtIndexPath:indexPathOfSelectedRow];
-        if ([[[[segue destinationViewController] viewControllers] objectAtIndex:0] respondsToSelector:@selector(setIsNew:)]) {
-            [[[[segue destinationViewController] viewControllers] objectAtIndex:0] setIsNew:NO];
+    if ([[segue identifier] isEqualToString:@"openEditPerson"]) {
+        id destination = [[segue destinationViewController] viewControllers][0];
+        if ([destination conformsToProtocol:@protocol(MCTonightsBillTransfer)] && [destination conformsToProtocol:@protocol(MCThisPersonProtocol)]) {
+            NSIndexPath *indexPathOfSelectedRow = [[self tableView] indexPathForSelectedRow];
+            MCPerson *thePerson = [_dataController objectAtIndexPath:indexPathOfSelectedRow];
+            [[MCWeAllPayStoreController defaultStore] beginUndoGroup];
+            if (!thePerson) {
+                // No person present create a new one.
+                thePerson = [_tonightsBill addPerson];
+                [thePerson setThumbnailDataFromImage:nil];
+                [thePerson setPictureDataFromImage:nil];
+                [destination setThisPerson:thePerson];
+                [destination setIsNew:YES];
+            } else {
+                // Person present open it.
+                [destination setThisPerson:thePerson];
+                [destination setIsNew:NO];
+            }
+        } else {
+            NSLog(@"%@: Unable to pass tonightsBill and thisPerson.", self);
         }
-    } else {
-        if ([[[[segue destinationViewController] viewControllers] objectAtIndex:0] respondsToSelector:@selector(setIsNew:)]) {
-            [[[[segue destinationViewController] viewControllers] objectAtIndex:0] setIsNew:YES];
-        }
-        [doneButton setEnabled:YES];
+
     }
-    if ([[[[segue destinationViewController] viewControllers] objectAtIndex:0] respondsToSelector:@selector(setThisPerson:)]) {
-        [[[[segue destinationViewController] viewControllers] objectAtIndex:0] setThisPerson:thePerson];
-    }
-    
 }
 
 @end

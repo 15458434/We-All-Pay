@@ -9,13 +9,12 @@
 #import <UIKit/UIKit.h>
 
 @interface MCPaymentTableViewCell : UITableViewCell
-{
-    
-}
 
 @property (weak, nonatomic) IBOutlet UILabel *namePayerLabel;
 @property (weak, nonatomic) IBOutlet UILabel *whatPaidLabel;
 @property (weak, nonatomic) IBOutlet UILabel *moneyPaidLabel;
 @property (weak, nonatomic) IBOutlet UIImageView *pictureOfPayer;
+
+- (void)setCircularImage:(UIImage *)personImage;
 
 @end

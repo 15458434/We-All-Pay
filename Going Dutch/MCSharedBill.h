@@ -2,14 +2,14 @@
 //  MCSharedBill.h
 //  We all pay
 //
-//  Created by Mark Cornelisse on 14-09-13.
-//  Copyright (c) 2013 Mark Cornelisse. All rights reserved.
+//  Created by Mark Cornelisse on 23/07/14.
+//  Copyright (c) 2014 Mark Cornelisse. All rights reserved.
 //
 
 #import <Foundation/Foundation.h>
 #import <CoreData/CoreData.h>
 
-@class MCPayment, MCPerson;
+@class MCCurrency, MCPayment, MCPerson;
 
 @interface MCSharedBill : NSManagedObject
 
@@ -18,6 +18,7 @@
 @property (nonatomic, retain) NSNumber * hasTheMailBeenSent;
 @property (nonatomic, retain) NSString * tripName;
 @property (nonatomic, retain) NSString * uniqueBillId;
+@property (nonatomic, retain) MCCurrency *mainCurrency;
 @property (nonatomic, retain) NSSet *payments;
 @property (nonatomic, retain) NSSet *peoplePresent;
 @end

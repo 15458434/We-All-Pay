@@ -9,11 +9,12 @@
 #import <Foundation/Foundation.h>
 #import <AddressBookUI/AddressBookUI.h>
 #import <AddressBook/AddressBook.h>
+#import "MCTonightsBillTransfer.h"
 
 @class MCPerson;
 @class MCSharedBill;
 
-@protocol MCAddressBookReceiverDelegate <NSObject>
+@protocol MCAddressBookReceiverDelegate <NSObject, MCTonightsBillTransfer>
 
 - (BOOL) isPersonAlreadyPresent:(MCPerson *)newPerson;
 - (MCPerson *)personRecordToUse;
@@ -29,6 +30,10 @@
 @property (nonatomic, strong) id delegate;
 @property (nonatomic, strong) MCPerson *thisPerson;
 @property (nonatomic, strong) MCSharedBill *tonightsBill;
+
+// Should be accessed only from the background queue.
+@property (nonatomic, strong) MCPerson *writableThisPerson;
+@property (nonatomic, strong) MCSharedBill *writableTonightsBill;
 
 - (id)initWithDelegate:(id)delegateUsedOnInit;
 - (id)initWithViewController:(UIViewController *)newViewController andDelegate:(id)newDelegate;

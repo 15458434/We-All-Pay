@@ -11,9 +11,11 @@
 @interface MCPerson (addons)
 
 + (MCPerson *)addPerson;
++ (MCPerson *)addPersonInContext:(NSManagedObjectContext *)context;
 + (void)deletePerson:(MCPerson *)delPerson;
 
 + (MCPerson *)fetchPersonWithUniqueId:(NSString *)uuid;
++ (BOOL)isTableInDatabaseEmpty;
 
 - (void)setThumbnailDataFromImage:(UIImage *)image;
 - (void)setPictureDataFromImage:(UIImage *)image;
@@ -24,8 +26,10 @@
 - (void)addNewDefaultEmailAddressFromAString:(NSString *)newEmailAddressString;
 - (void)addOneEmailAddressFromAString:(NSString *)emailAddressAsString;
 - (MCEmailAddress *)getDefaultEmailAddressObject;
+- (void)setNewDefaultEmailaddressObject:(MCEmailAddress *)newDefaultEmailAddress;
 - (void)deleteEmailAddress:(MCEmailAddress *)eAddress;
 - (void)deletAllEmailAddresses;
 - (BOOL)isThereAnEmailAddress;
+- (BOOL)hasPersonMadePaymentWithInvalidExchangeRates;
 
 @end

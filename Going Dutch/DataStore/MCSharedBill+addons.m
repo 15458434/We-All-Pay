@@ -8,9 +8,13 @@
 
 #import "MCSharedBill+addons.h"
 #import "MCPerson+addons.h"
+#import "MCEmailAddress+addons.h"
 #import "MCPayment+addons.h"
+#import "MCPaymentPresence+addons.h"
 #import "MCWeAllPayStoreController.h"
 #import "MCReturnPayment.h"
+#import "MCCurrency+addons.h"
+#import "MCExchangeRate+addons.h"
 
 @implementation MCSharedBill (addons)
 
@@ -18,31 +22,51 @@
 
 + (MCSharedBill *)addSharedBill
 {
-    __block NSManagedObjectContext *context = [[[MCWeAllPayStoreController defaultStore] weAllPayStoreDocument] managedObjectContext];
-    __block MCSharedBill *sharedBill;
-    [context performBlockAndWait:^{
-        sharedBill = [NSEntityDescription insertNewObjectForEntityForName:@"MCSharedBill" inManagedObjectContext:context];
-        [sharedBill setUniqueBillId:[MCTools createUniqueIdentifierString]];
-        [sharedBill setHasTheMailBeenSent:[NSNumber numberWithBool:NO]];
-        NSDate *nu = [NSDate date];
-        [sharedBill setDateCreated:nu];
-        [sharedBill setDateModified:nu];
-    }];
+    NSManagedObjectContext *context = [[MCWeAllPayStoreController defaultStore] mainThreadContext];
+    return [MCSharedBill addSharedBillToContext:context];
+}
+
++ (MCSharedBill *)addSharedBillToContext:(NSManagedObjectContext *)context
+{
+    MCSharedBill *sharedBill;
+    sharedBill = [NSEntityDescription insertNewObjectForEntityForName:@"MCSharedBill" inManagedObjectContext:context];
+    [sharedBill setUniqueBillId:[MCTools createUniqueIdentifierString]];
+    [sharedBill setHasTheMailBeenSent:@NO];
+    NSDate *nu = [NSDate date];
+    [sharedBill setDateCreated:nu];
+    [sharedBill setDateModified:nu];
+    [sharedBill setMainCurrency:[MCCurrency generateCurrencyFromSelectedLocaleForContext:context]];
     return sharedBill;
 }
 
 + (void)deleteSharedbill:(MCSharedBill *)deleteBill
 {
-    NSManagedObjectContext *context = [[[MCWeAllPayStoreController defaultStore] weAllPayStoreDocument] managedObjectContext];
-    [context performBlock:^{
-        for (MCPayment *p in [deleteBill payments]) {
-            [context deleteObject:p];
+    NSManagedObjectContext *context = [deleteBill managedObjectContext];
+    // Delete all paymentPresences of all payments.
+    for (MCPayment *payment in [deleteBill payments]) {
+        for (MCPaymentPresence *paymentPresence in [payment peopleSharingPayment]) {
+            [context deleteObject:paymentPresence];
         }
-        [context deleteObject:deleteBill];
-    }];
+    }
+    // Delete all payments of the to be deleted sharedbill
+    for (MCPayment *payment in [deleteBill payments]) {
+        [context deleteObject:payment];
+    }
+    // Delete all emailaddresses of all people of the sharedbill.
+    for (MCPerson *person in [deleteBill peoplePresent]) {
+        for (MCEmailAddress *emailAddress in [person emailAddress]) {
+            [context deleteObject:emailAddress];
+        }
+    }
+    // Delete all people of the sharedbill.
+    for (MCPerson *person in [deleteBill peoplePresent]) {
+        [context deleteObject:person];
+    }
+    // Delete the sharedBill itself.
+    [context deleteObject:deleteBill];
 }
 
-+ (MCSharedBill *)fetchSharedBillWithUniqueId:(NSString *)uuid
++ (MCSharedBill *)fetchSharedBillWithUniqueId:(NSString *)uuid inContext:(NSManagedObjectContext *)context
 {
     // Create a fetch request for MCSharedBills.
     NSFetchRequest *request = [NSFetchRequest fetchRequestWithEntityName:@"MCSharedBill"];
@@ -52,44 +76,86 @@
     [request setPredicate:predicate];
     
     NSError *error;
-    NSArray *sharedBills = [[[[MCWeAllPayStoreController defaultStore] weAllPayStoreDocument] managedObjectContext] executeFetchRequest:request error:&error];
+    NSArray *sharedBills = [context executeFetchRequest:request error:&error];
     if (!sharedBills) {
         // There was an error.
         return nil;
     } else {
-        return [sharedBills objectAtIndex:0];
+        return sharedBills[0];
+    }
+}
+
++ (BOOL)isTableInDatabaseEmpty
+{
+    NSManagedObjectContext *context = [[MCWeAllPayStoreController defaultStore] mainThreadContext];
+    return [self isTableInDatabaseEmptyForContext:context];
+}
+
++ (BOOL)isTableInDatabaseEmptyForContext:(NSManagedObjectContext *)context
+{
+    NSFetchRequest *request = [NSFetchRequest fetchRequestWithEntityName:@"MCSharedBill"];
+    NSSortDescriptor *sortDescriptor = [NSSortDescriptor sortDescriptorWithKey:@"dateCreated" ascending:YES];
+    NSArray *sortDescriptorArray = @[sortDescriptor];
+    [request setSortDescriptors:sortDescriptorArray];
+
+    NSError *error;
+    NSArray *people = [context executeFetchRequest:request error:&error];
+    if (people) {
+        if ([people count] == 0) {
+            return YES;
+        } else {
+            return NO;
+        }
+    } else {
+        return NO;
     }
 }
 
 - (NSString *)stringOfApproxPeoplePresent;
 {
-    NSManagedObjectContext *context = [[[MCWeAllPayStoreController defaultStore] weAllPayStoreDocument] managedObjectContext];
-    __block NSArray *allPeople;
-    [context performBlockAndWait:^{
-        NSFetchRequest *request = [NSFetchRequest fetchRequestWithEntityName:@"MCPerson"];
-        [request setPredicate:[NSPredicate predicateWithFormat:@"any sharedBill = %@", self]];
-        [request setSortDescriptors:[NSArray arrayWithObject:[NSSortDescriptor sortDescriptorWithKey:@"dateCreated" ascending:YES]]];
-        NSError *error = nil;
-        allPeople = [context executeFetchRequest:request error:&error];
-        if (!allPeople) {
-            NSLog(@"something went wrong fetching");
-        }
-    }];
-    
+    NSArray *allPeople;
+    NSArray *sda = @[[NSSortDescriptor sortDescriptorWithKey:@"dateCreated" ascending:YES]];
+    allPeople = [[self peoplePresent] sortedArrayUsingDescriptors:sda];
     NSMutableString *returnString = [[NSMutableString alloc] init];
     if ([allPeople count] == 0) {
-        return @"No people present.";
+        return NSLocalizedString(@"NO_PEOPLE_PRESENT", @"A message when there are no people present inside this shared bill");
     } else if ([allPeople count] == 1) {
-            return [[allPeople objectAtIndex:0] getName];
+        return [allPeople[0] getName];
     } else if ([allPeople count] == 2) {
-            [returnString appendFormat:@"%@ and %@", [[allPeople objectAtIndex:0] getName], [[allPeople objectAtIndex:1] getName]];
-            return returnString;
+        NSString *enString = [NSString stringWithFormat:NSLocalizedString(@"AND_STRING", @"The word \"and\" between two people")];
+        [returnString appendFormat:@"%@ %@ %@", [allPeople[0] getName], enString,[allPeople[1] getName]];
+        return returnString;
     } else if ([allPeople count] >= 3) {
-            [returnString appendFormat:@"%@, %@ and others", [[allPeople objectAtIndex:0] getName], [[allPeople objectAtIndex:1] getName]];
-            return returnString;
+        NSString *andOthers = [NSString stringWithFormat:NSLocalizedString(@"AND_OTHERS", @"A list of people like Mark, Ilse and other where the \"and others\" needs to be translated.")];
+        [returnString appendFormat:@"%@, %@ %@", [allPeople[0] getName], [allPeople[1] getName], andOthers];
+        return returnString;
     } else {
-            @throw [NSException exceptionWithName:@"Negative amount of people." reason:@"Should not be possible." userInfo:nil];
-            return nil;
+        @throw [NSException exceptionWithName:@"Negative amount of people." reason:@"Should not be possible." userInfo:nil];
+        return nil;
+    }
+}
+
+- (NSString *)stringOfApproxPeoplePresentWithFullNames;
+{
+    NSArray *allPeople;
+    NSArray *sda = @[[NSSortDescriptor sortDescriptorWithKey:@"dateCreated" ascending:YES]];
+    allPeople = [[self peoplePresent] sortedArrayUsingDescriptors:sda];
+    NSMutableString *returnString = [[NSMutableString alloc] init];
+    if ([allPeople count] == 0) {
+        return NSLocalizedString(@"NO_PEOPLE_PRESENT", @"A message when there are no people present inside this shared bill");
+    } else if ([allPeople count] == 1) {
+        return [allPeople[0] getFullName];
+    } else if ([allPeople count] == 2) {
+        NSString *enString = [NSString stringWithFormat:NSLocalizedString(@"AND_STRING", @"The word \"and\" between two people")];
+        [returnString appendFormat:@"%@ %@ %@", [allPeople[0] getFullName], enString,[allPeople[1] getFullName]];
+        return returnString;
+    } else if ([allPeople count] >= 3) {
+        NSString *andOthers = [NSString stringWithFormat:NSLocalizedString(@"AND_OTHERS", @"A list of people like Mark, Ilse and other where the \"and others\" needs to be translated.")];
+        [returnString appendFormat:@"%@, %@ %@", [allPeople[0] getFullName], [allPeople[1] getFullName], andOthers];
+        return returnString;
+    } else {
+        @throw [NSException exceptionWithName:@"Negative amount of people." reason:@"Should not be possible." userInfo:nil];
+        return nil;
     }
 }
 
@@ -109,16 +175,86 @@
 
 - (MCPayment *)addPayment
 {
-    MCPayment *payment = [MCPayment addPayment];
+    MCPayment *payment = [MCPayment addPaymentInContext:[self managedObjectContext]];
+    for (MCPerson *person in [self peoplePresent]) {
+        MCPaymentPresence *paymentPresence = [MCPaymentPresence addPaymentPresenceInContext:[self managedObjectContext]];
+        [paymentPresence setPayment:payment];
+        [paymentPresence setPerson:person];
+        [paymentPresence setIsPersonPresent:@YES];
+    }
     [payment setOnWhichBill:self];
+    payment.exchangeRate.toCurrency = [self mainCurrency];
     return payment;
+}
+
+- (void)deletePayment:(MCPayment *)toBeDeletePayment
+{
+    // It is not allowed to delete a payment belonging to another sharedBill.
+    NSParameterAssert([toBeDeletePayment onWhichBill] == self);
+    
+    // First delete the people presence on payment data.
+    NSSet *paymentPresences = [toBeDeletePayment peopleSharingPayment];
+    for (MCPaymentPresence *paymentPresence in paymentPresences) {
+        [[self managedObjectContext] deleteObject:paymentPresence];
+    }
+    
+    // Then delete the payment.
+    [[self managedObjectContext] deleteObject:toBeDeletePayment];
+    
+}
+
+- (void)updatePaymentForSupportWithPaymentPresence
+{
+    // Always executed to maintain unit test compatibility.
+    for (MCPayment *payment in [self payments]) {
+        [payment recalculateAveragePeopleOweAndStore];
+    }
 }
 
 - (MCPerson *)addPerson
 {
-    MCPerson *newPerson = [MCPerson addPerson];
+    NSManagedObjectContext *context = [self managedObjectContext];
+    MCPerson *newPerson = [MCPerson addPersonInContext:context];
+    for (MCPayment *payment in [self payments]) {
+        // Presence of all the exisiting payments on this sharedBill will be created and set tot NO.
+        [payment addLateArrivalPaymentPresenceFor:newPerson];
+    }
     [newPerson addSharedBillObject:self];
     return newPerson;
+}
+
+- (void)deletePerson:(MCPerson *)toBeDeletedPerson
+{
+    NSSet *presences = [[toBeDeletedPerson sharingPayment] copy];
+    for (MCPaymentPresence *paymentPresence in presences) {
+        MCPayment *payment = [paymentPresence payment];
+        [[self managedObjectContext] deleteObject:paymentPresence];
+        [payment recalculateAveragePeopleOweAndStore];
+    }
+    [MCPerson deletePerson:toBeDeletedPerson];
+}
+
+- (BOOL)isPresentWithFirstName:(NSString *)firstName andLastName:(NSString *)lastName andEmailAddress:(NSString *)emailAddress
+{
+    NSFetchRequest *request = [NSFetchRequest fetchRequestWithEntityName:@"MCPerson"];
+    NSSortDescriptor *sortDescriptor1 = [NSSortDescriptor sortDescriptorWithKey:@"firstName" ascending:YES];
+    NSSortDescriptor *sortDescriptor2 = [NSSortDescriptor sortDescriptorWithKey:@"lastName" ascending:YES];
+    NSArray *sda = @[sortDescriptor1, sortDescriptor2];
+    [request setSortDescriptors:sda];
+    NSPredicate *predicate = [NSPredicate predicateWithFormat:@"ANY sharedBill = %@ AND firstName = %@ AND lastName = %@ AND ANY emailAddress.emailAddress = %@", self, firstName, lastName, emailAddress];
+    [request setPredicate:predicate];
+    NSError *error;
+    NSArray *result = [[self managedObjectContext] executeFetchRequest:request error:&error];
+    if (!result) {
+        NSLog(@"Error checking if person is present: %@", [error localizedDescription]);
+        return NO;
+    } else {
+        if ([result count] == 0) {
+            return NO;
+        } else {
+            return YES;
+        }
+    }
 }
 
 - (BOOL)areTherePeople
@@ -140,8 +276,8 @@
     NSFetchRequest *request = [NSFetchRequest fetchRequestWithEntityName:@"MCPerson"];
     request.predicate = [NSPredicate predicateWithFormat:@"some payments.onWhichBill == %@", self];
     NSSortDescriptor *sd = [NSSortDescriptor sortDescriptorWithKey:@"uniquePersonId" ascending:YES];
-    [request setSortDescriptors:[NSArray arrayWithObject:sd]];
-    NSManagedObjectContext *context = [[[MCWeAllPayStoreController defaultStore] weAllPayStoreDocument] managedObjectContext];
+    [request setSortDescriptors:@[sd]];
+    NSManagedObjectContext *context = [self managedObjectContext];
     NSError *error = nil;
     NSArray *listOfPeopleWhoHavePaid = [context executeFetchRequest:request error:&error];
     if (!listOfPeopleWhoHavePaid) {
@@ -152,33 +288,42 @@
     }
 }
 
--(NSNumber *)totalSumOfMoneyOfThisSharedBill
+- (NSNumber *)totalSumOfMoneyOfThisSharedBill
 {
-    NSManagedObjectContext *context = [[[MCWeAllPayStoreController defaultStore] weAllPayStoreDocument] managedObjectContext];
-    __block NSArray *payments = nil;
-    [context performBlockAndWait:^{
-        NSFetchRequest *request = [NSFetchRequest fetchRequestWithEntityName:@"MCPayment"];
-        [request setPredicate:[NSPredicate predicateWithFormat:@"onWhichBill = %@", self]];
-        [request setSortDescriptors:[NSArray arrayWithObject:[NSSortDescriptor sortDescriptorWithKey:@"dateCreated" ascending:NO]]];
-        NSError *error = nil;
-        payments = [context executeFetchRequest:request error:&error];
-        if (!payments) {
-            NSLog(@"Error fetching payments on this bill");
-        }
-    }];
-    double sumOfMoney = 0.0;
-    for (MCPayment *p in payments) {
-        sumOfMoney += [[p money] doubleValue];
+    NSFetchRequest *request = [NSFetchRequest fetchRequestWithEntityName:@"MCPayment"];
+    [request setRelationshipKeyPathsForPrefetching:@[ @"payingPerson" ]];
+    [request setPredicate:[NSPredicate predicateWithFormat:@"onWhichBill = %@ AND ANY peopleSharingPayment.isPersonPresent = YES", self]];
+    [request setSortDescriptors:@[[NSSortDescriptor sortDescriptorWithKey:@"dateCreated" ascending:YES]]];
+    NSManagedObjectContext *context = [self managedObjectContext];
+    NSError *error = nil;
+    NSArray *paymentsOfPerson = [context executeFetchRequest:request error:&error];
+    if (!paymentsOfPerson) {
+        NSLog(@"Error fetching paymentofPerson: %@", [error localizedDescription]);
     }
-    return [NSNumber numberWithDouble:sumOfMoney];
+    double sumOfMoney = 0.0;
+    for (MCPayment *payment in paymentsOfPerson) {
+        sumOfMoney += [[payment moneyInMainCurrency] doubleValue];
+    }
+    return @(sumOfMoney);
+}
+
+- (NSString *)totalSumOfMoneyOfThisSharedBillAsCurrencyString
+{
+    NSNumber *totalSpent = [self totalSumOfMoneyOfThisSharedBill];
+    NSNumberFormatter *nf = [[NSNumberFormatter alloc] init];
+    [nf setLocale:[NSLocale currentLocale]];
+    [nf setNumberStyle:NSNumberFormatterCurrencyStyle];
+    [nf setFormatterBehavior:NSNumberFormatterBehaviorDefault];
+    return [nf stringFromNumber:totalSpent];
 }
 
 - (NSNumber *)totalSumPaidBy:(MCPerson *)person
 {
     NSFetchRequest *request = [NSFetchRequest fetchRequestWithEntityName:@"MCPayment"];
-    [request setPredicate:[NSPredicate predicateWithFormat:@"onWhichBill = %@ AND payingPerson = %@", self, person]];
-    [request setSortDescriptors:[NSArray arrayWithObject:[NSSortDescriptor sortDescriptorWithKey:@"dateCreated" ascending:YES]]];
-    NSManagedObjectContext *context = [[[MCWeAllPayStoreController defaultStore] weAllPayStoreDocument] managedObjectContext];
+    [request setRelationshipKeyPathsForPrefetching:@[ @"payingPerson" ]];
+    [request setPredicate:[NSPredicate predicateWithFormat:@"onWhichBill = %@ AND payingPerson = %@ AND ANY peopleSharingPayment.isPersonPresent = YES", self, person]];
+    [request setSortDescriptors:@[[NSSortDescriptor sortDescriptorWithKey:@"dateCreated" ascending:YES]]];
+    NSManagedObjectContext *context = [self managedObjectContext];
     NSError *error = nil;
     NSArray *paymentsOfPerson = [context executeFetchRequest:request error:&error];
     if (!paymentsOfPerson) {
@@ -186,9 +331,17 @@
     }
     double sumOfMoney = 0.0;
     for (MCPayment *p in paymentsOfPerson) {
-        sumOfMoney += [[p money] doubleValue];
+        sumOfMoney += [[p moneyInMainCurrency] doubleValue];
     }
-    return [NSNumber numberWithDouble:sumOfMoney];
+    return @(sumOfMoney);
+}
+
+- (NSNumber *)totalAmountOfCreditBy:(MCPerson *)person
+{
+    double totalSumPaid = [[self totalSumPaidBy:person] doubleValue];
+    double average = [[self amountPeopleShouldHavePaid] doubleValue];
+    double credit = totalSumPaid - average;
+    return @(credit);
 }
 
 - (BOOL)hasPersonPaidSomething:(MCPerson *)person
@@ -203,9 +356,7 @@
 
 - (BOOL)doesEveryoneHaveAnEmailAddress
 {
-    NSArray *sortDescriptors = [NSArray arrayWithObject:[NSSortDescriptor sortDescriptorWithKey:@"dateCreated" ascending:YES]];
-    NSArray *people = [self.peoplePresent sortedArrayUsingDescriptors:sortDescriptors];
-    for (MCPerson *person in people) {
+    for (MCPerson *person in [self peoplePresent]) {
         if (![person isThereAnEmailAddress]) {
             return NO;
         }
@@ -216,11 +367,106 @@
 - (NSNumber *)amountPeopleShouldHavePaid
 {
     double sumOfMoney = [[self totalSumOfMoneyOfThisSharedBill] doubleValue];
-    double average = sumOfMoney / [[self peoplePresent] count];
-    return [NSNumber numberWithDouble:average];
+    if ([[self peoplePresent] count] > 0) {
+        double average = sumOfMoney / [[self peoplePresent] count];
+        return @(average);
+    } else {
+        return @0.0;
+    }
 }
 
-- (NSArray *)solveWhoHasToPayWhoFromThisBill
+- (NSNumber *)amountShouldHavePaidBy:(MCPerson *)person
+{
+    // Fetch the sum of all paymentPresences for person
+    NSFetchRequest *request = [NSFetchRequest fetchRequestWithEntityName:@"MCPaymentPresence"];
+    NSPredicate *predicate = [NSPredicate predicateWithFormat:@"payment.onWhichBill = %@ AND person = %@ AND isPersonPresent = %@", self, person, @YES];
+    [request setPredicate:predicate];
+    NSSortDescriptor *sortDescriptor = [NSSortDescriptor sortDescriptorWithKey:@"person" ascending:YES];
+    [request setSortDescriptors:@[sortDescriptor]];
+
+    NSError *error;
+    NSArray *results = [[self managedObjectContext] executeFetchRequest:request error:&error];
+    if (error) {
+        NSLog(@"Something went wrong fetching sumOfAverageFromEachPayment: %@", error);
+    }
+    
+    double sumOfAllOwes = 0;
+    for (MCPaymentPresence *paymentPresence in results) {
+        sumOfAllOwes += [[paymentPresence getAverageOweFromPaymentInMainCurrency] doubleValue];
+    }
+    
+    return @(sumOfAllOwes);
+}
+
+- (NSString *)amountShouldHavePaidAsCurrencyStringBy:(MCPerson *)person
+{
+    // Still has no Unit test.
+    NSNumber *shouldHavePaid = [self amountShouldHavePaidBy:person];
+    NSNumberFormatter *nf = [[NSNumberFormatter alloc] init];
+    [nf setLocale:[NSLocale currentLocale]];
+    [nf setNumberStyle:NSNumberFormatterCurrencyStyle];
+    [nf setFormatterBehavior:NSNumberFormatterBehaviorDefault];
+    return [nf stringFromNumber:shouldHavePaid];
+}
+
+
+- (NSString *)amountPeopleShouldHavePaidAsCurrencyString
+{
+    NSNumber *averageSpentByPerson = [self amountPeopleShouldHavePaid];
+    NSNumberFormatter *nf = [[NSNumberFormatter alloc] init];
+    [nf setLocale:[NSLocale currentLocale]];
+    [nf setNumberStyle:NSNumberFormatterCurrencyStyle];
+    [nf setFormatterBehavior:NSNumberFormatterBehaviorDefault];
+    return [nf stringFromNumber:averageSpentByPerson];
+}
+
+- (BOOL)areAllExchangeRatesValid
+{
+    // Fetch all exchangeRates that are invalid.
+    NSFetchRequest *request = [[NSFetchRequest alloc] initWithEntityName:@"MCExchangeRate"];
+    NSSortDescriptor *sortDescriptor = [NSSortDescriptor sortDescriptorWithKey:@"dateCreated" ascending:YES];
+    request.sortDescriptors = @[sortDescriptor];
+    
+    NSNumber *exchangeRateValidStatus = [NSNumber numberWithShort:valid];
+    NSPredicate *predicate = [NSPredicate predicateWithFormat:@"payment.onWhichBill = %@ and status != %@", self, exchangeRateValidStatus];
+    request.predicate = predicate;
+    NSError *fetchError;
+    NSUInteger *amountOfInvalidExchangeRates = [[self managedObjectContext] countForFetchRequest:request error:&fetchError];
+    if (fetchError) {
+        NSLog(@"Something went wrong counting invalid exchangeRates: %@", [fetchError localizedDescription]);
+    }
+    if (amountOfInvalidExchangeRates == 0) {
+        return YES;
+    } else {
+        return NO;
+    }
+}
+
+- (void)updateInvalidExchangeRatesWithCompletionBlock:(void (^)(NSArray *results))completionBlock
+{
+    // Fetch all exchangeRates that are invalid.
+    NSFetchRequest *request = [[NSFetchRequest alloc] initWithEntityName:@"MCExchangeRate"];
+    NSSortDescriptor *sortDescriptor = [NSSortDescriptor sortDescriptorWithKey:@"dateCreated" ascending:YES];
+    request.sortDescriptors = @[sortDescriptor];
+    
+    NSNumber *exchangeRateValidStatus = [NSNumber numberWithShort:valid];
+    NSPredicate *predicate = [NSPredicate predicateWithFormat:@"payment.onWhichBill = %@ and status != %@", self, exchangeRateValidStatus];
+    request.predicate = predicate;
+    NSError *fetchError;
+    NSArray *arrayOfInvalidExchangeRatesOfThisSharedBill = [[self managedObjectContext] executeFetchRequest:request error:&fetchError];
+    if (fetchError) {
+        NSLog(@"Something went wrong fetching invalid ExchangeRates: %@", [fetchError localizedDescription]);
+    }
+    for (MCExchangeRate *exchangeRate in arrayOfInvalidExchangeRatesOfThisSharedBill) {
+        [exchangeRate retrieveExchangeRateFromWebWithCompletionHandler:^(NSDictionary *exchangeRateResult) {
+            if ([self areAllExchangeRatesValid]) {
+                completionBlock([self solveWhoHasToPayWhoFromThisBill]);
+            }
+        }];
+    }
+}
+
+- (NSArray *)originalSolveWhoHasToPayWhoFromThisBill
 {
     // Create two array's one of peope who should pay and one with people that should receive.
     NSMutableArray *payers = [[NSMutableArray alloc] init];
@@ -228,57 +474,57 @@
     NSNumber *leftToReceive;
     NSMutableArray *receivers = [[NSMutableArray alloc] init];
     NSMutableArray *whoHasToPayWho = [[NSMutableArray alloc] init];
-    NSArray *sda1 = [NSArray arrayWithObject:[NSSortDescriptor sortDescriptorWithKey:@"dateCreated" ascending:YES]];
-    NSArray *people = [[self peoplePresent] sortedArrayUsingDescriptors:sda1];
+    NSArray *sortDescriptorArray1 = @[[NSSortDescriptor sortDescriptorWithKey:@"dateCreated" ascending:YES]];
+    NSArray *people = [[self peoplePresent] sortedArrayUsingDescriptors:sortDescriptorArray1];
     
-    for (MCPerson *p in people) {
-        NSLog(@"%@ paid %@", [p getName], [self totalSumPaidBy:p]);
-    }
+    // Update the database to the current version.
+    [self updatePaymentForSupportWithPaymentPresence];
     
-    for (MCPerson *p in people) {
-        NSNumber *sumOfWhatWasPaidBy = [self totalSumPaidBy:p];
-        NSNumber *sumOfWhatShouldBePaid = [self amountPeopleShouldHavePaid];
+    for (MCPerson *person in people) {
+//        NSLog(@"%@ paid %@", [person getName], [self totalSumPaidBy:person]);
+        NSNumber *sumOfWhatWasPaidByPerson = [self totalSumPaidBy:person];
+        NSNumber *sumOfWhatShouldBePaidPerson = [self amountShouldHavePaidBy:person];
         
-        if ([sumOfWhatWasPaidBy doubleValue] < [sumOfWhatShouldBePaid doubleValue]) {
+        if ([sumOfWhatWasPaidByPerson doubleValue] < [sumOfWhatShouldBePaidPerson doubleValue]) {
             // This person should pay to someone.
-            leftToPay = [[NSNumber alloc] initWithDouble:[sumOfWhatShouldBePaid doubleValue] - [sumOfWhatWasPaidBy doubleValue]];
-            NSArray *creditValueOfThisPerson = [[NSMutableArray alloc] initWithObjects:p, sumOfWhatShouldBePaid, sumOfWhatWasPaidBy, leftToPay, nil];
+            leftToPay = @([sumOfWhatShouldBePaidPerson doubleValue] - [sumOfWhatWasPaidByPerson doubleValue]);
+            NSArray *creditValueOfThisPerson = [[NSMutableArray alloc] initWithObjects:person, sumOfWhatShouldBePaidPerson, sumOfWhatWasPaidByPerson, leftToPay, nil];
             [payers addObject:creditValueOfThisPerson];
-        } else if ([sumOfWhatWasPaidBy doubleValue] > [sumOfWhatShouldBePaid doubleValue]){
+        } else if ([sumOfWhatWasPaidByPerson doubleValue] > [sumOfWhatShouldBePaidPerson doubleValue]){
             // This person should receive from someone.
-            leftToReceive = [[NSNumber alloc] initWithDouble:[sumOfWhatWasPaidBy doubleValue] - [sumOfWhatShouldBePaid doubleValue]];
-            NSArray *creditValueOfThisPerson = [[NSMutableArray alloc] initWithObjects:p, sumOfWhatShouldBePaid, sumOfWhatWasPaidBy, leftToReceive, nil];
+            leftToReceive = @([sumOfWhatWasPaidByPerson doubleValue] - [sumOfWhatShouldBePaidPerson doubleValue]);
+            NSArray *creditValueOfThisPerson = [[NSMutableArray alloc] initWithObjects:person, sumOfWhatShouldBePaidPerson, sumOfWhatWasPaidByPerson, leftToReceive, nil];
             [receivers addObject:creditValueOfThisPerson];
         } else {
             // This person has already paid enough.
-            MCReturnPayment *notDepted = [[MCReturnPayment alloc] initWithPayer:p paysTo:nil amountOfMoney:[NSNumber numberWithDouble:0.0]];
-            [whoHasToPayWho addObject:notDepted];
+//            MCReturnPayment *notDepted = [[MCReturnPayment alloc] initWithPayer:person paysTo:nil amountOfMoney:@0.00];
+//            [whoHasToPayWho addObject:notDepted];
         }
     }
     
     // Solve who has to pay who.
     if ([payers count] > 0) {
-        for (NSMutableArray *p in payers) {
-            for (NSMutableArray *r in receivers) {
-                double ltp = [[p objectAtIndex:3] doubleValue];
-                double ltr = [[r objectAtIndex:3] doubleValue];
-                MCReturnPayment *rp;
+        for (NSMutableArray *payer in payers) {
+            for (NSMutableArray *receiver in receivers) {
+                double ltp = [payer[3] doubleValue];
+                double ltr = [receiver[3] doubleValue];
+                MCReturnPayment *returnPayment;
                 if (ltp >= ltr) {
-                    rp = [[MCReturnPayment alloc] initWithPayer:[p objectAtIndex:0] paysTo:[r objectAtIndex:0] amountOfMoney:[NSNumber numberWithDouble:ltr]];
+                    returnPayment = [[MCReturnPayment alloc] initWithPayer:payer[0] paysTo:receiver[0] amountOfMoney:@(ltr)];
                     ltp -= ltr;
                     ltr = 0;
                 } else {
-                    rp = [[MCReturnPayment alloc] initWithPayer:[p objectAtIndex:0] paysTo:[r objectAtIndex:0] amountOfMoney:[NSNumber numberWithDouble:ltp]];
+                    returnPayment = [[MCReturnPayment alloc] initWithPayer:payer[0] paysTo:receiver[0] amountOfMoney:@(ltp)];
                     ltr -= ltp;
                     ltp = 0;
                 }
-                leftToPay = [[NSNumber alloc] initWithDouble:ltp];
-                leftToReceive = [[NSNumber alloc] initWithDouble:ltr];
-                [p replaceObjectAtIndex:3 withObject:leftToPay];
-                [r replaceObjectAtIndex:3 withObject:leftToReceive];
+                leftToPay = @(ltp);
+                leftToReceive = @(ltr);
+                payer[3] = leftToPay;
+                receiver[3] = leftToReceive;
                 
-                if ([[rp money] doubleValue] > 0) {
-                    [whoHasToPayWho addObject:rp];
+                if ([[returnPayment money] doubleValue] > 0) {
+                    [whoHasToPayWho addObject:returnPayment];
                 }
             }
         }
@@ -287,10 +533,75 @@
     return whoHasToPayWho;
 }
 
+- (NSArray *)solveWhoHasToPayWhoFromThisBill
+{
+    return [self originalSolveWhoHasToPayWhoFromThisBill];
+}
+
+- (NSArray *)solveWhoHasToPayWhoFromThisBillWithCompletionBlock:(void (^)(NSArray *))completionBlock
+{
+    // This function will either give an NSArray as return value or it will return nil and will execuute the completionBlock at a later time when all exchangeRates are valid.
+    if ([self areAllExchangeRatesValid]) {
+        return [self originalSolveWhoHasToPayWhoFromThisBill];
+    } else {
+        [self updateInvalidExchangeRatesWithCompletionBlock:^(NSArray *results){
+            NSArray *result = [self originalSolveWhoHasToPayWhoFromThisBill];
+            completionBlock(result);
+        }];
+        return nil;
+    }
+}
+
 - (NSArray *)getArrayOfFullNamesOfPeoplePresent
 {
     NSSortDescriptor *sortDescriptor = [NSSortDescriptor sortDescriptorWithKey:@"getFullName" ascending:YES];
-    return [[self peoplePresent] sortedArrayUsingDescriptors:[NSArray arrayWithObject:sortDescriptor]];
+    return [[self peoplePresent] sortedArrayUsingDescriptors:@[sortDescriptor]];
+}
+
+- (void)deleteIfStillNew
+{
+    // Check to see if tripname is still 0 in length or nil.
+    if (![self tripName] || [[self tripName] length] == 0) {
+            // Check to see if payments count is still 0
+        if ([[self payments] count] == 0) {
+            // Check to see if people present is still 0
+            if ([[self peoplePresent] count] == 0) {
+                [MCSharedBill deleteSharedbill:self];
+            }
+        }
+    }
+}
+
+#pragma mark - NSManagedObject Stuff
+
+- (void)awakeFromInsert
+{
+    [super awakeFromInsert];
+}
+
+- (void)prepareForDeletion
+{
+//    NSManagedObjectContext *context = [self managedObjectContext];
+//    // Delete all paymentPresences of all payments.
+//    for (MCPayment *payment in [self payments]) {
+//        for (MCPaymentPresence *paymentPresence in [payment peopleSharingPayment]) {
+//            [context deleteObject:paymentPresence];
+//        }
+//    }
+//    // Delete all payments of the to be deleted sharedbill
+//    for (MCPayment *payment in [self payments]) {
+//        [context deleteObject:payment];
+//    }
+//    // Delete all emailaddresses of all people of the sharedbill.
+//    for (MCPerson *person in [self peoplePresent]) {
+//        for (MCEmailAddress *emailAddress in [person emailAddress]) {
+//            [context deleteObject:emailAddress];
+//        }
+//    }
+//    // Delete all people of the sharedbill.
+//    for (MCPerson *person in [self peoplePresent]) {
+//        [context deleteObject:person];
+//    }
 }
 
 @end

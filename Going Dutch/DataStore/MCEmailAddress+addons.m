@@ -14,25 +14,27 @@
 
 + (MCEmailAddress *)addEmailAddressFor:(MCPerson *)person
 {
-    __block MCEmailAddress *newEmailAddress;
-    NSManagedObjectContext *context = [[[MCWeAllPayStoreController defaultStore] weAllPayStoreDocument] managedObjectContext];
-    [context performBlockAndWait:^{
-        newEmailAddress = [NSEntityDescription insertNewObjectForEntityForName:@"MCEmailAddress" inManagedObjectContext:context];
-        [newEmailAddress setUniqueEmailId:[MCTools createUniqueIdentifierString]];
-        [newEmailAddress setOwner:person];
-    }];
+    MCEmailAddress *newEmailAddress;
+    NSManagedObjectContext *context = [person managedObjectContext];
+    newEmailAddress = [NSEntityDescription insertNewObjectForEntityForName:@"MCEmailAddress" inManagedObjectContext:context];
+    [newEmailAddress setUniqueEmailId:[[NSUUID UUID] UUIDString] ];
+    [newEmailAddress setOwner:person];
+    NSDate *nu = [NSDate date];
+    [newEmailAddress setDateCreated:nu];
+    [newEmailAddress setDateModified:nu];
     return newEmailAddress;
 }
 
 + (void)deleteEmailAddress:(MCEmailAddress *)eAddress
 {
-    NSManagedObjectContext *context = [[[MCWeAllPayStoreController defaultStore] weAllPayStoreDocument] managedObjectContext];
-    [context performBlockAndWait:^{
-        [context deleteObject:eAddress];
-    }];
+    NSManagedObjectContext *context = [eAddress managedObjectContext];
+    MCPerson *owner = [eAddress owner];
+    [eAddress setOwner:nil];
+    [context deleteObject:eAddress];
+    [context refreshObject:owner mergeChanges:YES];
 }
 
-+ (MCSharedBill *)fetchSharedBillWithUniqueId:(NSString *)uuid
++ (MCEmailAddress *)fetchEmailAddressWithUniqueId:(NSString *)uuid
 {
     // Create a fetch request for MCSharedBills.
     NSFetchRequest *request = [NSFetchRequest fetchRequestWithEntityName:@"MCSharedBill"];
@@ -42,12 +44,32 @@
     [request setPredicate:predicate];
     
     NSError *error;
-    NSArray *sharedBills = [[[[MCWeAllPayStoreController defaultStore] weAllPayStoreDocument] managedObjectContext] executeFetchRequest:request error:&error];
+    NSArray *sharedBills = [[[MCWeAllPayStoreController defaultStore] mainThreadContext] executeFetchRequest:request error:&error];
     if (!sharedBills) {
         // There was an error.
         return nil;
     } else {
-        return [sharedBills objectAtIndex:0];
+        return sharedBills[0];
+    }
+}
+
++ (BOOL)isTableInDatabaseEmpty
+{
+    NSFetchRequest *request = [NSFetchRequest fetchRequestWithEntityName:@"MCEmailAddress"];
+    NSSortDescriptor *sd = [NSSortDescriptor sortDescriptorWithKey:@"emailAddress" ascending:YES];
+    NSArray *sda = @[sd];
+    [request setSortDescriptors:sda];
+    NSManagedObjectContext *context = [[MCWeAllPayStoreController defaultStore] mainThreadContext];
+    NSError *error;
+    NSArray *people = [context executeFetchRequest:request error:&error];
+    if (people) {
+        if ([people count] == 0) {
+            return YES;
+        } else {
+            return NO;
+        }
+    } else {
+        return NO;
     }
 }
 
@@ -58,14 +80,13 @@
     
     // Select only emailAddresses for person
     NSPredicate *predicate1 = [NSPredicate predicateWithFormat:@"owner = %@", person];
-    NSPredicate *predicate2 = [NSPredicate predicateWithFormat:@"selected = %@", [NSNumber numberWithBool:YES]];
-    NSPredicate *compoundPredicate = [NSCompoundPredicate andPredicateWithSubpredicates:[NSArray arrayWithObjects:predicate1, predicate2, nil]];
+    NSPredicate *predicate2 = [NSPredicate predicateWithFormat:@"selected = %@", @YES];
+    NSPredicate *compoundPredicate = [NSCompoundPredicate andPredicateWithSubpredicates:@[predicate1, predicate2]];
     [request setPredicate:compoundPredicate];
     
     NSError *error;
     NSArray *emailAddresses;
-    NSManagedObjectContext *context = [[[MCWeAllPayStoreController defaultStore] weAllPayStoreDocument] managedObjectContext];
-    emailAddresses = [context executeFetchRequest:request error:&error];
+    emailAddresses = [[person managedObjectContext] executeFetchRequest:request error:&error];
     if (!emailAddresses) {
         NSLog(@"There was error fetching email addresses for %@", [person getFullName]);
         return nil;
@@ -73,7 +94,7 @@
         if ([emailAddresses count] == 0) {
             return nil;
         } else {
-            return [emailAddresses objectAtIndex:0];
+            return emailAddresses[0];
         }
     }
 }

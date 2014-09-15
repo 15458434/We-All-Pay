@@ -10,6 +10,7 @@
 
 @interface MCAllTripsTableViewCell : UITableViewCell
 
+@property (weak, nonatomic) IBOutlet UIActivityIndicatorView *waitingForXRatesIndicator;
 @property (weak, nonatomic) IBOutlet UILabel *tripLabel;
 @property (weak, nonatomic) IBOutlet UILabel *totalCostLabel;
 @property (weak, nonatomic) IBOutlet UILabel *peoplePresentLabel;

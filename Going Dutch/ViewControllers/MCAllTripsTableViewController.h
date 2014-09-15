@@ -8,18 +8,18 @@
 
 #import <UIKit/UIKit.h>
 #import <CoreData/CoreData.h>
-#import <iAd/iAd.h>
 #import <Social/Social.h>
 
 @class MCWeAllPayStoreController;
 @class MCTwoLabelsTitleView;
+@class MCTableEmptyMessage;
 
 @interface MCAllTripsTableViewController : UITableViewController < NSFetchedResultsControllerDelegate>
 {
     __strong IBOutlet MCTwoLabelsTitleView *titleView;
+    MCTableEmptyMessage *emptyMessage;
     
     NSDateFormatter *df;
-    NSFetchedResultsController *dataController;
 }
 
 - (IBAction)tellAFriendAboutWeAllPay:(id)sender;
