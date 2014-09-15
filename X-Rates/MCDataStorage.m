@@ -78,7 +78,9 @@ NSString * const MCStateRestoreDestinationCurrencyObject = @"MCStateRestoreDesti
 - (void)startIndicator
 {
     _indicatorStartCount++;
+#ifdef DEBUG
     NSLog(@"startIndicator: %d", _indicatorStartCount);
+#endif
     if (_indicatorStartCount == 1) {
         [_activityIndicator startAnimation:self];
         [_exchangeRateField setHidden:YES];
@@ -87,7 +89,9 @@ NSString * const MCStateRestoreDestinationCurrencyObject = @"MCStateRestoreDesti
 
 - (void)stopIndicator
 {
+#ifdef DEBUG
     NSLog(@"stopIndicator: %d", _indicatorStartCount);
+#endif
     _indicatorStartCount--;
     if (_indicatorStartCount == 0) {
         [_activityIndicator stopAnimation:self];
