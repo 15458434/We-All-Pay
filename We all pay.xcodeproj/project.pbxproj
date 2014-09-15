@@ -126,13 +126,6 @@
 		389DE9161982540D00169645 /* MCCurrency.m in Sources */ = {isa = PBXBuildFile; fileRef = 389DE9151982540D00169645 /* MCCurrency.m */; };
 		389E2D0019792D7600729F61 /* MCNetworkTools.m in Sources */ = {isa = PBXBuildFile; fileRef = 389E2CFF19792D7600729F61 /* MCNetworkTools.m */; };
 		389FBD40198BDA1C003B4409 /* MCExchangeRate.m in Sources */ = {isa = PBXBuildFile; fileRef = 389FBD3F198BDA1C003B4409 /* MCExchangeRate.m */; };
-		38A4ACEC1975625600C0636E /* Countly_OpenUDID.m in Sources */ = {isa = PBXBuildFile; fileRef = 38A4ACE21975625600C0636E /* Countly_OpenUDID.m */; settings = {COMPILER_FLAGS = "-fno-objc-arc"; }; };
-		38A4ACED1975625600C0636E /* Countly.m in Sources */ = {isa = PBXBuildFile; fileRef = 38A4ACE41975625600C0636E /* Countly.m */; settings = {COMPILER_FLAGS = "-fno-objc-arc"; }; };
-		38A4ACEE1975625600C0636E /* Countly.podspec in Resources */ = {isa = PBXBuildFile; fileRef = 38A4ACE51975625600C0636E /* Countly.podspec */; };
-		38A4ACEF1975625600C0636E /* Countly.xcdatamodeld in Sources */ = {isa = PBXBuildFile; fileRef = 38A4ACE61975625600C0636E /* Countly.xcdatamodeld */; };
-		38A4ACF01975625600C0636E /* CountlyDB.m in Sources */ = {isa = PBXBuildFile; fileRef = 38A4ACE91975625600C0636E /* CountlyDB.m */; settings = {COMPILER_FLAGS = "-fno-objc-arc"; }; };
-		38A4ACF11975625600C0636E /* LICENSE in Resources */ = {isa = PBXBuildFile; fileRef = 38A4ACEA1975625600C0636E /* LICENSE */; };
-		38A4ACF21975625600C0636E /* README.md in Resources */ = {isa = PBXBuildFile; fileRef = 38A4ACEB1975625600C0636E /* README.md */; };
 		38AAFB9F18EC404200CD3E12 /* MCSharedBillPaymentsTableViewController-iPad.m in Sources */ = {isa = PBXBuildFile; fileRef = 38AAFB9E18EC404200CD3E12 /* MCSharedBillPaymentsTableViewController-iPad.m */; };
 		38AAFBA218EC406300CD3E12 /* MCSharedBillPeoplePresentTableViewController-iPad.m in Sources */ = {isa = PBXBuildFile; fileRef = 38AAFBA118EC406300CD3E12 /* MCSharedBillPeoplePresentTableViewController-iPad.m */; };
 		38AAFBA518EC529300CD3E12 /* MCSharedBillViewController_iPad.m in Sources */ = {isa = PBXBuildFile; fileRef = 38AAFBA418EC529300CD3E12 /* MCSharedBillViewController_iPad.m */; };
@@ -406,16 +399,6 @@
 		389E92651889E6CC0005F063 /* en */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = en; path = en.lproj/InfoPlist.strings; sourceTree = "<group>"; };
 		389FBD3E198BDA1C003B4409 /* MCExchangeRate.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = MCExchangeRate.h; sourceTree = "<group>"; };
 		389FBD3F198BDA1C003B4409 /* MCExchangeRate.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = MCExchangeRate.m; sourceTree = "<group>"; };
-		38A4ACE11975625600C0636E /* Countly_OpenUDID.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = Countly_OpenUDID.h; sourceTree = "<group>"; };
-		38A4ACE21975625600C0636E /* Countly_OpenUDID.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = Countly_OpenUDID.m; sourceTree = "<group>"; };
-		38A4ACE31975625600C0636E /* Countly.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = Countly.h; sourceTree = "<group>"; };
-		38A4ACE41975625600C0636E /* Countly.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = Countly.m; sourceTree = "<group>"; };
-		38A4ACE51975625600C0636E /* Countly.podspec */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; path = Countly.podspec; sourceTree = "<group>"; };
-		38A4ACE71975625600C0636E /* Countly.xcdatamodel */ = {isa = PBXFileReference; lastKnownFileType = wrapper.xcdatamodel; path = Countly.xcdatamodel; sourceTree = "<group>"; };
-		38A4ACE81975625600C0636E /* CountlyDB.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = CountlyDB.h; sourceTree = "<group>"; };
-		38A4ACE91975625600C0636E /* CountlyDB.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = CountlyDB.m; sourceTree = "<group>"; };
-		38A4ACEA1975625600C0636E /* LICENSE */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; path = LICENSE; sourceTree = "<group>"; };
-		38A4ACEB1975625600C0636E /* README.md */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; path = README.md; sourceTree = "<group>"; };
 		38AAFB9D18EC404200CD3E12 /* MCSharedBillPaymentsTableViewController-iPad.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = "MCSharedBillPaymentsTableViewController-iPad.h"; path = "ViewControllers/iPad/MCSharedBillPaymentsTableViewController-iPad.h"; sourceTree = "<group>"; };
 		38AAFB9E18EC404200CD3E12 /* MCSharedBillPaymentsTableViewController-iPad.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = "MCSharedBillPaymentsTableViewController-iPad.m"; path = "ViewControllers/iPad/MCSharedBillPaymentsTableViewController-iPad.m"; sourceTree = "<group>"; };
 		38AAFBA018EC406300CD3E12 /* MCSharedBillPeoplePresentTableViewController-iPad.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = "MCSharedBillPeoplePresentTableViewController-iPad.h"; path = "ViewControllers/iPad/MCSharedBillPeoplePresentTableViewController-iPad.h"; sourceTree = "<group>"; };
@@ -872,23 +855,6 @@
 			name = "MC SDK";
 			sourceTree = "<group>";
 		};
-		38A4ACE01975624100C0636E /* Countly */ = {
-			isa = PBXGroup;
-			children = (
-				38A4ACE11975625600C0636E /* Countly_OpenUDID.h */,
-				38A4ACE21975625600C0636E /* Countly_OpenUDID.m */,
-				38A4ACE31975625600C0636E /* Countly.h */,
-				38A4ACE41975625600C0636E /* Countly.m */,
-				38A4ACE51975625600C0636E /* Countly.podspec */,
-				38A4ACE61975625600C0636E /* Countly.xcdatamodeld */,
-				38A4ACE81975625600C0636E /* CountlyDB.h */,
-				38A4ACE91975625600C0636E /* CountlyDB.m */,
-				38A4ACEA1975625600C0636E /* LICENSE */,
-				38A4ACEB1975625600C0636E /* README.md */,
-			);
-			name = Countly;
-			sourceTree = "<group>";
-		};
 		38A90E9919C085B70040056E /* iScreenViewController */ = {
 			isa = PBXGroup;
 			children = (
@@ -1042,7 +1008,6 @@
 				38DAB1371997C21600B989BF /* EMC.entitlements */,
 				3879E78B19798F8B009E5D57 /* X-Rates.entitlements */,
 				389E2CF719792C1E00729F61 /* MC SDK */,
-				38A4ACE01975624100C0636E /* Countly */,
 				38FE87F8195722D90008EE74 /* Model */,
 				38FE87D3195721670008EE74 /* MCAppDelegate.h */,
 				38FE87D4195721670008EE74 /* MCAppDelegate.m */,
@@ -1283,10 +1248,7 @@
 				38DDBF8719C1AB5E00D690D0 /* Currency info.plist in Resources */,
 				38FE87CC195721670008EE74 /* InfoPlist.strings in Resources */,
 				38FE87DA195721670008EE74 /* Images.xcassets in Resources */,
-				38A4ACF11975625600C0636E /* LICENSE in Resources */,
-				38A4ACEE1975625600C0636E /* Countly.podspec in Resources */,
 				38FE87D2195721670008EE74 /* Credits.rtf in Resources */,
-				38A4ACF21975625600C0636E /* README.md in Resources */,
 				38FE87D8195721670008EE74 /* MainMenu.xib in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
@@ -1428,14 +1390,10 @@
 			files = (
 				381318C419A2531500C821B0 /* XRCurrencyStoreController.m in Sources */,
 				38DAB1311997A1BF00B989BF /* MCAppDelegate.m in Sources */,
-				38A4ACEF1975625600C0636E /* Countly.xcdatamodeld in Sources */,
 				38BDFD8319B88D8B0026F4F8 /* XRCurrencyXRate.m in Sources */,
 				38974AFA195E8C4B00BBEA9C /* MCxRatesController+X_RatesAddOn.m in Sources */,
 				38974AFD195E8E9900BBEA9C /* MCDataStorage.m in Sources */,
 				389E2D0019792D7600729F61 /* MCNetworkTools.m in Sources */,
-				38A4ACED1975625600C0636E /* Countly.m in Sources */,
-				38A4ACF01975625600C0636E /* CountlyDB.m in Sources */,
-				38A4ACEC1975625600C0636E /* Countly_OpenUDID.m in Sources */,
 				381318BE19A250C600C821B0 /* XRCurrency.xcdatamodeld in Sources */,
 				38FE87CE195721670008EE74 /* main.m in Sources */,
 				381318D019A2869600C821B0 /* XRCurrency.m in Sources */,
@@ -1991,16 +1949,6 @@
 			);
 			currentVersion = 38AD8C0D197E85AA005C3436 /* WeAllPayStore 3.xcdatamodel */;
 			path = WeAllPayStore.xcdatamodeld;
-			sourceTree = "<group>";
-			versionGroupType = wrapper.xcdatamodel;
-		};
-		38A4ACE61975625600C0636E /* Countly.xcdatamodeld */ = {
-			isa = XCVersionGroup;
-			children = (
-				38A4ACE71975625600C0636E /* Countly.xcdatamodel */,
-			);
-			currentVersion = 38A4ACE71975625600C0636E /* Countly.xcdatamodel */;
-			path = Countly.xcdatamodeld;
 			sourceTree = "<group>";
 			versionGroupType = wrapper.xcdatamodel;
 		};

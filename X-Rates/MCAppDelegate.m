@@ -7,7 +7,6 @@
 //
 
 #import "MCAppDelegate.h"
-#import "Countly.h"
 
 @interface MCAppDelegate ()
 

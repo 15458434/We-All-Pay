@@ -10,7 +10,6 @@
 
 #import "MCxRatesController+X_RatesAddOn.h"
 #import "MCxRatesCurrency.h"
-#import "Countly.h"
 
 #import "MCNetworkTools.h"
 
