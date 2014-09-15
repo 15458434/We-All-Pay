@@ -76,6 +76,7 @@ NSString * const MCStateRestoreDestinationCurrencyObject = @"MCStateRestoreDesti
 - (void)startIndicator
 {
     _indicatorStartCount++;
+    NSLog(@"startIndicator: %d", _indicatorStartCount);
     if (_indicatorStartCount == 1) {
         [_activityIndicator startAnimation:self];
         [_exchangeRateField setHidden:YES];
@@ -84,6 +85,7 @@ NSString * const MCStateRestoreDestinationCurrencyObject = @"MCStateRestoreDesti
 
 - (void)stopIndicator
 {
+    NSLog(@"stopIndicator: %d", _indicatorStartCount);
     _indicatorStartCount--;
     if (_indicatorStartCount == 0) {
         [_activityIndicator stopAnimation:self];
@@ -107,15 +109,13 @@ NSString * const MCStateRestoreDestinationCurrencyObject = @"MCStateRestoreDesti
     
     if (isInternetConnection()) {
         _xRatesController = [MCxRatesController new];
-        NSLog(@"Refetch Started.");
         [self startIndicator];
         [_xRatesController getExchangeRateFrom:sourceCurrencyISOCode to:destinationCurrencyISOCode withCompletionHandler:^(NSDictionary *exchangeRateResult) {
             [self setExchangeRate:[exchangeRateResult objectForKey:MCCurrencyExchangeRate]];
+            [self stopIndicator];
             if (_exchangeRate) {
                 dispatch_async(dispatch_get_main_queue(), ^{
-                    [self stopIndicator];
                     [self setDestinationAmount:@([_sourceAmount doubleValue] * [_exchangeRate doubleValue])];
-                    NSLog(@"Refetch done.");
                 });
             }
         }];

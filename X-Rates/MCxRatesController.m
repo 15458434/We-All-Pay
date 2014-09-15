@@ -284,8 +284,10 @@ NSUInteger const MCCurrencyTypeSelection = MCCurrencyTypeCurrency | MCCurrencyTy
 #if TARGET_OS_IPHONE
                     NSLog(@"JSON Error: %@", [jsonError localizedDescription]);
 #elif TARGET_OS_MAC
-                    NSAlert *jsonAlert = [NSAlert alertWithError:jsonError];
-                    [jsonAlert runModal];
+                    dispatch_async(dispatch_get_main_queue(), ^{
+                        NSAlert *jsonAlert = [NSAlert alertWithError:jsonError];
+                        [jsonAlert runModal];
+                    });
 #endif
                 } else {
 //                    NSNumber *avg24h = [exchangeRateJSON objectForKey:@"24h_avg"];
@@ -318,8 +320,10 @@ NSUInteger const MCCurrencyTypeSelection = MCCurrencyTypeCurrency | MCCurrencyTy
         } else {
 #if TARGET_OS_IPHONE
 #elif TARGET_OS_MAC
-            NSAlert *alert = [NSAlert alertWithError:error];
-            [alert runModal];
+            dispatch_async(dispatch_get_main_queue(), ^{
+                NSAlert *alert = [NSAlert alertWithError:error];
+                [alert runModal];
+            });
 #endif
         }
     }];
