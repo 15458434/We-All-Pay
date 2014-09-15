@@ -74,7 +74,7 @@ NSString * const MCStateRestoreDestinationCurrencyObject = @"MCStateRestoreDesti
 
 - (void)getXRate
 {
-    if (_decodingState == isNotDecodingRestorableState) {
+    if (_decodingState == isDecodingRestorableState || _stillBooting == isStillBooting) {
         return;
     }
     NSString *sourceCurrencyISOCode = [[[_sourceController selectedObjects] firstObject] valueForKeyPath:@"currencyISOCode"];
@@ -88,6 +88,7 @@ NSString * const MCStateRestoreDestinationCurrencyObject = @"MCStateRestoreDesti
     
     if (isInternetConnection()) {
         _xRatesController = [MCxRatesController new];
+        NSLog(@"Refetch Started.");
         [_xRatesController getExchangeRateFrom:sourceCurrencyISOCode to:destinationCurrencyISOCode withCompletionHandler:^(NSDictionary *exchangeRateResult) {
             [self setExchangeRate:[exchangeRateResult objectForKey:MCCurrencyExchangeRate]];
             if (_exchangeRate) {
@@ -150,7 +151,6 @@ NSString * const MCStateRestoreDestinationCurrencyObject = @"MCStateRestoreDesti
     [self setSourceAmountLabel:sourceName];
     [self setDestinationAmountlabel:destinationName];
     if (_reversing == isNotReversing || _decodingState == isNotDecodingRestorableState) {
-        NSLog(@"Refetch Started.");
         [self getXRate];
         [self invalidateRestorableState];
 //        }
