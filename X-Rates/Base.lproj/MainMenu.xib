@@ -166,12 +166,12 @@
                     <modifierMask key="keyEquivalentModifierMask"/>
                     <menu key="submenu" title="Exchange rate" id="Oy0-3P-8v0">
                         <items>
-                            <menuItem title="Reverse" keyEquivalent="r" id="5Cz-Qd-U9z">
+                            <menuItem title="Reverse" keyEquivalent="R" id="5Cz-Qd-U9z">
                                 <connections>
                                     <action selector="reverseConversion:" target="dX5-ZC-kzm" id="q3F-Uh-JeN"/>
                                 </connections>
                             </menuItem>
-                            <menuItem title="Refresh" keyEquivalent="R" id="6VF-cq-y5d">
+                            <menuItem title="Refresh" keyEquivalent="r" id="6VF-cq-y5d">
                                 <connections>
                                     <action selector="refreshCurrentExchangeRateValue:" target="dX5-ZC-kzm" id="JMq-7J-ioB"/>
                                 </connections>
