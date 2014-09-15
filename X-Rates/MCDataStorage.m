@@ -149,11 +149,10 @@ NSString * const MCStateRestoreDestinationCurrencyObject = @"MCStateRestoreDesti
     NSString *destinationName = [[[_destinationController selectedObjects] firstObject] currencyName];
     [self setSourceAmountLabel:sourceName];
     [self setDestinationAmountlabel:destinationName];
-    if (_reversing == isNotReversing) {
-//        if (_stillBooting == isStillBooting) {
-//            _stillBooting = isNotBooting;
-//        } else {
+    if (_reversing == isNotReversing || _decodingState == isNotDecodingRestorableState) {
+        NSLog(@"Refetch Started.");
         [self getXRate];
+        [self invalidateRestorableState];
 //        }
     }
 }
