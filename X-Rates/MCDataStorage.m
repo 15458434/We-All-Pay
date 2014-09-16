@@ -28,18 +28,25 @@ typedef NS_ENUM(BOOL, MCDecodingRestorableState) {
     isDecodingRestorableState
 };
 
+typedef NS_ENUM(BOOL, MCConversionDirection) {
+    fromSourceToDestination,
+    fromDestinationToSource
+};
+
 // State Restoration Strings
 NSString * const MCStateRestoreSourceAmount = @"MCStateRestoreSourceAmount";
 NSString * const MCStateRestoreExchangeRate = @"MCStateRestoreExchangeRate";
 NSString * const MCStateRestoreDestinationAmount = @"MCStateRestoreDesinationAmount";
 NSString * const MCStateRestoreSourceCurrencyObject = @"MCStateRestoreSourceCurrencyObject";
 NSString * const MCStateRestoreDestinationCurrencyObject = @"MCStateRestoreDestinationCurrencyObject";
+NSString * const MCConversionDirectionKey = @"MCConversionDirectionKey";
 
 @interface MCDataStorage ()
 
 @property (nonatomic) MCDecodingRestorableState decodingState;
 @property (nonatomic) MCReversing reversing;
 @property (nonatomic) MCStillBooting stillBooting;
+@property (nonatomic) MCConversionDirection conversionDirection;
 
 @property (nonatomic) short indicatorStartCount;
 @property (nonatomic, strong) NSDate *requestTimeOfLastReceivedExchangeRateResult;
@@ -63,6 +70,16 @@ NSString * const MCStateRestoreDestinationCurrencyObject = @"MCStateRestoreDesti
     NSInteger selectedRowDestinationCurrency = [_destinationTableView selectedRow];
     [_sourceTableView scrollRowToVisible:selectedRowSourceCurrency];
     [_destinationTableView scrollRowToVisible:selectedRowDestinationCurrency];
+    
+    if (_conversionDirection == fromSourceToDestination) {
+        [self setDestinationAmount:_sourceAmount];
+        [self setSourceAmount:nil];
+        _conversionDirection = fromDestinationToSource;
+    } else {
+        [self setSourceAmount:_destinationAmount];
+        [self setDestinationAmount:nil];
+        _conversionDirection = fromSourceToDestination;
+    }
     
     _reversing = isNotReversing;
     [self getXRate];
@@ -127,7 +144,11 @@ NSString * const MCStateRestoreDestinationCurrencyObject = @"MCStateRestoreDesti
             });
             if (_exchangeRate) {
                 dispatch_async(dispatch_get_main_queue(), ^{
-                    [self setDestinationAmount:@([_sourceAmount doubleValue] * [_exchangeRate doubleValue])];
+                    if (_conversionDirection == fromSourceToDestination) {
+                        [self setDestinationAmount:@([_sourceAmount doubleValue] * [_exchangeRate doubleValue])];
+                    } else {
+                        [self setSourceAmount:@([_destinationAmount doubleValue] / [_exchangeRate doubleValue])];
+                    }
                 });
             }
         }];
@@ -151,6 +172,7 @@ NSString * const MCStateRestoreDestinationCurrencyObject = @"MCStateRestoreDesti
     _decodingState = isNotDecodingRestorableState;
     _reversing = isNotReversing;
     _stillBooting = isStillBooting;
+    _conversionDirection = fromSourceToDestination;
     
     // Don't use instance variables.
     self.sourceCurrencies = [MCxRatesController getAllCurrencies];
@@ -198,10 +220,12 @@ NSString * const MCStateRestoreDestinationCurrencyObject = @"MCStateRestoreDesti
 {
     if([notification object] == _originalAmountField)
     {
+        _conversionDirection = fromSourceToDestination;
         [self setDestinationAmount:@(_sourceAmount.doubleValue * _exchangeRate.doubleValue)];
     }
     if([notification object] == _convertedAmountField)
     {
+        _conversionDirection = fromDestinationToSource;
         [self setSourceAmount:@([_destinationAmount doubleValue] / [_exchangeRate doubleValue])];
     }
 }
@@ -218,6 +242,7 @@ NSString * const MCStateRestoreDestinationCurrencyObject = @"MCStateRestoreDesti
     [self setExchangeRate:[state decodeObjectForKey:MCStateRestoreExchangeRate]];
     [[self sourceController] setSelectedObjects:[state decodeObjectForKey:MCStateRestoreSourceCurrencyObject]];
     [[self destinationController] setSelectedObjects:[state decodeObjectForKey:MCStateRestoreDestinationCurrencyObject]];
+    self.conversionDirection = [state decodeBoolForKey:MCConversionDirectionKey];
     _decodingState = isNotDecodingRestorableState;
     [self getXRate];
 }
@@ -229,6 +254,7 @@ NSString * const MCStateRestoreDestinationCurrencyObject = @"MCStateRestoreDesti
     [state encodeObject:[_sourceController selectedObjects] forKey:MCStateRestoreSourceCurrencyObject];
     [state encodeObject:[_destinationController selectedObjects] forKey:MCStateRestoreDestinationCurrencyObject];
     [state encodeObject:_exchangeRate forKey:MCCurrencyExchangeRate];
+    [state encodeBool:_conversionDirection forKey:MCConversionDirectionKey];
 }
 
 @end
