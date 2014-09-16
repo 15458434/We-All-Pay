@@ -10,7 +10,7 @@
 
 @interface MCAppDelegate : NSObject <NSApplicationDelegate, NSSharingServiceDelegate>
 
-@property (assign) IBOutlet NSWindow *window;
+@property (assign) IBOutlet NSWindow *singleCurrencyWindow;
 
 - (IBAction)giveFeedBackPressed:(id)sender;
 - (IBAction)tweetThankYouPressed:(id)sender;

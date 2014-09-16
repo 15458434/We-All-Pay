@@ -10,10 +10,8 @@
 
 #import "MCxRatesController+X_RatesAddOn.h"
 #import "MCxRatesCurrency.h"
-#import "Countly.h"
 
 #import "MCNetworkTools.h"
-#import "MCPreferencesWindowController.h"
 
 typedef NS_ENUM(BOOL, MCReversing) {
     isNotReversing,
@@ -25,6 +23,11 @@ typedef NS_ENUM(BOOL, MCStillBooting) {
     isNotBooting
 };
 
+typedef NS_ENUM(BOOL, MCDecodingRestorableState) {
+    isNotDecodingRestorableState,
+    isDecodingRestorableState
+};
+
 // State Restoration Strings
 NSString * const MCStateRestoreSourceAmount = @"MCStateRestoreSourceAmount";
 NSString * const MCStateRestoreExchangeRate = @"MCStateRestoreExchangeRate";
@@ -32,17 +35,24 @@ NSString * const MCStateRestoreDestinationAmount = @"MCStateRestoreDesinationAmo
 NSString * const MCStateRestoreSourceCurrencyObject = @"MCStateRestoreSourceCurrencyObject";
 NSString * const MCStateRestoreDestinationCurrencyObject = @"MCStateRestoreDestinationCurrencyObject";
 
+@interface MCDataStorage ()
+
+@property (nonatomic) MCDecodingRestorableState decodingState;
+@property (nonatomic) MCReversing reversing;
+@property (nonatomic) MCStillBooting stillBooting;
+
+@property (nonatomic) short indicatorStartCount;
+@property (nonatomic, strong) NSDate *requestTimeOfLastReceivedExchangeRateResult;
+
+@end
+
 @implementation MCDataStorage
-{
-    MCReversing reversing;
-    MCStillBooting stillBooting;
-}
 
 #pragma mark - Actions
 
 - (IBAction)reverseConversion:(id)sender
 {
-    reversing = isReversing;
+    _reversing = isReversing;
     
     MCxRatesCurrency *selectedSourceCurrency = [[_sourceController selectedObjects] firstObject];
     MCxRatesCurrency *selectedDestinationCurrency = [[_destinationController selectedObjects] firstObject];
@@ -54,8 +64,8 @@ NSString * const MCStateRestoreDestinationCurrencyObject = @"MCStateRestoreDesti
     [_sourceTableView scrollRowToVisible:selectedRowSourceCurrency];
     [_destinationTableView scrollRowToVisible:selectedRowDestinationCurrency];
     
+    _reversing = isNotReversing;
     [self getXRate];
-    reversing = isNotReversing;
 }
 
 - (IBAction)refreshCurrentExchangeRateValue:(id)sender
@@ -63,10 +73,37 @@ NSString * const MCStateRestoreDestinationCurrencyObject = @"MCStateRestoreDesti
     [self getXRate];
 }
 
-#pragma mark - New in this class.
+#pragma mark - Private in this class.
+
+- (void)startIndicator
+{
+    _indicatorStartCount++;
+#ifdef DEBUG
+    NSLog(@"startIndicator: %d", _indicatorStartCount);
+#endif
+    if (_indicatorStartCount == 1) {
+        [_activityIndicator startAnimation:self];
+        [_exchangeRateField setHidden:YES];
+    }
+}
+
+- (void)stopIndicator
+{
+#ifdef DEBUG
+    NSLog(@"stopIndicator: %d", _indicatorStartCount);
+#endif
+    _indicatorStartCount--;
+    if (_indicatorStartCount == 0) {
+        [_activityIndicator stopAnimation:self];
+        [_exchangeRateField setHidden:NO];
+    }
+}
 
 - (void)getXRate
 {
+    if (_decodingState == isDecodingRestorableState || _stillBooting == isStillBooting || _reversing == isReversing) {
+        return;
+    }
     NSString *sourceCurrencyISOCode = [[[_sourceController selectedObjects] firstObject] valueForKeyPath:@"currencyISOCode"];
     NSString *destinationCurrencyISOCode = [[[_destinationController selectedObjects] firstObject] valueForKey:@"currencyISOCode"];
     if (sourceCurrencyISOCode == nil) {
@@ -75,22 +112,21 @@ NSString * const MCStateRestoreDestinationCurrencyObject = @"MCStateRestoreDesti
     if (destinationCurrencyISOCode == nil) {
         return;
     }
-    // For conversion rate statistics.
-    NSDictionary *dictionary = @{@"fromCurrency": sourceCurrencyISOCode,
-                                 @"toCurrency": destinationCurrencyISOCode};
-    if ([MCPreferencesWindowController analyticsOptIn]) {
-        [[Countly sharedInstance] recordEvent:@"Get conversion rate" segmentation:dictionary count:1];
-    }
-
     
+    NSDate *now = [NSDate date];
     if (isInternetConnection()) {
         _xRatesController = [MCxRatesController new];
+        [self startIndicator];
         [_xRatesController getExchangeRateFrom:sourceCurrencyISOCode to:destinationCurrencyISOCode withCompletionHandler:^(NSDictionary *exchangeRateResult) {
-            [self setExchangeRate:[exchangeRateResult objectForKey:MCCurrencyExchangeRate]];
+            if ([_requestTimeOfLastReceivedExchangeRateResult isLessThan:now]) {
+                [self setExchangeRate:[exchangeRateResult objectForKey:MCCurrencyExchangeRate]];
+            }
+            dispatch_async(dispatch_get_main_queue(), ^{
+                [self stopIndicator];
+            });
             if (_exchangeRate) {
                 dispatch_async(dispatch_get_main_queue(), ^{
                     [self setDestinationAmount:@([_sourceAmount doubleValue] * [_exchangeRate doubleValue])];
-                    NSLog(@"Refetch done.");
                 });
             }
         }];
@@ -107,15 +143,19 @@ NSString * const MCStateRestoreDestinationCurrencyObject = @"MCStateRestoreDesti
 
 - (void)awakeFromNib
 {
+    _indicatorStartCount = 0;
+    _requestTimeOfLastReceivedExchangeRateResult = [NSDate date];
     [super awakeFromNib];
     
-    reversing = isNotReversing;
-    stillBooting = isStillBooting;
+    _decodingState = isNotDecodingRestorableState;
+    _reversing = isNotReversing;
+    _stillBooting = isStillBooting;
     
     // Don't use instance variables.
     self.sourceCurrencies = [MCxRatesController getAllCurrencies];
     self.destinationCurrencies = [MCxRatesController getAllCurrencies];
     self.sourceAmount = @1.0;
+    _stillBooting = isNotBooting;
     [self getXRate];
     
     // LayoutConstraints for the source and destination currency amount.
@@ -145,12 +185,9 @@ NSString * const MCStateRestoreDestinationCurrencyObject = @"MCStateRestoreDesti
     NSString *destinationName = [[[_destinationController selectedObjects] firstObject] currencyName];
     [self setSourceAmountLabel:sourceName];
     [self setDestinationAmountlabel:destinationName];
-    if (reversing == isNotReversing) {
-        if (stillBooting == isStillBooting) {
-            stillBooting = isNotBooting;
-        } else {
-            [self getXRate];
-        }
+    if (_reversing == isNotReversing || _decodingState == isNotDecodingRestorableState) {
+        [self getXRate];
+        [self invalidateRestorableState];
     }
 }
 
@@ -160,16 +197,10 @@ NSString * const MCStateRestoreDestinationCurrencyObject = @"MCStateRestoreDesti
 {
     if([notification object] == _originalAmountField)
     {
-        if ([MCPreferencesWindowController analyticsOptIn]) {
-            [[Countly sharedInstance] recordEvent:@"Conversion Amount" segmentation:@{@"Amount Field Type": @"source amount"} count:1];
-        }
         [self setDestinationAmount:@(_sourceAmount.doubleValue * _exchangeRate.doubleValue)];
     }
     if([notification object] == _convertedAmountField)
     {
-        if ([MCPreferencesWindowController analyticsOptIn]) {
-            [[Countly sharedInstance] recordEvent:@"Conversion Amount" segmentation:@{@"Amount Field Type": @"destination amount"} count:1];
-        }
         [self setSourceAmount:@([_destinationAmount doubleValue] / [_exchangeRate doubleValue])];
     }
 }
@@ -178,8 +209,7 @@ NSString * const MCStateRestoreDestinationCurrencyObject = @"MCStateRestoreDesti
 
 - (void)window:(NSWindow *)window didDecodeRestorableState:(NSCoder *)state
 {
-    [MCPreferencesWindowController registerDefaultPreferences];
-    
+    _decodingState = isDecodingRestorableState;
     self.sourceCurrencies = [MCxRatesController getAllCurrencies];
     self.destinationCurrencies = [MCxRatesController getAllCurrencies];
     [self setSourceAmount:[state decodeObjectForKey:MCStateRestoreSourceAmount]];
@@ -187,6 +217,7 @@ NSString * const MCStateRestoreDestinationCurrencyObject = @"MCStateRestoreDesti
     [self setExchangeRate:[state decodeObjectForKey:MCStateRestoreExchangeRate]];
     [[self sourceController] setSelectedObjects:[state decodeObjectForKey:MCStateRestoreSourceCurrencyObject]];
     [[self destinationController] setSelectedObjects:[state decodeObjectForKey:MCStateRestoreDestinationCurrencyObject]];
+    _decodingState = isNotDecodingRestorableState;
     [self getXRate];
 }
 

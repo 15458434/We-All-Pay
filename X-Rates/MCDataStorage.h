@@ -40,6 +40,7 @@
 @property (weak) IBOutlet NSTextField *originalAmountField;
 @property (weak) IBOutlet NSTextField *convertedAmountField;
 @property (weak) IBOutlet NSTextField *exchangeRateField;
+@property (weak) IBOutlet NSProgressIndicator *activityIndicator;
 
 - (IBAction)reverseConversion:(id)sender;
 - (IBAction)refreshCurrentExchangeRateValue:(id)sender;

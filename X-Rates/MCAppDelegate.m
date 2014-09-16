@@ -7,12 +7,11 @@
 //
 
 #import "MCAppDelegate.h"
-#import "Countly.h"
-#import "MCPreferencesWindowController.h"
+#import "MultipleCurrencyInterface.h"
 
 @interface MCAppDelegate ()
 
-@property (nonatomic, strong) MCPreferencesWindowController *preferencesPanel;
+@property (nonatomic, strong) MultipleCurrencyInterface *multipleCurrencyInterfaceController;
 
 @end
 
@@ -39,34 +38,38 @@
     [service performWithItems:@[tweet]];
 }
 
-- (IBAction)showPreferencesPanel:(id)sender
-{
-    // Show preference panel to the user.
-    if (!_preferencesPanel) {
-        _preferencesPanel = [[MCPreferencesWindowController alloc] initWithWindowNibName:@"MCPreferencesWindowController"];
-    }
-    [_preferencesPanel showWindow:self];
-}
-
 - (IBAction)newWindowPressed:(id)sender
 {
-    [_window makeKeyAndOrderFront:self];
+    [_singleCurrencyWindow makeKeyAndOrderFront:self];
 }
+
+- (IBAction)multipleCurrencyWindowPressed:(id)sender
+{
+    // TODO: Create this function.
+    if (!_multipleCurrencyInterfaceController) {
+        _multipleCurrencyInterfaceController = [[MultipleCurrencyInterface alloc] init];
+    }
+    [_multipleCurrencyInterfaceController showWindow:self];
+}
+
+- (IBAction)closeKeyWindow:(id)sender
+{
+    NSWindow *keyWindow = [[NSApplication sharedApplication] keyWindow];
+    [keyWindow performClose:self];
+}
+
 
 #pragma mark - Inherited from super
 
 - (BOOL)applicationShouldHandleReopen:(NSApplication *)sender hasVisibleWindows:(BOOL)flag
 {
-    [_window makeKeyAndOrderFront:self];
+    [_singleCurrencyWindow makeKeyAndOrderFront:self];
     return NO;
 }
 
 - (void)applicationWillFinishLaunching:(NSNotification *)notification
 {
-    [MCPreferencesWindowController registerDefaultPreferences];
-    if ([MCPreferencesWindowController analyticsOptIn]) {
-        [[Countly sharedInstance] startOnCloudWithAppKey:@"b82580f508600a702d0eec03adb26319a8c2c1c9"];
-    }
+
 }
 
 - (void)applicationDidFinishLaunching:(NSNotification *)aNotification
