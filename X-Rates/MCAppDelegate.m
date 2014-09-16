@@ -7,8 +7,11 @@
 //
 
 #import "MCAppDelegate.h"
+#import "MultipleCurrencyInterface.h"
 
 @interface MCAppDelegate ()
+
+@property (nonatomic, strong) MultipleCurrencyInterface *multipleCurrencyInterfaceController;
 
 @end
 
@@ -37,14 +40,30 @@
 
 - (IBAction)newWindowPressed:(id)sender
 {
-    [_window makeKeyAndOrderFront:self];
+    [_singleCurrencyWindow makeKeyAndOrderFront:self];
 }
+
+- (IBAction)multipleCurrencyWindowPressed:(id)sender
+{
+    // TODO: Create this function.
+    if (!_multipleCurrencyInterfaceController) {
+        _multipleCurrencyInterfaceController = [[MultipleCurrencyInterface alloc] init];
+    }
+    [_multipleCurrencyInterfaceController showWindow:self];
+}
+
+- (IBAction)closeKeyWindow:(id)sender
+{
+    NSWindow *keyWindow = [[NSApplication sharedApplication] keyWindow];
+    [keyWindow performClose:self];
+}
+
 
 #pragma mark - Inherited from super
 
 - (BOOL)applicationShouldHandleReopen:(NSApplication *)sender hasVisibleWindows:(BOOL)flag
 {
-    [_window makeKeyAndOrderFront:self];
+    [_singleCurrencyWindow makeKeyAndOrderFront:self];
     return NO;
 }
 

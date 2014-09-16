@@ -84,6 +84,8 @@
 		388063EF19A4D00C000CF36B /* XRCurrencyStoreControllerTest.m in Sources */ = {isa = PBXBuildFile; fileRef = 388063ED19A4D00C000CF36B /* XRCurrencyStoreControllerTest.m */; };
 		3886D3FD16B7A1CD00ECE64F /* AddressBook.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 3886D3FB16B7A1CD00ECE64F /* AddressBook.framework */; };
 		3886D3FE16B7A1CD00ECE64F /* AddressBookUI.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 3886D3FC16B7A1CD00ECE64F /* AddressBookUI.framework */; };
+		3892C11419C84E6C0050F546 /* MultipleCurrencyInterface.xib in Resources */ = {isa = PBXBuildFile; fileRef = 3892C11319C84E6C0050F546 /* MultipleCurrencyInterface.xib */; };
+		3892C11719C856720050F546 /* MultipleCurrencyInterface.m in Sources */ = {isa = PBXBuildFile; fileRef = 3892C11619C856720050F546 /* MultipleCurrencyInterface.m */; };
 		3892E3A417903EF00038894B /* MCEditTripViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 3892E3A317903EF00038894B /* MCEditTripViewController.m */; };
 		3892E3AA17904A240038894B /* MCPersonViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 3892E3A917904A240038894B /* MCPersonViewController.m */; };
 		3892E3AE179056420038894B /* MCReturnPayment.m in Sources */ = {isa = PBXBuildFile; fileRef = 3892E3AD179056420038894B /* MCReturnPayment.m */; };
@@ -313,6 +315,9 @@
 		388063ED19A4D00C000CF36B /* XRCurrencyStoreControllerTest.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = XRCurrencyStoreControllerTest.m; sourceTree = "<group>"; };
 		3886D3FB16B7A1CD00ECE64F /* AddressBook.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = AddressBook.framework; path = System/Library/Frameworks/AddressBook.framework; sourceTree = SDKROOT; };
 		3886D3FC16B7A1CD00ECE64F /* AddressBookUI.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = AddressBookUI.framework; path = System/Library/Frameworks/AddressBookUI.framework; sourceTree = SDKROOT; };
+		3892C11319C84E6C0050F546 /* MultipleCurrencyInterface.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = MultipleCurrencyInterface.xib; sourceTree = "<group>"; };
+		3892C11519C856720050F546 /* MultipleCurrencyInterface.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = MultipleCurrencyInterface.h; sourceTree = "<group>"; };
+		3892C11619C856720050F546 /* MultipleCurrencyInterface.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = MultipleCurrencyInterface.m; sourceTree = "<group>"; };
 		3892E3A217903EF00038894B /* MCEditTripViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = MCEditTripViewController.h; path = ViewControllers/MCEditTripViewController.h; sourceTree = "<group>"; };
 		3892E3A317903EF00038894B /* MCEditTripViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = MCEditTripViewController.m; path = ViewControllers/MCEditTripViewController.m; sourceTree = "<group>"; };
 		3892E3A817904A240038894B /* MCPersonViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = MCPersonViewController.h; path = ViewControllers/MCPersonViewController.h; sourceTree = "<group>"; };
@@ -772,6 +777,16 @@
 			name = Storyboard;
 			sourceTree = "<group>";
 		};
+		3892C11819C864FC0050F546 /* MultiCurrencySelectionInterface */ = {
+			isa = PBXGroup;
+			children = (
+				3892C11319C84E6C0050F546 /* MultipleCurrencyInterface.xib */,
+				3892C11519C856720050F546 /* MultipleCurrencyInterface.h */,
+				3892C11619C856720050F546 /* MultipleCurrencyInterface.m */,
+			);
+			name = MultiCurrencySelectionInterface;
+			sourceTree = "<group>";
+		};
 		3892E3AB179055F40038894B /* DataModel */ = {
 			isa = PBXGroup;
 			children = (
@@ -1012,6 +1027,7 @@
 				38FE87D3195721670008EE74 /* MCAppDelegate.h */,
 				38FE87D4195721670008EE74 /* MCAppDelegate.m */,
 				38FE87D6195721670008EE74 /* MainMenu.xib */,
+				3892C11819C864FC0050F546 /* MultiCurrencySelectionInterface */,
 				38FE87D9195721670008EE74 /* Images.xcassets */,
 				38FE87C8195721670008EE74 /* Supporting Files */,
 			);
@@ -1247,6 +1263,7 @@
 			files = (
 				38DDBF8719C1AB5E00D690D0 /* Currency info.plist in Resources */,
 				38FE87CC195721670008EE74 /* InfoPlist.strings in Resources */,
+				3892C11419C84E6C0050F546 /* MultipleCurrencyInterface.xib in Resources */,
 				38FE87DA195721670008EE74 /* Images.xcassets in Resources */,
 				38FE87D2195721670008EE74 /* Credits.rtf in Resources */,
 				38FE87D8195721670008EE74 /* MainMenu.xib in Resources */,
@@ -1393,6 +1410,7 @@
 				38BDFD8319B88D8B0026F4F8 /* XRCurrencyXRate.m in Sources */,
 				38974AFA195E8C4B00BBEA9C /* MCxRatesController+X_RatesAddOn.m in Sources */,
 				38974AFD195E8E9900BBEA9C /* MCDataStorage.m in Sources */,
+				3892C11719C856720050F546 /* MultipleCurrencyInterface.m in Sources */,
 				389E2D0019792D7600729F61 /* MCNetworkTools.m in Sources */,
 				381318BE19A250C600C821B0 /* XRCurrency.xcdatamodeld in Sources */,
 				38FE87CE195721670008EE74 /* main.m in Sources */,
