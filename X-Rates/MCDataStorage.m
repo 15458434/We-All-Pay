@@ -119,6 +119,7 @@ NSString * const MCStateRestoreDestinationCurrencyObject = @"MCStateRestoreDesti
         [self startIndicator];
         [_xRatesController getExchangeRateFrom:sourceCurrencyISOCode to:destinationCurrencyISOCode withCompletionHandler:^(NSDictionary *exchangeRateResult) {
             if ([_requestTimeOfLastReceivedExchangeRateResult isLessThan:now]) {
+                _requestTimeOfLastReceivedExchangeRateResult = now;
                 [self setExchangeRate:[exchangeRateResult objectForKey:MCCurrencyExchangeRate]];
             }
             dispatch_async(dispatch_get_main_queue(), ^{
