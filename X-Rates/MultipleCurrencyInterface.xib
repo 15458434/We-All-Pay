@@ -28,7 +28,6 @@
                             <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                             <subviews>
                                 <tableView verticalHuggingPriority="750" allowsExpansionToolTips="YES" columnAutoresizingStyle="lastColumnOnly" columnSelection="YES" multipleSelection="NO" autosaveColumns="NO" rowSizeStyle="automatic" headerView="PE0-GF-Jlt" viewBased="YES" id="Z75-On-5iw">
-                                    <rect key="frame" x="0.0" y="0.0" width="238" height="134"/>
                                     <autoresizingMask key="autoresizingMask"/>
                                     <size key="intercellSpacing" width="3" height="2"/>
                                     <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
@@ -139,7 +138,7 @@
                             <rect key="frame" x="1" y="119" width="223" height="15"/>
                             <autoresizingMask key="autoresizingMask"/>
                         </scroller>
-                        <scroller key="verticalScroller" hidden="YES" verticalHuggingPriority="750" horizontal="NO" id="6Ma-vn-OSA">
+                        <scroller key="verticalScroller" hidden="YES" verticalHuggingPriority="750" doubleValue="1" horizontal="NO" id="6Ma-vn-OSA">
                             <rect key="frame" x="224" y="17" width="15" height="102"/>
                             <autoresizingMask key="autoresizingMask"/>
                         </scroller>
@@ -212,7 +211,7 @@
                     <toolbarItem reference="y79-s3-vt0"/>
                 </defaultToolbarItems>
             </toolbar>
-            <point key="canvasLocation" x="624" y="374"/>
+            <point key="canvasLocation" x="659" y="404"/>
         </window>
     </objects>
 </document>
