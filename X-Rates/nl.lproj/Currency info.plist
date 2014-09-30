@@ -312,7 +312,7 @@
 	<key>TRY</key>
 	<dict>
 		<key>name</key>
-		<string>Nieuwe Turkse lira</string>
+		<string>Turkse lira</string>
 		<key>type</key>
 		<string>currency</string>
 	</dict>

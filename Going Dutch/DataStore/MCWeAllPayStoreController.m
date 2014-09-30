@@ -65,6 +65,8 @@ MCiCloudUse const isiCloudUsed = iCloudIsNotUsed;
             [defaultCurrencyStore prepareStoreWithCompletionHandler:^{
                 NSLog(@"CurrencyStore available.");
             }];
+        } else if (![XRCurrencyStoreController doesMyDatabaseHaveTheRightVersion]) {
+            [XRCurrencyStoreController updateMyDatabase];
         }
     }];
 }
