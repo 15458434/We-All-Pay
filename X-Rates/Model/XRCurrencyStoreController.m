@@ -78,10 +78,10 @@ NSString * const XRCurrencyDatabaseVersionKey = @"XRCurrencyDatabaseVersionKey";
         default: {
             // Get current language
             // if current language is dutch update
-#if DEBUG
             if ([languageCode isEqualToString:@"nl"]) {
-#endif
+#if DEBUG
                 NSLog(@"Language is dutch");
+#endif
                 NSDictionary *currencyDictionary = [MCxRatesController getCurrencyDictionary];
                 NSDictionary *turkishCurrency = [currencyDictionary objectForKey:@"TRY"];
 #if DEBUG

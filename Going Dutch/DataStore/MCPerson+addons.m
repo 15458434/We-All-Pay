@@ -75,7 +75,7 @@
 {
     __block UIImage *thisImage = image;
     if (!thisImage) {
-        thisImage = [UIImage imageNamed:@"No picture image 2 - We All Pay"];
+        thisImage = [UIImage imageNamed:@"No picture Image 3 - thumbnail"];
     }
     CGSize imageSize = [thisImage size];
     CGRect thumbnailRect = CGRectMake(0, 0, 44, 44);
@@ -104,11 +104,10 @@
 {
     __block UIImage *thisImage = image;
     if (!thisImage) {
-        //image = [UIImage imageNamed:@"girl 100x100"];
-        thisImage = [UIImage imageNamed:@"No picture image 2 - We All Pay"];
+        thisImage = [UIImage imageNamed:@"No picture Image 3 - picture"];
     }
     CGSize imageSize = [thisImage size];
-    CGRect pictureRect = CGRectMake(0, 0, 80, 80);
+    CGRect pictureRect = CGRectMake(0, 0, 160, 160);
     float ratio = MAX(pictureRect.size.width / imageSize.width, pictureRect.size.height / imageSize.height);
         
     UIGraphicsBeginImageContextWithOptions(pictureRect.size, NO, 0.0);
