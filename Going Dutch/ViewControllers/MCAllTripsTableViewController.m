@@ -184,6 +184,8 @@
 - (void)viewWillDisappear:(BOOL)animated
 {
     [super viewWillDisappear:animated];
+    
+    _dataController = nil;
 }
 
 - (void)viewDidDisappear:(BOOL)animated

@@ -464,6 +464,8 @@
     [super viewDidDisappear:animated];
     
     [MCTools setAdBannerIfNotPaid:NO forViewController:self];
+    
+    _dataController = nil;
 }
 
 - (BOOL)disablesAutomaticKeyboardDismissal
