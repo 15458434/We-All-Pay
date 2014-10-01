@@ -147,6 +147,8 @@ NSUInteger const MCCurrencyTypeSelection = MCCurrencyTypeCurrency | MCCurrencyTy
         }
     }
     [currencyDictionaryFromPlist removeObjectsForKeys:keyToBeDeletedObjects];
+    NSUInteger *count = currencyDictionaryFromPlist.allKeys.count;
+    NSLog(@"%d of currencies", count);
     return currencyDictionaryFromPlist;
 }
 

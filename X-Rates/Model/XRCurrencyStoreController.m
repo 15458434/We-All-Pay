@@ -122,6 +122,9 @@ NSString * const XRCurrencyDatabaseVersionKey = @"XRCurrencyDatabaseVersionKey";
     if (amountOfCurrencies == 0) {
         NSDictionary *availableCurrencies = [MCxRatesController getCurrencyDictionary];
         NSArray *availableCurrencyCodes = [availableCurrencies allKeys];
+#if DEBUG
+        NSLog(@"%d currencies available", availableCurrencies.count);
+#endif
         for (NSString *currencyCode in availableCurrencyCodes) {
             // For each currencyCode add it.
             XRCurrency *newCurrency = [NSEntityDescription insertNewObjectForEntityForName:@"XRCurrency" inManagedObjectContext:context];
