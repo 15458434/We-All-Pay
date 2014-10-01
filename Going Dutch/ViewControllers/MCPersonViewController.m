@@ -196,26 +196,26 @@
     }
 }
 
-- (void)setCircularImageOnPictureView:(UIImage *)image
-{
-    __weak MCPersonViewController *weakSelf = self;
-    
-    __block UIImage *copyOfImage = [image copy];
-    dispatch_queue_t imageProcessQueue;
-    imageProcessQueue = dispatch_queue_create("imageProcessQueue", NULL);
-    
-    dispatch_async(imageProcessQueue, ^{
-        CGRect circularImageRect = CGRectMake(0, 0, 160, 160);
-        UIImage *circularImage = [MCTools cutCircularImageFrom:copyOfImage toDestinationRect:circularImageRect];
-        dispatch_async(dispatch_get_main_queue(), ^{
-            MCPersonViewController *strongSelf = weakSelf;
-            if (strongSelf) {
-                [[strongSelf pictureView] setImage:circularImage];
-                [[strongSelf pictureView] setNeedsDisplay];
-            }
-        });
-    });
-}
+//- (void)setCircularImageOnPictureView:(UIImage *)image
+//{
+//    __weak MCPersonViewController *weakSelf = self;
+//    
+//    __block UIImage *copyOfImage = [image copy];
+//    dispatch_queue_t imageProcessQueue;
+//    imageProcessQueue = dispatch_queue_create("imageProcessQueue", NULL);
+//    
+//    dispatch_async(imageProcessQueue, ^{
+//        CGRect circularImageRect = CGRectMake(0, 0, 160, 160);
+//        UIImage *circularImage = [MCTools cutCircularImageFrom:copyOfImage toDestinationRect:circularImageRect];
+//        dispatch_async(dispatch_get_main_queue(), ^{
+//            MCPersonViewController *strongSelf = weakSelf;
+//            if (strongSelf) {
+//                [[strongSelf pictureView] setImage:circularImage];
+//                [[strongSelf pictureView] setNeedsDisplay];
+//            }
+//        });
+//    });
+//}
 
 #pragma mark - Private in this class
 
@@ -226,7 +226,7 @@
     [lastNameField setText:[_thisPerson lastName]];
     MCEmailAddress *emailAddress = [MCEmailAddress fetchEmailAddressFor:_thisPerson];
     [emailField setText:[emailAddress emailAddress]];
-    [self setCircularImageOnPictureView:[_thisPerson picture]];
+    _pictureView.image = _thisPerson.picture;
     if ([[_thisPerson emailAddress] count] < 2) {
         [selectEmailAddressButton setHidden:YES];
     } else {

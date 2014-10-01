@@ -97,9 +97,7 @@
 		3897157C17901D0F005BE03E /* MCTwoLabelsTitleView.m in Sources */ = {isa = PBXBuildFile; fileRef = 3897157817901D0F005BE03E /* MCTwoLabelsTitleView.m */; };
 		3897157D17901D0F005BE03E /* MCTwoLabelsTitleView.xib in Resources */ = {isa = PBXBuildFile; fileRef = 3897157917901D0F005BE03E /* MCTwoLabelsTitleView.xib */; };
 		3897158717901D55005BE03E /* MCPaymentTableViewCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 3897157F17901D55005BE03E /* MCPaymentTableViewCell.m */; };
-		3897158817901D55005BE03E /* MCPaymentTableViewCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 3897158017901D55005BE03E /* MCPaymentTableViewCell.xib */; };
 		3897158917901D55005BE03E /* MCPersonTableViewCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 3897158217901D55005BE03E /* MCPersonTableViewCell.m */; };
-		3897158A17901D55005BE03E /* MCPersonTableViewCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 3897158317901D55005BE03E /* MCPersonTableViewCell.xib */; };
 		3897158B17901D55005BE03E /* MCReturnPaymentTableViewCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 3897158517901D55005BE03E /* MCReturnPaymentTableViewCell.m */; };
 		3897158C17901D55005BE03E /* MCReturnPaymentTableViewCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 3897158617901D55005BE03E /* MCReturnPaymentTableViewCell.xib */; };
 		3897159217902E35005BE03E /* MCSharedBillTableViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 3897159117902E35005BE03E /* MCSharedBillTableViewController.m */; };
@@ -336,10 +334,8 @@
 		3897157917901D0F005BE03E /* MCTwoLabelsTitleView.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; name = MCTwoLabelsTitleView.xib; path = Views/MCTwoLabelsTitleView.xib; sourceTree = "<group>"; };
 		3897157E17901D55005BE03E /* MCPaymentTableViewCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = MCPaymentTableViewCell.h; path = Views/MCPaymentTableViewCell.h; sourceTree = "<group>"; };
 		3897157F17901D55005BE03E /* MCPaymentTableViewCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = MCPaymentTableViewCell.m; path = Views/MCPaymentTableViewCell.m; sourceTree = "<group>"; };
-		3897158017901D55005BE03E /* MCPaymentTableViewCell.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; name = MCPaymentTableViewCell.xib; path = Views/MCPaymentTableViewCell.xib; sourceTree = "<group>"; };
 		3897158117901D55005BE03E /* MCPersonTableViewCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = MCPersonTableViewCell.h; path = Views/MCPersonTableViewCell.h; sourceTree = "<group>"; };
 		3897158217901D55005BE03E /* MCPersonTableViewCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = MCPersonTableViewCell.m; path = Views/MCPersonTableViewCell.m; sourceTree = "<group>"; };
-		3897158317901D55005BE03E /* MCPersonTableViewCell.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; name = MCPersonTableViewCell.xib; path = Views/MCPersonTableViewCell.xib; sourceTree = "<group>"; };
 		3897158417901D55005BE03E /* MCReturnPaymentTableViewCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = MCReturnPaymentTableViewCell.h; path = Views/MCReturnPaymentTableViewCell.h; sourceTree = "<group>"; };
 		3897158517901D55005BE03E /* MCReturnPaymentTableViewCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = MCReturnPaymentTableViewCell.m; path = Views/MCReturnPaymentTableViewCell.m; sourceTree = "<group>"; };
 		3897158617901D55005BE03E /* MCReturnPaymentTableViewCell.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; name = MCReturnPaymentTableViewCell.xib; path = Views/MCReturnPaymentTableViewCell.xib; sourceTree = "<group>"; };
@@ -928,10 +924,8 @@
 				38EFF2D516D215FB001C8248 /* MCAllTripsTableViewCell.xib */,
 				38EFF2D216D215BE001C8248 /* MCAllTripsTableViewCell.h */,
 				38EFF2D316D215BE001C8248 /* MCAllTripsTableViewCell.m */,
-				3897158017901D55005BE03E /* MCPaymentTableViewCell.xib */,
 				3897157E17901D55005BE03E /* MCPaymentTableViewCell.h */,
 				3897157F17901D55005BE03E /* MCPaymentTableViewCell.m */,
-				3897158317901D55005BE03E /* MCPersonTableViewCell.xib */,
 				3897158117901D55005BE03E /* MCPersonTableViewCell.h */,
 				3897158217901D55005BE03E /* MCPersonTableViewCell.m */,
 				3897158617901D55005BE03E /* MCReturnPaymentTableViewCell.xib */,
@@ -1242,8 +1236,6 @@
 				3872C0DD19041C95008C54D7 /* MCTableEmptyMessage_iPad.xib in Resources */,
 				3897157D17901D0F005BE03E /* MCTwoLabelsTitleView.xib in Resources */,
 				380F44F21813250600FF7E10 /* No picture image 2 - We All Pay.png in Resources */,
-				3897158817901D55005BE03E /* MCPaymentTableViewCell.xib in Resources */,
-				3897158A17901D55005BE03E /* MCPersonTableViewCell.xib in Resources */,
 				3899D3F4194F43AF00893323 /* Product ids.plist in Resources */,
 				3897158C17901D55005BE03E /* MCReturnPaymentTableViewCell.xib in Resources */,
 			);
@@ -1637,7 +1629,7 @@
 				GCC_PREFIX_HEADER = "Going Dutch/We all pay-Prefix.pch";
 				GCC_SYMBOLS_PRIVATE_EXTERN = NO;
 				INFOPLIST_FILE = "Going Dutch/We all pay-Info.plist";
-				IPHONEOS_DEPLOYMENT_TARGET = 8.0;
+				IPHONEOS_DEPLOYMENT_TARGET = 7.0;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
 				LIBRARY_SEARCH_PATHS = (
 					"$(inherited)",
@@ -1666,7 +1658,7 @@
 				GCC_PREFIX_HEADER = "Going Dutch/We all pay-Prefix.pch";
 				GCC_SYMBOLS_PRIVATE_EXTERN = YES;
 				INFOPLIST_FILE = "Going Dutch/We all pay-Info.plist";
-				IPHONEOS_DEPLOYMENT_TARGET = 8.0;
+				IPHONEOS_DEPLOYMENT_TARGET = 7.0;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
 				LIBRARY_SEARCH_PATHS = (
 					"$(inherited)",

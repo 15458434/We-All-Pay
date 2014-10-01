@@ -36,6 +36,7 @@
 
 + (UIImage *)cutCircularImageFrom:(UIImage *)sourceImage toDestinationRect:(CGRect)newPictureRect
 {
+    abort();
     UIImage *thisImage = sourceImage;
     NSParameterAssert(thisImage);
     NSParameterAssert(newPictureRect.size.height);

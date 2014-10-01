@@ -80,9 +80,9 @@
     peoplePickerCancelled = YES;
     [payerView setText:[[_thisPayment payingPerson] getFullName]];
     if ([_thisPayment payingPerson]) {
-        [self setCircularImageOnPictureView:[[_thisPayment payingPerson] picture]];
+        _payerPicture.image = _thisPayment.payingPerson.picture;
     } else {
-        [_payerPicture setImage:nil];
+        _payerPicture.image = nil;
     }
     [payerView resignFirstResponder];
 }
@@ -167,25 +167,25 @@
     return UIStatusBarStyleLightContent;
 }
 
-- (void)setCircularImageOnPictureView:(UIImage *)image
-{
-    __weak MCPaymentViewController *weakSelf = self;
-    
-    dispatch_queue_t imageProcessQueue;
-    imageProcessQueue = dispatch_queue_create("imageProcessQueue", NULL);
-    
-    dispatch_async(imageProcessQueue, ^{
-        CGRect circularImageRect = CGRectMake(0, 0, 60, 60);
-        UIImage *circularImage = [MCTools cutCircularImageFrom:image toDestinationRect:circularImageRect];
-        dispatch_async(dispatch_get_main_queue(), ^{
-            MCPaymentViewController *strongSelf = weakSelf;
-            if (strongSelf) {
-                [[strongSelf payerPicture] setImage:circularImage];
-                [[strongSelf payerPicture] setNeedsDisplay];
-            }
-        });
-    });
-}
+//- (void)setCircularImageOnPictureView:(UIImage *)image
+//{
+//    __weak MCPaymentViewController *weakSelf = self;
+//    
+//    dispatch_queue_t imageProcessQueue;
+//    imageProcessQueue = dispatch_queue_create("imageProcessQueue", NULL);
+//    
+//    dispatch_async(imageProcessQueue, ^{
+//        CGRect circularImageRect = CGRectMake(0, 0, 60, 60);
+//        UIImage *circularImage = [MCTools cutCircularImageFrom:image toDestinationRect:circularImageRect];
+//        dispatch_async(dispatch_get_main_queue(), ^{
+//            MCPaymentViewController *strongSelf = weakSelf;
+//            if (strongSelf) {
+//                [[strongSelf payerPicture] setImage:circularImage];
+//                [[strongSelf payerPicture] setNeedsDisplay];
+//            }
+//        });
+//    });
+//}
 
 - (void)tappedInTheBackground:(id)selector
 {
@@ -218,7 +218,7 @@
 {
     [payerView setText:[listOfPeople[row] getFullName]];
     [_thisPayment setPayingPerson:listOfPeople[row]];
-    [self setCircularImageOnPictureView:[listOfPeople[row] picture]];
+    _payerPicture.image = [listOfPeople[row] picture];
 }
 
 #pragma mark - PickerViewDataSource
@@ -284,7 +284,7 @@
             row = [personPickerView selectedRowInComponent:0];
         }
         [payerView setText:[listOfPeople[row] getFullName]];
-        [self setCircularImageOnPictureView:[listOfPeople[row] picture]];
+        _payerPicture.image = [listOfPeople[row] picture];
         [personPickerView selectRow:row inComponent:0 animated:YES];
         kindOfPaidFieldDismiss = otherTextFieldSelected;
     }
@@ -322,10 +322,9 @@
             [[MCWeAllPayStoreController defaultStore] endUndoGroupAndUndoWithoutRegistration];
             [payerView setText:[[_thisPayment payingPerson] getFullName]];
             if ([_thisPayment payingPerson]) {
-                [self setCircularImageOnPictureView:[[_thisPayment payingPerson] picture]];
+                _payerPicture.image = _thisPayment.payingPerson.picture;
             } else {
-                NSLog(@"Is het stuk?");
-                [self setCircularImageOnPictureView:nil];
+                _payerPicture.image = nil;
             }
         }
     } else if (textField == itemView) {
@@ -439,7 +438,7 @@
     [payerView setDelegate:self];
     [itemView setText:[_thisPayment descriptionOfPayment]];
     if ([_thisPayment payingPerson]) {
-        [self setCircularImageOnPictureView:[[_thisPayment payingPerson] picture]];
+        _payerPicture.image = _thisPayment.payingPerson.picture;
     }
 
     if (!isNew) {
@@ -556,7 +555,7 @@
     // Set the cell contents
     MCPaymentPresence *thisCellsPresence = [_dataController objectAtIndexPath:indexPath];
     [[cell nameLabel] setText:[[thisCellsPresence person] getFullName]];
-    [cell setCircularImage:[[thisCellsPresence person] thumbnail]];
+    cell.personView.image = thisCellsPresence.person.thumbnail;
     [[cell isPresentSwitch] setOn:[[thisCellsPresence isPersonPresent] boolValue]];
     NSString *owesPreString = NSLocalizedString(@"OWES_FROM_THIS_PAYMENT", @"owes");
     NSString *owesString = [NSString stringWithFormat:@"%@ %@", owesPreString, [thisCellsPresence getCurrencyStringOfAverageOwe]];

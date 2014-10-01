@@ -20,6 +20,6 @@
 
 - (IBAction)presenceIsSwitched:(id)sender;
 
-- (void)setCircularImage:(UIImage *)personImage;
+//- (void)setCircularImage:(UIImage *)personImage;
 
 @end
