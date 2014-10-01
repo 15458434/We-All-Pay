@@ -409,7 +409,7 @@
 
 - (void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath
 {
-    [self performSegueWithIdentifier:@"openTonightsBill" sender:self];
+//    [self performSegueWithIdentifier:@"openTonightsBill" sender:self];
 }
 
 #pragma mark - UIStoryboard

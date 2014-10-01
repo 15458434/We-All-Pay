@@ -61,23 +61,23 @@
 
 - (void)setSharedBillViewControllerFromStoryboard
 {
-    if (!sharedBillTableViewController) {
+    if (!_sharedBillTableViewController) {
         UIStoryboard *storyboard = [UIStoryboard storyboardWithName:@"Main-Iphone" bundle:nil];
-        sharedBillTableViewController = [storyboard instantiateViewControllerWithIdentifier:@"MCSharedBillTableViewController"];
-        [sharedBillTableViewController setTonightsBill:[self tonightsBill]];
-        [sharedBillTableViewController setMailDelegate:self];
+        _sharedBillTableViewController = [storyboard instantiateViewControllerWithIdentifier:@"MCSharedBillTableViewController"];
+        [_sharedBillTableViewController setTonightsBill:[self tonightsBill]];
+        [_sharedBillTableViewController setMailDelegate:self];
         [[self pageViewIndicator] setCurrentPage:1];
         [[self titleLabel] setText:NSLocalizedString(@"PAYMENTS_PAGEVIEWCONTROLLER", @"Payments")];
-        NSArray *views = @[sharedBillTableViewController];
+        NSArray *views = @[_sharedBillTableViewController];
         [self setViewControllers:views direction:UIPageViewControllerNavigationDirectionReverse animated:YES completion:nil];
         [self setDelegate:self];
         [self setDataSource:self];
         NSManagedObjectContext *backgroundContext = [[MCWeAllPayStoreController defaultStore] backgroundThreadContext];
         [backgroundContext performBlock:^{
             if (_writableTonightsBill) {
-                [sharedBillTableViewController setWritableTonightsBill:_writableTonightsBill];
+                [_sharedBillTableViewController setWritableTonightsBill:_writableTonightsBill];
             } else {
-                [[NSNotificationCenter defaultCenter] addObserver:sharedBillTableViewController selector:@selector(writableTonightsBillIsCreated:) name:MCWritableTonightsBillReady object:self];
+                [[NSNotificationCenter defaultCenter] addObserver:_sharedBillTableViewController selector:@selector(writableTonightsBillIsCreated:) name:MCWritableTonightsBillReady object:self];
             }
         }];
     }
@@ -85,11 +85,11 @@
 
 - (void)setEditTripViewControllerFromStoryboard
 {
-    if (!editTripTableViewController) {
+    if (!_editTripTableViewController) {
         UIStoryboard *storyboard = [UIStoryboard storyboardWithName:@"Main-Iphone" bundle:nil];
-        editTripTableViewController = [storyboard instantiateViewControllerWithIdentifier:@"MCEditTripViewController"];
-        [editTripTableViewController setTonightsBill:[self tonightsBill]];
-        NSArray *views = @[editTripTableViewController];
+        _editTripTableViewController = [storyboard instantiateViewControllerWithIdentifier:@"MCEditTripViewController"];
+        [_editTripTableViewController setTonightsBill:[self tonightsBill]];
+        NSArray *views = @[_editTripTableViewController];
         [[self pageViewIndicator] setCurrentPage:0];
         [[self titleLabel] setText:NSLocalizedString(@"PEOPLE_PRESENT_PAGEVIEWCONTROLLER", @"People present")];
         [self setViewControllers:views direction:UIPageViewControllerNavigationDirectionForward animated:YES completion:nil];
@@ -98,13 +98,13 @@
         NSManagedObjectContext *backgroundContext = [[MCWeAllPayStoreController defaultStore] backgroundThreadContext];
         [backgroundContext performBlock:^{
             if (_writableTonightsBill) {
-                [editTripTableViewController setWritableTonightsBill:_writableTonightsBill];
+                [_editTripTableViewController setWritableTonightsBill:_writableTonightsBill];
                 NSManagedObjectContext *mainContext = [[MCWeAllPayStoreController defaultStore] mainThreadContext];
                 [mainContext performBlock:^{
-                    [editTripTableViewController setTonightsBill:_tonightsBill];
+                    [_editTripTableViewController setTonightsBill:_tonightsBill];
                 }];
             } else {
-                [[NSNotificationCenter defaultCenter] addObserver:editTripTableViewController selector:@selector(writableTonightsBillIsCreated:) name:MCWritableTonightsBillReady object:self];
+                [[NSNotificationCenter defaultCenter] addObserver:_editTripTableViewController selector:@selector(writableTonightsBillIsCreated:) name:MCWritableTonightsBillReady object:self];
             }
         }];
     }
@@ -197,7 +197,7 @@
     
     [[self view] setBackgroundColor:[UIColor groupTableViewBackgroundColor]];
     
-    [[self navigationController] setToolbarHidden:YES animated:YES];
+    [[self navigationController] setToolbarHidden:YES animated:NO];
 }
 
 - (void)viewWillAppear:(BOOL)animated
@@ -318,13 +318,13 @@
 - (UIViewController *)pageViewController:(UIPageViewController *)pageViewController viewControllerBeforeViewController:(UIViewController *)viewController
 {
     if ([[self viewControllers][0] isKindOfClass:[MCSharedBillTableViewController class]]) {
-        if (!editTripTableViewController) {
+        if (!_editTripTableViewController) {
             UIStoryboard *storyboard = [UIStoryboard storyboardWithName:@"Main-Iphone" bundle:nil];
-            editTripTableViewController = [storyboard instantiateViewControllerWithIdentifier:@"MCEditTripViewController"];
-            [editTripTableViewController setTonightsBill:[self tonightsBill]];
-            [editTripTableViewController setDelegate:self];
+            _editTripTableViewController = [storyboard instantiateViewControllerWithIdentifier:@"MCEditTripViewController"];
+            [_editTripTableViewController setTonightsBill:[self tonightsBill]];
+            [_editTripTableViewController setDelegate:self];
         }
-        return editTripTableViewController;
+        return _editTripTableViewController;
     } else {
         return nil;
     }
@@ -333,14 +333,14 @@
 - (UIViewController *)pageViewController:(UIPageViewController *)pageViewController viewControllerAfterViewController:(UIViewController *)viewController
 {
     if ([[self viewControllers][0] isKindOfClass:[MCEditTripViewController class]]) {
-        if (!sharedBillTableViewController) {
+        if (!_sharedBillTableViewController) {
             UIStoryboard *storyboard = [UIStoryboard storyboardWithName:@"Main-Iphone" bundle:nil];
-            sharedBillTableViewController = [storyboard instantiateViewControllerWithIdentifier:@"MCSharedBillTableViewController"];
-            [sharedBillTableViewController setTonightsBill:[self tonightsBill]];
-            [sharedBillTableViewController setDelegate:self];
-            [sharedBillTableViewController setMailDelegate:self];
+            _sharedBillTableViewController = [storyboard instantiateViewControllerWithIdentifier:@"MCSharedBillTableViewController"];
+            [_sharedBillTableViewController setTonightsBill:[self tonightsBill]];
+            [_sharedBillTableViewController setDelegate:self];
+            [_sharedBillTableViewController setMailDelegate:self];
         }
-        return sharedBillTableViewController;
+        return _sharedBillTableViewController;
     } else {
         return nil;
     }
