@@ -263,8 +263,7 @@
     MCPerson *thisCellsPerson = [_dataController objectAtIndexPath:indexPath];
     MCPersonTableViewCell_iPad *thisCell = [tableView dequeueReusableCellWithIdentifier:@"MCPersonTableViewCell_iPad"];
     
-    [thisCell setCircularImage:[thisCellsPerson picture]];
-    //[[thisCell personImage] setImage:[thisCellsPerson picture]];
+    thisCell.personImage.image = thisCellsPerson.picture;
     [[thisCell nameLabel] setText:[thisCellsPerson getFullName]];
     [[thisCell emailLabel] setText:[thisCellsPerson defaultEmailAddress]];
     NSNumberFormatter *nf = [[NSNumberFormatter alloc] init];

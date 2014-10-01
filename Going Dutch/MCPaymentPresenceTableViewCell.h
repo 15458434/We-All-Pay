@@ -21,6 +21,6 @@
 @property (weak, nonatomic) id<MCDismissKeyboardProtocol> keyboardDismissDelegate;
 - (IBAction)switchPresence:(id)sender;
 
-- (void)setCircularImage:(UIImage *)personImage;
+//- (void)setCircularImage:(UIImage *)personImage;
 
 @end

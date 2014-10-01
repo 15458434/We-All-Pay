@@ -12,25 +12,25 @@
 
 #pragma mark - New in this class.
 
-- (void)setCircularImage:(UIImage *)personImage
-{
-    __weak MCPersonTableViewCell_iPad *weakSelf = self;
-    
-    dispatch_queue_t imageProcessQueue;
-    imageProcessQueue = dispatch_queue_create("imageProcessQueue", NULL);
-    
-    dispatch_async(imageProcessQueue, ^{
-        CGRect circularImageRect = CGRectMake(0, 0, 80, 80);
-        UIImage *circularImage = [MCTools cutCircularImageFrom:personImage toDestinationRect:circularImageRect];
-        dispatch_async(dispatch_get_main_queue(), ^{
-            MCPersonTableViewCell_iPad *strongSelf = weakSelf;
-            if (strongSelf) {
-                [[strongSelf personImage] setImage:circularImage];
-                [strongSelf setNeedsDisplay];
-            }
-        });
-    });
-}
+//- (void)setCircularImage:(UIImage *)personImage
+//{
+//    __weak MCPersonTableViewCell_iPad *weakSelf = self;
+//    
+//    dispatch_queue_t imageProcessQueue;
+//    imageProcessQueue = dispatch_queue_create("imageProcessQueue", NULL);
+//    
+//    dispatch_async(imageProcessQueue, ^{
+//        CGRect circularImageRect = CGRectMake(0, 0, 80, 80);
+//        UIImage *circularImage = [MCTools cutCircularImageFrom:personImage toDestinationRect:circularImageRect];
+//        dispatch_async(dispatch_get_main_queue(), ^{
+//            MCPersonTableViewCell_iPad *strongSelf = weakSelf;
+//            if (strongSelf) {
+//                [[strongSelf personImage] setImage:circularImage];
+//                [strongSelf setNeedsDisplay];
+//            }
+//        });
+//    });
+//}
 
 #pragma mark - Inherited From Super
 

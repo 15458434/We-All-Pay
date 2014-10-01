@@ -15,6 +15,6 @@
 @property (weak, nonatomic) IBOutlet UILabel *moneyPaidLabel;
 @property (weak, nonatomic) IBOutlet UIImageView *pictureOfPayer;
 
-- (void)setCircularImage:(UIImage *)personImage;
+//- (void)setCircularImage:(UIImage *)personImage;
 
 @end
