@@ -345,10 +345,10 @@
 
 #pragma mark - Table view delegate
 
-//- (CGFloat)tableView:(UITableView *)tableView heightForRowAtIndexPath:(NSIndexPath *)indexPath
-//{
-//    return 71;
-//}
+- (CGFloat)tableView:(UITableView *)tableView heightForRowAtIndexPath:(NSIndexPath *)indexPath
+{
+    return 59;
+}
 
 #pragma mark - Table view data source
 
