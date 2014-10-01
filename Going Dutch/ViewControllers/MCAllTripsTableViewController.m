@@ -128,10 +128,10 @@
     // [[self navigationItem] setTitle:NSLocalizedString(@"BACK_TITLE_ALL_TRIPS_VIEW", @"back")];
     
     // Load the nib file
-    UINib *nib = [UINib nibWithNibName:@"MCAllTripsTableViewCell" bundle:nil];
+//    UINib *nib = [UINib nibWithNibName:@"MCAllTripsTableViewCell" bundle:nil];
     
     // Register this nib that contains the cell.
-    [[ self tableView] registerNib:nib forCellReuseIdentifier:@"MCAllTripsTableViewCell"];
+//    [[ self tableView] registerNib:nib forCellReuseIdentifier:@"MCAllTripsTableViewCell"];
     
     emptyMessage = [[NSBundle mainBundle] loadNibNamed:@"MCTableEmptyMessage" owner:self options:nil][0];
     [[emptyMessage bigMessage] setAlpha:0.0];
