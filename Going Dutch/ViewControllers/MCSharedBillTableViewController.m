@@ -449,7 +449,10 @@
             }
         }
         [[[segue destinationViewController] viewControllers][0] setThisPayment:thePayment];
-        [[[segue destinationViewController] viewControllers][0] setDelegate:self];
+//        if ([[[segue destinationViewController] viewControllers][0] respondsToSelector:@selector(setDelegate:)]) {
+//            [[[segue destinationViewController] viewControllers][0] setDelegate:self];
+//        }
+
     }
     
 }

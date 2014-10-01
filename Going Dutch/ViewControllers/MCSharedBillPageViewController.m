@@ -205,10 +205,8 @@
     [super viewWillAppear:animated];
     
     id destination = [self parentViewController];
-    BOOL conformsGet = [destination conformsToProtocol:@protocol(MCTonightsBillTransfer)];
-    NSParameterAssert(conformsGet);
-    BOOL conformsCurrentView = [destination conformsToProtocol:@protocol(MCCurrentViewDelegate)];
-    NSParameterAssert(conformsCurrentView);
+    NSParameterAssert([destination conformsToProtocol:@protocol(MCTonightsBillTransfer)]);
+    NSParameterAssert([destination conformsToProtocol:@protocol(MCCurrentViewDelegate)]);
     
     if ([destination currentView] == MCSelectSharedBillTableView) {
         [self setSharedBillViewControllerFromStoryboard];
