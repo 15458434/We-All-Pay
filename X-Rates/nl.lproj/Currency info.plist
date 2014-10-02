@@ -112,7 +112,7 @@
 	<key>USN</key>
 	<dict>
 		<key>name</key>
-		<string>Amerikaanse dollar (Same day) (aandelen)</string>
+		<string>Amerikaanse dollar (Next day) (aandelen)</string>
 		<key>type</key>
 		<string>funds code</string>
 	</dict>

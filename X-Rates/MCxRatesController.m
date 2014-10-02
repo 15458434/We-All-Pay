@@ -71,13 +71,23 @@ NSUInteger const MCCurrencyTypeSelection = MCCurrencyTypeCurrency | MCCurrencyTy
     
     // Load the file content and read the data into arrays
     NSMutableDictionary *currencyDictionaryFromPlist = [[NSMutableDictionary alloc] initWithContentsOfFile:path];
-    NSMutableArray *keyToBeDeletedObjects = [NSMutableArray new];
+#if DEBUG
+    NSUInteger totalAmountInPlist = [[currencyDictionaryFromPlist allKeys] count];
+    NSLog(@"Total of %d in plist", totalAmountInPlist);
+#endif
+    NSMutableArray *keyToBeDeletedObjects = [[NSMutableArray alloc] init];
     for (NSString *keyToCurrencyObject in currencyDictionaryFromPlist) {
+        if ([keyToCurrencyObject isEqualToString:@"USS"]) {
+            NSLog(@"USS is here.");
+        }
         NSDictionary *currencyObject = [currencyDictionaryFromPlist objectForKey:keyToCurrencyObject];
         NSString *type = (NSString *)[currencyObject objectForKey:@"type"];
         if ((MCCurrencyTypeCurrency & MCCurrencyTypeSelection) == 0x00) {
             if ([type isEqualToString:MCCurrencyTypeKeyPathCurrency]) {
                 NSArray *keysFromObject = [currencyDictionaryFromPlist allKeysForObject:currencyObject];
+#if DEBUG
+                NSLog(@"%@ with name %@ is of type %@", keyToCurrencyObject, [currencyObject objectForKey:@"name"], type);
+#endif
                 [keyToBeDeletedObjects addObject:[keysFromObject firstObject]];
                 continue;
             }
@@ -85,6 +95,9 @@ NSUInteger const MCCurrencyTypeSelection = MCCurrencyTypeCurrency | MCCurrencyTy
         if ((MCCurrencyTypeFundsCode & MCCurrencyTypeSelection) == 0x00) {
             if ([type isEqualToString:MCCurrencyTypeKeyPathFundsCode]) {
                 NSArray *keysFromObject = [currencyDictionaryFromPlist allKeysForObject:currencyObject];
+#if DEBUG
+                NSLog(@"%@ with name %@ is of type %@", keyToCurrencyObject, [currencyObject objectForKey:@"name"], type);
+#endif
                 [keyToBeDeletedObjects addObject:[keysFromObject firstObject]];
                 continue;
             }
@@ -92,6 +105,9 @@ NSUInteger const MCCurrencyTypeSelection = MCCurrencyTypeCurrency | MCCurrencyTy
         if ((MCCurrencyTypeReverseAsset & MCCurrencyTypeSelection) == 0x00) {
             if ([type isEqualToString:MCCurrencyTypeKeyPathReverseAsset]) {
                 NSArray *keysFromObject = [currencyDictionaryFromPlist allKeysForObject:currencyObject];
+#if DEBUG
+                NSLog(@"%@ with name %@ is of type %@", keyToCurrencyObject, [currencyObject objectForKey:@"name"], type);
+#endif
                 [keyToBeDeletedObjects addObject:[keysFromObject firstObject]];
                 continue;
             }
@@ -99,6 +115,9 @@ NSUInteger const MCCurrencyTypeSelection = MCCurrencyTypeCurrency | MCCurrencyTy
         if ((MCCurrencyTypeCrypto & MCCurrencyTypeSelection) == 0x00) {
             if ([type isEqualToString:MCCurrencyTypeKeyPathCrypto]) {
                 NSArray *keysFromObject = [currencyDictionaryFromPlist allKeysForObject:currencyObject];
+#if DEBUG
+                NSLog(@"%@ with name %@ is of type %@", keyToCurrencyObject, [currencyObject objectForKey:@"name"], type);
+#endif
                 [keyToBeDeletedObjects addObject:[keysFromObject firstObject]];
                 continue;
             }
@@ -106,6 +125,9 @@ NSUInteger const MCCurrencyTypeSelection = MCCurrencyTypeCurrency | MCCurrencyTy
         if ((MCCurrencyTypeOneTroyOunce & MCCurrencyTypeSelection) == 0x00) {
             if ([type isEqualToString:MCCurrencyTypeKeyPathOneTroyOunce]) {
                 NSArray *keysFromObject = [currencyDictionaryFromPlist allKeysForObject:currencyObject];
+#if DEBUG
+                NSLog(@"%@ with name %@ is of type %@", keyToCurrencyObject, [currencyObject objectForKey:@"name"], type);
+#endif
                 [keyToBeDeletedObjects addObject:[keysFromObject firstObject]];
                 continue;
             }
@@ -113,6 +135,9 @@ NSUInteger const MCCurrencyTypeSelection = MCCurrencyTypeCurrency | MCCurrencyTy
         if ((MCCurrencyTypeBondMarketUnit & MCCurrencyTypeSelection) == 0x00) {
             if ([type isEqualToString:MCCurrencyTypeKeyPathBondMarketUnit]) {
                 NSArray *keysFromObject = [currencyDictionaryFromPlist allKeysForObject:currencyObject];
+#if DEBUG
+                NSLog(@"%@ with name %@ is of type %@", keyToCurrencyObject, [currencyObject objectForKey:@"name"], type);
+#endif
                 [keyToBeDeletedObjects addObject:[keysFromObject firstObject]];
                 continue;
             }
@@ -120,6 +145,9 @@ NSUInteger const MCCurrencyTypeSelection = MCCurrencyTypeCurrency | MCCurrencyTy
         if ((MCCurrencyTypeComplementaryCurrency & MCCurrencyTypeSelection) == 0x00) {
             if ([type isEqualToString:MCCurrencyTypeKeyPathComplementaryCurrency]) {
                 NSArray *keysFromObject = [currencyDictionaryFromPlist allKeysForObject:currencyObject];
+#if DEBUG
+                NSLog(@"%@ with name %@ is of type %@", keyToCurrencyObject, [currencyObject objectForKey:@"name"], type);
+#endif
                 [keyToBeDeletedObjects addObject:[keysFromObject firstObject]];
                 continue;
             }
@@ -127,6 +155,9 @@ NSUInteger const MCCurrencyTypeSelection = MCCurrencyTypeCurrency | MCCurrencyTy
         if ((MCCurrencyTypeUnitOfAccount & MCCurrencyTypeSelection) == 0x00) {
             if ([type isEqualToString:MCCurrencyTypeKeyPathUnitOfAccount]) {
                 NSArray *keysFromObject = [currencyDictionaryFromPlist allKeysForObject:currencyObject];
+#if DEBUG
+                NSLog(@"%@ with name %@ is of type %@", keyToCurrencyObject, [currencyObject objectForKey:@"name"], type);
+#endif
                 [keyToBeDeletedObjects addObject:[keysFromObject firstObject]];
                 continue;
             }
@@ -134,6 +165,9 @@ NSUInteger const MCCurrencyTypeSelection = MCCurrencyTypeCurrency | MCCurrencyTy
         if ((MCCurrencyTypeSpecialSettlementCurrency & MCCurrencyTypeSelection) == 0x00) {
             if ([type isEqualToString:MCCurrencyTypeKeyPathSpecialSettlementCurrency]) {
                 NSArray *keysFromObject = [currencyDictionaryFromPlist allKeysForObject:currencyObject];
+#if DEBUG
+                NSLog(@"%@ with name %@ is of type %@", keyToCurrencyObject, [currencyObject objectForKey:@"name"], type);
+#endif
                 [keyToBeDeletedObjects addObject:[keysFromObject firstObject]];
                 continue;
             }
@@ -141,14 +175,25 @@ NSUInteger const MCCurrencyTypeSelection = MCCurrencyTypeCurrency | MCCurrencyTy
         if ((MCCurrencyTypeVirtualCurrency & MCCurrencyTypeSelection) == 0x00) {
             if ([type isEqualToString:MCCurrencyTypeKeyPathVirtualCurrency]) {
                 NSArray *keysFromObject = [currencyDictionaryFromPlist allKeysForObject:currencyObject];
+#if DEBUG
+                NSLog(@"%@ with name %@ is of type %@", keyToCurrencyObject, [currencyObject objectForKey:@"name"], type);
+#endif
                 [keyToBeDeletedObjects addObject:[keysFromObject firstObject]];
                 continue;
             }
         }
     }
     [currencyDictionaryFromPlist removeObjectsForKeys:keyToBeDeletedObjects];
+#if DEBUG
     NSUInteger *count = currencyDictionaryFromPlist.allKeys.count;
+    for (NSString *key in currencyDictionaryFromPlist.allKeys) {
+        NSDictionary *currency = [currencyDictionaryFromPlist objectForKey:key];
+        NSString *myName = [currency objectForKey:@"name"];
+        NSString *myType = [currency objectForKey:@"type"];
+        NSLog(@"%@ is named %@ and is of %@", key, myName, myType);
+    }
     NSLog(@"%d of currencies", count);
+#endif
     return currencyDictionaryFromPlist;
 }
 

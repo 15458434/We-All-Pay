@@ -139,7 +139,9 @@ NSString * const XRCurrencyDatabaseVersionKey = @"XRCurrencyDatabaseVersionKey";
             [newCurrency setName:currencyName];
             [newCurrency setCode:currencyCode];
             [newCurrency setSymbol:currencySymbol];
+#if DEBUG
             NSLog(@"Generated MCCurrency: %@", newCurrency);
+#endif
         }
         NSError *saveError;
         if (![context save:&saveError]) {
