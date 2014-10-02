@@ -139,8 +139,8 @@
     [self startRespondingToStoreChangeNotifications];
     
     // Load nib for PaymentTableViewCell and register it to the TableView.
-    UINib *nib = [UINib nibWithNibName:@"MCPaymentTableViewCell" bundle:nil];
-    [[self tableView] registerNib:nib forCellReuseIdentifier:@"MCPaymentTableViewCell"];
+//    UINib *nib = [UINib nibWithNibName:@"MCPaymentTableViewCell" bundle:nil];
+//    [[self tableView] registerNib:nib forCellReuseIdentifier:@"MCPaymentTableViewCell"];
     
     emptyMessage = [[NSBundle mainBundle] loadNibNamed:@"MCTableEmptyMessage" owner:self options:nil][0];
     [[self tableView] setBackgroundView:emptyMessage];
