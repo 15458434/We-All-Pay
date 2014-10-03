@@ -71,7 +71,7 @@
     
     [self startRespondingToStoreChangeNotifications];
     
-    if (![self tonightsBill]) {
+    if (!_tonightsBill) {
         _tonightsBill = [MCSharedBill addSharedBillToContext:[[MCWeAllPayStoreController defaultStore] mainThreadContext]];
         [[MCWeAllPayStoreController defaultStore] saveMainThreadContext];
         _currentView = MCSelectEditTripTableView;

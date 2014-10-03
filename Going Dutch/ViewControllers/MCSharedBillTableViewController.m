@@ -139,8 +139,8 @@
     [self startRespondingToStoreChangeNotifications];
     
     // Load nib for PaymentTableViewCell and register it to the TableView.
-    UINib *nib = [UINib nibWithNibName:@"MCPaymentTableViewCell" bundle:nil];
-    [[self tableView] registerNib:nib forCellReuseIdentifier:@"MCPaymentTableViewCell"];
+//    UINib *nib = [UINib nibWithNibName:@"MCPaymentTableViewCell" bundle:nil];
+//    [[self tableView] registerNib:nib forCellReuseIdentifier:@"MCPaymentTableViewCell"];
     
     emptyMessage = [[NSBundle mainBundle] loadNibNamed:@"MCTableEmptyMessage" owner:self options:nil][0];
     [[self tableView] setBackgroundView:emptyMessage];
@@ -363,7 +363,7 @@
     }
     [[paymentCell namePayerLabel] setText:[NSString stringWithFormat:@"%@%@", thisCellsPayerName, NSLocalizedString(@"PAYMENTCELL_PAYERNAME_EXTRA", @" paid") ]];
     if ([[thisCellsPayment payingPerson] thumbnail]) {
-        [paymentCell setCircularImage:[[thisCellsPayment payingPerson] thumbnail]];
+        paymentCell.pictureOfPayer.image = thisCellsPayment.payingPerson.thumbnail;
     }
     
     NSString *thisCellsDescriptionOfPayment = [thisCellsPayment descriptionOfPayment];
@@ -449,7 +449,10 @@
             }
         }
         [[[segue destinationViewController] viewControllers][0] setThisPayment:thePayment];
-        [[[segue destinationViewController] viewControllers][0] setDelegate:self];
+//        if ([[[segue destinationViewController] viewControllers][0] respondsToSelector:@selector(setDelegate:)]) {
+//            [[[segue destinationViewController] viewControllers][0] setDelegate:self];
+//        }
+
     }
     
 }

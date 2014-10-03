@@ -21,6 +21,9 @@
 @property (nonatomic, strong) XRCurrencyXRateFetcher *xRateFetcher;
 
 + (BOOL)doesMyCurrencyDatabaseFileExist;
++ (BOOL)doesMyDatabaseHaveTheRightVersion;
++ (void)updateMyDatabase;
+
 + (void)populateCurrencyDataBaseIfEmptyForContext:(NSManagedObjectContext *)context;
 + (id)sharedStore;
 

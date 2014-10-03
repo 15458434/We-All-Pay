@@ -12,26 +12,26 @@
 
 #pragma mark - New in this class
 
-- (void)setCircularImage:(UIImage *)personImage
-{
-    __weak MCPaymentTableViewCell *weakSelf = self;
-    
-    __block UIImage *copyOfPersonImage = [personImage copy];
-    dispatch_queue_t imageProcessQueue;
-    imageProcessQueue = dispatch_queue_create("imageProcessQueue", NULL);
-    
-    dispatch_async(imageProcessQueue, ^{
-        CGRect circularImageRect = CGRectMake(0, 0, 40, 40);
-        UIImage *circularImage = [MCTools cutCircularImageFrom:copyOfPersonImage toDestinationRect:circularImageRect];
-        dispatch_async(dispatch_get_main_queue(), ^{
-            MCPaymentTableViewCell *strongSelf = weakSelf;
-            if (strongSelf) {
-                [[strongSelf pictureOfPayer] setImage:circularImage];
-                [strongSelf setNeedsDisplay];
-            }
-        });
-    });
-}
+//- (void)setCircularImage:(UIImage *)personImage
+//{
+//    __weak MCPaymentTableViewCell *weakSelf = self;
+//    
+//    __block UIImage *copyOfPersonImage = [personImage copy];
+//    dispatch_queue_t imageProcessQueue;
+//    imageProcessQueue = dispatch_queue_create("imageProcessQueue", NULL);
+//    
+//    dispatch_async(imageProcessQueue, ^{
+//        CGRect circularImageRect = CGRectMake(0, 0, 40, 40);
+//        UIImage *circularImage = [MCTools cutCircularImageFrom:copyOfPersonImage toDestinationRect:circularImageRect];
+//        dispatch_async(dispatch_get_main_queue(), ^{
+//            MCPaymentTableViewCell *strongSelf = weakSelf;
+//            if (strongSelf) {
+//                [[strongSelf pictureOfPayer] setImage:circularImage];
+//                [strongSelf setNeedsDisplay];
+//            }
+//        });
+//    });
+//}
 
 #pragma mark - Inherited from super
 

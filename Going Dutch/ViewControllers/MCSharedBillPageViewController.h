@@ -24,12 +24,14 @@
 
 @interface MCSharedBillPageViewController : UIPageViewController <UIPageViewControllerDataSource, UIPageViewControllerDelegate, UIAlertViewDelegate, MCTonightsBillTitleDelegate>
 {
-    MCSharedBillTableViewController *sharedBillTableViewController;
-    MCEditTripViewController *editTripTableViewController;
+
+
     
     //__weak IBOutlet UIPageControl *pageViewIndicator;
     NSUInteger newPageNumber;
 }
+@property (nonatomic, strong) MCSharedBillTableViewController *sharedBillTableViewController;
+@property (nonatomic, strong) MCEditTripViewController *editTripTableViewController;
 
 @property (nonatomic, strong) MCSharedBill *tonightsBill;
 @property (nonatomic, strong) MCSharedBill *writableTonightsBill;

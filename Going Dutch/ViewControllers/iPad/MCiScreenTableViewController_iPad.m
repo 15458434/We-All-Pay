@@ -186,7 +186,8 @@
         if ([indexPath row] == 0) {
             MFMailComposeViewController *mailComposer = [[MFMailComposeViewController alloc] init];
             [mailComposer setToRecipients:@[ @"support@markcornelisse.nl" ]];
-            [mailComposer setSubject:@"Feedback on We all pay"];
+            NSString *subjectString = [NSString stringWithFormat:@"Feedback on We all pay %@ for %@", [[NSBundle mainBundle] infoDictionary][@"CFBundleShortVersionString"], [[UIDevice currentDevice] model]];
+            [mailComposer setSubject:subjectString];
             [mailComposer setMailComposeDelegate:self];
             [self presentViewController:mailComposer animated:YES completion:^{
                 [[UIApplication sharedApplication] setStatusBarStyle:UIStatusBarStyleLightContent];

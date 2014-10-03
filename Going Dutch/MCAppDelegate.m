@@ -77,8 +77,12 @@
 //    [TestFlight takeOff:@"f2224673-b632-44ae-8feb-3c1cfe59e1f5"];
     // Override point for customization after application launch.
     NSLog(@"%@ running iOS %@", [[UIDevice currentDevice] model], [[UIDevice currentDevice] systemVersion]);
-    NSLog(@"I dedicate this program to Ilse Béguin, the most wonderful woman in the world who brought herself into my life, when I was developing this App.");
-    
+    NSLog(@"I dedicate this program to Ilse Béguin, the most wonderful woman in the world who brought herself into my life, when I was developing the first version App.");
+#if DEBUG
+    NSLocale *locale = [NSLocale currentLocale];
+    NSString *languageCode = [locale objectForKey:NSLocaleLanguageCode];
+    NSLog(@"The current language code is: %@", languageCode);
+#endif
     // Set colors throughout the App.
     [[UINavigationBar appearance] setBarTintColor:[MCColors getNavigationColor]];
     [[UINavigationBar appearance] setTintColor:[MCColors getButtonColor]];

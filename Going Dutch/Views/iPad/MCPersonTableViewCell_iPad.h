@@ -15,6 +15,6 @@
 @property (weak, nonatomic) IBOutlet UILabel *emailLabel;
 @property (weak, nonatomic) IBOutlet UILabel *totalSpent;
 
-- (void)setCircularImage:(UIImage *)personImage;
+//- (void)setCircularImage:(UIImage *)personImage;
 
 @end

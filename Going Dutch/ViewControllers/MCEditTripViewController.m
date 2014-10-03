@@ -208,8 +208,8 @@
     [self startRespondingToStoreChangeNotifications];
     
     // Load and register Nib to the tableView for use.
-    UINib *nib = [UINib nibWithNibName:@"MCPersonTableViewCell" bundle:nil];
-    [[self tableView] registerNib:nib forCellReuseIdentifier:@"MCPersonTableViewCell"];
+//    UINib *nib = [UINib nibWithNibName:@"MCPersonTableViewCell" bundle:nil];
+//    [[self tableView] registerNib:nib forCellReuseIdentifier:@"MCPersonTableViewCell"];
     
     emptyMessage = [[NSBundle mainBundle] loadNibNamed:@"MCTableEmptyMessage" owner:self options:nil][0];
     [[emptyMessage bigMessage] setText:NSLocalizedString(@"PEOPLE_LIST_EMPTY_MESSAGE", @"Press \"add Person\" to add a person who you'd like to share this bill with.")];
@@ -469,9 +469,6 @@
     MCPersonTableViewCell *thisCell = [tableView dequeueReusableCellWithIdentifier:@"MCPersonTableViewCell"];
     
     [[thisCell personImage] setImage:[thisCellsPerson thumbnail]];
-    if ([thisCellsPerson thumbnail]) {
-        [thisCell setCircularImage:[thisCellsPerson thumbnail]];
-    }
     [[thisCell nameLabel] setText:[thisCellsPerson getFullName]];
     [[thisCell emailLabel] setText:[thisCellsPerson defaultEmailAddress]];
     

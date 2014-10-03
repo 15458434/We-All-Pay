@@ -233,10 +233,10 @@
 
 #pragma mark - UITableViewDelegate
 
-//- (CGFloat)tableView:(UITableView *)tableView heightForRowAtIndexPath:(NSIndexPath *)indexPath
-//{
-//    return 120;
-//}
+- (CGFloat)tableView:(UITableView *)tableView heightForRowAtIndexPath:(NSIndexPath *)indexPath
+{
+    return 120;
+}
 
 - (void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath
 {
@@ -263,8 +263,7 @@
     MCPerson *thisCellsPerson = [_dataController objectAtIndexPath:indexPath];
     MCPersonTableViewCell_iPad *thisCell = [tableView dequeueReusableCellWithIdentifier:@"MCPersonTableViewCell_iPad"];
     
-    [thisCell setCircularImage:[thisCellsPerson picture]];
-    //[[thisCell personImage] setImage:[thisCellsPerson picture]];
+    thisCell.personImage.image = thisCellsPerson.picture;
     [[thisCell nameLabel] setText:[thisCellsPerson getFullName]];
     [[thisCell emailLabel] setText:[thisCellsPerson defaultEmailAddress]];
     NSNumberFormatter *nf = [[NSNumberFormatter alloc] init];

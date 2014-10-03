@@ -58,7 +58,6 @@
     [keyWindow performClose:self];
 }
 
-
 #pragma mark - Inherited from super
 
 - (BOOL)applicationShouldHandleReopen:(NSApplication *)sender hasVisibleWindows:(BOOL)flag

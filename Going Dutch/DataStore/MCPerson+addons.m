@@ -41,7 +41,8 @@
 
 + (MCPerson *)fetchPersonWithUniqueId:(NSString *)uuid
 {
-    NSLog(@"Has not been implemented yet.");
+    NSLog(@"fetchPersonWithUniqueId: Has not been implemented yet.");
+    abort();
     return nil;
 }
 
@@ -75,14 +76,14 @@
 {
     __block UIImage *thisImage = image;
     if (!thisImage) {
-        thisImage = [UIImage imageNamed:@"No picture image 2 - We All Pay"];
+        thisImage = [UIImage imageNamed:@"No picture Image 3 - thumbnail"];
     }
     CGSize imageSize = [thisImage size];
     CGRect thumbnailRect = CGRectMake(0, 0, 44, 44);
     float ratio = MAX(thumbnailRect.size.width / imageSize.width, thumbnailRect.size.height / imageSize.height);
     
     UIGraphicsBeginImageContextWithOptions(thumbnailRect.size, NO, 0.0);
-    UIBezierPath *bezierPath = [UIBezierPath bezierPathWithRoundedRect:thumbnailRect cornerRadius:5.0];
+    UIBezierPath *bezierPath = [UIBezierPath bezierPathWithOvalInRect:thumbnailRect];
     [bezierPath addClip];
     
     CGRect imageDrawRect;
@@ -104,17 +105,16 @@
 {
     __block UIImage *thisImage = image;
     if (!thisImage) {
-        //image = [UIImage imageNamed:@"girl 100x100"];
-        thisImage = [UIImage imageNamed:@"No picture image 2 - We All Pay"];
+        thisImage = [UIImage imageNamed:@"No picture Image 3 - picture"];
     }
     CGSize imageSize = [thisImage size];
-    CGRect pictureRect = CGRectMake(0, 0, 80, 80);
+    CGRect pictureRect = CGRectMake(0, 0, 160, 160);
     float ratio = MAX(pictureRect.size.width / imageSize.width, pictureRect.size.height / imageSize.height);
         
     UIGraphicsBeginImageContextWithOptions(pictureRect.size, NO, 0.0);
-    UIBezierPath *bezierPath = [UIBezierPath bezierPathWithRoundedRect:pictureRect cornerRadius:5.0 * 1.9];
+    UIBezierPath *bezierPath = [UIBezierPath bezierPathWithOvalInRect:pictureRect];
     [bezierPath addClip];
-        
+    
     CGRect imageDrawRect;
     imageDrawRect.size.width = ratio * imageSize.width;
     imageDrawRect.size.height = ratio * imageSize.height;
@@ -161,19 +161,16 @@
 - (void)addOneEmailAddressFromAString:(NSString *)emailAddressAsString
 {
     NSFetchRequest *request = [NSFetchRequest fetchRequestWithEntityName:@"MCEmailAddress"];
-    NSSortDescriptor *sortDescriptor = [NSSortDescriptor sortDescriptorWithKey:@"emailAddress" ascending:YES];
-    NSArray *sortDescriptorArray = @[sortDescriptor];
-    [request setSortDescriptors:sortDescriptorArray];
-    NSPredicate *predicate = [NSPredicate predicateWithFormat:@"emailAddress = %@ AND owner = %@", emailAddressAsString, self];
-    [request setPredicate:predicate];
+    request.sortDescriptors = @[[NSSortDescriptor sortDescriptorWithKey:@"emailAddress" ascending:YES]];
+    request.predicate = [NSPredicate predicateWithFormat:@"emailAddress = %@ AND owner = %@", emailAddressAsString, self];
 
     NSError *error;
-    NSArray *equalEmailAddresses = [[self managedObjectContext] executeFetchRequest:request error:&error];
+    NSUInteger amountOfEqualEmailAddresses = [[self managedObjectContext] countForFetchRequest:request error:&error];
     if (error) {
         NSLog(@"something went wrong in the search for equal email addresses");
     }
     MCEmailAddress *newEmailAddress;
-    if ([equalEmailAddresses count] == 0) {
+    if (amountOfEqualEmailAddresses == 0) {
         newEmailAddress = [MCEmailAddress addEmailAddressFor:self];
         if ([[self emailAddress] count] == 1) {
             [newEmailAddress setSelected:@YES];
@@ -317,7 +314,7 @@
     
     // Extract the thumbnail image from the data.
     [self setPrimitiveValue:[UIImage imageWithData:[self thumbnailData]] forKey:@"thumbnail"];
-    // Extract the picture image from the data
+    // Extract the picture image from the data.
     [self setPrimitiveValue:[UIImage imageWithData:[self pictureData]] forKey:@"picture"];
 }
 

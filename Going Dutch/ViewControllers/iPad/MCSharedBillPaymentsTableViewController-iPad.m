@@ -259,7 +259,7 @@
     [[paymentCell namePayerLabel] setText:[NSString stringWithFormat:@"%@%@", thisCellsPayerName, NSLocalizedString(@"PAYMENTCELL_PAYERNAME_EXTRA", @" paid") ]];
     
     if ([[thisCellsPayment payingPerson] picture]) {
-        [paymentCell setCircularImage:[[thisCellsPayment payingPerson] picture]];
+        paymentCell.pictureOfPayer.image = thisCellsPayment.payingPerson.picture;
     }
     
     NSString *thisCellsDescriptionOfPayment = [thisCellsPayment descriptionOfPayment];

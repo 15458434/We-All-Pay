@@ -97,29 +97,29 @@
 - (void)reloadPayerLabel
 {
     [selectButton setTitle:[[_thisPayment payingPerson] getFullName] forState:UIControlStateNormal];
-    [self setCircularImageOnPictureView:[[_thisPayment payingPerson] picture]];
+    _payerPicture.image = _thisPayment.payingPerson.picture;
 //    _didSomethingChange = MCSomethingHasChanged;
 }
 
-- (void)setCircularImageOnPictureView:(UIImage *)image
-{
-    __weak MCPaymentTableViewController_iPad *weakSelf = self;
-    
-    dispatch_queue_t imageProcessQueue;
-    imageProcessQueue = dispatch_queue_create("imageProcessQueue", NULL);
-    
-    dispatch_async(imageProcessQueue, ^{
-        CGRect circularImageRect = CGRectMake(0, 0, 160, 160);
-        UIImage *circularImage = [MCTools cutCircularImageFrom:image toDestinationRect:circularImageRect];
-        dispatch_async(dispatch_get_main_queue(), ^{
-            MCPaymentTableViewController_iPad *strongSelf = weakSelf;
-            if (strongSelf) {
-                [[strongSelf payerPicture] setImage:circularImage];
-                [[strongSelf payerPicture] setNeedsDisplay];
-            }
-        });
-    });
-}
+//- (void)setCircularImageOnPictureView:(UIImage *)image
+//{
+//    __weak MCPaymentTableViewController_iPad *weakSelf = self;
+//    
+//    dispatch_queue_t imageProcessQueue;
+//    imageProcessQueue = dispatch_queue_create("imageProcessQueue", NULL);
+//    
+//    dispatch_async(imageProcessQueue, ^{
+//        CGRect circularImageRect = CGRectMake(0, 0, 160, 160);
+//        UIImage *circularImage = [MCTools cutCircularImageFrom:image toDestinationRect:circularImageRect];
+//        dispatch_async(dispatch_get_main_queue(), ^{
+//            MCPaymentTableViewController_iPad *strongSelf = weakSelf;
+//            if (strongSelf) {
+//                [[strongSelf payerPicture] setImage:circularImage];
+//                [[strongSelf payerPicture] setNeedsDisplay];
+//            }
+//        });
+//    });
+//}
 
 - (void)tappedInTheBackground:(id)selector
 {
@@ -179,7 +179,7 @@
             [paidField setText:[_thisPayment getMoneyValueInCurrencyAsAString]];
         }
         if ([[_thisPayment payingPerson] picture]) {
-            [self setCircularImageOnPictureView:[[_thisPayment payingPerson] picture]];
+            _payerPicture.image = _thisPayment.payingPerson.picture;
         }
         _isNew = isNotNew;
     }
@@ -187,13 +187,17 @@
     NSSortDescriptor *sortDescriptor = [NSSortDescriptor sortDescriptorWithKey:@"person.firstName" ascending:YES];
     _paymentPresenceArray = [[_thisPayment peopleSharingPayment] sortedArrayUsingDescriptors:@[sortDescriptor]];
     
-    _dataController = [[MCWeAllPayStoreController defaultStore] paymentPresenceDataControllerForDelegate:self];
-    UIManagedDocument *weAllPayDocument = [[MCWeAllPayStoreController defaultStore] weAllPayStoreDocument];
-    if (![[MCWeAllPayStoreController defaultStore] isDocumentStateNormal]) {
-        [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(performFetchAndReloadTableView:) name:UIDocumentStateChangedNotification object:weAllPayDocument];
-    } else {
-        [self performFetch];
+    if (!_dataController) {
+        _dataController = [[MCWeAllPayStoreController defaultStore] paymentPresenceDataControllerForDelegate:self];
+        
     }
+
+//    UIManagedDocument *weAllPayDocument = [[MCWeAllPayStoreController defaultStore] weAllPayStoreDocument];
+//    if (![[MCWeAllPayStoreController defaultStore] isDocumentStateNormal]) {
+//        [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(performFetchAndReloadTableView:) name:UIDocumentStateChangedNotification object:weAllPayDocument];
+//    } else {
+//        [self performFetch];
+//    }
 }
 
 - (void)viewDidAppear:(BOOL)animated
@@ -211,9 +215,9 @@
 
 - (void)viewDidDisappear:(BOOL)animated
 {
-    [[NSNotificationCenter defaultCenter] removeObserver:self];
-    
     [super viewDidDisappear:animated];
+    [[NSNotificationCenter defaultCenter] removeObserver:self];
+    _dataController = nil;
 }
 
 - (void)didReceiveMemoryWarning
@@ -295,7 +299,7 @@
     if ([_thisPayment payingPerson]) {
         [selectButton setTitle:[[_thisPayment payingPerson] getFullName] forState:UIControlStateNormal];
         if ([[_thisPayment payingPerson] picture]) {
-            [self setCircularImageOnPictureView:[[_thisPayment payingPerson] picture]];
+            _payerPicture.image = _thisPayment.payingPerson.picture;
         }
     }
 }
@@ -342,10 +346,10 @@
 
 #pragma mark - Table view delegate
 
-//- (CGFloat)tableView:(UITableView *)tableView heightForRowAtIndexPath:(NSIndexPath *)indexPath
-//{
-//    return 71;
-//}
+- (CGFloat)tableView:(UITableView *)tableView heightForRowAtIndexPath:(NSIndexPath *)indexPath
+{
+    return 59;
+}
 
 #pragma mark - Table view data source
 
@@ -367,7 +371,7 @@
     
     MCPaymentPresence *paymentPresenceForThisCell = [_dataController objectAtIndexPath:indexPath];
     [[cell nameLabel] setText:[[paymentPresenceForThisCell person] getFullName]];
-    [cell setCircularImage:[[paymentPresenceForThisCell person] thumbnail]];
+    cell.personView.image = paymentPresenceForThisCell.person.thumbnail;
     [[cell theSwitch] setOn:[[paymentPresenceForThisCell isPersonPresent] boolValue] animated:NO];
     NSString *owesLabelString = [NSString stringWithFormat:@"owes %@",[paymentPresenceForThisCell getCurrencyStringOfAverageOwe]];
     [[cell owesMoneyLabel] setText:owesLabelString];

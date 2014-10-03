@@ -17,13 +17,19 @@
 #import "MCPaymentPresenceTableViewCell_iPhone.h"
 #import "MCDismissMeBlockProtocol.h"
 
+typedef NS_ENUM(BOOL, ChildViewOpened) {
+    isNotOpened,
+    isOpened
+};
+
 @interface MCPaymentViewController ()
+
+@property (nonatomic) ChildViewOpened selectCurrencyTableViewController;
 
 @end
 
 @implementation MCPaymentViewController
 
-@synthesize isNew;
 @synthesize delegate;
 
 #pragma mark - action
@@ -80,9 +86,9 @@
     peoplePickerCancelled = YES;
     [payerView setText:[[_thisPayment payingPerson] getFullName]];
     if ([_thisPayment payingPerson]) {
-        [self setCircularImageOnPictureView:[[_thisPayment payingPerson] picture]];
+        _payerPicture.image = _thisPayment.payingPerson.picture;
     } else {
-        [_payerPicture setImage:nil];
+        _payerPicture.image = nil;
     }
     [payerView resignFirstResponder];
 }
@@ -152,11 +158,11 @@
 //        didSomethingChange = NO;
         if (thePayment) {
             _thisPayment = thePayment;
-            isNew = NO;
+            _isNew = NO;
         } else {
             _thisPayment = [MCPayment addPayment];
             [_thisPayment setOnWhichBill:bill];
-            isNew = YES;
+            _isNew = YES;
         }
     }
     return self;
@@ -167,25 +173,25 @@
     return UIStatusBarStyleLightContent;
 }
 
-- (void)setCircularImageOnPictureView:(UIImage *)image
-{
-    __weak MCPaymentViewController *weakSelf = self;
-    
-    dispatch_queue_t imageProcessQueue;
-    imageProcessQueue = dispatch_queue_create("imageProcessQueue", NULL);
-    
-    dispatch_async(imageProcessQueue, ^{
-        CGRect circularImageRect = CGRectMake(0, 0, 60, 60);
-        UIImage *circularImage = [MCTools cutCircularImageFrom:image toDestinationRect:circularImageRect];
-        dispatch_async(dispatch_get_main_queue(), ^{
-            MCPaymentViewController *strongSelf = weakSelf;
-            if (strongSelf) {
-                [[strongSelf payerPicture] setImage:circularImage];
-                [[strongSelf payerPicture] setNeedsDisplay];
-            }
-        });
-    });
-}
+//- (void)setCircularImageOnPictureView:(UIImage *)image
+//{
+//    __weak MCPaymentViewController *weakSelf = self;
+//    
+//    dispatch_queue_t imageProcessQueue;
+//    imageProcessQueue = dispatch_queue_create("imageProcessQueue", NULL);
+//    
+//    dispatch_async(imageProcessQueue, ^{
+//        CGRect circularImageRect = CGRectMake(0, 0, 60, 60);
+//        UIImage *circularImage = [MCTools cutCircularImageFrom:image toDestinationRect:circularImageRect];
+//        dispatch_async(dispatch_get_main_queue(), ^{
+//            MCPaymentViewController *strongSelf = weakSelf;
+//            if (strongSelf) {
+//                [[strongSelf payerPicture] setImage:circularImage];
+//                [[strongSelf payerPicture] setNeedsDisplay];
+//            }
+//        });
+//    });
+//}
 
 - (void)tappedInTheBackground:(id)selector
 {
@@ -218,7 +224,7 @@
 {
     [payerView setText:[listOfPeople[row] getFullName]];
     [_thisPayment setPayingPerson:listOfPeople[row]];
-    [self setCircularImageOnPictureView:[listOfPeople[row] picture]];
+    _payerPicture.image = [listOfPeople[row] picture];
 }
 
 #pragma mark - PickerViewDataSource
@@ -284,7 +290,7 @@
             row = [personPickerView selectedRowInComponent:0];
         }
         [payerView setText:[listOfPeople[row] getFullName]];
-        [self setCircularImageOnPictureView:[listOfPeople[row] picture]];
+        _payerPicture.image = [listOfPeople[row] picture];
         [personPickerView selectRow:row inComponent:0 animated:YES];
         kindOfPaidFieldDismiss = otherTextFieldSelected;
     }
@@ -322,10 +328,9 @@
             [[MCWeAllPayStoreController defaultStore] endUndoGroupAndUndoWithoutRegistration];
             [payerView setText:[[_thisPayment payingPerson] getFullName]];
             if ([_thisPayment payingPerson]) {
-                [self setCircularImageOnPictureView:[[_thisPayment payingPerson] picture]];
+                _payerPicture.image = _thisPayment.payingPerson.picture;
             } else {
-                NSLog(@"Is het stuk?");
-                [self setCircularImageOnPictureView:nil];
+                _payerPicture.image = nil;
             }
         }
     } else if (textField == itemView) {
@@ -344,6 +349,7 @@
     self = [super initWithStyle:style];
     if (self) {
         // Custom initialization
+        _selectCurrencyTableViewController = isNotOpened;
     }
     return self;
 }
@@ -358,13 +364,11 @@
     // When _thisPayment was not passed along a new one should be created.
     if (!_thisPayment) {
         _thisPayment = [_tonightsBill addPayment];
-        isNew = YES;
+        _isNew = YES;
 //        didSomethingChange = YES;
     } else {
-        isNew = NO;
+        _isNew = NO;
     }
-    
-    _dataController = [[MCWeAllPayStoreController defaultStore] paymentPresenceDataControllerForDelegate:self];
     
     // If tonight's bill wasn't passed along.
     if (!_tonightsBill) {
@@ -424,7 +428,7 @@
     // Navigationbar stuff
     if (!twoLabelTitleView) {
         twoLabelTitleView = [[NSBundle mainBundle] loadNibNamed:@"MCTwoLabelsTitleView" owner:self options:nil][0];
-        if (isNew) {
+        if (_isNew) {
             [[twoLabelTitleView mainLabel] setText:NSLocalizedString(@"NEW_PAYMENT_HEADER", @"Header in the paymentView which state new Payment")];
             [[twoLabelTitleView subLabel] setText:NSLocalizedString(@"NEW_PAYMENT_SUBHEADER", @"Sub header in the paymentView which states Add payment data")];
         } else {
@@ -434,23 +438,42 @@
         [[self navigationItem] setTitleView:twoLabelTitleView];
     }
     
+    if (!_dataController) {
+        _dataController = [[MCWeAllPayStoreController defaultStore] paymentPresenceDataControllerForDelegate:self];
+        if (SYSTEM_VERSION_GREATER_THAN_OR_EQUAL_TO(@"8.0") && _selectCurrencyTableViewController == isOpened) {
+            // Those lines won't update when coming from MCSelectCurrencyTableViewController on iOS 8 and later.
+            // It's under an if statement, because only the iPhone 4 is effected.
+            paidView.text = [_thisPayment getMoneyValueInCurrencyAsAString];
+            [[self tableView] reloadData];
+            _selectCurrencyTableViewController = isNotOpened;
+#if DEBUG
+            NSLog(@"The current currency: %@", _thisPayment.currency);
+#endif
+        }
+        NSLog(@"Bla bla bla");
+    }
+
+    
     // Fill in the form if data is present.
     [payerView setText:[[_thisPayment payingPerson] getFullName]];
     [payerView setDelegate:self];
     [itemView setText:[_thisPayment descriptionOfPayment]];
     if ([_thisPayment payingPerson]) {
-        [self setCircularImageOnPictureView:[[_thisPayment payingPerson] picture]];
+        _payerPicture.image = _thisPayment.payingPerson.picture;
     }
 
-    if (!isNew) {
+    if (!_isNew) {
         paidView.text = [_thisPayment getMoneyValueInCurrencyAsAString];
     }
 }
 
 - (void)viewDidAppear:(BOOL)animated
 {
+#if DEBUG
+    NSLog(@"%@ viewDidAppear", self);
+#endif
     [super viewDidAppear:animated];
-    
+
 //    id<GAITracker> tracker = [[GAI sharedInstance] defaultTracker];
 //    if (isNew) {
 //        [tracker set:kGAIScreenName value:@"MCPaymentNewView_iPhone"];
@@ -462,9 +485,14 @@
 
 - (void)viewDidDisappear:(BOOL)animated
 {
+#if DEBUG
+    NSLog(@"%@, viewDidDisappear", self);
+#endif
     [super viewDidDisappear:animated];
     
     [MCTools setAdBannerIfNotPaid:NO forViewController:self];
+    
+    _dataController = nil;
 }
 
 - (BOOL)disablesAutomaticKeyboardDismissal
@@ -556,7 +584,7 @@
     // Set the cell contents
     MCPaymentPresence *thisCellsPresence = [_dataController objectAtIndexPath:indexPath];
     [[cell nameLabel] setText:[[thisCellsPresence person] getFullName]];
-    [cell setCircularImage:[[thisCellsPresence person] thumbnail]];
+    cell.personView.image = thisCellsPresence.person.thumbnail;
     [[cell isPresentSwitch] setOn:[[thisCellsPresence isPersonPresent] boolValue]];
     NSString *owesPreString = NSLocalizedString(@"OWES_FROM_THIS_PAYMENT", @"owes");
     NSString *owesString = [NSString stringWithFormat:@"%@ %@", owesPreString, [thisCellsPresence getCurrencyStringOfAverageOwe]];
@@ -618,6 +646,7 @@
  // Get the new view controller using [segue destinationViewController].
  // Pass the selected object to the new view controller.
      if ([[segue identifier] isEqualToString:@"openSelectCurrency"]) {
+         _selectCurrencyTableViewController = isOpened;
          id destination = [[segue destinationViewController] viewControllers][0];
          if ([destination conformsToProtocol:@protocol(MCThisPaymentProtocol)]) {
              [destination setThisPayment:_thisPayment];

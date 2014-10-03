@@ -91,7 +91,7 @@
     MCSelectPayerTableViewCell_iPad *cell = [tableView dequeueReusableCellWithIdentifier:@"selectPayerTableViewCell" forIndexPath:indexPath];
     
     MCPerson *thisPerson = [people objectAtIndex:[indexPath row]];
-    [cell setCircularImage:[thisPerson thumbnail]];
+    cell.thumbnailView.image = thisPerson.thumbnail;
     [[cell fullNameLabel] setText:[thisPerson getFullName]];
     
     return cell;

@@ -17,6 +17,8 @@ NSString * const XRCurrencyBaseDirectory = @"XRCurrency";
 NSString * const XRCurrencyStoreFileName = @"XRCurrencyStore";
 NSString * const XRCurrencyStoreFileExtension = @"sqlite";
 
+NSString * const XRCurrencyDatabaseVersionKey = @"XRCurrencyDatabaseVersionKey";
+
 @interface XRCurrencyStoreController ()
 
 @end
@@ -40,6 +42,70 @@ NSString * const XRCurrencyStoreFileExtension = @"sqlite";
     }
 }
 
++ (BOOL)doesMyDatabaseHaveTheRightVersion
+{
+    NSUserDefaults *defaults = [NSUserDefaults standardUserDefaults];
+    NSLocale *myLocale = [NSLocale currentLocale];
+    NSString *languageCode = [myLocale objectForKey:NSLocaleLanguageCode];
+    NSMutableString *localizedXRCurrencyDatabaseVersionKey = [XRCurrencyDatabaseVersionKey mutableCopy];
+    [localizedXRCurrencyDatabaseVersionKey appendString:languageCode];
+    NSString *xrCurrencyDatabaseVersion = [defaults objectForKey:localizedXRCurrencyDatabaseVersionKey];
+    if ([xrCurrencyDatabaseVersion integerValue] < 1 || !xrCurrencyDatabaseVersion) {
+#if DEBUG
+        NSLog(@"Currency Database version number not up to date.");
+#endif
+        return NO;
+    } else {
+#if DEBUG
+        NSLog(@"Currency Database version number up to date.");
+#endif
+        return YES;
+    }
+}
+
++ (void)updateMyDatabase
+{
+    NSUserDefaults *defaults = [NSUserDefaults standardUserDefaults];
+    NSLocale *myLocale = [NSLocale currentLocale];
+    NSString *languageCode = [myLocale objectForKey:NSLocaleLanguageCode];
+    NSMutableString *localizedXRCurrenceDatabaseVersionKey = [XRCurrencyDatabaseVersionKey mutableCopy];
+    [localizedXRCurrenceDatabaseVersionKey appendString:languageCode];
+    NSString *databaseVersion = [defaults objectForKey:localizedXRCurrenceDatabaseVersionKey];
+    switch ([databaseVersion integerValue]) {
+        case 1:
+            NSLog(@"XRCurrency is already up to date.");
+            break;
+        default: {
+            // Get current language
+            // if current language is dutch update
+            if ([languageCode isEqualToString:@"nl"]) {
+#if DEBUG
+                NSLog(@"Language is dutch");
+#endif
+                NSDictionary *currencyDictionary = [MCxRatesController getCurrencyDictionary];
+                NSDictionary *turkishCurrency = [currencyDictionary objectForKey:@"TRY"];
+#if DEBUG
+                NSLog(@"Gevonden %@", [turkishCurrency objectForKey:@"name"]);
+#endif
+                NSManagedObjectContext *backgroundContext = [[XRCurrencyStoreController sharedStore] backgroundContext];
+                [backgroundContext performBlock:^{
+                    XRCurrency *turkishLira = [[XRCurrencyStoreController sharedStore] fetchCurrencyWithCode:@"TRY" inContext:backgroundContext];
+                    [turkishLira setName:[turkishCurrency objectForKey:@"name"]];
+                    NSError *saveError;
+                    if (![backgroundContext save:&saveError]) {
+                        NSLog(@"Something went wrong saving: %@", saveError);
+                    } else {
+                        [defaults setObject:@1 forKey:localizedXRCurrenceDatabaseVersionKey];
+                        [defaults synchronize];
+                    }
+                }];
+            }
+            // update version number
+        }
+            break;
+    }
+}
+
 + (void)populateCurrencyDataBaseIfEmptyForContext:(NSManagedObjectContext *)context
 {
     // Unit tested.
@@ -56,6 +122,9 @@ NSString * const XRCurrencyStoreFileExtension = @"sqlite";
     if (amountOfCurrencies == 0) {
         NSDictionary *availableCurrencies = [MCxRatesController getCurrencyDictionary];
         NSArray *availableCurrencyCodes = [availableCurrencies allKeys];
+#if DEBUG
+        NSLog(@"%d currencies available", availableCurrencies.count);
+#endif
         for (NSString *currencyCode in availableCurrencyCodes) {
             // For each currencyCode add it.
             XRCurrency *newCurrency = [NSEntityDescription insertNewObjectForEntityForName:@"XRCurrency" inManagedObjectContext:context];
@@ -70,7 +139,9 @@ NSString * const XRCurrencyStoreFileExtension = @"sqlite";
             [newCurrency setName:currencyName];
             [newCurrency setCode:currencyCode];
             [newCurrency setSymbol:currencySymbol];
+#if DEBUG
             NSLog(@"Generated MCCurrency: %@", newCurrency);
+#endif
         }
         NSError *saveError;
         if (![context save:&saveError]) {
@@ -83,16 +154,13 @@ NSString * const XRCurrencyStoreFileExtension = @"sqlite";
 - (void)prepareStoreWithCompletionHandler:(void (^)())completionHandler
 {
     NSOperationQueue *thisQueue = [NSOperationQueue currentQueue];
-    NSOperationQueue *currencyDispatchQueue = [NSOperationQueue new];
-    [currencyDispatchQueue setName:@"currencyDispatchQueue"];
-    [currencyDispatchQueue addOperationWithBlock:^{
-        NSManagedObjectContext *context = [self backgroundContext];
+    NSManagedObjectContext *context = [self backgroundContext];
+    [context performBlock:^{
         // Check to see if currency database is filled.
         [XRCurrencyStoreController populateCurrencyDataBaseIfEmptyForContext:context];
         [thisQueue addOperationWithBlock:^{
             completionHandler();
         }];
-
     }];
 }
 
@@ -194,7 +262,7 @@ NSString * const XRCurrencyStoreFileExtension = @"sqlite";
     
     NSPersistentStoreCoordinator *coordinator = [self persistentStoreCoordinator];
     if (coordinator != nil) {
-        _backgroundContext = [[NSManagedObjectContext alloc] initWithConcurrencyType:NSConfinementConcurrencyType];
+        _backgroundContext = [[NSManagedObjectContext alloc] initWithConcurrencyType:NSPrivateQueueConcurrencyType];
         [_backgroundContext setPersistentStoreCoordinator:coordinator];
     }
     return _backgroundContext;

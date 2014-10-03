@@ -76,25 +76,25 @@
     [[[self navigationController] presentingViewController] dismissViewControllerAnimated:YES completion:nil];
 }
 
-- (void)setCircularImageOnPictureView:(UIImage *)image
-{
-    __weak MCPersonTableViewController_iPad *weakSelf = self;
-    
-    dispatch_queue_t imageProcessQueue;
-    imageProcessQueue = dispatch_queue_create("imageProcessQueue", NULL);
-    
-    dispatch_async(imageProcessQueue, ^{
-        CGRect circularImageRect = CGRectMake(0, 0, 160, 160);
-        UIImage *circularImage = [MCTools cutCircularImageFrom:image toDestinationRect:circularImageRect];
-        dispatch_async(dispatch_get_main_queue(), ^{
-            MCPersonTableViewController_iPad *strongSelf = weakSelf;
-            if (strongSelf) {
-                [[strongSelf pictureView] setImage:circularImage];
-                [[strongSelf pictureView] setNeedsDisplay];
-            }
-        });
-    });
-}
+//- (void)setCircularImageOnPictureView:(UIImage *)image
+//{
+//    __weak MCPersonTableViewController_iPad *weakSelf = self;
+//    
+//    dispatch_queue_t imageProcessQueue;
+//    imageProcessQueue = dispatch_queue_create("imageProcessQueue", NULL);
+//    
+//    dispatch_async(imageProcessQueue, ^{
+//        CGRect circularImageRect = CGRectMake(0, 0, 160, 160);
+//        UIImage *circularImage = [MCTools cutCircularImageFrom:image toDestinationRect:circularImageRect];
+//        dispatch_async(dispatch_get_main_queue(), ^{
+//            MCPersonTableViewController_iPad *strongSelf = weakSelf;
+//            if (strongSelf) {
+//                [[strongSelf pictureView] setImage:circularImage];
+//                [[strongSelf pictureView] setNeedsDisplay];
+//            }
+//        });
+//    });
+//}
 
 - (void)tappedInTheBackground:(id)selector
 {
@@ -171,7 +171,7 @@
     [lastNameField setText:[_thisPerson lastName]];
     [emailField setText:[_thisPerson defaultEmailAddress]];
     
-    [self setCircularImageOnPictureView:[_thisPerson picture]];
+    _pictureView.image = _thisPerson.picture;
 }
 
 - (void)viewDidAppear:(BOOL)animated

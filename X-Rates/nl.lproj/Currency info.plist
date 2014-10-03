@@ -112,7 +112,7 @@
 	<key>USN</key>
 	<dict>
 		<key>name</key>
-		<string>Amerikaanse dollar (Same day) (aandelen)</string>
+		<string>Amerikaanse dollar (Next day) (aandelen)</string>
 		<key>type</key>
 		<string>funds code</string>
 	</dict>
@@ -312,7 +312,7 @@
 	<key>TRY</key>
 	<dict>
 		<key>name</key>
-		<string>Nieuwe Turkse lira</string>
+		<string>Turkse lira</string>
 		<key>type</key>
 		<string>currency</string>
 	</dict>

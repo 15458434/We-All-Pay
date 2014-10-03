@@ -30,24 +30,24 @@
 
 #pragma mark - New in this class.
 
-- (void)setCircularImage:(UIImage *)personImage
-{
-    __weak MCPaymentPresenceTableViewCell *weakSelf = self;
-    
-    dispatch_queue_t imageProcessQueue;
-    imageProcessQueue = dispatch_queue_create("imageProcessQueue", NULL);
-    
-    dispatch_async(imageProcessQueue, ^{
-        CGRect circularImageRect = CGRectMake(0, 0, 60, 60);
-        UIImage *circularImage = [MCTools cutCircularImageFrom:personImage toDestinationRect:circularImageRect];
-        dispatch_async(dispatch_get_main_queue(), ^{
-            MCPaymentPresenceTableViewCell *strongSelf = weakSelf;
-            if (strongSelf) {
-                [[strongSelf personView] setImage:circularImage];
-            }
-        });
-    });
-}
+//- (void)setCircularImage:(UIImage *)personImage
+//{
+//    __weak MCPaymentPresenceTableViewCell *weakSelf = self;
+//    
+//    dispatch_queue_t imageProcessQueue;
+//    imageProcessQueue = dispatch_queue_create("imageProcessQueue", NULL);
+//    
+//    dispatch_async(imageProcessQueue, ^{
+//        CGRect circularImageRect = CGRectMake(0, 0, 60, 60);
+//        UIImage *circularImage = [MCTools cutCircularImageFrom:personImage toDestinationRect:circularImageRect];
+//        dispatch_async(dispatch_get_main_queue(), ^{
+//            MCPaymentPresenceTableViewCell *strongSelf = weakSelf;
+//            if (strongSelf) {
+//                [[strongSelf personView] setImage:circularImage];
+//            }
+//        });
+//    });
+//}
 
 #pragma mark - Inherited from super.
 
