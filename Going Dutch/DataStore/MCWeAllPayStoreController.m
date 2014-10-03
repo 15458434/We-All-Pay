@@ -455,21 +455,29 @@ MCiCloudUse const isiCloudUsed = iCloudIsNotUsed;
 
 - (void)storeWillSave:(NSNotification *)notification
 {
+#if DEBUG
     NSLog(@"MCWeAllPayStoreController: Store will save.");
+#endif
 }
 
 - (void)storeDidSave:(NSNotification *)notification
 {
+#if DEBUG
     NSLog(@"MCWeAllPayStoreController: Store did save.");
+#endif
     if (notification.object != _mainThreadContext) {
         [_mainThreadContext performBlockAndWait:^{
+#if DEBUG
             NSLog(@"Merging changes into mainContext.");
+#endif
             [_mainThreadContext mergeChangesFromContextDidSaveNotification:notification];
         }];
     }
     if (notification.object != _backgroundThreadContext) {
         [_backgroundThreadContext performBlockAndWait:^{
+#if DEBUG
             NSLog(@"Merging changes into backgroundContext.");
+#endif
             [_backgroundThreadContext mergeChangesFromContextDidSaveNotification:notification];
         }];
     }
@@ -477,7 +485,9 @@ MCiCloudUse const isiCloudUsed = iCloudIsNotUsed;
 
 - (void)storeWillBeSwapped:(NSNotification *)notification
 {
+#if DEBUG
     NSLog(@"MCWeAllPayStoreController: Store will be swapped.");
+#endif
     // Has main Context changes if yes save.
     [_mainThreadContext performBlockAndWait:^{
         if ([_mainThreadContext hasChanges]) {
@@ -499,12 +509,16 @@ MCiCloudUse const isiCloudUsed = iCloudIsNotUsed;
 
 - (void)storeDidSwap:(NSNotification *)notification
 {
+#if DEBUG
     NSLog(@"MCWeAllPayStoreController: Store did swap.");
+#endif
 }
 
 - (void)storedidUpdateFromUbiquitousContainer:(NSNotification *)notification
 {
+#if DEBUG
     NSLog(@"MCWeAllPayStoreController: Store did update from Ubiquitous Container.");
+#endif
     [_mainThreadContext performBlockAndWait:^{
         [_mainThreadContext mergeChangesFromContextDidSaveNotification:notification];
     }];
@@ -530,7 +544,9 @@ MCiCloudUse const isiCloudUsed = iCloudIsNotUsed;
         _mainThreadContext.mergePolicy = NSMergeByPropertyObjectTrumpMergePolicy;
         [_mainThreadContext setPersistentStoreCoordinator:coordinator];
     }
+#if DEBUG
     NSLog(@"mainThreadContext has been created.");
+#endif
     return _mainThreadContext;
 }
 
@@ -546,7 +562,9 @@ MCiCloudUse const isiCloudUsed = iCloudIsNotUsed;
         _backgroundThreadContext.mergePolicy = NSMergeByPropertyObjectTrumpMergePolicy;
         [_backgroundThreadContext setPersistentStoreCoordinator:coordinator];
     }
+#if DEBUG
     NSLog(@"backgroundThreadContext has been created.");
+#endif
     return _backgroundThreadContext;
 }
 
