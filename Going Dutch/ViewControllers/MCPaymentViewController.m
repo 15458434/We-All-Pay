@@ -17,13 +17,19 @@
 #import "MCPaymentPresenceTableViewCell_iPhone.h"
 #import "MCDismissMeBlockProtocol.h"
 
+typedef NS_ENUM(BOOL, ChildViewOpened) {
+    isNotOpened,
+    isOpened
+};
+
 @interface MCPaymentViewController ()
+
+@property (nonatomic) ChildViewOpened selectCurrencyTableViewController;
 
 @end
 
 @implementation MCPaymentViewController
 
-@synthesize isNew;
 @synthesize delegate;
 
 #pragma mark - action
@@ -152,11 +158,11 @@
 //        didSomethingChange = NO;
         if (thePayment) {
             _thisPayment = thePayment;
-            isNew = NO;
+            _isNew = NO;
         } else {
             _thisPayment = [MCPayment addPayment];
             [_thisPayment setOnWhichBill:bill];
-            isNew = YES;
+            _isNew = YES;
         }
     }
     return self;
@@ -343,6 +349,7 @@
     self = [super initWithStyle:style];
     if (self) {
         // Custom initialization
+        _selectCurrencyTableViewController = isNotOpened;
     }
     return self;
 }
@@ -357,10 +364,10 @@
     // When _thisPayment was not passed along a new one should be created.
     if (!_thisPayment) {
         _thisPayment = [_tonightsBill addPayment];
-        isNew = YES;
+        _isNew = YES;
 //        didSomethingChange = YES;
     } else {
-        isNew = NO;
+        _isNew = NO;
     }
     
     // If tonight's bill wasn't passed along.
@@ -421,7 +428,7 @@
     // Navigationbar stuff
     if (!twoLabelTitleView) {
         twoLabelTitleView = [[NSBundle mainBundle] loadNibNamed:@"MCTwoLabelsTitleView" owner:self options:nil][0];
-        if (isNew) {
+        if (_isNew) {
             [[twoLabelTitleView mainLabel] setText:NSLocalizedString(@"NEW_PAYMENT_HEADER", @"Header in the paymentView which state new Payment")];
             [[twoLabelTitleView subLabel] setText:NSLocalizedString(@"NEW_PAYMENT_SUBHEADER", @"Sub header in the paymentView which states Add payment data")];
         } else {
@@ -431,7 +438,21 @@
         [[self navigationItem] setTitleView:twoLabelTitleView];
     }
     
-    _dataController = [[MCWeAllPayStoreController defaultStore] paymentPresenceDataControllerForDelegate:self];
+    if (!_dataController) {
+        _dataController = [[MCWeAllPayStoreController defaultStore] paymentPresenceDataControllerForDelegate:self];
+        if (SYSTEM_VERSION_GREATER_THAN_OR_EQUAL_TO(@"8.0") && _selectCurrencyTableViewController == isOpened) {
+            // Those lines won't update when coming from MCSelectCurrencyTableViewController on iOS 8 and later.
+            // It's under an if statement, because only the iPhone 4 is effected.
+            paidView.text = [_thisPayment getMoneyValueInCurrencyAsAString];
+            [[self tableView] reloadData];
+            _selectCurrencyTableViewController = isNotOpened;
+#if DEBUG
+            NSLog(@"The current currency: %@", _thisPayment.currency);
+#endif
+        }
+        NSLog(@"Bla bla bla");
+    }
+
     
     // Fill in the form if data is present.
     [payerView setText:[[_thisPayment payingPerson] getFullName]];
@@ -441,15 +462,18 @@
         _payerPicture.image = _thisPayment.payingPerson.picture;
     }
 
-    if (!isNew) {
+    if (!_isNew) {
         paidView.text = [_thisPayment getMoneyValueInCurrencyAsAString];
     }
 }
 
 - (void)viewDidAppear:(BOOL)animated
 {
+#if DEBUG
+    NSLog(@"%@ viewDidAppear", self);
+#endif
     [super viewDidAppear:animated];
-    
+
 //    id<GAITracker> tracker = [[GAI sharedInstance] defaultTracker];
 //    if (isNew) {
 //        [tracker set:kGAIScreenName value:@"MCPaymentNewView_iPhone"];
@@ -461,6 +485,9 @@
 
 - (void)viewDidDisappear:(BOOL)animated
 {
+#if DEBUG
+    NSLog(@"%@, viewDidDisappear", self);
+#endif
     [super viewDidDisappear:animated];
     
     [MCTools setAdBannerIfNotPaid:NO forViewController:self];
@@ -619,6 +646,7 @@
  // Get the new view controller using [segue destinationViewController].
  // Pass the selected object to the new view controller.
      if ([[segue identifier] isEqualToString:@"openSelectCurrency"]) {
+         _selectCurrencyTableViewController = isOpened;
          id destination = [[segue destinationViewController] viewControllers][0];
          if ([destination conformsToProtocol:@protocol(MCThisPaymentProtocol)]) {
              [destination setThisPayment:_thisPayment];

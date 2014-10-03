@@ -91,6 +91,22 @@ NSString * const currencyCellIdentifier_iPad = @"MCSelectCurrencyTableViewCell_i
     [self setObjects:[_dataController fetchedObjects]];
 }
 
+- (void)viewWillDisappear:(BOOL)animated
+{
+#if DEBUG
+    NSLog(@"%@ viewWillDisappear", self);
+#endif
+    [super viewWillDisappear:animated];
+}
+
+- (void)viewDidDisappear:(BOOL)animated
+{
+#if DEBUG
+    NSLog(@"%@, viewDidDisappear", self);
+#endif
+    [super viewDidDisappear:animated];
+}
+
 - (void)didReceiveMemoryWarning
 {
     [super didReceiveMemoryWarning];
@@ -118,6 +134,9 @@ NSString * const currencyCellIdentifier_iPad = @"MCSelectCurrencyTableViewCell_i
 
 - (void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath
 {
+#if DEBUG
+    NSLog(@"%@ didSelectRowAtIndexPath", self);
+#endif
     XRCurrency *selectedCurrency;
     NSManagedObjectContext *context = [[MCWeAllPayStoreController defaultStore] mainThreadContext];
     if (tableView != [[self searchDisplayController] searchResultsTableView]) {

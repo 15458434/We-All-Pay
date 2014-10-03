@@ -189,14 +189,15 @@
     
     if (!_dataController) {
         _dataController = [[MCWeAllPayStoreController defaultStore] paymentPresenceDataControllerForDelegate:self];
+        
     }
 
-    UIManagedDocument *weAllPayDocument = [[MCWeAllPayStoreController defaultStore] weAllPayStoreDocument];
-    if (![[MCWeAllPayStoreController defaultStore] isDocumentStateNormal]) {
-        [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(performFetchAndReloadTableView:) name:UIDocumentStateChangedNotification object:weAllPayDocument];
-    } else {
-        [self performFetch];
-    }
+//    UIManagedDocument *weAllPayDocument = [[MCWeAllPayStoreController defaultStore] weAllPayStoreDocument];
+//    if (![[MCWeAllPayStoreController defaultStore] isDocumentStateNormal]) {
+//        [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(performFetchAndReloadTableView:) name:UIDocumentStateChangedNotification object:weAllPayDocument];
+//    } else {
+//        [self performFetch];
+//    }
 }
 
 - (void)viewDidAppear:(BOOL)animated
