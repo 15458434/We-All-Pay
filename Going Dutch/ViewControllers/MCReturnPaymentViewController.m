@@ -272,7 +272,6 @@ typedef NS_ENUM(BOOL, MCXRatesMissing) {
                 break;
         }
     }
-
 }
 
 #pragma mark - MFMailComposeViewControllerDelegate
