@@ -363,8 +363,6 @@
         isNew = NO;
     }
     
-    _dataController = [[MCWeAllPayStoreController defaultStore] paymentPresenceDataControllerForDelegate:self];
-    
     // If tonight's bill wasn't passed along.
     if (!_tonightsBill) {
         NSLog(@"tonightsBill wasn't passed along.");
@@ -432,6 +430,8 @@
         }
         [[self navigationItem] setTitleView:twoLabelTitleView];
     }
+    
+    _dataController = [[MCWeAllPayStoreController defaultStore] paymentPresenceDataControllerForDelegate:self];
     
     // Fill in the form if data is present.
     [payerView setText:[[_thisPayment payingPerson] getFullName]];
