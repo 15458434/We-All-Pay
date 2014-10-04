@@ -255,40 +255,48 @@
 
 - (void)controllerWillChangeContent:(NSFetchedResultsController *)controller
 {
-    [[self tableView] beginUpdates];
+    if (self.isViewLoaded && self.view.window) {
+        [[self tableView] beginUpdates];
+    }
+
 }
 
 - (void)controllerDidChangeContent:(NSFetchedResultsController *)controller
 {
-    [[self tableView] endUpdates];
+    if (self.isViewLoaded && self.view.window) {
+        [[self tableView] endUpdates];
+    }
+
 }
 
 - (void)controller:(NSFetchedResultsController *)controller didChangeObject:(id)anObject atIndexPath:(NSIndexPath *)indexPath forChangeType:(NSFetchedResultsChangeType)type newIndexPath:(NSIndexPath *)newIndexPath
 {
-    switch(type) {
-            
-        case NSFetchedResultsChangeInsert:
-            [[self tableView] insertRowsAtIndexPaths:@[newIndexPath]
-                                    withRowAnimation:UITableViewRowAnimationFade];
-            [self setEmptyMessage];
-            break;
-            
-        case NSFetchedResultsChangeDelete:
-            [[self tableView] deleteRowsAtIndexPaths:@[indexPath]
-                                    withRowAnimation:UITableViewRowAnimationFade];
-            [self setEmptyMessage];
-            break;
-            
-        case NSFetchedResultsChangeUpdate:
-            [[self tableView] reloadRowsAtIndexPaths:@[indexPath] withRowAnimation:UITableViewRowAnimationAutomatic];
-            break;
-            
-        case NSFetchedResultsChangeMove:
-            [[self tableView] deleteRowsAtIndexPaths:@[indexPath]
-                                    withRowAnimation:UITableViewRowAnimationFade];
-            [[self tableView] insertRowsAtIndexPaths:@[newIndexPath]
-                                    withRowAnimation:UITableViewRowAnimationFade];
-            break;
+    if (self.isViewLoaded && self.view.window) {
+        switch(type) {
+                
+            case NSFetchedResultsChangeInsert:
+                [[self tableView] insertRowsAtIndexPaths:@[newIndexPath]
+                                        withRowAnimation:UITableViewRowAnimationFade];
+                [self setEmptyMessage];
+                break;
+                
+            case NSFetchedResultsChangeDelete:
+                [[self tableView] deleteRowsAtIndexPaths:@[indexPath]
+                                        withRowAnimation:UITableViewRowAnimationFade];
+                [self setEmptyMessage];
+                break;
+                
+            case NSFetchedResultsChangeUpdate:
+                [[self tableView] reloadRowsAtIndexPaths:@[indexPath] withRowAnimation:UITableViewRowAnimationAutomatic];
+                break;
+                
+            case NSFetchedResultsChangeMove:
+                [[self tableView] deleteRowsAtIndexPaths:@[indexPath]
+                                        withRowAnimation:UITableViewRowAnimationFade];
+                [[self tableView] insertRowsAtIndexPaths:@[newIndexPath]
+                                        withRowAnimation:UITableViewRowAnimationFade];
+                break;
+        }
     }
 }
 
