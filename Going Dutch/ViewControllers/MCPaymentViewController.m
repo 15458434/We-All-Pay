@@ -446,13 +446,9 @@ typedef NS_ENUM(BOOL, ChildViewOpened) {
             paidView.text = [_thisPayment getMoneyValueInCurrencyAsAString];
             [[self tableView] reloadData];
             _selectCurrencyTableViewController = isNotOpened;
-#if DEBUG
-            NSLog(@"The current currency: %@", _thisPayment.currency);
-#endif
         }
-        NSLog(@"Bla bla bla");
     }
-
+    [[self tableView] reloadData];
     
     // Fill in the form if data is present.
     [payerView setText:[[_thisPayment payingPerson] getFullName]];
@@ -483,6 +479,14 @@ typedef NS_ENUM(BOOL, ChildViewOpened) {
 //    [tracker send:[[GAIDictionaryBuilder createAppView] build]];
 }
 
+- (void)viewWillDisappear:(BOOL)animated
+{
+#if DEBUG
+    NSLog(@"%@, viewWillDisappear", self);
+#endif
+    [super viewWillDisappear:animated];
+}
+
 - (void)viewDidDisappear:(BOOL)animated
 {
 #if DEBUG
@@ -492,7 +496,6 @@ typedef NS_ENUM(BOOL, ChildViewOpened) {
     
     [MCTools setAdBannerIfNotPaid:NO forViewController:self];
     
-    _dataController = nil;
 }
 
 - (BOOL)disablesAutomaticKeyboardDismissal
@@ -520,39 +523,45 @@ typedef NS_ENUM(BOOL, ChildViewOpened) {
 
 - (void)controllerWillChangeContent:(NSFetchedResultsController *)controller
 {
-    [[self tableView] beginUpdates];
+    if (self.isViewLoaded && self.view.window) {
+        [[self tableView] beginUpdates];
+    }
 }
 
 - (void)controllerDidChangeContent:(NSFetchedResultsController *)controller
 {
-    [[self tableView] endUpdates];
+    if (self.isViewLoaded && self.view.window) {
+        [[self tableView] endUpdates];
+    }
 }
 
 - (void)controller:(NSFetchedResultsController *)controller didChangeObject:(id)anObject atIndexPath:(NSIndexPath *)indexPath forChangeType:(NSFetchedResultsChangeType)type newIndexPath:(NSIndexPath *)newIndexPath
 {
-    switch(type) {
-            
-        case NSFetchedResultsChangeInsert:
-            [[self tableView] insertRowsAtIndexPaths:@[newIndexPath]
-                                    withRowAnimation:UITableViewRowAnimationFade];
-            break;
-            
-        case NSFetchedResultsChangeDelete:
-            [[self tableView] deleteRowsAtIndexPaths:@[indexPath]
-                                    withRowAnimation:UITableViewRowAnimationFade];
-            break;
-            
-        case NSFetchedResultsChangeUpdate:
-            [[self tableView] reloadRowsAtIndexPaths:@[indexPath] withRowAnimation:UITableViewRowAnimationAutomatic];
-            paidView.text = [_thisPayment getMoneyValueInCurrencyAsAString];
-            break;
-            
-        case NSFetchedResultsChangeMove:
-            [[self tableView] deleteRowsAtIndexPaths:@[indexPath]
-                                    withRowAnimation:UITableViewRowAnimationFade];
-            [[self tableView] insertRowsAtIndexPaths:@[newIndexPath]
-                                    withRowAnimation:UITableViewRowAnimationFade];
-            break;
+    if (self.isViewLoaded && self.view.window) {
+        switch(type) {
+                
+            case NSFetchedResultsChangeInsert:
+                [[self tableView] insertRowsAtIndexPaths:@[newIndexPath]
+                                        withRowAnimation:UITableViewRowAnimationFade];
+                break;
+                
+            case NSFetchedResultsChangeDelete:
+                [[self tableView] deleteRowsAtIndexPaths:@[indexPath]
+                                        withRowAnimation:UITableViewRowAnimationFade];
+                break;
+                
+            case NSFetchedResultsChangeUpdate:
+                [[self tableView] reloadRowsAtIndexPaths:@[indexPath] withRowAnimation:UITableViewRowAnimationAutomatic];
+                paidView.text = [_thisPayment getMoneyValueInCurrencyAsAString];
+                break;
+                
+            case NSFetchedResultsChangeMove:
+                [[self tableView] deleteRowsAtIndexPaths:@[indexPath]
+                                        withRowAnimation:UITableViewRowAnimationFade];
+                [[self tableView] insertRowsAtIndexPaths:@[newIndexPath]
+                                        withRowAnimation:UITableViewRowAnimationFade];
+                break;
+        }
     }
 }
 

@@ -23,14 +23,19 @@
 
 + (MCCurrency *)generateCurrencyFromSelectedLocaleForContext:(NSManagedObjectContext *)context;
 {
+#if DEBUG
+    NSLog(@"%@ generateCurrencyFromSelectedLocaleForContext", self);
+#endif
     NSParameterAssert(context);
-    NSDictionary *allCurrenciesDictionary = [MCxRatesController getCurrencyDictionary];
+//    NSDictionary *allCurrenciesDictionary = [MCxRatesController getCurrencyDictionary];
     NSString *currencyCodeFromCurrentLocale = [[NSLocale currentLocale] objectForKey:NSLocaleCurrencyCode];
-    NSDictionary *currencyDictionaryFromCurrencyCode = [allCurrenciesDictionary objectForKey:currencyCodeFromCurrentLocale];
+//    NSDictionary *currencyDictionaryFromCurrencyCode = [allCurrenciesDictionary objectForKey:currencyCodeFromCurrentLocale];
+    NSManagedObjectContext *xrContext = [[XRCurrencyStoreController sharedStore] mainQueueContext];
+    XRCurrency *xrCurrency = [[XRCurrencyStoreController sharedStore] fetchCurrencyWithCode:currencyCodeFromCurrentLocale inContext:xrContext];
     MCCurrency *newCurrency = [NSEntityDescription insertNewObjectForEntityForName:@"MCCurrency" inManagedObjectContext:context];
-    newCurrency.code = currencyCodeFromCurrentLocale;
-    newCurrency.name = [currencyDictionaryFromCurrencyCode objectForKey:@"name"];
-    newCurrency.symbol = [MCxRatesController getSymbolForCurrencyISOCode:currencyCodeFromCurrentLocale];
+    newCurrency.code = [xrCurrency.code copy];
+    newCurrency.name = [xrCurrency.name copy];
+    newCurrency.symbol = [xrCurrency.symbol copy];
     newCurrency.isStillValid = @YES;
     return newCurrency;
 }

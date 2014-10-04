@@ -329,7 +329,7 @@ MCiCloudUse const isiCloudUsed = iCloudIsNotUsed;
     // What entities will be fetched.
     NSFetchRequest *request = [NSFetchRequest fetchRequestWithEntityName:@"MCPaymentPresence"];
     // How to sort the data.
-    [request setRelationshipKeyPathsForPrefetching:@[ @"person", @"payment", @"currency", @"onWhichBill.mainCurrency" ]];
+    [request setRelationshipKeyPathsForPrefetching:@[ @"person", @"payment", @"payment.currency", @"onWhichBill.mainCurrency", @"payment.exchangeRate" ]];
     NSSortDescriptor *sortDescriptor = [NSSortDescriptor sortDescriptorWithKey:@"dateCreated" ascending:NO];
     NSArray *sortDescriptorArray = @[sortDescriptor];
     [request setSortDescriptors:sortDescriptorArray];
