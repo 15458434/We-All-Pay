@@ -161,6 +161,8 @@
     }
     if ([[_dataController fetchedObjects] count] > 0) {
         [[emptyMessage bigMessage] setAlpha:0.0];
+    } else {
+        [[emptyMessage bigMessage] setAlpha:1.0];
     }
 }
 
