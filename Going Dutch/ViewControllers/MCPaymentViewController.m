@@ -7,6 +7,8 @@
 //
 
 #import "MCPaymentViewController.h"
+#import "UIView+MCAddons.h"
+
 #import "MCPayment+addons.h"
 #import "MCPerson+addons.h"
 #import "MCSharedBill+addons.h"
@@ -78,6 +80,18 @@ typedef NS_ENUM(BOOL, ChildViewOpened) {
     }
     [[MCWeAllPayStoreController defaultStore] saveMainThreadContext];
     [[[self navigationController] presentingViewController] dismissViewControllerAnimated:YES completion:nil];
+}
+
+- (IBAction)currencySelectionPressed:(id)sender
+{
+#if DEBUG
+    NSLog(@"%@, currencySelectionPressed", self);
+#endif
+    kindOfPaidFieldDismiss = currencySelectionTapped;
+    UIView *myFirstResponder = [[self view] getFirstResponder];
+    [myFirstResponder resignFirstResponder];
+    
+    [self performSegueWithIdentifier:@"openSelectCurrency" sender:self];
 }
 
 - (void)cancelPersonPicker:(id)selector
@@ -308,12 +322,17 @@ typedef NS_ENUM(BOOL, ChildViewOpened) {
 - (void)textFieldDidEndEditing:(UITextField *)textField
 {
     if (textField == paidView) {
+#if DEBUG
+        NSLog(@"kindOfPaidFieldDismiss = %d", kindOfPaidFieldDismiss);
+#endif
         if (kindOfPaidFieldDismiss == cancelIsPressed) {
             // Restore stored value
             [paidView setText:[_thisPayment getMoneyValueInCurrencyAsAString]];
         } else if (kindOfPaidFieldDismiss == doneIsPressed) {
             [self storeMoneySpent];
         } else if (kindOfPaidFieldDismiss == otherTextFieldSelected) {
+            [self storeMoneySpent];
+        } else if (kindOfPaidFieldDismiss == currencySelectionTapped) {
             [self storeMoneySpent];
         } else if (kindOfPaidFieldDismiss == backgroundTapped){
             // Restore stored value
@@ -333,12 +352,14 @@ typedef NS_ENUM(BOOL, ChildViewOpened) {
                 _payerPicture.image = nil;
             }
         }
+        kindOfPaidFieldDismiss = backgroundTapped;
     } else if (textField == itemView) {
         // Do something to store value of placeview.
         [self storePlaceViewData];
         NSDate *nu = [NSDate date];
         [_tonightsBill setDateModified:nu];
         [_thisPayment setDateModified:nu];
+        kindOfPaidFieldDismiss = backgroundTapped;
     }
 }
 
@@ -413,7 +434,7 @@ typedef NS_ENUM(BOOL, ChildViewOpened) {
     
     // Make sure a tap in the background dimisses the keyboard as well.
     UITapGestureRecognizer *thatTickles = [[UITapGestureRecognizer alloc] initWithTarget:self action:@selector(tappedInTheBackground:)];
-    [thatTickles setCancelsTouchesInView:NO];
+    [thatTickles setCancelsTouchesInView:YES];
     [[self tableView] addGestureRecognizer:thatTickles];
 }
 
@@ -655,6 +676,9 @@ typedef NS_ENUM(BOOL, ChildViewOpened) {
  // Get the new view controller using [segue destinationViewController].
  // Pass the selected object to the new view controller.
      if ([[segue identifier] isEqualToString:@"openSelectCurrency"]) {
+#if DEBUG
+         NSLog(@"%@, prepareForSegue openSelectCurrency", self);
+#endif
          _selectCurrencyTableViewController = isOpened;
          id destination = [[segue destinationViewController] viewControllers][0];
          if ([destination conformsToProtocol:@protocol(MCThisPaymentProtocol)]) {

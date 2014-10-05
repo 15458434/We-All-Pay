@@ -23,7 +23,8 @@ typedef NS_ENUM(NSUInteger, MCMoneyValueFieldDismissStatus) {
     cancelIsPressed,
     doneIsPressed,
     otherTextFieldSelected,
-    backgroundTapped
+    backgroundTapped,
+    currencySelectionTapped
 };
 
 @protocol MCPaymentViewControllerDelegate <NSObject>

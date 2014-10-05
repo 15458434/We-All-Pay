@@ -1003,7 +1003,7 @@
                                         <color key="titleShadowColor" white="0.5" alpha="1" colorSpace="calibratedWhite"/>
                                     </state>
                                     <connections>
-                                        <segue destination="fIg-ri-deX" kind="modal" identifier="openSelectCurrency" id="jZy-gO-X9I"/>
+                                        <action selector="currencySelectionPressed:" destination="A1E-EB-xnZ" eventType="touchUpInside" id="O1r-3T-ctd"/>
                                     </connections>
                                 </button>
                             </subviews>
@@ -1107,6 +1107,7 @@
                         <outlet property="paidView" destination="ZTv-D4-TBc" id="vfR-Td-aAj"/>
                         <outlet property="payerPicture" destination="rmI-7G-oMX" id="aQ0-4S-9Ub"/>
                         <outlet property="payerView" destination="Gtj-b7-bzJ" id="Hsj-GO-cWJ"/>
+                        <segue destination="fIg-ri-deX" kind="modal" identifier="openSelectCurrency" id="DSi-fr-DCr"/>
                     </connections>
                 </tableViewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="icD-tl-11M" userLabel="First Responder" sceneMemberID="firstResponder"/>
