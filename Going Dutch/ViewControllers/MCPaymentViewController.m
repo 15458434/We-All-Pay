@@ -7,6 +7,8 @@
 //
 
 #import "MCPaymentViewController.h"
+#import "UIView+MCAddons.h"
+
 #import "MCPayment+addons.h"
 #import "MCPerson+addons.h"
 #import "MCSharedBill+addons.h"
@@ -78,6 +80,18 @@ typedef NS_ENUM(BOOL, ChildViewOpened) {
     }
     [[MCWeAllPayStoreController defaultStore] saveMainThreadContext];
     [[[self navigationController] presentingViewController] dismissViewControllerAnimated:YES completion:nil];
+}
+
+- (IBAction)currencySelectionPressed:(id)sender
+{
+#if DEBUG
+    NSLog(@"%@, currencySelectionPressed", self);
+#endif
+    kindOfPaidFieldDismiss = currencySelectionTapped;
+    UIView *myFirstResponder = [[self view] getFirstResponder];
+    [myFirstResponder resignFirstResponder];
+    
+    [self performSegueWithIdentifier:@"openSelectCurrency" sender:self];
 }
 
 - (void)cancelPersonPicker:(id)selector
@@ -308,12 +322,17 @@ typedef NS_ENUM(BOOL, ChildViewOpened) {
 - (void)textFieldDidEndEditing:(UITextField *)textField
 {
     if (textField == paidView) {
+#if DEBUG
+        NSLog(@"kindOfPaidFieldDismiss = %d", kindOfPaidFieldDismiss);
+#endif
         if (kindOfPaidFieldDismiss == cancelIsPressed) {
             // Restore stored value
             [paidView setText:[_thisPayment getMoneyValueInCurrencyAsAString]];
         } else if (kindOfPaidFieldDismiss == doneIsPressed) {
             [self storeMoneySpent];
         } else if (kindOfPaidFieldDismiss == otherTextFieldSelected) {
+            [self storeMoneySpent];
+        } else if (kindOfPaidFieldDismiss == currencySelectionTapped) {
             [self storeMoneySpent];
         } else if (kindOfPaidFieldDismiss == backgroundTapped){
             // Restore stored value
@@ -333,12 +352,14 @@ typedef NS_ENUM(BOOL, ChildViewOpened) {
                 _payerPicture.image = nil;
             }
         }
+        kindOfPaidFieldDismiss = backgroundTapped;
     } else if (textField == itemView) {
         // Do something to store value of placeview.
         [self storePlaceViewData];
         NSDate *nu = [NSDate date];
         [_tonightsBill setDateModified:nu];
         [_thisPayment setDateModified:nu];
+        kindOfPaidFieldDismiss = backgroundTapped;
     }
 }
 
@@ -413,7 +434,7 @@ typedef NS_ENUM(BOOL, ChildViewOpened) {
     
     // Make sure a tap in the background dimisses the keyboard as well.
     UITapGestureRecognizer *thatTickles = [[UITapGestureRecognizer alloc] initWithTarget:self action:@selector(tappedInTheBackground:)];
-    [thatTickles setCancelsTouchesInView:NO];
+    [thatTickles setCancelsTouchesInView:YES];
     [[self tableView] addGestureRecognizer:thatTickles];
 }
 
@@ -446,13 +467,9 @@ typedef NS_ENUM(BOOL, ChildViewOpened) {
             paidView.text = [_thisPayment getMoneyValueInCurrencyAsAString];
             [[self tableView] reloadData];
             _selectCurrencyTableViewController = isNotOpened;
-#if DEBUG
-            NSLog(@"The current currency: %@", _thisPayment.currency);
-#endif
         }
-        NSLog(@"Bla bla bla");
     }
-
+    [[self tableView] reloadData];
     
     // Fill in the form if data is present.
     [payerView setText:[[_thisPayment payingPerson] getFullName]];
@@ -483,6 +500,14 @@ typedef NS_ENUM(BOOL, ChildViewOpened) {
 //    [tracker send:[[GAIDictionaryBuilder createAppView] build]];
 }
 
+- (void)viewWillDisappear:(BOOL)animated
+{
+#if DEBUG
+    NSLog(@"%@, viewWillDisappear", self);
+#endif
+    [super viewWillDisappear:animated];
+}
+
 - (void)viewDidDisappear:(BOOL)animated
 {
 #if DEBUG
@@ -492,7 +517,6 @@ typedef NS_ENUM(BOOL, ChildViewOpened) {
     
     [MCTools setAdBannerIfNotPaid:NO forViewController:self];
     
-    _dataController = nil;
 }
 
 - (BOOL)disablesAutomaticKeyboardDismissal
@@ -520,39 +544,45 @@ typedef NS_ENUM(BOOL, ChildViewOpened) {
 
 - (void)controllerWillChangeContent:(NSFetchedResultsController *)controller
 {
-    [[self tableView] beginUpdates];
+    if (self.isViewLoaded && self.view.window) {
+        [[self tableView] beginUpdates];
+    }
 }
 
 - (void)controllerDidChangeContent:(NSFetchedResultsController *)controller
 {
-    [[self tableView] endUpdates];
+    if (self.isViewLoaded && self.view.window) {
+        [[self tableView] endUpdates];
+    }
 }
 
 - (void)controller:(NSFetchedResultsController *)controller didChangeObject:(id)anObject atIndexPath:(NSIndexPath *)indexPath forChangeType:(NSFetchedResultsChangeType)type newIndexPath:(NSIndexPath *)newIndexPath
 {
-    switch(type) {
-            
-        case NSFetchedResultsChangeInsert:
-            [[self tableView] insertRowsAtIndexPaths:@[newIndexPath]
-                                    withRowAnimation:UITableViewRowAnimationFade];
-            break;
-            
-        case NSFetchedResultsChangeDelete:
-            [[self tableView] deleteRowsAtIndexPaths:@[indexPath]
-                                    withRowAnimation:UITableViewRowAnimationFade];
-            break;
-            
-        case NSFetchedResultsChangeUpdate:
-            [[self tableView] reloadRowsAtIndexPaths:@[indexPath] withRowAnimation:UITableViewRowAnimationAutomatic];
-            paidView.text = [_thisPayment getMoneyValueInCurrencyAsAString];
-            break;
-            
-        case NSFetchedResultsChangeMove:
-            [[self tableView] deleteRowsAtIndexPaths:@[indexPath]
-                                    withRowAnimation:UITableViewRowAnimationFade];
-            [[self tableView] insertRowsAtIndexPaths:@[newIndexPath]
-                                    withRowAnimation:UITableViewRowAnimationFade];
-            break;
+    if (self.isViewLoaded && self.view.window) {
+        switch(type) {
+                
+            case NSFetchedResultsChangeInsert:
+                [[self tableView] insertRowsAtIndexPaths:@[newIndexPath]
+                                        withRowAnimation:UITableViewRowAnimationFade];
+                break;
+                
+            case NSFetchedResultsChangeDelete:
+                [[self tableView] deleteRowsAtIndexPaths:@[indexPath]
+                                        withRowAnimation:UITableViewRowAnimationFade];
+                break;
+                
+            case NSFetchedResultsChangeUpdate:
+                [[self tableView] reloadRowsAtIndexPaths:@[indexPath] withRowAnimation:UITableViewRowAnimationAutomatic];
+                paidView.text = [_thisPayment getMoneyValueInCurrencyAsAString];
+                break;
+                
+            case NSFetchedResultsChangeMove:
+                [[self tableView] deleteRowsAtIndexPaths:@[indexPath]
+                                        withRowAnimation:UITableViewRowAnimationFade];
+                [[self tableView] insertRowsAtIndexPaths:@[newIndexPath]
+                                        withRowAnimation:UITableViewRowAnimationFade];
+                break;
+        }
     }
 }
 
@@ -646,6 +676,9 @@ typedef NS_ENUM(BOOL, ChildViewOpened) {
  // Get the new view controller using [segue destinationViewController].
  // Pass the selected object to the new view controller.
      if ([[segue identifier] isEqualToString:@"openSelectCurrency"]) {
+#if DEBUG
+         NSLog(@"%@, prepareForSegue openSelectCurrency", self);
+#endif
          _selectCurrencyTableViewController = isOpened;
          id destination = [[segue destinationViewController] viewControllers][0];
          if ([destination conformsToProtocol:@protocol(MCThisPaymentProtocol)]) {

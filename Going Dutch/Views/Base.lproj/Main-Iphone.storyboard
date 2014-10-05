@@ -1,8 +1,8 @@
 <?xml version="1.0" encoding="UTF-8" standalone="no"?>
-<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="6245" systemVersion="14A379a" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" initialViewController="2iV-RF-WWF">
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="6249" systemVersion="14A379a" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" initialViewController="2iV-RF-WWF">
     <dependencies>
-        <deployment defaultVersion="1792" identifier="iOS"/>
-        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="6238"/>
+        <deployment identifier="iOS"/>
+        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="6243"/>
         <capability name="Aspect ratio constraints" minToolsVersion="5.1"/>
         <capability name="Constraints to layout margins" minToolsVersion="6.0"/>
     </dependencies>
@@ -226,7 +226,7 @@
                                         <constraint firstItem="9kB-QV-Rho" firstAttribute="leading" secondItem="cfL-0W-KAu" secondAttribute="leadingMargin" id="Z9L-Dp-aSS"/>
                                         <constraint firstItem="vGm-aA-fss" firstAttribute="top" secondItem="nIw-LN-RlM" secondAttribute="bottom" constant="6" id="bPI-1B-wBI"/>
                                         <constraint firstItem="vGm-aA-fss" firstAttribute="bottom" secondItem="9kB-QV-Rho" secondAttribute="bottom" constant="1" id="h4h-UJ-xa2"/>
-                                        <constraint firstAttribute="centerY" secondItem="9kB-QV-Rho" secondAttribute="centerY" constant="-0.5" id="sIc-91-5zK"/>
+                                        <constraint firstAttribute="centerY" secondItem="9kB-QV-Rho" secondAttribute="centerY" priority="750" id="sIc-91-5zK"/>
                                         <constraint firstAttribute="bottomMargin" secondItem="9kB-QV-Rho" secondAttribute="bottom" id="xCd-MZ-LL2"/>
                                         <constraint firstAttribute="trailingMargin" secondItem="nIw-LN-RlM" secondAttribute="trailing" constant="9" id="zkA-Lp-U46"/>
                                     </constraints>
@@ -1003,7 +1003,7 @@
                                         <color key="titleShadowColor" white="0.5" alpha="1" colorSpace="calibratedWhite"/>
                                     </state>
                                     <connections>
-                                        <segue destination="fIg-ri-deX" kind="modal" identifier="openSelectCurrency" id="jZy-gO-X9I"/>
+                                        <action selector="currencySelectionPressed:" destination="A1E-EB-xnZ" eventType="touchUpInside" id="O1r-3T-ctd"/>
                                     </connections>
                                 </button>
                             </subviews>
@@ -1107,6 +1107,7 @@
                         <outlet property="paidView" destination="ZTv-D4-TBc" id="vfR-Td-aAj"/>
                         <outlet property="payerPicture" destination="rmI-7G-oMX" id="aQ0-4S-9Ub"/>
                         <outlet property="payerView" destination="Gtj-b7-bzJ" id="Hsj-GO-cWJ"/>
+                        <segue destination="fIg-ri-deX" kind="modal" identifier="openSelectCurrency" id="DSi-fr-DCr"/>
                     </connections>
                 </tableViewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="icD-tl-11M" userLabel="First Responder" sceneMemberID="firstResponder"/>

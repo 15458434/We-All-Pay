@@ -242,10 +242,13 @@ MCiCloudUse const isiCloudUsed = iCloudIsNotUsed;
 
 - (NSFetchedResultsController *)allTripsDataControllerForDelegate:(id)delegate
 {
+#if DEBUG
+    NSLog(@"%@, allTripsDataControllerForDelegate", self);
+#endif
     NSParameterAssert([delegate conformsToProtocol:@protocol(NSFetchedResultsControllerDelegate)]);
     NSFetchRequest *request = [NSFetchRequest fetchRequestWithEntityName:@"MCSharedBill"];
     [request setSortDescriptors:@[[NSSortDescriptor sortDescriptorWithKey:@"dateCreated" ascending:NO]]];
-    [request setRelationshipKeyPathsForPrefetching:@[ @"payments", @"peoplePresent" ]];
+    [request setRelationshipKeyPathsForPrefetching:@[ @"payments", @"peoplePresent", @"mainCurrency", @"payments.exchangeRate" ]];
     NSFetchedResultsController *dataController = [[NSFetchedResultsController alloc] initWithFetchRequest:request
                                                          managedObjectContext:_mainThreadContext
                                                            sectionNameKeyPath:nil
@@ -257,12 +260,15 @@ MCiCloudUse const isiCloudUsed = iCloudIsNotUsed;
 
 - (NSFetchedResultsController *)sharedBillPaymentsDataControllerForDelegate:(id)delegate
 {
+#if DEBUG
+    NSLog(@"%@, sharedBillPaymentsDataControllerForDelegate", self);
+#endif
     NSParameterAssert([delegate conformsToProtocol:@protocol(NSFetchedResultsControllerDelegate)]);
     NSParameterAssert([delegate conformsToProtocol:@protocol(MCTonightsBillTransfer)]);
     MCSharedBill *tonightsBill = [delegate tonightsBill];
     // What entities will be fetched.
     NSFetchRequest *request = [NSFetchRequest fetchRequestWithEntityName:@"MCPayment"];
-    [request setRelationshipKeyPathsForPrefetching:@[ @"payingPerson" ]];
+    [request setRelationshipKeyPathsForPrefetching:@[ @"payingPerson", @"exchangeRate", @"currency" ]];
     // How to sort the data.
     NSSortDescriptor *sortDescriptor = [NSSortDescriptor sortDescriptorWithKey:@"dateCreated" ascending:NO];
     NSArray *sortDescriptorArray = @[sortDescriptor];
@@ -284,13 +290,16 @@ MCiCloudUse const isiCloudUsed = iCloudIsNotUsed;
 
 - (NSFetchedResultsController *)sharedBillPeoplePresentDataControllerForDelegate:(id)delegate
 {
+#if DEBUG
+    NSLog(@"%@ sharedBillPeoplePresentDataControllerForDelegate", self);
+#endif
     NSParameterAssert([delegate conformsToProtocol:@protocol(NSFetchedResultsControllerDelegate)]);
     NSParameterAssert([delegate conformsToProtocol:@protocol(MCTonightsBillTransfer)]);
     MCSharedBill *tonightsBill = [delegate tonightsBill];
     // What entities will be fetched.
     NSFetchRequest *request = [NSFetchRequest fetchRequestWithEntityName:@"MCPerson"];
     // How to sort the data.
-    [request setRelationshipKeyPathsForPrefetching:@[ @"emailAddress", @"payments", @"sharedBill" ]];
+    [request setRelationshipKeyPathsForPrefetching:@[ @"emailAddress", @"payments", @"sharedBill", @"sharedBill.mainCurrency", @"payments.currency" ]];
     NSSortDescriptor *sortDescriptor = [NSSortDescriptor sortDescriptorWithKey:@"dateCreated" ascending:NO];
     NSArray *sortDescriptorArray = @[sortDescriptor];
     [request setSortDescriptors:sortDescriptorArray];
@@ -311,13 +320,16 @@ MCiCloudUse const isiCloudUsed = iCloudIsNotUsed;
 
 - (NSFetchedResultsController *)paymentPresenceDataControllerForDelegate:(id)delegate
 {
+#if DEBUG
+    NSLog(@"%@ paymentPresenceDataControllerForDelegate", self);
+#endif
     NSParameterAssert([delegate conformsToProtocol:@protocol(NSFetchedResultsControllerDelegate)]);
     NSParameterAssert([delegate conformsToProtocol:@protocol(MCThisPaymentProtocol)]);
     MCPayment *thisPayment = [delegate thisPayment];
     // What entities will be fetched.
     NSFetchRequest *request = [NSFetchRequest fetchRequestWithEntityName:@"MCPaymentPresence"];
     // How to sort the data.
-    [request setRelationshipKeyPathsForPrefetching:@[ @"person", @"payment" ]];
+    [request setRelationshipKeyPathsForPrefetching:@[ @"person", @"payment", @"payment.currency", @"onWhichBill.mainCurrency", @"payment.exchangeRate" ]];
     NSSortDescriptor *sortDescriptor = [NSSortDescriptor sortDescriptorWithKey:@"dateCreated" ascending:NO];
     NSArray *sortDescriptorArray = @[sortDescriptor];
     [request setSortDescriptors:sortDescriptorArray];
@@ -331,13 +343,16 @@ MCiCloudUse const isiCloudUsed = iCloudIsNotUsed;
     NSError *error;
     BOOL success = [dataController performFetch:&error];
     if (!success) {
-        NSLog(@"Something went wrong");
+        NSLog(@"Unable to fetch data for paymentPresenceDataController.");
     }
     return dataController;
 }
 
 - (NSFetchedResultsController *)availableCurrencyControllerForDelegate:(id)delegate
 {
+#if DEBUG
+    NSLog(@"%@ availableCurrencyControllerForDelegate", self);
+#endif
     NSParameterAssert([delegate conformsToProtocol:@protocol(NSFetchedResultsControllerDelegate)]);
     NSManagedObjectContext *context = [weAllPayStoreDocument managedObjectContext];
     NSFetchRequest *request = [NSFetchRequest fetchRequestWithEntityName:@"MCCurrency"];

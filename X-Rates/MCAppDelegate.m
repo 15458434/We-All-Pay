@@ -68,7 +68,7 @@
 
 - (void)applicationWillFinishLaunching:(NSNotification *)notification
 {
-
+    
 }
 
 - (void)applicationDidFinishLaunching:(NSNotification *)aNotification
