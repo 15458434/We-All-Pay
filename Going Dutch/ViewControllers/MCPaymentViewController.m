@@ -479,7 +479,7 @@ typedef NS_ENUM(BOOL, ChildViewOpened) {
         _payerPicture.image = _thisPayment.payingPerson.picture;
     }
 
-    if (!_isNew) {
+    if (!_isNew || _selectCurrencyTableViewController == isOpened) {
         paidView.text = [_thisPayment getMoneyValueInCurrencyAsAString];
     }
 }
