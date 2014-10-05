@@ -1,8 +1,8 @@
 <?xml version="1.0" encoding="UTF-8" standalone="no"?>
-<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="6249" systemVersion="14A379a" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" initialViewController="2iV-RF-WWF">
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="6245" systemVersion="14A379a" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" initialViewController="2iV-RF-WWF">
     <dependencies>
-        <deployment identifier="iOS"/>
-        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="6243"/>
+        <deployment defaultVersion="1792" identifier="iOS"/>
+        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="6238"/>
         <capability name="Aspect ratio constraints" minToolsVersion="5.1"/>
         <capability name="Constraints to layout margins" minToolsVersion="6.0"/>
     </dependencies>
@@ -40,7 +40,7 @@
                                     <autoresizingMask key="autoresizingMask"/>
                                     <subviews>
                                         <label opaque="NO" clipsSubviews="YES" userInteractionEnabled="NO" contentMode="left" text="1" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="4gi-jX-9d6" userLabel="eventName">
-                                            <rect key="frame" x="12" y="7" width="229" height="21"/>
+                                            <rect key="frame" x="20" y="7" width="217" height="21"/>
                                             <constraints>
                                                 <constraint firstAttribute="width" priority="1" constant="239" id="8Id-N3-pMG"/>
                                                 <constraint firstAttribute="height" constant="21" id="uAN-Ta-2E6"/>
@@ -50,19 +50,19 @@
                                             <color key="highlightedColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                                         </label>
                                         <label opaque="NO" clipsSubviews="YES" userInteractionEnabled="NO" contentMode="left" placeholderIntrinsicWidth="246" placeholderIntrinsicHeight="15" text="3" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="Jau-C1-70z" userLabel="peoplePresent">
-                                            <rect key="frame" x="12" y="29" width="267" height="15"/>
+                                            <rect key="frame" x="20" y="29" width="259" height="15"/>
                                             <fontDescription key="fontDescription" name="HelveticaNeue-Medium" family="Helvetica Neue" pointSize="12"/>
                                             <color key="textColor" white="0.33333333333333331" alpha="1" colorSpace="calibratedWhite"/>
                                             <color key="highlightedColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                                         </label>
                                         <label opaque="NO" clipsSubviews="YES" userInteractionEnabled="NO" contentMode="left" text="4" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="1z7-SU-Uqv" userLabel="dateModified">
-                                            <rect key="frame" x="12" y="45" width="267" height="15"/>
+                                            <rect key="frame" x="20" y="45" width="259" height="15"/>
                                             <fontDescription key="fontDescription" name="HelveticaNeue-MediumItalic" family="Helvetica Neue" pointSize="12"/>
                                             <color key="textColor" white="0.33333333333333331" alpha="1" colorSpace="calibratedWhite"/>
                                             <color key="highlightedColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                                         </label>
                                         <label opaque="NO" clipsSubviews="YES" userInteractionEnabled="NO" contentMode="left" horizontalCompressionResistancePriority="736" text="2" textAlignment="right" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="PB8-pK-prC" userLabel="totalMoneySpent">
-                                            <rect key="frame" x="249" y="7" width="34" height="21"/>
+                                            <rect key="frame" x="245" y="7" width="34" height="21"/>
                                             <constraints>
                                                 <constraint firstAttribute="width" relation="greaterThanOrEqual" constant="34" id="5wD-dt-6d2"/>
                                             </constraints>
@@ -71,7 +71,7 @@
                                             <color key="highlightedColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                                         </label>
                                         <activityIndicatorView hidden="YES" opaque="NO" contentMode="scaleToFill" horizontalHuggingPriority="750" verticalHuggingPriority="750" hidesWhenStopped="YES" style="gray" translatesAutoresizingMaskIntoConstraints="NO" id="e3M-J8-W8E" userLabel="WaitingForXRatesIndicator">
-                                            <rect key="frame" x="256" y="8" width="20" height="20"/>
+                                            <rect key="frame" x="252" y="8" width="20" height="20"/>
                                         </activityIndicatorView>
                                     </subviews>
                                     <constraints>
@@ -86,9 +86,9 @@
                                         <constraint firstItem="Jau-C1-70z" firstAttribute="top" secondItem="4gi-jX-9d6" secondAttribute="bottom" constant="1" id="ZP7-qF-LuK"/>
                                         <constraint firstAttribute="bottomMargin" secondItem="1z7-SU-Uqv" secondAttribute="bottom" priority="250" id="cRA-Jv-NPT"/>
                                         <constraint firstItem="Jau-C1-70z" firstAttribute="leading" secondItem="4gi-jX-9d6" secondAttribute="leading" id="ppa-PF-KpX"/>
-                                        <constraint firstItem="4gi-jX-9d6" firstAttribute="leading" secondItem="3qP-Z0-Kzg" secondAttribute="leadingMargin" constant="4" id="qL3-nR-oPX"/>
+                                        <constraint firstItem="4gi-jX-9d6" firstAttribute="leading" secondItem="3qP-Z0-Kzg" secondAttribute="leadingMargin" constant="12" id="qL3-nR-oPX"/>
                                         <constraint firstItem="Jau-C1-70z" firstAttribute="leading" secondItem="1z7-SU-Uqv" secondAttribute="leading" id="sBA-Rn-Wbg"/>
-                                        <constraint firstItem="PB8-pK-prC" firstAttribute="trailing" secondItem="3qP-Z0-Kzg" secondAttribute="trailingMargin" constant="4" id="vO8-e3-RW8"/>
+                                        <constraint firstItem="PB8-pK-prC" firstAttribute="trailing" secondItem="3qP-Z0-Kzg" secondAttribute="trailingMargin" id="vO8-e3-RW8"/>
                                     </constraints>
                                 </tableViewCellContentView>
                                 <connections>
