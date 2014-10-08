@@ -119,6 +119,7 @@
         _dataController = [[MCWeAllPayStoreController defaultStore] allTripsDataControllerForDelegate:self];
         [self performFetch];
         [[self tableView] reloadData];
+        [self setEmptyMessage];
     }
 //    UIManagedDocument *weAllPayDocument = [[MCWeAllPayStoreController defaultStore] weAllPayStoreDocument];
 //    if (![[MCWeAllPayStoreController defaultStore] isDocumentStateNormal]) {

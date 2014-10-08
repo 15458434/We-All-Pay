@@ -272,7 +272,6 @@
 		38572AEC169D437B00969C62 /* Default-568h@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "Default-568h@2x.png"; sourceTree = "<group>"; };
 		38572AF6169D443C00969C62 /* MCAllTripsTableViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = MCAllTripsTableViewController.h; path = ViewControllers/MCAllTripsTableViewController.h; sourceTree = "<group>"; };
 		38572B09169F3D2700969C62 /* MCAllTripsTableViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = MCAllTripsTableViewController.m; path = ViewControllers/MCAllTripsTableViewController.m; sourceTree = "<group>"; };
-		3857304B18DAF2F100A900EA /* libTestFlight.a */ = {isa = PBXFileReference; lastKnownFileType = archive.ar; name = libTestFlight.a; path = "Going Dutch/TestFlight SDK/libTestFlight.a"; sourceTree = "<group>"; };
 		385F52FD191C2C360012773D /* We all pay Tests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = "We all pay Tests.xctest"; sourceTree = BUILT_PRODUCTS_DIR; };
 		385F5303191C2C360012773D /* We all pay Tests-Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = "We all pay Tests-Info.plist"; sourceTree = "<group>"; };
 		385F5305191C2C360012773D /* en */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = en; path = en.lproj/InfoPlist.strings; sourceTree = "<group>"; };
@@ -426,7 +425,6 @@
 		38C2BCA118FBEC5200233D24 /* MCPersonTableViewCell_iPad.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = MCPersonTableViewCell_iPad.m; path = Views/iPad/MCPersonTableViewCell_iPad.m; sourceTree = "<group>"; };
 		38C2BCA318FC3CD400233D24 /* MCPaymentTableViewCell_iPad.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = MCPaymentTableViewCell_iPad.h; path = Views/iPad/MCPaymentTableViewCell_iPad.h; sourceTree = "<group>"; };
 		38C2BCA418FC3CD400233D24 /* MCPaymentTableViewCell_iPad.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = MCPaymentTableViewCell_iPad.m; path = Views/iPad/MCPaymentTableViewCell_iPad.m; sourceTree = "<group>"; };
-		38CC48DE190A9E7000741201 /* libGoogleAnalyticsServices.a */ = {isa = PBXFileReference; lastKnownFileType = archive.ar; path = libGoogleAnalyticsServices.a; sourceTree = "<group>"; };
 		38CC8C4818ED61FD006D99E7 /* MCPersonTableViewController_iPad.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = MCPersonTableViewController_iPad.h; path = ViewControllers/iPad/MCPersonTableViewController_iPad.h; sourceTree = "<group>"; };
 		38CC8C4918ED61FD006D99E7 /* MCPersonTableViewController_iPad.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = MCPersonTableViewController_iPad.m; path = ViewControllers/iPad/MCPersonTableViewController_iPad.m; sourceTree = "<group>"; };
 		38CDE8FE17135B6300387CAA /* MCTools.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = MCTools.h; sourceTree = "<group>"; };
@@ -596,8 +594,6 @@
 		3829C61B192628C100DE91D4 /* iOS */ = {
 			isa = PBXGroup;
 			children = (
-				38CC48DE190A9E7000741201 /* libGoogleAnalyticsServices.a */,
-				3857304B18DAF2F100A900EA /* libTestFlight.a */,
 				38DC8B3519084ABE00762235 /* SystemConfiguration.framework */,
 				386FC36F18E5BE1900428294 /* iAd.framework */,
 				38690702186F0EEF006A5C11 /* libz.dylib */,
@@ -1580,7 +1576,7 @@
 				IPHONEOS_DEPLOYMENT_TARGET = 8.0;
 				ONLY_ACTIVE_ARCH = YES;
 				PROVISIONING_PROFILE = "";
-				"PROVISIONING_PROFILE[sdk=iphoneos*]" = "db310e78-2530-40f0-afcf-d2665761ba94";
+				"PROVISIONING_PROFILE[sdk=iphoneos*]" = "7c2babe2-5f0a-40b5-b66b-d820d3c2dcd4";
 				SDKROOT = iphoneos;
 			};
 			name = Debug;
@@ -1606,7 +1602,7 @@
 				IPHONEOS_DEPLOYMENT_TARGET = 8.0;
 				OTHER_CFLAGS = "-DNS_BLOCK_ASSERTIONS=1";
 				PROVISIONING_PROFILE = "";
-				"PROVISIONING_PROFILE[sdk=iphoneos*]" = "db310e78-2530-40f0-afcf-d2665761ba94";
+				"PROVISIONING_PROFILE[sdk=iphoneos*]" = "7c2babe2-5f0a-40b5-b66b-d820d3c2dcd4";
 				SDKROOT = iphoneos;
 				VALIDATE_PRODUCT = YES;
 			};
@@ -1633,7 +1629,7 @@
 				);
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				PROVISIONING_PROFILE = "";
-				"PROVISIONING_PROFILE[sdk=iphoneos*]" = "db310e78-2530-40f0-afcf-d2665761ba94";
+				"PROVISIONING_PROFILE[sdk=iphoneos*]" = "7c2babe2-5f0a-40b5-b66b-d820d3c2dcd4";
 				SWIFT_OBJC_BRIDGING_HEADER = "X-Rates/We all pay-Bridging-Header.h";
 				SWIFT_OPTIMIZATION_LEVEL = "-Onone";
 				TARGETED_DEVICE_FAMILY = "1,2";
@@ -1662,7 +1658,7 @@
 				);
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				PROVISIONING_PROFILE = "";
-				"PROVISIONING_PROFILE[sdk=iphoneos*]" = "db310e78-2530-40f0-afcf-d2665761ba94";
+				"PROVISIONING_PROFILE[sdk=iphoneos*]" = "7c2babe2-5f0a-40b5-b66b-d820d3c2dcd4";
 				SWIFT_OBJC_BRIDGING_HEADER = "X-Rates/We all pay-Bridging-Header.h";
 				TARGETED_DEVICE_FAMILY = "1,2";
 				WRAPPER_EXTENSION = app;
