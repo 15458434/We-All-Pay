@@ -1,0 +1,62 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE plist PUBLIC "-//Apple//DTD PLIST 1.0//EN" "http://www.apple.com/DTDs/PropertyList-1.0.dtd">
+<plist version="1.0">
+<array>
+	<dict>
+		<key>categoryDescription</key>
+		<string>Miscellaneous</string>
+		<key>categroryPictureFilename</key>
+		<string>Miscellaneous</string>
+		<key>categoryId</key>
+		<integer>0</integer>
+	</dict>
+	<dict>
+		<key>categoryDescription</key>
+		<string>Dinner</string>
+		<key>categoryPictureFilename</key>
+		<string>Dinner</string>
+		<key>categoryId</key>
+		<integer>1</integer>
+	</dict>
+	<dict>
+		<key>categoryDescription</key>
+		<string>Drinks</string>
+		<key>categoryPictureFilename</key>
+		<string>Drinks</string>
+		<key>categoryId</key>
+		<integer>2</integer>
+	</dict>
+	<dict>
+		<key>categoryDescription</key>
+		<string>Fuel</string>
+		<key>categoryPictureFilename</key>
+		<string>Fuel</string>
+		<key>categoryId</key>
+		<integer>3</integer>
+	</dict>
+	<dict>
+		<key>categoryDescription</key>
+		<string>Groceries</string>
+		<key>categoryPictureFilename</key>
+		<string>Groceries</string>
+		<key>categoryId</key>
+		<integer>4</integer>
+	</dict>
+	<dict>
+		<key>categoryDescription</key>
+		<string>Hotel</string>
+		<key>categoryPictureFilename</key>
+		<string>Hotel</string>
+		<key>categoryId</key>
+		<integer>5</integer>
+	</dict>
+	<dict>
+		<key>categoryDescription</key>
+		<string>Tickets</string>
+		<key>categoryPictureFilename</key>
+		<string>Tickets</string>
+		<key>categoryId</key>
+		<integer>6</integer>
+	</dict>
+</array>
+</plist>
