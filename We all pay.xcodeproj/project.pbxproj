@@ -67,6 +67,11 @@
 		385F5311191C2D140012773D /* MCPersonAddonsTest.m in Sources */ = {isa = PBXBuildFile; fileRef = 3898F33D18F40CC100BFFC61 /* MCPersonAddonsTest.m */; };
 		385F5312191C2D140012773D /* MCSharedBillAddOnsTest.m in Sources */ = {isa = PBXBuildFile; fileRef = 3898F33B18F40B9D00BFFC61 /* MCSharedBillAddOnsTest.m */; };
 		385F5313191C2D140012773D /* WeAllPayStoreTests.m in Sources */ = {isa = PBXBuildFile; fileRef = 38D785FC18DC53C30074B670 /* WeAllPayStoreTests.m */; };
+		3860574719EE92EB00BD5B78 /* MCCategoryPictureObject.m in Sources */ = {isa = PBXBuildFile; fileRef = 3860574619EE92EB00BD5B78 /* MCCategoryPictureObject.m */; };
+		3860574C19EE958700BD5B78 /* MCCategoryPictureStoreController.m in Sources */ = {isa = PBXBuildFile; fileRef = 3860574B19EE958700BD5B78 /* MCCategoryPictureStoreController.m */; };
+		3860574E19EE95F000BD5B78 /* categoryPictures.plist in Resources */ = {isa = PBXBuildFile; fileRef = 3860574D19EE95F000BD5B78 /* categoryPictures.plist */; };
+		3860575019EE963600BD5B78 /* categoryPictures.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 3860574F19EE963600BD5B78 /* categoryPictures.xcassets */; };
+		3860575519EEB28300BD5B78 /* MCCategoryPictureStoreTest.m in Sources */ = {isa = PBXBuildFile; fileRef = 3860575419EEB28300BD5B78 /* MCCategoryPictureStoreTest.m */; };
 		3862444319C46D43004CA03F /* MCRateMeController.m in Sources */ = {isa = PBXBuildFile; fileRef = 3862444219C46D43004CA03F /* MCRateMeController.m */; };
 		3864AA81195B0B6600831C93 /* MCiScreenRootViewController_iPad.m in Sources */ = {isa = PBXBuildFile; fileRef = 3864AA80195B0B6600831C93 /* MCiScreenRootViewController_iPad.m */; };
 		3867CE4718704B2E001EC222 /* Main-Iphone.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 3867CE4918704B2E001EC222 /* Main-Iphone.storyboard */; };
@@ -278,6 +283,13 @@
 		385F5307191C2C360012773D /* We_all_pay_Tests.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = We_all_pay_Tests.m; sourceTree = "<group>"; };
 		385F5309191C2C360012773D /* We all pay Tests-Prefix.pch */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = "We all pay Tests-Prefix.pch"; sourceTree = "<group>"; };
 		3860574419EE904B00BD5B78 /* WeAllPayStore 4.xcdatamodel */ = {isa = PBXFileReference; lastKnownFileType = wrapper.xcdatamodel; path = "WeAllPayStore 4.xcdatamodel"; sourceTree = "<group>"; };
+		3860574519EE92EB00BD5B78 /* MCCategoryPictureObject.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = MCCategoryPictureObject.h; path = CategoryPicturesStore/MCCategoryPictureObject.h; sourceTree = "<group>"; };
+		3860574619EE92EB00BD5B78 /* MCCategoryPictureObject.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = MCCategoryPictureObject.m; path = CategoryPicturesStore/MCCategoryPictureObject.m; sourceTree = "<group>"; };
+		3860574A19EE958700BD5B78 /* MCCategoryPictureStoreController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = MCCategoryPictureStoreController.h; path = CategoryPicturesStore/MCCategoryPictureStoreController.h; sourceTree = "<group>"; };
+		3860574B19EE958700BD5B78 /* MCCategoryPictureStoreController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = MCCategoryPictureStoreController.m; path = CategoryPicturesStore/MCCategoryPictureStoreController.m; sourceTree = "<group>"; };
+		3860574D19EE95F000BD5B78 /* categoryPictures.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; name = categoryPictures.plist; path = CategoryPicturesStore/categoryPictures.plist; sourceTree = "<group>"; };
+		3860574F19EE963600BD5B78 /* categoryPictures.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = categoryPictures.xcassets; sourceTree = "<group>"; };
+		3860575419EEB28300BD5B78 /* MCCategoryPictureStoreTest.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = MCCategoryPictureStoreTest.m; sourceTree = "<group>"; };
 		3862444119C46D43004CA03F /* MCRateMeController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = MCRateMeController.h; path = Misc/MCRateMeController.h; sourceTree = "<group>"; };
 		3862444219C46D43004CA03F /* MCRateMeController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = MCRateMeController.m; path = Misc/MCRateMeController.m; sourceTree = "<group>"; };
 		3864AA7F195B0B6600831C93 /* MCiScreenRootViewController_iPad.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = MCiScreenRootViewController_iPad.h; path = ViewControllers/iPad/MCiScreenRootViewController_iPad.h; sourceTree = "<group>"; };
@@ -667,6 +679,7 @@
 				3873A2A616F2858A000832FD /* Going Dutch.entitlements */,
 				38334EC5172D323D0063B919 /* Launch images */,
 				3898AADD17271157008F947E /* icons */,
+				3860574919EE92FC00BD5B78 /* CategoryPicturesStore */,
 				3801F89D16DFC6D400DF8675 /* DataStore */,
 				3892E3AB179055F40038894B /* DataModel */,
 				38572AF4169D439E00969C62 /* Views */,
@@ -735,6 +748,7 @@
 		385F5301191C2C360012773D /* We all pay Tests */ = {
 			isa = PBXGroup;
 			children = (
+				3860575419EEB28300BD5B78 /* MCCategoryPictureStoreTest.m */,
 				388063ED19A4D00C000CF36B /* XRCurrencyStoreControllerTest.m */,
 				389DE90F197FD6DF00169645 /* MCCurrencyTest.m */,
 				389DE908197FC5E900169645 /* MCExchangeRateTest.m */,
@@ -757,6 +771,19 @@
 				385F5309191C2C360012773D /* We all pay Tests-Prefix.pch */,
 			);
 			name = "Supporting Files";
+			sourceTree = "<group>";
+		};
+		3860574919EE92FC00BD5B78 /* CategoryPicturesStore */ = {
+			isa = PBXGroup;
+			children = (
+				3860574519EE92EB00BD5B78 /* MCCategoryPictureObject.h */,
+				3860574619EE92EB00BD5B78 /* MCCategoryPictureObject.m */,
+				3860574A19EE958700BD5B78 /* MCCategoryPictureStoreController.h */,
+				3860574B19EE958700BD5B78 /* MCCategoryPictureStoreController.m */,
+				3860574D19EE95F000BD5B78 /* categoryPictures.plist */,
+				3860574F19EE963600BD5B78 /* categoryPictures.xcassets */,
+			);
+			name = CategoryPicturesStore;
 			sourceTree = "<group>";
 		};
 		3867CE4218704161001EC222 /* Storyboard */ = {
@@ -1221,8 +1248,10 @@
 				387D3A911870652B0060FAF8 /* Localizable.strings in Resources */,
 				38334ECA173552330063B919 /* Default.png in Resources */,
 				38334ECB1735523A0063B919 /* Default@2x.png in Resources */,
+				3860574E19EE95F000BD5B78 /* categoryPictures.plist in Resources */,
 				38001C9B194EE284008ACD94 /* Images.xcassets in Resources */,
 				38DC8B4319097FEA00762235 /* Main-iPad.storyboard in Resources */,
+				3860575019EE963600BD5B78 /* categoryPictures.xcassets in Resources */,
 				3867CE4718704B2E001EC222 /* Main-Iphone.storyboard in Resources */,
 				38334ECC173552410063B919 /* Default-568h@2x.png in Resources */,
 				3897157B17901D0F005BE03E /* MCTextFieldAndLabelTitleView.xib in Resources */,
@@ -1291,6 +1320,7 @@
 				3898F33218F180B500BFFC61 /* MCPaymentTableViewController_iPad.m in Sources */,
 				38C2BCA218FBEC5200233D24 /* MCPersonTableViewCell_iPad.m in Sources */,
 				38AD8C12197E8926005C3436 /* MCAddCurrenciesEntityMigrationPolicy.m in Sources */,
+				3860574719EE92EB00BD5B78 /* MCCategoryPictureObject.m in Sources */,
 				3898F33618F2CB6700BFFC61 /* MCSelectPayerTableViewController_iPad.m in Sources */,
 				38CDE90017135B6300387CAA /* MCTools.m in Sources */,
 				3829AD0F178B41320025969D /* WeAllPayStore.xcdatamodeld in Sources */,
@@ -1298,6 +1328,7 @@
 				38DB85DD17E45FB7006237CF /* MCEmailAddress+addons.m in Sources */,
 				381F6941194EE5A800F465FC /* MCTwoLabelIscreenTableViewCell.m in Sources */,
 				38295AE818425E74009FB5DE /* MCCancelDoneViewController.m in Sources */,
+				3860574C19EE958700BD5B78 /* MCCategoryPictureStoreController.m in Sources */,
 				38EF31451938BA07004912F0 /* UINavigationController+KeyboardDismiss.m in Sources */,
 				380BF831181088B9008A8B74 /* MCEmailAddressTableViewCell.m in Sources */,
 				3899D3F8194F453D00893323 /* MCStoreInterface.m in Sources */,
@@ -1374,6 +1405,7 @@
 			files = (
 				389DE909197FC5E900169645 /* MCExchangeRateTest.m in Sources */,
 				388063EE19A4D00C000CF36B /* XRCurrencyStoreControllerTest.m in Sources */,
+				3860575519EEB28300BD5B78 /* MCCategoryPictureStoreTest.m in Sources */,
 				385F530F191C2D140012773D /* MCPaymentPresenceTest.m in Sources */,
 				385F5310191C2D140012773D /* MCPaymentAddonsTest.m in Sources */,
 				381318C319A2531500C821B0 /* XRCurrencyStoreController.m in Sources */,
