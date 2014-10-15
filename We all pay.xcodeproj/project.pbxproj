@@ -1954,7 +1954,7 @@
 				3899508E191A7282000B00BC /* WeAllPayStore 2.xcdatamodel */,
 				3829AD0E178B41320025969D /* WeAllPayStore.xcdatamodel */,
 			);
-			currentVersion = 38AD8C0D197E85AA005C3436 /* WeAllPayStore 3.xcdatamodel */;
+			currentVersion = 3860574419EE904B00BD5B78 /* WeAllPayStore 4.xcdatamodel */;
 			path = WeAllPayStore.xcdatamodeld;
 			sourceTree = "<group>";
 			versionGroupType = wrapper.xcdatamodel;
