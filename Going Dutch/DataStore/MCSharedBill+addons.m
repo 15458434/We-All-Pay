@@ -310,8 +310,7 @@
 - (NSString *)totalSumOfMoneyOfThisSharedBillAsCurrencyString
 {
     NSNumber *totalSpent = [self totalSumOfMoneyOfThisSharedBill];
-    NSNumberFormatter *nf = [[NSNumberFormatter alloc] init];
-    [nf setLocale:[NSLocale currentLocale]];
+    NSNumberFormatter *nf = [[self mainCurrency] numberFormatter];
     [nf setNumberStyle:NSNumberFormatterCurrencyStyle];
     [nf setFormatterBehavior:NSNumberFormatterBehaviorDefault];
     return [nf stringFromNumber:totalSpent];

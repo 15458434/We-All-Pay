@@ -18,6 +18,7 @@
 #import "MCWeAllPayStoreController.h"
 #import "MCSharedBill+addons.h"
 #import "MCPerson+addons.h"
+#import "MCCurrency+addons.h"
 
 #import "MCTonightsBillTransfer.h"
 
@@ -345,7 +346,7 @@ typedef NS_ENUM(BOOL, MCTonightsBillStatus) {
 
     if ([thisTrip areAllExchangeRatesValid]) {
         
-        NSNumberFormatter *nf = [[NSNumberFormatter alloc] init];
+        NSNumberFormatter *nf = [[thisTrip mainCurrency] numberFormatter];
         [nf setNumberStyle:NSNumberFormatterCurrencyStyle];
         NSString *moneyString = [nf stringFromNumber:[thisTrip totalSumOfMoneyOfThisSharedBill]];
         [[allTripsTableViewCell totalCostLabel] setHidden:NO];
