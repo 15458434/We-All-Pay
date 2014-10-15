@@ -5,7 +5,7 @@
 	<dict>
 		<key>categoryDescription</key>
 		<string>Miscellaneous</string>
-		<key>categroryPictureFilename</key>
+		<key>categoryPictureFilename</key>
 		<string>Miscellaneous</string>
 		<key>categoryId</key>
 		<integer>0</integer>
