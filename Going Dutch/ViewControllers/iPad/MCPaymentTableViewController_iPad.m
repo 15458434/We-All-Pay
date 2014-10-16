@@ -79,6 +79,13 @@
 
 #pragma mark - New in this class
 
+- (void)putImageOnCategoryButton
+{
+    // Put the correct category symbol on the categoryButton.
+    MCCategoryPictureObject *categoryObject = [[[MCCategoryPictureStoreController sharedController] pictureObjects] objectAtIndex:[_thisPayment.categoryId shortValue]];
+    [_categoryButton setImage:categoryObject.largePicture forState:UIControlStateNormal];
+}
+
 - (void)performFetchAndReloadTableView:(NSNotification *)notification
 {
     UIManagedDocument *weAllPayDocument = [[MCWeAllPayStoreController defaultStore] weAllPayStoreDocument];
@@ -188,10 +195,11 @@
         }
         _isNew = isNotNew;
     }
-    
-    // Put the correct category symbol on the categoryButton.
-    MCCategoryPictureObject *categoryObject = [[[MCCategoryPictureStoreController sharedController] pictureObjects] objectAtIndex:[_thisPayment.categoryId shortValue]];
-    [_categoryButton setImage:categoryObject.largePicture forState:UIControlStateNormal];
+
+    [self putImageOnCategoryButton];
+//    // Put the correct category symbol on the categoryButton.
+//    MCCategoryPictureObject *categoryObject = [[[MCCategoryPictureStoreController sharedController] pictureObjects] objectAtIndex:[_thisPayment.categoryId shortValue]];
+//    [_categoryButton setImage:categoryObject.largePicture forState:UIControlStateNormal];
     
     NSSortDescriptor *sortDescriptor = [NSSortDescriptor sortDescriptorWithKey:@"person.firstName" ascending:YES];
     _paymentPresenceArray = [[_thisPayment peopleSharingPayment] sortedArrayUsingDescriptors:@[sortDescriptor]];
@@ -479,6 +487,26 @@
             [destination setDismissMe:^{
                 NSLog(@"Dismiss from paymentTableViewController.");
                 [selectCurrencyPopover dismissPopoverAnimated:YES];
+            }];
+        }
+    }
+    
+    if ([[segue identifier] isEqualToString:@"selectCategory"]) {
+        id destination = [segue destinationViewController];
+        if ([destination conformsToProtocol:@protocol(MCThisPaymentProtocol)]) {
+            [destination setThisPayment:_thisPayment];
+        }
+        if ([destination conformsToProtocol:@protocol(MCDismissMeBlockProtocol)]) {
+            UIPopoverController *selectCurrencyPopover = [(UIStoryboardPopoverSegue *)segue popoverController];
+            selectCurrencyPopover.delegate = self;
+            __weak typeof(self) weakSelf = self;
+            [destination setDismissMe:^{
+                NSLog(@"Dismiss from paymentTableViewController.");
+                [selectCurrencyPopover dismissPopoverAnimated:YES];
+                __strong typeof(weakSelf) strongSelf = weakSelf;
+                if (strongSelf) {
+                    [strongSelf putImageOnCategoryButton];
+                }
             }];
         }
     }

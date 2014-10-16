@@ -1,21 +1,21 @@
 //
-//  MCSelectCategoryTableViewController_iPhone.m
+//  MCSelectCategoryTableViewController_iPad.m
 //  We all pay
 //
 //  Created by Mark Cornelisse on 16/10/14.
 //  Copyright (c) 2014 Mark Cornelisse. All rights reserved.
 //
 
-#import "MCSelectCategoryTableViewController_iPhone.h"
+#import "MCSelectCategoryTableViewController_iPad.h"
 
-#import "MCSelectCategoryTableViewCell_iPhone.h"
+#include "MCPayment+addons.h"
 
 #import "MCCategoryPictureStoreController.h"
 #import "MCCategoryPictureObject.h"
 
-#import "MCPayment+addons.h"
+#import "MCSelectCategoryTableViewCell_iPad.h"
 
-@interface MCSelectCategoryTableViewController_iPhone ()
+@interface MCSelectCategoryTableViewController_iPad ()
 
 @property (nonatomic, strong) NSArray *categories;
 @property (nonatomic, strong) NSArray *categorySections;
@@ -23,18 +23,11 @@
 
 @end
 
-@implementation MCSelectCategoryTableViewController_iPhone
-
-#pragma mark - Actions
-
-- (IBAction)mainCancelPressed:(id)sender
-{
-    [[[self navigationController] presentingViewController] dismissViewControllerAnimated:YES completion:nil];
-}
+@implementation MCSelectCategoryTableViewController_iPad
 
 #pragma mark - Private in this class
 
--(void)filterContentForSearchText:(NSString*)searchText scope:(NSString*)scope {
+- (void)filterContentForSearchText:(NSString*)searchText scope:(NSString*)scope {
     // Update the filtered array based on the search text and scope.
     // Remove all objects from the filtered search array
     [_filteredCategories removeAllObjects];
@@ -78,7 +71,7 @@
     [self.tableView reloadData];
 }
 
-#pragma mark - Inherited from super.
+#pragma mark - Inherited from super
 
 - (void)viewDidLoad {
     [super viewDidLoad];
@@ -88,6 +81,12 @@
     
     // Uncomment the following line to display an Edit button in the navigation bar for this view controller.
     // self.navigationItem.rightBarButtonItem = self.editButtonItem;
+}
+
+- (void)viewWillAppear:(BOOL)animated
+{
+    [super viewWillAppear:animated];
+    
     _categories = [[MCCategoryPictureStoreController sharedController] pictureObjects];
     [self createSections:_categories];
     _filteredCategories = [NSMutableArray arrayWithCapacity:_categories.count];
@@ -110,7 +109,7 @@
 
 - (void)searchDisplayController:(UISearchDisplayController *)controller willShowSearchResultsTableView:(UITableView *)tableView
 {
-    [tableView registerClass:[MCSelectCategoryTableViewCell_iPhone class] forCellReuseIdentifier:@"selectCategoryCell"];
+    [tableView registerClass:[MCSelectCategoryTableViewCell_iPad class] forCellReuseIdentifier:@"selectCategoryCell"];
 }
 
 #pragma mark - Table view delegate
@@ -148,7 +147,7 @@
         categoryObject = sectionArray[indexPath.row];
     }
     _thisPayment.categoryId = @([categoryObject categoryId]);
-    [[[self navigationController] presentingViewController] dismissViewControllerAnimated:YES completion:nil];
+    self.dismissMe();
 }
 
 #pragma mark - Table view data source
@@ -177,9 +176,8 @@
     return [[UILocalizedIndexedCollation currentCollation] sectionForSectionIndexTitleAtIndex:index];
 }
 
-- (UITableViewCell *)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath
-{
-    MCSelectCategoryTableViewCell_iPhone *cell = (MCSelectCategoryTableViewCell_iPhone *)[tableView dequeueReusableCellWithIdentifier:@"selectCategoryCell" forIndexPath:indexPath];
+- (UITableViewCell *)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath {
+    MCSelectCategoryTableViewCell_iPad *cell = (MCSelectCategoryTableViewCell_iPad *)[tableView dequeueReusableCellWithIdentifier:@"selectCategoryCell" forIndexPath:indexPath];
     
     if (tableView == self.searchDisplayController.searchResultsTableView) {
         MCCategoryPictureObject *category = [_filteredCategories objectAtIndex:[indexPath row]];
@@ -195,6 +193,7 @@
     }
     
     return cell;
+
 }
 
 /*
