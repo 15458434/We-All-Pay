@@ -21,6 +21,9 @@
 #import "MCThisPaymentProtocol.h"
 #import "MCDismissMeBlockProtocol.h"
 
+#import "MCCategoryPictureObject.h"
+#import "MCCategoryPictureStoreController.h"
+
 @interface MCSharedBillPaymentsTableViewController_iPad ()
 
 @property (nonatomic, strong) NSFetchedResultsController *dataController;
@@ -258,9 +261,13 @@
     }
     [[paymentCell namePayerLabel] setText:[NSString stringWithFormat:@"%@%@", thisCellsPayerName, NSLocalizedString(@"PAYMENTCELL_PAYERNAME_EXTRA", @" paid") ]];
     
-    if ([[thisCellsPayment payingPerson] picture]) {
-        paymentCell.pictureOfPayer.image = thisCellsPayment.payingPerson.picture;
-    }
+//    if ([[thisCellsPayment payingPerson] picture]) {
+//        paymentCell.pictureOfPayer.image = thisCellsPayment.payingPerson.picture;
+//    }
+    // Get category picture.
+    NSArray *pictureObjects = [[MCCategoryPictureStoreController sharedController] pictureObjects];
+    MCCategoryPictureObject *categoryObject = pictureObjects[[[thisCellsPayment categoryId] shortValue]];
+    paymentCell.pictureOfPayer.image = [categoryObject smallPicture];
     
     NSString *thisCellsDescriptionOfPayment = [thisCellsPayment descriptionOfPayment];
     if (!thisCellsDescriptionOfPayment) {
