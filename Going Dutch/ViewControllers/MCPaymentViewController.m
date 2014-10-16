@@ -19,6 +19,9 @@
 #import "MCPaymentPresenceTableViewCell_iPhone.h"
 #import "MCDismissMeBlockProtocol.h"
 
+#import "MCCategoryPictureStoreController.h"
+#import "MCCategoryPictureObject.h"
+
 typedef NS_ENUM(BOOL, ChildViewOpened) {
     isNotOpened,
     isOpened
@@ -478,7 +481,11 @@ typedef NS_ENUM(BOOL, ChildViewOpened) {
     if ([_thisPayment payingPerson]) {
         _payerPicture.image = _thisPayment.payingPerson.picture;
     }
-
+    // Get category picture.
+    NSArray *pictureObjects = [[MCCategoryPictureStoreController sharedController] pictureObjects];
+    MCCategoryPictureObject *categoryObject = pictureObjects[[[_thisPayment categoryId] shortValue]];
+    [_categoryPicture setImage:categoryObject.largePicture forState:UIControlStateNormal];
+    
     if (!_isNew || _selectCurrencyTableViewController == isOpened) {
         paidView.text = [_thisPayment getMoneyValueInCurrencyAsAString];
     }

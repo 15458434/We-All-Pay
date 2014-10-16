@@ -44,7 +44,6 @@ typedef NS_ENUM(NSUInteger, MCMoneyValueFieldDismissStatus) {
     __weak IBOutlet UITextField *itemView;
     __weak IBOutlet UITextField *paidView;
     NSNumber *paidViewNumber;
-//    __weak IBOutlet UILabel *dateAndTimeLabel;
     
     UIPickerView *personPickerView;
     NSArray *listOfPeople;
@@ -55,6 +54,7 @@ typedef NS_ENUM(NSUInteger, MCMoneyValueFieldDismissStatus) {
     NSFetchedResultsController *_dataController;
 }
 
+@property (weak, nonatomic) IBOutlet UIButton *categoryPicture;
 @property (weak, nonatomic) IBOutlet UIImageView *payerPicture;
 @property (nonatomic, strong) MCPayment *thisPayment;
 @property (nonatomic, strong) MCSharedBill *tonightsBill;
