@@ -345,6 +345,7 @@
 //                }
 //            }];
 //        }
+        [[self tableView] deselectRowAtIndexPath:ip animated:YES];
     }
 }
 
