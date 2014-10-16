@@ -1,0 +1,16 @@
+//
+//  MCSelectCategoryTableViewCell_iPhone.h
+//  We all pay
+//
+//  Created by Mark Cornelisse on 16/10/14.
+//  Copyright (c) 2014 Mark Cornelisse. All rights reserved.
+//
+
+@import UIKit;
+
+@interface MCSelectCategoryTableViewCell_iPhone : UITableViewCell
+
+@property (weak, nonatomic) IBOutlet UIImageView *categoryImageView;
+@property (weak, nonatomic) IBOutlet UILabel *categoryNameLabel;
+
+@end

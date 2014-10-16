@@ -692,6 +692,12 @@ typedef NS_ENUM(BOOL, ChildViewOpened) {
              [destination setThisPayment:_thisPayment];
          }
      }
+     if ([[segue identifier] isEqualToString:@"selectCategory"]) {
+         id destination = [[segue destinationViewController] viewControllers][0];
+         if ([destination conformsToProtocol:@protocol(MCThisPaymentProtocol)]) {
+             [destination setThisPayment:_thisPayment];
+         }
+     }
  }
 
 @end

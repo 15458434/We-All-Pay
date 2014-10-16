@@ -83,6 +83,8 @@
 		3872C0DC19041725008C54D7 /* MCTableEmptyMessage_iPad.m in Sources */ = {isa = PBXBuildFile; fileRef = 3872C0DB19041725008C54D7 /* MCTableEmptyMessage_iPad.m */; };
 		3872C0DD19041C95008C54D7 /* MCTableEmptyMessage_iPad.xib in Resources */ = {isa = PBXBuildFile; fileRef = 3872C0DF19041C95008C54D7 /* MCTableEmptyMessage_iPad.xib */; };
 		3873A2A516F23AA1000832FD /* MessageUI.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 3873A2A416F23AA1000832FD /* MessageUI.framework */; };
+		387494C919EFE46F001614CA /* MCSelectCategoryTableViewController_iPhone.m in Sources */ = {isa = PBXBuildFile; fileRef = 387494C819EFE46F001614CA /* MCSelectCategoryTableViewController_iPhone.m */; };
+		387494CC19EFECCF001614CA /* MCSelectCategoryTableViewCell_iPhone.m in Sources */ = {isa = PBXBuildFile; fileRef = 387494CB19EFECCF001614CA /* MCSelectCategoryTableViewCell_iPhone.m */; };
 		3876EF591840E86900C9546A /* MCCancelDoneTableViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 3876EF581840E86900C9546A /* MCCancelDoneTableViewController.m */; };
 		3877596A1924DBE50027A7F1 /* MCPaymentPresenceTableViewCell_iPhone.m in Sources */ = {isa = PBXBuildFile; fileRef = 387759691924DBE50027A7F1 /* MCPaymentPresenceTableViewCell_iPhone.m */; };
 		387D3A911870652B0060FAF8 /* Localizable.strings in Resources */ = {isa = PBXBuildFile; fileRef = 387D3A931870652B0060FAF8 /* Localizable.strings */; };
@@ -315,6 +317,10 @@
 		3872C0E319041CB3008C54D7 /* nl */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = nl; path = nl.lproj/MCTableEmptyMessage_iPad.strings; sourceTree = "<group>"; };
 		3873A2A416F23AA1000832FD /* MessageUI.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = MessageUI.framework; path = System/Library/Frameworks/MessageUI.framework; sourceTree = SDKROOT; };
 		3873A2A616F2858A000832FD /* Going Dutch.entitlements */ = {isa = PBXFileReference; lastKnownFileType = text.xml; path = "Going Dutch.entitlements"; sourceTree = "<group>"; };
+		387494C719EFE46F001614CA /* MCSelectCategoryTableViewController_iPhone.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = MCSelectCategoryTableViewController_iPhone.h; path = ViewControllers/iPhone/MCSelectCategoryTableViewController_iPhone.h; sourceTree = "<group>"; };
+		387494C819EFE46F001614CA /* MCSelectCategoryTableViewController_iPhone.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = MCSelectCategoryTableViewController_iPhone.m; path = ViewControllers/iPhone/MCSelectCategoryTableViewController_iPhone.m; sourceTree = "<group>"; };
+		387494CA19EFECCF001614CA /* MCSelectCategoryTableViewCell_iPhone.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = MCSelectCategoryTableViewCell_iPhone.h; path = Views/iPhone/MCSelectCategoryTableViewCell_iPhone.h; sourceTree = "<group>"; };
+		387494CB19EFECCF001614CA /* MCSelectCategoryTableViewCell_iPhone.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = MCSelectCategoryTableViewCell_iPhone.m; path = Views/iPhone/MCSelectCategoryTableViewCell_iPhone.m; sourceTree = "<group>"; };
 		3876EF571840E86900C9546A /* MCCancelDoneTableViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = MCCancelDoneTableViewController.h; path = ../MCCancelDoneTableViewController.h; sourceTree = "<group>"; };
 		3876EF581840E86900C9546A /* MCCancelDoneTableViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = MCCancelDoneTableViewController.m; path = ../MCCancelDoneTableViewController.m; sourceTree = "<group>"; };
 		387759681924DBE50027A7F1 /* MCPaymentPresenceTableViewCell_iPhone.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = MCPaymentPresenceTableViewCell_iPhone.h; path = Views/iPhone/MCPaymentPresenceTableViewCell_iPhone.h; sourceTree = "<group>"; };
@@ -969,6 +975,8 @@
 				381F693D194EE54700F465FC /* MCOneLabelIScreenTableViewCell.m */,
 				381F693F194EE5A800F465FC /* MCTwoLabelIscreenTableViewCell.h */,
 				381F6940194EE5A800F465FC /* MCTwoLabelIscreenTableViewCell.m */,
+				387494CA19EFECCF001614CA /* MCSelectCategoryTableViewCell_iPhone.h */,
+				387494CB19EFECCF001614CA /* MCSelectCategoryTableViewCell_iPhone.m */,
 			);
 			name = iPhone;
 			sourceTree = "<group>";
@@ -990,6 +998,8 @@
 				382E7BDC17E5E57500A1040A /* MCReturnPaymentViewController.m */,
 				3830F6F4179872B400904FAF /* MCPaymentViewController.h */,
 				3830F6F5179872B400904FAF /* MCPaymentViewController.m */,
+				387494C719EFE46F001614CA /* MCSelectCategoryTableViewController_iPhone.h */,
+				387494C819EFE46F001614CA /* MCSelectCategoryTableViewController_iPhone.m */,
 				384512FF1986DEC0008D17AB /* MCSelectCurrencyTableViewController.h */,
 				384513001986DEC0008D17AB /* MCSelectCurrencyTableViewController.m */,
 				3892E3A217903EF00038894B /* MCEditTripViewController.h */,
@@ -1317,6 +1327,7 @@
 				381AB0EF1924FCC2004A02C6 /* MCWhoPaidHowMuchTableViewCell_iPhone.m in Sources */,
 				38EFF2D416D215BE001C8248 /* MCAllTripsTableViewCell.m in Sources */,
 				38DB85DA17E45DEA006237CF /* MCPerson+addons.m in Sources */,
+				387494C919EFE46F001614CA /* MCSelectCategoryTableViewController_iPhone.m in Sources */,
 				3898F33218F180B500BFFC61 /* MCPaymentTableViewController_iPad.m in Sources */,
 				38C2BCA218FBEC5200233D24 /* MCPersonTableViewCell_iPad.m in Sources */,
 				38AD8C12197E8926005C3436 /* MCAddCurrenciesEntityMigrationPolicy.m in Sources */,
@@ -1382,6 +1393,7 @@
 				389DE902197FB4CD00169645 /* WeAllPayStore1to3.xcmappingmodel in Sources */,
 				384512F41986D498008D17AB /* MCSelectCurrencyTableViewController_iPad.m in Sources */,
 				389950A4191A90F1000B00BC /* MCPaymentPresence+addons.m in Sources */,
+				387494CC19EFECCF001614CA /* MCSelectCategoryTableViewCell_iPhone.m in Sources */,
 				38E95DAF194F62C500069414 /* SKProduct+MCStoreInterface.m in Sources */,
 				3892E3AE179056420038894B /* MCReturnPayment.m in Sources */,
 				38E63CF0186F904B00904D82 /* MCTableEmptyMessage.m in Sources */,
