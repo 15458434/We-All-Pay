@@ -11,7 +11,18 @@
 
 @implementation MCCategoryPictureStoreController
 
+@synthesize pictureObjects = _pictureObjects;
+
 #pragma mark - Public in this class
+
+- (NSArray *)pictureObjects
+{
+    if (!_pictureObjects) {
+        [self preparePictureObjectsArray];
+    }
+    
+    return _pictureObjects;
+}
 
 - (void)preparePictureObjectsArray
 {

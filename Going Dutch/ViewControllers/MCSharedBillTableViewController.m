@@ -26,6 +26,9 @@
 
 #import "MCReturnPayment.h"
 
+#import "MCCategoryPictureStoreController.h"
+#import "MCCategoryPictureObject.h"
+
 @interface MCSharedBillTableViewController ()
 
 @property (nonatomic, strong) NSFetchedResultsController *dataController;
@@ -364,9 +367,11 @@
         thisCellsPayerName = NSLocalizedString(@"THISPAYMENTCELL_NOPAYERNAME", @"Someone");
     }
     [[paymentCell namePayerLabel] setText:[NSString stringWithFormat:@"%@%@", thisCellsPayerName, NSLocalizedString(@"PAYMENTCELL_PAYERNAME_EXTRA", @" paid") ]];
-    if ([[thisCellsPayment payingPerson] thumbnail]) {
-        paymentCell.pictureOfPayer.image = thisCellsPayment.payingPerson.thumbnail;
-    }
+    
+    // Get category picture.
+    NSArray *pictureObjects = [[MCCategoryPictureStoreController sharedController] pictureObjects];
+    MCCategoryPictureObject *categoryObject = pictureObjects[[[thisCellsPayment categoryId] shortValue]];
+    paymentCell.pictureOfPayer.image = [categoryObject smallPicture];
     
     NSString *thisCellsDescriptionOfPayment = [thisCellsPayment descriptionOfPayment];
     if (!thisCellsDescriptionOfPayment) {

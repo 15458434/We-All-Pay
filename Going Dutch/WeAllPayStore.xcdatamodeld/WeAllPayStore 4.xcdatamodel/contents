@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="UTF-8" standalone="yes"?>
-<model userDefinedModelVersionIdentifier="3" type="com.apple.IDECoreDataModeler.DataModel" documentVersion="1.0" lastSavedToolsVersion="6244" systemVersion="14A388a" minimumToolsVersion="Xcode 4.3" macOSVersion="Automatic" iOSVersion="Automatic">
+<model userDefinedModelVersionIdentifier="4" type="com.apple.IDECoreDataModeler.DataModel" documentVersion="1.0" lastSavedToolsVersion="6244" systemVersion="14A388a" minimumToolsVersion="Xcode 4.3" macOSVersion="Automatic" iOSVersion="Automatic">
     <entity name="MCCurrency" representedClassName="MCCurrency" syncable="YES">
         <attribute name="code" optional="YES" attributeType="String" syncable="YES"/>
         <attribute name="dateCreated" optional="YES" attributeType="Date" syncable="YES"/>
@@ -88,7 +88,7 @@
         <element name="MCCurrency" positionX="-900" positionY="108" width="128" height="210"/>
         <element name="MCEmailAddress" positionX="-1118" positionY="9" width="128" height="135"/>
         <element name="MCExchangeRate" positionX="-891" positionY="117" width="128" height="193"/>
-        <element name="MCPayment" positionX="-342" positionY="-0" width="128" height="225"/>
+        <element name="MCPayment" positionX="-342" positionY="-0" width="128" height="223"/>
         <element name="MCPaymentPresence" positionX="-533" positionY="-27" width="128" height="150"/>
         <element name="MCPerson" positionX="-837" positionY="-54" width="128" height="285"/>
         <element name="MCSharedBill" positionX="-558" positionY="225" width="128" height="165"/>
