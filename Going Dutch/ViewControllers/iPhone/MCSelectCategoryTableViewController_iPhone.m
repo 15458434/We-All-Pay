@@ -110,7 +110,6 @@
 
 - (void)searchDisplayController:(UISearchDisplayController *)controller willShowSearchResultsTableView:(UITableView *)tableView
 {
-    // Add TableViewCell to it
     [tableView registerClass:[MCSelectCategoryTableViewCell_iPhone class] forCellReuseIdentifier:@"selectCategoryCell"];
 }
 
