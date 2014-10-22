@@ -22,6 +22,8 @@
 
 @property (nonatomic, strong) NSFetchedResultsController *dataController;
 
+@property (nonatomic) BOOL isEmptyMessageShownInstantForFirstBoot;
+
 @end
 
 @implementation MCAllTripsTableViewController_iPad
@@ -93,6 +95,12 @@
     return self;
 }
 
+- (void)awakeFromNib
+{
+    [super awakeFromNib];
+    _isEmptyMessageShownInstantForFirstBoot = false;
+}
+
 - (void)viewDidLoad
 {
     [super viewDidLoad];
@@ -120,7 +128,12 @@
         _dataController = [[MCWeAllPayStoreController defaultStore] allTripsDataControllerForDelegate:self];
         [self performFetch];
         [[self tableView] reloadData];
-        [self setEmptyMessage];
+        if (_isEmptyMessageShownInstantForFirstBoot == false) {
+            [self setEmptyMessageNow];
+            _isEmptyMessageShownInstantForFirstBoot = true;
+        } else {
+            [self setEmptyMessage];
+        }
     }
 //    UIManagedDocument *weAllPayDocument = [[MCWeAllPayStoreController defaultStore] weAllPayStoreDocument];
 //    if (![[MCWeAllPayStoreController defaultStore] isDocumentStateNormal]) {
