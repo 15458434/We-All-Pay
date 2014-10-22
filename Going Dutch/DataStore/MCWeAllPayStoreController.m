@@ -141,6 +141,9 @@ MCiCloudUse const isiCloudUsed = iCloudIsNotUsed;
 
 - (BOOL)isDocumentStateNormal
 {
+#if DEBUG
+    NSLog(@"Warning: isDocumentStateNormal should not be executed.");
+#endif
     if ([weAllPayStoreDocument documentState] == UIDocumentStateNormal) {
         return YES;
     } else {

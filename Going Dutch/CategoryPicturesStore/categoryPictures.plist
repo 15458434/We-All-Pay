@@ -58,5 +58,13 @@
 		<key>categoryId</key>
 		<integer>6</integer>
 	</dict>
+	<dict>
+		<key>categoryDescription</key>
+		<string>Rent</string>
+		<key>categoryPictureFilename</key>
+		<string>Rent</string>
+		<key>categoryId</key>
+		<integer>7</integer>
+	</dict>
 </array>
 </plist>
