@@ -32,6 +32,9 @@
 
 - (void)performFetchAndReloadTableView:(NSNotification *)notification
 {
+#if DEBUG
+    NSLog(@"This should not be executed.");
+#endif
     UIManagedDocument *weAllPayDocument = [[MCWeAllPayStoreController defaultStore] weAllPayStoreDocument];
     if ([weAllPayDocument documentState] == UIDocumentStateNormal) {
         [self performFetch];
