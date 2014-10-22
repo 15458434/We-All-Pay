@@ -34,6 +34,8 @@ typedef NS_ENUM(BOOL, MCTonightsBillStatus) {
 @property (nonatomic, strong) NSFetchedResultsController *dataController;
 @property (nonatomic) MCTonightsBillStatus isATonightsBillOpened;
 
+@property (nonatomic) BOOL isEmptyMessageShownInstantForFirstBoot;
+
 @end
 
 @implementation MCAllTripsTableViewController
@@ -131,6 +133,7 @@ typedef NS_ENUM(BOOL, MCTonightsBillStatus) {
     [super awakeFromNib];
     
     _isATonightsBillOpened = isClosed;
+    _isEmptyMessageShownInstantForFirstBoot = false;
 }
 
 - (void)viewDidLoad
@@ -181,7 +184,10 @@ typedef NS_ENUM(BOOL, MCTonightsBillStatus) {
         [self performFetch];
     }
     
-    if ([[MCWeAllPayStoreController defaultStore] isDocumentStateNormal]) {
+    if (_isEmptyMessageShownInstantForFirstBoot == false) {
+        [self setEmptyMessageNow];
+        _isEmptyMessageShownInstantForFirstBoot = true;
+    } else {
         [self setEmptyMessage];
     }
     
