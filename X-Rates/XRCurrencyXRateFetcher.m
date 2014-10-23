@@ -216,8 +216,10 @@ NSString * const XRExchangeRateSource = @"source";
                 NSError *jsonError;
                 NSDictionary *exchangeRateJSON = [NSJSONSerialization JSONObjectWithData:data options:NSJSONReadingAllowFragments error:&jsonError];
                 if (jsonError) {
+#ifndef EMC_WIDGET
                     NSAlert *jsonAlert = [NSAlert alertWithError:jsonError];
                     [jsonAlert runModal];
+#endif
                 } else {
                     NSNumberFormatter *numberFormatter = [NSNumberFormatter new];
                     NSString *localeIdentifier = [exchangeRateJSON valueForKeyPath:@"query.lang"];
@@ -236,8 +238,10 @@ NSString * const XRExchangeRateSource = @"source";
                 NSLog(@"http response error %ld", (long)[httpResp statusCode]);
             }
         } else {
+#ifndef EMC_WIDGET
             NSAlert *alert = [NSAlert alertWithError:error];
             [alert runModal];
+#endif
         }
     }];
     [_fetchXRatesDataTask resume];
@@ -274,8 +278,10 @@ NSString * const XRExchangeRateSource = @"source";
                 NSError *jsonError;
                 NSDictionary *exchangeRateJSON = [NSJSONSerialization JSONObjectWithData:data options:NSJSONReadingAllowFragments error:&jsonError];
                 if (jsonError) {
+#ifndef EMC_WIDGET
                     NSAlert *jsonAlert = [NSAlert alertWithError:jsonError];
                     [jsonAlert runModal];
+#endif
                 } else {
                     //                    NSNumber *avg24h = [exchangeRateJSON objectForKey:@"24h_avg"];
                     //                    NSNumber *ask = [exchangeRateJSON objectForKey:@"ask"];
@@ -302,8 +308,10 @@ NSString * const XRExchangeRateSource = @"source";
                 NSLog(@"http response error %ld", (long)[httpResp statusCode]);
             }
         } else {
+#ifndef EMC_WIDGET
             NSAlert *alert = [NSAlert alertWithError:error];
             [alert runModal];
+#endif
         }
     }];
     [_fetchXRatesDataTask resume];

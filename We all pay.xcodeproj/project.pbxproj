@@ -11,6 +11,11 @@
 		38001C9B194EE284008ACD94 /* Images.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 38001C9A194EE284008ACD94 /* Images.xcassets */; };
 		3801F89C16DFC62600DF8675 /* CoreData.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 3801F89B16DFC62600DF8675 /* CoreData.framework */; };
 		3803963F192114D700FA8CC2 /* MCPaymentPresenceTableViewCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 3803963E192114D700FA8CC2 /* MCPaymentPresenceTableViewCell.m */; };
+		3807560119F9445800489ED4 /* NotificationCenter.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 3807560019F9445800489ED4 /* NotificationCenter.framework */; };
+		3807560819F9445800489ED4 /* InfoPlist.strings in Resources */ = {isa = PBXBuildFile; fileRef = 3807560619F9445800489ED4 /* InfoPlist.strings */; };
+		3807560B19F9445800489ED4 /* TodayViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 3807560A19F9445800489ED4 /* TodayViewController.m */; };
+		3807560D19F9445800489ED4 /* TodayViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = 3807560C19F9445800489ED4 /* TodayViewController.xib */; };
+		3807561019F9445800489ED4 /* EMC Widget.appex in Embed App Extensions */ = {isa = PBXBuildFile; fileRef = 380755FF19F9445700489ED4 /* EMC Widget.appex */; settings = {ATTRIBUTES = (RemoveHeadersOnCopy, ); }; };
 		380BF82E18108898008A8B74 /* MCEmailAddressTableViewCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 380BF82D18108898008A8B74 /* MCEmailAddressTableViewCell.xib */; };
 		380BF831181088B9008A8B74 /* MCEmailAddressTableViewCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 380BF830181088B9008A8B74 /* MCEmailAddressTableViewCell.m */; };
 		380F44F21813250600FF7E10 /* No picture image 2 - We All Pay.png in Resources */ = {isa = PBXBuildFile; fileRef = 380F44F11813250600FF7E10 /* No picture image 2 - We All Pay.png */; };
@@ -145,6 +150,19 @@
 		38AB487119531F760090457A /* UIView+MCAddons.m in Sources */ = {isa = PBXBuildFile; fileRef = 38AB487019531F760090457A /* UIView+MCAddons.m */; };
 		38AD59BC197D3DF000BBC797 /* MCNetworkTools.m in Sources */ = {isa = PBXBuildFile; fileRef = 389E2CFF19792D7600729F61 /* MCNetworkTools.m */; };
 		38AD8C12197E8926005C3436 /* MCAddCurrenciesEntityMigrationPolicy.m in Sources */ = {isa = PBXBuildFile; fileRef = 38AD8C11197E8926005C3436 /* MCAddCurrenciesEntityMigrationPolicy.m */; };
+		38B7100E19F9460A00037012 /* XRCurrency.xcdatamodeld in Sources */ = {isa = PBXBuildFile; fileRef = 381318BA19A250C600C821B0 /* XRCurrency.xcdatamodeld */; };
+		38B7100F19F9460A00037012 /* XRCurrency.h in Sources */ = {isa = PBXBuildFile; fileRef = 381318CC19A2869600C821B0 /* XRCurrency.h */; };
+		38B7101019F9460A00037012 /* XRCurrency.m in Sources */ = {isa = PBXBuildFile; fileRef = 381318CD19A2869600C821B0 /* XRCurrency.m */; };
+		38B7101119F9460A00037012 /* XRCurrencyStoreController.h in Sources */ = {isa = PBXBuildFile; fileRef = 381318C019A2531500C821B0 /* XRCurrencyStoreController.h */; };
+		38B7101219F9460A00037012 /* XRCurrencyStoreController.m in Sources */ = {isa = PBXBuildFile; fileRef = 381318C119A2531500C821B0 /* XRCurrencyStoreController.m */; };
+		38B7101319F9460A00037012 /* XRCurrencyXRateFetcher.h in Sources */ = {isa = PBXBuildFile; fileRef = 38BDFD7C19B88D210026F4F8 /* XRCurrencyXRateFetcher.h */; };
+		38B7101419F9460A00037012 /* XRCurrencyXRateFetcher.m in Sources */ = {isa = PBXBuildFile; fileRef = 38BDFD7D19B88D210026F4F8 /* XRCurrencyXRateFetcher.m */; };
+		38B7101519F9460A00037012 /* XRCurrencyXRate.h in Sources */ = {isa = PBXBuildFile; fileRef = 38BDFD8019B88D8B0026F4F8 /* XRCurrencyXRate.h */; };
+		38B7101619F9460A00037012 /* XRCurrencyXRate.m in Sources */ = {isa = PBXBuildFile; fileRef = 38BDFD8119B88D8B0026F4F8 /* XRCurrencyXRate.m */; };
+		38B7101719F946BF00037012 /* MCxRatesController.h in Sources */ = {isa = PBXBuildFile; fileRef = 381248571959D22600C0447C /* MCxRatesController.h */; };
+		38B7101819F946BF00037012 /* MCxRatesController.m in Sources */ = {isa = PBXBuildFile; fileRef = 381248581959D22600C0447C /* MCxRatesController.m */; };
+		38B7101919F9474A00037012 /* MCNetworkTools.h in Sources */ = {isa = PBXBuildFile; fileRef = 389E2CFE19792D7600729F61 /* MCNetworkTools.h */; };
+		38B7101A19F9474A00037012 /* MCNetworkTools.m in Sources */ = {isa = PBXBuildFile; fileRef = 389E2CFF19792D7600729F61 /* MCNetworkTools.m */; };
 		38BDFD7E19B88D210026F4F8 /* XRCurrencyXRateFetcher.m in Sources */ = {isa = PBXBuildFile; fileRef = 38BDFD7D19B88D210026F4F8 /* XRCurrencyXRateFetcher.m */; };
 		38BDFD7F19B88D210026F4F8 /* XRCurrencyXRateFetcher.m in Sources */ = {isa = PBXBuildFile; fileRef = 38BDFD7D19B88D210026F4F8 /* XRCurrencyXRateFetcher.m */; };
 		38BDFD8219B88D8B0026F4F8 /* XRCurrencyXRate.m in Sources */ = {isa = PBXBuildFile; fileRef = 38BDFD8119B88D8B0026F4F8 /* XRCurrencyXRate.m */; };
@@ -189,6 +207,13 @@
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
+		3807560E19F9445800489ED4 /* PBXContainerItemProxy */ = {
+			isa = PBXContainerItemProxy;
+			containerPortal = 38572AC9169D437B00969C62 /* Project object */;
+			proxyType = 1;
+			remoteGlobalIDString = 380755FE19F9445700489ED4;
+			remoteInfo = "EMC Widget";
+		};
 		385F530A191C2C360012773D /* PBXContainerItemProxy */ = {
 			isa = PBXContainerItemProxy;
 			containerPortal = 38572AC9169D437B00969C62 /* Project object */;
@@ -205,6 +230,20 @@
 		};
 /* End PBXContainerItemProxy section */
 
+/* Begin PBXCopyFilesBuildPhase section */
+		3807561419F9445800489ED4 /* Embed App Extensions */ = {
+			isa = PBXCopyFilesBuildPhase;
+			buildActionMask = 2147483647;
+			dstPath = "";
+			dstSubfolderSpec = 13;
+			files = (
+				3807561019F9445800489ED4 /* EMC Widget.appex in Embed App Extensions */,
+			);
+			name = "Embed App Extensions";
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+/* End PBXCopyFilesBuildPhase section */
+
 /* Begin PBXFileReference section */
 		38001C95194DA3D8008ACD94 /* MCiScreenTableViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = MCiScreenTableViewController.h; path = iPhone/MCiScreenTableViewController.h; sourceTree = "<group>"; };
 		38001C96194DA3D8008ACD94 /* MCiScreenTableViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = MCiScreenTableViewController.m; path = iPhone/MCiScreenTableViewController.m; sourceTree = "<group>"; };
@@ -213,6 +252,14 @@
 		3801F89B16DFC62600DF8675 /* CoreData.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = CoreData.framework; path = System/Library/Frameworks/CoreData.framework; sourceTree = SDKROOT; };
 		3803963D192114D700FA8CC2 /* MCPaymentPresenceTableViewCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = MCPaymentPresenceTableViewCell.h; sourceTree = "<group>"; };
 		3803963E192114D700FA8CC2 /* MCPaymentPresenceTableViewCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = MCPaymentPresenceTableViewCell.m; sourceTree = "<group>"; };
+		380755FF19F9445700489ED4 /* EMC Widget.appex */ = {isa = PBXFileReference; explicitFileType = "wrapper.app-extension"; includeInIndex = 0; path = "EMC Widget.appex"; sourceTree = BUILT_PRODUCTS_DIR; };
+		3807560019F9445800489ED4 /* NotificationCenter.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = NotificationCenter.framework; path = System/Library/Frameworks/NotificationCenter.framework; sourceTree = SDKROOT; };
+		3807560419F9445800489ED4 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
+		3807560519F9445800489ED4 /* EMC_Widget.entitlements */ = {isa = PBXFileReference; lastKnownFileType = text.xml; path = EMC_Widget.entitlements; sourceTree = "<group>"; };
+		3807560719F9445800489ED4 /* en */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = en; path = en.lproj/InfoPlist.strings; sourceTree = "<group>"; };
+		3807560919F9445800489ED4 /* TodayViewController.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = TodayViewController.h; sourceTree = "<group>"; };
+		3807560A19F9445800489ED4 /* TodayViewController.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = TodayViewController.m; sourceTree = "<group>"; };
+		3807560C19F9445800489ED4 /* TodayViewController.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = TodayViewController.xib; sourceTree = "<group>"; };
 		380BF82D18108898008A8B74 /* MCEmailAddressTableViewCell.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; name = MCEmailAddressTableViewCell.xib; path = Views/MCEmailAddressTableViewCell.xib; sourceTree = "<group>"; };
 		380BF82F181088B9008A8B74 /* MCEmailAddressTableViewCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = MCEmailAddressTableViewCell.h; path = Views/MCEmailAddressTableViewCell.h; sourceTree = "<group>"; };
 		380BF830181088B9008A8B74 /* MCEmailAddressTableViewCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = MCEmailAddressTableViewCell.m; path = Views/MCEmailAddressTableViewCell.m; sourceTree = "<group>"; };
@@ -520,6 +567,14 @@
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
+		380755FC19F9445700489ED4 /* Frameworks */ = {
+			isa = PBXFrameworksBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				3807560119F9445800489ED4 /* NotificationCenter.framework in Frameworks */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
 		38572ACF169D437B00969C62 /* Frameworks */ = {
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
@@ -615,6 +670,27 @@
 			name = DataStore;
 			sourceTree = "<group>";
 		};
+		3807560219F9445800489ED4 /* EMC Widget */ = {
+			isa = PBXGroup;
+			children = (
+				3807560919F9445800489ED4 /* TodayViewController.h */,
+				3807560A19F9445800489ED4 /* TodayViewController.m */,
+				3807560C19F9445800489ED4 /* TodayViewController.xib */,
+				3807560319F9445800489ED4 /* Supporting Files */,
+			);
+			path = "EMC Widget";
+			sourceTree = "<group>";
+		};
+		3807560319F9445800489ED4 /* Supporting Files */ = {
+			isa = PBXGroup;
+			children = (
+				3807560419F9445800489ED4 /* Info.plist */,
+				3807560519F9445800489ED4 /* EMC_Widget.entitlements */,
+				3807560619F9445800489ED4 /* InfoPlist.strings */,
+			);
+			name = "Supporting Files";
+			sourceTree = "<group>";
+		};
 		3815BD7D1955CE9800A28316 /* Other Frameworks */ = {
 			isa = PBXGroup;
 			children = (
@@ -661,6 +737,7 @@
 				385F5301191C2C360012773D /* We all pay Tests */,
 				38FE87C7195721670008EE74 /* X-Rates */,
 				38FE87E4195721670008EE74 /* X-RatesTests */,
+				3807560219F9445800489ED4 /* EMC Widget */,
 				38572AD5169D437B00969C62 /* Frameworks */,
 				38572AD3169D437B00969C62 /* Products */,
 			);
@@ -673,6 +750,7 @@
 				385F52FD191C2C360012773D /* We all pay Tests.xctest */,
 				38FE87C5195721660008EE74 /* EMC.app */,
 				38FE87DF195721670008EE74 /* EMCTests.xctest */,
+				380755FF19F9445700489ED4 /* EMC Widget.appex */,
 			);
 			name = Products;
 			sourceTree = "<group>";
@@ -688,6 +766,7 @@
 				3829C61B192628C100DE91D4 /* iOS */,
 				3815BD7B1955CE9800A28316 /* Cocoa.framework */,
 				3815BD9A1955CE9900A28316 /* XCTest.framework */,
+				3807560019F9445800489ED4 /* NotificationCenter.framework */,
 				3815BD7D1955CE9800A28316 /* Other Frameworks */,
 			);
 			name = Frameworks;
@@ -1136,6 +1215,23 @@
 /* End PBXGroup section */
 
 /* Begin PBXNativeTarget section */
+		380755FE19F9445700489ED4 /* EMC Widget */ = {
+			isa = PBXNativeTarget;
+			buildConfigurationList = 3807561319F9445800489ED4 /* Build configuration list for PBXNativeTarget "EMC Widget" */;
+			buildPhases = (
+				380755FB19F9445700489ED4 /* Sources */,
+				380755FC19F9445700489ED4 /* Frameworks */,
+				380755FD19F9445700489ED4 /* Resources */,
+			);
+			buildRules = (
+			);
+			dependencies = (
+			);
+			name = "EMC Widget";
+			productName = "EMC Widget";
+			productReference = 380755FF19F9445700489ED4 /* EMC Widget.appex */;
+			productType = "com.apple.product-type.app-extension";
+		};
 		38572AD1169D437B00969C62 /* We all pay */ = {
 			isa = PBXNativeTarget;
 			buildConfigurationList = 38572AF0169D437B00969C62 /* Build configuration list for PBXNativeTarget "We all pay" */;
@@ -1178,10 +1274,12 @@
 				38FE87C1195721660008EE74 /* Sources */,
 				38FE87C2195721660008EE74 /* Frameworks */,
 				38FE87C3195721660008EE74 /* Resources */,
+				3807561419F9445800489ED4 /* Embed App Extensions */,
 			);
 			buildRules = (
 			);
 			dependencies = (
+				3807560F19F9445800489ED4 /* PBXTargetDependency */,
 			);
 			name = EMC;
 			productName = "X-Rates";
@@ -1216,6 +1314,10 @@
 				LastUpgradeCheck = 0600;
 				ORGANIZATIONNAME = "Mark Cornelisse";
 				TargetAttributes = {
+					380755FE19F9445700489ED4 = {
+						CreatedOnToolsVersion = 6.1;
+						DevelopmentTeam = Z6JP26PUUY;
+					};
 					38572AD1169D437B00969C62 = {
 						DevelopmentTeam = Z6JP26PUUY;
 						SystemCapabilities = {
@@ -1259,11 +1361,21 @@
 				385F52FC191C2C360012773D /* We all pay Tests */,
 				38FE87C4195721660008EE74 /* EMC */,
 				38FE87DE195721670008EE74 /* EMCTests */,
+				380755FE19F9445700489ED4 /* EMC Widget */,
 			);
 		};
 /* End PBXProject section */
 
 /* Begin PBXResourcesBuildPhase section */
+		380755FD19F9445700489ED4 /* Resources */ = {
+			isa = PBXResourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				3807560D19F9445800489ED4 /* TodayViewController.xib in Resources */,
+				3807560819F9445800489ED4 /* InfoPlist.strings in Resources */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
 		38572AD0169D437B00969C62 /* Resources */ = {
 			isa = PBXResourcesBuildPhase;
 			buildActionMask = 2147483647;
@@ -1324,6 +1436,27 @@
 /* End PBXResourcesBuildPhase section */
 
 /* Begin PBXSourcesBuildPhase section */
+		380755FB19F9445700489ED4 /* Sources */ = {
+			isa = PBXSourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				38B7101919F9474A00037012 /* MCNetworkTools.h in Sources */,
+				38B7101A19F9474A00037012 /* MCNetworkTools.m in Sources */,
+				38B7101719F946BF00037012 /* MCxRatesController.h in Sources */,
+				38B7101819F946BF00037012 /* MCxRatesController.m in Sources */,
+				38B7100E19F9460A00037012 /* XRCurrency.xcdatamodeld in Sources */,
+				38B7100F19F9460A00037012 /* XRCurrency.h in Sources */,
+				38B7101019F9460A00037012 /* XRCurrency.m in Sources */,
+				38B7101119F9460A00037012 /* XRCurrencyStoreController.h in Sources */,
+				38B7101219F9460A00037012 /* XRCurrencyStoreController.m in Sources */,
+				38B7101319F9460A00037012 /* XRCurrencyXRateFetcher.h in Sources */,
+				38B7101419F9460A00037012 /* XRCurrencyXRateFetcher.m in Sources */,
+				38B7101519F9460A00037012 /* XRCurrencyXRate.h in Sources */,
+				38B7101619F9460A00037012 /* XRCurrencyXRate.m in Sources */,
+				3807560B19F9445800489ED4 /* TodayViewController.m in Sources */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
 		38572ACE169D437B00969C62 /* Sources */ = {
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
@@ -1489,6 +1622,11 @@
 /* End PBXSourcesBuildPhase section */
 
 /* Begin PBXTargetDependency section */
+		3807560F19F9445800489ED4 /* PBXTargetDependency */ = {
+			isa = PBXTargetDependency;
+			target = 380755FE19F9445700489ED4 /* EMC Widget */;
+			targetProxy = 3807560E19F9445800489ED4 /* PBXContainerItemProxy */;
+		};
 		385F530B191C2C360012773D /* PBXTargetDependency */ = {
 			isa = PBXTargetDependency;
 			target = 38572AD1169D437B00969C62 /* We all pay */;
@@ -1502,6 +1640,14 @@
 /* End PBXTargetDependency section */
 
 /* Begin PBXVariantGroup section */
+		3807560619F9445800489ED4 /* InfoPlist.strings */ = {
+			isa = PBXVariantGroup;
+			children = (
+				3807560719F9445800489ED4 /* en */,
+			);
+			name = InfoPlist.strings;
+			sourceTree = "<group>";
+		};
 		38572ADF169D437B00969C62 /* InfoPlist.strings */ = {
 			isa = PBXVariantGroup;
 			children = (
@@ -1618,6 +1764,75 @@
 /* End PBXVariantGroup section */
 
 /* Begin XCBuildConfiguration section */
+		3807561119F9445800489ED4 /* Debug */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				CLANG_WARN_BOOL_CONVERSION = YES;
+				CLANG_WARN_CONSTANT_CONVERSION = YES;
+				CLANG_WARN_DIRECT_OBJC_ISA_USAGE = YES_ERROR;
+				CLANG_WARN_ENUM_CONVERSION = YES;
+				CLANG_WARN_INT_CONVERSION = YES;
+				CLANG_WARN_OBJC_ROOT_CLASS = YES_ERROR;
+				CLANG_WARN_UNREACHABLE_CODE = YES;
+				CODE_SIGN_ENTITLEMENTS = "EMC Widget/EMC_Widget.entitlements";
+				CODE_SIGN_IDENTITY = "Mac Developer";
+				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "";
+				"CODE_SIGN_IDENTITY[sdk=macosx*]" = "Mac Developer";
+				COMBINE_HIDPI_IMAGES = YES;
+				ENABLE_STRICT_OBJC_MSGSEND = YES;
+				GCC_PREPROCESSOR_DEFINITIONS = (
+					"DEBUG=1",
+					"$(inherited)",
+					"EMC_WIDGET=1",
+				);
+				GCC_WARN_64_TO_32_BIT_CONVERSION = YES;
+				GCC_WARN_ABOUT_RETURN_TYPE = YES_ERROR;
+				GCC_WARN_UNDECLARED_SELECTOR = YES;
+				GCC_WARN_UNINITIALIZED_AUTOS = YES_AGGRESSIVE;
+				GCC_WARN_UNUSED_FUNCTION = YES;
+				INFOPLIST_FILE = "EMC Widget/Info.plist";
+				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/../Frameworks @executable_path/../../../../Frameworks";
+				MACOSX_DEPLOYMENT_TARGET = 10.10;
+				MTL_ENABLE_DEBUG_INFO = YES;
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				SDKROOT = macosx;
+				SKIP_INSTALL = YES;
+			};
+			name = Debug;
+		};
+		3807561219F9445800489ED4 /* Release */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				CLANG_WARN_BOOL_CONVERSION = YES;
+				CLANG_WARN_CONSTANT_CONVERSION = YES;
+				CLANG_WARN_DIRECT_OBJC_ISA_USAGE = YES_ERROR;
+				CLANG_WARN_ENUM_CONVERSION = YES;
+				CLANG_WARN_INT_CONVERSION = YES;
+				CLANG_WARN_OBJC_ROOT_CLASS = YES_ERROR;
+				CLANG_WARN_UNREACHABLE_CODE = YES;
+				CODE_SIGN_ENTITLEMENTS = "EMC Widget/EMC_Widget.entitlements";
+				CODE_SIGN_IDENTITY = "Mac Developer";
+				"CODE_SIGN_IDENTITY[sdk=macosx*]" = "Mac Developer: Mark Cornelisse (B9ZEEP43C6)";
+				COMBINE_HIDPI_IMAGES = YES;
+				DEBUG_INFORMATION_FORMAT = "dwarf-with-dsym";
+				ENABLE_NS_ASSERTIONS = NO;
+				ENABLE_STRICT_OBJC_MSGSEND = YES;
+				GCC_PREPROCESSOR_DEFINITIONS = "EMC_WIDGET=1";
+				GCC_WARN_64_TO_32_BIT_CONVERSION = YES;
+				GCC_WARN_ABOUT_RETURN_TYPE = YES_ERROR;
+				GCC_WARN_UNDECLARED_SELECTOR = YES;
+				GCC_WARN_UNINITIALIZED_AUTOS = YES_AGGRESSIVE;
+				GCC_WARN_UNUSED_FUNCTION = YES;
+				INFOPLIST_FILE = "EMC Widget/Info.plist";
+				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/../Frameworks @executable_path/../../../../Frameworks";
+				MACOSX_DEPLOYMENT_TARGET = 10.10;
+				MTL_ENABLE_DEBUG_INFO = NO;
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				SDKROOT = macosx;
+				SKIP_INSTALL = YES;
+			};
+			name = Release;
+		};
 		38572AEE169D437B00969C62 /* Debug */ = {
 			isa = XCBuildConfiguration;
 			buildSettings = {
@@ -1956,6 +2171,15 @@
 /* End XCBuildConfiguration section */
 
 /* Begin XCConfigurationList section */
+		3807561319F9445800489ED4 /* Build configuration list for PBXNativeTarget "EMC Widget" */ = {
+			isa = XCConfigurationList;
+			buildConfigurations = (
+				3807561119F9445800489ED4 /* Debug */,
+				3807561219F9445800489ED4 /* Release */,
+			);
+			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
+		};
 		38572ACC169D437B00969C62 /* Build configuration list for PBXProject "We all pay" */ = {
 			isa = XCConfigurationList;
 			buildConfigurations = (

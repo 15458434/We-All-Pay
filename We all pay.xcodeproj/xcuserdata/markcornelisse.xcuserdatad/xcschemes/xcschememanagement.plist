@@ -4,6 +4,11 @@
 <dict>
 	<key>SchemeUserState</key>
 	<dict>
+		<key>EMC Widget.xcscheme</key>
+		<dict>
+			<key>orderHint</key>
+			<integer>2</integer>
+		</dict>
 		<key>Test.xcscheme</key>
 		<dict>
 			<key>orderHint</key>
@@ -27,6 +32,11 @@
 	</dict>
 	<key>SuppressBuildableAutocreation</key>
 	<dict>
+		<key>380755FE19F9445700489ED4</key>
+		<dict>
+			<key>primary</key>
+			<true/>
+		</dict>
 		<key>3815BD791955CE9800A28316</key>
 		<dict>
 			<key>primary</key>
