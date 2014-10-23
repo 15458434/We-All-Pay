@@ -6,6 +6,13 @@
     <objects>
         <customObject id="-2" userLabel="File's Owner" customClass="TodayViewController">
             <connections>
+                <outlet property="activityIndicator" destination="Wb6-CC-dT8" id="JNa-GU-JNb"/>
+                <outlet property="destinationAmountField" destination="2ab-lh-fuD" id="LKa-Rp-fzu"/>
+                <outlet property="destinationController" destination="ub1-Ex-a9o" id="zdT-3y-ZG5"/>
+                <outlet property="destinationCurrencySelector" destination="HOY-Gs-fvN" id="j8d-VD-oXC"/>
+                <outlet property="sourceAmountField" destination="XH3-pe-bYv" id="BBD-K2-ECb"/>
+                <outlet property="sourceController" destination="XV1-Lg-Nsm" id="ahn-J1-wiT"/>
+                <outlet property="sourceCurrencySelector" destination="xOP-MY-vl6" id="NdL-UF-Eah"/>
                 <outlet property="view" destination="Hz6-mo-xeY" id="0bl-1N-x8E"/>
             </connections>
         </customObject>
@@ -14,16 +21,19 @@
         <customView simulatedAppContext="notificationCenter" translatesAutoresizingMaskIntoConstraints="NO" id="Hz6-mo-xeY">
             <rect key="frame" x="0.0" y="5" width="320" height="171"/>
             <subviews>
-                <textField verticalHuggingPriority="750" translatesAutoresizingMaskIntoConstraints="NO" id="XH3-pe-bYv">
+                <textField verticalHuggingPriority="750" translatesAutoresizingMaskIntoConstraints="NO" id="XH3-pe-bYv" userLabel="Source Amount Field">
                     <rect key="frame" x="20" y="129" width="280" height="22"/>
-                    <textFieldCell key="cell" scrollable="YES" lineBreakMode="clipping" selectable="YES" editable="YES" sendsActionOnEndEditing="YES" state="on" borderStyle="bezel" drawsBackground="YES" id="Lem-6S-rvY">
+                    <textFieldCell key="cell" scrollable="YES" lineBreakMode="clipping" selectable="YES" editable="YES" sendsActionOnEndEditing="YES" state="on" borderStyle="bezel" alignment="center" title="1" drawsBackground="YES" id="Lem-6S-rvY">
                         <numberFormatter key="formatter" formatterBehavior="default10_4" numberStyle="decimal" minimumIntegerDigits="1" maximumIntegerDigits="2000000000" maximumFractionDigits="3" id="IFm-Cn-Uue"/>
                         <font key="font" metaFont="system"/>
                         <color key="textColor" name="textColor" catalog="System" colorSpace="catalog"/>
                         <color key="backgroundColor" name="textBackgroundColor" catalog="System" colorSpace="catalog"/>
                     </textFieldCell>
+                    <connections>
+                        <binding destination="-2" name="value" keyPath="self.sourceAmount" id="Bw6-1u-W5R"/>
+                    </connections>
                 </textField>
-                <comboBox verticalHuggingPriority="750" ambiguous="YES" misplaced="YES" translatesAutoresizingMaskIntoConstraints="NO" id="xOP-MY-vl6">
+                <comboBox verticalHuggingPriority="750" ambiguous="YES" misplaced="YES" translatesAutoresizingMaskIntoConstraints="NO" id="xOP-MY-vl6" userLabel="Source Currency Selector">
                     <rect key="frame" x="21" y="94" width="282" height="26"/>
                     <comboBoxCell key="cell" scrollable="YES" lineBreakMode="clipping" selectable="YES" editable="YES" sendsActionOnEndEditing="YES" borderStyle="bezel" drawsBackground="YES" completes="NO" numberOfVisibleItems="5" id="i64-LE-WjS">
                         <font key="font" metaFont="system"/>
@@ -35,6 +45,11 @@
                             <string>Item 3</string>
                         </objectValues>
                     </comboBoxCell>
+                    <connections>
+                        <binding destination="XV1-Lg-Nsm" name="content" keyPath="arrangedObjects" id="4eB-N7-bSn"/>
+                        <binding destination="XV1-Lg-Nsm" name="contentValues" keyPath="arrangedObjects.name" previousBinding="4eB-N7-bSn" id="v00-2O-kWu"/>
+                        <binding destination="XV1-Lg-Nsm" name="value" keyPath="selection.name" previousBinding="v00-2O-kWu" id="VwX-56-vKI"/>
+                    </connections>
                 </comboBox>
                 <textField horizontalHuggingPriority="251" verticalHuggingPriority="750" misplaced="YES" translatesAutoresizingMaskIntoConstraints="NO" id="BpY-s1-JE4">
                     <rect key="frame" x="141" y="73" width="38" height="17"/>
@@ -44,7 +59,7 @@
                         <color key="backgroundColor" name="controlColor" catalog="System" colorSpace="catalog"/>
                     </textFieldCell>
                 </textField>
-                <comboBox verticalHuggingPriority="750" ambiguous="YES" misplaced="YES" translatesAutoresizingMaskIntoConstraints="NO" id="HOY-Gs-fvN">
+                <comboBox verticalHuggingPriority="750" ambiguous="YES" misplaced="YES" translatesAutoresizingMaskIntoConstraints="NO" id="HOY-Gs-fvN" userLabel="Destination Currency Selector">
                     <rect key="frame" x="21" y="41" width="282" height="26"/>
                     <comboBoxCell key="cell" scrollable="YES" lineBreakMode="clipping" selectable="YES" editable="YES" sendsActionOnEndEditing="YES" borderStyle="bezel" drawsBackground="YES" completes="NO" numberOfVisibleItems="5" id="SS1-jV-1Y4">
                         <font key="font" metaFont="system"/>
@@ -56,8 +71,13 @@
                             <string>Item 3</string>
                         </objectValues>
                     </comboBoxCell>
+                    <connections>
+                        <binding destination="ub1-Ex-a9o" name="content" keyPath="arrangedObjects" id="fg6-Yj-pJc"/>
+                        <binding destination="ub1-Ex-a9o" name="contentValues" keyPath="arrangedObjects.name" previousBinding="fg6-Yj-pJc" id="6Vz-dN-Wsz"/>
+                        <binding destination="ub1-Ex-a9o" name="value" keyPath="selection.name" previousBinding="6Vz-dN-Wsz" id="imZ-7m-EhC"/>
+                    </connections>
                 </comboBox>
-                <textField horizontalHuggingPriority="251" verticalHuggingPriority="750" ambiguous="YES" misplaced="YES" translatesAutoresizingMaskIntoConstraints="NO" id="2ab-lh-fuD">
+                <textField horizontalHuggingPriority="251" verticalHuggingPriority="750" ambiguous="YES" misplaced="YES" translatesAutoresizingMaskIntoConstraints="NO" id="2ab-lh-fuD" userLabel="Destination Amount Label">
                     <rect key="frame" x="21" y="20" width="281" height="17"/>
                     <textFieldCell key="cell" scrollable="YES" lineBreakMode="clipping" sendsActionOnEndEditing="YES" title="Label" id="65H-17-XkI">
                         <numberFormatter key="formatter" formatterBehavior="default10_4" numberStyle="currency" minimumIntegerDigits="1" maximumIntegerDigits="2000000000" minimumFractionDigits="2" maximumFractionDigits="2" id="ObW-AF-Jbi"/>
@@ -65,12 +85,20 @@
                         <color key="textColor" name="labelColor" catalog="System" colorSpace="catalog"/>
                         <color key="backgroundColor" name="controlColor" catalog="System" colorSpace="catalog"/>
                     </textFieldCell>
+                    <connections>
+                        <binding destination="-2" name="value" keyPath="self.desintationAmount" id="Zrz-K3-cXU"/>
+                    </connections>
                 </textField>
+                <progressIndicator horizontalHuggingPriority="750" verticalHuggingPriority="750" maxValue="100" displayedWhenStopped="NO" bezeled="NO" indeterminate="YES" controlSize="small" style="spinning" translatesAutoresizingMaskIntoConstraints="NO" id="Wb6-CC-dT8">
+                    <rect key="frame" x="152" y="20" width="16" height="16"/>
+                </progressIndicator>
             </subviews>
             <constraints>
+                <constraint firstItem="2ab-lh-fuD" firstAttribute="centerY" secondItem="Wb6-CC-dT8" secondAttribute="centerY" constant="-0.5" id="1bq-AE-9fb"/>
                 <constraint firstItem="xOP-MY-vl6" firstAttribute="top" secondItem="XH3-pe-bYv" secondAttribute="bottom" constant="11" id="27b-gf-F53"/>
                 <constraint firstAttribute="centerX" secondItem="BpY-s1-JE4" secondAttribute="centerX" id="2Gv-pj-Z74"/>
                 <constraint firstItem="BpY-s1-JE4" firstAttribute="top" secondItem="xOP-MY-vl6" secondAttribute="bottom" constant="8" id="6h1-lZ-Dmg"/>
+                <constraint firstAttribute="centerX" secondItem="Wb6-CC-dT8" secondAttribute="centerX" id="E9b-h7-Ozb"/>
                 <constraint firstItem="XH3-pe-bYv" firstAttribute="leading" secondItem="Hz6-mo-xeY" secondAttribute="leading" constant="20" id="NU2-Ge-NHw"/>
                 <constraint firstAttribute="trailing" secondItem="XH3-pe-bYv" secondAttribute="trailing" constant="20" id="Qhj-5Q-ktj"/>
                 <constraint firstItem="2ab-lh-fuD" firstAttribute="top" secondItem="HOY-Gs-fvN" secondAttribute="bottom" constant="8" id="VKW-6e-i22"/>
@@ -81,7 +109,19 @@
                 <constraint firstItem="XH3-pe-bYv" firstAttribute="width" secondItem="HOY-Gs-fvN" secondAttribute="width" id="wzW-Iq-E92"/>
                 <constraint firstAttribute="bottom" secondItem="2ab-lh-fuD" secondAttribute="bottom" constant="20" id="zSX-gV-H25"/>
             </constraints>
-            <point key="canvasLocation" x="276" y="402.5"/>
+            <point key="canvasLocation" x="49" y="-53.5"/>
         </customView>
+        <userDefaultsController representsSharedInstance="YES" id="OQv-ed-DfS"/>
+        <customObject id="mWq-Z4-ofA" customClass="XRCurrencyStoreController"/>
+        <arrayController id="XV1-Lg-Nsm" userLabel="sourceController">
+            <connections>
+                <binding destination="-2" name="contentArray" keyPath="sourceArray" id="weH-hL-TgY"/>
+            </connections>
+        </arrayController>
+        <arrayController id="ub1-Ex-a9o" userLabel="destinationController">
+            <connections>
+                <binding destination="-2" name="contentArray" keyPath="destinationArray" id="qUG-Dg-MCU"/>
+            </connections>
+        </arrayController>
     </objects>
 </document>

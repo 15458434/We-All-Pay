@@ -13,6 +13,8 @@
 
 #import "MCNetworkTools.h"
 
+#import "XRCurrencyStoreController.h"
+
 typedef NS_ENUM(BOOL, MCReversing) {
     isNotReversing,
     isReversing
@@ -165,6 +167,11 @@ NSString * const MCConversionDirectionKey = @"MCConversionDirectionKey";
 
 - (void)awakeFromNib
 {
+    [[XRCurrencyStoreController sharedStore] prepareStoreWithCompletionHandler:^{
+#ifdef DEBUG
+        NSLog(@"XRCurrencyStore is ready");
+#endif
+    }];
     _indicatorStartCount = 0;
     _requestTimeOfLastReceivedExchangeRateResult = [NSDate date];
     [super awakeFromNib];
