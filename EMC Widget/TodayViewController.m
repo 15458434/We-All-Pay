@@ -19,7 +19,7 @@
 @property (strong) IBOutlet XRCurrencyStoreController *storeController;
 
 @property (nonatomic, strong) NSNumber *sourceAmount;
-@property (nonatomic, strong) XRCurrencyXRate *exchangeRate;
+@property (nonatomic, strong) NSNumber *exchangeRate;
 @property (nonatomic, strong) NSNumber *desintationAmount;
 
 @property (weak) IBOutlet NSTextField *sourceAmountField;
@@ -44,6 +44,8 @@
 
 @implementation TodayViewController
 
+#pragma mark - Private in this class.
+
 - (XRCurrencyXRateFetcher *)myXRateFetcher
 {
     // if no xratefetcher create one.
@@ -65,6 +67,18 @@
     }
 }
 
+- (void)calculateDestinationAmount
+{
+#if DEBUG
+    NSLog(@"calculateDestinationAmount");
+#endif
+    [self willChangeValueForKey:@"desintationAmount"];
+    self.desintationAmount = @(_sourceAmount.doubleValue * _exchangeRate.doubleValue);
+    [self didChangeValueForKey:@"desintationAmount"];
+}
+
+#pragma mark - Inherited from super.
+
 - (void)awakeFromNib
 {
     [super awakeFromNib];
@@ -72,6 +86,7 @@
     NSLog(@"Good morning says the widget.");
 #endif
     _storeController = [XRCurrencyStoreController sharedStore];
+    self.sourceAmount = @(1);
 }
 
 - (void)viewDidLoad
@@ -96,6 +111,7 @@
 #if DEBUG
                 NSLog(@"exchangeRate has been fetched.");
 #endif
+                [strongSelf calculateDestinationAmount];
             }];
         }
     }];
@@ -153,10 +169,16 @@
     // Get exchange rate
     NSString *uuidString = [[NSUUID UUID] UUIDString];
     XRCurrencyXRateFetcher *myFetcher = [[XRCurrencyStoreController sharedStore] xRateFetcher];
+    __weak typeof(self) weakSelf = self;
     [myFetcher getExchangeRateWithUniqueID:uuidString from:currentSelectedSourceCurrency.code to:currentSelectedDestinationCurrency.code withCompletionHandler:^(NSDictionary *exchangeRateResult) {
 #if DEBUG
         NSLog(@"Receiving exchangeRate");
 #endif
+        _exchangeRate = exchangeRateResult[XRCurrencyExchangeRate];
+        __strong typeof(weakSelf) strongSelf = weakSelf;
+        if (strongSelf) {
+            [strongSelf calculateDestinationAmount];
+        }
     }];
     // Recalculate
 }
