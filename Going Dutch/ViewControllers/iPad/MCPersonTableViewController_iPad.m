@@ -19,7 +19,14 @@
 
 #import "MCWeAllPayStoreController.h"
 
+typedef NS_ENUM(BOOL, MCStatus) {
+    inValid,
+    valid
+};
+
 @interface MCPersonTableViewController_iPad ()
+
+@property (nonatomic) MCStatus emailAddressStringInTextField;
 
 @end
 
@@ -123,6 +130,13 @@
     return self;
 }
 
+- (void)awakeFromNib
+{
+    [super awakeFromNib];
+    
+    _emailAddressStringInTextField = inValid;
+}
+
 - (void)viewDidLoad
 {
     [super viewDidLoad];
@@ -133,7 +147,6 @@
     // Uncomment the following line to display an Edit button in the navigation bar for this view controller.
     // self.navigationItem.rightBarButtonItem = self.editButtonItem;
     
-//    didSomethingChange = NO;
     isEditingEmailField = isNotEditing;
     mainCancelPressed = cancelIsNotPressed;
     [[MCWeAllPayStoreController defaultStore] beginUndoGroup];
@@ -240,6 +253,20 @@
 
 - (BOOL)textFieldShouldEndEditing:(UITextField *)textField
 {
+    if (textField == emailField) {
+#if DEBUG
+        NSLog(@"should dismiss emailField");
+#endif
+        if ([MCTools isStringAnEmailAddress:[emailField text]]) {
+            [emailField setTextColor:[UIColor blackColor]];
+            _emailAddressStringInTextField = valid;
+            return YES;
+        } else {
+            [emailField setTextColor:[UIColor redColor]];
+            _emailAddressStringInTextField = inValid;
+            return NO;
+        }
+    }
     return YES;
 }
 

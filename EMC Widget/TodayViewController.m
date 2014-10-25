@@ -14,7 +14,9 @@
 #import "XRCurrencyXRate.h"
 #import "XRCurrencyXRateFetcher.h"
 
-@interface TodayViewController () <NCWidgetProviding>
+@interface TodayViewController () <NCWidgetProviding, NSComboBoxDelegate, NSComboBoxDataSource>
+
+@property (strong) IBOutlet XRCurrencyStoreController *storeController;
 
 @property (nonatomic, strong) NSNumber *sourceAmount;
 @property (nonatomic, strong) XRCurrencyXRate *exchangeRate;
@@ -67,8 +69,9 @@
 {
     [super awakeFromNib];
 #if DEBUG
-    NSLog(@"Widget has been started.");
+    NSLog(@"Good morning says the widget.");
 #endif
+    _storeController = [XRCurrencyStoreController sharedStore];
 }
 
 - (void)viewDidLoad
@@ -101,8 +104,10 @@
 - (void)viewWillAppear
 {
     [super viewWillAppear];
+    
     // Fetch current selected exchange rate.
     // Recalculate result
+    
 }
 
 - (void)widgetPerformUpdateWithCompletionHandler:(void (^)(NCUpdateResult result))completionHandler {
@@ -110,6 +115,79 @@
     // with NoData if nothing has changed or NewData if there is new data since the last
     // time we called you
     completionHandler(NCUpdateResultNoData);
+}
+
+#pragma mark - Combo Box Delegate
+
+- (void)comboBoxSelectionDidChange:(NSNotification *)notification
+{
+#if DEBUG
+    NSLog(@"%@: comboBoxSelectionDidchange: %@", self, notification);
+#endif
+    // Get selected source currency
+    NSInteger indexOfSelectedSourceCurrency = _sourceCurrencySelector.indexOfSelectedItem;
+    if (indexOfSelectedSourceCurrency < 0) {
+#if DEBUG
+        NSLog(@"selectedSourceCurrency: %ld", (long)indexOfSelectedSourceCurrency);
+#endif
+        return;
+    }
+//    NSArray *arrangedSourceCurrencies = _sourceController.arrangedObjects;
+    XRCurrency *currentSelectedSourceCurrency = _sourceArray[indexOfSelectedSourceCurrency];
+#if DEBUG
+    NSLog(@"%@ %@ as source currency selected.", currentSelectedSourceCurrency.name, currentSelectedSourceCurrency.code);
+#endif
+    // Get selected destination currency
+    NSInteger indexOfselectDestinationCurrency = _destinationCurrencySelector.indexOfSelectedItem;
+    if (indexOfselectDestinationCurrency < 0) {
+#if DEBUG
+        NSLog(@"selectedDestinationCurrency: %ld", (long)indexOfselectDestinationCurrency);
+#endif
+        return;
+    }
+//    NSArray *arrangedDestinationCurrencies = _destinationController.arrangedObjects;
+    XRCurrency *currentSelectedDestinationCurrency = _destinationArray[indexOfselectDestinationCurrency];
+#if DEBUG
+    NSLog(@"%@ %@ as destination currency selected.", currentSelectedDestinationCurrency.name, currentSelectedDestinationCurrency.code);
+#endif
+    // Get exchange rate
+    NSString *uuidString = [[NSUUID UUID] UUIDString];
+    XRCurrencyXRateFetcher *myFetcher = [[XRCurrencyStoreController sharedStore] xRateFetcher];
+    [myFetcher getExchangeRateWithUniqueID:uuidString from:currentSelectedSourceCurrency.code to:currentSelectedDestinationCurrency.code withCompletionHandler:^(NSDictionary *exchangeRateResult) {
+#if DEBUG
+        NSLog(@"Receiving exchangeRate");
+#endif
+    }];
+    // Recalculate
+}
+
+#pragma mark - Combo Box Data Source
+
+- (NSInteger)numberOfItemsInComboBox:(NSComboBox *)aComboBox
+{
+    if (aComboBox == _sourceCurrencySelector) {
+        return _sourceArray.count;
+    }
+    if (aComboBox == _destinationCurrencySelector) {
+        return _destinationArray.count;
+    }
+    return 0;
+}
+
+- (id)comboBox:(NSComboBox *)aComboBox objectValueForItemAtIndex:(NSInteger)index
+{
+    if (aComboBox == _sourceCurrencySelector) {
+        XRCurrency *sourceCurrencyAtIndex = _sourceArray[index];
+        return sourceCurrencyAtIndex.name;
+    }
+    if (aComboBox == _destinationCurrencySelector) {
+        XRCurrency *destinationCurrencyAtIndex = _destinationArray[index];
+        return destinationCurrencyAtIndex.name;
+    }
+#if DEBUG
+    NSLog(@"There is an unknown comboBox present.");
+#endif
+    return nil;
 }
 
 @end

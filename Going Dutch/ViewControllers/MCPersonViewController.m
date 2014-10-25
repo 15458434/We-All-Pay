@@ -15,6 +15,13 @@
 
 #import "MCTwoLabelsTitleView.h"
 
+#import "MCTools.h"
+
+typedef NS_ENUM(BOOL, MCStatus) {
+    inValid,
+    valid
+};
+
 @interface MCPersonViewController ()
 
 @property (atomic, copy) NSDate * dateModified;
@@ -24,6 +31,8 @@
 @property (atomic, strong) NSString * phoneNumber;
 @property (atomic, copy) UIImage * picture;
 @property (atomic, copy) UIImage * thumbnail;
+
+@property (nonatomic) MCStatus emailAddressStringInTextField;
 
 @end
 
@@ -92,7 +101,6 @@
     [emailField setText:[_thisPerson defaultEmailAddress]];
     
     [emailField resignFirstResponder];
-//    didSomethingChange = YES;
     [[[self navigationItem] rightBarButtonItem] setEnabled:YES];
 }
 
@@ -113,7 +121,6 @@
             @throw [NSException exceptionWithName:@"nil" reason:@"person is nil" userInfo:nil];
         }
         _thisPerson = person;
-//        didSomethingChange = NO;
         emailEditFieldStatus = 0;
     }
     return self;
@@ -196,27 +203,6 @@
     }
 }
 
-//- (void)setCircularImageOnPictureView:(UIImage *)image
-//{
-//    __weak MCPersonViewController *weakSelf = self;
-//    
-//    __block UIImage *copyOfImage = [image copy];
-//    dispatch_queue_t imageProcessQueue;
-//    imageProcessQueue = dispatch_queue_create("imageProcessQueue", NULL);
-//    
-//    dispatch_async(imageProcessQueue, ^{
-//        CGRect circularImageRect = CGRectMake(0, 0, 160, 160);
-//        UIImage *circularImage = [MCTools cutCircularImageFrom:copyOfImage toDestinationRect:circularImageRect];
-//        dispatch_async(dispatch_get_main_queue(), ^{
-//            MCPersonViewController *strongSelf = weakSelf;
-//            if (strongSelf) {
-//                [[strongSelf pictureView] setImage:circularImage];
-//                [[strongSelf pictureView] setNeedsDisplay];
-//            }
-//        });
-//    });
-//}
-
 #pragma mark - Private in this class
 
 - (void)fillTheScreenWithInitialData
@@ -243,6 +229,13 @@
         // Custom initialization
     }
     return self;
+}
+
+- (void)awakeFromNib
+{
+    [super awakeFromNib];
+    
+    _emailAddressStringInTextField = inValid;
 }
 
 - (void)viewDidLoad
@@ -378,20 +371,14 @@
 {
     if (textField == firstNameField) {
         [_thisPerson setFirstName:[firstNameField text]];
-//        didSomethingChange = YES;
         NSDate *nu = [NSDate date];
         [_tonightsBill setDateModified:nu];
         [_thisPerson setDateModified:nu];
-//        [[[self navigationItem] rightBarButtonItem] setEnabled:YES];
-//        [lastNameField becomeFirstResponder];
     } else if (textField == lastNameField) {
         [_thisPerson setLastName:[lastNameField text]];
-//        didSomethingChange = YES;
         NSDate *nu = [NSDate date];
         [_tonightsBill setDateModified:nu];
         [_thisPerson setDateModified:nu];
-//        [[[self navigationItem] rightBarButtonItem] setEnabled:YES];
-//        [emailField becomeFirstResponder];
     } else if (textField == emailField) {
         if (!isSelectEmail) {
             [emailField setInputView:nil];
@@ -411,9 +398,6 @@
         NSDate *nu = [NSDate date];
         [_tonightsBill setDateModified:nu];
         [_thisPerson setDateModified:nu];
-//        didSomethingChange = YES;
-
-//        [[[self navigationItem] rightBarButtonItem] setEnabled:YES];
     }
 }
 
@@ -426,8 +410,15 @@
         [lastNameField resignFirstResponder];
         return YES;
     } else if (textField == emailField) {
-        [emailField resignFirstResponder];
-        return YES;
+        if ([MCTools isStringAnEmailAddress:[emailField text]]) {
+            _emailAddressStringInTextField = valid;
+            [emailField setTextColor:[UIColor blackColor]];
+            [emailField resignFirstResponder];
+            return YES;
+        } else {
+            _emailAddressStringInTextField = inValid;
+            [emailField setTextColor:[UIColor redColor]];
+        }
     }
     return NO;
 }

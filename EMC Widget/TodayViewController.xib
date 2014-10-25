@@ -13,6 +13,7 @@
                 <outlet property="sourceAmountField" destination="XH3-pe-bYv" id="BBD-K2-ECb"/>
                 <outlet property="sourceController" destination="XV1-Lg-Nsm" id="ahn-J1-wiT"/>
                 <outlet property="sourceCurrencySelector" destination="xOP-MY-vl6" id="NdL-UF-Eah"/>
+                <outlet property="storeController" destination="mWq-Z4-ofA" id="bOa-bn-6nf"/>
                 <outlet property="view" destination="Hz6-mo-xeY" id="0bl-1N-x8E"/>
             </connections>
         </customObject>
@@ -35,20 +36,14 @@
                 </textField>
                 <comboBox verticalHuggingPriority="750" ambiguous="YES" misplaced="YES" translatesAutoresizingMaskIntoConstraints="NO" id="xOP-MY-vl6" userLabel="Source Currency Selector">
                     <rect key="frame" x="21" y="94" width="282" height="26"/>
-                    <comboBoxCell key="cell" scrollable="YES" lineBreakMode="clipping" selectable="YES" editable="YES" sendsActionOnEndEditing="YES" borderStyle="bezel" drawsBackground="YES" completes="NO" numberOfVisibleItems="5" id="i64-LE-WjS">
+                    <comboBoxCell key="cell" scrollable="YES" lineBreakMode="clipping" selectable="YES" editable="YES" sendsActionOnEndEditing="YES" borderStyle="bezel" drawsBackground="YES" completes="NO" usesDataSource="YES" numberOfVisibleItems="5" id="i64-LE-WjS">
                         <font key="font" metaFont="system"/>
                         <color key="textColor" name="controlTextColor" catalog="System" colorSpace="catalog"/>
                         <color key="backgroundColor" name="textBackgroundColor" catalog="System" colorSpace="catalog"/>
-                        <objectValues>
-                            <string>Item 1</string>
-                            <string>Item 2</string>
-                            <string>Item 3</string>
-                        </objectValues>
                     </comboBoxCell>
                     <connections>
-                        <binding destination="XV1-Lg-Nsm" name="content" keyPath="arrangedObjects" id="4eB-N7-bSn"/>
-                        <binding destination="XV1-Lg-Nsm" name="contentValues" keyPath="arrangedObjects.name" previousBinding="4eB-N7-bSn" id="v00-2O-kWu"/>
-                        <binding destination="XV1-Lg-Nsm" name="value" keyPath="selection.name" previousBinding="v00-2O-kWu" id="VwX-56-vKI"/>
+                        <outlet property="dataSource" destination="-2" id="XgN-X7-zvO"/>
+                        <outlet property="delegate" destination="-2" id="31A-z2-gqF"/>
                     </connections>
                 </comboBox>
                 <textField horizontalHuggingPriority="251" verticalHuggingPriority="750" misplaced="YES" translatesAutoresizingMaskIntoConstraints="NO" id="BpY-s1-JE4">
@@ -61,20 +56,14 @@
                 </textField>
                 <comboBox verticalHuggingPriority="750" ambiguous="YES" misplaced="YES" translatesAutoresizingMaskIntoConstraints="NO" id="HOY-Gs-fvN" userLabel="Destination Currency Selector">
                     <rect key="frame" x="21" y="41" width="282" height="26"/>
-                    <comboBoxCell key="cell" scrollable="YES" lineBreakMode="clipping" selectable="YES" editable="YES" sendsActionOnEndEditing="YES" borderStyle="bezel" drawsBackground="YES" completes="NO" numberOfVisibleItems="5" id="SS1-jV-1Y4">
+                    <comboBoxCell key="cell" scrollable="YES" lineBreakMode="clipping" selectable="YES" editable="YES" sendsActionOnEndEditing="YES" borderStyle="bezel" drawsBackground="YES" completes="NO" usesDataSource="YES" numberOfVisibleItems="5" id="SS1-jV-1Y4">
                         <font key="font" metaFont="system"/>
                         <color key="textColor" name="controlTextColor" catalog="System" colorSpace="catalog"/>
                         <color key="backgroundColor" name="textBackgroundColor" catalog="System" colorSpace="catalog"/>
-                        <objectValues>
-                            <string>Item 1</string>
-                            <string>Item 2</string>
-                            <string>Item 3</string>
-                        </objectValues>
                     </comboBoxCell>
                     <connections>
-                        <binding destination="ub1-Ex-a9o" name="content" keyPath="arrangedObjects" id="fg6-Yj-pJc"/>
-                        <binding destination="ub1-Ex-a9o" name="contentValues" keyPath="arrangedObjects.name" previousBinding="fg6-Yj-pJc" id="6Vz-dN-Wsz"/>
-                        <binding destination="ub1-Ex-a9o" name="value" keyPath="selection.name" previousBinding="6Vz-dN-Wsz" id="imZ-7m-EhC"/>
+                        <outlet property="dataSource" destination="-2" id="ftM-Nj-YVH"/>
+                        <outlet property="delegate" destination="-2" id="jL7-9e-Fes"/>
                     </connections>
                 </comboBox>
                 <textField horizontalHuggingPriority="251" verticalHuggingPriority="750" ambiguous="YES" misplaced="YES" translatesAutoresizingMaskIntoConstraints="NO" id="2ab-lh-fuD" userLabel="Destination Amount Label">
@@ -115,12 +104,14 @@
         <customObject id="mWq-Z4-ofA" customClass="XRCurrencyStoreController"/>
         <arrayController id="XV1-Lg-Nsm" userLabel="sourceController">
             <connections>
+                <binding destination="mWq-Z4-ofA" name="managedObjectContext" keyPath="mainQueueContext" id="BQj-a9-yMW"/>
                 <binding destination="-2" name="contentArray" keyPath="sourceArray" id="weH-hL-TgY"/>
             </connections>
         </arrayController>
         <arrayController id="ub1-Ex-a9o" userLabel="destinationController">
             <connections>
                 <binding destination="-2" name="contentArray" keyPath="destinationArray" id="qUG-Dg-MCU"/>
+                <binding destination="mWq-Z4-ofA" name="managedObjectContext" keyPath="secondMainQueueContext" id="T5G-jI-T6p"/>
             </connections>
         </arrayController>
     </objects>

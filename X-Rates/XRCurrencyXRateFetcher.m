@@ -326,6 +326,9 @@ NSString * const XRExchangeRateSource = @"source";
     // Don't fetch if not two codes are applied.
     if (toCode == nil || fromCode == nil) {
         // When either value is nil nothing should be fetched.
+#if DEBUG
+        NSLog(@"Unable to fetch when only one Currency is present.");
+#endif
         return;
     }
     
@@ -342,6 +345,9 @@ NSString * const XRExchangeRateSource = @"source";
             [self getExchangeRateFromYahoo:fromCode to:toCode withCompletionHandler:completionBlock];
         }
     } else {
+#if DEBUG
+        NSLog(@"There is no internet connection.");
+#endif
         if ([fromCode isEqualToString:@"BTC"] || [toCode isEqualToString:@"BTC"]) {
             xRate = [[XRCurrencyXRate alloc] initWithUniqueID:uniqueID fromCode:fromCode toCode:toCode fromSource:@"BitcoinAverage"];
             xRate.status = failed;
