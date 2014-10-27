@@ -7,10 +7,10 @@
         <customObject id="-2" userLabel="File's Owner" customClass="TodayViewController">
             <connections>
                 <outlet property="activityIndicator" destination="Wb6-CC-dT8" id="JNa-GU-JNb"/>
-                <outlet property="destinationAmountField" destination="2ab-lh-fuD" id="LKa-Rp-fzu"/>
+                <outlet property="destinationAmountField" destination="HOY-Gs-fvN" id="e69-R2-twz"/>
                 <outlet property="destinationController" destination="ub1-Ex-a9o" id="zdT-3y-ZG5"/>
                 <outlet property="destinationCurrencySelector" destination="HOY-Gs-fvN" id="j8d-VD-oXC"/>
-                <outlet property="sourceAmountField" destination="XH3-pe-bYv" id="BBD-K2-ECb"/>
+                <outlet property="sourceAmountField" destination="xOP-MY-vl6" id="Cke-sj-Fjo"/>
                 <outlet property="sourceController" destination="XV1-Lg-Nsm" id="ahn-J1-wiT"/>
                 <outlet property="sourceCurrencySelector" destination="xOP-MY-vl6" id="NdL-UF-Eah"/>
                 <outlet property="storeController" destination="mWq-Z4-ofA" id="bOa-bn-6nf"/>
@@ -20,28 +20,11 @@
         <customObject id="-1" userLabel="First Responder" customClass="FirstResponder"/>
         <customObject id="-3" userLabel="Application" customClass="NSObject"/>
         <customView simulatedAppContext="notificationCenter" translatesAutoresizingMaskIntoConstraints="NO" id="Hz6-mo-xeY">
-            <rect key="frame" x="0.0" y="5" width="320" height="171"/>
+            <rect key="frame" x="0.0" y="5" width="320" height="88"/>
             <subviews>
-                <textField verticalHuggingPriority="750" translatesAutoresizingMaskIntoConstraints="NO" id="XH3-pe-bYv" userLabel="Source Amount Field">
-                    <rect key="frame" x="20" y="129" width="280" height="22"/>
-                    <textFieldCell key="cell" scrollable="YES" lineBreakMode="clipping" selectable="YES" editable="YES" sendsActionOnEndEditing="YES" state="on" borderStyle="bezel" alignment="center" title="1" drawsBackground="YES" id="Lem-6S-rvY">
-                        <numberFormatter key="formatter" formatterBehavior="default10_4" numberStyle="decimal" minimumIntegerDigits="1" maximumIntegerDigits="2000000000" maximumFractionDigits="3" id="IFm-Cn-Uue"/>
-                        <font key="font" metaFont="system"/>
-                        <color key="textColor" name="textColor" catalog="System" colorSpace="catalog"/>
-                        <color key="backgroundColor" name="textBackgroundColor" catalog="System" colorSpace="catalog"/>
-                    </textFieldCell>
-                    <connections>
-                        <binding destination="-2" name="value" keyPath="sourceAmount" id="j9H-ms-1Fg">
-                            <dictionary key="options">
-                                <bool key="NSConditionallySetsEnabled" value="YES"/>
-                                <bool key="NSContinuouslyUpdatesValue" value="YES"/>
-                            </dictionary>
-                        </binding>
-                    </connections>
-                </textField>
-                <comboBox verticalHuggingPriority="750" ambiguous="YES" misplaced="YES" translatesAutoresizingMaskIntoConstraints="NO" id="xOP-MY-vl6" userLabel="Source Currency Selector">
-                    <rect key="frame" x="21" y="94" width="282" height="26"/>
-                    <comboBoxCell key="cell" scrollable="YES" lineBreakMode="clipping" selectable="YES" editable="YES" sendsActionOnEndEditing="YES" borderStyle="bezel" drawsBackground="YES" completes="NO" usesDataSource="YES" numberOfVisibleItems="5" id="i64-LE-WjS">
+                <comboBox horizontalHuggingPriority="249" verticalHuggingPriority="750" horizontalCompressionResistancePriority="749" translatesAutoresizingMaskIntoConstraints="NO" id="xOP-MY-vl6" userLabel="Source Currency Selector">
+                    <rect key="frame" x="78" y="44" width="225" height="26"/>
+                    <comboBoxCell key="cell" scrollable="YES" lineBreakMode="clipping" selectable="YES" editable="YES" sendsActionOnEndEditing="YES" borderStyle="bezel" placeholderString="Select a currency" drawsBackground="YES" completes="NO" usesDataSource="YES" numberOfVisibleItems="5" id="i64-LE-WjS">
                         <font key="font" metaFont="system"/>
                         <color key="textColor" name="controlTextColor" catalog="System" colorSpace="catalog"/>
                         <color key="backgroundColor" name="textBackgroundColor" catalog="System" colorSpace="catalog"/>
@@ -51,17 +34,9 @@
                         <outlet property="delegate" destination="-2" id="31A-z2-gqF"/>
                     </connections>
                 </comboBox>
-                <textField horizontalHuggingPriority="251" verticalHuggingPriority="750" misplaced="YES" translatesAutoresizingMaskIntoConstraints="NO" id="BpY-s1-JE4">
-                    <rect key="frame" x="141" y="73" width="38" height="17"/>
-                    <textFieldCell key="cell" scrollable="YES" lineBreakMode="clipping" sendsActionOnEndEditing="YES" alignment="center" title="to" id="PMm-vQ-bhN">
-                        <font key="font" metaFont="system"/>
-                        <color key="textColor" name="labelColor" catalog="System" colorSpace="catalog"/>
-                        <color key="backgroundColor" name="controlColor" catalog="System" colorSpace="catalog"/>
-                    </textFieldCell>
-                </textField>
-                <comboBox verticalHuggingPriority="750" ambiguous="YES" misplaced="YES" translatesAutoresizingMaskIntoConstraints="NO" id="HOY-Gs-fvN" userLabel="Destination Currency Selector">
-                    <rect key="frame" x="21" y="41" width="282" height="26"/>
-                    <comboBoxCell key="cell" scrollable="YES" lineBreakMode="clipping" selectable="YES" editable="YES" sendsActionOnEndEditing="YES" borderStyle="bezel" drawsBackground="YES" completes="NO" usesDataSource="YES" numberOfVisibleItems="5" id="SS1-jV-1Y4">
+                <comboBox horizontalHuggingPriority="249" verticalHuggingPriority="750" horizontalCompressionResistancePriority="749" translatesAutoresizingMaskIntoConstraints="NO" id="HOY-Gs-fvN" userLabel="Destination Currency Selector">
+                    <rect key="frame" x="78" y="16" width="225" height="26"/>
+                    <comboBoxCell key="cell" lineBreakMode="truncatingMiddle" selectable="YES" editable="YES" sendsActionOnEndEditing="YES" borderStyle="bezel" placeholderString="Select a currency" drawsBackground="YES" completes="NO" usesDataSource="YES" numberOfVisibleItems="5" id="SS1-jV-1Y4">
                         <font key="font" metaFont="system"/>
                         <color key="textColor" name="controlTextColor" catalog="System" colorSpace="catalog"/>
                         <color key="backgroundColor" name="textBackgroundColor" catalog="System" colorSpace="catalog"/>
@@ -71,43 +46,57 @@
                         <outlet property="delegate" destination="-2" id="jL7-9e-Fes"/>
                     </connections>
                 </comboBox>
-                <textField horizontalHuggingPriority="251" verticalHuggingPriority="750" ambiguous="YES" misplaced="YES" translatesAutoresizingMaskIntoConstraints="NO" id="2ab-lh-fuD" userLabel="Destination Amount Label">
-                    <rect key="frame" x="21" y="20" width="281" height="17"/>
-                    <textFieldCell key="cell" scrollable="YES" lineBreakMode="clipping" sendsActionOnEndEditing="YES" alignment="center" title="Label" id="65H-17-XkI">
-                        <numberFormatter key="formatter" formatterBehavior="default10_4" numberStyle="decimal" minimumIntegerDigits="1" maximumIntegerDigits="2000000000" minimumFractionDigits="2" maximumFractionDigits="2" id="ObW-AF-Jbi"/>
+                <textField horizontalHuggingPriority="251" verticalHuggingPriority="750" translatesAutoresizingMaskIntoConstraints="NO" id="7lX-B0-cHg" userLabel="sourceAmount">
+                    <rect key="frame" x="18" y="49" width="54" height="17"/>
+                    <constraints>
+                        <constraint firstAttribute="width" constant="50" id="MzW-3b-5DE"/>
+                    </constraints>
+                    <textFieldCell key="cell" scrollable="YES" lineBreakMode="clipping" sendsActionOnEndEditing="YES" alignment="right" title="Label" id="QkV-zV-175">
+                        <numberFormatter key="formatter" formatterBehavior="default10_4" numberStyle="decimal" usesGroupingSeparator="NO" minimumIntegerDigits="0" maximumIntegerDigits="42" id="6ZN-ZI-w4q"/>
                         <font key="font" metaFont="system"/>
                         <color key="textColor" name="labelColor" catalog="System" colorSpace="catalog"/>
                         <color key="backgroundColor" name="controlColor" catalog="System" colorSpace="catalog"/>
                     </textFieldCell>
                     <connections>
-                        <binding destination="-2" name="value" keyPath="desintationAmount" id="F4P-sZ-Z5g">
-                            <dictionary key="options">
-                                <bool key="NSContinuouslyUpdatesValue" value="YES"/>
-                            </dictionary>
-                        </binding>
+                        <binding destination="-2" name="value" keyPath="sourceAmount" id="zD8-Sn-K61"/>
+                    </connections>
+                </textField>
+                <textField horizontalHuggingPriority="251" verticalHuggingPriority="750" translatesAutoresizingMaskIntoConstraints="NO" id="AjW-wb-kHG" userLabel="destinationAmount">
+                    <rect key="frame" x="18" y="21" width="54" height="17"/>
+                    <constraints>
+                        <constraint firstAttribute="width" constant="50" id="SdX-tw-O0d"/>
+                    </constraints>
+                    <textFieldCell key="cell" scrollable="YES" lineBreakMode="clipping" sendsActionOnEndEditing="YES" alignment="right" title="Label" id="5ls-k3-XaR">
+                        <numberFormatter key="formatter" formatterBehavior="default10_4" numberStyle="decimal" minimumIntegerDigits="1" maximumIntegerDigits="2000000000" maximumFractionDigits="3" id="Swc-ks-xAa"/>
+                        <font key="font" metaFont="system"/>
+                        <color key="textColor" name="labelColor" catalog="System" colorSpace="catalog"/>
+                        <color key="backgroundColor" name="controlColor" catalog="System" colorSpace="catalog"/>
+                    </textFieldCell>
+                    <connections>
+                        <binding destination="-2" name="value" keyPath="desintationAmount" id="ndJ-Ea-8x5"/>
                     </connections>
                 </textField>
                 <progressIndicator horizontalHuggingPriority="750" verticalHuggingPriority="750" maxValue="100" displayedWhenStopped="NO" bezeled="NO" indeterminate="YES" controlSize="small" style="spinning" translatesAutoresizingMaskIntoConstraints="NO" id="Wb6-CC-dT8">
-                    <rect key="frame" x="152" y="20" width="16" height="16"/>
+                    <rect key="frame" x="37" y="22" width="16" height="16"/>
                 </progressIndicator>
             </subviews>
             <constraints>
-                <constraint firstItem="2ab-lh-fuD" firstAttribute="centerY" secondItem="Wb6-CC-dT8" secondAttribute="centerY" constant="-0.5" id="1bq-AE-9fb"/>
-                <constraint firstItem="xOP-MY-vl6" firstAttribute="top" secondItem="XH3-pe-bYv" secondAttribute="bottom" constant="11" id="27b-gf-F53"/>
-                <constraint firstAttribute="centerX" secondItem="BpY-s1-JE4" secondAttribute="centerX" id="2Gv-pj-Z74"/>
-                <constraint firstItem="BpY-s1-JE4" firstAttribute="top" secondItem="xOP-MY-vl6" secondAttribute="bottom" constant="8" id="6h1-lZ-Dmg"/>
-                <constraint firstAttribute="centerX" secondItem="Wb6-CC-dT8" secondAttribute="centerX" id="E9b-h7-Ozb"/>
-                <constraint firstItem="XH3-pe-bYv" firstAttribute="leading" secondItem="Hz6-mo-xeY" secondAttribute="leading" constant="20" id="NU2-Ge-NHw"/>
-                <constraint firstAttribute="trailing" secondItem="XH3-pe-bYv" secondAttribute="trailing" constant="20" id="Qhj-5Q-ktj"/>
-                <constraint firstItem="2ab-lh-fuD" firstAttribute="top" secondItem="HOY-Gs-fvN" secondAttribute="bottom" constant="8" id="VKW-6e-i22"/>
-                <constraint firstItem="xOP-MY-vl6" firstAttribute="width" secondItem="XH3-pe-bYv" secondAttribute="width" id="i3e-8o-KZm"/>
-                <constraint firstItem="HOY-Gs-fvN" firstAttribute="top" secondItem="BpY-s1-JE4" secondAttribute="bottom" constant="8" id="leB-bR-Ag6"/>
-                <constraint firstItem="XH3-pe-bYv" firstAttribute="top" secondItem="Hz6-mo-xeY" secondAttribute="top" constant="20" id="pFU-AU-9cf"/>
-                <constraint firstItem="2ab-lh-fuD" firstAttribute="width" secondItem="XH3-pe-bYv" secondAttribute="width" id="v1Y-No-nzU"/>
-                <constraint firstItem="XH3-pe-bYv" firstAttribute="width" secondItem="HOY-Gs-fvN" secondAttribute="width" id="wzW-Iq-E92"/>
-                <constraint firstAttribute="bottom" secondItem="2ab-lh-fuD" secondAttribute="bottom" constant="20" id="zSX-gV-H25"/>
+                <constraint firstItem="xOP-MY-vl6" firstAttribute="leading" secondItem="7lX-B0-cHg" secondAttribute="trailing" constant="8" id="0Ez-Bk-OAc"/>
+                <constraint firstItem="AjW-wb-kHG" firstAttribute="baseline" secondItem="HOY-Gs-fvN" secondAttribute="baseline" id="1CV-MG-icZ"/>
+                <constraint firstAttribute="bottom" secondItem="HOY-Gs-fvN" secondAttribute="bottom" constant="20" id="6Or-e2-veK"/>
+                <constraint firstItem="7lX-B0-cHg" firstAttribute="leading" secondItem="Hz6-mo-xeY" secondAttribute="leading" constant="20" id="6mJ-W8-tpB"/>
+                <constraint firstItem="AjW-wb-kHG" firstAttribute="centerY" secondItem="Wb6-CC-dT8" secondAttribute="centerY" constant="0.5" id="A1j-Yn-mw2"/>
+                <constraint firstItem="7lX-B0-cHg" firstAttribute="baseline" secondItem="xOP-MY-vl6" secondAttribute="baseline" id="HrI-pQ-WGL"/>
+                <constraint firstAttribute="trailing" secondItem="xOP-MY-vl6" secondAttribute="trailing" constant="20" id="SUd-uc-bDi"/>
+                <constraint firstItem="HOY-Gs-fvN" firstAttribute="leading" secondItem="AjW-wb-kHG" secondAttribute="trailing" constant="8" id="Vum-Fe-bgN"/>
+                <constraint firstAttribute="trailing" secondItem="HOY-Gs-fvN" secondAttribute="trailing" constant="20" id="agN-DC-Ydd"/>
+                <constraint firstItem="AjW-wb-kHG" firstAttribute="centerX" secondItem="Wb6-CC-dT8" secondAttribute="centerX" id="ggf-gY-adB"/>
+                <constraint firstItem="xOP-MY-vl6" firstAttribute="top" secondItem="Hz6-mo-xeY" secondAttribute="top" constant="20" id="nBl-5G-w9z"/>
+                <constraint firstItem="HOY-Gs-fvN" firstAttribute="top" secondItem="xOP-MY-vl6" secondAttribute="bottom" constant="8" id="s7W-bW-3pF"/>
+                <constraint firstItem="AjW-wb-kHG" firstAttribute="leading" secondItem="Hz6-mo-xeY" secondAttribute="leading" constant="20" id="u6y-vM-4SW"/>
+                <constraint firstItem="xOP-MY-vl6" firstAttribute="width" secondItem="HOY-Gs-fvN" secondAttribute="width" id="zQL-If-a7q"/>
             </constraints>
-            <point key="canvasLocation" x="49" y="-53.5"/>
+            <point key="canvasLocation" x="40" y="-95"/>
         </customView>
         <userDefaultsController representsSharedInstance="YES" id="OQv-ed-DfS"/>
         <customObject id="mWq-Z4-ofA" customClass="XRCurrencyStoreController"/>

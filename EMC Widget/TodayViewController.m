@@ -14,6 +14,11 @@
 #import "XRCurrencyXRate.h"
 #import "XRCurrencyXRateFetcher.h"
 
+typedef NS_ENUM(BOOL, MCUpdateStatus) {
+    oldValue,
+    newValue
+};
+
 @interface TodayViewController () <NCWidgetProviding, NSComboBoxDelegate, NSComboBoxDataSource>
 
 @property (strong) IBOutlet XRCurrencyStoreController *storeController;
@@ -39,6 +44,7 @@
 @property (nonatomic, strong) XRCurrency *selectedDestinationCurrency;
 
 @property (nonatomic, strong) XRCurrencyXRateFetcher *myXRateFetcher;
+@property (nonatomic) MCUpdateStatus exchangeRateUpdateStatus;
 
 @end
 
@@ -69,11 +75,11 @@
 
 - (void)calculateDestinationAmount
 {
-#if DEBUG
-    NSLog(@"calculateDestinationAmount");
-#endif
     [self willChangeValueForKey:@"desintationAmount"];
     self.desintationAmount = @(_sourceAmount.doubleValue * _exchangeRate.doubleValue);
+#if DEBUG
+    NSLog(@"calculateDestinationAmount: %@", self.desintationAmount);
+#endif
     [self didChangeValueForKey:@"desintationAmount"];
 }
 
@@ -87,6 +93,7 @@
 #endif
     _storeController = [XRCurrencyStoreController sharedStore];
     self.sourceAmount = @(1);
+    _exchangeRateUpdateStatus = oldValue;
 }
 
 - (void)viewDidLoad
@@ -104,16 +111,7 @@
         NSManagedObjectContext *secondeContext = [[XRCurrencyStoreController sharedStore] secondMainQueueContext];
         self.destinationArray = [[[XRCurrencyStoreController sharedStore] fetchAllCurrenciesForContext:secondeContext] copy];
         // TODO: Set the combo boxes to the right value and fetch new exchange rate value.
-        __strong typeof(weakSelf) strongSelf = weakSelf;
-        if (strongSelf) {
-            XRCurrencyXRateFetcher *myFetcher = [strongSelf myXRateFetcher];
-            [myFetcher getExchangeRateWithUniqueID:[[NSUUID UUID] UUIDString] from:strongSelf.selectedSourceCurrency.code to:strongSelf.selectedDestinationCurrency.code withCompletionHandler:^(NSDictionary *exchangeRateResult) {
-#if DEBUG
-                NSLog(@"exchangeRate has been fetched.");
-#endif
-                [strongSelf calculateDestinationAmount];
-            }];
-        }
+
     }];
 }
 
@@ -130,7 +128,38 @@
     // Update your data and prepare for a snapshot. Call completion handler when you are done
     // with NoData if nothing has changed or NewData if there is new data since the last
     // time we called you
-    completionHandler(NCUpdateResultNoData);
+    NSOperationQueue *thisQueue = [NSOperationQueue currentQueue];
+    typeof(self) weakSelf = self;
+    if (_sourceArray.count > 0 && _desintationAmount > 0) {
+        __strong typeof(weakSelf) strongSelf = weakSelf;
+        if (strongSelf) {
+            XRCurrencyXRateFetcher *myFetcher = [strongSelf myXRateFetcher];
+            [myFetcher getExchangeRateWithUniqueID:[[NSUUID UUID] UUIDString] from:strongSelf.selectedSourceCurrency.code to:strongSelf.selectedDestinationCurrency.code withCompletionHandler:^(NSDictionary *exchangeRateResult) {
+                if (exchangeRateResult) {
+#if DEBUG
+                    NSLog(@"exchangeRate has been fetched.");
+#endif
+                    _exchangeRate = [exchangeRateResult objectForKey:XRCurrencyExchangeRate];
+#if DEBUG
+                    NSLog(@"exchangeRate: %@", _exchangeRate);
+#endif
+                    [strongSelf calculateDestinationAmount];
+                    [thisQueue addOperationWithBlock:^{
+                        completionHandler(NCUpdateResultNewData);
+                    }];
+                } else {
+#if DEBUG
+                    NSLog(@"exchangeRate has not been fetched.");
+#endif
+                    [thisQueue addOperationWithBlock:^{
+                        completionHandler(NCUpdateResultFailed);
+                    }];
+                }
+            }];
+        }
+    } else {
+        completionHandler(NCUpdateResultNoData);
+    }
 }
 
 #pragma mark - Combo Box Delegate
@@ -172,7 +201,7 @@
     __weak typeof(self) weakSelf = self;
     [myFetcher getExchangeRateWithUniqueID:uuidString from:currentSelectedSourceCurrency.code to:currentSelectedDestinationCurrency.code withCompletionHandler:^(NSDictionary *exchangeRateResult) {
 #if DEBUG
-        NSLog(@"Receiving exchangeRate");
+        NSLog(@"Receiving exchangeRate: %@", exchangeRateResult);
 #endif
         _exchangeRate = exchangeRateResult[XRCurrencyExchangeRate];
         __strong typeof(weakSelf) strongSelf = weakSelf;
@@ -180,7 +209,6 @@
             [strongSelf calculateDestinationAmount];
         }
     }];
-    // Recalculate
 }
 
 #pragma mark - Combo Box Data Source
