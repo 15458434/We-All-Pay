@@ -66,5 +66,13 @@
 		<key>categoryId</key>
 		<integer>7</integer>
 	</dict>
+	<dict>
+		<key>categoryDescription</key>
+		<string>Spa &amp; Relaxation</string>
+		<key>categoryPictureFilename</key>
+		<string>Spa</string>
+		<key>categoryId</key>
+		<integer>8</integer>
+	</dict>
 </array>
 </plist>
