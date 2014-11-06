@@ -27,6 +27,8 @@
 @interface MCPaymentTableViewController_iPad ()
 
 @property (weak, nonatomic) IBOutlet UIButton *categoryButton;
+@property (weak, nonatomic) IBOutlet UILabel *payerLabel;
+@property (weak, nonatomic) IBOutlet UIButton *selectButton;
 
 @end
 
@@ -83,7 +85,16 @@
 {
     // Put the correct category symbol on the categoryButton.
     MCCategoryPictureObject *categoryObject = [[[MCCategoryPictureStoreController sharedController] pictureObjects] objectAtIndex:[_thisPayment.categoryId shortValue]];
-    [_categoryButton setImage:categoryObject.largePicture forState:UIControlStateNormal];
+    if ([categoryObject categoryId] > 0) {
+        [_categoryButton setBackgroundImage:categoryObject.largePicture forState:UIControlStateNormal];
+        [_categoryButton setTitle:@"" forState:UIControlStateNormal];
+    } else {
+        [_categoryButton setBackgroundImage:nil forState:UIControlStateNormal];
+        NSString *title = NSLocalizedString(@"CATEGORY", @"Text of the category button.");
+        [_categoryButton setTitle:title forState:UIControlStateNormal];
+    }
+
+    
 }
 
 - (void)performFetchAndReloadTableView:(NSNotification *)notification
@@ -108,9 +119,15 @@
 
 - (void)reloadPayerLabel
 {
-    [selectButton setTitle:[[_thisPayment payingPerson] getFullName] forState:UIControlStateNormal];
-    _payerPicture.image = _thisPayment.payingPerson.picture;
-//    _didSomethingChange = MCSomethingHasChanged;
+    _payerLabel.text = [[_thisPayment payingPerson] getFullName];
+    if ([[_thisPayment payingPerson] picture]) {
+        [_selectButton setBackgroundImage:_thisPayment.payingPerson.picture forState:UIControlStateNormal];
+        [_selectButton setTitle:@"" forState:UIControlStateNormal];
+    } else {
+        NSString *title = NSLocalizedString(@"SELECT_PAYER", @"Select payer text for a buttons.");
+        [_selectButton setTitle:title forState:UIControlStateNormal];
+    }
+
 }
 
 //- (void)setCircularImageOnPictureView:(UIImage *)image
@@ -183,23 +200,15 @@
         NSString *newTitle = NSLocalizedString(@"NEW_PAYMENT_HEADER", "new payment");
         [self setTitle:newTitle];
     } else {
-        if ([_thisPayment payingPerson]) {
-            [selectButton setTitle:[[_thisPayment payingPerson] getFullName] forState:UIControlStateNormal];
-        }
         [itemField setText:[_thisPayment descriptionOfPayment]];
         if ([_thisPayment money]) {
             [paidField setText:[_thisPayment getMoneyValueInCurrencyAsAString]];
         }
-        if ([[_thisPayment payingPerson] picture]) {
-            _payerPicture.image = _thisPayment.payingPerson.picture;
-        }
+        [self reloadPayerLabel];
         _isNew = isNotNew;
     }
 
     [self putImageOnCategoryButton];
-//    // Put the correct category symbol on the categoryButton.
-//    MCCategoryPictureObject *categoryObject = [[[MCCategoryPictureStoreController sharedController] pictureObjects] objectAtIndex:[_thisPayment.categoryId shortValue]];
-//    [_categoryButton setImage:categoryObject.largePicture forState:UIControlStateNormal];
     
     NSSortDescriptor *sortDescriptor = [NSSortDescriptor sortDescriptorWithKey:@"person.firstName" ascending:YES];
     _paymentPresenceArray = [[_thisPayment peopleSharingPayment] sortedArrayUsingDescriptors:@[sortDescriptor]];
@@ -208,13 +217,6 @@
         _dataController = [[MCWeAllPayStoreController defaultStore] paymentPresenceDataControllerForDelegate:self];
         
     }
-
-//    UIManagedDocument *weAllPayDocument = [[MCWeAllPayStoreController defaultStore] weAllPayStoreDocument];
-//    if (![[MCWeAllPayStoreController defaultStore] isDocumentStateNormal]) {
-//        [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(performFetchAndReloadTableView:) name:UIDocumentStateChangedNotification object:weAllPayDocument];
-//    } else {
-//        [self performFetch];
-//    }
 }
 
 - (void)viewDidAppear:(BOOL)animated
@@ -314,9 +316,9 @@
 - (void)popoverControllerDidDismissPopover:(UIPopoverController *)popoverController
 {
     if ([_thisPayment payingPerson]) {
-        [selectButton setTitle:[[_thisPayment payingPerson] getFullName] forState:UIControlStateNormal];
+        [_selectButton setTitle:[[_thisPayment payingPerson] getFullName] forState:UIControlStateNormal];
         if ([[_thisPayment payingPerson] picture]) {
-            _payerPicture.image = _thisPayment.payingPerson.picture;
+            [_selectButton setImage:_thisPayment.payingPerson.picture forState:UIControlStateNormal];
         }
     }
 }
@@ -365,7 +367,7 @@
 
 - (CGFloat)tableView:(UITableView *)tableView heightForRowAtIndexPath:(NSIndexPath *)indexPath
 {
-    return 59;
+    return 60;
 }
 
 #pragma mark - Table view data source
@@ -398,9 +400,9 @@
     [cell setKeyboardDismissDelegate:self];
     
     // Constraint for alignment with headerView of the tableView.
-    NSLayoutConstraint *constraintBetweenNameLabelAndSelectButton = [NSLayoutConstraint constraintWithItem:selectButton attribute:NSLayoutAttributeLeading relatedBy:NSLayoutRelationEqual toItem:[cell nameLabel] attribute:NSLayoutAttributeLeading multiplier:1.0 constant:0.0];
-    NSLayoutConstraint *constraintBetweenPictureInCellAndPictureOfPayer = [NSLayoutConstraint constraintWithItem:[cell personView] attribute:NSLayoutAttributeLeading relatedBy:NSLayoutRelationEqual toItem:_categoryButton attribute:NSLayoutAttributeCenterX multiplier:1.0 constant:0.0];
-    [[self tableView] addConstraints:@[constraintBetweenNameLabelAndSelectButton, constraintBetweenPictureInCellAndPictureOfPayer]];
+    NSLayoutConstraint *constraintBetweenNameLabelAndPayerLabel = [NSLayoutConstraint constraintWithItem:_payerLabel attribute:NSLayoutAttributeLeading relatedBy:NSLayoutRelationEqual toItem:[cell nameLabel] attribute:NSLayoutAttributeLeading multiplier:1.0 constant:0.0];
+    NSLayoutConstraint *constraintBetweenPictureInCellAndPictureOfPayer = [NSLayoutConstraint constraintWithItem:[cell personView] attribute:NSLayoutAttributeTrailing relatedBy:NSLayoutRelationEqual toItem:_categoryButton attribute:NSLayoutAttributeTrailing multiplier:1.0 constant:0.0];
+    [[self tableView] addConstraints:@[constraintBetweenNameLabelAndPayerLabel, constraintBetweenPictureInCellAndPictureOfPayer]];
     
     return cell;
 }

@@ -4,9 +4,9 @@
 <array>
 	<dict>
 		<key>categoryDescription</key>
-		<string>Miscellaneous</string>
+		<string>None</string>
 		<key>categoryPictureFilename</key>
-		<string>Misc</string>
+		<string></string>
 		<key>categoryId</key>
 		<integer>0</integer>
 	</dict>
@@ -81,6 +81,14 @@
 		<string>Travel</string>
 		<key>categoryId</key>
 		<integer>9</integer>
+	</dict>
+	<dict>
+		<key>categoryDescription</key>
+		<string>Miscellaneous</string>
+		<key>categoryPictureFilename</key>
+		<string>Misc</string>
+		<key>categoryId</key>
+		<integer>10</integer>
 	</dict>
 </array>
 </plist>

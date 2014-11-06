@@ -301,7 +301,6 @@
 		385F52FD191C2C360012773D /* We all pay Tests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = "We all pay Tests.xctest"; sourceTree = BUILT_PRODUCTS_DIR; };
 		385F5303191C2C360012773D /* We all pay Tests-Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = "We all pay Tests-Info.plist"; sourceTree = "<group>"; };
 		385F5305191C2C360012773D /* en */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = en; path = en.lproj/InfoPlist.strings; sourceTree = "<group>"; };
-		385F5307191C2C360012773D /* We_all_pay_Tests.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = We_all_pay_Tests.m; sourceTree = "<group>"; };
 		385F5309191C2C360012773D /* We all pay Tests-Prefix.pch */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = "We all pay Tests-Prefix.pch"; sourceTree = "<group>"; };
 		3860574419EE904B00BD5B78 /* WeAllPayStore 4.xcdatamodel */ = {isa = PBXFileReference; lastKnownFileType = wrapper.xcdatamodel; path = "WeAllPayStore 4.xcdatamodel"; sourceTree = "<group>"; };
 		3860574519EE92EB00BD5B78 /* MCCategoryPictureObject.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = MCCategoryPictureObject.h; path = CategoryPicturesStore/MCCategoryPictureObject.h; sourceTree = "<group>"; };
@@ -793,7 +792,6 @@
 				3898F33D18F40CC100BFFC61 /* MCPersonAddonsTest.m */,
 				3898F33B18F40B9D00BFFC61 /* MCSharedBillAddOnsTest.m */,
 				38D785FC18DC53C30074B670 /* WeAllPayStoreTests.m */,
-				385F5307191C2C360012773D /* We_all_pay_Tests.m */,
 				385F5302191C2C360012773D /* Supporting Files */,
 			);
 			path = "We all pay Tests";
