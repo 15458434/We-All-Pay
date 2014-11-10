@@ -48,6 +48,9 @@
     MCCurrency *selectedCurrency = [MCCurrency getCurrencySelectedInCurrentLocaleFromContext:_context];
     NSString *currencyCode = [[NSLocale currentLocale] objectForKey:NSLocaleCurrencyCode];
     XCTAssertTrue([[selectedCurrency code] isEqualToString:currencyCode], @"Wrong currency selected.");
+    XCTAssertTrue(selectedCurrency.uniqueID, @"unique ID missing.");
+    XCTAssertTrue(selectedCurrency.dateCreated, @"dateCreated is missing.");
+    XCTAssertTrue(selectedCurrency.dateModified, @"dateModified is missing.");
 }
 
 - (void)testGetCurrencyWithCode
