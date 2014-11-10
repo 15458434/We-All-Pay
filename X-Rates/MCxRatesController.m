@@ -284,6 +284,7 @@ NSUInteger const MCCurrencyTypeSelection = MCCurrencyTypeCurrency | MCCurrencyTy
                 NSLog(@"http response error %ld", (long)[httpResp statusCode]);
             }
         } else {
+            NSLog(@"Error: %@", error);
             completionBlock(nil);
 #if TARGET_OS_IPHONE
 #elif TARGET_OS_MAC

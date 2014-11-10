@@ -233,6 +233,9 @@ MCiCloudUse const isiCloudUsed = iCloudIsNotUsed;
         if (strongSelf) {
             [exchangeRate setExchangeRate:[exchangeRateResult objectForKey:MCCurrencyExchangeRate]];
             [exchangeRate setSource:[exchangeRateResult objectForKey:MCSource]];
+            NSDate *now = [NSDate date];
+            exchangeRate.dateFetched = now;
+            exchangeRate.dateModified = now;
         } else {
             NSLog(@"Default Controller does not exist anymore.");
         }
