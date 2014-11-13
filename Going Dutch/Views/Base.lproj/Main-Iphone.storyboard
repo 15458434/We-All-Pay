@@ -298,6 +298,9 @@
                                     <rect key="frame" x="45" y="9" width="39" height="37"/>
                                     <color key="pageIndicatorTintColor" red="0.45490199327468872" green="0.58823531866073608" blue="0.72156864404678345" alpha="1" colorSpace="deviceRGB"/>
                                     <color key="currentPageIndicatorTintColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                                    <connections>
+                                        <action selector="pageControlTapped:" destination="pED-h6-Vmf" eventType="valueChanged" id="IIz-Ic-Ag3"/>
+                                    </connections>
                                 </pageControl>
                             </subviews>
                             <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="calibratedWhite"/>
@@ -312,9 +315,15 @@
                     <connections>
                         <outlet property="mainTitleLabel" destination="oKh-Bm-aHC" id="6TM-Lp-E5r"/>
                         <outlet property="pageIndicator" destination="kwG-GX-r14" id="Gf2-3X-wHG"/>
+                        <outlet property="pageViewController" destination="pED-h6-Vmf" id="6qs-br-mBl"/>
                     </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="U5c-3T-mxe" userLabel="First Responder" sceneMemberID="firstResponder"/>
+                <customObject id="pED-h6-Vmf" customClass="MCSharedBillPageViewController">
+                    <connections>
+                        <outlet property="pageControl" destination="kwG-GX-r14" id="nNN-hZ-IiD"/>
+                    </connections>
+                </customObject>
             </objects>
             <point key="canvasLocation" x="130" y="684"/>
         </scene>

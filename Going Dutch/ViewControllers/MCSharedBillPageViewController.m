@@ -26,6 +26,8 @@
 
 @interface MCSharedBillPageViewController ()
 
+@property (weak, nonatomic) IBOutlet UIPageControl *pageControl;
+
 @end
 
 @implementation MCSharedBillPageViewController
@@ -47,6 +49,16 @@
 {
     
 }
+
+- (IBAction)pageControlTapped:(id)sender
+{
+    if (sender == _pageControl) {
+#if DEBUG
+        NSLog(@"pageControlTapped");
+#endif
+    }
+}
+
 
 - (void)editBillData:(id)sender
 {

@@ -18,6 +18,8 @@
 
 @interface MCSharedBillMainViewController ()
 
+
+@property (strong, nonatomic) IBOutlet MCSharedBillPageViewController *pageViewController;
 @property (nonatomic, strong) MCSharedBill *writableTonightsBill;
 
 @end
@@ -138,6 +140,7 @@
     // Pass the selected object to the new view controller.
     
     if ([[segue identifier] isEqualToString:@"pageViewController"]) {
+        _pageViewController = (MCSharedBillPageViewController *)[segue destinationViewController];
         NSManagedObjectContext *backgroundContext = [[MCWeAllPayStoreController defaultStore] backgroundThreadContext];
         [backgroundContext performBlock:^{
             id<MCTonightsBillTransfer> destination = [segue destinationViewController];
