@@ -108,6 +108,9 @@
     //    [[peoplePicker viewControllers][0] setEdgesForExtendedLayout:UIRectEdgeNone];
     [peoplePicker setModalPresentationStyle:UIModalPresentationFormSheet];
     [[[peoplePicker navigationController] navigationBar] setBarStyle:UIBarStyleBlack];
+    peoplePicker.navigationBar.translucent = NO;
+    peoplePicker.navigationBar.opaque = YES;
+    
     
     [[self navigationController] presentViewController:peoplePicker animated:YES completion:nil];
 }
