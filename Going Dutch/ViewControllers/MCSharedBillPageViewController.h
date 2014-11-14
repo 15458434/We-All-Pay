@@ -32,12 +32,12 @@
 }
 @property (nonatomic, strong) MCSharedBillTableViewController *sharedBillTableViewController;
 @property (nonatomic, strong) MCEditTripViewController *editTripTableViewController;
+@property (weak, nonatomic) IBOutlet UIPageControl *pageControl;
 
 @property (nonatomic, strong) MCSharedBill *tonightsBill;
 @property (nonatomic, strong) MCSharedBill *writableTonightsBill;
 
 - (BOOL)toggleEditTableView:(id)sender;
-- (IBAction)solveBill:(id)sender;
 
 - (void)shareBill:(id)sender;
 - (void)sendMail:(id)sender;

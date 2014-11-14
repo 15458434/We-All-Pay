@@ -13,6 +13,7 @@
 
 #import "MCTonightsBillTransfer.h"
 #import "MCThisPersonProtocol.h"
+#import "MCIndexProtocol.h"
 
 @class MCPeople;
 @class MCSharedBill;
@@ -41,6 +42,8 @@
 @property (nonatomic, copy) void (^dismissOnDone)(void);
 @property (nonatomic, copy) void (^dismissOnCancel)(void);
 @property (nonatomic, readonly) BOOL didSomethingChange;
+
+@property (nonatomic) NSInteger index;
 
 - (IBAction)addressBookButton:(id)sender;
 - (IBAction)addPersonButton:(id)sender;
