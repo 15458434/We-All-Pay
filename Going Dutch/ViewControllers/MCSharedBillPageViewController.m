@@ -58,8 +58,6 @@ NSInteger const maxPageIndex = 1;
 #endif
         NSInteger newIndex = _pageControl.currentPage;
         if (_lastSetIndex > _pageControl.currentPage) {
-            // Move down
-            NSLog(@"Down");
             __weak typeof(self) weakSelf = self;
             [self setViewControllers:@[[self viewControllerForIndex:newIndex]] direction:UIPageViewControllerNavigationDirectionReverse animated:YES completion:^(BOOL finished) {
                 // Finished.
@@ -75,8 +73,6 @@ NSInteger const maxPageIndex = 1;
 
             }];
         } else if (_lastSetIndex < _pageControl.currentPage) {
-            // Move up
-            NSLog(@"Up");
             __weak typeof(self) weakSelf = self;
             UIViewController<MCIndexProtocol> *newViewController = [self viewControllerForIndex:newIndex];
             
@@ -167,9 +163,6 @@ NSInteger const maxPageIndex = 1;
 
 - (UIViewController<MCIndexProtocol> *)viewControllerForIndex:(NSInteger)index
 {
-#if DEBUG
-    NSLog(@"Index is %d", index);
-#endif
     switch (index) {
         case 0:
             return (UIViewController<MCIndexProtocol> *)[self editTripTableViewController];
@@ -183,9 +176,6 @@ NSInteger const maxPageIndex = 1;
 
 - (NSString *)viewTitleForIndex:(NSInteger)index
 {
-#if DEBUG
-    NSLog(@"viewTitleIndex is %d", index);
-#endif
     switch (index) {
         case 0:
             return NSLocalizedString(@"PEOPLE_PRESENT_PAGEVIEWCONTROLLER", @"People present");

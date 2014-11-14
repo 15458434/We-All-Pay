@@ -1135,7 +1135,7 @@
             </objects>
             <point key="canvasLocation" x="2314" y="684"/>
         </scene>
-        <!--select currency-->
+        <!--Select currency-->
         <scene sceneID="U7d-49-WP1">
             <objects>
                 <tableViewController id="Js0-at-SVC" customClass="MCSelectCurrencyTableViewController" sceneMemberID="viewController">
@@ -1190,7 +1190,7 @@
                             <outlet property="delegate" destination="Js0-at-SVC" id="ZVg-fb-CDX"/>
                         </connections>
                     </tableView>
-                    <navigationItem key="navigationItem" title="select currency" id="QDz-zd-ctc">
+                    <navigationItem key="navigationItem" title="Select currency" id="QDz-zd-ctc">
                         <barButtonItem key="rightBarButtonItem" systemItem="cancel" id="yl0-AA-qkH">
                             <color key="tintColor" red="1" green="0.54509806630000002" blue="0.59607845540000004" alpha="1" colorSpace="deviceRGB"/>
                             <connections>
@@ -1215,7 +1215,7 @@
             </objects>
             <point key="canvasLocation" x="3372" y="684"/>
         </scene>
-        <!--select category-->
+        <!--Select category-->
         <scene sceneID="FDB-WS-fc4">
             <objects>
                 <tableViewController id="f20-bj-0qT" customClass="MCSelectCategoryTableViewController_iPhone" sceneMemberID="viewController">
@@ -1270,7 +1270,7 @@
                             <outlet property="delegate" destination="f20-bj-0qT" id="7y4-I6-0BH"/>
                         </connections>
                     </tableView>
-                    <navigationItem key="navigationItem" title="select category" id="D32-AO-Av1">
+                    <navigationItem key="navigationItem" title="Select category" id="D32-AO-Av1">
                         <barButtonItem key="rightBarButtonItem" systemItem="cancel" id="VOj-mp-9lT">
                             <connections>
                                 <action selector="mainCancelPressed:" destination="f20-bj-0qT" id="XML-nZ-X4P"/>
