@@ -41,6 +41,7 @@
 
 - (void)shareBill:(id)sender;
 - (void)sendMail:(id)sender;
+- (void)pageControlTapped:(id)sender;
 
 - (void)openMailView:(id)sender;
 

@@ -452,6 +452,9 @@ typedef NS_ENUM(BOOL, MCTonightsBillStatus) {
 
 - (void)prepareForSegue:(UIStoryboardSegue *)segue sender:(id)sender
 {
+#if DEBUG
+    NSLog(@"prepareForSegue: %@", [segue identifier]);
+#endif
     if ([[segue identifier] isEqualToString:@"newTonightsBill"]) {
         _isATonightsBillOpened = isOpened;
     }

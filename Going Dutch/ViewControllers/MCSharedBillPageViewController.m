@@ -35,6 +35,8 @@ NSInteger const maxPageIndex = 1;
 
 @implementation MCSharedBillPageViewController
 
+@synthesize tonightsBill = _tonightsBill;
+
 #pragma mark - actions
 
 - (BOOL)toggleEditTableView:(id)sender
@@ -48,12 +50,49 @@ NSInteger const maxPageIndex = 1;
     }
 }
 
-- (IBAction)pageControlTapped:(id)sender
+- (void)pageControlTapped:(id)sender
 {
     if (sender == _pageControl) {
 #if DEBUG
-        NSLog(@"pageControlTapped");
+        NSLog(@"pageControlTapped to value: %d", _pageControl.currentPage);
 #endif
+        NSInteger newIndex = _pageControl.currentPage;
+        if (_lastSetIndex > _pageControl.currentPage) {
+            // Move down
+            NSLog(@"Down");
+            __weak typeof(self) weakSelf = self;
+            [self setViewControllers:@[[self viewControllerForIndex:newIndex]] direction:UIPageViewControllerNavigationDirectionReverse animated:YES completion:^(BOOL finished) {
+                // Finished.
+                if (finished) {
+                    __strong typeof(weakSelf) strongSelf = weakSelf;
+                    if (strongSelf) {
+                        strongSelf.lastSetIndex = newIndex;
+                    }
+                } else {
+                    NSLog(@"Moving down not finished.");
+                }
+
+            }];
+        } else if (_lastSetIndex < _pageControl.currentPage) {
+            // Move up
+            NSLog(@"Up");
+            __weak typeof(self) weakSelf = self;
+            UIViewController<MCIndexProtocol> *newViewController = [self viewControllerForIndex:newIndex];
+            
+            [self setViewControllers:@[newViewController] direction:UIPageViewControllerNavigationDirectionForward animated:YES completion:^(BOOL finished) {
+                // finished.
+                if (finished) {
+                    __strong typeof(weakSelf) strongSelf = weakSelf;
+                    if (strongSelf) {
+                        strongSelf.lastSetIndex = newIndex;
+                    }
+                } else {
+                    NSLog(@"Moving up not finished.");
+                }
+            }];
+        } else {
+            NSLog(@"This is not supposed to happen.");
+        }
     }
 }
 
@@ -79,7 +118,7 @@ NSInteger const maxPageIndex = 1;
     UIStoryboard *storyboard = [UIStoryboard storyboardWithName:@"Main-Iphone" bundle:nil];
     _editTripTableViewController.index = 0;
     _editTripTableViewController = [storyboard instantiateViewControllerWithIdentifier:@"MCEditTripViewController"];
-    [_editTripTableViewController setTonightsBill:[self tonightsBill]];
+    [_editTripTableViewController setTonightsBill:_tonightsBill];
     [self setDelegate:self];
     [self setDataSource:self];
     NSManagedObjectContext *backgroundContext = [[MCWeAllPayStoreController defaultStore] backgroundThreadContext];
@@ -108,7 +147,7 @@ NSInteger const maxPageIndex = 1;
     UIStoryboard *storyboard = [UIStoryboard storyboardWithName:@"Main-Iphone" bundle:nil];
     _sharedBillTableViewController = [storyboard instantiateViewControllerWithIdentifier:@"MCSharedBillTableViewController"];
     _sharedBillTableViewController.index = 1;
-    [_sharedBillTableViewController setTonightsBill:[self tonightsBill]];
+    [_sharedBillTableViewController setTonightsBill:_tonightsBill];
     [_sharedBillTableViewController setMailDelegate:self];
     [self setDelegate:self];
     [self setDataSource:self];
@@ -225,6 +264,9 @@ NSInteger const maxPageIndex = 1;
 
 - (void)viewDidLoad
 {
+#if DEBUG
+    NSLog(@"%@: viewDidLoad", self);
+#endif
     [super viewDidLoad];
 	// Do any additional setup after loading the view.
     
@@ -250,6 +292,7 @@ NSInteger const maxPageIndex = 1;
                 __strong typeof(weakSelf) strongSelf = weakSelf;
                 if (strongSelf) {
                     strongSelf.pageControl.currentPage = 1;
+                    strongSelf.lastSetIndex = 1;
                     strongSelf.titleLabel.text = NSLocalizedString(@"PAYMENTS_PAGEVIEWCONTROLLER", @"Payments");
                 }
             }
@@ -263,6 +306,7 @@ NSInteger const maxPageIndex = 1;
                 __strong typeof(weakSelf) strongSelf = weakSelf;
                 if (strongSelf) {
                     strongSelf.pageControl.currentPage = 0;
+                    strongSelf.lastSetIndex = 0;
                     strongSelf.titleLabel.text = NSLocalizedString(@"PEOPLE_PRESENT_PAGEVIEWCONTROLLER", @"People present");
                 }
             }
@@ -310,17 +354,32 @@ NSInteger const maxPageIndex = 1;
     
 }
 
-#pragma mark - MCTonightsBillGet
+#pragma mark - MCTonightsBillTransfer
 
 - (MCSharedBill *)tonightsBill
 {
-    id destination = [self parentViewController];
-    if ([destination conformsToProtocol:@protocol(MCTonightsBillTransfer)]) {
-        return [destination tonightsBill];
+    if (!_tonightsBill) {
+        id destination = [self parentViewController];
+        if ([destination conformsToProtocol:@protocol(MCTonightsBillTransfer)]) {
+            _tonightsBill = [destination tonightsBill];
+            return _tonightsBill;
+        } else {
+            NSLog(@"The destination object doesn't conform tonightsBill.");
+            return nil;
+        }
     } else {
-        NSLog(@"The destination object doesn't conform tonightsBill.");
-        return nil;
+        return _tonightsBill;
     }
+}
+
+- (void) setTonightsBill:(MCSharedBill *)tonightsBill
+{
+    if (!tonightsBill) {
+        abort();
+    }
+    [self willChangeValueForKey:@"tonightsBill"];
+    _tonightsBill = tonightsBill;
+    [self didChangeValueForKey:@"tonightsBill"];
 }
 
 - (MCSharedBill *)writeableTonightsBill
@@ -420,9 +479,11 @@ NSInteger const maxPageIndex = 1;
     if (finished) {
         if ([[self viewControllers][0] isKindOfClass:[MCEditTripViewController class]]) {
             [[self pageViewIndicator] setCurrentPage:0];
+            _lastSetIndex = 0;
             [[self titleLabel] setText:NSLocalizedString(@"PEOPLE_PRESENT_PAGEVIEWCONTROLLER", @"People present")];
         } else if ([[self viewControllers][0] isKindOfClass:[MCSharedBillTableViewController class]]) {
             [[self pageViewIndicator] setCurrentPage:1];
+            _lastSetIndex = 1;
             [[self titleLabel] setText:NSLocalizedString(@"PAYMENTS_PAGEVIEWCONTROLLER", @"Payments")];
         }
     }
