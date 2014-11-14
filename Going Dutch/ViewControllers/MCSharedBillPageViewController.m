@@ -67,6 +67,7 @@ NSInteger const maxPageIndex = 1;
                     __strong typeof(weakSelf) strongSelf = weakSelf;
                     if (strongSelf) {
                         strongSelf.lastSetIndex = newIndex;
+                        strongSelf.titleLabel.text = [strongSelf viewTitleForIndex:newIndex];
                     }
                 } else {
                     NSLog(@"Moving down not finished.");
@@ -85,6 +86,7 @@ NSInteger const maxPageIndex = 1;
                     __strong typeof(weakSelf) strongSelf = weakSelf;
                     if (strongSelf) {
                         strongSelf.lastSetIndex = newIndex;
+                        strongSelf.titleLabel.text = [strongSelf viewTitleForIndex:newIndex];
                     }
                 } else {
                     NSLog(@"Moving up not finished.");
@@ -170,9 +172,25 @@ NSInteger const maxPageIndex = 1;
 #endif
     switch (index) {
         case 0:
-            return [self editTripTableViewController];
+            return (UIViewController<MCIndexProtocol> *)[self editTripTableViewController];
         case 1:
-            return [self sharedBillTableViewController];
+            return (UIViewController<MCIndexProtocol> *)[self sharedBillTableViewController];
+        default:
+            NSLog(@"Out of bounds, this shouldn't be happening.");
+            return nil;
+    }
+}
+
+- (NSString *)viewTitleForIndex:(NSInteger)index
+{
+#if DEBUG
+    NSLog(@"viewTitleIndex is %d", index);
+#endif
+    switch (index) {
+        case 0:
+            return NSLocalizedString(@"PEOPLE_PRESENT_PAGEVIEWCONTROLLER", @"People present");
+        case 1:
+            return NSLocalizedString(@"PAYMENTS_PAGEVIEWCONTROLLER", @"Payments");
         default:
             NSLog(@"Out of bounds, this shouldn't be happening.");
             return nil;
