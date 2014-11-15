@@ -14,6 +14,7 @@
 #import "MCTonightsBillTransfer.h"
 #import "MCThisPersonProtocol.h"
 #import "MCIndexProtocol.h"
+#import "MCIsEditingProtocol.h"
 
 @class MCPeople;
 @class MCSharedBill;
@@ -36,6 +37,7 @@
     BOOL cancelPressed;
 }
 
+@property (nonatomic, weak) id<MCIsEditingProtocol> myParent;
 @property (nonatomic, weak) id delegate;
 @property (nonatomic, strong) MCSharedBill *tonightsBill;
 @property (nonatomic, strong) MCSharedBill *writableTonightsBill;

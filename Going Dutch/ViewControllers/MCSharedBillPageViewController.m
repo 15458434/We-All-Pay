@@ -30,6 +30,7 @@ NSInteger const maxPageIndex = 1;
 @interface MCSharedBillPageViewController ()
 
 @property (nonatomic) NSInteger lastSetIndex;
+@property (nonatomic) BOOL isChildTableViewEditing;
 
 @end
 
@@ -41,11 +42,17 @@ NSInteger const maxPageIndex = 1;
 
 - (BOOL)toggleEditTableView:(id)sender
 {
+#if DEBUG
+    NSNumber *freakyBooleaon = @([[[self viewControllers][0] tableView] isEditing]);
+    NSLog(@"toggleEditTableView: %@", freakyBooleaon);
+#endif
     if ([[[self viewControllers][0] tableView] isEditing]) {
-        [[[self viewControllers][0] tableView] setEditing:NO animated:YES];
+        _isChildTableViewEditing = NO;
+        [[[self viewControllers][0] tableView] setEditing:_isChildTableViewEditing animated:YES];
         return NO;
     } else {
-        [[[self viewControllers][0] tableView] setEditing:YES animated:YES];
+        _isChildTableViewEditing = YES;
+        [[[self viewControllers][0] tableView] setEditing:_isChildTableViewEditing animated:YES];
         return YES;
     }
 }
@@ -114,8 +121,9 @@ NSInteger const maxPageIndex = 1;
     }
     
     UIStoryboard *storyboard = [UIStoryboard storyboardWithName:@"Main-Iphone" bundle:nil];
-    _editTripTableViewController.index = 0;
     _editTripTableViewController = [storyboard instantiateViewControllerWithIdentifier:@"MCEditTripViewController"];
+    _editTripTableViewController.index = 0;
+    _editTripTableViewController.myParent = self;
     [_editTripTableViewController setTonightsBill:_tonightsBill];
     [self setDelegate:self];
     [self setDataSource:self];
@@ -145,6 +153,7 @@ NSInteger const maxPageIndex = 1;
     UIStoryboard *storyboard = [UIStoryboard storyboardWithName:@"Main-Iphone" bundle:nil];
     _sharedBillTableViewController = [storyboard instantiateViewControllerWithIdentifier:@"MCSharedBillTableViewController"];
     _sharedBillTableViewController.index = 1;
+    _sharedBillTableViewController.myParent = self;
     [_sharedBillTableViewController setTonightsBill:_tonightsBill];
     [_sharedBillTableViewController setMailDelegate:self];
     [self setDelegate:self];
@@ -448,7 +457,12 @@ NSInteger const maxPageIndex = 1;
         return nil;
     }
     NSInteger newIndex = viewControllerWithIndexProtocol.index - 1;
-    return [self viewControllerForIndex:newIndex];
+    UIViewController<MCIndexProtocol> *newViewController = [self viewControllerForIndex:newIndex];
+//    if ([newViewController isKindOfClass:[UITableViewController class]]) {
+//        UITableViewController *myNewTableViewController = (UITableViewController *)newViewController;
+//        [[myNewTableViewController tableView] setEditing:_isChildTableViewEditing animated:NO];
+//    }
+    return newViewController;
 }
 
 - (UIViewController *)pageViewController:(UIPageViewController *)pageViewController viewControllerAfterViewController:(UIViewController *)viewController
@@ -463,8 +477,12 @@ NSInteger const maxPageIndex = 1;
         return nil;
     }
     NSInteger newIndex = viewControllerWithIndexProtocol.index + 1;
-    
-    return [self viewControllerForIndex:newIndex];
+    UIViewController<MCIndexProtocol> *newViewController = [self viewControllerForIndex:newIndex];
+//    if ([newViewController isKindOfClass:[UITableViewController class]]) {
+//        UITableViewController *myNewTableViewController = (UITableViewController *)newViewController;
+//        [[myNewTableViewController tableView] setEditing:_isChildTableViewEditing animated:NO];
+//    }
+    return newViewController;
 }
 
 #pragma mark - UIPageViewControllerDelegate

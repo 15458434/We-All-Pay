@@ -11,6 +11,7 @@
 #import <MessageUI/MessageUI.h>
 #import "MCTonightsBillTransfer.h"
 #import "MCIndexProtocol.h"
+#import "MCIsEditingProtocol.h"
 
 @class MCSharedBill;
 @class MCAllTripsTableViewController;
@@ -34,11 +35,9 @@
     UIBarButtonItem *returnPaymentButton;
 }
 
-//- (id)initWithSharedBill:(MCSharedBill *)tBill;
-
-
 - (IBAction)mailButtonPressed:(id)sender;
 
+@property (nonatomic, weak) id<MCIsEditingProtocol> myParent;
 @property (nonatomic, weak) id delegate;
 @property (nonatomic, weak) MCSharedBillPageViewController *mailDelegate;
 @property (nonatomic, strong) MCSharedBill *tonightsBill;

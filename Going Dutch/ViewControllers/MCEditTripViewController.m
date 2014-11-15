@@ -239,22 +239,15 @@
         _dataController = [[MCWeAllPayStoreController defaultStore] sharedBillPeoplePresentDataControllerForDelegate:self];
     }
     
-//    UIManagedDocument *weAllPayDocument = [[MCWeAllPayStoreController defaultStore] weAllPayStoreDocument];
-//    if (![[MCWeAllPayStoreController defaultStore] isDocumentStateNormal]) {
-//        [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(performFetchAndReloadTableView:) name:UIDocumentStateChangedNotification object:weAllPayDocument];
-//    } else {
-//
-//    }
+    BOOL shouldAppearAsEditing = [_myParent isChildTableViewEditing];
+    [[self tableView] setEditing:shouldAppearAsEditing animated:NO];
+
     [self performFetch];
     [[self tableView] reloadData];
     [self setEmptyMessageNow];
-    
-//    if (kABAuthorizationStatusDenied == ABAddressBookGetAuthorizationStatus()) {
-//        [_contactsButton setHidden:YES];
-//    }
 }
 
--(void)viewDidAppear:(BOOL)animated
+- (void)viewDidAppear:(BOOL)animated
 {
     [super viewDidAppear:animated];
     

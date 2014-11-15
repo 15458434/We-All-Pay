@@ -9,6 +9,7 @@
 #import <UIKit/UIKit.h>
 
 #import "MCTonightsBillTransfer.h"
+#import "MCIsEditingProtocol.h"
 
 @class MCSharedBill;
 
@@ -22,7 +23,7 @@
 
 @end
 
-@interface MCSharedBillPageViewController : UIPageViewController <UIPageViewControllerDataSource, UIPageViewControllerDelegate, UIAlertViewDelegate, MCTonightsBillTitleDelegate>
+@interface MCSharedBillPageViewController : UIPageViewController <UIPageViewControllerDataSource, UIPageViewControllerDelegate, UIAlertViewDelegate, MCTonightsBillTitleDelegate, MCIsEditingProtocol>
 {
 
 

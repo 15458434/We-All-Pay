@@ -167,6 +167,9 @@
     } else {
         [[emptyMessage bigMessage] setAlpha:1.0];
     }
+    
+    BOOL shouldAppearAsEditing = [_myParent isChildTableViewEditing];
+    [[self tableView] setEditing:shouldAppearAsEditing animated:NO];
 }
 
 - (void)viewDidAppear:(BOOL)animated
