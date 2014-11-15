@@ -127,7 +127,7 @@
             </objects>
             <point key="canvasLocation" x="1099" y="-125"/>
         </scene>
-        <!--people and payments-->
+        <!--People and payments-->
         <scene sceneID="Fvg-Rr-bFC">
             <objects>
                 <viewController storyboardIdentifier="MCSharedBillViewController_iPad" useStoryboardIdentifierAsRestorationIdentifier="YES" id="R7R-eq-O5O" customClass="MCSharedBillViewController_iPad" sceneMemberID="viewController">
@@ -136,18 +136,18 @@
                         <viewControllerLayoutGuide type="bottom" id="LQO-sC-QG1"/>
                     </layoutGuides>
                     <view key="view" contentMode="scaleToFill" id="0z4-ag-Hbv">
-                        <rect key="frame" x="0.0" y="0.0" width="768" height="1024"/>
+                        <rect key="frame" x="0.0" y="0.0" width="768" height="980"/>
                         <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                         <subviews>
                             <containerView contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="CpF-MJ-vN0">
-                                <rect key="frame" x="384" y="108" width="384" height="916"/>
+                                <rect key="frame" x="384" y="108" width="384" height="872"/>
                                 <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="calibratedWhite"/>
                                 <connections>
                                     <segue destination="NKD-wF-4e4" kind="embed" id="rOa-zk-LNb"/>
                                 </connections>
                             </containerView>
                             <containerView contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="cqE-dH-zdR">
-                                <rect key="frame" x="0.0" y="108" width="384" height="916"/>
+                                <rect key="frame" x="0.0" y="108" width="384" height="872"/>
                                 <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="calibratedWhite"/>
                                 <connections>
                                     <segue destination="YMW-gY-bCa" kind="embed" id="00m-OO-9HG"/>
@@ -250,7 +250,7 @@
                             <constraint firstAttribute="trailing" secondItem="CpF-MJ-vN0" secondAttribute="trailing" id="vzk-MU-TTl"/>
                         </constraints>
                     </view>
-                    <navigationItem key="navigationItem" title="people and payments" id="Ajb-WY-VLi">
+                    <navigationItem key="navigationItem" title="People and payments" id="Ajb-WY-VLi">
                         <barButtonItem key="rightBarButtonItem" systemItem="edit" id="3Ko-oa-8OS">
                             <color key="tintColor" red="1" green="0.54509806630000002" blue="0.59607845540000004" alpha="1" colorSpace="deviceRGB"/>
                             <connections>
@@ -258,6 +258,7 @@
                             </connections>
                         </barButtonItem>
                     </navigationItem>
+                    <simulatedNavigationBarMetrics key="simulatedTopBarMetrics" translucent="NO" prompted="NO"/>
                     <connections>
                         <outlet property="tripNameField" destination="AkR-Sr-Oah" id="cq3-7k-StO"/>
                     </connections>
@@ -806,7 +807,7 @@
             </objects>
             <point key="canvasLocation" x="4152" y="1095"/>
         </scene>
-        <!--payment details-->
+        <!--Payment details-->
         <scene sceneID="8de-96-T7W">
             <objects>
                 <tableViewController storyboardIdentifier="MCPaymentTableViewController_iPad" useStoryboardIdentifierAsRestorationIdentifier="YES" id="3NB-dQ-HNX" customClass="MCPaymentTableViewController_iPad" sceneMemberID="viewController">
@@ -1011,7 +1012,7 @@
                             <outlet property="delegate" destination="3NB-dQ-HNX" id="s9i-7K-98j"/>
                         </connections>
                     </tableView>
-                    <navigationItem key="navigationItem" title="payment details" id="Du0-aV-eeD">
+                    <navigationItem key="navigationItem" title="Payment details" id="Du0-aV-eeD">
                         <barButtonItem key="leftBarButtonItem" systemItem="cancel" id="gKd-pZ-mW9">
                             <color key="tintColor" red="1" green="0.54509806630000002" blue="0.59607845540000004" alpha="1" colorSpace="deviceRGB"/>
                             <connections>
@@ -1359,7 +1360,7 @@
             </objects>
             <point key="canvasLocation" x="-903" y="-125"/>
         </scene>
-        <!--events-->
+        <!--Events-->
         <scene sceneID="8rY-HI-7EW">
             <objects>
                 <viewController storyboardIdentifier="eventViewController" useStoryboardIdentifierAsRestorationIdentifier="YES" id="LcN-QB-1Nf" customClass="MCRootViewController" sceneMemberID="viewController">
@@ -1399,7 +1400,7 @@
                             </connections>
                         </barButtonItem>
                     </toolbarItems>
-                    <navigationItem key="navigationItem" title="events" id="T8K-rj-EA0">
+                    <navigationItem key="navigationItem" title="Events" id="T8K-rj-EA0">
                         <barButtonItem key="leftBarButtonItem" image="iScreen button" id="mQW-My-2QR">
                             <connections>
                                 <segue destination="aDp-IF-sxb" kind="popover" identifier="iScreenSegue" popoverAnchorBarButtonItem="mQW-My-2QR" id="DKp-Bx-3Ur">
@@ -1493,7 +1494,7 @@
     </simulatedMetricsContainer>
     <inferredMetricsTieBreakers>
         <segue reference="M2f-Ug-Ooc"/>
+        <segue reference="8Cc-ux-2co"/>
         <segue reference="oh3-5j-dZ9"/>
-        <segue reference="1Uw-eh-0NI"/>
     </inferredMetricsTieBreakers>
 </document>
