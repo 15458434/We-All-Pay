@@ -832,7 +832,7 @@
                         <viewControllerLayoutGuide type="top" id="cIH-wB-q4j"/>
                         <viewControllerLayoutGuide type="bottom" id="7ck-Y1-fdd"/>
                     </layoutGuides>
-                    <view key="view" contentMode="scaleToFill" restorationIdentifier="personView" id="YgD-ot-OKq" customClass="UIControl">
+                    <view key="view" contentMode="scaleToFill" restorationIdentifier="personView" id="YgD-ot-OKq" customClass="UIScrollView">
                         <rect key="frame" x="0.0" y="64" width="320" height="504"/>
                         <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                         <subviews>

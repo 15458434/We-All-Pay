@@ -7,6 +7,7 @@
 //
 
 #import "MCPersonViewController.h"
+#import "UIViewController+TappedInBackground.h"
 
 #import "MCWeAllPayStoreController.h"
 #import "MCPerson+addons.h"
@@ -288,6 +289,9 @@ typedef NS_ENUM(BOOL, MCStatus) {
         [self fillTheScreenWithInitialData];
     }
     [selectEmailAddressButton setHidden:YES];
+    
+    // Dismiss the keyboard on backgroundtap.
+    [self startResigningFirstResponderOnBackgroundTap];
 }
 
 - (void)viewDidAppear:(BOOL)animated

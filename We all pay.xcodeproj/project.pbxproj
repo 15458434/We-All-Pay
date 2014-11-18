@@ -17,6 +17,7 @@
 		380700AE1A1B751E00C7FB37 /* We all pay database version 4.xcappdata in Resources */ = {isa = PBXBuildFile; fileRef = 380700AA1A1B751E00C7FB37 /* We all pay database version 4.xcappdata */; };
 		380700B01A1B76B200C7FB37 /* We all pay database version 2.xcappdata in Resources */ = {isa = PBXBuildFile; fileRef = 380700AF1A1B76B200C7FB37 /* We all pay database version 2.xcappdata */; };
 		380700B51A1B785C00C7FB37 /* We all pay database dutch version 4.xcappdata in Resources */ = {isa = PBXBuildFile; fileRef = 380700B41A1B785C00C7FB37 /* We all pay database dutch version 4.xcappdata */; };
+		380700EB1A1BA82700C7FB37 /* UIViewController+TappedInBackground.m in Sources */ = {isa = PBXBuildFile; fileRef = 380700EA1A1BA82700C7FB37 /* UIViewController+TappedInBackground.m */; };
 		380BF82E18108898008A8B74 /* MCEmailAddressTableViewCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 380BF82D18108898008A8B74 /* MCEmailAddressTableViewCell.xib */; };
 		380BF831181088B9008A8B74 /* MCEmailAddressTableViewCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 380BF830181088B9008A8B74 /* MCEmailAddressTableViewCell.m */; };
 		380F44F21813250600FF7E10 /* No picture image 2 - We All Pay.png in Resources */ = {isa = PBXBuildFile; fileRef = 380F44F11813250600FF7E10 /* No picture image 2 - We All Pay.png */; };
@@ -238,6 +239,8 @@
 		380700AA1A1B751E00C7FB37 /* We all pay database version 4.xcappdata */ = {isa = PBXFileReference; lastKnownFileType = wrapper; path = "We all pay database version 4.xcappdata"; sourceTree = "<group>"; };
 		380700AF1A1B76B200C7FB37 /* We all pay database version 2.xcappdata */ = {isa = PBXFileReference; lastKnownFileType = wrapper; path = "We all pay database version 2.xcappdata"; sourceTree = "<group>"; };
 		380700B41A1B785C00C7FB37 /* We all pay database dutch version 4.xcappdata */ = {isa = PBXFileReference; lastKnownFileType = wrapper; path = "We all pay database dutch version 4.xcappdata"; sourceTree = "<group>"; };
+		380700E91A1BA82700C7FB37 /* UIViewController+TappedInBackground.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "UIViewController+TappedInBackground.h"; sourceTree = "<group>"; };
+		380700EA1A1BA82700C7FB37 /* UIViewController+TappedInBackground.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "UIViewController+TappedInBackground.m"; sourceTree = "<group>"; };
 		3807560019F9445800489ED4 /* NotificationCenter.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = NotificationCenter.framework; path = System/Library/Frameworks/NotificationCenter.framework; sourceTree = SDKROOT; };
 		380BF82D18108898008A8B74 /* MCEmailAddressTableViewCell.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; name = MCEmailAddressTableViewCell.xib; path = Views/MCEmailAddressTableViewCell.xib; sourceTree = "<group>"; };
 		380BF82F181088B9008A8B74 /* MCEmailAddressTableViewCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = MCEmailAddressTableViewCell.h; path = Views/MCEmailAddressTableViewCell.h; sourceTree = "<group>"; };
@@ -967,6 +970,8 @@
 		38CC9814183D520C006EC35D /* MC SDK */ = {
 			isa = PBXGroup;
 			children = (
+				380700E91A1BA82700C7FB37 /* UIViewController+TappedInBackground.h */,
+				380700EA1A1BA82700C7FB37 /* UIViewController+TappedInBackground.m */,
 				384B34AD19B603B900F0EF80 /* MCMailComposer.h */,
 				384B34AE19B603B900F0EF80 /* MCMailComposer.m */,
 				38295AE618425E74009FB5DE /* MCCancelDoneViewController.h */,
@@ -1432,6 +1437,7 @@
 				380700A51A1B616000C7FB37 /* MCPaymentUpdateTo4.m in Sources */,
 				389FBD40198BDA1C003B4409 /* MCExchangeRate.m in Sources */,
 				3825A826199A2A5500A8885D /* MCTonightsBillTransfer.m in Sources */,
+				380700EB1A1BA82700C7FB37 /* UIViewController+TappedInBackground.m in Sources */,
 				3897157C17901D0F005BE03E /* MCTwoLabelsTitleView.m in Sources */,
 				3897158717901D55005BE03E /* MCPaymentTableViewCell.m in Sources */,
 				38DC8B2A1907145A00762235 /* MCRootViewController.m in Sources */,
