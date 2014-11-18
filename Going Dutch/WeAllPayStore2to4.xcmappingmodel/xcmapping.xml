@@ -229,14 +229,15 @@
         <relationship name="entitymapping" type="1/1" destination="XDDEVENTITYMAPPING" idrefs="z127"></relationship>
     </object>
     <object type="XDDEVENTITYMAPPING" id="z143">
+        <attribute name="migrationpolicyclassname" type="string">MCPaymentUpdateTo4</attribute>
         <attribute name="sourcename" type="string">MCPayment</attribute>
         <attribute name="mappingtypename" type="string">Undefined</attribute>
         <attribute name="mappingnumber" type="int16">5</attribute>
         <attribute name="destinationname" type="string">MCPayment</attribute>
         <attribute name="autogenerateexpression" type="bool">1</attribute>
         <relationship name="mappingmodel" type="1/1" destination="XDDEVMAPPINGMODEL" idrefs="z146"></relationship>
-        <relationship name="attributemappings" type="0/0" destination="XDDEVATTRIBUTEMAPPING" idrefs="z126 z125 z156 z134 z153 z113"></relationship>
-        <relationship name="relationshipmappings" type="0/0" destination="XDDEVRELATIONSHIPMAPPING" idrefs="z144 z122 z165 z152 z102"></relationship>
+        <relationship name="attributemappings" type="0/0" destination="XDDEVATTRIBUTEMAPPING" idrefs="z126 z153 z125 z113 z156 z134"></relationship>
+        <relationship name="relationshipmappings" type="0/0" destination="XDDEVRELATIONSHIPMAPPING" idrefs="z122 z165 z152 z102 z144"></relationship>
     </object>
     <object type="XDDEVRELATIONSHIPMAPPING" id="z144">
         <attribute name="autogenerateexpression" type="bool">1</attribute>
