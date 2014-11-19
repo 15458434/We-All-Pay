@@ -246,10 +246,6 @@ typedef NS_ENUM(BOOL, MCStatus) {
     [self prepareDataController];
     
     if (!_thisPerson) {
-//        _thisPerson = [tonightsBill addPerson];
-//        [_thisPerson setThumbnailDataFromImage:nil];
-//        [_thisPerson setPictureDataFromImage:nil];
-//        [tonightsBill addPeoplePresentObject:_thisPerson];
         // A new person object will be delivered
         thisPersonHasPaidSomething = NO;
     } else if ([_tonightsBill hasPersonPaidSomething:_thisPerson]) { // Check to see if thisPerson has paid something.
@@ -276,10 +272,7 @@ typedef NS_ENUM(BOOL, MCStatus) {
             [[twoLabelTitleView mainLabel] setText:NSLocalizedString(@"EXISTING_PERSON_HEADER", @"Header in the personView which states person")];
             [[twoLabelTitleView subLabel] setText:NSLocalizedString(@"EXISTING_PERSON_SUBHEADER", @"Sub header in the personView which state edit data")];
         }
-//        if (SYSTEM_VERSION_LESS_THAN(@"7.0")) {
-//            [[twoLabelTitleView mainLabel] setTextColor:[UIColor whiteColor]];
-//            [[twoLabelTitleView subLabel] setTextColor:[UIColor whiteColor]];
-//        }
+
         [[self navigationItem] setTitleView:twoLabelTitleView];
     }
     
@@ -288,7 +281,6 @@ typedef NS_ENUM(BOOL, MCStatus) {
     if (_thisPerson) {
         [self fillTheScreenWithInitialData];
     }
-//    [selectEmailAddressButton setHidden:YES];
     
     // Dismiss the keyboard on backgroundtap.
     [self startResigningFirstResponderOnBackgroundTap];
