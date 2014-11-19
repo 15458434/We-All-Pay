@@ -30,7 +30,7 @@ typedef enum _emailFieldEditStatus {
 
 @end
 
-@interface MCPersonViewController : UIViewController <UITextFieldDelegate, UIPickerViewDelegate, UIPickerViewDataSource, MCAddressBookReceiverDelegate, MCTonightsBillTransfer, MCThisPersonProtocol>
+@interface MCPersonViewController : UITableViewController <UITextFieldDelegate, UIPickerViewDelegate, UIPickerViewDataSource, MCAddressBookReceiverDelegate, MCTonightsBillTransfer, MCThisPersonProtocol>
 {
     __weak IBOutlet UITextField *firstNameField;
     __weak IBOutlet UITextField *lastNameField;
