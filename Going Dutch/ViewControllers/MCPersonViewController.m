@@ -288,7 +288,7 @@ typedef NS_ENUM(BOOL, MCStatus) {
     if (_thisPerson) {
         [self fillTheScreenWithInitialData];
     }
-    [selectEmailAddressButton setHidden:YES];
+//    [selectEmailAddressButton setHidden:YES];
     
     // Dismiss the keyboard on backgroundtap.
     [self startResigningFirstResponderOnBackgroundTap];
