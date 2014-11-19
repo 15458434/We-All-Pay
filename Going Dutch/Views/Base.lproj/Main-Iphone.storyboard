@@ -3,6 +3,7 @@
     <dependencies>
         <deployment identifier="iOS"/>
         <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="6244"/>
+        <capability name="Alignment constraints with different attributes" minToolsVersion="5.1"/>
         <capability name="Aspect ratio constraints" minToolsVersion="5.1"/>
         <capability name="Constraints to layout margins" minToolsVersion="6.0"/>
     </dependencies>
@@ -836,35 +837,27 @@
                         <viewControllerLayoutGuide type="top" id="cIH-wB-q4j"/>
                         <viewControllerLayoutGuide type="bottom" id="7ck-Y1-fdd"/>
                     </layoutGuides>
-                    <view key="view" contentMode="scaleToFill" restorationIdentifier="personView" id="YgD-ot-OKq" customClass="UIScrollView">
+                    <view key="view" contentMode="scaleToFill" restorationIdentifier="personView" id="YgD-ot-OKq">
                         <rect key="frame" x="0.0" y="64" width="320" height="504"/>
                         <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                         <subviews>
                             <imageView userInteractionEnabled="NO" contentMode="scaleAspectFit" restorationIdentifier="personImageOView" translatesAutoresizingMaskIntoConstraints="NO" id="BPi-hy-YkK">
-                                <rect key="frame" x="13" y="13" width="80" height="80"/>
+                                <rect key="frame" x="20" y="16" width="80" height="80"/>
                                 <constraints>
                                     <constraint firstAttribute="width" constant="80" id="ZEC-TL-iti"/>
                                     <constraint firstAttribute="height" constant="80" id="vKb-n9-vJx"/>
                                 </constraints>
                             </imageView>
                             <textField opaque="NO" clipsSubviews="YES" contentMode="scaleToFill" restorationIdentifier="firstNameField" contentHorizontalAlignment="left" contentVerticalAlignment="center" borderStyle="roundedRect" placeholder="First Name" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="Tln-WZ-m8Z">
-                                <rect key="frame" x="101" y="25" width="199" height="30"/>
+                                <rect key="frame" x="108" y="28" width="192" height="30"/>
                                 <fontDescription key="fontDescription" name="HelveticaNeue" family="Helvetica Neue" pointSize="14"/>
                                 <textInputTraits key="textInputTraits" autocapitalizationType="sentences"/>
                                 <connections>
                                     <outlet property="delegate" destination="X5i-vZ-dYW" id="aVA-K7-8rb"/>
                                 </connections>
                             </textField>
-                            <textField opaque="NO" clipsSubviews="YES" contentMode="scaleToFill" restorationIdentifier="lastNameField" contentHorizontalAlignment="left" contentVerticalAlignment="center" borderStyle="roundedRect" placeholder="Last name" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="E8v-zR-iZl">
-                                <rect key="frame" x="101" y="63" width="199" height="30"/>
-                                <fontDescription key="fontDescription" name="HelveticaNeue" family="Helvetica Neue" pointSize="14"/>
-                                <textInputTraits key="textInputTraits" autocapitalizationType="sentences"/>
-                                <connections>
-                                    <outlet property="delegate" destination="X5i-vZ-dYW" id="vEb-HT-4Ml"/>
-                                </connections>
-                            </textField>
                             <textField opaque="NO" clipsSubviews="YES" contentMode="scaleToFill" restorationIdentifier="emailaddressField" contentHorizontalAlignment="left" contentVerticalAlignment="center" borderStyle="roundedRect" placeholder="e-mail address" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="4YY-Cv-Jxg">
-                                <rect key="frame" x="101" y="101" width="199" height="30"/>
+                                <rect key="frame" x="108" y="104" width="192" height="30"/>
                                 <fontDescription key="fontDescription" name="HelveticaNeue" family="Helvetica Neue" pointSize="14"/>
                                 <textInputTraits key="textInputTraits" autocorrectionType="no" keyboardType="emailAddress"/>
                                 <connections>
@@ -872,7 +865,7 @@
                                 </connections>
                             </textField>
                             <button opaque="NO" contentMode="scaleToFill" restorationIdentifier="selectEmailAddressButton" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="Iac-jb-ETA">
-                                <rect key="frame" x="129" y="139" width="143" height="30"/>
+                                <rect key="frame" x="132" y="142" width="143" height="30"/>
                                 <state key="normal" title="Select email address">
                                     <color key="titleShadowColor" white="0.5" alpha="1" colorSpace="calibratedWhite"/>
                                 </state>
@@ -880,10 +873,18 @@
                                     <action selector="selectEmailAddressPressed:" destination="X5i-vZ-dYW" eventType="touchUpInside" id="qm9-Wk-Liv"/>
                                 </connections>
                             </button>
+                            <textField opaque="NO" clipsSubviews="YES" contentMode="scaleToFill" restorationIdentifier="lastNameField" contentHorizontalAlignment="left" contentVerticalAlignment="center" borderStyle="roundedRect" placeholder="Last name" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="E8v-zR-iZl">
+                                <rect key="frame" x="108" y="66" width="192" height="30"/>
+                                <fontDescription key="fontDescription" name="HelveticaNeue" family="Helvetica Neue" pointSize="14"/>
+                                <textInputTraits key="textInputTraits" autocapitalizationType="sentences"/>
+                                <connections>
+                                    <outlet property="delegate" destination="X5i-vZ-dYW" id="vEb-HT-4Ml"/>
+                                </connections>
+                            </textField>
                         </subviews>
                         <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="calibratedWhite"/>
                         <constraints>
-                            <constraint firstAttribute="trailing" secondItem="E8v-zR-iZl" secondAttribute="trailing" constant="20" symbolic="YES" id="7sf-qv-LdH"/>
+                            <constraint firstAttribute="trailingMargin" secondItem="E8v-zR-iZl" secondAttribute="trailingMargin" constant="12" id="7sf-qv-LdH"/>
                             <constraint firstItem="E8v-zR-iZl" firstAttribute="top" secondItem="Tln-WZ-m8Z" secondAttribute="bottom" constant="8" symbolic="YES" id="Bh1-H5-A7y"/>
                             <constraint firstItem="Iac-jb-ETA" firstAttribute="top" secondItem="4YY-Cv-Jxg" secondAttribute="bottom" constant="8" id="LAl-KS-mpZ"/>
                             <constraint firstItem="E8v-zR-iZl" firstAttribute="width" secondItem="Tln-WZ-m8Z" secondAttribute="width" id="UjM-Ua-I45"/>
@@ -893,9 +894,9 @@
                             <constraint firstItem="Iac-jb-ETA" firstAttribute="centerX" secondItem="4YY-Cv-Jxg" secondAttribute="centerX" id="bgg-de-lac"/>
                             <constraint firstItem="E8v-zR-iZl" firstAttribute="centerX" secondItem="Tln-WZ-m8Z" secondAttribute="centerX" id="ese-uB-tSC"/>
                             <constraint firstItem="BPi-hy-YkK" firstAttribute="bottom" secondItem="E8v-zR-iZl" secondAttribute="bottom" id="g0z-Od-TG0"/>
-                            <constraint firstItem="BPi-hy-YkK" firstAttribute="top" secondItem="cIH-wB-q4j" secondAttribute="bottom" constant="13" id="lax-tv-ItQ"/>
+                            <constraint firstItem="BPi-hy-YkK" firstAttribute="topMargin" secondItem="cIH-wB-q4j" secondAttribute="bottom" constant="24" id="lax-tv-ItQ"/>
                             <constraint firstItem="4YY-Cv-Jxg" firstAttribute="top" secondItem="E8v-zR-iZl" secondAttribute="bottom" constant="8" id="p3U-F4-0f1"/>
-                            <constraint firstItem="BPi-hy-YkK" firstAttribute="leading" secondItem="YgD-ot-OKq" secondAttribute="leading" constant="13" id="qTy-b3-8ut"/>
+                            <constraint firstItem="BPi-hy-YkK" firstAttribute="leadingMargin" secondItem="YgD-ot-OKq" secondAttribute="leadingMargin" constant="12" id="qTy-b3-8ut"/>
                         </constraints>
                         <connections>
                             <action selector="dismissKeyboard:" destination="X5i-vZ-dYW" eventType="touchUpInside" id="NYd-JH-u2A"/>
