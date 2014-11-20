@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="UTF-8" standalone="yes"?>
-<model userDefinedModelVersionIdentifier="4" type="com.apple.IDECoreDataModeler.DataModel" documentVersion="1.0" lastSavedToolsVersion="6244" systemVersion="14A388a" minimumToolsVersion="Xcode 4.3" macOSVersion="Automatic" iOSVersion="Automatic">
+<model userDefinedModelVersionIdentifier="4" type="com.apple.IDECoreDataModeler.DataModel" documentVersion="1.0" lastSavedToolsVersion="6252" systemVersion="14B25" minimumToolsVersion="Xcode 4.3" macOSVersion="Automatic" iOSVersion="Automatic">
     <entity name="MCCurrency" representedClassName="MCCurrency" syncable="YES">
         <attribute name="code" optional="YES" attributeType="String" syncable="YES"/>
         <attribute name="dateCreated" optional="YES" attributeType="Date" syncable="YES"/>
@@ -68,6 +68,7 @@
         <attribute name="pictureData" optional="YES" attributeType="Binary" allowsExternalBinaryDataStorage="YES" syncable="YES"/>
         <attribute name="thumbnail" optional="YES" transient="YES" syncable="YES"/>
         <attribute name="thumbnailData" optional="YES" attributeType="Binary" allowsExternalBinaryDataStorage="YES" syncable="YES"/>
+        <attribute name="totalSumPaid" optional="YES" transient="YES" attributeType="Double" defaultValueString="0.0" syncable="YES"/>
         <attribute name="uniquePersonId" attributeType="String" syncable="YES"/>
         <relationship name="emailAddress" optional="YES" toMany="YES" deletionRule="Cascade" destinationEntity="MCEmailAddress" inverseName="owner" inverseEntity="MCEmailAddress" syncable="YES"/>
         <relationship name="payments" optional="YES" toMany="YES" deletionRule="Nullify" destinationEntity="MCPayment" inverseName="payingPerson" inverseEntity="MCPayment" syncable="YES"/>
@@ -90,7 +91,7 @@
         <element name="MCExchangeRate" positionX="-891" positionY="117" width="128" height="193"/>
         <element name="MCPayment" positionX="-342" positionY="-0" width="128" height="223"/>
         <element name="MCPaymentPresence" positionX="-533" positionY="-27" width="128" height="150"/>
-        <element name="MCPerson" positionX="-837" positionY="-54" width="128" height="285"/>
+        <element name="MCPerson" positionX="-837" positionY="-54" width="128" height="300"/>
         <element name="MCSharedBill" positionX="-558" positionY="225" width="128" height="165"/>
     </elements>
 </model>
