@@ -300,11 +300,7 @@
     if (!paymentsOfPerson) {
         NSLog(@"Error fetching paymentofPerson: %@", [error localizedDescription]);
     }
-    double sumOfMoney = 0.0;
-    for (MCPayment *payment in paymentsOfPerson) {
-        sumOfMoney += [[payment moneyInMainCurrency] doubleValue];
-    }
-    return @(sumOfMoney);
+    return [paymentsOfPerson valueForKeyPath:@"@sum.moneyInMainCurrency"];
 }
 
 - (NSString *)totalSumOfMoneyOfThisSharedBillAsCurrencyString
@@ -319,20 +315,15 @@
 - (NSNumber *)totalSumPaidBy:(MCPerson *)person
 {
     NSFetchRequest *request = [NSFetchRequest fetchRequestWithEntityName:@"MCPayment"];
-    [request setRelationshipKeyPathsForPrefetching:@[ @"payingPerson" ]];
-    [request setPredicate:[NSPredicate predicateWithFormat:@"onWhichBill = %@ AND payingPerson = %@ AND ANY peopleSharingPayment.isPersonPresent = YES", self, person]];
-    [request setSortDescriptors:@[[NSSortDescriptor sortDescriptorWithKey:@"dateCreated" ascending:YES]]];
-    NSManagedObjectContext *context = [self managedObjectContext];
+    request.relationshipKeyPathsForPrefetching = @[@"payingPerson" ];
+    request.predicate = [NSPredicate predicateWithFormat:@"onWhichBill = %@ AND payingPerson = %@ AND ANY peopleSharingPayment.isPersonPresent = YES", self, person];
+    request.sortDescriptors = @[[NSSortDescriptor sortDescriptorWithKey:@"dateCreated" ascending:YES]];
     NSError *error = nil;
-    NSArray *paymentsOfPerson = [context executeFetchRequest:request error:&error];
+    NSArray *paymentsOfPerson = [[self managedObjectContext] executeFetchRequest:request error:&error];
     if (!paymentsOfPerson) {
         NSLog(@"Error fetching paymentofPerson: %@", [error localizedDescription]);
     }
-    double sumOfMoney = 0.0;
-    for (MCPayment *p in paymentsOfPerson) {
-        sumOfMoney += [[p moneyInMainCurrency] doubleValue];
-    }
-    return @(sumOfMoney);
+    return [paymentsOfPerson valueForKeyPath:@"@sum.moneyInMainCurrency"];
 }
 
 - (NSNumber *)totalAmountOfCreditBy:(MCPerson *)person
@@ -448,8 +439,7 @@
     request.sortDescriptors = @[sortDescriptor];
     
     NSNumber *exchangeRateValidStatus = [NSNumber numberWithShort:valid];
-    NSPredicate *predicate = [NSPredicate predicateWithFormat:@"payment.onWhichBill = %@ and status != %@", self, exchangeRateValidStatus];
-    request.predicate = predicate;
+    request.predicate = [NSPredicate predicateWithFormat:@"payment.onWhichBill = %@ and status != %@", self, exchangeRateValidStatus];
     NSError *fetchError;
     NSArray *arrayOfInvalidExchangeRatesOfThisSharedBill = [[self managedObjectContext] executeFetchRequest:request error:&fetchError];
     if (fetchError) {
