@@ -326,6 +326,13 @@
     return [paymentsOfPerson valueForKeyPath:@"@sum.moneyInMainCurrency"];
 }
 
+- (NSArray *)fetchPeoplePresentOrderedByAmountPaid:(BOOL)ascending
+{
+    NSSet *people = [self peoplePresent];
+    NSArray *sortedPeople = [people sortedArrayUsingDescriptors:@[ [NSSortDescriptor sortDescriptorWithKey:@"totalSumPaid" ascending:ascending] ]];
+    return sortedPeople;
+}
+
 - (NSNumber *)totalAmountOfCreditBy:(MCPerson *)person
 {
     double totalSumPaid = [[self totalSumPaidBy:person] doubleValue];

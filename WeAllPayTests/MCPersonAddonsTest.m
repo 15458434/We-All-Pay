@@ -141,9 +141,6 @@
     drinks.money = @(10);
     drinks.descriptionOfPayment = @"coffee";
     NSNumber *totalPaidByFred = fred.totalSumPaid;
-//    NSError *error = nil;
-//    [_context save:&error];
-//    XCTAssertFalse(error);
     XCTAssertEqualWithAccuracy(@(10).doubleValue, totalPaidByFred.doubleValue, 0.001);
 }
 

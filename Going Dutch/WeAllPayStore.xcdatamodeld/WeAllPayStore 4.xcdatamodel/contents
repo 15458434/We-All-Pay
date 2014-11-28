@@ -68,7 +68,7 @@
         <attribute name="pictureData" optional="YES" attributeType="Binary" allowsExternalBinaryDataStorage="YES" syncable="YES"/>
         <attribute name="thumbnail" optional="YES" transient="YES" syncable="YES"/>
         <attribute name="thumbnailData" optional="YES" attributeType="Binary" allowsExternalBinaryDataStorage="YES" syncable="YES"/>
-        <attribute name="totalSumPaid" optional="YES" transient="YES" attributeType="Double" defaultValueString="0.0" syncable="YES"/>
+        <attribute name="totalSumPaid" optional="YES" transient="YES" attributeType="Double" syncable="YES"/>
         <attribute name="uniquePersonId" attributeType="String" syncable="YES"/>
         <relationship name="emailAddress" optional="YES" toMany="YES" deletionRule="Cascade" destinationEntity="MCEmailAddress" inverseName="owner" inverseEntity="MCEmailAddress" syncable="YES"/>
         <relationship name="payments" optional="YES" toMany="YES" deletionRule="Nullify" destinationEntity="MCPayment" inverseName="payingPerson" inverseEntity="MCPayment" syncable="YES"/>
@@ -91,7 +91,7 @@
         <element name="MCExchangeRate" positionX="-891" positionY="117" width="128" height="193"/>
         <element name="MCPayment" positionX="-342" positionY="-0" width="128" height="223"/>
         <element name="MCPaymentPresence" positionX="-533" positionY="-27" width="128" height="150"/>
-        <element name="MCPerson" positionX="-837" positionY="-54" width="128" height="300"/>
+        <element name="MCPerson" positionX="-837" positionY="-54" width="128" height="28"/>
         <element name="MCSharedBill" positionX="-558" positionY="225" width="128" height="165"/>
     </elements>
 </model>

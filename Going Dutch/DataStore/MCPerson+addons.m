@@ -309,31 +309,6 @@
 
 - (NSNumber *)totalSumPaid
 {
-//    NSExpressionDescription *expressionDescription = [[NSExpressionDescription alloc] init];
-//    NSString *sumOfTotalPaidBySelf = @"sumOfTotalPaidBySelf";
-//    expressionDescription.name = sumOfTotalPaidBySelf;
-//    expressionDescription.expression = [NSExpression expressionForKeyPath:@"@sum.moneyInMainCurrency"];
-//    expressionDescription.expressionResultType = NSDoubleAttributeType;
-//    
-//    NSFetchRequest *fetchRequest = [NSFetchRequest fetchRequestWithEntityName:NSStringFromClass([MCPayment class])];
-//    fetchRequest.resultType = NSDictionaryResultType;
-//    fetchRequest.predicate = [NSPredicate predicateWithFormat:@"payingPerson = %@", self];
-//    fetchRequest.sortDescriptors = @[[NSSortDescriptor sortDescriptorWithKey:@"dateCreated" ascending:YES]];
-//    fetchRequest.propertiesToFetch = @[expressionDescription];
-//    
-//    NSError *error = nil;
-//    NSArray *fetchResult = [[self managedObjectContext] executeFetchRequest:fetchRequest error:&error];
-//    if (error) {
-//        NSLog(@"%@: error fetching: %@", self, error);
-//        return nil;
-//    }
-//
-//    if (fetchResult.count == 0) {
-//        return nil;
-//    }
-//    
-//    return [[fetchResult firstObject] objectForKey:sumOfTotalPaidBySelf];
- 
     NSFetchRequest *fetchRequest = [NSFetchRequest fetchRequestWithEntityName:NSStringFromClass([MCPayment class])];
     fetchRequest.predicate = [NSPredicate predicateWithFormat:@"payingPerson = %@", self];
     fetchRequest.sortDescriptors = @[[NSSortDescriptor sortDescriptorWithKey:@"dateCreated" ascending:YES]];
