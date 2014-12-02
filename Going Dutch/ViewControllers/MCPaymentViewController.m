@@ -22,6 +22,8 @@
 #import "MCCategoryPictureStoreController.h"
 #import "MCCategoryPictureObject.h"
 
+#import "MCWhoPayingUserDefaultsStoreInterface.h"
+
 typedef NS_ENUM(BOOL, ChildViewOpened) {
     isNotOpened,
     isOpened
@@ -82,7 +84,12 @@ typedef NS_ENUM(BOOL, ChildViewOpened) {
         [[MCWeAllPayStoreController defaultStore] endUndoGroup];
     }
     [[MCWeAllPayStoreController defaultStore] saveMainThreadContext];
-    [[[self navigationController] presentingViewController] dismissViewControllerAnimated:YES completion:nil];
+    [[[self navigationController] presentingViewController] dismissViewControllerAnimated:YES completion:^{
+        MCPerson *nextPayer = (MCPerson *)[[_tonightsBill fetchPeoplePresentOrderedByAmountPaid:YES] firstObject];
+        MCWhoPayingUserDefaultsStoreInterface *nextStore = [[MCWhoPayingUserDefaultsStoreInterface alloc] initWithTonightsBillUUID:_tonightsBill.uniqueBillId withTripName:_tonightsBill.tripName andTheNextPayerID:nextPayer.uniquePersonId withFullName:nextPayer.getFullName];
+        [nextStore storeToDefaults];
+        [[NCWidgetController widgetController] setHasContent:YES forWidgetWithBundleIdentifier:MCWhoIsPayingNextBundleIdentifier];
+    }];
 }
 
 - (IBAction)currencySelectionPressed:(id)sender

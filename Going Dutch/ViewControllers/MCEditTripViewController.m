@@ -20,6 +20,8 @@
 #import "MCTwoLabelsTitleView.h"
 #import "MCTableEmptyMessage.h"
 
+#import "MCWhoPayingUserDefaultsStoreInterface.h"
+
 @interface MCEditTripViewController ()
 
 @property (weak, nonatomic) IBOutlet UIButton *contactsButton;
@@ -403,6 +405,10 @@
     if (!didSomethingChange) {
         didSomethingChange = YES;
     }
+    MCPerson *nextPayer = [[_tonightsBill fetchPeoplePresentOrderedByAmountPaid:YES] firstObject];
+    MCWhoPayingUserDefaultsStoreInterface *groupStore = [[MCWhoPayingUserDefaultsStoreInterface alloc] initWithTonightsBillUUID:_tonightsBill.uniqueBillId withTripName:_tonightsBill.tripName andTheNextPayerID:nextPayer.uniquePersonId withFullName:[nextPayer getFullName]];
+    [groupStore storeToDefaults];
+    [[NCWidgetController widgetController] setHasContent:YES forWidgetWithBundleIdentifier:MCWhoIsPayingNextBundleIdentifier];
 }
 
 #pragma mark - NSFetchedResultsControllerDelegat

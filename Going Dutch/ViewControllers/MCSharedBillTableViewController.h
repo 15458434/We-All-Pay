@@ -6,9 +6,11 @@
 //  Copyright (c) 2013 Mark Cornelisse. All rights reserved.
 //
 
-#import <UIKit/UIKit.h>
-#import <CoreData/CoreData.h>
-#import <MessageUI/MessageUI.h>
+@import UIKit;
+@import CoreData;
+@import MessageUI;
+@import NotificationCenter;
+
 #import "MCTonightsBillTransfer.h"
 #import "MCIndexProtocol.h"
 #import "MCIsEditingProtocol.h"

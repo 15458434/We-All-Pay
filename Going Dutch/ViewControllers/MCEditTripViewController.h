@@ -6,9 +6,10 @@
 //  Copyright (c) 2013 Mark Cornelisse. All rights reserved.
 //
 
-#import <UIKit/UIKit.h>
-#import <CoreData/CoreData.h>
-#import <AddressBookUI/AddressBookUI.h>
+@import UIKit;
+@import CoreData;
+@import AddressBookUI;
+@import NotificationCenter;
 #import "MCPersonViewController.h"
 
 #import "MCTonightsBillTransfer.h"

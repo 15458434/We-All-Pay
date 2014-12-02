@@ -19,13 +19,13 @@
             shouldBeEnabled = "Yes"
             ignoreCount = "0"
             continueAfterRunningActions = "No"
-            filePath = "Going Dutch/DataStore/MCWeAllPayStoreController.m"
-            timestampString = "437672626.274114"
+            filePath = "Who is paying next/TodayViewController.swift"
+            timestampString = "439228003.200162"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "232"
-            endingLineNumber = "232"
-            landmarkName = "-updateXRate:withCompletionHandler:"
+            startingLineNumber = "68"
+            endingLineNumber = "68"
+            landmarkName = "widgetPerformUpdateWithCompletionHandler(_:)"
             landmarkType = "5">
          </BreakpointContent>
       </BreakpointProxy>

@@ -24,6 +24,11 @@
 			<key>orderHint</key>
 			<integer>0</integer>
 		</dict>
+		<key>Who is paying next.xcscheme</key>
+		<dict>
+			<key>orderHint</key>
+			<integer>3</integer>
+		</dict>
 		<key>X-Rates.xcscheme</key>
 		<dict>
 			<key>orderHint</key>
@@ -118,6 +123,16 @@
 			<true/>
 		</dict>
 		<key>38AD6E7A196FE90F000D21C9</key>
+		<dict>
+			<key>primary</key>
+			<true/>
+		</dict>
+		<key>38B6E0D01A28B62D009E69D7</key>
+		<dict>
+			<key>primary</key>
+			<true/>
+		</dict>
+		<key>38B6E0EB1A28BBAB009E69D7</key>
 		<dict>
 			<key>primary</key>
 			<true/>
