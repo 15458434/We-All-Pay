@@ -29,11 +29,6 @@ class TodayViewController: UIViewController, NCWidgetProviding {
         } else {
             return false
         }
-//        tonightsBillID = userDefaultsInterface.tonightsBillUUID
-//        tripName = userDefaultsInterface.tripName
-//        nextPayerID = userDefaultsInterface.nextPayerUUID
-//        fullNameNextPayer = userDefaultsInterface.fullNameOfNextPayer
-//        return true
     }
     
     func updateLabel() {
