@@ -18,7 +18,9 @@ class TodayViewController: UIViewController, NCWidgetProviding {
     var fullNameNextPayer: String!
     
     func updateLocalOptionalsFromUserDefaults() -> Bool {
-        println("updateLocalOptionalsFromUserDefaults")
+        #if DEBUG
+            println("\(self): updateLocalOptionalsFromUserDefaults")
+        #endif
         let userDefaultsInterface: MCWhoPayingUserDefaultsStoreInterface = MCWhoPayingUserDefaultsStoreInterface()
         if userDefaultsInterface.areAllValuesValid() {
             tonightsBillID = userDefaultsInterface.tonightsBillUUID
@@ -60,6 +62,9 @@ class TodayViewController: UIViewController, NCWidgetProviding {
         // If an error is encountered, use NCUpdateResult.Failed
         // If there's no update required, use NCUpdateResult.NoData
         // If there's an update, use NCUpdateResult.NewData
+        #if DEBUG
+            println("\(self): widgetPerformUpdateWithCompletionHandler")
+        #endif
         if updateLocalOptionalsFromUserDefaults() {
             updateLabel()
             completionHandler(NCUpdateResult.NewData)
