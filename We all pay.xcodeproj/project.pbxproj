@@ -103,6 +103,7 @@
 		387D3A911870652B0060FAF8 /* Localizable.strings in Resources */ = {isa = PBXBuildFile; fileRef = 387D3A931870652B0060FAF8 /* Localizable.strings */; };
 		388063EE19A4D00C000CF36B /* XRCurrencyStoreControllerTest.m in Sources */ = {isa = PBXBuildFile; fileRef = 388063ED19A4D00C000CF36B /* XRCurrencyStoreControllerTest.m */; };
 		388063EF19A4D00C000CF36B /* XRCurrencyStoreControllerTest.m in Sources */ = {isa = PBXBuildFile; fileRef = 388063ED19A4D00C000CF36B /* XRCurrencyStoreControllerTest.m */; };
+		38859F8B1A2F28C0009B1A3F /* WhoIsPayingNextTextLocalizer.swift in Sources */ = {isa = PBXBuildFile; fileRef = 38859F8A1A2F28C0009B1A3F /* WhoIsPayingNextTextLocalizer.swift */; };
 		3886D3FD16B7A1CD00ECE64F /* AddressBook.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 3886D3FB16B7A1CD00ECE64F /* AddressBook.framework */; };
 		3886D3FE16B7A1CD00ECE64F /* AddressBookUI.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 3886D3FC16B7A1CD00ECE64F /* AddressBookUI.framework */; };
 		3892C11419C84E6C0050F546 /* MultipleCurrencyInterface.xib in Resources */ = {isa = PBXBuildFile; fileRef = 3892C11319C84E6C0050F546 /* MultipleCurrencyInterface.xib */; };
@@ -393,6 +394,7 @@
 		3879E78B19798F8B009E5D57 /* X-Rates.entitlements */ = {isa = PBXFileReference; lastKnownFileType = text.xml; path = "X-Rates.entitlements"; sourceTree = "<group>"; };
 		387D3A8E187053BA0060FAF8 /* nl */ = {isa = PBXFileReference; fileEncoding = 10; lastKnownFileType = text.plist.strings; name = nl; path = "nl.lproj/Main-Iphone.strings"; sourceTree = "<group>"; };
 		388063ED19A4D00C000CF36B /* XRCurrencyStoreControllerTest.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = XRCurrencyStoreControllerTest.m; sourceTree = "<group>"; };
+		38859F8A1A2F28C0009B1A3F /* WhoIsPayingNextTextLocalizer.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = WhoIsPayingNextTextLocalizer.swift; sourceTree = "<group>"; };
 		3886D3FB16B7A1CD00ECE64F /* AddressBook.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = AddressBook.framework; path = System/Library/Frameworks/AddressBook.framework; sourceTree = SDKROOT; };
 		3886D3FC16B7A1CD00ECE64F /* AddressBookUI.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = AddressBookUI.framework; path = System/Library/Frameworks/AddressBookUI.framework; sourceTree = SDKROOT; };
 		3892C11319C84E6C0050F546 /* MultipleCurrencyInterface.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = MultipleCurrencyInterface.xib; sourceTree = "<group>"; };
@@ -1018,6 +1020,7 @@
 				38B6E0CB1A28AFAA009E69D7 /* MCWhoPayingUserDefaultsStoreInterface.m */,
 				386E11571A2D188C0045EB1A /* Whoispayingnext-Bridging-Header.h */,
 				38B6E0F11A28BBAB009E69D7 /* TodayViewController.swift */,
+				38859F8A1A2F28C0009B1A3F /* WhoIsPayingNextTextLocalizer.swift */,
 				38B6E0F31A28BBAB009E69D7 /* MainInterface.storyboard */,
 				38B6E0EF1A28BBAB009E69D7 /* Supporting Files */,
 			);
@@ -1624,6 +1627,7 @@
 			files = (
 				38B6E0FB1A28BBC5009E69D7 /* MCWhoPayingUserDefaultsStoreInterface.m in Sources */,
 				38B6E0F21A28BBAB009E69D7 /* TodayViewController.swift in Sources */,
+				38859F8B1A2F28C0009B1A3F /* WhoIsPayingNextTextLocalizer.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

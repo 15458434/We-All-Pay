@@ -27,6 +27,7 @@ class TodayViewController: UIViewController, NCWidgetProviding {
             tripName = userDefaultsInterface.tripName
             nextPayerID = userDefaultsInterface.nextPayerUUID
             fullNameNextPayer = userDefaultsInterface.fullNameOfNextPayer
+            
             return true
         } else {
             return false
@@ -39,7 +40,7 @@ class TodayViewController: UIViewController, NCWidgetProviding {
             if let thePayerName = fullNameNextPayer {
                 let finalString: String = "For your event \(theTripName), \(fullNameNextPayer) should pay next."
                 println(finalString)
-                theLabel.text = finalString
+                theLabel.attributedText = createAttributesStringForWhoIsPayingNext(theTripName, thePayerName)
             }
         }
     }
