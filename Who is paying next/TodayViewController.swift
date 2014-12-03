@@ -41,7 +41,11 @@ class TodayViewController: UIViewController, NCWidgetProviding {
                 let finalString: String = "For your event \(theTripName), \(fullNameNextPayer) should pay next."
                 println(finalString)
                 theLabel.attributedText = createAttributesStringForWhoIsPayingNext(theTripName, thePayerName)
+            } else {
+                NCWidgetController.widgetController().setHasContent(false, forWidgetWithBundleIdentifier: MCWhoIsPayingNextBundleIdentifier)                
             }
+        } else {
+            NCWidgetController.widgetController().setHasContent(false, forWidgetWithBundleIdentifier: MCWhoIsPayingNextBundleIdentifier)
         }
     }
     
