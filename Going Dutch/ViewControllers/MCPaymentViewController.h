@@ -40,7 +40,7 @@ typedef NS_ENUM(NSUInteger, MCMoneyValueFieldDismissStatus) {
     UIBarButtonItem *cancelChangesForEntirePaymentButton;
     MCTwoLabelsTitleView *twoLabelTitleView;
     
-    __weak IBOutlet UITextField *payerView;
+    __weak IBOutlet UITextField *payerNameField;
     MCPerson *payerViewPerson;
     __weak IBOutlet UITextField *itemView;
     __weak IBOutlet UITextField *paidView;
@@ -55,8 +55,6 @@ typedef NS_ENUM(NSUInteger, MCMoneyValueFieldDismissStatus) {
     NSFetchedResultsController *_dataController;
 }
 
-@property (weak, nonatomic) IBOutlet UIButton *categoryPicture;
-@property (weak, nonatomic) IBOutlet UIImageView *payerPicture;
 @property (nonatomic, strong) MCPayment *thisPayment;
 @property (nonatomic, strong) MCSharedBill *tonightsBill;
 @property (nonatomic, readonly) BOOL didSomethingChange;
