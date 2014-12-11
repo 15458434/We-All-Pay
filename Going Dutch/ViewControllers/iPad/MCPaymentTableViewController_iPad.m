@@ -100,8 +100,17 @@
 
 - (void)setTextForCategoryButton
 {
-    NSString *title = NSLocalizedString(@"CATEGORY", @"Text of the category button.");
-    [_categoryButton setTitle:title forState:UIControlStateNormal];
+    // Put the correct category symbol on the categoryButton.
+    MCCategoryPictureObject *categoryObject = [[[MCCategoryPictureStoreController sharedController] pictureObjects] objectAtIndex:[_thisPayment.categoryId shortValue]];
+    if ([categoryObject categoryId] > 0) {
+        _categoryImage.image = categoryObject.largePicture;
+        [_categoryButton setTitle:categoryObject.categoryDescription forState:UIControlStateNormal];
+    } else {
+        _categoryImage.image = nil;
+        NSString *title = NSLocalizedString(@"CATEGORY", @"Text of the category button.");
+        [_categoryButton setTitle:title forState:UIControlStateNormal];
+    }
+
 }
 
 - (void)performFetchAndReloadTableView:(NSNotification *)notification
@@ -495,6 +504,7 @@
                 __strong typeof(weakSelf) strongSelf = weakSelf;
                 if (strongSelf) {
                     [strongSelf reloadCategoryImageView];
+                    [strongSelf setTextForCategoryButton];
                 }
             }];
         }
