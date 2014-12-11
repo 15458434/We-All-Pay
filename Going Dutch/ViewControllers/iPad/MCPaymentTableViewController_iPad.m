@@ -28,6 +28,7 @@
 
 @property (weak, nonatomic) IBOutlet UIImageView *categoryImage;
 @property (weak, nonatomic) IBOutlet UIButton *categoryButton;
+@property (weak, nonatomic) IBOutlet UIImageView *payerView;
 @property (weak, nonatomic) IBOutlet UILabel *payerLabel;
 @property (weak, nonatomic) IBOutlet UIButton *selectButton;
 
@@ -123,17 +124,16 @@
 }
 
 
-- (void)reloadPayerLabel
+- (void)reloadPayerView
 {
     _payerLabel.text = [[_thisPayment payingPerson] getFullName];
     if ([[_thisPayment payingPerson] picture]) {
-        [_selectButton setBackgroundImage:_thisPayment.payingPerson.picture forState:UIControlStateNormal];
-        [_selectButton setTitle:@"" forState:UIControlStateNormal];
+        _payerView.image = _thisPayment.payingPerson.picture;
     } else {
-        NSString *title = NSLocalizedString(@"SELECT_PAYER", @"Select payer text for a buttons.");
-        [_selectButton setTitle:title forState:UIControlStateNormal];
+        _payerView.image = nil;
+//        NSString *title = NSLocalizedString(@"SELECT_PAYER", @"Select payer text for a buttons.");
+//        [_selectButton setTitle:title forState:UIControlStateNormal];
     }
-
 }
 
 - (void)tappedInTheBackground:(id)selector
@@ -190,7 +190,7 @@
         if ([_thisPayment money]) {
             [paidField setText:[_thisPayment getMoneyValueInCurrencyAsAString]];
         }
-        [self reloadPayerLabel];
+        [self reloadPayerView];
         _isNew = isNotNew;
     }
 
@@ -387,7 +387,7 @@
     [cell setKeyboardDismissDelegate:self];
     
     // Constraint for alignment with headerView of the tableView.
-    NSLayoutConstraint *constraintBetweenNameLabelAndPayerLabel = [NSLayoutConstraint constraintWithItem:_payerLabel attribute:NSLayoutAttributeLeading relatedBy:NSLayoutRelationEqual toItem:[cell nameLabel] attribute:NSLayoutAttributeLeading multiplier:1.0 constant:0.0];
+    NSLayoutConstraint *constraintBetweenNameLabelAndPayerLabel = [NSLayoutConstraint constraintWithItem:_selectButton attribute:NSLayoutAttributeLeading relatedBy:NSLayoutRelationEqual toItem:[cell nameLabel] attribute:NSLayoutAttributeLeading multiplier:1.0 constant:0.0];
     NSLayoutConstraint *constraintBetweenPictureInCellAndPictureOfPayer = [NSLayoutConstraint constraintWithItem:[cell personView] attribute:NSLayoutAttributeTrailing relatedBy:NSLayoutRelationEqual toItem:_categoryImage attribute:NSLayoutAttributeTrailing multiplier:1.0 constant:0.0];
     [[self tableView] addConstraints:@[constraintBetweenNameLabelAndPayerLabel, constraintBetweenPictureInCellAndPictureOfPayer]];
     
@@ -459,7 +459,7 @@
                 
                 __strong MCPaymentTableViewController_iPad *strongSelf = weakSelf;
                 if (strongSelf) {
-                    [strongSelf reloadPayerLabel];
+                    [strongSelf reloadPayerView];
                 }
             }];
         }

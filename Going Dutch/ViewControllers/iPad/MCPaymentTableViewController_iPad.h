@@ -50,6 +50,6 @@ typedef NS_ENUM(BOOL, MCCancelButtonPressed) {
 @property (strong, nonatomic) MCSharedBill *writableTonightsBill;
 @property (strong, nonatomic) void (^dismissMe)();
 
-- (void) reloadPayerLabel;
+- (void) reloadPayerView;
 
 @end

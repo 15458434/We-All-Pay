@@ -853,18 +853,8 @@
                                         </segue>
                                     </connections>
                                 </button>
-                                <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" horizontalCompressionResistancePriority="749" text="payerLabel" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" useAutomaticPreferredMaxLayoutWidth="YES" translatesAutoresizingMaskIntoConstraints="NO" id="09A-0L-1mu" userLabel="payerLabel">
-                                    <rect key="frame" x="134" y="63" width="386" height="18"/>
-                                    <fontDescription key="fontDescription" type="system" pointSize="15"/>
-                                    <color key="textColor" cocoaTouchSystemColor="darkTextColor"/>
-                                    <nil key="highlightedColor"/>
-                                </label>
                                 <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="hi9-hq-PS5">
-                                    <rect key="frame" x="20" y="19" width="100" height="100"/>
-                                    <constraints>
-                                        <constraint firstAttribute="height" constant="100" id="ae3-Cr-hEy"/>
-                                        <constraint firstAttribute="width" secondItem="hi9-hq-PS5" secondAttribute="height" multiplier="1:1" id="iL5-4v-6d8"/>
-                                    </constraints>
+                                    <rect key="frame" x="134" y="54" width="94" height="33"/>
                                     <fontDescription key="fontDescription" type="system" pointSize="17"/>
                                     <state key="normal" title="select payer">
                                         <color key="titleColor" red="0.89411764705882357" green="0.34901960784313724" blue="0.44313725490196076" alpha="1" colorSpace="calibratedRGB"/>
@@ -908,29 +898,35 @@
                                         </segue>
                                     </connections>
                                 </button>
+                                <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" translatesAutoresizingMaskIntoConstraints="NO" id="xcc-E7-c0h">
+                                    <rect key="frame" x="20" y="20" width="100" height="100"/>
+                                    <constraints>
+                                        <constraint firstAttribute="width" constant="100" id="2Uc-CR-kbk"/>
+                                        <constraint firstAttribute="width" secondItem="xcc-E7-c0h" secondAttribute="height" multiplier="1:1" id="let-m7-eSl"/>
+                                    </constraints>
+                                </imageView>
                             </subviews>
                             <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="calibratedWhite"/>
                             <constraints>
+                                <constraint firstItem="xcc-E7-c0h" firstAttribute="centerY" secondItem="hi9-hq-PS5" secondAttribute="centerY" id="159-yw-UcG"/>
                                 <constraint firstItem="ZlS-5v-dlc" firstAttribute="leading" secondItem="LDs-9i-ZRZ" secondAttribute="leading" id="4r5-Nh-K5J"/>
                                 <constraint firstItem="LnO-mX-ELw" firstAttribute="bottom" secondItem="q8F-9H-eKt" secondAttribute="centerY" id="6it-fI-9B6"/>
-                                <constraint firstItem="09A-0L-1mu" firstAttribute="leading" secondItem="Lbm-k4-s3a" secondAttribute="leading" id="8hR-lr-svM"/>
                                 <constraint firstItem="ZlS-5v-dlc" firstAttribute="leading" secondItem="8ht-EA-kJE" secondAttribute="trailing" constant="8" symbolic="YES" id="AHO-GW-TqO"/>
-                                <constraint firstItem="09A-0L-1mu" firstAttribute="trailing" secondItem="LDs-9i-ZRZ" secondAttribute="trailing" id="BXd-pn-Chp"/>
-                                <constraint firstItem="09A-0L-1mu" firstAttribute="baseline" secondItem="hi9-hq-PS5" secondAttribute="baseline" constant="2" id="DSc-kE-Efj"/>
                                 <constraint firstItem="ZlS-5v-dlc" firstAttribute="baseline" secondItem="8ht-EA-kJE" secondAttribute="baseline" id="E2N-7J-uWB"/>
                                 <constraint firstAttribute="bottom" secondItem="Lbm-k4-s3a" secondAttribute="bottom" priority="750" id="E8S-Ed-pXW"/>
                                 <constraint firstItem="LDs-9i-ZRZ" firstAttribute="top" secondItem="LnO-mX-ELw" secondAttribute="bottom" constant="8" id="ILH-ci-YAf"/>
                                 <constraint firstItem="q8F-9H-eKt" firstAttribute="leading" secondItem="zfO-fv-PpY" secondAttribute="leading" constant="20" id="LED-MH-yy2"/>
-                                <constraint firstItem="q8F-9H-eKt" firstAttribute="top" secondItem="hi9-hq-PS5" secondAttribute="bottom" constant="9" id="Qqh-2d-aw4"/>
                                 <constraint firstItem="8ht-EA-kJE" firstAttribute="top" secondItem="q8F-9H-eKt" secondAttribute="bottom" constant="8" id="Uxq-CY-MnK"/>
                                 <constraint firstItem="ZlS-5v-dlc" firstAttribute="trailing" secondItem="Lbm-k4-s3a" secondAttribute="trailing" id="XST-xW-kTc"/>
-                                <constraint firstItem="hi9-hq-PS5" firstAttribute="leading" secondItem="zfO-fv-PpY" secondAttribute="leading" constant="20" id="YIO-UB-wbA"/>
-                                <constraint firstItem="hi9-hq-PS5" firstAttribute="top" secondItem="zfO-fv-PpY" secondAttribute="top" constant="19" id="bnJ-vU-UGn"/>
                                 <constraint firstItem="LnO-mX-ELw" firstAttribute="leading" secondItem="LDs-9i-ZRZ" secondAttribute="leading" constant="6" id="dCm-fN-aPA"/>
+                                <constraint firstItem="q8F-9H-eKt" firstAttribute="top" secondItem="xcc-E7-c0h" secondAttribute="bottom" constant="8" id="hGt-Vg-5wT"/>
                                 <constraint firstItem="Lbm-k4-s3a" firstAttribute="top" secondItem="ZlS-5v-dlc" secondAttribute="bottom" priority="250" constant="46" id="iRs-hR-mpC"/>
+                                <constraint firstItem="Lbm-k4-s3a" firstAttribute="leading" secondItem="LnO-mX-ELw" secondAttribute="leading" id="k1z-tR-Nn9"/>
                                 <constraint firstItem="LDs-9i-ZRZ" firstAttribute="leading" secondItem="q8F-9H-eKt" secondAttribute="trailing" constant="8" id="kAy-xx-Xh8"/>
-                                <constraint firstItem="09A-0L-1mu" firstAttribute="leading" secondItem="LDs-9i-ZRZ" secondAttribute="leading" constant="6" id="tBI-6L-wTT"/>
+                                <constraint firstItem="xcc-E7-c0h" firstAttribute="leading" secondItem="zfO-fv-PpY" secondAttribute="leading" constant="20" id="nHw-a6-MrS"/>
+                                <constraint firstItem="LnO-mX-ELw" firstAttribute="leading" secondItem="hi9-hq-PS5" secondAttribute="leading" id="ru4-w9-xj8"/>
                                 <constraint firstItem="ZlS-5v-dlc" firstAttribute="trailing" secondItem="LDs-9i-ZRZ" secondAttribute="trailing" id="tOZ-10-71l"/>
+                                <constraint firstItem="xcc-E7-c0h" firstAttribute="top" secondItem="zfO-fv-PpY" secondAttribute="top" constant="20" id="xhR-IQ-sGT"/>
                                 <constraint firstAttribute="trailing" secondItem="LDs-9i-ZRZ" secondAttribute="trailing" constant="20" symbolic="YES" id="xhw-K9-UQp"/>
                             </constraints>
                         </view>
@@ -1038,7 +1034,7 @@
                         <outlet property="categoryImage" destination="q8F-9H-eKt" id="jbf-mh-8bo"/>
                         <outlet property="itemField" destination="LDs-9i-ZRZ" id="8d1-wG-1tG"/>
                         <outlet property="paidField" destination="ZlS-5v-dlc" id="UZl-Ot-u5Z"/>
-                        <outlet property="payerLabel" destination="09A-0L-1mu" id="asX-1r-1Dd"/>
+                        <outlet property="payerView" destination="xcc-E7-c0h" id="yaP-15-Yuz"/>
                         <outlet property="selectButton" destination="hi9-hq-PS5" id="dUx-qL-RDT"/>
                     </connections>
                 </tableViewController>
