@@ -29,7 +29,6 @@
 @property (weak, nonatomic) IBOutlet UIImageView *categoryImage;
 @property (weak, nonatomic) IBOutlet UIButton *categoryButton;
 @property (weak, nonatomic) IBOutlet UIImageView *payerView;
-@property (weak, nonatomic) IBOutlet UILabel *payerLabel;
 @property (weak, nonatomic) IBOutlet UIButton *selectButton;
 
 @end
@@ -135,14 +134,17 @@
 
 - (void)reloadPayerView
 {
-    _payerLabel.text = [[_thisPayment payingPerson] getFullName];
+    [self setTextPayerButton];
     if ([[_thisPayment payingPerson] picture]) {
         _payerView.image = _thisPayment.payingPerson.picture;
     } else {
         _payerView.image = nil;
-//        NSString *title = NSLocalizedString(@"SELECT_PAYER", @"Select payer text for a buttons.");
-//        [_selectButton setTitle:title forState:UIControlStateNormal];
     }
+}
+
+- (void)setTextPayerButton
+{
+    [_selectButton setTitle:[_thisPayment.payingPerson getFullName] forState:UIControlStateNormal];
 }
 
 - (void)tappedInTheBackground:(id)selector
@@ -200,9 +202,10 @@
             [paidField setText:[_thisPayment getMoneyValueInCurrencyAsAString]];
         }
         [self reloadPayerView];
+        [self setTextPayerButton];
         _isNew = isNotNew;
     }
-
+    
     [self reloadCategoryImageView];
     [self setTextForCategoryButton];
     

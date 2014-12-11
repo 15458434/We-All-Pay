@@ -853,19 +853,6 @@
                                         </segue>
                                     </connections>
                                 </button>
-                                <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="hi9-hq-PS5">
-                                    <rect key="frame" x="134" y="54" width="94" height="33"/>
-                                    <fontDescription key="fontDescription" type="system" pointSize="17"/>
-                                    <state key="normal" title="select payer">
-                                        <color key="titleColor" red="0.89411764705882357" green="0.34901960784313724" blue="0.44313725490196076" alpha="1" colorSpace="calibratedRGB"/>
-                                        <color key="titleShadowColor" white="0.5" alpha="1" colorSpace="calibratedWhite"/>
-                                    </state>
-                                    <connections>
-                                        <segue destination="XpR-6M-QF5" kind="popover" identifier="selectPayer" popoverAnchorView="hi9-hq-PS5" id="xdi-HG-Wvg">
-                                            <popoverArrowDirection key="popoverArrowDirection" up="YES" down="YES" left="YES" right="YES"/>
-                                        </segue>
-                                    </connections>
-                                </button>
                                 <textField opaque="NO" clipsSubviews="YES" contentMode="scaleToFill" horizontalCompressionResistancePriority="749" contentHorizontalAlignment="left" contentVerticalAlignment="center" borderStyle="roundedRect" placeholder="How much was spent?" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="ZlS-5v-dlc">
                                     <rect key="frame" x="128" y="238" width="392" height="30"/>
                                     <constraints>
@@ -905,6 +892,19 @@
                                         <constraint firstAttribute="width" secondItem="xcc-E7-c0h" secondAttribute="height" multiplier="1:1" id="let-m7-eSl"/>
                                     </constraints>
                                 </imageView>
+                                <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="hi9-hq-PS5">
+                                    <rect key="frame" x="134" y="55" width="86" height="30"/>
+                                    <fontDescription key="fontDescription" type="system" pointSize="15"/>
+                                    <state key="normal" title="Select payer">
+                                        <color key="titleColor" red="0.89411764705882357" green="0.34901960784313724" blue="0.44313725490196076" alpha="1" colorSpace="calibratedRGB"/>
+                                        <color key="titleShadowColor" white="0.5" alpha="1" colorSpace="calibratedWhite"/>
+                                    </state>
+                                    <connections>
+                                        <segue destination="XpR-6M-QF5" kind="popover" identifier="selectPayer" popoverAnchorView="hi9-hq-PS5" id="xdi-HG-Wvg">
+                                            <popoverArrowDirection key="popoverArrowDirection" up="YES" down="YES" left="YES" right="YES"/>
+                                        </segue>
+                                    </connections>
+                                </button>
                             </subviews>
                             <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="calibratedWhite"/>
                             <constraints>
