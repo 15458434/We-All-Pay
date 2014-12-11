@@ -1254,22 +1254,25 @@
                                 <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" tableViewCell="IXA-pf-egv" id="J07-8s-iID">
                                     <autoresizingMask key="autoresizingMask"/>
                                     <subviews>
-                                        <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" misplaced="YES" translatesAutoresizingMaskIntoConstraints="NO" id="mC4-Ft-sB3" userLabel="categoryImage">
-                                            <rect key="frame" x="8" y="3" width="40" height="40"/>
+                                        <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" translatesAutoresizingMaskIntoConstraints="NO" id="mC4-Ft-sB3" userLabel="categoryImage">
+                                            <rect key="frame" x="0.0" y="2" width="40" height="40"/>
                                             <constraints>
                                                 <constraint firstAttribute="width" secondItem="mC4-Ft-sB3" secondAttribute="height" multiplier="1:1" id="2ja-kP-kMC"/>
                                                 <constraint firstAttribute="width" constant="40" id="WBI-p9-pR7"/>
                                             </constraints>
                                         </imageView>
-                                        <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" horizontalCompressionResistancePriority="749" misplaced="YES" text="Label" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="6Nv-ch-G1Q" userLabel="categoryName">
-                                            <rect key="frame" x="56" y="12" width="256" height="21"/>
+                                        <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" horizontalCompressionResistancePriority="749" text="Label" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="6Nv-ch-G1Q" userLabel="categoryName">
+                                            <rect key="frame" x="48" y="11" width="272" height="21"/>
                                             <fontDescription key="fontDescription" type="system" pointSize="17"/>
                                             <color key="textColor" cocoaTouchSystemColor="darkTextColor"/>
                                             <nil key="highlightedColor"/>
                                         </label>
                                     </subviews>
                                     <constraints>
+                                        <constraint firstItem="mC4-Ft-sB3" firstAttribute="top" secondItem="J07-8s-iID" secondAttribute="topMargin" constant="-6" id="Etk-xb-b25"/>
+                                        <constraint firstItem="6Nv-ch-G1Q" firstAttribute="top" secondItem="J07-8s-iID" secondAttribute="topMargin" priority="750" constant="3" id="GF4-II-gW0"/>
                                         <constraint firstAttribute="centerY" secondItem="mC4-Ft-sB3" secondAttribute="centerY" id="Sf2-jK-qGu"/>
+                                        <constraint firstAttribute="bottomMargin" secondItem="6Nv-ch-G1Q" secondAttribute="bottom" priority="750" constant="3" id="URN-kP-I5k"/>
                                         <constraint firstItem="mC4-Ft-sB3" firstAttribute="centerY" secondItem="6Nv-ch-G1Q" secondAttribute="centerY" id="WEP-h2-TL3"/>
                                         <constraint firstItem="mC4-Ft-sB3" firstAttribute="leading" secondItem="J07-8s-iID" secondAttribute="leading" id="Z5P-8S-rkG"/>
                                         <constraint firstItem="6Nv-ch-G1Q" firstAttribute="trailing" secondItem="J07-8s-iID" secondAttribute="trailing" id="ZAA-6l-jiQ"/>

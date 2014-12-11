@@ -91,6 +91,13 @@
     _categories = [[MCCategoryPictureStoreController sharedController] pictureObjects];
     [self createSections:_categories];
     _filteredCategories = [NSMutableArray arrayWithCapacity:_categories.count];
+    
+    if (NSFoundationVersionNumber > NSFoundationVersionNumber_iOS_7_1) {
+        self.tableView.estimatedRowHeight = 44.0;
+        self.tableView.rowHeight = UITableViewAutomaticDimension;
+    } else {
+        self.tableView.rowHeight = 44.0;
+    }
 }
 
 - (void)didReceiveMemoryWarning {
@@ -115,10 +122,10 @@
 
 #pragma mark - Table view delegate
 
-- (CGFloat)tableView:(UITableView *)tableView heightForRowAtIndexPath:(NSIndexPath *)indexPath
-{
-    return 44;
-}
+//- (CGFloat)tableView:(UITableView *)tableView heightForRowAtIndexPath:(NSIndexPath *)indexPath
+//{
+//    return 44.0;
+//}
 
 - (NSInteger)numberOfSectionsInTableView:(UITableView *)tableView {
     // Return the number of sections.
