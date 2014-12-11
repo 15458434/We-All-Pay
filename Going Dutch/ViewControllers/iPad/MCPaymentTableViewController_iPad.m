@@ -26,6 +26,7 @@
 
 @interface MCPaymentTableViewController_iPad ()
 
+@property (weak, nonatomic) IBOutlet UIImageView *categoryImage;
 @property (weak, nonatomic) IBOutlet UIButton *categoryButton;
 @property (weak, nonatomic) IBOutlet UILabel *payerLabel;
 @property (weak, nonatomic) IBOutlet UIButton *selectButton;
@@ -72,29 +73,34 @@
 {
 
 }
+
 - (IBAction)dismissKeyboardWhenTappedOutsideAUITextField:(id)sender
 {
     [self dismissTheKeyboard];
 }
 
-
-
 #pragma mark - New in this class
 
-- (void)putImageOnCategoryButton
+- (void)reloadCategoryImageView
 {
     // Put the correct category symbol on the categoryButton.
     MCCategoryPictureObject *categoryObject = [[[MCCategoryPictureStoreController sharedController] pictureObjects] objectAtIndex:[_thisPayment.categoryId shortValue]];
     if ([categoryObject categoryId] > 0) {
-        [_categoryButton setBackgroundImage:categoryObject.largePicture forState:UIControlStateNormal];
-        [_categoryButton setTitle:@"" forState:UIControlStateNormal];
+        _categoryImage.image = categoryObject.largePicture;
+//        [_categoryButton setBackgroundImage:categoryObject.largePicture forState:UIControlStateNormal];
+//        [_categoryButton setTitle:@"" forState:UIControlStateNormal];
     } else {
-        [_categoryButton setBackgroundImage:nil forState:UIControlStateNormal];
-        NSString *title = NSLocalizedString(@"CATEGORY", @"Text of the category button.");
-        [_categoryButton setTitle:title forState:UIControlStateNormal];
+        _categoryImage.image = nil;
+//        [_categoryButton setBackgroundImage:nil forState:UIControlStateNormal];
+//        NSString *title = NSLocalizedString(@"CATEGORY", @"Text of the category button.");
+//        [_categoryButton setTitle:title forState:UIControlStateNormal];
     }
+}
 
-    
+- (void)setTextForCategoryButton
+{
+    NSString *title = NSLocalizedString(@"CATEGORY", @"Text of the category button.");
+    [_categoryButton setTitle:title forState:UIControlStateNormal];
 }
 
 - (void)performFetchAndReloadTableView:(NSNotification *)notification
@@ -129,26 +135,6 @@
     }
 
 }
-
-//- (void)setCircularImageOnPictureView:(UIImage *)image
-//{
-//    __weak MCPaymentTableViewController_iPad *weakSelf = self;
-//    
-//    dispatch_queue_t imageProcessQueue;
-//    imageProcessQueue = dispatch_queue_create("imageProcessQueue", NULL);
-//    
-//    dispatch_async(imageProcessQueue, ^{
-//        CGRect circularImageRect = CGRectMake(0, 0, 160, 160);
-//        UIImage *circularImage = [MCTools cutCircularImageFrom:image toDestinationRect:circularImageRect];
-//        dispatch_async(dispatch_get_main_queue(), ^{
-//            MCPaymentTableViewController_iPad *strongSelf = weakSelf;
-//            if (strongSelf) {
-//                [[strongSelf payerPicture] setImage:circularImage];
-//                [[strongSelf payerPicture] setNeedsDisplay];
-//            }
-//        });
-//    });
-//}
 
 - (void)tappedInTheBackground:(id)selector
 {
@@ -208,7 +194,8 @@
         _isNew = isNotNew;
     }
 
-    [self putImageOnCategoryButton];
+    [self reloadCategoryImageView];
+    [self setTextForCategoryButton];
     
     NSSortDescriptor *sortDescriptor = [NSSortDescriptor sortDescriptorWithKey:@"person.firstName" ascending:YES];
     _paymentPresenceArray = [[_thisPayment peopleSharingPayment] sortedArrayUsingDescriptors:@[sortDescriptor]];
@@ -401,7 +388,7 @@
     
     // Constraint for alignment with headerView of the tableView.
     NSLayoutConstraint *constraintBetweenNameLabelAndPayerLabel = [NSLayoutConstraint constraintWithItem:_payerLabel attribute:NSLayoutAttributeLeading relatedBy:NSLayoutRelationEqual toItem:[cell nameLabel] attribute:NSLayoutAttributeLeading multiplier:1.0 constant:0.0];
-    NSLayoutConstraint *constraintBetweenPictureInCellAndPictureOfPayer = [NSLayoutConstraint constraintWithItem:[cell personView] attribute:NSLayoutAttributeTrailing relatedBy:NSLayoutRelationEqual toItem:_categoryButton attribute:NSLayoutAttributeTrailing multiplier:1.0 constant:0.0];
+    NSLayoutConstraint *constraintBetweenPictureInCellAndPictureOfPayer = [NSLayoutConstraint constraintWithItem:[cell personView] attribute:NSLayoutAttributeTrailing relatedBy:NSLayoutRelationEqual toItem:_categoryImage attribute:NSLayoutAttributeTrailing multiplier:1.0 constant:0.0];
     [[self tableView] addConstraints:@[constraintBetweenNameLabelAndPayerLabel, constraintBetweenPictureInCellAndPictureOfPayer]];
     
     return cell;
@@ -507,7 +494,7 @@
                 [selectCurrencyPopover dismissPopoverAnimated:YES];
                 __strong typeof(weakSelf) strongSelf = weakSelf;
                 if (strongSelf) {
-                    [strongSelf putImageOnCategoryButton];
+                    [strongSelf reloadCategoryImageView];
                 }
             }];
         }
