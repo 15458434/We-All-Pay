@@ -316,9 +316,6 @@
 {
     if ([_thisPayment payingPerson]) {
         [_selectButton setTitle:[[_thisPayment payingPerson] getFullName] forState:UIControlStateNormal];
-        if ([[_thisPayment payingPerson] picture]) {
-            [_selectButton setImage:_thisPayment.payingPerson.picture forState:UIControlStateNormal];
-        }
     }
 }
 
