@@ -15,6 +15,8 @@
 
 #import "MCSelectCategoryTableViewCell_iPad.h"
 
+BOOL const isUILocalizedIndexedCollation = NO;
+
 @interface MCSelectCategoryTableViewController_iPad ()
 
 @property (nonatomic, strong) NSArray *categories;
@@ -154,6 +156,9 @@
 
 - (NSString *)tableView:(UITableView *)tableView titleForHeaderInSection:(NSInteger)section
 {
+    if (!isUILocalizedIndexedCollation) {
+        return nil;
+    }
     if (tableView != self.searchDisplayController.searchResultsTableView) {
         return [[[UILocalizedIndexedCollation currentCollation] sectionTitles] objectAtIndex:section];
     }
@@ -162,6 +167,9 @@
 
 - (NSArray *)sectionIndexTitlesForTableView:(UITableView *)tableView
 {
+    if (!isUILocalizedIndexedCollation) {
+        return nil;
+    }
     if (tableView == self.searchDisplayController.searchResultsTableView) {
         return nil;
     }
@@ -170,6 +178,9 @@
 
 - (NSInteger)tableView:(UITableView *)tableView sectionForSectionIndexTitle:(NSString *)title atIndex:(NSInteger)index
 {
+    if (!isUILocalizedIndexedCollation) {
+        return nil;
+    }
     if (tableView == self.searchDisplayController.searchResultsTableView) {
         return nil;
     }
