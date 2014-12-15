@@ -15,6 +15,8 @@
 
 #import "MCPayment+addons.h"
 
+BOOL const isUILocalizedIndexedCollationActive = NO;
+
 @interface MCSelectCategoryTableViewController_iPhone ()
 
 @property (nonatomic, strong) NSArray *categories;
@@ -162,6 +164,9 @@
 
 - (NSString *)tableView:(UITableView *)tableView titleForHeaderInSection:(NSInteger)section
 {
+    if (!isUILocalizedIndexedCollationActive) {
+        return nil;
+    }
     if (tableView != self.searchDisplayController.searchResultsTableView) {
         return [[[UILocalizedIndexedCollation currentCollation] sectionTitles] objectAtIndex:section];
     }
@@ -170,6 +175,9 @@
 
 - (NSArray *)sectionIndexTitlesForTableView:(UITableView *)tableView
 {
+    if (!isUILocalizedIndexedCollationActive) {
+        return nil;
+    }
     if (tableView == self.searchDisplayController.searchResultsTableView) {
         return nil;
     }
@@ -178,6 +186,9 @@
 
 - (NSInteger)tableView:(UITableView *)tableView sectionForSectionIndexTitle:(NSString *)title atIndex:(NSInteger)index
 {
+    if (!isUILocalizedIndexedCollationActive) {
+        return nil;
+    }
     if (tableView == self.searchDisplayController.searchResultsTableView) {
         return nil;
     }
