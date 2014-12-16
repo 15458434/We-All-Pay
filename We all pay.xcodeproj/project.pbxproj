@@ -9,6 +9,7 @@
 /* Begin PBXBuildFile section */
 		38001C97194DA3D8008ACD94 /* MCiScreenTableViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 38001C96194DA3D8008ACD94 /* MCiScreenTableViewController.m */; };
 		38001C9B194EE284008ACD94 /* Images.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 38001C9A194EE284008ACD94 /* Images.xcassets */; };
+		38010E0F1A3F4A4F0056F8F8 /* Localizable.strings in Resources */ = {isa = PBXBuildFile; fileRef = 38010E111A3F4A4F0056F8F8 /* Localizable.strings */; };
 		3801B1121A1E23D5005B69D7 /* We all pay empty.xcappdata in Resources */ = {isa = PBXBuildFile; fileRef = 3801B1111A1E23D5005B69D7 /* We all pay empty.xcappdata */; };
 		3801F89C16DFC62600DF8675 /* CoreData.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 3801F89B16DFC62600DF8675 /* CoreData.framework */; };
 		3803963F192114D700FA8CC2 /* MCPaymentPresenceTableViewCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 3803963E192114D700FA8CC2 /* MCPaymentPresenceTableViewCell.m */; };
@@ -51,6 +52,7 @@
 		38334ECA173552330063B919 /* Default.png in Resources */ = {isa = PBXBuildFile; fileRef = 38334EBF172D319B0063B919 /* Default.png */; };
 		38334ECB1735523A0063B919 /* Default@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 38334EC1172D31A50063B919 /* Default@2x.png */; };
 		38334ECC173552410063B919 /* Default-568h@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 38334EC3172D31AF0063B919 /* Default-568h@2x.png */; };
+		38370CF51A40DBC300B56460 /* MainInterface.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 38370CF71A40DBC300B56460 /* MainInterface.storyboard */; };
 		383A86C518F7EE48001F128E /* MCSolutionTableViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 383A86C418F7EE48001F128E /* MCSolutionTableViewController.m */; };
 		383B339D19C9063000AC2896 /* Currency info.plist in Resources */ = {isa = PBXBuildFile; fileRef = 38DDBF8919C1AB5E00D690D0 /* Currency info.plist */; };
 		383E0C5D186737EB00AA688D /* MCSharedBillPageViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 383E0C5C186737EB00AA688D /* MCSharedBillPageViewController.m */; };
@@ -154,7 +156,6 @@
 		38B6E0CC1A28AFAA009E69D7 /* MCWhoPayingUserDefaultsStoreInterface.m in Sources */ = {isa = PBXBuildFile; fileRef = 38B6E0CB1A28AFAA009E69D7 /* MCWhoPayingUserDefaultsStoreInterface.m */; };
 		38B6E0ED1A28BBAB009E69D7 /* NotificationCenter.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 3807560019F9445800489ED4 /* NotificationCenter.framework */; };
 		38B6E0F21A28BBAB009E69D7 /* TodayViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 38B6E0F11A28BBAB009E69D7 /* TodayViewController.swift */; };
-		38B6E0F41A28BBAB009E69D7 /* MainInterface.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 38B6E0F31A28BBAB009E69D7 /* MainInterface.storyboard */; };
 		38B6E0F71A28BBAB009E69D7 /* Who is paying next.appex in Embed App Extensions */ = {isa = PBXBuildFile; fileRef = 38B6E0EC1A28BBAB009E69D7 /* Who is paying next.appex */; settings = {ATTRIBUTES = (RemoveHeadersOnCopy, ); }; };
 		38B6E0FB1A28BBC5009E69D7 /* MCWhoPayingUserDefaultsStoreInterface.m in Sources */ = {isa = PBXBuildFile; fileRef = 38B6E0CB1A28AFAA009E69D7 /* MCWhoPayingUserDefaultsStoreInterface.m */; };
 		38BDFD7E19B88D210026F4F8 /* XRCurrencyXRateFetcher.m in Sources */ = {isa = PBXBuildFile; fileRef = 38BDFD7D19B88D210026F4F8 /* XRCurrencyXRateFetcher.m */; };
@@ -253,6 +254,9 @@
 		38001C95194DA3D8008ACD94 /* MCiScreenTableViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = MCiScreenTableViewController.h; path = iPhone/MCiScreenTableViewController.h; sourceTree = "<group>"; };
 		38001C96194DA3D8008ACD94 /* MCiScreenTableViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = MCiScreenTableViewController.m; path = iPhone/MCiScreenTableViewController.m; sourceTree = "<group>"; };
 		38001C9A194EE284008ACD94 /* Images.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Images.xcassets; sourceTree = "<group>"; };
+		38010E101A3F4A4F0056F8F8 /* Base */ = {isa = PBXFileReference; fileEncoding = 10; lastKnownFileType = text.plist.strings; name = Base; path = Base.lproj/Localizable.strings; sourceTree = "<group>"; };
+		38010E121A3F4A510056F8F8 /* en */ = {isa = PBXFileReference; fileEncoding = 10; lastKnownFileType = text.plist.strings; name = en; path = en.lproj/Localizable.strings; sourceTree = "<group>"; };
+		38010E131A3F4A530056F8F8 /* nl */ = {isa = PBXFileReference; fileEncoding = 10; lastKnownFileType = text.plist.strings; name = nl; path = nl.lproj/Localizable.strings; sourceTree = "<group>"; };
 		3801881A1938D8E70085A5AE /* MCDismissKeyboardProtocol.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = MCDismissKeyboardProtocol.h; path = ViewControllers/MCDismissKeyboardProtocol.h; sourceTree = "<group>"; };
 		3801B1111A1E23D5005B69D7 /* We all pay empty.xcappdata */ = {isa = PBXFileReference; lastKnownFileType = wrapper; path = "We all pay empty.xcappdata"; sourceTree = "<group>"; };
 		3801F89B16DFC62600DF8675 /* CoreData.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = CoreData.framework; path = System/Library/Frameworks/CoreData.framework; sourceTree = SDKROOT; };
@@ -311,6 +315,9 @@
 		38334EBF172D319B0063B919 /* Default.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = Default.png; path = ../Default.png; sourceTree = "<group>"; };
 		38334EC1172D31A50063B919 /* Default@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = "Default@2x.png"; path = "../Default@2x.png"; sourceTree = "<group>"; };
 		38334EC3172D31AF0063B919 /* Default-568h@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = "Default-568h@2x.png"; path = "../Default-568h@2x.png"; sourceTree = "<group>"; };
+		38370CF61A40DBC300B56460 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/MainInterface.storyboard; sourceTree = "<group>"; };
+		38370CF91A40DBC600B56460 /* en */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = en; path = en.lproj/MainInterface.strings; sourceTree = "<group>"; };
+		38370CFB1A40DBCA00B56460 /* nl */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = nl; path = nl.lproj/MainInterface.strings; sourceTree = "<group>"; };
 		383A86C318F7EE48001F128E /* MCSolutionTableViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = MCSolutionTableViewController.h; path = ViewControllers/iPad/MCSolutionTableViewController.h; sourceTree = "<group>"; };
 		383A86C418F7EE48001F128E /* MCSolutionTableViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = MCSolutionTableViewController.m; path = ViewControllers/iPad/MCSolutionTableViewController.m; sourceTree = "<group>"; };
 		383E0C561867079900AA688D /* Social.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Social.framework; path = System/Library/Frameworks/Social.framework; sourceTree = SDKROOT; };
@@ -497,7 +504,6 @@
 		38B6E0EC1A28BBAB009E69D7 /* Who is paying next.appex */ = {isa = PBXFileReference; explicitFileType = "wrapper.app-extension"; includeInIndex = 0; path = "Who is paying next.appex"; sourceTree = BUILT_PRODUCTS_DIR; };
 		38B6E0F01A28BBAB009E69D7 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		38B6E0F11A28BBAB009E69D7 /* TodayViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TodayViewController.swift; sourceTree = "<group>"; };
-		38B6E0F31A28BBAB009E69D7 /* MainInterface.storyboard */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; path = MainInterface.storyboard; sourceTree = "<group>"; };
 		38BC7EED19D8ABA4007558FC /* nl */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; name = nl; path = "nl.lproj/Currency info.plist"; sourceTree = "<group>"; };
 		38BC7EEE19D8ABB0007558FC /* en */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; name = en; path = "en.lproj/Currency info.plist"; sourceTree = "<group>"; };
 		38BDFD7C19B88D210026F4F8 /* XRCurrencyXRateFetcher.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = XRCurrencyXRateFetcher.h; sourceTree = "<group>"; };
@@ -1021,7 +1027,7 @@
 				386E11571A2D188C0045EB1A /* Whoispayingnext-Bridging-Header.h */,
 				38B6E0F11A28BBAB009E69D7 /* TodayViewController.swift */,
 				38859F8A1A2F28C0009B1A3F /* WhoIsPayingNextTextLocalizer.swift */,
-				38B6E0F31A28BBAB009E69D7 /* MainInterface.storyboard */,
+				38370CF71A40DBC300B56460 /* MainInterface.storyboard */,
 				38B6E0EF1A28BBAB009E69D7 /* Supporting Files */,
 			);
 			path = "Who is paying next";
@@ -1031,6 +1037,7 @@
 			isa = PBXGroup;
 			children = (
 				38B6E0F01A28BBAB009E69D7 /* Info.plist */,
+				38010E111A3F4A4F0056F8F8 /* Localizable.strings */,
 			);
 			name = "Supporting Files";
 			sourceTree = "<group>";
@@ -1463,7 +1470,8 @@
 			isa = PBXResourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				38B6E0F41A28BBAB009E69D7 /* MainInterface.storyboard in Resources */,
+				38370CF51A40DBC300B56460 /* MainInterface.storyboard in Resources */,
+				38010E0F1A3F4A4F0056F8F8 /* Localizable.strings in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -1684,6 +1692,26 @@
 /* End PBXTargetDependency section */
 
 /* Begin PBXVariantGroup section */
+		38010E111A3F4A4F0056F8F8 /* Localizable.strings */ = {
+			isa = PBXVariantGroup;
+			children = (
+				38010E101A3F4A4F0056F8F8 /* Base */,
+				38010E121A3F4A510056F8F8 /* en */,
+				38010E131A3F4A530056F8F8 /* nl */,
+			);
+			name = Localizable.strings;
+			sourceTree = "<group>";
+		};
+		38370CF71A40DBC300B56460 /* MainInterface.storyboard */ = {
+			isa = PBXVariantGroup;
+			children = (
+				38370CF61A40DBC300B56460 /* Base */,
+				38370CF91A40DBC600B56460 /* en */,
+				38370CFB1A40DBCA00B56460 /* nl */,
+			);
+			name = MainInterface.storyboard;
+			sourceTree = "<group>";
+		};
 		38572ADF169D437B00969C62 /* InfoPlist.strings */ = {
 			isa = PBXVariantGroup;
 			children = (
@@ -2021,7 +2049,7 @@
 				GCC_WARN_UNINITIALIZED_AUTOS = YES_AGGRESSIVE;
 				GCC_WARN_UNUSED_FUNCTION = YES;
 				INFOPLIST_FILE = "Who is paying next/Info.plist";
-				IPHONEOS_DEPLOYMENT_TARGET = 8.0;
+				IPHONEOS_DEPLOYMENT_TARGET = 8.1;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks @executable_path/../../Frameworks";
 				MTL_ENABLE_DEBUG_INFO = YES;
 				PRODUCT_NAME = "$(TARGET_NAME)";
@@ -2056,7 +2084,7 @@
 				GCC_WARN_UNINITIALIZED_AUTOS = YES_AGGRESSIVE;
 				GCC_WARN_UNUSED_FUNCTION = YES;
 				INFOPLIST_FILE = "Who is paying next/Info.plist";
-				IPHONEOS_DEPLOYMENT_TARGET = 8.0;
+				IPHONEOS_DEPLOYMENT_TARGET = 8.1;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks @executable_path/../../Frameworks";
 				MTL_ENABLE_DEBUG_INFO = NO;
 				PRODUCT_NAME = "$(TARGET_NAME)";

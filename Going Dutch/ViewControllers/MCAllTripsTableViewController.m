@@ -24,6 +24,8 @@
 
 #import "UIViewController+WeAllPayStore.h"
 
+#import "MCWhoPayingUserDefaultsStoreInterface.h"
+
 typedef NS_ENUM(BOOL, MCTonightsBillStatus) {
     isClosed,
     isOpened
@@ -402,6 +404,13 @@ typedef NS_ENUM(BOOL, MCTonightsBillStatus) {
 {
     if (editingStyle == UITableViewCellEditingStyleDelete) {
         MCSharedBill *toBeDeleteSharedBill = [_dataController objectAtIndexPath:indexPath];
+        
+        // If currentToBeDeleted tonightsBill the same as the one in the Today Extension delete content.
+        NSString *uniqueID = toBeDeleteSharedBill.uniqueBillId;
+        MCWhoPayingUserDefaultsStoreInterface *someStore = [[MCWhoPayingUserDefaultsStoreInterface alloc] init];
+        if ([uniqueID isEqualToString:someStore.tonightsBillUUID]) {
+            [[NCWidgetController widgetController] setHasContent:NO forWidgetWithBundleIdentifier:MCWhoIsPayingNextBundleIdentifier];
+        }
         [MCSharedBill deleteSharedbill:toBeDeleteSharedBill];
         [[MCWeAllPayStoreController defaultStore] saveMainThreadContext];
     }

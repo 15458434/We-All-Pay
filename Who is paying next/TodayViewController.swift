@@ -16,17 +16,22 @@ class TodayViewController: UIViewController, NCWidgetProviding {
     var tripName: String!
     var nextPayerID: String!
     var fullNameNextPayer: String!
+    var dateSaved: NSDate!
+    var valid: Bool!
     
     func updateLocalOptionalsFromUserDefaults() -> Bool {
         #if DEBUG
             println("\(self): updateLocalOptionalsFromUserDefaults")
         #endif
         let userDefaultsInterface: MCWhoPayingUserDefaultsStoreInterface = MCWhoPayingUserDefaultsStoreInterface()
-        if userDefaultsInterface.areAllValuesValid() {
+        
+        if userDefaultsInterface.valid {
             tonightsBillID = userDefaultsInterface.tonightsBillUUID
             tripName = userDefaultsInterface.tripName
             nextPayerID = userDefaultsInterface.nextPayerUUID
             fullNameNextPayer = userDefaultsInterface.fullNameOfNextPayer
+            dateSaved = userDefaultsInterface.dateSaved
+            valid = userDefaultsInterface.valid
             
             return true
         } else {
@@ -36,13 +41,13 @@ class TodayViewController: UIViewController, NCWidgetProviding {
     
     func updateLabel() {
         println("updateLabel")
-        if let theTripName = tripName {
-            if let thePayerName = fullNameNextPayer {
-                let finalString: String = "For your event \(theTripName), \(fullNameNextPayer) should pay next."
-                println(finalString)
-                theLabel.attributedText = createAttributesStringForWhoIsPayingNext(theTripName, thePayerName)
+        if valid == true {
+            let finalString: String = "For your event \(tripName), \(fullNameNextPayer) should pay next."
+            println(finalString)
+            if countElements(finalString) > 0 {
+                theLabel.attributedText = betterCreateAttributesStringForWhoIsPayingNext(tripName, fullNameNextPayer)
             } else {
-                NCWidgetController.widgetController().setHasContent(false, forWidgetWithBundleIdentifier: MCWhoIsPayingNextBundleIdentifier)                
+                NCWidgetController.widgetController().setHasContent(false, forWidgetWithBundleIdentifier: MCWhoIsPayingNextBundleIdentifier)
             }
         } else {
             NCWidgetController.widgetController().setHasContent(false, forWidgetWithBundleIdentifier: MCWhoIsPayingNextBundleIdentifier)
@@ -52,6 +57,7 @@ class TodayViewController: UIViewController, NCWidgetProviding {
     func defaultsDidUpdate(notification: NSNotification) {
         if updateLocalOptionalsFromUserDefaults() {
             updateLabel()
+            NCWidgetController.widgetController().setHasContent(true, forWidgetWithBundleIdentifier: MCWhoIsPayingNextBundleIdentifier)
         }
     }
     

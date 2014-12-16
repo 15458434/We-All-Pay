@@ -15,6 +15,8 @@ NSString * const tonightsBillUUIDKey = @"MCTonightsBillUUIDKey";
 NSString * const tripNameKey = @"MCTripNameKey";
 NSString * const nextPayerUUIDKey = @"MCNextPayerUUIDKey";
 NSString * const fullNameOfNextPayerKey = @"MCFullNameOfNextPayerKey";
+NSString * const validKey = @"MCIsTodayExchangeValidKey";
+NSString * const dateSavedKey =@"MCDateSavedKey";
 
 @implementation MCWhoPayingUserDefaultsStoreInterface
 
@@ -35,6 +37,11 @@ NSString * const fullNameOfNextPayerKey = @"MCFullNameOfNextPayerKey";
         _tripName = tripName;
         _nextPayerUUID = nextPayerUUID;
         _fullNameOfNextPayer = fullNameOfNextPayer;
+        if (self.areAllValuesValid) {
+            _valid = YES;
+        } else {
+            _valid = NO;
+        }
     }
     return self;
 }
@@ -46,6 +53,8 @@ NSString * const fullNameOfNextPayerKey = @"MCFullNameOfNextPayerKey";
     _tripName = [defaults objectForKey:tripNameKey];
     _nextPayerUUID = [defaults objectForKey:nextPayerUUIDKey];
     _fullNameOfNextPayer = [defaults objectForKey:fullNameOfNextPayerKey];
+    _valid = [defaults boolForKey:validKey];
+    _dateSaved = [defaults objectForKey:dateSavedKey];
 }
 
 - (void)storeToDefaults
@@ -55,6 +64,9 @@ NSString * const fullNameOfNextPayerKey = @"MCFullNameOfNextPayerKey";
     [defaults setObject:_tripName forKey:tripNameKey];
     [defaults setObject:_nextPayerUUID forKey:nextPayerUUIDKey];
     [defaults setObject:_fullNameOfNextPayer forKey:fullNameOfNextPayerKey];
+    [defaults setBool:_valid forKey:validKey];
+    _dateSaved = [NSDate date];
+    [defaults setObject:_dateSaved forKey:dateSavedKey];
     [defaults synchronize];
 }
 

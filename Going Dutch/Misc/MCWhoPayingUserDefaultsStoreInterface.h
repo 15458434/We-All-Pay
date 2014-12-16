@@ -19,6 +19,9 @@ extern NSString * const MCWeAllPayToWhoIsPayingNextGroupBundleIdentifier;
 @property (strong, nonatomic, readonly) NSString *nextPayerUUID;
 @property (strong, nonatomic, readonly) NSString *fullNameOfNextPayer;
 
+@property (nonatomic, readonly) BOOL valid;
+@property (strong, nonatomic, readonly) NSDate *dateSaved;
+
 - (instancetype)initWithTonightsBillUUID:(NSString *)tonightsBillUUID withTripName:(NSString *)tripName andTheNextPayerID:(NSString *)nextPayerUUID withFullName:(NSString *)fullNameOfNextPayer;
 - (void)storeToDefaults;
 - (BOOL)areAllValuesValid;
