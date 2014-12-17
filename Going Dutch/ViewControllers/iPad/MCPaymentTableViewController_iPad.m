@@ -109,7 +109,7 @@
         NSString *title = NSLocalizedString(@"CATEGORY", @"Text of the category button.");
         [_categoryButton setTitle:title forState:UIControlStateNormal];
     }
-
+    [_categoryButton sizeToFit];
 }
 
 - (void)performFetchAndReloadTableView:(NSNotification *)notification
