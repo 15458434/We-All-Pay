@@ -3,17 +3,17 @@
     {
       "idiom" : "universal",
       "scale" : "1x",
-      "filename" : "Bed icon.png"
+      "filename" : "Bed icon-small@1x.png"
     },
     {
       "idiom" : "universal",
       "scale" : "2x",
-      "filename" : "Bed icon@2x.png"
+      "filename" : "Bed icon-small@2x.png"
     },
     {
       "idiom" : "universal",
       "scale" : "3x",
-      "filename" : "Bed icon@3x.png"
+      "filename" : "Bed icon-small@3x.png"
     }
   ],
   "info" : {

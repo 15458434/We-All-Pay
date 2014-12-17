@@ -3,17 +3,17 @@
     {
       "idiom" : "universal",
       "scale" : "1x",
-      "filename" : "Dinner plate.png"
+      "filename" : "Dinner plate-small@1x.png"
     },
     {
       "idiom" : "universal",
       "scale" : "2x",
-      "filename" : "Dinner plate@2x.png"
+      "filename" : "Dinner plate-small@2x.png"
     },
     {
       "idiom" : "universal",
       "scale" : "3x",
-      "filename" : "Dinner plate@3x.png"
+      "filename" : "Dinner plate-small@3x.png"
     }
   ],
   "info" : {

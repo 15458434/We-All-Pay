@@ -3,17 +3,17 @@
     {
       "idiom" : "universal",
       "scale" : "1x",
-      "filename" : "Shopping cart icon 2.png"
+      "filename" : "Shopping cart icon 2-small@1x.png"
     },
     {
       "idiom" : "universal",
       "scale" : "2x",
-      "filename" : "Shopping cart icon 2@2x.png"
+      "filename" : "Shopping cart icon 2-small@2x.png"
     },
     {
       "idiom" : "universal",
       "scale" : "3x",
-      "filename" : "Shopping cart icon 2@3x.png"
+      "filename" : "Shopping cart icon 2-small-small@3x.png"
     }
   ],
   "info" : {
