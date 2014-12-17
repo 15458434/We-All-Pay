@@ -45,6 +45,7 @@
 		3825A828199A4E1E00A8885D /* MCThisPersonProtocol.m in Sources */ = {isa = PBXBuildFile; fileRef = 3825A827199A4E1E00A8885D /* MCThisPersonProtocol.m */; };
 		38295AE818425E74009FB5DE /* MCCancelDoneViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 38295AE718425E74009FB5DE /* MCCancelDoneViewController.m */; };
 		3829AD0F178B41320025969D /* WeAllPayStore.xcdatamodeld in Sources */ = {isa = PBXBuildFile; fileRef = 3829AD0D178B41320025969D /* WeAllPayStore.xcdatamodeld */; };
+		382B79CA1A419D9D00538E96 /* categoryPictures.plist in Resources */ = {isa = PBXBuildFile; fileRef = 382B79CC1A419D9D00538E96 /* categoryPictures.plist */; };
 		382E7BDD17E5E57500A1040A /* MCReturnPaymentViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 382E7BDC17E5E57500A1040A /* MCReturnPaymentViewController.m */; };
 		3830F6F6179872B400904FAF /* MCPaymentViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 3830F6F5179872B400904FAF /* MCPaymentViewController.m */; };
 		38334EBC172D1A770063B919 /* three peeps.png in Resources */ = {isa = PBXBuildFile; fileRef = 38334EBB172D1A770063B919 /* three peeps.png */; };
@@ -79,7 +80,6 @@
 		385F5313191C2D140012773D /* WeAllPayStoreTests.m in Sources */ = {isa = PBXBuildFile; fileRef = 38D785FC18DC53C30074B670 /* WeAllPayStoreTests.m */; };
 		3860574719EE92EB00BD5B78 /* MCCategoryPictureObject.m in Sources */ = {isa = PBXBuildFile; fileRef = 3860574619EE92EB00BD5B78 /* MCCategoryPictureObject.m */; };
 		3860574C19EE958700BD5B78 /* MCCategoryPictureStoreController.m in Sources */ = {isa = PBXBuildFile; fileRef = 3860574B19EE958700BD5B78 /* MCCategoryPictureStoreController.m */; };
-		3860574E19EE95F000BD5B78 /* categoryPictures.plist in Resources */ = {isa = PBXBuildFile; fileRef = 3860574D19EE95F000BD5B78 /* categoryPictures.plist */; };
 		3860575019EE963600BD5B78 /* categoryPictures.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 3860574F19EE963600BD5B78 /* categoryPictures.xcassets */; };
 		3860575519EEB28300BD5B78 /* MCCategoryPictureStoreTest.m in Sources */ = {isa = PBXBuildFile; fileRef = 3860575419EEB28300BD5B78 /* MCCategoryPictureStoreTest.m */; };
 		3862444319C46D43004CA03F /* MCRateMeController.m in Sources */ = {isa = PBXBuildFile; fileRef = 3862444219C46D43004CA03F /* MCRateMeController.m */; };
@@ -286,6 +286,9 @@
 		38295AE618425E74009FB5DE /* MCCancelDoneViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = MCCancelDoneViewController.h; sourceTree = "<group>"; };
 		38295AE718425E74009FB5DE /* MCCancelDoneViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = MCCancelDoneViewController.m; sourceTree = "<group>"; };
 		3829AD0E178B41320025969D /* WeAllPayStore.xcdatamodel */ = {isa = PBXFileReference; lastKnownFileType = wrapper.xcdatamodel; path = WeAllPayStore.xcdatamodel; sourceTree = "<group>"; };
+		382B79CB1A419D9D00538E96 /* Base */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; name = Base; path = Base.lproj/categoryPictures.plist; sourceTree = "<group>"; };
+		382B79CD1A419D9F00538E96 /* en */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; name = en; path = en.lproj/categoryPictures.plist; sourceTree = "<group>"; };
+		382B79CE1A419DA000538E96 /* nl */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; name = nl; path = nl.lproj/categoryPictures.plist; sourceTree = "<group>"; };
 		382E7BDB17E5E57500A1040A /* MCReturnPaymentViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = MCReturnPaymentViewController.h; path = ViewControllers/MCReturnPaymentViewController.h; sourceTree = "<group>"; };
 		382E7BDC17E5E57500A1040A /* MCReturnPaymentViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = MCReturnPaymentViewController.m; path = ViewControllers/MCReturnPaymentViewController.m; sourceTree = "<group>"; };
 		382F9BD118F7285400818276 /* MCDismissMeBlockProtocol.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = MCDismissMeBlockProtocol.h; path = ViewControllers/MCDismissMeBlockProtocol.h; sourceTree = "<group>"; };
@@ -335,7 +338,6 @@
 		3860574619EE92EB00BD5B78 /* MCCategoryPictureObject.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = MCCategoryPictureObject.m; path = CategoryPicturesStore/MCCategoryPictureObject.m; sourceTree = "<group>"; };
 		3860574A19EE958700BD5B78 /* MCCategoryPictureStoreController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = MCCategoryPictureStoreController.h; path = CategoryPicturesStore/MCCategoryPictureStoreController.h; sourceTree = "<group>"; };
 		3860574B19EE958700BD5B78 /* MCCategoryPictureStoreController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = MCCategoryPictureStoreController.m; path = CategoryPicturesStore/MCCategoryPictureStoreController.m; sourceTree = "<group>"; };
-		3860574D19EE95F000BD5B78 /* categoryPictures.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; name = categoryPictures.plist; path = CategoryPicturesStore/categoryPictures.plist; sourceTree = "<group>"; };
 		3860574F19EE963600BD5B78 /* categoryPictures.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = categoryPictures.xcassets; sourceTree = "<group>"; };
 		3860575419EEB28300BD5B78 /* MCCategoryPictureStoreTest.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = MCCategoryPictureStoreTest.m; sourceTree = "<group>"; };
 		3862444119C46D43004CA03F /* MCRateMeController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = MCRateMeController.h; path = Misc/MCRateMeController.h; sourceTree = "<group>"; };
@@ -878,7 +880,7 @@
 				3860574619EE92EB00BD5B78 /* MCCategoryPictureObject.m */,
 				3860574A19EE958700BD5B78 /* MCCategoryPictureStoreController.h */,
 				3860574B19EE958700BD5B78 /* MCCategoryPictureStoreController.m */,
-				3860574D19EE95F000BD5B78 /* categoryPictures.plist */,
+				382B79CC1A419D9D00538E96 /* categoryPictures.plist */,
 				3860574F19EE963600BD5B78 /* categoryPictures.xcassets */,
 			);
 			name = CategoryPicturesStore;
@@ -1419,7 +1421,7 @@
 				380700AD1A1B751E00C7FB37 /* We all pay database version 3.xcappdata in Resources */,
 				38334ECA173552330063B919 /* Default.png in Resources */,
 				38334ECB1735523A0063B919 /* Default@2x.png in Resources */,
-				3860574E19EE95F000BD5B78 /* categoryPictures.plist in Resources */,
+				382B79CA1A419D9D00538E96 /* categoryPictures.plist in Resources */,
 				38001C9B194EE284008ACD94 /* Images.xcassets in Resources */,
 				38DC8B4319097FEA00762235 /* Main-iPad.storyboard in Resources */,
 				380700B01A1B76B200C7FB37 /* We all pay database version 2.xcappdata in Resources */,
@@ -1674,6 +1676,17 @@
 				38010E131A3F4A530056F8F8 /* nl */,
 			);
 			name = Localizable.strings;
+			sourceTree = "<group>";
+		};
+		382B79CC1A419D9D00538E96 /* categoryPictures.plist */ = {
+			isa = PBXVariantGroup;
+			children = (
+				382B79CB1A419D9D00538E96 /* Base */,
+				382B79CD1A419D9F00538E96 /* en */,
+				382B79CE1A419DA000538E96 /* nl */,
+			);
+			name = categoryPictures.plist;
+			path = CategoryPicturesStore;
 			sourceTree = "<group>";
 		};
 		38370CF71A40DBC300B56460 /* MainInterface.storyboard */ = {
