@@ -36,11 +36,13 @@
             ignoreCount = "0"
             continueAfterRunningActions = "No"
             filePath = "Who is paying next/WhoIsPayingNextTextLocalizer.swift"
-            timestampString = "440458075.877932"
+            timestampString = "440547219.813617"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "84"
-            endingLineNumber = "84">
+            startingLineNumber = "87"
+            endingLineNumber = "87"
+            landmarkName = "createErrorMessage()"
+            landmarkType = "7">
          </BreakpointContent>
       </BreakpointProxy>
    </Breakpoints>

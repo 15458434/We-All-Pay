@@ -47,10 +47,12 @@ class TodayViewController: UIViewController, NCWidgetProviding {
             if countElements(finalString) > 0 {
                 theLabel.attributedText = betterCreateAttributesStringForWhoIsPayingNext(tripName, fullNameNextPayer)
             } else {
-                NCWidgetController.widgetController().setHasContent(false, forWidgetWithBundleIdentifier: MCWhoIsPayingNextBundleIdentifier)
+                theLabel.attributedText = createErrorMessage()
+                NCWidgetController.widgetController().setHasContent(true, forWidgetWithBundleIdentifier: MCWhoIsPayingNextBundleIdentifier)
             }
         } else {
-            NCWidgetController.widgetController().setHasContent(false, forWidgetWithBundleIdentifier: MCWhoIsPayingNextBundleIdentifier)
+            theLabel.attributedText = createErrorMessage()
+            NCWidgetController.widgetController().setHasContent(true, forWidgetWithBundleIdentifier: MCWhoIsPayingNextBundleIdentifier)
         }
     }
     
@@ -80,7 +82,8 @@ class TodayViewController: UIViewController, NCWidgetProviding {
             updateLabel()
             completionHandler(NCUpdateResult.NewData)
         } else {
-            NCWidgetController.widgetController().setHasContent(false, forWidgetWithBundleIdentifier: MCWhoIsPayingNextBundleIdentifier);
+            updateLabel()
+            NCWidgetController.widgetController().setHasContent(true, forWidgetWithBundleIdentifier: MCWhoIsPayingNextBundleIdentifier);
             completionHandler(NCUpdateResult.Failed)
         }
     }

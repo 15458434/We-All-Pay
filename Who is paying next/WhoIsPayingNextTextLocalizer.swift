@@ -71,6 +71,9 @@ func betterCreateAttributesStringForWhoIsPayingNext(tripName: String, fullNameNe
     return attributedText
 }
 
-//func errorMessage -> NSMutableAttributedString {
-//    
-//}
+func createErrorMessage() -> NSMutableAttributedString {
+    let fontDescriptor = UIFontDescriptor.preferredFontDescriptorWithTextStyle(UIFontTextStyleBody)
+    let font = UIFont(descriptor: fontDescriptor, size: 0)
+    let text = NSLocalizedString("There is no data to display", comment: "There is no data to display")
+    return NSMutableAttributedString(string: text, attributes: [NSFontAttributeName : font])
+}
