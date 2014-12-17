@@ -329,4 +329,32 @@
     XCTAssertTrue([tonightsBill areAllExchangeRatesValid], @"All Exchange Rate should be valid.");
 }
 
+- (void)testFetchPeoplePresentOrderedByAmountPaid
+{
+    MCSharedBill *tonightsBill = [MCSharedBill addSharedBill];
+    MCPerson *mark = [tonightsBill addPerson];
+    mark.firstName = @"Mark";
+    MCPerson *lieke = [tonightsBill addPerson];
+    lieke.firstName = @"Lieke";
+    MCPerson *marieke = [tonightsBill addPerson];
+    marieke.firstName = @"Marieke";
+    MCPayment *iceCream = [tonightsBill addPayment];
+    iceCream.payingPerson = marieke;
+    iceCream.descriptionOfPayment = @"Ice Cream";
+    iceCream.money = @6.00;
+    MCPayment *movie = [tonightsBill addPayment];
+    movie.payingPerson = mark;
+    movie.descriptionOfPayment = @"Movie";
+    movie.money = @36.00;
+    MCPayment *hotelRoom = [tonightsBill addPayment];
+    hotelRoom.payingPerson = lieke;
+    hotelRoom.descriptionOfPayment = @"Place to sleep";
+    hotelRoom.money = @100.00;
+    hotelRoom.exchangeRate.exchangeRate = @0.3;
+    NSArray *result = [tonightsBill fetchPeoplePresentOrderedByAmountPaid:YES];
+    XCTAssertTrue(result[0] == marieke, @"First person should be Marieke.");
+    XCTAssertTrue(result[1] == lieke, @"Second person should be Lieke.");
+    XCTAssertTrue(result[2] == mark, @"Third person should be Mark.");
+}
+
 @end

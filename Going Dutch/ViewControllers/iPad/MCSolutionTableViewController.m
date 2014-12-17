@@ -19,6 +19,7 @@
 #import "MCPayment+addons.h"
 #import "MCPerson+addons.h"
 #import "MCReturnPayment.h"
+#import "MCCurrency+addons.h"
 
 typedef NS_ENUM(BOOL, MCXRatesMissing) {
     xRatesPresent,
@@ -272,7 +273,7 @@ typedef NS_ENUM(BOOL, MCXRatesMissing) {
         // Configure the cell...
         MCReturnPayment *thisCellContents = [_solution objectAtIndex:[indexPath row]];
         
-        NSNumberFormatter *nf = [[NSNumberFormatter alloc] init];
+        NSNumberFormatter *nf = [[_tonightsBill mainCurrency] numberFormatter];
         [nf setNumberStyle:NSNumberFormatterCurrencyStyle];
         NSNumber *moneyToConvert = [thisCellContents money];
         [[cell moneyLabel] setText:[nf stringFromNumber:moneyToConvert]];
@@ -292,8 +293,7 @@ typedef NS_ENUM(BOOL, MCXRatesMissing) {
         [[cell firstLabel] setText:thisPersonPaidString];
         MCPerson *thisPerson = [_peoplePresent objectAtIndex:[indexPath row]];
         NSNumber *sumSpentByPerson = @(-[[_tonightsBill amountShouldHavePaidBy:thisPerson] doubleValue]);
-        NSNumberFormatter *nf = [[NSNumberFormatter alloc] init];
-        [nf setLocale:[NSLocale currentLocale]];
+        NSNumberFormatter *nf = [[_tonightsBill mainCurrency] numberFormatter];
         [nf setNumberStyle:NSNumberFormatterCurrencyStyle];
         [nf setFormatterBehavior:NSNumberFormatterBehaviorDefault];
         [[cell lastLabel] setText:[nf stringFromNumber:sumSpentByPerson]];
@@ -311,8 +311,7 @@ typedef NS_ENUM(BOOL, MCXRatesMissing) {
             [[cell firstLabel] setText:thisPersonPaidString];
             MCPerson *thisPerson = [_peoplePresent objectAtIndex:[indexPath row]];
             NSNumber *sumSpentByPerson = [_tonightsBill totalSumPaidBy:thisPerson];
-            NSNumberFormatter *nf = [[NSNumberFormatter alloc] init];
-            [nf setLocale:[NSLocale currentLocale]];
+            NSNumberFormatter *nf = [[_tonightsBill mainCurrency] numberFormatter];
             [nf setNumberStyle:NSNumberFormatterCurrencyStyle];
             [nf setFormatterBehavior:NSNumberFormatterBehaviorDefault];
             [[cell lastLabel] setText:[nf stringFromNumber:sumSpentByPerson]];

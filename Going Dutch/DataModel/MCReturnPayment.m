@@ -8,6 +8,7 @@
 
 #import "MCReturnPayment.h"
 #import "MCPerson.h"
+#import "MCCurrency+addons.h"
 
 @implementation MCReturnPayment
 
@@ -28,9 +29,9 @@
     return self;
 }
 
-- (NSString *)stringForMail
+- (NSString *)stringForMailIn:(MCCurrency *)currency
 {
-    NSNumberFormatter *nf = [[NSNumberFormatter alloc] init];
+    NSNumberFormatter *nf = [currency numberFormatter];
     [nf setNumberStyle:NSNumberFormatterCurrencyStyle];
     
     NSString *owesString1 = NSLocalizedString(@"EMAIL_OWES_PART_ONE", @"Part one of the words: %@ pays %@ to %@.");

@@ -6,13 +6,16 @@
 //  Copyright (c) 2013 Mark Cornelisse. All rights reserved.
 //
 
-#import <UIKit/UIKit.h>
-#import <CoreData/CoreData.h>
-#import <AddressBookUI/AddressBookUI.h>
+@import UIKit;
+@import CoreData;
+@import AddressBookUI;
+@import NotificationCenter;
 #import "MCPersonViewController.h"
 
 #import "MCTonightsBillTransfer.h"
 #import "MCThisPersonProtocol.h"
+#import "MCIndexProtocol.h"
+#import "MCIsEditingProtocol.h"
 
 @class MCPeople;
 @class MCSharedBill;
@@ -35,12 +38,15 @@
     BOOL cancelPressed;
 }
 
+@property (nonatomic, weak) id<MCIsEditingProtocol> myParent;
 @property (nonatomic, weak) id delegate;
 @property (nonatomic, strong) MCSharedBill *tonightsBill;
 @property (nonatomic, strong) MCSharedBill *writableTonightsBill;
 @property (nonatomic, copy) void (^dismissOnDone)(void);
 @property (nonatomic, copy) void (^dismissOnCancel)(void);
 @property (nonatomic, readonly) BOOL didSomethingChange;
+
+@property (nonatomic) NSInteger index;
 
 - (IBAction)addressBookButton:(id)sender;
 - (IBAction)addPersonButton:(id)sender;

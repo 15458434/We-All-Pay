@@ -18,6 +18,7 @@
 @property (nonatomic, strong) NSManagedObjectModel *managedObjectModel;
 @property (nonatomic, strong) NSManagedObjectContext *backgroundContext;
 @property (nonatomic, strong) NSManagedObjectContext *mainQueueContext;
+@property (nonatomic, strong) NSManagedObjectContext *secondMainQueueContext;
 @property (nonatomic, strong) XRCurrencyXRateFetcher *xRateFetcher;
 
 + (BOOL)doesMyCurrencyDatabaseFileExist;
@@ -30,6 +31,7 @@
 - (void)prepareStoreWithCompletionHandler:(void (^)())completionHandler;
 - (XRCurrency *)fetchCurrencyWithCode:(NSString *)code inContext:(NSManagedObjectContext *)context;
 - (void)fetchCurrencyWithCode:(NSString *)code withCompletionHandler:(void (^)(XRCurrency *fetchedCurrency))completionHandler;
+- (NSArray *)fetchAllCurrenciesForContext:(NSManagedObjectContext *)context;
 
 #if TARGET_OS_IPHONE
 - (NSFetchedResultsController *)getFetchedResultsControllerForDelegate:(id)delegate;

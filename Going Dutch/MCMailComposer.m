@@ -11,6 +11,7 @@
 #import "MCReturnPayment.h"
 #import "MCPayment+addons.h"
 #import "MCPerson+addons.h"
+#import "MCCurrency+addons.h"
 
 @implementation MCMailComposer
 
@@ -44,7 +45,7 @@
 {
     // Generate the text for the email.
     NSMutableString *mailBody = [[NSMutableString alloc] init];
-    NSNumberFormatter *nf = [[NSNumberFormatter alloc] init];
+    NSNumberFormatter *nf = [[_tonightsBill mainCurrency] numberFormatter];
     [nf setNumberStyle:NSNumberFormatterCurrencyStyle];
     [mailBody appendString:@"https://itunes.apple.com/us/app/we-all-pay/id642135963?mt=8&uo=4\n\n"];
     
@@ -89,7 +90,7 @@
     NSString *iSuggestString = NSLocalizedString(@"EMAIL_I_SUGGEST", @"I suggest the following solution.");
     [mailBody appendFormat:@"\n%@\n", iSuggestString];
     for (MCReturnPayment *rp in _solution) {
-        [mailBody appendFormat:@"%@\n", [rp stringForMail]];
+        [mailBody appendFormat:@"%@\n", [rp stringForMailIn:[_tonightsBill mainCurrency]]];
     }
     [mailBody appendFormat:@"\n"];
     [mailBody appendFormat:@"%@.", NSLocalizedString(@"EMAIL_FINAL SENTENCE", @"If you have any remarks please let me know.")];

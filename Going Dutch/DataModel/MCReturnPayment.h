@@ -6,9 +6,10 @@
 //  Copyright (c) 2013 Mark Cornelisse. All rights reserved.
 //
 
-#import <Foundation/Foundation.h>
+@import Foundation;
 
 @class MCPerson;
+@class MCCurrency;
 
 @interface MCReturnPayment : NSObject
 {
@@ -20,6 +21,6 @@
 @property (nonatomic, strong) NSNumber *money;
 
 - (id)initWithPayer:(MCPerson *)p paysTo:(MCPerson *)r amountOfMoney:(NSNumber *)m;
-- (NSString *)stringForMail;
+- (NSString *)stringForMailIn:(MCCurrency *)currency;
 
 @end

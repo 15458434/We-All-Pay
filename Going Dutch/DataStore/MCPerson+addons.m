@@ -201,7 +201,6 @@
     [newEmailAddress setEmailAddress:newEmailAddressString];
     [newEmailAddress setSelected:@YES];
     [self setDateModified:[NSDate date]];
-    
 }
 
 - (MCEmailAddress *)getDefaultEmailAddressObject
@@ -304,6 +303,24 @@
     for (MCEmailAddress *ea in copyOfEmailAddresses) {
         [MCEmailAddress deleteEmailAddress:ea];
     }
+}
+
+#pragma mark - Getter and setter stuff.
+
+- (NSNumber *)totalSumPaid
+{
+    NSFetchRequest *fetchRequest = [NSFetchRequest fetchRequestWithEntityName:NSStringFromClass([MCPayment class])];
+    fetchRequest.predicate = [NSPredicate predicateWithFormat:@"payingPerson = %@", self];
+    fetchRequest.sortDescriptors = @[[NSSortDescriptor sortDescriptorWithKey:@"dateCreated" ascending:YES]];
+    
+    NSError *error = nil;
+    NSArray *fetchResult = [[self managedObjectContext] executeFetchRequest:fetchRequest error:&error];
+    if (error) {
+        NSLog(@"%@: error fetching: %@", self, error);
+        return nil;
+    }
+    
+    return [fetchResult valueForKeyPath:@"@sum.moneyInMainCurrency"];
 }
 
 #pragma mark - NSManagedObject stuff

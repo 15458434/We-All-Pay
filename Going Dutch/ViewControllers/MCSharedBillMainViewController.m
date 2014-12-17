@@ -18,6 +18,8 @@
 
 @interface MCSharedBillMainViewController ()
 
+
+@property (strong, nonatomic) MCSharedBillPageViewController *pageViewController;
 @property (nonatomic, strong) MCSharedBill *writableTonightsBill;
 
 @end
@@ -38,6 +40,12 @@
         [[self navigationItem] setRightBarButtonItem:editButton];
     }
 }
+
+- (IBAction)pageViewControllerTapped:(id)sender
+{
+    [_pageViewController pageControlTapped:sender];
+}
+
 
 #pragma mark - From UIViewController+WeAllPayStore
 
@@ -64,6 +72,9 @@
 
 - (void)viewDidLoad
 {
+#if DEBUG
+    NSLog(@"%@ viewDidLoad", self);
+#endif
     [super viewDidLoad];
     // Do any additional setup after loading the view.
     [[self navigationController] setToolbarHidden:YES animated:YES];
@@ -78,6 +89,7 @@
     } else {
         _currentView = MCSelectSharedBillTableView;
     }
+    _pageViewController.tonightsBill = _tonightsBill;
 }
 
 - (void)viewWillAppear:(BOOL)animated
@@ -134,10 +146,15 @@
 // In a storyboard-based application, you will often want to do a little preparation before navigation
 - (void)prepareForSegue:(UIStoryboardSegue *)segue sender:(id)sender
 {
+#if DEBUG
+    NSLog(@"prepareForSegue: %@", [segue identifier]);
+#endif
     // Get the new view controller using [segue destinationViewController].
     // Pass the selected object to the new view controller.
     
     if ([[segue identifier] isEqualToString:@"pageViewController"]) {
+        _pageViewController = (MCSharedBillPageViewController *)[segue destinationViewController];
+        _pageViewController.pageControl = _pageIndicator;
         NSManagedObjectContext *backgroundContext = [[MCWeAllPayStoreController defaultStore] backgroundThreadContext];
         [backgroundContext performBlock:^{
             id<MCTonightsBillTransfer> destination = [segue destinationViewController];

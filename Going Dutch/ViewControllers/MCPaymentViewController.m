@@ -19,6 +19,11 @@
 #import "MCPaymentPresenceTableViewCell_iPhone.h"
 #import "MCDismissMeBlockProtocol.h"
 
+#import "MCCategoryPictureStoreController.h"
+#import "MCCategoryPictureObject.h"
+
+#import "MCWhoPayingUserDefaultsStoreInterface.h"
+
 typedef NS_ENUM(BOOL, ChildViewOpened) {
     isNotOpened,
     isOpened
@@ -26,6 +31,9 @@ typedef NS_ENUM(BOOL, ChildViewOpened) {
 
 @interface MCPaymentViewController ()
 
+@property (weak, nonatomic) IBOutlet UIButton *categoryButton;
+@property (weak, nonatomic) IBOutlet UIImageView *payerPicture;
+@property (weak, nonatomic) IBOutlet UIImageView *categoryView;
 @property (nonatomic) ChildViewOpened selectCurrencyTableViewController;
 
 @end
@@ -41,7 +49,7 @@ typedef NS_ENUM(BOOL, ChildViewOpened) {
         [itemView endEditing:YES];
         [itemView setText:[_thisPayment descriptionOfPayment]];
     }
-    if ([payerView isFirstResponder]) {
+    if ([payerNameField isFirstResponder]) {
         [self cancelPersonPicker:self];
     }
     if ([paidView isFirstResponder]) {
@@ -63,7 +71,7 @@ typedef NS_ENUM(BOOL, ChildViewOpened) {
 - (IBAction)mainDoneButtonPressed:(id)sender
 {
     NSLog(@"MCPaymentViewController: Done button pressed.");
-    if ([payerView isFirstResponder]) {
+    if ([payerNameField isFirstResponder]) {
         [self donePersonPicker:self];
     }
     if ([paidView isFirstResponder]) {
@@ -79,7 +87,12 @@ typedef NS_ENUM(BOOL, ChildViewOpened) {
         [[MCWeAllPayStoreController defaultStore] endUndoGroup];
     }
     [[MCWeAllPayStoreController defaultStore] saveMainThreadContext];
-    [[[self navigationController] presentingViewController] dismissViewControllerAnimated:YES completion:nil];
+    [[[self navigationController] presentingViewController] dismissViewControllerAnimated:YES completion:^{
+        MCPerson *nextPayer = (MCPerson *)[[_tonightsBill fetchPeoplePresentOrderedByAmountPaid:YES] firstObject];
+        MCWhoPayingUserDefaultsStoreInterface *nextStore = [[MCWhoPayingUserDefaultsStoreInterface alloc] initWithTonightsBillUUID:_tonightsBill.uniqueBillId withTripName:_tonightsBill.tripName andTheNextPayerID:nextPayer.uniquePersonId withFullName:nextPayer.getFullName];
+        [nextStore storeToDefaults];
+        [[NCWidgetController widgetController] setHasContent:YES forWidgetWithBundleIdentifier:MCWhoIsPayingNextBundleIdentifier];
+    }];
 }
 
 - (IBAction)currencySelectionPressed:(id)sender
@@ -98,13 +111,13 @@ typedef NS_ENUM(BOOL, ChildViewOpened) {
 {
     // Set the text of the textView back and resign first responder
     peoplePickerCancelled = YES;
-    [payerView setText:[[_thisPayment payingPerson] getFullName]];
+    [payerNameField setText:[[_thisPayment payingPerson] getFullName]];
     if ([_thisPayment payingPerson]) {
         _payerPicture.image = _thisPayment.payingPerson.picture;
     } else {
         _payerPicture.image = nil;
     }
-    [payerView resignFirstResponder];
+    [payerNameField resignFirstResponder];
 }
 
 - (void)donePersonPicker:(id)selector
@@ -119,7 +132,7 @@ typedef NS_ENUM(BOOL, ChildViewOpened) {
         [_thisPayment setDateModified:nu];
 //        [[[self navigationItem] rightBarButtonItem] setEnabled:YES];
     }
-    [payerView resignFirstResponder];
+    [payerNameField resignFirstResponder];
 }
 
 - (void)cancelNumberPad:(id)selector
@@ -187,26 +200,6 @@ typedef NS_ENUM(BOOL, ChildViewOpened) {
     return UIStatusBarStyleLightContent;
 }
 
-//- (void)setCircularImageOnPictureView:(UIImage *)image
-//{
-//    __weak MCPaymentViewController *weakSelf = self;
-//    
-//    dispatch_queue_t imageProcessQueue;
-//    imageProcessQueue = dispatch_queue_create("imageProcessQueue", NULL);
-//    
-//    dispatch_async(imageProcessQueue, ^{
-//        CGRect circularImageRect = CGRectMake(0, 0, 60, 60);
-//        UIImage *circularImage = [MCTools cutCircularImageFrom:image toDestinationRect:circularImageRect];
-//        dispatch_async(dispatch_get_main_queue(), ^{
-//            MCPaymentViewController *strongSelf = weakSelf;
-//            if (strongSelf) {
-//                [[strongSelf payerPicture] setImage:circularImage];
-//                [[strongSelf payerPicture] setNeedsDisplay];
-//            }
-//        });
-//    });
-//}
-
 - (void)tappedInTheBackground:(id)selector
 {
     kindOfPaidFieldDismiss = backgroundTapped;
@@ -219,8 +212,8 @@ typedef NS_ENUM(BOOL, ChildViewOpened) {
         [paidView resignFirstResponder];
     } else if ([itemView isFirstResponder]) {
         [itemView resignFirstResponder];
-    } else if ([payerView isFirstResponder]) {
-        [payerView resignFirstResponder];
+    } else if ([payerNameField isFirstResponder]) {
+        [payerNameField resignFirstResponder];
     }
 }
 
@@ -236,7 +229,7 @@ typedef NS_ENUM(BOOL, ChildViewOpened) {
 
 - (void)pickerView:(UIPickerView *)pickerView didSelectRow:(NSInteger)row inComponent:(NSInteger)component
 {
-    [payerView setText:[listOfPeople[row] getFullName]];
+    [payerNameField setText:[listOfPeople[row] getFullName]];
     [_thisPayment setPayingPerson:listOfPeople[row]];
     _payerPicture.image = [listOfPeople[row] picture];
 }
@@ -265,7 +258,7 @@ typedef NS_ENUM(BOOL, ChildViewOpened) {
 
 - (BOOL)textFieldShouldBeginEditing:(UITextField *)textField
 {
-    if (textField == payerView) {
+    if (textField == payerNameField) {
         // TODO: Better UI solution for the user.
         if ([[_tonightsBill peoplePresent] count] == 0) {
             NSLog(@"No people present on _tonightsBill, editing this textField is not allowed.");
@@ -290,7 +283,7 @@ typedef NS_ENUM(BOOL, ChildViewOpened) {
         [paidView setText:thisPaymentMoneyString];
     }
     
-    if (textField == payerView) {
+    if (textField == payerNameField) {
         [[MCWeAllPayStoreController defaultStore] beginUndoGroupWithoutRegistration];
         peoplePickerCancelled = NO;
         NSInteger row = 0;
@@ -303,7 +296,7 @@ typedef NS_ENUM(BOOL, ChildViewOpened) {
         } else {
             row = [personPickerView selectedRowInComponent:0];
         }
-        [payerView setText:[listOfPeople[row] getFullName]];
+        [payerNameField setText:[listOfPeople[row] getFullName]];
         _payerPicture.image = [listOfPeople[row] picture];
         [personPickerView selectRow:row inComponent:0 animated:YES];
         kindOfPaidFieldDismiss = otherTextFieldSelected;
@@ -338,14 +331,14 @@ typedef NS_ENUM(BOOL, ChildViewOpened) {
             // Restore stored value
             [paidView setText:[_thisPayment getMoneyValueInCurrencyAsAString]];
         }
-    } else if (textField == payerView) {
+    } else if (textField == payerNameField) {
         if (!peoplePickerCancelled) {
             [[MCWeAllPayStoreController defaultStore] endUndoGroupWithoutRegistration];
             [self donePersonPicker:self];
         } else {
             peoplePickerCancelled = YES;
             [[MCWeAllPayStoreController defaultStore] endUndoGroupAndUndoWithoutRegistration];
-            [payerView setText:[[_thisPayment payingPerson] getFullName]];
+            [payerNameField setText:[[_thisPayment payingPerson] getFullName]];
             if ([_thisPayment payingPerson]) {
                 _payerPicture.image = _thisPayment.payingPerson.picture;
             } else {
@@ -397,10 +390,6 @@ typedef NS_ENUM(BOOL, ChildViewOpened) {
         @throw [NSException exceptionWithName:@"tonightsBill missing" reason:@"thisPayment didn't receive tonightsBill." userInfo:nil];
     }
     
-    // Create an array sorted on people's firstName.
-//    NSSortDescriptor *sortDescriptor = [NSSortDescriptor sortDescriptorWithKey:@"person.firstName" ascending:YES];
-//    _paymentPresenceArray = [[_thisPayment peopleSharingPayment] sortedArrayUsingDescriptors:@[sortDescriptor]];
-    
     // Create Toolbar for the input accessory of payerView
     CGRect toolbarRect = CGRectMake(0, 0, [[self view] bounds].size.width, 44);
     UIToolbar *inputAccessoryPickerView = [[UIToolbar alloc] initWithFrame:toolbarRect];
@@ -419,8 +408,8 @@ typedef NS_ENUM(BOOL, ChildViewOpened) {
     [personPickerView setDelegate:self];
     [personPickerView setDataSource:self];
     [personPickerView setShowsSelectionIndicator:YES];
-    [payerView setInputView:personPickerView];
-    [payerView setInputAccessoryView:inputAccessoryPickerView];
+    [payerNameField setInputView:personPickerView];
+    [payerNameField setInputAccessoryView:inputAccessoryPickerView];
     
     UIToolbar *inputAccossoryNumberPad = [[UIToolbar alloc] initWithFrame:toolbarRect];
     cancelButton = [[UIBarButtonItem alloc] initWithBarButtonSystemItem:UIBarButtonSystemItemCancel
@@ -472,14 +461,21 @@ typedef NS_ENUM(BOOL, ChildViewOpened) {
     [[self tableView] reloadData];
     
     // Fill in the form if data is present.
-    [payerView setText:[[_thisPayment payingPerson] getFullName]];
-    [payerView setDelegate:self];
+    [payerNameField setText:[[_thisPayment payingPerson] getFullName]];
+    [payerNameField setDelegate:self];
     [itemView setText:[_thisPayment descriptionOfPayment]];
     if ([_thisPayment payingPerson]) {
         _payerPicture.image = _thisPayment.payingPerson.picture;
     }
-
-    if (!_isNew) {
+    // Get category picture.
+    NSArray *pictureObjects = [[MCCategoryPictureStoreController sharedController] pictureObjects];
+    MCCategoryPictureObject *categoryObject = pictureObjects[[[_thisPayment categoryId] shortValue]];
+    if (categoryObject.categoryId > 0) {
+        _categoryView.image = categoryObject.largePicture;
+        [_categoryButton setTitle:categoryObject.categoryDescription forState:UIControlStateNormal];
+    }
+    
+    if (!_isNew || _selectCurrencyTableViewController == isOpened) {
         paidView.text = [_thisPayment getMoneyValueInCurrencyAsAString];
     }
 }
@@ -622,9 +618,11 @@ typedef NS_ENUM(BOOL, ChildViewOpened) {
     [cell setThisCellsPaymentPresence:thisCellsPresence];
     
     // Set the cell alignment to headerView stuff
-    NSLayoutConstraint *bazinga = [NSLayoutConstraint constraintWithItem:payerView attribute:NSLayoutAttributeLeading relatedBy:NSLayoutRelationEqual toItem:[cell nameLabel] attribute:NSLayoutAttributeLeading multiplier:1.0 constant:-6.0];
+    NSLayoutConstraint *payerViewToCellNameLabel = [NSLayoutConstraint constraintWithItem:payerNameField attribute:NSLayoutAttributeLeading relatedBy:NSLayoutRelationEqual toItem:[cell nameLabel] attribute:NSLayoutAttributeLeading multiplier:1.0 constant:-6.0];
+    payerViewToCellNameLabel.identifier = [[thisCellsPresence.person getFullName] stringByAppendingString:@"payerViewToCellNameLabel"];
     NSLayoutConstraint *payerPictureToUser = [NSLayoutConstraint constraintWithItem:_payerPicture attribute:NSLayoutAttributeTrailing relatedBy:NSLayoutRelationEqual toItem:[cell personView] attribute:NSLayoutAttributeTrailing multiplier:1.0 constant:0.0];
-    [[self tableView] addConstraints:@[bazinga, payerPictureToUser]];
+    payerPictureToUser.identifier = [[thisCellsPresence.person getFullName] stringByAppendingString:@"payerPictureToUser"];
+    [[self tableView] addConstraints:@[payerViewToCellNameLabel, payerPictureToUser]];
     
     return cell;
 }
@@ -680,6 +678,12 @@ typedef NS_ENUM(BOOL, ChildViewOpened) {
          NSLog(@"%@, prepareForSegue openSelectCurrency", self);
 #endif
          _selectCurrencyTableViewController = isOpened;
+         id destination = [[segue destinationViewController] viewControllers][0];
+         if ([destination conformsToProtocol:@protocol(MCThisPaymentProtocol)]) {
+             [destination setThisPayment:_thisPayment];
+         }
+     }
+     if ([[segue identifier] isEqualToString:@"selectCategory"]) {
          id destination = [[segue destinationViewController] viewControllers][0];
          if ([destination conformsToProtocol:@protocol(MCThisPaymentProtocol)]) {
              [destination setThisPayment:_thisPayment];

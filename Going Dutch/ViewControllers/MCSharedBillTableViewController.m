@@ -26,6 +26,11 @@
 
 #import "MCReturnPayment.h"
 
+#import "MCCategoryPictureStoreController.h"
+#import "MCCategoryPictureObject.h"
+
+#import "MCWhoPayingUserDefaultsStoreInterface.h"
+
 @interface MCSharedBillTableViewController ()
 
 @property (nonatomic, strong) NSFetchedResultsController *dataController;
@@ -164,6 +169,9 @@
     } else {
         [[emptyMessage bigMessage] setAlpha:1.0];
     }
+    
+    BOOL shouldAppearAsEditing = [_myParent isChildTableViewEditing];
+    [[self tableView] setEditing:shouldAppearAsEditing animated:NO];
 }
 
 - (void)viewDidAppear:(BOOL)animated
@@ -289,6 +297,7 @@
         [[self presentedViewController] dismissViewControllerAnimated:YES completion:nil];
     } else if (result == MFMailComposeResultSent) {
         [[self presentedViewController] dismissViewControllerAnimated:YES completion:nil];
+        [[NCWidgetController widgetController] setHasContent:NO forWidgetWithBundleIdentifier:MCWhoIsPayingNextBundleIdentifier];
     } else if (result == MFMailComposeResultSaved) {
         [[self presentedViewController] dismissViewControllerAnimated:YES completion:nil];
     } else {
@@ -364,9 +373,11 @@
         thisCellsPayerName = NSLocalizedString(@"THISPAYMENTCELL_NOPAYERNAME", @"Someone");
     }
     [[paymentCell namePayerLabel] setText:[NSString stringWithFormat:@"%@%@", thisCellsPayerName, NSLocalizedString(@"PAYMENTCELL_PAYERNAME_EXTRA", @" paid") ]];
-    if ([[thisCellsPayment payingPerson] thumbnail]) {
-        paymentCell.pictureOfPayer.image = thisCellsPayment.payingPerson.thumbnail;
-    }
+    
+    // Get category picture.
+    NSArray *pictureObjects = [[MCCategoryPictureStoreController sharedController] pictureObjects];
+    MCCategoryPictureObject *categoryObject = pictureObjects[[[thisCellsPayment categoryId] shortValue]];
+    paymentCell.pictureOfPayer.image = [categoryObject smallPicture];
     
     NSString *thisCellsDescriptionOfPayment = [thisCellsPayment descriptionOfPayment];
     if (!thisCellsDescriptionOfPayment) {

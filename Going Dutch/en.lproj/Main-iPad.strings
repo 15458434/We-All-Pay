@@ -12,22 +12,22 @@
 "9og-gt-gwG.normalTitle" = "Solve";
 
 /* Class = "IBUINavigationItem"; title = "people and payments"; ObjectID = "Ajb-WY-VLi"; */
-"Ajb-WY-VLi.title" = "people and payments";
+"Ajb-WY-VLi.title" = "People and payments";
 
-/* Class = "IBUITextField"; placeholder = "Event name"; ObjectID = "AkR-Sr-Oah"; */
-"AkR-Sr-Oah.placeholder" = "Event name";
+/* Class = "IBUITextField"; placeholder = "Event name"; ObjectID = "Y5X-Hm-GBF"; */
+"Y5X-Hm-GBF.placeholder" = "Event name";
 
 /* Class = "IBUILabel"; text = "moneyLabel"; ObjectID = "Bus-qo-pqC"; */
 "Bus-qo-pqC.text" = "moneyLabel";
 
 /* Class = "IBUINavigationItem"; title = "payment details"; ObjectID = "Du0-aV-eeD"; */
-"Du0-aV-eeD.title" = "payment details";
+"Du0-aV-eeD.title" = "Payment details";
 
 /* Class = "IBUIButton"; normalTitle = "new event"; ObjectID = "EuC-uT-5WX"; */
 "EuC-uT-5WX.normalTitle" = "New event";
 
 /* Class = "IBUINavigationItem"; title = "events"; ObjectID = "Gep-Z6-3Aj"; */
-"Gep-Z6-3Aj.title" = "events";
+"Gep-Z6-3Aj.title" = "Events";
 
 /* Class = "IBUIBarButtonItem"; title = "Item"; ObjectID = "GfK-Qn-5Kr"; */
 "GfK-Qn-5Kr.title" = "Item";
@@ -36,7 +36,7 @@
 "H3d-ki-tdJ.normalTitle" = "Contacts";
 
 /* Class = "IBUITextField"; placeholder = "last name"; ObjectID = "JRX-hO-2n8"; */
-"JRX-hO-2n8.placeholder" = "last name";
+"JRX-hO-2n8.placeholder" = "Last name";
 
 /* Class = "IBUILabel"; text = "emailAddress"; ObjectID = "KBE-ZP-DFn"; */
 "KBE-ZP-DFn.text" = "emailAddress";
@@ -54,7 +54,7 @@
 "Nxq-6f-abw.normalTitle" = "Add person";
 
 /* Class = "IBUINavigationItem"; title = "events"; ObjectID = "T8K-rj-EA0"; */
-"T8K-rj-EA0.title" = "events";
+"T8K-rj-EA0.title" = "Events";
 
 /* Class = "IBUILabel"; text = "moneyLabel"; ObjectID = "UjB-LL-77p"; */
 "UjB-LL-77p.text" = "moneyLabel";
@@ -84,7 +84,7 @@
 "eD2-1r-4uR.text" = "nameLabel";
 
 /* Class = "IBUITextField"; placeholder = "emailaddress"; ObjectID = "eax-dw-aIf"; */
-"eax-dw-aIf.placeholder" = "emailaddress";
+"eax-dw-aIf.placeholder" = "Emailaddress";
 
 /* Class = "IBUIButton"; normalTitle = "add payment"; ObjectID = "egw-0d-cT1"; */
 "egw-0d-cT1.normalTitle" = "Add payment";
@@ -96,7 +96,7 @@
 "hKu-l5-7vA.text" = "extraLabel";
 
 /* Class = "IBUITextField"; placeholder = "first name"; ObjectID = "nPF-0g-HeJ"; */
-"nPF-0g-HeJ.placeholder" = "first name";
+"nPF-0g-HeJ.placeholder" = "First name";
 
 /* Class = "IBUILabel"; text = "Label"; ObjectID = "pSW-A7-HzN"; */
 "pSW-A7-HzN.text" = "Label";
@@ -108,7 +108,7 @@
 "rt5-oo-0IR.text" = "Label";
 
 /* Class = "IBUILabel"; text = "full name"; ObjectID = "vSV-5M-Ipk"; */
-"vSV-5M-Ipk.text" = "full name";
+"vSV-5M-Ipk.text" = "Full name";
 
 /* Class = "IBUILabel"; text = "payerField"; ObjectID = "xU7-yf-2N6"; */
 "xU7-yf-2N6.text" = "payerField";

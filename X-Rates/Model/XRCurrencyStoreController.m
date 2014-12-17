@@ -123,7 +123,7 @@ NSString * const XRCurrencyDatabaseVersionKey = @"XRCurrencyDatabaseVersionKey";
         NSDictionary *availableCurrencies = [MCxRatesController getCurrencyDictionary];
         NSArray *availableCurrencyCodes = [availableCurrencies allKeys];
 #if DEBUG
-        NSLog(@"%d currencies available", availableCurrencies.count);
+        NSLog(@"%lu currencies available", availableCurrencies.count);
 #endif
         for (NSString *currencyCode in availableCurrencyCodes) {
             // For each currencyCode add it.
@@ -191,6 +191,20 @@ NSString * const XRCurrencyDatabaseVersionKey = @"XRCurrencyDatabaseVersionKey";
     }];
 }
 
+- (NSArray *)fetchAllCurrenciesForContext:(NSManagedObjectContext *)context
+{
+    // TODO: Make a unit test for this.
+    NSFetchRequest *request = [NSFetchRequest fetchRequestWithEntityName:@"XRCurrency"];
+    request.sortDescriptors = @[[NSSortDescriptor sortDescriptorWithKey:@"name" ascending:YES]];
+    request.propertiesToFetch = @[ @"name", @"code", @"symbol"];
+    NSError *error;
+    NSArray *results = [context executeFetchRequest:request error:&error];
+    if (error) {
+        NSLog(@"Error fetching all currencies: %@", error);
+    }
+    return results;
+}
+
 #if TARGET_OS_IPHONE
 - (NSFetchedResultsController *)getFetchedResultsControllerForDelegate:(id)delegate
 {
@@ -250,6 +264,20 @@ NSString * const XRCurrencyDatabaseVersionKey = @"XRCurrencyDatabaseVersionKey";
         [_mainQueueContext setPersistentStoreCoordinator:coordinator];
     }
     return _mainQueueContext;
+}
+
+- (NSManagedObjectContext *)secondMainQueueContext
+{
+    if (_secondMainQueueContext != nil) {
+        return _secondMainQueueContext;
+    }
+    
+    NSPersistentStoreCoordinator *coordinator = [self persistentStoreCoordinator];
+    if (coordinator != nil) {
+        _secondMainQueueContext = [[NSManagedObjectContext alloc] initWithConcurrencyType:NSMainQueueConcurrencyType];
+        [_secondMainQueueContext setPersistentStoreCoordinator:coordinator];
+    }
+    return _secondMainQueueContext;
 }
 
 // Returns the managed object context for the application.

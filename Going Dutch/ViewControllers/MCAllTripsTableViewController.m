@@ -18,14 +18,25 @@
 #import "MCWeAllPayStoreController.h"
 #import "MCSharedBill+addons.h"
 #import "MCPerson+addons.h"
+#import "MCCurrency+addons.h"
 
 #import "MCTonightsBillTransfer.h"
 
 #import "UIViewController+WeAllPayStore.h"
 
+#import "MCWhoPayingUserDefaultsStoreInterface.h"
+
+typedef NS_ENUM(BOOL, MCTonightsBillStatus) {
+    isClosed,
+    isOpened
+};
+
 @interface MCAllTripsTableViewController ()
 
 @property (nonatomic, strong) NSFetchedResultsController *dataController;
+@property (nonatomic) MCTonightsBillStatus isATonightsBillOpened;
+
+@property (nonatomic) BOOL isEmptyMessageShownInstantForFirstBoot;
 
 @end
 
@@ -119,6 +130,14 @@
     return self;
 }
 
+- (void)awakeFromNib
+{
+    [super awakeFromNib];
+    
+    _isATonightsBillOpened = isClosed;
+    _isEmptyMessageShownInstantForFirstBoot = false;
+}
+
 - (void)viewDidLoad
 {
     [super viewDidLoad];
@@ -158,13 +177,19 @@
     [[titleView mainLabel] setTextColor:[UIColor whiteColor]];
     [[titleView subLabel] setTextColor:[UIColor whiteColor]];
      */
+    if (_isATonightsBillOpened == isOpened) {
+        _isATonightsBillOpened = isClosed;
+    }
     
     if (!_dataController) {
         _dataController = [[MCWeAllPayStoreController defaultStore] allTripsDataControllerForDelegate:self];
         [self performFetch];
     }
     
-    if ([[MCWeAllPayStoreController defaultStore] isDocumentStateNormal]) {
+    if (_isEmptyMessageShownInstantForFirstBoot == false) {
+        [self setEmptyMessageNow];
+        _isEmptyMessageShownInstantForFirstBoot = true;
+    } else {
         [self setEmptyMessage];
     }
     
@@ -255,7 +280,7 @@
 
 - (void)controllerWillChangeContent:(NSFetchedResultsController *)controller
 {
-    if (self.isViewLoaded && self.view.window) {
+    if (self.isViewLoaded && self.view.window && _isATonightsBillOpened == isClosed) {
         [[self tableView] beginUpdates];
     }
 
@@ -263,7 +288,10 @@
 
 - (void)controllerDidChangeContent:(NSFetchedResultsController *)controller
 {
-    if (self.isViewLoaded && self.view.window) {
+    if (self.isViewLoaded && self.view.window && _isATonightsBillOpened == isClosed) {
+#if DEBUG
+        NSLog(@"executing tableView endUpdates");
+#endif
         [[self tableView] endUpdates];
     }
 
@@ -271,7 +299,7 @@
 
 - (void)controller:(NSFetchedResultsController *)controller didChangeObject:(id)anObject atIndexPath:(NSIndexPath *)indexPath forChangeType:(NSFetchedResultsChangeType)type newIndexPath:(NSIndexPath *)newIndexPath
 {
-    if (self.isViewLoaded && self.view.window) {
+    if (self.isViewLoaded && self.view.window && _isATonightsBillOpened == isClosed) {
         switch(type) {
                 
             case NSFetchedResultsChangeInsert:
@@ -326,7 +354,7 @@
 
     if ([thisTrip areAllExchangeRatesValid]) {
         
-        NSNumberFormatter *nf = [[NSNumberFormatter alloc] init];
+        NSNumberFormatter *nf = [[thisTrip mainCurrency] numberFormatter];
         [nf setNumberStyle:NSNumberFormatterCurrencyStyle];
         NSString *moneyString = [nf stringFromNumber:[thisTrip totalSumOfMoneyOfThisSharedBill]];
         [[allTripsTableViewCell totalCostLabel] setHidden:NO];
@@ -376,6 +404,13 @@
 {
     if (editingStyle == UITableViewCellEditingStyleDelete) {
         MCSharedBill *toBeDeleteSharedBill = [_dataController objectAtIndexPath:indexPath];
+        
+        // If currentToBeDeleted tonightsBill the same as the one in the Today Extension delete content.
+        NSString *uniqueID = toBeDeleteSharedBill.uniqueBillId;
+        MCWhoPayingUserDefaultsStoreInterface *someStore = [[MCWhoPayingUserDefaultsStoreInterface alloc] init];
+        if ([uniqueID isEqualToString:someStore.tonightsBillUUID]) {
+            [[NCWidgetController widgetController] setHasContent:NO forWidgetWithBundleIdentifier:MCWhoIsPayingNextBundleIdentifier];
+        }
         [MCSharedBill deleteSharedbill:toBeDeleteSharedBill];
         [[MCWeAllPayStoreController defaultStore] saveMainThreadContext];
     }
@@ -426,6 +461,15 @@
 
 - (void)prepareForSegue:(UIStoryboardSegue *)segue sender:(id)sender
 {
+#if DEBUG
+    NSLog(@"prepareForSegue: %@", [segue identifier]);
+#endif
+    if ([[segue identifier] isEqualToString:@"newTonightsBill"]) {
+        _isATonightsBillOpened = isOpened;
+    }
+    if ([[segue identifier] isEqualToString:@"openTonightsBill"]) {
+        _isATonightsBillOpened = isOpened;
+    }
     MCSharedBill *theBill;
     NSIndexPath *indexPathOfSelectedRow = [[self tableView] indexPathForSelectedRow];
     if (indexPathOfSelectedRow) {

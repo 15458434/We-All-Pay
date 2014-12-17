@@ -73,7 +73,7 @@ NSUInteger const MCCurrencyTypeSelection = MCCurrencyTypeCurrency | MCCurrencyTy
     NSMutableDictionary *currencyDictionaryFromPlist = [[NSMutableDictionary alloc] initWithContentsOfFile:path];
 #if DEBUG
     NSUInteger totalAmountInPlist = [[currencyDictionaryFromPlist allKeys] count];
-    NSLog(@"Total of %d in plist", totalAmountInPlist);
+    NSLog(@"Total of %lu in plist", totalAmountInPlist);
 #endif
     NSMutableArray *keyToBeDeletedObjects = [[NSMutableArray alloc] init];
     for (NSString *keyToCurrencyObject in currencyDictionaryFromPlist) {
@@ -257,8 +257,10 @@ NSUInteger const MCCurrencyTypeSelection = MCCurrencyTypeCurrency | MCCurrencyTy
 #if TARGET_OS_IPHONE
                     NSLog(@"JSON Error: %@", [jsonError localizedDescription]);
 #elif TARGET_OS_MAC
+#ifndef EMC_WIDGET
                     NSAlert *jsonAlert = [NSAlert alertWithError:jsonError];
                     [jsonAlert runModal];
+#endif
 #endif
                 } else {
                     NSNumberFormatter *numberFormatter = [NSNumberFormatter new];
@@ -282,14 +284,16 @@ NSUInteger const MCCurrencyTypeSelection = MCCurrencyTypeCurrency | MCCurrencyTy
                 NSLog(@"http response error %ld", (long)[httpResp statusCode]);
             }
         } else {
+            NSLog(@"Error: %@", error);
             completionBlock(nil);
 #if TARGET_OS_IPHONE
 #elif TARGET_OS_MAC
-            
+#ifndef EMC_WIDGET
             dispatch_async(dispatch_get_main_queue(), ^{
                 NSAlert *alert = [NSAlert alertWithError:error];
                 [alert runModal];
             });
+#endif
 #endif
         }
     }];
@@ -340,11 +344,13 @@ NSUInteger const MCCurrencyTypeSelection = MCCurrencyTypeCurrency | MCCurrencyTy
 #if TARGET_OS_IPHONE
                     NSLog(@"JSON Error: %@", [jsonError localizedDescription]);
 #elif TARGET_OS_MAC
+#ifndef EMC_WIDGET
                     dispatch_async(dispatch_get_main_queue(), ^{
                         completionBlock(nil);
                         NSAlert *jsonAlert = [NSAlert alertWithError:jsonError];
                         [jsonAlert runModal];
                     });
+#endif
 #endif
                 } else {
 //                    NSNumber *avg24h = [exchangeRateJSON objectForKey:@"24h_avg"];
@@ -378,10 +384,12 @@ NSUInteger const MCCurrencyTypeSelection = MCCurrencyTypeCurrency | MCCurrencyTy
         } else {
 #if TARGET_OS_IPHONE
 #elif TARGET_OS_MAC
+#ifndef EMC_WIDGET
             dispatch_async(dispatch_get_main_queue(), ^{
                 NSAlert *alert = [NSAlert alertWithError:error];
                 [alert runModal];
             });
+#endif
 #endif
         }
     }];

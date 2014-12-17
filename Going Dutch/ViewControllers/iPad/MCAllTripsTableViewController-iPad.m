@@ -14,12 +14,15 @@
 
 #import "MCWeAllPayStoreController.h"
 #import "MCSharedBill+addons.h"
+#import "MCCurrency+addons.h"
 
 #import "MCTonightsBillTransfer.h"
 
 @interface MCAllTripsTableViewController_iPad ()
 
 @property (nonatomic, strong) NSFetchedResultsController *dataController;
+
+@property (nonatomic) BOOL isEmptyMessageShownInstantForFirstBoot;
 
 @end
 
@@ -29,6 +32,9 @@
 
 - (void)performFetchAndReloadTableView:(NSNotification *)notification
 {
+#if DEBUG
+    NSLog(@"This should not be executed.");
+#endif
     UIManagedDocument *weAllPayDocument = [[MCWeAllPayStoreController defaultStore] weAllPayStoreDocument];
     if ([weAllPayDocument documentState] == UIDocumentStateNormal) {
         [self performFetch];
@@ -92,6 +98,12 @@
     return self;
 }
 
+- (void)awakeFromNib
+{
+    [super awakeFromNib];
+    _isEmptyMessageShownInstantForFirstBoot = false;
+}
+
 - (void)viewDidLoad
 {
     [super viewDidLoad];
@@ -119,6 +131,12 @@
         _dataController = [[MCWeAllPayStoreController defaultStore] allTripsDataControllerForDelegate:self];
         [self performFetch];
         [[self tableView] reloadData];
+        if (_isEmptyMessageShownInstantForFirstBoot == false) {
+            [self setEmptyMessageNow];
+            _isEmptyMessageShownInstantForFirstBoot = true;
+        } else {
+            [self setEmptyMessage];
+        }
     }
 //    UIManagedDocument *weAllPayDocument = [[MCWeAllPayStoreController defaultStore] weAllPayStoreDocument];
 //    if (![[MCWeAllPayStoreController defaultStore] isDocumentStateNormal]) {
@@ -273,7 +291,7 @@
     if ([thisTrip areAllExchangeRatesValid]) {
         [[allTripsTableViewCell activityIndicator] stopAnimating];
         [[allTripsTableViewCell totalCostLabel] setHidden:NO];
-        NSNumberFormatter *nf = [[NSNumberFormatter alloc] init];
+        NSNumberFormatter *nf = [[thisTrip mainCurrency] numberFormatter];
         [nf setNumberStyle:NSNumberFormatterCurrencyStyle];
         NSString *moneyString = [nf stringFromNumber:[thisTrip totalSumOfMoneyOfThisSharedBill]];
         [[allTripsTableViewCell totalCostLabel] setText:moneyString];

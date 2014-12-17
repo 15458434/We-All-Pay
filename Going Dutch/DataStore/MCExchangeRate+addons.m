@@ -20,7 +20,12 @@
 
 - (BOOL)retrieveExchangeRateFromWeb
 {
-    return [self retrieveExchangeRateFromWebWithCompletionHandler:nil];
+    __weak typeof(self) weakSelf = self;
+    return [self retrieveExchangeRateFromWebWithCompletionHandler:^(NSDictionary *exchangeRateResult) {
+        if (!exchangeRateResult) {
+            NSLog(@"%@ something went wrong fetching exchangeRate.", weakSelf);
+        }
+    }];
 }
 
 - (BOOL)retrieveExchangeRateFromWebWithCompletionHandler:(void (^)(NSDictionary *))completionBlock
@@ -29,12 +34,22 @@
     [self setStatus:[NSNumber numberWithShort:fetchingStatus]];
     NSLog(@"MCExchangeRate Status is fetching.");
     [[MCWeAllPayStoreController defaultStore] updateXRate:self withCompletionHandler:^(NSDictionary *exchangeRateResult) {
-        MCExchangeRateStatus exchangeRateFetchStatus = valid;
-        [self setStatus:[NSNumber numberWithShort:exchangeRateFetchStatus]];
-        NSLog(@"MCExchangeRate Status is valid.");
-        if (completionBlock) {
-            completionBlock(exchangeRateResult);
+        if (exchangeRateResult) {
+            MCExchangeRateStatus exchangeRateFetchStatus = valid;
+            [self setStatus:[NSNumber numberWithShort:exchangeRateFetchStatus]];
+            NSLog(@"MCExchangeRate Status is valid.");
+            if (completionBlock) {
+                completionBlock(exchangeRateResult);
+            }
+        } else {
+            MCExchangeRateStatus exchangeRateFetchStatus = invalid;
+            [self setStatus:[NSNumber numberWithShort:exchangeRateFetchStatus]];
+            NSLog(@"MCExchangeRate status is invalid");
+            if (completionBlock) {
+                completionBlock(nil);
+            }
         }
+       
     }];
     return YES;
 }

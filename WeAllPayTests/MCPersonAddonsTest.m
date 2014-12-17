@@ -14,6 +14,7 @@
 #import "MCEmailAddress+addons.h"
 #import "MCPayment+addons.h"
 #import "MCExchangeRate+addons.h"
+#import "XRCurrencyStoreController.h"
 
 @interface MCPersonAddonsTest : XCTestCase
 {
@@ -29,8 +30,15 @@
 {
     [super setUp];
     // Put setup code here. This method is called before the invocation of each test method in the class.
-    mainController = [MCWeAllPayStoreController defaultStore];
-    _context = [mainController mainThreadContext];
+    NSManagedObjectModel *managedObjectModel = [NSManagedObjectModel mergedModelFromBundles:nil];
+    NSPersistentStoreCoordinator *persistentStoreCoordinator = [[NSPersistentStoreCoordinator alloc] initWithManagedObjectModel:managedObjectModel];
+    NSError *error;
+    NSPersistentStore *persistentStore = [persistentStoreCoordinator addPersistentStoreWithType:NSInMemoryStoreType configuration:nil URL:nil options:nil error:&error];
+    XCTAssertTrue(persistentStore, @"Something went wrong opening the In Memory Store: %@", [error localizedDescription]);
+    _context = [[NSManagedObjectContext alloc] initWithConcurrencyType:NSMainQueueConcurrencyType];
+    [_context setPersistentStoreCoordinator:persistentStoreCoordinator];
+    
+    [XRCurrencyStoreController populateCurrencyDataBaseIfEmptyForContext:_context];
 }
 
 - (void)tearDown
@@ -57,22 +65,14 @@
     NSString *emailAddress3Mark = @"m.p.cornelisse@gmail.com";
     [thisPerson addNewDefaultEmailAddressFromAString:emailAddress3Mark];
     XCTAssertTrue([[thisPerson defaultEmailAddress] isEqualToString:emailAddress3Mark], @"addNewDefaultEmailAddress failes to set the right defaultEmailAddress");
-    
-    // Create a fetch request for MCEmailAddress
-    NSFetchRequest *request = [NSFetchRequest fetchRequestWithEntityName:@"MCEmailAddress"];
-    
-    // Select only emailAddresses for person
-    NSPredicate *predicate1 = [NSPredicate predicateWithFormat:@"owner = %@", thisPerson];
-    NSPredicate *predicate2 = [NSPredicate predicateWithFormat:@"selected = %@", @YES];
-    NSPredicate *compoundPredicate = [NSCompoundPredicate andPredicateWithSubpredicates:@[predicate1, predicate2]];
-    [request setPredicate:compoundPredicate];
-    NSError *error;
-    NSArray *emailAddresses;
-    emailAddresses = [_context executeFetchRequest:request error:&error];
-    if (!emailAddresses) {
-        XCTFail(@"No list of email addresses generated");
+
+    NSInteger i = 0;
+    for (MCEmailAddress *email in [thisPerson emailAddress]) {
+        if (email.selected.boolValue) {
+            i++;
+        }
     }
-    XCTAssertTrue([emailAddresses count] == 1, @"More or less then one defaulEmailAddress present.");
+    XCTAssertTrue(i == 1, @"Only one emailaddress should have be default.");
     XCTAssertTrue([[thisPerson emailAddress] count] == 3, @"All emailAddresses have been entered.");
     
     MCEmailAddress *toBeDeletedEmailAddress = [thisPerson getDefaultEmailAddressObject];
@@ -127,6 +127,21 @@
     XCTAssertTrue([mark hasPersonMadePaymentWithInvalidExchangeRates], @"No payment should be valid.");
     thisPayment.exchangeRate.status = [NSNumber numberWithShort:fetching];
     XCTAssertTrue([mark hasPersonMadePaymentWithInvalidExchangeRates], @"No payment should be valid.");
+}
+
+- (void)testTotalSumPaidBy
+{
+    MCSharedBill *tonightsBill = [MCSharedBill addSharedBillToContext:_context];
+    MCPerson *fred = [tonightsBill addPerson];
+    fred.firstName = @"Fred";
+    MCPerson *anna = [tonightsBill addPerson];
+    anna.firstName = @"Marieke";
+    MCPayment *drinks = [tonightsBill addPayment];
+    drinks.payingPerson = fred;
+    drinks.money = @(10);
+    drinks.descriptionOfPayment = @"coffee";
+    NSNumber *totalPaidByFred = fred.totalSumPaid;
+    XCTAssertEqualWithAccuracy(@(10).doubleValue, totalPaidByFred.doubleValue, 0.001);
 }
 
 @end

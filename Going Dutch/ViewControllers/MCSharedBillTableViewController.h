@@ -6,10 +6,14 @@
 //  Copyright (c) 2013 Mark Cornelisse. All rights reserved.
 //
 
-#import <UIKit/UIKit.h>
-#import <CoreData/CoreData.h>
-#import <MessageUI/MessageUI.h>
+@import UIKit;
+@import CoreData;
+@import MessageUI;
+@import NotificationCenter;
+
 #import "MCTonightsBillTransfer.h"
+#import "MCIndexProtocol.h"
+#import "MCIsEditingProtocol.h"
 
 @class MCSharedBill;
 @class MCAllTripsTableViewController;
@@ -24,7 +28,7 @@
 
 @end
 
-@interface MCSharedBillTableViewController : UITableViewController <NSFetchedResultsControllerDelegate, MFMailComposeViewControllerDelegate, UIAlertViewDelegate, UITextFieldDelegate, MCTonightsBillTransfer>
+@interface MCSharedBillTableViewController : UITableViewController <NSFetchedResultsControllerDelegate, MFMailComposeViewControllerDelegate, UIAlertViewDelegate, UITextFieldDelegate, MCTonightsBillTransfer, MCIndexProtocol>
 {
     __strong IBOutlet MCTwoLabelsTitleView *twoLabelTitleView;
     MCTableEmptyMessage *emptyMessage;
@@ -33,15 +37,15 @@
     UIBarButtonItem *returnPaymentButton;
 }
 
-//- (id)initWithSharedBill:(MCSharedBill *)tBill;
-
-
 - (IBAction)mailButtonPressed:(id)sender;
 
+@property (nonatomic, weak) id<MCIsEditingProtocol> myParent;
 @property (nonatomic, weak) id delegate;
 @property (nonatomic, weak) MCSharedBillPageViewController *mailDelegate;
 @property (nonatomic, strong) MCSharedBill *tonightsBill;
 @property (nonatomic, readonly) BOOL didSomethingChange;
+
+@property (nonatomic) NSInteger index;
 
 // Only accessible through backgroundContext
 @property (nonatomic, strong) MCSharedBill *writableTonightsBill;

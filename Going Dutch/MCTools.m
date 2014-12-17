@@ -9,6 +9,10 @@
 #import "MCTools.h"
 #import "MCStoreInterface.h"
 
+#if DEBUG
+BOOL const showAdsInDebugVersion = YES;
+#endif
+
 @implementation MCTools
 
 + (NSString *)createUniqueIdentifierString
@@ -26,8 +30,17 @@
     } else {
         // If proProduct is not purchased show banner.
         if (![[MCStoreInterface defaultStoreInterface] isProProductPurchased]) {
+#if DEBUG
+            if (showAdsInDebugVersion) {
+                NSLog(@"Ads will show in debug version.");
+                [viewController setCanDisplayBannerAds:show];
+            } else {
+                NSLog(@"Ads will not show in debug version.");
+            }
+#else
             NSLog(@"Ads will show.");
             [viewController setCanDisplayBannerAds:show];
+#endif
         } else {
             NSLog(@"Ads will not show.");
         }

@@ -13,10 +13,12 @@
 
 @interface MCPayment : NSManagedObject
 
+@property (nonatomic, retain) NSNumber * categoryId;
 @property (nonatomic, retain) NSDate * dateCreated;
 @property (nonatomic, retain) NSDate * dateModified;
 @property (nonatomic, retain) NSString * descriptionOfPayment;
 @property (nonatomic, retain) NSNumber * money;
+@property (nonatomic, retain) NSNumber * moneyInMainCurrency;
 @property (nonatomic, retain) NSString * uniquePaymentId;
 @property (nonatomic, retain) MCCurrency *currency;
 @property (nonatomic, retain) MCExchangeRate *exchangeRate;

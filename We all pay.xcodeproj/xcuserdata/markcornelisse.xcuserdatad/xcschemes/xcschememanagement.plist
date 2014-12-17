@@ -4,6 +4,11 @@
 <dict>
 	<key>SchemeUserState</key>
 	<dict>
+		<key>EMC Widget.xcscheme</key>
+		<dict>
+			<key>orderHint</key>
+			<integer>2</integer>
+		</dict>
 		<key>Test.xcscheme</key>
 		<dict>
 			<key>orderHint</key>
@@ -19,6 +24,11 @@
 			<key>orderHint</key>
 			<integer>0</integer>
 		</dict>
+		<key>Who is paying next.xcscheme</key>
+		<dict>
+			<key>orderHint</key>
+			<integer>2</integer>
+		</dict>
 		<key>X-Rates.xcscheme</key>
 		<dict>
 			<key>orderHint</key>
@@ -27,6 +37,11 @@
 	</dict>
 	<key>SuppressBuildableAutocreation</key>
 	<dict>
+		<key>380755FE19F9445700489ED4</key>
+		<dict>
+			<key>primary</key>
+			<true/>
+		</dict>
 		<key>3815BD791955CE9800A28316</key>
 		<dict>
 			<key>primary</key>
@@ -108,6 +123,16 @@
 			<true/>
 		</dict>
 		<key>38AD6E7A196FE90F000D21C9</key>
+		<dict>
+			<key>primary</key>
+			<true/>
+		</dict>
+		<key>38B6E0D01A28B62D009E69D7</key>
+		<dict>
+			<key>primary</key>
+			<true/>
+		</dict>
+		<key>38B6E0EB1A28BBAB009E69D7</key>
 		<dict>
 			<key>primary</key>
 			<true/>

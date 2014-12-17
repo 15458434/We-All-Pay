@@ -1,6 +1,6 @@
 
 /* Class = "IBUINavigationItem"; title = "Person Details"; ObjectID = "1ZS-Vk-Q4D"; */
-"1ZS-Vk-Q4D.title" = "persoonsdetails";
+"1ZS-Vk-Q4D.title" = "Persoonsdetails";
 
 /* Class = "IBUILabel"; text = "Label"; ObjectID = "31L-di-50d"; */
 "31L-di-50d.text" = "Label";
@@ -12,22 +12,22 @@
 "9og-gt-gwG.normalTitle" = "Oplossing";
 
 /* Class = "IBUINavigationItem"; title = "people and payments"; ObjectID = "Ajb-WY-VLi"; */
-"Ajb-WY-VLi.title" = "mensen en betalingen";
+"Ajb-WY-VLi.title" = "Mensen en betalingen";
 
-/* Class = "IBUITextField"; placeholder = "Event name"; ObjectID = "AkR-Sr-Oah"; */
-"AkR-Sr-Oah.placeholder" = "Naam van de totaal rekening";
+/* Class = "IBUITextField"; placeholder = "Event name"; ObjectID = "Y5X-Hm-GBF"; */
+"Y5X-Hm-GBF.placeholder" = "Naam van de totaal rekening";
 
 /* Class = "IBUILabel"; text = "moneyLabel"; ObjectID = "Bus-qo-pqC"; */
 "Bus-qo-pqC.text" = "moneyLabel";
 
 /* Class = "IBUINavigationItem"; title = "payment details"; ObjectID = "Du0-aV-eeD"; */
-"Du0-aV-eeD.title" = "betalingsdetails";
+"Du0-aV-eeD.title" = "Betalingsdetails";
 
 /* Class = "IBUIButton"; normalTitle = "new event"; ObjectID = "EuC-uT-5WX"; */
 "EuC-uT-5WX.normalTitle" = "Nieuwe rekening";
 
 /* Class = "IBUINavigationItem"; title = "events"; ObjectID = "Gep-Z6-3Aj"; */
-"Gep-Z6-3Aj.title" = "rekeningen";
+"Gep-Z6-3Aj.title" = "Rekeningen";
 
 /* Class = "IBUIBarButtonItem"; title = "Item"; ObjectID = "GfK-Qn-5Kr"; */
 "GfK-Qn-5Kr.title" = "Item";
@@ -36,10 +36,10 @@
 "H3d-ki-tdJ.normalTitle" = "Contacten";
 
 /* Class = "IBUITextField"; placeholder = "last name"; ObjectID = "JRX-hO-2n8"; */
-"JRX-hO-2n8.placeholder" = "achternaam";
+"JRX-hO-2n8.placeholder" = "Achternaam";
 
 /* Class = "IBUILabel"; text = "emailAddress"; ObjectID = "KBE-ZP-DFn"; */
-"KBE-ZP-DFn.text" = "emailAddress";
+"KBE-ZP-DFn.text" = "EmailAddress";
 
 /* Class = "IBUITextField"; placeholder = "What was paid?"; ObjectID = "LDs-9i-ZRZ"; */
 "LDs-9i-ZRZ.placeholder" = "Wat is er betaald?";
@@ -54,7 +54,7 @@
 "Nxq-6f-abw.normalTitle" = "Nieuwe persoon";
 
 /* Class = "IBUINavigationItem"; title = "events"; ObjectID = "T8K-rj-EA0"; */
-"T8K-rj-EA0.title" = "rekeningen";
+"T8K-rj-EA0.title" = "Rekeningen";
 
 /* Class = "IBUILabel"; text = "moneyLabel"; ObjectID = "UjB-LL-77p"; */
 "UjB-LL-77p.text" = "moneyLabel";
@@ -63,7 +63,7 @@
 "V6H-03-85K.text" = "tripNameLabel";
 
 /* Class = "IBUINavigationItem"; title = "Solution"; ObjectID = "Vay-2v-DoQ"; */
-"Vay-2v-DoQ.title" = "oplossing";
+"Vay-2v-DoQ.title" = "Oplossing";
 
 /* Class = "IBUIButton"; normalTitle = "Select email address"; ObjectID = "Z0f-Hu-kcp"; */
 "Z0f-Hu-kcp.normalTitle" = "Selecteer emailadres";
@@ -84,7 +84,7 @@
 "eD2-1r-4uR.text" = "nameLabel";
 
 /* Class = "IBUITextField"; placeholder = "emailaddress"; ObjectID = "eax-dw-aIf"; */
-"eax-dw-aIf.placeholder" = "emailaddress";
+"eax-dw-aIf.placeholder" = "Emailaddress";
 
 /* Class = "IBUIButton"; normalTitle = "add payment"; ObjectID = "egw-0d-cT1"; */
 "egw-0d-cT1.normalTitle" = "Nieuwe betaling";
@@ -96,7 +96,7 @@
 "hKu-l5-7vA.text" = "extraLabel";
 
 /* Class = "IBUITextField"; placeholder = "first name"; ObjectID = "nPF-0g-HeJ"; */
-"nPF-0g-HeJ.placeholder" = "voornaam";
+"nPF-0g-HeJ.placeholder" = "Voornaam";
 
 /* Class = "IBUILabel"; text = "Label"; ObjectID = "pSW-A7-HzN"; */
 "pSW-A7-HzN.text" = "Label";
@@ -108,7 +108,7 @@
 "rt5-oo-0IR.text" = "Label";
 
 /* Class = "IBUILabel"; text = "full name"; ObjectID = "vSV-5M-Ipk"; */
-"vSV-5M-Ipk.text" = "full name";
+"vSV-5M-Ipk.text" = "Volledige naam";
 
 /* Class = "IBUILabel"; text = "payerField"; ObjectID = "xU7-yf-2N6"; */
 "xU7-yf-2N6.text" = "payerField";

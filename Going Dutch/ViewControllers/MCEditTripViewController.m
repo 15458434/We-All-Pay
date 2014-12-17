@@ -20,6 +20,8 @@
 #import "MCTwoLabelsTitleView.h"
 #import "MCTableEmptyMessage.h"
 
+#import "MCWhoPayingUserDefaultsStoreInterface.h"
+
 @interface MCEditTripViewController ()
 
 @property (weak, nonatomic) IBOutlet UIButton *contactsButton;
@@ -108,6 +110,9 @@
     //    [[peoplePicker viewControllers][0] setEdgesForExtendedLayout:UIRectEdgeNone];
     [peoplePicker setModalPresentationStyle:UIModalPresentationFormSheet];
     [[[peoplePicker navigationController] navigationBar] setBarStyle:UIBarStyleBlack];
+    peoplePicker.navigationBar.translucent = NO;
+    peoplePicker.navigationBar.opaque = YES;
+    
     
     [[self navigationController] presentViewController:peoplePicker animated:YES completion:nil];
 }
@@ -235,21 +240,16 @@
     if (!_dataController) {
         _dataController = [[MCWeAllPayStoreController defaultStore] sharedBillPeoplePresentDataControllerForDelegate:self];
     }
-    UIManagedDocument *weAllPayDocument = [[MCWeAllPayStoreController defaultStore] weAllPayStoreDocument];
-    if (![[MCWeAllPayStoreController defaultStore] isDocumentStateNormal]) {
-        [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(performFetchAndReloadTableView:) name:UIDocumentStateChangedNotification object:weAllPayDocument];
-    } else {
-        [self performFetch];
-        [[self tableView] reloadData];
-        [self setEmptyMessageNow];
-    }
     
-    if (kABAuthorizationStatusDenied == ABAddressBookGetAuthorizationStatus()) {
-//        [_contactsButton setHidden:YES];
-    }
+    BOOL shouldAppearAsEditing = [_myParent isChildTableViewEditing];
+    [[self tableView] setEditing:shouldAppearAsEditing animated:NO];
+
+    [self performFetch];
+    [[self tableView] reloadData];
+    [self setEmptyMessageNow];
 }
 
--(void)viewDidAppear:(BOOL)animated
+- (void)viewDidAppear:(BOOL)animated
 {
     [super viewDidAppear:animated];
     
@@ -405,6 +405,10 @@
     if (!didSomethingChange) {
         didSomethingChange = YES;
     }
+    MCPerson *nextPayer = [[_tonightsBill fetchPeoplePresentOrderedByAmountPaid:YES] firstObject];
+    MCWhoPayingUserDefaultsStoreInterface *groupStore = [[MCWhoPayingUserDefaultsStoreInterface alloc] initWithTonightsBillUUID:_tonightsBill.uniqueBillId withTripName:_tonightsBill.tripName andTheNextPayerID:nextPayer.uniquePersonId withFullName:[nextPayer getFullName]];
+    [groupStore storeToDefaults];
+    [[NCWidgetController widgetController] setHasContent:YES forWidgetWithBundleIdentifier:MCWhoIsPayingNextBundleIdentifier];
 }
 
 #pragma mark - NSFetchedResultsControllerDelegat

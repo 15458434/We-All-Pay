@@ -9,6 +9,7 @@
 #import <UIKit/UIKit.h>
 
 #import "MCTonightsBillTransfer.h"
+#import "MCIsEditingProtocol.h"
 
 @class MCSharedBill;
 
@@ -22,7 +23,7 @@
 
 @end
 
-@interface MCSharedBillPageViewController : UIPageViewController <UIPageViewControllerDataSource, UIPageViewControllerDelegate, UIAlertViewDelegate, MCTonightsBillTitleDelegate>
+@interface MCSharedBillPageViewController : UIPageViewController <UIPageViewControllerDataSource, UIPageViewControllerDelegate, UIAlertViewDelegate, MCTonightsBillTitleDelegate, MCIsEditingProtocol>
 {
 
 
@@ -32,15 +33,16 @@
 }
 @property (nonatomic, strong) MCSharedBillTableViewController *sharedBillTableViewController;
 @property (nonatomic, strong) MCEditTripViewController *editTripTableViewController;
+@property (weak, nonatomic) IBOutlet UIPageControl *pageControl;
 
 @property (nonatomic, strong) MCSharedBill *tonightsBill;
 @property (nonatomic, strong) MCSharedBill *writableTonightsBill;
 
 - (BOOL)toggleEditTableView:(id)sender;
-- (IBAction)solveBill:(id)sender;
 
 - (void)shareBill:(id)sender;
 - (void)sendMail:(id)sender;
+- (void)pageControlTapped:(id)sender;
 
 - (void)openMailView:(id)sender;
 

@@ -24,6 +24,7 @@
 @property (nonatomic, retain) NSData * pictureData;
 @property (nonatomic, retain) UIImage * thumbnail;
 @property (nonatomic, retain) NSData * thumbnailData;
+@property (nonatomic, retain) NSNumber * totalSumPaid;
 @property (nonatomic, retain) NSString * uniquePersonId;
 @property (nonatomic, retain) NSSet *emailAddress;
 @property (nonatomic, retain) NSSet *payments;

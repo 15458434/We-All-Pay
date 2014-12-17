@@ -6,8 +6,9 @@
 //  Copyright (c) 2013 Mark Cornelisse. All rights reserved.
 //
 
-#import <UIKit/UIKit.h>
-#import <CoreData/CoreData.h>
+@import UIKit;
+@import CoreData;
+@import NotificationCenter;
 
 #import "MCCancelDoneViewController.h"
 
@@ -39,12 +40,11 @@ typedef NS_ENUM(NSUInteger, MCMoneyValueFieldDismissStatus) {
     UIBarButtonItem *cancelChangesForEntirePaymentButton;
     MCTwoLabelsTitleView *twoLabelTitleView;
     
-    __weak IBOutlet UITextField *payerView;
+    __weak IBOutlet UITextField *payerNameField;
     MCPerson *payerViewPerson;
     __weak IBOutlet UITextField *itemView;
     __weak IBOutlet UITextField *paidView;
     NSNumber *paidViewNumber;
-//    __weak IBOutlet UILabel *dateAndTimeLabel;
     
     UIPickerView *personPickerView;
     NSArray *listOfPeople;
@@ -55,7 +55,6 @@ typedef NS_ENUM(NSUInteger, MCMoneyValueFieldDismissStatus) {
     NSFetchedResultsController *_dataController;
 }
 
-@property (weak, nonatomic) IBOutlet UIImageView *payerPicture;
 @property (nonatomic, strong) MCPayment *thisPayment;
 @property (nonatomic, strong) MCSharedBill *tonightsBill;
 @property (nonatomic, readonly) BOOL didSomethingChange;

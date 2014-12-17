@@ -41,6 +41,7 @@
 - (NSNumber *)totalSumOfMoneyOfThisSharedBill;
 - (NSString *)totalSumOfMoneyOfThisSharedBillAsCurrencyString;
 - (NSNumber *)totalSumPaidBy:(MCPerson *)person;
+- (NSArray *)fetchPeoplePresentOrderedByAmountPaid:(BOOL)ascending;
 - (NSNumber *)totalAmountOfCreditBy:(MCPerson *)person;
 - (NSNumber *)amountPeopleShouldHavePaid;
 - (NSString *)amountPeopleShouldHavePaidAsCurrencyString;

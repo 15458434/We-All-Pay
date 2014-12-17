@@ -26,6 +26,7 @@
 @dynamic pictureData;
 @dynamic thumbnail;
 @dynamic thumbnailData;
+@dynamic totalSumPaid;
 @dynamic uniquePersonId;
 @dynamic emailAddress;
 @dynamic payments;

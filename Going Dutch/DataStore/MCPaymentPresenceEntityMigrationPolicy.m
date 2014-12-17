@@ -55,6 +55,7 @@
     // payments to be in current currency.
     MCPayment *thisPayment = (MCPayment *)dInstance;
     [thisPayment setCurrency:currentCurrency];
+    thisPayment.categoryId = @(10);
     
     return returnedFromSuper;
 }

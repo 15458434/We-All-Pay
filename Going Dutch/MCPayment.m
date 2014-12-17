@@ -16,10 +16,12 @@
 
 @implementation MCPayment
 
+@dynamic categoryId;
 @dynamic dateCreated;
 @dynamic dateModified;
 @dynamic descriptionOfPayment;
 @dynamic money;
+@dynamic moneyInMainCurrency;
 @dynamic uniquePaymentId;
 @dynamic currency;
 @dynamic exchangeRate;

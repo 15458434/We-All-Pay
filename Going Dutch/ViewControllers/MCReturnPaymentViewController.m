@@ -10,6 +10,7 @@
 #import "MCSharedBillTableViewController.h"
 #import "MCSharedBillPageViewController.h"
 
+#import "MCCurrency+addons.h"
 #import "MCSharedBill+addons.h"
 #import "MCReturnPayment.h"
 #import "MCPerson+addons.h"
@@ -377,7 +378,7 @@ typedef NS_ENUM(BOOL, MCXRatesMissing) {
     if ([indexPath section] == 0) {
         MCReturnPayment *thisCellsReturnPayment = _paymentsAfterwards[[indexPath row]];
         MCWhoOwesWhoTableViewCell_iPhone *returnPaymentCell = [tableView dequeueReusableCellWithIdentifier:@"MCWhoOwesWhoTableViewCell_iPhone"];
-        NSNumberFormatter *nf = [[NSNumberFormatter alloc] init];
+        NSNumberFormatter *nf = [[_tonightsBill mainCurrency] numberFormatter];
         [nf setNumberStyle:NSNumberFormatterCurrencyStyle];
         NSNumber *moneyToConvert = [thisCellsReturnPayment money];
         [[returnPaymentCell moneyLabel] setText:[nf stringFromNumber:moneyToConvert]];
@@ -396,8 +397,7 @@ typedef NS_ENUM(BOOL, MCXRatesMissing) {
         MCPerson *person = [_peoplePresent objectAtIndex:[indexPath row]];
         [[cell whoPaidHowMuchLabel] setText:[person getFullName]];
         NSNumber *sumSpentByPerson = @(-[[_tonightsBill amountShouldHavePaidBy:person] doubleValue]);
-        NSNumberFormatter *nf = [[NSNumberFormatter alloc] init];
-        [nf setLocale:[NSLocale currentLocale]];
+        NSNumberFormatter *nf = [[_tonightsBill mainCurrency] numberFormatter];
         [nf setNumberStyle:NSNumberFormatterCurrencyStyle];
         [nf setFormatterBehavior:NSNumberFormatterBehaviorDefault];
         [[cell moneyLabel] setText:[nf stringFromNumber:sumSpentByPerson]];
@@ -411,8 +411,7 @@ typedef NS_ENUM(BOOL, MCXRatesMissing) {
             MCPerson *person = [_peoplePresent objectAtIndex:[indexPath row]];
             [[cell whoPaidHowMuchLabel] setText:[person getFullName]];
             NSNumber *sumSpentByPerson = [_tonightsBill totalSumPaidBy:person];
-            NSNumberFormatter *nf = [[NSNumberFormatter alloc] init];
-            [nf setLocale:[NSLocale currentLocale]];
+            NSNumberFormatter *nf = [[_tonightsBill mainCurrency] numberFormatter];
             [nf setNumberStyle:NSNumberFormatterCurrencyStyle];
             [nf setFormatterBehavior:NSNumberFormatterBehaviorDefault];
             [[cell moneyLabel] setText:[nf stringFromNumber:sumSpentByPerson]];
