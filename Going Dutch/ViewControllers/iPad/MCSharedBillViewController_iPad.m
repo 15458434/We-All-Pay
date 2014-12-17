@@ -19,6 +19,8 @@
 
 @interface MCSharedBillViewController_iPad ()
 
+@property (weak, nonatomic) IBOutlet UIView *leftTopView;
+
 @end
 
 @implementation MCSharedBillViewController_iPad
@@ -96,11 +98,11 @@
 - (void)openPeoplePicker
 {
     ABPeoplePickerNavigationController *peoplePicker = [[ABPeoplePickerNavigationController alloc] init];
-    if (!personReceiver) {
-        personReceiver = [[MCAddressBookDataReceiver alloc] initWithViewController:self andDelegate:self];
-        [personReceiver setTonightsBill:_tonightsBill];
+    if (!_personReceiver) {
+        _personReceiver = [[MCAddressBookDataReceiver alloc] initWithViewController:self andDelegate:self];
+        [_personReceiver setTonightsBill:_tonightsBill];
     }
-    [peoplePicker setPeoplePickerDelegate:personReceiver];
+    [peoplePicker setPeoplePickerDelegate:_personReceiver];
     [peoplePicker setEdgesForExtendedLayout:UIRectEdgeNone];
     //    [[peoplePicker viewControllers][0] setEdgesForExtendedLayout:UIRectEdgeNone];
     [peoplePicker setModalPresentationStyle:UIModalPresentationFormSheet];
@@ -149,7 +151,8 @@
 {
     [super viewWillAppear:animated];
     
-    [tripNameField setText:[_tonightsBill tripName]];
+    [_leftTopView bringSubviewToFront:_tripNameField];
+    [_tripNameField setText:[_tonightsBill tripName]];
     
     // Set the color of the backButton.
     UIColor *backButtonColor = [MCColors getButtonColor];
@@ -197,10 +200,22 @@
 
 #pragma mark - UITextFieldDelegate
 
+- (BOOL)textFieldShouldBeginEditing:(UITextField *)textField
+{
+    if (textField == _tripNameField) {
+        return YES;
+    } else {
+#if DEBUG
+        NSLog(@"There is only one textField in this ViewController.");
+#endif
+        return NO;
+    }
+}
+
 - (void)textFieldDidEndEditing:(UITextField *)textField
 {
-    if (textField == tripNameField) {
-        [_tonightsBill setTripName:[tripNameField text]];
+    if (textField == _tripNameField) {
+        [_tonightsBill setTripName:[_tripNameField text]];
     }
 }
 
