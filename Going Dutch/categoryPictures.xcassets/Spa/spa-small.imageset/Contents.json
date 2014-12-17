@@ -3,17 +3,17 @@
     {
       "idiom" : "universal",
       "scale" : "1x",
-      "filename" : "Spa iconsmall@1x.png"
+      "filename" : "Spa icon-small@1x.png"
     },
     {
       "idiom" : "universal",
       "scale" : "2x",
-      "filename" : "Spa iconsmall@2x.png"
+      "filename" : "Spa icon-small@2x.png"
     },
     {
       "idiom" : "universal",
       "scale" : "3x",
-      "filename" : "Spa iconsmall@3x.png"
+      "filename" : "Spa icon-small@3x.png"
     }
   ],
   "info" : {
