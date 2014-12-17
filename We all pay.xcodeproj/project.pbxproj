@@ -287,8 +287,8 @@
 		38295AE718425E74009FB5DE /* MCCancelDoneViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = MCCancelDoneViewController.m; sourceTree = "<group>"; };
 		3829AD0E178B41320025969D /* WeAllPayStore.xcdatamodel */ = {isa = PBXFileReference; lastKnownFileType = wrapper.xcdatamodel; path = WeAllPayStore.xcdatamodel; sourceTree = "<group>"; };
 		382B79CB1A419D9D00538E96 /* Base */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; name = Base; path = Base.lproj/categoryPictures.plist; sourceTree = "<group>"; };
-		382B79CD1A419D9F00538E96 /* en */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; name = en; path = en.lproj/categoryPictures.plist; sourceTree = "<group>"; };
 		382B79CE1A419DA000538E96 /* nl */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; name = nl; path = nl.lproj/categoryPictures.plist; sourceTree = "<group>"; };
+		382B79CF1A41BB6A00538E96 /* en */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; name = en; path = en.lproj/categoryPictures.plist; sourceTree = "<group>"; };
 		382E7BDB17E5E57500A1040A /* MCReturnPaymentViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = MCReturnPaymentViewController.h; path = ViewControllers/MCReturnPaymentViewController.h; sourceTree = "<group>"; };
 		382E7BDC17E5E57500A1040A /* MCReturnPaymentViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = MCReturnPaymentViewController.m; path = ViewControllers/MCReturnPaymentViewController.m; sourceTree = "<group>"; };
 		382F9BD118F7285400818276 /* MCDismissMeBlockProtocol.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = MCDismissMeBlockProtocol.h; path = ViewControllers/MCDismissMeBlockProtocol.h; sourceTree = "<group>"; };
@@ -1682,8 +1682,8 @@
 			isa = PBXVariantGroup;
 			children = (
 				382B79CB1A419D9D00538E96 /* Base */,
-				382B79CD1A419D9F00538E96 /* en */,
 				382B79CE1A419DA000538E96 /* nl */,
+				382B79CF1A41BB6A00538E96 /* en */,
 			);
 			name = categoryPictures.plist;
 			path = CategoryPicturesStore;
