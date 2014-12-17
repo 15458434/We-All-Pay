@@ -145,6 +145,7 @@
 - (void)setTextPayerButton
 {
     [_selectButton setTitle:[_thisPayment.payingPerson getFullName] forState:UIControlStateNormal];
+    [_selectButton sizeToFit];
 }
 
 - (void)tappedInTheBackground:(id)selector
