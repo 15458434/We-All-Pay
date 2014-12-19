@@ -83,8 +83,7 @@ class TodayViewController: UIViewController, NCWidgetProviding {
             completionHandler(NCUpdateResult.NewData)
         } else {
             updateLabel()
-            NCWidgetController.widgetController().setHasContent(true, forWidgetWithBundleIdentifier: MCWhoIsPayingNextBundleIdentifier);
-            completionHandler(NCUpdateResult.Failed)
+            completionHandler(NCUpdateResult.NewData)
         }
     }
 }
