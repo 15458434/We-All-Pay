@@ -84,7 +84,7 @@
 "eD2-1r-4uR.text" = "nameLabel";
 
 /* Class = "IBUITextField"; placeholder = "emailaddress"; ObjectID = "eax-dw-aIf"; */
-"eax-dw-aIf.placeholder" = "Emailaddress";
+"eax-dw-aIf.placeholder" = "E-mailadres";
 
 /* Class = "IBUIButton"; normalTitle = "add payment"; ObjectID = "egw-0d-cT1"; */
 "egw-0d-cT1.normalTitle" = "Nieuwe betaling";
