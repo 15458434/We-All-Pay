@@ -41,11 +41,16 @@ class TodayViewController: UIViewController, NCWidgetProviding {
     
     func updateLabel() {
         println("updateLabel")
-        if valid == true {
-            let finalString: String = "For your event \(tripName), \(fullNameNextPayer) should pay next."
-            println(finalString)
-            if countElements(finalString) > 0 {
-                theLabel.attributedText = betterCreateAttributesStringForWhoIsPayingNext(tripName, fullNameNextPayer)
+        if let validValue = valid {
+            if validValue == true {
+                let finalString: String = "For your event \(tripName), \(fullNameNextPayer) should pay next."
+                println(finalString)
+                if countElements(finalString) > 0 {
+                    theLabel.attributedText = betterCreateAttributesStringForWhoIsPayingNext(tripName, fullNameNextPayer)
+                } else {
+                    theLabel.attributedText = createErrorMessage()
+                    NCWidgetController.widgetController().setHasContent(true, forWidgetWithBundleIdentifier: MCWhoIsPayingNextBundleIdentifier)
+                }
             } else {
                 theLabel.attributedText = createErrorMessage()
                 NCWidgetController.widgetController().setHasContent(true, forWidgetWithBundleIdentifier: MCWhoIsPayingNextBundleIdentifier)
