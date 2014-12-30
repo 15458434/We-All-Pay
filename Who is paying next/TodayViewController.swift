@@ -72,7 +72,14 @@ class TodayViewController: UIViewController, NCWidgetProviding {
         #if DEBUG
             println("I am tapped.")
         #endif
-        let url = NSURL(string: "weallpay://")
+        var urlString = "weallpay://"
+        if let validValue = valid {
+            if validValue == true {
+                urlString = "weallpay://\(tonightsBillID)/\(nextPayerID)"
+            }
+        }
+        println("Open: \(urlString)")
+        let url = NSURL(string: urlString)
         self.extensionContext?.openURL(url!, completionHandler: nil)
     }
     
