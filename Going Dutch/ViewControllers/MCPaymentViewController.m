@@ -473,6 +473,9 @@ typedef NS_ENUM(BOOL, ChildViewOpened) {
     if (categoryObject.categoryId > 0) {
         _categoryView.image = categoryObject.largePicture;
         [_categoryButton setTitle:categoryObject.categoryDescription forState:UIControlStateNormal];
+    } else {
+        NSString *buttonText = NSLocalizedString(@"SELECT_CATEGORY", @"Select Category");
+        [_categoryButton setTitle:buttonText forState:UIControlStateNormal];
     }
     
     if (!_isNew || _selectCurrencyTableViewController == isOpened) {

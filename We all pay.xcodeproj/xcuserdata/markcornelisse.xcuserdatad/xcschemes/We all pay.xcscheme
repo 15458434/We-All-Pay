@@ -37,6 +37,9 @@
                BlueprintName = "We all pay Tests"
                ReferencedContainer = "container:We all pay.xcodeproj">
             </BuildableReference>
+            <DeviceAppData
+               resolvedPath = "../../Going Dutch/We all pay database version 4.xcappdata">
+            </DeviceAppData>
             <LocationScenarioReference
                identifier = "com.apple.dt.IDEFoundation.CurrentLocationScenarioIdentifier"
                referenceType = "1">
@@ -79,12 +82,11 @@
       selectedLauncherIdentifier = "Xcode.DebuggerFoundation.Launcher.LLDB"
       launchStyle = "0"
       useCustomWorkingDirectory = "NO"
-      customWorkingDirectory = "/Users/markcornelisse/Library/Developer/CoreSimulator/Devices/ABE9D440-8DEC-4875-BF7A-26062354AD1A/data/Documents"
       buildConfiguration = "Debug"
       ignoresPersistentStateOnLaunch = "NO"
       debugDocumentVersioning = "YES"
       allowLocationSimulation = "YES"
-      language = "nl"
+      language = "en"
       region = "NL">
       <BuildableProductRunnable>
          <BuildableReference
@@ -98,7 +100,7 @@
       <AdditionalOptions>
       </AdditionalOptions>
       <DeviceAppData
-         resolvedPath = "../../Going Dutch/We all pay database dutch version 4.xcappdata">
+         resolvedPath = "../../Going Dutch/We all pay database version 4.xcappdata">
       </DeviceAppData>
       <LocationScenarioReference
          identifier = "com.apple.dt.IDEFoundation.CurrentLocationScenarioIdentifier"
