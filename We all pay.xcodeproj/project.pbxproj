@@ -2112,8 +2112,8 @@
 				CLANG_WARN_OBJC_ROOT_CLASS = YES_ERROR;
 				CODE_SIGN_ENTITLEMENTS = EMC.entitlements;
 				CODE_SIGN_IDENTITY = "Mac Developer";
-				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "";
-				"CODE_SIGN_IDENTITY[sdk=macosx*]" = "Mac Developer";
+				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer: Mark Cornelisse (B9ZEEP43C6)";
+				"CODE_SIGN_IDENTITY[sdk=macosx*]" = "Mac Developer: Mark Cornelisse (B9ZEEP43C6)";
 				COMBINE_HIDPI_IMAGES = YES;
 				GCC_ENABLE_OBJC_EXCEPTIONS = YES;
 				GCC_PRECOMPILE_PREFIX_HEADER = YES;
@@ -2152,7 +2152,8 @@
 				CLANG_WARN_OBJC_ROOT_CLASS = YES_ERROR;
 				CODE_SIGN_ENTITLEMENTS = EMC.entitlements;
 				CODE_SIGN_IDENTITY = "Mac Developer";
-				"CODE_SIGN_IDENTITY[sdk=macosx*]" = "Mac Developer: Mark Cornelisse (B9ZEEP43C6)";
+				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Distribution: Mark Cornelisse (Z6JP26PUUY)";
+				"CODE_SIGN_IDENTITY[sdk=macosx*]" = "Developer ID Application: Mark Cornelisse (Z6JP26PUUY)";
 				COMBINE_HIDPI_IMAGES = YES;
 				DEBUG_INFORMATION_FORMAT = "dwarf-with-dsym";
 				ENABLE_NS_ASSERTIONS = NO;
@@ -2185,6 +2186,7 @@
 				CLANG_WARN_ENUM_CONVERSION = YES;
 				CLANG_WARN_INT_CONVERSION = YES;
 				CLANG_WARN_OBJC_ROOT_CLASS = YES_ERROR;
+				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer: Mark Cornelisse (B9ZEEP43C6)";
 				COMBINE_HIDPI_IMAGES = YES;
 				FRAMEWORK_SEARCH_PATHS = (
 					"$(DEVELOPER_FRAMEWORKS_DIR)",
