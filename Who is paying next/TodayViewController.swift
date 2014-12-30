@@ -68,10 +68,23 @@ class TodayViewController: UIViewController, NCWidgetProviding {
         }
     }
     
+    func tappedInTheBackground(sender: AnyObject) {
+        #if DEBUG
+            println("I am tapped.")
+        #endif
+        let url = NSURL(string: "weallpay://")
+        self.extensionContext?.openURL(url!, completionHandler: nil)
+    }
+    
     override func viewDidLoad() {
         super.viewDidLoad()
         // Do any additional setup after loading the view from its nib.
         NSNotificationCenter.defaultCenter().addObserver(self, selector: "defaultsDidUpdate:", name: NSUserDefaultsDidChangeNotification, object: nil)
+
+        // Setup a tap in the Today Extension to open We all pay.
+        let thatTickles = UITapGestureRecognizer(target: self, action: "tappedInTheBackground:")
+        thatTickles.cancelsTouchesInView = false
+        self.view.addGestureRecognizer(thatTickles)
     }
     
     func widgetPerformUpdateWithCompletionHandler(completionHandler: ((NCUpdateResult) -> Void)!) {
