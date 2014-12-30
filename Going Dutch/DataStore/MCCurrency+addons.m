@@ -27,9 +27,9 @@
     NSLog(@"%@ generateCurrencyFromSelectedLocaleForContext", self);
 #endif
     NSParameterAssert(context);
-//    NSDictionary *allCurrenciesDictionary = [MCxRatesController getCurrencyDictionary];
     NSString *currencyCodeFromCurrentLocale = [[NSLocale currentLocale] objectForKey:NSLocaleCurrencyCode];
-//    NSDictionary *currencyDictionaryFromCurrencyCode = [allCurrenciesDictionary objectForKey:currencyCodeFromCurrentLocale];
+    // currencyCode from Current locale is necessary. Set the current locale for the simulator.
+    NSParameterAssert(currencyCodeFromCurrentLocale);
     NSManagedObjectContext *xrContext = [[XRCurrencyStoreController sharedStore] mainQueueContext];
     XRCurrency *xrCurrency = [[XRCurrencyStoreController sharedStore] fetchCurrencyWithCode:currencyCodeFromCurrentLocale inContext:xrContext];
     MCCurrency *newCurrency = [NSEntityDescription insertNewObjectForEntityForName:@"MCCurrency" inManagedObjectContext:context];
