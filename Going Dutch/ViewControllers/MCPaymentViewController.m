@@ -379,6 +379,9 @@ typedef NS_ENUM(BOOL, ChildViewOpened) {
     if (!_thisPayment) {
         _thisPayment = [_tonightsBill addPayment];
         _isNew = YES;
+        if (_pathComponentsToOpen) {
+            _thisPayment.payingPerson = _pathComponentsToOpen.lastObject;
+        }
 //        didSomethingChange = YES;
     } else {
         _isNew = NO;

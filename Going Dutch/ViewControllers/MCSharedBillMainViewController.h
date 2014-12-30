@@ -11,18 +11,17 @@
 #import "MCTitleViewDelegate.h"
 #import "MCTonightsBillTransfer.h"
 #import "MCCurrentViewDelegate.h"
+#import "MCPathComponentsToOpenProtocol.h"
 
 #import "UIViewController+WeAllPayStore.h"
 
 @class MCSharedBill;
 
-@interface MCSharedBillMainViewController : UIViewController <MCTitleViewDelegate, MCTonightsBillTransfer, MCCurrentViewDelegate>
-{
-    
-}
+@interface MCSharedBillMainViewController : UIViewController <MCTitleViewDelegate, MCTonightsBillTransfer, MCCurrentViewDelegate, MCPathComponentsToOpenProtocol>
 
 @property (nonatomic) MCSharedBillViewSelector currentView;
 @property (strong, nonatomic) MCSharedBill *tonightsBill;
+@property (strong, nonatomic) NSArray *pathComponentsToOpen;
 @property (weak, nonatomic) IBOutlet UILabel *mainTitleLabel;
 @property (weak, nonatomic) IBOutlet UIPageControl *pageIndicator;
 

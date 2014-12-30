@@ -234,6 +234,23 @@
     [MCPerson deletePerson:toBeDeletedPerson];
 }
 
+- (MCPerson *)fetchPersonWithUniqueID:(NSString *)uuid
+{
+    NSManagedObjectContext *context = self.managedObjectContext;
+    NSFetchRequest *request = [NSFetchRequest fetchRequestWithEntityName:@"MCPerson"];
+    request.sortDescriptors = @[[NSSortDescriptor sortDescriptorWithKey:@"dateCreated" ascending:YES]];
+    request.predicate = [NSPredicate predicateWithFormat:@"ANY sharedBill = %@ AND uniquePersonId = %@", self, uuid];
+    NSError *fetchError;
+    NSArray *result = [context executeFetchRequest:request error:&fetchError];
+    if (!result) {
+        NSLog(@"Error fetching person with id:%@", uuid);
+        NSLog(@"%@", fetchError.description);
+        return nil;
+    } else {
+        return result.firstObject;
+    }
+}
+
 - (BOOL)isPresentWithFirstName:(NSString *)firstName andLastName:(NSString *)lastName andEmailAddress:(NSString *)emailAddress
 {
     NSFetchRequest *request = [NSFetchRequest fetchRequestWithEntityName:@"MCPerson"];

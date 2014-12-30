@@ -8,9 +8,15 @@
 
 #import "MCAppDelegate.h"
 #import "MCAllTripsTableViewController.h"
+#import "MCPaymentViewController.h"
+
 #import "MCWeAllPayStoreController.h"
 #import "MCStoreInterface.h"
 #import "XRCurrencyStoreController.h"
+
+#import "MCSharedBill+addons.h"
+#import "MCPerson+addons.h"
+#import "MCPayment+addons.h"
 
 @implementation MCAppDelegate
 
@@ -128,6 +134,41 @@
 
 - (BOOL)application:(UIApplication *)application openURL:(NSURL *)url sourceApplication:(NSString *)sourceApplication annotation:(id)annotation
 {
+    NSArray *pathComponents = url.pathComponents;
+    if (pathComponents.count != 3) {
+        return NO;
+    }
+    NSString *billID = pathComponents[1];
+    NSString *nextPayerID = pathComponents[2];
+    
+    // Verify existense of tonightsBill
+    MCSharedBill *tonightsBill = [MCSharedBill fetchSharedBillWithUniqueId:billID inContext:[[MCWeAllPayStoreController defaultStore] mainThreadContext] ];
+    if (!tonightsBill) {
+        NSLog(@"Unable to open this event.");
+        return NO;
+    }
+    // Verify existendse of payer on tonightsBill
+    MCPerson *nextPayer = [tonightsBill fetchPersonWithUniqueID:nextPayerID];
+    if (!nextPayer) {
+        NSLog(@"Unable to find specified person");
+        return NO;
+    }
+    // Navigate to the add payment screen.
+    NSArray *pathDuringOpening = @[tonightsBill, nextPayer];
+    UINavigationController *navController = (UINavigationController *)self.window.rootViewController;
+    [navController popToRootViewControllerAnimated:NO];
+    
+    // open add payment
+    UIStoryboard *storyboard = self.window.rootViewController.storyboard;
+    UINavigationController *navPaymentViewController = [storyboard instantiateViewControllerWithIdentifier:@"navPaymentViewController"];
+    MCPaymentViewController *paymentViewController = (MCPaymentViewController *)[navPaymentViewController viewControllers][0];
+    paymentViewController.pathComponentsToOpen = pathDuringOpening;
+    paymentViewController.tonightsBill = tonightsBill;
+    [navController presentViewController:navPaymentViewController animated:YES completion:nil];
+    // open tonightsBill
+    UIViewController *allTripsViewController = navController.viewControllers[0];
+    [allTripsViewController performSegueWithIdentifier:@"openTonightsBill" sender:pathDuringOpening];
+    
     return YES;
 }
 

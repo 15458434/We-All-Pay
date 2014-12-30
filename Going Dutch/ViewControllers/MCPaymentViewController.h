@@ -13,6 +13,7 @@
 #import "MCCancelDoneViewController.h"
 
 #import "MCThisPaymentProtocol.h"
+#import "MCPathComponentsToOpenProtocol.h"
 
 @class MCPayment;
 @class MCSharedBill;
@@ -34,7 +35,7 @@ typedef NS_ENUM(NSUInteger, MCMoneyValueFieldDismissStatus) {
 
 @end
 
-@interface MCPaymentViewController : UITableViewController <UIPickerViewDataSource, UIPickerViewDelegate, UITextFieldDelegate, NSFetchedResultsControllerDelegate, MCThisPaymentProtocol>
+@interface MCPaymentViewController : UITableViewController <UIPickerViewDataSource, UIPickerViewDelegate, UITextFieldDelegate, NSFetchedResultsControllerDelegate, MCThisPaymentProtocol, MCPathComponentsToOpenProtocol>
 {
     UIBarButtonItem *theDoneButton;
     UIBarButtonItem *cancelChangesForEntirePaymentButton;
@@ -60,6 +61,7 @@ typedef NS_ENUM(NSUInteger, MCMoneyValueFieldDismissStatus) {
 @property (nonatomic, readonly) BOOL didSomethingChange;
 @property (nonatomic, readonly) BOOL isNew;
 @property (nonatomic, weak) id delegate;
+@property (nonatomic, strong) NSArray *pathComponentsToOpen;
 
 - (IBAction)mainCancelButtonPressed:(id)sender;
 - (IBAction)mainDoneButtonPressed:(id)sender;

@@ -357,4 +357,15 @@
     XCTAssertTrue(result[2] == mark, @"Third person should be Mark.");
 }
 
+- (void)testFetchPersonWithID
+{
+    MCSharedBill *tonightsBill = [MCSharedBill addSharedBill];
+    MCPerson *mark = [tonightsBill addPerson];
+    mark.firstName = @"Mark";
+    mark.lastName = @"Cornelisse";
+    NSString *uuid = mark.uniquePersonId;
+    MCPerson *fetchedSucker = [tonightsBill fetchPersonWithUniqueID:uuid];
+    XCTAssertTrue([fetchedSucker.uniquePersonId isEqualToString:uuid], @"Fetched uuid should be Mark");
+}
+
 @end

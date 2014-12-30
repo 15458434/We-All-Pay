@@ -354,6 +354,7 @@
 		3860574B19EE958700BD5B78 /* MCCategoryPictureStoreController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = MCCategoryPictureStoreController.m; path = CategoryPicturesStore/MCCategoryPictureStoreController.m; sourceTree = "<group>"; };
 		3860574F19EE963600BD5B78 /* categoryPictures.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = categoryPictures.xcassets; sourceTree = "<group>"; };
 		3860575419EEB28300BD5B78 /* MCCategoryPictureStoreTest.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = MCCategoryPictureStoreTest.m; sourceTree = "<group>"; };
+		3861739F1A530371000C2EE5 /* MCPathComponentsToOpenProtocol.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = MCPathComponentsToOpenProtocol.h; sourceTree = "<group>"; };
 		3862444119C46D43004CA03F /* MCRateMeController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = MCRateMeController.h; path = Misc/MCRateMeController.h; sourceTree = "<group>"; };
 		3862444219C46D43004CA03F /* MCRateMeController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = MCRateMeController.m; path = Misc/MCRateMeController.m; sourceTree = "<group>"; };
 		3864AA7F195B0B6600831C93 /* MCiScreenRootViewController_iPad.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = MCiScreenRootViewController_iPad.h; path = ViewControllers/iPad/MCiScreenRootViewController_iPad.h; sourceTree = "<group>"; };
@@ -1080,6 +1081,7 @@
 				3801881A1938D8E70085A5AE /* MCDismissKeyboardProtocol.h */,
 				380700A01A16283500C7FB37 /* MCIndexProtocol.h */,
 				380700A21A174FFB00C7FB37 /* MCIsEditingProtocol.h */,
+				3861739F1A530371000C2EE5 /* MCPathComponentsToOpenProtocol.h */,
 			);
 			name = "ViewController Protocols";
 			sourceTree = "<group>";

@@ -72,10 +72,10 @@ class TodayViewController: UIViewController, NCWidgetProviding {
         #if DEBUG
             println("I am tapped.")
         #endif
-        var urlString = "weallpay://"
+        var urlString = "weallpay:///"
         if let validValue = valid {
             if validValue == true {
-                urlString = "weallpay://\(tonightsBillID)/\(nextPayerID)"
+                urlString = "weallpay:///\(tonightsBillID)/\(nextPayerID)"
             }
         }
         println("Open: \(urlString)")

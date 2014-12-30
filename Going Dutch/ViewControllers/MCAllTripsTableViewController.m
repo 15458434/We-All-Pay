@@ -471,12 +471,28 @@ typedef NS_ENUM(BOOL, MCTonightsBillStatus) {
         _isATonightsBillOpened = isOpened;
     }
     MCSharedBill *theBill;
-    NSIndexPath *indexPathOfSelectedRow = [[self tableView] indexPathForSelectedRow];
-    if (indexPathOfSelectedRow) {
-        theBill = [_dataController objectAtIndexPath:indexPathOfSelectedRow];
+    if ([sender isKindOfClass:[NSArray class]]) {
+        if ([[segue destinationViewController] conformsToProtocol:@protocol(MCTonightsBillTransfer)]) {
+            [[segue destinationViewController] setTonightsBill:[sender firstObject]];
+        }
+    } else {
+        NSIndexPath *indexPathOfSelectedRow = [[self tableView] indexPathForSelectedRow];
+        if (indexPathOfSelectedRow) {
+            theBill = [_dataController objectAtIndexPath:indexPathOfSelectedRow];
+        }
+        if ([[segue destinationViewController] conformsToProtocol:@protocol(MCTonightsBillTransfer)]) {
+            [[segue destinationViewController] setTonightsBill:theBill];
+        }
     }
-    if ([[segue destinationViewController] conformsToProtocol:@protocol(MCTonightsBillTransfer)]) {
-        [[segue destinationViewController] setTonightsBill:theBill];
+    
+    if ([[segue identifier] isEqualToString:@"newPaymentFromEvents"]) {
+        MCSharedBill *theBill = [sender firstObject];
+        if ([[segue destinationViewController] conformsToProtocol:@protocol(MCTonightsBillTransfer)]) {
+            [[segue destinationViewController] setTonightsBill:theBill];
+        }
+        if ([[segue destinationViewController] conformsToProtocol:@protocol(MCPathComponentsToOpenProtocol) ]) {
+            [[segue destinationViewController] setPathComponentsToOpen:sender];
+        }
     }
 }
 
