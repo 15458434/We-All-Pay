@@ -78,6 +78,7 @@
 		3860574C19EE958700BD5B78 /* MCCategoryPictureStoreController.m in Sources */ = {isa = PBXBuildFile; fileRef = 3860574B19EE958700BD5B78 /* MCCategoryPictureStoreController.m */; };
 		3860575019EE963600BD5B78 /* categoryPictures.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 3860574F19EE963600BD5B78 /* categoryPictures.xcassets */; };
 		3860575519EEB28300BD5B78 /* MCCategoryPictureStoreTest.m in Sources */ = {isa = PBXBuildFile; fileRef = 3860575419EEB28300BD5B78 /* MCCategoryPictureStoreTest.m */; };
+		386173A11A53453A000C2EE5 /* ADoriginate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 386173A01A53453A000C2EE5 /* ADoriginate.swift */; };
 		3862444319C46D43004CA03F /* MCRateMeController.m in Sources */ = {isa = PBXBuildFile; fileRef = 3862444219C46D43004CA03F /* MCRateMeController.m */; };
 		3864AA81195B0B6600831C93 /* MCiScreenRootViewController_iPad.m in Sources */ = {isa = PBXBuildFile; fileRef = 3864AA80195B0B6600831C93 /* MCiScreenRootViewController_iPad.m */; };
 		3867CE4718704B2E001EC222 /* Main-Iphone.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 3867CE4918704B2E001EC222 /* Main-Iphone.storyboard */; };
@@ -355,6 +356,8 @@
 		3860574F19EE963600BD5B78 /* categoryPictures.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = categoryPictures.xcassets; sourceTree = "<group>"; };
 		3860575419EEB28300BD5B78 /* MCCategoryPictureStoreTest.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = MCCategoryPictureStoreTest.m; sourceTree = "<group>"; };
 		3861739F1A530371000C2EE5 /* MCPathComponentsToOpenProtocol.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = MCPathComponentsToOpenProtocol.h; sourceTree = "<group>"; };
+		386173A01A53453A000C2EE5 /* ADoriginate.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = ADoriginate.swift; path = Misc/ADoriginate.swift; sourceTree = "<group>"; };
+		386173A21A534BCB000C2EE5 /* We-all-pay-Bridging-Header.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "We-all-pay-Bridging-Header.h"; sourceTree = "<group>"; };
 		3862444119C46D43004CA03F /* MCRateMeController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = MCRateMeController.h; path = Misc/MCRateMeController.h; sourceTree = "<group>"; };
 		3862444219C46D43004CA03F /* MCRateMeController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = MCRateMeController.m; path = Misc/MCRateMeController.m; sourceTree = "<group>"; };
 		3864AA7F195B0B6600831C93 /* MCiScreenRootViewController_iPad.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = MCiScreenRootViewController_iPad.h; path = ViewControllers/iPad/MCiScreenRootViewController_iPad.h; sourceTree = "<group>"; };
@@ -824,6 +827,7 @@
 				38572ADF169D437B00969C62 /* InfoPlist.strings */,
 				38572AE2169D437B00969C62 /* main.m */,
 				38572AE4169D437B00969C62 /* We all pay-Prefix.pch */,
+				386173A21A534BCB000C2EE5 /* We-all-pay-Bridging-Header.h */,
 			);
 			name = "Supporting Files";
 			sourceTree = "<group>";
@@ -1063,6 +1067,7 @@
 				3825A82319990BA400A8885D /* UIViewController+WeAllPayStore.m */,
 				38E95DAD194F62C500069414 /* SKProduct+MCStoreInterface.h */,
 				38E95DAE194F62C500069414 /* SKProduct+MCStoreInterface.m */,
+				386173A01A53453A000C2EE5 /* ADoriginate.swift */,
 			);
 			name = "MC SDK";
 			sourceTree = "<group>";
@@ -1515,6 +1520,7 @@
 				381AB0EF1924FCC2004A02C6 /* MCWhoPaidHowMuchTableViewCell_iPhone.m in Sources */,
 				38EFF2D416D215BE001C8248 /* MCAllTripsTableViewCell.m in Sources */,
 				38DB85DA17E45DEA006237CF /* MCPerson+addons.m in Sources */,
+				386173A11A53453A000C2EE5 /* ADoriginate.swift in Sources */,
 				387494C919EFE46F001614CA /* MCSelectCategoryTableViewController_iPhone.m in Sources */,
 				3898F33218F180B500BFFC61 /* MCPaymentTableViewController_iPad.m in Sources */,
 				38C2BCA218FBEC5200233D24 /* MCPersonTableViewCell_iPad.m in Sources */,
@@ -1918,7 +1924,7 @@
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				PROVISIONING_PROFILE = "";
 				"PROVISIONING_PROFILE[sdk=iphoneos*]" = "f65368f2-32d8-4fb3-bde7-1fb928b743e1";
-				SWIFT_OBJC_BRIDGING_HEADER = "X-Rates/We all pay-Bridging-Header.h";
+				SWIFT_OBJC_BRIDGING_HEADER = "Going Dutch/We-all-pay-Bridging-Header.h";
 				SWIFT_OPTIMIZATION_LEVEL = "-Onone";
 				TARGETED_DEVICE_FAMILY = "1,2";
 				WRAPPER_EXTENSION = app;
@@ -1949,7 +1955,7 @@
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				PROVISIONING_PROFILE = "";
 				"PROVISIONING_PROFILE[sdk=iphoneos*]" = "5708da2b-55f4-4cd0-9ebe-0b766732258e";
-				SWIFT_OBJC_BRIDGING_HEADER = "X-Rates/We all pay-Bridging-Header.h";
+				SWIFT_OBJC_BRIDGING_HEADER = "Going Dutch/We-all-pay-Bridging-Header.h";
 				TARGETED_DEVICE_FAMILY = "1,2";
 				WRAPPER_EXTENSION = app;
 			};

@@ -18,9 +18,32 @@
 #import "MCPerson+addons.h"
 #import "MCPayment+addons.h"
 
+#import "We_all_pay-Swift.h"
+
 @implementation MCAppDelegate
 
 #pragma mark - New in this class
+
+- (void)checkToSeeIfThisPurchaseOriginatesFromiAd
+{
+    ADoriginate *adAttributionObject = [[ADoriginate alloc] init];
+    if (adAttributionObject.fromiAd != nil) {
+        // There is a value present.
+        if (adAttributionObject.fromiAd.boolValue) {
+            NSLog(@"We met with iAd.");
+        } else {
+            NSLog(@"We didn't met with iAd");
+        }
+    } else {
+        [adAttributionObject fetchAttribution:^{
+            if (adAttributionObject.fromiAd.boolValue) {
+                NSLog(@"We met with iAd.");
+            } else {
+                NSLog(@"We didn't met with iAd");
+            }
+        }];
+    }
+}
 
 //- (void)setupGoogleAnalytics
 //{
@@ -184,6 +207,10 @@
         [MCWeAllPayStoreController prepareCurrencyStoreIfNecessary];
         [[MCWeAllPayStoreController defaultStore] openStore:nil];
         
+    });
+    dispatch_queue_t someBackgroundQueue = dispatch_queue_create("originChech", NULL);
+    dispatch_async(someBackgroundQueue, ^{
+        [self checkToSeeIfThisPurchaseOriginatesFromiAd];
     });
     return YES;
 }
