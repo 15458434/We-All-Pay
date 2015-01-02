@@ -92,13 +92,9 @@
     MCCategoryPictureObject *categoryObject = [[[MCCategoryPictureStoreController sharedController] pictureObjects] objectAtIndex:[_thisPayment.categoryId shortValue]];
     if ([categoryObject categoryId] > 0) {
         _categoryImage.image = categoryObject.largePicture;
-//        [_categoryButton setBackgroundImage:categoryObject.largePicture forState:UIControlStateNormal];
-//        [_categoryButton setTitle:@"" forState:UIControlStateNormal];
     } else {
         _categoryImage.image = nil;
-//        [_categoryButton setBackgroundImage:nil forState:UIControlStateNormal];
-//        NSString *title = NSLocalizedString(@"CATEGORY", @"Text of the category button.");
-//        [_categoryButton setTitle:title forState:UIControlStateNormal];
+
     }
 }
 
@@ -111,7 +107,7 @@
         [_categoryButton setTitle:categoryObject.categoryDescription forState:UIControlStateNormal];
     } else {
         _categoryImage.image = nil;
-        NSString *title = NSLocalizedString(@"CATEGORY", @"Text of the category button.");
+        NSString *title = NSLocalizedString(@"SELECT_CATEGORY", @"Text of the category button.");
         [_categoryButton setTitle:title forState:UIControlStateNormal];
     }
     [_categoryButton sizeToFit];
