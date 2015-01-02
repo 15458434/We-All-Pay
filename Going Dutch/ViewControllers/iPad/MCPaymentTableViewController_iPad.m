@@ -24,6 +24,8 @@
 #import "MCCategoryPictureStoreController.h"
 #import "MCCategoryPictureObject.h"
 
+#import "MCWhoPayingUserDefaultsStoreInterface+WeAllPay.h"
+
 @interface MCPaymentTableViewController_iPad ()
 
 @property (weak, nonatomic) IBOutlet UIImageView *categoryImage;
@@ -59,6 +61,9 @@
     [[MCWeAllPayStoreController defaultStore] endUndoGroupAndProcess];
     [[MCWeAllPayStoreController defaultStore] saveMainThreadContext];
     [[[self navigationController] presentingViewController] dismissViewControllerAnimated:YES completion:nil];
+    
+    [MCWhoPayingUserDefaultsStoreInterface sendToUserDefaultsStoreInterface:_tonightsBill];
+    
     if (_dismissMe) {
         _dismissMe();
     }

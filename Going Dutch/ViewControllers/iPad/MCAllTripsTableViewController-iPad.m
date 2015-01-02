@@ -18,6 +18,8 @@
 
 #import "MCTonightsBillTransfer.h"
 
+#import "MCWhoPayingUserDefaultsStoreInterface+WeAllPay.h"
+
 @interface MCAllTripsTableViewController_iPad ()
 
 @property (nonatomic, strong) NSFetchedResultsController *dataController;
@@ -323,7 +325,9 @@
 {
     if (editingStyle == UITableViewCellEditingStyleDelete) {
         // Delete the row from the data source
-        [MCSharedBill deleteSharedbill:[_dataController objectAtIndexPath:indexPath]];
+        MCSharedBill *toBeDeletedTonightsBill = [_dataController objectAtIndexPath:indexPath];
+        [MCWhoPayingUserDefaultsStoreInterface sendInvalidUserDefaultsIfTonightsBillIs:toBeDeletedTonightsBill];
+        [MCSharedBill deleteSharedbill:toBeDeletedTonightsBill];
         [[MCWeAllPayStoreController defaultStore] saveMainThreadContext];
     } else if (editingStyle == UITableViewCellEditingStyleInsert) {
         // Create a new instance of the appropriate class, insert it into the array, and add a new row to the table view
