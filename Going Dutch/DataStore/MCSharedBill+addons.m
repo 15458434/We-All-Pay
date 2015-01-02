@@ -81,7 +81,11 @@
         // There was an error.
         return nil;
     } else {
-        return sharedBills[0];
+        if (sharedBills.count > 0) {
+            return sharedBills[0];
+        } else {
+            return nil;
+        }
     }
 }
 
@@ -104,6 +108,9 @@
         if ([people count] == 0) {
             return YES;
         } else {
+#if DEBUG
+            NSLog(@"sharedBills.count should not be 0.");
+#endif
             return NO;
         }
     } else {
