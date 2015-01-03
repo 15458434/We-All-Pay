@@ -136,18 +136,18 @@
                         <viewControllerLayoutGuide type="bottom" id="LQO-sC-QG1"/>
                     </layoutGuides>
                     <view key="view" contentMode="scaleToFill" id="0z4-ag-Hbv">
-                        <rect key="frame" x="0.0" y="0.0" width="768" height="980"/>
+                        <rect key="frame" x="0.0" y="44" width="768" height="960"/>
                         <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                         <subviews>
                             <containerView contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="CpF-MJ-vN0">
-                                <rect key="frame" x="384" y="108" width="384" height="872"/>
+                                <rect key="frame" x="384" y="108" width="384" height="852"/>
                                 <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="calibratedWhite"/>
                                 <connections>
                                     <segue destination="NKD-wF-4e4" kind="embed" id="rOa-zk-LNb"/>
                                 </connections>
                             </containerView>
                             <containerView contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="cqE-dH-zdR">
-                                <rect key="frame" x="0.0" y="108" width="384" height="872"/>
+                                <rect key="frame" x="0.0" y="108" width="384" height="852"/>
                                 <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="calibratedWhite"/>
                                 <connections>
                                     <segue destination="YMW-gY-bCa" kind="embed" id="00m-OO-9HG"/>
@@ -1409,6 +1409,9 @@
                         </barButtonItem>
                     </navigationItem>
                     <nil key="simulatedBottomBarMetrics"/>
+                    <connections>
+                        <segue destination="R7R-eq-O5O" kind="push" identifier="openEvent" id="NBY-n3-S8k"/>
+                    </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="h3E-GA-raJ" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
@@ -1439,7 +1442,7 @@
         <!--Navigation Controller-->
         <scene sceneID="gXJ-3f-jQp">
             <objects>
-                <navigationController automaticallyAdjustsScrollViewInsets="NO" id="cne-yA-g1T" sceneMemberID="viewController">
+                <navigationController storyboardIdentifier="navPaymentViewController" automaticallyAdjustsScrollViewInsets="NO" modalPresentationStyle="formSheet" useStoryboardIdentifierAsRestorationIdentifier="YES" id="cne-yA-g1T" sceneMemberID="viewController">
                     <toolbarItems/>
                     <modalFormSheetSimulatedSizeMetrics key="simulatedDestinationMetrics"/>
                     <navigationBar key="navigationBar" contentMode="scaleToFill" id="7qy-YH-jij">
@@ -1492,8 +1495,8 @@
         <simulatedScreenMetrics key="destination"/>
     </simulatedMetricsContainer>
     <inferredMetricsTieBreakers>
-        <segue reference="M2f-Ug-Ooc"/>
-        <segue reference="8Cc-ux-2co"/>
         <segue reference="oh3-5j-dZ9"/>
+        <segue reference="NBY-n3-S8k"/>
+        <segue reference="8Cc-ux-2co"/>
     </inferredMetricsTieBreakers>
 </document>

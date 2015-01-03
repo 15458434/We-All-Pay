@@ -26,12 +26,19 @@
 
 #import "MCWhoPayingUserDefaultsStoreInterface+WeAllPay.h"
 
+typedef NS_ENUM(BOOL, MCCancelButtonPressed) {
+    cancelIsNotPressed,
+    cancelIsPressed
+};
+
 @interface MCPaymentTableViewController_iPad ()
 
 @property (weak, nonatomic) IBOutlet UIImageView *categoryImage;
 @property (weak, nonatomic) IBOutlet UIButton *categoryButton;
 @property (weak, nonatomic) IBOutlet UIImageView *payerView;
 @property (weak, nonatomic) IBOutlet UIButton *selectButton;
+
+@property (nonatomic) MCCancelButtonPressed mainCancelPressed;
 
 @end
 
@@ -132,7 +139,6 @@
     }
 }
 
-
 - (void)reloadPayerView
 {
     [self setTextPayerButton];
@@ -152,6 +158,15 @@
 - (void)tappedInTheBackground:(id)selector
 {
     [self dismissTheKeyboard];
+}
+
+- (void)respondToPresenceOfPathComponentsFromAppLaunch
+{
+    if (_pathComponentsToOpen) {
+        _tonightsBill = _pathComponentsToOpen[0];
+        _thisPayment = [_tonightsBill addPayment];
+        _thisPayment.payingPerson = _pathComponentsToOpen[1];
+    }
 }
 
 #pragma mark - Inherited from super
@@ -175,6 +190,7 @@
     // Uncomment the following line to display an Edit button in the navigation bar for this view controller.
     // self.navigationItem.rightBarButtonItem = self.editButtonItem;
     
+    [self respondToPresenceOfPathComponentsFromAppLaunch];
     // _tonightsBill should be present.
     NSParameterAssert(_tonightsBill);
     
