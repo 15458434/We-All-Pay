@@ -64,8 +64,8 @@ class TodayViewController: UIViewController, NCWidgetProviding {
     func defaultsDidUpdate(notification: NSNotification) {
         if updateLocalOptionalsFromUserDefaults() {
             updateLabel()
-            NCWidgetController.widgetController().setHasContent(true, forWidgetWithBundleIdentifier: MCWhoIsPayingNextBundleIdentifier)
         }
+        NCWidgetController.widgetController().setHasContent(true, forWidgetWithBundleIdentifier: MCWhoIsPayingNextBundleIdentifier)
     }
     
     func tappedInTheBackground(sender: AnyObject) {

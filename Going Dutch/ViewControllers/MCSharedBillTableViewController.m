@@ -29,7 +29,7 @@
 #import "MCCategoryPictureStoreController.h"
 #import "MCCategoryPictureObject.h"
 
-#import "MCWhoPayingUserDefaultsStoreInterface.h"
+#import "MCWhoPayingUserDefaultsStoreInterface+WeAllPay.h"
 
 @interface MCSharedBillTableViewController ()
 
@@ -405,6 +405,7 @@
     if (editingStyle == UITableViewCellEditingStyleDelete) {
         MCPayment *toBeDeletedPayment = [_dataController objectAtIndexPath:indexPath];
         [MCPayment deletePayment:toBeDeletedPayment];
+        [MCWhoPayingUserDefaultsStoreInterface sendToUserDefaultsStoreInterface:tonightsBill];
         [[[MCWeAllPayStoreController defaultStore] mainThreadContext] processPendingChanges];
     }
 }
