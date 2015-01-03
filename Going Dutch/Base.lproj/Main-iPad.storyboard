@@ -176,23 +176,23 @@
                                             <action selector="addressBookButtonPressed:" destination="R7R-eq-O5O" eventType="touchUpInside" id="dWE-ge-5c5"/>
                                         </connections>
                                     </button>
-                                    <textField opaque="NO" clipsSubviews="YES" contentMode="scaleToFill" restorationIdentifier="tripNameField" contentHorizontalAlignment="left" contentVerticalAlignment="center" borderStyle="roundedRect" placeholder="Event name" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="Y5X-Hm-GBF" userLabel="tripNameField">
+                                    <textField opaque="NO" clipsSubviews="YES" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" borderStyle="roundedRect" placeholder="Event name" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="01X-vX-W0B">
                                         <rect key="frame" x="20" y="20" width="344" height="30"/>
                                         <fontDescription key="fontDescription" type="system" pointSize="14"/>
                                         <textInputTraits key="textInputTraits"/>
                                         <connections>
-                                            <outlet property="delegate" destination="R7R-eq-O5O" id="RN7-iN-OgG"/>
+                                            <outlet property="delegate" destination="R7R-eq-O5O" id="ENt-BA-z5w"/>
                                         </connections>
                                     </textField>
                                 </subviews>
                                 <color key="backgroundColor" red="0.80000007149999997" green="0.86666673419999996" blue="0.94117653369999998" alpha="1" colorSpace="deviceRGB"/>
                                 <constraints>
-                                    <constraint firstItem="Nxq-6f-abw" firstAttribute="top" secondItem="Y5X-Hm-GBF" secondAttribute="bottom" constant="8" id="4mi-aG-kz6"/>
-                                    <constraint firstItem="Y5X-Hm-GBF" firstAttribute="top" secondItem="rqj-np-zHP" secondAttribute="top" constant="20" id="EEY-rs-Qqg"/>
+                                    <constraint firstItem="01X-vX-W0B" firstAttribute="top" secondItem="rqj-np-zHP" secondAttribute="top" constant="20" id="4If-o6-ezf"/>
                                     <constraint firstAttribute="bottom" secondItem="Nxq-6f-abw" secondAttribute="bottom" constant="20" symbolic="YES" id="Y2P-dA-Ce9"/>
                                     <constraint firstItem="H3d-ki-tdJ" firstAttribute="baseline" secondItem="Nxq-6f-abw" secondAttribute="baseline" id="aJO-FV-Zz2"/>
-                                    <constraint firstItem="Y5X-Hm-GBF" firstAttribute="leading" secondItem="rqj-np-zHP" secondAttribute="leading" constant="20" id="dyR-De-2zT"/>
-                                    <constraint firstAttribute="trailing" secondItem="Y5X-Hm-GBF" secondAttribute="trailing" constant="20" id="iDV-sg-kwV"/>
+                                    <constraint firstItem="01X-vX-W0B" firstAttribute="leading" secondItem="rqj-np-zHP" secondAttribute="leading" constant="20" id="jRi-gp-Orl"/>
+                                    <constraint firstAttribute="trailing" secondItem="01X-vX-W0B" secondAttribute="trailing" constant="20" id="sGe-W2-k5i"/>
+                                    <constraint firstItem="Nxq-6f-abw" firstAttribute="top" secondItem="01X-vX-W0B" secondAttribute="bottom" constant="8" id="uJe-p0-jxM"/>
                                 </constraints>
                             </view>
                             <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="Muu-sU-mX8">
@@ -261,7 +261,7 @@
                     <simulatedNavigationBarMetrics key="simulatedTopBarMetrics" translucent="NO" prompted="NO"/>
                     <connections>
                         <outlet property="leftTopView" destination="rqj-np-zHP" id="MLi-6R-Qku"/>
-                        <outlet property="tripNameField" destination="Y5X-Hm-GBF" id="qHQ-ci-2QU"/>
+                        <outlet property="tripNameField" destination="01X-vX-W0B" id="SeG-e8-MiL"/>
                     </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="en8-e4-seD" userLabel="First Responder" sceneMemberID="firstResponder"/>
