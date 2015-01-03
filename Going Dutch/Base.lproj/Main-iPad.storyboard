@@ -180,6 +180,9 @@
                                         <rect key="frame" x="20" y="20" width="344" height="30"/>
                                         <fontDescription key="fontDescription" type="system" pointSize="14"/>
                                         <textInputTraits key="textInputTraits"/>
+                                        <connections>
+                                            <outlet property="delegate" destination="R7R-eq-O5O" id="RN7-iN-OgG"/>
+                                        </connections>
                                     </textField>
                                 </subviews>
                                 <color key="backgroundColor" red="0.80000007149999997" green="0.86666673419999996" blue="0.94117653369999998" alpha="1" colorSpace="deviceRGB"/>
@@ -258,6 +261,7 @@
                     <simulatedNavigationBarMetrics key="simulatedTopBarMetrics" translucent="NO" prompted="NO"/>
                     <connections>
                         <outlet property="leftTopView" destination="rqj-np-zHP" id="MLi-6R-Qku"/>
+                        <outlet property="tripNameField" destination="Y5X-Hm-GBF" id="qHQ-ci-2QU"/>
                     </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="en8-e4-seD" userLabel="First Responder" sceneMemberID="firstResponder"/>

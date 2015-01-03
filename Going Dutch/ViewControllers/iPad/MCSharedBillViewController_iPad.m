@@ -19,6 +19,7 @@
 
 @interface MCSharedBillViewController_iPad ()
 
+@property (weak, nonatomic) IBOutlet UITextField *tripNameField;
 @property (weak, nonatomic) IBOutlet UIView *leftTopView;
 
 @end
