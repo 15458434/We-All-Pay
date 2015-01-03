@@ -176,7 +176,7 @@
                                             <action selector="addressBookButtonPressed:" destination="R7R-eq-O5O" eventType="touchUpInside" id="dWE-ge-5c5"/>
                                         </connections>
                                     </button>
-                                    <textField opaque="NO" clipsSubviews="YES" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" borderStyle="roundedRect" placeholder="Event name" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="Y5X-Hm-GBF" userLabel="tripNameField">
+                                    <textField opaque="NO" clipsSubviews="YES" contentMode="scaleToFill" restorationIdentifier="tripNameField" contentHorizontalAlignment="left" contentVerticalAlignment="center" borderStyle="roundedRect" placeholder="Event name" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="Y5X-Hm-GBF" userLabel="tripNameField">
                                         <rect key="frame" x="20" y="20" width="344" height="30"/>
                                         <fontDescription key="fontDescription" type="system" pointSize="14"/>
                                         <textInputTraits key="textInputTraits"/>
@@ -1405,6 +1405,7 @@
                     </toolbarItems>
                     <navigationItem key="navigationItem" title="Events" id="T8K-rj-EA0">
                         <barButtonItem key="leftBarButtonItem" image="iScreen button" id="mQW-My-2QR">
+                            <color key="tintColor" red="1" green="0.4901961088180542" blue="0.56862747669219971" alpha="1" colorSpace="deviceRGB"/>
                             <connections>
                                 <segue destination="aDp-IF-sxb" kind="popover" identifier="iScreenSegue" popoverAnchorBarButtonItem="mQW-My-2QR" id="DKp-Bx-3Ur">
                                     <popoverArrowDirection key="popoverArrowDirection" up="YES" down="YES" left="YES" right="YES"/>
