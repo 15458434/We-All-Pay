@@ -25,7 +25,7 @@
                             </label>
                         </subviews>
                         <constraints>
-                            <constraint firstAttribute="trailingMargin" secondItem="GcN-lo-r42" secondAttribute="trailing" id="31b-q0-RUm"/>
+                            <constraint firstAttribute="trailingMargin" secondItem="GcN-lo-r42" secondAttribute="trailing" priority="750" id="31b-q0-RUm"/>
                             <constraint firstItem="FKl-LY-JtV" firstAttribute="top" secondItem="GcN-lo-r42" secondAttribute="bottom" id="bFy-Vt-Nf5"/>
                             <constraint firstItem="GcN-lo-r42" firstAttribute="top" secondItem="Ft6-oW-KC0" secondAttribute="bottom" constant="8" id="jZZ-k4-gGh"/>
                             <constraint firstItem="GcN-lo-r42" firstAttribute="leading" secondItem="S3S-Oj-5AN" secondAttribute="leadingMargin" id="oIi-RD-Ae1"/>

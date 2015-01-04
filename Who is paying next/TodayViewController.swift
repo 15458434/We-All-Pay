@@ -92,6 +92,7 @@ class TodayViewController: UIViewController, NCWidgetProviding {
         let thatTickles = UITapGestureRecognizer(target: self, action: "tappedInTheBackground:")
         thatTickles.cancelsTouchesInView = false
         self.view.addGestureRecognizer(thatTickles)
+        self.view.preservesSuperviewLayoutMargins = true
     }
     
     func widgetPerformUpdateWithCompletionHandler(completionHandler: ((NCUpdateResult) -> Void)!) {
