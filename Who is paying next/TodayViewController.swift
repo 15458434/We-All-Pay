@@ -47,16 +47,21 @@ class TodayViewController: UIViewController, NCWidgetProviding {
                 println(finalString)
                 if countElements(finalString) > 0 {
                     theLabel.attributedText = betterCreateAttributesStringForWhoIsPayingNext(tripName, fullNameNextPayer)
+                    theLabel.setNeedsUpdateConstraints()
+                    NCWidgetController.widgetController().setHasContent(true, forWidgetWithBundleIdentifier: MCWhoIsPayingNextBundleIdentifier)
                 } else {
                     theLabel.attributedText = createErrorMessage()
+                    theLabel.setNeedsUpdateConstraints()
                     NCWidgetController.widgetController().setHasContent(true, forWidgetWithBundleIdentifier: MCWhoIsPayingNextBundleIdentifier)
                 }
             } else {
                 theLabel.attributedText = createErrorMessage()
+                theLabel.setNeedsUpdateConstraints()
                 NCWidgetController.widgetController().setHasContent(true, forWidgetWithBundleIdentifier: MCWhoIsPayingNextBundleIdentifier)
             }
         } else {
             theLabel.attributedText = createErrorMessage()
+            theLabel.setNeedsUpdateConstraints()
             NCWidgetController.widgetController().setHasContent(true, forWidgetWithBundleIdentifier: MCWhoIsPayingNextBundleIdentifier)
         }
     }
