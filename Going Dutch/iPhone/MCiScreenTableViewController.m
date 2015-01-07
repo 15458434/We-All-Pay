@@ -177,7 +177,7 @@
         if ([indexPath row] == 0) {
 //            // nothing yet.
 //        } else if ([indexPath row] == 1) {
-            [[MCStoreInterface defaultStoreInterface] buyProProduct];
+            [[MCStoreInterface defaultStoreInterface] buyProProductSendFrom:self];
         } else if ([indexPath row] == 1) {
             [[MCStoreInterface defaultStoreInterface] restorePreviousPurchases];
         }

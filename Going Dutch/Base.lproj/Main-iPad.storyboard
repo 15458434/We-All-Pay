@@ -629,7 +629,7 @@
                                     <outlet property="oneTextLabel" destination="9mn-vQ-mtm" id="VhV-4q-9Br"/>
                                 </connections>
                             </tableViewCell>
-                            <tableViewCell contentMode="scaleToFill" restorationIdentifier="MCTwoLabelTableViewCell_iPad" selectionStyle="blue" hidesAccessoryWhenEditing="NO" indentationLevel="1" indentationWidth="0.0" reuseIdentifier="MCTwoLabelTableViewCell_iPad" id="Pug-dk-lX2" customClass="MCTwoLabelTableViewCell_iPad">
+                            <tableViewCell contentMode="scaleToFill" restorationIdentifier="MCTwoLabelTableViewCell_iPad" selectionStyle="none" hidesAccessoryWhenEditing="NO" indentationLevel="1" indentationWidth="0.0" reuseIdentifier="MCTwoLabelTableViewCell_iPad" id="Pug-dk-lX2" customClass="MCTwoLabelTableViewCell_iPad">
                                 <rect key="frame" x="0.0" y="99" width="320" height="44"/>
                                 <autoresizingMask key="autoresizingMask"/>
                                 <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" tableViewCell="Pug-dk-lX2" id="nuv-1N-bnt">

@@ -8,6 +8,13 @@
 
 #import "MCStoreInterface.h"
 
+@interface MCStoreInterface ()
+
+@property (nonatomic, strong) SKProductsRequest *productRequest;
+@property (nonatomic, strong) NSError *lastSKProductsRequestError;
+
+@end
+
 @implementation MCStoreInterface
 
 #pragma mark - Private in this class
@@ -81,16 +88,57 @@
     [productsRequest start];
 }
 
-- (void)buyProProduct
+- (void)buyProProductSendFrom:(UIViewController *)viewController
 {
-    SKMutablePayment *payment = [SKMutablePayment paymentWithProduct:_proProduct];
-    [payment setQuantity:1];
-    [[SKPaymentQueue defaultQueue] addPayment:payment];
+    if (_proProduct) {
+        SKMutablePayment *payment = [SKMutablePayment paymentWithProduct:_proProduct];
+        [payment setQuantity:1];
+        [[SKPaymentQueue defaultQueue] addPayment:payment];
+    } else {
+        // Show error message.
+        NSString *title = NSLocalizedString(@"App Store unavailable", @"Message that pops up when the App Store is not available.");
+        NSString *message = NSLocalizedString(@"Unable to connect to the App Store. Please connect to the internet.", @"Message body explaining the App Store can't be reached.");
+        NSString *dismissButtonTitle = NSLocalizedString(@"Dismiss", @"Button that says dismiss.");
+        if (NSClassFromString(@"UIAlertController")) {
+            // Execute UIAlertController class for displaying error.
+            UIAlertController *alertController = [UIAlertController alertControllerWithTitle:title message:message preferredStyle:UIAlertControllerStyleAlert];
+            UIAlertAction *dismissAction = [UIAlertAction actionWithTitle:dismissButtonTitle style:UIAlertViewStyleDefault handler:^(UIAlertAction *action) {
+                NSLog(@"App Store unavailable dismissed.");
+            }];
+            [alertController addAction:dismissAction];
+            [viewController presentViewController:alertController animated:YES completion:nil];
+        } else {
+            // Execute UIAlertView class for displaying error.
+            
+        }
+    }
 }
 
 - (void)restorePreviousPurchases
 {
     [[SKPaymentQueue defaultQueue] restoreCompletedTransactions];
+}
+
+#pragma mark - SKRequestDelegate
+
+- (void)requestDidFinish:(SKRequest *)request
+{
+    NSLog(@"%@ did finish", request);
+}
+
+- (void)request:(SKRequest *)request didFailWithError:(NSError *)error
+{
+    NSLog(@"Request: %@ has failed with error: %@", request, error);
+    if ([error.domain isEqualToString:SKErrorDomain]) {
+        switch (error.code) {
+            case 0:
+                NSLog(@"App Store not available.");
+                _lastSKProductsRequestError = error;
+                break;
+            default:
+                break;
+        }
+    }
 }
 
 #pragma mark - SKProductsRequestDelegate
@@ -102,6 +150,7 @@
         NSLog(@"Invalid product: %@", invalidIdentifier);
     }
     _proProduct = [[response products] firstObject];
+    _lastSKProductsRequestError = nil;
     [[NSNotificationCenter defaultCenter] postNotificationName:@"Product price" object:self userInfo:@{[_proProduct productIdentifier] : [_proProduct price] } ];
 }
 

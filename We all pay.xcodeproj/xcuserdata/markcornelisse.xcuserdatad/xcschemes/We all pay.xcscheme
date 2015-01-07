@@ -86,8 +86,8 @@
       ignoresPersistentStateOnLaunch = "NO"
       debugDocumentVersioning = "YES"
       allowLocationSimulation = "YES"
-      language = "nl"
-      region = "NL">
+      language = "en"
+      region = "US">
       <BuildableProductRunnable>
          <BuildableReference
             BuildableIdentifier = "primary"
@@ -99,9 +99,6 @@
       </BuildableProductRunnable>
       <AdditionalOptions>
       </AdditionalOptions>
-      <DeviceAppData
-         resolvedPath = "../../Going Dutch/We all pay database version 4.xcappdata">
-      </DeviceAppData>
       <LocationScenarioReference
          identifier = "com.apple.dt.IDEFoundation.CurrentLocationScenarioIdentifier"
          referenceType = "1">
