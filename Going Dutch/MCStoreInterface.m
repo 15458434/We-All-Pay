@@ -8,10 +8,11 @@
 
 #import "MCStoreInterface.h"
 
-@interface MCStoreInterface ()
+@interface MCStoreInterface () <UIAlertViewDelegate>
 
 @property (nonatomic, strong) SKProductsRequest *productRequest;
 @property (nonatomic, strong) NSError *lastSKProductsRequestError;
+@property (nonatomic, strong) UIAlertView *appStoreUnreachableAlert;
 
 @end
 
@@ -109,7 +110,8 @@
             [viewController presentViewController:alertController animated:YES completion:nil];
         } else {
             // Execute UIAlertView class for displaying error.
-            
+            _appStoreUnreachableAlert = [[UIAlertView alloc] initWithTitle:title message:message delegate:self cancelButtonTitle:dismissButtonTitle otherButtonTitles:nil];
+            [_appStoreUnreachableAlert show];
         }
     }
 }
@@ -117,6 +119,13 @@
 - (void)restorePreviousPurchases
 {
     [[SKPaymentQueue defaultQueue] restoreCompletedTransactions];
+}
+
+#pragma mark - UIAlertViewDelegate
+
+- (void)alertView:(UIAlertView *)alertView clickedButtonAtIndex:(NSInteger)buttonIndex
+{
+    _appStoreUnreachableAlert = nil;
 }
 
 #pragma mark - SKRequestDelegate
