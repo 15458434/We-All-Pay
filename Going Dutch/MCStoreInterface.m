@@ -14,6 +14,8 @@
 @property (nonatomic, strong) NSError *lastSKProductsRequestError;
 @property (nonatomic, strong) UIAlertView *appStoreUnreachableAlert;
 
+@property (nonatomic) BOOL applyProVersionSuccesful; //
+
 @end
 
 @implementation MCStoreInterface
@@ -35,7 +37,8 @@
     // The first string is the Pro Version
     NSString *productIdentifier = [[self getProProductIdentifiers] firstObject];
     [[NSUserDefaults standardUserDefaults] setBool:YES forKey:productIdentifier];
-    [[NSUserDefaults standardUserDefaults] synchronize];
+    // synchronise takes some time. Therefor successvalue is cached in _applyProVersionSuccesful.
+    _applyProVersionSuccesful = [[NSUserDefaults standardUserDefaults] synchronize];
 }
 
 - (void)completeTransaction:(SKPaymentTransaction *)transaction
@@ -69,10 +72,13 @@
 
 - (BOOL)isProProductPurchased
 {
-    // Verify is ProProduct is Purchased.
-    NSString *productIdentifier = [[self getProProductIdentifiers] firstObject];
-    // If there is no value for that key or when the value for that key is no NO should be the return value.
-    return [[NSUserDefaults standardUserDefaults] valueForKey:productIdentifier];
+    if (!_applyProVersionSuccesful) {
+        // Verify is ProProduct is Purchased.
+        NSString *productIdentifier = [[self getProProductIdentifiers] firstObject];
+        // If there is no value for that key or when the value for that key is no NO should be the return value.
+        _applyProVersionSuccesful = [[NSUserDefaults standardUserDefaults] valueForKey:productIdentifier];
+    }
+    return _applyProVersionSuccesful;
 }
 
 + (BOOL)canMakePayments
@@ -226,6 +232,7 @@
     if (self = [super init]) {
         _someProperty = @"Default Property Value";
         [[SKPaymentQueue defaultQueue] addTransactionObserver:self];
+        _applyProVersionSuccesful = NO;
     }
     return self;
 }
