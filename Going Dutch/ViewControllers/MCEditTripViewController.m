@@ -15,6 +15,7 @@
 #import "MCWeAllPayStoreController.h"
 #import "MCPerson+addons.h"
 #import "MCSharedBill+addons.h"
+#import "MCCurrency+addons.h"
 
 #import "MCPersonTableViewCell.h"
 #import "MCTwoLabelsTitleView.h"
@@ -479,8 +480,8 @@
     if (![thisCellsPerson hasPersonMadePaymentWithInvalidExchangeRates]) {
         [thisCell.fetchingExchangeRateIndicator stopAnimating];
         [[thisCell totalSpent] setHidden:NO];
-        NSNumberFormatter *nf = [[NSNumberFormatter alloc] init];
-        [nf setNumberStyle:NSNumberFormatterCurrencyStyle];
+        
+        NSNumberFormatter *nf = [[_tonightsBill mainCurrency] numberFormatter];
         [[thisCell totalSpent] setText:[nf stringFromNumber:[_tonightsBill totalSumPaidBy:thisCellsPerson]]];
     } else {
         [thisCell.fetchingExchangeRateIndicator startAnimating];
