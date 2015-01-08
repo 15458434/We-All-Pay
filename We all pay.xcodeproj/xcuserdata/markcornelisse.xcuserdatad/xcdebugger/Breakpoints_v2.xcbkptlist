@@ -20,11 +20,11 @@
             ignoreCount = "0"
             continueAfterRunningActions = "No"
             filePath = "Going Dutch/ViewControllers/MCPaymentViewController.m"
-            timestampString = "440021630.157287"
+            timestampString = "441968261.140877"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "682"
-            endingLineNumber = "682"
+            startingLineNumber = "685"
+            endingLineNumber = "685"
             landmarkName = "-prepareForSegue:sender:"
             landmarkType = "5">
          </BreakpointContent>
@@ -36,11 +36,13 @@
             ignoreCount = "0"
             continueAfterRunningActions = "No"
             filePath = "Who is paying next/WhoIsPayingNextTextLocalizer.swift"
-            timestampString = "440458075.877932"
+            timestampString = "440602078.201752"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "84"
-            endingLineNumber = "84">
+            startingLineNumber = "88"
+            endingLineNumber = "88"
+            landmarkName = "createErrorMessage()"
+            landmarkType = "7">
          </BreakpointContent>
       </BreakpointProxy>
    </Breakpoints>

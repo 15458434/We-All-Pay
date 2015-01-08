@@ -24,7 +24,7 @@
 
 #import "UIViewController+WeAllPayStore.h"
 
-#import "MCWhoPayingUserDefaultsStoreInterface.h"
+#import "MCWhoPayingUserDefaultsStoreInterface+WeAllPay.h"
 
 typedef NS_ENUM(BOOL, MCTonightsBillStatus) {
     isClosed,
@@ -404,13 +404,14 @@ typedef NS_ENUM(BOOL, MCTonightsBillStatus) {
 {
     if (editingStyle == UITableViewCellEditingStyleDelete) {
         MCSharedBill *toBeDeleteSharedBill = [_dataController objectAtIndexPath:indexPath];
-        
-        // If currentToBeDeleted tonightsBill the same as the one in the Today Extension delete content.
-        NSString *uniqueID = toBeDeleteSharedBill.uniqueBillId;
-        MCWhoPayingUserDefaultsStoreInterface *someStore = [[MCWhoPayingUserDefaultsStoreInterface alloc] init];
-        if ([uniqueID isEqualToString:someStore.tonightsBillUUID]) {
-            [[NCWidgetController widgetController] setHasContent:NO forWidgetWithBundleIdentifier:MCWhoIsPayingNextBundleIdentifier];
-        }
+
+        [MCWhoPayingUserDefaultsStoreInterface sendInvalidUserDefaultsIfTonightsBillIs:toBeDeleteSharedBill];
+//        // If currentToBeDeleted tonightsBill the same as the one in the Today Extension delete content.
+//        NSString *uniqueID = toBeDeleteSharedBill.uniqueBillId;
+//        MCWhoPayingUserDefaultsStoreInterface *someStore = [[MCWhoPayingUserDefaultsStoreInterface alloc] init];
+//        if ([uniqueID isEqualToString:someStore.tonightsBillUUID]) {
+//            [[NCWidgetController widgetController] setHasContent:NO forWidgetWithBundleIdentifier:MCWhoIsPayingNextBundleIdentifier];
+//        }
         [MCSharedBill deleteSharedbill:toBeDeleteSharedBill];
         [[MCWeAllPayStoreController defaultStore] saveMainThreadContext];
     }
@@ -471,12 +472,28 @@ typedef NS_ENUM(BOOL, MCTonightsBillStatus) {
         _isATonightsBillOpened = isOpened;
     }
     MCSharedBill *theBill;
-    NSIndexPath *indexPathOfSelectedRow = [[self tableView] indexPathForSelectedRow];
-    if (indexPathOfSelectedRow) {
-        theBill = [_dataController objectAtIndexPath:indexPathOfSelectedRow];
+    if ([sender isKindOfClass:[NSArray class]]) {
+        if ([[segue destinationViewController] conformsToProtocol:@protocol(MCTonightsBillTransfer)]) {
+            [[segue destinationViewController] setTonightsBill:[sender firstObject]];
+        }
+    } else {
+        NSIndexPath *indexPathOfSelectedRow = [[self tableView] indexPathForSelectedRow];
+        if (indexPathOfSelectedRow) {
+            theBill = [_dataController objectAtIndexPath:indexPathOfSelectedRow];
+        }
+        if ([[segue destinationViewController] conformsToProtocol:@protocol(MCTonightsBillTransfer)]) {
+            [[segue destinationViewController] setTonightsBill:theBill];
+        }
     }
-    if ([[segue destinationViewController] conformsToProtocol:@protocol(MCTonightsBillTransfer)]) {
-        [[segue destinationViewController] setTonightsBill:theBill];
+    
+    if ([[segue identifier] isEqualToString:@"newPaymentFromEvents"]) {
+        MCSharedBill *theBill = [sender firstObject];
+        if ([[segue destinationViewController] conformsToProtocol:@protocol(MCTonightsBillTransfer)]) {
+            [[segue destinationViewController] setTonightsBill:theBill];
+        }
+        if ([[segue destinationViewController] conformsToProtocol:@protocol(MCPathComponentsToOpenProtocol) ]) {
+            [[segue destinationViewController] setPathComponentsToOpen:sender];
+        }
     }
 }
 

@@ -22,7 +22,7 @@
 #import "MCCategoryPictureStoreController.h"
 #import "MCCategoryPictureObject.h"
 
-#import "MCWhoPayingUserDefaultsStoreInterface.h"
+#import "MCWhoPayingUserDefaultsStoreInterface+WeAllPay.h"
 
 typedef NS_ENUM(BOOL, ChildViewOpened) {
     isNotOpened,
@@ -88,10 +88,7 @@ typedef NS_ENUM(BOOL, ChildViewOpened) {
     }
     [[MCWeAllPayStoreController defaultStore] saveMainThreadContext];
     [[[self navigationController] presentingViewController] dismissViewControllerAnimated:YES completion:^{
-        MCPerson *nextPayer = (MCPerson *)[[_tonightsBill fetchPeoplePresentOrderedByAmountPaid:YES] firstObject];
-        MCWhoPayingUserDefaultsStoreInterface *nextStore = [[MCWhoPayingUserDefaultsStoreInterface alloc] initWithTonightsBillUUID:_tonightsBill.uniqueBillId withTripName:_tonightsBill.tripName andTheNextPayerID:nextPayer.uniquePersonId withFullName:nextPayer.getFullName];
-        [nextStore storeToDefaults];
-        [[NCWidgetController widgetController] setHasContent:YES forWidgetWithBundleIdentifier:MCWhoIsPayingNextBundleIdentifier];
+        [MCWhoPayingUserDefaultsStoreInterface sendToUserDefaultsStoreInterface:_tonightsBill];
     }];
 }
 
@@ -379,6 +376,9 @@ typedef NS_ENUM(BOOL, ChildViewOpened) {
     if (!_thisPayment) {
         _thisPayment = [_tonightsBill addPayment];
         _isNew = YES;
+        if (_pathComponentsToOpen) {
+            _thisPayment.payingPerson = _pathComponentsToOpen.lastObject;
+        }
 //        didSomethingChange = YES;
     } else {
         _isNew = NO;
@@ -473,6 +473,9 @@ typedef NS_ENUM(BOOL, ChildViewOpened) {
     if (categoryObject.categoryId > 0) {
         _categoryView.image = categoryObject.largePicture;
         [_categoryButton setTitle:categoryObject.categoryDescription forState:UIControlStateNormal];
+    } else {
+        NSString *buttonText = NSLocalizedString(@"SELECT_CATEGORY", @"Select Category");
+        [_categoryButton setTitle:buttonText forState:UIControlStateNormal];
     }
     
     if (!_isNew || _selectCurrencyTableViewController == isOpened) {

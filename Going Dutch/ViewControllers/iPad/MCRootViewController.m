@@ -8,6 +8,8 @@
 
 #import "MCRootViewController.h"
 
+#import "MCTonightsBillTransfer.h"
+
 @interface MCRootViewController ()
 
 @end
@@ -60,7 +62,6 @@
     return UIStatusBarStyleLightContent;
 }
 
-/*
 #pragma mark - Navigation
 
 // In a storyboard-based application, you will often want to do a little preparation before navigation
@@ -68,7 +69,13 @@
 {
     // Get the new view controller using [segue destinationViewController].
     // Pass the selected object to the new view controller.
+    if ([[segue identifier] isEqualToString:@"openEvent"]) {
+        if ([sender isKindOfClass:[NSArray class]]) {
+            if ([[segue destinationViewController] conformsToProtocol:@protocol(MCTonightsBillTransfer)]) {
+                [[segue destinationViewController] setTonightsBill:[sender firstObject]];
+            }
+        }
+    }
 }
-*/
 
 @end

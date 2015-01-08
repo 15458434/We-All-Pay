@@ -81,7 +81,11 @@
         // There was an error.
         return nil;
     } else {
-        return sharedBills[0];
+        if (sharedBills.count > 0) {
+            return sharedBills[0];
+        } else {
+            return nil;
+        }
     }
 }
 
@@ -104,6 +108,9 @@
         if ([people count] == 0) {
             return YES;
         } else {
+#if DEBUG
+            NSLog(@"sharedBills.count should not be 0.");
+#endif
             return NO;
         }
     } else {
@@ -232,6 +239,23 @@
         [payment recalculateAveragePeopleOweAndStore];
     }
     [MCPerson deletePerson:toBeDeletedPerson];
+}
+
+- (MCPerson *)fetchPersonWithUniqueID:(NSString *)uuid
+{
+    NSManagedObjectContext *context = self.managedObjectContext;
+    NSFetchRequest *request = [NSFetchRequest fetchRequestWithEntityName:@"MCPerson"];
+    request.sortDescriptors = @[[NSSortDescriptor sortDescriptorWithKey:@"dateCreated" ascending:YES]];
+    request.predicate = [NSPredicate predicateWithFormat:@"ANY sharedBill = %@ AND uniquePersonId = %@", self, uuid];
+    NSError *fetchError;
+    NSArray *result = [context executeFetchRequest:request error:&fetchError];
+    if (!result) {
+        NSLog(@"Error fetching person with id:%@", uuid);
+        NSLog(@"%@", fetchError.description);
+        return nil;
+    } else {
+        return result.firstObject;
+    }
 }
 
 - (BOOL)isPresentWithFirstName:(NSString *)firstName andLastName:(NSString *)lastName andEmailAddress:(NSString *)emailAddress

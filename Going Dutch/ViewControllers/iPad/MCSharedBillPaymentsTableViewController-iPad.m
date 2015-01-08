@@ -24,6 +24,8 @@
 #import "MCCategoryPictureObject.h"
 #import "MCCategoryPictureStoreController.h"
 
+#import "MCWhoPayingUserDefaultsStoreInterface+WeAllPay.h"
+
 @interface MCSharedBillPaymentsTableViewController_iPad ()
 
 @property (nonatomic, strong) NSFetchedResultsController *dataController;
@@ -286,6 +288,7 @@
 {
     if (editingStyle == UITableViewCellEditingStyleDelete) {
         // Delete the row from the data source
+        [MCWhoPayingUserDefaultsStoreInterface sendToUserDefaultsStoreInterface:_tonightsBill];
         [MCPayment deletePayment:[_dataController objectAtIndexPath:indexPath]];
         [[MCWeAllPayStoreController defaultStore] saveMainThreadContext];
     } else if (editingStyle == UITableViewCellEditingStyleInsert) {

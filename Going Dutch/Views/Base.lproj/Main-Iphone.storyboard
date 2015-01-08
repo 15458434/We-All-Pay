@@ -12,7 +12,7 @@
             <objects>
                 <tableViewController storyboardIdentifier="MCAllTripsTableViewController" useStoryboardIdentifierAsRestorationIdentifier="YES" id="v9b-wE-q9L" customClass="MCAllTripsTableViewController" sceneMemberID="viewController">
                     <tableView key="view" opaque="NO" clipsSubviews="YES" clearsContextBeforeDrawing="NO" contentMode="scaleToFill" restorationIdentifier="AllTripTableView" alwaysBounceVertical="YES" dataMode="prototypes" style="plain" separatorStyle="default" rowHeight="76" sectionHeaderHeight="22" sectionFooterHeight="22" id="dFL-jL-DGD">
-                        <rect key="frame" x="0.0" y="64" width="320" height="504"/>
+                        <rect key="frame" x="0.0" y="64" width="320" height="568"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                         <view key="tableHeaderView" contentMode="scaleToFill" restorationIdentifier="MCAllTripsActionHeader" id="b5c-w1-Nq5" customClass="UITableViewHeaderFooterView">
@@ -193,7 +193,7 @@
                                             <fontDescription key="fontDescription" name="HelveticaNeue-Thin" family="Helvetica Neue" pointSize="17"/>
                                             <color key="highlightedColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                                         </label>
-                                        <label opaque="NO" clipsSubviews="YES" userInteractionEnabled="NO" contentMode="left" text="Label" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="vGm-aA-fss" userLabel="itemLabel">
+                                        <label opaque="NO" clipsSubviews="YES" userInteractionEnabled="NO" contentMode="left" horizontalCompressionResistancePriority="749" text="Label" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="vGm-aA-fss" userLabel="itemLabel">
                                             <rect key="frame" x="67" y="42" width="191" height="16"/>
                                             <constraints>
                                                 <constraint firstAttribute="width" priority="250" constant="214" id="PK3-Vo-cgI"/>
@@ -267,10 +267,10 @@
                         <viewControllerLayoutGuide type="bottom" id="fgA-y2-cLZ"/>
                     </layoutGuides>
                     <view key="view" contentMode="scaleToFill" restorationIdentifier="sharedBillMainViewController" id="hQT-KL-JNT">
-                        <rect key="frame" x="0.0" y="64" width="320" height="504"/>
+                        <rect key="frame" x="0.0" y="64" width="320" height="568"/>
                         <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                         <subviews>
-                            <containerView contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="5xC-6r-YOL">
+                            <containerView contentMode="scaleToFill" misplaced="YES" translatesAutoresizingMaskIntoConstraints="NO" id="5xC-6r-YOL">
                                 <rect key="frame" x="0.0" y="0.0" width="320" height="504"/>
                                 <color key="backgroundColor" red="0.80000007149999997" green="0.86666673419999996" blue="0.94117653369999998" alpha="1" colorSpace="deviceRGB"/>
                                 <connections>
@@ -385,7 +385,7 @@
                                     <outlet property="oneTextLabel" destination="YbH-6C-Ojs" id="BbN-Pp-dfU"/>
                                 </connections>
                             </tableViewCell>
-                            <tableViewCell contentMode="scaleToFill" restorationIdentifier="MCTwoLabelIscreenTableViewCell" selectionStyle="blue" hidesAccessoryWhenEditing="NO" indentationLevel="1" indentationWidth="0.0" reuseIdentifier="MCTwoLabelIscreenTableViewCell" rowHeight="44" id="WQg-5R-RbW" customClass="MCTwoLabelIscreenTableViewCell">
+                            <tableViewCell contentMode="scaleToFill" restorationIdentifier="MCTwoLabelIscreenTableViewCell" selectionStyle="none" hidesAccessoryWhenEditing="NO" indentationLevel="1" indentationWidth="0.0" reuseIdentifier="MCTwoLabelIscreenTableViewCell" rowHeight="44" id="WQg-5R-RbW" customClass="MCTwoLabelIscreenTableViewCell">
                                 <rect key="frame" x="0.0" y="99" width="320" height="44"/>
                                 <autoresizingMask key="autoresizingMask"/>
                                 <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" restorationIdentifier="TwoLabelContentViewOfTableViewCell" tableViewCell="WQg-5R-RbW" id="g1O-GD-HcA">
@@ -1339,7 +1339,7 @@
         <!--Navigation Controller-->
         <scene sceneID="kuh-rf-mIe">
             <objects>
-                <navigationController automaticallyAdjustsScrollViewInsets="NO" id="R4f-Dn-Lh4" sceneMemberID="viewController">
+                <navigationController storyboardIdentifier="navPaymentViewController" automaticallyAdjustsScrollViewInsets="NO" useStoryboardIdentifierAsRestorationIdentifier="YES" id="R4f-Dn-Lh4" sceneMemberID="viewController">
                     <toolbarItems/>
                     <simulatedStatusBarMetrics key="simulatedStatusBarMetrics" statusBarStyle="lightContent"/>
                     <simulatedNavigationBarMetrics key="simulatedTopBarMetrics" barStyle="black" translucent="NO" prompted="NO"/>
@@ -1350,6 +1350,7 @@
                     <nil name="viewControllers"/>
                     <connections>
                         <segue destination="A1E-EB-xnZ" kind="relationship" relationship="rootViewController" id="V9y-d1-1LO"/>
+                        <segue destination="v9b-wE-q9L" kind="modal" identifier="newPaymentFromEvents" id="5Vh-JE-OCd"/>
                     </connections>
                 </navigationController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="bmD-Nz-QbR" userLabel="First Responder" sceneMemberID="firstResponder"/>
@@ -1450,6 +1451,7 @@
         <simulatedScreenMetrics key="destination" type="retina4"/>
     </simulatedMetricsContainer>
     <inferredMetricsTieBreakers>
+        <segue reference="5Vh-JE-OCd"/>
         <segue reference="C0F-pM-cfm"/>
     </inferredMetricsTieBreakers>
 </document>

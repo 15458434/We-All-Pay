@@ -10,7 +10,7 @@
 @import StoreKit;
 @import Security;
 
-@interface MCStoreInterface : NSObject <SKProductsRequestDelegate, SKPaymentTransactionObserver>
+@interface MCStoreInterface : NSObject <SKProductsRequestDelegate, SKPaymentTransactionObserver, SKRequestDelegate>
 {
     NSArray *productIdentifiers;
 }
@@ -22,7 +22,7 @@
 + (BOOL)canMakePayments;
 
 - (void)validateProductIdentifiers;
-- (void)buyProProduct;
+- (void)buyProProductSendFrom:(UIViewController *)viewController;
 - (void)restorePreviousPurchases;
 
 - (BOOL)isProProductPurchased;

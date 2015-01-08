@@ -17,7 +17,6 @@
 
 @interface MCSharedBillViewController_iPad : UIViewController <MCTonightsBillTransfer, MCAddressBookReceiverDelegate, UITextFieldDelegate>
 
-@property (weak, nonatomic) IBOutlet UITextField *tripNameField;
 @property (strong, nonatomic) MCAddressBookDataReceiver *personReceiver;
 
 @property (strong, nonatomic) MCSharedBill *tonightsBill;

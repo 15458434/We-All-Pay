@@ -14,8 +14,8 @@
 /* Class = "IBUINavigationItem"; title = "people and payments"; ObjectID = "Ajb-WY-VLi"; */
 "Ajb-WY-VLi.title" = "Mensen en betalingen";
 
-/* Class = "IBUITextField"; placeholder = "Event name"; ObjectID = "Y5X-Hm-GBF"; */
-"Y5X-Hm-GBF.placeholder" = "Naam van de totaal rekening";
+/* Class = "IBUITextField"; placeholder = "Event name"; ObjectID = "01X-vX-W0B"; */
+"01X-vX-W0B.placeholder" = "Naam van de totaal rekening";
 
 /* Class = "IBUILabel"; text = "moneyLabel"; ObjectID = "Bus-qo-pqC"; */
 "Bus-qo-pqC.text" = "moneyLabel";
@@ -84,7 +84,7 @@
 "eD2-1r-4uR.text" = "nameLabel";
 
 /* Class = "IBUITextField"; placeholder = "emailaddress"; ObjectID = "eax-dw-aIf"; */
-"eax-dw-aIf.placeholder" = "Emailaddress";
+"eax-dw-aIf.placeholder" = "E-mailadres";
 
 /* Class = "IBUIButton"; normalTitle = "add payment"; ObjectID = "egw-0d-cT1"; */
 "egw-0d-cT1.normalTitle" = "Nieuwe betaling";

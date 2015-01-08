@@ -21,11 +21,26 @@
 	<key>CFBundlePackageType</key>
 	<string>APPL</string>
 	<key>CFBundleShortVersionString</key>
-	<string>1.4.3</string>
+	<string>1.5.0</string>
 	<key>CFBundleSignature</key>
 	<string>????</string>
+	<key>CFBundleURLTypes</key>
+	<array>
+		<dict>
+			<key>CFBundleTypeRole</key>
+			<string>Editor</string>
+			<key>CFBundleURLIconFile</key>
+			<string>three peeps</string>
+			<key>CFBundleURLName</key>
+			<string>com.GreenHair.We-all-pay</string>
+			<key>CFBundleURLSchemes</key>
+			<array>
+				<string>weallpay</string>
+			</array>
+		</dict>
+	</array>
 	<key>CFBundleVersion</key>
-	<string>67</string>
+	<string>69</string>
 	<key>LSRequiresIPhoneOS</key>
 	<true/>
 	<key>UIFileSharingEnabled</key>

@@ -24,12 +24,21 @@
 #import "MCCategoryPictureStoreController.h"
 #import "MCCategoryPictureObject.h"
 
+#import "MCWhoPayingUserDefaultsStoreInterface+WeAllPay.h"
+
+typedef NS_ENUM(BOOL, MCCancelButtonPressed) {
+    cancelIsNotPressed,
+    cancelIsPressed
+};
+
 @interface MCPaymentTableViewController_iPad ()
 
 @property (weak, nonatomic) IBOutlet UIImageView *categoryImage;
 @property (weak, nonatomic) IBOutlet UIButton *categoryButton;
 @property (weak, nonatomic) IBOutlet UIImageView *payerView;
 @property (weak, nonatomic) IBOutlet UIButton *selectButton;
+
+@property (nonatomic) MCCancelButtonPressed mainCancelPressed;
 
 @end
 
@@ -59,6 +68,9 @@
     [[MCWeAllPayStoreController defaultStore] endUndoGroupAndProcess];
     [[MCWeAllPayStoreController defaultStore] saveMainThreadContext];
     [[[self navigationController] presentingViewController] dismissViewControllerAnimated:YES completion:nil];
+    
+    [MCWhoPayingUserDefaultsStoreInterface sendToUserDefaultsStoreInterface:_tonightsBill];
+    
     if (_dismissMe) {
         _dismissMe();
     }
@@ -87,13 +99,9 @@
     MCCategoryPictureObject *categoryObject = [[[MCCategoryPictureStoreController sharedController] pictureObjects] objectAtIndex:[_thisPayment.categoryId shortValue]];
     if ([categoryObject categoryId] > 0) {
         _categoryImage.image = categoryObject.largePicture;
-//        [_categoryButton setBackgroundImage:categoryObject.largePicture forState:UIControlStateNormal];
-//        [_categoryButton setTitle:@"" forState:UIControlStateNormal];
     } else {
         _categoryImage.image = nil;
-//        [_categoryButton setBackgroundImage:nil forState:UIControlStateNormal];
-//        NSString *title = NSLocalizedString(@"CATEGORY", @"Text of the category button.");
-//        [_categoryButton setTitle:title forState:UIControlStateNormal];
+
     }
 }
 
@@ -106,7 +114,7 @@
         [_categoryButton setTitle:categoryObject.categoryDescription forState:UIControlStateNormal];
     } else {
         _categoryImage.image = nil;
-        NSString *title = NSLocalizedString(@"CATEGORY", @"Text of the category button.");
+        NSString *title = NSLocalizedString(@"SELECT_CATEGORY", @"Text of the category button.");
         [_categoryButton setTitle:title forState:UIControlStateNormal];
     }
     [_categoryButton sizeToFit];
@@ -131,7 +139,6 @@
     }
 }
 
-
 - (void)reloadPayerView
 {
     [self setTextPayerButton];
@@ -151,6 +158,15 @@
 - (void)tappedInTheBackground:(id)selector
 {
     [self dismissTheKeyboard];
+}
+
+- (void)respondToPresenceOfPathComponentsFromAppLaunch
+{
+    if (_pathComponentsToOpen) {
+        _tonightsBill = _pathComponentsToOpen[0];
+        _thisPayment = [_tonightsBill addPayment];
+        _thisPayment.payingPerson = _pathComponentsToOpen[1];
+    }
 }
 
 #pragma mark - Inherited from super
@@ -174,6 +190,7 @@
     // Uncomment the following line to display an Edit button in the navigation bar for this view controller.
     // self.navigationItem.rightBarButtonItem = self.editButtonItem;
     
+    [self respondToPresenceOfPathComponentsFromAppLaunch];
     // _tonightsBill should be present.
     NSParameterAssert(_tonightsBill);
     

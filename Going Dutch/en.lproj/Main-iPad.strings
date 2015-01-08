@@ -14,8 +14,8 @@
 /* Class = "IBUINavigationItem"; title = "people and payments"; ObjectID = "Ajb-WY-VLi"; */
 "Ajb-WY-VLi.title" = "People and payments";
 
-/* Class = "IBUITextField"; placeholder = "Event name"; ObjectID = "Y5X-Hm-GBF"; */
-"Y5X-Hm-GBF.placeholder" = "Event name";
+/* Class = "IBUITextField"; placeholder = "Event name"; ObjectID = "01X-vX-W0B"; */
+"01X-vX-W0B.placeholder" = "Event name";
 
 /* Class = "IBUILabel"; text = "moneyLabel"; ObjectID = "Bus-qo-pqC"; */
 "Bus-qo-pqC.text" = "moneyLabel";

@@ -8,13 +8,45 @@
 
 #import "MCAppDelegate.h"
 #import "MCAllTripsTableViewController.h"
+#import "MCPaymentViewController.h"
+
+#import "MCAllTripsTableViewController-iPad.h"
+#import "MCPaymentTableViewController_iPad.h"
+
 #import "MCWeAllPayStoreController.h"
 #import "MCStoreInterface.h"
 #import "XRCurrencyStoreController.h"
 
+#import "MCSharedBill+addons.h"
+#import "MCPerson+addons.h"
+#import "MCPayment+addons.h"
+
+#import "We_all_pay-Swift.h"
+
 @implementation MCAppDelegate
 
 #pragma mark - New in this class
+
+- (void)checkToSeeIfThisPurchaseOriginatesFromiAd
+{
+    ADoriginate *adAttributionObject = [[ADoriginate alloc] init];
+    if (adAttributionObject.fromiAd != nil) {
+        // There is a value present.
+        if (adAttributionObject.fromiAd.boolValue) {
+            NSLog(@"We met with iAd.");
+        } else {
+            NSLog(@"We didn't met with iAd");
+        }
+    } else {
+        [adAttributionObject fetchAttribution:^{
+            if (adAttributionObject.fromiAd.boolValue) {
+                NSLog(@"We met with iAd.");
+            } else {
+                NSLog(@"We didn't met with iAd");
+            }
+        }];
+    }
+}
 
 //- (void)setupGoogleAnalytics
 //{
@@ -126,6 +158,59 @@
 
 #pragma mark - UIApplicationDelegate
 
+- (BOOL)application:(UIApplication *)application openURL:(NSURL *)url sourceApplication:(NSString *)sourceApplication annotation:(id)annotation
+{
+    NSArray *pathComponents = url.pathComponents;
+    if (pathComponents.count != 3) {
+        return NO;
+    }
+    NSString *billID = pathComponents[1];
+    NSString *nextPayerID = pathComponents[2];
+    
+    // Verify existense of tonightsBill
+    MCSharedBill *tonightsBill = [MCSharedBill fetchSharedBillWithUniqueId:billID inContext:[[MCWeAllPayStoreController defaultStore] mainThreadContext] ];
+    if (!tonightsBill) {
+        NSLog(@"Unable to open this event.");
+        return NO;
+    }
+    // Verify existendse of payer on tonightsBill
+    MCPerson *nextPayer = [tonightsBill fetchPersonWithUniqueID:nextPayerID];
+    if (!nextPayer) {
+        NSLog(@"Unable to find specified person");
+        return NO;
+    }
+    // Navigate to the add payment screen.
+    NSArray *pathDuringOpening = @[tonightsBill, nextPayer];
+    UINavigationController *navController = (UINavigationController *)self.window.rootViewController;
+    [navController popToRootViewControllerAnimated:NO];
+    
+    if ([[UIDevice currentDevice] userInterfaceIdiom] == UIUserInterfaceIdiomPad) {
+        // open add payment
+        UIStoryboard *storyboard = self.window.rootViewController.storyboard;
+        UINavigationController *navPaymentViewController = [storyboard instantiateViewControllerWithIdentifier:@"navPaymentViewController"];
+        MCPaymentTableViewController_iPad *paymentViewController = (MCPaymentTableViewController_iPad *)[navPaymentViewController viewControllers][0];
+        paymentViewController.pathComponentsToOpen = pathDuringOpening;
+        paymentViewController.tonightsBill = tonightsBill;
+        [navController presentViewController:navPaymentViewController animated:YES completion:nil];
+        // open tonightsBill
+        UIViewController *mcRootViewController = navController.viewControllers[0];
+        [mcRootViewController performSegueWithIdentifier:@"openEvent" sender:pathDuringOpening];
+    } else {
+        // open add payment
+        UIStoryboard *storyboard = self.window.rootViewController.storyboard;
+        UINavigationController *navPaymentViewController = [storyboard instantiateViewControllerWithIdentifier:@"navPaymentViewController"];
+        MCPaymentViewController *paymentViewController = (MCPaymentViewController *)[navPaymentViewController viewControllers][0];
+        paymentViewController.pathComponentsToOpen = pathDuringOpening;
+        paymentViewController.tonightsBill = tonightsBill;
+        [navController presentViewController:navPaymentViewController animated:YES completion:nil];
+        // open tonightsBill
+        UIViewController *allTripsViewController = navController.viewControllers[0];
+        [allTripsViewController performSegueWithIdentifier:@"openTonightsBill" sender:pathDuringOpening];
+    }
+    
+    return YES;
+}
+
 - (BOOL)application:(UIApplication *)application shouldRestoreApplicationState:(NSCoder *)coder
 {
     return NO;
@@ -138,6 +223,10 @@
         [MCWeAllPayStoreController prepareCurrencyStoreIfNecessary];
         [[MCWeAllPayStoreController defaultStore] openStore:nil];
         
+    });
+    dispatch_queue_t someBackgroundQueue = dispatch_queue_create("originChech", NULL);
+    dispatch_async(someBackgroundQueue, ^{
+        [self checkToSeeIfThisPurchaseOriginatesFromiAd];
     });
     return YES;
 }

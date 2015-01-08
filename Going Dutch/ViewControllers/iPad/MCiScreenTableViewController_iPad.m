@@ -176,7 +176,7 @@
 //            // Not implemented yet.
 //        }
 //        if ([indexPath row] == 1) {
-            [[MCStoreInterface defaultStoreInterface] buyProProduct];
+            [[MCStoreInterface defaultStoreInterface] buyProProductSendFrom:self];
         }
         if ([indexPath row] == 1) {
             [[MCStoreInterface defaultStoreInterface] restorePreviousPurchases];

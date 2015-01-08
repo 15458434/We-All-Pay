@@ -41,30 +41,63 @@ class TodayViewController: UIViewController, NCWidgetProviding {
     
     func updateLabel() {
         println("updateLabel")
-        if valid == true {
-            let finalString: String = "For your event \(tripName), \(fullNameNextPayer) should pay next."
-            println(finalString)
-            if countElements(finalString) > 0 {
-                theLabel.attributedText = betterCreateAttributesStringForWhoIsPayingNext(tripName, fullNameNextPayer)
+        if let validValue = valid {
+            if validValue == true {
+                let finalString: String = "For your event \(tripName), \(fullNameNextPayer) should pay next."
+                println(finalString)
+                if countElements(finalString) > 0 {
+                    theLabel.attributedText = betterCreateAttributesStringForWhoIsPayingNext(tripName, fullNameNextPayer)
+                    theLabel.setNeedsUpdateConstraints()
+                    NCWidgetController.widgetController().setHasContent(true, forWidgetWithBundleIdentifier: MCWhoIsPayingNextBundleIdentifier)
+                } else {
+                    theLabel.attributedText = createErrorMessage()
+                    theLabel.setNeedsUpdateConstraints()
+                    NCWidgetController.widgetController().setHasContent(true, forWidgetWithBundleIdentifier: MCWhoIsPayingNextBundleIdentifier)
+                }
             } else {
-                NCWidgetController.widgetController().setHasContent(false, forWidgetWithBundleIdentifier: MCWhoIsPayingNextBundleIdentifier)
+                theLabel.attributedText = createErrorMessage()
+                theLabel.setNeedsUpdateConstraints()
+                NCWidgetController.widgetController().setHasContent(true, forWidgetWithBundleIdentifier: MCWhoIsPayingNextBundleIdentifier)
             }
         } else {
-            NCWidgetController.widgetController().setHasContent(false, forWidgetWithBundleIdentifier: MCWhoIsPayingNextBundleIdentifier)
+            theLabel.attributedText = createErrorMessage()
+            theLabel.setNeedsUpdateConstraints()
+            NCWidgetController.widgetController().setHasContent(true, forWidgetWithBundleIdentifier: MCWhoIsPayingNextBundleIdentifier)
         }
     }
     
     func defaultsDidUpdate(notification: NSNotification) {
         if updateLocalOptionalsFromUserDefaults() {
             updateLabel()
-            NCWidgetController.widgetController().setHasContent(true, forWidgetWithBundleIdentifier: MCWhoIsPayingNextBundleIdentifier)
         }
+        NCWidgetController.widgetController().setHasContent(true, forWidgetWithBundleIdentifier: MCWhoIsPayingNextBundleIdentifier)
+    }
+    
+    func tappedInTheBackground(sender: AnyObject) {
+        #if DEBUG
+            println("I am tapped.")
+        #endif
+        var urlString = "weallpay:///"
+        if let validValue = valid {
+            if validValue == true {
+                urlString = "weallpay:///\(tonightsBillID)/\(nextPayerID)"
+            }
+        }
+        println("Open: \(urlString)")
+        let url = NSURL(string: urlString)
+        self.extensionContext?.openURL(url!, completionHandler: nil)
     }
     
     override func viewDidLoad() {
         super.viewDidLoad()
         // Do any additional setup after loading the view from its nib.
         NSNotificationCenter.defaultCenter().addObserver(self, selector: "defaultsDidUpdate:", name: NSUserDefaultsDidChangeNotification, object: nil)
+
+        // Setup a tap in the Today Extension to open We all pay.
+        let thatTickles = UITapGestureRecognizer(target: self, action: "tappedInTheBackground:")
+        thatTickles.cancelsTouchesInView = false
+        self.view.addGestureRecognizer(thatTickles)
+        self.view.preservesSuperviewLayoutMargins = true
     }
     
     func widgetPerformUpdateWithCompletionHandler(completionHandler: ((NCUpdateResult) -> Void)!) {
@@ -80,8 +113,8 @@ class TodayViewController: UIViewController, NCWidgetProviding {
             updateLabel()
             completionHandler(NCUpdateResult.NewData)
         } else {
-            NCWidgetController.widgetController().setHasContent(false, forWidgetWithBundleIdentifier: MCWhoIsPayingNextBundleIdentifier);
-            completionHandler(NCUpdateResult.Failed)
+            updateLabel()
+            completionHandler(NCUpdateResult.NewData)
         }
     }
 }
