@@ -8,7 +8,7 @@
 
 #import "MCWeAllPayStoreController.h"
 
-#import "MCPerson.h"
+#import "MCPerson+addons.h"
 #import "MCPayment.h"
 #import "MCSharedBill.h"
 #import "MCCurrency+addons.h"
@@ -432,6 +432,25 @@ MCiCloudUse const isiCloudUsed = iCloudIsNotUsed;
     } else {
         return result;
     }
+}
+
+- (void)createCircularPeopleImages
+{
+    // Fetch all people.
+    NSFetchRequest *fetchRequest = [NSFetchRequest fetchRequestWithEntityName:@"MCPerson"];
+    fetchRequest.sortDescriptors = @[[NSSortDescriptor sortDescriptorWithKey:@"dateCreated" ascending:YES]];
+    NSError *fetchError;
+    NSArray *allPeople = [_mainThreadContext executeFetchRequest:fetchRequest error:&fetchError];
+    if (!allPeople) {
+        NSLog(@"Error fetching all people: %@", fetchError);
+    }
+    // Insert a new base picture for every person in the database.
+    for (MCPerson *person in allPeople) {
+        [person setPictureDataFromImage:nil];
+        [person setThumbnailDataFromImage:nil];
+    }
+    // Save everything.
+    [self saveMainThreadContext];
 }
 
 #pragma mark - Inherited from super class

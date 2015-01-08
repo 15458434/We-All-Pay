@@ -58,5 +58,6 @@ The We All Pay Store Controller is designed to do writing in the background and 
 - (NSFetchedResultsController *)searchCurrencyControllerWithSearchText:(NSString *)searchText withDelegate:(id)delegate;
 - (NSArray *)getPeopleOnSharedBill:(MCSharedBill *)thisBill;
 - (NSArray *)getEmailaddressesFrom:(MCPerson *)thisPerson;
+- (void)createCircularPeopleImages;
 
 @end

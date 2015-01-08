@@ -10,7 +10,7 @@
 #import "MCStoreInterface.h"
 
 #if DEBUG
-BOOL const showAdsInDebugVersion = YES;
+BOOL const showAdsInDebugVersion = NO;
 #endif
 
 @implementation MCTools
