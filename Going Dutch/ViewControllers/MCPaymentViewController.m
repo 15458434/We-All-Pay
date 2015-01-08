@@ -475,6 +475,7 @@ typedef NS_ENUM(BOOL, ChildViewOpened) {
         [_categoryButton setTitle:categoryObject.categoryDescription forState:UIControlStateNormal];
     } else {
         NSString *buttonText = NSLocalizedString(@"SELECT_CATEGORY", @"Select Category");
+        _categoryView.image = categoryObject.largePicture;
         [_categoryButton setTitle:buttonText forState:UIControlStateNormal];
     }
     
