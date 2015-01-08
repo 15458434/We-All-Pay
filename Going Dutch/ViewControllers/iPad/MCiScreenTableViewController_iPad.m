@@ -14,6 +14,8 @@
 #import "MCStoreInterface.h"
 #import "SKProduct+MCStoreInterface.h"
 
+#import "MCWeAllPayStoreController.h"
+
 @interface MCiScreenTableViewController_iPad ()
 
 @end
@@ -22,6 +24,9 @@
 
 #pragma mark - Actions
 
+- (IBAction)createCirclePictures:(id)sender {
+    [[MCWeAllPayStoreController defaultStore] createCircularPeopleImages];
+}
 
 - (IBAction)tweetUsPressed:(id)sender
 {

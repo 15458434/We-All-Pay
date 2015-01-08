@@ -14,6 +14,8 @@
 #import "MCStoreInterface.h"
 #import "SKProduct+MCStoreInterface.h"
 
+#import "MCWeAllPayStoreController.h"
+
 @interface MCiScreenTableViewController ()
 
 @end
@@ -21,6 +23,10 @@
 @implementation MCiScreenTableViewController
 
 #pragma mark - Actions
+
+- (IBAction)createCircularImages:(id)sender {
+    [[MCWeAllPayStoreController defaultStore] createCircularPeopleImages];
+}
 
 - (IBAction)mainCancelButtonPressed:(id)sender
 {
