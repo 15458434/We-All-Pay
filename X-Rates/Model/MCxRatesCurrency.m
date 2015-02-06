@@ -39,6 +39,18 @@ NSString * const MCCodingCurrencyISOCode = @"MCCodingCurrencyISOCode";
     return [_currencyISOCode hash];
 }
 
+#pragma mark - NSCopying
+
+- (instancetype)copyWithZone:(NSZone *)zone {
+    MCxRatesCurrency *copyOfSelf = [[[self class] allocWithZone:zone] init];
+    if (copyOfSelf) {
+        copyOfSelf.currencyName = [self.currencyName copy];
+        copyOfSelf.currencyISOCode = [self.currencyISOCode copy];
+        copyOfSelf.currencySymbol = [self.currencySymbol copy];
+    }
+    return copyOfSelf;
+}
+
 #pragma mark - NSCoding
 
 - (id)initWithCoder:(NSCoder *)aDecoder
