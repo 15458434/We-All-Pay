@@ -58,7 +58,11 @@ class MCMailComposer: NSObject {
         mailBody += "\n"
         
         for payment in allPayments {
-            mailBody += String.localizedStringWithFormat(NSLocalizedString("EMAIL_WHO_HAS_PAID", comment: "%1$@ has paid %2$@ for %3$@."), payment.payingPerson!.getName()!, tonightsBill.mainCurrency!.numberFormatter().stringFromNumber(payment.moneyInMainCurrency())!, payment.fullDescriptionOfPayment()!)
+            if payment.exchangeRate.exchangeRate.doubleValue == 1.0 {
+                mailBody += String.localizedStringWithFormat(NSLocalizedString("EMAIL_WHO_HAS_PAID", comment: "%1$@ has paid %2$@ for %3$@."), payment.payingPerson!.getName()!, tonightsBill.mainCurrency!.numberFormatter().stringFromNumber(payment.moneyInMainCurrency())!, payment.fullDescriptionOfPayment()!)
+            } else {
+                mailBody += String.localizedStringWithFormat(NSLocalizedString("EMAIL_WHO_HAS_PAID_INTERNATIONAL", comment: "%1$@ has paid %2$@(%3$@) for %4$@."), payment.payingPerson!.getName()!, tonightsBill.mainCurrency!.numberFormatter().stringFromNumber(payment.moneyInMainCurrency())!, payment.currency.numberFormatter().stringFromNumber(payment.money)!, payment.fullDescriptionOfPayment()!)
+            }
             mailBody += "\n"
         }
         mailBody += "\n"
