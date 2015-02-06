@@ -34,6 +34,7 @@
     NSNumberFormatter *nf = [currency numberFormatter];
     [nf setNumberStyle:NSNumberFormatterCurrencyStyle];
     
+    
     NSString *owesString1 = NSLocalizedString(@"EMAIL_OWES_PART_ONE", @"Part one of the words: %@ pays %@ to %@.");
     NSString *owesString2 = NSLocalizedString(@"EMAIL_OWES_PART_TWO", @"Part two of the words: %@ pays %@ to %@.");
     return [[NSString alloc] initWithFormat:@"%@ %@ %@ %@ %@.", [payer firstName], owesString1, [nf stringFromNumber:money], owesString2, [receiver firstName]];

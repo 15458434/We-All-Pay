@@ -19,7 +19,7 @@
 #import "MCWeAllPayStoreController.h"
 #import "MCReturnPayment.h"
 
-#import "MCMailComposer.h"
+#import "We_all_pay-Swift.h"
 
 #import "MCTitleViewDelegate.h"
 #import "MCCurrentViewDelegate.h"
@@ -208,14 +208,11 @@ NSInteger const maxPageIndex = 1;
     [[mailViewController viewControllers][0] setEdgesForExtendedLayout:UIRectEdgeNone];
     
     // Init the mailComposer
-    MCMailComposer *mailComposer = [[MCMailComposer alloc] init];
-    [mailComposer setTonightsBill:[self tonightsBill]];
-    [mailComposer setIsHTML:NO];
-    [mailComposer setSolution:[[self tonightsBill] solveWhoHasToPayWhoFromThisBill]];
+    MCMailComposer *mailComposer = [[MCMailComposer alloc] initWithTonightsBill:[self tonightsBill]];
     
     [mailViewController setToRecipients:[mailComposer getMailAddresses]];
     [mailViewController setSubject:[mailComposer getSubject]];
-    [mailViewController setMessageBody:[mailComposer getMailBody] isHTML:NO];
+    [mailViewController setMessageBody:[mailComposer getMailBody] isHTML:mailComposer.isHTML];
     
     if ([[UIDevice currentDevice] userInterfaceIdiom] == UIUserInterfaceIdiomPad) {
         [MCTools setAdBannerIfNotPaid:NO forViewController:[mailViewController viewControllers][0]];

@@ -6,3 +6,8 @@
 //  Copyright (c) 2014 Mark Cornelisse. All rights reserved.
 //
 
+#import "MCSharedBill+addons.h"
+#import "MCReturnPayment.h"
+#import "MCPayment+addons.h"
+#import "MCPerson+addons.h"
+#import "MCCurrency+addons.h"
