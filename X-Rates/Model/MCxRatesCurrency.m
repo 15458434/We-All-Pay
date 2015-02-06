@@ -15,6 +15,15 @@ NSString * const MCCodingCurrencyISOCode = @"MCCodingCurrencyISOCode";
 
 @implementation MCxRatesCurrency
 
+@synthesize fullCurrencyName = _fullCurrencyName;
+
+#pragma mark - New in this class
+
+- (NSString *)fullCurrencyName
+{
+    return [NSString stringWithFormat:@"%@ (%@)", _currencyName, _currencySymbol];
+}
+
 #pragma mark - Inherited from super
 
 - (BOOL)isEqual:(id)object
