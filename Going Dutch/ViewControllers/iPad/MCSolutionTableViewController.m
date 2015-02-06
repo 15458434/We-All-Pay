@@ -12,7 +12,7 @@
 #import "MCSolutionOverViewTableViewCell_iPad.h"
 #import "MCTableEmptyMessage_iPad.h"
 
-#import "MCMailComposer.h"
+#import "We_all_pay-Swift.h"
 
 #import "MCWeAllPayStoreController.h"
 #import "MCSharedBill+addons.h"
@@ -53,10 +53,7 @@ typedef NS_ENUM(BOOL, MCXRatesMissing) {
 - (void)openMailView:(id)sender
 {
     // Init the mailComposer
-    MCMailComposer *mailComposer = [[MCMailComposer alloc] init];
-    [mailComposer setTonightsBill:_tonightsBill];
-    [mailComposer setIsHTML:NO];
-    [mailComposer setSolution:_solution];
+    MCMailComposer *mailComposer = [[MCMailComposer alloc] initWithTonightsBill:_tonightsBill];
     
     // Init the mail ViewController
     MFMailComposeViewController *_mailViewController = [[MFMailComposeViewController alloc] init];
@@ -72,7 +69,7 @@ typedef NS_ENUM(BOOL, MCXRatesMissing) {
     // Set the mail.
     [_mailViewController setToRecipients:[mailComposer getMailAddresses]];
     [_mailViewController setSubject:[mailComposer getSubject]];
-    [_mailViewController setMessageBody:[mailComposer getMailBody] isHTML:NO];
+    [_mailViewController setMessageBody:[mailComposer getMailBody] isHTML:mailComposer.isHTML];
     
     if (sender!=self) {
         [sender presentViewController:_mailViewController animated:YES completion:nil];

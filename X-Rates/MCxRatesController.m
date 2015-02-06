@@ -185,14 +185,14 @@ NSUInteger const MCCurrencyTypeSelection = MCCurrencyTypeCurrency | MCCurrencyTy
     }
     [currencyDictionaryFromPlist removeObjectsForKeys:keyToBeDeletedObjects];
 #if DEBUG
-    NSUInteger *count = currencyDictionaryFromPlist.allKeys.count;
+    NSUInteger count = currencyDictionaryFromPlist.allKeys.count;
     for (NSString *key in currencyDictionaryFromPlist.allKeys) {
         NSDictionary *currency = [currencyDictionaryFromPlist objectForKey:key];
         NSString *myName = [currency objectForKey:@"name"];
         NSString *myType = [currency objectForKey:@"type"];
         NSLog(@"%@ is named %@ and is of %@", key, myName, myType);
     }
-    NSLog(@"%d of currencies", count);
+    NSLog(@"%lu of currencies", (unsigned long)count);
 #endif
     return currencyDictionaryFromPlist;
 }

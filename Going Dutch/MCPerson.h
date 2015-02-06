@@ -6,8 +6,9 @@
 //  Copyright (c) 2014 Mark Cornelisse. All rights reserved.
 //
 
-#import <Foundation/Foundation.h>
-#import <CoreData/CoreData.h>
+@import Foundation;
+@import CoreData;
+@import UIKit;
 
 @class MCEmailAddress, MCPayment, MCPaymentPresence, MCSharedBill;
 

@@ -13,6 +13,8 @@
 #import "MCCurrency+addons.h"
 #import "MCExchangeRate+addons.h"
 #import "MCWeAllPayStoreController.h"
+#import "MCCategoryPictureStoreController.h"
+#import "MCCategoryPictureObject.h"
 
 @implementation MCPayment (addons)
 
@@ -253,6 +255,14 @@
     } else {
         NSLog(@"ExchangeRate retrieval unsuccesful");
     }
+}
+
+- (NSString *)fullDescriptionOfPayment
+{
+    // Not unit tested, because of multiple languages.
+    NSString *categoryName = [[[[MCCategoryPictureStoreController sharedController] pictureObjects] objectAtIndex:self.categoryId.shortValue] categoryDescription];
+    NSString *result = [NSString stringWithFormat:@"%@: %@", categoryName, self.descriptionOfPayment];
+    return result;
 }
 
 #pragma mark - NSManagedObject stuff

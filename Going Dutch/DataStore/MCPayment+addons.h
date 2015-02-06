@@ -40,4 +40,6 @@
 - (MCExchangeRate *)addExchangeRate;
 - (void)setNewCurrencyAndAutomaticallyUpdateExchangeRate:(MCCurrency *)newCurrency;
 
+- (NSString *)fullDescriptionOfPayment;
+
 @end
