@@ -30,7 +30,11 @@ class MCMailComposer: NSObject {
     }
     
     func getSubject() -> String! {
-        return String.localizedStringWithFormat(NSLocalizedString("EMAIL_SUBJECT", comment: "Bill overview of our trip to %1$@"), self.tonightsBill.tripName)
+        if let tripName = self.tonightsBill.tripName {
+            return String.localizedStringWithFormat(NSLocalizedString("EMAIL_SUBJECT_WITH_TRIPNAME", comment: "Bill overview of our trip to %1$@"), tripName)
+        } else {
+            return NSLocalizedString("EMAIL_SUBJECT", comment: "Bill overview of our event.")
+        }
     }
     
     func getMailBody() -> String! {
@@ -44,7 +48,12 @@ class MCMailComposer: NSObject {
         
         mailBody += String.localizedStringWithFormat(NSLocalizedString("EMAIL_DEAR", comment: "Dear %1$@,"), self.tonightsBill.stringOfApproxPeoplePresent())
         mailBody += "\n\n"
-        mailBody += String.localizedStringWithFormat(NSLocalizedString("EMAIL_INTRO", comment: "From a total of \"$ 20,45\", which was spend on our last trip to \"Movies\". We all have to pay an equal share of \"$6,82\"."), self.tonightsBill.totalSumOfMoneyOfThisSharedBillAsCurrencyString(), self.tonightsBill.tripName, self.tonightsBill.amountPeopleShouldHavePaidAsCurrencyString())
+        
+        if let tripName = self.tonightsBill.tripName {
+            mailBody += String.localizedStringWithFormat(NSLocalizedString("EMAIL_INTRO_WITH_TRIPNAME", comment: "Here you go. The full overview of the %1$@ which we spend on our last event %2$@. We spent an average of %3$@ a person. You can find more of the details below."), self.tonightsBill.totalSumOfMoneyOfThisSharedBillAsCurrencyString(), tripName, self.tonightsBill.amountPeopleShouldHavePaidAsCurrencyString())
+        } else {
+            mailBody += String.localizedStringWithFormat(NSLocalizedString("EMAIL_INTRO", comment: "Here you go. The full overview of the %1$@ which we spend on our last event. We spent an average of %2$@ a person. You can find more of the details below."), self.tonightsBill.totalSumOfMoneyOfThisSharedBillAsCurrencyString(), self.tonightsBill.amountPeopleShouldHavePaidAsCurrencyString())
+        }
         mailBody += "\n\n"
         
         switch tonightsBill.totalAmountOfPeopleWhoHavePaid() {
