@@ -61,7 +61,7 @@ NSInteger const maxPageIndex = 1;
 {
     if (sender == _pageControl) {
 #if DEBUG
-        NSLog(@"pageControlTapped to value: %d", _pageControl.currentPage);
+        NSLog(@"pageControlTapped to value: %ld", (long)_pageControl.currentPage);
 #endif
         NSInteger newIndex = _pageControl.currentPage;
         if (_lastSetIndex > _pageControl.currentPage) {
