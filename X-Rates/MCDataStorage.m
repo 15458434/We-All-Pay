@@ -239,6 +239,8 @@ NSString * const MCConversionDirectionKey = @"MCConversionDirectionKey";
 
 #pragma mark - NSWindowDelegate
 
+
+
 - (void)window:(NSWindow *)window didDecodeRestorableState:(NSCoder *)state
 {
     _decodingState = isDecodingRestorableState;

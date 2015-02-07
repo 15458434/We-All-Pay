@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="UTF-8" standalone="no"?>
-<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="6254" systemVersion="14B25" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" initialViewController="2iV-RF-WWF">
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="6254" systemVersion="14C109" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" initialViewController="2iV-RF-WWF">
     <dependencies>
         <deployment identifier="iOS"/>
         <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="6247"/>
@@ -19,8 +19,8 @@
                             <rect key="frame" x="0.0" y="0.0" width="320" height="60"/>
                             <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                             <subviews>
-                                <button opaque="NO" contentMode="scaleToFill" misplaced="YES" restorationIdentifier="newEventButton" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="PRz-eP-dNH">
-                                    <rect key="frame" x="95" y="15" width="131" height="30"/>
+                                <button opaque="NO" contentMode="scaleToFill" restorationIdentifier="newEventButton" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="PRz-eP-dNH">
+                                    <rect key="frame" x="124" y="15" width="73" height="30"/>
                                     <state key="normal" title="New event">
                                         <color key="titleShadowColor" white="0.5" alpha="1" colorSpace="calibratedWhite"/>
                                     </state>
@@ -270,7 +270,7 @@
                         <rect key="frame" x="0.0" y="64" width="320" height="568"/>
                         <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                         <subviews>
-                            <containerView contentMode="scaleToFill" misplaced="YES" translatesAutoresizingMaskIntoConstraints="NO" id="5xC-6r-YOL">
+                            <containerView contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="5xC-6r-YOL">
                                 <rect key="frame" x="0.0" y="0.0" width="320" height="504"/>
                                 <color key="backgroundColor" red="0.80000007149999997" green="0.86666673419999996" blue="0.94117653369999998" alpha="1" colorSpace="deviceRGB"/>
                                 <connections>
@@ -280,10 +280,10 @@
                         </subviews>
                         <color key="backgroundColor" red="0.80000007149999997" green="0.86666673419999996" blue="0.94117653369999998" alpha="1" colorSpace="deviceRGB"/>
                         <constraints>
-                            <constraint firstItem="fgA-y2-cLZ" firstAttribute="top" secondItem="5xC-6r-YOL" secondAttribute="bottom" id="2GX-LO-Xuh"/>
+                            <constraint firstItem="fgA-y2-cLZ" firstAttribute="top" secondItem="5xC-6r-YOL" secondAttribute="bottom" constant="64" id="2GX-LO-Xuh"/>
                             <constraint firstAttribute="trailing" secondItem="5xC-6r-YOL" secondAttribute="trailing" id="EWq-BP-GuL"/>
                             <constraint firstItem="5xC-6r-YOL" firstAttribute="leading" secondItem="hQT-KL-JNT" secondAttribute="leading" id="YvN-eD-Gaw"/>
-                            <constraint firstItem="5xC-6r-YOL" firstAttribute="top" secondItem="m0O-d4-mMj" secondAttribute="bottom" id="iGB-av-ZX8"/>
+                            <constraint firstItem="5xC-6r-YOL" firstAttribute="top" secondItem="m0O-d4-mMj" secondAttribute="bottom" constant="-20" id="iGB-av-ZX8"/>
                         </constraints>
                     </view>
                     <navigationItem key="navigationItem" id="JXS-Lj-QTu">
@@ -840,23 +840,23 @@
                             <rect key="frame" x="0.0" y="0.0" width="320" height="192"/>
                             <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                             <subviews>
-                                <imageView userInteractionEnabled="NO" contentMode="scaleAspectFit" misplaced="YES" restorationIdentifier="personImageOView" translatesAutoresizingMaskIntoConstraints="NO" id="BPi-hy-YkK">
-                                    <rect key="frame" x="20" y="16" width="80" height="80"/>
+                                <imageView userInteractionEnabled="NO" contentMode="scaleAspectFit" restorationIdentifier="personImageOView" translatesAutoresizingMaskIntoConstraints="NO" id="BPi-hy-YkK">
+                                    <rect key="frame" x="12" y="16" width="80" height="80"/>
                                     <constraints>
                                         <constraint firstAttribute="width" constant="80" id="ZEC-TL-iti"/>
                                         <constraint firstAttribute="height" constant="80" id="vKb-n9-vJx"/>
                                     </constraints>
                                 </imageView>
-                                <textField opaque="NO" clipsSubviews="YES" contentMode="scaleToFill" misplaced="YES" restorationIdentifier="firstNameField" contentHorizontalAlignment="left" contentVerticalAlignment="center" borderStyle="roundedRect" placeholder="First Name" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="Tln-WZ-m8Z">
-                                    <rect key="frame" x="108" y="28" width="192" height="30"/>
+                                <textField opaque="NO" clipsSubviews="YES" contentMode="scaleToFill" restorationIdentifier="firstNameField" contentHorizontalAlignment="left" contentVerticalAlignment="center" borderStyle="roundedRect" placeholder="First Name" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="Tln-WZ-m8Z">
+                                    <rect key="frame" x="100" y="28" width="208" height="30"/>
                                     <fontDescription key="fontDescription" name="HelveticaNeue" family="Helvetica Neue" pointSize="14"/>
                                     <textInputTraits key="textInputTraits" autocapitalizationType="sentences"/>
                                     <connections>
                                         <outlet property="delegate" destination="eE2-xD-YRT" id="fIC-1D-94P"/>
                                     </connections>
                                 </textField>
-                                <textField opaque="NO" clipsSubviews="YES" contentMode="scaleToFill" misplaced="YES" restorationIdentifier="emailaddressField" contentHorizontalAlignment="left" contentVerticalAlignment="center" borderStyle="roundedRect" placeholder="e-mail address" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="4YY-Cv-Jxg">
-                                    <rect key="frame" x="108" y="104" width="192" height="30"/>
+                                <textField opaque="NO" clipsSubviews="YES" contentMode="scaleToFill" restorationIdentifier="emailaddressField" contentHorizontalAlignment="left" contentVerticalAlignment="center" borderStyle="roundedRect" placeholder="e-mail address" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="4YY-Cv-Jxg">
+                                    <rect key="frame" x="100" y="104" width="208" height="30"/>
                                     <fontDescription key="fontDescription" name="HelveticaNeue" family="Helvetica Neue" pointSize="14"/>
                                     <textInputTraits key="textInputTraits" autocorrectionType="no" keyboardType="emailAddress"/>
                                     <connections>
@@ -872,8 +872,8 @@
                                         <action selector="selectEmailAddressPressed:" destination="eE2-xD-YRT" eventType="touchDown" id="oNn-Z3-P2Y"/>
                                     </connections>
                                 </button>
-                                <textField opaque="NO" clipsSubviews="YES" contentMode="scaleToFill" misplaced="YES" restorationIdentifier="lastNameField" contentHorizontalAlignment="left" contentVerticalAlignment="center" borderStyle="roundedRect" placeholder="Last name" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="E8v-zR-iZl">
-                                    <rect key="frame" x="108" y="66" width="192" height="30"/>
+                                <textField opaque="NO" clipsSubviews="YES" contentMode="scaleToFill" restorationIdentifier="lastNameField" contentHorizontalAlignment="left" contentVerticalAlignment="center" borderStyle="roundedRect" placeholder="Last name" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="E8v-zR-iZl">
+                                    <rect key="frame" x="100" y="66" width="208" height="30"/>
                                     <fontDescription key="fontDescription" name="HelveticaNeue" family="Helvetica Neue" pointSize="14"/>
                                     <textInputTraits key="textInputTraits" autocapitalizationType="sentences"/>
                                     <connections>

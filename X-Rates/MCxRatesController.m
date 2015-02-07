@@ -73,7 +73,7 @@ NSUInteger const MCCurrencyTypeSelection = MCCurrencyTypeCurrency | MCCurrencyTy
     NSMutableDictionary *currencyDictionaryFromPlist = [[NSMutableDictionary alloc] initWithContentsOfFile:path];
 #if DEBUG
     NSUInteger totalAmountInPlist = [[currencyDictionaryFromPlist allKeys] count];
-    NSLog(@"Total of %lu in plist", totalAmountInPlist);
+    NSLog(@"Total of %lu in plist", (unsigned long)totalAmountInPlist);
 #endif
     NSMutableArray *keyToBeDeletedObjects = [[NSMutableArray alloc] init];
     for (NSString *keyToCurrencyObject in currencyDictionaryFromPlist) {

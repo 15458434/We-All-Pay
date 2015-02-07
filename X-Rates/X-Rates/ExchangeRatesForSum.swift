@@ -1,0 +1,50 @@
+//
+//  ExchangeRates.swift
+//  We all pay
+//
+//  Created by Mark Cornelisse on 09/01/15.
+//  Copyright (c) 2015 Mark Cornelisse. All rights reserved.
+//
+
+import Foundation
+
+enum ExchangeRateForSumState {
+    case Invalid
+    case Fetching
+    case Valid
+}
+
+class ExchangeRatesForSum: NSObject {
+    dynamic private(set) var valueInMainCurrency: Double = 0.0
+    dynamic var valueInCurrency: Double = 0.0 {
+        didSet {
+            valueInMainCurrency = valueInCurrency * exchangeRateToBaseCurrency
+        }
+    }
+    dynamic var exchangeRateToBaseCurrency: Double = 0.0 {
+        didSet {
+            valueInMainCurrency = valueInCurrency * exchangeRateToBaseCurrency
+        }
+    }
+    dynamic var currencyCode: String = ""
+    dynamic var currencyName: String = ""
+    var exchangeRateState: ExchangeRateForSumState
+    
+    // MARK: NSObjectProtocol
+    
+    override init() {
+        exchangeRateState = ExchangeRateForSumState.Valid
+        super.init()
+    }
+    
+    override func setNilValueForKey(key: String) {
+        switch key {
+        case "valueInCurrency":
+            valueInCurrency = 0.0
+        case "exchangeRateToBaseCurrency":
+            exchangeRateToBaseCurrency = 0.0
+        default:
+            println("Nothing should happen.")
+        }
+    }
+}

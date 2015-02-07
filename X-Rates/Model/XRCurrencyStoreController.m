@@ -123,7 +123,7 @@ NSString * const XRCurrencyDatabaseVersionKey = @"XRCurrencyDatabaseVersionKey";
         NSDictionary *availableCurrencies = [MCxRatesController getCurrencyDictionary];
         NSArray *availableCurrencyCodes = [availableCurrencies allKeys];
 #if DEBUG
-        NSLog(@"%lu currencies available", availableCurrencies.count);
+        NSLog(@"%lu currencies available", (unsigned long)availableCurrencies.count);
 #endif
         for (NSString *currencyCode in availableCurrencyCodes) {
             // For each currencyCode add it.
