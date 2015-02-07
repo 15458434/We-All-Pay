@@ -898,15 +898,6 @@
                                 <constraint firstItem="BPi-hy-YkK" firstAttribute="leadingMargin" secondItem="YgD-ot-OKq" secondAttribute="leadingMargin" constant="12" id="qTy-b3-8ut"/>
                             </constraints>
                         </view>
-                        <prototypes>
-                            <tableViewCell contentMode="scaleToFill" selectionStyle="default" indentationWidth="10" id="r5g-p1-fJ1">
-                                <autoresizingMask key="autoresizingMask"/>
-                                <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" tableViewCell="r5g-p1-fJ1" id="RV9-9A-Egw">
-                                    <autoresizingMask key="autoresizingMask"/>
-                                </tableViewCellContentView>
-                                <inset key="separatorInset" minX="15" minY="0.0" maxX="0.0" maxY="0.0"/>
-                            </tableViewCell>
-                        </prototypes>
                         <connections>
                             <outlet property="dataSource" destination="eE2-xD-YRT" id="nlk-PP-QQN"/>
                             <outlet property="delegate" destination="eE2-xD-YRT" id="Reu-io-q7l"/>
