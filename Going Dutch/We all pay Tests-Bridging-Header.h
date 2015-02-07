@@ -7,3 +7,4 @@
 #import "MCPayment+addons.h"
 #import "MCPerson+addons.h"
 #import "MCCurrency+addons.h"
+#import "MCExchangeRate+addons.h"
