@@ -7,11 +7,11 @@
 //
 
 #import "MCAppDelegate.h"
-#import "MultipleCurrencyInterface.h"
+#import "EMC-Swift.h"
 
 @interface MCAppDelegate ()
 
-@property (nonatomic, strong) MultipleCurrencyInterface *multipleCurrencyInterfaceController;
+@property (nonatomic, strong) MultipleCurrencyInterfaceController *multipleCurrencyInterface;
 
 @end
 
@@ -34,7 +34,7 @@
 {
     NSSharingService *service = [NSSharingService sharingServiceNamed:NSSharingServiceNamePostOnTwitter];
     [service setDelegate:self];
-    NSString *tweet = @".@MarkCornelisse Thank you for creating EMC. #osx #app";
+    NSString *tweet = @"Hey @MarkCornelisse. Thank you for creating EMC. #osx #app";
     [service performWithItems:@[tweet]];
 }
 
@@ -45,11 +45,16 @@
 
 - (IBAction)multipleCurrencyWindowPressed:(id)sender
 {
+#if DEBUG
+    NSLog(@"%@: multipleCurrencyWindowPressed", self);
+#endif
     // TODO: Create this function.
-    if (!_multipleCurrencyInterfaceController) {
-        _multipleCurrencyInterfaceController = [[MultipleCurrencyInterface alloc] init];
+    if (!_multipleCurrencyInterface.window) {
+        _multipleCurrencyInterface = [[MultipleCurrencyInterfaceController alloc] initWithWindowNibName:@"MultipleCurrencyInterface"];
     }
-    [_multipleCurrencyInterfaceController showWindow:self];
+    [_multipleCurrencyInterface showWindow:self];
+//    [_multipleCurrencyInterface.window makeMainWindow];
+    [_multipleCurrencyInterface.window makeKeyAndOrderFront:self];
 }
 
 - (IBAction)closeKeyWindow:(id)sender

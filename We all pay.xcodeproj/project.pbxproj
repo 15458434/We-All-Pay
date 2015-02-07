@@ -19,19 +19,15 @@
 		380BF831181088B9008A8B74 /* MCEmailAddressTableViewCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 380BF830181088B9008A8B74 /* MCEmailAddressTableViewCell.m */; };
 		380F44F21813250600FF7E10 /* No picture image 2 - We All Pay.png in Resources */ = {isa = PBXBuildFile; fileRef = 380F44F11813250600FF7E10 /* No picture image 2 - We All Pay.png */; };
 		381179D01A82D1FC00020538 /* MCMailComposer.swift in Sources */ = {isa = PBXBuildFile; fileRef = 381179CF1A82D1FC00020538 /* MCMailComposer.swift */; };
-		381179D11A82D1FC00020538 /* MCMailComposer.swift in Sources */ = {isa = PBXBuildFile; fileRef = 381179CF1A82D1FC00020538 /* MCMailComposer.swift */; };
 		3812485A1959D22600C0447C /* MCxRatesController.m in Sources */ = {isa = PBXBuildFile; fileRef = 381248581959D22600C0447C /* MCxRatesController.m */; };
 		3812485B1959D40900C0447C /* MCxRatesController.m in Sources */ = {isa = PBXBuildFile; fileRef = 381248581959D22600C0447C /* MCxRatesController.m */; };
 		381318BC19A250C600C821B0 /* XRCurrency.xcdatamodeld in Sources */ = {isa = PBXBuildFile; fileRef = 381318BA19A250C600C821B0 /* XRCurrency.xcdatamodeld */; };
-		381318BD19A250C600C821B0 /* XRCurrency.xcdatamodeld in Sources */ = {isa = PBXBuildFile; fileRef = 381318BA19A250C600C821B0 /* XRCurrency.xcdatamodeld */; };
 		381318BE19A250C600C821B0 /* XRCurrency.xcdatamodeld in Sources */ = {isa = PBXBuildFile; fileRef = 381318BA19A250C600C821B0 /* XRCurrency.xcdatamodeld */; };
 		381318BF19A250C600C821B0 /* XRCurrency.xcdatamodeld in Sources */ = {isa = PBXBuildFile; fileRef = 381318BA19A250C600C821B0 /* XRCurrency.xcdatamodeld */; };
 		381318C219A2531500C821B0 /* XRCurrencyStoreController.m in Sources */ = {isa = PBXBuildFile; fileRef = 381318C119A2531500C821B0 /* XRCurrencyStoreController.m */; };
-		381318C319A2531500C821B0 /* XRCurrencyStoreController.m in Sources */ = {isa = PBXBuildFile; fileRef = 381318C119A2531500C821B0 /* XRCurrencyStoreController.m */; };
 		381318C419A2531500C821B0 /* XRCurrencyStoreController.m in Sources */ = {isa = PBXBuildFile; fileRef = 381318C119A2531500C821B0 /* XRCurrencyStoreController.m */; };
 		381318C519A2531500C821B0 /* XRCurrencyStoreController.m in Sources */ = {isa = PBXBuildFile; fileRef = 381318C119A2531500C821B0 /* XRCurrencyStoreController.m */; };
 		381318CE19A2869600C821B0 /* XRCurrency.m in Sources */ = {isa = PBXBuildFile; fileRef = 381318CD19A2869600C821B0 /* XRCurrency.m */; };
-		381318CF19A2869600C821B0 /* XRCurrency.m in Sources */ = {isa = PBXBuildFile; fileRef = 381318CD19A2869600C821B0 /* XRCurrency.m */; };
 		381318D019A2869600C821B0 /* XRCurrency.m in Sources */ = {isa = PBXBuildFile; fileRef = 381318CD19A2869600C821B0 /* XRCurrency.m */; };
 		381318D119A2869600C821B0 /* XRCurrency.m in Sources */ = {isa = PBXBuildFile; fileRef = 381318CD19A2869600C821B0 /* XRCurrency.m */; };
 		381AB0EF1924FCC2004A02C6 /* MCWhoPaidHowMuchTableViewCell_iPhone.m in Sources */ = {isa = PBXBuildFile; fileRef = 381AB0EE1924FCC2004A02C6 /* MCWhoPaidHowMuchTableViewCell_iPhone.m */; };
@@ -104,6 +100,8 @@
 		387D3A911870652B0060FAF8 /* Localizable.strings in Resources */ = {isa = PBXBuildFile; fileRef = 387D3A931870652B0060FAF8 /* Localizable.strings */; };
 		388063EE19A4D00C000CF36B /* XRCurrencyStoreControllerTest.m in Sources */ = {isa = PBXBuildFile; fileRef = 388063ED19A4D00C000CF36B /* XRCurrencyStoreControllerTest.m */; };
 		388063EF19A4D00C000CF36B /* XRCurrencyStoreControllerTest.m in Sources */ = {isa = PBXBuildFile; fileRef = 388063ED19A4D00C000CF36B /* XRCurrencyStoreControllerTest.m */; };
+		38831BA71A86679C00E75CB1 /* MultipleCurrencyInterface.xib in Sources */ = {isa = PBXBuildFile; fileRef = 3892B3A71A604D5800CA45CD /* MultipleCurrencyInterface.xib */; };
+		38831BA81A86679C00E75CB1 /* EditValueInCurrencyWindow.xib in Sources */ = {isa = PBXBuildFile; fileRef = 38678C331A652E06002B7635 /* EditValueInCurrencyWindow.xib */; };
 		38859F8B1A2F28C0009B1A3F /* WhoIsPayingNextTextLocalizer.swift in Sources */ = {isa = PBXBuildFile; fileRef = 38859F8A1A2F28C0009B1A3F /* WhoIsPayingNextTextLocalizer.swift */; };
 		3886D3FD16B7A1CD00ECE64F /* AddressBook.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 3886D3FB16B7A1CD00ECE64F /* AddressBook.framework */; };
 		3886D3FE16B7A1CD00ECE64F /* AddressBookUI.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 3886D3FC16B7A1CD00ECE64F /* AddressBookUI.framework */; };
@@ -158,7 +156,6 @@
 		38B6E0F21A28BBAB009E69D7 /* TodayViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 38B6E0F11A28BBAB009E69D7 /* TodayViewController.swift */; };
 		38B6E0FB1A28BBC5009E69D7 /* MCWhoPayingUserDefaultsStoreInterface.m in Sources */ = {isa = PBXBuildFile; fileRef = 38B6E0CB1A28AFAA009E69D7 /* MCWhoPayingUserDefaultsStoreInterface.m */; };
 		38BDEE231A641B2300E00F4F /* MultiExchangeRatesController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 38BDEE221A641B2300E00F4F /* MultiExchangeRatesController.swift */; };
-		38BDEE241A641B2300E00F4F /* MultiExchangeRatesController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 38BDEE221A641B2300E00F4F /* MultiExchangeRatesController.swift */; };
 		38BDFD7E19B88D210026F4F8 /* XRCurrencyXRateFetcher.m in Sources */ = {isa = PBXBuildFile; fileRef = 38BDFD7D19B88D210026F4F8 /* XRCurrencyXRateFetcher.m */; };
 		38BDFD7F19B88D210026F4F8 /* XRCurrencyXRateFetcher.m in Sources */ = {isa = PBXBuildFile; fileRef = 38BDFD7D19B88D210026F4F8 /* XRCurrencyXRateFetcher.m */; };
 		38BDFD8219B88D8B0026F4F8 /* XRCurrencyXRate.m in Sources */ = {isa = PBXBuildFile; fileRef = 38BDFD8119B88D8B0026F4F8 /* XRCurrencyXRate.m */; };
@@ -1637,14 +1634,10 @@
 				389DE909197FC5E900169645 /* MCExchangeRateTest.m in Sources */,
 				388063EE19A4D00C000CF36B /* XRCurrencyStoreControllerTest.m in Sources */,
 				3860575519EEB28300BD5B78 /* MCCategoryPictureStoreTest.m in Sources */,
-				381179D11A82D1FC00020538 /* MCMailComposer.swift in Sources */,
 				385F530F191C2D140012773D /* MCPaymentPresenceTest.m in Sources */,
 				385F5310191C2D140012773D /* MCPaymentAddonsTest.m in Sources */,
-				381318C319A2531500C821B0 /* XRCurrencyStoreController.m in Sources */,
 				385F5311191C2D140012773D /* MCPersonAddonsTest.m in Sources */,
-				381318BD19A250C600C821B0 /* XRCurrency.xcdatamodeld in Sources */,
 				389DE910197FD6DF00169645 /* MCCurrencyTest.m in Sources */,
-				381318CF19A2869600C821B0 /* XRCurrency.m in Sources */,
 				385F5312191C2D140012773D /* MCSharedBillAddOnsTest.m in Sources */,
 				385F5313191C2D140012773D /* WeAllPayStoreTests.m in Sources */,
 			);
@@ -1664,6 +1657,8 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				38831BA71A86679C00E75CB1 /* MultipleCurrencyInterface.xib in Sources */,
+				38831BA81A86679C00E75CB1 /* EditValueInCurrencyWindow.xib in Sources */,
 				381318C419A2531500C821B0 /* XRCurrencyStoreController.m in Sources */,
 				38DAB1311997A1BF00B989BF /* MCAppDelegate.m in Sources */,
 				38BDFD8319B88D8B0026F4F8 /* XRCurrencyXRate.m in Sources */,
@@ -1690,7 +1685,6 @@
 				381318BF19A250C600C821B0 /* XRCurrency.xcdatamodeld in Sources */,
 				388063EF19A4D00C000CF36B /* XRCurrencyStoreControllerTest.m in Sources */,
 				38FE87EB195721670008EE74 /* X_RatesTests.m in Sources */,
-				38BDEE241A641B2300E00F4F /* MultiExchangeRatesController.swift in Sources */,
 				381318D119A2869600C821B0 /* XRCurrency.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;

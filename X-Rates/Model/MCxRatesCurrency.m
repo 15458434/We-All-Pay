@@ -15,6 +15,15 @@ NSString * const MCCodingCurrencyISOCode = @"MCCodingCurrencyISOCode";
 
 @implementation MCxRatesCurrency
 
+@synthesize fullCurrencyName = _fullCurrencyName;
+
+#pragma mark - New in this class
+
+- (NSString *)fullCurrencyName
+{
+    return [NSString stringWithFormat:@"%@ (%@)", _currencyName, _currencySymbol];
+}
+
 #pragma mark - Inherited from super
 
 - (BOOL)isEqual:(id)object
@@ -37,6 +46,18 @@ NSString * const MCCodingCurrencyISOCode = @"MCCodingCurrencyISOCode";
 - (NSUInteger)hash
 {
     return [_currencyISOCode hash];
+}
+
+#pragma mark - NSCopying
+
+- (instancetype)copyWithZone:(NSZone *)zone {
+    MCxRatesCurrency *copyOfSelf = [[[self class] allocWithZone:zone] init];
+    if (copyOfSelf) {
+        copyOfSelf.currencyName = [self.currencyName copy];
+        copyOfSelf.currencyISOCode = [self.currencyISOCode copy];
+        copyOfSelf.currencySymbol = [self.currencySymbol copy];
+    }
+    return copyOfSelf;
 }
 
 #pragma mark - NSCoding

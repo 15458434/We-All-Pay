@@ -8,10 +8,11 @@
 
 @import Foundation;
 
-@interface MCxRatesCurrency : NSObject <NSCoding>
+@interface MCxRatesCurrency : NSObject <NSCoding, NSCopying>
 
 @property (readwrite) NSString *currencyName;
 @property (readwrite) NSString *currencySymbol;
 @property (readwrite) NSString *currencyISOCode;
+@property (readonly) NSString *fullCurrencyName;
 
 @end
