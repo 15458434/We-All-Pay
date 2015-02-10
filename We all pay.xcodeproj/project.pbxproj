@@ -43,9 +43,6 @@
 		3830F6F6179872B400904FAF /* MCPaymentViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 3830F6F5179872B400904FAF /* MCPaymentViewController.m */; };
 		38334EBC172D1A770063B919 /* three peeps.png in Resources */ = {isa = PBXBuildFile; fileRef = 38334EBB172D1A770063B919 /* three peeps.png */; };
 		38334EBE172D1A8E0063B919 /* three peeps@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 38334EBD172D1A8E0063B919 /* three peeps@2x.png */; };
-		38334ECA173552330063B919 /* Default.png in Resources */ = {isa = PBXBuildFile; fileRef = 38334EBF172D319B0063B919 /* Default.png */; };
-		38334ECB1735523A0063B919 /* Default@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 38334EC1172D31A50063B919 /* Default@2x.png */; };
-		38334ECC173552410063B919 /* Default-568h@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 38334EC3172D31AF0063B919 /* Default-568h@2x.png */; };
 		38370CF51A40DBC300B56460 /* MainInterface.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 38370CF71A40DBC300B56460 /* MainInterface.storyboard */; };
 		383A86C518F7EE48001F128E /* MCSolutionTableViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 383A86C418F7EE48001F128E /* MCSolutionTableViewController.m */; };
 		383B339D19C9063000AC2896 /* Currency info.plist in Resources */ = {isa = PBXBuildFile; fileRef = 38DDBF8919C1AB5E00D690D0 /* Currency info.plist */; };
@@ -168,6 +165,7 @@
 		38C725051A2E08FE003173E6 /* StoreKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 38C725041A2E08FE003173E6 /* StoreKit.framework */; };
 		38CC8C4A18ED61FD006D99E7 /* MCPersonTableViewController_iPad.m in Sources */ = {isa = PBXBuildFile; fileRef = 38CC8C4918ED61FD006D99E7 /* MCPersonTableViewController_iPad.m */; };
 		38CDE90017135B6300387CAA /* MCTools.m in Sources */ = {isa = PBXBuildFile; fileRef = 38CDE8FF17135B6300387CAA /* MCTools.m */; };
+		38D1C3801A8A38B5008F2A8E /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 38D1C37F1A8A38B5008F2A8E /* LaunchScreen.storyboard */; };
 		38DAB1311997A1BF00B989BF /* MCAppDelegate.m in Sources */ = {isa = PBXBuildFile; fileRef = 38FE87D4195721670008EE74 /* MCAppDelegate.m */; };
 		38DAB1331997BCBE00B989BF /* Cocoa.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 389DE90A197FC7B600169645 /* Cocoa.framework */; };
 		38DAB1351997BCC500B989BF /* CFNetwork.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 38DAB1341997BCC500B989BF /* CFNetwork.framework */; };
@@ -316,9 +314,6 @@
 		3830F6F5179872B400904FAF /* MCPaymentViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = MCPaymentViewController.m; path = ViewControllers/MCPaymentViewController.m; sourceTree = "<group>"; };
 		38334EBB172D1A770063B919 /* three peeps.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "three peeps.png"; sourceTree = "<group>"; };
 		38334EBD172D1A8E0063B919 /* three peeps@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "three peeps@2x.png"; sourceTree = "<group>"; };
-		38334EBF172D319B0063B919 /* Default.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = Default.png; path = ../Default.png; sourceTree = "<group>"; };
-		38334EC1172D31A50063B919 /* Default@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = "Default@2x.png"; path = "../Default@2x.png"; sourceTree = "<group>"; };
-		38334EC3172D31AF0063B919 /* Default-568h@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = "Default-568h@2x.png"; path = "../Default-568h@2x.png"; sourceTree = "<group>"; };
 		38370CF61A40DBC300B56460 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/MainInterface.storyboard; sourceTree = "<group>"; };
 		38370CF91A40DBC600B56460 /* en */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = en; path = en.lproj/MainInterface.strings; sourceTree = "<group>"; };
 		38370CFB1A40DBCA00B56460 /* nl */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = nl; path = nl.lproj/MainInterface.strings; sourceTree = "<group>"; };
@@ -534,6 +529,7 @@
 		38CC8C4918ED61FD006D99E7 /* MCPersonTableViewController_iPad.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = MCPersonTableViewController_iPad.m; path = ViewControllers/iPad/MCPersonTableViewController_iPad.m; sourceTree = "<group>"; };
 		38CDE8FE17135B6300387CAA /* MCTools.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = MCTools.h; sourceTree = "<group>"; };
 		38CDE8FF17135B6300387CAA /* MCTools.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = MCTools.m; sourceTree = "<group>"; };
+		38D1C37F1A8A38B5008F2A8E /* LaunchScreen.storyboard */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.storyboard; name = LaunchScreen.storyboard; path = LaunchImage/LaunchScreen.storyboard; sourceTree = "<group>"; };
 		38D2323719A4EF42004B1203 /* We all pay.entitlements */ = {isa = PBXFileReference; lastKnownFileType = text.xml; path = "We all pay.entitlements"; sourceTree = SOURCE_ROOT; };
 		38D785FC18DC53C30074B670 /* WeAllPayStoreTests.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; name = WeAllPayStoreTests.m; path = ../WeAllPayTests/WeAllPayStoreTests.m; sourceTree = "<group>"; };
 		38DAB1341997BCC500B989BF /* CFNetwork.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = CFNetwork.framework; path = Platforms/MacOSX.platform/Developer/SDKs/MacOSX10.9.sdk/System/Library/Frameworks/CFNetwork.framework; sourceTree = DEVELOPER_DIR; };
@@ -748,16 +744,6 @@
 			name = iOS;
 			sourceTree = "<group>";
 		};
-		38334EC5172D323D0063B919 /* Launch images */ = {
-			isa = PBXGroup;
-			children = (
-				38334EC3172D31AF0063B919 /* Default-568h@2x.png */,
-				38334EC1172D31A50063B919 /* Default@2x.png */,
-				38334EBF172D319B0063B919 /* Default.png */,
-			);
-			name = "Launch images";
-			sourceTree = "<group>";
-		};
 		38572AC7169D437B00969C62 = {
 			isa = PBXGroup;
 			children = (
@@ -806,7 +792,7 @@
 			children = (
 				38D2323719A4EF42004B1203 /* We all pay.entitlements */,
 				3873A2A616F2858A000832FD /* Going Dutch.entitlements */,
-				38334EC5172D323D0063B919 /* Launch images */,
+				38D1C3781A8A33A5008F2A8E /* LaunchImage */,
 				3898AADD17271157008F947E /* icons */,
 				3860574919EE92FC00BD5B78 /* CategoryPicturesStore */,
 				3801F89D16DFC6D400DF8675 /* DataStore */,
@@ -1083,6 +1069,14 @@
 				38F174E31A56FBD000FC6FC8 /* MCWhoPayingUserDefaultsStoreInterface+WeAllPay.m */,
 			);
 			name = "MC SDK";
+			sourceTree = "<group>";
+		};
+		38D1C3781A8A33A5008F2A8E /* LaunchImage */ = {
+			isa = PBXGroup;
+			children = (
+				38D1C37F1A8A38B5008F2A8E /* LaunchScreen.storyboard */,
+			);
+			name = LaunchImage;
 			sourceTree = "<group>";
 		};
 		38DC8B371909064A00762235 /* ViewController Protocols */ = {
@@ -1455,18 +1449,16 @@
 				38334EBC172D1A770063B919 /* three peeps.png in Resources */,
 				38334EBE172D1A8E0063B919 /* three peeps@2x.png in Resources */,
 				387D3A911870652B0060FAF8 /* Localizable.strings in Resources */,
-				38334ECA173552330063B919 /* Default.png in Resources */,
-				38334ECB1735523A0063B919 /* Default@2x.png in Resources */,
 				382B79CA1A419D9D00538E96 /* categoryPictures.plist in Resources */,
 				38001C9B194EE284008ACD94 /* Images.xcassets in Resources */,
 				38DC8B4319097FEA00762235 /* Main-iPad.storyboard in Resources */,
 				3860575019EE963600BD5B78 /* categoryPictures.xcassets in Resources */,
 				3867CE4718704B2E001EC222 /* Main-Iphone.storyboard in Resources */,
-				38334ECC173552410063B919 /* Default-568h@2x.png in Resources */,
 				3897157B17901D0F005BE03E /* MCTextFieldAndLabelTitleView.xib in Resources */,
 				3872C0DD19041C95008C54D7 /* MCTableEmptyMessage_iPad.xib in Resources */,
 				3897157D17901D0F005BE03E /* MCTwoLabelsTitleView.xib in Resources */,
 				380F44F21813250600FF7E10 /* No picture image 2 - We All Pay.png in Resources */,
+				38D1C3801A8A38B5008F2A8E /* LaunchScreen.storyboard in Resources */,
 				3899D3F4194F43AF00893323 /* Product ids.plist in Resources */,
 				3897158C17901D55005BE03E /* MCReturnPaymentTableViewCell.xib in Resources */,
 			);
