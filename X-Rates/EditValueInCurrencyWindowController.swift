@@ -34,5 +34,6 @@ class EditValueInCurrencyWindowController: NSWindowController {
         debugLog("\(currency.currencyName) (\(currency.currencyISOCode))")
         exchangeRate.currencyCode = currency.currencyISOCode
         exchangeRate.currencyName = currency.currencyName
+        exchangeRate.currencySymbol = currency.currencySymbol
     }
 }

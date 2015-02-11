@@ -28,6 +28,8 @@ class ExchangeRatesForSum: NSObject {
     }
     dynamic var currencyCode: String = ""
     dynamic var currencyName: String = ""
+    dynamic var currencySymbol: String = ""
+    
     var exchangeRateState: ExchangeRateForSumState
     
     // MARK: Initializers

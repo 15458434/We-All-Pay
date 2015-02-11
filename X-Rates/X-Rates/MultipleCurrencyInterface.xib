@@ -82,7 +82,7 @@
                                             </textFieldCell>
                                             <tableColumnResizingMask key="resizingMask" resizeWithTable="YES" userResizable="YES"/>
                                             <connections>
-                                                <binding destination="QEf-C3-4UF" name="value" keyPath="arrangedObjects.currencyCode" id="pk4-p3-3LP"/>
+                                                <binding destination="QEf-C3-4UF" name="value" keyPath="arrangedObjects.currencySymbol" id="6hV-pS-7oy"/>
                                             </connections>
                                         </tableColumn>
                                         <tableColumn width="122" minWidth="10" maxWidth="3.4028234663852886e+38" id="0ql-D1-U4I">
