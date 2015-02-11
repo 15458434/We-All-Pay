@@ -30,6 +30,23 @@ class ExchangeRatesForSum: NSObject {
     dynamic var currencyName: String = ""
     var exchangeRateState: ExchangeRateForSumState
     
+    // MARK: Initializers
+    init(code: String) {
+        exchangeRateState = ExchangeRateForSumState.Valid
+        
+        super.init()
+    }
+    
+    // MARK: This class
+    var numberFormatter: NSNumberFormatter {
+        // Gives a numberformatter based on the currencyCode property of this class.
+        let nf = NSNumberFormatter()
+        nf.locale = NSLocale.currentLocale()
+        nf.numberStyle = .CurrencyStyle
+        nf.currencyCode = currencyCode
+        return nf
+    }
+    
     // MARK: NSObjectProtocol
     
     override init() {

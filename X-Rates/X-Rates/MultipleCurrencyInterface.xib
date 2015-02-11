@@ -7,11 +7,15 @@
     <objects>
         <customObject id="-2" userLabel="File's Owner" customClass="MultipleCurrencyInterfaceController" customModule="EMC">
             <connections>
+                <outlet property="addButton" destination="thL-Pt-EO7" id="PoG-dT-anI"/>
                 <outlet property="destinationCurrencyLabel" destination="40P-Q3-vHz" id="tqs-QG-rAN"/>
                 <outlet property="destinationCurrencyNumberFormatter" destination="859-dp-dls" id="vTc-Cy-npO"/>
                 <outlet property="destinationCurrencyPopUpButton" destination="yLs-ST-CDf" id="6N9-Sb-E2H"/>
                 <outlet property="destinationCurrencyPopUpButtonArrayController" destination="BBw-iK-Xmz" id="gKF-mk-9c6"/>
+                <outlet property="editButton" destination="OrK-0x-xac" id="AvL-xe-dDF"/>
+                <outlet property="exchangeRatesForSumArrayController" destination="QEf-C3-4UF" id="fdx-Jb-p8R"/>
                 <outlet property="multiExchangeRateController" destination="x3N-kN-ciD" id="fe7-Z2-YDP"/>
+                <outlet property="removeButton" destination="wRJ-Wh-ABa" id="TQg-2z-5wC"/>
                 <outlet property="window" destination="QvC-M9-y7g" id="EXy-AA-m1o"/>
             </connections>
         </customObject>
@@ -21,7 +25,7 @@
             <windowStyleMask key="styleMask" titled="YES" closable="YES" miniaturizable="YES" resizable="YES"/>
             <windowPositionMask key="initialPositionMask" leftStrut="YES" rightStrut="YES" topStrut="YES" bottomStrut="YES"/>
             <rect key="contentRect" x="196" y="240" width="565" height="469"/>
-            <rect key="screenRect" x="0.0" y="0.0" width="2560" height="1440"/>
+            <rect key="screenRect" x="0.0" y="0.0" width="1440" height="900"/>
             <view key="contentView" id="EiT-Mj-1SZ">
                 <rect key="frame" x="0.0" y="0.0" width="565" height="469"/>
                 <autoresizingMask key="autoresizingMask"/>
@@ -99,6 +103,9 @@
                                             </connections>
                                         </tableColumn>
                                     </tableColumns>
+                                    <connections>
+                                        <outlet property="delegate" destination="-2" id="Sur-fz-ISY"/>
+                                    </connections>
                                 </tableView>
                             </subviews>
                             <color key="backgroundColor" name="controlBackgroundColor" catalog="System" colorSpace="catalog"/>
@@ -118,14 +125,17 @@
                     </scrollView>
                     <button verticalHuggingPriority="750" fixedFrame="YES" translatesAutoresizingMaskIntoConstraints="NO" id="OrK-0x-xac">
                         <rect key="frame" x="418" y="388" width="133" height="32"/>
-                        <buttonCell key="cell" type="push" title="Edit" bezelStyle="rounded" alignment="center" borderStyle="border" imageScaling="proportionallyDown" inset="2" id="6Bd-VU-cpz">
+                        <buttonCell key="cell" type="push" title="Edit" bezelStyle="rounded" alignment="center" enabled="NO" borderStyle="border" imageScaling="proportionallyDown" inset="2" id="6Bd-VU-cpz">
                             <behavior key="behavior" pushIn="YES" lightByBackground="YES" lightByGray="YES"/>
                             <font key="font" metaFont="system"/>
                         </buttonCell>
+                        <connections>
+                            <action selector="editExchangeRateForSumPressed:" target="-2" id="AE0-Yk-Wg2"/>
+                        </connections>
                     </button>
                     <button verticalHuggingPriority="750" fixedFrame="YES" translatesAutoresizingMaskIntoConstraints="NO" id="wRJ-Wh-ABa">
                         <rect key="frame" x="418" y="355" width="133" height="32"/>
-                        <buttonCell key="cell" type="push" title="Remove" bezelStyle="rounded" alignment="center" borderStyle="border" imageScaling="proportionallyDown" inset="2" id="AGd-kd-hyw">
+                        <buttonCell key="cell" type="push" title="Remove" bezelStyle="rounded" alignment="center" enabled="NO" borderStyle="border" imageScaling="proportionallyDown" inset="2" id="AGd-kd-hyw">
                             <behavior key="behavior" pushIn="YES" lightByBackground="YES" lightByGray="YES"/>
                             <font key="font" metaFont="system"/>
                         </buttonCell>
@@ -140,16 +150,23 @@
                             <font key="font" metaFont="system"/>
                             <color key="textColor" name="labelColor" catalog="System" colorSpace="catalog"/>
                             <color key="backgroundColor" name="controlColor" catalog="System" colorSpace="catalog"/>
+                            <connections>
+                                <binding destination="x3N-kN-ciD" name="value" keyPath="destinationValue" id="nR4-2J-lSH">
+                                    <dictionary key="options">
+                                        <bool key="NSContinuouslyUpdatesValue" value="YES"/>
+                                    </dictionary>
+                                </binding>
+                            </connections>
                         </textFieldCell>
                     </textField>
                     <popUpButton verticalHuggingPriority="750" fixedFrame="YES" translatesAutoresizingMaskIntoConstraints="NO" id="yLs-ST-CDf" userLabel="Destination Currency">
                         <rect key="frame" x="18" y="17" width="401" height="26"/>
-                        <popUpButtonCell key="cell" type="push" title="Item 1" bezelStyle="rounded" alignment="left" lineBreakMode="truncatingTail" state="on" borderStyle="borderAndBezel" imageScaling="proportionallyDown" inset="2" selectedItem="J5I-VW-xeJ" id="9r0-Pk-J5D">
+                        <popUpButtonCell key="cell" type="push" bezelStyle="rounded" alignment="left" lineBreakMode="truncatingTail" borderStyle="borderAndBezel" imageScaling="proportionallyDown" inset="2" id="9r0-Pk-J5D">
                             <behavior key="behavior" lightByBackground="YES" lightByGray="YES"/>
                             <font key="font" metaFont="menu"/>
                             <menu key="menu" id="dWL-sK-im6">
                                 <items>
-                                    <menuItem title="Item 1" state="on" id="J5I-VW-xeJ"/>
+                                    <menuItem title="Item 1" id="J5I-VW-xeJ"/>
                                     <menuItem title="Item 2" id="4nH-a6-GoO"/>
                                     <menuItem title="Item 3" id="B5G-DX-qx9"/>
                                 </items>
@@ -158,6 +175,7 @@
                         <connections>
                             <action selector="newDestinationCurrencySelected:" target="-2" id="Ty8-VJ-iuM"/>
                             <binding destination="BBw-iK-Xmz" name="contentValues" keyPath="arrangedObjects.fullCurrencyName" id="YUS-t9-j6m"/>
+                            <binding destination="BBw-iK-Xmz" name="selectedIndex" keyPath="selectionIndex" previousBinding="YUS-t9-j6m" id="nBP-n0-VbZ"/>
                         </connections>
                     </popUpButton>
                 </subviews>

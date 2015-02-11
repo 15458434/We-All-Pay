@@ -53,7 +53,6 @@
         _multipleCurrencyInterface = [[MultipleCurrencyInterfaceController alloc] initWithWindowNibName:@"MultipleCurrencyInterface"];
     }
     [_multipleCurrencyInterface showWindow:self];
-//    [_multipleCurrencyInterface.window makeMainWindow];
     [_multipleCurrencyInterface.window makeKeyAndOrderFront:self];
 }
 
