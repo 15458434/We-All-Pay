@@ -12,14 +12,7 @@ class MultiExchangeRatesController: NSObject {
     dynamic var exchangeRates = [ExchangeRatesForSum]()
     
     dynamic var destinationValue: Double = 0.00
-    dynamic var destinationCurrencyCode: String = "" {
-        willSet {
-            self.willChangeValueForKey("destinationValue")
-        }
-        didSet {
-            self.didChangeValueForKey("destinationValue")
-        }
-    }
+    dynamic var destinationCurrencyCode: String?
     
     dynamic var availableXRates: [MCxRatesCurrency]
     
@@ -73,7 +66,7 @@ class MultiExchangeRatesController: NSObject {
         let nf = NSNumberFormatter()
         nf.locale = NSLocale.currentLocale()
         nf.numberStyle = .CurrencyStyle
-        nf.currencyCode = destinationCurrencyCode
+        nf.currencyCode = destinationCurrencyCode!
         return nf
     }
     
