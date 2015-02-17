@@ -9,6 +9,11 @@
 			<key>orderHint</key>
 			<integer>2</integer>
 		</dict>
+		<key>EMC2.xcscheme</key>
+		<dict>
+			<key>orderHint</key>
+			<integer>2</integer>
+		</dict>
 		<key>Test.xcscheme</key>
 		<dict>
 			<key>orderHint</key>
@@ -83,6 +88,16 @@
 			<true/>
 		</dict>
 		<key>385F52FC191C2C360012773D</key>
+		<dict>
+			<key>primary</key>
+			<true/>
+		</dict>
+		<key>387295F61A8D3DDB009B7BF8</key>
+		<dict>
+			<key>primary</key>
+			<true/>
+		</dict>
+		<key>387296091A8D3DDB009B7BF8</key>
 		<dict>
 			<key>primary</key>
 			<true/>
