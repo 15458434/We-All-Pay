@@ -239,11 +239,15 @@ NSInteger const maxPageIndex = 1;
         [self openMailView:sender];
     } else {
         NSLog(@"Not everyone has an email address");
-        UIAlertView *mailAddressesMissing = [[UIAlertView alloc] initWithTitle:@"Unable to send email to all people."
-                                                                       message:@"Reason: Not all people have a mail address."
+        NSString *title = NSLocalizedString(@"EMAIL_CONSTRUCTION_FAILURE_TITLE", @"Unable to send email to all people.");
+        NSString *message = NSLocalizedString(@"EMAIL_CONSTRUCTION_FAILURE_MESSAGE", @"Reason: Not all people have a mail address.");
+        NSString *cancel = NSLocalizedString(@"CANCEL", @"Cancel");
+        NSString *sendAnyway = NSLocalizedString(@"SEND_ANYWAY", @"Send anyway");
+        UIAlertView *mailAddressesMissing = [[UIAlertView alloc] initWithTitle:title
+                                                                       message:message
                                                                       delegate:self
-                                                             cancelButtonTitle:@"Cancel"
-                                                             otherButtonTitles:@"Send anyway", nil];
+                                                             cancelButtonTitle:cancel
+                                                             otherButtonTitles:sendAnyway, nil];
         [mailAddressesMissing setDelegate:self];
         [mailAddressesMissing show];
     }

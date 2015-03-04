@@ -1914,7 +1914,7 @@
 				CLANG_ENABLE_MODULES = YES;
 				CODE_SIGN_ENTITLEMENTS = "We all pay.entitlements";
 				CODE_SIGN_IDENTITY = "iPhone Developer";
-				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer";
+				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer: Mark Cornelisse (B9ZEEP43C6)";
 				"CODE_SIGN_IDENTITY[sdk=macosx*]" = "Mac Developer";
 				EMBEDDED_CONTENT_CONTAINS_SWIFT = YES;
 				GCC_PRECOMPILE_PREFIX_HEADER = YES;
@@ -1933,7 +1933,7 @@
 				);
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				PROVISIONING_PROFILE = "";
-				"PROVISIONING_PROFILE[sdk=iphoneos*]" = "f65368f2-32d8-4fb3-bde7-1fb928b743e1";
+				"PROVISIONING_PROFILE[sdk=iphoneos*]" = "";
 				SWIFT_OBJC_BRIDGING_HEADER = "Going Dutch/We-all-pay-Bridging-Header.h";
 				SWIFT_OPTIMIZATION_LEVEL = "-Onone";
 				TARGETED_DEVICE_FAMILY = "1,2";
@@ -1949,7 +1949,7 @@
 				CLANG_ENABLE_MODULES = YES;
 				CODE_SIGN_ENTITLEMENTS = "We all pay.entitlements";
 				CODE_SIGN_IDENTITY = "iPhone Developer";
-				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer";
+				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Distribution: Mark Cornelisse (Z6JP26PUUY)";
 				"CODE_SIGN_IDENTITY[sdk=macosx*]" = "Mac Developer";
 				EMBEDDED_CONTENT_CONTAINS_SWIFT = YES;
 				GCC_PRECOMPILE_PREFIX_HEADER = YES;
@@ -1964,7 +1964,7 @@
 				);
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				PROVISIONING_PROFILE = "";
-				"PROVISIONING_PROFILE[sdk=iphoneos*]" = "5708da2b-55f4-4cd0-9ebe-0b766732258e";
+				"PROVISIONING_PROFILE[sdk=iphoneos*]" = "";
 				SWIFT_OBJC_BRIDGING_HEADER = "Going Dutch/We-all-pay-Bridging-Header.h";
 				TARGETED_DEVICE_FAMILY = "1,2";
 				WRAPPER_EXTENSION = app;
@@ -2061,7 +2061,7 @@
 				CLANG_WARN_UNREACHABLE_CODE = YES;
 				CODE_SIGN_ENTITLEMENTS = "Who is paying next/Who is paying next.entitlements";
 				CODE_SIGN_IDENTITY = "iPhone Developer";
-				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer: Mark Cornelisse (B9ZEEP43C6)";
+				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer";
 				"CODE_SIGN_IDENTITY[sdk=macosx*]" = "Mac Developer: Mark Cornelisse (B9ZEEP43C6)";
 				DEFINES_MODULE = YES;
 				ENABLE_STRICT_OBJC_MSGSEND = YES;
@@ -2080,6 +2080,7 @@
 				MTL_ENABLE_DEBUG_INFO = YES;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				PROVISIONING_PROFILE = "";
+				"PROVISIONING_PROFILE[sdk=iphoneos*]" = "";
 				SKIP_INSTALL = YES;
 				SWIFT_OBJC_BRIDGING_HEADER = "Whoispayingnext-Bridging-Header.h";
 				SWIFT_OPTIMIZATION_LEVEL = "-Onone";
@@ -2099,7 +2100,7 @@
 				CLANG_WARN_UNREACHABLE_CODE = YES;
 				CODE_SIGN_ENTITLEMENTS = "Who is paying next/Who is paying next.entitlements";
 				CODE_SIGN_IDENTITY = "iPhone Developer";
-				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Distribution: Mark Cornelisse (Z6JP26PUUY)";
+				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer";
 				"CODE_SIGN_IDENTITY[sdk=macosx*]" = "Developer ID Application: Mark Cornelisse (Z6JP26PUUY)";
 				DEFINES_MODULE = YES;
 				ENABLE_NS_ASSERTIONS = NO;
@@ -2115,7 +2116,7 @@
 				MTL_ENABLE_DEBUG_INFO = NO;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				PROVISIONING_PROFILE = "";
-				"PROVISIONING_PROFILE[sdk=iphoneos*]" = "067db618-8fe6-45c4-ba7d-2e099d155a82";
+				"PROVISIONING_PROFILE[sdk=iphoneos*]" = "";
 				SKIP_INSTALL = YES;
 				SWIFT_OBJC_BRIDGING_HEADER = "Whoispayingnext-Bridging-Header.h";
 				TARGETED_DEVICE_FAMILY = "1,2";
