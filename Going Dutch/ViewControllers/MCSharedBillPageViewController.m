@@ -201,36 +201,31 @@ NSInteger const maxPageIndex = 1;
 #if DEBUG
     NSLog(@"%@ openMailView:%@", self, sender);
 #endif
+    // Init the mailComposer
+    MCMailComposer *mailComposer = [[MCMailComposer alloc] initWithTonightsBill:[self tonightsBill]];
+    NSArray *recipients = [mailComposer getMailAddresses];
+    NSString *subject = [mailComposer getSubject];
+    NSString *messageBody = [mailComposer getMailBody];
+    // Init the mailViewController
     MFMailComposeViewController *mailViewController = [[MFMailComposeViewController alloc] init];
     [mailViewController setMailComposeDelegate:sender];
     [mailViewController setEdgesForExtendedLayout:UIRectEdgeNone];
     [mailViewController setModalPresentationStyle:UIModalPresentationFormSheet];
     [[mailViewController viewControllers][0] setEdgesForExtendedLayout:UIRectEdgeNone];
-    
-    // Init the mailComposer
-    MCMailComposer *mailComposer = [[MCMailComposer alloc] initWithTonightsBill:[self tonightsBill]];
-    
-    [mailViewController setToRecipients:[mailComposer getMailAddresses]];
-    [mailViewController setSubject:[mailComposer getSubject]];
-    [mailViewController setMessageBody:[mailComposer getMailBody] isHTML:mailComposer.isHTML];
+    [mailViewController setToRecipients:recipients];
+    [mailViewController setSubject:subject];
+    [mailViewController setMessageBody:messageBody isHTML:mailComposer.isHTML];
     
     if ([[UIDevice currentDevice] userInterfaceIdiom] == UIUserInterfaceIdiomPad) {
         [MCTools setAdBannerIfNotPaid:NO forViewController:[mailViewController viewControllers][0]];
     } else {
         //[MCTools setAdBannerIfNotPaid:YES forViewController:[[mailViewController viewControllers] objectAtIndex:0]];
     }
-    if (sender!=self) {
-        [sender presentViewController:mailViewController animated:YES completion:^{
-            
-            [[UIApplication sharedApplication] setStatusBarStyle:UIStatusBarStyleLightContent];
-            [mailViewController setNeedsStatusBarAppearanceUpdate];
-        }];
-    } else {
-        [[self navigationController] presentViewController:mailViewController animated:YES completion:^{
-            [[UIApplication sharedApplication] setStatusBarStyle:UIStatusBarStyleLightContent];
-            [mailViewController setNeedsStatusBarAppearanceUpdate];
-        }];
-    }
+    
+    [[_sharedBillTableViewController presentedViewController] presentViewController:mailViewController animated:YES completion:^{
+        [[UIApplication sharedApplication] setStatusBarStyle:UIStatusBarStyleLightContent];
+        [mailViewController setNeedsStatusBarAppearanceUpdate];
+    }];
 }
 
 - (void)shareBill:(id)sender
