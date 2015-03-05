@@ -82,7 +82,6 @@
 		3872964C1A8D4293009B7BF8 /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 3872964B1A8D4293009B7BF8 /* Main.storyboard */; };
 		3872964F1A8D42CF009B7BF8 /* ViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3872964E1A8D42CF009B7BF8 /* ViewController.swift */; };
 		387296511A8D42F1009B7BF8 /* Document.swift in Sources */ = {isa = PBXBuildFile; fileRef = 387296501A8D42F1009B7BF8 /* Document.swift */; };
-		387296531A8D4308009B7BF8 /* Info.plist in Resources */ = {isa = PBXBuildFile; fileRef = 387296521A8D4308009B7BF8 /* Info.plist */; };
 		387296551A8D43C7009B7BF8 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 387296541A8D43C7009B7BF8 /* AppDelegate.swift */; };
 		3872C0D118FF0A5E008C54D7 /* MCSelectEmailAddressTableViewController_iPad.m in Sources */ = {isa = PBXBuildFile; fileRef = 3872C0D018FF0A5D008C54D7 /* MCSelectEmailAddressTableViewController_iPad.m */; };
 		3872C0D718FF1363008C54D7 /* MCSelectEmailAddressTableViewCell_iPad.m in Sources */ = {isa = PBXBuildFile; fileRef = 3872C0D618FF1363008C54D7 /* MCSelectEmailAddressTableViewCell_iPad.m */; };
@@ -1367,7 +1366,7 @@
 			isa = PBXProject;
 			attributes = {
 				CLASSPREFIX = MC;
-				LastUpgradeCheck = 0600;
+				LastUpgradeCheck = 0610;
 				ORGANIZATIONNAME = "Mark Cornelisse";
 				TargetAttributes = {
 					38572AD1169D437B00969C62 = {
@@ -1483,7 +1482,6 @@
 			buildActionMask = 2147483647;
 			files = (
 				383B339D19C9063000AC2896 /* Currency info.plist in Resources */,
-				387296531A8D4308009B7BF8 /* Info.plist in Resources */,
 				38FE87CC195721670008EE74 /* InfoPlist.strings in Resources */,
 				3872964C1A8D4293009B7BF8 /* Main.storyboard in Resources */,
 				38FE87DA195721670008EE74 /* Images.xcassets in Resources */,
@@ -1870,7 +1868,7 @@
 				GCC_WARN_ABOUT_RETURN_TYPE = YES;
 				GCC_WARN_UNINITIALIZED_AUTOS = YES;
 				GCC_WARN_UNUSED_VARIABLE = YES;
-				IPHONEOS_DEPLOYMENT_TARGET = 8.0;
+				IPHONEOS_DEPLOYMENT_TARGET = 8.1;
 				ONLY_ACTIVE_ARCH = YES;
 				PROVISIONING_PROFILE = "";
 				"PROVISIONING_PROFILE[sdk=iphoneos*]" = "f65368f2-32d8-4fb3-bde7-1fb928b743e1";
@@ -1897,7 +1895,7 @@
 				GCC_WARN_ABOUT_RETURN_TYPE = YES;
 				GCC_WARN_UNINITIALIZED_AUTOS = YES;
 				GCC_WARN_UNUSED_VARIABLE = YES;
-				IPHONEOS_DEPLOYMENT_TARGET = 8.0;
+				IPHONEOS_DEPLOYMENT_TARGET = 8.1;
 				OTHER_CFLAGS = "-DNS_BLOCK_ASSERTIONS=1";
 				PROVISIONING_PROFILE = "";
 				"PROVISIONING_PROFILE[sdk=iphoneos*]" = "5708da2b-55f4-4cd0-9ebe-0b766732258e";
