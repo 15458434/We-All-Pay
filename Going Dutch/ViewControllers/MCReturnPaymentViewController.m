@@ -261,6 +261,7 @@ typedef NS_ENUM(BOOL, MCXRatesMissing) {
         switch (buttonIndex) {
             case 0:
                 NSLog(@"Cancel button pressed");
+                [self dismissViewControllerAnimated:YES completion:nil];
                 break;
             case 1:
                 [[self sendMailObject] openMailView:self];
