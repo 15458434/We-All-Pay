@@ -82,7 +82,6 @@
 		3872964C1A8D4293009B7BF8 /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 3872964B1A8D4293009B7BF8 /* Main.storyboard */; };
 		3872964F1A8D42CF009B7BF8 /* ViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3872964E1A8D42CF009B7BF8 /* ViewController.swift */; };
 		387296511A8D42F1009B7BF8 /* Document.swift in Sources */ = {isa = PBXBuildFile; fileRef = 387296501A8D42F1009B7BF8 /* Document.swift */; };
-		387296531A8D4308009B7BF8 /* Info.plist in Resources */ = {isa = PBXBuildFile; fileRef = 387296521A8D4308009B7BF8 /* Info.plist */; };
 		387296551A8D43C7009B7BF8 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 387296541A8D43C7009B7BF8 /* AppDelegate.swift */; };
 		3872C0D118FF0A5E008C54D7 /* MCSelectEmailAddressTableViewController_iPad.m in Sources */ = {isa = PBXBuildFile; fileRef = 3872C0D018FF0A5D008C54D7 /* MCSelectEmailAddressTableViewController_iPad.m */; };
 		3872C0D718FF1363008C54D7 /* MCSelectEmailAddressTableViewCell_iPad.m in Sources */ = {isa = PBXBuildFile; fileRef = 3872C0D618FF1363008C54D7 /* MCSelectEmailAddressTableViewCell_iPad.m */; };
@@ -1367,7 +1366,7 @@
 			isa = PBXProject;
 			attributes = {
 				CLASSPREFIX = MC;
-				LastUpgradeCheck = 0600;
+				LastUpgradeCheck = 0610;
 				ORGANIZATIONNAME = "Mark Cornelisse";
 				TargetAttributes = {
 					38572AD1169D437B00969C62 = {
@@ -1483,7 +1482,6 @@
 			buildActionMask = 2147483647;
 			files = (
 				383B339D19C9063000AC2896 /* Currency info.plist in Resources */,
-				387296531A8D4308009B7BF8 /* Info.plist in Resources */,
 				38FE87CC195721670008EE74 /* InfoPlist.strings in Resources */,
 				3872964C1A8D4293009B7BF8 /* Main.storyboard in Resources */,
 				38FE87DA195721670008EE74 /* Images.xcassets in Resources */,
@@ -1870,7 +1868,7 @@
 				GCC_WARN_ABOUT_RETURN_TYPE = YES;
 				GCC_WARN_UNINITIALIZED_AUTOS = YES;
 				GCC_WARN_UNUSED_VARIABLE = YES;
-				IPHONEOS_DEPLOYMENT_TARGET = 8.0;
+				IPHONEOS_DEPLOYMENT_TARGET = 8.1;
 				ONLY_ACTIVE_ARCH = YES;
 				PROVISIONING_PROFILE = "";
 				"PROVISIONING_PROFILE[sdk=iphoneos*]" = "f65368f2-32d8-4fb3-bde7-1fb928b743e1";
@@ -1897,7 +1895,7 @@
 				GCC_WARN_ABOUT_RETURN_TYPE = YES;
 				GCC_WARN_UNINITIALIZED_AUTOS = YES;
 				GCC_WARN_UNUSED_VARIABLE = YES;
-				IPHONEOS_DEPLOYMENT_TARGET = 8.0;
+				IPHONEOS_DEPLOYMENT_TARGET = 8.1;
 				OTHER_CFLAGS = "-DNS_BLOCK_ASSERTIONS=1";
 				PROVISIONING_PROFILE = "";
 				"PROVISIONING_PROFILE[sdk=iphoneos*]" = "5708da2b-55f4-4cd0-9ebe-0b766732258e";
@@ -1925,7 +1923,7 @@
 					/Applications/Xcode.app/Contents/Developer/Toolchains/XcodeDefault.xctoolchain/usr/include,
 				);
 				INFOPLIST_FILE = "Going Dutch/We all pay-Info.plist";
-				IPHONEOS_DEPLOYMENT_TARGET = 7.1;
+				IPHONEOS_DEPLOYMENT_TARGET = 7.0;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
 				LIBRARY_SEARCH_PATHS = (
 					"$(inherited)",
@@ -1933,7 +1931,7 @@
 				);
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				PROVISIONING_PROFILE = "";
-				"PROVISIONING_PROFILE[sdk=iphoneos*]" = "f65368f2-32d8-4fb3-bde7-1fb928b743e1";
+				"PROVISIONING_PROFILE[sdk=iphoneos*]" = "";
 				SWIFT_OBJC_BRIDGING_HEADER = "Going Dutch/We-all-pay-Bridging-Header.h";
 				SWIFT_OPTIMIZATION_LEVEL = "-Onone";
 				TARGETED_DEVICE_FAMILY = "1,2";
@@ -1951,12 +1949,13 @@
 				CODE_SIGN_IDENTITY = "iPhone Developer";
 				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer";
 				"CODE_SIGN_IDENTITY[sdk=macosx*]" = "Mac Developer";
+				COPY_PHASE_STRIP = NO;
 				EMBEDDED_CONTENT_CONTAINS_SWIFT = YES;
 				GCC_PRECOMPILE_PREFIX_HEADER = YES;
 				GCC_PREFIX_HEADER = "Going Dutch/We all pay-Prefix.pch";
 				GCC_SYMBOLS_PRIVATE_EXTERN = YES;
 				INFOPLIST_FILE = "Going Dutch/We all pay-Info.plist";
-				IPHONEOS_DEPLOYMENT_TARGET = 7.1;
+				IPHONEOS_DEPLOYMENT_TARGET = 7.0;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
 				LIBRARY_SEARCH_PATHS = (
 					"$(inherited)",
@@ -1964,7 +1963,7 @@
 				);
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				PROVISIONING_PROFILE = "";
-				"PROVISIONING_PROFILE[sdk=iphoneos*]" = "5708da2b-55f4-4cd0-9ebe-0b766732258e";
+				"PROVISIONING_PROFILE[sdk=iphoneos*]" = "";
 				SWIFT_OBJC_BRIDGING_HEADER = "Going Dutch/We-all-pay-Bridging-Header.h";
 				TARGETED_DEVICE_FAMILY = "1,2";
 				WRAPPER_EXTENSION = app;
@@ -2005,6 +2004,7 @@
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks @loader_path/Frameworks";
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				PROVISIONING_PROFILE = "";
+				STRIP_STYLE = all;
 				SWIFT_OBJC_BRIDGING_HEADER = "Going Dutch/We all pay Tests-Bridging-Header.h";
 				SWIFT_OPTIMIZATION_LEVEL = "-Onone";
 				TEST_HOST = "$(BUNDLE_LOADER)";
@@ -2043,6 +2043,7 @@
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks @loader_path/Frameworks";
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				PROVISIONING_PROFILE = "";
+				STRIP_STYLE = all;
 				SWIFT_OBJC_BRIDGING_HEADER = "Going Dutch/We all pay Tests-Bridging-Header.h";
 				TEST_HOST = "$(BUNDLE_LOADER)";
 				WRAPPER_EXTENSION = xctest;
@@ -2061,7 +2062,7 @@
 				CLANG_WARN_UNREACHABLE_CODE = YES;
 				CODE_SIGN_ENTITLEMENTS = "Who is paying next/Who is paying next.entitlements";
 				CODE_SIGN_IDENTITY = "iPhone Developer";
-				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer: Mark Cornelisse (B9ZEEP43C6)";
+				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer";
 				"CODE_SIGN_IDENTITY[sdk=macosx*]" = "Mac Developer: Mark Cornelisse (B9ZEEP43C6)";
 				DEFINES_MODULE = YES;
 				ENABLE_STRICT_OBJC_MSGSEND = YES;
@@ -2080,7 +2081,9 @@
 				MTL_ENABLE_DEBUG_INFO = YES;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				PROVISIONING_PROFILE = "";
+				"PROVISIONING_PROFILE[sdk=iphoneos*]" = "";
 				SKIP_INSTALL = YES;
+				STRIP_STYLE = all;
 				SWIFT_OBJC_BRIDGING_HEADER = "Whoispayingnext-Bridging-Header.h";
 				SWIFT_OPTIMIZATION_LEVEL = "-Onone";
 				TARGETED_DEVICE_FAMILY = "1,2";
@@ -2099,8 +2102,9 @@
 				CLANG_WARN_UNREACHABLE_CODE = YES;
 				CODE_SIGN_ENTITLEMENTS = "Who is paying next/Who is paying next.entitlements";
 				CODE_SIGN_IDENTITY = "iPhone Developer";
-				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Distribution: Mark Cornelisse (Z6JP26PUUY)";
-				"CODE_SIGN_IDENTITY[sdk=macosx*]" = "Developer ID Application: Mark Cornelisse (Z6JP26PUUY)";
+				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer";
+				"CODE_SIGN_IDENTITY[sdk=macosx*]" = "Mac Developer: Mark Cornelisse (B9ZEEP43C6)";
+				COPY_PHASE_STRIP = NO;
 				DEFINES_MODULE = YES;
 				ENABLE_NS_ASSERTIONS = NO;
 				ENABLE_STRICT_OBJC_MSGSEND = YES;
@@ -2115,8 +2119,9 @@
 				MTL_ENABLE_DEBUG_INFO = NO;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				PROVISIONING_PROFILE = "";
-				"PROVISIONING_PROFILE[sdk=iphoneos*]" = "067db618-8fe6-45c4-ba7d-2e099d155a82";
+				"PROVISIONING_PROFILE[sdk=iphoneos*]" = "";
 				SKIP_INSTALL = YES;
+				STRIP_STYLE = all;
 				SWIFT_OBJC_BRIDGING_HEADER = "Whoispayingnext-Bridging-Header.h";
 				TARGETED_DEVICE_FAMILY = "1,2";
 			};
@@ -2234,6 +2239,7 @@
 				MACOSX_DEPLOYMENT_TARGET = 10.9;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				SDKROOT = macosx;
+				STRIP_STYLE = all;
 				SWIFT_OBJC_BRIDGING_HEADER = "X-Rates/EMCTests-Bridging-Header.h";
 				SWIFT_OPTIMIZATION_LEVEL = "-Onone";
 				TEST_HOST = "$(BUNDLE_LOADER)";
@@ -2253,6 +2259,7 @@
 				CLANG_WARN_INT_CONVERSION = YES;
 				CLANG_WARN_OBJC_ROOT_CLASS = YES_ERROR;
 				COMBINE_HIDPI_IMAGES = YES;
+				COPY_PHASE_STRIP = NO;
 				DEBUG_INFORMATION_FORMAT = "dwarf-with-dsym";
 				ENABLE_NS_ASSERTIONS = NO;
 				FRAMEWORK_SEARCH_PATHS = (
@@ -2272,6 +2279,7 @@
 				MACOSX_DEPLOYMENT_TARGET = 10.9;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				SDKROOT = macosx;
+				STRIP_STYLE = all;
 				SWIFT_OBJC_BRIDGING_HEADER = "X-Rates/EMCTests-Bridging-Header.h";
 				TEST_HOST = "$(BUNDLE_LOADER)";
 				WRAPPER_EXTENSION = xctest;

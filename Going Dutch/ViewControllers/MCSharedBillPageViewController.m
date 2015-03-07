@@ -196,64 +196,6 @@ NSInteger const maxPageIndex = 1;
     }
 }
 
-- (void)openMailView:(id)sender
-{
-#if DEBUG
-    NSLog(@"%@ openMailView:%@", self, sender);
-#endif
-    MFMailComposeViewController *mailViewController = [[MFMailComposeViewController alloc] init];
-    [mailViewController setMailComposeDelegate:sender];
-    [mailViewController setEdgesForExtendedLayout:UIRectEdgeNone];
-    [mailViewController setModalPresentationStyle:UIModalPresentationFormSheet];
-    [[mailViewController viewControllers][0] setEdgesForExtendedLayout:UIRectEdgeNone];
-    
-    // Init the mailComposer
-    MCMailComposer *mailComposer = [[MCMailComposer alloc] initWithTonightsBill:[self tonightsBill]];
-    
-    [mailViewController setToRecipients:[mailComposer getMailAddresses]];
-    [mailViewController setSubject:[mailComposer getSubject]];
-    [mailViewController setMessageBody:[mailComposer getMailBody] isHTML:mailComposer.isHTML];
-    
-    if ([[UIDevice currentDevice] userInterfaceIdiom] == UIUserInterfaceIdiomPad) {
-        [MCTools setAdBannerIfNotPaid:NO forViewController:[mailViewController viewControllers][0]];
-    } else {
-        //[MCTools setAdBannerIfNotPaid:YES forViewController:[[mailViewController viewControllers] objectAtIndex:0]];
-    }
-    if (sender!=self) {
-        [sender presentViewController:mailViewController animated:YES completion:^{
-            
-            [[UIApplication sharedApplication] setStatusBarStyle:UIStatusBarStyleLightContent];
-            [mailViewController setNeedsStatusBarAppearanceUpdate];
-        }];
-    } else {
-        [[self navigationController] presentViewController:mailViewController animated:YES completion:^{
-            [[UIApplication sharedApplication] setStatusBarStyle:UIStatusBarStyleLightContent];
-            [mailViewController setNeedsStatusBarAppearanceUpdate];
-        }];
-    }
-}
-
-- (void)shareBill:(id)sender
-{
-    if ([[self tonightsBill] doesEveryoneHaveAnEmailAddress]) {
-        [self openMailView:sender];
-    } else {
-        NSLog(@"Not everyone has an email address");
-        UIAlertView *mailAddressesMissing = [[UIAlertView alloc] initWithTitle:@"Unable to send email to all people."
-                                                                       message:@"Reason: Not all people have a mail address."
-                                                                      delegate:self
-                                                             cancelButtonTitle:@"Cancel"
-                                                             otherButtonTitles:@"Send anyway", nil];
-        [mailAddressesMissing setDelegate:self];
-        [mailAddressesMissing show];
-    }
-}
-
-- (void)sendMail:(id)sender
-{
-    
-}
-
 - (UIPageControl *)pageViewIndicator
 {
     id destination = [self parentViewController];
@@ -423,22 +365,22 @@ NSInteger const maxPageIndex = 1;
 
 #pragma mark - UIAlertViewDelegate
 
-- (void)alertView:(UIAlertView *)alertView clickedButtonAtIndex:(NSInteger)buttonIndex
-{
-    switch (buttonIndex) {
-        case 0:
-            NSLog(@"Cancel button pressed");
-            break;
-        case 1:
-            [self openMailView:self];
-            break;
-        case 2:
-            [self editBillData:self];
-            break;
-        default:
-            break;
-    }
-}
+//- (void)alertView:(UIAlertView *)alertView clickedButtonAtIndex:(NSInteger)buttonIndex
+//{
+//    switch (buttonIndex) {
+//        case 0:
+//            NSLog(@"Cancel button pressed");
+//            break;
+//        case 1:
+//            [self openMailView:self];
+//            break;
+//        case 2:
+//            [self editBillData:self];
+//            break;
+//        default:
+//            break;
+//    }
+//}
 
 #pragma mark - UIPageViewControllerDataSource
 

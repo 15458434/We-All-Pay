@@ -313,7 +313,7 @@ typedef NS_ENUM(BOOL, ChildViewOpened) {
 {
     if (textField == paidView) {
 #if DEBUG
-        NSLog(@"kindOfPaidFieldDismiss = %lu", kindOfPaidFieldDismiss);
+        NSLog(@"kindOfPaidFieldDismiss = %d", kindOfPaidFieldDismiss);
 #endif
         if (kindOfPaidFieldDismiss == cancelIsPressed) {
             // Restore stored value

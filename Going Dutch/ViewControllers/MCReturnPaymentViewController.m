@@ -23,12 +23,14 @@
 #import "MCTwoLabelsTitleView.h"
 #import "MCTableEmptyMessage.h"
 
+#import "We_all_pay-Swift.h"
+
 typedef NS_ENUM(BOOL, MCXRatesMissing) {
     xRatesPresent,
     xRatesMissing
 };
 
-@interface MCReturnPaymentViewController () <UIAlertViewDelegate>
+@interface MCReturnPaymentViewController () <UIAlertViewDelegate, MFMailComposeViewControllerDelegate>
 
 @property (nonatomic, strong) NSArray *peoplePresent;
 @property (nonatomic, strong) NSMutableArray *paymentsAfterwards;
@@ -49,7 +51,7 @@ typedef NS_ENUM(BOOL, MCXRatesMissing) {
 
 - (IBAction)sendAsEmailButtonPressed:(id)sender
 {
-    [sendMailObject shareBill:self];
+    [self shareBill:self];
 }
 
 - (IBAction)mainCancelButtonPressed:(id)sender
@@ -58,6 +60,58 @@ typedef NS_ENUM(BOOL, MCXRatesMissing) {
 }
 
 #pragma mark - Private in this class
+
+- (void)openMailView:(id)sender
+{
+#if DEBUG
+    NSLog(@"%@ openMailView:%@", self, sender);
+#endif
+    // Init the mailComposer
+    MCMailComposer *mailComposer = [[MCMailComposer alloc] initWithTonightsBill:[self tonightsBill]];
+    NSArray *recipients = [mailComposer getMailAddresses];
+    NSString *subject = [mailComposer getSubject];
+    NSString *messageBody = [mailComposer getMailBody];
+    // Init the mailViewController
+    MFMailComposeViewController *mailViewController = [[MFMailComposeViewController alloc] init];
+    [mailViewController setMailComposeDelegate:sender];
+    [mailViewController setEdgesForExtendedLayout:UIRectEdgeNone];
+    [mailViewController setModalPresentationStyle:UIModalPresentationFormSheet];
+    [[mailViewController viewControllers][0] setEdgesForExtendedLayout:UIRectEdgeNone];
+    [mailViewController setToRecipients:recipients];
+    [mailViewController setSubject:subject];
+    [mailViewController setMessageBody:messageBody isHTML:mailComposer.isHTML];
+    
+    if ([[UIDevice currentDevice] userInterfaceIdiom] == UIUserInterfaceIdiomPad) {
+        [MCTools setAdBannerIfNotPaid:NO forViewController:[mailViewController viewControllers][0]];
+    } else {
+        //[MCTools setAdBannerIfNotPaid:YES forViewController:[[mailViewController viewControllers] objectAtIndex:0]];
+    }
+    
+    [self presentViewController:mailViewController animated:YES completion:^{
+        [[UIApplication sharedApplication] setStatusBarStyle:UIStatusBarStyleLightContent];
+        [mailViewController setNeedsStatusBarAppearanceUpdate];
+    }];
+}
+
+- (void)shareBill:(id)sender
+{
+    if ([[self tonightsBill] doesEveryoneHaveAnEmailAddress]) {
+        [self openMailView:sender];
+    } else {
+        NSLog(@"Not everyone has an email address");
+        NSString *title = NSLocalizedString(@"EMAIL_CONSTRUCTION_FAILURE_TITLE", @"Unable to send email to all people.");
+        NSString *message = NSLocalizedString(@"EMAIL_CONSTRUCTION_FAILURE_MESSAGE", @"Reason: Not all people have a mail address.");
+        NSString *cancel = NSLocalizedString(@"CANCEL", @"Cancel");
+        NSString *sendAnyway = NSLocalizedString(@"SEND_ANYWAY", @"Send anyway");
+        UIAlertView *mailAddressesMissing = [[UIAlertView alloc] initWithTitle:title
+                                                                       message:message
+                                                                      delegate:self
+                                                             cancelButtonTitle:cancel
+                                                             otherButtonTitles:sendAnyway, nil];
+        [mailAddressesMissing setDelegate:self];
+        [mailAddressesMissing show];
+    }
+}
 
 - (void)showRateMe
 {
@@ -198,31 +252,7 @@ typedef NS_ENUM(BOOL, MCXRatesMissing) {
 {
     [super viewWillAppear:animated];
     
-//    if (_areXRatesMissing == xRatesMissing) {
-//        NSString *title = NSLocalizedString(@"UNABLE_TO_SOLVE", @"Unable to solve");
-//        NSString *message = NSLocalizedString(@"UNABLE_TO_SOLVE_MESSAGE", @"Exchange rates missing. Would you like to fetch them now?");
-//        NSString *cancelButton = NSLocalizedString(@"NO", @"No");
-//        NSString *firstButton = NSLocalizedString(@"YES", @"Yes");
-//        _noXRatesAlert = [[UIAlertView alloc] initWithTitle:title message:message delegate:self cancelButtonTitle:cancelButton otherButtonTitles:firstButton, nil];
-//        [_noXRatesAlert show];
-//    }
-    
     [self setEmptyMessage];
-}
-
-- (void)viewDidAppear:(BOOL)animated
-{
-    [super viewDidAppear:animated];
-    
-//    id<GAITracker> tracker = [[GAI sharedInstance] defaultTracker];
-//    [tracker set:kGAIScreenName value:@"MCSolutionScreen_iPhone"];
-//    [tracker send:[[GAIDictionaryBuilder createAppView] build]];
-}
-
-- (void)viewDidDisappear:(BOOL)animated
-{
-    [super viewDidDisappear:animated];
-    
 }
 
 - (void)didReceiveMemoryWarning
@@ -260,16 +290,15 @@ typedef NS_ENUM(BOOL, MCXRatesMissing) {
     } else {
         switch (buttonIndex) {
             case 0:
+#if DEBUG
                 NSLog(@"Cancel button pressed");
+#endif
                 break;
             case 1:
-                [[self sendMailObject] openMailView:self];
-                break;
-            case 2:
-                //[[self sendMailObject ] editBillData:self];
-                NSLog(@"If you see this there was a button that shouldn't be there.");
+                [self openMailView:self];
                 break;
             default:
+                NSAssert(false, @"Wrong button index.");
                 break;
         }
     }
@@ -426,58 +455,6 @@ typedef NS_ENUM(BOOL, MCXRatesMissing) {
     }
     
     return nil;
-}
-
-/*
-// Override to support conditional editing of the table view.
-- (BOOL)tableView:(UITableView *)tableView canEditRowAtIndexPath:(NSIndexPath *)indexPath
-{
-    // Return NO if you do not want the specified item to be editable.
-    return YES;
-}
-*/
-
-/*
-// Override to support editing the table view.
-- (void)tableView:(UITableView *)tableView commitEditingStyle:(UITableViewCellEditingStyle)editingStyle forRowAtIndexPath:(NSIndexPath *)indexPath
-{
-    if (editingStyle == UITableViewCellEditingStyleDelete) {
-        // Delete the row from the data source
-        [tableView deleteRowsAtIndexPaths:@[indexPath] withRowAnimation:UITableViewRowAnimationFade];
-    }   
-    else if (editingStyle == UITableViewCellEditingStyleInsert) {
-        // Create a new instance of the appropriate class, insert it into the array, and add a new row to the table view
-    }   
-}
-*/
-
-/*
-// Override to support rearranging the table view.
-- (void)tableView:(UITableView *)tableView moveRowAtIndexPath:(NSIndexPath *)fromIndexPath toIndexPath:(NSIndexPath *)toIndexPath
-{
-}
-*/
-
-/*
-// Override to support conditional rearranging of the table view.
-- (BOOL)tableView:(UITableView *)tableView canMoveRowAtIndexPath:(NSIndexPath *)indexPath
-{
-    // Return NO if you do not want the item to be re-orderable.
-    return YES;
-}
-*/
-
-#pragma mark - Table view delegate
-
-- (void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath
-{
-    // Navigation logic may go here. Create and push another view controller.
-    /*
-     <#DetailViewController#> *detailViewController = [[<#DetailViewController#> alloc] initWithNibName:@"<#Nib name#>" bundle:nil];
-     // ...
-     // Pass the selected object to the new view controller.
-     [self.navigationController pushViewController:detailViewController animated:YES];
-     */
 }
 
 @end

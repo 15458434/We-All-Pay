@@ -24,7 +24,9 @@ class MCMailComposer: NSObject {
         let allPeople = tonightsBill.peoplePresent.sortedArrayUsingDescriptors(sortDescriptorArray) as [MCPerson]
         var listOfMailAddresses = [String]()
         for person in allPeople {
-            listOfMailAddresses.append(person.defaultEmailAddress()!)
+            if let emailAddress = person.defaultEmailAddress() {
+                listOfMailAddresses.append(emailAddress)
+            }
         }
         return listOfMailAddresses
     }
