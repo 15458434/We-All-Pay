@@ -71,6 +71,7 @@ typedef NS_ENUM(BOOL, MCStatus) {
     [self dismissKeyboard];
     [_thisPerson setDateModified:[NSDate date]];
     [[MCWeAllPayStoreController defaultStore] endUndoGroupAndProcess];
+    [[MCWeAllPayStoreController defaultStore] saveMainThreadContext];
     [[[self navigationController] presentingViewController] dismissViewControllerAnimated:YES completion:nil];
 }
 
