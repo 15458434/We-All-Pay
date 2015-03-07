@@ -25,10 +25,6 @@
 
 @interface MCSharedBillPageViewController : UIPageViewController <UIPageViewControllerDataSource, UIPageViewControllerDelegate, UIAlertViewDelegate, MCTonightsBillTitleDelegate, MCIsEditingProtocol>
 {
-
-
-    
-    //__weak IBOutlet UIPageControl *pageViewIndicator;
     NSUInteger newPageNumber;
 }
 @property (nonatomic, strong) MCSharedBillTableViewController *sharedBillTableViewController;
@@ -40,14 +36,8 @@
 
 - (BOOL)toggleEditTableView:(id)sender;
 
-- (void)shareBill:(id)sender;
-- (void)sendMail:(id)sender;
 - (void)pageControlTapped:(id)sender;
 
-- (void)openMailView:(id)sender;
-
 - (UIPageControl *)pageViewIndicator;
-
-//- (void)writeableTonightsBillIsCreated:(NSNotification *)notification;
 
 @end
