@@ -10,7 +10,6 @@
 		38001C97194DA3D8008ACD94 /* MCiScreenTableViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 38001C96194DA3D8008ACD94 /* MCiScreenTableViewController.m */; };
 		38001C9B194EE284008ACD94 /* Images.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 38001C9A194EE284008ACD94 /* Images.xcassets */; };
 		38010E0F1A3F4A4F0056F8F8 /* Localizable.strings in Resources */ = {isa = PBXBuildFile; fileRef = 38010E111A3F4A4F0056F8F8 /* Localizable.strings */; };
-		3801B1121A1E23D5005B69D7 /* We all pay empty.xcappdata in Resources */ = {isa = PBXBuildFile; fileRef = 3801B1111A1E23D5005B69D7 /* We all pay empty.xcappdata */; };
 		3801F89C16DFC62600DF8675 /* CoreData.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 3801F89B16DFC62600DF8675 /* CoreData.framework */; };
 		3803963F192114D700FA8CC2 /* MCPaymentPresenceTableViewCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 3803963E192114D700FA8CC2 /* MCPaymentPresenceTableViewCell.m */; };
 		380700A51A1B616000C7FB37 /* MCPaymentUpdateTo4.m in Sources */ = {isa = PBXBuildFile; fileRef = 380700A41A1B616000C7FB37 /* MCPaymentUpdateTo4.m */; };
@@ -1437,7 +1436,6 @@
 			isa = PBXResourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				3801B1121A1E23D5005B69D7 /* We all pay empty.xcappdata in Resources */,
 				38DDBF8619C1AB5E00D690D0 /* Currency info.plist in Resources */,
 				38572AE1169D437B00969C62 /* InfoPlist.strings in Resources */,
 				380BF82E18108898008A8B74 /* MCEmailAddressTableViewCell.xib in Resources */,
