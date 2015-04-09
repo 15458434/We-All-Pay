@@ -14,7 +14,7 @@ func createAttributesStringForWhoIsPayingNext(tripName: String, fullNameNextPaye
     let normalFont: UIFont = UIFont(descriptor: normalFontDescriptor, size: 0)
     let normalAttributes: Dictionary = [NSFontAttributeName: normalFont]
     
-    let boldFontDescriptor: UIFontDescriptor = normalFontDescriptor.fontDescriptorWithSymbolicTraits(.TraitBold)
+    let boldFontDescriptor: UIFontDescriptor = normalFontDescriptor.fontDescriptorWithSymbolicTraits(.TraitBold)!
     let boldFont: UIFont = UIFont(descriptor: boldFontDescriptor, size: 0)
     let boldAttributes: Dictionary = [NSFontAttributeName: boldFont];
     
@@ -42,7 +42,7 @@ func betterCreateAttributesStringForWhoIsPayingNext(tripName: String, fullNameNe
     func createAttributesForFontStyle(style: String, withTrait trait: UIFontDescriptorSymbolicTraits!) -> [NSObject : AnyObject] {
         let fontDescriptor = UIFontDescriptor.preferredFontDescriptorWithTextStyle(UIFontTextStyleBody)
         if let theTrait = trait {
-            let descriptorWithTrait = fontDescriptor.fontDescriptorWithSymbolicTraits(trait)
+            let descriptorWithTrait = fontDescriptor.fontDescriptorWithSymbolicTraits(theTrait)!
             let font = UIFont(descriptor: descriptorWithTrait, size: 0)
             return [NSFontAttributeName : font];
         } else {
@@ -56,17 +56,6 @@ func betterCreateAttributesStringForWhoIsPayingNext(tripName: String, fullNameNe
     
     let text = String.localizedStringWithFormat(NSLocalizedString("For your event %@, %@ should pay next", comment: "For your event %1$@, %2$@ should pay next."), tripName, fullNameNextPayer)
     let attributedText = NSMutableAttributedString(string: text, attributes: normalAttributes)
-    
-//    let replacements = [tripName, fullNameNextPayer]
-//    for eachBoldString in replacements {
-//        let regularExpression = NSRegularExpression(pattern: tripName, options: nil, error: nil)!
-//        regularExpression.enumerateMatchesInString(attributedText.string, options: nil, range: NSMakeRange(0, countElements(attributedText.string)), usingBlock: { (match, flags, stop) -> Void in
-//            // apply the style
-//            let matchRange = match.rangeAtIndex(1)
-//            attributedText.addAttributes(boldAttributes, range: matchRange)
-//
-//        })
-//    }
     
     return attributedText
 }
