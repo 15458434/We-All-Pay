@@ -29,6 +29,7 @@
 		381318CE19A2869600C821B0 /* XRCurrency.m in Sources */ = {isa = PBXBuildFile; fileRef = 381318CD19A2869600C821B0 /* XRCurrency.m */; };
 		381318D019A2869600C821B0 /* XRCurrency.m in Sources */ = {isa = PBXBuildFile; fileRef = 381318CD19A2869600C821B0 /* XRCurrency.m */; };
 		381318D119A2869600C821B0 /* XRCurrency.m in Sources */ = {isa = PBXBuildFile; fileRef = 381318CD19A2869600C821B0 /* XRCurrency.m */; };
+		381640FE1AD6D8A0000D9FAF /* Who is paying next.appex in Embed App Extensions */ = {isa = PBXBuildFile; fileRef = 38B6E0EC1A28BBAB009E69D7 /* Who is paying next.appex */; settings = {ATTRIBUTES = (RemoveHeadersOnCopy, ); }; };
 		381AB0EF1924FCC2004A02C6 /* MCWhoPaidHowMuchTableViewCell_iPhone.m in Sources */ = {isa = PBXBuildFile; fileRef = 381AB0EE1924FCC2004A02C6 /* MCWhoPaidHowMuchTableViewCell_iPhone.m */; };
 		381F693E194EE54700F465FC /* MCOneLabelIScreenTableViewCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 381F693D194EE54700F465FC /* MCOneLabelIScreenTableViewCell.m */; };
 		381F6941194EE5A800F465FC /* MCTwoLabelIscreenTableViewCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 381F6940194EE5A800F465FC /* MCTwoLabelIscreenTableViewCell.m */; };
@@ -50,7 +51,6 @@
 		384512F81986D4CE008D17AB /* MCSelectCurrencyTableViewCell_iPad.m in Sources */ = {isa = PBXBuildFile; fileRef = 384512F71986D4CE008D17AB /* MCSelectCurrencyTableViewCell_iPad.m */; };
 		384512FB1986DDB7008D17AB /* MCSelectCurrencyTableViewCell_iPhone.m in Sources */ = {isa = PBXBuildFile; fileRef = 384512FA1986DDB7008D17AB /* MCSelectCurrencyTableViewCell_iPhone.m */; };
 		384513011986DEC0008D17AB /* MCSelectCurrencyTableViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 384513001986DEC0008D17AB /* MCSelectCurrencyTableViewController.m */; };
-		385503BF1A41E21B00ABF588 /* Who is paying next.appex in Embed App Extensions */ = {isa = PBXBuildFile; fileRef = 38B6E0EC1A28BBAB009E69D7 /* Who is paying next.appex */; settings = {ATTRIBUTES = (RemoveHeadersOnCopy, ); }; };
 		38572AD7169D437B00969C62 /* UIKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 38572AD6169D437B00969C62 /* UIKit.framework */; };
 		38572AD9169D437B00969C62 /* Foundation.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 38572AD8169D437B00969C62 /* Foundation.framework */; settings = {ATTRIBUTES = (Required, ); }; };
 		38572ADB169D437B00969C62 /* CoreGraphics.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 38572ADA169D437B00969C62 /* CoreGraphics.framework */; };
@@ -197,7 +197,7 @@
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
-		385503C01A41E21B00ABF588 /* PBXContainerItemProxy */ = {
+		381640FF1AD6D8A1000D9FAF /* PBXContainerItemProxy */ = {
 			isa = PBXContainerItemProxy;
 			containerPortal = 38572AC9169D437B00969C62 /* Project object */;
 			proxyType = 1;
@@ -231,13 +231,13 @@
 			name = "Embed App Extensions";
 			runOnlyForDeploymentPostprocessing = 0;
 		};
-		385503C21A41E21C00ABF588 /* Embed App Extensions */ = {
+		381641011AD6D8A1000D9FAF /* Embed App Extensions */ = {
 			isa = PBXCopyFilesBuildPhase;
 			buildActionMask = 2147483647;
 			dstPath = "";
 			dstSubfolderSpec = 13;
 			files = (
-				385503BF1A41E21B00ABF588 /* Who is paying next.appex in Embed App Extensions */,
+				381640FE1AD6D8A0000D9FAF /* Who is paying next.appex in Embed App Extensions */,
 			);
 			name = "Embed App Extensions";
 			runOnlyForDeploymentPostprocessing = 0;
@@ -1275,12 +1275,12 @@
 				38572ACE169D437B00969C62 /* Sources */,
 				38572ACF169D437B00969C62 /* Frameworks */,
 				38572AD0169D437B00969C62 /* Resources */,
-				385503C21A41E21C00ABF588 /* Embed App Extensions */,
+				381641011AD6D8A1000D9FAF /* Embed App Extensions */,
 			);
 			buildRules = (
 			);
 			dependencies = (
-				385503C11A41E21B00ABF588 /* PBXTargetDependency */,
+				381641001AD6D8A1000D9FAF /* PBXTargetDependency */,
 			);
 			name = "We all pay";
 			productName = "Going Dutch";
@@ -1676,10 +1676,10 @@
 /* End PBXSourcesBuildPhase section */
 
 /* Begin PBXTargetDependency section */
-		385503C11A41E21B00ABF588 /* PBXTargetDependency */ = {
+		381641001AD6D8A1000D9FAF /* PBXTargetDependency */ = {
 			isa = PBXTargetDependency;
 			target = 38B6E0EB1A28BBAB009E69D7 /* Who is paying next */;
-			targetProxy = 385503C01A41E21B00ABF588 /* PBXContainerItemProxy */;
+			targetProxy = 381640FF1AD6D8A1000D9FAF /* PBXContainerItemProxy */;
 		};
 		385F530B191C2C360012773D /* PBXTargetDependency */ = {
 			isa = PBXTargetDependency;
@@ -1912,7 +1912,6 @@
 				CODE_SIGN_IDENTITY = "iPhone Developer";
 				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer";
 				"CODE_SIGN_IDENTITY[sdk=macosx*]" = "Mac Developer";
-				EMBEDDED_CONTENT_CONTAINS_SWIFT = YES;
 				GCC_PRECOMPILE_PREFIX_HEADER = YES;
 				GCC_PREFIX_HEADER = "Going Dutch/We all pay-Prefix.pch";
 				GCC_SYMBOLS_PRIVATE_EXTERN = NO;
@@ -1948,7 +1947,6 @@
 				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer";
 				"CODE_SIGN_IDENTITY[sdk=macosx*]" = "Mac Developer";
 				COPY_PHASE_STRIP = NO;
-				EMBEDDED_CONTENT_CONTAINS_SWIFT = YES;
 				GCC_PRECOMPILE_PREFIX_HEADER = YES;
 				GCC_PREFIX_HEADER = "Going Dutch/We all pay-Prefix.pch";
 				GCC_SYMBOLS_PRIVATE_EXTERN = YES;
@@ -2061,7 +2059,7 @@
 				CODE_SIGN_ENTITLEMENTS = "Who is paying next/Who is paying next.entitlements";
 				CODE_SIGN_IDENTITY = "iPhone Developer";
 				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer";
-				"CODE_SIGN_IDENTITY[sdk=macosx*]" = "Mac Developer: Mark Cornelisse (B9ZEEP43C6)";
+				"CODE_SIGN_IDENTITY[sdk=macosx*]" = "Mac Developer";
 				DEFINES_MODULE = YES;
 				ENABLE_STRICT_OBJC_MSGSEND = YES;
 				GCC_PREPROCESSOR_DEFINITIONS = (
@@ -2101,7 +2099,7 @@
 				CODE_SIGN_ENTITLEMENTS = "Who is paying next/Who is paying next.entitlements";
 				CODE_SIGN_IDENTITY = "iPhone Developer";
 				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer";
-				"CODE_SIGN_IDENTITY[sdk=macosx*]" = "Mac Developer: Mark Cornelisse (B9ZEEP43C6)";
+				"CODE_SIGN_IDENTITY[sdk=macosx*]" = "Mac Developer";
 				COPY_PHASE_STRIP = NO;
 				DEFINES_MODULE = YES;
 				ENABLE_NS_ASSERTIONS = NO;
