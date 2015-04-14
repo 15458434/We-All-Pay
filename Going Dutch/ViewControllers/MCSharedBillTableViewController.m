@@ -34,27 +34,38 @@
 @interface MCSharedBillTableViewController ()
 
 @property (nonatomic, strong) NSFetchedResultsController *dataController;
+@property (nonatomic, strong) UIAlertView *payerMissingAlertView;
 
 @end
 
 @implementation MCSharedBillTableViewController
 
-@synthesize tonightsBill;
 @synthesize didSomethingChange;
 @synthesize delegate;
 @synthesize mailDelegate;
 
 #pragma mark - Actions
 
-- (IBAction)mailButtonPressed:(id)sender
-{
-    //[self shareBill:self];
+- (IBAction)solveButtonPressed:(id)sender {
+    // Check for all payers present.
+    if ([_tonightsBill doAllPaymentHaveAPayer]) {
+        // perform segue
+        [self performSegueWithIdentifier:@"solveButton" sender:self];
+    } else {
+        // Give user alert.
+        NSString *title = NSLocalizedString(@"Unable to solve", @"Unable to solve");
+        NSString *message = NSLocalizedString(@"At least one of the payments is missing a payer.", @"One of the payments is missing a payer.");
+        NSString *cancelButtonTitle = NSLocalizedString(@"CANCEL", @"Cancel");
+        NSString *fixItButtonTitle = NSLocalizedString(@"Go to", @"Go to");
+        // TODO: Create translations.
+        _payerMissingAlertView = [[UIAlertView alloc] initWithTitle:title message:message delegate:self cancelButtonTitle:cancelButtonTitle otherButtonTitles:fixItButtonTitle, nil];
+    }
 }
 
 - (void)showWhoPaysWho:(id)sender
 {
-    NSLog(@"%d", [tonightsBill doesEveryoneHaveAnEmailAddress]);
-    MCReturnPaymentViewController *rpvc = [[MCReturnPaymentViewController alloc] initWithBill:tonightsBill];
+    NSLog(@"%d", [_tonightsBill doesEveryoneHaveAnEmailAddress]);
+    MCReturnPaymentViewController *rpvc = [[MCReturnPaymentViewController alloc] initWithBill:_tonightsBill];
     UINavigationController *navController = [[UINavigationController alloc] initWithRootViewController:rpvc];
     if ([[UIDevice currentDevice] userInterfaceIdiom] == UIUserInterfaceIdiomPad) {
         [navController setModalPresentationStyle:UIModalPresentationFormSheet];
@@ -73,7 +84,7 @@
 {
     NSNumberFormatter *nf = [[NSNumberFormatter alloc] init];
     [nf setNumberStyle:NSNumberFormatterCurrencyStyle];
-    [[twoLabelTitleView subLabel] setText:[NSString stringWithFormat:@"Total spent: %@", [nf stringFromNumber:[tonightsBill totalSumOfMoneyOfThisSharedBill]]]];
+    [[twoLabelTitleView subLabel] setText:[NSString stringWithFormat:@"Total spent: %@", [nf stringFromNumber:[_tonightsBill totalSumOfMoneyOfThisSharedBill]]]];
     if (SYSTEM_VERSION_LESS_THAN(@"7.0")) {
         [[twoLabelTitleView mainLabel] setTextColor:[UIColor whiteColor]];
         [[twoLabelTitleView subLabel] setTextColor:[UIColor whiteColor]];
@@ -255,6 +266,14 @@
     NSLog(@"WritableTonightsBillIsCreated has been executed.");
 }
 
+#pragma mark - UIAlertViewDelegate
+
+- (void)alertView:(UIAlertView *)alertView clickedButtonAtIndex:(NSInteger)buttonIndex
+{
+    // TODO: Create function that opens payment with missing payer.
+    // TODO: Create proper responses to button click.
+}
+
 #pragma mark - UITextFieldDelegate
 
 - (void)textFieldDidBeginEditing:(UITextField *)textField
@@ -269,7 +288,7 @@
 
 - (BOOL)textFieldShouldReturn:(UITextField *)textField
 {
-    [tonightsBill setTripName:[[twoLabelTitleView mainLabel] text]];
+    [_tonightsBill setTripName:[[twoLabelTitleView mainLabel] text]];
     [textField resignFirstResponder];
     return YES;
 }
@@ -279,15 +298,6 @@
     [textField setText:@""];
     return YES;
 }
-
-#pragma mark - MCPaymentViewControllerDelegate
-/*
-- (void)removePayment:(MCPayment *)payment fromPaymentViewController:(MCPaymentViewController *)pvc
-{
-    [tonightsBill removePayment:payment];
-    [[self tableView] reloadData];
-}
- */
 
 #pragma mark - MFMailViewControllerDelegate
 
@@ -405,7 +415,7 @@
     if (editingStyle == UITableViewCellEditingStyleDelete) {
         MCPayment *toBeDeletedPayment = [_dataController objectAtIndexPath:indexPath];
         [MCPayment deletePayment:toBeDeletedPayment];
-        [MCWhoPayingUserDefaultsStoreInterface sendToUserDefaultsStoreInterface:tonightsBill];
+        [MCWhoPayingUserDefaultsStoreInterface sendToUserDefaultsStoreInterface:_tonightsBill];
         [[[MCWeAllPayStoreController defaultStore] mainThreadContext] processPendingChanges];
     }
 }
@@ -443,7 +453,7 @@
 - (void)prepareForSegue:(UIStoryboardSegue *)segue sender:(id)sender
 {
     if ([[[segue destinationViewController] viewControllers][0] respondsToSelector:@selector(setTonightsBill:)]) {
-        [[[segue destinationViewController] viewControllers][0] setTonightsBill:tonightsBill];
+        [[[segue destinationViewController] viewControllers][0] setTonightsBill:_tonightsBill];
     }
     if ([[[segue destinationViewController] viewControllers][0] respondsToSelector:@selector(setSendMailObject:)]) {
         [[[segue destinationViewController] viewControllers][0] setSendMailObject:[self mailDelegate]];

@@ -18,7 +18,7 @@ class AppDelegate: NSObject, NSApplicationDelegate, NSSharingServiceDelegate {
         let service: NSSharingService = NSSharingService(named: NSSharingServiceNameComposeEmail)!
         service.delegate = self
         service.recipients = ["support@markcornelisse.nl"]
-        let bundleVersion: String = NSBundle.mainBundle().infoDictionary?["CFBundleShortVersionString"] as String
+        let bundleVersion: String = NSBundle.mainBundle().infoDictionary?["CFBundleShortVersionString"] as! String
         service.subject = "Feedback on EMC version \(bundleVersion)"
         let body = "Dear mark, \n\n"
         service.performWithItems([body])

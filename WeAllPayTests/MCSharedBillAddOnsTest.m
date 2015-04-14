@@ -368,4 +368,27 @@
     XCTAssertTrue([fetchedSucker.uniquePersonId isEqualToString:uuid], @"Fetched uuid should be Mark");
 }
 
+- (void)testDoAllPaymentHaveAPayer
+{
+    MCSharedBill *tonightsbill = [MCSharedBill addSharedBillToContext:_context];
+    MCPerson *mark = [tonightsbill addPerson];
+    mark.firstName = @"Mark";
+    MCPerson *merit = [tonightsbill addPerson];
+    merit.firstName = @"Merit";
+    MCPayment *payment = [tonightsbill addPayment];
+    payment.money = @1.00;
+    payment.descriptionOfPayment = @"Knuffel";
+    BOOL noPaymentsWithoutPayers = tonightsbill.doAllPaymentHaveAPayer;
+    XCTAssertFalse(noPaymentsWithoutPayers, @"There should be a payment without a payer.");
+    MCPayment *paymentWithPayer = [tonightsbill addPayment];
+    payment.money = @34.00;
+    paymentWithPayer.descriptionOfPayment = @"Massage";
+    paymentWithPayer.payingPerson = merit;
+    noPaymentsWithoutPayers = tonightsbill.doAllPaymentHaveAPayer;
+    XCTAssertFalse(noPaymentsWithoutPayers, @"There should be a payment without a payer.");
+    payment.payingPerson = mark;
+    noPaymentsWithoutPayers = tonightsbill.doAllPaymentHaveAPayer;
+    XCTAssertTrue(noPaymentsWithoutPayers, @"All payments should have a payer.");
+}
+
 @end

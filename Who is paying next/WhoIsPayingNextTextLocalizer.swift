@@ -38,20 +38,38 @@ func createAttributesStringForWhoIsPayingNext(tripName: String, fullNameNextPaye
     return finalString
 }
 
+//func betterCreateAttributesStringForWhoIsPayingNext(tripName: String, fullNameNextPayer: String) -> NSMutableAttributedString {
+//    func createAttributesForFontStyle(style: String, withTrait trait: UIFontDescriptorSymbolicTraits!) -> [NSObject : AnyObject] {
+//        let fontDescriptor = UIFontDescriptor.preferredFontDescriptorWithTextStyle(UIFontTextStyleBody)
+//        if let theTrait = trait {
+//            let descriptorWithTrait = fontDescriptor.fontDescriptorWithSymbolicTraits(trait)!
+//            let font = UIFont(descriptor: descriptorWithTrait, size: 0)
+//            return [NSFontAttributeName : font];
+//        } else {
+//            let font = UIFont(descriptor: fontDescriptor, size: 0)
+//            return [NSFontAttributeName : font];
+//        }
+//    }
+//    
+//    let normalAttributes: Dictionary = createAttributesForFontStyle(UIFontTextStyleBody, withTrait: nil)
+//    let boldAttributes: Dictionary = createAttributesForFontStyle(UIFontTextStyleBody, withTrait: .TraitBold)
+//    
+//    let text = String.localizedStringWithFormat(NSLocalizedString("For your event %@, %@ should pay next", comment: "For your event %1$@, %2$@ should pay next."), tripName, fullNameNextPayer)
+//    let attributedText = NSMutableAttributedString(string: text, attributes: normalAttributes)
+//    
+//    return attributedText
+//}
+
 func betterCreateAttributesStringForWhoIsPayingNext(tripName: String, fullNameNextPayer: String) -> NSMutableAttributedString {
-    func createAttributesForFontStyle(style: String, withTrait trait: UIFontDescriptorSymbolicTraits!) -> [NSObject : AnyObject] {
+    func createAttributesForFontStyle(style: String, withTrait trait: UIFontDescriptorSymbolicTraits) -> [NSObject : AnyObject] {
         let fontDescriptor = UIFontDescriptor.preferredFontDescriptorWithTextStyle(UIFontTextStyleBody)
-        if let theTrait = trait {
-            let descriptorWithTrait = fontDescriptor.fontDescriptorWithSymbolicTraits(theTrait)!
-            let font = UIFont(descriptor: descriptorWithTrait, size: 0)
-            return [NSFontAttributeName : font];
-        } else {
-            let font = UIFont(descriptor: fontDescriptor, size: 0)
-            return [NSFontAttributeName : font];
-        }
+        let descriptorWithTrait = fontDescriptor.fontDescriptorWithSymbolicTraits(trait)!
+        let font = UIFont(descriptor: descriptorWithTrait, size: 0)
+        return [NSFontAttributeName : font];
     }
     
-    let normalAttributes: Dictionary = createAttributesForFontStyle(UIFontTextStyleBody, withTrait: nil)
+    let nullTrait: UIFontDescriptorSymbolicTraits = UIFontDescriptorSymbolicTraits(rawValue: 0)
+    let normalAttributes: Dictionary = createAttributesForFontStyle(UIFontTextStyleBody, withTrait: nullTrait)
     let boldAttributes: Dictionary = createAttributesForFontStyle(UIFontTextStyleBody, withTrait: .TraitBold)
     
     let text = String.localizedStringWithFormat(NSLocalizedString("For your event %@, %@ should pay next", comment: "For your event %1$@, %2$@ should pay next."), tripName, fullNameNextPayer)

@@ -165,7 +165,7 @@
                                         <color key="titleShadowColor" white="0.5" alpha="1" colorSpace="calibratedWhite"/>
                                     </state>
                                     <connections>
-                                        <segue destination="HxE-bK-sSq" kind="modal" identifier="solveButton" id="hwO-k6-ixR"/>
+                                        <action selector="solveButtonPressed:" destination="iz5-ZP-pZr" eventType="touchUpInside" id="fcI-KU-HYR"/>
                                     </connections>
                                 </button>
                             </subviews>
@@ -253,6 +253,9 @@
                         <nil key="title"/>
                     </navigationItem>
                     <nil key="simulatedBottomBarMetrics"/>
+                    <connections>
+                        <segue destination="HxE-bK-sSq" kind="modal" identifier="solveButton" id="ZLi-dv-Z0Y"/>
+                    </connections>
                 </tableViewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="aDR-YO-8As" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
