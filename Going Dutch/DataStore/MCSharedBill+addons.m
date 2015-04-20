@@ -458,6 +458,21 @@
     }
 }
 
+- (MCPayment *)getFirstPaymentWithoutAPayer
+{
+    // Returns the first payment without a payer on this sharedBill.
+    NSFetchRequest *request = [[NSFetchRequest alloc] initWithEntityName:@"MCPayment"];
+    request.sortDescriptors = @[[NSSortDescriptor sortDescriptorWithKey:@"dateCreated" ascending:YES]];
+    request.predicate = [NSPredicate predicateWithFormat:@"onWhichBill = %@ AND payingPerson = %@", self, nil];
+    NSError *fetchError;
+    NSArray *results = [[self managedObjectContext] executeFetchRequest:request error:&fetchError];
+    if (fetchError) {
+        NSLog(@"Error fetching firstPayment without a payer.");
+        return nil;
+    }
+    return (MCPayment *)results.firstObject;
+}
+
 - (BOOL)areAllExchangeRatesValid
 {
     // Fetch all exchangeRates that are invalid.

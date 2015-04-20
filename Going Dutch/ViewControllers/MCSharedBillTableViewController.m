@@ -59,6 +59,7 @@
         NSString *fixItButtonTitle = NSLocalizedString(@"Go to", @"Go to");
         // TODO: Create translations.
         _payerMissingAlertView = [[UIAlertView alloc] initWithTitle:title message:message delegate:self cancelButtonTitle:cancelButtonTitle otherButtonTitles:fixItButtonTitle, nil];
+        [_payerMissingAlertView show];
     }
 }
 
@@ -120,6 +121,8 @@
         }
     }
 }
+
+// TODO: Create function that finds and opens the first payment without a payer.
 
 #pragma mark - Inherited from super class.
 
@@ -272,6 +275,20 @@
 {
     // TODO: Create function that opens payment with missing payer.
     // TODO: Create proper responses to button click.
+    if (alertView == _payerMissingAlertView) {
+        switch (buttonIndex) {
+            case 0:
+                // Cancel button.
+                NSLog(@"Cancel pressed: I'm not doing anything.");
+                break;
+            case 1:
+                // Go To button.
+                // Open first payment with missing payer.
+                break;
+            default:
+                break;
+        }
+    }
 }
 
 #pragma mark - UITextFieldDelegate

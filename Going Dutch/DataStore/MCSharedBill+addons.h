@@ -36,6 +36,7 @@
 - (NSUInteger)totalAmountOfPeopleWhoHavePaid;
 
 - (BOOL)doAllPaymentHaveAPayer;
+- (MCPayment *)getFirstPaymentWithoutAPayer;
 - (BOOL)areAllExchangeRatesValid;
 - (void)updateInvalidExchangeRatesWithCompletionBlock:(void (^)(NSArray *results))completionBlock;
 - (NSArray *)solveWhoHasToPayWhoFromThisBill;
