@@ -53,11 +53,10 @@
         [self performSegueWithIdentifier:@"solveButton" sender:self];
     } else {
         // Give user alert.
-        NSString *title = NSLocalizedString(@"Unable to solve", @"Unable to solve");
+        NSString *title = NSLocalizedString(@"UNABLE_TO_SOLVE", @"Unable to solve");
         NSString *message = NSLocalizedString(@"At least one of the payments is missing a payer.", @"One of the payments is missing a payer.");
         NSString *cancelButtonTitle = NSLocalizedString(@"CANCEL", @"Cancel");
         NSString *fixItButtonTitle = NSLocalizedString(@"Go to", @"Go to");
-        // TODO: Create translations.
         _payerMissingAlertView = [[UIAlertView alloc] initWithTitle:title message:message delegate:self cancelButtonTitle:cancelButtonTitle otherButtonTitles:fixItButtonTitle, nil];
         [_payerMissingAlertView show];
     }
@@ -122,7 +121,11 @@
     }
 }
 
-// TODO: Create function that finds and opens the first payment without a payer.
+- (void)openFirstPaymentWithoutAPayer
+{
+    // This opens the payment detail view with the first payment on the tonightsBill which, doesn't have a payer.
+    [self performSegueWithIdentifier:@"openFirstPaymentWithoutPayer" sender:self];
+}
 
 #pragma mark - Inherited from super class.
 
@@ -273,8 +276,6 @@
 
 - (void)alertView:(UIAlertView *)alertView clickedButtonAtIndex:(NSInteger)buttonIndex
 {
-    // TODO: Create function that opens payment with missing payer.
-    // TODO: Create proper responses to button click.
     if (alertView == _payerMissingAlertView) {
         switch (buttonIndex) {
             case 0:
@@ -284,6 +285,7 @@
             case 1:
                 // Go To button.
                 // Open first payment with missing payer.
+                [self openFirstPaymentWithoutAPayer];
                 break;
             default:
                 break;
@@ -469,32 +471,36 @@
 
 - (void)prepareForSegue:(UIStoryboardSegue *)segue sender:(id)sender
 {
-    if ([[[segue destinationViewController] viewControllers][0] respondsToSelector:@selector(setTonightsBill:)]) {
-        [[[segue destinationViewController] viewControllers][0] setTonightsBill:_tonightsBill];
-    }
-    if ([[[segue destinationViewController] viewControllers][0] respondsToSelector:@selector(setSendMailObject:)]) {
-        [[[segue destinationViewController] viewControllers][0] setSendMailObject:[self mailDelegate]];
-    }
-
-    if ([[[segue destinationViewController] viewControllers][0] respondsToSelector:@selector(setThisPayment:)]) {
-        MCPayment *thePayment;
-        NSIndexPath *indexPathOfSelectedRow = [[self tableView] indexPathForSelectedRow];
-        if (indexPathOfSelectedRow) {
-            thePayment = [_dataController objectAtIndexPath:indexPathOfSelectedRow];
+    if ([segue.identifier isEqualToString:@"openFirstPaymentWithoutPayer"]) {
+        NSParameterAssert([[[segue destinationViewController] viewControllers][0] conformsToProtocol:@protocol(MCThisPaymentProtocol)]);
+        id<MCThisPaymentProtocol, MCTonightsBillTransfer> theDestination = [[segue destinationViewController] viewControllers][0];
+        [theDestination setThisPayment:[_tonightsBill getFirstPaymentWithoutAPayer]];
+        [theDestination setTonightsBill:_tonightsBill];
+    } else {
+        if ([[[segue destinationViewController] viewControllers][0] respondsToSelector:@selector(setTonightsBill:)]) {
+            [[[segue destinationViewController] viewControllers][0] setTonightsBill:_tonightsBill];
         }
-        if ([[[segue destinationViewController] viewControllers][0] respondsToSelector:@selector(setIsNew:)]) {
-            if (thePayment) {
-                [[[segue destinationViewController] viewControllers][0] setIsNew:YES];
-            } else {
-                [[[segue destinationViewController] viewControllers][0] setIsNew:NO];
+        if ([[[segue destinationViewController] viewControllers][0] respondsToSelector:@selector(setSendMailObject:)]) {
+            [[[segue destinationViewController] viewControllers][0] setSendMailObject:[self mailDelegate]];
+        }
+        
+        if ([[[segue destinationViewController] viewControllers][0] respondsToSelector:@selector(setThisPayment:)]) {
+            MCPayment *thePayment;
+            NSIndexPath *indexPathOfSelectedRow = [[self tableView] indexPathForSelectedRow];
+            if (indexPathOfSelectedRow) {
+                thePayment = [_dataController objectAtIndexPath:indexPathOfSelectedRow];
             }
+            if ([[[segue destinationViewController] viewControllers][0] respondsToSelector:@selector(setIsNew:)]) {
+                if (thePayment) {
+                    [[[segue destinationViewController] viewControllers][0] setIsNew:YES];
+                } else {
+                    [[[segue destinationViewController] viewControllers][0] setIsNew:NO];
+                }
+            }
+            [[[segue destinationViewController] viewControllers][0] setThisPayment:thePayment];
         }
-        [[[segue destinationViewController] viewControllers][0] setThisPayment:thePayment];
-//        if ([[[segue destinationViewController] viewControllers][0] respondsToSelector:@selector(setDelegate:)]) {
-//            [[[segue destinationViewController] viewControllers][0] setDelegate:self];
-//        }
-
     }
+
     
 }
 

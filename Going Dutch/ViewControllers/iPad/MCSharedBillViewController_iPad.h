@@ -12,10 +12,11 @@
 #import "MCAddressBookDataReceiver.h"
 #import "MCTonightsBillTransfer.h"
 #import "MCThisPersonProtocol.h"
+#import "MCThisPaymentProtocol.h"
 
 @class MCSharedBill;
 
-@interface MCSharedBillViewController_iPad : UIViewController <MCTonightsBillTransfer, MCAddressBookReceiverDelegate, UITextFieldDelegate>
+@interface MCSharedBillViewController_iPad : UIViewController <MCTonightsBillTransfer, MCAddressBookReceiverDelegate, UITextFieldDelegate, UIAlertViewDelegate>
 
 @property (strong, nonatomic) MCAddressBookDataReceiver *personReceiver;
 

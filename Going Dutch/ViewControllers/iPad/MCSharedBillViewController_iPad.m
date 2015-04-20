@@ -22,11 +22,29 @@
 @property (weak, nonatomic) IBOutlet UITextField *tripNameField;
 @property (weak, nonatomic) IBOutlet UIView *leftTopView;
 
+@property (strong, nonatomic) UIAlertView *payerMissingAlertView;
+
 @end
 
 @implementation MCSharedBillViewController_iPad
 
 #pragma mark - Actions
+
+- (IBAction)solveButtonPressed:(id)sender
+{
+    if ([_tonightsBill doAllPaymentHaveAPayer]) {
+        [self performSegueWithIdentifier:@"openSolutionView" sender:self];
+    } else {
+        // TODO: Create AlertView and show.
+        // Give user alert.
+        NSString *title = NSLocalizedString(@"UNABLE_TO_SOLVE", @"Unable to solve");
+        NSString *message = NSLocalizedString(@"At least one of the payments is missing a payer.", @"One of the payments is missing a payer.");
+        NSString *cancelButtonTitle = NSLocalizedString(@"CANCEL", @"Cancel");
+        NSString *fixItButtonTitle = NSLocalizedString(@"Go to", @"Go to");
+        _payerMissingAlertView = [[UIAlertView alloc] initWithTitle:title message:message delegate:self cancelButtonTitle:cancelButtonTitle otherButtonTitles:fixItButtonTitle, nil];
+        [_payerMissingAlertView show];
+    }
+}
 
 - (IBAction)editButtonPressed:(id)sender
 {
@@ -86,7 +104,6 @@
                 }
             });
         }
-            
             break;
         default:
             break;
@@ -126,6 +143,11 @@
                                           cancelButtonTitle:cancelButtonTitle
                                           otherButtonTitles:nil];
     [alert show];
+}
+
+- (void)openFirstPaymentWithoutAPayer
+{
+    [self performSegueWithIdentifier:@"firstPaymentWithoutPayer" sender:self];
 }
 
 #pragma mark - Inherited From super
@@ -220,6 +242,27 @@
     }
 }
 
+#pragma mark - UI Alert View Delegate
+
+- (void)alertView:(UIAlertView *)alertView clickedButtonAtIndex:(NSInteger)buttonIndex
+{
+    if (alertView == _payerMissingAlertView) {
+        switch (buttonIndex) {
+            case 0:
+                // Cancel button.
+                NSLog(@"Cancel pressed: I'm not doing anything.");
+                break;
+            case 1:
+                // Go To button.
+                // Open first payment with missing payer.
+                [self openFirstPaymentWithoutAPayer];
+                break;
+            default:
+                break;
+        }
+    }
+}
+
 #pragma mark - Navigation
  
 // In a storyboard-based application, you will often want to do a little preparation before navigation
@@ -264,6 +307,13 @@
 //                }
 //            }];
 //        }
+    }
+    
+    // Use this string to open payment view with the first payment without payer.
+    if ([segue.identifier isEqualToString:@"firstPaymentWithoutPayer"]) {
+        id<MCThisPaymentProtocol, MCTonightsBillTransfer> destination = [segue.destinationViewController viewControllers][0];
+        [destination setTonightsBill:_tonightsBill];
+        [destination setThisPayment:[_tonightsBill getFirstPaymentWithoutAPayer]];
     }
     
     // When openSolutionView is used to go to the solution screen.

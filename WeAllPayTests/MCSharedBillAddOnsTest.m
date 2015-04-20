@@ -410,7 +410,6 @@
     anotherPaymenWithoutAPayer.descriptionOfPayment = @"This is crazy!";
     MCPayment *firstPaymentWithoutAPayer = [tonightsbill getFirstPaymentWithoutAPayer];
     XCTAssertTrue([firstPaymentWithoutAPayer isEqual:paymentWithoutAPayer], @"These two should be the same.");
-    // TODO: This should be tested. This hasn't been done yet.
 }
 
 @end
