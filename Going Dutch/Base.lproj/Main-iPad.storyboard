@@ -944,23 +944,23 @@
                                         <view contentMode="scaleToFill" restorationIdentifier="backgroundTapThing" translatesAutoresizingMaskIntoConstraints="NO" id="HNw-5s-Znp" customClass="UIControl">
                                             <rect key="frame" x="0.0" y="0.0" width="540" height="59"/>
                                             <subviews>
-                                                <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" ambiguous="YES" misplaced="YES" translatesAutoresizingMaskIntoConstraints="NO" id="9MV-Ie-wK3">
-                                                    <rect key="frame" x="275" y="5" width="50" height="50"/>
+                                                <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" translatesAutoresizingMaskIntoConstraints="NO" id="9MV-Ie-wK3">
+                                                    <rect key="frame" x="297" y="5" width="50" height="50"/>
                                                     <constraints>
                                                         <constraint firstAttribute="width" secondItem="9MV-Ie-wK3" secondAttribute="height" multiplier="1:1" id="ZIY-EF-1OP"/>
                                                         <constraint firstAttribute="width" priority="999" constant="50" id="o0s-Qb-uaS"/>
                                                     </constraints>
                                                 </imageView>
-                                                <label opaque="NO" clipsSubviews="YES" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" horizontalCompressionResistancePriority="749" misplaced="YES" text="Label" lineBreakMode="headTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" useAutomaticPreferredMaxLayoutWidth="YES" translatesAutoresizingMaskIntoConstraints="NO" id="nuz-9n-IsM">
-                                                    <rect key="frame" x="419" y="22" width="44" height="16"/>
+                                                <label opaque="NO" clipsSubviews="YES" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" horizontalCompressionResistancePriority="749" text="Label" lineBreakMode="headTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" useAutomaticPreferredMaxLayoutWidth="YES" translatesAutoresizingMaskIntoConstraints="NO" id="nuz-9n-IsM">
+                                                    <rect key="frame" x="430" y="22" width="33" height="16"/>
                                                     <constraints>
                                                         <constraint firstAttribute="height" constant="16" id="UAg-7x-N2X"/>
                                                     </constraints>
                                                     <fontDescription key="fontDescription" name="HelveticaNeue-Medium" family="Helvetica Neue" pointSize="13"/>
                                                     <nil key="highlightedColor"/>
                                                 </label>
-                                                <label opaque="NO" clipsSubviews="YES" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" ambiguous="YES" misplaced="YES" text="full name" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" useAutomaticPreferredMaxLayoutWidth="YES" translatesAutoresizingMaskIntoConstraints="NO" id="vSV-5M-Ipk">
-                                                    <rect key="frame" x="333" y="17" width="78" height="22"/>
+                                                <label opaque="NO" clipsSubviews="YES" userInteractionEnabled="NO" contentMode="left" verticalHuggingPriority="251" text="full name" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" useAutomaticPreferredMaxLayoutWidth="YES" translatesAutoresizingMaskIntoConstraints="NO" id="vSV-5M-Ipk">
+                                                    <rect key="frame" x="355" y="18" width="67" height="22"/>
                                                     <constraints>
                                                         <constraint firstAttribute="height" constant="22" id="fZZ-Vz-OIF"/>
                                                     </constraints>
@@ -973,6 +973,7 @@
                                             <constraints>
                                                 <constraint firstItem="vSV-5M-Ipk" firstAttribute="leading" secondItem="9MV-Ie-wK3" secondAttribute="trailing" constant="8" id="5PL-Bh-Sw3"/>
                                                 <constraint firstItem="vSV-5M-Ipk" firstAttribute="baseline" secondItem="nuz-9n-IsM" secondAttribute="baseline" id="OX1-0b-8ns"/>
+                                                <constraint firstItem="9MV-Ie-wK3" firstAttribute="leading" secondItem="HNw-5s-Znp" secondAttribute="leading" priority="1" constant="297" id="PgG-zj-DqU"/>
                                                 <constraint firstAttribute="centerY" secondItem="9MV-Ie-wK3" secondAttribute="centerY" constant="-0.5" id="U8V-rY-vjd"/>
                                                 <constraint firstItem="nuz-9n-IsM" firstAttribute="leading" relation="greaterThanOrEqual" secondItem="vSV-5M-Ipk" secondAttribute="trailing" constant="8" id="fiz-GV-CuJ"/>
                                                 <constraint firstAttribute="centerY" secondItem="nuz-9n-IsM" secondAttribute="centerY" priority="750" id="tSv-0q-9h0"/>
