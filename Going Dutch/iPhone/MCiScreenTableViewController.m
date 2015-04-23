@@ -54,19 +54,21 @@
 
 - (void)applyProVersion:(NSNotification *)notification
 {
-    numberOfRowsInSection0 = [self getAmountOfRowsInSection0];
-    [[self tableView] deleteRowsAtIndexPaths:@[ [NSIndexPath indexPathForRow:0 inSection:0], [NSIndexPath indexPathForRow:1 inSection:0] ] withRowAnimation:UITableViewRowAnimationAutomatic];
-    UIAlertView *thankYouForPurchasingPopup;
-    NSString *dismiss = NSLocalizedString(@"OK", @"Ok");
-    if ([[[notification userInfo] valueForKeyPath:@"Kind of purchase"] isEqualToString:@"new buy"]) {
-        NSString *thankYouTitleString = NSLocalizedString(@"THANK_YOU_FOR_PURCHASING", @"Thank you for purchasing.");
-        NSString *noAdsString = NSLocalizedString(@"I_WILL_SHOW_NO_ADS", @"We all pay is now free of any ads.");
-        thankYouForPurchasingPopup = [[UIAlertView alloc] initWithTitle:thankYouTitleString message:noAdsString delegate:self cancelButtonTitle:dismiss otherButtonTitles:nil];
-    } else if ([[[notification userInfo] valueForKeyPath:@"Kind of purchase"] isEqualToString:@"restore purchase"]) {
-        NSString *restoredString = NSLocalizedString(@"PURCHASE_RESTORED", @"Ad free version restored.");
-        thankYouForPurchasingPopup = [[UIAlertView alloc] initWithTitle:restoredString message:nil delegate:self cancelButtonTitle:dismiss otherButtonTitles:nil];
-    }
-    [thankYouForPurchasingPopup show];
+    [[NSOperationQueue mainQueue] addOperationWithBlock:^{
+        numberOfRowsInSection0 = [self getAmountOfRowsInSection0];
+        [[self tableView] deleteRowsAtIndexPaths:@[ [NSIndexPath indexPathForRow:0 inSection:0], [NSIndexPath indexPathForRow:1 inSection:0] ] withRowAnimation:UITableViewRowAnimationAutomatic];
+        UIAlertView *thankYouForPurchasingPopup;
+        NSString *dismiss = NSLocalizedString(@"OK", @"Ok");
+        if ([[[notification userInfo] valueForKeyPath:@"Kind of purchase"] isEqualToString:@"new buy"]) {
+            NSString *thankYouTitleString = NSLocalizedString(@"THANK_YOU_FOR_PURCHASING", @"Thank you for purchasing.");
+            NSString *noAdsString = NSLocalizedString(@"I_WILL_SHOW_NO_ADS", @"We all pay is now free of any ads.");
+            thankYouForPurchasingPopup = [[UIAlertView alloc] initWithTitle:thankYouTitleString message:noAdsString delegate:self cancelButtonTitle:dismiss otherButtonTitles:nil];
+        } else if ([[[notification userInfo] valueForKeyPath:@"Kind of purchase"] isEqualToString:@"restore purchase"]) {
+            NSString *restoredString = NSLocalizedString(@"PURCHASE_RESTORED", @"Ad free version restored.");
+            thankYouForPurchasingPopup = [[UIAlertView alloc] initWithTitle:restoredString message:nil delegate:self cancelButtonTitle:dismiss otherButtonTitles:nil];
+        }
+        [thankYouForPurchasingPopup show];
+    }];
 }
 
 - (void)postProductPrice:(NSNotification *)notification
@@ -118,11 +120,6 @@
     [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(applyProVersion:) name:@"Apply pro version" object:[MCStoreInterface defaultStoreInterface]];
     [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(postProductPrice:) name:@"Product price" object:[MCStoreInterface defaultStoreInterface]];
     [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(restorePreviousPurchasesFailed:) name:@"Restore previous purchases" object:[MCStoreInterface defaultStoreInterface]];
-    
-    // Set the current screen in Google Analytics
-//    id<GAITracker> tracker = [[GAI sharedInstance] defaultTracker];
-//    [tracker set:kGAIScreenName value:@"MCiScreenViewController_iPhone"];
-//    [tracker send:[[GAIDictionaryBuilder createAppView] build]];
 }
 
 - (void)viewDidDisappear:(BOOL)animated
@@ -181,8 +178,6 @@
     if ([indexPath section] == 0) {
         // If something in section one is pressed.
         if ([indexPath row] == 0) {
-//            // nothing yet.
-//        } else if ([indexPath row] == 1) {
             [[MCStoreInterface defaultStoreInterface] buyProProductSendFrom:self];
         } else if ([indexPath row] == 1) {
             [[MCStoreInterface defaultStoreInterface] restorePreviousPurchases];
