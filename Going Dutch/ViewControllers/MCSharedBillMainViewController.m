@@ -16,6 +16,8 @@
 
 #import "MCWeAllPayStoreController.h"
 
+#import "MCStoreInterface.h"
+
 @interface MCSharedBillMainViewController ()
 
 
@@ -46,6 +48,12 @@
     [_pageViewController pageControlTapped:sender];
 }
 
+- (void)applyProVersion:(NSNotification *)notification
+{
+    [[NSOperationQueue mainQueue] addOperationWithBlock:^{
+        [MCTools setAdBannerIfNotPaid:YES forViewController:self];
+    }];
+}
 
 #pragma mark - From UIViewController+WeAllPayStore
 
@@ -95,17 +103,15 @@
 - (void)viewWillAppear:(BOOL)animated
 {
     [super viewWillAppear:animated];
+    
+    [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(applyProVersion:) name:applyProVersionNotification object:[MCStoreInterface defaultStoreInterface]];
 }
 
 - (void)viewDidAppear:(BOOL)animated
 {
     [super viewDidAppear:animated];
     
-    /*
-    id<GAITracker> tracker = [[GAI sharedInstance] defaultTracker];
-    [tracker set:kGAIScreenName value:@"MCSharedBillMainViewController_iPhone"];
-    [tracker send:[[GAIDictionaryBuilder createAppView] build]];
-     */
+    [[NSNotificationCenter defaultCenter] removeObserver:self name:applyProVersionNotification object:[MCStoreInterface defaultStoreInterface]];
 }
 
 - (void)willMoveToParentViewController:(UIViewController *)parent

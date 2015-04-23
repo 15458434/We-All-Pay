@@ -17,6 +17,8 @@
 #import "MCTools.h"
 #import "MCDismissMeBlockProtocol.h"
 
+#import "MCStoreInterface.h"
+
 @interface MCSharedBillViewController_iPad ()
 
 @property (weak, nonatomic) IBOutlet UITextField *tripNameField;
@@ -150,6 +152,13 @@
     [self performSegueWithIdentifier:@"firstPaymentWithoutPayer" sender:self];
 }
 
+- (void)applyProVersion:(NSNotification *)notification
+{
+    [[NSOperationQueue mainQueue] addOperationWithBlock:^{
+        [MCTools setAdBannerIfNotPaid:YES forViewController:self];
+    }];
+}
+
 #pragma mark - Inherited From super
 
 - (id)initWithNibName:(NSString *)nibNameOrNil bundle:(NSBundle *)nibBundleOrNil
@@ -181,6 +190,17 @@
     UIColor *backButtonColor = [MCColors getButtonColor];
     [[[self navigationController] navigationBar] setTintColor:backButtonColor];
     [[[self navigationItem] rightBarButtonItem] setTintColor:backButtonColor];
+    
+    // TODO: Add observer for notifications.
+    [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(applyProVersion:) name:applyProVersionNotification object:[MCStoreInterface defaultStoreInterface]];
+}
+
+- (void)viewWillDisappear:(BOOL)animated
+{
+    [super viewWillDisappear:animated];
+    
+    // TODO: Remove observer for notifications.
+    [[NSNotificationCenter defaultCenter] removeObserver:self name:applyProVersionNotification object:[MCStoreInterface defaultStoreInterface]];
 }
 
 - (void)willMoveToParentViewController:(UIViewController *)parent
@@ -277,17 +297,6 @@
         if ([destination conformsToProtocol:@protocol(MCTonightsBillTransfer)]) {
             [destination setTonightsBill:_tonightsBill];
         }
-//        if ([destination conformsToProtocol:@protocol(MCDismissMeBlockProtocol)]) {
-//            __weak MCSharedBillViewController_iPad *weakSelf = self;
-//            [destination setDismissMe:^{
-//                MCSharedBillViewController_iPad *strongSelf = weakSelf;
-//                if (strongSelf) {
-////                    id<GAITracker> tracker = [[GAI sharedInstance] defaultTracker];
-////                    [tracker set:kGAIScreenName value:@"MCSharedBillMainViewController_iPad"];
-////                    [tracker send:[[GAIDictionaryBuilder createAppView] build]];
-//                }
-//            }];
-//        }
     }
     
     // When newPerson segue is used to add a new payment to tonightsbill.
@@ -296,17 +305,6 @@
         if ([destination conformsToProtocol:@protocol(MCTonightsBillTransfer)]) {
             [destination setTonightsBill:_tonightsBill];
         }
-//        if ([destination conformsToProtocol:@protocol(MCDismissMeBlockProtocol)]) {
-//            __weak MCSharedBillViewController_iPad *weakSelf = self;
-//            [destination setDismissMe:^{
-//                MCSharedBillViewController_iPad *strongSelf = weakSelf;
-//                if (strongSelf) {
-////                    id<GAITracker> tracker = [[GAI sharedInstance] defaultTracker];
-////                    [tracker set:kGAIScreenName value:@"MCSharedBillMainViewController_iPad"];
-////                    [tracker send:[[GAIDictionaryBuilder createAppView] build]];
-//                }
-//            }];
-//        }
     }
     
     // Use this string to open payment view with the first payment without payer.

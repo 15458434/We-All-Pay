@@ -10,6 +10,8 @@
 @import StoreKit;
 @import Security;
 
+extern NSString * const applyProVersionNotification;
+
 @interface MCStoreInterface : NSObject <SKProductsRequestDelegate, SKPaymentTransactionObserver, SKRequestDelegate>
 {
     NSArray *productIdentifiers;
