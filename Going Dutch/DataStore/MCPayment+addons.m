@@ -260,9 +260,14 @@
 - (NSString *)fullDescriptionOfPayment
 {
     // Not unit tested, because of multiple languages.
-    NSString *categoryName = [[[[MCCategoryPictureStoreController sharedController] pictureObjects] objectAtIndex:self.categoryId.shortValue] categoryDescription];
-    NSString *result = [NSString stringWithFormat:@"%@: %@", categoryName, self.descriptionOfPayment];
-    return result;
+    if (self.categoryId.shortValue == 0) {
+        return [NSString stringWithFormat:@"%@", self.descriptionOfPayment];
+    } else {
+        NSString *categoryName = [[[[MCCategoryPictureStoreController sharedController] pictureObjects] objectAtIndex:self.categoryId.shortValue] categoryDescription];
+        NSString *result = [NSString stringWithFormat:@"%@: %@", categoryName, self.descriptionOfPayment];
+        return result;
+    }
+
 }
 
 #pragma mark - NSManagedObject stuff
