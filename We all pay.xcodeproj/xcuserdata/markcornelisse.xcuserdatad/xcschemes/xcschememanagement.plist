@@ -4,6 +4,16 @@
 <dict>
 	<key>SchemeUserState</key>
 	<dict>
+		<key>CurrencyExchangeRates.xcscheme</key>
+		<dict>
+			<key>orderHint</key>
+			<integer>3</integer>
+		</dict>
+		<key>CurrnecyExchangeRates.xcscheme</key>
+		<dict>
+			<key>orderHint</key>
+			<integer>2</integer>
+		</dict>
 		<key>EMC Widget.xcscheme</key>
 		<dict>
 			<key>orderHint</key>
@@ -153,6 +163,26 @@
 			<true/>
 		</dict>
 		<key>38D785F118DC53C30074B670</key>
+		<dict>
+			<key>primary</key>
+			<true/>
+		</dict>
+		<key>38E174681B009D31009F31E3</key>
+		<dict>
+			<key>primary</key>
+			<true/>
+		</dict>
+		<key>38E174721B009D31009F31E3</key>
+		<dict>
+			<key>primary</key>
+			<true/>
+		</dict>
+		<key>38E174871B009E44009F31E3</key>
+		<dict>
+			<key>primary</key>
+			<true/>
+		</dict>
+		<key>38E174911B009E45009F31E3</key>
 		<dict>
 			<key>primary</key>
 			<true/>

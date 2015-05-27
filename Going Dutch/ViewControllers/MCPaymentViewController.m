@@ -478,7 +478,6 @@ typedef NS_ENUM(BOOL, ChildViewOpened) {
         _categoryView.image = categoryObject.largePicture;
         [_categoryButton setTitle:buttonText forState:UIControlStateNormal];
     }
-    
     if (!_isNew || _selectCurrencyTableViewController == isOpened) {
         paidView.text = [_thisPayment getMoneyValueInCurrencyAsAString];
     }
