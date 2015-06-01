@@ -180,8 +180,6 @@
 		38E1748D1B009E45009F31E3 /* CurrencyExchangeRates.h in Headers */ = {isa = PBXBuildFile; fileRef = 38E1748C1B009E45009F31E3 /* CurrencyExchangeRates.h */; settings = {ATTRIBUTES = (Public, ); }; };
 		38E174931B009E46009F31E3 /* CurrencyExchangeRates.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 38E174881B009E44009F31E3 /* CurrencyExchangeRates.framework */; };
 		38E1749C1B009E46009F31E3 /* CurrencyExchangeRatesTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 38E1749B1B009E46009F31E3 /* CurrencyExchangeRatesTests.swift */; };
-		38E1749F1B009E46009F31E3 /* CurrencyExchangeRates.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 38E174881B009E44009F31E3 /* CurrencyExchangeRates.framework */; };
-		38E174A01B009E46009F31E3 /* CurrencyExchangeRates.framework in Embed Frameworks */ = {isa = PBXBuildFile; fileRef = 38E174881B009E44009F31E3 /* CurrencyExchangeRates.framework */; settings = {ATTRIBUTES = (CodeSignOnCopy, RemoveHeadersOnCopy, ); }; };
 		38E174AB1B009EF6009F31E3 /* Currency.swift in Sources */ = {isa = PBXBuildFile; fileRef = 38E174AA1B009EF6009F31E3 /* Currency.swift */; };
 		38E174AD1B00A30F009F31E3 /* ExchangeRate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 38E174AC1B00A30F009F31E3 /* ExchangeRate.swift */; };
 		38E174AF1B00A950009F31E3 /* CurrencyExchangeRateController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 38E174AE1B00A950009F31E3 /* CurrencyExchangeRateController.swift */; };
@@ -234,13 +232,6 @@
 			remoteGlobalIDString = 38572AD1169D437B00969C62;
 			remoteInfo = "We all pay";
 		};
-		38E1749D1B009E46009F31E3 /* PBXContainerItemProxy */ = {
-			isa = PBXContainerItemProxy;
-			containerPortal = 38572AC9169D437B00969C62 /* Project object */;
-			proxyType = 1;
-			remoteGlobalIDString = 38E174871B009E44009F31E3;
-			remoteInfo = CurrencyExchangeRates;
-		};
 		38FE87E2195721670008EE74 /* PBXContainerItemProxy */ = {
 			isa = PBXContainerItemProxy;
 			containerPortal = 38572AC9169D437B00969C62 /* Project object */;
@@ -270,17 +261,6 @@
 				381640FE1AD6D8A0000D9FAF /* Who is paying next.appex in Embed App Extensions */,
 			);
 			name = "Embed App Extensions";
-			runOnlyForDeploymentPostprocessing = 0;
-		};
-		38E174A41B009E47009F31E3 /* Embed Frameworks */ = {
-			isa = PBXCopyFilesBuildPhase;
-			buildActionMask = 2147483647;
-			dstPath = "";
-			dstSubfolderSpec = 10;
-			files = (
-				38E174A01B009E46009F31E3 /* CurrencyExchangeRates.framework in Embed Frameworks */,
-			);
-			name = "Embed Frameworks";
 			runOnlyForDeploymentPostprocessing = 0;
 		};
 /* End PBXCopyFilesBuildPhase section */
@@ -650,7 +630,6 @@
 				38572ADB169D437B00969C62 /* CoreGraphics.framework in Frameworks */,
 				38572AD9169D437B00969C62 /* Foundation.framework in Frameworks */,
 				38C725051A2E08FE003173E6 /* StoreKit.framework in Frameworks */,
-				38E1749F1B009E46009F31E3 /* CurrencyExchangeRates.framework in Frameworks */,
 				3873A2A516F23AA1000832FD /* MessageUI.framework in Frameworks */,
 				38572AD7169D437B00969C62 /* UIKit.framework in Frameworks */,
 			);
@@ -1394,13 +1373,11 @@
 				38572ACF169D437B00969C62 /* Frameworks */,
 				38572AD0169D437B00969C62 /* Resources */,
 				381641011AD6D8A1000D9FAF /* Embed App Extensions */,
-				38E174A41B009E47009F31E3 /* Embed Frameworks */,
 			);
 			buildRules = (
 			);
 			dependencies = (
 				381641001AD6D8A1000D9FAF /* PBXTargetDependency */,
-				38E1749E1B009E46009F31E3 /* PBXTargetDependency */,
 			);
 			name = "We all pay";
 			productName = "Going Dutch";
@@ -1895,11 +1872,6 @@
 			isa = PBXTargetDependency;
 			target = 38572AD1169D437B00969C62 /* We all pay */;
 			targetProxy = 38E174961B009E46009F31E3 /* PBXContainerItemProxy */;
-		};
-		38E1749E1B009E46009F31E3 /* PBXTargetDependency */ = {
-			isa = PBXTargetDependency;
-			target = 38E174871B009E44009F31E3 /* CurrencyExchangeRates */;
-			targetProxy = 38E1749D1B009E46009F31E3 /* PBXContainerItemProxy */;
 		};
 		38FE87E3195721670008EE74 /* PBXTargetDependency */ = {
 			isa = PBXTargetDependency;
