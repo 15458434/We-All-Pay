@@ -8,7 +8,7 @@
 
 import UIKit
 
-@objc class MCTableEmptyMessage: UIView {
-    @IBOutlet var bigMessage: UILabel?
-    @IBOutlet var activityIndicator: UIActivityIndicatorView?
+class MCTableEmptyMessage: UIView {
+    @IBOutlet var bigMessage: UILabel!
+    @IBOutlet var activityIndicator: UIActivityIndicatorView!
 }
