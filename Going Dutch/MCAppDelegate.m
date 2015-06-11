@@ -48,51 +48,6 @@
     }
 }
 
-//- (void)setupGoogleAnalytics
-//{
-    // Optional: automatically send uncaught exceptions to Google Analytics.
-//    [GAI sharedInstance].trackUncaughtExceptions = YES;
-    
-    // Optional: set Google Analytics dispatch interval to e.g. 20 seconds.
-//    [GAI sharedInstance].dispatchInterval = 120;
-    
-    // Optional: set Logger to VERBOSE for debug information.
-//    [[[GAI sharedInstance] logger] setLogLevel:kGAILogLevelNone];
-    
-    // Initialize tracker. Replace with your tracking ID.
-//    [[GAI sharedInstance] trackerWithTrackingId:@"UA-50304745-1"];
-    
-    // Tracker for development environment.
-//    [[GAI sharedInstance] trackerWithTrackingId:@"UA-50304745-2"];
-    
-    // Get opt-in value
-    // Get user preference
-//    NSUserDefaults *defaults = [NSUserDefaults standardUserDefaults];
-//    BOOL optInValue = [defaults boolForKey:@"googleAnalyticsOptIn"];
-//    BOOL success = [defaults synchronize];
-//    if (!success) {
-//        NSLog(@"Unable to write userDefaults.");
-//    }
-    
-    // Set to YES if during test versions.
-//    [[GAI sharedInstance] setDryRun:!optInValue];
-//}
-
-- (void)startGoogleAnalyticsSession
-{
-//    id<GAITracker> tracker = [[GAI sharedInstance] defaultTracker];
-//    [tracker set:kGAISessionControl value:@"start"];
-}
-
-- (void)stopGoogleAnalyticsSession
-{
-//    id<GAITracker> tracker = [[GAI sharedInstance] defaultTracker];
-//    [tracker set:kGAISessionControl value:@"stop"];
-//    [tracker set:kGAIScreenName value:@"Leaving"];
-//    [tracker send:[[GAIDictionaryBuilder createAppView] build]];
-//    [[GAI sharedInstance] dispatch];
-}
-
 - (void)getAppSettings
 {
     // Set the application defaults
@@ -105,9 +60,6 @@
 - (void)executeOnlyOnceDuringStartup
 {
     [self getAppSettings];
-//    [self setupGoogleAnalytics];
-//    [self startGoogleAnalyticsSession];
-//    [TestFlight takeOff:@"f2224673-b632-44ae-8feb-3c1cfe59e1f5"];
     // Override point for customization after application launch.
     NSLog(@"%@ running iOS %@", [[UIDevice currentDevice] model], [[UIDevice currentDevice] systemVersion]);
     NSLog(@"I dedicate this program to Ilse Béguin, the most wonderful woman in the world who brought herself into my life, when I was developing the first version App.");
@@ -144,16 +96,6 @@
     [[UITableView appearance] setSectionIndexColor:[MCColors getButtonColor]];
     
     [[UINavigationBar appearance] setBarStyle:UIBarStyleBlack];
-    
-    /*
-    // Set the sectionColor
-    UIView *sectionViewInPicker = [UIView appearanceWhenContainedIn:[UITableViewHeaderFooterView class], [ABPeoplePickerNavigationController class], nil];
-    [sectionViewInPicker setBackgroundColor:[MCColors getbackgroundColor]];
-    
-    // Set the labelColor of the section in peoplepicker
-    UILabel *pickerLabels = [UILabel appearanceWhenContainedIn:[UITableViewHeaderFooterView class], nil];
-    [pickerLabels setTextColor:[MCColors getEmptyMessageTextColor]];
-     */
 }
 
 #pragma mark - UIApplicationDelegate
@@ -276,7 +218,6 @@
         bgTask = UIBackgroundTaskInvalid;
     }];
     [[MCWeAllPayStoreController defaultStore] savebackgroundContext];
-//    [self stopGoogleAnalyticsSession];
 }
 
 - (void)applicationWillEnterForeground:(UIApplication *)application
@@ -294,7 +235,6 @@
 {
     // Called when the application is about to terminate. Save data if appropriate. See also applicationDidEnterBackground:.
     [[MCWeAllPayStoreController defaultStore] closeDocument];
-//    [[GAI sharedInstance] dispatch];
 }
 
 - (BOOL)application:(UIApplication *)application shouldSaveApplicationState:(NSCoder *)coder
