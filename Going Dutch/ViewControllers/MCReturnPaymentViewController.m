@@ -21,7 +21,6 @@
 #import "MCWhoOwesWhoTableViewCell_iPhone.h"
 #import "MCWhoPaidHowMuchTableViewCell_iPhone.h"
 #import "MCTwoLabelsTitleView.h"
-#import "MCTableEmptyMessage.h"
 
 #import "We_all_pay-Swift.h"
 

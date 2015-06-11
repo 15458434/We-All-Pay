@@ -19,7 +19,6 @@
 
 #import "MCPersonTableViewCell.h"
 #import "MCTwoLabelsTitleView.h"
-#import "MCTableEmptyMessage.h"
 
 #import "MCWhoPayingUserDefaultsStoreInterface.h"
 

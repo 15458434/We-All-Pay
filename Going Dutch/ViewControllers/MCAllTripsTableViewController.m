@@ -13,7 +13,6 @@
 
 #import "MCAllTripsTableViewCell.h"
 #import "MCTwoLabelsTitleView.h"
-#import "MCTableEmptyMessage.h"
 
 #import "MCWeAllPayStoreController.h"
 #import "MCSharedBill+addons.h"
@@ -25,6 +24,8 @@
 #import "UIViewController+WeAllPayStore.h"
 
 #import "MCWhoPayingUserDefaultsStoreInterface+WeAllPay.h"
+
+#import "We_all_pay-Swift.h"
 
 typedef NS_ENUM(BOOL, MCTonightsBillStatus) {
     isClosed,

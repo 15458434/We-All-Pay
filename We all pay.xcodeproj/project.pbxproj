@@ -18,6 +18,7 @@
 		380BF831181088B9008A8B74 /* MCEmailAddressTableViewCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 380BF830181088B9008A8B74 /* MCEmailAddressTableViewCell.m */; };
 		380D61241B299D99006F8AE4 /* PaymentsSwipeDirectionHint.swift in Sources */ = {isa = PBXBuildFile; fileRef = 380D61231B299D99006F8AE4 /* PaymentsSwipeDirectionHint.swift */; };
 		380D61261B29ACA8006F8AE4 /* HintsController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 380D61251B29ACA8006F8AE4 /* HintsController.swift */; };
+		380D612A1B29E9B6006F8AE4 /* MCTableEmptyMessage.swift in Sources */ = {isa = PBXBuildFile; fileRef = 380D61291B29E9B6006F8AE4 /* MCTableEmptyMessage.swift */; };
 		380F44F21813250600FF7E10 /* No picture image 2 - We All Pay.png in Resources */ = {isa = PBXBuildFile; fileRef = 380F44F11813250600FF7E10 /* No picture image 2 - We All Pay.png */; };
 		381179D01A82D1FC00020538 /* MCMailComposer.swift in Sources */ = {isa = PBXBuildFile; fileRef = 381179CF1A82D1FC00020538 /* MCMailComposer.swift */; };
 		3812485A1959D22600C0447C /* MCxRatesController.m in Sources */ = {isa = PBXBuildFile; fileRef = 381248581959D22600C0447C /* MCxRatesController.m */; };
@@ -185,7 +186,6 @@
 		38E174AB1B009EF6009F31E3 /* Currency.swift in Sources */ = {isa = PBXBuildFile; fileRef = 38E174AA1B009EF6009F31E3 /* Currency.swift */; };
 		38E174AD1B00A30F009F31E3 /* ExchangeRate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 38E174AC1B00A30F009F31E3 /* ExchangeRate.swift */; };
 		38E174AF1B00A950009F31E3 /* CurrencyExchangeRateController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 38E174AE1B00A950009F31E3 /* CurrencyExchangeRateController.swift */; };
-		38E63CF0186F904B00904D82 /* MCTableEmptyMessage.m in Sources */ = {isa = PBXBuildFile; fileRef = 38E63CEF186F904B00904D82 /* MCTableEmptyMessage.m */; };
 		38E95DAF194F62C500069414 /* SKProduct+MCStoreInterface.m in Sources */ = {isa = PBXBuildFile; fileRef = 38E95DAE194F62C500069414 /* SKProduct+MCStoreInterface.m */; };
 		38E95DB219506F9700069414 /* MCiScreenTableViewController_iPad.m in Sources */ = {isa = PBXBuildFile; fileRef = 38E95DB119506F9700069414 /* MCiScreenTableViewController_iPad.m */; };
 		38E95DB81950731600069414 /* MCOneLabelTableViewCell_iPad.m in Sources */ = {isa = PBXBuildFile; fileRef = 38E95DB71950731600069414 /* MCOneLabelTableViewCell_iPad.m */; };
@@ -306,6 +306,7 @@
 		380BF830181088B9008A8B74 /* MCEmailAddressTableViewCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = MCEmailAddressTableViewCell.m; path = Views/MCEmailAddressTableViewCell.m; sourceTree = "<group>"; };
 		380D61231B299D99006F8AE4 /* PaymentsSwipeDirectionHint.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = PaymentsSwipeDirectionHint.swift; sourceTree = "<group>"; };
 		380D61251B29ACA8006F8AE4 /* HintsController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = HintsController.swift; sourceTree = "<group>"; };
+		380D61291B29E9B6006F8AE4 /* MCTableEmptyMessage.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = MCTableEmptyMessage.swift; sourceTree = "<group>"; };
 		380F44F11813250600FF7E10 /* No picture image 2 - We All Pay.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = "No picture image 2 - We All Pay.png"; path = "Going Dutch/icons/no picture image/No picture image 2 - We All Pay.png"; sourceTree = "<group>"; };
 		381179CE1A82D1FC00020538 /* We all pay Tests-Bridging-Header.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; name = "We all pay Tests-Bridging-Header.h"; path = "../Going Dutch/We all pay Tests-Bridging-Header.h"; sourceTree = "<group>"; };
 		381179CF1A82D1FC00020538 /* MCMailComposer.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = MCMailComposer.swift; path = Misc/MCMailComposer.swift; sourceTree = "<group>"; };
@@ -599,8 +600,6 @@
 		38E174AA1B009EF6009F31E3 /* Currency.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Currency.swift; sourceTree = "<group>"; };
 		38E174AC1B00A30F009F31E3 /* ExchangeRate.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ExchangeRate.swift; sourceTree = "<group>"; };
 		38E174AE1B00A950009F31E3 /* CurrencyExchangeRateController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = CurrencyExchangeRateController.swift; sourceTree = "<group>"; };
-		38E63CEE186F904B00904D82 /* MCTableEmptyMessage.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = MCTableEmptyMessage.h; path = Views/MCTableEmptyMessage.h; sourceTree = "<group>"; };
-		38E63CEF186F904B00904D82 /* MCTableEmptyMessage.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = MCTableEmptyMessage.m; path = Views/MCTableEmptyMessage.m; sourceTree = "<group>"; };
 		38E95DAD194F62C500069414 /* SKProduct+MCStoreInterface.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "SKProduct+MCStoreInterface.h"; sourceTree = "<group>"; };
 		38E95DAE194F62C500069414 /* SKProduct+MCStoreInterface.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "SKProduct+MCStoreInterface.m"; sourceTree = "<group>"; };
 		38E95DB019506F9700069414 /* MCiScreenTableViewController_iPad.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = MCiScreenTableViewController_iPad.h; path = ViewControllers/iPad/MCiScreenTableViewController_iPad.h; sourceTree = "<group>"; };
@@ -914,8 +913,7 @@
 				38DC8B38190911BE00762235 /* iPhone */,
 				3867CE4218704161001EC222 /* Storyboard */,
 				3867CE5318704DAF001EC222 /* MCTableEmptyMessage.xib */,
-				38E63CEE186F904B00904D82 /* MCTableEmptyMessage.h */,
-				38E63CEF186F904B00904D82 /* MCTableEmptyMessage.m */,
+				380D61291B29E9B6006F8AE4 /* MCTableEmptyMessage.swift */,
 			);
 			name = Views;
 			sourceTree = "<group>";
@@ -1775,7 +1773,6 @@
 				387494CC19EFECCF001614CA /* MCSelectCategoryTableViewCell_iPhone.m in Sources */,
 				38E95DAF194F62C500069414 /* SKProduct+MCStoreInterface.m in Sources */,
 				3892E3AE179056420038894B /* MCReturnPayment.m in Sources */,
-				38E63CF0186F904B00904D82 /* MCTableEmptyMessage.m in Sources */,
 				3872C0D718FF1363008C54D7 /* MCSelectEmailAddressTableViewCell_iPad.m in Sources */,
 				389DE90E197FD41900169645 /* MCCurrency+addons.m in Sources */,
 				3872C0D118FF0A5E008C54D7 /* MCSelectEmailAddressTableViewController_iPad.m in Sources */,
@@ -1785,6 +1782,7 @@
 				38CC8C4A18ED61FD006D99E7 /* MCPersonTableViewController_iPad.m in Sources */,
 				389C2F56193391E300BB9F3E /* MCPaymentPresenceEntityMigrationPolicy.m in Sources */,
 				3830F6F6179872B400904FAF /* MCPaymentViewController.m in Sources */,
+				380D612A1B29E9B6006F8AE4 /* MCTableEmptyMessage.swift in Sources */,
 				389DE9161982540D00169645 /* MCCurrency.m in Sources */,
 				38DC8B4C19098C1B00762235 /* MCSolutionOverViewTableViewCell_iPhone.m in Sources */,
 			);
