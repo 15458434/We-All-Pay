@@ -4,6 +4,16 @@
 <dict>
 	<key>SchemeUserState</key>
 	<dict>
+		<key>CurrencyExchangeRates.xcscheme</key>
+		<dict>
+			<key>orderHint</key>
+			<integer>3</integer>
+		</dict>
+		<key>CurrnecyExchangeRates.xcscheme</key>
+		<dict>
+			<key>orderHint</key>
+			<integer>2</integer>
+		</dict>
 		<key>EMC Widget.xcscheme</key>
 		<dict>
 			<key>orderHint</key>
@@ -18,6 +28,11 @@
 		<dict>
 			<key>orderHint</key>
 			<integer>2</integer>
+		</dict>
+		<key>We All Pay CustomViews.xcscheme</key>
+		<dict>
+			<key>orderHint</key>
+			<integer>4</integer>
 		</dict>
 		<key>We all pay for Mac.xcscheme</key>
 		<dict>
@@ -43,6 +58,16 @@
 	<key>SuppressBuildableAutocreation</key>
 	<dict>
 		<key>380755FE19F9445700489ED4</key>
+		<dict>
+			<key>primary</key>
+			<true/>
+		</dict>
+		<key>380D60FF1B299B93006F8AE4</key>
+		<dict>
+			<key>primary</key>
+			<true/>
+		</dict>
+		<key>380D61091B299B93006F8AE4</key>
 		<dict>
 			<key>primary</key>
 			<true/>
@@ -153,6 +178,26 @@
 			<true/>
 		</dict>
 		<key>38D785F118DC53C30074B670</key>
+		<dict>
+			<key>primary</key>
+			<true/>
+		</dict>
+		<key>38E174681B009D31009F31E3</key>
+		<dict>
+			<key>primary</key>
+			<true/>
+		</dict>
+		<key>38E174721B009D31009F31E3</key>
+		<dict>
+			<key>primary</key>
+			<true/>
+		</dict>
+		<key>38E174871B009E44009F31E3</key>
+		<dict>
+			<key>primary</key>
+			<true/>
+		</dict>
+		<key>38E174911B009E45009F31E3</key>
 		<dict>
 			<key>primary</key>
 			<true/>

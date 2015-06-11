@@ -22,7 +22,9 @@ class MultiExchangeRatesController: NSObject {
     }
     
     private override init() {
-        availableXRates = NSArray(array: MCxRatesController.getAllCurrencies(), copyItems: true) as [MCxRatesCurrency]
+//        availableXRates = NSMutableArray(array: MCxRatesController.getAllCurrencies(), copyItems: true) as! [MCxRatesCurrency]
+        var allCurrencies = MCxRatesController.getAllCurrencies()! as Array
+        availableXRates = allCurrencies as! [MCxRatesCurrency]
         super.init()
     }
     

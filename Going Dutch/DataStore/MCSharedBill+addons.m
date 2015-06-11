@@ -440,6 +440,39 @@
     return [nf stringFromNumber:averageSpentByPerson];
 }
 
+- (BOOL)doAllPaymentHaveAPayer
+{
+    // Query that checks to see if all the payments have a payer.
+    NSFetchRequest *request = [[NSFetchRequest alloc] initWithEntityName:@"MCPayment"];
+    request.sortDescriptors = @[[NSSortDescriptor sortDescriptorWithKey:@"dateCreated" ascending:YES]];
+    request.predicate = [NSPredicate predicateWithFormat:@"payingPerson = nil"];
+    NSError *fetchError;
+    NSUInteger *amountOfPaymentWithoutPayers = [[self managedObjectContext] countForFetchRequest:request error:&fetchError];
+    if (fetchError) {
+        NSLog(@"Something went wrong counting payments without payers: %@", fetchError);
+    }
+    if (amountOfPaymentWithoutPayers > 0) {
+        return false;
+    } else {
+        return true;
+    }
+}
+
+- (MCPayment *)getFirstPaymentWithoutAPayer
+{
+    // Returns the first payment without a payer on this sharedBill.
+    NSFetchRequest *request = [[NSFetchRequest alloc] initWithEntityName:@"MCPayment"];
+    request.sortDescriptors = @[[NSSortDescriptor sortDescriptorWithKey:@"dateCreated" ascending:YES]];
+    request.predicate = [NSPredicate predicateWithFormat:@"onWhichBill = %@ AND payingPerson = %@", self, nil];
+    NSError *fetchError;
+    NSArray *results = [[self managedObjectContext] executeFetchRequest:request error:&fetchError];
+    if (fetchError) {
+        NSLog(@"Error fetching firstPayment without a payer.");
+        return nil;
+    }
+    return (MCPayment *)results.firstObject;
+}
+
 - (BOOL)areAllExchangeRatesValid
 {
     // Fetch all exchangeRates that are invalid.

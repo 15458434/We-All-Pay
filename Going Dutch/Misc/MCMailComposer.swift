@@ -21,7 +21,7 @@ class MCMailComposer: NSObject {
     
     func getMailAddresses() -> [AnyObject]! {
         let sortDescriptorArray = [NSSortDescriptor(key: "dateCreated", ascending: true)]
-        let allPeople = tonightsBill.peoplePresent.sortedArrayUsingDescriptors(sortDescriptorArray) as [MCPerson]
+        let allPeople = Array(tonightsBill.peoplePresent) as! [MCPerson]
         var listOfMailAddresses = [String]()
         for person in allPeople {
             if let emailAddress = person.defaultEmailAddress() {
@@ -40,10 +40,10 @@ class MCMailComposer: NSObject {
     }
     
     func getMailBody() -> String! {
-        let solution = tonightsBill.solveWhoHasToPayWhoFromThisBill() as [MCReturnPayment]
+        let solution = tonightsBill.solveWhoHasToPayWhoFromThisBill() as! [MCReturnPayment]
         let sortDescriptorOnDateCreated = NSSortDescriptor(key: "dateCreated", ascending: true)
-        let allPayments = tonightsBill.payments.sortedArrayUsingDescriptors([sortDescriptorOnDateCreated]) as [MCPayment]
-        let allPeople = tonightsBill.peoplePresent.sortedArrayUsingDescriptors([sortDescriptorOnDateCreated]) as [MCPerson]
+        let allPayments = Array(tonightsBill.payments) as! [MCPayment]
+        let allPeople = Array(tonightsBill.peoplePresent) as! [MCPerson]
         
         var mailBody = String()
         mailBody += "https://itunes.apple.com/us/app/we-all-pay/id642135963?mt=8&uo=4\n\n"

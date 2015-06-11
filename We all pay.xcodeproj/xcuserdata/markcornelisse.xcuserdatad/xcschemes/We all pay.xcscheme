@@ -20,6 +20,34 @@
                ReferencedContainer = "container:We all pay.xcodeproj">
             </BuildableReference>
          </BuildActionEntry>
+         <BuildActionEntry
+            buildForTesting = "YES"
+            buildForRunning = "YES"
+            buildForProfiling = "NO"
+            buildForArchiving = "NO"
+            buildForAnalyzing = "YES">
+            <BuildableReference
+               BuildableIdentifier = "primary"
+               BlueprintIdentifier = "38E174911B009E45009F31E3"
+               BuildableName = "CurrencyExchangeRatesTests.xctest"
+               BlueprintName = "CurrencyExchangeRatesTests"
+               ReferencedContainer = "container:We all pay.xcodeproj">
+            </BuildableReference>
+         </BuildActionEntry>
+         <BuildActionEntry
+            buildForTesting = "YES"
+            buildForRunning = "YES"
+            buildForProfiling = "NO"
+            buildForArchiving = "NO"
+            buildForAnalyzing = "YES">
+            <BuildableReference
+               BuildableIdentifier = "primary"
+               BlueprintIdentifier = "380D61091B299B93006F8AE4"
+               BuildableName = "We All Pay CustomViewsTests.xctest"
+               BlueprintName = "We All Pay CustomViewsTests"
+               ReferencedContainer = "container:We all pay.xcodeproj">
+            </BuildableReference>
+         </BuildActionEntry>
       </BuildActionEntries>
    </BuildAction>
    <TestAction
@@ -59,6 +87,26 @@
                   Identifier = "X_RatesTests">
                </Test>
             </SkippedTests>
+         </TestableReference>
+         <TestableReference
+            skipped = "NO">
+            <BuildableReference
+               BuildableIdentifier = "primary"
+               BlueprintIdentifier = "38E174911B009E45009F31E3"
+               BuildableName = "CurrencyExchangeRatesTests.xctest"
+               BlueprintName = "CurrencyExchangeRatesTests"
+               ReferencedContainer = "container:We all pay.xcodeproj">
+            </BuildableReference>
+         </TestableReference>
+         <TestableReference
+            skipped = "NO">
+            <BuildableReference
+               BuildableIdentifier = "primary"
+               BlueprintIdentifier = "380D61091B299B93006F8AE4"
+               BuildableName = "We All Pay CustomViewsTests.xctest"
+               BlueprintName = "We All Pay CustomViewsTests"
+               ReferencedContainer = "container:We all pay.xcodeproj">
+            </BuildableReference>
          </TestableReference>
       </Testables>
       <MacroExpansion>

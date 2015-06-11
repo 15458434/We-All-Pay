@@ -31,30 +31,43 @@
 
 #import "MCWhoPayingUserDefaultsStoreInterface+WeAllPay.h"
 
+#import "We_all_pay-Swift.h"
+
 @interface MCSharedBillTableViewController ()
 
 @property (nonatomic, strong) NSFetchedResultsController *dataController;
+@property (nonatomic, strong) UIAlertView *payerMissingAlertView;
 
 @end
 
 @implementation MCSharedBillTableViewController
 
-@synthesize tonightsBill;
 @synthesize didSomethingChange;
 @synthesize delegate;
 @synthesize mailDelegate;
 
 #pragma mark - Actions
 
-- (IBAction)mailButtonPressed:(id)sender
-{
-    //[self shareBill:self];
+- (IBAction)solveButtonPressed:(id)sender {
+    // Check for all payers present.
+    if ([_tonightsBill doAllPaymentHaveAPayer]) {
+        // perform segue
+        [self performSegueWithIdentifier:@"solveButton" sender:self];
+    } else {
+        // Give user alert.
+        NSString *title = NSLocalizedString(@"UNABLE_TO_SOLVE", @"Unable to solve");
+        NSString *message = NSLocalizedString(@"At least one of the payments is missing a payer.", @"One of the payments is missing a payer.");
+        NSString *cancelButtonTitle = NSLocalizedString(@"CANCEL", @"Cancel");
+        NSString *fixItButtonTitle = NSLocalizedString(@"Go to", @"Go to");
+        _payerMissingAlertView = [[UIAlertView alloc] initWithTitle:title message:message delegate:self cancelButtonTitle:cancelButtonTitle otherButtonTitles:fixItButtonTitle, nil];
+        [_payerMissingAlertView show];
+    }
 }
 
 - (void)showWhoPaysWho:(id)sender
 {
-    NSLog(@"%d", [tonightsBill doesEveryoneHaveAnEmailAddress]);
-    MCReturnPaymentViewController *rpvc = [[MCReturnPaymentViewController alloc] initWithBill:tonightsBill];
+    NSLog(@"%d", [_tonightsBill doesEveryoneHaveAnEmailAddress]);
+    MCReturnPaymentViewController *rpvc = [[MCReturnPaymentViewController alloc] initWithBill:_tonightsBill];
     UINavigationController *navController = [[UINavigationController alloc] initWithRootViewController:rpvc];
     if ([[UIDevice currentDevice] userInterfaceIdiom] == UIUserInterfaceIdiomPad) {
         [navController setModalPresentationStyle:UIModalPresentationFormSheet];
@@ -73,7 +86,7 @@
 {
     NSNumberFormatter *nf = [[NSNumberFormatter alloc] init];
     [nf setNumberStyle:NSNumberFormatterCurrencyStyle];
-    [[twoLabelTitleView subLabel] setText:[NSString stringWithFormat:@"Total spent: %@", [nf stringFromNumber:[tonightsBill totalSumOfMoneyOfThisSharedBill]]]];
+    [[twoLabelTitleView subLabel] setText:[NSString stringWithFormat:@"Total spent: %@", [nf stringFromNumber:[_tonightsBill totalSumOfMoneyOfThisSharedBill]]]];
     if (SYSTEM_VERSION_LESS_THAN(@"7.0")) {
         [[twoLabelTitleView mainLabel] setTextColor:[UIColor whiteColor]];
         [[twoLabelTitleView subLabel] setTextColor:[UIColor whiteColor]];
@@ -110,6 +123,12 @@
     }
 }
 
+- (void)openFirstPaymentWithoutAPayer
+{
+    // This opens the payment detail view with the first payment on the tonightsBill which, doesn't have a payer.
+    [self performSegueWithIdentifier:@"openFirstPaymentWithoutPayer" sender:self];
+}
+
 #pragma mark - Inherited from super class.
 
 - (id)init
@@ -118,10 +137,6 @@
     
     if (self) {
         [[self navigationController] setTitle:@"SharedBill"];
-//        UIBarButtonItem *bbi = [[UIBarButtonItem alloc] initWithBarButtonSystemItem:UIBarButtonSystemItemAdd
-//                                                                             target:self
-//                                                                             action:@selector(addPayment:)];
-//        [[self navigationItem] setRightBarButtonItem:bbi animated:YES];
     }
     return self;
 }
@@ -143,15 +158,9 @@
     
     [self startRespondingToStoreChangeNotifications];
     
-    // Load nib for PaymentTableViewCell and register it to the TableView.
-//    UINib *nib = [UINib nibWithNibName:@"MCPaymentTableViewCell" bundle:nil];
-//    [[self tableView] registerNib:nib forCellReuseIdentifier:@"MCPaymentTableViewCell"];
-    
     emptyMessage = [[NSBundle mainBundle] loadNibNamed:@"MCTableEmptyMessage" owner:self options:nil][0];
     [[self tableView] setBackgroundView:emptyMessage];
     [[emptyMessage bigMessage] setText:NSLocalizedString(@"EMPTY_PAYMENT_LIST_MESSAGE", @"Press \"add payment\" to add a payment to this event.")];
-    // [[emptyMessage bigMessage] setTextColor:[UIColor lightGrayColor]];
-    // [emptyMessage setBackgroundColor:[UIColor groupTableViewBackgroundColor]];
 }
 
 - (void)viewWillAppear:(BOOL)animated
@@ -172,15 +181,15 @@
     
     BOOL shouldAppearAsEditing = [_myParent isChildTableViewEditing];
     [[self tableView] setEditing:shouldAppearAsEditing animated:NO];
+    
+    // Don't show payment swipe hint anymore.
+    HintsController *controller = [[HintsController alloc] init];
+    controller.showHints = false;
 }
 
 - (void)viewDidAppear:(BOOL)animated
 {
     [super viewDidAppear:animated];
-    
-//    id<GAITracker> tracker = [[GAI sharedInstance] defaultTracker];
-//    [tracker set:kGAIScreenName value:@"MCSharedBillPaymentsTableView_iPhone"];
-//    [tracker send:[[GAIDictionaryBuilder createAppView] build]];
 }
 
 - (void)viewWillDisappear:(BOOL)animated
@@ -255,6 +264,27 @@
     NSLog(@"WritableTonightsBillIsCreated has been executed.");
 }
 
+#pragma mark - UIAlertViewDelegate
+
+- (void)alertView:(UIAlertView *)alertView clickedButtonAtIndex:(NSInteger)buttonIndex
+{
+    if (alertView == _payerMissingAlertView) {
+        switch (buttonIndex) {
+            case 0:
+                // Cancel button.
+                NSLog(@"Cancel pressed: I'm not doing anything.");
+                break;
+            case 1:
+                // Go To button.
+                // Open first payment with missing payer.
+                [self openFirstPaymentWithoutAPayer];
+                break;
+            default:
+                break;
+        }
+    }
+}
+
 #pragma mark - UITextFieldDelegate
 
 - (void)textFieldDidBeginEditing:(UITextField *)textField
@@ -269,7 +299,7 @@
 
 - (BOOL)textFieldShouldReturn:(UITextField *)textField
 {
-    [tonightsBill setTripName:[[twoLabelTitleView mainLabel] text]];
+    [_tonightsBill setTripName:[[twoLabelTitleView mainLabel] text]];
     [textField resignFirstResponder];
     return YES;
 }
@@ -279,15 +309,6 @@
     [textField setText:@""];
     return YES;
 }
-
-#pragma mark - MCPaymentViewControllerDelegate
-/*
-- (void)removePayment:(MCPayment *)payment fromPaymentViewController:(MCPaymentViewController *)pvc
-{
-    [tonightsBill removePayment:payment];
-    [[self tableView] reloadData];
-}
- */
 
 #pragma mark - MFMailViewControllerDelegate
 
@@ -405,7 +426,7 @@
     if (editingStyle == UITableViewCellEditingStyleDelete) {
         MCPayment *toBeDeletedPayment = [_dataController objectAtIndexPath:indexPath];
         [MCPayment deletePayment:toBeDeletedPayment];
-        [MCWhoPayingUserDefaultsStoreInterface sendToUserDefaultsStoreInterface:tonightsBill];
+        [MCWhoPayingUserDefaultsStoreInterface sendToUserDefaultsStoreInterface:_tonightsBill];
         [[[MCWeAllPayStoreController defaultStore] mainThreadContext] processPendingChanges];
     }
 }
@@ -442,32 +463,36 @@
 
 - (void)prepareForSegue:(UIStoryboardSegue *)segue sender:(id)sender
 {
-    if ([[[segue destinationViewController] viewControllers][0] respondsToSelector:@selector(setTonightsBill:)]) {
-        [[[segue destinationViewController] viewControllers][0] setTonightsBill:tonightsBill];
-    }
-    if ([[[segue destinationViewController] viewControllers][0] respondsToSelector:@selector(setSendMailObject:)]) {
-        [[[segue destinationViewController] viewControllers][0] setSendMailObject:[self mailDelegate]];
-    }
-
-    if ([[[segue destinationViewController] viewControllers][0] respondsToSelector:@selector(setThisPayment:)]) {
-        MCPayment *thePayment;
-        NSIndexPath *indexPathOfSelectedRow = [[self tableView] indexPathForSelectedRow];
-        if (indexPathOfSelectedRow) {
-            thePayment = [_dataController objectAtIndexPath:indexPathOfSelectedRow];
+    if ([segue.identifier isEqualToString:@"openFirstPaymentWithoutPayer"]) {
+        NSParameterAssert([[[segue destinationViewController] viewControllers][0] conformsToProtocol:@protocol(MCThisPaymentProtocol)]);
+        id<MCThisPaymentProtocol, MCTonightsBillTransfer> theDestination = [[segue destinationViewController] viewControllers][0];
+        [theDestination setThisPayment:[_tonightsBill getFirstPaymentWithoutAPayer]];
+        [theDestination setTonightsBill:_tonightsBill];
+    } else {
+        if ([[[segue destinationViewController] viewControllers][0] respondsToSelector:@selector(setTonightsBill:)]) {
+            [[[segue destinationViewController] viewControllers][0] setTonightsBill:_tonightsBill];
         }
-        if ([[[segue destinationViewController] viewControllers][0] respondsToSelector:@selector(setIsNew:)]) {
-            if (thePayment) {
-                [[[segue destinationViewController] viewControllers][0] setIsNew:YES];
-            } else {
-                [[[segue destinationViewController] viewControllers][0] setIsNew:NO];
+        if ([[[segue destinationViewController] viewControllers][0] respondsToSelector:@selector(setSendMailObject:)]) {
+            [[[segue destinationViewController] viewControllers][0] setSendMailObject:[self mailDelegate]];
+        }
+        
+        if ([[[segue destinationViewController] viewControllers][0] respondsToSelector:@selector(setThisPayment:)]) {
+            MCPayment *thePayment;
+            NSIndexPath *indexPathOfSelectedRow = [[self tableView] indexPathForSelectedRow];
+            if (indexPathOfSelectedRow) {
+                thePayment = [_dataController objectAtIndexPath:indexPathOfSelectedRow];
             }
+            if ([[[segue destinationViewController] viewControllers][0] respondsToSelector:@selector(setIsNew:)]) {
+                if (thePayment) {
+                    [[[segue destinationViewController] viewControllers][0] setIsNew:YES];
+                } else {
+                    [[[segue destinationViewController] viewControllers][0] setIsNew:NO];
+                }
+            }
+            [[[segue destinationViewController] viewControllers][0] setThisPayment:thePayment];
         }
-        [[[segue destinationViewController] viewControllers][0] setThisPayment:thePayment];
-//        if ([[[segue destinationViewController] viewControllers][0] respondsToSelector:@selector(setDelegate:)]) {
-//            [[[segue destinationViewController] viewControllers][0] setDelegate:self];
-//        }
-
     }
+
     
 }
 

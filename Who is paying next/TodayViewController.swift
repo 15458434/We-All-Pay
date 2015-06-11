@@ -45,7 +45,7 @@ class TodayViewController: UIViewController, NCWidgetProviding {
             if validValue == true {
                 let finalString: String = "For your event \(tripName), \(fullNameNextPayer) should pay next."
                 println(finalString)
-                if countElements(finalString) > 0 {
+                if count(finalString) > 0 {
                     theLabel.attributedText = betterCreateAttributesStringForWhoIsPayingNext(tripName, fullNameNextPayer)
                     theLabel.setNeedsUpdateConstraints()
                     NCWidgetController.widgetController().setHasContent(true, forWidgetWithBundleIdentifier: MCWhoIsPayingNextBundleIdentifier)

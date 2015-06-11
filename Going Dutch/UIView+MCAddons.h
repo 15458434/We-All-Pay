@@ -6,10 +6,12 @@
 //  Copyright (c) 2014 Mark Cornelisse. All rights reserved.
 //
 
-#import <UIKit/UIKit.h>
+@import UIKit;
+@import iAd;
 
 @interface UIView (MCAddons)
 
 - (UIView *)getFirstResponder;
+- (ADBannerView *)getAdBanner;
 
 @end

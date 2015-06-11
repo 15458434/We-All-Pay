@@ -23,9 +23,12 @@
 
 #import "MCWhoPayingUserDefaultsStoreInterface.h"
 
+#import "We_all_pay-Swift.h"
+
 @interface MCEditTripViewController ()
 
 @property (weak, nonatomic) IBOutlet UIButton *contactsButton;
+@property (weak, nonatomic) IBOutlet PaymentsSwipeDirectionHintView *paymentsHintsView;
 
 @property (nonatomic, strong) NSFetchedResultsController *dataController;
 
@@ -60,7 +63,7 @@
             CFErrorRef error;
             ABAddressBookRef myAddressBook = ABAddressBookCreateWithOptions(NULL, &error);
             if (error) {
-                NSLog(@"Something went wrong opening myAddressBook.");
+                NSLog(@"Something went wrong opening myAddressBook: %@", error);
             }
             
             typeof(self) __weak weakSelf = self;
@@ -187,6 +190,28 @@
     }
 }
 
+- (void)showPaymentsHint
+{
+    if (_dataController.fetchedObjects.count > 0) {
+        HintsController *controller = [[HintsController alloc] init];
+        _paymentsHintsView.showHint = controller.showHints;
+    } else {
+        _paymentsHintsView.showHint = false;
+    }
+}
+
+- (void)showPaymentsHintDelayed
+{
+    __weak typeof(self) weakSelf = self;
+    int64_t delayInSeconds = 1.0;
+    dispatch_time_t waitTime = dispatch_time(DISPATCH_TIME_NOW, delayInSeconds * NSEC_PER_SEC);
+    dispatch_after(waitTime, dispatch_get_main_queue(), ^{
+        typeof(self) strongSelf = weakSelf;
+        if (strongSelf) {
+            [self showPaymentsHint];
+        }
+    });
+}
 
 #pragma mark - inherited from super
 
@@ -213,16 +238,13 @@
     
     [self startRespondingToStoreChangeNotifications];
     
-    // Load and register Nib to the tableView for use.
-//    UINib *nib = [UINib nibWithNibName:@"MCPersonTableViewCell" bundle:nil];
-//    [[self tableView] registerNib:nib forCellReuseIdentifier:@"MCPersonTableViewCell"];
-    
     emptyMessage = [[NSBundle mainBundle] loadNibNamed:@"MCTableEmptyMessage" owner:self options:nil][0];
     [[emptyMessage bigMessage] setText:NSLocalizedString(@"PEOPLE_LIST_EMPTY_MESSAGE", @"Press \"add Person\" to add a person who you'd like to share this bill with.")];
     if ([[_dataController fetchedObjects] count] > 0) {
         [[emptyMessage bigMessage] setAlpha:0.0];
     }
     [[self tableView] setBackgroundView:emptyMessage];
+    [self showPaymentsHint];
     
     // Make sure a tap in the background dismisses the keyboard as well.
     UITapGestureRecognizer *thatTickles = [[UITapGestureRecognizer alloc] initWithTarget:self action:@selector(tappedInTheBackground:)];
@@ -248,6 +270,11 @@
     [self performFetch];
     [[self tableView] reloadData];
     [self setEmptyMessageNow];
+    
+    HintsController *controller = [[HintsController alloc] init];
+    if (_paymentsHintsView.showHint && !controller.showHints) {
+        _paymentsHintsView.showHint = false;
+    }
 }
 
 - (void)viewDidAppear:(BOOL)animated
@@ -257,10 +284,6 @@
     if ([_tonightsBill tripName]) {
         [tripNameField setPlaceholder:[[NSString alloc] initWithFormat:@"Enter something to rename %@", [_tonightsBill tripName]]];
     }
-    
-//    id<GAITracker> tracker = [[GAI sharedInstance] defaultTracker];
-//    [tracker set:kGAIScreenName value:@"MCPeoplePresentTableView_iPhone"];
-//    [tracker send:[[GAIDictionaryBuilder createAppView] build]];
 }
 
 - (void)viewWillDisappear:(BOOL)animated
@@ -344,7 +367,6 @@
 {
     if(!didSomethingChange && value) {
         didSomethingChange = YES;
-        // [[[self navigationItem] rightBarButtonItem] setEnabled:YES];
     }
     [[self tableView] reloadData];
 }
@@ -374,7 +396,6 @@
 
 - (BOOL) isNewPersonFromAddressBookAlreadyPresent:(MCPerson *)newPerson
 {
-    //return [editedPeople isPersonPresent:newPerson];
     return NO;
 }
 
@@ -422,6 +443,7 @@
 - (void)controllerDidChangeContent:(NSFetchedResultsController *)controller
 {
     [[self tableView] endUpdates];
+    [self showPaymentsHintDelayed];
 }
 
 - (void)controller:(NSFetchedResultsController *)controller didChangeObject:(id)anObject atIndexPath:(NSIndexPath *)indexPath forChangeType:(NSFetchedResultsChangeType)type newIndexPath:(NSIndexPath *)newIndexPath
@@ -463,8 +485,6 @@
 
 - (NSInteger)tableView:(UITableView *)tableView numberOfRowsInSection:(NSInteger)section
 {
-    // Return the number of rows in the section.
-//    return [[dataController sections][section] numberOfObjects];
     return [[_dataController fetchedObjects] count];
 }
 

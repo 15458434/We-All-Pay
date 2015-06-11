@@ -8,6 +8,8 @@
 
 #import "MCStoreInterface.h"
 
+NSString * const applyProVersionNotification = @"Apply pro version";
+
 @interface MCStoreInterface () <UIAlertViewDelegate>
 
 @property (nonatomic, strong) SKProductsRequest *productRequest;
@@ -46,7 +48,7 @@
     if ([[[transaction payment] productIdentifier] isEqualToString:@"com.Greenhair.We_all_pay.pro"]) {
         NSLog(@"%@ was bought.", [[transaction payment] productIdentifier]);
         [self applyProVersion];
-        [[NSNotificationCenter defaultCenter] postNotificationName:@"Apply pro version" object:self userInfo:@{@"Kind of purchase" : @"new buy"} ];
+        [[NSNotificationCenter defaultCenter] postNotificationName:applyProVersionNotification object:self userInfo:@{@"Kind of purchase" : @"new buy"} ];
         [[SKPaymentQueue defaultQueue] finishTransaction:transaction];
     }
 }
@@ -62,7 +64,7 @@
     if ([[[[transaction originalTransaction] payment] productIdentifier] isEqualToString:@"com.Greenhair.We_all_pay.pro"]) {
         NSLog(@"The sale of %@ was restored.", [[[transaction originalTransaction] payment] productIdentifier]);
         [self applyProVersion];
-        [[NSNotificationCenter defaultCenter] postNotificationName:@"Apply pro version" object:self userInfo:@{@"Kind of purchase" : @"restore purchase"} ];
+        [[NSNotificationCenter defaultCenter] postNotificationName:applyProVersionNotification object:self userInfo:@{@"Kind of purchase" : @"restore purchase"} ];
         [[SKPaymentQueue defaultQueue] finishTransaction:transaction];
     }
 }

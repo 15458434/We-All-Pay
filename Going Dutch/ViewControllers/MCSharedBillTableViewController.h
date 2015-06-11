@@ -37,8 +37,6 @@
     UIBarButtonItem *returnPaymentButton;
 }
 
-- (IBAction)mailButtonPressed:(id)sender;
-
 @property (nonatomic, weak) id<MCIsEditingProtocol> myParent;
 @property (nonatomic, weak) id delegate;
 @property (nonatomic, weak) MCSharedBillPageViewController *mailDelegate;
