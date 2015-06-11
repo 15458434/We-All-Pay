@@ -17,7 +17,6 @@
 #import "MCWeAllPayStoreController.h"
 
 #import "MCSolutionOverViewTableViewCell_iPhone.h"
-#import "MCWhoOwesWhoTableViewCell_iPhone.h"
 #import "MCTwoLabelsTitleView.h"
 
 #import "We_all_pay-Swift.h"
