@@ -11,8 +11,6 @@
 #import "MCPaymentViewController.h"
 #import "MCEditTripViewController.h"
 
-#import "MCTwoLabelsTitleView.h"
-
 #import "MCWeAllPayStoreController.h"
 #import "MCSharedBill+addons.h"
 #import "MCPerson+addons.h"
