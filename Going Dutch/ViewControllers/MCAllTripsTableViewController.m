@@ -44,25 +44,6 @@ typedef NS_ENUM(BOOL, MCTonightsBillStatus) {
 
 #pragma mark - Actions
 
-- (void) addButtonFromTableViewCell:(id)sender event:(id)event
-{
-    NSSet *touches = [event allTouches];
-    UITouch *touch = [touches anyObject];
-    
-	NSIndexPath *indexPath = [[self tableView] indexPathForRowAtPoint: [touch locationInView:[self tableView]]];
-	if (indexPath != nil)
-	{
-        [self tableView:[self tableView] accessoryButtonTappedForRowWithIndexPath:indexPath];
-	}
-}
-
-- (IBAction)tellAFriendAboutWeAllPay:(id)sender
-{
-    NSArray *dataToShare = @[[NSString stringWithString:NSLocalizedString(@"I_FOUND_WE_ALL_PAY", @"Hi, I found this easy to use iPhone app to share a bill amongst friends. It is called We All Pay.")]];
-    UIActivityViewController *shareMe = [[UIActivityViewController alloc] initWithActivityItems:dataToShare applicationActivities:nil];
-    [self presentViewController:shareMe animated:YES completion:nil];
-}
-
 #pragma mark - New in this class.
 
 - (void)setEmptyMessage
