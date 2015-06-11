@@ -16,7 +16,6 @@
 #import "MCPerson+addons.h"
 #import "MCWeAllPayStoreController.h"
 
-#import "MCReturnPaymentTableViewCell.h"
 #import "MCSolutionOverViewTableViewCell_iPhone.h"
 #import "MCWhoOwesWhoTableViewCell_iPhone.h"
 #import "MCWhoPaidHowMuchTableViewCell_iPhone.h"

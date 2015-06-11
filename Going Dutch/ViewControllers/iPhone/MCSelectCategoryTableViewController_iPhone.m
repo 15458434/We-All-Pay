@@ -8,12 +8,12 @@
 
 #import "MCSelectCategoryTableViewController_iPhone.h"
 
-#import "MCSelectCategoryTableViewCell_iPhone.h"
-
 #import "MCCategoryPictureStoreController.h"
 #import "MCCategoryPictureObject.h"
 
 #import "MCPayment+addons.h"
+
+#import "We_all_pay-Swift.h"
 
 BOOL const isUILocalizedIndexedCollationActive = NO;
 
