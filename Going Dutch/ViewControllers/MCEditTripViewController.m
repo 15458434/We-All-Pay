@@ -17,7 +17,6 @@
 #import "MCSharedBill+addons.h"
 #import "MCCurrency+addons.h"
 
-#import "MCPersonTableViewCell.h"
 #import "MCTwoLabelsTitleView.h"
 
 #import "MCWhoPayingUserDefaultsStoreInterface.h"
