@@ -29,6 +29,11 @@
 			<key>orderHint</key>
 			<integer>2</integer>
 		</dict>
+		<key>We All Pay CustomViews.xcscheme</key>
+		<dict>
+			<key>orderHint</key>
+			<integer>4</integer>
+		</dict>
 		<key>We all pay for Mac.xcscheme</key>
 		<dict>
 			<key>orderHint</key>
@@ -53,6 +58,16 @@
 	<key>SuppressBuildableAutocreation</key>
 	<dict>
 		<key>380755FE19F9445700489ED4</key>
+		<dict>
+			<key>primary</key>
+			<true/>
+		</dict>
+		<key>380D60FF1B299B93006F8AE4</key>
+		<dict>
+			<key>primary</key>
+			<true/>
+		</dict>
+		<key>380D61091B299B93006F8AE4</key>
 		<dict>
 			<key>primary</key>
 			<true/>

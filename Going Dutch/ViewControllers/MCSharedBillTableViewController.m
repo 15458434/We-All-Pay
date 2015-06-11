@@ -31,6 +31,8 @@
 
 #import "MCWhoPayingUserDefaultsStoreInterface+WeAllPay.h"
 
+#import "We_all_pay-Swift.h"
+
 @interface MCSharedBillTableViewController ()
 
 @property (nonatomic, strong) NSFetchedResultsController *dataController;
@@ -135,10 +137,6 @@
     
     if (self) {
         [[self navigationController] setTitle:@"SharedBill"];
-//        UIBarButtonItem *bbi = [[UIBarButtonItem alloc] initWithBarButtonSystemItem:UIBarButtonSystemItemAdd
-//                                                                             target:self
-//                                                                             action:@selector(addPayment:)];
-//        [[self navigationItem] setRightBarButtonItem:bbi animated:YES];
     }
     return self;
 }
@@ -160,15 +158,9 @@
     
     [self startRespondingToStoreChangeNotifications];
     
-    // Load nib for PaymentTableViewCell and register it to the TableView.
-//    UINib *nib = [UINib nibWithNibName:@"MCPaymentTableViewCell" bundle:nil];
-//    [[self tableView] registerNib:nib forCellReuseIdentifier:@"MCPaymentTableViewCell"];
-    
     emptyMessage = [[NSBundle mainBundle] loadNibNamed:@"MCTableEmptyMessage" owner:self options:nil][0];
     [[self tableView] setBackgroundView:emptyMessage];
     [[emptyMessage bigMessage] setText:NSLocalizedString(@"EMPTY_PAYMENT_LIST_MESSAGE", @"Press \"add payment\" to add a payment to this event.")];
-    // [[emptyMessage bigMessage] setTextColor:[UIColor lightGrayColor]];
-    // [emptyMessage setBackgroundColor:[UIColor groupTableViewBackgroundColor]];
 }
 
 - (void)viewWillAppear:(BOOL)animated
@@ -189,15 +181,15 @@
     
     BOOL shouldAppearAsEditing = [_myParent isChildTableViewEditing];
     [[self tableView] setEditing:shouldAppearAsEditing animated:NO];
+    
+    // Don't show payment swipe hint anymore.
+    HintsController *controller = [[HintsController alloc] init];
+    controller.showHints = false;
 }
 
 - (void)viewDidAppear:(BOOL)animated
 {
     [super viewDidAppear:animated];
-    
-//    id<GAITracker> tracker = [[GAI sharedInstance] defaultTracker];
-//    [tracker set:kGAIScreenName value:@"MCSharedBillPaymentsTableView_iPhone"];
-//    [tracker send:[[GAIDictionaryBuilder createAppView] build]];
 }
 
 - (void)viewWillDisappear:(BOOL)animated

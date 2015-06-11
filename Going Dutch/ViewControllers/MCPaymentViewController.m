@@ -313,7 +313,7 @@ typedef NS_ENUM(BOOL, ChildViewOpened) {
 {
     if (textField == paidView) {
 #if DEBUG
-        NSLog(@"kindOfPaidFieldDismiss = %lu", kindOfPaidFieldDismiss);
+        NSLog(@"kindOfPaidFieldDismiss = %lu", (unsigned long)kindOfPaidFieldDismiss);
 #endif
         if (kindOfPaidFieldDismiss == cancelIsPressed) {
             // Restore stored value
@@ -481,6 +481,8 @@ typedef NS_ENUM(BOOL, ChildViewOpened) {
     if (!_isNew || _selectCurrencyTableViewController == isOpened) {
         paidView.text = [_thisPayment getMoneyValueInCurrencyAsAString];
     }
+    
+    
 }
 
 - (void)viewDidAppear:(BOOL)animated

@@ -11,7 +11,7 @@ import Foundation
 private let kShowHints = "kShowHints"
 
 @objc class HintsController: NSObject {
-    var showHints: Bool! {
+    @objc var showHints: Bool = true {
         willSet(newValue) {
             self.showHints = newValue
             // Opposite value is stored in NSUserDefaults

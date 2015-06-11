@@ -293,7 +293,7 @@
                     <navigationItem key="navigationItem" id="JXS-Lj-QTu">
                         <nil key="title"/>
                         <view key="titleView" contentMode="scaleToFill" restorationIdentifier="sharedBillPageViewTitleView" id="HDn-dn-fhY">
-                            <rect key="frame" x="96" y="6" width="128" height="33"/>
+                            <rect key="frame" x="236" y="6" width="128" height="33"/>
                             <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                             <subviews>
                                 <label opaque="NO" clipsSubviews="YES" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" restorationIdentifier="sharedBillPageViewTitleLabel" text="Label" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="oKh-Bm-aHC">
@@ -434,7 +434,7 @@
                     <navigationItem key="navigationItem" id="Ntt-oe-ct4">
                         <nil key="title"/>
                         <view key="titleView" contentMode="scaleToFill" id="Fp6-vz-fRL">
-                            <rect key="frame" x="96" y="6" width="128" height="33"/>
+                            <rect key="frame" x="236" y="6" width="128" height="33"/>
                             <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                             <subviews>
                                 <label opaque="NO" clipsSubviews="YES" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="We all pay" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="7Ul-ek-GSq">
@@ -513,8 +513,6 @@
                     <nil key="simulatedStatusBarMetrics"/>
                     <nil key="simulatedTopBarMetrics"/>
                     <nil key="simulatedBottomBarMetrics"/>
-                    <freeformSimulatedSizeMetrics key="simulatedDestinationMetrics"/>
-                    <size key="freeformSize" width="320" height="480"/>
                     <connections>
                         <outlet property="pageViewIndicator" destination="kwG-GX-r14" id="qX0-jx-g1R"/>
                         <outlet property="titleLabel" destination="oKh-Bm-aHC" id="w8r-dO-U8y"/>
@@ -745,9 +743,25 @@
                             </constraints>
                         </view>
                         <view key="tableFooterView" contentMode="scaleToFill" restorationIdentifier="Payments Swipe Direction" id="OOf-lG-1Zm" userLabel="&lt;&lt;&lt; Payments Swipe Direction" customClass="PaymentsSwipeDirectionHintView" customModule="We_all_pay" customModuleProvider="target">
-                            <rect key="frame" x="0.0" y="236" width="600" height="60"/>
+                            <rect key="frame" x="0.0" y="236" width="600" height="50"/>
                             <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
-                            <color key="backgroundColor" red="0.70588235294117652" green="0.79607843137254897" blue="0.90588235294117647" alpha="1" colorSpace="calibratedRGB"/>
+                            <subviews>
+                                <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" misplaced="YES" text="&lt;&lt;&lt; Swipe for payments" textAlignment="right" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="lmh-2o-BWu" userLabel="Hint label">
+                                    <rect key="frame" x="362" y="9" width="218" height="25"/>
+                                    <fontDescription key="fontDescription" name="HelveticaNeue-Thin" family="Helvetica Neue" pointSize="21"/>
+                                    <color key="textColor" red="0.38039215686274508" green="0.51372549019607838" blue="0.66274509803921566" alpha="1" colorSpace="calibratedRGB"/>
+                                    <nil key="highlightedColor"/>
+                                </label>
+                            </subviews>
+                            <color key="backgroundColor" red="0.75686274509803919" green="0.83529411764705885" blue="0.92549019607843142" alpha="1" colorSpace="calibratedRGB"/>
+                            <constraints>
+                                <constraint firstAttribute="centerY" secondItem="lmh-2o-BWu" secondAttribute="centerY" constant="8.5" id="Ma4-c4-282"/>
+                                <constraint firstAttribute="trailingMargin" secondItem="lmh-2o-BWu" secondAttribute="trailing" constant="12" id="T9B-q3-Lqn"/>
+                            </constraints>
+                            <connections>
+                                <outlet property="hintLabel" destination="lmh-2o-BWu" id="BOY-PC-lMo"/>
+                                <outlet property="horizontalContraintHintLabel" destination="T9B-q3-Lqn" id="8vS-vN-QnU"/>
+                            </connections>
                         </view>
                         <prototypes>
                             <tableViewCell contentMode="scaleToFill" restorationIdentifier="MCPersonTableViewCell" selectionStyle="blue" hidesAccessoryWhenEditing="NO" indentationLevel="1" indentationWidth="0.0" reuseIdentifier="MCPersonTableViewCell" rowHeight="68" id="i9Y-ku-g7W" customClass="MCPersonTableViewCell">
@@ -830,12 +844,13 @@
                     <connections>
                         <outlet property="addPersonButton" destination="gfv-ln-Tgv" id="kQ0-08-UfA"/>
                         <outlet property="contactsButton" destination="asZ-Na-2wd" id="LA0-ly-LPC"/>
+                        <outlet property="paymentsHintsView" destination="OOf-lG-1Zm" id="Qgt-vP-LBH"/>
                         <outlet property="tripNameField" destination="BJS-wA-qlM" id="mRl-pt-rEN"/>
                     </connections>
                 </tableViewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="RjQ-v9-WwD" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="2257.5" y="-49.647887323943657"/>
+            <point key="canvasLocation" x="2257" y="-50"/>
         </scene>
         <!--Person View Controller-->
         <scene sceneID="kPW-Sp-0Xw">
