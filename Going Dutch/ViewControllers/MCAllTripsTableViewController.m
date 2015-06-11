@@ -11,7 +11,6 @@
 #import "MCPaymentViewController.h"
 #import "MCEditTripViewController.h"
 
-#import "MCAllTripsTableViewCell.h"
 #import "MCTwoLabelsTitleView.h"
 
 #import "MCWeAllPayStoreController.h"
