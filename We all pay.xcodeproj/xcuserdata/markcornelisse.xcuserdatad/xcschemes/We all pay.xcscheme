@@ -146,6 +146,9 @@
       </BuildableProductRunnable>
       <AdditionalOptions>
       </AdditionalOptions>
+      <DeviceAppData
+         resolvedPath = "../../Going Dutch/We all pay database version 4.xcappdata">
+      </DeviceAppData>
       <LocationScenarioReference
          identifier = "com.apple.dt.IDEFoundation.CurrentLocationScenarioIdentifier"
          referenceType = "1">
