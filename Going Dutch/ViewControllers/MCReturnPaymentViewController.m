@@ -16,7 +16,6 @@
 #import "MCPerson+addons.h"
 #import "MCWeAllPayStoreController.h"
 
-#import "MCSolutionOverViewTableViewCell_iPhone.h"
 #import "MCTwoLabelsTitleView.h"
 
 #import "We_all_pay-Swift.h"
