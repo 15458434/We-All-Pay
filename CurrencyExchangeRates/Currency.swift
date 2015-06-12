@@ -9,9 +9,9 @@
 import Foundation
 
 @objc public class Currency: NSObject, Printable {
-    public var name: String!
-    public var code: String!
-    public var symbol: String!
+    public var name: String
+    public var code: String
+    public var symbol: String
     
     // MARK: New in this class
     
