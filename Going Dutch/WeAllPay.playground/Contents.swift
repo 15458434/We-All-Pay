@@ -2,27 +2,11 @@
 
 import Foundation
 
-private let kShowHints = "kShowHints"
+let url = NSURL(string: "https://openexchangerates.org/api/latest.json?app_idcba02a60bd89412095c84ecb65b6326a");
 
-@objc class HintsController: NSObject {
-    var showHints: Bool! {
-        set(newValue) {
-            self.showHints = newValue
-            // Opposite value is stored in NSUserDefaults
-            NSUserDefaults.standardUserDefaults().setBool(!newValue, forKey: kShowHints)
-            NSUserDefaults.standardUserDefaults().synchronize()
-        }
-        get {
-            return self.showHints
-        }
-    }
-    
-    override init() {
-        super.init()
-        // Opposite value is stored in NSUserDefaults
-        self.showHints = !NSUserDefaults.standardUserDefaults().boolForKey(kShowHints)
-    }
+var fetchedResults: String?
+let task = NSURLSession.sharedSession().dataTaskWithURL(url!) {(data, response, error) in
+    fetchedResults = NSString(data: data, encoding: NSUTF8StringEncoding)
 }
 
-let controller = HintsController()
-controller.showHints = false
+task.resume()

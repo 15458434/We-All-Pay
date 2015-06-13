@@ -8,6 +8,7 @@
 
 #import "XRCurrencyStoreController.h"
 #import "XRCurrency.h"
+#import "XRCurrency+NSDictionary.h"
 #import "XRCurrencyXRateFetcher.h"
 
 #import "MCxRatesController.h"
@@ -155,6 +156,7 @@ NSString * const XRCurrencyDatabaseVersionKey = @"XRCurrencyDatabaseVersionKey";
 {
     NSOperationQueue *thisQueue = [NSOperationQueue currentQueue];
     NSManagedObjectContext *context = [self backgroundContext];
+    
     [context performBlock:^{
         // Check to see if currency database is filled.
         [XRCurrencyStoreController populateCurrencyDataBaseIfEmptyForContext:context];
@@ -205,6 +207,31 @@ NSString * const XRCurrencyDatabaseVersionKey = @"XRCurrencyDatabaseVersionKey";
     return results;
 }
 
+- (void)writeToPList
+{
+    NSFetchRequest *request = [NSFetchRequest fetchRequestWithEntityName:@"XRCurrency"];
+    request.sortDescriptors = @[[NSSortDescriptor sortDescriptorWithKey:@"name" ascending:YES]];
+    request.predicate = [NSPredicate predicateWithValue:YES];
+    request.includesPropertyValues = YES;
+//    request.propertiesToFetch = @[ @"name", @"code", @"symbol"];
+    NSError *error;
+    NSArray *allCurrencies = [_mainQueueContext executeFetchRequest:request error:&error];
+    if (error) {
+        NSLog(@"Error fetching currencies: %@", error);
+        abort();
+    }
+    
+    NSMutableArray *result = [[NSMutableArray alloc] init];
+    for (XRCurrency *currency in allCurrencies) {
+        [result addObject:currency.convertToDictionary];
+    }
+    
+    NSArray *paths = NSSearchPathForDirectoriesInDomains(NSDocumentDirectory, NSUserDomainMask, YES);
+    NSString *docDir = [paths objectAtIndex:0];
+    NSString *filePath = [docDir stringByAppendingPathComponent:@"result.plist"];
+    NSAssert([result writeToFile:filePath atomically:YES], @"File save should work.");
+}
+
 #if TARGET_OS_IPHONE
 - (NSFetchedResultsController *)getFetchedResultsControllerForDelegate:(id)delegate
 {
@@ -218,6 +245,8 @@ NSString * const XRCurrencyDatabaseVersionKey = @"XRCurrencyDatabaseVersionKey";
     
     NSFetchedResultsController *dataController = [[NSFetchedResultsController alloc] initWithFetchRequest:request managedObjectContext:[self mainQueueContext] sectionNameKeyPath:nil cacheName:nil];
     dataController.delegate = delegate;
+    
+//    [self writeToPList];
     
     return dataController;
 }

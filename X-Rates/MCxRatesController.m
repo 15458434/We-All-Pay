@@ -385,6 +385,11 @@ NSUInteger const MCCurrencyTypeSelection = MCCurrencyTypeCurrency | MCCurrencyTy
     [_fetchXRatesDataTask resume];
 }
 
+- (void)getExchangeRateFromOpenExchangeRates:(NSString *)fromCountryISOCode to:(NSString *)toCountryISOCode withCompletionHandler:(void (^)(NSDictionary *, NSError *))completionBlock
+{
+    
+}
+
 #pragma mark - Public methods
 
 - (void)getExchangeRateFrom:(NSString *)fromCountryISOCode to:(NSString *)toCountryISOCode withCompletionHandler:(void (^)(NSDictionary *))completionBlock

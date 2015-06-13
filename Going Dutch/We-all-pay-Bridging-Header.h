@@ -13,3 +13,6 @@
 #import "MCCurrency+addons.h"
 #import "MCExchangeRate+addons.h"
 #import "MCPaymentPresence+addons.h"
+
+#import "MCxRatesCurrency.h"
+#import "MCxRatesController+X_RatesAddOn.h"
