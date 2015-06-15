@@ -9,7 +9,7 @@
 #import <Foundation/Foundation.h>
 #import <CoreData/CoreData.h>
 
-
+__deprecated
 @interface XRCurrency : NSManagedObject
 
 @property (nonatomic, retain) NSNumber * isStillValid;

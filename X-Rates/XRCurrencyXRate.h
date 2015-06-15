@@ -14,8 +14,9 @@ typedef NS_ENUM(int32_t, XRFetchStatus) {
     fetching,
     background,
     failed
-};
+} __deprecated;
 
+__deprecated
 @interface XRCurrencyXRate : NSObject <NSCoding>
 
 @property (nonatomic, strong, readonly) NSString *uniqueID;

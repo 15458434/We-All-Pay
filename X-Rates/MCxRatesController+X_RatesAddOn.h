@@ -10,6 +10,6 @@
 
 @interface MCxRatesController (X_RatesAddOn)
 
-+ (NSMutableArray *)getAllCurrencies;
++ (NSMutableArray *)getAllCurrencies __deprecated;
 
 @end

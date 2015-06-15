@@ -10,6 +10,6 @@
 
 @interface XRCurrency (NSDictionary)
 
-- (NSDictionary *)convertToDictionary;
+- (NSDictionary *)convertToDictionary __deprecated;
 
 @end

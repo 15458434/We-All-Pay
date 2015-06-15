@@ -12,6 +12,7 @@
 @class XRCurrency;
 @class XRCurrencyXRateFetcher;
 
+__deprecated
 @interface XRCurrencyStoreController : NSObject
 
 @property (nonatomic, strong) NSPersistentStoreCoordinator *persistentStoreCoordinator;
