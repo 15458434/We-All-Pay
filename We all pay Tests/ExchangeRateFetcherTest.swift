@@ -38,7 +38,7 @@ class ExchangeRateFetcherTest: XCTestCase {
         let emptyFetcher = ExchangeRateFetcher()
         XCTAssertTrue(emptyFetcher.isLastFetchOlderThanAnHour, "Should be true nothing is fetched.")
         let expectation = self.expectationWithDescription("isLastFetchOlderThanHour")
-        emptyFetcher.fetchFromOpenExchangeRates("EUR", toCode: "RUB") { (fromCode, toCode, exchangeRate, error) -> () in
+        emptyFetcher.fetchFromOpenExchangeRates{ (baseCurrency, rates, error) -> () in
             XCTAssertFalse(emptyFetcher.isLastFetchOlderThanAnHour, "Should be true when fetched.")
             expectation.fulfill()
         }
@@ -50,9 +50,10 @@ class ExchangeRateFetcherTest: XCTestCase {
 
     func testFetchFromOpenExchangeRates() {
         let expectation = self.expectationWithDescription("fetchFromOpenExchangeRates")
-        fetcher.fetchFromOpenExchangeRates("EUR", toCode: "USD") { (fromCode, toCode, exchangeRate, error) -> () in
+        fetcher.fetchFromOpenExchangeRates { (baseCurrency, rates, error) -> () in
             XCTAssertNil(error, "Error fetchingExchangeRate: \(error)")
-            XCTAssertNotNil(exchangeRate, "ExchangeRateValue can't be nil")
+            XCTAssertNotNil(baseCurrency, "baseCurrency can't be nil")
+            XCTAssertNotNil(rates, "Rates can't be nil.")
             XCTAssertNotNil(self.fetcher.baseCurrencyCode, "BaseCurrency can't be nil")
             XCTAssertNotNil(self.fetcher.rates, "Rates can't be nil")
             expectation.fulfill()
