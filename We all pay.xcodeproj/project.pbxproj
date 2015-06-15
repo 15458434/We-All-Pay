@@ -163,6 +163,8 @@
 		38CDE90017135B6300387CAA /* MCTools.m in Sources */ = {isa = PBXBuildFile; fileRef = 38CDE8FF17135B6300387CAA /* MCTools.m */; };
 		38D1C3801A8A38B5008F2A8E /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 38D1C37F1A8A38B5008F2A8E /* LaunchScreen.storyboard */; };
 		38D7960C1B2DEFC100F3872F /* CurrencyController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 38F7F9A91B2C4A120059DE51 /* CurrencyController.swift */; };
+		38D796111B2DF2DE00F3872F /* ExchangeRateFetcher.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3858D6591B2DB6B3006A4E2B /* ExchangeRateFetcher.swift */; };
+		38D796131B2DF30800F3872F /* ExchangeRateFetcherTest.swift in Sources */ = {isa = PBXBuildFile; fileRef = 38D796121B2DF30800F3872F /* ExchangeRateFetcherTest.swift */; };
 		38DAB1331997BCBE00B989BF /* Cocoa.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 389DE90A197FC7B600169645 /* Cocoa.framework */; };
 		38DAB1351997BCC500B989BF /* CFNetwork.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 38DAB1341997BCC500B989BF /* CFNetwork.framework */; };
 		38DB0F941ADD48CB00946B95 /* MCWhoPayingUserDefaultsStoreInterface.m in Sources */ = {isa = PBXBuildFile; fileRef = 38F2A1AF1ADCF85200831D48 /* MCWhoPayingUserDefaultsStoreInterface.m */; };
@@ -529,6 +531,7 @@
 		38D1C37F1A8A38B5008F2A8E /* LaunchScreen.storyboard */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.storyboard; name = LaunchScreen.storyboard; path = LaunchImage/LaunchScreen.storyboard; sourceTree = "<group>"; };
 		38D2323719A4EF42004B1203 /* We all pay.entitlements */ = {isa = PBXFileReference; lastKnownFileType = text.xml; path = "We all pay.entitlements"; sourceTree = SOURCE_ROOT; };
 		38D785FC18DC53C30074B670 /* WeAllPayStoreTests.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; name = WeAllPayStoreTests.m; path = ../WeAllPayTests/WeAllPayStoreTests.m; sourceTree = "<group>"; };
+		38D796121B2DF30800F3872F /* ExchangeRateFetcherTest.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ExchangeRateFetcherTest.swift; sourceTree = "<group>"; };
 		38DAB1341997BCC500B989BF /* CFNetwork.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = CFNetwork.framework; path = Platforms/MacOSX.platform/Developer/SDKs/MacOSX10.9.sdk/System/Library/Frameworks/CFNetwork.framework; sourceTree = DEVELOPER_DIR; };
 		38DAB1371997C21600B989BF /* EMC.entitlements */ = {isa = PBXFileReference; lastKnownFileType = text.xml; name = EMC.entitlements; path = ../EMC.entitlements; sourceTree = "<group>"; };
 		38DB85D217E45BCA006237CF /* MCPayment+addons.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = "MCPayment+addons.h"; path = "DataStore/MCPayment+addons.h"; sourceTree = "<group>"; };
@@ -860,6 +863,7 @@
 			children = (
 				381179CE1A82D1FC00020538 /* We all pay Tests-Bridging-Header.h */,
 				3858D6551B2DB55B006A4E2B /* CurrencyControllerTest.swift */,
+				38D796121B2DF30800F3872F /* ExchangeRateFetcherTest.swift */,
 				3860575419EEB28300BD5B78 /* MCCategoryPictureStoreTest.m */,
 				388063ED19A4D00C000CF36B /* XRCurrencyStoreControllerTest.m */,
 				389DE90F197FD6DF00169645 /* MCCurrencyTest.m */,
@@ -1614,11 +1618,13 @@
 			buildActionMask = 2147483647;
 			files = (
 				389DE909197FC5E900169645 /* MCExchangeRateTest.m in Sources */,
+				38D796111B2DF2DE00F3872F /* ExchangeRateFetcher.swift in Sources */,
 				38D7960C1B2DEFC100F3872F /* CurrencyController.swift in Sources */,
 				388063EE19A4D00C000CF36B /* XRCurrencyStoreControllerTest.m in Sources */,
 				3860575519EEB28300BD5B78 /* MCCategoryPictureStoreTest.m in Sources */,
 				385F530F191C2D140012773D /* MCPaymentPresenceTest.m in Sources */,
 				385F5310191C2D140012773D /* MCPaymentAddonsTest.m in Sources */,
+				38D796131B2DF30800F3872F /* ExchangeRateFetcherTest.swift in Sources */,
 				385F5311191C2D140012773D /* MCPersonAddonsTest.m in Sources */,
 				3858D6561B2DB55B006A4E2B /* CurrencyControllerTest.swift in Sources */,
 				389DE910197FD6DF00169645 /* MCCurrencyTest.m in Sources */,
