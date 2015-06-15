@@ -778,7 +778,7 @@
 	</dict>
 	<dict>
 		<key>code</key>
-		<string>SSP</string>
+		<string>SDG</string>
 		<key>name</key>
 		<string>South Sudanese pound</string>
 	</dict>
@@ -852,7 +852,7 @@
 		<key>code</key>
 		<string>TOP</string>
 		<key>name</key>
-		<string>Tongan pa'anga</string>
+		<string>Tongan pa&apos;anga</string>
 	</dict>
 	<dict>
 		<key>code</key>
@@ -946,7 +946,7 @@
 	</dict>
 	<dict>
 		<key>code</key>
-		<string>ZWD</string>
+		<string>ZWL</string>
 		<key>name</key>
 		<string>Zimbabwe dollar</string>
 	</dict>

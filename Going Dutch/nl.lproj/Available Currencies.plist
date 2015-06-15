@@ -840,7 +840,7 @@
 		<key>code</key>
 		<string>TOP</string>
 		<key>name</key>
-		<string>Tongaanse pa'anga</string>
+		<string>Tongaanse pa&apos;anga</string>
 	</dict>
 	<dict>
 		<key>code</key>
@@ -916,7 +916,7 @@
 	</dict>
 	<dict>
 		<key>code</key>
-		<string>ZWD</string>
+		<string>ZWL</string>
 		<key>name</key>
 		<string>Zimbabwe dollar</string>
 	</dict>
@@ -934,7 +934,7 @@
 	</dict>
 	<dict>
 		<key>code</key>
-		<string>SSP</string>
+		<string>SDG</string>
 		<key>name</key>
 		<string>Zuid-Soedanees pond</string>
 	</dict>
