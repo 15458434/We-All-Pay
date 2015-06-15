@@ -17,14 +17,16 @@ class ExchangeRateFetcher: NSObject {
     internal private(set) var rates: Dictionary<String, Double>!
     internal private(set) var date: NSDate!
     
+    internal private(set) var isFetching: Bool = false
+    
     var isLastFetchOlderThanAnHour: Bool {
         if date == nil {
-            return false
+            return true
         }
         
         let now = NSDate()
         let intervalSinceLastFetch = now.timeIntervalSinceDate(self.date)
-        if intervalSinceLastFetch <= 3600.0 {
+        if intervalSinceLastFetch >= 3600.0 {
             return true
         } else {
             return false
@@ -37,7 +39,22 @@ class ExchangeRateFetcher: NSObject {
         return toToBaseRate / fromToBaseRate
     }
     
+    func exchangeRate(fromCode: CurrencyISOCode, toCode: CurrencyISOCode, completionHandler: (fromCode: CurrencyISOCode, toCode: CurrencyISOCode, exchangeRate: ExchangeRateValue!, error: NSError!) -> ()) {
+        if isLastFetchOlderThanAnHour {
+            fetchFromOpenExchangeRates(fromCode, toCode: toCode, completionHandler: completionHandler)
+        } else {
+            let rate = calculateExchangeRate(fromCode, toCode: toCode)
+            completionHandler(fromCode: fromCode, toCode: toCode, exchangeRate: rate, error: nil)
+        }
+    }
+    
     func fetchFromOpenExchangeRates(fromCode: CurrencyISOCode, toCode: CurrencyISOCode, completionHandler: (fromCode: CurrencyISOCode, toCode: CurrencyISOCode, exchangeRate: ExchangeRateValue!, error: NSError!) -> ()) {
+        if isFetching {
+            let error = NSError(domain: "ExchangeRateFetcher", code: 1, userInfo: ["reason": "Already fetching"])
+            completionHandler(fromCode: fromCode, toCode: toCode, exchangeRate: nil, error: error)
+            return
+        }
+        isFetching = true
         UIApplication.sharedApplication().networkActivityIndicatorVisible = true
         
         let url = NSURL(string: "http://openexchangerates.org/api/latest.json?app_id=cba02a60bd89412095c84ecb65b6326a");
@@ -47,6 +64,7 @@ class ExchangeRateFetcher: NSObject {
             if let realError = error {
                 println("Error fetching exchangeRate from OpenExchangeRates: \(realError)")
                 completionHandler(fromCode: fromCode, toCode: toCode, exchangeRate: nil, error: realError)
+                self.isFetching = false
                 return
             }
             
@@ -63,19 +81,34 @@ class ExchangeRateFetcher: NSObject {
                         self.date = date
                         let calculatedExchangeRate = self.calculateExchangeRate(fromCode, toCode: toCode)
                         completionHandler(fromCode: fromCode, toCode: toCode, exchangeRate: calculatedExchangeRate, error: nil)
+                        self.isFetching = false
                     })
                 } else {
                     // JSON Error
                     println("Error reading exchangeRatesFromJSON: \(jsonError)")
                     NSOperationQueue.mainQueue().addOperationWithBlock({ () -> Void in
                         completionHandler(fromCode: fromCode, toCode: toCode, exchangeRate: nil, error: jsonError)
+                        self.isFetching = false
                     })
                 }
             } else {
                 // Status code != 200
-                
+                let error = NSError(domain: "ExchangeRateFetcher", code: 2, userInfo: ["reason": "HTTP Response code: \(httpResp)", "response": httpResp])
+                NSOperationQueue.mainQueue().addOperationWithBlock({ () -> Void in
+                    completionHandler(fromCode: fromCode, toCode: toCode, exchangeRate: nil, error: error)
+                    self.isFetching = false
+                })
             }
         }
         task.resume()
+    }
+    
+    func isCurrencyCodeAvailableInRates(code: CurrencyISOCode) -> Bool {
+        if let exchangeRate = rates[code] {
+            return true
+        } else {
+            println("CurrencyCode: \(code) not present.")
+            return false
+        }
     }
 }

@@ -30,8 +30,8 @@ class CurrencyControllerTest: XCTestCase {
     
     func testSubscript() {
         let result = currencyController[5]
-        let name = result["name"] as! String
-        let code = result["code"] as! String
+        let name = result["name"]
+        let code = result["code"]
         XCTAssertNotNil(name, "Name should be presnt.")
         XCTAssertNotNil(code, "Code should be present.")
     }

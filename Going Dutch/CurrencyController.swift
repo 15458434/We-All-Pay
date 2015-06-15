@@ -9,15 +9,15 @@
 import Foundation
 
 public class CurrencyController: NSObject {
-    public let currencies: [Dictionary<NSObject, AnyObject>]
+    public let currencies: [Dictionary<String, String>]
     
     public override init() {
         let currencyFilePath = NSBundle.mainBundle().pathForResource("Available Currencies", ofType: "plist")
-        currencies = NSArray(contentsOfFile: currencyFilePath!) as! [Dictionary<NSObject, AnyObject>]
+        currencies = NSArray(contentsOfFile: currencyFilePath!) as! [Dictionary<String, String>]
         super.init()
     }
     
-    public subscript(index: Int) -> Dictionary<NSObject, AnyObject> {
+    public subscript(index: Int) -> Dictionary<String, String> {
         return currencies[index]
     }
 }
