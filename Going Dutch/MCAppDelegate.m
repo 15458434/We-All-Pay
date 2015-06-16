@@ -27,6 +27,19 @@
 
 #pragma mark - New in this class
 
+- (void)removeOldCurrencyStore
+{
+    NSURL *documentsDirectory = [[[NSFileManager defaultManager] URLsForDirectory:NSDocumentDirectory inDomains:NSUserDomainMask] lastObject];
+    NSFileManager *fileManager = [NSFileManager defaultManager];
+    NSString *directory = [documentsDirectory.path stringByAppendingPathComponent:@"XRCurrency"];
+    NSError *error;
+    BOOL success = [fileManager removeItemAtPath:directory error:&error];
+    if (!success || error) {
+        // something went wrong
+        NSLog(@"Error deleting XRCurrency: %@", error);
+    }
+}
+
 - (void)checkToSeeIfThisPurchaseOriginatesFromiAd
 {
     ADoriginate *adAttributionObject = [[ADoriginate alloc] init];
@@ -48,18 +61,9 @@
     }
 }
 
-- (void)getAppSettings
-{
-    // Set the application defaults
-    NSUserDefaults *defaults = [NSUserDefaults standardUserDefaults];
-    NSDictionary *appDefaults = @{ @"googleAnalyticsOptIn" : @YES};
-    [defaults registerDefaults:appDefaults];
-    [defaults synchronize];
-}
-
 - (void)executeOnlyOnceDuringStartup
 {
-    [self getAppSettings];
+    [self removeOldCurrencyStore];
     // Override point for customization after application launch.
     NSLog(@"%@ running iOS %@", [[UIDevice currentDevice] model], [[UIDevice currentDevice] systemVersion]);
     NSLog(@"I dedicate this program to Ilse Béguin, the most wonderful woman in the world who brought herself into my life, when I was developing the first version App.");
