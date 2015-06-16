@@ -20,4 +20,9 @@ public class CurrencyController: NSObject {
     public subscript(index: Int) -> Dictionary<String, String> {
         return currencies[index]
     }
+    
+    public subscript(code: String) -> String {
+        let filteredDictionary = currencies.filter { $0["code"] == code }
+        return filteredDictionary.first!["name"]!
+    }
 }

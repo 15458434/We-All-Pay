@@ -28,11 +28,16 @@ class CurrencyControllerTest: XCTestCase {
         XCTAssertEqual(currencyController.currencies.count, 158, "Amount of currencies should be 158.")
     }
     
-    func testSubscript() {
+    func testSubscriptForIndex() {
         let result = currencyController[5]
         let name = result["name"]
         let code = result["code"]
         XCTAssertNotNil(name, "Name should be presnt.")
         XCTAssertNotNil(code, "Code should be present.")
+    }
+    
+    func testSubscriptForCode() {
+        let name = currencyController["USD"]
+        XCTAssertNotNil(name, "Name can't be nil")
     }
 }
