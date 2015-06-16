@@ -19,14 +19,10 @@
 		380F44F21813250600FF7E10 /* No picture image 2 - We All Pay.png in Resources */ = {isa = PBXBuildFile; fileRef = 380F44F11813250600FF7E10 /* No picture image 2 - We All Pay.png */; };
 		381179D01A82D1FC00020538 /* MCMailComposer.swift in Sources */ = {isa = PBXBuildFile; fileRef = 381179CF1A82D1FC00020538 /* MCMailComposer.swift */; };
 		3812485A1959D22600C0447C /* MCxRatesController.m in Sources */ = {isa = PBXBuildFile; fileRef = 381248581959D22600C0447C /* MCxRatesController.m */; };
-		3812485B1959D40900C0447C /* MCxRatesController.m in Sources */ = {isa = PBXBuildFile; fileRef = 381248581959D22600C0447C /* MCxRatesController.m */; };
-		381318BC19A250C600C821B0 /* XRCurrency.xcdatamodeld in Sources */ = {isa = PBXBuildFile; fileRef = 381318BA19A250C600C821B0 /* XRCurrency.xcdatamodeld */; };
 		381318BE19A250C600C821B0 /* XRCurrency.xcdatamodeld in Sources */ = {isa = PBXBuildFile; fileRef = 381318BA19A250C600C821B0 /* XRCurrency.xcdatamodeld */; };
 		381318BF19A250C600C821B0 /* XRCurrency.xcdatamodeld in Sources */ = {isa = PBXBuildFile; fileRef = 381318BA19A250C600C821B0 /* XRCurrency.xcdatamodeld */; };
-		381318C219A2531500C821B0 /* XRCurrencyStoreController.m in Sources */ = {isa = PBXBuildFile; fileRef = 381318C119A2531500C821B0 /* XRCurrencyStoreController.m */; };
 		381318C419A2531500C821B0 /* XRCurrencyStoreController.m in Sources */ = {isa = PBXBuildFile; fileRef = 381318C119A2531500C821B0 /* XRCurrencyStoreController.m */; };
 		381318C519A2531500C821B0 /* XRCurrencyStoreController.m in Sources */ = {isa = PBXBuildFile; fileRef = 381318C119A2531500C821B0 /* XRCurrencyStoreController.m */; };
-		381318CE19A2869600C821B0 /* XRCurrency.m in Sources */ = {isa = PBXBuildFile; fileRef = 381318CD19A2869600C821B0 /* XRCurrency.m */; };
 		381318D019A2869600C821B0 /* XRCurrency.m in Sources */ = {isa = PBXBuildFile; fileRef = 381318CD19A2869600C821B0 /* XRCurrency.m */; };
 		381318D119A2869600C821B0 /* XRCurrency.m in Sources */ = {isa = PBXBuildFile; fileRef = 381318CD19A2869600C821B0 /* XRCurrency.m */; };
 		381640FE1AD6D8A0000D9FAF /* Who is paying next.appex in Embed App Extensions */ = {isa = PBXBuildFile; fileRef = 38B6E0EC1A28BBAB009E69D7 /* Who is paying next.appex */; settings = {ATTRIBUTES = (RemoveHeadersOnCopy, ); }; };
@@ -146,9 +142,7 @@
 		38AD8C12197E8926005C3436 /* MCAddCurrenciesEntityMigrationPolicy.m in Sources */ = {isa = PBXBuildFile; fileRef = 38AD8C11197E8926005C3436 /* MCAddCurrenciesEntityMigrationPolicy.m */; };
 		38B6E0ED1A28BBAB009E69D7 /* NotificationCenter.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 3807560019F9445800489ED4 /* NotificationCenter.framework */; };
 		38BDEE231A641B2300E00F4F /* MultiExchangeRatesController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 38BDEE221A641B2300E00F4F /* MultiExchangeRatesController.swift */; };
-		38BDFD7E19B88D210026F4F8 /* XRCurrencyXRateFetcher.m in Sources */ = {isa = PBXBuildFile; fileRef = 38BDFD7D19B88D210026F4F8 /* XRCurrencyXRateFetcher.m */; };
 		38BDFD7F19B88D210026F4F8 /* XRCurrencyXRateFetcher.m in Sources */ = {isa = PBXBuildFile; fileRef = 38BDFD7D19B88D210026F4F8 /* XRCurrencyXRateFetcher.m */; };
-		38BDFD8219B88D8B0026F4F8 /* XRCurrencyXRate.m in Sources */ = {isa = PBXBuildFile; fileRef = 38BDFD8119B88D8B0026F4F8 /* XRCurrencyXRate.m */; };
 		38BDFD8319B88D8B0026F4F8 /* XRCurrencyXRate.m in Sources */ = {isa = PBXBuildFile; fileRef = 38BDFD8119B88D8B0026F4F8 /* XRCurrencyXRate.m */; };
 		38C20A391A8A874B00F284EB /* MCDevelopTools.swift in Sources */ = {isa = PBXBuildFile; fileRef = 38C20A381A8A874B00F284EB /* MCDevelopTools.swift */; };
 		38C2BC9918F7F69A00233D24 /* MCWhoOwesWhoTableViewCell_iPad.m in Sources */ = {isa = PBXBuildFile; fileRef = 38C2BC9818F7F69A00233D24 /* MCWhoOwesWhoTableViewCell_iPad.m */; };
@@ -175,7 +169,6 @@
 		38DC8B3619084ABE00762235 /* SystemConfiguration.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 38DC8B3519084ABE00762235 /* SystemConfiguration.framework */; };
 		38DC8B421909508800762235 /* MCColors.m in Sources */ = {isa = PBXBuildFile; fileRef = 38DC8B411909508800762235 /* MCColors.m */; };
 		38DC8B4319097FEA00762235 /* Main-iPad.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 38DC8B4519097FEA00762235 /* Main-iPad.storyboard */; };
-		38DDBF8619C1AB5E00D690D0 /* Currency info.plist in Resources */ = {isa = PBXBuildFile; fileRef = 38DDBF8919C1AB5E00D690D0 /* Currency info.plist */; };
 		38E0C5EA18E9B2BD005A3F17 /* MCAllTripsTableViewController-iPad.m in Sources */ = {isa = PBXBuildFile; fileRef = 38E0C5E918E9B2BD005A3F17 /* MCAllTripsTableViewController-iPad.m */; };
 		38E95DAF194F62C500069414 /* SKProduct+MCStoreInterface.m in Sources */ = {isa = PBXBuildFile; fileRef = 38E95DAE194F62C500069414 /* SKProduct+MCStoreInterface.m */; };
 		38E95DB219506F9700069414 /* MCiScreenTableViewController_iPad.m in Sources */ = {isa = PBXBuildFile; fileRef = 38E95DB119506F9700069414 /* MCiScreenTableViewController_iPad.m */; };
@@ -187,7 +180,6 @@
 		38F2A1AC1ADCF7E100831D48 /* TodayViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 38F2A1AA1ADCF7E100831D48 /* TodayViewController.swift */; };
 		38F2A1AD1ADCF7E100831D48 /* WhoIsPayingNextTextLocalizer.swift in Sources */ = {isa = PBXBuildFile; fileRef = 38F2A1AB1ADCF7E100831D48 /* WhoIsPayingNextTextLocalizer.swift */; };
 		38F2A1B01ADCF85200831D48 /* MCWhoPayingUserDefaultsStoreInterface.m in Sources */ = {isa = PBXBuildFile; fileRef = 38F2A1AF1ADCF85200831D48 /* MCWhoPayingUserDefaultsStoreInterface.m */; };
-		38F7F9A01B2C36FD0059DE51 /* XRCurrency+NSDictionary.m in Sources */ = {isa = PBXBuildFile; fileRef = 38F7F99F1B2C36FD0059DE51 /* XRCurrency+NSDictionary.m */; };
 		38F7F9A41B2C49B80059DE51 /* Available Currencies.plist in Resources */ = {isa = PBXBuildFile; fileRef = 38F7F9A61B2C49B80059DE51 /* Available Currencies.plist */; };
 		38F7F9AA1B2C4A120059DE51 /* CurrencyController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 38F7F9A91B2C4A120059DE51 /* CurrencyController.swift */; };
 		38FE87CC195721670008EE74 /* InfoPlist.strings in Resources */ = {isa = PBXBuildFile; fileRef = 38FE87CA195721670008EE74 /* InfoPlist.strings */; };
@@ -1436,7 +1428,6 @@
 			isa = PBXResourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				38DDBF8619C1AB5E00D690D0 /* Currency info.plist in Resources */,
 				38572AE1169D437B00969C62 /* InfoPlist.strings in Resources */,
 				38F7F9A41B2C49B80059DE51 /* Available Currencies.plist in Resources */,
 				3867CE5118704DAF001EC222 /* MCTableEmptyMessage.xib in Resources */,
@@ -1505,7 +1496,6 @@
 				38DB0F941ADD48CB00946B95 /* MCWhoPayingUserDefaultsStoreInterface.m in Sources */,
 				38977E4F1B2A26D4008484A4 /* MCTwoLabelIscreenTableViewCell.swift in Sources */,
 				38AD59BC197D3DF000BBC797 /* MCNetworkTools.m in Sources */,
-				3812485B1959D40900C0447C /* MCxRatesController.m in Sources */,
 				38572AE3169D437B00969C62 /* main.m in Sources */,
 				389DE900197FB2BA00169645 /* MCSharedBill.m in Sources */,
 				38977E531B2A297E008484A4 /* MCWhoPaidHowMuchTableViewCell_iPhone.swift in Sources */,
@@ -1540,13 +1530,9 @@
 				38EF31451938BA07004912F0 /* UINavigationController+KeyboardDismiss.m in Sources */,
 				3899D3F8194F453D00893323 /* MCStoreInterface.m in Sources */,
 				3803963F192114D700FA8CC2 /* MCPaymentPresenceTableViewCell.m in Sources */,
-				38F7F9A01B2C36FD0059DE51 /* XRCurrency+NSDictionary.m in Sources */,
 				38955048178B4FCA0077A95A /* MCWeAllPayStoreController.m in Sources */,
 				38E95DB219506F9700069414 /* MCiScreenTableViewController_iPad.m in Sources */,
-				381318BC19A250C600C821B0 /* XRCurrency.xcdatamodeld in Sources */,
 				389DE8FA197FB2BA00169645 /* MCPayment.m in Sources */,
-				38BDFD7E19B88D210026F4F8 /* XRCurrencyXRateFetcher.m in Sources */,
-				381318CE19A2869600C821B0 /* XRCurrency.m in Sources */,
 				38AAFBA218EC406300CD3E12 /* MCSharedBillPeoplePresentTableViewController-iPad.m in Sources */,
 				389DE907197FBE8400169645 /* MCExchangeRate+addons.m in Sources */,
 				38977E631B2A37BC008484A4 /* MCAllTripsTableViewCell.swift in Sources */,
@@ -1577,7 +1563,6 @@
 				381179D01A82D1FC00020538 /* MCMailComposer.swift in Sources */,
 				3825A828199A4E1E00A8885D /* MCThisPersonProtocol.m in Sources */,
 				38977E511B2A277A008484A4 /* MCOneLabelIScreenTableViewCell.swift in Sources */,
-				38BDFD8219B88D8B0026F4F8 /* XRCurrencyXRate.m in Sources */,
 				38DC8B421909508800762235 /* MCColors.m in Sources */,
 				387494D219F045DA001614CA /* MCSelectCategoryTableViewCell_iPad.m in Sources */,
 				38E95DBB195073A000069414 /* MCTwoLabelTableViewCell_iPad.m in Sources */,
@@ -1591,7 +1576,6 @@
 				38DB85D417E45BCA006237CF /* MCPayment+addons.m in Sources */,
 				38F174E41A56FBD000FC6FC8 /* MCWhoPayingUserDefaultsStoreInterface+WeAllPay.m in Sources */,
 				3825A82419990BA400A8885D /* UIViewController+WeAllPayStore.m in Sources */,
-				381318C219A2531500C821B0 /* XRCurrencyStoreController.m in Sources */,
 				383A86C518F7EE48001F128E /* MCSolutionTableViewController.m in Sources */,
 				389DE8F7197FB2B900169645 /* MCPaymentPresence.m in Sources */,
 				3892E3AA17904A240038894B /* MCPersonViewController.m in Sources */,

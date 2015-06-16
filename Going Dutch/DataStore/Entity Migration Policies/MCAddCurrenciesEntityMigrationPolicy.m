@@ -7,7 +7,6 @@
 //
 
 #import "MCAddCurrenciesEntityMigrationPolicy.h"
-#import "MCxRatesController.h"
 #import "MCCurrency.h"
 #import "MCSharedBill.h"
 #import "MCExchangeRate.h"

@@ -18,9 +18,6 @@ typedef NS_ENUM(short, MCExchangeRateStatus){
 
 + (MCExchangeRate *)addExchangeRateForContext:(NSManagedObjectContext *)context;
 
-- (BOOL)retrieveExchangeRateFromWeb __deprecated;
-- (BOOL)retrieveExchangeRateFromWebWithCompletionHandler:(void (^)(NSDictionary *exchangeRateResult))completionBlock __deprecated;
-
 - (void)fetchExchangeRate:(void (^)(NSError *error))completionHandler;
 
 @end

@@ -30,7 +30,6 @@ The We All Pay Store Controller is designed to do writing in the background and 
 @property (nonatomic, strong) ExchangeRateFetcher *fetcher;
 
 + (MCWeAllPayStoreController *)defaultStore;
-+ (void)prepareCurrencyStoreIfNecessary __deprecated;
 
 - (BOOL)isDocumentStateNormal;
 
@@ -47,10 +46,6 @@ The We All Pay Store Controller is designed to do writing in the background and 
 - (void)endUndoGroupAndProcessWithoutRegistration;
 - (void)endUndoGroupAndUndo;
 - (void)endUndoGroupAndUndoWithoutRegistration;
-
-#pragma mark - Webinterface
-
-- (void)updateXRate:(MCExchangeRate *)exchangeRate withCompletionHandler:(void (^)(NSDictionary *exchangeRateResult))completionBlock __deprecated;
 
 #pragma mark - TableViewSources
 - (NSFetchedResultsController *)allTripsDataControllerForDelegate:(id)delegate;

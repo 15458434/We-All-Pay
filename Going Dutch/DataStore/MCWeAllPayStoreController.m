@@ -14,9 +14,6 @@
 #import "MCCurrency+addons.h"
 #import "MCExchangeRate+addons.h"
 
-#import "MCxRatesController.h"
-#import "XRCurrencyStoreController.h"
-
 #import "MCTonightsBillTransfer.h"
 #import "MCThisPaymentProtocol.h"
 
@@ -38,9 +35,6 @@ MCiCloudUse const isiCloudUsed = iCloudIsNotUsed;
 
 @interface MCWeAllPayStoreController ()
 
-@property (nonatomic, strong) MCxRatesController *xRatesfetchController __deprecated;
-@property (nonatomic, strong) NSMutableArray *exchangeRateQueue __deprecated;
-
 @end
 
 @implementation MCWeAllPayStoreController
@@ -57,21 +51,6 @@ MCiCloudUse const isiCloudUsed = iCloudIsNotUsed;
 
 
 #pragma mark - New in this class
-
-+ (void)prepareCurrencyStoreIfNecessary
-{
-    NSOperationQueue *someQueue = [NSOperationQueue new];
-    [someQueue addOperationWithBlock:^{
-        if (![XRCurrencyStoreController doesMyCurrencyDatabaseFileExist]) {
-            XRCurrencyStoreController *defaultCurrencyStore = [XRCurrencyStoreController sharedStore];
-            [defaultCurrencyStore prepareStoreWithCompletionHandler:^{
-                NSLog(@"CurrencyStore available.");
-            }];
-        } else if (![XRCurrencyStoreController doesMyDatabaseHaveTheRightVersion]) {
-            [XRCurrencyStoreController updateMyDatabase];
-        }
-    }];
-}
 
 - (void)storeIsReady:(NSNotification *)notification
 {
@@ -203,42 +182,6 @@ MCiCloudUse const isiCloudUsed = iCloudIsNotUsed;
 {
     [[_mainThreadContext undoManager] endUndoGrouping];
     [[_mainThreadContext undoManager] undoNestedGroup];
-}
-
-- (MCxRatesController *)xRatesfetchController
-{
-    if (!_xRatesfetchController) {
-        _xRatesfetchController = [MCxRatesController new];
-    }
-    return _xRatesfetchController;
-}
-
-#pragma mark - Webinterface
-
-- (void)updateXRate:(MCExchangeRate *)exchangeRate withCompletionHandler:(void (^)(NSDictionary *))completionBlock
-{
-    NSString *fromCode = [[exchangeRate fromCurrency] code];
-    NSString *toCode = [[exchangeRate toCurrency] code];
-    if (!_exchangeRateQueue) {
-        _exchangeRateQueue = [NSMutableArray new];
-    }
-    [_exchangeRateQueue addObject:exchangeRate];
-    __weak __typeof(self) weakSelf = self;
-    [[self xRatesfetchController] getExchangeRateFrom:fromCode to:toCode withCompletionHandler:^(NSDictionary *exchangeRateResult) {
-        NSLog(@"Fetched ExchangeRate: %@", exchangeRateResult);
-        __strong __typeof(self) strongSelf = weakSelf;
-        if (strongSelf) {
-            [exchangeRate setExchangeRate:[exchangeRateResult objectForKey:MCCurrencyExchangeRate]];
-            [exchangeRate setSource:[exchangeRateResult objectForKey:MCSource]];
-            NSDate *now = [NSDate date];
-            exchangeRate.dateFetched = now;
-            exchangeRate.dateModified = now;
-        } else {
-            NSLog(@"Default Controller does not exist anymore.");
-        }
-        [[strongSelf exchangeRateQueue] removeObject:exchangeRate];
-        completionBlock(exchangeRateResult);
-    }];
 }
 
 #pragma mark - TableView fill sources.

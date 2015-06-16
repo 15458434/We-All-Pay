@@ -8,10 +8,6 @@
 
 #import "MCCurrency+addons.h"
 #import "MCWeAllPayStoreController.h"
-#import "MCxRatesController.h"
-
-#import "XRCurrencyStoreController.h"
-#import "XRCurrency.h"
 
 #import "We_all_pay-Swift.h"
 
@@ -39,20 +35,6 @@
     newCurrency.name = currencyNameFromCurrentLocale;
     newCurrency.symbol = currencySymbolFromCurrentLocale;
     newCurrency.isStillValid = @YES;
-    return newCurrency;
-}
-
-+ (MCCurrency *)getCurrencyFrom:(XRCurrency *)xrCurrency FromContext:(NSManagedObjectContext *)context
-{
-    MCCurrency *newCurrency = [NSEntityDescription insertNewObjectForEntityForName:@"MCCurrency" inManagedObjectContext:context];
-    NSDate *now = [NSDate date];
-    newCurrency.dateCreated = now;
-    newCurrency.dateModified = now;
-    newCurrency.uniqueID = [[NSUUID UUID] UUIDString];
-    newCurrency.name = xrCurrency.name;
-    newCurrency.symbol = xrCurrency.symbol;
-    newCurrency.code = xrCurrency.code;
-    newCurrency.isStillValid = xrCurrency.isStillValid;
     return newCurrency;
 }
 
@@ -88,33 +70,6 @@
         newCurrency.symbol = [[[[MCWeAllPayStoreController defaultStore] fetcher] currencyController] currencySymbol:currency[@"code"]];
         NSLog(@"Generated MCCurrency: %@", newCurrency);
     }
-}
-
-+ (MCCurrency *)getCurrencyWithCode:(NSString *)code FromContext:(NSManagedObjectContext *)context
-{
-    NSManagedObjectContext *xrMainQueueContext = [[XRCurrencyStoreController sharedStore] mainQueueContext];
-    XRCurrency *xrCurrency = [[XRCurrencyStoreController sharedStore] fetchCurrencyWithCode:code inContext:xrMainQueueContext];
-    MCCurrency *mcCurrency = [NSEntityDescription insertNewObjectForEntityForName:@"MCCurrency" inManagedObjectContext:context];
-    NSDate *now = [NSDate date];
-    mcCurrency.dateCreated = now;
-    mcCurrency.dateModified = now;
-    mcCurrency.uniqueID = [[NSUUID UUID] UUIDString];
-    mcCurrency.name = xrCurrency.name;
-    mcCurrency.symbol = xrCurrency.symbol;
-    mcCurrency.code = xrCurrency.code;
-    mcCurrency.isStillValid = xrCurrency.isStillValid;
-    return mcCurrency;
-//    NSFetchRequest *request = [NSFetchRequest fetchRequestWithEntityName:@"MCCurrency"];
-//    NSSortDescriptor *sortDescriptor = [NSSortDescriptor sortDescriptorWithKey:@"dateCreated" ascending:YES];
-//    [request setSortDescriptors:@[sortDescriptor]];
-//    NSPredicate *predicate = [NSPredicate predicateWithFormat:@"code like %@", code];
-//    [request setPredicate:predicate];
-//    NSError *fetchError;
-//    NSArray *fetchResults = [context executeFetchRequest:request error:&fetchError];
-//    if (!fetchResults) {
-//        NSLog(@"Fetching currencySelectedInCurrentLocale did fail: %@", [fetchError localizedDescription]);
-//    }
-//    return [fetchResults firstObject];
 }
 
 - (NSNumberFormatter *)numberFormatter
