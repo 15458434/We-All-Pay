@@ -40,8 +40,6 @@
     XCTAssertTrue(persistentStore, @"Something went wrong opening the In Memory Store: %@", [error localizedDescription]);
     _context = [[NSManagedObjectContext alloc] initWithConcurrencyType:NSMainQueueConcurrencyType];
     [_context setPersistentStoreCoordinator:persistentStoreCoordinator];
-    
-    [XRCurrencyStoreController populateCurrencyDataBaseIfEmptyForContext:_context];
 }
 
 - (void)tearDown
@@ -109,9 +107,9 @@
 {
     // This test checks to see if currency is correctly converted to the mainCurrency of the sharedBill.
     MCSharedBill *tonightsBill = [MCSharedBill addSharedBillToContext:_context];
-    [tonightsBill setMainCurrency:[MCCurrency getCurrencyWithCode:@"EUR" FromContext:_context]];
+    tonightsBill.mainCurrency = [MCCurrency currencyFrom:@"EUR" fromContext:_context];
     MCPayment *thisPayment = [tonightsBill addPayment];
-    [thisPayment setCurrency:[MCCurrency getCurrencyWithCode:@"USD" FromContext:_context]];
+    thisPayment.currency = [MCCurrency currencyFrom:@"USD" fromContext:_context];
     MCExchangeRate *exchangeRate = [thisPayment addExchangeRate];
     [exchangeRate setExchangeRate:@0.7424];
     [thisPayment setMoney:@2.97];

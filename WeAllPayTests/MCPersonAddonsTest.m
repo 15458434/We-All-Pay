@@ -37,8 +37,6 @@
     XCTAssertTrue(persistentStore, @"Something went wrong opening the In Memory Store: %@", [error localizedDescription]);
     _context = [[NSManagedObjectContext alloc] initWithConcurrencyType:NSMainQueueConcurrencyType];
     [_context setPersistentStoreCoordinator:persistentStoreCoordinator];
-    
-    [XRCurrencyStoreController populateCurrencyDataBaseIfEmptyForContext:_context];
 }
 
 - (void)tearDown

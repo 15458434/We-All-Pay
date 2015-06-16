@@ -41,9 +41,6 @@
     XCTAssertTrue(persistentStore, @"Something went wrong opening the In Memory Store: %@", [error localizedDescription]);
     _context = [[NSManagedObjectContext alloc] init];
     [_context setPersistentStoreCoordinator:persistentStoreCoordinator];
-    
-//    [MCCurrency addAllAvailableCurrenciesToContext:_context];
-    [XRCurrencyStoreController populateCurrencyDataBaseIfEmptyForContext:_context];
 }
 
 - (void)tearDown
@@ -215,7 +212,7 @@
 {
     // Test to see if amountShouldHavePaidBy delivers the correct amount.
     MCSharedBill *tonightsBill = [MCSharedBill addSharedBillToContext:_context];
-    MCCurrency *mainCurrency = [MCCurrency getCurrencyWithCode:@"EUR" FromContext:_context];
+    MCCurrency *mainCurrency = [MCCurrency currencyFrom:@"EUR" fromContext:_context];
     MCPerson *mieke = [tonightsBill addPerson];
     [mieke setFirstName:@"Mieke"];
     [mieke setLastName:@"Mooi"];
@@ -225,7 +222,7 @@
     MCPerson *mark = [tonightsBill addPerson];
     [mark setFirstName:@"Mark"];
     [mark setLastName:@"De grootte"];
-    MCCurrency *currencyFirstPayment = [MCCurrency getCurrencyWithCode:@"USD" FromContext:_context];
+    MCCurrency *currencyFirstPayment = [MCCurrency currencyFrom:@"USD" fromContext:_context];
     MCPayment *firstPayment = [tonightsBill addPayment];
     [firstPayment setDescriptionOfPayment:@"Movie"];
     [firstPayment setPayingPerson:mark];
@@ -245,7 +242,7 @@
 {
     // Test to see if calculation containing foreign currency is done the right way.
     MCSharedBill *tonightsBill = [MCSharedBill addSharedBillToContext:_context];
-    MCCurrency *mainCurrency = [MCCurrency getCurrencyWithCode:@"EUR" FromContext:_context];
+    MCCurrency *mainCurrency = [MCCurrency currencyFrom:@"EUR" fromContext:_context];
     MCPerson *mieke = [tonightsBill addPerson];
     [mieke setFirstName:@"Mieke"];
     [mieke setLastName:@"Mooi"];
@@ -255,7 +252,7 @@
     MCPerson *mark = [tonightsBill addPerson];
     [mark setFirstName:@"Mark"];
     [mark setLastName:@"Leuk"];
-    MCCurrency *currencyFirstPayment = [MCCurrency getCurrencyWithCode:@"USD" FromContext:_context];
+    MCCurrency *currencyFirstPayment = [MCCurrency currencyFrom:@"USD" fromContext:_context];
     MCPayment *firstPayment = [tonightsBill addPayment];
     [firstPayment setDescriptionOfPayment:@"Movie"];
     [firstPayment setPayingPerson:mark];
@@ -271,7 +268,7 @@
     for (MCReturnPayment *rp in resultsWithOnlyOnePayment) {
         XCTAssertEqualWithAccuracy([[rp money] doubleValue], [@(30.0 * 0.72 / 3) doubleValue], 0.001, @"Basic split amount with conversion not ok.");
     }
-    MCCurrency *currencySecondPayment = [MCCurrency getCurrencyWithCode:@"GBP" FromContext:_context];
+    MCCurrency *currencySecondPayment = [MCCurrency currencyFrom:@"GBP" fromContext:_context];
     MCPayment *secondPayment = [tonightsBill addPayment];
     [secondPayment setDescriptionOfPayment:@"Drinks"];
     [secondPayment setPayingPerson:anne];
