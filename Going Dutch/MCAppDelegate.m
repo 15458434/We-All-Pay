@@ -29,15 +29,19 @@
 
 - (void)removeOldCurrencyStore
 {
-    NSURL *documentsDirectory = [[[NSFileManager defaultManager] URLsForDirectory:NSDocumentDirectory inDomains:NSUserDomainMask] lastObject];
-    NSFileManager *fileManager = [NSFileManager defaultManager];
-    NSString *directory = [documentsDirectory.path stringByAppendingPathComponent:@"XRCurrency"];
-    NSError *error;
-    BOOL success = [fileManager removeItemAtPath:directory error:&error];
-    if (!success || error) {
-        // something went wrong
-        NSLog(@"Error deleting XRCurrency: %@", error);
-    }
+    NSOperationQueue *myQueue = [[NSOperationQueue alloc] init];
+    myQueue.name = @"removeOldCurrencyStore";
+    [myQueue addOperationWithBlock:^{
+        NSURL *documentsDirectory = [[[NSFileManager defaultManager] URLsForDirectory:NSDocumentDirectory inDomains:NSUserDomainMask] lastObject];
+        NSFileManager *fileManager = [NSFileManager defaultManager];
+        NSString *directory = [documentsDirectory.path stringByAppendingPathComponent:@"XRCurrency"];
+        NSError *error;
+        BOOL success = [fileManager removeItemAtPath:directory error:&error];
+        if (!success || error) {
+            // something went wrong
+            NSLog(@"Error deleting XRCurrency: %@", error);
+        }
+    }];
 }
 
 - (void)checkToSeeIfThisPurchaseOriginatesFromiAd

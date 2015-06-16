@@ -309,18 +309,19 @@
 
 - (NSNumber *)totalSumPaid
 {
-    NSFetchRequest *fetchRequest = [NSFetchRequest fetchRequestWithEntityName:NSStringFromClass([MCPayment class])];
-    fetchRequest.predicate = [NSPredicate predicateWithFormat:@"payingPerson = %@", self];
-    fetchRequest.sortDescriptors = @[[NSSortDescriptor sortDescriptorWithKey:@"dateCreated" ascending:YES]];
-    
-    NSError *error = nil;
-    NSArray *fetchResult = [[self managedObjectContext] executeFetchRequest:fetchRequest error:&error];
-    if (error) {
-        NSLog(@"%@: error fetching: %@", self, error);
-        return nil;
-    }
-    
+    NSArray *sortDescriptors = @[[NSSortDescriptor sortDescriptorWithKey:@"dateCreated" ascending:YES]];
+    NSArray *fetchResult = [[self payments] sortedArrayUsingDescriptors:sortDescriptors];
     return [fetchResult valueForKeyPath:@"@sum.moneyInMainCurrency"];
+}
+
+- (UIImage *)thumbnail
+{
+    return [UIImage imageWithData:[self thumbnailData]];
+}
+
+- (UIImage *)picture
+{
+    return [UIImage imageWithData:[self pictureData]];
 }
 
 #pragma mark - NSManagedObject stuff
@@ -329,10 +330,10 @@
 {
     [super awakeFromFetch];
     
-    // Extract the thumbnail image from the data.
-    [self setPrimitiveValue:[UIImage imageWithData:[self thumbnailData]] forKey:@"thumbnail"];
-    // Extract the picture image from the data.
-    [self setPrimitiveValue:[UIImage imageWithData:[self pictureData]] forKey:@"picture"];
+//    // Extract the thumbnail image from the data.
+//    [self setPrimitiveValue:[UIImage imageWithData:[self thumbnailData]] forKey:@"thumbnail"];
+//    // Extract the picture image from the data.
+//    [self setPrimitiveValue:[UIImage imageWithData:[self pictureData]] forKey:@"picture"];
 }
 
 @end

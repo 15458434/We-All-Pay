@@ -64,7 +64,11 @@ MCiCloudUse const isiCloudUsed = iCloudIsNotUsed;
     static MCWeAllPayStoreController *sharedStore = nil;
     if (!sharedStore) {
         sharedStore = [[super allocWithZone:nil] init];
-        sharedStore.fetcher = [[ExchangeRateFetcher alloc] init];
+        NSOperationQueue *someQueue = [[NSOperationQueue alloc] init];
+        someQueue.name = @"Fetcher Initialiser";
+        [someQueue addOperationWithBlock:^{
+            sharedStore.fetcher = [[ExchangeRateFetcher alloc] init];
+        }];
     }
     return sharedStore;
 }
@@ -193,8 +197,8 @@ MCiCloudUse const isiCloudUsed = iCloudIsNotUsed;
 #endif
     NSParameterAssert([delegate conformsToProtocol:@protocol(NSFetchedResultsControllerDelegate)]);
     NSFetchRequest *request = [NSFetchRequest fetchRequestWithEntityName:@"MCSharedBill"];
-    [request setSortDescriptors:@[[NSSortDescriptor sortDescriptorWithKey:@"dateCreated" ascending:NO]]];
-    [request setRelationshipKeyPathsForPrefetching:@[ @"payments", @"peoplePresent", @"mainCurrency", @"payments.exchangeRate" ]];
+    request.sortDescriptors = @[[NSSortDescriptor sortDescriptorWithKey:@"dateCreated" ascending:NO]];
+    request.relationshipKeyPathsForPrefetching = @[ @"payments", @"peoplePresent", @"mainCurrency", @"payments.exchangeRate" ];
     NSFetchedResultsController *dataController = [[NSFetchedResultsController alloc] initWithFetchRequest:request
                                                          managedObjectContext:_mainThreadContext
                                                            sectionNameKeyPath:nil
@@ -245,13 +249,10 @@ MCiCloudUse const isiCloudUsed = iCloudIsNotUsed;
     // What entities will be fetched.
     NSFetchRequest *request = [NSFetchRequest fetchRequestWithEntityName:@"MCPerson"];
     // How to sort the data.
-    [request setRelationshipKeyPathsForPrefetching:@[ @"emailAddress", @"payments", @"sharedBill", @"sharedBill.mainCurrency", @"payments.currency" ]];
-    NSSortDescriptor *sortDescriptor = [NSSortDescriptor sortDescriptorWithKey:@"dateCreated" ascending:NO];
-    NSArray *sortDescriptorArray = @[sortDescriptor];
-    [request setSortDescriptors:sortDescriptorArray];
+    request.relationshipKeyPathsForPrefetching = @[ @"emailAddress", @"payments", @"sharedBill", @"sharedBill.mainCurrency", @"payments.currency" ];
+    request.sortDescriptors = @[[NSSortDescriptor sortDescriptorWithKey:@"dateCreated" ascending:NO]];
     // Select only people from tonightsBill.
-    NSPredicate *predicate = [NSPredicate predicateWithFormat:@"ANY sharedBill = %@", tonightsBill];
-    [request setPredicate:predicate];
+    request.predicate = [NSPredicate predicateWithFormat:@"ANY sharedBill = %@", tonightsBill];
     
     // Create the FetchedResultsController.
     NSFetchedResultsController *dataController = [[NSFetchedResultsController alloc] initWithFetchRequest:request managedObjectContext:_mainThreadContext sectionNameKeyPath:nil cacheName:nil];
