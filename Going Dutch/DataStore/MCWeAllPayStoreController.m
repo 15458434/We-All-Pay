@@ -20,6 +20,8 @@
 #import "MCTonightsBillTransfer.h"
 #import "MCThisPaymentProtocol.h"
 
+#import "We_all_pay-Swift.h"
+
 typedef NS_ENUM(BOOL, MCiCloudUse) {
     iCloudIsNotUsed,
     iCloudIsUsed
@@ -36,8 +38,8 @@ MCiCloudUse const isiCloudUsed = iCloudIsNotUsed;
 
 @interface MCWeAllPayStoreController ()
 
-@property (nonatomic, strong) MCxRatesController *xRatesfetchController;
-@property (nonatomic, strong) NSMutableArray *exchangeRateQueue;
+@property (nonatomic, strong) MCxRatesController *xRatesfetchController __deprecated;
+@property (nonatomic, strong) NSMutableArray *exchangeRateQueue __deprecated;
 
 @end
 
@@ -83,6 +85,7 @@ MCiCloudUse const isiCloudUsed = iCloudIsNotUsed;
     static MCWeAllPayStoreController *sharedStore = nil;
     if (!sharedStore) {
         sharedStore = [[super allocWithZone:nil] init];
+        sharedStore.fetcher = [[ExchangeRateFetcher alloc] init];
     }
     return sharedStore;
 }
@@ -181,19 +184,12 @@ MCiCloudUse const isiCloudUsed = iCloudIsNotUsed;
     [[_mainThreadContext undoManager] endUndoGrouping];
     [[_mainThreadContext undoManager] disableUndoRegistration];
     [_mainThreadContext processPendingChanges];
-//    [self saveStore];
-//    NSError *saveError;
-//    BOOL saveSuccesful = [context save:&saveError];
-//    if (!saveSuccesful) {
-//        NSLog(@"Save unsuccesful: %@", [saveError localizedDescription]);
-//    }
 }
 
 - (void)endUndoGroupAndProcessWithoutRegistration
 {
     [[_mainThreadContext undoManager] endUndoGrouping];
     [_mainThreadContext processPendingChanges];
-//    [self saveStore];
 }
 
 - (void)endUndoGroupAndUndo

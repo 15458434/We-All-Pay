@@ -31,7 +31,7 @@
     [newPayment setUniquePaymentId:[MCTools createUniqueIdentifierString]];
     [newPayment setDateCreated:[NSDate date]];
     [newPayment setDateModified:[newPayment dateCreated]];
-    [newPayment setCurrency:[MCCurrency getCurrencySelectedInCurrentLocaleFromContext:context]];
+    [newPayment setCurrency:[MCCurrency generateCurrencyFromSelectedLocaleForContext:context]];
     MCExchangeRate *exchangeRate = [newPayment addExchangeRate];
     [exchangeRate setExchangeRate:@1];
     [exchangeRate setSource:@"Payment Creation"];
@@ -245,16 +245,17 @@
     return [self exchangeRate];
 }
 
-- (void)setNewCurrencyAndAutomaticallyUpdateExchangeRate:(MCCurrency *)newCurrency
+- (void)setNewCurrencyAndAutomaticallyUpdateExchangeRate:(MCCurrency *)newCurrency withCompletionHandler:(void (^)(NSError *))completionHandler
 {
     self.currency = newCurrency;
     self.exchangeRate.fromCurrency = newCurrency;
-    BOOL success = [[self exchangeRate] retrieveExchangeRateFromWeb];
-    if (success) {
-        NSLog(@"ExchangeRate retrieval successful");
-    } else {
-        NSLog(@"ExchangeRate retrieval unsuccesful");
-    }
+    [[self exchangeRate] fetchExchangeRate:^(NSError *error) {
+        if (error) {
+            completionHandler(error);
+            return;
+        }
+        completionHandler(nil);
+    }];
 }
 
 - (NSString *)fullDescriptionOfPayment
@@ -271,19 +272,5 @@
 }
 
 #pragma mark - NSManagedObject stuff
-
-- (void)awakeFromInsert
-{
-    [super awakeFromInsert];
-    
-//    [self setPrimitiveValue:[MCExchangeRate addExchangeRateForContext:[self managedObjectContext]] forKey:@"exchangeRate"];
-}
-
-//- (void)didChangeValueForKey:(NSString *)key
-//{
-//    if ([key isEqualToString:@"peopleSharingPayment"]) {
-//        [self recalculateAveragePeopleOweAndStore];
-//    }
-//}
 
 @end

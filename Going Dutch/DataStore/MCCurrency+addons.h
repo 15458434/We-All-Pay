@@ -12,12 +12,13 @@
 
 @interface MCCurrency (addons)
 
-+ (MCCurrency *) getCurrencySelectedInCurrentLocaleFromContext:(NSManagedObjectContext *)context;
++ (MCCurrency *) getCurrencySelectedInCurrentLocaleFromContext:(NSManagedObjectContext *)context __deprecated;
 + (MCCurrency *)generateCurrencyFromSelectedLocaleForContext:(NSManagedObjectContext *)context;
 + (void) addAllAvailableCurrenciesToContext:(NSManagedObjectContext *)context;
-+ (MCCurrency *) getCurrencyWithCode:(NSString *)code FromContext:(NSManagedObjectContext *)context;
++ (MCCurrency *) getCurrencyWithCode:(NSString *)code FromContext:(NSManagedObjectContext *)context __deprecated;
 
-+ (MCCurrency *)getCurrencyFrom:(XRCurrency *)xrCurrency FromContext:(NSManagedObjectContext *)context;
++ (MCCurrency *)getCurrencyFrom:(XRCurrency *)xrCurrency FromContext:(NSManagedObjectContext *)context __deprecated;
++ (MCCurrency *)currencyFrom:(NSString *)code fromContext:(NSManagedObjectContext *)context;
 
 - (NSNumberFormatter *)numberFormatter;
 

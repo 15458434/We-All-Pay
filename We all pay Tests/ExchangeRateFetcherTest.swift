@@ -12,7 +12,7 @@ import XCTest
 extension ExchangeRateFetcher {
     var allCurrenciesAvailable: Bool {
         for currency in currencyController.currencies {
-            if !isCurrencyCodeAvailableInRates(currency["code"]!) {
+            if !isCurrencyCodeAvailableInRates(currency["code"]) {
                 return false
             }
         }
@@ -79,6 +79,20 @@ class ExchangeRateFetcherTest: XCTestCase {
                 expectation.fulfill()
             })
         }
+        waitForExpectationsWithTimeout(90, handler: { (error) -> Void in
+            XCTAssertNil(error, "Timeout error: \(error)")
+        })
+    }
+    
+    func testCodeSubscript() {
+        let expectation = self.expectationWithDescription("codeSubscript")
+        let codeSubscriptFetcher = ExchangeRateFetcher()
+        codeSubscriptFetcher.fetchFromOpenExchangeRates { (baseCurrency, rates, error) -> () in
+            XCTAssertNil(error, "Error fetching exchangeRates")
+            XCTAssertNotNil(codeSubscriptFetcher["EUR"], "ExchangeRate should be valid")
+            expectation.fulfill()
+        }
+        
         waitForExpectationsWithTimeout(90, handler: { (error) -> Void in
             XCTAssertNil(error, "Timeout error: \(error)")
         })

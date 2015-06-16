@@ -8,11 +8,8 @@
 
 import Foundation
 
-public typealias CurrencyISOCode = String
-public typealias ExchangeRateValue = Double
-
 class ExchangeRateFetcher: NSObject {
-    internal let currencyController = CurrencyController()
+    let currencyController: CurrencyController = CurrencyController()
     internal private(set) var baseCurrencyCode: String!
     internal private(set) var rates: Dictionary<String, Double>!
     internal private(set) var date: NSDate!
@@ -33,13 +30,13 @@ class ExchangeRateFetcher: NSObject {
         }
     }
     
-    func calculateExchangeRate(fromCode: CurrencyISOCode, toCode: CurrencyISOCode) -> ExchangeRateValue {
+    func calculateExchangeRate(fromCode: String, toCode: String) -> Double {
         let fromToBaseRate = rates[fromCode]!
         let toToBaseRate = rates[toCode]!
         return toToBaseRate / fromToBaseRate
     }
     
-    func exchangeRate(fromCode: CurrencyISOCode, toCode: CurrencyISOCode, completionHandler: (fromCode: CurrencyISOCode, toCode: CurrencyISOCode, exchangeRate: ExchangeRateValue!, error: NSError!) -> ()) {
+    func exchangeRate(fromCode: String, toCode: String, completionHandler: (fromCode: String, toCode: String, exchangeRate: NSNumber!, error: NSError!) -> ()) {
         if isLastFetchOlderThanAnHour {
             fetchFromOpenExchangeRates({ (baseCurrency, rates, error) -> () in
                 if error != nil {
@@ -55,7 +52,7 @@ class ExchangeRateFetcher: NSObject {
         }
     }
     
-    func fetchFromOpenExchangeRates(completionHandler: (baseCurrency: CurrencyISOCode!, rates: Dictionary<String, Double>!, error: NSError!) -> ()) {
+    func fetchFromOpenExchangeRates(completionHandler: (baseCurrency: String!, rates: Dictionary<String, Double>!, error: NSError!) -> ()) {
         if isFetching {
             let error = NSError(domain: "ExchangeRateFetcher", code: 1, userInfo: ["reason": "Already fetching"])
             completionHandler(baseCurrency: nil, rates: nil, error: error)
@@ -109,12 +106,16 @@ class ExchangeRateFetcher: NSObject {
         task.resume()
     }
     
-    func isCurrencyCodeAvailableInRates(code: CurrencyISOCode) -> Bool {
+    func isCurrencyCodeAvailableInRates(code: String) -> Bool {
         if let exchangeRate = rates[code] {
             return true
         } else {
             println("CurrencyCode: \(code) not present.")
             return false
         }
+    }
+    
+    internal subscript(code: String) -> Double {
+        return rates[code]!
     }
 }

@@ -162,7 +162,6 @@
 {
     dispatch_once(&executeOnlyOnce, ^{
         [self executeOnlyOnceDuringStartup];
-        [MCWeAllPayStoreController prepareCurrencyStoreIfNecessary];
         [[MCWeAllPayStoreController defaultStore] openStore:nil];
         
     });
@@ -177,28 +176,7 @@
 {
     dispatch_once(&executeOnlyOnce, ^{
         [self executeOnlyOnceDuringStartup];
-        [MCWeAllPayStoreController prepareCurrencyStoreIfNecessary];
         [[MCWeAllPayStoreController defaultStore] openStore:nil];
-        if (SYSTEM_VERSION_GREATER_THAN_OR_EQUAL_TO(@"8.0")) {
-            NSOperationQueue *queue = [[NSOperationQueue alloc] init];
-            [queue setQualityOfService:NSQualityOfServiceBackground];
-            [queue addOperationWithBlock:^{
-                [[XRCurrencyStoreController sharedStore] backgroundContext];
-                [[XRCurrencyStoreController sharedStore] mainQueueContext];
-#if DEBUG
-                NSLog(@"Done creating contexts for XRCurrencyController on iOS 8");
-#endif
-            }];
-        } else {
-            dispatch_queue_t someBackgroundQueue = dispatch_queue_create("InitiateBackGroundContext for XRCurrencyStoreController", NULL);
-            dispatch_async(someBackgroundQueue, ^{
-                [[XRCurrencyStoreController sharedStore] backgroundContext];
-                [[XRCurrencyStoreController sharedStore] mainQueueContext];
-#if DEBUG
-                NSLog(@"Done creating contexts for XRCurrencyController on iOS 7");
-#endif
-            });
-        }
     });
     [[MCStoreInterface defaultStoreInterface] validateProductIdentifiers];
     

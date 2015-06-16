@@ -22,7 +22,7 @@ NSString * const cellIdentifier = @"MCSelectCurrencyTableViewCell_iPhone";
 
 @interface MCSelectCurrencyTableViewController () <UISearchDisplayDelegate, UISearchBarDelegate>
 
-@property (nonatomic, strong) NSFetchedResultsController *dataController;
+@property (nonatomic, strong) NSArray *currencies;
 @property (nonatomic, strong) NSMutableArray *sections;
 @property (nonatomic, strong) NSFetchedResultsController *searchDataController;
 @property (nonatomic, strong) NSMutableArray *searchResults;
@@ -47,7 +47,7 @@ NSString * const cellIdentifier = @"MCSelectCurrencyTableViewCell_iPhone";
 	[_searchResults removeAllObjects];
 	// Filter the array using NSPredicate
     NSPredicate *predicate = [NSPredicate predicateWithFormat:@"name contains[c] %@ || code contains[c] %@",searchText, searchText];
-    NSArray *tempArray = [[_dataController fetchedObjects] filteredArrayUsingPredicate:predicate];
+    NSArray *tempArray = [_currencies filteredArrayUsingPredicate:predicate];
 //    if (![scope isEqualToString:@"All"]) {
 //        // Further filter the array with the scope
 //        NSPredicate *scopePredicate = [NSPredicate predicateWithFormat:@"SELF.category contains[c] %@",scope];
@@ -56,17 +56,22 @@ NSString * const cellIdentifier = @"MCSelectCurrencyTableViewCell_iPhone";
     _searchResults = [NSMutableArray arrayWithArray:tempArray];
 }
 
-- (void)putIntThisPayment:(XRCurrency *)xrCurrency
-{
-    // If there is a currency on this payment update it with the new stuff.
-    NSManagedObjectContext *mainQueueContext = [[MCWeAllPayStoreController defaultStore] mainThreadContext];
-    MCCurrency *newCurrency = [MCCurrency getCurrencyFrom:xrCurrency FromContext:mainQueueContext];
-    MCCurrency *oldCurrency = [_thisPayment currency];
+- (void)addNewCurrencyToThisPayment:(NSString *)code withCompletionHandler:(void (^)(NSError *error))completion {
+    NSManagedObjectContext *mainThreadContext = [[MCWeAllPayStoreController defaultStore] mainThreadContext];
+    MCCurrency *newCurrency = [MCCurrency currencyFrom:code fromContext:mainThreadContext];
+    MCCurrency *oldCurrency = _thisPayment.currency;
     _thisPayment.currency = newCurrency;
     if (oldCurrency.sharedBill.count == 0 && oldCurrency.payment.count == 0) {
-        [mainQueueContext deleteObject:oldCurrency];
+        [mainThreadContext deleteObject:oldCurrency];
     }
-    [_thisPayment setNewCurrencyAndAutomaticallyUpdateExchangeRate:newCurrency];
+    [_thisPayment setNewCurrencyAndAutomaticallyUpdateExchangeRate:newCurrency withCompletionHandler:^(NSError *error) {
+        if (error) {
+            NSLog(@"Error fetching ExchangeRate: %@", error);
+            completion(error);
+            return;
+        }
+        completion(nil);
+    }];
 }
 
 - (void)setObjects:(NSArray *)objects {
@@ -114,12 +119,8 @@ NSString * const cellIdentifier = @"MCSelectCurrencyTableViewCell_iPhone";
     // Uncomment the following line to display an Edit button in the navigation bar for this view controller.
     // self.navigationItem.rightBarButtonItem = self.editButtonItem;
     
-    _dataController = [[XRCurrencyStoreController sharedStore] getFetchedResultsControllerForDelegate:nil];
-    NSError *fetchError;
-    if (![_dataController performFetch:&fetchError]) {
-        NSLog(@"Error fetching XRCurrencies: %@", fetchError);
-    }
-    [self setObjects:[_dataController fetchedObjects]];
+    _currencies = [[[[MCWeAllPayStoreController defaultStore] fetcher] currencyController] currencies];
+    [self setObjects:_currencies];
 }
 
 - (void)didReceiveMemoryWarning
@@ -144,13 +145,21 @@ NSString * const cellIdentifier = @"MCSelectCurrencyTableViewCell_iPhone";
 
 - (void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath
 {
-    XRCurrency *thisCellsCurrency;
+    NSDictionary *thisCellsCurrency;
     if (tableView != [[self searchDisplayController] searchResultsTableView]) {
         thisCellsCurrency = _sections[[indexPath section]][[indexPath row]];
-        [self putIntThisPayment:thisCellsCurrency];
+        [self addNewCurrencyToThisPayment:thisCellsCurrency[@"code"] withCompletionHandler:^(NSError *error) {
+            if (error) {
+                NSLog(@"Error changing currency: %@", error);
+            }
+        }];
     } else {
         thisCellsCurrency = [_searchResults objectAtIndex:[indexPath row]];
-        [self putIntThisPayment:thisCellsCurrency];
+        [self addNewCurrencyToThisPayment:thisCellsCurrency[@"code"] withCompletionHandler:^(NSError *error) {
+            if (error) {
+                NSLog(@"Error changing currency: %@", error);
+            }
+        }];
     }
     [_thisPayment recalculateAveragePeopleOweAndStore];
     [[[self navigationController] presentingViewController] dismissViewControllerAnimated:YES completion:nil];
@@ -209,9 +218,8 @@ NSString * const cellIdentifier = @"MCSelectCurrencyTableViewCell_iPhone";
         cell = [[MCSelectCurrencyTableViewCell_iPhone alloc] initWithStyle:UITableViewCellStyleDefault reuseIdentifier:cellIdentifier];
     }
 
-    XRCurrency *thisCellsCurrency;
+    Currency *thisCellsCurrency;
     if (tableView != [[self searchDisplayController] searchResultsTableView]) {
-//        thisCellsCurrency = [_dataController objectAtIndexPath:indexPath];
         thisCellsCurrency = _sections[[indexPath section]][[indexPath row]];
     } else {
         thisCellsCurrency = [_searchResults objectAtIndex:[indexPath row]];

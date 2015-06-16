@@ -16,6 +16,8 @@
 #import "MCCurrency+addons.h"
 #import "MCExchangeRate+addons.h"
 
+#import "We_all_pay-Swift.h"
+
 @implementation MCSharedBill (addons)
 
 #pragma mark - New in this class.
@@ -400,10 +402,8 @@
 {
     // Fetch the sum of all paymentPresences for person
     NSFetchRequest *request = [NSFetchRequest fetchRequestWithEntityName:@"MCPaymentPresence"];
-    NSPredicate *predicate = [NSPredicate predicateWithFormat:@"payment.onWhichBill = %@ AND person = %@ AND isPersonPresent = %@", self, person, @YES];
-    [request setPredicate:predicate];
-    NSSortDescriptor *sortDescriptor = [NSSortDescriptor sortDescriptorWithKey:@"person" ascending:YES];
-    [request setSortDescriptors:@[sortDescriptor]];
+    request.predicate = [NSPredicate predicateWithFormat:@"payment.onWhichBill = %@ AND person = %@ AND isPersonPresent = %@", self, person, @YES];
+    request.sortDescriptors = @[[NSSortDescriptor sortDescriptorWithKey:@"person" ascending:YES]];
 
     NSError *error;
     NSArray *results = [[self managedObjectContext] executeFetchRequest:request error:&error];
@@ -477,12 +477,10 @@
 {
     // Fetch all exchangeRates that are invalid.
     NSFetchRequest *request = [[NSFetchRequest alloc] initWithEntityName:@"MCExchangeRate"];
-    NSSortDescriptor *sortDescriptor = [NSSortDescriptor sortDescriptorWithKey:@"dateCreated" ascending:YES];
-    request.sortDescriptors = @[sortDescriptor];
+    request.sortDescriptors = @[[NSSortDescriptor sortDescriptorWithKey:@"dateCreated" ascending:YES]];
     
     NSNumber *exchangeRateValidStatus = [NSNumber numberWithShort:valid];
-    NSPredicate *predicate = [NSPredicate predicateWithFormat:@"payment.onWhichBill = %@ and status != %@", self, exchangeRateValidStatus];
-    request.predicate = predicate;
+    request.predicate = [NSPredicate predicateWithFormat:@"payment.onWhichBill = %@ and status != %@", self, exchangeRateValidStatus];
     NSError *fetchError;
     NSUInteger *amountOfInvalidExchangeRates = [[self managedObjectContext] countForFetchRequest:request error:&fetchError];
     if (fetchError) {
@@ -499,8 +497,7 @@
 {
     // Fetch all exchangeRates that are invalid.
     NSFetchRequest *request = [[NSFetchRequest alloc] initWithEntityName:@"MCExchangeRate"];
-    NSSortDescriptor *sortDescriptor = [NSSortDescriptor sortDescriptorWithKey:@"dateCreated" ascending:YES];
-    request.sortDescriptors = @[sortDescriptor];
+    request.sortDescriptors = @[[NSSortDescriptor sortDescriptorWithKey:@"dateCreated" ascending:YES]];
     
     NSNumber *exchangeRateValidStatus = [NSNumber numberWithShort:valid];
     request.predicate = [NSPredicate predicateWithFormat:@"payment.onWhichBill = %@ and status != %@", self, exchangeRateValidStatus];
@@ -509,13 +506,11 @@
     if (fetchError) {
         NSLog(@"Something went wrong fetching invalid ExchangeRates: %@", [fetchError localizedDescription]);
     }
-    for (MCExchangeRate *exchangeRate in arrayOfInvalidExchangeRatesOfThisSharedBill) {
-        [exchangeRate retrieveExchangeRateFromWebWithCompletionHandler:^(NSDictionary *exchangeRateResult) {
-            if ([self areAllExchangeRatesValid]) {
-                completionBlock([self solveWhoHasToPayWhoFromThisBill]);
-            }
-        }];
-    }
+    [[[MCWeAllPayStoreController defaultStore] fetcher] fetchAll:arrayOfInvalidExchangeRatesOfThisSharedBill completionHandler:^(NSError * error) {
+        if ([self areAllExchangeRatesValid]) {
+            completionBlock([self solveWhoHasToPayWhoFromThisBill]);
+        }
+    }];
 }
 
 - (NSArray *)originalSolveWhoHasToPayWhoFromThisBill

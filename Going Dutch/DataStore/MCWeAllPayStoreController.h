@@ -13,6 +13,7 @@
 @class MCPerson;
 @class MCSharedBill;
 @class MCExchangeRate;
+@class ExchangeRateFetcher;
 
 /*
 The We All Pay Store Controller is designed to do writing in the background and fetching on the mainThread. This way write actions won't interfere with the user interface.
@@ -26,8 +27,10 @@ The We All Pay Store Controller is designed to do writing in the background and 
 @property (nonatomic, strong, readonly) NSPersistentStoreCoordinator *persistentStoreCoordinator;
 @property (nonatomic, strong, readonly) NSManagedObjectModel *managedObjectModel;
 
+@property (nonatomic, strong) ExchangeRateFetcher *fetcher;
+
 + (MCWeAllPayStoreController *)defaultStore;
-+ (void)prepareCurrencyStoreIfNecessary;
++ (void)prepareCurrencyStoreIfNecessary __deprecated;
 
 - (BOOL)isDocumentStateNormal;
 
@@ -47,7 +50,7 @@ The We All Pay Store Controller is designed to do writing in the background and 
 
 #pragma mark - Webinterface
 
-- (void)updateXRate:(MCExchangeRate *)exchangeRate withCompletionHandler:(void (^)(NSDictionary *exchangeRateResult))completionBlock;
+- (void)updateXRate:(MCExchangeRate *)exchangeRate withCompletionHandler:(void (^)(NSDictionary *exchangeRateResult))completionBlock __deprecated;
 
 #pragma mark - TableViewSources
 - (NSFetchedResultsController *)allTripsDataControllerForDelegate:(id)delegate;

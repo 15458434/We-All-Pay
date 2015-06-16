@@ -14,14 +14,13 @@
 #import "MCSharedBill+addons.h"
 
 #import "MCWeAllPayStoreController.h"
-#import "XRCurrencyStoreController.h"
-#import "XRCurrency.h"
+#import "We_all_pay-Swift.h"
 
 NSString * const currencyCellIdentifier_iPad = @"MCSelectCurrencyTableViewCell_iPad";
 
 @interface MCSelectCurrencyTableViewController_iPad () <UISearchBarDelegate, UISearchDisplayDelegate>
 
-@property (nonatomic, strong) NSFetchedResultsController *dataController;
+@property (nonatomic, strong) NSArray *currencies;
 @property (nonatomic, strong) NSMutableArray *sections;
 @property (nonatomic, strong) NSMutableArray *searchResults;
 
@@ -58,37 +57,18 @@ NSString * const currencyCellIdentifier_iPad = @"MCSelectCurrencyTableViewCell_i
 - (void)filterContentForSearchText:(NSString*)searchText scope:(NSString*)scope {
 	[_searchResults removeAllObjects];
     NSPredicate *predicate = [NSPredicate predicateWithFormat:@"name contains[c] %@ || code contains[c] %@",searchText, searchText];
-    NSArray *tempArray = [[_dataController fetchedObjects] filteredArrayUsingPredicate:predicate];
+    NSArray *tempArray = [_currencies filteredArrayUsingPredicate:predicate];
     _searchResults = [NSMutableArray arrayWithArray:tempArray];
 }
 
 #pragma mark - Inherited from super
 
-- (id)initWithStyle:(UITableViewStyle)style
-{
-    self = [super initWithStyle:style];
-    if (self) {
-        // Custom initialization
-    }
-    return self;
-}
-
 - (void)viewDidLoad
 {
     [super viewDidLoad];
     
-    // Uncomment the following line to preserve selection between presentations.
-    // self.clearsSelectionOnViewWillAppear = NO;
-    
-    // Uncomment the following line to display an Edit button in the navigation bar for this view controller.
-    // self.navigationItem.rightBarButtonItem = self.editButtonItem;
-//    _dataController = [[MCWeAllPayStoreController defaultStore] availableCurrencyControllerForDelegate:self];
-    _dataController = [[XRCurrencyStoreController sharedStore] getFetchedResultsControllerForDelegate:self];
-    NSError *fetchError;
-    if (![_dataController performFetch:&fetchError]) {
-        NSLog(@"Error fetching currencies: %@", fetchError);
-    }
-    [self setObjects:[_dataController fetchedObjects]];
+    _currencies = [[[[MCWeAllPayStoreController defaultStore] fetcher] currencyController] currencies];
+    [self setObjects:_currencies];
 }
 
 - (void)viewWillDisappear:(BOOL)animated
@@ -137,14 +117,18 @@ NSString * const currencyCellIdentifier_iPad = @"MCSelectCurrencyTableViewCell_i
 #if DEBUG
     NSLog(@"%@ didSelectRowAtIndexPath", self);
 #endif
-    XRCurrency *selectedCurrency;
+    NSDictionary *selectedCurrency;
     NSManagedObjectContext *context = [[MCWeAllPayStoreController defaultStore] mainThreadContext];
     if (tableView != [[self searchDisplayController] searchResultsTableView]) {
         selectedCurrency = _sections[[indexPath section]][[indexPath row]];
-        [_thisPayment setNewCurrencyAndAutomaticallyUpdateExchangeRate:[MCCurrency getCurrencyFrom:selectedCurrency FromContext:context]];
+        [_thisPayment setNewCurrencyAndAutomaticallyUpdateExchangeRate:[MCCurrency currencyFrom:selectedCurrency[@"code"] fromContext:context] withCompletionHandler:^(NSError *error) {
+            NSLog(@"Error fetching exchangeRate: %@", error);
+        }];
     } else {
         selectedCurrency = [_searchResults objectAtIndex:[indexPath row]];
-        [_thisPayment setNewCurrencyAndAutomaticallyUpdateExchangeRate:[MCCurrency getCurrencyFrom:selectedCurrency FromContext:context]];
+        [_thisPayment setNewCurrencyAndAutomaticallyUpdateExchangeRate:[MCCurrency currencyFrom:selectedCurrency[@"code"] fromContext:context] withCompletionHandler:^(NSError *error) {
+            NSLog(@"Error fetching exchangeRate: %@", error);
+        }];
     }
     [_thisPayment recalculateAveragePeopleOweAndStore];
     self.dismissMe();
@@ -198,17 +182,17 @@ NSString * const currencyCellIdentifier_iPad = @"MCSelectCurrencyTableViewCell_i
         cell = [[MCSelectCurrencyTableViewCell_iPad alloc] initWithStyle:UITableViewCellStyleDefault reuseIdentifier:currencyCellIdentifier_iPad];
     }
     
-    XRCurrency *thisCellsCurrency;
+    NSDictionary *thisCellsCurrency;
     if (tableView != [[self searchDisplayController] searchResultsTableView]) {
-//        thisCellsCurrency = [_dataController objectAtIndexPath:indexPath];
         thisCellsCurrency = _sections[[indexPath section]][[indexPath row]];
     } else {
         thisCellsCurrency = [_searchResults objectAtIndex:[indexPath row]];
     }
-    cell.currencyNameLabel.text = [thisCellsCurrency name];
-    cell.currencySymbolLabel.text = [thisCellsCurrency symbol];
+    cell.currencyNameLabel.text = thisCellsCurrency[@"name"];
+    NSString *currencySymbol = [[[[MCWeAllPayStoreController defaultStore] fetcher] currencyController] currencySymbol:thisCellsCurrency[@"code"]];
+    cell.currencySymbolLabel.text = currencySymbol;
     
-    if ([[[_thisPayment currency] code] isEqualToString:[thisCellsCurrency code]]) {
+    if ([[[_thisPayment currency] code] isEqualToString:currencySymbol]) {
         cell.accessoryType = UITableViewCellAccessoryCheckmark;
     } else {
         cell.accessoryType = UITableViewCellAccessoryNone;

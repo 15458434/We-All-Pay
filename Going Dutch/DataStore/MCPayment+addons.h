@@ -38,7 +38,7 @@
 - (void)putMoneyValueInCurrencyAsAString:(NSString *)moneyString;
 - (NSNumber *)moneyInMainCurrency;
 - (MCExchangeRate *)addExchangeRate;
-- (void)setNewCurrencyAndAutomaticallyUpdateExchangeRate:(MCCurrency *)newCurrency;
+- (void)setNewCurrencyAndAutomaticallyUpdateExchangeRate:(MCCurrency *)newCurrency withCompletionHandler:(void (^)(NSError *error))completionHandler;
 
 - (NSString *)fullDescriptionOfPayment;
 
