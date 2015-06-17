@@ -167,7 +167,7 @@
 {
     double peoplePresentOnThisPayment = [[self peoplePresentOnThisPayment] doubleValue];
     double result = [[self money] doubleValue] / peoplePresentOnThisPayment;
-    return [NSNumber numberWithDouble:result];
+    return @(result);
 }
 
 - (void)recalculateAveragePeopleOweAndStore

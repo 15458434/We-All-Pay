@@ -434,7 +434,7 @@ typedef NS_ENUM(BOOL, MCXRatesMissing) {
             
             MCPerson *person = [_peoplePresent objectAtIndex:[indexPath row]];
             [[cell whoPaidHowMuchLabel] setText:[person getFullName]];
-            NSNumber *sumSpentByPerson = [_tonightsBill totalSumPaidBy:person];
+            NSNumber *sumSpentByPerson = person.totalSumPaid;
             NSNumberFormatter *nf = [[_tonightsBill mainCurrency] numberFormatter];
             [nf setNumberStyle:NSNumberFormatterCurrencyStyle];
             [nf setFormatterBehavior:NSNumberFormatterBehaviorDefault];

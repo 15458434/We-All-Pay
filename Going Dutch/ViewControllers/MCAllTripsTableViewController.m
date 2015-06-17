@@ -142,6 +142,7 @@ typedef NS_ENUM(BOOL, MCTonightsBillStatus) {
     if (!_dataController) {
         _dataController = [[MCWeAllPayStoreController defaultStore] allTripsDataControllerForDelegate:self];
         [self performFetch];
+        [[self tableView] reloadData];
     }
     
     if (_isEmptyMessageShownInstantForFirstBoot == false) {
@@ -151,7 +152,6 @@ typedef NS_ENUM(BOOL, MCTonightsBillStatus) {
         [self setEmptyMessage];
     }
     
-    [[self tableView] reloadData];
     [[self navigationController] setToolbarHidden:YES animated:YES];
 }
 
@@ -296,14 +296,12 @@ typedef NS_ENUM(BOOL, MCTonightsBillStatus) {
     if ([thisTrip areAllExchangeRatesValid]) {
         
         NSNumberFormatter *nf = [[thisTrip mainCurrency] numberFormatter];
-        [nf setNumberStyle:NSNumberFormatterCurrencyStyle];
         NSString *moneyString = [nf stringFromNumber:[thisTrip totalSumOfMoneyOfThisSharedBill]];
         [[allTripsTableViewCell totalCostLabel] setHidden:NO];
         [[allTripsTableViewCell waitingForXRatesIndicator] stopAnimating];
         [[allTripsTableViewCell totalCostLabel] setText:moneyString];
     } else {
-        NSNumberFormatter *nf = [[NSNumberFormatter alloc] init];
-        [nf setNumberStyle:NSNumberFormatterCurrencyStyle];
+        NSNumberFormatter *nf = [[thisTrip mainCurrency] numberFormatter];
         NSString *moneyString = [nf stringFromNumber:[thisTrip totalSumOfMoneyOfThisSharedBill]];
         [[allTripsTableViewCell totalCostLabel] setText:moneyString];
         [[allTripsTableViewCell totalCostLabel] setHidden:YES];

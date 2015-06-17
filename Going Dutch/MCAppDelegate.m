@@ -67,10 +67,13 @@
 
 - (void)executeOnlyOnceDuringStartup
 {
-    [self removeOldCurrencyStore];
     // Override point for customization after application launch.
-    NSLog(@"%@ running iOS %@", [[UIDevice currentDevice] model], [[UIDevice currentDevice] systemVersion]);
-    NSLog(@"I dedicate this program to Ilse Béguin, the most wonderful woman in the world who brought herself into my life, when I was developing the first version App.");
+    NSOperationQueue *someQueue = [[NSOperationQueue alloc] init];
+    someQueue.name = @"Logging start";
+    [someQueue addOperationWithBlock:^{
+        NSLog(@"%@ running iOS %@", [[UIDevice currentDevice] model], [[UIDevice currentDevice] systemVersion]);
+        NSLog(@"I dedicate this program to Ilse Béguin, the most wonderful woman in the world who brought herself into my life, when I was developing the first version App.");
+    }];
 #if DEBUG
     NSLocale *locale = [NSLocale currentLocale];
     NSString *languageCode = [locale objectForKey:NSLocaleLanguageCode];
@@ -204,6 +207,7 @@
         bgTask = UIBackgroundTaskInvalid;
     }];
     [[MCWeAllPayStoreController defaultStore] savebackgroundContext];
+    [self removeOldCurrencyStore];
 }
 
 - (void)applicationWillEnterForeground:(UIApplication *)application

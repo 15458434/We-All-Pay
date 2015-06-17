@@ -18,8 +18,6 @@
 #import "MCCurrency+addons.h"
 #import "MCExchangeRate+addons.h"
 
-#import "XRCurrencyStoreController.h"
-
 @interface MCSharedBillAddOnsTest : XCTestCase
 
 @property (nonatomic, strong) MCWeAllPayStoreController *mainController;
@@ -88,7 +86,7 @@
     XCTAssertTrue([movie areTherePeople], @"There are no people when 4 people should have been added?");
     XCTAssertTrue([movie totalAmountOfPeoplePresent] == 4, @"4 people were added, but the returned amount it not 4?");
     XCTAssertTrue([movie totalAmountOfPeopleWhoHavePaid] == 2, @"Total amount of people who have paid is not 3");
-    XCTAssertTrue([[movie totalSumPaidBy:liekemovie] doubleValue] == 40.40, @"Total sum is wrong when adding multiple payments.");
+    XCTAssertTrue([liekemovie.totalSumPaid doubleValue] == 40.40, @"Total sum is wrong when adding multiple payments.");
     XCTAssertTrue([[movie totalSumOfMoneyOfThisSharedBill] doubleValue] == 8.90*4+34.40+6.00, @"Total sum is wrong when adding multiple payments.");
     XCTAssertTrue([movie hasPersonPaidSomething:liekemovie], @"This person should have paid something.");
     XCTAssertTrue([movie hasPersonPaidSomething:markmovie], @"This person should have paid something.");

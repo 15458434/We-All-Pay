@@ -198,7 +198,7 @@ MCiCloudUse const isiCloudUsed = iCloudIsNotUsed;
     NSParameterAssert([delegate conformsToProtocol:@protocol(NSFetchedResultsControllerDelegate)]);
     NSFetchRequest *request = [NSFetchRequest fetchRequestWithEntityName:@"MCSharedBill"];
     request.sortDescriptors = @[[NSSortDescriptor sortDescriptorWithKey:@"dateCreated" ascending:NO]];
-    request.relationshipKeyPathsForPrefetching = @[ @"payments", @"peoplePresent", @"mainCurrency", @"payments.exchangeRate" ];
+    request.relationshipKeyPathsForPrefetching = @[ @"payments", @"peoplePresent", @"mainCurrency", @"payments.exchangeRate", @"payments.peopleSharingPayment" ];
     NSFetchedResultsController *dataController = [[NSFetchedResultsController alloc] initWithFetchRequest:request
                                                          managedObjectContext:_mainThreadContext
                                                            sectionNameKeyPath:nil
@@ -229,11 +229,6 @@ MCiCloudUse const isiCloudUsed = iCloudIsNotUsed;
     
     // Create the FetchedResultsController.
     NSFetchedResultsController *dataController = [[NSFetchedResultsController alloc] initWithFetchRequest:request managedObjectContext:_mainThreadContext sectionNameKeyPath:nil cacheName:nil];
-    NSError *error;
-    BOOL success = [dataController performFetch:&error];
-    if (!success) {
-        NSLog(@"Something went wrong fetching the payments");
-    }
     [dataController setDelegate:delegate];
     return dataController;
 }
@@ -257,11 +252,6 @@ MCiCloudUse const isiCloudUsed = iCloudIsNotUsed;
     // Create the FetchedResultsController.
     NSFetchedResultsController *dataController = [[NSFetchedResultsController alloc] initWithFetchRequest:request managedObjectContext:_mainThreadContext sectionNameKeyPath:nil cacheName:nil];
     [dataController setDelegate:delegate];
-    NSError *error;
-    BOOL success = [dataController performFetch:&error];
-    if (!success) {
-        NSLog(@"Something went wrong");
-    }
     return dataController;
 }
 
