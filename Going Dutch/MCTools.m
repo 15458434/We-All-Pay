@@ -15,14 +15,6 @@ BOOL const showAdsInDebugVersion = NO;
 
 @implementation MCTools
 
-+ (NSString *)createUniqueIdentifierString
-{
-    CFUUIDRef UUID = CFUUIDCreate(kCFAllocatorDefault);
-    CFStringRef UUIDString = CFUUIDCreateString(kCFAllocatorDefault, UUID);
-    CFRelease(UUID);
-    return (__bridge_transfer NSString *)UUIDString;
-}
-
 + (void)setAdBannerIfNotPaid:(BOOL)show forViewController:(UIViewController *)viewController
 {
     if ([[[UIDevice currentDevice] model] isEqualToString:@"iPad"] && [[UIDevice currentDevice] userInterfaceIdiom] == UIUserInterfaceIdiomPhone) {

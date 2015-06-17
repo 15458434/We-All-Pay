@@ -32,12 +32,12 @@
 {
     MCSharedBill *sharedBill;
     sharedBill = [NSEntityDescription insertNewObjectForEntityForName:@"MCSharedBill" inManagedObjectContext:context];
-    [sharedBill setUniqueBillId:[MCTools createUniqueIdentifierString]];
-    [sharedBill setHasTheMailBeenSent:@NO];
-    NSDate *nu = [NSDate date];
-    [sharedBill setDateCreated:nu];
-    [sharedBill setDateModified:nu];
-    [sharedBill setMainCurrency:[MCCurrency generateCurrencyFromSelectedLocaleForContext:context]];
+    sharedBill.uniqueBillId = [[NSUUID UUID] UUIDString];
+    sharedBill.hasTheMailBeenSent = @NO;
+    NSDate *now = [NSDate date];
+    sharedBill.dateCreated = now;
+    sharedBill.dateModified = now;
+    sharedBill.mainCurrency = [MCCurrency generateCurrencyFromSelectedLocaleForContext:context];
     return sharedBill;
 }
 

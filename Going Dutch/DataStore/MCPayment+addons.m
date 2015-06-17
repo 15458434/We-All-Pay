@@ -28,13 +28,13 @@
 {
     MCPayment *newPayment;
     newPayment = [NSEntityDescription insertNewObjectForEntityForName:@"MCPayment" inManagedObjectContext:context];
-    [newPayment setUniquePaymentId:[MCTools createUniqueIdentifierString]];
-    [newPayment setDateCreated:[NSDate date]];
-    [newPayment setDateModified:[newPayment dateCreated]];
-    [newPayment setCurrency:[MCCurrency generateCurrencyFromSelectedLocaleForContext:context]];
+    newPayment.uniquePaymentId = [[NSUUID UUID] UUIDString];
+    newPayment.dateCreated = [NSDate date];
+    newPayment.dateModified = newPayment.dateCreated;
+    newPayment.currency = [MCCurrency generateCurrencyFromSelectedLocaleForContext:context];
     MCExchangeRate *exchangeRate = [newPayment addExchangeRate];
-    [exchangeRate setExchangeRate:@1];
-    [exchangeRate setSource:@"Payment Creation"];
+    exchangeRate.exchangeRate = @1;
+    exchangeRate.source = @"Payment Creation";
     return newPayment;
 }
 
