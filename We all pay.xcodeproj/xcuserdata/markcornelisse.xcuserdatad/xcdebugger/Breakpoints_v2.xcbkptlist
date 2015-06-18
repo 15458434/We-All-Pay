@@ -39,5 +39,83 @@
             stopOnStyle = "0">
          </BreakpointContent>
       </BreakpointProxy>
+      <BreakpointProxy
+         BreakpointExtensionID = "Xcode.Breakpoint.FileBreakpoint">
+         <BreakpointContent
+            shouldBeEnabled = "Yes"
+            ignoreCount = "0"
+            continueAfterRunningActions = "No"
+            filePath = "WeAllPayTests/MCSharedBillAddOnsTest.m"
+            timestampString = "456297455.188147"
+            startingColumnNumber = "9223372036854775807"
+            endingColumnNumber = "9223372036854775807"
+            startingLineNumber = "158"
+            endingLineNumber = "158"
+            landmarkName = "-testToCheckCalculationWhenEverybodyIsNotPresentOnPayment"
+            landmarkType = "5">
+            <Locations>
+               <Location
+                  shouldBeEnabled = "Yes"
+                  ignoreCount = "0"
+                  continueAfterRunningActions = "No"
+                  symbolName = "-[MCSharedBillAddOnsTest testToCheckCalculationWhenEverybodyIsNotPresentOnPayment]"
+                  moduleName = "We all pay Tests"
+                  usesParentBreakpointCondition = "Yes"
+                  urlString = "file:///Users/markcornelisse/Programming/Going%20Dutch/WeAllPayTests/MCSharedBillAddOnsTest.m"
+                  timestampString = "456297461.176042"
+                  startingColumnNumber = "9223372036854775807"
+                  endingColumnNumber = "9223372036854775807"
+                  startingLineNumber = "158"
+                  endingLineNumber = "158"
+                  offsetFromSymbolStart = "1481">
+               </Location>
+               <Location
+                  shouldBeEnabled = "Yes"
+                  ignoreCount = "0"
+                  continueAfterRunningActions = "No"
+                  symbolName = "-[MCSharedBillAddOnsTest testToCheckCalculationWhenEverybodyIsNotPresentOnPayment]"
+                  moduleName = "We all pay Tests"
+                  usesParentBreakpointCondition = "Yes"
+                  urlString = "file:///Users/markcornelisse/Programming/Going%20Dutch/WeAllPayTests/MCSharedBillAddOnsTest.m"
+                  timestampString = "456297461.176516"
+                  startingColumnNumber = "9223372036854775807"
+                  endingColumnNumber = "9223372036854775807"
+                  startingLineNumber = "158"
+                  endingLineNumber = "158"
+                  offsetFromSymbolStart = "1941">
+               </Location>
+               <Location
+                  shouldBeEnabled = "Yes"
+                  ignoreCount = "0"
+                  continueAfterRunningActions = "No"
+                  symbolName = "-[MCSharedBillAddOnsTest testToCheckCalculationWhenEverybodyIsNotPresentOnPayment]"
+                  moduleName = "We all pay Tests"
+                  usesParentBreakpointCondition = "Yes"
+                  urlString = "file:///Users/markcornelisse/Programming/Going%20Dutch/WeAllPayTests/MCSharedBillAddOnsTest.m"
+                  timestampString = "456297461.176885"
+                  startingColumnNumber = "9223372036854775807"
+                  endingColumnNumber = "9223372036854775807"
+                  startingLineNumber = "158"
+                  endingLineNumber = "158"
+                  offsetFromSymbolStart = "3659">
+               </Location>
+               <Location
+                  shouldBeEnabled = "Yes"
+                  ignoreCount = "0"
+                  continueAfterRunningActions = "No"
+                  symbolName = "-[MCSharedBillAddOnsTest testToCheckCalculationWhenEverybodyIsNotPresentOnPayment]"
+                  moduleName = "We all pay Tests"
+                  usesParentBreakpointCondition = "Yes"
+                  urlString = "file:///Users/markcornelisse/Programming/Going%20Dutch/WeAllPayTests/MCSharedBillAddOnsTest.m"
+                  timestampString = "456297461.177372"
+                  startingColumnNumber = "9223372036854775807"
+                  endingColumnNumber = "9223372036854775807"
+                  startingLineNumber = "158"
+                  endingLineNumber = "158"
+                  offsetFromSymbolStart = "3796">
+               </Location>
+            </Locations>
+         </BreakpointContent>
+      </BreakpointProxy>
    </Breakpoints>
 </Bucket>
