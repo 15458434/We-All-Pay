@@ -149,9 +149,11 @@
     }
     [paymentWithNoPresences recalculateAveragePeopleOweAndStore];
     MCPayment *paymentWithPresences = [tonightsBill addPayment];
-    [paymentWithPresences setMoney:@5.00];
-    [paymentWithPresences setPayingPerson:mark];
-    [paymentWithPresences setDescriptionOfPayment:@"Everybody is present on this payment."];
+    paymentWithPresences.money = @5.00;
+    paymentWithPresences.payingPerson = mark;
+    paymentWithPresences.descriptionOfPayment = @"Everybody is present on this payment.";
+    paymentWithPresences.currency = tonightsBill.mainCurrency;
+    [paymentWithPresences recalculateAveragePeopleOweAndStore];
     NSArray *result = [tonightsBill solveWhoHasToPayWhoFromThisBill];
     XCTAssertTrue([result count] == 1, @"There should be one solution.");
     MCReturnPayment *returnPayment = [result lastObject];
