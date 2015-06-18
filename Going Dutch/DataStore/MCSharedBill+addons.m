@@ -337,6 +337,20 @@
     return @(credit);
 }
 
+- (NSNumber *)totalSumPaidBy:(MCPerson *)person
+{
+    NSFetchRequest *request = [NSFetchRequest fetchRequestWithEntityName:@"MCPayment"];
+    request.relationshipKeyPathsForPrefetching = @[@"payingPerson" ];
+    request.predicate = [NSPredicate predicateWithFormat:@"onWhichBill = %@ AND payingPerson = %@ AND ANY peopleSharingPayment.isPersonPresent = YES", self, person];
+    request.sortDescriptors = @[[NSSortDescriptor sortDescriptorWithKey:@"dateCreated" ascending:YES]];
+    NSError *error = nil;
+    NSArray *paymentsOfPerson = [[self managedObjectContext] executeFetchRequest:request error:&error];
+    if (!paymentsOfPerson) {
+        NSLog(@"Error fetching paymentofPerson: %@", [error localizedDescription]);
+    }
+    return [paymentsOfPerson valueForKeyPath:@"@sum.moneyInMainCurrency"];
+}
+
 - (BOOL)hasPersonPaidSomething:(MCPerson *)person
 {
     NSNumber *paid = person.totalSumPaid;
@@ -494,8 +508,8 @@
     [self updatePaymentForSupportWithPaymentPresence];
     
     for (MCPerson *person in people) {
-        NSLog(@"%@ paid %@", [person getName], person.totalSumPaid);
-        NSNumber *sumOfWhatWasPaidByPerson = person.totalSumPaid;
+        NSLog(@"%@ paid %@", [person getName], [self totalSumPaidBy:person]);
+        NSNumber *sumOfWhatWasPaidByPerson = [self totalSumPaidBy:person];
         NSNumber *sumOfWhatShouldBePaidPerson = [self amountShouldHavePaidBy:person];
         
         if ([sumOfWhatWasPaidByPerson doubleValue] < [sumOfWhatShouldBePaidPerson doubleValue]) {
