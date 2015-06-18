@@ -288,8 +288,6 @@
     if (countError) {
         NSLog(@"Error counting invalid ExchangeRates: %@", countError);
     }
-//    request.sortDescriptors = @[[NSSortDescriptor sortDescriptorWithKey:@"dateCreated" ascending:YES]];
-//    NSArray *array = [context executeFetchRequest:request error:&countError];
     if (amountOfInvalidExchangeRates > 0) {
         return YES;
     } else {

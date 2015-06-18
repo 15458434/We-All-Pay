@@ -339,7 +339,7 @@
 
 - (NSNumber *)totalAmountOfCreditBy:(MCPerson *)person
 {
-    double totalSumPaid = person.totalSumPaid.doubleValue;
+    double totalSumPaid = [[self totalSumPaidBy:person] doubleValue];
     double average = [[self amountPeopleShouldHavePaid] doubleValue];
     double credit = totalSumPaid - average;
     return @(credit);
@@ -361,7 +361,7 @@
 
 - (BOOL)hasPersonPaidSomething:(MCPerson *)person
 {
-    NSNumber *paid = person.totalSumPaid;
+    NSNumber *paid = [self totalSumPaidBy:person];
     if ([paid doubleValue] < 0.01) {
         return NO;
     } else {
