@@ -309,6 +309,7 @@
 
 - (NSNumber *)totalSumPaid
 {
+    // This doesn't check for the absense of total presence on this tonightsBill
     NSArray *sortDescriptors = @[[NSSortDescriptor sortDescriptorWithKey:@"dateCreated" ascending:YES]];
     NSArray *fetchResult = [[self payments] sortedArrayUsingDescriptors:sortDescriptors];
     return [fetchResult valueForKeyPath:@"@sum.moneyInMainCurrency"];
