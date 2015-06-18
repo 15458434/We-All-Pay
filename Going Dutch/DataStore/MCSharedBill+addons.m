@@ -310,9 +310,17 @@
 
 - (NSNumber *)totalSumOfMoneyOfThisSharedBill
 {
-    NSArray *sortDescriptors = @[[NSSortDescriptor sortDescriptorWithKey:@"dateCreated" ascending:YES]];
-    NSArray *paymentsOfThisSharedBill = [self.payments sortedArrayUsingDescriptors:sortDescriptors];
-    return [paymentsOfThisSharedBill valueForKeyPath:@"@sum.moneyInMainCurrency"];
+    NSFetchRequest *request = [NSFetchRequest fetchRequestWithEntityName:@"MCPayment"];
+    [request setRelationshipKeyPathsForPrefetching:@[ @"payingPerson" ]];
+    [request setPredicate:[NSPredicate predicateWithFormat:@"onWhichBill = %@ AND ANY peopleSharingPayment.isPersonPresent = YES", self]];
+    [request setSortDescriptors:@[[NSSortDescriptor sortDescriptorWithKey:@"dateCreated" ascending:YES]]];
+    NSManagedObjectContext *context = [self managedObjectContext];
+    NSError *error = nil;
+    NSArray *paymentsOfPerson = [context executeFetchRequest:request error:&error];
+    if (!paymentsOfPerson) {
+        NSLog(@"Error fetching paymentofPerson: %@", [error localizedDescription]);
+    }
+    return [paymentsOfPerson valueForKeyPath:@"@sum.moneyInMainCurrency"];
 }
 
 - (NSString *)totalSumOfMoneyOfThisSharedBillAsCurrencyString
