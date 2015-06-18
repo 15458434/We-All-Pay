@@ -165,8 +165,8 @@
 
 - (NSNumber *)averageAmountPeopleShouldHavePaidOnThisPayment
 {
-    double peoplePresentOnThisPayment = [[self peoplePresentOnThisPayment] doubleValue];
-    double result = [[self money] doubleValue] / peoplePresentOnThisPayment;
+    double peoplePresentOnThisPayment = self.peoplePresentOnThisPayment.doubleValue;
+    double result = self.money.doubleValue / peoplePresentOnThisPayment;
     return @(result);
 }
 
@@ -176,18 +176,18 @@
     NSLog(@"%@ recalculateAveragePeopleOweAndStore", self);
 #endif
     NSNumber *averagePayedByPeoplePresent = [self averageAmountPeopleShouldHavePaidOnThisPayment];
-    NSDate *nu = [NSDate date];
+    NSDate *now = [NSDate date];
     for (MCPaymentPresence *paymentPresence in [self peopleSharingPayment]) {
-        if ([[paymentPresence isPersonPresent] boolValue]) {
-            [paymentPresence setAverageOweFromPayment:averagePayedByPeoplePresent];
-            [paymentPresence setDateModified:nu];
+        if (paymentPresence.isPersonPresent.boolValue) {
+            paymentPresence.averageOweFromPayment = averagePayedByPeoplePresent;
+            paymentPresence.dateModified = now;
         } else {
-            [paymentPresence setAverageOweFromPayment:@0.00];
-            [paymentPresence setDateModified:nu];
+            paymentPresence.averageOweFromPayment = @0.00;
+            paymentPresence.dateModified = now;
         }
     }
-    [self setDateModified:nu];
-    [[self onWhichBill] setDateModified:nu];
+    self.dateModified = now;
+    self.onWhichBill.dateModified = now;
 }
 
 - (NSString *)getMoneyValueAsAString
