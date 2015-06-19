@@ -11,18 +11,13 @@
 #import <Social/Social.h>
 
 @class MCWeAllPayStoreController;
-@class MCTwoLabelsTitleView;
 @class MCTableEmptyMessage;
 
 @interface MCAllTripsTableViewController : UITableViewController < NSFetchedResultsControllerDelegate>
 {
-    __strong IBOutlet MCTwoLabelsTitleView *titleView;
     MCTableEmptyMessage *emptyMessage;
     
     NSDateFormatter *df;
 }
-
-- (IBAction)tellAFriendAboutWeAllPay:(id)sender;
-
 
 @end

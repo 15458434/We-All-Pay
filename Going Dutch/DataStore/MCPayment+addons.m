@@ -28,13 +28,13 @@
 {
     MCPayment *newPayment;
     newPayment = [NSEntityDescription insertNewObjectForEntityForName:@"MCPayment" inManagedObjectContext:context];
-    [newPayment setUniquePaymentId:[MCTools createUniqueIdentifierString]];
-    [newPayment setDateCreated:[NSDate date]];
-    [newPayment setDateModified:[newPayment dateCreated]];
-    [newPayment setCurrency:[MCCurrency getCurrencySelectedInCurrentLocaleFromContext:context]];
+    newPayment.uniquePaymentId = [[NSUUID UUID] UUIDString];
+    newPayment.dateCreated = [NSDate date];
+    newPayment.dateModified = newPayment.dateCreated;
+    newPayment.currency = [MCCurrency generateCurrencyFromSelectedLocaleForContext:context];
     MCExchangeRate *exchangeRate = [newPayment addExchangeRate];
-    [exchangeRate setExchangeRate:@1];
-    [exchangeRate setSource:@"Payment Creation"];
+    exchangeRate.exchangeRate = @1;
+    exchangeRate.source = @"Payment Creation";
     return newPayment;
 }
 
@@ -165,9 +165,9 @@
 
 - (NSNumber *)averageAmountPeopleShouldHavePaidOnThisPayment
 {
-    double peoplePresentOnThisPayment = [[self peoplePresentOnThisPayment] doubleValue];
-    double result = [[self money] doubleValue] / peoplePresentOnThisPayment;
-    return [NSNumber numberWithDouble:result];
+    double peoplePresentOnThisPayment = self.peoplePresentOnThisPayment.doubleValue;
+    double result = self.money.doubleValue / peoplePresentOnThisPayment;
+    return @(result);
 }
 
 - (void)recalculateAveragePeopleOweAndStore
@@ -176,18 +176,18 @@
     NSLog(@"%@ recalculateAveragePeopleOweAndStore", self);
 #endif
     NSNumber *averagePayedByPeoplePresent = [self averageAmountPeopleShouldHavePaidOnThisPayment];
-    NSDate *nu = [NSDate date];
+    NSDate *now = [NSDate date];
     for (MCPaymentPresence *paymentPresence in [self peopleSharingPayment]) {
-        if ([[paymentPresence isPersonPresent] boolValue]) {
-            [paymentPresence setAverageOweFromPayment:averagePayedByPeoplePresent];
-            [paymentPresence setDateModified:nu];
+        if (paymentPresence.isPersonPresent.boolValue) {
+            paymentPresence.averageOweFromPayment = averagePayedByPeoplePresent;
+            paymentPresence.dateModified = now;
         } else {
-            [paymentPresence setAverageOweFromPayment:@0.00];
-            [paymentPresence setDateModified:nu];
+            paymentPresence.averageOweFromPayment = @0.00;
+            paymentPresence.dateModified = now;
         }
     }
-    [self setDateModified:nu];
-    [[self onWhichBill] setDateModified:nu];
+    self.dateModified = now;
+    self.onWhichBill.dateModified = now;
 }
 
 - (NSString *)getMoneyValueAsAString
@@ -245,16 +245,17 @@
     return [self exchangeRate];
 }
 
-- (void)setNewCurrencyAndAutomaticallyUpdateExchangeRate:(MCCurrency *)newCurrency
+- (void)setNewCurrencyAndAutomaticallyUpdateExchangeRate:(MCCurrency *)newCurrency withCompletionHandler:(void (^)(NSError *))completionHandler
 {
     self.currency = newCurrency;
     self.exchangeRate.fromCurrency = newCurrency;
-    BOOL success = [[self exchangeRate] retrieveExchangeRateFromWeb];
-    if (success) {
-        NSLog(@"ExchangeRate retrieval successful");
-    } else {
-        NSLog(@"ExchangeRate retrieval unsuccesful");
-    }
+    [[self exchangeRate] fetchExchangeRate:^(NSError *error) {
+        if (error) {
+            completionHandler(error);
+            return;
+        }
+        completionHandler(nil);
+    }];
 }
 
 - (NSString *)fullDescriptionOfPayment
@@ -271,19 +272,5 @@
 }
 
 #pragma mark - NSManagedObject stuff
-
-- (void)awakeFromInsert
-{
-    [super awakeFromInsert];
-    
-//    [self setPrimitiveValue:[MCExchangeRate addExchangeRateForContext:[self managedObjectContext]] forKey:@"exchangeRate"];
-}
-
-//- (void)didChangeValueForKey:(NSString *)key
-//{
-//    if ([key isEqualToString:@"peopleSharingPayment"]) {
-//        [self recalculateAveragePeopleOweAndStore];
-//    }
-//}
 
 @end

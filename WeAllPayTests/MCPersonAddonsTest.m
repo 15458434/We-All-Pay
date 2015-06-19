@@ -14,7 +14,7 @@
 #import "MCEmailAddress+addons.h"
 #import "MCPayment+addons.h"
 #import "MCExchangeRate+addons.h"
-#import "XRCurrencyStoreController.h"
+#import "MCPaymentPresence+addons.h"
 
 @interface MCPersonAddonsTest : XCTestCase
 {
@@ -37,8 +37,6 @@
     XCTAssertTrue(persistentStore, @"Something went wrong opening the In Memory Store: %@", [error localizedDescription]);
     _context = [[NSManagedObjectContext alloc] initWithConcurrencyType:NSMainQueueConcurrencyType];
     [_context setPersistentStoreCoordinator:persistentStoreCoordinator];
-    
-    [XRCurrencyStoreController populateCurrencyDataBaseIfEmptyForContext:_context];
 }
 
 - (void)tearDown
@@ -142,6 +140,16 @@
     drinks.descriptionOfPayment = @"coffee";
     NSNumber *totalPaidByFred = fred.totalSumPaid;
     XCTAssertEqualWithAccuracy(@(10).doubleValue, totalPaidByFred.doubleValue, 0.001);
+    
+    // Test with missing no payment presence
+    MCPayment *tickets = [tonightsBill addPayment];
+    tickets.payingPerson = anna;
+    tickets.money = @(20);
+    for (MCPaymentPresence *presence in tickets.peopleSharingPayment) {
+        presence.isPersonPresent = @NO;
+    }
+    XCTAssertEqualWithAccuracy(@(10).doubleValue, fred.totalSumPaid.doubleValue, 0.001);
+    XCTAssertEqualWithAccuracy(@(20).doubleValue, anna.totalSumPaid.doubleValue, 0.001);
 }
 
 @end

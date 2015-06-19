@@ -7,9 +7,10 @@
 //
 
 #import "MCExchangeRate+addons.h"
-#import "MCxRatesController.h"
 #import "MCWeAllPayStoreController.h"
 #import "MCCurrency+addons.h"
+
+#import "We_all_pay-Swift.h"
 
 @implementation MCExchangeRate (addons)
 
@@ -18,40 +19,20 @@
     return [NSEntityDescription insertNewObjectForEntityForName:@"MCExchangeRate" inManagedObjectContext:context];
 }
 
-- (BOOL)retrieveExchangeRateFromWeb
+- (void)fetchExchangeRate:(void (^)(NSError *))completionHandler
 {
-    __weak typeof(self) weakSelf = self;
-    return [self retrieveExchangeRateFromWebWithCompletionHandler:^(NSDictionary *exchangeRateResult) {
-        if (!exchangeRateResult) {
-            NSLog(@"%@ something went wrong fetching exchangeRate.", weakSelf);
+    NSParameterAssert(completionHandler);
+    [self setStatus:[NSNumber numberWithShort:fetching]];
+    ExchangeRateFetcher *fetcher = [[MCWeAllPayStoreController defaultStore] fetcher];
+    [fetcher exchangeRate:self.fromCurrency.code toCode:self.toCurrency.code completionHandler:^(NSString * fromCode, NSString * toCode, NSNumber * exchangeRate, NSError * error) {
+        if (error) {
+            completionHandler(error);
+            [self setStatus:[NSNumber numberWithShort:invalid]];
         }
+        self.exchangeRate = exchangeRate;
+        [self setStatus:[NSNumber numberWithShort:valid]];
+        completionHandler(nil);
     }];
-}
-
-- (BOOL)retrieveExchangeRateFromWebWithCompletionHandler:(void (^)(NSDictionary *))completionBlock
-{
-    MCExchangeRateStatus fetchingStatus = fetching;
-    [self setStatus:[NSNumber numberWithShort:fetchingStatus]];
-    NSLog(@"MCExchangeRate Status is fetching.");
-    [[MCWeAllPayStoreController defaultStore] updateXRate:self withCompletionHandler:^(NSDictionary *exchangeRateResult) {
-        if (exchangeRateResult) {
-            MCExchangeRateStatus exchangeRateFetchStatus = valid;
-            [self setStatus:[NSNumber numberWithShort:exchangeRateFetchStatus]];
-            NSLog(@"MCExchangeRate Status is valid.");
-            if (completionBlock) {
-                completionBlock(exchangeRateResult);
-            }
-        } else {
-            MCExchangeRateStatus exchangeRateFetchStatus = invalid;
-            [self setStatus:[NSNumber numberWithShort:exchangeRateFetchStatus]];
-            NSLog(@"MCExchangeRate status is invalid");
-            if (completionBlock) {
-                completionBlock(nil);
-            }
-        }
-       
-    }];
-    return YES;
 }
 
 #pragma mark - Inherited From Super

@@ -8,6 +8,7 @@
 
 @import Foundation;
 
+__deprecated
 @interface MCxRatesCurrency : NSObject <NSCoding, NSCopying>
 
 @property (readwrite) NSString *currencyName;

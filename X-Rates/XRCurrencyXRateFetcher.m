@@ -209,7 +209,7 @@ NSString * const XRExchangeRateSource = @"source";
         [_fetchXRatesDataTask cancel];
         _fetchXRatesDataTask = nil;
     }
-    _fetchXRatesDataTask = [ [self session] dataTaskWithURL:url completionHandler:^(NSData *data, NSURLResponse *response, NSError *error) {
+    _fetchXRatesDataTask = [ [NSURLSession sharedSession] dataTaskWithURL:url completionHandler:^(NSData *data, NSURLResponse *response, NSError *error) {
         if (!error) {
             NSHTTPURLResponse *httpResp = (NSHTTPURLResponse *)response;
             if ([httpResp statusCode] == 200) {

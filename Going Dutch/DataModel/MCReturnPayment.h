@@ -12,9 +12,6 @@
 @class MCCurrency;
 
 @interface MCReturnPayment : NSObject
-{
-    
-}
 
 @property (nonatomic, strong) MCPerson *payer;
 @property (nonatomic, strong) MCPerson *receiver;

@@ -16,12 +16,7 @@
 #import "MCPerson+addons.h"
 #import "MCWeAllPayStoreController.h"
 
-#import "MCReturnPaymentTableViewCell.h"
-#import "MCSolutionOverViewTableViewCell_iPhone.h"
-#import "MCWhoOwesWhoTableViewCell_iPhone.h"
-#import "MCWhoPaidHowMuchTableViewCell_iPhone.h"
 #import "MCTwoLabelsTitleView.h"
-#import "MCTableEmptyMessage.h"
 
 #import "We_all_pay-Swift.h"
 
@@ -439,7 +434,7 @@ typedef NS_ENUM(BOOL, MCXRatesMissing) {
             
             MCPerson *person = [_peoplePresent objectAtIndex:[indexPath row]];
             [[cell whoPaidHowMuchLabel] setText:[person getFullName]];
-            NSNumber *sumSpentByPerson = [_tonightsBill totalSumPaidBy:person];
+            NSNumber *sumSpentByPerson = person.totalSumPaid;
             NSNumberFormatter *nf = [[_tonightsBill mainCurrency] numberFormatter];
             [nf setNumberStyle:NSNumberFormatterCurrencyStyle];
             [nf setFormatterBehavior:NSNumberFormatterBehaviorDefault];

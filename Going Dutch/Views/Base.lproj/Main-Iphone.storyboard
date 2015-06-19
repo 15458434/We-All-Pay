@@ -36,7 +36,7 @@
                             </constraints>
                         </view>
                         <prototypes>
-                            <tableViewCell contentMode="scaleToFill" restorationIdentifier="MCAllTripsTableViewCell" selectionStyle="blue" accessoryType="disclosureIndicator" hidesAccessoryWhenEditing="NO" indentationLevel="1" indentationWidth="0.0" reuseIdentifier="MCAllTripsTableViewCell" rowHeight="76" id="v2h-RS-Mvh" customClass="MCAllTripsTableViewCell">
+                            <tableViewCell contentMode="scaleToFill" restorationIdentifier="MCAllTripsTableViewCell" selectionStyle="blue" accessoryType="disclosureIndicator" hidesAccessoryWhenEditing="NO" indentationLevel="1" indentationWidth="0.0" reuseIdentifier="MCAllTripsTableViewCell" rowHeight="76" id="v2h-RS-Mvh" customClass="MCAllTripsTableViewCell" customModule="We_all_pay" customModuleProvider="target">
                                 <rect key="frame" x="0.0" y="82" width="320" height="44"/>
                                 <autoresizingMask key="autoresizingMask"/>
                                 <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" restorationIdentifier="japan" tableViewCell="v2h-RS-Mvh" id="3qP-Z0-Kzg">
@@ -178,7 +178,7 @@
                             </constraints>
                         </view>
                         <prototypes>
-                            <tableViewCell contentMode="scaleToFill" selectionStyle="blue" hidesAccessoryWhenEditing="NO" indentationLevel="1" indentationWidth="0.0" reuseIdentifier="MCPaymentTableViewCell" rowHeight="66" id="EPM-k7-MaG" customClass="MCPaymentTableViewCell">
+                            <tableViewCell contentMode="scaleToFill" selectionStyle="blue" hidesAccessoryWhenEditing="NO" indentationLevel="1" indentationWidth="0.0" reuseIdentifier="MCPaymentTableViewCell" rowHeight="66" id="EPM-k7-MaG" customClass="MCPaymentTableViewCell" customModule="We_all_pay" customModuleProvider="target">
                                 <rect key="frame" x="0.0" y="125" width="320" height="44"/>
                                 <autoresizingMask key="autoresizingMask"/>
                                 <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" restorationIdentifier="MCPaymentTableViewCell" tableViewCell="EPM-k7-MaG" id="cfL-0W-KAu">
@@ -274,8 +274,8 @@
                         <rect key="frame" x="0.0" y="0.0" width="600" height="536"/>
                         <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                         <subviews>
-                            <containerView contentMode="scaleToFill" misplaced="YES" translatesAutoresizingMaskIntoConstraints="NO" id="5xC-6r-YOL">
-                                <rect key="frame" x="0.0" y="20" width="600" height="580"/>
+                            <containerView contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="5xC-6r-YOL">
+                                <rect key="frame" x="0.0" y="0.0" width="600" height="536"/>
                                 <color key="backgroundColor" red="0.80000007149999997" green="0.86666673419999996" blue="0.94117653369999998" alpha="1" colorSpace="deviceRGB"/>
                                 <connections>
                                     <segue destination="4g7-52-2bw" kind="embed" identifier="pageViewController" id="aSD-UO-zEs"/>
@@ -362,7 +362,7 @@
                             </constraints>
                         </view>
                         <prototypes>
-                            <tableViewCell contentMode="scaleToFill" restorationIdentifier="MCOneLabelIScreenTableViewCell" selectionStyle="blue" hidesAccessoryWhenEditing="NO" indentationLevel="1" indentationWidth="0.0" reuseIdentifier="MCOneLabelIScreenTableViewCell" rowHeight="44" id="eIv-Pe-6br" customClass="MCOneLabelIScreenTableViewCell">
+                            <tableViewCell contentMode="scaleToFill" restorationIdentifier="MCOneLabelIScreenTableViewCell" selectionStyle="blue" hidesAccessoryWhenEditing="NO" indentationLevel="1" indentationWidth="0.0" reuseIdentifier="MCOneLabelIScreenTableViewCell" rowHeight="44" id="eIv-Pe-6br" customClass="MCOneLabelIScreenTableViewCell" customModule="We_all_pay" customModuleProvider="target">
                                 <rect key="frame" x="0.0" y="55" width="320" height="44"/>
                                 <autoresizingMask key="autoresizingMask"/>
                                 <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" restorationIdentifier="OneLabelContentViewOfTableviewCell" tableViewCell="eIv-Pe-6br" id="XJe-c5-qmr">
@@ -389,7 +389,7 @@
                                     <outlet property="oneTextLabel" destination="YbH-6C-Ojs" id="BbN-Pp-dfU"/>
                                 </connections>
                             </tableViewCell>
-                            <tableViewCell contentMode="scaleToFill" restorationIdentifier="MCTwoLabelIscreenTableViewCell" selectionStyle="none" hidesAccessoryWhenEditing="NO" indentationLevel="1" indentationWidth="0.0" reuseIdentifier="MCTwoLabelIscreenTableViewCell" rowHeight="44" id="WQg-5R-RbW" customClass="MCTwoLabelIscreenTableViewCell">
+                            <tableViewCell contentMode="scaleToFill" restorationIdentifier="MCTwoLabelIscreenTableViewCell" selectionStyle="none" hidesAccessoryWhenEditing="NO" indentationLevel="1" indentationWidth="0.0" reuseIdentifier="MCTwoLabelIscreenTableViewCell" rowHeight="44" id="WQg-5R-RbW" customClass="MCTwoLabelIscreenTableViewCell" customModule="We_all_pay" customModuleProvider="target">
                                 <rect key="frame" x="0.0" y="99" width="320" height="44"/>
                                 <autoresizingMask key="autoresizingMask"/>
                                 <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" restorationIdentifier="TwoLabelContentViewOfTableViewCell" tableViewCell="WQg-5R-RbW" id="g1O-GD-HcA">
@@ -556,7 +556,7 @@
                             </constraints>
                         </view>
                         <prototypes>
-                            <tableViewCell contentMode="scaleToFill" restorationIdentifier="MCSolutionOverViewTableViewCell_iPhone" selectionStyle="none" hidesAccessoryWhenEditing="NO" indentationLevel="1" indentationWidth="0.0" reuseIdentifier="MCSolutionOverViewTableViewCell_iPhone" id="AeB-PX-SS3" customClass="MCSolutionOverViewTableViewCell_iPhone">
+                            <tableViewCell contentMode="scaleToFill" restorationIdentifier="MCSolutionOverViewTableViewCell_iPhone" selectionStyle="none" hidesAccessoryWhenEditing="NO" indentationLevel="1" indentationWidth="0.0" reuseIdentifier="MCSolutionOverViewTableViewCell_iPhone" id="AeB-PX-SS3" customClass="MCSolutionOverViewTableViewCell_iPhone" customModule="We_all_pay" customModuleProvider="target">
                                 <rect key="frame" x="0.0" y="105" width="320" height="44"/>
                                 <autoresizingMask key="autoresizingMask"/>
                                 <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" tableViewCell="AeB-PX-SS3" id="S1p-0e-b3A">
@@ -591,7 +591,7 @@
                                     <outlet property="totalLabel" destination="MHu-fw-WGA" id="Cst-GA-AQR"/>
                                 </connections>
                             </tableViewCell>
-                            <tableViewCell contentMode="scaleToFill" restorationIdentifier="MCWhoOwesWhoTableViewCell_iPhone" selectionStyle="none" indentationWidth="10" reuseIdentifier="MCWhoOwesWhoTableViewCell_iPhone" id="kHO-oe-rlC" customClass="MCWhoOwesWhoTableViewCell_iPhone">
+                            <tableViewCell contentMode="scaleToFill" restorationIdentifier="MCWhoOwesWhoTableViewCell_iPhone" selectionStyle="none" indentationWidth="10" reuseIdentifier="MCWhoOwesWhoTableViewCell_iPhone" id="kHO-oe-rlC" customClass="MCWhoOwesWhoTableViewCell_iPhone" customModule="We_all_pay" customModuleProvider="target">
                                 <rect key="frame" x="0.0" y="149" width="320" height="44"/>
                                 <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                                 <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" tableViewCell="kHO-oe-rlC" id="kda-p7-7ZX">
@@ -630,7 +630,7 @@
                                     <outlet property="whoOwesWhoLabel" destination="udH-oV-muc" id="sXG-3V-lq4"/>
                                 </connections>
                             </tableViewCell>
-                            <tableViewCell contentMode="scaleToFill" restorationIdentifier="MCWhoPaidHowMuchTableViewCell_iPhone" selectionStyle="default" indentationWidth="10" reuseIdentifier="MCWhoPaidHowMuchTableViewCell_iPhone" id="rCL-6C-Xqz" customClass="MCWhoPaidHowMuchTableViewCell_iPhone">
+                            <tableViewCell contentMode="scaleToFill" restorationIdentifier="MCWhoPaidHowMuchTableViewCell_iPhone" selectionStyle="default" indentationWidth="10" reuseIdentifier="MCWhoPaidHowMuchTableViewCell_iPhone" id="rCL-6C-Xqz" customClass="MCWhoPaidHowMuchTableViewCell_iPhone" customModule="We_all_pay" customModuleProvider="target">
                                 <rect key="frame" x="0.0" y="193" width="320" height="44"/>
                                 <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                                 <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" restorationIdentifier="contentView" tableViewCell="rCL-6C-Xqz" id="yHy-np-QOe">
@@ -748,8 +748,8 @@
                             <rect key="frame" x="0.0" y="236" width="600" height="50"/>
                             <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                             <subviews>
-                                <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" misplaced="YES" text="&lt;&lt;&lt; Swipe for payments" textAlignment="right" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="lmh-2o-BWu" userLabel="Hint label">
-                                    <rect key="frame" x="362" y="9" width="218" height="25"/>
+                                <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="&lt;&lt;&lt; Payments" textAlignment="right" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="lmh-2o-BWu" userLabel="Hint label">
+                                    <rect key="frame" x="450" y="4" width="130" height="25"/>
                                     <fontDescription key="fontDescription" name="HelveticaNeue-Thin" family="Helvetica Neue" pointSize="21"/>
                                     <color key="textColor" red="0.38039215686274508" green="0.51372549019607838" blue="0.66274509803921566" alpha="1" colorSpace="calibratedRGB"/>
                                     <nil key="highlightedColor"/>
@@ -766,7 +766,7 @@
                             </connections>
                         </view>
                         <prototypes>
-                            <tableViewCell contentMode="scaleToFill" restorationIdentifier="MCPersonTableViewCell" selectionStyle="blue" hidesAccessoryWhenEditing="NO" indentationLevel="1" indentationWidth="0.0" reuseIdentifier="MCPersonTableViewCell" rowHeight="68" id="i9Y-ku-g7W" customClass="MCPersonTableViewCell">
+                            <tableViewCell contentMode="scaleToFill" restorationIdentifier="MCPersonTableViewCell" selectionStyle="blue" hidesAccessoryWhenEditing="NO" indentationLevel="1" indentationWidth="0.0" reuseIdentifier="MCPersonTableViewCell" rowHeight="68" id="i9Y-ku-g7W" customClass="MCPersonTableViewCell" customModule="We_all_pay" customModuleProvider="target">
                                 <rect key="frame" x="0.0" y="163" width="320" height="44"/>
                                 <autoresizingMask key="autoresizingMask"/>
                                 <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" tableViewCell="i9Y-ku-g7W" id="Mxx-Ut-rjY">
@@ -1082,7 +1082,7 @@
                             </constraints>
                         </view>
                         <prototypes>
-                            <tableViewCell contentMode="scaleToFill" restorationIdentifier="paymentPresenceCell" selectionStyle="none" hidesAccessoryWhenEditing="NO" indentationLevel="1" indentationWidth="0.0" reuseIdentifier="paymentPresenceCell_iPhone" rowHeight="52" id="AcN-yE-tRP" customClass="MCPaymentPresenceTableViewCell_iPhone">
+                            <tableViewCell contentMode="scaleToFill" restorationIdentifier="paymentPresenceCell" selectionStyle="none" hidesAccessoryWhenEditing="NO" indentationLevel="1" indentationWidth="0.0" reuseIdentifier="paymentPresenceCell_iPhone" rowHeight="52" id="AcN-yE-tRP" customClass="MCPaymentPresenceTableViewCell_iPhone" customModule="We_all_pay" customModuleProvider="target">
                                 <rect key="frame" x="0.0" y="230" width="320" height="52"/>
                                 <autoresizingMask key="autoresizingMask"/>
                                 <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" restorationIdentifier="tableViewCellContent" tableViewCell="AcN-yE-tRP" id="WHI-GF-nBf">
@@ -1186,7 +1186,7 @@
                             </connections>
                         </searchBar>
                         <prototypes>
-                            <tableViewCell contentMode="scaleToFill" restorationIdentifier="MCSelectCurrencyTableViewCell_iPhone" selectionStyle="blue" hidesAccessoryWhenEditing="NO" indentationLevel="1" indentationWidth="0.0" reuseIdentifier="MCSelectCurrencyTableViewCell_iPhone" id="ANc-xw-Qi8" customClass="MCSelectCurrencyTableViewCell_iPhone">
+                            <tableViewCell contentMode="scaleToFill" restorationIdentifier="MCSelectCurrencyTableViewCell_iPhone" selectionStyle="blue" hidesAccessoryWhenEditing="NO" indentationLevel="1" indentationWidth="0.0" reuseIdentifier="MCSelectCurrencyTableViewCell_iPhone" id="ANc-xw-Qi8" customClass="MCSelectCurrencyTableViewCell_iPhone" customModule="We_all_pay" customModuleProvider="target">
                                 <rect key="frame" x="0.0" y="66" width="320" height="44"/>
                                 <autoresizingMask key="autoresizingMask"/>
                                 <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" tableViewCell="ANc-xw-Qi8" id="fam-A9-hoy">
@@ -1266,7 +1266,7 @@
                             </connections>
                         </searchBar>
                         <prototypes>
-                            <tableViewCell contentMode="scaleToFill" restorationIdentifier="MCSelectCategoryTableViewCell_iPhone" selectionStyle="default" indentationWidth="10" reuseIdentifier="selectCategoryCell" id="IXA-pf-egv" customClass="MCSelectCategoryTableViewCell_iPhone">
+                            <tableViewCell contentMode="scaleToFill" restorationIdentifier="MCSelectCategoryTableViewCell_iPhone" selectionStyle="default" indentationWidth="10" reuseIdentifier="selectCategoryCell" id="IXA-pf-egv" customClass="MCSelectCategoryTableViewCell_iPhone" customModule="We_all_pay" customModuleProvider="target">
                                 <autoresizingMask key="autoresizingMask"/>
                                 <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" tableViewCell="IXA-pf-egv" id="J07-8s-iID">
                                     <autoresizingMask key="autoresizingMask"/>

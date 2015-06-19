@@ -11,10 +11,6 @@
 #import "MCPaymentViewController.h"
 #import "MCEditTripViewController.h"
 
-#import "MCAllTripsTableViewCell.h"
-#import "MCTwoLabelsTitleView.h"
-#import "MCTableEmptyMessage.h"
-
 #import "MCWeAllPayStoreController.h"
 #import "MCSharedBill+addons.h"
 #import "MCPerson+addons.h"
@@ -25,6 +21,8 @@
 #import "UIViewController+WeAllPayStore.h"
 
 #import "MCWhoPayingUserDefaultsStoreInterface+WeAllPay.h"
+
+#import "We_all_pay-Swift.h"
 
 typedef NS_ENUM(BOOL, MCTonightsBillStatus) {
     isClosed,
@@ -43,25 +41,6 @@ typedef NS_ENUM(BOOL, MCTonightsBillStatus) {
 @implementation MCAllTripsTableViewController
 
 #pragma mark - Actions
-
-- (void) addButtonFromTableViewCell:(id)sender event:(id)event
-{
-    NSSet *touches = [event allTouches];
-    UITouch *touch = [touches anyObject];
-    
-	NSIndexPath *indexPath = [[self tableView] indexPathForRowAtPoint: [touch locationInView:[self tableView]]];
-	if (indexPath != nil)
-	{
-        [self tableView:[self tableView] accessoryButtonTappedForRowWithIndexPath:indexPath];
-	}
-}
-
-- (IBAction)tellAFriendAboutWeAllPay:(id)sender
-{
-    NSArray *dataToShare = @[[NSString stringWithString:NSLocalizedString(@"I_FOUND_WE_ALL_PAY", @"Hi, I found this easy to use iPhone app to share a bill amongst friends. It is called We All Pay.")]];
-    UIActivityViewController *shareMe = [[UIActivityViewController alloc] initWithActivityItems:dataToShare applicationActivities:nil];
-    [self presentViewController:shareMe animated:YES completion:nil];
-}
 
 #pragma mark - New in this class.
 
@@ -144,14 +123,6 @@ typedef NS_ENUM(BOOL, MCTonightsBillStatus) {
     
     [self setEdgesForExtendedLayout:UIRectEdgeNone];
     
-    // [[self navigationItem] setTitle:NSLocalizedString(@"BACK_TITLE_ALL_TRIPS_VIEW", @"back")];
-    
-    // Load the nib file
-//    UINib *nib = [UINib nibWithNibName:@"MCAllTripsTableViewCell" bundle:nil];
-    
-    // Register this nib that contains the cell.
-//    [[ self tableView] registerNib:nib forCellReuseIdentifier:@"MCAllTripsTableViewCell"];
-    
     emptyMessage = [[NSBundle mainBundle] loadNibNamed:@"MCTableEmptyMessage" owner:self options:nil][0];
     [[emptyMessage bigMessage] setAlpha:0.0];
     [[self tableView] setBackgroundView:emptyMessage];
@@ -164,19 +135,6 @@ typedef NS_ENUM(BOOL, MCTonightsBillStatus) {
 {
     [super viewWillAppear:animated];
     
-    //[MCTools setAdBannerIfNotPaid:YES forViewController:self];
-    
-    /*
-    // Set the titleView.
-    if (!titleView) {
-        titleView = [[NSBundle mainBundle] loadNibNamed:@"MCTwoLabelsTitleView" owner:self options:nil][0];
-        [[self navigationItem] setTitleView:titleView];
-    }
-    [[titleView mainLabel] setText:@"We All Pay"];
-    [[titleView subLabel] setText:[NSString stringWithFormat:@"%@ build %@", [[NSBundle mainBundle] infoDictionary][@"CFBundleShortVersionString"], [[NSBundle mainBundle] infoDictionary][@"CFBundleVersion"]]];
-    [[titleView mainLabel] setTextColor:[UIColor whiteColor]];
-    [[titleView subLabel] setTextColor:[UIColor whiteColor]];
-     */
     if (_isATonightsBillOpened == isOpened) {
         _isATonightsBillOpened = isClosed;
     }
@@ -184,6 +142,7 @@ typedef NS_ENUM(BOOL, MCTonightsBillStatus) {
     if (!_dataController) {
         _dataController = [[MCWeAllPayStoreController defaultStore] allTripsDataControllerForDelegate:self];
         [self performFetch];
+        [[self tableView] reloadData];
     }
     
     if (_isEmptyMessageShownInstantForFirstBoot == false) {
@@ -193,17 +152,7 @@ typedef NS_ENUM(BOOL, MCTonightsBillStatus) {
         [self setEmptyMessage];
     }
     
-    [[self tableView] reloadData];
     [[self navigationController] setToolbarHidden:YES animated:YES];
-}
-
-- (void)viewDidAppear:(BOOL)animated
-{
-    [super viewDidAppear:animated];
-    
-//    id<GAITracker> tracker = [[GAI sharedInstance] defaultTracker];
-//    [tracker set:kGAIScreenName value:@"MCAllTripsTableView_iPhone"];
-//    [tracker send:[[GAIDictionaryBuilder createAppView] build]];
 }
 
 - (void)viewWillDisappear:(BOOL)animated
@@ -269,13 +218,6 @@ typedef NS_ENUM(BOOL, MCTonightsBillStatus) {
 
 #pragma mark - MCReturnPaymentViewControllerDelegate
 
-/*- (void)removePayment:(MCPayment *)payment fromPaymentViewController:(MCPaymentViewController *)pvc
-{
-    NSLog(@"removePayment in AllTripsTableViewController.");
-    [[pvc tonightsBill] removePayment:payment];
-    [[self tableView] reloadData];
-}*/
-
 #pragma mark - NSFetchedResultsControllerDelegate
 
 - (void)controllerWillChangeContent:(NSFetchedResultsController *)controller
@@ -294,7 +236,6 @@ typedef NS_ENUM(BOOL, MCTonightsBillStatus) {
 #endif
         [[self tableView] endUpdates];
     }
-
 }
 
 - (void)controller:(NSFetchedResultsController *)controller didChangeObject:(id)anObject atIndexPath:(NSIndexPath *)indexPath forChangeType:(NSFetchedResultsChangeType)type newIndexPath:(NSIndexPath *)newIndexPath
@@ -355,14 +296,12 @@ typedef NS_ENUM(BOOL, MCTonightsBillStatus) {
     if ([thisTrip areAllExchangeRatesValid]) {
         
         NSNumberFormatter *nf = [[thisTrip mainCurrency] numberFormatter];
-        [nf setNumberStyle:NSNumberFormatterCurrencyStyle];
         NSString *moneyString = [nf stringFromNumber:[thisTrip totalSumOfMoneyOfThisSharedBill]];
         [[allTripsTableViewCell totalCostLabel] setHidden:NO];
         [[allTripsTableViewCell waitingForXRatesIndicator] stopAnimating];
         [[allTripsTableViewCell totalCostLabel] setText:moneyString];
     } else {
-        NSNumberFormatter *nf = [[NSNumberFormatter alloc] init];
-        [nf setNumberStyle:NSNumberFormatterCurrencyStyle];
+        NSNumberFormatter *nf = [[thisTrip mainCurrency] numberFormatter];
         NSString *moneyString = [nf stringFromNumber:[thisTrip totalSumOfMoneyOfThisSharedBill]];
         [[allTripsTableViewCell totalCostLabel] setText:moneyString];
         [[allTripsTableViewCell totalCostLabel] setHidden:YES];
@@ -376,15 +315,6 @@ typedef NS_ENUM(BOOL, MCTonightsBillStatus) {
         [df setTimeStyle:NSDateFormatterShortStyle];
     }
     [[allTripsTableViewCell extraLabel] setText:[df stringFromDate:[thisTrip dateModified]]];
-    
-    /*
-    CGRect buttonRect = CGRectMake(0, 0, 44, 44);
-    UIButton *accessoryButton = [[UIButton alloc] initWithFrame:buttonRect];
-    UIImage *plusSign = [UIImage imageNamed:@"plus sign"];
-    [accessoryButton setImage:plusSign forState:UIControlStateNormal];
-    [accessoryButton addTarget:self action:@selector(addButtonFromTableViewCell:event:) forControlEvents:UIControlEventTouchUpInside];
-    [allTripsTableViewCell setAccessoryView:accessoryButton];
-     */
     
     return allTripsTableViewCell;
 }
@@ -406,12 +336,6 @@ typedef NS_ENUM(BOOL, MCTonightsBillStatus) {
         MCSharedBill *toBeDeleteSharedBill = [_dataController objectAtIndexPath:indexPath];
 
         [MCWhoPayingUserDefaultsStoreInterface sendInvalidUserDefaultsIfTonightsBillIs:toBeDeleteSharedBill];
-//        // If currentToBeDeleted tonightsBill the same as the one in the Today Extension delete content.
-//        NSString *uniqueID = toBeDeleteSharedBill.uniqueBillId;
-//        MCWhoPayingUserDefaultsStoreInterface *someStore = [[MCWhoPayingUserDefaultsStoreInterface alloc] init];
-//        if ([uniqueID isEqualToString:someStore.tonightsBillUUID]) {
-//            [[NCWidgetController widgetController] setHasContent:NO forWidgetWithBundleIdentifier:MCWhoIsPayingNextBundleIdentifier];
-//        }
         [MCSharedBill deleteSharedbill:toBeDeleteSharedBill];
         [[MCWeAllPayStoreController defaultStore] saveMainThreadContext];
     }
@@ -451,11 +375,6 @@ typedef NS_ENUM(BOOL, MCTonightsBillStatus) {
         [navController setModalPresentationStyle:UIModalPresentationFormSheet];
     }
     [self presentViewController:navController animated:YES completion:nil];
-}
-
-- (void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath
-{
-//    [self performSegueWithIdentifier:@"openTonightsBill" sender:self];
 }
 
 #pragma mark - UIStoryboard

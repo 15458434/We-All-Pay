@@ -16,13 +16,14 @@
 #import "MCWeAllPayStoreController.h"
 #import "MCTwoLabelsTitleView.h"
 
-#import "MCPaymentPresenceTableViewCell_iPhone.h"
 #import "MCDismissMeBlockProtocol.h"
 
 #import "MCCategoryPictureStoreController.h"
 #import "MCCategoryPictureObject.h"
 
 #import "MCWhoPayingUserDefaultsStoreInterface+WeAllPay.h"
+
+#import "We_all_pay-Swift.h"
 
 typedef NS_ENUM(BOOL, ChildViewOpened) {
     isNotOpened,

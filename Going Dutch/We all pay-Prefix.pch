@@ -6,11 +6,6 @@
 #import "MCTools.h"
 #import "MCColors.h"
 
-// Google Analytics 
-//#import "GAI.h"
-//#import "GAIDictionaryBuilder.h"
-//#import "GAIFields.h"
-
 #ifndef __IPHONE_3_0
 #warning "This project uses features only available in iOS SDK 3.0 and later."
 #endif

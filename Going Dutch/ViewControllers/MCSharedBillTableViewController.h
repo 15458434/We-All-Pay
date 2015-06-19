@@ -18,7 +18,6 @@
 @class MCSharedBill;
 @class MCAllTripsTableViewController;
 @class MCTwoLabelsTitleView;
-@class MCTextFieldAndLabelTitleView;
 @class MCTableEmptyMessage;
 @class MCSharedBillPageViewController;
 

@@ -9,11 +9,6 @@
 			<key>orderHint</key>
 			<integer>3</integer>
 		</dict>
-		<key>CurrnecyExchangeRates.xcscheme</key>
-		<dict>
-			<key>orderHint</key>
-			<integer>2</integer>
-		</dict>
 		<key>EMC Widget.xcscheme</key>
 		<dict>
 			<key>orderHint</key>
@@ -28,11 +23,6 @@
 		<dict>
 			<key>orderHint</key>
 			<integer>2</integer>
-		</dict>
-		<key>We All Pay CustomViews.xcscheme</key>
-		<dict>
-			<key>orderHint</key>
-			<integer>4</integer>
 		</dict>
 		<key>We all pay for Mac.xcscheme</key>
 		<dict>

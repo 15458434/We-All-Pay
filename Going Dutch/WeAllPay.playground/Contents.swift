@@ -2,27 +2,12 @@
 
 import Foundation
 
-private let kShowHints = "kShowHints"
+let mark: Dictionary<String, String> = ["name": "Mark", "type": "Man"]
+let lieke: Dictionary<String, String> = ["name": "Lieke", "type": "Vrouw"]
+let merit: Dictionary<String, String> = ["name": "Merit", "type": "Vrouw"]
+let marieke: Dictionary<String, String> = ["name": "Marieke", "type": "Vrouw"]
+let joris: Dictionary<String, String> = ["name": "Joris", "type": "Man"]
 
-@objc class HintsController: NSObject {
-    var showHints: Bool! {
-        set(newValue) {
-            self.showHints = newValue
-            // Opposite value is stored in NSUserDefaults
-            NSUserDefaults.standardUserDefaults().setBool(!newValue, forKey: kShowHints)
-            NSUserDefaults.standardUserDefaults().synchronize()
-        }
-        get {
-            return self.showHints
-        }
-    }
-    
-    override init() {
-        super.init()
-        // Opposite value is stored in NSUserDefaults
-        self.showHints = !NSUserDefaults.standardUserDefaults().boolForKey(kShowHints)
-    }
-}
-
-let controller = HintsController()
-controller.showHints = false
+let people = [mark, lieke, merit, marieke, joris]
+let vrouwen = people.filter {$0["type"] == "Vrouw"}
+println(vrouwen)

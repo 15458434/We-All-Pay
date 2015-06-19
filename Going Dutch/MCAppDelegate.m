@@ -27,6 +27,23 @@
 
 #pragma mark - New in this class
 
+- (void)removeOldCurrencyStore
+{
+    NSOperationQueue *myQueue = [[NSOperationQueue alloc] init];
+    myQueue.name = @"removeOldCurrencyStore";
+    [myQueue addOperationWithBlock:^{
+        NSURL *documentsDirectory = [[[NSFileManager defaultManager] URLsForDirectory:NSDocumentDirectory inDomains:NSUserDomainMask] lastObject];
+        NSFileManager *fileManager = [NSFileManager defaultManager];
+        NSString *directory = [documentsDirectory.path stringByAppendingPathComponent:@"XRCurrency"];
+        NSError *error;
+        BOOL success = [fileManager removeItemAtPath:directory error:&error];
+        if (!success || error) {
+            // something went wrong
+            NSLog(@"Error deleting XRCurrency: %@", error);
+        }
+    }];
+}
+
 - (void)checkToSeeIfThisPurchaseOriginatesFromiAd
 {
     ADoriginate *adAttributionObject = [[ADoriginate alloc] init];
@@ -48,69 +65,15 @@
     }
 }
 
-//- (void)setupGoogleAnalytics
-//{
-    // Optional: automatically send uncaught exceptions to Google Analytics.
-//    [GAI sharedInstance].trackUncaughtExceptions = YES;
-    
-    // Optional: set Google Analytics dispatch interval to e.g. 20 seconds.
-//    [GAI sharedInstance].dispatchInterval = 120;
-    
-    // Optional: set Logger to VERBOSE for debug information.
-//    [[[GAI sharedInstance] logger] setLogLevel:kGAILogLevelNone];
-    
-    // Initialize tracker. Replace with your tracking ID.
-//    [[GAI sharedInstance] trackerWithTrackingId:@"UA-50304745-1"];
-    
-    // Tracker for development environment.
-//    [[GAI sharedInstance] trackerWithTrackingId:@"UA-50304745-2"];
-    
-    // Get opt-in value
-    // Get user preference
-//    NSUserDefaults *defaults = [NSUserDefaults standardUserDefaults];
-//    BOOL optInValue = [defaults boolForKey:@"googleAnalyticsOptIn"];
-//    BOOL success = [defaults synchronize];
-//    if (!success) {
-//        NSLog(@"Unable to write userDefaults.");
-//    }
-    
-    // Set to YES if during test versions.
-//    [[GAI sharedInstance] setDryRun:!optInValue];
-//}
-
-- (void)startGoogleAnalyticsSession
-{
-//    id<GAITracker> tracker = [[GAI sharedInstance] defaultTracker];
-//    [tracker set:kGAISessionControl value:@"start"];
-}
-
-- (void)stopGoogleAnalyticsSession
-{
-//    id<GAITracker> tracker = [[GAI sharedInstance] defaultTracker];
-//    [tracker set:kGAISessionControl value:@"stop"];
-//    [tracker set:kGAIScreenName value:@"Leaving"];
-//    [tracker send:[[GAIDictionaryBuilder createAppView] build]];
-//    [[GAI sharedInstance] dispatch];
-}
-
-- (void)getAppSettings
-{
-    // Set the application defaults
-    NSUserDefaults *defaults = [NSUserDefaults standardUserDefaults];
-    NSDictionary *appDefaults = @{ @"googleAnalyticsOptIn" : @YES};
-    [defaults registerDefaults:appDefaults];
-    [defaults synchronize];
-}
-
 - (void)executeOnlyOnceDuringStartup
 {
-    [self getAppSettings];
-//    [self setupGoogleAnalytics];
-//    [self startGoogleAnalyticsSession];
-//    [TestFlight takeOff:@"f2224673-b632-44ae-8feb-3c1cfe59e1f5"];
     // Override point for customization after application launch.
-    NSLog(@"%@ running iOS %@", [[UIDevice currentDevice] model], [[UIDevice currentDevice] systemVersion]);
-    NSLog(@"I dedicate this program to Ilse Béguin, the most wonderful woman in the world who brought herself into my life, when I was developing the first version App.");
+    NSOperationQueue *someQueue = [[NSOperationQueue alloc] init];
+    someQueue.name = @"Logging start";
+    [someQueue addOperationWithBlock:^{
+        NSLog(@"%@ running iOS %@", [[UIDevice currentDevice] model], [[UIDevice currentDevice] systemVersion]);
+        NSLog(@"I dedicate this program to Ilse Béguin, the most wonderful woman in the world who brought herself into my life, when I was developing the first version App.");
+    }];
 #if DEBUG
     NSLocale *locale = [NSLocale currentLocale];
     NSString *languageCode = [locale objectForKey:NSLocaleLanguageCode];
@@ -144,16 +107,6 @@
     [[UITableView appearance] setSectionIndexColor:[MCColors getButtonColor]];
     
     [[UINavigationBar appearance] setBarStyle:UIBarStyleBlack];
-    
-    /*
-    // Set the sectionColor
-    UIView *sectionViewInPicker = [UIView appearanceWhenContainedIn:[UITableViewHeaderFooterView class], [ABPeoplePickerNavigationController class], nil];
-    [sectionViewInPicker setBackgroundColor:[MCColors getbackgroundColor]];
-    
-    // Set the labelColor of the section in peoplepicker
-    UILabel *pickerLabels = [UILabel appearanceWhenContainedIn:[UITableViewHeaderFooterView class], nil];
-    [pickerLabels setTextColor:[MCColors getEmptyMessageTextColor]];
-     */
 }
 
 #pragma mark - UIApplicationDelegate
@@ -220,7 +173,6 @@
 {
     dispatch_once(&executeOnlyOnce, ^{
         [self executeOnlyOnceDuringStartup];
-        [MCWeAllPayStoreController prepareCurrencyStoreIfNecessary];
         [[MCWeAllPayStoreController defaultStore] openStore:nil];
         
     });
@@ -235,28 +187,7 @@
 {
     dispatch_once(&executeOnlyOnce, ^{
         [self executeOnlyOnceDuringStartup];
-        [MCWeAllPayStoreController prepareCurrencyStoreIfNecessary];
         [[MCWeAllPayStoreController defaultStore] openStore:nil];
-        if (SYSTEM_VERSION_GREATER_THAN_OR_EQUAL_TO(@"8.0")) {
-            NSOperationQueue *queue = [[NSOperationQueue alloc] init];
-            [queue setQualityOfService:NSQualityOfServiceBackground];
-            [queue addOperationWithBlock:^{
-                [[XRCurrencyStoreController sharedStore] backgroundContext];
-                [[XRCurrencyStoreController sharedStore] mainQueueContext];
-#if DEBUG
-                NSLog(@"Done creating contexts for XRCurrencyController on iOS 8");
-#endif
-            }];
-        } else {
-            dispatch_queue_t someBackgroundQueue = dispatch_queue_create("InitiateBackGroundContext for XRCurrencyStoreController", NULL);
-            dispatch_async(someBackgroundQueue, ^{
-                [[XRCurrencyStoreController sharedStore] backgroundContext];
-                [[XRCurrencyStoreController sharedStore] mainQueueContext];
-#if DEBUG
-                NSLog(@"Done creating contexts for XRCurrencyController on iOS 7");
-#endif
-            });
-        }
     });
     [[MCStoreInterface defaultStoreInterface] validateProductIdentifiers];
     
@@ -276,7 +207,7 @@
         bgTask = UIBackgroundTaskInvalid;
     }];
     [[MCWeAllPayStoreController defaultStore] savebackgroundContext];
-//    [self stopGoogleAnalyticsSession];
+    [self removeOldCurrencyStore];
 }
 
 - (void)applicationWillEnterForeground:(UIApplication *)application
@@ -294,7 +225,6 @@
 {
     // Called when the application is about to terminate. Save data if appropriate. See also applicationDidEnterBackground:.
     [[MCWeAllPayStoreController defaultStore] closeDocument];
-//    [[GAI sharedInstance] dispatch];
 }
 
 - (BOOL)application:(UIApplication *)application shouldSaveApplicationState:(NSCoder *)coder

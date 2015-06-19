@@ -14,11 +14,10 @@
 #import "MCCurrency+addons.h"
 #import "MCExchangeRate+addons.h"
 
-#import "MCxRatesController.h"
-#import "XRCurrencyStoreController.h"
-
 #import "MCTonightsBillTransfer.h"
 #import "MCThisPaymentProtocol.h"
+
+#import "We_all_pay-Swift.h"
 
 typedef NS_ENUM(BOOL, MCiCloudUse) {
     iCloudIsNotUsed,
@@ -35,9 +34,6 @@ NSString * const MCiCloudWeAllPayStoreName = @"iCloud-WeAllPayStore";
 MCiCloudUse const isiCloudUsed = iCloudIsNotUsed;
 
 @interface MCWeAllPayStoreController ()
-
-@property (nonatomic, strong) MCxRatesController *xRatesfetchController;
-@property (nonatomic, strong) NSMutableArray *exchangeRateQueue;
 
 @end
 
@@ -56,21 +52,6 @@ MCiCloudUse const isiCloudUsed = iCloudIsNotUsed;
 
 #pragma mark - New in this class
 
-+ (void)prepareCurrencyStoreIfNecessary
-{
-    NSOperationQueue *someQueue = [NSOperationQueue new];
-    [someQueue addOperationWithBlock:^{
-        if (![XRCurrencyStoreController doesMyCurrencyDatabaseFileExist]) {
-            XRCurrencyStoreController *defaultCurrencyStore = [XRCurrencyStoreController sharedStore];
-            [defaultCurrencyStore prepareStoreWithCompletionHandler:^{
-                NSLog(@"CurrencyStore available.");
-            }];
-        } else if (![XRCurrencyStoreController doesMyDatabaseHaveTheRightVersion]) {
-            [XRCurrencyStoreController updateMyDatabase];
-        }
-    }];
-}
-
 - (void)storeIsReady:(NSNotification *)notification
 {
     if ([weAllPayStoreDocument documentState] == UIDocumentStateNormal) {
@@ -83,6 +64,11 @@ MCiCloudUse const isiCloudUsed = iCloudIsNotUsed;
     static MCWeAllPayStoreController *sharedStore = nil;
     if (!sharedStore) {
         sharedStore = [[super allocWithZone:nil] init];
+        NSOperationQueue *someQueue = [[NSOperationQueue alloc] init];
+        someQueue.name = @"Fetcher Initialiser";
+        [someQueue addOperationWithBlock:^{
+            sharedStore.fetcher = [[ExchangeRateFetcher alloc] init];
+        }];
     }
     return sharedStore;
 }
@@ -181,19 +167,12 @@ MCiCloudUse const isiCloudUsed = iCloudIsNotUsed;
     [[_mainThreadContext undoManager] endUndoGrouping];
     [[_mainThreadContext undoManager] disableUndoRegistration];
     [_mainThreadContext processPendingChanges];
-//    [self saveStore];
-//    NSError *saveError;
-//    BOOL saveSuccesful = [context save:&saveError];
-//    if (!saveSuccesful) {
-//        NSLog(@"Save unsuccesful: %@", [saveError localizedDescription]);
-//    }
 }
 
 - (void)endUndoGroupAndProcessWithoutRegistration
 {
     [[_mainThreadContext undoManager] endUndoGrouping];
     [_mainThreadContext processPendingChanges];
-//    [self saveStore];
 }
 
 - (void)endUndoGroupAndUndo
@@ -209,42 +188,6 @@ MCiCloudUse const isiCloudUsed = iCloudIsNotUsed;
     [[_mainThreadContext undoManager] undoNestedGroup];
 }
 
-- (MCxRatesController *)xRatesfetchController
-{
-    if (!_xRatesfetchController) {
-        _xRatesfetchController = [MCxRatesController new];
-    }
-    return _xRatesfetchController;
-}
-
-#pragma mark - Webinterface
-
-- (void)updateXRate:(MCExchangeRate *)exchangeRate withCompletionHandler:(void (^)(NSDictionary *))completionBlock
-{
-    NSString *fromCode = [[exchangeRate fromCurrency] code];
-    NSString *toCode = [[exchangeRate toCurrency] code];
-    if (!_exchangeRateQueue) {
-        _exchangeRateQueue = [NSMutableArray new];
-    }
-    [_exchangeRateQueue addObject:exchangeRate];
-    __weak __typeof(self) weakSelf = self;
-    [[self xRatesfetchController] getExchangeRateFrom:fromCode to:toCode withCompletionHandler:^(NSDictionary *exchangeRateResult) {
-        NSLog(@"Fetched ExchangeRate: %@", exchangeRateResult);
-        __strong __typeof(self) strongSelf = weakSelf;
-        if (strongSelf) {
-            [exchangeRate setExchangeRate:[exchangeRateResult objectForKey:MCCurrencyExchangeRate]];
-            [exchangeRate setSource:[exchangeRateResult objectForKey:MCSource]];
-            NSDate *now = [NSDate date];
-            exchangeRate.dateFetched = now;
-            exchangeRate.dateModified = now;
-        } else {
-            NSLog(@"Default Controller does not exist anymore.");
-        }
-        [[strongSelf exchangeRateQueue] removeObject:exchangeRate];
-        completionBlock(exchangeRateResult);
-    }];
-}
-
 #pragma mark - TableView fill sources.
 
 - (NSFetchedResultsController *)allTripsDataControllerForDelegate:(id)delegate
@@ -254,8 +197,8 @@ MCiCloudUse const isiCloudUsed = iCloudIsNotUsed;
 #endif
     NSParameterAssert([delegate conformsToProtocol:@protocol(NSFetchedResultsControllerDelegate)]);
     NSFetchRequest *request = [NSFetchRequest fetchRequestWithEntityName:@"MCSharedBill"];
-    [request setSortDescriptors:@[[NSSortDescriptor sortDescriptorWithKey:@"dateCreated" ascending:NO]]];
-    [request setRelationshipKeyPathsForPrefetching:@[ @"payments", @"peoplePresent", @"mainCurrency", @"payments.exchangeRate" ]];
+    request.sortDescriptors = @[[NSSortDescriptor sortDescriptorWithKey:@"dateCreated" ascending:NO]];
+    request.relationshipKeyPathsForPrefetching = @[ @"payments", @"peoplePresent", @"mainCurrency", @"payments.exchangeRate", @"payments.peopleSharingPayment" ];
     NSFetchedResultsController *dataController = [[NSFetchedResultsController alloc] initWithFetchRequest:request
                                                          managedObjectContext:_mainThreadContext
                                                            sectionNameKeyPath:nil
@@ -286,11 +229,6 @@ MCiCloudUse const isiCloudUsed = iCloudIsNotUsed;
     
     // Create the FetchedResultsController.
     NSFetchedResultsController *dataController = [[NSFetchedResultsController alloc] initWithFetchRequest:request managedObjectContext:_mainThreadContext sectionNameKeyPath:nil cacheName:nil];
-    NSError *error;
-    BOOL success = [dataController performFetch:&error];
-    if (!success) {
-        NSLog(@"Something went wrong fetching the payments");
-    }
     [dataController setDelegate:delegate];
     return dataController;
 }
@@ -306,22 +244,14 @@ MCiCloudUse const isiCloudUsed = iCloudIsNotUsed;
     // What entities will be fetched.
     NSFetchRequest *request = [NSFetchRequest fetchRequestWithEntityName:@"MCPerson"];
     // How to sort the data.
-    [request setRelationshipKeyPathsForPrefetching:@[ @"emailAddress", @"payments", @"sharedBill", @"sharedBill.mainCurrency", @"payments.currency" ]];
-    NSSortDescriptor *sortDescriptor = [NSSortDescriptor sortDescriptorWithKey:@"dateCreated" ascending:NO];
-    NSArray *sortDescriptorArray = @[sortDescriptor];
-    [request setSortDescriptors:sortDescriptorArray];
+    request.relationshipKeyPathsForPrefetching = @[ @"emailAddress", @"payments", @"sharedBill", @"sharedBill.mainCurrency", @"payments.currency" ];
+    request.sortDescriptors = @[[NSSortDescriptor sortDescriptorWithKey:@"dateCreated" ascending:NO]];
     // Select only people from tonightsBill.
-    NSPredicate *predicate = [NSPredicate predicateWithFormat:@"ANY sharedBill = %@", tonightsBill];
-    [request setPredicate:predicate];
+    request.predicate = [NSPredicate predicateWithFormat:@"ANY sharedBill = %@", tonightsBill];
     
     // Create the FetchedResultsController.
     NSFetchedResultsController *dataController = [[NSFetchedResultsController alloc] initWithFetchRequest:request managedObjectContext:_mainThreadContext sectionNameKeyPath:nil cacheName:nil];
     [dataController setDelegate:delegate];
-    NSError *error;
-    BOOL success = [dataController performFetch:&error];
-    if (!success) {
-        NSLog(@"Something went wrong");
-    }
     return dataController;
 }
 

@@ -8,13 +8,12 @@
 
 #import "MCiScreenTableViewController.h"
 
-#import "MCOneLabelIScreenTableViewCell.h"
-#import "MCTwoLabelIscreenTableViewCell.h"
-
 #import "MCStoreInterface.h"
 #import "SKProduct+MCStoreInterface.h"
 
 #import "MCWeAllPayStoreController.h"
+
+#import "We_all_pay-Swift.h"
 
 @interface MCiScreenTableViewController ()
 

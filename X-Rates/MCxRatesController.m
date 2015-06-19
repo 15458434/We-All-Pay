@@ -205,17 +205,6 @@ NSUInteger const MCCurrencyTypeSelection = MCCurrencyTypeCurrency | MCCurrencyTy
 
 #pragma mark - Private methods
 
-- (NSURLSession *)session
-{
-    if (_session) {
-        return _session;
-    } else {
-        NSURLSessionConfiguration *config = [NSURLSessionConfiguration defaultSessionConfiguration];
-        _session = [NSURLSession sessionWithConfiguration:config];
-        return _session;
-    }
-}
-
 - (void)getExchangeRateFromYahoo:(NSString *)fromCountryISOCode to:(NSString *)toCountryISOCode withCompletionHandler:(void (^)(NSDictionary *))completionBlock
 {
     // Either one should be present.
@@ -241,7 +230,7 @@ NSUInteger const MCCurrencyTypeSelection = MCCurrencyTypeCurrency | MCCurrencyTy
         [_fetchXRatesDataTask cancel];
         _fetchXRatesDataTask = nil;
     }
-    _fetchXRatesDataTask = [ [self session] dataTaskWithURL:url completionHandler:^(NSData *data, NSURLResponse *response, NSError *error) {
+    _fetchXRatesDataTask = [ [NSURLSession sharedSession] dataTaskWithURL:url completionHandler:^(NSData *data, NSURLResponse *response, NSError *error) {
 #if TARGET_OS_IPHONE
         [[UIApplication sharedApplication] setNetworkActivityIndicatorVisible:NO];
 #elif TARGET_OS_MAC
@@ -329,7 +318,7 @@ NSUInteger const MCCurrencyTypeSelection = MCCurrencyTypeCurrency | MCCurrencyTy
         [_fetchXRatesDataTask cancel];
         _fetchXRatesDataTask = nil;
     }
-    _fetchXRatesDataTask = [ [self session] dataTaskWithURL:url completionHandler:^(NSData *data, NSURLResponse *response, NSError *error) {
+    _fetchXRatesDataTask = [ [NSURLSession sharedSession] dataTaskWithURL:url completionHandler:^(NSData *data, NSURLResponse *response, NSError *error) {
 #if TARGET_OS_IPHONE
         [[UIApplication sharedApplication] setNetworkActivityIndicatorVisible:NO];
 #elif TARGET_OS_MAC
@@ -394,6 +383,11 @@ NSUInteger const MCCurrencyTypeSelection = MCCurrencyTypeCurrency | MCCurrencyTy
         }
     }];
     [_fetchXRatesDataTask resume];
+}
+
+- (void)getExchangeRateFromOpenExchangeRates:(NSString *)fromCountryISOCode to:(NSString *)toCountryISOCode withCompletionHandler:(void (^)(NSDictionary *, NSError *))completionBlock
+{
+    
 }
 
 #pragma mark - Public methods

@@ -1,0 +1,100 @@
+//
+//  ExchangeRateFetcherTest.swift
+//  We all pay
+//
+//  Created by Mark Cornelisse on 14/06/15.
+//  Copyright (c) 2015 Mark Cornelisse. All rights reserved.
+//
+
+import UIKit
+import XCTest
+
+extension ExchangeRateFetcher {
+    var allCurrenciesAvailable: Bool {
+        for currency in currencyController.currencies {
+            if !isCurrencyCodeAvailableInRates(currency["code"]) {
+                return false
+            }
+        }
+        return true
+    }
+}
+
+class ExchangeRateFetcherTest: XCTestCase {
+    var fetcher: ExchangeRateFetcher!
+    
+    override func setUp() {
+        super.setUp()
+        
+        fetcher = ExchangeRateFetcher()
+    }
+    
+    override func tearDown() {
+        // Put teardown code here. This method is called after the invocation of each test method in the class.
+        super.tearDown()
+    }
+    
+    func testIsLastFetchOlderThanAnHour() {
+        let emptyFetcher = ExchangeRateFetcher()
+        XCTAssertTrue(emptyFetcher.isLastFetchOlderThanAnHour, "Should be true nothing is fetched.")
+        let expectation = self.expectationWithDescription("isLastFetchOlderThanHour")
+        emptyFetcher.fetchFromOpenExchangeRates{ (baseCurrency, rates, error) -> () in
+            XCTAssertFalse(emptyFetcher.isLastFetchOlderThanAnHour, "Should be true when fetched.")
+            expectation.fulfill()
+        }
+        
+        waitForExpectationsWithTimeout(90, handler: { (error) -> Void in
+            XCTAssertNil(error, "Timeout error: \(error)")
+        })
+    }
+
+    func testFetchFromOpenExchangeRates() {
+        let expectation = self.expectationWithDescription("fetchFromOpenExchangeRates")
+        fetcher.fetchFromOpenExchangeRates { (baseCurrency, rates, error) -> () in
+            XCTAssertNil(error, "Error fetchingExchangeRate: \(error)")
+            XCTAssertNotNil(baseCurrency, "baseCurrency can't be nil")
+            XCTAssertNotNil(rates, "Rates can't be nil.")
+            XCTAssertNotNil(self.fetcher.baseCurrencyCode, "BaseCurrency can't be nil")
+            XCTAssertNotNil(self.fetcher.rates, "Rates can't be nil")
+            expectation.fulfill()
+        }
+        
+        waitForExpectationsWithTimeout(90, handler: { (error) -> Void in
+            XCTAssertNil(error, "Error waiting for exchangeRate results: \(error)")
+            XCTAssertTrue(self.fetcher.allCurrenciesAvailable, "All currencies should be available.")
+        })
+    }
+    
+    func testExchangeRate() {
+        let expectation = self.expectationWithDescription("exchangeRate")
+        let repeatFetcher = ExchangeRateFetcher()
+        repeatFetcher.exchangeRate("EUR", toCode: "BTC") { (fromCode, toCode, exchangeRate, error) -> () in
+            XCTAssertNil(error, "Error fetching ExchangeRate")
+            XCTAssertNotNil(exchangeRate, "ExchangeRate can't be nil")
+            XCTAssertNotNil(repeatFetcher.baseCurrencyCode, "BaseCurrency can't be nil")
+            XCTAssertNotNil(repeatFetcher.rates, "Rates can't be nil")
+            repeatFetcher.exchangeRate("BTC", toCode: "RUB", completionHandler: { (fromCode, toCode, exchangeRate, error) -> () in
+                XCTAssertNil(error, "Error fetching exchangeRate")
+                XCTAssertNotNil(exchangeRate, "ExchangeRate can't be nil")
+                expectation.fulfill()
+            })
+        }
+        waitForExpectationsWithTimeout(90, handler: { (error) -> Void in
+            XCTAssertNil(error, "Timeout error: \(error)")
+        })
+    }
+    
+    func testCodeSubscript() {
+        let expectation = self.expectationWithDescription("codeSubscript")
+        let codeSubscriptFetcher = ExchangeRateFetcher()
+        codeSubscriptFetcher.fetchFromOpenExchangeRates { (baseCurrency, rates, error) -> () in
+            XCTAssertNil(error, "Error fetching exchangeRates")
+            XCTAssertNotNil(codeSubscriptFetcher["EUR"], "ExchangeRate should be valid")
+            expectation.fulfill()
+        }
+        
+        waitForExpectationsWithTimeout(90, handler: { (error) -> Void in
+            XCTAssertNil(error, "Timeout error: \(error)")
+        })
+    }
+}

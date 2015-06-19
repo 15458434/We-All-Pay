@@ -43,9 +43,9 @@
 - (NSArray *)solveWhoHasToPayWhoFromThisBillWithCompletionBlock:(void (^)(NSArray *))completionBlock;
 - (NSNumber *)totalSumOfMoneyOfThisSharedBill;
 - (NSString *)totalSumOfMoneyOfThisSharedBillAsCurrencyString;
-- (NSNumber *)totalSumPaidBy:(MCPerson *)person;
 - (NSArray *)fetchPeoplePresentOrderedByAmountPaid:(BOOL)ascending;
 - (NSNumber *)totalAmountOfCreditBy:(MCPerson *)person;
+- (NSNumber *)totalSumPaidBy:(MCPerson *)person;
 - (NSNumber *)amountPeopleShouldHavePaid;
 - (NSString *)amountPeopleShouldHavePaidAsCurrencyString;
 - (NSNumber *)amountShouldHavePaidBy:(MCPerson *)person;

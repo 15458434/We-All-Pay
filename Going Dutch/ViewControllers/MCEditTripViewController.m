@@ -17,9 +17,7 @@
 #import "MCSharedBill+addons.h"
 #import "MCCurrency+addons.h"
 
-#import "MCPersonTableViewCell.h"
 #import "MCTwoLabelsTitleView.h"
-#import "MCTableEmptyMessage.h"
 
 #import "MCWhoPayingUserDefaultsStoreInterface.h"
 
@@ -262,13 +260,13 @@
     
     if (!_dataController) {
         _dataController = [[MCWeAllPayStoreController defaultStore] sharedBillPeoplePresentDataControllerForDelegate:self];
+        [self performFetch];
+        [[self tableView] reloadData];
     }
     
     BOOL shouldAppearAsEditing = [_myParent isChildTableViewEditing];
     [[self tableView] setEditing:shouldAppearAsEditing animated:NO];
 
-    [self performFetch];
-    [[self tableView] reloadData];
     [self setEmptyMessageNow];
     
     HintsController *controller = [[HintsController alloc] init];
@@ -502,7 +500,7 @@
         [[thisCell totalSpent] setHidden:NO];
         
         NSNumberFormatter *nf = [[_tonightsBill mainCurrency] numberFormatter];
-        [[thisCell totalSpent] setText:[nf stringFromNumber:[_tonightsBill totalSumPaidBy:thisCellsPerson]]];
+        [[thisCell totalSpent] setText:[nf stringFromNumber:thisCellsPerson.totalSumPaid]];
     } else {
         [thisCell.fetchingExchangeRateIndicator startAnimating];
         [[thisCell totalSpent] setHidden:YES];

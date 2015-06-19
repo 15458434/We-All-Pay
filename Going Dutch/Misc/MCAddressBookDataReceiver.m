@@ -15,9 +15,6 @@
 
 @implementation MCAddressBookDataReceiver
 
-@synthesize delegate;
-@synthesize thisPerson;
-
 #pragma mark - New in this class.
 
 - (void)importPersonDataAndSave:(ABRecordRef)person
@@ -45,19 +42,19 @@
         // Get all linked ABRecords from AddressBook
         CFArrayRef allLinkedPeople = ABPersonCopyArrayOfAllLinkedPeople(personInBackground);
         
-        thisPerson = [_writableTonightsBill addPerson];
+        _thisPerson = [_writableTonightsBill addPerson];
         
-        [thisPerson setThumbnailDataFromImage:[UIImage imageWithData:(__bridge_transfer NSData *)ABPersonCopyImageDataWithFormat(personInBackground, kABPersonImageFormatThumbnail)]];
-        [thisPerson setPictureDataFromImage:[UIImage imageWithData:(__bridge_transfer NSData *)ABPersonCopyImageDataWithFormat(personInBackground, kABPersonImageFormatOriginalSize)]];
-        [thisPerson setFirstName:(__bridge_transfer NSString *)ABRecordCopyValue(personInBackground, kABPersonFirstNameProperty)];
+        [_thisPerson setThumbnailDataFromImage:[UIImage imageWithData:(__bridge_transfer NSData *)ABPersonCopyImageDataWithFormat(personInBackground, kABPersonImageFormatThumbnail)]];
+        [_thisPerson setPictureDataFromImage:[UIImage imageWithData:(__bridge_transfer NSData *)ABPersonCopyImageDataWithFormat(personInBackground, kABPersonImageFormatOriginalSize)]];
+        [_thisPerson setFirstName:(__bridge_transfer NSString *)ABRecordCopyValue(personInBackground, kABPersonFirstNameProperty)];
         
         // Combine middle and Last name to create a name.
         NSString *middleName = (__bridge_transfer NSString *)ABRecordCopyValue(personInBackground, kABPersonMiddleNameProperty);
         NSString *lastName = (__bridge_transfer NSString *)ABRecordCopyValue(personInBackground, kABPersonLastNameProperty);
         if (middleName) {
-            [thisPerson setLastName:[NSString stringWithFormat:@"%@ %@", middleName, lastName]];
+            [_thisPerson setLastName:[NSString stringWithFormat:@"%@ %@", middleName, lastName]];
         } else {
-            [thisPerson setLastName:lastName];
+            [_thisPerson setLastName:lastName];
         }
         
         // Retrieve all possible mail addresses by going through the list of linked ABRecords and through the list of EmailAddresses.
@@ -68,7 +65,7 @@
                 if (ABMultiValueGetCount(emailAddresses)) {
                     for (NSUInteger i = 0 ; i < ABMultiValueGetCount(emailAddresses); i++) {
                         NSString *emailAddressForPerson=(__bridge_transfer NSString *)ABMultiValueCopyValueAtIndex(emailAddresses, i);
-                        [thisPerson addOneEmailAddressFromAString:emailAddressForPerson];
+                        [_thisPerson addOneEmailAddressFromAString:emailAddressForPerson];
                     }
                 }
                 CFRelease(emailAddresses);
@@ -94,7 +91,7 @@
 {
     self = [super init];
     if (self) {
-        delegate = delegateUsedOnInit;
+        _delegate = delegateUsedOnInit;
     }
     return self;
 }
@@ -103,7 +100,7 @@
 {
     self = [super init];
     if (self) {
-        delegate = newDelegate;
+        _delegate = newDelegate;
         viewController = newViewController;
     }
     return self;
@@ -130,7 +127,7 @@
 {
     // iOS 8 code
     [viewController dismissViewControllerAnimated:YES completion:^{
-        [delegate receiveANewPersonFromAddressBook:thisPerson];
+        [_delegate receiveANewPersonFromAddressBook:_thisPerson];
     }];
     [self importPersonDataAndSave:person];
 }

@@ -26,10 +26,10 @@
 {
     MCPaymentPresence *newPaymentPresence;
     newPaymentPresence = [NSEntityDescription insertNewObjectForEntityForName:@"MCPaymentPresence" inManagedObjectContext:context];
-    [newPaymentPresence setUniqueId:[[NSUUID UUID] UUIDString]];
-    NSDate *nu = [NSDate date];
-    [newPaymentPresence setDateCreated:nu];
-    [newPaymentPresence setDateModified:nu];
+    newPaymentPresence.uniqueId = [[NSUUID UUID] UUIDString];
+    NSDate *now = [NSDate date];
+    newPaymentPresence.dateCreated = now;
+    newPaymentPresence.dateModified = now;
     return newPaymentPresence;
 }
 

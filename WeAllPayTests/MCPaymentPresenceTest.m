@@ -40,8 +40,6 @@
     XCTAssertTrue(persistentStore, @"Something went wrong opening the In Memory Store: %@", [error localizedDescription]);
     _context = [[NSManagedObjectContext alloc] init];
     [_context setPersistentStoreCoordinator:persistentStoreCoordinator];
-    
-    [XRCurrencyStoreController populateCurrencyDataBaseIfEmptyForContext:_context];
 }
 
 - (void)tearDown
@@ -343,7 +341,7 @@
 - (void)testGetAverageOweFromPaymentInMainCurrency
 {
     MCSharedBill *tonightsBill = [MCSharedBill addSharedBillToContext:_context];
-    MCCurrency *mainCurrency = [MCCurrency getCurrencySelectedInCurrentLocaleFromContext:_context];
+    MCCurrency *mainCurrency = [MCCurrency generateCurrencyFromSelectedLocaleForContext:_context];
     [tonightsBill setMainCurrency:mainCurrency];
     MCPerson *marieke = [tonightsBill addPerson];
     [marieke setFirstName:@"Marieke"];
@@ -352,15 +350,15 @@
     [merit setFirstName:@"Merit"];
     [merit setLastName:@"Koelink"];
     MCPayment *thisPayment = [tonightsBill addPayment];
-    MCCurrency *paymentCurrency = [MCCurrency getCurrencyWithCode:@"USD" FromContext:_context];
-    [thisPayment setCurrency:paymentCurrency];
+    MCCurrency *paymentCurrency = [MCCurrency currencyFrom:@"USD" fromContext:_context];
+    thisPayment.currency = paymentCurrency;
     [thisPayment setDescriptionOfPayment:@"Thee and cookies"];
     [thisPayment setPayingPerson:marieke];
     [thisPayment setMoney:@4.50];
     [thisPayment recalculateAveragePeopleOweAndStore];
     MCExchangeRate *exchangeRate = [MCExchangeRate addExchangeRateForContext:_context];
     [exchangeRate setToCurrency:mainCurrency];
-    [exchangeRate setFromCurrency:paymentCurrency];
+    exchangeRate.fromCurrency = paymentCurrency;
     [exchangeRate setExchangeRate:@0.72];
     [exchangeRate setPayment:thisPayment];
     for (MCPaymentPresence *pp in [thisPayment peopleSharingPayment]) {

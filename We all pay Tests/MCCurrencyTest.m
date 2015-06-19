@@ -33,8 +33,6 @@
     XCTAssertTrue(persistentStore, @"Something went wrong opening the In Memory Store: %@", [error localizedDescription]);
     _context = [[NSManagedObjectContext alloc] init];
     [_context setPersistentStoreCoordinator:persistentStoreCoordinator];
-    
-    [XRCurrencyStoreController populateCurrencyDataBaseIfEmptyForContext:_context];
 }
 
 - (void)tearDown
@@ -45,7 +43,7 @@
 
 - (void)testGetCurrencySelectedInCurrentLocaleFromContext
 {
-    MCCurrency *selectedCurrency = [MCCurrency getCurrencySelectedInCurrentLocaleFromContext:_context];
+    MCCurrency *selectedCurrency = [MCCurrency generateCurrencyFromSelectedLocaleForContext:_context];
     NSString *currencyCode = [[NSLocale currentLocale] objectForKey:NSLocaleCurrencyCode];
     XCTAssertTrue([[selectedCurrency code] isEqualToString:currencyCode], @"Wrong currency selected.");
     XCTAssertTrue(selectedCurrency.uniqueID, @"unique ID missing.");
@@ -55,9 +53,7 @@
 
 - (void)testGetCurrencyWithCode
 {
-    NSManagedObjectContext *mainQueueContext = [[XRCurrencyStoreController sharedStore] mainQueueContext];
-    [XRCurrencyStoreController populateCurrencyDataBaseIfEmptyForContext:mainQueueContext];
-    MCCurrency *selectedCurrency = [MCCurrency getCurrencyWithCode:@"USD" FromContext:_context];
+    MCCurrency *selectedCurrency = [MCCurrency currencyFrom:@"USD" fromContext:_context];
     XCTAssertTrue([[selectedCurrency code] isEqualToString:@"USD"], @"Wrong currency selected.");
 }
 
