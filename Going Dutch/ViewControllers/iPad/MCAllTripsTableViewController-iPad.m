@@ -10,7 +10,6 @@
 #import "UIViewController+WeAllPayStore.h"
 
 #import "MCAllTripsTableViewCell_iPad.h"
-#import "MCTableEmptyMessage_iPad.h"
 
 #import "MCWeAllPayStoreController.h"
 #import "MCSharedBill+addons.h"
@@ -19,6 +18,8 @@
 #import "MCTonightsBillTransfer.h"
 
 #import "MCWhoPayingUserDefaultsStoreInterface+WeAllPay.h"
+
+#import "We_all_pay-Swift.h"
 
 @interface MCAllTripsTableViewController_iPad ()
 

@@ -10,7 +10,6 @@
 
 #import "MCWhoOwesWhoTableViewCell_iPad.h"
 #import "MCSolutionOverViewTableViewCell_iPad.h"
-#import "MCTableEmptyMessage_iPad.h"
 
 #import "We_all_pay-Swift.h"
 

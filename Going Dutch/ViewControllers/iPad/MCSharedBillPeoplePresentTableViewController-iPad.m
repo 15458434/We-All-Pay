@@ -10,7 +10,6 @@
 #import "UIViewController+WeAllPayStore.h"
 
 #import "MCPersonTableViewCell_iPad.h"
-#import "MCTableEmptyMessage_iPad.h"
 
 #import "MCPerson+addons.h"
 #import "MCSharedBill+addons.h"
@@ -20,6 +19,8 @@
 #import "MCDismissMeBlockProtocol.h"
 
 #import "MCWhoPayingUserDefaultsStoreInterface+WeAllPay.h"
+
+#import "We_all_pay-Swift.h"
 
 @interface MCSharedBillPeoplePresentTableViewController_iPad ()
 

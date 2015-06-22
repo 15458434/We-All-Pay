@@ -78,7 +78,6 @@
 		387296551A8D43C7009B7BF8 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 387296541A8D43C7009B7BF8 /* AppDelegate.swift */; };
 		3872C0D118FF0A5E008C54D7 /* MCSelectEmailAddressTableViewController_iPad.m in Sources */ = {isa = PBXBuildFile; fileRef = 3872C0D018FF0A5D008C54D7 /* MCSelectEmailAddressTableViewController_iPad.m */; };
 		3872C0D718FF1363008C54D7 /* MCSelectEmailAddressTableViewCell_iPad.m in Sources */ = {isa = PBXBuildFile; fileRef = 3872C0D618FF1363008C54D7 /* MCSelectEmailAddressTableViewCell_iPad.m */; };
-		3872C0DC19041725008C54D7 /* MCTableEmptyMessage_iPad.m in Sources */ = {isa = PBXBuildFile; fileRef = 3872C0DB19041725008C54D7 /* MCTableEmptyMessage_iPad.m */; };
 		3872C0DD19041C95008C54D7 /* MCTableEmptyMessage_iPad.xib in Resources */ = {isa = PBXBuildFile; fileRef = 3872C0DF19041C95008C54D7 /* MCTableEmptyMessage_iPad.xib */; };
 		3873A2A516F23AA1000832FD /* MessageUI.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 3873A2A416F23AA1000832FD /* MessageUI.framework */; };
 		387494C919EFE46F001614CA /* MCSelectCategoryTableViewController_iPhone.m in Sources */ = {isa = PBXBuildFile; fileRef = 387494C819EFE46F001614CA /* MCSelectCategoryTableViewController_iPhone.m */; };
@@ -140,6 +139,7 @@
 		38AB487119531F760090457A /* UIView+MCAddons.m in Sources */ = {isa = PBXBuildFile; fileRef = 38AB487019531F760090457A /* UIView+MCAddons.m */; };
 		38AD59BC197D3DF000BBC797 /* MCNetworkTools.m in Sources */ = {isa = PBXBuildFile; fileRef = 389E2CFF19792D7600729F61 /* MCNetworkTools.m */; };
 		38AD8C12197E8926005C3436 /* MCAddCurrenciesEntityMigrationPolicy.m in Sources */ = {isa = PBXBuildFile; fileRef = 38AD8C11197E8926005C3436 /* MCAddCurrenciesEntityMigrationPolicy.m */; };
+		38B08C571B38382E00FB84B1 /* MCTableEmptyMessage_iPad.swift in Sources */ = {isa = PBXBuildFile; fileRef = 38B08C561B38382E00FB84B1 /* MCTableEmptyMessage_iPad.swift */; };
 		38B6E0ED1A28BBAB009E69D7 /* NotificationCenter.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 3807560019F9445800489ED4 /* NotificationCenter.framework */; };
 		38BDEE231A641B2300E00F4F /* MultiExchangeRatesController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 38BDEE221A641B2300E00F4F /* MultiExchangeRatesController.swift */; };
 		38BDFD7F19B88D210026F4F8 /* XRCurrencyXRateFetcher.m in Sources */ = {isa = PBXBuildFile; fileRef = 38BDFD7D19B88D210026F4F8 /* XRCurrencyXRateFetcher.m */; };
@@ -373,8 +373,6 @@
 		3872C0D018FF0A5D008C54D7 /* MCSelectEmailAddressTableViewController_iPad.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = MCSelectEmailAddressTableViewController_iPad.m; path = ViewControllers/iPad/MCSelectEmailAddressTableViewController_iPad.m; sourceTree = "<group>"; };
 		3872C0D518FF1363008C54D7 /* MCSelectEmailAddressTableViewCell_iPad.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = MCSelectEmailAddressTableViewCell_iPad.h; path = Views/iPad/MCSelectEmailAddressTableViewCell_iPad.h; sourceTree = "<group>"; };
 		3872C0D618FF1363008C54D7 /* MCSelectEmailAddressTableViewCell_iPad.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = MCSelectEmailAddressTableViewCell_iPad.m; path = Views/iPad/MCSelectEmailAddressTableViewCell_iPad.m; sourceTree = "<group>"; };
-		3872C0DA19041725008C54D7 /* MCTableEmptyMessage_iPad.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = MCTableEmptyMessage_iPad.h; path = Views/iPad/MCTableEmptyMessage_iPad.h; sourceTree = "<group>"; };
-		3872C0DB19041725008C54D7 /* MCTableEmptyMessage_iPad.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = MCTableEmptyMessage_iPad.m; path = Views/iPad/MCTableEmptyMessage_iPad.m; sourceTree = "<group>"; };
 		3872C0E019041CA6008C54D7 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.xib; name = Base; path = Base.lproj/MCTableEmptyMessage_iPad.xib; sourceTree = "<group>"; };
 		3872C0E119041CAE008C54D7 /* en */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = en; path = en.lproj/MCTableEmptyMessage_iPad.strings; sourceTree = "<group>"; };
 		3872C0E319041CB3008C54D7 /* nl */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = nl; path = nl.lproj/MCTableEmptyMessage_iPad.strings; sourceTree = "<group>"; };
@@ -491,6 +489,7 @@
 		38AD8C0D197E85AA005C3436 /* WeAllPayStore 3.xcdatamodel */ = {isa = PBXFileReference; lastKnownFileType = wrapper.xcdatamodel; path = "WeAllPayStore 3.xcdatamodel"; sourceTree = "<group>"; };
 		38AD8C10197E8926005C3436 /* MCAddCurrenciesEntityMigrationPolicy.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = MCAddCurrenciesEntityMigrationPolicy.h; path = "DataStore/Entity Migration Policies/MCAddCurrenciesEntityMigrationPolicy.h"; sourceTree = "<group>"; };
 		38AD8C11197E8926005C3436 /* MCAddCurrenciesEntityMigrationPolicy.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = MCAddCurrenciesEntityMigrationPolicy.m; path = "DataStore/Entity Migration Policies/MCAddCurrenciesEntityMigrationPolicy.m"; sourceTree = "<group>"; };
+		38B08C561B38382E00FB84B1 /* MCTableEmptyMessage_iPad.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = MCTableEmptyMessage_iPad.swift; sourceTree = "<group>"; };
 		38B6E0EC1A28BBAB009E69D7 /* Who is paying next.appex */ = {isa = PBXFileReference; explicitFileType = "wrapper.app-extension"; includeInIndex = 0; path = "Who is paying next.appex"; sourceTree = BUILT_PRODUCTS_DIR; };
 		38B6E0F01A28BBAB009E69D7 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		38BC7EED19D8ABA4007558FC /* nl */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; name = nl; path = "nl.lproj/Currency info.plist"; sourceTree = "<group>"; };
@@ -971,8 +970,7 @@
 				3872C0D518FF1363008C54D7 /* MCSelectEmailAddressTableViewCell_iPad.h */,
 				3872C0D618FF1363008C54D7 /* MCSelectEmailAddressTableViewCell_iPad.m */,
 				3872C0DF19041C95008C54D7 /* MCTableEmptyMessage_iPad.xib */,
-				3872C0DA19041725008C54D7 /* MCTableEmptyMessage_iPad.h */,
-				3872C0DB19041725008C54D7 /* MCTableEmptyMessage_iPad.m */,
+				38B08C561B38382E00FB84B1 /* MCTableEmptyMessage_iPad.swift */,
 			);
 			name = iPad;
 			sourceTree = "<group>";
@@ -1564,9 +1562,9 @@
 				3825A828199A4E1E00A8885D /* MCThisPersonProtocol.m in Sources */,
 				38977E511B2A277A008484A4 /* MCOneLabelIScreenTableViewCell.swift in Sources */,
 				38DC8B421909508800762235 /* MCColors.m in Sources */,
+				38B08C571B38382E00FB84B1 /* MCTableEmptyMessage_iPad.swift in Sources */,
 				387494D219F045DA001614CA /* MCSelectCategoryTableViewCell_iPad.m in Sources */,
 				38E95DBB195073A000069414 /* MCTwoLabelTableViewCell_iPad.m in Sources */,
-				3872C0DC19041725008C54D7 /* MCTableEmptyMessage_iPad.m in Sources */,
 				38E0C5EA18E9B2BD005A3F17 /* MCAllTripsTableViewController-iPad.m in Sources */,
 				3892E3A417903EF00038894B /* MCEditTripViewController.m in Sources */,
 				3898F33A18F2CC0D00BFFC61 /* MCSelectPayerTableViewCell_iPad.m in Sources */,

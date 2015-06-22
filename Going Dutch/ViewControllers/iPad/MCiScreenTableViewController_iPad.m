@@ -83,15 +83,6 @@
 
 #pragma mark - Inherited froms super.
 
-- (id)initWithStyle:(UITableViewStyle)style
-{
-    self = [super initWithStyle:style];
-    if (self) {
-        // Custom initialization
-    }
-    return self;
-}
-
 - (void)viewDidLoad
 {
     [super viewDidLoad];
@@ -114,11 +105,6 @@
     [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(applyProVersion:) name:applyProVersionNotification object:[MCStoreInterface defaultStoreInterface]];
     [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(postProductPrice:) name:@"Product price" object:[MCStoreInterface defaultStoreInterface]];
     [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(restorePreviousPurchasesFailed:) name:@"Restore previous purchases" object:[MCStoreInterface defaultStoreInterface]];
-    
-    // Set the current screen in Google Analytics
-//    id<GAITracker> tracker = [[GAI sharedInstance] defaultTracker];
-//    [tracker set:kGAIScreenName value:@"MCiScreenViewController_iPhone"];
-//    [tracker send:[[GAIDictionaryBuilder createAppView] build]];
 }
 
 - (void)viewDidDisappear:(BOOL)animated
@@ -132,6 +118,11 @@
 {
     [super didReceiveMemoryWarning];
     // Dispose of any resources that can be recreated.
+}
+
+-(void)dealloc
+{
+    [[NSNotificationCenter defaultCenter] removeObserver:self];
 }
 
 #pragma mark - UIAlertViewDelegate
