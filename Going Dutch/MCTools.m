@@ -7,10 +7,10 @@
 //
 
 #import "MCTools.h"
-#import "MCStoreInterface.h"
+#import "We_all_pay-Swift.h"
 
 #if DEBUG
-BOOL const showAdsInDebugVersion = NO;
+BOOL const showAdsInDebugVersion = YES;
 #endif
 
 @implementation MCTools

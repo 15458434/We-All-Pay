@@ -17,7 +17,7 @@
 #import "MCTools.h"
 #import "MCDismissMeBlockProtocol.h"
 
-#import "MCStoreInterface.h"
+#import "We_all_pay-Swift.h"
 
 @interface MCSharedBillViewController_iPad ()
 
@@ -192,7 +192,7 @@
     [[[self navigationItem] rightBarButtonItem] setTintColor:backButtonColor];
     
     // TODO: Add observer for notifications.
-    [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(applyProVersion:) name:applyProVersionNotification object:[MCStoreInterface defaultStoreInterface]];
+    [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(applyProVersion:) name:[ MCStoreInterface applyProVersionNotification] object:[MCStoreInterface defaultStoreInterface]];
 }
 
 - (void)viewWillDisappear:(BOOL)animated
@@ -200,7 +200,7 @@
     [super viewWillDisappear:animated];
     
     // TODO: Remove observer for notifications.
-    [[NSNotificationCenter defaultCenter] removeObserver:self name:applyProVersionNotification object:[MCStoreInterface defaultStoreInterface]];
+    [[NSNotificationCenter defaultCenter] removeObserver:self name:[MCStoreInterface applyProVersionNotification] object:[MCStoreInterface defaultStoreInterface]];
 }
 
 - (void)willMoveToParentViewController:(UIViewController *)parent

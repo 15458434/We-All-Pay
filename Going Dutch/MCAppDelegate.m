@@ -14,7 +14,6 @@
 #import "MCPaymentTableViewController_iPad.h"
 
 #import "MCWeAllPayStoreController.h"
-#import "MCStoreInterface.h"
 #import "XRCurrencyStoreController.h"
 
 #import "MCSharedBill+addons.h"

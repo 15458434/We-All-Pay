@@ -11,10 +11,9 @@
 #import "MCOneLabelTableViewCell_iPad.h"
 #import "MCTwoLabelTableViewCell_iPad.h"
 
-#import "MCStoreInterface.h"
-#import "SKProduct+MCStoreInterface.h"
-
 #import "MCWeAllPayStoreController.h"
+
+#import "We_all_pay-Swift.h"
 
 @interface MCiScreenTableViewController_iPad ()
 
@@ -102,7 +101,7 @@
 {
     [super viewDidAppear:animated];
     
-    [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(applyProVersion:) name:applyProVersionNotification object:[MCStoreInterface defaultStoreInterface]];
+    [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(applyProVersion:) name:[MCStoreInterface applyProVersionNotification] object:[MCStoreInterface defaultStoreInterface]];
     [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(postProductPrice:) name:@"Product price" object:[MCStoreInterface defaultStoreInterface]];
     [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(restorePreviousPurchasesFailed:) name:@"Restore previous purchases" object:[MCStoreInterface defaultStoreInterface]];
 }
