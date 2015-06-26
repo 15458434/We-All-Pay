@@ -25,15 +25,4 @@
     return nil;
 }
 
--(ADBannerView *)getAdBanner
-{
-    // Get the ad banner from my view hierarchy else return nil.
-    for (id subView in self.subviews) {
-        if ([subView isKindOfClass:[ADBannerView class]]) {
-            return (ADBannerView *)subView;
-        }
-    }
-    return nil;
-}
-
 @end

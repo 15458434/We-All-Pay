@@ -12,6 +12,5 @@
 @interface UIView (MCAddons)
 
 - (UIView *)getFirstResponder;
-- (ADBannerView *)getAdBanner;
 
 @end
