@@ -6,7 +6,7 @@
 //  Copyright (c) 2014 Mark Cornelisse. All rights reserved.
 //
 
-#import <UIKit/UIKit.h>
+@import UIKit;
 
 @interface UINavigationController (KeyboardDismiss)
 

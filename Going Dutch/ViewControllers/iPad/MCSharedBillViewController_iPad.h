@@ -6,8 +6,8 @@
 //  Copyright (c) 2014 Mark Cornelisse. All rights reserved.
 //
 
-#import <UIKit/UIKit.h>
-#import <iAd/iAd.h>
+@import UIKit;
+@import iAd;
 
 #import "MCAddressBookDataReceiver.h"
 #import "MCTonightsBillTransfer.h"

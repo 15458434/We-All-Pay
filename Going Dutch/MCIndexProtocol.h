@@ -6,7 +6,7 @@
 //  Copyright (c) 2014 Mark Cornelisse. All rights reserved.
 //
 
-#import <Foundation/Foundation.h>
+@import Foundation;
 
 @protocol MCIndexProtocol <NSObject>
 // This protocol is for the presence of an index parameter in an object.

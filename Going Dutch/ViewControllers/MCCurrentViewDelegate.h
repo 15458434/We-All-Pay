@@ -6,7 +6,7 @@
 //  Copyright (c) 2014 Mark Cornelisse. All rights reserved.
 //
 
-#import <Foundation/Foundation.h>
+@import Foundation;
 
 typedef NS_ENUM(NSUInteger, MCSharedBillViewSelector) {
     MCSelectSharedBillTableView,
