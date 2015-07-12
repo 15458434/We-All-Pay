@@ -9,8 +9,6 @@
 @import UIKit;
 @import MessageUI;
 
-#import "MCCancelDoneTableViewController.h"
-
 @class MCSharedBill;
 
 @class MCTwoLabelsTitleView;
@@ -18,7 +16,7 @@
 
 @class MCSharedBillPageViewController;
 
-@interface MCReturnPaymentViewController : MCCancelDoneTableViewController <MFMailComposeViewControllerDelegate>
+@interface MCReturnPaymentViewController : UITableViewController <MFMailComposeViewControllerDelegate>
 {
     MCTwoLabelsTitleView *twoLabelTitleView;
 }

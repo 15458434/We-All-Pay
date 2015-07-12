@@ -209,8 +209,6 @@ typedef NS_ENUM(BOOL, MCXRatesMissing) {
     // Uncomment the following line to display an Edit button in the navigation bar for this view controller.
     // self.navigationItem.rightBarButtonItem = self.editButtonItem;
     
-    [self setWillShowButtons:NO];
-    
     [self setEdgesForExtendedLayout:UIRectEdgeNone];
     
     if ([[UIDevice currentDevice] userInterfaceIdiom] == UIUserInterfaceIdiomPad) {
