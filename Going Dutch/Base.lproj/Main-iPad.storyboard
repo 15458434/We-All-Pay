@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="UTF-8" standalone="no"?>
-<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="7706" systemVersion="14D136" targetRuntime="iOS.CocoaTouch.iPad" propertyAccessControl="none" useAutolayout="YES" initialViewController="zVB-NT-1S4">
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="7706" systemVersion="14E46" targetRuntime="iOS.CocoaTouch.iPad" propertyAccessControl="none" useAutolayout="YES" initialViewController="zVB-NT-1S4">
     <dependencies>
         <deployment identifier="iOS"/>
         <development version="5100" identifier="xcode"/>
@@ -310,7 +310,7 @@
                                         <label opaque="NO" clipsSubviews="YES" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Label" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" useAutomaticPreferredMaxLayoutWidth="YES" translatesAutoresizingMaskIntoConstraints="NO" id="31L-di-50d">
                                             <rect key="frame" x="20" y="11" width="490" height="21"/>
                                             <constraints>
-                                                <constraint firstAttribute="width" priority="750" constant="490" id="1J4-lK-Vrf"/>
+                                                <constraint firstAttribute="width" constant="490" id="1J4-lK-Vrf"/>
                                             </constraints>
                                             <fontDescription key="fontDescription" type="system" pointSize="17"/>
                                             <nil key="highlightedColor"/>
@@ -328,7 +328,7 @@
                                         <constraint firstAttribute="trailing" secondItem="ZFw-P0-QBI" secondAttribute="trailing" constant="20" symbolic="YES" id="8W0-7z-JVX"/>
                                         <constraint firstItem="31L-di-50d" firstAttribute="leading" secondItem="IND-hG-Cc2" secondAttribute="leading" constant="20" symbolic="YES" id="B0P-Rz-qk6"/>
                                         <constraint firstItem="31L-di-50d" firstAttribute="baseline" secondItem="ZFw-P0-QBI" secondAttribute="baseline" id="C0h-WR-RYv"/>
-                                        <constraint firstItem="ZFw-P0-QBI" firstAttribute="leading" secondItem="31L-di-50d" secondAttribute="trailing" constant="196" id="S7U-Ii-Kjs"/>
+                                        <constraint firstItem="ZFw-P0-QBI" firstAttribute="leading" relation="greaterThanOrEqual" secondItem="31L-di-50d" secondAttribute="trailing" constant="8" id="S7U-Ii-Kjs"/>
                                         <constraint firstAttribute="centerY" secondItem="31L-di-50d" secondAttribute="centerY" id="ies-a8-CDl"/>
                                     </constraints>
                                 </tableViewCellContentView>
@@ -363,7 +363,7 @@
                                     </subviews>
                                     <constraints>
                                         <constraint firstAttribute="centerY" secondItem="pSW-A7-HzN" secondAttribute="centerY" id="2I4-mh-RPo"/>
-                                        <constraint firstItem="cb9-ow-Za9" firstAttribute="leading" secondItem="pSW-A7-HzN" secondAttribute="trailing" constant="218" id="86z-y2-eFB"/>
+                                        <constraint firstItem="cb9-ow-Za9" firstAttribute="leading" relation="greaterThanOrEqual" secondItem="pSW-A7-HzN" secondAttribute="trailing" constant="8" id="86z-y2-eFB"/>
                                         <constraint firstAttribute="trailing" secondItem="cb9-ow-Za9" secondAttribute="trailing" constant="20" symbolic="YES" id="ZWz-aM-JKb"/>
                                         <constraint firstItem="pSW-A7-HzN" firstAttribute="leading" secondItem="EWV-5Z-WfL" secondAttribute="leading" constant="20" symbolic="YES" id="m7T-AI-OT9"/>
                                         <constraint firstItem="cb9-ow-Za9" firstAttribute="baseline" secondItem="pSW-A7-HzN" secondAttribute="baseline" id="mnK-35-zdY"/>
