@@ -22,15 +22,22 @@
 - (void)fetchExchangeRate:(void (^)(NSError *))completionHandler
 {
     NSParameterAssert(completionHandler);
-    [self setStatus:[NSNumber numberWithShort:fetching]];
+    self.status = [NSNumber numberWithShort:fetching];
     ExchangeRateFetcher *fetcher = [[MCWeAllPayStoreController defaultStore] fetcher];
+    __weak typeof(self) weakSelf = self;
     [fetcher exchangeRate:self.fromCurrency.code toCode:self.toCurrency.code completionHandler:^(NSString * fromCode, NSString * toCode, NSNumber * exchangeRate, NSError * error) {
+        typeof(self) strongSelf = weakSelf;
         if (error) {
             completionHandler(error);
-            [self setStatus:[NSNumber numberWithShort:invalid]];
+            if (strongSelf) {
+                strongSelf.status = [NSNumber numberWithShort:invalid];
+            }
+            return;
         }
-        self.exchangeRate = exchangeRate;
-        [self setStatus:[NSNumber numberWithShort:valid]];
+        if (strongSelf) {
+            strongSelf.exchangeRate = exchangeRate;
+            strongSelf.status = [NSNumber numberWithShort:valid];
+        }
         completionHandler(nil);
     }];
 }

@@ -494,6 +494,9 @@
     if (fetchError) {
         NSLog(@"Something went wrong fetching invalid ExchangeRates: %@", [fetchError localizedDescription]);
     }
+    for (MCExchangeRate *exchangeRate in arrayOfInvalidExchangeRatesOfThisSharedBill) {
+        exchangeRate.status = [NSNumber numberWithShort:fetching];
+    }
     [[[MCWeAllPayStoreController defaultStore] fetcher] fetchAll:arrayOfInvalidExchangeRatesOfThisSharedBill completionHandler:^(NSError * error) {
         if ([self areAllExchangeRatesValid]) {
             completionBlock([self solveWhoHasToPayWhoFromThisBill]);
