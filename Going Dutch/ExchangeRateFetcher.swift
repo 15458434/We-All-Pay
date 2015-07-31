@@ -61,7 +61,7 @@ class ExchangeRateFetcher: NSObject {
         isFetching = true
         UIApplication.sharedApplication().networkActivityIndicatorVisible = true
         
-        let url = NSURL(string: "http://openexchangerates.org/api/latest.json?app_id=cba02a60bd89412095c84ecb65b6326a");
+        let url = NSURL(string: "https://openexchangerates.org/api/latest.json?app_id=cba02a60bd89412095c84ecb65b6326a");
         
         let task = NSURLSession.sharedSession().dataTaskWithURL(url!) {(data, response, error) in
             UIApplication.sharedApplication().networkActivityIndicatorVisible = false
