@@ -14,9 +14,9 @@
 #import "MCSharedBill+addons.h"
 #import "MCEmailAddress+addons.h"
 
-#import "MCTwoLabelsTitleView.h"
-
 #import "MCTools.h"
+
+#import "We_all_pay-Swift.h"
 
 typedef NS_ENUM(BOOL, MCStatus) {
     inValid,

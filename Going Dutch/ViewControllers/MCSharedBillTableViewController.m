@@ -20,8 +20,6 @@
 #import "MCReturnPaymentViewController.h"
 #import "MCSharedBillPageViewController.h"
 
-#import "MCTwoLabelsTitleView.h"
-
 #import "MCReturnPayment.h"
 
 #import "MCCategoryPictureStoreController.h"

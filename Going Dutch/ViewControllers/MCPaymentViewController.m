@@ -14,7 +14,6 @@
 #import "MCSharedBill+addons.h"
 #import "MCPaymentPresence+addons.h"
 #import "MCWeAllPayStoreController.h"
-#import "MCTwoLabelsTitleView.h"
 
 #import "MCDismissMeBlockProtocol.h"
 

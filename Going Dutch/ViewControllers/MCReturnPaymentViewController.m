@@ -16,8 +16,6 @@
 #import "MCPerson+addons.h"
 #import "MCWeAllPayStoreController.h"
 
-#import "MCTwoLabelsTitleView.h"
-
 #import "We_all_pay-Swift.h"
 
 typedef NS_ENUM(BOOL, MCXRatesMissing) {
