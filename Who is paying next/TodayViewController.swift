@@ -21,7 +21,7 @@ class TodayViewController: UIViewController, NCWidgetProviding {
     
     func updateLocalOptionalsFromUserDefaults() -> Bool {
         #if DEBUG
-            println("\(self): updateLocalOptionalsFromUserDefaults")
+            print("\(self): updateLocalOptionalsFromUserDefaults")
         #endif
         let userDefaultsInterface: MCWhoPayingUserDefaultsStoreInterface = MCWhoPayingUserDefaultsStoreInterface()
         
