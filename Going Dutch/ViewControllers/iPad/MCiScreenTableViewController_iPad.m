@@ -8,8 +8,6 @@
 
 #import "MCiScreenTableViewController_iPad.h"
 
-#import "MCTwoLabelTableViewCell_iPad.h"
-
 #import "MCWeAllPayStoreController.h"
 
 #import "We_all_pay-Swift.h"
