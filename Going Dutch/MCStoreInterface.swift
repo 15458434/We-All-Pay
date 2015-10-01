@@ -44,14 +44,14 @@ class MCStoreInterface: NSObject, SKPaymentTransactionObserver, SKRequestDelegat
     // MARK: Private in this class
     
     func applyProVersion() {
-        let productIdentifier = self.productIdentifiers.first
+//        let productIdentifier = self.productIdentifiers.first
         NSUserDefaults.standardUserDefaults().setBool(true, forKey: "com.Greenhair.We_all_pay.pro")
         applyProVersionSuccesful = NSUserDefaults.standardUserDefaults().synchronize()
     }
     
     func completeTransaction(transaction: SKPaymentTransaction) {
         if transaction.payment.productIdentifier == "com.Greenhair.We_all_pay.pro" {
-            println("\(transaction.payment.productIdentifier) was bought")
+            print("\(transaction.payment.productIdentifier) was bought")
             self.applyProVersion()
             NSNotificationCenter.defaultCenter().postNotificationName(kApplyProVersionNotification, object: self, userInfo: ["Kind of purchase": "new buy"])
             SKPaymentQueue.defaultQueue().finishTransaction(transaction)
@@ -60,11 +60,11 @@ class MCStoreInterface: NSObject, SKPaymentTransactionObserver, SKRequestDelegat
     
     func failedTransaction(transaction: SKPaymentTransaction) {
         SKPaymentQueue.defaultQueue().finishTransaction(transaction)
-        println("The sale went bad: \(transaction.error.localizedDescription)")
+        print("The sale went bad: \(transaction.error!.localizedDescription)")
     }
     
     func restoreTransaction(transaction: SKPaymentTransaction) {
-        if transaction.originalTransaction.payment.productIdentifier == "com.Greenhair.We_all_pay.pro" {
+        if transaction.originalTransaction?.payment.productIdentifier == "com.Greenhair.We_all_pay.pro" {
             self.applyProVersion()
             NSNotificationCenter.defaultCenter().postNotificationName(kApplyProVersionNotification, object: self, userInfo: ["Kind of purchase" : "restore purchase"])
             SKPaymentQueue.defaultQueue().finishTransaction(transaction)
@@ -81,29 +81,30 @@ class MCStoreInterface: NSObject, SKPaymentTransactionObserver, SKRequestDelegat
     // MARK: Public in this class
     
     func validateProductIdentifiers() {
-        println("Validating product identifiers.")
-        let productRequest = SKProductsRequest(productIdentifiers: Set(productIdentifiers) as Set<NSObject>)
-        productRequest!.delegate = self
-        productRequest!.start()
+        print("Validating product identifiers.")
+        let productRequest = SKProductsRequest(productIdentifiers: Set(productIdentifiers) as Set<String>)
+        productRequest.delegate = self
+        productRequest.start()
     }
     
     func buyProProductSendFrom(viewController: UIViewController) {
         if proProduct != nil {
-            var payment = SKMutablePayment(product: proProduct)
+            let payment = SKMutablePayment(product: proProduct)
             payment.quantity = 1
             SKPaymentQueue.defaultQueue().addPayment(payment)
         } else {
             let title = NSLocalizedString("App Store unavailable", comment: "Message that pops up when the App Store is not available.")
             let message = NSLocalizedString("Unable to connect to the App Store. Please connect to the internet.", comment: "Message body explaining the App Store can't be reached.")
             let dismissButtonTitle = NSLocalizedString("Dismiss", comment: "Button that says dismiss.")
-            if let existingClass: AnyClass! = NSClassFromString("UIAlertViewController") {
+            if #available(iOS 8.0, *) {
                 let alertController = UIAlertController(title: title, message: message, preferredStyle: .Alert)
                 let dismissAction = UIAlertAction(title: dismissButtonTitle, style: .Default, handler: { (action) -> Void in
-                    println("App Store unavailable dismissed.")
+                    print("App Store unavailable dismissed.")
                 })
                 alertController.addAction(dismissAction)
                 viewController.presentViewController(alertController, animated: true, completion: nil)
             } else {
+                // Fallback on earlier versions
                 appStoreUnreachableAlert = UIAlertView(title: title, message: message, delegate: self, cancelButtonTitle: dismissButtonTitle)
                 appStoreUnreachableAlert!.show()
             }
@@ -123,19 +124,19 @@ class MCStoreInterface: NSObject, SKPaymentTransactionObserver, SKRequestDelegat
     }
     
     // MARK: SK Request Delegate
-    func requestDidFinish(request: SKRequest!) {
-        println("SKRequest: \(request) did finish.")
+    func requestDidFinish(request: SKRequest) {
+        print("SKRequest: \(request) did finish.")
     }
     
-    func request(request: SKRequest!, didFailWithError error: NSError!) {
-        println("SKRequest: \(request) did fail with error: \(error)")
+    func request(request: SKRequest, didFailWithError error: NSError) {
+        print("SKRequest: \(request) did fail with error: \(error)")
         if error.domain == SKErrorDomain {
             switch error.code {
             case 0:
-                println("App store not available.")
+                print("App store not available.")
                 self.lastSKProductsRequestError = error
             default:
-                println("App store something is wrong.")
+                print("App store something is wrong.")
                 self.lastSKProductsRequestError = error
             }
         }
@@ -143,21 +144,21 @@ class MCStoreInterface: NSObject, SKPaymentTransactionObserver, SKRequestDelegat
     
     // MARK: SK Products Request Delegate
     
-    func productsRequest(request: SKProductsRequest!, didReceiveResponse response: SKProductsResponse!) {
-        println("Products Delivered")
-        for invalidIdentifier in response.invalidProductIdentifiers as! [String] {
-            println("Invalid product: \(invalidIdentifier)")
+    func productsRequest(request: SKProductsRequest, didReceiveResponse response: SKProductsResponse) {
+        print("Products Delivered")
+        for invalidIdentifier in response.invalidProductIdentifiers {
+            print("Invalid product: \(invalidIdentifier)")
         }
-        proProduct = response.products.first as! SKProduct
+        proProduct = response.products.first
         lastSKProductsRequestError = nil
         NSNotificationCenter.defaultCenter().postNotificationName("Product price", object: self, userInfo: [proProduct.productIdentifier: proProduct.price])
     }
     
     // MARK: SK Payment Transaction Observer
     
-    func paymentQueue(queue: SKPaymentQueue!, updatedTransactions transactions: [AnyObject]!) {
-        println("UpdatedTransactions: \(transactions)")
-        for transaction in transactions as! [SKPaymentTransaction] {
+    func paymentQueue(queue: SKPaymentQueue, updatedTransactions transactions: [SKPaymentTransaction]) {
+        print("UpdatedTransactions: \(transactions)")
+        for transaction in transactions {
             switch transaction.transactionState {
             case SKPaymentTransactionState.Purchased:
                 self.completeTransaction(transaction as SKPaymentTransaction)
@@ -166,24 +167,24 @@ class MCStoreInterface: NSObject, SKPaymentTransactionObserver, SKRequestDelegat
             case SKPaymentTransactionState.Restored:
                 self.restoreTransaction(transaction as SKPaymentTransaction)
             default:
-                println("Transaction state: \(transaction.transactionState)")
+                print("Transaction state: \(transaction.transactionState)")
             }
         }
     }
     
-    func paymentQueue(queue: SKPaymentQueue!, removedTransactions transactions: [AnyObject]!) {
-        println("RemovedTransactions: \(transactions)")
+    func paymentQueue(queue: SKPaymentQueue, removedTransactions transactions: [SKPaymentTransaction]) {
+        print("RemovedTransactions: \(transactions)")
     }
     
-    func paymentQueueRestoreCompletedTransactionsFinished(queue: SKPaymentQueue!) {
+    func paymentQueueRestoreCompletedTransactionsFinished(queue: SKPaymentQueue) {
         if queue.transactions.count == 0 {
-            println("No previous purchases were restored.")
+            print("No previous purchases were restored.")
             NSNotificationCenter.defaultCenter().postNotificationName("Restore previous purchases", object: self, userInfo: ["status": "Not restored"])
         }
     }
     
-    func paymentQueue(queue: SKPaymentQueue!, updatedDownloads downloads: [AnyObject]!) {
-        println("UpdatedDownload: \(downloads)")
+    func paymentQueue(queue: SKPaymentQueue, updatedDownloads downloads: [SKDownload]) {
+        print("UpdatedDownload: \(downloads)")
     }
 }
 

@@ -35,14 +35,14 @@ class MultiExchangeRatesController: NSObject {
         }
     }
     
-    func fetchCurrency(#ISOcode: String) -> MCxRatesCurrency {
+    func fetchCurrency(ISOcode ISOcode: String) -> MCxRatesCurrency {
         let arrayWithResult = availableXRates.filter {
             return $0.currencyISOCode == ISOcode
         }
         return arrayWithResult.first!
     }
     
-    func doesCurrencyExist(#ISOcode: String) -> Bool {
+    func doesCurrencyExist(ISOcode ISOcode: String) -> Bool {
         let arrayWithResult = availableXRates.filter {
             return $0.currencyISOCode == ISOcode
         }
@@ -59,7 +59,7 @@ class MultiExchangeRatesController: NSObject {
         }
     }
     
-    func updateDestinationCurrency(#currency: MCxRatesCurrency) {
+    func updateDestinationCurrency(currency currency: MCxRatesCurrency) {
         destinationCurrencyCode = currency.currencyISOCode
     }
     

@@ -10,4 +10,4 @@ let joris: Dictionary<String, String> = ["name": "Joris", "type": "Man"]
 
 let people = [mark, lieke, merit, marieke, joris]
 let vrouwen = people.filter {$0["type"] == "Vrouw"}
-println(vrouwen)
+print(vrouwen, 

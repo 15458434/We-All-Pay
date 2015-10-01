@@ -239,6 +239,7 @@ typedef NS_ENUM(BOOL, MCXRatesMissing) {
     }
 
     [[self tableView] reloadData];
+    [self setInterstitialPresentationPolicy:ADInterstitialPresentationPolicyAutomatic];    
 }
 
 - (void)viewWillAppear:(BOOL)animated
@@ -252,6 +253,11 @@ typedef NS_ENUM(BOOL, MCXRatesMissing) {
 {
     [super didReceiveMemoryWarning];
     // Dispose of any resources that can be recreated.
+}
+
+- (BOOL)shouldPresentInterstitialAd
+{
+    return YES;
 }
 
 - (void)encodeRestorableStateWithCoder:(NSCoder *)coder

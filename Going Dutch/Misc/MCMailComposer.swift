@@ -20,7 +20,7 @@ class MCMailComposer: NSObject {
     }
     
     func getMailAddresses() -> [AnyObject]! {
-        let sortDescriptorArray = [NSSortDescriptor(key: "dateCreated", ascending: true)]
+//        let sortDescriptorArray = [NSSortDescriptor(key: "dateCreated", ascending: true)]
         let allPeople = Array(tonightsBill.peoplePresent) as! [MCPerson]
         var listOfMailAddresses = [String]()
         for person in allPeople {
@@ -41,7 +41,7 @@ class MCMailComposer: NSObject {
     
     func getMailBody() -> String! {
         let solution = tonightsBill.solveWhoHasToPayWhoFromThisBill() as! [MCReturnPayment]
-        let sortDescriptorOnDateCreated = NSSortDescriptor(key: "dateCreated", ascending: true)
+//        let sortDescriptorOnDateCreated = NSSortDescriptor(key: "dateCreated", ascending: true)
         let allPayments = Array(tonightsBill.payments) as! [MCPayment]
         let allPeople = Array(tonightsBill.peoplePresent) as! [MCPerson]
         
