@@ -11,13 +11,13 @@
 @interface MCCategoryPictureObject : NSObject
 
 @property (nonatomic, readonly) short categoryId;
-@property (nonatomic, strong, readonly) NSString *pictureFilename;
-@property (nonatomic, strong, readonly) NSString *categoryDescription;
-@property (nonatomic, strong, readonly) UIImage *smallPicture;
-@property (nonatomic, strong, readonly) UIImage *largePicture;
+@property (nonatomic, strong, readonly, nonnull) NSString *pictureFilename;
+@property (nonatomic, strong, readonly, nonnull) NSString *categoryDescription;
+@property (nonatomic, strong, readonly, nonnull) UIImage *smallPicture;
+@property (nonatomic, strong, readonly, nonnull) UIImage *largePicture;
 
-+ (instancetype)objectFromDictionary:(NSDictionary *)dictionary;
++ (instancetype _Nonnull)objectFromDictionary:(NSDictionary * _Nonnull)dictionary;
 
-- (instancetype)initWithDictionary:(NSDictionary *)dictionary;
+- (instancetype _Nonnull)initWithDictionary:(NSDictionary * _Nonnull)dictionary;
 
 @end

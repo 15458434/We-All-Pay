@@ -15,3 +15,16 @@
 #import "MCPaymentPresence+addons.h"
 
 #import "MCWeAllPayStoreController.h"
+
+#import "MCTonightsBillTransfer.h"
+#import "MCThisPaymentProtocol.h"
+#import "MCDismissMeBlockProtocol.h"
+#import "MCDismissKeyboardProtocol.h"
+#import "MCPathComponentsToOpenProtocol.h"
+
+#import "MCCategoryPictureStoreController.h"
+#import "MCCategoryPictureObject.h"
+
+#import "MCSelectPayerTableViewController_iPad.h"
+#import "MCSelectCurrencyTableViewController_iPad.h"
+#import "MCSelectCategoryTableViewController_iPad.h"

@@ -17,8 +17,6 @@
 #import "MCCurrency+addons.h"
 #import "MCExchangeRate+addons.h"
 
-#import "XRCurrencyStoreController.h"
-
 @interface MCPaymentAddonsTest : XCTestCase
 
 @property (nonatomic, strong) MCWeAllPayStoreController *mainController;

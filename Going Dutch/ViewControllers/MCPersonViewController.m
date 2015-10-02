@@ -18,8 +18,8 @@
 #import "We_all_pay-Swift.h"
 
 typedef NS_ENUM(BOOL, MCStatus) {
-    inValid,
-    valid
+    invalidStatus,
+    validStatus
 };
 
 @interface MCPersonViewController ()
@@ -236,7 +236,7 @@ typedef NS_ENUM(BOOL, MCStatus) {
 {
     [super awakeFromNib];
     
-    _emailAddressStringInTextField = inValid;
+    _emailAddressStringInTextField = invalidStatus;
 }
 
 - (void)viewDidLoad
@@ -407,12 +407,12 @@ typedef NS_ENUM(BOOL, MCStatus) {
         return YES;
     } else if (textField == emailField) {
         if ([MCTools isStringAnEmailAddress:[emailField text]]) {
-            _emailAddressStringInTextField = valid;
+            _emailAddressStringInTextField = validStatus;
             [emailField setTextColor:[UIColor blackColor]];
             [emailField resignFirstResponder];
             return YES;
         } else {
-            _emailAddressStringInTextField = inValid;
+            _emailAddressStringInTextField = invalidStatus;
             [emailField setTextColor:[UIColor redColor]];
         }
     }

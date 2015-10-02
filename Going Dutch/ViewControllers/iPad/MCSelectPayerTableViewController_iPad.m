@@ -7,7 +7,6 @@
 //
 
 #import "MCSelectPayerTableViewController_iPad.h"
-#import "MCPaymentTableViewController_iPad.h"
 
 #import "MCSelectPayerTableViewCell_iPad.h"
 
@@ -15,6 +14,8 @@
 #import "MCPerson+addons.h"
 #import "MCPayment+addons.h"
 #import "MCSharedBill+addons.h"
+
+#import "We_all_pay-Swift.h"
 
 @interface MCSelectPayerTableViewController_iPad ()
 

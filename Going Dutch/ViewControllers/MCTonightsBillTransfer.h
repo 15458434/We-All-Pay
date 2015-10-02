@@ -17,11 +17,11 @@ extern NSString * const MCwritableTonightsBillKey;
 @protocol MCTonightsBillTransfer <NSObject>
 
 // Accessed on mainThread.
-- (MCSharedBill *)tonightsBill;
-- (void)setTonightsBill:(MCSharedBill *)tonightsBill;
+@property (strong, nonatomic) MCSharedBill *tonightsBill;
+
+@optional
 // Accessed on privateThread
-- (MCSharedBill *)writableTonightsBill;
-- (void)setWritableTonightsBill:(MCSharedBill *)writeableTonightsBill;
+@property (strong, nonatomic) MCSharedBill *writableTonightsBill;
 
 @end
 

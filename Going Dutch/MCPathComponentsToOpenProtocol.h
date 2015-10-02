@@ -10,7 +10,6 @@
 
 @protocol MCPathComponentsToOpenProtocol <NSObject>
 
-- (void)setPathComponentsToOpen:(NSArray *)pathComponentsToOpen;
-- (NSArray *)pathComponentsToOpen;
+@property (strong, nonatomic) NSArray *pathComponentsToOpen;
 
 @end

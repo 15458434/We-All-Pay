@@ -12,7 +12,6 @@
 
 @protocol MCThisPaymentProtocol <NSObject>
 
-- (MCPayment *)thisPayment;
-- (void)setThisPayment:(MCPayment *)payment;
+@property (strong, nonatomic) MCPayment *thisPayment;
 
 @end

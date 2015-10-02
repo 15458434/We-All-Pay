@@ -20,7 +20,6 @@
 
 
 @property (strong, nonatomic) MCSharedBillPageViewController *pageViewController;
-@property (nonatomic, strong) MCSharedBill *writableTonightsBill;
 
 @end
 

@@ -11,7 +11,6 @@
 #import "MCPaymentViewController.h"
 
 #import "MCAllTripsTableViewController-iPad.h"
-#import "MCPaymentTableViewController_iPad.h"
 
 #import "MCWeAllPayStoreController.h"
 
@@ -139,7 +138,7 @@
         // open add payment
         UIStoryboard *storyboard = self.window.rootViewController.storyboard;
         UINavigationController *navPaymentViewController = [storyboard instantiateViewControllerWithIdentifier:@"navPaymentViewController"];
-        MCPaymentTableViewController_iPad *paymentViewController = (MCPaymentTableViewController_iPad *)[navPaymentViewController viewControllers][0];
+        PaymentViewController *paymentViewController = (PaymentViewController *)[navPaymentViewController viewControllers][0];
         paymentViewController.pathComponentsToOpen = pathDuringOpening;
         paymentViewController.tonightsBill = tonightsBill;
         [navController presentViewController:navPaymentViewController animated:YES completion:nil];

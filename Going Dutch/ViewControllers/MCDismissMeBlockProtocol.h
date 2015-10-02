@@ -10,6 +10,6 @@
 
 @protocol MCDismissMeBlockProtocol <NSObject>
 
-- (void)setDismissMe:(void (^)())dismissMe;
+@property (strong, nonatomic) void (^dismissMe)();
 
 @end
