@@ -12,8 +12,6 @@
 
 #import "MCSharedBill+addons.h"
 
-#import "UIView+MCAddons.h"
-
 #import "MCWeAllPayStoreController.h"
 
 #import "We_all_pay-Swift.h"

@@ -7,7 +7,6 @@
 //
 
 #import "MCPaymentViewController.h"
-#import "UIView+MCAddons.h"
 
 #import "MCPayment+addons.h"
 #import "MCPerson+addons.h"

@@ -8,8 +8,6 @@
 
 #import "MCSharedBillViewController_iPad.h"
 
-#import "UIView+MCAddons.h"
-
 #import "MCPerson+addons.h"
 #import "MCSharedBill+addons.h"
 #import "MCWeAllPayStoreController.h"

@@ -7,7 +7,6 @@
 //
 
 #import "MCPersonViewController.h"
-#import "UIViewController+TappedInBackground.h"
 
 #import "MCWeAllPayStoreController.h"
 #import "MCPerson+addons.h"
