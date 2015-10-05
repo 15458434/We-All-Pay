@@ -8,11 +8,11 @@
 
 #import "MCSelectEmailAddressTableViewController_iPad.h"
 
-#import "MCSelectEmailAddressTableViewCell_iPad.h"
-
 #import "MCWeAllPayStoreController.h"
 #import "MCPerson+addons.h"
 #import "MCEmailAddress+addons.h"
+
+#import "We_all_pay-Swift.h"
 
 @interface MCSelectEmailAddressTableViewController_iPad ()
 
@@ -85,7 +85,7 @@
 
 - (UITableViewCell *)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath
 {
-    MCSelectEmailAddressTableViewCell_iPad *cell = [tableView dequeueReusableCellWithIdentifier:@"MCSelectEmailAddressTableViewCell_iPad" forIndexPath:indexPath];
+    SelectEmailAddressTableViewCell_iPad *cell = [tableView dequeueReusableCellWithIdentifier:@"MCSelectEmailAddressTableViewCell_iPad" forIndexPath:indexPath];
     
     MCEmailAddress *emailAddress = [_allEmailAddresses objectAtIndex:[indexPath row]];
     [[cell emailAddressLabel] setText:[emailAddress emailAddress]];
