@@ -1213,7 +1213,7 @@
         <!--Select Payer Table View Controller i Pad-->
         <scene sceneID="vkK-vr-OvF">
             <objects>
-                <tableViewController storyboardIdentifier="MCSelectPayerTableViewController_iPad" useStoryboardIdentifierAsRestorationIdentifier="YES" id="XpR-6M-QF5" customClass="MCSelectPayerTableViewController_iPad" sceneMemberID="viewController">
+                <tableViewController storyboardIdentifier="MCSelectPayerTableViewController_iPad" useStoryboardIdentifierAsRestorationIdentifier="YES" id="XpR-6M-QF5" customClass="SelectPayerTableViewController_iPad" customModule="We_all_pay" customModuleProvider="target" sceneMemberID="viewController">
                     <tableView key="view" clipsSubviews="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" dataMode="prototypes" style="plain" rowHeight="44" sectionHeaderHeight="22" sectionFooterHeight="22" id="qtY-9X-OgJ">
                         <rect key="frame" x="0.0" y="0.0" width="320" height="480"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>

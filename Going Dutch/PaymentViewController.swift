@@ -284,7 +284,7 @@ enum CancelButtonPressed {
     override func prepareForSegue(segue: UIStoryboardSegue, sender: AnyObject?) {
         switch (segue.identifier) {
         case let identifier where identifier == "selectPayer_iPad":
-            let destination = segue.destinationViewController as! MCSelectPayerTableViewController_iPad
+            let destination = segue.destinationViewController as! SelectPayerTableViewController_iPad
             destination.tonightsBill = tonightsBill
             destination.thisPayment = thisPayment
             
