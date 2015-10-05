@@ -364,7 +364,7 @@
                                     <outlet property="lastLabel" destination="ZFw-P0-QBI" id="dHj-jd-trU"/>
                                 </connections>
                             </tableViewCell>
-                            <tableViewCell contentMode="scaleToFill" restorationIdentifier="MCWhoOwesWhoTableViewCell_iPad" selectionStyle="none" indentationWidth="10" reuseIdentifier="MCWhoOwesWhoTableViewCell_iPad" id="w1V-qq-Jfl" customClass="MCWhoOwesWhoTableViewCell_iPad">
+                            <tableViewCell contentMode="scaleToFill" restorationIdentifier="MCWhoOwesWhoTableViewCell_iPad" selectionStyle="none" indentationWidth="10" reuseIdentifier="MCWhoOwesWhoTableViewCell_iPad" id="w1V-qq-Jfl" customClass="WhoOwesWhoTableViewCell_iPad" customModule="We_all_pay" customModuleProvider="target">
                                 <rect key="frame" x="0.0" y="208" width="768" height="44"/>
                                 <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                                 <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" tableViewCell="w1V-qq-Jfl" id="EWV-5Z-WfL">

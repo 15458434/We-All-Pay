@@ -8,8 +8,6 @@
 
 #import "MCSolutionTableViewController.h"
 
-#import "MCWhoOwesWhoTableViewCell_iPad.h"
-
 #import "We_all_pay-Swift.h"
 
 #import "MCWeAllPayStoreController.h"
@@ -263,7 +261,7 @@ typedef NS_ENUM(BOOL, MCXRatesMissing) {
 - (UITableViewCell *)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath
 {
     if ([indexPath section] == 0) {
-        MCWhoOwesWhoTableViewCell_iPad *cell = [tableView dequeueReusableCellWithIdentifier:@"MCWhoOwesWhoTableViewCell_iPad" forIndexPath:indexPath];
+        WhoOwesWhoTableViewCell_iPad *cell = [tableView dequeueReusableCellWithIdentifier:@"MCWhoOwesWhoTableViewCell_iPad" forIndexPath:indexPath];
         
         // Configure the cell...
         MCReturnPayment *thisCellContents = [_solution objectAtIndex:[indexPath row]];
