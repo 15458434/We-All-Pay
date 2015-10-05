@@ -283,7 +283,7 @@ enum CancelButtonPressed {
     
     override func prepareForSegue(segue: UIStoryboardSegue, sender: AnyObject?) {
         switch (segue.identifier) {
-        case let identifier where identifier == "selectPayer":
+        case let identifier where identifier == "selectPayer_iPad":
             let destination = segue.destinationViewController as! MCSelectPayerTableViewController_iPad
             destination.tonightsBill = tonightsBill
             destination.thisPayment = thisPayment
@@ -294,7 +294,7 @@ enum CancelButtonPressed {
                 myPopover.dismissPopoverAnimated(true)
                 self.reloadPayerView()
             }
-        case let identifier where identifier == "openSelectCurrency":
+        case let identifier where identifier == "openSelectCurrency_iPad":
             let destination = segue.destinationViewController as! MCSelectCurrencyTableViewController_iPad
             destination.thisPayment = thisPayment
             
@@ -303,7 +303,7 @@ enum CancelButtonPressed {
             destination.dismissMe = { 
                 myPopover.dismissPopoverAnimated(true)
             }
-        case let identifier where identifier == "selectCategory":
+        case let identifier where identifier == "selectCategory_iPad":
             let destination = segue.destinationViewController as! MCSelectCategoryTableViewController_iPad
             destination.thisPayment = thisPayment
             
