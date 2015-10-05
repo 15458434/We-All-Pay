@@ -9,8 +9,6 @@
 #import "MCSharedBillPeoplePresentTableViewController-iPad.h"
 #import "UIViewController+WeAllPayStore.h"
 
-#import "MCPersonTableViewCell_iPad.h"
-
 #import "MCPerson+addons.h"
 #import "MCSharedBill+addons.h"
 
@@ -264,7 +262,7 @@
 - (UITableViewCell *)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath
 {
     MCPerson *thisCellsPerson = [_dataController objectAtIndexPath:indexPath];
-    MCPersonTableViewCell_iPad *thisCell = [tableView dequeueReusableCellWithIdentifier:@"MCPersonTableViewCell_iPad"];
+    PersonTableViewCell_iPad *thisCell = [tableView dequeueReusableCellWithIdentifier:@"MCPersonTableViewCell_iPad"];
     
     thisCell.personImage.image = thisCellsPerson.picture;
     [[thisCell nameLabel] setText:[thisCellsPerson getFullName]];
