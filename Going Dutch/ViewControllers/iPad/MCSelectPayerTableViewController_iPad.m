@@ -8,8 +8,6 @@
 
 #import "MCSelectPayerTableViewController_iPad.h"
 
-#import "MCSelectPayerTableViewCell_iPad.h"
-
 #import "MCWeAllPayStoreController.h"
 #import "MCPerson+addons.h"
 #import "MCPayment+addons.h"
@@ -89,7 +87,7 @@
 
 - (UITableViewCell *)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath
 {
-    MCSelectPayerTableViewCell_iPad *cell = [tableView dequeueReusableCellWithIdentifier:@"selectPayerTableViewCell" forIndexPath:indexPath];
+    SelectPayerTableViewCell_iPad *cell = [tableView dequeueReusableCellWithIdentifier:@"selectPayerTableViewCell" forIndexPath:indexPath];
     
     MCPerson *thisPerson = [people objectAtIndex:[indexPath row]];
     cell.thumbnailView.image = thisPerson.thumbnail;
