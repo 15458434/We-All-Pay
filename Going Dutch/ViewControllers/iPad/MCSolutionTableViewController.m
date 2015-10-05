@@ -9,7 +9,6 @@
 #import "MCSolutionTableViewController.h"
 
 #import "MCWhoOwesWhoTableViewCell_iPad.h"
-#import "MCSolutionOverViewTableViewCell_iPad.h"
 
 #import "We_all_pay-Swift.h"
 
@@ -282,7 +281,7 @@ typedef NS_ENUM(BOOL, MCXRatesMissing) {
     }
     
     if ([indexPath section] == 1) {
-        MCSolutionOverViewTableViewCell_iPad *cell = [tableView dequeueReusableCellWithIdentifier:@"MCSolutionOverViewTableViewCell_iPad" forIndexPath:indexPath];
+        SolutionOverViewTableViewCell_iPad *cell = [tableView dequeueReusableCellWithIdentifier:@"MCSolutionOverViewTableViewCell_iPad" forIndexPath:indexPath];
         
         NSString *eachPaysString = NSLocalizedString(@"EACH_USED", @"Each used:");
         NSString *thisPersonPaidString = [NSString stringWithFormat:@"%@ %@", [[_peoplePresent objectAtIndex:[indexPath row]] getFullName], eachPaysString];
@@ -299,7 +298,7 @@ typedef NS_ENUM(BOOL, MCXRatesMissing) {
     }
     
     if ([indexPath section] == 2) {
-        MCSolutionOverViewTableViewCell_iPad *cell = [tableView dequeueReusableCellWithIdentifier:@"MCSolutionOverViewTableViewCell_iPad" forIndexPath:indexPath];
+        SolutionOverViewTableViewCell_iPad *cell = [tableView dequeueReusableCellWithIdentifier:@"MCSolutionOverViewTableViewCell_iPad" forIndexPath:indexPath];
         
         if ([indexPath row] < [_peoplePresent count]) {
             NSString *paidString = NSLocalizedString(@"TOTAL_PAID", @"total paid:");
