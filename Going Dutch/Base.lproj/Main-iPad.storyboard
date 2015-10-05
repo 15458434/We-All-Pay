@@ -1478,7 +1478,7 @@
         <!--Events-->
         <scene sceneID="8rY-HI-7EW">
             <objects>
-                <viewController storyboardIdentifier="eventViewController" useStoryboardIdentifierAsRestorationIdentifier="YES" id="LcN-QB-1Nf" customClass="MCRootViewController" sceneMemberID="viewController">
+                <viewController storyboardIdentifier="eventViewController" useStoryboardIdentifierAsRestorationIdentifier="YES" id="LcN-QB-1Nf" customClass="RootViewController" customModule="We_all_pay" customModuleProvider="target" sceneMemberID="viewController">
                     <layoutGuides>
                         <viewControllerLayoutGuide type="top" id="pNK-a2-hzL"/>
                         <viewControllerLayoutGuide type="bottom" id="eQn-cZ-eIt"/>
@@ -1612,8 +1612,8 @@
         <image name="iScreen button" width="26" height="26"/>
     </resources>
     <inferredMetricsTieBreakers>
-        <segue reference="eXg-7Q-xwo"/>
-        <segue reference="NBY-n3-S8k"/>
         <segue reference="1Uw-eh-0NI"/>
+        <segue reference="NBY-n3-S8k"/>
+        <segue reference="eXg-7Q-xwo"/>
     </inferredMetricsTieBreakers>
 </document>

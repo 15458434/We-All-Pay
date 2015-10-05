@@ -27,3 +27,4 @@
 
 #import "MCSelectCurrencyTableViewController_iPad.h"
 #import "MCSelectCategoryTableViewController_iPad.h"
+#import "MCAllTripsTableViewController-iPad.h"
