@@ -180,7 +180,7 @@ enum CancelButtonPressed {
     // MARK: UITextFieldDelegate 
     func textFieldShouldBeginEditing(textField: UITextField) -> Bool {
         if textField == paidField {
-            if thisPayment.money.doubleValue >= 0.005 {
+            if thisPayment.money?.doubleValue >= 0.005 {
                 paidField.text = ""
             } else {
                 paidField.text = thisPayment.getMoneyValueAsAString()

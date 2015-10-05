@@ -56,6 +56,4 @@ class SelectPayerTableViewController_iPad: UITableViewController, MCTonightsBill
         
         return cell
     }
-    
-    
 }
