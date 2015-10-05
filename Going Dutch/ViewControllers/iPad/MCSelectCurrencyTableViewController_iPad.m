@@ -7,7 +7,6 @@
 //
 
 #import "MCSelectCurrencyTableViewController_iPad.h"
-#import "MCSelectCurrencyTableViewCell_iPad.h"
 
 #import "MCCurrency+addons.h"
 #import "MCPayment+addons.h"
@@ -177,9 +176,9 @@ NSString * const currencyCellIdentifier_iPad = @"MCSelectCurrencyTableViewCell_i
 
 - (UITableViewCell *)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath
 {
-    MCSelectCurrencyTableViewCell_iPad *cell = (MCSelectCurrencyTableViewCell_iPad *)[[self tableView] dequeueReusableCellWithIdentifier:currencyCellIdentifier_iPad];
+    SelectCurrencyTableViewCell_iPad *cell = (SelectCurrencyTableViewCell_iPad *)[[self tableView] dequeueReusableCellWithIdentifier:currencyCellIdentifier_iPad];
     if (cell == nil) {
-        cell = [[MCSelectCurrencyTableViewCell_iPad alloc] initWithStyle:UITableViewCellStyleDefault reuseIdentifier:currencyCellIdentifier_iPad];
+        cell = [[SelectCurrencyTableViewCell_iPad alloc] initWithStyle:UITableViewCellStyleDefault reuseIdentifier:currencyCellIdentifier_iPad];
     }
     
     NSDictionary *thisCellsCurrency;

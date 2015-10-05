@@ -1297,7 +1297,7 @@
                             </connections>
                         </searchBar>
                         <prototypes>
-                            <tableViewCell contentMode="scaleToFill" horizontalCompressionResistancePriority="250" restorationIdentifier="MCSelectCurrencyTableViewCell_iPad" selectionStyle="blue" accessoryType="checkmark" hidesAccessoryWhenEditing="NO" indentationLevel="1" indentationWidth="0.0" reuseIdentifier="MCSelectCurrencyTableViewCell_iPad" id="nTN-I8-L2p" customClass="MCSelectCurrencyTableViewCell_iPad">
+                            <tableViewCell contentMode="scaleToFill" horizontalCompressionResistancePriority="250" restorationIdentifier="MCSelectCurrencyTableViewCell_iPad" selectionStyle="blue" accessoryType="checkmark" hidesAccessoryWhenEditing="NO" indentationLevel="1" indentationWidth="0.0" reuseIdentifier="MCSelectCurrencyTableViewCell_iPad" id="nTN-I8-L2p" customClass="SelectCurrencyTableViewCell_iPad" customModule="We_all_pay" customModuleProvider="target">
                                 <rect key="frame" x="0.0" y="66" width="320" height="44"/>
                                 <autoresizingMask key="autoresizingMask"/>
                                 <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" tableViewCell="nTN-I8-L2p" id="kZh-eJ-cZO">
