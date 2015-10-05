@@ -39,6 +39,7 @@
 		384512F81986D4CE008D17AB /* MCSelectCurrencyTableViewCell_iPad.m in Sources */ = {isa = PBXBuildFile; fileRef = 384512F71986D4CE008D17AB /* MCSelectCurrencyTableViewCell_iPad.m */; };
 		384513011986DEC0008D17AB /* MCSelectCurrencyTableViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 384513001986DEC0008D17AB /* MCSelectCurrencyTableViewController.m */; };
 		384EC90A1BC2F03F00A80799 /* PaymentTableViewCell_iPad.swift in Sources */ = {isa = PBXBuildFile; fileRef = 384EC9091BC2F03F00A80799 /* PaymentTableViewCell_iPad.swift */; settings = {ASSET_TAGS = (); }; };
+		384EC90C1BC2F17500A80799 /* SelectCategoryTableViewCell_iPad.swift in Sources */ = {isa = PBXBuildFile; fileRef = 384EC90B1BC2F17500A80799 /* SelectCategoryTableViewCell_iPad.swift */; settings = {ASSET_TAGS = (); }; };
 		38572AD7169D437B00969C62 /* UIKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 38572AD6169D437B00969C62 /* UIKit.framework */; };
 		38572AD9169D437B00969C62 /* Foundation.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 38572AD8169D437B00969C62 /* Foundation.framework */; settings = {ATTRIBUTES = (Required, ); }; };
 		38572ADB169D437B00969C62 /* CoreGraphics.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 38572ADA169D437B00969C62 /* CoreGraphics.framework */; };
@@ -72,7 +73,6 @@
 		3873A2A516F23AA1000832FD /* MessageUI.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 3873A2A416F23AA1000832FD /* MessageUI.framework */; };
 		387494C919EFE46F001614CA /* MCSelectCategoryTableViewController_iPhone.m in Sources */ = {isa = PBXBuildFile; fileRef = 387494C819EFE46F001614CA /* MCSelectCategoryTableViewController_iPhone.m */; };
 		387494CF19F041A6001614CA /* MCSelectCategoryTableViewController_iPad.m in Sources */ = {isa = PBXBuildFile; fileRef = 387494CE19F041A6001614CA /* MCSelectCategoryTableViewController_iPad.m */; };
-		387494D219F045DA001614CA /* MCSelectCategoryTableViewCell_iPad.m in Sources */ = {isa = PBXBuildFile; fileRef = 387494D119F045DA001614CA /* MCSelectCategoryTableViewCell_iPad.m */; };
 		387494D419F053C2001614CA /* WeAllPayStore3to4.xcmappingmodel in Sources */ = {isa = PBXBuildFile; fileRef = 387494D319F053C2001614CA /* WeAllPayStore3to4.xcmappingmodel */; };
 		387494D619F053E9001614CA /* WeAllPayStore2to4.xcmappingmodel in Sources */ = {isa = PBXBuildFile; fileRef = 387494D519F053E9001614CA /* WeAllPayStore2to4.xcmappingmodel */; };
 		387494D819F05476001614CA /* WeAllPayStore1to4.xcmappingmodel in Sources */ = {isa = PBXBuildFile; fileRef = 387494D719F05476001614CA /* WeAllPayStore1to4.xcmappingmodel */; };
@@ -259,6 +259,7 @@
 		384512FF1986DEC0008D17AB /* MCSelectCurrencyTableViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = MCSelectCurrencyTableViewController.h; path = ViewControllers/iPhone/MCSelectCurrencyTableViewController.h; sourceTree = "<group>"; };
 		384513001986DEC0008D17AB /* MCSelectCurrencyTableViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = MCSelectCurrencyTableViewController.m; path = ViewControllers/iPhone/MCSelectCurrencyTableViewController.m; sourceTree = "<group>"; };
 		384EC9091BC2F03F00A80799 /* PaymentTableViewCell_iPad.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = PaymentTableViewCell_iPad.swift; sourceTree = "<group>"; };
+		384EC90B1BC2F17500A80799 /* SelectCategoryTableViewCell_iPad.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SelectCategoryTableViewCell_iPad.swift; sourceTree = "<group>"; };
 		38522E2418DB3F01007BDB3F /* XCTest.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = XCTest.framework; path = Library/Frameworks/XCTest.framework; sourceTree = DEVELOPER_DIR; };
 		38572AD2169D437B00969C62 /* We all pay.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = "We all pay.app"; sourceTree = BUILT_PRODUCTS_DIR; };
 		38572AD6169D437B00969C62 /* UIKit.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = UIKit.framework; path = System/Library/Frameworks/UIKit.framework; sourceTree = SDKROOT; };
@@ -309,8 +310,6 @@
 		387494C819EFE46F001614CA /* MCSelectCategoryTableViewController_iPhone.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = MCSelectCategoryTableViewController_iPhone.m; path = ViewControllers/iPhone/MCSelectCategoryTableViewController_iPhone.m; sourceTree = "<group>"; };
 		387494CD19F041A6001614CA /* MCSelectCategoryTableViewController_iPad.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = MCSelectCategoryTableViewController_iPad.h; path = ViewControllers/iPad/MCSelectCategoryTableViewController_iPad.h; sourceTree = "<group>"; };
 		387494CE19F041A6001614CA /* MCSelectCategoryTableViewController_iPad.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = MCSelectCategoryTableViewController_iPad.m; path = ViewControllers/iPad/MCSelectCategoryTableViewController_iPad.m; sourceTree = "<group>"; };
-		387494D019F045DA001614CA /* MCSelectCategoryTableViewCell_iPad.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = MCSelectCategoryTableViewCell_iPad.h; path = Views/iPad/MCSelectCategoryTableViewCell_iPad.h; sourceTree = "<group>"; };
-		387494D119F045DA001614CA /* MCSelectCategoryTableViewCell_iPad.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = MCSelectCategoryTableViewCell_iPad.m; path = Views/iPad/MCSelectCategoryTableViewCell_iPad.m; sourceTree = "<group>"; };
 		387494D319F053C2001614CA /* WeAllPayStore3to4.xcmappingmodel */ = {isa = PBXFileReference; lastKnownFileType = wrapper.xcmappingmodel; path = WeAllPayStore3to4.xcmappingmodel; sourceTree = "<group>"; };
 		387494D519F053E9001614CA /* WeAllPayStore2to4.xcmappingmodel */ = {isa = PBXFileReference; lastKnownFileType = wrapper.xcmappingmodel; path = WeAllPayStore2to4.xcmappingmodel; sourceTree = "<group>"; };
 		387494D719F05476001614CA /* WeAllPayStore1to4.xcmappingmodel */ = {isa = PBXFileReference; lastKnownFileType = wrapper.xcmappingmodel; path = WeAllPayStore1to4.xcmappingmodel; sourceTree = "<group>"; };
@@ -777,8 +776,7 @@
 				38E2CB451BC2A8E10092B5C8 /* PersonTableViewCell_iPad.swift */,
 				384EC9091BC2F03F00A80799 /* PaymentTableViewCell_iPad.swift */,
 				3812760F1BBE9A7F0004C8C2 /* MCPaymentPresenceTableViewCell.swift */,
-				387494D019F045DA001614CA /* MCSelectCategoryTableViewCell_iPad.h */,
-				387494D119F045DA001614CA /* MCSelectCategoryTableViewCell_iPad.m */,
+				384EC90B1BC2F17500A80799 /* SelectCategoryTableViewCell_iPad.swift */,
 				384512F61986D4CE008D17AB /* MCSelectCurrencyTableViewCell_iPad.h */,
 				384512F71986D4CE008D17AB /* MCSelectCurrencyTableViewCell_iPad.m */,
 				3872C0D518FF1363008C54D7 /* MCSelectEmailAddressTableViewCell_iPad.h */,
@@ -1126,6 +1124,7 @@
 			files = (
 				38E9DA1C1B29F8990097D719 /* MCTableEmptyMessage.swift in Sources */,
 				38DB0F941ADD48CB00946B95 /* MCWhoPayingUserDefaultsStoreInterface.m in Sources */,
+				384EC90C1BC2F17500A80799 /* SelectCategoryTableViewCell_iPad.swift in Sources */,
 				3812760E1BBE76B40004C8C2 /* PaymentViewController.swift in Sources */,
 				38977E4F1B2A26D4008484A4 /* MCTwoLabelIscreenTableViewCell.swift in Sources */,
 				38572AE3169D437B00969C62 /* main.m in Sources */,
@@ -1191,7 +1190,6 @@
 				38B08C571B38382E00FB84B1 /* MCTableEmptyMessage_iPad.swift in Sources */,
 				384EC90A1BC2F03F00A80799 /* PaymentTableViewCell_iPad.swift in Sources */,
 				381275FF1BBD84650004C8C2 /* InfoScreenTableViewController.swift in Sources */,
-				387494D219F045DA001614CA /* MCSelectCategoryTableViewCell_iPad.m in Sources */,
 				38E0C5EA18E9B2BD005A3F17 /* MCAllTripsTableViewController-iPad.m in Sources */,
 				3812760A1BBE74520004C8C2 /* UIViewExtension.swift in Sources */,
 				3892E3A417903EF00038894B /* MCEditTripViewController.m in Sources */,
