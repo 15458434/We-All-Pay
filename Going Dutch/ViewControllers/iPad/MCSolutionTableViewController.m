@@ -200,9 +200,9 @@ typedef NS_ENUM(BOOL, MCXRatesMissing) {
 
 - (void)tableView:(UITableView *)tableView willDisplayHeaderView:(UIView *)view forSection:(NSInteger)section
 {
-    [view setTintColor:[MCColors getbackgroundColor]];
+    [view setTintColor:[Colors getbackgroundColor]];
     UITableViewHeaderFooterView *sectionTitleHeader = (UITableViewHeaderFooterView *)view;
-    [[sectionTitleHeader textLabel] setTextColor:[MCColors getEmptyMessageTextColor]];
+    [[sectionTitleHeader textLabel] setTextColor:[Colors getEmptyMessageTextColor]];
 }
 
 #pragma mark - Table view data source

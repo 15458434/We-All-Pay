@@ -185,7 +185,7 @@
     [_tripNameField setText:[_tonightsBill tripName]];
     
     // Set the color of the backButton.
-    UIColor *backButtonColor = [MCColors getButtonColor];
+    UIColor *backButtonColor = [Colors getButtonColor];
     [[[self navigationController] navigationBar] setTintColor:backButtonColor];
     [[[self navigationItem] rightBarButtonItem] setTintColor:backButtonColor];
     

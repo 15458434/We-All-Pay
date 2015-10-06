@@ -23,6 +23,8 @@
 #import "MCDismissKeyboardProtocol.h"
 #import "MCPathComponentsToOpenProtocol.h"
 
+#import "MCTools.h"
+
 #import "MCCategoryPictureStoreController.h"
 #import "MCCategoryPictureObject.h"
 

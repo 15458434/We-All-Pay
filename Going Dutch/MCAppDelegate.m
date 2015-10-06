@@ -77,22 +77,22 @@
     NSLog(@"The current language code is: %@", languageCode);
 #endif
     // Set colors throughout the App.
-    [[UINavigationBar appearance] setBarTintColor:[MCColors getNavigationColor]];
-    [[UINavigationBar appearance] setTintColor:[MCColors getButtonColor]];
+    [[UINavigationBar appearance] setBarTintColor:[Colors getNavigationColor]];
+    [[UINavigationBar appearance] setTintColor:[Colors getButtonColor]];
     [[UINavigationBar appearance] setTitleTextAttributes:@{NSForegroundColorAttributeName: [UIColor whiteColor]}];
-    [[UIButton appearance] setTitleColor:[MCColors getButtonColor] forState:UIControlStateNormal];
-    [[UIButton appearance] setTitleColor:[MCColors getButtonDisabledColor] forState:UIControlStateDisabled];
-    [[UIBarButtonItem appearance] setTintColor:[MCColors getButtonColor]];
+    [[UIButton appearance] setTitleColor:[Colors getButtonColor] forState:UIControlStateNormal];
+    [[UIButton appearance] setTitleColor:[Colors getButtonDisabledColor] forState:UIControlStateDisabled];
+    [[UIBarButtonItem appearance] setTintColor:[Colors getButtonColor]];
     [[UINavigationBar appearance] setBarStyle:UIBarStyleBlackTranslucent];
     [[UIApplication sharedApplication] setStatusBarStyle:UIStatusBarStyleLightContent];
     [[UIButton appearanceWhenContainedIn:[UITableViewCell class], nil] setTitleColor:[UIColor whiteColor] forState:UIControlStateNormal];
     
     // Set the background color in the peoplepicker.
-    [[UISearchBar appearance] setBarTintColor:[MCColors getbackgroundColor]];
+    [[UISearchBar appearance] setBarTintColor:[Colors getbackgroundColor]];
     
     // Set the color of the cancelButton of the search bar
     UIBarButtonItem *addressBookSearchBarCancelButton = [UIBarButtonItem appearanceWhenContainedIn:[UISearchBar class], nil];
-    UIColor *addressBookSearchBarCancelButtonColor = [MCColors getButtonColor];
+    UIColor *addressBookSearchBarCancelButtonColor = [Colors getButtonColor];
     NSMutableDictionary *colorDictionary = [NSMutableDictionary dictionaryWithObjectsAndKeys:
                                             addressBookSearchBarCancelButtonColor,
                                             NSForegroundColorAttributeName,
@@ -101,7 +101,7 @@
     [addressBookSearchBarCancelButton setTitleTextAttributes:colorDictionary forState:UIControlStateNormal];
     
     // Set the sectionIndex color in the people picker
-    [[UITableView appearance] setSectionIndexColor:[MCColors getButtonColor]];
+    [[UITableView appearance] setSectionIndexColor:[Colors getButtonColor]];
     
     [[UINavigationBar appearance] setBarStyle:UIBarStyleBlack];
 }
