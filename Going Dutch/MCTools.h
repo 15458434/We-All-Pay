@@ -22,6 +22,4 @@
 + (UIImage *)cutCircularImageFrom:(UIImage *)sourceImage toDestinationRect:(CGRect)newPictureRect;
 + (BOOL)isStringAnEmailAddress:(NSString *)stringThatIsSupposedToBeEmailAddress;
 
-+ (UIColor *)colorWith8BitRed:(NSUInteger)red green:(NSUInteger)green blue:(NSUInteger)blue alpha:(CGFloat)alpha;
-
 @end

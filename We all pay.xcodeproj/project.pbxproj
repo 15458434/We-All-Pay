@@ -40,6 +40,7 @@
 		384EC9101BC2F48C00A80799 /* SelectEmailAddressTableViewCell_iPad.swift in Sources */ = {isa = PBXBuildFile; fileRef = 384EC90F1BC2F48C00A80799 /* SelectEmailAddressTableViewCell_iPad.swift */; settings = {ASSET_TAGS = (); }; };
 		384EC9121BC3008300A80799 /* SelectEmailAddressTableViewController_iPad.swift in Sources */ = {isa = PBXBuildFile; fileRef = 384EC9111BC3008300A80799 /* SelectEmailAddressTableViewController_iPad.swift */; settings = {ASSET_TAGS = (); }; };
 		384EC9141BC3E78C00A80799 /* Colors.swift in Sources */ = {isa = PBXBuildFile; fileRef = 384EC9131BC3E78C00A80799 /* Colors.swift */; settings = {ASSET_TAGS = (); }; };
+		384EC9161BC3EA4C00A80799 /* UIColorExtension.swift in Sources */ = {isa = PBXBuildFile; fileRef = 384EC9151BC3EA4C00A80799 /* UIColorExtension.swift */; settings = {ASSET_TAGS = (); }; };
 		38572AD7169D437B00969C62 /* UIKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 38572AD6169D437B00969C62 /* UIKit.framework */; };
 		38572AD9169D437B00969C62 /* Foundation.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 38572AD8169D437B00969C62 /* Foundation.framework */; settings = {ATTRIBUTES = (Required, ); }; };
 		38572ADB169D437B00969C62 /* CoreGraphics.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 38572ADA169D437B00969C62 /* CoreGraphics.framework */; };
@@ -253,6 +254,7 @@
 		384EC90F1BC2F48C00A80799 /* SelectEmailAddressTableViewCell_iPad.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SelectEmailAddressTableViewCell_iPad.swift; sourceTree = "<group>"; };
 		384EC9111BC3008300A80799 /* SelectEmailAddressTableViewController_iPad.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SelectEmailAddressTableViewController_iPad.swift; sourceTree = "<group>"; };
 		384EC9131BC3E78C00A80799 /* Colors.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Colors.swift; sourceTree = "<group>"; };
+		384EC9151BC3EA4C00A80799 /* UIColorExtension.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = UIColorExtension.swift; sourceTree = "<group>"; };
 		38522E2418DB3F01007BDB3F /* XCTest.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = XCTest.framework; path = Library/Frameworks/XCTest.framework; sourceTree = DEVELOPER_DIR; };
 		38572AD2169D437B00969C62 /* We all pay.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = "We all pay.app"; sourceTree = BUILT_PRODUCTS_DIR; };
 		38572AD6169D437B00969C62 /* UIKit.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = UIKit.framework; path = System/Library/Frameworks/UIKit.framework; sourceTree = SDKROOT; };
@@ -774,6 +776,7 @@
 				38CDE8FE17135B6300387CAA /* MCTools.h */,
 				38CDE8FF17135B6300387CAA /* MCTools.m */,
 				384EC9131BC3E78C00A80799 /* Colors.swift */,
+				384EC9151BC3EA4C00A80799 /* UIColorExtension.swift */,
 				381276091BBE74520004C8C2 /* UIViewExtension.swift */,
 				3825A82219990BA400A8885D /* UIViewController+WeAllPayStore.h */,
 				3825A82319990BA400A8885D /* UIViewController+WeAllPayStore.m */,
@@ -1105,6 +1108,7 @@
 				389DE907197FBE8400169645 /* MCExchangeRate+addons.m in Sources */,
 				38977E631B2A37BC008484A4 /* MCAllTripsTableViewCell.swift in Sources */,
 				387494D819F05476001614CA /* WeAllPayStore1to4.xcmappingmodel in Sources */,
+				384EC9161BC3EA4C00A80799 /* UIColorExtension.swift in Sources */,
 				38977E5B1B2A30A7008484A4 /* MCWhoOwesWhoTableViewCell_iPhone.swift in Sources */,
 				38E2CB661BC2EA6C0092B5C8 /* RootViewController.swift in Sources */,
 				387494CF19F041A6001614CA /* MCSelectCategoryTableViewController_iPad.m in Sources */,
