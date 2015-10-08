@@ -24,6 +24,8 @@ NSString * const cellIdentifier = @"MCSelectCurrencyTableViewCell_iPhone";
 @property (nonatomic, strong) NSFetchedResultsController *searchDataController;
 @property (nonatomic, strong) NSMutableArray *searchResults;
 
+@property (nonatomic, strong) UIAlertView *exchangeRateFetchErrorAlert;
+
 @end
 
 @implementation MCSelectCurrencyTableViewController
@@ -142,12 +144,26 @@ NSString * const cellIdentifier = @"MCSelectCurrencyTableViewCell_iPhone";
 
 - (void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath
 {
+    UIViewController *myPresenter = self.presentingViewController;
+    
     NSDictionary *thisCellsCurrency;
     if (tableView != [[self searchDisplayController] searchResultsTableView]) {
         thisCellsCurrency = _sections[[indexPath section]][[indexPath row]];
         [self addNewCurrencyToThisPayment:thisCellsCurrency[@"code"] withCompletionHandler:^(NSError *error) {
             if (error) {
                 NSLog(@"Error changing currency: %@", error);
+                
+                NSString *title = NSLocalizedString(@"Unable to fetch exchange rates", @"Title message of an alert that pops up when fetching exchange rates is impossible");
+                NSString *message = NSLocalizedString(@"Fetching exchange rates is not possible at this moment. Check your internet connection and/or hit solve to fetch all missing exchange rates at a later time", @"Message explaining what the user can do to refetch exchange rates");
+                NSString *dismissTitle = NSLocalizedString(@"Dismiss", @"Title of a button that dismisses an alert.");
+                
+                if ([UIAlertController class]) {
+                    // iOS 8 and up.
+                    UIAlertController *alertController = [UIAlertController alertControllerWithTitle:title message:message preferredStyle:UIAlertControllerStyleAlert];
+                    UIAlertAction *dismissAction = [UIAlertAction actionWithTitle:dismissTitle style:UIAlertActionStyleCancel handler:nil];
+                    [alertController addAction:dismissAction];
+                    [myPresenter presentViewController:alertController animated:YES completion:nil];
+                }
             }
         }];
     } else {
@@ -155,6 +171,18 @@ NSString * const cellIdentifier = @"MCSelectCurrencyTableViewCell_iPhone";
         [self addNewCurrencyToThisPayment:thisCellsCurrency[@"code"] withCompletionHandler:^(NSError *error) {
             if (error) {
                 NSLog(@"Error changing currency: %@", error);
+                
+                NSString *title = NSLocalizedString(@"Unable to fetch exchange rates", @"Title message of an alert that pops up when fetching exchange rates is impossible");
+                NSString *message = NSLocalizedString(@"Fetching exchange rates is not possible at this moment. Check your internet connection and/or hit solve to fetch all missing exchange rates at a later time", @"Message explaining what the user can do to refetch exchange rates");
+                if ([UIAlertController class]) {
+                    // iOS 8 and up.
+                    UIAlertController *alertController = [UIAlertController alertControllerWithTitle:title message:message preferredStyle:UIAlertControllerStyleAlert];
+                    NSString *dismissTitle = NSLocalizedString(@"Dismiss", @"Title of a button that dismisses an alart.");
+                    UIAlertAction *dismissAction = [UIAlertAction actionWithTitle:dismissTitle style:UIAlertActionStyleCancel handler:nil];
+                    [alertController addAction:dismissAction];
+                    [myPresenter presentViewController:alertController animated:YES completion:nil];
+                }
+
             }
         }];
     }

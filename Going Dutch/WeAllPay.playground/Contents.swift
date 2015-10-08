@@ -2,12 +2,13 @@
 
 import Foundation
 
-let mark: Dictionary<String, String> = ["name": "Mark", "type": "Man"]
-let lieke: Dictionary<String, String> = ["name": "Lieke", "type": "Vrouw"]
-let merit: Dictionary<String, String> = ["name": "Merit", "type": "Vrouw"]
-let marieke: Dictionary<String, String> = ["name": "Marieke", "type": "Vrouw"]
-let joris: Dictionary<String, String> = ["name": "Joris", "type": "Man"]
+class NSCurrencyFormatter: NSNumberFormatter {
+    
+}
 
-let people = [mark, lieke, merit, marieke, joris]
-let vrouwen = people.filter {$0["type"] == "Vrouw"}
-print(vrouwen, 
+let money = 34.99
+let nf = NSNumberFormatter()
+nf.numberStyle = NSNumberFormatterStyle.CurrencyStyle
+
+let printedMoneyString = nf.stringFromNumber(NSNumber(double: money))
+let editableMoneyString = nf.editingStringForObjectValue(NSNumber(double: money))
