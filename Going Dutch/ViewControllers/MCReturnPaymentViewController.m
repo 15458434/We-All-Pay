@@ -106,13 +106,30 @@ typedef NS_ENUM(BOOL, MCXRatesMissing) {
         NSString *message = NSLocalizedString(@"EMAIL_CONSTRUCTION_FAILURE_MESSAGE", @"Reason: Not all people have a mail address.");
         NSString *cancel = NSLocalizedString(@"CANCEL", @"Cancel");
         NSString *sendAnyway = NSLocalizedString(@"SEND_ANYWAY", @"Send anyway");
-        UIAlertView *mailAddressesMissing = [[UIAlertView alloc] initWithTitle:title
-                                                                       message:message
-                                                                      delegate:self
-                                                             cancelButtonTitle:cancel
-                                                             otherButtonTitles:sendAnyway, nil];
-        [mailAddressesMissing setDelegate:self];
-        [mailAddressesMissing show];
+        if ([UIAlertController class]) {
+            // iOS 8 and up
+            UIAlertController *alertController = [UIAlertController alertControllerWithTitle:title message:message preferredStyle:UIAlertControllerStyleAlert];
+            [alertController addAction:[UIAlertAction actionWithTitle:cancel style:UIAlertActionStyleCancel handler:^(UIAlertAction * _Nonnull action) {
+                // don't do a thing
+            }]];
+            __weak typeof(self) weakSelf = self;
+            [alertController addAction:[UIAlertAction actionWithTitle:sendAnyway style:UIAlertActionStyleDefault handler:^(UIAlertAction * _Nonnull action) {
+                typeof(self) strongSelf = weakSelf;
+                if (strongSelf) {
+                    [self openMailView:self];
+                }
+            }]];
+            [self presentViewController:alertController animated:YES completion:nil];
+        } else {
+            UIAlertView *mailAddressesMissing = [[UIAlertView alloc] initWithTitle:title
+                                                                           message:message
+                                                                          delegate:self
+                                                                 cancelButtonTitle:cancel
+                                                                 otherButtonTitles:sendAnyway, nil];
+            [mailAddressesMissing setDelegate:self];
+            [mailAddressesMissing show];
+        }
+
     }
 }
 
