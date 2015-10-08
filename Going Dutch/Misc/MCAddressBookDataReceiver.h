@@ -6,9 +6,10 @@
 //  Copyright (c) 2013 Mark Cornelisse. All rights reserved.
 //
 
-#import <Foundation/Foundation.h>
-#import <AddressBookUI/AddressBookUI.h>
-#import <AddressBook/AddressBook.h>
+@import Foundation;
+@import AddressBookUI;
+@import AddressBook;
+
 #import "MCTonightsBillTransfer.h"
 
 @class MCPerson;

@@ -17,8 +17,6 @@
 #import "MCSharedBill+addons.h"
 #import "MCCurrency+addons.h"
 
-#import "MCTwoLabelsTitleView.h"
-
 #import "MCWhoPayingUserDefaultsStoreInterface.h"
 
 #import "We_all_pay-Swift.h"
@@ -123,13 +121,17 @@
 {
     NSString *title = NSLocalizedString(@"CONTACTS_DISABLED_TITLE", @"Contacts disabled");
     NSString *message = NSLocalizedString(@"CONTACTS_DISABLED_MESSAGE", @"Access to Contacts can be enable in Settings->We All Pay->Privacy");
-    NSString *cancelButtonTitle = NSLocalizedString(@"OK", @"Ok");
-    UIAlertView *alert = [[UIAlertView alloc] initWithTitle:title
-                                                    message:message
-                                                   delegate:nil
-                                          cancelButtonTitle:cancelButtonTitle
-                                          otherButtonTitles:nil];
-    [alert show];
+    NSString *cancelButtonTitle = NSLocalizedString(@"Dismiss", @"Dismiss");
+    if ([UIAlertController class]) {
+        // iOS 8  and up
+        UIAlertController *alertController = [UIAlertController alertControllerWithTitle:title message:message preferredStyle:UIAlertControllerStyleAlert];
+        UIAlertAction *alertAction = [UIAlertAction actionWithTitle:cancelButtonTitle style:UIAlertActionStyleCancel handler:nil];
+        [alertController addAction:alertAction];
+        [self presentViewController:alertController animated:YES completion:nil];
+    } else {
+        UIAlertView *alert = [[UIAlertView alloc] initWithTitle:title message:message delegate:nil cancelButtonTitle:cancelButtonTitle otherButtonTitles:nil];
+        [alert show];
+    }
 }
 
 - (void)performFetchAndReloadTableView:(NSNotification *)notification

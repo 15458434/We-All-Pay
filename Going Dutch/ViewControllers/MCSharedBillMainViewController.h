@@ -6,7 +6,7 @@
 //  Copyright (c) 2014 Mark Cornelisse. All rights reserved.
 //
 
-#import <UIKit/UIKit.h>
+@import UIKit;
 
 #import "MCTitleViewDelegate.h"
 #import "MCTonightsBillTransfer.h"
@@ -21,6 +21,8 @@
 
 @property (nonatomic) MCSharedBillViewSelector currentView;
 @property (strong, nonatomic) MCSharedBill *tonightsBill;
+@property (nonatomic, strong) MCSharedBill *writableTonightsBill;
+
 @property (strong, nonatomic) NSArray *pathComponentsToOpen;
 @property (weak, nonatomic) IBOutlet UILabel *mainTitleLabel;
 @property (weak, nonatomic) IBOutlet UIPageControl *pageIndicator;

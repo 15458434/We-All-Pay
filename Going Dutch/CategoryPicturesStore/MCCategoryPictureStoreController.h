@@ -8,11 +8,13 @@
 
 #import <Foundation/Foundation.h>
 
+@class MCCategoryPictureObject;
+
 @interface MCCategoryPictureStoreController : NSObject
 
-@property (nonatomic, strong, readonly) NSArray *pictureObjects;
+@property (nonatomic, strong, readonly, nonnull) NSArray<MCCategoryPictureObject *> *pictureObjects;
 
-+ (instancetype)sharedController;
++ (instancetype _Nonnull)sharedController;
 
 - (void)preparePictureObjectsArray;
 

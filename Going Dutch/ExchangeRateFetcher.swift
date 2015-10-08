@@ -52,7 +52,7 @@ class ExchangeRateFetcher: NSObject {
         }
     }
     
-    func fetchFromOpenExchangeRates(completionHandler: (baseCurrency: String!, rates: Dictionary<String, Double>!, error: NSError!) -> ()) {
+    func fetchFromOpenExchangeRates(completionHandler: (baseCurrency: String!, rates: Dictionary<String, Double>!, error: NSError?) -> ()) {
         if isFetching {
             let error = NSError(domain: "ExchangeRateFetcher", code: 1, userInfo: ["reason": "Already fetching"])
             completionHandler(baseCurrency: nil, rates: nil, error: error)
@@ -61,12 +61,12 @@ class ExchangeRateFetcher: NSObject {
         isFetching = true
         UIApplication.sharedApplication().networkActivityIndicatorVisible = true
         
-        let url = NSURL(string: "http://openexchangerates.org/api/latest.json?app_id=cba02a60bd89412095c84ecb65b6326a");
+        let url = NSURL(string: "https://openexchangerates.org/api/latest.json?app_id=cba02a60bd89412095c84ecb65b6326a");
         
         let task = NSURLSession.sharedSession().dataTaskWithURL(url!) {(data, response, error) in
             UIApplication.sharedApplication().networkActivityIndicatorVisible = false
             if error != nil {
-                println("Error fetching exchangeRate from OpenExchangeRates: \(error)")
+                print("Error fetching exchangeRate from OpenExchangeRates: \(error)")
                 completionHandler(baseCurrency: nil, rates: nil, error: error)
                 self.isFetching = false
                 return
@@ -74,21 +74,22 @@ class ExchangeRateFetcher: NSObject {
             
             let httpResp = response as! NSHTTPURLResponse
             if (httpResp.statusCode == 200) {
-                var jsonError: NSError?
-                if let openExchangeRateDictonary = NSJSONSerialization.JSONObjectWithData(data, options: NSJSONReadingOptions.AllowFragments, error: &jsonError) as? Dictionary<NSObject, AnyObject> {
-                    let baseCurrencyCode = openExchangeRateDictonary["base"] as! String
-                    let rates = openExchangeRateDictonary["rates"] as! Dictionary<String, Double>
-                    let date = NSDate(timeIntervalSince1970: Double(openExchangeRateDictonary["timestamp"] as! Int))
+                do {
+                    let jsonResponseDictonary = try NSJSONSerialization.JSONObjectWithData(data!, options: .AllowFragments) as! Dictionary<String, AnyObject>
+                    let baseCurrencyCode = jsonResponseDictonary["base"] as? String
+                    let rates = jsonResponseDictonary["rates"] as? Dictionary<String, Double>
+                    let date = NSDate(timeIntervalSince1970: Double((jsonResponseDictonary["timestamp"] as? Int)!))
                     NSOperationQueue.mainQueue().addOperationWithBlock({ () -> Void in
                         self.baseCurrencyCode = baseCurrencyCode
                         self.rates = rates
                         self.date = date
                         completionHandler(baseCurrency: baseCurrencyCode, rates: rates, error: nil)
-                        self.isFetching = false
+                            self.isFetching = false
                     })
-                } else {
+                } catch let error {
                     // JSON Error
-                    println("Error reading exchangeRatesFromJSON: \(jsonError)")
+                    print("Error reading exchangeRatesFromJSON: \(error)")
+                    let jsonError = NSError(domain: "We all pay", code: 0, userInfo: ["Reason": "Error parsing json"])
                     NSOperationQueue.mainQueue().addOperationWithBlock({ () -> Void in
                         completionHandler(baseCurrency: nil, rates: nil, error: jsonError)
                         self.isFetching = false
@@ -107,10 +108,10 @@ class ExchangeRateFetcher: NSObject {
     }
     
     func isCurrencyCodeAvailableInRates(code: String) -> Bool {
-        if let exchangeRate = rates[code] {
+        if let _ = rates[code] {
             return true
         } else {
-            println("CurrencyCode: \(code) not present.")
+            print("CurrencyCode: \(code) not present.")
             return false
         }
     }

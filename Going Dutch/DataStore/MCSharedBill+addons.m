@@ -267,7 +267,7 @@
     NSError *error;
     NSArray *result = [[self managedObjectContext] executeFetchRequest:request error:&error];
     if (!result) {
-        NSLog(@"Error checking if person is present: %@", [error localizedDescription]);
+        NSLog(@"Error checking if person is present: %@", error);
         return NO;
     } else {
         if ([result count] == 0) {
@@ -301,7 +301,7 @@
     NSError *error = nil;
     NSUInteger result = [context countForFetchRequest:request error:&error];
     if (error) {
-        NSLog(@"totalAmountOfPeopleWhoHavPaid fetch error: %@", [error localizedDescription]);
+        NSLog(@"totalAmountOfPeopleWhoHavPaid fetch error: %@", error);
         return 0;
     } else {
         return result;
@@ -318,7 +318,7 @@
     NSError *error = nil;
     NSArray *paymentsOfPerson = [context executeFetchRequest:request error:&error];
     if (!paymentsOfPerson) {
-        NSLog(@"Error fetching paymentofPerson: %@", [error localizedDescription]);
+        NSLog(@"Error fetching paymentofPerson: %@", error);
     }
     return [paymentsOfPerson valueForKeyPath:@"@sum.moneyInMainCurrency"];
 }
@@ -354,7 +354,7 @@
     NSError *error = nil;
     NSArray *paymentsOfPerson = [[self managedObjectContext] executeFetchRequest:request error:&error];
     if (!paymentsOfPerson) {
-        NSLog(@"Error fetching paymentofPerson: %@", [error localizedDescription]);
+        NSLog(@"Error fetching paymentofPerson: %@", error);
     }
     return [paymentsOfPerson valueForKeyPath:@"@sum.moneyInMainCurrency"];
 }
@@ -472,7 +472,7 @@
     NSError *fetchError;
     NSUInteger *amountOfInvalidExchangeRates = [[self managedObjectContext] countForFetchRequest:request error:&fetchError];
     if (fetchError) {
-        NSLog(@"Something went wrong counting invalid exchangeRates: %@", [fetchError localizedDescription]);
+        NSLog(@"Something went wrong counting invalid exchangeRates: %@", fetchError);
     }
     if (amountOfInvalidExchangeRates == 0) {
         return YES;
@@ -492,7 +492,10 @@
     NSError *fetchError;
     NSArray *arrayOfInvalidExchangeRatesOfThisSharedBill = [[self managedObjectContext] executeFetchRequest:request error:&fetchError];
     if (fetchError) {
-        NSLog(@"Something went wrong fetching invalid ExchangeRates: %@", [fetchError localizedDescription]);
+        NSLog(@"Something went wrong fetching invalid ExchangeRates: %@", fetchError);
+    }
+    for (MCExchangeRate *exchangeRate in arrayOfInvalidExchangeRatesOfThisSharedBill) {
+        exchangeRate.status = [NSNumber numberWithShort:fetching];
     }
     [[[MCWeAllPayStoreController defaultStore] fetcher] fetchAll:arrayOfInvalidExchangeRatesOfThisSharedBill completionHandler:^(NSError * error) {
         if ([self areAllExchangeRatesValid]) {

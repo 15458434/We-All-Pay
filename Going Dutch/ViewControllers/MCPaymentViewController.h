@@ -10,8 +10,6 @@
 @import CoreData;
 @import NotificationCenter;
 
-#import "MCCancelDoneViewController.h"
-
 #import "MCThisPaymentProtocol.h"
 #import "MCPathComponentsToOpenProtocol.h"
 

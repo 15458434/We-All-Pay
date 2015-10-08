@@ -9,9 +9,6 @@
 #import "MCAllTripsTableViewController-iPad.h"
 #import "UIViewController+WeAllPayStore.h"
 
-#import "MCAllTripsTableViewCell_iPad.h"
-#import "MCTableEmptyMessage_iPad.h"
-
 #import "MCWeAllPayStoreController.h"
 #import "MCSharedBill+addons.h"
 #import "MCCurrency+addons.h"
@@ -19,6 +16,8 @@
 #import "MCTonightsBillTransfer.h"
 
 #import "MCWhoPayingUserDefaultsStoreInterface+WeAllPay.h"
+
+#import "We_all_pay-Swift.h"
 
 @interface MCAllTripsTableViewController_iPad ()
 
@@ -281,7 +280,7 @@
 - (UITableViewCell *)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath
 {
     MCSharedBill *thisTrip = [_dataController objectAtIndexPath:indexPath];
-    MCAllTripsTableViewCell_iPad *allTripsTableViewCell = [tableView dequeueReusableCellWithIdentifier:@"MCAllTripsTableViewCell_iPad"];
+    AllTripsTableViewCell_iPad *allTripsTableViewCell = [tableView dequeueReusableCellWithIdentifier:@"MCAllTripsTableViewCell_iPad"];
     
     if (![thisTrip tripName]) {
         [[allTripsTableViewCell tripLabel] setText:@"..."];

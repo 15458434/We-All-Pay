@@ -134,7 +134,7 @@
     NSError *error;
     NSArray *fetchResults = [[self managedObjectContext] executeFetchRequest:request error:&error];
     if (error) {
-        NSLog(@"Something went wrong fetching MCPaymentPresence: %@", [error localizedDescription]);
+        NSLog(@"Something went wrong fetching MCPaymentPresence: %@", error);
     }
     return [fetchResults objectAtIndex:0];
 }
@@ -158,7 +158,7 @@
     NSError *error;
     NSUInteger *countInteger = [[self managedObjectContext] countForFetchRequest:request error:&error];
     if (error) {
-        NSLog(@"Something went wrong counting people present: %@", [error localizedDescription]);
+        NSLog(@"Something went wrong counting people present: %@", error);
     }
     return [NSNumber numberWithUnsignedInteger:countInteger];
 }

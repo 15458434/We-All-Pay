@@ -6,10 +6,8 @@
 //  Copyright (c) 2013 Mark Cornelisse. All rights reserved.
 //
 
-#import <UIKit/UIKit.h>
-#import <MessageUI/MessageUI.h>
-
-#import "MCCancelDoneTableViewController.h"
+@import UIKit;
+@import MessageUI;
 
 @class MCSharedBill;
 
@@ -18,7 +16,7 @@
 
 @class MCSharedBillPageViewController;
 
-@interface MCReturnPaymentViewController : MCCancelDoneTableViewController <MFMailComposeViewControllerDelegate>
+@interface MCReturnPaymentViewController : UITableViewController <MFMailComposeViewControllerDelegate>
 {
     MCTwoLabelsTitleView *twoLabelTitleView;
 }

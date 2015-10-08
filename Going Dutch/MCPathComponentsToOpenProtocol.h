@@ -6,9 +6,10 @@
 //  Copyright (c) 2014 Mark Cornelisse. All rights reserved.
 //
 
+@import Foundation;
+
 @protocol MCPathComponentsToOpenProtocol <NSObject>
 
-- (void)setPathComponentsToOpen:(NSArray *)pathComponentsToOpen;
-- (NSArray *)pathComponentsToOpen;
+@property (strong, nonatomic) NSArray *pathComponentsToOpen;
 
 @end

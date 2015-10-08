@@ -6,7 +6,7 @@
 //  Copyright (c) 2014 Mark Cornelisse. All rights reserved.
 //
 
-#import <CoreData/CoreData.h>
+@import CoreData;
 
 @interface MCPaymentPresenceEntityMigrationPolicy : NSEntityMigrationPolicy
 

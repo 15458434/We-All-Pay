@@ -14,7 +14,7 @@ func createAttributesStringForWhoIsPayingNext(tripName: String, fullNameNextPaye
     let normalFont: UIFont = UIFont(descriptor: normalFontDescriptor, size: 0)
     let normalAttributes: Dictionary = [NSFontAttributeName: normalFont]
     
-    let boldFontDescriptor: UIFontDescriptor = normalFontDescriptor.fontDescriptorWithSymbolicTraits(.TraitBold)!
+    let boldFontDescriptor: UIFontDescriptor = normalFontDescriptor.fontDescriptorWithSymbolicTraits(.TraitBold)
     let boldFont: UIFont = UIFont(descriptor: boldFontDescriptor, size: 0)
     let boldAttributes: Dictionary = [NSFontAttributeName: boldFont];
     
@@ -61,16 +61,16 @@ func createAttributesStringForWhoIsPayingNext(tripName: String, fullNameNextPaye
 //}
 
 func betterCreateAttributesStringForWhoIsPayingNext(tripName: String, fullNameNextPayer: String) -> NSMutableAttributedString {
-    func createAttributesForFontStyle(style: String, withTrait trait: UIFontDescriptorSymbolicTraits) -> [NSObject : AnyObject] {
+    func createAttributesForFontStyle(style: String, withTrait trait: UIFontDescriptorSymbolicTraits) -> [String : AnyObject] {
         let fontDescriptor = UIFontDescriptor.preferredFontDescriptorWithTextStyle(UIFontTextStyleBody)
-        let descriptorWithTrait = fontDescriptor.fontDescriptorWithSymbolicTraits(trait)!
+        let descriptorWithTrait = fontDescriptor.fontDescriptorWithSymbolicTraits(trait)
         let font = UIFont(descriptor: descriptorWithTrait, size: 0)
         return [NSFontAttributeName : font];
     }
     
     let nullTrait: UIFontDescriptorSymbolicTraits = UIFontDescriptorSymbolicTraits(rawValue: 0)
     let normalAttributes: Dictionary = createAttributesForFontStyle(UIFontTextStyleBody, withTrait: nullTrait)
-    let boldAttributes: Dictionary = createAttributesForFontStyle(UIFontTextStyleBody, withTrait: .TraitBold)
+//    let boldAttributes: Dictionary = createAttributesForFontStyle(UIFontTextStyleBody, withTrait: .TraitBold)
     
     let text = String.localizedStringWithFormat(NSLocalizedString("For your event %@, %@ should pay next", comment: "For your event %1$@, %2$@ should pay next."), tripName, fullNameNextPayer)
     let attributedText = NSMutableAttributedString(string: text, attributes: normalAttributes)

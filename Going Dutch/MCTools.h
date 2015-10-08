@@ -6,9 +6,9 @@
 //  Copyright (c) 2013 Mark Cornelisse. All rights reserved.
 //
 
-#import <Foundation/Foundation.h>
-#import <UIKit/UIKit.h>
-#import <iAd/iAd.h>
+@import Foundation;
+@import UIKit;
+@import iAd;
 
 #define SYSTEM_VERSION_EQUAL_TO(v)                  ([[[UIDevice currentDevice] systemVersion] compare:v options:NSNumericSearch] == NSOrderedSame)
 #define SYSTEM_VERSION_GREATER_THAN(v)              ([[[UIDevice currentDevice] systemVersion] compare:v options:NSNumericSearch] == NSOrderedDescending)
@@ -21,7 +21,5 @@
 + (void)setAdBannerIfNotPaid:(BOOL)show forViewController:(UIViewController *)viewController;
 + (UIImage *)cutCircularImageFrom:(UIImage *)sourceImage toDestinationRect:(CGRect)newPictureRect;
 + (BOOL)isStringAnEmailAddress:(NSString *)stringThatIsSupposedToBeEmailAddress;
-
-+ (UIColor *)colorWith8BitRed:(NSUInteger)red green:(NSUInteger)green blue:(NSUInteger)blue alpha:(CGFloat)alpha;
 
 @end

@@ -12,17 +12,14 @@
 
 #import "MCSharedBill+addons.h"
 
-#import "UIView+MCAddons.h"
-
 #import "MCWeAllPayStoreController.h"
 
-#import "MCStoreInterface.h"
+#import "We_all_pay-Swift.h"
 
 @interface MCSharedBillMainViewController ()
 
 
 @property (strong, nonatomic) MCSharedBillPageViewController *pageViewController;
-@property (nonatomic, strong) MCSharedBill *writableTonightsBill;
 
 @end
 
@@ -104,14 +101,14 @@
 {
     [super viewWillAppear:animated];
     
-    [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(applyProVersion:) name:applyProVersionNotification object:[MCStoreInterface defaultStoreInterface]];
+    [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(applyProVersion:) name:[MCStoreInterface applyProVersionNotification] object:[MCStoreInterface defaultStoreInterface]];
 }
 
 - (void)viewDidAppear:(BOOL)animated
 {
     [super viewDidAppear:animated];
     
-    [[NSNotificationCenter defaultCenter] removeObserver:self name:applyProVersionNotification object:[MCStoreInterface defaultStoreInterface]];
+    [[NSNotificationCenter defaultCenter] removeObserver:self name:[MCStoreInterface applyProVersionNotification] object:[MCStoreInterface defaultStoreInterface]];
 }
 
 - (void)willMoveToParentViewController:(UIViewController *)parent

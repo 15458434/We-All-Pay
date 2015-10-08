@@ -40,24 +40,32 @@ class ADoriginate : NSObject {
     
     func fetchAttribution(completionHandler: () -> ()){
         // Check for iOS 8 attribution implementation
-        if ADClient.sharedClient().respondsToSelector("lookupAdConversionDetails:") {
-            ADClient.sharedClient().lookupAdConversionDetails({ (appPurchaseDate, iAdImpressionDate) -> Void in
-                // True if we were installed from an iAd campaign
-                if iAdImpressionDate != nil {
-                    self.fromiAd = true
+        if #available(iOS 7.1, *) {
+            if ADClient.sharedClient().respondsToSelector("lookupAdConversionDetails:") {
+                if #available(iOS 8.0, *) {
+                    ADClient.sharedClient().lookupAdConversionDetails({ (appPurchaseDate, iAdImpressionDate) -> Void in
+                        // True if we were installed from an iAd campaign
+                        if iAdImpressionDate != nil {
+                            self.fromiAd = true
+                        } else {
+                            self.fromiAd = false
+                        }
+                        completionHandler()
+                        self.save()
+                    })
                 } else {
-                    self.fromiAd = false
+                    // Fallback on earlier versions
                 }
-                completionHandler()
-                self.save()
-            })
-            // Check for iOS 7.1 attribution implementation
-        } else if ADClient.sharedClient().respondsToSelector("determineAppInstallationAttributionWithCompletionHandler:") {
-            ADClient.sharedClient().determineAppInstallationAttributionWithCompletionHandler({ (appInstallationWasAttributedToiAd) -> Void in
-                self.fromiAd = appInstallationWasAttributedToiAd
-                completionHandler()
-                self.save()
-            })
+                // Check for iOS 7.1 attribution implementation
+            } else if ADClient.sharedClient().respondsToSelector("determineAppInstallationAttributionWithCompletionHandler:") {
+                ADClient.sharedClient().determineAppInstallationAttributionWithCompletionHandler({ (appInstallationWasAttributedToiAd) -> Void in
+                    self.fromiAd = appInstallationWasAttributedToiAd
+                    completionHandler()
+                    self.save()
+                })
+            }
+        } else {
+            // Fallback on earlier versions
         }
     }
     
@@ -66,10 +74,10 @@ class ADoriginate : NSObject {
         if let fromiAdValue = fromiAd?.boolValue {
             userDefaults.setBool(fromiAdValue, forKey: fromiAdKey)
             if userDefaults.synchronize() {
-                println("UserDefaults Sync succesful.")
+                print("UserDefaults Sync succesful.")
                 return true
             } else {
-                println("UserDefaults Sync failure.")
+                print("UserDefaults Sync failure.")
                 return false
             }
         }

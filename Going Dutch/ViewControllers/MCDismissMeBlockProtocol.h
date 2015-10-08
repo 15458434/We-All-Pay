@@ -6,10 +6,10 @@
 //  Copyright (c) 2014 Mark Cornelisse. All rights reserved.
 //
 
-#import <Foundation/Foundation.h>
+@import Foundation;
 
 @protocol MCDismissMeBlockProtocol <NSObject>
 
-- (void)setDismissMe:(void (^)())dismissMe;
+@property (strong, nonatomic) void (^dismissMe)();
 
 @end

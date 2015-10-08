@@ -303,6 +303,83 @@
     }
 }
 
+- (void)solveWhoHasToPayWhoFromThisBillWithCompletionBlock
+{
+    XCTestExpectation *expectation = [self expectationWithDescription:@"solveWhoHasToPayWhoFromThisBillWithCompletionBlock"];
+    
+    // Test to see if calculation containing foreign currency is done the right way.
+    MCSharedBill *tonightsBill = [MCSharedBill addSharedBillToContext:_context];
+    MCCurrency *mainCurrency = [MCCurrency currencyFrom:@"EUR" fromContext:_context];
+    MCPerson *mieke = [tonightsBill addPerson];
+    [mieke setFirstName:@"Mieke"];
+    [mieke setLastName:@"Mooi"];
+    MCPerson *anne = [tonightsBill addPerson];
+    [anne setFirstName:@"Anne"];
+    [anne setLastName:@"Lief"];
+    MCPerson *mark = [tonightsBill addPerson];
+    [mark setFirstName:@"Mark"];
+    [mark setLastName:@"Leuk"];
+    MCCurrency *currencyFirstPayment = [MCCurrency currencyFrom:@"USD" fromContext:_context];
+    MCPayment *firstPayment = [tonightsBill addPayment];
+    [firstPayment setDescriptionOfPayment:@"Movie"];
+    [firstPayment setPayingPerson:mark];
+    [firstPayment setMoney:@30.0];
+    [firstPayment setCurrency:currencyFirstPayment];
+    [firstPayment recalculateAveragePeopleOweAndStore];
+    MCExchangeRate *usdToEur = [MCExchangeRate addExchangeRateForContext:_context];
+    [usdToEur setToCurrency:mainCurrency];
+    [usdToEur setFromCurrency:currencyFirstPayment];
+    [usdToEur setExchangeRate:@0.72];
+    [firstPayment setExchangeRate:usdToEur];
+    NSArray *resultsWithOnlyOnePayment = [tonightsBill solveWhoHasToPayWhoFromThisBill];
+    for (MCReturnPayment *rp in resultsWithOnlyOnePayment) {
+        XCTAssertEqualWithAccuracy([[rp money] doubleValue], [@(30.0 * 0.72 / 3) doubleValue], 0.001, @"Basic split amount with conversion not ok.");
+    }
+    MCCurrency *currencySecondPayment = [MCCurrency currencyFrom:@"GBP" fromContext:_context];
+    MCPayment *secondPayment = [tonightsBill addPayment];
+    [secondPayment setDescriptionOfPayment:@"Drinks"];
+    [secondPayment setPayingPerson:anne];
+    [secondPayment setMoney:@14.50];
+    [secondPayment setCurrency:currencySecondPayment];
+    NSFetchRequest *request = [NSFetchRequest fetchRequestWithEntityName:@"MCPaymentPresence"];
+    NSSortDescriptor *sortDescriptor = [NSSortDescriptor sortDescriptorWithKey:@"dateCreated" ascending:YES];
+    [request setSortDescriptors:@[sortDescriptor]];
+    NSPredicate *predicate = [NSPredicate predicateWithFormat:@"payment = %@ AND person.firstName = %@", secondPayment, [mieke firstName]];
+    [request setPredicate:predicate];
+    NSError *fetchError;
+    NSArray *arrayWithOnlyMiekesPaymentPresence = [_context executeFetchRequest:request error:&fetchError];
+    XCTAssertNil(fetchError, @"Fetch error: %@", [fetchError localizedDescription]);
+    XCTAssertEqual([arrayWithOnlyMiekesPaymentPresence count], 1, @"More than one Mieke present.");
+    MCPaymentPresence *miekesPaymentPresence = [arrayWithOnlyMiekesPaymentPresence firstObject];
+    [miekesPaymentPresence setIsPersonPresent:@NO];
+    [secondPayment recalculateAveragePeopleOweAndStore];
+    MCExchangeRate *gbpToEur = [MCExchangeRate addExchangeRateForContext:_context];
+    [gbpToEur setToCurrency:mainCurrency];
+    [gbpToEur setFromCurrency:currencySecondPayment];
+    gbpToEur.exchangeRate = nil;
+    gbpToEur.status = [NSNumber numberWithShort:invalid];
+    [secondPayment setExchangeRate:gbpToEur];
+    NSArray *results = [tonightsBill solveWhoHasToPayWhoFromThisBillWithCompletionBlock:^(NSArray *resultsAfterExchangeRateFetch) {
+        for (MCReturnPayment *returnPayment in results) {
+            XCTAssertNotNil(secondPayment.exchangeRate.exchangeRate, @"There should be a value for the exchange rate.");
+            double gbpToEurRate = secondPayment.exchangeRate.exchangeRate.doubleValue;
+            if ([[[returnPayment receiver] firstName] isEqualToString:@"Anne"]) {
+                XCTAssertEqualWithAccuracy([[returnPayment money] doubleValue], [@(14.50*gbpToEurRate - ((14.50 * gbpToEurRate/2) + (30*0.72/3))) doubleValue], 0.001, @"Anne is not receiving the right amount.");
+            } else if ([[[returnPayment receiver] firstName] isEqualToString:@"Mark"]) {
+                XCTAssertEqualWithAccuracy([[returnPayment money] doubleValue], [@(30.0 * 0.72 - ((14.50 * gbpToEurRate/2) + (30*0.72/3))) doubleValue], 0.001, @"Mark is not receiving the right amount.");
+            } else {
+                XCTAssertFalse([[[returnPayment receiver] firstName] isEqualToString:@"Mieke"], @"Mieke should not be a receiver of money.");
+            }
+        }
+        [expectation fulfill];
+    }];
+    XCTAssertNil(results, @"Results should not return at this point.");
+    
+    [self waitForExpectationsWithTimeout:90 handler:^(NSError *error) {
+        XCTAssertFalse(error, "Error: %@", error);
+    }];
+}
+
 - (void)testAddPaymentAddToCurrencyToExchangeRate
 {
     MCSharedBill *tonightsBill = [MCSharedBill addSharedBillToContext:_context];
@@ -324,6 +401,15 @@
     MCPayment *paymentWithValidExchangeRate = [tonightsBill addPayment];
     XCTAssertNotNil(paymentWithValidExchangeRate, @"Should be present.");
     XCTAssertTrue([tonightsBill areAllExchangeRatesValid], @"All Exchange Rate should be valid.");
+    MCPayment *paymentWithInValidExchangeRate = [tonightsBill addPayment];
+    MCCurrency *foreignCurrency = [MCCurrency currencyFrom:@"GBP" fromContext:[tonightsBill managedObjectContext]];
+    paymentWithInValidExchangeRate.currency = foreignCurrency;
+    XCTAssertNotNil(paymentWithInValidExchangeRate.exchangeRate, @"ExchangeRate should not be nil.");
+    paymentWithInValidExchangeRate.exchangeRate.toCurrency = foreignCurrency;
+    paymentWithInValidExchangeRate.exchangeRate.status = [NSNumber numberWithShort:fetching];
+    XCTAssertFalse([tonightsBill areAllExchangeRatesValid], @"One exchange rate is fetching.");
+    paymentWithInValidExchangeRate.exchangeRate.status = [NSNumber numberWithShort:invalid];
+    XCTAssertFalse([tonightsBill areAllExchangeRatesValid], @"One exchange rate is invalid.");
 }
 
 - (void)testFetchPeoplePresentOrderedByAmountPaid

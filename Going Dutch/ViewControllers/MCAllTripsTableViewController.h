@@ -6,9 +6,9 @@
 //  Copyright (c) 2013 Mark Cornelisse. All rights reserved.
 //
 
-#import <UIKit/UIKit.h>
-#import <CoreData/CoreData.h>
-#import <Social/Social.h>
+@import UIKit;
+@import CoreData;
+@import Social;
 
 @class MCWeAllPayStoreController;
 @class MCTableEmptyMessage;

@@ -8,10 +8,6 @@
 
 #import "MCSolutionTableViewController.h"
 
-#import "MCWhoOwesWhoTableViewCell_iPad.h"
-#import "MCSolutionOverViewTableViewCell_iPad.h"
-#import "MCTableEmptyMessage_iPad.h"
-
 #import "We_all_pay-Swift.h"
 
 #import "MCWeAllPayStoreController.h"
@@ -52,29 +48,45 @@ typedef NS_ENUM(BOOL, MCXRatesMissing) {
 
 - (void)openMailView:(id)sender
 {
-    // Init the mailComposer
-    MCMailComposer *mailComposer = [[MCMailComposer alloc] initWithTonightsBill:_tonightsBill];
-    
-    // Init the mail ViewController
-    MFMailComposeViewController *_mailViewController = [[MFMailComposeViewController alloc] init];
-    [_mailViewController setMailComposeDelegate:sender];
-    [_mailViewController setEdgesForExtendedLayout:UIRectEdgeNone];
-    [_mailViewController setModalPresentationStyle:UIModalPresentationFormSheet];
-    [[_mailViewController viewControllers][0] setEdgesForExtendedLayout:UIRectEdgeNone];
-    
-    NSMutableDictionary *textAttributes = [[NSMutableDictionary alloc] initWithDictionary:[self navigationController].navigationBar.titleTextAttributes];
-    [textAttributes setValue:[UIColor whiteColor] forKey:NSForegroundColorAttributeName];
-    [[_mailViewController navigationBar] setTitleTextAttributes:textAttributes];
-    
-    // Set the mail.
-    [_mailViewController setToRecipients:[mailComposer getMailAddresses]];
-    [_mailViewController setSubject:[mailComposer getSubject]];
-    [_mailViewController setMessageBody:[mailComposer getMailBody] isHTML:mailComposer.isHTML];
-    
-    if (sender!=self) {
-        [sender presentViewController:_mailViewController animated:YES completion:nil];
+    if ([MFMailComposeViewController canSendMail]) {
+        // Init the mailComposer
+        MCMailComposer *mailComposer = [[MCMailComposer alloc] initWithTonightsBill:_tonightsBill];
+        
+        // Init the mail ViewController
+        MFMailComposeViewController *_mailViewController = [[MFMailComposeViewController alloc] init];
+        [_mailViewController setMailComposeDelegate:sender];
+        [_mailViewController setEdgesForExtendedLayout:UIRectEdgeNone];
+        [_mailViewController setModalPresentationStyle:UIModalPresentationFormSheet];
+        [[_mailViewController viewControllers][0] setEdgesForExtendedLayout:UIRectEdgeNone];
+        
+        NSMutableDictionary *textAttributes = [[NSMutableDictionary alloc] initWithDictionary:[self navigationController].navigationBar.titleTextAttributes];
+        [textAttributes setValue:[UIColor whiteColor] forKey:NSForegroundColorAttributeName];
+        [[_mailViewController navigationBar] setTitleTextAttributes:textAttributes];
+        
+        // Set the mail.
+        [_mailViewController setToRecipients:[mailComposer getMailAddresses]];
+        [_mailViewController setSubject:[mailComposer getSubject]];
+        [_mailViewController setMessageBody:[mailComposer getMailBody] isHTML:mailComposer.isHTML];
+        
+        if (sender!=self) {
+            [sender presentViewController:_mailViewController animated:YES completion:nil];
+        } else {
+            [[self navigationController] presentViewController:_mailViewController animated:YES completion:nil];
+        }
     } else {
-        [[self navigationController] presentViewController:_mailViewController animated:YES completion:nil];
+        NSString *alertTitle = NSLocalizedString(@"Unable to send email", @"Title of an alert that notifies the user the app is unable to send email.");
+        NSString *alertMessage = NSLocalizedString(@"Please configure your mail in Settings", @"Instruction in an alert to tell the user that they should check their email address for a valid configuration.");
+        NSString *dismiss = NSLocalizedString(@"Dimiss", @"Text on a button that dismisses the alert");
+        if ([UIAlertController class]) {
+            // iOS 8 and up
+            UIAlertController *alertController = [UIAlertController alertControllerWithTitle:alertTitle message:alertMessage preferredStyle:UIAlertControllerStyleAlert];
+            UIAlertAction *dismissAction = [UIAlertAction actionWithTitle:dismiss style:UIAlertActionStyleCancel handler:nil];
+            [alertController addAction:dismissAction];
+            [self presentViewController:alertController animated:YES completion:nil];
+        } else {
+            UIAlertView *alertView = [[UIAlertView alloc] initWithTitle:alertTitle message:alertMessage delegate:nil cancelButtonTitle:dismiss otherButtonTitles:nil];
+            [alertView show];
+        }
     }
 }
 
@@ -188,7 +200,7 @@ typedef NS_ENUM(BOOL, MCXRatesMissing) {
     } else if (result == MFMailComposeResultSaved) {
         [self dismissViewControllerAnimated:YES completion:nil];
     } else if (result == MFMailComposeResultFailed) {
-        NSLog(@"Error sending email: %@", [error localizedDescription]);
+        NSLog(@"Error sending email: %@", error);
         [self dismissViewControllerAnimated:YES completion:nil];
     } else if (result == MFMailComposeResultCancelled) {
         [self dismissViewControllerAnimated:YES completion:nil];
@@ -204,9 +216,9 @@ typedef NS_ENUM(BOOL, MCXRatesMissing) {
 
 - (void)tableView:(UITableView *)tableView willDisplayHeaderView:(UIView *)view forSection:(NSInteger)section
 {
-    [view setTintColor:[MCColors getbackgroundColor]];
+    [view setTintColor:[Colors getbackgroundColor]];
     UITableViewHeaderFooterView *sectionTitleHeader = (UITableViewHeaderFooterView *)view;
-    [[sectionTitleHeader textLabel] setTextColor:[MCColors getEmptyMessageTextColor]];
+    [[sectionTitleHeader textLabel] setTextColor:[Colors getEmptyMessageTextColor]];
 }
 
 #pragma mark - Table view data source
@@ -265,7 +277,7 @@ typedef NS_ENUM(BOOL, MCXRatesMissing) {
 - (UITableViewCell *)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath
 {
     if ([indexPath section] == 0) {
-        MCWhoOwesWhoTableViewCell_iPad *cell = [tableView dequeueReusableCellWithIdentifier:@"MCWhoOwesWhoTableViewCell_iPad" forIndexPath:indexPath];
+        WhoOwesWhoTableViewCell_iPad *cell = [tableView dequeueReusableCellWithIdentifier:@"MCWhoOwesWhoTableViewCell_iPad" forIndexPath:indexPath];
         
         // Configure the cell...
         MCReturnPayment *thisCellContents = [_solution objectAtIndex:[indexPath row]];
@@ -283,7 +295,7 @@ typedef NS_ENUM(BOOL, MCXRatesMissing) {
     }
     
     if ([indexPath section] == 1) {
-        MCSolutionOverViewTableViewCell_iPad *cell = [tableView dequeueReusableCellWithIdentifier:@"MCSolutionOverViewTableViewCell_iPad" forIndexPath:indexPath];
+        SolutionOverViewTableViewCell_iPad *cell = [tableView dequeueReusableCellWithIdentifier:@"MCSolutionOverViewTableViewCell_iPad" forIndexPath:indexPath];
         
         NSString *eachPaysString = NSLocalizedString(@"EACH_USED", @"Each used:");
         NSString *thisPersonPaidString = [NSString stringWithFormat:@"%@ %@", [[_peoplePresent objectAtIndex:[indexPath row]] getFullName], eachPaysString];
@@ -300,7 +312,7 @@ typedef NS_ENUM(BOOL, MCXRatesMissing) {
     }
     
     if ([indexPath section] == 2) {
-        MCSolutionOverViewTableViewCell_iPad *cell = [tableView dequeueReusableCellWithIdentifier:@"MCSolutionOverViewTableViewCell_iPad" forIndexPath:indexPath];
+        SolutionOverViewTableViewCell_iPad *cell = [tableView dequeueReusableCellWithIdentifier:@"MCSolutionOverViewTableViewCell_iPad" forIndexPath:indexPath];
         
         if ([indexPath row] < [_peoplePresent count]) {
             NSString *paidString = NSLocalizedString(@"TOTAL_PAID", @"total paid:");

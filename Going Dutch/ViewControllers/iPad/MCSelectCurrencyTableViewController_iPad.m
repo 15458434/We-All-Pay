@@ -7,7 +7,6 @@
 //
 
 #import "MCSelectCurrencyTableViewController_iPad.h"
-#import "MCSelectCurrencyTableViewCell_iPad.h"
 
 #import "MCCurrency+addons.h"
 #import "MCPayment+addons.h"
@@ -114,20 +113,43 @@ NSString * const currencyCellIdentifier_iPad = @"MCSelectCurrencyTableViewCell_i
 
 - (void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath
 {
-#if DEBUG
-    NSLog(@"%@ didSelectRowAtIndexPath", self);
-#endif
+    UIViewController *myPresenter = self.presentingViewController;
+    
     NSDictionary *selectedCurrency;
     NSManagedObjectContext *context = [[MCWeAllPayStoreController defaultStore] mainThreadContext];
     if (tableView != [[self searchDisplayController] searchResultsTableView]) {
         selectedCurrency = _sections[[indexPath section]][[indexPath row]];
         [_thisPayment setNewCurrencyAndAutomaticallyUpdateExchangeRate:[MCCurrency currencyFrom:selectedCurrency[@"code"] fromContext:context] withCompletionHandler:^(NSError *error) {
             NSLog(@"Error fetching exchangeRate: %@", error);
+            
+            NSString *title = NSLocalizedString(@"Unable to fetch exchange rates", @"Title message of an alert that pops up when fetching exchange rates is impossible");
+            NSString *message = NSLocalizedString(@"Fetching exchange rates is not possible at this moment. Check your internet connection and/or hit solve to fetch all missing exchange rates at a later time", @"Message explaining what the user can do to refetch exchange rates");
+            NSString *dismissTitle = NSLocalizedString(@"Dismiss", @"Title of a button that dismisses an alert.");
+            
+            if ([UIAlertController class]) {
+                // iOS 8 and up.
+                UIAlertController *alertController = [UIAlertController alertControllerWithTitle:title message:message preferredStyle:UIAlertControllerStyleAlert];
+                UIAlertAction *dismissAction = [UIAlertAction actionWithTitle:dismissTitle style:UIAlertActionStyleCancel handler:nil];
+                [alertController addAction:dismissAction];
+                [myPresenter presentViewController:alertController animated:YES completion:nil];
+            }
         }];
     } else {
         selectedCurrency = [_searchResults objectAtIndex:[indexPath row]];
         [_thisPayment setNewCurrencyAndAutomaticallyUpdateExchangeRate:[MCCurrency currencyFrom:selectedCurrency[@"code"] fromContext:context] withCompletionHandler:^(NSError *error) {
             NSLog(@"Error fetching exchangeRate: %@", error);
+
+            NSString *title = NSLocalizedString(@"Unable to fetch exchange rates", @"Title message of an alert that pops up when fetching exchange rates is impossible");
+            NSString *message = NSLocalizedString(@"Fetching exchange rates is not possible at this moment. Check your internet connection and/or hit solve to fetch all missing exchange rates at a later time", @"Message explaining what the user can do to refetch exchange rates");
+            NSString *dismissTitle = NSLocalizedString(@"Dismiss", @"Title of a button that dismisses an alart.");
+            
+            if ([UIAlertController class]) {
+                // iOS 8 and up.
+                UIAlertController *alertController = [UIAlertController alertControllerWithTitle:title message:message preferredStyle:UIAlertControllerStyleAlert];
+                UIAlertAction *dismissAction = [UIAlertAction actionWithTitle:dismissTitle style:UIAlertActionStyleCancel handler:nil];
+                [alertController addAction:dismissAction];
+                [myPresenter presentViewController:alertController animated:YES completion:nil];
+            }
         }];
     }
     [_thisPayment recalculateAveragePeopleOweAndStore];
@@ -177,9 +199,9 @@ NSString * const currencyCellIdentifier_iPad = @"MCSelectCurrencyTableViewCell_i
 
 - (UITableViewCell *)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath
 {
-    MCSelectCurrencyTableViewCell_iPad *cell = (MCSelectCurrencyTableViewCell_iPad *)[[self tableView] dequeueReusableCellWithIdentifier:currencyCellIdentifier_iPad];
+    SelectCurrencyTableViewCell_iPad *cell = (SelectCurrencyTableViewCell_iPad *)[[self tableView] dequeueReusableCellWithIdentifier:currencyCellIdentifier_iPad];
     if (cell == nil) {
-        cell = [[MCSelectCurrencyTableViewCell_iPad alloc] initWithStyle:UITableViewCellStyleDefault reuseIdentifier:currencyCellIdentifier_iPad];
+        cell = [[SelectCurrencyTableViewCell_iPad alloc] initWithStyle:UITableViewCellStyleDefault reuseIdentifier:currencyCellIdentifier_iPad];
     }
     
     NSDictionary *thisCellsCurrency;

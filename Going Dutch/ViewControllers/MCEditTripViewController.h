@@ -22,7 +22,7 @@
 @class MCTwoLabelsTitleView;
 @class MCTableEmptyMessage;
 
-@interface MCEditTripViewController : UITableViewController <NSFetchedResultsControllerDelegate, UITextFieldDelegate, UIAlertViewDelegate, MCPersonViewChangeDelegate, MCTonightsBillTransfer>
+@interface MCEditTripViewController : UITableViewController <NSFetchedResultsControllerDelegate, UITextFieldDelegate, MCPersonViewChangeDelegate, MCTonightsBillTransfer>
 {
     __weak IBOutlet UIButton *addressBookButton;    
     __weak IBOutlet UIButton *addPersonButton;
@@ -50,8 +50,5 @@
 
 - (IBAction)addressBookButton:(id)sender;
 - (IBAction)addPersonButton:(id)sender;
-
-//- (IBAction)doneButtonPressed:(id)sender;
-//- (IBAction)cancelButtonPressed:(id)sender;
 
 @end

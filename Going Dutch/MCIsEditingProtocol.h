@@ -6,6 +6,8 @@
 //  Copyright (c) 2014 Mark Cornelisse. All rights reserved.
 //
 
+@import Foundation;
+
 @protocol MCIsEditingProtocol <NSObject>
 
 - (BOOL)isChildTableViewEditing;

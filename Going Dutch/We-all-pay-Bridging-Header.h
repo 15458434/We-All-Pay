@@ -13,5 +13,21 @@
 #import "MCCurrency+addons.h"
 #import "MCExchangeRate+addons.h"
 #import "MCPaymentPresence+addons.h"
+#import "MCEmailAddress+addons.h"
 
 #import "MCWeAllPayStoreController.h"
+
+#import "MCTonightsBillTransfer.h"
+#import "MCThisPaymentProtocol.h"
+#import "MCDismissMeBlockProtocol.h"
+#import "MCDismissKeyboardProtocol.h"
+#import "MCPathComponentsToOpenProtocol.h"
+
+#import "MCTools.h"
+
+#import "MCCategoryPictureStoreController.h"
+#import "MCCategoryPictureObject.h"
+
+#import "MCSelectCurrencyTableViewController_iPad.h"
+#import "MCSelectCategoryTableViewController_iPad.h"
+#import "MCAllTripsTableViewController-iPad.h"

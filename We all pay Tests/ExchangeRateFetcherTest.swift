@@ -88,6 +88,7 @@ class ExchangeRateFetcherTest: XCTestCase {
         let expectation = self.expectationWithDescription("codeSubscript")
         let codeSubscriptFetcher = ExchangeRateFetcher()
         codeSubscriptFetcher.fetchFromOpenExchangeRates { (baseCurrency, rates, error) -> () in
+            NSThread.sleepForTimeInterval(1.0)
             XCTAssertNil(error, "Error fetching exchangeRates")
             XCTAssertNotNil(codeSubscriptFetcher["EUR"], "ExchangeRate should be valid")
             expectation.fulfill()

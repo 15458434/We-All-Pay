@@ -15,7 +15,7 @@
 
 #pragma mark - Public in this class
 
-- (NSArray *)pictureObjects
+- (NSArray<MCCategoryPictureObject *> *)pictureObjects
 {
     if (!_pictureObjects) {
         [self preparePictureObjectsArray];

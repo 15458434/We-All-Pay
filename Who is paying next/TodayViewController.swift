@@ -21,7 +21,7 @@ class TodayViewController: UIViewController, NCWidgetProviding {
     
     func updateLocalOptionalsFromUserDefaults() -> Bool {
         #if DEBUG
-            println("\(self): updateLocalOptionalsFromUserDefaults")
+            print("\(self): updateLocalOptionalsFromUserDefaults")
         #endif
         let userDefaultsInterface: MCWhoPayingUserDefaultsStoreInterface = MCWhoPayingUserDefaultsStoreInterface()
         
@@ -40,13 +40,13 @@ class TodayViewController: UIViewController, NCWidgetProviding {
     }
     
     func updateLabel() {
-        println("updateLabel")
+        print("updateLabel", terminator: "")
         if let validValue = valid {
             if validValue == true {
                 let finalString: String = "For your event \(tripName), \(fullNameNextPayer) should pay next."
-                println(finalString)
-                if count(finalString) > 0 {
-                    theLabel.attributedText = betterCreateAttributesStringForWhoIsPayingNext(tripName, fullNameNextPayer)
+                print(finalString, terminator: "")
+                if finalString.characters.count > 0 {
+                    theLabel.attributedText = betterCreateAttributesStringForWhoIsPayingNext(tripName, fullNameNextPayer: fullNameNextPayer)
                     theLabel.setNeedsUpdateConstraints()
                     NCWidgetController.widgetController().setHasContent(true, forWidgetWithBundleIdentifier: MCWhoIsPayingNextBundleIdentifier)
                 } else {
@@ -83,7 +83,7 @@ class TodayViewController: UIViewController, NCWidgetProviding {
                 urlString = "weallpay:///\(tonightsBillID)/\(nextPayerID)"
             }
         }
-        println("Open: \(urlString)")
+        print("Open: \(urlString)", terminator: "")
         let url = NSURL(string: urlString)
         self.extensionContext?.openURL(url!, completionHandler: nil)
     }
@@ -100,7 +100,7 @@ class TodayViewController: UIViewController, NCWidgetProviding {
         self.view.preservesSuperviewLayoutMargins = true
     }
     
-    func widgetPerformUpdateWithCompletionHandler(completionHandler: ((NCUpdateResult) -> Void)!) {
+    func widgetPerformUpdateWithCompletionHandler(completionHandler: ((NCUpdateResult) -> Void)) {
         // Perform any setup necessary in order to update the view.
 
         // If an error is encountered, use NCUpdateResult.Failed

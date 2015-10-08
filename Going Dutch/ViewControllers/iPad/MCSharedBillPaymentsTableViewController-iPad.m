@@ -9,9 +9,6 @@
 #import "MCSharedBillPaymentsTableViewController-iPad.h"
 #import "UIViewController+WeAllPayStore.h"
 
-#import "MCPaymentTableViewCell_iPad.h"
-#import "MCTableEmptyMessage_iPad.h"
-
 #import "MCWeAllPayStoreController.h"
 #import "MCPayment+addons.h"
 #import "MCSharedBill+addons.h"
@@ -25,6 +22,8 @@
 #import "MCCategoryPictureStoreController.h"
 
 #import "MCWhoPayingUserDefaultsStoreInterface+WeAllPay.h"
+
+#import "We_all_pay-Swift.h"
 
 @interface MCSharedBillPaymentsTableViewController_iPad ()
 
@@ -248,7 +247,7 @@
     MCPayment *thisCellsPayment = [_dataController objectAtIndexPath:indexPath];
     if (!thisCellsPayment) {
     }
-    MCPaymentTableViewCell_iPad *paymentCell = [tableView dequeueReusableCellWithIdentifier:@"MCPaymentTableViewCell_iPad"];
+    PaymentTableViewCell_iPad *paymentCell = [tableView dequeueReusableCellWithIdentifier:@"MCPaymentTableViewCell_iPad"];
     
     NSString *thisCellsPayerName;
     if ([thisCellsPayment payingPerson]) {

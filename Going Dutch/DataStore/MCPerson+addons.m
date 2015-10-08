@@ -214,7 +214,7 @@
     
     NSArray *emailAddresses = [[self managedObjectContext] executeFetchRequest:request error:&error];
     if (!emailAddresses) {
-        NSLog(@"Something went wrong on fetching emailAddresses: %@", [error localizedDescription]);
+        NSLog(@"Something went wrong on fetching emailAddresses: %@", error);
     } else if ([emailAddresses count] != 1) {
         NSLog(@"%lu defaultEmailAddresses found.", (unsigned long)[emailAddresses count]);
     }

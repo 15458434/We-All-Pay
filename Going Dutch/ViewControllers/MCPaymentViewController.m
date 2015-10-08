@@ -7,14 +7,12 @@
 //
 
 #import "MCPaymentViewController.h"
-#import "UIView+MCAddons.h"
 
 #import "MCPayment+addons.h"
 #import "MCPerson+addons.h"
 #import "MCSharedBill+addons.h"
 #import "MCPaymentPresence+addons.h"
 #import "MCWeAllPayStoreController.h"
-#import "MCTwoLabelsTitleView.h"
 
 #import "MCDismissMeBlockProtocol.h"
 

@@ -16,8 +16,6 @@
 #import "MCPerson+addons.h"
 #import "MCWeAllPayStoreController.h"
 
-#import "MCTwoLabelsTitleView.h"
-
 #import "We_all_pay-Swift.h"
 
 typedef NS_ENUM(BOOL, MCXRatesMissing) {
@@ -61,31 +59,41 @@ typedef NS_ENUM(BOOL, MCXRatesMissing) {
 #if DEBUG
     NSLog(@"%@ openMailView:%@", self, sender);
 #endif
-    // Init the mailComposer
-    MCMailComposer *mailComposer = [[MCMailComposer alloc] initWithTonightsBill:[self tonightsBill]];
-    NSArray *recipients = [mailComposer getMailAddresses];
-    NSString *subject = [mailComposer getSubject];
-    NSString *messageBody = [mailComposer getMailBody];
-    // Init the mailViewController
-    MFMailComposeViewController *mailViewController = [[MFMailComposeViewController alloc] init];
-    [mailViewController setMailComposeDelegate:sender];
-    [mailViewController setEdgesForExtendedLayout:UIRectEdgeNone];
-    [mailViewController setModalPresentationStyle:UIModalPresentationFormSheet];
-    [[mailViewController viewControllers][0] setEdgesForExtendedLayout:UIRectEdgeNone];
-    [mailViewController setToRecipients:recipients];
-    [mailViewController setSubject:subject];
-    [mailViewController setMessageBody:messageBody isHTML:mailComposer.isHTML];
-    
-    if ([[UIDevice currentDevice] userInterfaceIdiom] == UIUserInterfaceIdiomPad) {
-        [MCTools setAdBannerIfNotPaid:NO forViewController:[mailViewController viewControllers][0]];
+    if ([MFMailComposeViewController canSendMail]) {
+        // Init the mailComposer
+        MCMailComposer *mailComposer = [[MCMailComposer alloc] initWithTonightsBill:[self tonightsBill]];
+        NSArray *recipients = [mailComposer getMailAddresses];
+        NSString *subject = [mailComposer getSubject];
+        NSString *messageBody = [mailComposer getMailBody];
+        // Init the mailViewController
+        MFMailComposeViewController *mailViewController = [[MFMailComposeViewController alloc] init];
+        [mailViewController setMailComposeDelegate:sender];
+        [mailViewController setEdgesForExtendedLayout:UIRectEdgeNone];
+        [mailViewController setModalPresentationStyle:UIModalPresentationFormSheet];
+        [[mailViewController viewControllers][0] setEdgesForExtendedLayout:UIRectEdgeNone];
+        [mailViewController setToRecipients:recipients];
+        [mailViewController setSubject:subject];
+        [mailViewController setMessageBody:messageBody isHTML:mailComposer.isHTML];
+        
+        [self presentViewController:mailViewController animated:YES completion:^{
+            [[UIApplication sharedApplication] setStatusBarStyle:UIStatusBarStyleLightContent];
+            [mailViewController setNeedsStatusBarAppearanceUpdate];
+        }];
     } else {
-        //[MCTools setAdBannerIfNotPaid:YES forViewController:[[mailViewController viewControllers] objectAtIndex:0]];
+        NSString *alertTitle = NSLocalizedString(@"Unable to send email", @"Title of an alert that notifies the user the app is unable to send email.");
+        NSString *alertMessage = NSLocalizedString(@"Please configure your mail in Settings", @"Instruction in an alert to tell the user that they should check their email address for a valid configuration.");
+        NSString *dismiss = NSLocalizedString(@"Dimiss", @"Text on a button that dismisses the alert");
+        if ([UIAlertController class]) {
+            // iOS 8 and up
+            UIAlertController *alertController = [UIAlertController alertControllerWithTitle:alertTitle message:alertMessage preferredStyle:UIAlertControllerStyleAlert];
+            UIAlertAction *dismissAction = [UIAlertAction actionWithTitle:dismiss style:UIAlertActionStyleCancel handler:nil];
+            [alertController addAction:dismissAction];
+            [self presentViewController:alertController animated:YES completion:nil];
+        } else {
+            UIAlertView *alertView = [[UIAlertView alloc] initWithTitle:alertTitle message:alertMessage delegate:nil cancelButtonTitle:dismiss otherButtonTitles:nil];
+            [alertView show];
+        }
     }
-    
-    [self presentViewController:mailViewController animated:YES completion:^{
-        [[UIApplication sharedApplication] setStatusBarStyle:UIStatusBarStyleLightContent];
-        [mailViewController setNeedsStatusBarAppearanceUpdate];
-    }];
 }
 
 - (void)shareBill:(id)sender
@@ -98,13 +106,30 @@ typedef NS_ENUM(BOOL, MCXRatesMissing) {
         NSString *message = NSLocalizedString(@"EMAIL_CONSTRUCTION_FAILURE_MESSAGE", @"Reason: Not all people have a mail address.");
         NSString *cancel = NSLocalizedString(@"CANCEL", @"Cancel");
         NSString *sendAnyway = NSLocalizedString(@"SEND_ANYWAY", @"Send anyway");
-        UIAlertView *mailAddressesMissing = [[UIAlertView alloc] initWithTitle:title
-                                                                       message:message
-                                                                      delegate:self
-                                                             cancelButtonTitle:cancel
-                                                             otherButtonTitles:sendAnyway, nil];
-        [mailAddressesMissing setDelegate:self];
-        [mailAddressesMissing show];
+        if ([UIAlertController class]) {
+            // iOS 8 and up
+            UIAlertController *alertController = [UIAlertController alertControllerWithTitle:title message:message preferredStyle:UIAlertControllerStyleAlert];
+            [alertController addAction:[UIAlertAction actionWithTitle:cancel style:UIAlertActionStyleCancel handler:^(UIAlertAction * _Nonnull action) {
+                // don't do a thing
+            }]];
+            __weak typeof(self) weakSelf = self;
+            [alertController addAction:[UIAlertAction actionWithTitle:sendAnyway style:UIAlertActionStyleDefault handler:^(UIAlertAction * _Nonnull action) {
+                typeof(self) strongSelf = weakSelf;
+                if (strongSelf) {
+                    [self openMailView:self];
+                }
+            }]];
+            [self presentViewController:alertController animated:YES completion:nil];
+        } else {
+            UIAlertView *mailAddressesMissing = [[UIAlertView alloc] initWithTitle:title
+                                                                           message:message
+                                                                          delegate:self
+                                                                 cancelButtonTitle:cancel
+                                                                 otherButtonTitles:sendAnyway, nil];
+            [mailAddressesMissing setDelegate:self];
+            [mailAddressesMissing show];
+        }
+
     }
 }
 
@@ -209,8 +234,6 @@ typedef NS_ENUM(BOOL, MCXRatesMissing) {
     // Uncomment the following line to display an Edit button in the navigation bar for this view controller.
     // self.navigationItem.rightBarButtonItem = self.editButtonItem;
     
-    [self setWillShowButtons:NO];
-    
     [self setEdgesForExtendedLayout:UIRectEdgeNone];
     
     if ([[UIDevice currentDevice] userInterfaceIdiom] == UIUserInterfaceIdiomPad) {
@@ -241,6 +264,7 @@ typedef NS_ENUM(BOOL, MCXRatesMissing) {
     }
 
     [[self tableView] reloadData];
+    [self setInterstitialPresentationPolicy:ADInterstitialPresentationPolicyAutomatic];    
 }
 
 - (void)viewWillAppear:(BOOL)animated
@@ -254,6 +278,11 @@ typedef NS_ENUM(BOOL, MCXRatesMissing) {
 {
     [super didReceiveMemoryWarning];
     // Dispose of any resources that can be recreated.
+}
+
+- (BOOL)shouldPresentInterstitialAd
+{
+    return YES;
 }
 
 - (void)encodeRestorableStateWithCoder:(NSCoder *)coder
@@ -319,7 +348,7 @@ typedef NS_ENUM(BOOL, MCXRatesMissing) {
     } else if (result == MFMailComposeResultSaved) {
         [[self presentedViewController] dismissViewControllerAnimated:YES completion:nil];
     } else {
-        NSLog(@"Sending email went wrong: %@", [error localizedDescription]);
+        NSLog(@"Sending email went wrong: %@", error);
     }
 }
 
@@ -333,8 +362,8 @@ typedef NS_ENUM(BOOL, MCXRatesMissing) {
 - (void)tableView:(UITableView *)tableView willDisplayHeaderView:(UIView *)view forSection:(NSInteger)section
 {
     UITableViewHeaderFooterView *sectionTitleHeader = (UITableViewHeaderFooterView *)view;
-    [view setTintColor:[MCColors getbackgroundColor]];
-    [[sectionTitleHeader textLabel] setTextColor:[MCColors getEmptyMessageTextColor]];
+    [view setTintColor:[Colors getbackgroundColor]];
+    [[sectionTitleHeader textLabel] setTextColor:[Colors getEmptyMessageTextColor]];
 }
 
 - (void)tableView:(UITableView *)tableView didEndDisplayingHeaderView:(UIView *)view forSection:(NSInteger)section

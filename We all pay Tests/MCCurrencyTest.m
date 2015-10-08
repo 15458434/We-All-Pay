@@ -10,8 +10,6 @@
 #import "MCWeAllPayStoreController.h"
 #import "MCCurrency+addons.h"
 
-#import "XRCurrencyStoreController.h"
-
 @interface MCCurrencyTest : XCTestCase
 {
     MCWeAllPayStoreController *_mainController;

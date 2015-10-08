@@ -13,7 +13,7 @@
 #import "MCCategoryPictureStoreController.h"
 #import "MCCategoryPictureObject.h"
 
-#import "MCSelectCategoryTableViewCell_iPad.h"
+#import "We_all_pay-Swift.h"
 
 BOOL const isUILocalizedIndexedCollation = NO;
 
@@ -111,7 +111,7 @@ BOOL const isUILocalizedIndexedCollation = NO;
 
 - (void)searchDisplayController:(UISearchDisplayController *)controller willShowSearchResultsTableView:(UITableView *)tableView
 {
-    [tableView registerClass:[MCSelectCategoryTableViewCell_iPad class] forCellReuseIdentifier:@"selectCategoryCell"];
+    [tableView registerClass:[SelectCategoryTableViewCell_iPad class] forCellReuseIdentifier:@"selectCategoryCell"];
 }
 
 #pragma mark - Table view delegate
@@ -188,7 +188,7 @@ BOOL const isUILocalizedIndexedCollation = NO;
 }
 
 - (UITableViewCell *)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath {
-    MCSelectCategoryTableViewCell_iPad *cell = (MCSelectCategoryTableViewCell_iPad *)[tableView dequeueReusableCellWithIdentifier:@"selectCategoryCell" forIndexPath:indexPath];
+    SelectCategoryTableViewCell_iPad *cell = (SelectCategoryTableViewCell_iPad *)[tableView dequeueReusableCellWithIdentifier:@"selectCategoryCell" forIndexPath:indexPath];
     
     if (tableView == self.searchDisplayController.searchResultsTableView) {
         MCCategoryPictureObject *category = [_filteredCategories objectAtIndex:[indexPath row]];

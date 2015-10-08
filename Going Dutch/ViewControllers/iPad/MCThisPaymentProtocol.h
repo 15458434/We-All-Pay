@@ -6,13 +6,12 @@
 //  Copyright (c) 2014 Mark Cornelisse. All rights reserved.
 //
 
-#import <Foundation/Foundation.h>
+@import Foundation;
 
 @class MCPayment;
 
 @protocol MCThisPaymentProtocol <NSObject>
 
-- (MCPayment *)thisPayment;
-- (void)setThisPayment:(MCPayment *)payment;
+@property (strong, nonatomic) MCPayment *thisPayment;
 
 @end

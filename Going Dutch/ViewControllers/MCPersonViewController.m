@@ -7,20 +7,19 @@
 //
 
 #import "MCPersonViewController.h"
-#import "UIViewController+TappedInBackground.h"
 
 #import "MCWeAllPayStoreController.h"
 #import "MCPerson+addons.h"
 #import "MCSharedBill+addons.h"
 #import "MCEmailAddress+addons.h"
 
-#import "MCTwoLabelsTitleView.h"
-
 #import "MCTools.h"
 
+#import "We_all_pay-Swift.h"
+
 typedef NS_ENUM(BOOL, MCStatus) {
-    inValid,
-    valid
+    invalidStatus,
+    validStatus
 };
 
 @interface MCPersonViewController ()
@@ -161,7 +160,7 @@ typedef NS_ENUM(BOOL, MCStatus) {
     NSError *error = nil;
     [dataController performFetch:&error];
     if (error) {
-        NSLog(@"Something went wrong fetching email addresses: %@", [error localizedDescription]);
+        NSLog(@"Something went wrong fetching email addresses: %@", error);
     }
 }
 
@@ -237,7 +236,7 @@ typedef NS_ENUM(BOOL, MCStatus) {
 {
     [super awakeFromNib];
     
-    _emailAddressStringInTextField = inValid;
+    _emailAddressStringInTextField = invalidStatus;
 }
 
 - (void)viewDidLoad
@@ -408,12 +407,12 @@ typedef NS_ENUM(BOOL, MCStatus) {
         return YES;
     } else if (textField == emailField) {
         if ([MCTools isStringAnEmailAddress:[emailField text]]) {
-            _emailAddressStringInTextField = valid;
+            _emailAddressStringInTextField = validStatus;
             [emailField setTextColor:[UIColor blackColor]];
             [emailField resignFirstResponder];
             return YES;
         } else {
-            _emailAddressStringInTextField = inValid;
+            _emailAddressStringInTextField = invalidStatus;
             [emailField setTextColor:[UIColor redColor]];
         }
     }
