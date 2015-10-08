@@ -155,7 +155,7 @@ NSString * const cellIdentifier = @"MCSelectCurrencyTableViewCell_iPhone";
                 
                 NSString *title = NSLocalizedString(@"Unable to fetch exchange rates", @"Title message of an alert that pops up when fetching exchange rates is impossible");
                 NSString *message = NSLocalizedString(@"Fetching exchange rates is not possible at this moment. Check your internet connection and/or hit solve to fetch all missing exchange rates at a later time", @"Message explaining what the user can do to refetch exchange rates");
-                NSString *dismissTitle = NSLocalizedString(@"Dismiss", @"Title of a button that dismisses an alert.");
+                NSString *dismissTitle = NSLocalizedString(@"Dismiss", @"Title of a button that dismisses an alart.");
                 
                 if ([UIAlertController class]) {
                     // iOS 8 and up.

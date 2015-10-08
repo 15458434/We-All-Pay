@@ -19,7 +19,7 @@
 /* (No Commment) */
 "BACK_TITLE_ALL_TRIPS_VIEW" = "terug";
 
-/* Buy Pro Version */
+/* (No Commment) */
 "BUY_PRO" = "Verwijder Ads";
 
 /* Buy ad free Version */
@@ -35,7 +35,9 @@
 "CONTACTS_DISABLED_TITLE" = "Contacten uitgeschakeld";
 
 /* Button that says dismiss.
-   Dismiss */
+   Dismiss
+   Title of a button that dismisses an alart.
+   Title of a button that dismisses an alert. */
 "Dismiss" = "Negeer";
 
 /* (No Commment) */
@@ -122,7 +124,10 @@
 /* Sub header in the personView which state edit data */
 "EXISTING_PERSON_SUBHEADER" = "Bewerk gegevens";
 
-/* Give feedback */
+/* Message explaining what the user can do to refetch exchange rates */
+"Fetching exchange rates is not possible at this moment. Check your internet connection and/or hit solve to fetch all missing exchange rates at a later time" = "Het ophalen van de wisselkoers is niet mogelijk op dit moment. Controleer je internet verbinding en/of druk later op 'Oplossing' om all ontbrekende wisselkoersen op te halen.";
+
+/* (No Commment) */
 "GIVE_FEEDBACK" = "Geef feedback";
 
 /* Give feedback */
@@ -137,17 +142,16 @@
 /* The email address you provided doesn't appear to be an email address. This might cause improper behavior. Are you sure you want to continu? */
 "INVALID_EMAIL_ADDRESS_MESSAGE" = "Het ingevoerde emailadres lijkt niet op een geldig email adres. Dit kan ongewenst gedrag veroorzaken. Weet u zeker dat u door wilt gaan?";
 
-/* Hi, I found this easy to use iPhone app to share a bill amongst friends. It is called We All Pay. */
+/* (No Commment) */
 "I_FOUND_WE_ALL_PAY" = "Hoi, ik heb deze makkelijk te gebruiken iPhone App gevonden, waarmee je heel makkelijk een rekening kan verdelen over vrienden. Het heet \"We all pay\".";
 
-/* We all pay is now free of any ads. */
+/* (No Commment) */
 "I_WILL_SHOW_NO_ADS" = "We all pay is nu een advertentie vrije ervaring.";
 
 /* Text of the the button that takes you to my apps in the App Store */
 "My Apps" = "Mijn apps";
 
-/* Header in the paymentView which state new Payment
-   new payment */
+/* Header in the paymentView which state new Payment */
 "NEW_PAYMENT_HEADER" = "Nieuwe betaling";
 
 /* Sub header in the paymentView which states Add payment data */
@@ -190,13 +194,13 @@
 /* People present */
 "PEOPLE_PRESENT_PAGEVIEWCONTROLLER" = "Aanwezigen";
 
-/* Ad free version restored. */
+/* (No Commment) */
 "PURCHASE_RESTORED" = "Ad vrije versie hersteld.";
 
-/* Restore previous purchases */
+/* (No Commment) */
 "RESTORE_PREVIOUS_PURCHASES" = "Herstel eerdere aankopen";
 
-/* Nothing to restore */
+/* (No Commment) */
 "RESTORE_PURCHASE_FAILED" = "Geen aankoop om te herstellen";
 
 /* Please add payments and/or people if you want a solution on who owes who. */
@@ -208,8 +212,7 @@
 /* Restore previous purchases */
 "Restore previous purchases" = "Herstel eerdere aankopen";
 
-/* Select Category
-   Text of the category button. */
+/* Select Category */
 "SELECT_CATEGORY" = "Selecteer Categorie";
 
 /* (No Commment) */
@@ -227,7 +230,7 @@
 /* Who ows who */
 "SOLUTION_SECTION_WHO_OWES_WHO" = "Wie betaalt wie";
 
-/* Thank you for purchasing. */
+/* (No Commment) */
 "THANK_YOU_FOR_PURCHASING" = "Dank u wel voor uw aankoop.";
 
 /* Something */
@@ -254,7 +257,13 @@
 /* Message body explaining the App Store can't be reached. */
 "Unable to connect to the App Store. Please connect to the internet." = "Kan de App Store niet bereiken. Verbind met het internet.";
 
-/* What is the Pro Version */
+/* Title message of an alert that pops up when fetching exchange rates is impossible */
+"Unable to fetch exchange rates" = "Kan wisselkoers niet ophalen";
+
+/* Unable to send email */
+"Unable to send email" = "Kan email niet versturen";
+
+/* (No Commment) */
 "WHAT_IS_PRO" = "Wat is de Pro versie?";
 
 /* yes */
