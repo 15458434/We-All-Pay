@@ -83,23 +83,26 @@ class InfoScreenTableViewController: UITableViewController, MFMailComposeViewCon
     func applyProVersion(notification: NSNotification) {
         NSOperationQueue.mainQueue().addOperationWithBlock { () -> Void in
             self.tableView.deleteRowsAtIndexPaths([NSIndexPath(forRow: 0, inSection: 0), NSIndexPath(forRow: 1, inSection: 0)], withRowAnimation: UITableViewRowAnimation.Automatic)
+            var title: String!
+            var message: String?
+            if notification.userInfo!["Kind of purchase"] as? String == "new buy" {
+                title = NSLocalizedString("Thank you for purchasing", comment: "Thank you for purchasing")
+                message = NSLocalizedString("\(productName) is now free of any ads.", comment: "\(productName) is now free of any ads.")
+
+            } else if notification.userInfo!["Kind of purchase"] as? String == "restore purchase" {
+                title = NSLocalizedString("Ad free version restored.", comment: "Ad free version restored.")
+            }
+            let dismissText = NSLocalizedString("Dismiss", comment: "Dismiss")
             if #available(iOS 8.0, *) {
                 var alertController: UIAlertController!
-                if notification.userInfo!["Kind of purchase"] as? String == "new buy" {
-                    let title = NSLocalizedString("Thank you for purchasing", comment: "Thank you for purchasing")
-                    let message = NSLocalizedString("\(productName) is now free of any ads.", comment: "\(productName) is now free of any ads.")
-                    alertController = UIAlertController(title: title, message: message, preferredStyle: .Alert)
-                } else if notification.userInfo!["Kind of purchase"] as? String == "restore purchase" {
-                    let title = NSLocalizedString("Ad free version restored.", comment: "Ad free version restored.")
-                    alertController = UIAlertController(title: title, message: nil, preferredStyle: .Alert)
-                }
-                let dismiss = NSLocalizedString("Dismiss", comment: "Dismiss")
-                let cancelAction = UIAlertAction(title: dismiss, style: .Cancel, handler:nil)
+                alertController = UIAlertController(title: title, message: message, preferredStyle: .Alert)
+                let cancelAction = UIAlertAction(title: dismissText, style: .Cancel, handler:nil)
                 alertController.addAction(cancelAction)
                 self.presentViewController(alertController, animated: true, completion: nil)
             } else {
                 // Fallback on earlier versions
-                
+                let alertView = UIAlertView(title: title, message: message, delegate: nil, cancelButtonTitle: dismissText)
+                alertView.show()
             }
         }
     }
@@ -115,14 +118,17 @@ class InfoScreenTableViewController: UITableViewController, MFMailComposeViewCon
         if notification.userInfo!["status"] as? String == "Not restored" {
             let myPresenter = presentingViewController!
             let title = NSLocalizedString("Nothing to restore", comment: "Nothing to restore")
+            let dismiss = NSLocalizedString("Dismiss", comment: "Dismiss")
             if #available(iOS 8.0, *) {
                 let alertController = UIAlertController(title: title, message: nil, preferredStyle: .Alert)
-                let dismiss = NSLocalizedString("Dismiss", comment: "Dismiss")
+                
                 let cancelAction = UIAlertAction(title: dismiss, style: .Cancel, handler:nil)
                 alertController.addAction(cancelAction)
                 myPresenter.presentViewController(alertController, animated: true, completion: nil)
             } else {
                 // Fallback on earlier versions
+                let alertView = UIAlertView(title: title, message: nil, delegate: nil, cancelButtonTitle: dismiss)
+                alertView.show()
             }
         }
     }
