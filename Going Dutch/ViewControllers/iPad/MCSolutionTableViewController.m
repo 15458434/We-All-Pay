@@ -48,29 +48,45 @@ typedef NS_ENUM(BOOL, MCXRatesMissing) {
 
 - (void)openMailView:(id)sender
 {
-    // Init the mailComposer
-    MCMailComposer *mailComposer = [[MCMailComposer alloc] initWithTonightsBill:_tonightsBill];
-    
-    // Init the mail ViewController
-    MFMailComposeViewController *_mailViewController = [[MFMailComposeViewController alloc] init];
-    [_mailViewController setMailComposeDelegate:sender];
-    [_mailViewController setEdgesForExtendedLayout:UIRectEdgeNone];
-    [_mailViewController setModalPresentationStyle:UIModalPresentationFormSheet];
-    [[_mailViewController viewControllers][0] setEdgesForExtendedLayout:UIRectEdgeNone];
-    
-    NSMutableDictionary *textAttributes = [[NSMutableDictionary alloc] initWithDictionary:[self navigationController].navigationBar.titleTextAttributes];
-    [textAttributes setValue:[UIColor whiteColor] forKey:NSForegroundColorAttributeName];
-    [[_mailViewController navigationBar] setTitleTextAttributes:textAttributes];
-    
-    // Set the mail.
-    [_mailViewController setToRecipients:[mailComposer getMailAddresses]];
-    [_mailViewController setSubject:[mailComposer getSubject]];
-    [_mailViewController setMessageBody:[mailComposer getMailBody] isHTML:mailComposer.isHTML];
-    
-    if (sender!=self) {
-        [sender presentViewController:_mailViewController animated:YES completion:nil];
+    if ([MFMailComposeViewController canSendMail]) {
+        // Init the mailComposer
+        MCMailComposer *mailComposer = [[MCMailComposer alloc] initWithTonightsBill:_tonightsBill];
+        
+        // Init the mail ViewController
+        MFMailComposeViewController *_mailViewController = [[MFMailComposeViewController alloc] init];
+        [_mailViewController setMailComposeDelegate:sender];
+        [_mailViewController setEdgesForExtendedLayout:UIRectEdgeNone];
+        [_mailViewController setModalPresentationStyle:UIModalPresentationFormSheet];
+        [[_mailViewController viewControllers][0] setEdgesForExtendedLayout:UIRectEdgeNone];
+        
+        NSMutableDictionary *textAttributes = [[NSMutableDictionary alloc] initWithDictionary:[self navigationController].navigationBar.titleTextAttributes];
+        [textAttributes setValue:[UIColor whiteColor] forKey:NSForegroundColorAttributeName];
+        [[_mailViewController navigationBar] setTitleTextAttributes:textAttributes];
+        
+        // Set the mail.
+        [_mailViewController setToRecipients:[mailComposer getMailAddresses]];
+        [_mailViewController setSubject:[mailComposer getSubject]];
+        [_mailViewController setMessageBody:[mailComposer getMailBody] isHTML:mailComposer.isHTML];
+        
+        if (sender!=self) {
+            [sender presentViewController:_mailViewController animated:YES completion:nil];
+        } else {
+            [[self navigationController] presentViewController:_mailViewController animated:YES completion:nil];
+        }
     } else {
-        [[self navigationController] presentViewController:_mailViewController animated:YES completion:nil];
+        NSString *alertTitle = NSLocalizedString(@"Unable to send email", @"Title of an alert that notifies the user the app is unable to send email.");
+        NSString *alertMessage = NSLocalizedString(@"Please configure your mail in Settings", @"Instruction in an alert to tell the user that they should check their email address for a valid configuration.");
+        NSString *dismiss = NSLocalizedString(@"Dimiss", @"Text on a button that dismisses the alert");
+        if ([UIAlertController class]) {
+            // iOS 8 and up
+            UIAlertController *alertController = [UIAlertController alertControllerWithTitle:alertTitle message:alertMessage preferredStyle:UIAlertControllerStyleAlert];
+            UIAlertAction *dismissAction = [UIAlertAction actionWithTitle:dismiss style:UIAlertActionStyleCancel handler:nil];
+            [alertController addAction:dismissAction];
+            [self presentViewController:alertController animated:YES completion:nil];
+        } else {
+            UIAlertView *alertView = [[UIAlertView alloc] initWithTitle:alertTitle message:alertMessage delegate:nil cancelButtonTitle:dismiss otherButtonTitles:nil];
+            [alertView show];
+        }
     }
 }
 

@@ -59,31 +59,41 @@ typedef NS_ENUM(BOOL, MCXRatesMissing) {
 #if DEBUG
     NSLog(@"%@ openMailView:%@", self, sender);
 #endif
-    // Init the mailComposer
-    MCMailComposer *mailComposer = [[MCMailComposer alloc] initWithTonightsBill:[self tonightsBill]];
-    NSArray *recipients = [mailComposer getMailAddresses];
-    NSString *subject = [mailComposer getSubject];
-    NSString *messageBody = [mailComposer getMailBody];
-    // Init the mailViewController
-    MFMailComposeViewController *mailViewController = [[MFMailComposeViewController alloc] init];
-    [mailViewController setMailComposeDelegate:sender];
-    [mailViewController setEdgesForExtendedLayout:UIRectEdgeNone];
-    [mailViewController setModalPresentationStyle:UIModalPresentationFormSheet];
-    [[mailViewController viewControllers][0] setEdgesForExtendedLayout:UIRectEdgeNone];
-    [mailViewController setToRecipients:recipients];
-    [mailViewController setSubject:subject];
-    [mailViewController setMessageBody:messageBody isHTML:mailComposer.isHTML];
-    
-    if ([[UIDevice currentDevice] userInterfaceIdiom] == UIUserInterfaceIdiomPad) {
-        [MCTools setAdBannerIfNotPaid:NO forViewController:[mailViewController viewControllers][0]];
+    if ([MFMailComposeViewController canSendMail]) {
+        // Init the mailComposer
+        MCMailComposer *mailComposer = [[MCMailComposer alloc] initWithTonightsBill:[self tonightsBill]];
+        NSArray *recipients = [mailComposer getMailAddresses];
+        NSString *subject = [mailComposer getSubject];
+        NSString *messageBody = [mailComposer getMailBody];
+        // Init the mailViewController
+        MFMailComposeViewController *mailViewController = [[MFMailComposeViewController alloc] init];
+        [mailViewController setMailComposeDelegate:sender];
+        [mailViewController setEdgesForExtendedLayout:UIRectEdgeNone];
+        [mailViewController setModalPresentationStyle:UIModalPresentationFormSheet];
+        [[mailViewController viewControllers][0] setEdgesForExtendedLayout:UIRectEdgeNone];
+        [mailViewController setToRecipients:recipients];
+        [mailViewController setSubject:subject];
+        [mailViewController setMessageBody:messageBody isHTML:mailComposer.isHTML];
+        
+        [self presentViewController:mailViewController animated:YES completion:^{
+            [[UIApplication sharedApplication] setStatusBarStyle:UIStatusBarStyleLightContent];
+            [mailViewController setNeedsStatusBarAppearanceUpdate];
+        }];
     } else {
-        //[MCTools setAdBannerIfNotPaid:YES forViewController:[[mailViewController viewControllers] objectAtIndex:0]];
+        NSString *alertTitle = NSLocalizedString(@"Unable to send email", @"Title of an alert that notifies the user the app is unable to send email.");
+        NSString *alertMessage = NSLocalizedString(@"Please configure your mail in Settings", @"Instruction in an alert to tell the user that they should check their email address for a valid configuration.");
+        NSString *dismiss = NSLocalizedString(@"Dimiss", @"Text on a button that dismisses the alert");
+        if ([UIAlertController class]) {
+            // iOS 8 and up
+            UIAlertController *alertController = [UIAlertController alertControllerWithTitle:alertTitle message:alertMessage preferredStyle:UIAlertControllerStyleAlert];
+            UIAlertAction *dismissAction = [UIAlertAction actionWithTitle:dismiss style:UIAlertActionStyleCancel handler:nil];
+            [alertController addAction:dismissAction];
+            [self presentViewController:alertController animated:YES completion:nil];
+        } else {
+            UIAlertView *alertView = [[UIAlertView alloc] initWithTitle:alertTitle message:alertMessage delegate:nil cancelButtonTitle:dismiss otherButtonTitles:nil];
+            [alertView show];
+        }
     }
-    
-    [self presentViewController:mailViewController animated:YES completion:^{
-        [[UIApplication sharedApplication] setStatusBarStyle:UIStatusBarStyleLightContent];
-        [mailViewController setNeedsStatusBarAppearanceUpdate];
-    }];
 }
 
 - (void)shareBill:(id)sender
