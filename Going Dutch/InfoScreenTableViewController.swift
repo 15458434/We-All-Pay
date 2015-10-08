@@ -113,13 +113,14 @@ class InfoScreenTableViewController: UITableViewController, MFMailComposeViewCon
     
     func restorePreviousPurchasesFailed(notification: NSNotification) {
         if notification.userInfo!["status"] as? String == "Not restored" {
+            let myPresenter = presentingViewController!
             let title = NSLocalizedString("Nothing to restore", comment: "Nothing to restore")
             if #available(iOS 8.0, *) {
                 let alertController = UIAlertController(title: title, message: nil, preferredStyle: .Alert)
                 let dismiss = NSLocalizedString("Dismiss", comment: "Dismiss")
                 let cancelAction = UIAlertAction(title: dismiss, style: .Cancel, handler:nil)
                 alertController.addAction(cancelAction)
-                self.presentViewController(alertController, animated: true, completion: nil)
+                myPresenter.presentViewController(alertController, animated: true, completion: nil)
             } else {
                 // Fallback on earlier versions
             }

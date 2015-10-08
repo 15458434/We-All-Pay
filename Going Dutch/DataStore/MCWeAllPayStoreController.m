@@ -301,7 +301,7 @@ MCiCloudUse const isiCloudUsed = iCloudIsNotUsed;
     NSError *fetchError;
     BOOL success = [dataController performFetch:&fetchError];
     if (!success) {
-        NSLog(@"Error fetching available currencies: %@", [fetchError localizedDescription]);
+        NSLog(@"Error fetching available currencies: %@", fetchError);
     }
     return dataController;
 }
@@ -319,7 +319,7 @@ MCiCloudUse const isiCloudUsed = iCloudIsNotUsed;
     NSError *fetchError;
     BOOL success = [dataController performFetch:&fetchError];
     if (!success) {
-        NSLog(@"Error fetching available currencies: %@", [fetchError localizedDescription]);
+        NSLog(@"Error fetching available currencies: %@", fetchError);
     }
     return dataController;
 }
@@ -337,7 +337,7 @@ MCiCloudUse const isiCloudUsed = iCloudIsNotUsed;
     NSError *error;
     NSArray *result = [context executeFetchRequest:request error:&error];
     if (!result) {
-        NSLog(@"Error fetching people: %@", [error localizedDescription]);
+        NSLog(@"Error fetching people: %@", error);
         return nil;
     } else {
         return result;

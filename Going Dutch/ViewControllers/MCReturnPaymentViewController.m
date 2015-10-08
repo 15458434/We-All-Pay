@@ -321,7 +321,7 @@ typedef NS_ENUM(BOOL, MCXRatesMissing) {
     } else if (result == MFMailComposeResultSaved) {
         [[self presentedViewController] dismissViewControllerAnimated:YES completion:nil];
     } else {
-        NSLog(@"Sending email went wrong: %@", [error localizedDescription]);
+        NSLog(@"Sending email went wrong: %@", error);
     }
 }
 

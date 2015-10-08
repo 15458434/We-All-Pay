@@ -184,7 +184,7 @@ typedef NS_ENUM(BOOL, MCXRatesMissing) {
     } else if (result == MFMailComposeResultSaved) {
         [self dismissViewControllerAnimated:YES completion:nil];
     } else if (result == MFMailComposeResultFailed) {
-        NSLog(@"Error sending email: %@", [error localizedDescription]);
+        NSLog(@"Error sending email: %@", error);
         [self dismissViewControllerAnimated:YES completion:nil];
     } else if (result == MFMailComposeResultCancelled) {
         [self dismissViewControllerAnimated:YES completion:nil];

@@ -160,7 +160,7 @@ typedef NS_ENUM(BOOL, MCStatus) {
     NSError *error = nil;
     [dataController performFetch:&error];
     if (error) {
-        NSLog(@"Something went wrong fetching email addresses: %@", [error localizedDescription]);
+        NSLog(@"Something went wrong fetching email addresses: %@", error);
     }
 }
 

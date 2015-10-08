@@ -318,7 +318,7 @@
     } else if (result == MFMailComposeResultSaved) {
         [[self presentedViewController] dismissViewControllerAnimated:YES completion:nil];
     } else {
-        NSLog(@"Something went wrong: %@", [error localizedDescription]);
+        NSLog(@"Something went wrong: %@", error);
     }
 }
     

@@ -47,7 +47,7 @@
     NSError *currencyFetchError;
     NSArray *currencyFetchResults = [context executeFetchRequest:currencyFetchRequest error:&currencyFetchError];
     if (!currencyFetchResults) {
-        NSLog(@"currencyFetchError: %@", [currencyFetchError localizedDescription]);
+        NSLog(@"currencyFetchError: %@", currencyFetchError);
         return NO;
     }
     MCCurrency *currentCurrency = currencyFetchResults[0];

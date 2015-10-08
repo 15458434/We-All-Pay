@@ -51,7 +51,7 @@
     NSError *fetchSharedBillError;
     NSArray *allSharedBills = [destinationContext executeFetchRequest:sharedBillRequest error:&fetchSharedBillError];
     if (!allSharedBills) {
-        NSLog(@"Error migrating: %@", [fetchSharedBillError localizedDescription]);
+        NSLog(@"Error migrating: %@", fetchSharedBillError);
         return NO;
     }
     NSLocale *currentLocale = [NSLocale currentLocale];
@@ -63,7 +63,7 @@
     NSError *fetchCurrencyError;
     NSArray *currentUsersCurrency = [destinationContext executeFetchRequest:currencyRequest error:&fetchCurrencyError];
     if (!currentUsersCurrency) {
-        NSLog(@"Error migrating: %@", [fetchCurrencyError localizedDescription]);
+        NSLog(@"Error migrating: %@", fetchCurrencyError);
         return NO;
     }
     MCCurrency *theCurrentCurrency = [currentUsersCurrency firstObject];
