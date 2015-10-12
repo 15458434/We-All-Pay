@@ -37,6 +37,7 @@ class ExchangeRateFetcher: NSObject {
     }
     
     func exchangeRate(fromCode: String, toCode: String, completionHandler: (fromCode: String, toCode: String, exchangeRate: NSNumber!, error: NSError!) -> ()) {
+        let thisOperationQueue = NSOperationQueue.currentQueue()!
         if isLastFetchOlderThanAnHour {
             fetchFromOpenExchangeRates({ (baseCurrency, rates, error) -> () in
                 if error != nil {
@@ -44,7 +45,9 @@ class ExchangeRateFetcher: NSObject {
                     return
                 }
                 let exchangeRate = self.calculateExchangeRate(fromCode, toCode: toCode)
-                completionHandler(fromCode: fromCode, toCode: toCode, exchangeRate: exchangeRate, error: nil)
+                thisOperationQueue.addOperationWithBlock({ () -> Void in
+                    completionHandler(fromCode: fromCode, toCode: toCode, exchangeRate: exchangeRate, error: nil)
+                })
             })
         } else {
             let rate = calculateExchangeRate(fromCode, toCode: toCode)
