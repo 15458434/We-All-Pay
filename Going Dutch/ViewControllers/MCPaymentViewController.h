@@ -46,7 +46,7 @@ typedef NS_ENUM(NSUInteger, MCMoneyValueFieldDismissStatus) {
     NSNumber *paidViewNumber;
     
     UIPickerView *personPickerView;
-    NSArray *listOfPeople;
+    NSArray<MCPerson *> *listOfPeople;
     BOOL peoplePickerCancelled;
     MCMoneyValueFieldDismissStatus kindOfPaidFieldDismiss;
     

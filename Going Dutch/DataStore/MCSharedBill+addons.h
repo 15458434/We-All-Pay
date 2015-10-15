@@ -53,7 +53,7 @@
 - (BOOL)hasPersonPaidSomething:(MCPerson *)person;
 - (BOOL)doesEveryoneHaveAnEmailAddress;
 
-- (NSArray *)getArrayOfFullNamesOfPeoplePresent;
+- (NSArray<MCPerson *> *)getArrayOfPeopleSortedOnFullNames;
 
 - (void)deleteIfStillNew;
 
