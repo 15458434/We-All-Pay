@@ -66,7 +66,6 @@ enum CancelButtonPressed {
         MCWeAllPayStoreController.defaultStore().endUndoGroupAndProcess()
         MCWeAllPayStoreController.defaultStore().saveMainThreadContext()
         navigationController?.presentingViewController?.dismissViewControllerAnimated(true, completion: { () -> Void in
-//        [MCWhoPayingUserDefaultsStoreInterface sendToUserDefaultsStoreInterface:_tonightsBill];
             MCWhoPayingUserDefaultsStoreInterface.sendToUserDefaultsStoreInterface(self.tonightsBill)
         })
         dismissMe?()
