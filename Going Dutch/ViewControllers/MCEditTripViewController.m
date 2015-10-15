@@ -17,8 +17,6 @@
 #import "MCSharedBill+addons.h"
 #import "MCCurrency+addons.h"
 
-//#import "MCWhoPayingUserDefaultsStoreInterface.h"
-
 #import "We_all_pay-Swift.h"
 
 @interface MCEditTripViewController ()
