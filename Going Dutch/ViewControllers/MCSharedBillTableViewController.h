@@ -37,7 +37,6 @@
 }
 
 @property (nonatomic, weak) id<MCIsEditingProtocol> myParent;
-@property (nonatomic, weak) id delegate;
 @property (nonatomic, weak) MCSharedBillPageViewController *mailDelegate;
 @property (nonatomic, strong) MCSharedBill *tonightsBill;
 @property (nonatomic, readonly) BOOL didSomethingChange;
