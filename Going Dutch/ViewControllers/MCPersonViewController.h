@@ -70,8 +70,6 @@ typedef enum _emailFieldEditStatus {
 @property (nonatomic, strong) MCSharedBill *writableTonightsBill;
 @property (nonatomic, strong) MCPerson *writableThisPerson;
 
-- (id)initWithPerson:(MCPerson *)person;
-
 - (IBAction)doneButtonPressed:(id)sender;
 - (IBAction)cancelButtonPressed:(id)sender;
 - (IBAction)selectEmailAddressPressed:(id)sender;
