@@ -437,7 +437,7 @@ typedef NS_ENUM(BOOL, MCXRatesMissing) {
         [[returnPaymentCell moneyLabel] setText:[nf stringFromNumber:moneyToConvert]];
         
         NSString *owesString = NSLocalizedString(@"OWES", @"As in Mark owes Arjen, but then just the word owes.");
-        NSString *whoOwesWho = [[NSString alloc] initWithFormat:@"%@ %@ %@:", [[thisCellsReturnPayment payer] getName], owesString, [[thisCellsReturnPayment receiver] getName]];
+        NSString *whoOwesWho = [[NSString alloc] initWithFormat:@"%@ %@ %@:", [[thisCellsReturnPayment payer] getFullName], owesString, [[thisCellsReturnPayment receiver] getName]];
         [[returnPaymentCell whoOwesWhoLabel] setText:whoOwesWho];
         [returnPaymentCell setSelectionStyle:UITableViewCellSelectionStyleNone];
         

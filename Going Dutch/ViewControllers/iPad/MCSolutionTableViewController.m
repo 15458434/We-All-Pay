@@ -176,6 +176,13 @@ typedef NS_ENUM(BOOL, MCXRatesMissing) {
     [self setEmptyMessageNow];
 }
 
+- (void)viewWillAppear:(BOOL)animated
+{
+    [super viewWillAppear:animated];
+    
+    [self setInterstitialPresentationPolicy:ADInterstitialPresentationPolicyAutomatic];    
+}
+
 - (void)viewDidAppear:(BOOL)animated
 {
     [super viewDidAppear:animated];
