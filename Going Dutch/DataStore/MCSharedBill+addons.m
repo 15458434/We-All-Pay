@@ -590,7 +590,7 @@
     }
 }
 
-- (NSArray *)getArrayOfFullNamesOfPeoplePresent
+- (NSArray<MCPerson *> *)getArrayOfPeopleSortedOnFullNames
 {
     NSSortDescriptor *sortDescriptor = [NSSortDescriptor sortDescriptorWithKey:@"getFullName" ascending:YES];
     return [[self peoplePresent] sortedArrayUsingDescriptors:@[sortDescriptor]];

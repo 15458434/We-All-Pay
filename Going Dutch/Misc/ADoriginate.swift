@@ -64,8 +64,6 @@ class ADoriginate : NSObject {
                     self.save()
                 })
             }
-        } else {
-            // Fallback on earlier versions
         }
     }
     

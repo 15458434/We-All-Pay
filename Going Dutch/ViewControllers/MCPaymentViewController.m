@@ -218,7 +218,7 @@ typedef NS_ENUM(BOOL, ChildViewOpened) {
 - (NSString *)pickerView:(UIPickerView *)pickerView titleForRow:(NSInteger)row forComponent:(NSInteger)component
 {
     if (listOfPeople == nil) {
-        listOfPeople = [_tonightsBill getArrayOfFullNamesOfPeoplePresent];
+        listOfPeople = [_tonightsBill getArrayOfPeopleSortedOnFullNames];
     }
     return [listOfPeople[row] getFullName];
 }
@@ -285,7 +285,7 @@ typedef NS_ENUM(BOOL, ChildViewOpened) {
         NSInteger row = 0;
         MCPerson *payingPerson = [_thisPayment payingPerson];
         if (listOfPeople == nil) {
-            listOfPeople = [_tonightsBill getArrayOfFullNamesOfPeoplePresent];
+            listOfPeople = [_tonightsBill getArrayOfPeopleSortedOnFullNames];
         }
         if (payingPerson) {
             row = [listOfPeople indexOfObject:payingPerson];

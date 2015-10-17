@@ -74,25 +74,6 @@ typedef NS_ENUM(BOOL, MCStatus) {
     [[[self navigationController] presentingViewController] dismissViewControllerAnimated:YES completion:nil];
 }
 
-- (void)getSomeone:(id)selector
-{
-    ABPeoplePickerNavigationController *peoplePicker = [[ABPeoplePickerNavigationController alloc] init];
-    if (!personReceiver) {
-        personReceiver = [[MCAddressBookDataReceiver alloc] initWithViewController:self andDelegate:self];
-        [personReceiver setThisPerson:_thisPerson];
-    }
-    [peoplePicker setPeoplePickerDelegate:personReceiver];
-    [peoplePicker setEdgesForExtendedLayout:UIRectEdgeNone];
-    [[peoplePicker viewControllers][0] setEdgesForExtendedLayout:UIRectEdgeNone];
-    [peoplePicker setModalPresentationStyle:UIModalPresentationFormSheet];
-    if ([[UIDevice currentDevice] userInterfaceIdiom] == UIUserInterfaceIdiomPad) {
-        [MCTools setAdBannerIfNotPaid:NO forViewController:[peoplePicker viewControllers][0]];
-    } else {
-        [MCTools setAdBannerIfNotPaid:YES forViewController:[peoplePicker viewControllers][0]];
-    }
-    [[self navigationController] presentViewController:peoplePicker animated:YES completion:nil];
-}
-
 - (void)doneEmailPicker:(id)selector
 {
     MCEmailAddress *newDefaultEmailAddress = [dataController fetchedObjects][[emailSelectionFromAddressBookPickerView selectedRowInComponent:0]];
@@ -112,20 +93,6 @@ typedef NS_ENUM(BOOL, MCStatus) {
 }
 
 #pragma mark - New in this class
-
-- (id)initWithPerson:(MCPerson *)person 
-{
-    self = [super init];
-    
-    if (self) {
-        if (!person) {
-            @throw [NSException exceptionWithName:@"nil" reason:@"person is nil" userInfo:nil];
-        }
-        _thisPerson = person;
-        emailEditFieldStatus = 0;
-    }
-    return self;
-}
 
 - (void)dismissKeyboard
 {

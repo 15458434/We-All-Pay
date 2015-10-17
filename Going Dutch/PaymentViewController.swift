@@ -65,7 +65,9 @@ enum CancelButtonPressed {
         tonightsBill.dateModified = now
         MCWeAllPayStoreController.defaultStore().endUndoGroupAndProcess()
         MCWeAllPayStoreController.defaultStore().saveMainThreadContext()
-        navigationController?.presentingViewController?.dismissViewControllerAnimated(true, completion: nil)
+        navigationController?.presentingViewController?.dismissViewControllerAnimated(true, completion: { () -> Void in
+            MCWhoPayingUserDefaultsStoreInterface.sendToUserDefaultsStoreInterface(self.tonightsBill)
+        })
         dismissMe?()
     }
     

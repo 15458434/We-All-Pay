@@ -39,7 +39,6 @@
 @implementation MCSharedBillTableViewController
 
 @synthesize didSomethingChange;
-@synthesize delegate;
 @synthesize mailDelegate;
 
 #pragma mark - Actions
@@ -92,17 +91,6 @@
 }
 
 #pragma mark - New in this class.
-
-- (void)updateSubLabel
-{
-    NSNumberFormatter *nf = [[NSNumberFormatter alloc] init];
-    [nf setNumberStyle:NSNumberFormatterCurrencyStyle];
-    [[twoLabelTitleView subLabel] setText:[NSString stringWithFormat:@"Total spent: %@", [nf stringFromNumber:[_tonightsBill totalSumOfMoneyOfThisSharedBill]]]];
-    if (SYSTEM_VERSION_LESS_THAN(@"7.0")) {
-        [[twoLabelTitleView mainLabel] setTextColor:[UIColor whiteColor]];
-        [[twoLabelTitleView subLabel] setTextColor:[UIColor whiteColor]];
-    }
-}
 
 - (void)prepareDataControllerAndFetch
 {
@@ -347,7 +335,6 @@
 - (void)controllerDidChangeContent:(NSFetchedResultsController *)controller
 {
     [[self tableView] endUpdates];
-    //[self updateSubLabel];
 }
 
 - (void)controller:(NSFetchedResultsController *)controller didChangeObject:(id)anObject atIndexPath:(NSIndexPath *)indexPath forChangeType:(NSFetchedResultsChangeType)type newIndexPath:(NSIndexPath *)newIndexPath
