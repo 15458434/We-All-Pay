@@ -180,7 +180,11 @@ class InfoScreenTableViewController: UITableViewController, MFMailComposeViewCon
     
     // MARK: UI Table View Delegate
     override func tableView(tableView: UITableView, heightForRowAtIndexPath indexPath: NSIndexPath) -> CGFloat {
-        return UITableViewAutomaticDimension
+        if #available(iOS 8, *) {
+            return UITableViewAutomaticDimension
+        } else {
+            return 44.0
+        }
     }
     
     override func tableView(tableView: UITableView, estimatedHeightForRowAtIndexPath indexPath: NSIndexPath) -> CGFloat {
