@@ -1,8 +1,8 @@
 <?xml version="1.0" encoding="UTF-8" standalone="no"?>
-<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="8191" systemVersion="15A282b" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" initialViewController="2iV-RF-WWF">
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="9059" systemVersion="15B42" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" initialViewController="2iV-RF-WWF">
     <dependencies>
         <deployment identifier="iOS"/>
-        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="8154"/>
+        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="9049"/>
         <capability name="Aspect ratio constraints" minToolsVersion="5.1"/>
         <capability name="Constraints to layout margins" minToolsVersion="6.0"/>
     </dependencies>
@@ -1398,7 +1398,7 @@
                                     </subviews>
                                     <animations/>
                                     <constraints>
-                                        <constraint firstItem="mC4-Ft-sB3" firstAttribute="top" secondItem="J07-8s-iID" secondAttribute="topMargin" constant="-6" id="Etk-xb-b25"/>
+                                        <constraint firstItem="mC4-Ft-sB3" firstAttribute="top" secondItem="J07-8s-iID" secondAttribute="topMargin" priority="750" constant="-6" id="Etk-xb-b25"/>
                                         <constraint firstItem="6Nv-ch-G1Q" firstAttribute="top" secondItem="J07-8s-iID" secondAttribute="topMargin" priority="750" constant="3" id="GF4-II-gW0"/>
                                         <constraint firstAttribute="centerY" secondItem="mC4-Ft-sB3" secondAttribute="centerY" id="Sf2-jK-qGu"/>
                                         <constraint firstAttribute="bottomMargin" secondItem="6Nv-ch-G1Q" secondAttribute="bottom" priority="750" constant="3" id="URN-kP-I5k"/>
@@ -1406,6 +1406,7 @@
                                         <constraint firstItem="mC4-Ft-sB3" firstAttribute="leading" secondItem="J07-8s-iID" secondAttribute="leading" id="Z5P-8S-rkG"/>
                                         <constraint firstItem="6Nv-ch-G1Q" firstAttribute="trailing" secondItem="J07-8s-iID" secondAttribute="trailing" id="ZAA-6l-jiQ"/>
                                         <constraint firstItem="6Nv-ch-G1Q" firstAttribute="leading" secondItem="mC4-Ft-sB3" secondAttribute="trailing" constant="8" id="sjn-44-qKe"/>
+                                        <constraint firstAttribute="bottomMargin" secondItem="mC4-Ft-sB3" secondAttribute="bottom" priority="750" constant="-7" id="yQr-94-cID"/>
                                     </constraints>
                                 </tableViewCellContentView>
                                 <animations/>
