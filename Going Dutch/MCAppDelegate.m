@@ -177,7 +177,7 @@
     dispatch_async(someBackgroundQueue, ^{
         [self checkToSeeIfThisPurchaseOriginatesFromiAd];
     });
-    [UIViewController prepareInterstitialAds];    
+//    [UIViewController prepareInterstitialAds];    
     return YES;
 }
 
