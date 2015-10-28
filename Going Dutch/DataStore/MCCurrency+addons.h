@@ -18,6 +18,6 @@
 
 + (MCCurrency *)currencyFrom:(NSString *)code fromContext:(NSManagedObjectContext *)context;
 
-- (NSNumberFormatter *)numberFormatter;
+- (NSNumberFormatter *)numberFormatter __deprecated;
 
 @end

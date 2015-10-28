@@ -32,10 +32,10 @@
 - (NSNumber *)peoplePresentOnThisPayment;
 - (NSNumber *)averageAmountPeopleShouldHavePaidOnThisPayment;
 - (void)recalculateAveragePeopleOweAndStore;
-- (NSString *)getMoneyValueAsAString;
-- (NSString *)getMoneyValueInCurrencyAsAString;
-- (void)putMoneyValueAsAString:(NSString *)moneyString;
-- (void)putMoneyValueInCurrencyAsAString:(NSString *)moneyString;
+- (NSString *)getMoneyValueAsAString __deprecated;
+- (NSString *)getMoneyValueInCurrencyAsAString __deprecated;
+- (void)putMoneyValueAsAString:(NSString *)moneyString __deprecated;
+- (void)putMoneyValueInCurrencyAsAString:(NSString *)moneyString __deprecated;
 - (NSNumber *)moneyInMainCurrency;
 - (MCExchangeRate *)addExchangeRate;
 - (void)setNewCurrencyAndAutomaticallyUpdateExchangeRate:(MCCurrency *)newCurrency withCompletionHandler:(void (^)(NSError *error))completionHandler;
