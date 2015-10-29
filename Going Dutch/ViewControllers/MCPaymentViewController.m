@@ -174,25 +174,6 @@ typedef NS_ENUM(BOOL, ChildViewOpened) {
 
 #pragma mark - new in this class
 
-- (id)initWithExistingPayment:(MCPayment *)thePayment fromBill:(MCSharedBill *)bill
-{
-    self = [super init];
-    
-    if (self) {
-        _tonightsBill = bill;
-//        didSomethingChange = NO;
-        if (thePayment) {
-            _thisPayment = thePayment;
-            _isNew = NO;
-        } else {
-            _thisPayment = [MCPayment addPayment];
-            [_thisPayment setOnWhichBill:bill];
-            _isNew = YES;
-        }
-    }
-    return self;
-}
-
 - (UIStatusBarStyle)preferredStatusBarStyle
 {
     return UIStatusBarStyleLightContent;

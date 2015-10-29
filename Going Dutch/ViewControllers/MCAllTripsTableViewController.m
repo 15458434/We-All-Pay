@@ -358,22 +358,9 @@ typedef NS_ENUM(BOOL, MCTonightsBillStatus) {
 
 #pragma mark - Table view delegate
 
-
-
 - (CGFloat)tableView:(UITableView *)tableView heightForRowAtIndexPath:(NSIndexPath *)indexPath
 {
     return 64;
-}
-
-- (void)tableView:(UITableView *)tableView accessoryButtonTappedForRowWithIndexPath:(NSIndexPath *)indexPath
-{
-    MCSharedBill *thisBill = [_dataController objectAtIndexPath:indexPath];
-    MCPaymentViewController *pvc = [[MCPaymentViewController alloc] initWithExistingPayment:nil fromBill:thisBill];
-    UINavigationController *navController = [[UINavigationController alloc] initWithRootViewController:pvc];
-    if ([[UIDevice currentDevice] userInterfaceIdiom] == UIUserInterfaceIdiomPad) {
-        [navController setModalPresentationStyle:UIModalPresentationFormSheet];
-    }
-    [self presentViewController:navController animated:YES completion:nil];
 }
 
 #pragma mark - UIStoryboard
