@@ -339,14 +339,10 @@ typedef NS_ENUM(BOOL, ChildViewOpened) {
 
 #pragma mark - Inherited from super
 
-- (id)initWithStyle:(UITableViewStyle)style
-{
-    self = [super initWithStyle:style];
-    if (self) {
-        // Custom initialization
-        _selectCurrencyTableViewController = isNotOpened;
-    }
-    return self;
+- (void)awakeFromNib {
+    [super awakeFromNib];
+    
+    _selectCurrencyTableViewController = isNotOpened;
 }
 
 - (void)viewDidLoad
@@ -415,8 +411,6 @@ typedef NS_ENUM(BOOL, ChildViewOpened) {
 {
     [super viewWillAppear:animated];
     
-    [MCTools setAdBannerIfNotPaid:NO forViewController:self];
-    
     [self setNeedsStatusBarAppearanceUpdate];
     
     // Navigationbar stuff
@@ -467,43 +461,6 @@ typedef NS_ENUM(BOOL, ChildViewOpened) {
         CurrencyFormatter *cf = [[CurrencyFormatter alloc] initWithCurrencyCode:_thisPayment.currency.code];
         paidView.text = [cf stringForObjectValue:_thisPayment.money];
     }
-    
-    
-}
-
-- (void)viewDidAppear:(BOOL)animated
-{
-#if DEBUG
-    NSLog(@"%@ viewDidAppear", self);
-#endif
-    [super viewDidAppear:animated];
-
-//    id<GAITracker> tracker = [[GAI sharedInstance] defaultTracker];
-//    if (isNew) {
-//        [tracker set:kGAIScreenName value:@"MCPaymentNewView_iPhone"];
-//    } else {
-//        [tracker set:kGAIScreenName value:@"MCPaymentDetailsView_iPhone"];
-//    }
-//    [tracker send:[[GAIDictionaryBuilder createAppView] build]];
-}
-
-- (void)viewWillDisappear:(BOOL)animated
-{
-#if DEBUG
-    NSLog(@"%@, viewWillDisappear", self);
-#endif
-    [super viewWillDisappear:animated];
-}
-
-- (void)viewDidDisappear:(BOOL)animated
-{
-#if DEBUG
-    NSLog(@"%@, viewDidDisappear", self);
-#endif
-    [super viewDidDisappear:animated];
-    
-    [MCTools setAdBannerIfNotPaid:NO forViewController:self];
-    
 }
 
 - (BOOL)disablesAutomaticKeyboardDismissal
@@ -515,16 +472,6 @@ typedef NS_ENUM(BOOL, ChildViewOpened) {
 {
     [super didReceiveMemoryWarning];
     // Dispose of any resources that can be recreated.
-}
-
-- (void)encodeRestorableStateWithCoder:(NSCoder *)coder
-{
-    [super encodeRestorableStateWithCoder:coder];
-}
-
-- (void)decodeRestorableStateWithCoder:(NSCoder *)coder
-{
-    [super decodeRestorableStateWithCoder:coder];
 }
 
 #pragma mark - NSFetchedResultsControllerDelegate
