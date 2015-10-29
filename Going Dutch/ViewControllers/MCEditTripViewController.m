@@ -499,8 +499,8 @@
         [thisCell.fetchingExchangeRateIndicator stopAnimating];
         [[thisCell totalSpent] setHidden:NO];
         
-        NSNumberFormatter *nf = [[_tonightsBill mainCurrency] numberFormatter];
-        [[thisCell totalSpent] setText:[nf stringFromNumber:thisCellsPerson.totalSumPaid]];
+        CurrencyFormatter *cf = [[CurrencyFormatter alloc] initWithCurrencyCode:_tonightsBill.mainCurrency.code];
+        thisCell.totalSpent.text = [cf stringForObjectValue:thisCellsPerson.totalSumPaid];
     } else {
         [thisCell.fetchingExchangeRateIndicator startAnimating];
         [[thisCell totalSpent] setHidden:YES];

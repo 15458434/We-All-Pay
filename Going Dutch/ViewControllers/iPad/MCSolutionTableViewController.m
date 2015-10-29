@@ -289,10 +289,8 @@ typedef NS_ENUM(BOOL, MCXRatesMissing) {
         // Configure the cell...
         MCReturnPayment *thisCellContents = [_solution objectAtIndex:[indexPath row]];
         
-        NSNumberFormatter *nf = [[_tonightsBill mainCurrency] numberFormatter];
-        [nf setNumberStyle:NSNumberFormatterCurrencyStyle];
-        NSNumber *moneyToConvert = [thisCellContents money];
-        [[cell moneyLabel] setText:[nf stringFromNumber:moneyToConvert]];
+        CurrencyFormatter *cf = [[CurrencyFormatter alloc] initWithCurrencyCode:_tonightsBill.mainCurrency.code];
+        cell.moneyLabel.text = [cf stringForObjectValue:thisCellContents.money];
         
         NSString *owesString = NSLocalizedString(@"OWES", @"As in Mark owes Arjen, but then just the word owes.");
         NSString *whoOwesWho = [[NSString alloc] initWithFormat:@"%@ %@ %@:", [[thisCellContents payer] getFullName], owesString, [[thisCellContents receiver] getFullName]];
@@ -309,10 +307,9 @@ typedef NS_ENUM(BOOL, MCXRatesMissing) {
         [[cell firstLabel] setText:thisPersonPaidString];
         MCPerson *thisPerson = [_peoplePresent objectAtIndex:[indexPath row]];
         NSNumber *sumSpentByPerson = @(-[[_tonightsBill amountShouldHavePaidBy:thisPerson] doubleValue]);
-        NSNumberFormatter *nf = [[_tonightsBill mainCurrency] numberFormatter];
-        [nf setNumberStyle:NSNumberFormatterCurrencyStyle];
-        [nf setFormatterBehavior:NSNumberFormatterBehaviorDefault];
-        [[cell lastLabel] setText:[nf stringFromNumber:sumSpentByPerson]];
+
+        CurrencyFormatter *cf = [[CurrencyFormatter alloc] initWithCurrencyCode:_tonightsBill.mainCurrency.code];
+        cell.lastLabel.text = [cf stringForObjectValue:sumSpentByPerson];
 
         [cell setSelectionStyle:UITableViewCellSelectionStyleNone];
         return cell;
@@ -327,14 +324,16 @@ typedef NS_ENUM(BOOL, MCXRatesMissing) {
             [[cell firstLabel] setText:thisPersonPaidString];
             MCPerson *thisPerson = [_peoplePresent objectAtIndex:[indexPath row]];
             NSNumber *sumSpentByPerson = thisPerson.totalSumPaid;
-            NSNumberFormatter *nf = [[_tonightsBill mainCurrency] numberFormatter];
-            [nf setNumberStyle:NSNumberFormatterCurrencyStyle];
-            [nf setFormatterBehavior:NSNumberFormatterBehaviorDefault];
-            [[cell lastLabel] setText:[nf stringFromNumber:sumSpentByPerson]];
+            
+            CurrencyFormatter *cf = [[CurrencyFormatter alloc] initWithCurrencyCode:_tonightsBill.mainCurrency.code];
+            cell.lastLabel.text = [cf stringForObjectValue:sumSpentByPerson];
+            
         } else {
             NSString *totalSpentString = NSLocalizedString(@"TOTAL_SPENT", @"Total spent:");
             [[cell firstLabel] setText:totalSpentString];
-            [[cell lastLabel] setText:[_tonightsBill totalSumOfMoneyOfThisSharedBillAsCurrencyString]];
+            
+            CurrencyFormatter *cf = [[CurrencyFormatter alloc] initWithCurrencyCode:_tonightsBill.mainCurrency.code];
+            cell.lastLabel.text = [cf stringForObjectValue:_tonightsBill.totalSumOfMoneyOfThisSharedBill];
         }
 
         return cell;

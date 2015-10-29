@@ -292,10 +292,9 @@
     if ([thisTrip areAllExchangeRatesValid]) {
         [[allTripsTableViewCell activityIndicator] stopAnimating];
         [[allTripsTableViewCell totalCostLabel] setHidden:NO];
-        NSNumberFormatter *nf = [[thisTrip mainCurrency] numberFormatter];
-        [nf setNumberStyle:NSNumberFormatterCurrencyStyle];
-        NSString *moneyString = [nf stringFromNumber:[thisTrip totalSumOfMoneyOfThisSharedBill]];
-        [[allTripsTableViewCell totalCostLabel] setText:moneyString];
+        
+        CurrencyFormatter *cf = [[CurrencyFormatter alloc] initWithCurrencyCode:thisTrip.mainCurrency.code];
+        allTripsTableViewCell.totalCostLabel.text = [cf stringForObjectValue:thisTrip.totalSumOfMoneyOfThisSharedBill];
     } else {
         [[allTripsTableViewCell activityIndicator] startAnimating];
         [[allTripsTableViewCell totalCostLabel] setHidden:YES];
