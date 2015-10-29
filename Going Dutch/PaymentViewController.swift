@@ -148,7 +148,8 @@ enum CancelButtonPressed {
         } else {
             itemField.text = thisPayment.descriptionOfPayment
             if thisPayment.money != nil {
-                paidField.text = thisPayment.getMoneyValueInCurrencyAsAString()
+                let cf = CurrencyFormatter(currencyCode: thisPayment.currency.code)
+                paidField.text = cf.stringForObjectValue(thisPayment.money)
             }
             reloadPayerView()
             setTextPayerButton()
@@ -182,10 +183,11 @@ enum CancelButtonPressed {
     // MARK: UITextFieldDelegate 
     func textFieldShouldBeginEditing(textField: UITextField) -> Bool {
         if textField == paidField {
-            if thisPayment.money?.doubleValue >= 0.005 {
+            if thisPayment.money?.doubleValue <= 0.005 {
                 paidField.text = ""
             } else {
-                paidField.text = thisPayment.getMoneyValueAsAString()
+                let cf = CurrencyFormatter(currencyCode: thisPayment.currency.code)
+                paidField.text = cf.editingStringForObjectValue(thisPayment.money ?? NSNumber(double: 0)) ?? nil
             }
         }
         return true
@@ -205,8 +207,16 @@ enum CancelButtonPressed {
                 thisPayment.descriptionOfPayment = itemField.text
             }
             if textField == paidField {
-                thisPayment.putMoneyValueAsAString(paidField.text)
-                paidField.text = thisPayment.getMoneyValueInCurrencyAsAString()
+                let cf = CurrencyFormatter(currencyCode: thisPayment.currency.code)
+                MCWeAllPayStoreController.defaultStore().beginUndoGroupWithoutRegistration()
+                if paidField.text == nil {
+                    thisPayment.money = nil
+                } else {
+                    thisPayment.money = cf.doubleFromString(paidField.text!)
+                }
+                thisPayment.recalculateAveragePeopleOweAndStore()
+                MCWeAllPayStoreController.defaultStore().endUndoGroupAndProcessWithoutRegistration()
+                paidField.text = cf.stringForObjectValue(thisPayment.money ?? NSNumber(double: 0))
             }
         }
     }
@@ -269,8 +279,10 @@ enum CancelButtonPressed {
         cell.nameLabel.text = paymentPresenceForThisCell.person.getFullName()
         cell.personView.image = paymentPresenceForThisCell.person.thumbnail
         cell.theSwitch.setOn(paymentPresenceForThisCell.isPersonPresent.boolValue, animated: false)
-        // TODO: Add translation stuff.
-        cell.owesMoneyLabel.text = "owes \(paymentPresenceForThisCell.getCurrencyStringOfAverageOwe())"
+
+        let cf = CurrencyFormatter(currencyCode: paymentPresenceForThisCell.payment.currency.code)
+        let averageOweFromPayment = NSNumber(double: -paymentPresenceForThisCell.averageOweFromPayment.doubleValue)
+        cell.owesMoneyLabel.text = cf.stringForObjectValue(averageOweFromPayment)
         cell.thisCellsPaymentPresence = paymentPresenceForThisCell
         cell.keyboardDismissDelegate = self
         

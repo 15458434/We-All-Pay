@@ -100,15 +100,6 @@ typedef NS_ENUM(BOOL, MCTonightsBillStatus) {
 
 #pragma mark - Inherited from super
 
-- (id)initWithStyle:(UITableViewStyle)style
-{
-    self = [super initWithStyle:style];
-    if (self) {
-        // Custom initialization
-    }
-    return self;
-}
-
 - (void)awakeFromNib
 {
     [super awakeFromNib];
@@ -180,16 +171,6 @@ typedef NS_ENUM(BOOL, MCTonightsBillStatus) {
     [self stopRespondingToStorechangeNotifications];
 }
 
-- (void)encodeRestorableStateWithCoder:(NSCoder *)coder
-{
-    [super encodeRestorableStateWithCoder:coder];
-}
-
-- (void)decodeRestorableStateWithCoder:(NSCoder *)coder
-{
-    [super decodeRestorableStateWithCoder:coder];
-}
-
 #pragma mark - UIViewController+WeAllPayStore notifications
 
 - (void)storeWillBeSwapped:(NSNotification *)notification
@@ -225,7 +206,6 @@ typedef NS_ENUM(BOOL, MCTonightsBillStatus) {
     if (self.isViewLoaded && self.view.window && _isATonightsBillOpened == isClosed) {
         [[self tableView] beginUpdates];
     }
-
 }
 
 - (void)controllerDidChangeContent:(NSFetchedResultsController *)controller
@@ -244,14 +224,12 @@ typedef NS_ENUM(BOOL, MCTonightsBillStatus) {
         switch(type) {
                 
             case NSFetchedResultsChangeInsert:
-                [[self tableView] insertRowsAtIndexPaths:@[newIndexPath]
-                                        withRowAnimation:UITableViewRowAnimationFade];
+                [[self tableView] insertRowsAtIndexPaths:@[newIndexPath] withRowAnimation:UITableViewRowAnimationFade];
                 [self setEmptyMessage];
                 break;
                 
             case NSFetchedResultsChangeDelete:
-                [[self tableView] deleteRowsAtIndexPaths:@[indexPath]
-                                        withRowAnimation:UITableViewRowAnimationFade];
+                [[self tableView] deleteRowsAtIndexPaths:@[indexPath] withRowAnimation:UITableViewRowAnimationFade];
                 [self setEmptyMessage];
                 break;
                 
@@ -260,10 +238,8 @@ typedef NS_ENUM(BOOL, MCTonightsBillStatus) {
                 break;
                 
             case NSFetchedResultsChangeMove:
-                [[self tableView] deleteRowsAtIndexPaths:@[indexPath]
-                                        withRowAnimation:UITableViewRowAnimationFade];
-                [[self tableView] insertRowsAtIndexPaths:@[newIndexPath]
-                                        withRowAnimation:UITableViewRowAnimationFade];
+                [[self tableView] deleteRowsAtIndexPaths:@[indexPath] withRowAnimation:UITableViewRowAnimationFade];
+                [[self tableView] insertRowsAtIndexPaths:@[newIndexPath] withRowAnimation:UITableViewRowAnimationFade];
                 break;
         }
     }
@@ -294,15 +270,14 @@ typedef NS_ENUM(BOOL, MCTonightsBillStatus) {
     [[allTripsTableViewCell peoplePresentLabel] setText:[thisTrip stringOfApproxPeoplePresent]];
 
     if ([thisTrip areAllExchangeRatesValid]) {
-        
-        NSNumberFormatter *nf = [[thisTrip mainCurrency] numberFormatter];
-        NSString *moneyString = [nf stringFromNumber:[thisTrip totalSumOfMoneyOfThisSharedBill]];
+        CurrencyFormatter *cf = [[CurrencyFormatter alloc] initWithCurrencyCode:thisTrip.mainCurrency.code];
+        NSString *moneyString = [cf stringForObjectValue:[thisTrip totalSumOfMoneyOfThisSharedBill]];
         [[allTripsTableViewCell totalCostLabel] setHidden:NO];
         [[allTripsTableViewCell waitingForXRatesIndicator] stopAnimating];
         [[allTripsTableViewCell totalCostLabel] setText:moneyString];
     } else {
-        NSNumberFormatter *nf = [[thisTrip mainCurrency] numberFormatter];
-        NSString *moneyString = [nf stringFromNumber:[thisTrip totalSumOfMoneyOfThisSharedBill]];
+        CurrencyFormatter *cf = [[CurrencyFormatter alloc] initWithCurrencyCode:thisTrip.mainCurrency.code];
+        NSString *moneyString = [cf stringForObjectValue:[thisTrip totalSumOfMoneyOfThisSharedBill]];
         [[allTripsTableViewCell totalCostLabel] setText:moneyString];
         [[allTripsTableViewCell totalCostLabel] setHidden:YES];
         [[allTripsTableViewCell waitingForXRatesIndicator] startAnimating];
@@ -359,22 +334,9 @@ typedef NS_ENUM(BOOL, MCTonightsBillStatus) {
 
 #pragma mark - Table view delegate
 
-
-
 - (CGFloat)tableView:(UITableView *)tableView heightForRowAtIndexPath:(NSIndexPath *)indexPath
 {
     return 64;
-}
-
-- (void)tableView:(UITableView *)tableView accessoryButtonTappedForRowWithIndexPath:(NSIndexPath *)indexPath
-{
-    MCSharedBill *thisBill = [_dataController objectAtIndexPath:indexPath];
-    MCPaymentViewController *pvc = [[MCPaymentViewController alloc] initWithExistingPayment:nil fromBill:thisBill];
-    UINavigationController *navController = [[UINavigationController alloc] initWithRootViewController:pvc];
-    if ([[UIDevice currentDevice] userInterfaceIdiom] == UIUserInterfaceIdiomPad) {
-        [navController setModalPresentationStyle:UIModalPresentationFormSheet];
-    }
-    [self presentViewController:navController animated:YES completion:nil];
 }
 
 #pragma mark - UIStoryboard

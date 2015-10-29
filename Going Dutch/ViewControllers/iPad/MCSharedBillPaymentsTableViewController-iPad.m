@@ -91,15 +91,6 @@
 
 #pragma mark - Inherited from super
 
-- (id)initWithStyle:(UITableViewStyle)style
-{
-    self = [super initWithStyle:style];
-    if (self) {
-        // Custom initialization
-    }
-    return self;
-}
-
 - (void)viewDidLoad
 {
     [super viewDidLoad];
@@ -270,7 +261,9 @@
         thisCellsDescriptionOfPayment = NSLocalizedString(@"THISPAYMENTCELL_NOOBJECT", @"Something");
     }
     [[paymentCell whatPaidLabel] setText:[NSString stringWithFormat:@"%@%@", NSLocalizedString(@"PAYMENT_CELL_PAIDFOR_EXTRA", @"for ") , thisCellsDescriptionOfPayment]];
-    paymentCell.moneyPaidLabel.text = [thisCellsPayment getMoneyValueInCurrencyAsAString];
+    
+    CurrencyFormatter *cf = [[CurrencyFormatter alloc] initWithCurrencyCode:thisCellsPayment.currency.code];
+    paymentCell.moneyPaidLabel.text = [cf stringForObjectValue:thisCellsPayment.money];
     
     return paymentCell;
 }

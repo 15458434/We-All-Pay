@@ -31,20 +31,6 @@
 
 #pragma mark - New in this class
 
-- (void)performFetchAndReloadTableView:(NSNotification *)notification
-{
-#if DEBUG
-    NSLog(@"This should not be executed.");
-#endif
-    UIManagedDocument *weAllPayDocument = [[MCWeAllPayStoreController defaultStore] weAllPayStoreDocument];
-    if ([weAllPayDocument documentState] == UIDocumentStateNormal) {
-        [self performFetch];
-        [[self tableView] reloadData];
-        [[NSNotificationCenter defaultCenter] removeObserver:self];
-        [self setEmptyMessageNow];
-    }
-}
-
 - (void)performFetch
 {
     NSError *error;
@@ -90,15 +76,6 @@
 
 #pragma mark - Inherited from super
 
-- (id)initWithStyle:(UITableViewStyle)style
-{
-    self = [super initWithStyle:style];
-    if (self) {
-        // Custom initialization
-    }
-    return self;
-}
-
 - (void)awakeFromNib
 {
     [super awakeFromNib];
@@ -139,14 +116,6 @@
             [self setEmptyMessage];
         }
     }
-//    UIManagedDocument *weAllPayDocument = [[MCWeAllPayStoreController defaultStore] weAllPayStoreDocument];
-//    if (![[MCWeAllPayStoreController defaultStore] isDocumentStateNormal]) {
-//        [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(performFetchAndReloadTableView:) name:UIDocumentStateChangedNotification object:weAllPayDocument];
-//    } else {
-//        [self performFetch];
-//        [[self tableView] reloadData];
-//        [self setEmptyMessageNow];
-//    }
 }
 
 - (void)viewDidAppear:(BOOL)animated
@@ -224,14 +193,12 @@
     switch(type) {
             
         case NSFetchedResultsChangeInsert:
-            [[self tableView] insertRowsAtIndexPaths:@[newIndexPath]
-                                    withRowAnimation:UITableViewRowAnimationFade];
+            [[self tableView] insertRowsAtIndexPaths:@[newIndexPath] withRowAnimation:UITableViewRowAnimationFade];
             [self setEmptyMessage];
             break;
             
         case NSFetchedResultsChangeDelete:
-            [[self tableView] deleteRowsAtIndexPaths:@[indexPath]
-                                    withRowAnimation:UITableViewRowAnimationFade];
+            [[self tableView] deleteRowsAtIndexPaths:@[indexPath] withRowAnimation:UITableViewRowAnimationFade];
             [self setEmptyMessage];
             break;
             
@@ -240,10 +207,8 @@
             break;
             
         case NSFetchedResultsChangeMove:
-            [[self tableView] deleteRowsAtIndexPaths:@[indexPath]
-                                    withRowAnimation:UITableViewRowAnimationFade];
-            [[self tableView] insertRowsAtIndexPaths:@[newIndexPath]
-                                    withRowAnimation:UITableViewRowAnimationFade];
+            [[self tableView] deleteRowsAtIndexPaths:@[indexPath] withRowAnimation:UITableViewRowAnimationFade];
+            [[self tableView] insertRowsAtIndexPaths:@[newIndexPath] withRowAnimation:UITableViewRowAnimationFade];
             break;
     }
 }
@@ -292,10 +257,9 @@
     if ([thisTrip areAllExchangeRatesValid]) {
         [[allTripsTableViewCell activityIndicator] stopAnimating];
         [[allTripsTableViewCell totalCostLabel] setHidden:NO];
-        NSNumberFormatter *nf = [[thisTrip mainCurrency] numberFormatter];
-        [nf setNumberStyle:NSNumberFormatterCurrencyStyle];
-        NSString *moneyString = [nf stringFromNumber:[thisTrip totalSumOfMoneyOfThisSharedBill]];
-        [[allTripsTableViewCell totalCostLabel] setText:moneyString];
+        
+        CurrencyFormatter *cf = [[CurrencyFormatter alloc] initWithCurrencyCode:thisTrip.mainCurrency.code];
+        allTripsTableViewCell.totalCostLabel.text = [cf stringForObjectValue:thisTrip.totalSumOfMoneyOfThisSharedBill];
     } else {
         [[allTripsTableViewCell activityIndicator] startAnimating];
         [[allTripsTableViewCell totalCostLabel] setHidden:YES];

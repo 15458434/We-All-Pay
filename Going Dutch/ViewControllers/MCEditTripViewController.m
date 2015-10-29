@@ -213,15 +213,6 @@
 
 #pragma mark - inherited from super
 
-- (id)initWithStyle:(UITableViewStyle)style
-{
-    self = [super initWithStyle:style];
-    if (self) {
-        // Custom initialization
-    }
-    return self;
-}
-
 - (void)viewDidLoad
 {
     [super viewDidLoad];
@@ -284,11 +275,6 @@
     }
 }
 
-- (void)viewWillDisappear:(BOOL)animated
-{
-    [super viewWillDisappear:animated];
-}
-
 - (void)viewDidDisappear:(BOOL)animated
 {
     [super viewDidDisappear:animated];
@@ -300,16 +286,6 @@
 {
     [super didReceiveMemoryWarning];
     // Dispose of any resources that can be recreated.
-}
-
-- (void)encodeRestorableStateWithCoder:(NSCoder *)coder
-{
-    [super encodeRestorableStateWithCoder:coder];
-}
-
-- (void)decodeRestorableStateWithCoder:(NSCoder *)coder
-{
-    [super decodeRestorableStateWithCoder:coder];
 }
 
 -(void)dealloc
@@ -449,14 +425,12 @@
     switch(type) {
             
         case NSFetchedResultsChangeInsert:
-            [[self tableView] insertRowsAtIndexPaths:@[newIndexPath]
-                                    withRowAnimation:UITableViewRowAnimationFade];
+            [[self tableView] insertRowsAtIndexPaths:@[newIndexPath] withRowAnimation:UITableViewRowAnimationFade];
             [self setEmptyMessage];
             break;
             
         case NSFetchedResultsChangeDelete:
-            [[self tableView] deleteRowsAtIndexPaths:@[indexPath]
-                                    withRowAnimation:UITableViewRowAnimationFade];
+            [[self tableView] deleteRowsAtIndexPaths:@[indexPath] withRowAnimation:UITableViewRowAnimationFade];
             [self setEmptyMessage];
             break;
             
@@ -466,10 +440,8 @@
             break;
             
         case NSFetchedResultsChangeMove:
-            [[self tableView] deleteRowsAtIndexPaths:@[indexPath]
-                                    withRowAnimation:UITableViewRowAnimationFade];
-            [[self tableView] insertRowsAtIndexPaths:@[newIndexPath]
-                                    withRowAnimation:UITableViewRowAnimationFade];
+            [[self tableView] deleteRowsAtIndexPaths:@[indexPath] withRowAnimation:UITableViewRowAnimationFade];
+            [[self tableView] insertRowsAtIndexPaths:@[newIndexPath] withRowAnimation:UITableViewRowAnimationFade];
             break;
     }
 }
@@ -499,8 +471,8 @@
         [thisCell.fetchingExchangeRateIndicator stopAnimating];
         [[thisCell totalSpent] setHidden:NO];
         
-        NSNumberFormatter *nf = [[_tonightsBill mainCurrency] numberFormatter];
-        [[thisCell totalSpent] setText:[nf stringFromNumber:thisCellsPerson.totalSumPaid]];
+        CurrencyFormatter *cf = [[CurrencyFormatter alloc] initWithCurrencyCode:_tonightsBill.mainCurrency.code];
+        thisCell.totalSpent.text = [cf stringForObjectValue:thisCellsPerson.totalSumPaid];
     } else {
         [thisCell.fetchingExchangeRateIndicator startAnimating];
         [[thisCell totalSpent] setHidden:YES];

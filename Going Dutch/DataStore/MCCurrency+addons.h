@@ -18,6 +18,4 @@
 
 + (MCCurrency *)currencyFrom:(NSString *)code fromContext:(NSManagedObjectContext *)context;
 
-- (NSNumberFormatter *)numberFormatter;
-
 @end

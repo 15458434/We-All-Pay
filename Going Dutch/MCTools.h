@@ -19,7 +19,6 @@
 @interface MCTools : NSObject
 
 + (void)setAdBannerIfNotPaid:(BOOL)show forViewController:(UIViewController *)viewController;
-+ (UIImage *)cutCircularImageFrom:(UIImage *)sourceImage toDestinationRect:(CGRect)newPictureRect;
 + (BOOL)isStringAnEmailAddress:(NSString *)stringThatIsSupposedToBeEmailAddress;
 
 @end

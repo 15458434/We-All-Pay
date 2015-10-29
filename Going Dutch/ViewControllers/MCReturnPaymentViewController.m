@@ -215,15 +215,6 @@ typedef NS_ENUM(BOOL, MCXRatesMissing) {
 
 #pragma mark - Inherited from super.
 
-- (id)initWithStyle:(UITableViewStyle)style
-{
-    self = [super initWithStyle:style];
-    if (self) {
-        // Custom initialization
-    }
-    return self;
-}
-
 - (void)viewDidLoad
 {
     [super viewDidLoad];
@@ -283,16 +274,6 @@ typedef NS_ENUM(BOOL, MCXRatesMissing) {
 - (BOOL)shouldPresentInterstitialAd
 {
     return YES;
-}
-
-- (void)encodeRestorableStateWithCoder:(NSCoder *)coder
-{
-    [super encodeRestorableStateWithCoder:coder];
-}
-
-- (void)decodeRestorableStateWithCoder:(NSCoder *)coder
-{
-    [super decodeRestorableStateWithCoder:coder];
 }
 
 #pragma mark - UIAlertViewDelegate
@@ -431,13 +412,11 @@ typedef NS_ENUM(BOOL, MCXRatesMissing) {
     if ([indexPath section] == 0) {
         MCReturnPayment *thisCellsReturnPayment = _paymentsAfterwards[[indexPath row]];
         MCWhoOwesWhoTableViewCell_iPhone *returnPaymentCell = [tableView dequeueReusableCellWithIdentifier:@"MCWhoOwesWhoTableViewCell_iPhone"];
-        NSNumberFormatter *nf = [[_tonightsBill mainCurrency] numberFormatter];
-        [nf setNumberStyle:NSNumberFormatterCurrencyStyle];
-        NSNumber *moneyToConvert = [thisCellsReturnPayment money];
-        [[returnPaymentCell moneyLabel] setText:[nf stringFromNumber:moneyToConvert]];
+        CurrencyFormatter *cf = [[CurrencyFormatter alloc] initWithCurrencyCode:_tonightsBill.mainCurrency.code];
+        returnPaymentCell.moneyLabel.text = [cf stringForObjectValue:thisCellsReturnPayment.money];
         
         NSString *owesString = NSLocalizedString(@"OWES", @"As in Mark owes Arjen, but then just the word owes.");
-        NSString *whoOwesWho = [[NSString alloc] initWithFormat:@"%@ %@ %@:", [[thisCellsReturnPayment payer] getFullName], owesString, [[thisCellsReturnPayment receiver] getName]];
+        NSString *whoOwesWho = [[NSString alloc] initWithFormat:@"%@ %@ %@:", [[thisCellsReturnPayment payer] getName], owesString, [[thisCellsReturnPayment receiver] getName]];
         [[returnPaymentCell whoOwesWhoLabel] setText:whoOwesWho];
         [returnPaymentCell setSelectionStyle:UITableViewCellSelectionStyleNone];
         
@@ -450,10 +429,8 @@ typedef NS_ENUM(BOOL, MCXRatesMissing) {
         MCPerson *person = [_peoplePresent objectAtIndex:[indexPath row]];
         [[cell whoPaidHowMuchLabel] setText:[person getFullName]];
         NSNumber *sumSpentByPerson = @(-[[_tonightsBill amountShouldHavePaidBy:person] doubleValue]);
-        NSNumberFormatter *nf = [[_tonightsBill mainCurrency] numberFormatter];
-        [nf setNumberStyle:NSNumberFormatterCurrencyStyle];
-        [nf setFormatterBehavior:NSNumberFormatterBehaviorDefault];
-        [[cell moneyLabel] setText:[nf stringFromNumber:sumSpentByPerson]];
+        CurrencyFormatter *cf = [[CurrencyFormatter alloc] initWithCurrencyCode:_tonightsBill.mainCurrency.code];
+        cell.moneyLabel.text = [cf stringForObjectValue:sumSpentByPerson];
         return cell;
     }
     
@@ -463,17 +440,17 @@ typedef NS_ENUM(BOOL, MCXRatesMissing) {
             
             MCPerson *person = [_peoplePresent objectAtIndex:[indexPath row]];
             [[cell whoPaidHowMuchLabel] setText:[person getFullName]];
-            NSNumber *sumSpentByPerson = person.totalSumPaid;
-            NSNumberFormatter *nf = [[_tonightsBill mainCurrency] numberFormatter];
-            [nf setNumberStyle:NSNumberFormatterCurrencyStyle];
-            [nf setFormatterBehavior:NSNumberFormatterBehaviorDefault];
-            [[cell moneyLabel] setText:[nf stringFromNumber:sumSpentByPerson]];
+            
+            CurrencyFormatter *cf = [[CurrencyFormatter alloc] initWithCurrencyCode:_tonightsBill.mainCurrency.code];
+            cell.moneyLabel.text = [cf stringForObjectValue:person.totalSumPaid];
             return cell;
         } else {
             MCSolutionOverViewTableViewCell_iPhone *cell = [tableView dequeueReusableCellWithIdentifier:@"MCSolutionOverViewTableViewCell_iPhone"];
             NSString *totalSpentString = NSLocalizedString(@"TOTAL_SPENT", @"Total spent:");
             [[cell totalLabel] setText:totalSpentString];
-            [[cell moneyLabel] setText:[_tonightsBill totalSumOfMoneyOfThisSharedBillAsCurrencyString]];
+            
+            CurrencyFormatter *cf = [[CurrencyFormatter alloc] initWithCurrencyCode:_tonightsBill.mainCurrency.code];
+            cell.moneyLabel.text = [cf stringForObjectValue:_tonightsBill.totalSumOfMoneyOfThisSharedBill];
             return cell;
         }
     }

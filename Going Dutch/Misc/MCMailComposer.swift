@@ -39,6 +39,10 @@ class MCMailComposer: NSObject {
     }
     
     func getMailBody() -> String! {
+        let mainCurrencyFormatter = CurrencyFormatter()
+        let localCurrencyFormatter = CurrencyFormatter()
+        mainCurrencyFormatter.currencyCode = tonightsBill.mainCurrency.code
+        
         let solution = tonightsBill.solveWhoHasToPayWhoFromThisBill() as! [MCReturnPayment]
 //        let sortDescriptorOnDateCreated = NSSortDescriptor(key: "dateCreated", ascending: true)
         let allPayments = Array(tonightsBill.payments) as! [MCPayment]
@@ -51,9 +55,9 @@ class MCMailComposer: NSObject {
         mailBody += "\n\n"
         
         if let tripName = self.tonightsBill.tripName {
-            mailBody += String.localizedStringWithFormat(NSLocalizedString("EMAIL_INTRO_WITH_TRIPNAME", comment: "Here you go. The full overview of the %1$@ which we spend on our last event %2$@. We spent an average of %3$@ a person. You can find more of the details below."), self.tonightsBill.totalSumOfMoneyOfThisSharedBillAsCurrencyString(), tripName, self.tonightsBill.amountPeopleShouldHavePaidAsCurrencyString())
+            mailBody += String.localizedStringWithFormat(NSLocalizedString("EMAIL_INTRO_WITH_TRIPNAME", comment: "Here you go. The full overview of the %1$@ which we spend on our last event %2$@. We spent an average of %3$@ a person. You can find more of the details below."), mainCurrencyFormatter.stringForObjectValue(tonightsBill.totalSumOfMoneyOfThisSharedBill())!, tripName, mainCurrencyFormatter.stringForObjectValue(tonightsBill.amountPeopleShouldHavePaid())!)
         } else {
-            mailBody += String.localizedStringWithFormat(NSLocalizedString("EMAIL_INTRO", comment: "Here you go. The full overview of the %1$@ which we spend on our last event. We spent an average of %2$@ a person. You can find more of the details below."), self.tonightsBill.totalSumOfMoneyOfThisSharedBillAsCurrencyString(), self.tonightsBill.amountPeopleShouldHavePaidAsCurrencyString())
+            mailBody += String.localizedStringWithFormat(NSLocalizedString("EMAIL_INTRO", comment: "Here you go. The full overview of the %1$@ which we spend on our last event. We spent an average of %2$@ a person. You can find more of the details below."), mainCurrencyFormatter.stringForObjectValue(tonightsBill.totalSumOfMoneyOfThisSharedBill())!, mainCurrencyFormatter.stringForObjectValue(tonightsBill.amountPeopleShouldHavePaid())!)
         }
         mailBody += "\n\n"
         
@@ -69,9 +73,10 @@ class MCMailComposer: NSObject {
         
         for payment in allPayments {
             if payment.exchangeRate.exchangeRate.doubleValue == 1.0 {
-                mailBody += String.localizedStringWithFormat(NSLocalizedString("EMAIL_WHO_HAS_PAID", comment: "%1$@ has paid %2$@ for %3$@."), payment.payingPerson!.getFullName()!, tonightsBill.mainCurrency!.numberFormatter().stringFromNumber(payment.moneyInMainCurrency())!, payment.fullDescriptionOfPayment()!)
+                mailBody += String.localizedStringWithFormat(NSLocalizedString("EMAIL_WHO_HAS_PAID", comment: "%1$@ has paid %2$@ for %3$@."), payment.payingPerson!.getFullName()!, mainCurrencyFormatter.stringForObjectValue(payment.moneyInMainCurrency())!, payment.fullDescriptionOfPayment()!)
             } else {
-                mailBody += String.localizedStringWithFormat(NSLocalizedString("EMAIL_WHO_HAS_PAID_INTERNATIONAL", comment: "%1$@ has paid %2$@(%3$@) for %4$@."), payment.payingPerson!.getFullName()!, tonightsBill.mainCurrency!.numberFormatter().stringFromNumber(payment.moneyInMainCurrency())!, payment.currency.numberFormatter().stringFromNumber(payment.money)!, payment.fullDescriptionOfPayment()!)
+                localCurrencyFormatter.currencyCode = payment.currency.code
+                mailBody += String.localizedStringWithFormat(NSLocalizedString("EMAIL_WHO_HAS_PAID_INTERNATIONAL", comment: "%1$@ has paid %2$@(%3$@) for %4$@."), payment.payingPerson!.getFullName()!, mainCurrencyFormatter.stringForObjectValue(payment.moneyInMainCurrency())!, localCurrencyFormatter.stringForObjectValue(payment.money)!, payment.fullDescriptionOfPayment()!)
             }
             mailBody += "\n"
         }
@@ -80,7 +85,7 @@ class MCMailComposer: NSObject {
         mailBody += String.localizedStringWithFormat(NSLocalizedString("EMAIL_AVERAGE_OF_USE_SENTENCE", comment: "The amount of money we used:"))
         mailBody += "\n"
         for person in allPeople {
-            mailBody += String.localizedStringWithFormat(NSLocalizedString("EMAIL_AMOUNT_USED", comment: "%1$@ used %2$@ in total."), person.getFullName(), tonightsBill.amountShouldHavePaidAsCurrencyStringBy(person))
+            mailBody += String.localizedStringWithFormat(NSLocalizedString("EMAIL_AMOUNT_USED", comment: "%1$@ used %2$@ in total."), person.getFullName(), mainCurrencyFormatter.stringForObjectValue(tonightsBill.amountShouldHavePaidBy(person))!)
             mailBody += "\n"
         }
         mailBody += "\n"
@@ -89,7 +94,7 @@ class MCMailComposer: NSObject {
         mailBody += "\n"
         
         for returnPayment in solution {
-            mailBody += String.localizedStringWithFormat(NSLocalizedString("EMAIL_OWES", comment: "%1$@ pays %2$@ to %3$@"), returnPayment.payer.getFullName(), tonightsBill.mainCurrency.numberFormatter().stringFromNumber(returnPayment.money)!, returnPayment.receiver.getFullName())
+            mailBody += String.localizedStringWithFormat(NSLocalizedString("EMAIL_OWES", comment: "%1$@ pays %2$@ to %3$@"), returnPayment.payer.getFullName(), mainCurrencyFormatter.stringForObjectValue(returnPayment.money)!, returnPayment.receiver.getFullName())
             mailBody += "\n"
         }
         mailBody += "\n"

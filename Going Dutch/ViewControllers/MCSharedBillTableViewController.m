@@ -130,25 +130,6 @@
 
 #pragma mark - Inherited from super class.
 
-- (id)init
-{
-    self = [super initWithStyle:UITableViewStyleGrouped];
-    
-    if (self) {
-        [[self navigationController] setTitle:@"SharedBill"];
-    }
-    return self;
-}
-
-- (id)initWithStyle:(UITableViewStyle)style
-{
-    self = [super initWithStyle:style];
-    if (self) {
-        // Custom initialization
-    }
-    return self;
-}
-
 - (void)viewDidLoad
 {
     [super viewDidLoad];
@@ -186,11 +167,6 @@
     controller.showHints = false;
 }
 
-- (void)viewDidAppear:(BOOL)animated
-{
-    [super viewDidAppear:animated];
-}
-
 - (void)viewWillDisappear:(BOOL)animated
 {
     [super viewWillDisappear:animated];
@@ -209,16 +185,6 @@
 {
     [super didReceiveMemoryWarning];
     // Dispose of any resources that can be recreated.
-}
-
-- (void)encodeRestorableStateWithCoder:(NSCoder *)coder
-{
-    [super encodeRestorableStateWithCoder:coder];
-}
-
-- (void)decodeRestorableStateWithCoder:(NSCoder *)coder
-{
-    [super decodeRestorableStateWithCoder:coder];
 }
 
 - (void)dealloc
@@ -342,14 +308,12 @@
     switch(type) {
             
         case NSFetchedResultsChangeInsert:
-            [[self tableView] insertRowsAtIndexPaths:@[newIndexPath]
-                                    withRowAnimation:UITableViewRowAnimationFade];
+            [[self tableView] insertRowsAtIndexPaths:@[newIndexPath] withRowAnimation:UITableViewRowAnimationFade];
             [self setEmptyMessage];
             break;
             
         case NSFetchedResultsChangeDelete:
-            [[self tableView] deleteRowsAtIndexPaths:@[indexPath]
-                                    withRowAnimation:UITableViewRowAnimationFade];
+            [[self tableView] deleteRowsAtIndexPaths:@[indexPath] withRowAnimation:UITableViewRowAnimationFade];
             [self setEmptyMessage];
             break;
             
@@ -358,10 +322,8 @@
             break;
             
         case NSFetchedResultsChangeMove:
-            [[self tableView] deleteRowsAtIndexPaths:@[indexPath]
-                                    withRowAnimation:UITableViewRowAnimationFade];
-            [[self tableView] insertRowsAtIndexPaths:@[newIndexPath]
-                                    withRowAnimation:UITableViewRowAnimationFade];
+            [[self tableView] deleteRowsAtIndexPaths:@[indexPath] withRowAnimation:UITableViewRowAnimationFade];
+            [[self tableView] insertRowsAtIndexPaths:@[newIndexPath] withRowAnimation:UITableViewRowAnimationFade];
             break;
     }
 }
@@ -403,7 +365,9 @@
         thisCellsDescriptionOfPayment = NSLocalizedString(@"THISPAYMENTCELL_NOOBJECT", @"Something");
     }
     [[paymentCell whatPaidLabel] setText:[NSString stringWithFormat:@"%@%@", NSLocalizedString(@"PAYMENT_CELL_PAIDFOR_EXTRA", @"for ") , thisCellsDescriptionOfPayment]];
-    paymentCell.moneyPaidLabel.text = [thisCellsPayment getMoneyValueInCurrencyAsAString];
+    
+    CurrencyFormatter *cf = [[CurrencyFormatter alloc] initWithCurrencyCode:thisCellsPayment.currency.code];
+    paymentCell.moneyPaidLabel.text = [cf stringForObjectValue:thisCellsPayment.money];
     
     return paymentCell;
 }
@@ -490,8 +454,6 @@
             [[[segue destinationViewController] viewControllers][0] setThisPayment:thePayment];
         }
     }
-
-    
 }
 
 @end

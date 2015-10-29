@@ -64,6 +64,4 @@ typedef NS_ENUM(NSUInteger, MCMoneyValueFieldDismissStatus) {
 - (IBAction)mainCancelButtonPressed:(id)sender;
 - (IBAction)mainDoneButtonPressed:(id)sender;
 
-- (id)initWithExistingPayment:(MCPayment *)thePayment fromBill:(MCSharedBill *)bill;
-
 @end

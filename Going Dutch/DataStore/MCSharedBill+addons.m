@@ -323,13 +323,6 @@
     return [paymentsOfPerson valueForKeyPath:@"@sum.moneyInMainCurrency"];
 }
 
-- (NSString *)totalSumOfMoneyOfThisSharedBillAsCurrencyString
-{
-    NSNumber *totalSpent = [self totalSumOfMoneyOfThisSharedBill];
-    NSNumberFormatter *nf = [[self mainCurrency] numberFormatter];
-    return [nf stringFromNumber:totalSpent];
-}
-
 - (NSArray *)fetchPeoplePresentOrderedByAmountPaid:(BOOL)ascending
 {
     NSSet *people = [self peoplePresent];
@@ -409,23 +402,6 @@
     }
     
     return @(sumOfAllOwes);
-}
-
-- (NSString *)amountShouldHavePaidAsCurrencyStringBy:(MCPerson *)person
-{
-    // Still has no Unit test.
-    NSNumber *shouldHavePaid = [self amountShouldHavePaidBy:person];
-    NSNumberFormatter *nf = [[self mainCurrency] numberFormatter];
-    return [nf stringFromNumber:shouldHavePaid];
-}
-
-
-- (NSString *)amountPeopleShouldHavePaidAsCurrencyString
-{
-    NSNumber *averageSpentByPerson = [self amountPeopleShouldHavePaid];
-    NSNumberFormatter *nf = [[self mainCurrency] numberFormatter];
-    [nf setLocale:[NSLocale currentLocale]];
-    return [nf stringFromNumber:averageSpentByPerson];
 }
 
 - (BOOL)doAllPaymentHaveAPayer

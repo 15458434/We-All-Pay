@@ -190,15 +190,6 @@ typedef NS_ENUM(BOOL, MCStatus) {
 
 #pragma mark - Inherited from super.
 
-- (id)initWithNibName:(NSString *)nibNameOrNil bundle:(NSBundle *)nibBundleOrNil
-{
-    self = [super initWithNibName:nibNameOrNil bundle:nibBundleOrNil];
-    if (self) {
-        // Custom initialization
-    }
-    return self;
-}
-
 - (void)awakeFromNib
 {
     [super awakeFromNib];
@@ -277,16 +268,6 @@ typedef NS_ENUM(BOOL, MCStatus) {
 {
     [super didReceiveMemoryWarning];
     // Dispose of any resources that can be recreated.
-}
-
-- (void)encodeRestorableStateWithCoder:(NSCoder *)coder
-{
-    [super encodeRestorableStateWithCoder:coder];
-}
-
-- (void)decodeRestorableStateWithCoder:(NSCoder *)coder
-{
-    [super decodeRestorableStateWithCoder:coder];
 }
 
 #pragma mark - NSNotifications

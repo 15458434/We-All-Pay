@@ -42,14 +42,11 @@
 - (NSArray *)solveWhoHasToPayWhoFromThisBill;
 - (NSArray *)solveWhoHasToPayWhoFromThisBillWithCompletionBlock:(void (^)(NSArray *))completionBlock;
 - (NSNumber *)totalSumOfMoneyOfThisSharedBill;
-- (NSString *)totalSumOfMoneyOfThisSharedBillAsCurrencyString;
 - (NSArray *)fetchPeoplePresentOrderedByAmountPaid:(BOOL)ascending;
 - (NSNumber *)totalAmountOfCreditBy:(MCPerson *)person;
 - (NSNumber *)totalSumPaidBy:(MCPerson *)person;
 - (NSNumber *)amountPeopleShouldHavePaid;
-- (NSString *)amountPeopleShouldHavePaidAsCurrencyString;
 - (NSNumber *)amountShouldHavePaidBy:(MCPerson *)person;
-- (NSString *)amountShouldHavePaidAsCurrencyStringBy:(MCPerson *)person;
 - (BOOL)hasPersonPaidSomething:(MCPerson *)person;
 - (BOOL)doesEveryoneHaveAnEmailAddress;
 

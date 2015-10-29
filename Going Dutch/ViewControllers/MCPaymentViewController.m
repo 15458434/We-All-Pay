@@ -143,7 +143,6 @@ typedef NS_ENUM(BOOL, ChildViewOpened) {
 
 - (void)doneNumberPad:(id)selector
 {
-//    [self storeMoneySpent];
     kindOfPaidFieldDismiss = doneIsPressed;
     [paidView resignFirstResponder];
 }
@@ -158,9 +157,12 @@ typedef NS_ENUM(BOOL, ChildViewOpened) {
 
 - (void)storeMoneySpent
 {
-    [_thisPayment putMoneyValueAsAString:[paidView text]];
-
-    [paidView setText:[_thisPayment getMoneyValueInCurrencyAsAString]];
+    CurrencyFormatter *cf = [[CurrencyFormatter alloc] initWithCurrencyCode:_thisPayment.currency.code];
+    [[MCWeAllPayStoreController defaultStore] beginUndoGroupWithoutRegistration];
+    _thisPayment.money = [cf doubleFromString:paidView.text];
+    [_thisPayment recalculateAveragePeopleOweAndStore];
+    [[MCWeAllPayStoreController defaultStore] endUndoGroupWithoutRegistration];
+    paidView.text = [cf stringForObjectValue:_thisPayment.money];
     
     [[[self navigationItem] rightBarButtonItem] setEnabled:YES];
     NSDate *nu = [NSDate date];
@@ -171,25 +173,6 @@ typedef NS_ENUM(BOOL, ChildViewOpened) {
 }
 
 #pragma mark - new in this class
-
-- (id)initWithExistingPayment:(MCPayment *)thePayment fromBill:(MCSharedBill *)bill
-{
-    self = [super init];
-    
-    if (self) {
-        _tonightsBill = bill;
-//        didSomethingChange = NO;
-        if (thePayment) {
-            _thisPayment = thePayment;
-            _isNew = NO;
-        } else {
-            _thisPayment = [MCPayment addPayment];
-            [_thisPayment setOnWhichBill:bill];
-            _isNew = YES;
-        }
-    }
-    return self;
-}
 
 - (UIStatusBarStyle)preferredStatusBarStyle
 {
@@ -316,7 +299,8 @@ typedef NS_ENUM(BOOL, ChildViewOpened) {
 #endif
         if (kindOfPaidFieldDismiss == cancelIsPressed) {
             // Restore stored value
-            [paidView setText:[_thisPayment getMoneyValueInCurrencyAsAString]];
+            CurrencyFormatter *cf = [[CurrencyFormatter alloc] initWithCurrencyCode:_thisPayment.currency.code];
+            paidView.text = [cf stringForObjectValue:_thisPayment.money];
         } else if (kindOfPaidFieldDismiss == doneIsPressed) {
             [self storeMoneySpent];
         } else if (kindOfPaidFieldDismiss == otherTextFieldSelected) {
@@ -325,7 +309,8 @@ typedef NS_ENUM(BOOL, ChildViewOpened) {
             [self storeMoneySpent];
         } else if (kindOfPaidFieldDismiss == backgroundTapped){
             // Restore stored value
-            [paidView setText:[_thisPayment getMoneyValueInCurrencyAsAString]];
+            CurrencyFormatter *cf = [[CurrencyFormatter alloc] initWithCurrencyCode:_thisPayment.currency.code];
+            paidView.text = [cf stringForObjectValue:_thisPayment.money];
         }
     } else if (textField == payerNameField) {
         if (!peoplePickerCancelled) {
@@ -354,14 +339,10 @@ typedef NS_ENUM(BOOL, ChildViewOpened) {
 
 #pragma mark - Inherited from super
 
-- (id)initWithStyle:(UITableViewStyle)style
-{
-    self = [super initWithStyle:style];
-    if (self) {
-        // Custom initialization
-        _selectCurrencyTableViewController = isNotOpened;
-    }
-    return self;
+- (void)awakeFromNib {
+    [super awakeFromNib];
+    
+    _selectCurrencyTableViewController = isNotOpened;
 }
 
 - (void)viewDidLoad
@@ -411,12 +392,8 @@ typedef NS_ENUM(BOOL, ChildViewOpened) {
     [payerNameField setInputAccessoryView:inputAccessoryPickerView];
     
     UIToolbar *inputAccossoryNumberPad = [[UIToolbar alloc] initWithFrame:toolbarRect];
-    cancelButton = [[UIBarButtonItem alloc] initWithBarButtonSystemItem:UIBarButtonSystemItemCancel
-                                                                 target:self
-                                                                 action:@selector(cancelNumberPad:)];
-    theDoneButton = [[UIBarButtonItem alloc] initWithBarButtonSystemItem:UIBarButtonSystemItemDone
-                                                                  target:self
-                                                                  action:@selector(doneNumberPad:)];
+    cancelButton = [[UIBarButtonItem alloc] initWithBarButtonSystemItem:UIBarButtonSystemItemCancel target:self action:@selector(cancelNumberPad:)];
+    theDoneButton = [[UIBarButtonItem alloc] initWithBarButtonSystemItem:UIBarButtonSystemItemDone target:self action:@selector(doneNumberPad:)];
     [inputAccossoryNumberPad setItems:@[cancelButton, flexButton, theDoneButton] animated:YES];
     [paidView setInputAccessoryView:inputAccossoryNumberPad];
     
@@ -429,8 +406,6 @@ typedef NS_ENUM(BOOL, ChildViewOpened) {
 - (void)viewWillAppear:(BOOL)animated
 {
     [super viewWillAppear:animated];
-    
-    [MCTools setAdBannerIfNotPaid:NO forViewController:self];
     
     [self setNeedsStatusBarAppearanceUpdate];
     
@@ -452,7 +427,8 @@ typedef NS_ENUM(BOOL, ChildViewOpened) {
         if (SYSTEM_VERSION_GREATER_THAN_OR_EQUAL_TO(@"8.0") && _selectCurrencyTableViewController == isOpened) {
             // Those lines won't update when coming from MCSelectCurrencyTableViewController on iOS 8 and later.
             // It's under an if statement, because only the iPhone 4 is effected.
-            paidView.text = [_thisPayment getMoneyValueInCurrencyAsAString];
+            CurrencyFormatter *cf = [[CurrencyFormatter alloc] initWithCurrencyCode:_thisPayment.currency.code];
+            paidView.text = [cf stringForObjectValue:_thisPayment.money];
             [[self tableView] reloadData];
             _selectCurrencyTableViewController = isNotOpened;
         }
@@ -478,45 +454,9 @@ typedef NS_ENUM(BOOL, ChildViewOpened) {
         [_categoryButton setTitle:buttonText forState:UIControlStateNormal];
     }
     if (!_isNew || _selectCurrencyTableViewController == isOpened) {
-        paidView.text = [_thisPayment getMoneyValueInCurrencyAsAString];
+        CurrencyFormatter *cf = [[CurrencyFormatter alloc] initWithCurrencyCode:_thisPayment.currency.code];
+        paidView.text = [cf stringForObjectValue:_thisPayment.money];
     }
-    
-    
-}
-
-- (void)viewDidAppear:(BOOL)animated
-{
-#if DEBUG
-    NSLog(@"%@ viewDidAppear", self);
-#endif
-    [super viewDidAppear:animated];
-
-//    id<GAITracker> tracker = [[GAI sharedInstance] defaultTracker];
-//    if (isNew) {
-//        [tracker set:kGAIScreenName value:@"MCPaymentNewView_iPhone"];
-//    } else {
-//        [tracker set:kGAIScreenName value:@"MCPaymentDetailsView_iPhone"];
-//    }
-//    [tracker send:[[GAIDictionaryBuilder createAppView] build]];
-}
-
-- (void)viewWillDisappear:(BOOL)animated
-{
-#if DEBUG
-    NSLog(@"%@, viewWillDisappear", self);
-#endif
-    [super viewWillDisappear:animated];
-}
-
-- (void)viewDidDisappear:(BOOL)animated
-{
-#if DEBUG
-    NSLog(@"%@, viewDidDisappear", self);
-#endif
-    [super viewDidDisappear:animated];
-    
-    [MCTools setAdBannerIfNotPaid:NO forViewController:self];
-    
 }
 
 - (BOOL)disablesAutomaticKeyboardDismissal
@@ -528,16 +468,6 @@ typedef NS_ENUM(BOOL, ChildViewOpened) {
 {
     [super didReceiveMemoryWarning];
     // Dispose of any resources that can be recreated.
-}
-
-- (void)encodeRestorableStateWithCoder:(NSCoder *)coder
-{
-    [super encodeRestorableStateWithCoder:coder];
-}
-
-- (void)decodeRestorableStateWithCoder:(NSCoder *)coder
-{
-    [super decodeRestorableStateWithCoder:coder];
 }
 
 #pragma mark - NSFetchedResultsControllerDelegate
@@ -562,25 +492,22 @@ typedef NS_ENUM(BOOL, ChildViewOpened) {
         switch(type) {
                 
             case NSFetchedResultsChangeInsert:
-                [[self tableView] insertRowsAtIndexPaths:@[newIndexPath]
-                                        withRowAnimation:UITableViewRowAnimationFade];
+                [[self tableView] insertRowsAtIndexPaths:@[newIndexPath] withRowAnimation:UITableViewRowAnimationFade];
                 break;
                 
             case NSFetchedResultsChangeDelete:
-                [[self tableView] deleteRowsAtIndexPaths:@[indexPath]
-                                        withRowAnimation:UITableViewRowAnimationFade];
+                [[self tableView] deleteRowsAtIndexPaths:@[indexPath] withRowAnimation:UITableViewRowAnimationFade];
+                break;
+                
+            case NSFetchedResultsChangeMove:
+                [[self tableView] deleteRowsAtIndexPaths:@[indexPath] withRowAnimation:UITableViewRowAnimationFade];
+                [[self tableView] insertRowsAtIndexPaths:@[newIndexPath] withRowAnimation:UITableViewRowAnimationFade];
                 break;
                 
             case NSFetchedResultsChangeUpdate:
                 [[self tableView] reloadRowsAtIndexPaths:@[indexPath] withRowAnimation:UITableViewRowAnimationAutomatic];
-                paidView.text = [_thisPayment getMoneyValueInCurrencyAsAString];
-                break;
-                
-            case NSFetchedResultsChangeMove:
-                [[self tableView] deleteRowsAtIndexPaths:@[indexPath]
-                                        withRowAnimation:UITableViewRowAnimationFade];
-                [[self tableView] insertRowsAtIndexPaths:@[newIndexPath]
-                                        withRowAnimation:UITableViewRowAnimationFade];
+                CurrencyFormatter *cf = [[CurrencyFormatter alloc] initWithCurrencyCode:_thisPayment.currency.code];
+                paidView.text = [cf stringForObjectValue:_thisPayment.money];
                 break;
         }
     }
@@ -616,9 +543,12 @@ typedef NS_ENUM(BOOL, ChildViewOpened) {
     [[cell nameLabel] setText:[[thisCellsPresence person] getFullName]];
     cell.personView.image = thisCellsPresence.person.thumbnail;
     [[cell isPresentSwitch] setOn:[[thisCellsPresence isPersonPresent] boolValue]];
-    NSString *owesPreString = NSLocalizedString(@"OWES_FROM_THIS_PAYMENT", @"owes");
-    NSString *owesString = [NSString stringWithFormat:@"%@ %@", owesPreString, [thisCellsPresence getCurrencyStringOfAverageOwe]];
-    [[cell owesLabel] setText:owesString];
+//    NSString *owesPreString = NSLocalizedString(@"OWES_FROM_THIS_PAYMENT", @"owes");
+    CurrencyFormatter *cf = [[CurrencyFormatter alloc] initWithCurrencyCode:thisCellsPresence.payment.currency.code];
+    NSNumber *averageOwe = @(-thisCellsPresence.averageOweFromPayment.doubleValue);
+    cell.owesLabel.text = [cf stringForObjectValue:averageOwe];
+//    NSString *owesString = [NSString stringWithFormat:@"%@ %@", owesPreString, [thisCellsPresence getCurrencyStringOfAverageOwe]];
+//    [[cell owesLabel] setText:owesString];
     [cell setThisCellsPaymentPresence:thisCellsPresence];
     
     // Set the cell alignment to headerView stuff

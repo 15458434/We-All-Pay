@@ -65,34 +65,6 @@
     [MCPerson deletePerson:thisPerson];
 }
 
-- (void)testMoneyValuePutAndGet
-{
-    // This test tests the functionality of putting and getting moneyValues in MCPayment+addons by passing along strings.
-    MCSharedBill *tonightsBill = [MCSharedBill addSharedBill];
-    MCPerson *thisPerson = [tonightsBill addPerson];
-    [thisPerson setFirstName:@"Mark"];
-    [thisPerson setLastName:@"Cornelisse"];
-    [thisPerson addOneEmailAddressFromAString:@"info@markcornelisse.nl"];
-    MCPayment *thisPayment = [tonightsBill addPayment];
-    [thisPayment setPayingPerson:thisPerson];
-    [thisPayment setDescriptionOfPayment:@"Bazinga"];
-    NSNumberFormatter *nf = [[NSNumberFormatter alloc] init];
-    [nf setLocale:[NSLocale currentLocale]];
-    [nf setFormatterBehavior:NSNumberFormatterBehaviorDefault];
-    [nf setNumberStyle:NSNumberFormatterDecimalStyle];
-    NSNumber *verifyNumber = @(9.87);
-    NSString *verifyNumberString = [nf stringFromNumber:verifyNumber];
-    [thisPayment putMoneyValueAsAString:verifyNumberString];
-    XCTAssertEqualWithAccuracy([verifyNumber doubleValue], [[thisPayment money] doubleValue], 0.005, @"thisPayment value not the same as the original.");
-    XCTAssert([verifyNumberString isEqualToString:[thisPayment getMoneyValueAsAString]], @"thisPayment money string not equal to the string the way it should be.");
-    [nf setNumberStyle:NSNumberFormatterCurrencyStyle];
-    NSString *verifyCurrencyString = [nf stringFromNumber:verifyNumber];
-    [thisPayment putMoneyValueInCurrencyAsAString:verifyCurrencyString];
-    XCTAssertEqualWithAccuracy([verifyNumber doubleValue], [[thisPayment money] doubleValue], 0.005, @"thisPayment value no the same as the original currency");
-    XCTAssert([verifyCurrencyString isEqualToString:[thisPayment getMoneyValueInCurrencyAsAString]], @"thisPayment currency string not equal to the string the way it should be");
-    [MCSharedBill deleteSharedbill:tonightsBill];
-}
-
 - (void)testCurrency
 {
     // This test checks to see if currency is being setup when a new payment is being made.
