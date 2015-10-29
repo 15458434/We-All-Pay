@@ -100,15 +100,6 @@ typedef NS_ENUM(BOOL, MCTonightsBillStatus) {
 
 #pragma mark - Inherited from super
 
-- (id)initWithStyle:(UITableViewStyle)style
-{
-    self = [super initWithStyle:style];
-    if (self) {
-        // Custom initialization
-    }
-    return self;
-}
-
 - (void)awakeFromNib
 {
     [super awakeFromNib];
@@ -180,16 +171,6 @@ typedef NS_ENUM(BOOL, MCTonightsBillStatus) {
     [self stopRespondingToStorechangeNotifications];
 }
 
-- (void)encodeRestorableStateWithCoder:(NSCoder *)coder
-{
-    [super encodeRestorableStateWithCoder:coder];
-}
-
-- (void)decodeRestorableStateWithCoder:(NSCoder *)coder
-{
-    [super decodeRestorableStateWithCoder:coder];
-}
-
 #pragma mark - UIViewController+WeAllPayStore notifications
 
 - (void)storeWillBeSwapped:(NSNotification *)notification
@@ -225,7 +206,6 @@ typedef NS_ENUM(BOOL, MCTonightsBillStatus) {
     if (self.isViewLoaded && self.view.window && _isATonightsBillOpened == isClosed) {
         [[self tableView] beginUpdates];
     }
-
 }
 
 - (void)controllerDidChangeContent:(NSFetchedResultsController *)controller
@@ -244,14 +224,12 @@ typedef NS_ENUM(BOOL, MCTonightsBillStatus) {
         switch(type) {
                 
             case NSFetchedResultsChangeInsert:
-                [[self tableView] insertRowsAtIndexPaths:@[newIndexPath]
-                                        withRowAnimation:UITableViewRowAnimationFade];
+                [[self tableView] insertRowsAtIndexPaths:@[newIndexPath] withRowAnimation:UITableViewRowAnimationFade];
                 [self setEmptyMessage];
                 break;
                 
             case NSFetchedResultsChangeDelete:
-                [[self tableView] deleteRowsAtIndexPaths:@[indexPath]
-                                        withRowAnimation:UITableViewRowAnimationFade];
+                [[self tableView] deleteRowsAtIndexPaths:@[indexPath] withRowAnimation:UITableViewRowAnimationFade];
                 [self setEmptyMessage];
                 break;
                 
@@ -260,10 +238,8 @@ typedef NS_ENUM(BOOL, MCTonightsBillStatus) {
                 break;
                 
             case NSFetchedResultsChangeMove:
-                [[self tableView] deleteRowsAtIndexPaths:@[indexPath]
-                                        withRowAnimation:UITableViewRowAnimationFade];
-                [[self tableView] insertRowsAtIndexPaths:@[newIndexPath]
-                                        withRowAnimation:UITableViewRowAnimationFade];
+                [[self tableView] deleteRowsAtIndexPaths:@[indexPath] withRowAnimation:UITableViewRowAnimationFade];
+                [[self tableView] insertRowsAtIndexPaths:@[newIndexPath] withRowAnimation:UITableViewRowAnimationFade];
                 break;
         }
     }
