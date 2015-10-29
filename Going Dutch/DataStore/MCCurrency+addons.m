@@ -72,16 +72,6 @@
     }
 }
 
-- (NSNumberFormatter *)numberFormatter
-{
-    NSNumberFormatter *newNumberFormatter = [NSNumberFormatter new];
-    [newNumberFormatter setLocale:[NSLocale currentLocale]];
-    [newNumberFormatter setCurrencyCode:[self code]];
-    [newNumberFormatter setNumberStyle:NSNumberFormatterCurrencyStyle];
-    [newNumberFormatter setFormatterBehavior:NSNumberFormatterBehaviorDefault];
-    return newNumberFormatter;
-}
-
 #pragma mark - Inherited from super
 
 - (void)awakeFromInsert

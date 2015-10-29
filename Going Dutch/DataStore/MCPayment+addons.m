@@ -190,42 +190,6 @@
     self.onWhichBill.dateModified = now;
 }
 
-- (NSString *)getMoneyValueAsAString
-{
-    NSNumberFormatter *nf = [[self currency] numberFormatter];
-    [nf setNumberStyle:NSNumberFormatterDecimalStyle];
-    return [nf stringFromNumber:[self money]];
-}
-
-- (NSString *)getMoneyValueInCurrencyAsAString
-{
-    NSNumberFormatter *nf = [[self currency] numberFormatter];
-    [nf setFormatterBehavior:NSNumberFormatterBehaviorDefault];
-    return [nf stringFromNumber:[self money]];
-}
-
-- (void)putMoneyValueAsAString:(NSString *)moneyString
-{
-    NSNumberFormatter *nf = [[self currency] numberFormatter];
-    [nf setNumberStyle:NSNumberFormatterDecimalStyle];
-    [nf setFormatterBehavior:NSNumberFormatterBehaviorDefault];
-    [[MCWeAllPayStoreController defaultStore] beginUndoGroupWithoutRegistration];
-    [self setMoney:[nf numberFromString:moneyString]];
-    [self recalculateAveragePeopleOweAndStore];
-    [[MCWeAllPayStoreController defaultStore] endUndoGroupWithoutRegistration];
-}
-
-- (void)putMoneyValueInCurrencyAsAString:(NSString *)moneyString
-{
-    NSNumberFormatter *nf = [[self currency] numberFormatter];
-    [nf setFormatterBehavior:NSNumberFormatterBehaviorDefault];
-    
-    [[MCWeAllPayStoreController defaultStore] beginUndoGroupWithoutRegistration];
-    [self setMoney:[nf numberFromString:moneyString]];
-    [self recalculateAveragePeopleOweAndStore];
-    [[MCWeAllPayStoreController defaultStore] endUndoGroupWithoutRegistration];
-}
-
 - (NSNumber *)moneyInMainCurrency
 {
     if (![self exchangeRate]) {

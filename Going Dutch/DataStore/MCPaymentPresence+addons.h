@@ -14,7 +14,6 @@
 + (MCPaymentPresence *)addPaymentPresenceInContext:(NSManagedObjectContext *)context;
 + (void)deletePaymentPresence:(MCPaymentPresence *)paymentPresence;
 
-- (NSString *)getCurrencyStringOfAverageOwe __deprecated;
 - (NSNumber *)getAverageOweFromPaymentInMainCurrency;
 
 
