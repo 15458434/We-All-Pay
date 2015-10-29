@@ -10,6 +10,7 @@ import Foundation
 
 class CurrencyFormatter: NSFormatter {
     // MARK: Properties
+    var currencyCode: String?
     
     // MARK: New in this class
     
@@ -30,30 +31,28 @@ class CurrencyFormatter: NSFormatter {
     
     // MARK: Inherited from super
     override func getObjectValue(obj: AutoreleasingUnsafeMutablePointer<AnyObject?>, forString string: String, errorDescription error: AutoreleasingUnsafeMutablePointer<NSString?>) -> Bool {
-        let nf = CFNumberFormatterCreate(kCFAllocatorDefault, CFLocaleCopyCurrent(), CFNumberFormatterStyle.DecimalStyle)
-        let money: UnsafeMutablePointer<Double> = UnsafeMutablePointer<Double>.alloc(1)
-        money.initialize(0.00)
-        let success = CFNumberFormatterGetValueFromString(nf, string, nil, CFNumberType.DoubleType, money)
-        if success {
-            let nummer = NSNumber(double: money.memory)
+        let nf = NSNumberFormatter()
+        nf.numberStyle = .DecimalStyle
+        if let nummer = nf.numberFromString(string) {
             obj.memory = nummer
+            return true
         } else {
             if error != nil {
                 let errorString = "Error converting to Double"
                 error.memory = errorString as NSString
             }
+            return false
         }
-        money.destroy()
-        money.dealloc(1)
-        return success
     }
     
     override func stringForObjectValue(obj: AnyObject) -> String? {
         if let nummer = obj as? NSNumber {
-            let cfnf = CFNumberFormatterCreate(kCFAllocatorDefault, CFLocaleCopyCurrent(), CFNumberFormatterStyle.CurrencyStyle)
-            var money: Double = nummer.doubleValue
-            let cfn = CFNumberCreate(kCFAllocatorDefault, CFNumberType.DoubleType, &money)
-            return CFNumberFormatterCreateStringWithNumber(kCFAllocatorDefault, cfnf, cfn) as String
+            let nf = NSNumberFormatter()
+            nf.numberStyle = .CurrencyStyle
+            if let code = currencyCode {
+                nf.currencyCode = code
+            }
+            return nf.stringFromNumber(nummer)
         } else {
             return nil
         }
@@ -61,10 +60,9 @@ class CurrencyFormatter: NSFormatter {
     
     override func editingStringForObjectValue(obj: AnyObject) -> String? {
         if let nummer = obj as? NSNumber {
-            let cfnf = CFNumberFormatterCreate(kCFAllocatorDefault, CFLocaleCopyCurrent(), CFNumberFormatterStyle.DecimalStyle)
-            var money: Double = nummer.doubleValue
-            let cfn = CFNumberCreate(kCFAllocatorDefault, CFNumberType.DoubleType, &money)
-            return CFNumberFormatterCreateStringWithNumber(kCFAllocatorDefault, cfnf, cfn) as String
+            let nf = NSNumberFormatter()
+            nf.numberStyle = .DecimalStyle
+            return nf.stringFromNumber(nummer)
         } else {
             return nil
         }
