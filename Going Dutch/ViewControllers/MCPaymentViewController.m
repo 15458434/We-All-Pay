@@ -143,7 +143,6 @@ typedef NS_ENUM(BOOL, ChildViewOpened) {
 
 - (void)doneNumberPad:(id)selector
 {
-//    [self storeMoneySpent];
     kindOfPaidFieldDismiss = doneIsPressed;
     [paidView resignFirstResponder];
 }
@@ -162,7 +161,7 @@ typedef NS_ENUM(BOOL, ChildViewOpened) {
     [[MCWeAllPayStoreController defaultStore] beginUndoGroupWithoutRegistration];
     _thisPayment.money = [cf doubleFromString:paidView.text];
     [_thisPayment recalculateAveragePeopleOweAndStore];
-    [[MCWeAllPayStoreController defaultStore] endUndoGroupAndUndoWithoutRegistration];
+    [[MCWeAllPayStoreController defaultStore] endUndoGroupWithoutRegistration];
     paidView.text = [cf stringForObjectValue:_thisPayment.money];
     
     [[[self navigationItem] rightBarButtonItem] setEnabled:YES];
