@@ -392,12 +392,8 @@ typedef NS_ENUM(BOOL, ChildViewOpened) {
     [payerNameField setInputAccessoryView:inputAccessoryPickerView];
     
     UIToolbar *inputAccossoryNumberPad = [[UIToolbar alloc] initWithFrame:toolbarRect];
-    cancelButton = [[UIBarButtonItem alloc] initWithBarButtonSystemItem:UIBarButtonSystemItemCancel
-                                                                 target:self
-                                                                 action:@selector(cancelNumberPad:)];
-    theDoneButton = [[UIBarButtonItem alloc] initWithBarButtonSystemItem:UIBarButtonSystemItemDone
-                                                                  target:self
-                                                                  action:@selector(doneNumberPad:)];
+    cancelButton = [[UIBarButtonItem alloc] initWithBarButtonSystemItem:UIBarButtonSystemItemCancel target:self action:@selector(cancelNumberPad:)];
+    theDoneButton = [[UIBarButtonItem alloc] initWithBarButtonSystemItem:UIBarButtonSystemItemDone target:self action:@selector(doneNumberPad:)];
     [inputAccossoryNumberPad setItems:@[cancelButton, flexButton, theDoneButton] animated:YES];
     [paidView setInputAccessoryView:inputAccossoryNumberPad];
     
