@@ -215,15 +215,6 @@ typedef NS_ENUM(BOOL, MCXRatesMissing) {
 
 #pragma mark - Inherited from super.
 
-- (id)initWithStyle:(UITableViewStyle)style
-{
-    self = [super initWithStyle:style];
-    if (self) {
-        // Custom initialization
-    }
-    return self;
-}
-
 - (void)viewDidLoad
 {
     [super viewDidLoad];
@@ -283,16 +274,6 @@ typedef NS_ENUM(BOOL, MCXRatesMissing) {
 - (BOOL)shouldPresentInterstitialAd
 {
     return YES;
-}
-
-- (void)encodeRestorableStateWithCoder:(NSCoder *)coder
-{
-    [super encodeRestorableStateWithCoder:coder];
-}
-
-- (void)decodeRestorableStateWithCoder:(NSCoder *)coder
-{
-    [super decodeRestorableStateWithCoder:coder];
 }
 
 #pragma mark - UIAlertViewDelegate
