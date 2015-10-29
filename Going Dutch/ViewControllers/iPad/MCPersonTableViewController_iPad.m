@@ -83,26 +83,6 @@ typedef NS_ENUM(BOOL, MCStatus) {
     [[[self navigationController] presentingViewController] dismissViewControllerAnimated:YES completion:nil];
 }
 
-//- (void)setCircularImageOnPictureView:(UIImage *)image
-//{
-//    __weak MCPersonTableViewController_iPad *weakSelf = self;
-//    
-//    dispatch_queue_t imageProcessQueue;
-//    imageProcessQueue = dispatch_queue_create("imageProcessQueue", NULL);
-//    
-//    dispatch_async(imageProcessQueue, ^{
-//        CGRect circularImageRect = CGRectMake(0, 0, 160, 160);
-//        UIImage *circularImage = [MCTools cutCircularImageFrom:image toDestinationRect:circularImageRect];
-//        dispatch_async(dispatch_get_main_queue(), ^{
-//            MCPersonTableViewController_iPad *strongSelf = weakSelf;
-//            if (strongSelf) {
-//                [[strongSelf pictureView] setImage:circularImage];
-//                [[strongSelf pictureView] setNeedsDisplay];
-//            }
-//        });
-//    });
-//}
-
 - (void)tappedInTheBackground:(id)selector
 {
     [self dismissTheKeyboard];
@@ -120,15 +100,6 @@ typedef NS_ENUM(BOOL, MCStatus) {
 }
 
 #pragma mark - Inherited From Super
-
-- (id)initWithStyle:(UITableViewStyle)style
-{
-    self = [super initWithStyle:style];
-    if (self) {
-        // Custom initialization
-    }
-    return self;
-}
 
 - (void)awakeFromNib
 {

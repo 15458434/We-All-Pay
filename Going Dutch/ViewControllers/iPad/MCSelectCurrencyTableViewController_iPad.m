@@ -70,22 +70,6 @@ NSString * const currencyCellIdentifier_iPad = @"MCSelectCurrencyTableViewCell_i
     [self setObjects:_currencies];
 }
 
-- (void)viewWillDisappear:(BOOL)animated
-{
-#if DEBUG
-    NSLog(@"%@ viewWillDisappear", self);
-#endif
-    [super viewWillDisappear:animated];
-}
-
-- (void)viewDidDisappear:(BOOL)animated
-{
-#if DEBUG
-    NSLog(@"%@, viewDidDisappear", self);
-#endif
-    [super viewDidDisappear:animated];
-}
-
 - (void)didReceiveMemoryWarning
 {
     [super didReceiveMemoryWarning];
