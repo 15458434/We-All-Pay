@@ -20,6 +20,12 @@
 
 #import "We_all_pay-Swift.h"
 
+@interface MCAppDelegate ()
+
+@property (nonatomic) dispatch_once_t executeOnlyOnce;
+
+@end
+
 @implementation MCAppDelegate
 
 #pragma mark - New in this class
@@ -168,7 +174,7 @@
 
 - (BOOL)application:(UIApplication *)application willFinishLaunchingWithOptions:(NSDictionary *)launchOptions
 {
-    dispatch_once(&executeOnlyOnce, ^{
+    dispatch_once(&_executeOnlyOnce, ^{
         [self executeOnlyOnceDuringStartup];
         [[MCWeAllPayStoreController defaultStore] openStore:nil];
         
@@ -176,14 +182,13 @@
     dispatch_queue_t someBackgroundQueue = dispatch_queue_create("originChech", NULL);
     dispatch_async(someBackgroundQueue, ^{
         [self checkToSeeIfThisPurchaseOriginatesFromiAd];
-    });
-//    [UIViewController prepareInterstitialAds];    
+    });    
     return YES;
 }
 
 - (BOOL)application:(UIApplication *)application didFinishLaunchingWithOptions:(NSDictionary *)launchOptions
 {
-    dispatch_once(&executeOnlyOnce, ^{
+    dispatch_once(&_executeOnlyOnce, ^{
         [self executeOnlyOnceDuringStartup];
         [[MCWeAllPayStoreController defaultStore] openStore:nil];
     });
