@@ -17,16 +17,15 @@
 @class MCSharedBillPageViewController;
 
 @interface MCReturnPaymentViewController : UITableViewController <MFMailComposeViewControllerDelegate>
-{
-    MCTwoLabelsTitleView *twoLabelTitleView;
-}
+
+@property (nonatomic, strong) MCTwoLabelsTitleView *twoLabelTitleView;
+
+@property (nonatomic, strong) MCSharedBill *tonightsBill;
+@property (nonatomic, weak) MCSharedBillPageViewController *sendMailObject;
 
 - (IBAction)sendAsEmailButtonPressed:(id)sender;
 - (IBAction)mainCancelButtonPressed:(id)sender;
 
 - (id)initWithBill:(MCSharedBill *)thisBill;
-
-@property (nonatomic, strong) MCSharedBill *tonightsBill;
-@property (nonatomic, weak) MCSharedBillPageViewController *sendMailObject;
 
 @end

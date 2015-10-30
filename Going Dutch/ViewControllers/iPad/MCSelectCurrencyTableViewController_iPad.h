@@ -15,9 +15,6 @@
 @class MCPayment;
 
 @interface MCSelectCurrencyTableViewController_iPad : UITableViewController <NSFetchedResultsControllerDelegate, MCThisPaymentProtocol, MCDismissMeBlockProtocol>
-{
-
-}
 
 @property (nonatomic, strong) MCPayment *thisPayment;
 @property (strong, nonatomic) void (^dismissMe)();

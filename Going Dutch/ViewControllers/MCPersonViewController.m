@@ -24,6 +24,20 @@ typedef NS_ENUM(BOOL, MCStatus) {
 
 @interface MCPersonViewController ()
 
+@property (nonatomic, weak) IBOutlet UITextField *firstNameField;
+@property (nonatomic, weak) IBOutlet UITextField *lastNameField;
+@property (nonatomic, weak) IBOutlet UITextField *emailField;
+@property (nonatomic, weak) IBOutlet UIButton *selectEmailAddressButton;
+
+@property (nonatomic, strong) MCTwoLabelsTitleView *twoLabelTitleView;
+@property (nonatomic, strong) UIBarButtonItem *addressBookButton;
+@property (nonatomic, strong) UIPickerView *emailSelectionFromAddressBookPickerView;
+@property (nonatomic) BOOL isSelectEmail;
+@property (nonatomic) NSUInteger emailEditFieldStatus;
+
+@property (nonatomic, strong) MCAddressBookDataReceiver *personReceiver;
+@property (nonatomic, strong) NSFetchedResultsController *dataController;
+
 @property (atomic, copy) NSDate * dateModified;
 @property (atomic, copy) NSString * defaultEmailAddress;
 @property (atomic, copy) NSString * firstName;
@@ -33,6 +47,11 @@ typedef NS_ENUM(BOOL, MCStatus) {
 @property (atomic, copy) UIImage * thumbnail;
 
 @property (nonatomic) MCStatus emailAddressStringInTextField;
+
+@property (nonatomic) BOOL didSomethingChange;
+@property (nonatomic) BOOL isNew;
+@property (nonatomic) BOOL thisPersonHasPaidSomething;
+@property (nonatomic) BOOL mainCancelPressed;
 
 @end
 
@@ -61,8 +80,8 @@ typedef NS_ENUM(BOOL, MCStatus) {
     [self dismissKeyboard];
     
     // select the emailField and pop-up it's keyboard with the UIPickerView
-    isSelectEmail = YES;
-    [emailField becomeFirstResponder];
+    _isSelectEmail = YES;
+    [_emailField becomeFirstResponder];
 }
 
 - (IBAction)doneButtonPressed:(id)sender
@@ -76,37 +95,37 @@ typedef NS_ENUM(BOOL, MCStatus) {
 
 - (void)doneEmailPicker:(id)selector
 {
-    MCEmailAddress *newDefaultEmailAddress = [dataController fetchedObjects][[emailSelectionFromAddressBookPickerView selectedRowInComponent:0]];
+    MCEmailAddress *newDefaultEmailAddress = [_dataController fetchedObjects][[_emailSelectionFromAddressBookPickerView selectedRowInComponent:0]];
     MCEmailAddress *oldDefaulEmailAddress = [MCEmailAddress fetchEmailAddressFor:_thisPerson];
     [oldDefaulEmailAddress setSelected:@NO];
     [newDefaultEmailAddress setSelected:@YES];
-    [emailField setText:[_thisPerson defaultEmailAddress]];
+    [_emailField setText:[_thisPerson defaultEmailAddress]];
     
-    [emailField resignFirstResponder];
+    [_emailField resignFirstResponder];
     [[[self navigationItem] rightBarButtonItem] setEnabled:YES];
 }
 
 - (void)cancelEmailPicker:(id)selector
 {
-    [emailField setText:[_thisPerson defaultEmailAddress]];
-    [emailField resignFirstResponder];
+    [_emailField setText:[_thisPerson defaultEmailAddress]];
+    [_emailField resignFirstResponder];
 }
 
 #pragma mark - New in this class
 
 - (void)dismissKeyboard
 {
-    if ([firstNameField isFirstResponder]) {
-        [firstNameField endEditing:YES];
+    if ([_firstNameField isFirstResponder]) {
+        [_firstNameField endEditing:YES];
     }
-    if ([lastNameField isFirstResponder]) {
-        [lastNameField endEditing:YES];
+    if ([_lastNameField isFirstResponder]) {
+        [_lastNameField endEditing:YES];
     }
-    if ([emailField isFirstResponder]) {
-        if (isSelectEmail) {
+    if ([_emailField isFirstResponder]) {
+        if (_isSelectEmail) {
             [self cancelEmailPicker:self];
         } else {
-            [emailField endEditing:YES];
+            [_emailField endEditing:YES];
         }
     }
 }
@@ -119,13 +138,13 @@ typedef NS_ENUM(BOOL, MCStatus) {
     [request setPredicate:[NSPredicate predicateWithFormat:@"owner = %@", _thisPerson]];
     NSSortDescriptor *sd = [NSSortDescriptor sortDescriptorWithKey:@"emailAddress" ascending:YES];
     [request setSortDescriptors:@[sd]];
-    dataController = [[NSFetchedResultsController alloc] initWithFetchRequest:request managedObjectContext:context sectionNameKeyPath:nil cacheName:nil];
+    _dataController = [[NSFetchedResultsController alloc] initWithFetchRequest:request managedObjectContext:context sectionNameKeyPath:nil cacheName:nil];
 }
 
 - (void)performFetch
 {
     NSError *error = nil;
-    [dataController performFetch:&error];
+    [_dataController performFetch:&error];
     if (error) {
         NSLog(@"Something went wrong fetching email addresses: %@", error);
     }
@@ -133,8 +152,8 @@ typedef NS_ENUM(BOOL, MCStatus) {
 
 - (void)prepareEmailFieldAsSelector
 {
-    NSUInteger indexOfDefaultEmailAddress = [[dataController fetchedObjects] indexOfObject:[_thisPerson getDefaultEmailAddressObject]];
-    if (indexOfDefaultEmailAddress < [[dataController fetchedObjects] count]) {
+    NSUInteger indexOfDefaultEmailAddress = [[_dataController fetchedObjects] indexOfObject:[_thisPerson getDefaultEmailAddressObject]];
+    if (indexOfDefaultEmailAddress < [[_dataController fetchedObjects] count]) {
         CGRect toolbarRect = CGRectMake(0, 0, [[self view] bounds].size.width, 44);
         UIToolbar *inputAccessoryPickerView = [[UIToolbar alloc] initWithFrame:toolbarRect];
         UIBarButtonItem *cancelButton = [[UIBarButtonItem alloc] initWithBarButtonSystemItem:UIBarButtonSystemItemCancel
@@ -148,16 +167,16 @@ typedef NS_ENUM(BOOL, MCStatus) {
                                                                                     action:@selector(doneEmailPicker:)];
         NSArray *buttonArray = @[cancelButton, flexButton, doneButton];
         [inputAccessoryPickerView setItems:buttonArray animated:YES];
-        if (!emailSelectionFromAddressBookPickerView) {
-            emailSelectionFromAddressBookPickerView = [[UIPickerView alloc] init];
-            [emailSelectionFromAddressBookPickerView setDelegate:self];
-            [emailSelectionFromAddressBookPickerView setDataSource:self];
-            [emailSelectionFromAddressBookPickerView setShowsSelectionIndicator:YES];
+        if (!_emailSelectionFromAddressBookPickerView) {
+            _emailSelectionFromAddressBookPickerView = [[UIPickerView alloc] init];
+            [_emailSelectionFromAddressBookPickerView setDelegate:self];
+            [_emailSelectionFromAddressBookPickerView setDataSource:self];
+            [_emailSelectionFromAddressBookPickerView setShowsSelectionIndicator:YES];
         }
-        [emailField setInputView:emailSelectionFromAddressBookPickerView];
-        [emailField setInputAccessoryView:inputAccessoryPickerView];
+        [_emailField setInputView:_emailSelectionFromAddressBookPickerView];
+        [_emailField setInputAccessoryView:inputAccessoryPickerView];
         
-        [emailSelectionFromAddressBookPickerView selectRow:indexOfDefaultEmailAddress inComponent:0 animated:YES];
+        [_emailSelectionFromAddressBookPickerView selectRow:indexOfDefaultEmailAddress inComponent:0 animated:YES];
         UIToolbar *inputAccossoryNumberPad = [[UIToolbar alloc] initWithFrame:toolbarRect];
         cancelButton = [[UIBarButtonItem alloc] initWithBarButtonSystemItem:UIBarButtonSystemItemCancel
                                                                      target:self
@@ -167,7 +186,7 @@ typedef NS_ENUM(BOOL, MCStatus) {
                                                                    action:@selector(doneNumberPad:)];
         [inputAccossoryNumberPad setItems:@[cancelButton, flexButton, doneButton] animated:YES];
     } else {
-        isSelectEmail = NO;
+        _isSelectEmail = NO;
     }
 }
 
@@ -176,15 +195,15 @@ typedef NS_ENUM(BOOL, MCStatus) {
 - (void)fillTheScreenWithInitialData
 {
     // Should be execute on the mainThread.
-    [firstNameField setText:[_thisPerson firstName]];
-    [lastNameField setText:[_thisPerson lastName]];
+    [_firstNameField setText:[_thisPerson firstName]];
+    [_lastNameField setText:[_thisPerson lastName]];
     MCEmailAddress *emailAddress = [MCEmailAddress fetchEmailAddressFor:_thisPerson];
-    [emailField setText:[emailAddress emailAddress]];
+    [_emailField setText:[emailAddress emailAddress]];
     _pictureView.image = _thisPerson.picture;
     if ([[_thisPerson emailAddress] count] < 2) {
-        [selectEmailAddressButton setHidden:YES];
+        [_selectEmailAddressButton setHidden:YES];
     } else {
-        [selectEmailAddressButton setHidden:NO];
+        [_selectEmailAddressButton setHidden:NO];
     }
 }
 
@@ -205,14 +224,14 @@ typedef NS_ENUM(BOOL, MCStatus) {
     
     if (!_thisPerson) {
         // A new person object will be delivered
-        thisPersonHasPaidSomething = NO;
+        _thisPersonHasPaidSomething = NO;
     } else if ([_tonightsBill hasPersonPaidSomething:_thisPerson]) { // Check to see if thisPerson has paid something.
-        thisPersonHasPaidSomething = YES;
+        _thisPersonHasPaidSomething = YES;
     } else {
-        thisPersonHasPaidSomething = NO;
+        _thisPersonHasPaidSomething = NO;
     }
     
-    isSelectEmail = NO;
+    _isSelectEmail = NO;
 }
 
 - (void)viewWillAppear:(BOOL)animated
@@ -221,17 +240,17 @@ typedef NS_ENUM(BOOL, MCStatus) {
     
     [[self navigationController] setToolbarHidden:YES animated:YES];
     
-    if (!twoLabelTitleView) {
-        twoLabelTitleView = [[NSBundle mainBundle] loadNibNamed:@"MCTwoLabelsTitleView" owner:self options:nil][0];
+    if (!_twoLabelTitleView) {
+        _twoLabelTitleView = [[NSBundle mainBundle] loadNibNamed:@"MCTwoLabelsTitleView" owner:self options:nil][0];
         if (isNew) {
-            [[twoLabelTitleView mainLabel] setText:NSLocalizedString(@"NEW_PERSON_HEADER", @"Header in the personView which state new person.")];
-            [[twoLabelTitleView subLabel] setText:NSLocalizedString(@"NEW_PERSON_SUBHEADER", @"Sub header in the personView which states add new data")];
+            [[_twoLabelTitleView mainLabel] setText:NSLocalizedString(@"NEW_PERSON_HEADER", @"Header in the personView which state new person.")];
+            [[_twoLabelTitleView subLabel] setText:NSLocalizedString(@"NEW_PERSON_SUBHEADER", @"Sub header in the personView which states add new data")];
         } else {
-            [[twoLabelTitleView mainLabel] setText:NSLocalizedString(@"EXISTING_PERSON_HEADER", @"Header in the personView which states person")];
-            [[twoLabelTitleView subLabel] setText:NSLocalizedString(@"EXISTING_PERSON_SUBHEADER", @"Sub header in the personView which state edit data")];
+            [[_twoLabelTitleView mainLabel] setText:NSLocalizedString(@"EXISTING_PERSON_HEADER", @"Header in the personView which states person")];
+            [[_twoLabelTitleView subLabel] setText:NSLocalizedString(@"EXISTING_PERSON_SUBHEADER", @"Sub header in the personView which state edit data")];
         }
 
-        [[self navigationItem] setTitleView:twoLabelTitleView];
+        [[self navigationItem] setTitleView:_twoLabelTitleView];
     }
     
     [self performFetch];
@@ -242,19 +261,6 @@ typedef NS_ENUM(BOOL, MCStatus) {
     
     // Dismiss the keyboard on backgroundtap.
     [self startResigningFirstResponderOnBackgroundTap];
-}
-
-- (void)viewDidAppear:(BOOL)animated
-{
-    [super viewDidAppear:animated];
-    
-//    id<GAITracker> tracker = [[GAI sharedInstance] defaultTracker];
-//    if (isNew) {
-//        [tracker set:kGAIScreenName value:@"MCPersonNewView_iPhone"];
-//    } else {
-//        [tracker set:kGAIScreenName value:@"MCPersonDetails_iPhone"];
-//    }
-//    [tracker send:[[GAIDictionaryBuilder createAppView] build]];
 }
 
 - (void)viewDidDisappear:(BOOL)animated
@@ -301,44 +307,44 @@ typedef NS_ENUM(BOOL, MCStatus) {
 
 - (void)textFieldDidBeginEditing:(UITextField *)textField
 {
-    if (textField == emailField) {
-        if (isSelectEmail) {
+    if (textField == _emailField) {
+        if (_isSelectEmail) {
             [self prepareEmailFieldAsSelector];
         } else {
-            [emailField setInputView:nil];
-            [emailField setInputAccessoryView:nil];
+            [_emailField setInputView:nil];
+            [_emailField setInputAccessoryView:nil];
         }
     }
 }
 
 - (void)textFieldDidEndEditing:(UITextField *)textField
 {
-    if (textField == firstNameField) {
-        [_thisPerson setFirstName:[firstNameField text]];
+    if (textField == _firstNameField) {
+        [_thisPerson setFirstName:[_firstNameField text]];
         NSDate *nu = [NSDate date];
         [_tonightsBill setDateModified:nu];
         [_thisPerson setDateModified:nu];
-    } else if (textField == lastNameField) {
-        [_thisPerson setLastName:[lastNameField text]];
+    } else if (textField == _lastNameField) {
+        [_thisPerson setLastName:[_lastNameField text]];
         NSDate *nu = [NSDate date];
         [_tonightsBill setDateModified:nu];
         [_thisPerson setDateModified:nu];
-    } else if (textField == emailField) {
-        if (!isSelectEmail) {
-            [emailField setInputView:nil];
-            [emailField setInputAccessoryView:nil];
+    } else if (textField == _emailField) {
+        if (!_isSelectEmail) {
+            [_emailField setInputView:nil];
+            [_emailField setInputAccessoryView:nil];
             if (isNew) {
-                [_thisPerson addOneEmailAddressFromAString:[emailField text]];
+                [_thisPerson addOneEmailAddressFromAString:[_emailField text]];
             } else {
                 MCEmailAddress *defaultEmail = [_thisPerson getDefaultEmailAddressObject];
                 if (!defaultEmail) {
-                    [_thisPerson addOneEmailAddressFromAString:[emailField text]];
+                    [_thisPerson addOneEmailAddressFromAString:[_emailField text]];
                 } else {
-                    [defaultEmail setEmailAddress:[emailField text]];
+                    [defaultEmail setEmailAddress:[_emailField text]];
                 }
             }
         }
-        isSelectEmail = NO;
+        _isSelectEmail = NO;
         NSDate *nu = [NSDate date];
         [_tonightsBill setDateModified:nu];
         [_thisPerson setDateModified:nu];
@@ -347,21 +353,21 @@ typedef NS_ENUM(BOOL, MCStatus) {
 
 - (BOOL)textFieldShouldReturn:(UITextField *)textField
 {
-    if (textField == firstNameField) {
-        [firstNameField resignFirstResponder];
+    if (textField == _firstNameField) {
+        [_firstNameField resignFirstResponder];
         return YES;
-    } else if (textField == lastNameField) {
-        [lastNameField resignFirstResponder];
+    } else if (textField == _lastNameField) {
+        [_lastNameField resignFirstResponder];
         return YES;
-    } else if (textField == emailField) {
-        if ([MCTools isStringAnEmailAddress:[emailField text]]) {
+    } else if (textField == _emailField) {
+        if ([MCTools isStringAnEmailAddress:[_emailField text]]) {
             _emailAddressStringInTextField = validStatus;
-            [emailField setTextColor:[UIColor blackColor]];
-            [emailField resignFirstResponder];
+            [_emailField setTextColor:[UIColor blackColor]];
+            [_emailField resignFirstResponder];
             return YES;
         } else {
             _emailAddressStringInTextField = invalidStatus;
-            [emailField setTextColor:[UIColor redColor]];
+            [_emailField setTextColor:[UIColor redColor]];
         }
     }
     return NO;
@@ -371,14 +377,14 @@ typedef NS_ENUM(BOOL, MCStatus) {
 
 - (NSString *)pickerView:(UIPickerView *)pickerView titleForRow:(NSInteger)row forComponent:(NSInteger)component
 {
-    MCEmailAddress *emailAddressObject = [dataController fetchedObjects][row];
+    MCEmailAddress *emailAddressObject = [_dataController fetchedObjects][row];
     return [emailAddressObject emailAddress];
 }
 
 - (void)pickerView:(UIPickerView *)pickerView didSelectRow:(NSInteger)row inComponent:(NSInteger)component
 {
-    MCEmailAddress *pickedEmailAddress = [dataController fetchedObjects][row];
-    [emailField setText:[pickedEmailAddress emailAddress]];
+    MCEmailAddress *pickedEmailAddress = [_dataController fetchedObjects][row];
+    [_emailField setText:[pickedEmailAddress emailAddress]];
 }
 
 #pragma mark - UIPickerViewDataSource
@@ -391,7 +397,7 @@ typedef NS_ENUM(BOOL, MCStatus) {
 - (NSInteger)pickerView:(UIPickerView *)pickerView numberOfRowsInComponent:(NSInteger)component
 {
     if (kABAuthorizationStatusAuthorized == ABAddressBookGetAuthorizationStatus()) {
-        return [[dataController fetchedObjects] count];
+        return [[_dataController fetchedObjects] count];
     } else {
         return 1;
     }
@@ -417,7 +423,7 @@ typedef NS_ENUM(BOOL, MCStatus) {
 - (void)receiveANewPersonFromAddressBook:(MCPerson *)newPerson
 {
 //    didSomethingChange = YES;
-    [emailSelectionFromAddressBookPickerView reloadComponent:0];
+    [_emailSelectionFromAddressBookPickerView reloadComponent:0];
 }
 
 @end

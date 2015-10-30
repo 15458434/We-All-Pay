@@ -338,8 +338,12 @@ NSInteger const maxPageIndex = 1;
     _writableTonightsBill = [userInfo objectForKey:MCwritableTonightsBillKey];
     NSManagedObjectID *tonightsBillID = [_writableTonightsBill objectID];
     NSManagedObjectContext *mainContext = [[MCWeAllPayStoreController defaultStore] mainThreadContext];
+    __weak typeof(self) weakSelf = self;
     [mainContext performBlock:^{
-        _tonightsBill = (MCSharedBill *)[mainContext objectWithID:tonightsBillID];
+        typeof(self) strongSelf = weakSelf;
+        if (strongSelf) {
+            strongSelf.tonightsBill = (MCSharedBill *)[mainContext objectWithID:tonightsBillID];
+        }
     }];
     NSLog(@"WritableTonightsBillIsCreated has been executed.");
 }

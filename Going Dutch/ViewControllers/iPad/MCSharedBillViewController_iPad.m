@@ -139,11 +139,7 @@
     //    [[peoplePicker viewControllers][0] setEdgesForExtendedLayout:UIRectEdgeNone];
     [peoplePicker setModalPresentationStyle:UIModalPresentationFormSheet];
     
-    [[self navigationController] presentViewController:peoplePicker animated:YES completion:^{
-        //        id<GAITracker> tracker = [[GAI sharedInstance] defaultTracker];
-        //        [tracker set:kGAIScreenName value:@"Peoplepicker_iPad"];
-        //        [tracker send:[[GAIDictionaryBuilder createAppView] build]];
-    }];
+    [[self navigationController] presentViewController:peoplePicker animated:YES completion:nil];
 }
 
 - (void)showContactsDisabledMessage
@@ -332,11 +328,7 @@
             [destination setDismissMe:^{
                 MCSharedBillViewController_iPad *strongSelf = weakSelf;
                 if (strongSelf) {
-                    [weakSelf dismissViewControllerAnimated:YES completion:^{
-//                        id<GAITracker> tracker = [[GAI sharedInstance] defaultTracker];
-//                        [tracker set:kGAIScreenName value:@"MCSharedBillMainViewController_iPad"];
-//                        [tracker send:[[GAIDictionaryBuilder createAppView] build]];
-                    }];
+                    [weakSelf dismissViewControllerAnimated:YES completion:nil];
                 }
             }];
         }

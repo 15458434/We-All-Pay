@@ -27,7 +27,7 @@
                                         <color key="titleShadowColor" white="0.5" alpha="1" colorSpace="calibratedWhite"/>
                                     </state>
                                     <connections>
-                                        <segue destination="Ltx-xd-qSj" kind="push" identifier="newTonightsBill" id="9a8-44-zBn"/>
+                                        <segue destination="Ltx-xd-qSj" kind="show" identifier="newTonightsBill" id="9a8-44-zBn"/>
                                     </connections>
                                 </button>
                             </subviews>
@@ -111,7 +111,7 @@
                                     <outlet property="totalCostLabel" destination="PB8-pK-prC" id="21C-gP-gGS"/>
                                     <outlet property="tripLabel" destination="4gi-jX-9d6" id="bGa-aJ-WLo"/>
                                     <outlet property="waitingForXRatesIndicator" destination="e3M-J8-W8E" id="3Sz-Wl-5xG"/>
-                                    <segue destination="Ltx-xd-qSj" kind="push" identifier="openTonightsBill" id="C0F-pM-cfm"/>
+                                    <segue destination="Ltx-xd-qSj" kind="show" identifier="openTonightsBill" id="C0F-pM-cfm"/>
                                 </connections>
                             </tableViewCell>
                         </prototypes>
@@ -1584,7 +1584,7 @@
     </resources>
     <inferredMetricsTieBreakers>
         <segue reference="ibz-Jf-X0h"/>
-        <segue reference="C0F-pM-cfm"/>
         <segue reference="6AC-aI-bIB"/>
+        <segue reference="C0F-pM-cfm"/>
     </inferredMetricsTieBreakers>
 </document>

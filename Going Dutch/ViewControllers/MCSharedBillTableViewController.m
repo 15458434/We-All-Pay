@@ -38,9 +38,6 @@
 
 @implementation MCSharedBillTableViewController
 
-@synthesize didSomethingChange;
-@synthesize mailDelegate;
-
 #pragma mark - Actions
 
 - (IBAction)solveButtonPressed:(id)sender {
@@ -435,7 +432,7 @@
             [[[segue destinationViewController] viewControllers][0] setTonightsBill:_tonightsBill];
         }
         if ([[[segue destinationViewController] viewControllers][0] respondsToSelector:@selector(setSendMailObject:)]) {
-            [[[segue destinationViewController] viewControllers][0] setSendMailObject:[self mailDelegate]];
+            [[[segue destinationViewController] viewControllers][0] setSendMailObject:_mailDelegate];
         }
         
         if ([[[segue destinationViewController] viewControllers][0] respondsToSelector:@selector(setThisPayment:)]) {

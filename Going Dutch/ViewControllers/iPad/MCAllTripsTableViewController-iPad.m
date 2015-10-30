@@ -44,13 +44,13 @@
 {
     if (![[_dataController fetchedObjects] count] == 0) {
         [UIView animateWithDuration:1.0 animations:^{
-            [[emptyMessage bigMessage] setAlpha:0.0];
+            [[_emptyMessage bigMessage] setAlpha:0.0];
             [[self tableView] setSeparatorStyle:UITableViewCellSeparatorStyleSingleLine];
         } completion:nil];
     } else {
-        if ([[emptyMessage bigMessage] alpha] < 1.0) {
+        if ([[_emptyMessage bigMessage] alpha] < 1.0) {
             [UIView animateWithDuration:1.0 animations:^{
-                [[emptyMessage bigMessage] setAlpha:1.0];
+                [[_emptyMessage bigMessage] setAlpha:1.0];
                 [[self tableView] setSeparatorStyle:UITableViewCellSeparatorStyleNone];
             } completion:nil];
         }
@@ -61,13 +61,13 @@
 {
     if (![[_dataController fetchedObjects] count] == 0) {
         [UIView animateWithDuration:0.0 animations:^{
-            [[emptyMessage bigMessage] setAlpha:0.0];
+            [[_emptyMessage bigMessage] setAlpha:0.0];
             [[self tableView] setSeparatorStyle:UITableViewCellSeparatorStyleSingleLine];
         } completion:nil];
     } else {
-        if ([[emptyMessage bigMessage] alpha] < 1.0) {
+        if ([[_emptyMessage bigMessage] alpha] < 1.0) {
             [UIView animateWithDuration:0.0 animations:^{
-                [[emptyMessage bigMessage] setAlpha:1.0];
+                [[_emptyMessage bigMessage] setAlpha:1.0];
                 [[self tableView] setSeparatorStyle:UITableViewCellSeparatorStyleNone];
             } completion:nil];
         }
@@ -94,9 +94,9 @@
     
     [self startRespondingToStoreChangeNotifications];
     
-    emptyMessage = [[NSBundle mainBundle] loadNibNamed:@"MCTableEmptyMessage_iPad" owner:self options:nil][0];
-    [[emptyMessage bigMessage] setAlpha:0.0];
-    [[self tableView] setBackgroundView:emptyMessage];
+    _emptyMessage = [[NSBundle mainBundle] loadNibNamed:@"MCTableEmptyMessage_iPad" owner:self options:nil][0];
+    [[_emptyMessage bigMessage] setAlpha:0.0];
+    [[self tableView] setBackgroundView:_emptyMessage];
     
     [self setNeedsStatusBarAppearanceUpdate];
 }
@@ -116,15 +116,6 @@
             [self setEmptyMessage];
         }
     }
-}
-
-- (void)viewDidAppear:(BOOL)animated
-{
-    [super viewDidAppear:animated];
-    
-//    id<GAITracker> tracker = [[GAI sharedInstance] defaultTracker];
-//    [tracker set:kGAIScreenName value:@"AllTripsViewController_iPad"];
-//    [tracker send:[[GAIDictionaryBuilder createAppView] build]];
 }
 
 - (void)viewWillDisappear:(BOOL)animated
@@ -266,12 +257,12 @@
     }
     
     // fill extraLabel with dateModified.
-    if (!df) {
-        df = [[NSDateFormatter alloc] init];
-        [df setDateStyle:NSDateFormatterFullStyle];
+    if (!_df) {
+        _df = [[NSDateFormatter alloc] init];
+        [_df setDateStyle:NSDateFormatterFullStyle];
         // [df setTimeStyle:NSDateFormatterShortStyle];
     }
-    [[allTripsTableViewCell extraLabel] setText:[df stringFromDate:[thisTrip dateModified]]];
+    [[allTripsTableViewCell extraLabel] setText:[_df stringFromDate:[thisTrip dateModified]]];
     
     return allTripsTableViewCell;
 }

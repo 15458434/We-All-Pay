@@ -101,7 +101,7 @@
     self = [super init];
     if (self) {
         _delegate = newDelegate;
-        viewController = newViewController;
+        _viewController = newViewController;
     }
     return self;
 }
@@ -115,18 +115,15 @@
 
 - (void)peoplePickerNavigationControllerDidCancel:(ABPeoplePickerNavigationController *)peoplePicker
 {
-    [viewController dismissViewControllerAnimated:YES completion:^{
-//        id<GAITracker> tracker = [[GAI sharedInstance] defaultTracker];
-//        [tracker set:kGAIScreenName value:@"MCSharedBillMainViewController_iPad"];
-//        [tracker send:[[GAIDictionaryBuilder createAppView] build]];
-    }];
+    
+    [_viewController dismissViewControllerAnimated:YES completion:nil];
 }
 
 #if __IPHONE_OS_VERSION_MAX_ALLOWED >= 80000
 - (void)peoplePickerNavigationController:(ABPeoplePickerNavigationController *)peoplePicker didSelectPerson:(ABRecordRef)person
 {
     // iOS 8 code
-    [viewController dismissViewControllerAnimated:YES completion:^{
+    [_viewController dismissViewControllerAnimated:YES completion:^{
         [_delegate receiveANewPersonFromAddressBook:_thisPerson];
     }];
     [self importPersonDataAndSave:person];
@@ -137,13 +134,7 @@
 {
     // iOS 7 code
 #if __IPHONE_OS_VERSION_MAX_ALLOWED >= 70000
-    [viewController dismissViewControllerAnimated:YES completion:^{
-//        [[[viewController navigationItem] rightBarButtonItem] setEnabled:YES];
-//        [delegate receiveANewPersonFromAddressBook:thisPerson];
-//        id<GAITracker> tracker = [[GAI sharedInstance] defaultTracker];
-//        [tracker set:kGAIScreenName value:@"MCSharedBillMainViewController_iPad"];
-//        [tracker send:[[GAIDictionaryBuilder createAppView] build]];
-    }];
+    [_viewController dismissViewControllerAnimated:YES completion:nil];
     [self importPersonDataAndSave:person];
 #endif
     return NO;

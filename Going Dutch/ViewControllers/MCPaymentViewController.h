@@ -34,25 +34,6 @@ typedef NS_ENUM(NSUInteger, MCMoneyValueFieldDismissStatus) {
 @end
 
 @interface MCPaymentViewController : UITableViewController <UIPickerViewDataSource, UIPickerViewDelegate, UITextFieldDelegate, NSFetchedResultsControllerDelegate, MCThisPaymentProtocol, MCPathComponentsToOpenProtocol>
-{
-    UIBarButtonItem *theDoneButton;
-    UIBarButtonItem *cancelChangesForEntirePaymentButton;
-    MCTwoLabelsTitleView *twoLabelTitleView;
-    
-    __weak IBOutlet UITextField *payerNameField;
-    MCPerson *payerViewPerson;
-    __weak IBOutlet UITextField *itemView;
-    __weak IBOutlet UITextField *paidView;
-    NSNumber *paidViewNumber;
-    
-    UIPickerView *personPickerView;
-    NSArray<MCPerson *> *listOfPeople;
-    BOOL peoplePickerCancelled;
-    MCMoneyValueFieldDismissStatus kindOfPaidFieldDismiss;
-    
-    NSArray *_paymentPresenceArray;
-    NSFetchedResultsController *_dataController;
-}
 
 @property (nonatomic, strong) MCPayment *thisPayment;
 @property (nonatomic, strong) MCSharedBill *tonightsBill;

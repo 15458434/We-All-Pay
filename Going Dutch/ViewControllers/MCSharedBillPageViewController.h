@@ -6,6 +6,7 @@
 //  Copyright (c) 2013 Mark Cornelisse. All rights reserved.
 //
 
+@import Foundation;
 @import UIKit;
 
 #import "MCTonightsBillTransfer.h"
@@ -24,9 +25,7 @@
 @end
 
 @interface MCSharedBillPageViewController : UIPageViewController <UIPageViewControllerDataSource, UIPageViewControllerDelegate, UIAlertViewDelegate, MCTonightsBillTitleDelegate, MCIsEditingProtocol>
-{
-    NSUInteger newPageNumber;
-}
+
 @property (nonatomic, strong) MCSharedBillTableViewController *sharedBillTableViewController;
 @property (nonatomic, strong) MCEditTripViewController *editTripTableViewController;
 @property (weak, nonatomic) IBOutlet UIPageControl *pageControl;

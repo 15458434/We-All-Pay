@@ -59,13 +59,13 @@
 {
     if (![[_dataController fetchedObjects] count] == 0) {
         [UIView animateWithDuration:1.0 animations:^{
-            [[emptyMessage bigMessage] setAlpha:0.0];
+            [[_emptyMessage bigMessage] setAlpha:0.0];
             [[self tableView] setSeparatorStyle:UITableViewCellSeparatorStyleSingleLine];
         } completion:nil];
     } else {
-        if ([[emptyMessage bigMessage] alpha] < 1.0) {
+        if ([[_emptyMessage bigMessage] alpha] < 1.0) {
             [UIView animateWithDuration:1.0 animations:^{
-                [[emptyMessage bigMessage] setAlpha:1.0];
+                [[_emptyMessage bigMessage] setAlpha:1.0];
                 [[self tableView] setSeparatorStyle:UITableViewCellSeparatorStyleNone];
             } completion:nil];
         }
@@ -76,13 +76,13 @@
 {
     if (![[_dataController fetchedObjects] count] == 0) {
         [UIView animateWithDuration:0.0 animations:^{
-            [[emptyMessage bigMessage] setAlpha:0.0];
+            [[_emptyMessage bigMessage] setAlpha:0.0];
             [[self tableView] setSeparatorStyle:UITableViewCellSeparatorStyleSingleLine];
         } completion:nil];
     } else {
-        if ([[emptyMessage bigMessage] alpha] < 1.0) {
+        if ([[_emptyMessage bigMessage] alpha] < 1.0) {
             [UIView animateWithDuration:0.0 animations:^{
-                [[emptyMessage bigMessage] setAlpha:1.0];
+                [[_emptyMessage bigMessage] setAlpha:1.0];
                 [[self tableView] setSeparatorStyle:UITableViewCellSeparatorStyleNone];
             } completion:nil];
         }
@@ -103,10 +103,10 @@
     
     [self startRespondingToStoreChangeNotifications];
     
-    emptyMessage = [[NSBundle mainBundle] loadNibNamed:@"MCTableEmptyMessage_iPad" owner:self options:nil][0];
-    [[emptyMessage bigMessage] setText:NSLocalizedString(@"EMPTY_PAYMENT_LIST_MESSAGE", @"Press \"add payment\" to add a payment to this event.")];
-    [[emptyMessage bigMessage] setAlpha:0.0];
-    [[self tableView] setBackgroundView:emptyMessage];
+    _emptyMessage = [[NSBundle mainBundle] loadNibNamed:@"MCTableEmptyMessage_iPad" owner:self options:nil][0];
+    [[_emptyMessage bigMessage] setText:NSLocalizedString(@"EMPTY_PAYMENT_LIST_MESSAGE", @"Press \"add payment\" to add a payment to this event.")];
+    [[_emptyMessage bigMessage] setAlpha:0.0];
+    [[self tableView] setBackgroundView:_emptyMessage];
 }
 
 - (void)viewWillAppear:(BOOL)animated
@@ -322,19 +322,6 @@
         if ([destination conformsToProtocol:@protocol(MCTonightsBillTransfer)]) {
             [destination setTonightsBill:_tonightsBill];
         }
-//        if ([destination conformsToProtocol:@protocol(MCDismissMeBlockProtocol)]) {
-//            __weak MCSharedBillPaymentsTableViewController_iPad *weakSelf = self;
-//            [destination setDismissMe:^{
-//                __strong MCSharedBillPaymentsTableViewController_iPad *strongSelf = weakSelf;
-//                if (strongSelf) {
-//                    [[strongSelf tableView] deselectRowAtIndexPath:ip animated:YES];
-//                    
-////                    id<GAITracker> tracker = [[GAI sharedInstance] defaultTracker];
-////                    [tracker set:kGAIScreenName value:@"MCSharedBillMainViewController_iPad"];
-////                    [tracker send:[[GAIDictionaryBuilder createAppView] build]];
-//                }
-//            }];
-//        }
         [[self tableView] deselectRowAtIndexPath:ip animated:YES];
     }
 }
