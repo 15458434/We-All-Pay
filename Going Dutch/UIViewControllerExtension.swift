@@ -10,7 +10,7 @@ import UIKit
 
 public extension UIViewController {
     func startResigningFirstResponderOnBackgroundTap() {
-        // Make sure a tap in the background dimisses the keyboard as well.
+        // Make sure a tap in the background dismisses the keyboard as well.
         let thatTickles = UITapGestureRecognizer(target: self, action: "tappedInTheBackground")
         thatTickles.cancelsTouchesInView = true
         view.addGestureRecognizer(thatTickles)

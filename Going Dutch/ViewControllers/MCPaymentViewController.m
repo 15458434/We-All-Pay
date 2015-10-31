@@ -417,7 +417,7 @@ typedef NS_ENUM(BOOL, ChildViewOpened) {
     [inputAccossoryNumberPad setItems:@[cancelButton, flexButton, _theDoneButton] animated:YES];
     [_paidView setInputAccessoryView:inputAccossoryNumberPad];
     
-    // Make sure a tap in the background dimisses the keyboard as well.
+    // Make sure a tap in the background dismisses the keyboard as well.
     UITapGestureRecognizer *thatTickles = [[UITapGestureRecognizer alloc] initWithTarget:self action:@selector(tappedInTheBackground:)];
     [thatTickles setCancelsTouchesInView:YES];
     [[self tableView] addGestureRecognizer:thatTickles];

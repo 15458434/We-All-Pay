@@ -122,7 +122,7 @@ typedef NS_ENUM(BOOL, MCStatus) {
     _mainCancelPressed = cancelIsNotPressed;
     [[MCWeAllPayStoreController defaultStore] beginUndoGroup];
     
-    // Make sure a tap in the background dimisses the keyboard as well.
+    // Make sure a tap in the background dismisses the keyboard as well.
     UITapGestureRecognizer *thatTickles = [[UITapGestureRecognizer alloc] initWithTarget:self action:@selector(tappedInTheBackground:)];
     [thatTickles setCancelsTouchesInView:NO];
     [[self tableView] addGestureRecognizer:thatTickles];
