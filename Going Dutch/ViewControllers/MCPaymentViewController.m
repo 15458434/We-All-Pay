@@ -563,12 +563,9 @@ typedef NS_ENUM(BOOL, ChildViewOpened) {
     [[cell nameLabel] setText:[[thisCellsPresence person] getFullName]];
     cell.personView.image = thisCellsPresence.person.thumbnail;
     [[cell isPresentSwitch] setOn:[[thisCellsPresence isPersonPresent] boolValue]];
-//    NSString *owesPreString = NSLocalizedString(@"OWES_FROM_THIS_PAYMENT", @"owes");
     CurrencyFormatter *cf = [[CurrencyFormatter alloc] initWithCurrencyCode:thisCellsPresence.payment.currency.code];
     NSNumber *averageOwe = @(-thisCellsPresence.averageOweFromPayment.doubleValue);
     cell.owesLabel.text = [cf stringForObjectValue:averageOwe];
-//    NSString *owesString = [NSString stringWithFormat:@"%@ %@", owesPreString, [thisCellsPresence getCurrencyStringOfAverageOwe]];
-//    [[cell owesLabel] setText:owesString];
     [cell setThisCellsPaymentPresence:thisCellsPresence];
     
     // Set the cell alignment to headerView stuff
