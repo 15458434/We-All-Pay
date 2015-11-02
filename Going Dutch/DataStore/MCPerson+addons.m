@@ -39,13 +39,6 @@
     [[delPerson managedObjectContext] deleteObject:delPerson];
 }
 
-+ (MCPerson *)fetchPersonWithUniqueId:(NSString *)uuid
-{
-    NSLog(@"fetchPersonWithUniqueId: Has not been implemented yet.");
-    abort();
-    return nil;
-}
-
 + (BOOL)isTableInDatabaseEmpty
 {
     NSManagedObjectContext *context = [[MCWeAllPayStoreController defaultStore] mainThreadContext];

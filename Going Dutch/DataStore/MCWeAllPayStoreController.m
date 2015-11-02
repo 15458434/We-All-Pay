@@ -125,19 +125,6 @@ MCiCloudUse const isiCloudUsed = iCloudIsNotUsed;
     }];
 }
 
-- (BOOL)isDocumentStateNormal
-{
-#if DEBUG
-    NSLog(@"Warning: isDocumentStateNormal should not be executed.");
-    abort();
-#endif
-    if ([weAllPayStoreDocument documentState] == UIDocumentStateNormal) {
-        return YES;
-    } else {
-        return NO;
-    }
-}
-
 #pragma mark - Undomanager stuff.
 
 - (void)beginUndoGroup

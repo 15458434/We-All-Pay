@@ -309,11 +309,8 @@ NSInteger const maxPageIndex = 1;
     }
 }
 
-- (void) setTonightsBill:(MCSharedBill *)tonightsBill
+- (void) setTonightsBill:(MCSharedBill  * _Nonnull )tonightsBill
 {
-    if (!tonightsBill) {
-        abort();
-    }
     [self willChangeValueForKey:@"tonightsBill"];
     _tonightsBill = tonightsBill;
     [self didChangeValueForKey:@"tonightsBill"];
