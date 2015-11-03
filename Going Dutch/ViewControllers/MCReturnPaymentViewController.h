@@ -26,6 +26,4 @@
 - (IBAction)sendAsEmailButtonPressed:(id)sender;
 - (IBAction)mainCancelButtonPressed:(id)sender;
 
-- (id)initWithBill:(MCSharedBill *)thisBill;
-
 @end

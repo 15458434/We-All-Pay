@@ -184,20 +184,6 @@ typedef NS_ENUM(BOOL, MCXRatesMissing) {
 
 #pragma mark - New in this Class
 
-- (id)initWithBill:(MCSharedBill *)thisBill
-{
-    self = [super initWithStyle:UITableViewStyleGrouped];
-    
-    if (self) {
-        if (!thisBill) {
-            @throw [NSException exceptionWithName:@"InitWithNil" reason:@"thisBill is not allowed to point to nil." userInfo:nil];
-        }
-        _tonightsBill = thisBill;
-
-    }
-    return self;
-}
-
 - (void)setEmptyMessage
 {
     if (![_paymentsAfterwards count] == 0 || _emptyMessage.activityIndicator.isAnimating) {

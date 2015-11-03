@@ -71,17 +71,6 @@
     }
 }
 
-- (void)showWhoPaysWho:(id)sender
-{
-    NSLog(@"%d", [_tonightsBill doesEveryoneHaveAnEmailAddress]);
-    MCReturnPaymentViewController *rpvc = [[MCReturnPaymentViewController alloc] initWithBill:_tonightsBill];
-    UINavigationController *navController = [[UINavigationController alloc] initWithRootViewController:rpvc];
-    if ([[UIDevice currentDevice] userInterfaceIdiom] == UIUserInterfaceIdiomPad) {
-        [navController setModalPresentationStyle:UIModalPresentationFormSheet];
-    }
-    [[self navigationController] presentViewController:navController animated:YES completion:nil];
-}
-
 - (void)dismissEdit:(id)selector
 {
     NSLog(@"Mis");
