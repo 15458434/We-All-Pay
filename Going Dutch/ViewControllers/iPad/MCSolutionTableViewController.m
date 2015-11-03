@@ -110,24 +110,42 @@ typedef NS_ENUM(BOOL, MCXRatesMissing) {
 - (void)giveSolution
 {
     __weak typeof(self) weakSelf = self;
-    _solution = [_tonightsBill solveWhoHasToPayWhoFromThisBillWithCompletionBlock:^(NSArray *results) {
+    _solution = [_tonightsBill solveWhoHasToPayWhoFromThisBillWithHandler:^(NSArray *results, NSError *error) {
+        if (error) {
+            NSString *title = NSLocalizedString(@"Unable to fetch exchange rates", @"Title message of an alert that pops up when fetching exchange rates is impossible");
+            NSString *message = NSLocalizedString(@"Fetching exchange rates is not possible at this moment. Check your internet connection and/or hit solve to fetch all missing exchange rates at a later time", @"Message explaining what the user can do to refetch exchange rates");
+            NSString *dismissTitle = NSLocalizedString(@"Dismiss", @"Title of a button that dismisses an alert.");
+            
+            UIAlertController *alertController = [UIAlertController alertControllerWithTitle:title message:message preferredStyle:UIAlertControllerStyleAlert];
+            UIAlertAction *dismissAction = [UIAlertAction actionWithTitle:dismissTitle style:UIAlertActionStyleCancel handler:^(UIAlertAction * _Nonnull action) {
+                __strong typeof(weakSelf) strongSelf = weakSelf;
+                if (strongSelf) {
+                    [strongSelf.emptyMessage.activityIndicator stopAnimating];
+                    strongSelf.emptyMessage.bigMessage.text = nil;
+                }
+            }];
+            [alertController addAction:dismissAction];
+            [self presentViewController:alertController animated:YES completion:nil];
+            
+            return;
+        }
+        
         // Update tableView.
         __strong typeof(weakSelf) strongSelf = weakSelf;
         if (strongSelf) {
             strongSelf.areXRatesMissing = xRatesPresent;
             strongSelf.solution = results;
             
-            dispatch_async(dispatch_get_main_queue(), ^{
-                NSSortDescriptor *sortDescriptor = [NSSortDescriptor sortDescriptorWithKey:@"firstName" ascending:YES];
-                _peoplePresent = [[_tonightsBill peoplePresent] sortedArrayUsingDescriptors:@[sortDescriptor]];
-                
-                NSLog(@"Stop animating.");
-                [[[strongSelf emptyMessage] activityIndicator] stopAnimating];
-                [strongSelf setEmptyMessageNow];
-                [[strongSelf tableView] insertSections:[NSIndexSet indexSetWithIndexesInRange:NSMakeRange(0, 3)] withRowAnimation:UITableViewRowAnimationTop];
-            });
+            NSSortDescriptor *sortDescriptor = [NSSortDescriptor sortDescriptorWithKey:@"firstName" ascending:YES];
+            _peoplePresent = [[_tonightsBill peoplePresent] sortedArrayUsingDescriptors:@[sortDescriptor]];
+            
+            NSLog(@"Stop animating.");
+            [[[strongSelf emptyMessage] activityIndicator] stopAnimating];
+            [strongSelf setEmptyMessageNow];
+            [[strongSelf tableView] insertSections:[NSIndexSet indexSetWithIndexesInRange:NSMakeRange(0, 3)] withRowAnimation:UITableViewRowAnimationTop];
         }
     }];
+    
     if (!_solution) {
         NSLog(@"Start animating");
         [_emptyMessage.activityIndicator startAnimating];
@@ -138,15 +156,6 @@ typedef NS_ENUM(BOOL, MCXRatesMissing) {
 }
 
 #pragma mark - Inherited from super
-
-- (id)initWithStyle:(UITableViewStyle)style
-{
-    self = [super initWithStyle:style];
-    if (self) {
-        // Custom initialization
-    }
-    return self;
-}
 
 - (void)viewDidLoad
 {
@@ -159,6 +168,11 @@ typedef NS_ENUM(BOOL, MCXRatesMissing) {
     // self.navigationItem.rightBarButtonItem = self.editButtonItem;
 
     _emptyMessage = [[NSBundle mainBundle] loadNibNamed:@"MCTableEmptyMessage_iPad" owner:self options:nil][0];
+}
+
+- (void)viewWillAppear:(BOOL)animated
+{
+    [super viewWillAppear:animated];
     
     [self giveSolution];
     if ([_tonightsBill areAllExchangeRatesValid]) {
@@ -174,11 +188,6 @@ typedef NS_ENUM(BOOL, MCXRatesMissing) {
     [[_emptyMessage bigMessage] setText:NSLocalizedString(@"RETURNPAYMENTSVIEW_NOPAYMENTS", @"Please add payments and/or people if you want a solution on who owes who.")];
     [[self tableView] setBackgroundView:_emptyMessage];
     [self setEmptyMessageNow];
-}
-
-- (void)viewWillAppear:(BOOL)animated
-{
-    [super viewWillAppear:animated];
 }
 
 - (void)viewDidAppear:(BOOL)animated

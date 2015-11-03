@@ -26,7 +26,7 @@ typedef NS_ENUM(BOOL, MCXRatesMissing) {
 @interface MCReturnPaymentViewController () <UIAlertViewDelegate, MFMailComposeViewControllerDelegate>
 
 @property (nonatomic, strong) NSArray *peoplePresent;
-@property (nonatomic, strong) NSMutableArray *paymentsAfterwards;
+@property (nonatomic, strong) NSArray *solution;
 
 @property (nonatomic) MCXRatesMissing areXRatesMissing;
 @property (nonatomic, strong) UIAlertView *noXRatesAlert;
@@ -151,42 +151,57 @@ typedef NS_ENUM(BOOL, MCXRatesMissing) {
     [self presentViewController:_rateMeAlert animated:YES completion:nil];
 }
 
-- (NSArray *)giveSolution
+- (void)giveSolution
 {
     __weak typeof(self) weakSelf = self;
-    NSArray *directResults = [_tonightsBill solveWhoHasToPayWhoFromThisBillWithCompletionBlock:^(NSArray *results) {
+    _solution = [_tonightsBill solveWhoHasToPayWhoFromThisBillWithHandler:^(NSArray *results, NSError *error) {
+        if (error) {
+            NSString *title = NSLocalizedString(@"Unable to fetch exchange rates", @"Title message of an alert that pops up when fetching exchange rates is impossible");
+            NSString *message = NSLocalizedString(@"Fetching exchange rates is not possible at this moment. Check your internet connection and/or hit solve to fetch all missing exchange rates at a later time", @"Message explaining what the user can do to refetch exchange rates");
+            NSString *dismissTitle = NSLocalizedString(@"Dismiss", @"Title of a button that dismisses an alert.");
+            
+            UIAlertController *alertController = [UIAlertController alertControllerWithTitle:title message:message preferredStyle:UIAlertControllerStyleAlert];
+            UIAlertAction *dismissAction = [UIAlertAction actionWithTitle:dismissTitle style:UIAlertActionStyleCancel handler:^(UIAlertAction * _Nonnull action) {
+                __strong typeof(weakSelf) strongSelf = weakSelf;
+                if (strongSelf) {
+                    [strongSelf.emptyMessage.activityIndicator stopAnimating];
+                    strongSelf.emptyMessage.bigMessage.text = nil;
+                }
+            }];
+            [alertController addAction:dismissAction];
+            [self presentViewController:alertController animated:YES completion:nil];
+            return;
+        }
+        
         // Update tableView.
         __strong typeof(weakSelf) strongSelf = weakSelf;
         if (strongSelf) {
             strongSelf.areXRatesMissing = xRatesPresent;
+            strongSelf.solution = results;
 
-            // What the hell was I thinking during writing this???
-            strongSelf.paymentsAfterwards = [[NSMutableArray alloc] init];
-            for (MCReturnPayment *rp in results) {
-                if ([rp receiver]) {
-                    [[strongSelf paymentsAfterwards] addObject:rp];
-                }
-            }
-            dispatch_async(dispatch_get_main_queue(), ^{
-                NSLog(@"Stop animating.");
-                [[[strongSelf emptyMessage] activityIndicator] stopAnimating];
-                [strongSelf setEmptyMessage];
-                [[strongSelf tableView] insertSections:[NSIndexSet indexSetWithIndexesInRange:NSMakeRange(0, 3)] withRowAnimation:UITableViewRowAnimationTop];
-            });
+            NSSortDescriptor *sortDescriptor = [NSSortDescriptor sortDescriptorWithKey:@"firstName" ascending:YES];
+            _peoplePresent = [[_tonightsBill peoplePresent] sortedArrayUsingDescriptors:@[sortDescriptor]];
+            
+            NSLog(@"Stop animating.");
+            [[[strongSelf emptyMessage] activityIndicator] stopAnimating];
+            [strongSelf setEmptyMessage];
+            [[strongSelf tableView] insertSections:[NSIndexSet indexSetWithIndexesInRange:NSMakeRange(0, 3)] withRowAnimation:UITableViewRowAnimationTop];
         }
     }];
-    if (!directResults) {
+    
+    if (!_solution) {
         NSLog(@"Start animating");
         [_emptyMessage.activityIndicator startAnimating];
+    } else {
+        NSSortDescriptor *sortDescriptor = [NSSortDescriptor sortDescriptorWithKey:@"firstName" ascending:YES];
+        _peoplePresent = [[_tonightsBill peoplePresent] sortedArrayUsingDescriptors:@[sortDescriptor]];
     }
-    return directResults;
 }
-
 #pragma mark - New in this Class
 
 - (void)setEmptyMessage
 {
-    if (![_paymentsAfterwards count] == 0 || _emptyMessage.activityIndicator.isAnimating) {
+    if (![_solution count] == 0 || _emptyMessage.activityIndicator.isAnimating) {
         [UIView animateWithDuration:1.0 animations:^{
             [[_emptyMessage bigMessage] setAlpha:0.0];
             [[self tableView] setSeparatorStyle:UITableViewCellSeparatorStyleSingleLine];
@@ -218,36 +233,25 @@ typedef NS_ENUM(BOOL, MCXRatesMissing) {
     } else {
         [MCTools setAdBannerIfNotPaid:YES forViewController:self];
     }
-    
-    if ([_tonightsBill areAllExchangeRatesValid]) {
-        _areXRatesMissing = xRatesPresent;
-    } else {
-        _areXRatesMissing = xRatesMissing;
-    }
-    
-    NSSortDescriptor *sortDescriptor = [NSSortDescriptor sortDescriptorWithKey:@"firstName" ascending:YES];
-    _peoplePresent = [[_tonightsBill peoplePresent] sortedArrayUsingDescriptors:@[sortDescriptor]];
-
-    _emptyMessage = [[NSBundle mainBundle] loadNibNamed:@"MCTableEmptyMessage" owner:self options:nil][0];
-    [[self tableView] setBackgroundView:_emptyMessage];
-    [[_emptyMessage bigMessage] setText:NSLocalizedString(@"RETURNPAYMENTSVIEW_NOPAYMENTS", @"Please add payments and/or people if you want a solution on who owes who.")];
-    [[_emptyMessage bigMessage] setAlpha:0.0];
-    
-    _paymentsAfterwards = [[NSMutableArray alloc] init];
-    for (MCReturnPayment *rp in [self giveSolution]) {
-        if ([rp receiver]) {
-            [_paymentsAfterwards addObject:rp];
-        }
-    }
-
-    [[self tableView] reloadData];
-//    [self setInterstitialPresentationPolicy:ADInterstitialPresentationPolicyAutomatic];    
 }
 
 - (void)viewWillAppear:(BOOL)animated
 {
     [super viewWillAppear:animated];
     
+    [self giveSolution];
+    if ([_tonightsBill areAllExchangeRatesValid]) {
+        _areXRatesMissing = xRatesPresent;
+        [[_emptyMessage activityIndicator] stopAnimating];
+        [[_emptyMessage bigMessage] setHidden:NO];
+    } else {
+        _areXRatesMissing = xRatesMissing;
+        [[_emptyMessage activityIndicator] startAnimating];
+        [[_emptyMessage bigMessage] setHidden:YES];
+    }
+    
+    [[_emptyMessage bigMessage] setText:NSLocalizedString(@"RETURNPAYMENTSVIEW_NOPAYMENTS", @"Please add payments and/or people if you want a solution on who owes who.")];
+    [[self tableView] setBackgroundView:_emptyMessage];
     [self setEmptyMessage];
 }
 
@@ -259,7 +263,7 @@ typedef NS_ENUM(BOOL, MCXRatesMissing) {
 
 - (BOOL)shouldPresentInterstitialAd
 {
-    return YES;
+    return NO;
 }
 
 #pragma mark - UIAlertViewDelegate
@@ -345,7 +349,7 @@ typedef NS_ENUM(BOOL, MCXRatesMissing) {
 
 - (NSString *)tableView:(UITableView *)tableView titleForHeaderInSection:(NSInteger)section
 {
-    if ([_paymentsAfterwards count] > 0) {
+    if ([_solution count] > 0) {
         switch (section) {
             case 0:
                 return NSLocalizedString(@"SOLUTION_SECTION_WHO_OWES_WHO", @"Who ows who");
@@ -375,18 +379,18 @@ typedef NS_ENUM(BOOL, MCXRatesMissing) {
 {
     switch (section) {
         case 0:
-            return [_paymentsAfterwards count];
+            return [_solution count];
         case 1:
-            if ([_paymentsAfterwards count] == 0) {
+            if ([_solution count] == 0) {
                 return 0;
             } else {
                 return [_peoplePresent count];
             }
         case 2:
-            if ([_paymentsAfterwards count] == 0) {
+            if ([_solution count] == 0) {
                 return 0;
             } else {
-                return [[_tonightsBill peoplePresent] count] + 1;
+                return [_peoplePresent count] + 1;
             }
         default:
             return 0;
@@ -396,7 +400,7 @@ typedef NS_ENUM(BOOL, MCXRatesMissing) {
 - (UITableViewCell *)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath
 {
     if ([indexPath section] == 0) {
-        MCReturnPayment *thisCellsReturnPayment = _paymentsAfterwards[[indexPath row]];
+        MCReturnPayment *thisCellsReturnPayment = _solution[[indexPath row]];
         MCWhoOwesWhoTableViewCell_iPhone *returnPaymentCell = [tableView dequeueReusableCellWithIdentifier:@"MCWhoOwesWhoTableViewCell_iPhone"];
         CurrencyFormatter *cf = [[CurrencyFormatter alloc] initWithCurrencyCode:_tonightsBill.mainCurrency.code];
         returnPaymentCell.moneyLabel.text = [cf stringForObjectValue:thisCellsReturnPayment.money];

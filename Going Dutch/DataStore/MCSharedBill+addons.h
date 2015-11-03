@@ -40,7 +40,8 @@
 - (BOOL)areAllExchangeRatesValid;
 - (void)updateInvalidExchangeRatesWithCompletionBlock:(void (^)(NSArray *results))completionBlock;
 - (NSArray *)solveWhoHasToPayWhoFromThisBill;
-- (NSArray *)solveWhoHasToPayWhoFromThisBillWithCompletionBlock:(void (^)(NSArray *))completionBlock;
+- (NSArray *)solveWhoHasToPayWhoFromThisBillWithCompletionBlock:(void (^)(NSArray *))completionBlock __deprecated;
+- (NSArray *)solveWhoHasToPayWhoFromThisBillWithHandler:(void (^)(NSArray *results, NSError *error))completion;
 - (NSNumber *)totalSumOfMoneyOfThisSharedBill;
 - (NSArray *)fetchPeoplePresentOrderedByAmountPaid:(BOOL)ascending;
 - (NSNumber *)totalAmountOfCreditBy:(MCPerson *)person;
