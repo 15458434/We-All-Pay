@@ -30,8 +30,7 @@
 
 + (MCSharedBill *)addSharedBillToContext:(NSManagedObjectContext *)context
 {
-    MCSharedBill *sharedBill;
-    sharedBill = [NSEntityDescription insertNewObjectForEntityForName:@"MCSharedBill" inManagedObjectContext:context];
+    MCSharedBill *sharedBill = [NSEntityDescription insertNewObjectForEntityForName:@"MCSharedBill" inManagedObjectContext:context];
     sharedBill.uniqueBillId = [[NSUUID UUID] UUIDString];
     sharedBill.hasTheMailBeenSent = @NO;
     NSDate *now = [NSDate date];

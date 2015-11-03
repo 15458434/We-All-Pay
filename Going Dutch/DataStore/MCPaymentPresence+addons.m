@@ -24,8 +24,7 @@
 
 + (MCPaymentPresence *)addPaymentPresenceInContext:(NSManagedObjectContext *)context
 {
-    MCPaymentPresence *newPaymentPresence;
-    newPaymentPresence = [NSEntityDescription insertNewObjectForEntityForName:@"MCPaymentPresence" inManagedObjectContext:context];
+    MCPaymentPresence *newPaymentPresence = [NSEntityDescription insertNewObjectForEntityForName:@"MCPaymentPresence" inManagedObjectContext:context];
     newPaymentPresence.uniqueId = [[NSUUID UUID] UUIDString];
     NSDate *now = [NSDate date];
     newPaymentPresence.dateCreated = now;

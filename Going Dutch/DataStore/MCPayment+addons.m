@@ -26,8 +26,7 @@
 
 + (MCPayment *)addPaymentInContext:(NSManagedObjectContext *)context
 {
-    MCPayment *newPayment;
-    newPayment = [NSEntityDescription insertNewObjectForEntityForName:@"MCPayment" inManagedObjectContext:context];
+    MCPayment *newPayment = [NSEntityDescription insertNewObjectForEntityForName:@"MCPayment" inManagedObjectContext:context];
     newPayment.uniquePaymentId = [[NSUUID UUID] UUIDString];
     newPayment.dateCreated = [NSDate date];
     newPayment.dateModified = newPayment.dateCreated;
