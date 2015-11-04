@@ -92,6 +92,11 @@ NSString * const currencyCellIdentifier_iPad = @"MCSelectCurrencyTableViewCell_i
 
 - (CGFloat)tableView:(UITableView *)tableView heightForRowAtIndexPath:(NSIndexPath *)indexPath
 {
+    return UITableViewAutomaticDimension;
+}
+
+- (CGFloat)tableView:(UITableView *)tableView estimatedHeightForRowAtIndexPath:(NSIndexPath *)indexPath
+{
     return 44.0;
 }
 

@@ -1311,7 +1311,7 @@
                                     <rect key="frame" x="0.0" y="0.0" width="281" height="43"/>
                                     <autoresizingMask key="autoresizingMask"/>
                                     <subviews>
-                                        <label opaque="NO" clipsSubviews="YES" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" misplaced="YES" text="Label" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" useAutomaticPreferredMaxLayoutWidth="YES" translatesAutoresizingMaskIntoConstraints="NO" id="yR8-Zj-j4o">
+                                        <label opaque="NO" clipsSubviews="YES" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" misplaced="YES" text="Label" lineBreakMode="wordWrap" numberOfLines="0" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" useAutomaticPreferredMaxLayoutWidth="YES" preferredMaxLayoutWidth="175" translatesAutoresizingMaskIntoConstraints="NO" id="yR8-Zj-j4o">
                                             <rect key="frame" x="20" y="11" width="175" height="21"/>
                                             <animations/>
                                             <fontDescription key="fontDescription" name="HelveticaNeue-Thin" family="Helvetica Neue" pointSize="17"/>
@@ -1326,11 +1326,13 @@
                                     </subviews>
                                     <animations/>
                                     <constraints>
-                                        <constraint firstAttribute="centerY" secondItem="yR8-Zj-j4o" secondAttribute="centerY" id="3In-Ba-nun"/>
+                                        <constraint firstAttribute="centerY" secondItem="yR8-Zj-j4o" secondAttribute="centerY" priority="800" id="3In-Ba-nun"/>
                                         <constraint firstAttribute="trailing" secondItem="szY-aN-Vq8" secondAttribute="trailing" constant="20" symbolic="YES" id="APN-SO-hF7"/>
                                         <constraint firstItem="yR8-Zj-j4o" firstAttribute="leading" secondItem="kZh-eJ-cZO" secondAttribute="leading" constant="20" symbolic="YES" id="Dxf-HX-Nnn"/>
+                                        <constraint firstAttribute="bottomMargin" secondItem="yR8-Zj-j4o" secondAttribute="bottom" constant="3" id="Fdm-Tc-zX2"/>
+                                        <constraint firstItem="yR8-Zj-j4o" firstAttribute="top" secondItem="kZh-eJ-cZO" secondAttribute="topMargin" constant="3" id="FgE-fu-cUw"/>
                                         <constraint firstItem="szY-aN-Vq8" firstAttribute="leading" secondItem="yR8-Zj-j4o" secondAttribute="trailing" constant="8" symbolic="YES" id="pDw-lc-zNn"/>
-                                        <constraint firstItem="szY-aN-Vq8" firstAttribute="baseline" secondItem="yR8-Zj-j4o" secondAttribute="baseline" id="tMZ-ur-w8Q"/>
+                                        <constraint firstItem="szY-aN-Vq8" firstAttribute="top" secondItem="yR8-Zj-j4o" secondAttribute="top" id="tMZ-ur-w8Q"/>
                                     </constraints>
                                 </tableViewCellContentView>
                                 <animations/>
