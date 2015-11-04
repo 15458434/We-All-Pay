@@ -30,7 +30,7 @@ typedef NS_ENUM(BOOL, MCXRatesMissing) {
 
 @property (nonatomic) MCXRatesMissing areXRatesMissing;
 @property (nonatomic, strong) UIAlertView *noXRatesAlert;
-@property (nonatomic, strong) UIAlertController *rateMeAlert;
+//@property (nonatomic, strong) UIAlertController *rateMeAlert;
 
 @property (nonatomic, strong) MCTableEmptyMessage *emptyMessage;
 
@@ -121,11 +121,7 @@ typedef NS_ENUM(BOOL, MCXRatesMissing) {
             }]];
             [self presentViewController:alertController animated:YES completion:nil];
         } else {
-            UIAlertView *mailAddressesMissing = [[UIAlertView alloc] initWithTitle:title
-                                                                           message:message
-                                                                          delegate:self
-                                                                 cancelButtonTitle:cancel
-                                                                 otherButtonTitles:sendAnyway, nil];
+            UIAlertView *mailAddressesMissing = [[UIAlertView alloc] initWithTitle:title message:message delegate:self cancelButtonTitle:cancel otherButtonTitles:sendAnyway, nil];
             [mailAddressesMissing setDelegate:self];
             [mailAddressesMissing show];
         }
@@ -135,7 +131,7 @@ typedef NS_ENUM(BOOL, MCXRatesMissing) {
 
 - (void)showRateMe
 {
-    _rateMeAlert = [UIAlertController alertControllerWithTitle:@"Please Rate Me" message:@"Do you like We all pay? If so please take some time to leave a rating in the App Store" preferredStyle:UIAlertControllerStyleAlert];
+    UIAlertController *rateMeAlert = [UIAlertController alertControllerWithTitle:@"Please Rate Me" message:@"Do you like We all pay? If so please take some time to leave a rating in the App Store" preferredStyle:UIAlertControllerStyleAlert];
     UIAlertAction *rateMe = [UIAlertAction actionWithTitle:@"rate me" style:UIAlertActionStyleDefault handler:^(UIAlertAction *action) {
         NSLog(@"Rate me");
     }];
@@ -145,10 +141,10 @@ typedef NS_ENUM(BOOL, MCXRatesMissing) {
     UIAlertAction *never = [UIAlertAction actionWithTitle:@"never" style:UIAlertActionStyleDefault handler:^(UIAlertAction *action) {
         NSLog(@"Never!!");
     }];
-    [_rateMeAlert addAction:never];
-    [_rateMeAlert addAction:later];
-    [_rateMeAlert addAction:rateMe];
-    [self presentViewController:_rateMeAlert animated:YES completion:nil];
+    [rateMeAlert addAction:never];
+    [rateMeAlert addAction:later];
+    [rateMeAlert addAction:rateMe];
+    [self presentViewController:rateMeAlert animated:YES completion:nil];
 }
 
 - (void)giveSolution

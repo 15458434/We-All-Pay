@@ -55,6 +55,9 @@
 /* Class = "UIButton"; normalTitle = "Add Person"; ObjectID = "Nxq-6f-abw"; */
 "Nxq-6f-abw.normalTitle" = "Nieuwe persoon";
 
+/* Class = "UISearchBar"; placeholder = "Search currency"; ObjectID = "Sxt-5n-jx4"; */
+"Sxt-5n-jx4.placeholder" = "Zoek valuta";
+
 /* Class = "UINavigationItem"; title = "Events"; ObjectID = "T8K-rj-EA0"; */
 "T8K-rj-EA0.title" = "Rekeningen";
 

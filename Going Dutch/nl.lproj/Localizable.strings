@@ -36,6 +36,7 @@
 
 /* Button that says dismiss.
    Dismiss
+   Text on a button that dismisses the alert
    Title of a button that dismisses an alart.
    Title of a button that dismisses an alert. */
 "Dismiss" = "Negeer";
@@ -170,13 +171,13 @@
 /* A message when there are no people present inside this shared bill */
 "NO_PEOPLE_PRESENT" = "Niemand aanwezig";
 
-/* Ok */
+/* (No Commment) */
 "OK" = "Ok";
 
 /* As in Mark owes Arjen, but then just the word owes. */
 "OWES" = "betaalt";
 
-/* owes */
+/* (No Commment) */
 "OWES_FROM_THIS_PAYMENT" = "gebruikt";
 
 /* paid */
@@ -260,7 +261,8 @@
 /* Title message of an alert that pops up when fetching exchange rates is impossible */
 "Unable to fetch exchange rates" = "Kan wisselkoers niet ophalen";
 
-/* Unable to send email */
+/* Title of an alert that notifies the user the app is unable to send email.
+   Unable to send email */
 "Unable to send email" = "Kan email niet versturen";
 
 /* (No Commment) */
