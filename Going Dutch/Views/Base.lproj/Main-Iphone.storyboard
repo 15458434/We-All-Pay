@@ -1302,7 +1302,7 @@
                                     <rect key="frame" x="0.0" y="0.0" width="600" height="43"/>
                                     <autoresizingMask key="autoresizingMask"/>
                                     <subviews>
-                                        <label opaque="NO" clipsSubviews="YES" userInteractionEnabled="NO" contentMode="left" horizontalCompressionResistancePriority="250" text="Label" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="aOd-AZ-MTT">
+                                        <label opaque="NO" clipsSubviews="YES" userInteractionEnabled="NO" contentMode="left" horizontalCompressionResistancePriority="250" text="Label" lineBreakMode="wordWrap" numberOfLines="0" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="aOd-AZ-MTT">
                                             <rect key="frame" x="20" y="11" width="513" height="21"/>
                                             <animations/>
                                             <fontDescription key="fontDescription" name="HelveticaNeue-Thin" family="Helvetica Neue" pointSize="17"/>
@@ -1319,9 +1319,11 @@
                                     <animations/>
                                     <constraints>
                                         <constraint firstItem="aOd-AZ-MTT" firstAttribute="leading" secondItem="fam-A9-hoy" secondAttribute="leading" constant="20" symbolic="YES" id="39U-WF-qdL"/>
-                                        <constraint firstAttribute="centerY" secondItem="aOd-AZ-MTT" secondAttribute="centerY" id="Nff-al-cse"/>
-                                        <constraint firstItem="aOd-AZ-MTT" firstAttribute="baseline" secondItem="DOO-YK-wFy" secondAttribute="baseline" id="Wmo-1V-Qi4"/>
+                                        <constraint firstAttribute="centerY" secondItem="aOd-AZ-MTT" secondAttribute="centerY" priority="800" id="Nff-al-cse"/>
+                                        <constraint firstAttribute="bottomMargin" secondItem="aOd-AZ-MTT" secondAttribute="bottom" constant="3" id="WVx-la-ca9"/>
+                                        <constraint firstItem="aOd-AZ-MTT" firstAttribute="top" secondItem="DOO-YK-wFy" secondAttribute="top" id="Wmo-1V-Qi4"/>
                                         <constraint firstAttribute="trailing" secondItem="DOO-YK-wFy" secondAttribute="trailing" constant="20" symbolic="YES" id="erl-R2-W0f"/>
+                                        <constraint firstItem="aOd-AZ-MTT" firstAttribute="top" secondItem="fam-A9-hoy" secondAttribute="topMargin" constant="3" id="kvO-38-xfD"/>
                                         <constraint firstItem="DOO-YK-wFy" firstAttribute="leading" secondItem="aOd-AZ-MTT" secondAttribute="trailing" constant="8" symbolic="YES" id="rMJ-GZ-pUh"/>
                                     </constraints>
                                 </tableViewCellContentView>
