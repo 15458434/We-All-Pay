@@ -39,32 +39,16 @@ class ADoriginate : NSObject {
     }
     
     func fetchAttribution(completionHandler: () -> ()){
-        // Check for iOS 8 attribution implementation
-        if #available(iOS 7.1, *) {
-            if ADClient.sharedClient().respondsToSelector("lookupAdConversionDetails:") {
-                if #available(iOS 8.0, *) {
-                    ADClient.sharedClient().lookupAdConversionDetails({ (appPurchaseDate, iAdImpressionDate) -> Void in
-                        // True if we were installed from an iAd campaign
-                        if iAdImpressionDate != nil {
-                            self.fromiAd = true
-                        } else {
-                            self.fromiAd = false
-                        }
-                        completionHandler()
-                        self.save()
-                    })
-                } else {
-                    // Fallback on earlier versions
-                }
-                // Check for iOS 7.1 attribution implementation
-            } else if ADClient.sharedClient().respondsToSelector("determineAppInstallationAttributionWithCompletionHandler:") {
-                ADClient.sharedClient().determineAppInstallationAttributionWithCompletionHandler({ (appInstallationWasAttributedToiAd) -> Void in
-                    self.fromiAd = appInstallationWasAttributedToiAd
-                    completionHandler()
-                    self.save()
-                })
+        ADClient.sharedClient().lookupAdConversionDetails({ (appPurchaseDate, iAdImpressionDate) -> Void in
+            // True if we were installed from an iAd campaign
+            if iAdImpressionDate != nil {
+                self.fromiAd = true
+            } else {
+                self.fromiAd = false
             }
-        }
+            completionHandler()
+            self.save()
+        })
     }
     
     func save() -> Bool {

@@ -96,18 +96,12 @@ class MCStoreInterface: NSObject, SKPaymentTransactionObserver, SKRequestDelegat
             let title = NSLocalizedString("App Store unavailable", comment: "Message that pops up when the App Store is not available.")
             let message = NSLocalizedString("Unable to connect to the App Store. Please connect to the internet.", comment: "Message body explaining the App Store can't be reached.")
             let dismissButtonTitle = NSLocalizedString("Dismiss", comment: "Button that says dismiss.")
-            if #available(iOS 8.0, *) {
-                let alertController = UIAlertController(title: title, message: message, preferredStyle: .Alert)
-                let dismissAction = UIAlertAction(title: dismissButtonTitle, style: .Default, handler: { (action) -> Void in
-                    print("App Store unavailable dismissed.")
-                })
-                alertController.addAction(dismissAction)
-                viewController.presentViewController(alertController, animated: true, completion: nil)
-            } else {
-                // Fallback on earlier versions
-                appStoreUnreachableAlert = UIAlertView(title: title, message: message, delegate: self, cancelButtonTitle: dismissButtonTitle)
-                appStoreUnreachableAlert!.show()
-            }
+            let alertController = UIAlertController(title: title, message: message, preferredStyle: .Alert)
+            let dismissAction = UIAlertAction(title: dismissButtonTitle, style: .Default, handler: { (action) -> Void in
+                print("App Store unavailable dismissed.")
+            })
+            alertController.addAction(dismissAction)
+            viewController.presentViewController(alertController, animated: true, completion: nil)
         }
     }
     

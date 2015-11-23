@@ -66,16 +66,11 @@ class InfoScreenTableViewController: UITableViewController, MFMailComposeViewCon
         } else {
             let title = NSLocalizedString("Unable to send email", comment: "Unable to send email")
             let message = NSLocalizedString("Please configure your mail in Settings", comment: "Please configure your mail in Settings")
-            if #available(iOS 8.0, *) {
-                let alertController = UIAlertController(title: title, message: message, preferredStyle: .Alert)
-                let cancelButtonText = NSLocalizedString("Dismiss", comment: "Dismiss")
-                let cancelAction = UIAlertAction(title: cancelButtonText, style: .Cancel, handler: nil)
-                alertController.addAction(cancelAction)
-                presentViewController(alertController, animated: true, completion: nil)
-            } else {
-                // Fallback on earlier versions
-            }
-
+            let alertController = UIAlertController(title: title, message: message, preferredStyle: .Alert)
+            let cancelButtonText = NSLocalizedString("Dismiss", comment: "Dismiss")
+            let cancelAction = UIAlertAction(title: cancelButtonText, style: .Cancel, handler: nil)
+            alertController.addAction(cancelAction)
+            presentViewController(alertController, animated: true, completion: nil)
         }
     }
     
@@ -93,17 +88,11 @@ class InfoScreenTableViewController: UITableViewController, MFMailComposeViewCon
                 title = NSLocalizedString("Ad free version restored.", comment: "Ad free version restored.")
             }
             let dismissText = NSLocalizedString("Dismiss", comment: "Dismiss")
-            if #available(iOS 8.0, *) {
-                var alertController: UIAlertController!
-                alertController = UIAlertController(title: title, message: message, preferredStyle: .Alert)
-                let cancelAction = UIAlertAction(title: dismissText, style: .Cancel, handler:nil)
-                alertController.addAction(cancelAction)
-                self.presentViewController(alertController, animated: true, completion: nil)
-            } else {
-                // Fallback on earlier versions
-                let alertView = UIAlertView(title: title, message: message, delegate: nil, cancelButtonTitle: dismissText)
-                alertView.show()
-            }
+            var alertController: UIAlertController!
+            alertController = UIAlertController(title: title, message: message, preferredStyle: .Alert)
+            let cancelAction = UIAlertAction(title: dismissText, style: .Cancel, handler:nil)
+            alertController.addAction(cancelAction)
+            self.presentViewController(alertController, animated: true, completion: nil)
         }
     }
     
@@ -119,17 +108,11 @@ class InfoScreenTableViewController: UITableViewController, MFMailComposeViewCon
             let myPresenter = presentingViewController!
             let title = NSLocalizedString("Nothing to restore", comment: "Nothing to restore")
             let dismiss = NSLocalizedString("Dismiss", comment: "Dismiss")
-            if #available(iOS 8.0, *) {
-                let alertController = UIAlertController(title: title, message: nil, preferredStyle: .Alert)
-                
-                let cancelAction = UIAlertAction(title: dismiss, style: .Cancel, handler:nil)
-                alertController.addAction(cancelAction)
-                myPresenter.presentViewController(alertController, animated: true, completion: nil)
-            } else {
-                // Fallback on earlier versions
-                let alertView = UIAlertView(title: title, message: nil, delegate: nil, cancelButtonTitle: dismiss)
-                alertView.show()
-            }
+            let alertController = UIAlertController(title: title, message: nil, preferredStyle: .Alert)
+            
+            let cancelAction = UIAlertAction(title: dismiss, style: .Cancel, handler:nil)
+            alertController.addAction(cancelAction)
+            myPresenter.presentViewController(alertController, animated: true, completion: nil)
         }
     }
     
@@ -180,11 +163,7 @@ class InfoScreenTableViewController: UITableViewController, MFMailComposeViewCon
     
     // MARK: UI Table View Delegate
     override func tableView(tableView: UITableView, heightForRowAtIndexPath indexPath: NSIndexPath) -> CGFloat {
-        if #available(iOS 8, *) {
-            return UITableViewAutomaticDimension
-        } else {
-            return 44.0
-        }
+        return UITableViewAutomaticDimension
     }
     
     override func tableView(tableView: UITableView, estimatedHeightForRowAtIndexPath indexPath: NSIndexPath) -> CGFloat {

@@ -359,7 +359,8 @@
     gbpToEur.exchangeRate = nil;
     gbpToEur.status = [NSNumber numberWithShort:invalid];
     [secondPayment setExchangeRate:gbpToEur];
-    NSArray *results = [tonightsBill solveWhoHasToPayWhoFromThisBillWithCompletionBlock:^(NSArray *resultsAfterExchangeRateFetch) {
+    NSArray *results = [tonightsBill solveWhoHasToPayWhoFromThisBillWithHandler:^(NSArray *results, NSError *error) {
+        XCTAssertNil(error);
         for (MCReturnPayment *returnPayment in results) {
             XCTAssertNotNil(secondPayment.exchangeRate.exchangeRate, @"There should be a value for the exchange rate.");
             double gbpToEurRate = secondPayment.exchangeRate.exchangeRate.doubleValue;
