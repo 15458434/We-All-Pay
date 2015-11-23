@@ -298,7 +298,6 @@
 		3872C0E119041CAE008C54D7 /* en */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = en; path = en.lproj/MCTableEmptyMessage_iPad.strings; sourceTree = "<group>"; };
 		3872C0E319041CB3008C54D7 /* nl */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = nl; path = nl.lproj/MCTableEmptyMessage_iPad.strings; sourceTree = "<group>"; };
 		3873A2A416F23AA1000832FD /* MessageUI.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = MessageUI.framework; path = System/Library/Frameworks/MessageUI.framework; sourceTree = SDKROOT; };
-		3873A2A616F2858A000832FD /* Going Dutch.entitlements */ = {isa = PBXFileReference; lastKnownFileType = text.xml; path = "Going Dutch.entitlements"; sourceTree = "<group>"; };
 		387494C719EFE46F001614CA /* MCSelectCategoryTableViewController_iPhone.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = MCSelectCategoryTableViewController_iPhone.h; path = ViewControllers/iPhone/MCSelectCategoryTableViewController_iPhone.h; sourceTree = "<group>"; };
 		387494C819EFE46F001614CA /* MCSelectCategoryTableViewController_iPhone.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = MCSelectCategoryTableViewController_iPhone.m; path = ViewControllers/iPhone/MCSelectCategoryTableViewController_iPhone.m; sourceTree = "<group>"; };
 		387494CD19F041A6001614CA /* MCSelectCategoryTableViewController_iPad.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = MCSelectCategoryTableViewController_iPad.h; path = ViewControllers/iPad/MCSelectCategoryTableViewController_iPad.h; sourceTree = "<group>"; };
@@ -596,7 +595,6 @@
 			isa = PBXGroup;
 			children = (
 				38D2323719A4EF42004B1203 /* We all pay.entitlements */,
-				3873A2A616F2858A000832FD /* Going Dutch.entitlements */,
 				38F7F9A11B2C49630059DE51 /* Currency Converter */,
 				38D1C3781A8A33A5008F2A8E /* LaunchImage */,
 				3860574919EE92FC00BD5B78 /* CategoryPicturesStore */,
