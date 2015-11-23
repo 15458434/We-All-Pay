@@ -75,7 +75,7 @@
     someQueue.name = @"Logging start";
     [someQueue addOperationWithBlock:^{
         NSLog(@"%@ running iOS %@", [[UIDevice currentDevice] model], [[UIDevice currentDevice] systemVersion]);
-        NSLog(@"I dedicate this program to Ilse Béguin, the most wonderful woman in the world who brought herself into my life, when I was developing the first version App.");
+        NSLog(@"I dedicate this program to Ilse Béguin, the most wonderful woman in the world who brought herself into my life, when I was developing the first version of this App.");
     }];
 #if DEBUG
     NSLocale *locale = [NSLocale currentLocale];
