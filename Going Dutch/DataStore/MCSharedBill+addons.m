@@ -513,9 +513,9 @@
     NSNumber *leftToPay;
     NSNumber *leftToReceive;
     NSMutableArray *receivers = [[NSMutableArray alloc] init];
-    NSMutableArray *whoHasToPayWho = [[NSMutableArray alloc] init];
+    NSMutableArray<ReturnPayment *> *whoHasToPayWho = [[NSMutableArray alloc] init];
     NSArray *sortDescriptorArray1 = @[[NSSortDescriptor sortDescriptorWithKey:@"dateCreated" ascending:YES]];
-    NSArray *people = [[self peoplePresent] sortedArrayUsingDescriptors:sortDescriptorArray1];
+    NSArray<MCPerson *> *people = [[self peoplePresent] sortedArrayUsingDescriptors:sortDescriptorArray1];
     
     // Update the database to the current version.
     [self updatePaymentForSupportWithPaymentPresence];
@@ -548,13 +548,13 @@
             for (NSMutableArray *receiver in receivers) {
                 double ltp = [payer[3] doubleValue];
                 double ltr = [receiver[3] doubleValue];
-                MCReturnPayment *returnPayment;
+                ReturnPayment *returnPayment;
                 if (ltp >= ltr) {
-                    returnPayment = [[MCReturnPayment alloc] initWithPayer:payer[0] paysTo:receiver[0] amountOfMoney:@(ltr)];
+                    returnPayment = [[ReturnPayment alloc] initWithPayer:payer[0] money:@(ltr) receiver:receiver[0]];
                     ltp -= ltr;
                     ltr = 0;
                 } else {
-                    returnPayment = [[MCReturnPayment alloc] initWithPayer:payer[0] paysTo:receiver[0] amountOfMoney:@(ltp)];
+                    returnPayment = [[ReturnPayment alloc] initWithPayer:payer[0] money:@(ltp) receiver:receiver[0]];
                     ltr -= ltp;
                     ltp = 0;
                 }

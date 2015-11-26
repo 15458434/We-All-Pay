@@ -26,7 +26,7 @@ typedef NS_ENUM(BOOL, MCXRatesMissing) {
 @interface MCReturnPaymentViewController () <UIAlertViewDelegate, MFMailComposeViewControllerDelegate>
 
 @property (nonatomic, strong) NSArray *peoplePresent;
-@property (nonatomic, strong) NSArray *solution;
+@property (nonatomic, strong) NSArray<ReturnPayment *> *solution;
 
 @property (nonatomic) MCXRatesMissing areXRatesMissing;
 @property (nonatomic, strong) UIAlertView *noXRatesAlert;
@@ -396,7 +396,7 @@ typedef NS_ENUM(BOOL, MCXRatesMissing) {
 - (UITableViewCell *)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath
 {
     if ([indexPath section] == 0) {
-        MCReturnPayment *thisCellsReturnPayment = _solution[[indexPath row]];
+        ReturnPayment *thisCellsReturnPayment = _solution[[indexPath row]];
         MCWhoOwesWhoTableViewCell_iPhone *returnPaymentCell = [tableView dequeueReusableCellWithIdentifier:@"MCWhoOwesWhoTableViewCell_iPhone"];
         CurrencyFormatter *cf = [[CurrencyFormatter alloc] initWithCurrencyCode:_tonightsBill.mainCurrency.code];
         returnPaymentCell.moneyLabel.text = [cf stringForObjectValue:thisCellsReturnPayment.money];

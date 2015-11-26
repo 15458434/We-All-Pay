@@ -290,7 +290,7 @@ typedef NS_ENUM(BOOL, MCXRatesMissing) {
         WhoOwesWhoTableViewCell_iPad *cell = [tableView dequeueReusableCellWithIdentifier:@"MCWhoOwesWhoTableViewCell_iPad" forIndexPath:indexPath];
         
         // Configure the cell...
-        MCReturnPayment *thisCellContents = [_solution objectAtIndex:[indexPath row]];
+        ReturnPayment *thisCellContents = [_solution objectAtIndex:[indexPath row]];
         
         CurrencyFormatter *cf = [[CurrencyFormatter alloc] initWithCurrencyCode:_tonightsBill.mainCurrency.code];
         cell.moneyLabel.text = [cf stringForObjectValue:thisCellContents.money];
