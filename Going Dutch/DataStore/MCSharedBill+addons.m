@@ -12,7 +12,6 @@
 #import "MCPayment+addons.h"
 #import "MCPaymentPresence+addons.h"
 #import "MCWeAllPayStoreController.h"
-#import "MCReturnPayment.h"
 #import "MCCurrency+addons.h"
 #import "MCExchangeRate+addons.h"
 

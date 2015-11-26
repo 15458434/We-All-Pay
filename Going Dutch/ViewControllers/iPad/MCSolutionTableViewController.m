@@ -14,7 +14,6 @@
 #import "MCSharedBill+addons.h"
 #import "MCPayment+addons.h"
 #import "MCPerson+addons.h"
-#import "MCReturnPayment.h"
 #import "MCCurrency+addons.h"
 
 typedef NS_ENUM(BOOL, MCXRatesMissing) {

@@ -43,7 +43,7 @@ class MCMailComposer: NSObject {
         let localCurrencyFormatter = CurrencyFormatter()
         mainCurrencyFormatter.currencyCode = tonightsBill.mainCurrency.code
         
-        let solution = tonightsBill.solveWhoHasToPayWhoFromThisBill() as! [MCReturnPayment]
+        let solution = tonightsBill.solveWhoHasToPayWhoFromThisBill() as! [ReturnPayment]
 //        let sortDescriptorOnDateCreated = NSSortDescriptor(key: "dateCreated", ascending: true)
         let allPayments = Array(tonightsBill.payments) as! [MCPayment]
         let allPeople = Array(tonightsBill.peoplePresent) as! [MCPerson]
@@ -94,7 +94,11 @@ class MCMailComposer: NSObject {
         mailBody += "\n"
         
         for returnPayment in solution {
-            mailBody += String.localizedStringWithFormat(NSLocalizedString("EMAIL_OWES", comment: "%1$@ pays %2$@ to %3$@"), returnPayment.payer.getFullName(), mainCurrencyFormatter.stringForObjectValue(returnPayment.money)!, returnPayment.receiver.getFullName())
+            let payerFullName: String = returnPayment.payer?.getFullName() ?? ""
+            let moneyNumber = returnPayment.money ?? NSNumber(double: 0.0)
+            let moneyString: String = mainCurrencyFormatter.stringForObjectValue(moneyNumber)!
+            let receiverFullName: String = returnPayment.receiver?.getFullName() ?? ""
+            mailBody += String.localizedStringWithFormat(NSLocalizedString("EMAIL_OWES", comment: "%1$@ pays %2$@ to %3$@"), payerFullName, moneyString, receiverFullName)
             mailBody += "\n"
         }
         mailBody += "\n"

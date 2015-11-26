@@ -17,7 +17,6 @@
 #import "MCPayment+addons.h"
 
 #import "MCWeAllPayStoreController.h"
-#import "MCReturnPayment.h"
 
 #import "We_all_pay-Swift.h"
 
