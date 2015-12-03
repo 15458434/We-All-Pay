@@ -8,9 +8,6 @@
 
 #import "MCSelectCategoryTableViewController_iPhone.h"
 
-#import "MCCategoryPictureStoreController.h"
-#import "MCCategoryPictureObject.h"
-
 #import "MCPayment+addons.h"
 
 #import "We_all_pay-Swift.h"
@@ -90,7 +87,7 @@ BOOL const isUILocalizedIndexedCollationActive = NO;
     
     // Uncomment the following line to display an Edit button in the navigation bar for this view controller.
     // self.navigationItem.rightBarButtonItem = self.editButtonItem;
-    _categories = [[MCCategoryPictureStoreController sharedController] pictureObjects];
+    _categories = [[CategoryPictureStoreController sharedController] pictureObjects];
     [self createSections:_categories];
     _filteredCategories = [NSMutableArray arrayWithCapacity:_categories.count];
     
@@ -149,7 +146,7 @@ BOOL const isUILocalizedIndexedCollationActive = NO;
 
 - (void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath
 {
-    MCCategoryPictureObject *categoryObject;
+    CategoryPictureObject *categoryObject;
     if (tableView == self.searchDisplayController.searchResultsTableView) {
         categoryObject = _filteredCategories[indexPath.row];
     } else {
@@ -200,14 +197,14 @@ BOOL const isUILocalizedIndexedCollationActive = NO;
     MCSelectCategoryTableViewCell_iPhone *cell = (MCSelectCategoryTableViewCell_iPhone *)[tableView dequeueReusableCellWithIdentifier:@"selectCategoryCell" forIndexPath:indexPath];
     
     if (tableView == self.searchDisplayController.searchResultsTableView) {
-        MCCategoryPictureObject *category = [_filteredCategories objectAtIndex:[indexPath row]];
+        CategoryPictureObject *category = [_filteredCategories objectAtIndex:[indexPath row]];
         cell.textLabel.text = category.categoryDescription;
         cell.imageView.image = category.smallPicture;
 //        cell.categoryNameLabel.text = category.categoryDescription;
 //        cell.categoryImageView.image = category.smallPicture;
     } else {
         NSArray *arrayOfSection = [_categorySections objectAtIndex:[indexPath section]];
-        MCCategoryPictureObject *category = [arrayOfSection objectAtIndex:[indexPath row]];
+        CategoryPictureObject *category = [arrayOfSection objectAtIndex:[indexPath row]];
         cell.categoryNameLabel.text = category.categoryDescription;
         cell.categoryImageView.image = category.smallPicture;
     }

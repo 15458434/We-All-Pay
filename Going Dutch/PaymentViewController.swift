@@ -74,7 +74,7 @@ enum CancelButtonPressed {
     // MARK: New in this class
     private func reloadCategoryImageView() {
         let categoryId = thisPayment.categoryId.integerValue
-        let categoryObject = MCCategoryPictureStoreController.sharedController().pictureObjects[categoryId]
+        let categoryObject = CategoryPictureStoreController.sharedController.pictureObjects[categoryId]
         if categoryId > 0 {
             categoryImage.image = categoryObject.largePicture
         } else {
@@ -84,7 +84,7 @@ enum CancelButtonPressed {
     
     private func setTextForCategoryButton() {
         let categoryId = thisPayment.categoryId.integerValue
-        let categoryObject = MCCategoryPictureStoreController.sharedController().pictureObjects[categoryId]
+        let categoryObject = CategoryPictureStoreController.sharedController.pictureObjects[categoryId]
         if categoryId > 0 {
             categoryImage.image = categoryObject.largePicture
             categoryButton.setTitle(categoryObject.categoryDescription, forState: .Normal)

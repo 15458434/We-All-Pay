@@ -9,12 +9,11 @@
 #import <UIKit/UIKit.h>
 #import <XCTest/XCTest.h>
 
-#import "MCCategoryPictureStoreController.h"
-#import "MCCategoryPictureObject.h"
+#import "We_all_pay_Tests-Swift.h"
 
 @interface MCCategoryPictureStoreTest : XCTestCase
 
-@property (nonatomic, strong) MCCategoryPictureStoreController *myCategoryPictureController;
+@property (nonatomic, strong) CategoryPictureStoreController *myCategoryPictureController;
 
 @end
 
@@ -23,7 +22,7 @@
 - (void)setUp {
     [super setUp];
     // Put setup code here. This method is called before the invocation of each test method in the class.
-    _myCategoryPictureController = [MCCategoryPictureStoreController sharedController];
+    _myCategoryPictureController = [CategoryPictureStoreController sharedController];
     XCTAssertTrue(_myCategoryPictureController, @"Unable to create Shared Instance");
 }
 
@@ -43,7 +42,7 @@
     NSDictionary *testDictionary = @{ @"categoryId" : @45,
                                       @"categoryPictureFilename" : @"MyFileName",
                                       @"categoryDescription" : @"Groceries" };
-    MCCategoryPictureObject *myTestObject = [[MCCategoryPictureObject alloc] initWithDictionary:testDictionary];
+    CategoryPictureObject *myTestObject = [[CategoryPictureObject alloc] initWithDictionary:testDictionary];
     XCTAssertTrue(myTestObject.categoryId == 45, @"Invalid categoryId");
     XCTAssertNotNil(myTestObject.categoryDescription, @"CategoryDescription is not supposed to be nil");
     XCTAssertNotNil(myTestObject.pictureFilename, @"pictureFilename is not supposed to be nil");

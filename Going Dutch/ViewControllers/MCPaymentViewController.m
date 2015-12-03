@@ -16,9 +16,6 @@
 
 #import "MCDismissMeBlockProtocol.h"
 
-#import "MCCategoryPictureStoreController.h"
-#import "MCCategoryPictureObject.h"
-
 #import "MCWhoPayingUserDefaultsStoreInterface+WeAllPay.h"
 
 #import "We_all_pay-Swift.h"
@@ -463,8 +460,8 @@ typedef NS_ENUM(BOOL, ChildViewOpened) {
         _payerPicture.image = _thisPayment.payingPerson.picture;
     }
     // Get category picture.
-    NSArray *pictureObjects = [[MCCategoryPictureStoreController sharedController] pictureObjects];
-    MCCategoryPictureObject *categoryObject = pictureObjects[[[_thisPayment categoryId] shortValue]];
+    NSArray *pictureObjects = [[CategoryPictureStoreController sharedController] pictureObjects];
+    CategoryPictureObject *categoryObject = pictureObjects[[[_thisPayment categoryId] shortValue]];
     if (categoryObject.categoryId > 0) {
         _categoryView.image = categoryObject.largePicture;
         [_categoryButton setTitle:categoryObject.categoryDescription forState:UIControlStateNormal];

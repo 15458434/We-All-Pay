@@ -20,9 +20,6 @@
 #import "MCReturnPaymentViewController.h"
 #import "MCSharedBillPageViewController.h"
 
-#import "MCCategoryPictureStoreController.h"
-#import "MCCategoryPictureObject.h"
-
 #import "MCWhoPayingUserDefaultsStoreInterface+WeAllPay.h"
 
 #import "We_all_pay-Swift.h"
@@ -340,8 +337,8 @@
     [[paymentCell namePayerLabel] setText:[NSString stringWithFormat:@"%@%@", thisCellsPayerName, NSLocalizedString(@"PAYMENTCELL_PAYERNAME_EXTRA", @" paid") ]];
     
     // Get category picture.
-    NSArray *pictureObjects = [[MCCategoryPictureStoreController sharedController] pictureObjects];
-    MCCategoryPictureObject *categoryObject = pictureObjects[[[thisCellsPayment categoryId] shortValue]];
+    NSArray *pictureObjects = [[CategoryPictureStoreController sharedController] pictureObjects];
+    CategoryPictureObject *categoryObject = pictureObjects[[[thisCellsPayment categoryId] shortValue]];
     paymentCell.pictureOfPayer.image = [categoryObject smallPicture];
     
     NSString *thisCellsDescriptionOfPayment = [thisCellsPayment descriptionOfPayment];

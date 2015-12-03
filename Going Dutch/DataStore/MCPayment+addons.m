@@ -13,8 +13,10 @@
 #import "MCCurrency+addons.h"
 #import "MCExchangeRate+addons.h"
 #import "MCWeAllPayStoreController.h"
-#import "MCCategoryPictureStoreController.h"
-#import "MCCategoryPictureObject.h"
+//#import "MCCategoryPictureStoreController.h"
+//#import "MCCategoryPictureObject.h"
+
+#import "We_all_pay-Swift.h"
 
 @implementation MCPayment (addons)
 
@@ -227,7 +229,7 @@
     if (self.categoryId.shortValue == 0) {
         return [NSString stringWithFormat:@"%@", self.descriptionOfPayment];
     } else {
-        NSString *categoryName = [[[[MCCategoryPictureStoreController sharedController] pictureObjects] objectAtIndex:self.categoryId.shortValue] categoryDescription];
+        NSString *categoryName = [[[[CategoryPictureStoreController sharedController] pictureObjects] objectAtIndex:self.categoryId.shortValue] categoryDescription];
         NSString *result = [NSString stringWithFormat:@"%@: %@", categoryName, self.descriptionOfPayment];
         return result;
     }
