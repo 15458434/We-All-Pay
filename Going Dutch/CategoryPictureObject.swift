@@ -17,11 +17,11 @@ class CategoryPictureObject: NSObject {
     let categoryId: Int16
     let pictureFilename: String
     let categoryDescription: String
-    var smallPicture: UIImage {
-        return UIImage(named: "\(pictureFilename)-small")!
+    var smallPicture: UIImage? {
+        return UIImage(named: "\(pictureFilename)-small")
     }
-    var largePicture: UIImage {
-        return UIImage(named: "\(pictureFilename)-large")!
+    var largePicture: UIImage? {
+        return UIImage(named: "\(pictureFilename)-large")
     }
     
     class func object(dictionary: Dictionary<String, AnyObject>) -> CategoryPictureObject {
