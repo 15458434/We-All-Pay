@@ -414,9 +414,10 @@
         didSomethingChange = YES;
     }
     MCPerson *nextPayer = [[_tonightsBill fetchPeoplePresentOrderedByAmountPaid:YES] firstObject];
-    MCWhoPayingUserDefaultsStoreInterface *groupStore = [[MCWhoPayingUserDefaultsStoreInterface alloc] initWithTonightsBillUUID:_tonightsBill.uniqueBillId withTripName:_tonightsBill.tripName andTheNextPayerID:nextPayer.uniquePersonId withFullName:[nextPayer getFullName]];
+
+    WhoPayingUserDefaultsStoreInterface *groupStore = [[WhoPayingUserDefaultsStoreInterface alloc] initWithTonightsBillUUID:_tonightsBill.uniqueBillId tripName:_tonightsBill.tripName nextPayerUUID:nextPayer.uniquePersonId fullNameOfNextPayer:[nextPayer getFullName]];//[[WhoPayingUserDefaultsStoreInterface alloc] initWithTonightsBillUUID:_tonightsBill.uniqueBillId tripName:_tonightsBill.tripName nextPayerID:nextPayer.uniquePersonId fullNameOfNextPayer:[nextPayer getFullName]];
     [groupStore storeToDefaults];
-    [[NCWidgetController widgetController] setHasContent:YES forWidgetWithBundleIdentifier:MCWhoIsPayingNextBundleIdentifier];
+    [[NCWidgetController widgetController] setHasContent:YES forWidgetWithBundleIdentifier:[WhoPayingUserDefaultsStoreInterface MCWhoIsPayingNextBundleIdentifier]];
 }
 
 #pragma mark - NSFetchedResultsControllerDelegat

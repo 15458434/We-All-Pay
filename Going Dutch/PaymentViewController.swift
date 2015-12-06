@@ -8,6 +8,7 @@
 
 import UIKit
 import CoreData
+import WhoPayingUserDefaultsStoreInterface
 
 enum DidSomethingChange: Int8 {
     case NothingChanged = 0, SomethingChanged
@@ -66,7 +67,7 @@ enum CancelButtonPressed {
         MCWeAllPayStoreController.defaultStore().endUndoGroupAndProcess()
         MCWeAllPayStoreController.defaultStore().saveMainThreadContext()
         navigationController?.presentingViewController?.dismissViewControllerAnimated(true, completion: { () -> Void in
-            MCWhoPayingUserDefaultsStoreInterface.sendToUserDefaultsStoreInterface(self.tonightsBill)
+            WhoPayingUserDefaultsStoreInterface.sendToUserDefaultsStoreInterface(self.tonightsBill)
         })
         dismissMe?()
     }

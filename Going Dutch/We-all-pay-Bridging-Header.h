@@ -24,12 +24,6 @@
 
 #import "MCTools.h"
 
-//#import "MCCategoryPictureStoreController.h"
-//#import "MCCategoryPictureObject.h"
-
 #import "MCSelectCurrencyTableViewController_iPad.h"
 #import "MCSelectCategoryTableViewController_iPad.h"
 #import "MCAllTripsTableViewController-iPad.h"
-
-//#import "MCWhoPayingUserDefaultsStoreInterface.h"
-#import "MCWhoPayingUserDefaultsStoreInterface+WeAllPay.h"

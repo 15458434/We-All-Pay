@@ -83,6 +83,14 @@
 		3886D3FE16B7A1CD00ECE64F /* AddressBookUI.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 3886D3FC16B7A1CD00ECE64F /* AddressBookUI.framework */; };
 		388A326E1C10965D00F7459C /* CategoryPictureObject.swift in Sources */ = {isa = PBXBuildFile; fileRef = 385295CE1C10583E0081894D /* CategoryPictureObject.swift */; };
 		388A326F1C10966000F7459C /* CategoryPictureStoreController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 385295D01C105C580081894D /* CategoryPictureStoreController.swift */; };
+		388A32761C11ED2F00F7459C /* WhoPayingUserDefaultsStoreInterfaceWeAllPayExtension.swift in Sources */ = {isa = PBXBuildFile; fileRef = 388A32741C11EA1400F7459C /* WhoPayingUserDefaultsStoreInterfaceWeAllPayExtension.swift */; };
+		388A327F1C11EDBD00F7459C /* WhoPayingUserDefaultsStoreInterface.h in Headers */ = {isa = PBXBuildFile; fileRef = 388A327E1C11EDBD00F7459C /* WhoPayingUserDefaultsStoreInterface.h */; settings = {ATTRIBUTES = (Public, ); }; };
+		388A32861C11EDBD00F7459C /* WhoPayingUserDefaultsStoreInterface.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 388A327C1C11EDBD00F7459C /* WhoPayingUserDefaultsStoreInterface.framework */; };
+		388A328D1C11EDBD00F7459C /* WhoPayingUserDefaultsStoreInterfaceTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 388A328C1C11EDBD00F7459C /* WhoPayingUserDefaultsStoreInterfaceTests.swift */; };
+		388A32911C11EDBD00F7459C /* WhoPayingUserDefaultsStoreInterface.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 388A327C1C11EDBD00F7459C /* WhoPayingUserDefaultsStoreInterface.framework */; };
+		388A32921C11EDBD00F7459C /* WhoPayingUserDefaultsStoreInterface.framework in Embed Frameworks */ = {isa = PBXBuildFile; fileRef = 388A327C1C11EDBD00F7459C /* WhoPayingUserDefaultsStoreInterface.framework */; settings = {ATTRIBUTES = (CodeSignOnCopy, RemoveHeadersOnCopy, ); }; };
+		388A32991C11EEA700F7459C /* WhoPayingUserDefaultsStoreInterface.swift in Sources */ = {isa = PBXBuildFile; fileRef = 388A32701C11C51F00F7459C /* WhoPayingUserDefaultsStoreInterface.swift */; };
+		388A329A1C11EF4700F7459C /* WhoPayingUserDefaultsStoreInterface.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 388A327C1C11EDBD00F7459C /* WhoPayingUserDefaultsStoreInterface.framework */; };
 		3892E3A417903EF00038894B /* MCEditTripViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 3892E3A317903EF00038894B /* MCEditTripViewController.m */; };
 		3892E3AA17904A240038894B /* MCPersonViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 3892E3A917904A240038894B /* MCPersonViewController.m */; };
 		3892E3B117906B5E0038894B /* MCAddressBookDataReceiver.m in Sources */ = {isa = PBXBuildFile; fileRef = 3892E3B017906B5E0038894B /* MCAddressBookDataReceiver.m */; };
@@ -129,7 +137,6 @@
 		38D796111B2DF2DE00F3872F /* ExchangeRateFetcher.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3858D6591B2DB6B3006A4E2B /* ExchangeRateFetcher.swift */; };
 		38D796131B2DF30800F3872F /* ExchangeRateFetcherTest.swift in Sources */ = {isa = PBXBuildFile; fileRef = 38D796121B2DF30800F3872F /* ExchangeRateFetcherTest.swift */; };
 		38D796151B2F1CBD00F3872F /* ExchangeRateFetcherForMCExchangeRate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 38D796141B2F1CBD00F3872F /* ExchangeRateFetcherForMCExchangeRate.swift */; };
-		38DB0F941ADD48CB00946B95 /* MCWhoPayingUserDefaultsStoreInterface.m in Sources */ = {isa = PBXBuildFile; fileRef = 38F2A1AF1ADCF85200831D48 /* MCWhoPayingUserDefaultsStoreInterface.m */; };
 		38DB85D417E45BCA006237CF /* MCPayment+addons.m in Sources */ = {isa = PBXBuildFile; fileRef = 38DB85D317E45BCA006237CF /* MCPayment+addons.m */; };
 		38DB85D717E45CA4006237CF /* MCSharedBill+addons.m in Sources */ = {isa = PBXBuildFile; fileRef = 38DB85D617E45CA4006237CF /* MCSharedBill+addons.m */; };
 		38DB85DA17E45DEA006237CF /* MCPerson+addons.m in Sources */ = {isa = PBXBuildFile; fileRef = 38DB85D917E45DEA006237CF /* MCPerson+addons.m */; };
@@ -147,10 +154,8 @@
 		38E36EEE1BBD7E820026ED7E /* MCTwoLabelsTitleView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 38E36EED1BBD7E820026ED7E /* MCTwoLabelsTitleView.swift */; };
 		38E9DA1C1B29F8990097D719 /* MCTableEmptyMessage.swift in Sources */ = {isa = PBXBuildFile; fileRef = 38E9DA1A1B29F5C40097D719 /* MCTableEmptyMessage.swift */; };
 		38EF31451938BA07004912F0 /* UINavigationController+KeyboardDismiss.m in Sources */ = {isa = PBXBuildFile; fileRef = 38EF31441938BA07004912F0 /* UINavigationController+KeyboardDismiss.m */; };
-		38F174E41A56FBD000FC6FC8 /* MCWhoPayingUserDefaultsStoreInterface+WeAllPay.m in Sources */ = {isa = PBXBuildFile; fileRef = 38F174E31A56FBD000FC6FC8 /* MCWhoPayingUserDefaultsStoreInterface+WeAllPay.m */; };
 		38F2A1AC1ADCF7E100831D48 /* TodayViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 38F2A1AA1ADCF7E100831D48 /* TodayViewController.swift */; };
 		38F2A1AD1ADCF7E100831D48 /* WhoIsPayingNextTextLocalizer.swift in Sources */ = {isa = PBXBuildFile; fileRef = 38F2A1AB1ADCF7E100831D48 /* WhoIsPayingNextTextLocalizer.swift */; };
-		38F2A1B01ADCF85200831D48 /* MCWhoPayingUserDefaultsStoreInterface.m in Sources */ = {isa = PBXBuildFile; fileRef = 38F2A1AF1ADCF85200831D48 /* MCWhoPayingUserDefaultsStoreInterface.m */; };
 		38F7F9A41B2C49B80059DE51 /* Available Currencies.plist in Resources */ = {isa = PBXBuildFile; fileRef = 38F7F9A61B2C49B80059DE51 /* Available Currencies.plist */; };
 		38F7F9AA1B2C4A120059DE51 /* CurrencyController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 38F7F9A91B2C4A120059DE51 /* CurrencyController.swift */; };
 /* End PBXBuildFile section */
@@ -170,6 +175,27 @@
 			remoteGlobalIDString = 38572AD1169D437B00969C62;
 			remoteInfo = "We all pay";
 		};
+		388A32871C11EDBD00F7459C /* PBXContainerItemProxy */ = {
+			isa = PBXContainerItemProxy;
+			containerPortal = 38572AC9169D437B00969C62 /* Project object */;
+			proxyType = 1;
+			remoteGlobalIDString = 388A327B1C11EDBD00F7459C;
+			remoteInfo = WhoPayingUserDefaultsStoreInterface;
+		};
+		388A32891C11EDBD00F7459C /* PBXContainerItemProxy */ = {
+			isa = PBXContainerItemProxy;
+			containerPortal = 38572AC9169D437B00969C62 /* Project object */;
+			proxyType = 1;
+			remoteGlobalIDString = 38572AD1169D437B00969C62;
+			remoteInfo = "We all pay";
+		};
+		388A328F1C11EDBD00F7459C /* PBXContainerItemProxy */ = {
+			isa = PBXContainerItemProxy;
+			containerPortal = 38572AC9169D437B00969C62 /* Project object */;
+			proxyType = 1;
+			remoteGlobalIDString = 388A327B1C11EDBD00F7459C;
+			remoteInfo = WhoPayingUserDefaultsStoreInterface;
+		};
 /* End PBXContainerItemProxy section */
 
 /* Begin PBXCopyFilesBuildPhase section */
@@ -179,6 +205,7 @@
 			dstPath = "";
 			dstSubfolderSpec = 10;
 			files = (
+				388A32921C11EDBD00F7459C /* WhoPayingUserDefaultsStoreInterface.framework in Embed Frameworks */,
 			);
 			name = "Embed Frameworks";
 			runOnlyForDeploymentPostprocessing = 0;
@@ -310,6 +337,14 @@
 		387D3A8E187053BA0060FAF8 /* nl */ = {isa = PBXFileReference; fileEncoding = 10; lastKnownFileType = text.plist.strings; name = nl; path = "nl.lproj/Main-Iphone.strings"; sourceTree = "<group>"; };
 		3886D3FB16B7A1CD00ECE64F /* AddressBook.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = AddressBook.framework; path = System/Library/Frameworks/AddressBook.framework; sourceTree = SDKROOT; };
 		3886D3FC16B7A1CD00ECE64F /* AddressBookUI.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = AddressBookUI.framework; path = System/Library/Frameworks/AddressBookUI.framework; sourceTree = SDKROOT; };
+		388A32701C11C51F00F7459C /* WhoPayingUserDefaultsStoreInterface.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = WhoPayingUserDefaultsStoreInterface.swift; path = "../Who is paying next/WhoPayingUserDefaultsStoreInterface.swift"; sourceTree = "<group>"; };
+		388A32741C11EA1400F7459C /* WhoPayingUserDefaultsStoreInterfaceWeAllPayExtension.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = WhoPayingUserDefaultsStoreInterfaceWeAllPayExtension.swift; sourceTree = "<group>"; };
+		388A327C1C11EDBD00F7459C /* WhoPayingUserDefaultsStoreInterface.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = WhoPayingUserDefaultsStoreInterface.framework; sourceTree = BUILT_PRODUCTS_DIR; };
+		388A327E1C11EDBD00F7459C /* WhoPayingUserDefaultsStoreInterface.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = WhoPayingUserDefaultsStoreInterface.h; sourceTree = "<group>"; };
+		388A32801C11EDBD00F7459C /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
+		388A32851C11EDBD00F7459C /* WhoPayingUserDefaultsStoreInterfaceTests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = WhoPayingUserDefaultsStoreInterfaceTests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
+		388A328C1C11EDBD00F7459C /* WhoPayingUserDefaultsStoreInterfaceTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = WhoPayingUserDefaultsStoreInterfaceTests.swift; sourceTree = "<group>"; };
+		388A328E1C11EDBD00F7459C /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		3892E3A217903EF00038894B /* MCEditTripViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = MCEditTripViewController.h; path = ViewControllers/MCEditTripViewController.h; sourceTree = "<group>"; };
 		3892E3A317903EF00038894B /* MCEditTripViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = MCEditTripViewController.m; path = ViewControllers/MCEditTripViewController.m; sourceTree = "<group>"; };
 		3892E3A817904A240038894B /* MCPersonViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = MCPersonViewController.h; path = ViewControllers/MCPersonViewController.h; sourceTree = "<group>"; };
@@ -421,12 +456,8 @@
 		38E9DA1A1B29F5C40097D719 /* MCTableEmptyMessage.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = MCTableEmptyMessage.swift; sourceTree = "<group>"; };
 		38EF31431938BA07004912F0 /* UINavigationController+KeyboardDismiss.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = "UINavigationController+KeyboardDismiss.h"; path = "ViewControllers/iPad/UINavigationController+KeyboardDismiss.h"; sourceTree = "<group>"; };
 		38EF31441938BA07004912F0 /* UINavigationController+KeyboardDismiss.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = "UINavigationController+KeyboardDismiss.m"; path = "ViewControllers/iPad/UINavigationController+KeyboardDismiss.m"; sourceTree = "<group>"; };
-		38F174E21A56FBD000FC6FC8 /* MCWhoPayingUserDefaultsStoreInterface+WeAllPay.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = "MCWhoPayingUserDefaultsStoreInterface+WeAllPay.h"; path = "Misc/MCWhoPayingUserDefaultsStoreInterface+WeAllPay.h"; sourceTree = "<group>"; };
-		38F174E31A56FBD000FC6FC8 /* MCWhoPayingUserDefaultsStoreInterface+WeAllPay.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = "MCWhoPayingUserDefaultsStoreInterface+WeAllPay.m"; path = "Misc/MCWhoPayingUserDefaultsStoreInterface+WeAllPay.m"; sourceTree = "<group>"; };
 		38F2A1AA1ADCF7E100831D48 /* TodayViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = TodayViewController.swift; sourceTree = "<group>"; };
 		38F2A1AB1ADCF7E100831D48 /* WhoIsPayingNextTextLocalizer.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = WhoIsPayingNextTextLocalizer.swift; sourceTree = "<group>"; };
-		38F2A1AE1ADCF85200831D48 /* MCWhoPayingUserDefaultsStoreInterface.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = MCWhoPayingUserDefaultsStoreInterface.h; sourceTree = "<group>"; };
-		38F2A1AF1ADCF85200831D48 /* MCWhoPayingUserDefaultsStoreInterface.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = MCWhoPayingUserDefaultsStoreInterface.m; sourceTree = "<group>"; };
 		38F7F9A51B2C49B80059DE51 /* Base */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; name = Base; path = "Base.lproj/Available Currencies.plist"; sourceTree = "<group>"; };
 		38F7F9A71B2C49C00059DE51 /* en */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; name = en; path = "en.lproj/Available Currencies.plist"; sourceTree = "<group>"; };
 		38F7F9A81B2C49C20059DE51 /* nl */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; name = nl; path = "nl.lproj/Available Currencies.plist"; sourceTree = "<group>"; };
@@ -441,6 +472,7 @@
 				38DC8B3619084ABE00762235 /* SystemConfiguration.framework in Frameworks */,
 				386FC37018E5BE1900428294 /* iAd.framework in Frameworks */,
 				3886D3FD16B7A1CD00ECE64F /* AddressBook.framework in Frameworks */,
+				388A32911C11EDBD00F7459C /* WhoPayingUserDefaultsStoreInterface.framework in Frameworks */,
 				3886D3FE16B7A1CD00ECE64F /* AddressBookUI.framework in Frameworks */,
 				3801F89C16DFC62600DF8675 /* CoreData.framework in Frameworks */,
 				38572ADB169D437B00969C62 /* CoreGraphics.framework in Frameworks */,
@@ -461,10 +493,26 @@
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
+		388A32781C11EDBD00F7459C /* Frameworks */ = {
+			isa = PBXFrameworksBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+		388A32821C11EDBD00F7459C /* Frameworks */ = {
+			isa = PBXFrameworksBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				388A32861C11EDBD00F7459C /* WhoPayingUserDefaultsStoreInterface.framework in Frameworks */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
 		38B6E0E91A28BBAB009E69D7 /* Frameworks */ = {
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				388A329A1C11EF4700F7459C /* WhoPayingUserDefaultsStoreInterface.framework in Frameworks */,
 				38B6E0ED1A28BBAB009E69D7 /* NotificationCenter.framework in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
@@ -566,6 +614,8 @@
 				38572ADC169D437B00969C62 /* We all pay */,
 				385F5301191C2C360012773D /* We all pay Tests */,
 				38B6E0EE1A28BBAB009E69D7 /* Who is paying next */,
+				388A327D1C11EDBD00F7459C /* WhoPayingUserDefaultsStoreInterface */,
+				388A328B1C11EDBD00F7459C /* WhoPayingUserDefaultsStoreInterfaceTests */,
 				38572AD5169D437B00969C62 /* Frameworks */,
 				38572AD3169D437B00969C62 /* Products */,
 			);
@@ -577,6 +627,8 @@
 				38572AD2169D437B00969C62 /* We all pay.app */,
 				385F52FD191C2C360012773D /* We all pay Tests.xctest */,
 				38B6E0EC1A28BBAB009E69D7 /* Who is paying next.appex */,
+				388A327C1C11EDBD00F7459C /* WhoPayingUserDefaultsStoreInterface.framework */,
+				388A32851C11EDBD00F7459C /* WhoPayingUserDefaultsStoreInterfaceTests.xctest */,
 			);
 			name = Products;
 			sourceTree = "<group>";
@@ -705,6 +757,25 @@
 			name = Storyboard;
 			sourceTree = "<group>";
 		};
+		388A327D1C11EDBD00F7459C /* WhoPayingUserDefaultsStoreInterface */ = {
+			isa = PBXGroup;
+			children = (
+				388A327E1C11EDBD00F7459C /* WhoPayingUserDefaultsStoreInterface.h */,
+				388A32701C11C51F00F7459C /* WhoPayingUserDefaultsStoreInterface.swift */,
+				388A32801C11EDBD00F7459C /* Info.plist */,
+			);
+			path = WhoPayingUserDefaultsStoreInterface;
+			sourceTree = "<group>";
+		};
+		388A328B1C11EDBD00F7459C /* WhoPayingUserDefaultsStoreInterfaceTests */ = {
+			isa = PBXGroup;
+			children = (
+				388A328C1C11EDBD00F7459C /* WhoPayingUserDefaultsStoreInterfaceTests.swift */,
+				388A328E1C11EDBD00F7459C /* Info.plist */,
+			);
+			path = WhoPayingUserDefaultsStoreInterfaceTests;
+			sourceTree = "<group>";
+		};
 		3892E3AB179055F40038894B /* DataModel */ = {
 			isa = PBXGroup;
 			children = (
@@ -745,8 +816,6 @@
 			isa = PBXGroup;
 			children = (
 				38C725031A2E082D003173E6 /* Who is paying next.entitlements */,
-				38F2A1AE1ADCF85200831D48 /* MCWhoPayingUserDefaultsStoreInterface.h */,
-				38F2A1AF1ADCF85200831D48 /* MCWhoPayingUserDefaultsStoreInterface.m */,
 				38F2A1AA1ADCF7E100831D48 /* TodayViewController.swift */,
 				38F2A1AB1ADCF7E100831D48 /* WhoIsPayingNextTextLocalizer.swift */,
 				38370CF71A40DBC300B56460 /* MainInterface.storyboard */,
@@ -780,8 +849,7 @@
 				3825A82319990BA400A8885D /* UIViewController+WeAllPayStore.m */,
 				386173A01A53453A000C2EE5 /* ADoriginate.swift */,
 				380D61251B29ACA8006F8AE4 /* HintsController.swift */,
-				38F174E21A56FBD000FC6FC8 /* MCWhoPayingUserDefaultsStoreInterface+WeAllPay.h */,
-				38F174E31A56FBD000FC6FC8 /* MCWhoPayingUserDefaultsStoreInterface+WeAllPay.m */,
+				388A32741C11EA1400F7459C /* WhoPayingUserDefaultsStoreInterfaceWeAllPayExtension.swift */,
 			);
 			name = "MC SDK";
 			sourceTree = "<group>";
@@ -900,6 +968,17 @@
 		};
 /* End PBXGroup section */
 
+/* Begin PBXHeadersBuildPhase section */
+		388A32791C11EDBD00F7459C /* Headers */ = {
+			isa = PBXHeadersBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				388A327F1C11EDBD00F7459C /* WhoPayingUserDefaultsStoreInterface.h in Headers */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+/* End PBXHeadersBuildPhase section */
+
 /* Begin PBXNativeTarget section */
 		38572AD1169D437B00969C62 /* We all pay */ = {
 			isa = PBXNativeTarget;
@@ -915,6 +994,7 @@
 			);
 			dependencies = (
 				381641001AD6D8A1000D9FAF /* PBXTargetDependency */,
+				388A32901C11EDBD00F7459C /* PBXTargetDependency */,
 			);
 			name = "We all pay";
 			productName = "Going Dutch";
@@ -937,6 +1017,43 @@
 			name = "We all pay Tests";
 			productName = "We all pay Tests";
 			productReference = 385F52FD191C2C360012773D /* We all pay Tests.xctest */;
+			productType = "com.apple.product-type.bundle.unit-test";
+		};
+		388A327B1C11EDBD00F7459C /* WhoPayingUserDefaultsStoreInterface */ = {
+			isa = PBXNativeTarget;
+			buildConfigurationList = 388A32931C11EDBD00F7459C /* Build configuration list for PBXNativeTarget "WhoPayingUserDefaultsStoreInterface" */;
+			buildPhases = (
+				388A32771C11EDBD00F7459C /* Sources */,
+				388A32781C11EDBD00F7459C /* Frameworks */,
+				388A32791C11EDBD00F7459C /* Headers */,
+				388A327A1C11EDBD00F7459C /* Resources */,
+			);
+			buildRules = (
+			);
+			dependencies = (
+			);
+			name = WhoPayingUserDefaultsStoreInterface;
+			productName = WhoPayingUserDefaultsStoreInterface;
+			productReference = 388A327C1C11EDBD00F7459C /* WhoPayingUserDefaultsStoreInterface.framework */;
+			productType = "com.apple.product-type.framework";
+		};
+		388A32841C11EDBD00F7459C /* WhoPayingUserDefaultsStoreInterfaceTests */ = {
+			isa = PBXNativeTarget;
+			buildConfigurationList = 388A32961C11EDBD00F7459C /* Build configuration list for PBXNativeTarget "WhoPayingUserDefaultsStoreInterfaceTests" */;
+			buildPhases = (
+				388A32811C11EDBD00F7459C /* Sources */,
+				388A32821C11EDBD00F7459C /* Frameworks */,
+				388A32831C11EDBD00F7459C /* Resources */,
+			);
+			buildRules = (
+			);
+			dependencies = (
+				388A32881C11EDBD00F7459C /* PBXTargetDependency */,
+				388A328A1C11EDBD00F7459C /* PBXTargetDependency */,
+			);
+			name = WhoPayingUserDefaultsStoreInterfaceTests;
+			productName = WhoPayingUserDefaultsStoreInterfaceTests;
+			productReference = 388A32851C11EDBD00F7459C /* WhoPayingUserDefaultsStoreInterfaceTests.xctest */;
 			productType = "com.apple.product-type.bundle.unit-test";
 		};
 		38B6E0EB1A28BBAB009E69D7 /* Who is paying next */ = {
@@ -964,7 +1081,7 @@
 			attributes = {
 				CLASSPREFIX = MC;
 				LastSwiftMigration = 0700;
-				LastSwiftUpdateCheck = 0700;
+				LastSwiftUpdateCheck = 0710;
 				LastUpgradeCheck = 0700;
 				ORGANIZATIONNAME = "Mark Cornelisse";
 				TargetAttributes = {
@@ -984,6 +1101,14 @@
 					};
 					385F52FC191C2C360012773D = {
 						DevelopmentTeam = Z6JP26PUUY;
+						TestTargetID = 38572AD1169D437B00969C62;
+					};
+					388A327B1C11EDBD00F7459C = {
+						CreatedOnToolsVersion = 7.1.1;
+						DevelopmentTeam = Z6JP26PUUY;
+					};
+					388A32841C11EDBD00F7459C = {
+						CreatedOnToolsVersion = 7.1.1;
 						TestTargetID = 38572AD1169D437B00969C62;
 					};
 					38B6E0EB1A28BBAB009E69D7 = {
@@ -1014,6 +1139,8 @@
 				38572AD1169D437B00969C62 /* We all pay */,
 				385F52FC191C2C360012773D /* We all pay Tests */,
 				38B6E0EB1A28BBAB009E69D7 /* Who is paying next */,
+				388A327B1C11EDBD00F7459C /* WhoPayingUserDefaultsStoreInterface */,
+				388A32841C11EDBD00F7459C /* WhoPayingUserDefaultsStoreInterfaceTests */,
 			);
 		};
 /* End PBXProject section */
@@ -1047,6 +1174,20 @@
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
+		388A327A1C11EDBD00F7459C /* Resources */ = {
+			isa = PBXResourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+		388A32831C11EDBD00F7459C /* Resources */ = {
+			isa = PBXResourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
 		38B6E0EA1A28BBAB009E69D7 /* Resources */ = {
 			isa = PBXResourcesBuildPhase;
 			buildActionMask = 2147483647;
@@ -1066,7 +1207,6 @@
 			files = (
 				38E9DA1C1B29F8990097D719 /* MCTableEmptyMessage.swift in Sources */,
 				383D5D841C0708F800BE9F94 /* ReturnPayment.swift in Sources */,
-				38DB0F941ADD48CB00946B95 /* MCWhoPayingUserDefaultsStoreInterface.m in Sources */,
 				384EC90C1BC2F17500A80799 /* SelectCategoryTableViewCell_iPad.swift in Sources */,
 				3812760E1BBE76B40004C8C2 /* PaymentViewController.swift in Sources */,
 				38977E4F1B2A26D4008484A4 /* MCTwoLabelIscreenTableViewCell.swift in Sources */,
@@ -1125,6 +1265,7 @@
 				38AAFBA518EC529300CD3E12 /* MCSharedBillViewController_iPad.m in Sources */,
 				384EC9101BC2F48C00A80799 /* SelectEmailAddressTableViewCell_iPad.swift in Sources */,
 				3897159217902E35005BE03E /* MCSharedBillTableViewController.m in Sources */,
+				388A32761C11ED2F00F7459C /* WhoPayingUserDefaultsStoreInterfaceWeAllPayExtension.swift in Sources */,
 				3858D65A1B2DB6B3006A4E2B /* ExchangeRateFetcher.swift in Sources */,
 				382E7BDD17E5E57500A1040A /* MCReturnPaymentViewController.m in Sources */,
 				383E0C5D186737EB00AA688D /* MCSharedBillPageViewController.m in Sources */,
@@ -1142,7 +1283,6 @@
 				384513011986DEC0008D17AB /* MCSelectCurrencyTableViewController.m in Sources */,
 				38977E571B2A2C57008484A4 /* MCPaymentPresenceTableViewCell_iPhone.swift in Sources */,
 				38DB85D417E45BCA006237CF /* MCPayment+addons.m in Sources */,
-				38F174E41A56FBD000FC6FC8 /* MCWhoPayingUserDefaultsStoreInterface+WeAllPay.m in Sources */,
 				3825A82419990BA400A8885D /* UIViewController+WeAllPayStore.m in Sources */,
 				383A86C518F7EE48001F128E /* MCSolutionTableViewController.m in Sources */,
 				389DE8F7197FB2B900169645 /* MCPaymentPresence.m in Sources */,
@@ -1185,12 +1325,27 @@
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
+		388A32771C11EDBD00F7459C /* Sources */ = {
+			isa = PBXSourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				388A32991C11EEA700F7459C /* WhoPayingUserDefaultsStoreInterface.swift in Sources */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+		388A32811C11EDBD00F7459C /* Sources */ = {
+			isa = PBXSourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				388A328D1C11EDBD00F7459C /* WhoPayingUserDefaultsStoreInterfaceTests.swift in Sources */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
 		38B6E0E81A28BBAB009E69D7 /* Sources */ = {
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
 				38F2A1AD1ADCF7E100831D48 /* WhoIsPayingNextTextLocalizer.swift in Sources */,
-				38F2A1B01ADCF85200831D48 /* MCWhoPayingUserDefaultsStoreInterface.m in Sources */,
 				38F2A1AC1ADCF7E100831D48 /* TodayViewController.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
@@ -1207,6 +1362,21 @@
 			isa = PBXTargetDependency;
 			target = 38572AD1169D437B00969C62 /* We all pay */;
 			targetProxy = 385F530A191C2C360012773D /* PBXContainerItemProxy */;
+		};
+		388A32881C11EDBD00F7459C /* PBXTargetDependency */ = {
+			isa = PBXTargetDependency;
+			target = 388A327B1C11EDBD00F7459C /* WhoPayingUserDefaultsStoreInterface */;
+			targetProxy = 388A32871C11EDBD00F7459C /* PBXContainerItemProxy */;
+		};
+		388A328A1C11EDBD00F7459C /* PBXTargetDependency */ = {
+			isa = PBXTargetDependency;
+			target = 38572AD1169D437B00969C62 /* We all pay */;
+			targetProxy = 388A32891C11EDBD00F7459C /* PBXContainerItemProxy */;
+		};
+		388A32901C11EDBD00F7459C /* PBXTargetDependency */ = {
+			isa = PBXTargetDependency;
+			target = 388A327B1C11EDBD00F7459C /* WhoPayingUserDefaultsStoreInterface */;
+			targetProxy = 388A328F1C11EDBD00F7459C /* PBXContainerItemProxy */;
 		};
 /* End PBXTargetDependency section */
 
@@ -1406,6 +1576,7 @@
 				CODE_SIGN_IDENTITY = "iPhone Developer";
 				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer";
 				"CODE_SIGN_IDENTITY[sdk=macosx*]" = "Mac Developer";
+				EMBEDDED_CONTENT_CONTAINS_SWIFT = YES;
 				GCC_PRECOMPILE_PREFIX_HEADER = YES;
 				GCC_PREFIX_HEADER = "Going Dutch/We all pay-Prefix.pch";
 				GCC_SYMBOLS_PRIVATE_EXTERN = NO;
@@ -1442,6 +1613,7 @@
 				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer";
 				"CODE_SIGN_IDENTITY[sdk=macosx*]" = "Mac Developer";
 				COPY_PHASE_STRIP = NO;
+				EMBEDDED_CONTENT_CONTAINS_SWIFT = YES;
 				GCC_PRECOMPILE_PREFIX_HEADER = YES;
 				GCC_PREFIX_HEADER = "Going Dutch/We all pay-Prefix.pch";
 				GCC_SYMBOLS_PRIVATE_EXTERN = YES;
@@ -1541,6 +1713,152 @@
 				SWIFT_OBJC_BRIDGING_HEADER = "Going Dutch/We all pay Tests-Bridging-Header.h";
 				TEST_HOST = "$(BUNDLE_LOADER)";
 				WRAPPER_EXTENSION = xctest;
+			};
+			name = Release;
+		};
+		388A32941C11EDBD00F7459C /* Debug */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				CLANG_ENABLE_MODULES = YES;
+				CLANG_WARN_BOOL_CONVERSION = YES;
+				CLANG_WARN_CONSTANT_CONVERSION = YES;
+				CLANG_WARN_DIRECT_OBJC_ISA_USAGE = YES_ERROR;
+				CLANG_WARN_ENUM_CONVERSION = YES;
+				CLANG_WARN_INT_CONVERSION = YES;
+				CLANG_WARN_OBJC_ROOT_CLASS = YES_ERROR;
+				CLANG_WARN_UNREACHABLE_CODE = YES;
+				CODE_SIGN_IDENTITY = "iPhone Developer";
+				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer";
+				"CODE_SIGN_IDENTITY[sdk=macosx*]" = "Mac Developer";
+				CURRENT_PROJECT_VERSION = 1;
+				DEBUG_INFORMATION_FORMAT = dwarf;
+				DEFINES_MODULE = YES;
+				DYLIB_COMPATIBILITY_VERSION = 1;
+				DYLIB_CURRENT_VERSION = 1;
+				DYLIB_INSTALL_NAME_BASE = "@rpath";
+				ENABLE_STRICT_OBJC_MSGSEND = YES;
+				GCC_NO_COMMON_BLOCKS = YES;
+				GCC_WARN_64_TO_32_BIT_CONVERSION = YES;
+				GCC_WARN_ABOUT_RETURN_TYPE = YES_ERROR;
+				GCC_WARN_UNDECLARED_SELECTOR = YES;
+				GCC_WARN_UNINITIALIZED_AUTOS = YES_AGGRESSIVE;
+				GCC_WARN_UNUSED_FUNCTION = YES;
+				INFOPLIST_FILE = WhoPayingUserDefaultsStoreInterface/Info.plist;
+				INSTALL_PATH = "$(LOCAL_LIBRARY_DIR)/Frameworks";
+				IPHONEOS_DEPLOYMENT_TARGET = 8.0;
+				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks @loader_path/Frameworks";
+				MTL_ENABLE_DEBUG_INFO = YES;
+				PRODUCT_BUNDLE_IDENTIFIER = com.GreenHair.WhoPayingUserDefaultsStoreInterface;
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				SKIP_INSTALL = YES;
+				SWIFT_OPTIMIZATION_LEVEL = "-Onone";
+				TARGETED_DEVICE_FAMILY = "1,2";
+				VERSIONING_SYSTEM = "apple-generic";
+				VERSION_INFO_PREFIX = "";
+			};
+			name = Debug;
+		};
+		388A32951C11EDBD00F7459C /* Release */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				CLANG_ENABLE_MODULES = YES;
+				CLANG_WARN_BOOL_CONVERSION = YES;
+				CLANG_WARN_CONSTANT_CONVERSION = YES;
+				CLANG_WARN_DIRECT_OBJC_ISA_USAGE = YES_ERROR;
+				CLANG_WARN_ENUM_CONVERSION = YES;
+				CLANG_WARN_INT_CONVERSION = YES;
+				CLANG_WARN_OBJC_ROOT_CLASS = YES_ERROR;
+				CLANG_WARN_UNREACHABLE_CODE = YES;
+				CODE_SIGN_IDENTITY = "iPhone Developer";
+				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer";
+				"CODE_SIGN_IDENTITY[sdk=macosx*]" = "Mac Developer";
+				COPY_PHASE_STRIP = NO;
+				CURRENT_PROJECT_VERSION = 1;
+				DEBUG_INFORMATION_FORMAT = "dwarf-with-dsym";
+				DEFINES_MODULE = YES;
+				DYLIB_COMPATIBILITY_VERSION = 1;
+				DYLIB_CURRENT_VERSION = 1;
+				DYLIB_INSTALL_NAME_BASE = "@rpath";
+				ENABLE_NS_ASSERTIONS = NO;
+				ENABLE_STRICT_OBJC_MSGSEND = YES;
+				GCC_NO_COMMON_BLOCKS = YES;
+				GCC_WARN_64_TO_32_BIT_CONVERSION = YES;
+				GCC_WARN_ABOUT_RETURN_TYPE = YES_ERROR;
+				GCC_WARN_UNDECLARED_SELECTOR = YES;
+				GCC_WARN_UNINITIALIZED_AUTOS = YES_AGGRESSIVE;
+				GCC_WARN_UNUSED_FUNCTION = YES;
+				INFOPLIST_FILE = WhoPayingUserDefaultsStoreInterface/Info.plist;
+				INSTALL_PATH = "$(LOCAL_LIBRARY_DIR)/Frameworks";
+				IPHONEOS_DEPLOYMENT_TARGET = 8.0;
+				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks @loader_path/Frameworks";
+				MTL_ENABLE_DEBUG_INFO = NO;
+				PRODUCT_BUNDLE_IDENTIFIER = com.GreenHair.WhoPayingUserDefaultsStoreInterface;
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				SKIP_INSTALL = YES;
+				TARGETED_DEVICE_FAMILY = "1,2";
+				VERSIONING_SYSTEM = "apple-generic";
+				VERSION_INFO_PREFIX = "";
+			};
+			name = Release;
+		};
+		388A32971C11EDBD00F7459C /* Debug */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				CLANG_WARN_BOOL_CONVERSION = YES;
+				CLANG_WARN_CONSTANT_CONVERSION = YES;
+				CLANG_WARN_DIRECT_OBJC_ISA_USAGE = YES_ERROR;
+				CLANG_WARN_ENUM_CONVERSION = YES;
+				CLANG_WARN_INT_CONVERSION = YES;
+				CLANG_WARN_OBJC_ROOT_CLASS = YES_ERROR;
+				CLANG_WARN_UNREACHABLE_CODE = YES;
+				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer";
+				DEBUG_INFORMATION_FORMAT = dwarf;
+				ENABLE_STRICT_OBJC_MSGSEND = YES;
+				GCC_NO_COMMON_BLOCKS = YES;
+				GCC_WARN_64_TO_32_BIT_CONVERSION = YES;
+				GCC_WARN_ABOUT_RETURN_TYPE = YES_ERROR;
+				GCC_WARN_UNDECLARED_SELECTOR = YES;
+				GCC_WARN_UNINITIALIZED_AUTOS = YES_AGGRESSIVE;
+				GCC_WARN_UNUSED_FUNCTION = YES;
+				INFOPLIST_FILE = WhoPayingUserDefaultsStoreInterfaceTests/Info.plist;
+				IPHONEOS_DEPLOYMENT_TARGET = 9.1;
+				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks @loader_path/Frameworks";
+				MTL_ENABLE_DEBUG_INFO = YES;
+				PRODUCT_BUNDLE_IDENTIFIER = com.GreenHair.WhoPayingUserDefaultsStoreInterfaceTests;
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				SWIFT_OPTIMIZATION_LEVEL = "-Onone";
+				TEST_HOST = "$(BUILT_PRODUCTS_DIR)/We all pay.app/We all pay";
+			};
+			name = Debug;
+		};
+		388A32981C11EDBD00F7459C /* Release */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				CLANG_WARN_BOOL_CONVERSION = YES;
+				CLANG_WARN_CONSTANT_CONVERSION = YES;
+				CLANG_WARN_DIRECT_OBJC_ISA_USAGE = YES_ERROR;
+				CLANG_WARN_ENUM_CONVERSION = YES;
+				CLANG_WARN_INT_CONVERSION = YES;
+				CLANG_WARN_OBJC_ROOT_CLASS = YES_ERROR;
+				CLANG_WARN_UNREACHABLE_CODE = YES;
+				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer";
+				COPY_PHASE_STRIP = NO;
+				DEBUG_INFORMATION_FORMAT = "dwarf-with-dsym";
+				ENABLE_NS_ASSERTIONS = NO;
+				ENABLE_STRICT_OBJC_MSGSEND = YES;
+				GCC_NO_COMMON_BLOCKS = YES;
+				GCC_WARN_64_TO_32_BIT_CONVERSION = YES;
+				GCC_WARN_ABOUT_RETURN_TYPE = YES_ERROR;
+				GCC_WARN_UNDECLARED_SELECTOR = YES;
+				GCC_WARN_UNINITIALIZED_AUTOS = YES_AGGRESSIVE;
+				GCC_WARN_UNUSED_FUNCTION = YES;
+				INFOPLIST_FILE = WhoPayingUserDefaultsStoreInterfaceTests/Info.plist;
+				IPHONEOS_DEPLOYMENT_TARGET = 9.1;
+				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks @loader_path/Frameworks";
+				MTL_ENABLE_DEBUG_INFO = NO;
+				PRODUCT_BUNDLE_IDENTIFIER = com.GreenHair.WhoPayingUserDefaultsStoreInterfaceTests;
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				TEST_HOST = "$(BUILT_PRODUCTS_DIR)/We all pay.app/We all pay";
 			};
 			name = Release;
 		};
@@ -1649,6 +1967,24 @@
 			buildConfigurations = (
 				385F530D191C2C360012773D /* Debug */,
 				385F530E191C2C360012773D /* Release */,
+			);
+			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
+		};
+		388A32931C11EDBD00F7459C /* Build configuration list for PBXNativeTarget "WhoPayingUserDefaultsStoreInterface" */ = {
+			isa = XCConfigurationList;
+			buildConfigurations = (
+				388A32941C11EDBD00F7459C /* Debug */,
+				388A32951C11EDBD00F7459C /* Release */,
+			);
+			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
+		};
+		388A32961C11EDBD00F7459C /* Build configuration list for PBXNativeTarget "WhoPayingUserDefaultsStoreInterfaceTests" */ = {
+			isa = XCConfigurationList;
+			buildConfigurations = (
+				388A32971C11EDBD00F7459C /* Debug */,
+				388A32981C11EDBD00F7459C /* Release */,
 			);
 			defaultConfigurationIsVisible = 0;
 			defaultConfigurationName = Release;

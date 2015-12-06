@@ -16,8 +16,6 @@
 
 #import "MCDismissMeBlockProtocol.h"
 
-#import "MCWhoPayingUserDefaultsStoreInterface+WeAllPay.h"
-
 #import "We_all_pay-Swift.h"
 
 typedef NS_ENUM(BOOL, ChildViewOpened) {
@@ -104,7 +102,7 @@ typedef NS_ENUM(BOOL, ChildViewOpened) {
     }
     [[MCWeAllPayStoreController defaultStore] saveMainThreadContext];
     [[[self navigationController] presentingViewController] dismissViewControllerAnimated:YES completion:^{
-        [MCWhoPayingUserDefaultsStoreInterface sendToUserDefaultsStoreInterface:_tonightsBill];
+        [WhoPayingUserDefaultsStoreInterface sendToUserDefaultsStoreInterface:_tonightsBill];
     }];
 }
 

@@ -10,6 +10,8 @@
 @import CoreData;
 @import AddressBookUI;
 @import NotificationCenter;
+@import WhoPayingUserDefaultsStoreInterface;
+
 #import "MCPersonViewController.h"
 
 #import "MCTonightsBillTransfer.h"

@@ -20,8 +20,6 @@
 
 #import "UIViewController+WeAllPayStore.h"
 
-#import "MCWhoPayingUserDefaultsStoreInterface+WeAllPay.h"
-
 #import "We_all_pay-Swift.h"
 
 typedef NS_ENUM(BOOL, MCTonightsBillStatus) {
@@ -312,7 +310,7 @@ typedef NS_ENUM(BOOL, MCTonightsBillStatus) {
     if (editingStyle == UITableViewCellEditingStyleDelete) {
         MCSharedBill *toBeDeleteSharedBill = [_dataController objectAtIndexPath:indexPath];
 
-        [MCWhoPayingUserDefaultsStoreInterface sendInvalidUserDefaultsIfTonightsBillIs:toBeDeleteSharedBill];
+        [WhoPayingUserDefaultsStoreInterface sendInvalidUserDefaultsIfTonightsBillIs:toBeDeleteSharedBill];
         [MCSharedBill deleteSharedbill:toBeDeleteSharedBill];
         [[MCWeAllPayStoreController defaultStore] saveMainThreadContext];
     }

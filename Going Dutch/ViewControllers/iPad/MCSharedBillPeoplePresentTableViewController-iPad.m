@@ -16,8 +16,6 @@
 
 #import "MCDismissMeBlockProtocol.h"
 
-#import "MCWhoPayingUserDefaultsStoreInterface+WeAllPay.h"
-
 #import "We_all_pay-Swift.h"
 
 @interface MCSharedBillPeoplePresentTableViewController_iPad ()
@@ -286,7 +284,7 @@
 {
     if (editingStyle == UITableViewCellEditingStyleDelete) {
         // Delete the row from the data source
-        [MCWhoPayingUserDefaultsStoreInterface sendToUserDefaultsStoreInterface:_tonightsBill];
+        [WhoPayingUserDefaultsStoreInterface sendToUserDefaultsStoreInterface:_tonightsBill];
         [MCPerson deletePerson:[_dataController objectAtIndexPath:indexPath]];
         [[MCWeAllPayStoreController defaultStore] saveMainThreadContext];
     } else if (editingStyle == UITableViewCellEditingStyleInsert) {

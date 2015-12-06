@@ -33,7 +33,7 @@
 
 - (void)testPreparePictureArray
 {
-    [_myCategoryPictureController preparePictureObjectsArray];
+//    [_myCategoryPictureController preparePictureObjectsArray];
     XCTAssertTrue([_myCategoryPictureController pictureObjects], @"Picture array not created.");
 }
 

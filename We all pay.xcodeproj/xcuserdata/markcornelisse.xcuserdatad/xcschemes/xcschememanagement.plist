@@ -39,6 +39,11 @@
 			<key>orderHint</key>
 			<integer>2</integer>
 		</dict>
+		<key>WhoPayingUserDefaultsStoreInterface.xcscheme</key>
+		<dict>
+			<key>orderHint</key>
+			<integer>2</integer>
+		</dict>
 		<key>X-Rates.xcscheme</key>
 		<dict>
 			<key>orderHint</key>
@@ -123,6 +128,16 @@
 			<true/>
 		</dict>
 		<key>3877591C1923D3EE0027A7F1</key>
+		<dict>
+			<key>primary</key>
+			<true/>
+		</dict>
+		<key>388A327B1C11EDBD00F7459C</key>
+		<dict>
+			<key>primary</key>
+			<true/>
+		</dict>
+		<key>388A32841C11EDBD00F7459C</key>
 		<dict>
 			<key>primary</key>
 			<true/>

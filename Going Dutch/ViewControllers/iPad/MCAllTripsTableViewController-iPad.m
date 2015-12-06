@@ -15,8 +15,6 @@
 
 #import "MCTonightsBillTransfer.h"
 
-#import "MCWhoPayingUserDefaultsStoreInterface+WeAllPay.h"
-
 #import "We_all_pay-Swift.h"
 
 @interface MCAllTripsTableViewController_iPad ()
@@ -280,7 +278,7 @@
     if (editingStyle == UITableViewCellEditingStyleDelete) {
         // Delete the row from the data source
         MCSharedBill *toBeDeletedTonightsBill = [_dataController objectAtIndexPath:indexPath];
-        [MCWhoPayingUserDefaultsStoreInterface sendInvalidUserDefaultsIfTonightsBillIs:toBeDeletedTonightsBill];
+        [WhoPayingUserDefaultsStoreInterface sendInvalidUserDefaultsIfTonightsBillIs:toBeDeletedTonightsBill];
         [MCSharedBill deleteSharedbill:toBeDeletedTonightsBill];
         [[MCWeAllPayStoreController defaultStore] saveMainThreadContext];
     } else if (editingStyle == UITableViewCellEditingStyleInsert) {

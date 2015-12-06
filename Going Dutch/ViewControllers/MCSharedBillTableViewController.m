@@ -6,6 +6,7 @@
 //  Copyright (c) 2013 Mark Cornelisse. All rights reserved.
 //
 
+@import WhoPayingUserDefaultsStoreInterface;
 #import "MCSharedBillTableViewController.h"
 #import "UIViewController+WeAllPayStore.h"
 
@@ -19,8 +20,6 @@
 #import "MCPaymentViewController.h"
 #import "MCReturnPaymentViewController.h"
 #import "MCSharedBillPageViewController.h"
-
-#import "MCWhoPayingUserDefaultsStoreInterface+WeAllPay.h"
 
 #import "We_all_pay-Swift.h"
 
@@ -264,7 +263,7 @@
         [[self presentedViewController] dismissViewControllerAnimated:YES completion:nil];
     } else if (result == MFMailComposeResultSent) {
         [[self presentedViewController] dismissViewControllerAnimated:YES completion:nil];
-        [[NCWidgetController widgetController] setHasContent:NO forWidgetWithBundleIdentifier:MCWhoIsPayingNextBundleIdentifier];
+        [[NCWidgetController widgetController] setHasContent:NO forWidgetWithBundleIdentifier:WhoPayingUserDefaultsStoreInterface.MCWhoIsPayingNextBundleIdentifier];
     } else if (result == MFMailComposeResultSaved) {
         [[self presentedViewController] dismissViewControllerAnimated:YES completion:nil];
     } else {
@@ -369,7 +368,7 @@
     if (editingStyle == UITableViewCellEditingStyleDelete) {
         MCPayment *toBeDeletedPayment = [_dataController objectAtIndexPath:indexPath];
         [MCPayment deletePayment:toBeDeletedPayment];
-        [MCWhoPayingUserDefaultsStoreInterface sendToUserDefaultsStoreInterface:_tonightsBill];
+        [WhoPayingUserDefaultsStoreInterface sendToUserDefaultsStoreInterface:_tonightsBill];
         [[[MCWeAllPayStoreController defaultStore] mainThreadContext] processPendingChanges];
     }
 }
