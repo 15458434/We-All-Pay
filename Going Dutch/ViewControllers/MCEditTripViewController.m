@@ -21,7 +21,6 @@
 
 @interface MCEditTripViewController ()
 
-@property (weak, nonatomic) IBOutlet UIButton *addressBookButton;
 @property (weak, nonatomic) IBOutlet UIButton *addPersonButton;
 
 @property (weak, nonatomic) IBOutlet UIButton *contactsButton;
