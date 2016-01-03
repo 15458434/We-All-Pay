@@ -7,6 +7,7 @@
 //
 
 import Foundation
+import CurrencyConverter
 
 extension ExchangeRateFetcher {
     private func update(exchangeRates: [MCExchangeRate]) {

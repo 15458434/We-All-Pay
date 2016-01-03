@@ -6,17 +6,17 @@
 //  Copyright (c) 2015 Mark Cornelisse. All rights reserved.
 //
 
-import Foundation
+import UIKit
 
-class ExchangeRateFetcher: NSObject {
-    let currencyController: CurrencyController = CurrencyController()
-    internal private(set) var baseCurrencyCode: String!
-    internal private(set) var rates: Dictionary<String, Double>!
-    internal private(set) var date: NSDate!
+public class ExchangeRateFetcher: NSObject {
+    public let currencyController: CurrencyController = CurrencyController()
+    public private(set) var baseCurrencyCode: String!
+    public private(set) var rates: Dictionary<String, Double>!
+    public private(set) var date: NSDate!
     
-    internal private(set) var isFetching: Bool = false
+    public private(set) var isFetching: Bool = false
     
-    var isLastFetchOlderThanAnHour: Bool {
+    public var isLastFetchOlderThanAnHour: Bool {
         if date == nil {
             return true
         }
@@ -30,13 +30,13 @@ class ExchangeRateFetcher: NSObject {
         }
     }
     
-    func calculateExchangeRate(fromCode: String, toCode: String) -> Double {
+    public func calculateExchangeRate(fromCode: String, toCode: String) -> Double {
         let fromToBaseRate = rates[fromCode]!
         let toToBaseRate = rates[toCode]!
         return toToBaseRate / fromToBaseRate
     }
     
-    func exchangeRate(fromCode: String, toCode: String, completionHandler: (fromCode: String, toCode: String, exchangeRate: NSNumber!, error: NSError!) -> ()) {
+    public func exchangeRate(fromCode: String, toCode: String, completionHandler: (fromCode: String, toCode: String, exchangeRate: NSNumber!, error: NSError!) -> ()) {
         let thisOperationQueue = NSOperationQueue.currentQueue()!
         if isLastFetchOlderThanAnHour {
             fetchFromOpenExchangeRates({ (baseCurrency, rates, error) -> () in
@@ -55,7 +55,7 @@ class ExchangeRateFetcher: NSObject {
         }
     }
     
-    func fetchFromOpenExchangeRates(completionHandler: (baseCurrency: String!, rates: Dictionary<String, Double>!, error: NSError?) -> ()) {
+    public func fetchFromOpenExchangeRates(completionHandler: (baseCurrency: String!, rates: Dictionary<String, Double>!, error: NSError?) -> ()) {
         if isFetching {
             let error = NSError(domain: "ExchangeRateFetcher", code: 1, userInfo: ["reason": "Already fetching"])
             completionHandler(baseCurrency: nil, rates: nil, error: error)
@@ -110,7 +110,7 @@ class ExchangeRateFetcher: NSObject {
         task.resume()
     }
     
-    func isCurrencyCodeAvailableInRates(code: String) -> Bool {
+    public func isCurrencyCodeAvailableInRates(code: String) -> Bool {
         if let _ = rates[code] {
             return true
         } else {
@@ -119,7 +119,7 @@ class ExchangeRateFetcher: NSObject {
         }
     }
     
-    internal subscript(code: String) -> Double {
+    public subscript(code: String) -> Double {
         return rates[code]!
     }
 }
