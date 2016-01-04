@@ -16,8 +16,7 @@ class SelectCategoryTableViewController: UITableViewController, MCThisPaymentPro
     var categories: [CategoryPictureObject]! {
         didSet {
             let selector: Selector = "categoryDescription"
-            let collation = UILocalizedIndexedCollation.currentCollation()                        
-            sections = Array(count: collation.sectionTitles.count, repeatedValue: [])
+            let collation = UILocalizedIndexedCollation.currentCollation()
             sortedCategories = collation.sortedArrayFromArray(categories, collationStringSelector: selector) as! [CategoryPictureObject]
             
             self.tableView.reloadData()
@@ -36,7 +35,6 @@ class SelectCategoryTableViewController: UITableViewController, MCThisPaymentPro
     
     // MARK: New in this class
     
-
     
     // MARK: Inherited From super
     
@@ -49,12 +47,17 @@ class SelectCategoryTableViewController: UITableViewController, MCThisPaymentPro
         func prepareSearchController() {
             searchController.searchResultsUpdater = self
             searchController.dimsBackgroundDuringPresentation = false
-            definesPresentationContext = true
+            searchController.hidesNavigationBarDuringPresentation = false
             tableView.tableHeaderView = searchController.searchBar
+            searchController.searchBar.delegate = self
+            searchController.searchBar.searchBarStyle = .Prominent
+            searchController.searchBar.scopeButtonTitles = []
+            definesPresentationContext = true
         }
         
         super.viewDidLoad()
         
+        self.extendedLayoutIncludesOpaqueBars = false
         prepareCategories()
         prepareSearchController()
     }
@@ -127,5 +130,15 @@ extension SelectCategoryTableViewController: UISearchResultsUpdating {
     func updateSearchResultsForSearchController(searchController: UISearchController) {
         let searchBar = searchController.searchBar
         filteredContentForSearchText(searchBar.text!)
+    }
+}
+
+extension SelectCategoryTableViewController: UISearchBarDelegate {
+    func positionForBar(bar: UIBarPositioning) -> UIBarPosition {
+        if (bar as! UISearchBar == searchController.searchBar) {
+            return UIBarPosition.Top
+        } else {
+            return UIBarPosition.Any
+        }
     }
 }
