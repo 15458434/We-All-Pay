@@ -8,7 +8,7 @@
 
 import UIKit
 
-class SelectCategoryTableViewController: UITableViewController, MCThisPaymentProtocol {
+class SelectCategoryTableViewController: UITableViewController, MCThisPaymentProtocol, MCDismissMeBlockProtocol {
     // MARK: Properties
     var thisPayment: MCPayment!
     
@@ -87,7 +87,11 @@ class SelectCategoryTableViewController: UITableViewController, MCThisPaymentPro
         }
         
         thisPayment.categoryId = NSNumber(short: categoryObject.categoryId)
-        navigationController!.presentingViewController!.dismissViewControllerAnimated(true, completion: nil)
+        if dismissMe != nil {
+            dismissMe!()
+        } else {
+            navigationController!.presentingViewController!.dismissViewControllerAnimated(true, completion: nil)
+        }
     }
     
     // MARK: UI Table View Data Source
@@ -125,6 +129,10 @@ class SelectCategoryTableViewController: UITableViewController, MCThisPaymentPro
         
         return cell
     }
+    
+    // MARK: MC Dismiss Me Block Protocol
+    
+    var dismissMe: (()->())?
 }
 
 extension SelectCategoryTableViewController: UISearchResultsUpdating {

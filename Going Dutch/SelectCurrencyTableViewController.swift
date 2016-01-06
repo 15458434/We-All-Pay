@@ -102,6 +102,10 @@ class SelectCurrencyTableViewController: UITableViewController, UISearchResultsU
     
     // MARK: NS Fetched Results Controller Delegate
     
+    // MARK: MC Dismiss Me Block Protocol
+    
+    var dismissMe: (()->())?
+    
     // MARK: UI Table View Delegate
     
     override func tableView(tableView: UITableView, didSelectRowAtIndexPath indexPath: NSIndexPath) {
@@ -139,7 +143,11 @@ class SelectCurrencyTableViewController: UITableViewController, UISearchResultsU
             
         }
         
-        navigationController!.presentingViewController!.dismissViewControllerAnimated(true, completion: nil)
+        if dismissMe != nil {
+            dismissMe!()
+        } else {
+            navigationController!.presentingViewController!.dismissViewControllerAnimated(true, completion: nil)
+        }
     }
     
     // MARK: UI Table View Data Source
