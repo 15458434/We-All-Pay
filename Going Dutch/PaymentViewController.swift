@@ -310,7 +310,7 @@ enum CancelButtonPressed {
                 self.reloadPayerView()
             }
         case let identifier where identifier == "openSelectCurrency_iPad":
-            let destination = segue.destinationViewController as! MCSelectCurrencyTableViewController_iPad
+            let destination = segue.destinationViewController as! SelectCurrencyTableViewController
             destination.thisPayment = thisPayment
             
             let myPopover = (segue as! UIStoryboardPopoverSegue).popoverController

@@ -1192,10 +1192,10 @@
             </objects>
             <point key="canvasLocation" x="6726" y="1297"/>
         </scene>
-        <!--Select Currency Table View Controller i Pad-->
+        <!--Select Currency Table View Controller-->
         <scene sceneID="ThZ-ve-uHv">
             <objects>
-                <tableViewController storyboardIdentifier="MCSelectCurrencyTableViewController_iPad" useStoryboardIdentifierAsRestorationIdentifier="YES" id="Z9a-Hu-qSZ" customClass="MCSelectCurrencyTableViewController_iPad" sceneMemberID="viewController">
+                <tableViewController storyboardIdentifier="MCSelectCurrencyTableViewController_iPad" useStoryboardIdentifierAsRestorationIdentifier="YES" id="Z9a-Hu-qSZ" customClass="SelectCurrencyTableViewController" customModule="We_all_pay" customModuleProvider="target" sceneMemberID="viewController">
                     <tableView key="view" clipsSubviews="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" dataMode="prototypes" style="plain" separatorStyle="default" rowHeight="44" sectionHeaderHeight="22" sectionFooterHeight="22" id="rkF-gV-exG">
                         <rect key="frame" x="0.0" y="0.0" width="320" height="480"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
@@ -1209,7 +1209,7 @@
                             </connections>
                         </searchBar>
                         <prototypes>
-                            <tableViewCell contentMode="scaleToFill" horizontalCompressionResistancePriority="250" restorationIdentifier="MCSelectCurrencyTableViewCell_iPad" selectionStyle="blue" accessoryType="checkmark" hidesAccessoryWhenEditing="NO" indentationLevel="1" indentationWidth="0.0" reuseIdentifier="MCSelectCurrencyTableViewCell_iPad" id="nTN-I8-L2p" customClass="SelectCurrencyTableViewCell_iPad" customModule="We_all_pay" customModuleProvider="target">
+                            <tableViewCell contentMode="scaleToFill" horizontalCompressionResistancePriority="250" restorationIdentifier="MCSelectCurrencyTableViewCell_iPhone" selectionStyle="blue" accessoryType="checkmark" hidesAccessoryWhenEditing="NO" indentationLevel="1" indentationWidth="0.0" reuseIdentifier="MCSelectCurrencyTableViewCell_iPhone" id="nTN-I8-L2p" customClass="MCSelectCurrencyTableViewCell_iPhone" customModule="We_all_pay" customModuleProvider="target">
                                 <rect key="frame" x="0.0" y="66" width="320" height="44"/>
                                 <autoresizingMask key="autoresizingMask"/>
                                 <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" tableViewCell="nTN-I8-L2p" id="kZh-eJ-cZO">
