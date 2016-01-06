@@ -123,7 +123,7 @@ class SelectCategoryTableViewController: UITableViewController, MCThisPaymentPro
             category = filteredCategory
         }
 
-        let cell = tableView.dequeueReusableCellWithIdentifier("selectCategoryCell", forIndexPath: indexPath) as! MCSelectCategoryTableViewCell_iPhone
+        let cell = tableView.dequeueReusableCellWithIdentifier("MCSelectCategoryTableViewCell_iPhone", forIndexPath: indexPath) as! MCSelectCategoryTableViewCell_iPhone
         cell.categoryImageView!.image = category.smallPicture
         cell.categoryNameLabel!.text = category.categoryDescription
         

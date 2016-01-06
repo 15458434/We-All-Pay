@@ -46,7 +46,6 @@
 		383D5D841C0708F800BE9F94 /* ReturnPayment.swift in Sources */ = {isa = PBXBuildFile; fileRef = 383D5D831C0708F800BE9F94 /* ReturnPayment.swift */; };
 		383D5D851C07106600BE9F94 /* ReturnPayment.swift in Sources */ = {isa = PBXBuildFile; fileRef = 383D5D831C0708F800BE9F94 /* ReturnPayment.swift */; };
 		383E0C5D186737EB00AA688D /* MCSharedBillPageViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 383E0C5C186737EB00AA688D /* MCSharedBillPageViewController.m */; };
-		384512F41986D498008D17AB /* MCSelectCurrencyTableViewController_iPad.m in Sources */ = {isa = PBXBuildFile; fileRef = 384512F11986D498008D17AB /* MCSelectCurrencyTableViewController_iPad.m */; };
 		384EC90A1BC2F03F00A80799 /* PaymentTableViewCell_iPad.swift in Sources */ = {isa = PBXBuildFile; fileRef = 384EC9091BC2F03F00A80799 /* PaymentTableViewCell_iPad.swift */; };
 		384EC90C1BC2F17500A80799 /* SelectCategoryTableViewCell_iPad.swift in Sources */ = {isa = PBXBuildFile; fileRef = 384EC90B1BC2F17500A80799 /* SelectCategoryTableViewCell_iPad.swift */; };
 		384EC90E1BC2F35700A80799 /* SelectCurrencyTableViewCell_iPad.swift in Sources */ = {isa = PBXBuildFile; fileRef = 384EC90D1BC2F35700A80799 /* SelectCurrencyTableViewCell_iPad.swift */; };
@@ -81,7 +80,6 @@
 		386FC37018E5BE1900428294 /* iAd.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 386FC36F18E5BE1900428294 /* iAd.framework */; };
 		3872C0DD19041C95008C54D7 /* MCTableEmptyMessage_iPad.xib in Resources */ = {isa = PBXBuildFile; fileRef = 3872C0DF19041C95008C54D7 /* MCTableEmptyMessage_iPad.xib */; };
 		3873A2A516F23AA1000832FD /* MessageUI.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 3873A2A416F23AA1000832FD /* MessageUI.framework */; };
-		387494CF19F041A6001614CA /* MCSelectCategoryTableViewController_iPad.m in Sources */ = {isa = PBXBuildFile; fileRef = 387494CE19F041A6001614CA /* MCSelectCategoryTableViewController_iPad.m */; };
 		387494D419F053C2001614CA /* WeAllPayStore3to4.xcmappingmodel in Sources */ = {isa = PBXBuildFile; fileRef = 387494D319F053C2001614CA /* WeAllPayStore3to4.xcmappingmodel */; };
 		387494D619F053E9001614CA /* WeAllPayStore2to4.xcmappingmodel in Sources */ = {isa = PBXBuildFile; fileRef = 387494D519F053E9001614CA /* WeAllPayStore2to4.xcmappingmodel */; };
 		387494D819F05476001614CA /* WeAllPayStore1to4.xcmappingmodel in Sources */ = {isa = PBXBuildFile; fileRef = 387494D719F05476001614CA /* WeAllPayStore1to4.xcmappingmodel */; };
@@ -308,8 +306,6 @@
 		383E0C561867079900AA688D /* Social.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Social.framework; path = System/Library/Frameworks/Social.framework; sourceTree = SDKROOT; };
 		383E0C5B186737EB00AA688D /* MCSharedBillPageViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = MCSharedBillPageViewController.h; path = ViewControllers/MCSharedBillPageViewController.h; sourceTree = "<group>"; };
 		383E0C5C186737EB00AA688D /* MCSharedBillPageViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = MCSharedBillPageViewController.m; path = ViewControllers/MCSharedBillPageViewController.m; sourceTree = "<group>"; };
-		384512F01986D498008D17AB /* MCSelectCurrencyTableViewController_iPad.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = MCSelectCurrencyTableViewController_iPad.h; path = ViewControllers/iPad/MCSelectCurrencyTableViewController_iPad.h; sourceTree = "<group>"; };
-		384512F11986D498008D17AB /* MCSelectCurrencyTableViewController_iPad.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = MCSelectCurrencyTableViewController_iPad.m; path = ViewControllers/iPad/MCSelectCurrencyTableViewController_iPad.m; sourceTree = "<group>"; };
 		384EC9091BC2F03F00A80799 /* PaymentTableViewCell_iPad.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = PaymentTableViewCell_iPad.swift; sourceTree = "<group>"; };
 		384EC90B1BC2F17500A80799 /* SelectCategoryTableViewCell_iPad.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SelectCategoryTableViewCell_iPad.swift; sourceTree = "<group>"; };
 		384EC90D1BC2F35700A80799 /* SelectCurrencyTableViewCell_iPad.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SelectCurrencyTableViewCell_iPad.swift; sourceTree = "<group>"; };
@@ -356,8 +352,6 @@
 		3872C0E119041CAE008C54D7 /* en */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = en; path = en.lproj/MCTableEmptyMessage_iPad.strings; sourceTree = "<group>"; };
 		3872C0E319041CB3008C54D7 /* nl */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = nl; path = nl.lproj/MCTableEmptyMessage_iPad.strings; sourceTree = "<group>"; };
 		3873A2A416F23AA1000832FD /* MessageUI.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = MessageUI.framework; path = System/Library/Frameworks/MessageUI.framework; sourceTree = SDKROOT; };
-		387494CD19F041A6001614CA /* MCSelectCategoryTableViewController_iPad.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = MCSelectCategoryTableViewController_iPad.h; path = ViewControllers/iPad/MCSelectCategoryTableViewController_iPad.h; sourceTree = "<group>"; };
-		387494CE19F041A6001614CA /* MCSelectCategoryTableViewController_iPad.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = MCSelectCategoryTableViewController_iPad.m; path = ViewControllers/iPad/MCSelectCategoryTableViewController_iPad.m; sourceTree = "<group>"; };
 		387494D319F053C2001614CA /* WeAllPayStore3to4.xcmappingmodel */ = {isa = PBXFileReference; lastKnownFileType = wrapper.xcmappingmodel; path = WeAllPayStore3to4.xcmappingmodel; sourceTree = "<group>"; };
 		387494D519F053E9001614CA /* WeAllPayStore2to4.xcmappingmodel */ = {isa = PBXFileReference; lastKnownFileType = wrapper.xcmappingmodel; path = WeAllPayStore2to4.xcmappingmodel; sourceTree = "<group>"; };
 		387494D719F05476001614CA /* WeAllPayStore1to4.xcmappingmodel */ = {isa = PBXFileReference; lastKnownFileType = wrapper.xcmappingmodel; path = WeAllPayStore1to4.xcmappingmodel; sourceTree = "<group>"; };
@@ -757,6 +751,8 @@
 			children = (
 				381276071BBE68F10004C8C2 /* InfoScreenContainerViewController.swift */,
 				381275FE1BBD84650004C8C2 /* InfoScreenTableViewController.swift */,
+				38D177101C3A5E640084604C /* SelectCategoryTableViewController.swift */,
+				38D177121C3A85C00084604C /* SelectCurrencyTableViewController.swift */,
 				38E0C5E418E9B244005A3F17 /* iPad */,
 				38E0C5E218E9B22E005A3F17 /* iPhone */,
 				38DC8B371909064A00762235 /* ViewController Protocols */,
@@ -983,8 +979,6 @@
 				382E7BDC17E5E57500A1040A /* MCReturnPaymentViewController.m */,
 				3830F6F4179872B400904FAF /* MCPaymentViewController.h */,
 				3830F6F5179872B400904FAF /* MCPaymentViewController.m */,
-				38D177101C3A5E640084604C /* SelectCategoryTableViewController.swift */,
-				38D177121C3A85C00084604C /* SelectCurrencyTableViewController.swift */,
 				3892E3A217903EF00038894B /* MCEditTripViewController.h */,
 				3892E3A317903EF00038894B /* MCEditTripViewController.m */,
 				3892E3A817904A240038894B /* MCPersonViewController.h */,
@@ -1009,10 +1003,6 @@
 				38CC8C4918ED61FD006D99E7 /* MCPersonTableViewController_iPad.m */,
 				384EC9111BC3008300A80799 /* SelectEmailAddressTableViewController_iPad.swift */,
 				3812760D1BBE76B40004C8C2 /* PaymentViewController.swift */,
-				387494CD19F041A6001614CA /* MCSelectCategoryTableViewController_iPad.h */,
-				387494CE19F041A6001614CA /* MCSelectCategoryTableViewController_iPad.m */,
-				384512F01986D498008D17AB /* MCSelectCurrencyTableViewController_iPad.h */,
-				384512F11986D498008D17AB /* MCSelectCurrencyTableViewController_iPad.m */,
 				38E2CB471BC2ABFB0092B5C8 /* SelectPayerTableViewController_iPad.swift */,
 				383A86C318F7EE48001F128E /* MCSolutionTableViewController.h */,
 				383A86C418F7EE48001F128E /* MCSolutionTableViewController.m */,
@@ -1394,7 +1384,6 @@
 				384EC9161BC3EA4C00A80799 /* UIColorExtension.swift in Sources */,
 				38977E5B1B2A30A7008484A4 /* MCWhoOwesWhoTableViewCell_iPhone.swift in Sources */,
 				38E2CB661BC2EA6C0092B5C8 /* RootViewController.swift in Sources */,
-				387494CF19F041A6001614CA /* MCSelectCategoryTableViewController_iPad.m in Sources */,
 				38E2CB401BC2A5A20092B5C8 /* SolutionOverViewTableViewCell_iPad.swift in Sources */,
 				387494D419F053C2001614CA /* WeAllPayStore3to4.xcmappingmodel in Sources */,
 				387494D619F053E9001614CA /* WeAllPayStore2to4.xcmappingmodel in Sources */,
@@ -1431,7 +1420,6 @@
 				383A86C518F7EE48001F128E /* MCSolutionTableViewController.m in Sources */,
 				389DE8F7197FB2B900169645 /* MCPaymentPresence.m in Sources */,
 				3892E3AA17904A240038894B /* MCPersonViewController.m in Sources */,
-				384512F41986D498008D17AB /* MCSelectCurrencyTableViewController_iPad.m in Sources */,
 				389950A4191A90F1000B00BC /* MCPaymentPresence+addons.m in Sources */,
 				389DE90E197FD41900169645 /* MCCurrency+addons.m in Sources */,
 				3892E3B117906B5E0038894B /* MCAddressBookDataReceiver.m in Sources */,

@@ -319,7 +319,7 @@ enum CancelButtonPressed {
                 myPopover.dismissPopoverAnimated(true)
             }
         case let identifier where identifier == "selectCategory_iPad":
-            let destination = segue.destinationViewController as! MCSelectCategoryTableViewController_iPad
+            let destination = segue.destinationViewController as! SelectCategoryTableViewController
             destination.thisPayment = thisPayment
             
             let myPopover = (segue as! UIStoryboardPopoverSegue).popoverController
