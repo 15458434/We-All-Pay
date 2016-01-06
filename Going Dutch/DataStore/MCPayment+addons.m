@@ -219,6 +219,7 @@
             completionHandler(error);
             return;
         }
+        [self recalculateAveragePeopleOweAndStore];
         completionHandler(nil);
     }];
 }

@@ -44,7 +44,7 @@ class SelectCategoryTableViewController: UITableViewController, MCThisPaymentPro
             filteredCategories = [CategoryPictureObject]()
         }
         
-        func prepareSearchController() {
+        func prepareForSearchController() {
             searchController.searchResultsUpdater = self
             searchController.dimsBackgroundDuringPresentation = false
             searchController.hidesNavigationBarDuringPresentation = false
@@ -53,13 +53,21 @@ class SelectCategoryTableViewController: UITableViewController, MCThisPaymentPro
             searchController.searchBar.searchBarStyle = .Prominent
             searchController.searchBar.scopeButtonTitles = []
             definesPresentationContext = true
+            
+            self.extendedLayoutIncludesOpaqueBars = true
+            self.edgesForExtendedLayout = UIRectEdge.All
         }
         
         super.viewDidLoad()
         
-        self.extendedLayoutIncludesOpaqueBars = false
         prepareCategories()
-        prepareSearchController()
+        prepareForSearchController()
+    }
+    
+    override func viewWillAppear(animated: Bool) {
+        super.viewWillAppear(animated)
+        
+        searchController.searchBar.sizeToFit()
     }
     
     // MARK: UI Table View Delegate
