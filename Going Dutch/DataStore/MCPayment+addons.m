@@ -13,8 +13,10 @@
 #import "MCCurrency+addons.h"
 #import "MCExchangeRate+addons.h"
 #import "MCWeAllPayStoreController.h"
-#import "MCCategoryPictureStoreController.h"
-#import "MCCategoryPictureObject.h"
+//#import "MCCategoryPictureStoreController.h"
+//#import "MCCategoryPictureObject.h"
+
+#import "We_all_pay-Swift.h"
 
 @implementation MCPayment (addons)
 
@@ -26,8 +28,7 @@
 
 + (MCPayment *)addPaymentInContext:(NSManagedObjectContext *)context
 {
-    MCPayment *newPayment;
-    newPayment = [NSEntityDescription insertNewObjectForEntityForName:@"MCPayment" inManagedObjectContext:context];
+    MCPayment *newPayment = [NSEntityDescription insertNewObjectForEntityForName:@"MCPayment" inManagedObjectContext:context];
     newPayment.uniquePaymentId = [[NSUUID UUID] UUIDString];
     newPayment.dateCreated = [NSDate date];
     newPayment.dateModified = newPayment.dateCreated;
@@ -218,6 +219,7 @@
             completionHandler(error);
             return;
         }
+        [self recalculateAveragePeopleOweAndStore];
         completionHandler(nil);
     }];
 }
@@ -228,7 +230,7 @@
     if (self.categoryId.shortValue == 0) {
         return [NSString stringWithFormat:@"%@", self.descriptionOfPayment];
     } else {
-        NSString *categoryName = [[[[MCCategoryPictureStoreController sharedController] pictureObjects] objectAtIndex:self.categoryId.shortValue] categoryDescription];
+        NSString *categoryName = [[[[CategoryPictureStoreController sharedController] pictureObjects] objectAtIndex:self.categoryId.shortValue] categoryDescription];
         NSString *result = [NSString stringWithFormat:@"%@: %@", categoryName, self.descriptionOfPayment];
         return result;
     }

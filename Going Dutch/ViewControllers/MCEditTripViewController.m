@@ -21,10 +21,21 @@
 
 @interface MCEditTripViewController ()
 
+@property (weak, nonatomic) IBOutlet UIButton *addPersonButton;
+
 @property (weak, nonatomic) IBOutlet UIButton *contactsButton;
 @property (weak, nonatomic) IBOutlet PaymentsSwipeDirectionHintView *paymentsHintsView;
 
+@property (weak, nonatomic) IBOutlet UITextField *tripNameField;
+@property (weak, nonatomic) IBOutlet UIBarButtonItem *doneButton;
+@property (strong, nonatomic) IBOutlet MCTwoLabelsTitleView *twoLabelTitleView;
+
+@property (strong, nonatomic) MCTableEmptyMessage *emptyMessage;
+
 @property (nonatomic, strong) NSFetchedResultsController *dataController;
+@property (nonatomic, strong) MCAddressBookDataReceiver *personReceiver;
+
+@property (nonatomic) BOOL cancelPressed;
 
 @end
 
@@ -83,14 +94,14 @@
 
 
 - (IBAction)addPersonButton:(id)sender {
-    if ([tripNameField isEditing]) {
-        [tripNameField resignFirstResponder];
+    if ([_tripNameField isEditing]) {
+        [_tripNameField resignFirstResponder];
     }
 }
 
 - (void)tappedInTheBackground:(id)sender
 {
-    [tripNameField resignFirstResponder];
+    [_tripNameField resignFirstResponder];
 }
 
 #pragma mark - new in this class.
@@ -98,11 +109,11 @@
 - (void)openPeoplePicker
 {
     ABPeoplePickerNavigationController *peoplePicker = [[ABPeoplePickerNavigationController alloc] init];
-    if (!personReceiver) {
-        personReceiver = [[MCAddressBookDataReceiver alloc] initWithViewController:self andDelegate:self];
-        [personReceiver setTonightsBill:_tonightsBill];
+    if (!_personReceiver) {
+        _personReceiver = [[MCAddressBookDataReceiver alloc] initWithViewController:self andDelegate:self];
+        [_personReceiver setTonightsBill:_tonightsBill];
     }
-    [peoplePicker setPeoplePickerDelegate:personReceiver];
+    [peoplePicker setPeoplePickerDelegate:_personReceiver];
     //    [peoplePicker setPredicateForSelectionOfPerson:nil];
     [peoplePicker setEdgesForExtendedLayout:UIRectEdgeNone];
     //    [[peoplePicker viewControllers][0] setEdgesForExtendedLayout:UIRectEdgeNone];
@@ -155,16 +166,16 @@
 - (void)setEmptyMessage
 {
     if (![[_dataController fetchedObjects] count] == 0) {
-        if ([[emptyMessage bigMessage] alpha] > 0.0) {
+        if ([[_emptyMessage bigMessage] alpha] > 0.0) {
             [UIView animateWithDuration:1.0 animations:^{
-                [[emptyMessage bigMessage] setAlpha:0.0];
+                [[_emptyMessage bigMessage] setAlpha:0.0];
                 [[self tableView] setSeparatorStyle:UITableViewCellSeparatorStyleSingleLine];
             } completion:nil];
         }
     } else {
-        if ([[emptyMessage bigMessage] alpha] < 1.0) {
+        if ([[_emptyMessage bigMessage] alpha] < 1.0) {
             [UIView animateWithDuration:1.0 animations:^{
-                [[emptyMessage bigMessage] setAlpha:1.0];
+                [[_emptyMessage bigMessage] setAlpha:1.0];
                 [[self tableView] setSeparatorStyle:UITableViewCellSeparatorStyleNone];
             } completion:nil];
         }
@@ -175,13 +186,13 @@
 {
     if (![[_dataController fetchedObjects] count] == 0) {
         [UIView animateWithDuration:0.0 animations:^{
-            [[emptyMessage bigMessage] setAlpha:0.0];
+            [[_emptyMessage bigMessage] setAlpha:0.0];
             [[self tableView] setSeparatorStyle:UITableViewCellSeparatorStyleSingleLine];
         } completion:nil];
     } else {
-        if ([[emptyMessage bigMessage] alpha] < 1.0) {
+        if ([[_emptyMessage bigMessage] alpha] < 1.0) {
             [UIView animateWithDuration:0.0 animations:^{
-                [[emptyMessage bigMessage] setAlpha:1.0];
+                [[_emptyMessage bigMessage] setAlpha:1.0];
                 [[self tableView] setSeparatorStyle:UITableViewCellSeparatorStyleNone];
             } completion:nil];
         }
@@ -227,12 +238,12 @@
     
     [self startRespondingToStoreChangeNotifications];
     
-    emptyMessage = [[NSBundle mainBundle] loadNibNamed:@"MCTableEmptyMessage" owner:self options:nil][0];
-    [[emptyMessage bigMessage] setText:NSLocalizedString(@"PEOPLE_LIST_EMPTY_MESSAGE", @"Press \"add Person\" to add a person who you'd like to share this bill with.")];
+    _emptyMessage = [[NSBundle mainBundle] loadNibNamed:@"MCTableEmptyMessage" owner:self options:nil][0];
+    [[_emptyMessage bigMessage] setText:NSLocalizedString(@"PEOPLE_LIST_EMPTY_MESSAGE", @"Press \"add Person\" to add a person who you'd like to share this bill with.")];
     if ([[_dataController fetchedObjects] count] > 0) {
-        [[emptyMessage bigMessage] setAlpha:0.0];
+        [[_emptyMessage bigMessage] setAlpha:0.0];
     }
-    [[self tableView] setBackgroundView:emptyMessage];
+    [[self tableView] setBackgroundView:_emptyMessage];
     [self showPaymentsHint];
     
     // Make sure a tap in the background dismisses the keyboard as well.
@@ -246,8 +257,8 @@
 {
     [super viewWillAppear:animated];
     
-    [tripNameField setText:[_tonightsBill tripName]];
-    [tripNameField setDelegate:self];
+    [_tripNameField setText:[_tonightsBill tripName]];
+    [_tripNameField setDelegate:self];
     
     if (!_dataController) {
         _dataController = [[MCWeAllPayStoreController defaultStore] sharedBillPeoplePresentDataControllerForDelegate:self];
@@ -271,7 +282,7 @@
     [super viewDidAppear:animated];
     
     if ([_tonightsBill tripName]) {
-        [tripNameField setPlaceholder:[[NSString alloc] initWithFormat:@"Enter something to rename %@", [_tonightsBill tripName]]];
+        [_tripNameField setPlaceholder:[[NSString alloc] initWithFormat:@"Enter something to rename %@", [_tonightsBill tripName]]];
     }
 }
 
@@ -394,7 +405,7 @@
 
 -(void)textFieldDidEndEditing:(UITextField *)textField
 {
-    [_tonightsBill setTripName:[tripNameField text]];
+    [_tonightsBill setTripName:[_tripNameField text]];
     NSDate *now = [NSDate date];
     [_tonightsBill setDateModified:now];
     [[MCWeAllPayStoreController defaultStore] saveMainThreadContext];
@@ -402,9 +413,10 @@
         didSomethingChange = YES;
     }
     MCPerson *nextPayer = [[_tonightsBill fetchPeoplePresentOrderedByAmountPaid:YES] firstObject];
-    MCWhoPayingUserDefaultsStoreInterface *groupStore = [[MCWhoPayingUserDefaultsStoreInterface alloc] initWithTonightsBillUUID:_tonightsBill.uniqueBillId withTripName:_tonightsBill.tripName andTheNextPayerID:nextPayer.uniquePersonId withFullName:[nextPayer getFullName]];
+
+    WhoPayingUserDefaultsStoreInterface *groupStore = [[WhoPayingUserDefaultsStoreInterface alloc] initWithTonightsBillUUID:_tonightsBill.uniqueBillId tripName:_tonightsBill.tripName nextPayerUUID:nextPayer.uniquePersonId fullNameOfNextPayer:[nextPayer getFullName]];//[[WhoPayingUserDefaultsStoreInterface alloc] initWithTonightsBillUUID:_tonightsBill.uniqueBillId tripName:_tonightsBill.tripName nextPayerID:nextPayer.uniquePersonId fullNameOfNextPayer:[nextPayer getFullName]];
     [groupStore storeToDefaults];
-    [[NCWidgetController widgetController] setHasContent:YES forWidgetWithBundleIdentifier:MCWhoIsPayingNextBundleIdentifier];
+    [[NCWidgetController widgetController] setHasContent:YES forWidgetWithBundleIdentifier:[WhoPayingUserDefaultsStoreInterface MCWhoIsPayingNextBundleIdentifier]];
 }
 
 #pragma mark - NSFetchedResultsControllerDelegat

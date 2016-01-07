@@ -31,8 +31,6 @@ The We All Pay Store Controller is designed to do writing in the background and 
 
 + (MCWeAllPayStoreController *)defaultStore;
 
-- (BOOL)isDocumentStateNormal;
-
 - (void)openStore:(void (^)(BOOL success))completionHandler;
 - (void)saveMainThreadContext;
 - (void)savebackgroundContext;

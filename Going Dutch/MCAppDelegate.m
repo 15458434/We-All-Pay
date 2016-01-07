@@ -20,6 +20,12 @@
 
 #import "We_all_pay-Swift.h"
 
+@interface MCAppDelegate ()
+
+@property (nonatomic) dispatch_once_t executeOnlyOnce;
+
+@end
+
 @implementation MCAppDelegate
 
 #pragma mark - New in this class
@@ -69,7 +75,7 @@
     someQueue.name = @"Logging start";
     [someQueue addOperationWithBlock:^{
         NSLog(@"%@ running iOS %@", [[UIDevice currentDevice] model], [[UIDevice currentDevice] systemVersion]);
-        NSLog(@"I dedicate this program to Ilse Béguin, the most wonderful woman in the world who brought herself into my life, when I was developing the first version App.");
+        NSLog(@"I dedicate this program to Ilse Béguin, the most wonderful woman in the world who brought herself into my life, when I was developing the first version of this App.");
     }];
 #if DEBUG
     NSLocale *locale = [NSLocale currentLocale];
@@ -168,7 +174,7 @@
 
 - (BOOL)application:(UIApplication *)application willFinishLaunchingWithOptions:(NSDictionary *)launchOptions
 {
-    dispatch_once(&executeOnlyOnce, ^{
+    dispatch_once(&_executeOnlyOnce, ^{
         [self executeOnlyOnceDuringStartup];
         [[MCWeAllPayStoreController defaultStore] openStore:nil];
         
@@ -176,14 +182,13 @@
     dispatch_queue_t someBackgroundQueue = dispatch_queue_create("originChech", NULL);
     dispatch_async(someBackgroundQueue, ^{
         [self checkToSeeIfThisPurchaseOriginatesFromiAd];
-    });
-//    [UIViewController prepareInterstitialAds];    
+    });    
     return YES;
 }
 
 - (BOOL)application:(UIApplication *)application didFinishLaunchingWithOptions:(NSDictionary *)launchOptions
 {
-    dispatch_once(&executeOnlyOnce, ^{
+    dispatch_once(&_executeOnlyOnce, ^{
         [self executeOnlyOnceDuringStartup];
         [[MCWeAllPayStoreController defaultStore] openStore:nil];
     });
@@ -235,12 +240,4 @@
     [[NSNotificationCenter defaultCenter] removeObserver:self name:@"Start views" object:nil];
 }
 
-- (IBAction)giveFeedBackPressed:(id)sender {
-}
-
-- (IBAction)tweetThankYouPressed:(id)sender {
-}
-
-- (IBAction)reverseConverstionPressed:(id)sender {
-}
 @end

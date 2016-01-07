@@ -16,8 +16,6 @@
 
 #import "MCDismissMeBlockProtocol.h"
 
-#import "MCWhoPayingUserDefaultsStoreInterface+WeAllPay.h"
-
 #import "We_all_pay-Swift.h"
 
 @interface MCSharedBillPeoplePresentTableViewController_iPad ()
@@ -54,13 +52,13 @@
 {
     if (![[_dataController fetchedObjects] count] == 0) {
         [UIView animateWithDuration:1.0 animations:^{
-            [[emptyMessage bigMessage] setAlpha:0.0];
+            [[_emptyMessage bigMessage] setAlpha:0.0];
             [[self tableView] setSeparatorStyle:UITableViewCellSeparatorStyleSingleLine];
         } completion:nil];
     } else {
-        if ([[emptyMessage bigMessage] alpha] < 1.0) {
+        if ([[_emptyMessage bigMessage] alpha] < 1.0) {
             [UIView animateWithDuration:1.0 animations:^{
-                [[emptyMessage bigMessage] setAlpha:1.0];
+                [[_emptyMessage bigMessage] setAlpha:1.0];
                 [[self tableView] setSeparatorStyle:UITableViewCellSeparatorStyleNone];
             } completion:nil];
         }
@@ -71,13 +69,13 @@
 {
     if (![[_dataController fetchedObjects] count] == 0) {
         [UIView animateWithDuration:0.0 animations:^{
-            [[emptyMessage bigMessage] setAlpha:0.0];
+            [[_emptyMessage bigMessage] setAlpha:0.0];
             [[self tableView] setSeparatorStyle:UITableViewCellSeparatorStyleSingleLine];
         } completion:nil];
     } else {
-        if ([[emptyMessage bigMessage] alpha] < 1.0) {
+        if ([[_emptyMessage bigMessage] alpha] < 1.0) {
             [UIView animateWithDuration:0.0 animations:^{
-                [[emptyMessage bigMessage] setAlpha:1.0];
+                [[_emptyMessage bigMessage] setAlpha:1.0];
                 [[self tableView] setSeparatorStyle:UITableViewCellSeparatorStyleNone];
             } completion:nil];
         }
@@ -107,10 +105,10 @@
     
     [self startRespondingToStoreChangeNotifications];
     
-    emptyMessage = [[NSBundle mainBundle] loadNibNamed:@"MCTableEmptyMessage_iPad" owner:self options:nil][0];
-    [[emptyMessage bigMessage] setText:NSLocalizedString(@"PEOPLE_LIST_EMPTY_MESSAGE", @"Press \"add Person\" to add a person who you'd like to share this bill with.")];
-    [[emptyMessage bigMessage] setAlpha:0.0];
-    [[self tableView] setBackgroundView:emptyMessage];
+    _emptyMessage = [[NSBundle mainBundle] loadNibNamed:@"MCTableEmptyMessage_iPad" owner:self options:nil][0];
+    [[_emptyMessage bigMessage] setText:NSLocalizedString(@"PEOPLE_LIST_EMPTY_MESSAGE", @"Press \"add Person\" to add a person who you'd like to share this bill with.")];
+    [[_emptyMessage bigMessage] setAlpha:0.0];
+    [[self tableView] setBackgroundView:_emptyMessage];
     self.tableView.estimatedRowHeight = 120.0;
 }
 
@@ -286,7 +284,7 @@
 {
     if (editingStyle == UITableViewCellEditingStyleDelete) {
         // Delete the row from the data source
-        [MCWhoPayingUserDefaultsStoreInterface sendToUserDefaultsStoreInterface:_tonightsBill];
+        [WhoPayingUserDefaultsStoreInterface sendToUserDefaultsStoreInterface:_tonightsBill];
         [MCPerson deletePerson:[_dataController objectAtIndexPath:indexPath]];
         [[MCWeAllPayStoreController defaultStore] saveMainThreadContext];
     } else if (editingStyle == UITableViewCellEditingStyleInsert) {
@@ -324,17 +322,6 @@
             [destination setThisPerson:[_dataController objectAtIndexPath:ip]];
             [[self tableView] deselectRowAtIndexPath:ip animated:YES];
         }
-//        if ([destination conformsToProtocol:@protocol(MCDismissMeBlockProtocol)]) {
-//            __weak MCSharedBillPeoplePresentTableViewController_iPad *weakSelf = self;
-//            [destination setDismissMe:^{
-//                MCSharedBillPeoplePresentTableViewController_iPad *strongSelf = weakSelf;
-//                if (strongSelf) {
-////                    id<GAITracker> tracker = [[GAI sharedInstance] defaultTracker];
-////                    [tracker set:kGAIScreenName value:@"MCSharedBillMainViewController_iPad"];
-////                    [tracker send:[[GAIDictionaryBuilder createAppView] build]];
-//                }
-//            }];
-//        }
     }
 }
 

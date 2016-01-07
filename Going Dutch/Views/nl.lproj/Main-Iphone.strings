@@ -64,6 +64,9 @@
 /* Class = "UILabel"; text = "Label"; ObjectID = "oKh-Bm-aHC"; */
 "oKh-Bm-aHC.text" = "Label";
 
+/* Class = "UISearchBar"; placeholder = "Search currency"; ObjectID = "uPu-GW-fSZ"; */
+"uPu-GW-fSZ.placeholder" = "Zoek valuta";
+
 /* Class = "UIButton"; normalTitle = "Add payment"; ObjectID = "x8t-7z-SNG"; */
 "x8t-7z-SNG.normalTitle" = "Nieuwe betaling";
 

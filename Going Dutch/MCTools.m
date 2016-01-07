@@ -15,7 +15,7 @@ BOOL const showAdsInDebugVersion = NO;
 
 @implementation MCTools
 
-+ (void)setAdBannerIfNotPaid:(BOOL)show forViewController:(UIViewController *)viewController
++ (void)setAdBannerIfNotPaid:(BOOL)show forViewController:(UIViewController * _Nonnull)viewController
 {
     if ([[[UIDevice currentDevice] model] isEqualToString:@"iPad"] && [[UIDevice currentDevice] userInterfaceIdiom] == UIUserInterfaceIdiomPhone) {
         [viewController setCanDisplayBannerAds:NO];
@@ -39,7 +39,7 @@ BOOL const showAdsInDebugVersion = NO;
     }
 }
 
-+ (BOOL)isStringAnEmailAddress:(NSString *)stringThatIsSupposedToBeEmailAddress
++ (BOOL)isStringAnEmailAddress:(NSString * _Nonnull)stringThatIsSupposedToBeEmailAddress
 {
     NSParameterAssert(stringThatIsSupposedToBeEmailAddress);
     if([stringThatIsSupposedToBeEmailAddress length] == 0){

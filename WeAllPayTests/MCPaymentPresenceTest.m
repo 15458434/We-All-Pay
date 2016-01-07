@@ -13,10 +13,11 @@
 #import "MCPayment+addons.h"
 #import "MCPerson+addons.h"
 #import "MCEmailAddress+addons.h"
-#import "MCReturnPayment.h"
 #import "MCPaymentPresence+addons.h"
 #import "MCCurrency+addons.h"
 #import "MCExchangeRate+addons.h"
+
+#import "We_all_pay_Tests-Swift.h"
 
 @interface MCPaymentPresenceTest : XCTestCase
 
@@ -132,10 +133,10 @@
     [iva addOneEmailAddressFromAString:@"ivamavi2002@yahoo.co.uk"];
     
     MCPayment *thisPayment = [thisBill addPayment];
-    [thisPayment putMoneyValueAsAString:@"9,00"];
+    thisPayment.money = @9.00;
+    [thisPayment recalculateAveragePeopleOweAndStore];
     double average = 9.00 / 3.00;
     
-    // Test [thisPayment averageAmountPeopleShouldHavePaidOnThisPayment]
     XCTAssertEqualWithAccuracy(average, [[thisPayment averageAmountPeopleShouldHavePaidOnThisPayment] doubleValue], 0.01, @"The average amount of money is different, from what I'm calculating.");
     for (MCPaymentPresence *pp in [thisPayment peopleSharingPayment]) {
         XCTAssertEqualWithAccuracy(average, [[pp averageOweFromPayment] doubleValue], 0.01, @"Average amount stored is not ok.");
@@ -154,7 +155,7 @@
     
     // Test [thisPayment fetchPaymentPresenceForPerson:]
     MCPayment *thisPayment2 = [thisBill addPayment];
-    [thisPayment2 putMoneyValueAsAString:@"60,00"];
+    thisPayment2.money = @60.00;
     [thisPayment2 setDescriptionOfPayment:@"Bier of some sort."];
     MCPaymentPresence *ppMarkOnThisPayment2 = [thisPayment2 fetchPaymentPresenceForPerson:mark];
     XCTAssertTrue([ppMarkOnThisPayment2 person] == mark && [ppMarkOnThisPayment2 payment] == thisPayment2, @"The paymentPresence fetched is the correct one.");
@@ -199,18 +200,20 @@
     MCPayment *thisPayment = [thisBill addPayment];
     [thisPayment setPayingPerson:mark];
     [thisPayment setDescriptionOfPayment:@"Drinken op een terras."];
-    [thisPayment putMoneyValueAsAString:@"9,00"];
-    // [thisPayment thisPerson:ilse setIsPresent:@NO];
+    thisPayment.money = @9.00;
+    [thisPayment recalculateAveragePeopleOweAndStore];
     
     MCPayment *thisPayment2 = [thisBill addPayment];
     [thisPayment2 setPayingPerson:iva];
     [thisPayment2 setDescriptionOfPayment:@"Food"];
-    [thisPayment2 putMoneyValueAsAString:@"30,00"];
+    thisPayment2.money = @30.00;
+    [thisPayment2 recalculateAveragePeopleOweAndStore];
     
     MCPayment *thisPayment3 = [thisBill addPayment];
     [thisPayment3 setPayingPerson:ilse];
     [thisPayment3 setDescriptionOfPayment:@"Movie"];
-    [thisPayment3 putMoneyValueAsAString:@"36,00"];
+    thisPayment3.money = @36.00;
+    [thisPayment3 recalculateAveragePeopleOweAndStore];
     
     // Does the sum function work correct when everybody is always present.
     NSNumber *sumOfAllOwesOnPaymentsForIlse = [thisBill amountShouldHavePaidBy:ilse];
@@ -243,18 +246,18 @@
     MCPayment *thisPayment = [thisBill addPayment];
     [thisPayment setPayingPerson:mark];
     [thisPayment setDescriptionOfPayment:@"Drinken op een terras."];
-    [thisPayment putMoneyValueAsAString:@"9,00"];
+    thisPayment.money = @9.00;
     [thisPayment thisPerson:ilse setIsPresent:@NO];
     
     MCPayment *thisPayment2 = [thisBill addPayment];
     [thisPayment2 setPayingPerson:iva];
     [thisPayment2 setDescriptionOfPayment:@"Food"];
-    [thisPayment2 putMoneyValueAsAString:@"30,00"];
+    thisPayment2.money = @30.00;
     
     MCPayment *thisPayment3 = [thisBill addPayment];
     [thisPayment3 setPayingPerson:ilse];
     [thisPayment3 setDescriptionOfPayment:@"Movie"];
-    [thisPayment3 putMoneyValueAsAString:@"36,00"];
+    thisPayment3.money = @36.00;
     [thisPayment3 thisPerson:mark setIsPresent:@NO];
     
     NSArray *solution = [thisBill solveWhoHasToPayWhoFromThisBill];

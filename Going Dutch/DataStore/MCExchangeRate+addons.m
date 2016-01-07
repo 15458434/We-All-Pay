@@ -54,6 +54,4 @@
     [self setPrimitiveValue:now forKey:@"dateModified"];
 }
 
-
-
 @end

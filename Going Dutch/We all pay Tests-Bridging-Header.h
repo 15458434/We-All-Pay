@@ -3,7 +3,6 @@
 //
 
 #import "MCSharedBill+addons.h"
-#import "MCReturnPayment.h"
 #import "MCPayment+addons.h"
 #import "MCPerson+addons.h"
 #import "MCCurrency+addons.h"

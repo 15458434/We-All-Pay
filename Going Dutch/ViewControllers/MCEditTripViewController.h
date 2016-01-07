@@ -10,6 +10,8 @@
 @import CoreData;
 @import AddressBookUI;
 @import NotificationCenter;
+@import WhoPayingUserDefaultsStoreInterface;
+
 #import "MCPersonViewController.h"
 
 #import "MCTonightsBillTransfer.h"
@@ -23,20 +25,8 @@
 @class MCTableEmptyMessage;
 
 @interface MCEditTripViewController : UITableViewController <NSFetchedResultsControllerDelegate, UITextFieldDelegate, MCPersonViewChangeDelegate, MCTonightsBillTransfer>
-{
-    __weak IBOutlet UIButton *addressBookButton;    
-    __weak IBOutlet UIButton *addPersonButton;
-    
-    IBOutlet UITextField *tripNameField;
-    IBOutlet UIBarButtonItem *doneButton;
-    __strong IBOutlet MCTwoLabelsTitleView *twoLabelTitleView;
-    MCTableEmptyMessage *emptyMessage;
-    
-    MCAddressBookDataReceiver *personReceiver;
-    
-    BOOL isInitAsNew;
-    BOOL cancelPressed;
-}
+
+@property (nonatomic) BOOL isInitAsNew;
 
 @property (nonatomic, weak) id<MCIsEditingProtocol> myParent;
 @property (nonatomic, weak) id delegate;

@@ -25,23 +25,18 @@ typedef NS_ENUM(BOOL, MCCancelButtonPressed) {
 };
 
 @interface MCPersonTableViewController_iPad : UITableViewController <UITextFieldDelegate, UIPopoverControllerDelegate, UIAlertViewDelegate, MCThisPersonProtocol, MCTonightsBillTransfer>
-{
-    //__weak IBOutlet UIImageView *_pictureView;
-    __weak IBOutlet UITextField *firstNameField;
-    __weak IBOutlet UITextField *lastNameField;
-    __weak IBOutlet UITextField *emailField;
-    __weak IBOutlet UIButton *selectEmailAddressButton;
-    
-    UIPickerView *emailSelectionFromAddressBookPickerView;
-    BOOL isSelectEmail;
-    
-    BOOL didSomethingChange;
-    BOOL isNew;
-    MCIsEditing isEditingEmailField;
-    MCCancelButtonPressed mainCancelPressed;
-}
 
+@property (weak, nonatomic) IBOutlet UITextField *firstNameField;
+@property (weak, nonatomic) IBOutlet UITextField *lastNameField;
+@property (weak, nonatomic) IBOutlet UITextField *emailField;
+@property (weak, nonatomic) IBOutlet UIButton *selectEmailAddressButton;
 @property (weak, nonatomic) IBOutlet UIImageView *pictureView;
+
+@property (nonatomic) BOOL isSelectEmail;
+@property (nonatomic) BOOL didSomethingChange;
+@property (nonatomic) BOOL isNew;
+@property (nonatomic) MCIsEditing isEditingEmailField;
+@property (nonatomic) MCCancelButtonPressed mainCancelPressed;
 
 @property (strong, nonatomic) MCPerson *thisPerson;
 @property (strong, nonatomic) MCSharedBill *tonightsBill;

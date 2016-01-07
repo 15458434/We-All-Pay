@@ -37,7 +37,7 @@ typedef NS_ENUM(BOOL, MCStatus) {
 - (IBAction)mainCancelButtonPressed:(id)sender
 {
     [[self view] resignFirstResponder];
-    mainCancelPressed = cancelIsPressed;
+    _mainCancelPressed = cancelIsPressed;
     if ([[[_thisPerson managedObjectContext] undoManager] canUndo]) {
         [[MCWeAllPayStoreController defaultStore] endUndoGroupAndUndo];
     } else {
@@ -50,7 +50,7 @@ typedef NS_ENUM(BOOL, MCStatus) {
 - (IBAction)mainDoneButtonPressed:(id)sender
 {
     [[self view] resignFirstResponder];
-    if ([MCTools isStringAnEmailAddress:[emailField text]]) {
+    if ([MCTools isStringAnEmailAddress:[_emailField text]]) {
         [self dismissFromDone];
     } else {
         NSString *alertViewTitle = NSLocalizedString(@"INVALID_EMAIL_ADDRESS", "Invalid email address");
@@ -90,12 +90,12 @@ typedef NS_ENUM(BOOL, MCStatus) {
 
 - (void) dismissTheKeyboard
 {
-    if ([firstNameField isFirstResponder]) {
-        [firstNameField resignFirstResponder];
-    } else if ([lastNameField isFirstResponder]) {
-        [lastNameField resignFirstResponder];
-    } else if ([emailField isFirstResponder]) {
-        [emailField resignFirstResponder];
+    if ([_firstNameField isFirstResponder]) {
+        [_firstNameField resignFirstResponder];
+    } else if ([_lastNameField isFirstResponder]) {
+        [_lastNameField resignFirstResponder];
+    } else if ([_emailField isFirstResponder]) {
+        [_emailField resignFirstResponder];
     }
 }
 
@@ -118,11 +118,11 @@ typedef NS_ENUM(BOOL, MCStatus) {
     // Uncomment the following line to display an Edit button in the navigation bar for this view controller.
     // self.navigationItem.rightBarButtonItem = self.editButtonItem;
     
-    isEditingEmailField = isNotEditing;
-    mainCancelPressed = cancelIsNotPressed;
+    _isEditingEmailField = isNotEditing;
+    _mainCancelPressed = cancelIsNotPressed;
     [[MCWeAllPayStoreController defaultStore] beginUndoGroup];
     
-    // Make sure a tap in the background dimisses the keyboard as well.
+    // Make sure a tap in the background dismisses the keyboard as well.
     UITapGestureRecognizer *thatTickles = [[UITapGestureRecognizer alloc] initWithTarget:self action:@selector(tappedInTheBackground:)];
     [thatTickles setCancelsTouchesInView:NO];
     [[self tableView] addGestureRecognizer:thatTickles];
@@ -137,38 +137,25 @@ typedef NS_ENUM(BOOL, MCStatus) {
         [_thisPerson setPictureDataFromImage:nil];
         [_thisPerson setThumbnailDataFromImage:nil];
 //        didSomethingChange = YES;
-        isNew = YES;
+        _isNew = YES;
         NSString *newHeaderTitle = NSLocalizedString(@"NEW_PERSON_HEADER", @"new person");
         [self setTitle:newHeaderTitle];
     } else {
-        isNew = NO;
+        _isNew = NO;
     }
     
     // If there is none or only one emailAddress the button for an email address should not be shown.
     if ([[_thisPerson emailAddress] count] < 2) {
-        [selectEmailAddressButton setHidden:YES];
+        [_selectEmailAddressButton setHidden:YES];
     } else {
-        [selectEmailAddressButton setHidden:NO];
+        [_selectEmailAddressButton setHidden:NO];
     }
     
-    [firstNameField setText:[_thisPerson firstName]];
-    [lastNameField setText:[_thisPerson lastName]];
-    [emailField setText:[_thisPerson defaultEmailAddress]];
+    [_firstNameField setText:[_thisPerson firstName]];
+    [_lastNameField setText:[_thisPerson lastName]];
+    [_emailField setText:[_thisPerson defaultEmailAddress]];
     
     _pictureView.image = _thisPerson.picture;
-}
-
-- (void)viewDidAppear:(BOOL)animated
-{
-    [super viewDidAppear:animated];
-    
-//    id<GAITracker> tracker = [[GAI sharedInstance] defaultTracker];
-//    if (isNew) {
-//        [tracker set:kGAIScreenName value:@"MCPersonNewView_iPad"];
-//    } else {
-//        [tracker set:kGAIScreenName value:@"MCPersonDetailView_iPad"];
-//    }
-//    [tracker send:[[GAIDictionaryBuilder createAppView] build]];
 }
 
 - (void)didReceiveMemoryWarning
@@ -210,30 +197,30 @@ typedef NS_ENUM(BOOL, MCStatus) {
 
 - (void)popoverControllerDidDismissPopover:(UIPopoverController *)popoverController
 {
-    [emailField setText:[_thisPerson defaultEmailAddress]];
+    [_emailField setText:[_thisPerson defaultEmailAddress]];
 }
 
 #pragma mark - UITextFieldDelegate
 
 -(void)textFieldDidBeginEditing:(UITextField *)textField
 {
-    if (textField == emailField) {
-        isEditingEmailField = isEditing;
+    if (textField == _emailField) {
+        _isEditingEmailField = isEditing;
     }
 }
 
 - (BOOL)textFieldShouldEndEditing:(UITextField *)textField
 {
-    if (textField == emailField) {
+    if (textField == _emailField) {
 #if DEBUG
         NSLog(@"should dismiss emailField");
 #endif
-        if ([MCTools isStringAnEmailAddress:[emailField text]]) {
-            [emailField setTextColor:[UIColor blackColor]];
+        if ([MCTools isStringAnEmailAddress:[_emailField text]]) {
+            [_emailField setTextColor:[UIColor blackColor]];
             _emailAddressStringInTextField = valid;
             return YES;
         } else {
-            [emailField setTextColor:[UIColor redColor]];
+            [_emailField setTextColor:[UIColor redColor]];
             _emailAddressStringInTextField = inValid;
             return NO;
         }
@@ -244,26 +231,26 @@ typedef NS_ENUM(BOOL, MCStatus) {
 - (void)textFieldDidEndEditing:(UITextField *)textField
 {
     // First check is mainCancel has been pressed. In that case this will be executed after the textField has been dismissed.
-    if (mainCancelPressed == cancelIsNotPressed) {
-        if (textField == firstNameField) {
+    if (_mainCancelPressed == cancelIsNotPressed) {
+        if (textField == _firstNameField) {
             [_thisPerson setFirstName:[textField text]];
 //            didSomethingChange = YES;
-        } else if (textField == lastNameField) {
+        } else if (textField == _lastNameField) {
             [_thisPerson setLastName:[textField text]];
 //            didSomethingChange = YES;
-        } else if (textField == emailField) {
-            if (isNew) {
-                [_thisPerson addOneEmailAddressFromAString:[emailField text]];
+        } else if (textField == _emailField) {
+            if (_isNew) {
+                [_thisPerson addOneEmailAddressFromAString:[_emailField text]];
             } else {
                 MCEmailAddress *defaultEmail = [_thisPerson getDefaultEmailAddressObject];
                 if (!defaultEmail) {
-                    [_thisPerson addOneEmailAddressFromAString:[emailField text]];
+                    [_thisPerson addOneEmailAddressFromAString:[_emailField text]];
                 } else {
-                    [defaultEmail setEmailAddress:[emailField text]];
+                    [defaultEmail setEmailAddress:[_emailField text]];
                 }
             }
 //            didSomethingChange = YES;
-            isEditingEmailField = isNotEditing;
+            _isEditingEmailField = isNotEditing;
         }
     }
 }
@@ -350,7 +337,7 @@ typedef NS_ENUM(BOOL, MCStatus) {
         if ([destination conformsToProtocol:@protocol(MCDismissMeBlockProtocol)]) {
             [destination setDismissMe:^{
                 [myPopover dismissPopoverAnimated:YES];
-                [emailField setText:[_thisPerson defaultEmailAddress]];
+                [_emailField setText:[_thisPerson defaultEmailAddress]];
             }];
         }
     }

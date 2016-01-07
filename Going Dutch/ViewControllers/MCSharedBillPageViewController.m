@@ -17,7 +17,6 @@
 #import "MCPayment+addons.h"
 
 #import "MCWeAllPayStoreController.h"
-#import "MCReturnPayment.h"
 
 #import "We_all_pay-Swift.h"
 
@@ -217,7 +216,7 @@ NSInteger const maxPageIndex = 1;
     [super viewDidLoad];
 	// Do any additional setup after loading the view.
     
-    [[self view] setBackgroundColor:[UIColor groupTableViewBackgroundColor]];
+    self.view.backgroundColor = [Colors getEmptyMessageTextColor];
     
     [[self navigationController] setToolbarHidden:YES animated:NO];
 }
@@ -309,11 +308,8 @@ NSInteger const maxPageIndex = 1;
     }
 }
 
-- (void) setTonightsBill:(MCSharedBill *)tonightsBill
+- (void) setTonightsBill:(MCSharedBill  * _Nonnull )tonightsBill
 {
-    if (!tonightsBill) {
-        abort();
-    }
     [self willChangeValueForKey:@"tonightsBill"];
     _tonightsBill = tonightsBill;
     [self didChangeValueForKey:@"tonightsBill"];
@@ -338,8 +334,12 @@ NSInteger const maxPageIndex = 1;
     _writableTonightsBill = [userInfo objectForKey:MCwritableTonightsBillKey];
     NSManagedObjectID *tonightsBillID = [_writableTonightsBill objectID];
     NSManagedObjectContext *mainContext = [[MCWeAllPayStoreController defaultStore] mainThreadContext];
+    __weak typeof(self) weakSelf = self;
     [mainContext performBlock:^{
-        _tonightsBill = (MCSharedBill *)[mainContext objectWithID:tonightsBillID];
+        typeof(self) strongSelf = weakSelf;
+        if (strongSelf) {
+            strongSelf.tonightsBill = (MCSharedBill *)[mainContext objectWithID:tonightsBillID];
+        }
     }];
     NSLog(@"WritableTonightsBillIsCreated has been executed.");
 }

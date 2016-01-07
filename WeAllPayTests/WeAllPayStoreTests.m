@@ -13,7 +13,8 @@
 #import "MCPayment+addons.h"
 #import "MCSharedBill+addons.h"
 #import "MCEmailAddress+addons.h"
-#import "MCReturnPayment.h"
+
+#import "We_all_pay_Tests-Swift.h"
 
 @interface WeAllPayStoreTests : XCTestCase
 {

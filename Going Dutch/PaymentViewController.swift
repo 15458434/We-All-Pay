@@ -8,6 +8,7 @@
 
 import UIKit
 import CoreData
+import WhoPayingUserDefaultsStoreInterface
 
 enum DidSomethingChange: Int8 {
     case NothingChanged = 0, SomethingChanged
@@ -66,7 +67,7 @@ enum CancelButtonPressed {
         MCWeAllPayStoreController.defaultStore().endUndoGroupAndProcess()
         MCWeAllPayStoreController.defaultStore().saveMainThreadContext()
         navigationController?.presentingViewController?.dismissViewControllerAnimated(true, completion: { () -> Void in
-            MCWhoPayingUserDefaultsStoreInterface.sendToUserDefaultsStoreInterface(self.tonightsBill)
+            WhoPayingUserDefaultsStoreInterface.sendToUserDefaultsStoreInterface(self.tonightsBill)
         })
         dismissMe?()
     }
@@ -74,7 +75,7 @@ enum CancelButtonPressed {
     // MARK: New in this class
     private func reloadCategoryImageView() {
         let categoryId = thisPayment.categoryId.integerValue
-        let categoryObject = MCCategoryPictureStoreController.sharedController().pictureObjects[categoryId]
+        let categoryObject = CategoryPictureStoreController.sharedController.pictureObjects[categoryId]
         if categoryId > 0 {
             categoryImage.image = categoryObject.largePicture
         } else {
@@ -84,7 +85,7 @@ enum CancelButtonPressed {
     
     private func setTextForCategoryButton() {
         let categoryId = thisPayment.categoryId.integerValue
-        let categoryObject = MCCategoryPictureStoreController.sharedController().pictureObjects[categoryId]
+        let categoryObject = CategoryPictureStoreController.sharedController.pictureObjects[categoryId]
         if categoryId > 0 {
             categoryImage.image = categoryObject.largePicture
             categoryButton.setTitle(categoryObject.categoryDescription, forState: .Normal)
@@ -309,7 +310,7 @@ enum CancelButtonPressed {
                 self.reloadPayerView()
             }
         case let identifier where identifier == "openSelectCurrency_iPad":
-            let destination = segue.destinationViewController as! MCSelectCurrencyTableViewController_iPad
+            let destination = segue.destinationViewController as! SelectCurrencyTableViewController
             destination.thisPayment = thisPayment
             
             let myPopover = (segue as! UIStoryboardPopoverSegue).popoverController
@@ -318,7 +319,7 @@ enum CancelButtonPressed {
                 myPopover.dismissPopoverAnimated(true)
             }
         case let identifier where identifier == "selectCategory_iPad":
-            let destination = segue.destinationViewController as! MCSelectCategoryTableViewController_iPad
+            let destination = segue.destinationViewController as! SelectCategoryTableViewController
             destination.thisPayment = thisPayment
             
             let myPopover = (segue as! UIStoryboardPopoverSegue).popoverController

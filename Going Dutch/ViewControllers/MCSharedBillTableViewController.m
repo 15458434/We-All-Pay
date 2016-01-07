@@ -6,6 +6,7 @@
 //  Copyright (c) 2013 Mark Cornelisse. All rights reserved.
 //
 
+@import WhoPayingUserDefaultsStoreInterface;
 #import "MCSharedBillTableViewController.h"
 #import "UIViewController+WeAllPayStore.h"
 
@@ -20,13 +21,6 @@
 #import "MCReturnPaymentViewController.h"
 #import "MCSharedBillPageViewController.h"
 
-#import "MCReturnPayment.h"
-
-#import "MCCategoryPictureStoreController.h"
-#import "MCCategoryPictureObject.h"
-
-#import "MCWhoPayingUserDefaultsStoreInterface+WeAllPay.h"
-
 #import "We_all_pay-Swift.h"
 
 @interface MCSharedBillTableViewController ()
@@ -37,9 +31,6 @@
 @end
 
 @implementation MCSharedBillTableViewController
-
-@synthesize didSomethingChange;
-@synthesize mailDelegate;
 
 #pragma mark - Actions
 
@@ -72,17 +63,6 @@
             [_payerMissingAlertView show];
         }
     }
-}
-
-- (void)showWhoPaysWho:(id)sender
-{
-    NSLog(@"%d", [_tonightsBill doesEveryoneHaveAnEmailAddress]);
-    MCReturnPaymentViewController *rpvc = [[MCReturnPaymentViewController alloc] initWithBill:_tonightsBill];
-    UINavigationController *navController = [[UINavigationController alloc] initWithRootViewController:rpvc];
-    if ([[UIDevice currentDevice] userInterfaceIdiom] == UIUserInterfaceIdiomPad) {
-        [navController setModalPresentationStyle:UIModalPresentationFormSheet];
-    }
-    [[self navigationController] presentViewController:navController animated:YES completion:nil];
 }
 
 - (void)dismissEdit:(id)selector
@@ -283,7 +263,7 @@
         [[self presentedViewController] dismissViewControllerAnimated:YES completion:nil];
     } else if (result == MFMailComposeResultSent) {
         [[self presentedViewController] dismissViewControllerAnimated:YES completion:nil];
-        [[NCWidgetController widgetController] setHasContent:NO forWidgetWithBundleIdentifier:MCWhoIsPayingNextBundleIdentifier];
+        [[NCWidgetController widgetController] setHasContent:NO forWidgetWithBundleIdentifier:WhoPayingUserDefaultsStoreInterface.MCWhoIsPayingNextBundleIdentifier];
     } else if (result == MFMailComposeResultSaved) {
         [[self presentedViewController] dismissViewControllerAnimated:YES completion:nil];
     } else {
@@ -356,8 +336,8 @@
     [[paymentCell namePayerLabel] setText:[NSString stringWithFormat:@"%@%@", thisCellsPayerName, NSLocalizedString(@"PAYMENTCELL_PAYERNAME_EXTRA", @" paid") ]];
     
     // Get category picture.
-    NSArray *pictureObjects = [[MCCategoryPictureStoreController sharedController] pictureObjects];
-    MCCategoryPictureObject *categoryObject = pictureObjects[[[thisCellsPayment categoryId] shortValue]];
+    NSArray *pictureObjects = [[CategoryPictureStoreController sharedController] pictureObjects];
+    CategoryPictureObject *categoryObject = pictureObjects[[[thisCellsPayment categoryId] shortValue]];
     paymentCell.pictureOfPayer.image = [categoryObject smallPicture];
     
     NSString *thisCellsDescriptionOfPayment = [thisCellsPayment descriptionOfPayment];
@@ -388,7 +368,7 @@
     if (editingStyle == UITableViewCellEditingStyleDelete) {
         MCPayment *toBeDeletedPayment = [_dataController objectAtIndexPath:indexPath];
         [MCPayment deletePayment:toBeDeletedPayment];
-        [MCWhoPayingUserDefaultsStoreInterface sendToUserDefaultsStoreInterface:_tonightsBill];
+        [WhoPayingUserDefaultsStoreInterface sendToUserDefaultsStoreInterface:_tonightsBill];
         [[[MCWeAllPayStoreController defaultStore] mainThreadContext] processPendingChanges];
     }
 }
@@ -435,7 +415,7 @@
             [[[segue destinationViewController] viewControllers][0] setTonightsBill:_tonightsBill];
         }
         if ([[[segue destinationViewController] viewControllers][0] respondsToSelector:@selector(setSendMailObject:)]) {
-            [[[segue destinationViewController] viewControllers][0] setSendMailObject:[self mailDelegate]];
+            [[[segue destinationViewController] viewControllers][0] setSendMailObject:_mailDelegate];
         }
         
         if ([[[segue destinationViewController] viewControllers][0] respondsToSelector:@selector(setThisPayment:)]) {

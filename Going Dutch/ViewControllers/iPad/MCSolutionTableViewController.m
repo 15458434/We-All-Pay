@@ -14,7 +14,6 @@
 #import "MCSharedBill+addons.h"
 #import "MCPayment+addons.h"
 #import "MCPerson+addons.h"
-#import "MCReturnPayment.h"
 #import "MCCurrency+addons.h"
 
 typedef NS_ENUM(BOOL, MCXRatesMissing) {
@@ -76,7 +75,7 @@ typedef NS_ENUM(BOOL, MCXRatesMissing) {
     } else {
         NSString *alertTitle = NSLocalizedString(@"Unable to send email", @"Title of an alert that notifies the user the app is unable to send email.");
         NSString *alertMessage = NSLocalizedString(@"Please configure your mail in Settings", @"Instruction in an alert to tell the user that they should check their email address for a valid configuration.");
-        NSString *dismiss = NSLocalizedString(@"Dimiss", @"Text on a button that dismisses the alert");
+        NSString *dismiss = NSLocalizedString(@"Dismiss", @"Text on a button that dismisses the alert");
         if ([UIAlertController class]) {
             // iOS 8 and up
             UIAlertController *alertController = [UIAlertController alertControllerWithTitle:alertTitle message:alertMessage preferredStyle:UIAlertControllerStyleAlert];
@@ -110,24 +109,42 @@ typedef NS_ENUM(BOOL, MCXRatesMissing) {
 - (void)giveSolution
 {
     __weak typeof(self) weakSelf = self;
-    _solution = [_tonightsBill solveWhoHasToPayWhoFromThisBillWithCompletionBlock:^(NSArray *results) {
+    _solution = [_tonightsBill solveWhoHasToPayWhoFromThisBillWithHandler:^(NSArray *results, NSError *error) {
+        if (error) {
+            NSString *title = NSLocalizedString(@"Unable to fetch exchange rates", @"Title message of an alert that pops up when fetching exchange rates is impossible");
+            NSString *message = NSLocalizedString(@"Fetching exchange rates is not possible at this moment. Check your internet connection and/or hit solve to fetch all missing exchange rates at a later time", @"Message explaining what the user can do to refetch exchange rates");
+            NSString *dismissTitle = NSLocalizedString(@"Dismiss", @"Title of a button that dismisses an alert.");
+            
+            UIAlertController *alertController = [UIAlertController alertControllerWithTitle:title message:message preferredStyle:UIAlertControllerStyleAlert];
+            UIAlertAction *dismissAction = [UIAlertAction actionWithTitle:dismissTitle style:UIAlertActionStyleCancel handler:^(UIAlertAction * _Nonnull action) {
+                __strong typeof(weakSelf) strongSelf = weakSelf;
+                if (strongSelf) {
+                    [strongSelf.emptyMessage.activityIndicator stopAnimating];
+                    strongSelf.emptyMessage.bigMessage.text = nil;
+                }
+            }];
+            [alertController addAction:dismissAction];
+            [self presentViewController:alertController animated:YES completion:nil];
+            
+            return;
+        }
+        
         // Update tableView.
         __strong typeof(weakSelf) strongSelf = weakSelf;
         if (strongSelf) {
             strongSelf.areXRatesMissing = xRatesPresent;
             strongSelf.solution = results;
             
-            dispatch_async(dispatch_get_main_queue(), ^{
-                NSSortDescriptor *sortDescriptor = [NSSortDescriptor sortDescriptorWithKey:@"firstName" ascending:YES];
-                _peoplePresent = [[_tonightsBill peoplePresent] sortedArrayUsingDescriptors:@[sortDescriptor]];
-                
-                NSLog(@"Stop animating.");
-                [[[strongSelf emptyMessage] activityIndicator] stopAnimating];
-                [strongSelf setEmptyMessageNow];
-                [[strongSelf tableView] insertSections:[NSIndexSet indexSetWithIndexesInRange:NSMakeRange(0, 3)] withRowAnimation:UITableViewRowAnimationTop];
-            });
+            NSSortDescriptor *sortDescriptor = [NSSortDescriptor sortDescriptorWithKey:@"firstName" ascending:YES];
+            _peoplePresent = [[_tonightsBill peoplePresent] sortedArrayUsingDescriptors:@[sortDescriptor]];
+            
+            NSLog(@"Stop animating.");
+            [[[strongSelf emptyMessage] activityIndicator] stopAnimating];
+            [strongSelf setEmptyMessageNow];
+            [[strongSelf tableView] insertSections:[NSIndexSet indexSetWithIndexesInRange:NSMakeRange(0, 3)] withRowAnimation:UITableViewRowAnimationTop];
         }
     }];
+    
     if (!_solution) {
         NSLog(@"Start animating");
         [_emptyMessage.activityIndicator startAnimating];
@@ -138,15 +155,6 @@ typedef NS_ENUM(BOOL, MCXRatesMissing) {
 }
 
 #pragma mark - Inherited from super
-
-- (id)initWithStyle:(UITableViewStyle)style
-{
-    self = [super initWithStyle:style];
-    if (self) {
-        // Custom initialization
-    }
-    return self;
-}
 
 - (void)viewDidLoad
 {
@@ -159,6 +167,11 @@ typedef NS_ENUM(BOOL, MCXRatesMissing) {
     // self.navigationItem.rightBarButtonItem = self.editButtonItem;
 
     _emptyMessage = [[NSBundle mainBundle] loadNibNamed:@"MCTableEmptyMessage_iPad" owner:self options:nil][0];
+}
+
+- (void)viewWillAppear:(BOOL)animated
+{
+    [super viewWillAppear:animated];
     
     [self giveSolution];
     if ([_tonightsBill areAllExchangeRatesValid]) {
@@ -176,18 +189,9 @@ typedef NS_ENUM(BOOL, MCXRatesMissing) {
     [self setEmptyMessageNow];
 }
 
-- (void)viewWillAppear:(BOOL)animated
-{
-    [super viewWillAppear:animated];
-}
-
 - (void)viewDidAppear:(BOOL)animated
 {
     [super viewDidAppear:animated];
-    
-//    id<GAITracker> tracker = [[GAI sharedInstance] defaultTracker];
-//    [tracker set:kGAIScreenName value:@"MCSolutionScreen_iPad"];
-//    [tracker send:[[GAIDictionaryBuilder createAppView] build]];
 }
 
 - (void)didReceiveMemoryWarning
@@ -285,7 +289,7 @@ typedef NS_ENUM(BOOL, MCXRatesMissing) {
         WhoOwesWhoTableViewCell_iPad *cell = [tableView dequeueReusableCellWithIdentifier:@"MCWhoOwesWhoTableViewCell_iPad" forIndexPath:indexPath];
         
         // Configure the cell...
-        MCReturnPayment *thisCellContents = [_solution objectAtIndex:[indexPath row]];
+        ReturnPayment *thisCellContents = [_solution objectAtIndex:[indexPath row]];
         
         CurrencyFormatter *cf = [[CurrencyFormatter alloc] initWithCurrencyCode:_tonightsBill.mainCurrency.code];
         cell.moneyLabel.text = [cf stringForObjectValue:thisCellContents.money];

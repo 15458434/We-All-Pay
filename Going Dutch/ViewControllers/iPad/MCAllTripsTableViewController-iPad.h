@@ -12,14 +12,8 @@
 @class MCTableEmptyMessage_iPad;
 
 @interface MCAllTripsTableViewController_iPad : UITableViewController <NSFetchedResultsControllerDelegate>
-{
-    MCTableEmptyMessage_iPad *emptyMessage;
-    
-    NSDateFormatter *df;
-}
 
-- (void)performFetchAndReloadTableView:(NSNotification *)notification;
-
-
+@property (nonatomic, strong) MCTableEmptyMessage_iPad *emptyMessage;
+@property (nonatomic, strong) NSDateFormatter *df;
 
 @end

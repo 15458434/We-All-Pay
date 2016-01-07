@@ -20,8 +20,6 @@
 
 #import "UIViewController+WeAllPayStore.h"
 
-#import "MCWhoPayingUserDefaultsStoreInterface+WeAllPay.h"
-
 #import "We_all_pay-Swift.h"
 
 typedef NS_ENUM(BOOL, MCTonightsBillStatus) {
@@ -48,13 +46,13 @@ typedef NS_ENUM(BOOL, MCTonightsBillStatus) {
 {
     if (![[_dataController fetchedObjects] count] == 0) {
         [UIView animateWithDuration:1.0 animations:^{
-            [[emptyMessage bigMessage] setAlpha:0.0];
+            [[_emptyMessage bigMessage] setAlpha:0.0];
             [[self tableView] setSeparatorStyle:UITableViewCellSeparatorStyleSingleLine];
         } completion:nil];
     } else {
-        if ([[emptyMessage bigMessage] alpha] < 1.0) {
+        if ([[_emptyMessage bigMessage] alpha] < 1.0) {
             [UIView animateWithDuration:1.0 animations:^{
-                [[emptyMessage bigMessage] setAlpha:1.0];
+                [[_emptyMessage bigMessage] setAlpha:1.0];
                 [[self tableView] setSeparatorStyle:UITableViewCellSeparatorStyleNone];
             } completion:nil];
         }
@@ -65,13 +63,13 @@ typedef NS_ENUM(BOOL, MCTonightsBillStatus) {
 {
     if (![[_dataController fetchedObjects] count] == 0) {
         [UIView animateWithDuration:0.0 animations:^{
-            [[emptyMessage bigMessage] setAlpha:0.0];
+            [[_emptyMessage bigMessage] setAlpha:0.0];
             [[self tableView] setSeparatorStyle:UITableViewCellSeparatorStyleSingleLine];
         } completion:nil];
     } else {
-        if ([[emptyMessage bigMessage] alpha] < 1.0) {
+        if ([[_emptyMessage bigMessage] alpha] < 1.0) {
             [UIView animateWithDuration:0.0 animations:^{
-                [[emptyMessage bigMessage] setAlpha:1.0];
+                [[_emptyMessage bigMessage] setAlpha:1.0];
                 [[self tableView] setSeparatorStyle:UITableViewCellSeparatorStyleNone];
             } completion:nil];
         }
@@ -114,9 +112,9 @@ typedef NS_ENUM(BOOL, MCTonightsBillStatus) {
     
     [self setEdgesForExtendedLayout:UIRectEdgeNone];
     
-    emptyMessage = [[NSBundle mainBundle] loadNibNamed:@"MCTableEmptyMessage" owner:self options:nil][0];
-    [[emptyMessage bigMessage] setAlpha:0.0];
-    [[self tableView] setBackgroundView:emptyMessage];
+    _emptyMessage = [[NSBundle mainBundle] loadNibNamed:@"MCTableEmptyMessage" owner:self options:nil][0];
+    [[_emptyMessage bigMessage] setAlpha:0.0];
+    [[self tableView] setBackgroundView:_emptyMessage];
     
     [self startRespondingToStoreChangeNotifications];
 }
@@ -215,6 +213,8 @@ typedef NS_ENUM(BOOL, MCTonightsBillStatus) {
         NSLog(@"executing tableView endUpdates");
 #endif
         [[self tableView] endUpdates];
+        
+        
     }
 }
 
@@ -284,12 +284,12 @@ typedef NS_ENUM(BOOL, MCTonightsBillStatus) {
     }
 
     // fill extraLabel with dateModified.
-    if (!df) {
-        df = [[NSDateFormatter alloc] init];
-        [df setDateStyle:NSDateFormatterMediumStyle];
-        [df setTimeStyle:NSDateFormatterShortStyle];
+    if (!_df) {
+        _df = [[NSDateFormatter alloc] init];
+        [_df setDateStyle:NSDateFormatterMediumStyle];
+        [_df setTimeStyle:NSDateFormatterShortStyle];
     }
-    [[allTripsTableViewCell extraLabel] setText:[df stringFromDate:[thisTrip dateModified]]];
+    [[allTripsTableViewCell extraLabel] setText:[_df stringFromDate:[thisTrip dateModified]]];
     
     return allTripsTableViewCell;
 }
@@ -310,7 +310,7 @@ typedef NS_ENUM(BOOL, MCTonightsBillStatus) {
     if (editingStyle == UITableViewCellEditingStyleDelete) {
         MCSharedBill *toBeDeleteSharedBill = [_dataController objectAtIndexPath:indexPath];
 
-        [MCWhoPayingUserDefaultsStoreInterface sendInvalidUserDefaultsIfTonightsBillIs:toBeDeleteSharedBill];
+        [WhoPayingUserDefaultsStoreInterface sendInvalidUserDefaultsIfTonightsBillIs:toBeDeleteSharedBill];
         [MCSharedBill deleteSharedbill:toBeDeleteSharedBill];
         [[MCWeAllPayStoreController defaultStore] saveMainThreadContext];
     }

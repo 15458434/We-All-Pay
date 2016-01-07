@@ -4,6 +4,11 @@
 <dict>
 	<key>SchemeUserState</key>
 	<dict>
+		<key>CurrencyConverter.xcscheme</key>
+		<dict>
+			<key>orderHint</key>
+			<integer>2</integer>
+		</dict>
 		<key>CurrencyExchangeRates.xcscheme</key>
 		<dict>
 			<key>orderHint</key>
@@ -35,6 +40,11 @@
 			<integer>0</integer>
 		</dict>
 		<key>Who is paying next.xcscheme</key>
+		<dict>
+			<key>orderHint</key>
+			<integer>2</integer>
+		</dict>
+		<key>WhoPayingUserDefaultsStoreInterface.xcscheme</key>
 		<dict>
 			<key>orderHint</key>
 			<integer>2</integer>
@@ -82,6 +92,16 @@
 			<key>primary</key>
 			<true/>
 		</dict>
+		<key>382B76DF1C398249000C203A</key>
+		<dict>
+			<key>primary</key>
+			<true/>
+		</dict>
+		<key>382B76E81C398249000C203A</key>
+		<dict>
+			<key>primary</key>
+			<true/>
+		</dict>
 		<key>38522E2218DB3F01007BDB3F</key>
 		<dict>
 			<key>primary</key>
@@ -123,6 +143,16 @@
 			<true/>
 		</dict>
 		<key>3877591C1923D3EE0027A7F1</key>
+		<dict>
+			<key>primary</key>
+			<true/>
+		</dict>
+		<key>388A327B1C11EDBD00F7459C</key>
+		<dict>
+			<key>primary</key>
+			<true/>
+		</dict>
+		<key>388A32841C11EDBD00F7459C</key>
 		<dict>
 			<key>primary</key>
 			<true/>

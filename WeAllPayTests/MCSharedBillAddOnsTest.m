@@ -14,9 +14,10 @@
 #import "MCEmailAddress+addons.h"
 #import "MCPayment+addons.h"
 #import "MCPaymentPresence+addons.h"
-#import "MCReturnPayment.h"
 #import "MCCurrency+addons.h"
 #import "MCExchangeRate+addons.h"
+
+#import "We_all_pay_Tests-Swift.h"
 
 @interface MCSharedBillAddOnsTest : XCTestCase
 
@@ -94,17 +95,17 @@
     XCTAssertFalse([movie hasPersonPaidSomething:conniemovie], @"This person shouldn't have paid something.");
     XCTAssertTrue([movie doesEveryoneHaveAnEmailAddress], @"Everyone should have an email address");
     XCTAssertTrue([[movie amountPeopleShouldHavePaid] doubleValue] == (8.90*4+34.40+6.00)/4, @"The average calculated amount is wrong.");
-    NSArray *solution = [movie solveWhoHasToPayWhoFromThisBill];
+    NSArray<ReturnPayment *> *solution = [movie solveWhoHasToPayWhoFromThisBill];
     XCTAssertEqual([solution count], 3, @"Amount of MCReturnPayment on solved bill is not ok.");
-    MCReturnPayment *one = solution[0];
+    ReturnPayment *one = solution[0];
     XCTAssertEqual(ilsemovie, [one payer], @"Payer not equal to the person that should pay.");
     XCTAssertEqualWithAccuracy([@16.6 doubleValue], [[one money] doubleValue], 0.001, @"Amount of money not equal to what should be paid.");
     XCTAssertEqual(markmovie, [one receiver], @"Receiver not equal to the person that should receive.");
-    MCReturnPayment *two = solution[1];
+    ReturnPayment *two = solution[1];
     XCTAssertEqual(ilsemovie, [two payer], @"Payer not equal to the person that should pay.");
     XCTAssertEqualWithAccuracy([@2.4 doubleValue], [[two money] doubleValue], 0.001, @"Amount of money not equal to what should be paid.");
     XCTAssertEqual(liekemovie, [two receiver], @"Receiver not equal to the person that should receive.");
-    MCReturnPayment *three = solution[2];
+    ReturnPayment *three = solution[2];
     XCTAssertEqual(conniemovie, [three payer], @"Payer not equal to the person that should pay.");
     XCTAssertEqualWithAccuracy([@19.00 doubleValue], [[three money] doubleValue], 0.001, @"Amount of money not equal to what should be paid.");
     XCTAssertEqual(liekemovie, [two receiver], @"Receiver not equal to the person that should receive.");
@@ -156,7 +157,7 @@
     [paymentWithPresences recalculateAveragePeopleOweAndStore];
     NSArray *result = [tonightsBill solveWhoHasToPayWhoFromThisBill];
     XCTAssertTrue([result count] == 1, @"There should be one solution.");
-    MCReturnPayment *returnPayment = [result lastObject];
+    ReturnPayment *returnPayment = [result lastObject];
     XCTAssertEqualWithAccuracy([[returnPayment money] doubleValue], 2.5, 0.001, @"The amount of money owed should be 2.5");
     XCTAssertTrue([returnPayment payer] == ilse, @"Ilse should be paying.");
     XCTAssertTrue([returnPayment receiver] == mark, @"Mark should be receiving.");
@@ -265,7 +266,7 @@
     [usdToEur setExchangeRate:@0.72];
     [firstPayment setExchangeRate:usdToEur];
     NSArray *resultsWithOnlyOnePayment = [tonightsBill solveWhoHasToPayWhoFromThisBill];
-    for (MCReturnPayment *rp in resultsWithOnlyOnePayment) {
+    for (ReturnPayment *rp in resultsWithOnlyOnePayment) {
         XCTAssertEqualWithAccuracy([[rp money] doubleValue], [@(30.0 * 0.72 / 3) doubleValue], 0.001, @"Basic split amount with conversion not ok.");
     }
     MCCurrency *currencySecondPayment = [MCCurrency currencyFrom:@"GBP" fromContext:_context];
@@ -292,7 +293,7 @@
     [gbpToEur setExchangeRate:@1.2625];
     [secondPayment setExchangeRate:gbpToEur];
     NSArray *results = [tonightsBill solveWhoHasToPayWhoFromThisBill];
-    for (MCReturnPayment *returnPayment in results) {
+    for (ReturnPayment *returnPayment in results) {
         if ([[[returnPayment receiver] firstName] isEqualToString:@"Anne"]) {
             XCTAssertEqualWithAccuracy([[returnPayment money] doubleValue], [@(14.50*1.2625 - ((14.50 * 1.2625/2) + (30*0.72/3))) doubleValue], 0.001, @"Anne is not receiving the right amount.");
         } else if ([[[returnPayment receiver] firstName] isEqualToString:@"Mark"]) {
@@ -332,7 +333,7 @@
     [usdToEur setExchangeRate:@0.72];
     [firstPayment setExchangeRate:usdToEur];
     NSArray *resultsWithOnlyOnePayment = [tonightsBill solveWhoHasToPayWhoFromThisBill];
-    for (MCReturnPayment *rp in resultsWithOnlyOnePayment) {
+    for (ReturnPayment *rp in resultsWithOnlyOnePayment) {
         XCTAssertEqualWithAccuracy([[rp money] doubleValue], [@(30.0 * 0.72 / 3) doubleValue], 0.001, @"Basic split amount with conversion not ok.");
     }
     MCCurrency *currencySecondPayment = [MCCurrency currencyFrom:@"GBP" fromContext:_context];
@@ -359,8 +360,9 @@
     gbpToEur.exchangeRate = nil;
     gbpToEur.status = [NSNumber numberWithShort:invalid];
     [secondPayment setExchangeRate:gbpToEur];
-    NSArray *results = [tonightsBill solveWhoHasToPayWhoFromThisBillWithCompletionBlock:^(NSArray *resultsAfterExchangeRateFetch) {
-        for (MCReturnPayment *returnPayment in results) {
+    NSArray *results = [tonightsBill solveWhoHasToPayWhoFromThisBillWithHandler:^(NSArray *results, NSError *error) {
+        XCTAssertNil(error);
+        for (ReturnPayment *returnPayment in results) {
             XCTAssertNotNil(secondPayment.exchangeRate.exchangeRate, @"There should be a value for the exchange rate.");
             double gbpToEurRate = secondPayment.exchangeRate.exchangeRate.doubleValue;
             if ([[[returnPayment receiver] firstName] isEqualToString:@"Anne"]) {

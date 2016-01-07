@@ -24,9 +24,8 @@
 @end
 
 @interface MCAddressBookDataReceiver : NSObject <ABPeoplePickerNavigationControllerDelegate>
-{
-    __weak UIViewController *viewController;    
-}
+
+@property (weak, nonatomic) UIViewController *viewController;
 
 @property (nonatomic, strong) id delegate;
 @property (nonatomic, strong) MCPerson *thisPerson;

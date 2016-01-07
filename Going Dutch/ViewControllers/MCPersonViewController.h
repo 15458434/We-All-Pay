@@ -32,35 +32,10 @@ typedef enum _emailFieldEditStatus {
 @end
 
 @interface MCPersonViewController : UITableViewController <UITextFieldDelegate, UIPickerViewDelegate, UIPickerViewDataSource, MCAddressBookReceiverDelegate, MCTonightsBillTransfer, MCThisPersonProtocol>
-{
-    __weak IBOutlet UITextField *firstNameField;
-    __weak IBOutlet UITextField *lastNameField;
-    __weak IBOutlet UITextField *emailField;
-    __weak IBOutlet UIButton *selectEmailAddressButton;
-    
-    // __weak IBOutlet UILabel *totalSumSpendLabel;
-    MCTwoLabelsTitleView *twoLabelTitleView;
-    UIBarButtonItem *addressBookButton;
-    
-
-    UIPickerView *emailSelectionFromAddressBookPickerView;
-    BOOL isSelectEmail;
-    
-    MCAddressBookDataReceiver *personReceiver;
-    NSFetchedResultsController *dataController;
-    NSUndoManager *undoManager;
-    
-    BOOL didSomethingChange;
-    BOOL isNew;
-    BOOL thisPersonHasPaidSomething;
-    BOOL mainCancelPressed;
-    NSUInteger emailEditFieldStatus;
-}
 
 @property (weak, nonatomic) IBOutlet UIImageView *pictureView;
 
 @property (nonatomic, weak) id changeFlagDelegate;
-@property (nonatomic) BOOL isNew;
 
 // Only accessible on the mainThread.
 @property (nonatomic, strong) MCSharedBill *tonightsBill;

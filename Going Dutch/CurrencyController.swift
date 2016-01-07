@@ -43,7 +43,7 @@ public class CurrencyController: NSObject {
     }
     
     public override init() {
-        let currencyFilePath = NSBundle.mainBundle().pathForResource("Available Currencies", ofType: "plist")
+        let currencyFilePath = NSBundle(identifier: "com.GreenHair.CurrencyConverter")!.pathForResource("Available Currencies", ofType: "plist")
         let readCurrencies = NSArray(contentsOfFile: currencyFilePath!) as! [Dictionary<String, String>]
         currencies = readCurrencies.map {
             return Currency(name: $0["name"]!, code: $0["code"]!)

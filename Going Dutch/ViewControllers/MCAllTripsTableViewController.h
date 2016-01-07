@@ -14,10 +14,8 @@
 @class MCTableEmptyMessage;
 
 @interface MCAllTripsTableViewController : UITableViewController < NSFetchedResultsControllerDelegate>
-{
-    MCTableEmptyMessage *emptyMessage;
-    
-    NSDateFormatter *df;
-}
+
+@property (nonatomic, strong) MCTableEmptyMessage *emptyMessage;
+@property (nonatomic, strong) NSDateFormatter *df;
 
 @end

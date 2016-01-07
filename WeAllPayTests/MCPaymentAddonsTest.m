@@ -13,9 +13,10 @@
 #import "MCPayment+addons.h"
 #import "MCPerson+addons.h"
 #import "MCEmailAddress+addons.h"
-#import "MCReturnPayment.h"
 #import "MCCurrency+addons.h"
 #import "MCExchangeRate+addons.h"
+
+#import "We_all_pay_Tests-Swift.h"
 
 @interface MCPaymentAddonsTest : XCTestCase
 

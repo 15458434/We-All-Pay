@@ -8,6 +8,7 @@
 
 import UIKit
 import NotificationCenter
+import WhoPayingUserDefaultsStoreInterface
 
 class TodayViewController: UIViewController, NCWidgetProviding {
     @IBOutlet weak var theLabel: UILabel!
@@ -23,7 +24,7 @@ class TodayViewController: UIViewController, NCWidgetProviding {
         #if DEBUG
             print("\(self): updateLocalOptionalsFromUserDefaults")
         #endif
-        let userDefaultsInterface: MCWhoPayingUserDefaultsStoreInterface = MCWhoPayingUserDefaultsStoreInterface()
+        let userDefaultsInterface = WhoPayingUserDefaultsStoreInterface()
         
         if userDefaultsInterface.valid {
             tonightsBillID = userDefaultsInterface.tonightsBillUUID
@@ -48,21 +49,21 @@ class TodayViewController: UIViewController, NCWidgetProviding {
                 if finalString.characters.count > 0 {
                     theLabel.attributedText = betterCreateAttributesStringForWhoIsPayingNext(tripName, fullNameNextPayer: fullNameNextPayer)
                     theLabel.setNeedsUpdateConstraints()
-                    NCWidgetController.widgetController().setHasContent(true, forWidgetWithBundleIdentifier: MCWhoIsPayingNextBundleIdentifier)
+                    NCWidgetController.widgetController().setHasContent(true, forWidgetWithBundleIdentifier: WhoPayingUserDefaultsStoreInterface.MCWhoIsPayingNextBundleIdentifier)
                 } else {
                     theLabel.attributedText = createErrorMessage()
                     theLabel.setNeedsUpdateConstraints()
-                    NCWidgetController.widgetController().setHasContent(true, forWidgetWithBundleIdentifier: MCWhoIsPayingNextBundleIdentifier)
+                    NCWidgetController.widgetController().setHasContent(true, forWidgetWithBundleIdentifier: WhoPayingUserDefaultsStoreInterface.MCWhoIsPayingNextBundleIdentifier)
                 }
             } else {
                 theLabel.attributedText = createErrorMessage()
                 theLabel.setNeedsUpdateConstraints()
-                NCWidgetController.widgetController().setHasContent(true, forWidgetWithBundleIdentifier: MCWhoIsPayingNextBundleIdentifier)
+                NCWidgetController.widgetController().setHasContent(true, forWidgetWithBundleIdentifier: WhoPayingUserDefaultsStoreInterface.MCWhoIsPayingNextBundleIdentifier)
             }
         } else {
             theLabel.attributedText = createErrorMessage()
             theLabel.setNeedsUpdateConstraints()
-            NCWidgetController.widgetController().setHasContent(true, forWidgetWithBundleIdentifier: MCWhoIsPayingNextBundleIdentifier)
+            NCWidgetController.widgetController().setHasContent(true, forWidgetWithBundleIdentifier: WhoPayingUserDefaultsStoreInterface.MCWhoIsPayingNextBundleIdentifier)
         }
     }
     
@@ -70,7 +71,7 @@ class TodayViewController: UIViewController, NCWidgetProviding {
         if updateLocalOptionalsFromUserDefaults() {
             updateLabel()
         }
-        NCWidgetController.widgetController().setHasContent(true, forWidgetWithBundleIdentifier: MCWhoIsPayingNextBundleIdentifier)
+        NCWidgetController.widgetController().setHasContent(true, forWidgetWithBundleIdentifier: WhoPayingUserDefaultsStoreInterface.MCWhoIsPayingNextBundleIdentifier)
     }
     
     func tappedInTheBackground(sender: AnyObject) {

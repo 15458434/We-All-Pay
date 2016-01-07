@@ -12,7 +12,6 @@
 #import "MCPayment+addons.h"
 #import "MCPaymentPresence+addons.h"
 #import "MCWeAllPayStoreController.h"
-#import "MCReturnPayment.h"
 #import "MCCurrency+addons.h"
 #import "MCExchangeRate+addons.h"
 
@@ -30,8 +29,7 @@
 
 + (MCSharedBill *)addSharedBillToContext:(NSManagedObjectContext *)context
 {
-    MCSharedBill *sharedBill;
-    sharedBill = [NSEntityDescription insertNewObjectForEntityForName:@"MCSharedBill" inManagedObjectContext:context];
+    MCSharedBill *sharedBill = [NSEntityDescription insertNewObjectForEntityForName:@"MCSharedBill" inManagedObjectContext:context];
     sharedBill.uniqueBillId = [[NSUUID UUID] UUIDString];
     sharedBill.hasTheMailBeenSent = @NO;
     NSDate *now = [NSDate date];
@@ -480,6 +478,33 @@
     }];
 }
 
+- (void)updateInvalidExchangeRatesWithHandler:(void (^)(NSArray *results, NSError *error))completion
+{
+    // Fetch all exchangeRates that are invalid.
+    NSFetchRequest *request = [[NSFetchRequest alloc] initWithEntityName:@"MCExchangeRate"];
+    request.sortDescriptors = @[[NSSortDescriptor sortDescriptorWithKey:@"dateCreated" ascending:YES]];
+    
+    NSNumber *exchangeRateValidStatus = [NSNumber numberWithShort:valid];
+    request.predicate = [NSPredicate predicateWithFormat:@"payment.onWhichBill = %@ and status != %@", self, exchangeRateValidStatus];
+    NSError *fetchError;
+    NSArray *arrayOfInvalidExchangeRatesOfThisSharedBill = [[self managedObjectContext] executeFetchRequest:request error:&fetchError];
+    if (fetchError) {
+        NSLog(@"Something went wrong fetching invalid ExchangeRates: %@", fetchError);
+    }
+    for (MCExchangeRate *exchangeRate in arrayOfInvalidExchangeRatesOfThisSharedBill) {
+        exchangeRate.status = [NSNumber numberWithShort:fetching];
+    }
+    [[[MCWeAllPayStoreController defaultStore] fetcher] fetchAll:arrayOfInvalidExchangeRatesOfThisSharedBill completionHandler:^(NSError *error) {
+        if (error) {
+            NSLog(@"Something went wrong fetching exchangeRates.");
+            completion(nil, error);
+        }
+        if ([self areAllExchangeRatesValid]) {
+            completion([self solveWhoHasToPayWhoFromThisBill], nil);
+        }
+    }];
+}
+
 - (NSArray *)originalSolveWhoHasToPayWhoFromThisBill
 {
     // Create two array's one of peope who should pay and one with people that should receive.
@@ -487,9 +512,9 @@
     NSNumber *leftToPay;
     NSNumber *leftToReceive;
     NSMutableArray *receivers = [[NSMutableArray alloc] init];
-    NSMutableArray *whoHasToPayWho = [[NSMutableArray alloc] init];
+    NSMutableArray<ReturnPayment *> *whoHasToPayWho = [[NSMutableArray alloc] init];
     NSArray *sortDescriptorArray1 = @[[NSSortDescriptor sortDescriptorWithKey:@"dateCreated" ascending:YES]];
-    NSArray *people = [[self peoplePresent] sortedArrayUsingDescriptors:sortDescriptorArray1];
+    NSArray<MCPerson *> *people = [[self peoplePresent] sortedArrayUsingDescriptors:sortDescriptorArray1];
     
     // Update the database to the current version.
     [self updatePaymentForSupportWithPaymentPresence];
@@ -522,13 +547,13 @@
             for (NSMutableArray *receiver in receivers) {
                 double ltp = [payer[3] doubleValue];
                 double ltr = [receiver[3] doubleValue];
-                MCReturnPayment *returnPayment;
+                ReturnPayment *returnPayment;
                 if (ltp >= ltr) {
-                    returnPayment = [[MCReturnPayment alloc] initWithPayer:payer[0] paysTo:receiver[0] amountOfMoney:@(ltr)];
+                    returnPayment = [[ReturnPayment alloc] initWithPayer:payer[0] money:@(ltr) receiver:receiver[0]];
                     ltp -= ltr;
                     ltr = 0;
                 } else {
-                    returnPayment = [[MCReturnPayment alloc] initWithPayer:payer[0] paysTo:receiver[0] amountOfMoney:@(ltp)];
+                    returnPayment = [[ReturnPayment alloc] initWithPayer:payer[0] money:@(ltp) receiver:receiver[0]];
                     ltr -= ltp;
                     ltp = 0;
                 }
@@ -566,6 +591,23 @@
     }
 }
 
+- (NSArray *)solveWhoHasToPayWhoFromThisBillWithHandler:(void (^)(NSArray *results, NSError *error))completion
+{
+    // This function will either give an NSArray as return value or it will return nil and will execuute the completionBlock at a later time when all exchangeRates are valid.
+    if ([self areAllExchangeRatesValid]) {
+        return [self originalSolveWhoHasToPayWhoFromThisBill];
+    } else {
+        [self updateInvalidExchangeRatesWithHandler:^(NSArray *results, NSError *error) {
+            if (error) {
+                completion(nil, error);
+            } else {
+                NSArray *solution = [self originalSolveWhoHasToPayWhoFromThisBill];
+                completion(solution, nil);
+            }
+        }];
+        return nil;
+    }
+}
 - (NSArray<MCPerson *> *)getArrayOfPeopleSortedOnFullNames
 {
     NSSortDescriptor *sortDescriptor = [NSSortDescriptor sortDescriptorWithKey:@"getFullName" ascending:YES];
