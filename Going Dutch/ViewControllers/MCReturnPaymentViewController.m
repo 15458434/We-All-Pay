@@ -146,6 +146,23 @@ typedef NS_ENUM(BOOL, MCXRatesMissing) {
     [self presentViewController:rateMeAlert animated:YES completion:nil];
 }
 
+- (void)setEmptyMessageNow
+{
+    if (![_solution count] == 0) {
+        [UIView animateWithDuration:0.0 animations:^{
+            [[_emptyMessage bigMessage] setAlpha:0.0];
+            [[self tableView] setSeparatorStyle:UITableViewCellSeparatorStyleSingleLine];
+        } completion:nil];
+    } else {
+        if ([[_emptyMessage bigMessage] alpha] < 1.0) {
+            [UIView animateWithDuration:0.0 animations:^{
+                [[_emptyMessage bigMessage] setAlpha:1.0];
+                [[self tableView] setSeparatorStyle:UITableViewCellSeparatorStyleNone];
+            } completion:nil];
+        }
+    }
+}
+
 - (void)giveSolution
 {
     __weak typeof(self) weakSelf = self;
@@ -165,6 +182,7 @@ typedef NS_ENUM(BOOL, MCXRatesMissing) {
             }];
             [alertController addAction:dismissAction];
             [self presentViewController:alertController animated:YES completion:nil];
+            
             return;
         }
         
@@ -173,13 +191,13 @@ typedef NS_ENUM(BOOL, MCXRatesMissing) {
         if (strongSelf) {
             strongSelf.areXRatesMissing = xRatesPresent;
             strongSelf.solution = results;
-
+            
             NSSortDescriptor *sortDescriptor = [NSSortDescriptor sortDescriptorWithKey:@"firstName" ascending:YES];
             _peoplePresent = [[_tonightsBill peoplePresent] sortedArrayUsingDescriptors:@[sortDescriptor]];
             
             NSLog(@"Stop animating.");
             [[[strongSelf emptyMessage] activityIndicator] stopAnimating];
-            [strongSelf setEmptyMessage];
+            [strongSelf setEmptyMessageNow];
             [[strongSelf tableView] insertSections:[NSIndexSet indexSetWithIndexesInRange:NSMakeRange(0, 3)] withRowAnimation:UITableViewRowAnimationTop];
         }
     }];
@@ -192,6 +210,7 @@ typedef NS_ENUM(BOOL, MCXRatesMissing) {
         _peoplePresent = [[_tonightsBill peoplePresent] sortedArrayUsingDescriptors:@[sortDescriptor]];
     }
 }
+
 #pragma mark - New in this Class
 
 - (void)setEmptyMessage
@@ -221,6 +240,8 @@ typedef NS_ENUM(BOOL, MCXRatesMissing) {
     // Uncomment the following line to display an Edit button in the navigation bar for this view controller.
     // self.navigationItem.rightBarButtonItem = self.editButtonItem;
     
+    _emptyMessage = [[NSBundle mainBundle] loadNibNamed:@"MCTableEmptyMessage" owner:self options:nil][0];    
+    
     [self setEdgesForExtendedLayout:UIRectEdgeNone];
     
     if ([[UIDevice currentDevice] userInterfaceIdiom] == UIUserInterfaceIdiomPad) {
@@ -238,11 +259,11 @@ typedef NS_ENUM(BOOL, MCXRatesMissing) {
     if ([_tonightsBill areAllExchangeRatesValid]) {
         _areXRatesMissing = xRatesPresent;
         [[_emptyMessage activityIndicator] stopAnimating];
-        [[_emptyMessage bigMessage] setHidden:NO];
+        _emptyMessage.bigMessage.alpha = 1.0;
     } else {
         _areXRatesMissing = xRatesMissing;
         [[_emptyMessage activityIndicator] startAnimating];
-        [[_emptyMessage bigMessage] setHidden:YES];
+        _emptyMessage.bigMessage.alpha = 0.0;
     }
     
     [[_emptyMessage bigMessage] setText:NSLocalizedString(@"RETURNPAYMENTSVIEW_NOPAYMENTS", @"Please add payments and/or people if you want a solution on who owes who.")];
