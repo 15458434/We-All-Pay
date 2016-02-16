@@ -151,6 +151,8 @@
 		38D6A3E41C73DDEF00968BB2 /* RateMeControllerTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 38D6A3E31C73DDEF00968BB2 /* RateMeControllerTests.swift */; };
 		38D6A3E61C73DF2600968BB2 /* RateMeControllerExtension.swift in Sources */ = {isa = PBXBuildFile; fileRef = 38D6A3E51C73DF2600968BB2 /* RateMeControllerExtension.swift */; };
 		38D6A3E81C73E04300968BB2 /* UIViewControllerRateMeControllerExtension.swift in Sources */ = {isa = PBXBuildFile; fileRef = 38D6A3E71C73E04300968BB2 /* UIViewControllerRateMeControllerExtension.swift */; };
+		38D6A3EB1C73E64E00968BB2 /* InfoPlist.strings in Resources */ = {isa = PBXBuildFile; fileRef = 38D6A3ED1C73E64E00968BB2 /* InfoPlist.strings */; };
+		38D6A3F01C73E64F00968BB2 /* InfoPlist.strings in Resources */ = {isa = PBXBuildFile; fileRef = 38D6A3F21C73E64F00968BB2 /* InfoPlist.strings */; };
 		38D796151B2F1CBD00F3872F /* ExchangeRateFetcherForMCExchangeRate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 38D796141B2F1CBD00F3872F /* ExchangeRateFetcherForMCExchangeRate.swift */; };
 		38DB85D417E45BCA006237CF /* MCPayment+addons.m in Sources */ = {isa = PBXBuildFile; fileRef = 38DB85D317E45BCA006237CF /* MCPayment+addons.m */; };
 		38DB85D717E45CA4006237CF /* MCSharedBill+addons.m in Sources */ = {isa = PBXBuildFile; fileRef = 38DB85D617E45CA4006237CF /* MCSharedBill+addons.m */; };
@@ -496,6 +498,8 @@
 		38D6A3E31C73DDEF00968BB2 /* RateMeControllerTests.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = RateMeControllerTests.swift; sourceTree = "<group>"; };
 		38D6A3E51C73DF2600968BB2 /* RateMeControllerExtension.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = RateMeControllerExtension.swift; sourceTree = "<group>"; };
 		38D6A3E71C73E04300968BB2 /* UIViewControllerRateMeControllerExtension.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = UIViewControllerRateMeControllerExtension.swift; sourceTree = "<group>"; };
+		38D6A3EC1C73E64E00968BB2 /* nl */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = nl; path = nl.lproj/InfoPlist.strings; sourceTree = "<group>"; };
+		38D6A3F11C73E64F00968BB2 /* nl */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = nl; path = nl.lproj/InfoPlist.strings; sourceTree = "<group>"; };
 		38D785FC18DC53C30074B670 /* WeAllPayStoreTests.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; name = WeAllPayStoreTests.m; path = ../WeAllPayTests/WeAllPayStoreTests.m; sourceTree = "<group>"; };
 		38D796121B2DF30800F3872F /* ExchangeRateFetcherTest.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = ExchangeRateFetcherTest.swift; path = "../We all pay Tests/ExchangeRateFetcherTest.swift"; sourceTree = "<group>"; };
 		38D796141B2F1CBD00F3872F /* ExchangeRateFetcherForMCExchangeRate.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ExchangeRateFetcherForMCExchangeRate.swift; sourceTree = "<group>"; };
@@ -1007,6 +1011,7 @@
 		38D6A3BD1C73DDBF00968BB2 /* RateMeControllerForiOS */ = {
 			isa = PBXGroup;
 			children = (
+				38D6A3F21C73E64F00968BB2 /* InfoPlist.strings */,
 				38D6A3D91C73DDDE00968BB2 /* InfoPlist.strings */,
 				38D6A3DA1C73DDDE00968BB2 /* RateMeControllerForiOS.h */,
 				38D6A3DB1C73DDDE00968BB2 /* RateMeController.swift */,
@@ -1019,6 +1024,7 @@
 		38D6A3CB1C73DDC000968BB2 /* RateMeControllerForiOSTests */ = {
 			isa = PBXGroup;
 			children = (
+				38D6A3ED1C73E64E00968BB2 /* InfoPlist.strings */,
 				38D6A3E31C73DDEF00968BB2 /* RateMeControllerTests.swift */,
 				38D6A3CE1C73DDC000968BB2 /* Info.plist */,
 			);
@@ -1478,6 +1484,7 @@
 			buildActionMask = 2147483647;
 			files = (
 				38D6A3E21C73DDDE00968BB2 /* Info.plist in Resources */,
+				38D6A3F01C73E64F00968BB2 /* InfoPlist.strings in Resources */,
 				38D6A3DE1C73DDDE00968BB2 /* InfoPlist.strings in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
@@ -1486,6 +1493,7 @@
 			isa = PBXResourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				38D6A3EB1C73E64E00968BB2 /* InfoPlist.strings in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -1831,6 +1839,22 @@
 				389E92641889E5A60005F063 /* en */,
 			);
 			name = Localizable.strings;
+			sourceTree = "<group>";
+		};
+		38D6A3ED1C73E64E00968BB2 /* InfoPlist.strings */ = {
+			isa = PBXVariantGroup;
+			children = (
+				38D6A3EC1C73E64E00968BB2 /* nl */,
+			);
+			name = InfoPlist.strings;
+			sourceTree = "<group>";
+		};
+		38D6A3F21C73E64F00968BB2 /* InfoPlist.strings */ = {
+			isa = PBXVariantGroup;
+			children = (
+				38D6A3F11C73E64F00968BB2 /* nl */,
+			);
+			name = InfoPlist.strings;
 			sourceTree = "<group>";
 		};
 		38DC8B4519097FEA00762235 /* Main-iPad.storyboard */ = {
