@@ -205,6 +205,7 @@ typedef NS_ENUM(BOOL, MCXRatesMissing) {
 - (void)mailComposeController:(MFMailComposeViewController *)controller didFinishWithResult:(MFMailComposeResult)result error:(NSError *)error
 {
     if (result == MFMailComposeResultSent) {
+        [self showRateMeIfNecessary];
         [self dismissViewControllerAnimated:YES completion:nil];
     } else if (result == MFMailComposeResultSaved) {
         [self dismissViewControllerAnimated:YES completion:nil];

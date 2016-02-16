@@ -128,24 +128,6 @@ typedef NS_ENUM(BOOL, MCXRatesMissing) {
     }
 }
 
-- (void)showRateMe
-{
-    UIAlertController *rateMeAlert = [UIAlertController alertControllerWithTitle:@"Please Rate Me" message:@"Do you like We all pay? If so please take some time to leave a rating in the App Store" preferredStyle:UIAlertControllerStyleAlert];
-    UIAlertAction *rateMe = [UIAlertAction actionWithTitle:@"rate me" style:UIAlertActionStyleDefault handler:^(UIAlertAction *action) {
-        NSLog(@"Rate me");
-    }];
-    UIAlertAction *later = [UIAlertAction actionWithTitle:@"later" style:UIAlertActionStyleDefault handler:^(UIAlertAction *action) {
-        NSLog(@"Later");
-    }];
-    UIAlertAction *never = [UIAlertAction actionWithTitle:@"never" style:UIAlertActionStyleDefault handler:^(UIAlertAction *action) {
-        NSLog(@"Never!!");
-    }];
-    [rateMeAlert addAction:never];
-    [rateMeAlert addAction:later];
-    [rateMeAlert addAction:rateMe];
-    [self presentViewController:rateMeAlert animated:YES completion:nil];
-}
-
 - (void)setEmptyMessageNow
 {
     if (![_solution count] == 0) {
@@ -322,7 +304,7 @@ typedef NS_ENUM(BOOL, MCXRatesMissing) {
     if (result == MFMailComposeResultCancelled) {
         [[self presentedViewController] dismissViewControllerAnimated:YES completion:nil];
     } else if (result == MFMailComposeResultSent) {
-        // TODO: add rate me here.
+        [self showRateMeIfNecessary];
         [[self presentedViewController] dismissViewControllerAnimated:YES completion:^{
             [_tonightsBill setHasTheMailBeenSent:@YES];
             [[MCWeAllPayStoreController defaultStore] saveMainThreadContext];
