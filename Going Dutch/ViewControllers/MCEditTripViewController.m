@@ -135,7 +135,6 @@
     UIAlertController *alertController = [UIAlertController alertControllerWithTitle:title message:message preferredStyle:UIAlertControllerStyleAlert];
     UIAlertAction *cancelAction = [UIAlertAction actionWithTitle:cancelButtonTitle style:UIAlertActionStyleCancel handler:nil];
     UIAlertAction *settingsAction = [UIAlertAction actionWithTitle:settingsButtonTitle style:UIAlertActionStyleDefault handler:^(UIAlertAction * _Nonnull action) {
-        // TODO: Add code that opens the privacy settings for We all pay.
         NSURL *settingsAppURL = [NSURL URLWithString:UIApplicationOpenSettingsURLString];
         [[UIApplication sharedApplication] openURL:settingsAppURL];
     }];
