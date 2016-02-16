@@ -24,6 +24,11 @@
 			<key>orderHint</key>
 			<integer>2</integer>
 		</dict>
+		<key>RateMeControllerForiOS.xcscheme</key>
+		<dict>
+			<key>orderHint</key>
+			<integer>2</integer>
+		</dict>
 		<key>Test.xcscheme</key>
 		<dict>
 			<key>orderHint</key>
@@ -193,6 +198,26 @@
 			<true/>
 		</dict>
 		<key>38B6E0EB1A28BBAB009E69D7</key>
+		<dict>
+			<key>primary</key>
+			<true/>
+		</dict>
+		<key>38D6A38F1C73DC7600968BB2</key>
+		<dict>
+			<key>primary</key>
+			<true/>
+		</dict>
+		<key>38D6A3981C73DC7600968BB2</key>
+		<dict>
+			<key>primary</key>
+			<true/>
+		</dict>
+		<key>38D6A3BB1C73DDBF00968BB2</key>
+		<dict>
+			<key>primary</key>
+			<true/>
+		</dict>
+		<key>38D6A3C41C73DDBF00968BB2</key>
 		<dict>
 			<key>primary</key>
 			<true/>

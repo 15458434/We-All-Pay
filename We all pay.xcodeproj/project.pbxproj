@@ -140,6 +140,17 @@
 		38D177111C3A5E640084604C /* SelectCategoryTableViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 38D177101C3A5E640084604C /* SelectCategoryTableViewController.swift */; };
 		38D177131C3A85C00084604C /* SelectCurrencyTableViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 38D177121C3A85C00084604C /* SelectCurrencyTableViewController.swift */; };
 		38D1C3801A8A38B5008F2A8E /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 38D1C37F1A8A38B5008F2A8E /* LaunchScreen.storyboard */; };
+		38D6A3C61C73DDC000968BB2 /* RateMeControllerForiOS.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 38D6A3BC1C73DDBF00968BB2 /* RateMeControllerForiOS.framework */; };
+		38D6A3D11C73DDC000968BB2 /* RateMeControllerForiOS.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 38D6A3BC1C73DDBF00968BB2 /* RateMeControllerForiOS.framework */; };
+		38D6A3D21C73DDC000968BB2 /* RateMeControllerForiOS.framework in Embed Frameworks */ = {isa = PBXBuildFile; fileRef = 38D6A3BC1C73DDBF00968BB2 /* RateMeControllerForiOS.framework */; settings = {ATTRIBUTES = (CodeSignOnCopy, RemoveHeadersOnCopy, ); }; };
+		38D6A3DE1C73DDDE00968BB2 /* InfoPlist.strings in Resources */ = {isa = PBXBuildFile; fileRef = 38D6A3D91C73DDDE00968BB2 /* InfoPlist.strings */; };
+		38D6A3DF1C73DDDE00968BB2 /* RateMeControllerForiOS.h in Headers */ = {isa = PBXBuildFile; fileRef = 38D6A3DA1C73DDDE00968BB2 /* RateMeControllerForiOS.h */; settings = {ATTRIBUTES = (Public, ); }; };
+		38D6A3E01C73DDDE00968BB2 /* RateMeController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 38D6A3DB1C73DDDE00968BB2 /* RateMeController.swift */; };
+		38D6A3E11C73DDDE00968BB2 /* RateMeControllerAskStatusContainer.swift in Sources */ = {isa = PBXBuildFile; fileRef = 38D6A3DC1C73DDDE00968BB2 /* RateMeControllerAskStatusContainer.swift */; };
+		38D6A3E21C73DDDE00968BB2 /* Info.plist in Resources */ = {isa = PBXBuildFile; fileRef = 38D6A3DD1C73DDDE00968BB2 /* Info.plist */; };
+		38D6A3E41C73DDEF00968BB2 /* RateMeControllerTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 38D6A3E31C73DDEF00968BB2 /* RateMeControllerTests.swift */; };
+		38D6A3E61C73DF2600968BB2 /* RateMeControllerExtension.swift in Sources */ = {isa = PBXBuildFile; fileRef = 38D6A3E51C73DF2600968BB2 /* RateMeControllerExtension.swift */; };
+		38D6A3E81C73E04300968BB2 /* UIViewControllerRateMeControllerExtension.swift in Sources */ = {isa = PBXBuildFile; fileRef = 38D6A3E71C73E04300968BB2 /* UIViewControllerRateMeControllerExtension.swift */; };
 		38D796151B2F1CBD00F3872F /* ExchangeRateFetcherForMCExchangeRate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 38D796141B2F1CBD00F3872F /* ExchangeRateFetcherForMCExchangeRate.swift */; };
 		38DB85D417E45BCA006237CF /* MCPayment+addons.m in Sources */ = {isa = PBXBuildFile; fileRef = 38DB85D317E45BCA006237CF /* MCPayment+addons.m */; };
 		38DB85D717E45CA4006237CF /* MCSharedBill+addons.m in Sources */ = {isa = PBXBuildFile; fileRef = 38DB85D617E45CA4006237CF /* MCSharedBill+addons.m */; };
@@ -223,6 +234,27 @@
 			remoteGlobalIDString = 388A327B1C11EDBD00F7459C;
 			remoteInfo = WhoPayingUserDefaultsStoreInterface;
 		};
+		38D6A3C71C73DDC000968BB2 /* PBXContainerItemProxy */ = {
+			isa = PBXContainerItemProxy;
+			containerPortal = 38572AC9169D437B00969C62 /* Project object */;
+			proxyType = 1;
+			remoteGlobalIDString = 38D6A3BB1C73DDBF00968BB2;
+			remoteInfo = RateMeControllerForiOS;
+		};
+		38D6A3C91C73DDC000968BB2 /* PBXContainerItemProxy */ = {
+			isa = PBXContainerItemProxy;
+			containerPortal = 38572AC9169D437B00969C62 /* Project object */;
+			proxyType = 1;
+			remoteGlobalIDString = 38572AD1169D437B00969C62;
+			remoteInfo = "We all pay";
+		};
+		38D6A3CF1C73DDC000968BB2 /* PBXContainerItemProxy */ = {
+			isa = PBXContainerItemProxy;
+			containerPortal = 38572AC9169D437B00969C62 /* Project object */;
+			proxyType = 1;
+			remoteGlobalIDString = 38D6A3BB1C73DDBF00968BB2;
+			remoteInfo = RateMeControllerForiOS;
+		};
 /* End PBXContainerItemProxy section */
 
 /* Begin PBXCopyFilesBuildPhase section */
@@ -233,6 +265,7 @@
 			dstSubfolderSpec = 10;
 			files = (
 				382B76F61C398249000C203A /* CurrencyConverter.framework in Embed Frameworks */,
+				38D6A3D21C73DDC000968BB2 /* RateMeControllerForiOS.framework in Embed Frameworks */,
 				388A32921C11EDBD00F7459C /* WhoPayingUserDefaultsStoreInterface.framework in Embed Frameworks */,
 			);
 			name = "Embed Frameworks";
@@ -452,6 +485,17 @@
 		38D177121C3A85C00084604C /* SelectCurrencyTableViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SelectCurrencyTableViewController.swift; sourceTree = "<group>"; };
 		38D1C37F1A8A38B5008F2A8E /* LaunchScreen.storyboard */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.storyboard; name = LaunchScreen.storyboard; path = LaunchImage/LaunchScreen.storyboard; sourceTree = "<group>"; };
 		38D2323719A4EF42004B1203 /* We all pay.entitlements */ = {isa = PBXFileReference; lastKnownFileType = text.xml; path = "We all pay.entitlements"; sourceTree = SOURCE_ROOT; };
+		38D6A3BC1C73DDBF00968BB2 /* RateMeControllerForiOS.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = RateMeControllerForiOS.framework; sourceTree = BUILT_PRODUCTS_DIR; };
+		38D6A3C51C73DDBF00968BB2 /* RateMeControllerForiOSTests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = RateMeControllerForiOSTests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
+		38D6A3CE1C73DDC000968BB2 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
+		38D6A3D91C73DDDE00968BB2 /* InfoPlist.strings */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.strings; path = InfoPlist.strings; sourceTree = "<group>"; };
+		38D6A3DA1C73DDDE00968BB2 /* RateMeControllerForiOS.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = RateMeControllerForiOS.h; sourceTree = "<group>"; };
+		38D6A3DB1C73DDDE00968BB2 /* RateMeController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = RateMeController.swift; sourceTree = "<group>"; };
+		38D6A3DC1C73DDDE00968BB2 /* RateMeControllerAskStatusContainer.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = RateMeControllerAskStatusContainer.swift; sourceTree = "<group>"; };
+		38D6A3DD1C73DDDE00968BB2 /* Info.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
+		38D6A3E31C73DDEF00968BB2 /* RateMeControllerTests.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = RateMeControllerTests.swift; sourceTree = "<group>"; };
+		38D6A3E51C73DF2600968BB2 /* RateMeControllerExtension.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = RateMeControllerExtension.swift; sourceTree = "<group>"; };
+		38D6A3E71C73E04300968BB2 /* UIViewControllerRateMeControllerExtension.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = UIViewControllerRateMeControllerExtension.swift; sourceTree = "<group>"; };
 		38D785FC18DC53C30074B670 /* WeAllPayStoreTests.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; name = WeAllPayStoreTests.m; path = ../WeAllPayTests/WeAllPayStoreTests.m; sourceTree = "<group>"; };
 		38D796121B2DF30800F3872F /* ExchangeRateFetcherTest.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = ExchangeRateFetcherTest.swift; path = "../We all pay Tests/ExchangeRateFetcherTest.swift"; sourceTree = "<group>"; };
 		38D796141B2F1CBD00F3872F /* ExchangeRateFetcherForMCExchangeRate.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ExchangeRateFetcherForMCExchangeRate.swift; sourceTree = "<group>"; };
@@ -516,6 +560,7 @@
 			buildActionMask = 2147483647;
 			files = (
 				38DC8B3619084ABE00762235 /* SystemConfiguration.framework in Frameworks */,
+				38D6A3D11C73DDC000968BB2 /* RateMeControllerForiOS.framework in Frameworks */,
 				386FC37018E5BE1900428294 /* iAd.framework in Frameworks */,
 				3886D3FD16B7A1CD00ECE64F /* AddressBook.framework in Frameworks */,
 				388A32911C11EDBD00F7459C /* WhoPayingUserDefaultsStoreInterface.framework in Frameworks */,
@@ -561,6 +606,21 @@
 			files = (
 				388A329A1C11EF4700F7459C /* WhoPayingUserDefaultsStoreInterface.framework in Frameworks */,
 				38B6E0ED1A28BBAB009E69D7 /* NotificationCenter.framework in Frameworks */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+		38D6A3B81C73DDBF00968BB2 /* Frameworks */ = {
+			isa = PBXFrameworksBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+		38D6A3C21C73DDBF00968BB2 /* Frameworks */ = {
+			isa = PBXFrameworksBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				38D6A3C61C73DDC000968BB2 /* RateMeControllerForiOS.framework in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -689,6 +749,8 @@
 				388A328B1C11EDBD00F7459C /* WhoPayingUserDefaultsStoreInterfaceTests */,
 				382B76E11C398249000C203A /* CurrencyConverter */,
 				382B76EF1C398249000C203A /* CurrencyConverterTests */,
+				38D6A3BD1C73DDBF00968BB2 /* RateMeControllerForiOS */,
+				38D6A3CB1C73DDC000968BB2 /* RateMeControllerForiOSTests */,
 				38572AD5169D437B00969C62 /* Frameworks */,
 				38572AD3169D437B00969C62 /* Products */,
 			);
@@ -704,6 +766,8 @@
 				388A32851C11EDBD00F7459C /* WhoPayingUserDefaultsStoreInterfaceTests.xctest */,
 				382B76E01C398249000C203A /* CurrencyConverter.framework */,
 				382B76E91C398249000C203A /* CurrencyConverterTests.xctest */,
+				38D6A3BC1C73DDBF00968BB2 /* RateMeControllerForiOS.framework */,
+				38D6A3C51C73DDBF00968BB2 /* RateMeControllerForiOSTests.xctest */,
 			);
 			name = Products;
 			sourceTree = "<group>";
@@ -734,6 +798,8 @@
 				3892E3B017906B5E0038894B /* MCAddressBookDataReceiver.m */,
 				38572AE5169D437B00969C62 /* MCAppDelegate.h */,
 				38572AE6169D437B00969C62 /* MCAppDelegate.m */,
+				38D6A3E51C73DF2600968BB2 /* RateMeControllerExtension.swift */,
+				38D6A3E71C73E04300968BB2 /* UIViewControllerRateMeControllerExtension.swift */,
 				38001C9A194EE284008ACD94 /* Images.xcassets */,
 				380700B11A1B76FE00C7FB37 /* Test files dutch */,
 				380700A61A1B750500C7FB37 /* Test files english */,
@@ -938,6 +1004,27 @@
 			name = LaunchImage;
 			sourceTree = "<group>";
 		};
+		38D6A3BD1C73DDBF00968BB2 /* RateMeControllerForiOS */ = {
+			isa = PBXGroup;
+			children = (
+				38D6A3D91C73DDDE00968BB2 /* InfoPlist.strings */,
+				38D6A3DA1C73DDDE00968BB2 /* RateMeControllerForiOS.h */,
+				38D6A3DB1C73DDDE00968BB2 /* RateMeController.swift */,
+				38D6A3DC1C73DDDE00968BB2 /* RateMeControllerAskStatusContainer.swift */,
+				38D6A3DD1C73DDDE00968BB2 /* Info.plist */,
+			);
+			path = RateMeControllerForiOS;
+			sourceTree = "<group>";
+		};
+		38D6A3CB1C73DDC000968BB2 /* RateMeControllerForiOSTests */ = {
+			isa = PBXGroup;
+			children = (
+				38D6A3E31C73DDEF00968BB2 /* RateMeControllerTests.swift */,
+				38D6A3CE1C73DDC000968BB2 /* Info.plist */,
+			);
+			path = RateMeControllerForiOSTests;
+			sourceTree = "<group>";
+		};
 		38DC8B371909064A00762235 /* ViewController Protocols */ = {
 			isa = PBXGroup;
 			children = (
@@ -1043,6 +1130,14 @@
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
+		38D6A3B91C73DDBF00968BB2 /* Headers */ = {
+			isa = PBXHeadersBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				38D6A3DF1C73DDDE00968BB2 /* RateMeControllerForiOS.h in Headers */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
 /* End PBXHeadersBuildPhase section */
 
 /* Begin PBXNativeTarget section */
@@ -1099,6 +1194,7 @@
 				381641001AD6D8A1000D9FAF /* PBXTargetDependency */,
 				388A32901C11EDBD00F7459C /* PBXTargetDependency */,
 				382B76F41C398249000C203A /* PBXTargetDependency */,
+				38D6A3D01C73DDC000968BB2 /* PBXTargetDependency */,
 			);
 			name = "We all pay";
 			productName = "Going Dutch";
@@ -1177,6 +1273,43 @@
 			productReference = 38B6E0EC1A28BBAB009E69D7 /* Who is paying next.appex */;
 			productType = "com.apple.product-type.app-extension";
 		};
+		38D6A3BB1C73DDBF00968BB2 /* RateMeControllerForiOS */ = {
+			isa = PBXNativeTarget;
+			buildConfigurationList = 38D6A3D31C73DDC100968BB2 /* Build configuration list for PBXNativeTarget "RateMeControllerForiOS" */;
+			buildPhases = (
+				38D6A3B71C73DDBF00968BB2 /* Sources */,
+				38D6A3B81C73DDBF00968BB2 /* Frameworks */,
+				38D6A3B91C73DDBF00968BB2 /* Headers */,
+				38D6A3BA1C73DDBF00968BB2 /* Resources */,
+			);
+			buildRules = (
+			);
+			dependencies = (
+			);
+			name = RateMeControllerForiOS;
+			productName = RateMeControllerForiOS;
+			productReference = 38D6A3BC1C73DDBF00968BB2 /* RateMeControllerForiOS.framework */;
+			productType = "com.apple.product-type.framework";
+		};
+		38D6A3C41C73DDBF00968BB2 /* RateMeControllerForiOSTests */ = {
+			isa = PBXNativeTarget;
+			buildConfigurationList = 38D6A3D61C73DDC100968BB2 /* Build configuration list for PBXNativeTarget "RateMeControllerForiOSTests" */;
+			buildPhases = (
+				38D6A3C11C73DDBF00968BB2 /* Sources */,
+				38D6A3C21C73DDBF00968BB2 /* Frameworks */,
+				38D6A3C31C73DDBF00968BB2 /* Resources */,
+			);
+			buildRules = (
+			);
+			dependencies = (
+				38D6A3C81C73DDC000968BB2 /* PBXTargetDependency */,
+				38D6A3CA1C73DDC000968BB2 /* PBXTargetDependency */,
+			);
+			name = RateMeControllerForiOSTests;
+			productName = RateMeControllerForiOSTests;
+			productReference = 38D6A3C51C73DDBF00968BB2 /* RateMeControllerForiOSTests.xctest */;
+			productType = "com.apple.product-type.bundle.unit-test";
+		};
 /* End PBXNativeTarget section */
 
 /* Begin PBXProject section */
@@ -1232,6 +1365,14 @@
 							};
 						};
 					};
+					38D6A3BB1C73DDBF00968BB2 = {
+						CreatedOnToolsVersion = 7.2.1;
+						DevelopmentTeam = Z6JP26PUUY;
+					};
+					38D6A3C41C73DDBF00968BB2 = {
+						CreatedOnToolsVersion = 7.2.1;
+						TestTargetID = 38572AD1169D437B00969C62;
+					};
 				};
 			};
 			buildConfigurationList = 38572ACC169D437B00969C62 /* Build configuration list for PBXProject "We all pay" */;
@@ -1255,6 +1396,8 @@
 				388A32841C11EDBD00F7459C /* WhoPayingUserDefaultsStoreInterfaceTests */,
 				382B76DF1C398249000C203A /* CurrencyConverter */,
 				382B76E81C398249000C203A /* CurrencyConverterTests */,
+				38D6A3BB1C73DDBF00968BB2 /* RateMeControllerForiOS */,
+				38D6A3C41C73DDBF00968BB2 /* RateMeControllerForiOSTests */,
 			);
 		};
 /* End PBXProject section */
@@ -1327,6 +1470,22 @@
 				38370CF51A40DBC300B56460 /* MainInterface.storyboard in Resources */,
 				381276041BBD8F130004C8C2 /* InfoPlist.strings in Resources */,
 				38010E0F1A3F4A4F0056F8F8 /* Localizable.strings in Resources */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+		38D6A3BA1C73DDBF00968BB2 /* Resources */ = {
+			isa = PBXResourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				38D6A3E21C73DDDE00968BB2 /* Info.plist in Resources */,
+				38D6A3DE1C73DDDE00968BB2 /* InfoPlist.strings in Resources */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+		38D6A3C31C73DDBF00968BB2 /* Resources */ = {
+			isa = PBXResourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -1443,9 +1602,11 @@
 				38977E5F1B2A32EF008484A4 /* MCPersonTableViewCell.swift in Sources */,
 				385295CF1C10583E0081894D /* CategoryPictureObject.swift in Sources */,
 				38977E5D1B2A31A2008484A4 /* MCSolutionOverViewTableViewCell_iPhone.swift in Sources */,
+				38D6A3E81C73E04300968BB2 /* UIViewControllerRateMeControllerExtension.swift in Sources */,
 				38CC8C4A18ED61FD006D99E7 /* MCPersonTableViewController_iPad.m in Sources */,
 				389C2F56193391E300BB9F3E /* MCPaymentPresenceEntityMigrationPolicy.m in Sources */,
 				3812760C1BBE74EF0004C8C2 /* UIViewControllerExtension.swift in Sources */,
+				38D6A3E61C73DF2600968BB2 /* RateMeControllerExtension.swift in Sources */,
 				3830F6F6179872B400904FAF /* MCPaymentViewController.m in Sources */,
 				389DE9161982540D00169645 /* MCCurrency.m in Sources */,
 			);
@@ -1494,6 +1655,23 @@
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
+		38D6A3B71C73DDBF00968BB2 /* Sources */ = {
+			isa = PBXSourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				38D6A3E01C73DDDE00968BB2 /* RateMeController.swift in Sources */,
+				38D6A3E11C73DDDE00968BB2 /* RateMeControllerAskStatusContainer.swift in Sources */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+		38D6A3C11C73DDBF00968BB2 /* Sources */ = {
+			isa = PBXSourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				38D6A3E41C73DDEF00968BB2 /* RateMeControllerTests.swift in Sources */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
 /* End PBXSourcesBuildPhase section */
 
 /* Begin PBXTargetDependency section */
@@ -1536,6 +1714,21 @@
 			isa = PBXTargetDependency;
 			target = 388A327B1C11EDBD00F7459C /* WhoPayingUserDefaultsStoreInterface */;
 			targetProxy = 388A328F1C11EDBD00F7459C /* PBXContainerItemProxy */;
+		};
+		38D6A3C81C73DDC000968BB2 /* PBXTargetDependency */ = {
+			isa = PBXTargetDependency;
+			target = 38D6A3BB1C73DDBF00968BB2 /* RateMeControllerForiOS */;
+			targetProxy = 38D6A3C71C73DDC000968BB2 /* PBXContainerItemProxy */;
+		};
+		38D6A3CA1C73DDC000968BB2 /* PBXTargetDependency */ = {
+			isa = PBXTargetDependency;
+			target = 38572AD1169D437B00969C62 /* We all pay */;
+			targetProxy = 38D6A3C91C73DDC000968BB2 /* PBXContainerItemProxy */;
+		};
+		38D6A3D01C73DDC000968BB2 /* PBXTargetDependency */ = {
+			isa = PBXTargetDependency;
+			target = 38D6A3BB1C73DDBF00968BB2 /* RateMeControllerForiOS */;
+			targetProxy = 38D6A3CF1C73DDC000968BB2 /* PBXContainerItemProxy */;
 		};
 /* End PBXTargetDependency section */
 
@@ -2279,6 +2472,150 @@
 			};
 			name = Release;
 		};
+		38D6A3D41C73DDC100968BB2 /* Debug */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				CLANG_ENABLE_MODULES = YES;
+				CLANG_WARN_BOOL_CONVERSION = YES;
+				CLANG_WARN_CONSTANT_CONVERSION = YES;
+				CLANG_WARN_DIRECT_OBJC_ISA_USAGE = YES_ERROR;
+				CLANG_WARN_ENUM_CONVERSION = YES;
+				CLANG_WARN_INT_CONVERSION = YES;
+				CLANG_WARN_OBJC_ROOT_CLASS = YES_ERROR;
+				CLANG_WARN_UNREACHABLE_CODE = YES;
+				CODE_SIGN_IDENTITY = "iPhone Developer";
+				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer";
+				"CODE_SIGN_IDENTITY[sdk=macosx*]" = "Mac Developer";
+				CURRENT_PROJECT_VERSION = 1;
+				DEBUG_INFORMATION_FORMAT = dwarf;
+				DEFINES_MODULE = YES;
+				DYLIB_COMPATIBILITY_VERSION = 1;
+				DYLIB_CURRENT_VERSION = 1;
+				DYLIB_INSTALL_NAME_BASE = "@rpath";
+				ENABLE_STRICT_OBJC_MSGSEND = YES;
+				GCC_NO_COMMON_BLOCKS = YES;
+				GCC_WARN_64_TO_32_BIT_CONVERSION = YES;
+				GCC_WARN_ABOUT_RETURN_TYPE = YES_ERROR;
+				GCC_WARN_UNDECLARED_SELECTOR = YES;
+				GCC_WARN_UNINITIALIZED_AUTOS = YES_AGGRESSIVE;
+				GCC_WARN_UNUSED_FUNCTION = YES;
+				INFOPLIST_FILE = RateMeControllerForiOS/Info.plist;
+				INSTALL_PATH = "$(LOCAL_LIBRARY_DIR)/Frameworks";
+				IPHONEOS_DEPLOYMENT_TARGET = 8.0;
+				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks @loader_path/Frameworks";
+				MTL_ENABLE_DEBUG_INFO = YES;
+				PRODUCT_BUNDLE_IDENTIFIER = com.GreenHair.RateMeControllerForiOS;
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				SKIP_INSTALL = YES;
+				SWIFT_OPTIMIZATION_LEVEL = "-Onone";
+				TARGETED_DEVICE_FAMILY = "1,2";
+				VERSIONING_SYSTEM = "apple-generic";
+				VERSION_INFO_PREFIX = "";
+			};
+			name = Debug;
+		};
+		38D6A3D51C73DDC100968BB2 /* Release */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				CLANG_ENABLE_MODULES = YES;
+				CLANG_WARN_BOOL_CONVERSION = YES;
+				CLANG_WARN_CONSTANT_CONVERSION = YES;
+				CLANG_WARN_DIRECT_OBJC_ISA_USAGE = YES_ERROR;
+				CLANG_WARN_ENUM_CONVERSION = YES;
+				CLANG_WARN_INT_CONVERSION = YES;
+				CLANG_WARN_OBJC_ROOT_CLASS = YES_ERROR;
+				CLANG_WARN_UNREACHABLE_CODE = YES;
+				CODE_SIGN_IDENTITY = "iPhone Developer";
+				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer";
+				"CODE_SIGN_IDENTITY[sdk=macosx*]" = "Mac Developer";
+				COPY_PHASE_STRIP = NO;
+				CURRENT_PROJECT_VERSION = 1;
+				DEBUG_INFORMATION_FORMAT = "dwarf-with-dsym";
+				DEFINES_MODULE = YES;
+				DYLIB_COMPATIBILITY_VERSION = 1;
+				DYLIB_CURRENT_VERSION = 1;
+				DYLIB_INSTALL_NAME_BASE = "@rpath";
+				ENABLE_NS_ASSERTIONS = NO;
+				ENABLE_STRICT_OBJC_MSGSEND = YES;
+				GCC_NO_COMMON_BLOCKS = YES;
+				GCC_WARN_64_TO_32_BIT_CONVERSION = YES;
+				GCC_WARN_ABOUT_RETURN_TYPE = YES_ERROR;
+				GCC_WARN_UNDECLARED_SELECTOR = YES;
+				GCC_WARN_UNINITIALIZED_AUTOS = YES_AGGRESSIVE;
+				GCC_WARN_UNUSED_FUNCTION = YES;
+				INFOPLIST_FILE = RateMeControllerForiOS/Info.plist;
+				INSTALL_PATH = "$(LOCAL_LIBRARY_DIR)/Frameworks";
+				IPHONEOS_DEPLOYMENT_TARGET = 8.0;
+				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks @loader_path/Frameworks";
+				MTL_ENABLE_DEBUG_INFO = NO;
+				PRODUCT_BUNDLE_IDENTIFIER = com.GreenHair.RateMeControllerForiOS;
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				SKIP_INSTALL = YES;
+				TARGETED_DEVICE_FAMILY = "1,2";
+				VERSIONING_SYSTEM = "apple-generic";
+				VERSION_INFO_PREFIX = "";
+			};
+			name = Release;
+		};
+		38D6A3D71C73DDC100968BB2 /* Debug */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				CLANG_WARN_BOOL_CONVERSION = YES;
+				CLANG_WARN_CONSTANT_CONVERSION = YES;
+				CLANG_WARN_DIRECT_OBJC_ISA_USAGE = YES_ERROR;
+				CLANG_WARN_ENUM_CONVERSION = YES;
+				CLANG_WARN_INT_CONVERSION = YES;
+				CLANG_WARN_OBJC_ROOT_CLASS = YES_ERROR;
+				CLANG_WARN_UNREACHABLE_CODE = YES;
+				DEBUG_INFORMATION_FORMAT = dwarf;
+				ENABLE_STRICT_OBJC_MSGSEND = YES;
+				GCC_NO_COMMON_BLOCKS = YES;
+				GCC_WARN_64_TO_32_BIT_CONVERSION = YES;
+				GCC_WARN_ABOUT_RETURN_TYPE = YES_ERROR;
+				GCC_WARN_UNDECLARED_SELECTOR = YES;
+				GCC_WARN_UNINITIALIZED_AUTOS = YES_AGGRESSIVE;
+				GCC_WARN_UNUSED_FUNCTION = YES;
+				INFOPLIST_FILE = RateMeControllerForiOSTests/Info.plist;
+				IPHONEOS_DEPLOYMENT_TARGET = 9.2;
+				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks @loader_path/Frameworks";
+				MTL_ENABLE_DEBUG_INFO = YES;
+				PRODUCT_BUNDLE_IDENTIFIER = com.GreenHair.RateMeControllerForiOSTests;
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				SWIFT_OPTIMIZATION_LEVEL = "-Onone";
+				TEST_HOST = "$(BUILT_PRODUCTS_DIR)/We all pay.app/We all pay";
+			};
+			name = Debug;
+		};
+		38D6A3D81C73DDC100968BB2 /* Release */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				CLANG_WARN_BOOL_CONVERSION = YES;
+				CLANG_WARN_CONSTANT_CONVERSION = YES;
+				CLANG_WARN_DIRECT_OBJC_ISA_USAGE = YES_ERROR;
+				CLANG_WARN_ENUM_CONVERSION = YES;
+				CLANG_WARN_INT_CONVERSION = YES;
+				CLANG_WARN_OBJC_ROOT_CLASS = YES_ERROR;
+				CLANG_WARN_UNREACHABLE_CODE = YES;
+				COPY_PHASE_STRIP = NO;
+				DEBUG_INFORMATION_FORMAT = "dwarf-with-dsym";
+				ENABLE_NS_ASSERTIONS = NO;
+				ENABLE_STRICT_OBJC_MSGSEND = YES;
+				GCC_NO_COMMON_BLOCKS = YES;
+				GCC_WARN_64_TO_32_BIT_CONVERSION = YES;
+				GCC_WARN_ABOUT_RETURN_TYPE = YES_ERROR;
+				GCC_WARN_UNDECLARED_SELECTOR = YES;
+				GCC_WARN_UNINITIALIZED_AUTOS = YES_AGGRESSIVE;
+				GCC_WARN_UNUSED_FUNCTION = YES;
+				INFOPLIST_FILE = RateMeControllerForiOSTests/Info.plist;
+				IPHONEOS_DEPLOYMENT_TARGET = 9.2;
+				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks @loader_path/Frameworks";
+				MTL_ENABLE_DEBUG_INFO = NO;
+				PRODUCT_BUNDLE_IDENTIFIER = com.GreenHair.RateMeControllerForiOSTests;
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				TEST_HOST = "$(BUILT_PRODUCTS_DIR)/We all pay.app/We all pay";
+			};
+			name = Release;
+		};
 /* End XCBuildConfiguration section */
 
 /* Begin XCConfigurationList section */
@@ -2353,6 +2690,22 @@
 			);
 			defaultConfigurationIsVisible = 0;
 			defaultConfigurationName = Release;
+		};
+		38D6A3D31C73DDC100968BB2 /* Build configuration list for PBXNativeTarget "RateMeControllerForiOS" */ = {
+			isa = XCConfigurationList;
+			buildConfigurations = (
+				38D6A3D41C73DDC100968BB2 /* Debug */,
+				38D6A3D51C73DDC100968BB2 /* Release */,
+			);
+			defaultConfigurationIsVisible = 0;
+		};
+		38D6A3D61C73DDC100968BB2 /* Build configuration list for PBXNativeTarget "RateMeControllerForiOSTests" */ = {
+			isa = XCConfigurationList;
+			buildConfigurations = (
+				38D6A3D71C73DDC100968BB2 /* Debug */,
+				38D6A3D81C73DDC100968BB2 /* Release */,
+			);
+			defaultConfigurationIsVisible = 0;
 		};
 /* End XCConfigurationList section */
 
