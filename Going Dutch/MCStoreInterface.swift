@@ -109,6 +109,11 @@ class MCStoreInterface: NSObject, SKPaymentTransactionObserver, SKRequestDelegat
         SKPaymentQueue.defaultQueue().restoreCompletedTransactions()
     }
     
+    func reset() {
+        let productIdentifier: String = self.productIdentifiers.first! as String
+        NSUserDefaults.standardUserDefaults().removeObjectForKey(productIdentifier)
+    }
+    
     // MARK: UI Alert View Delegate
     
     func alertView(alertView: UIAlertView, clickedButtonAtIndex buttonIndex: Int) {
