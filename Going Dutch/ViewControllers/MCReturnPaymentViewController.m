@@ -222,7 +222,10 @@ typedef NS_ENUM(BOOL, MCXRatesMissing) {
     // Uncomment the following line to display an Edit button in the navigation bar for this view controller.
     // self.navigationItem.rightBarButtonItem = self.editButtonItem;
     
-    _emptyMessage = [[NSBundle mainBundle] loadNibNamed:@"MCTableEmptyMessage" owner:self options:nil][0];    
+    _emptyMessage = [[NSBundle mainBundle] loadNibNamed:@"MCTableEmptyMessage" owner:self options:nil][0];
+    
+    self.tableView.estimatedRowHeight = 44.0;
+    self.tableView.rowHeight = UITableViewAutomaticDimension;
     
     [self setEdgesForExtendedLayout:UIRectEdgeNone];
     
@@ -307,11 +310,6 @@ typedef NS_ENUM(BOOL, MCXRatesMissing) {
             [_tonightsBill setHasTheMailBeenSent:@YES];
             [[MCWeAllPayStoreController defaultStore] saveMainThreadContext];
         }];
-//        if (1) {
-//            [self showRateMe];
-//        } else {
-//            
-//        }
     } else if (result == MFMailComposeResultSaved) {
         [[self presentedViewController] dismissViewControllerAnimated:YES completion:nil];
     } else {
@@ -320,11 +318,6 @@ typedef NS_ENUM(BOOL, MCXRatesMissing) {
 }
 
 #pragma mark - UITableViewDelegate
-
-- (CGFloat)tableView:(UITableView *)tableView heightForRowAtIndexPath:(NSIndexPath *)indexPath
-{
-    return 44.0;
-}
 
 - (void)tableView:(UITableView *)tableView willDisplayHeaderView:(UIView *)view forSection:(NSInteger)section
 {
