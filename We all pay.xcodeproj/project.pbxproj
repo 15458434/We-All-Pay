@@ -143,7 +143,6 @@
 		38D6A3C61C73DDC000968BB2 /* RateMeControllerForiOS.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 38D6A3BC1C73DDBF00968BB2 /* RateMeControllerForiOS.framework */; };
 		38D6A3D11C73DDC000968BB2 /* RateMeControllerForiOS.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 38D6A3BC1C73DDBF00968BB2 /* RateMeControllerForiOS.framework */; };
 		38D6A3D21C73DDC000968BB2 /* RateMeControllerForiOS.framework in Embed Frameworks */ = {isa = PBXBuildFile; fileRef = 38D6A3BC1C73DDBF00968BB2 /* RateMeControllerForiOS.framework */; settings = {ATTRIBUTES = (CodeSignOnCopy, RemoveHeadersOnCopy, ); }; };
-		38D6A3DE1C73DDDE00968BB2 /* InfoPlist.strings in Resources */ = {isa = PBXBuildFile; fileRef = 38D6A3D91C73DDDE00968BB2 /* InfoPlist.strings */; };
 		38D6A3DF1C73DDDE00968BB2 /* RateMeControllerForiOS.h in Headers */ = {isa = PBXBuildFile; fileRef = 38D6A3DA1C73DDDE00968BB2 /* RateMeControllerForiOS.h */; settings = {ATTRIBUTES = (Public, ); }; };
 		38D6A3E01C73DDDE00968BB2 /* RateMeController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 38D6A3DB1C73DDDE00968BB2 /* RateMeController.swift */; };
 		38D6A3E11C73DDDE00968BB2 /* RateMeControllerAskStatusContainer.swift in Sources */ = {isa = PBXBuildFile; fileRef = 38D6A3DC1C73DDDE00968BB2 /* RateMeControllerAskStatusContainer.swift */; };
@@ -490,7 +489,6 @@
 		38D6A3BC1C73DDBF00968BB2 /* RateMeControllerForiOS.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = RateMeControllerForiOS.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		38D6A3C51C73DDBF00968BB2 /* RateMeControllerForiOSTests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = RateMeControllerForiOSTests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
 		38D6A3CE1C73DDC000968BB2 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
-		38D6A3D91C73DDDE00968BB2 /* InfoPlist.strings */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.strings; path = InfoPlist.strings; sourceTree = "<group>"; };
 		38D6A3DA1C73DDDE00968BB2 /* RateMeControllerForiOS.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = RateMeControllerForiOS.h; sourceTree = "<group>"; };
 		38D6A3DB1C73DDDE00968BB2 /* RateMeController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = RateMeController.swift; sourceTree = "<group>"; };
 		38D6A3DC1C73DDDE00968BB2 /* RateMeControllerAskStatusContainer.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = RateMeControllerAskStatusContainer.swift; sourceTree = "<group>"; };
@@ -1012,7 +1010,6 @@
 			isa = PBXGroup;
 			children = (
 				38D6A3F21C73E64F00968BB2 /* InfoPlist.strings */,
-				38D6A3D91C73DDDE00968BB2 /* InfoPlist.strings */,
 				38D6A3DA1C73DDDE00968BB2 /* RateMeControllerForiOS.h */,
 				38D6A3DB1C73DDDE00968BB2 /* RateMeController.swift */,
 				38D6A3DC1C73DDDE00968BB2 /* RateMeControllerAskStatusContainer.swift */,
@@ -1485,7 +1482,6 @@
 			files = (
 				38D6A3E21C73DDDE00968BB2 /* Info.plist in Resources */,
 				38D6A3F01C73E64F00968BB2 /* InfoPlist.strings in Resources */,
-				38D6A3DE1C73DDDE00968BB2 /* InfoPlist.strings in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
