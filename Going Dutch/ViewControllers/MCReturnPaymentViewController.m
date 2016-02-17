@@ -241,16 +241,14 @@ typedef NS_ENUM(BOOL, MCXRatesMissing) {
     if ([_tonightsBill areAllExchangeRatesValid]) {
         _areXRatesMissing = xRatesPresent;
         [[_emptyMessage activityIndicator] stopAnimating];
-        _emptyMessage.bigMessage.alpha = 1.0;
     } else {
         _areXRatesMissing = xRatesMissing;
         [[_emptyMessage activityIndicator] startAnimating];
-        _emptyMessage.bigMessage.alpha = 0.0;
     }
     
     [[_emptyMessage bigMessage] setText:NSLocalizedString(@"RETURNPAYMENTSVIEW_NOPAYMENTS", @"Please add payments and/or people if you want a solution on who owes who.")];
     [[self tableView] setBackgroundView:_emptyMessage];
-    [self setEmptyMessage];
+    [self setEmptyMessageNow];
 }
 
 - (void)didReceiveMemoryWarning
