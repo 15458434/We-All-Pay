@@ -28,18 +28,21 @@
 /* Cancel */
 "CANCEL" = "Annuleer";
 
-/* Access to Contacts can be enable in Settings->We All Pay->Privacy */
+/* (No Commment) */
 "CONTACTS_DISABLED_MESSAGE" = "Toegang tot Contacten kan aangezet worden in Instellingen->We All Pay->Privacy";
 
-/* Contacts disabled */
+/* (No Commment) */
 "CONTACTS_DISABLED_TITLE" = "Contacten uitgeschakeld";
 
 /* Button that says dismiss.
    Dismiss
    Text on a button that dismisses the alert
-   Title of a button that dismisses an alart.
+   Title of a button that dismisses an alart
    Title of a button that dismisses an alert. */
 "Dismiss" = "Negeer";
+
+/* Question to the user whether or not they like this app. */
+"Do you like We all pay?" = "Vind je We all pay handig?";
 
 /* (No Commment) */
 "EACH_PAYS" = "Per persoon:";
@@ -92,10 +95,10 @@
 /* %1$@ pays %2$@ to %3$@ */
 "EMAIL_OWES" = "%1$@ geeft %2$@ aan %3$@.";
 
-/* Part one of the words: %@ pays %@ to %@. */
+/* (No Commment) */
 "EMAIL_OWES_PART_ONE" = "geeft";
 
-/* Part two of the words: %@ pays %@ to %@. */
+/* (No Commment) */
 "EMAIL_OWES_PART_TWO" = "aan";
 
 /* Bill overview of our event. */
@@ -136,6 +139,15 @@
 
 /* Go to */
 "Go to" = "Ga naar";
+
+/* Title for a button that directs the user to the settings application. */
+"Go to settings" = "Ga naar instellingen";
+
+/* Instructions for the user to go to the settings application and change the privacy settings for We all pay. */
+"Go to your settings app and allow We all pay to access your contact data" = "Ga naar de settings app van je iPhone en geef We all pay toegang tot je contacten";
+
+/* Title of a No button. */
+"Hell no" = "Absoluut niet";
 
 /* Invalid email address */
 "INVALID_EMAIL_ADDRESS" = "Ongeldig emailadres";
@@ -198,6 +210,13 @@
 /* (No Commment) */
 "PURCHASE_RESTORED" = "Ad vrije versie hersteld.";
 
+/* Instruction in an alert to tell the user that they should check their email address for a valid configuration.
+   Please configure your mail in Settings */
+"Please configure your mail in Settings" = "Configureer je mail in instellingen";
+
+/* Message to the user to give We all pay a five star rating. */
+"Please give We all pay a 5 star rating and help other people find the benefits We all pay." = "Zou je We all pay een 5 sterren waardering willen geven, zodat andere mensen de voordelen van We all pay kunnen ontdekken?";
+
 /* (No Commment) */
 "RESTORE_PREVIOUS_PURCHASES" = "Herstel eerdere aankopen";
 
@@ -231,6 +250,9 @@
 /* Who ows who */
 "SOLUTION_SECTION_WHO_OWES_WHO" = "Wie betaalt wie";
 
+/* Title of a Yes button. */
+"Sure" = "Jazeker";
+
 /* (No Commment) */
 "THANK_YOU_FOR_PURCHASING" = "Dank u wel voor uw aankoop.";
 
@@ -258,7 +280,8 @@
 /* Message body explaining the App Store can't be reached. */
 "Unable to connect to the App Store. Please connect to the internet." = "Kan de App Store niet bereiken. Verbind met het internet.";
 
-/* Title message of an alert that pops up when fetching exchange rates is impossible */
+/* itle message of an alert that pops up when fetching exchange rates is impossibl
+   Title message of an alert that pops up when fetching exchange rates is impossible */
 "Unable to fetch exchange rates" = "Kan wisselkoers niet ophalen";
 
 /* Title of an alert that notifies the user the app is unable to send email.
