@@ -8,9 +8,9 @@
 
 import Foundation
 
-private let rateMeControllerCounterInterval: Int = 3
-private let rateMeControllerMinimumTimeIntervalInDays: Double = 7.0
-private let rateMeControllerTimeIntervalInDays: Double = 90.0
+internal let rateMeControllerCounterInterval: Int = 3
+internal let rateMeControllerMinimumTimeIntervalInDays: Double = 7.0
+internal let rateMeControllerTimeIntervalInDays: Double = 90.0
 
 //private let rateMeControllerOneDayTimeInterval: Double = 1
 private let rateMeControllerOneDayTimeInterval: Double = 86400
