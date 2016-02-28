@@ -76,16 +76,10 @@ typedef NS_ENUM(BOOL, MCXRatesMissing) {
         NSString *alertTitle = NSLocalizedString(@"Unable to send email", @"Title of an alert that notifies the user the app is unable to send email.");
         NSString *alertMessage = NSLocalizedString(@"Please configure your mail in Settings", @"Instruction in an alert to tell the user that they should check their email address for a valid configuration.");
         NSString *dismiss = NSLocalizedString(@"Dismiss", @"Text on a button that dismisses the alert");
-        if ([UIAlertController class]) {
-            // iOS 8 and up
-            UIAlertController *alertController = [UIAlertController alertControllerWithTitle:alertTitle message:alertMessage preferredStyle:UIAlertControllerStyleAlert];
-            UIAlertAction *dismissAction = [UIAlertAction actionWithTitle:dismiss style:UIAlertActionStyleCancel handler:nil];
-            [alertController addAction:dismissAction];
-            [self presentViewController:alertController animated:YES completion:nil];
-        } else {
-            UIAlertView *alertView = [[UIAlertView alloc] initWithTitle:alertTitle message:alertMessage delegate:nil cancelButtonTitle:dismiss otherButtonTitles:nil];
-            [alertView show];
-        }
+        UIAlertController *alertController = [UIAlertController alertControllerWithTitle:alertTitle message:alertMessage preferredStyle:UIAlertControllerStyleAlert];
+        UIAlertAction *dismissAction = [UIAlertAction actionWithTitle:dismiss style:UIAlertActionStyleCancel handler:nil];
+        [alertController addAction:dismissAction];
+        [self presentViewController:alertController animated:YES completion:nil];
     }
 }
 
