@@ -160,7 +160,7 @@ typedef NS_ENUM(BOOL, MCXRatesMissing) {
                 __strong typeof(weakSelf) strongSelf = weakSelf;
                 if (strongSelf) {
                     [strongSelf.emptyMessage.activityIndicator stopAnimating];
-                    strongSelf.emptyMessage.bigMessage.text = nil;
+                    strongSelf.emptyMessage.bigMessage.text = message;
                 }
             }];
             [alertController addAction:dismissAction];
@@ -180,6 +180,7 @@ typedef NS_ENUM(BOOL, MCXRatesMissing) {
             
             NSLog(@"Stop animating.");
             [[[strongSelf emptyMessage] activityIndicator] stopAnimating];
+            
             [strongSelf setEmptyMessageNow];
             [[strongSelf tableView] insertSections:[NSIndexSet indexSetWithIndexesInRange:NSMakeRange(0, 3)] withRowAnimation:UITableViewRowAnimationTop];
         }
