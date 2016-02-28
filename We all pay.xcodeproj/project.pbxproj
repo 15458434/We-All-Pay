@@ -146,7 +146,6 @@
 		38D6A3DF1C73DDDE00968BB2 /* RateMeControllerForiOS.h in Headers */ = {isa = PBXBuildFile; fileRef = 38D6A3DA1C73DDDE00968BB2 /* RateMeControllerForiOS.h */; settings = {ATTRIBUTES = (Public, ); }; };
 		38D6A3E01C73DDDE00968BB2 /* RateMeController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 38D6A3DB1C73DDDE00968BB2 /* RateMeController.swift */; };
 		38D6A3E11C73DDDE00968BB2 /* RateMeControllerAskStatusContainer.swift in Sources */ = {isa = PBXBuildFile; fileRef = 38D6A3DC1C73DDDE00968BB2 /* RateMeControllerAskStatusContainer.swift */; };
-		38D6A3E21C73DDDE00968BB2 /* Info.plist in Resources */ = {isa = PBXBuildFile; fileRef = 38D6A3DD1C73DDDE00968BB2 /* Info.plist */; };
 		38D6A3E41C73DDEF00968BB2 /* RateMeControllerTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 38D6A3E31C73DDEF00968BB2 /* RateMeControllerTests.swift */; };
 		38D6A3E61C73DF2600968BB2 /* RateMeControllerExtension.swift in Sources */ = {isa = PBXBuildFile; fileRef = 38D6A3E51C73DF2600968BB2 /* RateMeControllerExtension.swift */; };
 		38D6A3E81C73E04300968BB2 /* UIViewControllerRateMeControllerExtension.swift in Sources */ = {isa = PBXBuildFile; fileRef = 38D6A3E71C73E04300968BB2 /* UIViewControllerRateMeControllerExtension.swift */; };
@@ -1322,7 +1321,7 @@
 				CLASSPREFIX = MC;
 				LastSwiftMigration = 0700;
 				LastSwiftUpdateCheck = 0720;
-				LastUpgradeCheck = 0700;
+				LastUpgradeCheck = 0720;
 				ORGANIZATIONNAME = "Mark Cornelisse";
 				TargetAttributes = {
 					382B76DF1C398249000C203A = {
@@ -1480,7 +1479,6 @@
 			isa = PBXResourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				38D6A3E21C73DDDE00968BB2 /* Info.plist in Resources */,
 				38D6A3F01C73E64F00968BB2 /* InfoPlist.strings in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
@@ -2718,6 +2716,7 @@
 				38D6A3D51C73DDC100968BB2 /* Release */,
 			);
 			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
 		};
 		38D6A3D61C73DDC100968BB2 /* Build configuration list for PBXNativeTarget "RateMeControllerForiOSTests" */ = {
 			isa = XCConfigurationList;
@@ -2726,6 +2725,7 @@
 				38D6A3D81C73DDC100968BB2 /* Release */,
 			);
 			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
 		};
 /* End XCConfigurationList section */
 

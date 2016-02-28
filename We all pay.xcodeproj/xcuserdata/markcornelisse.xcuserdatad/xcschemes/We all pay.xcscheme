@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <Scheme
-   LastUpgradeVersion = "0700"
+   LastUpgradeVersion = "0720"
    version = "1.7">
    <BuildAction
       parallelizeBuildables = "YES"
@@ -132,7 +132,7 @@
             skipped = "NO">
             <BuildableReference
                BuildableIdentifier = "primary"
-               BlueprintIdentifier = "38D6A3981C73DC7600968BB2"
+               BlueprintIdentifier = "38D6A3C41C73DDBF00968BB2"
                BuildableName = "RateMeControllerForiOSTests.xctest"
                BlueprintName = "RateMeControllerForiOSTests"
                ReferencedContainer = "container:We all pay.xcodeproj">
