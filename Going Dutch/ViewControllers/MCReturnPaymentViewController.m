@@ -149,6 +149,7 @@ typedef NS_ENUM(BOOL, MCXRatesMissing) {
 {
     __weak typeof(self) weakSelf = self;
     _solution = [_tonightsBill solveWhoHasToPayWhoFromThisBillWithHandler:^(NSArray *results, NSError *error) {
+        NSParameterAssert([NSThread isMainThread]);
         if (error) {
             NSString *title = NSLocalizedString(@"Unable to fetch exchange rates", @"Title message of an alert that pops up when fetching exchange rates is impossible");
             NSString *message = NSLocalizedString(@"Fetching exchange rates is not possible at this moment. Check your internet connection and/or hit solve to fetch all missing exchange rates at a later time", @"Message explaining what the user can do to refetch exchange rates");
