@@ -24,7 +24,7 @@ class SelectPayerTableViewController_iPad: UITableViewController, MCTonightsBill
         super.viewDidLoad()
         
         let unsortedPeople = (Array(tonightsBill.peoplePresent) as! [MCPerson])
-        let selector: Selector = "firstName"
+        let selector: Selector = "getFullName"
         people = UILocalizedIndexedCollation.currentCollation().sortedArrayFromArray(unsortedPeople, collationStringSelector: selector) as! [MCPerson]
     }
     
