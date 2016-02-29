@@ -578,10 +578,11 @@
         return nil;
     }
 }
+
 - (NSArray<MCPerson *> *)getArrayOfPeopleSortedOnFullNames
 {
-    NSSortDescriptor *sortDescriptor = [NSSortDescriptor sortDescriptorWithKey:@"getFullName" ascending:YES];
-    return [[self peoplePresent] sortedArrayUsingDescriptors:@[sortDescriptor]];
+    NSArray<MCPerson *> *unsortedPeople = [[self peoplePresent] allObjects];
+    return [[UILocalizedIndexedCollation currentCollation] sortedArrayFromArray:unsortedPeople collationStringSelector:@selector(getFullName)];
 }
 
 - (void)deleteIfStillNew
