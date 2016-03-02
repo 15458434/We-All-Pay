@@ -150,11 +150,8 @@ typedef NS_ENUM(BOOL, MCXRatesMissing) {
             
             UIAlertController *alertController = [UIAlertController alertControllerWithTitle:title message:message preferredStyle:UIAlertControllerStyleAlert];
             UIAlertAction *dismissAction = [UIAlertAction actionWithTitle:dismissTitle style:UIAlertActionStyleCancel handler:^(UIAlertAction * _Nonnull action) {
-                __strong typeof(weakSelf) strongSelf = weakSelf;
-                if (strongSelf) {
-                    [strongSelf.emptyMessage.activityIndicator stopAnimating];
-                    strongSelf.emptyMessage.bigMessage.text = message;
-                }
+                [self.emptyMessage.activityIndicator stopAnimating];
+                self.emptyMessage.bigMessage.text = message;
             }];
             [alertController addAction:dismissAction];
             [self presentViewController:alertController animated:YES completion:nil];

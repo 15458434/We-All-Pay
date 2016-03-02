@@ -504,7 +504,6 @@
     [self updatePaymentForSupportWithPaymentPresence];
     
     for (MCPerson *person in people) {
-        NSLog(@"%@ paid %@", [person getName], [self totalSumPaidBy:person]);
         NSNumber *sumOfWhatWasPaidByPerson = [self totalSumPaidBy:person];
         NSNumber *sumOfWhatShouldBePaidPerson = [self amountShouldHavePaidBy:person];
         
