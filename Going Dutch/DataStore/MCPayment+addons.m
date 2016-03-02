@@ -195,9 +195,9 @@
 
 - (MCExchangeRate *)addExchangeRate
 {
-    [self setExchangeRate:[MCExchangeRate addExchangeRateForContext:[self managedObjectContext]]];
-    [[self exchangeRate] setToCurrency:[[self onWhichBill] mainCurrency]];
-    [[self exchangeRate] setFromCurrency:[self currency]];
+    self.exchangeRate = [MCExchangeRate addExchangeRateForContext:[self managedObjectContext]];
+    self.exchangeRate.toCurrency = self.onWhichBill.mainCurrency;
+    self.exchangeRate.fromCurrency = self.currency;
     
     return [self exchangeRate];
 }
