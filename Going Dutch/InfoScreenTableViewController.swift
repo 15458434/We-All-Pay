@@ -77,7 +77,10 @@ class InfoScreenTableViewController: UITableViewController, MFMailComposeViewCon
     // MARK: Notifications
     func applyProVersion(notification: NSNotification) {
         NSOperationQueue.mainQueue().addOperationWithBlock { () -> Void in
+            self.tableView.beginUpdates()
             self.tableView.deleteRowsAtIndexPaths([NSIndexPath(forRow: 0, inSection: 0), NSIndexPath(forRow: 1, inSection: 0)], withRowAnimation: UITableViewRowAnimation.Automatic)
+            self.tableView.endUpdates()
+            
             var title: String!
             var message: String?
             if notification.userInfo!["Kind of purchase"] as? String == "new buy" {
