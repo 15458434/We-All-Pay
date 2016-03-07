@@ -116,7 +116,7 @@ enum CancelButtonPressed {
     
     private func setTextPayerButton() {
         selectButton.setTitle(thisPayment.payingPerson.getFullName(), forState: .Normal)
-        selectButton.sizeToFit()
+        selectButton.invalidateIntrinsicContentSize()
     }
     
     private func respondToPresenceOfPathComponentsFromAppLaunch() {
