@@ -102,7 +102,6 @@ typedef NS_ENUM(BOOL, MCXRatesMissing) {
 
 - (void)giveSolution
 {
-    __weak typeof(self) weakSelf = self;
     _solution = [_tonightsBill solveWhoHasToPayWhoFromThisBillWithHandler:^(NSArray *results, NSError *error) {
         if (error) {
             NSString *title = NSLocalizedString(@"Unable to fetch exchange rates", @"Title message of an alert that pops up when fetching exchange rates is impossible");
@@ -111,11 +110,8 @@ typedef NS_ENUM(BOOL, MCXRatesMissing) {
             
             UIAlertController *alertController = [UIAlertController alertControllerWithTitle:title message:message preferredStyle:UIAlertControllerStyleAlert];
             UIAlertAction *dismissAction = [UIAlertAction actionWithTitle:dismissTitle style:UIAlertActionStyleCancel handler:^(UIAlertAction * _Nonnull action) {
-                __strong typeof(weakSelf) strongSelf = weakSelf;
-                if (strongSelf) {
-                    [strongSelf.emptyMessage.activityIndicator stopAnimating];
-                    strongSelf.emptyMessage.bigMessage.text = message;
-                }
+                [self.emptyMessage.activityIndicator stopAnimating];
+                self.emptyMessage.bigMessage.text = message;
             }];
             [alertController addAction:dismissAction];
             [self presentViewController:alertController animated:YES completion:nil];
@@ -124,19 +120,18 @@ typedef NS_ENUM(BOOL, MCXRatesMissing) {
         }
         
         // Update tableView.
-        __strong typeof(weakSelf) strongSelf = weakSelf;
-        if (strongSelf) {
-            strongSelf.areXRatesMissing = xRatesPresent;
-            strongSelf.solution = results;
-            
-            NSSortDescriptor *sortDescriptor = [NSSortDescriptor sortDescriptorWithKey:@"firstName" ascending:YES];
-            _peoplePresent = [[_tonightsBill peoplePresent] sortedArrayUsingDescriptors:@[sortDescriptor]];
-            
-            NSLog(@"Stop animating.");
-            [[[strongSelf emptyMessage] activityIndicator] stopAnimating];
-            [strongSelf setEmptyMessageNow];
-            [[strongSelf tableView] insertSections:[NSIndexSet indexSetWithIndexesInRange:NSMakeRange(0, 3)] withRowAnimation:UITableViewRowAnimationTop];
-        }
+        self.areXRatesMissing = xRatesPresent;
+        self.solution = results;
+        
+        NSSortDescriptor *sortDescriptor = [NSSortDescriptor sortDescriptorWithKey:@"firstName" ascending:YES];
+        _peoplePresent = [[self.tonightsBill peoplePresent] sortedArrayUsingDescriptors:@[sortDescriptor]];
+        
+        NSLog(@"Stop animating.");
+        [[[self emptyMessage] activityIndicator] stopAnimating];
+        [self setEmptyMessageNow];
+        [self.tableView beginUpdates];
+        [[self tableView] insertSections:[NSIndexSet indexSetWithIndexesInRange:NSMakeRange(0, 3)] withRowAnimation:UITableViewRowAnimationTop];
+        [self.tableView endUpdates];
     }];
     
     if (!_solution) {
