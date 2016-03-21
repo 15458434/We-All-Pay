@@ -455,29 +455,6 @@
     }
 }
 
-- (void)updateInvalidExchangeRatesWithCompletionBlock:(void (^)(NSArray *results))completionBlock
-{
-    // Fetch all exchangeRates that are invalid.
-    NSFetchRequest *request = [[NSFetchRequest alloc] initWithEntityName:@"MCExchangeRate"];
-    request.sortDescriptors = @[[NSSortDescriptor sortDescriptorWithKey:@"dateCreated" ascending:YES]];
-    
-    NSNumber *exchangeRateValidStatus = [NSNumber numberWithShort:valid];
-    request.predicate = [NSPredicate predicateWithFormat:@"payment.onWhichBill = %@ and status != %@", self, exchangeRateValidStatus];
-    NSError *fetchError;
-    NSArray *arrayOfInvalidExchangeRatesOfThisSharedBill = [[self managedObjectContext] executeFetchRequest:request error:&fetchError];
-    if (fetchError) {
-        NSLog(@"Something went wrong fetching invalid ExchangeRates: %@", fetchError);
-    }
-    for (MCExchangeRate *exchangeRate in arrayOfInvalidExchangeRatesOfThisSharedBill) {
-        exchangeRate.status = [NSNumber numberWithShort:fetching];
-    }
-    [[[MCWeAllPayStoreController defaultStore] fetcher] fetchAll:arrayOfInvalidExchangeRatesOfThisSharedBill completionHandler:^(NSError * error) {
-        if ([self areAllExchangeRatesValid]) {
-            completionBlock([self solveWhoHasToPayWhoFromThisBill]);
-        }
-    }];
-}
-
 - (void)updateInvalidExchangeRatesWithHandler:(void (^)(NSArray *results, NSError *error))completion
 {
     // Fetch all exchangeRates that are invalid.
@@ -490,6 +467,8 @@
     NSArray *arrayOfInvalidExchangeRatesOfThisSharedBill = [[self managedObjectContext] executeFetchRequest:request error:&fetchError];
     if (fetchError) {
         NSLog(@"Something went wrong fetching invalid ExchangeRates: %@", fetchError);
+        completion(nil, fetchError);
+        return;
     }
     for (MCExchangeRate *exchangeRate in arrayOfInvalidExchangeRatesOfThisSharedBill) {
         exchangeRate.status = [NSNumber numberWithShort:fetching];
@@ -500,7 +479,12 @@
             completion(nil, error);
         }
         if ([self areAllExchangeRatesValid]) {
-            completion([self solveWhoHasToPayWhoFromThisBill], nil);
+            NSError *saveError;
+            [[[MCWeAllPayStoreController defaultStore] mainThreadContext] save:&saveError];
+            completion([self solveWhoHasToPayWhoFromThisBill], saveError);
+        } else {
+            NSError *notAllExchangeRatesValidError = [NSError errorWithDomain:@"com.green.We_all_pay" code:1 userInfo:@{@"reason": @"Not all exchangeRates are valid after fetching exchangeRates"}];
+            completion(nil, notAllExchangeRatesValidError);
         }
     }];
 }
@@ -520,7 +504,6 @@
     [self updatePaymentForSupportWithPaymentPresence];
     
     for (MCPerson *person in people) {
-        NSLog(@"%@ paid %@", [person getName], [self totalSumPaidBy:person]);
         NSNumber *sumOfWhatWasPaidByPerson = [self totalSumPaidBy:person];
         NSNumber *sumOfWhatShouldBePaidPerson = [self amountShouldHavePaidBy:person];
         
@@ -577,20 +560,6 @@
     return [self originalSolveWhoHasToPayWhoFromThisBill];
 }
 
-- (NSArray *)solveWhoHasToPayWhoFromThisBillWithCompletionBlock:(void (^)(NSArray *))completionBlock
-{
-    // This function will either give an NSArray as return value or it will return nil and will execuute the completionBlock at a later time when all exchangeRates are valid.
-    if ([self areAllExchangeRatesValid]) {
-        return [self originalSolveWhoHasToPayWhoFromThisBill];
-    } else {
-        [self updateInvalidExchangeRatesWithCompletionBlock:^(NSArray *results){
-            NSArray *result = [self originalSolveWhoHasToPayWhoFromThisBill];
-            completionBlock(result);
-        }];
-        return nil;
-    }
-}
-
 - (NSArray *)solveWhoHasToPayWhoFromThisBillWithHandler:(void (^)(NSArray *results, NSError *error))completion
 {
     // This function will either give an NSArray as return value or it will return nil and will execuute the completionBlock at a later time when all exchangeRates are valid.
@@ -608,10 +577,11 @@
         return nil;
     }
 }
+
 - (NSArray<MCPerson *> *)getArrayOfPeopleSortedOnFullNames
 {
-    NSSortDescriptor *sortDescriptor = [NSSortDescriptor sortDescriptorWithKey:@"getFullName" ascending:YES];
-    return [[self peoplePresent] sortedArrayUsingDescriptors:@[sortDescriptor]];
+    NSArray<MCPerson *> *unsortedPeople = [[self peoplePresent] allObjects];
+    return [[UILocalizedIndexedCollation currentCollation] sortedArrayFromArray:unsortedPeople collationStringSelector:@selector(getFullName)];
 }
 
 - (void)deleteIfStillNew

@@ -55,8 +55,7 @@
     NSFetchRequest *request = [NSFetchRequest fetchRequestWithEntityName:@"MCPayment"];
     
     // Select only the sharedBill with uuid as uniqueBillId
-    NSPredicate *predicate = [NSPredicate predicateWithFormat:@"uniquePaymentId = %@", uuid];
-    [request setPredicate:predicate];
+    request.predicate = [NSPredicate predicateWithFormat:@"uniquePaymentId = %@", uuid];
     
     NSError *error;
     NSArray *payments = [context executeFetchRequest:request error:&error];
@@ -77,9 +76,8 @@
 + (BOOL)isTableInDatabaseEmptyForContext:(NSManagedObjectContext *)context
 {
     NSFetchRequest *request = [NSFetchRequest fetchRequestWithEntityName:@"MCPayment"];
-    NSSortDescriptor *sd = [NSSortDescriptor sortDescriptorWithKey:@"money" ascending:YES];
-    NSArray *sda = @[sd];
-    [request setSortDescriptors:sda];
+    request.sortDescriptors = @[[NSSortDescriptor sortDescriptorWithKey:@"money" ascending:YES]];
+    
     NSError *error;
     
     NSArray *allPayments = [context executeFetchRequest:request error:&error];
@@ -107,28 +105,26 @@
 {
     // When the App goes through an update cycle to version two for eacht payment the presences need to be added.
     MCPaymentPresence *paymentPresence = [MCPaymentPresence addPaymentPresenceInContext:[self managedObjectContext]];
-    [paymentPresence setPerson:person];
-    [paymentPresence setIsPersonPresent:@YES];
-    [paymentPresence setPayment:self];
+    paymentPresence.person = person;
+    paymentPresence.isPersonPresent = @YES;
+    paymentPresence.payment = self;
 }
 
 - (void)addLateArrivalPaymentPresenceFor:(MCPerson *)person
 {
     // When someone arrives late and is added later to tonightsBill the presence of this person will be set to nil.
     MCPaymentPresence *paymentPresence = [MCPaymentPresence addPaymentPresenceInContext:[self managedObjectContext]];
-    [paymentPresence setPerson:person];
-    [paymentPresence setIsPersonPresent:@NO];
-    [paymentPresence setPayment:self];
-    [self setDateModified:[paymentPresence dateCreated]];
+    paymentPresence.person = person;
+    paymentPresence.isPersonPresent = @NO;
+    paymentPresence.payment = self;
+    paymentPresence.dateModified = paymentPresence.dateCreated;
 }
 
 - (MCPaymentPresence *)fetchPaymentPresenceForPerson:(MCPerson *)person
 {
     NSFetchRequest *request = [NSFetchRequest fetchRequestWithEntityName:@"MCPaymentPresence"];
-    NSPredicate *predicate = [NSPredicate predicateWithFormat:@"payment = %@ AND person = %@", self, person];
-    [request setPredicate:predicate];
-    NSSortDescriptor *sd = [NSSortDescriptor sortDescriptorWithKey:@"averageOweFromPayment" ascending:YES];
-    [request setSortDescriptors:@[sd]];
+    request.predicate = [NSPredicate predicateWithFormat:@"payment = %@ AND person = %@", self, person];
+    request.sortDescriptors = @[[NSSortDescriptor sortDescriptorWithKey:@"averageOweFromPayment" ascending:YES]];
     
     NSError *error;
     NSArray *fetchResults = [[self managedObjectContext] executeFetchRequest:request error:&error];
@@ -150,10 +146,8 @@
 - (NSNumber *)peoplePresentOnThisPayment
 {
     NSFetchRequest *request = [NSFetchRequest fetchRequestWithEntityName:@"MCPaymentPresence"];
-    NSPredicate *predicate = [NSPredicate predicateWithFormat:@"payment = %@ AND isPersonPresent = %@", self, @YES];
-    [request setPredicate:predicate];
-    NSSortDescriptor *sd = [NSSortDescriptor sortDescriptorWithKey:@"averageOweFromPayment" ascending:YES];
-    [request setSortDescriptors:@[sd]];
+    request.predicate = [NSPredicate predicateWithFormat:@"payment = %@ AND isPersonPresent = %@", self, @YES];
+    request.sortDescriptors = @[[NSSortDescriptor sortDescriptorWithKey:@"averageOweFromPayment" ascending:YES]];
     NSError *error;
     NSUInteger *countInteger = [[self managedObjectContext] countForFetchRequest:request error:&error];
     if (error) {
@@ -201,9 +195,9 @@
 
 - (MCExchangeRate *)addExchangeRate
 {
-    [self setExchangeRate:[MCExchangeRate addExchangeRateForContext:[self managedObjectContext]]];
-    [[self exchangeRate] setToCurrency:[[self onWhichBill] mainCurrency]];
-    [[self exchangeRate] setFromCurrency:[self currency]];
+    self.exchangeRate = [MCExchangeRate addExchangeRateForContext:[self managedObjectContext]];
+    self.exchangeRate.toCurrency = self.onWhichBill.mainCurrency;
+    self.exchangeRate.fromCurrency = self.currency;
     
     return [self exchangeRate];
 }

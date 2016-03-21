@@ -70,8 +70,10 @@ public class ExchangeRateFetcher: NSObject {
             UIApplication.sharedApplication().networkActivityIndicatorVisible = false
             if error != nil {
                 print("Error fetching exchangeRate from OpenExchangeRates: \(error)")
-                completionHandler(baseCurrency: nil, rates: nil, error: error)
-                self.isFetching = false
+                NSOperationQueue.mainQueue().addOperationWithBlock({ () -> Void in
+                    completionHandler(baseCurrency: nil, rates: nil, error: error)
+                    self.isFetching = false
+                })
                 return
             }
             

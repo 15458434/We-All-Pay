@@ -45,23 +45,12 @@
         NSString *message = NSLocalizedString(@"At least one of the payments is missing a payer.", @"One of the payments is missing a payer.");
         NSString *cancelButtonTitle = NSLocalizedString(@"CANCEL", @"Cancel");
         NSString *fixItButtonTitle = NSLocalizedString(@"Go to", @"Go to");
-        if ([UIAlertController class]) {
-            // iOS 8  and up
-            UIAlertController *alertController = [UIAlertController alertControllerWithTitle:title message:message preferredStyle:UIAlertControllerStyleAlert];
-            [alertController addAction:[UIAlertAction actionWithTitle:cancelButtonTitle style:UIAlertActionStyleCancel handler:^(UIAlertAction * _Nonnull action) {
-                // don't do a thing.
-            }]];
-            __weak typeof(self) weakSelf = self;
-            [alertController addAction:[UIAlertAction actionWithTitle:fixItButtonTitle style:UIAlertActionStyleDefault handler:^(UIAlertAction * _Nonnull action) {
-                typeof(self) strongSelf = weakSelf;
-                if (strongSelf) {
-                    [strongSelf openFirstPaymentWithoutAPayer];
-                }
-            }]];
-        } else {
-            _payerMissingAlertView = [[UIAlertView alloc] initWithTitle:title message:message delegate:self cancelButtonTitle:cancelButtonTitle otherButtonTitles:fixItButtonTitle, nil];
-            [_payerMissingAlertView show];
-        }
+        UIAlertController *alertController = [UIAlertController alertControllerWithTitle:title message:message preferredStyle:UIAlertControllerStyleAlert];
+        [alertController addAction:[UIAlertAction actionWithTitle:cancelButtonTitle style:UIAlertActionStyleCancel handler:nil]];
+        [alertController addAction:[UIAlertAction actionWithTitle:fixItButtonTitle style:UIAlertActionStyleDefault handler:^(UIAlertAction * _Nonnull action) {
+            [self openFirstPaymentWithoutAPayer];
+        }]];
+        [self presentViewController:alertController animated:YES completion:nil];
     }
 }
 

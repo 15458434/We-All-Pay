@@ -23,9 +23,7 @@ class SelectPayerTableViewController_iPad: UITableViewController, MCTonightsBill
     override func viewDidLoad() {
         super.viewDidLoad()
         
-        let unsortedPeople = (Array(tonightsBill.peoplePresent) as! [MCPerson])
-        let selector: Selector = "firstName"
-        people = UILocalizedIndexedCollation.currentCollation().sortedArrayFromArray(unsortedPeople, collationStringSelector: selector) as! [MCPerson]
+        people = tonightsBill.getArrayOfPeopleSortedOnFullNames()
     }
     
     // MARK: UI Table View Delegate
