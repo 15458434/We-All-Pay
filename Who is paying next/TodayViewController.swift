@@ -92,10 +92,10 @@ class TodayViewController: UIViewController, NCWidgetProviding {
     override func viewDidLoad() {
         super.viewDidLoad()
         // Do any additional setup after loading the view from its nib.
-        NSNotificationCenter.defaultCenter().addObserver(self, selector: "defaultsDidUpdate:", name: NSUserDefaultsDidChangeNotification, object: nil)
+        NSNotificationCenter.defaultCenter().addObserver(self, selector: #selector(TodayViewController.defaultsDidUpdate(_:)), name: NSUserDefaultsDidChangeNotification, object: nil)
 
         // Setup a tap in the Today Extension to open We all pay.
-        let thatTickles = UITapGestureRecognizer(target: self, action: "tappedInTheBackground:")
+        let thatTickles = UITapGestureRecognizer(target: self, action: #selector(TodayViewController.tappedInTheBackground(_:)))
         thatTickles.cancelsTouchesInView = false
         self.view.addGestureRecognizer(thatTickles)
         self.view.preservesSuperviewLayoutMargins = true
