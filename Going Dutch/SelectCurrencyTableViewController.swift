@@ -20,11 +20,11 @@ class SelectCurrencyTableViewController: UITableViewController, UISearchResultsU
     let collation = UILocalizedIndexedCollation.currentCollation()
     var currencies: [Currency]! {
         didSet {
-            let selector: Selector = "name"
+            let nameSelector: Selector = Selector("name")
             sections = Array(count: collation.sectionTitles.count, repeatedValue: [])
-            sortedCurrencies = collation.sortedArrayFromArray(currencies, collationStringSelector: selector) as! [Currency]
+            sortedCurrencies = collation.sortedArrayFromArray(currencies, collationStringSelector: nameSelector) as! [Currency]
             for currency in sortedCurrencies {
-                let sectionNumber = collation.sectionForObject(currency, collationStringSelector: selector)
+                let sectionNumber = collation.sectionForObject(currency, collationStringSelector: nameSelector)
                 sections[sectionNumber].append(currency)
             }
 

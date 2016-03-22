@@ -22,7 +22,8 @@ class SelectEmailAddressTableViewController_iPad: UITableViewController {
         super.viewDidLoad()
         
         let arrayOfEmailAddresses = Array(thisPerson.emailAddress) as! [MCEmailAddress]
-        allEmailAddresses = UILocalizedIndexedCollation.currentCollation().sortedArrayFromArray(arrayOfEmailAddresses, collationStringSelector: "emailAddress") as! [MCEmailAddress]
+        let emailAddressSelector: Selector = Selector("emailAddress")
+        allEmailAddresses = UILocalizedIndexedCollation.currentCollation().sortedArrayFromArray(arrayOfEmailAddresses, collationStringSelector: emailAddressSelector) as! [MCEmailAddress]
     }
     
     // MARK: UI Table View Delegate
