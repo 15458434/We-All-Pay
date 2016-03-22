@@ -33,45 +33,6 @@
     [context refreshObject:owner mergeChanges:YES];
 }
 
-+ (MCEmailAddress *)fetchEmailAddressWithUniqueId:(NSString *)uuid
-{
-    // Create a fetch request for MCSharedBills.
-    NSFetchRequest *request = [NSFetchRequest fetchRequestWithEntityName:@"MCSharedBill"];
-    
-    // Select only the sharedBill with uuid as uniqueBillId
-    NSPredicate *predicate = [NSPredicate predicateWithFormat:@"uniqueBillId = %@", uuid];
-    [request setPredicate:predicate];
-    
-    NSError *error;
-    NSArray *sharedBills = [[[MCWeAllPayStoreController defaultStore] mainThreadContext] executeFetchRequest:request error:&error];
-    if (!sharedBills) {
-        // There was an error.
-        return nil;
-    } else {
-        return sharedBills[0];
-    }
-}
-
-+ (BOOL)isTableInDatabaseEmpty
-{
-    NSFetchRequest *request = [NSFetchRequest fetchRequestWithEntityName:@"MCEmailAddress"];
-    NSSortDescriptor *sd = [NSSortDescriptor sortDescriptorWithKey:@"emailAddress" ascending:YES];
-    NSArray *sda = @[sd];
-    [request setSortDescriptors:sda];
-    NSManagedObjectContext *context = [[MCWeAllPayStoreController defaultStore] mainThreadContext];
-    NSError *error;
-    NSArray *people = [context executeFetchRequest:request error:&error];
-    if (people) {
-        if ([people count] == 0) {
-            return YES;
-        } else {
-            return NO;
-        }
-    } else {
-        return NO;
-    }
-}
-
 + (MCEmailAddress *)fetchEmailAddressFor:(MCPerson *)person
 {
     // Create a fetch request for MCEmailAddress
