@@ -129,9 +129,9 @@ class InfoScreenTableViewController: UITableViewController, MFMailComposeViewCon
     override func viewDidAppear(animated: Bool) {
         super.viewDidAppear(animated)
         
-        NSNotificationCenter.defaultCenter().addObserver(self, selector: "applyProVersion:", name: MCStoreInterface.applyProVersionNotification(), object: MCStoreInterface.defaultStoreInterface)
-        NSNotificationCenter.defaultCenter().addObserver(self, selector: "postProductPrice:", name: "Product price", object: MCStoreInterface.defaultStoreInterface)
-        NSNotificationCenter.defaultCenter().addObserver(self, selector: "restorePreviousPurchasesFailed:", name: "Restore previous purchases", object: MCStoreInterface.defaultStoreInterface)
+        NSNotificationCenter.defaultCenter().addObserver(self, selector: #selector(InfoScreenTableViewController.applyProVersion(_:)), name: MCStoreInterface.applyProVersionNotification(), object: MCStoreInterface.defaultStoreInterface)
+        NSNotificationCenter.defaultCenter().addObserver(self, selector: #selector(InfoScreenTableViewController.postProductPrice(_:)), name: "Product price", object: MCStoreInterface.defaultStoreInterface)
+        NSNotificationCenter.defaultCenter().addObserver(self, selector: #selector(InfoScreenTableViewController.restorePreviousPurchasesFailed(_:)), name: "Restore previous purchases", object: MCStoreInterface.defaultStoreInterface)
     }
     
     override func viewDidDisappear(animated: Bool) {
