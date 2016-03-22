@@ -7,6 +7,9 @@
 /* The word \"and\" between two people */
 "AND_STRING" = "en";
 
+/* Message to the user when access to the Contacts is denied by the user */
+"Access to contacts denied" = "Toegang tot Contacten geweigerd";
+
 /* Ad free version restored. */
 "Ad free version restored." = "Advertentie vrije versie is hersteld";
 
