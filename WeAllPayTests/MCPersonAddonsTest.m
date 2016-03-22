@@ -119,11 +119,11 @@
     MCPerson *mark = [tonightsBill addPerson];
     MCPayment *thisPayment = [tonightsBill addPayment];
     thisPayment.payingPerson = mark;
-    thisPayment.exchangeRate.status = [NSNumber numberWithShort:valid];
+    thisPayment.exchangeRate.status = [NSNumber numberWithShort:MCExchangeRateStatusValid];
     XCTAssertFalse([mark hasPersonMadePaymentWithInvalidExchangeRates], @"All payments person has made should be valid.");
-    thisPayment.exchangeRate.status = [NSNumber numberWithShort:invalid];
+    thisPayment.exchangeRate.status = [NSNumber numberWithShort:MCExchangeRateStatusInvalid];
     XCTAssertTrue([mark hasPersonMadePaymentWithInvalidExchangeRates], @"No payment should be valid.");
-    thisPayment.exchangeRate.status = [NSNumber numberWithShort:fetching];
+    thisPayment.exchangeRate.status = [NSNumber numberWithShort:MCExchangeRateStatusFetching];
     XCTAssertTrue([mark hasPersonMadePaymentWithInvalidExchangeRates], @"No payment should be valid.");
 }
 

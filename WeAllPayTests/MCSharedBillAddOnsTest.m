@@ -358,7 +358,7 @@
     [gbpToEur setToCurrency:mainCurrency];
     [gbpToEur setFromCurrency:currencySecondPayment];
     gbpToEur.exchangeRate = nil;
-    gbpToEur.status = [NSNumber numberWithShort:invalid];
+    gbpToEur.status = [NSNumber numberWithShort:MCExchangeRateStatusInvalid];
     [secondPayment setExchangeRate:gbpToEur];
     NSArray *results = [tonightsBill solveWhoHasToPayWhoFromThisBillWithHandler:^(NSArray *results, NSError *error) {
         XCTAssertNil(error);
@@ -408,9 +408,9 @@
     paymentWithInValidExchangeRate.currency = foreignCurrency;
     XCTAssertNotNil(paymentWithInValidExchangeRate.exchangeRate, @"ExchangeRate should not be nil.");
     paymentWithInValidExchangeRate.exchangeRate.toCurrency = foreignCurrency;
-    paymentWithInValidExchangeRate.exchangeRate.status = [NSNumber numberWithShort:fetching];
+    paymentWithInValidExchangeRate.exchangeRate.status = [NSNumber numberWithShort:MCExchangeRateStatusFetching];
     XCTAssertFalse([tonightsBill areAllExchangeRatesValid], @"One exchange rate is fetching.");
-    paymentWithInValidExchangeRate.exchangeRate.status = [NSNumber numberWithShort:invalid];
+    paymentWithInValidExchangeRate.exchangeRate.status = [NSNumber numberWithShort:MCExchangeRateStatusInvalid];
     XCTAssertFalse([tonightsBill areAllExchangeRatesValid], @"One exchange rate is invalid.");
 }
 
