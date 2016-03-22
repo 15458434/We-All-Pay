@@ -85,7 +85,7 @@ typedef NS_ENUM(BOOL, MCXRatesMissing) {
 
 - (void)setEmptyMessageNow
 {
-    if (![_solution count] == 0) {
+    if ([_solution count] != 0) {
         [UIView animateWithDuration:0.0 animations:^{
             [[_emptyMessage bigMessage] setAlpha:0.0];
             [[self tableView] setSeparatorStyle:UITableViewCellSeparatorStyleSingleLine];

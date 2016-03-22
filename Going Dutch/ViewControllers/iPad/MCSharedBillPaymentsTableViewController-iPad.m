@@ -52,7 +52,7 @@
 
 - (void)setEmptyMessage
 {
-    if (![[_dataController fetchedObjects] count] == 0) {
+    if ([[_dataController fetchedObjects] count] != 0) {
         [UIView animateWithDuration:1.0 animations:^{
             [[_emptyMessage bigMessage] setAlpha:0.0];
             [[self tableView] setSeparatorStyle:UITableViewCellSeparatorStyleSingleLine];
@@ -69,7 +69,7 @@
 
 - (void)setEmptyMessageNow
 {
-    if (![[_dataController fetchedObjects] count] == 0) {
+    if ([[_dataController fetchedObjects] count] != 0) {
         [UIView animateWithDuration:0.0 animations:^{
             [[_emptyMessage bigMessage] setAlpha:0.0];
             [[self tableView] setSeparatorStyle:UITableViewCellSeparatorStyleSingleLine];
