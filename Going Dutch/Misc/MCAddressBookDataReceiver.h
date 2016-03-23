@@ -35,7 +35,6 @@
 @property (nonatomic, strong) MCPerson *writableThisPerson;
 @property (nonatomic, strong) MCSharedBill *writableTonightsBill;
 
-- (id)initWithDelegate:(id)delegateUsedOnInit;
 - (id)initWithViewController:(UIViewController *)newViewController andDelegate:(id)newDelegate;
 
 @end
