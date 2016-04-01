@@ -115,7 +115,11 @@ enum CancelButtonPressed {
     }
     
     private func setTextPayerButton() {
-        selectButton.setTitle(thisPayment.payingPerson.getFullName(), forState: .Normal)
+        guard let payingPerson = thisPayment.payingPerson else {
+            selectButton.invalidateIntrinsicContentSize()
+            return
+        }
+        selectButton.setTitle(payingPerson.getFullName(), forState: .Normal)
         selectButton.invalidateIntrinsicContentSize()
     }
     
