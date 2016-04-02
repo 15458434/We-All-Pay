@@ -104,10 +104,10 @@
 - (void)peoplePickerNavigationController:(ABPeoplePickerNavigationController *)peoplePicker didSelectPerson:(ABRecordRef)person
 {
     // iOS 8 code
+    [self importPersonDataAndSave:person];    
     [_viewController dismissViewControllerAnimated:YES completion:^{
         [_delegate receiveANewPersonFromAddressBook:_thisPerson];
     }];
-    [self importPersonDataAndSave:person];
 }
 
 - (BOOL)peoplePickerNavigationController:(ABPeoplePickerNavigationController *)peoplePicker shouldContinueAfterSelectingPerson:(ABRecordRef)person property:(ABPropertyID)property identifier:(ABMultiValueIdentifier)identifier
