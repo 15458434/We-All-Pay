@@ -8,7 +8,7 @@
 
 @import UIKit;
 
-#import "MCThisPersonProtocol.h"
+#import "We_all_pay-Swift.h"
 #import "MCTonightsBillTransfer.h"
 
 @class MCPerson;

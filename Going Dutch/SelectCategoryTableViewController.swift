@@ -1,3 +1,5 @@
+
+
 //
 //  SelectCategoryTableViewController.swift
 //  We all pay
@@ -15,9 +17,9 @@ class SelectCategoryTableViewController: UITableViewController, MCThisPaymentPro
     var sections: [[CategoryPictureObject]]!
     var categories: [CategoryPictureObject]! {
         didSet {
-            let selector: Selector = "categoryDescription"
+            let categoryDescriptionSelector: Selector = NSSelectorFromString("categoryDescription")
             let collation = UILocalizedIndexedCollation.currentCollation()
-            sortedCategories = collation.sortedArrayFromArray(categories, collationStringSelector: selector) as! [CategoryPictureObject]
+            sortedCategories = collation.sortedArrayFromArray(categories, collationStringSelector: categoryDescriptionSelector) as! [CategoryPictureObject]
             
             self.tableView.reloadData()
         }

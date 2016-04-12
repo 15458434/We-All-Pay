@@ -7,6 +7,9 @@
 /* The word \"and\" between two people */
 "AND_STRING" = "en";
 
+/* Message to the user when access to the Contacts is denied by the user */
+"Access to contacts denied" = "Toegang tot Contacten geweigerd";
+
 /* Ad free version restored. */
 "Ad free version restored." = "Advertentie vrije versie is hersteld";
 
@@ -154,9 +157,6 @@
 
 /* The email address you provided doesn't appear to be an email address. This might cause improper behavior. Are you sure you want to continu? */
 "INVALID_EMAIL_ADDRESS_MESSAGE" = "Het ingevoerde emailadres lijkt niet op een geldig email adres. Dit kan ongewenst gedrag veroorzaken. Weet u zeker dat u door wilt gaan?";
-
-/* (No Commment) */
-"I_FOUND_WE_ALL_PAY" = "Hoi, ik heb deze makkelijk te gebruiken iPhone App gevonden, waarmee je heel makkelijk een rekening kan verdelen over vrienden. Het heet \"We all pay\".";
 
 /* (No Commment) */
 "I_WILL_SHOW_NO_ADS" = "We all pay is nu een advertentie vrije ervaring.";

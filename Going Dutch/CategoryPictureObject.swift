@@ -16,7 +16,7 @@ class CategoryPictureObject: NSObject {
     // MARK: Properties
     let categoryId: Int16
     let pictureFilename: String
-    let categoryDescription: String
+    var categoryDescription: String!
     var smallPicture: UIImage? {
         return UIImage(named: "\(pictureFilename)-small")
     }

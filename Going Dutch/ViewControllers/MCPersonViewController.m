@@ -15,8 +15,6 @@
 
 #import "MCTools.h"
 
-#import "We_all_pay-Swift.h"
-
 typedef NS_ENUM(BOOL, MCStatus) {
     invalidStatus,
     validStatus
@@ -49,7 +47,6 @@ typedef NS_ENUM(BOOL, MCStatus) {
 @property (nonatomic) MCStatus emailAddressStringInTextField;
 
 @property (nonatomic) BOOL didSomethingChange;
-@property (nonatomic) BOOL isNew;
 @property (nonatomic) BOOL thisPersonHasPaidSomething;
 @property (nonatomic) BOOL mainCancelPressed;
 

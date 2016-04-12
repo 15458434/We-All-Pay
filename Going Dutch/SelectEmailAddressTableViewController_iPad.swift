@@ -8,11 +8,11 @@
 
 import UIKit
 
-class SelectEmailAddressTableViewController_iPad: UITableViewController {
+class SelectEmailAddressTableViewController_iPad: UITableViewController, ThisPersonProtocol {
     // MARK: Properties
     var allEmailAddresses: [MCEmailAddress]!
     
-    var thisPerson: MCPerson!
+    var thisPerson: MCPerson! 
     var dismissMe: (()->())?
     
     var writableThisPerson: MCPerson!
@@ -22,7 +22,8 @@ class SelectEmailAddressTableViewController_iPad: UITableViewController {
         super.viewDidLoad()
         
         let arrayOfEmailAddresses = Array(thisPerson.emailAddress) as! [MCEmailAddress]
-        allEmailAddresses = UILocalizedIndexedCollation.currentCollation().sortedArrayFromArray(arrayOfEmailAddresses, collationStringSelector: "emailAddress") as! [MCEmailAddress]
+        let emailAddressSelector: Selector = Selector("emailAddress")
+        allEmailAddresses = UILocalizedIndexedCollation.currentCollation().sortedArrayFromArray(arrayOfEmailAddresses, collationStringSelector: emailAddressSelector) as! [MCEmailAddress]
     }
     
     // MARK: UI Table View Delegate

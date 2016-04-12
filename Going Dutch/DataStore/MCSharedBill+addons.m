@@ -441,7 +441,7 @@
     NSFetchRequest *request = [[NSFetchRequest alloc] initWithEntityName:@"MCExchangeRate"];
     request.sortDescriptors = @[[NSSortDescriptor sortDescriptorWithKey:@"dateCreated" ascending:YES]];
     
-    NSNumber *exchangeRateValidStatus = [NSNumber numberWithShort:valid];
+    NSNumber *exchangeRateValidStatus = [NSNumber numberWithShort:MCExchangeRateStatusValid];
     request.predicate = [NSPredicate predicateWithFormat:@"payment.onWhichBill = %@ and status != %@", self, exchangeRateValidStatus];
     NSError *fetchError;
     NSUInteger *amountOfInvalidExchangeRates = [[self managedObjectContext] countForFetchRequest:request error:&fetchError];
@@ -461,7 +461,7 @@
     NSFetchRequest *request = [[NSFetchRequest alloc] initWithEntityName:@"MCExchangeRate"];
     request.sortDescriptors = @[[NSSortDescriptor sortDescriptorWithKey:@"dateCreated" ascending:YES]];
     
-    NSNumber *exchangeRateValidStatus = [NSNumber numberWithShort:valid];
+    NSNumber *exchangeRateValidStatus = [NSNumber numberWithShort:MCExchangeRateStatusValid];
     request.predicate = [NSPredicate predicateWithFormat:@"payment.onWhichBill = %@ and status != %@", self, exchangeRateValidStatus];
     NSError *fetchError;
     NSArray *arrayOfInvalidExchangeRatesOfThisSharedBill = [[self managedObjectContext] executeFetchRequest:request error:&fetchError];
@@ -471,7 +471,7 @@
         return;
     }
     for (MCExchangeRate *exchangeRate in arrayOfInvalidExchangeRatesOfThisSharedBill) {
-        exchangeRate.status = [NSNumber numberWithShort:fetching];
+        exchangeRate.status = [NSNumber numberWithShort:MCExchangeRateStatusFetching];
     }
     [[[MCWeAllPayStoreController defaultStore] fetcher] fetchAll:arrayOfInvalidExchangeRatesOfThisSharedBill completionHandler:^(NSError *error) {
         if (error) {

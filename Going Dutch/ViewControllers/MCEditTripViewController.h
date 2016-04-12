@@ -15,7 +15,6 @@
 #import "MCPersonViewController.h"
 
 #import "MCTonightsBillTransfer.h"
-#import "MCThisPersonProtocol.h"
 #import "MCIndexProtocol.h"
 #import "MCIsEditingProtocol.h"
 

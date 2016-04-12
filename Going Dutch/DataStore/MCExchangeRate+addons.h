@@ -8,13 +8,13 @@
 
 #import "MCExchangeRate.h"
 
-@interface MCExchangeRate (addons)
-
 typedef NS_ENUM(short, MCExchangeRateStatus){
-    valid,
-    invalid,
-    fetching
+    MCExchangeRateStatusValid NS_SWIFT_NAME(Valid),
+    MCExchangeRateStatusInvalid NS_SWIFT_NAME(Invalid),
+    MCExchangeRateStatusFetching NS_SWIFT_NAME(Fetching)
 };
+
+@interface MCExchangeRate (addons)
 
 + (MCExchangeRate *)addExchangeRateForContext:(NSManagedObjectContext *)context;
 

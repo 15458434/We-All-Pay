@@ -78,24 +78,6 @@
 
 #pragma mark - Inherited from super.
 
-- (id) init
-{
-    self = [super init];
-    if (self) {
-        
-    }
-    return self;
-}
-
-- (id)initWithDelegate:(id)delegateUsedOnInit
-{
-    self = [super init];
-    if (self) {
-        _delegate = delegateUsedOnInit;
-    }
-    return self;
-}
-
 - (id)initWithViewController:(UIViewController *)newViewController andDelegate:(id)newDelegate
 {
     self = [super init];
@@ -119,25 +101,13 @@
     [_viewController dismissViewControllerAnimated:YES completion:nil];
 }
 
-#if __IPHONE_OS_VERSION_MAX_ALLOWED >= 80000
 - (void)peoplePickerNavigationController:(ABPeoplePickerNavigationController *)peoplePicker didSelectPerson:(ABRecordRef)person
 {
     // iOS 8 code
+    [self importPersonDataAndSave:person];    
     [_viewController dismissViewControllerAnimated:YES completion:^{
         [_delegate receiveANewPersonFromAddressBook:_thisPerson];
     }];
-    [self importPersonDataAndSave:person];
-}
-#endif
-
-- (BOOL)peoplePickerNavigationController:(ABPeoplePickerNavigationController *)peoplePicker shouldContinueAfterSelectingPerson:(ABRecordRef)person
-{
-    // iOS 7 code
-#if __IPHONE_OS_VERSION_MAX_ALLOWED >= 70000
-    [_viewController dismissViewControllerAnimated:YES completion:nil];
-    [self importPersonDataAndSave:person];
-#endif
-    return NO;
 }
 
 - (BOOL)peoplePickerNavigationController:(ABPeoplePickerNavigationController *)peoplePicker shouldContinueAfterSelectingPerson:(ABRecordRef)person property:(ABPropertyID)property identifier:(ABMultiValueIdentifier)identifier

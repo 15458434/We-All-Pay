@@ -74,7 +74,7 @@
 
 - (void)setEmptyMessage
 {
-    if (![[_dataController fetchedObjects] count] == 0) {
+    if ([[_dataController fetchedObjects] count] != 0) {
         if ([[emptyMessage bigMessage] alpha] > 0.0) {
             [UIView animateWithDuration:1.0 animations:^{
                 [[emptyMessage bigMessage] setAlpha:0.0];

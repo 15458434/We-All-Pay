@@ -39,7 +39,7 @@ public class RateMeController: NSObject {
     }
     
     public var shouldDisplayRateMeQuestion: Bool {
-        counterValue++
+        counterValue += 1
         let currentTimeIntervalInDays = self.currentDate.timeIntervalSinceDate(firstLaunchDate) / rateMeControllerOneDayTimeInterval
         debugPrint("CurrentTimeIntervalInDays: \(currentTimeIntervalInDays)")
         debugPrint("CounterValue: \(counterValue)")

@@ -10,10 +10,11 @@
 @import CoreData;
 @import AddressBookUI;
 
+#import "We_all_pay-Swift.h"
+
 #import "MCAddressBookDataReceiver.h"
 
 #import "MCTonightsBillTransfer.h"
-#import "MCThisPersonProtocol.h"
 
 typedef enum _emailFieldEditStatus {
     MCEmailFieldEditNormal = 0,
@@ -40,6 +41,7 @@ typedef enum _emailFieldEditStatus {
 // Only accessible on the mainThread.
 @property (nonatomic, strong) MCSharedBill *tonightsBill;
 @property (nonatomic, strong) MCPerson *thisPerson;
+@property (nonatomic) BOOL isNew;
 
 // Only accessible on the background thread.
 @property (nonatomic, strong) MCSharedBill *writableTonightsBill;
