@@ -8,11 +8,11 @@
 
 import UIKit
 
-class SelectEmailAddressTableViewController_iPad: UITableViewController {
+class SelectEmailAddressTableViewController_iPad: UITableViewController, ThisPersonProtocol {
     // MARK: Properties
     var allEmailAddresses: [MCEmailAddress]!
     
-    var thisPerson: MCPerson!
+    var thisPerson: MCPerson! 
     var dismissMe: (()->())?
     
     var writableThisPerson: MCPerson!

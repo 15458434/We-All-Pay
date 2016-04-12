@@ -10,7 +10,6 @@
 @import CoreData;
 
 #import "MCTonightsBillTransfer.h"
-#import "MCThisPersonProtocol.h"
 
 @class MCSharedBill;
 @class MCTableEmptyMessage_iPad;

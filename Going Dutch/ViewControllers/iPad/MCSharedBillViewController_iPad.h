@@ -11,7 +11,6 @@
 
 #import "MCAddressBookDataReceiver.h"
 #import "MCTonightsBillTransfer.h"
-#import "MCThisPersonProtocol.h"
 #import "MCThisPaymentProtocol.h"
 
 @class MCSharedBill;

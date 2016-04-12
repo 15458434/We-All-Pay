@@ -25,7 +25,6 @@
 		381640FE1AD6D8A0000D9FAF /* Who is paying next.appex in Embed App Extensions */ = {isa = PBXBuildFile; fileRef = 38B6E0EC1A28BBAB009E69D7 /* Who is paying next.appex */; settings = {ATTRIBUTES = (RemoveHeadersOnCopy, ); }; };
 		3825A82419990BA400A8885D /* UIViewController+WeAllPayStore.m in Sources */ = {isa = PBXBuildFile; fileRef = 3825A82319990BA400A8885D /* UIViewController+WeAllPayStore.m */; };
 		3825A826199A2A5500A8885D /* MCTonightsBillTransfer.m in Sources */ = {isa = PBXBuildFile; fileRef = 3825A825199A2A5500A8885D /* MCTonightsBillTransfer.m */; };
-		3825A828199A4E1E00A8885D /* MCThisPersonProtocol.m in Sources */ = {isa = PBXBuildFile; fileRef = 3825A827199A4E1E00A8885D /* MCThisPersonProtocol.m */; };
 		3829AD0F178B41320025969D /* WeAllPayStore.xcdatamodeld in Sources */ = {isa = PBXBuildFile; fileRef = 3829AD0D178B41320025969D /* WeAllPayStore.xcdatamodeld */; };
 		382B76E31C398249000C203A /* CurrencyConverter.h in Headers */ = {isa = PBXBuildFile; fileRef = 382B76E21C398249000C203A /* CurrencyConverter.h */; settings = {ATTRIBUTES = (Public, ); }; };
 		382B76EA1C398249000C203A /* CurrencyConverter.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 382B76E01C398249000C203A /* CurrencyConverter.framework */; };
@@ -134,6 +133,7 @@
 		38B08C571B38382E00FB84B1 /* MCTableEmptyMessage_iPad.swift in Sources */ = {isa = PBXBuildFile; fileRef = 38B08C561B38382E00FB84B1 /* MCTableEmptyMessage_iPad.swift */; };
 		38B08C591B383A4C00FB84B1 /* MCStoreInterface.swift in Sources */ = {isa = PBXBuildFile; fileRef = 38B08C581B383A4C00FB84B1 /* MCStoreInterface.swift */; };
 		38B6E0ED1A28BBAB009E69D7 /* NotificationCenter.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 3807560019F9445800489ED4 /* NotificationCenter.framework */; };
+		38C3AB151CBCF3200011C10C /* ViewControllerProtocols.swift in Sources */ = {isa = PBXBuildFile; fileRef = 38C3AB141CBCF3200011C10C /* ViewControllerProtocols.swift */; };
 		38C725051A2E08FE003173E6 /* StoreKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 38C725041A2E08FE003173E6 /* StoreKit.framework */; };
 		38CC8C4A18ED61FD006D99E7 /* MCPersonTableViewController_iPad.m in Sources */ = {isa = PBXBuildFile; fileRef = 38CC8C4918ED61FD006D99E7 /* MCPersonTableViewController_iPad.m */; };
 		38CDE90017135B6300387CAA /* MCTools.m in Sources */ = {isa = PBXBuildFile; fileRef = 38CDE8FF17135B6300387CAA /* MCTools.m */; };
@@ -321,7 +321,6 @@
 		3825A82219990BA400A8885D /* UIViewController+WeAllPayStore.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = "UIViewController+WeAllPayStore.h"; path = "Misc/UIViewController+WeAllPayStore.h"; sourceTree = "<group>"; };
 		3825A82319990BA400A8885D /* UIViewController+WeAllPayStore.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = "UIViewController+WeAllPayStore.m"; path = "Misc/UIViewController+WeAllPayStore.m"; sourceTree = "<group>"; };
 		3825A825199A2A5500A8885D /* MCTonightsBillTransfer.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = MCTonightsBillTransfer.m; path = ViewControllers/MCTonightsBillTransfer.m; sourceTree = "<group>"; };
-		3825A827199A4E1E00A8885D /* MCThisPersonProtocol.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = MCThisPersonProtocol.m; path = ViewControllers/MCThisPersonProtocol.m; sourceTree = "<group>"; };
 		3829AD0E178B41320025969D /* WeAllPayStore.xcdatamodel */ = {isa = PBXFileReference; lastKnownFileType = wrapper.xcdatamodel; path = WeAllPayStore.xcdatamodel; sourceTree = "<group>"; };
 		382B76E01C398249000C203A /* CurrencyConverter.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = CurrencyConverter.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		382B76E21C398249000C203A /* CurrencyConverter.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = CurrencyConverter.h; sourceTree = "<group>"; };
@@ -426,7 +425,6 @@
 		38977E5E1B2A32EF008484A4 /* MCPersonTableViewCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = MCPersonTableViewCell.swift; sourceTree = "<group>"; };
 		38977E601B2A367E008484A4 /* MCPaymentTableViewCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = MCPaymentTableViewCell.swift; sourceTree = "<group>"; };
 		38977E621B2A37BC008484A4 /* MCAllTripsTableViewCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = MCAllTripsTableViewCell.swift; sourceTree = "<group>"; };
-		3898F32D18EEB38400BFFC61 /* MCThisPersonProtocol.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = MCThisPersonProtocol.h; path = ViewControllers/MCThisPersonProtocol.h; sourceTree = "<group>"; };
 		3898F33318F1820600BFFC61 /* MCThisPaymentProtocol.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = MCThisPaymentProtocol.h; path = ViewControllers/iPad/MCThisPaymentProtocol.h; sourceTree = "<group>"; };
 		3898F33B18F40B9D00BFFC61 /* MCSharedBillAddOnsTest.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = MCSharedBillAddOnsTest.m; path = ../WeAllPayTests/MCSharedBillAddOnsTest.m; sourceTree = "<group>"; };
 		3898F33D18F40CC100BFFC61 /* MCPersonAddonsTest.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = MCPersonAddonsTest.m; path = ../WeAllPayTests/MCPersonAddonsTest.m; sourceTree = "<group>"; };
@@ -475,6 +473,7 @@
 		38B08C581B383A4C00FB84B1 /* MCStoreInterface.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = MCStoreInterface.swift; sourceTree = "<group>"; };
 		38B6E0EC1A28BBAB009E69D7 /* Who is paying next.appex */ = {isa = PBXFileReference; explicitFileType = "wrapper.app-extension"; includeInIndex = 0; path = "Who is paying next.appex"; sourceTree = BUILT_PRODUCTS_DIR; };
 		38B6E0F01A28BBAB009E69D7 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
+		38C3AB141CBCF3200011C10C /* ViewControllerProtocols.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ViewControllerProtocols.swift; sourceTree = "<group>"; };
 		38C725031A2E082D003173E6 /* Who is paying next.entitlements */ = {isa = PBXFileReference; lastKnownFileType = text.xml; path = "Who is paying next.entitlements"; sourceTree = "<group>"; };
 		38C725041A2E08FE003173E6 /* StoreKit.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = StoreKit.framework; path = System/Library/Frameworks/StoreKit.framework; sourceTree = SDKROOT; };
 		38CC8C4818ED61FD006D99E7 /* MCPersonTableViewController_iPad.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = MCPersonTableViewController_iPad.h; path = ViewControllers/iPad/MCPersonTableViewController_iPad.h; sourceTree = "<group>"; };
@@ -1034,14 +1033,13 @@
 				38E0C5DE18E5C94D005A3F17 /* MCTonightsBillTransfer.h */,
 				3825A825199A2A5500A8885D /* MCTonightsBillTransfer.m */,
 				38E0C5DF18E97A8A005A3F17 /* MCCurrentViewDelegate.h */,
-				3898F32D18EEB38400BFFC61 /* MCThisPersonProtocol.h */,
-				3825A827199A4E1E00A8885D /* MCThisPersonProtocol.m */,
 				3898F33318F1820600BFFC61 /* MCThisPaymentProtocol.h */,
 				382F9BD118F7285400818276 /* MCDismissMeBlockProtocol.h */,
 				3801881A1938D8E70085A5AE /* MCDismissKeyboardProtocol.h */,
 				380700A01A16283500C7FB37 /* MCIndexProtocol.h */,
 				380700A21A174FFB00C7FB37 /* MCIsEditingProtocol.h */,
 				3861739F1A530371000C2EE5 /* MCPathComponentsToOpenProtocol.h */,
+				38C3AB141CBCF3200011C10C /* ViewControllerProtocols.swift */,
 			);
 			name = "ViewController Protocols";
 			sourceTree = "<group>";
@@ -1580,7 +1578,6 @@
 				382E7BDD17E5E57500A1040A /* MCReturnPaymentViewController.m in Sources */,
 				383E0C5D186737EB00AA688D /* MCSharedBillPageViewController.m in Sources */,
 				381179D01A82D1FC00020538 /* MCMailComposer.swift in Sources */,
-				3825A828199A4E1E00A8885D /* MCThisPersonProtocol.m in Sources */,
 				38977E511B2A277A008484A4 /* MCOneLabelIScreenTableViewCell.swift in Sources */,
 				38B08C591B383A4C00FB84B1 /* MCStoreInterface.swift in Sources */,
 				38B08C571B38382E00FB84B1 /* MCTableEmptyMessage_iPad.swift in Sources */,
@@ -1592,6 +1589,7 @@
 				381276081BBE68F10004C8C2 /* InfoScreenContainerViewController.swift in Sources */,
 				38977E571B2A2C57008484A4 /* MCPaymentPresenceTableViewCell_iPhone.swift in Sources */,
 				38DB85D417E45BCA006237CF /* MCPayment+addons.m in Sources */,
+				38C3AB151CBCF3200011C10C /* ViewControllerProtocols.swift in Sources */,
 				38D177131C3A85C00084604C /* SelectCurrencyTableViewController.swift in Sources */,
 				3825A82419990BA400A8885D /* UIViewController+WeAllPayStore.m in Sources */,
 				383A86C518F7EE48001F128E /* MCSolutionTableViewController.m in Sources */,
