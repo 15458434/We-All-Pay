@@ -6,9 +6,10 @@
 //  Copyright © 2015 Mark Cornelisse. All rights reserved.
 //
 
+
 import UIKit
 
-class SelectEmailAddressTableViewController_iPad: UITableViewController, ThisPersonProtocol {
+class SelectEmailAddressTableViewController_iPad: UITableViewController, ThisPersonProtocol, MCDismissMeBlockProtocol {
     // MARK: Properties
     var allEmailAddresses: [MCEmailAddress]!
     
