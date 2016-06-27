@@ -4,6 +4,11 @@
 <dict>
 	<key>SchemeUserState</key>
 	<dict>
+		<key>Bazgina.xcscheme</key>
+		<dict>
+			<key>orderHint</key>
+			<integer>2</integer>
+		</dict>
 		<key>CurrencyConverter.xcscheme</key>
 		<dict>
 			<key>orderHint</key>
@@ -198,6 +203,11 @@
 			<true/>
 		</dict>
 		<key>38B6E0EB1A28BBAB009E69D7</key>
+		<dict>
+			<key>primary</key>
+			<true/>
+		</dict>
+		<key>38C2BC2E1D217C60000EA65D</key>
 		<dict>
 			<key>primary</key>
 			<true/>
