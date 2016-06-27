@@ -578,6 +578,22 @@
     }
 }
 
+- (void)solveWithHandler:(void (^)(NSArray *results, NSError *error))solution {
+    if ([self areAllExchangeRatesValid]) {
+        NSArray<ReturnPayment *> *results = [self originalSolveWhoHasToPayWhoFromThisBill];
+        solution(results, nil);
+    } else {
+        [self updateInvalidExchangeRatesWithHandler:^(NSArray *results, NSError *error) {
+            if (error) {
+                solution(nil, error);
+            } else {
+                NSArray *results = [self originalSolveWhoHasToPayWhoFromThisBill];
+                solution(results, nil);
+            }
+        }];
+    }
+}
+
 - (NSArray<MCPerson *> *)getArrayOfPeopleSortedOnFullNames
 {
     NSArray<MCPerson *> *unsortedPeople = [[self peoplePresent] allObjects];

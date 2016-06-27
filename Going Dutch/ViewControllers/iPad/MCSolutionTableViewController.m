@@ -102,7 +102,7 @@ typedef NS_ENUM(BOOL, MCXRatesMissing) {
 
 - (void)giveSolution
 {
-    _solution = [_tonightsBill solveWhoHasToPayWhoFromThisBillWithHandler:^(NSArray *results, NSError *error) {
+    [_tonightsBill solveWithHandler:^(NSArray *results, NSError *error) {
         if (error) {
             NSString *title = NSLocalizedString(@"Unable to fetch exchange rates", @"Title message of an alert that pops up when fetching exchange rates is impossible");
             NSString *message = NSLocalizedString(@"Fetching exchange rates is not possible at this moment. Check your internet connection and/or hit solve to fetch all missing exchange rates at a later time", @"Message explaining what the user can do to refetch exchange rates");
@@ -243,6 +243,14 @@ typedef NS_ENUM(BOOL, MCXRatesMissing) {
 {
     // Return the number of sections.
     if (_areXRatesMissing == xRatesMissing) {
+#ifdef DEBUG
+        NSLog(@"Amount of sections is 0.");
+#endif
+        return 0;
+    } else if (_solution == nil) {
+#ifdef DEBUG
+        NSLog(@"Amount of sections is 0.");
+#endif
         return 0;
     } else {
         return 3;
@@ -268,7 +276,7 @@ typedef NS_ENUM(BOOL, MCXRatesMissing) {
                 return [_peoplePresent count] + 1;
             }
         default:
-            @throw [NSException exceptionWithName:@"TableView broken" reason:@"There are no more than 2 sections in this tableView." userInfo:nil];
+            @throw [NSException exceptionWithName:@"TableView broken" reason:@"There are no more than 3 sections in this tableView." userInfo:nil];
             return nil;
     }
 }

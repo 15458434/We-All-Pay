@@ -39,7 +39,8 @@
 - (MCPayment *)getFirstPaymentWithoutAPayer;
 - (BOOL)areAllExchangeRatesValid;
 - (NSArray *)solveWhoHasToPayWhoFromThisBill;
-- (NSArray *)solveWhoHasToPayWhoFromThisBillWithHandler:(void (^)(NSArray *results, NSError *error))completion;
+- (NSArray *)solveWhoHasToPayWhoFromThisBillWithHandler:(void (^)(NSArray *results, NSError *error))completion __deprecated;
+- (void)solveWithHandler:(void (^)(NSArray *results, NSError *error))solution;
 - (NSNumber *)totalSumOfMoneyOfThisSharedBill;
 - (NSArray *)fetchPeoplePresentOrderedByAmountPaid:(BOOL)ascending;
 - (NSNumber *)totalAmountOfCreditBy:(MCPerson *)person;
