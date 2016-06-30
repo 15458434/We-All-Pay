@@ -3,7 +3,7 @@ use_frameworks!
 
 platform :ios, '8.0'
 
-target 'BannerExample' do
+target 'We all pay' do
 pod 'Firebase/Core'
 pod 'Firebase/AdMob'
 end
