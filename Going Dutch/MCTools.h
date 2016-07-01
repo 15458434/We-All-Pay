@@ -18,7 +18,7 @@
 
 @interface MCTools : NSObject
 
-+ (void)setAdBannerIfNotPaid:(BOOL)show forViewController:(UIViewController * _Nonnull)viewController;
++ (void)setAdBannerIfNotPaid:(BOOL)show forViewController:(UIViewController * _Nonnull)viewController __deprecated;
 + (BOOL)isStringAnEmailAddress:(NSString * _Nonnull)stringThatIsSupposedToBeEmailAddress;
 
 @end
