@@ -6,6 +6,8 @@
 //  Copyright (c) 2014 Mark Cornelisse. All rights reserved.
 //
 
+@import GoogleMobileAds;
+
 #import "MCSharedBillViewController_iPad.h"
 
 #import "MCPerson+addons.h"
@@ -18,6 +20,12 @@
 #import "We_all_pay-Swift.h"
 
 @interface MCSharedBillViewController_iPad ()
+
+@property (nonatomic, readonly) GADRequest *generalAdRequest;
+@property (weak, nonatomic) IBOutlet GADBannerView *worstSalesPitchEverView;
+@property (weak, nonatomic) IBOutlet NSLayoutConstraint *worstSalesPitchEverViewHeight;
+@property (weak, nonatomic) IBOutlet NSLayoutConstraint *bottomLayoutConstraintToLeftContainerView;
+@property (weak, nonatomic) IBOutlet NSLayoutConstraint *bottomLayoutConstraintToRightContainerView;
 
 @property (weak, nonatomic) IBOutlet UITextField *tripNameField;
 @property (weak, nonatomic) IBOutlet UIView *leftTopView;
@@ -127,6 +135,86 @@
 
 #pragma mark - New in this class
 
+- (GADRequest *)generalAdRequest
+{
+    GADRequest *request = [GADRequest request];
+#if DEBUG
+    NSString *kiPhone5S = @"109c8d87d59d27b62a53157e313d1a49";
+    NSString *kiPhone4S = @"87ebfc252a3675f03375aa13fce9286f";
+    request.testDevices = @[kGADSimulatorID, kiPhone5S, kiPhone4S];
+#endif
+    return request;
+}
+
+- (void)putBannerOnScreen:(BOOL)animate
+{
+    if (animate) {
+#if DEBUG
+        NSLog(@"animating banner on screen.");
+#endif
+        [UIView animateWithDuration:0.3 delay:0.0 options:UIViewAnimationOptionCurveEaseOut animations:^{
+            self.bottomLayoutConstraintToLeftContainerView.priority = UILayoutPriorityDefaultHigh - 1;
+            self.bottomLayoutConstraintToRightContainerView.priority = UILayoutPriorityDefaultHigh - 1;
+            [[self view] layoutIfNeeded];
+        } completion:nil];
+    } else {
+#if DEBUG
+        NSLog(@"putting banner on screen immediately.");
+#endif
+        self.bottomLayoutConstraintToLeftContainerView.priority = UILayoutPriorityDefaultHigh - 1;
+        self.bottomLayoutConstraintToRightContainerView.priority = UILayoutPriorityDefaultHigh - 1;
+        [[self view] layoutIfNeeded];
+    }
+}
+
+- (void)putBannerOffScreen:(BOOL)animate
+{
+    if (animate) {
+        NSLog(@"animating banner off screen.");
+        [UIView animateWithDuration:0.3 delay:0.0 options:UIViewAnimationOptionCurveEaseIn animations:^{
+            self.bottomLayoutConstraintToLeftContainerView.priority = UILayoutPriorityDefaultHigh + 1;
+            self.bottomLayoutConstraintToRightContainerView.priority = UILayoutPriorityDefaultHigh + 1;
+            [[self view] layoutIfNeeded];
+        } completion:nil];
+    } else {
+        NSLog(@"putting banner off screen immediately.");
+        self.bottomLayoutConstraintToLeftContainerView.priority = UILayoutPriorityDefaultHigh + 1;
+        self.bottomLayoutConstraintToRightContainerView.priority = UILayoutPriorityDefaultHigh + 1;
+        [[self view] layoutIfNeeded];
+    }
+}
+
+- (void)updateBannerSize:(CGSize)size
+{
+    if (size.height > size.width) {
+        self.worstSalesPitchEverView.adSize = kGADAdSizeSmartBannerPortrait;
+    } else {
+        self.worstSalesPitchEverView.adSize = kGADAdSizeSmartBannerLandscape;
+    }
+    
+    if (size.height <= 400) {
+        self.worstSalesPitchEverViewHeight.constant = 32;
+    } else if (size.height > 400 && size.height <= 720) {
+        self.worstSalesPitchEverViewHeight.constant = 50;
+    } else if (size.height > 720) {
+        self.worstSalesPitchEverViewHeight.constant = 90;
+    }
+}
+
+- (void)prepareWorstSalesPitchEverView
+{
+#ifdef DEBUG
+    NSLog(@"Preparing GoogleMobileAds version: %@", [GADRequest sdkVersion]);
+#endif
+    NSParameterAssert(_worstSalesPitchEverView);
+    [[self worstSalesPitchEverView] layoutIfNeeded];
+    [self updateBannerSize:[[UIScreen mainScreen] bounds].size];
+    
+    self.worstSalesPitchEverView.rootViewController = self;
+    self.worstSalesPitchEverView.delegate = self;
+    [[self worstSalesPitchEverView] loadRequest:self.generalAdRequest];
+}
+
 - (void)openPeoplePicker
 {
     ABPeoplePickerNavigationController *peoplePicker = [[ABPeoplePickerNavigationController alloc] init];
@@ -171,15 +259,37 @@
     }];
 }
 
+#pragma mark - GADBannerViewDelegate
+
+- (void)adViewDidReceiveAd:(GADBannerView *)bannerView
+{
+#ifdef DEBUG
+    NSLog(@"Yes, I got something.");
+#endif
+    [self putBannerOnScreen:YES];
+    
+}
+
+- (void)adView:(GADBannerView *)bannerView didFailToReceiveAdWithError:(GADRequestError *)error
+{
+#ifdef DEBUG
+    NSLog(@"No, I didn't get anything, because %@", error);
+#endif
+    [self putBannerOffScreen:YES];
+}
+
 #pragma mark - Inherited From super
 
 - (void)viewDidLoad
 {
     [super viewDidLoad];
     // Do any additional setup after loading the view.
-    [MCTools setAdBannerIfNotPaid:YES forViewController:self];
     
     [[self navigationController] setToolbarHidden:YES animated:YES];
+    
+    // Hide AdBanner
+    self.bottomLayoutConstraintToLeftContainerView.priority = UILayoutPriorityDefaultHigh + 1;
+    self.bottomLayoutConstraintToRightContainerView.priority = UILayoutPriorityDefaultHigh + 1;
 }
 
 - (void)viewWillAppear:(BOOL)animated
@@ -196,6 +306,8 @@
     
     // TODO: Add observer for notifications.
     [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(applyProVersion:) name:[ MCStoreInterface applyProVersionNotification] object:[MCStoreInterface defaultStoreInterface]];
+    
+    [self prepareWorstSalesPitchEverView];
 }
 
 - (void)viewWillDisappear:(BOOL)animated
@@ -224,6 +336,21 @@
 {
     [super didReceiveMemoryWarning];
     // Dispose of any resources that can be recreated.
+}
+
+- (void)viewWillTransitionToSize:(CGSize)size withTransitionCoordinator:(id<UIViewControllerTransitionCoordinator>)coordinator
+{
+    [super viewWillTransitionToSize:size withTransitionCoordinator:coordinator];
+    
+    [[self worstSalesPitchEverView] loadRequest:self.generalAdRequest];
+    
+    [coordinator animateAlongsideTransition:^(id<UIViewControllerTransitionCoordinatorContext>  _Nonnull context) {
+        [self updateBannerSize:size];
+    } completion:^(id<UIViewControllerTransitionCoordinatorContext>  _Nonnull context) {
+#if DEBUG
+        NSLog(@"Yes, I'm done.");
+#endif
+    }];
 }
 
 #pragma mark - MCAddressBookReceiverDelegate

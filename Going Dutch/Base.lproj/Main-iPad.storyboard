@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="UTF-8" standalone="no"?>
-<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="10116" systemVersion="15E65" targetRuntime="iOS.CocoaTouch.iPad" propertyAccessControl="none" useAutolayout="YES" initialViewController="zVB-NT-1S4">
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="10117" systemVersion="15F34" targetRuntime="iOS.CocoaTouch.iPad" propertyAccessControl="none" useAutolayout="YES" initialViewController="zVB-NT-1S4">
     <dependencies>
         <deployment identifier="iOS"/>
         <development version="5100" identifier="xcode"/>
@@ -141,14 +141,14 @@
                         <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                         <subviews>
                             <containerView contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="CpF-MJ-vN0">
-                                <rect key="frame" x="384" y="108" width="384" height="852"/>
+                                <rect key="frame" x="384" y="108" width="384" height="762"/>
                                 <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="calibratedWhite"/>
                                 <connections>
                                     <segue destination="NKD-wF-4e4" kind="embed" id="rOa-zk-LNb"/>
                                 </connections>
                             </containerView>
                             <containerView contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="cqE-dH-zdR">
-                                <rect key="frame" x="0.0" y="108" width="384" height="852"/>
+                                <rect key="frame" x="0.0" y="108" width="384" height="762"/>
                                 <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="calibratedWhite"/>
                                 <connections>
                                     <segue destination="YMW-gY-bCa" kind="embed" id="00m-OO-9HG"/>
@@ -231,25 +231,41 @@
                                     <constraint firstItem="egw-0d-cT1" firstAttribute="baseline" secondItem="9og-gt-gwG" secondAttribute="baseline" id="k17-cV-NKs"/>
                                 </constraints>
                             </view>
+                            <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="YDY-MC-Y9W" customClass="GADBannerView">
+                                <rect key="frame" x="0.0" y="870" width="768" height="90"/>
+                                <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                                <constraints>
+                                    <constraint firstAttribute="height" constant="90" id="sdl-xf-LSe"/>
+                                </constraints>
+                                <userDefinedRuntimeAttributes>
+                                    <userDefinedRuntimeAttribute type="string" keyPath="adUnitID" value="ca-app-pub-5354415674074435/1457854707"/>
+                                    <userDefinedRuntimeAttribute type="boolean" keyPath="autoloadEnabled" value="YES"/>
+                                </userDefinedRuntimeAttributes>
+                            </view>
                         </subviews>
                         <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="calibratedWhite"/>
                         <constraints>
                             <constraint firstAttribute="trailing" secondItem="Muu-sU-mX8" secondAttribute="trailing" id="1bu-M6-927"/>
                             <constraint firstItem="cqE-dH-zdR" firstAttribute="leading" secondItem="Nxq-6f-abw" secondAttribute="leading" constant="-20" id="6nL-3b-Qdi"/>
                             <constraint firstItem="Muu-sU-mX8" firstAttribute="width" secondItem="CpF-MJ-vN0" secondAttribute="width" id="9O4-Ag-g4T"/>
+                            <constraint firstAttribute="trailing" secondItem="YDY-MC-Y9W" secondAttribute="trailing" id="AU1-TV-blG"/>
+                            <constraint firstItem="YDY-MC-Y9W" firstAttribute="leading" secondItem="0z4-ag-Hbv" secondAttribute="leading" id="D3L-xK-dLS"/>
                             <constraint firstItem="egw-0d-cT1" firstAttribute="leading" secondItem="CpF-MJ-vN0" secondAttribute="leading" constant="20" id="D7E-7e-Rvy"/>
                             <constraint firstItem="CpF-MJ-vN0" firstAttribute="trailing" secondItem="9og-gt-gwG" secondAttribute="trailing" constant="20" id="DgI-tb-cZV"/>
-                            <constraint firstItem="LQO-sC-QG1" firstAttribute="top" secondItem="CpF-MJ-vN0" secondAttribute="bottom" id="Ks4-BC-Pyi"/>
+                            <constraint firstItem="LQO-sC-QG1" firstAttribute="top" secondItem="CpF-MJ-vN0" secondAttribute="bottom" priority="749" id="Ks4-BC-Pyi"/>
                             <constraint firstItem="rqj-np-zHP" firstAttribute="top" secondItem="Y3V-5W-BVu" secondAttribute="bottom" id="LAb-vN-Xwa"/>
                             <constraint firstItem="cqE-dH-zdR" firstAttribute="top" secondItem="rqj-np-zHP" secondAttribute="bottom" id="NEU-XJ-Beh"/>
+                            <constraint firstItem="YDY-MC-Y9W" firstAttribute="top" secondItem="cqE-dH-zdR" secondAttribute="bottom" id="Odr-Bi-jjv"/>
                             <constraint firstItem="CpF-MJ-vN0" firstAttribute="top" secondItem="rqj-np-zHP" secondAttribute="bottom" id="TXp-WY-bC1"/>
                             <constraint firstItem="CpF-MJ-vN0" firstAttribute="leading" secondItem="cqE-dH-zdR" secondAttribute="trailing" id="ULg-5p-tLS"/>
                             <constraint firstItem="cqE-dH-zdR" firstAttribute="trailing" secondItem="H3d-ki-tdJ" secondAttribute="trailing" constant="20" id="XkQ-sc-NRA"/>
                             <constraint firstItem="cqE-dH-zdR" firstAttribute="leading" secondItem="0z4-ag-Hbv" secondAttribute="leading" id="aIx-SA-6G6"/>
                             <constraint firstItem="rqj-np-zHP" firstAttribute="width" secondItem="cqE-dH-zdR" secondAttribute="width" id="aZh-W7-KAw"/>
+                            <constraint firstItem="YDY-MC-Y9W" firstAttribute="top" secondItem="CpF-MJ-vN0" secondAttribute="bottom" id="bAa-B6-t89"/>
+                            <constraint firstItem="LQO-sC-QG1" firstAttribute="top" secondItem="YDY-MC-Y9W" secondAttribute="bottom" priority="750" id="cX6-SM-RgG"/>
                             <constraint firstItem="CpF-MJ-vN0" firstAttribute="width" secondItem="cqE-dH-zdR" secondAttribute="width" id="gk4-kP-RKp"/>
                             <constraint firstItem="rqj-np-zHP" firstAttribute="leading" secondItem="0z4-ag-Hbv" secondAttribute="leading" id="iVg-7c-Ryw"/>
-                            <constraint firstItem="LQO-sC-QG1" firstAttribute="top" secondItem="cqE-dH-zdR" secondAttribute="bottom" id="jLH-9n-glc"/>
+                            <constraint firstItem="LQO-sC-QG1" firstAttribute="top" secondItem="cqE-dH-zdR" secondAttribute="bottom" priority="749" id="jLH-9n-glc"/>
                             <constraint firstItem="CpF-MJ-vN0" firstAttribute="top" secondItem="Muu-sU-mX8" secondAttribute="bottom" id="mRo-5N-x4K"/>
                             <constraint firstItem="Muu-sU-mX8" firstAttribute="top" secondItem="Y3V-5W-BVu" secondAttribute="bottom" id="oz3-Ar-1Kb"/>
                             <constraint firstAttribute="trailing" secondItem="CpF-MJ-vN0" secondAttribute="trailing" id="vzk-MU-TTl"/>
@@ -265,8 +281,12 @@
                     </navigationItem>
                     <simulatedNavigationBarMetrics key="simulatedTopBarMetrics" translucent="NO" prompted="NO"/>
                     <connections>
+                        <outlet property="bottomLayoutConstraintToLeftContainerView" destination="jLH-9n-glc" id="iY3-9j-FxI"/>
+                        <outlet property="bottomLayoutConstraintToRightContainerView" destination="Ks4-BC-Pyi" id="ifF-Xm-Yw4"/>
                         <outlet property="leftTopView" destination="rqj-np-zHP" id="MLi-6R-Qku"/>
                         <outlet property="tripNameField" destination="01X-vX-W0B" id="SeG-e8-MiL"/>
+                        <outlet property="worstSalesPitchEverView" destination="YDY-MC-Y9W" id="mVe-iL-5Jm"/>
+                        <outlet property="worstSalesPitchEverViewHeight" destination="sdl-xf-LSe" id="wCh-TT-iCh"/>
                         <segue destination="5uI-dP-udm" kind="modal" identifier="openSolutionView" id="82R-I3-yRA"/>
                         <segue destination="cne-yA-g1T" kind="modal" identifier="firstPaymentWithoutPayer" id="eXg-7Q-xwo"/>
                     </connections>
@@ -1509,8 +1529,8 @@
         <image name="iScreen button" width="26" height="26"/>
     </resources>
     <inferredMetricsTieBreakers>
-        <segue reference="pZQ-Y2-0Nm"/>
         <segue reference="NBY-n3-S8k"/>
-        <segue reference="1Uw-eh-0NI"/>
+        <segue reference="8Cc-ux-2co"/>
+        <segue reference="oh3-5j-dZ9"/>
     </inferredMetricsTieBreakers>
 </document>
