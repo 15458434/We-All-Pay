@@ -226,6 +226,12 @@ typedef NS_ENUM(BOOL, MCXRatesMissing) {
     [[_emptyMessage bigMessage] setText:NSLocalizedString(@"RETURNPAYMENTSVIEW_NOPAYMENTS", @"Please add payments and/or people if you want a solution on who owes who.")];
     [[self tableView] setBackgroundView:_emptyMessage];
     [self setEmptyMessageNow];
+    
+    if (_tonightsBill.peoplePresent.count == 0 || _tonightsBill.payments.count == 0) {
+        [[_emptyMessage bigMessage] setText:NSLocalizedString(@"RETURNPAYMENTSVIEW_NOPAYMENTS", @"Please add payments and/or people if you want a solution on who owes who.")];
+    } else {
+        _emptyMessage.bigMessage.text = @"";
+    }
 }
 
 - (void)didReceiveMemoryWarning
