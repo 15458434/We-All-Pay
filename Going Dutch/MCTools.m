@@ -9,10 +9,6 @@
 #import "MCTools.h"
 #import "We_all_pay-Swift.h"
 
-#if DEBUG
-BOOL const showAdsInDebugVersion = NO;
-#endif
-
 @implementation MCTools
 
 + (BOOL)isStringAnEmailAddress:(NSString * _Nonnull)stringThatIsSupposedToBeEmailAddress
