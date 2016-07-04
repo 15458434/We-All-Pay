@@ -268,12 +268,23 @@
     [self performSegueWithIdentifier:@"firstPaymentWithoutPayer" sender:self];
 }
 
+#pragma mark - Notifications
+
 - (void)applyProVersion:(NSNotification *)notification
 {
     [[NSOperationQueue mainQueue] addOperationWithBlock:^{
         [self putBannerOffScreen:YES];
         self.worstSalesPitchEverView.autoloadEnabled = NO;
     }];
+}
+
+- (void)applicationWillEnterForegroundHandler:(NSNotification *) notication
+{
+    BOOL isNotPurchased = ![[MCStoreInterface defaultStoreInterface] isProProductPurchased];
+    if (isNotPurchased) {
+        GADRequest *request = [self generalAdRequest];
+        [[self worstSalesPitchEverView] loadRequest:request];
+    }
 }
 
 #pragma mark - GADBannerViewDelegate
@@ -316,6 +327,7 @@
     
     // TODO: Add observer for notifications.
     [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(applyProVersion:) name:[ MCStoreInterface applyProVersionNotification] object:[MCStoreInterface defaultStoreInterface]];
+    [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(applicationWillEnterForegroundHandler:) name:UIApplicationWillEnterForegroundNotification object:nil];
     
     [self prepareWorstSalesPitchEverView];
 }
@@ -326,6 +338,7 @@
     
     // TODO: Remove observer for notifications.
     [[NSNotificationCenter defaultCenter] removeObserver:self name:[MCStoreInterface applyProVersionNotification] object:[MCStoreInterface defaultStoreInterface]];
+    [[NSNotificationCenter defaultCenter] removeObserver:self name:UIApplicationWillEnterForegroundNotification object:nil];
 }
 
 - (void)willMoveToParentViewController:(UIViewController *)parent

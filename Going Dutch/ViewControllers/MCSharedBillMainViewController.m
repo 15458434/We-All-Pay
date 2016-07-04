@@ -148,12 +148,23 @@
     [_pageViewController pageControlTapped:sender];
 }
 
+#pragma mark - Notification Handlers
+
 - (void)applyProVersion:(NSNotification *)notification
 {
     [[NSOperationQueue mainQueue] addOperationWithBlock:^{
         [self putBannerOffScreen:YES];
         self.worstSalesPitchEverView.autoloadEnabled = NO;
     }];
+}
+
+- (void)applicationWillEnterForegroundHandler:(NSNotification *) notication
+{
+    BOOL isNotPurchased = ![[MCStoreInterface defaultStoreInterface] isProProductPurchased];
+    if (isNotPurchased) {
+        GADRequest *request = [self generalAdRequest];
+        [[self worstSalesPitchEverView] loadRequest:request];
+    }
 }
 
 #pragma mark - From UIViewController+WeAllPayStore
@@ -216,6 +227,7 @@
     [super viewWillAppear:animated];
     
     [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(applyProVersion:) name:[MCStoreInterface applyProVersionNotification] object:[MCStoreInterface defaultStoreInterface]];
+    [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(applicationWillEnterForegroundHandler:) name:UIApplicationWillEnterForegroundNotification object:nil];
     
     [self prepareWorstSalesPitchEverView];
 }
@@ -225,6 +237,13 @@
     [super viewDidAppear:animated];
     
     [[NSNotificationCenter defaultCenter] removeObserver:self name:[MCStoreInterface applyProVersionNotification] object:[MCStoreInterface defaultStoreInterface]];
+}
+
+- (void)viewWillDisappear:(BOOL)animated
+{
+    [super viewWillDisappear:animated];
+    
+    [[NSNotificationCenter defaultCenter] removeObserver:self name:UIApplicationWillEnterForegroundNotification object:nil];
 }
 
 - (void)willMoveToParentViewController:(UIViewController *)parent
