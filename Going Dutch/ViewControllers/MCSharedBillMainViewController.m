@@ -164,7 +164,7 @@
 - (void)adView:(GADBannerView *)bannerView didFailToReceiveAdWithError:(GADRequestError *)error
 {
 #ifdef DEBUG
-    NSLog(@"No, I didn't get anything, because %@", error);
+    NSLog(@"Oh no, I didn't get anything, because %@", error);
 #endif
     [self putBannerOffScreen:YES];
 }
@@ -225,20 +225,12 @@
     }
 }
 
-- (void)didMoveToParentViewController:(UIViewController *)parent
-{
-    if (!parent) {
-//        [[MCWeAllPayStoreController defaultStore] saveMainThreadContext];
-    }
-}
-
 - (void)viewWillTransitionToSize:(CGSize)size withTransitionCoordinator:(id<UIViewControllerTransitionCoordinator>)coordinator
 {
     [super viewWillTransitionToSize:size withTransitionCoordinator:coordinator];
     
-    [[self worstSalesPitchEverView] loadRequest:self.generalAdRequest];
-    
     [coordinator animateAlongsideTransition:^(id<UIViewControllerTransitionCoordinatorContext>  _Nonnull context) {
+        [self putBannerOffScreen:NO];
         [self updateBannerSize:size];
     } completion:^(id<UIViewControllerTransitionCoordinatorContext>  _Nonnull context) {
 #if DEBUG
