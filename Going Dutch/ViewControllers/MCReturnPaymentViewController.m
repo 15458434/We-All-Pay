@@ -215,11 +215,6 @@ typedef NS_ENUM(BOOL, MCXRatesMissing) {
     
     [self setEdgesForExtendedLayout:UIRectEdgeNone];
     
-    if ([[UIDevice currentDevice] userInterfaceIdiom] == UIUserInterfaceIdiomPad) {
-        [MCTools setAdBannerIfNotPaid:NO forViewController:self];
-    } else {
-        [MCTools setAdBannerIfNotPaid:YES forViewController:self];
-    }
 }
 
 - (void)viewWillAppear:(BOOL)animated

@@ -260,13 +260,6 @@ typedef NS_ENUM(BOOL, MCStatus) {
     [self startResigningFirstResponderOnBackgroundTap];
 }
 
-- (void)viewDidDisappear:(BOOL)animated
-{
-    [super viewDidDisappear:animated];
-    
-    [MCTools setAdBannerIfNotPaid:NO forViewController:self];
-}
-
 - (void)didReceiveMemoryWarning
 {
     [super didReceiveMemoryWarning];
