@@ -200,6 +200,7 @@
         [[MCWeAllPayStoreController defaultStore] openStore:nil];
     });
     [[MCStoreInterface defaultStoreInterface] validateProductIdentifiers];
+    [self activateAnalytics];
     
     return YES;
 }
