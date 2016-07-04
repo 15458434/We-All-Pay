@@ -50,21 +50,27 @@
 
 - (void)putBannerOnScreen:(BOOL)animate
 {
-    if (animate) {
+    BOOL isNotPurchased = ![[MCStoreInterface defaultStoreInterface] isProProductPurchased];
+    if (isNotPurchased) {
+        if (animate) {
 #if DEBUG
-        NSLog(@"animating banner on screen.");
+            NSLog(@"animating banner on screen.");
 #endif
-        [UIView animateWithDuration:0.3 delay:0.0 options:UIViewAnimationOptionCurveEaseOut animations:^{
+            [UIView animateWithDuration:0.3 delay:0.0 options:UIViewAnimationOptionCurveEaseOut animations:^{
+                self.bottomLayoutCustomContainer.priority = UILayoutPriorityDefaultHigh - 1;
+                [[self view] layoutIfNeeded];
+            } completion:nil];
+        } else {
+#if DEBUG
+            NSLog(@"putting banner on screen immediately.");
+#endif
             self.bottomLayoutCustomContainer.priority = UILayoutPriorityDefaultHigh - 1;
             [[self view] layoutIfNeeded];
-        } completion:nil];
+        }
     } else {
-#if DEBUG
-        NSLog(@"putting banner on screen immediately.");
-#endif
-        self.bottomLayoutCustomContainer.priority = UILayoutPriorityDefaultHigh - 1;
-        [[self view] layoutIfNeeded];
+        [self putBannerOffScreen:animate];
     }
+
 }
 
 - (void)putBannerOffScreen:(BOOL)animate
@@ -104,13 +110,20 @@
 #ifdef DEBUG
     NSLog(@"Preparing GoogleMobileAds version: %@", [GADRequest sdkVersion]);
 #endif
-    NSParameterAssert(_worstSalesPitchEverView);
-    [[self worstSalesPitchEverView] layoutIfNeeded];
-    [self updateBannerSize:[[UIScreen mainScreen] bounds].size];
-    
-    self.worstSalesPitchEverView.rootViewController = self;
-    self.worstSalesPitchEverView.delegate = self;
-    [[self worstSalesPitchEverView] loadRequest:self.generalAdRequest];
+    BOOL isNotPurchased = ![[MCStoreInterface defaultStoreInterface] isProProductPurchased];
+    if (isNotPurchased) {
+        NSParameterAssert(_worstSalesPitchEverView);
+        [[self worstSalesPitchEverView] layoutIfNeeded];
+        [self updateBannerSize:[[UIScreen mainScreen] bounds].size];
+        
+        self.worstSalesPitchEverView.rootViewController = self;
+        self.worstSalesPitchEverView.delegate = self;
+        [[self worstSalesPitchEverView] loadRequest:self.generalAdRequest];
+        self.worstSalesPitchEverView.autoloadEnabled = YES;
+    } else {
+        self.worstSalesPitchEverView.autoloadEnabled = NO;
+    }
+
 }
 
 - (IBAction)toggleEdit:(id)sender
@@ -134,7 +147,8 @@
 - (void)applyProVersion:(NSNotification *)notification
 {
     [[NSOperationQueue mainQueue] addOperationWithBlock:^{
-        [MCTools setAdBannerIfNotPaid:YES forViewController:self];
+        [self putBannerOffScreen:YES];
+        self.worstSalesPitchEverView.autoloadEnabled = NO;
     }];
 }
 
@@ -158,7 +172,6 @@
     NSLog(@"Yes, I got something.");
 #endif
     [self putBannerOnScreen:YES];
-    
 }
 
 - (void)adView:(GADBannerView *)bannerView didFailToReceiveAdWithError:(GADRequestError *)error
