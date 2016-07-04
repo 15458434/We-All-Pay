@@ -280,17 +280,11 @@
 
 - (void)adViewDidReceiveAd:(GADBannerView *)bannerView
 {
-#ifdef DEBUG
-    NSLog(@"Yes, I got something.");
-#endif
     [self putBannerOnScreen:YES];
 }
 
 - (void)adView:(GADBannerView *)bannerView didFailToReceiveAdWithError:(GADRequestError *)error
 {
-#ifdef DEBUG
-    NSLog(@"No, I didn't get anything, because %@", error);
-#endif
     [self putBannerOffScreen:YES];
 }
 

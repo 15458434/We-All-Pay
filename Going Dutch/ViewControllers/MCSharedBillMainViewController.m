@@ -76,13 +76,17 @@
 - (void)putBannerOffScreen:(BOOL)animate
 {
     if (animate) {
+#if DEBUG
         NSLog(@"animating banner off screen.");
+#endif
         [UIView animateWithDuration:0.3 delay:0.0 options:UIViewAnimationOptionCurveEaseIn animations:^{
             self.bottomLayoutCustomContainer.priority = UILayoutPriorityDefaultHigh + 1;
             [[self view] layoutIfNeeded];
         } completion:nil];
     } else {
+#if DEBUG
         NSLog(@"putting banner off screen immediately.");
+#endif
         self.bottomLayoutCustomContainer.priority = UILayoutPriorityDefaultHigh + 1;
         [[self view] layoutIfNeeded];
     }
@@ -192,7 +196,6 @@
     [super viewDidLoad];
     // Do any additional setup after loading the view.
     [[self navigationController] setToolbarHidden:YES animated:YES];
-//    [MCTools setAdBannerIfNotPaid:YES forViewController:self];
     
     [self startRespondingToStoreChangeNotifications];
     
