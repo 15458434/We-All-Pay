@@ -83,16 +83,43 @@ typedef NS_ENUM(BOOL, MCXRatesMissing) {
     }
 }
 
-- (void)setEmptyMessageNow
+- (void)setEmptyMessage
 {
     if ([_solution count] != 0) {
-        [UIView animateWithDuration:0.0 animations:^{
+        [UIView animateWithDuration:0.3 animations:^{
             [[_emptyMessage bigMessage] setAlpha:0.0];
             [[self tableView] setSeparatorStyle:UITableViewCellSeparatorStyleSingleLine];
         } completion:nil];
+    } else if (!_solution) {
+        [UIView animateWithDuration:0.3 animations:^{
+            [[_emptyMessage bigMessage] setAlpha:1.0];
+            [[self tableView] setSeparatorStyle:UITableViewCellSeparatorStyleNone];
+        } completion:nil];
     } else {
         if ([[_emptyMessage bigMessage] alpha] < 1.0) {
-            [UIView animateWithDuration:0.0 animations:^{
+            [UIView animateWithDuration:0.3 animations:^{
+                [[_emptyMessage bigMessage] setAlpha:1.0];
+                [[self tableView] setSeparatorStyle:UITableViewCellSeparatorStyleNone];
+            } completion:nil];
+        }
+    }
+}
+
+- (void)setEmptyMessageNow
+{
+    if ([_solution count] != 0) {
+        [UIView animateWithDuration:0.3 animations:^{
+            [[_emptyMessage bigMessage] setAlpha:0.0];
+            [[self tableView] setSeparatorStyle:UITableViewCellSeparatorStyleSingleLine];
+        } completion:nil];
+    } else if (!_solution) {
+        [UIView animateWithDuration:0.3 animations:^{
+            [[_emptyMessage bigMessage] setAlpha:1.0];
+            [[self tableView] setSeparatorStyle:UITableViewCellSeparatorStyleNone];
+        } completion:nil];
+    } else {
+        if ([[_emptyMessage bigMessage] alpha] < 1.0) {
+            [UIView animateWithDuration:0.3 animations:^{
                 [[_emptyMessage bigMessage] setAlpha:1.0];
                 [[self tableView] setSeparatorStyle:UITableViewCellSeparatorStyleNone];
             } completion:nil];
@@ -112,6 +139,7 @@ typedef NS_ENUM(BOOL, MCXRatesMissing) {
             UIAlertAction *dismissAction = [UIAlertAction actionWithTitle:dismissTitle style:UIAlertActionStyleCancel handler:^(UIAlertAction * _Nonnull action) {
                 [self.emptyMessage.activityIndicator stopAnimating];
                 self.emptyMessage.bigMessage.text = message;
+                [self setEmptyMessage];
             }];
             [alertController addAction:dismissAction];
             [self presentViewController:alertController animated:YES completion:nil];
@@ -166,14 +194,19 @@ typedef NS_ENUM(BOOL, MCXRatesMissing) {
     if ([_tonightsBill areAllExchangeRatesValid]) {
         _areXRatesMissing = xRatesPresent;
         [[_emptyMessage activityIndicator] stopAnimating];
-        [[_emptyMessage bigMessage] setHidden:NO];
+        [[_emptyMessage bigMessage] setAlpha:0.0];
     } else {
         _areXRatesMissing = xRatesMissing;
         [[_emptyMessage activityIndicator] startAnimating];
-        [[_emptyMessage bigMessage] setHidden:YES];
+        [[_emptyMessage bigMessage] setAlpha:0.0];
     }
     
-    [[_emptyMessage bigMessage] setText:NSLocalizedString(@"RETURNPAYMENTSVIEW_NOPAYMENTS", @"Please add payments and/or people if you want a solution on who owes who.")];
+    if (_tonightsBill.peoplePresent.count == 0 || _tonightsBill.payments.count == 0) {
+        [[_emptyMessage bigMessage] setText:NSLocalizedString(@"RETURNPAYMENTSVIEW_NOPAYMENTS", @"Please add payments and/or people if you want a solution on who owes who.")];
+    } else {
+        _emptyMessage.bigMessage.text = @"";
+    }
+
     [[self tableView] setBackgroundView:_emptyMessage];
     [self setEmptyMessageNow];
 }
