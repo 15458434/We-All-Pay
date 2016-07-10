@@ -311,6 +311,7 @@
     // Hide AdBanner
     self.bottomLayoutConstraintToLeftContainerView.priority = UILayoutPriorityDefaultHigh + 1;
     self.bottomLayoutConstraintToRightContainerView.priority = UILayoutPriorityDefaultHigh + 1;
+    [self prepareWorstSalesPitchEverView];
 }
 
 - (void)viewWillAppear:(BOOL)animated
@@ -328,8 +329,6 @@
     // TODO: Add observer for notifications.
     [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(applyProVersion:) name:[ MCStoreInterface applyProVersionNotification] object:[MCStoreInterface defaultStoreInterface]];
     [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(applicationWillEnterForegroundHandler:) name:UIApplicationWillEnterForegroundNotification object:nil];
-    
-    [self prepareWorstSalesPitchEverView];
 }
 
 - (void)viewWillDisappear:(BOOL)animated
