@@ -360,7 +360,7 @@
     gbpToEur.exchangeRate = nil;
     gbpToEur.status = [NSNumber numberWithShort:MCExchangeRateStatusInvalid];
     [secondPayment setExchangeRate:gbpToEur];
-    NSArray *results = [tonightsBill solveWhoHasToPayWhoFromThisBillWithHandler:^(NSArray *results, NSError *error) {
+    [tonightsBill solveWithHandler:^(NSArray *results, NSError *error) {
         XCTAssertNil(error);
         for (ReturnPayment *returnPayment in results) {
             XCTAssertNotNil(secondPayment.exchangeRate.exchangeRate, @"There should be a value for the exchange rate.");
@@ -375,7 +375,6 @@
         }
         [expectation fulfill];
     }];
-    XCTAssertNil(results, @"Results should not return at this point.");
     
     [self waitForExpectationsWithTimeout:90 handler:^(NSError *error) {
         XCTAssertFalse(error, "Error: %@", error);

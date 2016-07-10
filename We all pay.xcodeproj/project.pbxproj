@@ -12,6 +12,7 @@
 		3801F89C16DFC62600DF8675 /* CoreData.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 3801F89B16DFC62600DF8675 /* CoreData.framework */; };
 		380700A51A1B616000C7FB37 /* MCPaymentUpdateTo4.m in Sources */ = {isa = PBXBuildFile; fileRef = 380700A41A1B616000C7FB37 /* MCPaymentUpdateTo4.m */; };
 		380C48161BE1330E00C82B0F /* CurrencyFormatter.swift in Sources */ = {isa = PBXBuildFile; fileRef = 380C48151BE1330E00C82B0F /* CurrencyFormatter.swift */; };
+		380D31E71D2A93AE001CB279 /* GoogleService-Info.plist in Resources */ = {isa = PBXBuildFile; fileRef = 380D31E61D2A93AE001CB279 /* GoogleService-Info.plist */; };
 		380D61241B299D99006F8AE4 /* PaymentsSwipeDirectionHint.swift in Sources */ = {isa = PBXBuildFile; fileRef = 380D61231B299D99006F8AE4 /* PaymentsSwipeDirectionHint.swift */; };
 		380D61261B29ACA8006F8AE4 /* HintsController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 380D61251B29ACA8006F8AE4 /* HintsController.swift */; };
 		381179D01A82D1FC00020538 /* MCMailComposer.swift in Sources */ = {isa = PBXBuildFile; fileRef = 381179CF1A82D1FC00020538 /* MCMailComposer.swift */; };
@@ -175,6 +176,7 @@
 		38EF31451938BA07004912F0 /* UINavigationController+KeyboardDismiss.m in Sources */ = {isa = PBXBuildFile; fileRef = 38EF31441938BA07004912F0 /* UINavigationController+KeyboardDismiss.m */; };
 		38F2A1AC1ADCF7E100831D48 /* TodayViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 38F2A1AA1ADCF7E100831D48 /* TodayViewController.swift */; };
 		38F2A1AD1ADCF7E100831D48 /* WhoIsPayingNextTextLocalizer.swift in Sources */ = {isa = PBXBuildFile; fileRef = 38F2A1AB1ADCF7E100831D48 /* WhoIsPayingNextTextLocalizer.swift */; };
+		575EE89BF79DD169FD4D8156 /* Pods_We_all_pay.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 8B3637C5FA3E64067E7AA8B7 /* Pods_We_all_pay.framework */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -303,6 +305,7 @@
 		380700B41A1B785C00C7FB37 /* We all pay database dutch version 4.xcappdata */ = {isa = PBXFileReference; lastKnownFileType = wrapper; path = "We all pay database dutch version 4.xcappdata"; sourceTree = "<group>"; };
 		3807560019F9445800489ED4 /* NotificationCenter.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = NotificationCenter.framework; path = System/Library/Frameworks/NotificationCenter.framework; sourceTree = SDKROOT; };
 		380C48151BE1330E00C82B0F /* CurrencyFormatter.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = CurrencyFormatter.swift; sourceTree = "<group>"; };
+		380D31E61D2A93AE001CB279 /* GoogleService-Info.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; path = "GoogleService-Info.plist"; sourceTree = "<group>"; };
 		380D61231B299D99006F8AE4 /* PaymentsSwipeDirectionHint.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = PaymentsSwipeDirectionHint.swift; sourceTree = "<group>"; };
 		380D61251B29ACA8006F8AE4 /* HintsController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = HintsController.swift; sourceTree = "<group>"; };
 		381179CE1A82D1FC00020538 /* We all pay Tests-Bridging-Header.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; name = "We all pay Tests-Bridging-Header.h"; path = "../Going Dutch/We all pay Tests-Bridging-Header.h"; sourceTree = "<group>"; };
@@ -537,6 +540,9 @@
 		38F7F9A71B2C49C00059DE51 /* en */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; name = en; path = "en.lproj/Available Currencies.plist"; sourceTree = "<group>"; };
 		38F7F9A81B2C49C20059DE51 /* nl */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; name = nl; path = "nl.lproj/Available Currencies.plist"; sourceTree = "<group>"; };
 		38F7F9A91B2C4A120059DE51 /* CurrencyController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = CurrencyController.swift; path = "../Going Dutch/CurrencyController.swift"; sourceTree = "<group>"; };
+		6574327FA65F950C699284DC /* Pods-We all pay.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-We all pay.debug.xcconfig"; path = "Pods/Target Support Files/Pods-We all pay/Pods-We all pay.debug.xcconfig"; sourceTree = "<group>"; };
+		8B3637C5FA3E64067E7AA8B7 /* Pods_We_all_pay.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_We_all_pay.framework; sourceTree = BUILT_PRODUCTS_DIR; };
+		F2E1E066ED9A5094D819440C /* Pods-We all pay.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-We all pay.release.xcconfig"; path = "Pods/Target Support Files/Pods-We all pay/Pods-We all pay.release.xcconfig"; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -572,6 +578,7 @@
 				38C725051A2E08FE003173E6 /* StoreKit.framework in Frameworks */,
 				3873A2A516F23AA1000832FD /* MessageUI.framework in Frameworks */,
 				38572AD7169D437B00969C62 /* UIKit.framework in Frameworks */,
+				575EE89BF79DD169FD4D8156 /* Pods_We_all_pay.framework in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -654,6 +661,8 @@
 				389DE8F3197FB2B900169645 /* MCEmailAddress.m */,
 				389DE8EF197FB2B900169645 /* MCPerson.h */,
 				389DE8F0197FB2B900169645 /* MCPerson.m */,
+				38DB85D817E45DEA006237CF /* MCPerson+addons.h */,
+				38DB85D917E45DEA006237CF /* MCPerson+addons.m */,
 				389DE90C197FD41900169645 /* MCCurrency+addons.h */,
 				389DE90D197FD41900169645 /* MCCurrency+addons.m */,
 				389DE905197FBE8400169645 /* MCExchangeRate+addons.h */,
@@ -664,8 +673,6 @@
 				38DB85D617E45CA4006237CF /* MCSharedBill+addons.m */,
 				389950A2191A90F1000B00BC /* MCPaymentPresence+addons.h */,
 				389950A3191A90F1000B00BC /* MCPaymentPresence+addons.m */,
-				38DB85D817E45DEA006237CF /* MCPerson+addons.h */,
-				38DB85D917E45DEA006237CF /* MCPerson+addons.m */,
 				38DB85DB17E45FB7006237CF /* MCEmailAddress+addons.h */,
 				38DB85DC17E45FB7006237CF /* MCEmailAddress+addons.m */,
 				38955046178B4FCA0077A95A /* MCWeAllPayStoreController.h */,
@@ -753,6 +760,7 @@
 				38D6A3CB1C73DDC000968BB2 /* RateMeControllerForiOSTests */,
 				38572AD5169D437B00969C62 /* Frameworks */,
 				38572AD3169D437B00969C62 /* Products */,
+				9DF4D77CF10F1506194028A2 /* Pods */,
 			);
 			sourceTree = "<group>";
 		};
@@ -778,6 +786,7 @@
 				38C725041A2E08FE003173E6 /* StoreKit.framework */,
 				3829C61B192628C100DE91D4 /* iOS */,
 				3807560019F9445800489ED4 /* NotificationCenter.framework */,
+				8B3637C5FA3E64067E7AA8B7 /* Pods_We_all_pay.framework */,
 			);
 			name = Frameworks;
 			sourceTree = "<group>";
@@ -814,6 +823,7 @@
 			children = (
 				387D3A931870652B0060FAF8 /* Localizable.strings */,
 				38572ADE169D437B00969C62 /* Info.plist */,
+				380D31E61D2A93AE001CB279 /* GoogleService-Info.plist */,
 				38572ADF169D437B00969C62 /* InfoPlist.strings */,
 				38572AE2169D437B00969C62 /* main.m */,
 				38572AE4169D437B00969C62 /* We all pay-Prefix.pch */,
@@ -1111,6 +1121,15 @@
 			name = iPad;
 			sourceTree = "<group>";
 		};
+		9DF4D77CF10F1506194028A2 /* Pods */ = {
+			isa = PBXGroup;
+			children = (
+				6574327FA65F950C699284DC /* Pods-We all pay.debug.xcconfig */,
+				F2E1E066ED9A5094D819440C /* Pods-We all pay.release.xcconfig */,
+			);
+			name = Pods;
+			sourceTree = "<group>";
+		};
 /* End PBXGroup section */
 
 /* Begin PBXHeadersBuildPhase section */
@@ -1182,11 +1201,14 @@
 			isa = PBXNativeTarget;
 			buildConfigurationList = 38572AF0169D437B00969C62 /* Build configuration list for PBXNativeTarget "We all pay" */;
 			buildPhases = (
+				7EBC678A465CF274346AD774 /* [CP] Check Pods Manifest.lock */,
 				38572ACE169D437B00969C62 /* Sources */,
 				38572ACF169D437B00969C62 /* Frameworks */,
 				38572AD0169D437B00969C62 /* Resources */,
 				381641011AD6D8A1000D9FAF /* Embed App Extensions */,
 				380D611E1B299B94006F8AE4 /* Embed Frameworks */,
+				2506596625395E32E20C5D2C /* [CP] Embed Pods Frameworks */,
+				8A710DA964B64371764BBF64 /* [CP] Copy Pods Resources */,
 			);
 			buildRules = (
 			);
@@ -1318,7 +1340,7 @@
 			attributes = {
 				CLASSPREFIX = MC;
 				LastSwiftMigration = 0700;
-				LastSwiftUpdateCheck = 0720;
+				LastSwiftUpdateCheck = 0730;
 				LastUpgradeCheck = 0720;
 				ORGANIZATIONNAME = "Mark Cornelisse";
 				TargetAttributes = {
@@ -1424,6 +1446,7 @@
 			isa = PBXResourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				380D31E71D2A93AE001CB279 /* GoogleService-Info.plist in Resources */,
 				38572AE1169D437B00969C62 /* InfoPlist.strings in Resources */,
 				3867CE5118704DAF001EC222 /* MCTableEmptyMessage.xib in Resources */,
 				387D3A911870652B0060FAF8 /* Localizable.strings in Resources */,
@@ -1490,6 +1513,54 @@
 			runOnlyForDeploymentPostprocessing = 0;
 		};
 /* End PBXResourcesBuildPhase section */
+
+/* Begin PBXShellScriptBuildPhase section */
+		2506596625395E32E20C5D2C /* [CP] Embed Pods Frameworks */ = {
+			isa = PBXShellScriptBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			inputPaths = (
+			);
+			name = "[CP] Embed Pods Frameworks";
+			outputPaths = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+			shellPath = /bin/sh;
+			shellScript = "\"${SRCROOT}/Pods/Target Support Files/Pods-We all pay/Pods-We all pay-frameworks.sh\"\n";
+			showEnvVarsInLog = 0;
+		};
+		7EBC678A465CF274346AD774 /* [CP] Check Pods Manifest.lock */ = {
+			isa = PBXShellScriptBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			inputPaths = (
+			);
+			name = "[CP] Check Pods Manifest.lock";
+			outputPaths = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+			shellPath = /bin/sh;
+			shellScript = "diff \"${PODS_ROOT}/../Podfile.lock\" \"${PODS_ROOT}/Manifest.lock\" > /dev/null\nif [[ $? != 0 ]] ; then\n    cat << EOM\nerror: The sandbox is not in sync with the Podfile.lock. Run 'pod install' or update your CocoaPods installation.\nEOM\n    exit 1\nfi\n";
+			showEnvVarsInLog = 0;
+		};
+		8A710DA964B64371764BBF64 /* [CP] Copy Pods Resources */ = {
+			isa = PBXShellScriptBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			inputPaths = (
+			);
+			name = "[CP] Copy Pods Resources";
+			outputPaths = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+			shellPath = /bin/sh;
+			shellScript = "\"${SRCROOT}/Pods/Target Support Files/Pods-We all pay/Pods-We all pay-resources.sh\"\n";
+			showEnvVarsInLog = 0;
+		};
+/* End PBXShellScriptBuildPhase section */
 
 /* Begin PBXSourcesBuildPhase section */
 		382B76DB1C398249000C203A /* Sources */ = {
@@ -2062,7 +2133,6 @@
 				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer";
 				"CODE_SIGN_IDENTITY[sdk=macosx*]" = "Mac Developer: Mark Cornelisse (B9ZEEP43C6)";
 				COPY_PHASE_STRIP = NO;
-				CURRENT_PROJECT_VERSION = 96;
 				DEFINES_MODULE = YES;
 				ENABLE_TESTABILITY = YES;
 				GCC_C_LANGUAGE_STANDARD = gnu99;
@@ -2097,7 +2167,6 @@
 				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer";
 				"CODE_SIGN_IDENTITY[sdk=macosx*]" = "Developer ID Application: Mark Cornelisse (Z6JP26PUUY)";
 				COPY_PHASE_STRIP = YES;
-				CURRENT_PROJECT_VERSION = 96;
 				DEFINES_MODULE = YES;
 				GCC_C_LANGUAGE_STANDARD = gnu99;
 				GCC_OPTIMIZATION_LEVEL = s;
@@ -2115,6 +2184,7 @@
 		};
 		38572AF1169D437B00969C62 /* Debug */ = {
 			isa = XCBuildConfiguration;
+			baseConfigurationReference = 6574327FA65F950C699284DC /* Pods-We all pay.debug.xcconfig */;
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = "iPhone And iPad icons";
 				ASSETCATALOG_COMPILER_LAUNCHIMAGE_NAME = LaunchImage;
@@ -2151,6 +2221,7 @@
 		};
 		38572AF2169D437B00969C62 /* Release */ = {
 			isa = XCBuildConfiguration;
+			baseConfigurationReference = F2E1E066ED9A5094D819440C /* Pods-We all pay.release.xcconfig */;
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = "iPhone And iPad icons";
 				ASSETCATALOG_COMPILER_LAUNCHIMAGE_NAME = LaunchImage;

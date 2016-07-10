@@ -16,11 +16,11 @@
 {
     NSManagedObjectContext *context = [person managedObjectContext];
     MCEmailAddress *newEmailAddress = [NSEntityDescription insertNewObjectForEntityForName:@"MCEmailAddress" inManagedObjectContext:context];
-    [newEmailAddress setUniqueEmailId:[[NSUUID UUID] UUIDString] ];
-    [newEmailAddress setOwner:person];
+    newEmailAddress.uniqueEmailId = [[NSUUID UUID] UUIDString];
+    newEmailAddress.owner = person;
     NSDate *nu = [NSDate date];
-    [newEmailAddress setDateCreated:nu];
-    [newEmailAddress setDateModified:nu];
+    newEmailAddress.dateCreated = nu;
+    newEmailAddress.dateModified = nu;
     return newEmailAddress;
 }
 
@@ -42,8 +42,7 @@
     NSPredicate *predicate1 = [NSPredicate predicateWithFormat:@"owner = %@", person];
     NSPredicate *predicate2 = [NSPredicate predicateWithFormat:@"selected = %@", @YES];
     NSPredicate *compoundPredicate = [NSCompoundPredicate andPredicateWithSubpredicates:@[predicate1, predicate2]];
-    [request setPredicate:compoundPredicate];
-    
+    request.predicate = compoundPredicate;
     NSError *error;
     NSArray *emailAddresses;
     emailAddresses = [[person managedObjectContext] executeFetchRequest:request error:&error];

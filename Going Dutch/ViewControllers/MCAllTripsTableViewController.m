@@ -151,13 +151,6 @@ typedef NS_ENUM(BOOL, MCTonightsBillStatus) {
     _dataController = nil;
 }
 
-- (void)viewDidDisappear:(BOOL)animated
-{
-    [super viewDidDisappear:animated];
-    
-    [MCTools setAdBannerIfNotPaid:NO forViewController:self];
-}
-
 - (void)didReceiveMemoryWarning
 {
     [super didReceiveMemoryWarning];

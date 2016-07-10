@@ -6,6 +6,8 @@
 //  Copyright (c) 2013 Mark Cornelisse. All rights reserved.
 //
 
+@import Firebase;
+
 #import "MCAppDelegate.h"
 #import "MCAllTripsTableViewController.h"
 #import "MCPaymentViewController.h"
@@ -29,6 +31,11 @@
 @implementation MCAppDelegate
 
 #pragma mark - New in this class
+
+- (void)activateAnalytics
+{
+    [FIRApp configure];
+}
 
 - (void)removeOldCurrencyStore
 {
@@ -193,6 +200,7 @@
         [[MCWeAllPayStoreController defaultStore] openStore:nil];
     });
     [[MCStoreInterface defaultStoreInterface] validateProductIdentifiers];
+    [self activateAnalytics];
     
     return YES;
 }

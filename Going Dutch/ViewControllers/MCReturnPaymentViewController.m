@@ -24,7 +24,7 @@ typedef NS_ENUM(BOOL, MCXRatesMissing) {
 
 @interface MCReturnPaymentViewController () <UIAlertViewDelegate, MFMailComposeViewControllerDelegate>
 
-@property (nonatomic, strong) NSArray *peoplePresent;
+@property (nonatomic, strong) NSArray<MCPerson *> *peoplePresent;
 @property (nonatomic, strong) NSArray<ReturnPayment *> *solution;
 
 @property (nonatomic) MCXRatesMissing areXRatesMissing;
@@ -140,9 +140,15 @@ typedef NS_ENUM(BOOL, MCXRatesMissing) {
 
 - (void)giveSolution
 {
-    _solution = [_tonightsBill solveWhoHasToPayWhoFromThisBillWithHandler:^(NSArray *results, NSError *error) {
+    [_emptyMessage.activityIndicator startAnimating];
+    _areXRatesMissing = xRatesMissing;
+    
+    [_tonightsBill solveWithHandler:^(NSArray *results, NSError *error) {
         NSParameterAssert([NSThread isMainThread]);
         if (error) {
+#ifdef DEBUG
+            NSLog(@"Error solving: %@", error);
+#endif
             NSString *title = NSLocalizedString(@"Unable to fetch exchange rates", @"Title message of an alert that pops up when fetching exchange rates is impossible");
             NSString *message = NSLocalizedString(@"Fetching exchange rates is not possible at this moment. Check your internet connection and/or hit solve to fetch all missing exchange rates at a later time", @"Message explaining what the user can do to refetch exchange rates");
             NSString *dismissTitle = NSLocalizedString(@"Dismiss", @"Title of a button that dismisses an alert.");
@@ -163,7 +169,6 @@ typedef NS_ENUM(BOOL, MCXRatesMissing) {
         self.solution = results;
         NSSortDescriptor *sortDescriptor = [NSSortDescriptor sortDescriptorWithKey:@"firstName" ascending:YES];
         _peoplePresent = [[_tonightsBill peoplePresent] sortedArrayUsingDescriptors:@[sortDescriptor]];
-        NSLog(@"Stop animating.");
         [[[self emptyMessage] activityIndicator] stopAnimating];
         
         [self setEmptyMessageNow];
@@ -172,14 +177,6 @@ typedef NS_ENUM(BOOL, MCXRatesMissing) {
         [[self tableView] insertSections:[NSIndexSet indexSetWithIndexesInRange:NSMakeRange(0, 3)] withRowAnimation:UITableViewRowAnimationTop];
         [[self tableView] endUpdates];
     }];
-    
-    if (!_solution) {
-        NSLog(@"Start animating");
-        [_emptyMessage.activityIndicator startAnimating];
-    } else {
-        NSSortDescriptor *sortDescriptor = [NSSortDescriptor sortDescriptorWithKey:@"firstName" ascending:YES];
-        _peoplePresent = [[_tonightsBill peoplePresent] sortedArrayUsingDescriptors:@[sortDescriptor]];
-    }
 }
 
 #pragma mark - New in this Class
@@ -218,11 +215,6 @@ typedef NS_ENUM(BOOL, MCXRatesMissing) {
     
     [self setEdgesForExtendedLayout:UIRectEdgeNone];
     
-    if ([[UIDevice currentDevice] userInterfaceIdiom] == UIUserInterfaceIdiomPad) {
-        [MCTools setAdBannerIfNotPaid:NO forViewController:self];
-    } else {
-        [MCTools setAdBannerIfNotPaid:YES forViewController:self];
-    }
 }
 
 - (void)viewWillAppear:(BOOL)animated
@@ -230,17 +222,16 @@ typedef NS_ENUM(BOOL, MCXRatesMissing) {
     [super viewWillAppear:animated];
     
     [self giveSolution];
-    if ([_tonightsBill areAllExchangeRatesValid]) {
-        _areXRatesMissing = xRatesPresent;
-        [[_emptyMessage activityIndicator] stopAnimating];
-    } else {
-        _areXRatesMissing = xRatesMissing;
-        [[_emptyMessage activityIndicator] startAnimating];
-    }
     
     [[_emptyMessage bigMessage] setText:NSLocalizedString(@"RETURNPAYMENTSVIEW_NOPAYMENTS", @"Please add payments and/or people if you want a solution on who owes who.")];
     [[self tableView] setBackgroundView:_emptyMessage];
     [self setEmptyMessageNow];
+    
+    if (_tonightsBill.peoplePresent.count == 0 || _tonightsBill.payments.count == 0) {
+        [[_emptyMessage bigMessage] setText:NSLocalizedString(@"RETURNPAYMENTSVIEW_NOPAYMENTS", @"Please add payments and/or people if you want a solution on who owes who.")];
+    } else {
+        _emptyMessage.bigMessage.text = @"";
+    }
 }
 
 - (void)didReceiveMemoryWarning
@@ -345,10 +336,16 @@ typedef NS_ENUM(BOOL, MCXRatesMissing) {
 - (NSInteger)numberOfSectionsInTableView:(UITableView *)tableView
 {
     if (_areXRatesMissing == xRatesMissing) {
+#ifdef DEBUG
         NSLog(@"Amount of sections is 0.");
+#endif
+        return 0;
+    } else if (_solution == nil) {
+#ifdef DEBUG
+        NSLog(@"Amount of sections is 0.");
+#endif
         return 0;
     } else {
-        NSLog(@"Amount of sections is 3.");
         return 3;
     }
 }

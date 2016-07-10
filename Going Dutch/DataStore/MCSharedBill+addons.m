@@ -560,21 +560,19 @@
     return [self originalSolveWhoHasToPayWhoFromThisBill];
 }
 
-- (NSArray *)solveWhoHasToPayWhoFromThisBillWithHandler:(void (^)(NSArray *results, NSError *error))completion
-{
-    // This function will either give an NSArray as return value or it will return nil and will execuute the completionBlock at a later time when all exchangeRates are valid.
+- (void)solveWithHandler:(void (^)(NSArray *results, NSError *error))solution {
     if ([self areAllExchangeRatesValid]) {
-        return [self originalSolveWhoHasToPayWhoFromThisBill];
+        NSArray<ReturnPayment *> *results = [self originalSolveWhoHasToPayWhoFromThisBill];
+        solution(results, nil);
     } else {
         [self updateInvalidExchangeRatesWithHandler:^(NSArray *results, NSError *error) {
             if (error) {
-                completion(nil, error);
+                solution(nil, error);
             } else {
-                NSArray *solution = [self originalSolveWhoHasToPayWhoFromThisBill];
-                completion(solution, nil);
+                NSArray *results = [self originalSolveWhoHasToPayWhoFromThisBill];
+                solution(results, nil);
             }
         }];
-        return nil;
     }
 }
 
