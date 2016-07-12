@@ -96,6 +96,19 @@ typedef NS_ENUM(BOOL, MCTonightsBillStatus) {
     }
 }
 
+- (void)prepareUserActivity
+{
+    NSUserActivity *activity = [[NSUserActivity alloc] initWithActivityType:@"com.GreenHair.We-all-pay.SharingExpenses"];
+    activity.title = NSLocalizedString(@"We all pay - Sharing Expenses and bill splitting made easy", @"The title of the app");
+    NSString *keywordsFilePath = [[NSBundle mainBundle] pathForResource:@"We all pay keywords" ofType:@"plist"];
+    activity.keywords = [NSSet setWithArray:[NSArray arrayWithContentsOfFile:keywordsFilePath]];
+    activity.eligibleForHandoff = NO;
+    activity.eligibleForSearch = YES;
+    activity.eligibleForPublicIndexing = YES;
+    activity.requiredUserInfoKeys = [[NSSet alloc] init];
+    self.userActivity = activity;
+}
+
 #pragma mark - Inherited from super
 
 - (void)awakeFromNib
@@ -103,7 +116,7 @@ typedef NS_ENUM(BOOL, MCTonightsBillStatus) {
     [super awakeFromNib];
     
     _isATonightsBillOpened = isClosed;
-    _isEmptyMessageShownInstantForFirstBoot = false;
+    _isEmptyMessageShownInstantForFirstBoot = NO;
 }
 
 - (void)viewDidLoad
@@ -117,6 +130,8 @@ typedef NS_ENUM(BOOL, MCTonightsBillStatus) {
     [[self tableView] setBackgroundView:_emptyMessage];
     
     [self startRespondingToStoreChangeNotifications];
+    
+    [self prepareUserActivity];
 }
 
 
@@ -142,6 +157,8 @@ typedef NS_ENUM(BOOL, MCTonightsBillStatus) {
     }
     
     [[self navigationController] setToolbarHidden:YES animated:YES];
+    
+    [[self userActivity] becomeCurrent];
 }
 
 - (void)viewWillDisappear:(BOOL)animated
