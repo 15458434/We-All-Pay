@@ -165,6 +165,7 @@ typedef NS_ENUM(BOOL, MCXRatesMissing) {
         }
         
         // Update tableView.
+        [[self tableView] beginUpdates];
         self.areXRatesMissing = xRatesPresent;
         self.solution = results;
         NSSortDescriptor *sortDescriptor = [NSSortDescriptor sortDescriptorWithKey:@"firstName" ascending:YES];
@@ -173,8 +174,8 @@ typedef NS_ENUM(BOOL, MCXRatesMissing) {
         
         [self setEmptyMessageNow];
         
-        [[self tableView] beginUpdates];
-        [[self tableView] insertSections:[NSIndexSet indexSetWithIndexesInRange:NSMakeRange(0, 3)] withRowAnimation:UITableViewRowAnimationTop];
+        NSIndexSet *indexes = [[NSIndexSet alloc] initWithIndexesInRange:NSMakeRange(0, 3)];
+        [[self tableView] insertSections:indexes withRowAnimation:UITableViewRowAnimationTop];
         [[self tableView] endUpdates];
     }];
 }
