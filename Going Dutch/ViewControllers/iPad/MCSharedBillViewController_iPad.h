@@ -15,7 +15,7 @@
 
 @class MCSharedBill;
 
-@interface MCSharedBillViewController_iPad : UIViewController <MCTonightsBillTransfer, MCAddressBookReceiverDelegate, UITextFieldDelegate, UIAlertViewDelegate>
+@interface MCSharedBillViewController_iPad : UIViewController <MCTonightsBillTransfer, MCAddressBookReceiverDelegate, UITextFieldDelegate>
 
 @property (strong, nonatomic) MCAddressBookDataReceiver *personReceiver;
 

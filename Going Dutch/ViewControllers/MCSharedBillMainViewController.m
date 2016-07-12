@@ -220,6 +220,7 @@
     _pageViewController.tonightsBill = _tonightsBill;
     
     self.bottomLayoutCustomContainer.priority = UILayoutPriorityDefaultHigh + 1;
+    [self prepareWorstSalesPitchEverView];
 }
 
 - (void)viewWillAppear:(BOOL)animated
@@ -228,8 +229,6 @@
     
     [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(applyProVersion:) name:[MCStoreInterface applyProVersionNotification] object:[MCStoreInterface defaultStoreInterface]];
     [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(applicationWillEnterForegroundHandler:) name:UIApplicationWillEnterForegroundNotification object:nil];
-    
-    [self prepareWorstSalesPitchEverView];
 }
 
 - (void)viewDidAppear:(BOOL)animated

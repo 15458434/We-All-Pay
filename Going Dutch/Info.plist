@@ -17,7 +17,7 @@
 	<key>CFBundlePackageType</key>
 	<string>APPL</string>
 	<key>CFBundleShortVersionString</key>
-	<string>1.5.16</string>
+	<string>1.5.17</string>
 	<key>CFBundleSignature</key>
 	<string>????</string>
 	<key>CFBundleURLTypes</key>
@@ -36,13 +36,25 @@
 		</dict>
 	</array>
 	<key>CFBundleVersion</key>
-	<string>109</string>
+	<string>110</string>
 	<key>LSRequiresIPhoneOS</key>
 	<true/>
 	<key>NSAppTransportSecurity</key>
 	<dict>
 		<key>NSAllowArbitaryLoads</key>
 		<true/>
+        <key>NSExceptionDomains</key>
+        <dict>
+            <key>openexchangerates.org</key>
+            <dict>
+                <key>NSThirdPartyExceptionAllowsInsecureHTTPLoads</key>
+                <true/>
+                <key>NSThirdPartyExceptionMinimumTLSVersion</key>
+                <string>TLSv1.0</string>
+                <key>NSThirdPartyExceptionRequiresForwardSecrecy</key>
+                <false/>
+            </dict>
+        </dict>
 	</dict>
 	<key>UIFileSharingEnabled</key>
 	<false/>

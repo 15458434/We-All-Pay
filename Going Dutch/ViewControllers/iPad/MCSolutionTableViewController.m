@@ -148,6 +148,8 @@ typedef NS_ENUM(BOOL, MCXRatesMissing) {
         }
         
         // Update tableView.
+        [self.tableView beginUpdates];
+        
         self.areXRatesMissing = xRatesPresent;
         self.solution = results;
         
@@ -157,8 +159,9 @@ typedef NS_ENUM(BOOL, MCXRatesMissing) {
         NSLog(@"Stop animating.");
         [[[self emptyMessage] activityIndicator] stopAnimating];
         [self setEmptyMessageNow];
-        [self.tableView beginUpdates];
-        [[self tableView] insertSections:[NSIndexSet indexSetWithIndexesInRange:NSMakeRange(0, 3)] withRowAnimation:UITableViewRowAnimationTop];
+        
+        NSIndexSet *indexes = [[NSIndexSet alloc] initWithIndexesInRange:NSMakeRange(0, 3)];
+        [[self tableView] insertSections:indexes withRowAnimation:UITableViewRowAnimationTop];
         [self.tableView endUpdates];
     }];
     
