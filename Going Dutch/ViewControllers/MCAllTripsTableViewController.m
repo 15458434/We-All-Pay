@@ -100,9 +100,6 @@ typedef NS_ENUM(BOOL, MCTonightsBillStatus) {
 {
     NSOperatingSystemVersion ios9 = (NSOperatingSystemVersion){9, 0, 0};
     if ([[NSProcessInfo processInfo] isOperatingSystemAtLeastVersion:ios9]) {
-#if DEBUG
-        NSLog(@"Running on iOS 9");
-#endif
         NSUserActivity *activity = [[NSUserActivity alloc] initWithActivityType:@"com.GreenHair.We-all-pay.SharingExpenses"];
         activity.title = NSLocalizedString(@"We all pay - Sharing Expenses and bill splitting made easy", @"The title of the app");
         NSString *keywordsFilePath = [[NSBundle mainBundle] pathForResource:@"We all pay keywords" ofType:@"plist"];
