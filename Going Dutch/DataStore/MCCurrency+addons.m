@@ -72,7 +72,11 @@
     }
 }
 
-#pragma mark - Inherited from super
+- (BOOL)isEqualToMCCurrency:(MCCurrency *)object {
+    return [self.code isEqualToString:object.code];
+}
+
+#pragma mark - NSManagedObject
 
 - (void)awakeFromInsert
 {
@@ -82,5 +86,7 @@
     [self setPrimitiveValue:now forKey:@"dateCreated"];
     [self setPrimitiveValue:now forKey:@"dateModified"];
 }
+
+#pragma mark - NSObject
 
 @end

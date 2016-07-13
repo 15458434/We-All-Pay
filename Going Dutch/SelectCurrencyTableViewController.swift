@@ -144,7 +144,7 @@ class SelectCurrencyTableViewController: UITableViewController, UISearchResultsU
         
         thisPayment.setNewCurrencyAndAutomaticallyUpdateExchangeRate(newCurrency) { (error) -> Void in
             if (error != nil) {
-                Swift.print("Error fetching ExchangeRate: \(error)")
+                Swift.debugPrint("Error fetching ExchangeRate: \(error)")
                 
                 let title = NSLocalizedString("Unable to fetch exchange rates", comment: "itle message of an alert that pops up when fetching exchange rates is impossibl")
                 let message = NSLocalizedString("Fetching exchange rates is not possible at this moment. Check your internet connection and/or hit solve to fetch all missing exchange rates at a later time", comment: "Message explaining what the user can do to refetch exchange rates")

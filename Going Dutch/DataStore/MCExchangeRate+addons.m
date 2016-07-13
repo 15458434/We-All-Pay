@@ -23,6 +23,13 @@
 {
     NSParameterAssert(completionHandler);
     self.status = [NSNumber numberWithShort:MCExchangeRateStatusFetching];
+    // If equal just set the exchangeRate to a value of 1.
+    if ([self.fromCurrency isEqualToMCCurrency:self.toCurrency]) {
+        self.exchangeRate = @(1);
+        self.status = [NSNumber numberWithShort:MCExchangeRateStatusValid];
+        completionHandler(nil);
+        return;
+    }
     ExchangeRateFetcher *fetcher = [[MCWeAllPayStoreController defaultStore] fetcher];
     __weak typeof(self) weakSelf = self;
     [fetcher exchangeRate:self.fromCurrency.code toCode:self.toCurrency.code completionHandler:^(NSString * fromCode, NSString * toCode, NSNumber * exchangeRate, NSError * error) {
