@@ -36,25 +36,25 @@
 		</dict>
 	</array>
 	<key>CFBundleVersion</key>
-	<string>110</string>
+	<string>111</string>
 	<key>LSRequiresIPhoneOS</key>
 	<true/>
 	<key>NSAppTransportSecurity</key>
 	<dict>
 		<key>NSAllowArbitaryLoads</key>
 		<true/>
-        <key>NSExceptionDomains</key>
-        <dict>
-            <key>openexchangerates.org</key>
-            <dict>
-                <key>NSThirdPartyExceptionAllowsInsecureHTTPLoads</key>
-                <true/>
-                <key>NSThirdPartyExceptionMinimumTLSVersion</key>
-                <string>TLSv1.0</string>
-                <key>NSThirdPartyExceptionRequiresForwardSecrecy</key>
-                <false/>
-            </dict>
-        </dict>
+		<key>NSExceptionDomains</key>
+		<dict>
+			<key>openexchangerates.org</key>
+			<dict>
+				<key>NSThirdPartyExceptionAllowsInsecureHTTPLoads</key>
+				<true/>
+				<key>NSThirdPartyExceptionMinimumTLSVersion</key>
+				<string>TLSv1.0</string>
+				<key>NSThirdPartyExceptionRequiresForwardSecrecy</key>
+				<false/>
+			</dict>
+		</dict>
 	</dict>
 	<key>UIFileSharingEnabled</key>
 	<false/>
