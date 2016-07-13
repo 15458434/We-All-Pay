@@ -26,7 +26,6 @@
 @interface MCSharedBillTableViewController ()
 
 @property (nonatomic, strong) NSFetchedResultsController *dataController;
-@property (nonatomic, strong) UIAlertView *payerMissingAlertView;
 
 @end
 
@@ -196,27 +195,6 @@
     NSDictionary *userInfo = [notification userInfo];
     _writableTonightsBill = [userInfo objectForKey:MCwritableTonightsBillKey];
     NSLog(@"WritableTonightsBillIsCreated has been executed.");
-}
-
-#pragma mark - UIAlertViewDelegate
-
-- (void)alertView:(UIAlertView *)alertView clickedButtonAtIndex:(NSInteger)buttonIndex
-{
-    if (alertView == _payerMissingAlertView) {
-        switch (buttonIndex) {
-            case 0:
-                // Cancel button.
-                NSLog(@"Cancel pressed: I'm not doing anything.");
-                break;
-            case 1:
-                // Go To button.
-                // Open first payment with missing payer.
-                [self openFirstPaymentWithoutAPayer];
-                break;
-            default:
-                break;
-        }
-    }
 }
 
 #pragma mark - UITextFieldDelegate

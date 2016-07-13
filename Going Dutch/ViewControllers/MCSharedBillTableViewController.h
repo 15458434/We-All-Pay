@@ -27,7 +27,7 @@
 
 @end
 
-@interface MCSharedBillTableViewController : UITableViewController <NSFetchedResultsControllerDelegate, MFMailComposeViewControllerDelegate, UIAlertViewDelegate, UITextFieldDelegate, MCTonightsBillTransfer, MCIndexProtocol>
+@interface MCSharedBillTableViewController : UITableViewController <NSFetchedResultsControllerDelegate, MFMailComposeViewControllerDelegate, UITextFieldDelegate, MCTonightsBillTransfer, MCIndexProtocol>
 {
     __strong IBOutlet MCTwoLabelsTitleView *twoLabelTitleView;
     MCTableEmptyMessage *emptyMessage;
