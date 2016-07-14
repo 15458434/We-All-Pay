@@ -28,7 +28,6 @@ typedef NS_ENUM(BOOL, MCXRatesMissing) {
 @property (nonatomic, strong) NSArray<ReturnPayment *> *solution;
 
 @property (nonatomic) MCXRatesMissing areXRatesMissing;
-@property (nonatomic, strong) UIAlertView *noXRatesAlert;
 
 @property (nonatomic, strong) MCTableEmptyMessage *emptyMessage;
 
@@ -244,39 +243,6 @@ typedef NS_ENUM(BOOL, MCXRatesMissing) {
 - (BOOL)shouldPresentInterstitialAd
 {
     return NO;
-}
-
-#pragma mark - UIAlertViewDelegate
-
-- (void)alertView:(UIAlertView *)alertView clickedButtonAtIndex:(NSInteger)buttonIndex
-{
-    if (alertView == _noXRatesAlert) {
-        switch (buttonIndex) {
-            case 0:
-                NSLog(@"No xRates Fetch.");
-                break;
-            case 1:
-                NSLog(@"Yes xRates Fetch.");
-                [self giveSolution];
-                break;
-            default:
-                break;
-        }
-    } else {
-        switch (buttonIndex) {
-            case 0:
-#if DEBUG
-                NSLog(@"Cancel button pressed");
-#endif
-                break;
-            case 1:
-                [self openMailView:self];
-                break;
-            default:
-                NSAssert(false, @"Wrong button index.");
-                break;
-        }
-    }
 }
 
 #pragma mark - MFMailComposeViewControllerDelegate
