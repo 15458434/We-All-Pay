@@ -120,6 +120,15 @@
 }
 
 #pragma mark - UIApplicationDelegate
+- (BOOL)application:(UIApplication *)application willContinueUserActivityWithType:(NSString *)userActivityType
+{
+    if ([userActivityType isEqualToString:@"com.GreenHair.We-all-pay.SharingExpenses"]) {
+        return YES;
+    } else {
+        return NO;
+    }
+}
+
 - (BOOL)application:(UIApplication *)application continueUserActivity:(NSUserActivity *)userActivity restorationHandler:(void (^)(NSArray * _Nullable))restorationHandler
 {
     return YES;

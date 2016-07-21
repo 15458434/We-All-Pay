@@ -37,6 +37,10 @@
 	</array>
 	<key>CFBundleVersion</key>
 	<string>112</string>
+	<key>NSUserActivityTypes</key>
+	<array>
+		<string>com.GreenHair.We-all-pay.SharingExpenses</string>
+	</array>
 	<key>LSRequiresIPhoneOS</key>
 	<true/>
 	<key>NSAppTransportSecurity</key>

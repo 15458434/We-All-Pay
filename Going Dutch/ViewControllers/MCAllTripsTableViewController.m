@@ -112,7 +112,7 @@ typedef NS_ENUM(BOOL, MCTonightsBillStatus) {
     }
 }
 
-#pragma mark - Inherited from super
+#pragma mark - UIViewController
 
 - (void)awakeFromNib
 {
