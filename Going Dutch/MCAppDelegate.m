@@ -34,7 +34,9 @@
 
 - (void)activateAnalytics
 {
+#if DEBUG
     [FIRApp configure];
+#endif
 }
 
 - (void)removeOldCurrencyStore

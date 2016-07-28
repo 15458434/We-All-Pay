@@ -17,6 +17,8 @@ class SelectCurrencyTableViewController: UITableViewController, UISearchResultsU
     
     var thisPayment: MCPayment!
     
+    var recentUsedForeignCurrencies: [MCCurrency]!
+    
     let collation = UILocalizedIndexedCollation.currentCollation()
     var currencies: [Currency]! {
         didSet {
@@ -108,6 +110,8 @@ class SelectCurrencyTableViewController: UITableViewController, UISearchResultsU
         super.viewWillAppear(animated)
         
         searchController.searchBar.sizeToFit()
+        
+        self.recentUsedForeignCurrencies = thisPayment!.onWhichBill.recentUsedForeignCurrencies() ?? [MCCurrency]()
     }
     
     // MARK: UI Search Results Updating
@@ -168,17 +172,17 @@ class SelectCurrencyTableViewController: UITableViewController, UISearchResultsU
     
     // MARK: UI Table View Data Source
     
-    override func tableView(tableView: UITableView, titleForHeaderInSection section: Int) -> String? {
-        return collation.sectionTitles[section]
-    }
-    
-    override func sectionIndexTitlesForTableView(tableView: UITableView) -> [String]? {
-        return collation.sectionIndexTitles
-    }
-    
-    override func tableView(tableView: UITableView, sectionForSectionIndexTitle title: String, atIndex index: Int) -> Int {
-        return collation.sectionForSectionIndexTitleAtIndex(index)
-    }
+//    override func tableView(tableView: UITableView, titleForHeaderInSection section: Int) -> String? {
+//        return collation.sectionTitles[section]
+//    }
+//    
+//    override func sectionIndexTitlesForTableView(tableView: UITableView) -> [String]? {
+//        return collation.sectionIndexTitles
+//    }
+//    
+//    override func tableView(tableView: UITableView, sectionForSectionIndexTitle title: String, atIndex index: Int) -> Int {
+//        return collation.sectionForSectionIndexTitleAtIndex(index)
+//    }
     
     override func numberOfSectionsInTableView(tableView: UITableView) -> Int {
         if searchActive {

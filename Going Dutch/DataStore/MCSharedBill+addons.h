@@ -53,4 +53,6 @@
 
 - (void)deleteIfStillNew;
 
+- (NSArray<MCCurrency *>*)recentUsedForeignCurrencies;
+
 @end

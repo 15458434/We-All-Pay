@@ -596,6 +596,29 @@
     }
 }
 
+- (NSArray<MCCurrency *> *)recentUsedForeignCurrencies
+{
+    // Prepare NSFetchRequest
+    NSFetchRequest *request = [[NSFetchRequest alloc] initWithEntityName:@"MCCurrency"];
+    request.sortDescriptors = @[[NSSortDescriptor sortDescriptorWithKey:@"dateCreated" ascending:YES]];
+    request.predicate = [NSPredicate predicateWithFormat:@"ANY payment.onWhichBill.uniqueBillId LIKE %@ AND NOT code LIKE %@", self.uniqueBillId, self.mainCurrency.code];
+    
+    // Execute fetch request
+    NSError *fetchError;
+    NSManagedObjectContext *context = self.managedObjectContext;
+    NSArray<MCCurrency *> *results = (NSArray<MCCurrency *> *)[context executeFetchRequest:request error:&fetchError];
+    
+    // Parse results.
+    if (fetchError) {
+#if DEBUG
+        NSLog(@"Error fetching recentUsedCurrencies: %@", fetchError.description);
+#endif
+        return nil;
+    }
+    
+    return results;
+}
+
 #pragma mark - NSManagedObject Stuff
 
 @end

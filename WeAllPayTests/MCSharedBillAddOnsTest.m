@@ -496,4 +496,27 @@
     XCTAssertTrue([firstPaymentWithoutAPayer isEqual:paymentWithoutAPayer], @"These two should be the same.");
 }
 
+- (void)testRecentUsedForeignCurrencies
+{
+    MCSharedBill *tonightsBill = [MCSharedBill addSharedBillToContext:_context];
+    MCPerson *mark = [tonightsBill addPerson];
+    mark.firstName = @"Mark";
+    MCPerson *merit = [tonightsBill addPerson];
+    merit.firstName = @"Merit";
+    MCCurrency *aud = [MCCurrency currencyFrom:@"AUD" fromContext:_context];
+    MCPayment *payment = [tonightsBill addPayment];
+    payment.payingPerson = mark;
+    payment.currency = aud;
+    MCCurrency *mainCurrency = [MCCurrency generateCurrencyFromSelectedLocaleForContext:_context];
+    MCPayment *homePayment = [tonightsBill addPayment];
+    homePayment.payingPerson = merit;
+    homePayment.currency = mainCurrency;
+    NSArray<MCCurrency *> *foreignCurrencies = [tonightsBill recentUsedForeignCurrencies];
+
+    XCTAssertTrue(foreignCurrencies.count > 0, @"There can only be multiple foreign currencies");
+    for (MCCurrency *currency in foreignCurrencies) {
+        XCTAssertTrue([currency.code isEqualToString:@"AUD"], @"Only foreign currency should be Australian Dollar");
+    }
+}
+
 @end
