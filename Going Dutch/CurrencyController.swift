@@ -15,7 +15,9 @@ public class Currency: NSObject {
         return NSLocale.currentLocale().displayNameForKey(NSLocaleCurrencySymbol, value: code) ?? ""
     }
     
-    init(name: String, code: String) {
+    // MARK: NSObject
+    
+    public init(name: String, code: String) {
         self.name = name
         self.code = code
         super.init()
@@ -41,6 +43,8 @@ public class CurrencyController: NSObject {
     public func currencySymbol(code: String) -> String {
         return NSLocale.currentLocale().displayNameForKey(NSLocaleCurrencySymbol, value: code) ?? ""
     }
+    
+    // MARK: NSObject
     
     public override init() {
         let currencyFilePath = NSBundle(identifier: "com.GreenHair.CurrencyConverter")!.pathForResource("Available Currencies", ofType: "plist")

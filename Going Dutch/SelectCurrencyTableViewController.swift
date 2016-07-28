@@ -129,14 +129,22 @@ class SelectCurrencyTableViewController: UITableViewController, UISearchResultsU
     // MARK: UI Table View Delegate
     
     override func tableView(tableView: UITableView, didSelectRowAtIndexPath indexPath: NSIndexPath) {
+        func data(indexPath: NSIndexPath) -> Currency {
+            switch (searchActive, recentUsedForeignCurrencies?.count ?? 0, indexPath.section) {
+            case let (searchActive, _, _) where searchActive == true:
+                return filteredCurrencies[indexPath.row];
+            case let (searchActive, rc, section) where searchActive == false && rc > 0 && section == 0:
+                let result = recentUsedForeignCurrencies[indexPath.row]
+                return Currency(name: result.name, code: result.code)
+            case let (searchActive, rc, section) where searchActive == false && rc > 0 && section > 0:
+                return sections[section - 1][indexPath.row]
+            default:
+                return sections[indexPath.section][indexPath.row]
+            }
+        }
         let myPresenter = self.presentingViewController
         
-        let thisCellsCurrency: Currency
-        if searchActive {
-            thisCellsCurrency = filteredCurrencies[indexPath.row]
-        } else {
-            thisCellsCurrency = sections[indexPath.section][indexPath.row]
-        }
+        let thisCellsCurrency = data(indexPath)
         
         let mainThreadContext = MCWeAllPayStoreController.defaultStore().mainThreadContext
         let newCurrency = MCCurrency(from: thisCellsCurrency.code, fromContext: mainThreadContext)
@@ -172,43 +180,79 @@ class SelectCurrencyTableViewController: UITableViewController, UISearchResultsU
     
     // MARK: UI Table View Data Source
     
-//    override func tableView(tableView: UITableView, titleForHeaderInSection section: Int) -> String? {
-//        return collation.sectionTitles[section]
-//    }
-//    
-//    override func sectionIndexTitlesForTableView(tableView: UITableView) -> [String]? {
-//        return collation.sectionIndexTitles
-//    }
-//    
-//    override func tableView(tableView: UITableView, sectionForSectionIndexTitle title: String, atIndex index: Int) -> Int {
-//        return collation.sectionForSectionIndexTitleAtIndex(index)
-//    }
+    override func tableView(tableView: UITableView, titleForHeaderInSection section: Int) -> String? {
+        func data(section: Int) -> String {
+            switch (searchActive, recentUsedForeignCurrencies?.count ?? 0, section) {
+            case let (searchActive, rc, section) where searchActive == false && rc > 0 && section == 0:
+                return NSLocalizedString("Recent", comment: "Message to the user that this section in the tableview contains recently used foreign currencies")
+            case let (searchActive, rc, section) where searchActive == false && rc > 0 && section > 0:
+                return collation.sectionTitles[section - 1]
+            default:
+                return collation.sectionTitles[section]
+            }
+        }
+        return data(section)
+    }
+
+    override func sectionIndexTitlesForTableView(tableView: UITableView) -> [String]? {
+        var result = collation.sectionIndexTitles
+        result.insert(NSLocalizedString("!", comment: "Symbol for recent used currencies"), atIndex: 0)
+        return result
+    }
+    
+    override func tableView(tableView: UITableView, sectionForSectionIndexTitle title: String, atIndex index: Int) -> Int {
+        switch (searchActive, recentUsedForeignCurrencies?.count ?? 0, index) {
+        case let (s, rc, i) where s == false && rc > 0 && i == 0:
+            return 0
+        case let (s, rc, i) where s == false && rc > 0 && i > 0:
+            return collation.sectionForSectionIndexTitleAtIndex(index - 1) + 1
+        default:
+            return collation.sectionForSectionIndexTitleAtIndex(index)
+        }
+        
+    }
     
     override func numberOfSectionsInTableView(tableView: UITableView) -> Int {
-        if searchActive {
+        switch (searchActive, recentUsedForeignCurrencies?.count ?? 0) {
+        case let (s, _) where s == true:
             return 1
-        } else {
+        case let (s, rc) where s == false && rc > 0:
+            return sections.count + 1
+        default:
             return sections.count
         }
     }
     
     override func tableView(tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
-        if searchActive {
+        switch (searchActive, recentUsedForeignCurrencies?.count ?? 0, section) {
+        case let (searchActive, _, _) where searchActive == true:
             return filteredCurrencies.count
-        } else {
+        case let (searchActive, rc, section) where searchActive == false && rc > 0 && section == 0:
+            return recentUsedForeignCurrencies.count
+        case let (searchActive, rc, section) where searchActive == false && rc > 0 && section > 0:
+            return sections[section - 1].count
+        default:
             return sections[section].count
         }
     }
     
     override func tableView(tableView: UITableView, cellForRowAtIndexPath indexPath: NSIndexPath) -> UITableViewCell {
-        let cell = tableView.dequeueReusableCellWithIdentifier("MCSelectCurrencyTableViewCell_iPhone", forIndexPath: indexPath) as! MCSelectCurrencyTableViewCell_iPhone
-        
-        let thisCellsCurrency: Currency
-        if searchActive {
-            thisCellsCurrency = filteredCurrencies[indexPath.row]
-        } else {
-            thisCellsCurrency = sections[indexPath.section][indexPath.row]
+        func data(indexPath: NSIndexPath) -> Currency {
+            switch (searchActive, recentUsedForeignCurrencies?.count ?? 0, indexPath.section) {
+            case let (searchActive, _, _) where searchActive == true:
+                return filteredCurrencies[indexPath.row];
+            case let (searchActive, rc, section) where searchActive == false && rc > 0 && section == 0:
+                let result = recentUsedForeignCurrencies[indexPath.row]
+                return Currency(name: result.name, code: result.code)
+            case let (searchActive, rc, section) where searchActive == false && rc > 0 && section > 0:
+                return sections[section - 1][indexPath.row]
+            default:
+                return sections[indexPath.section][indexPath.row]
+            }
         }
+        let cell = tableView.dequeueReusableCellWithIdentifier("MCSelectCurrencyTableViewCell_iPhone", forIndexPath: indexPath) as! MCSelectCurrencyTableViewCell_iPhone
+
+        let thisCellsCurrency = data(indexPath)
         
         cell.currencyNameLabel.text = thisCellsCurrency.name
         cell.currencySymbolLabel.text = thisCellsCurrency.symbol
