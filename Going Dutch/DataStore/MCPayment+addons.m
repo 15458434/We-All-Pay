@@ -165,8 +165,8 @@
 
 - (void)recalculateAveragePeopleOweAndStore
 {
-#if DEBUG
-    NSLog(@"%@ recalculateAveragePeopleOweAndStore", self);
+#ifdef DEBUG
+    NSLog(@"recalculateAveragePeopleOweAndStore: %@", self);
 #endif
     NSNumber *averagePayedByPeoplePresent = [self averageAmountPeopleShouldHavePaidOnThisPayment];
     NSDate *now = [NSDate date];

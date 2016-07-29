@@ -108,7 +108,7 @@
         if ([people count] == 0) {
             return YES;
         } else {
-#if DEBUG
+#ifdef DEBUG
             NSLog(@"sharedBills.count should not be 0.");
 #endif
             return NO;
@@ -610,7 +610,7 @@
     
     // Parse results.
     if (fetchError) {
-#if DEBUG
+#ifdef DEBUG
         NSLog(@"Error fetching recentUsedCurrencies: %@", fetchError.description);
 #endif
         return nil;

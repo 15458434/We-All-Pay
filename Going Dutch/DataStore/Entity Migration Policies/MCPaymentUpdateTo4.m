@@ -15,7 +15,7 @@
 {
     MCPayment *paymentInDestinationInstance = (MCPayment *)dInstance;
     paymentInDestinationInstance.categoryId = @(10);
-#if DEBUG
+#ifdef DEBUG
     NSLog(@"%@", paymentInDestinationInstance);
 #endif
     return YES;

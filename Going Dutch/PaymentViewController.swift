@@ -164,8 +164,8 @@ enum CancelButtonPressed {
         reloadCategoryImageView()
         setTextForCategoryButton()
         
-        let sortDescriptor = NSSortDescriptor(key: "person.firstName", ascending: true)
-        paymentPresenceArray = (thisPayment.peopleSharingPayment as NSSet).sortedArrayUsingDescriptors([sortDescriptor]) as! [MCPaymentPresence]
+//        let sortDescriptor = NSSortDescriptor(key: "person.firstName", ascending: true)
+//        paymentPresenceArray = (thisPayment.peopleSharingPayment as NSSet).sortedArrayUsingDescriptors([sortDescriptor]) as! [MCPaymentPresence]
         
         if dataController == nil {
             dataController = MCWeAllPayStoreController.defaultStore().paymentPresenceDataControllerForDelegate(self)
@@ -178,6 +178,8 @@ enum CancelButtonPressed {
         NSNotificationCenter.defaultCenter().removeObserver(self)
         dataController = nil
     }
+    
+    
     
     // MARK: DismissKeyboardProtocol
     func dismissTheKeyboard() {
@@ -243,24 +245,46 @@ enum CancelButtonPressed {
     
     // MARK: NS Fetched Results Controller Delegate
     func controllerWillChangeContent(controller: NSFetchedResultsController) {
+        debugPrint("controllerWillChangeContent")
         tableView.beginUpdates()
     }
     
     func controllerDidChangeContent(controller: NSFetchedResultsController) {
+        debugPrint("controllerDidChangeContent")
         tableView.endUpdates()
     }
     
     func controller(controller: NSFetchedResultsController, didChangeObject anObject: AnyObject, atIndexPath indexPath: NSIndexPath?, forChangeType type: NSFetchedResultsChangeType, newIndexPath: NSIndexPath?) {
-        switch (type) {
-        case .Insert:
-            tableView.insertRowsAtIndexPaths([newIndexPath!], withRowAnimation: .Fade)
-        case .Delete:
-            tableView.deleteRowsAtIndexPaths([indexPath!], withRowAnimation: .Fade)
-        case .Update:
-            tableView.reloadRowsAtIndexPaths([indexPath!], withRowAnimation: .Automatic)
-        case .Move:
-            tableView.deleteRowsAtIndexPaths([indexPath!], withRowAnimation: .Fade)
-            tableView.insertRowsAtIndexPaths([indexPath!], withRowAnimation: .Fade)
+        if #available(iOS 9, *) {
+            switch (type) {
+            case .Insert:
+                tableView.insertRowsAtIndexPaths([newIndexPath!], withRowAnimation: .Fade)
+            case .Delete:
+                tableView.deleteRowsAtIndexPaths([indexPath!], withRowAnimation: .Fade)
+            case .Update:
+                tableView.reloadRowsAtIndexPaths([indexPath!], withRowAnimation: .Automatic)
+            case .Move:
+                tableView.deleteRowsAtIndexPaths([indexPath!], withRowAnimation: .Fade)
+                tableView.insertRowsAtIndexPaths([indexPath!], withRowAnimation: .Fade)
+            }
+        } else {
+            switch (type) {
+            case .Insert:
+                if indexPath == nil {
+                    tableView.insertRowsAtIndexPaths([newIndexPath!], withRowAnimation: .Fade)
+                }
+            case .Delete:
+                tableView.deleteRowsAtIndexPaths([indexPath!], withRowAnimation: .Fade)
+            case .Update:
+                tableView.reloadRowsAtIndexPaths([indexPath!], withRowAnimation: .Automatic)
+            case .Move:
+                if indexPath == newIndexPath {
+                    tableView.reloadRowsAtIndexPaths([indexPath!], withRowAnimation: .Automatic)
+                } else {
+                    tableView.deleteRowsAtIndexPaths([indexPath!], withRowAnimation: .Fade)
+                    tableView.insertRowsAtIndexPaths([indexPath!], withRowAnimation: .Fade)
+                }
+            }
         }
     }
     
@@ -293,7 +317,7 @@ enum CancelButtonPressed {
         
         let constraintBetweenNameLabelAndPayerLabel = NSLayoutConstraint(item: selectButton, attribute: .Leading, relatedBy: .Equal, toItem: cell.nameLabel, attribute: .Leading, multiplier: 1.0, constant: 0.0)
         let constraintBetweenPictureInCellAndPictureOfPayer = NSLayoutConstraint(item: cell.personView, attribute: .Trailing, relatedBy: .Equal, toItem: categoryImage, attribute: .Trailing, multiplier: 1.0, constant: 0.0)
-        tableView.addConstraints([constraintBetweenNameLabelAndPayerLabel, constraintBetweenPictureInCellAndPictureOfPayer])
+        self.tableView.addConstraints([constraintBetweenNameLabelAndPayerLabel, constraintBetweenPictureInCellAndPictureOfPayer])
         
         return cell
     }
@@ -314,6 +338,7 @@ enum CancelButtonPressed {
                 self.reloadPayerView()
             }
         case let identifier where identifier == "openSelectCurrency_iPad":
+            MCWeAllPayStoreController.defaultStore().beginUndoGroupWithoutRegistration()
             let destination = segue.destinationViewController as! SelectCurrencyTableViewController
             destination.thisPayment = thisPayment
             
@@ -321,6 +346,7 @@ enum CancelButtonPressed {
             myPopover.delegate = self
             destination.dismissMe = { 
                 myPopover.dismissPopoverAnimated(true)
+                MCWeAllPayStoreController.defaultStore().endUndoGroupAndProcessWithoutRegistration()
             }
         case let identifier where identifier == "selectCategory_iPad":
             let destination = segue.destinationViewController as! SelectCategoryTableViewController
@@ -334,7 +360,7 @@ enum CancelButtonPressed {
                 self.setTextForCategoryButton()
             }
         default:
-            print("Unknown segue")
+            print("Unknown segue. The programmer must be stupid.")
             abort()
         }
     }

@@ -179,7 +179,7 @@ MCiCloudUse const isiCloudUsed = iCloudIsNotUsed;
 
 - (NSFetchedResultsController *)allTripsDataControllerForDelegate:(id)delegate
 {
-#if DEBUG
+#ifdef DEBUG
     NSLog(@"%@, allTripsDataControllerForDelegate", self);
 #endif
     NSParameterAssert([delegate conformsToProtocol:@protocol(NSFetchedResultsControllerDelegate)]);
@@ -197,7 +197,7 @@ MCiCloudUse const isiCloudUsed = iCloudIsNotUsed;
 
 - (NSFetchedResultsController *)sharedBillPaymentsDataControllerForDelegate:(id)delegate
 {
-#if DEBUG
+#ifdef DEBUG
     NSLog(@"%@, sharedBillPaymentsDataControllerForDelegate", self);
 #endif
     NSParameterAssert([delegate conformsToProtocol:@protocol(NSFetchedResultsControllerDelegate)]);
@@ -222,7 +222,7 @@ MCiCloudUse const isiCloudUsed = iCloudIsNotUsed;
 
 - (NSFetchedResultsController *)sharedBillPeoplePresentDataControllerForDelegate:(id)delegate
 {
-#if DEBUG
+#ifdef DEBUG
     NSLog(@"%@ sharedBillPeoplePresentDataControllerForDelegate", self);
 #endif
     NSParameterAssert([delegate conformsToProtocol:@protocol(NSFetchedResultsControllerDelegate)]);
@@ -244,7 +244,7 @@ MCiCloudUse const isiCloudUsed = iCloudIsNotUsed;
 
 - (NSFetchedResultsController *)paymentPresenceDataControllerForDelegate:(id)delegate
 {
-#if DEBUG
+#ifdef DEBUG
     NSLog(@"%@ paymentPresenceDataControllerForDelegate", self);
 #endif
     NSParameterAssert([delegate conformsToProtocol:@protocol(NSFetchedResultsControllerDelegate)]);
@@ -253,13 +253,10 @@ MCiCloudUse const isiCloudUsed = iCloudIsNotUsed;
     // What entities will be fetched.
     NSFetchRequest *request = [NSFetchRequest fetchRequestWithEntityName:@"MCPaymentPresence"];
     // How to sort the data.
-    [request setRelationshipKeyPathsForPrefetching:@[ @"person", @"payment", @"payment.currency", @"onWhichBill.mainCurrency", @"payment.exchangeRate" ]];
-    NSSortDescriptor *sortDescriptor = [NSSortDescriptor sortDescriptorWithKey:@"dateCreated" ascending:NO];
-    NSArray *sortDescriptorArray = @[sortDescriptor];
-    [request setSortDescriptors:sortDescriptorArray];
+    request.relationshipKeyPathsForPrefetching = @[ @"person", @"payment", @"payment.currency", @"onWhichBill.mainCurrency", @"payment.exchangeRate" ];
+    request.sortDescriptors = @[[NSSortDescriptor sortDescriptorWithKey:@"dateCreated" ascending:NO]];
     // Select only people from tonightsBill.
-    NSPredicate *predicate = [NSPredicate predicateWithFormat:@"payment = %@", thisPayment];
-    [request setPredicate:predicate];
+    request.predicate = [NSPredicate predicateWithFormat:@"payment = %@", thisPayment];
     
     // Create the FetchedResultsController.
     NSFetchedResultsController *dataController = [[NSFetchedResultsController alloc] initWithFetchRequest:request managedObjectContext:_mainThreadContext sectionNameKeyPath:nil cacheName:nil];
@@ -274,7 +271,7 @@ MCiCloudUse const isiCloudUsed = iCloudIsNotUsed;
 
 - (NSFetchedResultsController *)availableCurrencyControllerForDelegate:(id)delegate
 {
-#if DEBUG
+#ifdef DEBUG
     NSLog(@"%@ availableCurrencyControllerForDelegate", self);
 #endif
     NSParameterAssert([delegate conformsToProtocol:@protocol(NSFetchedResultsControllerDelegate)]);
@@ -413,19 +410,19 @@ MCiCloudUse const isiCloudUsed = iCloudIsNotUsed;
 
 - (void)storeWillSave:(NSNotification *)notification
 {
-#if DEBUG
+#ifdef DEBUG
     NSLog(@"MCWeAllPayStoreController: Store will save.");
 #endif
 }
 
 - (void)storeDidSave:(NSNotification *)notification
 {
-#if DEBUG
+#ifdef DEBUG
     NSLog(@"MCWeAllPayStoreController: Store did save.");
 #endif
     if (notification.object != _mainThreadContext) {
         [_mainThreadContext performBlockAndWait:^{
-#if DEBUG
+#ifdef DEBUG
             NSLog(@"Merging changes into mainContext.");
 #endif
             [_mainThreadContext mergeChangesFromContextDidSaveNotification:notification];
@@ -433,7 +430,7 @@ MCiCloudUse const isiCloudUsed = iCloudIsNotUsed;
     }
     if (notification.object != _backgroundThreadContext) {
         [_backgroundThreadContext performBlockAndWait:^{
-#if DEBUG
+#ifdef DEBUG
             NSLog(@"Merging changes into backgroundContext.");
 #endif
             [_backgroundThreadContext mergeChangesFromContextDidSaveNotification:notification];
@@ -443,7 +440,7 @@ MCiCloudUse const isiCloudUsed = iCloudIsNotUsed;
 
 - (void)storeWillBeSwapped:(NSNotification *)notification
 {
-#if DEBUG
+#ifdef DEBUG
     NSLog(@"MCWeAllPayStoreController: Store will be swapped.");
 #endif
     // Has main Context changes if yes save.
@@ -467,14 +464,14 @@ MCiCloudUse const isiCloudUsed = iCloudIsNotUsed;
 
 - (void)storeDidSwap:(NSNotification *)notification
 {
-#if DEBUG
+#ifdef DEBUG
     NSLog(@"MCWeAllPayStoreController: Store did swap.");
 #endif
 }
 
 - (void)storedidUpdateFromUbiquitousContainer:(NSNotification *)notification
 {
-#if DEBUG
+#ifdef DEBUG
     NSLog(@"MCWeAllPayStoreController: Store did update from Ubiquitous Container.");
 #endif
     [_mainThreadContext performBlockAndWait:^{
@@ -502,7 +499,7 @@ MCiCloudUse const isiCloudUsed = iCloudIsNotUsed;
         _mainThreadContext.mergePolicy = NSMergeByPropertyObjectTrumpMergePolicy;
         [_mainThreadContext setPersistentStoreCoordinator:coordinator];
     }
-#if DEBUG
+#ifdef DEBUG
     NSLog(@"mainThreadContext has been created.");
 #endif
     return _mainThreadContext;
@@ -520,7 +517,7 @@ MCiCloudUse const isiCloudUsed = iCloudIsNotUsed;
         _backgroundThreadContext.mergePolicy = NSMergeByPropertyObjectTrumpMergePolicy;
         [_backgroundThreadContext setPersistentStoreCoordinator:coordinator];
     }
-#if DEBUG
+#ifdef DEBUG
     NSLog(@"backgroundThreadContext has been created.");
 #endif
     return _backgroundThreadContext;

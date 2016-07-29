@@ -34,7 +34,7 @@
 
 - (void)activateAnalytics
 {
-#if DEBUG
+#ifndef DEBUG
     [FIRApp configure];
 #endif
 }
@@ -86,7 +86,7 @@
         NSLog(@"%@ running iOS %@", [[UIDevice currentDevice] model], [[UIDevice currentDevice] systemVersion]);
         NSLog(@"I dedicate this program to Ilse Béguin, the most wonderful woman in the world who brought herself into my life, when I was developing the first version of this App.");
     }];
-#if DEBUG
+#ifdef DEBUG
     NSLocale *locale = [NSLocale currentLocale];
     NSString *languageCode = [locale objectForKey:NSLocaleLanguageCode];
     NSLog(@"The current language code is: %@", languageCode);

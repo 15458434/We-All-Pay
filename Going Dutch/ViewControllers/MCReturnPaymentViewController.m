@@ -53,7 +53,7 @@ typedef NS_ENUM(BOOL, MCXRatesMissing) {
 
 - (void)openMailView:(id)sender
 {
-#if DEBUG
+#ifdef DEBUG
     NSLog(@"%@ openMailView:%@", self, sender);
 #endif
     if ([MFMailComposeViewController canSendMail]) {

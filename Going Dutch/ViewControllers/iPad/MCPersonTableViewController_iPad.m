@@ -214,7 +214,7 @@ typedef NS_ENUM(BOOL, MCStatus) {
 - (BOOL)textFieldShouldEndEditing:(UITextField *)textField
 {
     if (textField == _emailField) {
-#if DEBUG
+#ifdef DEBUG
         NSLog(@"should dismiss emailField");
 #endif
         if ([MCTools isStringAnEmailAddress:[_emailField text]]) {

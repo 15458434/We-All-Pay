@@ -130,6 +130,7 @@ class SelectCurrencyTableViewController: UITableViewController, UISearchResultsU
     
     override func tableView(tableView: UITableView, didSelectRowAtIndexPath indexPath: NSIndexPath) {
         func data(indexPath: NSIndexPath) -> Currency {
+            debugPrint("didSelectRowAtIndexPath: \(indexPath)")
             switch (searchActive, recentUsedForeignCurrencies?.count ?? 0, indexPath.section) {
             case let (searchActive, _, _) where searchActive == true:
                 return filteredCurrencies[indexPath.row];
@@ -171,8 +172,8 @@ class SelectCurrencyTableViewController: UITableViewController, UISearchResultsU
             
         }
         
-        if dismissMe != nil {
-            dismissMe!()
+        if let dismissMe = dismissMe {
+            dismissMe()
         } else {
             navigationController!.presentingViewController!.dismissViewControllerAnimated(true, completion: nil)
         }

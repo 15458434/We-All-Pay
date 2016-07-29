@@ -21,7 +21,7 @@
 
 + (MCCurrency *)generateCurrencyFromSelectedLocaleForContext:(NSManagedObjectContext *)context;
 {
-#if DEBUG
+#ifdef DEBUG
     NSLog(@"%@ generateCurrencyFromSelectedLocaleForContext", self);
 #endif
     NSParameterAssert(context);
