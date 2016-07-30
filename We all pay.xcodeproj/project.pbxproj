@@ -13,8 +13,6 @@
 		380700A51A1B616000C7FB37 /* MCPaymentUpdateTo4.m in Sources */ = {isa = PBXBuildFile; fileRef = 380700A41A1B616000C7FB37 /* MCPaymentUpdateTo4.m */; };
 		380C48161BE1330E00C82B0F /* CurrencyFormatter.swift in Sources */ = {isa = PBXBuildFile; fileRef = 380C48151BE1330E00C82B0F /* CurrencyFormatter.swift */; };
 		380D31E71D2A93AE001CB279 /* GoogleService-Info.plist in Resources */ = {isa = PBXBuildFile; fileRef = 380D31E61D2A93AE001CB279 /* GoogleService-Info.plist */; };
-		380D61241B299D99006F8AE4 /* PaymentsSwipeDirectionHint.swift in Sources */ = {isa = PBXBuildFile; fileRef = 380D61231B299D99006F8AE4 /* PaymentsSwipeDirectionHint.swift */; };
-		380D61261B29ACA8006F8AE4 /* HintsController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 380D61251B29ACA8006F8AE4 /* HintsController.swift */; };
 		381179D01A82D1FC00020538 /* MCMailComposer.swift in Sources */ = {isa = PBXBuildFile; fileRef = 381179CF1A82D1FC00020538 /* MCMailComposer.swift */; };
 		381205781D4B7FE0008FFDD1 /* NSIndexPathComparableExtension.swift in Sources */ = {isa = PBXBuildFile; fileRef = 381205771D4B7FE0008FFDD1 /* NSIndexPathComparableExtension.swift */; };
 		381275FF1BBD84650004C8C2 /* InfoScreenTableViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 381275FE1BBD84650004C8C2 /* InfoScreenTableViewController.swift */; };
@@ -308,8 +306,6 @@
 		3807560019F9445800489ED4 /* NotificationCenter.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = NotificationCenter.framework; path = System/Library/Frameworks/NotificationCenter.framework; sourceTree = SDKROOT; };
 		380C48151BE1330E00C82B0F /* CurrencyFormatter.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = CurrencyFormatter.swift; sourceTree = "<group>"; };
 		380D31E61D2A93AE001CB279 /* GoogleService-Info.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; path = "GoogleService-Info.plist"; sourceTree = "<group>"; };
-		380D61231B299D99006F8AE4 /* PaymentsSwipeDirectionHint.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = PaymentsSwipeDirectionHint.swift; sourceTree = "<group>"; };
-		380D61251B29ACA8006F8AE4 /* HintsController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = HintsController.swift; sourceTree = "<group>"; };
 		381179CE1A82D1FC00020538 /* We all pay Tests-Bridging-Header.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; name = "We all pay Tests-Bridging-Header.h"; path = "../Going Dutch/We all pay Tests-Bridging-Header.h"; sourceTree = "<group>"; };
 		381179CF1A82D1FC00020538 /* MCMailComposer.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = MCMailComposer.swift; path = Misc/MCMailComposer.swift; sourceTree = "<group>"; };
 		381205771D4B7FE0008FFDD1 /* NSIndexPathComparableExtension.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = NSIndexPathComparableExtension.swift; sourceTree = "<group>"; };
@@ -1014,7 +1010,6 @@
 				3825A82319990BA400A8885D /* UIViewController+WeAllPayStore.m */,
 				381205771D4B7FE0008FFDD1 /* NSIndexPathComparableExtension.swift */,
 				386173A01A53453A000C2EE5 /* ADoriginate.swift */,
-				380D61251B29ACA8006F8AE4 /* HintsController.swift */,
 				388A32741C11EA1400F7459C /* WhoPayingUserDefaultsStoreInterfaceWeAllPayExtension.swift */,
 			);
 			name = "MC SDK";
@@ -1081,7 +1076,6 @@
 				38977E501B2A277A008484A4 /* MCOneLabelIScreenTableViewCell.swift */,
 				38977E4E1B2A26D4008484A4 /* MCTwoLabelIscreenTableViewCell.swift */,
 				38977E4C1B2A2591008484A4 /* MCSelectCategoryTableViewCell_iPhone.swift */,
-				380D61231B299D99006F8AE4 /* PaymentsSwipeDirectionHint.swift */,
 			);
 			name = iPhone;
 			sourceTree = "<group>";
@@ -1620,7 +1614,6 @@
 				38E2CB461BC2A8E10092B5C8 /* PersonTableViewCell_iPad.swift in Sources */,
 				38977E611B2A367E008484A4 /* MCPaymentTableViewCell.swift in Sources */,
 				389DE8F1197FB2B900169645 /* MCPerson.m in Sources */,
-				380D61241B299D99006F8AE4 /* PaymentsSwipeDirectionHint.swift in Sources */,
 				38DB85DA17E45DEA006237CF /* MCPerson+addons.m in Sources */,
 				386173A11A53453A000C2EE5 /* ADoriginate.swift in Sources */,
 				38E2CB421BC2A6C60092B5C8 /* WhoOwesWhoTableViewCell_iPad.swift in Sources */,
@@ -1649,7 +1642,6 @@
 				387494D619F053E9001614CA /* WeAllPayStore2to4.xcmappingmodel in Sources */,
 				380C48161BE1330E00C82B0F /* CurrencyFormatter.swift in Sources */,
 				380700A51A1B616000C7FB37 /* MCPaymentUpdateTo4.m in Sources */,
-				380D61261B29ACA8006F8AE4 /* HintsController.swift in Sources */,
 				389FBD40198BDA1C003B4409 /* MCExchangeRate.m in Sources */,
 				3825A826199A2A5500A8885D /* MCTonightsBillTransfer.m in Sources */,
 				38977E551B2A2AE3008484A4 /* MCSelectCurrencyTableViewCell_iPhone.swift in Sources */,

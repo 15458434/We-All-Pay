@@ -129,10 +129,6 @@
     
     BOOL shouldAppearAsEditing = [_myParent isChildTableViewEditing];
     [[self tableView] setEditing:shouldAppearAsEditing animated:NO];
-    
-    // Don't show payment swipe hint anymore.
-    HintsController *controller = [[HintsController alloc] init];
-    controller.showHints = false;
 }
 
 - (void)viewWillDisappear:(BOOL)animated

@@ -24,7 +24,6 @@
 @property (weak, nonatomic) IBOutlet UIButton *addPersonButton;
 
 @property (weak, nonatomic) IBOutlet UIButton *contactsButton;
-@property (weak, nonatomic) IBOutlet PaymentsSwipeDirectionHintView *paymentsHintsView;
 
 @property (weak, nonatomic) IBOutlet UITextField *tripNameField;
 @property (weak, nonatomic) IBOutlet UIBarButtonItem *doneButton;
