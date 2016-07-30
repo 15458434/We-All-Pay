@@ -33,21 +33,21 @@
 
 - (void)storeWillSave:(NSNotification *)notification
 {
-#if DEBUG
+#ifdef DEBUG
     NSLog(@"%@addon: Store will save.", self);
 #endif
 }
 
 - (void)storeDidSave:(NSNotification *)notification
 {
-#if DEBUG
+#ifdef DEBUG
     NSLog(@"%@addon: Store did save.", self);
 #endif
 }
 
 - (void)storeWillBeSwapped:(NSNotification *)notification
 {
-#if DEBUG
+#ifdef DEBUG
     NSLog(@"%@addon: Store will be swapped.", self);
 #endif
     // Deactivate UI
@@ -55,7 +55,7 @@
 
 - (void)storeDidSwap:(NSNotification *)notification
 {
-#if DEBUG
+#ifdef DEBUG
     NSLog(@"%@addon: Store did swap.", self);
 #endif
     // Reactivate UI and refetch.
@@ -63,7 +63,7 @@
 
 - (void)storedidUpdateFromUbiquitousContainer:(NSNotification *)notification
 {
-#if DEBUG
+#ifdef DEBUG
     NSLog(@"%@addon: Store did update from Ubiquitous Container.", self);
 #endif
 }

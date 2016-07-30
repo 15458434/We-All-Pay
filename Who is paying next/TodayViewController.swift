@@ -21,9 +21,8 @@ class TodayViewController: UIViewController, NCWidgetProviding {
     var valid: Bool!
     
     func updateLocalOptionalsFromUserDefaults() -> Bool {
-        #if DEBUG
-            print("\(self): updateLocalOptionalsFromUserDefaults")
-        #endif
+        debugPrint("\(self): updateLocalOptionalsFromUserDefaults")
+    
         let userDefaultsInterface = WhoPayingUserDefaultsStoreInterface()
         
         if userDefaultsInterface.valid {
@@ -75,9 +74,7 @@ class TodayViewController: UIViewController, NCWidgetProviding {
     }
     
     func tappedInTheBackground(sender: AnyObject) {
-        #if DEBUG
-            println("I am tapped.")
-        #endif
+        debugPrint("I am tapped.")
         var urlString = "weallpay:///"
         if let validValue = valid {
             if validValue == true {
@@ -107,9 +104,7 @@ class TodayViewController: UIViewController, NCWidgetProviding {
         // If an error is encountered, use NCUpdateResult.Failed
         // If there's no update required, use NCUpdateResult.NoData
         // If there's an update, use NCUpdateResult.NewData
-        #if DEBUG
-            println("\(self): widgetPerformUpdateWithCompletionHandler")
-        #endif
+        debugPrint("\(self): widgetPerformUpdateWithCompletionHandler")
         if updateLocalOptionalsFromUserDefaults() {
             updateLabel()
             completionHandler(NCUpdateResult.NewData)

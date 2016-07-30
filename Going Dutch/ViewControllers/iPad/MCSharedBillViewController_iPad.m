@@ -133,7 +133,7 @@
 - (GADRequest *)generalAdRequest
 {
     GADRequest *request = [GADRequest request];
-#if DEBUG
+#ifdef DEBUG
     NSString *kiPhone5S = @"109c8d87d59d27b62a53157e313d1a49";
     NSString *kiPhone4S = @"87ebfc252a3675f03375aa13fce9286f";
     NSString *iPadRetina = @"63f51db641e29b85012042e407de3cba";
@@ -147,7 +147,7 @@
     BOOL isNotPurchased = ![[MCStoreInterface defaultStoreInterface] isProProductPurchased];
     if (isNotPurchased) {
         if (animate) {
-#if DEBUG
+#ifdef DEBUG
             NSLog(@"animating banner on screen.");
 #endif
             [UIView animateWithDuration:0.3 delay:0.0 options:UIViewAnimationOptionCurveEaseOut animations:^{
@@ -156,7 +156,7 @@
                 [[self view] layoutIfNeeded];
             } completion:nil];
         } else {
-#if DEBUG
+#ifdef DEBUG
             NSLog(@"putting banner on screen immediately.");
 #endif
             self.bottomLayoutConstraintToLeftContainerView.priority = UILayoutPriorityDefaultHigh - 1;
@@ -171,7 +171,7 @@
 - (void)putBannerOffScreen:(BOOL)animate
 {
     if (animate) {
-#if DEBUG
+#ifdef DEBUG
         NSLog(@"animating banner off screen.");
 #endif
         [UIView animateWithDuration:0.3 delay:0.0 options:UIViewAnimationOptionCurveEaseIn animations:^{
@@ -180,7 +180,7 @@
             [[self view] layoutIfNeeded];
         } completion:nil];
     } else {
-#if DEBUG
+#ifdef DEBUG
         NSLog(@"putting banner off screen immediately.");
 #endif
         self.bottomLayoutConstraintToLeftContainerView.priority = UILayoutPriorityDefaultHigh + 1;
@@ -363,7 +363,7 @@
         [self putBannerOffScreen:NO];
         [self updateBannerSize:size];
     } completion:^(id<UIViewControllerTransitionCoordinatorContext>  _Nonnull context) {
-#if DEBUG
+#ifdef DEBUG
         NSLog(@"Yes, I'm done.");
 #endif
     }];
@@ -394,7 +394,7 @@
     if (textField == _tripNameField) {
         return YES;
     } else {
-#if DEBUG
+#ifdef DEBUG
         NSLog(@"There is only one textField in this ViewController.");
 #endif
         return NO;

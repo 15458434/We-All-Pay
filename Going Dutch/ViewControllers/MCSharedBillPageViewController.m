@@ -41,7 +41,7 @@ NSInteger const maxPageIndex = 1;
 
 - (BOOL)toggleEditTableView:(id)sender
 {
-#if DEBUG
+#ifdef DEBUG
     NSNumber *freakyBooleaon = @([[[self viewControllers][0] tableView] isEditing]);
     NSLog(@"toggleEditTableView: %@", freakyBooleaon);
 #endif
@@ -59,7 +59,7 @@ NSInteger const maxPageIndex = 1;
 - (void)pageControlTapped:(id)sender
 {
     if (sender == _pageControl) {
-#if DEBUG
+#ifdef DEBUG
         NSLog(@"pageControlTapped to value: %ld", (long)_pageControl.currentPage);
 #endif
         NSInteger newIndex = _pageControl.currentPage;
@@ -210,7 +210,7 @@ NSInteger const maxPageIndex = 1;
 
 - (void)viewDidLoad
 {
-#if DEBUG
+#ifdef DEBUG
     NSLog(@"%@: viewDidLoad", self);
 #endif
     [super viewDidLoad];

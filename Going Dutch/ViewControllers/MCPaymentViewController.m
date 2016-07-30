@@ -108,7 +108,7 @@ typedef NS_ENUM(BOOL, ChildViewOpened) {
 
 - (IBAction)currencySelectionPressed:(id)sender
 {
-#if DEBUG
+#ifdef DEBUG
     NSLog(@"%@, currencySelectionPressed", self);
 #endif
     _kindOfPaidFieldDismiss = currencySelectionTapped;
@@ -309,7 +309,7 @@ typedef NS_ENUM(BOOL, ChildViewOpened) {
 - (void)textFieldDidEndEditing:(UITextField *)textField
 {
     if (textField == _paidView) {
-#if DEBUG
+#ifdef DEBUG
         NSLog(@"kindOfPaidFieldDismiss = %lu", (unsigned long)_kindOfPaidFieldDismiss);
 #endif
         if (_kindOfPaidFieldDismiss == cancelIsPressed) {
@@ -620,7 +620,7 @@ typedef NS_ENUM(BOOL, ChildViewOpened) {
  // Get the new view controller using [segue destinationViewController].
  // Pass the selected object to the new view controller.
      if ([[segue identifier] isEqualToString:@"openSelectCurrency"]) {
-#if DEBUG
+#ifdef DEBUG
          NSLog(@"%@, prepareForSegue openSelectCurrency", self);
 #endif
          _selectCurrencyTableViewController = isOpened;

@@ -16,6 +16,7 @@
 		380D61241B299D99006F8AE4 /* PaymentsSwipeDirectionHint.swift in Sources */ = {isa = PBXBuildFile; fileRef = 380D61231B299D99006F8AE4 /* PaymentsSwipeDirectionHint.swift */; };
 		380D61261B29ACA8006F8AE4 /* HintsController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 380D61251B29ACA8006F8AE4 /* HintsController.swift */; };
 		381179D01A82D1FC00020538 /* MCMailComposer.swift in Sources */ = {isa = PBXBuildFile; fileRef = 381179CF1A82D1FC00020538 /* MCMailComposer.swift */; };
+		381205781D4B7FE0008FFDD1 /* NSIndexPathComparableExtension.swift in Sources */ = {isa = PBXBuildFile; fileRef = 381205771D4B7FE0008FFDD1 /* NSIndexPathComparableExtension.swift */; };
 		381275FF1BBD84650004C8C2 /* InfoScreenTableViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 381275FE1BBD84650004C8C2 /* InfoScreenTableViewController.swift */; };
 		381276041BBD8F130004C8C2 /* InfoPlist.strings in Resources */ = {isa = PBXBuildFile; fileRef = 381276061BBD8F130004C8C2 /* InfoPlist.strings */; };
 		381276081BBE68F10004C8C2 /* InfoScreenContainerViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 381276071BBE68F10004C8C2 /* InfoScreenContainerViewController.swift */; };
@@ -311,6 +312,7 @@
 		380D61251B29ACA8006F8AE4 /* HintsController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = HintsController.swift; sourceTree = "<group>"; };
 		381179CE1A82D1FC00020538 /* We all pay Tests-Bridging-Header.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; name = "We all pay Tests-Bridging-Header.h"; path = "../Going Dutch/We all pay Tests-Bridging-Header.h"; sourceTree = "<group>"; };
 		381179CF1A82D1FC00020538 /* MCMailComposer.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = MCMailComposer.swift; path = Misc/MCMailComposer.swift; sourceTree = "<group>"; };
+		381205771D4B7FE0008FFDD1 /* NSIndexPathComparableExtension.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = NSIndexPathComparableExtension.swift; sourceTree = "<group>"; };
 		381275FE1BBD84650004C8C2 /* InfoScreenTableViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = InfoScreenTableViewController.swift; sourceTree = "<group>"; };
 		381276001BBD8F110004C8C2 /* nl */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = nl; path = nl.lproj/MainInterface.strings; sourceTree = "<group>"; };
 		381276011BBD8F120004C8C2 /* nl */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = nl; path = nl.lproj/InfoPlist.strings; sourceTree = "<group>"; };
@@ -654,10 +656,16 @@
 				380700A41A1B616000C7FB37 /* MCPaymentUpdateTo4.m */,
 				389DE9141982540D00169645 /* MCCurrency.h */,
 				389DE9151982540D00169645 /* MCCurrency.m */,
+				389DE90C197FD41900169645 /* MCCurrency+addons.h */,
+				389DE90D197FD41900169645 /* MCCurrency+addons.m */,
 				389DE8FE197FB2BA00169645 /* MCSharedBill.h */,
 				389DE8FF197FB2BA00169645 /* MCSharedBill.m */,
+				38DB85D517E45CA4006237CF /* MCSharedBill+addons.h */,
+				38DB85D617E45CA4006237CF /* MCSharedBill+addons.m */,
 				389DE8F8197FB2BA00169645 /* MCPayment.h */,
 				389DE8F9197FB2BA00169645 /* MCPayment.m */,
+				38DB85D217E45BCA006237CF /* MCPayment+addons.h */,
+				38DB85D317E45BCA006237CF /* MCPayment+addons.m */,
 				389DE8F5197FB2B900169645 /* MCPaymentPresence.h */,
 				389DE8F6197FB2B900169645 /* MCPaymentPresence.m */,
 				389DE8F2197FB2B900169645 /* MCEmailAddress.h */,
@@ -666,14 +674,8 @@
 				389DE8F0197FB2B900169645 /* MCPerson.m */,
 				38DB85D817E45DEA006237CF /* MCPerson+addons.h */,
 				38DB85D917E45DEA006237CF /* MCPerson+addons.m */,
-				389DE90C197FD41900169645 /* MCCurrency+addons.h */,
-				389DE90D197FD41900169645 /* MCCurrency+addons.m */,
 				389DE905197FBE8400169645 /* MCExchangeRate+addons.h */,
 				389DE906197FBE8400169645 /* MCExchangeRate+addons.m */,
-				38DB85D217E45BCA006237CF /* MCPayment+addons.h */,
-				38DB85D317E45BCA006237CF /* MCPayment+addons.m */,
-				38DB85D517E45CA4006237CF /* MCSharedBill+addons.h */,
-				38DB85D617E45CA4006237CF /* MCSharedBill+addons.m */,
 				389950A2191A90F1000B00BC /* MCPaymentPresence+addons.h */,
 				389950A3191A90F1000B00BC /* MCPaymentPresence+addons.m */,
 				38DB85DB17E45FB7006237CF /* MCEmailAddress+addons.h */,
@@ -1011,6 +1013,7 @@
 				381276091BBE74520004C8C2 /* UIViewExtension.swift */,
 				3825A82219990BA400A8885D /* UIViewController+WeAllPayStore.h */,
 				3825A82319990BA400A8885D /* UIViewController+WeAllPayStore.m */,
+				381205771D4B7FE0008FFDD1 /* NSIndexPathComparableExtension.swift */,
 				386173A01A53453A000C2EE5 /* ADoriginate.swift */,
 				380D61251B29ACA8006F8AE4 /* HintsController.swift */,
 				388A32741C11EA1400F7459C /* WhoPayingUserDefaultsStoreInterfaceWeAllPayExtension.swift */,
@@ -1670,6 +1673,7 @@
 				38E0C5EA18E9B2BD005A3F17 /* MCAllTripsTableViewController-iPad.m in Sources */,
 				3812760A1BBE74520004C8C2 /* UIViewExtension.swift in Sources */,
 				3892E3A417903EF00038894B /* MCEditTripViewController.m in Sources */,
+				381205781D4B7FE0008FFDD1 /* NSIndexPathComparableExtension.swift in Sources */,
 				381276081BBE68F10004C8C2 /* InfoScreenContainerViewController.swift in Sources */,
 				38977E571B2A2C57008484A4 /* MCPaymentPresenceTableViewCell_iPhone.swift in Sources */,
 				38DB85D417E45BCA006237CF /* MCPayment+addons.m in Sources */,
@@ -2200,6 +2204,7 @@
 				PROVISIONING_PROFILE = "";
 				"PROVISIONING_PROFILE[sdk=iphoneos*]" = "";
 				SDKROOT = iphoneos;
+				SWIFT_OPTIMIZATION_LEVEL = "-Owholemodule";
 				VALIDATE_PRODUCT = YES;
 			};
 			name = Release;

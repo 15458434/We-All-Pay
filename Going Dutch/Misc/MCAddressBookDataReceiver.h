@@ -27,7 +27,7 @@
 
 @property (weak, nonatomic) UIViewController *viewController;
 
-@property (nonatomic, strong) id delegate;
+@property (nonatomic, strong) id<MCAddressBookReceiverDelegate> delegate;
 @property (nonatomic, strong) MCPerson *thisPerson;
 @property (nonatomic, strong) MCSharedBill *tonightsBill;
 

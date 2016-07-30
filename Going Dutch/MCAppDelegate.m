@@ -34,7 +34,9 @@
 
 - (void)activateAnalytics
 {
+#ifndef DEBUG
     [FIRApp configure];
+#endif
 }
 
 - (void)removeOldCurrencyStore
@@ -84,7 +86,7 @@
         NSLog(@"%@ running iOS %@", [[UIDevice currentDevice] model], [[UIDevice currentDevice] systemVersion]);
         NSLog(@"I dedicate this program to Ilse Béguin, the most wonderful woman in the world who brought herself into my life, when I was developing the first version of this App.");
     }];
-#if DEBUG
+#ifdef DEBUG
     NSLocale *locale = [NSLocale currentLocale];
     NSString *languageCode = [locale objectForKey:NSLocaleLanguageCode];
     NSLog(@"The current language code is: %@", languageCode);
@@ -120,6 +122,15 @@
 }
 
 #pragma mark - UIApplicationDelegate
+- (BOOL)application:(UIApplication *)application willContinueUserActivityWithType:(NSString *)userActivityType
+{
+    if ([userActivityType isEqualToString:@"com.GreenHair.We-all-pay.SharingExpenses"]) {
+        return YES;
+    } else {
+        return NO;
+    }
+}
+
 - (BOOL)application:(UIApplication *)application continueUserActivity:(NSUserActivity *)userActivity restorationHandler:(void (^)(NSArray * _Nullable))restorationHandler
 {
     return YES;

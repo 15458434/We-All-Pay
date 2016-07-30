@@ -112,7 +112,7 @@ typedef NS_ENUM(BOOL, MCTonightsBillStatus) {
     }
 }
 
-#pragma mark - Inherited from super
+#pragma mark - UIViewController
 
 - (void)awakeFromNib
 {
@@ -224,7 +224,7 @@ typedef NS_ENUM(BOOL, MCTonightsBillStatus) {
 - (void)controllerDidChangeContent:(NSFetchedResultsController *)controller
 {
     if (self.isViewLoaded && self.view.window && _isATonightsBillOpened == isClosed) {
-#if DEBUG
+#ifdef DEBUG
         NSLog(@"executing tableView endUpdates");
 #endif
         [[self tableView] endUpdates];
@@ -358,7 +358,7 @@ typedef NS_ENUM(BOOL, MCTonightsBillStatus) {
 
 - (void)prepareForSegue:(UIStoryboardSegue *)segue sender:(id)sender
 {
-#if DEBUG
+#ifdef DEBUG
     NSLog(@"prepareForSegue: %@", [segue identifier]);
 #endif
     if ([[segue identifier] isEqualToString:@"newTonightsBill"]) {

@@ -108,7 +108,7 @@
         if ([people count] == 0) {
             return YES;
         } else {
-#if DEBUG
+#ifdef DEBUG
             NSLog(@"sharedBills.count should not be 0.");
 #endif
             return NO;
@@ -594,6 +594,29 @@
             }
         }
     }
+}
+
+- (NSArray<MCCurrency *> *)recentUsedForeignCurrencies
+{
+    // Prepare NSFetchRequest
+    NSFetchRequest *request = [[NSFetchRequest alloc] initWithEntityName:@"MCCurrency"];
+    request.sortDescriptors = @[[NSSortDescriptor sortDescriptorWithKey:@"dateCreated" ascending:YES]];
+    request.predicate = [NSPredicate predicateWithFormat:@"ANY payment.onWhichBill.uniqueBillId LIKE %@ AND NOT code LIKE %@", self.uniqueBillId, self.mainCurrency.code];
+    
+    // Execute fetch request
+    NSError *fetchError;
+    NSManagedObjectContext *context = self.managedObjectContext;
+    NSArray<MCCurrency *> *results = (NSArray<MCCurrency *> *)[context executeFetchRequest:request error:&fetchError];
+    
+    // Parse results.
+    if (fetchError) {
+#ifdef DEBUG
+        NSLog(@"Error fetching recentUsedCurrencies: %@", fetchError.description);
+#endif
+        return nil;
+    }
+    
+    return results;
 }
 
 #pragma mark - NSManagedObject Stuff

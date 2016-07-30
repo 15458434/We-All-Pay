@@ -229,6 +229,9 @@
 /* Text of the Rate me button */
 "Rate me" = "Waardeer mij";
 
+/* Message to the user that this section in the tableview contains recently used foreign currencies */
+"Recent" = "Recent";
+
 /* Restore previous purchases */
 "Restore previous purchases" = "Herstel eerdere aankopen";
 

@@ -16,6 +16,8 @@
 + (MCCurrency *)generateCurrencyFromSelectedLocaleForContext:(NSManagedObjectContext *)context;
 + (void) addAllAvailableCurrenciesToContext:(NSManagedObjectContext *)context;
 
+- (BOOL)isEqualToMCCurrency:(MCCurrency *)object;
+
 + (MCCurrency *)currencyFrom:(NSString *)code fromContext:(NSManagedObjectContext *)context;
 
 @end

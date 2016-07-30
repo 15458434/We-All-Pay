@@ -2,6 +2,8 @@
 <!DOCTYPE plist PUBLIC "-//Apple//DTD PLIST 1.0//EN" "http://www.apple.com/DTDs/PropertyList-1.0.dtd">
 <plist version="1.0">
 <array>
+	<string>rekening</string>
+	<string>splitsen</string>
 	<string>wiebetaaltwat</string>
 	<string>wie</string>
 	<string>betaalt</string>
@@ -9,11 +11,9 @@
 	<string>splits</string>
 	<string>betalen</string>
 	<string>reis</string>
-	<string>geld</string>
 	<string>onkosten</string>
-	<string>vriend</string>
+	<string>delen</string>
 	<string>groep</string>
-	<string>diner</string>
-	<string>rekening</string>
+	<string>kosten</string>
 </array>
 </plist>
