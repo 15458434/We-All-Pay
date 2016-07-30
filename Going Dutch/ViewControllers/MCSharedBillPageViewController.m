@@ -8,6 +8,7 @@
 
 #import "MCSharedBillPageViewController.h"
 
+#import "MCSharedBillMainViewController.h"
 #import "MCSharedBillTableViewController.h"
 #import "MCEditTripViewController.h"
 #import "MCReturnPaymentViewController.h"
@@ -20,7 +21,6 @@
 
 #import "We_all_pay-Swift.h"
 
-#import "MCTitleViewDelegate.h"
 #import "MCCurrentViewDelegate.h"
 
 NSInteger const minPageIndex = 0;
@@ -56,50 +56,51 @@ NSInteger const maxPageIndex = 1;
     }
 }
 
-- (void)pageControlTapped:(id)sender
+- (void)peopleOrPaymentsSelectionControlTapped:(id)sender
 {
-    if (sender == _pageControl) {
+    NSParameterAssert(_mainViewController);
 #ifdef DEBUG
-        NSLog(@"pageControlTapped to value: %ld", (long)_pageControl.currentPage);
+    NSLog(@"segmentedControllerPressed to value: %ld", (long)_mainViewController.peopleOrPaymentsSelectionControl.selectedSegmentIndex);
 #endif
-        NSInteger newIndex = _pageControl.currentPage;
-        if (_lastSetIndex > _pageControl.currentPage) {
-            __weak typeof(self) weakSelf = self;
-            [self setViewControllers:@[[self viewControllerForIndex:newIndex]] direction:UIPageViewControllerNavigationDirectionReverse animated:YES completion:^(BOOL finished) {
-                // Finished.
-                if (finished) {
-                    __strong typeof(weakSelf) strongSelf = weakSelf;
-                    if (strongSelf) {
-                        strongSelf.lastSetIndex = newIndex;
-                        strongSelf.titleLabel.text = [strongSelf viewTitleForIndex:newIndex];
-                    }
-                } else {
-                    NSLog(@"Moving down not finished.");
+    NSInteger newIndex = _mainViewController.peopleOrPaymentsSelectionControl.selectedSegmentIndex;
+    if (_lastSetIndex > newIndex) {
+        __weak typeof(self) weakSelf = self;
+        [self setViewControllers:@[[self viewControllerForIndex:newIndex]] direction:UIPageViewControllerNavigationDirectionReverse animated:YES completion:^(BOOL finished) {
+            // Finished.
+            if (finished) {
+                __strong typeof(weakSelf) strongSelf = weakSelf;
+                if (strongSelf) {
+                    strongSelf.lastSetIndex = newIndex;
                 }
-
-            }];
-        } else if (_lastSetIndex < _pageControl.currentPage) {
-            __weak typeof(self) weakSelf = self;
-            UIViewController<MCIndexProtocol> *newViewController = [self viewControllerForIndex:newIndex];
-            
-            [self setViewControllers:@[newViewController] direction:UIPageViewControllerNavigationDirectionForward animated:YES completion:^(BOOL finished) {
-                // finished.
-                if (finished) {
-                    __strong typeof(weakSelf) strongSelf = weakSelf;
-                    if (strongSelf) {
-                        strongSelf.lastSetIndex = newIndex;
-                        strongSelf.titleLabel.text = [strongSelf viewTitleForIndex:newIndex];
-                    }
-                } else {
-                    NSLog(@"Moving up not finished.");
+            } else {
+#ifdef DEBUG
+                NSLog(@"Moving down not finished.");
+#endif
+            }
+        }];
+    } else if (_lastSetIndex < newIndex) {
+        __weak typeof(self) weakSelf = self;
+        UIViewController<MCIndexProtocol> *newViewController = [self viewControllerForIndex:newIndex];
+        
+        [self setViewControllers:@[newViewController] direction:UIPageViewControllerNavigationDirectionForward animated:YES completion:^(BOOL finished) {
+            // finished.
+            if (finished) {
+                __strong typeof(weakSelf) strongSelf = weakSelf;
+                if (strongSelf) {
+                    strongSelf.lastSetIndex = newIndex;
                 }
-            }];
-        } else {
-            NSLog(@"This is not supposed to happen.");
-        }
+            } else {
+#ifdef DEBUG
+                NSLog(@"Moving up not finished.");
+#endif
+            }
+        }];
+    } else {
+#ifdef DEBUG
+        NSLog(@"This is not supposed to happen.");
+#endif
     }
 }
-
 
 - (void)editBillData:(id)sender
 {
@@ -195,17 +196,6 @@ NSInteger const maxPageIndex = 1;
     }
 }
 
-- (UIPageControl *)pageViewIndicator
-{
-    id destination = [self parentViewController];
-    if ([destination conformsToProtocol:@protocol(MCTitleViewDelegate)]) {
-        return [destination pageIndicator];
-    } else {
-        NSLog(@"Something is broken in the protocol.");
-        return nil;
-    }
-}
-
 #pragma mark - Inherited from super
 
 - (void)viewDidLoad
@@ -237,9 +227,8 @@ NSInteger const maxPageIndex = 1;
             if (finished) {
                 __strong typeof(weakSelf) strongSelf = weakSelf;
                 if (strongSelf) {
-                    strongSelf.pageControl.currentPage = 1;
+                    strongSelf.mainViewController.peopleOrPaymentsSelectionControl.selectedSegmentIndex = 1;
                     strongSelf.lastSetIndex = 1;
-                    strongSelf.titleLabel.text = NSLocalizedString(@"PAYMENTS_PAGEVIEWCONTROLLER", @"Payments");
                 }
             }
         }];
@@ -251,13 +240,11 @@ NSInteger const maxPageIndex = 1;
             if (finished) {
                 __strong typeof(weakSelf) strongSelf = weakSelf;
                 if (strongSelf) {
-                    strongSelf.pageControl.currentPage = 0;
+                    strongSelf.mainViewController.peopleOrPaymentsSelectionControl.selectedSegmentIndex = 0;
                     strongSelf.lastSetIndex = 0;
-                    strongSelf.titleLabel.text = NSLocalizedString(@"PEOPLE_PRESENT_PAGEVIEWCONTROLLER", @"People present");
                 }
             }
         }];
-        
     }
 }
 
@@ -270,24 +257,6 @@ NSInteger const maxPageIndex = 1;
 - (void)dealloc
 {
     [[NSNotificationCenter defaultCenter] removeObserver:self];
-}
-
-#pragma mark - MCTonightsBillTitleDelegate
-
-- (UILabel *)titleLabel
-{
-    id destination = [self parentViewController];
-    if ([destination conformsToProtocol:@protocol(MCTitleViewDelegate)]) {
-        return [destination mainTitleLabel];
-    } else {
-        NSLog(@"mainTitle not askable.");
-        return nil;
-    }
-}
-
-- (void)setTitleLabel:(UILabel *)titleLabel
-{
-    
 }
 
 #pragma mark - MCTonightsBillTransfer
@@ -330,9 +299,9 @@ NSInteger const maxPageIndex = 1;
 - (void)writeableTonightsBillIsCreated:(NSNotification *)notification
 {
     // Should be executed on the background thread.
-    NSDictionary *userInfo = [notification userInfo];
-    _writableTonightsBill = [userInfo objectForKey:MCwritableTonightsBillKey];
-    NSManagedObjectID *tonightsBillID = [_writableTonightsBill objectID];
+    NSDictionary *userInfo = notification.userInfo;
+    _writableTonightsBill = userInfo[MCwritableTonightsBillKey];
+    NSManagedObjectID *tonightsBillID = _writableTonightsBill.objectID;
     NSManagedObjectContext *mainContext = [[MCWeAllPayStoreController defaultStore] mainThreadContext];
     __weak typeof(self) weakSelf = self;
     [mainContext performBlock:^{
@@ -341,27 +310,10 @@ NSInteger const maxPageIndex = 1;
             strongSelf.tonightsBill = (MCSharedBill *)[mainContext objectWithID:tonightsBillID];
         }
     }];
+#ifdef DEBUG
     NSLog(@"WritableTonightsBillIsCreated has been executed.");
+#endif
 }
-
-#pragma mark - UIAlertViewDelegate
-
-//- (void)alertView:(UIAlertView *)alertView clickedButtonAtIndex:(NSInteger)buttonIndex
-//{
-//    switch (buttonIndex) {
-//        case 0:
-//            NSLog(@"Cancel button pressed");
-//            break;
-//        case 1:
-//            [self openMailView:self];
-//            break;
-//        case 2:
-//            [self editBillData:self];
-//            break;
-//        default:
-//            break;
-//    }
-//}
 
 #pragma mark - UIPageViewControllerDataSource
 
@@ -371,17 +323,15 @@ NSInteger const maxPageIndex = 1;
     if ([viewController conformsToProtocol:@protocol(MCIndexProtocol) ]) {
         viewControllerWithIndexProtocol = (UIViewController<MCIndexProtocol> *)viewController;
     } else {
+#ifdef DEBUG
         NSLog(@"%@ should conform MCIndexProtocol", viewController);
+#endif
     }
     if (viewControllerWithIndexProtocol.index == 0) {
         return nil;
     }
     NSInteger newIndex = viewControllerWithIndexProtocol.index - 1;
     UIViewController<MCIndexProtocol> *newViewController = [self viewControllerForIndex:newIndex];
-//    if ([newViewController isKindOfClass:[UITableViewController class]]) {
-//        UITableViewController *myNewTableViewController = (UITableViewController *)newViewController;
-//        [[myNewTableViewController tableView] setEditing:_isChildTableViewEditing animated:NO];
-//    }
     return newViewController;
 }
 
@@ -391,17 +341,15 @@ NSInteger const maxPageIndex = 1;
     if ([viewController conformsToProtocol:@protocol(MCIndexProtocol) ]) {
         viewControllerWithIndexProtocol = (UIViewController<MCIndexProtocol> *)viewController;
     } else {
+#ifdef DEBUG
         NSLog(@"%@ should conform MCIndexProtocol", viewController);
+#endif
     }
     if (viewControllerWithIndexProtocol.index == 1) {
         return nil;
     }
     NSInteger newIndex = viewControllerWithIndexProtocol.index + 1;
     UIViewController<MCIndexProtocol> *newViewController = [self viewControllerForIndex:newIndex];
-//    if ([newViewController isKindOfClass:[UITableViewController class]]) {
-//        UITableViewController *myNewTableViewController = (UITableViewController *)newViewController;
-//        [[myNewTableViewController tableView] setEditing:_isChildTableViewEditing animated:NO];
-//    }
     return newViewController;
 }
 
@@ -424,13 +372,11 @@ NSInteger const maxPageIndex = 1;
     
     if (finished) {
         if ([[self viewControllers][0] isKindOfClass:[MCEditTripViewController class]]) {
-            [[self pageViewIndicator] setCurrentPage:0];
+            self.mainViewController.peopleOrPaymentsSelectionControl.selectedSegmentIndex = 0;
             _lastSetIndex = 0;
-            [[self titleLabel] setText:NSLocalizedString(@"PEOPLE_PRESENT_PAGEVIEWCONTROLLER", @"People present")];
         } else if ([[self viewControllers][0] isKindOfClass:[MCSharedBillTableViewController class]]) {
-            [[self pageViewIndicator] setCurrentPage:1];
+            self.mainViewController.peopleOrPaymentsSelectionControl.selectedSegmentIndex = 1;
             _lastSetIndex = 1;
-            [[self titleLabel] setText:NSLocalizedString(@"PAYMENTS_PAGEVIEWCONTROLLER", @"Payments")];
         }
     }
 }

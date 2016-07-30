@@ -16,6 +16,7 @@
 
 @class MCEditTripViewController;
 @class MCSharedBillTableViewController;
+@class MCSharedBillMainViewController;
 
 @protocol MCTonightsBillTitleDelegate <NSObject>
 
@@ -24,19 +25,17 @@
 
 @end
 
-@interface MCSharedBillPageViewController : UIPageViewController <UIPageViewControllerDataSource, UIPageViewControllerDelegate, UIAlertViewDelegate, MCTonightsBillTitleDelegate, MCIsEditingProtocol>
+@interface MCSharedBillPageViewController : UIPageViewController <UIPageViewControllerDataSource, UIPageViewControllerDelegate, UIAlertViewDelegate, MCIsEditingProtocol>
 
+@property (weak, nonatomic) MCSharedBillMainViewController *mainViewController;
 @property (nonatomic, strong) MCSharedBillTableViewController *sharedBillTableViewController;
 @property (nonatomic, strong) MCEditTripViewController *editTripTableViewController;
-@property (weak, nonatomic) IBOutlet UIPageControl *pageControl;
 
 @property (nonatomic, strong) MCSharedBill *tonightsBill;
 @property (nonatomic, strong) MCSharedBill *writableTonightsBill;
 
 - (BOOL)toggleEditTableView:(id)sender;
 
-- (void)pageControlTapped:(id)sender;
-
-- (UIPageControl *)pageViewIndicator;
+- (void)peopleOrPaymentsSelectionControlTapped:(id)sender;
 
 @end

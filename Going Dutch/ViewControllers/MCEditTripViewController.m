@@ -24,7 +24,6 @@
 @property (weak, nonatomic) IBOutlet UIButton *addPersonButton;
 
 @property (weak, nonatomic) IBOutlet UIButton *contactsButton;
-@property (weak, nonatomic) IBOutlet PaymentsSwipeDirectionHintView *paymentsHintsView;
 
 @property (weak, nonatomic) IBOutlet UITextField *tripNameField;
 @property (weak, nonatomic) IBOutlet UIBarButtonItem *doneButton;
@@ -199,29 +198,6 @@
     }
 }
 
-- (void)showPaymentsHint
-{
-    if (_dataController.fetchedObjects.count > 0) {
-        HintsController *controller = [[HintsController alloc] init];
-        _paymentsHintsView.showHint = controller.showHints;
-    } else {
-        _paymentsHintsView.showHint = false;
-    }
-}
-
-- (void)showPaymentsHintDelayed
-{
-    __weak typeof(self) weakSelf = self;
-    int64_t delayInSeconds = 1.0;
-    dispatch_time_t waitTime = dispatch_time(DISPATCH_TIME_NOW, delayInSeconds * NSEC_PER_SEC);
-    dispatch_after(waitTime, dispatch_get_main_queue(), ^{
-        typeof(self) strongSelf = weakSelf;
-        if (strongSelf) {
-            [self showPaymentsHint];
-        }
-    });
-}
-
 #pragma mark - inherited from super
 
 - (void)viewDidLoad
@@ -244,7 +220,6 @@
         [[_emptyMessage bigMessage] setAlpha:0.0];
     }
     [[self tableView] setBackgroundView:_emptyMessage];
-    [self showPaymentsHint];
     
     // Make sure a tap in the background dismisses the keyboard as well.
     UITapGestureRecognizer *thatTickles = [[UITapGestureRecognizer alloc] initWithTarget:self action:@selector(tappedInTheBackground:)];
@@ -270,11 +245,6 @@
     [[self tableView] setEditing:shouldAppearAsEditing animated:NO];
 
     [self setEmptyMessageNow];
-    
-    HintsController *controller = [[HintsController alloc] init];
-    if (_paymentsHintsView.showHint && !controller.showHints) {
-        _paymentsHintsView.showHint = false;
-    }
 }
 
 - (void)viewDidAppear:(BOOL)animated
@@ -414,7 +384,7 @@
     }
     MCPerson *nextPayer = [[_tonightsBill fetchPeoplePresentOrderedByAmountPaid:YES] firstObject];
 
-    WhoPayingUserDefaultsStoreInterface *groupStore = [[WhoPayingUserDefaultsStoreInterface alloc] initWithTonightsBillUUID:_tonightsBill.uniqueBillId tripName:_tonightsBill.tripName nextPayerUUID:nextPayer.uniquePersonId fullNameOfNextPayer:[nextPayer getFullName]];//[[WhoPayingUserDefaultsStoreInterface alloc] initWithTonightsBillUUID:_tonightsBill.uniqueBillId tripName:_tonightsBill.tripName nextPayerID:nextPayer.uniquePersonId fullNameOfNextPayer:[nextPayer getFullName]];
+    WhoPayingUserDefaultsStoreInterface *groupStore = [[WhoPayingUserDefaultsStoreInterface alloc] initWithTonightsBillUUID:_tonightsBill.uniqueBillId tripName:_tonightsBill.tripName nextPayerUUID:nextPayer.uniquePersonId fullNameOfNextPayer:[nextPayer getFullName]];
     [groupStore storeToDefaults];
     [[NCWidgetController widgetController] setHasContent:YES forWidgetWithBundleIdentifier:[WhoPayingUserDefaultsStoreInterface MCWhoIsPayingNextBundleIdentifier]];
 }
@@ -429,7 +399,6 @@
 - (void)controllerDidChangeContent:(NSFetchedResultsController *)controller
 {
     [[self tableView] endUpdates];
-    [self showPaymentsHintDelayed];
 }
 
 - (void)controller:(NSFetchedResultsController *)controller didChangeObject:(id)anObject atIndexPath:(NSIndexPath *)indexPath forChangeType:(NSFetchedResultsChangeType)type newIndexPath:(NSIndexPath *)newIndexPath

@@ -34,6 +34,26 @@
 
 @implementation MCSharedBillMainViewController
 
+#pragma mark - IBActions
+
+- (IBAction)toggleEdit:(id)sender
+{
+    if ([[self childViewControllers][0] toggleEditTableView:sender]) {
+        // Set Done Button
+        UIBarButtonItem *doneButton = [[UIBarButtonItem alloc] initWithBarButtonSystemItem:UIBarButtonSystemItemDone target:self action:@selector(toggleEdit:)];
+        [[self navigationItem] setRightBarButtonItem:doneButton];
+    } else {
+        // Set Edit Button
+        UIBarButtonItem *editButton = [[UIBarButtonItem alloc] initWithBarButtonSystemItem:UIBarButtonSystemItemEdit target:self action:@selector(toggleEdit:)];
+        [[self navigationItem] setRightBarButtonItem:editButton];
+    }
+}
+
+- (IBAction)peopleOrPaymentsSelectionChangedValue:(id)sender
+{
+    [_pageViewController peopleOrPaymentsSelectionControlTapped:self];
+}
+
 #pragma mark - private functions
 
 - (GADRequest *)generalAdRequest
@@ -127,25 +147,6 @@
     } else {
         self.worstSalesPitchEverView.autoloadEnabled = NO;
     }
-
-}
-
-- (IBAction)toggleEdit:(id)sender
-{
-    if ([[self childViewControllers][0] toggleEditTableView:sender]) {
-        // Set Done Button
-        UIBarButtonItem *doneButton = [[UIBarButtonItem alloc] initWithBarButtonSystemItem:UIBarButtonSystemItemDone target:self action:@selector(toggleEdit:)];
-        [[self navigationItem] setRightBarButtonItem:doneButton];
-    } else {
-        // Set Edit Button
-        UIBarButtonItem *editButton = [[UIBarButtonItem alloc] initWithBarButtonSystemItem:UIBarButtonSystemItemEdit target:self action:@selector(toggleEdit:)];
-        [[self navigationItem] setRightBarButtonItem:editButton];
-    }
-}
-
-- (IBAction)pageViewControllerTapped:(id)sender
-{
-    [_pageViewController pageControlTapped:sender];
 }
 
 #pragma mark - Notification Handlers
@@ -267,9 +268,6 @@
         [self putBannerOffScreen:NO];
         [self updateBannerSize:size];
     } completion:^(id<UIViewControllerTransitionCoordinatorContext>  _Nonnull context) {
-#ifdef DEBUG
-        NSLog(@"Yes, I'm done.");
-#endif
     }];
 }
 
@@ -297,7 +295,7 @@
     
     if ([[segue identifier] isEqualToString:@"pageViewController"]) {
         _pageViewController = (MCSharedBillPageViewController *)[segue destinationViewController];
-        _pageViewController.pageControl = _pageIndicator;
+        _pageViewController.mainViewController = self;
         NSManagedObjectContext *backgroundContext = [[MCWeAllPayStoreController defaultStore] backgroundThreadContext];
         [backgroundContext performBlock:^{
             id<MCTonightsBillTransfer> destination = [segue destinationViewController];
