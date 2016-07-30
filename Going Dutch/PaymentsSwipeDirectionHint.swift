@@ -8,6 +8,7 @@
 
 import UIKit
 
+@available(*, deprecated)
 @objc class PaymentsSwipeDirectionHintView: UITableViewHeaderFooterView {
     @IBOutlet var hintLabel: UILabel!
     @IBOutlet var horizontalContraintHintLabel: NSLayoutConstraint!

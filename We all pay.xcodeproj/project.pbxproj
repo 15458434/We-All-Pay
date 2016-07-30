@@ -388,7 +388,6 @@
 		38690702186F0EEF006A5C11 /* libz.dylib */ = {isa = PBXFileReference; lastKnownFileType = "compiled.mach-o.dylib"; name = libz.dylib; path = usr/lib/libz.dylib; sourceTree = SDKROOT; };
 		386FC32318E5855400428294 /* MCSharedBillMainViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = MCSharedBillMainViewController.h; path = ViewControllers/MCSharedBillMainViewController.h; sourceTree = "<group>"; };
 		386FC32418E5855400428294 /* MCSharedBillMainViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = MCSharedBillMainViewController.m; path = ViewControllers/MCSharedBillMainViewController.m; sourceTree = "<group>"; };
-		386FC36E18E5B8FE00428294 /* MCTitleViewDelegate.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = MCTitleViewDelegate.h; path = ViewControllers/MCTitleViewDelegate.h; sourceTree = "<group>"; };
 		386FC36F18E5BE1900428294 /* iAd.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = iAd.framework; path = System/Library/Frameworks/iAd.framework; sourceTree = SDKROOT; };
 		3870C22B1D34FDF80030035A /* Base */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; name = Base; path = "Base.lproj/We all pay app keywords.plist"; sourceTree = "<group>"; };
 		3870C22D1D34FDFA0030035A /* nl */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; name = nl; path = "nl.lproj/We all pay app keywords.plist"; sourceTree = "<group>"; };
@@ -643,8 +642,6 @@
 			isa = PBXGroup;
 			children = (
 				3829AD0D178B41320025969D /* WeAllPayStore.xcdatamodeld */,
-				389FBD3E198BDA1C003B4409 /* MCExchangeRate.h */,
-				389FBD3F198BDA1C003B4409 /* MCExchangeRate.m */,
 				387494D719F05476001614CA /* WeAllPayStore1to4.xcmappingmodel */,
 				387494D519F053E9001614CA /* WeAllPayStore2to4.xcmappingmodel */,
 				387494D319F053C2001614CA /* WeAllPayStore3to4.xcmappingmodel */,
@@ -668,18 +665,20 @@
 				38DB85D317E45BCA006237CF /* MCPayment+addons.m */,
 				389DE8F5197FB2B900169645 /* MCPaymentPresence.h */,
 				389DE8F6197FB2B900169645 /* MCPaymentPresence.m */,
+				389950A2191A90F1000B00BC /* MCPaymentPresence+addons.h */,
+				389950A3191A90F1000B00BC /* MCPaymentPresence+addons.m */,
 				389DE8F2197FB2B900169645 /* MCEmailAddress.h */,
 				389DE8F3197FB2B900169645 /* MCEmailAddress.m */,
+				38DB85DB17E45FB7006237CF /* MCEmailAddress+addons.h */,
+				38DB85DC17E45FB7006237CF /* MCEmailAddress+addons.m */,
+				389FBD3E198BDA1C003B4409 /* MCExchangeRate.h */,
+				389FBD3F198BDA1C003B4409 /* MCExchangeRate.m */,
+				389DE905197FBE8400169645 /* MCExchangeRate+addons.h */,
+				389DE906197FBE8400169645 /* MCExchangeRate+addons.m */,
 				389DE8EF197FB2B900169645 /* MCPerson.h */,
 				389DE8F0197FB2B900169645 /* MCPerson.m */,
 				38DB85D817E45DEA006237CF /* MCPerson+addons.h */,
 				38DB85D917E45DEA006237CF /* MCPerson+addons.m */,
-				389DE905197FBE8400169645 /* MCExchangeRate+addons.h */,
-				389DE906197FBE8400169645 /* MCExchangeRate+addons.m */,
-				389950A2191A90F1000B00BC /* MCPaymentPresence+addons.h */,
-				389950A3191A90F1000B00BC /* MCPaymentPresence+addons.m */,
-				38DB85DB17E45FB7006237CF /* MCEmailAddress+addons.h */,
-				38DB85DC17E45FB7006237CF /* MCEmailAddress+addons.m */,
 				38955046178B4FCA0077A95A /* MCWeAllPayStoreController.h */,
 				38955047178B4FCA0077A95A /* MCWeAllPayStoreController.m */,
 				38D796141B2F1CBD00F3872F /* ExchangeRateFetcherForMCExchangeRate.swift */,
@@ -1054,7 +1053,6 @@
 		38DC8B371909064A00762235 /* ViewController Protocols */ = {
 			isa = PBXGroup;
 			children = (
-				386FC36E18E5B8FE00428294 /* MCTitleViewDelegate.h */,
 				38E0C5DE18E5C94D005A3F17 /* MCTonightsBillTransfer.h */,
 				3825A825199A2A5500A8885D /* MCTonightsBillTransfer.m */,
 				38E0C5DF18E97A8A005A3F17 /* MCCurrentViewDelegate.h */,

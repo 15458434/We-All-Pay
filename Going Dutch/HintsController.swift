@@ -10,6 +10,7 @@ import Foundation
 
 private let kShowHints = "kShowHints"
 
+@available (*, deprecated)
 @objc class HintsController: NSObject {
     @objc var showHints: Bool = true {
         willSet(newValue) {
