@@ -111,7 +111,7 @@ class SelectCurrencyTableViewController: UITableViewController, UISearchResultsU
         
         searchController.searchBar.sizeToFit()
         
-        self.recentUsedForeignCurrencies = thisPayment!.onWhichBill.recentUsedForeignCurrencies() ?? [MCCurrency]()
+        self.recentUsedForeignCurrencies = thisPayment!.onWhichBill.recentUsedForeignCurrencies(5) ?? [MCCurrency]()
     }
     
     // MARK: UI Search Results Updating

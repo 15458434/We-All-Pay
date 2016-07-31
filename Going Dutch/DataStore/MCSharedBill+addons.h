@@ -53,6 +53,6 @@
 
 - (void)deleteIfStillNew;
 
-- (NSArray<MCCurrency *>*)recentUsedForeignCurrencies;
+- (NSArray<MCCurrency *>*)recentUsedForeignCurrencies:(NSUInteger)fetchLimit;
 
 @end

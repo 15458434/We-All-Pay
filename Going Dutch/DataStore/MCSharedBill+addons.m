@@ -596,11 +596,14 @@
     }
 }
 
-- (NSArray<MCCurrency *> *)recentUsedForeignCurrencies
+- (NSArray<MCCurrency *> *)recentUsedForeignCurrencies:(NSUInteger)fetchLimit
 {
     // Prepare NSFetchRequest
     NSFetchRequest *request = [[NSFetchRequest alloc] initWithEntityName:@"MCCurrency"];
-    request.sortDescriptors = @[[NSSortDescriptor sortDescriptorWithKey:@"dateCreated" ascending:YES]];
+    if (fetchLimit > 0) {
+        request.fetchLimit = fetchLimit;
+    }
+    request.sortDescriptors = @[[NSSortDescriptor sortDescriptorWithKey:@"dateCreated" ascending:NO]];
     request.predicate = [NSPredicate predicateWithFormat:@"ANY payment.onWhichBill.uniqueBillId LIKE %@ AND NOT code LIKE %@", self.uniqueBillId, self.mainCurrency.code];
     
     // Execute fetch request
