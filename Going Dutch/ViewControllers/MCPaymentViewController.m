@@ -439,14 +439,10 @@ typedef NS_ENUM(BOOL, ChildViewOpened) {
     
     if (!_dataController) {
         _dataController = [[MCWeAllPayStoreController defaultStore] paymentPresenceDataControllerForDelegate:self];
-        if (SYSTEM_VERSION_GREATER_THAN_OR_EQUAL_TO(@"8.0") && _selectCurrencyTableViewController == isOpened) {
-            // Those lines won't update when coming from MCSelectCurrencyTableViewController on iOS 8 and later.
-            // It's under an if statement, because only the iPhone 4 is effected.
-            CurrencyFormatter *cf = [[CurrencyFormatter alloc] initWithCurrencyCode:_thisPayment.currency.code];
-            _paidView.text = [cf stringForObjectValue:_thisPayment.money];
-            [[self tableView] reloadData];
-            _selectCurrencyTableViewController = isNotOpened;
-        }
+        CurrencyFormatter *cf = [[CurrencyFormatter alloc] initWithCurrencyCode:_thisPayment.currency.code];
+        _paidView.text = [cf stringForObjectValue:_thisPayment.money];
+        [[self tableView] reloadData];
+        _selectCurrencyTableViewController = isNotOpened;
     }
     [[self tableView] reloadData];
     
