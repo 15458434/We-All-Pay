@@ -10,7 +10,7 @@ import Foundation
 
 internal let rateMeControllerCounterInterval: Int = 3
 internal let rateMeControllerMinimumTimeIntervalInDays: Double = 7.0
-internal let rateMeControllerTimeIntervalInDays: Double = 90.0
+internal let rateMeControllerTimeIntervalInDays: Double = 21.0
 
 //private let rateMeControllerOneDayTimeInterval: Double = 1
 private let rateMeControllerOneDayTimeInterval: Double = 86400
