@@ -63,6 +63,9 @@ NSInteger const maxPageIndex = 1;
     NSLog(@"segmentedControllerPressed to value: %ld", (long)_mainViewController.peopleOrPaymentsSelectionControl.selectedSegmentIndex);
 #endif
     NSInteger newIndex = _mainViewController.peopleOrPaymentsSelectionControl.selectedSegmentIndex;
+#ifdef DEBUG
+    NSLog(@"newIndex = %ld, _lastSetIndex = %ld", newIndex, _lastSetIndex);
+#endif
     if (_lastSetIndex > newIndex) {
         __weak typeof(self) weakSelf = self;
         [self setViewControllers:@[[self viewControllerForIndex:newIndex]] direction:UIPageViewControllerNavigationDirectionReverse animated:YES completion:^(BOOL finished) {
@@ -99,6 +102,48 @@ NSInteger const maxPageIndex = 1;
 #ifdef DEBUG
         NSLog(@"This is not supposed to happen.");
 #endif
+        Class currentViewController = object_getClass(self.viewControllers.firstObject);
+        NSString *currentViewControllerClassName = NSStringFromClass(currentViewController);
+        if ([currentViewControllerClassName isEqualToString:@"MCEditTripViewController"]) {
+#ifdef DEBUG
+            NSLog(@"Switching to Payments");
+#endif
+            __weak typeof(self) weakSelf = self;
+            UIViewController<MCIndexProtocol> *newViewController = [self viewControllerForIndex:newIndex];
+            
+            [self setViewControllers:@[newViewController] direction:UIPageViewControllerNavigationDirectionForward animated:YES completion:^(BOOL finished) {
+                // finished.
+                if (finished) {
+                    __strong typeof(weakSelf) strongSelf = weakSelf;
+                    if (strongSelf) {
+                        strongSelf.lastSetIndex = newIndex;
+                    }
+                } else {
+#ifdef DEBUG
+                    NSLog(@"Switching to Payments not finished.");
+#endif
+                }
+            }];
+        }
+        if ([currentViewControllerClassName isEqualToString:@"MCSharedBillTableViewController"]) {
+#ifdef DEBUG
+            NSLog(@"Switching to People");
+#endif
+            __weak typeof(self) weakSelf = self;
+            [self setViewControllers:@[[self viewControllerForIndex:newIndex]] direction:UIPageViewControllerNavigationDirectionReverse animated:YES completion:^(BOOL finished) {
+                // Finished.
+                if (finished) {
+                    __strong typeof(weakSelf) strongSelf = weakSelf;
+                    if (strongSelf) {
+                        strongSelf.lastSetIndex = newIndex;
+                    }
+                } else {
+#ifdef DEBUG
+                    NSLog(@"Switching to People not finished.");
+#endif
+                }
+            }];
+        }
     }
 }
 
@@ -354,6 +399,14 @@ NSInteger const maxPageIndex = 1;
 }
 
 #pragma mark - UIPageViewControllerDelegate
+
+- (void)pageViewController:(UIPageViewController *)pageViewController willTransitionToViewControllers:(NSArray<UIViewController *> *)pendingViewControllers
+{
+#ifdef DEBUG
+    NSLog(@"willTranstistionToViewControllers: %@", pendingViewControllers);
+#endif
+    
+}
 
 - (void)pageViewController:(UIPageViewController *)pageViewController didFinishAnimating:(BOOL)finished previousViewControllers:(NSArray *)previousViewControllers transitionCompleted:(BOOL)completed
 {
