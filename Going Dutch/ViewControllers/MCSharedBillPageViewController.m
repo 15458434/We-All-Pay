@@ -79,6 +79,10 @@ NSInteger const maxPageIndex = 1;
 #ifdef DEBUG
                 NSLog(@"Moving down not finished.");
 #endif
+                __strong typeof(weakSelf) strongSelf = weakSelf;
+                if (strongSelf) {
+                    strongSelf.mainViewController.peopleOrPaymentsSelectionControl.selectedSegmentIndex = 1;
+                }
             }
         }];
     } else if (_lastSetIndex < newIndex) {
@@ -96,6 +100,10 @@ NSInteger const maxPageIndex = 1;
 #ifdef DEBUG
                 NSLog(@"Moving up not finished.");
 #endif
+                __strong typeof(weakSelf) strongSelf = weakSelf;
+                if (strongSelf) {
+                    strongSelf.mainViewController.peopleOrPaymentsSelectionControl.selectedSegmentIndex = 0;
+                }
             }
         }];
     } else {
