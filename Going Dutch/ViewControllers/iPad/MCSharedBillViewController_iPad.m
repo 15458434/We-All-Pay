@@ -46,7 +46,7 @@
         // Give user alert.
         NSString *title = NSLocalizedString(@"UNABLE_TO_SOLVE", @"Unable to solve");
         NSString *message = NSLocalizedString(@"At least one of the payments is missing a payer.", @"One of the payments is missing a payer.");
-        NSString *cancelButtonTitle = NSLocalizedString(@"CANCEL", @"Cancel");
+        NSString *cancelButtonTitle = NSLocalizedString(@"Cancel", @"Text on button to cancel something");
         NSString *fixItButtonTitle = NSLocalizedString(@"Go to", @"Go to");
         
         UIAlertController *alertController = [UIAlertController alertControllerWithTitle:title message:message preferredStyle:UIAlertControllerStyleAlert];
