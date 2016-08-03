@@ -561,9 +561,12 @@
 }
 
 - (void)solveWithHandler:(void (^)(NSArray *results, NSError *error))solution {
+    NSOperationQueue *currentQueue = [NSOperationQueue currentQueue];
     if ([self areAllExchangeRatesValid]) {
         NSArray<ReturnPayment *> *results = [self originalSolveWhoHasToPayWhoFromThisBill];
-        solution(results, nil);
+        [currentQueue addOperationWithBlock:^{
+            solution(results, nil);
+        }];
     } else {
         [self updateInvalidExchangeRatesWithHandler:^(NSArray *results, NSError *error) {
             if (error) {
