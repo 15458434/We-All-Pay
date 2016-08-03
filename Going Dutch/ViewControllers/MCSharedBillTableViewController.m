@@ -90,16 +90,16 @@
 - (void)setEmptyMessage
 {
     if ([[_dataController fetchedObjects] count] != 0) {
-        if ([[emptyMessage bigMessage] alpha] > 0.0) {
+        if ([[_emptyMessage bigMessage] alpha] > 0.0) {
             [UIView animateWithDuration:1.0 animations:^{
-                [[emptyMessage bigMessage] setAlpha:0.0];
+                [[_emptyMessage bigMessage] setAlpha:0.0];
                 [[self tableView] setSeparatorStyle:UITableViewCellSeparatorStyleSingleLine];
             } completion:nil];
         }
     } else {
-        if ([[emptyMessage bigMessage] alpha] < 1.0) {
+        if ([[_emptyMessage bigMessage] alpha] < 1.0) {
             [UIView animateWithDuration:1.0 animations:^{
-                [[emptyMessage bigMessage] setAlpha:1.0];
+                [[_emptyMessage bigMessage] setAlpha:1.0];
                 [[self tableView] setSeparatorStyle:UITableViewCellSeparatorStyleNone];
             } completion:nil];
         }
@@ -122,9 +122,9 @@
     
     [self startRespondingToStoreChangeNotifications];
     
-    emptyMessage = [[NSBundle mainBundle] loadNibNamed:@"MCTableEmptyMessage" owner:self options:nil][0];
-    [[self tableView] setBackgroundView:emptyMessage];
-    [[emptyMessage bigMessage] setText:NSLocalizedString(@"EMPTY_PAYMENT_LIST_MESSAGE", @"Press \"add payment\" to add a payment to this event.")];
+    _emptyMessage = [[NSBundle mainBundle] loadNibNamed:@"MCTableEmptyMessage" owner:self options:nil][0];
+    [[self tableView] setBackgroundView:_emptyMessage];
+    [[_emptyMessage bigMessage] setText:NSLocalizedString(@"EMPTY_PAYMENT_LIST_MESSAGE", @"Press \"add payment\" to add a payment to this event.")];
 }
 
 - (void)viewWillAppear:(BOOL)animated
@@ -138,9 +138,9 @@
         [[self tableView] reloadData];
     }
     if ([[_dataController fetchedObjects] count] > 0) {
-        [[emptyMessage bigMessage] setAlpha:0.0];
+        [[_emptyMessage bigMessage] setAlpha:0.0];
     } else {
-        [[emptyMessage bigMessage] setAlpha:1.0];
+        [[_emptyMessage bigMessage] setAlpha:1.0];
     }
     
     BOOL shouldAppearAsEditing = [_myParent isChildTableViewEditing];
@@ -223,7 +223,6 @@
 
 - (BOOL)textFieldShouldReturn:(UITextField *)textField
 {
-    [_tonightsBill setTripName:[[twoLabelTitleView mainLabel] text]];
     [textField resignFirstResponder];
     return YES;
 }

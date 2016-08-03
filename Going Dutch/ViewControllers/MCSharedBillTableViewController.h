@@ -28,13 +28,8 @@
 @end
 
 @interface MCSharedBillTableViewController : UITableViewController <NSFetchedResultsControllerDelegate, MFMailComposeViewControllerDelegate, UITextFieldDelegate, MCTonightsBillTransfer, MCIndexProtocol>
-{
-    __strong IBOutlet MCTwoLabelsTitleView *twoLabelTitleView;
-    MCTableEmptyMessage *emptyMessage;
-    
-    UIBarButtonItem *mailButton;
-    UIBarButtonItem *returnPaymentButton;
-}
+
+@property (nonatomic, strong) MCTableEmptyMessage *emptyMessage;
 
 @property (nonatomic, weak) id<MCIsEditingProtocol> myParent;
 @property (nonatomic, weak) MCSharedBillPageViewController *mailDelegate;
