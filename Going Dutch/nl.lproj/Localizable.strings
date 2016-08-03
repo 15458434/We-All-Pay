@@ -13,6 +13,9 @@
 /* Ad free version restored. */
 "Ad free version restored." = "Advertentie vrije versie is hersteld";
 
+/* Title for an alert message, because there are no people added to this event. */
+"Add some people first" = "Voeg eerst aanwezigen toe";
+
 /* Message that pops up when the App Store is not available. */
 "App Store unavailable" = "App Store niet beschikbaar";
 
@@ -143,8 +146,7 @@
 /* Give feedback */
 "Give feedback" = "Geef feedback";
 
-/* A button that says go to to go to people present
-   Go to */
+/* Go to */
 "Go to" = "Ga naar";
 
 /* Title for a button that directs the user to the settings application. */
@@ -300,4 +302,7 @@
 
 /* yes */
 "YES" = "ja";
+
+/* A message to the user thay can't add a payment when they didn't add people to the even. */
+"You can't add a payment when no people are present. There is no one to split the expenses among." = "Je kan geen betaling toevoegen, als er geen aanwezigen zijn. Er is niemand om de rekening tussen te delen.";
 

@@ -155,7 +155,7 @@
                                         <color key="titleShadowColor" white="0.5" alpha="1" colorSpace="calibratedWhite"/>
                                     </state>
                                     <connections>
-                                        <segue destination="R4f-Dn-Lh4" kind="presentation" identifier="openPaymentView" id="ibz-Jf-X0h"/>
+                                        <action selector="addPaymentPressed:" destination="iz5-ZP-pZr" eventType="touchUpInside" id="ber-nU-3oF"/>
                                     </connections>
                                 </button>
                                 <button opaque="NO" contentMode="scaleToFill" restorationIdentifier="solveBillButton" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="Prv-KL-M67">
@@ -259,6 +259,7 @@
                     <connections>
                         <segue destination="HxE-bK-sSq" kind="presentation" identifier="solveButton" id="ZLi-dv-Z0Y"/>
                         <segue destination="R4f-Dn-Lh4" kind="presentation" identifier="openFirstPaymentWithoutPayer" id="eZd-I3-t8D"/>
+                        <segue destination="R4f-Dn-Lh4" kind="presentation" identifier="openPaymentView" id="z3e-Vr-AS7"/>
                     </connections>
                 </tableViewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="aDR-YO-8As" userLabel="First Responder" sceneMemberID="firstResponder"/>
@@ -1431,7 +1432,7 @@
     </resources>
     <inferredMetricsTieBreakers>
         <segue reference="5Vh-JE-OCd"/>
-        <segue reference="ibz-Jf-X0h"/>
+        <segue reference="z3e-Vr-AS7"/>
         <segue reference="C0F-pM-cfm"/>
     </inferredMetricsTieBreakers>
 </document>

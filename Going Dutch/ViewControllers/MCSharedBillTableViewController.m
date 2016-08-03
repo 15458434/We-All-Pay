@@ -20,6 +20,7 @@
 #import "MCPaymentViewController.h"
 #import "MCReturnPaymentViewController.h"
 #import "MCSharedBillPageViewController.h"
+#import "MCSharedBillMainViewController.h"
 
 #import "We_all_pay-Swift.h"
 
@@ -33,7 +34,22 @@
 
 #pragma mark - Actions
 
-- (IBAction)solveButtonPressed:(id)sender {
+- (IBAction)addPaymentPressed:(id)sender
+{
+    if (_tonightsBill.peoplePresent.count == 0) {
+        NSString *title = NSLocalizedString(@"Add some people first", @"Title for an alert message, because there are no people added to this event.");
+        NSString *message = NSLocalizedString(@"You can't add a payment when no people are present. There is no one to split the expenses among.", @"A message to the user thay can't add a payment when they didn't add people to the even.");
+        UIAlertController *alertController = [UIAlertController alertControllerWithTitle:title message:message preferredStyle:UIAlertControllerStyleAlert];
+        NSString *cancelActionTitle = NSLocalizedString(@"Cancel", @"Text on button to cancel something");
+        [alertController addAction:[UIAlertAction actionWithTitle:cancelActionTitle style:UIAlertActionStyleCancel handler:nil]];
+        [self presentViewController:alertController animated:YES completion:nil];
+        return;
+    }
+    [self performSegueWithIdentifier:@"openPaymentView" sender:self];
+}
+
+- (IBAction)solveButtonPressed:(id)sender
+{
     // Check for all payers present.
     if ([_tonightsBill doAllPaymentHaveAPayer]) {
         // perform segue
@@ -42,7 +58,7 @@
         // Give user alert.
         NSString *title = NSLocalizedString(@"UNABLE_TO_SOLVE", @"Unable to solve");
         NSString *message = NSLocalizedString(@"At least one of the payments is missing a payer.", @"One of the payments is missing a payer.");
-        NSString *cancelButtonTitle = NSLocalizedString(@"CANCEL", @"Cancel");
+        NSString *cancelButtonTitle = NSLocalizedString(@"Cancel", @"Text on button to cancel something");
         NSString *fixItButtonTitle = NSLocalizedString(@"Go to", @"Go to");
         UIAlertController *alertController = [UIAlertController alertControllerWithTitle:title message:message preferredStyle:UIAlertControllerStyleAlert];
         [alertController addAction:[UIAlertAction actionWithTitle:cancelButtonTitle style:UIAlertActionStyleCancel handler:nil]];
