@@ -95,7 +95,7 @@ typedef NS_ENUM(BOOL, MCXRatesMissing) {
         NSLog(@"Not everyone has an email address");
         NSString *title = NSLocalizedString(@"EMAIL_CONSTRUCTION_FAILURE_TITLE", @"Unable to send email to all people.");
         NSString *message = NSLocalizedString(@"EMAIL_CONSTRUCTION_FAILURE_MESSAGE", @"Reason: Not all people have a mail address.");
-        NSString *cancel = NSLocalizedString(@"CANCEL", @"Cancel");
+        NSString *cancel = NSLocalizedString(@"Cancel", @"Text on button to cancel something");
         NSString *sendAnyway = NSLocalizedString(@"SEND_ANYWAY", @"Send anyway");
         if ([UIAlertController class]) {
             // iOS 8 and up
