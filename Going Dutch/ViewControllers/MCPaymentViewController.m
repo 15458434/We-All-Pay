@@ -312,21 +312,22 @@ typedef NS_ENUM(BOOL, ChildViewOpened) {
 #ifdef DEBUG
         NSLog(@"kindOfPaidFieldDismiss = %lu", (unsigned long)_kindOfPaidFieldDismiss);
 #endif
-        if (_kindOfPaidFieldDismiss == cancelIsPressed) {
-            // Restore stored value
-            CurrencyFormatter *cf = [[CurrencyFormatter alloc] initWithCurrencyCode:_thisPayment.currency.code];
-            _paidView.text = [cf stringForObjectValue:_thisPayment.money];
-        } else if (_kindOfPaidFieldDismiss == doneIsPressed) {
-            [self storeMoneySpent];
-        } else if (_kindOfPaidFieldDismiss == otherTextFieldSelected) {
-            [self storeMoneySpent];
-        } else if (_kindOfPaidFieldDismiss == currencySelectionTapped) {
-            [self storeMoneySpent];
-        } else if (_kindOfPaidFieldDismiss == backgroundTapped){
-            // Restore stored value
-            CurrencyFormatter *cf = [[CurrencyFormatter alloc] initWithCurrencyCode:_thisPayment.currency.code];
-            _paidView.text = [cf stringForObjectValue:_thisPayment.money];
-        }
+        [self storeMoneySpent];
+//        if (_kindOfPaidFieldDismiss == cancelIsPressed) {
+//            // Restore stored value
+//            CurrencyFormatter *cf = [[CurrencyFormatter alloc] initWithCurrencyCode:_thisPayment.currency.code];
+//            _paidView.text = [cf stringForObjectValue:_thisPayment.money];
+//        } else if (_kindOfPaidFieldDismiss == doneIsPressed) {
+//            [self storeMoneySpent];
+//        } else if (_kindOfPaidFieldDismiss == otherTextFieldSelected) {
+//            [self storeMoneySpent];
+//        } else if (_kindOfPaidFieldDismiss == currencySelectionTapped) {
+//            [self storeMoneySpent];
+//        } else if (_kindOfPaidFieldDismiss == backgroundTapped){
+//            // Restore stored value
+//            CurrencyFormatter *cf = [[CurrencyFormatter alloc] initWithCurrencyCode:_thisPayment.currency.code];
+//            _paidView.text = [cf stringForObjectValue:_thisPayment.money];
+//        }
     } else if (textField == _payerNameField) {
         if (!_peoplePickerCancelled) {
             [[MCWeAllPayStoreController defaultStore] endUndoGroupWithoutRegistration];
@@ -406,11 +407,11 @@ typedef NS_ENUM(BOOL, ChildViewOpened) {
     [_payerNameField setInputView:_personPickerView];
     [_payerNameField setInputAccessoryView:inputAccessoryPickerView];
     
-    UIToolbar *inputAccossoryNumberPad = [[UIToolbar alloc] initWithFrame:toolbarRect];
-    cancelButton = [[UIBarButtonItem alloc] initWithBarButtonSystemItem:UIBarButtonSystemItemCancel target:self action:@selector(cancelNumberPad:)];
-    _theDoneButton = [[UIBarButtonItem alloc] initWithBarButtonSystemItem:UIBarButtonSystemItemDone target:self action:@selector(doneNumberPad:)];
-    [inputAccossoryNumberPad setItems:@[cancelButton, flexButton, _theDoneButton] animated:YES];
-    [_paidView setInputAccessoryView:inputAccossoryNumberPad];
+//    UIToolbar *inputAccossoryNumberPad = [[UIToolbar alloc] initWithFrame:toolbarRect];
+//    cancelButton = [[UIBarButtonItem alloc] initWithBarButtonSystemItem:UIBarButtonSystemItemCancel target:self action:@selector(cancelNumberPad:)];
+//    _theDoneButton = [[UIBarButtonItem alloc] initWithBarButtonSystemItem:UIBarButtonSystemItemDone target:self action:@selector(doneNumberPad:)];
+//    [inputAccossoryNumberPad setItems:@[cancelButton, flexButton, _theDoneButton] animated:YES];
+//    [_paidView setInputAccessoryView:inputAccossoryNumberPad];
     
     // Make sure a tap in the background dismisses the keyboard as well.
     UITapGestureRecognizer *thatTickles = [[UITapGestureRecognizer alloc] initWithTarget:self action:@selector(tappedInTheBackground:)];
