@@ -50,6 +50,16 @@
 
 - (IBAction)solveButtonPressed:(id)sender
 {
+    if (_tonightsBill.peoplePresent.count == 0) {
+        NSString *title = NSLocalizedString(@"Add some people first", @"Title for an alert message, because there are no people added to this event.");
+        NSString *message = NSLocalizedString(@"You can't add a payment when no people are present. There is no one to split the expenses among.", @"A message to the user thay can't add a payment when they didn't add people to the even.");
+        UIAlertController *alertController = [UIAlertController alertControllerWithTitle:title message:message preferredStyle:UIAlertControllerStyleAlert];
+        NSString *cancelActionTitle = NSLocalizedString(@"Cancel", @"Text on button to cancel something");
+        [alertController addAction:[UIAlertAction actionWithTitle:cancelActionTitle style:UIAlertActionStyleCancel handler:nil]];
+        [self presentViewController:alertController animated:YES completion:nil];
+        return;
+    }
+    
     // Check for all payers present.
     if ([_tonightsBill doAllPaymentHaveAPayer]) {
         // perform segue
