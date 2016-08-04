@@ -259,8 +259,6 @@ NSInteger const maxPageIndex = 1;
     [super viewDidLoad];
 	// Do any additional setup after loading the view.
     
-    self.view.backgroundColor = [Colors getEmptyMessageTextColor];
-    
     [[self navigationController] setToolbarHidden:YES animated:NO];
 }
 
