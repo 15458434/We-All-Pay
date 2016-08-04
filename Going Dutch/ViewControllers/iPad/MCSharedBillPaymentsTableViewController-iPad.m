@@ -241,11 +241,8 @@
     } else {
         thisCellsPayerName = NSLocalizedString(@"THISPAYMENTCELL_NOPAYERNAME", @"Someone");
     }
-    [[paymentCell namePayerLabel] setText:[NSString stringWithFormat:@"%@%@", thisCellsPayerName, NSLocalizedString(@"PAYMENTCELL_PAYERNAME_EXTRA", @" paid") ]];
+    paymentCell.namePayerLabel.text = thisCellsPayerName;
     
-//    if ([[thisCellsPayment payingPerson] picture]) {
-//        paymentCell.pictureOfPayer.image = thisCellsPayment.payingPerson.picture;
-//    }
     // Get category picture.
     NSArray *pictureObjects = [[CategoryPictureStoreController sharedController] pictureObjects];
     CategoryPictureObject *categoryObject = pictureObjects[[[thisCellsPayment categoryId] shortValue]];
@@ -255,7 +252,7 @@
     if (!thisCellsDescriptionOfPayment) {
         thisCellsDescriptionOfPayment = NSLocalizedString(@"THISPAYMENTCELL_NOOBJECT", @"Something");
     }
-    [[paymentCell whatPaidLabel] setText:[NSString stringWithFormat:@"%@%@", NSLocalizedString(@"PAYMENT_CELL_PAIDFOR_EXTRA", @"for ") , thisCellsDescriptionOfPayment]];
+    paymentCell.whatPaidLabel.text = thisCellsDescriptionOfPayment;
     
     CurrencyFormatter *cf = [[CurrencyFormatter alloc] initWithCurrencyCode:thisCellsPayment.currency.code];
     paymentCell.moneyPaidLabel.text = [cf stringForObjectValue:thisCellsPayment.money];
