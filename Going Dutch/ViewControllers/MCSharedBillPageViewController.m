@@ -64,7 +64,7 @@ NSInteger const maxPageIndex = 1;
 #endif
     NSInteger newIndex = _mainViewController.peopleOrPaymentsSelectionControl.selectedSegmentIndex;
 #ifdef DEBUG
-    NSLog(@"newIndex = %ld, _lastSetIndex = %ld", (long)newIndex, _lastSetIndex);
+    NSLog(@"newIndex = %ld, _lastSetIndex = %ld", (long)newIndex, (long)_lastSetIndex);
 #endif
     if (_lastSetIndex > newIndex) {
         __weak typeof(self) weakSelf = self;
