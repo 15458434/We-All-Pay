@@ -236,19 +236,6 @@ NSInteger const maxPageIndex = 1;
     }
 }
 
-- (NSString *)viewTitleForIndex:(NSInteger)index
-{
-    switch (index) {
-        case 0:
-            return NSLocalizedString(@"PEOPLE_PRESENT_PAGEVIEWCONTROLLER", @"People present");
-        case 1:
-            return NSLocalizedString(@"PAYMENTS_PAGEVIEWCONTROLLER", @"Payments");
-        default:
-            NSLog(@"Out of bounds, this shouldn't be happening.");
-            return nil;
-    }
-}
-
 #pragma mark - Inherited from super
 
 - (void)viewDidLoad
