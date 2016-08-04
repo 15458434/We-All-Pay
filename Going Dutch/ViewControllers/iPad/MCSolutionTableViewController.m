@@ -147,6 +147,29 @@ typedef NS_ENUM(BOOL, MCXRatesMissing) {
             return;
         }
         
+        // Workaround for a bug in iOS 9. Call reloadData before calling beginUpdates
+        NSOperatingSystemVersion ios9 = (NSOperatingSystemVersion){9, 0, 0};
+        if ([[NSProcessInfo processInfo] isOperatingSystemAtLeastVersion:ios9]) {
+            
+            BOOL shouldReloadData = YES;
+            NSInteger numberOfSections = [self.tableView.dataSource numberOfSectionsInTableView:self.tableView];
+            for (NSInteger section = 0; section < numberOfSections; section++)
+            {
+                if ([self.tableView.dataSource tableView:self.tableView numberOfRowsInSection:section] > 0)
+                {
+                    // found a row in current section, do not need to reload data
+                    shouldReloadData = NO;
+                    break;
+                }
+            }
+            
+            if (shouldReloadData)
+            {
+                [self.tableView reloadData];
+            }
+        }
+
+        
         // Update tableView.
         [self.tableView beginUpdates];
         
