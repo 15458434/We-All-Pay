@@ -604,7 +604,7 @@
     // Prepare NSFetchRequest
     NSFetchRequest *request = [[NSFetchRequest alloc] initWithEntityName:@"MCCurrency"];
     if (fetchLimit > 0) {
-        request.fetchLimit = fetchLimit;
+        request.fetchLimit = fetchLimit * 2;
     }
     request.sortDescriptors = @[[NSSortDescriptor sortDescriptorWithKey:@"dateCreated" ascending:NO]];
     request.predicate = [NSPredicate predicateWithFormat:@"ANY payment.onWhichBill.uniqueBillId LIKE %@ AND NOT code LIKE %@", self.uniqueBillId, self.mainCurrency.code];
@@ -622,7 +622,25 @@
         return nil;
     }
     
-    return results;
+    if (results.count <= 1) {
+        return results;
+    }
+    
+    NSMutableArray *resultsCopy = [NSMutableArray array];
+    NSMutableSet *codes = [NSMutableSet set];
+    for (MCCurrency *currency in results) {
+        NSString *code = currency.code;
+        if (![codes containsObject:code]) {
+            [resultsCopy addObject:currency];
+            [codes addObject:code];
+        }
+    }
+    
+    if (resultsCopy.count > 5) {
+        return [resultsCopy subarrayWithRange:NSMakeRange(0, 5)];
+    } else {
+        return resultsCopy;
+    }
 }
 
 #pragma mark - NSManagedObject Stuff
