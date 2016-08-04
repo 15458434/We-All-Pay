@@ -209,7 +209,7 @@
                                             <color key="titleShadowColor" white="0.5" alpha="1" colorSpace="calibratedWhite"/>
                                         </state>
                                         <connections>
-                                            <segue destination="cne-yA-g1T" kind="modal" identifier="newPayment" modalPresentationStyle="formSheet" id="oh3-5j-dZ9"/>
+                                            <action selector="addPaymentPressed:" destination="R7R-eq-O5O" eventType="touchUpInside" id="lX9-aM-cZo"/>
                                         </connections>
                                     </button>
                                     <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="9og-gt-gwG">
@@ -289,6 +289,7 @@
                         <outlet property="worstSalesPitchEverViewHeight" destination="sdl-xf-LSe" id="wCh-TT-iCh"/>
                         <segue destination="5uI-dP-udm" kind="modal" identifier="openSolutionView" id="82R-I3-yRA"/>
                         <segue destination="cne-yA-g1T" kind="modal" identifier="firstPaymentWithoutPayer" id="eXg-7Q-xwo"/>
+                        <segue destination="cne-yA-g1T" kind="modal" identifier="newPayment" id="FfM-Oa-hfo"/>
                     </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="en8-e4-seD" userLabel="First Responder" sceneMemberID="firstResponder"/>
@@ -842,7 +843,7 @@
             <objects>
                 <tableViewController storyboardIdentifier="MCPaymentTableViewController_iPad" useStoryboardIdentifierAsRestorationIdentifier="YES" id="3NB-dQ-HNX" customClass="PaymentViewController" customModule="We_all_pay" customModuleProvider="target" sceneMemberID="viewController">
                     <tableView key="view" clipsSubviews="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" dataMode="prototypes" style="plain" rowHeight="66" sectionHeaderHeight="22" sectionFooterHeight="22" id="FMb-15-8zu">
-                        <rect key="frame" x="0.0" y="44" width="540" height="576"/>
+                        <rect key="frame" x="0.0" y="64" width="540" height="556"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                         <inset key="separatorInset" minX="128" minY="0.0" maxX="0.0" maxY="0.0"/>
@@ -1529,8 +1530,8 @@
         <image name="iScreen button" width="26" height="26"/>
     </resources>
     <inferredMetricsTieBreakers>
+        <segue reference="FfM-Oa-hfo"/>
         <segue reference="NBY-n3-S8k"/>
         <segue reference="8Cc-ux-2co"/>
-        <segue reference="oh3-5j-dZ9"/>
     </inferredMetricsTieBreakers>
 </document>
