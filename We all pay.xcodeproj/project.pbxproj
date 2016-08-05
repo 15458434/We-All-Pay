@@ -22,7 +22,6 @@
 		3812760C1BBE74EF0004C8C2 /* UIViewControllerExtension.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3812760B1BBE74EF0004C8C2 /* UIViewControllerExtension.swift */; };
 		3812760E1BBE76B40004C8C2 /* PaymentViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3812760D1BBE76B40004C8C2 /* PaymentViewController.swift */; };
 		381276101BBE9A7F0004C8C2 /* MCPaymentPresenceTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3812760F1BBE9A7F0004C8C2 /* MCPaymentPresenceTableViewCell.swift */; };
-		381640FE1AD6D8A0000D9FAF /* Who is paying next.appex in Embed App Extensions */ = {isa = PBXBuildFile; fileRef = 38B6E0EC1A28BBAB009E69D7 /* Who is paying next.appex */; settings = {ATTRIBUTES = (RemoveHeadersOnCopy, ); }; };
 		3825A82419990BA400A8885D /* UIViewController+WeAllPayStore.m in Sources */ = {isa = PBXBuildFile; fileRef = 3825A82319990BA400A8885D /* UIViewController+WeAllPayStore.m */; };
 		3825A826199A2A5500A8885D /* MCTonightsBillTransfer.m in Sources */ = {isa = PBXBuildFile; fileRef = 3825A825199A2A5500A8885D /* MCTonightsBillTransfer.m */; };
 		3829AD0F178B41320025969D /* WeAllPayStore.xcdatamodeld in Sources */ = {isa = PBXBuildFile; fileRef = 3829AD0D178B41320025969D /* WeAllPayStore.xcdatamodeld */; };
@@ -45,6 +44,7 @@
 		383D5D841C0708F800BE9F94 /* ReturnPayment.swift in Sources */ = {isa = PBXBuildFile; fileRef = 383D5D831C0708F800BE9F94 /* ReturnPayment.swift */; };
 		383D5D851C07106600BE9F94 /* ReturnPayment.swift in Sources */ = {isa = PBXBuildFile; fileRef = 383D5D831C0708F800BE9F94 /* ReturnPayment.swift */; };
 		383E0C5D186737EB00AA688D /* MCSharedBillPageViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 383E0C5C186737EB00AA688D /* MCSharedBillPageViewController.m */; };
+		384A8D9A1D54776200A69E15 /* Who is paying next.appex in Embed App Extensions */ = {isa = PBXBuildFile; fileRef = 38B6E0EC1A28BBAB009E69D7 /* Who is paying next.appex */; settings = {ATTRIBUTES = (RemoveHeadersOnCopy, ); }; };
 		384EC90A1BC2F03F00A80799 /* PaymentTableViewCell_iPad.swift in Sources */ = {isa = PBXBuildFile; fileRef = 384EC9091BC2F03F00A80799 /* PaymentTableViewCell_iPad.swift */; };
 		384EC90C1BC2F17500A80799 /* SelectCategoryTableViewCell_iPad.swift in Sources */ = {isa = PBXBuildFile; fileRef = 384EC90B1BC2F17500A80799 /* SelectCategoryTableViewCell_iPad.swift */; };
 		384EC90E1BC2F35700A80799 /* SelectCurrencyTableViewCell_iPad.swift in Sources */ = {isa = PBXBuildFile; fileRef = 384EC90D1BC2F35700A80799 /* SelectCurrencyTableViewCell_iPad.swift */; };
@@ -179,13 +179,6 @@
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
-		381640FF1AD6D8A1000D9FAF /* PBXContainerItemProxy */ = {
-			isa = PBXContainerItemProxy;
-			containerPortal = 38572AC9169D437B00969C62 /* Project object */;
-			proxyType = 1;
-			remoteGlobalIDString = 38B6E0EB1A28BBAB009E69D7;
-			remoteInfo = "Who is paying next";
-		};
 		382B76EB1C398249000C203A /* PBXContainerItemProxy */ = {
 			isa = PBXContainerItemProxy;
 			containerPortal = 38572AC9169D437B00969C62 /* Project object */;
@@ -206,6 +199,13 @@
 			proxyType = 1;
 			remoteGlobalIDString = 382B76DF1C398249000C203A;
 			remoteInfo = CurrencyConverter;
+		};
+		384A8D9B1D54776300A69E15 /* PBXContainerItemProxy */ = {
+			isa = PBXContainerItemProxy;
+			containerPortal = 38572AC9169D437B00969C62 /* Project object */;
+			proxyType = 1;
+			remoteGlobalIDString = 38B6E0EB1A28BBAB009E69D7;
+			remoteInfo = "Who is paying next";
 		};
 		385F530A191C2C360012773D /* PBXContainerItemProxy */ = {
 			isa = PBXContainerItemProxy;
@@ -272,16 +272,16 @@
 			name = "Embed Frameworks";
 			runOnlyForDeploymentPostprocessing = 0;
 		};
-		381641011AD6D8A1000D9FAF /* Embed App Extensions */ = {
+		384A8D9D1D54776300A69E15 /* Embed App Extensions */ = {
 			isa = PBXCopyFilesBuildPhase;
-			buildActionMask = 8;
+			buildActionMask = 2147483647;
 			dstPath = "";
 			dstSubfolderSpec = 13;
 			files = (
-				381640FE1AD6D8A0000D9FAF /* Who is paying next.appex in Embed App Extensions */,
+				384A8D9A1D54776200A69E15 /* Who is paying next.appex in Embed App Extensions */,
 			);
 			name = "Embed App Extensions";
-			runOnlyForDeploymentPostprocessing = 1;
+			runOnlyForDeploymentPostprocessing = 0;
 		};
 /* End PBXCopyFilesBuildPhase section */
 
@@ -1210,18 +1210,18 @@
 				38572ACE169D437B00969C62 /* Sources */,
 				38572ACF169D437B00969C62 /* Frameworks */,
 				38572AD0169D437B00969C62 /* Resources */,
-				381641011AD6D8A1000D9FAF /* Embed App Extensions */,
 				380D611E1B299B94006F8AE4 /* Embed Frameworks */,
 				2506596625395E32E20C5D2C /* [CP] Embed Pods Frameworks */,
 				8A710DA964B64371764BBF64 /* [CP] Copy Pods Resources */,
+				384A8D9D1D54776300A69E15 /* Embed App Extensions */,
 			);
 			buildRules = (
 			);
 			dependencies = (
-				381641001AD6D8A1000D9FAF /* PBXTargetDependency */,
 				388A32901C11EDBD00F7459C /* PBXTargetDependency */,
 				382B76F41C398249000C203A /* PBXTargetDependency */,
 				38D6A3D01C73DDC000968BB2 /* PBXTargetDependency */,
+				384A8D9C1D54776300A69E15 /* PBXTargetDependency */,
 			);
 			name = "We all pay";
 			productName = "Going Dutch";
@@ -1751,11 +1751,6 @@
 /* End PBXSourcesBuildPhase section */
 
 /* Begin PBXTargetDependency section */
-		381641001AD6D8A1000D9FAF /* PBXTargetDependency */ = {
-			isa = PBXTargetDependency;
-			target = 38B6E0EB1A28BBAB009E69D7 /* Who is paying next */;
-			targetProxy = 381640FF1AD6D8A1000D9FAF /* PBXContainerItemProxy */;
-		};
 		382B76EC1C398249000C203A /* PBXTargetDependency */ = {
 			isa = PBXTargetDependency;
 			target = 382B76DF1C398249000C203A /* CurrencyConverter */;
@@ -1770,6 +1765,11 @@
 			isa = PBXTargetDependency;
 			target = 382B76DF1C398249000C203A /* CurrencyConverter */;
 			targetProxy = 382B76F31C398249000C203A /* PBXContainerItemProxy */;
+		};
+		384A8D9C1D54776300A69E15 /* PBXTargetDependency */ = {
+			isa = PBXTargetDependency;
+			target = 38B6E0EB1A28BBAB009E69D7 /* Who is paying next */;
+			targetProxy = 384A8D9B1D54776300A69E15 /* PBXContainerItemProxy */;
 		};
 		385F530B191C2C360012773D /* PBXTargetDependency */ = {
 			isa = PBXTargetDependency;
