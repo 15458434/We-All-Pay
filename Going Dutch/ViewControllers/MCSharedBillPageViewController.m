@@ -253,10 +253,6 @@ NSInteger const maxPageIndex = 1;
 {
     [super viewWillAppear:animated];
     
-    id destination = [self parentViewController];
-    NSParameterAssert([destination conformsToProtocol:@protocol(MCTonightsBillTransfer)]);
-    NSParameterAssert([destination conformsToProtocol:@protocol(MCCurrentViewDelegate)]);
-    
     switch (_mainViewController.peopleOrPaymentsSelectionControl.selectedSegmentIndex) {
         case 0:
         {
