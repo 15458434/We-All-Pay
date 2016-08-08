@@ -257,32 +257,43 @@ NSInteger const maxPageIndex = 1;
     NSParameterAssert([destination conformsToProtocol:@protocol(MCTonightsBillTransfer)]);
     NSParameterAssert([destination conformsToProtocol:@protocol(MCCurrentViewDelegate)]);
     
-    if ([destination currentView] == MCSelectSharedBillTableView) {
-        _lastSetIndex = 1;
-        MCSharedBillTableViewController *myFirstView = (MCSharedBillTableViewController *)[self viewControllerForIndex:1];
-        __weak typeof(self) weakSelf = self;
-        [self setViewControllers:@[myFirstView] direction:UIPageViewControllerNavigationDirectionForward animated:NO completion:^(BOOL finished) {
-            if (finished) {
-                __strong typeof(weakSelf) strongSelf = weakSelf;
-                if (strongSelf) {
-                    strongSelf.mainViewController.peopleOrPaymentsSelectionControl.selectedSegmentIndex = 1;
-                    strongSelf.lastSetIndex = 1;
+    switch (_mainViewController.peopleOrPaymentsSelectionControl.selectedSegmentIndex) {
+        case 0:
+        {
+            _lastSetIndex = 0;
+            MCEditTripViewController *myFirstView = (MCEditTripViewController *)[self viewControllerForIndex:0];
+            __weak typeof(self) weakSelf = self;
+            [self setViewControllers:@[myFirstView] direction:UIPageViewControllerNavigationDirectionReverse animated:NO completion:^(BOOL finished) {
+                if (finished) {
+                    __strong typeof(weakSelf) strongSelf = weakSelf;
+                    if (strongSelf) {
+                        strongSelf.mainViewController.peopleOrPaymentsSelectionControl.selectedSegmentIndex = 0;
+                        strongSelf.lastSetIndex = 0;
+                    }
                 }
-            }
-        }];
-    } else {
-        _lastSetIndex = 0;
-        MCEditTripViewController *myFirstView = (MCEditTripViewController *)[self viewControllerForIndex:0];
-        __weak typeof(self) weakSelf = self;
-        [self setViewControllers:@[myFirstView] direction:UIPageViewControllerNavigationDirectionReverse animated:NO completion:^(BOOL finished) {
-            if (finished) {
-                __strong typeof(weakSelf) strongSelf = weakSelf;
-                if (strongSelf) {
-                    strongSelf.mainViewController.peopleOrPaymentsSelectionControl.selectedSegmentIndex = 0;
-                    strongSelf.lastSetIndex = 0;
+            }];
+        }
+            break;
+        case 1:
+        {
+            _lastSetIndex = 1;
+            MCSharedBillTableViewController *myFirstView = (MCSharedBillTableViewController *)[self viewControllerForIndex:1];
+            __weak typeof(self) weakSelf = self;
+            [self setViewControllers:@[myFirstView] direction:UIPageViewControllerNavigationDirectionForward animated:NO completion:^(BOOL finished) {
+                if (finished) {
+                    __strong typeof(weakSelf) strongSelf = weakSelf;
+                    if (strongSelf) {
+                        strongSelf.mainViewController.peopleOrPaymentsSelectionControl.selectedSegmentIndex = 1;
+                        strongSelf.lastSetIndex = 1;
+                    }
                 }
-            }
-        }];
+            }];
+        }
+            break;
+        default:
+            NSLog(@"This is an invalid selection between people and payments.");
+            abort();
+            break;
     }
 }
 

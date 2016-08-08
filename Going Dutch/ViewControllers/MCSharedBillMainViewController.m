@@ -296,6 +296,11 @@
     if ([[segue identifier] isEqualToString:@"pageViewController"]) {
         _pageViewController = (MCSharedBillPageViewController *)[segue destinationViewController];
         _pageViewController.mainViewController = self;
+        if (_tonightsBill.peoplePresent.count > 0) {
+            self.peopleOrPaymentsSelectionControl.selectedSegmentIndex = 1;
+        } else {
+            self.peopleOrPaymentsSelectionControl.selectedSegmentIndex = 0;
+        }
         NSManagedObjectContext *backgroundContext = [[MCWeAllPayStoreController defaultStore] backgroundThreadContext];
         [backgroundContext performBlock:^{
             id<MCTonightsBillTransfer> destination = [segue destinationViewController];
