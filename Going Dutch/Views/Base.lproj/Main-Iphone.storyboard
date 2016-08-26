@@ -1,5 +1,5 @@
-<?xml version="1.0" encoding="UTF-8" standalone="no"?>
-<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="10117" systemVersion="15G31" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" initialViewController="2iV-RF-WWF">
+<?xml version="1.0" encoding="UTF-8"?>
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="10117" systemVersion="16A304a" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" initialViewController="2iV-RF-WWF">
     <dependencies>
         <deployment identifier="iOS"/>
         <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="10085"/>
@@ -260,6 +260,7 @@
                         <segue destination="HxE-bK-sSq" kind="presentation" identifier="solveButton" id="ZLi-dv-Z0Y"/>
                         <segue destination="R4f-Dn-Lh4" kind="presentation" identifier="openFirstPaymentWithoutPayer" id="eZd-I3-t8D"/>
                         <segue destination="R4f-Dn-Lh4" kind="presentation" identifier="openPaymentView" id="z3e-Vr-AS7"/>
+                        <segue destination="R4f-Dn-Lh4" kind="presentation" identifier="openPaymentWithMissingData" id="jjg-NC-1KA"/>
                     </connections>
                 </tableViewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="aDR-YO-8As" userLabel="First Responder" sceneMemberID="firstResponder"/>
@@ -537,7 +538,7 @@
         <!--solution-->
         <scene sceneID="608-i5-b2Z">
             <objects>
-                <tableViewController storyboardIdentifier="MCReturnPaymentViewController" useStoryboardIdentifierAsRestorationIdentifier="YES" id="Wal-rm-jmd" customClass="MCReturnPaymentViewController" sceneMemberID="viewController">
+                <tableViewController storyboardIdentifier="MCReturnPaymentViewController" useStoryboardIdentifierAsRestorationIdentifier="YES" id="Wal-rm-jmd" customClass="SolutionViewController" customModule="We_all_pay" customModuleProvider="target" sceneMemberID="viewController">
                     <tableView key="view" opaque="NO" clipsSubviews="YES" clearsContextBeforeDrawing="NO" contentMode="scaleToFill" restorationIdentifier="solveTableView" alwaysBounceVertical="YES" dataMode="prototypes" style="grouped" separatorStyle="default" allowsSelection="NO" rowHeight="44" sectionHeaderHeight="10" sectionFooterHeight="10" id="zpp-aB-s1w">
                         <rect key="frame" x="0.0" y="64" width="600" height="536"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
@@ -1431,8 +1432,8 @@
         <image name="iScreen button" width="26" height="26"/>
     </resources>
     <inferredMetricsTieBreakers>
+        <segue reference="jjg-NC-1KA"/>
         <segue reference="5Vh-JE-OCd"/>
-        <segue reference="z3e-Vr-AS7"/>
         <segue reference="C0F-pM-cfm"/>
     </inferredMetricsTieBreakers>
 </document>

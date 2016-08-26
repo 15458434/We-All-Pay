@@ -16,16 +16,16 @@
 #import "MCPerson+addons.h"
 #import "MCCurrency+addons.h"
 
-typedef NS_ENUM(BOOL, MCXRatesMissing) {
-    xRatesPresent,
-    xRatesMissing
+typedef NS_ENUM(BOOL, MCXRateStatus) {
+    xRatesPresent NS_SWIFT_NAME(Present),
+    xRatesMissing NS_SWIFT_NAME(Missing)
 };
 
 @interface MCSolutionTableViewController ()
 
 @property (nonatomic, strong) NSArray *solution;
 @property (nonatomic, strong) MCTableEmptyMessage_iPad *emptyMessage;
-@property (nonatomic) MCXRatesMissing areXRatesMissing;
+@property (nonatomic) MCXRateStatus areXRatesMissing;
 
 @end
 
@@ -47,40 +47,7 @@ typedef NS_ENUM(BOOL, MCXRatesMissing) {
 
 - (void)openMailView:(id)sender
 {
-    if ([MFMailComposeViewController canSendMail]) {
-        // Init the mailComposer
-        MCMailComposer *mailComposer = [[MCMailComposer alloc] initWithTonightsBill:_tonightsBill];
-        
-        // Init the mail ViewController
-        MFMailComposeViewController *_mailViewController = [[MFMailComposeViewController alloc] init];
-        [_mailViewController setMailComposeDelegate:sender];
-        [_mailViewController setEdgesForExtendedLayout:UIRectEdgeNone];
-        [_mailViewController setModalPresentationStyle:UIModalPresentationFormSheet];
-        [[_mailViewController viewControllers][0] setEdgesForExtendedLayout:UIRectEdgeNone];
-        
-        NSMutableDictionary *textAttributes = [[NSMutableDictionary alloc] initWithDictionary:[self navigationController].navigationBar.titleTextAttributes];
-        [textAttributes setValue:[UIColor whiteColor] forKey:NSForegroundColorAttributeName];
-        [[_mailViewController navigationBar] setTitleTextAttributes:textAttributes];
-        
-        // Set the mail.
-        [_mailViewController setToRecipients:[mailComposer getMailAddresses]];
-        [_mailViewController setSubject:[mailComposer getSubject]];
-        [_mailViewController setMessageBody:[mailComposer getMailBody] isHTML:mailComposer.isHTML];
-        
-        if (sender!=self) {
-            [sender presentViewController:_mailViewController animated:YES completion:nil];
-        } else {
-            [[self navigationController] presentViewController:_mailViewController animated:YES completion:nil];
-        }
-    } else {
-        NSString *alertTitle = NSLocalizedString(@"Unable to send email", @"Title of an alert that notifies the user the app is unable to send email.");
-        NSString *alertMessage = NSLocalizedString(@"Please configure your mail in Settings", @"Instruction in an alert to tell the user that they should check their email address for a valid configuration.");
-        NSString *dismiss = NSLocalizedString(@"Dismiss", @"Text on a button that dismisses the alert");
-        UIAlertController *alertController = [UIAlertController alertControllerWithTitle:alertTitle message:alertMessage preferredStyle:UIAlertControllerStyleAlert];
-        UIAlertAction *dismissAction = [UIAlertAction actionWithTitle:dismiss style:UIAlertActionStyleCancel handler:nil];
-        [alertController addAction:dismissAction];
-        [self presentViewController:alertController animated:YES completion:nil];
-    }
+
 }
 
 - (void)setEmptyMessage

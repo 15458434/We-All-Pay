@@ -24,9 +24,10 @@
 
 #import "We_all_pay-Swift.h"
 
-@interface MCSharedBillTableViewController ()
+@interface MCSharedBillTableViewController () <ShowPayment>
 
 @property (nonatomic, strong) NSFetchedResultsController *dataController;
+@property (nonatomic, strong) MCPayment *forOpenPaymentWithMissingDataForSegue;
 
 @end
 
@@ -219,6 +220,13 @@
     NSLog(@"WritableTonightsBillIsCreated has been executed.");
 }
 
+#pragma mark - ShowPayment
+
+- (void)show:(MCPayment *)payment
+{
+    [self performSegueWithIdentifier:@"openPaymentWithMissingData" sender:self];
+}
+
 #pragma mark - UITextFieldDelegate
 
 - (void)textFieldDidBeginEditing:(UITextField *)textField
@@ -398,6 +406,12 @@
         id<MCThisPaymentProtocol, MCTonightsBillTransfer> theDestination = [[segue destinationViewController] viewControllers][0];
         [theDestination setThisPayment:[_tonightsBill getFirstPaymentWithoutAPayer]];
         [theDestination setTonightsBill:_tonightsBill];
+    } else if ([segue.identifier isEqualToString:@"openPaymentWithMissingData"]) {
+        NSParameterAssert([[[segue destinationViewController] viewControllers][0] conformsToProtocol:@protocol(MCThisPaymentProtocol)]);
+        id<MCThisPaymentProtocol, MCTonightsBillTransfer> theDestination = [[segue destinationViewController] viewControllers][0];
+        [theDestination setTonightsBill:_tonightsBill];
+        [theDestination setThisPayment:_forOpenPaymentWithMissingDataForSegue];
+        _forOpenPaymentWithMissingDataForSegue = nil;
     } else {
         if ([[[segue destinationViewController] viewControllers][0] respondsToSelector:@selector(setTonightsBill:)]) {
             [[[segue destinationViewController] viewControllers][0] setTonightsBill:_tonightsBill];

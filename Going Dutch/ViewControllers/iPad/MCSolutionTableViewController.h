@@ -23,4 +23,6 @@
 @property (strong, nonatomic) MCSharedBill *writableTonightsBill;
 @property (strong, nonatomic) void (^dismissMe)();
 
+- (void)openMailView:(id)sender;
+
 @end

@@ -26,4 +26,6 @@
 - (IBAction)sendAsEmailButtonPressed:(id)sender;
 - (IBAction)mainCancelButtonPressed:(id)sender;
 
+- (void)openMailView:(id)sender;
+
 @end

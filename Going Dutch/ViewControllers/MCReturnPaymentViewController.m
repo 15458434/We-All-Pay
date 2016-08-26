@@ -17,9 +17,9 @@
 
 #import "We_all_pay-Swift.h"
 
-typedef NS_ENUM(BOOL, MCXRatesMissing) {
-    xRatesPresent,
-    xRatesMissing
+typedef NS_ENUM(BOOL, MCXRateStatus) {
+    xRatesPresent NS_SWIFT_NAME(Present),
+    xRatesMissing NS_SWIFT_NAME(Missing)
 };
 
 @interface MCReturnPaymentViewController () <UIAlertViewDelegate, MFMailComposeViewControllerDelegate>
@@ -27,7 +27,7 @@ typedef NS_ENUM(BOOL, MCXRatesMissing) {
 @property (nonatomic, strong) NSArray<MCPerson *> *peoplePresent;
 @property (nonatomic, strong) NSArray<ReturnPayment *> *solution;
 
-@property (nonatomic) MCXRatesMissing areXRatesMissing;
+@property (nonatomic) MCXRateStatus areXRatesMissing;
 
 @property (nonatomic, strong) MCTableEmptyMessage *emptyMessage;
 
@@ -49,43 +49,14 @@ typedef NS_ENUM(BOOL, MCXRatesMissing) {
     [[[self navigationController] presentingViewController] dismissViewControllerAnimated:YES completion:nil];
 }
 
-#pragma mark - Private in this class
+#pragma mark - Public in this class
 
 - (void)openMailView:(id)sender
 {
-#ifdef DEBUG
-    NSLog(@"%@ openMailView:%@", self, sender);
-#endif
-    if ([MFMailComposeViewController canSendMail]) {
-        // Init the mailComposer
-        MCMailComposer *mailComposer = [[MCMailComposer alloc] initWithTonightsBill:[self tonightsBill]];
-        NSArray *recipients = [mailComposer getMailAddresses];
-        NSString *subject = [mailComposer getSubject];
-        NSString *messageBody = [mailComposer getMailBody];
-        // Init the mailViewController
-        MFMailComposeViewController *mailViewController = [[MFMailComposeViewController alloc] init];
-        [mailViewController setMailComposeDelegate:sender];
-        [mailViewController setEdgesForExtendedLayout:UIRectEdgeNone];
-        [mailViewController setModalPresentationStyle:UIModalPresentationFormSheet];
-        [[mailViewController viewControllers][0] setEdgesForExtendedLayout:UIRectEdgeNone];
-        [mailViewController setToRecipients:recipients];
-        [mailViewController setSubject:subject];
-        [mailViewController setMessageBody:messageBody isHTML:mailComposer.isHTML];
-        
-        [self presentViewController:mailViewController animated:YES completion:^{
-            [[UIApplication sharedApplication] setStatusBarStyle:UIStatusBarStyleLightContent];
-            [mailViewController setNeedsStatusBarAppearanceUpdate];
-        }];
-    } else {
-        NSString *alertTitle = NSLocalizedString(@"Unable to send email", @"Title of an alert that notifies the user the app is unable to send email.");
-        NSString *alertMessage = NSLocalizedString(@"Please configure your mail in Settings", @"Instruction in an alert to tell the user that they should check their email address for a valid configuration.");
-        NSString *dismiss = NSLocalizedString(@"Dismiss", @"Text on a button that dismisses the alert");
-        UIAlertController *alertController = [UIAlertController alertControllerWithTitle:alertTitle message:alertMessage preferredStyle:UIAlertControllerStyleAlert];
-        UIAlertAction *dismissAction = [UIAlertAction actionWithTitle:dismiss style:UIAlertActionStyleCancel handler:nil];
-        [alertController addAction:dismissAction];
-        [self presentViewController:alertController animated:YES completion:nil];
-    }
+
 }
+
+#pragma mark - Private in this class
 
 - (void)shareBill:(id)sender
 {
@@ -116,7 +87,6 @@ typedef NS_ENUM(BOOL, MCXRatesMissing) {
             [mailAddressesMissing setDelegate:self];
             [mailAddressesMissing show];
         }
-
     }
 }
 
