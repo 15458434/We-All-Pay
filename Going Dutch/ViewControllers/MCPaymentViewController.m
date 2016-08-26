@@ -84,7 +84,9 @@ typedef NS_ENUM(BOOL, ChildViewOpened) {
 
 - (IBAction)mainDoneButtonPressed:(id)sender
 {
+#ifdef DEBUG
     NSLog(@"MCPaymentViewController: Done button pressed.");
+#endif
     if ([_payerNameField isFirstResponder]) {
         [self donePersonPicker:self];
     }
@@ -255,7 +257,9 @@ typedef NS_ENUM(BOOL, ChildViewOpened) {
     if (textField == _payerNameField) {
         // TODO: Better UI solution for the user.
         if ([[_tonightsBill peoplePresent] count] == 0) {
+#ifdef DEBUG
             NSLog(@"No people present on _tonightsBill, editing this textField is not allowed.");
+#endif
             return NO;
         }
     }
@@ -367,7 +371,9 @@ typedef NS_ENUM(BOOL, ChildViewOpened) {
     
     // If tonight's bill wasn't passed along.
     if (!_tonightsBill) {
+#ifdef DEBUG
         NSLog(@"tonightsBill wasn't passed along.");
+#endif
         @throw [NSException exceptionWithName:@"tonightsBill missing" reason:@"thisPayment didn't receive tonightsBill." userInfo:nil];
     }
     
