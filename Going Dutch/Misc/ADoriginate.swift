@@ -15,17 +15,17 @@ class ADoriginate : NSObject {
     var fromiAd: NSNumber?
     
     override init() {
-        let userDefaults = NSUserDefaults.standardUserDefaults()
-        fromiAd = userDefaults.boolForKey(fromiAdKey)
+        let userDefaults = UserDefaults.standard
+        fromiAd = userDefaults.bool(forKey: fromiAdKey)
         
         super.init()
     }
     
     init(completionHandler: () -> ()) {
-        let userDefaults = NSUserDefaults.standardUserDefaults()
-        let fromiAdValueFromUserDefaults: Bool! = userDefaults.boolForKey(fromiAdKey)
+        let userDefaults = UserDefaults.standard
+        let fromiAdValueFromUserDefaults: Bool! = userDefaults.bool(forKey: fromiAdKey)
         if let myValue = fromiAdValueFromUserDefaults {
-            fromiAd = NSNumber(bool: myValue)
+            fromiAd = NSNumber(value: myValue)
         }
         
         super.init()
@@ -38,8 +38,8 @@ class ADoriginate : NSObject {
         }
     }
     
-    func fetchAttribution(completionHandler: () -> ()){
-        ADClient.sharedClient().lookupAdConversionDetails({ (appPurchaseDate, iAdImpressionDate) -> Void in
+    func fetchAttribution(_ completionHandler: () -> ()){
+        ADClient.shared().lookupAdConversionDetails({ (appPurchaseDate, iAdImpressionDate) -> Void in
             // True if we were installed from an iAd campaign
             if iAdImpressionDate != nil {
                 self.fromiAd = true
@@ -47,14 +47,14 @@ class ADoriginate : NSObject {
                 self.fromiAd = false
             }
             completionHandler()
-            self.save()
+            _ = self.save()
         })
     }
     
     func save() -> Bool {
-        let userDefaults = NSUserDefaults.standardUserDefaults()
+        let userDefaults = UserDefaults.standard
         if let fromiAdValue = fromiAd?.boolValue {
-            userDefaults.setBool(fromiAdValue, forKey: fromiAdKey)
+            userDefaults.set(fromiAdValue, forKey: fromiAdKey)
             if userDefaults.synchronize() {
                 print("UserDefaults Sync succesful.")
                 return true

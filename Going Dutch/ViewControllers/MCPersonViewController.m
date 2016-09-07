@@ -50,6 +50,8 @@ typedef NS_ENUM(BOOL, MCStatus) {
 @property (nonatomic) BOOL thisPersonHasPaidSomething;
 @property (nonatomic) BOOL mainCancelPressed;
 
+
+
 @end
 
 @implementation MCPersonViewController
@@ -174,14 +176,6 @@ typedef NS_ENUM(BOOL, MCStatus) {
         [_emailField setInputAccessoryView:inputAccessoryPickerView];
         
         [_emailSelectionFromAddressBookPickerView selectRow:indexOfDefaultEmailAddress inComponent:0 animated:YES];
-        UIToolbar *inputAccossoryNumberPad = [[UIToolbar alloc] initWithFrame:toolbarRect];
-        cancelButton = [[UIBarButtonItem alloc] initWithBarButtonSystemItem:UIBarButtonSystemItemCancel
-                                                                     target:self
-                                                                     action:@selector(cancelNumberPad:)];
-        doneButton = [[UIBarButtonItem alloc] initWithBarButtonSystemItem:UIBarButtonSystemItemDone
-                                                                   target:self
-                                                                   action:@selector(doneNumberPad:)];
-        [inputAccossoryNumberPad setItems:@[cancelButton, flexButton, doneButton] animated:YES];
     } else {
         _isSelectEmail = NO;
     }

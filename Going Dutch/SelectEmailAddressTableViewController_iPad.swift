@@ -23,29 +23,29 @@ class SelectEmailAddressTableViewController_iPad: UITableViewController, ThisPer
         super.viewDidLoad()
         
         let arrayOfEmailAddresses = Array(thisPerson.emailAddress) as! [MCEmailAddress]
-        let emailAddressSelector: Selector = Selector("emailAddress")
-        allEmailAddresses = UILocalizedIndexedCollation.currentCollation().sortedArrayFromArray(arrayOfEmailAddresses, collationStringSelector: emailAddressSelector) as! [MCEmailAddress]
+        let emailAddressSelector: Selector = #selector(getter: MCPerson.emailAddress)
+        allEmailAddresses = UILocalizedIndexedCollation.current().sortedArray(from: arrayOfEmailAddresses, collationStringSelector: emailAddressSelector) as! [MCEmailAddress]
     }
     
     // MARK: UI Table View Delegate
-    override func tableView(tableView: UITableView, didSelectRowAtIndexPath indexPath: NSIndexPath) {
-        let newDefaulEmailAddressObject = allEmailAddresses[indexPath.row]
+    override func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
+        let newDefaulEmailAddressObject = allEmailAddresses[(indexPath as NSIndexPath).row]
         thisPerson.setNewDefaultEmailaddressObject(newDefaulEmailAddressObject)
         dismissMe!()
     }
     
     // MARK: UI Table View Data Source
-    override func numberOfSectionsInTableView(tableView: UITableView) -> Int {
+    override func numberOfSections(in tableView: UITableView) -> Int {
         return 1
     }
     
-    override func tableView(tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
+    override func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
         return allEmailAddresses.count
     }
     
-    override func tableView(tableView: UITableView, cellForRowAtIndexPath indexPath: NSIndexPath) -> UITableViewCell {
-        let cell = tableView.dequeueReusableCellWithIdentifier("MCSelectEmailAddressTableViewCell_iPad", forIndexPath: indexPath) as! SelectEmailAddressTableViewCell_iPad
-        let emailAddress = allEmailAddresses[indexPath.row]
+    override func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
+        let cell = tableView.dequeueReusableCell(withIdentifier: "MCSelectEmailAddressTableViewCell_iPad", for: indexPath) as! SelectEmailAddressTableViewCell_iPad
+        let emailAddress = allEmailAddresses[(indexPath as NSIndexPath).row]
         cell.emailAddressLabel.text = emailAddress.emailAddress
         return cell
     }

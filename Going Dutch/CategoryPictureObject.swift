@@ -24,14 +24,14 @@ class CategoryPictureObject: NSObject {
         return UIImage(named: "\(pictureFilename)-large")
     }
     
-    class func object(dictionary: Dictionary<String, AnyObject>) -> CategoryPictureObject {
+    class func object(_ dictionary: Dictionary<String, AnyObject>) -> CategoryPictureObject {
         return CategoryPictureObject(dictionary: dictionary)
     }
     
     init(dictionary: Dictionary<String, AnyObject>) {
         categoryDescription = dictionary[categoryDescriptionKey] as! String
         let categoryNumber = dictionary[categoryIdKey] as! NSNumber
-        categoryId = categoryNumber.shortValue
+        categoryId = categoryNumber.int16Value
         pictureFilename = dictionary[categoryPictureFilenameKey] as! String
     }
 }

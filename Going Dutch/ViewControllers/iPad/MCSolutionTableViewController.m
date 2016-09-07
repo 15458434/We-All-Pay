@@ -303,7 +303,7 @@ typedef NS_ENUM(BOOL, MCXRateStatus) {
             }
         default:
             @throw [NSException exceptionWithName:@"TableView broken" reason:@"There are no more than 3 sections in this tableView." userInfo:nil];
-            return nil;
+            return -1;
     }
 }
 

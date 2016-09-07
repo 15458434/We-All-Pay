@@ -15,8 +15,8 @@ class MCPaymentPresenceTableViewCell_iPhone: UITableViewCell {
     @IBOutlet var owesLabel: UILabel!
     var thisCellsPaymentPresence: MCPaymentPresence?
     
-    func presenceIsSwitched(sender: AnyObject) {
-        thisCellsPaymentPresence!.isPersonPresent = NSNumber(bool: isPresentSwitch.on)
+    func presenceIsSwitched(_ sender: AnyObject) {
+        thisCellsPaymentPresence!.isPersonPresent = NSNumber(value: isPresentSwitch.isOn)
         thisCellsPaymentPresence!.payment.recalculateAveragePeopleOweAndStore()
     }
 }

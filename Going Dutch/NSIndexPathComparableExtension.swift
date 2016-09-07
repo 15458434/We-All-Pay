@@ -8,14 +8,14 @@
 
 import UIKit
 
-extension NSIndexPath: Comparable { }
-
-public func ==(lhs: NSIndexPath, rhs: NSIndexPath) -> Bool {
-    let result = lhs.compare(rhs)
-    return result == NSComparisonResult.OrderedSame
-}
-
-public func <(lhs: NSIndexPath, rhs: NSIndexPath) -> Bool {
-    let result = lhs.compare(rhs)
-    return result == NSComparisonResult.OrderedAscending
-}
+//extension IndexPath: Comparable { }
+//
+//public func ==(lhs: IndexPath, rhs: IndexPath) -> Bool {
+//    let result = (lhs as NSIndexPath).compare(rhs)
+//    return result == ComparisonResult.orderedSame
+//}
+//
+//public func <(lhs: IndexPath, rhs: IndexPath) -> Bool {
+//    let result = (lhs as NSIndexPath).compare(rhs)
+//    return result == ComparisonResult.orderedAscending
+//}

@@ -11,15 +11,15 @@ import CoreData
 import WhoPayingUserDefaultsStoreInterface
 
 enum DidSomethingChange: Int8 {
-    case NothingChanged = 0, SomethingChanged
+    case nothingChanged = 0, somethingChanged
 }
 
 enum IsNew {
-    case IsNew, IsNotNew
+    case isNew, isNotNew
 }
 
 enum CancelButtonPressed {
-    case NotPressed, IsPressed
+    case notPressed, isPressed
 }
 
 @objc class PaymentViewController: UITableViewController, MCTonightsBillTransfer, MCThisPaymentProtocol, MCDismissMeBlockProtocol, MCDismissKeyboardProtocol, MCPathComponentsToOpenProtocol, UITextFieldDelegate, UIPopoverControllerDelegate,NSFetchedResultsControllerDelegate {
@@ -35,7 +35,7 @@ enum CancelButtonPressed {
     var didSomethingChange: DidSomethingChange?
     var isNew: IsNew?
     
-    var dataController: NSFetchedResultsController!
+    var dataController: NSFetchedResultsController<MCPaymentPresence>!
     var paymentPresenceArray: [MCPaymentPresence]!
     
     var thisPayment: MCPayment!
@@ -46,27 +46,27 @@ enum CancelButtonPressed {
     
     var pathComponentsToOpen: [AnyObject]?
     
-    var mainCancelIsPressed = CancelButtonPressed.NotPressed
+    var mainCancelIsPressed = CancelButtonPressed.notPressed
     
     // MARK: IB Actions
-    @IBAction func mainCancelPressed(sender: UIButton) {
-        mainCancelIsPressed = .IsPressed
+    @IBAction func mainCancelPressed(_ sender: UIButton) {
+        mainCancelIsPressed = .isPressed
         dataController.delegate = nil
         if MCWeAllPayStoreController.defaultStore().mainThreadContext.undoManager?.canUndo == true {
             MCWeAllPayStoreController.defaultStore().endUndoGroupAndUndo()
         } else {
             MCWeAllPayStoreController.defaultStore().endUndoGroup()
         }
-        navigationController?.presentingViewController?.dismissViewControllerAnimated(true, completion: nil)
+        navigationController?.presentingViewController?.dismiss(animated: true, completion: nil)
         dismissMe?()
     }
     
-    @IBAction func mainDonePressed(sender: UIButton) {
-        let now = NSDate()
+    @IBAction func mainDonePressed(_ sender: UIButton) {
+        let now = Date()
         tonightsBill.dateModified = now
         MCWeAllPayStoreController.defaultStore().endUndoGroupAndProcess()
         MCWeAllPayStoreController.defaultStore().saveMainThreadContext()
-        navigationController?.presentingViewController?.dismissViewControllerAnimated(true, completion: { () -> Void in
+        navigationController?.presentingViewController?.dismiss(animated: true, completion: { () -> Void in
             WhoPayingUserDefaultsStoreInterface.sendToUserDefaultsStoreInterface(self.tonightsBill)
         })
         dismissMe?()
@@ -74,7 +74,7 @@ enum CancelButtonPressed {
     
     // MARK: New in this class
     private func reloadCategoryImageView() {
-        let categoryId = thisPayment.categoryId.integerValue
+        let categoryId = thisPayment.categoryId.intValue
         let categoryObject = CategoryPictureStoreController.sharedController.pictureObjects[categoryId]
         if categoryId > 0 {
             categoryImage.image = categoryObject.largePicture
@@ -84,20 +84,20 @@ enum CancelButtonPressed {
     }
     
     private func setTextForCategoryButton() {
-        let categoryId = thisPayment.categoryId.integerValue
+        let categoryId = thisPayment.categoryId.intValue
         let categoryObject = CategoryPictureStoreController.sharedController.pictureObjects[categoryId]
         if categoryId > 0 {
             categoryImage.image = categoryObject.largePicture
-            categoryButton.setTitle(categoryObject.categoryDescription, forState: .Normal)
+            categoryButton.setTitle(categoryObject.categoryDescription, for: UIControlState())
         } else {
             categoryImage.image = nil
             let title = NSLocalizedString("Select Category", comment: "Text of the payment category selection button")
-            categoryButton.setTitle(title, forState: .Normal)
+            categoryButton.setTitle(title, for: UIControlState())
         }
         categoryButton.sizeToFit()
     }
     
-    private func performFetchAndReloadTableView(notification: NSNotification) {
+    private func performFetchAndReloadTableView(_ notification: Notification) {
         print("Should not be executed")
     }
     
@@ -119,7 +119,7 @@ enum CancelButtonPressed {
             selectButton.invalidateIntrinsicContentSize()
             return
         }
-        selectButton.setTitle(payingPerson.getFullName(), forState: .Normal)
+        selectButton.setTitle(payingPerson.getFullName(), for: UIControlState())
         selectButton.invalidateIntrinsicContentSize()
     }
     
@@ -142,23 +142,23 @@ enum CancelButtonPressed {
         startResigningFirstResponderOnBackgroundTap()
     }
     
-    override func viewWillAppear(animated: Bool) {
+    override func viewWillAppear(_ animated: Bool) {
         super.viewWillAppear(animated)
         
         if thisPayment == nil {
             thisPayment = tonightsBill.addPayment()
             let screenTitle = NSLocalizedString("New Payment", comment: "Screen name saying this is a new payment.")
             title = screenTitle
-            isNew = .IsNew
+            isNew = .isNew
         } else {
             itemField.text = thisPayment.descriptionOfPayment
             if thisPayment.money != nil {
                 let cf = CurrencyFormatter(currencyCode: thisPayment.currency.code)
-                paidField.text = cf.stringForObjectValue(thisPayment.money)
+                paidField.text = cf.string(for: thisPayment.money)
             }
             reloadPayerView()
             setTextPayerButton()
-            isNew = .IsNotNew
+            isNew = .isNotNew
         }
         
         reloadCategoryImageView()
@@ -168,14 +168,14 @@ enum CancelButtonPressed {
 //        paymentPresenceArray = (thisPayment.peopleSharingPayment as NSSet).sortedArrayUsingDescriptors([sortDescriptor]) as! [MCPaymentPresence]
         
         if dataController == nil {
-            dataController = MCWeAllPayStoreController.defaultStore().paymentPresenceDataControllerForDelegate(self)
+            dataController = MCWeAllPayStoreController.defaultStore().paymentPresenceDataController(forDelegate: self) as! NSFetchedResultsController<MCPayment>! as! NSFetchedResultsController<MCPaymentPresence>!
         }
     }
     
-    override func viewDidDisappear(animated: Bool) {
+    override func viewDidDisappear(_ animated: Bool) {
         super.viewDidDisappear(animated)
         
-        NSNotificationCenter.defaultCenter().removeObserver(self)
+        NotificationCenter.default.removeObserver(self)
         dataController = nil
     }
     
@@ -188,28 +188,28 @@ enum CancelButtonPressed {
     }
     
     // MARK: UITextFieldDelegate 
-    func textFieldShouldBeginEditing(textField: UITextField) -> Bool {
+    func textFieldShouldBeginEditing(_ textField: UITextField) -> Bool {
         if textField == paidField {
             if thisPayment.money?.doubleValue <= 0.005 {
                 paidField.text = ""
             } else {
                 let cf = CurrencyFormatter(currencyCode: thisPayment.currency.code)
-                paidField.text = cf.editingStringForObjectValue(thisPayment.money ?? NSNumber(double: 0)) ?? nil
+                paidField.text = cf.editingString(for: thisPayment.money ?? NSNumber(value: 0)) ?? nil
             }
         }
         return true
     }
     
-    func textFieldShouldReturn(textField: UITextField) -> Bool {
+    func textFieldShouldReturn(_ textField: UITextField) -> Bool {
         return true
     }
     
-    func textFieldShouldEndEditing(textField: UITextField) -> Bool {
+    func textFieldShouldEndEditing(_ textField: UITextField) -> Bool {
         return true
     }
     
-    func textFieldDidEndEditing(textField: UITextField) {
-        if mainCancelIsPressed == CancelButtonPressed.NotPressed {
+    func textFieldDidEndEditing(_ textField: UITextField) {
+        if mainCancelIsPressed == CancelButtonPressed.notPressed {
             if textField == itemField {
                 thisPayment.descriptionOfPayment = itemField.text
             }
@@ -223,100 +223,100 @@ enum CancelButtonPressed {
                 }
                 thisPayment.recalculateAveragePeopleOweAndStore()
                 MCWeAllPayStoreController.defaultStore().endUndoGroupAndProcessWithoutRegistration()
-                paidField.text = cf.stringForObjectValue(thisPayment.money ?? NSNumber(double: 0))
+                paidField.text = cf.string(for: thisPayment.money ?? NSNumber(value: 0))
             }
         }
     }
     
     // MARK: UI Popover Controller Delegate
-    func popoverController(popoverController: UIPopoverController, willRepositionPopoverToRect rect: UnsafeMutablePointer<CGRect>, inView view: AutoreleasingUnsafeMutablePointer<UIView?>) {
+    func popoverController(_ popoverController: UIPopoverController, willRepositionPopoverTo rect: UnsafeMutablePointer<CGRect>, in view: AutoreleasingUnsafeMutablePointer<UIView>) {
         print("Doesn't do anything")
     }
     
-    func popoverControllerShouldDismissPopover(popoverController: UIPopoverController) -> Bool {
+    func popoverControllerShouldDismissPopover(_ popoverController: UIPopoverController) -> Bool {
         return true
     }
     
-    func popoverControllerDidDismissPopover(popoverController: UIPopoverController) {
+    func popoverControllerDidDismissPopover(_ popoverController: UIPopoverController) {
         if thisPayment.payingPerson != nil {
-            selectButton.setTitle(thisPayment.payingPerson.getFullName(), forState: .Normal)
+            selectButton.setTitle(thisPayment.payingPerson.getFullName(), for: UIControlState())
         }
     }
     
     // MARK: NS Fetched Results Controller Delegate
-    func controllerWillChangeContent(controller: NSFetchedResultsController) {
+    func controllerWillChangeContent(_ controller: NSFetchedResultsController<NSFetchRequestResult>) {
         debugPrint("controllerWillChangeContent")
         tableView.beginUpdates()
     }
     
-    func controllerDidChangeContent(controller: NSFetchedResultsController) {
+    func controllerDidChangeContent(_ controller: NSFetchedResultsController<NSFetchRequestResult>) {
         debugPrint("controllerDidChangeContent")
         tableView.endUpdates()
     }
     
-    func controller(controller: NSFetchedResultsController, didChangeObject anObject: AnyObject, atIndexPath indexPath: NSIndexPath?, forChangeType type: NSFetchedResultsChangeType, newIndexPath: NSIndexPath?) {
+    func controller(_ controller: NSFetchedResultsController<NSFetchRequestResult>, didChange anObject: AnyObject, at indexPath: IndexPath?, for type: NSFetchedResultsChangeType, newIndexPath: IndexPath?) {
         if #available(iOS 9, *) {
             switch (type) {
-            case .Insert:
-                tableView.insertRowsAtIndexPaths([newIndexPath!], withRowAnimation: .Fade)
-            case .Delete:
-                tableView.deleteRowsAtIndexPaths([indexPath!], withRowAnimation: .Fade)
-            case .Update:
-                tableView.reloadRowsAtIndexPaths([indexPath!], withRowAnimation: .Automatic)
-            case .Move:
-                tableView.deleteRowsAtIndexPaths([indexPath!], withRowAnimation: .Fade)
-                tableView.insertRowsAtIndexPaths([indexPath!], withRowAnimation: .Fade)
+            case .insert:
+                tableView.insertRows(at: [newIndexPath!], with: .fade)
+            case .delete:
+                tableView.deleteRows(at: [indexPath!], with: .fade)
+            case .update:
+                tableView.reloadRows(at: [indexPath!], with: .automatic)
+            case .move:
+                tableView.deleteRows(at: [indexPath!], with: .fade)
+                tableView.insertRows(at: [indexPath!], with: .fade)
             }
         } else {
             switch (type) {
-            case .Insert:
+            case .insert:
                 if indexPath == nil {
-                    tableView.insertRowsAtIndexPaths([newIndexPath!], withRowAnimation: .Fade)
+                    tableView.insertRows(at: [newIndexPath!], with: .fade)
                 }
-            case .Delete:
-                tableView.deleteRowsAtIndexPaths([indexPath!], withRowAnimation: .Fade)
-            case .Update:
-                tableView.reloadRowsAtIndexPaths([indexPath!], withRowAnimation: .Automatic)
-            case .Move:
+            case .delete:
+                tableView.deleteRows(at: [indexPath!], with: .fade)
+            case .update:
+                tableView.reloadRows(at: [indexPath!], with: .automatic)
+            case .move:
                 if indexPath == newIndexPath {
-                    tableView.reloadRowsAtIndexPaths([indexPath!], withRowAnimation: .Automatic)
+                    tableView.reloadRows(at: [indexPath!], with: .automatic)
                 } else {
-                    tableView.deleteRowsAtIndexPaths([indexPath!], withRowAnimation: .Fade)
-                    tableView.insertRowsAtIndexPaths([indexPath!], withRowAnimation: .Fade)
+                    tableView.deleteRows(at: [indexPath!], with: .fade)
+                    tableView.insertRows(at: [indexPath!], with: .fade)
                 }
             }
         }
     }
     
     // MARK: UI Table View Delegate
-    override func tableView(tableView: UITableView, heightForRowAtIndexPath indexPath: NSIndexPath) -> CGFloat {
+    override func tableView(_ tableView: UITableView, heightForRowAt indexPath: IndexPath) -> CGFloat {
         return 60
     }
     
     // MARK: UI Table View Data Source
-    override func numberOfSectionsInTableView(tableView: UITableView) -> Int {
+    override func numberOfSections(in tableView: UITableView) -> Int {
         return 1
     }
     
-    override func tableView(tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
+    override func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
         return dataController.fetchedObjects!.count
     }
     
-    override func tableView(tableView: UITableView, cellForRowAtIndexPath indexPath: NSIndexPath) -> UITableViewCell {
-        let cell = tableView.dequeueReusableCellWithIdentifier("paymentPresenceTableViewCell", forIndexPath: indexPath) as! MCPaymentPresenceTableViewCell
-        let paymentPresenceForThisCell = dataController.objectAtIndexPath(indexPath) as! MCPaymentPresence
+    override func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
+        let cell = tableView.dequeueReusableCell(withIdentifier: "paymentPresenceTableViewCell", for: indexPath) as! MCPaymentPresenceTableViewCell
+        let paymentPresenceForThisCell = dataController.object(at: indexPath) 
         cell.nameLabel.text = paymentPresenceForThisCell.person.getFullName()
         cell.personView.image = paymentPresenceForThisCell.person.thumbnail
         cell.theSwitch.setOn(paymentPresenceForThisCell.isPersonPresent.boolValue, animated: false)
 
         let cf = CurrencyFormatter(currencyCode: paymentPresenceForThisCell.payment.currency.code)
-        let averageOweFromPayment = NSNumber(double: -paymentPresenceForThisCell.averageOweFromPayment.doubleValue)
-        cell.owesMoneyLabel.text = cf.stringForObjectValue(averageOweFromPayment)
+        let averageOweFromPayment = NSNumber(value: -paymentPresenceForThisCell.averageOweFromPayment.doubleValue)
+        cell.owesMoneyLabel.text = cf.string(for: averageOweFromPayment)
         cell.thisCellsPaymentPresence = paymentPresenceForThisCell
         cell.keyboardDismissDelegate = self
         
-        let constraintBetweenNameLabelAndPayerLabel = NSLayoutConstraint(item: selectButton, attribute: .Leading, relatedBy: .Equal, toItem: cell.nameLabel, attribute: .Leading, multiplier: 1.0, constant: 0.0)
-        let constraintBetweenPictureInCellAndPictureOfPayer = NSLayoutConstraint(item: cell.personView, attribute: .Trailing, relatedBy: .Equal, toItem: categoryImage, attribute: .Trailing, multiplier: 1.0, constant: 0.0)
+        let constraintBetweenNameLabelAndPayerLabel = NSLayoutConstraint(item: selectButton, attribute: .leading, relatedBy: .equal, toItem: cell.nameLabel, attribute: .leading, multiplier: 1.0, constant: 0.0)
+        let constraintBetweenPictureInCellAndPictureOfPayer = NSLayoutConstraint(item: cell.personView, attribute: .trailing, relatedBy: .equal, toItem: categoryImage, attribute: .trailing, multiplier: 1.0, constant: 0.0)
         self.tableView.addConstraints([constraintBetweenNameLabelAndPayerLabel, constraintBetweenPictureInCellAndPictureOfPayer])
         
         return cell
@@ -324,7 +324,7 @@ enum CancelButtonPressed {
     
     // MARK: Navigation
     
-    override func prepareForSegue(segue: UIStoryboardSegue, sender: AnyObject?) {
+    override func prepare(for segue: UIStoryboardSegue, sender: AnyObject?) {
         switch (segue.identifier) {
         case let identifier where identifier == "selectPayer_iPad":
             let destination = segue.destinationViewController as! SelectPayerTableViewController_iPad
@@ -334,7 +334,7 @@ enum CancelButtonPressed {
             let myPopover = (segue as! UIStoryboardPopoverSegue).popoverController
             myPopover.delegate = self
             destination.dismissMe = {
-                myPopover.dismissPopoverAnimated(true)
+                myPopover.dismiss(animated: true)
                 self.reloadPayerView()
             }
         case let identifier where identifier == "openSelectCurrency_iPad":
@@ -345,7 +345,7 @@ enum CancelButtonPressed {
             let myPopover = (segue as! UIStoryboardPopoverSegue).popoverController
             myPopover.delegate = self
             destination.dismissMe = { 
-                myPopover.dismissPopoverAnimated(true)
+                myPopover.dismiss(animated: true)
                 MCWeAllPayStoreController.defaultStore().endUndoGroupAndProcessWithoutRegistration()
             }
         case let identifier where identifier == "selectCategory_iPad":
@@ -355,7 +355,7 @@ enum CancelButtonPressed {
             let myPopover = (segue as! UIStoryboardPopoverSegue).popoverController
             myPopover.delegate = self
             destination.dismissMe = {
-                myPopover.dismissPopoverAnimated(true)
+                myPopover.dismiss(animated: true)
                 self.reloadCategoryImageView()
                 self.setTextForCategoryButton()
             }

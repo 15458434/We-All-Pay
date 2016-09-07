@@ -8,32 +8,32 @@
 
 import UIKit
 
-func createAttributesStringForWhoIsPayingNext(tripName: String, fullNameNextPayer: String) -> NSMutableAttributedString {
+func createAttributesStringForWhoIsPayingNext(_ tripName: String, fullNameNextPayer: String) -> NSMutableAttributedString {
     // The code of this function should be replaced to support multiple languages. For now it's just hardcoded.
-    let normalFontDescriptor: UIFontDescriptor = UIFontDescriptor.preferredFontDescriptorWithTextStyle(UIFontTextStyleBody)
+    let normalFontDescriptor: UIFontDescriptor = UIFontDescriptor.preferredFontDescriptor(withTextStyle: UIFontTextStyleBody)
     let normalFont: UIFont = UIFont(descriptor: normalFontDescriptor, size: 0)
     let normalAttributes: Dictionary = [NSFontAttributeName: normalFont]
     
-    let boldFontDescriptor: UIFontDescriptor = normalFontDescriptor.fontDescriptorWithSymbolicTraits(.TraitBold)
+    let boldFontDescriptor: UIFontDescriptor = normalFontDescriptor.withSymbolicTraits(.traitBold)!
     let boldFont: UIFont = UIFont(descriptor: boldFontDescriptor, size: 0)
     let boldAttributes: Dictionary = [NSFontAttributeName: boldFont];
     
-    let attributedTripName: NSAttributedString = NSAttributedString(string: tripName, attributes: boldAttributes)
-    let attributedFullNameNextPayer: NSAttributedString = NSAttributedString(string: fullNameNextPayer, attributes: boldAttributes)
+    let attributedTripName: AttributedString = AttributedString(string: tripName, attributes: boldAttributes)
+    let attributedFullNameNextPayer: AttributedString = AttributedString(string: fullNameNextPayer, attributes: boldAttributes)
     
     let firstPartString = String.localizedStringWithFormat(NSLocalizedString("FOR_YOUR_EVENT", comment: "First part of For your event eventName, 'name person' should pay next."))
     let thirdPartString = String.localizedStringWithFormat(NSLocalizedString("SHOULD_PAY_NEXT", comment: "Third part of For your event eventName, 'name person' should pay next."))
     
-    let firstPart: NSAttributedString = NSAttributedString(string: firstPartString, attributes: normalAttributes)
-    let secondPart: NSAttributedString = NSAttributedString(string: ", ", attributes: normalAttributes)
-    let thirdPart: NSAttributedString = NSAttributedString(string: thirdPartString, attributes: normalAttributes)
+    let firstPart: AttributedString = AttributedString(string: firstPartString, attributes: normalAttributes)
+    let secondPart: AttributedString = AttributedString(string: ", ", attributes: normalAttributes)
+    let thirdPart: AttributedString = AttributedString(string: thirdPartString, attributes: normalAttributes)
     
     let finalString: NSMutableAttributedString = NSMutableAttributedString()
-    finalString.appendAttributedString(firstPart)
-    finalString.appendAttributedString(attributedTripName)
-    finalString.appendAttributedString(secondPart)
-    finalString.appendAttributedString(attributedFullNameNextPayer)
-    finalString.appendAttributedString(thirdPart)
+    finalString.append(firstPart)
+    finalString.append(attributedTripName)
+    finalString.append(secondPart)
+    finalString.append(attributedFullNameNextPayer)
+    finalString.append(thirdPart)
     
     return finalString
 }
@@ -60,11 +60,11 @@ func createAttributesStringForWhoIsPayingNext(tripName: String, fullNameNextPaye
 //    return attributedText
 //}
 
-func betterCreateAttributesStringForWhoIsPayingNext(tripName: String, fullNameNextPayer: String) -> NSMutableAttributedString {
-    func createAttributesForFontStyle(style: String, withTrait trait: UIFontDescriptorSymbolicTraits) -> [String : AnyObject] {
-        let fontDescriptor = UIFontDescriptor.preferredFontDescriptorWithTextStyle(UIFontTextStyleBody)
-        let descriptorWithTrait = fontDescriptor.fontDescriptorWithSymbolicTraits(trait)
-        let font = UIFont(descriptor: descriptorWithTrait, size: 0)
+func betterCreateAttributesStringForWhoIsPayingNext(_ tripName: String, fullNameNextPayer: String) -> NSMutableAttributedString {
+    func createAttributesForFontStyle(_ style: String, withTrait trait: UIFontDescriptorSymbolicTraits) -> [String : AnyObject] {
+        let fontDescriptor = UIFontDescriptor.preferredFontDescriptor(withTextStyle: UIFontTextStyleBody)
+        let descriptorWithTrait = fontDescriptor.withSymbolicTraits(trait)
+        let font = UIFont(descriptor: descriptorWithTrait!, size: 0)
         return [NSFontAttributeName : font];
     }
     
@@ -79,7 +79,7 @@ func betterCreateAttributesStringForWhoIsPayingNext(tripName: String, fullNameNe
 }
 
 func createErrorMessage() -> NSMutableAttributedString {
-    let fontDescriptor = UIFontDescriptor.preferredFontDescriptorWithTextStyle(UIFontTextStyleBody)
+    let fontDescriptor = UIFontDescriptor.preferredFontDescriptor(withTextStyle: UIFontTextStyleBody)
     let font = UIFont(descriptor: fontDescriptor, size: 0)
     let text = NSLocalizedString("There is no data to display", comment: "There is no data to display")
     let attributedResult = NSMutableAttributedString(string: text, attributes: [NSFontAttributeName : font])

@@ -11,7 +11,7 @@ import RateMeControllerForiOS
 
 extension RateMeController {
     class func openReviewLink() {
-        let url = NSURL(string: "itms-apps://itunes.apple.com/WebObjects/MZStore.woa/wa/viewContentsUserReviews?id=642135963&pageNumber=0&sortOrdering=2&type=Purple+Software&mt=8")!
-        UIApplication.sharedApplication().openURL(url)
+        let url = URL(string: "itms-apps://itunes.apple.com/WebObjects/MZStore.woa/wa/viewContentsUserReviews?id=642135963&pageNumber=0&sortOrdering=2&type=Purple+Software&mt=8")!
+        UIApplication.shared().openURL(url)
     }
 }

@@ -14,7 +14,7 @@ class InfoScreenContainerViewController: UIViewController {
     
     // MARK: New in this class
     
-    override func prepareForSegue(segue: UIStoryboardSegue, sender: AnyObject?) {
+    override func prepare(for segue: UIStoryboardSegue, sender: AnyObject?) {
         switch (segue.identifier) {
         case let identifier where identifier == "EmbedInfoScreenViewController_iPad":
             let destination = segue.destinationViewController as! InfoScreenTableViewController

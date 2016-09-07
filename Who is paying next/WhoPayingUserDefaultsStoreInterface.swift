@@ -31,10 +31,10 @@ public class WhoPayingUserDefaultsStoreInterface: NSObject {
         }
     }
     
-    public var dateSaved: NSDate!
+    public var dateSaved: Date!
     
-    private var defaults: NSUserDefaults {
-        return NSUserDefaults(suiteName: WhoPayingUserDefaultsStoreInterface.MCWeAllPayToWhoIsPayingNextGroupBundleIdentifier)!
+    private var defaults: UserDefaults {
+        return UserDefaults(suiteName: WhoPayingUserDefaultsStoreInterface.MCWeAllPayToWhoIsPayingNextGroupBundleIdentifier)!
     }
     
     public static let MCWhoIsPayingNextBundleIdentifier: String = "group.com.GreenHair.We-all-pay.Who-is-paying-next"
@@ -54,20 +54,20 @@ public class WhoPayingUserDefaultsStoreInterface: NSObject {
     }
     
     public func fetchFromUserDefaults() {
-        tonightsBillUUID = defaults.objectForKey(kTonightsBillUUID) as? String
-        tripName = defaults.objectForKey(kTripName) as? String
-        nextPayerUUID = defaults.objectForKey(kNextPayerUUID) as? String
-        fullNameOfNextPayer = defaults.objectForKey(kFullNameOfNextPayer) as? String
-        dateSaved = defaults.objectForKey(kDateSaved) as? NSDate
+        tonightsBillUUID = defaults.object(forKey: kTonightsBillUUID) as? String
+        tripName = defaults.object(forKey: kTripName) as? String
+        nextPayerUUID = defaults.object(forKey: kNextPayerUUID) as? String
+        fullNameOfNextPayer = defaults.object(forKey: kFullNameOfNextPayer) as? String
+        dateSaved = defaults.object(forKey: kDateSaved) as? Date
     }
     
     public func storeToDefaults() {
-        defaults.setObject(tonightsBillUUID, forKey: kTonightsBillUUID)
-        defaults.setObject(tripName, forKey: kTripName)
-        defaults.setObject(nextPayerUUID, forKey: kNextPayerUUID)
-        defaults.setObject(fullNameOfNextPayer, forKey: kFullNameOfNextPayer)
-        self.dateSaved = NSDate()
-        defaults.setObject(dateSaved, forKey: kDateSaved)
+        defaults.set(tonightsBillUUID, forKey: kTonightsBillUUID)
+        defaults.set(tripName, forKey: kTripName)
+        defaults.set(nextPayerUUID, forKey: kNextPayerUUID)
+        defaults.set(fullNameOfNextPayer, forKey: kFullNameOfNextPayer)
+        self.dateSaved = Date()
+        defaults.set(dateSaved, forKey: kDateSaved)
         defaults.synchronize()
     }
 }

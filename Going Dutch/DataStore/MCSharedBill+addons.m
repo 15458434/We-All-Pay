@@ -409,7 +409,7 @@
     request.sortDescriptors = @[[NSSortDescriptor sortDescriptorWithKey:@"dateCreated" ascending:YES]];
     request.predicate = [NSPredicate predicateWithFormat:@"payingPerson = nil"];
     NSError *fetchError;
-    NSUInteger *amountOfPaymentWithoutPayers = [[self managedObjectContext] countForFetchRequest:request error:&fetchError];
+    NSUInteger amountOfPaymentWithoutPayers = [[self managedObjectContext] countForFetchRequest:request error:&fetchError];
     if (fetchError) {
         NSLog(@"Something went wrong counting payments without payers: %@", fetchError);
     }
@@ -444,7 +444,7 @@
     NSNumber *exchangeRateValidStatus = [NSNumber numberWithShort:MCExchangeRateStatusValid];
     request.predicate = [NSPredicate predicateWithFormat:@"payment.onWhichBill = %@ and status != %@", self, exchangeRateValidStatus];
     NSError *fetchError;
-    NSUInteger *amountOfInvalidExchangeRates = [[self managedObjectContext] countForFetchRequest:request error:&fetchError];
+    NSUInteger amountOfInvalidExchangeRates = [[self managedObjectContext] countForFetchRequest:request error:&fetchError];
     if (fetchError) {
         NSLog(@"Something went wrong counting invalid exchangeRates: %@", fetchError);
     }

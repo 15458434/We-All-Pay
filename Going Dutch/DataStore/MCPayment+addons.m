@@ -149,7 +149,7 @@
     request.predicate = [NSPredicate predicateWithFormat:@"payment = %@ AND isPersonPresent = %@", self, @YES];
     request.sortDescriptors = @[[NSSortDescriptor sortDescriptorWithKey:@"averageOweFromPayment" ascending:YES]];
     NSError *error;
-    NSUInteger *countInteger = [[self managedObjectContext] countForFetchRequest:request error:&error];
+    NSUInteger countInteger = [[self managedObjectContext] countForFetchRequest:request error:&error];
     if (error) {
         NSLog(@"Something went wrong counting people present: %@", error);
     }

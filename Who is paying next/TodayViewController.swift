@@ -17,7 +17,7 @@ class TodayViewController: UIViewController, NCWidgetProviding {
     var tripName: String!
     var nextPayerID: String!
     var fullNameNextPayer: String!
-    var dateSaved: NSDate!
+    var dateSaved: Date!
     var valid: Bool!
     
     func updateLocalOptionalsFromUserDefaults() -> Bool {
@@ -66,14 +66,14 @@ class TodayViewController: UIViewController, NCWidgetProviding {
         }
     }
     
-    func defaultsDidUpdate(notification: NSNotification) {
+    func defaultsDidUpdate(_ notification: Notification) {
         if updateLocalOptionalsFromUserDefaults() {
             updateLabel()
         }
         NCWidgetController.widgetController().setHasContent(true, forWidgetWithBundleIdentifier: WhoPayingUserDefaultsStoreInterface.MCWhoIsPayingNextBundleIdentifier)
     }
     
-    func tappedInTheBackground(sender: AnyObject) {
+    func tappedInTheBackground(_ sender: AnyObject) {
         debugPrint("I am tapped.")
         var urlString = "weallpay:///"
         if let validValue = valid {
@@ -82,14 +82,14 @@ class TodayViewController: UIViewController, NCWidgetProviding {
             }
         }
         print("Open: \(urlString)", terminator: "")
-        let url = NSURL(string: urlString)
-        self.extensionContext?.openURL(url!, completionHandler: nil)
+        let url = URL(string: urlString)
+        self.extensionContext?.open(url!, completionHandler: nil)
     }
     
     override func viewDidLoad() {
         super.viewDidLoad()
         // Do any additional setup after loading the view from its nib.
-        NSNotificationCenter.defaultCenter().addObserver(self, selector: #selector(TodayViewController.defaultsDidUpdate(_:)), name: NSUserDefaultsDidChangeNotification, object: nil)
+        NotificationCenter.default.addObserver(self, selector: #selector(TodayViewController.defaultsDidUpdate(_:)), name: UserDefaults.didChangeNotification, object: nil)
 
         // Setup a tap in the Today Extension to open We all pay.
         let thatTickles = UITapGestureRecognizer(target: self, action: #selector(TodayViewController.tappedInTheBackground(_:)))
@@ -98,7 +98,7 @@ class TodayViewController: UIViewController, NCWidgetProviding {
         self.view.preservesSuperviewLayoutMargins = true
     }
     
-    func widgetPerformUpdateWithCompletionHandler(completionHandler: ((NCUpdateResult) -> Void)) {
+    func widgetPerformUpdate(completionHandler: ((NCUpdateResult) -> Void)) {
         // Perform any setup necessary in order to update the view.
 
         // If an error is encountered, use NCUpdateResult.Failed
@@ -107,10 +107,10 @@ class TodayViewController: UIViewController, NCWidgetProviding {
         debugPrint("\(self): widgetPerformUpdateWithCompletionHandler")
         if updateLocalOptionalsFromUserDefaults() {
             updateLabel()
-            completionHandler(NCUpdateResult.NewData)
+            completionHandler(NCUpdateResult.newData)
         } else {
             updateLabel()
-            completionHandler(NCUpdateResult.NewData)
+            completionHandler(NCUpdateResult.newData)
         }
     }
 }

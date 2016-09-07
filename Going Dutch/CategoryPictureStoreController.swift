@@ -11,7 +11,7 @@ import Foundation
 class CategoryPictureStoreController: NSObject {
     // MARK: Properties
     var pictureObjects: [CategoryPictureObject] {
-        let plistPath = NSBundle.mainBundle().pathForResource("categoryPictures", ofType: "plist")!
+        let plistPath = Bundle.main.pathForResource("categoryPictures", ofType: "plist")!
         let arrayFromPlist = NSArray(contentsOfFile: plistPath) as! [Dictionary<String, AnyObject>]
         
         return arrayFromPlist.map({ (dictionary) -> CategoryPictureObject in

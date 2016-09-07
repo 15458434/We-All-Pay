@@ -27,77 +27,77 @@ class RateMeControllerTests: XCTestCase {
     }
     
     func testShouldDisplayRateMeQuestion() {
-        let twentyEightDaysAgo = NSDate(timeIntervalSinceNow: -rateMeControllerTimeIntervalInDays * 86400.0)
+        let twentyEightDaysAgo = Date(timeIntervalSinceNow: -rateMeControllerTimeIntervalInDays * 86400.0)
         let rmc = RateMeController(firstDate: twentyEightDaysAgo, counterValue: 0, shouldAsk: RateMeControllerAskStatusContainer())
         XCTAssertTrue(rmc.shouldDisplayRateMeQuestion)
-        let rmc2 = RateMeController(firstDate: NSDate(timeIntervalSinceNow: -(rateMeControllerMinimumTimeIntervalInDays + 4) * 86400), counterValue: rateMeControllerCounterInterval - 1, shouldAsk: RateMeControllerAskStatusContainer())
+        let rmc2 = RateMeController(firstDate: Date(timeIntervalSinceNow: -(rateMeControllerMinimumTimeIntervalInDays + 4) * 86400), counterValue: rateMeControllerCounterInterval - 1, shouldAsk: RateMeControllerAskStatusContainer())
         XCTAssertFalse(rmc2.shouldDisplayRateMeQuestion)
         XCTAssertTrue(rmc2.shouldDisplayRateMeQuestion)
         XCTAssertTrue(rmc2.shouldDisplayRateMeQuestion)
-        let rmc3 = RateMeController(firstDate: NSDate(timeIntervalSinceNow: -(rateMeControllerMinimumTimeIntervalInDays - 1) * 86400), counterValue: 22, shouldAsk: RateMeControllerAskStatusContainer())
+        let rmc3 = RateMeController(firstDate: Date(timeIntervalSinceNow: -(rateMeControllerMinimumTimeIntervalInDays - 1) * 86400), counterValue: 22, shouldAsk: RateMeControllerAskStatusContainer())
         XCTAssertFalse(rmc3.shouldDisplayRateMeQuestion)
-        let rmc4 = RateMeController(firstDate: NSDate(timeIntervalSinceNow: -(rateMeControllerMinimumTimeIntervalInDays - 1) * 86400), counterValue: 20, shouldAsk: RateMeControllerAskStatusContainer())
+        let rmc4 = RateMeController(firstDate: Date(timeIntervalSinceNow: -(rateMeControllerMinimumTimeIntervalInDays - 1) * 86400), counterValue: 20, shouldAsk: RateMeControllerAskStatusContainer())
         XCTAssertFalse(rmc4.shouldDisplayRateMeQuestion)
     }
     
     func testRateMeDisplayed() {
-        let thisVersionString = NSBundle.mainBundle().infoDictionary!["CFBundleVersion"] as! String
-        let twentyEightDaysAgo = NSDate(timeIntervalSinceNow: -rateMeControllerTimeIntervalInDays * 86400.0)
+        let thisVersionString = Bundle.main.infoDictionary!["CFBundleVersion"] as! String
+        let twentyEightDaysAgo = Date(timeIntervalSinceNow: -rateMeControllerTimeIntervalInDays * 86400.0)
         var rmc = RateMeController(firstDate: twentyEightDaysAgo, counterValue: 0, shouldAsk: RateMeControllerAskStatusContainer())
         XCTAssertTrue(rmc.shouldDisplayRateMeQuestion)
-        rmc.rateMeDisplayed(RateMeControllerAskStatus.NoNever)
+        rmc.rateMeDisplayed(RateMeControllerAskStatus.noNever)
         XCTAssertFalse(rmc.shouldDisplayRateMeQuestion)
-        rmc.rateMeDisplayed(RateMeControllerAskStatus.No)
+        rmc.rateMeDisplayed(RateMeControllerAskStatus.no)
         XCTAssertFalse(rmc.shouldDisplayRateMeQuestion)
-        rmc.rateMeDisplayed(RateMeControllerAskStatus.Yes)
+        rmc.rateMeDisplayed(RateMeControllerAskStatus.yes)
         XCTAssertTrue(rmc.shouldDisplayRateMeQuestion)
-        rmc.rateMeDisplayed(RateMeControllerAskStatus.AlreadyRated)
+        rmc.rateMeDisplayed(RateMeControllerAskStatus.alreadyRated)
         XCTAssertFalse(rmc.shouldDisplayRateMeQuestion)
-        rmc = RateMeController(firstDate: NSDate(timeIntervalSinceNow: -rateMeControllerMinimumTimeIntervalInDays * 86400), counterValue: rateMeControllerCounterInterval + 1, shouldAsk: RateMeControllerAskStatusContainer())
+        rmc = RateMeController(firstDate: Date(timeIntervalSinceNow: -rateMeControllerMinimumTimeIntervalInDays * 86400), counterValue: rateMeControllerCounterInterval + 1, shouldAsk: RateMeControllerAskStatusContainer())
         XCTAssertTrue(rmc.shouldDisplayRateMeQuestion)
-        rmc.rateMeDisplayed(RateMeControllerAskStatus.AlreadyRated)
+        rmc.rateMeDisplayed(RateMeControllerAskStatus.alreadyRated)
         XCTAssertFalse(rmc.shouldDisplayRateMeQuestion)
-        rmc.rateMeDisplayed(RateMeControllerAskStatus.Yes)
+        rmc.rateMeDisplayed(RateMeControllerAskStatus.yes)
         XCTAssertFalse(rmc.shouldDisplayRateMeQuestion)
-        rmc = RateMeController(firstDate: NSDate(timeIntervalSinceNow: -rateMeControllerTimeIntervalInDays * 86400), counterValue: 40, shouldAsk: RateMeControllerAskStatusContainer(shouldAsk: RateMeControllerAskStatus.No, lastVersion: thisVersionString))
+        rmc = RateMeController(firstDate: Date(timeIntervalSinceNow: -rateMeControllerTimeIntervalInDays * 86400), counterValue: 40, shouldAsk: RateMeControllerAskStatusContainer(shouldAsk: RateMeControllerAskStatus.no, lastVersion: thisVersionString))
         XCTAssertFalse(rmc.shouldDisplayRateMeQuestion)
-        rmc = RateMeController(firstDate: NSDate(timeIntervalSinceNow: -rateMeControllerTimeIntervalInDays * 86400), counterValue: 40, shouldAsk: RateMeControllerAskStatusContainer(shouldAsk: RateMeControllerAskStatus.NoNever, lastVersion: thisVersionString))
+        rmc = RateMeController(firstDate: Date(timeIntervalSinceNow: -rateMeControllerTimeIntervalInDays * 86400), counterValue: 40, shouldAsk: RateMeControllerAskStatusContainer(shouldAsk: RateMeControllerAskStatus.noNever, lastVersion: thisVersionString))
         XCTAssertFalse(rmc.shouldDisplayRateMeQuestion)
-        rmc = RateMeController(firstDate: NSDate(timeIntervalSinceNow: -rateMeControllerTimeIntervalInDays * 86400), counterValue: 40, shouldAsk: RateMeControllerAskStatusContainer(shouldAsk: RateMeControllerAskStatus.AlreadyRated, lastVersion: thisVersionString))
+        rmc = RateMeController(firstDate: Date(timeIntervalSinceNow: -rateMeControllerTimeIntervalInDays * 86400), counterValue: 40, shouldAsk: RateMeControllerAskStatusContainer(shouldAsk: RateMeControllerAskStatus.alreadyRated, lastVersion: thisVersionString))
         XCTAssertFalse(rmc.shouldDisplayRateMeQuestion)
-        rmc = RateMeController(firstDate: NSDate(timeIntervalSinceNow: -rateMeControllerTimeIntervalInDays * 86400), counterValue: 40, shouldAsk: RateMeControllerAskStatusContainer(shouldAsk: RateMeControllerAskStatus.AlreadyRated, lastVersion: "0"))
+        rmc = RateMeController(firstDate: Date(timeIntervalSinceNow: -rateMeControllerTimeIntervalInDays * 86400), counterValue: 40, shouldAsk: RateMeControllerAskStatusContainer(shouldAsk: RateMeControllerAskStatus.alreadyRated, lastVersion: "0"))
         XCTAssertTrue(rmc.shouldDisplayRateMeQuestion)
     }
     
     func testSave() {
-        let now = NSDate()
+        let now = Date()
         let rmc = RateMeController()
-        rmc.save()
-        let savedDate = NSUserDefaults.standardUserDefaults().objectForKey("kFirstLaunchDate") as? NSDate
-        let savedDataShouldAsk = NSUserDefaults.standardUserDefaults().objectForKey("kRateMeControllerAskStatus") as? NSData
-        let savedShouldAsk = NSKeyedUnarchiver.unarchiveObjectWithData(savedDataShouldAsk!) as? RateMeControllerAskStatusContainer
-        let savedCounter = NSUserDefaults.standardUserDefaults().integerForKey("kRateMeControllerCounterValue")
-        let timeintervalDifference = savedDate!.timeIntervalSinceDate(now)
+        _ = rmc.save()
+        let savedDate = UserDefaults.standard.object(forKey: "kFirstLaunchDate") as? Date
+        let savedDataShouldAsk = UserDefaults.standard.object(forKey: "kRateMeControllerAskStatus") as? Data
+        let savedShouldAsk = NSKeyedUnarchiver.unarchiveObject(with: savedDataShouldAsk!) as? RateMeControllerAskStatusContainer
+        let savedCounter = UserDefaults.standard.integer(forKey: "kRateMeControllerCounterValue")
+        let timeintervalDifference = savedDate!.timeIntervalSince(now)
         XCTAssertEqualWithAccuracy(0.02, timeintervalDifference, accuracy: 0.02)
         XCTAssertNotNil(savedShouldAsk)
         XCTAssertEqual(0, savedCounter)
         RateMeController.reset()
-        let clearedDate = NSUserDefaults.standardUserDefaults().objectForKey("kFirstLaunchDate") as? NSDate
+        let clearedDate = UserDefaults.standard.object(forKey: "kFirstLaunchDate") as? Date
         XCTAssertNil(clearedDate)
-        let clearedShouldAsk = NSUserDefaults.standardUserDefaults().objectForKey("kRateMeControllerAskStatus")
+        let clearedShouldAsk = UserDefaults.standard.object(forKey: "kRateMeControllerAskStatus")
         XCTAssertNil(clearedShouldAsk)
-        let clearedCounter = NSUserDefaults.standardUserDefaults().integerForKey("kRateMeControllerCounterValue")
+        let clearedCounter = UserDefaults.standard.integer(forKey: "kRateMeControllerCounterValue")
         XCTAssertEqual(0, clearedCounter)
         
-        let firstDate = NSDate(timeIntervalSinceNow: -15.0 * 86400.0)
+        let firstDate = Date(timeIntervalSinceNow: -15.0 * 86400.0)
         let initialCounter = 45
         let rmc2 = RateMeController(firstDate: firstDate, counterValue: initialCounter, shouldAsk: RateMeControllerAskStatusContainer())
-        rmc2.save()
+        _ = rmc2.save()
         
         let rmc3 = RateMeController()
         XCTAssertTrue(rmc3.shouldDisplayRateMeQuestion)
-        NSUserDefaults.standardUserDefaults().removeObjectForKey("kFirstLaunchDate")
-        NSUserDefaults.standardUserDefaults().removeObjectForKey("kRateMeControllerAskStatus")
-        NSUserDefaults.standardUserDefaults().removeObjectForKey("kRateMeControllerCounterValue")
+        UserDefaults.standard.removeObject(forKey: "kFirstLaunchDate")
+        UserDefaults.standard.removeObject(forKey: "kRateMeControllerAskStatus")
+        UserDefaults.standard.removeObject(forKey: "kRateMeControllerCounterValue")
     }
 }

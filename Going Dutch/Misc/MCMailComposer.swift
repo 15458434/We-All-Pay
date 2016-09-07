@@ -14,9 +14,9 @@ protocol MailComposer {
     func mailBody() throws -> String
 }
 
-enum MailComposerError: ErrorType {
-    case MissingCrititcalInformationIn(payment: MCPayment)
-    case MissingInformationIn(payment: MCPayment)
+enum MailComposerError: ErrorProtocol {
+    case missingCrititcalInformationIn(payment: MCPayment)
+    case missingInformationIn(payment: MCPayment)
 }
 
 extension MailComposer where Self: ThisEvent {
@@ -56,9 +56,9 @@ extension MailComposer where Self: ThisEvent {
         mailBody += "\n\n"
         
         if let tripName = self.event.tripName {
-            mailBody += String.localizedStringWithFormat(NSLocalizedString("EMAIL_INTRO_WITH_TRIPNAME", comment: "Here you go. The full overview of the %1$@ which we spend on our last event %2$@. We spent an average of %3$@ a person. You can find more of the details below."), mainCurrencyFormatter.stringForObjectValue(event.totalSumOfMoneyOfThisSharedBill())!, tripName, mainCurrencyFormatter.stringForObjectValue(event.amountPeopleShouldHavePaid())!)
+            mailBody += String.localizedStringWithFormat(NSLocalizedString("EMAIL_INTRO_WITH_TRIPNAME", comment: "Here you go. The full overview of the %1$@ which we spend on our last event %2$@. We spent an average of %3$@ a person. You can find more of the details below."), mainCurrencyFormatter.string(for: event.totalSumOfMoneyOfThisSharedBill())!, tripName, mainCurrencyFormatter.string(for: event.amountPeopleShouldHavePaid())!)
         } else {
-            mailBody += String.localizedStringWithFormat(NSLocalizedString("EMAIL_INTRO", comment: "Here you go. The full overview of the %1$@ which we spend on our last event. We spent an average of %2$@ a person. You can find more of the details below."), mainCurrencyFormatter.stringForObjectValue(event.totalSumOfMoneyOfThisSharedBill())!, mainCurrencyFormatter.stringForObjectValue(event.amountPeopleShouldHavePaid())!)
+            mailBody += String.localizedStringWithFormat(NSLocalizedString("EMAIL_INTRO", comment: "Here you go. The full overview of the %1$@ which we spend on our last event. We spent an average of %2$@ a person. You can find more of the details below."), mainCurrencyFormatter.string(for: event.totalSumOfMoneyOfThisSharedBill())!, mainCurrencyFormatter.string(for: event.amountPeopleShouldHavePaid())!)
         }
         mailBody += "\n\n"
         
@@ -74,16 +74,16 @@ extension MailComposer where Self: ThisEvent {
         
         for payment in allPayments {
             guard payment.moneyInMainCurrency() != nil else {
-                throw MailComposerError.MissingCrititcalInformationIn(payment: payment)
+                throw MailComposerError.missingCrititcalInformationIn(payment: payment)
             }
             guard payment.payingPerson != nil else {
-                throw MailComposerError.MissingCrititcalInformationIn(payment: payment)
+                throw MailComposerError.missingCrititcalInformationIn(payment: payment)
             }
             if payment.exchangeRate.exchangeRate.doubleValue == 1.0 {
-                mailBody += String.localizedStringWithFormat(NSLocalizedString("EMAIL_WHO_HAS_PAID", comment: "%1$@ has paid %2$@ for %3$@."), payment.payingPerson!.getFullName()!, mainCurrencyFormatter.stringForObjectValue(payment.moneyInMainCurrency())!, payment.fullDescriptionOfPayment()!)
+                mailBody += String.localizedStringWithFormat(NSLocalizedString("EMAIL_WHO_HAS_PAID", comment: "%1$@ has paid %2$@ for %3$@."), payment.payingPerson!.getFullName()!, mainCurrencyFormatter.string(for: payment.moneyInMainCurrency())!, payment.fullDescriptionOfPayment()!)
             } else {
                 localCurrencyFormatter.currencyCode = payment.currency.code
-                mailBody += String.localizedStringWithFormat(NSLocalizedString("EMAIL_WHO_HAS_PAID_INTERNATIONAL", comment: "%1$@ has paid %2$@(%3$@) for %4$@."), payment.payingPerson!.getFullName()!, mainCurrencyFormatter.stringForObjectValue(payment.moneyInMainCurrency())!, localCurrencyFormatter.stringForObjectValue(payment.money)!, payment.fullDescriptionOfPayment()!)
+                mailBody += String.localizedStringWithFormat(NSLocalizedString("EMAIL_WHO_HAS_PAID_INTERNATIONAL", comment: "%1$@ has paid %2$@(%3$@) for %4$@."), payment.payingPerson!.getFullName()!, mainCurrencyFormatter.string(for: payment.moneyInMainCurrency())!, localCurrencyFormatter.string(for: payment.money)!, payment.fullDescriptionOfPayment()!)
             }
             
             mailBody += "\n"
@@ -93,7 +93,7 @@ extension MailComposer where Self: ThisEvent {
         mailBody += String.localizedStringWithFormat(NSLocalizedString("EMAIL_AVERAGE_OF_USE_SENTENCE", comment: "The amount of money we used:"))
         mailBody += "\n"
         for person in allPeople {
-            mailBody += String.localizedStringWithFormat(NSLocalizedString("EMAIL_AMOUNT_USED", comment: "%1$@ used %2$@ in total."), person.getFullName(), mainCurrencyFormatter.stringForObjectValue(event.amountShouldHavePaidBy(person))!)
+            mailBody += String.localizedStringWithFormat(NSLocalizedString("EMAIL_AMOUNT_USED", comment: "%1$@ used %2$@ in total."), person.getFullName(), mainCurrencyFormatter.string(for: event.amountShouldHavePaid(by: person))!)
             mailBody += "\n"
         }
         mailBody += "\n"
@@ -103,8 +103,8 @@ extension MailComposer where Self: ThisEvent {
         
         for returnPayment in solution {
             let payerFullName: String = returnPayment.payer?.getFullName() ?? ""
-            let moneyNumber = returnPayment.money ?? NSNumber(double: 0.0)
-            let moneyString: String = mainCurrencyFormatter.stringForObjectValue(moneyNumber)!
+            let moneyNumber = returnPayment.money ?? NSNumber(value: 0.0)
+            let moneyString: String = mainCurrencyFormatter.string(for: moneyNumber)!
             let receiverFullName: String = returnPayment.receiver?.getFullName() ?? ""
             mailBody += String.localizedStringWithFormat(NSLocalizedString("EMAIL_OWES", comment: "%1$@ pays %2$@ to %3$@"), payerFullName, moneyString, receiverFullName)
             mailBody += "\n"

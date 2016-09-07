@@ -19,14 +19,14 @@ class SelectCurrencyTableViewController: UITableViewController, UISearchResultsU
     
     var recentUsedForeignCurrencies: [MCCurrency]!
     
-    let collation = UILocalizedIndexedCollation.currentCollation()
+    let collation = UILocalizedIndexedCollation.current()
     var currencies: [Currency]! {
         didSet {
-            let nameSelector: Selector = Selector("name")
-            sections = Array(count: collation.sectionTitles.count, repeatedValue: [])
-            sortedCurrencies = collation.sortedArrayFromArray(currencies, collationStringSelector: nameSelector) as! [Currency]
+            let nameSelector: Selector = #selector(getter: NSFetchedResultsSectionInfo.name)
+            sections = Array(repeating: [], count: collation.sectionTitles.count)
+            sortedCurrencies = collation.sortedArray(from: currencies, collationStringSelector: nameSelector) as! [Currency]
             for currency in sortedCurrencies {
-                let sectionNumber = collation.sectionForObject(currency, collationStringSelector: nameSelector)
+                let sectionNumber = collation.section(for: currency, collationStringSelector: nameSelector)
                 sections[sectionNumber].append(currency)
             }
 
@@ -38,7 +38,7 @@ class SelectCurrencyTableViewController: UITableViewController, UISearchResultsU
     var filteredCurrencies: [Currency]!
     
     var searchActive: Bool {
-        if searchController.active && searchController.searchBar.text != "" {
+        if searchController.isActive && searchController.searchBar.text != "" {
             return true
         } else {
             return false
@@ -49,14 +49,14 @@ class SelectCurrencyTableViewController: UITableViewController, UISearchResultsU
     
     @IBAction func mainCancelPressed(sender: AnyObject) {
         // Don't select anything just dimiss the currency view controller
-        navigationController!.presentingViewController!.dismissViewControllerAnimated(true, completion: nil)
+        navigationController!.presentingViewController!.dismiss(animated: true, completion: nil)
     }
     
     // MARK: New in this class
     
     private func filteredContentForSearchText(searchText: String) {
         filteredCurrencies = sortedCurrencies.filter({ (currency) -> Bool in
-            return currency.name.lowercaseString.containsString(searchText.lowercaseString)
+            return currency.name.lowercased().contains(searchText.lowercased())
         })
         tableView.reloadData()
     }
@@ -76,13 +76,13 @@ class SelectCurrencyTableViewController: UITableViewController, UISearchResultsU
                 searchController.hidesNavigationBarDuringPresentation = false
                 tableView.tableHeaderView = searchController.searchBar
                 searchController.searchBar.delegate = self
-                searchController.searchBar.searchBarStyle = .Prominent
+                searchController.searchBar.searchBarStyle = .prominent
                 searchController.searchBar.scopeButtonTitles = []
                 searchController.searchBar.showsScopeBar = false
                 definesPresentationContext = true
                 
                 self.extendedLayoutIncludesOpaqueBars = true
-                self.edgesForExtendedLayout = UIRectEdge.All
+                self.edgesForExtendedLayout = UIRectEdge.all
             } else {
                 searchController.searchResultsUpdater = self
                 searchController.dimsBackgroundDuringPresentation = false
@@ -90,13 +90,13 @@ class SelectCurrencyTableViewController: UITableViewController, UISearchResultsU
                 searchController.searchBar.sizeToFit()
                 tableView.tableHeaderView = searchController.searchBar
                 searchController.searchBar.delegate = self
-                searchController.searchBar.searchBarStyle = .Prominent
+                searchController.searchBar.searchBarStyle = .prominent
                 searchController.searchBar.scopeButtonTitles = []
                 searchController.searchBar.showsScopeBar = false
                 definesPresentationContext = true
                 
                 self.extendedLayoutIncludesOpaqueBars = true
-                self.edgesForExtendedLayout = UIRectEdge.All
+                self.edgesForExtendedLayout = UIRectEdge.all
             }
         }
         
@@ -106,7 +106,7 @@ class SelectCurrencyTableViewController: UITableViewController, UISearchResultsU
         prepareForSearchController()
     }
     
-    override func viewWillAppear(animated: Bool) {
+    override func viewWillAppear(_ animated: Bool) {
         super.viewWillAppear(animated)
         
         searchController.searchBar.sizeToFit()
@@ -116,8 +116,8 @@ class SelectCurrencyTableViewController: UITableViewController, UISearchResultsU
     
     // MARK: UI Search Results Updating
     
-    func updateSearchResultsForSearchController(searchController: UISearchController) {
-        filteredContentForSearchText(searchController.searchBar.text!)
+    func updateSearchResults(for searchController: UISearchController) {
+        filteredContentForSearchText(searchText: searchController.searchBar.text!)
     }
     
     // MARK: NS Fetched Results Controller Delegate
@@ -128,7 +128,7 @@ class SelectCurrencyTableViewController: UITableViewController, UISearchResultsU
     
     // MARK: UI Table View Delegate
     
-    override func tableView(tableView: UITableView, didSelectRowAtIndexPath indexPath: NSIndexPath) {
+    override func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
         func data(indexPath: NSIndexPath) -> Currency {
             debugPrint("didSelectRowAtIndexPath: \(indexPath)")
             switch (searchActive, recentUsedForeignCurrencies?.count ?? 0, indexPath.section) {
@@ -145,14 +145,14 @@ class SelectCurrencyTableViewController: UITableViewController, UISearchResultsU
         }
         let myPresenter = self.presentingViewController
         
-        let thisCellsCurrency = data(indexPath)
+        let thisCellsCurrency = data(indexPath: indexPath)
         
         let mainThreadContext = MCWeAllPayStoreController.defaultStore().mainThreadContext
-        let newCurrency = MCCurrency(from: thisCellsCurrency.code, fromContext: mainThreadContext)
+        let newCurrency = MCCurrency(from: thisCellsCurrency.code, from: mainThreadContext)
         let oldCurrency = thisPayment.currency
         thisPayment.currency = newCurrency
-        if oldCurrency.sharedBill.count == 0 && oldCurrency.payment.count == 0 {
-            mainThreadContext.deleteObject(oldCurrency)
+        if oldCurrency?.sharedBill.count == 0 && oldCurrency?.payment.count == 0 {
+            mainThreadContext?.delete(oldCurrency!)
         }
         
         thisPayment.setNewCurrencyAndAutomaticallyUpdateExchangeRate(newCurrency) { (error) -> Void in
@@ -163,11 +163,11 @@ class SelectCurrencyTableViewController: UITableViewController, UISearchResultsU
                 let message = NSLocalizedString("Fetching exchange rates is not possible at this moment. Check your internet connection and/or hit solve to fetch all missing exchange rates at a later time", comment: "Message explaining what the user can do to refetch exchange rates")
                 let dismissTitle = NSLocalizedString("Dismiss", comment: "Title of a button that dismisses an alart")
                 
-                let alertController = UIAlertController(title: title, message: message, preferredStyle: .Alert)
-                let dismissAction = UIAlertAction(title: dismissTitle, style: .Cancel, handler: nil)
+                let alertController = UIAlertController(title: title, message: message, preferredStyle: .alert)
+                let dismissAction = UIAlertAction(title: dismissTitle, style: .cancel, handler: nil)
                 alertController.addAction(dismissAction)
                 
-                myPresenter?.presentViewController(alertController, animated: true, completion: nil)
+                myPresenter?.present(alertController, animated: true, completion: nil)
             }
             
         }
@@ -175,13 +175,13 @@ class SelectCurrencyTableViewController: UITableViewController, UISearchResultsU
         if let dismissMe = dismissMe {
             dismissMe()
         } else {
-            navigationController!.presentingViewController!.dismissViewControllerAnimated(true, completion: nil)
+            navigationController!.presentingViewController!.dismiss(animated: true, completion: nil)
         }
     }
     
     // MARK: UI Table View Data Source
     
-    override func tableView(tableView: UITableView, titleForHeaderInSection section: Int) -> String? {
+    override func tableView(_ tableView: UITableView, titleForHeaderInSection section: Int) -> String? {
         func data(section: Int) -> String {
             switch (searchActive, recentUsedForeignCurrencies?.count ?? 0, section) {
             case let (searchActive, rc, section) where searchActive == false && rc > 0 && section == 0:
@@ -192,28 +192,28 @@ class SelectCurrencyTableViewController: UITableViewController, UISearchResultsU
                 return collation.sectionTitles[section]
             }
         }
-        return data(section)
+        return data(section: section)
     }
 
-    override func sectionIndexTitlesForTableView(tableView: UITableView) -> [String]? {
+    func sectionIndexTitlesForTableView(tableView: UITableView) -> [String]? {
         var result = collation.sectionIndexTitles
-        result.insert(NSLocalizedString("!", comment: "Symbol for recent used currencies"), atIndex: 0)
+        result.insert(NSLocalizedString("!", comment: "Symbol for recent used currencies"), at: 0)
         return result
     }
     
-    override func tableView(tableView: UITableView, sectionForSectionIndexTitle title: String, atIndex index: Int) -> Int {
+    override func tableView(_ tableView: UITableView, sectionForSectionIndexTitle title: String, at index: Int) -> Int {
         switch (searchActive, recentUsedForeignCurrencies?.count ?? 0, index) {
         case let (s, rc, i) where s == false && rc > 0 && i == 0:
             return 0
         case let (s, rc, i) where s == false && rc > 0 && i > 0:
-            return collation.sectionForSectionIndexTitleAtIndex(index - 1) + 1
+            return collation.section(forSectionIndexTitle: index - 1) + 1
         default:
-            return collation.sectionForSectionIndexTitleAtIndex(index)
+            return collation.section(forSectionIndexTitle: index)
         }
         
     }
     
-    override func numberOfSectionsInTableView(tableView: UITableView) -> Int {
+    func numberOfSectionsInTableView(tableView: UITableView) -> Int {
         switch (searchActive, recentUsedForeignCurrencies?.count ?? 0) {
         case let (s, _) where s == true:
             return 1
@@ -224,7 +224,7 @@ class SelectCurrencyTableViewController: UITableViewController, UISearchResultsU
         }
     }
     
-    override func tableView(tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
+    override func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
         switch (searchActive, recentUsedForeignCurrencies?.count ?? 0, section) {
         case let (searchActive, _, _) where searchActive == true:
             return filteredCurrencies.count
@@ -237,7 +237,7 @@ class SelectCurrencyTableViewController: UITableViewController, UISearchResultsU
         }
     }
     
-    override func tableView(tableView: UITableView, cellForRowAtIndexPath indexPath: NSIndexPath) -> UITableViewCell {
+    func tableView(tableView: UITableView, cellForRowAtIndexPath indexPath: NSIndexPath) -> UITableViewCell {
         func data(indexPath: NSIndexPath) -> Currency {
             switch (searchActive, recentUsedForeignCurrencies?.count ?? 0, indexPath.section) {
             case let (searchActive, _, _) where searchActive == true:
@@ -251,17 +251,17 @@ class SelectCurrencyTableViewController: UITableViewController, UISearchResultsU
                 return sections[indexPath.section][indexPath.row]
             }
         }
-        let cell = tableView.dequeueReusableCellWithIdentifier("MCSelectCurrencyTableViewCell_iPhone", forIndexPath: indexPath) as! MCSelectCurrencyTableViewCell_iPhone
+        let cell = tableView.dequeueReusableCell(withIdentifier: "MCSelectCurrencyTableViewCell_iPhone", for: indexPath as IndexPath) as! MCSelectCurrencyTableViewCell_iPhone
 
-        let thisCellsCurrency = data(indexPath)
+        let thisCellsCurrency = data(indexPath: indexPath)
         
         cell.currencyNameLabel.text = thisCellsCurrency.name
         cell.currencySymbolLabel.text = thisCellsCurrency.symbol
         
         if thisPayment.currency.code == thisCellsCurrency.code {
-            cell.accessoryType = UITableViewCellAccessoryType.Checkmark
+            cell.accessoryType = UITableViewCellAccessoryType.checkmark
         } else {
-            cell.accessoryType = UITableViewCellAccessoryType.None
+            cell.accessoryType = UITableViewCellAccessoryType.none
         }
         
         return cell
@@ -271,9 +271,9 @@ class SelectCurrencyTableViewController: UITableViewController, UISearchResultsU
 extension SelectCurrencyTableViewController: UISearchBarDelegate {
     func positionForBar(bar: UIBarPositioning) -> UIBarPosition {
         if (bar as! UISearchBar == searchController.searchBar) {
-            return UIBarPosition.Top
+            return UIBarPosition.top
         } else {
-            return UIBarPosition.Any
+            return UIBarPosition.any
         }
     }
 }

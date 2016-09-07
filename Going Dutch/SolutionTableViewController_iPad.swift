@@ -11,7 +11,7 @@ import UIKit
 class SolutionTableViewController_iPad: MCSolutionTableViewController, ThisEvent, ShowMailViewProtocol {
     
     // MARK: New in this class
-    override func openMailView(sender: AnyObject!) {
+    override func openMailView(_ sender: AnyObject!) {
         self.showMailView(sender)
     }
     

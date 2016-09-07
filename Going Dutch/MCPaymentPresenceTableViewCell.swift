@@ -20,12 +20,12 @@ class MCPaymentPresenceTableViewCell: UITableViewCell {
     var keyboardDismissDelegate: MCDismissKeyboardProtocol!
     
     // MARK: IB Actions
-    @IBAction func switchPresence(sender: UISwitch) {
-        thisCellsPaymentPresence.isPersonPresent = NSNumber(bool: sender.on)
+    @IBAction func switchPresence(_ sender: UISwitch) {
+        thisCellsPaymentPresence.isPersonPresent = NSNumber(value: sender.isOn)
         thisCellsPaymentPresence.payment.recalculateAveragePeopleOweAndStore()
     }
     
-    @IBAction func backgroundTappedToDismissKeyboard(sender: AnyObject) {
+    @IBAction func backgroundTappedToDismissKeyboard(_ sender: AnyObject) {
         keyboardDismissDelegate.dismissTheKeyboard()
     }
 }

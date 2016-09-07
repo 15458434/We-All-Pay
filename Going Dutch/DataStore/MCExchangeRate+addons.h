@@ -9,9 +9,9 @@
 #import "MCExchangeRate.h"
 
 typedef NS_ENUM(short, MCExchangeRateStatus){
-    MCExchangeRateStatusValid NS_SWIFT_NAME(Valid),
-    MCExchangeRateStatusInvalid NS_SWIFT_NAME(Invalid),
-    MCExchangeRateStatusFetching NS_SWIFT_NAME(Fetching)
+    MCExchangeRateStatusValid NS_SWIFT_NAME(valid),
+    MCExchangeRateStatusInvalid NS_SWIFT_NAME(invalid),
+    MCExchangeRateStatusFetching NS_SWIFT_NAME(fetching)
 };
 
 @interface MCExchangeRate (addons)
