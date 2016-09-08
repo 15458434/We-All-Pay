@@ -10,7 +10,7 @@ import UIKit
 
 func createAttributesStringForWhoIsPayingNext(_ tripName: String, fullNameNextPayer: String) -> NSMutableAttributedString {
     // The code of this function should be replaced to support multiple languages. For now it's just hardcoded.
-    let normalFontDescriptor: UIFontDescriptor = UIFontDescriptor.preferredFontDescriptor(withTextStyle: UIFontTextStyleBody)
+    let normalFontDescriptor: UIFontDescriptor = UIFontDescriptor.preferredFontDescriptor(withTextStyle: UIFontTextStyle.body)
     let normalFont: UIFont = UIFont(descriptor: normalFontDescriptor, size: 0)
     let normalAttributes: Dictionary = [NSFontAttributeName: normalFont]
     
@@ -18,15 +18,15 @@ func createAttributesStringForWhoIsPayingNext(_ tripName: String, fullNameNextPa
     let boldFont: UIFont = UIFont(descriptor: boldFontDescriptor, size: 0)
     let boldAttributes: Dictionary = [NSFontAttributeName: boldFont];
     
-    let attributedTripName: AttributedString = AttributedString(string: tripName, attributes: boldAttributes)
-    let attributedFullNameNextPayer: AttributedString = AttributedString(string: fullNameNextPayer, attributes: boldAttributes)
+    let attributedTripName: NSAttributedString = NSAttributedString(string: tripName, attributes: boldAttributes)
+    let attributedFullNameNextPayer: NSAttributedString = NSAttributedString(string: fullNameNextPayer, attributes: boldAttributes)
     
     let firstPartString = String.localizedStringWithFormat(NSLocalizedString("FOR_YOUR_EVENT", comment: "First part of For your event eventName, 'name person' should pay next."))
     let thirdPartString = String.localizedStringWithFormat(NSLocalizedString("SHOULD_PAY_NEXT", comment: "Third part of For your event eventName, 'name person' should pay next."))
     
-    let firstPart: AttributedString = AttributedString(string: firstPartString, attributes: normalAttributes)
-    let secondPart: AttributedString = AttributedString(string: ", ", attributes: normalAttributes)
-    let thirdPart: AttributedString = AttributedString(string: thirdPartString, attributes: normalAttributes)
+    let firstPart: NSAttributedString = NSAttributedString(string: firstPartString, attributes: normalAttributes)
+    let secondPart: NSAttributedString = NSAttributedString(string: ", ", attributes: normalAttributes)
+    let thirdPart: NSAttributedString = NSAttributedString(string: thirdPartString, attributes: normalAttributes)
     
     let finalString: NSMutableAttributedString = NSMutableAttributedString()
     finalString.append(firstPart)
@@ -62,14 +62,14 @@ func createAttributesStringForWhoIsPayingNext(_ tripName: String, fullNameNextPa
 
 func betterCreateAttributesStringForWhoIsPayingNext(_ tripName: String, fullNameNextPayer: String) -> NSMutableAttributedString {
     func createAttributesForFontStyle(_ style: String, withTrait trait: UIFontDescriptorSymbolicTraits) -> [String : AnyObject] {
-        let fontDescriptor = UIFontDescriptor.preferredFontDescriptor(withTextStyle: UIFontTextStyleBody)
+        let fontDescriptor = UIFontDescriptor.preferredFontDescriptor(withTextStyle: UIFontTextStyle.body)
         let descriptorWithTrait = fontDescriptor.withSymbolicTraits(trait)
         let font = UIFont(descriptor: descriptorWithTrait!, size: 0)
         return [NSFontAttributeName : font];
     }
     
     let nullTrait: UIFontDescriptorSymbolicTraits = UIFontDescriptorSymbolicTraits(rawValue: 0)
-    let normalAttributes: Dictionary = createAttributesForFontStyle(UIFontTextStyleBody, withTrait: nullTrait)
+    let normalAttributes: Dictionary = createAttributesForFontStyle(UIFontTextStyle.body.rawValue, withTrait: nullTrait)
 //    let boldAttributes: Dictionary = createAttributesForFontStyle(UIFontTextStyleBody, withTrait: .TraitBold)
     
     let text = String.localizedStringWithFormat(NSLocalizedString("For your event %@, %@ should pay next", comment: "For your event %1$@, %2$@ should pay next."), tripName, fullNameNextPayer)
@@ -79,7 +79,7 @@ func betterCreateAttributesStringForWhoIsPayingNext(_ tripName: String, fullName
 }
 
 func createErrorMessage() -> NSMutableAttributedString {
-    let fontDescriptor = UIFontDescriptor.preferredFontDescriptor(withTextStyle: UIFontTextStyleBody)
+    let fontDescriptor = UIFontDescriptor.preferredFontDescriptor(withTextStyle: UIFontTextStyle.body)
     let font = UIFont(descriptor: fontDescriptor, size: 0)
     let text = NSLocalizedString("There is no data to display", comment: "There is no data to display")
     let attributedResult = NSMutableAttributedString(string: text, attributes: [NSFontAttributeName : font])

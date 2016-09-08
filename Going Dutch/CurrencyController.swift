@@ -12,7 +12,7 @@ public class Currency: NSObject {
     public let name: String
     public let code: String
     public var symbol: String {
-        return Locale.current.displayName(forKey: Locale.Key.currencySymbol, value: code) ?? ""
+        return Locale.current.localizedString(forCurrencyCode: code) ?? ""
     }
     
     // MARK: NSObject
@@ -41,13 +41,13 @@ public class CurrencyController: NSObject {
     public let currencies: [Currency]
     
     public func currencySymbol(_ code: String) -> String {
-        return Locale.current.displayName(forKey: Locale.Key.currencySymbol, value: code) ?? ""
+        return Locale.current.localizedString(forCurrencyCode: code) ?? ""
     }
     
     // MARK: NSObject
     
     public override init() {
-        let currencyFilePath = Bundle(identifier: "com.GreenHair.CurrencyConverter")!.pathForResource("Available Currencies", ofType: "plist")
+        let currencyFilePath = Bundle(identifier: "com.GreenHair.CurrencyConverter")!.path(forResource: "Available Currencies", ofType: "plist")
         let readCurrencies = NSArray(contentsOfFile: currencyFilePath!) as! [Dictionary<String, String>]
         currencies = readCurrencies.map {
             return Currency(name: $0["name"]!, code: $0["code"]!)

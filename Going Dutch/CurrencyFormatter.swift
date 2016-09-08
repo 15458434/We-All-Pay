@@ -53,7 +53,7 @@ class CurrencyFormatter: Formatter {
         }
     }
     
-    override func string(for obj: AnyObject?) -> String? {
+    func string(for obj: AnyObject?) -> String? {
         if let nummer = obj as? NSNumber {
             let nf = NumberFormatter()
             nf.numberStyle = .currency
@@ -66,7 +66,7 @@ class CurrencyFormatter: Formatter {
         }
     }
     
-    override func editingString(for obj: AnyObject) -> String? {
+    func editingString(for obj: AnyObject) -> String? {
         if let nummer = obj as? NSNumber {
             if nummer.doubleValue == 0 {
                 return nil

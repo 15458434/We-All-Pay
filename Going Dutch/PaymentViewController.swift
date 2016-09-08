@@ -23,6 +23,8 @@ enum CancelButtonPressed {
 }
 
 @objc class PaymentViewController: UITableViewController, MCTonightsBillTransfer, MCThisPaymentProtocol, MCDismissMeBlockProtocol, MCDismissKeyboardProtocol, MCPathComponentsToOpenProtocol, UITextFieldDelegate, UIPopoverControllerDelegate,NSFetchedResultsControllerDelegate {
+    public var pathComponentsToOpen: [Any]!
+
     // MARK: IB Outlet
     @IBOutlet var itemField: UITextField!
     @IBOutlet var paidField: UITextField!
@@ -43,8 +45,6 @@ enum CancelButtonPressed {
     var writableTonightsBill: MCSharedBill!
     
     var dismissMe: (()->())?
-    
-    var pathComponentsToOpen: [AnyObject]?
     
     var mainCancelIsPressed = CancelButtonPressed.notPressed
     
@@ -190,7 +190,7 @@ enum CancelButtonPressed {
     // MARK: UITextFieldDelegate 
     func textFieldShouldBeginEditing(_ textField: UITextField) -> Bool {
         if textField == paidField {
-            if thisPayment.money?.doubleValue <= 0.005 {
+            if thisPayment.money?.doubleValue ?? 0.0 <= 0.005 {
                 paidField.text = ""
             } else {
                 let cf = CurrencyFormatter(currencyCode: thisPayment.currency.code)
@@ -254,7 +254,7 @@ enum CancelButtonPressed {
         tableView.endUpdates()
     }
     
-    func controller(_ controller: NSFetchedResultsController<NSFetchRequestResult>, didChange anObject: AnyObject, at indexPath: IndexPath?, for type: NSFetchedResultsChangeType, newIndexPath: IndexPath?) {
+    private func controller(_ controller: NSFetchedResultsController<NSFetchRequestResult>, didChange anObject: AnyObject, at indexPath: IndexPath?, for type: NSFetchedResultsChangeType, newIndexPath: IndexPath?) {
         if #available(iOS 9, *) {
             switch (type) {
             case .insert:
@@ -324,10 +324,10 @@ enum CancelButtonPressed {
     
     // MARK: Navigation
     
-    override func prepare(for segue: UIStoryboardSegue, sender: AnyObject?) {
+    override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
         switch (segue.identifier) {
         case let identifier where identifier == "selectPayer_iPad":
-            let destination = segue.destinationViewController as! SelectPayerTableViewController_iPad
+            let destination = segue.destination as! SelectPayerTableViewController_iPad
             destination.tonightsBill = tonightsBill
             destination.thisPayment = thisPayment
             
@@ -339,7 +339,7 @@ enum CancelButtonPressed {
             }
         case let identifier where identifier == "openSelectCurrency_iPad":
             MCWeAllPayStoreController.defaultStore().beginUndoGroupWithoutRegistration()
-            let destination = segue.destinationViewController as! SelectCurrencyTableViewController
+            let destination = segue.destination as! SelectCurrencyTableViewController
             destination.thisPayment = thisPayment
             
             let myPopover = (segue as! UIStoryboardPopoverSegue).popoverController
@@ -349,7 +349,7 @@ enum CancelButtonPressed {
                 MCWeAllPayStoreController.defaultStore().endUndoGroupAndProcessWithoutRegistration()
             }
         case let identifier where identifier == "selectCategory_iPad":
-            let destination = segue.destinationViewController as! SelectCategoryTableViewController
+            let destination = segue.destination as! SelectCategoryTableViewController
             destination.thisPayment = thisPayment
             
             let myPopover = (segue as! UIStoryboardPopoverSegue).popoverController

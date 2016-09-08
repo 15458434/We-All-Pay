@@ -22,7 +22,7 @@ class MCStoreInterface: NSObject, SKPaymentTransactionObserver, SKRequestDelegat
     var proProduct: SKProduct!
     
     var productIdentifiers: [String] {
-        let url = Bundle.main.urlForResource("Product ids", withExtension: "plist")!
+        let url = Bundle.main.url(forResource: "Product ids", withExtension: "plist")!
         return NSArray(contentsOf: url) as! [String]
     }
     
@@ -127,16 +127,16 @@ class MCStoreInterface: NSObject, SKPaymentTransactionObserver, SKRequestDelegat
         print("SKRequest: \(request) did finish.")
     }
     
-    func request(_ request: SKRequest, didFailWithError error: NSError) {
+    func request(_ request: SKRequest, didFailWithError error: Error) {
         print("SKRequest: \(request) did fail with error: \(error)")
-        if error.domain == SKErrorDomain {
-            switch error.code {
+        if error._domain == SKErrorDomain {
+            switch error._code {
             case 0:
                 print("App store not available.")
-                self.lastSKProductsRequestError = error
+                self.lastSKProductsRequestError = error as NSError?
             default:
                 print("App store something is wrong.")
-                self.lastSKProductsRequestError = error
+                self.lastSKProductsRequestError = error as NSError?
             }
         }
     }

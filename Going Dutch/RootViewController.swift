@@ -17,12 +17,12 @@ class RootViewController: UIViewController {
         navigationController!.setToolbarHidden(true, animated: true)
     }
     
-    override func preferredStatusBarStyle() -> UIStatusBarStyle {
+    override var preferredStatusBarStyle: UIStatusBarStyle {
         return .lightContent
     }
     
     // MARK: Navigation
-    override func prepare(for segue: UIStoryboardSegue, sender: AnyObject?) {
+    override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
         
     }
 }

@@ -10,7 +10,7 @@ import UIKit
 
 public extension UIView {
     public func getFirstResponder() -> UIView? {
-        if self.isFirstResponder() {
+        if self.isFirstResponder {
             return self
         }
         for subView in self.subviews {

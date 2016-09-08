@@ -16,12 +16,12 @@ class ADoriginate : NSObject {
     
     override init() {
         let userDefaults = UserDefaults.standard
-        fromiAd = userDefaults.bool(forKey: fromiAdKey)
+        fromiAd = userDefaults.bool(forKey: fromiAdKey) as NSNumber?
         
         super.init()
     }
     
-    init(completionHandler: () -> ()) {
+    init(completionHandler: @escaping () -> ()) {
         let userDefaults = UserDefaults.standard
         let fromiAdValueFromUserDefaults: Bool! = userDefaults.bool(forKey: fromiAdKey)
         if let myValue = fromiAdValueFromUserDefaults {
@@ -38,7 +38,7 @@ class ADoriginate : NSObject {
         }
     }
     
-    func fetchAttribution(_ completionHandler: () -> ()){
+    func fetchAttribution(_ completionHandler: @escaping () -> ()){
         ADClient.shared().lookupAdConversionDetails({ (appPurchaseDate, iAdImpressionDate) -> Void in
             // True if we were installed from an iAd campaign
             if iAdImpressionDate != nil {

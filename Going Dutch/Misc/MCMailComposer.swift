@@ -14,7 +14,7 @@ protocol MailComposer {
     func mailBody() throws -> String
 }
 
-enum MailComposerError: ErrorProtocol {
+enum MailComposerError: Error {
     case missingCrititcalInformationIn(payment: MCPayment)
     case missingInformationIn(payment: MCPayment)
 }

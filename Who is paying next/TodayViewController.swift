@@ -98,7 +98,7 @@ class TodayViewController: UIViewController, NCWidgetProviding {
         self.view.preservesSuperviewLayoutMargins = true
     }
     
-    func widgetPerformUpdate(completionHandler: ((NCUpdateResult) -> Void)) {
+    private func widgetPerformUpdate(completionHandler: ((NCUpdateResult) -> Void)) {
         // Perform any setup necessary in order to update the view.
 
         // If an error is encountered, use NCUpdateResult.Failed

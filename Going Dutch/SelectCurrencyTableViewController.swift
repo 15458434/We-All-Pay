@@ -145,7 +145,7 @@ class SelectCurrencyTableViewController: UITableViewController, UISearchResultsU
         }
         let myPresenter = self.presentingViewController
         
-        let thisCellsCurrency = data(indexPath: indexPath)
+        let thisCellsCurrency = data(indexPath: indexPath as NSIndexPath)
         
         let mainThreadContext = MCWeAllPayStoreController.defaultStore().mainThreadContext
         let newCurrency = MCCurrency(from: thisCellsCurrency.code, from: mainThreadContext)

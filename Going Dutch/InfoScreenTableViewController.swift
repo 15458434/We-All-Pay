@@ -44,12 +44,12 @@ class InfoScreenTableViewController: UITableViewController, MFMailComposeViewCon
     
     private func openMyAppStoreLink() {
         let url = URL(string: "itms-apps://itunes.apple.com/WebObjects/MZStore.woa/wa/viewContentsUserReviews?id=642135963&pageNumber=0&sortOrdering=2&type=Purple+Software&mt=8")!
-        UIApplication.shared().openURL(url)
+        UIApplication.shared.openURL(url)
     }
     
     private func showAllMyApps() {
         let url = URL(string: "itms-apps://search.itunes.apple.com/WebObjects/MZContentLink.woa/wa/link?mt=8&path=apps%2fmarkcornelisse")!
-        UIApplication.shared().openURL(url)
+        UIApplication.shared.openURL(url)
     }
     
     private func openMailComposer() {
@@ -60,7 +60,7 @@ class InfoScreenTableViewController: UITableViewController, MFMailComposeViewCon
             mailComposer.setSubject(subjectString)
             mailComposer.mailComposeDelegate = self
             present(mailComposer, animated: true) { () -> Void in
-                UIApplication.shared().setStatusBarStyle(UIStatusBarStyle.lightContent, animated: false)
+                UIApplication.shared.setStatusBarStyle(UIStatusBarStyle.lightContent, animated: false)
                 mailComposer.setNeedsStatusBarAppearanceUpdate()
             }
         } else {
@@ -130,8 +130,8 @@ class InfoScreenTableViewController: UITableViewController, MFMailComposeViewCon
         super.viewDidAppear(animated)
         
         NotificationCenter.default.addObserver(self, selector: #selector(InfoScreenTableViewController.applyProVersion(_:)), name: NSNotification.Name(rawValue: MCStoreInterface.applyProVersionNotification()), object: MCStoreInterface.defaultStoreInterface)
-        NotificationCenter.default.addObserver(self, selector: #selector(InfoScreenTableViewController.postProductPrice(_:)), name: "Product price" as NSNotification.Name, object: MCStoreInterface.defaultStoreInterface)
-        NotificationCenter.default.addObserver(self, selector: #selector(InfoScreenTableViewController.restorePreviousPurchasesFailed(_:)), name: "Restore previous purchases" as NSNotification.Name, object: MCStoreInterface.defaultStoreInterface)
+        NotificationCenter.default.addObserver(self, selector: #selector(InfoScreenTableViewController.postProductPrice(_:)), name: NSNotification.Name(rawValue: "Product price"), object: MCStoreInterface.defaultStoreInterface)
+        NotificationCenter.default.addObserver(self, selector: #selector(InfoScreenTableViewController.restorePreviousPurchasesFailed(_:)), name: NSNotification.Name(rawValue:"Restore previous purchases"), object: MCStoreInterface.defaultStoreInterface)
     }
     
     override func viewDidDisappear(_ animated: Bool) {
@@ -144,13 +144,13 @@ class InfoScreenTableViewController: UITableViewController, MFMailComposeViewCon
         super.didReceiveMemoryWarning()
     }
     
-    override func prefersStatusBarHidden() -> Bool {
+    override var prefersStatusBarHidden: Bool {
         return true
     }
     
     // MARK: MF MAil Compose Delegate
     
-    func mailComposeController(_ controller: MFMailComposeViewController, didFinishWith result: MFMailComposeResult, error: NSError?) {
+    func mailComposeController(_ controller: MFMailComposeViewController, didFinishWith result: MFMailComposeResult, error: Error?) {
         switch (result.rawValue) {
         case MFMailComposeResult.cancelled.rawValue:
             dismiss(animated: true, completion: nil)

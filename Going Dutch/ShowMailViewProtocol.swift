@@ -38,7 +38,7 @@ extension ShowMailViewProtocol where Self: UIViewController {
             mailViewController.setSubject(try subject())
             mailViewController.setMessageBody(try mailBody(), isHTML: false)
             present(mailViewController, animated: true, completion: {
-                UIApplication.shared().statusBarStyle = .lightContent
+                UIApplication.shared.statusBarStyle = .lightContent
                 mailViewController.setNeedsStatusBarAppearanceUpdate()
             })
         } catch MailComposerError.missingCrititcalInformationIn(let payment) {
