@@ -53,15 +53,14 @@ class InfoScreenTableViewController: UITableViewController, MFMailComposeViewCon
     }
     
     private func openMailComposer() {
-        if MFMailComposeViewController.canSendMail() {
+        if MailComposeViewController.canSendMail() {
             let mailComposer = MFMailComposeViewController()
             mailComposer.setToRecipients(["support@markcornelisse.nl"])
             let subjectString = "Feedback on \(productName) \(shortVersionString)"
             mailComposer.setSubject(subjectString)
             mailComposer.mailComposeDelegate = self
             present(mailComposer, animated: true) { () -> Void in
-                UIApplication.shared.setStatusBarStyle(UIStatusBarStyle.lightContent, animated: false)
-                mailComposer.setNeedsStatusBarAppearanceUpdate()
+                // Nothing to do.
             }
         } else {
             let title = NSLocalizedString("Unable to send email", comment: "Unable to send email")

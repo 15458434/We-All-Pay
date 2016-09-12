@@ -30,8 +30,6 @@
 @property (weak, nonatomic) IBOutlet UITextField *tripNameField;
 @property (weak, nonatomic) IBOutlet UIView *leftTopView;
 
-@property (strong, nonatomic) UIAlertView *payerMissingAlertView;
-
 @end
 
 @implementation MCSharedBillViewController_iPad
@@ -70,6 +68,7 @@
                 [strongSelf openFirstPaymentWithoutAPayer];
             }
         }]];
+        [self presentViewController:alertController animated:YES completion:nil];
     }
 }
 

@@ -15,7 +15,6 @@ let kApplyProVersionNotification = "Apply pro version"
 class MCStoreInterface: NSObject, SKPaymentTransactionObserver, SKRequestDelegate, SKProductsRequestDelegate, UIAlertViewDelegate {
     private var productRequest: SKProductsRequest?
     private var lastSKProductsRequestError: NSError?
-    private var appStoreUnreachableAlert: UIAlertView?
     
     private var applyProVersionSuccesful: Bool = false
     
@@ -112,14 +111,6 @@ class MCStoreInterface: NSObject, SKPaymentTransactionObserver, SKRequestDelegat
     func reset() {
         let productIdentifier: String = self.productIdentifiers.first! as String
         UserDefaults.standard.removeObject(forKey: productIdentifier)
-    }
-    
-    // MARK: UI Alert View Delegate
-    
-    func alertView(_ alertView: UIAlertView, clickedButtonAt buttonIndex: Int) {
-        if alertView == appStoreUnreachableAlert {
-            appStoreUnreachableAlert = nil
-        }
     }
     
     // MARK: SK Request Delegate
