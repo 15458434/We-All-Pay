@@ -52,8 +52,14 @@ class ContactsDataReceiver: NSObject, ThisEventReadOnly, CNContactPickerDelegate
                 let emailAddressString = emailAddress.value as String
                 newPerson.addOneEmailAddress(fromAString: emailAddressString)
             }
-            newPerson.setThumbnailDataFrom(UIImage(data: contact.imageData!) ?? nil)
-            newPerson.setPictureDataFrom(UIImage(data: contact.imageData!) ?? nil)
+            if let imageData = contact.imageData {
+                newPerson.setThumbnailDataFrom(UIImage(data: imageData)!)
+                newPerson.setPictureDataFrom(UIImage(data: imageData)!)
+            } else {
+                newPerson.setThumbnailDataFrom(nil)
+                newPerson.setPictureDataFrom(nil)
+            }
+            
             MCWeAllPayStoreController.defaultStore().savebackgroundContext()
         }
     }
