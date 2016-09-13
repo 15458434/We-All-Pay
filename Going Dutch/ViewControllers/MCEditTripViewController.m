@@ -74,26 +74,6 @@
 
 #pragma mark - new in this class.
 
-- (void)openPeoplePicker __deprecated
-{
-    ABPeoplePickerNavigationController *peoplePicker = [[ABPeoplePickerNavigationController alloc] init];
-    if (!_personReceiver) {
-        _personReceiver = [[MCAddressBookDataReceiver alloc] initWithViewController:self andDelegate:self];
-        [_personReceiver setTonightsBill:_tonightsBill];
-    }
-    [peoplePicker setPeoplePickerDelegate:_personReceiver];
-    //    [peoplePicker setPredicateForSelectionOfPerson:nil];
-    [peoplePicker setEdgesForExtendedLayout:UIRectEdgeNone];
-    //    [[peoplePicker viewControllers][0] setEdgesForExtendedLayout:UIRectEdgeNone];
-    [peoplePicker setModalPresentationStyle:UIModalPresentationFormSheet];
-    [[[peoplePicker navigationController] navigationBar] setBarStyle:UIBarStyleBlack];
-    peoplePicker.navigationBar.translucent = NO;
-    peoplePicker.navigationBar.opaque = YES;
-    
-    
-    [[self navigationController] presentViewController:peoplePicker animated:YES completion:nil];
-}
-
 - (void)showContactsDisabledMessage
 {
     NSString *title = NSLocalizedString(@"Access to contacts denied", @"Message to the user when access to the Contacts is denied by the user");

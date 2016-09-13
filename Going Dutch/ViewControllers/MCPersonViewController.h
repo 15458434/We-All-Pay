@@ -12,8 +12,6 @@
 
 #import "We_all_pay-Swift.h"
 
-#import "MCAddressBookDataReceiver.h"
-
 #import "MCTonightsBillTransfer.h"
 
 typedef enum _emailFieldEditStatus {

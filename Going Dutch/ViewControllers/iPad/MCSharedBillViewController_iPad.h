@@ -9,7 +9,6 @@
 @import UIKit;
 @import iAd;
 
-#import "MCAddressBookDataReceiver.h"
 #import "MCTonightsBillTransfer.h"
 #import "MCThisPaymentProtocol.h"
 
