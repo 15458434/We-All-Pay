@@ -56,27 +56,6 @@
     }];
 }
 
-- (void)checkToSeeIfThisPurchaseOriginatesFromiAd
-{
-    ADoriginate *adAttributionObject = [[ADoriginate alloc] init];
-    if (adAttributionObject.fromiAd != nil) {
-        // There is a value present.
-        if (adAttributionObject.fromiAd.boolValue) {
-            NSLog(@"We met with iAd.");
-        } else {
-            NSLog(@"We didn't met with iAd");
-        }
-    } else {
-        [adAttributionObject fetchAttribution:^{
-            if (adAttributionObject.fromiAd.boolValue) {
-                NSLog(@"We met with iAd.");
-            } else {
-                NSLog(@"We didn't met with iAd");
-            }
-        }];
-    }
-}
-
 - (void)executeOnlyOnceDuringStartup
 {
     // Override point for customization after application launch.
@@ -85,12 +64,13 @@
     [someQueue addOperationWithBlock:^{
         NSLog(@"%@ running iOS %@", [[UIDevice currentDevice] model], [[UIDevice currentDevice] systemVersion]);
         NSLog(@"I dedicate this program to Ilse Béguin, the most wonderful woman in the world who brought herself into my life, when I was developing the first version of this App.");
-    }];
 #ifdef DEBUG
-    NSLocale *locale = [NSLocale currentLocale];
-    NSString *languageCode = [locale objectForKey:NSLocaleLanguageCode];
-    NSLog(@"The current language code is: %@", languageCode);
+        NSLocale *locale = [NSLocale currentLocale];
+        NSString *languageCode = [locale objectForKey:NSLocaleLanguageCode];
+        NSLog(@"The current language code is: %@", languageCode);
 #endif
+    }];
+
     // Set colors throughout the App.
     [[UINavigationBar appearance] setBarTintColor:[Colors getNavigationColor]];
     [[UINavigationBar appearance] setTintColor:[Colors getButtonColor]];
@@ -198,10 +178,6 @@
         [self executeOnlyOnceDuringStartup];
         [[MCWeAllPayStoreController defaultStore] openStore:nil];
         
-    });
-    dispatch_queue_t someBackgroundQueue = dispatch_queue_create("originChech", NULL);
-    dispatch_async(someBackgroundQueue, ^{
-        [self checkToSeeIfThisPurchaseOriginatesFromiAd];
     });    
     return YES;
 }
