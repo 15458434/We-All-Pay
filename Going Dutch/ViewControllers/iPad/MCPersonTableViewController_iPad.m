@@ -173,23 +173,6 @@ typedef NS_ENUM(BOOL, MCStatus) {
     // Dispose of any resources that can be recreated.
 }
 
-#pragma mark - UIPopoverControllerDelegate
-
-- (void)popoverController:(UIPopoverController *)popoverController willRepositionPopoverToRect:(inout CGRect *)rect inView:(inout UIView *__autoreleasing *)view
-{
-    
-}
-
-- (BOOL)popoverControllerShouldDismissPopover:(UIPopoverController *)popoverController
-{
-    return YES;
-}
-
-- (void)popoverControllerDidDismissPopover:(UIPopoverController *)popoverController
-{
-    [_emailField setText:[_thisPerson defaultEmailAddress]];
-}
-
 #pragma mark - UITextFieldDelegate
 
 -(void)textFieldDidBeginEditing:(UITextField *)textField
@@ -316,18 +299,16 @@ typedef NS_ENUM(BOOL, MCStatus) {
     // Get the new view controller using [segue destinationViewController].
     // Pass the selected object to the new view controller.
     if ([[segue identifier] isEqualToString:@"openSelectEmailAddress"]) {
-        id destination = [segue destinationViewController];
-        if ([destination conformsToProtocol:@protocol(MCThisPersonProtocol) ]) {
-            [destination setThisPerson:_thisPerson];
-        }
-        
-        UIPopoverController *myPopover = [(UIStoryboardPopoverSegue *)segue popoverController];
-        [myPopover setDelegate:self];
+        __weak SelectEmailAddressTableViewController_iPad *destination = [segue destinationViewController];
+        [destination setThisPerson:_thisPerson];
         
         if ([destination conformsToProtocol:@protocol(MCDismissMeBlockProtocol)]) {
             [destination setDismissMe:^{
-                [myPopover dismissPopoverAnimated:YES];
-                [_emailField setText:[_thisPerson defaultEmailAddress]];
+                if (destination) {
+                    [destination dismissViewControllerAnimated:YES completion:^{
+                        [_emailField setText:[_thisPerson defaultEmailAddress]];
+                    }];
+                }
             }];
         }
     }

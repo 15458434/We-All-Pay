@@ -22,7 +22,7 @@ enum CancelButtonPressed {
     case notPressed, isPressed
 }
 
-@objc class PaymentViewController: UITableViewController, MCTonightsBillTransfer, MCThisPaymentProtocol, MCDismissMeBlockProtocol, MCDismissKeyboardProtocol, MCPathComponentsToOpenProtocol, UITextFieldDelegate, UIPopoverControllerDelegate,NSFetchedResultsControllerDelegate {
+@objc class PaymentViewController: UITableViewController, MCTonightsBillTransfer, MCThisPaymentProtocol, MCDismissMeBlockProtocol, MCDismissKeyboardProtocol, MCPathComponentsToOpenProtocol, UITextFieldDelegate, NSFetchedResultsControllerDelegate {
     public var pathComponentsToOpen: [Any]!
 
     // MARK: IB Outlet
@@ -66,7 +66,7 @@ enum CancelButtonPressed {
         tonightsBill.dateModified = now
         MCWeAllPayStoreController.defaultStore().endUndoGroupAndProcess()
         MCWeAllPayStoreController.defaultStore().saveMainThreadContext()
-        navigationController?.presentingViewController?.dismiss(animated: true, completion: { () -> Void in
+        navigationController!.presentingViewController!.dismiss(animated: true, completion: { () -> Void in
             WhoPayingUserDefaultsStoreInterface.sendToUserDefaultsStoreInterface(self.tonightsBill)
         })
         dismissMe?()
@@ -228,21 +228,6 @@ enum CancelButtonPressed {
         }
     }
     
-    // MARK: UI Popover Controller Delegate
-    func popoverController(_ popoverController: UIPopoverController, willRepositionPopoverTo rect: UnsafeMutablePointer<CGRect>, in view: AutoreleasingUnsafeMutablePointer<UIView>) {
-        print("Doesn't do anything")
-    }
-    
-    func popoverControllerShouldDismissPopover(_ popoverController: UIPopoverController) -> Bool {
-        return true
-    }
-    
-    func popoverControllerDidDismissPopover(_ popoverController: UIPopoverController) {
-        if thisPayment.payingPerson != nil {
-            selectButton.setTitle(thisPayment.payingPerson.getFullName(), for: UIControlState())
-        }
-    }
-    
     // MARK: NS Fetched Results Controller Delegate
     func controllerWillChangeContent(_ controller: NSFetchedResultsController<NSFetchRequestResult>) {
         debugPrint("controllerWillChangeContent")
@@ -330,32 +315,28 @@ enum CancelButtonPressed {
             let destination = segue.destination as! SelectPayerTableViewController_iPad
             destination.tonightsBill = tonightsBill
             destination.thisPayment = thisPayment
-            
-            let myPopover = (segue as! UIStoryboardPopoverSegue).popoverController
-            myPopover.delegate = self
+        
             destination.dismissMe = {
-                myPopover.dismiss(animated: true)
-                self.reloadPayerView()
+                destination.dismiss(animated: true, completion: {
+                    self.reloadPayerView()
+                })
             }
         case let identifier where identifier == "openSelectCurrency_iPad":
             MCWeAllPayStoreController.defaultStore().beginUndoGroupWithoutRegistration()
             let destination = segue.destination as! SelectCurrencyTableViewController
             destination.thisPayment = thisPayment
             
-            let myPopover = (segue as! UIStoryboardPopoverSegue).popoverController
-            myPopover.delegate = self
             destination.dismissMe = { 
-                myPopover.dismiss(animated: true)
-                MCWeAllPayStoreController.defaultStore().endUndoGroupAndProcessWithoutRegistration()
+                destination.dismiss(animated: true, completion: { 
+                    MCWeAllPayStoreController.defaultStore().endUndoGroupAndProcessWithoutRegistration()
+                })
             }
         case let identifier where identifier == "selectCategory_iPad":
             let destination = segue.destination as! SelectCategoryTableViewController
             destination.thisPayment = thisPayment
             
-            let myPopover = (segue as! UIStoryboardPopoverSegue).popoverController
-            myPopover.delegate = self
             destination.dismissMe = {
-                myPopover.dismiss(animated: true)
+                destination.dismiss(animated: true)
                 self.reloadCategoryImageView()
                 self.setTextForCategoryButton()
             }
