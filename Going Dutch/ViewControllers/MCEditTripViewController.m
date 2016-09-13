@@ -32,7 +32,7 @@
 @property (strong, nonatomic) MCTableEmptyMessage *emptyMessage;
 
 @property (nonatomic, strong) NSFetchedResultsController *dataController;
-@property (nonatomic, strong) MCAddressBookDataReceiver *personReceiver;
+@property (nonatomic, strong) ContactsDataReceiver *contactsInserter;
 
 @property (nonatomic) BOOL cancelPressed;
 
@@ -50,45 +50,14 @@
 #pragma mark - actions of this class
 
 - (IBAction)addressBookButton:(id)sender {
-    
-    // TODO: This can be done without the Switch case.
-    switch (ABAddressBookGetAuthorizationStatus())
-    {
-            // Update our UI if the user has granted access to their Contacts
-        case  kABAuthorizationStatusAuthorized:
-            [self openPeoplePicker];
-            break;
-            // Prompt the user for access to Contacts if there is no definitive answer
-        case  kABAuthorizationStatusNotDetermined :
-            // Display a message if the user has denied or restricted access to Contacts
-        case  kABAuthorizationStatusDenied:
-        case  kABAuthorizationStatusRestricted:
-        {
-            CFErrorRef error;
-            ABAddressBookRef myAddressBook = ABAddressBookCreateWithOptions(NULL, &error);
-            if (error) {
-                NSLog(@"Something went wrong opening myAddressBook: %@", error);
-            }
-            
-            typeof(self) __weak weakSelf = self;
-            // Popup for user will only appear once.
-            ABAddressBookRequestAccessWithCompletion(myAddressBook, ^(bool granted, CFErrorRef error) {
-                if (granted) {
-                    dispatch_async(dispatch_get_main_queue(), ^{
-                        [weakSelf openPeoplePicker];
-                    });
-                } else {
-                    dispatch_async(dispatch_get_main_queue(), ^{
-                        [weakSelf showContactsDisabledMessage];
-                    });
-                }
-            });
-        }
-
-            break;
-        default:
-            break;
+    if (!_contactsInserter) {
+        _contactsInserter = [[ContactsDataReceiver alloc] initWith:_tonightsBill];
     }
+    [_contactsInserter presentContactsPickerWith:self completion:^{
+#ifdef DEBUG
+        NSLog(@"I love Ilse.");
+#endif
+    }];
 }
 
 
@@ -105,7 +74,7 @@
 
 #pragma mark - new in this class.
 
-- (void)openPeoplePicker
+- (void)openPeoplePicker __deprecated
 {
     ABPeoplePickerNavigationController *peoplePicker = [[ABPeoplePickerNavigationController alloc] init];
     if (!_personReceiver) {
@@ -326,27 +295,6 @@
     [[self tableView] reloadData];
 }
 
-#pragma mark - UIAlertViewDelegate
-
-- (void)alertView:(UIAlertView *)alertView clickedButtonAtIndex:(NSInteger)buttonIndex
-{
-    switch (buttonIndex) {
-        case 0:
-            NSLog(@"Ok, in no people present message pressed.");
-            break;
-        case 1:
-            NSLog(@"Edit, in no people present message pressed.");
-            if (kABAuthorizationStatusAuthorized == ABAddressBookGetAuthorizationStatus() ||
-                kABAuthorizationStatusNotDetermined == ABAddressBookGetAuthorizationStatus()) {
-                [self addressBookButton:self];
-            } else {
-                [self addPersonButton:self];
-            }
-        default:
-            break;
-    }
-}
-
 #pragma mark - MCAddressBookReceiverDelegate
 
 - (BOOL) isNewPersonFromAddressBookAlreadyPresent:(MCPerson *)newPerson
@@ -453,7 +401,8 @@
         [[thisCell totalSpent] setHidden:NO];
         
         CurrencyFormatter *cf = [[CurrencyFormatter alloc] initWithCurrencyCode:_tonightsBill.mainCurrency.code];
-        thisCell.totalSpent.text = [cf stringForObjectValue:thisCellsPerson.totalSumPaid];
+        thisCell.totalSpent.text = [cf stringFor:thisCellsPerson.totalSumPaid];
+//        thisCell.totalSpent.text = [cf stringForObjectValue:thisCellsPerson.totalSumPaid];
     } else {
         [thisCell.fetchingExchangeRateIndicator startAnimating];
         [[thisCell totalSpent] setHidden:YES];

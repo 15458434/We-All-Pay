@@ -270,7 +270,7 @@
         [[allTripsTableViewCell totalCostLabel] setHidden:NO];
         
         CurrencyFormatter *cf = [[CurrencyFormatter alloc] initWithCurrencyCode:thisTrip.mainCurrency.code];
-        allTripsTableViewCell.totalCostLabel.text = [cf stringForObjectValue:thisTrip.totalSumOfMoneyOfThisSharedBill];
+        allTripsTableViewCell.totalCostLabel.text = [cf stringFor:thisTrip.totalSumOfMoneyOfThisSharedBill];
     } else {
         [[allTripsTableViewCell activityIndicator] startAnimating];
         [[allTripsTableViewCell totalCostLabel] setHidden:YES];

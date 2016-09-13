@@ -33,7 +33,6 @@ typedef NS_ENUM(BOOL, MCStatus) {
 @property (nonatomic) BOOL isSelectEmail;
 @property (nonatomic) NSUInteger emailEditFieldStatus;
 
-@property (nonatomic, strong) MCAddressBookDataReceiver *personReceiver;
 @property (nonatomic, strong) NSFetchedResultsController *dataController;
 
 @property (atomic, copy) NSDate * dateModified;
@@ -380,34 +379,7 @@ typedef NS_ENUM(BOOL, MCStatus) {
 
 - (NSInteger)pickerView:(UIPickerView *)pickerView numberOfRowsInComponent:(NSInteger)component
 {
-    if (kABAuthorizationStatusAuthorized == ABAddressBookGetAuthorizationStatus()) {
-        return [[_dataController fetchedObjects] count];
-    } else {
-        return 1;
-    }
-}
-
-#pragma mark - MCAddressBookReceiverDelegate
-
-- (BOOL)isPersonAlreadyPresent:(MCPerson *)newPerson
-{
-    NSLog(@"isNewPersonFromAddressBookAlreadyPresent is not implemented yet.");
-    return NO;
-}
-
-- (MCPerson *)personRecordToUse
-{
-    if (!isNew) {
-        return _thisPerson;
-    } else {
-        return nil;
-    }
-}
-
-- (void)receiveANewPersonFromAddressBook:(MCPerson *)newPerson
-{
-//    didSomethingChange = YES;
-    [_emailSelectionFromAddressBookPickerView reloadComponent:0];
+    return [[_dataController fetchedObjects] count];
 }
 
 @end

@@ -32,7 +32,7 @@ typedef enum _emailFieldEditStatus {
 
 @end
 
-@interface MCPersonViewController : UITableViewController <UITextFieldDelegate, UIPickerViewDelegate, UIPickerViewDataSource, MCAddressBookReceiverDelegate, MCTonightsBillTransfer, MCThisPersonProtocol>
+@interface MCPersonViewController : UITableViewController <UITextFieldDelegate, UIPickerViewDelegate, UIPickerViewDataSource, MCTonightsBillTransfer, MCThisPersonProtocol>
 
 @property (weak, nonatomic) IBOutlet UIImageView *pictureView;
 

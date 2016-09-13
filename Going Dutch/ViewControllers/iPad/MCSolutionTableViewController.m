@@ -316,7 +316,7 @@ typedef NS_ENUM(BOOL, MCXRateStatus) {
         ReturnPayment *thisCellContents = [_solution objectAtIndex:[indexPath row]];
         
         CurrencyFormatter *cf = [[CurrencyFormatter alloc] initWithCurrencyCode:_tonightsBill.mainCurrency.code];
-        cell.moneyLabel.text = [cf stringForObjectValue:thisCellContents.money];
+        cell.moneyLabel.text = [cf stringFor:thisCellContents.money];
         
         NSString *owesString = NSLocalizedString(@"OWES", @"As in Mark owes Arjen, but then just the word owes.");
         NSString *whoOwesWho = [[NSString alloc] initWithFormat:@"%@ %@ %@:", [[thisCellContents payer] getFullName], owesString, [[thisCellContents receiver] getFullName]];
@@ -335,7 +335,7 @@ typedef NS_ENUM(BOOL, MCXRateStatus) {
         NSNumber *sumSpentByPerson = @(-[[_tonightsBill amountShouldHavePaidBy:thisPerson] doubleValue]);
 
         CurrencyFormatter *cf = [[CurrencyFormatter alloc] initWithCurrencyCode:_tonightsBill.mainCurrency.code];
-        cell.lastLabel.text = [cf stringForObjectValue:sumSpentByPerson];
+        cell.lastLabel.text = [cf stringFor:sumSpentByPerson];
 
         [cell setSelectionStyle:UITableViewCellSelectionStyleNone];
         return cell;
@@ -352,14 +352,14 @@ typedef NS_ENUM(BOOL, MCXRateStatus) {
             NSNumber *sumSpentByPerson = thisPerson.totalSumPaid;
             
             CurrencyFormatter *cf = [[CurrencyFormatter alloc] initWithCurrencyCode:_tonightsBill.mainCurrency.code];
-            cell.lastLabel.text = [cf stringForObjectValue:sumSpentByPerson];
+            cell.lastLabel.text = [cf stringFor:sumSpentByPerson];
             
         } else {
             NSString *totalSpentString = NSLocalizedString(@"TOTAL_SPENT", @"Total spent:");
             [[cell firstLabel] setText:totalSpentString];
             
             CurrencyFormatter *cf = [[CurrencyFormatter alloc] initWithCurrencyCode:_tonightsBill.mainCurrency.code];
-            cell.lastLabel.text = [cf stringForObjectValue:_tonightsBill.totalSumOfMoneyOfThisSharedBill];
+            cell.lastLabel.text = [cf stringFor:_tonightsBill.totalSumOfMoneyOfThisSharedBill];
         }
 
         return cell;

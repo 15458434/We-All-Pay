@@ -54,15 +54,22 @@ typedef NS_ENUM(BOOL, MCStatus) {
     [[self view] resignFirstResponder];
     if ([MCTools isStringAnEmailAddress:[_emailField text]]) {
         [self dismissFromDone];
+        [[MCWeAllPayStoreController defaultStore] saveMainThreadContext];
     } else {
         NSString *alertViewTitle = NSLocalizedString(@"INVALID_EMAIL_ADDRESS", "Invalid email address");
         NSString *alertViewMessage = NSLocalizedString(@"INVALID_EMAIL_ADDRESS_MESSAGE", @"The email address you provided doesn't appear to be an email address. This might cause improper behavior. Are you sure you want to continu?");
         NSString *alertViewYes = NSLocalizedString(@"YES", @"yes");
         NSString *alertViewNo = NSLocalizedString(@"NO", @"no");
-        UIAlertView *alertView = [[UIAlertView alloc] initWithTitle:alertViewTitle message:alertViewMessage delegate:self cancelButtonTitle:alertViewNo otherButtonTitles:alertViewYes, nil];
-        [alertView show];
+        UIAlertController *alertController = [UIAlertController alertControllerWithTitle:alertViewTitle message:alertViewMessage preferredStyle:UIAlertControllerStyleAlert];
+        [alertController addAction:[UIAlertAction actionWithTitle:alertViewNo style:UIAlertActionStyleCancel handler:nil]];
+        [alertController addAction:[UIAlertAction actionWithTitle:alertViewYes style:UIAlertActionStyleDefault handler:^(UIAlertAction * _Nonnull action) {
+            [self dismissFromDone];
+            [[MCWeAllPayStoreController defaultStore] saveMainThreadContext];
+        }]];
+        [self presentViewController:alertController animated:YES completion:nil];
+        
     }
-    [[MCWeAllPayStoreController defaultStore] saveMainThreadContext];
+    
 }
 
 - (IBAction)selectEmailAddressButtonPressed:(id)sender
@@ -164,25 +171,6 @@ typedef NS_ENUM(BOOL, MCStatus) {
 {
     [super didReceiveMemoryWarning];
     // Dispose of any resources that can be recreated.
-}
-
-#pragma mark - UIAlertViewDelegate
-
-- (void)alertView:(UIAlertView *)alertView clickedButtonAtIndex:(NSInteger)buttonIndex
-{
-    if ([[alertView title] isEqualToString:@"Invalid email address"]) {
-        switch (buttonIndex) {
-            case 0:
-                // don't do anything.
-                break;
-            case 1:
-                [self dismissFromDone];
-                break;
-            default:
-                NSLog(@"This is not supposed to be happening.");
-                break;
-        }
-    }
 }
 
 #pragma mark - UIPopoverControllerDelegate

@@ -11,3 +11,7 @@
 protocol ThisEvent {
     var event: MCSharedBill! { get set }
 }
+
+protocol ThisEventReadOnly {
+    var event: MCSharedBill { get }
+}

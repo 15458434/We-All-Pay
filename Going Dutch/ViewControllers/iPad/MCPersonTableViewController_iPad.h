@@ -24,7 +24,7 @@ typedef NS_ENUM(BOOL, MCCancelButtonPressed) {
     cancelIsPressed
 };
 
-@interface MCPersonTableViewController_iPad : UITableViewController <UITextFieldDelegate, UIPopoverControllerDelegate, UIAlertViewDelegate, MCThisPersonProtocol, MCTonightsBillTransfer>
+@interface MCPersonTableViewController_iPad : UITableViewController <UITextFieldDelegate, UIPopoverControllerDelegate, MCThisPersonProtocol, MCTonightsBillTransfer>
 
 @property (weak, nonatomic) IBOutlet UITextField *firstNameField;
 @property (weak, nonatomic) IBOutlet UITextField *lastNameField;

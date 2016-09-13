@@ -330,7 +330,7 @@ typedef NS_ENUM(BOOL, MCXRateStatus) {
         ReturnPayment *thisCellsReturnPayment = _solution[[indexPath row]];
         MCWhoOwesWhoTableViewCell_iPhone *returnPaymentCell = [tableView dequeueReusableCellWithIdentifier:@"MCWhoOwesWhoTableViewCell_iPhone"];
         CurrencyFormatter *cf = [[CurrencyFormatter alloc] initWithCurrencyCode:_tonightsBill.mainCurrency.code];
-        returnPaymentCell.moneyLabel.text = [cf stringForObjectValue:thisCellsReturnPayment.money];
+        returnPaymentCell.moneyLabel.text = [cf stringFor:thisCellsReturnPayment.money];
         
         NSString *owesString = NSLocalizedString(@"OWES", @"As in Mark owes Arjen, but then just the word owes.");
         NSString *whoOwesWho = [[NSString alloc] initWithFormat:@"%@ %@ %@:", [[thisCellsReturnPayment payer] getName], owesString, [[thisCellsReturnPayment receiver] getName]];
@@ -347,7 +347,7 @@ typedef NS_ENUM(BOOL, MCXRateStatus) {
         [[cell whoPaidHowMuchLabel] setText:[person getFullName]];
         NSNumber *sumSpentByPerson = @(-[[_tonightsBill amountShouldHavePaidBy:person] doubleValue]);
         CurrencyFormatter *cf = [[CurrencyFormatter alloc] initWithCurrencyCode:_tonightsBill.mainCurrency.code];
-        cell.moneyLabel.text = [cf stringForObjectValue:sumSpentByPerson];
+        cell.moneyLabel.text = [cf stringFor:sumSpentByPerson];
         return cell;
     }
     
@@ -359,7 +359,7 @@ typedef NS_ENUM(BOOL, MCXRateStatus) {
             [[cell whoPaidHowMuchLabel] setText:[person getFullName]];
             
             CurrencyFormatter *cf = [[CurrencyFormatter alloc] initWithCurrencyCode:_tonightsBill.mainCurrency.code];
-            cell.moneyLabel.text = [cf stringForObjectValue:person.totalSumPaid];
+            cell.moneyLabel.text = [cf stringFor:person.totalSumPaid];
             return cell;
         } else {
             MCSolutionOverViewTableViewCell_iPhone *cell = [tableView dequeueReusableCellWithIdentifier:@"MCSolutionOverViewTableViewCell_iPhone"];
@@ -367,7 +367,7 @@ typedef NS_ENUM(BOOL, MCXRateStatus) {
             [[cell totalLabel] setText:totalSpentString];
             
             CurrencyFormatter *cf = [[CurrencyFormatter alloc] initWithCurrencyCode:_tonightsBill.mainCurrency.code];
-            cell.moneyLabel.text = [cf stringForObjectValue:_tonightsBill.totalSumOfMoneyOfThisSharedBill];
+            cell.moneyLabel.text = [cf stringFor:_tonightsBill.totalSumOfMoneyOfThisSharedBill];
             return cell;
         }
     }

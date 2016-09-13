@@ -179,7 +179,7 @@ typedef NS_ENUM(BOOL, ChildViewOpened) {
     _thisPayment.money = [cf doubleFromString:_paidView.text];
     [_thisPayment recalculateAveragePeopleOweAndStore];
     [[MCWeAllPayStoreController defaultStore] endUndoGroupWithoutRegistration];
-    _paidView.text = [cf stringForObjectValue:_thisPayment.money];
+    _paidView.text = [cf stringFor:_thisPayment.money];
     
     [[[self navigationItem] rightBarButtonItem] setEnabled:YES];
     NSDate *nu = [NSDate date];
@@ -426,7 +426,7 @@ typedef NS_ENUM(BOOL, ChildViewOpened) {
     if (!_dataController) {
         _dataController = [[MCWeAllPayStoreController defaultStore] paymentPresenceDataControllerForDelegate:self];
         CurrencyFormatter *cf = [[CurrencyFormatter alloc] initWithCurrencyCode:_thisPayment.currency.code];
-        _paidView.text = [cf stringForObjectValue:_thisPayment.money];
+        _paidView.text = [cf stringFor:_thisPayment.money];
         [[self tableView] reloadData];
         _selectCurrencyTableViewController = isNotOpened;
     }
@@ -452,7 +452,7 @@ typedef NS_ENUM(BOOL, ChildViewOpened) {
     }
     if (!_isNew || _selectCurrencyTableViewController == isOpened) {
         CurrencyFormatter *cf = [[CurrencyFormatter alloc] initWithCurrencyCode:_thisPayment.currency.code];
-        _paidView.text = [cf stringForObjectValue:_thisPayment.money];
+        _paidView.text = [cf stringFor:_thisPayment.money];
     }
 }
 
@@ -504,7 +504,7 @@ typedef NS_ENUM(BOOL, ChildViewOpened) {
             case NSFetchedResultsChangeUpdate:
                 [[self tableView] reloadRowsAtIndexPaths:@[indexPath] withRowAnimation:UITableViewRowAnimationAutomatic];
                 CurrencyFormatter *cf = [[CurrencyFormatter alloc] initWithCurrencyCode:_thisPayment.currency.code];
-                _paidView.text = [cf stringForObjectValue:_thisPayment.money];
+                _paidView.text = [cf stringFor:_thisPayment.money];
                 break;
         }
     }
@@ -542,7 +542,7 @@ typedef NS_ENUM(BOOL, ChildViewOpened) {
     [[cell isPresentSwitch] setOn:[[thisCellsPresence isPersonPresent] boolValue]];
     CurrencyFormatter *cf = [[CurrencyFormatter alloc] initWithCurrencyCode:thisCellsPresence.payment.currency.code];
     NSNumber *averageOwe = @(-thisCellsPresence.averageOweFromPayment.doubleValue);
-    cell.owesLabel.text = [cf stringForObjectValue:averageOwe];
+    cell.owesLabel.text = [cf stringFor:averageOwe];
     [cell setThisCellsPaymentPresence:thisCellsPresence];
     
     // Set the cell alignment to headerView stuff
