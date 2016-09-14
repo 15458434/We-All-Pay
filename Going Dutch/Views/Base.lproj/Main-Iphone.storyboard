@@ -40,7 +40,7 @@
                                 <rect key="frame" x="0.0" y="82" width="375" height="76"/>
                                 <autoresizingMask key="autoresizingMask"/>
                                 <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" restorationIdentifier="japan" tableViewCell="v2h-RS-Mvh" id="3qP-Z0-Kzg">
-                                    <frame key="frameInset" width="342" height="76"/>
+                                    <frame key="frameInset" width="342" height="75.5"/>
                                     <autoresizingMask key="autoresizingMask"/>
                                     <subviews>
                                         <label opaque="NO" clipsSubviews="YES" userInteractionEnabled="NO" contentMode="left" text="1" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="4gi-jX-9d6" userLabel="eventName">
@@ -173,10 +173,10 @@
                         </view>
                         <prototypes>
                             <tableViewCell contentMode="scaleToFill" selectionStyle="blue" hidesAccessoryWhenEditing="NO" indentationLevel="1" indentationWidth="0.0" reuseIdentifier="MCPaymentTableViewCell" rowHeight="66" id="EPM-k7-MaG" customClass="MCPaymentTableViewCell" customModule="We_all_pay" customModuleProvider="target">
-                                <rect key="frame" x="0.0" y="126" width="375" height="66"/>
+                                <rect key="frame" x="0.0" y="125.5" width="375" height="66"/>
                                 <autoresizingMask key="autoresizingMask"/>
                                 <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" restorationIdentifier="MCPaymentTableViewCell" tableViewCell="EPM-k7-MaG" id="cfL-0W-KAu">
-                                    <frame key="frameInset" width="375" height="65"/>
+                                    <frame key="frameInset" width="375" height="65.5"/>
                                     <autoresizingMask key="autoresizingMask"/>
                                     <subviews>
                                         <label opaque="NO" clipsSubviews="YES" userInteractionEnabled="NO" contentMode="left" text="Label" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="nIw-LN-RlM" userLabel="payerName">
@@ -362,10 +362,10 @@
                         </view>
                         <prototypes>
                             <tableViewCell contentMode="scaleToFill" restorationIdentifier="MCOneLabelIScreenTableViewCell" selectionStyle="blue" hidesAccessoryWhenEditing="NO" indentationLevel="1" indentationWidth="0.0" reuseIdentifier="MCOneLabelIScreenTableViewCell" rowHeight="44" id="eIv-Pe-6br" customClass="MCOneLabelIScreenTableViewCell" customModule="We_all_pay" customModuleProvider="target">
-                                <rect key="frame" x="0.0" y="56" width="375" height="44"/>
+                                <rect key="frame" x="0.0" y="55.5" width="375" height="44"/>
                                 <autoresizingMask key="autoresizingMask"/>
                                 <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" restorationIdentifier="OneLabelContentViewOfTableviewCell" tableViewCell="eIv-Pe-6br" id="XJe-c5-qmr">
-                                    <frame key="frameInset" width="375" height="43"/>
+                                    <frame key="frameInset" width="375" height="43.5"/>
                                     <autoresizingMask key="autoresizingMask"/>
                                     <subviews>
                                         <label opaque="NO" clipsSubviews="YES" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Label" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="YbH-6C-Ojs">
@@ -388,10 +388,10 @@
                                 </connections>
                             </tableViewCell>
                             <tableViewCell contentMode="scaleToFill" restorationIdentifier="MCTwoLabelIscreenTableViewCell" selectionStyle="none" hidesAccessoryWhenEditing="NO" indentationLevel="1" indentationWidth="0.0" reuseIdentifier="MCTwoLabelIscreenTableViewCell" rowHeight="44" id="WQg-5R-RbW" customClass="MCTwoLabelIscreenTableViewCell" customModule="We_all_pay" customModuleProvider="target">
-                                <rect key="frame" x="0.0" y="100" width="375" height="44"/>
+                                <rect key="frame" x="0.0" y="99.5" width="375" height="44"/>
                                 <autoresizingMask key="autoresizingMask"/>
                                 <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" restorationIdentifier="TwoLabelContentViewOfTableViewCell" tableViewCell="WQg-5R-RbW" id="g1O-GD-HcA">
-                                    <frame key="frameInset" width="375" height="43"/>
+                                    <frame key="frameInset" width="375" height="43.5"/>
                                     <autoresizingMask key="autoresizingMask"/>
                                     <subviews>
                                         <label opaque="NO" clipsSubviews="YES" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" restorationIdentifier="firstLabel" text="Label" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" minimumScaleFactor="0.5" translatesAutoresizingMaskIntoConstraints="NO" id="JaE-Fp-cO9">
@@ -548,10 +548,10 @@
                         </view>
                         <prototypes>
                             <tableViewCell contentMode="scaleToFill" restorationIdentifier="MCSolutionOverViewTableViewCell_iPhone" selectionStyle="none" hidesAccessoryWhenEditing="NO" indentationLevel="1" indentationWidth="0.0" reuseIdentifier="MCSolutionOverViewTableViewCell_iPhone" id="AeB-PX-SS3" customClass="MCSolutionOverViewTableViewCell_iPhone" customModule="We_all_pay" customModuleProvider="target">
-                                <rect key="frame" x="0.0" y="106" width="375" height="44"/>
+                                <rect key="frame" x="0.0" y="105.5" width="375" height="44"/>
                                 <autoresizingMask key="autoresizingMask"/>
                                 <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" tableViewCell="AeB-PX-SS3" id="S1p-0e-b3A">
-                                    <frame key="frameInset" width="375" height="43"/>
+                                    <frame key="frameInset" width="375" height="43.5"/>
                                     <autoresizingMask key="autoresizingMask"/>
                                     <subviews>
                                         <label opaque="NO" clipsSubviews="YES" userInteractionEnabled="NO" contentMode="left" horizontalCompressionResistancePriority="749" verticalCompressionResistancePriority="749" text="totalLabel" lineBreakMode="tailTruncation" numberOfLines="0" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="MHu-fw-WGA">
@@ -591,7 +591,7 @@
                                 <rect key="frame" x="0.0" y="149.5" width="375" height="44"/>
                                 <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                                 <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" tableViewCell="kHO-oe-rlC" id="kda-p7-7ZX">
-                                    <frame key="frameInset" width="375" height="43"/>
+                                    <frame key="frameInset" width="375" height="43.5"/>
                                     <autoresizingMask key="autoresizingMask"/>
                                     <subviews>
                                         <label opaque="NO" clipsSubviews="YES" userInteractionEnabled="NO" contentMode="left" verticalHuggingPriority="251" horizontalCompressionResistancePriority="749" text="whoOwesWhoLabel" lineBreakMode="tailTruncation" numberOfLines="0" baselineAdjustment="alignBaselines" adjustsLetterSpacingToFitWidth="YES" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="udH-oV-muc">
@@ -630,7 +630,7 @@
                                 <rect key="frame" x="0.0" y="193.5" width="375" height="44"/>
                                 <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                                 <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" restorationIdentifier="contentView" tableViewCell="rCL-6C-Xqz" id="yHy-np-QOe">
-                                    <frame key="frameInset" width="375" height="43"/>
+                                    <frame key="frameInset" width="375" height="43.5"/>
                                     <autoresizingMask key="autoresizingMask"/>
                                     <subviews>
                                         <label opaque="NO" clipsSubviews="YES" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" horizontalCompressionResistancePriority="250" restorationIdentifier="whoPaidLabel" text="whoPaidHowMuchLabel" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="1y3-o3-jkI">
@@ -739,13 +739,13 @@
                         </view>
                         <prototypes>
                             <tableViewCell contentMode="scaleToFill" restorationIdentifier="MCPersonTableViewCell" selectionStyle="blue" hidesAccessoryWhenEditing="NO" indentationLevel="1" indentationWidth="0.0" reuseIdentifier="MCPersonTableViewCell" rowHeight="68" id="i9Y-ku-g7W" customClass="MCPersonTableViewCell" customModule="We_all_pay" customModuleProvider="target">
-                                <rect key="frame" x="0.0" y="158" width="375" height="68"/>
+                                <rect key="frame" x="0.0" y="157.5" width="375" height="68"/>
                                 <autoresizingMask key="autoresizingMask"/>
                                 <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" tableViewCell="i9Y-ku-g7W" id="Mxx-Ut-rjY">
-                                    <frame key="frameInset" width="375" height="67"/>
+                                    <frame key="frameInset" width="375" height="67.5"/>
                                     <autoresizingMask key="autoresizingMask"/>
                                     <subviews>
-                                        <imageView userInteractionEnabled="NO" contentMode="scaleToFill" restorationIdentifier="personPhoto" translatesAutoresizingMaskIntoConstraints="NO" id="ZjT-qg-OGx">
+                                        <imageView userInteractionEnabled="NO" contentMode="scaleToFill" restorationIdentifier="personPhoto" translatesAutoresizingMaskIntoConstraints="NO" id="ZjT-qg-OGx" customClass="CirclularImageView" customModule="We_all_pay" customModuleProvider="target">
                                             <constraints>
                                                 <constraint firstAttribute="width" secondItem="ZjT-qg-OGx" secondAttribute="height" multiplier="1:1" id="NLc-NF-5fX"/>
                                                 <constraint firstAttribute="width" relation="greaterThanOrEqual" priority="750" constant="44" id="cuG-DW-DOP"/>
@@ -831,12 +831,6 @@
                             <rect key="frame" x="0.0" y="0.0" width="375" height="192"/>
                             <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                             <subviews>
-                                <imageView userInteractionEnabled="NO" contentMode="scaleAspectFit" restorationIdentifier="personImageOView" translatesAutoresizingMaskIntoConstraints="NO" id="BPi-hy-YkK">
-                                    <constraints>
-                                        <constraint firstAttribute="width" constant="80" id="ZEC-TL-iti"/>
-                                        <constraint firstAttribute="height" constant="80" id="vKb-n9-vJx"/>
-                                    </constraints>
-                                </imageView>
                                 <textField opaque="NO" clipsSubviews="YES" contentMode="scaleToFill" restorationIdentifier="firstNameField" contentHorizontalAlignment="left" contentVerticalAlignment="center" borderStyle="roundedRect" placeholder="First Name" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="Tln-WZ-m8Z">
                                     <fontDescription key="fontDescription" type="system" pointSize="14"/>
                                     <textInputTraits key="textInputTraits" autocapitalizationType="sentences"/>
@@ -867,22 +861,28 @@
                                         <outlet property="delegate" destination="eE2-xD-YRT" id="1yp-o6-4gL"/>
                                     </connections>
                                 </textField>
+                                <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" translatesAutoresizingMaskIntoConstraints="NO" id="rBP-Ui-O3X" customClass="CirclularImageView" customModule="We_all_pay" customModuleProvider="target">
+                                    <constraints>
+                                        <constraint firstAttribute="width" constant="80" id="I30-ou-1iT"/>
+                                        <constraint firstAttribute="width" secondItem="rBP-Ui-O3X" secondAttribute="height" multiplier="1:1" id="b3n-aU-ykT"/>
+                                    </constraints>
+                                </imageView>
                             </subviews>
                             <color key="backgroundColor" red="1" green="1" blue="1" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                             <constraints>
                                 <constraint firstAttribute="trailingMargin" secondItem="E8v-zR-iZl" secondAttribute="trailingMargin" constant="12" id="7sf-qv-LdH"/>
+                                <constraint firstItem="rBP-Ui-O3X" firstAttribute="leading" secondItem="YgD-ot-OKq" secondAttribute="leading" constant="12" id="8vR-fF-xoR"/>
                                 <constraint firstAttribute="bottom" secondItem="Iac-jb-ETA" secondAttribute="bottom" constant="20" id="A6U-RG-1HP"/>
                                 <constraint firstItem="E8v-zR-iZl" firstAttribute="top" secondItem="Tln-WZ-m8Z" secondAttribute="bottom" constant="8" symbolic="YES" id="Bh1-H5-A7y"/>
                                 <constraint firstItem="Iac-jb-ETA" firstAttribute="top" secondItem="4YY-Cv-Jxg" secondAttribute="bottom" constant="8" id="LAl-KS-mpZ"/>
+                                <constraint firstItem="rBP-Ui-O3X" firstAttribute="bottom" secondItem="E8v-zR-iZl" secondAttribute="bottom" id="SR3-6i-u5p"/>
                                 <constraint firstItem="E8v-zR-iZl" firstAttribute="width" secondItem="Tln-WZ-m8Z" secondAttribute="width" id="UjM-Ua-I45"/>
-                                <constraint firstItem="E8v-zR-iZl" firstAttribute="leading" secondItem="BPi-hy-YkK" secondAttribute="trailing" constant="8" id="V8X-gx-jGS"/>
+                                <constraint firstItem="E8v-zR-iZl" firstAttribute="leading" secondItem="rBP-Ui-O3X" secondAttribute="trailing" constant="8" id="Yi4-oD-fmQ"/>
                                 <constraint firstItem="E8v-zR-iZl" firstAttribute="width" secondItem="4YY-Cv-Jxg" secondAttribute="width" id="aND-oH-kDq"/>
                                 <constraint firstItem="E8v-zR-iZl" firstAttribute="centerX" secondItem="4YY-Cv-Jxg" secondAttribute="centerX" id="b14-lo-yiW"/>
                                 <constraint firstItem="Iac-jb-ETA" firstAttribute="centerX" secondItem="4YY-Cv-Jxg" secondAttribute="centerX" id="bgg-de-lac"/>
                                 <constraint firstItem="E8v-zR-iZl" firstAttribute="centerX" secondItem="Tln-WZ-m8Z" secondAttribute="centerX" id="ese-uB-tSC"/>
-                                <constraint firstItem="BPi-hy-YkK" firstAttribute="bottom" secondItem="E8v-zR-iZl" secondAttribute="bottom" id="g0z-Od-TG0"/>
                                 <constraint firstItem="4YY-Cv-Jxg" firstAttribute="top" secondItem="E8v-zR-iZl" secondAttribute="bottom" constant="8" id="p3U-F4-0f1"/>
-                                <constraint firstItem="BPi-hy-YkK" firstAttribute="leadingMargin" secondItem="YgD-ot-OKq" secondAttribute="leadingMargin" constant="12" id="qTy-b3-8ut"/>
                             </constraints>
                         </view>
                         <connections>
@@ -906,13 +906,13 @@
                         <outlet property="emailField" destination="4YY-Cv-Jxg" id="AnM-aA-aZd"/>
                         <outlet property="firstNameField" destination="Tln-WZ-m8Z" id="d1N-5q-L5I"/>
                         <outlet property="lastNameField" destination="E8v-zR-iZl" id="w1N-70-q1B"/>
-                        <outlet property="pictureView" destination="BPi-hy-YkK" id="OvP-Nb-R2a"/>
+                        <outlet property="pictureView" destination="rBP-Ui-O3X" id="ohX-6M-fE4"/>
                         <outlet property="selectEmailAddressButton" destination="Iac-jb-ETA" id="5Kp-U2-FF1"/>
                     </connections>
                 </tableViewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="3DJ-Qy-W7F" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="4350" y="-49.647887323943657"/>
+            <point key="canvasLocation" x="4349.6000000000004" y="-49.925037481259373"/>
         </scene>
         <!--Navigation Controller-->
         <scene sceneID="mlr-FR-5OU">
@@ -973,7 +973,7 @@
                                         <outlet property="delegate" destination="A1E-EB-xnZ" id="vgo-EI-ceW"/>
                                     </connections>
                                 </textField>
-                                <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" translatesAutoresizingMaskIntoConstraints="NO" id="rmI-7G-oMX">
+                                <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" translatesAutoresizingMaskIntoConstraints="NO" id="rmI-7G-oMX" customClass="CirclularImageView" customModule="We_all_pay" customModuleProvider="target">
                                     <constraints>
                                         <constraint firstAttribute="width" constant="60" id="BHd-Kf-Zud"/>
                                         <constraint firstAttribute="width" secondItem="rmI-7G-oMX" secondAttribute="height" multiplier="1:1" id="i5r-yV-io1"/>
@@ -1040,7 +1040,7 @@
                                 <rect key="frame" x="0.0" y="254" width="375" height="52"/>
                                 <autoresizingMask key="autoresizingMask"/>
                                 <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" restorationIdentifier="tableViewCellContent" tableViewCell="AcN-yE-tRP" id="WHI-GF-nBf">
-                                    <frame key="frameInset" width="375" height="52"/>
+                                    <frame key="frameInset" width="375" height="51.5"/>
                                     <autoresizingMask key="autoresizingMask"/>
                                     <subviews>
                                         <switch opaque="NO" contentMode="scaleToFill" horizontalHuggingPriority="750" verticalHuggingPriority="750" contentHorizontalAlignment="center" contentVerticalAlignment="center" on="YES" translatesAutoresizingMaskIntoConstraints="NO" id="yeA-rP-ZR9">
@@ -1058,7 +1058,7 @@
                                             <color key="textColor" red="0.0" green="0.0" blue="0.0" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                                             <nil key="highlightedColor"/>
                                         </label>
-                                        <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" translatesAutoresizingMaskIntoConstraints="NO" id="Y6i-cu-NDo">
+                                        <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" translatesAutoresizingMaskIntoConstraints="NO" id="Y6i-cu-NDo" customClass="CirclularImageView" customModule="We_all_pay" customModuleProvider="target">
                                             <constraints>
                                                 <constraint firstAttribute="width" constant="40" id="4Ko-rK-sT7"/>
                                                 <constraint firstAttribute="height" constant="40" id="VbT-mz-0dr"/>
@@ -1132,7 +1132,7 @@
                                 <rect key="frame" x="0.0" y="22" width="375" height="44"/>
                                 <autoresizingMask key="autoresizingMask"/>
                                 <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" tableViewCell="ANc-xw-Qi8" id="fam-A9-hoy">
-                                    <frame key="frameInset" width="375" height="44"/>
+                                    <frame key="frameInset" width="375" height="43.5"/>
                                     <autoresizingMask key="autoresizingMask"/>
                                     <subviews>
                                         <label opaque="NO" clipsSubviews="YES" userInteractionEnabled="NO" contentMode="left" horizontalCompressionResistancePriority="250" text="Label" lineBreakMode="wordWrap" numberOfLines="0" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="aOd-AZ-MTT">
@@ -1193,7 +1193,7 @@
                                 <rect key="frame" x="0.0" y="22" width="375" height="44"/>
                                 <autoresizingMask key="autoresizingMask"/>
                                 <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" tableViewCell="IXA-pf-egv" id="J07-8s-iID">
-                                    <frame key="frameInset" width="375" height="44"/>
+                                    <frame key="frameInset" width="375" height="43.5"/>
                                     <autoresizingMask key="autoresizingMask"/>
                                     <subviews>
                                         <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" translatesAutoresizingMaskIntoConstraints="NO" id="mC4-Ft-sB3" userLabel="categoryImage">
