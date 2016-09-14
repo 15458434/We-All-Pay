@@ -26,6 +26,7 @@ class ContactsDataReceiver: NSObject, ThisEventReadOnly, CNContactPickerDelegate
                                                         CNContactImageDataKey,
                                                         CNContactIdentifierKey,
                                                         CNContactNoteKey]
+        contactsViewController.modalPresentationStyle = .formSheet
         viewController.present(contactsViewController, animated: true) {
             debugPrint("Hooray, the contacts form on the screen.")
             completion?()

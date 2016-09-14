@@ -107,43 +107,6 @@
         NSLog(@"I love Ilse.");
 #endif
     }];
-//    // TODO: This can be done without the Switch case.
-//    switch (ABAddressBookGetAuthorizationStatus())
-//    {
-//            // Update our UI if the user has granted access to their Contacts
-//        case  kABAuthorizationStatusAuthorized:
-//            [self openPeoplePicker];
-//            break;
-//            // Prompt the user for access to Contacts if there is no definitive answer
-//        case  kABAuthorizationStatusNotDetermined :
-//            // Display a message if the user has denied or restricted access to Contacts
-//        case  kABAuthorizationStatusDenied:
-//        case  kABAuthorizationStatusRestricted:
-//        {
-//            CFErrorRef error;
-//            ABAddressBookRef myAddressBook = ABAddressBookCreateWithOptions(NULL, &error);
-//            if (error) {
-//                NSLog(@"Something went wrong opening myAddressBook.");
-//            }
-//            
-//            typeof(self) __weak weakSelf = self;
-//            // Popup for user will only appear once.
-//            ABAddressBookRequestAccessWithCompletion(myAddressBook, ^(bool granted, CFErrorRef error) {
-//                if (granted) {
-//                    dispatch_async(dispatch_get_main_queue(), ^{
-//                        [weakSelf openPeoplePicker];
-//                    });
-//                } else {
-//                    dispatch_async(dispatch_get_main_queue(), ^{
-//                        [weakSelf showContactsDisabledMessage];
-//                    });
-//                }
-//            });
-//        }
-//            break;
-//        default:
-//            break;
-//    }
 }
 
 - (IBAction)addPaymentPressed:(id)sender
