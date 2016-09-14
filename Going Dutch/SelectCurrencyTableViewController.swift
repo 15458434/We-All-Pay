@@ -236,9 +236,9 @@ class SelectCurrencyTableViewController: UITableViewController, UISearchResultsU
             return sections[section].count
         }
     }
-    
-    func tableView(tableView: UITableView, cellForRowAtIndexPath indexPath: NSIndexPath) -> UITableViewCell {
-        func data(indexPath: NSIndexPath) -> Currency {
+  
+    override func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
+        func data(indexPath: IndexPath) -> Currency {
             switch (searchActive, recentUsedForeignCurrencies?.count ?? 0, indexPath.section) {
             case let (searchActive, _, _) where searchActive == true:
                 return filteredCurrencies[indexPath.row];
@@ -251,6 +251,7 @@ class SelectCurrencyTableViewController: UITableViewController, UISearchResultsU
                 return sections[indexPath.section][indexPath.row]
             }
         }
+
         let cell = tableView.dequeueReusableCell(withIdentifier: "MCSelectCurrencyTableViewCell_iPhone", for: indexPath as IndexPath) as! MCSelectCurrencyTableViewCell_iPhone
 
         let thisCellsCurrency = data(indexPath: indexPath)
