@@ -47,7 +47,7 @@ class SelectCurrencyTableViewController: UITableViewController, UISearchResultsU
     
     // MARK: Action
     
-    @IBAction func mainCancelPressed(sender: AnyObject) {
+    @IBAction func mainCancelPressed(_ sender: AnyObject) {
         // Don't select anything just dimiss the currency view controller
         navigationController!.presentingViewController!.dismiss(animated: true, completion: nil)
     }
@@ -213,13 +213,16 @@ class SelectCurrencyTableViewController: UITableViewController, UISearchResultsU
         
     }
     
-    func numberOfSectionsInTableView(tableView: UITableView) -> Int {
+    override func numberOfSections(in tableView: UITableView) -> Int {
         switch (searchActive, recentUsedForeignCurrencies?.count ?? 0) {
         case let (s, _) where s == true:
+            debugPrint("numberOfSectionsInTableView: 1")
             return 1
         case let (s, rc) where s == false && rc > 0:
+            debugPrint("numberOfSectionsInTableView: \(sections.count + 1)")
             return sections.count + 1
         default:
+            debugPrint("numberOfSectionsInTableView: \(sections.count)")
             return sections.count
         }
     }
