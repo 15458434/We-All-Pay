@@ -8,7 +8,7 @@
 
 import UIKit
 
-@IBDesignable class CirclularImageView: UIImageView {
+@IBDesignable class CircularImageView: UIImageView {
     // MARK: UIImageView
     
     // MARK: UIView
@@ -16,9 +16,9 @@ import UIKit
     override func layoutSubviews() {
         super.layoutSubviews()
 
-        let height = self.frame.height / 2.0
-        let width = self.frame.width / 2.0
-        self.layer.cornerRadius = min(height, width)
+        let mask = CAShapeLayer()
+        mask.path = UIBezierPath(ovalIn: self.bounds).cgPath
+        self.layer.mask = mask
     }
     
     override func prepareForInterfaceBuilder() {
