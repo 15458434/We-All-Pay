@@ -8,7 +8,6 @@
 
 @import UIKit;
 @import CoreData;
-@import AddressBookUI;
 @import NotificationCenter;
 @import WhoPayingUserDefaultsStoreInterface;
 
