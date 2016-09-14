@@ -210,10 +210,10 @@ enum CancelButtonPressed {
     
     func textFieldDidEndEditing(_ textField: UITextField) {
         if mainCancelIsPressed == CancelButtonPressed.notPressed {
-            if textField == itemField {
+            switch textField {
+            case itemField:
                 thisPayment.descriptionOfPayment = itemField.text
-            }
-            if textField == paidField {
+            case paidField:
                 let cf = CurrencyFormatter(currencyCode: thisPayment.currency.code)
                 MCWeAllPayStoreController.defaultStore().beginUndoGroupWithoutRegistration()
                 if paidField.text == nil {
@@ -224,6 +224,8 @@ enum CancelButtonPressed {
                 thisPayment.recalculateAveragePeopleOweAndStore()
                 MCWeAllPayStoreController.defaultStore().endUndoGroupAndProcessWithoutRegistration()
                 paidField.text = cf.string(for: thisPayment.money ?? NSNumber(value: 0))
+            default:
+                debugPrint("textFieldDidEndEditing for unknown textfield: \(textField)")
             }
         }
     }
@@ -239,7 +241,8 @@ enum CancelButtonPressed {
         tableView.endUpdates()
     }
     
-    private func controller(_ controller: NSFetchedResultsController<NSFetchRequestResult>, didChange anObject: AnyObject, at indexPath: IndexPath?, for type: NSFetchedResultsChangeType, newIndexPath: IndexPath?) {
+    func controller(_ controller: NSFetchedResultsController<NSFetchRequestResult>, didChange anObject: Any, at indexPath: IndexPath?, for type: NSFetchedResultsChangeType, newIndexPath: IndexPath?) {
+        debugPrint("didchange")
         if #available(iOS 9, *) {
             switch (type) {
             case .insert:
