@@ -21,7 +21,7 @@ The We All Pay Store Controller is designed to do writing in the background and 
 
 @interface MCWeAllPayStoreController : NSObject
 
-@property (nonatomic, strong, readonly) UIManagedDocument *weAllPayStoreDocument;
+@property (nonatomic, strong, readonly) UIManagedDocument *weAllPayStoreDocument __deprecated;
 @property (nonatomic, strong, readonly) NSManagedObjectContext *mainThreadContext;
 @property (nonatomic, strong, readonly) NSManagedObjectContext *backgroundThreadContext;
 @property (nonatomic, strong, readonly) NSPersistentStoreCoordinator *persistentStoreCoordinator;
@@ -34,7 +34,6 @@ The We All Pay Store Controller is designed to do writing in the background and 
 - (void)openStore:(void (^)(BOOL success))completionHandler;
 - (void)saveMainThreadContext;
 - (void)savebackgroundContext;
-- (void)closeDocument;
 
 - (void)beginUndoGroup;
 - (void)beginUndoGroupWithoutRegistration;
@@ -54,6 +53,5 @@ The We All Pay Store Controller is designed to do writing in the background and 
 - (NSFetchedResultsController *)searchCurrencyControllerWithSearchText:(NSString *)searchText withDelegate:(id)delegate;
 - (NSArray *)getPeopleOnSharedBill:(MCSharedBill *)thisBill;
 - (NSArray *)getEmailaddressesFrom:(MCPerson *)thisPerson;
-- (void)createCircularPeopleImages;
 
 @end

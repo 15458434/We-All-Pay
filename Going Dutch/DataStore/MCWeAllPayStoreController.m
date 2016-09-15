@@ -62,13 +62,6 @@ MCiCloudUse const isiCloudUsed = iCloudIsNotUsed;
     }
 }
 
-- (void)storeIsReady:(NSNotification *)notification
-{
-    if ([weAllPayStoreDocument documentState] == UIDocumentStateNormal) {
-        NSLog(@"Document is ready to use.");
-    }
-}
-
 + (instancetype)defaultStore
 {
     static MCWeAllPayStoreController *sharedStore = nil;
@@ -119,17 +112,6 @@ MCiCloudUse const isiCloudUsed = iCloudIsNotUsed;
     } else {
         NSLog(@"Background save not possible: %@", error);
     }
-}
-
-- (void)closeDocument
-{
-    [weAllPayStoreDocument closeWithCompletionHandler:^(BOOL success){
-        if (success) {
-            NSLog(@"UIManagedDocument was succesfully closed.");
-        } else {
-            NSLog(@"Close not possible for document at %@", [weAllPayStoreDocument fileURL]);
-        }
-    }];
 }
 
 #pragma mark - Undomanager stuff.
@@ -354,46 +336,6 @@ MCiCloudUse const isiCloudUsed = iCloudIsNotUsed;
         return result;
     }
 }
-
-- (void)createCircularPeopleImages
-{
-    // Fetch all people.
-    NSFetchRequest *fetchRequest = [NSFetchRequest fetchRequestWithEntityName:@"MCPerson"];
-    fetchRequest.sortDescriptors = @[[NSSortDescriptor sortDescriptorWithKey:@"dateCreated" ascending:YES]];
-    NSError *fetchError;
-    NSArray *allPeople = [_mainThreadContext executeFetchRequest:fetchRequest error:&fetchError];
-    if (!allPeople) {
-        NSLog(@"Error fetching all people: %@", fetchError);
-    }
-    // Insert a new base picture for every person in the database.
-    for (MCPerson *person in allPeople) {
-        [person setPictureDataFromImage:nil];
-        [person setThumbnailDataFromImage:nil];
-    }
-    // Save everything.
-    [self saveMainThreadContext];
-}
-
-#pragma mark - NSObject
-
-//- (id)init
-//{
-//    self = [super init];
-//    
-//    static BOOL stillNeedsInit = 1;
-//    
-//    if (self && stillNeedsInit) {
-////        [self openStore:nil];
-//        
-//        stillNeedsInit = 0;
-//    }
-//    return self;
-//}
-
-//+ (id)allocWithZone:(NSZone *)zone
-//{
-//    return [self defaultStore];
-//}
 
 #pragma mark - Core Data Messages
 

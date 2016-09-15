@@ -76,17 +76,6 @@ typedef NS_ENUM(BOOL, MCTonightsBillStatus) {
     }
 }
 
-- (void)performFetchAndReloadTableView:(NSNotification *)notification
-{
-    UIManagedDocument *weAllPayDocument = [[MCWeAllPayStoreController defaultStore] weAllPayStoreDocument];
-    if ([weAllPayDocument documentState] == UIDocumentStateNormal) {
-        [self performFetch];
-        [[self tableView] reloadData];
-        [[NSNotificationCenter defaultCenter] removeObserver:self];
-        [self setEmptyMessageNow];
-    }
-}
-
 - (void)performFetch
 {
     NSError *error;
