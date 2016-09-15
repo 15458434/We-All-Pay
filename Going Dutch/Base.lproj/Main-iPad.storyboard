@@ -444,7 +444,7 @@
                                                 <outlet property="delegate" destination="ULr-7Y-8VH" id="KHm-EH-bnf"/>
                                             </connections>
                                         </textField>
-                                        <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" translatesAutoresizingMaskIntoConstraints="NO" id="gsF-fz-iel" customClass="CircularImageView" customModule="We_all_pay" customModuleProvider="target">
+                                        <imageView userInteractionEnabled="NO" contentMode="scaleAspectFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" translatesAutoresizingMaskIntoConstraints="NO" id="gsF-fz-iel" customClass="CircularImageView" customModule="We_all_pay" customModuleProvider="target">
                                             <constraints>
                                                 <constraint firstAttribute="height" constant="120" id="Vta-fP-fpA"/>
                                                 <constraint firstAttribute="width" secondItem="gsF-fz-iel" secondAttribute="height" multiplier="1:1" id="Xd2-bB-4SV"/>
@@ -737,7 +737,7 @@
                                     <frame key="frameInset" width="768" height="79"/>
                                     <autoresizingMask key="autoresizingMask"/>
                                     <subviews>
-                                        <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" translatesAutoresizingMaskIntoConstraints="NO" id="gvW-A9-uVj" customClass="CircularImageView" customModule="We_all_pay" customModuleProvider="target">
+                                        <imageView userInteractionEnabled="NO" contentMode="scaleAspectFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" translatesAutoresizingMaskIntoConstraints="NO" id="gvW-A9-uVj" customClass="CircularImageView" customModule="We_all_pay" customModuleProvider="target">
                                             <constraints>
                                                 <constraint firstAttribute="width" secondItem="gvW-A9-uVj" secondAttribute="height" multiplier="1:1" id="MDb-wW-TsC"/>
                                             </constraints>
@@ -869,7 +869,7 @@
                                         </segue>
                                     </connections>
                                 </button>
-                                <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" translatesAutoresizingMaskIntoConstraints="NO" id="xcc-E7-c0h" customClass="CircularImageView" customModule="We_all_pay" customModuleProvider="target">
+                                <imageView userInteractionEnabled="NO" contentMode="scaleAspectFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" translatesAutoresizingMaskIntoConstraints="NO" id="xcc-E7-c0h" customClass="CircularImageView" customModule="We_all_pay" customModuleProvider="target">
                                     <constraints>
                                         <constraint firstAttribute="width" constant="100" id="2Uc-CR-kbk"/>
                                         <constraint firstAttribute="width" secondItem="xcc-E7-c0h" secondAttribute="height" multiplier="1:1" id="let-m7-eSl"/>
@@ -1111,7 +1111,7 @@
                                     <frame key="frameInset" width="320" height="43"/>
                                     <autoresizingMask key="autoresizingMask"/>
                                     <subviews>
-                                        <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" translatesAutoresizingMaskIntoConstraints="NO" id="jaj-RZ-MiC" customClass="CircularImageView" customModule="We_all_pay" customModuleProvider="target">
+                                        <imageView userInteractionEnabled="NO" contentMode="scaleAspectFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" translatesAutoresizingMaskIntoConstraints="NO" id="jaj-RZ-MiC" customClass="CircularImageView" customModule="We_all_pay" customModuleProvider="target">
                                             <constraints>
                                                 <constraint firstAttribute="height" constant="39" id="g6P-04-JHJ"/>
                                                 <constraint firstAttribute="width" constant="40" id="uld-r1-9LM"/>
@@ -1253,7 +1253,7 @@
                                     <frame key="frameInset" width="768" height="119"/>
                                     <autoresizingMask key="autoresizingMask"/>
                                     <subviews>
-                                        <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" restorationIdentifier="pictureView" translatesAutoresizingMaskIntoConstraints="NO" id="Z3O-c0-2tS" customClass="CircularImageView" customModule="We_all_pay" customModuleProvider="target">
+                                        <imageView userInteractionEnabled="NO" contentMode="scaleAspectFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" restorationIdentifier="pictureView" translatesAutoresizingMaskIntoConstraints="NO" id="Z3O-c0-2tS" customClass="CircularImageView" customModule="We_all_pay" customModuleProvider="target">
                                             <constraints>
                                                 <constraint firstAttribute="height" priority="999" constant="80" id="WOz-D1-7x4"/>
                                                 <constraint firstAttribute="width" secondItem="Z3O-c0-2tS" secondAttribute="height" multiplier="1:1" id="zqZ-Zm-f7D"/>
