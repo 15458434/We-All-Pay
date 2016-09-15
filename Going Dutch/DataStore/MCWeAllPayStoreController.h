@@ -27,9 +27,9 @@ The We All Pay Store Controller is designed to do writing in the background and 
 @property (nonatomic, strong, readonly) NSPersistentStoreCoordinator *persistentStoreCoordinator;
 @property (nonatomic, strong, readonly) NSManagedObjectModel *managedObjectModel;
 
-@property (nonatomic, strong) ExchangeRateFetcher *fetcher;
+@property (nonatomic, strong, readonly) ExchangeRateFetcher *fetcher;
 
-+ (MCWeAllPayStoreController *)defaultStore;
++ (instancetype)defaultStore;
 
 - (void)openStore:(void (^)(BOOL success))completionHandler;
 - (void)saveMainThreadContext;

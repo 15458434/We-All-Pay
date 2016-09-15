@@ -41,6 +41,7 @@ MCiCloudUse const isiCloudUsed = iCloudIsNotUsed;
 
 @synthesize weAllPayStoreDocument;
 
+@synthesize fetcher = _fetcher;
 @synthesize managedObjectModel = _managedObjectModel;
 @synthesize mainThreadContext = _mainThreadContext;
 @synthesize backgroundThreadContext = _backgroundThreadContext;
@@ -52,6 +53,15 @@ MCiCloudUse const isiCloudUsed = iCloudIsNotUsed;
 
 #pragma mark - New in this class
 
+- (ExchangeRateFetcher *)fetcher
+{
+    if (_fetcher == nil) {
+        return [[ExchangeRateFetcher alloc] init];
+    } else {
+        return _fetcher;
+    }
+}
+
 - (void)storeIsReady:(NSNotification *)notification
 {
     if ([weAllPayStoreDocument documentState] == UIDocumentStateNormal) {
@@ -59,16 +69,13 @@ MCiCloudUse const isiCloudUsed = iCloudIsNotUsed;
     }
 }
 
-+ (MCWeAllPayStoreController *)defaultStore
++ (instancetype)defaultStore
 {
     static MCWeAllPayStoreController *sharedStore = nil;
-    if (!sharedStore) {
-        sharedStore = [[super allocWithZone:nil] init];
-        NSOperationQueue *someQueue = [[NSOperationQueue alloc] init];
-        someQueue.name = @"Fetcher Initialiser";
-        [someQueue addOperationWithBlock:^{
-            sharedStore.fetcher = [[ExchangeRateFetcher alloc] init];
-        }];
+    @synchronized (self) {
+        if (sharedStore == nil) {
+            sharedStore = [[MCWeAllPayStoreController alloc] init];
+        }
     }
     return sharedStore;
 }
@@ -367,26 +374,26 @@ MCiCloudUse const isiCloudUsed = iCloudIsNotUsed;
     [self saveMainThreadContext];
 }
 
-#pragma mark - Inherited from super class
+#pragma mark - NSObject
 
-- (id)init
-{
-    self = [super init];
-    
-    static BOOL stillNeedsInit = 1;
-    
-    if (self && stillNeedsInit) {
-//        [self openStore:nil];
-        
-        stillNeedsInit = 0;
-    }
-    return self;
-}
+//- (id)init
+//{
+//    self = [super init];
+//    
+//    static BOOL stillNeedsInit = 1;
+//    
+//    if (self && stillNeedsInit) {
+////        [self openStore:nil];
+//        
+//        stillNeedsInit = 0;
+//    }
+//    return self;
+//}
 
-+ (id)allocWithZone:(NSZone *)zone
-{
-    return [self defaultStore];
-}
+//+ (id)allocWithZone:(NSZone *)zone
+//{
+//    return [self defaultStore];
+//}
 
 #pragma mark - Core Data Messages
 

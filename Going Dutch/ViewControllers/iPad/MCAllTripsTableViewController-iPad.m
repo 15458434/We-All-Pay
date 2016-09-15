@@ -259,7 +259,7 @@
     AllTripsTableViewCell_iPad *allTripsTableViewCell = [tableView dequeueReusableCellWithIdentifier:@"MCAllTripsTableViewCell_iPad"];
     
     if (![thisTrip tripName]) {
-        [[allTripsTableViewCell tripLabel] setText:@"..."];
+        [[allTripsTableViewCell tripLabel] setText:NSLocalizedString(@"...", @"String that shows empty string")];
     } else {
         [[allTripsTableViewCell tripLabel] setText:[thisTrip tripName]];
     }
