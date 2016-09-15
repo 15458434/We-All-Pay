@@ -12,7 +12,7 @@ public class Currency: NSObject {
     public let name: String
     public let code: String
     public var symbol: String {
-        return Locale.current.localizedString(forCurrencyCode: code) ?? ""
+        return (Locale.current as NSLocale).displayName(forKey: .currencySymbol, value: code) ?? ""
     }
     
     // MARK: NSObject
