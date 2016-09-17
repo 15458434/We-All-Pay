@@ -325,7 +325,7 @@
     
     NSString *thisCellsPayerName;
     if ([thisCellsPayment payingPerson]) {
-        thisCellsPayerName = [[thisCellsPayment payingPerson] getFullName];
+        thisCellsPayerName = thisCellsPayment.payingPerson.getFullName;
     } else {
         thisCellsPayerName = NSLocalizedString(@"THISPAYMENTCELL_NOPAYERNAME", @"Someone");
     }
