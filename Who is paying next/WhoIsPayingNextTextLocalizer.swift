@@ -12,11 +12,21 @@ func createAttributesStringForWhoIsPayingNext(_ tripName: String, fullNameNextPa
     // The code of this function should be replaced to support multiple languages. For now it's just hardcoded.
     let normalFontDescriptor: UIFontDescriptor = UIFontDescriptor.preferredFontDescriptor(withTextStyle: UIFontTextStyle.body)
     let normalFont: UIFont = UIFont(descriptor: normalFontDescriptor, size: 0)
-    let normalAttributes: Dictionary = [NSFontAttributeName: normalFont]
+    let normalAttributes: [String: AnyObject]
+    if #available(iOS 10, *) {
+        normalAttributes = [NSFontAttributeName: normalFont, NSForegroundColorAttributeName: UIColor.darkText]
+    } else {
+        normalAttributes = [NSFontAttributeName: normalFont, NSForegroundColorAttributeName: UIColor.lightText]
+    }
     
     let boldFontDescriptor: UIFontDescriptor = normalFontDescriptor.withSymbolicTraits(.traitBold)!
     let boldFont: UIFont = UIFont(descriptor: boldFontDescriptor, size: 0)
-    let boldAttributes: Dictionary = [NSFontAttributeName: boldFont];
+    let boldAttributes: [String: AnyObject]
+    if #available(iOS 10, *) {
+        boldAttributes = [NSFontAttributeName: boldFont, NSForegroundColorAttributeName: UIColor.darkText]
+    } else {
+        boldAttributes = [NSFontAttributeName: boldFont, NSForegroundColorAttributeName: UIColor.lightText]
+    }
     
     let attributedTripName: NSAttributedString = NSAttributedString(string: tripName, attributes: boldAttributes)
     let attributedFullNameNextPayer: NSAttributedString = NSAttributedString(string: fullNameNextPayer, attributes: boldAttributes)
@@ -65,7 +75,11 @@ func betterCreateAttributesStringForWhoIsPayingNext(_ tripName: String, fullName
         let fontDescriptor = UIFontDescriptor.preferredFontDescriptor(withTextStyle: UIFontTextStyle.body)
         let descriptorWithTrait = fontDescriptor.withSymbolicTraits(trait)
         let font = UIFont(descriptor: descriptorWithTrait!, size: 0)
-        return [NSFontAttributeName : font];
+        if #available(iOS 10, *) {
+            return [NSFontAttributeName: font, NSForegroundColorAttributeName: UIColor.darkText]
+        } else {
+            return [NSFontAttributeName: font, NSForegroundColorAttributeName: UIColor.lightText]
+        }
     }
     
     let nullTrait: UIFontDescriptorSymbolicTraits = UIFontDescriptorSymbolicTraits(rawValue: 0)

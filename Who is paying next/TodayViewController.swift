@@ -78,24 +78,59 @@ class TodayViewController: UIViewController, NCWidgetProviding {
         var urlString = "weallpay:///"
         if let validValue = valid {
             if validValue == true {
-                urlString = "weallpay:///\(tonightsBillID)/\(nextPayerID)"
+                urlString = "weallpay:///\(tonightsBillID!)/\(nextPayerID!)"
             }
         }
-        print("Open: \(urlString)", terminator: "")
+        debugPrint("Open: \(urlString)", terminator: "")
         let url = URL(string: urlString)
         self.extensionContext?.open(url!, completionHandler: nil)
     }
     
     override func viewDidLoad() {
         super.viewDidLoad()
+        
+        if #available(iOS 10, *) {
+            self.extensionContext!.widgetLargestAvailableDisplayMode = .compact
+        }
         // Do any additional setup after loading the view from its nib.
         NotificationCenter.default.addObserver(self, selector: #selector(TodayViewController.defaultsDidUpdate(_:)), name: UserDefaults.didChangeNotification, object: nil)
-
+        
         // Setup a tap in the Today Extension to open We all pay.
         let thatTickles = UITapGestureRecognizer(target: self, action: #selector(TodayViewController.tappedInTheBackground(_:)))
         thatTickles.cancelsTouchesInView = false
         self.view.addGestureRecognizer(thatTickles)
         self.view.preservesSuperviewLayoutMargins = true
+    }
+    
+    override func viewWillAppear(_ animated: Bool) {
+        super.viewWillAppear(animated)
+        
+        if updateLocalOptionalsFromUserDefaults() {
+            updateLabel()
+        }
+    }
+    
+    // MARK: NCWidgetProviding
+    
+    func widgetMarginInsets(forProposedMarginInsets defaultMarginInsets: UIEdgeInsets) -> UIEdgeInsets {
+        debugPrint("widgetMarginInsets")
+        var insets = defaultMarginInsets
+        if #available(iOSApplicationExtension 10.0, *) {
+//            if self.view.effectiveUserInterfaceLayoutDirection == .leftToRight {
+//                insets.left -= 8
+//            } else {
+//                insets.right -= 8
+//            }
+        } else {
+            // Fallback on earlier versions
+            if UIView.userInterfaceLayoutDirection(for: self.view.semanticContentAttribute) == UIUserInterfaceLayoutDirection.leftToRight {
+                insets.left -= 8
+            } else {
+                insets.right -= 8
+            }
+            insets.bottom /= 2
+        }
+        return insets
     }
     
     private func widgetPerformUpdate(completionHandler: ((NCUpdateResult) -> Void)) {

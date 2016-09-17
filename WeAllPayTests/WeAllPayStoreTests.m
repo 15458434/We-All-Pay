@@ -40,15 +40,6 @@
     [super tearDown];
 }
 
-- (void)testMCWeAllPayStoreController
-{
-    MCWeAllPayStoreController *testController = [[MCWeAllPayStoreController alloc] init];
-    XCTAssertEqualObjects(testController, mainController, @"MCWeAllPayStoreController init gives not the defaultStore.");
-    testController = nil;
-    testController = [MCWeAllPayStoreController defaultStore];
-    XCTAssertEqualObjects(testController, mainController, @"MCWeAllPayStoreController defaultStore gives not the defaultStore.");
-}
-
 - (void)testMCPersonAddonsGetName
 {
     MCPerson *thisPerson = [MCPerson addPerson];
