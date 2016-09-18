@@ -25,6 +25,7 @@
                                         <color key="titleShadowColor" red="0.5" green="0.5" blue="0.5" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                                     </state>
                                     <connections>
+                                        <action selector="newEventPressed:" destination="v9b-wE-q9L" eventType="touchUpOutside" id="prp-rC-WBJ"/>
                                         <segue destination="Ltx-xd-qSj" kind="show" identifier="newTonightsBill" id="9a8-44-zBn"/>
                                     </connections>
                                 </button>
@@ -104,19 +105,12 @@
                             <outlet property="delegate" destination="v9b-wE-q9L" id="NqD-Dh-OeZ"/>
                         </connections>
                     </tableView>
-                    <toolbarItems>
-                        <barButtonItem style="plain" systemItem="flexibleSpace" id="P8L-7L-QEK"/>
-                        <barButtonItem systemItem="action" id="fil-0u-gaE">
-                            <color key="tintColor" red="0.98952531814575195" green="0.45403587818145752" blue="0.5264095664024353" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
-                            <connections>
-                                <action selector="tellAFriendAboutWeAllPay:" destination="v9b-wE-q9L" id="QeB-TE-tg0"/>
-                            </connections>
-                        </barButtonItem>
-                    </toolbarItems>
+                    <toolbarItems/>
                     <navigationItem key="navigationItem" title="events" id="j9s-0f-8Vh">
                         <barButtonItem key="leftBarButtonItem" image="iScreen button" id="85f-Et-Abg">
                             <color key="tintColor" red="0.98952531814575195" green="0.45403587818145752" blue="0.5264095664024353" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                             <connections>
+                                <action selector="iButtonPressed:" destination="v9b-wE-q9L" id="Q0f-hY-39Z"/>
                                 <segue destination="syc-O8-8LU" kind="presentation" identifier="iScreenSegue" modalTransitionStyle="coverVertical" id="tQ6-am-nQu"/>
                             </connections>
                         </barButtonItem>
@@ -1006,6 +1000,7 @@
                                         <color key="titleShadowColor" red="0.5" green="0.5" blue="0.5" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                                     </state>
                                     <connections>
+                                        <action selector="selectCategoryPressed:" destination="A1E-EB-xnZ" eventType="touchUpOutside" id="SZD-qk-Qzr"/>
                                         <segue destination="7fo-xG-Qjc" kind="presentation" identifier="selectCategory" id="Ytd-Wv-s5Z"/>
                                     </connections>
                                 </button>

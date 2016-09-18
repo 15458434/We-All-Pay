@@ -9,6 +9,8 @@
 import UIKit
 import MessageUI
 
+import FirebaseAnalytics
+
 @objc protocol ShowPayment {
     func show(_ payment: MCPayment)
 }
@@ -17,7 +19,7 @@ protocol ShowMailViewProtocol: MailComposer {
     func showMailView(_ sender: AnyObject)
 }
 
-extension ShowMailViewProtocol where Self: UIViewController {
+extension ShowMailViewProtocol where Self: UIViewController, Self: MFMailComposeViewControllerDelegate {
     func showMailView(_ sender: AnyObject) {
         debugPrint("\(self) showMailViewProtocol: \(sender)")
         
@@ -34,6 +36,7 @@ extension ShowMailViewProtocol where Self: UIViewController {
         
         do {
             let mailViewController = MFMailComposeViewController()
+            mailViewController.mailComposeDelegate = self
             mailViewController.setToRecipients(try mailAdresses())
             mailViewController.setSubject(try subject())
             mailViewController.setMessageBody(try mailBody(), isHTML: false)

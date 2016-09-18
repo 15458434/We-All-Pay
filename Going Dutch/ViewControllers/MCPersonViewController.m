@@ -6,6 +6,8 @@
 //  Copyright (c) 2013 Mark Cornelisse. All rights reserved.
 //
 
+@import FirebaseAnalytics;
+
 #import "MCPersonViewController.h"
 
 #import "MCWeAllPayStoreController.h"
@@ -67,6 +69,7 @@ typedef NS_ENUM(BOOL, MCStatus) {
 
 - (IBAction)cancelButtonPressed:(id)sender
 {
+    [FIRAnalytics logEventWithName:@"Cancel button pressed" parameters:nil];
     [self dismissKeyboard];
     [[MCWeAllPayStoreController defaultStore] endUndoGroupAndUndo];
     [[[self navigationController] presentingViewController] dismissViewControllerAnimated:YES completion:nil];
@@ -74,6 +77,7 @@ typedef NS_ENUM(BOOL, MCStatus) {
 
 - (IBAction)selectEmailAddressPressed:(id)sender
 {
+    [FIRAnalytics logEventWithName:@"Select email address pressed" parameters:nil];
     // If any of the fields is first responder resign them first.
     [self dismissKeyboard];
     
@@ -84,6 +88,7 @@ typedef NS_ENUM(BOOL, MCStatus) {
 
 - (IBAction)doneButtonPressed:(id)sender
 {
+    [FIRAnalytics logEventWithName:@"Done button pressed" parameters:nil];
     [self dismissKeyboard];
     [_thisPerson setDateModified:[NSDate date]];
     [[MCWeAllPayStoreController defaultStore] endUndoGroupAndProcess];
@@ -93,6 +98,7 @@ typedef NS_ENUM(BOOL, MCStatus) {
 
 - (void)doneEmailPicker:(id)selector
 {
+    [FIRAnalytics logEventWithName:@"Done email picker pressed" parameters:nil];
     MCEmailAddress *newDefaultEmailAddress = [_dataController fetchedObjects][[_emailSelectionFromAddressBookPickerView selectedRowInComponent:0]];
     MCEmailAddress *oldDefaulEmailAddress = [MCEmailAddress fetchEmailAddressFor:_thisPerson];
     [oldDefaulEmailAddress setSelected:@NO];
@@ -105,6 +111,7 @@ typedef NS_ENUM(BOOL, MCStatus) {
 
 - (void)cancelEmailPicker:(id)selector
 {
+    [FIRAnalytics logEventWithName:@"Cancel email picker pressed" parameters:nil];
     [_emailField setText:[_thisPerson defaultEmailAddress]];
     [_emailField resignFirstResponder];
 }
@@ -290,7 +297,12 @@ typedef NS_ENUM(BOOL, MCStatus) {
 
 - (void)textFieldDidBeginEditing:(UITextField *)textField
 {
-    if (textField == _emailField) {
+    if (textField == _firstNameField) {
+        [FIRAnalytics logEventWithName:@"firstNameField didBeginEditing" parameters:nil];
+    } else if (textField == _lastNameField) {
+        [FIRAnalytics logEventWithName:@"lastNameField didBeginEditing" parameters:nil];
+    } else if (textField == _emailField) {
+        [FIRAnalytics logEventWithName:@"emailField didBeginEditing" parameters:nil];
         if (_isSelectEmail) {
             [self prepareEmailFieldAsSelector];
         } else {
@@ -303,16 +315,19 @@ typedef NS_ENUM(BOOL, MCStatus) {
 - (void)textFieldDidEndEditing:(UITextField *)textField
 {
     if (textField == _firstNameField) {
+        [FIRAnalytics logEventWithName:@"firstNameField didEndEditing" parameters:nil];
         [_thisPerson setFirstName:[_firstNameField text]];
         NSDate *nu = [NSDate date];
         [_tonightsBill setDateModified:nu];
         [_thisPerson setDateModified:nu];
     } else if (textField == _lastNameField) {
+        [FIRAnalytics logEventWithName:@"lastNameField didEndEditing" parameters:nil];
         [_thisPerson setLastName:[_lastNameField text]];
         NSDate *nu = [NSDate date];
         [_tonightsBill setDateModified:nu];
         [_thisPerson setDateModified:nu];
     } else if (textField == _emailField) {
+        [FIRAnalytics logEventWithName:@"emailField didEndEditing" parameters:nil];
         if (!_isSelectEmail) {
             [_emailField setInputView:nil];
             [_emailField setInputAccessoryView:nil];
@@ -366,6 +381,7 @@ typedef NS_ENUM(BOOL, MCStatus) {
 
 - (void)pickerView:(UIPickerView *)pickerView didSelectRow:(NSInteger)row inComponent:(NSInteger)component
 {
+    [FIRAnalytics logEventWithName:@"pickedEmailAddress with picker" parameters:nil];
     MCEmailAddress *pickedEmailAddress = [_dataController fetchedObjects][row];
     [_emailField setText:[pickedEmailAddress emailAddress]];
 }

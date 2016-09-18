@@ -6,6 +6,8 @@
 //  Copyright (c) 2013 Mark Cornelisse. All rights reserved.
 //
 
+@import FirebaseAnalytics;
+
 #import "MCEditTripViewController.h"
 #import "MCPersonViewController.h"
 #import "MCSharedBillTableViewController.h"
@@ -50,6 +52,7 @@
 #pragma mark - actions of this class
 
 - (IBAction)addressBookButton:(id)sender {
+    [FIRAnalytics logEventWithName:@"Contacts pressed" parameters:nil];
     if (!_contactsInserter) {
         _contactsInserter = [[ContactsDataReceiver alloc] initWith:_tonightsBill];
     }
@@ -62,6 +65,7 @@
 
 
 - (IBAction)addPersonButton:(id)sender {
+    [FIRAnalytics logEventWithName:@"Add Person pressed" parameters:nil];
     if ([_tripNameField isEditing]) {
         [_tripNameField resignFirstResponder];
     }
@@ -69,6 +73,7 @@
 
 - (void)tappedInTheBackground:(id)sender
 {
+    [FIRAnalytics logEventWithName:@"Background tapped" parameters:nil];
     [_tripNameField resignFirstResponder];
 }
 
@@ -290,8 +295,18 @@
     return YES;
 }
 
+- (void)textFieldDidBeginEditing:(UITextField *)textField
+{
+    if ([textField isEqual:_tripNameField]) {
+        [FIRAnalytics logEventWithName:@"tripNameField didBeginEditing" parameters:nil];
+    }
+}
+
 -(void)textFieldDidEndEditing:(UITextField *)textField
 {
+    if ([textField isEqual:_tripNameField]) {
+        [FIRAnalytics logEventWithName:@"tripNameField didEndEditing" parameters:nil];
+    }
     [_tonightsBill setTripName:[_tripNameField text]];
     NSDate *now = [NSDate date];
     [_tonightsBill setDateModified:now];
@@ -432,6 +447,7 @@
 
 - (void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath
 {
+    [FIRAnalytics logEventWithName:@"Open person details" parameters:nil];
     [self performSegueWithIdentifier:@"openEditPerson" sender:self];
 }
 

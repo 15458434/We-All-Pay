@@ -9,6 +9,8 @@
 import UIKit
 import CoreData
 
+import FirebaseAnalytics
+
 import CurrencyConverter
 
 class SelectCurrencyTableViewController: UITableViewController, UISearchResultsUpdating, MCThisPaymentProtocol {
@@ -49,6 +51,7 @@ class SelectCurrencyTableViewController: UITableViewController, UISearchResultsU
     
     @IBAction func mainCancelPressed(_ sender: AnyObject) {
         // Don't select anything just dimiss the currency view controller
+        FIRAnalytics.logEvent(withName: "Main Cancel Pressed", parameters: nil)
         navigationController!.presentingViewController!.dismiss(animated: true, completion: nil)
     }
     
@@ -84,6 +87,7 @@ class SelectCurrencyTableViewController: UITableViewController, UISearchResultsU
                 self.extendedLayoutIncludesOpaqueBars = true
                 self.edgesForExtendedLayout = UIRectEdge.all
             } else {
+                // TODO: Remove iOS 8 code.
                 searchController.searchResultsUpdater = self
                 searchController.dimsBackgroundDuringPresentation = false
                 searchController.hidesNavigationBarDuringPresentation = false
@@ -129,7 +133,7 @@ class SelectCurrencyTableViewController: UITableViewController, UISearchResultsU
     // MARK: UI Table View Delegate
     
     override func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
-        func data(indexPath: NSIndexPath) -> Currency {
+        func data(indexPath: IndexPath) -> Currency {
             debugPrint("didSelectRowAtIndexPath: \(indexPath)")
             switch (searchActive, recentUsedForeignCurrencies?.count ?? 0, indexPath.section) {
             case let (searchActive, _, _) where searchActive == true:
@@ -145,7 +149,8 @@ class SelectCurrencyTableViewController: UITableViewController, UISearchResultsU
         }
         let myPresenter = self.presentingViewController
         
-        let thisCellsCurrency = data(indexPath: indexPath as NSIndexPath)
+        let thisCellsCurrency = data(indexPath: indexPath)
+        FIRAnalytics.logEvent(withName: "didSelectCurrency pressed", parameters: nil)
         
         let mainThreadContext = MCWeAllPayStoreController.defaultStore().mainThreadContext
         let newCurrency = MCCurrency(from: thisCellsCurrency.code, from: mainThreadContext)
@@ -279,5 +284,17 @@ extension SelectCurrencyTableViewController: UISearchBarDelegate {
         } else {
             return UIBarPosition.any
         }
+    }
+    
+    func searchBarTextDidBeginEditing(_ searchBar: UISearchBar) {
+        FIRAnalytics.logEvent(withName: "SearchBarDidBeginEditing", parameters: nil)
+    }
+    
+    func searchBarTextDidEndEditing(_ searchBar: UISearchBar) {
+        FIRAnalytics.logEvent(withName: "SearchBarDidEndEditing", parameters: nil)
+    }
+    
+    func searchBarCancelButtonClicked(_ searchBar: UISearchBar) {
+        FIRAnalytics.logEvent(withName: "Cancel pressed", parameters: nil)
     }
 }

@@ -11,6 +11,8 @@ import MessageUI
 import Social
 import StoreKit
 
+import FirebaseAnalytics
+
 private let productName = Bundle.main.infoDictionary!["CFBundleDisplayName"] as! String
 private let shortVersionString = Bundle.main.infoDictionary!["CFBundleShortVersionString"] as! String
 private let versionString = Bundle.main.infoDictionary!["CFBundleVersion"] as! String
@@ -75,6 +77,7 @@ class InfoScreenTableViewController: UITableViewController, MFMailComposeViewCon
     
     // MARK: Notifications
     func applyProVersion(_ notification: Notification) {
+        FIRAnalytics.logEvent(withName: "Applying Pro version", parameters: nil)
         OperationQueue.main.addOperation { () -> Void in
             self.tableView.beginUpdates()
             self.tableView.deleteRows(at: [IndexPath(row: 0, section: 0), IndexPath(row: 1, section: 0)], with: UITableViewRowAnimation.automatic)
@@ -106,6 +109,7 @@ class InfoScreenTableViewController: UITableViewController, MFMailComposeViewCon
     }
     
     func restorePreviousPurchasesFailed(_ notification: Notification) {
+        FIRAnalytics.logEvent(withName: "Restore Previous Purchases", parameters: nil)
         if (notification as NSNotification).userInfo!["status"] as? String == "Not restored" {
             let myPresenter = presentingViewController!
             let title = NSLocalizedString("Nothing to restore", comment: "Nothing to restore")
@@ -175,14 +179,19 @@ class InfoScreenTableViewController: UITableViewController, MFMailComposeViewCon
     override func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
         switch ((indexPath as NSIndexPath).section, (indexPath as NSIndexPath).row) {
         case (0, 0):
+            FIRAnalytics.logEvent(withName: "Buy Pro Product Pressed", parameters: nil)
             MCStoreInterface.defaultStoreInterface.buyProProductSendFrom(self)
         case (0, 1):
+            FIRAnalytics.logEvent(withName: "Restore Previous Purchases pressed", parameters: nil)
             MCStoreInterface.defaultStoreInterface.restorePreviousPurchases()
         case (1, 0):
+            FIRAnalytics.logEvent(withName: "Rate Me pressed", parameters: nil)
             openMyAppStoreLink()
         case (1, 1):
+            FIRAnalytics.logEvent(withName: "My Apps pressed", parameters: nil)
             showAllMyApps()
         case (2, 0):
+            FIRAnalytics.logEvent(withName: "Send Feedback pressed", parameters: nil)
             openMailComposer()
         default:
             print("Nothing to open")

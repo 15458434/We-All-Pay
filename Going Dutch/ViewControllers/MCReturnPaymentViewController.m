@@ -6,6 +6,8 @@
 //  Copyright (c) 2013 Mark Cornelisse. All rights reserved.
 //
 
+@import FirebaseAnalytics;
+
 #import "MCReturnPaymentViewController.h"
 #import "MCSharedBillTableViewController.h"
 #import "MCSharedBillPageViewController.h"
@@ -22,7 +24,7 @@ typedef NS_ENUM(BOOL, MCXRateStatus) {
     xRatesMissing NS_SWIFT_NAME(Missing)
 };
 
-@interface MCReturnPaymentViewController () <UIAlertViewDelegate, MFMailComposeViewControllerDelegate>
+@interface MCReturnPaymentViewController () <UIAlertViewDelegate>
 
 @property (nonatomic, strong) NSArray<MCPerson *> *peoplePresent;
 @property (nonatomic, strong) NSArray<ReturnPayment *> *solution;
@@ -41,6 +43,7 @@ typedef NS_ENUM(BOOL, MCXRateStatus) {
 
 - (IBAction)sendAsEmailButtonPressed:(id)sender
 {
+    [FIRAnalytics logEventWithName:@"Send email pressed" parameters:nil];
     [self shareBill:self];
 }
 
@@ -228,25 +231,6 @@ typedef NS_ENUM(BOOL, MCXRateStatus) {
 - (BOOL)shouldPresentInterstitialAd
 {
     return NO;
-}
-
-#pragma mark - MFMailComposeViewControllerDelegate
-
-- (void)mailComposeController:(MFMailComposeViewController *)controller didFinishWithResult:(MFMailComposeResult)result error:(NSError *)error
-{
-    if (result == MFMailComposeResultCancelled) {
-        [[self presentedViewController] dismissViewControllerAnimated:YES completion:nil];
-    } else if (result == MFMailComposeResultSent) {
-        [self showRateMeIfNecessary];
-        [[self presentedViewController] dismissViewControllerAnimated:YES completion:^{
-            [_tonightsBill setHasTheMailBeenSent:@YES];
-            [[MCWeAllPayStoreController defaultStore] saveMainThreadContext];
-        }];
-    } else if (result == MFMailComposeResultSaved) {
-        [[self presentedViewController] dismissViewControllerAnimated:YES completion:nil];
-    } else {
-        NSLog(@"Sending email went wrong: %@", error);
-    }
 }
 
 #pragma mark - UITableViewDelegate

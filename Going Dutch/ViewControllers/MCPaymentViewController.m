@@ -6,6 +6,8 @@
 //  Copyright (c) 2013 Mark Cornelisse. All rights reserved.
 //
 
+@import FirebaseAnalytics;
+
 #import "MCPaymentViewController.h"
 
 #import "MCPayment+addons.h"
@@ -59,6 +61,7 @@ typedef NS_ENUM(BOOL, ChildViewOpened) {
 #pragma mark - action
 
 - (IBAction)tabElseWhereAndDismissKeyboard:(id)sender {
+    [FIRAnalytics logEventWithName:@"tabElseWhereAndDismissKeyboard pressed" parameters:nil];
     if ([_itemView isFirstResponder]) {
         [_itemView endEditing:YES];
         [_itemView setText:[_thisPayment descriptionOfPayment]];
@@ -73,6 +76,7 @@ typedef NS_ENUM(BOOL, ChildViewOpened) {
 
 - (IBAction)mainCancelButtonPressed:(id)sender
 {
+    [FIRAnalytics logEventWithName:@"Main Canncel Pressed" parameters:nil];
     [self dismissKeyboard];
     if ([[[[MCWeAllPayStoreController defaultStore] mainThreadContext] undoManager] canUndo]) {
         [[MCWeAllPayStoreController defaultStore] endUndoGroupAndUndo];
@@ -84,6 +88,7 @@ typedef NS_ENUM(BOOL, ChildViewOpened) {
 
 - (IBAction)mainDoneButtonPressed:(id)sender
 {
+    [FIRAnalytics logEventWithName:@"Main Done Pressed" parameters:nil];
 #ifdef DEBUG
     NSLog(@"MCPaymentViewController: Done button pressed.");
 #endif
@@ -110,6 +115,7 @@ typedef NS_ENUM(BOOL, ChildViewOpened) {
 
 - (IBAction)currencySelectionPressed:(id)sender
 {
+    [FIRAnalytics logEventWithName:@"Select Currency Selected" parameters:nil];
 #ifdef DEBUG
     NSLog(@"%@, currencySelectionPressed", self);
 #endif
@@ -122,6 +128,7 @@ typedef NS_ENUM(BOOL, ChildViewOpened) {
 
 - (void)cancelPersonPicker:(id)selector
 {
+    [FIRAnalytics logEventWithName:@"Cancel Person picker pressed" parameters:nil];
     // Set the text of the textView back and resign first responder
     _peoplePickerCancelled = YES;
     [_payerNameField setText:[[_thisPayment payingPerson] getFullName]];
@@ -135,6 +142,7 @@ typedef NS_ENUM(BOOL, ChildViewOpened) {
 
 - (void)donePersonPicker:(id)selector
 {
+    [FIRAnalytics logEventWithName:@"Done Person picker pressed" parameters:nil];
     if ([[_tonightsBill peoplePresent] count] > 0) {
         NSInteger row = [_personPickerView selectedRowInComponent:0];
         [_thisPayment setPayingPerson:_listOfPeople[row]];
@@ -150,6 +158,7 @@ typedef NS_ENUM(BOOL, ChildViewOpened) {
 
 - (void)cancelNumberPad:(id)selector
 {
+    [FIRAnalytics logEventWithName:@"Cancel number pad pressed" parameters:nil];
     // Restore Paidview and resignFirstResponder.
     NSNumberFormatter *nf = [[NSNumberFormatter alloc] init];
     [nf setNumberStyle:NSNumberFormatterCurrencyStyle];
@@ -160,8 +169,14 @@ typedef NS_ENUM(BOOL, ChildViewOpened) {
 
 - (void)doneNumberPad:(id)selector
 {
+    [FIRAnalytics logEventWithName:@"Done number pad pressed" parameters:nil];
     _kindOfPaidFieldDismiss = doneIsPressed;
     [_paidView resignFirstResponder];
+}
+
+- (IBAction)selectCategoryPressed:(id)sender
+{
+    [FIRAnalytics logEventWithName:@"Select Category Pressed" parameters:nil];
 }
 
 - (void)storePlaceViewData
@@ -269,6 +284,7 @@ typedef NS_ENUM(BOOL, ChildViewOpened) {
 - (void)textFieldDidBeginEditing:(UITextField *)textField
 {
     if (textField == _paidView) {
+        [FIRAnalytics logEventWithName:@"PaidView didBeginEditing" parameters:nil];
         [[MCWeAllPayStoreController defaultStore] beginUndoGroupWithoutRegistration];
         NSNumberFormatter *numberFormatter = [[NSNumberFormatter alloc] init];
         [numberFormatter setFormatterBehavior:NSNumberFormatterBehaviorDefault];
@@ -282,6 +298,7 @@ typedef NS_ENUM(BOOL, ChildViewOpened) {
     }
     
     if (textField == _payerNameField) {
+        [FIRAnalytics logEventWithName:@"PayerNameField didBeginEditing" parameters:nil];
         [[MCWeAllPayStoreController defaultStore] beginUndoGroupWithoutRegistration];
         _peoplePickerCancelled = NO;
         NSInteger row = 0;
@@ -301,6 +318,7 @@ typedef NS_ENUM(BOOL, ChildViewOpened) {
     }
     
     if (textField == _itemView) {
+        [FIRAnalytics logEventWithName:@"ItemView didBeginEditing" parameters:nil];
         _kindOfPaidFieldDismiss = otherTextFieldSelected;
     }
 }
@@ -313,11 +331,13 @@ typedef NS_ENUM(BOOL, ChildViewOpened) {
 - (void)textFieldDidEndEditing:(UITextField *)textField
 {
     if (textField == _paidView) {
+        [FIRAnalytics logEventWithName:@"PaidView didEndEditing" parameters:nil];
 #ifdef DEBUG
         NSLog(@"kindOfPaidFieldDismiss = %lu", (unsigned long)_kindOfPaidFieldDismiss);
 #endif
         [self storeMoneySpent];
     } else if (textField == _payerNameField) {
+        [FIRAnalytics logEventWithName:@"payerNameField didEndEditing" parameters:nil];
         if (!_peoplePickerCancelled) {
             [[MCWeAllPayStoreController defaultStore] endUndoGroupWithoutRegistration];
             [self donePersonPicker:self];
@@ -333,6 +353,7 @@ typedef NS_ENUM(BOOL, ChildViewOpened) {
         }
         _kindOfPaidFieldDismiss = backgroundTapped;
     } else if (textField == _itemView) {
+        [FIRAnalytics logEventWithName:@"itemView DidEndEditing" parameters:nil];
         // Do something to store value of placeview.
         [self storePlaceViewData];
         NSDate *nu = [NSDate date];
@@ -537,13 +558,13 @@ typedef NS_ENUM(BOOL, ChildViewOpened) {
     
     // Set the cell contents
     MCPaymentPresence *thisCellsPresence = [_dataController objectAtIndexPath:indexPath];
-    [[cell nameLabel] setText:[[thisCellsPresence person] getFullName]];
+    cell.nameLabel.text = thisCellsPresence.person.getFullName;
     cell.personView.image = thisCellsPresence.person.thumbnail;
     [[cell isPresentSwitch] setOn:[[thisCellsPresence isPersonPresent] boolValue]];
     CurrencyFormatter *cf = [[CurrencyFormatter alloc] initWithCurrencyCode:thisCellsPresence.payment.currency.code];
     NSNumber *averageOwe = @(-thisCellsPresence.averageOweFromPayment.doubleValue);
     cell.owesLabel.text = [cf stringFor:averageOwe];
-    [cell setThisCellsPaymentPresence:thisCellsPresence];
+    cell.thisCellsPaymentPresence = thisCellsPresence;
     
     // Set the cell alignment to headerView stuff
     NSLayoutConstraint *payerViewToCellNameLabel = [NSLayoutConstraint constraintWithItem:_payerNameField attribute:NSLayoutAttributeLeading relatedBy:NSLayoutRelationEqual toItem:[cell nameLabel] attribute:NSLayoutAttributeLeading multiplier:1.0 constant:-6.0];

@@ -6,6 +6,8 @@
 //  Copyright (c) 2013 Mark Cornelisse. All rights reserved.
 //
 
+@import FirebaseAnalytics;
+
 #import "MCAllTripsTableViewController.h"
 #import "MCSharedBillTableViewController.h"
 #import "MCPaymentViewController.h"
@@ -39,6 +41,16 @@ typedef NS_ENUM(BOOL, MCTonightsBillStatus) {
 @implementation MCAllTripsTableViewController
 
 #pragma mark - Actions
+
+- (IBAction)newEventPressed:(id)sender
+{
+    [FIRAnalytics logEventWithName:@"New Event" parameters:nil];
+}
+
+- (IBAction)iButtonPressed:(id)sender
+{
+    [FIRAnalytics logEventWithName:@"Open Info Screen" parameters:nil];
+}
 
 #pragma mark - New in this class.
 
@@ -318,6 +330,12 @@ typedef NS_ENUM(BOOL, MCTonightsBillStatus) {
         [MCSharedBill deleteSharedbill:toBeDeleteSharedBill];
         [[MCWeAllPayStoreController defaultStore] saveMainThreadContext];
     }
+}
+
+- (void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath
+{
+    MCSharedBill *selectedEvent = [_dataController objectAtIndexPath:indexPath];
+    [FIRAnalytics logEventWithName:@"Open event" parameters:@{@"Event name": selectedEvent.tripName}];
 }
 
 /*

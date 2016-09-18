@@ -6,7 +6,9 @@
 //  Copyright (c) 2013 Mark Cornelisse. All rights reserved.
 //
 
+@import FirebaseAnalytics;
 @import WhoPayingUserDefaultsStoreInterface;
+
 #import "MCSharedBillTableViewController.h"
 #import "UIViewController+WeAllPayStore.h"
 
@@ -37,13 +39,18 @@
 
 - (IBAction)addPaymentPressed:(id)sender
 {
+    [FIRAnalytics logEventWithName:@"Add payment pressed" parameters:@{@"peoplePresent count": @(_tonightsBill.peoplePresent.count)}];
     if (_tonightsBill.peoplePresent.count == 0) {
         NSString *title = NSLocalizedString(@"Add some people first", @"Title for an alert message, because there are no people added to this event.");
         NSString *message = NSLocalizedString(@"You can't add a payment when no people are present. There is no one to split the expenses among.", @"A message to the user thay can't add a payment when they didn't add people to the even.");
         UIAlertController *alertController = [UIAlertController alertControllerWithTitle:title message:message preferredStyle:UIAlertControllerStyleAlert];
         NSString *cancelActionTitle = NSLocalizedString(@"Cancel", @"Text on button to cancel something");
-        [alertController addAction:[UIAlertAction actionWithTitle:cancelActionTitle style:UIAlertActionStyleCancel handler:nil]];
-        [self presentViewController:alertController animated:YES completion:nil];
+        [alertController addAction:[UIAlertAction actionWithTitle:cancelActionTitle style:UIAlertActionStyleCancel handler:^(UIAlertAction * _Nonnull action) {
+            [FIRAnalytics logEventWithName:@"Cancel pressed" parameters:nil];
+        }]];
+        [self presentViewController:alertController animated:YES completion:^{
+            [FIRAnalytics logEventWithName:@"Show alertController" parameters:nil];
+        }];
         return;
     }
     [self performSegueWithIdentifier:@"openPaymentView" sender:self];
@@ -51,13 +58,18 @@
 
 - (IBAction)solveButtonPressed:(id)sender
 {
+    [FIRAnalytics logEventWithName:@"Solve pressed" parameters:@{@"peoplePresent count": @(_tonightsBill.peoplePresent.count), @"payments count": @(_tonightsBill.payments.count)}];
     if (_tonightsBill.peoplePresent.count == 0) {
         NSString *title = NSLocalizedString(@"Add some people first", @"Title for an alert message, because there are no people added to this event.");
         NSString *message = NSLocalizedString(@"You can't add a payment when no people are present. There is no one to split the expenses among.", @"A message to the user thay can't add a payment when they didn't add people to the even.");
         UIAlertController *alertController = [UIAlertController alertControllerWithTitle:title message:message preferredStyle:UIAlertControllerStyleAlert];
         NSString *cancelActionTitle = NSLocalizedString(@"Cancel", @"Text on button to cancel something");
-        [alertController addAction:[UIAlertAction actionWithTitle:cancelActionTitle style:UIAlertActionStyleCancel handler:nil]];
-        [self presentViewController:alertController animated:YES completion:nil];
+        [alertController addAction:[UIAlertAction actionWithTitle:cancelActionTitle style:UIAlertActionStyleCancel handler:^(UIAlertAction * _Nonnull action) {
+            [FIRAnalytics logEventWithName:@"Cancel pressed" parameters:nil];
+        }]];
+        [self presentViewController:alertController animated:YES completion:^{
+            [FIRAnalytics logEventWithName:@"Show alertController" parameters:nil];
+        }];
         return;
     }
     
@@ -72,24 +84,28 @@
         NSString *cancelButtonTitle = NSLocalizedString(@"Cancel", @"Text on button to cancel something");
         NSString *fixItButtonTitle = NSLocalizedString(@"Go to", @"Go to");
         UIAlertController *alertController = [UIAlertController alertControllerWithTitle:title message:message preferredStyle:UIAlertControllerStyleAlert];
-        [alertController addAction:[UIAlertAction actionWithTitle:cancelButtonTitle style:UIAlertActionStyleCancel handler:nil]];
+        [alertController addAction:[UIAlertAction actionWithTitle:cancelButtonTitle style:UIAlertActionStyleCancel handler:^(UIAlertAction * _Nonnull action) {
+            [FIRAnalytics logEventWithName:@"Cancel pressed" parameters:nil];
+        }]];
         [alertController addAction:[UIAlertAction actionWithTitle:fixItButtonTitle style:UIAlertActionStyleDefault handler:^(UIAlertAction * _Nonnull action) {
+            [FIRAnalytics logEventWithName:@"Go to pressed" parameters:nil];
             [self openFirstPaymentWithoutAPayer];
         }]];
-        [self presentViewController:alertController animated:YES completion:nil];
+        [self presentViewController:alertController animated:YES completion:^{
+            [FIRAnalytics logEventWithName:@"Show alertController" parameters:nil];
+        }];
     }
 }
 
 - (void)dismissEdit:(id)selector
 {
-    NSLog(@"Mis");
+    [FIRAnalytics logEventWithName:@"Dismiss Edit Pressed" parameters:nil];
 }
 
 #pragma mark - New in this class.
 
 - (void)prepareDataControllerAndFetch
 {
-    // TODO: Replace this with the NSFetchedResultsController coming from MCWeAllPayStoreController.
     _dataController = [[MCWeAllPayStoreController defaultStore] sharedBillPaymentsDataControllerForDelegate:self];
     NSError *error;
     BOOL success = [_dataController performFetch:&error];
@@ -394,6 +410,7 @@
 
 - (void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath
 {
+    [FIRAnalytics logEventWithName:@"Open payment" parameters:nil];
     [self performSegueWithIdentifier:@"openPaymentView" sender:self];
 }
 

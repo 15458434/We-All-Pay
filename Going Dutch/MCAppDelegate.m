@@ -7,6 +7,7 @@
 //
 
 @import Firebase;
+@import FirebaseAnalytics;
 
 #import "MCAppDelegate.h"
 #import "MCAllTripsTableViewController.h"
@@ -25,6 +26,7 @@
 @interface MCAppDelegate ()
 
 @property (nonatomic) dispatch_once_t executeOnlyOnce;
+@property (nonatomic, strong) MCLaunchCounter *launchCounter;
 
 @end
 
@@ -37,6 +39,9 @@
 #ifndef DEBUG
     [FIRApp configure];
 #endif
+    _launchCounter = [[MCLaunchCounter alloc] init];
+    [_launchCounter increment];
+    [FIRAnalytics logEventWithName:@"Start counter" parameters:@{@"Counter Value": @(_launchCounter.count)}];
 }
 
 - (void)removeOldCurrencyStore
@@ -202,6 +207,7 @@
 
 - (void)applicationDidEnterBackground:(UIApplication *)application
 {
+    [FIRAnalytics logEventWithName:@"application did enter backgroun" parameters:nil];
     __block UIBackgroundTaskIdentifier bgTask = [application beginBackgroundTaskWithExpirationHandler:^{
         [application endBackgroundTask:bgTask];
         bgTask = UIBackgroundTaskInvalid;
@@ -219,6 +225,7 @@
 {
     // Restart any tasks that were paused (or not yet started) while the application was inactive. If the application was previously in the background, optionally refresh the user interface.
 //    [self startGoogleAnalyticsSession];
+    [FIRAnalytics logEventWithName:@"application did become active" parameters:nil];
 }
 
 - (void)applicationWillTerminate:(UIApplication *)application

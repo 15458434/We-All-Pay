@@ -7,6 +7,7 @@
 //
 
 @import GoogleMobileAds;
+@import FirebaseAnalytics;
 
 #import "MCSharedBillMainViewController.h"
 
@@ -39,10 +40,12 @@
 - (IBAction)toggleEdit:(id)sender
 {
     if ([[self childViewControllers][0] toggleEditTableView:sender]) {
+        [FIRAnalytics logEventWithName:@"Edit Pressed" parameters:nil];
         // Set Done Button
         UIBarButtonItem *doneButton = [[UIBarButtonItem alloc] initWithBarButtonSystemItem:UIBarButtonSystemItemDone target:self action:@selector(toggleEdit:)];
         [[self navigationItem] setRightBarButtonItem:doneButton];
     } else {
+        [FIRAnalytics logEventWithName:@"Done Pressed" parameters:nil];
         // Set Edit Button
         UIBarButtonItem *editButton = [[UIBarButtonItem alloc] initWithBarButtonSystemItem:UIBarButtonSystemItemEdit target:self action:@selector(toggleEdit:)];
         [[self navigationItem] setRightBarButtonItem:editButton];
@@ -196,6 +199,21 @@
     NSLog(@"Oh no, I didn't get anything, because %@", error);
 #endif
     [self putBannerOffScreen:YES];
+}
+
+- (void)adViewWillPresentScreen:(GADBannerView *)bannerView
+{
+    [FIRAnalytics logEventWithName:@"Press AdBanner" parameters:nil];
+}
+
+- (void)adViewWillDismissScreen:(GADBannerView *)bannerView
+{
+    [FIRAnalytics logEventWithName:@"Dismiss full screen ad" parameters:nil];
+}
+
+- (void)adViewWillLeaveApplication:(GADBannerView *)bannerView
+{
+    [FIRAnalytics logEventWithName:@"Take me to the product" parameters:nil];
 }
 
 #pragma mark - Inherited from super

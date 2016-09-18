@@ -10,6 +10,8 @@
 
 import UIKit
 
+import FirebaseAnalytics
+
 class SelectCategoryTableViewController: UITableViewController, MCThisPaymentProtocol, MCDismissMeBlockProtocol {
     // MARK: Properties
     var thisPayment: MCPayment!
@@ -32,6 +34,7 @@ class SelectCategoryTableViewController: UITableViewController, MCThisPaymentPro
     // MARK: Actions
     
     @IBAction func mainCancelPressed(_ sender: AnyObject) {
+        FIRAnalytics.logEvent(withName: "Main Cancel Pressed", parameters: nil)
         navigationController!.presentingViewController?.dismiss(animated: true, completion: nil)
     }
     
@@ -88,6 +91,7 @@ class SelectCategoryTableViewController: UITableViewController, MCThisPaymentPro
             categoryObject = filteredCategory
         }
         
+        FIRAnalytics.logEvent(withName: "didSelecCategory", parameters: ["categoryID": NSNumber.init(value: categoryObject.categoryId)])
         thisPayment.categoryId = NSNumber(value: categoryObject.categoryId)
         if dismissMe != nil {
             dismissMe!()
