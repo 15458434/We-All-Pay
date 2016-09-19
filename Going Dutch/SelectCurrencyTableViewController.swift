@@ -73,35 +73,18 @@ class SelectCurrencyTableViewController: UITableViewController, UISearchResultsU
         }
         
         func prepareForSearchController() {
-            if #available(iOS 9.0, *) {
-                searchController.searchResultsUpdater = self
-                searchController.dimsBackgroundDuringPresentation = false
-                searchController.hidesNavigationBarDuringPresentation = false
-                tableView.tableHeaderView = searchController.searchBar
-                searchController.searchBar.delegate = self
-                searchController.searchBar.searchBarStyle = .prominent
-                searchController.searchBar.scopeButtonTitles = []
-                searchController.searchBar.showsScopeBar = false
-                definesPresentationContext = true
-                
-                self.extendedLayoutIncludesOpaqueBars = true
-                self.edgesForExtendedLayout = UIRectEdge.all
-            } else {
-                // TODO: Remove iOS 8 code.
-                searchController.searchResultsUpdater = self
-                searchController.dimsBackgroundDuringPresentation = false
-                searchController.hidesNavigationBarDuringPresentation = false
-                searchController.searchBar.sizeToFit()
-                tableView.tableHeaderView = searchController.searchBar
-                searchController.searchBar.delegate = self
-                searchController.searchBar.searchBarStyle = .prominent
-                searchController.searchBar.scopeButtonTitles = []
-                searchController.searchBar.showsScopeBar = false
-                definesPresentationContext = true
-                
-                self.extendedLayoutIncludesOpaqueBars = true
-                self.edgesForExtendedLayout = UIRectEdge.all
-            }
+            searchController.searchResultsUpdater = self
+            searchController.dimsBackgroundDuringPresentation = false
+            searchController.hidesNavigationBarDuringPresentation = false
+            tableView.tableHeaderView = searchController.searchBar
+            searchController.searchBar.delegate = self
+            searchController.searchBar.searchBarStyle = .prominent
+            searchController.searchBar.scopeButtonTitles = []
+            searchController.searchBar.showsScopeBar = false
+            definesPresentationContext = true
+            
+            self.extendedLayoutIncludesOpaqueBars = true
+            self.edgesForExtendedLayout = UIRectEdge.all
         }
         
         super.viewDidLoad()
