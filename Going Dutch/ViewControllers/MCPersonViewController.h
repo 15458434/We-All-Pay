@@ -49,7 +49,4 @@ typedef enum _emailFieldEditStatus {
 - (IBAction)cancelButtonPressed:(id)sender;
 - (IBAction)selectEmailAddressPressed:(id)sender;
 
-//- (void)writableThisPersonIsCreated:(NSNotification *)notification;
-- (void)writableTonightsBillIsCreated:(NSNotification *)notification;
-
 @end
