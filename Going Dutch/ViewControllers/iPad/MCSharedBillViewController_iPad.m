@@ -358,24 +358,6 @@
     }];
 }
 
-#pragma mark - MCAddressBookReceiverDelegate
-
-- (MCPerson *)personRecordToUse
-{
-    return nil;
-}
-
-- (void)receiveANewPersonFromAddressBook:(MCPerson *)newPerson
-{
-    // Not implemented.
-}
-
-- (BOOL)isPersonAlreadyPresent:(MCPerson *)newPerson
-{
-    // Function is not used at the moment.
-    return NO;
-}
-
 #pragma mark - UITextFieldDelegate
 
 - (BOOL)textFieldShouldBeginEditing:(UITextField *)textField
@@ -390,9 +372,17 @@
     }
 }
 
+- (void)textFieldDidBeginEditing:(UITextField *)textField
+{
+    if (textField == _tripNameField) {
+        [FIRAnalytics logEventWithName:@"Begin edit Event name" parameters:nil];
+    }
+}
+
 - (void)textFieldDidEndEditing:(UITextField *)textField
 {
     if (textField == _tripNameField) {
+        [FIRAnalytics logEventWithName:@"End edit Event name" parameters:nil];
         [_tonightsBill setTripName:[_tripNameField text]];
     }
 }
