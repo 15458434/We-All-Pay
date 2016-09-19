@@ -21,7 +21,6 @@ The We All Pay Store Controller is designed to do writing in the background and 
 
 @interface MCWeAllPayStoreController : NSObject
 
-@property (nonatomic, strong, readonly) UIManagedDocument *weAllPayStoreDocument __deprecated;
 @property (nonatomic, strong, readonly) NSManagedObjectContext *mainThreadContext;
 @property (nonatomic, strong, readonly) NSManagedObjectContext *backgroundThreadContext;
 @property (nonatomic, strong, readonly) NSPersistentStoreCoordinator *persistentStoreCoordinator;
