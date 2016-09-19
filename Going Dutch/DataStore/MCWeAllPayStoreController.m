@@ -39,8 +39,6 @@ MCiCloudUse const isiCloudUsed = iCloudIsNotUsed;
 
 @implementation MCWeAllPayStoreController
 
-@synthesize weAllPayStoreDocument;
-
 @synthesize fetcher = _fetcher;
 @synthesize managedObjectModel = _managedObjectModel;
 @synthesize mainThreadContext = _mainThreadContext;
@@ -264,7 +262,7 @@ MCiCloudUse const isiCloudUsed = iCloudIsNotUsed;
     NSLog(@"%@ availableCurrencyControllerForDelegate", self);
 #endif
     NSParameterAssert([delegate conformsToProtocol:@protocol(NSFetchedResultsControllerDelegate)]);
-    NSManagedObjectContext *context = [weAllPayStoreDocument managedObjectContext];
+    NSManagedObjectContext *context = [self mainThreadContext];
     NSFetchRequest *request = [NSFetchRequest fetchRequestWithEntityName:@"MCCurrency"];
     request.sortDescriptors = @[[NSSortDescriptor sortDescriptorWithKey:@"name" ascending:YES]];
     request.predicate = [NSPredicate predicateWithFormat:@"isStillValid = YES"];
@@ -282,7 +280,7 @@ MCiCloudUse const isiCloudUsed = iCloudIsNotUsed;
 - (NSFetchedResultsController *)searchCurrencyControllerWithSearchText:(NSString *)searchText withDelegate:(id)delegate
 {
     NSParameterAssert([delegate conformsToProtocol:@protocol(NSFetchedResultsControllerDelegate)]);
-    NSManagedObjectContext *context = [weAllPayStoreDocument managedObjectContext];
+    NSManagedObjectContext *context = [self mainThreadContext];
     NSFetchRequest *request = [NSFetchRequest fetchRequestWithEntityName:@"MCCurrency"];
     request.sortDescriptors = @[[NSSortDescriptor sortDescriptorWithKey:@"name" ascending:YES]];
     request.predicate = [NSPredicate predicateWithFormat:@"isStillValid = YES AND name contains[c] %@", searchText];
