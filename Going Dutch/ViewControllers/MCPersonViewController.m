@@ -265,23 +265,6 @@ typedef NS_ENUM(BOOL, MCStatus) {
     [super didReceiveMemoryWarning];
     // Dispose of any resources that can be recreated.
 }
-//
-//#pragma mark - NSNotifications
-//
-//- (void)writableTonightsBillIsCreated:(NSNotification *)notification
-//{
-//    // Should be executed on the background thread.
-//    _writableTonightsBill = [[notification userInfo] objectForKey:MCwritableTonightsBillKey];
-//    _writableThisPerson = [_writableTonightsBill addPerson];
-//    NSLog(@"MCPersonViewController: writableTonightsBill is created.");
-//    __weak typeof(self) weakSelf = self;
-//    dispatch_async(dispatch_get_main_queue(), ^{
-//        __strong typeof(self) strongSelf = weakSelf;
-//        if (strongSelf) {
-//            [strongSelf fillTheScreenWithInitialData];
-//        }
-//    });
-//}
 
 #pragma mark - UITextFieldDelegate
 
