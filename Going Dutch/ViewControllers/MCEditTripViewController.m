@@ -264,14 +264,14 @@
 - (void)textFieldDidBeginEditing:(UITextField *)textField
 {
     if ([textField isEqual:_tripNameField]) {
-        [FIRAnalytics logEventWithName:@"tripNameField didBeginEditing" parameters:nil];
+        [FIRAnalytics logEventWithName:@"Did begin editing event name" parameters:nil];
     }
 }
 
 -(void)textFieldDidEndEditing:(UITextField *)textField
 {
     if ([textField isEqual:_tripNameField]) {
-        [FIRAnalytics logEventWithName:@"tripNameField didEndEditing" parameters:nil];
+        [FIRAnalytics logEventWithName:@"Did end editing event name" parameters:nil];
     }
     [_tonightsBill setTripName:[_tripNameField text]];
     NSDate *now = [NSDate date];
