@@ -15,7 +15,7 @@
 @class MCSharedBill;
 @class MCTableEmptyMessage_iPad;
 
-@interface MCSolutionTableViewController : UITableViewController <MFMailComposeViewControllerDelegate, MCTonightsBillTransfer, MCDismissMeBlockProtocol>
+@interface MCSolutionTableViewController : UITableViewController <MCTonightsBillTransfer, MCDismissMeBlockProtocol>
 
 @property (strong, nonatomic) MFMailComposeViewController *mailController;
 @property (strong, nonatomic) NSArray *peoplePresent;

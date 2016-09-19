@@ -6,6 +6,8 @@
 //  Copyright (c) 2014 Mark Cornelisse. All rights reserved.
 //
 
+@import FirebaseAnalytics;
+
 #import "MCSolutionTableViewController.h"
 
 #import "We_all_pay-Swift.h"
@@ -35,11 +37,13 @@ typedef NS_ENUM(BOOL, MCXRateStatus) {
 
 - (IBAction)mainCancelButton:(id)sender
 {
+    [FIRAnalytics logEventWithName:@"Main cancel pressed" parameters:nil];
     _dismissMe();
 }
 
 - (IBAction)sendEmailButtonPressed:(id)sender
 {
+    [FIRAnalytics logEventWithName:@"Send Email pressed" parameters:nil];
     [self openMailView:self];
 }
 
@@ -213,23 +217,6 @@ typedef NS_ENUM(BOOL, MCXRateStatus) {
 {
     [super didReceiveMemoryWarning];
     // Dispose of any resources that can be recreated.
-}
-
-#pragma mark - MFMailComposeViewDelegate
-
-- (void)mailComposeController:(MFMailComposeViewController *)controller didFinishWithResult:(MFMailComposeResult)result error:(NSError *)error
-{
-    if (result == MFMailComposeResultSent) {
-        [self showRateMeIfNecessary];
-        [self dismissViewControllerAnimated:YES completion:nil];
-    } else if (result == MFMailComposeResultSaved) {
-        [self dismissViewControllerAnimated:YES completion:nil];
-    } else if (result == MFMailComposeResultFailed) {
-        NSLog(@"Error sending email: %@", error);
-        [self dismissViewControllerAnimated:YES completion:nil];
-    } else if (result == MFMailComposeResultCancelled) {
-        [self dismissViewControllerAnimated:YES completion:nil];
-    }
 }
 
 #pragma mark - UITableViewDelegate

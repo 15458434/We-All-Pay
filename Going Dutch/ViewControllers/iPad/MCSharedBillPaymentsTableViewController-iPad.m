@@ -6,6 +6,8 @@
 //  Copyright (c) 2014 Mark Cornelisse. All rights reserved.
 //
 
+@import FirebaseAnalytics;
+
 #import "MCSharedBillPaymentsTableViewController-iPad.h"
 #import "UIViewController+WeAllPayStore.h"
 
@@ -200,6 +202,7 @@
 
 -(void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath
 {
+    [FIRAnalytics logEventWithName:@"Open payment" parameters:nil];
     [self performSegueWithIdentifier:@"openPayment" sender:self];
 }
 
@@ -261,6 +264,7 @@
 {
     if (editingStyle == UITableViewCellEditingStyleDelete) {
         // Delete the row from the data source
+        [FIRAnalytics logEventWithName:@"Delete payment" parameters:nil];
         [WhoPayingUserDefaultsStoreInterface sendToUserDefaultsStoreInterface:_tonightsBill];
         [MCPayment deletePayment:[_dataController objectAtIndexPath:indexPath]];
         [[MCWeAllPayStoreController defaultStore] saveMainThreadContext];

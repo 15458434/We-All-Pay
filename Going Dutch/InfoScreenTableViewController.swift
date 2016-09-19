@@ -36,6 +36,7 @@ class InfoScreenTableViewController: UITableViewController, MFMailComposeViewCon
     }
     
     @IBAction func tweetAboutUsPressed(_ sender: AnyObject) {
+        FIRAnalytics.logEvent(withName: "Tweet about us", parameters: nil)
         let twitterComposer = SLComposeViewController(forServiceType: SLServiceTypeTwitter)
         twitterComposer?.setInitialText("Thank you @MarkCornelisse, I have no more money problems with my friends thanks to your \(productName). #ios #app")
         twitterComposer?.add(URL(string: "https://itunes.apple.com/us/app/we-all-pay/id642135963?ls=1&mt=8"))
@@ -154,16 +155,23 @@ class InfoScreenTableViewController: UITableViewController, MFMailComposeViewCon
     // MARK: MF MAil Compose Delegate
     
     func mailComposeController(_ controller: MFMailComposeViewController, didFinishWith result: MFMailComposeResult, error: Error?) {
-        switch (result.rawValue) {
-        case MFMailComposeResult.cancelled.rawValue:
+        switch (result) {
+        case MFMailComposeResult.cancelled:
+            FIRAnalytics.logEvent(withName: "Feedback email cancelled", parameters: nil)
             dismiss(animated: true, completion: nil)
-        case MFMailComposeResult.saved.rawValue:
+        case MFMailComposeResult.saved:
+            FIRAnalytics.logEvent(withName: "Feedback email saved", parameters: nil)
             dismiss(animated: true, completion: nil)
-        case MFMailComposeResult.sent.rawValue:
+        case MFMailComposeResult.sent:
+            FIRAnalytics.logEvent(withName: "Feedback email send", parameters: nil)
             dismiss(animated: true, completion: nil)
-        default:
+        case MFMailComposeResult.failed:
+            if let error = error {
+                FIRAnalytics.logEvent(withName: "Feedback email failed", parameters: ["error": error as NSError])
+            } else {
+                FIRAnalytics.logEvent(withName: "Feedback email failed", parameters: nil)
+            }
             print("Failed to open mailComposeController")
-            // TODO: Add message to the user.
         }
     }
     

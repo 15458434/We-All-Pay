@@ -6,6 +6,7 @@
 //  Copyright (c) 2014 Mark Cornelisse. All rights reserved.
 //
 
+@import FirebaseAnalytics;
 @import GoogleMobileAds;
 
 #import "MCSharedBillViewController_iPad.h"
@@ -40,6 +41,7 @@
 
 - (IBAction)solveButtonPressed:(id)sender
 {
+    [FIRAnalytics logEventWithName:@"Solve pressed" parameters:nil];
     if (_tonightsBill.peoplePresent.count == 0) {
         NSString *title = NSLocalizedString(@"Add some people first", @"Title for an alert message, because there are no people added to this event.");
         NSString *message = NSLocalizedString(@"You can't add a payment when no people are present. There is no one to split the expenses among.", @"A message to the user thay can't add a payment when they didn't add people to the even.");
@@ -76,6 +78,7 @@
 
 - (IBAction)editButtonPressed:(id)sender
 {
+    
     static BOOL isEditingMode = NO;
     NSArray *myKids = [self childViewControllers];
     for (id kid in myKids) {
@@ -89,9 +92,11 @@
     }
     isEditingMode = !isEditingMode;
     if (isEditingMode) {
+        [FIRAnalytics logEventWithName:@"Edit Pressed" parameters:nil];
         UIBarButtonItem *doneButton = [[UIBarButtonItem alloc] initWithBarButtonSystemItem:UIBarButtonSystemItemDone target:self action:@selector(editButtonPressed:)];
         [[self navigationItem] setRightBarButtonItem:doneButton];
     } else {
+        [FIRAnalytics logEventWithName:@"Done Pressed" parameters:nil];
         UIBarButtonItem *editButton = [[UIBarButtonItem alloc] initWithBarButtonSystemItem:UIBarButtonSystemItemEdit target:self action:@selector(editButtonPressed:)];
         [[self navigationItem] setRightBarButtonItem:editButton];
     }
@@ -99,6 +104,7 @@
 
 - (IBAction)addressBookButtonPressed:(id)sender
 {
+    [FIRAnalytics logEventWithName:@"Contacts pressed" parameters:nil];
     if (!_contactsInserter) {
         _contactsInserter = [[ContactsDataReceiver alloc] initWith:_tonightsBill];
     }
@@ -111,6 +117,7 @@
 
 - (IBAction)addPaymentPressed:(id)sender
 {
+    [FIRAnalytics logEventWithName:@"Add Person pressed" parameters:nil];
     if (_tonightsBill.peoplePresent.count == 0) {
         NSString *title = NSLocalizedString(@"Add some people first", @"Title for an alert message, because there are no people added to this event.");
         NSString *message = NSLocalizedString(@"You can't add a payment when no people are present. There is no one to split the expenses among.", @"A message to the user thay can't add a payment when they didn't add people to the even.");
@@ -222,21 +229,6 @@
         self.worstSalesPitchEverView.autoloadEnabled = NO;
     }
 }
-
-//- (void)openPeoplePicker
-//{
-//    ABPeoplePickerNavigationController *peoplePicker = [[ABPeoplePickerNavigationController alloc] init];
-//    if (!_personReceiver) {
-//        _personReceiver = [[MCAddressBookDataReceiver alloc] initWithViewController:self andDelegate:self];
-//        [_personReceiver setTonightsBill:_tonightsBill];
-//    }
-//    [peoplePicker setPeoplePickerDelegate:_personReceiver];
-//    [peoplePicker setEdgesForExtendedLayout:UIRectEdgeNone];
-//    //    [[peoplePicker viewControllers][0] setEdgesForExtendedLayout:UIRectEdgeNone];
-//    [peoplePicker setModalPresentationStyle:UIModalPresentationFormSheet];
-//    
-//    [[self navigationController] presentViewController:peoplePicker animated:YES completion:nil];
-//}
 
 - (void)showContactsDisabledMessage
 {

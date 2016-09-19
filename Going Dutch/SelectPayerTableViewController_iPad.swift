@@ -9,6 +9,8 @@
 import UIKit
 import CoreData
 
+import FirebaseAnalytics
+
 class SelectPayerTableViewController_iPad: UITableViewController, MCTonightsBillTransfer, MCThisPaymentProtocol {
     // MARK: Properties
     var people: [MCPerson]!
@@ -32,6 +34,7 @@ class SelectPayerTableViewController_iPad: UITableViewController, MCTonightsBill
     }
     
     override func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
+        FIRAnalytics.logEvent(withName: "Select payer", parameters: nil)
         thisPayment.payingPerson = people[(indexPath as NSIndexPath).row]
         dismissMe?()
     }

@@ -115,7 +115,7 @@ typedef NS_ENUM(BOOL, ChildViewOpened) {
 
 - (IBAction)currencySelectionPressed:(id)sender
 {
-    [FIRAnalytics logEventWithName:@"Select Currency Selected" parameters:nil];
+    [FIRAnalytics logEventWithName:@"Open Select Currency" parameters:nil];
 #ifdef DEBUG
     NSLog(@"%@, currencySelectionPressed", self);
 #endif
@@ -176,7 +176,7 @@ typedef NS_ENUM(BOOL, ChildViewOpened) {
 
 - (IBAction)selectCategoryPressed:(id)sender
 {
-    [FIRAnalytics logEventWithName:@"Select Category Pressed" parameters:nil];
+    [FIRAnalytics logEventWithName:@"Open Select Category" parameters:nil];
 }
 
 - (void)storePlaceViewData
@@ -240,6 +240,7 @@ typedef NS_ENUM(BOOL, ChildViewOpened) {
 
 - (void)pickerView:(UIPickerView *)pickerView didSelectRow:(NSInteger)row inComponent:(NSInteger)component
 {
+    
     [_payerNameField setText:[_listOfPeople[row] getFullName]];
     [_thisPayment setPayingPerson:_listOfPeople[row]];
     _payerPicture.image = [_listOfPeople[row] picture];

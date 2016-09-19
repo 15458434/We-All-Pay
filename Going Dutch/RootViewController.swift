@@ -8,7 +8,16 @@
 
 import UIKit
 
+import FirebaseAnalytics
+
 class RootViewController: UIViewController {
+    // MARK: IBActions
+    
+    @IBAction func infoButtonTapped(_ sender: AnyObject)
+    {
+        FIRAnalytics.logEvent(withName: "Open Info Screen", parameters: nil)
+    }
+    
     // MARK: Inherited From Super
     override func viewWillAppear(_ animated: Bool) {
         super.viewWillAppear(animated)

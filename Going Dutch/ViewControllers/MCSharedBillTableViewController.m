@@ -378,6 +378,7 @@
 - (void)tableView:(UITableView *)tableView commitEditingStyle:(UITableViewCellEditingStyle)editingStyle forRowAtIndexPath:(NSIndexPath *)indexPath
 {
     if (editingStyle == UITableViewCellEditingStyleDelete) {
+        [FIRAnalytics logEventWithName:@"Delete payment" parameters:nil];
         MCPayment *toBeDeletedPayment = [_dataController objectAtIndexPath:indexPath];
         [MCPayment deletePayment:toBeDeletedPayment];
         [WhoPayingUserDefaultsStoreInterface sendToUserDefaultsStoreInterface:_tonightsBill];

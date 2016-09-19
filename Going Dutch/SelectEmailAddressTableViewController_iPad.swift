@@ -9,6 +9,8 @@
 
 import UIKit
 
+import FirebaseAnalytics
+
 class SelectEmailAddressTableViewController_iPad: UITableViewController, ThisPersonProtocol, MCDismissMeBlockProtocol {
     // MARK: Properties
     var allEmailAddresses: [MCEmailAddress]!
@@ -29,6 +31,7 @@ class SelectEmailAddressTableViewController_iPad: UITableViewController, ThisPer
     
     // MARK: UI Table View Delegate
     override func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
+        FIRAnalytics.logEvent(withName: "PickedEmailAddress with picker", parameters: nil)
         let newDefaulEmailAddressObject = allEmailAddresses[(indexPath as NSIndexPath).row]
         thisPerson.setNewDefaultEmailaddressObject(newDefaulEmailAddressObject)
         dismissMe!()

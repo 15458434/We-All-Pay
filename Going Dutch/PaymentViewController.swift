@@ -8,7 +8,11 @@
 
 import UIKit
 import CoreData
+
+import FirebaseAnalytics
+
 import WhoPayingUserDefaultsStoreInterface
+
 
 enum DidSomethingChange: Int8 {
     case nothingChanged = 0, somethingChanged
@@ -50,6 +54,7 @@ enum CancelButtonPressed {
     
     // MARK: IB Actions
     @IBAction func mainCancelPressed(_ sender: UIButton) {
+        FIRAnalytics.logEvent(withName: "Main Canncel Pressed", parameters: nil)
         mainCancelIsPressed = .isPressed
         dataController.delegate = nil
         if MCWeAllPayStoreController.defaultStore().mainThreadContext.undoManager?.canUndo == true {
@@ -62,6 +67,7 @@ enum CancelButtonPressed {
     }
     
     @IBAction func mainDonePressed(_ sender: UIButton) {
+        FIRAnalytics.logEvent(withName: "Main Done Pressed", parameters: nil)
         let now = Date()
         tonightsBill.dateModified = now
         MCWeAllPayStoreController.defaultStore().endUndoGroupAndProcess()
@@ -70,6 +76,18 @@ enum CancelButtonPressed {
             WhoPayingUserDefaultsStoreInterface.sendToUserDefaultsStoreInterface(self.tonightsBill)
         })
         dismissMe?()
+    }
+    
+    @IBAction func selectPayerButtonPressed(_ sender: AnyObject) {
+        FIRAnalytics.logEvent(withName: "Select Payer button Pressed", parameters: nil)
+    }
+    
+    @IBAction func categoryButtonPressed(_ sender: AnyObject) {
+        FIRAnalytics.logEvent(withName: "Open Select Category", parameters: nil)
+    }
+    
+    @IBAction func selectCurrencyPressed(_ sender: AnyObject) {
+        FIRAnalytics.logEvent(withName: "Open Select Currency", parameters: nil)
     }
     
     // MARK: New in this class
@@ -164,9 +182,6 @@ enum CancelButtonPressed {
         reloadCategoryImageView()
         setTextForCategoryButton()
         
-//        let sortDescriptor = NSSortDescriptor(key: "person.firstName", ascending: true)
-//        paymentPresenceArray = (thisPayment.peopleSharingPayment as NSSet).sortedArrayUsingDescriptors([sortDescriptor]) as! [MCPaymentPresence]
-        
         if dataController == nil {
             dataController = MCWeAllPayStoreController.defaultStore().paymentPresenceDataController(forDelegate: self) as! NSFetchedResultsController<MCPayment>! as! NSFetchedResultsController<MCPaymentPresence>!
         }
@@ -178,8 +193,6 @@ enum CancelButtonPressed {
         NotificationCenter.default.removeObserver(self)
         dataController = nil
     }
-    
-    
     
     // MARK: DismissKeyboardProtocol
     func dismissTheKeyboard() {
@@ -200,6 +213,15 @@ enum CancelButtonPressed {
         return true
     }
     
+    func textFieldDidBeginEditing(_ textField: UITextField) {
+        if textField == itemField {
+            FIRAnalytics.logEvent(withName: "ItemView didBeginEditing", parameters: nil)
+        }
+        if textField == paidField {
+            FIRAnalytics.logEvent(withName: "PaidView didBeginEditing", parameters: nil)
+        }
+    }
+    
     func textFieldShouldReturn(_ textField: UITextField) -> Bool {
         return true
     }
@@ -212,8 +234,10 @@ enum CancelButtonPressed {
         if mainCancelIsPressed == CancelButtonPressed.notPressed {
             switch textField {
             case itemField:
+                FIRAnalytics.logEvent(withName: "itemView DidEndEditing", parameters: nil)
                 thisPayment.descriptionOfPayment = itemField.text
             case paidField:
+                FIRAnalytics.logEvent(withName: "payerNameField didEndEditing", parameters: nil)
                 let cf = CurrencyFormatter(currencyCode: thisPayment.currency.code)
                 MCWeAllPayStoreController.defaultStore().beginUndoGroupWithoutRegistration()
                 if paidField.text == nil {
@@ -321,6 +345,7 @@ enum CancelButtonPressed {
         
             destination.dismissMe = {
                 destination.dismiss(animated: true, completion: {
+                    FIRAnalytics.logEvent(withName: "Close select payer", parameters: nil)
                     self.reloadPayerView()
                 })
             }
@@ -330,7 +355,8 @@ enum CancelButtonPressed {
             destination.thisPayment = thisPayment
             
             destination.dismissMe = { 
-                destination.dismiss(animated: true, completion: { 
+                destination.dismiss(animated: true, completion: {
+                    FIRAnalytics.logEvent(withName: "Close select currency", parameters: nil)
                     MCWeAllPayStoreController.defaultStore().endUndoGroupAndProcessWithoutRegistration()
                 })
             }
@@ -339,6 +365,7 @@ enum CancelButtonPressed {
             destination.thisPayment = thisPayment
             
             destination.dismissMe = {
+                FIRAnalytics.logEvent(withName: "Close select category", parameters: nil)
                 destination.dismiss(animated: true)
                 self.reloadCategoryImageView()
                 self.setTextForCategoryButton()

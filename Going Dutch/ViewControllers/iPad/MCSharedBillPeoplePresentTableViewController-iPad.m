@@ -6,6 +6,8 @@
 //  Copyright (c) 2014 Mark Cornelisse. All rights reserved.
 //
 
+@import FirebaseAnalytics;
+
 #import "MCSharedBillPeoplePresentTableViewController-iPad.h"
 #import "UIViewController+WeAllPayStore.h"
 
@@ -117,14 +119,6 @@
         [[self tableView] reloadData];
         [self setEmptyMessageNow];
     }
-//    UIManagedDocument *weAllPayDocument = [[MCWeAllPayStoreController defaultStore] weAllPayStoreDocument];
-//    if (![[MCWeAllPayStoreController defaultStore] isDocumentStateNormal]) {
-//        [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(performFetchAndReloadTableView:) name:UIDocumentStateChangedNotification object:weAllPayDocument];
-//    } else {
-//        [self performFetch];
-//        [[self tableView] reloadData];
-//        [self setEmptyMessageNow];
-//    }
 }
 
 - (void)viewDidAppear:(BOOL)animated
@@ -224,7 +218,7 @@
 
 - (void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath
 {
-    NSLog(@"Bazinga");
+    [FIRAnalytics logEventWithName:@"Open person details" parameters:nil];
     [self performSegueWithIdentifier:@"openPerson" sender:self];
 }
 
@@ -273,6 +267,7 @@
 {
     if (editingStyle == UITableViewCellEditingStyleDelete) {
         // Delete the row from the data source
+        [FIRAnalytics logEventWithName:@"Delete Person" parameters:nil];
         [WhoPayingUserDefaultsStoreInterface sendToUserDefaultsStoreInterface:_tonightsBill];
         [MCPerson deletePerson:[_dataController objectAtIndexPath:indexPath]];
         [[MCWeAllPayStoreController defaultStore] saveMainThreadContext];

@@ -6,6 +6,8 @@
 //  Copyright (c) 2014 Mark Cornelisse. All rights reserved.
 //
 
+@import FirebaseAnalytics;
+
 #import "MCAllTripsTableViewController-iPad.h"
 #import "UIViewController+WeAllPayStore.h"
 
@@ -26,6 +28,14 @@
 @end
 
 @implementation MCAllTripsTableViewController_iPad
+
+#pragma mark - IBActions
+
+- (IBAction)newEventPressed:(id)sender
+{
+    [FIRAnalytics logEventWithName:@"New Event" parameters:nil];
+}
+
 
 #pragma mark - New in this class
 
@@ -231,12 +241,14 @@
 {
     return 64;
 }
+*/
 
 - (void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath
 {
-    [self performSegueWithIdentifier:@"openEvent" sender:self];
+    [FIRAnalytics logEventWithName:@"Open Event" parameters:nil];
+//    [self performSegueWithIdentifier:@"openEvent" sender:self];
 }
- */
+
 
 #pragma mark - Table view data source
 
@@ -298,6 +310,7 @@
 - (void)tableView:(UITableView *)tableView commitEditingStyle:(UITableViewCellEditingStyle)editingStyle forRowAtIndexPath:(NSIndexPath *)indexPath
 {
     if (editingStyle == UITableViewCellEditingStyleDelete) {
+        [FIRAnalytics logEventWithName:@"Delete event" parameters:nil];
         // Delete the row from the data source
         MCSharedBill *toBeDeletedTonightsBill = [_dataController objectAtIndexPath:indexPath];
         [WhoPayingUserDefaultsStoreInterface sendInvalidUserDefaultsIfTonightsBillIs:toBeDeletedTonightsBill];

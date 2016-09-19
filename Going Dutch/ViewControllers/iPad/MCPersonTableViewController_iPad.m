@@ -6,6 +6,8 @@
 //  Copyright (c) 2014 Mark Cornelisse. All rights reserved.
 //
 
+@import FirebaseAnalytics;
+
 #import "MCPersonTableViewController_iPad.h"
 
 #import "UINavigationController+KeyboardDismiss.h"
@@ -38,6 +40,7 @@ typedef NS_ENUM(BOOL, MCStatus) {
 
 - (IBAction)mainCancelButtonPressed:(id)sender
 {
+    [FIRAnalytics logEventWithName:@"Main Canncel Pressed" parameters:nil];
     [[self view] resignFirstResponder];
     _mainCancelPressed = cancelIsPressed;
     if ([[[_thisPerson managedObjectContext] undoManager] canUndo]) {
@@ -51,6 +54,7 @@ typedef NS_ENUM(BOOL, MCStatus) {
 
 - (IBAction)mainDoneButtonPressed:(id)sender
 {
+    [FIRAnalytics logEventWithName:@"Main Done Pressed" parameters:nil];
     [[self view] resignFirstResponder];
     if ([MCTools isStringAnEmailAddress:[_emailField text]]) {
         [self dismissFromDone];
@@ -67,18 +71,17 @@ typedef NS_ENUM(BOOL, MCStatus) {
             [[MCWeAllPayStoreController defaultStore] saveMainThreadContext];
         }]];
         [self presentViewController:alertController animated:YES completion:nil];
-        
     }
-    
 }
 
 - (IBAction)selectEmailAddressButtonPressed:(id)sender
 {
-    
+    [FIRAnalytics logEventWithName:@"Select email address pressed" parameters:nil];
 }
 
 - (IBAction)backgroundTappedToDismissKeyboard:(id)sender
 {
+    [FIRAnalytics logEventWithName:@"BackgroundTapped to dismiss keyboard" parameters:nil];
     [self dismissTheKeyboard];
 }
 
@@ -177,7 +180,12 @@ typedef NS_ENUM(BOOL, MCStatus) {
 
 -(void)textFieldDidBeginEditing:(UITextField *)textField
 {
-    if (textField == _emailField) {
+    if (textField == _firstNameField) {
+        [FIRAnalytics logEventWithName:@"firstNameField didBeginEditing" parameters:nil];
+    } else if (textField == _lastNameField) {
+        [FIRAnalytics logEventWithName:@"lastNameField didBeginEditing" parameters:nil];
+    } else if (textField == _emailField) {
+        [FIRAnalytics logEventWithName:@"emailField didBeginEditing" parameters:nil];
         _isEditingEmailField = isEditing;
     }
 }
@@ -206,12 +214,13 @@ typedef NS_ENUM(BOOL, MCStatus) {
     // First check is mainCancel has been pressed. In that case this will be executed after the textField has been dismissed.
     if (_mainCancelPressed == cancelIsNotPressed) {
         if (textField == _firstNameField) {
+            [FIRAnalytics logEventWithName:@"firstNameField didEndEditing" parameters:nil];
             [_thisPerson setFirstName:[textField text]];
-//            didSomethingChange = YES;
         } else if (textField == _lastNameField) {
+            [FIRAnalytics logEventWithName:@"lastNameField didEndEditing" parameters:nil];
             [_thisPerson setLastName:[textField text]];
-//            didSomethingChange = YES;
         } else if (textField == _emailField) {
+            [FIRAnalytics logEventWithName:@"emailField didEndEditing" parameters:nil];
             if (_isNew) {
                 [_thisPerson addOneEmailAddressFromAString:[_emailField text]];
             } else {
@@ -222,7 +231,6 @@ typedef NS_ENUM(BOOL, MCStatus) {
                     [defaultEmail setEmailAddress:[_emailField text]];
                 }
             }
-//            didSomethingChange = YES;
             _isEditingEmailField = isNotEditing;
         }
     }
@@ -304,6 +312,7 @@ typedef NS_ENUM(BOOL, MCStatus) {
         
         if ([destination conformsToProtocol:@protocol(MCDismissMeBlockProtocol)]) {
             [destination setDismissMe:^{
+                [FIRAnalytics logEventWithName:@"dismiss select email address" parameters:nil];
                 if (destination) {
                     [destination dismissViewControllerAnimated:YES completion:^{
                         [_emailField setText:[_thisPerson defaultEmailAddress]];

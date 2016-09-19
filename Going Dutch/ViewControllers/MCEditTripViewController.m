@@ -415,6 +415,7 @@
 - (void)tableView:(UITableView *)tableView commitEditingStyle:(UITableViewCellEditingStyle)editingStyle forRowAtIndexPath:(NSIndexPath *)indexPath
 {
     if (editingStyle == UITableViewCellEditingStyleDelete) {
+        [FIRAnalytics logEventWithName:@"Delete Person" parameters:nil];
         MCPerson *removablePerson = [_dataController objectAtIndexPath:indexPath];
         [_tonightsBill deletePerson:removablePerson];
         [[MCWeAllPayStoreController defaultStore] saveMainThreadContext];
