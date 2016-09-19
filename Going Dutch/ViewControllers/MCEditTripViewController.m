@@ -269,23 +269,6 @@
     [[self tableView] reloadData];
 }
 
-#pragma mark - MCAddressBookReceiverDelegate
-
-- (BOOL) isNewPersonFromAddressBookAlreadyPresent:(MCPerson *)newPerson
-{
-    return NO;
-}
-
-- (MCPerson *)personRecordToUse
-{
-    return nil;
-}
-
-- (void)receiveANewPersonFromAddressBook:(MCPerson *)newPerson
-{
-    didSomethingChange = YES;
-}
-
 #pragma mark - UITextFieldDelegate
 
 - (BOOL)textFieldShouldReturn:(UITextField *)textField
