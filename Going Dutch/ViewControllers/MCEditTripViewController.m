@@ -79,23 +79,6 @@
 
 #pragma mark - new in this class.
 
-- (void)showContactsDisabledMessage
-{
-    NSString *title = NSLocalizedString(@"Access to contacts denied", @"Message to the user when access to the Contacts is denied by the user");
-    NSString *message = NSLocalizedString(@"Go to your settings app and allow We all pay to access your contact data", @"Instructions for the user to go to the settings application and change the privacy settings for We all pay.");
-    NSString *cancelButtonTitle = NSLocalizedString(@"Dismiss", @"Dismiss");
-    NSString *settingsButtonTitle = NSLocalizedString(@"Go to settings", @"Title for a button that directs the user to the settings application.");
-    UIAlertController *alertController = [UIAlertController alertControllerWithTitle:title message:message preferredStyle:UIAlertControllerStyleAlert];
-    UIAlertAction *cancelAction = [UIAlertAction actionWithTitle:cancelButtonTitle style:UIAlertActionStyleCancel handler:nil];
-    UIAlertAction *settingsAction = [UIAlertAction actionWithTitle:settingsButtonTitle style:UIAlertActionStyleDefault handler:^(UIAlertAction * _Nonnull action) {
-        NSURL *settingsAppURL = [NSURL URLWithString:UIApplicationOpenSettingsURLString];
-        [[UIApplication sharedApplication] openURL:settingsAppURL];
-    }];
-    [alertController addAction:cancelAction];
-    [alertController addAction:settingsAction];
-    [self presentViewController:alertController animated:YES completion:nil];
-}
-
 - (void)performFetch
 {
     NSError *error;
