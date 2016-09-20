@@ -8,6 +8,7 @@
 
 @import Firebase;
 @import FirebaseAnalytics;
+@import FirebaseAppIndexing;
 
 #import "MCAppDelegate.h"
 #import "MCAllTripsTableViewController.h"
@@ -34,10 +35,11 @@
 
 #pragma mark - New in this class
 
-- (void)activateAnalytics
+- (void)activateFirebase
 {
 #ifndef DEBUG
     [FIRApp configure];
+    [[FIRAppIndexing sharedInstance] registerApp:642135963];
 #endif
     _launchCounter = [[MCLaunchCounter alloc] init];
     [_launchCounter increment];
@@ -194,7 +196,7 @@
         [[MCWeAllPayStoreController defaultStore] openStore:nil];
     });
     [[MCStoreInterface defaultStoreInterface] validateProductIdentifiers];
-    [self activateAnalytics];
+    [self activateFirebase];
     
     return YES;
 }
