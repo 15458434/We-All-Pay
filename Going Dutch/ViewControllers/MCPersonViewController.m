@@ -51,8 +51,6 @@ typedef NS_ENUM(BOOL, MCStatus) {
 @property (nonatomic) BOOL thisPersonHasPaidSomething;
 @property (nonatomic) BOOL mainCancelPressed;
 
-
-
 @end
 
 @implementation MCPersonViewController

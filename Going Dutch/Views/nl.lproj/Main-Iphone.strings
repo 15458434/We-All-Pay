@@ -1,6 +1,9 @@
 /* Class = "UITextField"; placeholder = "e-mail address"; ObjectID = "4YY-Cv-Jxg"; */
 "4YY-Cv-Jxg.placeholder" = "e-mailadres";
 
+/* Class = "UILabel"; text = "some person"; ObjectID = "6uD-Ru-yqC"; */
+"6uD-Ru-yqC.text" = "een persoon";
+
 /* Class = "UITextField"; placeholder = "Activity name"; ObjectID = "BJS-wA-qlM"; */
 "BJS-wA-qlM.placeholder" = "naam van de rekening";
 
@@ -12,6 +15,9 @@
 
 /* Class = "UITextField"; placeholder = "Who paid?"; ObjectID = "Gtj-b7-bzJ"; */
 "Gtj-b7-bzJ.placeholder" = "Wie heeft er betaald?";
+
+/* Class = "UIButton"; normalTitle = "Category"; ObjectID = "HOP-tV-JuG"; */
+"HOP-tV-JuG.normalTitle" = "Categorie";
 
 /* Class = "UIButton"; normalTitle = "Select email address"; ObjectID = "Iac-jb-ETA"; */
 "Iac-jb-ETA.normalTitle" = "Selecteer emailadres";

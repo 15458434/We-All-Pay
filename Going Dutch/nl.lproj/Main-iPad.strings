@@ -49,6 +49,9 @@
 /* Class = "UILabel"; text = "People sharing this payment"; ObjectID = "Lbm-k4-s3a"; */
 "Lbm-k4-s3a.text" = "Aanwezigen die deze betaling delen";
 
+/* Class = "UIButton"; normalTitle = "Category"; ObjectID = "LnO-mX-ELw"; */
+"LnO-mX-ELw.normalTitle" = "Categorie";
+
 /* Class = "UILabel"; text = "emailLabel"; ObjectID = "MCZ-yM-Hrf"; */
 "MCZ-yM-Hrf.text" = "emailLabel";
 
@@ -100,6 +103,9 @@
 /* Class = "UILabel"; text = "extraLabel"; ObjectID = "hKu-l5-7vA"; */
 "hKu-l5-7vA.text" = "extraLabel";
 
+/* Class = "UIButton"; normalTitle = "Select payer"; ObjectID = "hi9-hq-PS5"; */
+"hi9-hq-PS5.normalTitle" = "Selecteer betaler";
+
 /* Class = "UITextField"; placeholder = "first name"; ObjectID = "nPF-0g-HeJ"; */
 "nPF-0g-HeJ.placeholder" = "Voornaam";
 
@@ -111,6 +117,9 @@
 
 /* Class = "UILabel"; text = "Label"; ObjectID = "rt5-oo-0IR"; */
 "rt5-oo-0IR.text" = "Label";
+
+/* Class = "UILabel"; text = "Symbol"; ObjectID = "szY-aN-Vq8"; */
+"szY-aN-Vq8.text" = "Symbool";
 
 /* Class = "UILabel"; text = "full name"; ObjectID = "vSV-5M-Ipk"; */
 "vSV-5M-Ipk.text" = "Volledige naam";
