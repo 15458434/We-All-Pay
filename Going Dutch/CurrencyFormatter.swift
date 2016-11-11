@@ -27,7 +27,7 @@ class CurrencyFormatter: Formatter {
             return moneyNumber
         } else {
             if moneyErrorString != nil {
-                print(moneyErrorString)
+                print(moneyErrorString!)
             }
             return nil
         }
