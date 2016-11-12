@@ -12,7 +12,6 @@
 
 @interface MCCurrency (addons)
 
-+ (MCCurrency *) getCurrencySelectedInCurrentLocaleFromContext:(NSManagedObjectContext *)context __deprecated;
 + (MCCurrency *)generateCurrencyFromSelectedLocaleForContext:(NSManagedObjectContext *)context;
 + (void) addAllAvailableCurrenciesToContext:(NSManagedObjectContext *)context;
 

@@ -39,7 +39,7 @@
     [super tearDown];
 }
 
-- (void)testGetCurrencySelectedInCurrentLocaleFromContext
+- (void)testGenerateCurrencyFromSelectedLocaleForContext
 {
     MCCurrency *selectedCurrency = [MCCurrency generateCurrencyFromSelectedLocaleForContext:_context];
     NSString *currencyCode = [[NSLocale currentLocale] objectForKey:NSLocaleCurrencyCode];
