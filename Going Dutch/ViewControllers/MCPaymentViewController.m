@@ -628,10 +628,9 @@ typedef NS_ENUM(BOOL, ChildViewOpened) {
          NSLog(@"%@, prepareForSegue openSelectCurrency", self);
 #endif
          _selectCurrencyTableViewController = isOpened;
-         id destination = [[segue destinationViewController] viewControllers][0];
-         if ([destination conformsToProtocol:@protocol(MCThisPaymentProtocol)]) {
-             [destination setThisPayment:_thisPayment];
-         }
+         UINavigationController *navController = (UINavigationController *)segue.destinationViewController;
+         SelectCurrencyTableViewController *selectCurrencyViewController = (SelectCurrencyTableViewController *)navController.viewControllers.firstObject;
+         selectCurrencyViewController.currencyUpdateModel = [[PaymentUpdateCurrencyModel alloc] initWith:_thisPayment];
      }
      if ([[segue identifier] isEqualToString:@"selectCategory"]) {
          id destination = [[segue destinationViewController] viewControllers][0];
