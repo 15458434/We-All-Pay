@@ -36,6 +36,8 @@ typedef NS_ENUM(BOOL, MCTonightsBillStatus) {
 
 @property (nonatomic) BOOL isEmptyMessageShownInstantForFirstBoot;
 
+@property (nonatomic, strong) NSIndexPath *selectedIndexPathForAction;
+
 @end
 
 @implementation MCAllTripsTableViewController
@@ -111,6 +113,14 @@ typedef NS_ENUM(BOOL, MCTonightsBillStatus) {
         activity.requiredUserInfoKeys = [[NSSet alloc] init];
         self.userActivity = activity;
     }
+}
+
+- (void)deleteBillAtIndexpath:(NSIndexPath *)indexPath {
+    MCSharedBill *toBeDeleteSharedBill = [_dataController objectAtIndexPath:indexPath];
+    
+    [WhoPayingUserDefaultsStoreInterface sendInvalidUserDefaultsIfTonightsBillIs:toBeDeleteSharedBill];
+    [MCSharedBill deleteSharedbill:toBeDeleteSharedBill];
+    [[MCWeAllPayStoreController defaultStore] saveMainThreadContext];
 }
 
 #pragma mark - UIViewController
@@ -324,11 +334,7 @@ typedef NS_ENUM(BOOL, MCTonightsBillStatus) {
 - (void)tableView:(UITableView *)tableView commitEditingStyle:(UITableViewCellEditingStyle)editingStyle forRowAtIndexPath:(NSIndexPath *)indexPath
 {
     if (editingStyle == UITableViewCellEditingStyleDelete) {
-        MCSharedBill *toBeDeleteSharedBill = [_dataController objectAtIndexPath:indexPath];
-
-        [WhoPayingUserDefaultsStoreInterface sendInvalidUserDefaultsIfTonightsBillIs:toBeDeleteSharedBill];
-        [MCSharedBill deleteSharedbill:toBeDeleteSharedBill];
-        [[MCWeAllPayStoreController defaultStore] saveMainThreadContext];
+        [self deleteBillAtIndexpath:indexPath];
     }
 }
 
@@ -359,6 +365,28 @@ typedef NS_ENUM(BOOL, MCTonightsBillStatus) {
 - (CGFloat)tableView:(UITableView *)tableView heightForRowAtIndexPath:(NSIndexPath *)indexPath
 {
     return 64;
+}
+
+- (NSArray<UITableViewRowAction *> *)tableView:(UITableView *)tableView editActionsForRowAtIndexPath:(NSIndexPath *)indexPath {
+    // Delete action
+    NSString *deleteTitle = NSLocalizedString(@"Delete", @"Text on a delete button");
+    UITableViewRowAction *deleteAction = [UITableViewRowAction rowActionWithStyle:UITableViewRowActionStyleDestructive title:deleteTitle handler:^(UITableViewRowAction * _Nonnull action, NSIndexPath * _Nonnull indexPath) {
+#ifdef DEBUG
+        NSLog(@"Delete action pressed");
+#endif
+        [self deleteBillAtIndexpath:indexPath];
+    }];
+    // Change MainCurrency action
+    NSString *selectMainCurrencyTitle = NSLocalizedString(@"€$£¥", @"Text on a button to select a different currency");
+    UITableViewRowAction *selectCurrencyAction = [UITableViewRowAction rowActionWithStyle:UITableViewRowActionStyleNormal title:selectMainCurrencyTitle handler:^(UITableViewRowAction * _Nonnull action, NSIndexPath * _Nonnull indexPath) {
+#ifdef DEBUG
+        NSLog(@"Change currency pressed");
+#endif
+        // Open currency picker in mainCurrency mode
+        [self performSegueWithIdentifier:@"selectMainCurrency" sender:self];
+        self.selectedIndexPathForAction = indexPath;
+    }];
+    return @[deleteAction, selectCurrencyAction];
 }
 
 #pragma mark - UIStoryboard
@@ -397,6 +425,12 @@ typedef NS_ENUM(BOOL, MCTonightsBillStatus) {
         if ([[segue destinationViewController] conformsToProtocol:@protocol(MCPathComponentsToOpenProtocol) ]) {
             [[segue destinationViewController] setPathComponentsToOpen:sender];
         }
+    }
+    if ([[segue identifier] isEqualToString:@"selectMainCurrency"]) {
+        MCSharedBill *theBill = _dataController.fetchedObjects[_selectedIndexPathForAction.row];
+        UINavigationController *navController = (UINavigationController *)segue.destinationViewController;
+        SelectCurrencyTableViewController *currencySelector = (SelectCurrencyTableViewController *)navController.viewControllers.firstObject;
+        currencySelector.currencyUpdateModel = [[EventUpdateCurrencyModel alloc] initWith:theBill];
     }
 }
 
