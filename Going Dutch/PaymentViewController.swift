@@ -352,7 +352,7 @@ enum CancelButtonPressed {
         case let identifier where identifier == "openSelectCurrency_iPad":
             MCWeAllPayStoreController.defaultStore().beginUndoGroupWithoutRegistration()
             let destination = segue.destination as! SelectCurrencyTableViewController
-            destination.thisPayment = thisPayment
+            destination.currencyUpdateModel = PaymentUpdateCurrencyModel(with: thisPayment)
             
             destination.dismissMe = { 
                 destination.dismiss(animated: true, completion: {
