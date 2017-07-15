@@ -13,11 +13,11 @@ import FirebaseAnalytics
 
 import CurrencyConverter
 
-class SelectCurrencyTableViewController: UITableViewController, UISearchResultsUpdating, MCThisPaymentProtocol {
+class SelectCurrencyTableViewController: UITableViewController, UISearchResultsUpdating {
     // MARK: Properties
     var searchController = UISearchController(searchResultsController: nil)
     
-    var thisPayment: MCPayment!
+    var currencyUpdateModel: CurrencyUpdateModel!
     
     var recentUsedForeignCurrencies: [MCCurrency]!
     
@@ -98,7 +98,7 @@ class SelectCurrencyTableViewController: UITableViewController, UISearchResultsU
         
         searchController.searchBar.sizeToFit()
         
-        self.recentUsedForeignCurrencies = thisPayment!.onWhichBill.recentUsedForeignCurrencies(5) ?? [MCCurrency]()
+        self.recentUsedForeignCurrencies = currencyUpdateModel.recentSelectedCurrencies
     }
     
     // MARK: UI Search Results Updating
@@ -135,15 +135,7 @@ class SelectCurrencyTableViewController: UITableViewController, UISearchResultsU
         let thisCellsCurrency = data(indexPath: indexPath)
         FIRAnalytics.logEvent(withName: "didSelectCurrency pressed", parameters: nil)
         
-        let mainThreadContext = MCWeAllPayStoreController.defaultStore().mainThreadContext
-        let newCurrency = MCCurrency(from: thisCellsCurrency.code, from: mainThreadContext)
-        let oldCurrency = thisPayment.currency
-        thisPayment.currency = newCurrency
-        if oldCurrency?.sharedBill.count == 0 && oldCurrency?.payment.count == 0 {
-            mainThreadContext?.delete(oldCurrency!)
-        }
-        
-        thisPayment.setNewCurrencyAndAutomaticallyUpdateExchangeRate(newCurrency) { (error) -> Void in
+        currencyUpdateModel.updateCurrency(with: thisCellsCurrency.code) { (error) in
             if (error != nil) {
                 Swift.debugPrint("Error fetching ExchangeRate: \(error!)")
                 
@@ -157,7 +149,6 @@ class SelectCurrencyTableViewController: UITableViewController, UISearchResultsU
                 
                 myPresenter?.present(alertController, animated: true, completion: nil)
             }
-            
         }
         
         if let dismissMe = dismissMe {
@@ -250,7 +241,7 @@ class SelectCurrencyTableViewController: UITableViewController, UISearchResultsU
         cell.currencyNameLabel.text = thisCellsCurrency.name
         cell.currencySymbolLabel.text = thisCellsCurrency.symbol
         
-        if thisPayment.currency.code == thisCellsCurrency.code {
+        if currencyUpdateModel.currencyCode == thisCellsCurrency.code {
             cell.accessoryType = UITableViewCellAccessoryType.checkmark
         } else {
             cell.accessoryType = UITableViewCellAccessoryType.none
@@ -279,5 +270,65 @@ extension SelectCurrencyTableViewController: UISearchBarDelegate {
     
     func searchBarCancelButtonClicked(_ searchBar: UISearchBar) {
         FIRAnalytics.logEvent(withName: "Cancel pressed", parameters: nil)
+    }
+}
+
+@objc protocol CurrencyUpdateModel {
+    var currencyCode: String { get }
+    func updateCurrency(with code: String, with completion: @escaping ((_ error: Error?) -> Void))
+    var recentSelectedCurrencies: [MCCurrency] { get }
+}
+
+class EventUpdateCurrencyModel: NSObject, CurrencyUpdateModel {
+    let event: MCSharedBill
+    
+    init(with event: MCSharedBill) {
+        self.event = event
+        super.init()
+    }
+    
+    // MARK: CurrencyUpdateModel
+    
+    var currencyCode: String {
+        return self.event.mainCurrency.code
+    }
+    
+    func updateCurrency(with code: String, with completion: @escaping ((Error?) -> Void)) {
+        self.event.updateMainCurrency(fromCode: code, withCompletion: completion)
+    }
+    
+    var recentSelectedCurrencies: [MCCurrency] {
+        return event.recentUsedForeignCurrencies(5) ?? [MCCurrency]()
+    }
+}
+
+class PaymentUpdateCurrencyModel: NSObject, CurrencyUpdateModel {
+    let payment: MCPayment
+    
+    init(with payment: MCPayment) {
+        self.payment = payment
+        super.init()
+    }
+    
+    // MARK: CurrencyUpdateModel
+    
+    var currencyCode: String {
+        return self.payment.currency.code
+    }
+    
+    func updateCurrency(with code: String, with completion: @escaping ((Error?) -> Void)) {
+        let mainThreadContext = MCWeAllPayStoreController.defaultStore().mainThreadContext
+        let newCurrency = MCCurrency(from: code, from: mainThreadContext)
+        let oldCurrency = payment.currency
+        payment.currency = newCurrency
+        if oldCurrency?.sharedBill.count == 0 && oldCurrency?.payment.count == 0 {
+            mainThreadContext?.delete(oldCurrency!)
+        }
+        
+        payment.setNewCurrencyAndAutomaticallyUpdateExchangeRate(newCurrency, withCompletionHandler: completion)
+    }
+    
+    var recentSelectedCurrencies: [MCCurrency] {
+        return payment.onWhichBill.recentUsedForeignCurrencies(5) ?? [MCCurrency]()
     }
 }
