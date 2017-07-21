@@ -456,11 +456,16 @@
 }
 
 - (void)updateMainCurrencyFromCode:(NSString *)code withCompletion:(void (^)(NSError *error))completion {
-    self.mainCurrency = [MCCurrency currencyFrom:code fromContext:self.managedObjectContext];
+    MCCurrency *newMainCurrency = [MCCurrency currencyFrom:code fromContext:self.managedObjectContext];
+    self.mainCurrency = newMainCurrency;
+    NSArray<MCExchangeRate *> *allExchangeRates = [self fetchAllExchangeRatesWithError:nil];
+    [allExchangeRates enumerateObjectsUsingBlock:^(MCExchangeRate * _Nonnull obj, NSUInteger idx, BOOL * _Nonnull stop) {
+        obj.toCurrency = newMainCurrency;
+    }];
     [self updateAllExchangeRatesWithCompletionHandler:completion];
 }
 
-- (void)updateAllExchangeRatesWithCompletionHandler:(void (^)(NSError *error))completion {
+- (NSArray<MCExchangeRate *> *)fetchAllExchangeRatesWithError:(NSError **)error {
     NSFetchRequest *request = [[NSFetchRequest alloc] initWithEntityName:@"MCExchangeRate"];
     request.sortDescriptors = @[[NSSortDescriptor sortDescriptorWithKey:@"dateCreated" ascending:YES]];
     request.predicate = [NSPredicate predicateWithFormat:@"payment.onWhichBill = %@", self];
@@ -468,7 +473,19 @@
     NSError *fetchError;
     NSArray<MCExchangeRate *> *arrayOfAllExchangeRates = [[self managedObjectContext] executeFetchRequest:request error:&fetchError];
     if (fetchError) {
+        *error = fetchError;
         NSLog(@"Something went wrong fetching all ExchangeRates on this bill: %@", fetchError.localizedDescription);
+        return nil;
+    }
+    
+    return arrayOfAllExchangeRates;
+}
+
+- (void)updateAllExchangeRatesWithCompletionHandler:(void (^)(NSError *error))completion {
+    NSError *fetchError;
+    NSArray<MCExchangeRate *> *arrayOfAllExchangeRates = [self fetchAllExchangeRatesWithError:&fetchError];
+    if (fetchError) {
+        NSLog(@"Something went wrong fetching all ExchangeRates on this bill: %@", fetchError);
         completion(fetchError);
         return;
     }
