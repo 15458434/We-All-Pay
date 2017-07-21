@@ -25,6 +25,8 @@
 
 @property (nonatomic) BOOL isEmptyMessageShownInstantForFirstBoot;
 
+@property (nonatomic, strong) NSIndexPath *selectedIndexPathForAction;
+
 @end
 
 @implementation MCAllTripsTableViewController_iPad
@@ -96,6 +98,14 @@
         activity.requiredUserInfoKeys = [[NSSet alloc] init];
         self.userActivity = activity;
     }
+}
+
+- (void)deleteBillAtIndexpath:(NSIndexPath *)indexPath {
+    MCSharedBill *toBeDeleteSharedBill = [_dataController objectAtIndexPath:indexPath];
+    
+    [WhoPayingUserDefaultsStoreInterface sendInvalidUserDefaultsIfTonightsBillIs:toBeDeleteSharedBill];
+    [MCSharedBill deleteSharedbill:toBeDeleteSharedBill];
+    [[MCWeAllPayStoreController defaultStore] saveMainThreadContext];
 }
 
 #pragma mark - Inherited from super
@@ -249,6 +259,27 @@
 //    [self performSegueWithIdentifier:@"openEvent" sender:self];
 }
 
+- (NSArray<UITableViewRowAction *> *)tableView:(UITableView *)tableView editActionsForRowAtIndexPath:(NSIndexPath *)indexPath {
+    // Delete action
+    NSString *deleteTitle = NSLocalizedString(@"Delete", @"Text on a delete button");
+    UITableViewRowAction *deleteAction = [UITableViewRowAction rowActionWithStyle:UITableViewRowActionStyleDestructive title:deleteTitle handler:^(UITableViewRowAction * _Nonnull action, NSIndexPath * _Nonnull indexPath) {
+#ifdef DEBUG
+        NSLog(@"Delete action pressed");
+#endif
+        [self deleteBillAtIndexpath:indexPath];
+    }];
+    // Change MainCurrency action
+    NSString *selectMainCurrencyTitle = NSLocalizedString(@"€$£¥", @"Text on a button to select a different currency");
+    UITableViewRowAction *selectCurrencyAction = [UITableViewRowAction rowActionWithStyle:UITableViewRowActionStyleNormal title:selectMainCurrencyTitle handler:^(UITableViewRowAction * _Nonnull action, NSIndexPath * _Nonnull indexPath) {
+#ifdef DEBUG
+        NSLog(@"Change currency pressed");
+#endif
+        // Open currency picker in mainCurrency mode
+        [self performSegueWithIdentifier:@"selectMainCurrency" sender:self];
+        self.selectedIndexPathForAction = indexPath;
+    }];
+    return @[deleteAction, selectCurrencyAction];
+}
 
 #pragma mark - Table view data source
 
@@ -312,10 +343,7 @@
     if (editingStyle == UITableViewCellEditingStyleDelete) {
         [FIRAnalytics logEventWithName:@"Delete event" parameters:nil];
         // Delete the row from the data source
-        MCSharedBill *toBeDeletedTonightsBill = [_dataController objectAtIndexPath:indexPath];
-        [WhoPayingUserDefaultsStoreInterface sendInvalidUserDefaultsIfTonightsBillIs:toBeDeletedTonightsBill];
-        [MCSharedBill deleteSharedbill:toBeDeletedTonightsBill];
-        [[MCWeAllPayStoreController defaultStore] saveMainThreadContext];
+        [self deleteBillAtIndexpath:indexPath];
     } else if (editingStyle == UITableViewCellEditingStyleInsert) {
         // Create a new instance of the appropriate class, insert it into the array, and add a new row to the table view
     }   
@@ -344,6 +372,14 @@
 {
     // Get the new view controller using [segue destinationViewController].
     // Pass the selected object to the new view controller.
+    
+    if ([[segue identifier] isEqualToString:@"selectMainCurrency"]) {
+        MCSharedBill *theBill = _dataController.fetchedObjects[_selectedIndexPathForAction.row];
+        UINavigationController *navController = (UINavigationController *)segue.destinationViewController;
+        SelectCurrencyTableViewController *currencySelector = (SelectCurrencyTableViewController *)navController.viewControllers.firstObject;
+        currencySelector.currencyUpdateModel = [[EventUpdateCurrencyModel alloc] initWith:theBill];
+        return;
+    }
     
     MCSharedBill *theBill;
     NSIndexPath *indexPathOfSelectedRow = [[self tableView] indexPathForSelectedRow];
