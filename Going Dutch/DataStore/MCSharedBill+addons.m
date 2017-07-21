@@ -455,6 +455,39 @@
     }
 }
 
+- (void)updateMainCurrencyFromCode:(NSString *)code withCompletion:(void (^)(NSError *error))completion {
+    self.mainCurrency = [MCCurrency currencyFrom:code fromContext:self.managedObjectContext];
+    [self updateAllExchangeRatesWithCompletionHandler:completion];
+}
+
+- (void)updateAllExchangeRatesWithCompletionHandler:(void (^)(NSError *error))completion {
+    NSFetchRequest *request = [[NSFetchRequest alloc] initWithEntityName:@"MCExchangeRate"];
+    request.sortDescriptors = @[[NSSortDescriptor sortDescriptorWithKey:@"dateCreated" ascending:YES]];
+    request.predicate = [NSPredicate predicateWithFormat:@"payment.onWhichBill = %@", self];
+    
+    NSError *fetchError;
+    NSArray<MCExchangeRate *> *arrayOfAllExchangeRates = [[self managedObjectContext] executeFetchRequest:request error:&fetchError];
+    if (fetchError) {
+        NSLog(@"Something went wrong fetching all ExchangeRates on this bill: %@", fetchError.localizedDescription);
+        completion(fetchError);
+        return;
+    }
+    
+    [arrayOfAllExchangeRates enumerateObjectsUsingBlock:^(MCExchangeRate * _Nonnull obj, NSUInteger idx, BOOL * _Nonnull stop) {
+        obj.status = @(MCExchangeRateStatusInvalid);
+    }];
+    
+    NSError *saveError;
+    [[self managedObjectContext] save:&saveError];
+    if (saveError) {
+        @throw [NSException exceptionWithName:NSInternalInconsistencyException reason:@"Error saving arrayOfAllExchangeRates" userInfo:@{@"saved Array": arrayOfAllExchangeRates}];
+    }
+    
+    [self updateInvalidExchangeRatesWithHandler:^(NSArray *results, NSError *error) {
+        completion(error);
+    }];
+}
+
 - (void)updateInvalidExchangeRatesWithHandler:(void (^)(NSArray *results, NSError *error))completion
 {
     // Fetch all exchangeRates that are invalid.
