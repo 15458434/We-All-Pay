@@ -6,6 +6,8 @@
 //  Copyright (c) 2013 Mark Cornelisse. All rights reserved.
 //
 
+@import FirebaseAnalytics;
+
 #import "MCAllTripsTableViewController.h"
 #import "MCSharedBillTableViewController.h"
 #import "MCPaymentViewController.h"
@@ -34,11 +36,23 @@ typedef NS_ENUM(BOOL, MCTonightsBillStatus) {
 
 @property (nonatomic) BOOL isEmptyMessageShownInstantForFirstBoot;
 
+@property (nonatomic, strong) NSIndexPath *selectedIndexPathForAction;
+
 @end
 
 @implementation MCAllTripsTableViewController
 
 #pragma mark - Actions
+
+- (IBAction)newEventPressed:(id)sender
+{
+    [FIRAnalytics logEventWithName:@"New Event" parameters:nil];
+}
+
+- (IBAction)iButtonPressed:(id)sender
+{
+    [FIRAnalytics logEventWithName:@"Open Info Screen" parameters:nil];
+}
 
 #pragma mark - New in this class.
 
@@ -76,17 +90,6 @@ typedef NS_ENUM(BOOL, MCTonightsBillStatus) {
     }
 }
 
-- (void)performFetchAndReloadTableView:(NSNotification *)notification
-{
-    UIManagedDocument *weAllPayDocument = [[MCWeAllPayStoreController defaultStore] weAllPayStoreDocument];
-    if ([weAllPayDocument documentState] == UIDocumentStateNormal) {
-        [self performFetch];
-        [[self tableView] reloadData];
-        [[NSNotificationCenter defaultCenter] removeObserver:self];
-        [self setEmptyMessageNow];
-    }
-}
-
 - (void)performFetch
 {
     NSError *error;
@@ -110,6 +113,14 @@ typedef NS_ENUM(BOOL, MCTonightsBillStatus) {
         activity.requiredUserInfoKeys = [[NSSet alloc] init];
         self.userActivity = activity;
     }
+}
+
+- (void)deleteBillAtIndexpath:(NSIndexPath *)indexPath {
+    MCSharedBill *toBeDeleteSharedBill = [_dataController objectAtIndexPath:indexPath];
+    
+    [WhoPayingUserDefaultsStoreInterface sendInvalidUserDefaultsIfTonightsBillIs:toBeDeleteSharedBill];
+    [MCSharedBill deleteSharedbill:toBeDeleteSharedBill];
+    [[MCWeAllPayStoreController defaultStore] saveMainThreadContext];
 }
 
 #pragma mark - UIViewController
@@ -278,7 +289,7 @@ typedef NS_ENUM(BOOL, MCTonightsBillStatus) {
     MCAllTripsTableViewCell *allTripsTableViewCell = [tableView dequeueReusableCellWithIdentifier:@"MCAllTripsTableViewCell"];
     
     if (![thisTrip tripName]) {
-        [[allTripsTableViewCell tripLabel] setText:@"..."];
+        [[allTripsTableViewCell tripLabel] setText:NSLocalizedString(@"...", @"String that shows empty string")];
     } else {
         [[allTripsTableViewCell tripLabel] setText:[thisTrip tripName]];
     }
@@ -286,13 +297,13 @@ typedef NS_ENUM(BOOL, MCTonightsBillStatus) {
 
     if ([thisTrip areAllExchangeRatesValid]) {
         CurrencyFormatter *cf = [[CurrencyFormatter alloc] initWithCurrencyCode:thisTrip.mainCurrency.code];
-        NSString *moneyString = [cf stringForObjectValue:[thisTrip totalSumOfMoneyOfThisSharedBill]];
+        NSString *moneyString = [cf stringFor:[thisTrip totalSumOfMoneyOfThisSharedBill]];
         [[allTripsTableViewCell totalCostLabel] setHidden:NO];
         [[allTripsTableViewCell waitingForXRatesIndicator] stopAnimating];
         [[allTripsTableViewCell totalCostLabel] setText:moneyString];
     } else {
         CurrencyFormatter *cf = [[CurrencyFormatter alloc] initWithCurrencyCode:thisTrip.mainCurrency.code];
-        NSString *moneyString = [cf stringForObjectValue:[thisTrip totalSumOfMoneyOfThisSharedBill]];
+        NSString *moneyString = [cf stringFor:[thisTrip totalSumOfMoneyOfThisSharedBill]];
         [[allTripsTableViewCell totalCostLabel] setText:moneyString];
         [[allTripsTableViewCell totalCostLabel] setHidden:YES];
         [[allTripsTableViewCell waitingForXRatesIndicator] startAnimating];
@@ -323,12 +334,14 @@ typedef NS_ENUM(BOOL, MCTonightsBillStatus) {
 - (void)tableView:(UITableView *)tableView commitEditingStyle:(UITableViewCellEditingStyle)editingStyle forRowAtIndexPath:(NSIndexPath *)indexPath
 {
     if (editingStyle == UITableViewCellEditingStyleDelete) {
-        MCSharedBill *toBeDeleteSharedBill = [_dataController objectAtIndexPath:indexPath];
-
-        [WhoPayingUserDefaultsStoreInterface sendInvalidUserDefaultsIfTonightsBillIs:toBeDeleteSharedBill];
-        [MCSharedBill deleteSharedbill:toBeDeleteSharedBill];
-        [[MCWeAllPayStoreController defaultStore] saveMainThreadContext];
+        [self deleteBillAtIndexpath:indexPath];
     }
+}
+
+- (void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath
+{
+    MCSharedBill *selectedEvent = [_dataController objectAtIndexPath:indexPath];
+    [FIRAnalytics logEventWithName:@"Open event" parameters:@{@"Event name": selectedEvent.tripName}];
 }
 
 /*
@@ -352,6 +365,28 @@ typedef NS_ENUM(BOOL, MCTonightsBillStatus) {
 - (CGFloat)tableView:(UITableView *)tableView heightForRowAtIndexPath:(NSIndexPath *)indexPath
 {
     return 64;
+}
+
+- (NSArray<UITableViewRowAction *> *)tableView:(UITableView *)tableView editActionsForRowAtIndexPath:(NSIndexPath *)indexPath {
+    // Delete action
+    NSString *deleteTitle = NSLocalizedString(@"Delete", @"Text on a delete button");
+    UITableViewRowAction *deleteAction = [UITableViewRowAction rowActionWithStyle:UITableViewRowActionStyleDestructive title:deleteTitle handler:^(UITableViewRowAction * _Nonnull action, NSIndexPath * _Nonnull indexPath) {
+#ifdef DEBUG
+        NSLog(@"Delete action pressed");
+#endif
+        [self deleteBillAtIndexpath:indexPath];
+    }];
+    // Change MainCurrency action
+    NSString *selectMainCurrencyTitle = NSLocalizedString(@"€$£¥", @"Text on a button to select a different currency");
+    UITableViewRowAction *selectCurrencyAction = [UITableViewRowAction rowActionWithStyle:UITableViewRowActionStyleNormal title:selectMainCurrencyTitle handler:^(UITableViewRowAction * _Nonnull action, NSIndexPath * _Nonnull indexPath) {
+#ifdef DEBUG
+        NSLog(@"Change currency pressed");
+#endif
+        // Open currency picker in mainCurrency mode
+        [self performSegueWithIdentifier:@"selectMainCurrency" sender:self];
+        self.selectedIndexPathForAction = indexPath;
+    }];
+    return @[deleteAction, selectCurrencyAction];
 }
 
 #pragma mark - UIStoryboard
@@ -390,6 +425,12 @@ typedef NS_ENUM(BOOL, MCTonightsBillStatus) {
         if ([[segue destinationViewController] conformsToProtocol:@protocol(MCPathComponentsToOpenProtocol) ]) {
             [[segue destinationViewController] setPathComponentsToOpen:sender];
         }
+    }
+    if ([[segue identifier] isEqualToString:@"selectMainCurrency"]) {
+        MCSharedBill *theBill = _dataController.fetchedObjects[_selectedIndexPathForAction.row];
+        UINavigationController *navController = (UINavigationController *)segue.destinationViewController;
+        SelectCurrencyTableViewController *currencySelector = (SelectCurrencyTableViewController *)navController.viewControllers.firstObject;
+        currencySelector.currencyUpdateModel = [[EventUpdateCurrencyModel alloc] initWith:theBill];
     }
 }
 

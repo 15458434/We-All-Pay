@@ -12,8 +12,6 @@
 
 #import "We_all_pay-Swift.h"
 
-#import "MCAddressBookDataReceiver.h"
-
 #import "MCTonightsBillTransfer.h"
 
 typedef enum _emailFieldEditStatus {
@@ -32,7 +30,7 @@ typedef enum _emailFieldEditStatus {
 
 @end
 
-@interface MCPersonViewController : UITableViewController <UITextFieldDelegate, UIPickerViewDelegate, UIPickerViewDataSource, MCAddressBookReceiverDelegate, MCTonightsBillTransfer, MCThisPersonProtocol>
+@interface MCPersonViewController : UITableViewController <UITextFieldDelegate, UIPickerViewDelegate, UIPickerViewDataSource, MCTonightsBillTransfer, MCThisPersonProtocol>
 
 @property (weak, nonatomic) IBOutlet UIImageView *pictureView;
 
@@ -50,8 +48,5 @@ typedef enum _emailFieldEditStatus {
 - (IBAction)doneButtonPressed:(id)sender;
 - (IBAction)cancelButtonPressed:(id)sender;
 - (IBAction)selectEmailAddressPressed:(id)sender;
-
-//- (void)writableThisPersonIsCreated:(NSNotification *)notification;
-- (void)writableTonightsBillIsCreated:(NSNotification *)notification;
 
 @end

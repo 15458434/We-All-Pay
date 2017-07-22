@@ -6,6 +6,8 @@
 //  Copyright (c) 2013 Mark Cornelisse. All rights reserved.
 //
 
+@import FirebaseAnalytics;
+
 #import "MCEditTripViewController.h"
 #import "MCPersonViewController.h"
 #import "MCSharedBillTableViewController.h"
@@ -24,7 +26,6 @@
 @property (weak, nonatomic) IBOutlet UIButton *addPersonButton;
 
 @property (weak, nonatomic) IBOutlet UIButton *contactsButton;
-@property (weak, nonatomic) IBOutlet PaymentsSwipeDirectionHintView *paymentsHintsView;
 
 @property (weak, nonatomic) IBOutlet UITextField *tripNameField;
 @property (weak, nonatomic) IBOutlet UIBarButtonItem *doneButton;
@@ -33,7 +34,7 @@
 @property (strong, nonatomic) MCTableEmptyMessage *emptyMessage;
 
 @property (nonatomic, strong) NSFetchedResultsController *dataController;
-@property (nonatomic, strong) MCAddressBookDataReceiver *personReceiver;
+@property (nonatomic, strong) ContactsDataReceiver *contactsInserter;
 
 @property (nonatomic) BOOL cancelPressed;
 
@@ -51,49 +52,20 @@
 #pragma mark - actions of this class
 
 - (IBAction)addressBookButton:(id)sender {
-    
-    // TODO: This can be done without the Switch case.
-    switch (ABAddressBookGetAuthorizationStatus())
-    {
-            // Update our UI if the user has granted access to their Contacts
-        case  kABAuthorizationStatusAuthorized:
-            [self openPeoplePicker];
-            break;
-            // Prompt the user for access to Contacts if there is no definitive answer
-        case  kABAuthorizationStatusNotDetermined :
-            // Display a message if the user has denied or restricted access to Contacts
-        case  kABAuthorizationStatusDenied:
-        case  kABAuthorizationStatusRestricted:
-        {
-            CFErrorRef error;
-            ABAddressBookRef myAddressBook = ABAddressBookCreateWithOptions(NULL, &error);
-            if (error) {
-                NSLog(@"Something went wrong opening myAddressBook: %@", error);
-            }
-            
-            typeof(self) __weak weakSelf = self;
-            // Popup for user will only appear once.
-            ABAddressBookRequestAccessWithCompletion(myAddressBook, ^(bool granted, CFErrorRef error) {
-                if (granted) {
-                    dispatch_async(dispatch_get_main_queue(), ^{
-                        [weakSelf openPeoplePicker];
-                    });
-                } else {
-                    dispatch_async(dispatch_get_main_queue(), ^{
-                        [weakSelf showContactsDisabledMessage];
-                    });
-                }
-            });
-        }
-
-            break;
-        default:
-            break;
+    [FIRAnalytics logEventWithName:@"Contacts pressed" parameters:nil];
+    if (!_contactsInserter) {
+        _contactsInserter = [[ContactsDataReceiver alloc] initWith:_tonightsBill];
     }
+    [_contactsInserter presentContactsPickerWith:self completion:^{
+#ifdef DEBUG
+        NSLog(@"I love Ilse.");
+#endif
+    }];
 }
 
 
 - (IBAction)addPersonButton:(id)sender {
+    [FIRAnalytics logEventWithName:@"Add Person pressed" parameters:nil];
     if ([_tripNameField isEditing]) {
         [_tripNameField resignFirstResponder];
     }
@@ -101,58 +73,11 @@
 
 - (void)tappedInTheBackground:(id)sender
 {
+    [FIRAnalytics logEventWithName:@"Background tapped" parameters:nil];
     [_tripNameField resignFirstResponder];
 }
 
 #pragma mark - new in this class.
-
-- (void)openPeoplePicker
-{
-    ABPeoplePickerNavigationController *peoplePicker = [[ABPeoplePickerNavigationController alloc] init];
-    if (!_personReceiver) {
-        _personReceiver = [[MCAddressBookDataReceiver alloc] initWithViewController:self andDelegate:self];
-        [_personReceiver setTonightsBill:_tonightsBill];
-    }
-    [peoplePicker setPeoplePickerDelegate:_personReceiver];
-    //    [peoplePicker setPredicateForSelectionOfPerson:nil];
-    [peoplePicker setEdgesForExtendedLayout:UIRectEdgeNone];
-    //    [[peoplePicker viewControllers][0] setEdgesForExtendedLayout:UIRectEdgeNone];
-    [peoplePicker setModalPresentationStyle:UIModalPresentationFormSheet];
-    [[[peoplePicker navigationController] navigationBar] setBarStyle:UIBarStyleBlack];
-    peoplePicker.navigationBar.translucent = NO;
-    peoplePicker.navigationBar.opaque = YES;
-    
-    
-    [[self navigationController] presentViewController:peoplePicker animated:YES completion:nil];
-}
-
-- (void)showContactsDisabledMessage
-{
-    NSString *title = NSLocalizedString(@"Access to contacts denied", @"Message to the user when access to the Contacts is denied by the user");
-    NSString *message = NSLocalizedString(@"Go to your settings app and allow We all pay to access your contact data", @"Instructions for the user to go to the settings application and change the privacy settings for We all pay.");
-    NSString *cancelButtonTitle = NSLocalizedString(@"Dismiss", @"Dismiss");
-    NSString *settingsButtonTitle = NSLocalizedString(@"Go to settings", @"Title for a button that directs the user to the settings application.");
-    UIAlertController *alertController = [UIAlertController alertControllerWithTitle:title message:message preferredStyle:UIAlertControllerStyleAlert];
-    UIAlertAction *cancelAction = [UIAlertAction actionWithTitle:cancelButtonTitle style:UIAlertActionStyleCancel handler:nil];
-    UIAlertAction *settingsAction = [UIAlertAction actionWithTitle:settingsButtonTitle style:UIAlertActionStyleDefault handler:^(UIAlertAction * _Nonnull action) {
-        NSURL *settingsAppURL = [NSURL URLWithString:UIApplicationOpenSettingsURLString];
-        [[UIApplication sharedApplication] openURL:settingsAppURL];
-    }];
-    [alertController addAction:cancelAction];
-    [alertController addAction:settingsAction];
-    [self presentViewController:alertController animated:YES completion:nil];
-}
-
-- (void)performFetchAndReloadTableView:(NSNotification *)notification
-{
-    UIManagedDocument *weAllPayDocument = [[MCWeAllPayStoreController defaultStore] weAllPayStoreDocument];
-    if ([weAllPayDocument documentState] == UIDocumentStateNormal) {
-        [self performFetch];
-        [[self tableView] reloadData];
-        [[NSNotificationCenter defaultCenter] removeObserver:self];
-        [self setEmptyMessageNow];
-    }
-}
 
 - (void)performFetch
 {
@@ -199,29 +124,6 @@
     }
 }
 
-- (void)showPaymentsHint
-{
-    if (_dataController.fetchedObjects.count > 0) {
-        HintsController *controller = [[HintsController alloc] init];
-        _paymentsHintsView.showHint = controller.showHints;
-    } else {
-        _paymentsHintsView.showHint = false;
-    }
-}
-
-- (void)showPaymentsHintDelayed
-{
-    __weak typeof(self) weakSelf = self;
-    int64_t delayInSeconds = 1.0;
-    dispatch_time_t waitTime = dispatch_time(DISPATCH_TIME_NOW, delayInSeconds * NSEC_PER_SEC);
-    dispatch_after(waitTime, dispatch_get_main_queue(), ^{
-        typeof(self) strongSelf = weakSelf;
-        if (strongSelf) {
-            [self showPaymentsHint];
-        }
-    });
-}
-
 #pragma mark - inherited from super
 
 - (void)viewDidLoad
@@ -244,7 +146,6 @@
         [[_emptyMessage bigMessage] setAlpha:0.0];
     }
     [[self tableView] setBackgroundView:_emptyMessage];
-    [self showPaymentsHint];
     
     // Make sure a tap in the background dismisses the keyboard as well.
     UITapGestureRecognizer *thatTickles = [[UITapGestureRecognizer alloc] initWithTarget:self action:@selector(tappedInTheBackground:)];
@@ -270,11 +171,6 @@
     [[self tableView] setEditing:shouldAppearAsEditing animated:NO];
 
     [self setEmptyMessageNow];
-    
-    HintsController *controller = [[HintsController alloc] init];
-    if (_paymentsHintsView.showHint && !controller.showHints) {
-        _paymentsHintsView.showHint = false;
-    }
 }
 
 - (void)viewDidAppear:(BOOL)animated
@@ -356,44 +252,6 @@
     [[self tableView] reloadData];
 }
 
-#pragma mark - UIAlertViewDelegate
-
-- (void)alertView:(UIAlertView *)alertView clickedButtonAtIndex:(NSInteger)buttonIndex
-{
-    switch (buttonIndex) {
-        case 0:
-            NSLog(@"Ok, in no people present message pressed.");
-            break;
-        case 1:
-            NSLog(@"Edit, in no people present message pressed.");
-            if (kABAuthorizationStatusAuthorized == ABAddressBookGetAuthorizationStatus() ||
-                kABAuthorizationStatusNotDetermined == ABAddressBookGetAuthorizationStatus()) {
-                [self addressBookButton:self];
-            } else {
-                [self addPersonButton:self];
-            }
-        default:
-            break;
-    }
-}
-
-#pragma mark - MCAddressBookReceiverDelegate
-
-- (BOOL) isNewPersonFromAddressBookAlreadyPresent:(MCPerson *)newPerson
-{
-    return NO;
-}
-
-- (MCPerson *)personRecordToUse
-{
-    return nil;
-}
-
-- (void)receiveANewPersonFromAddressBook:(MCPerson *)newPerson
-{
-    didSomethingChange = YES;
-}
-
 #pragma mark - UITextFieldDelegate
 
 - (BOOL)textFieldShouldReturn:(UITextField *)textField
@@ -403,8 +261,18 @@
     return YES;
 }
 
+- (void)textFieldDidBeginEditing:(UITextField *)textField
+{
+    if ([textField isEqual:_tripNameField]) {
+        [FIRAnalytics logEventWithName:@"Did begin editing event name" parameters:nil];
+    }
+}
+
 -(void)textFieldDidEndEditing:(UITextField *)textField
 {
+    if ([textField isEqual:_tripNameField]) {
+        [FIRAnalytics logEventWithName:@"Did end editing event name" parameters:nil];
+    }
     [_tonightsBill setTripName:[_tripNameField text]];
     NSDate *now = [NSDate date];
     [_tonightsBill setDateModified:now];
@@ -414,7 +282,7 @@
     }
     MCPerson *nextPayer = [[_tonightsBill fetchPeoplePresentOrderedByAmountPaid:YES] firstObject];
 
-    WhoPayingUserDefaultsStoreInterface *groupStore = [[WhoPayingUserDefaultsStoreInterface alloc] initWithTonightsBillUUID:_tonightsBill.uniqueBillId tripName:_tonightsBill.tripName nextPayerUUID:nextPayer.uniquePersonId fullNameOfNextPayer:[nextPayer getFullName]];//[[WhoPayingUserDefaultsStoreInterface alloc] initWithTonightsBillUUID:_tonightsBill.uniqueBillId tripName:_tonightsBill.tripName nextPayerID:nextPayer.uniquePersonId fullNameOfNextPayer:[nextPayer getFullName]];
+    WhoPayingUserDefaultsStoreInterface *groupStore = [[WhoPayingUserDefaultsStoreInterface alloc] initWithTonightsBillUUID:_tonightsBill.uniqueBillId tripName:_tonightsBill.tripName nextPayerUUID:nextPayer.uniquePersonId fullNameOfNextPayer:[nextPayer getFullName]];
     [groupStore storeToDefaults];
     [[NCWidgetController widgetController] setHasContent:YES forWidgetWithBundleIdentifier:[WhoPayingUserDefaultsStoreInterface MCWhoIsPayingNextBundleIdentifier]];
 }
@@ -429,7 +297,6 @@
 - (void)controllerDidChangeContent:(NSFetchedResultsController *)controller
 {
     [[self tableView] endUpdates];
-    [self showPaymentsHintDelayed];
 }
 
 - (void)controller:(NSFetchedResultsController *)controller didChangeObject:(id)anObject atIndexPath:(NSIndexPath *)indexPath forChangeType:(NSFetchedResultsChangeType)type newIndexPath:(NSIndexPath *)newIndexPath
@@ -484,7 +351,8 @@
         [[thisCell totalSpent] setHidden:NO];
         
         CurrencyFormatter *cf = [[CurrencyFormatter alloc] initWithCurrencyCode:_tonightsBill.mainCurrency.code];
-        thisCell.totalSpent.text = [cf stringForObjectValue:thisCellsPerson.totalSumPaid];
+        thisCell.totalSpent.text = [cf stringFor:thisCellsPerson.totalSumPaid];
+//        thisCell.totalSpent.text = [cf stringForObjectValue:thisCellsPerson.totalSumPaid];
     } else {
         [thisCell.fetchingExchangeRateIndicator startAnimating];
         [[thisCell totalSpent] setHidden:YES];
@@ -513,6 +381,7 @@
 - (void)tableView:(UITableView *)tableView commitEditingStyle:(UITableViewCellEditingStyle)editingStyle forRowAtIndexPath:(NSIndexPath *)indexPath
 {
     if (editingStyle == UITableViewCellEditingStyleDelete) {
+        [FIRAnalytics logEventWithName:@"Delete Person" parameters:nil];
         MCPerson *removablePerson = [_dataController objectAtIndexPath:indexPath];
         [_tonightsBill deletePerson:removablePerson];
         [[MCWeAllPayStoreController defaultStore] saveMainThreadContext];
@@ -545,6 +414,7 @@
 
 - (void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath
 {
+    [FIRAnalytics logEventWithName:@"Open person details" parameters:nil];
     [self performSegueWithIdentifier:@"openEditPerson" sender:self];
 }
 

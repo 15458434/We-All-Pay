@@ -10,23 +10,23 @@ import Foundation
 import WhoPayingUserDefaultsStoreInterface
 
 extension WhoPayingUserDefaultsStoreInterface {
-    class func sendToUserDefaultsStoreInterface(tonightsBill: MCSharedBill?) {
+    class func sendToUserDefaultsStoreInterface(_ tonightsBill: MCSharedBill?) {
         // Get data in local variables.
         let billID = tonightsBill?.uniqueBillId
         let tripName = tonightsBill?.tripName
-        let nextPayer = tonightsBill?.fetchPeoplePresentOrderedByAmountPaid(true).first as? MCPerson
+        let nextPayer = tonightsBill?.fetchPeoplePresentOrdered(byAmountPaid: true).first as? MCPerson
         let nextPayerID = nextPayer?.uniquePersonId
         let nextPayerName = nextPayer?.getFullName()
         
         // Put it in a backgroundQueue
-        let backgroundQueue = dispatch_queue_create("sendToWhoIsPayingNextQueue", nil)
-        dispatch_async(backgroundQueue) { () -> Void in
+        let backgroundQueue = DispatchQueue(label: "sendToWhoIsPayingNextQueue", attributes: [])
+        backgroundQueue.async { () -> Void in
             let storeInterface = WhoPayingUserDefaultsStoreInterface(tonightsBillUUID: billID, tripName: tripName, nextPayerUUID: nextPayerID, fullNameOfNextPayer: nextPayerName)
             storeInterface.storeToDefaults()
         }
     }
     
-    class func sendInvalidUserDefaultsIfTonightsBillIs(tonightsBill: MCSharedBill?) {
+    class func sendInvalidUserDefaultsIfTonightsBillIs(_ tonightsBill: MCSharedBill?) {
         let currentStoreInterfaceContents = WhoPayingUserDefaultsStoreInterface()
         if tonightsBill?.uniqueBillId == currentStoreInterfaceContents.tonightsBillUUID {
             WhoPayingUserDefaultsStoreInterface.sendToUserDefaultsStoreInterface(nil)

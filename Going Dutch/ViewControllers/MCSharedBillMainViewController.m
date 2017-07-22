@@ -7,6 +7,7 @@
 //
 
 @import GoogleMobileAds;
+@import FirebaseAnalytics;
 
 #import "MCSharedBillMainViewController.h"
 
@@ -33,6 +34,28 @@
 @end
 
 @implementation MCSharedBillMainViewController
+
+#pragma mark - IBActions
+
+- (IBAction)toggleEdit:(id)sender
+{
+    if ([[self childViewControllers][0] toggleEditTableView:sender]) {
+        [FIRAnalytics logEventWithName:@"Edit Pressed" parameters:nil];
+        // Set Done Button
+        UIBarButtonItem *doneButton = [[UIBarButtonItem alloc] initWithBarButtonSystemItem:UIBarButtonSystemItemDone target:self action:@selector(toggleEdit:)];
+        [[self navigationItem] setRightBarButtonItem:doneButton];
+    } else {
+        [FIRAnalytics logEventWithName:@"Done Pressed" parameters:nil];
+        // Set Edit Button
+        UIBarButtonItem *editButton = [[UIBarButtonItem alloc] initWithBarButtonSystemItem:UIBarButtonSystemItemEdit target:self action:@selector(toggleEdit:)];
+        [[self navigationItem] setRightBarButtonItem:editButton];
+    }
+}
+
+- (IBAction)peopleOrPaymentsSelectionChangedValue:(id)sender
+{
+    [_pageViewController peopleOrPaymentsSelectionControlTapped:self];
+}
 
 #pragma mark - private functions
 
@@ -127,25 +150,6 @@
     } else {
         self.worstSalesPitchEverView.autoloadEnabled = NO;
     }
-
-}
-
-- (IBAction)toggleEdit:(id)sender
-{
-    if ([[self childViewControllers][0] toggleEditTableView:sender]) {
-        // Set Done Button
-        UIBarButtonItem *doneButton = [[UIBarButtonItem alloc] initWithBarButtonSystemItem:UIBarButtonSystemItemDone target:self action:@selector(toggleEdit:)];
-        [[self navigationItem] setRightBarButtonItem:doneButton];
-    } else {
-        // Set Edit Button
-        UIBarButtonItem *editButton = [[UIBarButtonItem alloc] initWithBarButtonSystemItem:UIBarButtonSystemItemEdit target:self action:@selector(toggleEdit:)];
-        [[self navigationItem] setRightBarButtonItem:editButton];
-    }
-}
-
-- (IBAction)pageViewControllerTapped:(id)sender
-{
-    [_pageViewController pageControlTapped:sender];
 }
 
 #pragma mark - Notification Handlers
@@ -195,6 +199,21 @@
     NSLog(@"Oh no, I didn't get anything, because %@", error);
 #endif
     [self putBannerOffScreen:YES];
+}
+
+- (void)adViewWillPresentScreen:(GADBannerView *)bannerView
+{
+    [FIRAnalytics logEventWithName:@"Press AdBanner" parameters:nil];
+}
+
+- (void)adViewWillDismissScreen:(GADBannerView *)bannerView
+{
+    [FIRAnalytics logEventWithName:@"Dismiss full screen ad" parameters:nil];
+}
+
+- (void)adViewWillLeaveApplication:(GADBannerView *)bannerView
+{
+    [FIRAnalytics logEventWithName:@"Take me to the product" parameters:nil];
 }
 
 #pragma mark - Inherited from super
@@ -267,9 +286,6 @@
         [self putBannerOffScreen:NO];
         [self updateBannerSize:size];
     } completion:^(id<UIViewControllerTransitionCoordinatorContext>  _Nonnull context) {
-#ifdef DEBUG
-        NSLog(@"Yes, I'm done.");
-#endif
     }];
 }
 
@@ -297,7 +313,12 @@
     
     if ([[segue identifier] isEqualToString:@"pageViewController"]) {
         _pageViewController = (MCSharedBillPageViewController *)[segue destinationViewController];
-        _pageViewController.pageControl = _pageIndicator;
+        _pageViewController.mainViewController = self;
+        if (_tonightsBill.peoplePresent.count > 0) {
+            self.peopleOrPaymentsSelectionControl.selectedSegmentIndex = 1;
+        } else {
+            self.peopleOrPaymentsSelectionControl.selectedSegmentIndex = 0;
+        }
         NSManagedObjectContext *backgroundContext = [[MCWeAllPayStoreController defaultStore] backgroundThreadContext];
         [backgroundContext performBlock:^{
             id<MCTonightsBillTransfer> destination = [segue destinationViewController];
@@ -308,7 +329,8 @@
                     [destination setTonightsBill:_tonightsBill];
                 }];
             } else {
-                [[NSNotificationCenter defaultCenter] addObserver:destination selector:@selector(writeableTonightsBillIsCreated:) name:MCWritableTonightsBillReady object:nil];
+                SEL writeableTonightsBillIsCreated = NSSelectorFromString(@"writeableTonightsBillIsCreated:");
+                [[NSNotificationCenter defaultCenter] addObserver:destination selector:writeableTonightsBillIsCreated name:MCWritableTonightsBillReady object:nil];
             }
         }];
     }

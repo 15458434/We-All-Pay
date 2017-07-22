@@ -6,6 +6,7 @@
 //  Copyright (c) 2014 Mark Cornelisse. All rights reserved.
 //
 
+@import FirebaseAnalytics;
 @import GoogleMobileAds;
 
 #import "MCSharedBillViewController_iPad.h"
@@ -30,7 +31,7 @@
 @property (weak, nonatomic) IBOutlet UITextField *tripNameField;
 @property (weak, nonatomic) IBOutlet UIView *leftTopView;
 
-@property (strong, nonatomic) UIAlertView *payerMissingAlertView;
+@property (strong, nonatomic) ContactsDataReceiver *contactsInserter;
 
 @end
 
@@ -40,13 +41,24 @@
 
 - (IBAction)solveButtonPressed:(id)sender
 {
+    [FIRAnalytics logEventWithName:@"Solve pressed" parameters:nil];
+    if (_tonightsBill.peoplePresent.count == 0) {
+        NSString *title = NSLocalizedString(@"Add some people first", @"Title for an alert message, because there are no people added to this event.");
+        NSString *message = NSLocalizedString(@"You can't add a payment when no people are present. There is no one to split the expenses among.", @"A message to the user thay can't add a payment when they didn't add people to the even.");
+        UIAlertController *alertController = [UIAlertController alertControllerWithTitle:title message:message preferredStyle:UIAlertControllerStyleAlert];
+        NSString *cancelActionTitle = NSLocalizedString(@"Cancel", @"Text on button to cancel something");
+        [alertController addAction:[UIAlertAction actionWithTitle:cancelActionTitle style:UIAlertActionStyleCancel handler:nil]];
+        [self presentViewController:alertController animated:YES completion:nil];
+        return;
+    }
+    
     if ([_tonightsBill doAllPaymentHaveAPayer]) {
         [self performSegueWithIdentifier:@"openSolutionView" sender:self];
     } else {
         // Give user alert.
         NSString *title = NSLocalizedString(@"UNABLE_TO_SOLVE", @"Unable to solve");
         NSString *message = NSLocalizedString(@"At least one of the payments is missing a payer.", @"One of the payments is missing a payer.");
-        NSString *cancelButtonTitle = NSLocalizedString(@"CANCEL", @"Cancel");
+        NSString *cancelButtonTitle = NSLocalizedString(@"Cancel", @"Text on button to cancel something");
         NSString *fixItButtonTitle = NSLocalizedString(@"Go to", @"Go to");
         
         UIAlertController *alertController = [UIAlertController alertControllerWithTitle:title message:message preferredStyle:UIAlertControllerStyleAlert];
@@ -60,11 +72,13 @@
                 [strongSelf openFirstPaymentWithoutAPayer];
             }
         }]];
+        [self presentViewController:alertController animated:YES completion:nil];
     }
 }
 
 - (IBAction)editButtonPressed:(id)sender
 {
+    
     static BOOL isEditingMode = NO;
     NSArray *myKids = [self childViewControllers];
     for (id kid in myKids) {
@@ -78,9 +92,11 @@
     }
     isEditingMode = !isEditingMode;
     if (isEditingMode) {
+        [FIRAnalytics logEventWithName:@"Edit Pressed" parameters:nil];
         UIBarButtonItem *doneButton = [[UIBarButtonItem alloc] initWithBarButtonSystemItem:UIBarButtonSystemItemDone target:self action:@selector(editButtonPressed:)];
         [[self navigationItem] setRightBarButtonItem:doneButton];
     } else {
+        [FIRAnalytics logEventWithName:@"Done Pressed" parameters:nil];
         UIBarButtonItem *editButton = [[UIBarButtonItem alloc] initWithBarButtonSystemItem:UIBarButtonSystemItemEdit target:self action:@selector(editButtonPressed:)];
         [[self navigationItem] setRightBarButtonItem:editButton];
     }
@@ -88,43 +104,31 @@
 
 - (IBAction)addressBookButtonPressed:(id)sender
 {
-    // TODO: This can be done without the Switch case.
-    switch (ABAddressBookGetAuthorizationStatus())
-    {
-            // Update our UI if the user has granted access to their Contacts
-        case  kABAuthorizationStatusAuthorized:
-            [self openPeoplePicker];
-            break;
-            // Prompt the user for access to Contacts if there is no definitive answer
-        case  kABAuthorizationStatusNotDetermined :
-            // Display a message if the user has denied or restricted access to Contacts
-        case  kABAuthorizationStatusDenied:
-        case  kABAuthorizationStatusRestricted:
-        {
-            CFErrorRef error;
-            ABAddressBookRef myAddressBook = ABAddressBookCreateWithOptions(NULL, &error);
-            if (error) {
-                NSLog(@"Something went wrong opening myAddressBook.");
-            }
-            
-            typeof(self) __weak weakSelf = self;
-            // Popup for user will only appear once.
-            ABAddressBookRequestAccessWithCompletion(myAddressBook, ^(bool granted, CFErrorRef error) {
-                if (granted) {
-                    dispatch_async(dispatch_get_main_queue(), ^{
-                        [weakSelf openPeoplePicker];
-                    });
-                } else {
-                    dispatch_async(dispatch_get_main_queue(), ^{
-                        [weakSelf showContactsDisabledMessage];
-                    });
-                }
-            });
-        }
-            break;
-        default:
-            break;
+    [FIRAnalytics logEventWithName:@"Contacts pressed" parameters:nil];
+    if (!_contactsInserter) {
+        _contactsInserter = [[ContactsDataReceiver alloc] initWith:_tonightsBill];
     }
+    [_contactsInserter presentContactsPickerWith:self completion:^{
+#ifdef DEBUG
+        NSLog(@"I love Ilse.");
+#endif
+    }];
+}
+
+- (IBAction)addPaymentPressed:(id)sender
+{
+    [FIRAnalytics logEventWithName:@"Add Person pressed" parameters:nil];
+    if (_tonightsBill.peoplePresent.count == 0) {
+        NSString *title = NSLocalizedString(@"Add some people first", @"Title for an alert message, because there are no people added to this event.");
+        NSString *message = NSLocalizedString(@"You can't add a payment when no people are present. There is no one to split the expenses among.", @"A message to the user thay can't add a payment when they didn't add people to the even.");
+        UIAlertController *alertController = [UIAlertController alertControllerWithTitle:title message:message preferredStyle:UIAlertControllerStyleAlert];
+        NSString *cancelActionTitle = NSLocalizedString(@"Cancel", @"Text on button to cancel something");
+        [alertController addAction:[UIAlertAction actionWithTitle:cancelActionTitle style:UIAlertActionStyleCancel handler:nil]];
+        [self presentViewController:alertController animated:YES completion:nil];
+        return;
+    }
+    
+    [self performSegueWithIdentifier:@"newPayment" sender:self];
 }
 
 
@@ -224,21 +228,6 @@
     } else {
         self.worstSalesPitchEverView.autoloadEnabled = NO;
     }
-}
-
-- (void)openPeoplePicker
-{
-    ABPeoplePickerNavigationController *peoplePicker = [[ABPeoplePickerNavigationController alloc] init];
-    if (!_personReceiver) {
-        _personReceiver = [[MCAddressBookDataReceiver alloc] initWithViewController:self andDelegate:self];
-        [_personReceiver setTonightsBill:_tonightsBill];
-    }
-    [peoplePicker setPeoplePickerDelegate:_personReceiver];
-    [peoplePicker setEdgesForExtendedLayout:UIRectEdgeNone];
-    //    [[peoplePicker viewControllers][0] setEdgesForExtendedLayout:UIRectEdgeNone];
-    [peoplePicker setModalPresentationStyle:UIModalPresentationFormSheet];
-    
-    [[self navigationController] presentViewController:peoplePicker animated:YES completion:nil];
 }
 
 - (void)showContactsDisabledMessage
@@ -369,24 +358,6 @@
     }];
 }
 
-#pragma mark - MCAddressBookReceiverDelegate
-
-- (MCPerson *)personRecordToUse
-{
-    return nil;
-}
-
-- (void)receiveANewPersonFromAddressBook:(MCPerson *)newPerson
-{
-    // Not implemented.
-}
-
-- (BOOL)isPersonAlreadyPresent:(MCPerson *)newPerson
-{
-    // Function is not used at the moment.
-    return NO;
-}
-
 #pragma mark - UITextFieldDelegate
 
 - (BOOL)textFieldShouldBeginEditing:(UITextField *)textField
@@ -401,9 +372,17 @@
     }
 }
 
+- (void)textFieldDidBeginEditing:(UITextField *)textField
+{
+    if (textField == _tripNameField) {
+        [FIRAnalytics logEventWithName:@"Begin edit Event name" parameters:nil];
+    }
+}
+
 - (void)textFieldDidEndEditing:(UITextField *)textField
 {
     if (textField == _tripNameField) {
+        [FIRAnalytics logEventWithName:@"End edit Event name" parameters:nil];
         [_tonightsBill setTripName:[_tripNameField text]];
     }
 }

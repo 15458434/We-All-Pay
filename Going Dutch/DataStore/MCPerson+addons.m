@@ -26,7 +26,6 @@
 {
     MCPerson *newPerson;
     newPerson = [NSEntityDescription insertNewObjectForEntityForName:@"MCPerson" inManagedObjectContext:context];
-//    [newPerson setUniquePersonId:[MCTools createUniqueIdentifierString]];
     [newPerson setUniquePersonId:[[NSUUID UUID] UUIDString]];
     NSDate *nu = [NSDate date];
     [newPerson setDateCreated:nu];
@@ -67,60 +66,22 @@
 
 - (void)setThumbnailDataFromImage:(UIImage *)image
 {
-    __block UIImage *thisImage = image;
+    UIImage *thisImage = image;
     if (!thisImage) {
         thisImage = [UIImage imageNamed:@"No picture Image 3 - thumbnail"];
     }
-    CGSize imageSize = [thisImage size];
-    CGRect thumbnailRect = CGRectMake(0, 0, 44, 44);
-    float ratio = MAX(thumbnailRect.size.width / imageSize.width, thumbnailRect.size.height / imageSize.height);
-    
-    UIGraphicsBeginImageContextWithOptions(thumbnailRect.size, NO, 0.0);
-    UIBezierPath *bezierPath = [UIBezierPath bezierPathWithOvalInRect:thumbnailRect];
-    [bezierPath addClip];
-    
-    CGRect imageDrawRect;
-    imageDrawRect.size.width = ratio * imageSize.width;
-    imageDrawRect.size.height = ratio * imageSize.height;
-    imageDrawRect.origin.x = (thumbnailRect.size.width - imageDrawRect.size.width) / 2.0;
-    imageDrawRect.origin.y = (thumbnailRect.size.height - imageDrawRect.size.height) / 2.0;
-    [thisImage drawInRect:imageDrawRect];
-    UIImage *thumbnailWithRoundedCorners = UIGraphicsGetImageFromCurrentImageContext();
-
-    
-    NSData *thumbnailWithRoundedCornersData = UIImagePNGRepresentation(thumbnailWithRoundedCorners);
-    UIGraphicsEndImageContext();
-    [self setThumbnail:thumbnailWithRoundedCorners];
-    [self setThumbnailData:thumbnailWithRoundedCornersData];
+    self.thumbnail = thisImage;
+    self.thumbnailData = UIImagePNGRepresentation(thisImage);
 }
 
 - (void)setPictureDataFromImage:(UIImage *)image
 {
-    __block UIImage *thisImage = image;
+    UIImage *thisImage = image;
     if (!thisImage) {
         thisImage = [UIImage imageNamed:@"No picture Image 3 - picture"];
     }
-    CGSize imageSize = [thisImage size];
-    CGRect pictureRect = CGRectMake(0, 0, 160, 160);
-    float ratio = MAX(pictureRect.size.width / imageSize.width, pictureRect.size.height / imageSize.height);
-        
-    UIGraphicsBeginImageContextWithOptions(pictureRect.size, NO, 0.0);
-    UIBezierPath *bezierPath = [UIBezierPath bezierPathWithOvalInRect:pictureRect];
-    [bezierPath addClip];
-    
-    CGRect imageDrawRect;
-    imageDrawRect.size.width = ratio * imageSize.width;
-    imageDrawRect.size.height = ratio * imageSize.height;
-    imageDrawRect.origin.x = (pictureRect.size.width - imageDrawRect.size.width) / 2.0;
-    imageDrawRect.origin.y = (pictureRect.size.height - imageDrawRect.size.height) / 2.0;
-        
-    [thisImage drawInRect:imageDrawRect];
-    UIImage *pictureWithRoundedCorners = UIGraphicsGetImageFromCurrentImageContext();
-    NSData *pictureWithRoundedCornersData = UIImagePNGRepresentation(pictureWithRoundedCorners);
-
-    UIGraphicsEndImageContext();
-    [self setPicture:pictureWithRoundedCorners];
-    [self setPictureData:pictureWithRoundedCornersData];
+    self.picture = thisImage;
+    self.pictureData = UIImagePNGRepresentation(thisImage);
 }
 
 - (NSString *)getFullName

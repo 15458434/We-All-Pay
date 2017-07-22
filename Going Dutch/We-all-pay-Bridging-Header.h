@@ -25,3 +25,5 @@
 #import "MCTools.h"
 
 #import "MCAllTripsTableViewController-iPad.h"
+#import "MCReturnPaymentViewController.h"
+#import "MCSolutionTableViewController.h"

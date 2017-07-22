@@ -8,6 +8,8 @@
 
 import UIKit
 
+import FirebaseAnalytics
+
 class MCPaymentPresenceTableViewCell: UITableViewCell {
     // MARK: IB Outlets
     @IBOutlet var theSwitch: UISwitch!
@@ -20,12 +22,14 @@ class MCPaymentPresenceTableViewCell: UITableViewCell {
     var keyboardDismissDelegate: MCDismissKeyboardProtocol!
     
     // MARK: IB Actions
-    @IBAction func switchPresence(sender: UISwitch) {
-        thisCellsPaymentPresence.isPersonPresent = NSNumber(bool: sender.on)
+    @IBAction func switchPresence(_ sender: UISwitch) {
+        FIRAnalytics.logEvent(withName: "SwitchPresence on payment", parameters: ["Presence Value": (theSwitch.isOn as NSNumber)])
+        thisCellsPaymentPresence.isPersonPresent = NSNumber(value: sender.isOn)
         thisCellsPaymentPresence.payment.recalculateAveragePeopleOweAndStore()
     }
     
-    @IBAction func backgroundTappedToDismissKeyboard(sender: AnyObject) {
+    @IBAction func backgroundTappedToDismissKeyboard(_ sender: AnyObject) {
+        FIRAnalytics.logEvent(withName: "Background tapped to dismiss keyboard", parameters: nil)
         keyboardDismissDelegate.dismissTheKeyboard()
     }
 }

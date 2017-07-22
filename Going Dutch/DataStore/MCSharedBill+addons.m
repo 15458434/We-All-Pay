@@ -409,7 +409,7 @@
     request.sortDescriptors = @[[NSSortDescriptor sortDescriptorWithKey:@"dateCreated" ascending:YES]];
     request.predicate = [NSPredicate predicateWithFormat:@"payingPerson = nil"];
     NSError *fetchError;
-    NSUInteger *amountOfPaymentWithoutPayers = [[self managedObjectContext] countForFetchRequest:request error:&fetchError];
+    NSUInteger amountOfPaymentWithoutPayers = [[self managedObjectContext] countForFetchRequest:request error:&fetchError];
     if (fetchError) {
         NSLog(@"Something went wrong counting payments without payers: %@", fetchError);
     }
@@ -444,7 +444,7 @@
     NSNumber *exchangeRateValidStatus = [NSNumber numberWithShort:MCExchangeRateStatusValid];
     request.predicate = [NSPredicate predicateWithFormat:@"payment.onWhichBill = %@ and status != %@", self, exchangeRateValidStatus];
     NSError *fetchError;
-    NSUInteger *amountOfInvalidExchangeRates = [[self managedObjectContext] countForFetchRequest:request error:&fetchError];
+    NSUInteger amountOfInvalidExchangeRates = [[self managedObjectContext] countForFetchRequest:request error:&fetchError];
     if (fetchError) {
         NSLog(@"Something went wrong counting invalid exchangeRates: %@", fetchError);
     }
@@ -453,6 +453,56 @@
     } else {
         return NO;
     }
+}
+
+- (void)updateMainCurrencyFromCode:(NSString *)code withCompletion:(void (^)(NSError *error))completion {
+    MCCurrency *newMainCurrency = [MCCurrency currencyFrom:code fromContext:self.managedObjectContext];
+    self.mainCurrency = newMainCurrency;
+    NSArray<MCExchangeRate *> *allExchangeRates = [self fetchAllExchangeRatesWithError:nil];
+    [allExchangeRates enumerateObjectsUsingBlock:^(MCExchangeRate * _Nonnull obj, NSUInteger idx, BOOL * _Nonnull stop) {
+        obj.toCurrency = newMainCurrency;
+    }];
+    [self updateAllExchangeRatesWithCompletionHandler:completion];
+}
+
+- (NSArray<MCExchangeRate *> *)fetchAllExchangeRatesWithError:(NSError **)error {
+    NSFetchRequest *request = [[NSFetchRequest alloc] initWithEntityName:@"MCExchangeRate"];
+    request.sortDescriptors = @[[NSSortDescriptor sortDescriptorWithKey:@"dateCreated" ascending:YES]];
+    request.predicate = [NSPredicate predicateWithFormat:@"payment.onWhichBill = %@", self];
+    
+    NSError *fetchError;
+    NSArray<MCExchangeRate *> *arrayOfAllExchangeRates = [[self managedObjectContext] executeFetchRequest:request error:&fetchError];
+    if (fetchError) {
+        *error = fetchError;
+        NSLog(@"Something went wrong fetching all ExchangeRates on this bill: %@", fetchError.localizedDescription);
+        return nil;
+    }
+    
+    return arrayOfAllExchangeRates;
+}
+
+- (void)updateAllExchangeRatesWithCompletionHandler:(void (^)(NSError *error))completion {
+    NSError *fetchError;
+    NSArray<MCExchangeRate *> *arrayOfAllExchangeRates = [self fetchAllExchangeRatesWithError:&fetchError];
+    if (fetchError) {
+        NSLog(@"Something went wrong fetching all ExchangeRates on this bill: %@", fetchError);
+        completion(fetchError);
+        return;
+    }
+    
+    [arrayOfAllExchangeRates enumerateObjectsUsingBlock:^(MCExchangeRate * _Nonnull obj, NSUInteger idx, BOOL * _Nonnull stop) {
+        obj.status = @(MCExchangeRateStatusInvalid);
+    }];
+    
+    NSError *saveError;
+    [[self managedObjectContext] save:&saveError];
+    if (saveError) {
+        @throw [NSException exceptionWithName:NSInternalInconsistencyException reason:@"Error saving arrayOfAllExchangeRates" userInfo:@{@"saved Array": arrayOfAllExchangeRates}];
+    }
+    
+    [self updateInvalidExchangeRatesWithHandler:^(NSArray *results, NSError *error) {
+        completion(error);
+    }];
 }
 
 - (void)updateInvalidExchangeRatesWithHandler:(void (^)(NSArray *results, NSError *error))completion
@@ -561,9 +611,12 @@
 }
 
 - (void)solveWithHandler:(void (^)(NSArray *results, NSError *error))solution {
+    NSOperationQueue *currentQueue = [NSOperationQueue currentQueue];
     if ([self areAllExchangeRatesValid]) {
         NSArray<ReturnPayment *> *results = [self originalSolveWhoHasToPayWhoFromThisBill];
-        solution(results, nil);
+        [currentQueue addOperationWithBlock:^{
+            solution(results, nil);
+        }];
     } else {
         [self updateInvalidExchangeRatesWithHandler:^(NSArray *results, NSError *error) {
             if (error) {
@@ -596,11 +649,14 @@
     }
 }
 
-- (NSArray<MCCurrency *> *)recentUsedForeignCurrencies
+- (NSArray<MCCurrency *> *)recentUsedForeignCurrencies:(NSUInteger)fetchLimit
 {
     // Prepare NSFetchRequest
     NSFetchRequest *request = [[NSFetchRequest alloc] initWithEntityName:@"MCCurrency"];
-    request.sortDescriptors = @[[NSSortDescriptor sortDescriptorWithKey:@"dateCreated" ascending:YES]];
+    if (fetchLimit > 0) {
+        request.fetchLimit = fetchLimit * 2;
+    }
+    request.sortDescriptors = @[[NSSortDescriptor sortDescriptorWithKey:@"dateCreated" ascending:NO]];
     request.predicate = [NSPredicate predicateWithFormat:@"ANY payment.onWhichBill.uniqueBillId LIKE %@ AND NOT code LIKE %@", self.uniqueBillId, self.mainCurrency.code];
     
     // Execute fetch request
@@ -616,7 +672,25 @@
         return nil;
     }
     
-    return results;
+    if (results.count <= 1) {
+        return results;
+    }
+    
+    NSMutableArray *resultsCopy = [NSMutableArray array];
+    NSMutableSet *codes = [NSMutableSet set];
+    for (MCCurrency *currency in results) {
+        NSString *code = currency.code;
+        if (![codes containsObject:code]) {
+            [resultsCopy addObject:currency];
+            [codes addObject:code];
+        }
+    }
+    
+    if (resultsCopy.count > 5) {
+        return [resultsCopy subarrayWithRange:NSMakeRange(0, 5)];
+    } else {
+        return resultsCopy;
+    }
 }
 
 #pragma mark - NSManagedObject Stuff

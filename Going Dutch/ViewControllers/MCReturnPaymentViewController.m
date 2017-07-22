@@ -6,6 +6,8 @@
 //  Copyright (c) 2013 Mark Cornelisse. All rights reserved.
 //
 
+@import FirebaseAnalytics;
+
 #import "MCReturnPaymentViewController.h"
 #import "MCSharedBillTableViewController.h"
 #import "MCSharedBillPageViewController.h"
@@ -17,17 +19,17 @@
 
 #import "We_all_pay-Swift.h"
 
-typedef NS_ENUM(BOOL, MCXRatesMissing) {
-    xRatesPresent,
-    xRatesMissing
+typedef NS_ENUM(BOOL, MCXRateStatus) {
+    xRatesPresent NS_SWIFT_NAME(Present),
+    xRatesMissing NS_SWIFT_NAME(Missing)
 };
 
-@interface MCReturnPaymentViewController () <UIAlertViewDelegate, MFMailComposeViewControllerDelegate>
+@interface MCReturnPaymentViewController () <UIAlertViewDelegate>
 
 @property (nonatomic, strong) NSArray<MCPerson *> *peoplePresent;
 @property (nonatomic, strong) NSArray<ReturnPayment *> *solution;
 
-@property (nonatomic) MCXRatesMissing areXRatesMissing;
+@property (nonatomic) MCXRateStatus areXRatesMissing;
 
 @property (nonatomic, strong) MCTableEmptyMessage *emptyMessage;
 
@@ -41,6 +43,7 @@ typedef NS_ENUM(BOOL, MCXRatesMissing) {
 
 - (IBAction)sendAsEmailButtonPressed:(id)sender
 {
+    [FIRAnalytics logEventWithName:@"Send email pressed" parameters:nil];
     [self shareBill:self];
 }
 
@@ -49,43 +52,14 @@ typedef NS_ENUM(BOOL, MCXRatesMissing) {
     [[[self navigationController] presentingViewController] dismissViewControllerAnimated:YES completion:nil];
 }
 
-#pragma mark - Private in this class
+#pragma mark - Public in this class
 
 - (void)openMailView:(id)sender
 {
-#ifdef DEBUG
-    NSLog(@"%@ openMailView:%@", self, sender);
-#endif
-    if ([MFMailComposeViewController canSendMail]) {
-        // Init the mailComposer
-        MCMailComposer *mailComposer = [[MCMailComposer alloc] initWithTonightsBill:[self tonightsBill]];
-        NSArray *recipients = [mailComposer getMailAddresses];
-        NSString *subject = [mailComposer getSubject];
-        NSString *messageBody = [mailComposer getMailBody];
-        // Init the mailViewController
-        MFMailComposeViewController *mailViewController = [[MFMailComposeViewController alloc] init];
-        [mailViewController setMailComposeDelegate:sender];
-        [mailViewController setEdgesForExtendedLayout:UIRectEdgeNone];
-        [mailViewController setModalPresentationStyle:UIModalPresentationFormSheet];
-        [[mailViewController viewControllers][0] setEdgesForExtendedLayout:UIRectEdgeNone];
-        [mailViewController setToRecipients:recipients];
-        [mailViewController setSubject:subject];
-        [mailViewController setMessageBody:messageBody isHTML:mailComposer.isHTML];
-        
-        [self presentViewController:mailViewController animated:YES completion:^{
-            [[UIApplication sharedApplication] setStatusBarStyle:UIStatusBarStyleLightContent];
-            [mailViewController setNeedsStatusBarAppearanceUpdate];
-        }];
-    } else {
-        NSString *alertTitle = NSLocalizedString(@"Unable to send email", @"Title of an alert that notifies the user the app is unable to send email.");
-        NSString *alertMessage = NSLocalizedString(@"Please configure your mail in Settings", @"Instruction in an alert to tell the user that they should check their email address for a valid configuration.");
-        NSString *dismiss = NSLocalizedString(@"Dismiss", @"Text on a button that dismisses the alert");
-        UIAlertController *alertController = [UIAlertController alertControllerWithTitle:alertTitle message:alertMessage preferredStyle:UIAlertControllerStyleAlert];
-        UIAlertAction *dismissAction = [UIAlertAction actionWithTitle:dismiss style:UIAlertActionStyleCancel handler:nil];
-        [alertController addAction:dismissAction];
-        [self presentViewController:alertController animated:YES completion:nil];
-    }
+
 }
+
+#pragma mark - Private in this class
 
 - (void)shareBill:(id)sender
 {
@@ -95,28 +69,21 @@ typedef NS_ENUM(BOOL, MCXRatesMissing) {
         NSLog(@"Not everyone has an email address");
         NSString *title = NSLocalizedString(@"EMAIL_CONSTRUCTION_FAILURE_TITLE", @"Unable to send email to all people.");
         NSString *message = NSLocalizedString(@"EMAIL_CONSTRUCTION_FAILURE_MESSAGE", @"Reason: Not all people have a mail address.");
-        NSString *cancel = NSLocalizedString(@"CANCEL", @"Cancel");
+        NSString *cancel = NSLocalizedString(@"Cancel", @"Text on button to cancel something");
         NSString *sendAnyway = NSLocalizedString(@"SEND_ANYWAY", @"Send anyway");
-        if ([UIAlertController class]) {
-            // iOS 8 and up
-            UIAlertController *alertController = [UIAlertController alertControllerWithTitle:title message:message preferredStyle:UIAlertControllerStyleAlert];
-            [alertController addAction:[UIAlertAction actionWithTitle:cancel style:UIAlertActionStyleCancel handler:^(UIAlertAction * _Nonnull action) {
-                // don't do a thing
-            }]];
-            __weak typeof(self) weakSelf = self;
-            [alertController addAction:[UIAlertAction actionWithTitle:sendAnyway style:UIAlertActionStyleDefault handler:^(UIAlertAction * _Nonnull action) {
-                typeof(self) strongSelf = weakSelf;
-                if (strongSelf) {
-                    [self openMailView:self];
-                }
-            }]];
-            [self presentViewController:alertController animated:YES completion:nil];
-        } else {
-            UIAlertView *mailAddressesMissing = [[UIAlertView alloc] initWithTitle:title message:message delegate:self cancelButtonTitle:cancel otherButtonTitles:sendAnyway, nil];
-            [mailAddressesMissing setDelegate:self];
-            [mailAddressesMissing show];
-        }
-
+        
+        UIAlertController *alertController = [UIAlertController alertControllerWithTitle:title message:message preferredStyle:UIAlertControllerStyleAlert];
+        [alertController addAction:[UIAlertAction actionWithTitle:cancel style:UIAlertActionStyleCancel handler:^(UIAlertAction * _Nonnull action) {
+            // don't do a thing
+        }]];
+        __weak typeof(self) weakSelf = self;
+        [alertController addAction:[UIAlertAction actionWithTitle:sendAnyway style:UIAlertActionStyleDefault handler:^(UIAlertAction * _Nonnull action) {
+            typeof(self) strongSelf = weakSelf;
+            if (strongSelf) {
+                [self openMailView:self];
+            }
+        }]];
+        [self presentViewController:alertController animated:YES completion:nil];
     }
 }
 
@@ -162,9 +129,29 @@ typedef NS_ENUM(BOOL, MCXRatesMissing) {
             
             return;
         }
+        // Workaround for a bug in iOS 9. Call reloadData before calling beginUpdates
+        NSOperatingSystemVersion ios9 = (NSOperatingSystemVersion){9, 0, 0};
+        if ([[NSProcessInfo processInfo] isOperatingSystemAtLeastVersion:ios9]) {
+            
+            BOOL shouldReloadData = YES;
+            NSInteger numberOfSections = [self.tableView.dataSource numberOfSectionsInTableView:self.tableView];
+            for (NSInteger section = 0; section < numberOfSections; section++)
+            {
+                if ([self.tableView.dataSource tableView:self.tableView numberOfRowsInSection:section] > 0)
+                {
+                    // found a row in current section, do not need to reload data
+                    shouldReloadData = NO;
+                    break;
+                }
+            }
+            
+            if (shouldReloadData) 
+            {
+                [self.tableView reloadData];
+            }
+        }
         
         // Update tableView.
-        [[self tableView] beginUpdates];
         self.areXRatesMissing = xRatesPresent;
         self.solution = results;
         NSSortDescriptor *sortDescriptor = [NSSortDescriptor sortDescriptorWithKey:@"firstName" ascending:YES];
@@ -173,6 +160,7 @@ typedef NS_ENUM(BOOL, MCXRatesMissing) {
         
         [self setEmptyMessageNow];
         
+        [[self tableView] beginUpdates];
         NSIndexSet *indexes = [[NSIndexSet alloc] initWithIndexesInRange:NSMakeRange(0, 3)];
         [[self tableView] insertSections:indexes withRowAnimation:UITableViewRowAnimationTop];
         [[self tableView] endUpdates];
@@ -243,25 +231,6 @@ typedef NS_ENUM(BOOL, MCXRatesMissing) {
 - (BOOL)shouldPresentInterstitialAd
 {
     return NO;
-}
-
-#pragma mark - MFMailComposeViewControllerDelegate
-
-- (void)mailComposeController:(MFMailComposeViewController *)controller didFinishWithResult:(MFMailComposeResult)result error:(NSError *)error
-{
-    if (result == MFMailComposeResultCancelled) {
-        [[self presentedViewController] dismissViewControllerAnimated:YES completion:nil];
-    } else if (result == MFMailComposeResultSent) {
-        [self showRateMeIfNecessary];
-        [[self presentedViewController] dismissViewControllerAnimated:YES completion:^{
-            [_tonightsBill setHasTheMailBeenSent:@YES];
-            [[MCWeAllPayStoreController defaultStore] saveMainThreadContext];
-        }];
-    } else if (result == MFMailComposeResultSaved) {
-        [[self presentedViewController] dismissViewControllerAnimated:YES completion:nil];
-    } else {
-        NSLog(@"Sending email went wrong: %@", error);
-    }
 }
 
 #pragma mark - UITableViewDelegate
@@ -345,7 +314,7 @@ typedef NS_ENUM(BOOL, MCXRatesMissing) {
         ReturnPayment *thisCellsReturnPayment = _solution[[indexPath row]];
         MCWhoOwesWhoTableViewCell_iPhone *returnPaymentCell = [tableView dequeueReusableCellWithIdentifier:@"MCWhoOwesWhoTableViewCell_iPhone"];
         CurrencyFormatter *cf = [[CurrencyFormatter alloc] initWithCurrencyCode:_tonightsBill.mainCurrency.code];
-        returnPaymentCell.moneyLabel.text = [cf stringForObjectValue:thisCellsReturnPayment.money];
+        returnPaymentCell.moneyLabel.text = [cf stringFor:thisCellsReturnPayment.money];
         
         NSString *owesString = NSLocalizedString(@"OWES", @"As in Mark owes Arjen, but then just the word owes.");
         NSString *whoOwesWho = [[NSString alloc] initWithFormat:@"%@ %@ %@:", [[thisCellsReturnPayment payer] getName], owesString, [[thisCellsReturnPayment receiver] getName]];
@@ -362,7 +331,7 @@ typedef NS_ENUM(BOOL, MCXRatesMissing) {
         [[cell whoPaidHowMuchLabel] setText:[person getFullName]];
         NSNumber *sumSpentByPerson = @(-[[_tonightsBill amountShouldHavePaidBy:person] doubleValue]);
         CurrencyFormatter *cf = [[CurrencyFormatter alloc] initWithCurrencyCode:_tonightsBill.mainCurrency.code];
-        cell.moneyLabel.text = [cf stringForObjectValue:sumSpentByPerson];
+        cell.moneyLabel.text = [cf stringFor:sumSpentByPerson];
         return cell;
     }
     
@@ -374,7 +343,7 @@ typedef NS_ENUM(BOOL, MCXRatesMissing) {
             [[cell whoPaidHowMuchLabel] setText:[person getFullName]];
             
             CurrencyFormatter *cf = [[CurrencyFormatter alloc] initWithCurrencyCode:_tonightsBill.mainCurrency.code];
-            cell.moneyLabel.text = [cf stringForObjectValue:person.totalSumPaid];
+            cell.moneyLabel.text = [cf stringFor:person.totalSumPaid];
             return cell;
         } else {
             MCSolutionOverViewTableViewCell_iPhone *cell = [tableView dequeueReusableCellWithIdentifier:@"MCSolutionOverViewTableViewCell_iPhone"];
@@ -382,7 +351,7 @@ typedef NS_ENUM(BOOL, MCXRatesMissing) {
             [[cell totalLabel] setText:totalSpentString];
             
             CurrencyFormatter *cf = [[CurrencyFormatter alloc] initWithCurrencyCode:_tonightsBill.mainCurrency.code];
-            cell.moneyLabel.text = [cf stringForObjectValue:_tonightsBill.totalSumOfMoneyOfThisSharedBill];
+            cell.moneyLabel.text = [cf stringFor:_tonightsBill.totalSumOfMoneyOfThisSharedBill];
             return cell;
         }
     }

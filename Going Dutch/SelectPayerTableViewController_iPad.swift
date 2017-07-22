@@ -9,11 +9,13 @@
 import UIKit
 import CoreData
 
+import FirebaseAnalytics
+
 class SelectPayerTableViewController_iPad: UITableViewController, MCTonightsBillTransfer, MCThisPaymentProtocol {
     // MARK: Properties
     var people: [MCPerson]!
     var tonightsBill: MCSharedBill!
-    var writeableTonightsBill: MCSharedBill!
+    @objc(writableTonightsBill) var writableTonightsBill: MCSharedBill!
     var thisPayment: MCPayment!
     var dismissMe: (()->())?
 
@@ -27,28 +29,29 @@ class SelectPayerTableViewController_iPad: UITableViewController, MCTonightsBill
     }
     
     // MARK: UI Table View Delegate
-    override func tableView(tableView: UITableView, heightForRowAtIndexPath indexPath: NSIndexPath) -> CGFloat {
+    override func tableView(_ tableView: UITableView, heightForRowAt indexPath: IndexPath) -> CGFloat {
         return 44.0
     }
     
-    override func tableView(tableView: UITableView, didSelectRowAtIndexPath indexPath: NSIndexPath) {
-        thisPayment.payingPerson = people[indexPath.row]
+    override func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
+        FIRAnalytics.logEvent(withName: "Select payer", parameters: nil)
+        thisPayment.payingPerson = people[(indexPath as NSIndexPath).row]
         dismissMe?()
     }
     
     // MARK: UI Table View Data Source
     
-    override func numberOfSectionsInTableView(tableView: UITableView) -> Int {
+    override func numberOfSections(in tableView: UITableView) -> Int {
         return 1
     }
     
-    override func tableView(tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
+    override func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
         return people.count
     }
     
-    override func tableView(tableView: UITableView, cellForRowAtIndexPath indexPath: NSIndexPath) -> UITableViewCell {
-        let cell = tableView.dequeueReusableCellWithIdentifier("selectPayerTableViewCell", forIndexPath: indexPath) as! SelectPayerTableViewCell_iPad
-        let thisPerson = people[indexPath.row]
+    override func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
+        let cell = tableView.dequeueReusableCell(withIdentifier: "selectPayerTableViewCell", for: indexPath) as! SelectPayerTableViewCell_iPad
+        let thisPerson = people[(indexPath as NSIndexPath).row]
         cell.thumbnailView.image = thisPerson.thumbnail
         cell.fullNameLabel.text = thisPerson.getFullName()
         

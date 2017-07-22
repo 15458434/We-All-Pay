@@ -39,8 +39,7 @@ MCiCloudUse const isiCloudUsed = iCloudIsNotUsed;
 
 @implementation MCWeAllPayStoreController
 
-@synthesize weAllPayStoreDocument;
-
+@synthesize fetcher = _fetcher;
 @synthesize managedObjectModel = _managedObjectModel;
 @synthesize mainThreadContext = _mainThreadContext;
 @synthesize backgroundThreadContext = _backgroundThreadContext;
@@ -52,23 +51,22 @@ MCiCloudUse const isiCloudUsed = iCloudIsNotUsed;
 
 #pragma mark - New in this class
 
-- (void)storeIsReady:(NSNotification *)notification
+- (ExchangeRateFetcher *)fetcher
 {
-    if ([weAllPayStoreDocument documentState] == UIDocumentStateNormal) {
-        NSLog(@"Document is ready to use.");
+    if (_fetcher == nil) {
+        return [[ExchangeRateFetcher alloc] init];
+    } else {
+        return _fetcher;
     }
 }
 
-+ (MCWeAllPayStoreController *)defaultStore
++ (instancetype)defaultStore
 {
     static MCWeAllPayStoreController *sharedStore = nil;
-    if (!sharedStore) {
-        sharedStore = [[super allocWithZone:nil] init];
-        NSOperationQueue *someQueue = [[NSOperationQueue alloc] init];
-        someQueue.name = @"Fetcher Initialiser";
-        [someQueue addOperationWithBlock:^{
-            sharedStore.fetcher = [[ExchangeRateFetcher alloc] init];
-        }];
+    @synchronized (self) {
+        if (sharedStore == nil) {
+            sharedStore = [[MCWeAllPayStoreController alloc] init];
+        }
     }
     return sharedStore;
 }
@@ -112,17 +110,6 @@ MCiCloudUse const isiCloudUsed = iCloudIsNotUsed;
     } else {
         NSLog(@"Background save not possible: %@", error);
     }
-}
-
-- (void)closeDocument
-{
-    [weAllPayStoreDocument closeWithCompletionHandler:^(BOOL success){
-        if (success) {
-            NSLog(@"UIManagedDocument was succesfully closed.");
-        } else {
-            NSLog(@"Close not possible for document at %@", [weAllPayStoreDocument fileURL]);
-        }
-    }];
 }
 
 #pragma mark - Undomanager stuff.
@@ -275,7 +262,7 @@ MCiCloudUse const isiCloudUsed = iCloudIsNotUsed;
     NSLog(@"%@ availableCurrencyControllerForDelegate", self);
 #endif
     NSParameterAssert([delegate conformsToProtocol:@protocol(NSFetchedResultsControllerDelegate)]);
-    NSManagedObjectContext *context = [weAllPayStoreDocument managedObjectContext];
+    NSManagedObjectContext *context = [self mainThreadContext];
     NSFetchRequest *request = [NSFetchRequest fetchRequestWithEntityName:@"MCCurrency"];
     request.sortDescriptors = @[[NSSortDescriptor sortDescriptorWithKey:@"name" ascending:YES]];
     request.predicate = [NSPredicate predicateWithFormat:@"isStillValid = YES"];
@@ -293,7 +280,7 @@ MCiCloudUse const isiCloudUsed = iCloudIsNotUsed;
 - (NSFetchedResultsController *)searchCurrencyControllerWithSearchText:(NSString *)searchText withDelegate:(id)delegate
 {
     NSParameterAssert([delegate conformsToProtocol:@protocol(NSFetchedResultsControllerDelegate)]);
-    NSManagedObjectContext *context = [weAllPayStoreDocument managedObjectContext];
+    NSManagedObjectContext *context = [self mainThreadContext];
     NSFetchRequest *request = [NSFetchRequest fetchRequestWithEntityName:@"MCCurrency"];
     request.sortDescriptors = @[[NSSortDescriptor sortDescriptorWithKey:@"name" ascending:YES]];
     request.predicate = [NSPredicate predicateWithFormat:@"isStillValid = YES AND name contains[c] %@", searchText];
@@ -346,46 +333,6 @@ MCiCloudUse const isiCloudUsed = iCloudIsNotUsed;
     } else {
         return result;
     }
-}
-
-- (void)createCircularPeopleImages
-{
-    // Fetch all people.
-    NSFetchRequest *fetchRequest = [NSFetchRequest fetchRequestWithEntityName:@"MCPerson"];
-    fetchRequest.sortDescriptors = @[[NSSortDescriptor sortDescriptorWithKey:@"dateCreated" ascending:YES]];
-    NSError *fetchError;
-    NSArray *allPeople = [_mainThreadContext executeFetchRequest:fetchRequest error:&fetchError];
-    if (!allPeople) {
-        NSLog(@"Error fetching all people: %@", fetchError);
-    }
-    // Insert a new base picture for every person in the database.
-    for (MCPerson *person in allPeople) {
-        [person setPictureDataFromImage:nil];
-        [person setThumbnailDataFromImage:nil];
-    }
-    // Save everything.
-    [self saveMainThreadContext];
-}
-
-#pragma mark - Inherited from super class
-
-- (id)init
-{
-    self = [super init];
-    
-    static BOOL stillNeedsInit = 1;
-    
-    if (self && stillNeedsInit) {
-//        [self openStore:nil];
-        
-        stillNeedsInit = 0;
-    }
-    return self;
-}
-
-+ (id)allocWithZone:(NSZone *)zone
-{
-    return [self defaultStore];
 }
 
 #pragma mark - Core Data Messages

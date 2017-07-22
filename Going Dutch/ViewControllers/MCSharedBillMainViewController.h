@@ -8,7 +8,6 @@
 
 @import UIKit;
 
-#import "MCTitleViewDelegate.h"
 #import "MCTonightsBillTransfer.h"
 #import "MCCurrentViewDelegate.h"
 #import "MCPathComponentsToOpenProtocol.h"
@@ -17,14 +16,14 @@
 
 @class MCSharedBill;
 
-@interface MCSharedBillMainViewController : UIViewController <MCTitleViewDelegate, MCTonightsBillTransfer, MCCurrentViewDelegate, MCPathComponentsToOpenProtocol>
+@interface MCSharedBillMainViewController : UIViewController <MCTonightsBillTransfer, MCCurrentViewDelegate, MCPathComponentsToOpenProtocol>
 
 @property (nonatomic) MCSharedBillViewSelector currentView;
 @property (strong, nonatomic) MCSharedBill *tonightsBill;
 @property (nonatomic, strong) MCSharedBill *writableTonightsBill;
 
 @property (strong, nonatomic) NSArray *pathComponentsToOpen;
-@property (weak, nonatomic) IBOutlet UILabel *mainTitleLabel;
-@property (weak, nonatomic) IBOutlet UIPageControl *pageIndicator;
+
+@property (weak, nonatomic) IBOutlet UISegmentedControl *peopleOrPaymentsSelectionControl;
 
 @end

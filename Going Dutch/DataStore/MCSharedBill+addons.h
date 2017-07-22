@@ -38,6 +38,7 @@
 - (BOOL)doAllPaymentHaveAPayer;
 - (MCPayment *)getFirstPaymentWithoutAPayer;
 - (BOOL)areAllExchangeRatesValid;
+- (void)updateMainCurrencyFromCode:(NSString *)code withCompletion:(void (^)(NSError *error))completion;
 - (NSArray *)solveWhoHasToPayWhoFromThisBill;
 - (void)solveWithHandler:(void (^)(NSArray *results, NSError *error))solution;
 - (NSNumber *)totalSumOfMoneyOfThisSharedBill;
@@ -53,6 +54,6 @@
 
 - (void)deleteIfStillNew;
 
-- (NSArray<MCCurrency *>*)recentUsedForeignCurrencies;
+- (NSArray<MCCurrency *>*)recentUsedForeignCurrencies:(NSUInteger)fetchLimit;
 
 @end

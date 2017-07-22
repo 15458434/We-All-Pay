@@ -17,24 +17,24 @@ extension UIViewController {
             // show rate me alert
             let title = NSLocalizedString("Do you like We all pay?", comment: "Question to the user whether or not they like this app.")
             let message = NSLocalizedString("Please give We all pay a 5 star rating and help other people find the benefits We all pay.", comment: "Message to the user to give We all pay a five star rating.")
-            let alertController = UIAlertController(title: title, message: message, preferredStyle: UIAlertControllerStyle.Alert)
+            let alertController = UIAlertController(title: title, message: message, preferredStyle: UIAlertControllerStyle.alert)
             let noTitle = NSLocalizedString("Hell no", comment: "Title of a No button.")
-            let noAction = UIAlertAction(title: noTitle, style: UIAlertActionStyle.Cancel, handler: { (action) -> Void in
-                rmc.rateMeDisplayed(RateMeControllerAskStatus.No)
-                rmc.save()
+            let noAction = UIAlertAction(title: noTitle, style: UIAlertActionStyle.cancel, handler: { (action) -> Void in
+                rmc.rateMeDisplayed(RateMeControllerAskStatus.no)
+                _ = rmc.save()
             })
             alertController.addAction(noAction)
             let yesTitle = NSLocalizedString("Sure", comment: "Title of a Yes button.")
-            let yesAction = UIAlertAction(title: yesTitle, style: UIAlertActionStyle.Default, handler: { (action) -> Void in
+            let yesAction = UIAlertAction(title: yesTitle, style: UIAlertActionStyle.default, handler: { (action) -> Void in
                 RateMeController.openReviewLink()
-                rmc.rateMeDisplayed(RateMeControllerAskStatus.AlreadyRated)
-                rmc.save()
+                rmc.rateMeDisplayed(RateMeControllerAskStatus.alreadyRated)
+                _ = rmc.save()
             })
             alertController.addAction(yesAction)
-            presentViewController(alertController, animated: true, completion: nil)
+            present(alertController, animated: true, completion: nil)
         } else {
             debugPrint("Should not show.")
-            rmc.save()
+            _ = rmc.save()
         }
     }
 }

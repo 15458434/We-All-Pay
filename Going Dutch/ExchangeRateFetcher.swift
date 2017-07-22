@@ -12,7 +12,7 @@ public class ExchangeRateFetcher: NSObject {
     public let currencyController: CurrencyController = CurrencyController()
     public private(set) var baseCurrencyCode: String!
     public private(set) var rates: Dictionary<String, Double>!
-    public private(set) var date: NSDate!
+    public private(set) var date: Date!
     
     public private(set) var isFetching: Bool = false
     
@@ -21,8 +21,8 @@ public class ExchangeRateFetcher: NSObject {
             return true
         }
         
-        let now = NSDate()
-        let intervalSinceLastFetch = now.timeIntervalSinceDate(self.date)
+        let now = Date()
+        let intervalSinceLastFetch = now.timeIntervalSince(self.date)
         if intervalSinceLastFetch >= 3600.0 {
             return true
         } else {
@@ -30,81 +30,81 @@ public class ExchangeRateFetcher: NSObject {
         }
     }
     
-    public func calculateExchangeRate(fromCode: String, toCode: String) -> Double {
+    public func calculateExchangeRate(_ fromCode: String, toCode: String) -> Double {
         let fromToBaseRate = rates[fromCode]!
         let toToBaseRate = rates[toCode]!
         return toToBaseRate / fromToBaseRate
     }
     
-    public func exchangeRate(fromCode: String, toCode: String, completionHandler: (fromCode: String, toCode: String, exchangeRate: NSNumber!, error: NSError!) -> ()) {
-        let thisOperationQueue = NSOperationQueue.currentQueue()!
+    public func exchangeRate(_ fromCode: String, toCode: String, completionHandler: @escaping (_ fromCode: String, _ toCode: String, _ exchangeRate: NSNumber?, _ error: NSError?) -> ()) {
+        let thisOperationQueue = OperationQueue.current!
         if isLastFetchOlderThanAnHour {
             fetchFromOpenExchangeRates({ (baseCurrency, rates, error) -> () in
                 if error != nil {
-                    completionHandler(fromCode: fromCode, toCode: toCode, exchangeRate: nil, error: error)
+                    completionHandler(fromCode, toCode, nil, error)
                     return
                 }
                 let exchangeRate = self.calculateExchangeRate(fromCode, toCode: toCode)
-                thisOperationQueue.addOperationWithBlock({ () -> Void in
-                    completionHandler(fromCode: fromCode, toCode: toCode, exchangeRate: exchangeRate, error: nil)
+                thisOperationQueue.addOperation({ () -> Void in
+                    completionHandler(fromCode, toCode, exchangeRate as NSNumber?, nil)
                 })
             })
         } else {
             let rate = calculateExchangeRate(fromCode, toCode: toCode)
-            completionHandler(fromCode: fromCode, toCode: toCode, exchangeRate: rate, error: nil)
+            completionHandler(fromCode, toCode, rate as NSNumber?, nil)
         }
     }
     
-    public func fetchFromOpenExchangeRates(completionHandler: (baseCurrency: String!, rates: Dictionary<String, Double>!, error: NSError?) -> ()) {
+    public func fetchFromOpenExchangeRates(_ completionHandler: @escaping (_ baseCurrency: String?, _ rates: Dictionary<String, Double>?, _ error: NSError?) -> ()) {
         if isFetching {
             let error = NSError(domain: "ExchangeRateFetcher", code: 1, userInfo: ["reason": "Already fetching"])
-            completionHandler(baseCurrency: nil, rates: nil, error: error)
+            completionHandler(nil, nil, error)
             return
         }
         isFetching = true
-        UIApplication.sharedApplication().networkActivityIndicatorVisible = true
+        UIApplication.shared.isNetworkActivityIndicatorVisible = true
         
-        let url = NSURL(string: "https://openexchangerates.org/api/latest.json?app_id=cba02a60bd89412095c84ecb65b6326a");
+        let url = URL(string: "https://openexchangerates.org/api/latest.json?app_id=cba02a60bd89412095c84ecb65b6326a");
         
-        let task = NSURLSession.sharedSession().dataTaskWithURL(url!) {(data, response, error) in
-            UIApplication.sharedApplication().networkActivityIndicatorVisible = false
+        let task = URLSession.shared.dataTask(with: url!) {(data, response, error) in
+            UIApplication.shared.isNetworkActivityIndicatorVisible = false
             if error != nil {
                 print("Error fetching exchangeRate from OpenExchangeRates: \(error)")
-                NSOperationQueue.mainQueue().addOperationWithBlock({ () -> Void in
-                    completionHandler(baseCurrency: nil, rates: nil, error: error)
+                OperationQueue.main.addOperation({ () -> Void in
+                    completionHandler(nil, nil, error as NSError?)
                     self.isFetching = false
                 })
                 return
             }
             
-            let httpResp = response as! NSHTTPURLResponse
+            let httpResp = response as! HTTPURLResponse
             if (httpResp.statusCode == 200) {
                 do {
-                    let jsonResponseDictonary = try NSJSONSerialization.JSONObjectWithData(data!, options: .AllowFragments) as! Dictionary<String, AnyObject>
+                    let jsonResponseDictonary = try JSONSerialization.jsonObject(with: data!, options: .allowFragments) as! Dictionary<String, AnyObject>
                     let baseCurrencyCode = jsonResponseDictonary["base"] as? String
                     let rates = jsonResponseDictonary["rates"] as? Dictionary<String, Double>
-                    let date = NSDate(timeIntervalSince1970: Double((jsonResponseDictonary["timestamp"] as? Int)!))
-                    NSOperationQueue.mainQueue().addOperationWithBlock({ () -> Void in
+                    let date = Date(timeIntervalSince1970: Double((jsonResponseDictonary["timestamp"] as? Int)!))
+                    OperationQueue.main.addOperation({ () -> Void in
                         self.baseCurrencyCode = baseCurrencyCode
                         self.rates = rates
                         self.date = date
-                        completionHandler(baseCurrency: baseCurrencyCode, rates: rates, error: nil)
+                        completionHandler(baseCurrencyCode, rates, nil)
                             self.isFetching = false
                     })
                 } catch let error {
                     // JSON Error
                     print("Error reading exchangeRatesFromJSON: \(error)")
                     let jsonError = NSError(domain: "We all pay", code: 0, userInfo: ["Reason": "Error parsing json"])
-                    NSOperationQueue.mainQueue().addOperationWithBlock({ () -> Void in
-                        completionHandler(baseCurrency: nil, rates: nil, error: jsonError)
+                    OperationQueue.main.addOperation({ () -> Void in
+                        completionHandler(nil, nil, jsonError)
                         self.isFetching = false
                     })
                 }
             } else {
                 // Status code != 200
                 let error = NSError(domain: "ExchangeRateFetcher", code: 2, userInfo: ["reason": "HTTP Response code: \(httpResp)", "response": httpResp])
-                NSOperationQueue.mainQueue().addOperationWithBlock({ () -> Void in
-                    completionHandler(baseCurrency: nil, rates: nil, error: error)
+                OperationQueue.main.addOperation({ () -> Void in
+                    completionHandler(nil, nil, error)
                     self.isFetching = false
                 })
             }
@@ -112,7 +112,7 @@ public class ExchangeRateFetcher: NSObject {
         task.resume()
     }
     
-    public func isCurrencyCodeAvailableInRates(code: String) -> Bool {
+    public func isCurrencyCodeAvailableInRates(_ code: String) -> Bool {
         if let _ = rates[code] {
             return true
         } else {

@@ -11,5 +11,5 @@ import Foundation
 @objc(MCThisPersonProtocol) protocol ThisPersonProtocol {
     var thisPerson: MCPerson! {set get}
     
-    optional var isNew: Bool {set get}
+     @objc optional var isNew: Bool {set get}
 }

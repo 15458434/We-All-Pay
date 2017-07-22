@@ -13,12 +13,6 @@
 
 @implementation MCCurrency (addons)
 
-+ (MCCurrency *)getCurrencySelectedInCurrentLocaleFromContext:(NSManagedObjectContext *)context
-{
-    // Still present for downwards compatibility.
-    return [MCCurrency generateCurrencyFromSelectedLocaleForContext:context];
-}
-
 + (MCCurrency *)generateCurrencyFromSelectedLocaleForContext:(NSManagedObjectContext *)context;
 {
 #ifdef DEBUG

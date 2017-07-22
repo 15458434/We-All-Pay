@@ -11,9 +11,11 @@ import MessageUI
 import Social
 import StoreKit
 
-private let productName = NSBundle.mainBundle().infoDictionary!["CFBundleDisplayName"] as! String
-private let shortVersionString = NSBundle.mainBundle().infoDictionary!["CFBundleShortVersionString"] as! String
-private let versionString = NSBundle.mainBundle().infoDictionary!["CFBundleVersion"] as! String
+import FirebaseAnalytics
+
+private let productName = Bundle.main.infoDictionary!["CFBundleDisplayName"] as! String
+private let shortVersionString = Bundle.main.infoDictionary!["CFBundleShortVersionString"] as! String
+private let versionString = Bundle.main.infoDictionary!["CFBundleVersion"] as! String
 
 class InfoScreenTableViewController: UITableViewController, MFMailComposeViewControllerDelegate {
     // MARK: Properties
@@ -29,93 +31,95 @@ class InfoScreenTableViewController: UITableViewController, MFMailComposeViewCon
     @IBOutlet var versionLabel: UILabel!
     
     // MARK: IB Actions
-    @IBAction func mainCancelButtonPressed(sender: AnyObject) {
-        self.navigationController?.presentingViewController!.dismissViewControllerAnimated(true, completion: nil)
+    @IBAction func mainCancelButtonPressed(_ sender: AnyObject) {
+        self.navigationController?.presentingViewController!.dismiss(animated: true, completion: nil)
     }
     
-    @IBAction func tweetAboutUsPressed(sender: AnyObject) {
+    @IBAction func tweetAboutUsPressed(_ sender: AnyObject) {
+        FIRAnalytics.logEvent(withName: "Tweet about us", parameters: nil)
         let twitterComposer = SLComposeViewController(forServiceType: SLServiceTypeTwitter)
-        twitterComposer.setInitialText("Thank you @MarkCornelisse, I have no more money problems with my friends thanks to your \(productName). #ios #app")
-        twitterComposer.addURL(NSURL(string: "https://itunes.apple.com/us/app/we-all-pay/id642135963?ls=1&mt=8"))
-        presentViewController(twitterComposer, animated: true, completion: nil)
+        twitterComposer?.setInitialText("Thank you @MarkCornelisse, I have no more money problems with my friends thanks to your \(productName). #ios #app")
+        twitterComposer?.add(URL(string: "https://itunes.apple.com/us/app/we-all-pay/id642135963?ls=1&mt=8"))
+        present(twitterComposer!, animated: true, completion: nil)
     }
     
     // MARK: New in this class
     
     private func openMyAppStoreLink() {
-        let url = NSURL(string: "itms-apps://itunes.apple.com/WebObjects/MZStore.woa/wa/viewContentsUserReviews?id=642135963&pageNumber=0&sortOrdering=2&type=Purple+Software&mt=8")!
-        UIApplication.sharedApplication().openURL(url)
+        let url = URL(string: "itms-apps://itunes.apple.com/WebObjects/MZStore.woa/wa/viewContentsUserReviews?id=642135963&pageNumber=0&sortOrdering=2&type=Purple+Software&mt=8")!
+        UIApplication.shared.openURL(url)
     }
     
     private func showAllMyApps() {
-        let url = NSURL(string: "itms-apps://search.itunes.apple.com/WebObjects/MZContentLink.woa/wa/link?mt=8&path=apps%2fmarkcornelisse")!
-        UIApplication.sharedApplication().openURL(url)
+        let url = URL(string: "itms-apps://search.itunes.apple.com/WebObjects/MZContentLink.woa/wa/link?mt=8&path=apps%2fmarkcornelisse")!
+        UIApplication.shared.openURL(url)
     }
     
     private func openMailComposer() {
-        if MFMailComposeViewController.canSendMail() {
+        if MailComposeViewController.canSendMail() {
             let mailComposer = MFMailComposeViewController()
             mailComposer.setToRecipients(["support@markcornelisse.nl"])
             let subjectString = "Feedback on \(productName) \(shortVersionString)"
             mailComposer.setSubject(subjectString)
             mailComposer.mailComposeDelegate = self
-            presentViewController(mailComposer, animated: true) { () -> Void in
-                UIApplication.sharedApplication().setStatusBarStyle(UIStatusBarStyle.LightContent, animated: false)
-                mailComposer.setNeedsStatusBarAppearanceUpdate()
+            present(mailComposer, animated: true) { () -> Void in
+                // Nothing to do.
             }
         } else {
             let title = NSLocalizedString("Unable to send email", comment: "Unable to send email")
             let message = NSLocalizedString("Please configure your mail in Settings", comment: "Please configure your mail in Settings")
-            let alertController = UIAlertController(title: title, message: message, preferredStyle: .Alert)
+            let alertController = UIAlertController(title: title, message: message, preferredStyle: .alert)
             let cancelButtonText = NSLocalizedString("Dismiss", comment: "Dismiss")
-            let cancelAction = UIAlertAction(title: cancelButtonText, style: .Cancel, handler: nil)
+            let cancelAction = UIAlertAction(title: cancelButtonText, style: .cancel, handler: nil)
             alertController.addAction(cancelAction)
-            presentViewController(alertController, animated: true, completion: nil)
+            present(alertController, animated: true, completion: nil)
         }
     }
     
     // MARK: Notifications
-    func applyProVersion(notification: NSNotification) {
-        NSOperationQueue.mainQueue().addOperationWithBlock { () -> Void in
+    func applyProVersion(_ notification: Notification) {
+        FIRAnalytics.logEvent(withName: "Applying Pro version", parameters: nil)
+        OperationQueue.main.addOperation { () -> Void in
             self.tableView.beginUpdates()
-            self.tableView.deleteRowsAtIndexPaths([NSIndexPath(forRow: 0, inSection: 0), NSIndexPath(forRow: 1, inSection: 0)], withRowAnimation: UITableViewRowAnimation.Automatic)
+            self.tableView.deleteRows(at: [IndexPath(row: 0, section: 0), IndexPath(row: 1, section: 0)], with: UITableViewRowAnimation.automatic)
             self.tableView.endUpdates()
             
             var title: String!
             var message: String?
-            if notification.userInfo!["Kind of purchase"] as? String == "new buy" {
+            if (notification as NSNotification).userInfo!["Kind of purchase"] as? String == "new buy" {
                 title = NSLocalizedString("Thank you for purchasing", comment: "Thank you for purchasing")
                 message = NSLocalizedString("\(productName) is now free of any ads.", comment: "\(productName) is now free of any ads.")
 
-            } else if notification.userInfo!["Kind of purchase"] as? String == "restore purchase" {
+            } else if (notification as NSNotification).userInfo!["Kind of purchase"] as? String == "restore purchase" {
                 title = NSLocalizedString("Ad free version restored.", comment: "Ad free version restored.")
             }
             let dismissText = NSLocalizedString("Dismiss", comment: "Dismiss")
             var alertController: UIAlertController!
-            alertController = UIAlertController(title: title, message: message, preferredStyle: .Alert)
-            let cancelAction = UIAlertAction(title: dismissText, style: .Cancel, handler:nil)
+            alertController = UIAlertController(title: title, message: message, preferredStyle: .alert)
+            let cancelAction = UIAlertAction(title: dismissText, style: .cancel, handler:nil)
             alertController.addAction(cancelAction)
-            self.presentViewController(alertController, animated: true, completion: nil)
+            self.present(alertController, animated: true, completion: nil)
         }
     }
     
-    func postProductPrice(notification: NSNotification) {
+    func postProductPrice(_ notification: Notification) {
         if !MCStoreInterface.defaultStoreInterface.isProProductPurchased {
-            let cell = tableView.cellForRowAtIndexPath(NSIndexPath(forRow: 0, inSection: 0)) as! MCTwoLabelIscreenTableViewCell
+            let cell = tableView.cellForRow(at: IndexPath(row: 0, section: 0)) as! MCTwoLabelIscreenTableViewCell
             cell.rightLabel.text = MCStoreInterface.defaultStoreInterface.proProduct.priceString
         }
     }
     
-    func restorePreviousPurchasesFailed(notification: NSNotification) {
-        if notification.userInfo!["status"] as? String == "Not restored" {
+    func restorePreviousPurchasesFailed(_ notification: Notification) {
+        FIRAnalytics.logEvent(withName: "Restore Previous Purchases", parameters: nil)
+        if (notification as NSNotification).userInfo!["status"] as? String == "Not restored" {
             let myPresenter = presentingViewController!
             let title = NSLocalizedString("Nothing to restore", comment: "Nothing to restore")
             let dismiss = NSLocalizedString("Dismiss", comment: "Dismiss")
-            let alertController = UIAlertController(title: title, message: nil, preferredStyle: .Alert)
+            let alertController = UIAlertController(title: title, message: nil, preferredStyle: .alert)
             
-            let cancelAction = UIAlertAction(title: dismiss, style: .Cancel, handler:nil)
+            let cancelAction = UIAlertAction(title: dismiss, style: .cancel, handler:nil)
             alertController.addAction(cancelAction)
-            myPresenter.presentViewController(alertController, animated: true, completion: nil)
+            myPresenter.present(alertController, animated: true, completion: nil)
         }
     }
     
@@ -126,78 +130,90 @@ class InfoScreenTableViewController: UITableViewController, MFMailComposeViewCon
         versionLabel.text = "\(shortVersionString) build \(versionString)"
     }
     
-    override func viewDidAppear(animated: Bool) {
+    override func viewDidAppear(_ animated: Bool) {
         super.viewDidAppear(animated)
         
-        NSNotificationCenter.defaultCenter().addObserver(self, selector: #selector(InfoScreenTableViewController.applyProVersion(_:)), name: MCStoreInterface.applyProVersionNotification(), object: MCStoreInterface.defaultStoreInterface)
-        NSNotificationCenter.defaultCenter().addObserver(self, selector: #selector(InfoScreenTableViewController.postProductPrice(_:)), name: "Product price", object: MCStoreInterface.defaultStoreInterface)
-        NSNotificationCenter.defaultCenter().addObserver(self, selector: #selector(InfoScreenTableViewController.restorePreviousPurchasesFailed(_:)), name: "Restore previous purchases", object: MCStoreInterface.defaultStoreInterface)
+        NotificationCenter.default.addObserver(self, selector: #selector(InfoScreenTableViewController.applyProVersion(_:)), name: NSNotification.Name(rawValue: MCStoreInterface.applyProVersionNotification()), object: MCStoreInterface.defaultStoreInterface)
+        NotificationCenter.default.addObserver(self, selector: #selector(InfoScreenTableViewController.postProductPrice(_:)), name: NSNotification.Name(rawValue: "Product price"), object: MCStoreInterface.defaultStoreInterface)
+        NotificationCenter.default.addObserver(self, selector: #selector(InfoScreenTableViewController.restorePreviousPurchasesFailed(_:)), name: NSNotification.Name(rawValue:"Restore previous purchases"), object: MCStoreInterface.defaultStoreInterface)
     }
     
-    override func viewDidDisappear(animated: Bool) {
+    override func viewDidDisappear(_ animated: Bool) {
         super.viewDidDisappear(animated)
         
-        NSNotificationCenter.defaultCenter().removeObserver(self)
+        NotificationCenter.default.removeObserver(self)
     }
     
     override func didReceiveMemoryWarning() {
         super.didReceiveMemoryWarning()
     }
     
-    override func prefersStatusBarHidden() -> Bool {
+    override var prefersStatusBarHidden: Bool {
         return true
     }
     
     // MARK: MF MAil Compose Delegate
     
-    func mailComposeController(controller: MFMailComposeViewController, didFinishWithResult result: MFMailComposeResult, error: NSError?) {
-        switch (result.rawValue) {
-        case MFMailComposeResultCancelled.rawValue:
-            dismissViewControllerAnimated(true, completion: nil)
-        case MFMailComposeResultSaved.rawValue:
-            dismissViewControllerAnimated(true, completion: nil)
-        case MFMailComposeResultSent.rawValue:
-            dismissViewControllerAnimated(true, completion: nil)
-        default:
+    func mailComposeController(_ controller: MFMailComposeViewController, didFinishWith result: MFMailComposeResult, error: Error?) {
+        switch (result) {
+        case MFMailComposeResult.cancelled:
+            FIRAnalytics.logEvent(withName: "Feedback email cancelled", parameters: nil)
+            dismiss(animated: true, completion: nil)
+        case MFMailComposeResult.saved:
+            FIRAnalytics.logEvent(withName: "Feedback email saved", parameters: nil)
+            dismiss(animated: true, completion: nil)
+        case MFMailComposeResult.sent:
+            FIRAnalytics.logEvent(withName: "Feedback email send", parameters: nil)
+            dismiss(animated: true, completion: nil)
+        case MFMailComposeResult.failed:
+            if let error = error {
+                FIRAnalytics.logEvent(withName: "Feedback email failed", parameters: ["error": error as NSError])
+            } else {
+                FIRAnalytics.logEvent(withName: "Feedback email failed", parameters: nil)
+            }
             print("Failed to open mailComposeController")
-            // TODO: Add message to the user.
         }
     }
     
     // MARK: UI Table View Delegate
-    override func tableView(tableView: UITableView, heightForRowAtIndexPath indexPath: NSIndexPath) -> CGFloat {
+    override func tableView(_ tableView: UITableView, heightForRowAt indexPath: IndexPath) -> CGFloat {
         return UITableViewAutomaticDimension
     }
     
-    override func tableView(tableView: UITableView, estimatedHeightForRowAtIndexPath indexPath: NSIndexPath) -> CGFloat {
+    override func tableView(_ tableView: UITableView, estimatedHeightForRowAt indexPath: IndexPath) -> CGFloat {
         return 50.0
     }
     
-    override func tableView(tableView: UITableView, didSelectRowAtIndexPath indexPath: NSIndexPath) {
-        switch (indexPath.section, indexPath.row) {
+    override func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
+        switch ((indexPath as NSIndexPath).section, (indexPath as NSIndexPath).row) {
         case (0, 0):
+            FIRAnalytics.logEvent(withName: "Buy Pro Product Pressed", parameters: nil)
             MCStoreInterface.defaultStoreInterface.buyProProductSendFrom(self)
         case (0, 1):
+            FIRAnalytics.logEvent(withName: "Restore Previous Purchases pressed", parameters: nil)
             MCStoreInterface.defaultStoreInterface.restorePreviousPurchases()
         case (1, 0):
+            FIRAnalytics.logEvent(withName: "Rate Me pressed", parameters: nil)
             openMyAppStoreLink()
         case (1, 1):
+            FIRAnalytics.logEvent(withName: "My Apps pressed", parameters: nil)
             showAllMyApps()
         case (2, 0):
+            FIRAnalytics.logEvent(withName: "Send Feedback pressed", parameters: nil)
             openMailComposer()
         default:
             print("Nothing to open")
         }
-        let thisCell = tableView.cellForRowAtIndexPath(indexPath)
+        let thisCell = tableView.cellForRow(at: indexPath)
         thisCell!.setSelected(false, animated: true)
     }
     
     // MARK: UI Table View Data Source
-    override func numberOfSectionsInTableView(tableView: UITableView) -> Int {
+    override func numberOfSections(in tableView: UITableView) -> Int {
         return 3
     }
     
-    override func tableView(tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
+    override func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
         switch (section) {
         case 0:
             if (MCStoreInterface.canMakePayments()) && !MCStoreInterface.defaultStoreInterface.isProProductPurchased {
@@ -214,10 +230,10 @@ class InfoScreenTableViewController: UITableViewController, MFMailComposeViewCon
         }
     }
     
-    override func tableView(tableView: UITableView, cellForRowAtIndexPath indexPath: NSIndexPath) -> UITableViewCell {
-        switch (indexPath.section, indexPath.row) {
+    override func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
+        switch ((indexPath as NSIndexPath).section, (indexPath as NSIndexPath).row) {
         case (0, 0):
-            let cell = tableView.dequeueReusableCellWithIdentifier("MCTwoLabelIscreenTableViewCell", forIndexPath: indexPath) as! MCTwoLabelIscreenTableViewCell
+            let cell = tableView.dequeueReusableCell(withIdentifier: "MCTwoLabelIscreenTableViewCell", for: indexPath) as! MCTwoLabelIscreenTableViewCell
             cell.leftLabel.text = NSLocalizedString("Buy ad free version", comment: "Buy ad free Version")
             if MCStoreInterface.defaultStoreInterface.proProduct != nil {
                 cell.rightLabel.text = MCStoreInterface.defaultStoreInterface.proProduct.priceString
@@ -226,23 +242,23 @@ class InfoScreenTableViewController: UITableViewController, MFMailComposeViewCon
             }
             return cell
         case (0, 1):
-            let cell = tableView.dequeueReusableCellWithIdentifier("MCOneLabelIScreenTableViewCell", forIndexPath: indexPath) as! MCOneLabelIScreenTableViewCell
+            let cell = tableView.dequeueReusableCell(withIdentifier: "MCOneLabelIScreenTableViewCell", for: indexPath) as! MCOneLabelIScreenTableViewCell
             cell.oneTextLabel.text = NSLocalizedString("Restore previous purchases", comment: "Restore previous purchases")
             return cell
         case (1, 0):
-            let cell = tableView.dequeueReusableCellWithIdentifier("MCOneLabelIScreenTableViewCell", forIndexPath: indexPath) as! MCOneLabelIScreenTableViewCell
+            let cell = tableView.dequeueReusableCell(withIdentifier: "MCOneLabelIScreenTableViewCell", for: indexPath) as! MCOneLabelIScreenTableViewCell
             cell.oneTextLabel.text = NSLocalizedString("Rate me", comment: "Text of the Rate me button")
             return cell
         case (1, 1):
-            let cell = tableView.dequeueReusableCellWithIdentifier("MCOneLabelIScreenTableViewCell", forIndexPath: indexPath) as! MCOneLabelIScreenTableViewCell
+            let cell = tableView.dequeueReusableCell(withIdentifier: "MCOneLabelIScreenTableViewCell", for: indexPath) as! MCOneLabelIScreenTableViewCell
             cell.oneTextLabel.text = NSLocalizedString("My Apps", comment: "Text of the the button that takes you to my apps in the App Store")
             return cell
         case (2, 0):
-            let cell = tableView.dequeueReusableCellWithIdentifier("MCOneLabelIScreenTableViewCell", forIndexPath: indexPath) as! MCOneLabelIScreenTableViewCell
+            let cell = tableView.dequeueReusableCell(withIdentifier: "MCOneLabelIScreenTableViewCell", for: indexPath) as! MCOneLabelIScreenTableViewCell
             cell.oneTextLabel.text = NSLocalizedString("Give feedback", comment: "Give feedback")
             return cell
         default:
-            assert(false, "This section: \(indexPath.section) and row: \(indexPath.row) are not valid")
+            assert(false, "This section: \((indexPath as NSIndexPath).section) and row: \((indexPath as NSIndexPath).row) are not valid")
             return UITableViewCell()
         }
     }

@@ -8,21 +8,30 @@
 
 import UIKit
 
+import FirebaseAnalytics
+
 class RootViewController: UIViewController {
+    // MARK: IBActions
+    
+    @IBAction func infoButtonTapped(_ sender: AnyObject)
+    {
+        FIRAnalytics.logEvent(withName: "Open Info Screen", parameters: nil)
+    }
+    
     // MARK: Inherited From Super
-    override func viewWillAppear(animated: Bool) {
+    override func viewWillAppear(_ animated: Bool) {
         super.viewWillAppear(animated)
         
         setNeedsStatusBarAppearanceUpdate()
         navigationController!.setToolbarHidden(true, animated: true)
     }
     
-    override func preferredStatusBarStyle() -> UIStatusBarStyle {
-        return .LightContent
+    override var preferredStatusBarStyle: UIStatusBarStyle {
+        return .lightContent
     }
     
     // MARK: Navigation
-    override func prepareForSegue(segue: UIStoryboardSegue, sender: AnyObject?) {
+    override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
         
     }
 }

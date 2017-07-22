@@ -511,7 +511,7 @@
     MCPayment *homePayment = [tonightsBill addPayment];
     homePayment.payingPerson = merit;
     homePayment.currency = mainCurrency;
-    NSArray<MCCurrency *> *foreignCurrencies = [tonightsBill recentUsedForeignCurrencies];
+    NSArray<MCCurrency *> *foreignCurrencies = [tonightsBill recentUsedForeignCurrencies:5];
 
     XCTAssertTrue(foreignCurrencies.count > 0, @"There can only be multiple foreign currencies");
     for (MCCurrency *currency in foreignCurrencies) {

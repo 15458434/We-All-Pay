@@ -8,6 +8,8 @@
 
 import UIKit
 
+import FirebaseAnalytics
+
 class MCPaymentPresenceTableViewCell_iPhone: UITableViewCell {
     @IBOutlet var personView: UIImageView!
     @IBOutlet var nameLabel: UILabel!
@@ -15,8 +17,9 @@ class MCPaymentPresenceTableViewCell_iPhone: UITableViewCell {
     @IBOutlet var owesLabel: UILabel!
     var thisCellsPaymentPresence: MCPaymentPresence?
     
-    func presenceIsSwitched(sender: AnyObject) {
-        thisCellsPaymentPresence!.isPersonPresent = NSNumber(bool: isPresentSwitch.on)
+    func presenceIsSwitched(_ sender: AnyObject) {
+        FIRAnalytics.logEvent(withName: "SwitchPresence on payment", parameters: ["Presence Value": (isPresentSwitch.isOn as NSNumber)])
+        thisCellsPaymentPresence!.isPersonPresent = NSNumber(value: isPresentSwitch.isOn)
         thisCellsPaymentPresence!.payment.recalculateAveragePeopleOweAndStore()
     }
 }

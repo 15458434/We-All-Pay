@@ -17,7 +17,7 @@ class TodayViewController: UIViewController, NCWidgetProviding {
     var tripName: String!
     var nextPayerID: String!
     var fullNameNextPayer: String!
-    var dateSaved: NSDate!
+    var dateSaved: Date!
     var valid: Bool!
     
     func updateLocalOptionalsFromUserDefaults() -> Bool {
@@ -66,31 +66,35 @@ class TodayViewController: UIViewController, NCWidgetProviding {
         }
     }
     
-    func defaultsDidUpdate(notification: NSNotification) {
+    func defaultsDidUpdate(_ notification: Notification) {
         if updateLocalOptionalsFromUserDefaults() {
             updateLabel()
         }
         NCWidgetController.widgetController().setHasContent(true, forWidgetWithBundleIdentifier: WhoPayingUserDefaultsStoreInterface.MCWhoIsPayingNextBundleIdentifier)
     }
     
-    func tappedInTheBackground(sender: AnyObject) {
+    func tappedInTheBackground(_ sender: AnyObject) {
         debugPrint("I am tapped.")
         var urlString = "weallpay:///"
         if let validValue = valid {
             if validValue == true {
-                urlString = "weallpay:///\(tonightsBillID)/\(nextPayerID)"
+                urlString = "weallpay:///\(tonightsBillID!)/\(nextPayerID!)"
             }
         }
-        print("Open: \(urlString)", terminator: "")
-        let url = NSURL(string: urlString)
-        self.extensionContext?.openURL(url!, completionHandler: nil)
+        debugPrint("Open: \(urlString)", terminator: "")
+        let url = URL(string: urlString)
+        self.extensionContext?.open(url!, completionHandler: nil)
     }
     
     override func viewDidLoad() {
         super.viewDidLoad()
+        
+        if #available(iOS 10, *) {
+            self.extensionContext!.widgetLargestAvailableDisplayMode = .compact
+        }
         // Do any additional setup after loading the view from its nib.
-        NSNotificationCenter.defaultCenter().addObserver(self, selector: #selector(TodayViewController.defaultsDidUpdate(_:)), name: NSUserDefaultsDidChangeNotification, object: nil)
-
+        NotificationCenter.default.addObserver(self, selector: #selector(TodayViewController.defaultsDidUpdate(_:)), name: UserDefaults.didChangeNotification, object: nil)
+        
         // Setup a tap in the Today Extension to open We all pay.
         let thatTickles = UITapGestureRecognizer(target: self, action: #selector(TodayViewController.tappedInTheBackground(_:)))
         thatTickles.cancelsTouchesInView = false
@@ -98,7 +102,38 @@ class TodayViewController: UIViewController, NCWidgetProviding {
         self.view.preservesSuperviewLayoutMargins = true
     }
     
-    func widgetPerformUpdateWithCompletionHandler(completionHandler: ((NCUpdateResult) -> Void)) {
+    override func viewWillAppear(_ animated: Bool) {
+        super.viewWillAppear(animated)
+        
+        if updateLocalOptionalsFromUserDefaults() {
+            updateLabel()
+        }
+    }
+    
+    // MARK: NCWidgetProviding
+    
+    func widgetMarginInsets(forProposedMarginInsets defaultMarginInsets: UIEdgeInsets) -> UIEdgeInsets {
+        debugPrint("widgetMarginInsets")
+        var insets = defaultMarginInsets
+        if #available(iOSApplicationExtension 10.0, *) {
+//            if self.view.effectiveUserInterfaceLayoutDirection == .leftToRight {
+//                insets.left -= 8
+//            } else {
+//                insets.right -= 8
+//            }
+        } else {
+            // Fallback on earlier versions
+            if UIView.userInterfaceLayoutDirection(for: self.view.semanticContentAttribute) == UIUserInterfaceLayoutDirection.leftToRight {
+                insets.left -= 8
+            } else {
+                insets.right -= 8
+            }
+            insets.bottom /= 2
+        }
+        return insets
+    }
+    
+    private func widgetPerformUpdate(completionHandler: ((NCUpdateResult) -> Void)) {
         // Perform any setup necessary in order to update the view.
 
         // If an error is encountered, use NCUpdateResult.Failed
@@ -107,10 +142,10 @@ class TodayViewController: UIViewController, NCWidgetProviding {
         debugPrint("\(self): widgetPerformUpdateWithCompletionHandler")
         if updateLocalOptionalsFromUserDefaults() {
             updateLabel()
-            completionHandler(NCUpdateResult.NewData)
+            completionHandler(NCUpdateResult.newData)
         } else {
             updateLabel()
-            completionHandler(NCUpdateResult.NewData)
+            completionHandler(NCUpdateResult.newData)
         }
     }
 }

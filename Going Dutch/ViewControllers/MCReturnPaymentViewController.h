@@ -7,7 +7,6 @@
 //
 
 @import UIKit;
-@import MessageUI;
 
 @class MCSharedBill;
 
@@ -16,7 +15,7 @@
 
 @class MCSharedBillPageViewController;
 
-@interface MCReturnPaymentViewController : UITableViewController <MFMailComposeViewControllerDelegate>
+@interface MCReturnPaymentViewController : UITableViewController
 
 @property (nonatomic, strong) MCTwoLabelsTitleView *twoLabelTitleView;
 
@@ -25,5 +24,7 @@
 
 - (IBAction)sendAsEmailButtonPressed:(id)sender;
 - (IBAction)mainCancelButtonPressed:(id)sender;
+
+- (void)openMailView:(id)sender;
 
 @end

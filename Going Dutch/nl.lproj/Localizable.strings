@@ -13,6 +13,9 @@
 /* Ad free version restored. */
 "Ad free version restored." = "Advertentie vrije versie is hersteld";
 
+/* Title for an alert message, because there are no people added to this event. */
+"Add some people first" = "Voeg eerst aanwezigen toe";
+
 /* Message that pops up when the App Store is not available. */
 "App Store unavailable" = "App Store niet beschikbaar";
 
@@ -28,7 +31,7 @@
 /* Buy ad free Version */
 "Buy ad free version" = "Koop ads vrije versie";
 
-/* Cancel */
+/* (No Commment) */
 "CANCEL" = "Annuleer";
 
 /* (No Commment) */
@@ -37,7 +40,11 @@
 /* (No Commment) */
 "CONTACTS_DISABLED_TITLE" = "Contacten uitgeschakeld";
 
-/* Button that says dismiss.
+/* Text on button to cancel something */
+"Cancel" = "Annuleer";
+
+/* Button that says dismiss
+   Button that says dismiss.
    Dismiss
    Text on a button that dismisses the alert
    Title of a button that dismisses an alart
@@ -192,19 +199,19 @@
 /* (No Commment) */
 "OWES_FROM_THIS_PAYMENT" = "gebruikt";
 
-/* paid */
+/* (No Commment) */
 "PAYMENTCELL_PAYERNAME_EXTRA" = "";
 
-/* Payments */
+/* (No Commment) */
 "PAYMENTS_PAGEVIEWCONTROLLER" = "Betalingen";
 
-/* for */
+/* (No Commment) */
 "PAYMENT_CELL_PAIDFOR_EXTRA" = "betaalde ";
 
 /* Press \"add Person\" to add a person who you'd like to share this bill with. */
 "PEOPLE_LIST_EMPTY_MESSAGE" = "Druk op \"Nieuwe persoon\" om iemand toe te voegen waarmee je de rekening wilt delen.";
 
-/* People present */
+/* (No Commment) */
 "PEOPLE_PRESENT_PAGEVIEWCONTROLLER" = "Aanwezigen";
 
 /* (No Commment) */
@@ -296,4 +303,7 @@
 
 /* yes */
 "YES" = "ja";
+
+/* A message to the user thay can't add a payment when they didn't add people to the even. */
+"You can't add a payment when no people are present. There is no one to split the expenses among." = "Je kan geen betaling toevoegen, als er geen aanwezigen zijn. Er is niemand om de rekening tussen te delen.";
 

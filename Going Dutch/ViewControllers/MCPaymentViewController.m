@@ -6,6 +6,8 @@
 //  Copyright (c) 2013 Mark Cornelisse. All rights reserved.
 //
 
+@import FirebaseAnalytics;
+
 #import "MCPaymentViewController.h"
 
 #import "MCPayment+addons.h"
@@ -59,6 +61,7 @@ typedef NS_ENUM(BOOL, ChildViewOpened) {
 #pragma mark - action
 
 - (IBAction)tabElseWhereAndDismissKeyboard:(id)sender {
+    [FIRAnalytics logEventWithName:@"tabElseWhereAndDismissKeyboard pressed" parameters:nil];
     if ([_itemView isFirstResponder]) {
         [_itemView endEditing:YES];
         [_itemView setText:[_thisPayment descriptionOfPayment]];
@@ -73,6 +76,7 @@ typedef NS_ENUM(BOOL, ChildViewOpened) {
 
 - (IBAction)mainCancelButtonPressed:(id)sender
 {
+    [FIRAnalytics logEventWithName:@"Main Canncel Pressed" parameters:nil];
     [self dismissKeyboard];
     if ([[[[MCWeAllPayStoreController defaultStore] mainThreadContext] undoManager] canUndo]) {
         [[MCWeAllPayStoreController defaultStore] endUndoGroupAndUndo];
@@ -84,7 +88,10 @@ typedef NS_ENUM(BOOL, ChildViewOpened) {
 
 - (IBAction)mainDoneButtonPressed:(id)sender
 {
+    [FIRAnalytics logEventWithName:@"Main Done Pressed" parameters:nil];
+#ifdef DEBUG
     NSLog(@"MCPaymentViewController: Done button pressed.");
+#endif
     if ([_payerNameField isFirstResponder]) {
         [self donePersonPicker:self];
     }
@@ -108,6 +115,7 @@ typedef NS_ENUM(BOOL, ChildViewOpened) {
 
 - (IBAction)currencySelectionPressed:(id)sender
 {
+    [FIRAnalytics logEventWithName:@"Open Select Currency" parameters:nil];
 #ifdef DEBUG
     NSLog(@"%@, currencySelectionPressed", self);
 #endif
@@ -120,6 +128,7 @@ typedef NS_ENUM(BOOL, ChildViewOpened) {
 
 - (void)cancelPersonPicker:(id)selector
 {
+    [FIRAnalytics logEventWithName:@"Cancel Person picker pressed" parameters:nil];
     // Set the text of the textView back and resign first responder
     _peoplePickerCancelled = YES;
     [_payerNameField setText:[[_thisPayment payingPerson] getFullName]];
@@ -133,6 +142,7 @@ typedef NS_ENUM(BOOL, ChildViewOpened) {
 
 - (void)donePersonPicker:(id)selector
 {
+    [FIRAnalytics logEventWithName:@"Done Person picker pressed" parameters:nil];
     if ([[_tonightsBill peoplePresent] count] > 0) {
         NSInteger row = [_personPickerView selectedRowInComponent:0];
         [_thisPayment setPayingPerson:_listOfPeople[row]];
@@ -148,6 +158,7 @@ typedef NS_ENUM(BOOL, ChildViewOpened) {
 
 - (void)cancelNumberPad:(id)selector
 {
+    [FIRAnalytics logEventWithName:@"Cancel number pad pressed" parameters:nil];
     // Restore Paidview and resignFirstResponder.
     NSNumberFormatter *nf = [[NSNumberFormatter alloc] init];
     [nf setNumberStyle:NSNumberFormatterCurrencyStyle];
@@ -158,8 +169,14 @@ typedef NS_ENUM(BOOL, ChildViewOpened) {
 
 - (void)doneNumberPad:(id)selector
 {
+    [FIRAnalytics logEventWithName:@"Done number pad pressed" parameters:nil];
     _kindOfPaidFieldDismiss = doneIsPressed;
     [_paidView resignFirstResponder];
+}
+
+- (IBAction)selectCategoryPressed:(id)sender
+{
+    [FIRAnalytics logEventWithName:@"Open Select Category" parameters:nil];
 }
 
 - (void)storePlaceViewData
@@ -177,7 +194,7 @@ typedef NS_ENUM(BOOL, ChildViewOpened) {
     _thisPayment.money = [cf doubleFromString:_paidView.text];
     [_thisPayment recalculateAveragePeopleOweAndStore];
     [[MCWeAllPayStoreController defaultStore] endUndoGroupWithoutRegistration];
-    _paidView.text = [cf stringForObjectValue:_thisPayment.money];
+    _paidView.text = [cf stringFor:_thisPayment.money];
     
     [[[self navigationItem] rightBarButtonItem] setEnabled:YES];
     NSDate *nu = [NSDate date];
@@ -223,6 +240,7 @@ typedef NS_ENUM(BOOL, ChildViewOpened) {
 
 - (void)pickerView:(UIPickerView *)pickerView didSelectRow:(NSInteger)row inComponent:(NSInteger)component
 {
+    
     [_payerNameField setText:[_listOfPeople[row] getFullName]];
     [_thisPayment setPayingPerson:_listOfPeople[row]];
     _payerPicture.image = [_listOfPeople[row] picture];
@@ -255,7 +273,9 @@ typedef NS_ENUM(BOOL, ChildViewOpened) {
     if (textField == _payerNameField) {
         // TODO: Better UI solution for the user.
         if ([[_tonightsBill peoplePresent] count] == 0) {
+#ifdef DEBUG
             NSLog(@"No people present on _tonightsBill, editing this textField is not allowed.");
+#endif
             return NO;
         }
     }
@@ -265,6 +285,7 @@ typedef NS_ENUM(BOOL, ChildViewOpened) {
 - (void)textFieldDidBeginEditing:(UITextField *)textField
 {
     if (textField == _paidView) {
+        [FIRAnalytics logEventWithName:@"PaidView didBeginEditing" parameters:nil];
         [[MCWeAllPayStoreController defaultStore] beginUndoGroupWithoutRegistration];
         NSNumberFormatter *numberFormatter = [[NSNumberFormatter alloc] init];
         [numberFormatter setFormatterBehavior:NSNumberFormatterBehaviorDefault];
@@ -278,6 +299,7 @@ typedef NS_ENUM(BOOL, ChildViewOpened) {
     }
     
     if (textField == _payerNameField) {
+        [FIRAnalytics logEventWithName:@"PayerNameField didBeginEditing" parameters:nil];
         [[MCWeAllPayStoreController defaultStore] beginUndoGroupWithoutRegistration];
         _peoplePickerCancelled = NO;
         NSInteger row = 0;
@@ -297,6 +319,7 @@ typedef NS_ENUM(BOOL, ChildViewOpened) {
     }
     
     if (textField == _itemView) {
+        [FIRAnalytics logEventWithName:@"ItemView didBeginEditing" parameters:nil];
         _kindOfPaidFieldDismiss = otherTextFieldSelected;
     }
 }
@@ -309,25 +332,13 @@ typedef NS_ENUM(BOOL, ChildViewOpened) {
 - (void)textFieldDidEndEditing:(UITextField *)textField
 {
     if (textField == _paidView) {
+        [FIRAnalytics logEventWithName:@"PaidView didEndEditing" parameters:nil];
 #ifdef DEBUG
         NSLog(@"kindOfPaidFieldDismiss = %lu", (unsigned long)_kindOfPaidFieldDismiss);
 #endif
-        if (_kindOfPaidFieldDismiss == cancelIsPressed) {
-            // Restore stored value
-            CurrencyFormatter *cf = [[CurrencyFormatter alloc] initWithCurrencyCode:_thisPayment.currency.code];
-            _paidView.text = [cf stringForObjectValue:_thisPayment.money];
-        } else if (_kindOfPaidFieldDismiss == doneIsPressed) {
-            [self storeMoneySpent];
-        } else if (_kindOfPaidFieldDismiss == otherTextFieldSelected) {
-            [self storeMoneySpent];
-        } else if (_kindOfPaidFieldDismiss == currencySelectionTapped) {
-            [self storeMoneySpent];
-        } else if (_kindOfPaidFieldDismiss == backgroundTapped){
-            // Restore stored value
-            CurrencyFormatter *cf = [[CurrencyFormatter alloc] initWithCurrencyCode:_thisPayment.currency.code];
-            _paidView.text = [cf stringForObjectValue:_thisPayment.money];
-        }
+        [self storeMoneySpent];
     } else if (textField == _payerNameField) {
+        [FIRAnalytics logEventWithName:@"payerNameField didEndEditing" parameters:nil];
         if (!_peoplePickerCancelled) {
             [[MCWeAllPayStoreController defaultStore] endUndoGroupWithoutRegistration];
             [self donePersonPicker:self];
@@ -343,6 +354,7 @@ typedef NS_ENUM(BOOL, ChildViewOpened) {
         }
         _kindOfPaidFieldDismiss = backgroundTapped;
     } else if (textField == _itemView) {
+        [FIRAnalytics logEventWithName:@"itemView DidEndEditing" parameters:nil];
         // Do something to store value of placeview.
         [self storePlaceViewData];
         NSDate *nu = [NSDate date];
@@ -381,7 +393,9 @@ typedef NS_ENUM(BOOL, ChildViewOpened) {
     
     // If tonight's bill wasn't passed along.
     if (!_tonightsBill) {
+#ifdef DEBUG
         NSLog(@"tonightsBill wasn't passed along.");
+#endif
         @throw [NSException exceptionWithName:@"tonightsBill missing" reason:@"thisPayment didn't receive tonightsBill." userInfo:nil];
     }
     
@@ -405,12 +419,6 @@ typedef NS_ENUM(BOOL, ChildViewOpened) {
     [_personPickerView setShowsSelectionIndicator:YES];
     [_payerNameField setInputView:_personPickerView];
     [_payerNameField setInputAccessoryView:inputAccessoryPickerView];
-    
-    UIToolbar *inputAccossoryNumberPad = [[UIToolbar alloc] initWithFrame:toolbarRect];
-    cancelButton = [[UIBarButtonItem alloc] initWithBarButtonSystemItem:UIBarButtonSystemItemCancel target:self action:@selector(cancelNumberPad:)];
-    _theDoneButton = [[UIBarButtonItem alloc] initWithBarButtonSystemItem:UIBarButtonSystemItemDone target:self action:@selector(doneNumberPad:)];
-    [inputAccossoryNumberPad setItems:@[cancelButton, flexButton, _theDoneButton] animated:YES];
-    [_paidView setInputAccessoryView:inputAccossoryNumberPad];
     
     // Make sure a tap in the background dismisses the keyboard as well.
     UITapGestureRecognizer *thatTickles = [[UITapGestureRecognizer alloc] initWithTarget:self action:@selector(tappedInTheBackground:)];
@@ -439,14 +447,10 @@ typedef NS_ENUM(BOOL, ChildViewOpened) {
     
     if (!_dataController) {
         _dataController = [[MCWeAllPayStoreController defaultStore] paymentPresenceDataControllerForDelegate:self];
-        if (SYSTEM_VERSION_GREATER_THAN_OR_EQUAL_TO(@"8.0") && _selectCurrencyTableViewController == isOpened) {
-            // Those lines won't update when coming from MCSelectCurrencyTableViewController on iOS 8 and later.
-            // It's under an if statement, because only the iPhone 4 is effected.
-            CurrencyFormatter *cf = [[CurrencyFormatter alloc] initWithCurrencyCode:_thisPayment.currency.code];
-            _paidView.text = [cf stringForObjectValue:_thisPayment.money];
-            [[self tableView] reloadData];
-            _selectCurrencyTableViewController = isNotOpened;
-        }
+        CurrencyFormatter *cf = [[CurrencyFormatter alloc] initWithCurrencyCode:_thisPayment.currency.code];
+        _paidView.text = [cf stringFor:_thisPayment.money];
+        [[self tableView] reloadData];
+        _selectCurrencyTableViewController = isNotOpened;
     }
     [[self tableView] reloadData];
     
@@ -470,7 +474,7 @@ typedef NS_ENUM(BOOL, ChildViewOpened) {
     }
     if (!_isNew || _selectCurrencyTableViewController == isOpened) {
         CurrencyFormatter *cf = [[CurrencyFormatter alloc] initWithCurrencyCode:_thisPayment.currency.code];
-        _paidView.text = [cf stringForObjectValue:_thisPayment.money];
+        _paidView.text = [cf stringFor:_thisPayment.money];
     }
 }
 
@@ -522,7 +526,7 @@ typedef NS_ENUM(BOOL, ChildViewOpened) {
             case NSFetchedResultsChangeUpdate:
                 [[self tableView] reloadRowsAtIndexPaths:@[indexPath] withRowAnimation:UITableViewRowAnimationAutomatic];
                 CurrencyFormatter *cf = [[CurrencyFormatter alloc] initWithCurrencyCode:_thisPayment.currency.code];
-                _paidView.text = [cf stringForObjectValue:_thisPayment.money];
+                _paidView.text = [cf stringFor:_thisPayment.money];
                 break;
         }
     }
@@ -555,13 +559,13 @@ typedef NS_ENUM(BOOL, ChildViewOpened) {
     
     // Set the cell contents
     MCPaymentPresence *thisCellsPresence = [_dataController objectAtIndexPath:indexPath];
-    [[cell nameLabel] setText:[[thisCellsPresence person] getFullName]];
+    cell.nameLabel.text = thisCellsPresence.person.getFullName;
     cell.personView.image = thisCellsPresence.person.thumbnail;
     [[cell isPresentSwitch] setOn:[[thisCellsPresence isPersonPresent] boolValue]];
     CurrencyFormatter *cf = [[CurrencyFormatter alloc] initWithCurrencyCode:thisCellsPresence.payment.currency.code];
     NSNumber *averageOwe = @(-thisCellsPresence.averageOweFromPayment.doubleValue);
-    cell.owesLabel.text = [cf stringForObjectValue:averageOwe];
-    [cell setThisCellsPaymentPresence:thisCellsPresence];
+    cell.owesLabel.text = [cf stringFor:averageOwe];
+    cell.thisCellsPaymentPresence = thisCellsPresence;
     
     // Set the cell alignment to headerView stuff
     NSLayoutConstraint *payerViewToCellNameLabel = [NSLayoutConstraint constraintWithItem:_payerNameField attribute:NSLayoutAttributeLeading relatedBy:NSLayoutRelationEqual toItem:[cell nameLabel] attribute:NSLayoutAttributeLeading multiplier:1.0 constant:-6.0];
@@ -624,10 +628,9 @@ typedef NS_ENUM(BOOL, ChildViewOpened) {
          NSLog(@"%@, prepareForSegue openSelectCurrency", self);
 #endif
          _selectCurrencyTableViewController = isOpened;
-         id destination = [[segue destinationViewController] viewControllers][0];
-         if ([destination conformsToProtocol:@protocol(MCThisPaymentProtocol)]) {
-             [destination setThisPayment:_thisPayment];
-         }
+         UINavigationController *navController = (UINavigationController *)segue.destinationViewController;
+         SelectCurrencyTableViewController *selectCurrencyViewController = (SelectCurrencyTableViewController *)navController.viewControllers.firstObject;
+         selectCurrencyViewController.currencyUpdateModel = [[PaymentUpdateCurrencyModel alloc] initWith:_thisPayment];
      }
      if ([[segue identifier] isEqualToString:@"selectCategory"]) {
          id destination = [[segue destinationViewController] viewControllers][0];

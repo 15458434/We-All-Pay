@@ -15,12 +15,14 @@
 @class MCSharedBill;
 @class MCTableEmptyMessage_iPad;
 
-@interface MCSolutionTableViewController : UITableViewController <MFMailComposeViewControllerDelegate, MCTonightsBillTransfer, MCDismissMeBlockProtocol>
+@interface MCSolutionTableViewController : UITableViewController <MCTonightsBillTransfer, MCDismissMeBlockProtocol>
 
 @property (strong, nonatomic) MFMailComposeViewController *mailController;
 @property (strong, nonatomic) NSArray *peoplePresent;
 @property (strong, nonatomic) MCSharedBill *tonightsBill;
 @property (strong, nonatomic) MCSharedBill *writableTonightsBill;
 @property (strong, nonatomic) void (^dismissMe)();
+
+- (void)openMailView:(id)sender;
 
 @end

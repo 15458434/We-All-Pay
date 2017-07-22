@@ -8,7 +8,7 @@
 
 import Foundation
 
-class CurrencyFormatter: NSFormatter {
+class CurrencyFormatter: Formatter {
     // MARK: Properties
     var currencyCode: String?
     
@@ -18,16 +18,16 @@ class CurrencyFormatter: NSFormatter {
         self.currencyCode = currencyCode
     }
     
-    func doubleFromString(string: String) -> NSNumber? {
+    func doubleFromString(_ string: String) -> NSNumber? {
         var moneyObject: AnyObject? = nil
         var moneyErrorString: NSString? = nil
-        let success = self.getObjectValue(&moneyObject, forString: string, errorDescription: &moneyErrorString)
+        let success = self.getObjectValue(&moneyObject, for: string, errorDescription: &moneyErrorString)
         if success {
             let moneyNumber = moneyObject as! NSNumber
             return moneyNumber
         } else {
             if moneyErrorString != nil {
-                print(moneyErrorString)
+                print(moneyErrorString!)
             }
             return nil
         }
@@ -38,42 +38,42 @@ class CurrencyFormatter: NSFormatter {
         super.init()
     }
     
-    override func getObjectValue(obj: AutoreleasingUnsafeMutablePointer<AnyObject?>, forString string: String, errorDescription error: AutoreleasingUnsafeMutablePointer<NSString?>) -> Bool {
-        let nf = NSNumberFormatter()
-        nf.numberStyle = .DecimalStyle
-        if let nummer = nf.numberFromString(string) {
-            obj.memory = nummer
+    override func getObjectValue(_ obj: AutoreleasingUnsafeMutablePointer<AnyObject?>?, for string: String, errorDescription error: AutoreleasingUnsafeMutablePointer<NSString?>?) -> Bool {
+        let nf = NumberFormatter()
+        nf.numberStyle = .decimal
+        if let nummer = nf.number(from: string) {
+            obj?.pointee = nummer
             return true
         } else {
             if error != nil {
                 let errorString = "Error converting to Double"
-                error.memory = errorString as NSString
+                error?.pointee = errorString as NSString
             }
             return false
         }
     }
     
-    override func stringForObjectValue(obj: AnyObject) -> String? {
+    func string(for obj: AnyObject?) -> String? {
         if let nummer = obj as? NSNumber {
-            let nf = NSNumberFormatter()
-            nf.numberStyle = .CurrencyStyle
+            let nf = NumberFormatter()
+            nf.numberStyle = .currency
             if let code = currencyCode {
                 nf.currencyCode = code
             }
-            return nf.stringFromNumber(nummer)
+            return nf.string(from: nummer)
         } else {
             return nil
         }
     }
     
-    override func editingStringForObjectValue(obj: AnyObject) -> String? {
+    func editingString(for obj: AnyObject) -> String? {
         if let nummer = obj as? NSNumber {
             if nummer.doubleValue == 0 {
                 return nil
             }
-            let nf = NSNumberFormatter()
-            nf.numberStyle = .DecimalStyle
-            return nf.stringFromNumber(nummer)
+            let nf = NumberFormatter()
+            nf.numberStyle = .decimal
+            return nf.string(from: nummer)
         } else {
             return nil
         }
@@ -81,12 +81,12 @@ class CurrencyFormatter: NSFormatter {
     
     // MARK: NSCoding
     required init?(coder aDecoder: NSCoder) {
-        self.currencyCode = aDecoder.decodeObjectForKey("kCurrencyCode") as? String
+        self.currencyCode = aDecoder.decodeObject(forKey: "kCurrencyCode") as? String
         super.init(coder: aDecoder)
     }
     
-    override func encodeWithCoder(aCoder: NSCoder) {
-        super.encodeWithCoder(aCoder)
-        aCoder.encodeObject(self.currencyCode, forKey: "kCurrencyCode")
+    override func encode(with aCoder: NSCoder) {
+        super.encode(with: aCoder)
+        aCoder.encode(self.currencyCode, forKey: "kCurrencyCode")
     }
 }

@@ -9,18 +9,18 @@
 import Foundation
 
 public enum RateMeControllerAskStatus: Int32, CustomStringConvertible {
-    case Yes, AlreadyRated, No, NoNever
+    case yes, alreadyRated, no, noNever
     
     // MARK: Custom String Convertible
     public var description: String {
         switch (self) {
-        case .Yes:
+        case .yes:
             return "RateMeControllerAskStatus: .Yes"
-        case .AlreadyRated:
+        case .alreadyRated:
             return "RateMeControllerAskStatus: .AlreadyRated"
-        case .No:
+        case .no:
             return "RateMeControllerAskStatus: .No"
-        case .NoNever:
+        case .noNever:
             return "RateMeControllerAskStatus: .NoNever"
         }
     }
@@ -44,21 +44,21 @@ internal class RateMeControllerAskStatusContainer: NSObject, NSCoding {
     // MARK: Inherited from super
     
     override convenience init() {
-        self.init(shouldAsk: RateMeControllerAskStatus.Yes, lastVersion: nil)
+        self.init(shouldAsk: RateMeControllerAskStatus.yes, lastVersion: nil)
     }
     
     // MARK: NS Coding
     
     required init?(coder aDecoder: NSCoder) {
-        self.shouldAsk = RateMeControllerAskStatus(rawValue: aDecoder.decodeInt32ForKey(kRateMeControllerAskStatusContainerShouldAsk))!
-        self.lastVersion = aDecoder.decodeObjectForKey(kRateMeControllerAskStatusContainerLastVersion) as? String
+        self.shouldAsk = RateMeControllerAskStatus(rawValue: aDecoder.decodeInt32(forKey: kRateMeControllerAskStatusContainerShouldAsk))!
+        self.lastVersion = aDecoder.decodeObject(forKey: kRateMeControllerAskStatusContainerLastVersion) as? String
         super.init()
     }
     
-    func encodeWithCoder(aCoder: NSCoder) {
-        aCoder.encodeInt32(self.shouldAsk.rawValue, forKey: kRateMeControllerAskStatusContainerShouldAsk)
+    func encode(with aCoder: NSCoder) {
+        aCoder.encode(self.shouldAsk.rawValue, forKey: kRateMeControllerAskStatusContainerShouldAsk)
         if let lastVersion = lastVersion {
-            aCoder.encodeObject(lastVersion, forKey: kRateMeControllerAskStatusContainerLastVersion)
+            aCoder.encode(lastVersion, forKey: kRateMeControllerAskStatusContainerLastVersion)
         }
     }
 }

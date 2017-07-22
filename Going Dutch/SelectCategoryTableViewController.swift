@@ -10,6 +10,8 @@
 
 import UIKit
 
+import FirebaseAnalytics
+
 class SelectCategoryTableViewController: UITableViewController, MCThisPaymentProtocol, MCDismissMeBlockProtocol {
     // MARK: Properties
     var thisPayment: MCPayment!
@@ -18,8 +20,8 @@ class SelectCategoryTableViewController: UITableViewController, MCThisPaymentPro
     var categories: [CategoryPictureObject]! {
         didSet {
             let categoryDescriptionSelector: Selector = NSSelectorFromString("categoryDescription")
-            let collation = UILocalizedIndexedCollation.currentCollation()
-            sortedCategories = collation.sortedArrayFromArray(categories, collationStringSelector: categoryDescriptionSelector) as! [CategoryPictureObject]
+            let collation = UILocalizedIndexedCollation.current()
+            sortedCategories = collation.sortedArray(from: categories, collationStringSelector: categoryDescriptionSelector) as! [CategoryPictureObject]
             
             self.tableView.reloadData()
         }
@@ -31,8 +33,9 @@ class SelectCategoryTableViewController: UITableViewController, MCThisPaymentPro
     
     // MARK: Actions
     
-    @IBAction func mainCancelPressed(sender: AnyObject) {
-        navigationController!.presentingViewController?.dismissViewControllerAnimated(true, completion: nil)
+    @IBAction func mainCancelPressed(_ sender: AnyObject) {
+        FIRAnalytics.logEvent(withName: "Main Cancel Pressed", parameters: nil)
+        navigationController!.presentingViewController?.dismiss(animated: true, completion: nil)
     }
     
     // MARK: New in this class
@@ -52,12 +55,12 @@ class SelectCategoryTableViewController: UITableViewController, MCThisPaymentPro
             searchController.hidesNavigationBarDuringPresentation = false
             tableView.tableHeaderView = searchController.searchBar
             searchController.searchBar.delegate = self
-            searchController.searchBar.searchBarStyle = .Prominent
+            searchController.searchBar.searchBarStyle = .prominent
             searchController.searchBar.scopeButtonTitles = []
             definesPresentationContext = true
             
             self.extendedLayoutIncludesOpaqueBars = true
-            self.edgesForExtendedLayout = UIRectEdge.All
+            self.edgesForExtendedLayout = UIRectEdge.all
         }
         
         super.viewDidLoad()
@@ -66,7 +69,7 @@ class SelectCategoryTableViewController: UITableViewController, MCThisPaymentPro
         prepareForSearchController()
     }
     
-    override func viewWillAppear(animated: Bool) {
+    override func viewWillAppear(_ animated: Bool) {
         super.viewWillAppear(animated)
         
         searchController.searchBar.sizeToFit()
@@ -74,58 +77,59 @@ class SelectCategoryTableViewController: UITableViewController, MCThisPaymentPro
     
     // MARK: UI Table View Delegate
     
-    override func tableView(tableView: UITableView, didSelectRowAtIndexPath indexPath: NSIndexPath) {
+    override func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
         let categoryObject: CategoryPictureObject
-        if searchController.active && (searchController.searchBar.text != "") {
-            guard let filteredCategory = filteredCategories?[indexPath.row] else {
+        if searchController.isActive && (searchController.searchBar.text != "") {
+            guard let filteredCategory = filteredCategories?[(indexPath as NSIndexPath).row] else {
                 abort()
             }
             categoryObject = filteredCategory
         } else {
-            guard let filteredCategory = sortedCategories?[indexPath.row] else {
+            guard let filteredCategory = sortedCategories?[(indexPath as NSIndexPath).row] else {
                 abort()
             }
             categoryObject = filteredCategory
         }
         
-        thisPayment.categoryId = NSNumber(short: categoryObject.categoryId)
+        FIRAnalytics.logEvent(withName: "didSelecCategory", parameters: ["categoryID": NSNumber.init(value: categoryObject.categoryId)])
+        thisPayment.categoryId = NSNumber(value: categoryObject.categoryId)
         if dismissMe != nil {
             dismissMe!()
         } else {
-            navigationController!.presentingViewController!.dismissViewControllerAnimated(true, completion: nil)
+            navigationController!.presentingViewController!.dismiss(animated: true, completion: nil)
         }
     }
     
     // MARK: UI Table View Data Source
     
-    override func numberOfSectionsInTableView(tableView: UITableView) -> Int {
+    override func numberOfSections(in tableView: UITableView) -> Int {
         return 1
     }
     
-    override func tableView(tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
-        if searchController.active && searchController.searchBar.text != "" {
+    override func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
+        if searchController.isActive && searchController.searchBar.text != "" {
             return filteredCategories.count
         } else {
             return sortedCategories.count
         }
     }
     
-    override func tableView(tableView: UITableView, cellForRowAtIndexPath indexPath: NSIndexPath) -> UITableViewCell {
+    override func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
 
         let category: CategoryPictureObject
-        if searchController.active && searchController.searchBar.text != "" {
-            guard let filteredCategory = filteredCategories?[indexPath.row] else {
+        if searchController.isActive && searchController.searchBar.text != "" {
+            guard let filteredCategory = filteredCategories?[(indexPath as NSIndexPath).row] else {
                 abort()
             }
             category = filteredCategory
         } else {
-            guard let filteredCategory = sortedCategories?[indexPath.row] else {
+            guard let filteredCategory = sortedCategories?[(indexPath as NSIndexPath).row] else {
                 abort()
             }
             category = filteredCategory
         }
 
-        let cell = tableView.dequeueReusableCellWithIdentifier("selectCategoryCell", forIndexPath: indexPath) as! MCSelectCategoryTableViewCell_iPhone
+        let cell = tableView.dequeueReusableCell(withIdentifier: "selectCategoryCell", for: indexPath) as! MCSelectCategoryTableViewCell_iPhone
         cell.categoryImageView!.image = category.smallPicture
         cell.categoryNameLabel!.text = category.categoryDescription
         
@@ -138,25 +142,25 @@ class SelectCategoryTableViewController: UITableViewController, MCThisPaymentPro
 }
 
 extension SelectCategoryTableViewController: UISearchResultsUpdating {
-    func filteredContentForSearchText(searchText: String) {
+    func filteredContentForSearchText(_ searchText: String) {
         filteredCategories = sortedCategories.filter({ (category) -> Bool in
-            return category.categoryDescription.lowercaseString.containsString(searchText.lowercaseString)
+            return category.categoryDescription.lowercased().contains(searchText.lowercased())
         })
         tableView.reloadData()
     }
     
-    func updateSearchResultsForSearchController(searchController: UISearchController) {
+    func updateSearchResults(for searchController: UISearchController) {
         let searchBar = searchController.searchBar
         filteredContentForSearchText(searchBar.text!)
     }
 }
 
 extension SelectCategoryTableViewController: UISearchBarDelegate {
-    func positionForBar(bar: UIBarPositioning) -> UIBarPosition {
+    func position(for bar: UIBarPositioning) -> UIBarPosition {
         if (bar as! UISearchBar == searchController.searchBar) {
-            return UIBarPosition.Top
+            return UIBarPosition.top
         } else {
-            return UIBarPosition.Any
+            return UIBarPosition.any
         }
     }
 }

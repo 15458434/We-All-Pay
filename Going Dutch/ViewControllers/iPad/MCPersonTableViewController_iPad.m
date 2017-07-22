@@ -6,6 +6,8 @@
 //  Copyright (c) 2014 Mark Cornelisse. All rights reserved.
 //
 
+@import FirebaseAnalytics;
+
 #import "MCPersonTableViewController_iPad.h"
 
 #import "UINavigationController+KeyboardDismiss.h"
@@ -38,6 +40,7 @@ typedef NS_ENUM(BOOL, MCStatus) {
 
 - (IBAction)mainCancelButtonPressed:(id)sender
 {
+    [FIRAnalytics logEventWithName:@"Main Canncel Pressed" parameters:nil];
     [[self view] resignFirstResponder];
     _mainCancelPressed = cancelIsPressed;
     if ([[[_thisPerson managedObjectContext] undoManager] canUndo]) {
@@ -51,27 +54,34 @@ typedef NS_ENUM(BOOL, MCStatus) {
 
 - (IBAction)mainDoneButtonPressed:(id)sender
 {
+    [FIRAnalytics logEventWithName:@"Main Done Pressed" parameters:nil];
     [[self view] resignFirstResponder];
     if ([MCTools isStringAnEmailAddress:[_emailField text]]) {
         [self dismissFromDone];
+        [[MCWeAllPayStoreController defaultStore] saveMainThreadContext];
     } else {
         NSString *alertViewTitle = NSLocalizedString(@"INVALID_EMAIL_ADDRESS", "Invalid email address");
         NSString *alertViewMessage = NSLocalizedString(@"INVALID_EMAIL_ADDRESS_MESSAGE", @"The email address you provided doesn't appear to be an email address. This might cause improper behavior. Are you sure you want to continu?");
         NSString *alertViewYes = NSLocalizedString(@"YES", @"yes");
         NSString *alertViewNo = NSLocalizedString(@"NO", @"no");
-        UIAlertView *alertView = [[UIAlertView alloc] initWithTitle:alertViewTitle message:alertViewMessage delegate:self cancelButtonTitle:alertViewNo otherButtonTitles:alertViewYes, nil];
-        [alertView show];
+        UIAlertController *alertController = [UIAlertController alertControllerWithTitle:alertViewTitle message:alertViewMessage preferredStyle:UIAlertControllerStyleAlert];
+        [alertController addAction:[UIAlertAction actionWithTitle:alertViewNo style:UIAlertActionStyleCancel handler:nil]];
+        [alertController addAction:[UIAlertAction actionWithTitle:alertViewYes style:UIAlertActionStyleDefault handler:^(UIAlertAction * _Nonnull action) {
+            [self dismissFromDone];
+            [[MCWeAllPayStoreController defaultStore] saveMainThreadContext];
+        }]];
+        [self presentViewController:alertController animated:YES completion:nil];
     }
-    [[MCWeAllPayStoreController defaultStore] saveMainThreadContext];
 }
 
 - (IBAction)selectEmailAddressButtonPressed:(id)sender
 {
-    
+    [FIRAnalytics logEventWithName:@"Select email address pressed" parameters:nil];
 }
 
 - (IBAction)backgroundTappedToDismissKeyboard:(id)sender
 {
+    [FIRAnalytics logEventWithName:@"BackgroundTapped to dismiss keyboard" parameters:nil];
     [self dismissTheKeyboard];
 }
 
@@ -166,47 +176,16 @@ typedef NS_ENUM(BOOL, MCStatus) {
     // Dispose of any resources that can be recreated.
 }
 
-#pragma mark - UIAlertViewDelegate
-
-- (void)alertView:(UIAlertView *)alertView clickedButtonAtIndex:(NSInteger)buttonIndex
-{
-    if ([[alertView title] isEqualToString:@"Invalid email address"]) {
-        switch (buttonIndex) {
-            case 0:
-                // don't do anything.
-                break;
-            case 1:
-                [self dismissFromDone];
-                break;
-            default:
-                NSLog(@"This is not supposed to be happening.");
-                break;
-        }
-    }
-}
-
-#pragma mark - UIPopoverControllerDelegate
-
-- (void)popoverController:(UIPopoverController *)popoverController willRepositionPopoverToRect:(inout CGRect *)rect inView:(inout UIView *__autoreleasing *)view
-{
-    
-}
-
-- (BOOL)popoverControllerShouldDismissPopover:(UIPopoverController *)popoverController
-{
-    return YES;
-}
-
-- (void)popoverControllerDidDismissPopover:(UIPopoverController *)popoverController
-{
-    [_emailField setText:[_thisPerson defaultEmailAddress]];
-}
-
 #pragma mark - UITextFieldDelegate
 
 -(void)textFieldDidBeginEditing:(UITextField *)textField
 {
-    if (textField == _emailField) {
+    if (textField == _firstNameField) {
+        [FIRAnalytics logEventWithName:@"firstNameField didBeginEditing" parameters:nil];
+    } else if (textField == _lastNameField) {
+        [FIRAnalytics logEventWithName:@"lastNameField didBeginEditing" parameters:nil];
+    } else if (textField == _emailField) {
+        [FIRAnalytics logEventWithName:@"emailField didBeginEditing" parameters:nil];
         _isEditingEmailField = isEditing;
     }
 }
@@ -235,12 +214,13 @@ typedef NS_ENUM(BOOL, MCStatus) {
     // First check is mainCancel has been pressed. In that case this will be executed after the textField has been dismissed.
     if (_mainCancelPressed == cancelIsNotPressed) {
         if (textField == _firstNameField) {
+            [FIRAnalytics logEventWithName:@"firstNameField didEndEditing" parameters:nil];
             [_thisPerson setFirstName:[textField text]];
-//            didSomethingChange = YES;
         } else if (textField == _lastNameField) {
+            [FIRAnalytics logEventWithName:@"lastNameField didEndEditing" parameters:nil];
             [_thisPerson setLastName:[textField text]];
-//            didSomethingChange = YES;
         } else if (textField == _emailField) {
+            [FIRAnalytics logEventWithName:@"emailField didEndEditing" parameters:nil];
             if (_isNew) {
                 [_thisPerson addOneEmailAddressFromAString:[_emailField text]];
             } else {
@@ -251,7 +231,6 @@ typedef NS_ENUM(BOOL, MCStatus) {
                     [defaultEmail setEmailAddress:[_emailField text]];
                 }
             }
-//            didSomethingChange = YES;
             _isEditingEmailField = isNotEditing;
         }
     }
@@ -328,18 +307,17 @@ typedef NS_ENUM(BOOL, MCStatus) {
     // Get the new view controller using [segue destinationViewController].
     // Pass the selected object to the new view controller.
     if ([[segue identifier] isEqualToString:@"openSelectEmailAddress"]) {
-        id destination = [segue destinationViewController];
-        if ([destination conformsToProtocol:@protocol(MCThisPersonProtocol) ]) {
-            [destination setThisPerson:_thisPerson];
-        }
-        
-        UIPopoverController *myPopover = [(UIStoryboardPopoverSegue *)segue popoverController];
-        [myPopover setDelegate:self];
+        __weak SelectEmailAddressTableViewController_iPad *destination = [segue destinationViewController];
+        [destination setThisPerson:_thisPerson];
         
         if ([destination conformsToProtocol:@protocol(MCDismissMeBlockProtocol)]) {
             [destination setDismissMe:^{
-                [myPopover dismissPopoverAnimated:YES];
-                [_emailField setText:[_thisPerson defaultEmailAddress]];
+                [FIRAnalytics logEventWithName:@"dismiss select email address" parameters:nil];
+                if (destination) {
+                    [destination dismissViewControllerAnimated:YES completion:^{
+                        [_emailField setText:[_thisPerson defaultEmailAddress]];
+                    }];
+                }
             }];
         }
     }

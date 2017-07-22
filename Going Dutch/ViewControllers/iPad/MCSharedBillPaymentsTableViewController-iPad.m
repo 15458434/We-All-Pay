@@ -6,6 +6,8 @@
 //  Copyright (c) 2014 Mark Cornelisse. All rights reserved.
 //
 
+@import FirebaseAnalytics;
+
 #import "MCSharedBillPaymentsTableViewController-iPad.h"
 #import "UIViewController+WeAllPayStore.h"
 
@@ -29,17 +31,6 @@
 @implementation MCSharedBillPaymentsTableViewController_iPad
 
 #pragma mark - New in this class
-
-- (void)performFetchAndReloadTableView:(NSNotification *)notification
-{
-    UIManagedDocument *weAllPayDocument = [[MCWeAllPayStoreController defaultStore] weAllPayStoreDocument];
-    if ([weAllPayDocument documentState] == UIDocumentStateNormal) {
-        [self performFetch];
-        [[self tableView] reloadData];
-        [[NSNotificationCenter defaultCenter] removeObserver:self];
-        [self setEmptyMessageNow];
-    }
-}
 
 - (void)performFetch
 {
@@ -211,6 +202,7 @@
 
 -(void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath
 {
+    [FIRAnalytics logEventWithName:@"Open payment" parameters:nil];
     [self performSegueWithIdentifier:@"openPayment" sender:self];
 }
 
@@ -241,11 +233,8 @@
     } else {
         thisCellsPayerName = NSLocalizedString(@"THISPAYMENTCELL_NOPAYERNAME", @"Someone");
     }
-    [[paymentCell namePayerLabel] setText:[NSString stringWithFormat:@"%@%@", thisCellsPayerName, NSLocalizedString(@"PAYMENTCELL_PAYERNAME_EXTRA", @" paid") ]];
+    paymentCell.namePayerLabel.text = thisCellsPayerName;
     
-//    if ([[thisCellsPayment payingPerson] picture]) {
-//        paymentCell.pictureOfPayer.image = thisCellsPayment.payingPerson.picture;
-//    }
     // Get category picture.
     NSArray *pictureObjects = [[CategoryPictureStoreController sharedController] pictureObjects];
     CategoryPictureObject *categoryObject = pictureObjects[[[thisCellsPayment categoryId] shortValue]];
@@ -255,10 +244,10 @@
     if (!thisCellsDescriptionOfPayment) {
         thisCellsDescriptionOfPayment = NSLocalizedString(@"THISPAYMENTCELL_NOOBJECT", @"Something");
     }
-    [[paymentCell whatPaidLabel] setText:[NSString stringWithFormat:@"%@%@", NSLocalizedString(@"PAYMENT_CELL_PAIDFOR_EXTRA", @"for ") , thisCellsDescriptionOfPayment]];
+    paymentCell.whatPaidLabel.text = thisCellsDescriptionOfPayment;
     
     CurrencyFormatter *cf = [[CurrencyFormatter alloc] initWithCurrencyCode:thisCellsPayment.currency.code];
-    paymentCell.moneyPaidLabel.text = [cf stringForObjectValue:thisCellsPayment.money];
+    paymentCell.moneyPaidLabel.text = [cf stringFor:thisCellsPayment.money];
     
     return paymentCell;
 }
@@ -275,6 +264,7 @@
 {
     if (editingStyle == UITableViewCellEditingStyleDelete) {
         // Delete the row from the data source
+        [FIRAnalytics logEventWithName:@"Delete payment" parameters:nil];
         [WhoPayingUserDefaultsStoreInterface sendToUserDefaultsStoreInterface:_tonightsBill];
         [MCPayment deletePayment:[_dataController objectAtIndexPath:indexPath]];
         [[MCWeAllPayStoreController defaultStore] saveMainThreadContext];

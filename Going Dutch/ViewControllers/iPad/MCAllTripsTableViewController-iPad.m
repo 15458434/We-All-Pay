@@ -6,6 +6,8 @@
 //  Copyright (c) 2014 Mark Cornelisse. All rights reserved.
 //
 
+@import FirebaseAnalytics;
+
 #import "MCAllTripsTableViewController-iPad.h"
 #import "UIViewController+WeAllPayStore.h"
 
@@ -23,9 +25,19 @@
 
 @property (nonatomic) BOOL isEmptyMessageShownInstantForFirstBoot;
 
+@property (nonatomic, strong) NSIndexPath *selectedIndexPathForAction;
+
 @end
 
 @implementation MCAllTripsTableViewController_iPad
+
+#pragma mark - IBActions
+
+- (IBAction)newEventPressed:(id)sender
+{
+    [FIRAnalytics logEventWithName:@"New Event" parameters:nil];
+}
+
 
 #pragma mark - New in this class
 
@@ -86,6 +98,14 @@
         activity.requiredUserInfoKeys = [[NSSet alloc] init];
         self.userActivity = activity;
     }
+}
+
+- (void)deleteBillAtIndexpath:(NSIndexPath *)indexPath {
+    MCSharedBill *toBeDeleteSharedBill = [_dataController objectAtIndexPath:indexPath];
+    
+    [WhoPayingUserDefaultsStoreInterface sendInvalidUserDefaultsIfTonightsBillIs:toBeDeleteSharedBill];
+    [MCSharedBill deleteSharedbill:toBeDeleteSharedBill];
+    [[MCWeAllPayStoreController defaultStore] saveMainThreadContext];
 }
 
 #pragma mark - Inherited from super
@@ -231,12 +251,35 @@
 {
     return 64;
 }
+*/
 
 - (void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath
 {
-    [self performSegueWithIdentifier:@"openEvent" sender:self];
+    [FIRAnalytics logEventWithName:@"Open Event" parameters:nil];
+//    [self performSegueWithIdentifier:@"openEvent" sender:self];
 }
- */
+
+- (NSArray<UITableViewRowAction *> *)tableView:(UITableView *)tableView editActionsForRowAtIndexPath:(NSIndexPath *)indexPath {
+    // Delete action
+    NSString *deleteTitle = NSLocalizedString(@"Delete", @"Text on a delete button");
+    UITableViewRowAction *deleteAction = [UITableViewRowAction rowActionWithStyle:UITableViewRowActionStyleDestructive title:deleteTitle handler:^(UITableViewRowAction * _Nonnull action, NSIndexPath * _Nonnull indexPath) {
+#ifdef DEBUG
+        NSLog(@"Delete action pressed");
+#endif
+        [self deleteBillAtIndexpath:indexPath];
+    }];
+    // Change MainCurrency action
+    NSString *selectMainCurrencyTitle = NSLocalizedString(@"€$£¥", @"Text on a button to select a different currency");
+    UITableViewRowAction *selectCurrencyAction = [UITableViewRowAction rowActionWithStyle:UITableViewRowActionStyleNormal title:selectMainCurrencyTitle handler:^(UITableViewRowAction * _Nonnull action, NSIndexPath * _Nonnull indexPath) {
+#ifdef DEBUG
+        NSLog(@"Change currency pressed");
+#endif
+        // Open currency picker in mainCurrency mode
+        [self performSegueWithIdentifier:@"selectMainCurrency" sender:self];
+        self.selectedIndexPathForAction = indexPath;
+    }];
+    return @[deleteAction, selectCurrencyAction];
+}
 
 #pragma mark - Table view data source
 
@@ -259,7 +302,7 @@
     AllTripsTableViewCell_iPad *allTripsTableViewCell = [tableView dequeueReusableCellWithIdentifier:@"MCAllTripsTableViewCell_iPad"];
     
     if (![thisTrip tripName]) {
-        [[allTripsTableViewCell tripLabel] setText:@"..."];
+        [[allTripsTableViewCell tripLabel] setText:NSLocalizedString(@"...", @"String that shows empty string")];
     } else {
         [[allTripsTableViewCell tripLabel] setText:[thisTrip tripName]];
     }
@@ -270,7 +313,7 @@
         [[allTripsTableViewCell totalCostLabel] setHidden:NO];
         
         CurrencyFormatter *cf = [[CurrencyFormatter alloc] initWithCurrencyCode:thisTrip.mainCurrency.code];
-        allTripsTableViewCell.totalCostLabel.text = [cf stringForObjectValue:thisTrip.totalSumOfMoneyOfThisSharedBill];
+        allTripsTableViewCell.totalCostLabel.text = [cf stringFor:thisTrip.totalSumOfMoneyOfThisSharedBill];
     } else {
         [[allTripsTableViewCell activityIndicator] startAnimating];
         [[allTripsTableViewCell totalCostLabel] setHidden:YES];
@@ -298,11 +341,9 @@
 - (void)tableView:(UITableView *)tableView commitEditingStyle:(UITableViewCellEditingStyle)editingStyle forRowAtIndexPath:(NSIndexPath *)indexPath
 {
     if (editingStyle == UITableViewCellEditingStyleDelete) {
+        [FIRAnalytics logEventWithName:@"Delete event" parameters:nil];
         // Delete the row from the data source
-        MCSharedBill *toBeDeletedTonightsBill = [_dataController objectAtIndexPath:indexPath];
-        [WhoPayingUserDefaultsStoreInterface sendInvalidUserDefaultsIfTonightsBillIs:toBeDeletedTonightsBill];
-        [MCSharedBill deleteSharedbill:toBeDeletedTonightsBill];
-        [[MCWeAllPayStoreController defaultStore] saveMainThreadContext];
+        [self deleteBillAtIndexpath:indexPath];
     } else if (editingStyle == UITableViewCellEditingStyleInsert) {
         // Create a new instance of the appropriate class, insert it into the array, and add a new row to the table view
     }   
@@ -331,6 +372,14 @@
 {
     // Get the new view controller using [segue destinationViewController].
     // Pass the selected object to the new view controller.
+    
+    if ([[segue identifier] isEqualToString:@"selectMainCurrency"]) {
+        MCSharedBill *theBill = _dataController.fetchedObjects[_selectedIndexPathForAction.row];
+        UINavigationController *navController = (UINavigationController *)segue.destinationViewController;
+        SelectCurrencyTableViewController *currencySelector = (SelectCurrencyTableViewController *)navController.viewControllers.firstObject;
+        currencySelector.currencyUpdateModel = [[EventUpdateCurrencyModel alloc] initWith:theBill];
+        return;
+    }
     
     MCSharedBill *theBill;
     NSIndexPath *indexPathOfSelectedRow = [[self tableView] indexPathForSelectedRow];

@@ -37,19 +37,19 @@ class ExchangeRateFetcherTest: XCTestCase {
     func testIsLastFetchOlderThanAnHour() {
         let emptyFetcher = ExchangeRateFetcher()
         XCTAssertTrue(emptyFetcher.isLastFetchOlderThanAnHour, "Should be true nothing is fetched.")
-        let expectation = self.expectationWithDescription("isLastFetchOlderThanHour")
+        let expectation = self.expectation(description: "isLastFetchOlderThanHour")
         emptyFetcher.fetchFromOpenExchangeRates{ (baseCurrency, rates, error) -> () in
             XCTAssertFalse(emptyFetcher.isLastFetchOlderThanAnHour, "Should be true when fetched.")
             expectation.fulfill()
         }
         
-        waitForExpectationsWithTimeout(90, handler: { (error) -> Void in
+        waitForExpectations(timeout: 90, handler: { (error) -> Void in
             XCTAssertNil(error, "Timeout error: \(error)")
         })
     }
 
     func testFetchFromOpenExchangeRates() {
-        let expectation = self.expectationWithDescription("fetchFromOpenExchangeRates")
+        let expectation = self.expectation(description: "fetchFromOpenExchangeRates")
         fetcher.fetchFromOpenExchangeRates { (baseCurrency, rates, error) -> () in
             XCTAssertNil(error, "Error fetchingExchangeRate: \(error)")
             XCTAssertNotNil(baseCurrency, "baseCurrency can't be nil")
@@ -59,14 +59,14 @@ class ExchangeRateFetcherTest: XCTestCase {
             expectation.fulfill()
         }
         
-        waitForExpectationsWithTimeout(90, handler: { (error) -> Void in
+        waitForExpectations(timeout: 90, handler: { (error) -> Void in
             XCTAssertNil(error, "Error waiting for exchangeRate results: \(error)")
             XCTAssertTrue(self.fetcher.allCurrenciesAvailable, "All currencies should be available.")
         })
     }
     
     func testExchangeRate() {
-        let expectation = self.expectationWithDescription("exchangeRate")
+        let expectation = self.expectation(description: "exchangeRate")
         let repeatFetcher = ExchangeRateFetcher()
         repeatFetcher.exchangeRate("EUR", toCode: "BTC") { (fromCode, toCode, exchangeRate, error) -> () in
             XCTAssertNil(error, "Error fetching ExchangeRate")
@@ -79,22 +79,22 @@ class ExchangeRateFetcherTest: XCTestCase {
                 expectation.fulfill()
             })
         }
-        waitForExpectationsWithTimeout(90, handler: { (error) -> Void in
+        waitForExpectations(timeout: 90, handler: { (error) -> Void in
             XCTAssertNil(error, "Timeout error: \(error)")
         })
     }
     
     func testCodeSubscript() {
-        let expectation = self.expectationWithDescription("codeSubscript")
+        let expectation = self.expectation(description: "codeSubscript")
         let codeSubscriptFetcher = ExchangeRateFetcher()
         codeSubscriptFetcher.fetchFromOpenExchangeRates { (baseCurrency, rates, error) -> () in
-            NSThread.sleepForTimeInterval(1.0)
+            Thread.sleep(forTimeInterval: 1.0)
             XCTAssertNil(error, "Error fetching exchangeRates")
             XCTAssertNotNil(codeSubscriptFetcher["EUR"], "ExchangeRate should be valid")
             expectation.fulfill()
         }
         
-        waitForExpectationsWithTimeout(90, handler: { (error) -> Void in
+        waitForExpectations(timeout: 90, handler: { (error) -> Void in
             XCTAssertNil(error, "Timeout error: \(error)")
         })
     }

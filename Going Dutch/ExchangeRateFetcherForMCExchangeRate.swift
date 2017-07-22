@@ -10,30 +10,30 @@ import Foundation
 import CurrencyConverter
 
 extension ExchangeRateFetcher {
-    private func update(exchangeRates: [MCExchangeRate]) {
+    private func update(_ exchangeRates: [MCExchangeRate]) {
         for exchangeRate in exchangeRates {
             let fromCode = exchangeRate.fromCurrency.code
             let toCode = exchangeRate.toCurrency.code
-            let newExchangeRate = calculateExchangeRate(fromCode, toCode: toCode)
-            exchangeRate.exchangeRate = NSNumber(double: newExchangeRate)
-            exchangeRate.status = NSNumber(short: MCExchangeRateStatus.Valid.rawValue)
+            let newExchangeRate = calculateExchangeRate(fromCode!, toCode: toCode!)
+            exchangeRate.exchangeRate = NSNumber(value: newExchangeRate)
+            exchangeRate.status = NSNumber(value: MCExchangeRateStatus.valid.rawValue)
         }
     }
     
-    func fetchAll(exchangeRates: [MCExchangeRate], completionHandler: ((error: NSError!) -> ())) {
+    func fetchAll(_ exchangeRates: [MCExchangeRate], completionHandler: @escaping ((_ error: NSError?) -> ())) {
         if isLastFetchOlderThanAnHour {
             fetchFromOpenExchangeRates({ (baseCurrency, rates, error) -> () in
                 if error != nil {
-                    completionHandler(error: error)
+                    completionHandler(error)
                     return
                 }
                 
                 self.update(exchangeRates)
-                completionHandler(error: nil)
+                completionHandler(nil)
             })
         } else {
             update(exchangeRates)
-            completionHandler(error: nil)
+            completionHandler(nil)
         }
     }
 }

@@ -7,6 +7,8 @@
 //
 
 @import Firebase;
+@import FirebaseAnalytics;
+@import FirebaseAppIndexing;
 
 #import "MCAppDelegate.h"
 #import "MCAllTripsTableViewController.h"
@@ -25,6 +27,7 @@
 @interface MCAppDelegate ()
 
 @property (nonatomic) dispatch_once_t executeOnlyOnce;
+@property (nonatomic, strong) MCLaunchCounter *launchCounter;
 
 @end
 
@@ -32,11 +35,15 @@
 
 #pragma mark - New in this class
 
-- (void)activateAnalytics
+- (void)activateFirebase
 {
 #ifndef DEBUG
     [FIRApp configure];
+    [[FIRAppIndexing sharedInstance] registerApp:642135963];
 #endif
+    _launchCounter = [[MCLaunchCounter alloc] init];
+    [_launchCounter increment];
+    [FIRAnalytics logEventWithName:@"Start counter" parameters:@{@"Counter Value": @(_launchCounter.count)}];
 }
 
 - (void)removeOldCurrencyStore
@@ -56,27 +63,6 @@
     }];
 }
 
-- (void)checkToSeeIfThisPurchaseOriginatesFromiAd
-{
-    ADoriginate *adAttributionObject = [[ADoriginate alloc] init];
-    if (adAttributionObject.fromiAd != nil) {
-        // There is a value present.
-        if (adAttributionObject.fromiAd.boolValue) {
-            NSLog(@"We met with iAd.");
-        } else {
-            NSLog(@"We didn't met with iAd");
-        }
-    } else {
-        [adAttributionObject fetchAttribution:^{
-            if (adAttributionObject.fromiAd.boolValue) {
-                NSLog(@"We met with iAd.");
-            } else {
-                NSLog(@"We didn't met with iAd");
-            }
-        }];
-    }
-}
-
 - (void)executeOnlyOnceDuringStartup
 {
     // Override point for customization after application launch.
@@ -85,12 +71,13 @@
     [someQueue addOperationWithBlock:^{
         NSLog(@"%@ running iOS %@", [[UIDevice currentDevice] model], [[UIDevice currentDevice] systemVersion]);
         NSLog(@"I dedicate this program to Ilse Béguin, the most wonderful woman in the world who brought herself into my life, when I was developing the first version of this App.");
-    }];
 #ifdef DEBUG
-    NSLocale *locale = [NSLocale currentLocale];
-    NSString *languageCode = [locale objectForKey:NSLocaleLanguageCode];
-    NSLog(@"The current language code is: %@", languageCode);
+        NSLocale *locale = [NSLocale currentLocale];
+        NSString *languageCode = [locale objectForKey:NSLocaleLanguageCode];
+        NSLog(@"The current language code is: %@", languageCode);
 #endif
+    }];
+
     // Set colors throughout the App.
     [[UINavigationBar appearance] setBarTintColor:[Colors getNavigationColor]];
     [[UINavigationBar appearance] setTintColor:[Colors getButtonColor]];
@@ -99,14 +86,12 @@
     [[UIButton appearance] setTitleColor:[Colors getButtonDisabledColor] forState:UIControlStateDisabled];
     [[UIBarButtonItem appearance] setTintColor:[Colors getButtonColor]];
     [[UINavigationBar appearance] setBarStyle:UIBarStyleBlackTranslucent];
-    [[UIApplication sharedApplication] setStatusBarStyle:UIStatusBarStyleLightContent];
-    [[UIButton appearanceWhenContainedIn:[UITableViewCell class], nil] setTitleColor:[UIColor whiteColor] forState:UIControlStateNormal];
-    
+    [[UIButton appearanceWhenContainedInInstancesOfClasses:@[[UITableViewCell class]]] setTitleColor:[UIColor whiteColor] forState:UIControlStateNormal];
     // Set the background color in the peoplepicker.
     [[UISearchBar appearance] setBarTintColor:[Colors getbackgroundColor]];
     
     // Set the color of the cancelButton of the search bar
-    UIBarButtonItem *addressBookSearchBarCancelButton = [UIBarButtonItem appearanceWhenContainedIn:[UISearchBar class], nil];
+    UIBarButtonItem *addressBookSearchBarCancelButton = [UIBarButtonItem appearanceWhenContainedInInstancesOfClasses:@[[UISearchBar class]]];
     UIColor *addressBookSearchBarCancelButtonColor = [Colors getButtonColor];
     NSMutableDictionary *colorDictionary = [NSMutableDictionary dictionaryWithObjectsAndKeys:
                                             addressBookSearchBarCancelButtonColor,
@@ -200,10 +185,6 @@
         [self executeOnlyOnceDuringStartup];
         [[MCWeAllPayStoreController defaultStore] openStore:nil];
         
-    });
-    dispatch_queue_t someBackgroundQueue = dispatch_queue_create("originChech", NULL);
-    dispatch_async(someBackgroundQueue, ^{
-        [self checkToSeeIfThisPurchaseOriginatesFromiAd];
     });    
     return YES;
 }
@@ -215,7 +196,7 @@
         [[MCWeAllPayStoreController defaultStore] openStore:nil];
     });
     [[MCStoreInterface defaultStoreInterface] validateProductIdentifiers];
-    [self activateAnalytics];
+    [self activateFirebase];
     
     return YES;
 }
@@ -228,6 +209,7 @@
 
 - (void)applicationDidEnterBackground:(UIApplication *)application
 {
+    [FIRAnalytics logEventWithName:@"application did enter backgroun" parameters:nil];
     __block UIBackgroundTaskIdentifier bgTask = [application beginBackgroundTaskWithExpirationHandler:^{
         [application endBackgroundTask:bgTask];
         bgTask = UIBackgroundTaskInvalid;
@@ -245,12 +227,12 @@
 {
     // Restart any tasks that were paused (or not yet started) while the application was inactive. If the application was previously in the background, optionally refresh the user interface.
 //    [self startGoogleAnalyticsSession];
+    [FIRAnalytics logEventWithName:@"application did become active" parameters:nil];
 }
 
 - (void)applicationWillTerminate:(UIApplication *)application
 {
     // Called when the application is about to terminate. Save data if appropriate. See also applicationDidEnterBackground:.
-    [[MCWeAllPayStoreController defaultStore] closeDocument];
 }
 
 - (BOOL)application:(UIApplication *)application shouldSaveApplicationState:(NSCoder *)coder

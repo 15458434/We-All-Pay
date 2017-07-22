@@ -9,15 +9,12 @@
 @import UIKit;
 @import iAd;
 
-#import "MCAddressBookDataReceiver.h"
 #import "MCTonightsBillTransfer.h"
 #import "MCThisPaymentProtocol.h"
 
 @class MCSharedBill;
 
-@interface MCSharedBillViewController_iPad : UIViewController <MCTonightsBillTransfer, MCAddressBookReceiverDelegate, UITextFieldDelegate>
-
-@property (strong, nonatomic) MCAddressBookDataReceiver *personReceiver;
+@interface MCSharedBillViewController_iPad : UIViewController <MCTonightsBillTransfer, UITextFieldDelegate>
 
 @property (strong, nonatomic) MCSharedBill *tonightsBill;
 @property (strong, nonatomic) MCSharedBill *writableTonightsBill;

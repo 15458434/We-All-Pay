@@ -10,7 +10,7 @@ import Foundation
 
 internal let rateMeControllerCounterInterval: Int = 3
 internal let rateMeControllerMinimumTimeIntervalInDays: Double = 7.0
-internal let rateMeControllerTimeIntervalInDays: Double = 90.0
+internal let rateMeControllerTimeIntervalInDays: Double = 21.0
 
 //private let rateMeControllerOneDayTimeInterval: Double = 1
 private let rateMeControllerOneDayTimeInterval: Double = 86400
@@ -22,31 +22,31 @@ private let kRateMeControllerShouldAskContainer = "kRateMeControllerAskStatus"
 
 public class RateMeController: NSObject {
     // MARK: Properties
-    private let firstLaunchDate: NSDate
-    private var currentDate = NSDate()
+    private let firstLaunchDate: Date
+    private var currentDate = Date()
     private var counterValue: Int
     private var shouldAskContainer: RateMeControllerAskStatusContainer
     
-    private var currentVersionString = NSBundle.mainBundle().infoDictionary!["CFBundleVersion"] as! String
+    private var currentVersionString = Bundle.main.infoDictionary!["CFBundleVersion"] as! String
     
     // MARK: New in this class
     
     internal class func reset() {
-        NSUserDefaults.standardUserDefaults().removeObjectForKey(kRateMeControllerFirstLaunchDate)
-        NSUserDefaults.standardUserDefaults().removeObjectForKey(kRateMeControllerCounterValue)
-        NSUserDefaults.standardUserDefaults().removeObjectForKey(kRateMeControllerShouldAskContainer)
-        NSUserDefaults.standardUserDefaults().synchronize()
+        UserDefaults.standard.removeObject(forKey: kRateMeControllerFirstLaunchDate)
+        UserDefaults.standard.removeObject(forKey: kRateMeControllerCounterValue)
+        UserDefaults.standard.removeObject(forKey: kRateMeControllerShouldAskContainer)
+        UserDefaults.standard.synchronize()
     }
     
     public var shouldDisplayRateMeQuestion: Bool {
         counterValue += 1
-        let currentTimeIntervalInDays = self.currentDate.timeIntervalSinceDate(firstLaunchDate) / rateMeControllerOneDayTimeInterval
+        let currentTimeIntervalInDays = self.currentDate.timeIntervalSince(firstLaunchDate) / rateMeControllerOneDayTimeInterval
         debugPrint("CurrentTimeIntervalInDays: \(currentTimeIntervalInDays)")
         debugPrint("CounterValue: \(counterValue)")
         switch (shouldAskContainer.shouldAsk) {
-        case .NoNever:
+        case .noNever:
             return false
-        case .Yes:
+        case .yes:
             switch (currentTimeIntervalInDays, counterValue) {
             case let (t, _) where t < rateMeControllerMinimumTimeIntervalInDays:
                 return false
@@ -57,13 +57,13 @@ public class RateMeController: NSObject {
             default:
                 return false
             }
-        case .AlreadyRated:
+        case .alreadyRated:
             if shouldAskContainer.lastVersion != currentVersionString {
                 return true
             } else {
                 return false
             }
-        case .No:
+        case .no:
             if shouldAskContainer.lastVersion != currentVersionString {
                 return true
             } else {
@@ -72,22 +72,22 @@ public class RateMeController: NSObject {
         }
     }
     
-    public func rateMeDisplayed(shouldAskAgain: RateMeControllerAskStatus) {
+    public func rateMeDisplayed(_ shouldAskAgain: RateMeControllerAskStatus) {
         shouldAskContainer.shouldAsk = shouldAskAgain
         switch (shouldAskAgain) {
-        case .No:
+        case .no:
             shouldAskContainer.lastVersion = currentVersionString
-        case .AlreadyRated:
+        case .alreadyRated:
             shouldAskContainer.lastVersion = currentVersionString
-        case .Yes:
+        case .yes:
             counterValue = 0
             shouldAskContainer.lastVersion = nil
-        case .NoNever:
+        case .noNever:
             shouldAskContainer.lastVersion = nil
         }
     }
     
-    internal init(firstDate: NSDate, counterValue: Int, shouldAsk: RateMeControllerAskStatusContainer) {
+    internal init(firstDate: Date, counterValue: Int, shouldAsk: RateMeControllerAskStatusContainer) {
         self.firstLaunchDate = firstDate
         self.counterValue = counterValue
         self.shouldAskContainer = shouldAsk
@@ -95,24 +95,24 @@ public class RateMeController: NSObject {
     }
     
     public func save() -> Bool {
-        NSUserDefaults.standardUserDefaults().setObject(self.firstLaunchDate, forKey: kRateMeControllerFirstLaunchDate)
-        NSUserDefaults.standardUserDefaults().setInteger(self.counterValue, forKey: kRateMeControllerCounterValue)
-        NSUserDefaults.standardUserDefaults().setObject(NSKeyedArchiver.archivedDataWithRootObject(self.shouldAskContainer), forKey: kRateMeControllerShouldAskContainer)
-        return NSUserDefaults.standardUserDefaults().synchronize()
+        UserDefaults.standard.set(self.firstLaunchDate, forKey: kRateMeControllerFirstLaunchDate)
+        UserDefaults.standard.set(self.counterValue, forKey: kRateMeControllerCounterValue)
+        UserDefaults.standard.set(NSKeyedArchiver.archivedData(withRootObject: self.shouldAskContainer), forKey: kRateMeControllerShouldAskContainer)
+        return UserDefaults.standard.synchronize()
     }
     
     // MARK: Inherited from super
     
     public override init() {
-        if let firstLaunchDateForUserDefaults = NSUserDefaults.standardUserDefaults().objectForKey(kRateMeControllerFirstLaunchDate) as? NSDate {
+        if let firstLaunchDateForUserDefaults = UserDefaults.standard.object(forKey: kRateMeControllerFirstLaunchDate) as? Date {
             self.firstLaunchDate = firstLaunchDateForUserDefaults
         } else {
-            self.firstLaunchDate = NSDate()
+            self.firstLaunchDate = Date()
         }
         
-        self.counterValue = NSUserDefaults.standardUserDefaults().integerForKey(kRateMeControllerCounterValue)
-        if let shouldAskContainerData = NSUserDefaults.standardUserDefaults().objectForKey(kRateMeControllerShouldAskContainer) as? NSData {
-            if let userDefaultShouldAsk = NSKeyedUnarchiver.unarchiveObjectWithData(shouldAskContainerData) as? RateMeControllerAskStatusContainer {
+        self.counterValue = UserDefaults.standard.integer(forKey: kRateMeControllerCounterValue)
+        if let shouldAskContainerData = UserDefaults.standard.object(forKey: kRateMeControllerShouldAskContainer) as? Data {
+            if let userDefaultShouldAsk = NSKeyedUnarchiver.unarchiveObject(with: shouldAskContainerData) as? RateMeControllerAskStatusContainer {
                 self.shouldAskContainer = userDefaultShouldAsk
             } else {
                 self.shouldAskContainer = RateMeControllerAskStatusContainer()
