@@ -15,7 +15,7 @@ class SolutionViewController: MCReturnPaymentViewController, MFMailComposeViewCo
     
     // MARK: New in this class
     override func openMailView(_ sender: Any!) {
-        Analytics.logEvent("openMailView", parameters: nil)
+        FIRAnalytics.logEvent(withName: "openMailView", parameters: nil)
         self.showMailView(sender as AnyObject)
     }
     
@@ -36,20 +36,20 @@ class SolutionViewController: MCReturnPaymentViewController, MFMailComposeViewCo
     func mailComposeController(_ controller: MFMailComposeViewController, didFinishWith result: MFMailComposeResult, error: Error?) {
         switch result {
         case .cancelled:
-            Analytics.logEvent("MailComposeViewController cancel", parameters: nil)
+            FIRAnalytics.logEvent(withName: "MailComposeViewController cancel", parameters: nil)
             self.presentedViewController!.dismiss(animated: true, completion: nil)
         case .sent:
-            Analytics.logEvent("MailComposeViewController sent", parameters: nil)
+            FIRAnalytics.logEvent(withName: "MailComposeViewController sent", parameters: nil)
             self.showRateMeIfNecessary()
             self.presentedViewController!.dismiss(animated: true, completion: {
                 self.event.hasTheMailBeenSent = NSNumber(booleanLiteral: true)
                 MCWeAllPayStoreController.defaultStore().saveMainThreadContext()
             })
         case .failed:
-            Analytics.logEvent("MailComposeViewController failed", parameters: nil)
+            FIRAnalytics.logEvent(withName: "MailComposeViewController failed", parameters: nil)
             self.presentedViewController!.dismiss(animated: true, completion: nil)
         case .saved:
-            Analytics.logEvent("MailComposeViewControler saved", parameters: nil)
+            FIRAnalytics.logEvent(withName: "MailComposeViewControler saved", parameters: nil)
             self.presentedViewController!.dismiss(animated: true, completion: nil)
         }
     }
