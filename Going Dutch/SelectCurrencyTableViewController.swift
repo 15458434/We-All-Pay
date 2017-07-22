@@ -51,7 +51,7 @@ class SelectCurrencyTableViewController: UITableViewController, UISearchResultsU
     
     @IBAction func mainCancelPressed(_ sender: AnyObject) {
         // Don't select anything just dimiss the currency view controller
-        Analytics.logEvent("Main Cancel Pressed", parameters: nil)
+        FIRAnalytics.logEvent(withName: "Main Cancel Pressed", parameters: nil)
         navigationController!.presentingViewController!.dismiss(animated: true, completion: nil)
     }
     
@@ -133,7 +133,7 @@ class SelectCurrencyTableViewController: UITableViewController, UISearchResultsU
         let myPresenter = self.presentingViewController
         
         let thisCellsCurrency = data(indexPath: indexPath)
-        Analytics.logEvent("didSelectCurrency pressed", parameters: nil)
+        FIRAnalytics.logEvent(withName: "didSelectCurrency pressed", parameters: nil)
         
         currencyUpdateModel.updateCurrency(with: thisCellsCurrency.code) { (error) in
             if (error != nil) {
@@ -261,15 +261,15 @@ extension SelectCurrencyTableViewController: UISearchBarDelegate {
     }
     
     func searchBarTextDidBeginEditing(_ searchBar: UISearchBar) {
-        Analytics.logEvent("SearchBarDidBeginEditing", parameters: nil)
+        FIRAnalytics.logEvent(withName: "SearchBarDidBeginEditing", parameters: nil)
     }
     
     func searchBarTextDidEndEditing(_ searchBar: UISearchBar) {
-        Analytics.logEvent("SearchBarDidEndEditing", parameters: nil)
+        FIRAnalytics.logEvent(withName: "SearchBarDidEndEditing", parameters: nil)
     }
     
     func searchBarCancelButtonClicked(_ searchBar: UISearchBar) {
-        Analytics.logEvent("Cancel pressed", parameters: nil)
+        FIRAnalytics.logEvent(withName: "Cancel pressed", parameters: nil)
     }
 }
 

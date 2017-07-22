@@ -34,7 +34,7 @@ class SelectCategoryTableViewController: UITableViewController, MCThisPaymentPro
     // MARK: Actions
     
     @IBAction func mainCancelPressed(_ sender: AnyObject) {
-        Analytics.logEvent("Main Cancel Pressed", parameters: nil)
+        FIRAnalytics.logEvent(withName: "Main Cancel Pressed", parameters: nil)
         navigationController!.presentingViewController?.dismiss(animated: true, completion: nil)
     }
     
@@ -91,7 +91,7 @@ class SelectCategoryTableViewController: UITableViewController, MCThisPaymentPro
             categoryObject = filteredCategory
         }
         
-        Analytics.logEvent("didSelecCategory", parameters: ["categoryID": NSNumber.init(value: categoryObject.categoryId)])
+        FIRAnalytics.logEvent(withName: "didSelecCategory", parameters: ["categoryID": NSNumber.init(value: categoryObject.categoryId)])
         thisPayment.categoryId = NSNumber(value: categoryObject.categoryId)
         if dismissMe != nil {
             dismissMe!()

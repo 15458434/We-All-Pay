@@ -178,7 +178,7 @@
 		38EF31451938BA07004912F0 /* UINavigationController+KeyboardDismiss.m in Sources */ = {isa = PBXBuildFile; fileRef = 38EF31441938BA07004912F0 /* UINavigationController+KeyboardDismiss.m */; };
 		38F2A1AC1ADCF7E100831D48 /* TodayViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 38F2A1AA1ADCF7E100831D48 /* TodayViewController.swift */; };
 		38F2A1AD1ADCF7E100831D48 /* WhoIsPayingNextTextLocalizer.swift in Sources */ = {isa = PBXBuildFile; fileRef = 38F2A1AB1ADCF7E100831D48 /* WhoIsPayingNextTextLocalizer.swift */; };
-		575EE89BF79DD169FD4D8156 /* Pods_We_all_pay.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 8B3637C5FA3E64067E7AA8B7 /* Pods_We_all_pay.framework */; };
+		ACDABF43286B9FBB997385B7 /* Pods_We_all_pay.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 40A28F819C00D2C98D9142B5 /* Pods_We_all_pay.framework */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -546,9 +546,9 @@
 		38F7F9A71B2C49C00059DE51 /* en */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; name = en; path = "en.lproj/Available Currencies.plist"; sourceTree = "<group>"; };
 		38F7F9A81B2C49C20059DE51 /* nl */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; name = nl; path = "nl.lproj/Available Currencies.plist"; sourceTree = "<group>"; };
 		38F7F9A91B2C4A120059DE51 /* CurrencyController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = CurrencyController.swift; path = "../Going Dutch/CurrencyController.swift"; sourceTree = "<group>"; };
-		6574327FA65F950C699284DC /* Pods-We all pay.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-We all pay.debug.xcconfig"; path = "Pods/Target Support Files/Pods-We all pay/Pods-We all pay.debug.xcconfig"; sourceTree = "<group>"; };
-		8B3637C5FA3E64067E7AA8B7 /* Pods_We_all_pay.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_We_all_pay.framework; sourceTree = BUILT_PRODUCTS_DIR; };
-		F2E1E066ED9A5094D819440C /* Pods-We all pay.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-We all pay.release.xcconfig"; path = "Pods/Target Support Files/Pods-We all pay/Pods-We all pay.release.xcconfig"; sourceTree = "<group>"; };
+		40A28F819C00D2C98D9142B5 /* Pods_We_all_pay.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_We_all_pay.framework; sourceTree = BUILT_PRODUCTS_DIR; };
+		68C07B95BDB1C514D3B94057 /* Pods-We all pay.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-We all pay.release.xcconfig"; path = "Pods/Target Support Files/Pods-We all pay/Pods-We all pay.release.xcconfig"; sourceTree = "<group>"; };
+		B1287B2495F383B5DFA966B3 /* Pods-We all pay.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-We all pay.debug.xcconfig"; path = "Pods/Target Support Files/Pods-We all pay/Pods-We all pay.debug.xcconfig"; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -581,7 +581,7 @@
 				38C725051A2E08FE003173E6 /* StoreKit.framework in Frameworks */,
 				3873A2A516F23AA1000832FD /* MessageUI.framework in Frameworks */,
 				38572AD7169D437B00969C62 /* UIKit.framework in Frameworks */,
-				575EE89BF79DD169FD4D8156 /* Pods_We_all_pay.framework in Frameworks */,
+				ACDABF43286B9FBB997385B7 /* Pods_We_all_pay.framework in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -762,7 +762,7 @@
 				38D6A3CB1C73DDC000968BB2 /* RateMeControllerForiOSTests */,
 				38572AD5169D437B00969C62 /* Frameworks */,
 				38572AD3169D437B00969C62 /* Products */,
-				9DF4D77CF10F1506194028A2 /* Pods */,
+				D2928D3E652BDEAD7FE0CB01 /* Pods */,
 			);
 			sourceTree = "<group>";
 		};
@@ -788,7 +788,7 @@
 				38C725041A2E08FE003173E6 /* StoreKit.framework */,
 				3829C61B192628C100DE91D4 /* iOS */,
 				3807560019F9445800489ED4 /* NotificationCenter.framework */,
-				8B3637C5FA3E64067E7AA8B7 /* Pods_We_all_pay.framework */,
+				40A28F819C00D2C98D9142B5 /* Pods_We_all_pay.framework */,
 			);
 			name = Frameworks;
 			sourceTree = "<group>";
@@ -1151,11 +1151,11 @@
 			name = iPad;
 			sourceTree = "<group>";
 		};
-		9DF4D77CF10F1506194028A2 /* Pods */ = {
+		D2928D3E652BDEAD7FE0CB01 /* Pods */ = {
 			isa = PBXGroup;
 			children = (
-				6574327FA65F950C699284DC /* Pods-We all pay.debug.xcconfig */,
-				F2E1E066ED9A5094D819440C /* Pods-We all pay.release.xcconfig */,
+				B1287B2495F383B5DFA966B3 /* Pods-We all pay.debug.xcconfig */,
+				68C07B95BDB1C514D3B94057 /* Pods-We all pay.release.xcconfig */,
 			);
 			name = Pods;
 			sourceTree = "<group>";
@@ -1231,14 +1231,14 @@
 			isa = PBXNativeTarget;
 			buildConfigurationList = 38572AF0169D437B00969C62 /* Build configuration list for PBXNativeTarget "We all pay" */;
 			buildPhases = (
-				7EBC678A465CF274346AD774 /* [CP] Check Pods Manifest.lock */,
+				7251645A11798CDBEBD26035 /* [CP] Check Pods Manifest.lock */,
 				38572ACE169D437B00969C62 /* Sources */,
 				38572ACF169D437B00969C62 /* Frameworks */,
 				38572AD0169D437B00969C62 /* Resources */,
 				380D611E1B299B94006F8AE4 /* Embed Frameworks */,
-				2506596625395E32E20C5D2C /* [CP] Embed Pods Frameworks */,
-				8A710DA964B64371764BBF64 /* [CP] Copy Pods Resources */,
 				384A8D9D1D54776300A69E15 /* Embed App Extensions */,
+				02AC65C0AE073EBF6B25F7FB /* [CP] Embed Pods Frameworks */,
+				A0791D858C9685354A1836C9 /* [CP] Copy Pods Resources */,
 			);
 			buildRules = (
 			);
@@ -1555,7 +1555,7 @@
 /* End PBXResourcesBuildPhase section */
 
 /* Begin PBXShellScriptBuildPhase section */
-		2506596625395E32E20C5D2C /* [CP] Embed Pods Frameworks */ = {
+		02AC65C0AE073EBF6B25F7FB /* [CP] Embed Pods Frameworks */ = {
 			isa = PBXShellScriptBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
@@ -1570,7 +1570,7 @@
 			shellScript = "\"${SRCROOT}/Pods/Target Support Files/Pods-We all pay/Pods-We all pay-frameworks.sh\"\n";
 			showEnvVarsInLog = 0;
 		};
-		7EBC678A465CF274346AD774 /* [CP] Check Pods Manifest.lock */ = {
+		7251645A11798CDBEBD26035 /* [CP] Check Pods Manifest.lock */ = {
 			isa = PBXShellScriptBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
@@ -1585,7 +1585,7 @@
 			shellScript = "diff \"${PODS_PODFILE_DIR_PATH}/Podfile.lock\" \"${PODS_ROOT}/Manifest.lock\" > /dev/null\nif [ $? != 0 ] ; then\n    # print error to STDERR\n    echo \"error: The sandbox is not in sync with the Podfile.lock. Run 'pod install' or update your CocoaPods installation.\" >&2\n    exit 1\nfi\n";
 			showEnvVarsInLog = 0;
 		};
-		8A710DA964B64371764BBF64 /* [CP] Copy Pods Resources */ = {
+		A0791D858C9685354A1836C9 /* [CP] Copy Pods Resources */ = {
 			isa = PBXShellScriptBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
@@ -2277,7 +2277,7 @@
 		};
 		38572AF1169D437B00969C62 /* Debug */ = {
 			isa = XCBuildConfiguration;
-			baseConfigurationReference = 6574327FA65F950C699284DC /* Pods-We all pay.debug.xcconfig */;
+			baseConfigurationReference = B1287B2495F383B5DFA966B3 /* Pods-We all pay.debug.xcconfig */;
 			buildSettings = {
 				ALWAYS_EMBED_SWIFT_STANDARD_LIBRARIES = YES;
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
@@ -2315,7 +2315,7 @@
 		};
 		38572AF2169D437B00969C62 /* Release */ = {
 			isa = XCBuildConfiguration;
-			baseConfigurationReference = F2E1E066ED9A5094D819440C /* Pods-We all pay.release.xcconfig */;
+			baseConfigurationReference = 68C07B95BDB1C514D3B94057 /* Pods-We all pay.release.xcconfig */;
 			buildSettings = {
 				ALWAYS_EMBED_SWIFT_STANDARD_LIBRARIES = YES;
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
