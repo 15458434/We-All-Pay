@@ -23,6 +23,6 @@ class ReturnPayment: NSObject {
     
     // MARK: Inherited from super.
     override var description: String {
-        return "\(payer) owes \(money) to \(receiver)."
+        return "\(String(describing: payer)) owes \(String(describing: money)) to \(String(describing: receiver))."
     }
 }

@@ -54,7 +54,7 @@ enum CancelButtonPressed {
     
     // MARK: IB Actions
     @IBAction func mainCancelPressed(_ sender: UIButton) {
-        FIRAnalytics.logEvent(withName: "Main Canncel Pressed", parameters: nil)
+        Analytics.logEvent("Main Canncel Pressed", parameters: nil)
         mainCancelIsPressed = .isPressed
         dataController.delegate = nil
         if MCWeAllPayStoreController.defaultStore().mainThreadContext.undoManager?.canUndo == true {
@@ -67,7 +67,7 @@ enum CancelButtonPressed {
     }
     
     @IBAction func mainDonePressed(_ sender: UIButton) {
-        FIRAnalytics.logEvent(withName: "Main Done Pressed", parameters: nil)
+        Analytics.logEvent("Main Done Pressed", parameters: nil)
         let now = Date()
         tonightsBill.dateModified = now
         MCWeAllPayStoreController.defaultStore().endUndoGroupAndProcess()
@@ -79,15 +79,15 @@ enum CancelButtonPressed {
     }
     
     @IBAction func selectPayerButtonPressed(_ sender: AnyObject) {
-        FIRAnalytics.logEvent(withName: "Select Payer button Pressed", parameters: nil)
+        Analytics.logEvent("Select Payer button Pressed", parameters: nil)
     }
     
     @IBAction func categoryButtonPressed(_ sender: AnyObject) {
-        FIRAnalytics.logEvent(withName: "Open Select Category", parameters: nil)
+        Analytics.logEvent("Open Select Category", parameters: nil)
     }
     
     @IBAction func selectCurrencyPressed(_ sender: AnyObject) {
-        FIRAnalytics.logEvent(withName: "Open Select Currency", parameters: nil)
+        Analytics.logEvent("Open Select Currency", parameters: nil)
     }
     
     // MARK: New in this class
@@ -215,10 +215,10 @@ enum CancelButtonPressed {
     
     func textFieldDidBeginEditing(_ textField: UITextField) {
         if textField == itemField {
-            FIRAnalytics.logEvent(withName: "ItemView didBeginEditing", parameters: nil)
+            Analytics.logEvent("ItemView didBeginEditing", parameters: nil)
         }
         if textField == paidField {
-            FIRAnalytics.logEvent(withName: "PaidView didBeginEditing", parameters: nil)
+            Analytics.logEvent("PaidView didBeginEditing", parameters: nil)
         }
     }
     
@@ -234,10 +234,10 @@ enum CancelButtonPressed {
         if mainCancelIsPressed == CancelButtonPressed.notPressed {
             switch textField {
             case itemField:
-                FIRAnalytics.logEvent(withName: "itemView DidEndEditing", parameters: nil)
+                Analytics.logEvent("itemView DidEndEditing", parameters: nil)
                 thisPayment.descriptionOfPayment = itemField.text
             case paidField:
-                FIRAnalytics.logEvent(withName: "payerNameField didEndEditing", parameters: nil)
+                Analytics.logEvent("payerNameField didEndEditing", parameters: nil)
                 let cf = CurrencyFormatter(currencyCode: thisPayment.currency.code)
                 MCWeAllPayStoreController.defaultStore().beginUndoGroupWithoutRegistration()
                 if paidField.text == nil {
@@ -345,7 +345,7 @@ enum CancelButtonPressed {
         
             destination.dismissMe = {
                 destination.dismiss(animated: true, completion: {
-                    FIRAnalytics.logEvent(withName: "Close select payer", parameters: nil)
+                    Analytics.logEvent("Close select payer", parameters: nil)
                     self.reloadPayerView()
                 })
             }
@@ -356,7 +356,7 @@ enum CancelButtonPressed {
             
             destination.dismissMe = { 
                 destination.dismiss(animated: true, completion: {
-                    FIRAnalytics.logEvent(withName: "Close select currency", parameters: nil)
+                    Analytics.logEvent("Close select currency", parameters: nil)
                     MCWeAllPayStoreController.defaultStore().endUndoGroupAndProcessWithoutRegistration()
                 })
             }
@@ -365,7 +365,7 @@ enum CancelButtonPressed {
             destination.thisPayment = thisPayment
             
             destination.dismissMe = {
-                FIRAnalytics.logEvent(withName: "Close select category", parameters: nil)
+                Analytics.logEvent("Close select category", parameters: nil)
                 destination.dismiss(animated: true)
                 self.reloadCategoryImageView()
                 self.setTextForCategoryButton()

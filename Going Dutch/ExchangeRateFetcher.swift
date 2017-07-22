@@ -69,7 +69,7 @@ public class ExchangeRateFetcher: NSObject {
         let task = URLSession.shared.dataTask(with: url!) {(data, response, error) in
             UIApplication.shared.isNetworkActivityIndicatorVisible = false
             if error != nil {
-                print("Error fetching exchangeRate from OpenExchangeRates: \(error)")
+                debugPrint("Error fetching exchangeRate from OpenExchangeRates: \(String(describing: error))")
                 OperationQueue.main.addOperation({ () -> Void in
                     completionHandler(nil, nil, error as NSError?)
                     self.isFetching = false
