@@ -8,7 +8,6 @@
 
 @import Firebase;
 @import FirebaseAnalytics;
-@import FirebaseAppIndexing;
 
 #import "MCAppDelegate.h"
 #import "MCAllTripsTableViewController.h"
@@ -42,8 +41,8 @@
     [[FIRAppIndexing sharedInstance] registerApp:642135963];
 #endif
     _launchCounter = [[MCLaunchCounter alloc] init];
-    [_launchCounter increment];
-    [FIRAnalytics logEventWithName:@"Start counter" parameters:@{@"Counter Value": @(_launchCounter.count)}];
+    NSUInteger result = [_launchCounter increment];
+    [FIRAnalytics logEventWithName:@"Start counter" parameters:@{@"Counter Value": @(result)}];
 }
 
 - (void)removeOldCurrencyStore
