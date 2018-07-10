@@ -44,14 +44,14 @@ class ExchangeRateFetcherTest: XCTestCase {
         }
         
         waitForExpectations(timeout: 90, handler: { (error) -> Void in
-            XCTAssertNil(error, "Timeout error: \(error)")
+            XCTAssertNil(error, "Timeout error: \(String(describing: error))")
         })
     }
 
     func testFetchFromOpenExchangeRates() {
         let expectation = self.expectation(description: "fetchFromOpenExchangeRates")
         fetcher.fetchFromOpenExchangeRates { (baseCurrency, rates, error) -> () in
-            XCTAssertNil(error, "Error fetchingExchangeRate: \(error)")
+            XCTAssertNil(error, "Error fetchingExchangeRate: \(String(describing: error))")
             XCTAssertNotNil(baseCurrency, "baseCurrency can't be nil")
             XCTAssertNotNil(rates, "Rates can't be nil.")
             XCTAssertNotNil(self.fetcher.baseCurrencyCode, "BaseCurrency can't be nil")
@@ -60,7 +60,7 @@ class ExchangeRateFetcherTest: XCTestCase {
         }
         
         waitForExpectations(timeout: 90, handler: { (error) -> Void in
-            XCTAssertNil(error, "Error waiting for exchangeRate results: \(error)")
+            XCTAssertNil(error, "Error waiting for exchangeRate results: \(String(describing: error))")
             XCTAssertTrue(self.fetcher.allCurrenciesAvailable, "All currencies should be available.")
         })
     }
@@ -80,7 +80,7 @@ class ExchangeRateFetcherTest: XCTestCase {
             })
         }
         waitForExpectations(timeout: 90, handler: { (error) -> Void in
-            XCTAssertNil(error, "Timeout error: \(error)")
+            XCTAssertNil(error, "Timeout error: \(String(describing: error))")
         })
     }
     
@@ -95,7 +95,7 @@ class ExchangeRateFetcherTest: XCTestCase {
         }
         
         waitForExpectations(timeout: 90, handler: { (error) -> Void in
-            XCTAssertNil(error, "Timeout error: \(error)")
+            XCTAssertNil(error, "Timeout error: \(String(describing: error))")
         })
     }
 }

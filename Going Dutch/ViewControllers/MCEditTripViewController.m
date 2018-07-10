@@ -93,14 +93,14 @@
     if ([[_dataController fetchedObjects] count] != 0) {
         if ([[_emptyMessage bigMessage] alpha] > 0.0) {
             [UIView animateWithDuration:1.0 animations:^{
-                [[_emptyMessage bigMessage] setAlpha:0.0];
+                [[self.emptyMessage bigMessage] setAlpha:0.0];
                 [[self tableView] setSeparatorStyle:UITableViewCellSeparatorStyleSingleLine];
             } completion:nil];
         }
     } else {
         if ([[_emptyMessage bigMessage] alpha] < 1.0) {
             [UIView animateWithDuration:1.0 animations:^{
-                [[_emptyMessage bigMessage] setAlpha:1.0];
+                [[self.emptyMessage bigMessage] setAlpha:1.0];
                 [[self tableView] setSeparatorStyle:UITableViewCellSeparatorStyleNone];
             } completion:nil];
         }
@@ -111,13 +111,13 @@
 {
     if ([[_dataController fetchedObjects] count] != 0) {
         [UIView animateWithDuration:0.0 animations:^{
-            [[_emptyMessage bigMessage] setAlpha:0.0];
+            [[self->_emptyMessage bigMessage] setAlpha:0.0];
             [[self tableView] setSeparatorStyle:UITableViewCellSeparatorStyleSingleLine];
         } completion:nil];
     } else {
         if ([[_emptyMessage bigMessage] alpha] < 1.0) {
             [UIView animateWithDuration:0.0 animations:^{
-                [[_emptyMessage bigMessage] setAlpha:1.0];
+                [[self->_emptyMessage bigMessage] setAlpha:1.0];
                 [[self tableView] setSeparatorStyle:UITableViewCellSeparatorStyleNone];
             } completion:nil];
         }
@@ -210,7 +210,7 @@
     NSManagedObjectContext *mainContext = [[MCWeAllPayStoreController defaultStore] mainThreadContext];
     NSManagedObjectID *tonightsBillID = [_writableTonightsBill objectID];
     [mainContext performBlock:^{
-        _tonightsBill = (MCSharedBill *)[mainContext objectWithID:tonightsBillID];
+        self->_tonightsBill = (MCSharedBill *)[mainContext objectWithID:tonightsBillID];
     }];
     NSLog(@"PeoplePresent: WritableTonightsBillIsCreated has been executed.");
 }
@@ -229,9 +229,9 @@
 {
     [super storeDidSwap:notification];
     dispatch_sync(dispatch_get_main_queue(), ^{
-        if (_dataController) {
+        if (self->_dataController) {
             NSError *fetchError;
-            if (![_dataController performFetch:&fetchError]) {
+            if (![self->_dataController performFetch:&fetchError]) {
                 NSLog(@"Error fetching: %@", fetchError);
             }
         }

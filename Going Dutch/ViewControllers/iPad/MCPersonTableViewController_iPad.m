@@ -315,7 +315,7 @@ typedef NS_ENUM(BOOL, MCStatus) {
                 [FIRAnalytics logEventWithName:@"dismiss select email address" parameters:nil];
                 if (destination) {
                     [destination dismissViewControllerAnimated:YES completion:^{
-                        [_emailField setText:[_thisPerson defaultEmailAddress]];
+                        [self.emailField setText:[self.thisPerson defaultEmailAddress]];
                     }];
                 }
             }];

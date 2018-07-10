@@ -11,12 +11,12 @@ import ContactsUI
 
 class ContactsDataReceiver: NSObject, ThisEventReadOnly, CNContactPickerDelegate {
     
-    init(with tonightsBill: MCSharedBill) {
+    @objc init(with tonightsBill: MCSharedBill) {
         self.event = tonightsBill
         super.init()
     }
     
-    func presentContactsPicker(with viewController: UIViewController, completion: ( () -> Swift.Void)? = nil) {
+    @objc func presentContactsPicker(with viewController: UIViewController, completion: ( () -> Swift.Void)? = nil) {
         let contactsViewController = CNContactPickerViewController()
         contactsViewController.delegate = self
         contactsViewController.displayedPropertyKeys = [CNContactGivenNameKey,

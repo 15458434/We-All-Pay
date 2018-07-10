@@ -490,12 +490,6 @@
 	</dict>
 	<dict>
 		<key>code</key>
-		<string>LTL</string>
-		<key>name</key>
-		<string>Litouwse litas</string>
-	</dict>
-	<dict>
-		<key>code</key>
 		<string>MOP</string>
 		<key>name</key>
 		<string>Macause pataca</string>
@@ -904,7 +898,7 @@
 	</dict>
 	<dict>
 		<key>code</key>
-		<string>BYR</string>
+		<string>BYN</string>
 		<key>name</key>
 		<string>Wit-Russische roebel</string>
 	</dict>

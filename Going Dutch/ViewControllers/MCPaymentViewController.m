@@ -109,7 +109,7 @@ typedef NS_ENUM(BOOL, ChildViewOpened) {
     }
     [[MCWeAllPayStoreController defaultStore] saveMainThreadContext];
     [[[self navigationController] presentingViewController] dismissViewControllerAnimated:YES completion:^{
-        [WhoPayingUserDefaultsStoreInterface sendToUserDefaultsStoreInterface:_tonightsBill];
+        [WhoPayingUserDefaultsStoreInterface sendToUserDefaultsStoreInterface:self.tonightsBill];
     }];
 }
 

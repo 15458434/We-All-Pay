@@ -53,7 +53,7 @@ class SelectPayerTableViewController_iPad: UITableViewController, MCTonightsBill
         let cell = tableView.dequeueReusableCell(withIdentifier: "selectPayerTableViewCell", for: indexPath) as! SelectPayerTableViewCell_iPad
         let thisPerson = people[(indexPath as NSIndexPath).row]
         cell.thumbnailView.image = thisPerson.thumbnail
-        cell.fullNameLabel.text = thisPerson.getFullName()
+        cell.fullNameLabel.text = thisPerson.getFullName
         
         return cell
     }

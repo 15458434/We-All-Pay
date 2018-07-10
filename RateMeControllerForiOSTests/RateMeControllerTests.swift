@@ -78,7 +78,7 @@ class RateMeControllerTests: XCTestCase {
         let savedShouldAsk = NSKeyedUnarchiver.unarchiveObject(with: savedDataShouldAsk!) as? RateMeControllerAskStatusContainer
         let savedCounter = UserDefaults.standard.integer(forKey: "kRateMeControllerCounterValue")
         let timeintervalDifference = savedDate!.timeIntervalSince(now)
-        XCTAssertEqualWithAccuracy(0.02, timeintervalDifference, accuracy: 0.02)
+        XCTAssertEqual(0.02, timeintervalDifference, accuracy: 0.02)
         XCTAssertNotNil(savedShouldAsk)
         XCTAssertEqual(0, savedCounter)
         RateMeController.reset()

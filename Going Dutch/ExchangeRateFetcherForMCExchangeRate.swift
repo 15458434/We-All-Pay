@@ -20,7 +20,7 @@ extension ExchangeRateFetcher {
         }
     }
     
-    func fetchAll(_ exchangeRates: [MCExchangeRate], completionHandler: @escaping ((_ error: NSError?) -> ())) {
+    @objc func fetchAll(_ exchangeRates: [MCExchangeRate], completionHandler: @escaping ((_ error: NSError?) -> ())) {
         if isLastFetchOlderThanAnHour {
             fetchFromOpenExchangeRates({ (baseCurrency, rates, error) -> () in
                 if error != nil {

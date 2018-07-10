@@ -178,7 +178,7 @@
     if (!_tonightsBill) {
         NSManagedObjectContext *context = [[MCWeAllPayStoreController defaultStore] mainThreadContext];
         [context performBlock:^{
-            _tonightsBill = (MCSharedBill *)[context objectWithID:[_writableTonightsBill objectID]];
+            self.tonightsBill = (MCSharedBill *)[context objectWithID:[self.writableTonightsBill objectID]];
         }];
     }
 }
@@ -322,11 +322,11 @@
         NSManagedObjectContext *backgroundContext = [[MCWeAllPayStoreController defaultStore] backgroundThreadContext];
         [backgroundContext performBlock:^{
             id<MCTonightsBillTransfer> destination = [segue destinationViewController];
-            if (_writableTonightsBill) {
-                [destination setWritableTonightsBill:_writableTonightsBill];
+            if (self.writableTonightsBill) {
+                [destination setWritableTonightsBill:self.writableTonightsBill];
                 NSManagedObjectContext *mainContext = [[MCWeAllPayStoreController defaultStore] mainThreadContext];
                 [mainContext performBlock:^{
-                    [destination setTonightsBill:_tonightsBill];
+                    [destination setTonightsBill:self.tonightsBill];
                 }];
             } else {
                 SEL writeableTonightsBillIsCreated = NSSelectorFromString(@"writeableTonightsBillIsCreated:");

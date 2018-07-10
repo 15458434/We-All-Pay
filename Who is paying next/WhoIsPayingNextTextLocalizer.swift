@@ -12,20 +12,20 @@ func createAttributesStringForWhoIsPayingNext(_ tripName: String, fullNameNextPa
     // The code of this function should be replaced to support multiple languages. For now it's just hardcoded.
     let normalFontDescriptor: UIFontDescriptor = UIFontDescriptor.preferredFontDescriptor(withTextStyle: UIFontTextStyle.body)
     let normalFont: UIFont = UIFont(descriptor: normalFontDescriptor, size: 0)
-    let normalAttributes: [String: AnyObject]
+    let normalAttributes: [NSAttributedStringKey: Any]
     if #available(iOS 10, *) {
-        normalAttributes = [NSFontAttributeName: normalFont, NSForegroundColorAttributeName: UIColor.darkText]
+        normalAttributes = [NSAttributedStringKey.font: normalFont, NSAttributedStringKey.foregroundColor: UIColor.darkText]
     } else {
-        normalAttributes = [NSFontAttributeName: normalFont, NSForegroundColorAttributeName: UIColor.lightText]
+        normalAttributes = [NSAttributedStringKey.font: normalFont, NSAttributedStringKey.foregroundColor: UIColor.lightText]
     }
     
     let boldFontDescriptor: UIFontDescriptor = normalFontDescriptor.withSymbolicTraits(.traitBold)!
     let boldFont: UIFont = UIFont(descriptor: boldFontDescriptor, size: 0)
-    let boldAttributes: [String: AnyObject]
+    let boldAttributes: [NSAttributedStringKey: Any]
     if #available(iOS 10, *) {
-        boldAttributes = [NSFontAttributeName: boldFont, NSForegroundColorAttributeName: UIColor.darkText]
+        boldAttributes = [NSAttributedStringKey.font: boldFont, NSAttributedStringKey.foregroundColor: UIColor.darkText]
     } else {
-        boldAttributes = [NSFontAttributeName: boldFont, NSForegroundColorAttributeName: UIColor.lightText]
+        boldAttributes = [NSAttributedStringKey.font: boldFont, NSAttributedStringKey.foregroundColor: UIColor.lightText]
     }
     
     let attributedTripName: NSAttributedString = NSAttributedString(string: tripName, attributes: boldAttributes)
@@ -71,14 +71,14 @@ func createAttributesStringForWhoIsPayingNext(_ tripName: String, fullNameNextPa
 //}
 
 func betterCreateAttributesStringForWhoIsPayingNext(_ tripName: String, fullNameNextPayer: String) -> NSMutableAttributedString {
-    func createAttributesForFontStyle(_ style: String, withTrait trait: UIFontDescriptorSymbolicTraits) -> [String : AnyObject] {
+    func createAttributesForFontStyle(_ style: String, withTrait trait: UIFontDescriptorSymbolicTraits) -> [NSAttributedStringKey : Any] {
         let fontDescriptor = UIFontDescriptor.preferredFontDescriptor(withTextStyle: UIFontTextStyle.body)
         let descriptorWithTrait = fontDescriptor.withSymbolicTraits(trait)
         let font = UIFont(descriptor: descriptorWithTrait!, size: 0)
         if #available(iOS 10, *) {
-            return [NSFontAttributeName: font, NSForegroundColorAttributeName: UIColor.darkText]
+            return [NSAttributedStringKey.font: font, NSAttributedStringKey.foregroundColor: UIColor.darkText]
         } else {
-            return [NSFontAttributeName: font, NSForegroundColorAttributeName: UIColor.lightText]
+            return [NSAttributedStringKey.font: font, NSAttributedStringKey.foregroundColor: UIColor.lightText]
         }
     }
     
@@ -96,6 +96,6 @@ func createErrorMessage() -> NSMutableAttributedString {
     let fontDescriptor = UIFontDescriptor.preferredFontDescriptor(withTextStyle: UIFontTextStyle.body)
     let font = UIFont(descriptor: fontDescriptor, size: 0)
     let text = NSLocalizedString("There is no data to display", comment: "There is no data to display")
-    let attributedResult = NSMutableAttributedString(string: text, attributes: [NSFontAttributeName : font])
+    let attributedResult = NSMutableAttributedString(string: text, attributes: [NSAttributedStringKey.font : font])
     return attributedResult
 }

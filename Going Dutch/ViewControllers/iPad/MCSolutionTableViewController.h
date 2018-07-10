@@ -21,7 +21,7 @@
 @property (strong, nonatomic) NSArray *peoplePresent;
 @property (strong, nonatomic) MCSharedBill *tonightsBill;
 @property (strong, nonatomic) MCSharedBill *writableTonightsBill;
-@property (strong, nonatomic) void (^dismissMe)();
+@property (strong, nonatomic) void (^dismissMe)(void);
 
 - (void)openMailView:(id)sender;
 

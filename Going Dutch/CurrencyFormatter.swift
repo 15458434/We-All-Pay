@@ -13,12 +13,12 @@ class CurrencyFormatter: Formatter {
     var currencyCode: String?
     
     // MARK: New in this class
-    convenience init(currencyCode: String) {
+    @objc convenience init(currencyCode: String) {
         self.init()
         self.currencyCode = currencyCode
     }
     
-    func doubleFromString(_ string: String) -> NSNumber? {
+    @objc func doubleFromString(_ string: String) -> NSNumber? {
         var moneyObject: AnyObject? = nil
         var moneyErrorString: NSString? = nil
         let success = self.getObjectValue(&moneyObject, for: string, errorDescription: &moneyErrorString)
@@ -53,7 +53,7 @@ class CurrencyFormatter: Formatter {
         }
     }
     
-    func string(for obj: AnyObject?) -> String? {
+    @objc func string(for obj: AnyObject?) -> String? {
         if let nummer = obj as? NSNumber {
             let nf = NumberFormatter()
             nf.numberStyle = .currency

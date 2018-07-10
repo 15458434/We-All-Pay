@@ -137,7 +137,7 @@ enum CancelButtonPressed {
             selectButton.invalidateIntrinsicContentSize()
             return
         }
-        selectButton.setTitle(payingPerson.getFullName(), for: UIControlState())
+        selectButton.setTitle(payingPerson.getFullName, for: UIControlState())
         selectButton.invalidateIntrinsicContentSize()
     }
     
@@ -183,7 +183,7 @@ enum CancelButtonPressed {
         setTextForCategoryButton()
         
         if dataController == nil {
-            dataController = MCWeAllPayStoreController.defaultStore().paymentPresenceDataController(forDelegate: self) as! NSFetchedResultsController<MCPayment>! as! NSFetchedResultsController<MCPaymentPresence>!
+            dataController = MCWeAllPayStoreController.defaultStore().paymentPresenceDataController(forDelegate: self) as! NSFetchedResultsController<MCPaymentPresence>
         }
     }
     
@@ -317,7 +317,7 @@ enum CancelButtonPressed {
     override func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
         let cell = tableView.dequeueReusableCell(withIdentifier: "paymentPresenceTableViewCell", for: indexPath) as! MCPaymentPresenceTableViewCell
         let paymentPresenceForThisCell = dataController.object(at: indexPath) 
-        cell.nameLabel.text = paymentPresenceForThisCell.person.getFullName()
+        cell.nameLabel.text = paymentPresenceForThisCell.person.getFullName
         cell.personView.image = paymentPresenceForThisCell.person.thumbnail
         cell.theSwitch.setOn(paymentPresenceForThisCell.isPersonPresent.boolValue, animated: false)
 

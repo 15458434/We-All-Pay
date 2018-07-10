@@ -10,13 +10,13 @@ import Foundation
 import WhoPayingUserDefaultsStoreInterface
 
 extension WhoPayingUserDefaultsStoreInterface {
-    class func sendToUserDefaultsStoreInterface(_ tonightsBill: MCSharedBill?) {
+    @objc class func sendToUserDefaultsStoreInterface(_ tonightsBill: MCSharedBill?) {
         // Get data in local variables.
         let billID = tonightsBill?.uniqueBillId
         let tripName = tonightsBill?.tripName
         let nextPayer = tonightsBill?.fetchPeoplePresentOrdered(byAmountPaid: true).first as? MCPerson
         let nextPayerID = nextPayer?.uniquePersonId
-        let nextPayerName = nextPayer?.getFullName()
+        let nextPayerName = nextPayer?.getFullName
         
         // Put it in a backgroundQueue
         let backgroundQueue = DispatchQueue(label: "sendToWhoIsPayingNextQueue", attributes: [])
@@ -26,7 +26,7 @@ extension WhoPayingUserDefaultsStoreInterface {
         }
     }
     
-    class func sendInvalidUserDefaultsIfTonightsBillIs(_ tonightsBill: MCSharedBill?) {
+    @objc class func sendInvalidUserDefaultsIfTonightsBillIs(_ tonightsBill: MCSharedBill?) {
         let currentStoreInterfaceContents = WhoPayingUserDefaultsStoreInterface()
         if tonightsBill?.uniqueBillId == currentStoreInterfaceContents.tonightsBillUUID {
             WhoPayingUserDefaultsStoreInterface.sendToUserDefaultsStoreInterface(nil)
