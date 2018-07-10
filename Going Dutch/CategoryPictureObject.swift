@@ -15,7 +15,7 @@ private let categoryIdKey = "categoryId"
 class CategoryPictureObject: NSObject {
     // MARK: Properties
     @objc let categoryId: Int16
-    let pictureFilename: String
+    @objc let pictureFilename: String
     @objc var categoryDescription: String!
     @objc var smallPicture: UIImage? {
         return UIImage(named: "\(pictureFilename)-small")
@@ -28,7 +28,7 @@ class CategoryPictureObject: NSObject {
         return CategoryPictureObject(dictionary: dictionary)
     }
     
-    init(dictionary: Dictionary<String, AnyObject>) {
+    @objc init(dictionary: Dictionary<String, AnyObject>) {
         categoryDescription = dictionary[categoryDescriptionKey] as! String
         let categoryNumber = dictionary[categoryIdKey] as! NSNumber
         categoryId = categoryNumber.int16Value

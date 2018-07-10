@@ -67,7 +67,10 @@ import UIKit
         let url = URL(string: "https://openexchangerates.org/api/latest.json?app_id=cba02a60bd89412095c84ecb65b6326a");
         
         let task = URLSession.shared.dataTask(with: url!) {(data, response, error) in
-            UIApplication.shared.isNetworkActivityIndicatorVisible = false
+            DispatchQueue.main.sync {
+                UIApplication.shared.isNetworkActivityIndicatorVisible = false
+            }
+            
             if error != nil {
                 debugPrint("Error fetching exchangeRate from OpenExchangeRates: \(String(describing: error))")
                 OperationQueue.main.addOperation({ () -> Void in
