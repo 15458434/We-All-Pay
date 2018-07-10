@@ -2384,8 +2384,6 @@
 					"\"SystemConfiguration\"",
 					"-weak_framework",
 					"\"AdSupport\"",
-					"-weak_framework",
-					"\"JavaScriptCore\"",
 					"-Wpartial-availability",
 				);
 				PRODUCT_BUNDLE_IDENTIFIER = "com.GreenHair.${PRODUCT_NAME:rfc1034identifier}";
@@ -2472,8 +2470,6 @@
 					"\"SystemConfiguration\"",
 					"-weak_framework",
 					"\"AdSupport\"",
-					"-weak_framework",
-					"\"JavaScriptCore\"",
 					"-Wpartial-availability",
 				);
 				PRODUCT_BUNDLE_IDENTIFIER = "com.GreenHair.${PRODUCT_NAME:rfc1034identifier}";
