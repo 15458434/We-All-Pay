@@ -2072,6 +2072,7 @@
 				IPHONEOS_DEPLOYMENT_TARGET = 9.0;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks @loader_path/Frameworks";
 				MTL_ENABLE_DEBUG_INFO = YES;
+				OTHER_LDFLAGS = "-Wpartial-availability";
 				PRODUCT_BUNDLE_IDENTIFIER = com.GreenHair.CurrencyConverter;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				PROVISIONING_PROFILE_SPECIFIER = "";
@@ -2122,6 +2123,7 @@
 				IPHONEOS_DEPLOYMENT_TARGET = 9.0;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks @loader_path/Frameworks";
 				MTL_ENABLE_DEBUG_INFO = NO;
+				OTHER_LDFLAGS = "-Wpartial-availability";
 				PRODUCT_BUNDLE_IDENTIFIER = com.GreenHair.CurrencyConverter;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				PROVISIONING_PROFILE_SPECIFIER = "";
@@ -2334,6 +2336,62 @@
 					"$(inherited)",
 					"$(PROJECT_DIR)/**",
 				);
+				OTHER_LDFLAGS = (
+					"$(inherited)",
+					"-ObjC",
+					"-l\"c++\"",
+					"-l\"sqlite3\"",
+					"-l\"z\"",
+					"-framework",
+					"\"AVFoundation\"",
+					"-framework",
+					"\"AudioToolbox\"",
+					"-framework",
+					"\"CoreGraphics\"",
+					"-framework",
+					"\"CoreMedia\"",
+					"-framework",
+					"\"CoreMotion\"",
+					"-framework",
+					"\"CoreTelephony\"",
+					"-framework",
+					"\"CoreVideo\"",
+					"-framework",
+					"\"FirebaseAnalytics\"",
+					"-framework",
+					"\"FirebaseAppIndexing\"",
+					"-framework",
+					"\"FirebaseCore\"",
+					"-framework",
+					"\"FirebaseInstanceID\"",
+					"-framework",
+					"\"GLKit\"",
+					"-framework",
+					"\"GoogleMobileAds\"",
+					"-framework",
+					"\"GoogleToolboxForMac\"",
+					"-framework",
+					"\"MediaPlayer\"",
+					"-framework",
+					"\"MessageUI\"",
+					"-framework",
+					"\"MobileCoreServices\"",
+					"-framework",
+					"\"OpenGLES\"",
+					"-framework",
+					"\"SafariServices\"",
+					"-framework",
+					"\"StoreKit\"",
+					"-framework",
+					"\"SystemConfiguration\"",
+					"-weak_framework",
+					"\"AdSupport\"",
+					"-weak_framework",
+					"\"JavaScriptCore\"",
+					"-weak_framework",
+					"\"SafariServices\"",
+					"-Wpartial-availability",
+				);
 				PRODUCT_BUNDLE_IDENTIFIER = "com.GreenHair.${PRODUCT_NAME:rfc1034identifier}";
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				PROVISIONING_PROFILE = "";
@@ -2369,6 +2427,62 @@
 				LIBRARY_SEARCH_PATHS = (
 					"$(inherited)",
 					"$(PROJECT_DIR)/**",
+				);
+				OTHER_LDFLAGS = (
+					"$(inherited)",
+					"-ObjC",
+					"-l\"c++\"",
+					"-l\"sqlite3\"",
+					"-l\"z\"",
+					"-framework",
+					"\"AVFoundation\"",
+					"-framework",
+					"\"AudioToolbox\"",
+					"-framework",
+					"\"CoreGraphics\"",
+					"-framework",
+					"\"CoreMedia\"",
+					"-framework",
+					"\"CoreMotion\"",
+					"-framework",
+					"\"CoreTelephony\"",
+					"-framework",
+					"\"CoreVideo\"",
+					"-framework",
+					"\"FirebaseAnalytics\"",
+					"-framework",
+					"\"FirebaseAppIndexing\"",
+					"-framework",
+					"\"FirebaseCore\"",
+					"-framework",
+					"\"FirebaseInstanceID\"",
+					"-framework",
+					"\"GLKit\"",
+					"-framework",
+					"\"GoogleMobileAds\"",
+					"-framework",
+					"\"GoogleToolboxForMac\"",
+					"-framework",
+					"\"MediaPlayer\"",
+					"-framework",
+					"\"MessageUI\"",
+					"-framework",
+					"\"MobileCoreServices\"",
+					"-framework",
+					"\"OpenGLES\"",
+					"-framework",
+					"\"SafariServices\"",
+					"-framework",
+					"\"StoreKit\"",
+					"-framework",
+					"\"SystemConfiguration\"",
+					"-weak_framework",
+					"\"AdSupport\"",
+					"-weak_framework",
+					"\"JavaScriptCore\"",
+					"-weak_framework",
+					"\"SafariServices\"",
+					"-Wpartial-availability",
 				);
 				PRODUCT_BUNDLE_IDENTIFIER = "com.GreenHair.${PRODUCT_NAME:rfc1034identifier}";
 				PRODUCT_NAME = "$(TARGET_NAME)";
@@ -2504,6 +2618,7 @@
 				IPHONEOS_DEPLOYMENT_TARGET = 9.0;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks @loader_path/Frameworks";
 				MTL_ENABLE_DEBUG_INFO = YES;
+				OTHER_LDFLAGS = "-Wpartial-availability";
 				PRODUCT_BUNDLE_IDENTIFIER = com.GreenHair.WhoPayingUserDefaultsStoreInterface;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				PROVISIONING_PROFILE_SPECIFIER = "";
@@ -2553,6 +2668,7 @@
 				IPHONEOS_DEPLOYMENT_TARGET = 9.0;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks @loader_path/Frameworks";
 				MTL_ENABLE_DEBUG_INFO = NO;
+				OTHER_LDFLAGS = "-Wpartial-availability";
 				PRODUCT_BUNDLE_IDENTIFIER = com.GreenHair.WhoPayingUserDefaultsStoreInterface;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				PROVISIONING_PROFILE_SPECIFIER = "";
@@ -2659,6 +2775,7 @@
 				IPHONEOS_DEPLOYMENT_TARGET = 9.0;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks @executable_path/../../Frameworks";
 				MTL_ENABLE_DEBUG_INFO = YES;
+				OTHER_LDFLAGS = "-Wpartial-availability";
 				PRODUCT_BUNDLE_IDENTIFIER = "com.GreenHair.We-all-pay.$(PRODUCT_NAME:rfc1034identifier)";
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				PROVISIONING_PROFILE = "";
@@ -2700,6 +2817,7 @@
 				IPHONEOS_DEPLOYMENT_TARGET = 9.0;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks @executable_path/../../Frameworks";
 				MTL_ENABLE_DEBUG_INFO = NO;
+				OTHER_LDFLAGS = "-Wpartial-availability";
 				PRODUCT_BUNDLE_IDENTIFIER = "com.GreenHair.We-all-pay.$(PRODUCT_NAME:rfc1034identifier)";
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				PROVISIONING_PROFILE = "";
@@ -2746,6 +2864,7 @@
 				IPHONEOS_DEPLOYMENT_TARGET = 9.0;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks @loader_path/Frameworks";
 				MTL_ENABLE_DEBUG_INFO = YES;
+				OTHER_LDFLAGS = "-Wpartial-availability";
 				PRODUCT_BUNDLE_IDENTIFIER = com.GreenHair.RateMeControllerForiOS;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				PROVISIONING_PROFILE_SPECIFIER = "";
@@ -2794,6 +2913,7 @@
 				IPHONEOS_DEPLOYMENT_TARGET = 9.0;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks @loader_path/Frameworks";
 				MTL_ENABLE_DEBUG_INFO = NO;
+				OTHER_LDFLAGS = "-Wpartial-availability";
 				PRODUCT_BUNDLE_IDENTIFIER = com.GreenHair.RateMeControllerForiOS;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				PROVISIONING_PROFILE_SPECIFIER = "";
