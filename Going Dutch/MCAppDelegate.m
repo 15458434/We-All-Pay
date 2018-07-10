@@ -41,7 +41,7 @@
     [[FIRAppIndexing sharedInstance] registerApp:642135963];
 #endif
     _launchCounter = [[MCLaunchCounter alloc] init];
-    NSUInteger result = [_launchCounter increment];
+    uint64_t result = [_launchCounter increment];
     [FIRAnalytics logEventWithName:@"Start counter" parameters:@{@"Counter Value": @(result)}];
 }
 
