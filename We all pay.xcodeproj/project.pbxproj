@@ -2378,12 +2378,6 @@
 					"\"OpenGLES\"",
 					"-framework",
 					"\"SafariServices\"",
-					"-framework",
-					"\"StoreKit\"",
-					"-framework",
-					"\"SystemConfiguration\"",
-					"-weak_framework",
-					"\"AdSupport\"",
 					"-Wpartial-availability",
 				);
 				PRODUCT_BUNDLE_IDENTIFIER = "com.GreenHair.${PRODUCT_NAME:rfc1034identifier}";
@@ -2464,12 +2458,6 @@
 					"\"OpenGLES\"",
 					"-framework",
 					"\"SafariServices\"",
-					"-framework",
-					"\"StoreKit\"",
-					"-framework",
-					"\"SystemConfiguration\"",
-					"-weak_framework",
-					"\"AdSupport\"",
 					"-Wpartial-availability",
 				);
 				PRODUCT_BUNDLE_IDENTIFIER = "com.GreenHair.${PRODUCT_NAME:rfc1034identifier}";
