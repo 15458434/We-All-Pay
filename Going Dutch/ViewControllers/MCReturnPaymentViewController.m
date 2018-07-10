@@ -155,7 +155,7 @@ typedef NS_ENUM(BOOL, MCXRateStatus) {
         self.areXRatesMissing = xRatesPresent;
         self.solution = results;
         NSSortDescriptor *sortDescriptor = [NSSortDescriptor sortDescriptorWithKey:@"firstName" ascending:YES];
-        _peoplePresent = [[_tonightsBill peoplePresent] sortedArrayUsingDescriptors:@[sortDescriptor]];
+        self->_peoplePresent = [[self->_tonightsBill peoplePresent] sortedArrayUsingDescriptors:@[sortDescriptor]];
         [[[self emptyMessage] activityIndicator] stopAnimating];
         
         [self setEmptyMessageNow];
@@ -173,12 +173,12 @@ typedef NS_ENUM(BOOL, MCXRateStatus) {
 {
     if (!([_solution count] == 0 || _emptyMessage.activityIndicator.isAnimating)) {
         [UIView animateWithDuration:1.0 animations:^{
-            [[_emptyMessage bigMessage] setAlpha:0.0];
+            [[self->_emptyMessage bigMessage] setAlpha:0.0];
             [[self tableView] setSeparatorStyle:UITableViewCellSeparatorStyleSingleLine];
         } completion:nil];
     } else {
         [UIView animateWithDuration:1.0 animations:^{
-            [[_emptyMessage bigMessage] setAlpha:1.0];
+            [[self->_emptyMessage bigMessage] setAlpha:1.0];
             [[self tableView] setSeparatorStyle:UITableViewCellSeparatorStyleNone];
         } completion:nil];
     }

@@ -213,9 +213,9 @@
 {
     [super storeDidSwap:notification];
     dispatch_sync(dispatch_get_main_queue(), ^{
-        if (_dataController) {
+        if (self->_dataController) {
             NSError *fetchError;
-            if (![_dataController performFetch:&fetchError]) {
+            if (![self->_dataController performFetch:&fetchError]) {
                 NSLog(@"Error fetching: %@", fetchError);
             }
         }

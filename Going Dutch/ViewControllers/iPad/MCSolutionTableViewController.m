@@ -148,7 +148,7 @@ typedef NS_ENUM(BOOL, MCXRateStatus) {
         self.solution = results;
         
         NSSortDescriptor *sortDescriptor = [NSSortDescriptor sortDescriptorWithKey:@"firstName" ascending:YES];
-        _peoplePresent = [[self.tonightsBill peoplePresent] sortedArrayUsingDescriptors:@[sortDescriptor]];
+        self->_peoplePresent = [[self.tonightsBill peoplePresent] sortedArrayUsingDescriptors:@[sortDescriptor]];
         
         NSLog(@"Stop animating.");
         [[[self emptyMessage] activityIndicator] stopAnimating];
