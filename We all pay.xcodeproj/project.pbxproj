@@ -2343,8 +2343,6 @@
 					"-l\"sqlite3\"",
 					"-l\"z\"",
 					"-framework",
-					"\"AudioToolbox\"",
-					"-framework",
 					"\"CoreGraphics\"",
 					"-framework",
 					"\"CoreMedia\"",
@@ -2368,10 +2366,6 @@
 					"\"GoogleMobileAds\"",
 					"-framework",
 					"\"GoogleToolboxForMac\"",
-					"-framework",
-					"\"MediaPlayer\"",
-					"-framework",
-					"\"MessageUI\"",
 					"-Wpartial-availability",
 				);
 				PRODUCT_BUNDLE_IDENTIFIER = "com.GreenHair.${PRODUCT_NAME:rfc1034identifier}";
@@ -2417,8 +2411,6 @@
 					"-l\"sqlite3\"",
 					"-l\"z\"",
 					"-framework",
-					"\"AudioToolbox\"",
-					"-framework",
 					"\"CoreGraphics\"",
 					"-framework",
 					"\"CoreMedia\"",
@@ -2442,10 +2434,6 @@
 					"\"GoogleMobileAds\"",
 					"-framework",
 					"\"GoogleToolboxForMac\"",
-					"-framework",
-					"\"MediaPlayer\"",
-					"-framework",
-					"\"MessageUI\"",
 					"-Wpartial-availability",
 				);
 				PRODUCT_BUNDLE_IDENTIFIER = "com.GreenHair.${PRODUCT_NAME:rfc1034identifier}";
