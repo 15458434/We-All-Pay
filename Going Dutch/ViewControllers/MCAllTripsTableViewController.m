@@ -342,7 +342,9 @@ typedef NS_ENUM(BOOL, MCTonightsBillStatus) {
 {
     MCSharedBill *selectedEvent = [_dataController objectAtIndexPath:indexPath];
     if (selectedEvent.tripName) {
-        [FIRAnalytics logEventWithName:@"Open event" parameters:@{@"Event name": selectedEvent.tripName}];
+        [FIRAnalytics logEventWithName:@"Open event" parameters:@{@"Event name": selectedEvent.tripName, @"Event identifier": selectedEvent.uniqueBillId}];
+    } else {
+        [FIRAnalytics logEventWithName:@"Open event" parameters:@{@"Event identifier": selectedEvent.uniqueBillId}];
     }
     
 }
