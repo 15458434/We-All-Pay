@@ -9,7 +9,7 @@
 import Foundation
 
 public class Currency: NSObject {
-    public let name: String
+    @objc public let name: String
     public let code: String
     public var symbol: String {
         return (Locale.current as NSLocale).displayName(forKey: .currencySymbol, value: code) ?? ""
