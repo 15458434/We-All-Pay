@@ -39,23 +39,6 @@
 	<string>126</string>
 	<key>LSRequiresIPhoneOS</key>
 	<true/>
-	<key>NSAppTransportSecurity</key>
-	<dict>
-		<key>NSAllowArbitaryLoads</key>
-		<true/>
-		<key>NSExceptionDomains</key>
-		<dict>
-			<key>openexchangerates.org</key>
-			<dict>
-				<key>NSThirdPartyExceptionAllowsInsecureHTTPLoads</key>
-				<true/>
-				<key>NSThirdPartyExceptionMinimumTLSVersion</key>
-				<string>TLSv1.0</string>
-				<key>NSThirdPartyExceptionRequiresForwardSecrecy</key>
-				<false/>
-			</dict>
-		</dict>
-	</dict>
 	<key>NSUserActivityTypes</key>
 	<array>
 		<string>com.GreenHair.We-all-pay.SharingExpenses</string>
