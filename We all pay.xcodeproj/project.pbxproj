@@ -2343,8 +2343,6 @@
 					"-l\"sqlite3\"",
 					"-l\"z\"",
 					"-framework",
-					"\"AVFoundation\"",
-					"-framework",
 					"\"AudioToolbox\"",
 					"-framework",
 					"\"CoreGraphics\"",
@@ -2388,8 +2386,6 @@
 					"\"AdSupport\"",
 					"-weak_framework",
 					"\"JavaScriptCore\"",
-					"-weak_framework",
-					"\"SafariServices\"",
 					"-Wpartial-availability",
 				);
 				PRODUCT_BUNDLE_IDENTIFIER = "com.GreenHair.${PRODUCT_NAME:rfc1034identifier}";
@@ -2435,8 +2431,6 @@
 					"-l\"sqlite3\"",
 					"-l\"z\"",
 					"-framework",
-					"\"AVFoundation\"",
-					"-framework",
 					"\"AudioToolbox\"",
 					"-framework",
 					"\"CoreGraphics\"",
@@ -2480,8 +2474,6 @@
 					"\"AdSupport\"",
 					"-weak_framework",
 					"\"JavaScriptCore\"",
-					"-weak_framework",
-					"\"SafariServices\"",
 					"-Wpartial-availability",
 				);
 				PRODUCT_BUNDLE_IDENTIFIER = "com.GreenHair.${PRODUCT_NAME:rfc1034identifier}";
