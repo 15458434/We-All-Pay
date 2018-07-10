@@ -2337,7 +2337,6 @@
 					"$(PROJECT_DIR)/**",
 				);
 				OTHER_LDFLAGS = (
-					"$(inherited)",
 					"-ObjC",
 					"-l\"c++\"",
 					"-l\"sqlite3\"",
@@ -2405,7 +2404,6 @@
 					"$(PROJECT_DIR)/**",
 				);
 				OTHER_LDFLAGS = (
-					"$(inherited)",
 					"-ObjC",
 					"-l\"c++\"",
 					"-l\"sqlite3\"",
