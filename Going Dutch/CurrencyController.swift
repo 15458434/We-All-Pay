@@ -37,16 +37,16 @@ public class Currency: NSObject {
     }
 }
 
-public class CurrencyController: NSObject {
-    public let currencies: [Currency]
+@objc public class CurrencyController: NSObject {
+    @objc public let currencies: [Currency]
     
-    public func currencySymbol(_ code: String) -> String {
+    @objc public func currencySymbol(_ code: String) -> String {
         return Locale.current.localizedString(forCurrencyCode: code) ?? ""
     }
     
     // MARK: NSObject
     
-    public override init() {
+    @objc public override init() {
         let currencyFilePath = Bundle(identifier: "com.GreenHair.CurrencyConverter")!.path(forResource: "Available Currencies", ofType: "plist")
         let readCurrencies = NSArray(contentsOfFile: currencyFilePath!) as! [Dictionary<String, String>]
         currencies = readCurrencies.map {
@@ -59,7 +59,7 @@ public class CurrencyController: NSObject {
         return currencies[index]
     }
     
-    public subscript(code: String) -> String {
+    @objc public subscript(code: String) -> String {
         let filteredDictionary = currencies.filter { $0.code == code }
         return filteredDictionary.first!.name
     }

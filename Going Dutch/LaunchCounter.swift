@@ -23,7 +23,7 @@ private let kLaunchCounterValue: String = "kLaunchCounterValue"
         }
     }
     
-    func increment() -> UInt64 {
+    @objc func increment() -> UInt64 {
         value = count + 1
         let ud = UserDefaults.standard
         ud.setValue(NSNumber.init(value: value!), forKey: kLaunchCounterValue)

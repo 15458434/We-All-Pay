@@ -8,8 +8,8 @@
 
 import UIKit
 
-public class ExchangeRateFetcher: NSObject {
-    public let currencyController: CurrencyController = CurrencyController()
+@objc public class ExchangeRateFetcher: NSObject {
+    @objc public let currencyController: CurrencyController = CurrencyController()
     public private(set) var baseCurrencyCode: String!
     public private(set) var rates: Dictionary<String, Double>!
     public private(set) var date: Date!
@@ -36,7 +36,7 @@ public class ExchangeRateFetcher: NSObject {
         return toToBaseRate / fromToBaseRate
     }
     
-    public func exchangeRate(_ fromCode: String, toCode: String, completionHandler: @escaping (_ fromCode: String, _ toCode: String, _ exchangeRate: NSNumber?, _ error: NSError?) -> ()) {
+    @objc public func exchangeRate(_ fromCode: String, toCode: String, completionHandler: @escaping (_ fromCode: String, _ toCode: String, _ exchangeRate: NSNumber?, _ error: NSError?) -> ()) {
         let thisOperationQueue = OperationQueue.current!
         if isLastFetchOlderThanAnHour {
             fetchFromOpenExchangeRates({ (baseCurrency, rates, error) -> () in

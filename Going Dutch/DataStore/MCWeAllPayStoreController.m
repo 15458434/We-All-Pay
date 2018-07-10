@@ -372,7 +372,7 @@ MCiCloudUse const isiCloudUsed = iCloudIsNotUsed;
 #ifdef DEBUG
             NSLog(@"Merging changes into mainContext.");
 #endif
-            [_mainThreadContext mergeChangesFromContextDidSaveNotification:notification];
+            [self.mainThreadContext mergeChangesFromContextDidSaveNotification:notification];
         }];
     }
     if (notification.object != _backgroundThreadContext) {
@@ -380,7 +380,7 @@ MCiCloudUse const isiCloudUsed = iCloudIsNotUsed;
 #ifdef DEBUG
             NSLog(@"Merging changes into backgroundContext.");
 #endif
-            [_backgroundThreadContext mergeChangesFromContextDidSaveNotification:notification];
+            [self.backgroundThreadContext mergeChangesFromContextDidSaveNotification:notification];
         }];
     }
 }

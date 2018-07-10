@@ -178,7 +178,7 @@
     if (!_tonightsBill) {
         NSManagedObjectContext *context = [[MCWeAllPayStoreController defaultStore] mainThreadContext];
         [context performBlock:^{
-            _tonightsBill = (MCSharedBill *)[context objectWithID:[_writableTonightsBill objectID]];
+            self.tonightsBill = (MCSharedBill *)[context objectWithID:[self.writableTonightsBill objectID]];
         }];
     }
 }

@@ -12,7 +12,7 @@ import Security
 
 let kApplyProVersionNotification = "Apply pro version"
 
-class MCStoreInterface: NSObject, SKPaymentTransactionObserver, SKRequestDelegate, SKProductsRequestDelegate, UIAlertViewDelegate {
+@objc class MCStoreInterface: NSObject, SKPaymentTransactionObserver, SKRequestDelegate, SKProductsRequestDelegate, UIAlertViewDelegate {
     private var productRequest: SKProductsRequest?
     private var lastSKProductsRequestError: NSError?
     
@@ -25,18 +25,18 @@ class MCStoreInterface: NSObject, SKPaymentTransactionObserver, SKRequestDelegat
         return NSArray(contentsOf: url) as! [String]
     }
     
-    var isProProductPurchased: Bool {
+    @objc var isProProductPurchased: Bool {
         let productIdentifier: String = self.productIdentifiers.first! as String
         return UserDefaults.standard.value(forKey: productIdentifier) as! Bool? ?? false
     }
     
-    static var defaultStoreInterface: MCStoreInterface = MCStoreInterface()
+    @objc static var defaultStoreInterface: MCStoreInterface = MCStoreInterface()
     
     class func canMakePayments() -> Bool {
         return SKPaymentQueue.canMakePayments()
     }
     
-    class func applyProVersionNotification() -> String {
+    @objc class func applyProVersionNotification() -> String {
         return kApplyProVersionNotification;
     }
     
@@ -79,7 +79,7 @@ class MCStoreInterface: NSObject, SKPaymentTransactionObserver, SKRequestDelegat
     
     // MARK: Public in this class
     
-    func validateProductIdentifiers() {
+    @objc func validateProductIdentifiers() {
         print("Validating product identifiers.")
         let productRequest = SKProductsRequest(productIdentifiers: Set(productIdentifiers) as Set<String>)
         productRequest.delegate = self

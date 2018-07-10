@@ -58,18 +58,18 @@ typedef NS_ENUM(BOOL, MCXRateStatus) {
 {
     if ([_solution count] != 0) {
         [UIView animateWithDuration:0.3 animations:^{
-            [[_emptyMessage bigMessage] setAlpha:0.0];
+            [[self.emptyMessage bigMessage] setAlpha:0.0];
             [[self tableView] setSeparatorStyle:UITableViewCellSeparatorStyleSingleLine];
         } completion:nil];
     } else if (!_solution) {
         [UIView animateWithDuration:0.3 animations:^{
-            [[_emptyMessage bigMessage] setAlpha:1.0];
+            [[self.emptyMessage bigMessage] setAlpha:1.0];
             [[self tableView] setSeparatorStyle:UITableViewCellSeparatorStyleNone];
         } completion:nil];
     } else {
         if ([[_emptyMessage bigMessage] alpha] < 1.0) {
             [UIView animateWithDuration:0.3 animations:^{
-                [[_emptyMessage bigMessage] setAlpha:1.0];
+                [[self.emptyMessage bigMessage] setAlpha:1.0];
                 [[self tableView] setSeparatorStyle:UITableViewCellSeparatorStyleNone];
             } completion:nil];
         }
@@ -80,18 +80,18 @@ typedef NS_ENUM(BOOL, MCXRateStatus) {
 {
     if ([_solution count] != 0) {
         [UIView animateWithDuration:0.3 animations:^{
-            [[_emptyMessage bigMessage] setAlpha:0.0];
+            [[self.emptyMessage bigMessage] setAlpha:0.0];
             [[self tableView] setSeparatorStyle:UITableViewCellSeparatorStyleSingleLine];
         } completion:nil];
     } else if (!_solution) {
         [UIView animateWithDuration:0.3 animations:^{
-            [[_emptyMessage bigMessage] setAlpha:1.0];
+            [[self.emptyMessage bigMessage] setAlpha:1.0];
             [[self tableView] setSeparatorStyle:UITableViewCellSeparatorStyleNone];
         } completion:nil];
     } else {
-        if ([[_emptyMessage bigMessage] alpha] < 1.0) {
+        if ([[self.emptyMessage bigMessage] alpha] < 1.0) {
             [UIView animateWithDuration:0.3 animations:^{
-                [[_emptyMessage bigMessage] setAlpha:1.0];
+                [[self.emptyMessage bigMessage] setAlpha:1.0];
                 [[self tableView] setSeparatorStyle:UITableViewCellSeparatorStyleNone];
             } completion:nil];
         }

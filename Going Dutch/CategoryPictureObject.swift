@@ -14,13 +14,13 @@ private let categoryIdKey = "categoryId"
 
 class CategoryPictureObject: NSObject {
     // MARK: Properties
-    let categoryId: Int16
+    @objc let categoryId: Int16
     let pictureFilename: String
-    var categoryDescription: String!
-    var smallPicture: UIImage? {
+    @objc var categoryDescription: String!
+    @objc var smallPicture: UIImage? {
         return UIImage(named: "\(pictureFilename)-small")
     }
-    var largePicture: UIImage? {
+    @objc var largePicture: UIImage? {
         return UIImage(named: "\(pictureFilename)-large")
     }
     

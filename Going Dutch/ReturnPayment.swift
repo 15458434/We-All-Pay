@@ -8,13 +8,13 @@
 
 import Foundation
 
-class ReturnPayment: NSObject {
+@objc class ReturnPayment: NSObject {
     // MARK: Properties
-    let payer: MCPerson?
-    let receiver: MCPerson?
-    let money: NSNumber?
+    @objc let payer: MCPerson?
+    @objc let receiver: MCPerson?
+    @objc let money: NSNumber?
     
-    init(payer: MCPerson?, money: NSNumber?, receiver: MCPerson?) {
+    @objc init(payer: MCPerson?, money: NSNumber?, receiver: MCPerson?) {
         self.payer = payer
         self.receiver = receiver
         self.money = money

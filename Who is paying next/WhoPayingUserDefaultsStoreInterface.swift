@@ -37,7 +37,7 @@ public class WhoPayingUserDefaultsStoreInterface: NSObject {
         return UserDefaults(suiteName: WhoPayingUserDefaultsStoreInterface.MCWeAllPayToWhoIsPayingNextGroupBundleIdentifier)!
     }
     
-    public static let MCWhoIsPayingNextBundleIdentifier: String = "group.com.GreenHair.We-all-pay.Who-is-paying-next"
+    @objc public static let MCWhoIsPayingNextBundleIdentifier: String = "group.com.GreenHair.We-all-pay.Who-is-paying-next"
     public static let MCWeAllPayToWhoIsPayingNextGroupBundleIdentifier: String = "group.com.GreenHair.We-all-pay.Who-is-paying-next"
     
     public override init() {
@@ -45,7 +45,7 @@ public class WhoPayingUserDefaultsStoreInterface: NSObject {
         self.fetchFromUserDefaults()
     }
     
-    public init(tonightsBillUUID: String?, tripName: String?, nextPayerUUID: String?, fullNameOfNextPayer: String?) {
+    @objc public init(tonightsBillUUID: String?, tripName: String?, nextPayerUUID: String?, fullNameOfNextPayer: String?) {
         self.tonightsBillUUID = tonightsBillUUID
         self.tripName = tripName
         self.nextPayerUUID = nextPayerUUID
@@ -61,7 +61,7 @@ public class WhoPayingUserDefaultsStoreInterface: NSObject {
         dateSaved = defaults.object(forKey: kDateSaved) as? Date
     }
     
-    public func storeToDefaults() {
+    @objc public func storeToDefaults() {
         defaults.set(tonightsBillUUID, forKey: kTonightsBillUUID)
         defaults.set(tripName, forKey: kTripName)
         defaults.set(nextPayerUUID, forKey: kNextPayerUUID)
