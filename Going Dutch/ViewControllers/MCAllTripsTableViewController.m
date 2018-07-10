@@ -341,7 +341,10 @@ typedef NS_ENUM(BOOL, MCTonightsBillStatus) {
 - (void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath
 {
     MCSharedBill *selectedEvent = [_dataController objectAtIndexPath:indexPath];
-    [FIRAnalytics logEventWithName:@"Open event" parameters:@{@"Event name": selectedEvent.tripName}];
+    if (selectedEvent.tripName) {
+        [FIRAnalytics logEventWithName:@"Open event" parameters:@{@"Event name": selectedEvent.tripName}];
+    }
+    
 }
 
 /*
