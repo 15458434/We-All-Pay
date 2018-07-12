@@ -372,7 +372,7 @@ MCiCloudUse const isiCloudUsed = iCloudIsNotUsed;
 #ifdef DEBUG
             NSLog(@"Merging changes into mainContext.");
 #endif
-            [_mainThreadContext mergeChangesFromContextDidSaveNotification:notification];
+            [self.mainThreadContext mergeChangesFromContextDidSaveNotification:notification];
         }];
     }
     if (notification.object != _backgroundThreadContext) {
@@ -380,7 +380,7 @@ MCiCloudUse const isiCloudUsed = iCloudIsNotUsed;
 #ifdef DEBUG
             NSLog(@"Merging changes into backgroundContext.");
 #endif
-            [_backgroundThreadContext mergeChangesFromContextDidSaveNotification:notification];
+            [self.backgroundThreadContext mergeChangesFromContextDidSaveNotification:notification];
         }];
     }
 }
@@ -392,19 +392,19 @@ MCiCloudUse const isiCloudUsed = iCloudIsNotUsed;
 #endif
     // Has main Context changes if yes save.
     [_mainThreadContext performBlockAndWait:^{
-        if ([_mainThreadContext hasChanges]) {
+        if ([self.mainThreadContext hasChanges]) {
             [self saveMainThreadContext];
         }
     // mainContext reset.
-        [_mainThreadContext reset];
+        [self.mainThreadContext reset];
     }];
     // Has backgroundContext changes if yes save.
     [_backgroundThreadContext performBlockAndWait:^{
-        if ([_backgroundThreadContext hasChanges]) {
+        if ([self->_backgroundThreadContext hasChanges]) {
             [self savebackgroundContext];
         }
     // backgroundContext reset.
-        [_backgroundThreadContext reset];
+        [self->_backgroundThreadContext reset];
     }];
 
 }
@@ -422,10 +422,10 @@ MCiCloudUse const isiCloudUsed = iCloudIsNotUsed;
     NSLog(@"MCWeAllPayStoreController: Store did update from Ubiquitous Container.");
 #endif
     [_mainThreadContext performBlockAndWait:^{
-        [_mainThreadContext mergeChangesFromContextDidSaveNotification:notification];
+        [self->_mainThreadContext mergeChangesFromContextDidSaveNotification:notification];
     }];
     [_backgroundThreadContext performBlockAndWait:^{
-        [_backgroundThreadContext mergeChangesFromContextDidSaveNotification:notification];
+        [self->_backgroundThreadContext mergeChangesFromContextDidSaveNotification:notification];
     }];
 }
 

@@ -10,7 +10,7 @@ import Foundation
 
 class CategoryPictureStoreController: NSObject {
     // MARK: Properties
-    var pictureObjects: [CategoryPictureObject] {
+    @objc var pictureObjects: [CategoryPictureObject] {
         let plistPath = Bundle.main.path(forResource: "categoryPictures", ofType: "plist")!
         let arrayFromPlist = NSArray(contentsOfFile: plistPath) as! [Dictionary<String, AnyObject>]
         
@@ -20,7 +20,7 @@ class CategoryPictureStoreController: NSObject {
     }
     
     // MARK: SingleTon
-    static let sharedController = CategoryPictureStoreController()
+    @objc static let sharedController = CategoryPictureStoreController()
     
 //    func preparePictureObjectsArray() {
 //        let plistPath = NSBundle.mainBundle().pathForResource("categoryPictures", ofType: "plist")!

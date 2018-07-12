@@ -182,14 +182,14 @@ NSInteger const maxPageIndex = 1;
     [self setDataSource:self];
     NSManagedObjectContext *backgroundContext = [[MCWeAllPayStoreController defaultStore] backgroundThreadContext];
     [backgroundContext performBlock:^{
-        if (_writableTonightsBill) {
-            [_editTripTableViewController setWritableTonightsBill:_writableTonightsBill];
+        if (self.writableTonightsBill) {
+            [self.editTripTableViewController setWritableTonightsBill:self.writableTonightsBill];
             NSManagedObjectContext *mainContext = [[MCWeAllPayStoreController defaultStore] mainThreadContext];
             [mainContext performBlock:^{
-                [_editTripTableViewController setTonightsBill:_tonightsBill];
+                [self.editTripTableViewController setTonightsBill:self.tonightsBill];
             }];
         } else {
-            [[NSNotificationCenter defaultCenter] addObserver:_editTripTableViewController selector:@selector(writableTonightsBillIsCreated:) name:MCWritableTonightsBillReady object:self];
+            [[NSNotificationCenter defaultCenter] addObserver:self.editTripTableViewController selector:@selector(writableTonightsBillIsCreated:) name:MCWritableTonightsBillReady object:self];
         }
     }];
     
@@ -213,10 +213,10 @@ NSInteger const maxPageIndex = 1;
     [self setDataSource:self];
     NSManagedObjectContext *backgroundContext = [[MCWeAllPayStoreController defaultStore] backgroundThreadContext];
     [backgroundContext performBlock:^{
-        if (_writableTonightsBill) {
-            [_sharedBillTableViewController setWritableTonightsBill:_writableTonightsBill];
+        if (self.writableTonightsBill) {
+            [self.sharedBillTableViewController setWritableTonightsBill:self.writableTonightsBill];
         } else {
-            [[NSNotificationCenter defaultCenter] addObserver:_sharedBillTableViewController selector:@selector(writableTonightsBillIsCreated:) name:MCWritableTonightsBillReady object:self];
+            [[NSNotificationCenter defaultCenter] addObserver:self.sharedBillTableViewController selector:@selector(writableTonightsBillIsCreated:) name:MCWritableTonightsBillReady object:self];
         }
     }];
     

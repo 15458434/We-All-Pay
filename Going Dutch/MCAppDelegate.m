@@ -41,7 +41,7 @@
     [[FIRAppIndexing sharedInstance] registerApp:642135963];
 #endif
     _launchCounter = [[MCLaunchCounter alloc] init];
-    NSUInteger result = [_launchCounter increment];
+    uint64_t result = [_launchCounter increment];
     [FIRAnalytics logEventWithName:@"Start counter" parameters:@{@"Counter Value": @(result)}];
 }
 
@@ -98,6 +98,10 @@
                                             nil];
     [colorDictionary setObject:addressBookSearchBarCancelButtonColor forKey:NSForegroundColorAttributeName];
     [addressBookSearchBarCancelButton setTitleTextAttributes:colorDictionary forState:UIControlStateNormal];
+    NSOperatingSystemVersion iOS11 = (NSOperatingSystemVersion){11,0,0};
+    if ([[NSProcessInfo processInfo] isOperatingSystemAtLeastVersion:iOS11]) {
+        [[UIButton appearanceWhenContainedInInstancesOfClasses:@[NSClassFromString(@"UISwipeActionPullView")]] setTitleColor:[UIColor whiteColor] forState:UIControlStateNormal];
+    } 
     
     // Set the sectionIndex color in the people picker
     [[UITableView appearance] setSectionIndexColor:[Colors getButtonColor]];
@@ -120,8 +124,7 @@
     return YES;
 }
 
-- (BOOL)application:(UIApplication *)application openURL:(NSURL *)url sourceApplication:(NSString *)sourceApplication annotation:(id)annotation
-{
+- (BOOL)application:(UIApplication *)app openURL:(NSURL *)url options:(NSDictionary<UIApplicationOpenURLOptionsKey,id> *)options {
     NSArray *pathComponents = url.pathComponents;
     if (pathComponents.count != 3) {
         return NO;

@@ -17,7 +17,7 @@ class SelectCurrencyTableViewController: UITableViewController, UISearchResultsU
     // MARK: Properties
     var searchController = UISearchController(searchResultsController: nil)
     
-    var currencyUpdateModel: CurrencyUpdateModel!
+    @objc var currencyUpdateModel: CurrencyUpdateModel!
     
     var recentUsedForeignCurrencies: [MCCurrency]!
     
@@ -282,7 +282,7 @@ extension SelectCurrencyTableViewController: UISearchBarDelegate {
 class EventUpdateCurrencyModel: NSObject, CurrencyUpdateModel {
     let event: MCSharedBill
     
-    init(with event: MCSharedBill) {
+    @objc init(with event: MCSharedBill) {
         self.event = event
         super.init()
     }
@@ -305,7 +305,7 @@ class EventUpdateCurrencyModel: NSObject, CurrencyUpdateModel {
 class PaymentUpdateCurrencyModel: NSObject, CurrencyUpdateModel {
     let payment: MCPayment
     
-    init(with payment: MCPayment) {
+    @objc init(with payment: MCPayment) {
         self.payment = payment
         super.init()
     }

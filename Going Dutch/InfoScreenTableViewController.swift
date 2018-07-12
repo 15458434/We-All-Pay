@@ -77,7 +77,7 @@ class InfoScreenTableViewController: UITableViewController, MFMailComposeViewCon
     }
     
     // MARK: Notifications
-    func applyProVersion(_ notification: Notification) {
+    @objc func applyProVersion(_ notification: Notification) {
         FIRAnalytics.logEvent(withName: "Applying Pro version", parameters: nil)
         OperationQueue.main.addOperation { () -> Void in
             self.tableView.beginUpdates()
@@ -102,14 +102,14 @@ class InfoScreenTableViewController: UITableViewController, MFMailComposeViewCon
         }
     }
     
-    func postProductPrice(_ notification: Notification) {
+    @objc func postProductPrice(_ notification: Notification) {
         if !MCStoreInterface.defaultStoreInterface.isProProductPurchased {
             let cell = tableView.cellForRow(at: IndexPath(row: 0, section: 0)) as! MCTwoLabelIscreenTableViewCell
             cell.rightLabel.text = MCStoreInterface.defaultStoreInterface.proProduct.priceString
         }
     }
     
-    func restorePreviousPurchasesFailed(_ notification: Notification) {
+    @objc func restorePreviousPurchasesFailed(_ notification: Notification) {
         FIRAnalytics.logEvent(withName: "Restore Previous Purchases", parameters: nil)
         if (notification as NSNotification).userInfo!["status"] as? String == "Not restored" {
             let myPresenter = presentingViewController!

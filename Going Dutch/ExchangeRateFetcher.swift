@@ -8,8 +8,8 @@
 
 import UIKit
 
-public class ExchangeRateFetcher: NSObject {
-    public let currencyController: CurrencyController = CurrencyController()
+@objc public class ExchangeRateFetcher: NSObject {
+    @objc public let currencyController: CurrencyController = CurrencyController()
     public private(set) var baseCurrencyCode: String!
     public private(set) var rates: Dictionary<String, Double>!
     public private(set) var date: Date!
@@ -36,7 +36,7 @@ public class ExchangeRateFetcher: NSObject {
         return toToBaseRate / fromToBaseRate
     }
     
-    public func exchangeRate(_ fromCode: String, toCode: String, completionHandler: @escaping (_ fromCode: String, _ toCode: String, _ exchangeRate: NSNumber?, _ error: NSError?) -> ()) {
+    @objc public func exchangeRate(_ fromCode: String, toCode: String, completionHandler: @escaping (_ fromCode: String, _ toCode: String, _ exchangeRate: NSNumber?, _ error: NSError?) -> ()) {
         let thisOperationQueue = OperationQueue.current!
         if isLastFetchOlderThanAnHour {
             fetchFromOpenExchangeRates({ (baseCurrency, rates, error) -> () in
@@ -67,7 +67,10 @@ public class ExchangeRateFetcher: NSObject {
         let url = URL(string: "https://openexchangerates.org/api/latest.json?app_id=cba02a60bd89412095c84ecb65b6326a");
         
         let task = URLSession.shared.dataTask(with: url!) {(data, response, error) in
-            UIApplication.shared.isNetworkActivityIndicatorVisible = false
+            DispatchQueue.main.sync {
+                UIApplication.shared.isNetworkActivityIndicatorVisible = false
+            }
+            
             if error != nil {
                 debugPrint("Error fetching exchangeRate from OpenExchangeRates: \(String(describing: error))")
                 OperationQueue.main.addOperation({ () -> Void in
