@@ -11,6 +11,7 @@ import MessageUI
 import Social
 import StoreKit
 
+import RateMeControllerForiOS
 import FirebaseAnalytics
 
 private let productName = Bundle.main.infoDictionary!["CFBundleDisplayName"] as! String
@@ -45,14 +46,19 @@ class InfoScreenTableViewController: UITableViewController, MFMailComposeViewCon
     
     // MARK: New in this class
     
-    private func openMyAppStoreLink() {
-        let url = URL(string: "itms-apps://itunes.apple.com/WebObjects/MZStore.woa/wa/viewContentsUserReviews?id=642135963&pageNumber=0&sortOrdering=2&type=Purple+Software&mt=8")!
-        UIApplication.shared.openURL(url)
-    }
-    
     private func showAllMyApps() {
         let url = URL(string: "itms-apps://search.itunes.apple.com/WebObjects/MZContentLink.woa/wa/link?mt=8&path=apps%2fmarkcornelisse")!
-        UIApplication.shared.openURL(url)
+        if #available(iOS 10.0, *) {
+            UIApplication.shared.open(url, options: [:]) { (success) in
+                guard success else {
+                    debugPrint("Unable to open url")
+                    return
+                }
+            }
+        } else {
+            UIApplication.shared.openURL(url)
+        }
+        
     }
     
     private func openMailComposer() {
@@ -194,7 +200,7 @@ class InfoScreenTableViewController: UITableViewController, MFMailComposeViewCon
             MCStoreInterface.defaultStoreInterface.restorePreviousPurchases()
         case (1, 0):
             FIRAnalytics.logEvent(withName: "Rate Me pressed", parameters: nil)
-            openMyAppStoreLink()
+            RateMeController.openReviewLink()
         case (1, 1):
             FIRAnalytics.logEvent(withName: "My Apps pressed", parameters: nil)
             showAllMyApps()
