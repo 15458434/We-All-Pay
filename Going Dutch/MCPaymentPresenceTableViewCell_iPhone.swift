@@ -21,5 +21,5 @@ class MCPaymentPresenceTableViewCell_iPhone: UITableViewCell {
         FIRAnalytics.logEvent(withName: "SwitchPresence on payment", parameters: ["Presence Value": (isPresentSwitch.isOn as NSNumber)])
         thisCellsPaymentPresence!.isPersonPresent = NSNumber(value: isPresentSwitch.isOn)
         thisCellsPaymentPresence!.payment.recalculateAveragePeopleOweAndStore()
-    },
+    }
 }
