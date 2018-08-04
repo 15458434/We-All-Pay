@@ -303,7 +303,7 @@
                         <color key="backgroundColor" red="0.75745260715484619" green="0.83339643478393555" blue="0.92594647407531738" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                         <constraints>
                             <constraint firstItem="XpA-qR-01e" firstAttribute="leading" secondItem="hQT-KL-JNT" secondAttribute="leading" id="8ud-Vh-DB1"/>
-                            <constraint firstItem="fgA-y2-cLZ" firstAttribute="top" secondItem="5xC-6r-YOL" secondAttribute="bottom" priority="751" id="L8f-nf-wVY"/>
+                            <constraint firstAttribute="bottom" secondItem="5xC-6r-YOL" secondAttribute="bottom" priority="751" id="L8f-nf-wVY"/>
                             <constraint firstAttribute="trailing" secondItem="5xC-6r-YOL" secondAttribute="trailing" id="PBj-s9-uGJ"/>
                             <constraint firstItem="fgA-y2-cLZ" firstAttribute="top" secondItem="XpA-qR-01e" secondAttribute="bottom" priority="750" id="TB2-aD-OBg"/>
                             <constraint firstAttribute="trailing" secondItem="XpA-qR-01e" secondAttribute="trailing" id="dDi-GO-98T"/>
