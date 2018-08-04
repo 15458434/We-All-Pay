@@ -35,7 +35,9 @@ class SelectPayerTableViewController_iPad: UITableViewController, MCTonightsBill
     
     override func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
         FIRAnalytics.logEvent(withName: "Select payer", parameters: nil)
-        thisPayment.payingPerson = people[(indexPath as NSIndexPath).row]
+        let payingPerson = people[indexPath.row]
+        payingPerson.addPaymentsObject(thisPayment)
+        thisPayment.payingPerson = payingPerson
         dismissMe?()
     }
     
@@ -51,7 +53,7 @@ class SelectPayerTableViewController_iPad: UITableViewController, MCTonightsBill
     
     override func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
         let cell = tableView.dequeueReusableCell(withIdentifier: "selectPayerTableViewCell", for: indexPath) as! SelectPayerTableViewCell_iPad
-        let thisPerson = people[(indexPath as NSIndexPath).row]
+        let thisPerson = people[indexPath.row]
         cell.thumbnailView.image = thisPerson.thumbnail
         cell.fullNameLabel.text = thisPerson.getFullName
         
