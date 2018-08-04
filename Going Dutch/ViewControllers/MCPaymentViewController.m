@@ -240,10 +240,12 @@ typedef NS_ENUM(BOOL, ChildViewOpened) {
 
 - (void)pickerView:(UIPickerView *)pickerView didSelectRow:(NSInteger)row inComponent:(NSInteger)component
 {
+    MCPerson *payingPerson = _listOfPeople[row];
+    _payerNameField.text = payingPerson.getFullName;
     
-    [_payerNameField setText:[_listOfPeople[row] getFullName]];
-    [_thisPayment setPayingPerson:_listOfPeople[row]];
-    _payerPicture.image = [_listOfPeople[row] picture];
+    [payingPerson addPaymentsObject:_thisPayment];
+    _thisPayment.payingPerson = payingPerson;
+    _payerPicture.image = payingPerson.picture;
 }
 
 #pragma mark - PickerViewDataSource
