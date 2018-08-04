@@ -230,16 +230,14 @@ typedef NS_ENUM(BOOL, ChildViewOpened) {
 
 #pragma mark - PickerViewDelegate
 
-- (NSString *)pickerView:(UIPickerView *)pickerView titleForRow:(NSInteger)row forComponent:(NSInteger)component
-{
+- (NSString *)pickerView:(UIPickerView *)pickerView titleForRow:(NSInteger)row forComponent:(NSInteger)component {
     if (_listOfPeople == nil) {
         _listOfPeople = [_tonightsBill getArrayOfPeopleSortedOnFullNames];
     }
     return [_listOfPeople[row] getFullName];
 }
 
-- (void)pickerView:(UIPickerView *)pickerView didSelectRow:(NSInteger)row inComponent:(NSInteger)component
-{
+- (void)pickerView:(UIPickerView *)pickerView didSelectRow:(NSInteger)row inComponent:(NSInteger)component {
     MCPerson *payingPerson = _listOfPeople[row];
     _payerNameField.text = payingPerson.getFullName;
     
