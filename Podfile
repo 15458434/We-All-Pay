@@ -10,3 +10,8 @@ pod 'Firebase/AppIndexing'
 pod 'Firebase/AdMob'
 
 end
+
+post_install do | installer |
+    require 'fileutils'
+    FileUtils.cp_r('Pods/Target Support Files/Pods-We all pay/Pods-We all pay-acknowledgements.plist', 'Going Dutch/Settings.bundle/Acknowledgements.plist', :remove_destination => true)
+end
