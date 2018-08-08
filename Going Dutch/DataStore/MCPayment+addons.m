@@ -105,9 +105,14 @@
 {
     // When the App goes through an update cycle to version two for eacht payment the presences need to be added.
     MCPaymentPresence *paymentPresence = [MCPaymentPresence addPaymentPresenceInContext:[self managedObjectContext]];
+    
     paymentPresence.person = person;
+    [person addSharingPaymentObject:paymentPresence];
+    
     paymentPresence.isPersonPresent = @YES;
+    
     paymentPresence.payment = self;
+    [self addPeopleSharingPaymentObject:paymentPresence];
 }
 
 - (void)addLateArrivalPaymentPresenceFor:(MCPerson *)person
