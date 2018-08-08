@@ -25,7 +25,7 @@ class CurrencyControllerTest: XCTestCase {
     }
     
     func testCurrencies() {
-        XCTAssertEqual(currencyController.currencies.count, 158, "Amount of currencies should be 158.")
+        XCTAssertEqual(currencyController.currencies.count, 157, "Amount of currencies should be 158.")
     }
     
     func testSubscriptForIndex() {
