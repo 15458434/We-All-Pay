@@ -119,9 +119,15 @@
 {
     // When someone arrives late and is added later to tonightsBill the presence of this person will be set to nil.
     MCPaymentPresence *paymentPresence = [MCPaymentPresence addPaymentPresenceInContext:[self managedObjectContext]];
+    
     paymentPresence.person = person;
+    [person addSharingPaymentObject:paymentPresence];
+    
     paymentPresence.isPersonPresent = @NO;
+    
     paymentPresence.payment = self;
+    [self addPeopleSharingPaymentObject:paymentPresence];
+    
     paymentPresence.dateModified = paymentPresence.dateCreated;
 }
 
