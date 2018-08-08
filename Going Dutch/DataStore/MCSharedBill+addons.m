@@ -232,6 +232,8 @@
         [payment addLateArrivalPaymentPresenceFor:newPerson];
     }
     [newPerson addSharedBillObject:self];
+    [self addPeoplePresentObject:newPerson];
+    
     return newPerson;
 }
 
