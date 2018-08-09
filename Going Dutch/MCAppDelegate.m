@@ -27,6 +27,7 @@
 
 @property (nonatomic) dispatch_once_t executeOnlyOnce;
 @property (nonatomic, strong) MCLaunchCounter *launchCounter;
+@property (nonatomic, strong) MCCoreDataSaveHandlerWhenEnteringBackground *saveHandlerOnDidEnterBackground;
 
 @end
 
@@ -42,7 +43,7 @@
 #endif
     _launchCounter = [[MCLaunchCounter alloc] init];
     uint64_t result = [_launchCounter increment];
-    [FIRAnalytics logEventWithName:@"Start counter" parameters:@{@"Counter Value": @(result)}];
+    [FIRAnalytics logEventWithName:@"Start_counter" parameters:@{@"Counter Value": @(result)}];
 }
 
 - (void)removeOldCurrencyStore
@@ -69,7 +70,7 @@
     someQueue.name = @"Logging start";
     [someQueue addOperationWithBlock:^{
         NSLog(@"%@ running iOS %@", [[UIDevice currentDevice] model], [[UIDevice currentDevice] systemVersion]);
-        NSLog(@"I dedicate this program to Ilse Béguin, the most wonderful woman in the world who brought herself into my life, when I was developing the first version of this App.");
+        NSLog(@"I dedicated this app to my wonderful daughter Annemoon, because I love her so much.");
 #ifdef DEBUG
         NSLocale *locale = [NSLocale currentLocale];
         NSString *languageCode = [locale objectForKey:NSLocaleLanguageCode];
@@ -211,12 +212,16 @@
 
 - (void)applicationDidEnterBackground:(UIApplication *)application
 {
-    [FIRAnalytics logEventWithName:@"application did enter backgroun" parameters:nil];
-    __block UIBackgroundTaskIdentifier bgTask = [application beginBackgroundTaskWithExpirationHandler:^{
-        [application endBackgroundTask:bgTask];
-        bgTask = UIBackgroundTaskInvalid;
+    [FIRAnalytics logEventWithName:@"application_did_enter_background" parameters:nil];
+    __block UIBackgroundTaskIdentifier taskIdentifier = [application beginBackgroundTaskWithExpirationHandler:^{
+        [application endBackgroundTask:taskIdentifier];
+        taskIdentifier = UIBackgroundTaskInvalid;
     }];
-    [[MCWeAllPayStoreController defaultStore] savebackgroundContext];
+    
+    NSManagedObjectContext *context = [[MCWeAllPayStoreController defaultStore] mainThreadContext];
+    self.saveHandlerOnDidEnterBackground = [[MCCoreDataSaveHandlerWhenEnteringBackground alloc] initWithContext:context];
+    [self.saveHandlerOnDidEnterBackground saveAndEndBackgroundTaskWithIdentifier:taskIdentifier];
+    
     [self removeOldCurrencyStore];
 }
 
@@ -229,7 +234,7 @@
 {
     // Restart any tasks that were paused (or not yet started) while the application was inactive. If the application was previously in the background, optionally refresh the user interface.
 //    [self startGoogleAnalyticsSession];
-    [FIRAnalytics logEventWithName:@"application did become active" parameters:nil];
+    [FIRAnalytics logEventWithName:@"application_did_become_active" parameters:nil];
 }
 
 - (void)applicationWillTerminate:(UIApplication *)application

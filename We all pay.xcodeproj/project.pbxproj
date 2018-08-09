@@ -86,6 +86,7 @@
 		387494D619F053E9001614CA /* WeAllPayStore2to4.xcmappingmodel in Sources */ = {isa = PBXBuildFile; fileRef = 387494D519F053E9001614CA /* WeAllPayStore2to4.xcmappingmodel */; };
 		387494D819F05476001614CA /* WeAllPayStore1to4.xcmappingmodel in Sources */ = {isa = PBXBuildFile; fileRef = 387494D719F05476001614CA /* WeAllPayStore1to4.xcmappingmodel */; };
 		387D3A911870652B0060FAF8 /* Localizable.strings in Resources */ = {isa = PBXBuildFile; fileRef = 387D3A931870652B0060FAF8 /* Localizable.strings */; };
+		38894980211C2DDE00BDF9CD /* CoreDataSaveHandlerWhenEnteringBackground.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3889497F211C2DDE00BDF9CD /* CoreDataSaveHandlerWhenEnteringBackground.swift */; };
 		388A326E1C10965D00F7459C /* CategoryPictureObject.swift in Sources */ = {isa = PBXBuildFile; fileRef = 385295CE1C10583E0081894D /* CategoryPictureObject.swift */; };
 		388A326F1C10966000F7459C /* CategoryPictureStoreController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 385295D01C105C580081894D /* CategoryPictureStoreController.swift */; };
 		388A32761C11ED2F00F7459C /* WhoPayingUserDefaultsStoreInterfaceWeAllPayExtension.swift in Sources */ = {isa = PBXBuildFile; fileRef = 388A32741C11EA1400F7459C /* WhoPayingUserDefaultsStoreInterfaceWeAllPayExtension.swift */; };
@@ -403,6 +404,7 @@
 		387D3A8E187053BA0060FAF8 /* nl */ = {isa = PBXFileReference; fileEncoding = 10; lastKnownFileType = text.plist.strings; name = nl; path = "nl.lproj/Main-Iphone.strings"; sourceTree = "<group>"; };
 		3886D3FB16B7A1CD00ECE64F /* AddressBook.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = AddressBook.framework; path = System/Library/Frameworks/AddressBook.framework; sourceTree = SDKROOT; };
 		3886D3FC16B7A1CD00ECE64F /* AddressBookUI.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = AddressBookUI.framework; path = System/Library/Frameworks/AddressBookUI.framework; sourceTree = SDKROOT; };
+		3889497F211C2DDE00BDF9CD /* CoreDataSaveHandlerWhenEnteringBackground.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CoreDataSaveHandlerWhenEnteringBackground.swift; sourceTree = "<group>"; };
 		388A32701C11C51F00F7459C /* WhoPayingUserDefaultsStoreInterface.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = WhoPayingUserDefaultsStoreInterface.swift; path = "../Who is paying next/WhoPayingUserDefaultsStoreInterface.swift"; sourceTree = "<group>"; };
 		388A32741C11EA1400F7459C /* WhoPayingUserDefaultsStoreInterfaceWeAllPayExtension.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = WhoPayingUserDefaultsStoreInterfaceWeAllPayExtension.swift; sourceTree = "<group>"; };
 		388A327C1C11EDBD00F7459C /* WhoPayingUserDefaultsStoreInterface.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = WhoPayingUserDefaultsStoreInterface.framework; sourceTree = BUILT_PRODUCTS_DIR; };
@@ -809,6 +811,7 @@
 				38CC9814183D520C006EC35D /* MC SDK */,
 				38572AE5169D437B00969C62 /* MCAppDelegate.h */,
 				38572AE6169D437B00969C62 /* MCAppDelegate.m */,
+				3889497F211C2DDE00BDF9CD /* CoreDataSaveHandlerWhenEnteringBackground.swift */,
 				38D6A3E51C73DF2600968BB2 /* RateMeControllerExtension.swift */,
 				38D6A3E71C73E04300968BB2 /* UIViewControllerRateMeControllerExtension.swift */,
 				3835EBF82115C40900E2BC3F /* Settings.bundle */,
@@ -1660,6 +1663,7 @@
 				38955048178B4FCA0077A95A /* MCWeAllPayStoreController.m in Sources */,
 				389DE8FA197FB2BA00169645 /* MCPayment.m in Sources */,
 				38AAFBA218EC406300CD3E12 /* MCSharedBillPeoplePresentTableViewController-iPad.m in Sources */,
+				38894980211C2DDE00BDF9CD /* CoreDataSaveHandlerWhenEnteringBackground.swift in Sources */,
 				389DE907197FBE8400169645 /* MCExchangeRate+addons.m in Sources */,
 				38977E631B2A37BC008484A4 /* MCAllTripsTableViewCell.swift in Sources */,
 				387494D819F05476001614CA /* WeAllPayStore1to4.xcmappingmodel in Sources */,
