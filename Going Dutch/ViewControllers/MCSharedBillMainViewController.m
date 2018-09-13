@@ -59,8 +59,7 @@
 
 #pragma mark - private functions
 
-- (GADRequest *)generalAdRequest
-{
+- (GADRequest *)generalAdRequest {
     GADRequest *request = [GADRequest request];
 #ifdef DEBUG
     NSString *iPhoneX = @"3a960c027f1ea390326793600324a891";
