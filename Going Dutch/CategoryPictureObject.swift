@@ -29,7 +29,7 @@ class CategoryPictureObject: NSObject {
     }
     
     @objc init(dictionary: Dictionary<String, AnyObject>) {
-        categoryDescription = dictionary[categoryDescriptionKey] as! String
+        categoryDescription = (dictionary[categoryDescriptionKey] as! String)
         let categoryNumber = dictionary[categoryIdKey] as! NSNumber
         categoryId = categoryNumber.int16Value
         pictureFilename = dictionary[categoryPictureFilenameKey] as! String
