@@ -1376,7 +1376,7 @@
 				CLASSPREFIX = MC;
 				LastSwiftMigration = 0700;
 				LastSwiftUpdateCheck = 0730;
-				LastUpgradeCheck = 0940;
+				LastUpgradeCheck = 1000;
 				ORGANIZATIONNAME = "Mark Cornelisse";
 				TargetAttributes = {
 					382B76DF1C398249000C203A = {
