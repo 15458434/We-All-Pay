@@ -108,6 +108,9 @@
     [[UITableView appearance] setSectionIndexColor:[Colors getButtonColor]];
     
     [[UINavigationBar appearance] setBarStyle:UIBarStyleBlack];
+    
+    // Uncomment the following line to remove the In-App Purchase. 
+//    [[NSUserDefaults standardUserDefaults] removeObjectForKey:@"com.Greenhair.We_all_pay.pro"];
 }
 
 #pragma mark - UIApplicationDelegate
