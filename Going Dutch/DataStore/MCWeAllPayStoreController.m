@@ -92,23 +92,27 @@ MCiCloudUse const isiCloudUsed = iCloudIsNotUsed;
 
 - (void)saveMainThreadContext
 {
-    NSError *error;
-    BOOL succes = [_mainThreadContext save:&error];
-    if (succes) {
-        NSLog(@"Main Thread Context: Succesfully saved.");
-    } else {
-        NSLog(@"MainQueue save not possible: %@", error);
+    if (self.mainThreadContext.hasChanges) {
+        NSError *error;
+        BOOL succes = [_mainThreadContext save:&error];
+        if (succes) {
+            NSLog(@"Main Thread Context: Succesfully saved.");
+        } else {
+            NSLog(@"MainQueue save not possible: %@", error);
+        }
     }
 }
 
 - (void)savebackgroundContext
 {
-    NSError *error;
-    BOOL succes = [_backgroundThreadContext save:&error];
-    if (succes) {
-        NSLog(@"Background Thread Context Succesfully saved.");
-    } else {
-        NSLog(@"Background save not possible: %@", error);
+    if (self.backgroundThreadContext.hasChanges) {
+        NSError *error;
+        BOOL succes = [_backgroundThreadContext save:&error];
+        if (succes) {
+            NSLog(@"Background Thread Context Succesfully saved.");
+        } else {
+            NSLog(@"Background save not possible: %@", error);
+        }
     }
 }
 

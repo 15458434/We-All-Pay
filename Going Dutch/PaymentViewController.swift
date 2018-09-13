@@ -143,9 +143,9 @@ enum CancelButtonPressed {
     
     private func respondToPresenceOfPathComponentsFromAppLaunch() {
         if pathComponentsToOpen != nil {
-            tonightsBill = pathComponentsToOpen![0] as! MCSharedBill
+            tonightsBill = (pathComponentsToOpen![0] as! MCSharedBill)
             thisPayment = tonightsBill.addPayment()
-            thisPayment.payingPerson = pathComponentsToOpen![1] as! MCPerson
+            thisPayment.payingPerson = (pathComponentsToOpen![1] as! MCPerson)
         }
     }
     
@@ -183,7 +183,7 @@ enum CancelButtonPressed {
         setTextForCategoryButton()
         
         if dataController == nil {
-            dataController = MCWeAllPayStoreController.defaultStore().paymentPresenceDataController(forDelegate: self) as! NSFetchedResultsController<MCPaymentPresence>
+            dataController = (MCWeAllPayStoreController.defaultStore().paymentPresenceDataController(forDelegate: self) as! NSFetchedResultsController<MCPaymentPresence>)
         }
     }
     

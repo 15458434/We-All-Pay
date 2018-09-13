@@ -26,7 +26,7 @@ class SelectCurrencyTableViewController: UITableViewController, UISearchResultsU
         didSet {
             let nameSelector: Selector = #selector(getter: NSFetchedResultsSectionInfo.name)
             sections = Array(repeating: [], count: collation.sectionTitles.count)
-            sortedCurrencies = collation.sortedArray(from: currencies, collationStringSelector: nameSelector) as! [Currency]
+            sortedCurrencies = (collation.sortedArray(from: currencies, collationStringSelector: nameSelector) as! [Currency])
             for currency in sortedCurrencies {
                 let sectionNumber = collation.section(for: currency, collationStringSelector: nameSelector)
                 sections[sectionNumber].append(currency)
