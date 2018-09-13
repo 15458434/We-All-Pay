@@ -294,7 +294,7 @@
 		38001C9A194EE284008ACD94 /* Images.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Images.xcassets; sourceTree = "<group>"; };
 		38010E101A3F4A4F0056F8F8 /* Base */ = {isa = PBXFileReference; fileEncoding = 10; lastKnownFileType = text.plist.strings; name = Base; path = Base.lproj/Localizable.strings; sourceTree = "<group>"; };
 		38010E121A3F4A510056F8F8 /* en */ = {isa = PBXFileReference; fileEncoding = 10; lastKnownFileType = text.plist.strings; name = en; path = en.lproj/Localizable.strings; sourceTree = "<group>"; };
-		38010E131A3F4A530056F8F8 /* nl */ = {isa = PBXFileReference; fileEncoding = 10; lastKnownFileType = text.plist.strings; name = nl; path = nl.lproj/Localizable.strings; sourceTree = "<group>"; };
+		38010E131A3F4A530056F8F8 /* nl */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.strings; name = nl; path = nl.lproj/Localizable.strings; sourceTree = "<group>"; };
 		3801881A1938D8E70085A5AE /* MCDismissKeyboardProtocol.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = MCDismissKeyboardProtocol.h; path = ViewControllers/MCDismissKeyboardProtocol.h; sourceTree = "<group>"; };
 		3801B1111A1E23D5005B69D7 /* We all pay empty.xcappdata */ = {isa = PBXFileReference; lastKnownFileType = wrapper; path = "We all pay empty.xcappdata"; sourceTree = "<group>"; };
 		3801F89B16DFC62600DF8675 /* CoreData.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = CoreData.framework; path = System/Library/Frameworks/CoreData.framework; sourceTree = SDKROOT; };
@@ -383,7 +383,7 @@
 		3860574F19EE963600BD5B78 /* categoryPictures.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = categoryPictures.xcassets; sourceTree = "<group>"; };
 		3860575419EEB28300BD5B78 /* MCCategoryPictureStoreTest.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = MCCategoryPictureStoreTest.m; sourceTree = "<group>"; };
 		3861739F1A530371000C2EE5 /* MCPathComponentsToOpenProtocol.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = MCPathComponentsToOpenProtocol.h; sourceTree = "<group>"; };
-		3867CE4018703E9A001EC222 /* nl */ = {isa = PBXFileReference; fileEncoding = 10; lastKnownFileType = text.plist.strings; name = nl; path = nl.lproj/InfoPlist.strings; sourceTree = "<group>"; };
+		3867CE4018703E9A001EC222 /* nl */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.strings; name = nl; path = nl.lproj/InfoPlist.strings; sourceTree = "<group>"; };
 		3867CE4A18704B48001EC222 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = "Base.lproj/Main-Iphone.storyboard"; sourceTree = "<group>"; };
 		3867CE4D18704C60001EC222 /* Base */ = {isa = PBXFileReference; fileEncoding = 10; lastKnownFileType = text.plist.strings; name = Base; path = Base.lproj/InfoPlist.strings; sourceTree = "<group>"; };
 		3867CE5218704DAF001EC222 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.xib; name = Base; path = Base.lproj/MCTableEmptyMessage.xib; sourceTree = "<group>"; };
@@ -1376,7 +1376,7 @@
 				CLASSPREFIX = MC;
 				LastSwiftMigration = 0700;
 				LastSwiftUpdateCheck = 0730;
-				LastUpgradeCheck = 0940;
+				LastUpgradeCheck = 1000;
 				ORGANIZATIONNAME = "Mark Cornelisse";
 				TargetAttributes = {
 					382B76DF1C398249000C203A = {

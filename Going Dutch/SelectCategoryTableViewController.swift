@@ -21,7 +21,7 @@ class SelectCategoryTableViewController: UITableViewController, MCThisPaymentPro
         didSet {
             let categoryDescriptionSelector: Selector = NSSelectorFromString("categoryDescription")
             let collation = UILocalizedIndexedCollation.current()
-            sortedCategories = collation.sortedArray(from: categories, collationStringSelector: categoryDescriptionSelector) as! [CategoryPictureObject]
+            sortedCategories = (collation.sortedArray(from: categories, collationStringSelector: categoryDescriptionSelector) as! [CategoryPictureObject])
             
             self.tableView.reloadData()
         }

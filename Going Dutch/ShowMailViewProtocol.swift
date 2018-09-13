@@ -35,12 +35,13 @@ extension ShowMailViewProtocol where Self: UIViewController, Self: MFMailCompose
         }
         
         do {
-            let mailViewController = MFMailComposeViewController()
+            let mailViewController = MailComposeViewController()
             mailViewController.mailComposeDelegate = self
             mailViewController.setToRecipients(try mailAdresses())
             mailViewController.setSubject(try subject())
             mailViewController.setMessageBody(try mailBody(), isHTML: false)
             present(mailViewController, animated: true, completion: {
+                // TODO: Fix this warning in a later release. See #807
                 UIApplication.shared.statusBarStyle = .lightContent
                 mailViewController.setNeedsStatusBarAppearanceUpdate()
             })
