@@ -12,12 +12,13 @@
 
 @implementation MCEmailAddress (addons)
 
-+ (MCEmailAddress *)addEmailAddressFor:(MCPerson *)person
-{
-    NSManagedObjectContext *context = [person managedObjectContext];
-    MCEmailAddress *newEmailAddress = [NSEntityDescription insertNewObjectForEntityForName:@"MCEmailAddress" inManagedObjectContext:context];
++ (MCEmailAddress *)addEmailAddressFor:(MCPerson *)person {
+    MCEmailAddress *newEmailAddress = [NSEntityDescription insertNewObjectForEntityForName:@"MCEmailAddress" inManagedObjectContext:person.managedObjectContext];
     newEmailAddress.uniqueEmailId = [[NSUUID UUID] UUIDString];
+    
     newEmailAddress.owner = person;
+    [person addEmailAddressObject:newEmailAddress];
+    
     NSDate *nu = [NSDate date];
     newEmailAddress.dateCreated = nu;
     newEmailAddress.dateModified = nu;
