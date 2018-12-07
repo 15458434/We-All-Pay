@@ -10,9 +10,15 @@ import UIKit
 
 @objc(MCMailComposeViewController) class MailComposeViewController: MFMailComposeViewController {
 
+    // MARK: UINavigationController
+    
     // MARK: UIViewController
     
     override var preferredStatusBarStyle: UIStatusBarStyle {
         return .lightContent
     }
+    
+    // MARK: UIResponder
+    
+    // MARK: NSObject
 }

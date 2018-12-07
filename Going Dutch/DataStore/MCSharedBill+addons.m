@@ -177,15 +177,25 @@
 
 - (MCPayment *)addPayment
 {
-    MCPayment *payment = [MCPayment addPaymentInContext:[self managedObjectContext]];
+    MCPayment *payment = [MCPayment addPaymentInContext:self.managedObjectContext];
     for (MCPerson *person in [self peoplePresent]) {
-        MCPaymentPresence *paymentPresence = [MCPaymentPresence addPaymentPresenceInContext:[self managedObjectContext]];
-        [paymentPresence setPayment:payment];
-        [paymentPresence setPerson:person];
-        [paymentPresence setIsPersonPresent:@YES];
+        MCPaymentPresence *paymentPresence = [MCPaymentPresence addPaymentPresenceInContext:self.managedObjectContext];
+        
+        paymentPresence.payment = payment;
+        [payment addPeopleSharingPaymentObject:paymentPresence];
+        
+        paymentPresence.person = person;
+        [person addSharingPaymentObject:paymentPresence];
+        
+        paymentPresence.isPersonPresent = @(YES);
     }
-    [payment setOnWhichBill:self];
+    
+    [self addPaymentsObject:payment];
+    payment.onWhichBill = self;
+    
     payment.exchangeRate.toCurrency = [self mainCurrency];
+    [self.mainCurrency addExchangeRateToCurrencyObject:payment.exchangeRate];
+    
     return payment;
 }
 
@@ -222,6 +232,8 @@
         [payment addLateArrivalPaymentPresenceFor:newPerson];
     }
     [newPerson addSharedBillObject:self];
+    [self addPeoplePresentObject:newPerson];
+    
     return newPerson;
 }
 

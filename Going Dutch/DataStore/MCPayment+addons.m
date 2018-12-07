@@ -105,18 +105,29 @@
 {
     // When the App goes through an update cycle to version two for eacht payment the presences need to be added.
     MCPaymentPresence *paymentPresence = [MCPaymentPresence addPaymentPresenceInContext:[self managedObjectContext]];
+    
     paymentPresence.person = person;
+    [person addSharingPaymentObject:paymentPresence];
+    
     paymentPresence.isPersonPresent = @YES;
+    
     paymentPresence.payment = self;
+    [self addPeopleSharingPaymentObject:paymentPresence];
 }
 
 - (void)addLateArrivalPaymentPresenceFor:(MCPerson *)person
 {
     // When someone arrives late and is added later to tonightsBill the presence of this person will be set to nil.
     MCPaymentPresence *paymentPresence = [MCPaymentPresence addPaymentPresenceInContext:[self managedObjectContext]];
+    
     paymentPresence.person = person;
+    [person addSharingPaymentObject:paymentPresence];
+    
     paymentPresence.isPersonPresent = @NO;
+    
     paymentPresence.payment = self;
+    [self addPeopleSharingPaymentObject:paymentPresence];
+    
     paymentPresence.dateModified = paymentPresence.dateCreated;
 }
 
@@ -195,9 +206,16 @@
 
 - (MCExchangeRate *)addExchangeRate
 {
-    self.exchangeRate = [MCExchangeRate addExchangeRateForContext:[self managedObjectContext]];
+    MCExchangeRate *new = [MCExchangeRate addExchangeRateForContext:[self managedObjectContext]];
+    
+    self.exchangeRate = new;
+    new.payment = self;
+    
     self.exchangeRate.toCurrency = self.onWhichBill.mainCurrency;
+    [self.onWhichBill.mainCurrency addExchangeRateToCurrencyObject:self.exchangeRate];
+    
     self.exchangeRate.fromCurrency = self.currency;
+    [self.currency addExchangeRateFromCurrencyObject:self.exchangeRate];
     
     return [self exchangeRate];
 }
