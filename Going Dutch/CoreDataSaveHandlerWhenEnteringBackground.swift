@@ -36,7 +36,7 @@ import CoreData
             self.isSaving = false
             UIApplication.shared.endBackgroundTask(identifier)
         })
-        try! context.save()
+        try? context.save()
     }
     
     
