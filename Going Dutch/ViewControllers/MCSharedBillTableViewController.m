@@ -350,7 +350,7 @@
     // Get category picture.
     NSArray *pictureObjects = [[CategoryPictureStoreController sharedController] pictureObjects];
     CategoryPictureObject *categoryObject = pictureObjects[[[thisCellsPayment categoryId] shortValue]];
-    paymentCell.pictureOfPayer.image = [categoryObject smallPicture];
+    paymentCell.itemTypeImageView.image = [categoryObject smallPicture];
     
     NSString *thisCellsDescriptionOfPayment = [thisCellsPayment descriptionOfPayment];
     if (!thisCellsDescriptionOfPayment) {

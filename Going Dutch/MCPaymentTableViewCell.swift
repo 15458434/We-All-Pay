@@ -12,5 +12,5 @@ class MCPaymentTableViewCell: UITableViewCell {
     @IBOutlet var namePayerLabel: UILabel!
     @IBOutlet var whatPaidLabel: UILabel!
     @IBOutlet var moneyPaidLabel: UILabel!
-    @IBOutlet var pictureOfPayer: UIImageView!
+    @IBOutlet var itemTypeImageView: UIImageView!
 }
