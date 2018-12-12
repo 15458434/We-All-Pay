@@ -2346,7 +2346,10 @@
 					"$(inherited)",
 					"$(PROJECT_DIR)/**",
 				);
-				OTHER_LDFLAGS = "$(inherited)";
+				OTHER_LDFLAGS = (
+					"$(inherited)",
+					"-Wpartial-availability",
+				);
 				PRODUCT_BUNDLE_IDENTIFIER = "com.GreenHair.${PRODUCT_NAME:rfc1034identifier}";
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				PROVISIONING_PROFILE = "";
@@ -2390,7 +2393,10 @@
 					"$(inherited)",
 					"$(PROJECT_DIR)/**",
 				);
-				OTHER_LDFLAGS = "$(inherited)";
+				OTHER_LDFLAGS = (
+					"$(inherited)",
+					"-Wpartial-availability",
+				);
 				PRODUCT_BUNDLE_IDENTIFIER = "com.GreenHair.${PRODUCT_NAME:rfc1034identifier}";
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				PROVISIONING_PROFILE = "";
