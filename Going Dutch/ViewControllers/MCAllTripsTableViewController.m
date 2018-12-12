@@ -44,20 +44,17 @@ typedef NS_ENUM(BOOL, MCTonightsBillStatus) {
 
 #pragma mark - Actions
 
-- (IBAction)newEventPressed:(id)sender
-{
+- (IBAction)newEventPressed:(id)sender {
     [FIRAnalytics logEventWithName:@"New Event" parameters:nil];
 }
 
-- (IBAction)iButtonPressed:(id)sender
-{
+- (IBAction)iButtonPressed:(id)sender {
     [FIRAnalytics logEventWithName:@"Open Info Screen" parameters:nil];
 }
 
 #pragma mark - New in this class.
 
-- (void)setEmptyMessage
-{
+- (void)setEmptyMessage {
     if ([[_dataController fetchedObjects] count] != 0) {
         [UIView animateWithDuration:1.0 animations:^{
             [[self.emptyMessage bigMessage] setAlpha:0.0];
@@ -73,8 +70,7 @@ typedef NS_ENUM(BOOL, MCTonightsBillStatus) {
     }
 }
 
-- (void)setEmptyMessageNow
-{
+- (void)setEmptyMessageNow {
     if ([[_dataController fetchedObjects] count] != 0) {
         [UIView animateWithDuration:0.0 animations:^{
             [[self.emptyMessage bigMessage] setAlpha:0.0];
@@ -90,8 +86,7 @@ typedef NS_ENUM(BOOL, MCTonightsBillStatus) {
     }
 }
 
-- (void)performFetch
-{
+- (void)performFetch {
     NSError *error;
     BOOL success = [_dataController performFetch:&error];
     if (!success) {
@@ -99,8 +94,7 @@ typedef NS_ENUM(BOOL, MCTonightsBillStatus) {
     }
 }
 
-- (void)prepareUserActivity
-{
+- (void)prepareUserActivity {
     NSOperatingSystemVersion ios9 = (NSOperatingSystemVersion){9, 0, 0};
     if ([[NSProcessInfo processInfo] isOperatingSystemAtLeastVersion:ios9]) {
         NSUserActivity *activity = [[NSUserActivity alloc] initWithActivityType:@"com.GreenHair.We-all-pay.SharingExpenses"];
@@ -125,16 +119,14 @@ typedef NS_ENUM(BOOL, MCTonightsBillStatus) {
 
 #pragma mark - UIViewController
 
-- (void)awakeFromNib
-{
+- (void)awakeFromNib {
     [super awakeFromNib];
     
     _isATonightsBillOpened = isClosed;
     _isEmptyMessageShownInstantForFirstBoot = NO;
 }
 
-- (void)viewDidLoad
-{
+- (void)viewDidLoad {
     [super viewDidLoad];
     
     [self setEdgesForExtendedLayout:UIRectEdgeNone];
@@ -149,8 +141,7 @@ typedef NS_ENUM(BOOL, MCTonightsBillStatus) {
 }
 
 
-- (void)viewWillAppear:(BOOL)animated
-{
+- (void)viewWillAppear:(BOOL)animated {
     [super viewWillAppear:animated];
     
     if (_isATonightsBillOpened == isOpened) {
@@ -177,36 +168,31 @@ typedef NS_ENUM(BOOL, MCTonightsBillStatus) {
     }
 }
 
-- (void)viewWillDisappear:(BOOL)animated
-{
+- (void)viewWillDisappear:(BOOL)animated {
     [super viewWillDisappear:animated];
     
     _dataController = nil;
 }
 
-- (void)didReceiveMemoryWarning
-{
+- (void)didReceiveMemoryWarning {
     [super didReceiveMemoryWarning];
     // Dispose of any resources that can be recreated.
 }
 
-- (void)dealloc
-{
+- (void)dealloc {
     [self stopRespondingToStorechangeNotifications];
 }
 
 #pragma mark - UIViewController+WeAllPayStore notifications
 
-- (void)storeWillBeSwapped:(NSNotification *)notification
-{
+- (void)storeWillBeSwapped:(NSNotification *)notification {
     [super storeWillBeSwapped:notification];
     dispatch_sync(dispatch_get_main_queue(), ^{
         [[self view] setUserInteractionEnabled:NO];
     });
 }
 
--(void)storeDidSwap:(NSNotification *)notification
-{
+- (void)storeDidSwap:(NSNotification *)notification {
     [super storeDidSwap:notification];
     dispatch_sync(dispatch_get_main_queue(), ^{
         if (self.dataController) {
@@ -225,15 +211,13 @@ typedef NS_ENUM(BOOL, MCTonightsBillStatus) {
 
 #pragma mark - NSFetchedResultsControllerDelegate
 
-- (void)controllerWillChangeContent:(NSFetchedResultsController *)controller
-{
+- (void)controllerWillChangeContent:(NSFetchedResultsController *)controller {
     if (self.isViewLoaded && self.view.window && _isATonightsBillOpened == isClosed) {
         [[self tableView] beginUpdates];
     }
 }
 
-- (void)controllerDidChangeContent:(NSFetchedResultsController *)controller
-{
+- (void)controllerDidChangeContent:(NSFetchedResultsController *)controller {
     if (self.isViewLoaded && self.view.window && _isATonightsBillOpened == isClosed) {
 #ifdef DEBUG
         NSLog(@"executing tableView endUpdates");
@@ -244,8 +228,7 @@ typedef NS_ENUM(BOOL, MCTonightsBillStatus) {
     }
 }
 
-- (void)controller:(NSFetchedResultsController *)controller didChangeObject:(id)anObject atIndexPath:(NSIndexPath *)indexPath forChangeType:(NSFetchedResultsChangeType)type newIndexPath:(NSIndexPath *)newIndexPath
-{
+- (void)controller:(NSFetchedResultsController *)controller didChangeObject:(id)anObject atIndexPath:(NSIndexPath *)indexPath forChangeType:(NSFetchedResultsChangeType)type newIndexPath:(NSIndexPath *)newIndexPath {
     if (self.isViewLoaded && self.view.window && _isATonightsBillOpened == isClosed) {
         switch(type) {
                 
@@ -273,18 +256,15 @@ typedef NS_ENUM(BOOL, MCTonightsBillStatus) {
 
 #pragma mark - Table view data source
 
-- (NSInteger)numberOfSectionsInTableView:(UITableView *)tableView
-{
+- (NSInteger)numberOfSectionsInTableView:(UITableView *)tableView {
     return [[_dataController sections] count];
 }
 
-- (NSInteger)tableView:(UITableView *)tableView numberOfRowsInSection:(NSInteger)section
-{
+- (NSInteger)tableView:(UITableView *)tableView numberOfRowsInSection:(NSInteger)section {
     return [[_dataController sections][section] numberOfObjects];
 }
 
-- (UITableViewCell *)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath
-{
+- (UITableViewCell *)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath {
     MCSharedBill *thisTrip = [_dataController objectAtIndexPath:indexPath];
     MCAllTripsTableViewCell *allTripsTableViewCell = [tableView dequeueReusableCellWithIdentifier:@"MCAllTripsTableViewCell"];
     
@@ -320,26 +300,14 @@ typedef NS_ENUM(BOOL, MCTonightsBillStatus) {
     return allTripsTableViewCell;
 }
 
-/*
-// Override to support conditional editing of the table view.
-- (BOOL)tableView:(UITableView *)tableView canEditRowAtIndexPath:(NSIndexPath *)indexPath
-{
-    // Return NO if you do not want the specified item to be editable.
-    return YES;
-}
-*/
-
-
 // Override to support editing the table view.
-- (void)tableView:(UITableView *)tableView commitEditingStyle:(UITableViewCellEditingStyle)editingStyle forRowAtIndexPath:(NSIndexPath *)indexPath
-{
+- (void)tableView:(UITableView *)tableView commitEditingStyle:(UITableViewCellEditingStyle)editingStyle forRowAtIndexPath:(NSIndexPath *)indexPath {
     if (editingStyle == UITableViewCellEditingStyleDelete) {
         [self deleteBillAtIndexpath:indexPath];
     }
 }
 
-- (void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath
-{
+- (void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath {
     MCSharedBill *selectedEvent = [_dataController objectAtIndexPath:indexPath];
     if (selectedEvent.tripName) {
         [FIRAnalytics logEventWithName:@"Open event" parameters:@{@"Event name": selectedEvent.tripName, @"Event identifier": selectedEvent.uniqueBillId}];
@@ -348,22 +316,6 @@ typedef NS_ENUM(BOOL, MCTonightsBillStatus) {
     }
     
 }
-
-/*
-// Override to support rearranging the table view.
-- (void)tableView:(UITableView *)tableView moveRowAtIndexPath:(NSIndexPath *)fromIndexPath toIndexPath:(NSIndexPath *)toIndexPath
-{
-}
-*/
-
-/*
-// Override to support conditional rearranging of the table view.
-- (BOOL)tableView:(UITableView *)tableView canMoveRowAtIndexPath:(NSIndexPath *)indexPath
-{
-    // Return NO if you do not want the item to be re-orderable.
-    return YES;
-}
-*/
 
 #pragma mark - Table view delegate
 
@@ -399,8 +351,7 @@ typedef NS_ENUM(BOOL, MCTonightsBillStatus) {
 
 #pragma mark - UIStoryboard
 
-- (void)prepareForSegue:(UIStoryboardSegue *)segue sender:(id)sender
-{
+- (void)prepareForSegue:(UIStoryboardSegue *)segue sender:(id)sender {
 #ifdef DEBUG
     NSLog(@"prepareForSegue: %@", [segue identifier]);
 #endif
