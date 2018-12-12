@@ -36,14 +36,6 @@ class InfoScreenTableViewController: UITableViewController, MFMailComposeViewCon
         self.navigationController?.presentingViewController!.dismiss(animated: true, completion: nil)
     }
     
-    @IBAction func tweetAboutUsPressed(_ sender: AnyObject) {
-        Analytics.logEvent("Tweet about us", parameters: nil)
-        let twitterComposer = SLComposeViewController(forServiceType: SLServiceTypeTwitter)
-        twitterComposer?.setInitialText("Thank you @MarkCornelisse, I have no more money problems with my friends thanks to your \(productName). #ios #app")
-        twitterComposer?.add(URL(string: "https://itunes.apple.com/us/app/we-all-pay/id642135963?ls=1&mt=8"))
-        present(twitterComposer!, animated: true, completion: nil)
-    }
-    
     // MARK: New in this class
     
     private func showAllMyApps() {
