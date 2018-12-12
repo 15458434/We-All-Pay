@@ -39,7 +39,6 @@
 {
 #ifndef DEBUG
     [FIRApp configure];
-    [[FIRAppIndexing sharedInstance] registerApp:642135963];
 #endif
     _launchCounter = [[MCLaunchCounter alloc] init];
     uint64_t result = [_launchCounter increment];
