@@ -15,7 +15,7 @@ class RootViewController: UIViewController {
     
     @IBAction func infoButtonTapped(_ sender: AnyObject)
     {
-        FIRAnalytics.logEvent(withName: "Open Info Screen", parameters: nil)
+        Analytics.logEvent("Open Info Screen", parameters: nil)
     }
     
     // MARK: Inherited From Super
