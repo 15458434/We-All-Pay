@@ -18,12 +18,12 @@
                         <rect key="frame" x="0.0" y="0.0" width="375" height="724"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <color key="backgroundColor" red="1" green="1" blue="1" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
-                        <view key="tableHeaderView" contentMode="scaleToFill" restorationIdentifier="MCAllTripsActionHeader" id="b5c-w1-Nq5" customClass="UITableViewHeaderFooterView">
+                        <view key="tableHeaderView" contentMode="scaleToFill" misplaced="YES" restorationIdentifier="MCAllTripsActionHeader" id="b5c-w1-Nq5" customClass="UITableViewHeaderFooterView">
                             <rect key="frame" x="0.0" y="0.0" width="375" height="60"/>
                             <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                             <subviews>
                                 <button contentMode="scaleToFill" restorationIdentifier="newEventButton" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="PRz-eP-dNH">
-                                    <rect key="frame" x="151" y="15" width="73" height="30"/>
+                                    <rect key="frame" x="151" y="-15" width="73" height="30"/>
                                     <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                     <fontDescription key="fontDescription" type="system" pointSize="15"/>
                                     <state key="normal" title="New event">
@@ -532,7 +532,7 @@
                         <rect key="frame" x="0.0" y="0.0" width="375" height="724"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <color key="backgroundColor" red="0.75745260715484619" green="0.83339643478393555" blue="0.92594647407531738" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
-                        <view key="tableHeaderView" contentMode="scaleToFill" restorationIdentifier="sendEmailButtonView" id="kmK-CE-AdT" customClass="UITableViewHeaderFooterView">
+                        <view key="tableHeaderView" contentMode="scaleToFill" misplaced="YES" restorationIdentifier="sendEmailButtonView" id="kmK-CE-AdT" customClass="UITableViewHeaderFooterView">
                             <rect key="frame" x="0.0" y="0.0" width="375" height="50"/>
                             <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                             <subviews>
@@ -770,12 +770,12 @@
                             </subviews>
                             <color key="backgroundColor" red="0.75686274509999996" green="0.83529411760000005" blue="0.92549019610000005" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                             <constraints>
-                                <constraint firstItem="BJS-wA-qlM" firstAttribute="leading" secondItem="wmR-8m-HJR" secondAttribute="leadingMargin" constant="12" id="0xJ-gl-EEs"/>
+                                <constraint firstItem="BJS-wA-qlM" firstAttribute="leading" secondItem="wmR-8m-HJR" secondAttribute="leading" constant="20" symbolic="YES" id="74N-hX-AFj"/>
                                 <constraint firstItem="gfv-ln-Tgv" firstAttribute="baseline" secondItem="asZ-Na-2wd" secondAttribute="baseline" id="C1c-Dw-9ce"/>
                                 <constraint firstItem="gfv-ln-Tgv" firstAttribute="leading" secondItem="wmR-8m-HJR" secondAttribute="leading" constant="20" id="QBN-x3-F4v"/>
                                 <constraint firstItem="gfv-ln-Tgv" firstAttribute="top" secondItem="BJS-wA-qlM" secondAttribute="bottom" constant="10" id="Y9s-2b-a9h"/>
                                 <constraint firstAttribute="trailingMargin" secondItem="asZ-Na-2wd" secondAttribute="trailing" constant="12" id="epK-cr-e5u"/>
-                                <constraint firstAttribute="trailingMargin" secondItem="BJS-wA-qlM" secondAttribute="trailing" constant="12" id="kjM-ZT-xUG"/>
+                                <constraint firstAttribute="trailing" secondItem="BJS-wA-qlM" secondAttribute="trailing" constant="20" symbolic="YES" id="uUQ-0i-dmN"/>
                                 <constraint firstItem="BJS-wA-qlM" firstAttribute="top" secondItem="wmR-8m-HJR" secondAttribute="topMargin" constant="12" id="vR9-mY-2aQ"/>
                             </constraints>
                         </view>
@@ -886,12 +886,12 @@
                         <rect key="frame" x="0.0" y="0.0" width="375" height="724"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <color key="backgroundColor" red="1" green="1" blue="1" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
-                        <view key="tableHeaderView" contentMode="scaleToFill" restorationIdentifier="personView" id="YgD-ot-OKq">
+                        <view key="tableHeaderView" contentMode="scaleToFill" misplaced="YES" restorationIdentifier="personView" id="YgD-ot-OKq">
                             <rect key="frame" x="0.0" y="0.0" width="375" height="192"/>
                             <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                             <subviews>
                                 <textField opaque="NO" clipsSubviews="YES" contentMode="scaleToFill" restorationIdentifier="firstNameField" contentHorizontalAlignment="left" contentVerticalAlignment="center" borderStyle="roundedRect" placeholder="First Name" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="Tln-WZ-m8Z">
-                                    <rect key="frame" x="100" y="28" width="263" height="30"/>
+                                    <rect key="frame" x="100" y="-60" width="263" height="30"/>
                                     <fontDescription key="fontDescription" type="system" pointSize="14"/>
                                     <textInputTraits key="textInputTraits" autocapitalizationType="sentences"/>
                                     <connections>
@@ -899,7 +899,7 @@
                                     </connections>
                                 </textField>
                                 <textField opaque="NO" clipsSubviews="YES" contentMode="scaleToFill" restorationIdentifier="emailaddressField" contentHorizontalAlignment="left" contentVerticalAlignment="center" borderStyle="roundedRect" placeholder="e-mail address" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="4YY-Cv-Jxg">
-                                    <rect key="frame" x="100" y="104" width="263" height="30"/>
+                                    <rect key="frame" x="100" y="16" width="263" height="30"/>
                                     <fontDescription key="fontDescription" type="system" pointSize="14"/>
                                     <textInputTraits key="textInputTraits" autocorrectionType="no" keyboardType="emailAddress"/>
                                     <connections>
@@ -907,7 +907,7 @@
                                     </connections>
                                 </textField>
                                 <button opaque="NO" contentMode="scaleToFill" restorationIdentifier="selectEmailAddressButton" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="Iac-jb-ETA">
-                                    <rect key="frame" x="160.66666666666666" y="142" width="141.99999999999997" height="30"/>
+                                    <rect key="frame" x="160.66666666666666" y="54" width="141.99999999999997" height="30"/>
                                     <fontDescription key="fontDescription" type="system" pointSize="15"/>
                                     <state key="normal" title="Select email address">
                                         <color key="titleShadowColor" red="0.5" green="0.5" blue="0.5" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
@@ -917,7 +917,7 @@
                                     </connections>
                                 </button>
                                 <textField opaque="NO" clipsSubviews="YES" contentMode="scaleToFill" restorationIdentifier="lastNameField" contentHorizontalAlignment="left" contentVerticalAlignment="center" borderStyle="roundedRect" placeholder="Last name" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="E8v-zR-iZl">
-                                    <rect key="frame" x="100" y="66" width="263" height="30"/>
+                                    <rect key="frame" x="100" y="-22" width="263" height="30"/>
                                     <fontDescription key="fontDescription" type="system" pointSize="14"/>
                                     <textInputTraits key="textInputTraits" autocapitalizationType="sentences"/>
                                     <connections>
@@ -925,7 +925,7 @@
                                     </connections>
                                 </textField>
                                 <imageView userInteractionEnabled="NO" contentMode="scaleAspectFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" translatesAutoresizingMaskIntoConstraints="NO" id="rBP-Ui-O3X" customClass="CircularImageView" customModule="We_all_pay" customModuleProvider="target">
-                                    <rect key="frame" x="12" y="16" width="80" height="80"/>
+                                    <rect key="frame" x="12" y="-72" width="80" height="80"/>
                                     <constraints>
                                         <constraint firstAttribute="width" constant="80" id="I30-ou-1iT"/>
                                         <constraint firstAttribute="width" secondItem="rBP-Ui-O3X" secondAttribute="height" multiplier="1:1" id="b3n-aU-ykT"/>
@@ -1011,7 +1011,7 @@
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <color key="backgroundColor" red="1" green="1" blue="1" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                         <inset key="separatorInset" minX="88" minY="0.0" maxX="0.0" maxY="0.0"/>
-                        <view key="tableHeaderView" contentMode="scaleToFill" restorationIdentifier="paymentHeaderView" id="msZ-li-bka" customClass="UITableViewHeaderFooterView">
+                        <view key="tableHeaderView" contentMode="scaleToFill" misplaced="YES" restorationIdentifier="paymentHeaderView" id="msZ-li-bka" customClass="UITableViewHeaderFooterView">
                             <rect key="frame" x="0.0" y="0.0" width="375" height="232"/>
                             <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                             <subviews>
@@ -1058,7 +1058,7 @@
                                     </connections>
                                 </button>
                                 <label opaque="NO" clipsSubviews="YES" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" horizontalCompressionResistancePriority="749" restorationIdentifier="dateLabel" text="Presence on payment" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="mh0-5W-fIa">
-                                    <rect key="frame" x="86" y="210" width="281" height="18"/>
+                                    <rect key="frame" x="86" y="122" width="281" height="18"/>
                                     <fontDescription key="fontDescription" type="system" pointSize="15"/>
                                     <color key="textColor" red="0.0" green="0.0" blue="0.0" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                                     <nil key="highlightedColor"/>
