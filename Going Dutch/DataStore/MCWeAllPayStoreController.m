@@ -19,10 +19,6 @@
 
 #import "We_all_pay-Swift.h"
 
-typedef NS_ENUM(BOOL, MCiCloudUse) {
-    iCloudIsNotUsed,
-    iCloudIsUsed
-};
 
 // This is the name of the WeAllPayStoreFile. It's inherited from the location where UIManagedDocumentStores it's database file.
 NSString * const MCWeAllPayStoreFileName = @"persistentStore";
@@ -31,7 +27,6 @@ NSString * const MCWeAllPayStoreDirectoryName = @"WeAllPayStore/StoreContent";
 NSString * const MCWeAllPayStoreModelName = @"WeAllPayStore";
 
 NSString * const MCiCloudWeAllPayStoreName = @"iCloud-WeAllPayStore";
-MCiCloudUse const isiCloudUsed = iCloudIsNotUsed;
 
 @interface MCWeAllPayStoreController ()
 
@@ -491,20 +486,8 @@ MCiCloudUse const isiCloudUsed = iCloudIsNotUsed;
     NSURL *storeURL = [directoryURL URLByAppendingPathComponent:MCWeAllPayStoreFileName];
     
     NSError *error = nil;
-    NSDictionary *storeOptions;
-    if (isiCloudUsed == iCloudIsUsed) {
-        NSLog(@"Store will be opened with iCloud support.");
-        storeOptions = @{NSInferMappingModelAutomaticallyOption: @YES,
-                         NSMigratePersistentStoresAutomaticallyOption: @YES,
-                         NSPersistentStoreUbiquitousContentNameKey: MCiCloudWeAllPayStoreName};
-    } else {
-        NSLog(@"Store will not be opened with iCloud support.");
-        storeOptions = @{NSInferMappingModelAutomaticallyOption: @YES,
-                         NSMigratePersistentStoresAutomaticallyOption: @YES};
-    }
-//    if ([NSPersistentStoreCoordinator removeUbiquitousContentAndPersistentStoreAtURL:storeURL options:storeOptions error:&error]) {
-//        NSLog(@"Error removing ubiquitous content: %@", error);
-//    }
+    NSDictionary *storeOptions = @{NSInferMappingModelAutomaticallyOption: @YES,
+                                   NSMigratePersistentStoresAutomaticallyOption: @YES};
     _persistentStoreCoordinator = [[NSPersistentStoreCoordinator alloc] initWithManagedObjectModel:[self managedObjectModel]];
     if (![_persistentStoreCoordinator addPersistentStoreWithType:NSSQLiteStoreType configuration:nil URL:storeURL options:storeOptions error:&error]) {
         /*
