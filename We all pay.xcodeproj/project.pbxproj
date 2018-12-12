@@ -97,7 +97,6 @@
 		3897159217902E35005BE03E /* MCSharedBillTableViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 3897159117902E35005BE03E /* MCSharedBillTableViewController.m */; };
 		38977E4D1B2A2591008484A4 /* MCSelectCategoryTableViewCell_iPhone.swift in Sources */ = {isa = PBXBuildFile; fileRef = 38977E4C1B2A2591008484A4 /* MCSelectCategoryTableViewCell_iPhone.swift */; };
 		38977E4F1B2A26D4008484A4 /* MCTwoLabelIscreenTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 38977E4E1B2A26D4008484A4 /* MCTwoLabelIscreenTableViewCell.swift */; };
-		38977E511B2A277A008484A4 /* MCOneLabelIScreenTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 38977E501B2A277A008484A4 /* MCOneLabelIScreenTableViewCell.swift */; };
 		38977E531B2A297E008484A4 /* MCWhoPaidHowMuchTableViewCell_iPhone.swift in Sources */ = {isa = PBXBuildFile; fileRef = 38977E521B2A297E008484A4 /* MCWhoPaidHowMuchTableViewCell_iPhone.swift */; };
 		38977E551B2A2AE3008484A4 /* MCSelectCurrencyTableViewCell_iPhone.swift in Sources */ = {isa = PBXBuildFile; fileRef = 38977E541B2A2AE3008484A4 /* MCSelectCurrencyTableViewCell_iPhone.swift */; };
 		38977E571B2A2C57008484A4 /* MCPaymentPresenceTableViewCell_iPhone.swift in Sources */ = {isa = PBXBuildFile; fileRef = 38977E561B2A2C57008484A4 /* MCPaymentPresenceTableViewCell_iPhone.swift */; };
@@ -405,7 +404,6 @@
 		3897159117902E35005BE03E /* MCSharedBillTableViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = MCSharedBillTableViewController.m; path = ViewControllers/MCSharedBillTableViewController.m; sourceTree = "<group>"; };
 		38977E4C1B2A2591008484A4 /* MCSelectCategoryTableViewCell_iPhone.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = MCSelectCategoryTableViewCell_iPhone.swift; sourceTree = "<group>"; };
 		38977E4E1B2A26D4008484A4 /* MCTwoLabelIscreenTableViewCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = MCTwoLabelIscreenTableViewCell.swift; sourceTree = "<group>"; };
-		38977E501B2A277A008484A4 /* MCOneLabelIScreenTableViewCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = MCOneLabelIScreenTableViewCell.swift; sourceTree = "<group>"; };
 		38977E521B2A297E008484A4 /* MCWhoPaidHowMuchTableViewCell_iPhone.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = MCWhoPaidHowMuchTableViewCell_iPhone.swift; sourceTree = "<group>"; };
 		38977E541B2A2AE3008484A4 /* MCSelectCurrencyTableViewCell_iPhone.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = MCSelectCurrencyTableViewCell_iPhone.swift; sourceTree = "<group>"; };
 		38977E561B2A2C57008484A4 /* MCPaymentPresenceTableViewCell_iPhone.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = MCPaymentPresenceTableViewCell_iPhone.swift; sourceTree = "<group>"; };
@@ -1052,7 +1050,6 @@
 				38977E561B2A2C57008484A4 /* MCPaymentPresenceTableViewCell_iPhone.swift */,
 				38977E541B2A2AE3008484A4 /* MCSelectCurrencyTableViewCell_iPhone.swift */,
 				38977E521B2A297E008484A4 /* MCWhoPaidHowMuchTableViewCell_iPhone.swift */,
-				38977E501B2A277A008484A4 /* MCOneLabelIScreenTableViewCell.swift */,
 				38977E4E1B2A26D4008484A4 /* MCTwoLabelIscreenTableViewCell.swift */,
 				38977E4C1B2A2591008484A4 /* MCSelectCategoryTableViewCell_iPhone.swift */,
 			);
@@ -1684,7 +1681,6 @@
 				382E7BDD17E5E57500A1040A /* MCReturnPaymentViewController.m in Sources */,
 				383E0C5D186737EB00AA688D /* MCSharedBillPageViewController.m in Sources */,
 				381179D01A82D1FC00020538 /* MailComposer.swift in Sources */,
-				38977E511B2A277A008484A4 /* MCOneLabelIScreenTableViewCell.swift in Sources */,
 				38B08C591B383A4C00FB84B1 /* MCStoreInterface.swift in Sources */,
 				38B08C571B38382E00FB84B1 /* MCTableEmptyMessage_iPad.swift in Sources */,
 				388E90331D708E32004CD257 /* SolutionTableViewController_iPad.swift in Sources */,
