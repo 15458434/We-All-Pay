@@ -350,7 +350,6 @@ MCiCloudUse const isiCloudUsed = iCloudIsNotUsed;
     [dc addObserver:self selector:@selector(storeDidSave:) name:NSManagedObjectContextDidSaveNotification object:_backgroundThreadContext];
     [dc addObserver:self selector:@selector(storeWillBeSwapped:) name:NSPersistentStoreCoordinatorStoresWillChangeNotification object:_persistentStoreCoordinator];
     [dc addObserver:self selector:@selector(storeDidSwap:) name:NSPersistentStoreCoordinatorStoresDidChangeNotification object:_persistentStoreCoordinator];
-    [dc addObserver:self selector:@selector(storedidUpdateFromUbiquitousContainer:) name:NSPersistentStoreDidImportUbiquitousContentChangesNotification object:_persistentStoreCoordinator];
 }
 
 - (void)stopRespondingToStorechangeNotifications
@@ -418,19 +417,6 @@ MCiCloudUse const isiCloudUsed = iCloudIsNotUsed;
 #ifdef DEBUG
     NSLog(@"MCWeAllPayStoreController: Store did swap.");
 #endif
-}
-
-- (void)storedidUpdateFromUbiquitousContainer:(NSNotification *)notification
-{
-#ifdef DEBUG
-    NSLog(@"MCWeAllPayStoreController: Store did update from Ubiquitous Container.");
-#endif
-    [_mainThreadContext performBlockAndWait:^{
-        [self->_mainThreadContext mergeChangesFromContextDidSaveNotification:notification];
-    }];
-    [_backgroundThreadContext performBlockAndWait:^{
-        [self->_backgroundThreadContext mergeChangesFromContextDidSaveNotification:notification];
-    }];
 }
 
 
