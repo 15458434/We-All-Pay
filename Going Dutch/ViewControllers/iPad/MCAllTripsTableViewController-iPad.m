@@ -86,8 +86,7 @@
 
 - (void)prepareUserActivity
 {
-    NSOperatingSystemVersion ios9 = (NSOperatingSystemVersion){9, 0, 0};
-    if ([[NSProcessInfo processInfo] isOperatingSystemAtLeastVersion:ios9]) {
+    if (@available(iOS 9.0, *)) {
         NSUserActivity *activity = [[NSUserActivity alloc] initWithActivityType:@"com.GreenHair.We-all-pay.SharingExpenses"];
         activity.title = NSLocalizedString(@"We all pay - Sharing Expenses and bill splitting made easy", @"The title of the app");
         NSString *keywordsFilePath = [[NSBundle mainBundle] pathForResource:@"We all pay keywords" ofType:@"plist"];

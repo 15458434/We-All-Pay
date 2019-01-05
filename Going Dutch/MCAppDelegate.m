@@ -97,10 +97,9 @@
                                             nil];
     [colorDictionary setObject:addressBookSearchBarCancelButtonColor forKey:NSForegroundColorAttributeName];
     [addressBookSearchBarCancelButton setTitleTextAttributes:colorDictionary forState:UIControlStateNormal];
-    NSOperatingSystemVersion iOS11 = (NSOperatingSystemVersion){11,0,0};
-    if ([[NSProcessInfo processInfo] isOperatingSystemAtLeastVersion:iOS11]) {
+    if (@available(iOS 11.0, *)) {
         [[UIButton appearanceWhenContainedInInstancesOfClasses:@[NSClassFromString(@"UISwipeActionPullView")]] setTitleColor:[UIColor whiteColor] forState:UIControlStateNormal];
-    } 
+    }
     
     // Set the sectionIndex color in the people picker
     [[UITableView appearance] setSectionIndexColor:[Colors getButtonColor]];
