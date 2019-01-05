@@ -130,9 +130,7 @@ typedef NS_ENUM(BOOL, MCXRateStatus) {
             return;
         }
         // Workaround for a bug in iOS 9. Call reloadData before calling beginUpdates
-        NSOperatingSystemVersion ios9 = (NSOperatingSystemVersion){9, 0, 0};
-        if ([[NSProcessInfo processInfo] isOperatingSystemAtLeastVersion:ios9]) {
-            
+        if (@available(iOS 9.0, *)) {
             BOOL shouldReloadData = YES;
             NSInteger numberOfSections = [self.tableView.dataSource numberOfSectionsInTableView:self.tableView];
             for (NSInteger section = 0; section < numberOfSections; section++)
@@ -145,7 +143,7 @@ typedef NS_ENUM(BOOL, MCXRateStatus) {
                 }
             }
             
-            if (shouldReloadData) 
+            if (shouldReloadData)
             {
                 [self.tableView reloadData];
             }
