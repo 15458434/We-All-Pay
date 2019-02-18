@@ -40,7 +40,6 @@ class ContactsDataReceiver: NSObject, ThisEventReadOnly, CNContactPickerDelegate
     // MARK: CNContactPickerDelegate
     
     func contactPicker(_ picker: CNContactPickerViewController, didSelect contact: CNContact) {
-        debugPrint("A person is received from the Contacts Framework: \(CNContactFormatter.string(from: contact, style: .fullName)!)")
         let tonightsBillID = event.objectID
         let backgroundContext = MCWeAllPayStoreController.defaultStore().backgroundThreadContext!
         
