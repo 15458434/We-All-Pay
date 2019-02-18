@@ -27,13 +27,13 @@ import CoreData
             return
         }
         let notificationCenter = NotificationCenter.default
-        self.willSaveObserver = notificationCenter.addObserver(forName: Notification.Name.NSManagedObjectContextWillSave, object: context, queue: nil, using: { [unowned self] (notification) in
+        self.willSaveObserver = notificationCenter.addObserver(forName: Notification.Name.NSManagedObjectContextWillSave, object: context, queue: nil, using: { [weak self] (notification) in
             debugPrint("will save observed")
-            self.isSaving = true
+            self?.isSaving = true
         })
-        self.didSaveObserver = notificationCenter.addObserver(forName: Notification.Name.NSManagedObjectContextDidSave, object: context, queue: nil, using: { [unowned self] (notification) in
+        self.didSaveObserver = notificationCenter.addObserver(forName: Notification.Name.NSManagedObjectContextDidSave, object: context, queue: nil, using: { [weak self] (notification) in
             debugPrint("did save observed")
-            self.isSaving = false
+            self?.isSaving = false
             UIApplication.shared.endBackgroundTask(identifier)
         })
         try? context.save()
