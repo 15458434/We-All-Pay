@@ -9,7 +9,7 @@
 import UIKit
 
 public extension UIColor {
-    public class func eightBit(_ red: UInt8, green: UInt8, blue: UInt8, alpha: UInt8) -> UIColor {
+    class func eightBit(_ red: UInt8, green: UInt8, blue: UInt8, alpha: UInt8) -> UIColor {
         func convert(_ i: UInt8) -> CGFloat {
             return CGFloat(i)/255.0
         }
@@ -19,7 +19,7 @@ public extension UIColor {
         return UIColor(red: convert(red), green: convert(green), blue: convert(blue), alpha: convertAlpha(alpha))
     }
     
-    public class func eightBit(_ white: UInt8, alpha: UInt8) -> UIColor {
+    class func eightBit(_ white: UInt8, alpha: UInt8) -> UIColor {
         func convert(_ i: UInt8) -> CGFloat {
             return CGFloat(i)/255.0
         }
