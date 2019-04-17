@@ -242,9 +242,9 @@ class SelectCurrencyTableViewController: UITableViewController, UISearchResultsU
         cell.currencySymbolLabel.text = thisCellsCurrency.symbol
         
         if currencyUpdateModel.currencyCode == thisCellsCurrency.code {
-            cell.accessoryType = UITableViewCellAccessoryType.checkmark
+            cell.accessoryType = UITableViewCell.AccessoryType.checkmark
         } else {
-            cell.accessoryType = UITableViewCellAccessoryType.none
+            cell.accessoryType = UITableViewCell.AccessoryType.none
         }
         
         return cell
