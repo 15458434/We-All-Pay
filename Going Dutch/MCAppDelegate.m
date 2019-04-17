@@ -45,23 +45,6 @@
     [FIRAnalytics logEventWithName:@"Start_counter" parameters:@{@"Counter Value": @(result)}];
 }
 
-- (void)removeOldCurrencyStore
-{
-    NSOperationQueue *myQueue = [[NSOperationQueue alloc] init];
-    myQueue.name = @"removeOldCurrencyStore";
-    [myQueue addOperationWithBlock:^{
-        NSURL *documentsDirectory = [[[NSFileManager defaultManager] URLsForDirectory:NSDocumentDirectory inDomains:NSUserDomainMask] lastObject];
-        NSFileManager *fileManager = [NSFileManager defaultManager];
-        NSString *directory = [documentsDirectory.path stringByAppendingPathComponent:@"XRCurrency"];
-        NSError *error;
-        BOOL success = [fileManager removeItemAtPath:directory error:&error];
-        if (!success || error) {
-            // something went wrong
-            NSLog(@"Error deleting XRCurrency: %@", error);
-        }
-    }];
-}
-
 - (void)executeOnlyOnceDuringStartup {
     // Override point for customization after application launch.
     NSOperationQueue *someQueue = [[NSOperationQueue alloc] init];
@@ -220,8 +203,6 @@
     NSManagedObjectContext *context = [[MCWeAllPayStoreController defaultStore] mainThreadContext];
     self.saveHandlerOnDidEnterBackground = [[MCCoreDataSaveHandlerWhenEnteringBackground alloc] initWithContext:context];
     [self.saveHandlerOnDidEnterBackground saveAndEndBackgroundTaskWithIdentifier:taskIdentifier];
-    
-    [self removeOldCurrencyStore];
 }
 
 - (void)applicationWillEnterForeground:(UIApplication *)application
