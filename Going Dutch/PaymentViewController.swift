@@ -106,11 +106,11 @@ enum CancelButtonPressed {
         let categoryObject = CategoryPictureStoreController.sharedController.pictureObjects[categoryId]
         if categoryId > 0 {
             categoryImage.image = categoryObject.largePicture
-            categoryButton.setTitle(categoryObject.categoryDescription, for: UIControlState())
+            categoryButton.setTitle(categoryObject.categoryDescription, for: UIControl.State())
         } else {
             categoryImage.image = nil
             let title = NSLocalizedString("Select Category", comment: "Text of the payment category selection button")
-            categoryButton.setTitle(title, for: UIControlState())
+            categoryButton.setTitle(title, for: UIControl.State())
         }
         categoryButton.sizeToFit()
     }
@@ -137,7 +137,7 @@ enum CancelButtonPressed {
             selectButton.invalidateIntrinsicContentSize()
             return
         }
-        selectButton.setTitle(payingPerson.getFullName, for: UIControlState())
+        selectButton.setTitle(payingPerson.getFullName, for: UIControl.State())
         selectButton.invalidateIntrinsicContentSize()
     }
     

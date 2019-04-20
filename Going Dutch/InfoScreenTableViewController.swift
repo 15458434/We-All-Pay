@@ -79,7 +79,7 @@ class InfoScreenTableViewController: UITableViewController, MFMailComposeViewCon
         Analytics.logEvent("Applying Pro version", parameters: nil)
         OperationQueue.main.addOperation { () -> Void in
             self.tableView.beginUpdates()
-            self.tableView.deleteRows(at: [IndexPath(row: 0, section: 0), IndexPath(row: 1, section: 0)], with: UITableViewRowAnimation.automatic)
+            self.tableView.deleteRows(at: [IndexPath(row: 0, section: 0), IndexPath(row: 1, section: 0)], with: UITableView.RowAnimation.automatic)
             self.tableView.endUpdates()
             
             var title: String!
@@ -175,7 +175,7 @@ class InfoScreenTableViewController: UITableViewController, MFMailComposeViewCon
     
     // MARK: UI Table View Delegate
     override func tableView(_ tableView: UITableView, heightForRowAt indexPath: IndexPath) -> CGFloat {
-        return UITableViewAutomaticDimension
+        return UITableView.automaticDimension
     }
     
     override func tableView(_ tableView: UITableView, estimatedHeightForRowAt indexPath: IndexPath) -> CGFloat {
