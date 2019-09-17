@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <Scheme
-   LastUpgradeVersion = "1020"
+   LastUpgradeVersion = "1030"
    version = "1.7">
    <BuildAction
       parallelizeBuildables = "YES"
@@ -17,34 +17,6 @@
                BlueprintIdentifier = "38572AD1169D437B00969C62"
                BuildableName = "We all pay.app"
                BlueprintName = "We all pay"
-               ReferencedContainer = "container:We all pay.xcodeproj">
-            </BuildableReference>
-         </BuildActionEntry>
-         <BuildActionEntry
-            buildForTesting = "YES"
-            buildForRunning = "YES"
-            buildForProfiling = "NO"
-            buildForArchiving = "NO"
-            buildForAnalyzing = "YES">
-            <BuildableReference
-               BuildableIdentifier = "primary"
-               BlueprintIdentifier = "38E174911B009E45009F31E3"
-               BuildableName = "CurrencyExchangeRatesTests.xctest"
-               BlueprintName = "CurrencyExchangeRatesTests"
-               ReferencedContainer = "container:We all pay.xcodeproj">
-            </BuildableReference>
-         </BuildActionEntry>
-         <BuildActionEntry
-            buildForTesting = "YES"
-            buildForRunning = "YES"
-            buildForProfiling = "NO"
-            buildForArchiving = "NO"
-            buildForAnalyzing = "YES">
-            <BuildableReference
-               BuildableIdentifier = "primary"
-               BlueprintIdentifier = "380D61091B299B93006F8AE4"
-               BuildableName = "We All Pay CustomViewsTests.xctest"
-               BlueprintName = "We All Pay CustomViewsTests"
                ReferencedContainer = "container:We all pay.xcodeproj">
             </BuildableReference>
          </BuildActionEntry>
@@ -74,41 +46,6 @@
             </LocationScenarioReference>
          </TestableReference>
          <TestableReference
-            skipped = "YES">
-            <BuildableReference
-               BuildableIdentifier = "primary"
-               BlueprintIdentifier = "38FE87DE195721670008EE74"
-               BuildableName = "EMCTests.xctest"
-               BlueprintName = "EMCTests"
-               ReferencedContainer = "container:We all pay.xcodeproj">
-            </BuildableReference>
-            <SkippedTests>
-               <Test
-                  Identifier = "X_RatesTests">
-               </Test>
-            </SkippedTests>
-         </TestableReference>
-         <TestableReference
-            skipped = "NO">
-            <BuildableReference
-               BuildableIdentifier = "primary"
-               BlueprintIdentifier = "38E174911B009E45009F31E3"
-               BuildableName = "CurrencyExchangeRatesTests.xctest"
-               BlueprintName = "CurrencyExchangeRatesTests"
-               ReferencedContainer = "container:We all pay.xcodeproj">
-            </BuildableReference>
-         </TestableReference>
-         <TestableReference
-            skipped = "NO">
-            <BuildableReference
-               BuildableIdentifier = "primary"
-               BlueprintIdentifier = "380D61091B299B93006F8AE4"
-               BuildableName = "We All Pay CustomViewsTests.xctest"
-               BlueprintName = "We All Pay CustomViewsTests"
-               ReferencedContainer = "container:We all pay.xcodeproj">
-            </BuildableReference>
-         </TestableReference>
-         <TestableReference
             skipped = "NO">
             <BuildableReference
                BuildableIdentifier = "primary"
@@ -135,6 +72,16 @@
                BlueprintIdentifier = "38D6A3C41C73DDBF00968BB2"
                BuildableName = "RateMeControllerForiOSTests.xctest"
                BlueprintName = "RateMeControllerForiOSTests"
+               ReferencedContainer = "container:We all pay.xcodeproj">
+            </BuildableReference>
+         </TestableReference>
+         <TestableReference
+            skipped = "NO">
+            <BuildableReference
+               BuildableIdentifier = "primary"
+               BlueprintIdentifier = "380C92B122A9657B000BD574"
+               BuildableName = "Screenshots.xctest"
+               BlueprintName = "Screenshots"
                ReferencedContainer = "container:We all pay.xcodeproj">
             </BuildableReference>
          </TestableReference>
