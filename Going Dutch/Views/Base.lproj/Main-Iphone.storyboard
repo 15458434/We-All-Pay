@@ -1,11 +1,11 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="14460.31" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" useSafeAreas="YES" colorMatched="YES" initialViewController="2iV-RF-WWF">
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="14490.70" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" useSafeAreas="YES" colorMatched="YES" initialViewController="2iV-RF-WWF">
     <device id="retina5_9" orientation="portrait">
         <adaptation id="fullscreen"/>
     </device>
     <dependencies>
         <deployment identifier="iOS"/>
-        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="14460.20"/>
+        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="14490.49"/>
         <capability name="Safe area layout guides" minToolsVersion="9.0"/>
         <capability name="documents saved in the Xcode 8 format" minToolsVersion="8.0"/>
     </dependencies>
@@ -400,7 +400,7 @@
                                     <autoresizingMask key="autoresizingMask"/>
                                     <subviews>
                                         <stackView opaque="NO" contentMode="scaleToFill" distribution="equalSpacing" alignment="firstBaseline" spacing="6" translatesAutoresizingMaskIntoConstraints="NO" id="oy1-ge-dQV">
-                                            <rect key="frame" x="20" y="11.000000000000002" width="335" height="22.666666666666671"/>
+                                            <rect key="frame" x="20" y="11" width="335" height="22.666666666666671"/>
                                             <subviews>
                                                 <label clipsSubviews="YES" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" restorationIdentifier="firstLabel" text="Label" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" minimumScaleFactor="0.5" translatesAutoresizingMaskIntoConstraints="NO" id="JaE-Fp-cO9">
                                                     <rect key="frame" x="0.0" y="2.3333333333333339" width="41.333333333333336" height="20.333333333333329"/>
@@ -566,7 +566,7 @@
                                     <autoresizingMask key="autoresizingMask"/>
                                     <subviews>
                                         <stackView opaque="NO" contentMode="scaleToFill" distribution="equalSpacing" alignment="firstBaseline" spacing="6" translatesAutoresizingMaskIntoConstraints="NO" id="oCV-gA-pdD">
-                                            <rect key="frame" x="20" y="11.000000000000002" width="335" height="22.666666666666671"/>
+                                            <rect key="frame" x="20" y="11" width="335" height="22.666666666666671"/>
                                             <subviews>
                                                 <label opaque="NO" clipsSubviews="YES" userInteractionEnabled="NO" contentMode="left" verticalCompressionResistancePriority="749" text="totalLabel" lineBreakMode="tailTruncation" numberOfLines="0" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="MHu-fw-WGA">
                                                     <rect key="frame" x="0.0" y="2.3333333333333339" width="164.66666666666666" height="20.333333333333329"/>
@@ -614,7 +614,7 @@
                                     <autoresizingMask key="autoresizingMask"/>
                                     <subviews>
                                         <stackView opaque="NO" contentMode="scaleToFill" distribution="equalSpacing" alignment="firstBaseline" spacing="6" translatesAutoresizingMaskIntoConstraints="NO" id="sNw-Vm-yDH">
-                                            <rect key="frame" x="20" y="11.000000000000002" width="335" height="22.666666666666671"/>
+                                            <rect key="frame" x="20" y="11" width="335" height="22.666666666666671"/>
                                             <subviews>
                                                 <label opaque="NO" clipsSubviews="YES" userInteractionEnabled="NO" contentMode="left" verticalHuggingPriority="251" horizontalCompressionResistancePriority="749" text="whoOwesWhoLabel" lineBreakMode="tailTruncation" numberOfLines="0" baselineAdjustment="alignBaselines" adjustsLetterSpacingToFitWidth="YES" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="udH-oV-muc">
                                                     <rect key="frame" x="0.0" y="2.3333333333333339" width="164.66666666666666" height="20.333333333333329"/>
@@ -661,7 +661,7 @@
                                     <autoresizingMask key="autoresizingMask"/>
                                     <subviews>
                                         <stackView opaque="NO" contentMode="scaleToFill" distribution="equalSpacing" alignment="firstBaseline" spacing="6" baselineRelativeArrangement="YES" translatesAutoresizingMaskIntoConstraints="NO" id="yyg-Cl-3vR">
-                                            <rect key="frame" x="20" y="11.000000000000002" width="335" height="22.666666666666671"/>
+                                            <rect key="frame" x="20" y="11" width="335" height="22.666666666666671"/>
                                             <subviews>
                                                 <label opaque="NO" clipsSubviews="YES" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" horizontalCompressionResistancePriority="250" restorationIdentifier="whoPaidLabel" text="whoPaidHowMuchLabel" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="1y3-o3-jkI">
                                                     <rect key="frame" x="0.0" y="2.3333333333333339" width="182" height="20.333333333333329"/>
@@ -886,28 +886,28 @@
                         <rect key="frame" x="0.0" y="0.0" width="375" height="724"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <color key="backgroundColor" red="1" green="1" blue="1" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
-                        <view key="tableHeaderView" contentMode="scaleToFill" misplaced="YES" restorationIdentifier="personView" id="YgD-ot-OKq">
+                        <view key="tableHeaderView" contentMode="scaleToFill" restorationIdentifier="personView" id="YgD-ot-OKq">
                             <rect key="frame" x="0.0" y="0.0" width="375" height="192"/>
                             <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                             <subviews>
                                 <textField opaque="NO" clipsSubviews="YES" contentMode="scaleToFill" restorationIdentifier="firstNameField" contentHorizontalAlignment="left" contentVerticalAlignment="center" borderStyle="roundedRect" placeholder="First Name" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="Tln-WZ-m8Z">
-                                    <rect key="frame" x="100" y="-60" width="263" height="30"/>
+                                    <rect key="frame" x="100" y="28" width="263" height="30"/>
                                     <fontDescription key="fontDescription" type="system" pointSize="14"/>
-                                    <textInputTraits key="textInputTraits" autocapitalizationType="sentences"/>
+                                    <textInputTraits key="textInputTraits" autocapitalizationType="words" autocorrectionType="no" textContentType="name"/>
                                     <connections>
                                         <outlet property="delegate" destination="eE2-xD-YRT" id="fIC-1D-94P"/>
                                     </connections>
                                 </textField>
                                 <textField opaque="NO" clipsSubviews="YES" contentMode="scaleToFill" restorationIdentifier="emailaddressField" contentHorizontalAlignment="left" contentVerticalAlignment="center" borderStyle="roundedRect" placeholder="e-mail address" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="4YY-Cv-Jxg">
-                                    <rect key="frame" x="100" y="16" width="263" height="30"/>
+                                    <rect key="frame" x="100" y="104" width="263" height="30"/>
                                     <fontDescription key="fontDescription" type="system" pointSize="14"/>
-                                    <textInputTraits key="textInputTraits" autocorrectionType="no" keyboardType="emailAddress"/>
+                                    <textInputTraits key="textInputTraits" autocorrectionType="no" keyboardType="emailAddress" textContentType="email"/>
                                     <connections>
                                         <outlet property="delegate" destination="eE2-xD-YRT" id="huk-Mq-K5v"/>
                                     </connections>
                                 </textField>
                                 <button opaque="NO" contentMode="scaleToFill" restorationIdentifier="selectEmailAddressButton" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="Iac-jb-ETA">
-                                    <rect key="frame" x="160.66666666666666" y="54" width="141.99999999999997" height="30"/>
+                                    <rect key="frame" x="160.66666666666666" y="142" width="141.99999999999997" height="30"/>
                                     <fontDescription key="fontDescription" type="system" pointSize="15"/>
                                     <state key="normal" title="Select email address">
                                         <color key="titleShadowColor" red="0.5" green="0.5" blue="0.5" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
@@ -917,15 +917,15 @@
                                     </connections>
                                 </button>
                                 <textField opaque="NO" clipsSubviews="YES" contentMode="scaleToFill" restorationIdentifier="lastNameField" contentHorizontalAlignment="left" contentVerticalAlignment="center" borderStyle="roundedRect" placeholder="Last name" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="E8v-zR-iZl">
-                                    <rect key="frame" x="100" y="-22" width="263" height="30"/>
+                                    <rect key="frame" x="100" y="66" width="263" height="30"/>
                                     <fontDescription key="fontDescription" type="system" pointSize="14"/>
-                                    <textInputTraits key="textInputTraits" autocapitalizationType="sentences"/>
+                                    <textInputTraits key="textInputTraits" autocapitalizationType="sentences" autocorrectionType="no" textContentType="family-name"/>
                                     <connections>
                                         <outlet property="delegate" destination="eE2-xD-YRT" id="1yp-o6-4gL"/>
                                     </connections>
                                 </textField>
                                 <imageView userInteractionEnabled="NO" contentMode="scaleAspectFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" translatesAutoresizingMaskIntoConstraints="NO" id="rBP-Ui-O3X" customClass="CircularImageView" customModule="We_all_pay" customModuleProvider="target">
-                                    <rect key="frame" x="12" y="-72" width="80" height="80"/>
+                                    <rect key="frame" x="12" y="16" width="80" height="80"/>
                                     <constraints>
                                         <constraint firstAttribute="width" constant="80" id="I30-ou-1iT"/>
                                         <constraint firstAttribute="width" secondItem="rBP-Ui-O3X" secondAttribute="height" multiplier="1:1" id="b3n-aU-ykT"/>
