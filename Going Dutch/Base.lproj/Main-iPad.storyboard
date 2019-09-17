@@ -1,11 +1,11 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="14460.31" targetRuntime="iOS.CocoaTouch.iPad" propertyAccessControl="none" useAutolayout="YES" colorMatched="YES" initialViewController="zVB-NT-1S4">
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="14490.70" targetRuntime="iOS.CocoaTouch.iPad" propertyAccessControl="none" useAutolayout="YES" colorMatched="YES" initialViewController="zVB-NT-1S4">
     <device id="ipad9_7" orientation="portrait">
         <adaptation id="fullscreen"/>
     </device>
     <dependencies>
         <deployment identifier="iOS"/>
-        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="14460.20"/>
+        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="14490.49"/>
         <capability name="documents saved in the Xcode 8 format" minToolsVersion="8.0"/>
     </dependencies>
     <scenes>
@@ -446,12 +446,12 @@
                         <rect key="frame" x="0.0" y="0.0" width="540" height="570"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <color key="backgroundColor" red="1" green="1" blue="1" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
-                        <view key="tableHeaderView" contentMode="scaleToFill" misplaced="YES" restorationIdentifier="personHeaderView" id="8Td-nC-R1B" customClass="UITableViewHeaderFooterView">
+                        <view key="tableHeaderView" contentMode="scaleToFill" restorationIdentifier="personHeaderView" id="8Td-nC-R1B" customClass="UITableViewHeaderFooterView">
                             <rect key="frame" x="0.0" y="0.0" width="540" height="276"/>
                             <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                             <subviews>
                                 <view contentMode="scaleToFill" restorationIdentifier="tapableBackground" translatesAutoresizingMaskIntoConstraints="NO" id="W8e-8y-G2k" customClass="UIControl">
-                                    <rect key="frame" x="0.0" y="0.0" width="540" height="0.0"/>
+                                    <rect key="frame" x="0.0" y="0.0" width="540" height="276"/>
                                     <subviews>
                                         <button contentMode="scaleToFill" restorationIdentifier="selectemailAddressButton" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="Z0f-Hu-kcp">
                                             <rect key="frame" x="263" y="186" width="142" height="30"/>
@@ -472,7 +472,7 @@
                                             <rect key="frame" x="148" y="72" width="372" height="30"/>
                                             <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                             <fontDescription key="fontDescription" type="system" pointSize="14"/>
-                                            <textInputTraits key="textInputTraits" autocapitalizationType="sentences"/>
+                                            <textInputTraits key="textInputTraits" autocapitalizationType="sentences" autocorrectionType="no" textContentType="name"/>
                                             <connections>
                                                 <outlet property="delegate" destination="ULr-7Y-8VH" id="qs1-2T-gw7"/>
                                             </connections>
@@ -481,7 +481,7 @@
                                             <rect key="frame" x="148" y="110" width="372" height="30"/>
                                             <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                             <fontDescription key="fontDescription" type="system" pointSize="14"/>
-                                            <textInputTraits key="textInputTraits" autocapitalizationType="sentences"/>
+                                            <textInputTraits key="textInputTraits" autocapitalizationType="sentences" autocorrectionType="no" textContentType="additional-name"/>
                                             <connections>
                                                 <outlet property="delegate" destination="ULr-7Y-8VH" id="Ov4-sg-a0L"/>
                                             </connections>
@@ -490,7 +490,7 @@
                                             <rect key="frame" x="148" y="148" width="372" height="30"/>
                                             <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                             <fontDescription key="fontDescription" type="system" pointSize="14"/>
-                                            <textInputTraits key="textInputTraits" keyboardType="emailAddress"/>
+                                            <textInputTraits key="textInputTraits" autocorrectionType="no" keyboardType="emailAddress" textContentType="email"/>
                                             <connections>
                                                 <outlet property="delegate" destination="ULr-7Y-8VH" id="KHm-EH-bnf"/>
                                             </connections>
