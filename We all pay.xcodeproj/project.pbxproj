@@ -298,7 +298,7 @@
 		380700B41A1B785C00C7FB37 /* We all pay database dutch version 4.xcappdata */ = {isa = PBXFileReference; lastKnownFileType = wrapper; path = "We all pay database dutch version 4.xcappdata"; sourceTree = "<group>"; };
 		380C48151BE1330E00C82B0F /* CurrencyFormatter.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = CurrencyFormatter.swift; sourceTree = "<group>"; };
 		381179CE1A82D1FC00020538 /* We all pay Tests-Bridging-Header.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; name = "We all pay Tests-Bridging-Header.h"; path = "../Going Dutch/We all pay Tests-Bridging-Header.h"; sourceTree = "<group>"; };
-		381179CF1A82D1FC00020538 /* MailComposer.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = MailComposer.swift; path = Misc/MailComposer.swift; sourceTree = "<group>"; };
+		381179CF1A82D1FC00020538 /* MailComposer.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = MailComposer.swift; sourceTree = "<group>"; };
 		381275FE1BBD84650004C8C2 /* InfoScreenTableViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = InfoScreenTableViewController.swift; sourceTree = "<group>"; };
 		381276001BBD8F110004C8C2 /* nl */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = nl; path = nl.lproj/MainInterface.strings; sourceTree = "<group>"; };
 		381276011BBD8F120004C8C2 /* nl */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = nl; path = nl.lproj/InfoPlist.strings; sourceTree = "<group>"; };
@@ -311,8 +311,8 @@
 		3813D8941D8983C900E6B7A4 /* CircularImageView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; lineEnding = 0; path = CircularImageView.swift; sourceTree = "<group>"; xcLanguageSpecificationIdentifier = xcode.lang.swift; };
 		38156B2818706B750047AEEF /* nl */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.strings; lineEnding = 0; name = nl; path = nl.lproj/Localizable.strings; sourceTree = "<group>"; };
 		38156B2918706BAC0047AEEF /* Base */ = {isa = PBXFileReference; fileEncoding = 10; lastKnownFileType = text.plist.strings; lineEnding = 0; name = Base; path = Base.lproj/Localizable.strings; sourceTree = "<group>"; };
-		3825A82219990BA400A8885D /* UIViewController+WeAllPayStore.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = "UIViewController+WeAllPayStore.h"; path = "Misc/UIViewController+WeAllPayStore.h"; sourceTree = "<group>"; };
-		3825A82319990BA400A8885D /* UIViewController+WeAllPayStore.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = "UIViewController+WeAllPayStore.m"; path = "Misc/UIViewController+WeAllPayStore.m"; sourceTree = "<group>"; };
+		3825A82219990BA400A8885D /* UIViewController+WeAllPayStore.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "UIViewController+WeAllPayStore.h"; sourceTree = "<group>"; };
+		3825A82319990BA400A8885D /* UIViewController+WeAllPayStore.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "UIViewController+WeAllPayStore.m"; sourceTree = "<group>"; };
 		3825A825199A2A5500A8885D /* MCTonightsBillTransfer.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = MCTonightsBillTransfer.m; path = ViewControllers/MCTonightsBillTransfer.m; sourceTree = "<group>"; };
 		3829AD0E178B41320025969D /* WeAllPayStore.xcdatamodel */ = {isa = PBXFileReference; lastKnownFileType = wrapper.xcdatamodel; path = WeAllPayStore.xcdatamodel; sourceTree = "<group>"; };
 		382B76E01C398249000C203A /* CurrencyConverter.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = CurrencyConverter.framework; sourceTree = BUILT_PRODUCTS_DIR; };
@@ -745,7 +745,7 @@
 				38572AF4169D439E00969C62 /* Views */,
 				38572AF3169D438E00969C62 /* ViewControllers */,
 				3899D3F5194F43C200893323 /* In-App Purchase */,
-				38CC9814183D520C006EC35D /* MC SDK */,
+				38FE5A062346943400BBA722 /* Miscellaneous */,
 				38572AE5169D437B00969C62 /* MCAppDelegate.h */,
 				38572AE6169D437B00969C62 /* MCAppDelegate.m */,
 				3889497F211C2DDE00BDF9CD /* CoreDataSaveHandlerWhenEnteringBackground.swift */,
@@ -959,29 +959,6 @@
 			name = "Supporting Files";
 			sourceTree = "<group>";
 		};
-		38CC9814183D520C006EC35D /* MC SDK */ = {
-			isa = PBXGroup;
-			children = (
-				38B88E2D1D81FF6E0069A44D /* MailComposeViewController.swift */,
-				3812760B1BBE74EF0004C8C2 /* UIViewControllerExtension.swift */,
-				381179CF1A82D1FC00020538 /* MailComposer.swift */,
-				38490D2E1D7056D100A297BA /* ShowMailViewProtocol.swift */,
-				380C48151BE1330E00C82B0F /* CurrencyFormatter.swift */,
-				38CDE8FE17135B6300387CAA /* MCTools.h */,
-				38CDE8FF17135B6300387CAA /* MCTools.m */,
-				384EC9131BC3E78C00A80799 /* Colors.swift */,
-				384EC9151BC3EA4C00A80799 /* UIColorExtension.swift */,
-				381276091BBE74520004C8C2 /* UIViewExtension.swift */,
-				3825A82219990BA400A8885D /* UIViewController+WeAllPayStore.h */,
-				3825A82319990BA400A8885D /* UIViewController+WeAllPayStore.m */,
-				388A32741C11EA1400F7459C /* WhoPayingUserDefaultsStoreInterfaceWeAllPayExtension.swift */,
-				38B7E9511D86F8F600400E72 /* ContactsDataReceiver.swift */,
-				3813D8941D8983C900E6B7A4 /* CircularImageView.swift */,
-				38C700F11D8EC24100D785BB /* LaunchCounter.swift */,
-			);
-			name = "MC SDK";
-			sourceTree = "<group>";
-		};
 		38D1C3781A8A33A5008F2A8E /* LaunchImage */ = {
 			isa = PBXGroup;
 			children = (
@@ -1091,6 +1068,29 @@
 				38EF31441938BA07004912F0 /* UINavigationController+KeyboardDismiss.m */,
 			);
 			name = iPad;
+			sourceTree = "<group>";
+		};
+		38FE5A062346943400BBA722 /* Miscellaneous */ = {
+			isa = PBXGroup;
+			children = (
+				38B88E2D1D81FF6E0069A44D /* MailComposeViewController.swift */,
+				3812760B1BBE74EF0004C8C2 /* UIViewControllerExtension.swift */,
+				381179CF1A82D1FC00020538 /* MailComposer.swift */,
+				38490D2E1D7056D100A297BA /* ShowMailViewProtocol.swift */,
+				380C48151BE1330E00C82B0F /* CurrencyFormatter.swift */,
+				38CDE8FE17135B6300387CAA /* MCTools.h */,
+				38CDE8FF17135B6300387CAA /* MCTools.m */,
+				384EC9131BC3E78C00A80799 /* Colors.swift */,
+				384EC9151BC3EA4C00A80799 /* UIColorExtension.swift */,
+				381276091BBE74520004C8C2 /* UIViewExtension.swift */,
+				3825A82219990BA400A8885D /* UIViewController+WeAllPayStore.h */,
+				3825A82319990BA400A8885D /* UIViewController+WeAllPayStore.m */,
+				388A32741C11EA1400F7459C /* WhoPayingUserDefaultsStoreInterfaceWeAllPayExtension.swift */,
+				38B7E9511D86F8F600400E72 /* ContactsDataReceiver.swift */,
+				3813D8941D8983C900E6B7A4 /* CircularImageView.swift */,
+				38C700F11D8EC24100D785BB /* LaunchCounter.swift */,
+			);
+			path = Miscellaneous;
 			sourceTree = "<group>";
 		};
 		6737C40BBBFD0321D14106F5 /* Frameworks */ = {
