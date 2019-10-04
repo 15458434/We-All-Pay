@@ -37,6 +37,16 @@ import UIKit
         return frameOfPresentingViewController
     }
     
+    public override func containerViewWillLayoutSubviews() {
+        super.containerViewWillLayoutSubviews()
+        self.presentedViewController.view.clipsToBounds = false
+        let presentedLayer = self.presentedViewController.view.layer
+        presentedLayer.shadowOpacity = 0.5
+        presentedLayer.shadowRadius = 15
+        presentedLayer.shadowPath = CGPath(rect: presentedLayer.frame.insetBy(dx: 0, dy: -15), transform: nil)
+        presentedLayer.shadowColor = UIColor.black.cgColor
+    }
+    
     // MARK: NSObject
 }
 
