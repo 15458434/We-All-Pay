@@ -126,9 +126,9 @@
 }
 
 - (void)prepareWorstSalesPitchEverView {
-#ifdef DEBUG
-    NSLog(@"Preparing GoogleMobileAds version: %@", [GADRequest sdkVersion]);
-#endif
+#ifdef SCREENSHOTS
+    self.worstSalesPitchEverView.autoloadEnabled = NO;
+#else
     BOOL isNotPurchased = ![[MCStoreInterface defaultStoreInterface] isProProductPurchased];
     if (isNotPurchased) {
         NSParameterAssert(_worstSalesPitchEverView);
@@ -142,6 +142,7 @@
     } else {
         self.worstSalesPitchEverView.autoloadEnabled = NO;
     }
+#endif
 }
 
 #pragma mark - Notification Handlers

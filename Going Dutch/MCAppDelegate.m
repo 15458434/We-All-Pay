@@ -25,7 +25,6 @@
 
 @interface MCAppDelegate ()
 
-@property (nonatomic) dispatch_once_t executeOnlyOnce;
 @property (nonatomic, strong) MCLaunchCounter *launchCounter;
 @property (nonatomic, strong) MCCoreDataSaveHandlerWhenEnteringBackground *saveHandlerOnDidEnterBackground;
 
@@ -164,22 +163,21 @@
     return NO;
 }
 
-- (BOOL)application:(UIApplication *)application willFinishLaunchingWithOptions:(NSDictionary *)launchOptions
-{
-    dispatch_once(&_executeOnlyOnce, ^{
-        [self executeOnlyOnceDuringStartup];
+- (BOOL)application:(UIApplication *)application willFinishLaunchingWithOptions:(NSDictionary *)launchOptions {
+    [self executeOnlyOnceDuringStartup];
+#ifdef SCREENSHOTS
+        [[MCWeAllPayStoreController defaultStore] openStore:^(MCWeAllPayStoreController *store, BOOL success) {
+            // TODO: Populate for screenshots
+            ScreenshotPopulationEngine *populator = [[ScreenshotPopulationEngine alloc] initWithManagedObjectContext:store.mainThreadContext];
+            [populator populate];
+        }];
+#else
         [[MCWeAllPayStoreController defaultStore] openStore:nil];
-        
-    });    
+#endif
     return YES;
 }
 
-- (BOOL)application:(UIApplication *)application didFinishLaunchingWithOptions:(NSDictionary *)launchOptions
-{
-    dispatch_once(&_executeOnlyOnce, ^{
-        [self executeOnlyOnceDuringStartup];
-        [[MCWeAllPayStoreController defaultStore] openStore:nil];
-    });
+- (BOOL)application:(UIApplication *)application didFinishLaunchingWithOptions:(NSDictionary *)launchOptions {
     [[MCStoreInterface defaultStoreInterface] validateProductIdentifiers];
     [self activateFirebase];
     
