@@ -166,13 +166,12 @@
 - (BOOL)application:(UIApplication *)application willFinishLaunchingWithOptions:(NSDictionary *)launchOptions {
     [self executeOnlyOnceDuringStartup];
 #ifdef SCREENSHOTS
-        [[MCWeAllPayStoreController defaultStore] openStore:^(MCWeAllPayStoreController *store, BOOL success) {
-            // TODO: Populate for screenshots
-            ScreenshotPopulationEngine *populator = [[ScreenshotPopulationEngine alloc] initWithManagedObjectContext:store.mainThreadContext];
-            [populator populate];
-        }];
+    [[MCWeAllPayStoreController defaultStore] openStore:^(MCWeAllPayStoreController *store, BOOL success) {
+        ScreenshotPopulationEngine *populator = [[ScreenshotPopulationEngine alloc] initWithManagedObjectContext:store.mainThreadContext];
+        [populator populate];
+    }];
 #else
-        [[MCWeAllPayStoreController defaultStore] openStore:nil];
+    [[MCWeAllPayStoreController defaultStore] openStore:nil];
 #endif
     return YES;
 }

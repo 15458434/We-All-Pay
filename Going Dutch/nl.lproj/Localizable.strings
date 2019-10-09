@@ -1,20 +1,23 @@
 /* \(productName) is now free of any ads. */
 "(productName) is now free of any ads." = "(productName) is nu vrij van advertenties";
 
+/* Ad free version restored. */
+"Ad free version restored." = "Advertentie vrije versie is hersteld";
+
+/* Title for an alert message, because there are no people added to this event. */
+"Add some people first" = "Voeg eerst aanwezigen toe";
+
 /* A list of people like Mark, Ilse and other where the \"and others\" needs to be translated. */
 "AND_OTHERS" = "en anderen";
 
 /* The word \"and\" between two people */
 "AND_STRING" = "en";
 
-/* Message to the user when access to the Contacts is denied by the user */
-"Access to contacts denied" = "Toegang tot Contacten geweigerd";
+/* first name example for app store screenshots */
+"Ann" = "Anne";
 
-/* Ad free version restored. */
-"Ad free version restored." = "Advertentie vrije versie is hersteld";
-
-/* Title for an alert message, because there are no people added to this event. */
-"Add some people first" = "Voeg eerst aanwezigen toe";
+/* example for appstore screenshots */
+"ann_burwell@work.com" = "anne_groen@werk.com";
 
 /* Message that pops up when the App Store is not available. */
 "App Store unavailable" = "App Store niet beschikbaar";
@@ -22,26 +25,50 @@
 /* One of the payments is missing a payer. */
 "At least one of the payments is missing a payer." = "Minstens één betaling heeft een onbekende betaler.";
 
-/* (No Commment) */
+/* AllTripsTableView */
 "BACK_TITLE_ALL_TRIPS_VIEW" = "terug";
 
-/* (No Commment) */
-"BUY_PRO" = "Verwijder Ads";
+/* last name example for appstore screenshots */
+"Burwell" = "Groen";
 
 /* Buy ad free Version */
 "Buy ad free version" = "Koop ads vrije versie";
 
-/* (No Commment) */
-"CANCEL" = "Annuleer";
+/* (No Comment) */
+"BUY_PRO" = "Verwijder Ads";
 
-/* (No Commment) */
-"CONTACTS_DISABLED_MESSAGE" = "Toegang tot Contacten kan aangezet worden in Instellingen->We All Pay->Privacy";
-
-/* (No Commment) */
-"CONTACTS_DISABLED_TITLE" = "Contacten uitgeschakeld";
+/* event name example for app store screenshots */
+"Camping trip" = "Kamperen";
 
 /* Text on button to cancel something */
 "Cancel" = "Annuleer";
+
+/* (No Comment) */
+"CANCEL" = "Annuleer";
+
+/* event name example for app store screenshots */
+"Concert" = "Concert";
+
+/* (No Comment) */
+"CONTACTS_DISABLED_MESSAGE" = "Toegang tot Contacten kan aangezet worden in Instellingen->We All Pay->Privacy";
+
+/* (No Comment) */
+"CONTACTS_DISABLED_TITLE" = "Contacten uitgeschakeld";
+
+/* Alert title stating that data is missing in a payment */
+"Data missing in payment" = "Ontbrekende gegevens in betaling";
+
+/* first name example for app store screenshots */
+"David" = "David";
+
+/* example for appstore screenshots */
+"davidtucker@somewhere.com" = "davidsmits@ergens.nl";
+
+/* Text on a delete button */
+"Delete" = "Verwijder";
+
+/* event name example for app store screenshots */
+"Dinner" = "Diner";
 
 /* Button that says dismiss
    Button that says dismiss.
@@ -54,7 +81,7 @@
 /* Question to the user whether or not they like this app. */
 "Do you like We all pay?" = "Vind je We all pay handig?";
 
-/* (No Commment) */
+/* Each pays: $ string inside the header of the solution screen. */
 "EACH_PAYS" = "Per persoon:";
 
 /* Each used: */
@@ -66,10 +93,10 @@
 /* The amount of money we used: */
 "EMAIL_AVERAGE_OF_USE_SENTENCE" = "We hebben deze kosten gemaakt:";
 
-/* (No Commment) */
+/* Part one of: To have everybody pay the average of $7.00, I suggest the following solution */
 "EMAIL_AVERAGE_SENTENCES_ONE" = "Als we iedereen het gemiddelde van";
 
-/* (No Commment) */
+/* (No Comment) */
 "EMAIL_AVERAGE_SENTENCES_TWO" = " laten betalen, dan stel ik volgende oplossing voor";
 
 /* Reason: Not all people have a mail address. */
@@ -84,14 +111,14 @@
 /* If you have any remarks please let me know. */
 "EMAIL_FINAL_SENTENCE" = "Als jullie nog opmerkingen hebben dan hoor ik dat graag.";
 
+/* I suggest the following solution. */
+"EMAIL_I_SUGGEST" = "Ik stel de volgende oplossing voor:";
+
 /* Here you go. The full overview of the %1$@ which we spend on our last event. We spent an average of %2$@ a person. You can find more of the details below. */
 "EMAIL_INTRO" = "Alsjeblieft, het overzicht van de %1$@ aan kosten die we gemaakt hebben voor ons uitje. De gemiddelde kosten per persoon zijn %3$@. Het complete overzicht staat hieronder.";
 
 /* Here you go. The full overview of the %1$@ which we spend on our last event %2$@. We spent an average of %3$@ a person. You can find more of the details below. */
 "EMAIL_INTRO_WITH_TRIPNAME" = "Alsjeblieft, het overzicht van de %1$@ aan kosten die we gemaakt hebben voor ons uitje naar %2$@. De gemiddelde kosten per persoon zijn %3$@. Het complete overzicht staat hieronder.";
-
-/* I suggest the following solution. */
-"EMAIL_I_SUGGEST" = "Ik stel de volgende oplossing voor:";
 
 /* The people who have paid are */
 "EMAIL_MULTIPLE_PEOPLE_HAVE_PAID" = "Wie heeft wat betaald:";
@@ -105,10 +132,10 @@
 /* %1$@ pays %2$@ to %3$@ */
 "EMAIL_OWES" = "%1$@ geeft %2$@ aan %3$@.";
 
-/* (No Commment) */
+/* The sentence: "Mark" pays $6.80 to Ilse. */
 "EMAIL_OWES_PART_ONE" = "geeft";
 
-/* (No Commment) */
+/* (No Comment) */
 "EMAIL_OWES_PART_TWO" = "aan";
 
 /* Bill overview of our event. */
@@ -141,23 +168,20 @@
 /* Message explaining what the user can do to refetch exchange rates */
 "Fetching exchange rates is not possible at this moment. Check your internet connection and/or hit solve to fetch all missing exchange rates at a later time" = "Het ophalen van de wisselkoers is niet mogelijk op dit moment. Controleer je internet verbinding en/of druk later op 'Oplossing' om all ontbrekende wisselkoersen op te halen.";
 
-/* (No Commment) */
-"GIVE_FEEDBACK" = "Geef feedback";
-
 /* Give feedback */
 "Give feedback" = "Geef feedback";
+
+/* iScreen */
+"GIVE_FEEDBACK" = "Geef feedback";
 
 /* Go to */
 "Go to" = "Ga naar";
 
-/* Title for a button that directs the user to the settings application. */
-"Go to settings" = "Ga naar instellingen";
-
-/* Instructions for the user to go to the settings application and change the privacy settings for We all pay. */
-"Go to your settings app and allow We all pay to access your contact data" = "Ga naar de settings app van je iPhone en geef We all pay toegang tot je contacten";
-
 /* Title of a No button. */
 "Hell no" = "Absoluut niet";
+
+/* (No Comment) */
+"I_WILL_SHOW_NO_ADS" = "We all pay is nu een advertentie vrije ervaring.";
 
 /* Invalid email address */
 "INVALID_EMAIL_ADDRESS" = "Ongeldig emailadres";
@@ -165,11 +189,35 @@
 /* The email address you provided doesn't appear to be an email address. This might cause improper behavior. Are you sure you want to continu? */
 "INVALID_EMAIL_ADDRESS_MESSAGE" = "Het ingevoerde emailadres lijkt niet op een geldig email adres. Dit kan ongewenst gedrag veroorzaken. Weet u zeker dat u door wilt gaan?";
 
-/* (No Commment) */
-"I_WILL_SHOW_NO_ADS" = "We all pay is nu een advertentie vrije ervaring.";
+/* first name example for app store screenshots */
+"Jake" = "Rik";
 
-/* Text of the the button that takes you to my apps in the App Store */
+/* example for appstore screenshots */
+"jake@earth.com" = "rik@aarde.nl";
+
+/* example for appstore screenshots */
+"l.d.mortimer@internet.com" = "l.d.boer@internet.nl";
+
+/* first name example for app store screenshots */
+"Lauren" = "Laurentien";
+
+/* example for appstore screenshots */
+"mailsheila@home.com" = "mailsophie@thuis.nl";
+
+/* last name example for appstore screenshots */
+"Miller" = "van der Meulen";
+
+/* last name example for appstore screenshots */
+"Mortimer" = "Boer";
+
+/* event name example for app store screenshots */
+"Movie" = "Film";
+
+/* Text of the the button that takes you to my apps in the AppStore */
 "My Apps" = "Mijn apps";
+
+/* Screen name saying this is a new payment. */
+"New Payment" = "Nieuwe betaling";
 
 /* Header in the paymentView which state new Payment */
 "NEW_PAYMENT_HEADER" = "Nieuwe betaling";
@@ -184,38 +232,44 @@
 /* Sub header in the personView which states add new data */
 "NEW_PERSON_SUBHEADER" = "Vul gegevens in";
 
+/* last name example for appstore screenshots */
+"Nichelson" = "Vos";
+
 /* no */
 "NO" = "nee";
 
 /* A message when there are no people present inside this shared bill */
 "NO_PEOPLE_PRESENT" = "Niemand aanwezig";
 
-/* (No Commment) */
+/* Nothing to restore */
+"Nothing to restore" = "Niks om te herstellen";
+
+/* (No Comment) */
 "OK" = "Ok";
 
 /* As in Mark owes Arjen, but then just the word owes. */
 "OWES" = "betaalt";
 
-/* (No Commment) */
+/* Owes as in Mark owes $5 */
 "OWES_FROM_THIS_PAYMENT" = "gebruikt";
 
-/* (No Commment) */
+/* (No Comment) */
+"PAYMENT_CELL_PAIDFOR_EXTRA" = "betaalde ";
+
+/* (No Comment) */
 "PAYMENTCELL_PAYERNAME_EXTRA" = "";
 
-/* (No Commment) */
+/* (No Comment) */
 "PAYMENTS_PAGEVIEWCONTROLLER" = "Betalingen";
-
-/* (No Commment) */
-"PAYMENT_CELL_PAIDFOR_EXTRA" = "betaalde ";
 
 /* Press \"add Person\" to add a person who you'd like to share this bill with. */
 "PEOPLE_LIST_EMPTY_MESSAGE" = "Druk op \"Nieuwe persoon\" om iemand toe te voegen waarmee je de rekening wilt delen.";
 
-/* (No Commment) */
+/* SharedBillPageView */
 "PEOPLE_PRESENT_PAGEVIEWCONTROLLER" = "Aanwezigen";
 
-/* (No Commment) */
-"PURCHASE_RESTORED" = "Ad vrije versie hersteld.";
+/* Alert message suggesting the user that there is missing data on a payment. */
+"Please check the payment for missing data" = "Controleer de betaling op ontbrekende data";
 
 /* Instruction in an alert to tell the user that they should check their email address for a valid configuration.
    Please configure your mail in Settings */
@@ -224,14 +278,11 @@
 /* Message to the user to give We all pay a five star rating. */
 "Please give We all pay a 5 star rating and help other people find the benefits We all pay." = "Zou je We all pay een 5 sterren waardering willen geven, zodat andere mensen de voordelen van We all pay kunnen ontdekken?";
 
-/* (No Commment) */
-"RESTORE_PREVIOUS_PURCHASES" = "Herstel eerdere aankopen";
+/* payed item example for app store screenshots */
+"Popcorn" = "Popcorn";
 
-/* (No Commment) */
-"RESTORE_PURCHASE_FAILED" = "Geen aankoop om te herstellen";
-
-/* Please add payments and/or people if you want a solution on who owes who. */
-"RETURNPAYMENTSVIEW_NOPAYMENTS" = "Druk op \"Annuleer\" en voeg mensen en betalingen toe.";
+/* (No Comment) */
+"PURCHASE_RESTORED" = "Ad vrije versie hersteld.";
 
 /* Text of the Rate me button */
 "Rate me" = "Waardeer mij";
@@ -242,14 +293,32 @@
 /* Restore previous purchases */
 "Restore previous purchases" = "Herstel eerdere aankopen";
 
+/* (No Comment) */
+"RESTORE_PREVIOUS_PURCHASES" = "Herstel eerdere aankopen";
+
+/* (No Comment) */
+"RESTORE_PURCHASE_FAILED" = "Geen aankoop om te herstellen";
+
+/* Please add payments and/or people if you want a solution on who owes who. */
+"RETURNPAYMENTSVIEW_NOPAYMENTS" = "Druk op \"Annuleer\" en voeg mensen en betalingen toe.";
+
+/* Text of the payment category selection button */
+"Select Category" = "Selecteer Categorie";
+
 /* Select Category */
 "SELECT_CATEGORY" = "Selecteer Categorie";
 
-/* (No Commment) */
+/* (No Comment) */
 "SELECT_PAYER" = "Betaler";
 
 /* Send anyway */
 "SEND_ANYWAY" = "Stuur alsnog";
+
+/* first name example for app store screenshots */
+"Sheila" = "Sophie";
+
+/* payed item example for app store screenshots */
+"Soft drinks" = "Frisdrank";
 
 /* Total owes */
 "SOLUTION_SECTION_TOTAL_OWES" = "Totaal verschuldigd";
@@ -263,8 +332,20 @@
 /* Title of a Yes button. */
 "Sure" = "Jazeker";
 
-/* (No Commment) */
+/* payed item example for app store screenshots */
+"Sushi" = "Sushi";
+
+/* Thank you for purchasing */
+"Thank you for purchasing" = "Dank u wel voor uw aankoop";
+
+/* (No Comment) */
 "THANK_YOU_FOR_PURCHASING" = "Dank u wel voor uw aankoop.";
+
+/* event name example for app store screenshots */
+"Theatre" = "Theater";
+
+/* event name example for app store screenshots */
+"This month food costs" = "Boodschappen deze maand";
 
 /* Something */
 "THISPAYMENTCELL_NOOBJECT" = "iets";
@@ -272,20 +353,17 @@
 /* Someone */
 "THISPAYMENTCELL_NOPAYERNAME" = "Iemand";
 
+/* payed item example for app store screenshots */
+"Tickets" = "Kaartjes";
+
 /* total paid: */
 "TOTAL_PAID" = "totaal uitgegeven:";
 
 /* Total spent: */
 "TOTAL_SPENT" = "Totaal:";
 
-/* Thank you for purchasing */
-"Thank you for purchasing" = "Dank u wel voor uw aankoop";
-
-/* Unable to solve */
-"UNABLE_TO_SOLVE" = "Onoplosbaar";
-
-/* (No Commment) */
-"UNABLE_TO_SOLVE_MESSAGE" = "Valuta conversie gegevens niet bekend. Nu ophalen?";
+/* last name example for appstore screenshots */
+"Tucker" = "Smits";
 
 /* Message body explaining the App Store can't be reached. */
 "Unable to connect to the App Store. Please connect to the internet." = "Kan de App Store niet bereiken. Verbind met het internet.";
@@ -298,7 +376,13 @@
    Unable to send email */
 "Unable to send email" = "Kan email niet versturen";
 
-/* (No Commment) */
+/* Unable to solve */
+"UNABLE_TO_SOLVE" = "Onoplosbaar";
+
+/* (No Comment) */
+"UNABLE_TO_SOLVE_MESSAGE" = "Valuta conversie gegevens niet bekend. Nu ophalen?";
+
+/* (No Comment) */
 "WHAT_IS_PRO" = "Wat is de Pro versie?";
 
 /* yes */

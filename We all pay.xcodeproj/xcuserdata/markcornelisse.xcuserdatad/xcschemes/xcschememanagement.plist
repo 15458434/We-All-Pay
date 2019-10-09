@@ -39,17 +39,12 @@
 			<key>orderHint</key>
 			<integer>2</integer>
 		</dict>
-		<key>We all pay (screenshots).xcscheme_^#shared#^_</key>
-		<dict>
-			<key>orderHint</key>
-			<integer>16</integer>
-		</dict>
 		<key>We all pay for Mac.xcscheme</key>
 		<dict>
 			<key>orderHint</key>
 			<integer>1</integer>
 		</dict>
-		<key>We all pay.xcscheme</key>
+		<key>We all pay.xcscheme_^#shared#^_</key>
 		<dict>
 			<key>orderHint</key>
 			<integer>0</integer>
@@ -68,6 +63,11 @@
 	<key>SuppressBuildableAutocreation</key>
 	<dict>
 		<key>380755FE19F9445700489ED4</key>
+		<dict>
+			<key>primary</key>
+			<true/>
+		</dict>
+		<key>380C92B122A9657B000BD574</key>
 		<dict>
 			<key>primary</key>
 			<true/>
@@ -107,11 +107,6 @@
 			<key>primary</key>
 			<true/>
 		</dict>
-		<key>382B76E81C398249000C203A</key>
-		<dict>
-			<key>primary</key>
-			<true/>
-		</dict>
 		<key>38522E2218DB3F01007BDB3F</key>
 		<dict>
 			<key>primary</key>
@@ -128,11 +123,6 @@
 			<true/>
 		</dict>
 		<key>385F52E6191C2C110012773D</key>
-		<dict>
-			<key>primary</key>
-			<true/>
-		</dict>
-		<key>385F52FC191C2C360012773D</key>
 		<dict>
 			<key>primary</key>
 			<true/>
@@ -158,11 +148,6 @@
 			<true/>
 		</dict>
 		<key>388A327B1C11EDBD00F7459C</key>
-		<dict>
-			<key>primary</key>
-			<true/>
-		</dict>
-		<key>388A32841C11EDBD00F7459C</key>
 		<dict>
 			<key>primary</key>
 			<true/>
@@ -223,11 +208,6 @@
 			<true/>
 		</dict>
 		<key>38D6A3BB1C73DDBF00968BB2</key>
-		<dict>
-			<key>primary</key>
-			<true/>
-		</dict>
-		<key>38D6A3C41C73DDBF00968BB2</key>
 		<dict>
 			<key>primary</key>
 			<true/>
