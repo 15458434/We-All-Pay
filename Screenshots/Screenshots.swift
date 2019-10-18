@@ -34,29 +34,31 @@ class Screenshots: XCTestCase {
         // Use recording to get started writing UI tests.
         // Use XCTAssert and related functions to verify your tests produce the correct results.
         
-        switch UIDevice.current.userInterfaceIdiom {
-        case .phone:
-            snapshot("01-AllEventsViewController")
-            app.tables.cells.element(boundBy: 0).tap()
-            let mcsharedbillmainviewNavigationBar = app.navigationBars["MCSharedBillMainView"]
-            mcsharedbillmainviewNavigationBar.segmentedControls.buttons.element(boundBy: 0).tap()
-            
-            app!.navigationBars["MCSharedBillMainView"].segmentedControls.buttons.element(boundBy: 0).tap()
-            snapshot("02-PeoplePresentViewController")
-            app!.navigationBars["MCSharedBillMainView"].segmentedControls.buttons.element(boundBy: 1).tap()
-            snapshot("03-PaymentsViewController")
-            let tablesQuery = app.scrollViews.otherElements.tables
-            tablesQuery/*@START_MENU_TOKEN@*/.buttons["Add Payment"]/*[[".buttons[\"Add payment\"]",".buttons[\"Add Payment\"]"],[[[-1,1],[-1,0]]],[0]]@END_MENU_TOKEN@*/.tap()
-            snapshot("04-PaymentViewController")
-            app.navigationBars["MCPaymentView"].buttons["Cancel"].tap()
-            tablesQuery.buttons["Solve"].tap()
-            snapshot("05-SolutionViewController")
-            
-        case .pad:
-            ()
-        default:
-            fatalError("Unknown interface idiom")
-        }
+        
+        
+//        switch UIDevice.current.userInterfaceIdiom {
+//        case .phone:
+//            snapshot("01-AllEventsViewController")
+//            app.tables.cells.element(boundBy: 0).tap()
+//            let mcsharedbillmainviewNavigationBar = app.navigationBars["MCSharedBillMainView"]
+//            mcsharedbillmainviewNavigationBar.segmentedControls.buttons.element(boundBy: 0).tap()
+//
+//            app!.navigationBars["MCSharedBillMainView"].segmentedControls.buttons.element(boundBy: 0).tap()
+//            snapshot("02-PeoplePresentViewController")
+//            app!.navigationBars["MCSharedBillMainView"].segmentedControls.buttons.element(boundBy: 1).tap()
+//            snapshot("03-PaymentsViewController")
+//            let tablesQuery = app.scrollViews.otherElements.tables
+//            tablesQuery/*@START_MENU_TOKEN@*/.buttons["Add Payment"]/*[[".buttons[\"Add payment\"]",".buttons[\"Add Payment\"]"],[[[-1,1],[-1,0]]],[0]]@END_MENU_TOKEN@*/.tap()
+//            snapshot("04-PaymentViewController")
+//            app.navigationBars["MCPaymentView"].buttons["Cancel"].tap()
+//            tablesQuery.buttons["Solve"].tap()
+//            snapshot("05-SolutionViewController")
+//
+//        case .pad:
+//            ()
+//        default:
+//            fatalError("Unknown interface idiom")
+//        }
     }
 
 }

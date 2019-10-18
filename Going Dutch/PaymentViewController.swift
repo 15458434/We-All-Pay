@@ -316,7 +316,9 @@ enum CancelButtonPressed {
     
     override func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
         let cell = tableView.dequeueReusableCell(withIdentifier: "paymentPresenceTableViewCell", for: indexPath) as! MCPaymentPresenceTableViewCell
-        let paymentPresenceForThisCell = dataController.object(at: indexPath) 
+        cell.accessibilityIdentifier = "PaymentPresenceTableViewCell-\(indexPath.row)"
+        
+        let paymentPresenceForThisCell = dataController.object(at: indexPath)
         cell.nameLabel.text = paymentPresenceForThisCell.person.getFullName
         cell.personView.image = paymentPresenceForThisCell.person.thumbnail
         cell.theSwitch.setOn(paymentPresenceForThisCell.isPersonPresent.boolValue, animated: false)
