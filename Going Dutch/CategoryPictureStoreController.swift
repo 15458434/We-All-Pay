@@ -9,6 +9,24 @@
 import Foundation
 
 class CategoryPictureStoreController: NSObject {
+    @objc enum PaymentCategory: Int {
+        case none = 0
+        case dinner = 1
+        case drinks = 2
+        case fuel = 3
+        case groceries = 4
+        case hotel = 5
+        case tickets = 6
+        case rent = 7
+        case spaAndRelaxation = 8
+        case travel = 9
+        case miscellaneous = 10
+        case present = 11
+        
+        var number: NSNumber {
+            return NSNumber(value: self.rawValue)
+        }
+    }
     // MARK: Properties
     @objc var pictureObjects: [CategoryPictureObject] {
         let plistPath = Bundle.main.path(forResource: "categoryPictures", ofType: "plist")!

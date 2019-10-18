@@ -21,6 +21,9 @@
 
 @interface MCAllTripsTableViewController_iPad ()
 
+@property (nonatomic, strong) MCTableEmptyMessage_iPad *emptyMessage;
+@property (nonatomic, strong) NSDateFormatter *df;
+
 @property (nonatomic, strong) NSFetchedResultsController *dataController;
 
 @property (nonatomic) BOOL isEmptyMessageShownInstantForFirstBoot;
@@ -33,16 +36,14 @@
 
 #pragma mark - IBActions
 
-- (IBAction)newEventPressed:(id)sender
-{
+- (IBAction)newEventPressed:(id)sender {
     [FIRAnalytics logEventWithName:@"New Event" parameters:nil];
 }
 
 
 #pragma mark - New in this class
 
-- (void)performFetch
-{
+- (void)performFetch {
     NSError *error;
     BOOL success = [_dataController performFetch:&error];
     if (!success) {
@@ -50,42 +51,39 @@
     }
 }
 
-- (void)setEmptyMessage
-{
+- (void)setEmptyMessage {
     if ([[_dataController fetchedObjects] count] != 0) {
         [UIView animateWithDuration:1.0 animations:^{
-            [[self.emptyMessage bigMessage] setAlpha:0.0];
-            [[self tableView] setSeparatorStyle:UITableViewCellSeparatorStyleSingleLine];
+            self.emptyMessage.bigMessage.alpha = 0.0;
+            self.tableView.separatorStyle = UITableViewCellSeparatorStyleSingleLine;
         } completion:nil];
     } else {
         if ([[_emptyMessage bigMessage] alpha] < 1.0) {
             [UIView animateWithDuration:1.0 animations:^{
-                [[self.emptyMessage bigMessage] setAlpha:1.0];
-                [[self tableView] setSeparatorStyle:UITableViewCellSeparatorStyleNone];
+                self.emptyMessage.bigMessage.alpha = 1.0;
+                self.tableView.separatorStyle = UITableViewCellSeparatorStyleNone;
             } completion:nil];
         }
     }
 }
 
-- (void)setEmptyMessageNow
-{
-    if ([[_dataController fetchedObjects] count] != 0) {
+- (void)setEmptyMessageNow {
+    if (_dataController.fetchedObjects.count != 0) {
         [UIView animateWithDuration:0.0 animations:^{
-            [[self.emptyMessage bigMessage] setAlpha:0.0];
-            [[self tableView] setSeparatorStyle:UITableViewCellSeparatorStyleSingleLine];
+            self.emptyMessage.bigMessage.alpha = 0.0;
+            self.tableView.separatorStyle = UITableViewCellSeparatorStyleSingleLine;
         } completion:nil];
     } else {
         if ([[_emptyMessage bigMessage] alpha] < 1.0) {
             [UIView animateWithDuration:0.0 animations:^{
-                [[self.emptyMessage bigMessage] setAlpha:1.0];
-                [[self tableView] setSeparatorStyle:UITableViewCellSeparatorStyleNone];
+                self.emptyMessage.bigMessage.alpha = 1.0;
+                self.tableView.separatorStyle = UITableViewCellSeparatorStyleNone;
             } completion:nil];
         }
     }
 }
 
-- (void)prepareUserActivity
-{
+- (void)prepareUserActivity {
     if (@available(iOS 9.0, *)) {
         NSUserActivity *activity = [[NSUserActivity alloc] initWithActivityType:@"com.GreenHair.We-all-pay.SharingExpenses"];
         activity.title = NSLocalizedString(@"We all pay - Sharing Expenses and bill splitting made easy", @"The title of the app");
@@ -107,13 +105,157 @@
     [[MCWeAllPayStoreController defaultStore] saveMainThreadContext];
 }
 
-#pragma mark - Inherited from super
+#pragma mark - Core Data Notifications
 
-- (void)awakeFromNib
-{
-    [super awakeFromNib];
-    _isEmptyMessageShownInstantForFirstBoot = false;
+- (void)storeWillBeSwapped:(NSNotification *)notification {
+    [super storeWillBeSwapped:notification];
+    dispatch_sync(dispatch_get_main_queue(), ^{
+        self.view.userInteractionEnabled = NO;
+    });
 }
+
+- (void)storeDidSwap:(NSNotification *)notification {
+    [super storeDidSwap:notification];
+    dispatch_sync(dispatch_get_main_queue(), ^{
+        if (self.dataController) {
+            NSError *fetchError;
+            if (![self.dataController performFetch:&fetchError]) {
+                NSLog(@"Error fetching: %@", fetchError);
+            }
+        }
+        [[self tableView] reloadData];
+        [self setEmptyMessage];
+        self.view.userInteractionEnabled = YES;
+    });
+}
+
+#pragma mark - NSFetchedResultsController
+
+- (void)controllerWillChangeContent:(NSFetchedResultsController *)controller {
+    [[self tableView] beginUpdates];
+}
+
+- (void)controllerDidChangeContent:(NSFetchedResultsController *)controller {
+    [[self tableView] endUpdates];
+}
+
+- (void)controller:(NSFetchedResultsController *)controller didChangeObject:(id)anObject atIndexPath:(NSIndexPath *)indexPath forChangeType:(NSFetchedResultsChangeType)type newIndexPath:(NSIndexPath *)newIndexPath {
+    switch(type) {
+        case NSFetchedResultsChangeInsert:
+            [[self tableView] insertRowsAtIndexPaths:@[newIndexPath] withRowAnimation:UITableViewRowAnimationFade];
+            [self setEmptyMessage];
+            break;
+            
+        case NSFetchedResultsChangeDelete:
+            [[self tableView] deleteRowsAtIndexPaths:@[indexPath] withRowAnimation:UITableViewRowAnimationFade];
+            [self setEmptyMessage];
+            break;
+            
+        case NSFetchedResultsChangeUpdate:
+            [[self tableView] reloadRowsAtIndexPaths:@[indexPath] withRowAnimation:UITableViewRowAnimationAutomatic];
+            break;
+            
+        case NSFetchedResultsChangeMove:
+            [[self tableView] deleteRowsAtIndexPaths:@[indexPath] withRowAnimation:UITableViewRowAnimationFade];
+            [[self tableView] insertRowsAtIndexPaths:@[newIndexPath] withRowAnimation:UITableViewRowAnimationFade];
+            break;
+    }
+}
+
+#pragma mark UITableViewController
+
+#pragma mark - UITableViewDelegate
+
+- (void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath {
+    [FIRAnalytics logEventWithName:@"Open Event" parameters:nil];
+}
+
+- (NSArray<UITableViewRowAction *> *)tableView:(UITableView *)tableView editActionsForRowAtIndexPath:(NSIndexPath *)indexPath {
+    // Delete action
+    NSString *deleteTitle = NSLocalizedString(@"Delete", @"Text on a delete button");
+    UITableViewRowAction *deleteAction = [UITableViewRowAction rowActionWithStyle:UITableViewRowActionStyleDestructive title:deleteTitle handler:^(UITableViewRowAction * _Nonnull action, NSIndexPath * _Nonnull indexPath) {
+#ifdef DEBUG
+        NSLog(@"Delete action pressed");
+#endif
+        [self deleteBillAtIndexpath:indexPath];
+    }];
+    // Change MainCurrency action
+    NSString *selectMainCurrencyTitle = NSLocalizedString(@"€$£¥", @"Text on a button to select a different currency");
+    UITableViewRowAction *selectCurrencyAction = [UITableViewRowAction rowActionWithStyle:UITableViewRowActionStyleNormal title:selectMainCurrencyTitle handler:^(UITableViewRowAction * _Nonnull action, NSIndexPath * _Nonnull indexPath) {
+#ifdef DEBUG
+        NSLog(@"Change currency pressed");
+#endif
+        // Open currency picker in mainCurrency mode
+        [self performSegueWithIdentifier:@"selectMainCurrency" sender:self];
+        self.selectedIndexPathForAction = indexPath;
+    }];
+    return @[deleteAction, selectCurrencyAction];
+}
+
+#pragma mark - UITableViewDataSource
+
+- (NSInteger)numberOfSectionsInTableView:(UITableView *)tableView {
+    return 1;
+}
+
+- (NSInteger)tableView:(UITableView *)tableView numberOfRowsInSection:(NSInteger)section {
+    return _dataController.fetchedObjects.count;
+}
+
+
+- (UITableViewCell *)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath {
+    MCSharedBill *thisTrip = [_dataController objectAtIndexPath:indexPath];
+    AllTripsTableViewCell_iPad *thisCell = [tableView dequeueReusableCellWithIdentifier:@"MCAllTripsTableViewCell_iPad"];
+    thisCell.tripLabel.accessibilityIdentifier = [NSString stringWithFormat:@"EventTableViewCell-%lu", indexPath.row];
+    
+    if (!thisTrip.tripName) {
+        thisCell.tripLabel.text = NSLocalizedString(@"...", @"String that shows empty string");
+    } else {
+        thisCell.tripLabel.text = thisTrip.tripName;
+    }
+    thisCell.peoplePresentLabel.text = thisTrip.stringOfApproxPeoplePresentWithFullNames;
+    
+    if ([thisTrip areAllExchangeRatesValid]) {
+        [[thisCell activityIndicator] stopAnimating];
+        thisCell.totalCostLabel.hidden = NO;
+        
+        CurrencyFormatter *cf = [[CurrencyFormatter alloc] initWithCurrencyCode:thisTrip.mainCurrency.code];
+        thisCell.totalCostLabel.text = [cf stringFor:thisTrip.totalSumOfMoneyOfThisSharedBill];
+    } else {
+        [[thisCell activityIndicator] startAnimating];
+        thisCell.totalCostLabel.hidden = YES;
+    }
+    
+    // fill extraLabel with dateModified.
+    if (!_df) {
+        _df = [[NSDateFormatter alloc] init];
+        _df.dateStyle = NSDateFormatterFullStyle;
+    }
+    thisCell.extraLabel.text = [_df stringFromDate:thisTrip.dateModified];
+    
+    return thisCell;
+}
+
+// Override to support conditional editing of the table view.
+- (BOOL)tableView:(UITableView *)tableView canEditRowAtIndexPath:(NSIndexPath *)indexPath
+{
+    // Return NO if you do not want the specified item to be editable.
+    return YES;
+}
+
+// Override to support editing the table view.
+- (void)tableView:(UITableView *)tableView commitEditingStyle:(UITableViewCellEditingStyle)editingStyle forRowAtIndexPath:(NSIndexPath *)indexPath
+{
+    if (editingStyle == UITableViewCellEditingStyleDelete) {
+        [FIRAnalytics logEventWithName:@"Delete event" parameters:nil];
+        // Delete the row from the data source
+        [self deleteBillAtIndexpath:indexPath];
+    } else if (editingStyle == UITableViewCellEditingStyleInsert) {
+        // Create a new instance of the appropriate class, insert it into the array, and add a new row to the table view
+    }   
+}
+
+#pragma mark - UIViewController
 
 - (void)viewDidLoad
 {
@@ -128,8 +270,8 @@
     [self startRespondingToStoreChangeNotifications];
     
     _emptyMessage = [[NSBundle mainBundle] loadNibNamed:@"MCTableEmptyMessage_iPad" owner:self options:nil][0];
-    [[_emptyMessage bigMessage] setAlpha:0.0];
-    [[self tableView] setBackgroundView:_emptyMessage];
+    _emptyMessage.bigMessage.alpha = 0.0;
+    self.tableView.backgroundView = _emptyMessage;
     
     [self setNeedsStatusBarAppearanceUpdate];
     
@@ -170,205 +312,12 @@
     // Dispose of any resources that can be recreated.
     
     // When view is not loaded it's not onscreen. Therefor the dataController can be nil;
-    if (![self isViewLoaded]) {
+    if (!self.isViewLoaded) {
         _dataController = nil;
     }
 }
 
-- (void)dealloc
-{
-    [[NSNotificationCenter defaultCenter] removeObserver:self];
-}
-
-#pragma mark - Core Data Notifications
-
-- (void)storeWillBeSwapped:(NSNotification *)notification
-{
-    [super storeWillBeSwapped:notification];
-    dispatch_sync(dispatch_get_main_queue(), ^{
-        [[self view] setUserInteractionEnabled:NO];
-    });
-}
-
--(void)storeDidSwap:(NSNotification *)notification
-{
-    [super storeDidSwap:notification];
-    dispatch_sync(dispatch_get_main_queue(), ^{
-        if (self.dataController) {
-            NSError *fetchError;
-            if (![self.dataController performFetch:&fetchError]) {
-                NSLog(@"Error fetching: %@", fetchError);
-            }
-        }
-        [[self tableView] reloadData];
-        [self setEmptyMessage];
-        [[self view] setUserInteractionEnabled:YES];
-    });
-}
-
-#pragma mark - NSFetchedResultsController
-
-- (void)controllerWillChangeContent:(NSFetchedResultsController *)controller
-{
-    [[self tableView] beginUpdates];
-}
-
-- (void)controllerDidChangeContent:(NSFetchedResultsController *)controller
-{
-    [[self tableView] endUpdates];
-}
-
-- (void)controller:(NSFetchedResultsController *)controller didChangeObject:(id)anObject atIndexPath:(NSIndexPath *)indexPath forChangeType:(NSFetchedResultsChangeType)type newIndexPath:(NSIndexPath *)newIndexPath
-{
-    switch(type) {
-            
-        case NSFetchedResultsChangeInsert:
-            [[self tableView] insertRowsAtIndexPaths:@[newIndexPath] withRowAnimation:UITableViewRowAnimationFade];
-            [self setEmptyMessage];
-            break;
-            
-        case NSFetchedResultsChangeDelete:
-            [[self tableView] deleteRowsAtIndexPaths:@[indexPath] withRowAnimation:UITableViewRowAnimationFade];
-            [self setEmptyMessage];
-            break;
-            
-        case NSFetchedResultsChangeUpdate:
-            [[self tableView] reloadRowsAtIndexPaths:@[indexPath] withRowAnimation:UITableViewRowAnimationAutomatic];
-            break;
-            
-        case NSFetchedResultsChangeMove:
-            [[self tableView] deleteRowsAtIndexPaths:@[indexPath] withRowAnimation:UITableViewRowAnimationFade];
-            [[self tableView] insertRowsAtIndexPaths:@[newIndexPath] withRowAnimation:UITableViewRowAnimationFade];
-            break;
-    }
-}
-
-#pragma mark - UITableView Delegate
-
-/*
-- (CGFloat)tableView:(UITableView *)tableView heightForRowAtIndexPath:(NSIndexPath *)indexPath
-{
-    return 64;
-}
-*/
-
-- (void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath
-{
-    [FIRAnalytics logEventWithName:@"Open Event" parameters:nil];
-//    [self performSegueWithIdentifier:@"openEvent" sender:self];
-}
-
-- (NSArray<UITableViewRowAction *> *)tableView:(UITableView *)tableView editActionsForRowAtIndexPath:(NSIndexPath *)indexPath {
-    // Delete action
-    NSString *deleteTitle = NSLocalizedString(@"Delete", @"Text on a delete button");
-    UITableViewRowAction *deleteAction = [UITableViewRowAction rowActionWithStyle:UITableViewRowActionStyleDestructive title:deleteTitle handler:^(UITableViewRowAction * _Nonnull action, NSIndexPath * _Nonnull indexPath) {
-#ifdef DEBUG
-        NSLog(@"Delete action pressed");
-#endif
-        [self deleteBillAtIndexpath:indexPath];
-    }];
-    // Change MainCurrency action
-    NSString *selectMainCurrencyTitle = NSLocalizedString(@"€$£¥", @"Text on a button to select a different currency");
-    UITableViewRowAction *selectCurrencyAction = [UITableViewRowAction rowActionWithStyle:UITableViewRowActionStyleNormal title:selectMainCurrencyTitle handler:^(UITableViewRowAction * _Nonnull action, NSIndexPath * _Nonnull indexPath) {
-#ifdef DEBUG
-        NSLog(@"Change currency pressed");
-#endif
-        // Open currency picker in mainCurrency mode
-        [self performSegueWithIdentifier:@"selectMainCurrency" sender:self];
-        self.selectedIndexPathForAction = indexPath;
-    }];
-    return @[deleteAction, selectCurrencyAction];
-}
-
-#pragma mark - Table view data source
-
-- (NSInteger)numberOfSectionsInTableView:(UITableView *)tableView
-{
-    // Return the number of sections.
-    return 1;
-}
-
-- (NSInteger)tableView:(UITableView *)tableView numberOfRowsInSection:(NSInteger)section
-{
-    // Return the number of rows in the section.
-    return [[_dataController fetchedObjects] count];
-}
-
-
-- (UITableViewCell *)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath
-{
-    MCSharedBill *thisTrip = [_dataController objectAtIndexPath:indexPath];
-    AllTripsTableViewCell_iPad *allTripsTableViewCell = [tableView dequeueReusableCellWithIdentifier:@"MCAllTripsTableViewCell_iPad"];
-    
-    if (![thisTrip tripName]) {
-        [[allTripsTableViewCell tripLabel] setText:NSLocalizedString(@"...", @"String that shows empty string")];
-    } else {
-        [[allTripsTableViewCell tripLabel] setText:[thisTrip tripName]];
-    }
-    [[allTripsTableViewCell peoplePresentLabel] setText:[thisTrip stringOfApproxPeoplePresentWithFullNames]];
-    
-    if ([thisTrip areAllExchangeRatesValid]) {
-        [[allTripsTableViewCell activityIndicator] stopAnimating];
-        [[allTripsTableViewCell totalCostLabel] setHidden:NO];
-        
-        CurrencyFormatter *cf = [[CurrencyFormatter alloc] initWithCurrencyCode:thisTrip.mainCurrency.code];
-        allTripsTableViewCell.totalCostLabel.text = [cf stringFor:thisTrip.totalSumOfMoneyOfThisSharedBill];
-    } else {
-        [[allTripsTableViewCell activityIndicator] startAnimating];
-        [[allTripsTableViewCell totalCostLabel] setHidden:YES];
-    }
-    
-    // fill extraLabel with dateModified.
-    if (!_df) {
-        _df = [[NSDateFormatter alloc] init];
-        [_df setDateStyle:NSDateFormatterFullStyle];
-        // [df setTimeStyle:NSDateFormatterShortStyle];
-    }
-    [[allTripsTableViewCell extraLabel] setText:[_df stringFromDate:[thisTrip dateModified]]];
-    
-    return allTripsTableViewCell;
-}
-
-// Override to support conditional editing of the table view.
-- (BOOL)tableView:(UITableView *)tableView canEditRowAtIndexPath:(NSIndexPath *)indexPath
-{
-    // Return NO if you do not want the specified item to be editable.
-    return YES;
-}
-
-// Override to support editing the table view.
-- (void)tableView:(UITableView *)tableView commitEditingStyle:(UITableViewCellEditingStyle)editingStyle forRowAtIndexPath:(NSIndexPath *)indexPath
-{
-    if (editingStyle == UITableViewCellEditingStyleDelete) {
-        [FIRAnalytics logEventWithName:@"Delete event" parameters:nil];
-        // Delete the row from the data source
-        [self deleteBillAtIndexpath:indexPath];
-    } else if (editingStyle == UITableViewCellEditingStyleInsert) {
-        // Create a new instance of the appropriate class, insert it into the array, and add a new row to the table view
-    }   
-}
-
-/*
-// Override to support rearranging the table view.
-- (void)tableView:(UITableView *)tableView moveRowAtIndexPath:(NSIndexPath *)fromIndexPath toIndexPath:(NSIndexPath *)toIndexPath
-{
-}
-*/
-
-/*
-// Override to support conditional rearranging of the table view.
-- (BOOL)tableView:(UITableView *)tableView canMoveRowAtIndexPath:(NSIndexPath *)indexPath
-{
-    // Return NO if you do not want the item to be re-orderable.
-    return YES;
-}
-*/
-
-#pragma mark - Navigation
-
-// In a storyboard-based application, you will often want to do a little preparation before navigation
-- (void)prepareForSegue:(UIStoryboardSegue *)segue sender:(id)sender
-{
+- (void)prepareForSegue:(UIStoryboardSegue *)segue sender:(id)sender {
     // Get the new view controller using [segue destinationViewController].
     // Pass the selected object to the new view controller.
     
@@ -394,5 +343,19 @@
         }
     }
 }
+
+#pragma mark - UIResponder
+
+#pragma mark - NSObject
+
+- (void)awakeFromNib {
+    [super awakeFromNib];
+    _isEmptyMessageShownInstantForFirstBoot = false;
+}
+
+- (void)dealloc {
+    [[NSNotificationCenter defaultCenter] removeObserver:self];
+}
+
 
 @end
