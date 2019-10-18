@@ -107,79 +107,6 @@
     [[MCWeAllPayStoreController defaultStore] saveMainThreadContext];
 }
 
-#pragma mark - Inherited from super
-
-- (void)awakeFromNib
-{
-    [super awakeFromNib];
-    _isEmptyMessageShownInstantForFirstBoot = false;
-}
-
-- (void)viewDidLoad
-{
-    [super viewDidLoad];
-    
-    // Uncomment the following line to preserve selection between presentations.
-    // self.clearsSelectionOnViewWillAppear = NO;
-    
-    // Uncomment the following line to display an Edit button in the navigation bar for this view controller.
-    // self.navigationItem.rightBarButtonItem = self.editButtonItem;
-    
-    [self startRespondingToStoreChangeNotifications];
-    
-    _emptyMessage = [[NSBundle mainBundle] loadNibNamed:@"MCTableEmptyMessage_iPad" owner:self options:nil][0];
-    [[_emptyMessage bigMessage] setAlpha:0.0];
-    [[self tableView] setBackgroundView:_emptyMessage];
-    
-    [self setNeedsStatusBarAppearanceUpdate];
-    
-    [self prepareUserActivity];
-}
-
-- (void)viewWillAppear:(BOOL)animated
-{
-    [super viewWillAppear:animated];
-    
-    if (!_dataController) {
-        _dataController = [[MCWeAllPayStoreController defaultStore] allTripsDataControllerForDelegate:self];
-        [self performFetch];
-        [[self tableView] reloadData];
-        if (_isEmptyMessageShownInstantForFirstBoot == false) {
-            [self setEmptyMessageNow];
-            _isEmptyMessageShownInstantForFirstBoot = true;
-        } else {
-            [self setEmptyMessage];
-        }
-    }
-    
-    if (self.userActivity) {
-        [self.userActivity becomeCurrent];
-    }
-}
-
-- (void)viewWillDisappear:(BOOL)animated
-{
-    [super viewWillDisappear:animated];
-    
-    _dataController = nil;
-}
-
-- (void)didReceiveMemoryWarning
-{
-    [super didReceiveMemoryWarning];
-    // Dispose of any resources that can be recreated.
-    
-    // When view is not loaded it's not onscreen. Therefor the dataController can be nil;
-    if (![self isViewLoaded]) {
-        _dataController = nil;
-    }
-}
-
-- (void)dealloc
-{
-    [[NSNotificationCenter defaultCenter] removeObserver:self];
-}
-
 #pragma mark - Core Data Notifications
 
 - (void)storeWillBeSwapped:(NSNotification *)notification
@@ -243,14 +170,9 @@
     }
 }
 
-#pragma mark - UITableView Delegate
+#pragma mark UITableViewController
 
-/*
-- (CGFloat)tableView:(UITableView *)tableView heightForRowAtIndexPath:(NSIndexPath *)indexPath
-{
-    return 64;
-}
-*/
+#pragma mark - UITableViewDelegate
 
 - (void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath
 {
@@ -280,7 +202,7 @@
     return @[deleteAction, selectCurrencyAction];
 }
 
-#pragma mark - Table view data source
+#pragma mark - UITableViewDataSource
 
 - (NSInteger)numberOfSectionsInTableView:(UITableView *)tableView
 {
@@ -322,7 +244,6 @@
     if (!_df) {
         _df = [[NSDateFormatter alloc] init];
         [_df setDateStyle:NSDateFormatterFullStyle];
-        // [df setTimeStyle:NSDateFormatterShortStyle];
     }
     [[allTripsTableViewCell extraLabel] setText:[_df stringFromDate:[thisTrip dateModified]]];
     
@@ -348,27 +269,69 @@
     }   
 }
 
-/*
-// Override to support rearranging the table view.
-- (void)tableView:(UITableView *)tableView moveRowAtIndexPath:(NSIndexPath *)fromIndexPath toIndexPath:(NSIndexPath *)toIndexPath
+#pragma mark - UIViewController
+
+- (void)viewDidLoad
 {
+    [super viewDidLoad];
+    
+    // Uncomment the following line to preserve selection between presentations.
+    // self.clearsSelectionOnViewWillAppear = NO;
+    
+    // Uncomment the following line to display an Edit button in the navigation bar for this view controller.
+    // self.navigationItem.rightBarButtonItem = self.editButtonItem;
+    
+    [self startRespondingToStoreChangeNotifications];
+    
+    _emptyMessage = [[NSBundle mainBundle] loadNibNamed:@"MCTableEmptyMessage_iPad" owner:self options:nil][0];
+    [[_emptyMessage bigMessage] setAlpha:0.0];
+    [[self tableView] setBackgroundView:_emptyMessage];
+    
+    [self setNeedsStatusBarAppearanceUpdate];
+    
+    [self prepareUserActivity];
 }
-*/
 
-/*
-// Override to support conditional rearranging of the table view.
-- (BOOL)tableView:(UITableView *)tableView canMoveRowAtIndexPath:(NSIndexPath *)indexPath
+- (void)viewWillAppear:(BOOL)animated
 {
-    // Return NO if you do not want the item to be re-orderable.
-    return YES;
+    [super viewWillAppear:animated];
+    
+    if (!_dataController) {
+        _dataController = [[MCWeAllPayStoreController defaultStore] allTripsDataControllerForDelegate:self];
+        [self performFetch];
+        [[self tableView] reloadData];
+        if (_isEmptyMessageShownInstantForFirstBoot == false) {
+            [self setEmptyMessageNow];
+            _isEmptyMessageShownInstantForFirstBoot = true;
+        } else {
+            [self setEmptyMessage];
+        }
+    }
+    
+    if (self.userActivity) {
+        [self.userActivity becomeCurrent];
+    }
 }
-*/
 
-#pragma mark - Navigation
-
-// In a storyboard-based application, you will often want to do a little preparation before navigation
-- (void)prepareForSegue:(UIStoryboardSegue *)segue sender:(id)sender
+- (void)viewWillDisappear:(BOOL)animated
 {
+    [super viewWillDisappear:animated];
+    
+    _dataController = nil;
+}
+
+- (void)didReceiveMemoryWarning
+{
+    [super didReceiveMemoryWarning];
+    // Dispose of any resources that can be recreated.
+    
+    // When view is not loaded it's not onscreen. Therefor the dataController can be nil;
+    if (![self isViewLoaded]) {
+        _dataController = nil;
+    }
+}
+
+- (void)prepareForSegue:(UIStoryboardSegue *)segue sender:(id)sender {
     // Get the new view controller using [segue destinationViewController].
     // Pass the selected object to the new view controller.
     
@@ -394,5 +357,21 @@
         }
     }
 }
+
+#pragma mark - UIResponder
+
+#pragma mark - NSObject
+
+- (void)awakeFromNib
+{
+    [super awakeFromNib];
+    _isEmptyMessageShownInstantForFirstBoot = false;
+}
+
+- (void)dealloc
+{
+    [[NSNotificationCenter defaultCenter] removeObserver:self];
+}
+
 
 @end
