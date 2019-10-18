@@ -13,7 +13,4 @@
 
 @interface MCAllTripsTableViewController_iPad : UITableViewController <NSFetchedResultsControllerDelegate>
 
-@property (nonatomic, strong) MCTableEmptyMessage_iPad *emptyMessage;
-@property (nonatomic, strong) NSDateFormatter *df;
-
 @end

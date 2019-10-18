@@ -21,6 +21,9 @@
 
 @interface MCAllTripsTableViewController_iPad ()
 
+@property (nonatomic, strong) MCTableEmptyMessage_iPad *emptyMessage;
+@property (nonatomic, strong) NSDateFormatter *df;
+
 @property (nonatomic, strong) NSFetchedResultsController *dataController;
 
 @property (nonatomic) BOOL isEmptyMessageShownInstantForFirstBoot;
@@ -33,16 +36,14 @@
 
 #pragma mark - IBActions
 
-- (IBAction)newEventPressed:(id)sender
-{
+- (IBAction)newEventPressed:(id)sender {
     [FIRAnalytics logEventWithName:@"New Event" parameters:nil];
 }
 
 
 #pragma mark - New in this class
 
-- (void)performFetch
-{
+- (void)performFetch {
     NSError *error;
     BOOL success = [_dataController performFetch:&error];
     if (!success) {
@@ -50,42 +51,39 @@
     }
 }
 
-- (void)setEmptyMessage
-{
+- (void)setEmptyMessage {
     if ([[_dataController fetchedObjects] count] != 0) {
         [UIView animateWithDuration:1.0 animations:^{
-            [[self.emptyMessage bigMessage] setAlpha:0.0];
-            [[self tableView] setSeparatorStyle:UITableViewCellSeparatorStyleSingleLine];
+            self.emptyMessage.bigMessage.alpha = 0.0;
+            self.tableView.separatorStyle = UITableViewCellSeparatorStyleSingleLine;
         } completion:nil];
     } else {
         if ([[_emptyMessage bigMessage] alpha] < 1.0) {
             [UIView animateWithDuration:1.0 animations:^{
-                [[self.emptyMessage bigMessage] setAlpha:1.0];
-                [[self tableView] setSeparatorStyle:UITableViewCellSeparatorStyleNone];
+                self.emptyMessage.bigMessage.alpha = 1.0;
+                self.tableView.separatorStyle = UITableViewCellSeparatorStyleNone;
             } completion:nil];
         }
     }
 }
 
-- (void)setEmptyMessageNow
-{
-    if ([[_dataController fetchedObjects] count] != 0) {
+- (void)setEmptyMessageNow {
+    if (_dataController.fetchedObjects.count != 0) {
         [UIView animateWithDuration:0.0 animations:^{
-            [[self.emptyMessage bigMessage] setAlpha:0.0];
-            [[self tableView] setSeparatorStyle:UITableViewCellSeparatorStyleSingleLine];
+            self.emptyMessage.bigMessage.alpha = 0.0;
+            self.tableView.separatorStyle = UITableViewCellSeparatorStyleSingleLine;
         } completion:nil];
     } else {
         if ([[_emptyMessage bigMessage] alpha] < 1.0) {
             [UIView animateWithDuration:0.0 animations:^{
-                [[self.emptyMessage bigMessage] setAlpha:1.0];
-                [[self tableView] setSeparatorStyle:UITableViewCellSeparatorStyleNone];
+                self.emptyMessage.bigMessage.alpha = 1.0;
+                self.tableView.separatorStyle = UITableViewCellSeparatorStyleNone;
             } completion:nil];
         }
     }
 }
 
-- (void)prepareUserActivity
-{
+- (void)prepareUserActivity {
     if (@available(iOS 9.0, *)) {
         NSUserActivity *activity = [[NSUserActivity alloc] initWithActivityType:@"com.GreenHair.We-all-pay.SharingExpenses"];
         activity.title = NSLocalizedString(@"We all pay - Sharing Expenses and bill splitting made easy", @"The title of the app");
@@ -109,16 +107,14 @@
 
 #pragma mark - Core Data Notifications
 
-- (void)storeWillBeSwapped:(NSNotification *)notification
-{
+- (void)storeWillBeSwapped:(NSNotification *)notification {
     [super storeWillBeSwapped:notification];
     dispatch_sync(dispatch_get_main_queue(), ^{
-        [[self view] setUserInteractionEnabled:NO];
+        self.view.userInteractionEnabled = NO;
     });
 }
 
--(void)storeDidSwap:(NSNotification *)notification
-{
+- (void)storeDidSwap:(NSNotification *)notification {
     [super storeDidSwap:notification];
     dispatch_sync(dispatch_get_main_queue(), ^{
         if (self.dataController) {
@@ -129,26 +125,22 @@
         }
         [[self tableView] reloadData];
         [self setEmptyMessage];
-        [[self view] setUserInteractionEnabled:YES];
+        self.view.userInteractionEnabled = YES;
     });
 }
 
 #pragma mark - NSFetchedResultsController
 
-- (void)controllerWillChangeContent:(NSFetchedResultsController *)controller
-{
+- (void)controllerWillChangeContent:(NSFetchedResultsController *)controller {
     [[self tableView] beginUpdates];
 }
 
-- (void)controllerDidChangeContent:(NSFetchedResultsController *)controller
-{
+- (void)controllerDidChangeContent:(NSFetchedResultsController *)controller {
     [[self tableView] endUpdates];
 }
 
-- (void)controller:(NSFetchedResultsController *)controller didChangeObject:(id)anObject atIndexPath:(NSIndexPath *)indexPath forChangeType:(NSFetchedResultsChangeType)type newIndexPath:(NSIndexPath *)newIndexPath
-{
+- (void)controller:(NSFetchedResultsController *)controller didChangeObject:(id)anObject atIndexPath:(NSIndexPath *)indexPath forChangeType:(NSFetchedResultsChangeType)type newIndexPath:(NSIndexPath *)newIndexPath {
     switch(type) {
-            
         case NSFetchedResultsChangeInsert:
             [[self tableView] insertRowsAtIndexPaths:@[newIndexPath] withRowAnimation:UITableViewRowAnimationFade];
             [self setEmptyMessage];
@@ -174,10 +166,8 @@
 
 #pragma mark - UITableViewDelegate
 
-- (void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath
-{
+- (void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath {
     [FIRAnalytics logEventWithName:@"Open Event" parameters:nil];
-//    [self performSegueWithIdentifier:@"openEvent" sender:self];
 }
 
 - (NSArray<UITableViewRowAction *> *)tableView:(UITableView *)tableView editActionsForRowAtIndexPath:(NSIndexPath *)indexPath {
@@ -204,48 +194,44 @@
 
 #pragma mark - UITableViewDataSource
 
-- (NSInteger)numberOfSectionsInTableView:(UITableView *)tableView
-{
-    // Return the number of sections.
+- (NSInteger)numberOfSectionsInTableView:(UITableView *)tableView {
     return 1;
 }
 
-- (NSInteger)tableView:(UITableView *)tableView numberOfRowsInSection:(NSInteger)section
-{
-    // Return the number of rows in the section.
-    return [[_dataController fetchedObjects] count];
+- (NSInteger)tableView:(UITableView *)tableView numberOfRowsInSection:(NSInteger)section {
+    return _dataController.fetchedObjects.count;
 }
 
 
-- (UITableViewCell *)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath
-{
+- (UITableViewCell *)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath {
     MCSharedBill *thisTrip = [_dataController objectAtIndexPath:indexPath];
     AllTripsTableViewCell_iPad *allTripsTableViewCell = [tableView dequeueReusableCellWithIdentifier:@"MCAllTripsTableViewCell_iPad"];
+    allTripsTableViewCell.accessibilityIdentifier = [NSString stringWithFormat:@"EventTableViewCell-%lu", indexPath.row];
     
-    if (![thisTrip tripName]) {
-        [[allTripsTableViewCell tripLabel] setText:NSLocalizedString(@"...", @"String that shows empty string")];
+    if (!thisTrip.tripName) {
+        allTripsTableViewCell.tripLabel.text = NSLocalizedString(@"...", @"String that shows empty string");
     } else {
-        [[allTripsTableViewCell tripLabel] setText:[thisTrip tripName]];
+        allTripsTableViewCell.tripLabel.text = thisTrip.tripName;
     }
-    [[allTripsTableViewCell peoplePresentLabel] setText:[thisTrip stringOfApproxPeoplePresentWithFullNames]];
+    allTripsTableViewCell.peoplePresentLabel.text = thisTrip.stringOfApproxPeoplePresentWithFullNames;
     
     if ([thisTrip areAllExchangeRatesValid]) {
         [[allTripsTableViewCell activityIndicator] stopAnimating];
-        [[allTripsTableViewCell totalCostLabel] setHidden:NO];
+        allTripsTableViewCell.totalCostLabel.hidden = NO;
         
         CurrencyFormatter *cf = [[CurrencyFormatter alloc] initWithCurrencyCode:thisTrip.mainCurrency.code];
         allTripsTableViewCell.totalCostLabel.text = [cf stringFor:thisTrip.totalSumOfMoneyOfThisSharedBill];
     } else {
         [[allTripsTableViewCell activityIndicator] startAnimating];
-        [[allTripsTableViewCell totalCostLabel] setHidden:YES];
+        allTripsTableViewCell.totalCostLabel.hidden = YES;
     }
     
     // fill extraLabel with dateModified.
     if (!_df) {
         _df = [[NSDateFormatter alloc] init];
-        [_df setDateStyle:NSDateFormatterFullStyle];
+        _df.dateStyle = NSDateFormatterFullStyle;
     }
-    [[allTripsTableViewCell extraLabel] setText:[_df stringFromDate:[thisTrip dateModified]]];
+    allTripsTableViewCell.extraLabel.text = [_df stringFromDate:thisTrip.dateModified];
     
     return allTripsTableViewCell;
 }
@@ -284,8 +270,8 @@
     [self startRespondingToStoreChangeNotifications];
     
     _emptyMessage = [[NSBundle mainBundle] loadNibNamed:@"MCTableEmptyMessage_iPad" owner:self options:nil][0];
-    [[_emptyMessage bigMessage] setAlpha:0.0];
-    [[self tableView] setBackgroundView:_emptyMessage];
+    _emptyMessage.bigMessage.alpha = 0.0;
+    self.tableView.backgroundView = _emptyMessage;
     
     [self setNeedsStatusBarAppearanceUpdate];
     
@@ -326,7 +312,7 @@
     // Dispose of any resources that can be recreated.
     
     // When view is not loaded it's not onscreen. Therefor the dataController can be nil;
-    if (![self isViewLoaded]) {
+    if (!self.isViewLoaded) {
         _dataController = nil;
     }
 }
@@ -362,14 +348,12 @@
 
 #pragma mark - NSObject
 
-- (void)awakeFromNib
-{
+- (void)awakeFromNib {
     [super awakeFromNib];
     _isEmptyMessageShownInstantForFirstBoot = false;
 }
 
-- (void)dealloc
-{
+- (void)dealloc {
     [[NSNotificationCenter defaultCenter] removeObserver:self];
 }
 
