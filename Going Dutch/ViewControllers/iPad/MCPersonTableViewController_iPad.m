@@ -24,8 +24,8 @@
 #import "We_all_pay-Swift.h"
 
 typedef NS_ENUM(BOOL, MCStatus) {
-    inValid,
-    valid
+    MCStatusInValid,
+    MCStatusValid
 };
 
 @interface MCPersonTableViewController_iPad ()
@@ -38,35 +38,32 @@ typedef NS_ENUM(BOOL, MCStatus) {
 
 #pragma mark - Actions
 
-- (IBAction)mainCancelButtonPressed:(id)sender
-{
+- (IBAction)mainCancelButtonPressed:(id)sender {
     [FIRAnalytics logEventWithName:@"Main Canncel Pressed" parameters:nil];
-    [[self view] resignFirstResponder];
+    [self.view resignFirstResponder];
     _mainCancelPressed = cancelIsPressed;
-    if ([[[_thisPerson managedObjectContext] undoManager] canUndo]) {
+    if ([_thisPerson.managedObjectContext.undoManager canUndo]) {
         [[MCWeAllPayStoreController defaultStore] endUndoGroupAndUndo];
     } else {
         [[MCWeAllPayStoreController defaultStore] endUndoGroup];
     }
-    [[[self navigationController] presentingViewController] dismissViewControllerAnimated:YES completion:nil];
-    
+    [self.navigationController.presentingViewController dismissViewControllerAnimated:YES completion:nil];
 }
 
-- (IBAction)mainDoneButtonPressed:(id)sender
-{
+- (IBAction)mainDoneButtonPressed:(id)sender {
     [FIRAnalytics logEventWithName:@"Main Done Pressed" parameters:nil];
-    [[self view] resignFirstResponder];
-    if ([MCTools isStringAnEmailAddress:[_emailField text]]) {
+    [self.view resignFirstResponder];
+    if ([MCTools isStringAnEmailAddress:_emailField.text]) {
         [self dismissFromDone];
         [[MCWeAllPayStoreController defaultStore] saveMainThreadContext];
     } else {
-        NSString *alertViewTitle = NSLocalizedString(@"INVALID_EMAIL_ADDRESS", "Invalid email address");
-        NSString *alertViewMessage = NSLocalizedString(@"INVALID_EMAIL_ADDRESS_MESSAGE", @"The email address you provided doesn't appear to be an email address. This might cause improper behavior. Are you sure you want to continu?");
-        NSString *alertViewYes = NSLocalizedString(@"YES", @"yes");
-        NSString *alertViewNo = NSLocalizedString(@"NO", @"no");
-        UIAlertController *alertController = [UIAlertController alertControllerWithTitle:alertViewTitle message:alertViewMessage preferredStyle:UIAlertControllerStyleAlert];
-        [alertController addAction:[UIAlertAction actionWithTitle:alertViewNo style:UIAlertActionStyleCancel handler:nil]];
-        [alertController addAction:[UIAlertAction actionWithTitle:alertViewYes style:UIAlertActionStyleDefault handler:^(UIAlertAction * _Nonnull action) {
+        NSString *title = NSLocalizedString(@"INVALID_EMAIL_ADDRESS", "Invalid email address");
+        NSString *message = NSLocalizedString(@"INVALID_EMAIL_ADDRESS_MESSAGE", @"The email address you provided doesn't appear to be an email address. This might cause improper behavior. Are you sure you want to continu?");
+        NSString *yesTitle = NSLocalizedString(@"YES", @"yes");
+        NSString *noTitle = NSLocalizedString(@"NO", @"no");
+        UIAlertController *alertController = [UIAlertController alertControllerWithTitle:title message:message preferredStyle:UIAlertControllerStyleAlert];
+        [alertController addAction:[UIAlertAction actionWithTitle:noTitle style:UIAlertActionStyleCancel handler:nil]];
+        [alertController addAction:[UIAlertAction actionWithTitle:yesTitle style:UIAlertActionStyleDefault handler:^(UIAlertAction * _Nonnull action) {
             [self dismissFromDone];
             [[MCWeAllPayStoreController defaultStore] saveMainThreadContext];
         }]];
@@ -74,34 +71,29 @@ typedef NS_ENUM(BOOL, MCStatus) {
     }
 }
 
-- (IBAction)selectEmailAddressButtonPressed:(id)sender
-{
+- (IBAction)selectEmailAddressButtonPressed:(id)sender {
     [FIRAnalytics logEventWithName:@"Select email address pressed" parameters:nil];
 }
 
-- (IBAction)backgroundTappedToDismissKeyboard:(id)sender
-{
+- (IBAction)backgroundTappedToDismissKeyboard:(id)sender {
     [FIRAnalytics logEventWithName:@"BackgroundTapped to dismiss keyboard" parameters:nil];
     [self dismissTheKeyboard];
 }
 
 #pragma mark - New in this class
 
-- (void)dismissFromDone
-{
-    NSDate *now = [NSDate date];
-    [_tonightsBill setDateModified:now];
+- (void)dismissFromDone {
+    NSDate *now = NSDate.date;
+    _tonightsBill.dateModified = now;
     [[MCWeAllPayStoreController defaultStore] endUndoGroupAndProcess];
-    [[[self navigationController] presentingViewController] dismissViewControllerAnimated:YES completion:nil];
+    [self.navigationController.presentingViewController dismissViewControllerAnimated:YES completion:nil];
 }
 
-- (void)tappedInTheBackground:(id)selector
-{
+- (void)tappedInTheBackground:(id)selector {
     [self dismissTheKeyboard];
 }
 
-- (void) dismissTheKeyboard
-{
+- (void) dismissTheKeyboard {
     if ([_firstNameField isFirstResponder]) {
         [_firstNameField resignFirstResponder];
     } else if ([_lastNameField isFirstResponder]) {
@@ -113,22 +105,14 @@ typedef NS_ENUM(BOOL, MCStatus) {
 
 #pragma mark - Inherited From Super
 
-- (void)awakeFromNib
-{
+- (void)awakeFromNib {
     [super awakeFromNib];
     
-    _emailAddressStringInTextField = inValid;
+    _emailAddressStringInTextField = MCStatusInValid;
 }
 
-- (void)viewDidLoad
-{
+- (void)viewDidLoad {
     [super viewDidLoad];
-    
-    // Uncomment the following line to preserve selection between presentations.
-    // self.clearsSelectionOnViewWillAppear = NO;
-    
-    // Uncomment the following line to display an Edit button in the navigation bar for this view controller.
-    // self.navigationItem.rightBarButtonItem = self.editButtonItem;
     
     _isEditingEmailField = isNotEditing;
     _mainCancelPressed = cancelIsNotPressed;
@@ -136,12 +120,11 @@ typedef NS_ENUM(BOOL, MCStatus) {
     
     // Make sure a tap in the background dismisses the keyboard as well.
     UITapGestureRecognizer *thatTickles = [[UITapGestureRecognizer alloc] initWithTarget:self action:@selector(tappedInTheBackground:)];
-    [thatTickles setCancelsTouchesInView:NO];
+    thatTickles.cancelsTouchesInView = NO;
     [[self tableView] addGestureRecognizer:thatTickles];
 }
 
-- (void)viewWillAppear:(BOOL)animated
-{
+- (void)viewWillAppear:(BOOL)animated {
     [super viewWillAppear:animated];
     
     if (!_thisPerson) {
@@ -151,35 +134,29 @@ typedef NS_ENUM(BOOL, MCStatus) {
 //        didSomethingChange = YES;
         _isNew = YES;
         NSString *newHeaderTitle = NSLocalizedString(@"NEW_PERSON_HEADER", @"new person");
-        [self setTitle:newHeaderTitle];
+        self.title = newHeaderTitle;
     } else {
         _isNew = NO;
     }
     
     // If there is none or only one emailAddress the button for an email address should not be shown.
     if ([[_thisPerson emailAddress] count] < 2) {
-        [_selectEmailAddressButton setHidden:YES];
+        _selectEmailAddressButton.hidden = YES;
     } else {
-        [_selectEmailAddressButton setHidden:NO];
+        _selectEmailAddressButton.hidden = NO;
     }
     
-    [_firstNameField setText:[_thisPerson firstName]];
-    [_lastNameField setText:[_thisPerson lastName]];
-    [_emailField setText:[_thisPerson defaultEmailAddress]];
+
+    _firstNameField.text = _thisPerson.firstName;
+    _lastNameField.text = _thisPerson.lastName;
+    _emailField.text = _thisPerson.defaultEmailAddress;
     
     _pictureView.image = _thisPerson.picture;
 }
 
-- (void)didReceiveMemoryWarning
-{
-    [super didReceiveMemoryWarning];
-    // Dispose of any resources that can be recreated.
-}
-
 #pragma mark - UITextFieldDelegate
 
--(void)textFieldDidBeginEditing:(UITextField *)textField
-{
+- (void)textFieldDidBeginEditing:(UITextField *)textField {
     if (textField == _firstNameField) {
         [FIRAnalytics logEventWithName:@"firstNameField didBeginEditing" parameters:nil];
     } else if (textField == _lastNameField) {
@@ -190,35 +167,33 @@ typedef NS_ENUM(BOOL, MCStatus) {
     }
 }
 
-- (BOOL)textFieldShouldEndEditing:(UITextField *)textField
-{
+- (BOOL)textFieldShouldEndEditing:(UITextField *)textField {
     if (textField == _emailField) {
 #ifdef DEBUG
         NSLog(@"should dismiss emailField");
 #endif
         if ([MCTools isStringAnEmailAddress:[_emailField text]]) {
-            [_emailField setTextColor:[UIColor blackColor]];
-            _emailAddressStringInTextField = valid;
+            _emailField.textColor = UIColor.blackColor;
+            _emailAddressStringInTextField = MCStatusValid;
             return YES;
         } else {
-            [_emailField setTextColor:[UIColor redColor]];
-            _emailAddressStringInTextField = inValid;
+            _emailField.textColor = UIColor.redColor;
+            _emailAddressStringInTextField = MCStatusInValid;
             return NO;
         }
     }
     return YES;
 }
 
-- (void)textFieldDidEndEditing:(UITextField *)textField
-{
+- (void)textFieldDidEndEditing:(UITextField *)textField {
     // First check is mainCancel has been pressed. In that case this will be executed after the textField has been dismissed.
     if (_mainCancelPressed == cancelIsNotPressed) {
         if (textField == _firstNameField) {
             [FIRAnalytics logEventWithName:@"firstNameField didEndEditing" parameters:nil];
-            [_thisPerson setFirstName:[textField text]];
+            _thisPerson.firstName = textField.text;
         } else if (textField == _lastNameField) {
             [FIRAnalytics logEventWithName:@"lastNameField didEndEditing" parameters:nil];
-            [_thisPerson setLastName:[textField text]];
+            _thisPerson.lastName = textField.text;
         } else if (textField == _emailField) {
             [FIRAnalytics logEventWithName:@"emailField didEndEditing" parameters:nil];
             if (_isNew) {
@@ -228,7 +203,7 @@ typedef NS_ENUM(BOOL, MCStatus) {
                 if (!defaultEmail) {
                     [_thisPerson addOneEmailAddressFromAString:[_emailField text]];
                 } else {
-                    [defaultEmail setEmailAddress:[_emailField text]];
+                    defaultEmail.emailAddress = _emailField.text;
                 }
             }
             _isEditingEmailField = isNotEditing;
@@ -238,84 +213,26 @@ typedef NS_ENUM(BOOL, MCStatus) {
 
 #pragma mark - Table view data source
 
-- (NSInteger)numberOfSectionsInTableView:(UITableView *)tableView
-{
-    // Return the number of sections.
+- (NSInteger)numberOfSectionsInTableView:(UITableView *)tableView {
     return 0;
 }
 
-- (NSInteger)tableView:(UITableView *)tableView numberOfRowsInSection:(NSInteger)section
-{
-    // Return the number of rows in the section.
+- (NSInteger)tableView:(UITableView *)tableView numberOfRowsInSection:(NSInteger)section {
     return 0;
 }
-
-/*
-- (UITableViewCell *)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath
-{
-    UITableViewCell *cell = [tableView dequeueReusableCellWithIdentifier:<#@"reuseIdentifier"#> forIndexPath:indexPath];
-    
-    // Configure the cell...
-    
-    return cell;
-}
-*/
-
-/*
-// Override to support conditional editing of the table view.
-- (BOOL)tableView:(UITableView *)tableView canEditRowAtIndexPath:(NSIndexPath *)indexPath
-{
-    // Return NO if you do not want the specified item to be editable.
-    return YES;
-}
-*/
-
-/*
-// Override to support editing the table view.
-- (void)tableView:(UITableView *)tableView commitEditingStyle:(UITableViewCellEditingStyle)editingStyle forRowAtIndexPath:(NSIndexPath *)indexPath
-{
-    if (editingStyle == UITableViewCellEditingStyleDelete) {
-        // Delete the row from the data source
-        [tableView deleteRowsAtIndexPaths:@[indexPath] withRowAnimation:UITableViewRowAnimationFade];
-    } else if (editingStyle == UITableViewCellEditingStyleInsert) {
-        // Create a new instance of the appropriate class, insert it into the array, and add a new row to the table view
-    }   
-}
-*/
-
-/*
-// Override to support rearranging the table view.
-- (void)tableView:(UITableView *)tableView moveRowAtIndexPath:(NSIndexPath *)fromIndexPath toIndexPath:(NSIndexPath *)toIndexPath
-{
-}
-*/
-
-/*
-// Override to support conditional rearranging of the table view.
-- (BOOL)tableView:(UITableView *)tableView canMoveRowAtIndexPath:(NSIndexPath *)indexPath
-{
-    // Return NO if you do not want the item to be re-orderable.
-    return YES;
-}
-*/
 
 #pragma mark - Navigation
 
-// In a storyboard-based application, you will often want to do a little preparation before navigation
-- (void)prepareForSegue:(UIStoryboardSegue *)segue sender:(id)sender
-{
-    // Get the new view controller using [segue destinationViewController].
-    // Pass the selected object to the new view controller.
+- (void)prepareForSegue:(UIStoryboardSegue *)segue sender:(id)sender {
     if ([[segue identifier] isEqualToString:@"openSelectEmailAddress"]) {
         __weak SelectEmailAddressTableViewController_iPad *destination = [segue destinationViewController];
-        [destination setThisPerson:_thisPerson];
-        
+        destination.thisPerson = _thisPerson;
         if ([destination conformsToProtocol:@protocol(MCDismissMeBlockProtocol)]) {
             [destination setDismissMe:^{
                 [FIRAnalytics logEventWithName:@"dismiss select email address" parameters:nil];
                 if (destination) {
                     [destination dismissViewControllerAnimated:YES completion:^{
-                        [self.emailField setText:[self.thisPerson defaultEmailAddress]];
+                        self.emailField.text = self.thisPerson.defaultEmailAddress;
                     }];
                 }
             }];
