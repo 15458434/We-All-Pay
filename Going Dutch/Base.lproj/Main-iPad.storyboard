@@ -477,7 +477,7 @@
                                             <rect key="frame" x="148" y="64" width="372" height="34"/>
                                             <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                             <fontDescription key="fontDescription" type="system" pointSize="14"/>
-                                            <textInputTraits key="textInputTraits" autocapitalizationType="sentences"/>
+                                            <textInputTraits key="textInputTraits" autocapitalizationType="sentences" autocorrectionType="no" textContentType="name"/>
                                             <connections>
                                                 <outlet property="delegate" destination="ULr-7Y-8VH" id="qs1-2T-gw7"/>
                                             </connections>
@@ -486,7 +486,7 @@
                                             <rect key="frame" x="148" y="106" width="372" height="34"/>
                                             <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                             <fontDescription key="fontDescription" type="system" pointSize="14"/>
-                                            <textInputTraits key="textInputTraits" autocapitalizationType="sentences"/>
+                                            <textInputTraits key="textInputTraits" autocapitalizationType="sentences" autocorrectionType="no" textContentType="additional-name"/>
                                             <connections>
                                                 <outlet property="delegate" destination="ULr-7Y-8VH" id="Ov4-sg-a0L"/>
                                             </connections>
@@ -495,7 +495,7 @@
                                             <rect key="frame" x="148" y="148" width="372" height="34"/>
                                             <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                             <fontDescription key="fontDescription" type="system" pointSize="14"/>
-                                            <textInputTraits key="textInputTraits" keyboardType="emailAddress"/>
+                                            <textInputTraits key="textInputTraits" autocorrectionType="no" keyboardType="emailAddress" textContentType="email"/>
                                             <connections>
                                                 <outlet property="delegate" destination="ULr-7Y-8VH" id="KHm-EH-bnf"/>
                                             </connections>

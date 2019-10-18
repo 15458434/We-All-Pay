@@ -903,7 +903,7 @@
                                 <textField opaque="NO" clipsSubviews="YES" contentMode="scaleToFill" restorationIdentifier="firstNameField" contentHorizontalAlignment="left" contentVerticalAlignment="center" borderStyle="roundedRect" placeholder="First Name" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="Tln-WZ-m8Z">
                                     <rect key="frame" x="100" y="16" width="263" height="34"/>
                                     <fontDescription key="fontDescription" type="system" pointSize="14"/>
-                                    <textInputTraits key="textInputTraits" autocapitalizationType="sentences"/>
+                                    <textInputTraits key="textInputTraits" autocapitalizationType="words" autocorrectionType="no" textContentType="name"/>
                                     <connections>
                                         <outlet property="delegate" destination="eE2-xD-YRT" id="fIC-1D-94P"/>
                                     </connections>
@@ -911,7 +911,7 @@
                                 <textField opaque="NO" clipsSubviews="YES" contentMode="scaleToFill" restorationIdentifier="emailaddressField" contentHorizontalAlignment="left" contentVerticalAlignment="center" borderStyle="roundedRect" placeholder="e-mail address" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="4YY-Cv-Jxg">
                                     <rect key="frame" x="100" y="100" width="263" height="34"/>
                                     <fontDescription key="fontDescription" type="system" pointSize="14"/>
-                                    <textInputTraits key="textInputTraits" autocorrectionType="no" keyboardType="emailAddress"/>
+                                    <textInputTraits key="textInputTraits" autocorrectionType="no" keyboardType="emailAddress" textContentType="email"/>
                                     <connections>
                                         <outlet property="delegate" destination="eE2-xD-YRT" id="huk-Mq-K5v"/>
                                     </connections>
@@ -929,7 +929,7 @@
                                 <textField opaque="NO" clipsSubviews="YES" contentMode="scaleToFill" restorationIdentifier="lastNameField" contentHorizontalAlignment="left" contentVerticalAlignment="center" borderStyle="roundedRect" placeholder="Last name" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="E8v-zR-iZl">
                                     <rect key="frame" x="100" y="58" width="263" height="34"/>
                                     <fontDescription key="fontDescription" type="system" pointSize="14"/>
-                                    <textInputTraits key="textInputTraits" autocapitalizationType="sentences"/>
+                                    <textInputTraits key="textInputTraits" autocapitalizationType="sentences" autocorrectionType="no" textContentType="family-name"/>
                                     <connections>
                                         <outlet property="delegate" destination="eE2-xD-YRT" id="1yp-o6-4gL"/>
                                     </connections>
