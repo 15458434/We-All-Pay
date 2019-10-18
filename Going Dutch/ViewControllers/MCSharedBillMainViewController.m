@@ -209,7 +209,10 @@
 #endif
     [super viewDidLoad];
     // Do any additional setup after loading the view.
-    [[self navigationController] setToolbarHidden:YES animated:YES];
+    [self.navigationController setToolbarHidden:YES animated:YES];
+    
+    _peopleOrPaymentsSelectionControl.subviews[0].accessibilityIdentifier = @"People";
+    _peopleOrPaymentsSelectionControl.subviews[1].accessibilityIdentifier = @"Payments";
     
     [self startRespondingToStoreChangeNotifications];
     

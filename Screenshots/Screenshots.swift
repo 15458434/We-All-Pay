@@ -33,25 +33,24 @@ class Screenshots: XCTestCase {
     func testScreenshot() {
         // Use recording to get started writing UI tests.
         // Use XCTAssert and related functions to verify your tests produce the correct results.
+        
         switch UIDevice.current.userInterfaceIdiom {
         case .phone:
-            
-            let tablesQuery = app.tables
             snapshot("01-AllEventsViewController")
-            tablesQuery.cells.element(boundBy: 0).tap()
-//            tablesQuery.staticTexts[movieText].tap()
+            app.tables.cells.element(boundBy: 0).tap()
             let mcsharedbillmainviewNavigationBar = app.navigationBars["MCSharedBillMainView"]
-            XCTAssertNotNil(mcsharedbillmainviewNavigationBar)
             mcsharedbillmainviewNavigationBar.segmentedControls.buttons.element(boundBy: 0).tap()
+            
+            app!.navigationBars["MCSharedBillMainView"].segmentedControls.buttons.element(boundBy: 0).tap()
             snapshot("02-PeoplePresentViewController")
-            mcsharedbillmainviewNavigationBar.segmentedControls.buttons.element(boundBy: 1).tap()
+            app!.navigationBars["MCSharedBillMainView"].segmentedControls.buttons.element(boundBy: 1).tap()
             snapshot("03-PaymentsViewController")
-//            tablesQuery.buttons["Add payment"].tap()
-//            snapshot("04-PaymentViewController")
-//            app.navigationBars["MCPaymentView"].buttons["Cancel"].tap()
-//            tablesQuery.buttons["Solve"].tap()
-//            snapshot("05-SolutionViewController")
-//            app.navigationBars["Solution"].buttons["Cancel"].tap()
+            let tablesQuery = app.scrollViews.otherElements.tables
+            tablesQuery/*@START_MENU_TOKEN@*/.buttons["Add Payment"]/*[[".buttons[\"Add payment\"]",".buttons[\"Add Payment\"]"],[[[-1,1],[-1,0]]],[0]]@END_MENU_TOKEN@*/.tap()
+            snapshot("04-PaymentViewController")
+            app.navigationBars["MCPaymentView"].buttons["Cancel"].tap()
+            tablesQuery.buttons["Solve"].tap()
+            snapshot("05-SolutionViewController")
             
         case .pad:
             ()
