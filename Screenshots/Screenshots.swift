@@ -58,10 +58,10 @@ class Screenshots: XCTestCase {
             snapshot("02-EventOverviewViewController")
             app/*@START_MENU_TOKEN@*/.buttons["Add  Person"]/*[[".buttons[\"Add person\"]",".buttons[\"Add  Person\"]"],[[[-1,1],[-1,0]]],[0]]@END_MENU_TOKEN@*/.tap()
             snapshot("03-AddPersonViewController")
-            app.navigationBars["New person"].buttons["Cancel"].tap()
+            app.navigationBars.element(boundBy: 1).buttons["Cancel"].tap()
             app/*@START_MENU_TOKEN@*/.buttons["Add Payment"]/*[[".buttons[\"Add payment\"]",".buttons[\"Add Payment\"]"],[[[-1,1],[-1,0]]],[0]]@END_MENU_TOKEN@*/.tap()
             snapshot("04-AddPaymentViewController")
-            app.navigationBars["New Payment"].buttons["Cancel"].tap()
+            app.navigationBars.element(boundBy: 1).buttons["Cancel"].tap()
             app.buttons["Solve"].tap()
             snapshot("05-SolutionViewController")
         default:
