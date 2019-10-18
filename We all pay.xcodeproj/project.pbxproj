@@ -11,7 +11,6 @@
 		38010E0F1A3F4A4F0056F8F8 /* Localizable.strings in Resources */ = {isa = PBXBuildFile; fileRef = 38010E111A3F4A4F0056F8F8 /* Localizable.strings */; };
 		380700A51A1B616000C7FB37 /* MCPaymentUpdateTo4.m in Sources */ = {isa = PBXBuildFile; fileRef = 380700A41A1B616000C7FB37 /* MCPaymentUpdateTo4.m */; };
 		380C48161BE1330E00C82B0F /* CurrencyFormatter.swift in Sources */ = {isa = PBXBuildFile; fileRef = 380C48151BE1330E00C82B0F /* CurrencyFormatter.swift */; };
-		380C92B522A9657B000BD574 /* Screenshots.swift in Sources */ = {isa = PBXBuildFile; fileRef = 380C92B422A9657B000BD574 /* Screenshots.swift */; };
 		380C92C022A9666F000BD574 /* SnapshotHelper.swift in Sources */ = {isa = PBXBuildFile; fileRef = 380C92BD22A96669000BD574 /* SnapshotHelper.swift */; };
 		381179D01A82D1FC00020538 /* MailComposer.swift in Sources */ = {isa = PBXBuildFile; fileRef = 381179CF1A82D1FC00020538 /* MailComposer.swift */; };
 		381275FF1BBD84650004C8C2 /* InfoScreenTableViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 381275FE1BBD84650004C8C2 /* InfoScreenTableViewController.swift */; };
@@ -125,6 +124,7 @@
 		38AAFBA218EC406300CD3E12 /* MCSharedBillPeoplePresentTableViewController-iPad.m in Sources */ = {isa = PBXBuildFile; fileRef = 38AAFBA118EC406300CD3E12 /* MCSharedBillPeoplePresentTableViewController-iPad.m */; };
 		38AAFBA518EC529300CD3E12 /* MCSharedBillViewController_iPad.m in Sources */ = {isa = PBXBuildFile; fileRef = 38AAFBA418EC529300CD3E12 /* MCSharedBillViewController_iPad.m */; };
 		38AD8C12197E8926005C3436 /* MCAddCurrenciesEntityMigrationPolicy.m in Sources */ = {isa = PBXBuildFile; fileRef = 38AD8C11197E8926005C3436 /* MCAddCurrenciesEntityMigrationPolicy.m */; };
+		38AFB8B6235A38CC007D6676 /* Screenshots.swift in Sources */ = {isa = PBXBuildFile; fileRef = 380C92B422A9657B000BD574 /* Screenshots.swift */; };
 		38B08C571B38382E00FB84B1 /* MCTableEmptyMessage_iPad.swift in Sources */ = {isa = PBXBuildFile; fileRef = 38B08C561B38382E00FB84B1 /* MCTableEmptyMessage_iPad.swift */; };
 		38B08C591B383A4C00FB84B1 /* MCStoreInterface.swift in Sources */ = {isa = PBXBuildFile; fileRef = 38B08C581B383A4C00FB84B1 /* MCStoreInterface.swift */; };
 		38B7E9521D86F8F600400E72 /* ContactsDataReceiver.swift in Sources */ = {isa = PBXBuildFile; fileRef = 38B7E9511D86F8F600400E72 /* ContactsDataReceiver.swift */; };
@@ -1677,8 +1677,8 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				380C92B522A9657B000BD574 /* Screenshots.swift in Sources */,
 				380C92C022A9666F000BD574 /* SnapshotHelper.swift in Sources */,
+				38AFB8B6235A38CC007D6676 /* Screenshots.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

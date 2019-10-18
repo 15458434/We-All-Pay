@@ -2,17 +2,17 @@
 
 # A list of devices you want to take the screenshots from
 devices([
-   "iPhone 8",
-   "iPhone 8 Plus",
-   "iPhone SE (13.1)",
-   "iPhone 11",
-   "iPhone 11 Pro",
-   "iPhone 11 Pro Max"])
+#   "iPhone 8",
+#   "iPhone 8 Plus",
+#   "iPhone SE (13.1)",
+#   "iPhone 11",
+#   "iPhone 11 Pro",
+#   "iPhone 11 Pro Max",
 #   "iPad Pro (12.9-inch)",
-#   "iPad Pro (11.0-inch)",
+   "iPad Pro (11.0-inch)"
 #   "iPad Pro (10.4-inch)",
 #   "iPad Pro (9.7-inch)"
-#])
+])
 
 languages([
     "en-US",

@@ -206,7 +206,7 @@
 - (UITableViewCell *)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath {
     MCSharedBill *thisTrip = [_dataController objectAtIndexPath:indexPath];
     AllTripsTableViewCell_iPad *thisCell = [tableView dequeueReusableCellWithIdentifier:@"MCAllTripsTableViewCell_iPad"];
-    thisCell.accessibilityIdentifier = [NSString stringWithFormat:@"EventTableViewCell-%lu", indexPath.row];
+    thisCell.tripLabel.accessibilityIdentifier = [NSString stringWithFormat:@"EventTableViewCell-%lu", indexPath.row];
     
     if (!thisTrip.tripName) {
         thisCell.tripLabel.text = NSLocalizedString(@"...", @"String that shows empty string");
