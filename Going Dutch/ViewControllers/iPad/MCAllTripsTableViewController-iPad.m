@@ -205,25 +205,25 @@
 
 - (UITableViewCell *)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath {
     MCSharedBill *thisTrip = [_dataController objectAtIndexPath:indexPath];
-    AllTripsTableViewCell_iPad *allTripsTableViewCell = [tableView dequeueReusableCellWithIdentifier:@"MCAllTripsTableViewCell_iPad"];
-    allTripsTableViewCell.accessibilityIdentifier = [NSString stringWithFormat:@"EventTableViewCell-%lu", indexPath.row];
+    AllTripsTableViewCell_iPad *thisCell = [tableView dequeueReusableCellWithIdentifier:@"MCAllTripsTableViewCell_iPad"];
+    thisCell.accessibilityIdentifier = [NSString stringWithFormat:@"EventTableViewCell-%lu", indexPath.row];
     
     if (!thisTrip.tripName) {
-        allTripsTableViewCell.tripLabel.text = NSLocalizedString(@"...", @"String that shows empty string");
+        thisCell.tripLabel.text = NSLocalizedString(@"...", @"String that shows empty string");
     } else {
-        allTripsTableViewCell.tripLabel.text = thisTrip.tripName;
+        thisCell.tripLabel.text = thisTrip.tripName;
     }
-    allTripsTableViewCell.peoplePresentLabel.text = thisTrip.stringOfApproxPeoplePresentWithFullNames;
+    thisCell.peoplePresentLabel.text = thisTrip.stringOfApproxPeoplePresentWithFullNames;
     
     if ([thisTrip areAllExchangeRatesValid]) {
-        [[allTripsTableViewCell activityIndicator] stopAnimating];
-        allTripsTableViewCell.totalCostLabel.hidden = NO;
+        [[thisCell activityIndicator] stopAnimating];
+        thisCell.totalCostLabel.hidden = NO;
         
         CurrencyFormatter *cf = [[CurrencyFormatter alloc] initWithCurrencyCode:thisTrip.mainCurrency.code];
-        allTripsTableViewCell.totalCostLabel.text = [cf stringFor:thisTrip.totalSumOfMoneyOfThisSharedBill];
+        thisCell.totalCostLabel.text = [cf stringFor:thisTrip.totalSumOfMoneyOfThisSharedBill];
     } else {
-        [[allTripsTableViewCell activityIndicator] startAnimating];
-        allTripsTableViewCell.totalCostLabel.hidden = YES;
+        [[thisCell activityIndicator] startAnimating];
+        thisCell.totalCostLabel.hidden = YES;
     }
     
     // fill extraLabel with dateModified.
@@ -231,9 +231,9 @@
         _df = [[NSDateFormatter alloc] init];
         _df.dateStyle = NSDateFormatterFullStyle;
     }
-    allTripsTableViewCell.extraLabel.text = [_df stringFromDate:thisTrip.dateModified];
+    thisCell.extraLabel.text = [_df stringFromDate:thisTrip.dateModified];
     
-    return allTripsTableViewCell;
+    return thisCell;
 }
 
 // Override to support conditional editing of the table view.
