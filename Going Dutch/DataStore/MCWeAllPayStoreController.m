@@ -66,8 +66,26 @@ NSString * const MCiCloudWeAllPayStoreName = @"iCloud-WeAllPayStore";
     return sharedStore;
 }
 
-- (void)openStore:(void (^)(BOOL success))completionHandler
-{
+#ifdef SCREENSHOTS
+- (void)openStore:(void (^)(MCWeAllPayStoreController *store, BOOL success))completionHandler {
+    [self mainThreadContext];
+    [self backgroundThreadContext];
+    [self startRespondingToStoreChangeNotifications];
+    if (_mainThreadContext && _backgroundThreadContext) {
+        _mainThreadContext.undoManager = [[NSUndoManager alloc] init];
+        [[_mainThreadContext undoManager] disableUndoRegistration];
+        if (completionHandler) {
+            completionHandler(self, YES);
+        }
+    } else {
+        NSLog(@"Unable to open We All Pay Store.");
+        if (completionHandler) {
+            completionHandler(self, NO);
+        }
+    }
+}
+#else
+- (void)openStore:(void (^)(BOOL success))completionHandler {
     [self mainThreadContext];
     [self backgroundThreadContext];
     [self startRespondingToStoreChangeNotifications];
@@ -84,6 +102,7 @@ NSString * const MCiCloudWeAllPayStoreName = @"iCloud-WeAllPayStore";
         }
     }
 }
+#endif
 
 - (void)saveMainThreadContext
 {
@@ -414,7 +433,6 @@ NSString * const MCiCloudWeAllPayStoreName = @"iCloud-WeAllPayStore";
 #endif
 }
 
-
 #pragma mark - Core Data Stack
 
 // Returns the managed object context for the application.
@@ -469,12 +487,19 @@ NSString * const MCiCloudWeAllPayStoreName = @"iCloud-WeAllPayStore";
 
 // Returns the persistent store coordinator for the application.
 // If the coordinator doesn't already exist, it is created and the application's store added to it.
-- (NSPersistentStoreCoordinator *)persistentStoreCoordinator
-{
+- (NSPersistentStoreCoordinator *)persistentStoreCoordinator {
     if (_persistentStoreCoordinator != nil) {
         return _persistentStoreCoordinator;
     }
-    
+#ifdef SCREENSHOTS
+    NSError *openPersistentStoreError;
+    _persistentStoreCoordinator = [[NSPersistentStoreCoordinator alloc] initWithManagedObjectModel:[self managedObjectModel]];
+    if (![_persistentStoreCoordinator addPersistentStoreWithType:NSInMemoryStoreType configuration:nil URL:nil options:nil error:&openPersistentStoreError]) {
+        NSLog(@"Unable to create in memory persistant store for screenshots: %@", openPersistentStoreError);
+        abort();
+    }
+    return _persistentStoreCoordinator;
+#else
     NSURL *directoryURL = [[self applicationDocumentsDirectory] URLByAppendingPathComponent:MCWeAllPayStoreDirectoryName isDirectory:YES];
     NSFileManager *fileManager = [NSFileManager defaultManager];
     if (![fileManager fileExistsAtPath:directoryURL.path]) {
@@ -518,6 +543,7 @@ NSString * const MCiCloudWeAllPayStoreName = @"iCloud-WeAllPayStore";
     }
     
     return _persistentStoreCoordinator;
+#endif
 }
 
 #pragma mark - Application's Documents directory

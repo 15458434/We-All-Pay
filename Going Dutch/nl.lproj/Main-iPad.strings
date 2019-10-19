@@ -19,47 +19,80 @@
 /* Class = "UILabel"; text = "moneyLabel"; ObjectID = "Bus-qo-pqC"; */
 "Bus-qo-pqC.text" = "moneyLabel";
 
+/* Class = "UILabel"; text = "Label"; ObjectID = "cb9-ow-Za9"; */
+"cb9-ow-Za9.text" = "Label";
+
 /* Class = "UINavigationItem"; title = "Payment details"; ObjectID = "Du0-aV-eeD"; */
 "Du0-aV-eeD.title" = "Betalingsdetails";
+
+/* Class = "UITextField"; placeholder = "emailaddress"; ObjectID = "eax-dw-aIf"; */
+"eax-dw-aIf.placeholder" = "E-mailadres";
+
+/* Class = "UILabel"; text = "nameLabel"; ObjectID = "eD2-1r-4uR"; */
+"eD2-1r-4uR.text" = "nameLabel";
+
+/* Class = "UIButton"; normalTitle = "Add payment"; ObjectID = "egw-0d-cT1"; */
+"egw-0d-cT1.normalTitle" = "Nieuwe betaling";
 
 /* Class = "UIButton"; normalTitle = "New event"; ObjectID = "EuC-uT-5WX"; */
 "EuC-uT-5WX.normalTitle" = "Nieuwe rekening";
 
+/* Class = "UIButton"; normalTitle = "Send Email"; ObjectID = "fi4-m8-emE"; */
+"fi4-m8-emE.normalTitle" = "Stuur email";
+
 /* Class = "UINavigationItem"; title = "events"; ObjectID = "Gep-Z6-3Aj"; */
 "Gep-Z6-3Aj.title" = "Rekeningen";
 
-/* (No Commment) */
-"GfK-Qn-5Kr.title" = "Item";
-
 /* Class = "UIButton"; normalTitle = "Contacts"; ObjectID = "H3d-ki-tdJ"; */
 "H3d-ki-tdJ.normalTitle" = "Contacten";
+
+/* Class = "UIButton"; normalTitle = "Select payer"; ObjectID = "hi9-hq-PS5"; */
+"hi9-hq-PS5.normalTitle" = "Selecteer betaler";
+
+/* Class = "UILabel"; text = "extraLabel"; ObjectID = "hKu-l5-7vA"; */
+"hKu-l5-7vA.text" = "extraLabel";
 
 /* Class = "UITextField"; placeholder = "last name"; ObjectID = "JRX-hO-2n8"; */
 "JRX-hO-2n8.placeholder" = "Achternaam";
 
 /* Class = "UILabel"; text = "emailAddress"; ObjectID = "KBE-ZP-DFn"; */
-"KBE-ZP-DFn.text" = "EmailAddress";
-
-/* Class = "UITextField"; placeholder = "What was paid?"; ObjectID = "LDs-9i-ZRZ"; */
-"LDs-9i-ZRZ.placeholder" = "Wat is er betaald?";
-
-/* Class = "UILabel"; text = "itemField"; ObjectID = "LTB-3b-Z1S"; */
-"LTB-3b-Z1S.text" = "itemField";
+"KBE-ZP-DFn.text" = "emailadres";
 
 /* Class = "UILabel"; text = "People sharing this payment"; ObjectID = "Lbm-k4-s3a"; */
 "Lbm-k4-s3a.text" = "Aanwezigen die deze betaling delen";
 
+/* Class = "UITextField"; placeholder = "What was paid?"; ObjectID = "LDs-9i-ZRZ"; */
+"LDs-9i-ZRZ.placeholder" = "Wat is er betaald?";
+
 /* Class = "UIButton"; normalTitle = "Category"; ObjectID = "LnO-mX-ELw"; */
 "LnO-mX-ELw.normalTitle" = "Categorie";
+
+/* Class = "UILabel"; text = "itemField"; ObjectID = "LTB-3b-Z1S"; */
+"LTB-3b-Z1S.text" = "itemField";
 
 /* Class = "UILabel"; text = "emailLabel"; ObjectID = "MCZ-yM-Hrf"; */
 "MCZ-yM-Hrf.text" = "emailLabel";
 
+/* Class = "UITextField"; placeholder = "first name"; ObjectID = "nPF-0g-HeJ"; */
+"nPF-0g-HeJ.placeholder" = "Voornaam";
+
 /* Class = "UIButton"; normalTitle = "Add Person"; ObjectID = "Nxq-6f-abw"; */
 "Nxq-6f-abw.normalTitle" = "Nieuwe persoon";
 
+/* Class = "UILabel"; text = "totalSpentLabel"; ObjectID = "pkK-xC-uPv"; */
+"pkK-xC-uPv.text" = "totalSpentLabel";
+
+/* Class = "UILabel"; text = "Label"; ObjectID = "pSW-A7-HzN"; */
+"pSW-A7-HzN.text" = "Label";
+
+/* Class = "UILabel"; text = "Label"; ObjectID = "rt5-oo-0IR"; */
+"rt5-oo-0IR.text" = "Label";
+
 /* Class = "UISearchBar"; placeholder = "Search currency"; ObjectID = "Sxt-5n-jx4"; */
 "Sxt-5n-jx4.placeholder" = "Zoek valuta";
+
+/* Class = "UILabel"; text = "Symbol"; ObjectID = "szY-aN-Vq8"; */
+"szY-aN-Vq8.text" = "Symbool";
 
 /* Class = "UINavigationItem"; title = "Events"; ObjectID = "T8K-rj-EA0"; */
 "T8K-rj-EA0.title" = "Rekeningen";
@@ -73,6 +106,12 @@
 /* Class = "UINavigationItem"; title = "Solution"; ObjectID = "Vay-2v-DoQ"; */
 "Vay-2v-DoQ.title" = "Oplossing";
 
+/* Class = "UILabel"; text = "full name"; ObjectID = "vSV-5M-Ipk"; */
+"vSV-5M-Ipk.text" = "Volledige naam";
+
+/* Class = "UILabel"; text = "payerField"; ObjectID = "xU7-yf-2N6"; */
+"xU7-yf-2N6.text" = "payerField";
+
 /* Class = "UIButton"; normalTitle = "Select email address"; ObjectID = "Z0f-Hu-kcp"; */
 "Z0f-Hu-kcp.normalTitle" = "Selecteer emailadres";
 
@@ -81,49 +120,4 @@
 
 /* Class = "UITextField"; placeholder = "How much was spent?"; ObjectID = "ZlS-5v-dlc"; */
 "ZlS-5v-dlc.placeholder" = "Hoeveel is er betaald?";
-
-/* (No Commment) */
-"al5-Gb-hhI.normalTitle" = "Selecteer wie betaalt";
-
-/* Class = "UILabel"; text = "Label"; ObjectID = "cb9-ow-Za9"; */
-"cb9-ow-Za9.text" = "Label";
-
-/* Class = "UILabel"; text = "nameLabel"; ObjectID = "eD2-1r-4uR"; */
-"eD2-1r-4uR.text" = "nameLabel";
-
-/* Class = "UITextField"; placeholder = "emailaddress"; ObjectID = "eax-dw-aIf"; */
-"eax-dw-aIf.placeholder" = "E-mailadres";
-
-/* Class = "UIButton"; normalTitle = "Add payment"; ObjectID = "egw-0d-cT1"; */
-"egw-0d-cT1.normalTitle" = "Nieuwe betaling";
-
-/* Class = "UIButton"; normalTitle = "Send Email"; ObjectID = "fi4-m8-emE"; */
-"fi4-m8-emE.normalTitle" = "Stuur email";
-
-/* Class = "UILabel"; text = "extraLabel"; ObjectID = "hKu-l5-7vA"; */
-"hKu-l5-7vA.text" = "extraLabel";
-
-/* Class = "UIButton"; normalTitle = "Select payer"; ObjectID = "hi9-hq-PS5"; */
-"hi9-hq-PS5.normalTitle" = "Selecteer betaler";
-
-/* Class = "UITextField"; placeholder = "first name"; ObjectID = "nPF-0g-HeJ"; */
-"nPF-0g-HeJ.placeholder" = "Voornaam";
-
-/* Class = "UILabel"; text = "Label"; ObjectID = "pSW-A7-HzN"; */
-"pSW-A7-HzN.text" = "Label";
-
-/* Class = "UILabel"; text = "totalSpentLabel"; ObjectID = "pkK-xC-uPv"; */
-"pkK-xC-uPv.text" = "totalSpentLabel";
-
-/* Class = "UILabel"; text = "Label"; ObjectID = "rt5-oo-0IR"; */
-"rt5-oo-0IR.text" = "Label";
-
-/* Class = "UILabel"; text = "Symbol"; ObjectID = "szY-aN-Vq8"; */
-"szY-aN-Vq8.text" = "Symbool";
-
-/* Class = "UILabel"; text = "full name"; ObjectID = "vSV-5M-Ipk"; */
-"vSV-5M-Ipk.text" = "Volledige naam";
-
-/* Class = "UILabel"; text = "payerField"; ObjectID = "xU7-yf-2N6"; */
-"xU7-yf-2N6.text" = "payerField";
 

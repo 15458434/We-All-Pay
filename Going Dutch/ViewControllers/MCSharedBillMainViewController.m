@@ -126,9 +126,9 @@
 }
 
 - (void)prepareWorstSalesPitchEverView {
-#ifdef DEBUG
-    NSLog(@"Preparing GoogleMobileAds version: %@", [GADRequest sdkVersion]);
-#endif
+#ifdef SCREENSHOTS
+    self.worstSalesPitchEverView.autoloadEnabled = NO;
+#else
     BOOL isNotPurchased = ![[MCStoreInterface defaultStoreInterface] isProProductPurchased];
     if (isNotPurchased) {
         NSParameterAssert(_worstSalesPitchEverView);
@@ -142,6 +142,7 @@
     } else {
         self.worstSalesPitchEverView.autoloadEnabled = NO;
     }
+#endif
 }
 
 #pragma mark - Notification Handlers
@@ -208,7 +209,10 @@
 #endif
     [super viewDidLoad];
     // Do any additional setup after loading the view.
-    [[self navigationController] setToolbarHidden:YES animated:YES];
+    [self.navigationController setToolbarHidden:YES animated:YES];
+    
+    _peopleOrPaymentsSelectionControl.subviews[0].accessibilityIdentifier = @"People";
+    _peopleOrPaymentsSelectionControl.subviews[1].accessibilityIdentifier = @"Payments";
     
     [self startRespondingToStoreChangeNotifications];
     

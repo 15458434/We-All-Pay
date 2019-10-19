@@ -4,14 +4,29 @@
 /* Class = "UILabel"; text = "some person"; ObjectID = "6uD-Ru-yqC"; */
 "6uD-Ru-yqC.text" = "een persoon";
 
+/* Class = "UIButton"; normalTitle = "Contacts"; ObjectID = "asZ-Na-2wd"; */
+"asZ-Na-2wd.normalTitle" = "Contacten";
+
 /* Class = "UITextField"; placeholder = "Activity name"; ObjectID = "BJS-wA-qlM"; */
 "BJS-wA-qlM.placeholder" = "naam van de rekening";
+
+/* Class = "UINavigationItem"; title = "solution"; ObjectID = "cWM-Oj-MA0"; */
+"cWM-Oj-MA0.title" = "Oplossing";
 
 /* Class = "UINavigationItem"; title = "Select category"; ObjectID = "D32-AO-Av1"; */
 "D32-AO-Av1.title" = "Selecteer categorie";
 
 /* Class = "UITextField"; placeholder = "Last name"; ObjectID = "E8v-zR-iZl"; */
 "E8v-zR-iZl.placeholder" = "achternaam";
+
+/* Class = "UIButton"; normalTitle = "Add person"; ObjectID = "gfv-ln-Tgv"; */
+"gfv-ln-Tgv.normalTitle" = "Nieuwe persoon";
+
+/* Class = "UISegmentedControl"; gfW-p5-dHb.segmentTitles[0] = "People"; ObjectID = "gfW-p5-dHb"; */
+"gfW-p5-dHb.segmentTitles[0]" = "Aanwezigen";
+
+/* Class = "UISegmentedControl"; gfW-p5-dHb.segmentTitles[1] = "Payments"; ObjectID = "gfW-p5-dHb"; */
+"gfW-p5-dHb.segmentTitles[1]" = "Betalingen";
 
 /* Class = "UITextField"; placeholder = "Who paid?"; ObjectID = "Gtj-b7-bzJ"; */
 "Gtj-b7-bzJ.placeholder" = "Wie heeft er betaald?";
@@ -22,11 +37,17 @@
 /* Class = "UIButton"; normalTitle = "Select email address"; ObjectID = "Iac-jb-ETA"; */
 "Iac-jb-ETA.normalTitle" = "Selecteer emailadres";
 
-/* Class = "UIButton"; normalTitle = "New event"; ObjectID = "PRz-eP-dNH"; */
-"PRz-eP-dNH.normalTitle" = "Nieuwe rekening";
+/* Class = "UINavigationItem"; title = "events"; ObjectID = "j9s-0f-8Vh"; */
+"j9s-0f-8Vh.title" = "Rekeningen";
+
+/* Class = "UILabel"; text = "Presence on payment"; ObjectID = "mh0-5W-fIa"; */
+"mh0-5W-fIa.text" = "Aanwezigheid hierbij";
 
 /* Class = "UIButton"; normalTitle = "Solve"; ObjectID = "Prv-KL-M67"; */
 "Prv-KL-M67.normalTitle" = "Oplossing";
+
+/* Class = "UIButton"; normalTitle = "New event"; ObjectID = "PRz-eP-dNH"; */
+"PRz-eP-dNH.normalTitle" = "Nieuwe rekening";
 
 /* Class = "UINavigationItem"; title = "Select currency"; ObjectID = "QDz-zd-ctc"; */
 "QDz-zd-ctc.title" = "Selecteer munteenheid";
@@ -37,45 +58,12 @@
 /* Class = "UITextField"; placeholder = "First Name"; ObjectID = "Tln-WZ-m8Z"; */
 "Tln-WZ-m8Z.placeholder" = "voornaam";
 
-/* Class = "UITextField"; placeholder = "How much is spent?"; ObjectID = "ZTv-D4-TBc"; */
-"ZTv-D4-TBc.placeholder" = "Hoeveel is er betaald?";
+/* Class = "UIButton"; normalTitle = "Add payment"; ObjectID = "x8t-7z-SNG"; */
+"x8t-7z-SNG.normalTitle" = "Nieuwe betaling";
 
 /* Class = "UITextField"; placeholder = "What got paid?"; ObjectID = "Zmm-zR-L97"; */
 "Zmm-zR-L97.placeholder" = "Waarvoor is er betaald?";
 
-/* Class = "UIButton"; normalTitle = "Contacts"; ObjectID = "asZ-Na-2wd"; */
-"asZ-Na-2wd.normalTitle" = "Contacten";
-
-/* Class = "UINavigationItem"; title = "solution"; ObjectID = "cWM-Oj-MA0"; */
-"cWM-Oj-MA0.title" = "Oplossing";
-
-/* (No Commment) */
-"cvx-xv-4K0.text" = "Label";
-
-/* (No Commment) */
-"eFV-hJ-XhB.title" = "Info";
-
-/* Class = "UISegmentedControl"; gfW-p5-dHb.segmentTitles[0] = "People"; ObjectID = "gfW-p5-dHb"; */
-"gfW-p5-dHb.segmentTitles[0]" = "Aanwezigen";
-
-/* Class = "UISegmentedControl"; gfW-p5-dHb.segmentTitles[1] = "Payments"; ObjectID = "gfW-p5-dHb"; */
-"gfW-p5-dHb.segmentTitles[1]" = "Betalingen";
-
-/* Class = "UIButton"; normalTitle = "Add person"; ObjectID = "gfv-ln-Tgv"; */
-"gfv-ln-Tgv.normalTitle" = "Nieuwe persoon";
-
-/* Class = "UINavigationItem"; title = "events"; ObjectID = "j9s-0f-8Vh"; */
-"j9s-0f-8Vh.title" = "Rekeningen";
-
-/* (No Commment) */
-"lmh-2o-BWu.text" = "<<< Betalingen";
-
-/* Class = "UILabel"; text = "Presence on payment"; ObjectID = "mh0-5W-fIa"; */
-"mh0-5W-fIa.text" = "Aanwezigheid hierbij";
-
-/* (No Commment) */
-"oKh-Bm-aHC.text" = "Label";
-
-/* Class = "UIButton"; normalTitle = "Add payment"; ObjectID = "x8t-7z-SNG"; */
-"x8t-7z-SNG.normalTitle" = "Nieuwe betaling";
+/* Class = "UITextField"; placeholder = "How much is spent?"; ObjectID = "ZTv-D4-TBc"; */
+"ZTv-D4-TBc.placeholder" = "Hoeveel is er betaald?";
 
