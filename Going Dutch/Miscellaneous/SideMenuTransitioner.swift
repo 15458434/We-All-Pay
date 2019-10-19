@@ -28,6 +28,18 @@ import UIKit
 }
 
 @objcMembers public class SideMenuPresentationController: UIPresentationController {
+    private weak var backgroundTapGestureRecognizer: UITapGestureRecognizer!
+    
+    @objc func backgroundTapped(_ sender: UITapGestureRecognizer) {
+        guard sender == backgroundTapGestureRecognizer else {
+            fatalError("Wrong sender use only with the intended UITapGestureRecognizer")
+        }
+        
+        let presentedViewFrame = self.presentedViewController.view.frame
+        if !presentedViewFrame.contains(sender.location(in: containerView)) {
+            self.presentedViewController.dismiss(animated: true, completion: nil)
+        }
+    }
     
     // MARK: UIPresentationController
     
@@ -35,6 +47,12 @@ import UIKit
         var frameOfPresentingViewController = presentingViewController.view.frame
         frameOfPresentingViewController.size.width = 280
         return frameOfPresentingViewController
+    }
+    
+    public override func presentationTransitionWillBegin() {
+        let backgroundTapGestureRecognizer = UITapGestureRecognizer(target: self, action: #selector(backgroundTapped(_:)))
+        self.backgroundTapGestureRecognizer = backgroundTapGestureRecognizer
+        containerView!.addGestureRecognizer(backgroundTapGestureRecognizer)
     }
     
     public override func presentationTransitionDidEnd(_ completed: Bool) {
