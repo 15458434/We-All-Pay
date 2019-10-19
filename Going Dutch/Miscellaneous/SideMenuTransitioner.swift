@@ -37,8 +37,7 @@ import UIKit
         return frameOfPresentingViewController
     }
     
-    public override func containerViewWillLayoutSubviews() {
-        super.containerViewWillLayoutSubviews()
+    public override func presentationTransitionDidEnd(_ completed: Bool) {
         self.presentedViewController.view.clipsToBounds = false
         let presentedLayer = self.presentedViewController.view.layer
         presentedLayer.shadowOpacity = 0.5
@@ -59,13 +58,17 @@ import UIKit
     }
     
     public func animateTransition(using transitionContext: UIViewControllerContextTransitioning) {
-        guard let _ = transitionContext.viewController(forKey: .from), let toViewController = transitionContext.viewController(forKey: .to), let snapshot = toViewController.view.snapshotView(afterScreenUpdates: true) else {
+        guard let _ = transitionContext.viewController(forKey: .from), let toViewController = transitionContext.viewController(forKey: .to) else {
             return
         }
-        
-        let containerView = transitionContext.containerView
+
         let finalFrame = transitionContext.finalFrame(for: toViewController)
         let initialFrame = CGRect(x: -finalFrame.width, y: 0, width: finalFrame.width, height: finalFrame.height)
+        toViewController.view.frame = initialFrame
+        
+        guard let snapshot = toViewController.view.snapshotView(afterScreenUpdates: true) else {
+            return
+        }
         
         snapshot.frame = initialFrame
         snapshot.clipsToBounds = false
@@ -73,7 +76,8 @@ import UIKit
         snapshot.layer.shadowRadius = 15
         snapshot.layer.shadowPath = CGPath(rect: snapshot.bounds.insetBy(dx: 0, dy: -15), transform: nil)
         snapshot.layer.shadowColor = UIColor.black.cgColor
-        
+
+        let containerView = transitionContext.containerView
         containerView.addSubview(toViewController.view)
         containerView.addSubview(snapshot)
         toViewController.view.isHidden = true
