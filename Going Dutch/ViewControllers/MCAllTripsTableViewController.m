@@ -25,8 +25,8 @@
 #import "We_all_pay-Swift.h"
 
 typedef NS_ENUM(BOOL, MCTonightsBillStatus) {
-    isClosed,
-    isOpened
+    MCTonightsBillStatusClosed,
+    MCTonightsBillStatusOpened
 };
 
 @interface MCAllTripsTableViewController ()
@@ -37,6 +37,8 @@ typedef NS_ENUM(BOOL, MCTonightsBillStatus) {
 @property (nonatomic) BOOL isEmptyMessageShownInstantForFirstBoot;
 
 @property (nonatomic, strong) NSIndexPath *selectedIndexPathForAction;
+
+@property (nonatomic, strong) SideMenuTransitioner *iScreenTransitioner;
 
 @end
 
@@ -121,7 +123,7 @@ typedef NS_ENUM(BOOL, MCTonightsBillStatus) {
 - (void)awakeFromNib {
     [super awakeFromNib];
     
-    _isATonightsBillOpened = isClosed;
+    _isATonightsBillOpened = MCTonightsBillStatusClosed;
     _isEmptyMessageShownInstantForFirstBoot = NO;
 }
 
@@ -143,8 +145,8 @@ typedef NS_ENUM(BOOL, MCTonightsBillStatus) {
 - (void)viewWillAppear:(BOOL)animated {
     [super viewWillAppear:animated];
     
-    if (_isATonightsBillOpened == isOpened) {
-        _isATonightsBillOpened = isClosed;
+    if (_isATonightsBillOpened == MCTonightsBillStatusOpened) {
+        _isATonightsBillOpened = MCTonightsBillStatusClosed;
     }
     
     if (!_dataController) {
@@ -211,13 +213,13 @@ typedef NS_ENUM(BOOL, MCTonightsBillStatus) {
 #pragma mark - NSFetchedResultsControllerDelegate
 
 - (void)controllerWillChangeContent:(NSFetchedResultsController *)controller {
-    if (self.isViewLoaded && self.view.window && _isATonightsBillOpened == isClosed) {
+    if (self.isViewLoaded && self.view.window && _isATonightsBillOpened == MCTonightsBillStatusClosed) {
         [[self tableView] beginUpdates];
     }
 }
 
 - (void)controllerDidChangeContent:(NSFetchedResultsController *)controller {
-    if (self.isViewLoaded && self.view.window && _isATonightsBillOpened == isClosed) {
+    if (self.isViewLoaded && self.view.window && _isATonightsBillOpened == MCTonightsBillStatusClosed) {
 #ifdef DEBUG
         NSLog(@"executing tableView endUpdates");
 #endif
@@ -228,7 +230,7 @@ typedef NS_ENUM(BOOL, MCTonightsBillStatus) {
 }
 
 - (void)controller:(NSFetchedResultsController *)controller didChangeObject:(id)anObject atIndexPath:(NSIndexPath *)indexPath forChangeType:(NSFetchedResultsChangeType)type newIndexPath:(NSIndexPath *)newIndexPath {
-    if (self.isViewLoaded && self.view.window && _isATonightsBillOpened == isClosed) {
+    if (self.isViewLoaded && self.view.window && _isATonightsBillOpened == MCTonightsBillStatusClosed) {
         switch(type) {
                 
             case NSFetchedResultsChangeInsert:
@@ -355,10 +357,10 @@ typedef NS_ENUM(BOOL, MCTonightsBillStatus) {
     NSLog(@"prepareForSegue: %@", [segue identifier]);
 #endif
     if ([[segue identifier] isEqualToString:@"newTonightsBill"]) {
-        _isATonightsBillOpened = isOpened;
+        _isATonightsBillOpened = MCTonightsBillStatusOpened;
     }
     if ([[segue identifier] isEqualToString:@"openTonightsBill"]) {
-        _isATonightsBillOpened = isOpened;
+        _isATonightsBillOpened = MCTonightsBillStatusOpened;
     }
     MCSharedBill *theBill;
     if ([sender isKindOfClass:[NSArray class]]) {
@@ -389,6 +391,11 @@ typedef NS_ENUM(BOOL, MCTonightsBillStatus) {
         UINavigationController *navController = (UINavigationController *)segue.destinationViewController;
         SelectCurrencyTableViewController *currencySelector = (SelectCurrencyTableViewController *)navController.viewControllers.firstObject;
         currencySelector.currencyUpdateModel = [[EventUpdateCurrencyModel alloc] initWith:theBill];
+    } else if ([segue.identifier isEqualToString:@"iScreenSegue"]) {
+        UIViewController *navigationController = segue.destinationViewController;
+        navigationController.modalPresentationStyle = UIModalPresentationCustom;
+        _iScreenTransitioner = [[SideMenuTransitioner alloc] init];
+        navigationController.transitioningDelegate = _iScreenTransitioner;
     }
 }
 
