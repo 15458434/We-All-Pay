@@ -30,7 +30,7 @@ import UIKit
 @objcMembers public class SideMenuPresentationController: UIPresentationController {
     private weak var backgroundTapGestureRecognizer: UITapGestureRecognizer!
     
-    @objc func backgroundTapped(_ sender: UITapGestureRecognizer) {
+    @objc private func backgroundTapped(_ sender: UITapGestureRecognizer) {
         guard sender == backgroundTapGestureRecognizer else {
             fatalError("Wrong sender use only with the intended UITapGestureRecognizer")
         }
