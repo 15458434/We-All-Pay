@@ -49,6 +49,8 @@ class SolutionTableViewController_iPad: MCSolutionTableViewController, MFMailCom
         case .saved:
             Analytics.logEvent("MailComposeViewControler saved", parameters: nil)
             self.presentedViewController!.dismiss(animated: true, completion: nil)
+        @unknown default:
+            fatalError("Unknown value for MFMailComposeResult")
         }
     }
 }

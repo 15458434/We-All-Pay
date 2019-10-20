@@ -166,6 +166,8 @@ class InfoScreenTableViewController: UITableViewController, MFMailComposeViewCon
                 Analytics.logEvent("Feedback email failed", parameters: nil)
             }
             print("Failed to open mailComposeController")
+        @unknown default:
+            fatalError("Unknown value for MFMailComposeResult")
         }
     }
     
