@@ -278,6 +278,8 @@ enum CancelButtonPressed {
             case .move:
                 tableView.deleteRows(at: [indexPath!], with: .fade)
                 tableView.insertRows(at: [indexPath!], with: .fade)
+            @unknown default:
+                fatalError("Unknwn value for NSFetchedResultsChangeType")
             }
         } else {
             switch (type) {
@@ -296,6 +298,8 @@ enum CancelButtonPressed {
                     tableView.deleteRows(at: [indexPath!], with: .fade)
                     tableView.insertRows(at: [indexPath!], with: .fade)
                 }
+            @unknown default:
+                fatalError("Unknwn value for NSFetchedResultsChangeType")
             }
         }
     }

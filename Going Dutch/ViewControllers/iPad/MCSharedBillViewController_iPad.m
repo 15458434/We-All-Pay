@@ -141,7 +141,7 @@
     NSString *kiPhone5S = @"109c8d87d59d27b62a53157e313d1a49";
     NSString *kiPhone4S = @"87ebfc252a3675f03375aa13fce9286f";
     NSString *iPadRetina = @"63f51db641e29b85012042e407de3cba";
-    request.testDevices = @[kGADSimulatorID, kiPhone5S, kiPhone4S, iPadRetina];
+    GADMobileAds.sharedInstance.requestConfiguration.testDeviceIdentifiers = @[kGADSimulatorID, kiPhone5S, kiPhone4S, iPadRetina];
 #endif
     return request;
 }
