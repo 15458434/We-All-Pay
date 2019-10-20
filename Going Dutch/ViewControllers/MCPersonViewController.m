@@ -258,12 +258,6 @@ typedef NS_ENUM(BOOL, MCStatus) {
     [self startResigningFirstResponderOnBackgroundTap];
 }
 
-- (void)didReceiveMemoryWarning
-{
-    [super didReceiveMemoryWarning];
-    // Dispose of any resources that can be recreated.
-}
-
 #pragma mark - UITextFieldDelegate
 
 -(BOOL)textFieldShouldBeginEditing:(UITextField *)textField

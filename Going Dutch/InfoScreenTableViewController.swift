@@ -142,10 +142,6 @@ class InfoScreenTableViewController: UITableViewController, MFMailComposeViewCon
         NotificationCenter.default.removeObserver(self)
     }
     
-    override func didReceiveMemoryWarning() {
-        super.didReceiveMemoryWarning()
-    }
-    
     override var prefersStatusBarHidden: Bool {
         return true
     }
