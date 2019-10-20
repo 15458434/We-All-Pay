@@ -175,11 +175,6 @@ typedef NS_ENUM(BOOL, MCTonightsBillStatus) {
     _dataController = nil;
 }
 
-- (void)didReceiveMemoryWarning {
-    [super didReceiveMemoryWarning];
-    // Dispose of any resources that can be recreated.
-}
-
 - (void)dealloc {
     [self stopRespondingToStorechangeNotifications];
 }

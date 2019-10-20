@@ -220,12 +220,6 @@ typedef NS_ENUM(BOOL, MCXRateStatus) {
     }
 }
 
-- (void)didReceiveMemoryWarning
-{
-    [super didReceiveMemoryWarning];
-    // Dispose of any resources that can be recreated.
-}
-
 - (BOOL)shouldPresentInterstitialAd
 {
     return NO;
