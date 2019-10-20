@@ -48,6 +48,11 @@
                BlueprintName = "RateMeControllerForiOSTests"
                ReferencedContainer = "container:We all pay.xcodeproj">
             </BuildableReference>
+            <SkippedTests>
+               <Test
+                  Identifier = "RateMeControllerTests">
+               </Test>
+            </SkippedTests>
          </TestableReference>
       </Testables>
    </TestAction>
