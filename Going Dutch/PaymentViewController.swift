@@ -333,8 +333,8 @@ enum CancelButtonPressed {
         cell.thisCellsPaymentPresence = paymentPresenceForThisCell
         cell.keyboardDismissDelegate = self
         
-        let constraintBetweenNameLabelAndPayerLabel = NSLayoutConstraint(item: selectButton, attribute: .leading, relatedBy: .equal, toItem: cell.nameLabel, attribute: .leading, multiplier: 1.0, constant: 0.0)
-        let constraintBetweenPictureInCellAndPictureOfPayer = NSLayoutConstraint(item: cell.personView, attribute: .trailing, relatedBy: .equal, toItem: categoryImage, attribute: .trailing, multiplier: 1.0, constant: 0.0)
+        let constraintBetweenNameLabelAndPayerLabel = NSLayoutConstraint(item: selectButton!, attribute: .leading, relatedBy: .equal, toItem: cell.nameLabel, attribute: .leading, multiplier: 1.0, constant: 0.0)
+        let constraintBetweenPictureInCellAndPictureOfPayer = NSLayoutConstraint(item: cell.personView!, attribute: .trailing, relatedBy: .equal, toItem: categoryImage, attribute: .trailing, multiplier: 1.0, constant: 0.0)
         self.tableView.addConstraints([constraintBetweenNameLabelAndPayerLabel, constraintBetweenPictureInCellAndPictureOfPayer])
         
         return cell
