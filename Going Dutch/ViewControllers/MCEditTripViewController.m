@@ -445,6 +445,11 @@
         }
 
     }
+    
+    NSIndexPath *indexPathForSelectedRow = [self.tableView indexPathForSelectedRow];
+    if (indexPathForSelectedRow) {
+        [self.tableView deselectRowAtIndexPath:indexPathForSelectedRow animated:YES];
+    }
 }
 
 @end
