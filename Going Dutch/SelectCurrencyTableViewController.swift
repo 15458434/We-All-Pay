@@ -51,7 +51,7 @@ class SelectCurrencyTableViewController: UITableViewController, UISearchResultsU
     
     @IBAction func mainCancelPressed(_ sender: AnyObject) {
         // Don't select anything just dimiss the currency view controller
-        FIRAnalytics.logEvent(withName: "Main Cancel Pressed", parameters: nil)
+        Analytics.logEvent("Main Cancel Pressed", parameters: nil)
         navigationController!.presentingViewController!.dismiss(animated: true, completion: nil)
     }
     
@@ -74,7 +74,7 @@ class SelectCurrencyTableViewController: UITableViewController, UISearchResultsU
         
         func prepareForSearchController() {
             searchController.searchResultsUpdater = self
-            searchController.dimsBackgroundDuringPresentation = false
+            searchController.obscuresBackgroundDuringPresentation = false
             searchController.hidesNavigationBarDuringPresentation = false
             tableView.tableHeaderView = searchController.searchBar
             searchController.searchBar.delegate = self
@@ -133,7 +133,7 @@ class SelectCurrencyTableViewController: UITableViewController, UISearchResultsU
         let myPresenter = self.presentingViewController
         
         let thisCellsCurrency = data(indexPath: indexPath)
-        FIRAnalytics.logEvent(withName: "didSelectCurrency pressed", parameters: nil)
+        Analytics.logEvent("didSelectCurrency pressed", parameters: nil)
         
         currencyUpdateModel.updateCurrency(with: thisCellsCurrency.code) { (error) in
             if (error != nil) {
@@ -242,9 +242,9 @@ class SelectCurrencyTableViewController: UITableViewController, UISearchResultsU
         cell.currencySymbolLabel.text = thisCellsCurrency.symbol
         
         if currencyUpdateModel.currencyCode == thisCellsCurrency.code {
-            cell.accessoryType = UITableViewCellAccessoryType.checkmark
+            cell.accessoryType = UITableViewCell.AccessoryType.checkmark
         } else {
-            cell.accessoryType = UITableViewCellAccessoryType.none
+            cell.accessoryType = UITableViewCell.AccessoryType.none
         }
         
         return cell
@@ -261,15 +261,15 @@ extension SelectCurrencyTableViewController: UISearchBarDelegate {
     }
     
     func searchBarTextDidBeginEditing(_ searchBar: UISearchBar) {
-        FIRAnalytics.logEvent(withName: "SearchBarDidBeginEditing", parameters: nil)
+        Analytics.logEvent("SearchBarDidBeginEditing", parameters: nil)
     }
     
     func searchBarTextDidEndEditing(_ searchBar: UISearchBar) {
-        FIRAnalytics.logEvent(withName: "SearchBarDidEndEditing", parameters: nil)
+        Analytics.logEvent("SearchBarDidEndEditing", parameters: nil)
     }
     
     func searchBarCancelButtonClicked(_ searchBar: UISearchBar) {
-        FIRAnalytics.logEvent(withName: "Cancel pressed", parameters: nil)
+        Analytics.logEvent("Cancel pressed", parameters: nil)
     }
 }
 

@@ -54,7 +54,7 @@ enum CancelButtonPressed {
     
     // MARK: IB Actions
     @IBAction func mainCancelPressed(_ sender: UIButton) {
-        FIRAnalytics.logEvent(withName: "Main Canncel Pressed", parameters: nil)
+        Analytics.logEvent("Main Canncel Pressed", parameters: nil)
         mainCancelIsPressed = .isPressed
         dataController.delegate = nil
         if MCWeAllPayStoreController.defaultStore().mainThreadContext.undoManager?.canUndo == true {
@@ -67,7 +67,7 @@ enum CancelButtonPressed {
     }
     
     @IBAction func mainDonePressed(_ sender: UIButton) {
-        FIRAnalytics.logEvent(withName: "Main Done Pressed", parameters: nil)
+        Analytics.logEvent("Main Done Pressed", parameters: nil)
         let now = Date()
         tonightsBill.dateModified = now
         MCWeAllPayStoreController.defaultStore().endUndoGroupAndProcess()
@@ -79,15 +79,15 @@ enum CancelButtonPressed {
     }
     
     @IBAction func selectPayerButtonPressed(_ sender: AnyObject) {
-        FIRAnalytics.logEvent(withName: "Select Payer button Pressed", parameters: nil)
+        Analytics.logEvent("Select Payer button Pressed", parameters: nil)
     }
     
     @IBAction func categoryButtonPressed(_ sender: AnyObject) {
-        FIRAnalytics.logEvent(withName: "Open Select Category", parameters: nil)
+        Analytics.logEvent("Open Select Category", parameters: nil)
     }
     
     @IBAction func selectCurrencyPressed(_ sender: AnyObject) {
-        FIRAnalytics.logEvent(withName: "Open Select Currency", parameters: nil)
+        Analytics.logEvent("Open Select Currency", parameters: nil)
     }
     
     // MARK: New in this class
@@ -106,11 +106,11 @@ enum CancelButtonPressed {
         let categoryObject = CategoryPictureStoreController.sharedController.pictureObjects[categoryId]
         if categoryId > 0 {
             categoryImage.image = categoryObject.largePicture
-            categoryButton.setTitle(categoryObject.categoryDescription, for: UIControlState())
+            categoryButton.setTitle(categoryObject.categoryDescription, for: UIControl.State())
         } else {
             categoryImage.image = nil
             let title = NSLocalizedString("Select Category", comment: "Text of the payment category selection button")
-            categoryButton.setTitle(title, for: UIControlState())
+            categoryButton.setTitle(title, for: UIControl.State())
         }
         categoryButton.sizeToFit()
     }
@@ -137,7 +137,7 @@ enum CancelButtonPressed {
             selectButton.invalidateIntrinsicContentSize()
             return
         }
-        selectButton.setTitle(payingPerson.getFullName, for: UIControlState())
+        selectButton.setTitle(payingPerson.getFullName, for: UIControl.State())
         selectButton.invalidateIntrinsicContentSize()
     }
     
@@ -215,10 +215,10 @@ enum CancelButtonPressed {
     
     func textFieldDidBeginEditing(_ textField: UITextField) {
         if textField == itemField {
-            FIRAnalytics.logEvent(withName: "ItemView didBeginEditing", parameters: nil)
+            Analytics.logEvent("ItemView didBeginEditing", parameters: nil)
         }
         if textField == paidField {
-            FIRAnalytics.logEvent(withName: "PaidView didBeginEditing", parameters: nil)
+            Analytics.logEvent("PaidView didBeginEditing", parameters: nil)
         }
     }
     
@@ -234,10 +234,10 @@ enum CancelButtonPressed {
         if mainCancelIsPressed == CancelButtonPressed.notPressed {
             switch textField {
             case itemField:
-                FIRAnalytics.logEvent(withName: "itemView DidEndEditing", parameters: nil)
+                Analytics.logEvent("itemView DidEndEditing", parameters: nil)
                 thisPayment.descriptionOfPayment = itemField.text
             case paidField:
-                FIRAnalytics.logEvent(withName: "payerNameField didEndEditing", parameters: nil)
+                Analytics.logEvent("payerNameField didEndEditing", parameters: nil)
                 let cf = CurrencyFormatter(currencyCode: thisPayment.currency.code)
                 MCWeAllPayStoreController.defaultStore().beginUndoGroupWithoutRegistration()
                 if paidField.text == nil {
@@ -278,6 +278,8 @@ enum CancelButtonPressed {
             case .move:
                 tableView.deleteRows(at: [indexPath!], with: .fade)
                 tableView.insertRows(at: [indexPath!], with: .fade)
+            @unknown default:
+                fatalError("Unknwn value for NSFetchedResultsChangeType")
             }
         } else {
             switch (type) {
@@ -296,6 +298,8 @@ enum CancelButtonPressed {
                     tableView.deleteRows(at: [indexPath!], with: .fade)
                     tableView.insertRows(at: [indexPath!], with: .fade)
                 }
+            @unknown default:
+                fatalError("Unknwn value for NSFetchedResultsChangeType")
             }
         }
     }
@@ -316,7 +320,9 @@ enum CancelButtonPressed {
     
     override func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
         let cell = tableView.dequeueReusableCell(withIdentifier: "paymentPresenceTableViewCell", for: indexPath) as! MCPaymentPresenceTableViewCell
-        let paymentPresenceForThisCell = dataController.object(at: indexPath) 
+        cell.accessibilityIdentifier = "PaymentPresenceTableViewCell-\(indexPath.row)"
+        
+        let paymentPresenceForThisCell = dataController.object(at: indexPath)
         cell.nameLabel.text = paymentPresenceForThisCell.person.getFullName
         cell.personView.image = paymentPresenceForThisCell.person.thumbnail
         cell.theSwitch.setOn(paymentPresenceForThisCell.isPersonPresent.boolValue, animated: false)
@@ -327,8 +333,8 @@ enum CancelButtonPressed {
         cell.thisCellsPaymentPresence = paymentPresenceForThisCell
         cell.keyboardDismissDelegate = self
         
-        let constraintBetweenNameLabelAndPayerLabel = NSLayoutConstraint(item: selectButton, attribute: .leading, relatedBy: .equal, toItem: cell.nameLabel, attribute: .leading, multiplier: 1.0, constant: 0.0)
-        let constraintBetweenPictureInCellAndPictureOfPayer = NSLayoutConstraint(item: cell.personView, attribute: .trailing, relatedBy: .equal, toItem: categoryImage, attribute: .trailing, multiplier: 1.0, constant: 0.0)
+        let constraintBetweenNameLabelAndPayerLabel = NSLayoutConstraint(item: selectButton!, attribute: .leading, relatedBy: .equal, toItem: cell.nameLabel, attribute: .leading, multiplier: 1.0, constant: 0.0)
+        let constraintBetweenPictureInCellAndPictureOfPayer = NSLayoutConstraint(item: cell.personView!, attribute: .trailing, relatedBy: .equal, toItem: categoryImage, attribute: .trailing, multiplier: 1.0, constant: 0.0)
         self.tableView.addConstraints([constraintBetweenNameLabelAndPayerLabel, constraintBetweenPictureInCellAndPictureOfPayer])
         
         return cell
@@ -345,7 +351,7 @@ enum CancelButtonPressed {
         
             destination.dismissMe = {
                 destination.dismiss(animated: true, completion: {
-                    FIRAnalytics.logEvent(withName: "Close select payer", parameters: nil)
+                    Analytics.logEvent("Close select payer", parameters: nil)
                     self.reloadPayerView()
                 })
             }
@@ -356,7 +362,7 @@ enum CancelButtonPressed {
             
             destination.dismissMe = { 
                 destination.dismiss(animated: true, completion: {
-                    FIRAnalytics.logEvent(withName: "Close select currency", parameters: nil)
+                    Analytics.logEvent("Close select currency", parameters: nil)
                     MCWeAllPayStoreController.defaultStore().endUndoGroupAndProcessWithoutRegistration()
                 })
             }
@@ -365,7 +371,7 @@ enum CancelButtonPressed {
             destination.thisPayment = thisPayment
             
             destination.dismissMe = {
-                FIRAnalytics.logEvent(withName: "Close select category", parameters: nil)
+                Analytics.logEvent("Close select category", parameters: nil)
                 destination.dismiss(animated: true)
                 self.reloadCategoryImageView()
                 self.setTextForCategoryButton()

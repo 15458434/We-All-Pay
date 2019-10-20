@@ -75,15 +75,6 @@
 
 #pragma mark - Inherited from super
 
-- (id)initWithStyle:(UITableViewStyle)style
-{
-    self = [super initWithStyle:style];
-    if (self) {
-        // Custom initialization
-    }
-    return self;
-}
-
 - (void)viewDidLoad
 {
     [super viewDidLoad];
@@ -126,12 +117,6 @@
     [super viewDidAppear:animated];
     
     NSLog(@"People on screen");
-}
-
-- (void)didReceiveMemoryWarning
-{
-    [super didReceiveMemoryWarning];
-    // Dispose of any resources that can be recreated.
 }
 
 - (void)dealloc
@@ -236,17 +221,17 @@
     return [[_dataController fetchedObjects] count];
 }
 
-- (UITableViewCell *)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath
-{
+- (UITableViewCell *)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath {
     MCPerson *thisCellsPerson = [_dataController objectAtIndexPath:indexPath];
     PersonTableViewCell_iPad *thisCell = [tableView dequeueReusableCellWithIdentifier:@"MCPersonTableViewCell_iPad"];
+    thisCell.accessibilityLabel = [NSString stringWithFormat:@"PersonTableViewCell-%lu", indexPath.row];
     
     thisCell.personImage.image = thisCellsPerson.picture;
-    [[thisCell nameLabel] setText:[thisCellsPerson getFullName]];
-    [[thisCell emailLabel] setText:[thisCellsPerson defaultEmailAddress]];
+    thisCell.nameLabel.text = [thisCellsPerson getFullName];
+    thisCell.emailLabel.text = [thisCellsPerson defaultEmailAddress];
     NSNumberFormatter *nf = [[NSNumberFormatter alloc] init];
     [nf setNumberStyle:NSNumberFormatterCurrencyStyle];
-    [[thisCell totalSpent] setText:[nf stringFromNumber:thisCellsPerson.totalSumPaid]];
+    thisCell.totalSpent.text = [nf stringFromNumber:thisCellsPerson.totalSumPaid];
     
     return thisCell;
 }

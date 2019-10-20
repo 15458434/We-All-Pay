@@ -19,10 +19,6 @@
 
 #import "We_all_pay-Swift.h"
 
-typedef NS_ENUM(BOOL, MCiCloudUse) {
-    iCloudIsNotUsed,
-    iCloudIsUsed
-};
 
 // This is the name of the WeAllPayStoreFile. It's inherited from the location where UIManagedDocumentStores it's database file.
 NSString * const MCWeAllPayStoreFileName = @"persistentStore";
@@ -31,7 +27,6 @@ NSString * const MCWeAllPayStoreDirectoryName = @"WeAllPayStore/StoreContent";
 NSString * const MCWeAllPayStoreModelName = @"WeAllPayStore";
 
 NSString * const MCiCloudWeAllPayStoreName = @"iCloud-WeAllPayStore";
-MCiCloudUse const isiCloudUsed = iCloudIsNotUsed;
 
 @interface MCWeAllPayStoreController ()
 
@@ -71,8 +66,26 @@ MCiCloudUse const isiCloudUsed = iCloudIsNotUsed;
     return sharedStore;
 }
 
-- (void)openStore:(void (^)(BOOL success))completionHandler
-{
+#ifdef SCREENSHOTS
+- (void)openStore:(void (^)(MCWeAllPayStoreController *store, BOOL success))completionHandler {
+    [self mainThreadContext];
+    [self backgroundThreadContext];
+    [self startRespondingToStoreChangeNotifications];
+    if (_mainThreadContext && _backgroundThreadContext) {
+        _mainThreadContext.undoManager = [[NSUndoManager alloc] init];
+        [[_mainThreadContext undoManager] disableUndoRegistration];
+        if (completionHandler) {
+            completionHandler(self, YES);
+        }
+    } else {
+        NSLog(@"Unable to open We All Pay Store.");
+        if (completionHandler) {
+            completionHandler(self, NO);
+        }
+    }
+}
+#else
+- (void)openStore:(void (^)(BOOL success))completionHandler {
     [self mainThreadContext];
     [self backgroundThreadContext];
     [self startRespondingToStoreChangeNotifications];
@@ -89,6 +102,7 @@ MCiCloudUse const isiCloudUsed = iCloudIsNotUsed;
         }
     }
 }
+#endif
 
 - (void)saveMainThreadContext
 {
@@ -350,7 +364,6 @@ MCiCloudUse const isiCloudUsed = iCloudIsNotUsed;
     [dc addObserver:self selector:@selector(storeDidSave:) name:NSManagedObjectContextDidSaveNotification object:_backgroundThreadContext];
     [dc addObserver:self selector:@selector(storeWillBeSwapped:) name:NSPersistentStoreCoordinatorStoresWillChangeNotification object:_persistentStoreCoordinator];
     [dc addObserver:self selector:@selector(storeDidSwap:) name:NSPersistentStoreCoordinatorStoresDidChangeNotification object:_persistentStoreCoordinator];
-    [dc addObserver:self selector:@selector(storedidUpdateFromUbiquitousContainer:) name:NSPersistentStoreDidImportUbiquitousContentChangesNotification object:_persistentStoreCoordinator];
 }
 
 - (void)stopRespondingToStorechangeNotifications
@@ -420,20 +433,6 @@ MCiCloudUse const isiCloudUsed = iCloudIsNotUsed;
 #endif
 }
 
-- (void)storedidUpdateFromUbiquitousContainer:(NSNotification *)notification
-{
-#ifdef DEBUG
-    NSLog(@"MCWeAllPayStoreController: Store did update from Ubiquitous Container.");
-#endif
-    [_mainThreadContext performBlockAndWait:^{
-        [self->_mainThreadContext mergeChangesFromContextDidSaveNotification:notification];
-    }];
-    [_backgroundThreadContext performBlockAndWait:^{
-        [self->_backgroundThreadContext mergeChangesFromContextDidSaveNotification:notification];
-    }];
-}
-
-
 #pragma mark - Core Data Stack
 
 // Returns the managed object context for the application.
@@ -488,12 +487,19 @@ MCiCloudUse const isiCloudUsed = iCloudIsNotUsed;
 
 // Returns the persistent store coordinator for the application.
 // If the coordinator doesn't already exist, it is created and the application's store added to it.
-- (NSPersistentStoreCoordinator *)persistentStoreCoordinator
-{
+- (NSPersistentStoreCoordinator *)persistentStoreCoordinator {
     if (_persistentStoreCoordinator != nil) {
         return _persistentStoreCoordinator;
     }
-    
+#ifdef SCREENSHOTS
+    NSError *openPersistentStoreError;
+    _persistentStoreCoordinator = [[NSPersistentStoreCoordinator alloc] initWithManagedObjectModel:[self managedObjectModel]];
+    if (![_persistentStoreCoordinator addPersistentStoreWithType:NSInMemoryStoreType configuration:nil URL:nil options:nil error:&openPersistentStoreError]) {
+        NSLog(@"Unable to create in memory persistant store for screenshots: %@", openPersistentStoreError);
+        abort();
+    }
+    return _persistentStoreCoordinator;
+#else
     NSURL *directoryURL = [[self applicationDocumentsDirectory] URLByAppendingPathComponent:MCWeAllPayStoreDirectoryName isDirectory:YES];
     NSFileManager *fileManager = [NSFileManager defaultManager];
     if (![fileManager fileExistsAtPath:directoryURL.path]) {
@@ -505,20 +511,8 @@ MCiCloudUse const isiCloudUsed = iCloudIsNotUsed;
     NSURL *storeURL = [directoryURL URLByAppendingPathComponent:MCWeAllPayStoreFileName];
     
     NSError *error = nil;
-    NSDictionary *storeOptions;
-    if (isiCloudUsed == iCloudIsUsed) {
-        NSLog(@"Store will be opened with iCloud support.");
-        storeOptions = @{NSInferMappingModelAutomaticallyOption: @YES,
-                         NSMigratePersistentStoresAutomaticallyOption: @YES,
-                         NSPersistentStoreUbiquitousContentNameKey: MCiCloudWeAllPayStoreName};
-    } else {
-        NSLog(@"Store will not be opened with iCloud support.");
-        storeOptions = @{NSInferMappingModelAutomaticallyOption: @YES,
-                         NSMigratePersistentStoresAutomaticallyOption: @YES};
-    }
-//    if ([NSPersistentStoreCoordinator removeUbiquitousContentAndPersistentStoreAtURL:storeURL options:storeOptions error:&error]) {
-//        NSLog(@"Error removing ubiquitous content: %@", error);
-//    }
+    NSDictionary *storeOptions = @{NSInferMappingModelAutomaticallyOption: @YES,
+                                   NSMigratePersistentStoresAutomaticallyOption: @YES};
     _persistentStoreCoordinator = [[NSPersistentStoreCoordinator alloc] initWithManagedObjectModel:[self managedObjectModel]];
     if (![_persistentStoreCoordinator addPersistentStoreWithType:NSSQLiteStoreType configuration:nil URL:storeURL options:storeOptions error:&error]) {
         /*
@@ -549,6 +543,7 @@ MCiCloudUse const isiCloudUsed = iCloudIsNotUsed;
     }
     
     return _persistentStoreCoordinator;
+#endif
 }
 
 #pragma mark - Application's Documents directory

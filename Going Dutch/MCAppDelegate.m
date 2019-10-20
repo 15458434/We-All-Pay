@@ -25,7 +25,6 @@
 
 @interface MCAppDelegate ()
 
-@property (nonatomic) dispatch_once_t executeOnlyOnce;
 @property (nonatomic, strong) MCLaunchCounter *launchCounter;
 @property (nonatomic, strong) MCCoreDataSaveHandlerWhenEnteringBackground *saveHandlerOnDidEnterBackground;
 
@@ -39,28 +38,10 @@
 {
 #ifndef DEBUG
     [FIRApp configure];
-    [[FIRAppIndexing sharedInstance] registerApp:642135963];
 #endif
     _launchCounter = [[MCLaunchCounter alloc] init];
     uint64_t result = [_launchCounter increment];
     [FIRAnalytics logEventWithName:@"Start_counter" parameters:@{@"Counter Value": @(result)}];
-}
-
-- (void)removeOldCurrencyStore
-{
-    NSOperationQueue *myQueue = [[NSOperationQueue alloc] init];
-    myQueue.name = @"removeOldCurrencyStore";
-    [myQueue addOperationWithBlock:^{
-        NSURL *documentsDirectory = [[[NSFileManager defaultManager] URLsForDirectory:NSDocumentDirectory inDomains:NSUserDomainMask] lastObject];
-        NSFileManager *fileManager = [NSFileManager defaultManager];
-        NSString *directory = [documentsDirectory.path stringByAppendingPathComponent:@"XRCurrency"];
-        NSError *error;
-        BOOL success = [fileManager removeItemAtPath:directory error:&error];
-        if (!success || error) {
-            // something went wrong
-            NSLog(@"Error deleting XRCurrency: %@", error);
-        }
-    }];
 }
 
 - (void)executeOnlyOnceDuringStartup {
@@ -98,10 +79,9 @@
                                             nil];
     [colorDictionary setObject:addressBookSearchBarCancelButtonColor forKey:NSForegroundColorAttributeName];
     [addressBookSearchBarCancelButton setTitleTextAttributes:colorDictionary forState:UIControlStateNormal];
-    NSOperatingSystemVersion iOS11 = (NSOperatingSystemVersion){11,0,0};
-    if ([[NSProcessInfo processInfo] isOperatingSystemAtLeastVersion:iOS11]) {
+    if (@available(iOS 11.0, *)) {
         [[UIButton appearanceWhenContainedInInstancesOfClasses:@[NSClassFromString(@"UISwipeActionPullView")]] setTitleColor:[UIColor whiteColor] forState:UIControlStateNormal];
-    } 
+    }
     
     // Set the sectionIndex color in the people picker
     [[UITableView appearance] setSectionIndexColor:[Colors getButtonColor]];
@@ -183,22 +163,20 @@
     return NO;
 }
 
-- (BOOL)application:(UIApplication *)application willFinishLaunchingWithOptions:(NSDictionary *)launchOptions
-{
-    dispatch_once(&_executeOnlyOnce, ^{
-        [self executeOnlyOnceDuringStartup];
-        [[MCWeAllPayStoreController defaultStore] openStore:nil];
-        
-    });    
+- (BOOL)application:(UIApplication *)application willFinishLaunchingWithOptions:(NSDictionary *)launchOptions {
+    [self executeOnlyOnceDuringStartup];
+#ifdef SCREENSHOTS
+    [[MCWeAllPayStoreController defaultStore] openStore:^(MCWeAllPayStoreController *store, BOOL success) {
+        ScreenshotPopulationEngine *populator = [[ScreenshotPopulationEngine alloc] initWithManagedObjectContext:store.mainThreadContext];
+        [populator populate];
+    }];
+#else
+    [[MCWeAllPayStoreController defaultStore] openStore:nil];
+#endif
     return YES;
 }
 
-- (BOOL)application:(UIApplication *)application didFinishLaunchingWithOptions:(NSDictionary *)launchOptions
-{
-    dispatch_once(&_executeOnlyOnce, ^{
-        [self executeOnlyOnceDuringStartup];
-        [[MCWeAllPayStoreController defaultStore] openStore:nil];
-    });
+- (BOOL)application:(UIApplication *)application didFinishLaunchingWithOptions:(NSDictionary *)launchOptions {
     [[MCStoreInterface defaultStoreInterface] validateProductIdentifiers];
     [self activateFirebase];
     
@@ -222,8 +200,6 @@
     NSManagedObjectContext *context = [[MCWeAllPayStoreController defaultStore] mainThreadContext];
     self.saveHandlerOnDidEnterBackground = [[MCCoreDataSaveHandlerWhenEnteringBackground alloc] initWithContext:context];
     [self.saveHandlerOnDidEnterBackground saveAndEndBackgroundTaskWithIdentifier:taskIdentifier];
-    
-    [self removeOldCurrencyStore];
 }
 
 - (void)applicationWillEnterForeground:(UIApplication *)application

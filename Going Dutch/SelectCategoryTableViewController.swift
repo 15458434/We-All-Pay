@@ -34,7 +34,7 @@ class SelectCategoryTableViewController: UITableViewController, MCThisPaymentPro
     // MARK: Actions
     
     @IBAction func mainCancelPressed(_ sender: AnyObject) {
-        FIRAnalytics.logEvent(withName: "Main Cancel Pressed", parameters: nil)
+        Analytics.logEvent("Main Cancel Pressed", parameters: nil)
         navigationController!.presentingViewController?.dismiss(animated: true, completion: nil)
     }
     
@@ -51,7 +51,7 @@ class SelectCategoryTableViewController: UITableViewController, MCThisPaymentPro
         
         func prepareForSearchController() {
             searchController.searchResultsUpdater = self
-            searchController.dimsBackgroundDuringPresentation = false
+            searchController.obscuresBackgroundDuringPresentation = false
             searchController.hidesNavigationBarDuringPresentation = false
             tableView.tableHeaderView = searchController.searchBar
             searchController.searchBar.delegate = self
@@ -91,7 +91,7 @@ class SelectCategoryTableViewController: UITableViewController, MCThisPaymentPro
             categoryObject = filteredCategory
         }
         
-        FIRAnalytics.logEvent(withName: "didSelecCategory", parameters: ["categoryID": NSNumber.init(value: categoryObject.categoryId)])
+        Analytics.logEvent("didSelecCategory", parameters: ["categoryID": NSNumber.init(value: categoryObject.categoryId)])
         thisPayment.categoryId = NSNumber(value: categoryObject.categoryId)
         if dismissMe != nil {
             dismissMe!()

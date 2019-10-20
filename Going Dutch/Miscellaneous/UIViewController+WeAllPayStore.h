@@ -16,6 +16,5 @@
 - (void)storeDidSave:(NSNotification *)notification;
 - (void)storeWillBeSwapped:(NSNotification *)notification;
 - (void)storeDidSwap:(NSNotification *)notification;
-- (void)storedidUpdateFromUbiquitousContainer:(NSNotification *)notification;
 
 @end

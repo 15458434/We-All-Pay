@@ -75,7 +75,7 @@ class RateMeControllerTests: XCTestCase {
         _ = rmc.save()
         let savedDate = UserDefaults.standard.object(forKey: "kFirstLaunchDate") as? Date
         let savedDataShouldAsk = UserDefaults.standard.object(forKey: "kRateMeControllerAskStatus") as? Data
-        let savedShouldAsk = NSKeyedUnarchiver.unarchiveObject(with: savedDataShouldAsk!) as? RateMeControllerAskStatusContainer
+        let savedShouldAsk = try? NSKeyedUnarchiver.unarchiveTopLevelObjectWithData(savedDataShouldAsk!) as? RateMeControllerAskStatusContainer
         let savedCounter = UserDefaults.standard.integer(forKey: "kRateMeControllerCounterValue")
         let timeintervalDifference = savedDate!.timeIntervalSince(now)
         XCTAssertEqual(0.02, timeintervalDifference, accuracy: 0.02)

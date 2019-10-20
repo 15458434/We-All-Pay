@@ -37,8 +37,7 @@
 
 #pragma mark - IBActions
 
-- (IBAction)toggleEdit:(id)sender
-{
+- (IBAction)toggleEdit:(id)sender {
     if ([[self childViewControllers][0] toggleEditTableView:sender]) {
         [FIRAnalytics logEventWithName:@"Edit Pressed" parameters:nil];
         // Set Done Button
@@ -52,8 +51,7 @@
     }
 }
 
-- (IBAction)peopleOrPaymentsSelectionChangedValue:(id)sender
-{
+- (IBAction)peopleOrPaymentsSelectionChangedValue:(id)sender {
     [_pageViewController peopleOrPaymentsSelectionControlTapped:self];
 }
 
@@ -64,13 +62,12 @@
 #ifdef DEBUG
     NSString *iPhoneX = @"3a960c027f1ea390326793600324a891";
     NSString *iPadRetina = @"63f51db641e29b85012042e407de3cba";
-    request.testDevices = @[kGADSimulatorID, iPhoneX, iPadRetina];
+    GADMobileAds.sharedInstance.requestConfiguration.testDeviceIdentifiers = @[kGADSimulatorID, iPhoneX, iPadRetina];
 #endif
     return request;
 }
 
-- (void)putBannerOnScreen:(BOOL)animate
-{
+- (void)putBannerOnScreen:(BOOL)animate {
     BOOL isNotPurchased = ![[MCStoreInterface defaultStoreInterface] isProProductPurchased];
     if (isNotPurchased) {
         if (animate) {
@@ -94,8 +91,7 @@
 
 }
 
-- (void)putBannerOffScreen:(BOOL)animate
-{
+- (void)putBannerOffScreen:(BOOL)animate {
     if (animate) {
 #ifdef DEBUG
         NSLog(@"animating banner off screen.");
@@ -113,8 +109,7 @@
     }
 }
 
-- (void)updateBannerSize:(CGSize)size
-{
+- (void)updateBannerSize:(CGSize)size {
     if (size.height > size.width) {
         self.worstSalesPitchEverView.adSize = kGADAdSizeSmartBannerPortrait;
     } else {
@@ -130,11 +125,10 @@
     }
 }
 
-- (void)prepareWorstSalesPitchEverView
-{
-#ifdef DEBUG
-    NSLog(@"Preparing GoogleMobileAds version: %@", [GADRequest sdkVersion]);
-#endif
+- (void)prepareWorstSalesPitchEverView {
+#ifdef SCREENSHOTS
+    self.worstSalesPitchEverView.autoloadEnabled = NO;
+#else
     BOOL isNotPurchased = ![[MCStoreInterface defaultStoreInterface] isProProductPurchased];
     if (isNotPurchased) {
         NSParameterAssert(_worstSalesPitchEverView);
@@ -148,20 +142,19 @@
     } else {
         self.worstSalesPitchEverView.autoloadEnabled = NO;
     }
+#endif
 }
 
 #pragma mark - Notification Handlers
 
-- (void)applyProVersion:(NSNotification *)notification
-{
+- (void)applyProVersion:(NSNotification *)notification {
     [[NSOperationQueue mainQueue] addOperationWithBlock:^{
         [self putBannerOffScreen:YES];
         self.worstSalesPitchEverView.autoloadEnabled = NO;
     }];
 }
 
-- (void)applicationWillEnterForegroundHandler:(NSNotification *) notication
-{
+- (void)applicationWillEnterForegroundHandler:(NSNotification *) notication {
     BOOL isNotPurchased = ![[MCStoreInterface defaultStoreInterface] isProProductPurchased];
     if (isNotPurchased) {
         GADRequest *request = [self generalAdRequest];
@@ -171,8 +164,7 @@
 
 #pragma mark - From UIViewController+WeAllPayStore
 
-- (void)storeDidChange:(NSNotification *)notification
-{
+- (void)storeDidChange:(NSNotification *)notification {
     if (!_tonightsBill) {
         NSManagedObjectContext *context = [[MCWeAllPayStoreController defaultStore] mainThreadContext];
         [context performBlock:^{
@@ -183,47 +175,44 @@
 
 #pragma mark - GADBannerViewDelegate
 
-- (void)adViewDidReceiveAd:(GADBannerView *)bannerView
-{
+- (void)adViewDidReceiveAd:(GADBannerView *)bannerView {
 #ifdef DEBUG
     NSLog(@"Yes, I got something.");
 #endif
     [self putBannerOnScreen:YES];
 }
 
-- (void)adView:(GADBannerView *)bannerView didFailToReceiveAdWithError:(GADRequestError *)error
-{
+- (void)adView:(GADBannerView *)bannerView didFailToReceiveAdWithError:(GADRequestError *)error {
 #ifdef DEBUG
     NSLog(@"Oh no, I didn't get anything, because %@", error);
 #endif
     [self putBannerOffScreen:YES];
 }
 
-- (void)adViewWillPresentScreen:(GADBannerView *)bannerView
-{
+- (void)adViewWillPresentScreen:(GADBannerView *)bannerView {
     [FIRAnalytics logEventWithName:@"Press AdBanner" parameters:nil];
 }
 
-- (void)adViewWillDismissScreen:(GADBannerView *)bannerView
-{
+- (void)adViewWillDismissScreen:(GADBannerView *)bannerView {
     [FIRAnalytics logEventWithName:@"Dismiss full screen ad" parameters:nil];
 }
 
-- (void)adViewWillLeaveApplication:(GADBannerView *)bannerView
-{
+- (void)adViewWillLeaveApplication:(GADBannerView *)bannerView {
     [FIRAnalytics logEventWithName:@"Take me to the product" parameters:nil];
 }
 
 #pragma mark - Inherited from super
 
-- (void)viewDidLoad
-{
+- (void)viewDidLoad {
 #ifdef DEBUG
     NSLog(@"%@ viewDidLoad", self);
 #endif
     [super viewDidLoad];
     // Do any additional setup after loading the view.
-    [[self navigationController] setToolbarHidden:YES animated:YES];
+    [self.navigationController setToolbarHidden:YES animated:YES];
+    
+    _peopleOrPaymentsSelectionControl.subviews[0].accessibilityIdentifier = @"People";
+    _peopleOrPaymentsSelectionControl.subviews[1].accessibilityIdentifier = @"Payments";
     
     [self startRespondingToStoreChangeNotifications];
     
@@ -240,30 +229,26 @@
     [self prepareWorstSalesPitchEverView];
 }
 
-- (void)viewWillAppear:(BOOL)animated
-{
+- (void)viewWillAppear:(BOOL)animated {
     [super viewWillAppear:animated];
     
     [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(applyProVersion:) name:[MCStoreInterface applyProVersionNotification] object:[MCStoreInterface defaultStoreInterface]];
     [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(applicationWillEnterForegroundHandler:) name:UIApplicationWillEnterForegroundNotification object:nil];
 }
 
-- (void)viewDidAppear:(BOOL)animated
-{
+- (void)viewDidAppear:(BOOL)animated {
     [super viewDidAppear:animated];
     
     [[NSNotificationCenter defaultCenter] removeObserver:self name:[MCStoreInterface applyProVersionNotification] object:[MCStoreInterface defaultStoreInterface]];
 }
 
-- (void)viewWillDisappear:(BOOL)animated
-{
+- (void)viewWillDisappear:(BOOL)animated {
     [super viewWillDisappear:animated];
     
     [[NSNotificationCenter defaultCenter] removeObserver:self name:UIApplicationWillEnterForegroundNotification object:nil];
 }
 
-- (void)willMoveToParentViewController:(UIViewController *)parent
-{
+- (void)willMoveToParentViewController:(UIViewController *)parent {
     if (!parent) {
         // Parent is null when back button is pressed in navigationbar
         
@@ -276,8 +261,7 @@
     }
 }
 
-- (void)viewWillTransitionToSize:(CGSize)size withTransitionCoordinator:(id<UIViewControllerTransitionCoordinator>)coordinator
-{
+- (void)viewWillTransitionToSize:(CGSize)size withTransitionCoordinator:(id<UIViewControllerTransitionCoordinator>)coordinator {
     [super viewWillTransitionToSize:size withTransitionCoordinator:coordinator];
     
     [coordinator animateAlongsideTransition:^(id<UIViewControllerTransitionCoordinatorContext>  _Nonnull context) {
@@ -287,22 +271,14 @@
     }];
 }
 
-- (void)didReceiveMemoryWarning
-{
-    [super didReceiveMemoryWarning];
-    // Dispose of any resources that can be recreated.
-}
-
--(void)dealloc
-{
+-(void)dealloc {
     [[NSNotificationCenter defaultCenter] removeObserver:self];
 }
 
 #pragma mark - Navigation
 
 // In a storyboard-based application, you will often want to do a little preparation before navigation
-- (void)prepareForSegue:(UIStoryboardSegue *)segue sender:(id)sender
-{
+- (void)prepareForSegue:(UIStoryboardSegue *)segue sender:(id)sender {
 #ifdef DEBUG
     NSLog(@"prepareForSegue: %@", [segue identifier]);
 #endif
@@ -319,7 +295,7 @@
         }
         NSManagedObjectContext *backgroundContext = [[MCWeAllPayStoreController defaultStore] backgroundThreadContext];
         [backgroundContext performBlock:^{
-            id<MCTonightsBillTransfer> destination = [segue destinationViewController];
+            id<MCTonightsBillTransfer> destination = (id<MCTonightsBillTransfer>)[segue destinationViewController];
             if (self.writableTonightsBill) {
                 [destination setWritableTonightsBill:self.writableTonightsBill];
                 NSManagedObjectContext *mainContext = [[MCWeAllPayStoreController defaultStore] mainThreadContext];

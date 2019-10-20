@@ -141,7 +141,7 @@
     NSString *kiPhone5S = @"109c8d87d59d27b62a53157e313d1a49";
     NSString *kiPhone4S = @"87ebfc252a3675f03375aa13fce9286f";
     NSString *iPadRetina = @"63f51db641e29b85012042e407de3cba";
-    request.testDevices = @[kGADSimulatorID, kiPhone5S, kiPhone4S, iPadRetina];
+    GADMobileAds.sharedInstance.requestConfiguration.testDeviceIdentifiers = @[kGADSimulatorID, kiPhone5S, kiPhone4S, iPadRetina];
 #endif
     return request;
 }
@@ -212,9 +212,9 @@
 
 - (void)prepareWorstSalesPitchEverView
 {
-#ifdef DEBUG
-    NSLog(@"Preparing GoogleMobileAds version: %@", [GADRequest sdkVersion]);
-#endif
+#ifdef SCREENSHOTS
+    self.worstSalesPitchEverView.autoloadEnabled = NO;
+#else
     BOOL isNotPurchased = ![[MCStoreInterface defaultStoreInterface] isProProductPurchased];
     if (isNotPurchased) {
         NSParameterAssert(_worstSalesPitchEverView);
@@ -228,23 +228,7 @@
     } else {
         self.worstSalesPitchEverView.autoloadEnabled = NO;
     }
-}
-
-- (void)showContactsDisabledMessage
-{
-    NSString *title = NSLocalizedString(@"Access to contacts denied", @"Message to the user when access to the Contacts is denied by the user");
-    NSString *message = NSLocalizedString(@"Go to your settings app and allow We all pay to access your contact data", @"Instructions for the user to go to the settings application and change the privacy settings for We all pay.");
-    NSString *cancelButtonTitle = NSLocalizedString(@"Dismiss", @"Dismiss");
-    NSString *settingsButtonTitle = NSLocalizedString(@"Go to settings", @"Title for a button that directs the user to the settings application.");
-    UIAlertController *alertController = [UIAlertController alertControllerWithTitle:title message:message preferredStyle:UIAlertControllerStyleAlert];
-    UIAlertAction *cancelAction = [UIAlertAction actionWithTitle:cancelButtonTitle style:UIAlertActionStyleCancel handler:nil];
-    UIAlertAction *settingsAction = [UIAlertAction actionWithTitle:settingsButtonTitle style:UIAlertActionStyleDefault handler:^(UIAlertAction * _Nonnull action) {
-        NSURL *settingsAppURL = [NSURL URLWithString:UIApplicationOpenSettingsURLString];
-        [[UIApplication sharedApplication] openURL:settingsAppURL];
-    }];
-    [alertController addAction:cancelAction];
-    [alertController addAction:settingsAction];
-    [self presentViewController:alertController animated:YES completion:nil];
+#endif
 }
 
 - (void)openFirstPaymentWithoutAPayer
@@ -336,12 +320,6 @@
         [_tonightsBill deleteIfStillNew];
         [[MCWeAllPayStoreController defaultStore] saveMainThreadContext];
     }
-}
-
-- (void)didReceiveMemoryWarning
-{
-    [super didReceiveMemoryWarning];
-    // Dispose of any resources that can be recreated.
 }
 
 - (void)viewWillTransitionToSize:(CGSize)size withTransitionCoordinator:(id<UIViewControllerTransitionCoordinator>)coordinator

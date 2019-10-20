@@ -154,8 +154,7 @@
     [[_emptyMessage bigMessage] setText:NSLocalizedString(@"EMPTY_PAYMENT_LIST_MESSAGE", @"Press \"add payment\" to add a payment to this event.")];
 }
 
-- (void)viewWillAppear:(BOOL)animated
-{
+- (void)viewWillAppear:(BOOL)animated {
     [super viewWillAppear:animated];
     
     [[self navigationController] setToolbarHidden:YES animated:YES];
@@ -186,12 +185,6 @@
     [super viewDidDisappear:animated];
     
     _dataController = nil;
-}
-
-- (void)didReceiveMemoryWarning
-{
-    [super didReceiveMemoryWarning];
-    // Dispose of any resources that can be recreated.
 }
 
 - (void)dealloc
@@ -350,7 +343,7 @@
     // Get category picture.
     NSArray *pictureObjects = [[CategoryPictureStoreController sharedController] pictureObjects];
     CategoryPictureObject *categoryObject = pictureObjects[[[thisCellsPayment categoryId] shortValue]];
-    paymentCell.pictureOfPayer.image = [categoryObject smallPicture];
+    paymentCell.itemTypeImageView.image = [categoryObject smallPicture];
     
     NSString *thisCellsDescriptionOfPayment = [thisCellsPayment descriptionOfPayment];
     if (!thisCellsDescriptionOfPayment) {
@@ -417,8 +410,7 @@
 
 #pragma mark - Storyboard stuff
 
-- (void)prepareForSegue:(UIStoryboardSegue *)segue sender:(id)sender
-{
+- (void)prepareForSegue:(UIStoryboardSegue *)segue sender:(id)sender {
     if ([segue.identifier isEqualToString:@"openFirstPaymentWithoutPayer"]) {
         NSParameterAssert([[[segue destinationViewController] viewControllers][0] conformsToProtocol:@protocol(MCThisPaymentProtocol)]);
         id<MCThisPaymentProtocol, MCTonightsBillTransfer> theDestination = [[segue destinationViewController] viewControllers][0];
@@ -453,6 +445,11 @@
             }
             [[[segue destinationViewController] viewControllers][0] setThisPayment:thePayment];
         }
+    }
+    
+    NSIndexPath *indexPathForSelectedRow = [self.tableView indexPathForSelectedRow];
+    if (indexPathForSelectedRow) {
+        [self.tableView deselectRowAtIndexPath:indexPathForSelectedRow animated:YES];
     }
 }
 

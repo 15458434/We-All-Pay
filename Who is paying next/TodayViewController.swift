@@ -133,7 +133,7 @@ class TodayViewController: UIViewController, NCWidgetProviding {
         return insets
     }
     
-    private func widgetPerformUpdate(completionHandler: ((NCUpdateResult) -> Void)) {
+    internal func widgetPerformUpdate(completionHandler: ((NCUpdateResult) -> Void)) {
         // Perform any setup necessary in order to update the view.
 
         // If an error is encountered, use NCUpdateResult.Failed

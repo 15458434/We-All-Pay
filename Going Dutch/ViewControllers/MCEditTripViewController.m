@@ -189,13 +189,7 @@
     _dataController = nil;
 }
 
-- (void)didReceiveMemoryWarning
-{
-    [super didReceiveMemoryWarning];
-    // Dispose of any resources that can be recreated.
-}
-
--(void)dealloc
+- (void)dealloc
 {
     [[NSNotificationCenter defaultCenter] removeObserver:self];
 }
@@ -444,6 +438,11 @@
             NSLog(@"%@: Unable to pass tonightsBill and thisPerson.", self);
         }
 
+    }
+    
+    NSIndexPath *indexPathForSelectedRow = [self.tableView indexPathForSelectedRow];
+    if (indexPathForSelectedRow) {
+        [self.tableView deselectRowAtIndexPath:indexPathForSelectedRow animated:YES];
     }
 }
 
