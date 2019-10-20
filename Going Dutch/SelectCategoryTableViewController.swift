@@ -51,7 +51,7 @@ class SelectCategoryTableViewController: UITableViewController, MCThisPaymentPro
         
         func prepareForSearchController() {
             searchController.searchResultsUpdater = self
-            searchController.dimsBackgroundDuringPresentation = false
+            searchController.obscuresBackgroundDuringPresentation = false
             searchController.hidesNavigationBarDuringPresentation = false
             tableView.tableHeaderView = searchController.searchBar
             searchController.searchBar.delegate = self

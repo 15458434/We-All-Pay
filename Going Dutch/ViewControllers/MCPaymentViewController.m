@@ -20,9 +20,9 @@
 
 #import "We_all_pay-Swift.h"
 
-typedef NS_ENUM(BOOL, ChildViewOpened) {
-    isNotOpened,
-    isOpened
+typedef NS_ENUM(BOOL, ChildViewStatus) {
+    ChildViewStatusIsNotOpened,
+    ChildViewStatusIsOpened
 };
 
 @interface MCPaymentViewController ()
@@ -34,7 +34,7 @@ typedef NS_ENUM(BOOL, ChildViewOpened) {
 @property (weak, nonatomic) IBOutlet UIButton *categoryButton;
 @property (weak, nonatomic) IBOutlet UIImageView *payerPicture;
 @property (weak, nonatomic) IBOutlet UIImageView *categoryView;
-@property (nonatomic) ChildViewOpened selectCurrencyTableViewController;
+@property (nonatomic) ChildViewStatus selectCurrencyTableViewController;
 
 @property (strong, nonatomic) UIBarButtonItem *theDoneButton;
 @property (strong, nonatomic) UIBarButtonItem *cancelChangesForEntirePaymentButton;
@@ -369,7 +369,7 @@ typedef NS_ENUM(BOOL, ChildViewOpened) {
 - (void)awakeFromNib {
     [super awakeFromNib];
     
-    _selectCurrencyTableViewController = isNotOpened;
+    _selectCurrencyTableViewController = ChildViewStatusIsNotOpened;
 }
 
 - (void)viewDidLoad
@@ -450,7 +450,7 @@ typedef NS_ENUM(BOOL, ChildViewOpened) {
         CurrencyFormatter *cf = [[CurrencyFormatter alloc] initWithCurrencyCode:_thisPayment.currency.code];
         _paidView.text = [cf stringFor:_thisPayment.money];
         [[self tableView] reloadData];
-        _selectCurrencyTableViewController = isNotOpened;
+        _selectCurrencyTableViewController = ChildViewStatusIsNotOpened;
     }
     [[self tableView] reloadData];
     
@@ -472,7 +472,7 @@ typedef NS_ENUM(BOOL, ChildViewOpened) {
         _categoryView.image = categoryObject.largePicture;
         [_categoryButton setTitle:buttonText forState:UIControlStateNormal];
     }
-    if (!_isNew || _selectCurrencyTableViewController == isOpened) {
+    if (!_isNew || _selectCurrencyTableViewController == ChildViewStatusIsOpened) {
         CurrencyFormatter *cf = [[CurrencyFormatter alloc] initWithCurrencyCode:_thisPayment.currency.code];
         _paidView.text = [cf stringFor:_thisPayment.money];
     }
@@ -621,7 +621,7 @@ typedef NS_ENUM(BOOL, ChildViewOpened) {
 #ifdef DEBUG
          NSLog(@"%@, prepareForSegue openSelectCurrency", self);
 #endif
-         _selectCurrencyTableViewController = isOpened;
+         _selectCurrencyTableViewController = ChildViewStatusIsOpened;
          UINavigationController *navController = (UINavigationController *)segue.destinationViewController;
          SelectCurrencyTableViewController *selectCurrencyViewController = (SelectCurrencyTableViewController *)navController.viewControllers.firstObject;
          selectCurrencyViewController.currencyUpdateModel = [[PaymentUpdateCurrencyModel alloc] initWith:_thisPayment];

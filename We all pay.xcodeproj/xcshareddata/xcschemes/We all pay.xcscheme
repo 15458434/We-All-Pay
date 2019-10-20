@@ -39,6 +39,21 @@
                ReferencedContainer = "container:We all pay.xcodeproj">
             </BuildableReference>
          </TestableReference>
+         <TestableReference
+            skipped = "NO">
+            <BuildableReference
+               BuildableIdentifier = "primary"
+               BlueprintIdentifier = "38D6A3C41C73DDBF00968BB2"
+               BuildableName = "RateMeControllerForiOSTests.xctest"
+               BlueprintName = "RateMeControllerForiOSTests"
+               ReferencedContainer = "container:We all pay.xcodeproj">
+            </BuildableReference>
+            <SkippedTests>
+               <Test
+                  Identifier = "RateMeControllerTests">
+               </Test>
+            </SkippedTests>
+         </TestableReference>
       </Testables>
    </TestAction>
    <LaunchAction
