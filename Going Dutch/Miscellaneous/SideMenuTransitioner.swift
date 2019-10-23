@@ -27,7 +27,7 @@ import UIKit
     // MARK: NSObject
 }
 
-@objcMembers public class SideMenuPresentationController: UIPresentationController {
+@objcMembers public class SideMenuPresentationController: UIPresentationController, UIGestureRecognizerDelegate {
     private weak var backgroundTapGestureRecognizer: UITapGestureRecognizer!
     
     @objc private func backgroundTapped(_ sender: UITapGestureRecognizer) {
@@ -35,9 +35,17 @@ import UIKit
             fatalError("Wrong sender use only with the intended UITapGestureRecognizer")
         }
         
+        self.presentedViewController.dismiss(animated: true, completion: nil)
+    }
+    
+    // MARK: UIGestureRecognizerDelegate
+    
+    public func gestureRecognizerShouldBegin(_ gestureRecognizer: UIGestureRecognizer) -> Bool {
         let presentedViewFrame = self.presentedViewController.view.frame
-        if !presentedViewFrame.contains(sender.location(in: containerView)) {
-            self.presentedViewController.dismiss(animated: true, completion: nil)
+        if presentedViewFrame.contains(gestureRecognizer.location(in: containerView)) {
+            return false
+        } else {
+            return true
         }
     }
     
@@ -51,6 +59,7 @@ import UIKit
     
     public override func presentationTransitionWillBegin() {
         let backgroundTapGestureRecognizer = UITapGestureRecognizer(target: self, action: #selector(backgroundTapped(_:)))
+        backgroundTapGestureRecognizer.delegate = self
         self.backgroundTapGestureRecognizer = backgroundTapGestureRecognizer
         containerView!.addGestureRecognizer(backgroundTapGestureRecognizer)
     }
