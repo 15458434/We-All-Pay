@@ -2363,6 +2363,7 @@
 					"$(inherited)",
 					"$(PROJECT_DIR)/**",
 				);
+				MARKETING_VERSION = 1.7.5;
 				OTHER_LDFLAGS = (
 					"$(inherited)",
 					"-Wpartial-availability",
@@ -2411,6 +2412,7 @@
 					"$(inherited)",
 					"$(PROJECT_DIR)/**",
 				);
+				MARKETING_VERSION = 1.7.5;
 				OTHER_LDFLAGS = (
 					"$(inherited)",
 					"-Wpartial-availability",
@@ -2619,6 +2621,7 @@
 					"$(inherited)",
 					"$(PROJECT_DIR)/**",
 				);
+				MARKETING_VERSION = 1.7.5;
 				OTHER_LDFLAGS = (
 					"$(inherited)",
 					"-Wpartial-availability",
