@@ -189,11 +189,12 @@
                             </subviews>
                             <color key="backgroundColor" red="0.0" green="0.0" blue="0.0" alpha="0.0" colorSpace="custom" customColorSpace="sRGB"/>
                             <constraints>
-                                <constraint firstItem="x8t-7z-SNG" firstAttribute="leading" secondItem="eaE-b1-r5K" secondAttribute="leading" constant="20" id="6gT-g5-kUV"/>
-                                <constraint firstAttribute="trailing" secondItem="Prv-KL-M67" secondAttribute="trailing" constant="20" id="Hl2-OH-SVQ"/>
+                                <constraint firstItem="x8t-7z-SNG" firstAttribute="leading" secondItem="Xct-bF-mfX" secondAttribute="leading" constant="20" id="6gT-g5-kUV"/>
+                                <constraint firstItem="Xct-bF-mfX" firstAttribute="trailing" secondItem="Prv-KL-M67" secondAttribute="trailing" constant="20" id="Hl2-OH-SVQ"/>
                                 <constraint firstItem="x8t-7z-SNG" firstAttribute="baseline" secondItem="Prv-KL-M67" secondAttribute="baseline" id="dE4-6l-F1i"/>
                                 <constraint firstAttribute="bottom" secondItem="x8t-7z-SNG" secondAttribute="bottom" constant="20" symbolic="YES" id="ghF-tp-KgL"/>
                             </constraints>
+                            <viewLayoutGuide key="safeArea" id="Xct-bF-mfX"/>
                         </view>
                         <prototypes>
                             <tableViewCell contentMode="scaleToFill" preservesSuperviewLayoutMargins="YES" selectionStyle="blue" indentationLevel="1" indentationWidth="0.0" reuseIdentifier="MCPaymentTableViewCell" id="BlJ-CV-mR0" customClass="MCPaymentTableViewCell" customModule="We_all_pay" customModuleProvider="target">
@@ -313,11 +314,11 @@
                             <constraint firstItem="uPK-t8-Id2" firstAttribute="leading" secondItem="XpA-qR-01e" secondAttribute="leading" id="DsW-6y-NLY"/>
                             <constraint firstItem="uPK-t8-Id2" firstAttribute="trailing" secondItem="XpA-qR-01e" secondAttribute="trailing" id="EHD-Mj-QUW"/>
                             <constraint firstAttribute="bottom" secondItem="5xC-6r-YOL" secondAttribute="bottom" priority="751" id="L8f-nf-wVY"/>
-                            <constraint firstItem="uPK-t8-Id2" firstAttribute="trailing" secondItem="5xC-6r-YOL" secondAttribute="trailing" id="PBj-s9-uGJ"/>
+                            <constraint firstAttribute="trailing" secondItem="5xC-6r-YOL" secondAttribute="trailing" id="PBj-s9-uGJ"/>
                             <constraint firstItem="uPK-t8-Id2" firstAttribute="bottom" secondItem="XpA-qR-01e" secondAttribute="bottom" priority="750" id="TB2-aD-OBg"/>
                             <constraint firstAttribute="trailing" secondItem="XpA-qR-01e" secondAttribute="trailing" id="dDi-GO-98T"/>
                             <constraint firstItem="5xC-6r-YOL" firstAttribute="top" secondItem="uPK-t8-Id2" secondAttribute="top" id="dI7-6W-udT"/>
-                            <constraint firstItem="5xC-6r-YOL" firstAttribute="leading" secondItem="uPK-t8-Id2" secondAttribute="leading" id="iQL-8g-IuR"/>
+                            <constraint firstItem="5xC-6r-YOL" firstAttribute="leading" secondItem="hQT-KL-JNT" secondAttribute="leading" id="iQL-8g-IuR"/>
                             <constraint firstItem="XpA-qR-01e" firstAttribute="top" secondItem="5xC-6r-YOL" secondAttribute="bottom" id="nu1-hV-ZBv"/>
                         </constraints>
                         <viewLayoutGuide key="safeArea" id="uPK-t8-Id2"/>
@@ -776,14 +777,15 @@
                             </subviews>
                             <color key="backgroundColor" red="0.75686274509999996" green="0.83529411760000005" blue="0.92549019610000005" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                             <constraints>
-                                <constraint firstItem="BJS-wA-qlM" firstAttribute="leading" secondItem="wmR-8m-HJR" secondAttribute="leading" constant="20" symbolic="YES" id="74N-hX-AFj"/>
+                                <constraint firstItem="BJS-wA-qlM" firstAttribute="leading" secondItem="X3E-Wj-Cnd" secondAttribute="leading" constant="20" id="74N-hX-AFj"/>
                                 <constraint firstItem="gfv-ln-Tgv" firstAttribute="baseline" secondItem="asZ-Na-2wd" secondAttribute="baseline" id="C1c-Dw-9ce"/>
-                                <constraint firstItem="gfv-ln-Tgv" firstAttribute="leading" secondItem="wmR-8m-HJR" secondAttribute="leading" constant="20" id="QBN-x3-F4v"/>
+                                <constraint firstItem="gfv-ln-Tgv" firstAttribute="leading" secondItem="X3E-Wj-Cnd" secondAttribute="leading" constant="20" id="QBN-x3-F4v"/>
                                 <constraint firstItem="gfv-ln-Tgv" firstAttribute="top" secondItem="BJS-wA-qlM" secondAttribute="bottom" constant="10" id="Y9s-2b-a9h"/>
-                                <constraint firstAttribute="trailingMargin" secondItem="asZ-Na-2wd" secondAttribute="trailing" constant="12" id="epK-cr-e5u"/>
-                                <constraint firstAttribute="trailing" secondItem="BJS-wA-qlM" secondAttribute="trailing" constant="20" symbolic="YES" id="uUQ-0i-dmN"/>
+                                <constraint firstItem="X3E-Wj-Cnd" firstAttribute="trailing" secondItem="asZ-Na-2wd" secondAttribute="trailing" constant="20" id="epK-cr-e5u"/>
+                                <constraint firstItem="X3E-Wj-Cnd" firstAttribute="trailing" secondItem="BJS-wA-qlM" secondAttribute="trailing" constant="20" id="uUQ-0i-dmN"/>
                                 <constraint firstItem="BJS-wA-qlM" firstAttribute="top" secondItem="wmR-8m-HJR" secondAttribute="topMargin" constant="12" id="vR9-mY-2aQ"/>
                             </constraints>
+                            <viewLayoutGuide key="safeArea" id="X3E-Wj-Cnd"/>
                         </view>
                         <prototypes>
                             <tableViewCell contentMode="scaleToFill" restorationIdentifier="MCPersonTableViewCell" selectionStyle="blue" hidesAccessoryWhenEditing="NO" indentationLevel="1" indentationWidth="0.0" reuseIdentifier="MCPersonTableViewCell" rowHeight="68" id="i9Y-ku-g7W" customClass="MCPersonTableViewCell" customModule="We_all_pay" customModuleProvider="target">
