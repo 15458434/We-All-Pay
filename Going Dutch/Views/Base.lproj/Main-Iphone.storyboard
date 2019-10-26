@@ -891,6 +891,7 @@
                         <rect key="frame" x="0.0" y="0.0" width="375" height="702"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <color key="backgroundColor" red="1" green="1" blue="1" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                        <viewLayoutGuide key="safeArea" id="8gD-cp-rW9"/>
                         <view key="tableHeaderView" contentMode="scaleToFill" restorationIdentifier="personView" id="YgD-ot-OKq">
                             <rect key="frame" x="0.0" y="0.0" width="375" height="192"/>
                             <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
@@ -939,8 +940,8 @@
                             </subviews>
                             <color key="backgroundColor" red="1" green="1" blue="1" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                             <constraints>
-                                <constraint firstAttribute="trailingMargin" secondItem="E8v-zR-iZl" secondAttribute="trailingMargin" constant="12" id="7sf-qv-LdH"/>
-                                <constraint firstItem="rBP-Ui-O3X" firstAttribute="leading" secondItem="YgD-ot-OKq" secondAttribute="leading" constant="12" id="8vR-fF-xoR"/>
+                                <constraint firstItem="tgm-ni-PG9" firstAttribute="trailing" secondItem="E8v-zR-iZl" secondAttribute="trailingMargin" constant="20" id="7sf-qv-LdH"/>
+                                <constraint firstItem="rBP-Ui-O3X" firstAttribute="leading" secondItem="tgm-ni-PG9" secondAttribute="leading" constant="12" id="8vR-fF-xoR"/>
                                 <constraint firstAttribute="bottom" secondItem="Iac-jb-ETA" secondAttribute="bottom" constant="20" id="A6U-RG-1HP"/>
                                 <constraint firstItem="E8v-zR-iZl" firstAttribute="top" secondItem="Tln-WZ-m8Z" secondAttribute="bottom" constant="8" symbolic="YES" id="Bh1-H5-A7y"/>
                                 <constraint firstItem="Iac-jb-ETA" firstAttribute="top" secondItem="4YY-Cv-Jxg" secondAttribute="bottom" constant="8" id="LAl-KS-mpZ"/>
@@ -953,6 +954,7 @@
                                 <constraint firstItem="E8v-zR-iZl" firstAttribute="centerX" secondItem="Tln-WZ-m8Z" secondAttribute="centerX" id="ese-uB-tSC"/>
                                 <constraint firstItem="4YY-Cv-Jxg" firstAttribute="top" secondItem="E8v-zR-iZl" secondAttribute="bottom" constant="8" id="p3U-F4-0f1"/>
                             </constraints>
+                            <viewLayoutGuide key="safeArea" id="tgm-ni-PG9"/>
                         </view>
                         <connections>
                             <outlet property="dataSource" destination="eE2-xD-YRT" id="nlk-PP-QQN"/>
