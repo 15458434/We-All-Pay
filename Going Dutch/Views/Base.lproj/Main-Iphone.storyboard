@@ -891,6 +891,7 @@
                         <rect key="frame" x="0.0" y="0.0" width="375" height="702"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <color key="backgroundColor" red="1" green="1" blue="1" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                        <viewLayoutGuide key="safeArea" id="8gD-cp-rW9"/>
                         <view key="tableHeaderView" contentMode="scaleToFill" restorationIdentifier="personView" id="YgD-ot-OKq">
                             <rect key="frame" x="0.0" y="0.0" width="375" height="192"/>
                             <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
@@ -939,8 +940,8 @@
                             </subviews>
                             <color key="backgroundColor" red="1" green="1" blue="1" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                             <constraints>
-                                <constraint firstAttribute="trailingMargin" secondItem="E8v-zR-iZl" secondAttribute="trailingMargin" constant="12" id="7sf-qv-LdH"/>
-                                <constraint firstItem="rBP-Ui-O3X" firstAttribute="leading" secondItem="YgD-ot-OKq" secondAttribute="leading" constant="12" id="8vR-fF-xoR"/>
+                                <constraint firstItem="tgm-ni-PG9" firstAttribute="trailing" secondItem="E8v-zR-iZl" secondAttribute="trailingMargin" constant="20" id="7sf-qv-LdH"/>
+                                <constraint firstItem="rBP-Ui-O3X" firstAttribute="leading" secondItem="tgm-ni-PG9" secondAttribute="leading" constant="12" id="8vR-fF-xoR"/>
                                 <constraint firstAttribute="bottom" secondItem="Iac-jb-ETA" secondAttribute="bottom" constant="20" id="A6U-RG-1HP"/>
                                 <constraint firstItem="E8v-zR-iZl" firstAttribute="top" secondItem="Tln-WZ-m8Z" secondAttribute="bottom" constant="8" symbolic="YES" id="Bh1-H5-A7y"/>
                                 <constraint firstItem="Iac-jb-ETA" firstAttribute="top" secondItem="4YY-Cv-Jxg" secondAttribute="bottom" constant="8" id="LAl-KS-mpZ"/>
@@ -953,6 +954,7 @@
                                 <constraint firstItem="E8v-zR-iZl" firstAttribute="centerX" secondItem="Tln-WZ-m8Z" secondAttribute="centerX" id="ese-uB-tSC"/>
                                 <constraint firstItem="4YY-Cv-Jxg" firstAttribute="top" secondItem="E8v-zR-iZl" secondAttribute="bottom" constant="8" id="p3U-F4-0f1"/>
                             </constraints>
+                            <viewLayoutGuide key="safeArea" id="tgm-ni-PG9"/>
                         </view>
                         <connections>
                             <outlet property="dataSource" destination="eE2-xD-YRT" id="nlk-PP-QQN"/>
@@ -1090,7 +1092,7 @@
                             <color key="backgroundColor" red="1" green="1" blue="1" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                             <constraints>
                                 <constraint firstItem="HOP-tV-JuG" firstAttribute="leading" secondItem="mh0-5W-fIa" secondAttribute="leading" id="1dE-Dr-3Y1"/>
-                                <constraint firstAttribute="trailing" secondItem="Zmm-zR-L97" secondAttribute="trailing" constant="8" id="9uV-4A-AGJ"/>
+                                <constraint firstItem="YKs-7U-wo6" firstAttribute="trailing" secondItem="Zmm-zR-L97" secondAttribute="trailing" constant="8" id="9uV-4A-AGJ"/>
                                 <constraint firstItem="q95-mM-YFr" firstAttribute="bottom" secondItem="Zmm-zR-L97" secondAttribute="bottom" id="Kt0-VR-tqM"/>
                                 <constraint firstItem="ZTv-D4-TBc" firstAttribute="trailing" secondItem="mh0-5W-fIa" secondAttribute="trailing" id="LHX-w3-ybJ"/>
                                 <constraint firstItem="Zmm-zR-L97" firstAttribute="trailing" secondItem="ZTv-D4-TBc" secondAttribute="trailing" id="OxY-Xx-Ntv"/>
@@ -1105,12 +1107,13 @@
                                 <constraint firstItem="Zmm-zR-L97" firstAttribute="trailing" secondItem="Gtj-b7-bzJ" secondAttribute="trailing" id="eh7-qp-SoI"/>
                                 <constraint firstItem="rmI-7G-oMX" firstAttribute="top" secondItem="msZ-li-bka" secondAttribute="top" constant="12" id="fyU-kQ-rWL"/>
                                 <constraint firstItem="ZTv-D4-TBc" firstAttribute="leading" secondItem="BiQ-RU-tkG" secondAttribute="trailing" constant="8" id="igM-US-5WX"/>
-                                <constraint firstItem="rmI-7G-oMX" firstAttribute="leading" secondItem="msZ-li-bka" secondAttribute="leading" constant="12" id="mMr-kV-y2L"/>
+                                <constraint firstItem="rmI-7G-oMX" firstAttribute="leading" secondItem="YKs-7U-wo6" secondAttribute="leading" constant="12" id="mMr-kV-y2L"/>
                                 <constraint firstItem="Zmm-zR-L97" firstAttribute="top" secondItem="HOP-tV-JuG" secondAttribute="bottom" constant="8" id="nAM-2W-RYg"/>
                                 <constraint firstItem="Zmm-zR-L97" firstAttribute="leading" secondItem="Gtj-b7-bzJ" secondAttribute="leading" id="pem-LT-N1Z"/>
                                 <constraint firstItem="ZTv-D4-TBc" firstAttribute="baseline" secondItem="BiQ-RU-tkG" secondAttribute="baseline" id="uV6-hs-MYJ"/>
                                 <constraint firstAttribute="bottom" secondItem="mh0-5W-fIa" secondAttribute="bottom" constant="4" id="xoS-d5-5hF"/>
                             </constraints>
+                            <viewLayoutGuide key="safeArea" id="YKs-7U-wo6"/>
                         </view>
                         <prototypes>
                             <tableViewCell contentMode="scaleToFill" restorationIdentifier="paymentPresenceCell" selectionStyle="none" hidesAccessoryWhenEditing="NO" indentationLevel="1" indentationWidth="0.0" reuseIdentifier="paymentPresenceCell_iPhone" rowHeight="52" id="AcN-yE-tRP" customClass="MCPaymentPresenceTableViewCell_iPhone" customModule="We_all_pay" customModuleProvider="target">
@@ -1462,7 +1465,7 @@
         <image name="iScreen button" width="26" height="26"/>
     </resources>
     <inferredMetricsTieBreakers>
-        <segue reference="AFT-dx-z90"/>
+        <segue reference="DSi-fr-DCr"/>
         <segue reference="jjg-NC-1KA"/>
         <segue reference="C0F-pM-cfm"/>
         <segue reference="6AC-aI-bIB"/>
