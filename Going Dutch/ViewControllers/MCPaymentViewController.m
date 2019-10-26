@@ -58,8 +58,6 @@ typedef NS_ENUM(BOOL, ChildViewStatus) {
 
 @synthesize delegate;
 
-#pragma mark - action
-
 - (IBAction)tabElseWhereAndDismissKeyboard:(id)sender {
     [FIRAnalytics logEventWithName:@"tabElseWhereAndDismissKeyboard pressed" parameters:nil];
     if ([_itemView isFirstResponder]) {
@@ -203,8 +201,6 @@ typedef NS_ENUM(BOOL, ChildViewStatus) {
 //    didSomethingChange = YES;
     [[MCWeAllPayStoreController defaultStore] endUndoGroupWithoutRegistration];
 }
-
-#pragma mark - new in this class
 
 - (UIStatusBarStyle)preferredStatusBarStyle
 {
@@ -364,13 +360,97 @@ typedef NS_ENUM(BOOL, ChildViewStatus) {
     }
 }
 
-#pragma mark - Inherited from super
+#pragma mark - NSFetchedResultsControllerDelegate
 
-- (void)awakeFromNib {
-    [super awakeFromNib];
-    
-    _selectCurrencyTableViewController = ChildViewStatusIsNotOpened;
+- (void)controllerWillChangeContent:(NSFetchedResultsController *)controller
+{
+    if (self.isViewLoaded && self.view.window) {
+        [[self tableView] beginUpdates];
+    }
 }
+
+- (void)controllerDidChangeContent:(NSFetchedResultsController *)controller
+{
+    if (self.isViewLoaded && self.view.window) {
+        [[self tableView] endUpdates];
+    }
+}
+
+- (void)controller:(NSFetchedResultsController *)controller didChangeObject:(id)anObject atIndexPath:(NSIndexPath *)indexPath forChangeType:(NSFetchedResultsChangeType)type newIndexPath:(NSIndexPath *)newIndexPath
+{
+    if (self.isViewLoaded && self.view.window) {
+        switch(type) {
+                
+            case NSFetchedResultsChangeInsert:
+                [[self tableView] insertRowsAtIndexPaths:@[newIndexPath] withRowAnimation:UITableViewRowAnimationFade];
+                break;
+                
+            case NSFetchedResultsChangeDelete:
+                [[self tableView] deleteRowsAtIndexPaths:@[indexPath] withRowAnimation:UITableViewRowAnimationFade];
+                break;
+                
+            case NSFetchedResultsChangeMove:
+                [[self tableView] deleteRowsAtIndexPaths:@[indexPath] withRowAnimation:UITableViewRowAnimationFade];
+                [[self tableView] insertRowsAtIndexPaths:@[newIndexPath] withRowAnimation:UITableViewRowAnimationFade];
+                break;
+                
+            case NSFetchedResultsChangeUpdate:
+                [[self tableView] reloadRowsAtIndexPaths:@[indexPath] withRowAnimation:UITableViewRowAnimationAutomatic];
+                CurrencyFormatter *cf = [[CurrencyFormatter alloc] initWithCurrencyCode:_thisPayment.currency.code];
+                _paidView.text = [cf stringFor:_thisPayment.money];
+                break;
+        }
+    }
+}
+
+#pragma mark - UITableViewController
+
+#pragma mark - UITableViewDataSource
+
+- (NSInteger)numberOfSectionsInTableView:(UITableView *)tableView
+{
+    // Return the number of sections.
+    return 1;
+}
+
+- (NSInteger)tableView:(UITableView *)tableView numberOfRowsInSection:(NSInteger)section
+{
+    // Return the number of rows in the section.
+    return [[_dataController fetchedObjects] count];
+}
+
+- (UITableViewCell *)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath
+{
+    MCPaymentPresenceTableViewCell_iPhone *cell = [tableView dequeueReusableCellWithIdentifier:@"paymentPresenceCell_iPhone" forIndexPath:indexPath];
+    
+    // Set the cell contents
+    MCPaymentPresence *thisCellsPresence = [_dataController objectAtIndexPath:indexPath];
+    cell.nameLabel.text = thisCellsPresence.person.getFullName;
+    cell.personView.image = thisCellsPresence.person.thumbnail;
+    [[cell isPresentSwitch] setOn:[[thisCellsPresence isPersonPresent] boolValue]];
+    CurrencyFormatter *cf = [[CurrencyFormatter alloc] initWithCurrencyCode:thisCellsPresence.payment.currency.code];
+    NSNumber *averageOwe = @(-thisCellsPresence.averageOweFromPayment.doubleValue);
+    cell.owesLabel.text = [cf stringFor:averageOwe];
+    cell.thisCellsPaymentPresence = thisCellsPresence;
+    
+    // Set the cell alignment to headerView stuff
+    NSLayoutConstraint *payerViewToCellNameLabel = [NSLayoutConstraint constraintWithItem:_payerNameField attribute:NSLayoutAttributeLeading relatedBy:NSLayoutRelationEqual toItem:[cell nameLabel] attribute:NSLayoutAttributeLeading multiplier:1.0 constant:-6.0];
+    payerViewToCellNameLabel.identifier = [[thisCellsPresence.person getFullName] stringByAppendingString:@"payerViewToCellNameLabel"];
+    NSLayoutConstraint *payerPictureToUser = [NSLayoutConstraint constraintWithItem:_payerPicture attribute:NSLayoutAttributeTrailing relatedBy:NSLayoutRelationEqual toItem:[cell personView] attribute:NSLayoutAttributeTrailing multiplier:1.0 constant:0.0];
+    payerPictureToUser.identifier = [[thisCellsPresence.person getFullName] stringByAppendingString:@"payerPictureToUser"];
+    [[self tableView] addConstraints:@[payerViewToCellNameLabel, payerPictureToUser]];
+    
+    return cell;
+}
+
+#pragma mark - UITableViewDelegate
+
+- (CGFloat)tableView:(UITableView *)tableView heightForRowAtIndexPath:(NSIndexPath *)indexPath
+{
+    return 52.0;
+}
+
+#pragma mark - UIViewController
 
 - (void)viewDidLoad
 {
@@ -478,160 +558,36 @@ typedef NS_ENUM(BOOL, ChildViewStatus) {
     }
 }
 
+- (void)prepareForSegue:(UIStoryboardSegue *)segue sender:(id)sender {
+    if ([[segue identifier] isEqualToString:@"openSelectCurrency"]) {
+#ifdef DEBUG
+        NSLog(@"%@, prepareForSegue openSelectCurrency", self);
+#endif
+        _selectCurrencyTableViewController = ChildViewStatusIsOpened;
+        UINavigationController *navController = (UINavigationController *)segue.destinationViewController;
+        SelectCurrencyTableViewController *selectCurrencyViewController = (SelectCurrencyTableViewController *)navController.viewControllers.firstObject;
+        selectCurrencyViewController.currencyUpdateModel = [[PaymentUpdateCurrencyModel alloc] initWith:_thisPayment];
+    }
+    if ([[segue identifier] isEqualToString:@"selectCategory"]) {
+        id destination = [[segue destinationViewController] viewControllers][0];
+        if ([destination conformsToProtocol:@protocol(MCThisPaymentProtocol)]) {
+            [destination setThisPayment:_thisPayment];
+        }
+    }
+}
+
 - (BOOL)disablesAutomaticKeyboardDismissal
 {
     return NO;
 }
 
-#pragma mark - NSFetchedResultsControllerDelegate
+#pragma mark - UIResponder
 
-- (void)controllerWillChangeContent:(NSFetchedResultsController *)controller
-{
-    if (self.isViewLoaded && self.view.window) {
-        [[self tableView] beginUpdates];
-    }
+#pragma mark - NSObject
+
+- (void)awakeFromNib {
+    [super awakeFromNib];
+    _selectCurrencyTableViewController = ChildViewStatusIsNotOpened;
 }
-
-- (void)controllerDidChangeContent:(NSFetchedResultsController *)controller
-{
-    if (self.isViewLoaded && self.view.window) {
-        [[self tableView] endUpdates];
-    }
-}
-
-- (void)controller:(NSFetchedResultsController *)controller didChangeObject:(id)anObject atIndexPath:(NSIndexPath *)indexPath forChangeType:(NSFetchedResultsChangeType)type newIndexPath:(NSIndexPath *)newIndexPath
-{
-    if (self.isViewLoaded && self.view.window) {
-        switch(type) {
-                
-            case NSFetchedResultsChangeInsert:
-                [[self tableView] insertRowsAtIndexPaths:@[newIndexPath] withRowAnimation:UITableViewRowAnimationFade];
-                break;
-                
-            case NSFetchedResultsChangeDelete:
-                [[self tableView] deleteRowsAtIndexPaths:@[indexPath] withRowAnimation:UITableViewRowAnimationFade];
-                break;
-                
-            case NSFetchedResultsChangeMove:
-                [[self tableView] deleteRowsAtIndexPaths:@[indexPath] withRowAnimation:UITableViewRowAnimationFade];
-                [[self tableView] insertRowsAtIndexPaths:@[newIndexPath] withRowAnimation:UITableViewRowAnimationFade];
-                break;
-                
-            case NSFetchedResultsChangeUpdate:
-                [[self tableView] reloadRowsAtIndexPaths:@[indexPath] withRowAnimation:UITableViewRowAnimationAutomatic];
-                CurrencyFormatter *cf = [[CurrencyFormatter alloc] initWithCurrencyCode:_thisPayment.currency.code];
-                _paidView.text = [cf stringFor:_thisPayment.money];
-                break;
-        }
-    }
-}
-
-#pragma mark - Table view delegate
-
-- (CGFloat)tableView:(UITableView *)tableView heightForRowAtIndexPath:(NSIndexPath *)indexPath
-{
-    return 52.0;
-}
-
-#pragma mark - Table view data source
-
-- (NSInteger)numberOfSectionsInTableView:(UITableView *)tableView
-{
-    // Return the number of sections.
-    return 1;
-}
-
-- (NSInteger)tableView:(UITableView *)tableView numberOfRowsInSection:(NSInteger)section
-{
-    // Return the number of rows in the section.
-    return [[_dataController fetchedObjects] count];
-}
-
-- (UITableViewCell *)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath
-{
-    MCPaymentPresenceTableViewCell_iPhone *cell = [tableView dequeueReusableCellWithIdentifier:@"paymentPresenceCell_iPhone" forIndexPath:indexPath];
-    
-    // Set the cell contents
-    MCPaymentPresence *thisCellsPresence = [_dataController objectAtIndexPath:indexPath];
-    cell.nameLabel.text = thisCellsPresence.person.getFullName;
-    cell.personView.image = thisCellsPresence.person.thumbnail;
-    [[cell isPresentSwitch] setOn:[[thisCellsPresence isPersonPresent] boolValue]];
-    CurrencyFormatter *cf = [[CurrencyFormatter alloc] initWithCurrencyCode:thisCellsPresence.payment.currency.code];
-    NSNumber *averageOwe = @(-thisCellsPresence.averageOweFromPayment.doubleValue);
-    cell.owesLabel.text = [cf stringFor:averageOwe];
-    cell.thisCellsPaymentPresence = thisCellsPresence;
-    
-    // Set the cell alignment to headerView stuff
-    NSLayoutConstraint *payerViewToCellNameLabel = [NSLayoutConstraint constraintWithItem:_payerNameField attribute:NSLayoutAttributeLeading relatedBy:NSLayoutRelationEqual toItem:[cell nameLabel] attribute:NSLayoutAttributeLeading multiplier:1.0 constant:-6.0];
-    payerViewToCellNameLabel.identifier = [[thisCellsPresence.person getFullName] stringByAppendingString:@"payerViewToCellNameLabel"];
-    NSLayoutConstraint *payerPictureToUser = [NSLayoutConstraint constraintWithItem:_payerPicture attribute:NSLayoutAttributeTrailing relatedBy:NSLayoutRelationEqual toItem:[cell personView] attribute:NSLayoutAttributeTrailing multiplier:1.0 constant:0.0];
-    payerPictureToUser.identifier = [[thisCellsPresence.person getFullName] stringByAppendingString:@"payerPictureToUser"];
-    [[self tableView] addConstraints:@[payerViewToCellNameLabel, payerPictureToUser]];
-    
-    return cell;
-}
-
-
-/*
- // Override to support conditional editing of the table view.
- - (BOOL)tableView:(UITableView *)tableView canEditRowAtIndexPath:(NSIndexPath *)indexPath
- {
- // Return NO if you do not want the specified item to be editable.
- return YES;
- }
- */
-
-/*
- // Override to support editing the table view.
- - (void)tableView:(UITableView *)tableView commitEditingStyle:(UITableViewCellEditingStyle)editingStyle forRowAtIndexPath:(NSIndexPath *)indexPath
- {
- if (editingStyle == UITableViewCellEditingStyleDelete) {
- // Delete the row from the data source
- [tableView deleteRowsAtIndexPaths:@[indexPath] withRowAnimation:UITableViewRowAnimationFade];
- } else if (editingStyle == UITableViewCellEditingStyleInsert) {
- // Create a new instance of the appropriate class, insert it into the array, and add a new row to the table view
- }
- }
- */
-
-/*
- // Override to support rearranging the table view.
- - (void)tableView:(UITableView *)tableView moveRowAtIndexPath:(NSIndexPath *)fromIndexPath toIndexPath:(NSIndexPath *)toIndexPath
- {
- }
- */
-
-/*
- // Override to support conditional rearranging of the table view.
- - (BOOL)tableView:(UITableView *)tableView canMoveRowAtIndexPath:(NSIndexPath *)indexPath
- {
- // Return NO if you do not want the item to be re-orderable.
- return YES;
- }
- */
-
- #pragma mark - Navigation
- 
- // In a storyboard-based application, you will often want to do a little preparation before navigation
- - (void)prepareForSegue:(UIStoryboardSegue *)segue sender:(id)sender
- {
- // Get the new view controller using [segue destinationViewController].
- // Pass the selected object to the new view controller.
-     if ([[segue identifier] isEqualToString:@"openSelectCurrency"]) {
-#ifdef DEBUG
-         NSLog(@"%@, prepareForSegue openSelectCurrency", self);
-#endif
-         _selectCurrencyTableViewController = ChildViewStatusIsOpened;
-         UINavigationController *navController = (UINavigationController *)segue.destinationViewController;
-         SelectCurrencyTableViewController *selectCurrencyViewController = (SelectCurrencyTableViewController *)navController.viewControllers.firstObject;
-         selectCurrencyViewController.currencyUpdateModel = [[PaymentUpdateCurrencyModel alloc] initWith:_thisPayment];
-     }
-     if ([[segue identifier] isEqualToString:@"selectCategory"]) {
-         id destination = [[segue destinationViewController] viewControllers][0];
-         if ([destination conformsToProtocol:@protocol(MCThisPaymentProtocol)]) {
-             [destination setThisPayment:_thisPayment];
-         }
-     }
- }
 
 @end
