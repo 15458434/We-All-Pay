@@ -30,6 +30,7 @@ typedef NS_ENUM(BOOL, ChildViewStatus) {
 @property (weak, nonatomic) IBOutlet UITextField *payerNameField;
 @property (weak, nonatomic) IBOutlet UITextField *itemView;
 @property (weak, nonatomic) IBOutlet UITextField *paidView;
+@property (strong, nonatomic) IBOutlet MCMoneyStringTextFieldDelegate *paidViewDelegate;
 
 @property (weak, nonatomic) IBOutlet UIButton *categoryButton;
 @property (weak, nonatomic) IBOutlet UIImageView *payerPicture;
@@ -50,6 +51,8 @@ typedef NS_ENUM(BOOL, ChildViewStatus) {
 @property (nonatomic, strong) NSArray<MCPerson *> *listOfPeople;
 @property (nonatomic) BOOL peoplePickerCancelled;
 
+@property (nonatomic, strong) IBOutlet MCPaymentModel *model;
+
 @property (nonatomic) MCMoneyValueFieldDismissStatus kindOfPaidFieldDismiss;
 
 @end
@@ -61,15 +64,12 @@ typedef NS_ENUM(BOOL, ChildViewStatus) {
 - (IBAction)tabElseWhereAndDismissKeyboard:(id)sender {
     [FIRAnalytics logEventWithName:@"tabElseWhereAndDismissKeyboard pressed" parameters:nil];
     if ([_itemView isFirstResponder]) {
-        [_itemView endEditing:YES];
         [_itemView setText:[_thisPayment descriptionOfPayment]];
     }
     if ([_payerNameField isFirstResponder]) {
         [self cancelPersonPicker:self];
     }
-    if ([_paidView isFirstResponder]) {
-        [self cancelNumberPad:self];
-    }
+    [self.view endEditing:YES];
 }
 
 - (IBAction)mainCancelButtonPressed:(id)sender
@@ -93,9 +93,6 @@ typedef NS_ENUM(BOOL, ChildViewStatus) {
     if ([_payerNameField isFirstResponder]) {
         [self donePersonPicker:self];
     }
-    if ([_paidView isFirstResponder]) {
-        [self doneNumberPad:self];
-    }
     if ([_itemView isFirstResponder]) {
         [self storePlaceViewData];
     }
@@ -117,7 +114,7 @@ typedef NS_ENUM(BOOL, ChildViewStatus) {
 #ifdef DEBUG
     NSLog(@"%@, currencySelectionPressed", self);
 #endif
-    _kindOfPaidFieldDismiss = currencySelectionTapped;
+    _kindOfPaidFieldDismiss = MCMoneyValueFieldDismissStatusCurrencySelectionTapped;
     UIView *myFirstResponder = [[self view] getFirstResponder];
     [myFirstResponder resignFirstResponder];
     
@@ -152,24 +149,6 @@ typedef NS_ENUM(BOOL, ChildViewStatus) {
 //        [[[self navigationItem] rightBarButtonItem] setEnabled:YES];
     }
     [_payerNameField resignFirstResponder];
-}
-
-- (void)cancelNumberPad:(id)selector
-{
-    [FIRAnalytics logEventWithName:@"Cancel number pad pressed" parameters:nil];
-    // Restore Paidview and resignFirstResponder.
-    NSNumberFormatter *nf = [[NSNumberFormatter alloc] init];
-    [nf setNumberStyle:NSNumberFormatterCurrencyStyle];
-    [_paidView setText:[nf stringFromNumber:[_thisPayment money]]];
-    _kindOfPaidFieldDismiss = cancelIsPressed;
-    [_paidView resignFirstResponder];
-}
-
-- (void)doneNumberPad:(id)selector
-{
-    [FIRAnalytics logEventWithName:@"Done number pad pressed" parameters:nil];
-    _kindOfPaidFieldDismiss = doneIsPressed;
-    [_paidView resignFirstResponder];
 }
 
 - (IBAction)selectCategoryPressed:(id)sender
@@ -209,7 +188,7 @@ typedef NS_ENUM(BOOL, ChildViewStatus) {
 
 - (void)tappedInTheBackground:(id)selector
 {
-    _kindOfPaidFieldDismiss = backgroundTapped;
+    _kindOfPaidFieldDismiss = MCMoneyValueFieldDismissStatusBackgroundTapped;
     [self dismissKeyboard];
 }
 
@@ -311,12 +290,12 @@ typedef NS_ENUM(BOOL, ChildViewStatus) {
         [_payerNameField setText:[_listOfPeople[row] getFullName]];
         _payerPicture.image = [_listOfPeople[row] picture];
         [_personPickerView selectRow:row inComponent:0 animated:YES];
-        _kindOfPaidFieldDismiss = otherTextFieldSelected;
+        _kindOfPaidFieldDismiss = MCMoneyValueFieldDismissStatusOtherTextFieldSelected;
     }
     
     if (textField == _itemView) {
         [FIRAnalytics logEventWithName:@"ItemView didBeginEditing" parameters:nil];
-        _kindOfPaidFieldDismiss = otherTextFieldSelected;
+        _kindOfPaidFieldDismiss = MCMoneyValueFieldDismissStatusOtherTextFieldSelected;
     }
 }
 
@@ -348,7 +327,7 @@ typedef NS_ENUM(BOOL, ChildViewStatus) {
                 _payerPicture.image = nil;
             }
         }
-        _kindOfPaidFieldDismiss = backgroundTapped;
+        _kindOfPaidFieldDismiss = MCMoneyValueFieldDismissStatusBackgroundTapped;
     } else if (textField == _itemView) {
         [FIRAnalytics logEventWithName:@"itemView DidEndEditing" parameters:nil];
         // Do something to store value of placeview.
@@ -356,7 +335,7 @@ typedef NS_ENUM(BOOL, ChildViewStatus) {
         NSDate *nu = [NSDate date];
         [_tonightsBill setDateModified:nu];
         [_thisPayment setDateModified:nu];
-        _kindOfPaidFieldDismiss = backgroundTapped;
+        _kindOfPaidFieldDismiss = MCMoneyValueFieldDismissStatusBackgroundTapped;
     }
 }
 
@@ -470,6 +449,8 @@ typedef NS_ENUM(BOOL, ChildViewStatus) {
     } else {
         _isNew = NO;
     }
+    
+    [_model prepareForUseWithPayment:_thisPayment];
     
     // If tonight's bill wasn't passed along.
     if (!_tonightsBill) {

@@ -1045,7 +1045,7 @@
                                     <fontDescription key="fontDescription" type="system" pointSize="14"/>
                                     <textInputTraits key="textInputTraits" spellCheckingType="no" keyboardType="decimalPad"/>
                                     <connections>
-                                        <outlet property="delegate" destination="A1E-EB-xnZ" id="vgo-EI-ceW"/>
+                                        <outlet property="delegate" destination="V6Z-Uo-FMI" id="vB4-jL-sof"/>
                                     </connections>
                                 </textField>
                                 <imageView userInteractionEnabled="NO" contentMode="scaleAspectFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" translatesAutoresizingMaskIntoConstraints="NO" id="rmI-7G-oMX" customClass="CircularImageView" customModule="We_all_pay" customModuleProvider="target">
@@ -1198,13 +1198,22 @@
                         <outlet property="categoryButton" destination="HOP-tV-JuG" id="EbO-CT-Po3"/>
                         <outlet property="categoryView" destination="q95-mM-YFr" id="H2E-Ib-NI6"/>
                         <outlet property="itemView" destination="Zmm-zR-L97" id="Rmb-IB-snM"/>
+                        <outlet property="model" destination="kPl-Jh-cgm" id="1Yn-aH-38C"/>
                         <outlet property="paidView" destination="ZTv-D4-TBc" id="vfR-Td-aAj"/>
+                        <outlet property="paidViewDelegate" destination="V6Z-Uo-FMI" id="4Cz-03-XGv"/>
                         <outlet property="payerNameField" destination="Gtj-b7-bzJ" id="DtP-Z1-0CW"/>
                         <outlet property="payerPicture" destination="rmI-7G-oMX" id="aQ0-4S-9Ub"/>
                         <segue destination="fIg-ri-deX" kind="presentation" identifier="openSelectCurrency" id="DSi-fr-DCr"/>
                     </connections>
                 </tableViewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="icD-tl-11M" userLabel="First Responder" sceneMemberID="firstResponder"/>
+                <customObject id="V6Z-Uo-FMI" customClass="MCMoneyStringTextFieldDelegate">
+                    <connections>
+                        <outlet property="model" destination="kPl-Jh-cgm" id="2Qb-ZO-AE2"/>
+                        <outlet property="textField" destination="ZTv-D4-TBc" id="kHD-9F-UXr"/>
+                    </connections>
+                </customObject>
+                <customObject id="kPl-Jh-cgm" customClass="MCPaymentModel"/>
             </objects>
             <point key="canvasLocation" x="4338.75" y="722.53521126760563"/>
         </scene>

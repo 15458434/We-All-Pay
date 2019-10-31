@@ -122,6 +122,7 @@
 		38AAFB9F18EC404200CD3E12 /* MCSharedBillPaymentsTableViewController-iPad.m in Sources */ = {isa = PBXBuildFile; fileRef = 38AAFB9E18EC404200CD3E12 /* MCSharedBillPaymentsTableViewController-iPad.m */; };
 		38AAFBA218EC406300CD3E12 /* MCSharedBillPeoplePresentTableViewController-iPad.m in Sources */ = {isa = PBXBuildFile; fileRef = 38AAFBA118EC406300CD3E12 /* MCSharedBillPeoplePresentTableViewController-iPad.m */; };
 		38AAFBA518EC529300CD3E12 /* MCSharedBillViewController_iPad.m in Sources */ = {isa = PBXBuildFile; fileRef = 38AAFBA418EC529300CD3E12 /* MCSharedBillViewController_iPad.m */; };
+		38ACC5A3236B1FAE000BDEEC /* PaymentModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 38ACC5A2236B1FAE000BDEEC /* PaymentModel.swift */; };
 		38AD8C12197E8926005C3436 /* MCAddCurrenciesEntityMigrationPolicy.m in Sources */ = {isa = PBXBuildFile; fileRef = 38AD8C11197E8926005C3436 /* MCAddCurrenciesEntityMigrationPolicy.m */; };
 		38B08C571B38382E00FB84B1 /* MCTableEmptyMessage_iPad.swift in Sources */ = {isa = PBXBuildFile; fileRef = 38B08C561B38382E00FB84B1 /* MCTableEmptyMessage_iPad.swift */; };
 		38B08C591B383A4C00FB84B1 /* MCStoreInterface.swift in Sources */ = {isa = PBXBuildFile; fileRef = 38B08C581B383A4C00FB84B1 /* MCStoreInterface.swift */; };
@@ -169,6 +170,7 @@
 		38EF31451938BA07004912F0 /* UINavigationController+KeyboardDismiss.m in Sources */ = {isa = PBXBuildFile; fileRef = 38EF31441938BA07004912F0 /* UINavigationController+KeyboardDismiss.m */; };
 		38F2A1AC1ADCF7E100831D48 /* TodayViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 38F2A1AA1ADCF7E100831D48 /* TodayViewController.swift */; };
 		38F2A1AD1ADCF7E100831D48 /* WhoIsPayingNextTextLocalizer.swift in Sources */ = {isa = PBXBuildFile; fileRef = 38F2A1AB1ADCF7E100831D48 /* WhoIsPayingNextTextLocalizer.swift */; };
+		38F44CCB2364993400215B1C /* MoneyStringTextFieldDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 38F44CCA2364993400215B1C /* MoneyStringTextFieldDelegate.swift */; };
 		38FE5A082346957100BBA722 /* SideMenuTransitioner.swift in Sources */ = {isa = PBXBuildFile; fileRef = 38FE5A072346957100BBA722 /* SideMenuTransitioner.swift */; };
 		A02B1CCB9E8A03DDA7D09AC1 /* Pods_We_all_pay_Tests.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 21121C86CAA462D9731CDDEA /* Pods_We_all_pay_Tests.framework */; };
 		EB9DF8B0CF8785B81E0D7309 /* Pods_We_all_pay.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 9789D49EB21261F3834E5EDA /* Pods_We_all_pay.framework */; };
@@ -458,6 +460,7 @@
 		38AAFBA118EC406300CD3E12 /* MCSharedBillPeoplePresentTableViewController-iPad.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = "MCSharedBillPeoplePresentTableViewController-iPad.m"; path = "ViewControllers/iPad/MCSharedBillPeoplePresentTableViewController-iPad.m"; sourceTree = "<group>"; };
 		38AAFBA318EC529300CD3E12 /* MCSharedBillViewController_iPad.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = MCSharedBillViewController_iPad.h; path = ViewControllers/iPad/MCSharedBillViewController_iPad.h; sourceTree = "<group>"; };
 		38AAFBA418EC529300CD3E12 /* MCSharedBillViewController_iPad.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = MCSharedBillViewController_iPad.m; path = ViewControllers/iPad/MCSharedBillViewController_iPad.m; sourceTree = "<group>"; };
+		38ACC5A2236B1FAE000BDEEC /* PaymentModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PaymentModel.swift; sourceTree = "<group>"; };
 		38AD8C0D197E85AA005C3436 /* WeAllPayStore 3.xcdatamodel */ = {isa = PBXFileReference; lastKnownFileType = wrapper.xcdatamodel; path = "WeAllPayStore 3.xcdatamodel"; sourceTree = "<group>"; };
 		38AD8C10197E8926005C3436 /* MCAddCurrenciesEntityMigrationPolicy.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = MCAddCurrenciesEntityMigrationPolicy.h; path = "DataStore/Entity Migration Policies/MCAddCurrenciesEntityMigrationPolicy.h"; sourceTree = "<group>"; };
 		38AD8C11197E8926005C3436 /* MCAddCurrenciesEntityMigrationPolicy.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = MCAddCurrenciesEntityMigrationPolicy.m; path = "DataStore/Entity Migration Policies/MCAddCurrenciesEntityMigrationPolicy.m"; sourceTree = "<group>"; };
@@ -527,6 +530,7 @@
 		38EF31441938BA07004912F0 /* UINavigationController+KeyboardDismiss.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = "UINavigationController+KeyboardDismiss.m"; path = "ViewControllers/iPad/UINavigationController+KeyboardDismiss.m"; sourceTree = "<group>"; };
 		38F2A1AA1ADCF7E100831D48 /* TodayViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = TodayViewController.swift; sourceTree = "<group>"; };
 		38F2A1AB1ADCF7E100831D48 /* WhoIsPayingNextTextLocalizer.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = WhoIsPayingNextTextLocalizer.swift; sourceTree = "<group>"; };
+		38F44CCA2364993400215B1C /* MoneyStringTextFieldDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MoneyStringTextFieldDelegate.swift; sourceTree = "<group>"; };
 		38F7F9A51B2C49B80059DE51 /* Base */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; name = Base; path = "Base.lproj/Available Currencies.plist"; sourceTree = "<group>"; };
 		38F7F9A71B2C49C00059DE51 /* en */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; name = en; path = "en.lproj/Available Currencies.plist"; sourceTree = "<group>"; };
 		38F7F9A81B2C49C20059DE51 /* nl */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; name = nl; path = "nl.lproj/Available Currencies.plist"; sourceTree = "<group>"; };
@@ -1043,8 +1047,7 @@
 				3897159017902E35005BE03E /* MCSharedBillTableViewController.h */,
 				3897159117902E35005BE03E /* MCSharedBillTableViewController.m */,
 				388E90311D708BB3004CD257 /* SolutionViewController */,
-				3830F6F4179872B400904FAF /* MCPaymentViewController.h */,
-				3830F6F5179872B400904FAF /* MCPaymentViewController.m */,
+				38F44CC92364978400215B1C /* Payment */,
 				3892E3A217903EF00038894B /* MCEditTripViewController.h */,
 				3892E3A317903EF00038894B /* MCEditTripViewController.m */,
 				3892E3A817904A240038894B /* MCPersonViewController.h */,
@@ -1075,6 +1078,17 @@
 				38EF31441938BA07004912F0 /* UINavigationController+KeyboardDismiss.m */,
 			);
 			name = iPad;
+			sourceTree = "<group>";
+		};
+		38F44CC92364978400215B1C /* Payment */ = {
+			isa = PBXGroup;
+			children = (
+				3830F6F4179872B400904FAF /* MCPaymentViewController.h */,
+				3830F6F5179872B400904FAF /* MCPaymentViewController.m */,
+				38F44CCA2364993400215B1C /* MoneyStringTextFieldDelegate.swift */,
+				38ACC5A2236B1FAE000BDEEC /* PaymentModel.swift */,
+			);
+			name = Payment;
 			sourceTree = "<group>";
 		};
 		38FE5A062346943400BBA722 /* Miscellaneous */ = {
@@ -1672,6 +1686,7 @@
 				3863148D235C6D8C00748B9F /* ScreenshotPopulationEngine.swift in Sources */,
 				38977E5B1B2A30A7008484A4 /* MCWhoOwesWhoTableViewCell_iPhone.swift in Sources */,
 				38E2CB661BC2EA6C0092B5C8 /* RootViewController.swift in Sources */,
+				38F44CCB2364993400215B1C /* MoneyStringTextFieldDelegate.swift in Sources */,
 				38E2CB401BC2A5A20092B5C8 /* SolutionOverViewTableViewCell_iPad.swift in Sources */,
 				38490D2F1D7056D100A297BA /* ShowMailViewProtocol.swift in Sources */,
 				387494D419F053C2001614CA /* WeAllPayStore3to4.xcmappingmodel in Sources */,
@@ -1697,6 +1712,7 @@
 				38B08C571B38382E00FB84B1 /* MCTableEmptyMessage_iPad.swift in Sources */,
 				388E90331D708E32004CD257 /* SolutionTableViewController_iPad.swift in Sources */,
 				384EC90A1BC2F03F00A80799 /* PaymentTableViewCell_iPad.swift in Sources */,
+				38ACC5A3236B1FAE000BDEEC /* PaymentModel.swift in Sources */,
 				381275FF1BBD84650004C8C2 /* InfoScreenTableViewController.swift in Sources */,
 				38C700F21D8EC24100D785BB /* LaunchCounter.swift in Sources */,
 				38E0C5EA18E9B2BD005A3F17 /* MCAllTripsTableViewController-iPad.m in Sources */,
