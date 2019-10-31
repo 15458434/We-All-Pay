@@ -16,18 +16,8 @@ import UIKit
     }
     @IBOutlet weak var model: PaymentModel!
     
-    // MARK: UITextFieldDelegate
-    
-    func textFieldDidBeginEditing(_ textField: UITextField) {
-        model.beginUpdates()
-        let money = model.payment.money
-        textField.text = model.currencyFormatter.editingString(for: money!)
-    }
-    
-    func textField(_ textField: UITextField, shouldChangeCharactersIn range: NSRange, replacementString string: String) -> Bool {
-        let originalString = textField.text ?? ""
-        let newString = originalString.replacingCharacters(in: Range(range, in: originalString)!, with: string)
-        if model.currencyFormatter.doubleFromString(newString) != nil {
+    func updateTextFieldColor(for string: String) {
+        if model.currencyFormatter.doubleFromString(string) != nil {
             if #available(iOS 13.0, *) {
                 textField.textColor = .label
             } else {
@@ -36,6 +26,21 @@ import UIKit
         } else {
             textField.textColor = .red
         }
+    }
+    
+    // MARK: UITextFieldDelegate
+    
+    func textFieldDidBeginEditing(_ textField: UITextField) {
+        model.beginUpdates()
+        let money = model.payment.money
+        textField.text = model.currencyFormatter.editingString(for: money!)
+        updateTextFieldColor(for: textField.text ?? "")
+    }
+    
+    func textField(_ textField: UITextField, shouldChangeCharactersIn range: NSRange, replacementString string: String) -> Bool {
+        let originalString = textField.text ?? ""
+        let newString = originalString.replacingCharacters(in: Range(range, in: originalString)!, with: string)
+        updateTextFieldColor(for: newString)
         return true
     }
     
@@ -49,8 +54,6 @@ import UIKit
                     currencyString = nil
                 }
                 textField.text = currencyString
-            } else {
-                textField.textColor = .red
             }
         case .cancelled:
              var currencyString: String? = model.currencyFormatter.string(for: self.model.payment.money)
