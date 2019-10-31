@@ -24,16 +24,26 @@ import UIKit
         textField.text = model.currencyFormatter.editingString(for: money!)
     }
     
+    func textField(_ textField: UITextField, shouldChangeCharactersIn range: NSRange, replacementString string: String) -> Bool {
+        let originalString = textField.text ?? ""
+        let newString = originalString.replacingCharacters(in: Range(range, in: originalString)!, with: string)
+        if model.currencyFormatter.doubleFromString(newString) != nil {
+            if #available(iOS 13.0, *) {
+                textField.textColor = .label
+            } else {
+                textField.textColor = .darkText
+            }
+        } else {
+            textField.textColor = .red
+        }
+        return true
+    }
+    
     func textFieldDidEndEditing(_ textField: UITextField, reason: UITextField.DidEndEditingReason) {
         switch reason {
         case .committed:
             if let number = model.currencyFormatter.doubleFromString(textField.text ?? "") {
                 model.update(money: number)
-                if #available(iOS 13.0, *) {
-                    textField.textColor = .label
-                } else {
-                    textField.textColor = .darkText
-                }
                 var currencyString: String? = model.currencyFormatter.string(for: self.model.payment.money)
                 if currencyString == "0" {
                     currencyString = nil
@@ -43,11 +53,11 @@ import UIKit
                 textField.textColor = .red
             }
         case .cancelled:
-            if #available(iOS 13.0, *) {
-                textField.textColor = .label
-            } else {
-                textField.textColor = .darkText
-            }
+             var currencyString: String? = model.currencyFormatter.string(for: self.model.payment.money)
+             if currencyString == "0" {
+                 currencyString = nil
+             }
+             textField.text = currencyString
         @unknown default:
             fatalError("Unknown value for DidEndEditingReason. Software needs update.")
         }
