@@ -229,7 +229,7 @@
     thisCell.whatPaidLabel.text = thisCellsDescriptionOfPayment;
     
     CurrencyFormatter *cf = [[CurrencyFormatter alloc] initWithCurrencyCode:thisCellsPayment.currency.code];
-    thisCell.moneyPaidLabel.text = [cf stringFor:thisCellsPayment.money];
+    thisCell.moneyPaidLabel.text = [cf stringForObjectValue:thisCellsPayment.money];
     
     return thisCell;
 }

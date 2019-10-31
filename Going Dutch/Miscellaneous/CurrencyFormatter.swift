@@ -9,10 +9,8 @@
 import Foundation
 
 class CurrencyFormatter: Formatter {
-    // MARK: Properties
     var currencyCode: String?
     
-    // MARK: New in this class
     @objc convenience init(currencyCode: String) {
         self.init()
         self.currencyCode = currencyCode
@@ -33,10 +31,7 @@ class CurrencyFormatter: Formatter {
         }
     }
     
-    // MARK: Inherited from super
-    override init() {
-        super.init()
-    }
+    // MARK: Formatter
     
     override func getObjectValue(_ obj: AutoreleasingUnsafeMutablePointer<AnyObject?>?, for string: String, errorDescription error: AutoreleasingUnsafeMutablePointer<NSString?>?) -> Bool {
         let nf = NumberFormatter()
@@ -53,7 +48,7 @@ class CurrencyFormatter: Formatter {
         }
     }
     
-    @objc func string(for obj: AnyObject?) -> String? {
+    @objc override func string(for obj: Any?) -> String? {
         if let nummer = obj as? NSNumber {
             let nf = NumberFormatter()
             nf.numberStyle = .currency
@@ -66,7 +61,7 @@ class CurrencyFormatter: Formatter {
         }
     }
     
-    func editingString(for obj: AnyObject) -> String? {
+    @objc override func editingString(for obj: Any) -> String? {
         if let nummer = obj as? NSNumber {
             if nummer.doubleValue == 0 {
                 return nil
@@ -80,6 +75,7 @@ class CurrencyFormatter: Formatter {
     }
     
     // MARK: NSCoding
+    
     required init?(coder aDecoder: NSCoder) {
         self.currencyCode = aDecoder.decodeObject(forKey: "kCurrencyCode") as? String
         super.init(coder: aDecoder)
@@ -88,5 +84,11 @@ class CurrencyFormatter: Formatter {
     override func encode(with aCoder: NSCoder) {
         super.encode(with: aCoder)
         aCoder.encode(self.currencyCode, forKey: "kCurrencyCode")
+    }
+    
+    // MARK: NSObject
+    
+    override init() {
+        super.init()
     }
 }

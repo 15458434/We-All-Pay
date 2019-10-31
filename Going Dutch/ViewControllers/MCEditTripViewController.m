@@ -345,8 +345,7 @@
         [[thisCell totalSpent] setHidden:NO];
         
         CurrencyFormatter *cf = [[CurrencyFormatter alloc] initWithCurrencyCode:_tonightsBill.mainCurrency.code];
-        thisCell.totalSpent.text = [cf stringFor:thisCellsPerson.totalSumPaid];
-//        thisCell.totalSpent.text = [cf stringForObjectValue:thisCellsPerson.totalSumPaid];
+        thisCell.totalSpent.text = [cf stringForObjectValue:thisCellsPerson.totalSumPaid];
     } else {
         [thisCell.fetchingExchangeRateIndicator startAnimating];
         [[thisCell totalSpent] setHidden:YES];

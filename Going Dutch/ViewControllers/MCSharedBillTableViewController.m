@@ -352,7 +352,7 @@
     paymentCell.whatPaidLabel.text =thisCellsDescriptionOfPayment;
     
     CurrencyFormatter *cf = [[CurrencyFormatter alloc] initWithCurrencyCode:thisCellsPayment.currency.code];
-    paymentCell.moneyPaidLabel.text = [cf stringFor:thisCellsPayment.money];
+    paymentCell.moneyPaidLabel.text = [cf stringForObjectValue:thisCellsPayment.money];
     
     return paymentCell;
 }
