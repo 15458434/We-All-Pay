@@ -24,9 +24,6 @@ import UIKit
     @objc(updateMoney:) func update(money: NSNumber) {
         payment.money = money
         payment.recalculateAveragePeopleOweAndStore()
-        let nu = Date()
-        payment.dateModified = nu
-        payment.onWhichBill.dateModified = nu
     }
     
     func endUpdates() {
