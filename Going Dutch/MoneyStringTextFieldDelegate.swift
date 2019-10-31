@@ -19,7 +19,7 @@ import UIKit
     // MARK: UITextFieldDelegate
     
     func textFieldDidBeginEditing(_ textField: UITextField) {
-        MCWeAllPayStoreController.defaultStore()!.beginUndoGroupWithoutRegistration()
+        model.beginUpdates()
         let money = model.payment.money
         textField.text = model.currencyFormatter.editingString(for: money!)
     }
@@ -28,14 +28,17 @@ import UIKit
         switch reason {
         case .committed:
             if let number = model.currencyFormatter.doubleFromString(textField.text ?? "") {
-                model.beginUpdates()
                 model.update(money: number)
-                model.endUpdates()
                 if #available(iOS 13.0, *) {
                     textField.textColor = .label
                 } else {
                     textField.textColor = .darkText
                 }
+                var currencyString: String? = model.currencyFormatter.string(for: self.model.payment.money)
+                if currencyString == "0" {
+                    currencyString = nil
+                }
+                textField.text = currencyString
             } else {
                 textField.textColor = .red
             }
@@ -48,12 +51,7 @@ import UIKit
         @unknown default:
             fatalError("Unknown value for DidEndEditingReason. Software needs update.")
         }
-        var currencyString: String? = model.currencyFormatter.string(for: self.model.payment.money)
-        if currencyString == "0" {
-            currencyString = nil
-        }
-        textField.text = currencyString
-        MCWeAllPayStoreController.defaultStore()!.endUndoGroupWithoutRegistration()
+        model.endUpdates()
     }
     
     // MARK: NSObject
