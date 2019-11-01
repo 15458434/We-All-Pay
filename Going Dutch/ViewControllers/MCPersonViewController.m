@@ -202,62 +202,6 @@ typedef NS_ENUM(BOOL, MCStatus) {
     }
 }
 
-#pragma mark - Inherited from super.
-
-- (void)awakeFromNib
-{
-    [super awakeFromNib];
-    
-    _emailAddressStringInTextField = invalidStatus;
-}
-
-- (void)viewDidLoad
-{
-    [super viewDidLoad];
-    
-    [self prepareDataController];
-    
-    if (!_thisPerson) {
-        // A new person object will be delivered
-        _thisPersonHasPaidSomething = NO;
-    } else if ([_tonightsBill hasPersonPaidSomething:_thisPerson]) { // Check to see if thisPerson has paid something.
-        _thisPersonHasPaidSomething = YES;
-    } else {
-        _thisPersonHasPaidSomething = NO;
-    }
-    
-    _isSelectEmail = NO;
-}
-
-- (void)viewWillAppear:(BOOL)animated
-{
-    [super viewWillAppear:animated];
-    
-    [[self navigationController] setToolbarHidden:YES animated:YES];
-    
-    if (!_twoLabelTitleView) {
-        _twoLabelTitleView = [[NSBundle mainBundle] loadNibNamed:@"MCTwoLabelsTitleView" owner:self options:nil][0];
-        if (isNew) {
-            [[_twoLabelTitleView mainLabel] setText:NSLocalizedString(@"NEW_PERSON_HEADER", @"Header in the personView which state new person.")];
-            [[_twoLabelTitleView subLabel] setText:NSLocalizedString(@"NEW_PERSON_SUBHEADER", @"Sub header in the personView which states add new data")];
-        } else {
-            [[_twoLabelTitleView mainLabel] setText:NSLocalizedString(@"EXISTING_PERSON_HEADER", @"Header in the personView which states person")];
-            [[_twoLabelTitleView subLabel] setText:NSLocalizedString(@"EXISTING_PERSON_SUBHEADER", @"Sub header in the personView which state edit data")];
-        }
-
-        [[self navigationItem] setTitleView:_twoLabelTitleView];
-    }
-    
-    [self performFetch];
-
-    if (_thisPerson) {
-        [self fillTheScreenWithInitialData];
-    }
-    
-    // Dismiss the keyboard on backgroundtap.
-    [self startResigningFirstResponderOnBackgroundTap];
-}
-
 #pragma mark - UITextFieldDelegate
 
 -(BOOL)textFieldShouldBeginEditing:(UITextField *)textField
@@ -366,6 +310,63 @@ typedef NS_ENUM(BOOL, MCStatus) {
 - (NSInteger)pickerView:(UIPickerView *)pickerView numberOfRowsInComponent:(NSInteger)component
 {
     return [[_dataController fetchedObjects] count];
+}
+
+#pragma mark - UIViewController
+
+- (void)viewDidLoad {
+    [super viewDidLoad];
+    
+    [self prepareDataController];
+    
+    if (!_thisPerson) {
+        // A new person object will be delivered
+        _thisPersonHasPaidSomething = NO;
+    } else if ([_tonightsBill hasPersonPaidSomething:_thisPerson]) { // Check to see if thisPerson has paid something.
+        _thisPersonHasPaidSomething = YES;
+    } else {
+        _thisPersonHasPaidSomething = NO;
+    }
+    
+    _isSelectEmail = NO;
+}
+
+- (void)viewWillAppear:(BOOL)animated {
+    [super viewWillAppear:animated];
+    
+    [[self navigationController] setToolbarHidden:YES animated:YES];
+    
+    if (!_twoLabelTitleView) {
+        _twoLabelTitleView = [[NSBundle mainBundle] loadNibNamed:@"MCTwoLabelsTitleView" owner:self options:nil][0];
+        if (isNew) {
+            [[_twoLabelTitleView mainLabel] setText:NSLocalizedString(@"NEW_PERSON_HEADER", @"Header in the personView which state new person.")];
+            [[_twoLabelTitleView subLabel] setText:NSLocalizedString(@"NEW_PERSON_SUBHEADER", @"Sub header in the personView which states add new data")];
+        } else {
+            [[_twoLabelTitleView mainLabel] setText:NSLocalizedString(@"EXISTING_PERSON_HEADER", @"Header in the personView which states person")];
+            [[_twoLabelTitleView subLabel] setText:NSLocalizedString(@"EXISTING_PERSON_SUBHEADER", @"Sub header in the personView which state edit data")];
+        }
+
+        [[self navigationItem] setTitleView:_twoLabelTitleView];
+    }
+    
+    [self performFetch];
+
+    if (_thisPerson) {
+        [self fillTheScreenWithInitialData];
+    }
+    
+    // Dismiss the keyboard on backgroundtap.
+    [self startResigningFirstResponderOnBackgroundTap];
+}
+
+#pragma mark - UIResponder
+
+#pragma mark - NSObject
+
+- (void)awakeFromNib {
+    [super awakeFromNib];
+    
+    _emailAddressStringInTextField = invalidStatus;
 }
 
 @end
