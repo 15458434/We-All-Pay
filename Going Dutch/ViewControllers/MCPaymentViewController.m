@@ -257,22 +257,7 @@ typedef NS_ENUM(BOOL, ChildViewStatus) {
     return YES;
 }
 
-- (void)textFieldDidBeginEditing:(UITextField *)textField
-{
-    if (textField == _paidView) {
-        [FIRAnalytics logEventWithName:@"PaidView didBeginEditing" parameters:nil];
-        [[MCWeAllPayStoreController defaultStore] beginUndoGroupWithoutRegistration];
-        NSNumberFormatter *numberFormatter = [[NSNumberFormatter alloc] init];
-        [numberFormatter setFormatterBehavior:NSNumberFormatterBehaviorDefault];
-        [numberFormatter setLocale:[NSLocale currentLocale]];
-        [numberFormatter setNumberStyle:NSNumberFormatterDecimalStyle];
-        NSString *thisPaymentMoneyString = [numberFormatter stringFromNumber:[_thisPayment money]];
-        if ([thisPaymentMoneyString isEqualToString:@"0"]) {
-            thisPaymentMoneyString = nil;
-        }
-        [_paidView setText:thisPaymentMoneyString];
-    }
-    
+- (void)textFieldDidBeginEditing:(UITextField *)textField {
     if (textField == _payerNameField) {
         [FIRAnalytics logEventWithName:@"PayerNameField didBeginEditing" parameters:nil];
         [[MCWeAllPayStoreController defaultStore] beginUndoGroupWithoutRegistration];
@@ -299,20 +284,12 @@ typedef NS_ENUM(BOOL, ChildViewStatus) {
     }
 }
 
-- (BOOL)textFieldShouldEndEditing:(UITextField *)textField
-{
+- (BOOL)textFieldShouldEndEditing:(UITextField *)textField {
     return YES;
 }
 
-- (void)textFieldDidEndEditing:(UITextField *)textField
-{
-    if (textField == _paidView) {
-        [FIRAnalytics logEventWithName:@"PaidView didEndEditing" parameters:nil];
-#ifdef DEBUG
-        NSLog(@"kindOfPaidFieldDismiss = %lu", (unsigned long)_kindOfPaidFieldDismiss);
-#endif
-        [self storeMoneySpent];
-    } else if (textField == _payerNameField) {
+- (void)textFieldDidEndEditing:(UITextField *)textField {
+    if (textField == _payerNameField) {
         [FIRAnalytics logEventWithName:@"payerNameField didEndEditing" parameters:nil];
         if (!_peoplePickerCancelled) {
             [[MCWeAllPayStoreController defaultStore] endUndoGroupWithoutRegistration];
