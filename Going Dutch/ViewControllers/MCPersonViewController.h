@@ -14,12 +14,6 @@
 
 #import "MCTonightsBillTransfer.h"
 
-typedef enum _emailFieldEditStatus {
-    MCEmailFieldEditNormal = 0,
-    MCEmailFieldEditAdd = 1,
-    MCEmailFieldSelectDefaultAddress = 2,
-}emailFieldEditStatus;
-
 @class MCPerson;
 @class MCSharedBill;
 @class MCTwoLabelsTitleView;
