@@ -203,6 +203,20 @@ typedef NS_ENUM(BOOL, ChildViewStatus) {
     }
 }
 
+- (void)showCategory {
+    // Get category picture.
+    NSArray *pictureObjects = [[CategoryPictureStoreController sharedController] pictureObjects];
+    CategoryPictureObject *categoryObject = pictureObjects[[[_thisPayment categoryId] shortValue]];
+    if (categoryObject.categoryId > 0) {
+        _categoryView.image = categoryObject.largePicture;
+        [_categoryButton setTitle:categoryObject.categoryDescription forState:UIControlStateNormal];
+    } else {
+        NSString *buttonText = NSLocalizedString(@"SELECT_CATEGORY", @"Select Category");
+        _categoryView.image = categoryObject.largePicture;
+        [_categoryButton setTitle:buttonText forState:UIControlStateNormal];
+    }
+}
+
 #pragma mark - PickerViewDelegate
 
 - (NSString *)pickerView:(UIPickerView *)pickerView titleForRow:(NSInteger)row forComponent:(NSInteger)component {
@@ -325,13 +339,6 @@ typedef NS_ENUM(BOOL, ChildViewStatus) {
     }
 }
 
-- (void)controllerDidChangeContent:(NSFetchedResultsController *)controller
-{
-    if (self.isViewLoaded && self.view.window) {
-        [[self tableView] endUpdates];
-    }
-}
-
 - (void)controller:(NSFetchedResultsController *)controller didChangeObject:(id)anObject atIndexPath:(NSIndexPath *)indexPath forChangeType:(NSFetchedResultsChangeType)type newIndexPath:(NSIndexPath *)newIndexPath
 {
     if (self.isViewLoaded && self.view.window) {
@@ -356,6 +363,13 @@ typedef NS_ENUM(BOOL, ChildViewStatus) {
                 _paidView.text = [cf stringForObjectValue:_thisPayment.money];
                 break;
         }
+    }
+}
+
+- (void)controllerDidChangeContent:(NSFetchedResultsController *)controller
+{
+    if (self.isViewLoaded && self.view.window) {
+        [[self tableView] endUpdates];
     }
 }
 
@@ -427,7 +441,10 @@ typedef NS_ENUM(BOOL, ChildViewStatus) {
         _isNew = NO;
     }
     
-    [_model prepareForUseWithPayment:_thisPayment];
+    __weak typeof(self) weakSelf = self;
+    [_model prepareForUseWithPayment:_thisPayment andChangeHandler:^(MCPayment * _Nonnull payment) {
+        [weakSelf showCategory];
+    }];
     
     // If tonight's bill wasn't passed along.
     if (!_tonightsBill) {
@@ -464,8 +481,7 @@ typedef NS_ENUM(BOOL, ChildViewStatus) {
     [[self tableView] addGestureRecognizer:thatTickles];
 }
 
-- (void)viewWillAppear:(BOOL)animated
-{
+- (void)viewWillAppear:(BOOL)animated {
     [super viewWillAppear:animated];
     
     [self setNeedsStatusBarAppearanceUpdate];
@@ -499,17 +515,7 @@ typedef NS_ENUM(BOOL, ChildViewStatus) {
     if ([_thisPayment payingPerson]) {
         _payerPicture.image = _thisPayment.payingPerson.picture;
     }
-    // Get category picture.
-    NSArray *pictureObjects = [[CategoryPictureStoreController sharedController] pictureObjects];
-    CategoryPictureObject *categoryObject = pictureObjects[[[_thisPayment categoryId] shortValue]];
-    if (categoryObject.categoryId > 0) {
-        _categoryView.image = categoryObject.largePicture;
-        [_categoryButton setTitle:categoryObject.categoryDescription forState:UIControlStateNormal];
-    } else {
-        NSString *buttonText = NSLocalizedString(@"SELECT_CATEGORY", @"Select Category");
-        _categoryView.image = categoryObject.largePicture;
-        [_categoryButton setTitle:buttonText forState:UIControlStateNormal];
-    }
+    [self showCategory];
     if (!_isNew || _selectCurrencyTableViewController == ChildViewStatusIsOpened) {
         CurrencyFormatter *cf = [[CurrencyFormatter alloc] initWithCurrencyCode:_thisPayment.currency.code];
         _paidView.text = [cf stringForObjectValue:_thisPayment.money];
@@ -526,11 +532,13 @@ typedef NS_ENUM(BOOL, ChildViewStatus) {
         SelectCurrencyTableViewController *selectCurrencyViewController = (SelectCurrencyTableViewController *)navController.viewControllers.firstObject;
         selectCurrencyViewController.currencyUpdateModel = [[PaymentUpdateCurrencyModel alloc] initWith:_thisPayment];
     }
-    if ([[segue identifier] isEqualToString:@"selectCategory"]) {
-        id destination = [[segue destinationViewController] viewControllers][0];
-        if ([destination conformsToProtocol:@protocol(MCThisPaymentProtocol)]) {
-            [destination setThisPayment:_thisPayment];
-        }
+    if ([segue.identifier isEqualToString:@"selectCategory"]) {
+        UINavigationController *navigationController = (UINavigationController *)segue.destinationViewController;
+        SelectCategoryTableViewController *destinationViewController = (SelectCategoryTableViewController *)navigationController.viewControllers.firstObject;
+        __weak typeof(self) weakSelf = self;
+        [destinationViewController prepareForUseWithPayment:_model.payment andChangeHandler:^(MCPayment * _Nonnull payment) {
+            [weakSelf showCategory];
+        }];
     }
 }
 

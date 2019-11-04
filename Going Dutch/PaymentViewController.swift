@@ -37,6 +37,8 @@ enum CancelButtonPressed {
     @IBOutlet var payerView: UIImageView!
     @IBOutlet var selectButton: UIButton!
     
+    @IBOutlet var model: PaymentModel!
+    
     // MARK: Properties
     var didSomethingChange: DidSomethingChange?
     var isNew: IsNew?
@@ -149,51 +151,6 @@ enum CancelButtonPressed {
         }
     }
     
-    // MARK: Inherited from super
-    override func viewDidLoad() {
-        super.viewDidLoad()
-        
-        self.respondToPresenceOfPathComponentsFromAppLaunch()
-        
-        MCWeAllPayStoreController.defaultStore().beginUndoGroup()
-        
-        startResigningFirstResponderOnBackgroundTap()
-    }
-    
-    override func viewWillAppear(_ animated: Bool) {
-        super.viewWillAppear(animated)
-        
-        if thisPayment == nil {
-            thisPayment = tonightsBill.addPayment()
-            let screenTitle = NSLocalizedString("New Payment", comment: "Screen name saying this is a new payment.")
-            title = screenTitle
-            isNew = .isNew
-        } else {
-            itemField.text = thisPayment.descriptionOfPayment
-            if thisPayment.money != nil {
-                let cf = CurrencyFormatter(currencyCode: thisPayment.currency.code)
-                paidField.text = cf.string(for: thisPayment.money)
-            }
-            reloadPayerView()
-            setTextPayerButton()
-            isNew = .isNotNew
-        }
-        
-        reloadCategoryImageView()
-        setTextForCategoryButton()
-        
-        if dataController == nil {
-            dataController = (MCWeAllPayStoreController.defaultStore().paymentPresenceDataController(forDelegate: self) as! NSFetchedResultsController<MCPaymentPresence>)
-        }
-    }
-    
-    override func viewDidDisappear(_ animated: Bool) {
-        super.viewDidDisappear(animated)
-        
-        NotificationCenter.default.removeObserver(self)
-        dataController = nil
-    }
-    
     // MARK: DismissKeyboardProtocol
     func dismissTheKeyboard() {
         let fr = view.getFirstResponder()
@@ -254,15 +211,10 @@ enum CancelButtonPressed {
         }
     }
     
-    // MARK: NS Fetched Results Controller Delegate
+    // MARK: NSFetchedResultsControllerDelegate
     func controllerWillChangeContent(_ controller: NSFetchedResultsController<NSFetchRequestResult>) {
         debugPrint("controllerWillChangeContent")
         tableView.beginUpdates()
-    }
-    
-    func controllerDidChangeContent(_ controller: NSFetchedResultsController<NSFetchRequestResult>) {
-        debugPrint("controllerDidChangeContent")
-        tableView.endUpdates()
     }
     
     func controller(_ controller: NSFetchedResultsController<NSFetchRequestResult>, didChange anObject: Any, at indexPath: IndexPath?, for type: NSFetchedResultsChangeType, newIndexPath: IndexPath?) {
@@ -304,12 +256,17 @@ enum CancelButtonPressed {
         }
     }
     
-    // MARK: UI Table View Delegate
+    func controllerDidChangeContent(_ controller: NSFetchedResultsController<NSFetchRequestResult>) {
+        debugPrint("controllerDidChangeContent")
+        tableView.endUpdates()
+    }
+
+    // MARK: UITableViewDelegate
     override func tableView(_ tableView: UITableView, heightForRowAt indexPath: IndexPath) -> CGFloat {
         return 60
     }
     
-    // MARK: UI Table View Data Source
+    // MARK: UITableViewDataSource
     override func numberOfSections(in tableView: UITableView) -> Int {
         return 1
     }
@@ -340,7 +297,53 @@ enum CancelButtonPressed {
         return cell
     }
     
-    // MARK: Navigation
+    // MARK: UITableViewController
+    
+    // MARK: UIViewController
+    
+    override func viewDidLoad() {
+        super.viewDidLoad()
+        
+        self.respondToPresenceOfPathComponentsFromAppLaunch()
+        
+        MCWeAllPayStoreController.defaultStore().beginUndoGroup()
+        
+        startResigningFirstResponderOnBackgroundTap()
+    }
+    
+    override func viewWillAppear(_ animated: Bool) {
+        super.viewWillAppear(animated)
+        
+        if thisPayment == nil {
+            thisPayment = tonightsBill.addPayment()
+            let screenTitle = NSLocalizedString("New Payment", comment: "Screen name saying this is a new payment.")
+            title = screenTitle
+            isNew = .isNew
+        } else {
+            itemField.text = thisPayment.descriptionOfPayment
+            if thisPayment.money != nil {
+                let cf = CurrencyFormatter(currencyCode: thisPayment.currency.code)
+                paidField.text = cf.string(for: thisPayment.money)
+            }
+            reloadPayerView()
+            setTextPayerButton()
+            isNew = .isNotNew
+        }
+        
+        reloadCategoryImageView()
+        setTextForCategoryButton()
+        
+        if dataController == nil {
+            dataController = (MCWeAllPayStoreController.defaultStore().paymentPresenceDataController(forDelegate: self) as! NSFetchedResultsController<MCPaymentPresence>)
+        }
+    }
+    
+    override func viewDidDisappear(_ animated: Bool) {
+        super.viewDidDisappear(animated)
+        
+        NotificationCenter.default.removeObserver(self)
+        dataController = nil
+    }
     
     override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
         switch (segue.identifier) {
@@ -360,7 +363,7 @@ enum CancelButtonPressed {
             let destination = segue.destination as! SelectCurrencyTableViewController
             destination.currencyUpdateModel = PaymentUpdateCurrencyModel(with: thisPayment)
             
-            destination.dismissMe = { 
+            destination.dismissMe = {
                 destination.dismiss(animated: true, completion: {
                     Analytics.logEvent("Close select currency", parameters: nil)
                     MCWeAllPayStoreController.defaultStore().endUndoGroupAndProcessWithoutRegistration()
@@ -368,17 +371,22 @@ enum CancelButtonPressed {
             }
         case let identifier where identifier == "selectCategory_iPad":
             let destination = segue.destination as! SelectCategoryTableViewController
-            destination.thisPayment = thisPayment
+            destination.prepareForUse(with: thisPayment) { [unowned self] (payment) in
+                self.reloadCategoryImageView()
+                self.setTextForCategoryButton()
+            }
             
             destination.dismissMe = {
                 Analytics.logEvent("Close select category", parameters: nil)
                 destination.dismiss(animated: true)
-                self.reloadCategoryImageView()
-                self.setTextForCategoryButton()
             }
         default:
             print("Unknown segue. The programmer must be stupid.")
             abort()
         }
     }
+    
+    // MARK: UIResponder
+    
+    // MARK: NSObject
 }

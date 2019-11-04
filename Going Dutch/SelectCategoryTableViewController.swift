@@ -12,9 +12,9 @@ import UIKit
 
 import FirebaseAnalytics
 
-class SelectCategoryTableViewController: UITableViewController, MCThisPaymentProtocol, MCDismissMeBlockProtocol {
+class SelectCategoryTableViewController: UITableViewController, MCDismissMeBlockProtocol {
+    @IBOutlet var model: PaymentModel!
     // MARK: Properties
-    var thisPayment: MCPayment!
     
     var sections: [[CategoryPictureObject]]!
     var categories: [CategoryPictureObject]! {
@@ -40,6 +40,9 @@ class SelectCategoryTableViewController: UITableViewController, MCThisPaymentPro
     
     // MARK: New in this class
     
+    @objc(prepareForUseWithPayment:andChangeHandler:) func prepareForUse(with payment: MCPayment, and changeHandler:@escaping ((_ payment: MCPayment) -> ())) {
+        self.model.prepareForUse(with: payment, and: changeHandler)
+    }
     
     // MARK: Inherited From super
     
@@ -92,7 +95,9 @@ class SelectCategoryTableViewController: UITableViewController, MCThisPaymentPro
         }
         
         Analytics.logEvent("didSelecCategory", parameters: ["categoryID": NSNumber.init(value: categoryObject.categoryId)])
-        thisPayment.categoryId = NSNumber(value: categoryObject.categoryId)
+        model.beginUpdates()
+        model.update(categoryObject: categoryObject)
+        model.endUpdates()
         if dismissMe != nil {
             dismissMe!()
         } else {
