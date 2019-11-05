@@ -38,7 +38,7 @@ class CategoryPictureStoreController: NSObject {
     }
     
     // MARK: SingleTon
-    @objc static let sharedController = CategoryPictureStoreController()
+    @objc static let shared = CategoryPictureStoreController()
     
 //    func preparePictureObjectsArray() {
 //        let plistPath = NSBundle.mainBundle().pathForResource("categoryPictures", ofType: "plist")!

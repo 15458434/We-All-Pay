@@ -48,7 +48,7 @@ class SelectCategoryTableViewController: UITableViewController, MCDismissMeBlock
     
     override func viewDidLoad() {
         func prepareCategories() {
-            categories = CategoryPictureStoreController.sharedController.pictureObjects
+            categories = CategoryPictureStoreController.shared.pictureObjects
             filteredCategories = [CategoryPictureObject]()
         }
         

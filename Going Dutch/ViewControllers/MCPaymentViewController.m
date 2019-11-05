@@ -205,8 +205,8 @@ typedef NS_ENUM(BOOL, ChildViewStatus) {
 
 - (void)showCategory {
     // Get category picture.
-    NSArray *pictureObjects = [[CategoryPictureStoreController sharedController] pictureObjects];
-    CategoryPictureObject *categoryObject = pictureObjects[[[_thisPayment categoryId] shortValue]];
+    NSArray *pictureObjects = CategoryPictureStoreController.shared.pictureObjects;
+    CategoryPictureObject *categoryObject = pictureObjects[_thisPayment.categoryId.shortValue];
     if (categoryObject.categoryId > 0) {
         _categoryView.image = categoryObject.largePicture;
         [_categoryButton setTitle:categoryObject.categoryDescription forState:UIControlStateNormal];

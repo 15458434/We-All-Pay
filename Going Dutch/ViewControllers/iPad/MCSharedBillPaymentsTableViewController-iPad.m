@@ -218,9 +218,9 @@
     thisCell.namePayerLabel.text = thisCellsPayerName;
     
     // Get category picture.
-    NSArray *pictureObjects = [[CategoryPictureStoreController sharedController] pictureObjects];
-    CategoryPictureObject *categoryObject = pictureObjects[[[thisCellsPayment categoryId] shortValue]];
-    thisCell.pictureOfPayer.image = [categoryObject smallPicture];
+    NSArray *pictureObjects = CategoryPictureStoreController.shared.pictureObjects;
+    CategoryPictureObject *categoryObject = pictureObjects[thisCellsPayment.categoryId.shortValue];
+    thisCell.pictureOfPayer.image = categoryObject.smallPicture;
     
     NSString *thisCellsDescriptionOfPayment = [thisCellsPayment descriptionOfPayment];
     if (!thisCellsDescriptionOfPayment) {
