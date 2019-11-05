@@ -170,7 +170,7 @@
 		38EF31451938BA07004912F0 /* UINavigationController+KeyboardDismiss.m in Sources */ = {isa = PBXBuildFile; fileRef = 38EF31441938BA07004912F0 /* UINavigationController+KeyboardDismiss.m */; };
 		38F2A1AC1ADCF7E100831D48 /* TodayViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 38F2A1AA1ADCF7E100831D48 /* TodayViewController.swift */; };
 		38F2A1AD1ADCF7E100831D48 /* WhoIsPayingNextTextLocalizer.swift in Sources */ = {isa = PBXBuildFile; fileRef = 38F2A1AB1ADCF7E100831D48 /* WhoIsPayingNextTextLocalizer.swift */; };
-		38F44CCB2364993400215B1C /* TextInputValidator.swift in Sources */ = {isa = PBXBuildFile; fileRef = 38F44CCA2364993400215B1C /* TextInputValidator.swift */; };
+		38F44CCB2364993400215B1C /* MoneyTextInputValidator.swift in Sources */ = {isa = PBXBuildFile; fileRef = 38F44CCA2364993400215B1C /* MoneyTextInputValidator.swift */; };
 		38FE5A082346957100BBA722 /* SideMenuTransitioner.swift in Sources */ = {isa = PBXBuildFile; fileRef = 38FE5A072346957100BBA722 /* SideMenuTransitioner.swift */; };
 		A02B1CCB9E8A03DDA7D09AC1 /* Pods_We_all_pay_Tests.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 21121C86CAA462D9731CDDEA /* Pods_We_all_pay_Tests.framework */; };
 		EB9DF8B0CF8785B81E0D7309 /* Pods_We_all_pay.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 9789D49EB21261F3834E5EDA /* Pods_We_all_pay.framework */; };
@@ -530,7 +530,7 @@
 		38EF31441938BA07004912F0 /* UINavigationController+KeyboardDismiss.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = "UINavigationController+KeyboardDismiss.m"; path = "ViewControllers/iPad/UINavigationController+KeyboardDismiss.m"; sourceTree = "<group>"; };
 		38F2A1AA1ADCF7E100831D48 /* TodayViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = TodayViewController.swift; sourceTree = "<group>"; };
 		38F2A1AB1ADCF7E100831D48 /* WhoIsPayingNextTextLocalizer.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = WhoIsPayingNextTextLocalizer.swift; sourceTree = "<group>"; };
-		38F44CCA2364993400215B1C /* TextInputValidator.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TextInputValidator.swift; sourceTree = "<group>"; };
+		38F44CCA2364993400215B1C /* MoneyTextInputValidator.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MoneyTextInputValidator.swift; sourceTree = "<group>"; };
 		38F7F9A51B2C49B80059DE51 /* Base */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; name = Base; path = "Base.lproj/Available Currencies.plist"; sourceTree = "<group>"; };
 		38F7F9A71B2C49C00059DE51 /* en */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; name = en; path = "en.lproj/Available Currencies.plist"; sourceTree = "<group>"; };
 		38F7F9A81B2C49C20059DE51 /* nl */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; name = nl; path = "nl.lproj/Available Currencies.plist"; sourceTree = "<group>"; };
@@ -1084,6 +1084,7 @@
 			children = (
 				3830F6F4179872B400904FAF /* MCPaymentViewController.h */,
 				3830F6F5179872B400904FAF /* MCPaymentViewController.m */,
+				38F44CCA2364993400215B1C /* MoneyTextInputValidator.swift */,
 				38ACC5A2236B1FAE000BDEEC /* PaymentModel.swift */,
 			);
 			name = Payment;
@@ -1118,7 +1119,6 @@
 				3813D8941D8983C900E6B7A4 /* CircularImageView.swift */,
 				38C700F11D8EC24100D785BB /* LaunchCounter.swift */,
 				38FE5A072346957100BBA722 /* SideMenuTransitioner.swift */,
-				38F44CCA2364993400215B1C /* TextInputValidator.swift */,
 			);
 			path = Miscellaneous;
 			sourceTree = "<group>";
@@ -1694,7 +1694,7 @@
 				3863148D235C6D8C00748B9F /* ScreenshotPopulationEngine.swift in Sources */,
 				38977E5B1B2A30A7008484A4 /* MCWhoOwesWhoTableViewCell_iPhone.swift in Sources */,
 				38E2CB661BC2EA6C0092B5C8 /* RootViewController.swift in Sources */,
-				38F44CCB2364993400215B1C /* TextInputValidator.swift in Sources */,
+				38F44CCB2364993400215B1C /* MoneyTextInputValidator.swift in Sources */,
 				38E2CB401BC2A5A20092B5C8 /* SolutionOverViewTableViewCell_iPad.swift in Sources */,
 				38490D2F1D7056D100A297BA /* ShowMailViewProtocol.swift in Sources */,
 				387494D419F053C2001614CA /* WeAllPayStore3to4.xcmappingmodel in Sources */,

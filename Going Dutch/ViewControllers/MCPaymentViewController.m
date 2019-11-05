@@ -30,7 +30,7 @@ typedef NS_ENUM(BOOL, ChildViewStatus) {
 @property (weak, nonatomic) IBOutlet UITextField *payerNameField;
 @property (weak, nonatomic) IBOutlet UITextField *itemView;
 @property (weak, nonatomic) IBOutlet UITextField *paidView;
-@property (strong, nonatomic) IBOutlet MCTextInputValidator *paidViewDelegate;
+@property (strong, nonatomic) IBOutlet MCMoneyTextInputValidator *paidViewDelegate;
 
 @property (weak, nonatomic) IBOutlet UIButton *categoryButton;
 @property (weak, nonatomic) IBOutlet UIImageView *payerPicture;
