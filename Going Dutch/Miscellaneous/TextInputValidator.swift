@@ -1,5 +1,5 @@
 //
-//  MoneyStringTextFieldDelegate.swift
+//  TextInputValidator.swift
 //  We all pay
 //
 //  Created by Mark Cornelisse on 26/10/2019.
@@ -8,7 +8,7 @@
 
 import UIKit
 
-@objcMembers @objc(MCMoneyStringTextFieldDelegate) class MoneyStringTextFieldDelegate: NSObject, UITextFieldDelegate {
+@objcMembers @objc(MCTextInputValidator) class TextInputValidator: NSObject, UITextFieldDelegate {
     @IBOutlet weak var textField: UITextField! {
         willSet {
             newValue.delegate = self

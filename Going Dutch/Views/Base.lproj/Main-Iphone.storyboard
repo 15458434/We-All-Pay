@@ -1207,7 +1207,7 @@
                     </connections>
                 </tableViewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="icD-tl-11M" userLabel="First Responder" sceneMemberID="firstResponder"/>
-                <customObject id="V6Z-Uo-FMI" customClass="MCMoneyStringTextFieldDelegate">
+                <customObject id="V6Z-Uo-FMI" customClass="MCTextInputValidator">
                     <connections>
                         <outlet property="model" destination="kPl-Jh-cgm" id="2Qb-ZO-AE2"/>
                         <outlet property="textField" destination="ZTv-D4-TBc" id="kHD-9F-UXr"/>
