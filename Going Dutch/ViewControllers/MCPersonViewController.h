@@ -18,11 +18,11 @@
 @class MCSharedBill;
 @class MCTwoLabelsTitleView;
 
-@protocol MCPersonViewChangeDelegate <NSObject>
-
-- (void)sendDidSomethingChange:(BOOL)value;
-
-@end
+//@protocol MCPersonViewChangeDelegate <NSObject>
+//
+//- (void)sendDidSomethingChange:(BOOL)value;
+//
+//@end
 
 @interface MCPersonViewController : UITableViewController <UITextFieldDelegate, UIPickerViewDelegate, UIPickerViewDataSource, MCTonightsBillTransfer, MCThisPersonProtocol>
 

@@ -236,15 +236,15 @@
 }
 
 
-#pragma mark - MCPersonViewChangeDelegate
-
-- (void)sendDidSomethingChange:(BOOL)value
-{
-    if(!didSomethingChange && value) {
-        didSomethingChange = YES;
-    }
-    [[self tableView] reloadData];
-}
+//#pragma mark - MCPersonViewChangeDelegate
+//
+//- (void)sendDidSomethingChange:(BOOL)value
+//{
+//    if(!didSomethingChange && value) {
+//        didSomethingChange = YES;
+//    }
+//    [[self tableView] reloadData];
+//}
 
 #pragma mark - UITextFieldDelegate
 
