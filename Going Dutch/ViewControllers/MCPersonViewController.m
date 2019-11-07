@@ -18,8 +18,8 @@
 #import "MCTools.h"
 
 typedef NS_ENUM(BOOL, MCStatus) {
-    invalidStatus,
-    validStatus
+    MCStatusInvalid,
+    MCStatusValid
 };
 
 @interface MCPersonViewController ()
@@ -245,12 +245,12 @@ typedef NS_ENUM(BOOL, MCStatus) {
 - (BOOL)textFieldShouldReturn:(UITextField *)textField {
     if (textField == _emailField) {
         if ([MCTools isStringAnEmailAddress:[_emailField text]]) {
-            _emailAddressStringInTextField = validStatus;
+            _emailAddressStringInTextField = MCStatusValid;
             [_emailField setTextColor:[UIColor blackColor]];
             [_emailField resignFirstResponder];
             return YES;
         } else {
-            _emailAddressStringInTextField = invalidStatus;
+            _emailAddressStringInTextField = MCStatusInvalid;
             [_emailField setTextColor:[UIColor redColor]];
         }
     }
@@ -349,7 +349,7 @@ typedef NS_ENUM(BOOL, MCStatus) {
 - (void)awakeFromNib {
     [super awakeFromNib];
     
-    _emailAddressStringInTextField = invalidStatus;
+    _emailAddressStringInTextField = MCStatusInvalid;
 }
 
 @end
