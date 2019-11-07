@@ -25,6 +25,7 @@ typedef NS_ENUM(BOOL, MCStatus) {
 @interface MCPersonViewController ()
 
 @property (nonatomic, weak) IBOutlet UITextField *firstNameField;
+@property (nonatomic, strong) MCNameTextInputValidator *firstNameFieldValidator;
 @property (nonatomic, weak) IBOutlet UITextField *lastNameField;
 @property (nonatomic, weak) IBOutlet UITextField *emailField;
 @property (nonatomic, weak) IBOutlet UIButton *selectEmailAddressButton;
@@ -36,6 +37,8 @@ typedef NS_ENUM(BOOL, MCStatus) {
 @property (nonatomic) NSUInteger emailEditFieldStatus;
 
 @property (nonatomic, strong) NSFetchedResultsController *dataController;
+
+@property (nonatomic, strong) IBOutlet MCPersonModel *model;
 
 @property (atomic, copy) NSDate * dateModified;
 @property (atomic, copy) NSString * defaultEmailAddress;
@@ -204,16 +207,8 @@ typedef NS_ENUM(BOOL, MCStatus) {
 
 #pragma mark - UITextFieldDelegate
 
--(BOOL)textFieldShouldBeginEditing:(UITextField *)textField
-{
-    return YES;
-}
-
-- (void)textFieldDidBeginEditing:(UITextField *)textField
-{
-    if (textField == _firstNameField) {
-        [FIRAnalytics logEventWithName:@"firstNameField didBeginEditing" parameters:nil];
-    } else if (textField == _lastNameField) {
+- (void)textFieldDidBeginEditing:(UITextField *)textField {
+    if (textField == _lastNameField) {
         [FIRAnalytics logEventWithName:@"lastNameField didBeginEditing" parameters:nil];
     } else if (textField == _emailField) {
         [FIRAnalytics logEventWithName:@"emailField didBeginEditing" parameters:nil];
@@ -226,15 +221,8 @@ typedef NS_ENUM(BOOL, MCStatus) {
     }
 }
 
-- (void)textFieldDidEndEditing:(UITextField *)textField
-{
-    if (textField == _firstNameField) {
-        [FIRAnalytics logEventWithName:@"firstNameField didEndEditing" parameters:nil];
-        [_thisPerson setFirstName:[_firstNameField text]];
-        NSDate *nu = [NSDate date];
-        [_tonightsBill setDateModified:nu];
-        [_thisPerson setDateModified:nu];
-    } else if (textField == _lastNameField) {
+- (void)textFieldDidEndEditing:(UITextField *)textField {
+    if (textField == _lastNameField) {
         [FIRAnalytics logEventWithName:@"lastNameField didEndEditing" parameters:nil];
         [_thisPerson setLastName:[_lastNameField text]];
         NSDate *nu = [NSDate date];
@@ -263,12 +251,8 @@ typedef NS_ENUM(BOOL, MCStatus) {
     }
 }
 
-- (BOOL)textFieldShouldReturn:(UITextField *)textField
-{
-    if (textField == _firstNameField) {
-        [_firstNameField resignFirstResponder];
-        return YES;
-    } else if (textField == _lastNameField) {
+- (BOOL)textFieldShouldReturn:(UITextField *)textField {
+    if (textField == _lastNameField) {
         [_lastNameField resignFirstResponder];
         return YES;
     } else if (textField == _emailField) {
@@ -329,6 +313,15 @@ typedef NS_ENUM(BOOL, MCStatus) {
     }
     
     _isSelectEmail = NO;
+    
+    __weak typeof(self) weakSelf = self;
+    [_model prepareForUseWithPerson:_thisPerson andChangeHandler:^(MCPerson * _Nonnull person) {
+        typeof(self) strongSelf = weakSelf;
+        if (strongSelf) {
+            strongSelf.firstNameField.text = person.firstName;
+        }
+    }];
+    _firstNameFieldValidator = [[MCNameTextInputValidator alloc] initWithModel:_model andTextField:_firstNameField andConfig:MCNameTextInputValidatorConfigFirstName];
 }
 
 - (void)viewWillAppear:(BOOL)animated {
