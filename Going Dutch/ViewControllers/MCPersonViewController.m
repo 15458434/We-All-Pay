@@ -142,9 +142,8 @@ typedef NS_ENUM(BOOL, MCStatus) {
     NSManagedObjectContext *context = [[MCWeAllPayStoreController defaultStore] mainThreadContext];
     // Set dataController for EmailPicker
     NSFetchRequest *request = [NSFetchRequest fetchRequestWithEntityName:@"MCEmailAddress"];
-    [request setPredicate:[NSPredicate predicateWithFormat:@"owner = %@", _thisPerson]];
-    NSSortDescriptor *sd = [NSSortDescriptor sortDescriptorWithKey:@"emailAddress" ascending:YES];
-    [request setSortDescriptors:@[sd]];
+    request.predicate = [NSPredicate predicateWithFormat:@"owner = %@", _thisPerson];
+    request.sortDescriptors = @[[NSSortDescriptor sortDescriptorWithKey:@"emailAddress" ascending:YES]];
     _dataController = [[NSFetchedResultsController alloc] initWithFetchRequest:request managedObjectContext:context sectionNameKeyPath:nil cacheName:nil];
 }
 
