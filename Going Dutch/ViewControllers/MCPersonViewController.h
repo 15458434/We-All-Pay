@@ -8,7 +8,6 @@
 
 @import UIKit;
 @import CoreData;
-@import AddressBookUI;
 
 #import "We_all_pay-Swift.h"
 
