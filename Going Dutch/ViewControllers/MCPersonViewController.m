@@ -27,6 +27,7 @@ typedef NS_ENUM(BOOL, MCStatus) {
 @property (nonatomic, weak) IBOutlet UITextField *firstNameField;
 @property (nonatomic, strong) MCNameTextInputValidator *firstNameFieldValidator;
 @property (nonatomic, weak) IBOutlet UITextField *lastNameField;
+@property (nonatomic, strong) MCNameTextInputValidator *familyNameFieldValidator;
 @property (nonatomic, weak) IBOutlet UITextField *emailField;
 @property (nonatomic, weak) IBOutlet UIButton *selectEmailAddressButton;
 
@@ -193,8 +194,6 @@ typedef NS_ENUM(BOOL, MCStatus) {
 - (void)fillTheScreenWithInitialData
 {
     // Should be execute on the mainThread.
-    [_firstNameField setText:[_thisPerson firstName]];
-    [_lastNameField setText:[_thisPerson lastName]];
     MCEmailAddress *emailAddress = [MCEmailAddress fetchEmailAddressFor:_thisPerson];
     [_emailField setText:[emailAddress emailAddress]];
     _pictureView.image = _thisPerson.picture;
@@ -208,9 +207,7 @@ typedef NS_ENUM(BOOL, MCStatus) {
 #pragma mark - UITextFieldDelegate
 
 - (void)textFieldDidBeginEditing:(UITextField *)textField {
-    if (textField == _lastNameField) {
-        [FIRAnalytics logEventWithName:@"lastNameField didBeginEditing" parameters:nil];
-    } else if (textField == _emailField) {
+    if (textField == _emailField) {
         [FIRAnalytics logEventWithName:@"emailField didBeginEditing" parameters:nil];
         if (_isSelectEmail) {
             [self prepareEmailFieldAsSelector];
@@ -222,13 +219,7 @@ typedef NS_ENUM(BOOL, MCStatus) {
 }
 
 - (void)textFieldDidEndEditing:(UITextField *)textField {
-    if (textField == _lastNameField) {
-        [FIRAnalytics logEventWithName:@"lastNameField didEndEditing" parameters:nil];
-        [_thisPerson setLastName:[_lastNameField text]];
-        NSDate *nu = [NSDate date];
-        [_tonightsBill setDateModified:nu];
-        [_thisPerson setDateModified:nu];
-    } else if (textField == _emailField) {
+    if (textField == _emailField) {
         [FIRAnalytics logEventWithName:@"emailField didEndEditing" parameters:nil];
         if (!_isSelectEmail) {
             [_emailField setInputView:nil];
@@ -252,10 +243,7 @@ typedef NS_ENUM(BOOL, MCStatus) {
 }
 
 - (BOOL)textFieldShouldReturn:(UITextField *)textField {
-    if (textField == _lastNameField) {
-        [_lastNameField resignFirstResponder];
-        return YES;
-    } else if (textField == _emailField) {
+    if (textField == _emailField) {
         if ([MCTools isStringAnEmailAddress:[_emailField text]]) {
             _emailAddressStringInTextField = validStatus;
             [_emailField setTextColor:[UIColor blackColor]];
@@ -319,9 +307,11 @@ typedef NS_ENUM(BOOL, MCStatus) {
         typeof(self) strongSelf = weakSelf;
         if (strongSelf) {
             strongSelf.firstNameField.text = person.firstName;
+            strongSelf.lastNameField.text = person.lastName;
         }
     }];
     _firstNameFieldValidator = [[MCNameTextInputValidator alloc] initWithModel:_model andTextField:_firstNameField andConfig:MCNameTextInputValidatorConfigFirstName];
+    _familyNameFieldValidator = [[MCNameTextInputValidator alloc] initWithModel:_model andTextField:_lastNameField andConfig:MCNameTextInputValidatorConfigFamilyName];
 }
 
 - (void)viewWillAppear:(BOOL)animated {
