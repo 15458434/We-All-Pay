@@ -78,16 +78,14 @@
     [_model prepareForUseWithPerson:_thisPerson andChangeHandler:^(MCPerson * _Nonnull person) {
         typeof(self) strongSelf = weakSelf;
         NSParameterAssert(strongSelf);
-        if (strongSelf) {
-            strongSelf.firstNameField.text = person.firstName;
-            strongSelf.lastNameField.text = person.lastName;
-            strongSelf.emailField.text = person.defaultEmailAddress;
-            strongSelf.pictureView.image = person.picture;
-            
-            strongSelf.emailTextInputReceiver.target = MCEmailTextInputProxyTargetPicker;
-            strongSelf.emailField.inputView = nil;
-            strongSelf.emailField.tintColor = UIColor.systemBlueColor;
-        }
+        strongSelf.firstNameField.text = person.firstName;
+        strongSelf.lastNameField.text = person.lastName;
+        strongSelf.emailField.text = person.defaultEmailAddress;
+        strongSelf.pictureView.image = person.picture;
+        
+        strongSelf.emailField.inputView = nil;
+        strongSelf.emailField.tintColor = UIColor.systemBlueColor;
+        strongSelf.emailTextInputReceiver.target = MCEmailTextInputProxyTargetValidator;
     }];
     _firstNameFieldValidator = [[MCNameTextInputValidator alloc] initWithModel:_model andTextField:_firstNameField andConfig:MCNameTextInputValidatorConfigFirstName];
     _familyNameFieldValidator = [[MCNameTextInputValidator alloc] initWithModel:_model andTextField:_lastNameField andConfig:MCNameTextInputValidatorConfigFamilyName];
