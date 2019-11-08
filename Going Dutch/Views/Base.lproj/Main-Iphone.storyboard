@@ -907,9 +907,6 @@
                                     <rect key="frame" x="100" y="100" width="302" height="34"/>
                                     <fontDescription key="fontDescription" type="system" pointSize="14"/>
                                     <textInputTraits key="textInputTraits" autocorrectionType="no" keyboardType="emailAddress" textContentType="email"/>
-                                    <connections>
-                                        <outlet property="delegate" destination="eE2-xD-YRT" id="huk-Mq-K5v"/>
-                                    </connections>
                                 </textField>
                                 <button opaque="NO" contentMode="scaleToFill" restorationIdentifier="selectEmailAddressButton" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="Iac-jb-ETA">
                                     <rect key="frame" x="180" y="142" width="142" height="30"/>

@@ -25,6 +25,7 @@ import UIKit
     // MARK: UITextFieldDelegate
     
     func textFieldDidBeginEditing(_ textField: UITextField) {
+        textField.textColor = nil
         model.beginUpdates()
         if #available(iOS 13.0, *) {
             textField.textColor = .label

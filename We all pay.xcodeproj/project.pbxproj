@@ -111,6 +111,8 @@
 		389950A4191A90F1000B00BC /* MCPaymentPresence+addons.m in Sources */ = {isa = PBXBuildFile; fileRef = 389950A3191A90F1000B00BC /* MCPaymentPresence+addons.m */; };
 		3899D3F4194F43AF00893323 /* Product ids.plist in Resources */ = {isa = PBXBuildFile; fileRef = 3899D3F3194F43AF00893323 /* Product ids.plist */; };
 		389ACFDA23742C650025139F /* NameTextInputValidator.swift in Sources */ = {isa = PBXBuildFile; fileRef = 389ACFD923742C650025139F /* NameTextInputValidator.swift */; };
+		389ACFE12374A1E60025139F /* EmailTextInputPicker.swift in Sources */ = {isa = PBXBuildFile; fileRef = 389ACFE02374A1E60025139F /* EmailTextInputPicker.swift */; };
+		389ACFE42374B5060025139F /* MCEmailTextInputProxy.m in Sources */ = {isa = PBXBuildFile; fileRef = 389ACFE32374B5060025139F /* MCEmailTextInputProxy.m */; };
 		389C2F56193391E300BB9F3E /* MCPaymentPresenceEntityMigrationPolicy.m in Sources */ = {isa = PBXBuildFile; fileRef = 389C2F55193391E300BB9F3E /* MCPaymentPresenceEntityMigrationPolicy.m */; };
 		389DE8F1197FB2B900169645 /* MCPerson.m in Sources */ = {isa = PBXBuildFile; fileRef = 389DE8F0197FB2B900169645 /* MCPerson.m */; };
 		389DE8F4197FB2B900169645 /* MCEmailAddress.m in Sources */ = {isa = PBXBuildFile; fileRef = 389DE8F3197FB2B900169645 /* MCEmailAddress.m */; };
@@ -436,6 +438,9 @@
 		389950AA191A9469000B00BC /* MCPaymentPresenceTest.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = MCPaymentPresenceTest.m; path = ../WeAllPayTests/MCPaymentPresenceTest.m; sourceTree = "<group>"; };
 		3899D3F3194F43AF00893323 /* Product ids.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; name = "Product ids.plist"; path = "../Product ids.plist"; sourceTree = "<group>"; };
 		389ACFD923742C650025139F /* NameTextInputValidator.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NameTextInputValidator.swift; sourceTree = "<group>"; };
+		389ACFE02374A1E60025139F /* EmailTextInputPicker.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = EmailTextInputPicker.swift; sourceTree = "<group>"; };
+		389ACFE22374B5060025139F /* MCEmailTextInputProxy.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = MCEmailTextInputProxy.h; sourceTree = "<group>"; };
+		389ACFE32374B5060025139F /* MCEmailTextInputProxy.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = MCEmailTextInputProxy.m; sourceTree = "<group>"; };
 		389C2F54193391E300BB9F3E /* MCPaymentPresenceEntityMigrationPolicy.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = MCPaymentPresenceEntityMigrationPolicy.h; path = DataStore/MCPaymentPresenceEntityMigrationPolicy.h; sourceTree = "<group>"; };
 		389C2F55193391E300BB9F3E /* MCPaymentPresenceEntityMigrationPolicy.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = MCPaymentPresenceEntityMigrationPolicy.m; path = DataStore/MCPaymentPresenceEntityMigrationPolicy.m; sourceTree = "<group>"; };
 		389DE8EF197FB2B900169645 /* MCPerson.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = MCPerson.h; sourceTree = "<group>"; };
@@ -1106,6 +1111,9 @@
 				3868780923721967003D40A9 /* PersonModel.swift */,
 				389ACFD923742C650025139F /* NameTextInputValidator.swift */,
 				3868780523721751003D40A9 /* EmailTextInputValidator.swift */,
+				389ACFE02374A1E60025139F /* EmailTextInputPicker.swift */,
+				389ACFE22374B5060025139F /* MCEmailTextInputProxy.h */,
+				389ACFE32374B5060025139F /* MCEmailTextInputProxy.m */,
 			);
 			name = Person;
 			sourceTree = "<group>";
@@ -1753,6 +1761,7 @@
 				3813D8951D8983C900E6B7A4 /* CircularImageView.swift in Sources */,
 				3892E3AA17904A240038894B /* MCPersonViewController.m in Sources */,
 				389950A4191A90F1000B00BC /* MCPaymentPresence+addons.m in Sources */,
+				389ACFE12374A1E60025139F /* EmailTextInputPicker.swift in Sources */,
 				389DE90E197FD41900169645 /* MCCurrency+addons.m in Sources */,
 				384EC9121BC3008300A80799 /* SelectEmailAddressTableViewController_iPad.swift in Sources */,
 				38B88E2E1D81FF6E0069A44D /* MailComposeViewController.swift in Sources */,
@@ -1766,6 +1775,7 @@
 				3812760C1BBE74EF0004C8C2 /* UIViewControllerExtension.swift in Sources */,
 				38D6A3E61C73DF2600968BB2 /* RateMeControllerExtension.swift in Sources */,
 				3830F6F6179872B400904FAF /* MCPaymentViewController.m in Sources */,
+				389ACFE42374B5060025139F /* MCEmailTextInputProxy.m in Sources */,
 				389DE9161982540D00169645 /* MCCurrency.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;

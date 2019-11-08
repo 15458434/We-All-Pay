@@ -29,6 +29,7 @@ typedef NS_ENUM(BOOL, MCStatus) {
 @property (nonatomic, weak) IBOutlet UITextField *lastNameField;
 @property (nonatomic, strong) MCNameTextInputValidator *familyNameFieldValidator;
 @property (nonatomic, weak) IBOutlet UITextField *emailField;
+@property (nonatomic, strong) MCEmailTextInputProxy *emailTextInputReceiver;
 @property (nonatomic, weak) IBOutlet UIButton *selectEmailAddressButton;
 
 @property (nonatomic, strong) MCTwoLabelsTitleView *twoLabelTitleView;
@@ -62,7 +63,6 @@ typedef NS_ENUM(BOOL, MCStatus) {
 @synthesize changeFlagDelegate;
 @synthesize isNew;
 
-#pragma mark - Actions
 
 - (IBAction)dismissKeyboard:(id)sender
 {
@@ -77,14 +77,17 @@ typedef NS_ENUM(BOOL, MCStatus) {
     [[[self navigationController] presentingViewController] dismissViewControllerAnimated:YES completion:nil];
 }
 
-- (IBAction)selectEmailAddressPressed:(id)sender
-{
+- (IBAction)selectEmailAddressPressed:(id)sender {
     [FIRAnalytics logEventWithName:@"Select email address pressed" parameters:nil];
     // If any of the fields is first responder resign them first.
     [self dismissKeyboard];
     
-    // select the emailField and pop-up it's keyboard with the UIPickerView
-    _isSelectEmail = YES;
+    _emailTextInputReceiver.target = MCEmailTextInputProxyTargetPicker;
+    UIPickerView *inputView = [[UIPickerView alloc] init];
+    inputView.delegate = _emailTextInputReceiver;
+    inputView.dataSource = _emailTextInputReceiver;
+    inputView.showsSelectionIndicator = YES;
+    _emailField.inputView = inputView;
     [_emailField becomeFirstResponder];
 }
 
@@ -117,8 +120,6 @@ typedef NS_ENUM(BOOL, MCStatus) {
     [_emailField setText:[_thisPerson defaultEmailAddress]];
     [_emailField resignFirstResponder];
 }
-
-#pragma mark - New in this class
 
 - (void)dismissKeyboard
 {
@@ -162,22 +163,16 @@ typedef NS_ENUM(BOOL, MCStatus) {
     if (indexOfDefaultEmailAddress < [[_dataController fetchedObjects] count]) {
         CGRect toolbarRect = CGRectMake(0, 0, [[self view] bounds].size.width, 44);
         UIToolbar *inputAccessoryPickerView = [[UIToolbar alloc] initWithFrame:toolbarRect];
-        UIBarButtonItem *cancelButton = [[UIBarButtonItem alloc] initWithBarButtonSystemItem:UIBarButtonSystemItemCancel
-                                                                                      target:self
-                                                                                      action:@selector(cancelEmailPicker:)];
-        UIBarButtonItem *flexButton = [[UIBarButtonItem alloc] initWithBarButtonSystemItem:UIBarButtonSystemItemFlexibleSpace
-                                                                                    target:nil
-                                                                                    action:nil];
-        UIBarButtonItem *doneButton = [[UIBarButtonItem alloc] initWithBarButtonSystemItem:UIBarButtonSystemItemDone
-                                                                                    target:self
-                                                                                    action:@selector(doneEmailPicker:)];
+        UIBarButtonItem *cancelButton = [[UIBarButtonItem alloc] initWithBarButtonSystemItem:UIBarButtonSystemItemCancel target:self action:@selector(cancelEmailPicker:)];
+        UIBarButtonItem *flexButton = [[UIBarButtonItem alloc] initWithBarButtonSystemItem:UIBarButtonSystemItemFlexibleSpace target:nil action:nil];
+        UIBarButtonItem *doneButton = [[UIBarButtonItem alloc] initWithBarButtonSystemItem:UIBarButtonSystemItemDone target:self action:@selector(doneEmailPicker:)];
         NSArray *buttonArray = @[cancelButton, flexButton, doneButton];
         [inputAccessoryPickerView setItems:buttonArray animated:YES];
         if (!_emailSelectionFromAddressBookPickerView) {
             _emailSelectionFromAddressBookPickerView = [[UIPickerView alloc] init];
-            [_emailSelectionFromAddressBookPickerView setDelegate:self];
-            [_emailSelectionFromAddressBookPickerView setDataSource:self];
-            [_emailSelectionFromAddressBookPickerView setShowsSelectionIndicator:YES];
+            _emailSelectionFromAddressBookPickerView.delegate = self;
+            _emailSelectionFromAddressBookPickerView.dataSource = self;
+            _emailSelectionFromAddressBookPickerView.showsSelectionIndicator = YES;
         }
         [_emailField setInputView:_emailSelectionFromAddressBookPickerView];
         [_emailField setInputAccessoryView:inputAccessoryPickerView];
@@ -187,8 +182,6 @@ typedef NS_ENUM(BOOL, MCStatus) {
         _isSelectEmail = NO;
     }
 }
-
-#pragma mark - Private in this class
 
 - (void)fillTheScreenWithInitialData
 {
@@ -311,6 +304,9 @@ typedef NS_ENUM(BOOL, MCStatus) {
     }];
     _firstNameFieldValidator = [[MCNameTextInputValidator alloc] initWithModel:_model andTextField:_firstNameField andConfig:MCNameTextInputValidatorConfigFirstName];
     _familyNameFieldValidator = [[MCNameTextInputValidator alloc] initWithModel:_model andTextField:_lastNameField andConfig:MCNameTextInputValidatorConfigFamilyName];
+    MCEmailTextInputValidator *validator = [[MCEmailTextInputValidator alloc] initWithTextField:_emailField andModel:_model];
+    MCEmailTextInputPicker *picker = [[MCEmailTextInputPicker alloc] initWithTextField:_emailField andModel:_model];
+    _emailTextInputReceiver = [[MCEmailTextInputProxy alloc] initWithValidator:validator andPicker:picker andTarget:MCEmailTextInputProxyTargetValidator];
 }
 
 - (void)viewWillAppear:(BOOL)animated {

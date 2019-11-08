@@ -18,6 +18,14 @@ import UIKit
         self.changeHandler(self.person)
     }
     
+    var emailAddreses: [MCEmailAddress] {
+        let request = MCEmailAddress.fetchRequest()
+        request.predicate = NSPredicate(format: "owner = %@", person)
+        request.sortDescriptors = [NSSortDescriptor(key: "emailAddress", ascending: true)]
+        let result = try! person.managedObjectContext!.fetch(request) as! [MCEmailAddress]
+        return result
+    }
+    
     func beginUpdates() {
         person.managedObjectContext!.undoManager!.beginUndoGrouping()
     }
@@ -34,8 +42,12 @@ import UIKit
         person.dateModified = nu
     }
     
-    @objc(updateDefaultEmailAddress:) func update(defaultEmailAddress: String) {
+    @objc(updateDefaultEmailAddressWithString:) func update(defaultEmailAddress: String) {
         person.addNewDefaultEmailAddress(fromAString: defaultEmailAddress)
+    }
+    
+    @objc(updateDefaultEmailAddressWithEmailAddress:) func update(defaultEmailAddress: MCEmailAddress) {
+        person.setNewDefaultEmailaddressObject(defaultEmailAddress)
     }
     
     func endUpdates() {

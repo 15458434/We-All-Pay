@@ -32,8 +32,4 @@
 @property (nonatomic, strong) MCSharedBill *writableTonightsBill;
 @property (nonatomic, strong) MCPerson *writableThisPerson;
 
-- (IBAction)doneButtonPressed:(id)sender;
-- (IBAction)cancelButtonPressed:(id)sender;
-- (IBAction)selectEmailAddressPressed:(id)sender;
-
 @end
