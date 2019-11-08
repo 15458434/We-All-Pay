@@ -17,12 +17,9 @@
 
 #import "MCTools.h"
 
-typedef NS_ENUM(BOOL, MCStatus) {
-    MCStatusInvalid,
-    MCStatusValid
-};
-
 @interface MCPersonViewController ()
+
+@property (nonatomic, strong) MCTwoLabelsTitleView *twoLabelTitleView;
 
 @property (nonatomic, weak) IBOutlet UITextField *firstNameField;
 @property (nonatomic, strong) MCNameTextInputValidator *firstNameFieldValidator;
@@ -32,29 +29,9 @@ typedef NS_ENUM(BOOL, MCStatus) {
 @property (nonatomic, weak) IBOutlet UIButton *selectEmailAddressButton;
 @property (nonatomic, strong) MCEmailTextInputProxy *emailTextInputReceiver;
 
-@property (nonatomic, strong) MCTwoLabelsTitleView *twoLabelTitleView;
-@property (nonatomic, strong) UIBarButtonItem *addressBookButton;
-@property (nonatomic, strong) UIPickerView *emailSelectionFromAddressBookPickerView;
-@property (nonatomic) BOOL isSelectEmail;
-@property (nonatomic) NSUInteger emailEditFieldStatus;
-
-@property (nonatomic, strong) NSFetchedResultsController *dataController;
-
 @property (nonatomic, strong) IBOutlet MCPersonModel *model;
 
-@property (atomic, copy) NSDate * dateModified;
-@property (atomic, copy) NSString * defaultEmailAddress;
-@property (atomic, copy) NSString * firstName;
-@property (atomic, copy) NSString * lastName;
-@property (atomic, strong) NSString * phoneNumber;
-@property (atomic, copy) UIImage * picture;
-@property (atomic, copy) UIImage * thumbnail;
-
-@property (nonatomic) MCStatus emailAddressStringInTextField;
-
-@property (nonatomic) BOOL didSomethingChange;
 @property (nonatomic) BOOL thisPersonHasPaidSomething;
-@property (nonatomic) BOOL mainCancelPressed;
 
 @end
 
@@ -68,7 +45,7 @@ typedef NS_ENUM(BOOL, MCStatus) {
     [FIRAnalytics logEventWithName:@"Cancel button pressed" parameters:nil];
     [self.view endEditing:YES];
     [[MCWeAllPayStoreController defaultStore] endUndoGroupAndUndo];
-    [[[self navigationController] presentingViewController] dismissViewControllerAnimated:YES completion:nil];
+    [self.navigationController.presentingViewController dismissViewControllerAnimated:YES completion:nil];
 }
 
 - (IBAction)selectEmailAddressPressed:(id)sender {
@@ -91,7 +68,6 @@ typedef NS_ENUM(BOOL, MCStatus) {
 {
     [FIRAnalytics logEventWithName:@"Done button pressed" parameters:nil];
     [self.view endEditing:YES];
-    [_thisPerson setDateModified:[NSDate date]];
     [[MCWeAllPayStoreController defaultStore] endUndoGroupAndProcess];
     [[MCWeAllPayStoreController defaultStore] saveMainThreadContext];
     [[[self navigationController] presentingViewController] dismissViewControllerAnimated:YES completion:nil];
@@ -101,12 +77,12 @@ typedef NS_ENUM(BOOL, MCStatus) {
 {
     // Should be execute on the mainThread.
     MCEmailAddress *emailAddress = [MCEmailAddress fetchEmailAddressFor:_thisPerson];
-    [_emailField setText:[emailAddress emailAddress]];
+    _emailField.text = emailAddress.emailAddress;
     _pictureView.image = _thisPerson.picture;
-    if ([[_thisPerson emailAddress] count] < 2) {
-        [_selectEmailAddressButton setHidden:YES];
+    if (_thisPerson.emailAddress.count < 2) {
+        _selectEmailAddressButton.hidden = YES;
     } else {
-        [_selectEmailAddressButton setHidden:NO];
+        _selectEmailAddressButton.hidden = NO;
     }
 }
 
@@ -123,8 +99,6 @@ typedef NS_ENUM(BOOL, MCStatus) {
     } else {
         _thisPersonHasPaidSomething = NO;
     }
-    
-    _isSelectEmail = NO;
     
     __weak typeof(self) weakSelf = self;
     [_model prepareForUseWithPerson:_thisPerson andChangeHandler:^(MCPerson * _Nonnull person) {
@@ -171,30 +145,10 @@ typedef NS_ENUM(BOOL, MCStatus) {
     
     // Dismiss the keyboard on backgroundtap.
     [self startResigningFirstResponderOnBackgroundTap];
-//
-//    NSNotificationCenter *notificationCenter = NSNotificationCenter.defaultCenter;
-//    __weak typeof(self) weakSelf = self;
-//    _emailFieldDidEndEditingObserver = [notificationCenter addObserverForName:UITextFieldTextDidEndEditingNotification object:_emailField queue:NSOperationQueue.mainQueue usingBlock:^(NSNotification * _Nonnull note) {
-//        NSLog(@"Godverdomme");
-//        weakSelf.emailField.inputView = nil;
-//        weakSelf.emailTextInputReceiver.target = MCEmailTextInputProxyTargetValidator;
-//    }];
-//}
-//
-//- (void)viewWillDisappear:(BOOL)animated {
-//    [super viewWillDisappear:animated];
-//
-//    _emailFieldDidEndEditingObserver = nil;
 }
 
 #pragma mark - UIResponder
 
 #pragma mark - NSObject
-
-- (void)awakeFromNib {
-    [super awakeFromNib];
-    
-    _emailAddressStringInTextField = MCStatusInvalid;
-}
 
 @end
