@@ -19,10 +19,6 @@
 
 @interface MCPersonViewController : UITableViewController <MCTonightsBillTransfer, MCThisPersonProtocol>
 
-@property (weak, nonatomic) IBOutlet UIImageView *pictureView;
-
-@property (nonatomic, weak) id changeFlagDelegate;
-
 // Only accessible on the mainThread.
 @property (nonatomic, strong) MCSharedBill *tonightsBill;
 @property (nonatomic, strong) MCPerson *thisPerson;

@@ -21,6 +21,7 @@
 
 @property (nonatomic, strong) MCTwoLabelsTitleView *twoLabelTitleView;
 
+@property (nonatomic, weak) IBOutlet UIImageView *pictureView;
 @property (nonatomic, weak) IBOutlet UITextField *firstNameField;
 @property (nonatomic, strong) MCNameTextInputValidator *firstNameFieldValidator;
 @property (nonatomic, weak) IBOutlet UITextField *lastNameField;
@@ -31,14 +32,9 @@
 
 @property (nonatomic, strong) IBOutlet MCPersonModel *model;
 
-@property (nonatomic) BOOL thisPersonHasPaidSomething;
-
 @end
 
 @implementation MCPersonViewController
-
-@synthesize changeFlagDelegate;
-@synthesize isNew;
 
 - (IBAction)cancelButtonPressed:(id)sender
 {
@@ -73,32 +69,10 @@
     [[[self navigationController] presentingViewController] dismissViewControllerAnimated:YES completion:nil];
 }
 
-- (void)fillTheScreenWithInitialData
-{
-    // Should be execute on the mainThread.
-    MCEmailAddress *emailAddress = [MCEmailAddress fetchEmailAddressFor:_thisPerson];
-    _emailField.text = emailAddress.emailAddress;
-    _pictureView.image = _thisPerson.picture;
-    if (_thisPerson.emailAddress.count < 2) {
-        _selectEmailAddressButton.hidden = YES;
-    } else {
-        _selectEmailAddressButton.hidden = NO;
-    }
-}
-
 #pragma mark - UIViewController
 
 - (void)viewDidLoad {
     [super viewDidLoad];
-    
-    if (!_thisPerson) {
-        // A new person object will be delivered
-        _thisPersonHasPaidSomething = NO;
-    } else if ([_tonightsBill hasPersonPaidSomething:_thisPerson]) { // Check to see if thisPerson has paid something.
-        _thisPersonHasPaidSomething = YES;
-    } else {
-        _thisPersonHasPaidSomething = NO;
-    }
     
     __weak typeof(self) weakSelf = self;
     [_model prepareForUseWithPerson:_thisPerson andChangeHandler:^(MCPerson * _Nonnull person) {
@@ -108,6 +82,7 @@
             strongSelf.firstNameField.text = person.firstName;
             strongSelf.lastNameField.text = person.lastName;
             strongSelf.emailField.text = person.defaultEmailAddress;
+            strongSelf.pictureView.image = person.picture;
             
             strongSelf.emailTextInputReceiver.target = MCEmailTextInputProxyTargetPicker;
             strongSelf.emailField.inputView = nil;
@@ -128,7 +103,7 @@
     
     if (!_twoLabelTitleView) {
         _twoLabelTitleView = [[NSBundle mainBundle] loadNibNamed:@"MCTwoLabelsTitleView" owner:self options:nil][0];
-        if (isNew) {
+        if (_isNew) {
             _twoLabelTitleView.mainLabel.text = NSLocalizedString(@"NEW_PERSON_HEADER", @"Header in the personView which state new person.");
             _twoLabelTitleView.subLabel.text = NSLocalizedString(@"NEW_PERSON_SUBHEADER", @"Sub header in the personView which states add new data");
         } else {
@@ -137,10 +112,6 @@
         }
 
         self.navigationItem.titleView = _twoLabelTitleView;
-    }
-
-    if (_thisPerson) {
-        [self fillTheScreenWithInitialData];
     }
     
     // Dismiss the keyboard on backgroundtap.
