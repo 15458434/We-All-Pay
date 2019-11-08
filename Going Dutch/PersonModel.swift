@@ -26,6 +26,13 @@ import UIKit
         return result
     }
     
+    var indexOfDefaultEmailAddress: Int {
+        guard let defaultEmailAddressObject = person.getDefaultEmailAddressObject() else {
+            return -1
+        }
+        return emailAddreses.firstIndex(of: defaultEmailAddressObject) ?? -1
+    }
+    
     func beginUpdates() {
         person.managedObjectContext!.undoManager!.beginUndoGrouping()
     }

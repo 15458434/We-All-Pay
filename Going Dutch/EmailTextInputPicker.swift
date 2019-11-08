@@ -25,7 +25,6 @@ import UIKit
     // MARK: UITextFieldDelegate
     
     func textFieldShouldBeginEditing(_ textField: UITextField) -> Bool {
-        textField.tintColor = .clear
         return true
     }
     

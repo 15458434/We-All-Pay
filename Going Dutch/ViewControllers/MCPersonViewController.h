@@ -17,7 +17,7 @@
 @class MCSharedBill;
 @class MCTwoLabelsTitleView;
 
-@interface MCPersonViewController : UITableViewController <UITextFieldDelegate, UIPickerViewDelegate, UIPickerViewDataSource, MCTonightsBillTransfer, MCThisPersonProtocol>
+@interface MCPersonViewController : UITableViewController <MCTonightsBillTransfer, MCThisPersonProtocol>
 
 @property (weak, nonatomic) IBOutlet UIImageView *pictureView;
 

@@ -29,8 +29,8 @@ typedef NS_ENUM(BOOL, MCStatus) {
 @property (nonatomic, weak) IBOutlet UITextField *lastNameField;
 @property (nonatomic, strong) MCNameTextInputValidator *familyNameFieldValidator;
 @property (nonatomic, weak) IBOutlet UITextField *emailField;
-@property (nonatomic, strong) MCEmailTextInputProxy *emailTextInputReceiver;
 @property (nonatomic, weak) IBOutlet UIButton *selectEmailAddressButton;
+@property (nonatomic, strong) MCEmailTextInputProxy *emailTextInputReceiver;
 
 @property (nonatomic, strong) MCTwoLabelsTitleView *twoLabelTitleView;
 @property (nonatomic, strong) UIBarButtonItem *addressBookButton;
@@ -63,16 +63,10 @@ typedef NS_ENUM(BOOL, MCStatus) {
 @synthesize changeFlagDelegate;
 @synthesize isNew;
 
-
-- (IBAction)dismissKeyboard:(id)sender
-{
-    [self dismissKeyboard];
-}
-
 - (IBAction)cancelButtonPressed:(id)sender
 {
     [FIRAnalytics logEventWithName:@"Cancel button pressed" parameters:nil];
-    [self dismissKeyboard];
+    [self.view endEditing:YES];
     [[MCWeAllPayStoreController defaultStore] endUndoGroupAndUndo];
     [[[self navigationController] presentingViewController] dismissViewControllerAnimated:YES completion:nil];
 }
@@ -80,107 +74,27 @@ typedef NS_ENUM(BOOL, MCStatus) {
 - (IBAction)selectEmailAddressPressed:(id)sender {
     [FIRAnalytics logEventWithName:@"Select email address pressed" parameters:nil];
     // If any of the fields is first responder resign them first.
-    [self dismissKeyboard];
+    [self.view endEditing:YES];
     
     _emailTextInputReceiver.target = MCEmailTextInputProxyTargetPicker;
     UIPickerView *inputView = [[UIPickerView alloc] init];
     inputView.delegate = _emailTextInputReceiver;
     inputView.dataSource = _emailTextInputReceiver;
     inputView.showsSelectionIndicator = YES;
+    [inputView selectRow:_model.indexOfDefaultEmailAddress inComponent:0 animated:YES];
     _emailField.inputView = inputView;
+    _emailField.tintColor = UIColor.clearColor;
     [_emailField becomeFirstResponder];
 }
 
 - (IBAction)doneButtonPressed:(id)sender
 {
     [FIRAnalytics logEventWithName:@"Done button pressed" parameters:nil];
-    [self dismissKeyboard];
+    [self.view endEditing:YES];
     [_thisPerson setDateModified:[NSDate date]];
     [[MCWeAllPayStoreController defaultStore] endUndoGroupAndProcess];
     [[MCWeAllPayStoreController defaultStore] saveMainThreadContext];
     [[[self navigationController] presentingViewController] dismissViewControllerAnimated:YES completion:nil];
-}
-
-- (void)doneEmailPicker:(id)selector
-{
-    [FIRAnalytics logEventWithName:@"Done email picker pressed" parameters:nil];
-    MCEmailAddress *newDefaultEmailAddress = [_dataController fetchedObjects][[_emailSelectionFromAddressBookPickerView selectedRowInComponent:0]];
-    MCEmailAddress *oldDefaulEmailAddress = [MCEmailAddress fetchEmailAddressFor:_thisPerson];
-    [oldDefaulEmailAddress setSelected:@NO];
-    [newDefaultEmailAddress setSelected:@YES];
-    [_emailField setText:[_thisPerson defaultEmailAddress]];
-    
-    [_emailField resignFirstResponder];
-    [[[self navigationItem] rightBarButtonItem] setEnabled:YES];
-}
-
-- (void)cancelEmailPicker:(id)selector
-{
-    [FIRAnalytics logEventWithName:@"Cancel email picker pressed" parameters:nil];
-    [_emailField setText:[_thisPerson defaultEmailAddress]];
-    [_emailField resignFirstResponder];
-}
-
-- (void)dismissKeyboard
-{
-    if ([_firstNameField isFirstResponder]) {
-        [_firstNameField endEditing:YES];
-    }
-    if ([_lastNameField isFirstResponder]) {
-        [_lastNameField endEditing:YES];
-    }
-    if ([_emailField isFirstResponder]) {
-        if (_isSelectEmail) {
-            [self cancelEmailPicker:self];
-        } else {
-            [_emailField endEditing:YES];
-        }
-    }
-}
-
-- (void)prepareDataController
-{
-    NSManagedObjectContext *context = [[MCWeAllPayStoreController defaultStore] mainThreadContext];
-    // Set dataController for EmailPicker
-    NSFetchRequest *request = [NSFetchRequest fetchRequestWithEntityName:@"MCEmailAddress"];
-    request.predicate = [NSPredicate predicateWithFormat:@"owner = %@", _thisPerson];
-    request.sortDescriptors = @[[NSSortDescriptor sortDescriptorWithKey:@"emailAddress" ascending:YES]];
-    _dataController = [[NSFetchedResultsController alloc] initWithFetchRequest:request managedObjectContext:context sectionNameKeyPath:nil cacheName:nil];
-}
-
-- (void)performFetch
-{
-    NSError *error = nil;
-    [_dataController performFetch:&error];
-    if (error) {
-        NSLog(@"Something went wrong fetching email addresses: %@", error);
-    }
-}
-
-- (void)prepareEmailFieldAsSelector
-{
-    NSUInteger indexOfDefaultEmailAddress = [[_dataController fetchedObjects] indexOfObject:[_thisPerson getDefaultEmailAddressObject]];
-    if (indexOfDefaultEmailAddress < [[_dataController fetchedObjects] count]) {
-        CGRect toolbarRect = CGRectMake(0, 0, [[self view] bounds].size.width, 44);
-        UIToolbar *inputAccessoryPickerView = [[UIToolbar alloc] initWithFrame:toolbarRect];
-        UIBarButtonItem *cancelButton = [[UIBarButtonItem alloc] initWithBarButtonSystemItem:UIBarButtonSystemItemCancel target:self action:@selector(cancelEmailPicker:)];
-        UIBarButtonItem *flexButton = [[UIBarButtonItem alloc] initWithBarButtonSystemItem:UIBarButtonSystemItemFlexibleSpace target:nil action:nil];
-        UIBarButtonItem *doneButton = [[UIBarButtonItem alloc] initWithBarButtonSystemItem:UIBarButtonSystemItemDone target:self action:@selector(doneEmailPicker:)];
-        NSArray *buttonArray = @[cancelButton, flexButton, doneButton];
-        [inputAccessoryPickerView setItems:buttonArray animated:YES];
-        if (!_emailSelectionFromAddressBookPickerView) {
-            _emailSelectionFromAddressBookPickerView = [[UIPickerView alloc] init];
-            _emailSelectionFromAddressBookPickerView.delegate = self;
-            _emailSelectionFromAddressBookPickerView.dataSource = self;
-            _emailSelectionFromAddressBookPickerView.showsSelectionIndicator = YES;
-        }
-        [_emailField setInputView:_emailSelectionFromAddressBookPickerView];
-        [_emailField setInputAccessoryView:inputAccessoryPickerView];
-        
-        [_emailSelectionFromAddressBookPickerView selectRow:indexOfDefaultEmailAddress inComponent:0 animated:YES];
-    } else {
-        _isSelectEmail = NO;
-    }
 }
 
 - (void)fillTheScreenWithInitialData
@@ -196,92 +110,10 @@ typedef NS_ENUM(BOOL, MCStatus) {
     }
 }
 
-#pragma mark - UITextFieldDelegate
-
-- (void)textFieldDidBeginEditing:(UITextField *)textField {
-    if (textField == _emailField) {
-        [FIRAnalytics logEventWithName:@"emailField didBeginEditing" parameters:nil];
-        if (_isSelectEmail) {
-            [self prepareEmailFieldAsSelector];
-        } else {
-            [_emailField setInputView:nil];
-            [_emailField setInputAccessoryView:nil];
-        }
-    }
-}
-
-- (void)textFieldDidEndEditing:(UITextField *)textField {
-    if (textField == _emailField) {
-        [FIRAnalytics logEventWithName:@"emailField didEndEditing" parameters:nil];
-        if (!_isSelectEmail) {
-            [_emailField setInputView:nil];
-            [_emailField setInputAccessoryView:nil];
-            if (isNew) {
-                [_thisPerson addOneEmailAddressFromAString:[_emailField text]];
-            } else {
-                MCEmailAddress *defaultEmail = [_thisPerson getDefaultEmailAddressObject];
-                if (!defaultEmail) {
-                    [_thisPerson addOneEmailAddressFromAString:[_emailField text]];
-                } else {
-                    [defaultEmail setEmailAddress:[_emailField text]];
-                }
-            }
-        }
-        _isSelectEmail = NO;
-        NSDate *nu = [NSDate date];
-        [_tonightsBill setDateModified:nu];
-        [_thisPerson setDateModified:nu];
-    }
-}
-
-- (BOOL)textFieldShouldReturn:(UITextField *)textField {
-    if (textField == _emailField) {
-        if ([MCTools isStringAnEmailAddress:[_emailField text]]) {
-            _emailAddressStringInTextField = MCStatusValid;
-            [_emailField setTextColor:[UIColor blackColor]];
-            [_emailField resignFirstResponder];
-            return YES;
-        } else {
-            _emailAddressStringInTextField = MCStatusInvalid;
-            [_emailField setTextColor:[UIColor redColor]];
-        }
-    }
-    return NO;
-}
-
-#pragma mark - UIPickerViewDelegate
-
-- (NSString *)pickerView:(UIPickerView *)pickerView titleForRow:(NSInteger)row forComponent:(NSInteger)component
-{
-    MCEmailAddress *emailAddressObject = [_dataController fetchedObjects][row];
-    return [emailAddressObject emailAddress];
-}
-
-- (void)pickerView:(UIPickerView *)pickerView didSelectRow:(NSInteger)row inComponent:(NSInteger)component
-{
-    [FIRAnalytics logEventWithName:@"pickedEmailAddress with picker" parameters:nil];
-    MCEmailAddress *pickedEmailAddress = [_dataController fetchedObjects][row];
-    [_emailField setText:[pickedEmailAddress emailAddress]];
-}
-
-#pragma mark - UIPickerViewDataSource
-
-- (NSInteger)numberOfComponentsInPickerView:(UIPickerView *)pickerView
-{
-    return 1;
-}
-
-- (NSInteger)pickerView:(UIPickerView *)pickerView numberOfRowsInComponent:(NSInteger)component
-{
-    return [[_dataController fetchedObjects] count];
-}
-
 #pragma mark - UIViewController
 
 - (void)viewDidLoad {
     [super viewDidLoad];
-    
-    [self prepareDataController];
     
     if (!_thisPerson) {
         // A new person object will be delivered
@@ -297,9 +129,15 @@ typedef NS_ENUM(BOOL, MCStatus) {
     __weak typeof(self) weakSelf = self;
     [_model prepareForUseWithPerson:_thisPerson andChangeHandler:^(MCPerson * _Nonnull person) {
         typeof(self) strongSelf = weakSelf;
+        NSParameterAssert(strongSelf);
         if (strongSelf) {
             strongSelf.firstNameField.text = person.firstName;
             strongSelf.lastNameField.text = person.lastName;
+            strongSelf.emailField.text = person.defaultEmailAddress;
+            
+            strongSelf.emailTextInputReceiver.target = MCEmailTextInputProxyTargetPicker;
+            strongSelf.emailField.inputView = nil;
+            strongSelf.emailField.tintColor = UIColor.systemBlueColor;
         }
     }];
     _firstNameFieldValidator = [[MCNameTextInputValidator alloc] initWithModel:_model andTextField:_firstNameField andConfig:MCNameTextInputValidatorConfigFirstName];
@@ -317,17 +155,15 @@ typedef NS_ENUM(BOOL, MCStatus) {
     if (!_twoLabelTitleView) {
         _twoLabelTitleView = [[NSBundle mainBundle] loadNibNamed:@"MCTwoLabelsTitleView" owner:self options:nil][0];
         if (isNew) {
-            [[_twoLabelTitleView mainLabel] setText:NSLocalizedString(@"NEW_PERSON_HEADER", @"Header in the personView which state new person.")];
-            [[_twoLabelTitleView subLabel] setText:NSLocalizedString(@"NEW_PERSON_SUBHEADER", @"Sub header in the personView which states add new data")];
+            _twoLabelTitleView.mainLabel.text = NSLocalizedString(@"NEW_PERSON_HEADER", @"Header in the personView which state new person.");
+            _twoLabelTitleView.subLabel.text = NSLocalizedString(@"NEW_PERSON_SUBHEADER", @"Sub header in the personView which states add new data");
         } else {
-            [[_twoLabelTitleView mainLabel] setText:NSLocalizedString(@"EXISTING_PERSON_HEADER", @"Header in the personView which states person")];
-            [[_twoLabelTitleView subLabel] setText:NSLocalizedString(@"EXISTING_PERSON_SUBHEADER", @"Sub header in the personView which state edit data")];
+            _twoLabelTitleView.mainLabel.text = NSLocalizedString(@"EXISTING_PERSON_HEADER", @"Header in the personView which states person");
+            _twoLabelTitleView.subLabel.text = NSLocalizedString(@"EXISTING_PERSON_SUBHEADER", @"Sub header in the personView which state edit data");
         }
 
-        [[self navigationItem] setTitleView:_twoLabelTitleView];
+        self.navigationItem.titleView = _twoLabelTitleView;
     }
-    
-    [self performFetch];
 
     if (_thisPerson) {
         [self fillTheScreenWithInitialData];
@@ -335,6 +171,20 @@ typedef NS_ENUM(BOOL, MCStatus) {
     
     // Dismiss the keyboard on backgroundtap.
     [self startResigningFirstResponderOnBackgroundTap];
+//
+//    NSNotificationCenter *notificationCenter = NSNotificationCenter.defaultCenter;
+//    __weak typeof(self) weakSelf = self;
+//    _emailFieldDidEndEditingObserver = [notificationCenter addObserverForName:UITextFieldTextDidEndEditingNotification object:_emailField queue:NSOperationQueue.mainQueue usingBlock:^(NSNotification * _Nonnull note) {
+//        NSLog(@"Godverdomme");
+//        weakSelf.emailField.inputView = nil;
+//        weakSelf.emailTextInputReceiver.target = MCEmailTextInputProxyTargetValidator;
+//    }];
+//}
+//
+//- (void)viewWillDisappear:(BOOL)animated {
+//    [super viewWillDisappear:animated];
+//
+//    _emailFieldDidEndEditingObserver = nil;
 }
 
 #pragma mark - UIResponder

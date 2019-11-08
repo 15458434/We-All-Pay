@@ -11,13 +11,12 @@ import UIKit
 public extension UIViewController {
     @objc func startResigningFirstResponderOnBackgroundTap() {
         // Make sure a tap in the background dismisses the keyboard as well.
-        let thatTickles = UITapGestureRecognizer(target: self, action: #selector(UIViewController.tappedInTheBackground))
+        let thatTickles = UITapGestureRecognizer(target: self, action: #selector(UIViewController.tappedInTheBackground(_:)))
         thatTickles.cancelsTouchesInView = true
         view.addGestureRecognizer(thatTickles)
     }
     
-    @objc func tappedInTheBackground() {
-        let fr = self.view.getFirstResponder()
-        fr?.resignFirstResponder()
+    @objc func tappedInTheBackground(_ sender: UITapGestureRecognizer) {
+        self.view.endEditing(true)
     }
 }
