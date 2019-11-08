@@ -1097,8 +1097,8 @@
 			children = (
 				3830F6F4179872B400904FAF /* MCPaymentViewController.h */,
 				3830F6F5179872B400904FAF /* MCPaymentViewController.m */,
-				38F44CCA2364993400215B1C /* MoneyTextInputValidator.swift */,
 				38ACC5A2236B1FAE000BDEEC /* PaymentModel.swift */,
+				38F44CCA2364993400215B1C /* MoneyTextInputValidator.swift */,
 			);
 			name = Payment;
 			sourceTree = "<group>";
