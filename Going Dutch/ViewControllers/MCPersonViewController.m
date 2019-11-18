@@ -86,6 +86,7 @@
         strongSelf.emailField.inputView = nil;
         strongSelf.emailField.tintColor = UIColor.systemBlueColor;
         strongSelf.emailTextInputReceiver.target = MCEmailTextInputProxyTargetValidator;
+        strongSelf.selectEmailAddressButton.hidden = person.emailAddress.count > 1 ? NO : YES;
     }];
     _firstNameFieldValidator = [[MCNameTextInputValidator alloc] initWithModel:_model andTextField:_firstNameField andConfig:MCNameTextInputValidatorConfigFirstName];
     _familyNameFieldValidator = [[MCNameTextInputValidator alloc] initWithModel:_model andTextField:_lastNameField andConfig:MCNameTextInputValidatorConfigFamilyName];
