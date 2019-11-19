@@ -10,13 +10,24 @@ import UIKit
 
 @objc(MCPersonModel) @objcMembers class PersonModel: NSObject {
     public private(set) dynamic var person: MCPerson!
+    private(set) var defaultEmailAddressFetchedResultsController: NSFetchedResultsController<MCEmailAddress>!
     private var changeHandler: ((_ person: MCPerson) -> ())!
     
-    @objc(prepareForUseWithPerson:andChangeHandler:) func prepareForUse(with person: MCPerson, and changeHandler:@escaping ((_ person: MCPerson) -> ())) {
+    @objc(prepareForUseWithPerson:andFetchedResultsControllerDelegate:andChangeHandler:) func prepareForUse(with person: MCPerson, and fetchedResultsControllerDelegate: NSFetchedResultsControllerDelegate, and changeHandler:@escaping ((_ person: MCPerson) -> ())) {
+        func createEmailAddressResultsController() {
+            let request = MCEmailAddress.fetchRequest()
+            request.predicate = NSPredicate(format: "owner = %@ AND selected = %@", person, NSNumber(value: true))
+            request.sortDescriptors = [NSSortDescriptor(key: "emailAddress", ascending: true)]
+            defaultEmailAddressFetchedResultsController = NSFetchedResultsController(fetchRequest: request, managedObjectContext: person.managedObjectContext!, sectionNameKeyPath: nil, cacheName: nil) as? NSFetchedResultsController<MCEmailAddress>
+            defaultEmailAddressFetchedResultsController.delegate = fetchedResultsControllerDelegate
+            try! defaultEmailAddressFetchedResultsController.performFetch()
+        }
+        
         self.person = person
+        createEmailAddressResultsController()
         self.changeHandler = changeHandler
-        self.changeHandler(self.person)
     }
+    
     
     var emailAddreses: [MCEmailAddress] {
         let request = MCEmailAddress.fetchRequest()

@@ -46,7 +46,6 @@ import UIKit
     func pickerView(_ pickerView: UIPickerView, didSelectRow row: Int, inComponent component: Int) {
         let pickedEmailAddress = emailAddresses[row]
         model.update(defaultEmailAddress: pickedEmailAddress)
-        textField.text = pickedEmailAddress.emailAddress
     }
     
     // MARK: UIPickerViewDataSource
