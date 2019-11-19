@@ -50,7 +50,22 @@ import UIKit
     }
     
     @objc(updateDefaultEmailAddressWithString:) func update(defaultEmailAddress: String) {
-        person.addNewDefaultEmailAddress(fromAString: defaultEmailAddress)
+        var defaultEmailAddressObject: MCEmailAddress? {
+            let request: NSFetchRequest<MCEmailAddress> = MCEmailAddress.fetchRequest() as! NSFetchRequest<MCEmailAddress>
+            request.predicate = NSPredicate(format: "owner = %@ AND selected = %@", person, NSNumber(value: true))
+            request.sortDescriptors = [NSSortDescriptor(key: "uniqueEmailId", ascending: true)]
+            let emailAddresses = try! person.managedObjectContext!.fetch(request)
+            return emailAddresses.first
+        }
+        
+        let nu = Date()
+        if let defaultEmailAddressObject = defaultEmailAddressObject {
+            defaultEmailAddressObject.emailAddress = defaultEmailAddress
+            defaultEmailAddressObject.dateModified = nu
+        } else {
+            person.addOneEmailAddress(fromAString: defaultEmailAddress)
+        }
+        person.dateModified = nu
     }
     
     @objc(updateDefaultEmailAddressWithEmailAddress:) func update(defaultEmailAddress: MCEmailAddress) {
