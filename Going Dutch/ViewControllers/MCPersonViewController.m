@@ -73,20 +73,43 @@
 
 - (void)controller:(NSFetchedResultsController *)controller didChangeObject:(id)anObject atIndexPath:(NSIndexPath *)indexPath forChangeType:(NSFetchedResultsChangeType)type newIndexPath:(NSIndexPath *)newIndexPath {
     NSAssert((indexPath.section == 0), @"IndexPath section should be 0");
-    switch (type) {
-        case NSFetchedResultsChangeInsert:
-            self.emailField.text = [(MCEmailAddress *)anObject emailAddress];
-            break;
-        case NSFetchedResultsChangeUpdate:
-            self.emailField.text = [(MCEmailAddress *)anObject emailAddress];
-            break;
-        case NSFetchedResultsChangeMove:
-            NSParameterAssert(NO);
-            break;
-        case NSFetchedResultsChangeDelete:
-            break;
-        default:
-            break;
+    if ([controller isEqual:_model.personFetchedResultsController]) {
+        MCPerson *person = (MCPerson *)anObject;
+        switch (type) {
+            case NSFetchedResultsChangeInsert:
+                self.firstNameField.text = person.firstName;
+                self.lastNameField.text = person.lastName;
+                self.pictureView.image = person.picture;
+                break;
+            case NSFetchedResultsChangeUpdate:
+                self.firstNameField.text = person.firstName;
+                self.lastNameField.text = person.lastName;
+                self.pictureView.image = person.picture;
+                break;
+            case NSFetchedResultsChangeMove:
+                NSParameterAssert(NO);
+                break;
+            case NSFetchedResultsChangeDelete:
+                break;
+            default:
+                break;
+        }
+    } else if ([controller isEqual:_model.defaultEmailAddressFetchedResultsController]) {
+        switch (type) {
+            case NSFetchedResultsChangeInsert:
+                self.emailField.text = [(MCEmailAddress *)anObject emailAddress];
+                break;
+            case NSFetchedResultsChangeUpdate:
+                self.emailField.text = [(MCEmailAddress *)anObject emailAddress];
+                break;
+            case NSFetchedResultsChangeMove:
+                NSParameterAssert(NO);
+                break;
+            case NSFetchedResultsChangeDelete:
+                break;
+            default:
+                break;
+        }
     }
 }
 
@@ -99,14 +122,6 @@
     [_model prepareForUseWithPerson:_thisPerson andFetchedResultsControllerDelegate:self andChangeHandler:^(MCPerson * _Nonnull person) {
         typeof(self) strongSelf = weakSelf;
         NSParameterAssert(strongSelf);
-        NSString *newValueForFirstname = person.changedValues[@"firstName"];
-        if (newValueForFirstname) {
-            strongSelf.firstNameField.text = newValueForFirstname;
-        }
-        NSString *newValueForFamilyName = person.changedValues[@"lastName"];
-        if (newValueForFamilyName) {
-            strongSelf.lastNameField.text = newValueForFamilyName;
-        }
         
         strongSelf.emailField.inputView = nil;
         strongSelf.emailField.tintColor = UIColor.systemBlueColor;

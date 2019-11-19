@@ -10,10 +10,19 @@ import UIKit
 
 @objc(MCPersonModel) @objcMembers class PersonModel: NSObject {
     public private(set) dynamic var person: MCPerson!
+    private(set) var personFetchedResultsController: NSFetchedResultsController<MCPerson>!
     private(set) var defaultEmailAddressFetchedResultsController: NSFetchedResultsController<MCEmailAddress>!
     private var changeHandler: ((_ person: MCPerson) -> ())!
     
     @objc(prepareForUseWithPerson:andFetchedResultsControllerDelegate:andChangeHandler:) func prepareForUse(with person: MCPerson, and fetchedResultsControllerDelegate: NSFetchedResultsControllerDelegate, and changeHandler:@escaping ((_ person: MCPerson) -> ())) {
+        func createPersonFetchedResultsController() {
+            let request = MCPerson.fetchRequest()
+            request.predicate = NSPredicate(format: "self = %@", person)
+            request.sortDescriptors = [NSSortDescriptor(key: "dateCreated", ascending: true)]
+            personFetchedResultsController = NSFetchedResultsController(fetchRequest: request, managedObjectContext: person.managedObjectContext!, sectionNameKeyPath: nil, cacheName: nil) as? NSFetchedResultsController<MCPerson>
+            personFetchedResultsController.delegate = fetchedResultsControllerDelegate
+            try! personFetchedResultsController.performFetch()
+        }
         func createEmailAddressResultsController() {
             let request = MCEmailAddress.fetchRequest()
             request.predicate = NSPredicate(format: "owner = %@ AND selected = %@", person, NSNumber(value: true))
@@ -24,6 +33,7 @@ import UIKit
         }
         
         self.person = person
+        createPersonFetchedResultsController()
         createEmailAddressResultsController()
         self.changeHandler = changeHandler
     }
