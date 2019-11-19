@@ -23,7 +23,7 @@
     _validator = validator;
     _picker = picker;
     _picker.textField.delegate = self;
-    _target = MCEmailTextInputProxyTargetPicker;
+    _target = MCEmailTextInputProxyTargetValidator;
     return self;
 }
 
