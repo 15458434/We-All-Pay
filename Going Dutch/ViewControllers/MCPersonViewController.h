@@ -8,33 +8,16 @@
 
 @import UIKit;
 @import CoreData;
-@import AddressBookUI;
 
 #import "We_all_pay-Swift.h"
 
 #import "MCTonightsBillTransfer.h"
 
-typedef enum _emailFieldEditStatus {
-    MCEmailFieldEditNormal = 0,
-    MCEmailFieldEditAdd = 1,
-    MCEmailFieldSelectDefaultAddress = 2,
-}emailFieldEditStatus;
-
 @class MCPerson;
 @class MCSharedBill;
 @class MCTwoLabelsTitleView;
 
-@protocol MCPersonViewChangeDelegate <NSObject>
-
-- (void)sendDidSomethingChange:(BOOL)value;
-
-@end
-
-@interface MCPersonViewController : UITableViewController <UITextFieldDelegate, UIPickerViewDelegate, UIPickerViewDataSource, MCTonightsBillTransfer, MCThisPersonProtocol>
-
-@property (weak, nonatomic) IBOutlet UIImageView *pictureView;
-
-@property (nonatomic, weak) id changeFlagDelegate;
+@interface MCPersonViewController : UITableViewController <MCTonightsBillTransfer, MCThisPersonProtocol>
 
 // Only accessible on the mainThread.
 @property (nonatomic, strong) MCSharedBill *tonightsBill;
@@ -44,9 +27,5 @@ typedef enum _emailFieldEditStatus {
 // Only accessible on the background thread.
 @property (nonatomic, strong) MCSharedBill *writableTonightsBill;
 @property (nonatomic, strong) MCPerson *writableThisPerson;
-
-- (IBAction)doneButtonPressed:(id)sender;
-- (IBAction)cancelButtonPressed:(id)sender;
-- (IBAction)selectEmailAddressPressed:(id)sender;
 
 @end

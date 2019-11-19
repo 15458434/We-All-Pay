@@ -235,17 +235,6 @@
     });
 }
 
-
-#pragma mark - MCPersonViewChangeDelegate
-
-- (void)sendDidSomethingChange:(BOOL)value
-{
-    if(!didSomethingChange && value) {
-        didSomethingChange = YES;
-    }
-    [[self tableView] reloadData];
-}
-
 #pragma mark - UITextFieldDelegate
 
 - (BOOL)textFieldShouldReturn:(UITextField *)textField
@@ -345,8 +334,7 @@
         [[thisCell totalSpent] setHidden:NO];
         
         CurrencyFormatter *cf = [[CurrencyFormatter alloc] initWithCurrencyCode:_tonightsBill.mainCurrency.code];
-        thisCell.totalSpent.text = [cf stringFor:thisCellsPerson.totalSumPaid];
-//        thisCell.totalSpent.text = [cf stringForObjectValue:thisCellsPerson.totalSumPaid];
+        thisCell.totalSpent.text = [cf stringForObjectValue:thisCellsPerson.totalSumPaid];
     } else {
         [thisCell.fetchingExchangeRateIndicator startAnimating];
         [[thisCell totalSpent] setHidden:YES];

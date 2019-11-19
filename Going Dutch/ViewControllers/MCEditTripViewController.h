@@ -22,7 +22,7 @@
 @class MCTwoLabelsTitleView;
 @class MCTableEmptyMessage;
 
-@interface MCEditTripViewController : UITableViewController <NSFetchedResultsControllerDelegate, UITextFieldDelegate, MCPersonViewChangeDelegate, MCTonightsBillTransfer>
+@interface MCEditTripViewController : UITableViewController <NSFetchedResultsControllerDelegate, UITextFieldDelegate, MCTonightsBillTransfer>
 
 @property (nonatomic) BOOL isInitAsNew;
 

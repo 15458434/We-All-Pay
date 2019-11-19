@@ -20,11 +20,11 @@
 @class MCTwoLabelsTitleView;
 
 typedef NS_ENUM(NSUInteger, MCMoneyValueFieldDismissStatus) {
-    cancelIsPressed,
-    doneIsPressed,
-    otherTextFieldSelected,
-    backgroundTapped,
-    currencySelectionTapped
+    MCMoneyValueFieldDismissStatusCancelIsPressed,
+    MCMoneyValueFieldDismissStatusDoneIsPressed,
+    MCMoneyValueFieldDismissStatusOtherTextFieldSelected,
+    MCMoneyValueFieldDismissStatusBackgroundTapped,
+    MCMoneyValueFieldDismissStatusCurrencySelectionTapped
 };
 
 @protocol MCPaymentViewControllerDelegate <NSObject>
