@@ -120,67 +120,6 @@ typedef NS_ENUM(BOOL, MCTonightsBillStatus) {
     [[MCWeAllPayStoreController defaultStore] saveMainThreadContext];
 }
 
-#pragma mark - UIViewController
-
-- (void)awakeFromNib {
-    [super awakeFromNib];
-    
-    _isATonightsBillOpened = MCTonightsBillStatusClosed;
-    _isEmptyMessageShownInstantForFirstBoot = NO;
-}
-
-- (void)viewDidLoad {
-    [super viewDidLoad];
-    
-    [self setEdgesForExtendedLayout:UIRectEdgeNone];
-    
-    _emptyMessage = [[NSBundle mainBundle] loadNibNamed:@"MCTableEmptyMessage" owner:self options:nil][0];
-    [[_emptyMessage bigMessage] setAlpha:0.0];
-    [[self tableView] setBackgroundView:_emptyMessage];
-    
-    [self startRespondingToStoreChangeNotifications];
-    
-    [self prepareUserActivity];
-}
-
-
-- (void)viewWillAppear:(BOOL)animated {
-    [super viewWillAppear:animated];
-    
-    if (_isATonightsBillOpened == MCTonightsBillStatusOpened) {
-        _isATonightsBillOpened = MCTonightsBillStatusClosed;
-    }
-    
-    if (!_dataController) {
-        _dataController = [[MCWeAllPayStoreController defaultStore] allTripsDataControllerForDelegate:self];
-        [self performFetch];
-        [[self tableView] reloadData];
-    }
-    
-    if (_isEmptyMessageShownInstantForFirstBoot == false) {
-        [self setEmptyMessageNow];
-        _isEmptyMessageShownInstantForFirstBoot = true;
-    } else {
-        [self setEmptyMessage];
-    }
-    
-    [[self navigationController] setToolbarHidden:YES animated:YES];
-    
-    if (self.userActivity) {
-        [self.userActivity becomeCurrent];
-    }
-}
-
-- (void)viewWillDisappear:(BOOL)animated {
-    [super viewWillDisappear:animated];
-    
-    _dataController = nil;
-}
-
-- (void)dealloc {
-    [self stopRespondingToStorechangeNotifications];
-}
-
 #pragma mark - UIViewController+WeAllPayStore notifications
 
 - (void)storeWillBeSwapped:(NSNotification *)notification {
@@ -247,7 +186,9 @@ typedef NS_ENUM(BOOL, MCTonightsBillStatus) {
     }
 }
 
-#pragma mark - Table view data source
+#pragma mark - UITableViewController
+
+#pragma mark - UITableViewDataSource
 
 - (NSInteger)numberOfSectionsInTableView:(UITableView *)tableView {
     return [[_dataController sections] count];
@@ -293,7 +234,6 @@ typedef NS_ENUM(BOOL, MCTonightsBillStatus) {
     return allTripsTableViewCell;
 }
 
-// Override to support editing the table view.
 - (void)tableView:(UITableView *)tableView commitEditingStyle:(UITableViewCellEditingStyle)editingStyle forRowAtIndexPath:(NSIndexPath *)indexPath {
     if (editingStyle == UITableViewCellEditingStyleDelete) {
         [self deleteBillAtIndexpath:indexPath];
@@ -310,7 +250,7 @@ typedef NS_ENUM(BOOL, MCTonightsBillStatus) {
     
 }
 
-#pragma mark - Table view delegate
+#pragma mark - UITableViewDelegate
 
 - (CGFloat)tableView:(UITableView *)tableView heightForRowAtIndexPath:(NSIndexPath *)indexPath {
     return UITableViewAutomaticDimension;
@@ -342,7 +282,55 @@ typedef NS_ENUM(BOOL, MCTonightsBillStatus) {
     return @[deleteAction, selectCurrencyAction];
 }
 
-#pragma mark - UIStoryboard
+#pragma mark - UIViewController
+
+- (void)viewDidLoad {
+    [super viewDidLoad];
+    
+    [self setEdgesForExtendedLayout:UIRectEdgeNone];
+    
+    _emptyMessage = [[NSBundle mainBundle] loadNibNamed:@"MCTableEmptyMessage" owner:self options:nil][0];
+    [[_emptyMessage bigMessage] setAlpha:0.0];
+    [[self tableView] setBackgroundView:_emptyMessage];
+    
+    [self startRespondingToStoreChangeNotifications];
+    
+    [self prepareUserActivity];
+}
+
+
+- (void)viewWillAppear:(BOOL)animated {
+    [super viewWillAppear:animated];
+    
+    if (_isATonightsBillOpened == MCTonightsBillStatusOpened) {
+        _isATonightsBillOpened = MCTonightsBillStatusClosed;
+    }
+    
+    if (!_dataController) {
+        _dataController = [[MCWeAllPayStoreController defaultStore] allTripsDataControllerForDelegate:self];
+        [self performFetch];
+        [[self tableView] reloadData];
+    }
+    
+    if (_isEmptyMessageShownInstantForFirstBoot == false) {
+        [self setEmptyMessageNow];
+        _isEmptyMessageShownInstantForFirstBoot = true;
+    } else {
+        [self setEmptyMessage];
+    }
+    
+    [[self navigationController] setToolbarHidden:YES animated:YES];
+    
+    if (self.userActivity) {
+        [self.userActivity becomeCurrent];
+    }
+}
+
+- (void)viewWillDisappear:(BOOL)animated {
+    [super viewWillDisappear:animated];
+    
+    _dataController = nil;
+}
 
 - (void)prepareForSegue:(UIStoryboardSegue *)segue sender:(id)sender {
 #ifdef DEBUG
@@ -389,6 +377,21 @@ typedef NS_ENUM(BOOL, MCTonightsBillStatus) {
         _iScreenTransitioner = [[SideMenuTransitioner alloc] init];
         navigationController.transitioningDelegate = _iScreenTransitioner;
     }
+}
+
+#pragma mark - UIResponder
+
+#pragma mark - NSObject
+
+- (void)dealloc {
+    [self stopRespondingToStorechangeNotifications];
+}
+
+- (void)awakeFromNib {
+    [super awakeFromNib];
+    
+    _isATonightsBillOpened = MCTonightsBillStatusClosed;
+    _isEmptyMessageShownInstantForFirstBoot = NO;
 }
 
 @end
