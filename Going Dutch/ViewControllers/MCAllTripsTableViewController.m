@@ -31,7 +31,9 @@ typedef NS_ENUM(BOOL, MCTonightsBillStatus) {
 
 @interface MCAllTripsTableViewController ()
 
-@property (nonatomic, strong) NSFetchedResultsController *dataController;
+@property (nonatomic, strong) IBOutlet MCEventsModel *model;
+
+@property (nonatomic, strong) NSFetchedResultsController *dataController DEPRECATED_ATTRIBUTE;
 @property (nonatomic) MCTonightsBillStatus isATonightsBillOpened;
 
 @property (nonatomic) BOOL isEmptyMessageShownInstantForFirstBoot;
@@ -191,9 +193,9 @@ typedef NS_ENUM(BOOL, MCTonightsBillStatus) {
 - (void)storeDidSwap:(NSNotification *)notification {
     [super storeDidSwap:notification];
     dispatch_sync(dispatch_get_main_queue(), ^{
-        if (self.dataController) {
+        if (self.model.fetchEventsController) {
             NSError *fetchError;
-            if (![self.dataController performFetch:&fetchError]) {
+            if (![self.model.fetchEventsController performFetch:&fetchError]) {
                 NSLog(@"Error fetching: %@", fetchError);
             }
         }
@@ -210,17 +212,6 @@ typedef NS_ENUM(BOOL, MCTonightsBillStatus) {
 - (void)controllerWillChangeContent:(NSFetchedResultsController *)controller {
     if (self.isViewLoaded && self.view.window && _isATonightsBillOpened == MCTonightsBillStatusClosed) {
         [[self tableView] beginUpdates];
-    }
-}
-
-- (void)controllerDidChangeContent:(NSFetchedResultsController *)controller {
-    if (self.isViewLoaded && self.view.window && _isATonightsBillOpened == MCTonightsBillStatusClosed) {
-#ifdef DEBUG
-        NSLog(@"executing tableView endUpdates");
-#endif
-        [[self tableView] endUpdates];
-        
-        
     }
 }
 
@@ -247,6 +238,12 @@ typedef NS_ENUM(BOOL, MCTonightsBillStatus) {
                 [[self tableView] insertRowsAtIndexPaths:@[newIndexPath] withRowAnimation:UITableViewRowAnimationFade];
                 break;
         }
+    }
+}
+
+- (void)controllerDidChangeContent:(NSFetchedResultsController *)controller {
+    if (self.isViewLoaded && self.view.window && _isATonightsBillOpened == MCTonightsBillStatusClosed) {
+        [[self tableView] endUpdates];
     }
 }
 

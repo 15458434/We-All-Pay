@@ -1,0 +1,50 @@
+//
+//  MCEventsModel.swift
+//  We all pay
+//
+//  Created by Mark Cornelisse on 23/11/2019.
+//  Copyright © 2019 Mark Cornelisse. All rights reserved.
+//
+
+import UIKit
+
+@objc(MCEventsModel) @objcMembers class EventsModel: NSObject {
+    private(set) var managedObjectContext: NSManagedObjectContext!
+    
+    private(set) var fetchEventsController: NSFetchedResultsController<MCSharedBill>!
+    
+    func prepareForUse(with managedObjectContext: NSManagedObjectContext, for delegate: NSFetchedResultsControllerDelegate) {
+        func createFetchEventsController() {
+            let request = MCSharedBill.fetchRequest() as! NSFetchRequest<MCSharedBill>
+            request.predicate = NSPredicate(value: true)
+            request.sortDescriptors = [NSSortDescriptor(key: "dateCreated", ascending: false)]
+            request.relationshipKeyPathsForPrefetching = [ "payments", "peoplePresent", "mainCurrency", "payments.exchangeRate", "payments.peopleSharingPayment" ]
+            fetchEventsController = NSFetchedResultsController(fetchRequest: request, managedObjectContext: managedObjectContext, sectionNameKeyPath: nil, cacheName: nil)
+            try! fetchEventsController.performFetch()
+        }
+        self.managedObjectContext = managedObjectContext
+    }
+    
+    func create() -> MCSharedBill {
+        let new = MCSharedBill.add(to: managedObjectContext)!
+        return new
+    }
+    
+    func update(eventAt index: Int, mainCurrencyTo currencyCode: String, with completionHandler: @escaping ((_ event: MCSharedBill) -> ()), andWith failureHandler: ((_ error: Error?) -> ())? ) {
+        let event = self.fetchEventsController.fetchedObjects![index]
+        event.updateMainCurrency(fromCode: currencyCode) { (error) in
+            guard error == nil else {
+                failureHandler?(error)
+                return
+            }
+            completionHandler(event)
+        }
+    }
+    
+    func delete(event: MCSharedBill) {
+        let managedObjectContext = event.managedObjectContext!
+        managedObjectContext.delete(event)
+    }
+    
+    // MARK: NSObject
+}
