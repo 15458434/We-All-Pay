@@ -1,9 +1,9 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="15505" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" useSafeAreas="YES" colorMatched="YES" initialViewController="2iV-RF-WWF">
-    <device id="retina6_1" orientation="portrait" appearance="light"/>
+    <device id="retina5_9" orientation="portrait" appearance="light"/>
     <dependencies>
         <deployment identifier="iOS"/>
-        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="15509"/>
+        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="15510"/>
         <capability name="Safe area layout guides" minToolsVersion="9.0"/>
         <capability name="documents saved in the Xcode 8 format" minToolsVersion="8.0"/>
     </dependencies>
@@ -137,10 +137,12 @@
                         </barButtonItem>
                     </navigationItem>
                     <connections>
+                        <outlet property="model" destination="I1d-JY-yVm" id="PLh-yY-3qa"/>
                         <segue destination="fIg-ri-deX" kind="presentation" identifier="selectMainCurrency" id="AFT-dx-z90"/>
                     </connections>
                 </tableViewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="dgz-Pk-24M" userLabel="First Responder" sceneMemberID="firstResponder"/>
+                <customObject id="I1d-JY-yVm" customClass="MCEventsModel"/>
             </objects>
             <point key="canvasLocation" x="-823.125" y="727.81690140845069"/>
         </scene>
@@ -1473,7 +1475,7 @@
         <image name="iScreen button" width="26" height="26"/>
     </resources>
     <inferredMetricsTieBreakers>
-        <segue reference="DSi-fr-DCr"/>
+        <segue reference="AFT-dx-z90"/>
         <segue reference="jjg-NC-1KA"/>
         <segue reference="C0F-pM-cfm"/>
         <segue reference="6AC-aI-bIB"/>

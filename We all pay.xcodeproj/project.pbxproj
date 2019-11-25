@@ -43,6 +43,7 @@
 		383D5D841C0708F800BE9F94 /* ReturnPayment.swift in Sources */ = {isa = PBXBuildFile; fileRef = 383D5D831C0708F800BE9F94 /* ReturnPayment.swift */; };
 		383D5D851C07106600BE9F94 /* ReturnPayment.swift in Sources */ = {isa = PBXBuildFile; fileRef = 383D5D831C0708F800BE9F94 /* ReturnPayment.swift */; };
 		383E0C5D186737EB00AA688D /* MCSharedBillPageViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 383E0C5C186737EB00AA688D /* MCSharedBillPageViewController.m */; };
+		3841F8D323893A0B00882E40 /* EventsModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3841F8D223893A0A00882E40 /* EventsModel.swift */; };
 		38490D2D1D7052E700A297BA /* SolutionViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 38490D2C1D7052E700A297BA /* SolutionViewController.swift */; };
 		38490D2F1D7056D100A297BA /* ShowMailViewProtocol.swift in Sources */ = {isa = PBXBuildFile; fileRef = 38490D2E1D7056D100A297BA /* ShowMailViewProtocol.swift */; };
 		38490D311D705A7700A297BA /* ThisEvent.swift in Sources */ = {isa = PBXBuildFile; fileRef = 38490D301D705A7700A297BA /* ThisEvent.swift */; };
@@ -348,6 +349,7 @@
 		383D5D831C0708F800BE9F94 /* ReturnPayment.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ReturnPayment.swift; sourceTree = "<group>"; };
 		383E0C5B186737EB00AA688D /* MCSharedBillPageViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = MCSharedBillPageViewController.h; path = ViewControllers/MCSharedBillPageViewController.h; sourceTree = "<group>"; };
 		383E0C5C186737EB00AA688D /* MCSharedBillPageViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = MCSharedBillPageViewController.m; path = ViewControllers/MCSharedBillPageViewController.m; sourceTree = "<group>"; };
+		3841F8D223893A0A00882E40 /* EventsModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = EventsModel.swift; sourceTree = "<group>"; };
 		38490D2C1D7052E700A297BA /* SolutionViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = SolutionViewController.swift; path = ViewControllers/iPhone/SolutionViewController.swift; sourceTree = "<group>"; };
 		38490D2E1D7056D100A297BA /* ShowMailViewProtocol.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ShowMailViewProtocol.swift; sourceTree = "<group>"; };
 		38490D301D705A7700A297BA /* ThisEvent.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ThisEvent.swift; sourceTree = "<group>"; };
@@ -723,6 +725,16 @@
 			path = CurrencyConverterTests;
 			sourceTree = "<group>";
 		};
+		3841F8D1238939F600882E40 /* Events */ = {
+			isa = PBXGroup;
+			children = (
+				38572AF6169D443C00969C62 /* MCAllTripsTableViewController.h */,
+				38572B09169F3D2700969C62 /* MCAllTripsTableViewController.m */,
+				3841F8D223893A0A00882E40 /* EventsModel.swift */,
+			);
+			name = Events;
+			sourceTree = "<group>";
+		};
 		38572AC7169D437B00969C62 = {
 			isa = PBXGroup;
 			children = (
@@ -1051,8 +1063,7 @@
 		38E0C5E218E9B22E005A3F17 /* iPhone */ = {
 			isa = PBXGroup;
 			children = (
-				38572AF6169D443C00969C62 /* MCAllTripsTableViewController.h */,
-				38572B09169F3D2700969C62 /* MCAllTripsTableViewController.m */,
+				3841F8D1238939F600882E40 /* Events */,
 				386FC32318E5855400428294 /* MCSharedBillMainViewController.h */,
 				386FC32418E5855400428294 /* MCSharedBillMainViewController.m */,
 				383E0C5B186737EB00AA688D /* MCSharedBillPageViewController.h */,
@@ -1708,6 +1719,7 @@
 				38955048178B4FCA0077A95A /* MCWeAllPayStoreController.m in Sources */,
 				389DE8FA197FB2BA00169645 /* MCPayment.m in Sources */,
 				38AAFBA218EC406300CD3E12 /* MCSharedBillPeoplePresentTableViewController-iPad.m in Sources */,
+				3841F8D323893A0B00882E40 /* EventsModel.swift in Sources */,
 				38894980211C2DDE00BDF9CD /* CoreDataSaveHandlerWhenEnteringBackground.swift in Sources */,
 				389DE907197FBE8400169645 /* MCExchangeRate+addons.m in Sources */,
 				38977E631B2A37BC008484A4 /* MCAllTripsTableViewCell.swift in Sources */,
