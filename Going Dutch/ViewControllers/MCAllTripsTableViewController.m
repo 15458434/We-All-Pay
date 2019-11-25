@@ -33,7 +33,6 @@ typedef NS_ENUM(BOOL, MCTonightsBillStatus) {
 
 @property (nonatomic, strong) IBOutlet MCEventsModel *model;
 
-@property (nonatomic, strong) NSFetchedResultsController *dataController DEPRECATED_ATTRIBUTE;
 @property (nonatomic) MCTonightsBillStatus isATonightsBillOpened;
 
 @property (nonatomic) BOOL isEmptyMessageShownInstantForFirstBoot;
@@ -59,7 +58,7 @@ typedef NS_ENUM(BOOL, MCTonightsBillStatus) {
 #pragma mark - New in this class.
 
 - (void)setEmptyMessage {
-    if ([[_dataController fetchedObjects] count] != 0) {
+    if ([[_model.fetchEventsController fetchedObjects] count] != 0) {
         [UIView animateWithDuration:1.0 animations:^{
             [[self.emptyMessage bigMessage] setAlpha:0.0];
             [[self tableView] setSeparatorStyle:UITableViewCellSeparatorStyleSingleLine];
@@ -75,7 +74,7 @@ typedef NS_ENUM(BOOL, MCTonightsBillStatus) {
 }
 
 - (void)setEmptyMessageNow {
-    if ([[_dataController fetchedObjects] count] != 0) {
+    if ([[_model.fetchEventsController fetchedObjects] count] != 0) {
         [UIView animateWithDuration:0.0 animations:^{
             [[self.emptyMessage bigMessage] setAlpha:0.0];
             [[self tableView] setSeparatorStyle:UITableViewCellSeparatorStyleSingleLine];
@@ -87,14 +86,6 @@ typedef NS_ENUM(BOOL, MCTonightsBillStatus) {
                 [[self tableView] setSeparatorStyle:UITableViewCellSeparatorStyleNone];
             } completion:nil];
         }
-    }
-}
-
-- (void)performFetch {
-    NSError *error;
-    BOOL success = [_dataController performFetch:&error];
-    if (!success) {
-        NSLog(@"%@: performFetch went wrong: %@", self, error);
     }
 }
 
@@ -113,10 +104,9 @@ typedef NS_ENUM(BOOL, MCTonightsBillStatus) {
 }
 
 - (void)deleteBillAtIndexpath:(NSIndexPath *)indexPath {
-    MCSharedBill *toBeDeleteSharedBill = [_dataController objectAtIndexPath:indexPath];
-    
-    [WhoPayingUserDefaultsStoreInterface sendInvalidUserDefaultsIfTonightsBillIs:toBeDeleteSharedBill];
-    [MCSharedBill deleteSharedbill:toBeDeleteSharedBill];
+    MCSharedBill *poorSucker = [_model.fetchEventsController objectAtIndexPath:indexPath];
+    [WhoPayingUserDefaultsStoreInterface sendInvalidUserDefaultsIfTonightsBillIs:poorSucker];
+    [_model deleteWithEvent:poorSucker];
     [[MCWeAllPayStoreController defaultStore] saveMainThreadContext];
 }
 
@@ -149,41 +139,34 @@ typedef NS_ENUM(BOOL, MCTonightsBillStatus) {
 #pragma mark - NSFetchedResultsControllerDelegate
 
 - (void)controllerWillChangeContent:(NSFetchedResultsController *)controller {
-    if (self.isViewLoaded && self.view.window && _isATonightsBillOpened == MCTonightsBillStatusClosed) {
-        [[self tableView] beginUpdates];
-    }
+    [self.tableView beginUpdates];
 }
 
 - (void)controller:(NSFetchedResultsController *)controller didChangeObject:(id)anObject atIndexPath:(NSIndexPath *)indexPath forChangeType:(NSFetchedResultsChangeType)type newIndexPath:(NSIndexPath *)newIndexPath {
-    if (self.isViewLoaded && self.view.window && _isATonightsBillOpened == MCTonightsBillStatusClosed) {
-        switch(type) {
-                
-            case NSFetchedResultsChangeInsert:
-                [[self tableView] insertRowsAtIndexPaths:@[newIndexPath] withRowAnimation:UITableViewRowAnimationFade];
-                [self setEmptyMessage];
-                break;
-                
-            case NSFetchedResultsChangeDelete:
-                [[self tableView] deleteRowsAtIndexPaths:@[indexPath] withRowAnimation:UITableViewRowAnimationFade];
-                [self setEmptyMessage];
-                break;
-                
-            case NSFetchedResultsChangeUpdate:
-                [[self tableView] reloadRowsAtIndexPaths:@[indexPath] withRowAnimation:UITableViewRowAnimationAutomatic];
-                break;
-                
-            case NSFetchedResultsChangeMove:
-                [[self tableView] deleteRowsAtIndexPaths:@[indexPath] withRowAnimation:UITableViewRowAnimationFade];
-                [[self tableView] insertRowsAtIndexPaths:@[newIndexPath] withRowAnimation:UITableViewRowAnimationFade];
-                break;
-        }
+    switch(type) {
+        case NSFetchedResultsChangeInsert:
+            [[self tableView] insertRowsAtIndexPaths:@[newIndexPath] withRowAnimation:UITableViewRowAnimationFade];
+            [self setEmptyMessage];
+            break;
+            
+        case NSFetchedResultsChangeDelete:
+            [[self tableView] deleteRowsAtIndexPaths:@[indexPath] withRowAnimation:UITableViewRowAnimationFade];
+            [self setEmptyMessage];
+            break;
+            
+        case NSFetchedResultsChangeUpdate:
+            [[self tableView] reloadRowsAtIndexPaths:@[indexPath] withRowAnimation:UITableViewRowAnimationAutomatic];
+            break;
+            
+        case NSFetchedResultsChangeMove:
+            [[self tableView] deleteRowsAtIndexPaths:@[indexPath] withRowAnimation:UITableViewRowAnimationFade];
+            [[self tableView] insertRowsAtIndexPaths:@[newIndexPath] withRowAnimation:UITableViewRowAnimationFade];
+            break;
     }
 }
 
 - (void)controllerDidChangeContent:(NSFetchedResultsController *)controller {
-    if (self.isViewLoaded && self.view.window && _isATonightsBillOpened == MCTonightsBillStatusClosed) {
-        [[self tableView] endUpdates];
-    }
+    [self.tableView endUpdates];
 }
 
 #pragma mark - UITableViewController
@@ -191,15 +174,15 @@ typedef NS_ENUM(BOOL, MCTonightsBillStatus) {
 #pragma mark - UITableViewDataSource
 
 - (NSInteger)numberOfSectionsInTableView:(UITableView *)tableView {
-    return [[_dataController sections] count];
+    return _model.fetchEventsController.sections.count;
 }
 
 - (NSInteger)tableView:(UITableView *)tableView numberOfRowsInSection:(NSInteger)section {
-    return [[_dataController sections][section] numberOfObjects];
+    return _model.fetchEventsController.sections[section].numberOfObjects;
 }
 
 - (UITableViewCell *)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath {
-    MCSharedBill *thisTrip = [_dataController objectAtIndexPath:indexPath];
+    MCSharedBill *thisTrip = [_model.fetchEventsController objectAtIndexPath:indexPath];
     MCAllTripsTableViewCell *allTripsTableViewCell = [tableView dequeueReusableCellWithIdentifier:@"MCAllTripsTableViewCell"];
     
     if (![thisTrip tripName]) {
@@ -241,7 +224,7 @@ typedef NS_ENUM(BOOL, MCTonightsBillStatus) {
 }
 
 - (void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath {
-    MCSharedBill *selectedEvent = [_dataController objectAtIndexPath:indexPath];
+    MCSharedBill *selectedEvent = [_model.fetchEventsController objectAtIndexPath:indexPath];
     if (selectedEvent.tripName) {
         [FIRAnalytics logEventWithName:@"Open event" parameters:@{@"Event name": selectedEvent.tripName, @"Event identifier": selectedEvent.uniqueBillId}];
     } else {
@@ -306,9 +289,9 @@ typedef NS_ENUM(BOOL, MCTonightsBillStatus) {
         _isATonightsBillOpened = MCTonightsBillStatusClosed;
     }
     
-    if (!_dataController) {
-        _dataController = [[MCWeAllPayStoreController defaultStore] allTripsDataControllerForDelegate:self];
-        [self performFetch];
+    if (!_model.fetchEventsController) {
+        NSManagedObjectContext *managedObjectContext = MCWeAllPayStoreController.defaultStore.mainThreadContext;
+        [_model prepareForUseWithManagedObjectContext:managedObjectContext forDelegate:self];
         [[self tableView] reloadData];
     }
     
@@ -324,12 +307,6 @@ typedef NS_ENUM(BOOL, MCTonightsBillStatus) {
     if (self.userActivity) {
         [self.userActivity becomeCurrent];
     }
-}
-
-- (void)viewWillDisappear:(BOOL)animated {
-    [super viewWillDisappear:animated];
-    
-    _dataController = nil;
 }
 
 - (void)prepareForSegue:(UIStoryboardSegue *)segue sender:(id)sender {
@@ -350,7 +327,7 @@ typedef NS_ENUM(BOOL, MCTonightsBillStatus) {
     } else {
         NSIndexPath *indexPathOfSelectedRow = [[self tableView] indexPathForSelectedRow];
         if (indexPathOfSelectedRow) {
-            theBill = [_dataController objectAtIndexPath:indexPathOfSelectedRow];
+            theBill = [_model.fetchEventsController objectAtIndexPath:indexPathOfSelectedRow];
         }
         if ([[segue destinationViewController] conformsToProtocol:@protocol(MCTonightsBillTransfer)]) {
             [[segue destinationViewController] setTonightsBill:theBill];
@@ -367,7 +344,7 @@ typedef NS_ENUM(BOOL, MCTonightsBillStatus) {
         }
     }
     if ([[segue identifier] isEqualToString:@"selectMainCurrency"]) {
-        MCSharedBill *theBill = _dataController.fetchedObjects[_selectedIndexPathForAction.row];
+        MCSharedBill *theBill = _model.fetchEventsController.fetchedObjects[_selectedIndexPathForAction.row];
         UINavigationController *navController = (UINavigationController *)segue.destinationViewController;
         SelectCurrencyTableViewController *currencySelector = (SelectCurrencyTableViewController *)navController.viewControllers.firstObject;
         currencySelector.currencyUpdateModel = [[EventUpdateCurrencyModel alloc] initWith:theBill];

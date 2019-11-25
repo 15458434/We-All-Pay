@@ -13,16 +13,19 @@ import UIKit
     
     private(set) var fetchEventsController: NSFetchedResultsController<MCSharedBill>!
     
-    func prepareForUse(with managedObjectContext: NSManagedObjectContext, for delegate: NSFetchedResultsControllerDelegate) {
+    @objc(prepareForUseWithManagedObjectContext:forDelegate:) func prepareForUse(with managedObjectContext: NSManagedObjectContext, for delegate: NSFetchedResultsControllerDelegate) {
         func createFetchEventsController() {
             let request = MCSharedBill.fetchRequest() as! NSFetchRequest<MCSharedBill>
             request.predicate = NSPredicate(value: true)
             request.sortDescriptors = [NSSortDescriptor(key: "dateCreated", ascending: false)]
             request.relationshipKeyPathsForPrefetching = [ "payments", "peoplePresent", "mainCurrency", "payments.exchangeRate", "payments.peopleSharingPayment" ]
             fetchEventsController = NSFetchedResultsController(fetchRequest: request, managedObjectContext: managedObjectContext, sectionNameKeyPath: nil, cacheName: nil)
+            fetchEventsController.delegate = delegate
             try! fetchEventsController.performFetch()
         }
+        
         self.managedObjectContext = managedObjectContext
+        createFetchEventsController()
     }
     
     func create() -> MCSharedBill {
@@ -42,8 +45,9 @@ import UIKit
     }
     
     func delete(event: MCSharedBill) {
-        let managedObjectContext = event.managedObjectContext!
-        managedObjectContext.delete(event)
+        let objectID = event.objectID
+        let poorSucker = self.managedObjectContext.object(with: objectID)
+        managedObjectContext.delete(poorSucker)
     }
     
     // MARK: NSObject
