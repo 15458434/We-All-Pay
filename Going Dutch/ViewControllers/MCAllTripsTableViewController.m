@@ -194,13 +194,13 @@ typedef NS_ENUM(BOOL, MCTonightsBillStatus) {
 
     if ([thisTrip areAllExchangeRatesValid]) {
         CurrencyFormatter *cf = [[CurrencyFormatter alloc] initWithCurrencyCode:thisTrip.mainCurrency.code];
-        NSString *moneyString = [cf stringFor:[thisTrip totalSumOfMoneyOfThisSharedBill]];
+        NSString *moneyString = [cf stringForObjectValue:[thisTrip totalSumOfMoneyOfThisSharedBill]];
         [[allTripsTableViewCell totalCostLabel] setHidden:NO];
         [[allTripsTableViewCell waitingForXRatesIndicator] stopAnimating];
         [[allTripsTableViewCell totalCostLabel] setText:moneyString];
     } else {
         CurrencyFormatter *cf = [[CurrencyFormatter alloc] initWithCurrencyCode:thisTrip.mainCurrency.code];
-        NSString *moneyString = [cf stringFor:[thisTrip totalSumOfMoneyOfThisSharedBill]];
+        NSString *moneyString = [cf stringForObjectValue:[thisTrip totalSumOfMoneyOfThisSharedBill]];
         [[allTripsTableViewCell totalCostLabel] setText:moneyString];
         [[allTripsTableViewCell totalCostLabel] setHidden:YES];
         [[allTripsTableViewCell waitingForXRatesIndicator] startAnimating];

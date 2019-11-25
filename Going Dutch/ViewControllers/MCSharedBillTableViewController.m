@@ -341,9 +341,9 @@
     paymentCell.namePayerLabel.text = thisCellsPayerName;
     
     // Get category picture.
-    NSArray *pictureObjects = [[CategoryPictureStoreController sharedController] pictureObjects];
-    CategoryPictureObject *categoryObject = pictureObjects[[[thisCellsPayment categoryId] shortValue]];
-    paymentCell.itemTypeImageView.image = [categoryObject smallPicture];
+    NSArray *pictureObjects = CategoryPictureStoreController.shared.pictureObjects;
+    CategoryPictureObject *categoryObject = pictureObjects[thisCellsPayment.categoryId.shortValue];
+    paymentCell.itemTypeImageView.image = categoryObject.smallPicture;
     
     NSString *thisCellsDescriptionOfPayment = [thisCellsPayment descriptionOfPayment];
     if (!thisCellsDescriptionOfPayment) {
@@ -352,7 +352,7 @@
     paymentCell.whatPaidLabel.text =thisCellsDescriptionOfPayment;
     
     CurrencyFormatter *cf = [[CurrencyFormatter alloc] initWithCurrencyCode:thisCellsPayment.currency.code];
-    paymentCell.moneyPaidLabel.text = [cf stringFor:thisCellsPayment.money];
+    paymentCell.moneyPaidLabel.text = [cf stringForObjectValue:thisCellsPayment.money];
     
     return paymentCell;
 }

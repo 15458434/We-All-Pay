@@ -220,7 +220,7 @@
         thisCell.totalCostLabel.hidden = NO;
         
         CurrencyFormatter *cf = [[CurrencyFormatter alloc] initWithCurrencyCode:thisTrip.mainCurrency.code];
-        thisCell.totalCostLabel.text = [cf stringFor:thisTrip.totalSumOfMoneyOfThisSharedBill];
+        thisCell.totalCostLabel.text = [cf stringForObjectValue:thisTrip.totalSumOfMoneyOfThisSharedBill];
     } else {
         [[thisCell activityIndicator] startAnimating];
         thisCell.totalCostLabel.hidden = YES;
