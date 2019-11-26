@@ -56,11 +56,7 @@
     if (!_contactsInserter) {
         _contactsInserter = [[ContactsDataReceiver alloc] initWith:_tonightsBill];
     }
-    [_contactsInserter presentContactsPickerWith:self completion:^{
-#ifdef DEBUG
-        NSLog(@"I love Ilse.");
-#endif
-    }];
+    [_contactsInserter presentContactsPickerWith:self completion:nil];
 }
 
 
