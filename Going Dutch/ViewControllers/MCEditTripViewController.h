@@ -27,11 +27,8 @@
 @property (nonatomic) BOOL isInitAsNew;
 
 @property (nonatomic, weak) id<MCIsEditingProtocol> myParent;
-@property (nonatomic, weak) id delegate;
 @property (nonatomic, strong) MCSharedBill *tonightsBill;
 @property (nonatomic, strong) MCSharedBill *writableTonightsBill;
-@property (nonatomic, copy) void (^dismissOnDone)(void);
-@property (nonatomic, copy) void (^dismissOnCancel)(void);
 @property (nonatomic, readonly) BOOL didSomethingChange;
 
 @property (nonatomic) NSInteger index;
