@@ -42,13 +42,6 @@
 
 @implementation MCEditTripViewController
 
-@synthesize dismissOnDone;
-@synthesize dismissOnCancel;
-
-@synthesize didSomethingChange;
-
-@synthesize delegate;
-
 #pragma mark - actions of this class
 
 - (IBAction)addressBookButton:(id)sender {
@@ -56,11 +49,7 @@
     if (!_contactsInserter) {
         _contactsInserter = [[ContactsDataReceiver alloc] initWith:_tonightsBill];
     }
-    [_contactsInserter presentContactsPickerWith:self completion:^{
-#ifdef DEBUG
-        NSLog(@"I love Ilse.");
-#endif
-    }];
+    [_contactsInserter presentContactsPickerWith:self completion:nil];
 }
 
 
@@ -260,8 +249,8 @@
     NSDate *now = [NSDate date];
     [_tonightsBill setDateModified:now];
     [[MCWeAllPayStoreController defaultStore] saveMainThreadContext];
-    if (!didSomethingChange) {
-        didSomethingChange = YES;
+    if (!_didSomethingChange) {
+        _didSomethingChange = YES;
     }
     MCPerson *nextPayer = [[_tonightsBill fetchPeoplePresentOrderedByAmountPaid:YES] firstObject];
 
@@ -298,7 +287,7 @@
             
         case NSFetchedResultsChangeUpdate:
             [[self tableView] reloadRowsAtIndexPaths:@[indexPath] withRowAnimation:UITableViewRowAnimationAutomatic];
-            didSomethingChange = YES;
+            _didSomethingChange = YES;
             break;
             
         case NSFetchedResultsChangeMove:
@@ -367,7 +356,7 @@
         MCPerson *removablePerson = [_dataController objectAtIndexPath:indexPath];
         [_tonightsBill deletePerson:removablePerson];
         [[MCWeAllPayStoreController defaultStore] saveMainThreadContext];
-        didSomethingChange = YES;
+        _didSomethingChange = YES;
     }
 }
 
