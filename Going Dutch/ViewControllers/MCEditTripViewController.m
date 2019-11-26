@@ -42,13 +42,6 @@
 
 @implementation MCEditTripViewController
 
-//@synthesize dismissOnDone;
-//@synthesize dismissOnCancel;
-//
-//@synthesize didSomethingChange;
-//
-//@synthesize delegate;
-
 #pragma mark - actions of this class
 
 - (IBAction)addressBookButton:(id)sender {
