@@ -33,4 +33,13 @@
 @dynamic sharedBill;
 @dynamic sharingPayment;
 
+- (void)addPaymentsObject:(MCPayment *)value {
+    NSPredicate *predicate = [NSPredicate predicateWithFormat:@"uniquePaymentId = %@", value.uniquePaymentId];
+    NSSet *filteredForValue = [self.payments filteredSetUsingPredicate:predicate];
+    if (filteredForValue.count == 0) {
+        NSSet *result = [self.payments setByAddingObject:value];
+        self.payments = result;
+    } 
+}
+
 @end

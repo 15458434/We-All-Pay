@@ -240,7 +240,7 @@
     if (self.categoryId.shortValue == 0) {
         return [NSString stringWithFormat:@"%@", self.descriptionOfPayment];
     } else {
-        NSString *categoryName = [[[[CategoryPictureStoreController sharedController] pictureObjects] objectAtIndex:self.categoryId.shortValue] categoryDescription];
+        NSString *categoryName = CategoryPictureStoreController.shared.pictureObjects[self.categoryId.shortValue].categoryDescription;
         NSString *result = [NSString stringWithFormat:@"%@: %@", categoryName, self.descriptionOfPayment];
         return result;
     }

@@ -42,13 +42,6 @@
 
 @implementation MCEditTripViewController
 
-@synthesize dismissOnDone;
-@synthesize dismissOnCancel;
-
-@synthesize didSomethingChange;
-
-@synthesize delegate;
-
 #pragma mark - actions of this class
 
 - (IBAction)addressBookButton:(id)sender {
@@ -56,11 +49,7 @@
     if (!_contactsInserter) {
         _contactsInserter = [[ContactsDataReceiver alloc] initWith:_tonightsBill];
     }
-    [_contactsInserter presentContactsPickerWith:self completion:^{
-#ifdef DEBUG
-        NSLog(@"I love Ilse.");
-#endif
-    }];
+    [_contactsInserter presentContactsPickerWith:self completion:nil];
 }
 
 
@@ -235,17 +224,6 @@
     });
 }
 
-
-#pragma mark - MCPersonViewChangeDelegate
-
-- (void)sendDidSomethingChange:(BOOL)value
-{
-    if(!didSomethingChange && value) {
-        didSomethingChange = YES;
-    }
-    [[self tableView] reloadData];
-}
-
 #pragma mark - UITextFieldDelegate
 
 - (BOOL)textFieldShouldReturn:(UITextField *)textField
@@ -271,8 +249,8 @@
     NSDate *now = [NSDate date];
     [_tonightsBill setDateModified:now];
     [[MCWeAllPayStoreController defaultStore] saveMainThreadContext];
-    if (!didSomethingChange) {
-        didSomethingChange = YES;
+    if (!_didSomethingChange) {
+        _didSomethingChange = YES;
     }
     MCPerson *nextPayer = [[_tonightsBill fetchPeoplePresentOrderedByAmountPaid:YES] firstObject];
 
@@ -309,7 +287,7 @@
             
         case NSFetchedResultsChangeUpdate:
             [[self tableView] reloadRowsAtIndexPaths:@[indexPath] withRowAnimation:UITableViewRowAnimationAutomatic];
-            didSomethingChange = YES;
+            _didSomethingChange = YES;
             break;
             
         case NSFetchedResultsChangeMove:
@@ -345,8 +323,7 @@
         [[thisCell totalSpent] setHidden:NO];
         
         CurrencyFormatter *cf = [[CurrencyFormatter alloc] initWithCurrencyCode:_tonightsBill.mainCurrency.code];
-        thisCell.totalSpent.text = [cf stringFor:thisCellsPerson.totalSumPaid];
-//        thisCell.totalSpent.text = [cf stringForObjectValue:thisCellsPerson.totalSumPaid];
+        thisCell.totalSpent.text = [cf stringForObjectValue:thisCellsPerson.totalSumPaid];
     } else {
         [thisCell.fetchingExchangeRateIndicator startAnimating];
         [[thisCell totalSpent] setHidden:YES];
@@ -379,7 +356,7 @@
         MCPerson *removablePerson = [_dataController objectAtIndexPath:indexPath];
         [_tonightsBill deletePerson:removablePerson];
         [[MCWeAllPayStoreController defaultStore] saveMainThreadContext];
-        didSomethingChange = YES;
+        _didSomethingChange = YES;
     }
 }
 
