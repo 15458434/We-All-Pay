@@ -1090,17 +1090,9 @@
                         <rect key="frame" x="0.0" y="0.0" width="320" height="460"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <color key="backgroundColor" red="1" green="1" blue="1" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
-                        <searchBar key="tableHeaderView" contentMode="redraw" text="" id="v5R-Xt-ec1">
-                            <rect key="frame" x="0.0" y="0.0" width="320" height="44"/>
-                            <autoresizingMask key="autoresizingMask" widthSizable="YES" flexibleMaxY="YES"/>
-                            <textInputTraits key="textInputTraits"/>
-                            <connections>
-                                <outlet property="delegate" destination="8dJ-8n-R7R" id="p8q-Ar-Pru"/>
-                            </connections>
-                        </searchBar>
                         <prototypes>
                             <tableViewCell contentMode="scaleToFill" restorationIdentifier="MCSelectCategoryTableViewCell_iPhone" selectionStyle="default" indentationWidth="10" reuseIdentifier="selectCategoryCell" id="eHd-r2-aia" customClass="MCSelectCategoryTableViewCell_iPhone" customModule="We_all_pay" customModuleProvider="target">
-                                <rect key="frame" x="0.0" y="72" width="320" height="44"/>
+                                <rect key="frame" x="0.0" y="28" width="320" height="44"/>
                                 <autoresizingMask key="autoresizingMask"/>
                                 <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" tableViewCell="eHd-r2-aia" id="MHh-RY-ayN">
                                     <rect key="frame" x="0.0" y="0.0" width="320" height="44"/>
@@ -1241,17 +1233,9 @@
                         <rect key="frame" x="0.0" y="0.0" width="320" height="460"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <color key="backgroundColor" red="1" green="1" blue="1" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
-                        <searchBar key="tableHeaderView" contentMode="redraw" text="" placeholder="Search currency" id="Sxt-5n-jx4">
-                            <rect key="frame" x="0.0" y="0.0" width="320" height="44"/>
-                            <autoresizingMask key="autoresizingMask" widthSizable="YES" flexibleMaxY="YES"/>
-                            <textInputTraits key="textInputTraits"/>
-                            <connections>
-                                <outlet property="delegate" destination="Z9a-Hu-qSZ" id="GIy-8U-oII"/>
-                            </connections>
-                        </searchBar>
                         <prototypes>
                             <tableViewCell contentMode="scaleToFill" horizontalCompressionResistancePriority="250" restorationIdentifier="MCSelectCurrencyTableViewCell_iPhone" selectionStyle="blue" accessoryType="checkmark" hidesAccessoryWhenEditing="NO" indentationLevel="1" indentationWidth="0.0" reuseIdentifier="MCSelectCurrencyTableViewCell_iPhone" id="nTN-I8-L2p" customClass="MCSelectCurrencyTableViewCell_iPhone" customModule="We_all_pay" customModuleProvider="target">
-                                <rect key="frame" x="0.0" y="72" width="320" height="44"/>
+                                <rect key="frame" x="0.0" y="28" width="320" height="44"/>
                                 <autoresizingMask key="autoresizingMask"/>
                                 <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" tableViewCell="nTN-I8-L2p" id="kZh-eJ-cZO">
                                     <rect key="frame" x="0.0" y="0.0" width="280" height="44"/>
