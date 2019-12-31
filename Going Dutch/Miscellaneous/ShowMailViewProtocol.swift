@@ -41,9 +41,14 @@ extension ShowMailViewProtocol where Self: UIViewController, Self: MFMailCompose
             mailViewController.setSubject(try subject())
             mailViewController.setMessageBody(try mailBody(), isHTML: false)
             present(mailViewController, animated: true, completion: {
-                // TODO: Fix this warning in a later release. See #807
-                UIApplication.shared.statusBarStyle = .lightContent
-                mailViewController.setNeedsStatusBarAppearanceUpdate()
+                if #available(iOS 13.0, *) {
+                    // Don't do anything. StatusBar is not in the NavigationBar anymore.
+                } else {
+                    // TODO: Fix this warning in a later release. See #807
+                    UIApplication.shared.statusBarStyle = .lightContent
+                    mailViewController.setNeedsStatusBarAppearanceUpdate()
+                }
+
             })
         } catch MailComposerError.missingCrititcalInformationIn(let payment) {
             let title = NSLocalizedString("Data missing in payment", comment: "Alert title stating that data is missing in a payment")

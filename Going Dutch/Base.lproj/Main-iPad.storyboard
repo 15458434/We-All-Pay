@@ -1,9 +1,9 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="15505" targetRuntime="iOS.CocoaTouch.iPad" propertyAccessControl="none" useAutolayout="YES" colorMatched="YES" initialViewController="zVB-NT-1S4">
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="15702" targetRuntime="iOS.CocoaTouch.iPad" propertyAccessControl="none" useAutolayout="YES" colorMatched="YES" initialViewController="zVB-NT-1S4">
     <device id="ipad9_7" orientation="portrait" layout="fullscreen" appearance="light"/>
     <dependencies>
         <deployment identifier="iOS"/>
-        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="15509"/>
+        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="15704"/>
         <capability name="documents saved in the Xcode 8 format" minToolsVersion="8.0"/>
     </dependencies>
     <scenes>
@@ -1090,17 +1090,9 @@
                         <rect key="frame" x="0.0" y="0.0" width="320" height="460"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <color key="backgroundColor" red="1" green="1" blue="1" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
-                        <searchBar key="tableHeaderView" contentMode="redraw" text="" id="v5R-Xt-ec1">
-                            <rect key="frame" x="0.0" y="0.0" width="320" height="44"/>
-                            <autoresizingMask key="autoresizingMask" widthSizable="YES" flexibleMaxY="YES"/>
-                            <textInputTraits key="textInputTraits"/>
-                            <connections>
-                                <outlet property="delegate" destination="8dJ-8n-R7R" id="p8q-Ar-Pru"/>
-                            </connections>
-                        </searchBar>
                         <prototypes>
                             <tableViewCell contentMode="scaleToFill" restorationIdentifier="MCSelectCategoryTableViewCell_iPhone" selectionStyle="default" indentationWidth="10" reuseIdentifier="selectCategoryCell" id="eHd-r2-aia" customClass="MCSelectCategoryTableViewCell_iPhone" customModule="We_all_pay" customModuleProvider="target">
-                                <rect key="frame" x="0.0" y="72" width="320" height="44"/>
+                                <rect key="frame" x="0.0" y="28" width="320" height="44"/>
                                 <autoresizingMask key="autoresizingMask"/>
                                 <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" tableViewCell="eHd-r2-aia" id="MHh-RY-ayN">
                                     <rect key="frame" x="0.0" y="0.0" width="320" height="44"/>
@@ -1145,20 +1137,10 @@
                     <size key="freeformSize" width="320" height="480"/>
                     <connections>
                         <outlet property="model" destination="dND-zx-OsQ" id="3cs-hV-CoC"/>
-                        <outlet property="searchDisplayController" destination="LWU-qZ-i26" id="5Aq-vJ-VJj"/>
                     </connections>
                 </tableViewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="xeK-Fx-TTt" userLabel="First Responder" sceneMemberID="firstResponder"/>
                 <customObject id="dND-zx-OsQ" customClass="MCPaymentModel"/>
-                <searchDisplayController id="LWU-qZ-i26">
-                    <connections>
-                        <outlet property="delegate" destination="8dJ-8n-R7R" id="x67-hX-8eq"/>
-                        <outlet property="searchBar" destination="v5R-Xt-ec1" id="DGz-VV-PXg"/>
-                        <outlet property="searchContentsController" destination="8dJ-8n-R7R" id="vEX-2t-yVX"/>
-                        <outlet property="searchResultsDataSource" destination="8dJ-8n-R7R" id="yVZ-yY-o8G"/>
-                        <outlet property="searchResultsDelegate" destination="8dJ-8n-R7R" id="tOe-os-5zL"/>
-                    </connections>
-                </searchDisplayController>
             </objects>
             <point key="canvasLocation" x="5254.6875" y="359.1796875"/>
         </scene>
@@ -1251,17 +1233,9 @@
                         <rect key="frame" x="0.0" y="0.0" width="320" height="460"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <color key="backgroundColor" red="1" green="1" blue="1" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
-                        <searchBar key="tableHeaderView" contentMode="redraw" text="" placeholder="Search currency" id="Sxt-5n-jx4">
-                            <rect key="frame" x="0.0" y="0.0" width="320" height="44"/>
-                            <autoresizingMask key="autoresizingMask" widthSizable="YES" flexibleMaxY="YES"/>
-                            <textInputTraits key="textInputTraits"/>
-                            <connections>
-                                <outlet property="delegate" destination="Z9a-Hu-qSZ" id="GIy-8U-oII"/>
-                            </connections>
-                        </searchBar>
                         <prototypes>
                             <tableViewCell contentMode="scaleToFill" horizontalCompressionResistancePriority="250" restorationIdentifier="MCSelectCurrencyTableViewCell_iPhone" selectionStyle="blue" accessoryType="checkmark" hidesAccessoryWhenEditing="NO" indentationLevel="1" indentationWidth="0.0" reuseIdentifier="MCSelectCurrencyTableViewCell_iPhone" id="nTN-I8-L2p" customClass="MCSelectCurrencyTableViewCell_iPhone" customModule="We_all_pay" customModuleProvider="target">
-                                <rect key="frame" x="0.0" y="72" width="320" height="44"/>
+                                <rect key="frame" x="0.0" y="28" width="320" height="44"/>
                                 <autoresizingMask key="autoresizingMask"/>
                                 <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" tableViewCell="nTN-I8-L2p" id="kZh-eJ-cZO">
                                     <rect key="frame" x="0.0" y="0.0" width="280" height="44"/>
@@ -1302,28 +1276,8 @@
                     <navigationItem key="navigationItem" id="Hc3-3p-NuZ"/>
                     <freeformSimulatedSizeMetrics key="simulatedDestinationMetrics"/>
                     <size key="freeformSize" width="320" height="480"/>
-                    <connections>
-                        <outlet property="searchDisplayController" destination="9Jp-be-5pl" id="R1f-mW-8gc"/>
-                    </connections>
                 </tableViewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="vTg-RC-oXr" userLabel="First Responder" sceneMemberID="firstResponder"/>
-                <searchDisplayController id="yU3-DS-GSE">
-                    <connections>
-                        <outlet property="delegate" destination="Z9a-Hu-qSZ" id="4J8-Kd-Sk7"/>
-                        <outlet property="searchContentsController" destination="Z9a-Hu-qSZ" id="tgS-09-mbK"/>
-                        <outlet property="searchResultsDataSource" destination="Z9a-Hu-qSZ" id="Wf0-1h-17D"/>
-                        <outlet property="searchResultsDelegate" destination="Z9a-Hu-qSZ" id="vgU-QY-Pf3"/>
-                    </connections>
-                </searchDisplayController>
-                <searchDisplayController id="9Jp-be-5pl">
-                    <connections>
-                        <outlet property="delegate" destination="Z9a-Hu-qSZ" id="cfU-mQ-yWn"/>
-                        <outlet property="searchBar" destination="Sxt-5n-jx4" id="t18-fk-FTB"/>
-                        <outlet property="searchContentsController" destination="Z9a-Hu-qSZ" id="f9p-Vm-hWM"/>
-                        <outlet property="searchResultsDataSource" destination="Z9a-Hu-qSZ" id="xwC-Gw-hEb"/>
-                        <outlet property="searchResultsDelegate" destination="Z9a-Hu-qSZ" id="3JI-On-kYw"/>
-                    </connections>
-                </searchDisplayController>
             </objects>
             <point key="canvasLocation" x="5267" y="1309"/>
         </scene>
