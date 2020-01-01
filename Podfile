@@ -7,6 +7,7 @@ target 'We all pay' do
     
 pod 'Firebase/Core'
 pod 'Firebase/AdMob'
+pod 'GoogleMobileAdsMediationFacebook'
 
     target 'We all pay Tests' do
         inherit! :search_paths
