@@ -29,6 +29,7 @@ typedef NS_ENUM(BOOL, ChildViewStatus) {
 
 @property (weak, nonatomic) IBOutlet UITextField *payerNameField;
 @property (weak, nonatomic) IBOutlet UITextField *itemView;
+@property (strong, nonatomic) MCDescriptionOfPaymentTextInputValidator *itemViewDelegate;
 @property (weak, nonatomic) IBOutlet UITextField *paidView;
 @property (strong, nonatomic) IBOutlet MCMoneyTextInputValidator *paidViewDelegate;
 
@@ -249,14 +250,6 @@ typedef NS_ENUM(BOOL, ChildViewStatus) {
 
 #pragma mark - UITextFieldDelegate
 
-- (BOOL)textFieldShouldReturn:(UITextField *)textField
-{
-    if (textField == _itemView) {
-        [self storePlaceViewData];
-    }
-    return YES;
-}
-
 - (BOOL)textFieldShouldBeginEditing:(UITextField *)textField
 {
     if (textField == _payerNameField) {
@@ -291,11 +284,6 @@ typedef NS_ENUM(BOOL, ChildViewStatus) {
         [_personPickerView selectRow:row inComponent:0 animated:YES];
         _kindOfPaidFieldDismiss = MCMoneyValueFieldDismissStatusOtherTextFieldSelected;
     }
-    
-    if (textField == _itemView) {
-        [FIRAnalytics logEventWithName:@"ItemView didBeginEditing" parameters:nil];
-        _kindOfPaidFieldDismiss = MCMoneyValueFieldDismissStatusOtherTextFieldSelected;
-    }
 }
 
 - (BOOL)textFieldShouldEndEditing:(UITextField *)textField {
@@ -318,14 +306,6 @@ typedef NS_ENUM(BOOL, ChildViewStatus) {
                 _payerPicture.image = nil;
             }
         }
-        _kindOfPaidFieldDismiss = MCMoneyValueFieldDismissStatusBackgroundTapped;
-    } else if (textField == _itemView) {
-        [FIRAnalytics logEventWithName:@"itemView DidEndEditing" parameters:nil];
-        // Do something to store value of placeview.
-        [self storePlaceViewData];
-        NSDate *nu = [NSDate date];
-        [_tonightsBill setDateModified:nu];
-        [_thisPayment setDateModified:nu];
         _kindOfPaidFieldDismiss = MCMoneyValueFieldDismissStatusBackgroundTapped;
     }
 }
@@ -474,6 +454,8 @@ typedef NS_ENUM(BOOL, ChildViewStatus) {
     [_personPickerView setShowsSelectionIndicator:YES];
     [_payerNameField setInputView:_personPickerView];
     [_payerNameField setInputAccessoryView:inputAccessoryPickerView];
+    
+    _itemViewDelegate = [[MCDescriptionOfPaymentTextInputValidator alloc] initWithModel:_model andTextField:_itemView];
     
     // Make sure a tap in the background dismisses the keyboard as well.
     UITapGestureRecognizer *thatTickles = [[UITapGestureRecognizer alloc] initWithTarget:self action:@selector(tappedInTheBackground:)];

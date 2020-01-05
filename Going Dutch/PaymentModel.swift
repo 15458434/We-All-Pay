@@ -32,6 +32,14 @@ import UIKit
         changeHandler(payment)
     }
     
+    @objc(updateDescriptionOfPayment:) func update(descriptionOfPayment: String) {
+        payment.descriptionOfPayment = descriptionOfPayment
+        let nu = Date()
+        payment.dateModified = nu
+        payment.onWhichBill.dateModified = nu
+        changeHandler(payment)
+    }
+    
     @objc(updateMoney:) func update(money: NSNumber) {
         payment.money = money
         payment.recalculateAveragePeopleOweAndStore()
