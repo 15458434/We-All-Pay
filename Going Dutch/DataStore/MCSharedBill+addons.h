@@ -42,7 +42,7 @@
 - (NSArray *)solveWhoHasToPayWhoFromThisBill;
 - (void)solveWithHandler:(void (^)(NSArray *results, NSError *error))solution;
 - (NSNumber *)totalSumOfMoneyOfThisSharedBill;
-- (NSArray *)fetchPeoplePresentOrderedByAmountPaid:(BOOL)ascending;
+- (NSArray<MCPerson *> *)fetchPeoplePresentOrderedByAmountPaid:(BOOL)ascending;
 - (NSNumber *)totalAmountOfCreditBy:(MCPerson *)person;
 - (NSNumber *)totalSumPaidBy:(MCPerson *)person;
 - (NSNumber *)amountPeopleShouldHavePaid;

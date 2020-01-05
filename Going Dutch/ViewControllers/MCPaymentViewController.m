@@ -28,6 +28,7 @@ typedef NS_ENUM(BOOL, ChildViewStatus) {
 @interface MCPaymentViewController ()
 
 @property (weak, nonatomic) IBOutlet UITextField *payerNameField;
+@property (strong, nonatomic) MCPayerTextInputPicker *payerTextInputPicker;
 @property (weak, nonatomic) IBOutlet UITextField *itemView;
 @property (strong, nonatomic) MCDescriptionOfPaymentTextInputValidator *itemViewDelegate;
 @property (weak, nonatomic) IBOutlet UITextField *paidView;
@@ -64,12 +65,6 @@ typedef NS_ENUM(BOOL, ChildViewStatus) {
 
 - (IBAction)tabElseWhereAndDismissKeyboard:(id)sender {
     [FIRAnalytics logEventWithName:@"tabElseWhereAndDismissKeyboard pressed" parameters:nil];
-    if ([_itemView isFirstResponder]) {
-        [_itemView setText:[_thisPayment descriptionOfPayment]];
-    }
-    if ([_payerNameField isFirstResponder]) {
-        [self cancelPersonPicker:self];
-    }
     [self.view endEditing:YES];
 }
 
@@ -91,9 +86,6 @@ typedef NS_ENUM(BOOL, ChildViewStatus) {
 #ifdef DEBUG
     NSLog(@"MCPaymentViewController: Done button pressed.");
 #endif
-    if ([_payerNameField isFirstResponder]) {
-        [self donePersonPicker:self];
-    }
     if ([_itemView isFirstResponder]) {
         [self storePlaceViewData];
     }
@@ -120,36 +112,6 @@ typedef NS_ENUM(BOOL, ChildViewStatus) {
     [myFirstResponder resignFirstResponder];
     
     [self performSegueWithIdentifier:@"openSelectCurrency" sender:self];
-}
-
-- (void)cancelPersonPicker:(id)selector
-{
-    [FIRAnalytics logEventWithName:@"Cancel Person picker pressed" parameters:nil];
-    // Set the text of the textView back and resign first responder
-    _peoplePickerCancelled = YES;
-    [_payerNameField setText:[[_thisPayment payingPerson] getFullName]];
-    if ([_thisPayment payingPerson]) {
-        _payerPicture.image = _thisPayment.payingPerson.picture;
-    } else {
-        _payerPicture.image = nil;
-    }
-    [_payerNameField resignFirstResponder];
-}
-
-- (void)donePersonPicker:(id)selector
-{
-    [FIRAnalytics logEventWithName:@"Done Person picker pressed" parameters:nil];
-    if ([[_tonightsBill peoplePresent] count] > 0) {
-        NSInteger row = [_personPickerView selectedRowInComponent:0];
-        [_thisPayment setPayingPerson:_listOfPeople[row]];
-//        [payerView setText:[[_thisPayment payingPerson] getFullName]];
-//        didSomethingChange = YES;
-        NSDate *nu = [NSDate date];
-        [_tonightsBill setDateModified:nu];
-        [_thisPayment setDateModified:nu];
-//        [[[self navigationItem] rightBarButtonItem] setEnabled:YES];
-    }
-    [_payerNameField resignFirstResponder];
 }
 
 - (IBAction)selectCategoryPressed:(id)sender
@@ -215,98 +177,6 @@ typedef NS_ENUM(BOOL, ChildViewStatus) {
         NSString *buttonText = NSLocalizedString(@"SELECT_CATEGORY", @"Select Category");
         _categoryView.image = categoryObject.largePicture;
         [_categoryButton setTitle:buttonText forState:UIControlStateNormal];
-    }
-}
-
-#pragma mark - PickerViewDelegate
-
-- (NSString *)pickerView:(UIPickerView *)pickerView titleForRow:(NSInteger)row forComponent:(NSInteger)component {
-    if (_listOfPeople == nil) {
-        _listOfPeople = [_tonightsBill getArrayOfPeopleSortedOnFullNames];
-    }
-    return [_listOfPeople[row] getFullName];
-}
-
-- (void)pickerView:(UIPickerView *)pickerView didSelectRow:(NSInteger)row inComponent:(NSInteger)component {
-    MCPerson *payingPerson = _listOfPeople[row];
-    _payerNameField.text = payingPerson.getFullName;
-    
-    [payingPerson addPaymentsObject:_thisPayment];
-    _thisPayment.payingPerson = payingPerson;
-    _payerPicture.image = payingPerson.picture;
-}
-
-#pragma mark - PickerViewDataSource
-
-- (NSInteger)numberOfComponentsInPickerView:(UIPickerView *)pickerView
-{
-    return 1;
-}
-
-- (NSInteger)pickerView:(UIPickerView *)pickerView numberOfRowsInComponent:(NSInteger)component
-{
-    return [[_tonightsBill peoplePresent] count];
-}
-
-#pragma mark - UITextFieldDelegate
-
-- (BOOL)textFieldShouldBeginEditing:(UITextField *)textField
-{
-    if (textField == _payerNameField) {
-        // TODO: Better UI solution for the user.
-        if ([[_tonightsBill peoplePresent] count] == 0) {
-#ifdef DEBUG
-            NSLog(@"No people present on _tonightsBill, editing this textField is not allowed.");
-#endif
-            return NO;
-        }
-    }
-    return YES;
-}
-
-- (void)textFieldDidBeginEditing:(UITextField *)textField {
-    if (textField == _payerNameField) {
-        [FIRAnalytics logEventWithName:@"PayerNameField didBeginEditing" parameters:nil];
-        [[MCWeAllPayStoreController defaultStore] beginUndoGroupWithoutRegistration];
-        _peoplePickerCancelled = NO;
-        NSInteger row = 0;
-        MCPerson *payingPerson = [_thisPayment payingPerson];
-        if (_listOfPeople == nil) {
-            _listOfPeople = [_tonightsBill getArrayOfPeopleSortedOnFullNames];
-        }
-        if (payingPerson) {
-            row = [_listOfPeople indexOfObject:payingPerson];
-        } else {
-            row = [_personPickerView selectedRowInComponent:0];
-        }
-        [_payerNameField setText:[_listOfPeople[row] getFullName]];
-        _payerPicture.image = [_listOfPeople[row] picture];
-        [_personPickerView selectRow:row inComponent:0 animated:YES];
-        _kindOfPaidFieldDismiss = MCMoneyValueFieldDismissStatusOtherTextFieldSelected;
-    }
-}
-
-- (BOOL)textFieldShouldEndEditing:(UITextField *)textField {
-    return YES;
-}
-
-- (void)textFieldDidEndEditing:(UITextField *)textField {
-    if (textField == _payerNameField) {
-        [FIRAnalytics logEventWithName:@"payerNameField didEndEditing" parameters:nil];
-        if (!_peoplePickerCancelled) {
-            [[MCWeAllPayStoreController defaultStore] endUndoGroupWithoutRegistration];
-            [self donePersonPicker:self];
-        } else {
-            _peoplePickerCancelled = YES;
-            [[MCWeAllPayStoreController defaultStore] endUndoGroupAndUndoWithoutRegistration];
-            [_payerNameField setText:[[_thisPayment payingPerson] getFullName]];
-            if ([_thisPayment payingPerson]) {
-                _payerPicture.image = _thisPayment.payingPerson.picture;
-            } else {
-                _payerPicture.image = nil;
-            }
-        }
-        _kindOfPaidFieldDismiss = MCMoneyValueFieldDismissStatusBackgroundTapped;
     }
 }
 
@@ -424,6 +294,7 @@ typedef NS_ENUM(BOOL, ChildViewStatus) {
     __weak typeof(self) weakSelf = self;
     [_model prepareForUseWithPayment:_thisPayment andChangeHandler:^(MCPayment * _Nonnull payment) {
         [weakSelf showCategory];
+        weakSelf.payerPicture.image = payment.payingPerson.picture;
     }];
     
     // If tonight's bill wasn't passed along.
@@ -434,21 +305,7 @@ typedef NS_ENUM(BOOL, ChildViewStatus) {
         @throw [NSException exceptionWithName:@"tonightsBill missing" reason:@"thisPayment didn't receive tonightsBill." userInfo:nil];
     }
     
-    // Create Toolbar for the input accessory of payerView
-    CGRect toolbarRect = CGRectMake(0, 0, self.view.bounds.size.width, 44);
-    UIToolbar *inputAccessoryPickerView = [[UIToolbar alloc] initWithFrame:toolbarRect];
-    UIBarButtonItem *cancelButton = [[UIBarButtonItem alloc] initWithBarButtonSystemItem:UIBarButtonSystemItemCancel target:self action:@selector(cancelPersonPicker:)];
-    UIBarButtonItem *flexButton = [[UIBarButtonItem alloc] initWithBarButtonSystemItem:UIBarButtonSystemItemFlexibleSpace target:nil action:nil];
-    UIBarButtonItem *doneButtonToolbar = [[UIBarButtonItem alloc] initWithBarButtonSystemItem:UIBarButtonSystemItemDone target:self action:@selector(donePersonPicker:)];
-    NSArray *buttonArray = @[cancelButton, flexButton, doneButtonToolbar];
-    [inputAccessoryPickerView setItems:buttonArray animated:YES];
-    _personPickerView = [[UIPickerView alloc] init];
-    _personPickerView.delegate = self;
-    _personPickerView.dataSource = self;
-    _personPickerView.showsSelectionIndicator = YES;
-    _payerNameField.inputView = _personPickerView;
-    _payerNameField.inputAccessoryView = inputAccessoryPickerView;
-    
+    _payerTextInputPicker = [[MCPayerTextInputPicker alloc] initWith:_model and:_payerNameField];
     _itemViewDelegate = [[MCDescriptionOfPaymentTextInputValidator alloc] initWithModel:_model andTextField:_itemView];
     
     // Make sure a tap in the background dismisses the keyboard as well.
@@ -485,8 +342,7 @@ typedef NS_ENUM(BOOL, ChildViewStatus) {
     [[self tableView] reloadData];
     
     // Fill in the form if data is present.
-    [_payerNameField setText:[[_thisPayment payingPerson] getFullName]];
-    [_payerNameField setDelegate:self];
+    _payerNameField.text = _model.payment.payingPerson.getFullName;
     _itemView.text = _model.payment.descriptionOfPayment;
     if ([_thisPayment payingPerson]) {
         _payerPicture.image = _thisPayment.payingPerson.picture;
