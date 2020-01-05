@@ -435,7 +435,7 @@ typedef NS_ENUM(BOOL, ChildViewStatus) {
     }
     
     // Create Toolbar for the input accessory of payerView
-    CGRect toolbarRect = CGRectMake(0, 0, [[self view] bounds].size.width, 44);
+    CGRect toolbarRect = CGRectMake(0, 0, self.view.bounds.size.width, 44);
     UIToolbar *inputAccessoryPickerView = [[UIToolbar alloc] initWithFrame:toolbarRect];
     UIBarButtonItem *cancelButton = [[UIBarButtonItem alloc] initWithBarButtonSystemItem:UIBarButtonSystemItemCancel
                                                                                   target:self
@@ -493,7 +493,7 @@ typedef NS_ENUM(BOOL, ChildViewStatus) {
     // Fill in the form if data is present.
     [_payerNameField setText:[[_thisPayment payingPerson] getFullName]];
     [_payerNameField setDelegate:self];
-    [_itemView setText:[_thisPayment descriptionOfPayment]];
+    _itemView.text = _model.payment.descriptionOfPayment;
     if ([_thisPayment payingPerson]) {
         _payerPicture.image = _thisPayment.payingPerson.picture;
     }
