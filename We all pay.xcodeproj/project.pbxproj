@@ -126,6 +126,7 @@
 		389DE910197FD6DF00169645 /* MCCurrencyTest.m in Sources */ = {isa = PBXBuildFile; fileRef = 389DE90F197FD6DF00169645 /* MCCurrencyTest.m */; };
 		389DE9161982540D00169645 /* MCCurrency.m in Sources */ = {isa = PBXBuildFile; fileRef = 389DE9151982540D00169645 /* MCCurrency.m */; };
 		389FBD40198BDA1C003B4409 /* MCExchangeRate.m in Sources */ = {isa = PBXBuildFile; fileRef = 389FBD3F198BDA1C003B4409 /* MCExchangeRate.m */; };
+		38A8F2A623C2583200CB3B73 /* AlwaysTrueTextInputValidator.swift in Sources */ = {isa = PBXBuildFile; fileRef = 38A8F2A523C2583200CB3B73 /* AlwaysTrueTextInputValidator.swift */; };
 		38AAFB9F18EC404200CD3E12 /* MCSharedBillPaymentsTableViewController-iPad.m in Sources */ = {isa = PBXBuildFile; fileRef = 38AAFB9E18EC404200CD3E12 /* MCSharedBillPaymentsTableViewController-iPad.m */; };
 		38AAFBA218EC406300CD3E12 /* MCSharedBillPeoplePresentTableViewController-iPad.m in Sources */ = {isa = PBXBuildFile; fileRef = 38AAFBA118EC406300CD3E12 /* MCSharedBillPeoplePresentTableViewController-iPad.m */; };
 		38AAFBA518EC529300CD3E12 /* MCSharedBillViewController_iPad.m in Sources */ = {isa = PBXBuildFile; fileRef = 38AAFBA418EC529300CD3E12 /* MCSharedBillViewController_iPad.m */; };
@@ -469,6 +470,7 @@
 		389E92651889E6CC0005F063 /* en */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = en; path = en.lproj/InfoPlist.strings; sourceTree = "<group>"; };
 		389FBD3E198BDA1C003B4409 /* MCExchangeRate.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = MCExchangeRate.h; sourceTree = "<group>"; };
 		389FBD3F198BDA1C003B4409 /* MCExchangeRate.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = MCExchangeRate.m; sourceTree = "<group>"; };
+		38A8F2A523C2583200CB3B73 /* AlwaysTrueTextInputValidator.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AlwaysTrueTextInputValidator.swift; sourceTree = "<group>"; };
 		38AAFB9D18EC404200CD3E12 /* MCSharedBillPaymentsTableViewController-iPad.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = "MCSharedBillPaymentsTableViewController-iPad.h"; path = "ViewControllers/iPad/MCSharedBillPaymentsTableViewController-iPad.h"; sourceTree = "<group>"; };
 		38AAFB9E18EC404200CD3E12 /* MCSharedBillPaymentsTableViewController-iPad.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = "MCSharedBillPaymentsTableViewController-iPad.m"; path = "ViewControllers/iPad/MCSharedBillPaymentsTableViewController-iPad.m"; sourceTree = "<group>"; };
 		38AAFBA018EC406300CD3E12 /* MCSharedBillPeoplePresentTableViewController-iPad.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = "MCSharedBillPeoplePresentTableViewController-iPad.h"; path = "ViewControllers/iPad/MCSharedBillPeoplePresentTableViewController-iPad.h"; sourceTree = "<group>"; };
@@ -973,6 +975,15 @@
 			name = "In-App Purchase";
 			sourceTree = "<group>";
 		};
+		38A8F2A723C2584B00CB3B73 /* TextInputValidators */ = {
+			isa = PBXGroup;
+			children = (
+				38687807237217B3003D40A9 /* TextInputValidator.swift */,
+				38A8F2A523C2583200CB3B73 /* AlwaysTrueTextInputValidator.swift */,
+			);
+			path = TextInputValidators;
+			sourceTree = "<group>";
+		};
 		38B6E0EE1A28BBAB009E69D7 /* Who is paying next */ = {
 			isa = PBXGroup;
 			children = (
@@ -1148,7 +1159,7 @@
 				38B7E9511D86F8F600400E72 /* ContactsDataReceiver.swift */,
 				3813D8941D8983C900E6B7A4 /* CircularImageView.swift */,
 				38C700F11D8EC24100D785BB /* LaunchCounter.swift */,
-				38687807237217B3003D40A9 /* TextInputValidator.swift */,
+				38A8F2A723C2584B00CB3B73 /* TextInputValidators */,
 				38FE5A072346957100BBA722 /* SideMenuTransitioner.swift */,
 			);
 			path = Miscellaneous;
@@ -1692,6 +1703,7 @@
 				38977E531B2A297E008484A4 /* MCWhoPaidHowMuchTableViewCell_iPhone.swift in Sources */,
 				38572AE7169D437B00969C62 /* MCAppDelegate.m in Sources */,
 				38E36EEE1BBD7E820026ED7E /* MCTwoLabelsTitleView.swift in Sources */,
+				38A8F2A623C2583200CB3B73 /* AlwaysTrueTextInputValidator.swift in Sources */,
 				389ACFDA23742C650025139F /* NameTextInputValidator.swift in Sources */,
 				38E2CB3E1BC2A49C0092B5C8 /* SelectPayerTableViewCell_iPad.swift in Sources */,
 				38572B0A169F3D2700969C62 /* MCAllTripsTableViewController.m in Sources */,
