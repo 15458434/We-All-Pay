@@ -437,23 +437,17 @@ typedef NS_ENUM(BOOL, ChildViewStatus) {
     // Create Toolbar for the input accessory of payerView
     CGRect toolbarRect = CGRectMake(0, 0, self.view.bounds.size.width, 44);
     UIToolbar *inputAccessoryPickerView = [[UIToolbar alloc] initWithFrame:toolbarRect];
-    UIBarButtonItem *cancelButton = [[UIBarButtonItem alloc] initWithBarButtonSystemItem:UIBarButtonSystemItemCancel
-                                                                                  target:self
-                                                                                  action:@selector(cancelPersonPicker:)];
-    UIBarButtonItem *flexButton = [[UIBarButtonItem alloc] initWithBarButtonSystemItem:UIBarButtonSystemItemFlexibleSpace
-                                                                                target:nil
-                                                                                action:nil];
-    UIBarButtonItem *doneButtonToolbar = [[UIBarButtonItem alloc] initWithBarButtonSystemItem:UIBarButtonSystemItemDone
-                                                                                       target:self
-                                                                                       action:@selector(donePersonPicker:)];
+    UIBarButtonItem *cancelButton = [[UIBarButtonItem alloc] initWithBarButtonSystemItem:UIBarButtonSystemItemCancel target:self action:@selector(cancelPersonPicker:)];
+    UIBarButtonItem *flexButton = [[UIBarButtonItem alloc] initWithBarButtonSystemItem:UIBarButtonSystemItemFlexibleSpace target:nil action:nil];
+    UIBarButtonItem *doneButtonToolbar = [[UIBarButtonItem alloc] initWithBarButtonSystemItem:UIBarButtonSystemItemDone target:self action:@selector(donePersonPicker:)];
     NSArray *buttonArray = @[cancelButton, flexButton, doneButtonToolbar];
     [inputAccessoryPickerView setItems:buttonArray animated:YES];
     _personPickerView = [[UIPickerView alloc] init];
-    [_personPickerView setDelegate:self];
-    [_personPickerView setDataSource:self];
-    [_personPickerView setShowsSelectionIndicator:YES];
-    [_payerNameField setInputView:_personPickerView];
-    [_payerNameField setInputAccessoryView:inputAccessoryPickerView];
+    _personPickerView.delegate = self;
+    _personPickerView.dataSource = self;
+    _personPickerView.showsSelectionIndicator = YES;
+    _payerNameField.inputView = _personPickerView;
+    _payerNameField.inputAccessoryView = inputAccessoryPickerView;
     
     _itemViewDelegate = [[MCDescriptionOfPaymentTextInputValidator alloc] initWithModel:_model andTextField:_itemView];
     
