@@ -261,12 +261,7 @@ typedef NS_ENUM(BOOL, ChildViewStatus) {
     }];
     
     // If tonight's bill wasn't passed along.
-    if (!_tonightsBill) {
-#ifdef DEBUG
-        NSLog(@"tonightsBill wasn't passed along.");
-#endif
-        @throw [NSException exceptionWithName:@"tonightsBill missing" reason:@"thisPayment didn't receive tonightsBill." userInfo:nil];
-    }
+    NSParameterAssert(_tonightsBill);
     
     _payerTextInputPicker = [[MCPayerTextInputPicker alloc] initWith:_model and:_payerNameField];
     _itemViewDelegate = [[MCDescriptionOfPaymentTextInputValidator alloc] initWithModel:_model andTextField:_itemView];
