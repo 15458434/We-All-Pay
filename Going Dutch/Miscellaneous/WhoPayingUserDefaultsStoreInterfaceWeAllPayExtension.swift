@@ -14,7 +14,7 @@ extension WhoPayingUserDefaultsStoreInterface {
         // Get data in local variables.
         let billID = tonightsBill?.uniqueBillId
         let tripName = tonightsBill?.tripName
-        let nextPayer = tonightsBill?.fetchPeoplePresentOrdered(byAmountPaid: true).first as? MCPerson
+        let nextPayer = tonightsBill?.fetchPeoplePresentOrdered(byAmountPaid: true).first
         let nextPayerID = nextPayer?.uniquePersonId
         let nextPayerName = nextPayer?.getFullName
         

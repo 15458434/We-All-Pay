@@ -416,40 +416,42 @@
         id<MCThisPaymentProtocol, MCTonightsBillTransfer> theDestination = [[segue destinationViewController] viewControllers][0];
         [theDestination setThisPayment:[_tonightsBill getFirstPaymentWithoutAPayer]];
         [theDestination setTonightsBill:_tonightsBill];
+        if (@available(iOS 13.0, *)) {
+            UINavigationController *navController = (UINavigationController *)segue.destinationViewController;
+            navController.modalInPresentation = YES;
+        }
     } else if ([segue.identifier isEqualToString:@"openPaymentWithMissingData"]) {
         NSParameterAssert([[[segue destinationViewController] viewControllers][0] conformsToProtocol:@protocol(MCThisPaymentProtocol)]);
         id<MCThisPaymentProtocol, MCTonightsBillTransfer> theDestination = [[segue destinationViewController] viewControllers][0];
         [theDestination setTonightsBill:_tonightsBill];
         [theDestination setThisPayment:_forOpenPaymentWithMissingDataForSegue];
         _forOpenPaymentWithMissingDataForSegue = nil;
+        if (@available(iOS 13.0, *)) {
+            UINavigationController *navController = (UINavigationController *)segue.destinationViewController;
+            navController.modalInPresentation = YES;
+        }
+    } else if ([segue.identifier isEqualToString:@"openPaymentView"]) {
+        UINavigationController *navController = (UINavigationController *)segue.destinationViewController;
+        if (@available(iOS 13.0, *)) {
+            navController.modalInPresentation = YES;
+        }
+        MCPayment *payment;
+        NSIndexPath *indexPathOfSelectedRow = self.tableView.indexPathForSelectedRow;
+        if (indexPathOfSelectedRow) {
+            [self.tableView deselectRowAtIndexPath:indexPathOfSelectedRow animated:YES];
+            payment = [_dataController objectAtIndexPath:indexPathOfSelectedRow];
+        }
+        MCPaymentViewController *paymentViewController = (MCPaymentViewController *)navController.viewControllers[0];
+        paymentViewController.thisPayment = payment;
+        paymentViewController.tonightsBill = _tonightsBill;
+    } else if ([segue.identifier isEqualToString:@"solveButton"]) {
+        UINavigationController *navController = (UINavigationController *)segue.destinationViewController;
+        SolutionViewController *destination = navController.viewControllers.firstObject;
+        destination.tonightsBill = _tonightsBill;
+        destination.sendMailObject = _mailDelegate;
     } else {
-        if ([[[segue destinationViewController] viewControllers][0] respondsToSelector:@selector(setTonightsBill:)]) {
-            [[[segue destinationViewController] viewControllers][0] setTonightsBill:_tonightsBill];
-        }
-        if ([[[segue destinationViewController] viewControllers][0] respondsToSelector:@selector(setSendMailObject:)]) {
-            [[[segue destinationViewController] viewControllers][0] setSendMailObject:_mailDelegate];
-        }
-        
-        if ([[[segue destinationViewController] viewControllers][0] respondsToSelector:@selector(setThisPayment:)]) {
-            MCPayment *thePayment;
-            NSIndexPath *indexPathOfSelectedRow = [[self tableView] indexPathForSelectedRow];
-            if (indexPathOfSelectedRow) {
-                thePayment = [_dataController objectAtIndexPath:indexPathOfSelectedRow];
-            }
-            if ([[[segue destinationViewController] viewControllers][0] respondsToSelector:@selector(setIsNew:)]) {
-                if (thePayment) {
-                    [[[segue destinationViewController] viewControllers][0] setIsNew:YES];
-                } else {
-                    [[[segue destinationViewController] viewControllers][0] setIsNew:NO];
-                }
-            }
-            [[[segue destinationViewController] viewControllers][0] setThisPayment:thePayment];
-        }
-    }
-    
-    NSIndexPath *indexPathForSelectedRow = [self.tableView indexPathForSelectedRow];
-    if (indexPathForSelectedRow) {
-        [self.tableView deselectRowAtIndexPath:indexPathForSelectedRow animated:YES];
+        NSLog(@"Unknown segue with identifier: %@", segue.identifier);
+        NSParameterAssert(NO);
     }
 }
 
