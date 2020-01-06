@@ -394,7 +394,11 @@
 - (void)prepareForSegue:(UIStoryboardSegue *)segue sender:(id)sender
 {
     if ([[segue identifier] isEqualToString:@"openEditPerson"]) {
-        id destination = [[segue destinationViewController] viewControllers][0];
+        UINavigationController *navController = (UINavigationController *)segue.destinationViewController;
+        if (@available(iOS 13.0, *)) {
+            navController.modalInPresentation = YES;
+        }
+        MCPersonViewController *destination = navController.viewControllers.firstObject;
         if ([destination conformsToProtocol:@protocol(MCTonightsBillTransfer)] && [destination conformsToProtocol:@protocol(MCThisPersonProtocol)]) {
             NSIndexPath *indexPathOfSelectedRow = [[self tableView] indexPathForSelectedRow];
             MCPerson *thePerson = [_dataController objectAtIndexPath:indexPathOfSelectedRow];
@@ -404,17 +408,16 @@
                 thePerson = [_tonightsBill addPerson];
                 [thePerson setThumbnailDataFromImage:nil];
                 [thePerson setPictureDataFromImage:nil];
-                [destination setThisPerson:thePerson];
-                [destination setIsNew:YES];
+                destination.thisPerson = thePerson;
+                destination.isNew = YES;
             } else {
                 // Person present open it.
-                [destination setThisPerson:thePerson];
-                [destination setIsNew:NO];
+                destination.thisPerson = thePerson;
+                destination.isNew = NO;
             }
         } else {
             NSLog(@"%@: Unable to pass tonightsBill and thisPerson.", self);
         }
-
     }
     
     NSIndexPath *indexPathForSelectedRow = [self.tableView indexPathForSelectedRow];
