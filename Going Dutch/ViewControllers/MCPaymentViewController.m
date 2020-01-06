@@ -86,9 +86,7 @@ typedef NS_ENUM(BOOL, ChildViewStatus) {
 #ifdef DEBUG
     NSLog(@"MCPaymentViewController: Done button pressed.");
 #endif
-    if ([_itemView isFirstResponder]) {
-        [self storePlaceViewData];
-    }
+    [self.view endEditing:YES];
 
     if (MCWeAllPayStoreController.defaultStore.mainThreadContext.undoManager.canUndo) {
         [[MCWeAllPayStoreController defaultStore] endUndoGroupAndProcess];
@@ -117,31 +115,6 @@ typedef NS_ENUM(BOOL, ChildViewStatus) {
 - (IBAction)selectCategoryPressed:(id)sender
 {
     [FIRAnalytics logEventWithName:@"Open Select Category" parameters:nil];
-}
-
-- (void)storePlaceViewData
-{
-    [_itemView resignFirstResponder];
-    [_thisPayment setDescriptionOfPayment:[_itemView text]];
-//    didSomethingChange = YES;
-    [[[self navigationItem] rightBarButtonItem] setEnabled:YES];
-}
-
-- (void)storeMoneySpent
-{
-    CurrencyFormatter *cf = [[CurrencyFormatter alloc] initWithCurrencyCode:_thisPayment.currency.code];
-    [[MCWeAllPayStoreController defaultStore] beginUndoGroupWithoutRegistration];
-    _thisPayment.money = [cf doubleFromString:_paidView.text];
-    [_thisPayment recalculateAveragePeopleOweAndStore];
-    [[MCWeAllPayStoreController defaultStore] endUndoGroupWithoutRegistration];
-    _paidView.text = [cf stringForObjectValue:_thisPayment.money];
-    
-    [[[self navigationItem] rightBarButtonItem] setEnabled:YES];
-    NSDate *nu = [NSDate date];
-    [_tonightsBill setDateModified:nu];
-    [_thisPayment setDateModified:nu];
-//    didSomethingChange = YES;
-    [[MCWeAllPayStoreController defaultStore] endUndoGroupWithoutRegistration];
 }
 
 - (UIStatusBarStyle)preferredStatusBarStyle
