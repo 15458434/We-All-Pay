@@ -37,6 +37,7 @@ import UIKit
         payingPerson.addPaymentsObject(payment)
         payment.payingPerson = payingPerson
         updateDateModified()
+        changeHandler(payment)
     }
     
     @objc(updateCategoryWithObject:) func update(categoryObject: CategoryPictureObject) {

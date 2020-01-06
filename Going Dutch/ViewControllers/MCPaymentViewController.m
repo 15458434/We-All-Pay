@@ -284,6 +284,7 @@ typedef NS_ENUM(BOOL, ChildViewStatus) {
     [_model prepareForUseWithPayment:_thisPayment andChangeHandler:^(MCPayment * _Nonnull payment) {
         [weakSelf showCategory];
         weakSelf.payerPicture.image = payment.payingPerson.picture;
+        weakSelf.payerNameField.text = payment.payingPerson.getFullName;
     }];
     
     // If tonight's bill wasn't passed along.
