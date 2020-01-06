@@ -414,15 +414,11 @@
                 // Person present open it.
                 destination.thisPerson = thePerson;
                 destination.isNew = NO;
+                [self.tableView deselectRowAtIndexPath:indexPathOfSelectedRow animated:YES];
             }
         } else {
             NSLog(@"%@: Unable to pass tonightsBill and thisPerson.", self);
         }
-    }
-    
-    NSIndexPath *indexPathForSelectedRow = [self.tableView indexPathForSelectedRow];
-    if (indexPathForSelectedRow) {
-        [self.tableView deselectRowAtIndexPath:indexPathForSelectedRow animated:YES];
     }
 }
 
