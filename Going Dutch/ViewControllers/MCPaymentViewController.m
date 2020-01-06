@@ -90,13 +90,13 @@ typedef NS_ENUM(BOOL, ChildViewStatus) {
         [self storePlaceViewData];
     }
 
-    if ([[[[MCWeAllPayStoreController defaultStore] mainThreadContext] undoManager] canUndo]) {
+    if (MCWeAllPayStoreController.defaultStore.mainThreadContext.undoManager.canUndo) {
         [[MCWeAllPayStoreController defaultStore] endUndoGroupAndProcess];
     } else {
         [[MCWeAllPayStoreController defaultStore] endUndoGroup];
     }
     [[MCWeAllPayStoreController defaultStore] saveMainThreadContext];
-    [[[self navigationController] presentingViewController] dismissViewControllerAnimated:YES completion:^{
+    [self.navigationController.presentingViewController dismissViewControllerAnimated:YES completion:^{
         [WhoPayingUserDefaultsStoreInterface sendToUserDefaultsStoreInterface:self.tonightsBill];
     }];
 }
