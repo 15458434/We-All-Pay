@@ -76,6 +76,12 @@ import UIKit
     }
     
     func textFieldDidEndEditing(_ textField: UITextField, reason: UITextField.DidEndEditingReason) {
+        if model.payment.payingPerson == nil {
+            let index = pickerView.selectedRow(inComponent: 0)
+            let selectedPerson = arrayOfPeoplePresent[index];
+            textField.text = selectedPerson.getFullName
+            model.update(payingPerson: selectedPerson)
+        }
         model.endUpdates()
     }
     
