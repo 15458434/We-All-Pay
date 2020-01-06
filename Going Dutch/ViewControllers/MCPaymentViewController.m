@@ -71,7 +71,7 @@ typedef NS_ENUM(BOOL, ChildViewStatus) {
 - (IBAction)mainCancelButtonPressed:(id)sender
 {
     [FIRAnalytics logEventWithName:@"Main Canncel Pressed" parameters:nil];
-    [self dismissKeyboard];
+    [self.view endEditing:YES];
     if ([[[[MCWeAllPayStoreController defaultStore] mainThreadContext] undoManager] canUndo]) {
         [[MCWeAllPayStoreController defaultStore] endUndoGroupAndUndo];
     } else {
@@ -152,18 +152,7 @@ typedef NS_ENUM(BOOL, ChildViewStatus) {
 - (void)tappedInTheBackground:(id)selector
 {
     _kindOfPaidFieldDismiss = MCMoneyValueFieldDismissStatusBackgroundTapped;
-    [self dismissKeyboard];
-}
-
-- (void)dismissKeyboard
-{
-    if ([_paidView isFirstResponder]) {
-        [_paidView resignFirstResponder];
-    } else if ([_itemView isFirstResponder]) {
-        [_itemView resignFirstResponder];
-    } else if ([_payerNameField isFirstResponder]) {
-        [_payerNameField resignFirstResponder];
-    }
+    [self.view endEditing:YES];
 }
 
 - (void)showCategory {
