@@ -21,7 +21,16 @@ import UIKit
     }
     
     public func animationController(forDismissed dismissed: UIViewController) -> UIViewControllerAnimatedTransitioning? {
-        return SideMenuDismissAnimationController()
+        let interactiveDismissableNavigationController = dismissed as! SwipeLeftDissmissableNavigationController
+        return SideMenuDismissAnimationController(with: interactiveDismissableNavigationController.dismissInteractionController!)
+    }
+    
+    public func interactionControllerForDismissal(using animator: UIViewControllerAnimatedTransitioning) -> UIViewControllerInteractiveTransitioning? {
+        let existingAnimator = animator as! SideMenuDismissAnimationController
+        guard existingAnimator.interactionController.interactionInProgress else {
+            return nil
+        }
+        return existingAnimator.interactionController
     }
     
     // MARK: NSObject
@@ -128,6 +137,12 @@ import UIKit
 }
 
 @objcMembers public class SideMenuDismissAnimationController: NSObject, UIViewControllerAnimatedTransitioning {
+    let interactionController: SideMenuDismissInteractionController
+    
+    init(with interactionController: SideMenuDismissInteractionController) {
+        self.interactionController = interactionController
+        super.init()
+    }
     
     // MARK: UIViewControllerAnimatedTransitioning
     
@@ -159,6 +174,86 @@ import UIKit
             transitionContext.completeTransition(!transitionContext.transitionWasCancelled)
         }
     }
+    
+    // MARK: NSObject
+}
+
+@objc protocol SideMenuDismissInteractionControllerSource {
+    var dismissInteractionController: SideMenuDismissInteractionController? { get }
+}
+
+class SideMenuDismissInteractionController: UIPercentDrivenInteractiveTransition {
+    var interactionInProgress: Bool
+    
+    private var shouldCompleteTransition: Bool
+    private weak var viewController: UIViewController!
+    
+    init(with viewController: UIViewController) {
+        interactionInProgress = false
+        shouldCompleteTransition = false
+        super.init()
+        self.viewController = viewController
+        prepareGestureRecognizer(in: viewController.view)
+    }
+    
+    private func prepareGestureRecognizer(in view: UIView) {
+        let gestureRecognizer = UIPanGestureRecognizer(target: self, action: #selector(handleSwipeGesture(_:)))
+        view.addGestureRecognizer(gestureRecognizer)
+    }
+    
+    @objc private func handleSwipeGesture(_ sender: UIPanGestureRecognizer) {
+        let translation = sender.location(in: sender.view!)
+        var progress = translation.x / 200.0
+        progress = 1.0 - CGFloat(fminf(fmaxf(Float(progress), 0.0), 1.0))
+        
+        debugPrint("Progress: \(progress)")
+        
+        switch sender.state {
+        case .began:
+            debugPrint(".begin")
+            interactionInProgress = true
+            viewController.dismiss(animated: true, completion: nil)
+        case .changed:
+            debugPrint(".changed")
+            shouldCompleteTransition = progress > 0.5
+            update(progress)
+        case .cancelled:
+            debugPrint(".cancelled")
+            interactionInProgress = false
+            cancel()
+        case .ended:
+            debugPrint(".ended")
+            interactionInProgress = false
+            if shouldCompleteTransition {
+                debugPrint("finish")
+                finish()
+            } else {
+                debugPrint("cancel")
+                cancel()
+            }
+        default:
+            break
+        }
+    }
+}
+
+class SwipeLeftDissmissableNavigationController: UINavigationController, SideMenuDismissInteractionControllerSource {
+    
+    // MARK: SideMenuDismissInteractionControllerSource
+    
+    var dismissInteractionController: SideMenuDismissInteractionController?
+    
+    // MARK: UINavigationController
+    
+    // MARK: UIViewController
+    
+    override func viewDidLoad() {
+        super.viewDidLoad()
+        
+        dismissInteractionController = SideMenuDismissInteractionController(with: self)
+    }
+    
+    // MARK: UIResponder
     
     // MARK: NSObject
 }
