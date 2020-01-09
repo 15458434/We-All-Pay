@@ -225,32 +225,24 @@ class SideMenuDismissInteractionController: UIPercentDrivenInteractiveTransition
         var progress = translation.x / swipeDistance
         progress = 1.0 - CGFloat(fminf(fmaxf(Float(progress), 0.0), 1.0))
         
-        debugPrint("Progress: \(progress)")
-        
         switch sender.state {
         case .began:
-            debugPrint(".begin")
             update(xTranslationOnBegan: translation.x)
             interactionInProgress = true
             viewController.dismiss(animated: true, completion: nil)
         case .changed:
-            debugPrint(".changed")
             shouldCompleteTransition = progress > 0.4
             self.update(progress)
         case .cancelled:
-            debugPrint(".cancelled")
             update(xTranslationOnBegan: nil)
             interactionInProgress = false
             cancel()
         case .ended:
-            debugPrint(".ended")
             update(xTranslationOnBegan: nil)
             interactionInProgress = false
             if shouldCompleteTransition {
-                debugPrint("finish")
                 finish()
             } else {
-                debugPrint("cancel")
                 cancel()
             }
         default:
