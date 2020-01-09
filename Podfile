@@ -8,6 +8,7 @@ target 'We all pay' do
 pod 'Firebase/Core'
 pod 'Firebase/AdMob'
 pod 'GoogleMobileAdsMediationFacebook'
+pod 'PersonalizedAdConsent'
 #pod 'GoogleMobileAdsMediationTestSuite', :configurations => ['Debug'], :path => '/path/to/GoogleMobileAdsMediationTestSuite/'
 
     target 'We all pay Tests' do

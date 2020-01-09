@@ -180,9 +180,7 @@
     [[MCStoreInterface defaultStoreInterface] validateProductIdentifiers];
     [self activateFirebase];
     
-    NSString *iPhoneX = @"3a960c027f1ea390326793600324a891";
-    NSString *iPadRetina = @"63f51db641e29b85012042e407de3cba";
-    GADMobileAds.sharedInstance.requestConfiguration.testDeviceIdentifiers = @[kGADSimulatorID, iPhoneX, iPadRetina];
+    [AdEngine registerDebugDevices];
     
     return YES;
 }

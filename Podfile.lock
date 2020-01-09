@@ -73,11 +73,13 @@ PODS:
     - nanopb/encode (= 0.3.9011)
   - nanopb/decode (0.3.9011)
   - nanopb/encode (0.3.9011)
+  - PersonalizedAdConsent (1.0.4)
 
 DEPENDENCIES:
   - Firebase/AdMob
   - Firebase/Core
   - GoogleMobileAdsMediationFacebook
+  - PersonalizedAdConsent
 
 SPEC REPOS:
   https://github.com/CocoaPods/Specs.git:
@@ -96,6 +98,7 @@ SPEC REPOS:
     - GoogleMobileAdsMediationFacebook
     - GoogleUtilities
     - nanopb
+    - PersonalizedAdConsent
 
 SPEC CHECKSUMS:
   FBAudienceNetwork: 1ea63543665445a3a5b4a059e8210a343b6ab3c1
@@ -113,7 +116,8 @@ SPEC CHECKSUMS:
   GoogleMobileAdsMediationFacebook: 2306b9822775e4ddb50c29fc758d6b45efcf6a72
   GoogleUtilities: 29bd0d8f850efbd28cff6d99e8b7da1f8d236bcf
   nanopb: 18003b5e52dab79db540fe93fe9579f399bd1ccd
+  PersonalizedAdConsent: 4b87320b7a0f22576bec530ae3b7adba88a24c78
 
-PODFILE CHECKSUM: bcac72b6af244206e349883e2e4aad3c22fb49a7
+PODFILE CHECKSUM: 7b32605643ef667fda6510454c9e8ca7fc71284f
 
 COCOAPODS: 1.8.4
