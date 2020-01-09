@@ -90,7 +90,7 @@ import UIKit
     // MARK: UIViewControllerAnimatedTransitioning
     
     public func transitionDuration(using transitionContext: UIViewControllerContextTransitioning?) -> TimeInterval {
-        return 0.25
+        return 0.35
     }
     
     public func animateTransition(using transitionContext: UIViewControllerContextTransitioning) {
@@ -147,7 +147,7 @@ import UIKit
     // MARK: UIViewControllerAnimatedTransitioning
     
     public func transitionDuration(using transitionContext: UIViewControllerContextTransitioning?) -> TimeInterval {
-        return 0.25
+        return 0.35
     }
     
     public func animateTransition(using transitionContext: UIViewControllerContextTransitioning) {
@@ -160,6 +160,12 @@ import UIKit
         let finalFrame = CGRect(x: -initialFrame.size.width, y: 0, width: initialFrame.width, height: initialFrame.height)
         
         snapshot.frame = initialFrame
+        snapshot.clipsToBounds = false
+        snapshot.layer.shadowOpacity = 0.5
+        snapshot.layer.shadowRadius = 15
+        snapshot.layer.shadowPath = CGPath(rect: snapshot.bounds.insetBy(dx: 0, dy: -15), transform: nil)
+        snapshot.layer.shadowColor = UIColor.black.cgColor
+        
         containerView.addSubview(snapshot)
         fromViewController.view.isHidden = true
         
@@ -201,9 +207,22 @@ class SideMenuDismissInteractionController: UIPercentDrivenInteractiveTransition
         view.addGestureRecognizer(gestureRecognizer)
     }
     
+    private var xTranslationOnBegan: CGFloat?
+    private var expectedXTranslationOnEnd: CGFloat?
+    private var swipeDistance: CGFloat = 200
+    
     @objc private func handleSwipeGesture(_ sender: UIPanGestureRecognizer) {
+        func update(xTranslationOnBegan: CGFloat?) {
+            if let xTranslationOnBegan = xTranslationOnBegan {
+                self.xTranslationOnBegan = xTranslationOnBegan
+                self.expectedXTranslationOnEnd = xTranslationOnBegan - swipeDistance
+            } else {
+                self.xTranslationOnBegan = nil
+                self.expectedXTranslationOnEnd = nil
+            }
+        }
         let translation = sender.location(in: sender.view!)
-        var progress = translation.x / 200.0
+        var progress = translation.x / swipeDistance
         progress = 1.0 - CGFloat(fminf(fmaxf(Float(progress), 0.0), 1.0))
         
         debugPrint("Progress: \(progress)")
@@ -211,18 +230,21 @@ class SideMenuDismissInteractionController: UIPercentDrivenInteractiveTransition
         switch sender.state {
         case .began:
             debugPrint(".begin")
+            update(xTranslationOnBegan: translation.x)
             interactionInProgress = true
             viewController.dismiss(animated: true, completion: nil)
         case .changed:
             debugPrint(".changed")
-            shouldCompleteTransition = progress > 0.5
-            update(progress)
+            shouldCompleteTransition = progress > 0.4
+            self.update(progress)
         case .cancelled:
             debugPrint(".cancelled")
+            update(xTranslationOnBegan: nil)
             interactionInProgress = false
             cancel()
         case .ended:
             debugPrint(".ended")
+            update(xTranslationOnBegan: nil)
             interactionInProgress = false
             if shouldCompleteTransition {
                 debugPrint("finish")
