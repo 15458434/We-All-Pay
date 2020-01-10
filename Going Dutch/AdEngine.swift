@@ -12,13 +12,15 @@ import AdSupport
 import PersonalizedAdConsent
 import GoogleMobileAds
 
+@objc(MCAdEngineDelegate) protocol AdEngineDelegate {
+    @objc(putOnScreenBannerView:) func putOnScreen(bannerView: GADBannerView)
+    @objc(putOffScreenBannerView:) func putOffScreen(bannerview: GADBannerView)
+}
+
 @objc(MCAdEngine) @objcMembers class AdEngine: NSObject, GADBannerViewDelegate {
     static let kAdBannerConsent = "7DE9F9CF-B4B9-4DCB-94FC-F0FD62F432DC"
     
-    static let isEnabled: Bool = true
-    
-    private var putBannerOnScreen: ((_ bannerView: GADBannerView) -> ())!
-    private var putBannerOffScreen: ((_ bannerView: GADBannerView) -> ())!
+    static var isEnabled: Bool = true
     
     enum EconomicArea {
         case unknown
@@ -108,6 +110,8 @@ import GoogleMobileAds
         }
     }
     
+    private(set) var delegate: AdEngineDelegate!
+    
     var request: GADRequest {
         let newRequest = DFPRequest()
         let consent = PACConsentStatus(rawValue: UserDefaults.standard.integer(forKey: AdEngine.kAdBannerConsent))
@@ -133,52 +137,11 @@ import GoogleMobileAds
             return
         }
         
-        PACConsentInformation.sharedInstance.debugGeography = .EEA
-        PACConsentInformation.sharedInstance.debugIdentifiers = ["E0C4F2B0-1AD9-4FEE-B467-7DE63D5E8939"]
-        if PACConsentInformation.sharedInstance.isRequestLocationInEEAOrUnknown {
-            debugPrint("InEEAorUnknown")
-            PACConsentInformation.sharedInstance.requestConsentInfoUpdate(forPublisherIdentifiers: ["pub-5354415674074435"]) { (error) in
-                guard error == nil else {
-                    debugPrint("Consent info update failed.")
-                    return
-                }
-                
-                let ud = UserDefaults.standard
-                let consentStatus = PACConsentStatus(rawValue: ud.integer(forKey: AdEngine.kAdBannerConsent))!
-                switch consentStatus {
-                case .personalized:
-//                    gdprConsentInMobi(economicArea: .eea, consentStatus: consentStatus)
-                    createAdBanner()
-                case .nonPersonalized:
-//                    gdprConsentInMobi(economicArea: .eea, consentStatus: consentStatus)
-                    createAdBanner()
-                default:
-                    guard let privacyUrl = URL(string: "https://www.iubenda.com/privacy-policy/7876418"),
-                      let form = PACConsentForm(applicationPrivacyPolicyURL: privacyUrl) else {
-                        print("incorrect privacy URL.")
-                        return
-                    }
-                    form.shouldOfferPersonalizedAds = true
-                    form.shouldOfferNonPersonalizedAds = false
-                    form.shouldOfferAdFree = false
-                    
-                    form.load { [unowned form, unowned viewController] (error) in
-                        guard error == nil else {
-                            print("error: \(error!)")
-                            fatalError("Unable to load consent form.")
-                        }
-                        
-                        form.present(from: viewController) { (error, success) in
-                            let consentStatus = PACConsentInformation.sharedInstance.consentStatus
-                            UserDefaults.standard.set(consentStatus.rawValue, forKey: AdEngine.kAdBannerConsent)
-//                            gdprConsentInMobi(economicArea: .eea, consentStatus: consentStatus)
-                            createAdBanner()
-                        }
-                    }
-                }
-            }
-        } else {
-            createAdBanner()
+        self.delegate = (viewController as! AdEngineDelegate)
+        
+        let consent = PACConsentStatus(rawValue: UserDefaults.standard.integer(forKey: AdEngine.kAdBannerConsent))!
+        if (consent == PACConsentStatus.nonPersonalized) || (consent == PACConsentStatus.personalized) {
+            createAdBanner(with: consent)
         }
     }
     
@@ -200,7 +163,7 @@ import GoogleMobileAds
             return
         }
         debugPrint("adViewDidReceiveAd: \(String(describing: bannerView.responseInfo?.responseIdentifier)) for \(String(describing: bannerView.responseInfo?.adNetworkClassName))")
-        putBannerOnScreen(bannerView)
+        delegate.putOnScreen(bannerView: bannerView)
     }
     
     func adView(_ bannerView: GADBannerView, didFailToReceiveAdWithError error: GADRequestError) {
@@ -208,7 +171,7 @@ import GoogleMobileAds
             return
         }
         debugPrint("didFailToReceiveAdWithError: \(error)")
-        putBannerOffScreen(bannerView)
+        delegate.putOffScreen(bannerview: bannerView)
     }
     
     func adViewWillPresentScreen(_ bannerView: GADBannerView) {

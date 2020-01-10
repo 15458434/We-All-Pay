@@ -138,6 +138,7 @@
 		38B08C591B383A4C00FB84B1 /* MCStoreInterface.swift in Sources */ = {isa = PBXBuildFile; fileRef = 38B08C581B383A4C00FB84B1 /* MCStoreInterface.swift */; };
 		38B7E9521D86F8F600400E72 /* ContactsDataReceiver.swift in Sources */ = {isa = PBXBuildFile; fileRef = 38B7E9511D86F8F600400E72 /* ContactsDataReceiver.swift */; };
 		38B88E2E1D81FF6E0069A44D /* MailComposeViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 38B88E2D1D81FF6E0069A44D /* MailComposeViewController.swift */; };
+		38C1956323C8C575006255AE /* MCGenericAdBannerViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 38C1956223C8C575006255AE /* MCGenericAdBannerViewController.m */; };
 		38C3AB151CBCF3200011C10C /* ViewControllerProtocols.swift in Sources */ = {isa = PBXBuildFile; fileRef = 38C3AB141CBCF3200011C10C /* ViewControllerProtocols.swift */; };
 		38C700F21D8EC24100D785BB /* LaunchCounter.swift in Sources */ = {isa = PBXBuildFile; fileRef = 38C700F11D8EC24100D785BB /* LaunchCounter.swift */; };
 		38CC8C4A18ED61FD006D99E7 /* MCPersonTableViewController_iPad.m in Sources */ = {isa = PBXBuildFile; fileRef = 38CC8C4918ED61FD006D99E7 /* MCPersonTableViewController_iPad.m */; };
@@ -491,6 +492,8 @@
 		38B6E0F01A28BBAB009E69D7 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		38B7E9511D86F8F600400E72 /* ContactsDataReceiver.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ContactsDataReceiver.swift; sourceTree = "<group>"; };
 		38B88E2D1D81FF6E0069A44D /* MailComposeViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = MailComposeViewController.swift; sourceTree = "<group>"; };
+		38C1956123C8C575006255AE /* MCGenericAdBannerViewController.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = MCGenericAdBannerViewController.h; sourceTree = "<group>"; };
+		38C1956223C8C575006255AE /* MCGenericAdBannerViewController.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = MCGenericAdBannerViewController.m; sourceTree = "<group>"; };
 		38C3AB141CBCF3200011C10C /* ViewControllerProtocols.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ViewControllerProtocols.swift; sourceTree = "<group>"; };
 		38C700F11D8EC24100D785BB /* LaunchCounter.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = LaunchCounter.swift; sourceTree = "<group>"; };
 		38C725031A2E082D003173E6 /* Who is paying next.entitlements */ = {isa = PBXFileReference; lastKnownFileType = text.xml; path = "Who is paying next.entitlements"; sourceTree = "<group>"; };
@@ -825,6 +828,7 @@
 				38D177121C3A85C00084604C /* SelectCurrencyTableViewController.swift */,
 				38E0C5E418E9B244005A3F17 /* iPad */,
 				38E0C5E218E9B22E005A3F17 /* iPhone */,
+				38C1956423C8C58A006255AE /* GenericViewController */,
 				38DC8B371909064A00762235 /* ViewController Protocols */,
 			);
 			name = ViewControllers;
@@ -1009,6 +1013,15 @@
 				38010E111A3F4A4F0056F8F8 /* Localizable.strings */,
 			);
 			name = "Supporting Files";
+			sourceTree = "<group>";
+		};
+		38C1956423C8C58A006255AE /* GenericViewController */ = {
+			isa = PBXGroup;
+			children = (
+				38C1956123C8C575006255AE /* MCGenericAdBannerViewController.h */,
+				38C1956223C8C575006255AE /* MCGenericAdBannerViewController.m */,
+			);
+			name = GenericViewController;
 			sourceTree = "<group>";
 		};
 		38D1C3781A8A33A5008F2A8E /* LaunchImage */ = {
@@ -1755,6 +1768,7 @@
 				387494D619F053E9001614CA /* WeAllPayStore2to4.xcmappingmodel in Sources */,
 				380C48161BE1330E00C82B0F /* CurrencyFormatter.swift in Sources */,
 				380700A51A1B616000C7FB37 /* MCPaymentUpdateTo4.m in Sources */,
+				38C1956323C8C575006255AE /* MCGenericAdBannerViewController.m in Sources */,
 				3868780A23721967003D40A9 /* PersonModel.swift in Sources */,
 				389FBD40198BDA1C003B4409 /* MCExchangeRate.m in Sources */,
 				3825A826199A2A5500A8885D /* MCTonightsBillTransfer.m in Sources */,

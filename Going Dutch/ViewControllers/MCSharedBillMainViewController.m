@@ -25,7 +25,6 @@
 @property (strong, nonatomic) MCSharedBillPageViewController *pageViewController;
 
 @property (nonatomic, readonly) GADRequest *generalAdRequest;
-@property (weak, nonatomic) IBOutlet GADBannerView *worstSalesPitchEverView;
 @property (weak, nonatomic) IBOutlet NSLayoutConstraint *worstSalesPitchEverViewWidth;
 @property (weak, nonatomic) IBOutlet NSLayoutConstraint *worstSalesPitchEverViewHeight;
 @property (weak, nonatomic) IBOutlet NSLayoutConstraint *bottomLayoutContraintAdBanner;

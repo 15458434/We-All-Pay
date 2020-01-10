@@ -386,6 +386,7 @@
                     </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="U5c-3T-mxe" userLabel="First Responder" sceneMemberID="firstResponder"/>
+                <customObject id="7is-gh-aEV" customClass="MCAdEngine"/>
             </objects>
             <point key="canvasLocation" x="243" y="722"/>
         </scene>
