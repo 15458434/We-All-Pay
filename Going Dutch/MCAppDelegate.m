@@ -180,7 +180,7 @@
     [[MCStoreInterface defaultStoreInterface] validateProductIdentifiers];
     [self activateFirebase];
     
-    [AdEngine registerDebugDevices];
+    [MCAdEngine registerDebugDevices];
     
     return YES;
 }
