@@ -16,13 +16,18 @@
 
 @implementation MCGenericAdBannerViewController
 
+- (NSString *)adUnitId {
+    NSAssert(false, @"Should implement this in the ChildViewController");
+    return @"";
+}
+
 #pragma mark - MCAdEngineDelegate
 
-- (void)putOnScreenBannerView:(GADBannerView *)bannerView {
+- (void)adEngine:(MCAdEngine *)adEngine putOnScreenBannerView:(GADBannerView *)bannerView {
     
 }
 
-- (void)putOffScreenBannerView:(GADBannerView *)bannerview {
+- (void)adEngine:(MCAdEngine *)adEngine putOffScreenBannerView:(GADBannerView *)bannerView {
     
 }
 
@@ -31,7 +36,20 @@
 - (void)viewDidLoad {
     [super viewDidLoad];
     
-    [self.adEngine prepareWithAdBanner:_worstSalesPitchEverView with:self];
+    [self.adEngine prepareAdBanner:_worstSalesPitchEverView withAdUnitId:self.adUnitId andViewController:self];
+}
+
+- (void)viewWillTransitionToSize:(CGSize)size withTransitionCoordinator:(id<UIViewControllerTransitionCoordinator>)coordinator {
+    [super viewWillTransitionToSize:size withTransitionCoordinator:coordinator];
+    
+    __weak typeof(self) weakSelf = self;
+    [coordinator animateAlongsideTransition:^(id<UIViewControllerTransitionCoordinatorContext>  _Nonnull context) {
+        if (MCAdEngine.isEnabled) {
+            [weakSelf adEngine:nil putOffScreenBannerView:self.worstSalesPitchEverView];
+            [weakSelf.adEngine updateSizeFor:self.worstSalesPitchEverView withScreenSize:size];
+        }
+    } completion:^(id<UIViewControllerTransitionCoordinatorContext>  _Nonnull context) {
+    }];
 }
 
 #pragma maek - UIResponder

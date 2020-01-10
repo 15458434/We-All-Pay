@@ -18,6 +18,7 @@ NS_SWIFT_NAME(GenericAdBannerViewController)
 
 @property (weak, nonatomic) IBOutlet GADBannerView *worstSalesPitchEverView;
 @property (strong, nonatomic) IBOutlet MCAdEngine *adEngine;
+@property (nonatomic, readonly) NSString *adUnitId;
 
 @end
 

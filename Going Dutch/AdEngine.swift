@@ -13,14 +13,26 @@ import PersonalizedAdConsent
 import GoogleMobileAds
 
 @objc(MCAdEngineDelegate) protocol AdEngineDelegate {
-    @objc(putOnScreenBannerView:) func putOnScreen(bannerView: GADBannerView)
-    @objc(putOffScreenBannerView:) func putOffScreen(bannerview: GADBannerView)
+    /// Signals the ad banner is ready to be put on the screen.
+    /// - Parameters:
+    ///   - adEngine: The AdEngine that gave the signal of banner being ready. Supply none if the signal is coming from somewhere else.
+    ///   - bannerView: The bannerView that was ready.
+    @objc(adEngine:putOnScreenBannerView:) func adEngine(_ adEngine: AdEngine?, putOnscreen bannerView: GADBannerView)
+    /// Signals the ad banner has to be removed from the screen.
+    /// - Parameters:
+    ///   - adEngine: The AdEngine that gave the signal of banner not being ready. Supply non if the signal is coming from somewhere else.
+    ///   - bannerView: The bannerVeiw that was not ready.
+    @objc(adEngine:putOffScreenBannerView:) func adEngine(_ adEngine: AdEngine?, putOffScreen bannerView: GADBannerView)
 }
 
 @objc(MCAdEngine) @objcMembers class AdEngine: NSObject, GADBannerViewDelegate {
     static let kAdBannerConsent = "7DE9F9CF-B4B9-4DCB-94FC-F0FD62F432DC"
     
+    #if SCREENSHOTS
+    static var isEnabled: Bool = false
+    #else
     static var isEnabled: Bool = true
+    #endif
     
     enum EconomicArea {
         case unknown
@@ -123,10 +135,10 @@ import GoogleMobileAds
         return newRequest
     }
     
-    func prepare(adBanner: GADBannerView, with viewController: UIViewController) {
-        func createAdBanner(with consent: PACConsentStatus = .unknown) {
+    @objc(prepareAdBanner:withAdUnitId:andViewController:) func prepare(adBanner: GADBannerView, with adUnitID: String, and viewController: UIViewController) {
+        func prepareAdBanner(with consent: PACConsentStatus = .unknown) {
             self.updateSize(for: adBanner, withScreenSize: UIScreen.main.bounds.size)
-            adBanner.adUnitID = self.adUnitID!
+//            adBanner.adUnitID = self.adUnitID
             adBanner.rootViewController = viewController
             adBanner.delegate = self
             adBanner.load(self.request)
@@ -140,8 +152,8 @@ import GoogleMobileAds
         self.delegate = (viewController as! AdEngineDelegate)
         
         let consent = PACConsentStatus(rawValue: UserDefaults.standard.integer(forKey: AdEngine.kAdBannerConsent))!
-        if (consent == PACConsentStatus.nonPersonalized) || (consent == PACConsentStatus.personalized) {
-            createAdBanner(with: consent)
+        if (!MCStoreInterface.defaultStoreInterface.isProProductPurchased && (consent == PACConsentStatus.nonPersonalized) || (consent == PACConsentStatus.personalized)) {
+            prepareAdBanner(with: consent)
         }
     }
     
@@ -163,7 +175,7 @@ import GoogleMobileAds
             return
         }
         debugPrint("adViewDidReceiveAd: \(String(describing: bannerView.responseInfo?.responseIdentifier)) for \(String(describing: bannerView.responseInfo?.adNetworkClassName))")
-        delegate.putOnScreen(bannerView: bannerView)
+        delegate.adEngine(self, putOnscreen: bannerView)
     }
     
     func adView(_ bannerView: GADBannerView, didFailToReceiveAdWithError error: GADRequestError) {
@@ -171,7 +183,7 @@ import GoogleMobileAds
             return
         }
         debugPrint("didFailToReceiveAdWithError: \(error)")
-        delegate.putOffScreen(bannerview: bannerView)
+        delegate.adEngine(self, putOffScreen: bannerView)
     }
     
     func adViewWillPresentScreen(_ bannerView: GADBannerView) {

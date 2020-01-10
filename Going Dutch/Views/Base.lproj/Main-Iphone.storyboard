@@ -377,6 +377,7 @@
                     </navigationItem>
                     <nil key="simulatedBottomBarMetrics"/>
                     <connections>
+                        <outlet property="adEngine" destination="7is-gh-aEV" id="tcV-uu-1i2"/>
                         <outlet property="bottomLayoutContraintAdBanner" destination="TB2-aD-OBg" id="5NS-wE-fCv"/>
                         <outlet property="bottomLayoutCustomContainer" destination="L8f-nf-wVY" id="gFc-TR-edO"/>
                         <outlet property="peopleOrPaymentsSelectionControl" destination="gfW-p5-dHb" id="DD1-3x-fQv"/>
