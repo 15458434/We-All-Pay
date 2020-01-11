@@ -152,7 +152,7 @@ import GoogleMobileAds
         self.delegate = (viewController as! AdEngineDelegate)
         
         let consent = PACConsentStatus(rawValue: UserDefaults.standard.integer(forKey: AdEngine.kAdBannerConsent))!
-        if (!MCStoreInterface.defaultStoreInterface.isProProductPurchased && (consent == PACConsentStatus.nonPersonalized) || (consent == PACConsentStatus.personalized)) {
+        if (!MCStoreInterface.defaultStoreInterface.isProProductPurchased && (consent == PACConsentStatus.nonPersonalized) || (consent == PACConsentStatus.personalized) || !PACConsentInformation.sharedInstance.isRequestLocationInEEAOrUnknown) {
             prepareAdBanner(with: consent)
         }
     }

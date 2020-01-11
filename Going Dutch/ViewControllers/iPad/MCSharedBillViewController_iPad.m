@@ -20,7 +20,7 @@
 
 #import "We_all_pay-Swift.h"
 
-@interface MCSharedBillViewController_iPad () <GADBannerViewDelegate>
+@interface MCSharedBillViewController_iPad ()
 
 @property (nonatomic, readonly) GADRequest *generalAdRequest;
 @property (weak, nonatomic) IBOutlet NSLayoutConstraint *worstSalesPitchEverViewHeight;
@@ -133,18 +133,6 @@
 
 #pragma mark - New in this class
 
-- (GADRequest *)generalAdRequest
-{
-    GADRequest *request = [GADRequest request];
-#ifdef DEBUG
-    NSString *kiPhone5S = @"109c8d87d59d27b62a53157e313d1a49";
-    NSString *kiPhone4S = @"87ebfc252a3675f03375aa13fce9286f";
-    NSString *iPadRetina = @"63f51db641e29b85012042e407de3cba";
-    GADMobileAds.sharedInstance.requestConfiguration.testDeviceIdentifiers = @[kGADSimulatorID, kiPhone5S, kiPhone4S, iPadRetina];
-#endif
-    return request;
-}
-
 - (void)putBannerOnScreen:(BOOL)animate
 {
     BOOL isNotPurchased = ![[MCStoreInterface defaultStoreInterface] isProProductPurchased];
@@ -192,44 +180,6 @@
     }
 }
 
-- (void)updateBannerSize:(CGSize)size
-{
-    if (size.height > size.width) {
-        self.worstSalesPitchEverView.adSize = kGADAdSizeSmartBannerPortrait;
-    } else {
-        self.worstSalesPitchEverView.adSize = kGADAdSizeSmartBannerLandscape;
-    }
-    
-    if (size.height <= 400) {
-        self.worstSalesPitchEverViewHeight.constant = 32;
-    } else if (size.height > 400 && size.height <= 720) {
-        self.worstSalesPitchEverViewHeight.constant = 50;
-    } else if (size.height > 720) {
-        self.worstSalesPitchEverViewHeight.constant = 90;
-    }
-}
-
-- (void)prepareWorstSalesPitchEverView
-{
-#ifdef SCREENSHOTS
-    self.worstSalesPitchEverView.autoloadEnabled = NO;
-#else
-    BOOL isNotPurchased = ![[MCStoreInterface defaultStoreInterface] isProProductPurchased];
-    if (isNotPurchased) {
-        NSParameterAssert(_worstSalesPitchEverView);
-        [[self worstSalesPitchEverView] layoutIfNeeded];
-        [self updateBannerSize:[[UIScreen mainScreen] bounds].size];
-        
-        self.worstSalesPitchEverView.rootViewController = self;
-        self.worstSalesPitchEverView.delegate = self;
-        [[self worstSalesPitchEverView] loadRequest:self.generalAdRequest];
-        self.worstSalesPitchEverView.autoloadEnabled = YES;
-    } else {
-        self.worstSalesPitchEverView.autoloadEnabled = NO;
-    }
-#endif
-}
-
 - (void)openFirstPaymentWithoutAPayer
 {
     [self performSegueWithIdentifier:@"firstPaymentWithoutPayer" sender:self];
@@ -253,20 +203,6 @@
         [[self worstSalesPitchEverView] loadRequest:request];
     }
 }
-
-#pragma mark - GADBannerViewDelegate
-
-- (void)adViewDidReceiveAd:(GADBannerView *)bannerView
-{
-    [self putBannerOnScreen:YES];
-}
-
-- (void)adView:(GADBannerView *)bannerView didFailToReceiveAdWithError:(GADRequestError *)error
-{
-    [self putBannerOffScreen:YES];
-}
-
-#pragma mark - Inherited From super
 
 #pragma mark - UITextFieldDelegate
 
@@ -299,12 +235,27 @@
 
 #pragma mark - MCGenericAdBannerViewController
 
+- (NSString *)adUnitId {
+    return @"ca-app-pub-5354415674074435/1457854707";
+}
+
 #pragma mark - AdEngineDelegate
+
+- (void)adEngine:(MCAdEngine *)adEngine putOnScreenBannerView:(GADBannerView *)bannerView {
+    [self putBannerOnScreen:YES];
+}
+
+- (void)adEngine:(MCAdEngine *)adEngine putOffScreenBannerView:(GADBannerView *)bannerView {
+    if (adEngine) {
+        [self putBannerOffScreen:YES];
+    } else {
+        [self putBannerOffScreen:NO];
+    }
+}
 
 #pragma mark - UIViewController
 
-- (void)viewDidLoad
-{
+- (void)viewDidLoad {
     [super viewDidLoad];
     // Do any additional setup after loading the view.
     
@@ -313,7 +264,6 @@
     // Hide AdBanner
     self.bottomLayoutConstraintToLeftContainerView.priority = UILayoutPriorityDefaultHigh + 1;
     self.bottomLayoutConstraintToRightContainerView.priority = UILayoutPriorityDefaultHigh + 1;
-    [self prepareWorstSalesPitchEverView];
 }
 
 - (void)viewWillAppear:(BOOL)animated
@@ -404,20 +354,6 @@
 }
 
 #pragma mark - UIContentContainer
-
-- (void)viewWillTransitionToSize:(CGSize)size withTransitionCoordinator:(id<UIViewControllerTransitionCoordinator>)coordinator
-{
-    [super viewWillTransitionToSize:size withTransitionCoordinator:coordinator];
-    
-    [coordinator animateAlongsideTransition:^(id<UIViewControllerTransitionCoordinatorContext>  _Nonnull context) {
-        [self putBannerOffScreen:NO];
-        [self updateBannerSize:size];
-    } completion:^(id<UIViewControllerTransitionCoordinatorContext>  _Nonnull context) {
-#ifdef DEBUG
-        NSLog(@"Yes, I'm done.");
-#endif
-    }];
-}
 
 #pragma mark - UIResponder
 

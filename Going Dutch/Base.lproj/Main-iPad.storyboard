@@ -298,6 +298,7 @@
                     </navigationItem>
                     <simulatedNavigationBarMetrics key="simulatedTopBarMetrics" translucent="NO" prompted="NO"/>
                     <connections>
+                        <outlet property="adEngine" destination="MYW-dw-kKg" id="zlO-mJ-6zW"/>
                         <outlet property="bottomLayoutConstraintToLeftContainerView" destination="jLH-9n-glc" id="iY3-9j-FxI"/>
                         <outlet property="bottomLayoutConstraintToRightContainerView" destination="Ks4-BC-Pyi" id="ifF-Xm-Yw4"/>
                         <outlet property="leftTopView" destination="rqj-np-zHP" id="MLi-6R-Qku"/>
@@ -310,6 +311,7 @@
                     </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="en8-e4-seD" userLabel="First Responder" sceneMemberID="firstResponder"/>
+                <customObject id="MYW-dw-kKg" customClass="MCAdEngine"/>
             </objects>
             <point key="canvasLocation" x="1707.8125" y="-73.2421875"/>
         </scene>
@@ -1452,7 +1454,7 @@
                 <navigationController storyboardIdentifier="personDetailNavigationController" automaticallyAdjustsScrollViewInsets="NO" useStoryboardIdentifierAsRestorationIdentifier="YES" id="Eyq-nw-te5" sceneMemberID="viewController">
                     <toolbarItems/>
                     <navigationBar key="navigationBar" contentMode="scaleToFill" restorationIdentifier="personDetailsNavigationBar" id="PyI-c7-8bw">
-                        <rect key="frame" x="0.0" y="0.0" width="356" height="56"/>
+                        <rect key="frame" x="0.0" y="0.0" width="540" height="56"/>
                         <autoresizingMask key="autoresizingMask"/>
                         <color key="barTintColor" red="0.018172375857830048" green="0.098393335938453674" blue="0.30674564838409424" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                         <textAttributes key="titleTextAttributes">
@@ -1518,8 +1520,8 @@
         <image name="iScreen button" width="26" height="26"/>
     </resources>
     <inferredMetricsTieBreakers>
-        <segue reference="pZQ-Y2-0Nm"/>
-        <segue reference="1Uw-eh-0NI"/>
+        <segue reference="eXg-7Q-xwo"/>
+        <segue reference="8Cc-ux-2co"/>
         <segue reference="aJ5-e8-dvs"/>
         <segue reference="fEV-Fb-0pC"/>
     </inferredMetricsTieBreakers>
