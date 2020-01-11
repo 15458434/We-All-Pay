@@ -21,7 +21,16 @@ import UIKit
     }
     
     public func animationController(forDismissed dismissed: UIViewController) -> UIViewControllerAnimatedTransitioning? {
-        return SideMenuDismissAnimationController()
+        let interactiveDismissableNavigationController = dismissed as! SwipeLeftDissmissableNavigationController
+        return SideMenuDismissAnimationController(with: interactiveDismissableNavigationController.dismissInteractionController!)
+    }
+    
+    public func interactionControllerForDismissal(using animator: UIViewControllerAnimatedTransitioning) -> UIViewControllerInteractiveTransitioning? {
+        let existingAnimator = animator as! SideMenuDismissAnimationController
+        guard existingAnimator.interactionController.interactionInProgress else {
+            return nil
+        }
+        return existingAnimator.interactionController
     }
     
     // MARK: NSObject
@@ -81,7 +90,7 @@ import UIKit
     // MARK: UIViewControllerAnimatedTransitioning
     
     public func transitionDuration(using transitionContext: UIViewControllerContextTransitioning?) -> TimeInterval {
-        return 0.25
+        return 0.35
     }
     
     public func animateTransition(using transitionContext: UIViewControllerContextTransitioning) {
@@ -128,11 +137,17 @@ import UIKit
 }
 
 @objcMembers public class SideMenuDismissAnimationController: NSObject, UIViewControllerAnimatedTransitioning {
+    let interactionController: SideMenuDismissInteractionController
+    
+    init(with interactionController: SideMenuDismissInteractionController) {
+        self.interactionController = interactionController
+        super.init()
+    }
     
     // MARK: UIViewControllerAnimatedTransitioning
     
     public func transitionDuration(using transitionContext: UIViewControllerContextTransitioning?) -> TimeInterval {
-        return 0.25
+        return 0.35
     }
     
     public func animateTransition(using transitionContext: UIViewControllerContextTransitioning) {
@@ -145,6 +160,12 @@ import UIKit
         let finalFrame = CGRect(x: -initialFrame.size.width, y: 0, width: initialFrame.width, height: initialFrame.height)
         
         snapshot.frame = initialFrame
+        snapshot.clipsToBounds = false
+        snapshot.layer.shadowOpacity = 0.5
+        snapshot.layer.shadowRadius = 15
+        snapshot.layer.shadowPath = CGPath(rect: snapshot.bounds.insetBy(dx: 0, dy: -15), transform: nil)
+        snapshot.layer.shadowColor = UIColor.black.cgColor
+        
         containerView.addSubview(snapshot)
         fromViewController.view.isHidden = true
         
@@ -159,6 +180,94 @@ import UIKit
             transitionContext.completeTransition(!transitionContext.transitionWasCancelled)
         }
     }
+    
+    // MARK: NSObject
+}
+
+@objc protocol SideMenuDismissInteractionControllerSource {
+    var dismissInteractionController: SideMenuDismissInteractionController? { get }
+}
+
+class SideMenuDismissInteractionController: UIPercentDrivenInteractiveTransition {
+    var interactionInProgress: Bool
+    
+    private var shouldCompleteTransition: Bool
+    private weak var viewController: UIViewController!
+    
+    init(with viewController: UIViewController) {
+        interactionInProgress = false
+        shouldCompleteTransition = false
+        super.init()
+        self.viewController = viewController
+        prepareGestureRecognizer(in: viewController.view)
+    }
+    
+    private func prepareGestureRecognizer(in view: UIView) {
+        let gestureRecognizer = UIPanGestureRecognizer(target: self, action: #selector(handleSwipeGesture(_:)))
+        view.addGestureRecognizer(gestureRecognizer)
+    }
+    
+    private var xTranslationOnBegan: CGFloat?
+    private var expectedXTranslationOnEnd: CGFloat?
+    private var swipeDistance: CGFloat = 200
+    
+    @objc private func handleSwipeGesture(_ sender: UIPanGestureRecognizer) {
+        func update(xTranslationOnBegan: CGFloat?) {
+            if let xTranslationOnBegan = xTranslationOnBegan {
+                self.xTranslationOnBegan = xTranslationOnBegan
+                self.expectedXTranslationOnEnd = xTranslationOnBegan - swipeDistance
+            } else {
+                self.xTranslationOnBegan = nil
+                self.expectedXTranslationOnEnd = nil
+            }
+        }
+        let translation = sender.location(in: sender.view!)
+        var progress = translation.x / swipeDistance
+        progress = 1.0 - CGFloat(fminf(fmaxf(Float(progress), 0.0), 1.0))
+        
+        switch sender.state {
+        case .began:
+            update(xTranslationOnBegan: translation.x)
+            interactionInProgress = true
+            viewController.dismiss(animated: true, completion: nil)
+        case .changed:
+            shouldCompleteTransition = progress > 0.4
+            self.update(progress)
+        case .cancelled:
+            update(xTranslationOnBegan: nil)
+            interactionInProgress = false
+            cancel()
+        case .ended:
+            update(xTranslationOnBegan: nil)
+            interactionInProgress = false
+            if shouldCompleteTransition {
+                finish()
+            } else {
+                cancel()
+            }
+        default:
+            break
+        }
+    }
+}
+
+class SwipeLeftDissmissableNavigationController: UINavigationController, SideMenuDismissInteractionControllerSource {
+    
+    // MARK: SideMenuDismissInteractionControllerSource
+    
+    var dismissInteractionController: SideMenuDismissInteractionController?
+    
+    // MARK: UINavigationController
+    
+    // MARK: UIViewController
+    
+    override func viewDidLoad() {
+        super.viewDidLoad()
+        
+        dismissInteractionController = SideMenuDismissInteractionController(with: self)
+    }
+    
+    // MARK: UIResponder
     
     // MARK: NSObject
 }
