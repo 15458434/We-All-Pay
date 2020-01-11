@@ -19,6 +19,12 @@ class RootViewController: UIViewController {
     
     // MARK: - UIViewController
     
+    override func viewDidLoad() {
+        super.viewDidLoad()
+        
+        AdEngine.presentPrivacyConsentRequestIfNecessary(from: self)
+    }
+    
     override func viewWillAppear(_ animated: Bool) {
         super.viewWillAppear(animated)
         
