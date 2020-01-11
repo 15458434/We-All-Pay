@@ -13,12 +13,12 @@ import FirebaseAnalytics
 class RootViewController: UIViewController {
     // MARK: IBActions
     
-    @IBAction func infoButtonTapped(_ sender: AnyObject)
-    {
+    @IBAction func infoButtonTapped(_ sender: AnyObject) {
         Analytics.logEvent("Open Info Screen", parameters: nil)
     }
     
-    // MARK: Inherited From Super
+    // MARK: - UIViewController
+    
     override func viewWillAppear(_ animated: Bool) {
         super.viewWillAppear(animated)
         
@@ -30,8 +30,7 @@ class RootViewController: UIViewController {
         return .lightContent
     }
     
-    // MARK: Navigation
-    override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
-        
-    }
+    // MARK: - UIResponder
+    
+    // MARK: - NSObject
 }
