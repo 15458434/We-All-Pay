@@ -23,7 +23,6 @@
 @interface MCSharedBillViewController_iPad () <GADBannerViewDelegate>
 
 @property (nonatomic, readonly) GADRequest *generalAdRequest;
-@property (weak, nonatomic) IBOutlet GADBannerView *worstSalesPitchEverView;
 @property (weak, nonatomic) IBOutlet NSLayoutConstraint *worstSalesPitchEverViewHeight;
 @property (weak, nonatomic) IBOutlet NSLayoutConstraint *bottomLayoutConstraintToLeftContainerView;
 @property (weak, nonatomic) IBOutlet NSLayoutConstraint *bottomLayoutConstraintToRightContainerView;
@@ -269,6 +268,41 @@
 
 #pragma mark - Inherited From super
 
+#pragma mark - UITextFieldDelegate
+
+- (BOOL)textFieldShouldBeginEditing:(UITextField *)textField
+{
+    if (textField == _tripNameField) {
+        return YES;
+    } else {
+#ifdef DEBUG
+        NSLog(@"There is only one textField in this ViewController.");
+#endif
+        return NO;
+    }
+}
+
+- (void)textFieldDidBeginEditing:(UITextField *)textField
+{
+    if (textField == _tripNameField) {
+        [FIRAnalytics logEventWithName:@"Begin edit Event name" parameters:nil];
+    }
+}
+
+- (void)textFieldDidEndEditing:(UITextField *)textField
+{
+    if (textField == _tripNameField) {
+        [FIRAnalytics logEventWithName:@"End edit Event name" parameters:nil];
+        [_tonightsBill setTripName:[_tripNameField text]];
+    }
+}
+
+#pragma mark - MCGenericAdBannerViewController
+
+#pragma mark - AdEngineDelegate
+
+#pragma mark - UIViewController
+
 - (void)viewDidLoad
 {
     [super viewDidLoad];
@@ -322,51 +356,6 @@
     }
 }
 
-- (void)viewWillTransitionToSize:(CGSize)size withTransitionCoordinator:(id<UIViewControllerTransitionCoordinator>)coordinator
-{
-    [super viewWillTransitionToSize:size withTransitionCoordinator:coordinator];
-    
-    [coordinator animateAlongsideTransition:^(id<UIViewControllerTransitionCoordinatorContext>  _Nonnull context) {
-        [self putBannerOffScreen:NO];
-        [self updateBannerSize:size];
-    } completion:^(id<UIViewControllerTransitionCoordinatorContext>  _Nonnull context) {
-#ifdef DEBUG
-        NSLog(@"Yes, I'm done.");
-#endif
-    }];
-}
-
-#pragma mark - UITextFieldDelegate
-
-- (BOOL)textFieldShouldBeginEditing:(UITextField *)textField
-{
-    if (textField == _tripNameField) {
-        return YES;
-    } else {
-#ifdef DEBUG
-        NSLog(@"There is only one textField in this ViewController.");
-#endif
-        return NO;
-    }
-}
-
-- (void)textFieldDidBeginEditing:(UITextField *)textField
-{
-    if (textField == _tripNameField) {
-        [FIRAnalytics logEventWithName:@"Begin edit Event name" parameters:nil];
-    }
-}
-
-- (void)textFieldDidEndEditing:(UITextField *)textField
-{
-    if (textField == _tripNameField) {
-        [FIRAnalytics logEventWithName:@"End edit Event name" parameters:nil];
-        [_tonightsBill setTripName:[_tripNameField text]];
-    }
-}
-
-#pragma mark - Navigation
- 
 // In a storyboard-based application, you will often want to do a little preparation before navigation
 - (void)prepareForSegue:(UIStoryboardSegue *)segue sender:(id)sender
 {
@@ -413,5 +402,25 @@
         }
     }
 }
+
+#pragma mark - UIContentContainer
+
+- (void)viewWillTransitionToSize:(CGSize)size withTransitionCoordinator:(id<UIViewControllerTransitionCoordinator>)coordinator
+{
+    [super viewWillTransitionToSize:size withTransitionCoordinator:coordinator];
+    
+    [coordinator animateAlongsideTransition:^(id<UIViewControllerTransitionCoordinatorContext>  _Nonnull context) {
+        [self putBannerOffScreen:NO];
+        [self updateBannerSize:size];
+    } completion:^(id<UIViewControllerTransitionCoordinatorContext>  _Nonnull context) {
+#ifdef DEBUG
+        NSLog(@"Yes, I'm done.");
+#endif
+    }];
+}
+
+#pragma mark - UIResponder
+
+#pragma mark - NSObject
 
 @end
