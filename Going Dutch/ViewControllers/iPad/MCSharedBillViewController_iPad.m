@@ -22,7 +22,6 @@
 
 @interface MCSharedBillViewController_iPad ()
 
-@property (nonatomic, readonly) GADRequest *generalAdRequest;
 @property (weak, nonatomic) IBOutlet NSLayoutConstraint *worstSalesPitchEverViewHeight;
 @property (weak, nonatomic) IBOutlet NSLayoutConstraint *bottomLayoutConstraintToLeftContainerView;
 @property (weak, nonatomic) IBOutlet NSLayoutConstraint *bottomLayoutConstraintToRightContainerView;
@@ -187,20 +186,18 @@
 
 #pragma mark - Notifications
 
-- (void)applyProVersion:(NSNotification *)notification
-{
+- (void)applyProVersion:(NSNotification *)notification {
+    __weak typeof(self) weakSelf = self;
     [[NSOperationQueue mainQueue] addOperationWithBlock:^{
-        [self putBannerOffScreen:YES];
-        self.worstSalesPitchEverView.autoloadEnabled = NO;
+        [weakSelf adEngine:weakSelf.adEngine putOffScreenBannerView:self.worstSalesPitchEverView];
+        weakSelf.worstSalesPitchEverView.autoloadEnabled = NO;
     }];
 }
 
-- (void)applicationWillEnterForegroundHandler:(NSNotification *) notication
-{
+- (void)applicationWillEnterForegroundHandler:(NSNotification *) notication {
     BOOL isNotPurchased = ![[MCStoreInterface defaultStoreInterface] isProProductPurchased];
     if (isNotPurchased) {
-        GADRequest *request = [self generalAdRequest];
-        [[self worstSalesPitchEverView] loadRequest:request];
+        [self.adEngine prepareAdBanner:self.worstSalesPitchEverView withAdUnitId:self.adUnitId andViewController:self];
     }
 }
 

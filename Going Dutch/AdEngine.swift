@@ -75,6 +75,14 @@ import GoogleMobileAds
 //            GADMInMobiConsent.updateGDPRConsent(consentDictionary)
 //        }
         
+        guard AdEngine.isEnabled else {
+            return
+        }
+        
+        guard !MCStoreInterface.defaultStoreInterface.isProProductPurchased else {
+            return
+        }
+        
         PACConsentInformation.sharedInstance.debugGeography = .EEA
         PACConsentInformation.sharedInstance.debugIdentifiers = ["00000000-0000-0000-0000-000000000000", "E0C4F2B0-1AD9-4FEE-B467-7DE63D5E8939"]
         PACConsentInformation.sharedInstance.requestConsentInfoUpdate(forPublisherIdentifiers: ["pub-5354415674074435"]) { (error) in
