@@ -307,6 +307,8 @@ typedef NS_ENUM(BOOL, MCTonightsBillStatus) {
     if (self.userActivity) {
         [self.userActivity becomeCurrent];
     }
+    
+    [MCAdEngine presentPrivacyConsentRequestIfNecessaryFromViewController:self];
 }
 
 - (void)prepareForSegue:(UIStoryboardSegue *)segue sender:(id)sender {

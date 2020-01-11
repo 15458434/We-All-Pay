@@ -19,13 +19,10 @@
 
 #import "We_all_pay-Swift.h"
 
-@interface MCSharedBillMainViewController () <GADBannerViewDelegate>
-
+@interface MCSharedBillMainViewController ()
 
 @property (strong, nonatomic) MCSharedBillPageViewController *pageViewController;
 
-@property (nonatomic, readonly) GADRequest *generalAdRequest;
-@property (weak, nonatomic) IBOutlet GADBannerView *worstSalesPitchEverView;
 @property (weak, nonatomic) IBOutlet NSLayoutConstraint *worstSalesPitchEverViewWidth;
 @property (weak, nonatomic) IBOutlet NSLayoutConstraint *worstSalesPitchEverViewHeight;
 @property (weak, nonatomic) IBOutlet NSLayoutConstraint *bottomLayoutContraintAdBanner;
@@ -56,11 +53,6 @@
 }
 
 #pragma mark - private functions
-
-- (GADRequest *)generalAdRequest {
-    GADRequest *request = [GADRequest request];
-    return request;
-}
 
 - (void)putBannerOnScreen:(BOOL)animate {
     BOOL isNotPurchased = ![[MCStoreInterface defaultStoreInterface] isProProductPurchased];
@@ -104,56 +96,34 @@
     }
 }
 
-- (void)updateBannerSize:(CGSize)size {
-    if (size.height > size.width) {
-        self.worstSalesPitchEverView.adSize = kGADAdSizeSmartBannerPortrait;
-    } else {
-        self.worstSalesPitchEverView.adSize = kGADAdSizeSmartBannerLandscape;
-    }
-    
-    if (size.height <= 400) {
-        self.worstSalesPitchEverViewHeight.constant = 32;
-    } else if (size.height > 400 && size.height <= 720) {
-        self.worstSalesPitchEverViewHeight.constant = 50;
-    } else if (size.height > 720) {
-        self.worstSalesPitchEverViewHeight.constant = 90;
-    }
+#pragma mark - AdEngineDelegate
+
+- (void)adEngine:(MCAdEngine *)adEngine putOnScreenBannerView:(GADBannerView *)bannerView {
+    [self putBannerOnScreen:YES];
 }
 
-- (void)prepareWorstSalesPitchEverView {
-#ifdef SCREENSHOTS
-    self.worstSalesPitchEverView.autoloadEnabled = NO;
-#else
-    BOOL isNotPurchased = ![[MCStoreInterface defaultStoreInterface] isProProductPurchased];
-    if (isNotPurchased) {
-        NSParameterAssert(_worstSalesPitchEverView);
-        [[self worstSalesPitchEverView] layoutIfNeeded];
-        [self updateBannerSize:[[UIScreen mainScreen] bounds].size];
-        
-        self.worstSalesPitchEverView.rootViewController = self;
-        self.worstSalesPitchEverView.delegate = self;
-        [[self worstSalesPitchEverView] loadRequest:self.generalAdRequest];
-        self.worstSalesPitchEverView.autoloadEnabled = YES;
+- (void)adEngine:(MCAdEngine *)adEngine putOffScreenBannerView:(GADBannerView *)bannerView {
+    if (adEngine) {
+        [self putBannerOffScreen:YES];
     } else {
-        self.worstSalesPitchEverView.autoloadEnabled = NO;
+        [self putBannerOnScreen:NO];
     }
-#endif
 }
 
 #pragma mark - Notification Handlers
 
 - (void)applyProVersion:(NSNotification *)notification {
+    __weak typeof(self) weakSelf = self;
     [[NSOperationQueue mainQueue] addOperationWithBlock:^{
-        [self putBannerOffScreen:YES];
-        self.worstSalesPitchEverView.autoloadEnabled = NO;
+        [weakSelf adEngine:weakSelf.adEngine putOffScreenBannerView:self.worstSalesPitchEverView];
+        weakSelf.worstSalesPitchEverView.autoloadEnabled = NO;
     }];
 }
 
 - (void)applicationWillEnterForegroundHandler:(NSNotification *) notication {
     BOOL isNotPurchased = ![[MCStoreInterface defaultStoreInterface] isProProductPurchased];
     if (isNotPurchased) {
-        GADRequest *request = [self generalAdRequest];
-        [[self worstSalesPitchEverView] loadRequest:request];
+        [self.adEngine prepareAdBanner:self.worstSalesPitchEverView withAdUnitId:self.adUnitId andViewController:self];
     }
 }
 
@@ -168,40 +138,14 @@
     }
 }
 
-#pragma mark - GADBannerViewDelegate
-
-- (void)adViewDidReceiveAd:(GADBannerView *)bannerView {
-#ifdef DEBUG
-    NSLog(@"Yes, I got something.");
-#endif
-    [self putBannerOnScreen:YES];
-}
-
-- (void)adView:(GADBannerView *)bannerView didFailToReceiveAdWithError:(GADRequestError *)error {
-#ifdef DEBUG
-    NSLog(@"Oh no, I didn't get anything, because %@", error);
-#endif
-    [self putBannerOffScreen:YES];
-}
-
-- (void)adViewWillPresentScreen:(GADBannerView *)bannerView {
-    [FIRAnalytics logEventWithName:@"Press AdBanner" parameters:nil];
-}
-
-- (void)adViewWillDismissScreen:(GADBannerView *)bannerView {
-    [FIRAnalytics logEventWithName:@"Dismiss full screen ad" parameters:nil];
-}
-
-- (void)adViewWillLeaveApplication:(GADBannerView *)bannerView {
-    [FIRAnalytics logEventWithName:@"Take me to the product" parameters:nil];
-}
-
 #pragma mark - Inherited from super
 
+- (NSString *)adUnitId {
+    return @"ca-app-pub-5354415674074435/1457854707";
+}
+
 - (void)viewDidLoad {
-#ifdef DEBUG
-    NSLog(@"%@ viewDidLoad", self);
-#endif
+    MCAdEngine.isEnabled = !MCStoreInterface.defaultStoreInterface.isProProductPurchased;
     [super viewDidLoad];
     // Do any additional setup after loading the view.
     [self.navigationController setToolbarHidden:YES animated:YES];
@@ -221,7 +165,6 @@
     _pageViewController.tonightsBill = _tonightsBill;
     
     self.bottomLayoutCustomContainer.priority = UILayoutPriorityDefaultHigh + 1;
-    [self prepareWorstSalesPitchEverView];
 }
 
 - (void)viewWillAppear:(BOOL)animated {
@@ -256,30 +199,14 @@
     }
 }
 
-- (void)viewWillTransitionToSize:(CGSize)size withTransitionCoordinator:(id<UIViewControllerTransitionCoordinator>)coordinator {
-    [super viewWillTransitionToSize:size withTransitionCoordinator:coordinator];
-    
-    [coordinator animateAlongsideTransition:^(id<UIViewControllerTransitionCoordinatorContext>  _Nonnull context) {
-        [self putBannerOffScreen:NO];
-        [self updateBannerSize:size];
-    } completion:^(id<UIViewControllerTransitionCoordinatorContext>  _Nonnull context) {
-    }];
-}
-
--(void)dealloc {
+- (void)dealloc {
     [[NSNotificationCenter defaultCenter] removeObserver:self];
 }
 
 #pragma mark - Navigation
 
 // In a storyboard-based application, you will often want to do a little preparation before navigation
-- (void)prepareForSegue:(UIStoryboardSegue *)segue sender:(id)sender {
-#ifdef DEBUG
-    NSLog(@"prepareForSegue: %@", [segue identifier]);
-#endif
-    // Get the new view controller using [segue destinationViewController].
-    // Pass the selected object to the new view controller.
-    
+- (void)prepareForSegue:(UIStoryboardSegue *)segue sender:(id)sender {    
     if ([[segue identifier] isEqualToString:@"pageViewController"]) {
         _pageViewController = (MCSharedBillPageViewController *)[segue destinationViewController];
         _pageViewController.mainViewController = self;

@@ -7,14 +7,15 @@
 //
 
 @import UIKit;
-@import iAd;
+
+#import "MCGenericAdBannerViewController.h"
 
 #import "MCTonightsBillTransfer.h"
 #import "MCThisPaymentProtocol.h"
 
 @class MCSharedBill;
 
-@interface MCSharedBillViewController_iPad : UIViewController <MCTonightsBillTransfer, UITextFieldDelegate>
+@interface MCSharedBillViewController_iPad : MCGenericAdBannerViewController <MCTonightsBillTransfer, UITextFieldDelegate>
 
 @property (strong, nonatomic) MCSharedBill *tonightsBill;
 @property (strong, nonatomic) MCSharedBill *writableTonightsBill;

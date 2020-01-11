@@ -7,6 +7,7 @@
 //
 
 @import UIKit;
+#import "MCGenericAdBannerViewController.h"
 
 #import "MCTonightsBillTransfer.h"
 #import "MCCurrentViewDelegate.h"
@@ -16,7 +17,7 @@
 
 @class MCSharedBill;
 
-@interface MCSharedBillMainViewController : UIViewController <MCTonightsBillTransfer, MCCurrentViewDelegate, MCPathComponentsToOpenProtocol>
+@interface MCSharedBillMainViewController : MCGenericAdBannerViewController <MCTonightsBillTransfer, MCCurrentViewDelegate, MCPathComponentsToOpenProtocol>
 
 @property (nonatomic) MCSharedBillViewSelector currentView;
 @property (strong, nonatomic) MCSharedBill *tonightsBill;
