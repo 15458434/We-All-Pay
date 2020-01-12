@@ -50,6 +50,9 @@ PODS:
   - GoogleMobileAdsMediationFacebook (5.6.0.0):
     - FBAudienceNetwork (= 5.6.0)
     - Google-Mobile-Ads-SDK (>= 7.51.0)
+  - GoogleMobileAdsMediationInMobi (7.4.0.0):
+    - Google-Mobile-Ads-SDK (>= 7.50.0)
+    - InMobiSDK (= 7.4.0)
   - GoogleUtilities/AppDelegateSwizzler (6.4.0):
     - GoogleUtilities/Environment
     - GoogleUtilities/Logger
@@ -68,6 +71,7 @@ PODS:
     - GoogleUtilities/Logger
   - GoogleUtilities/UserDefaults (6.4.0):
     - GoogleUtilities/Logger
+  - InMobiSDK (7.4.0)
   - nanopb (0.3.9011):
     - nanopb/decode (= 0.3.9011)
     - nanopb/encode (= 0.3.9011)
@@ -79,6 +83,7 @@ DEPENDENCIES:
   - Firebase/AdMob
   - Firebase/Core
   - GoogleMobileAdsMediationFacebook
+  - GoogleMobileAdsMediationInMobi
   - PersonalizedAdConsent
 
 SPEC REPOS:
@@ -96,7 +101,9 @@ SPEC REPOS:
     - GoogleDataTransport
     - GoogleDataTransportCCTSupport
     - GoogleMobileAdsMediationFacebook
+    - GoogleMobileAdsMediationInMobi
     - GoogleUtilities
+    - InMobiSDK
     - nanopb
     - PersonalizedAdConsent
 
@@ -114,10 +121,12 @@ SPEC CHECKSUMS:
   GoogleDataTransport: 8e9b210c97d55fbff306cc5468ff91b9cb32dcf5
   GoogleDataTransportCCTSupport: 202d7cdf9c4a7d81a2bb7f7e7e1ba6faa421b1f2
   GoogleMobileAdsMediationFacebook: 2306b9822775e4ddb50c29fc758d6b45efcf6a72
+  GoogleMobileAdsMediationInMobi: 49d5af05829c4596e6442a4257360bdd9568eb13
   GoogleUtilities: 29bd0d8f850efbd28cff6d99e8b7da1f8d236bcf
+  InMobiSDK: 546ebed22609efcb42489f6cee12f6eda2a68c74
   nanopb: 18003b5e52dab79db540fe93fe9579f399bd1ccd
   PersonalizedAdConsent: 4b87320b7a0f22576bec530ae3b7adba88a24c78
 
-PODFILE CHECKSUM: 7b32605643ef667fda6510454c9e8ca7fc71284f
+PODFILE CHECKSUM: d005bc9202f45158689a86a1b868872eda51fc4c
 
 COCOAPODS: 1.8.4
