@@ -1454,7 +1454,7 @@
                 <navigationController storyboardIdentifier="personDetailNavigationController" automaticallyAdjustsScrollViewInsets="NO" useStoryboardIdentifierAsRestorationIdentifier="YES" id="Eyq-nw-te5" sceneMemberID="viewController">
                     <toolbarItems/>
                     <navigationBar key="navigationBar" contentMode="scaleToFill" restorationIdentifier="personDetailsNavigationBar" id="PyI-c7-8bw">
-                        <rect key="frame" x="0.0" y="0.0" width="540" height="56"/>
+                        <rect key="frame" x="0.0" y="0.0" width="356" height="56"/>
                         <autoresizingMask key="autoresizingMask"/>
                         <color key="barTintColor" red="0.018172375857830048" green="0.098393335938453674" blue="0.30674564838409424" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                         <textAttributes key="titleTextAttributes">
@@ -1521,7 +1521,7 @@
     </resources>
     <inferredMetricsTieBreakers>
         <segue reference="eXg-7Q-xwo"/>
-        <segue reference="8Cc-ux-2co"/>
+        <segue reference="1Uw-eh-0NI"/>
         <segue reference="aJ5-e8-dvs"/>
         <segue reference="fEV-Fb-0pC"/>
     </inferredMetricsTieBreakers>

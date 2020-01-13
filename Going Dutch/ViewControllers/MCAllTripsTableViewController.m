@@ -279,8 +279,11 @@ typedef NS_ENUM(BOOL, MCTonightsBillStatus) {
     [self startRespondingToStoreChangeNotifications];
     
     [self prepareUserActivity];
+    
+#ifdef ADTEST
+    [MCAdEngine presentAdTestSuiteFromPresentingViewController:self];
+#endif
 }
-
 
 - (void)viewWillAppear:(BOOL)animated {
     [super viewWillAppear:animated];

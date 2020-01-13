@@ -11,6 +11,7 @@ import AdSupport
 
 import PersonalizedAdConsent
 import GoogleMobileAds
+import InMobiAdapter
 
 @objc(MCAdEngineDelegate) protocol AdEngineDelegate {
     /// Signals the ad banner is ready to be put on the screen.
@@ -48,32 +49,32 @@ import GoogleMobileAds
     }
     
     @objc(presentPrivacyConsentRequestIfNecessaryFromViewController:) class func presentPrivacyConsentRequestIfNecessary(from viewController: UIViewController) {
-//        func gdprConsentInMobi(economicArea: AdEngine.EconomicArea = .unknown, consentStatus: PACConsentStatus) {
-//            var economicAreaString: String {
-//                switch economicArea {
-//                case .unknown:
-//                    return "0"
-//                case .eea:
-//                    return "1"
-//                }
-//            }
-//            var consentString: String {
-//                switch consentStatus {
-//                case .personalized:
-//                    return "true"
-//                default:
-//                    return "false"
-//                }
-//            }
-//
-//            if let _ = GADMInMobiConsent.consent {
-//                // Nothing todo.
-//                return
-//            }
-//
-//            let consentDictionary: [String: String] = ["gdpr": economicAreaString, IM_GDPR_CONSENT_AVAILABLE: consentString]
-//            GADMInMobiConsent.updateGDPRConsent(consentDictionary)
-//        }
+        func gdprConsentInMobi(economicArea: AdEngine.EconomicArea = .unknown, consentStatus: PACConsentStatus) {
+            var economicAreaString: String {
+                switch economicArea {
+                case .unknown:
+                    return "0"
+                case .eea:
+                    return "1"
+                }
+            }
+            var consentString: String {
+                switch consentStatus {
+                case .personalized:
+                    return "true"
+                default:
+                    return "false"
+                }
+            }
+
+            if let _ = GADMInMobiConsent.consent {
+                // Nothing todo.
+                return
+            }
+
+            let consentDictionary: [String: String] = ["gdpr": economicAreaString, IM_GDPR_CONSENT_AVAILABLE: consentString]
+            GADMInMobiConsent.updateGDPRConsent(consentDictionary)
+        }
         
         guard AdEngine.isEnabled else {
             return
@@ -98,10 +99,10 @@ import GoogleMobileAds
                 let consentStatus = PACConsentStatus(rawValue: userDefaults.integer(forKey: AdEngine.kAdBannerConsent))!
                 switch consentStatus {
                 case .personalized:
-//                    gdprConsentInMobi(economicArea: .eea, consentStatus: consentStatus)
+                    gdprConsentInMobi(economicArea: .eea, consentStatus: consentStatus)
                     ()
                 case .nonPersonalized:
-//                    gdprConsentInMobi(economicArea: .eea, consentStatus: consentStatus)
+                    gdprConsentInMobi(economicArea: .eea, consentStatus: consentStatus)
                     ()
                 default:
                     guard let privacyUrl = URL(string: "https://www.iubenda.com/privacy-policy/7876418"),
@@ -122,7 +123,7 @@ import GoogleMobileAds
                         form.present(from: viewController) { (error, success) in
                             let consentStatus = PACConsentInformation.sharedInstance.consentStatus
                             UserDefaults.standard.set(consentStatus.rawValue, forKey: AdEngine.kAdBannerConsent)
-//                            gdprConsentInMobi(economicArea: .eea, consentStatus: consentStatus)
+                            gdprConsentInMobi(economicArea: .eea, consentStatus: consentStatus)
                         }
                     }
                 }
@@ -212,3 +213,16 @@ import GoogleMobileAds
     
     // MARK: NSObject
 }
+
+#if ADTEST
+import GoogleMobileAdsMediationTestSuite
+
+extension AdEngine {
+    @objc(presentAdTestSuiteFromPresentingViewController:) class func presentAdTestSuite(from presentingViewController: UIViewController?) {
+        guard let presentingViewController = presentingViewController else {
+            return
+        }
+        GoogleMobileAdsMediationTestSuite.present(on:presentingViewController, delegate:nil)
+    }
+}
+#endif
