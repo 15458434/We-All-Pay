@@ -213,3 +213,16 @@ import InMobiAdapter
     
     // MARK: NSObject
 }
+
+#if ADTEST
+import GoogleMobileAdsMediationTestSuite
+
+extension AdEngine {
+    @objc(presentAdTestSuiteFromPresentingViewController:) class func presentAdTestSuite(from presentingViewController: UIViewController?) {
+        guard let presentingViewController = presentingViewController else {
+            return
+        }
+        GoogleMobileAdsMediationTestSuite.present(on:presentingViewController, delegate:nil)
+    }
+}
+#endif

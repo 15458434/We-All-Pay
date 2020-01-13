@@ -53,6 +53,12 @@ PODS:
   - GoogleMobileAdsMediationInMobi (7.4.0.0):
     - Google-Mobile-Ads-SDK (>= 7.50.0)
     - InMobiSDK (= 7.4.0)
+  - GoogleMobileAdsMediationTestSuite (1.1.1):
+    - Google-Mobile-Ads-SDK (>= 7.47.0)
+    - MaterialComponents/Cards (~> 94.0)
+    - MaterialComponents/Dialogs (~> 94.0)
+    - "MaterialComponents/Dialogs+DialogThemer (~> 94.0)"
+    - MaterialComponents/Tabs (~> 94.0)
   - GoogleUtilities/AppDelegateSwizzler (6.4.0):
     - GoogleUtilities/Environment
     - GoogleUtilities/Logger
@@ -72,6 +78,122 @@ PODS:
   - GoogleUtilities/UserDefaults (6.4.0):
     - GoogleUtilities/Logger
   - InMobiSDK (7.4.0)
+  - MaterialComponents/AnimationTiming (94.5.0)
+  - MaterialComponents/Buttons (94.5.0):
+    - MaterialComponents/Elevation
+    - MaterialComponents/Ink
+    - MaterialComponents/private/Math
+    - MaterialComponents/Ripple
+    - MaterialComponents/ShadowElevations
+    - MaterialComponents/ShadowLayer
+    - MaterialComponents/Shapes
+    - MaterialComponents/Typography
+    - MDFInternationalization
+    - MDFTextAccessibility
+  - "MaterialComponents/Buttons+ButtonThemer (94.5.0)":
+    - MaterialComponents/Buttons
+    - "MaterialComponents/Buttons+ColorThemer"
+    - "MaterialComponents/Buttons+ShapeThemer"
+    - "MaterialComponents/Buttons+TypographyThemer"
+    - MaterialComponents/Palettes
+  - "MaterialComponents/Buttons+ColorThemer (94.5.0)":
+    - MaterialComponents/Buttons
+    - MaterialComponents/schemes/Color
+  - "MaterialComponents/Buttons+ShapeThemer (94.5.0)":
+    - MaterialComponents/Buttons
+    - MaterialComponents/schemes/Shape
+  - "MaterialComponents/Buttons+TypographyThemer (94.5.0)":
+    - MaterialComponents/Buttons
+    - MaterialComponents/schemes/Typography
+  - MaterialComponents/Cards (94.5.0):
+    - MaterialComponents/Elevation
+    - MaterialComponents/Ink
+    - MaterialComponents/private/Icons/ic_check_circle
+    - MaterialComponents/private/Math
+    - MaterialComponents/Ripple
+    - MaterialComponents/ShadowLayer
+    - MaterialComponents/Shapes
+  - MaterialComponents/Dialogs (94.5.0):
+    - MaterialComponents/Buttons
+    - MaterialComponents/Elevation
+    - MaterialComponents/private/KeyboardWatcher
+    - MaterialComponents/private/Math
+    - MaterialComponents/ShadowElevations
+    - MaterialComponents/ShadowLayer
+    - MaterialComponents/Typography
+    - MDFInternationalization
+  - "MaterialComponents/Dialogs+ColorThemer (94.5.0)":
+    - "MaterialComponents/Buttons+ColorThemer"
+    - MaterialComponents/Dialogs
+    - MaterialComponents/Themes
+  - "MaterialComponents/Dialogs+DialogThemer (94.5.0)":
+    - "MaterialComponents/Buttons+ButtonThemer"
+    - MaterialComponents/Dialogs
+    - "MaterialComponents/Dialogs+ColorThemer"
+    - "MaterialComponents/Dialogs+TypographyThemer"
+  - "MaterialComponents/Dialogs+TypographyThemer (94.5.0)":
+    - "MaterialComponents/Buttons+TypographyThemer"
+    - MaterialComponents/Dialogs
+    - MaterialComponents/schemes/Typography
+  - MaterialComponents/Elevation (94.5.0):
+    - MaterialComponents/private/Color
+    - MaterialComponents/private/Math
+  - MaterialComponents/Ink (94.5.0):
+    - MaterialComponents/private/Color
+    - MaterialComponents/private/Math
+  - MaterialComponents/Palettes (94.5.0)
+  - MaterialComponents/private/Application (94.5.0)
+  - MaterialComponents/private/Color (94.5.0)
+  - MaterialComponents/private/Icons/Base (94.5.0)
+  - MaterialComponents/private/Icons/ic_check_circle (94.5.0):
+    - MaterialComponents/private/Icons/Base
+  - MaterialComponents/private/KeyboardWatcher (94.5.0):
+    - MaterialComponents/private/Application
+  - MaterialComponents/private/Math (94.5.0)
+  - MaterialComponents/Ripple (94.5.0):
+    - MaterialComponents/AnimationTiming
+    - MaterialComponents/private/Color
+    - MaterialComponents/private/Math
+  - MaterialComponents/schemes/Color (94.5.0):
+    - MaterialComponents/private/Color
+  - MaterialComponents/schemes/Shape (94.5.0):
+    - MaterialComponents/ShapeLibrary
+    - MaterialComponents/Shapes
+  - MaterialComponents/schemes/Typography (94.5.0):
+    - "MaterialComponents/schemes/Typography+BasicFontScheme"
+    - "MaterialComponents/schemes/Typography+Scheming"
+    - MaterialComponents/Typography
+  - "MaterialComponents/schemes/Typography+BasicFontScheme (94.5.0)"
+  - "MaterialComponents/schemes/Typography+Scheming (94.5.0)"
+  - MaterialComponents/ShadowElevations (94.5.0)
+  - MaterialComponents/ShadowLayer (94.5.0):
+    - MaterialComponents/ShadowElevations
+  - MaterialComponents/ShapeLibrary (94.5.0):
+    - MaterialComponents/private/Math
+    - MaterialComponents/Shapes
+  - MaterialComponents/Shapes (94.5.0):
+    - MaterialComponents/private/Color
+    - MaterialComponents/private/Math
+    - MaterialComponents/ShadowLayer
+  - MaterialComponents/Tabs (94.5.0):
+    - MaterialComponents/AnimationTiming
+    - MaterialComponents/Elevation
+    - MaterialComponents/Ink
+    - MaterialComponents/Palettes
+    - MaterialComponents/private/Math
+    - MaterialComponents/Ripple
+    - MaterialComponents/ShadowElevations
+    - MaterialComponents/ShadowLayer
+    - MaterialComponents/Typography
+    - MDFInternationalization
+  - MaterialComponents/Themes (94.5.0):
+    - MaterialComponents/schemes/Color
+    - MaterialComponents/schemes/Typography
+  - MaterialComponents/Typography (94.5.0):
+    - MaterialComponents/private/Application
+    - MaterialComponents/private/Math
+  - MDFInternationalization (2.0.0)
+  - MDFTextAccessibility (2.0.0)
   - nanopb (0.3.9011):
     - nanopb/decode (= 0.3.9011)
     - nanopb/encode (= 0.3.9011)
@@ -84,6 +206,7 @@ DEPENDENCIES:
   - Firebase/Core
   - GoogleMobileAdsMediationFacebook
   - GoogleMobileAdsMediationInMobi
+  - GoogleMobileAdsMediationTestSuite
   - PersonalizedAdConsent
 
 SPEC REPOS:
@@ -102,8 +225,12 @@ SPEC REPOS:
     - GoogleDataTransportCCTSupport
     - GoogleMobileAdsMediationFacebook
     - GoogleMobileAdsMediationInMobi
+    - GoogleMobileAdsMediationTestSuite
     - GoogleUtilities
     - InMobiSDK
+    - MaterialComponents
+    - MDFInternationalization
+    - MDFTextAccessibility
     - nanopb
     - PersonalizedAdConsent
 
@@ -122,11 +249,15 @@ SPEC CHECKSUMS:
   GoogleDataTransportCCTSupport: 202d7cdf9c4a7d81a2bb7f7e7e1ba6faa421b1f2
   GoogleMobileAdsMediationFacebook: 2306b9822775e4ddb50c29fc758d6b45efcf6a72
   GoogleMobileAdsMediationInMobi: 49d5af05829c4596e6442a4257360bdd9568eb13
+  GoogleMobileAdsMediationTestSuite: 188825108a95af95560c355de70bbaa3b4fd1b5c
   GoogleUtilities: 29bd0d8f850efbd28cff6d99e8b7da1f8d236bcf
   InMobiSDK: 546ebed22609efcb42489f6cee12f6eda2a68c74
+  MaterialComponents: 36435454351719ef5c9bf1192a25fdcd2191c712
+  MDFInternationalization: 010097556d6b09d2c4ea38e0820ea6d37be6a314
+  MDFTextAccessibility: 85c09a1bd9c321f494348e632a25063bcda35a53
   nanopb: 18003b5e52dab79db540fe93fe9579f399bd1ccd
   PersonalizedAdConsent: 4b87320b7a0f22576bec530ae3b7adba88a24c78
 
-PODFILE CHECKSUM: d005bc9202f45158689a86a1b868872eda51fc4c
+PODFILE CHECKSUM: 32365f6be4280ff803fdd7a7516c1efa6d62012b
 
 COCOAPODS: 1.8.4
