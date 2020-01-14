@@ -833,8 +833,8 @@
 				38572AF3169D438E00969C62 /* ViewControllers */,
 				3899D3F5194F43C200893323 /* In-App Purchase */,
 				38FE5A062346943400BBA722 /* Miscellaneous */,
-				38572AE5169D437B00969C62 /* MCAppDelegate.h */,
 				38B4E82C23CDFC840034CA95 /* Engines */,
+				38572AE5169D437B00969C62 /* MCAppDelegate.h */,
 				38572AE6169D437B00969C62 /* MCAppDelegate.m */,
 				3889497F211C2DDE00BDF9CD /* CoreDataSaveHandlerWhenEnteringBackground.swift */,
 				38D6A3E51C73DF2600968BB2 /* RateMeControllerExtension.swift */,
@@ -1044,14 +1044,14 @@
 			name = Engines;
 			sourceTree = "<group>";
 		};
-		38B4E82F23CDFD6E0034CA95 /* GeneericAdBannerViewController */ = {
+		38B4E82F23CDFD6E0034CA95 /* GenericAdBannerViewController */ = {
 			isa = PBXGroup;
 			children = (
 				38C1956123C8C575006255AE /* MCGenericAdBannerViewController.h */,
 				38C1956223C8C575006255AE /* MCGenericAdBannerViewController.m */,
 				38B4E83023CDFD930034CA95 /* AdBannerEngine.swift */,
 			);
-			name = GeneericAdBannerViewController;
+			name = GenericAdBannerViewController;
 			sourceTree = "<group>";
 		};
 		38B6E0EE1A28BBAB009E69D7 /* Who is paying next */ = {
@@ -1079,7 +1079,7 @@
 		38C1956423C8C58A006255AE /* GenericViewController */ = {
 			isa = PBXGroup;
 			children = (
-				38B4E82F23CDFD6E0034CA95 /* GeneericAdBannerViewController */,
+				38B4E82F23CDFD6E0034CA95 /* GenericAdBannerViewController */,
 			);
 			name = GenericViewController;
 			sourceTree = "<group>";
