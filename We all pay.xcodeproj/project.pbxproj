@@ -149,6 +149,7 @@
 		38B4E82723CDE62C0034CA95 /* MessageUI.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 38B4E82623CDE62C0034CA95 /* MessageUI.framework */; };
 		38B4E82923CDE6370034CA95 /* MobileCoreServices.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 38B4E82823CDE6370034CA95 /* MobileCoreServices.framework */; };
 		38B4E82B23CDE6410034CA95 /* SystemConfiguration.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 38B4E82A23CDE6410034CA95 /* SystemConfiguration.framework */; };
+		38B4E83123CDFD930034CA95 /* AdBannerEngine.swift in Sources */ = {isa = PBXBuildFile; fileRef = 38B4E83023CDFD930034CA95 /* AdBannerEngine.swift */; };
 		38B7E9521D86F8F600400E72 /* ContactsDataReceiver.swift in Sources */ = {isa = PBXBuildFile; fileRef = 38B7E9511D86F8F600400E72 /* ContactsDataReceiver.swift */; };
 		38B88E2E1D81FF6E0069A44D /* MailComposeViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 38B88E2D1D81FF6E0069A44D /* MailComposeViewController.swift */; };
 		38C1956323C8C575006255AE /* MCGenericAdBannerViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 38C1956223C8C575006255AE /* MCGenericAdBannerViewController.m */; };
@@ -514,6 +515,7 @@
 		38B4E82623CDE62C0034CA95 /* MessageUI.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = MessageUI.framework; path = System/Library/Frameworks/MessageUI.framework; sourceTree = SDKROOT; };
 		38B4E82823CDE6370034CA95 /* MobileCoreServices.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = MobileCoreServices.framework; path = System/Library/Frameworks/MobileCoreServices.framework; sourceTree = SDKROOT; };
 		38B4E82A23CDE6410034CA95 /* SystemConfiguration.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = SystemConfiguration.framework; path = System/Library/Frameworks/SystemConfiguration.framework; sourceTree = SDKROOT; };
+		38B4E83023CDFD930034CA95 /* AdBannerEngine.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AdBannerEngine.swift; sourceTree = "<group>"; };
 		38B6E0EC1A28BBAB009E69D7 /* Who is paying next.appex */ = {isa = PBXFileReference; explicitFileType = "wrapper.app-extension"; includeInIndex = 0; path = "Who is paying next.appex"; sourceTree = BUILT_PRODUCTS_DIR; };
 		38B6E0F01A28BBAB009E69D7 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		38B7E9511D86F8F600400E72 /* ContactsDataReceiver.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ContactsDataReceiver.swift; sourceTree = "<group>"; };
@@ -832,6 +834,7 @@
 				3899D3F5194F43C200893323 /* In-App Purchase */,
 				38FE5A062346943400BBA722 /* Miscellaneous */,
 				38572AE5169D437B00969C62 /* MCAppDelegate.h */,
+				38B4E82C23CDFC840034CA95 /* Engines */,
 				38572AE6169D437B00969C62 /* MCAppDelegate.m */,
 				3889497F211C2DDE00BDF9CD /* CoreDataSaveHandlerWhenEnteringBackground.swift */,
 				38D6A3E51C73DF2600968BB2 /* RateMeControllerExtension.swift */,
@@ -941,7 +944,6 @@
 			children = (
 				386FC32318E5855400428294 /* MCSharedBillMainViewController.h */,
 				386FC32418E5855400428294 /* MCSharedBillMainViewController.m */,
-				386EB43223C723BE00FB20B9 /* AdEngine.swift */,
 			);
 			name = EventDetailMainViewController;
 			sourceTree = "<group>";
@@ -1034,6 +1036,24 @@
 			name = "In-App Purchase";
 			sourceTree = "<group>";
 		};
+		38B4E82C23CDFC840034CA95 /* Engines */ = {
+			isa = PBXGroup;
+			children = (
+				386EB43223C723BE00FB20B9 /* AdEngine.swift */,
+			);
+			name = Engines;
+			sourceTree = "<group>";
+		};
+		38B4E82F23CDFD6E0034CA95 /* GeneericAdBannerViewController */ = {
+			isa = PBXGroup;
+			children = (
+				38C1956123C8C575006255AE /* MCGenericAdBannerViewController.h */,
+				38C1956223C8C575006255AE /* MCGenericAdBannerViewController.m */,
+				38B4E83023CDFD930034CA95 /* AdBannerEngine.swift */,
+			);
+			name = GeneericAdBannerViewController;
+			sourceTree = "<group>";
+		};
 		38B6E0EE1A28BBAB009E69D7 /* Who is paying next */ = {
 			isa = PBXGroup;
 			children = (
@@ -1059,8 +1079,7 @@
 		38C1956423C8C58A006255AE /* GenericViewController */ = {
 			isa = PBXGroup;
 			children = (
-				38C1956123C8C575006255AE /* MCGenericAdBannerViewController.h */,
-				38C1956223C8C575006255AE /* MCGenericAdBannerViewController.m */,
+				38B4E82F23CDFD6E0034CA95 /* GeneericAdBannerViewController */,
 			);
 			name = GenericViewController;
 			sourceTree = "<group>";
@@ -1861,6 +1880,7 @@
 				381179D01A82D1FC00020538 /* MailComposer.swift in Sources */,
 				38B08C591B383A4C00FB84B1 /* MCStoreInterface.swift in Sources */,
 				38B08C571B38382E00FB84B1 /* MCTableEmptyMessage_iPad.swift in Sources */,
+				38B4E83123CDFD930034CA95 /* AdBannerEngine.swift in Sources */,
 				388E90331D708E32004CD257 /* SolutionTableViewController_iPad.swift in Sources */,
 				384EC90A1BC2F03F00A80799 /* PaymentTableViewCell_iPad.swift in Sources */,
 				38ACC5A3236B1FAE000BDEEC /* PaymentModel.swift in Sources */,

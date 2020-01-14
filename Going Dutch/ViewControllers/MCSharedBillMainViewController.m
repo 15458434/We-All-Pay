@@ -115,7 +115,7 @@
 - (void)applyProVersion:(NSNotification *)notification {
     __weak typeof(self) weakSelf = self;
     [[NSOperationQueue mainQueue] addOperationWithBlock:^{
-        [weakSelf adEngine:weakSelf.adEngine putOffScreenBannerView:self.worstSalesPitchEverView];
+        [weakSelf adEngine:weakSelf.adBannerEngine putOffScreenBannerView:self.worstSalesPitchEverView];
         weakSelf.worstSalesPitchEverView.autoloadEnabled = NO;
     }];
 }
@@ -123,7 +123,7 @@
 - (void)applicationWillEnterForegroundHandler:(NSNotification *) notication {
     BOOL isNotPurchased = ![[MCStoreInterface defaultStoreInterface] isProProductPurchased];
     if (isNotPurchased) {
-        [self.adEngine prepareAdBanner:self.worstSalesPitchEverView withAdUnitId:self.adUnitId andViewController:self];
+        [self.adBannerEngine prepareAdBanner:self.worstSalesPitchEverView withAdUnitId:self.adUnitId andViewController:self];
     }
 }
 

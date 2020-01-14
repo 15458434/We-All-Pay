@@ -14,10 +14,10 @@
 NS_ASSUME_NONNULL_BEGIN
 
 NS_SWIFT_NAME(GenericAdBannerViewController)
-@interface MCGenericAdBannerViewController : UIViewController <MCAdEngineDelegate>
+@interface MCGenericAdBannerViewController : UIViewController <MCAdBannerEngineDelegate>
 
 @property (weak, nonatomic) IBOutlet GADBannerView *worstSalesPitchEverView;
-@property (strong, nonatomic) IBOutlet MCAdEngine *adEngine;
+@property (strong, nonatomic) IBOutlet MCAdBannerEngine *adBannerEngine;
 @property (nonatomic, readonly) NSString *adUnitId;
 
 @end
