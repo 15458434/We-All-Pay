@@ -9,14 +9,15 @@
 @import UIKit;
 @import GoogleMobileAds;
 
-#import "We_all_pay-Swift.h"
+@class MCInterstitialAdEngine;
 
 NS_ASSUME_NONNULL_BEGIN
 
 NS_SWIFT_NAME(GenericInterstitialAdTableViewController)
 @interface MCGenericInterstitialAdTableViewController : UITableViewController
 
-@property (strong, nonatomic) IBOutlet MCInterstitialAdEngine *adEngine;
+@property (nonatomic) BOOL loadInterstitialOnViewDidLoad;
+@property (nonatomic, strong) IBOutlet MCInterstitialAdEngine *adEngine;
 @property (nonatomic, readonly) NSString *adUnitId;
 
 @end

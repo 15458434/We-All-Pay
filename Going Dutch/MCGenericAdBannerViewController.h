@@ -9,12 +9,12 @@
 @import UIKit;
 @import GoogleMobileAds;
 
-#import "We_all_pay-Swift.h"
+@class MCAdBannerEngine;
 
 NS_ASSUME_NONNULL_BEGIN
 
 NS_SWIFT_NAME(GenericAdBannerViewController)
-@interface MCGenericAdBannerViewController : UIViewController <MCAdBannerEngineDelegate>
+@interface MCGenericAdBannerViewController : UIViewController
 
 @property (weak, nonatomic) IBOutlet GADBannerView *worstSalesPitchEverView;
 @property (strong, nonatomic) IBOutlet MCAdBannerEngine *adBannerEngine;

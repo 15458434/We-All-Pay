@@ -8,7 +8,9 @@
 
 #import "MCGenericAdBannerViewController.h"
 
-@interface MCGenericAdBannerViewController ()
+#import "We_all_pay-Swift.h"
+
+@interface MCGenericAdBannerViewController () <MCAdBannerEngineDelegate>
 
 
 
@@ -23,11 +25,11 @@
 
 #pragma mark - MCAdEngineDelegate
 
-- (void)adEngine:(MCAdEngine *)adEngine putOnScreenBannerView:(GADBannerView *)bannerView {
+- (void)adEngine:(MCAdBannerEngine *)adEngine putOnScreenBannerView:(GADBannerView *)bannerView {
     
 }
 
-- (void)adEngine:(MCAdEngine *)adEngine putOffScreenBannerView:(GADBannerView *)bannerView {
+- (void)adEngine:(MCAdBannerEngine *)adEngine putOffScreenBannerView:(GADBannerView *)bannerView {
     
 }
 

@@ -8,6 +8,8 @@
 
 #import "MCGenericInterstitialAdTableViewController.h"
 
+#import "We_all_pay-Swift.h"
+
 @interface MCGenericInterstitialAdTableViewController ()
 
 @end
@@ -21,16 +23,50 @@
 
 #pragma mark - UITableViewController
 
+- (instancetype)initWithStyle:(UITableViewStyle)style {
+    self = [super initWithStyle:style];
+    if (self) {
+        _loadInterstitialOnViewDidLoad = NO;
+    }
+    return self;
+}
+
 #pragma mark - UIViewController
+
+- (instancetype)initWithNibName:(NSString *)nibNameOrNil bundle:(NSBundle *)nibBundleOrNil {
+    self = [super initWithNibName:nibNameOrNil bundle:nibBundleOrNil];
+    if (self) {
+        _loadInterstitialOnViewDidLoad = NO;
+    }
+    return self;
+}
+
+- (instancetype)initWithCoder:(NSCoder *)coder {
+    self = [super initWithCoder:coder];
+    if (self) {
+        _loadInterstitialOnViewDidLoad = NO;
+    }
+    return self;
+}
 
 - (void)viewDidLoad {
     [super viewDidLoad];
     
-    [self.adEngine prepareInterstitialwithAdUnitId:self.adUnitId andViewController:self];
+    if (_loadInterstitialOnViewDidLoad) {
+        [self.adEngine prepareInterstitialwithAdUnitId:self.adUnitId andViewController:self];
+    }
 }
 
 #pragma mark - UIResponder
 
 #pragma mark - NSObject
+
+- (instancetype)init {
+    self = [super init];
+    if (self) {
+        _loadInterstitialOnViewDidLoad = YES;
+    }
+    return self;
+}
 
 @end
