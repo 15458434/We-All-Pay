@@ -11,13 +11,19 @@ import UIKit
 import PersonalizedAdConsent
 import GoogleMobileAds
 
+@objc(MCInterstitialAdEngineDelegate) protocol InterstitialAdEngineDelegate {
+    func willDismissInterstatial(for adEngine: InterstitialAdEngine)
+}
+
 @objc(MCInterstitialAdEngine) @objcMembers class InterstitialAdEngine: AdEngine, GADInterstitialDelegate {
     
+    private(set) weak var delegate: InterstitialAdEngineDelegate!
+
     private(set) var interstitialAd: GADInterstitial!
     private(set) weak var viewController: UIViewController!
     private(set) var isOnScreen: Bool = false
     
-    @objc(prepareInterstitialwithAdUnitId:andViewController:) func prepare(interstitial adUnitID: String, for viewController: UIViewController) {
+    @objc(prepareInterstitialwithAdUnitId:andInterstitialAdEngineDelegate:) func prepare(interstitial adUnitID: String, and delegate: InterstitialAdEngineDelegate) {
         func prepareInterstitialAd(with consent: PACConsentStatus = .unknown) {
 //            adBanner.adUnitID = self.adUnitID
             self.interstitialAd = GADInterstitial(adUnitID: adUnitID)
@@ -29,7 +35,7 @@ import GoogleMobileAds
             return
         }
         
-        self.viewController = viewController
+        self.delegate = delegate
         
         let consent = PACConsentStatus(rawValue: UserDefaults.standard.integer(forKey: AdEngine.kAdBannerConsent))!
         if (!MCStoreInterface.defaultStoreInterface.isProProductPurchased && (consent == PACConsentStatus.nonPersonalized) || (consent == PACConsentStatus.personalized) || !PACConsentInformation.sharedInstance.isRequestLocationInEEAOrUnknown) {
@@ -37,16 +43,18 @@ import GoogleMobileAds
         }
     }
     
-    func putOnScreenIfAvailable() {
+    @objc(putOnScreenIfAvailableWithPresentingViewController:) func putOnScreenIfAvailable(with presentingVienController: UIViewController) {
         guard self.interstitialAd.isReady else {
             return
         }
+        
         do {
-            try self.interstitialAd.canPresent(fromRootViewController: viewController)
-            self.interstitialAd.present(fromRootViewController: viewController)
+            self.viewController = presentingVienController
+            try self.interstitialAd.canPresent(fromRootViewController: presentingVienController)
+            self.interstitialAd.present(fromRootViewController: presentingVienController)
             self.isOnScreen = true
         } catch {
-            fatalError("Should be able to present on this viewController: \(viewController!)")
+            fatalError("Should be able to present on this viewController: \(presentingVienController)")
         }
     }
     
@@ -75,7 +83,7 @@ import GoogleMobileAds
 
     /// Tells the delegate the interstitial is to be animated off the screen.
     func interstitialWillDismissScreen(_ ad: GADInterstitial) {
-      
+        self.delegate.willDismissInterstatial(for: self)
     }
 
     /// Tells the delegate the interstitial had been animated off the screen.

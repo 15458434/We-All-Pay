@@ -28,5 +28,7 @@
 - (IBAction)mainCancelButtonPressed:(id)sender;
 
 - (void)openMailView:(id)sender;
+- (void)updateEvent:(MCSharedBill *)event andSendMailDelegate:(MCSharedBillPageViewController *)sendMailDelegate andAdEngine:(MCInterstitialAdEngine *)adEngine;
+
 
 @end

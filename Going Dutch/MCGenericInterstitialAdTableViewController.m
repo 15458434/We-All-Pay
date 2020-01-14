@@ -10,7 +10,7 @@
 
 #import "We_all_pay-Swift.h"
 
-@interface MCGenericInterstitialAdTableViewController ()
+@interface MCGenericInterstitialAdTableViewController () <MCInterstitialAdEngineDelegate>
 
 @end
 
@@ -19,6 +19,12 @@
 - (NSString *)adUnitId {
     NSAssert(false, @"Should implement this in the ChildViewController");
     return @"";
+}
+
+#pragma mark - MCInterstitialAdEngineDelegate
+
+- (void)willDismissInterstatialFor:(MCInterstitialAdEngine *)adEngine {
+    
 }
 
 #pragma mark - UITableViewController
@@ -53,7 +59,7 @@
     [super viewDidLoad];
     
     if (_loadInterstitialOnViewDidLoad) {
-        [self.adEngine prepareInterstitialwithAdUnitId:self.adUnitId andViewController:self];
+        [self.adEngine prepareInterstitialwithAdUnitId:self.adUnitId andInterstitialAdEngineDelegate:self];
     }
 }
 

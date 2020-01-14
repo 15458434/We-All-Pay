@@ -17,6 +17,7 @@
 #import "MCPerson+addons.h"
 #import "MCPayment+addons.h"
 
+#import "MCGenericInterstitialAdTableViewController.h"
 #import "MCAllTripsTableViewController.h"
 #import "MCEditTripViewController.h"
 #import "MCPaymentViewController.h"
@@ -390,8 +391,7 @@
     } else if ([segue.identifier isEqualToString:@"solveButton"]) {
         UINavigationController *navController = (UINavigationController *)segue.destinationViewController;
         SolutionViewController *destination = navController.viewControllers.firstObject;
-        destination.tonightsBill = _tonightsBill;
-        destination.sendMailObject = _mailDelegate;
+        [destination updateEvent:_tonightsBill andSendMailDelegate:_mailDelegate andAdEngine:self.adEngine];
     } else {
         NSLog(@"Unknown segue with identifier: %@", segue.identifier);
         NSParameterAssert(NO);
