@@ -9,6 +9,7 @@ pod 'Firebase/Core'
 pod 'Firebase/AdMob'
 pod 'GoogleMobileAdsMediationFacebook'
 pod 'GoogleMobileAdsMediationInMobi'
+pod 'GoogleMobileAdsMediationAdColony'
 pod 'PersonalizedAdConsent'
 pod 'GoogleMobileAdsMediationTestSuite', :configurations => ['AdTest']
 
