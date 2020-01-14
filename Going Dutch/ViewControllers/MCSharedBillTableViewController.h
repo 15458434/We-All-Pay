@@ -27,7 +27,7 @@
 
 @end
 
-@interface MCSharedBillTableViewController : UITableViewController <NSFetchedResultsControllerDelegate, MFMailComposeViewControllerDelegate, UITextFieldDelegate, MCTonightsBillTransfer, MCIndexProtocol>
+@interface MCSharedBillTableViewController : UITableViewController <NSFetchedResultsControllerDelegate, MFMailComposeViewControllerDelegate, MCTonightsBillTransfer, MCIndexProtocol>
 
 @property (nonatomic, strong) MCTableEmptyMessage *emptyMessage;
 

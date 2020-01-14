@@ -183,30 +183,6 @@
     [self performSegueWithIdentifier:@"openPaymentWithMissingData" sender:self];
 }
 
-#pragma mark - UITextFieldDelegate
-
-- (void)textFieldDidBeginEditing:(UITextField *)textField
-{
-
-}
-
-- (void)textFieldDidEndEditing:(UITextField *)textField
-{
-
-}
-
-- (BOOL)textFieldShouldReturn:(UITextField *)textField
-{
-    [textField resignFirstResponder];
-    return YES;
-}
-
-- (BOOL)textFieldShouldClear:(UITextField *)textField
-{
-    [textField setText:@""];
-    return YES;
-}
-
 #pragma mark - MFMailViewControllerDelegate
 
 - (void)mailComposeController:(MFMailComposeViewController *)controller didFinishWithResult:(MFMailComposeResult)result error:(NSError *)error
