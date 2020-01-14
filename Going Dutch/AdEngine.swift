@@ -12,6 +12,7 @@ import AdSupport
 import PersonalizedAdConsent
 import GoogleMobileAds
 import InMobiAdapter
+import AdColonyAdapter
 
 @objc(MCAdEngineDelegate) protocol AdEngineDelegate {
     /// Signals the ad banner is ready to be put on the screen.
@@ -76,6 +77,29 @@ import InMobiAdapter
             GADMInMobiConsent.updateGDPRConsent(consentDictionary)
         }
         
+        func gdprConsentAdcolony(economicArea: AdEngine.EconomicArea = .unknown, consentStatus: PACConsentStatus) {
+            var gdprRequired: Bool {
+                switch economicArea {
+                case .unknown:
+                    return false
+                case .eea:
+                    return true
+                }
+            }
+            var consentString: String {
+                switch consentStatus {
+                case .personalized:
+                    return "1"
+                default:
+                    return "0"
+                }
+            }
+            
+            let options = GADMediationAdapterAdColony.appOptions!
+            options.gdprRequired = gdprRequired
+            options.gdprConsentString = consentString
+        }
+        
         guard AdEngine.isEnabled else {
             return
         }
@@ -100,9 +124,11 @@ import InMobiAdapter
                 switch consentStatus {
                 case .personalized:
                     gdprConsentInMobi(economicArea: .eea, consentStatus: consentStatus)
+                    gdprConsentAdcolony(economicArea: .eea, consentStatus: consentStatus)
                     ()
                 case .nonPersonalized:
                     gdprConsentInMobi(economicArea: .eea, consentStatus: consentStatus)
+                    gdprConsentAdcolony(economicArea: .eea, consentStatus: consentStatus)
                     ()
                 default:
                     guard let privacyUrl = URL(string: "https://www.iubenda.com/privacy-policy/7876418"),
@@ -124,6 +150,7 @@ import InMobiAdapter
                             let consentStatus = PACConsentInformation.sharedInstance.consentStatus
                             UserDefaults.standard.set(consentStatus.rawValue, forKey: AdEngine.kAdBannerConsent)
                             gdprConsentInMobi(economicArea: .eea, consentStatus: consentStatus)
+                            gdprConsentAdcolony(economicArea: .eea, consentStatus: consentStatus)
                         }
                     }
                 }

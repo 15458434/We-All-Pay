@@ -139,6 +139,16 @@
 		38AD8C12197E8926005C3436 /* MCAddCurrenciesEntityMigrationPolicy.m in Sources */ = {isa = PBXBuildFile; fileRef = 38AD8C11197E8926005C3436 /* MCAddCurrenciesEntityMigrationPolicy.m */; };
 		38B08C571B38382E00FB84B1 /* MCTableEmptyMessage_iPad.swift in Sources */ = {isa = PBXBuildFile; fileRef = 38B08C561B38382E00FB84B1 /* MCTableEmptyMessage_iPad.swift */; };
 		38B08C591B383A4C00FB84B1 /* MCStoreInterface.swift in Sources */ = {isa = PBXBuildFile; fileRef = 38B08C581B383A4C00FB84B1 /* MCStoreInterface.swift */; };
+		38B4E81923CDE5D40034CA95 /* libz.1.2.5.tbd in Frameworks */ = {isa = PBXBuildFile; fileRef = 38B4E81823CDE5D40034CA95 /* libz.1.2.5.tbd */; };
+		38B4E81B23CDE5F40034CA95 /* AdSupport.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 38B4E81A23CDE5F40034CA95 /* AdSupport.framework */; };
+		38B4E81D23CDE5FC0034CA95 /* AudioToolbox.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 38B4E81C23CDE5FC0034CA95 /* AudioToolbox.framework */; };
+		38B4E81F23CDE6050034CA95 /* AVFoundation.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 38B4E81E23CDE6050034CA95 /* AVFoundation.framework */; };
+		38B4E82123CDE6100034CA95 /* CoreMedia.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 38B4E82023CDE6100034CA95 /* CoreMedia.framework */; };
+		38B4E82323CDE6180034CA95 /* CoreTelephony.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 38B4E82223CDE6180034CA95 /* CoreTelephony.framework */; };
+		38B4E82523CDE6220034CA95 /* JavaScriptCore.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 38B4E82423CDE6210034CA95 /* JavaScriptCore.framework */; };
+		38B4E82723CDE62C0034CA95 /* MessageUI.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 38B4E82623CDE62C0034CA95 /* MessageUI.framework */; };
+		38B4E82923CDE6370034CA95 /* MobileCoreServices.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 38B4E82823CDE6370034CA95 /* MobileCoreServices.framework */; };
+		38B4E82B23CDE6410034CA95 /* SystemConfiguration.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 38B4E82A23CDE6410034CA95 /* SystemConfiguration.framework */; };
 		38B7E9521D86F8F600400E72 /* ContactsDataReceiver.swift in Sources */ = {isa = PBXBuildFile; fileRef = 38B7E9511D86F8F600400E72 /* ContactsDataReceiver.swift */; };
 		38B88E2E1D81FF6E0069A44D /* MailComposeViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 38B88E2D1D81FF6E0069A44D /* MailComposeViewController.swift */; };
 		38C1956323C8C575006255AE /* MCGenericAdBannerViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 38C1956223C8C575006255AE /* MCGenericAdBannerViewController.m */; };
@@ -494,6 +504,16 @@
 		38AD8C11197E8926005C3436 /* MCAddCurrenciesEntityMigrationPolicy.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = MCAddCurrenciesEntityMigrationPolicy.m; path = "DataStore/Entity Migration Policies/MCAddCurrenciesEntityMigrationPolicy.m"; sourceTree = "<group>"; };
 		38B08C561B38382E00FB84B1 /* MCTableEmptyMessage_iPad.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = MCTableEmptyMessage_iPad.swift; sourceTree = "<group>"; };
 		38B08C581B383A4C00FB84B1 /* MCStoreInterface.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = MCStoreInterface.swift; sourceTree = "<group>"; };
+		38B4E81823CDE5D40034CA95 /* libz.1.2.5.tbd */ = {isa = PBXFileReference; lastKnownFileType = "sourcecode.text-based-dylib-definition"; name = libz.1.2.5.tbd; path = usr/lib/libz.1.2.5.tbd; sourceTree = SDKROOT; };
+		38B4E81A23CDE5F40034CA95 /* AdSupport.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = AdSupport.framework; path = System/Library/Frameworks/AdSupport.framework; sourceTree = SDKROOT; };
+		38B4E81C23CDE5FC0034CA95 /* AudioToolbox.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = AudioToolbox.framework; path = System/Library/Frameworks/AudioToolbox.framework; sourceTree = SDKROOT; };
+		38B4E81E23CDE6050034CA95 /* AVFoundation.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = AVFoundation.framework; path = System/Library/Frameworks/AVFoundation.framework; sourceTree = SDKROOT; };
+		38B4E82023CDE6100034CA95 /* CoreMedia.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = CoreMedia.framework; path = System/Library/Frameworks/CoreMedia.framework; sourceTree = SDKROOT; };
+		38B4E82223CDE6180034CA95 /* CoreTelephony.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = CoreTelephony.framework; path = System/Library/Frameworks/CoreTelephony.framework; sourceTree = SDKROOT; };
+		38B4E82423CDE6210034CA95 /* JavaScriptCore.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = JavaScriptCore.framework; path = System/Library/Frameworks/JavaScriptCore.framework; sourceTree = SDKROOT; };
+		38B4E82623CDE62C0034CA95 /* MessageUI.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = MessageUI.framework; path = System/Library/Frameworks/MessageUI.framework; sourceTree = SDKROOT; };
+		38B4E82823CDE6370034CA95 /* MobileCoreServices.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = MobileCoreServices.framework; path = System/Library/Frameworks/MobileCoreServices.framework; sourceTree = SDKROOT; };
+		38B4E82A23CDE6410034CA95 /* SystemConfiguration.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = SystemConfiguration.framework; path = System/Library/Frameworks/SystemConfiguration.framework; sourceTree = SDKROOT; };
 		38B6E0EC1A28BBAB009E69D7 /* Who is paying next.appex */ = {isa = PBXFileReference; explicitFileType = "wrapper.app-extension"; includeInIndex = 0; path = "Who is paying next.appex"; sourceTree = BUILT_PRODUCTS_DIR; };
 		38B6E0F01A28BBAB009E69D7 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		38B7E9511D86F8F600400E72 /* ContactsDataReceiver.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ContactsDataReceiver.swift; sourceTree = "<group>"; };
@@ -594,6 +614,16 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				38B4E82B23CDE6410034CA95 /* SystemConfiguration.framework in Frameworks */,
+				38B4E82923CDE6370034CA95 /* MobileCoreServices.framework in Frameworks */,
+				38B4E82723CDE62C0034CA95 /* MessageUI.framework in Frameworks */,
+				38B4E82523CDE6220034CA95 /* JavaScriptCore.framework in Frameworks */,
+				38B4E82323CDE6180034CA95 /* CoreTelephony.framework in Frameworks */,
+				38B4E82123CDE6100034CA95 /* CoreMedia.framework in Frameworks */,
+				38B4E81F23CDE6050034CA95 /* AVFoundation.framework in Frameworks */,
+				38B4E81D23CDE5FC0034CA95 /* AudioToolbox.framework in Frameworks */,
+				38B4E81B23CDE5F40034CA95 /* AdSupport.framework in Frameworks */,
+				38B4E81923CDE5D40034CA95 /* libz.1.2.5.tbd in Frameworks */,
 				3826D4D323CC5777009CAC30 /* libz.tbd in Frameworks */,
 				3826D4D223CC576C009CAC30 /* libsqlite3.0.tbd in Frameworks */,
 				3826D4D123CC574E009CAC30 /* WebKit.framework in Frameworks */,
@@ -1198,6 +1228,16 @@
 		8AA57C6157892F74604CB04B /* Frameworks */ = {
 			isa = PBXGroup;
 			children = (
+				38B4E82A23CDE6410034CA95 /* SystemConfiguration.framework */,
+				38B4E82823CDE6370034CA95 /* MobileCoreServices.framework */,
+				38B4E82623CDE62C0034CA95 /* MessageUI.framework */,
+				38B4E82423CDE6210034CA95 /* JavaScriptCore.framework */,
+				38B4E82223CDE6180034CA95 /* CoreTelephony.framework */,
+				38B4E82023CDE6100034CA95 /* CoreMedia.framework */,
+				38B4E81E23CDE6050034CA95 /* AVFoundation.framework */,
+				38B4E81C23CDE5FC0034CA95 /* AudioToolbox.framework */,
+				38B4E81A23CDE5F40034CA95 /* AdSupport.framework */,
+				38B4E81823CDE5D40034CA95 /* libz.1.2.5.tbd */,
 				3826D4D023CC574E009CAC30 /* WebKit.framework */,
 				3826D4CF23CC5745009CAC30 /* libz.tbd */,
 				3826D4CE23CC573B009CAC30 /* libsqlite3.0.tbd */,
