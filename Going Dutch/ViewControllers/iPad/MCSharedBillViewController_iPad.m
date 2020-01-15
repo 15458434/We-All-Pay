@@ -29,6 +29,8 @@
 @property (weak, nonatomic) IBOutlet UITextField *tripNameField;
 @property (weak, nonatomic) IBOutlet UIView *leftTopView;
 
+@property (strong, nonatomic) IBOutlet MCInterstitialAdEngine *interstitialAdEngine;
+
 @property (strong, nonatomic) ContactsDataReceiver *contactsInserter;
 
 @end
@@ -334,19 +336,15 @@
     
     // When openSolutionView is used to go to the solution screen.
     if ([[segue identifier] isEqualToString:@"openSolutionView"]) {
-        id destination = [[segue destinationViewController] viewControllers][0];
-        if ([destination conformsToProtocol:@protocol(MCTonightsBillTransfer)]) {
-            [destination setTonightsBill:_tonightsBill];
-        }
-        if ([destination conformsToProtocol:@protocol(MCDismissMeBlockProtocol)]) {
-            __weak MCSharedBillViewController_iPad *weakSelf = self;
-            [destination setDismissMe:^{
-                MCSharedBillViewController_iPad *strongSelf = weakSelf;
-                if (strongSelf) {
-                    [weakSelf dismissViewControllerAnimated:YES completion:nil];
-                }
-            }];
-        }
+        UINavigationController *navController = (UINavigationController *)segue.destinationViewController;
+        SolutionTableViewController_iPad *destination = (SolutionTableViewController_iPad *)navController.viewControllers.firstObject;
+        __weak MCSharedBillViewController_iPad *weakSelf = self;
+        [destination updateAdEngine:_interstitialAdEngine andEvent:_tonightsBill andDismissBlock:^{
+            MCSharedBillViewController_iPad *strongSelf = weakSelf;
+            if (strongSelf) {
+                [strongSelf dismissViewControllerAnimated:YES completion:nil];
+            }
+        }];
     }
 }
 

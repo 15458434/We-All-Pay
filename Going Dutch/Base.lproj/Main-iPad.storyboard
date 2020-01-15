@@ -312,6 +312,7 @@
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="en8-e4-seD" userLabel="First Responder" sceneMemberID="firstResponder"/>
                 <customObject id="MYW-dw-kKg" customClass="MCAdBannerEngine"/>
+                <customObject id="qyf-XD-NuD" customClass="MCInterstitialAdEngine"/>
             </objects>
             <point key="canvasLocation" x="1707.8125" y="-73.2421875"/>
         </scene>

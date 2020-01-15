@@ -9,13 +9,17 @@
 @import UIKit;
 @import MessageUI;
 
+#import "MCGenericInterstitialAdTableViewController.h"
+
 #import "MCTonightsBillTransfer.h"
 #import "MCDismissMeBlockProtocol.h"
+
+@class MCInterstitialAdEngine;
 
 @class MCSharedBill;
 @class MCTableEmptyMessage_iPad;
 
-@interface MCSolutionTableViewController : UITableViewController <MCTonightsBillTransfer, MCDismissMeBlockProtocol>
+@interface MCSolutionTableViewController : MCGenericInterstitialAdTableViewController <MCTonightsBillTransfer, MCDismissMeBlockProtocol>
 
 @property (strong, nonatomic) MFMailComposeViewController *mailController;
 @property (strong, nonatomic) NSArray *peoplePresent;
@@ -24,5 +28,7 @@
 @property (strong, nonatomic) void (^dismissMe)(void);
 
 - (void)openMailView:(id)sender;
+
+- (void)updateAdEngine:(MCInterstitialAdEngine *)adEngine andEvent:(MCSharedBill *)event andDismissBlock:(void (^)(void))dismissMe;
 
 @end

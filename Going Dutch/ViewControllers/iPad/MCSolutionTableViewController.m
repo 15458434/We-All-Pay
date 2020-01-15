@@ -35,10 +35,12 @@ typedef NS_ENUM(BOOL, MCXRateStatus) {
 
 #pragma mark - Action
 
-- (IBAction)mainCancelButton:(id)sender
-{
-    [FIRAnalytics logEventWithName:@"Main cancel pressed" parameters:nil];
-    _dismissMe();
+- (IBAction)mainCancelButton:(id)sender {
+    if (self.adEngine.interstitialAd.isReady) {
+        [self.adEngine putOnScreenIfAvailableWithPresentingViewController:self];
+    } else {
+        _dismissMe();
+    }
 }
 
 - (IBAction)sendEmailButtonPressed:(id)sender
@@ -163,6 +165,13 @@ typedef NS_ENUM(BOOL, MCXRateStatus) {
         NSSortDescriptor *sortDescriptor = [NSSortDescriptor sortDescriptorWithKey:@"firstName" ascending:YES];
         _peoplePresent = [[_tonightsBill peoplePresent] sortedArrayUsingDescriptors:@[sortDescriptor]];
     }
+}
+
+- (void)updateAdEngine:(MCInterstitialAdEngine *)adEngine andEvent:(MCSharedBill *)event andDismissBlock:(void (^)(void))dismissMe {
+    self.adEngine = adEngine;
+//    self.loadInterstitialOnViewDidLoad = YES;
+    self.tonightsBill = event;
+    self.dismissMe = dismissMe;
 }
 
 #pragma mark - Inherited from super
