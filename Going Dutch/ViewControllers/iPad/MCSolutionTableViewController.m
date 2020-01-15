@@ -214,20 +214,6 @@ typedef NS_ENUM(BOOL, MCXRateStatus) {
     [self setEmptyMessageNow];
 }
 
-#pragma mark - UITableViewDelegate
-
-- (CGFloat)tableView:(UITableView *)tableView heightForRowAtIndexPath:(NSIndexPath *)indexPath
-{
-    return 44.0;
-}
-
-- (void)tableView:(UITableView *)tableView willDisplayHeaderView:(UIView *)view forSection:(NSInteger)section
-{
-    [view setTintColor:[Colors getbackgroundColor]];
-    UITableViewHeaderFooterView *sectionTitleHeader = (UITableViewHeaderFooterView *)view;
-    [[sectionTitleHeader textLabel] setTextColor:[Colors getEmptyMessageTextColor]];
-}
-
 #pragma mark - UITableViewController
 
 #pragma mark - UITableViewDataSource
@@ -349,6 +335,16 @@ typedef NS_ENUM(BOOL, MCXRateStatus) {
 }
 
 #pragma mark - UITableViewDelegate
+
+- (void)tableView:(UITableView *)tableView willDisplayHeaderView:(UIView *)view forSection:(NSInteger)section {
+    [view setTintColor:[Colors getbackgroundColor]];
+    UITableViewHeaderFooterView *sectionTitleHeader = (UITableViewHeaderFooterView *)view;
+    [[sectionTitleHeader textLabel] setTextColor:[Colors getEmptyMessageTextColor]];
+}
+
+- (CGFloat)tableView:(UITableView *)tableView heightForRowAtIndexPath:(NSIndexPath *)indexPath {
+    return 44.0;
+}
 
 #pragma mark - UIViewController
 
