@@ -25,7 +25,6 @@ import GoogleMobileAds
     
     @objc(prepareInterstitialwithAdUnitId:andInterstitialAdEngineDelegate:) func prepare(interstitial adUnitID: String, and delegate: InterstitialAdEngineDelegate) {
         func prepareInterstitialAd(with consent: PACConsentStatus = .unknown) {
-//            adBanner.adUnitID = self.adUnitID
             self.interstitialAd = GADInterstitial(adUnitID: adUnitID)
             self.interstitialAd.delegate = self
             self.interstitialAd.load(self.request)

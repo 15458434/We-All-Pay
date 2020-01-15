@@ -169,9 +169,21 @@ typedef NS_ENUM(BOOL, MCXRateStatus) {
 
 - (void)updateAdEngine:(MCInterstitialAdEngine *)adEngine andEvent:(MCSharedBill *)event andDismissBlock:(void (^)(void))dismissMe {
     self.adEngine = adEngine;
-//    self.loadInterstitialOnViewDidLoad = YES;
+    self.loadInterstitialOnViewDidLoad = YES;
     self.tonightsBill = event;
     self.dismissMe = dismissMe;
+}
+
+#pragma mark - MCGenericInterstitialAdTableViewController
+
+- (NSString *)adUnitId {
+    return @"ca-app-pub-5354415674074435/8899635256";
+}
+
+#pragma mark - MCInterstitialAdEngineDelegate
+
+- (void)willDismissInterstatialFor:(MCInterstitialAdEngine *)adEngine {
+    _dismissMe();
 }
 
 #pragma mark - UITableViewController
