@@ -17,6 +17,7 @@
 #import "MCPerson+addons.h"
 #import "MCPayment+addons.h"
 
+#import "MCGenericInterstitialAdTableViewController.h"
 #import "MCAllTripsTableViewController.h"
 #import "MCEditTripViewController.h"
 #import "MCPaymentViewController.h"
@@ -139,59 +140,6 @@
     [self performSegueWithIdentifier:@"openFirstPaymentWithoutPayer" sender:self];
 }
 
-#pragma mark - Inherited from super class.
-
-- (void)viewDidLoad
-{
-    [super viewDidLoad];
-    
-    [self setEdgesForExtendedLayout:UIRectEdgeNone];
-    
-    [self startRespondingToStoreChangeNotifications];
-    
-    _emptyMessage = [[NSBundle mainBundle] loadNibNamed:@"MCTableEmptyMessage" owner:self options:nil][0];
-    [[self tableView] setBackgroundView:_emptyMessage];
-    [[_emptyMessage bigMessage] setText:NSLocalizedString(@"EMPTY_PAYMENT_LIST_MESSAGE", @"Press \"add payment\" to add a payment to this event.")];
-}
-
-- (void)viewWillAppear:(BOOL)animated {
-    [super viewWillAppear:animated];
-    
-    [[self navigationController] setToolbarHidden:YES animated:YES];
-    
-    if (!_dataController) {
-        [self prepareDataControllerAndFetch];
-        [[self tableView] reloadData];
-    }
-    if ([[_dataController fetchedObjects] count] > 0) {
-        [[_emptyMessage bigMessage] setAlpha:0.0];
-    } else {
-        [[_emptyMessage bigMessage] setAlpha:1.0];
-    }
-    
-    BOOL shouldAppearAsEditing = [_myParent isChildTableViewEditing];
-    [[self tableView] setEditing:shouldAppearAsEditing animated:NO];
-}
-
-- (void)viewWillDisappear:(BOOL)animated
-{
-    [super viewWillDisappear:animated];
-    
-    [[self view] endEditing:YES];
-}
-
-- (void)viewDidDisappear:(BOOL)animated
-{
-    [super viewDidDisappear:animated];
-    
-    _dataController = nil;
-}
-
-- (void)dealloc
-{
-    [[NSNotificationCenter defaultCenter] removeObserver:self];
-}
-
 #pragma mark - UIViewController+WeAllPayStore notifications
 
 - (void)storeWillBeSwapped:(NSNotification *)notification
@@ -234,30 +182,6 @@
 - (void)show:(MCPayment *)payment
 {
     [self performSegueWithIdentifier:@"openPaymentWithMissingData" sender:self];
-}
-
-#pragma mark - UITextFieldDelegate
-
-- (void)textFieldDidBeginEditing:(UITextField *)textField
-{
-
-}
-
-- (void)textFieldDidEndEditing:(UITextField *)textField
-{
-
-}
-
-- (BOOL)textFieldShouldReturn:(UITextField *)textField
-{
-    [textField resignFirstResponder];
-    return YES;
-}
-
-- (BOOL)textFieldShouldClear:(UITextField *)textField
-{
-    [textField setText:@""];
-    return YES;
 }
 
 #pragma mark - MFMailViewControllerDelegate
@@ -313,20 +237,19 @@
     }
 }
 
-#pragma mark - Table view data source
+#pragma mark - UITableViewController
 
-- (NSInteger)numberOfSectionsInTableView:(UITableView *)tableView
-{
-    return [[_dataController sections] count];
-}
+#pragma mark - UITableViewDataSource
 
-- (NSInteger)tableView:(UITableView *)tableView numberOfRowsInSection:(NSInteger)section
-{
+- (NSInteger)tableView:(UITableView *)tableView numberOfRowsInSection:(NSInteger)section {
     return [[_dataController sections][section] numberOfObjects];
 }
 
-- (UITableViewCell *)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath
-{
+- (NSInteger)numberOfSectionsInTableView:(UITableView *)tableView {
+    return [[_dataController sections] count];
+}
+
+- (UITableViewCell *)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath {
     MCPayment *thisCellsPayment = [_dataController objectAtIndexPath:indexPath];
     if (!thisCellsPayment) {
     }
@@ -357,19 +280,7 @@
     return paymentCell;
 }
 
-// Override to support conditional editing of the table view.
-- (BOOL)tableView:(UITableView *)tableView canEditRowAtIndexPath:(NSIndexPath *)indexPath
-{
-    if ([[self tableView] isEditing]) {
-        return YES;
-    } else {
-        return NO;
-    }
-}
-
-// Override to support editing the table view.
-- (void)tableView:(UITableView *)tableView commitEditingStyle:(UITableViewCellEditingStyle)editingStyle forRowAtIndexPath:(NSIndexPath *)indexPath
-{
+- (void)tableView:(UITableView *)tableView commitEditingStyle:(UITableViewCellEditingStyle)editingStyle forRowAtIndexPath:(NSIndexPath *)indexPath {
     if (editingStyle == UITableViewCellEditingStyleDelete) {
         [FIRAnalytics logEventWithName:@"Delete payment" parameters:nil];
         MCPayment *toBeDeletedPayment = [_dataController objectAtIndexPath:indexPath];
@@ -379,36 +290,69 @@
     }
 }
 
-/*
-// Override to support rearranging the table view.
-- (void)tableView:(UITableView *)tableView moveRowAtIndexPath:(NSIndexPath *)fromIndexPath toIndexPath:(NSIndexPath *)toIndexPath
-{
+- (BOOL)tableView:(UITableView *)tableView canEditRowAtIndexPath:(NSIndexPath *)indexPath {
+    if ([[self tableView] isEditing]) {
+        return YES;
+    } else {
+        return NO;
+    }
 }
-*/
 
-/*
-// Override to support conditional rearranging of the table view.
-- (BOOL)tableView:(UITableView *)tableView canMoveRowAtIndexPath:(NSIndexPath *)indexPath
-{
-    // Return NO if you do not want the item to be re-orderable.
-    return YES;
-}
-*/
+#pragma mark - UITableViewDelegate
 
-#pragma mark - Table view delegate
-
-- (CGFloat)tableView:(UITableView *)tableView heightForRowAtIndexPath:(NSIndexPath *)indexPath
-{
+- (CGFloat)tableView:(UITableView *)tableView heightForRowAtIndexPath:(NSIndexPath *)indexPath {
     return 60;
 }
 
-- (void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath
-{
+- (void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath {
     [FIRAnalytics logEventWithName:@"Open payment" parameters:nil];
     [self performSegueWithIdentifier:@"openPaymentView" sender:self];
 }
 
-#pragma mark - Storyboard stuff
+#pragma mark - UIViewController
+
+- (void)viewDidLoad {
+    [super viewDidLoad];
+    
+    [self setEdgesForExtendedLayout:UIRectEdgeNone];
+    
+    [self startRespondingToStoreChangeNotifications];
+    
+    _emptyMessage = [[NSBundle mainBundle] loadNibNamed:@"MCTableEmptyMessage" owner:self options:nil][0];
+    [[self tableView] setBackgroundView:_emptyMessage];
+    [[_emptyMessage bigMessage] setText:NSLocalizedString(@"EMPTY_PAYMENT_LIST_MESSAGE", @"Press \"add payment\" to add a payment to this event.")];
+}
+
+- (void)viewWillAppear:(BOOL)animated {
+    [super viewWillAppear:animated];
+    
+    [[self navigationController] setToolbarHidden:YES animated:YES];
+    
+    if (!_dataController) {
+        [self prepareDataControllerAndFetch];
+        [[self tableView] reloadData];
+    }
+    if ([[_dataController fetchedObjects] count] > 0) {
+        [[_emptyMessage bigMessage] setAlpha:0.0];
+    } else {
+        [[_emptyMessage bigMessage] setAlpha:1.0];
+    }
+    
+    BOOL shouldAppearAsEditing = [_myParent isChildTableViewEditing];
+    [[self tableView] setEditing:shouldAppearAsEditing animated:NO];
+}
+
+- (void)viewWillDisappear:(BOOL)animated {
+    [super viewWillDisappear:animated];
+    
+    [[self view] endEditing:YES];
+}
+
+- (void)viewDidDisappear:(BOOL)animated {
+    [super viewDidDisappear:animated];
+    
+    _dataController = nil;
+}
 
 - (void)prepareForSegue:(UIStoryboardSegue *)segue sender:(id)sender {
     if ([segue.identifier isEqualToString:@"openFirstPaymentWithoutPayer"]) {
@@ -447,12 +391,19 @@
     } else if ([segue.identifier isEqualToString:@"solveButton"]) {
         UINavigationController *navController = (UINavigationController *)segue.destinationViewController;
         SolutionViewController *destination = navController.viewControllers.firstObject;
-        destination.tonightsBill = _tonightsBill;
-        destination.sendMailObject = _mailDelegate;
+        [destination updateEvent:_tonightsBill andSendMailDelegate:_mailDelegate andAdEngine:self.adEngine];
     } else {
         NSLog(@"Unknown segue with identifier: %@", segue.identifier);
         NSParameterAssert(NO);
     }
+}
+
+#pragma mark - UIResponder
+
+#pragma mark - NSObject
+
+- (void)dealloc {
+    [[NSNotificationCenter defaultCenter] removeObserver:self];
 }
 
 @end

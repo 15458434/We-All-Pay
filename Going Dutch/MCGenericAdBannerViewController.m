@@ -8,7 +8,9 @@
 
 #import "MCGenericAdBannerViewController.h"
 
-@interface MCGenericAdBannerViewController ()
+#import "We_all_pay-Swift.h"
+
+@interface MCGenericAdBannerViewController () <MCAdBannerEngineDelegate>
 
 
 
@@ -23,11 +25,11 @@
 
 #pragma mark - MCAdEngineDelegate
 
-- (void)adEngine:(MCAdEngine *)adEngine putOnScreenBannerView:(GADBannerView *)bannerView {
+- (void)adEngine:(MCAdBannerEngine *)adEngine putOnScreenBannerView:(GADBannerView *)bannerView {
     
 }
 
-- (void)adEngine:(MCAdEngine *)adEngine putOffScreenBannerView:(GADBannerView *)bannerView {
+- (void)adEngine:(MCAdBannerEngine *)adEngine putOffScreenBannerView:(GADBannerView *)bannerView {
     
 }
 
@@ -36,7 +38,7 @@
 - (void)viewDidLoad {
     [super viewDidLoad];
     
-    [self.adEngine prepareAdBanner:_worstSalesPitchEverView withAdUnitId:self.adUnitId andViewController:self];
+    [self.adBannerEngine prepareAdBanner:_worstSalesPitchEverView withAdUnitId:self.adUnitId andViewController:self];
 }
 
 - (void)viewWillTransitionToSize:(CGSize)size withTransitionCoordinator:(id<UIViewControllerTransitionCoordinator>)coordinator {
@@ -46,7 +48,7 @@
     [coordinator animateAlongsideTransition:^(id<UIViewControllerTransitionCoordinatorContext>  _Nonnull context) {
         if (MCAdEngine.isEnabled) {
             [weakSelf adEngine:nil putOffScreenBannerView:self.worstSalesPitchEverView];
-            [weakSelf.adEngine updateSizeFor:self.worstSalesPitchEverView withScreenSize:size];
+            [weakSelf.adBannerEngine updateSizeFor:self.worstSalesPitchEverView withScreenSize:size];
         }
     } completion:^(id<UIViewControllerTransitionCoordinatorContext>  _Nonnull context) {
     }];

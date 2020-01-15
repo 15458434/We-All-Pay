@@ -33,12 +33,14 @@ typedef NS_ENUM(BOOL, MCXRateStatus) {
 
 @implementation MCSolutionTableViewController
 
-#pragma mark - Action
+#pragma mark - IBAction
 
-- (IBAction)mainCancelButton:(id)sender
-{
-    [FIRAnalytics logEventWithName:@"Main cancel pressed" parameters:nil];
-    _dismissMe();
+- (IBAction)mainCancelButton:(id)sender {
+    if (self.adEngine.interstitialAd.isReady) {
+        [self.adEngine putOnScreenIfAvailableWithPresentingViewController:self];
+    } else {
+        _dismissMe();
+    }
 }
 
 - (IBAction)sendEmailButtonPressed:(id)sender
@@ -165,99 +167,30 @@ typedef NS_ENUM(BOOL, MCXRateStatus) {
     }
 }
 
-#pragma mark - Inherited from super
-
-- (void)viewDidLoad
-{
-    [super viewDidLoad];
-    
-    // Uncomment the following line to preserve selection between presentations.
-    // self.clearsSelectionOnViewWillAppear = NO;
-    
-    // Uncomment the following line to display an Edit button in the navigation bar for this view controller.
-    // self.navigationItem.rightBarButtonItem = self.editButtonItem;
-
-    _emptyMessage = [[NSBundle mainBundle] loadNibNamed:@"MCTableEmptyMessage_iPad" owner:self options:nil][0];
+- (void)updateAdEngine:(MCInterstitialAdEngine *)adEngine andEvent:(MCSharedBill *)event andDismissBlock:(void (^)(void))dismissMe {
+    self.adEngine = adEngine;
+    self.loadInterstitialOnViewDidLoad = YES;
+    self.tonightsBill = event;
+    self.dismissMe = dismissMe;
 }
 
-- (void)viewWillAppear:(BOOL)animated
-{
-    [super viewWillAppear:animated];
-    
-    [self giveSolution];
-    if ([_tonightsBill areAllExchangeRatesValid]) {
-        _areXRatesMissing = xRatesPresent;
-        [[_emptyMessage activityIndicator] stopAnimating];
-        [[_emptyMessage bigMessage] setAlpha:0.0];
-    } else {
-        _areXRatesMissing = xRatesMissing;
-        [[_emptyMessage activityIndicator] startAnimating];
-        [[_emptyMessage bigMessage] setAlpha:0.0];
-    }
-    
-    if (_tonightsBill.peoplePresent.count == 0 || _tonightsBill.payments.count == 0) {
-        [[_emptyMessage bigMessage] setText:NSLocalizedString(@"RETURNPAYMENTSVIEW_NOPAYMENTS", @"Please add payments and/or people if you want a solution on who owes who.")];
-    } else {
-        _emptyMessage.bigMessage.text = @"";
-    }
+#pragma mark - MCGenericInterstitialAdTableViewController
 
-    [[self tableView] setBackgroundView:_emptyMessage];
-    [self setEmptyMessageNow];
+- (NSString *)adUnitId {
+    return @"ca-app-pub-5354415674074435/8899635256";
 }
 
-#pragma mark - UITableViewDelegate
+#pragma mark - MCInterstitialAdEngineDelegate
 
-- (CGFloat)tableView:(UITableView *)tableView heightForRowAtIndexPath:(NSIndexPath *)indexPath
-{
-    return 44.0;
+- (void)willDismissInterstatialFor:(MCInterstitialAdEngine *)adEngine {
+    _dismissMe();
 }
 
-- (void)tableView:(UITableView *)tableView willDisplayHeaderView:(UIView *)view forSection:(NSInteger)section
-{
-    [view setTintColor:[Colors getbackgroundColor]];
-    UITableViewHeaderFooterView *sectionTitleHeader = (UITableViewHeaderFooterView *)view;
-    [[sectionTitleHeader textLabel] setTextColor:[Colors getEmptyMessageTextColor]];
-}
+#pragma mark - UITableViewController
 
-#pragma mark - Table view data source
+#pragma mark - UITableViewDataSource
 
-- (NSString *)tableView:(UITableView *)tableView titleForHeaderInSection:(NSInteger)section
-{
-    if ([_solution count] > 0) {
-        switch (section) {
-            case 0:
-                return NSLocalizedString(@"SOLUTION_SECTION_WHO_OWES_WHO", @"Who ows who");
-            case 1:
-                return NSLocalizedString(@"SOLUTION_SECTION_TOTAL_OWES", @"Total owes");
-            case 2:
-                return NSLocalizedString(@"SOLUTION_SECTION_TOTAL_PAID", @"Total paid");
-            default:
-                return nil;
-        }
-    }
-    return nil;
-}
-
-- (NSInteger)numberOfSectionsInTableView:(UITableView *)tableView
-{
-    // Return the number of sections.
-    if (_areXRatesMissing == xRatesMissing) {
-#ifdef DEBUG
-        NSLog(@"Amount of sections is 0.");
-#endif
-        return 0;
-    } else if (_solution == nil) {
-#ifdef DEBUG
-        NSLog(@"Amount of sections is 0.");
-#endif
-        return 0;
-    } else {
-        return 3;
-    }
-}
-
-- (NSInteger)tableView:(UITableView *)tableView numberOfRowsInSection:(NSInteger)section
-{
+- (NSInteger)tableView:(UITableView *)tableView numberOfRowsInSection:(NSInteger)section {
     // Return the number of rows in the section.
     switch (section) {
         case 0:
@@ -280,8 +213,24 @@ typedef NS_ENUM(BOOL, MCXRateStatus) {
     }
 }
 
-- (UITableViewCell *)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath
-{
+- (NSInteger)numberOfSectionsInTableView:(UITableView *)tableView {
+    // Return the number of sections.
+    if (_areXRatesMissing == xRatesMissing) {
+#ifdef DEBUG
+        NSLog(@"Amount of sections is 0.");
+#endif
+        return 0;
+    } else if (_solution == nil) {
+#ifdef DEBUG
+        NSLog(@"Amount of sections is 0.");
+#endif
+        return 0;
+    } else {
+        return 3;
+    }
+}
+
+- (UITableViewCell *)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath {
     if ([indexPath section] == 0) {
         WhoOwesWhoTableViewCell_iPad *cell = [tableView dequeueReusableCellWithIdentifier:@"MCWhoOwesWhoTableViewCell_iPad" forIndexPath:indexPath];
         
@@ -341,53 +290,74 @@ typedef NS_ENUM(BOOL, MCXRateStatus) {
     return nil;
 }
 
-/*
-// Override to support conditional editing of the table view.
-- (BOOL)tableView:(UITableView *)tableView canEditRowAtIndexPath:(NSIndexPath *)indexPath
-{
-    // Return NO if you do not want the specified item to be editable.
-    return YES;
+- (NSString *)tableView:(UITableView *)tableView titleForHeaderInSection:(NSInteger)section {
+    if ([_solution count] > 0) {
+        switch (section) {
+            case 0:
+                return NSLocalizedString(@"SOLUTION_SECTION_WHO_OWES_WHO", @"Who ows who");
+            case 1:
+                return NSLocalizedString(@"SOLUTION_SECTION_TOTAL_OWES", @"Total owes");
+            case 2:
+                return NSLocalizedString(@"SOLUTION_SECTION_TOTAL_PAID", @"Total paid");
+            default:
+                return nil;
+        }
+    }
+    return nil;
 }
-*/
 
-/*
-// Override to support editing the table view.
-- (void)tableView:(UITableView *)tableView commitEditingStyle:(UITableViewCellEditingStyle)editingStyle forRowAtIndexPath:(NSIndexPath *)indexPath
-{
-    if (editingStyle == UITableViewCellEditingStyleDelete) {
-        // Delete the row from the data source
-        [tableView deleteRowsAtIndexPaths:@[indexPath] withRowAnimation:UITableViewRowAnimationFade];
-    } else if (editingStyle == UITableViewCellEditingStyleInsert) {
-        // Create a new instance of the appropriate class, insert it into the array, and add a new row to the table view
-    }   
+#pragma mark - UITableViewDelegate
+
+- (void)tableView:(UITableView *)tableView willDisplayHeaderView:(UIView *)view forSection:(NSInteger)section {
+    [view setTintColor:[Colors getbackgroundColor]];
+    UITableViewHeaderFooterView *sectionTitleHeader = (UITableViewHeaderFooterView *)view;
+    [[sectionTitleHeader textLabel] setTextColor:[Colors getEmptyMessageTextColor]];
 }
-*/
 
-/*
-// Override to support rearranging the table view.
-- (void)tableView:(UITableView *)tableView moveRowAtIndexPath:(NSIndexPath *)fromIndexPath toIndexPath:(NSIndexPath *)toIndexPath
-{
+- (CGFloat)tableView:(UITableView *)tableView heightForRowAtIndexPath:(NSIndexPath *)indexPath {
+    return 44.0;
 }
-*/
 
-/*
-// Override to support conditional rearranging of the table view.
-- (BOOL)tableView:(UITableView *)tableView canMoveRowAtIndexPath:(NSIndexPath *)indexPath
-{
-    // Return NO if you do not want the item to be re-orderable.
-    return YES;
+#pragma mark - UIViewController
+
+- (void)viewDidLoad {
+    [super viewDidLoad];
+    
+    // Uncomment the following line to preserve selection between presentations.
+    // self.clearsSelectionOnViewWillAppear = NO;
+    
+    // Uncomment the following line to display an Edit button in the navigation bar for this view controller.
+    // self.navigationItem.rightBarButtonItem = self.editButtonItem;
+
+    _emptyMessage = [[NSBundle mainBundle] loadNibNamed:@"MCTableEmptyMessage_iPad" owner:self options:nil][0];
+    [self giveSolution];
 }
-*/
 
-/*
-#pragma mark - Navigation
+- (void)viewWillAppear:(BOOL)animated {
+    [super viewWillAppear:animated];
+    
+    if ([_tonightsBill areAllExchangeRatesValid]) {
+        _areXRatesMissing = xRatesPresent;
+        [[_emptyMessage activityIndicator] stopAnimating];
+        [[_emptyMessage bigMessage] setAlpha:0.0];
+    } else {
+        _areXRatesMissing = xRatesMissing;
+        [[_emptyMessage activityIndicator] startAnimating];
+        [[_emptyMessage bigMessage] setAlpha:0.0];
+    }
+    
+    if (_tonightsBill.peoplePresent.count == 0 || _tonightsBill.payments.count == 0) {
+        [[_emptyMessage bigMessage] setText:NSLocalizedString(@"RETURNPAYMENTSVIEW_NOPAYMENTS", @"Please add payments and/or people if you want a solution on who owes who.")];
+    } else {
+        _emptyMessage.bigMessage.text = @"";
+    }
 
-// In a storyboard-based application, you will often want to do a little preparation before navigation
-- (void)prepareForSegue:(UIStoryboardSegue *)segue sender:(id)sender
-{
-    // Get the new view controller using [segue destinationViewController].
-    // Pass the selected object to the new view controller.
+    [[self tableView] setBackgroundView:_emptyMessage];
+    [self setEmptyMessageNow];
 }
-*/
+
+#pragma mark - UIResponder
+
+#pragma mark - NSObject
 
 @end

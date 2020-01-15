@@ -55,4 +55,6 @@ class SolutionViewController: MCReturnPaymentViewController, MFMailComposeViewCo
             fatalError("Unknown value for MFMailComposeResult")
         }
     }
+    
+    // MARK: UIViewController
 }
