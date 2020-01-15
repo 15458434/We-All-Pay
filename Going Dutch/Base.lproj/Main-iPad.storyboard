@@ -301,6 +301,7 @@
                         <outlet property="adBannerEngine" destination="MYW-dw-kKg" id="mhz-dW-Ccd"/>
                         <outlet property="bottomLayoutConstraintToLeftContainerView" destination="jLH-9n-glc" id="iY3-9j-FxI"/>
                         <outlet property="bottomLayoutConstraintToRightContainerView" destination="Ks4-BC-Pyi" id="ifF-Xm-Yw4"/>
+                        <outlet property="interstitialAdEngine" destination="qyf-XD-NuD" id="H8Z-Dp-PkB"/>
                         <outlet property="leftTopView" destination="rqj-np-zHP" id="MLi-6R-Qku"/>
                         <outlet property="tripNameField" destination="01X-vX-W0B" id="SeG-e8-MiL"/>
                         <outlet property="worstSalesPitchEverView" destination="YDY-MC-Y9W" id="mVe-iL-5Jm"/>
