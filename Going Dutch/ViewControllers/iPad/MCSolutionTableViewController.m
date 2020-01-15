@@ -232,39 +232,6 @@ typedef NS_ENUM(BOOL, MCXRateStatus) {
 
 #pragma mark - UITableViewDataSource
 
-- (NSString *)tableView:(UITableView *)tableView titleForHeaderInSection:(NSInteger)section {
-    if ([_solution count] > 0) {
-        switch (section) {
-            case 0:
-                return NSLocalizedString(@"SOLUTION_SECTION_WHO_OWES_WHO", @"Who ows who");
-            case 1:
-                return NSLocalizedString(@"SOLUTION_SECTION_TOTAL_OWES", @"Total owes");
-            case 2:
-                return NSLocalizedString(@"SOLUTION_SECTION_TOTAL_PAID", @"Total paid");
-            default:
-                return nil;
-        }
-    }
-    return nil;
-}
-
-- (NSInteger)numberOfSectionsInTableView:(UITableView *)tableView {
-    // Return the number of sections.
-    if (_areXRatesMissing == xRatesMissing) {
-#ifdef DEBUG
-        NSLog(@"Amount of sections is 0.");
-#endif
-        return 0;
-    } else if (_solution == nil) {
-#ifdef DEBUG
-        NSLog(@"Amount of sections is 0.");
-#endif
-        return 0;
-    } else {
-        return 3;
-    }
-}
-
 - (NSInteger)tableView:(UITableView *)tableView numberOfRowsInSection:(NSInteger)section {
     // Return the number of rows in the section.
     switch (section) {
@@ -285,6 +252,23 @@ typedef NS_ENUM(BOOL, MCXRateStatus) {
         default:
             @throw [NSException exceptionWithName:@"TableView broken" reason:@"There are no more than 3 sections in this tableView." userInfo:nil];
             return -1;
+    }
+}
+
+- (NSInteger)numberOfSectionsInTableView:(UITableView *)tableView {
+    // Return the number of sections.
+    if (_areXRatesMissing == xRatesMissing) {
+#ifdef DEBUG
+        NSLog(@"Amount of sections is 0.");
+#endif
+        return 0;
+    } else if (_solution == nil) {
+#ifdef DEBUG
+        NSLog(@"Amount of sections is 0.");
+#endif
+        return 0;
+    } else {
+        return 3;
     }
 }
 
@@ -345,6 +329,22 @@ typedef NS_ENUM(BOOL, MCXRateStatus) {
         return cell;
     }
     
+    return nil;
+}
+
+- (NSString *)tableView:(UITableView *)tableView titleForHeaderInSection:(NSInteger)section {
+    if ([_solution count] > 0) {
+        switch (section) {
+            case 0:
+                return NSLocalizedString(@"SOLUTION_SECTION_WHO_OWES_WHO", @"Who ows who");
+            case 1:
+                return NSLocalizedString(@"SOLUTION_SECTION_TOTAL_OWES", @"Total owes");
+            case 2:
+                return NSLocalizedString(@"SOLUTION_SECTION_TOTAL_PAID", @"Total paid");
+            default:
+                return nil;
+        }
+    }
     return nil;
 }
 
