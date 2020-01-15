@@ -33,7 +33,7 @@ typedef NS_ENUM(BOOL, MCXRateStatus) {
 
 @implementation MCSolutionTableViewController
 
-#pragma mark - Action
+#pragma mark - IBAction
 
 - (IBAction)mainCancelButton:(id)sender {
     if (self.adEngine.interstitialAd.isReady) {
@@ -174,46 +174,6 @@ typedef NS_ENUM(BOOL, MCXRateStatus) {
     self.dismissMe = dismissMe;
 }
 
-#pragma mark - Inherited from super
-
-- (void)viewDidLoad
-{
-    [super viewDidLoad];
-    
-    // Uncomment the following line to preserve selection between presentations.
-    // self.clearsSelectionOnViewWillAppear = NO;
-    
-    // Uncomment the following line to display an Edit button in the navigation bar for this view controller.
-    // self.navigationItem.rightBarButtonItem = self.editButtonItem;
-
-    _emptyMessage = [[NSBundle mainBundle] loadNibNamed:@"MCTableEmptyMessage_iPad" owner:self options:nil][0];
-}
-
-- (void)viewWillAppear:(BOOL)animated
-{
-    [super viewWillAppear:animated];
-    
-    [self giveSolution];
-    if ([_tonightsBill areAllExchangeRatesValid]) {
-        _areXRatesMissing = xRatesPresent;
-        [[_emptyMessage activityIndicator] stopAnimating];
-        [[_emptyMessage bigMessage] setAlpha:0.0];
-    } else {
-        _areXRatesMissing = xRatesMissing;
-        [[_emptyMessage activityIndicator] startAnimating];
-        [[_emptyMessage bigMessage] setAlpha:0.0];
-    }
-    
-    if (_tonightsBill.peoplePresent.count == 0 || _tonightsBill.payments.count == 0) {
-        [[_emptyMessage bigMessage] setText:NSLocalizedString(@"RETURNPAYMENTSVIEW_NOPAYMENTS", @"Please add payments and/or people if you want a solution on who owes who.")];
-    } else {
-        _emptyMessage.bigMessage.text = @"";
-    }
-
-    [[self tableView] setBackgroundView:_emptyMessage];
-    [self setEmptyMessageNow];
-}
-
 #pragma mark - UITableViewController
 
 #pragma mark - UITableViewDataSource
@@ -347,6 +307,42 @@ typedef NS_ENUM(BOOL, MCXRateStatus) {
 }
 
 #pragma mark - UIViewController
+
+- (void)viewDidLoad {
+    [super viewDidLoad];
+    
+    // Uncomment the following line to preserve selection between presentations.
+    // self.clearsSelectionOnViewWillAppear = NO;
+    
+    // Uncomment the following line to display an Edit button in the navigation bar for this view controller.
+    // self.navigationItem.rightBarButtonItem = self.editButtonItem;
+
+    _emptyMessage = [[NSBundle mainBundle] loadNibNamed:@"MCTableEmptyMessage_iPad" owner:self options:nil][0];
+}
+
+- (void)viewWillAppear:(BOOL)animated {
+    [super viewWillAppear:animated];
+    
+    [self giveSolution];
+    if ([_tonightsBill areAllExchangeRatesValid]) {
+        _areXRatesMissing = xRatesPresent;
+        [[_emptyMessage activityIndicator] stopAnimating];
+        [[_emptyMessage bigMessage] setAlpha:0.0];
+    } else {
+        _areXRatesMissing = xRatesMissing;
+        [[_emptyMessage activityIndicator] startAnimating];
+        [[_emptyMessage bigMessage] setAlpha:0.0];
+    }
+    
+    if (_tonightsBill.peoplePresent.count == 0 || _tonightsBill.payments.count == 0) {
+        [[_emptyMessage bigMessage] setText:NSLocalizedString(@"RETURNPAYMENTSVIEW_NOPAYMENTS", @"Please add payments and/or people if you want a solution on who owes who.")];
+    } else {
+        _emptyMessage.bigMessage.text = @"";
+    }
+
+    [[self tableView] setBackgroundView:_emptyMessage];
+    [self setEmptyMessageNow];
+}
 
 #pragma mark - UIResponder
 
