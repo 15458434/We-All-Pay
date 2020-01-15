@@ -330,12 +330,12 @@ typedef NS_ENUM(BOOL, MCXRateStatus) {
     // self.navigationItem.rightBarButtonItem = self.editButtonItem;
 
     _emptyMessage = [[NSBundle mainBundle] loadNibNamed:@"MCTableEmptyMessage_iPad" owner:self options:nil][0];
+    [self giveSolution];
 }
 
 - (void)viewWillAppear:(BOOL)animated {
     [super viewWillAppear:animated];
     
-    [self giveSolution];
     if ([_tonightsBill areAllExchangeRatesValid]) {
         _areXRatesMissing = xRatesPresent;
         [[_emptyMessage activityIndicator] stopAnimating];
