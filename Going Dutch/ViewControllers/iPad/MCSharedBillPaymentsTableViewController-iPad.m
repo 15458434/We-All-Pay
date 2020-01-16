@@ -280,16 +280,15 @@
     // Pass the selected object to the new view controller.
     
     if ([[segue identifier] isEqualToString:@"openPayment"]) {
-        NSIndexPath *ip = [[self tableView] indexPathForSelectedRow];
-        MCPayment *thisPayment =[_dataController objectAtIndexPath:ip];
-        id<MCThisPaymentProtocol, MCTonightsBillTransfer, MCDismissMeBlockProtocol> destination = [[segue destinationViewController] viewControllers][0];
-        if ([destination conformsToProtocol:@protocol(MCThisPaymentProtocol)]) {
-            [destination setThisPayment:thisPayment];
+        UINavigationController *navController = segue.destinationViewController;
+        if (@available(iOS 13.0, *)) {
+            navController.modalInPresentation = YES;
         }
-        if ([destination conformsToProtocol:@protocol(MCTonightsBillTransfer)]) {
-            [destination setTonightsBill:_tonightsBill];
-        }
-        [[self tableView] deselectRowAtIndexPath:ip animated:YES];
+        PaymentViewController *destination = (PaymentViewController *)navController.viewControllers.firstObject;
+        NSIndexPath *indexPath = [self.tableView indexPathForSelectedRow];
+        destination.thisPayment = [_dataController objectAtIndexPath:indexPath];
+        destination.tonightsBill = _tonightsBill;
+        [[self tableView] deselectRowAtIndexPath:indexPath animated:YES];
     }
 }
 
