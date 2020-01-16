@@ -306,11 +306,7 @@
     }
 }
 
-// In a storyboard-based application, you will often want to do a little preparation before navigation
-- (void)prepareForSegue:(UIStoryboardSegue *)segue sender:(id)sender
-{
-    // Get the new view controller using [segue destinationViewController].
-    // Pass the selected object to the new view controller.
+- (void)prepareForSegue:(UIStoryboardSegue *)segue sender:(id)sender {
     
     // When newPerson segue is used add a person to tonightsBill.
     if ([[segue identifier] isEqualToString:@"newPerson"]) {
@@ -320,6 +316,7 @@
         }
         MCPersonTableViewController_iPad *destination = (MCPersonTableViewController_iPad * )navController.viewControllers.firstObject;
         destination.tonightsBill = _tonightsBill;
+        return;
     }
     
     // When newPerson segue is used to add a new payment to tonightsbill.
@@ -330,6 +327,7 @@
         }
         PaymentViewController *destination = (PaymentViewController *)navController.viewControllers.firstObject;
         destination.tonightsBill = _tonightsBill;
+        return;
     }
     
     // Use this string to open payment view with the first payment without payer.
@@ -341,6 +339,7 @@
         PaymentViewController *destination = (PaymentViewController *)navController.viewControllers.firstObject;
         destination.tonightsBill = _tonightsBill;
         destination.thisPayment = [_tonightsBill getFirstPaymentWithoutAPayer];
+        return;
     }
     
     // When openSolutionView is used to go to the solution screen.
@@ -354,6 +353,7 @@
                 [strongSelf dismissViewControllerAnimated:YES completion:nil];
             }
         }];
+        return;
     }
 }
 
