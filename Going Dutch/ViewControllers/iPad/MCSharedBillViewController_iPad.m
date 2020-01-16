@@ -103,8 +103,7 @@
     }
 }
 
-- (IBAction)addressBookButtonPressed:(id)sender
-{
+- (IBAction)addressBookButtonPressed:(id)sender {
     [FIRAnalytics logEventWithName:@"Contacts pressed" parameters:nil];
     if (!_contactsInserter) {
         _contactsInserter = [[ContactsDataReceiver alloc] initWith:_tonightsBill];
@@ -113,8 +112,7 @@
     }];
 }
 
-- (IBAction)addPaymentPressed:(id)sender
-{
+- (IBAction)addPaymentPressed:(id)sender {
     [FIRAnalytics logEventWithName:@"Add Person pressed" parameters:nil];
     if (_tonightsBill.peoplePresent.count == 0) {
         NSString *title = NSLocalizedString(@"Add some people first", @"Title for an alert message, because there are no people added to this event.");
@@ -142,7 +140,9 @@
 #endif
             [UIView animateWithDuration:0.3 delay:0.0 options:UIViewAnimationOptionCurveEaseOut animations:^{
                 self.bottomLayoutConstraintToLeftContainerView.priority = UILayoutPriorityDefaultHigh - 1;
+                self.bottomLayoutConstraintToLeftContainerView.constant = 0;
                 self.bottomLayoutConstraintToRightContainerView.priority = UILayoutPriorityDefaultHigh - 1;
+                self.bottomLayoutConstraintToRightContainerView.constant = 0;
                 [[self view] layoutIfNeeded];
             } completion:nil];
         } else {
@@ -150,7 +150,9 @@
             NSLog(@"putting banner on screen immediately.");
 #endif
             self.bottomLayoutConstraintToLeftContainerView.priority = UILayoutPriorityDefaultHigh - 1;
+            self.bottomLayoutConstraintToLeftContainerView.constant = 0;
             self.bottomLayoutConstraintToRightContainerView.priority = UILayoutPriorityDefaultHigh - 1;
+            self.bottomLayoutConstraintToRightContainerView.constant = 0;
             [[self view] layoutIfNeeded];
         }
     } else {
@@ -166,7 +168,9 @@
 #endif
         [UIView animateWithDuration:0.3 delay:0.0 options:UIViewAnimationOptionCurveEaseIn animations:^{
             self.bottomLayoutConstraintToLeftContainerView.priority = UILayoutPriorityDefaultHigh + 1;
+            self.bottomLayoutConstraintToLeftContainerView.constant = -self.view.safeAreaInsets.bottom;
             self.bottomLayoutConstraintToRightContainerView.priority = UILayoutPriorityDefaultHigh + 1;
+            self.bottomLayoutConstraintToRightContainerView.constant = -self.view.safeAreaInsets.bottom;
             [[self view] layoutIfNeeded];
         } completion:nil];
     } else {
@@ -174,7 +178,9 @@
         NSLog(@"putting banner off screen immediately.");
 #endif
         self.bottomLayoutConstraintToLeftContainerView.priority = UILayoutPriorityDefaultHigh + 1;
+        self.bottomLayoutConstraintToLeftContainerView.constant = -self.view.safeAreaInsets.bottom;
         self.bottomLayoutConstraintToRightContainerView.priority = UILayoutPriorityDefaultHigh + 1;
+        self.bottomLayoutConstraintToRightContainerView.constant = -self.view.safeAreaInsets.bottom;
         [[self view] layoutIfNeeded];
     }
 }
