@@ -9,6 +9,7 @@
 @import FirebaseAnalytics;
 
 #import "MCSharedBillPeoplePresentTableViewController-iPad.h"
+#import "MCPersonTableViewController_iPad.h"
 #import "UIViewController+WeAllPayStore.h"
 
 #import "MCPerson+addons.h"
@@ -237,12 +238,14 @@
 - (void)prepareForSegue:(UIStoryboardSegue *)segue sender:(id)sender {
 
     if ([[segue identifier] isEqualToString:@"openPerson"]) {
-        id destination = [[segue destinationViewController] viewControllers][0];
-        if ([destination conformsToProtocol:@protocol(MCThisPersonProtocol)]) {
-            NSIndexPath *ip = [[self tableView] indexPathForSelectedRow];
-            [destination setThisPerson:[_dataController objectAtIndexPath:ip]];
-            [[self tableView] deselectRowAtIndexPath:ip animated:YES];
+        UINavigationController *navController = (UINavigationController *)segue.destinationViewController;
+        if (@available(iOS 13.0, *)) {
+            navController.modalInPresentation = YES;
         }
+        MCPersonTableViewController_iPad *destination = (MCPersonTableViewController_iPad *)navController.viewControllers.firstObject;
+        NSIndexPath *indexPath = self.tableView.indexPathForSelectedRow;
+        destination.thisPerson = [_dataController objectAtIndexPath:indexPath];
+        [self.tableView deselectRowAtIndexPath:indexPath animated:YES];
     }
 }
 
