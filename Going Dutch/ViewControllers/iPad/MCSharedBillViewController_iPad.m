@@ -321,17 +321,23 @@
     
     // When newPerson segue is used to add a new payment to tonightsbill.
     if ([[segue identifier] isEqualToString:@"newPayment"]) {
-        id destination = [[segue destinationViewController] viewControllers][0];
-        if ([destination conformsToProtocol:@protocol(MCTonightsBillTransfer)]) {
-            [destination setTonightsBill:_tonightsBill];
+        UINavigationController *navController = (UINavigationController *)segue.destinationViewController;
+        if (@available(iOS 13.0, *)) {
+            navController.modalInPresentation = YES;
         }
+        PaymentViewController *destination = (PaymentViewController *)navController.viewControllers.firstObject;
+        destination.tonightsBill = _tonightsBill;
     }
     
     // Use this string to open payment view with the first payment without payer.
     if ([segue.identifier isEqualToString:@"firstPaymentWithoutPayer"]) {
-        id<MCThisPaymentProtocol, MCTonightsBillTransfer> destination = [segue.destinationViewController viewControllers][0];
-        [destination setTonightsBill:_tonightsBill];
-        [destination setThisPayment:[_tonightsBill getFirstPaymentWithoutAPayer]];
+        UINavigationController *navController = (UINavigationController *)segue.destinationViewController;
+        if (@available(iOS 13.0, *)) {
+            navController.modalInPresentation = YES;
+        }
+        PaymentViewController *destination = (PaymentViewController *)navController.viewControllers.firstObject;
+        destination.tonightsBill = _tonightsBill;
+        destination.thisPayment = [_tonightsBill getFirstPaymentWithoutAPayer];
     }
     
     // When openSolutionView is used to go to the solution screen.
