@@ -10,6 +10,7 @@
 @import GoogleMobileAds;
 
 #import "MCSharedBillViewController_iPad.h"
+#import "MCPersonTableViewController_iPad.h"
 
 #import "MCPerson+addons.h"
 #import "MCSharedBill+addons.h"
@@ -313,10 +314,12 @@
     
     // When newPerson segue is used add a person to tonightsBill.
     if ([[segue identifier] isEqualToString:@"newPerson"]) {
-        id destination = [[segue destinationViewController] viewControllers][0];
-        if ([destination conformsToProtocol:@protocol(MCTonightsBillTransfer)]) {
-            [destination setTonightsBill:_tonightsBill];
+        UINavigationController *navController = (UINavigationController *)segue.destinationViewController;
+        if (@available(iOS 13.0, *)) {
+            navController.modalInPresentation = YES;
         }
+        MCPersonTableViewController_iPad *destination = (MCPersonTableViewController_iPad * )navController.viewControllers.firstObject;
+        destination.tonightsBill = _tonightsBill;
     }
     
     // When newPerson segue is used to add a new payment to tonightsbill.
