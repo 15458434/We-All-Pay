@@ -110,9 +110,6 @@
         _contactsInserter = [[ContactsDataReceiver alloc] initWith:_tonightsBill];
     }
     [_contactsInserter presentContactsPickerWith:self completion:^{
-#ifdef DEBUG
-        NSLog(@"I love Ilse.");
-#endif
     }];
 }
 
@@ -135,7 +132,7 @@
 
 #pragma mark - New in this class
 
-- (void)putBannerOnScreen:(BOOL)animate
+- (void)putBannerOnScreenWithAnimation:(BOOL)animate
 {
     BOOL isNotPurchased = ![[MCStoreInterface defaultStoreInterface] isProProductPurchased];
     if (isNotPurchased) {
@@ -157,11 +154,11 @@
             [[self view] layoutIfNeeded];
         }
     } else {
-        [self putBannerOffScreen:animate];
+        [self putBannerOffScreenWithAnimation:animate];
     }
 }
 
-- (void)putBannerOffScreen:(BOOL)animate
+- (void)putBannerOffScreenWithAnimation:(BOOL)animate
 {
     if (animate) {
 #ifdef DEBUG
@@ -242,14 +239,14 @@
 #pragma mark - AdEngineDelegate
 
 - (void)adEngine:(MCAdEngine *)adEngine putOnScreenBannerView:(GADBannerView *)bannerView {
-    [self putBannerOnScreen:YES];
+    [self putBannerOnScreenWithAnimation:YES];
 }
 
 - (void)adEngine:(MCAdEngine *)adEngine putOffScreenBannerView:(GADBannerView *)bannerView {
     if (adEngine) {
-        [self putBannerOffScreen:YES];
+        [self putBannerOffScreenWithAnimation:YES];
     } else {
-        [self putBannerOffScreen:NO];
+        [self putBannerOffScreenWithAnimation:NO];
     }
 }
 
@@ -261,9 +258,7 @@
     
     [[self navigationController] setToolbarHidden:YES animated:YES];
     
-    // Hide AdBanner
-    self.bottomLayoutConstraintToLeftContainerView.priority = UILayoutPriorityDefaultHigh + 1;
-    self.bottomLayoutConstraintToRightContainerView.priority = UILayoutPriorityDefaultHigh + 1;
+    [self putBannerOffScreenWithAnimation:NO];
 }
 
 - (void)viewWillAppear:(BOOL)animated
