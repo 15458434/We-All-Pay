@@ -103,21 +103,16 @@
     }
 }
 
-- (IBAction)addressBookButtonPressed:(id)sender
-{
+- (IBAction)addressBookButtonPressed:(id)sender {
     [FIRAnalytics logEventWithName:@"Contacts pressed" parameters:nil];
     if (!_contactsInserter) {
         _contactsInserter = [[ContactsDataReceiver alloc] initWith:_tonightsBill];
     }
     [_contactsInserter presentContactsPickerWith:self completion:^{
-#ifdef DEBUG
-        NSLog(@"I love Ilse.");
-#endif
     }];
 }
 
-- (IBAction)addPaymentPressed:(id)sender
-{
+- (IBAction)addPaymentPressed:(id)sender {
     [FIRAnalytics logEventWithName:@"Add Person pressed" parameters:nil];
     if (_tonightsBill.peoplePresent.count == 0) {
         NSString *title = NSLocalizedString(@"Add some people first", @"Title for an alert message, because there are no people added to this event.");
@@ -135,7 +130,7 @@
 
 #pragma mark - New in this class
 
-- (void)putBannerOnScreen:(BOOL)animate
+- (void)putBannerOnScreenWithAnimation:(BOOL)animate
 {
     BOOL isNotPurchased = ![[MCStoreInterface defaultStoreInterface] isProProductPurchased];
     if (isNotPurchased) {
@@ -145,7 +140,9 @@
 #endif
             [UIView animateWithDuration:0.3 delay:0.0 options:UIViewAnimationOptionCurveEaseOut animations:^{
                 self.bottomLayoutConstraintToLeftContainerView.priority = UILayoutPriorityDefaultHigh - 1;
+                self.bottomLayoutConstraintToLeftContainerView.constant = 0;
                 self.bottomLayoutConstraintToRightContainerView.priority = UILayoutPriorityDefaultHigh - 1;
+                self.bottomLayoutConstraintToRightContainerView.constant = 0;
                 [[self view] layoutIfNeeded];
             } completion:nil];
         } else {
@@ -153,15 +150,17 @@
             NSLog(@"putting banner on screen immediately.");
 #endif
             self.bottomLayoutConstraintToLeftContainerView.priority = UILayoutPriorityDefaultHigh - 1;
+            self.bottomLayoutConstraintToLeftContainerView.constant = 0;
             self.bottomLayoutConstraintToRightContainerView.priority = UILayoutPriorityDefaultHigh - 1;
+            self.bottomLayoutConstraintToRightContainerView.constant = 0;
             [[self view] layoutIfNeeded];
         }
     } else {
-        [self putBannerOffScreen:animate];
+        [self putBannerOffScreenWithAnimation:animate];
     }
 }
 
-- (void)putBannerOffScreen:(BOOL)animate
+- (void)putBannerOffScreenWithAnimation:(BOOL)animate
 {
     if (animate) {
 #ifdef DEBUG
@@ -169,7 +168,9 @@
 #endif
         [UIView animateWithDuration:0.3 delay:0.0 options:UIViewAnimationOptionCurveEaseIn animations:^{
             self.bottomLayoutConstraintToLeftContainerView.priority = UILayoutPriorityDefaultHigh + 1;
+            self.bottomLayoutConstraintToLeftContainerView.constant = -self.view.safeAreaInsets.bottom;
             self.bottomLayoutConstraintToRightContainerView.priority = UILayoutPriorityDefaultHigh + 1;
+            self.bottomLayoutConstraintToRightContainerView.constant = -self.view.safeAreaInsets.bottom;
             [[self view] layoutIfNeeded];
         } completion:nil];
     } else {
@@ -177,7 +178,9 @@
         NSLog(@"putting banner off screen immediately.");
 #endif
         self.bottomLayoutConstraintToLeftContainerView.priority = UILayoutPriorityDefaultHigh + 1;
+        self.bottomLayoutConstraintToLeftContainerView.constant = -self.view.safeAreaInsets.bottom;
         self.bottomLayoutConstraintToRightContainerView.priority = UILayoutPriorityDefaultHigh + 1;
+        self.bottomLayoutConstraintToRightContainerView.constant = -self.view.safeAreaInsets.bottom;
         [[self view] layoutIfNeeded];
     }
 }
@@ -242,14 +245,14 @@
 #pragma mark - AdEngineDelegate
 
 - (void)adEngine:(MCAdEngine *)adEngine putOnScreenBannerView:(GADBannerView *)bannerView {
-    [self putBannerOnScreen:YES];
+    [self putBannerOnScreenWithAnimation:YES];
 }
 
 - (void)adEngine:(MCAdEngine *)adEngine putOffScreenBannerView:(GADBannerView *)bannerView {
     if (adEngine) {
-        [self putBannerOffScreen:YES];
+        [self putBannerOffScreenWithAnimation:YES];
     } else {
-        [self putBannerOffScreen:NO];
+        [self putBannerOffScreenWithAnimation:NO];
     }
 }
 
@@ -261,9 +264,7 @@
     
     [[self navigationController] setToolbarHidden:YES animated:YES];
     
-    // Hide AdBanner
-    self.bottomLayoutConstraintToLeftContainerView.priority = UILayoutPriorityDefaultHigh + 1;
-    self.bottomLayoutConstraintToRightContainerView.priority = UILayoutPriorityDefaultHigh + 1;
+    [self putBannerOffScreenWithAnimation:NO];
 }
 
 - (void)viewWillAppear:(BOOL)animated
