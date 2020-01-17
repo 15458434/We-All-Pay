@@ -9,6 +9,7 @@
 @import FirebaseAnalytics;
 
 #import "MCSharedBillPeoplePresentTableViewController-iPad.h"
+#import "MCPersonTableViewController_iPad.h"
 #import "UIViewController+WeAllPayStore.h"
 
 #import "MCPerson+addons.h"
@@ -73,57 +74,6 @@
     }
 }
 
-#pragma mark - Inherited from super
-
-- (void)viewDidLoad
-{
-    [super viewDidLoad];
-    
-    // Uncomment the following line to preserve selection between presentations.
-    // self.clearsSelectionOnViewWillAppear = NO;
-    
-    // Uncomment the following line to display an Edit button in the navigation bar for this view controller.
-    // self.navigationItem.rightBarButtonItem = self.editButtonItem;
-    
-    [self startRespondingToStoreChangeNotifications];
-    
-    _emptyMessage = [[NSBundle mainBundle] loadNibNamed:@"MCTableEmptyMessage_iPad" owner:self options:nil][0];
-    [[_emptyMessage bigMessage] setText:NSLocalizedString(@"PEOPLE_LIST_EMPTY_MESSAGE", @"Press \"add Person\" to add a person who you'd like to share this bill with.")];
-    [[_emptyMessage bigMessage] setAlpha:0.0];
-    [[self tableView] setBackgroundView:_emptyMessage];
-    self.tableView.estimatedRowHeight = 120.0;
-}
-
-- (void)viewWillAppear:(BOOL)animated
-{
-    [super viewWillAppear:animated];
-    
-    // Get tonightsBill from parentViewController
-    id myParent = [self parentViewController];
-    if ([myParent conformsToProtocol:@protocol(MCTonightsBillTransfer)]) {
-        _tonightsBill = [myParent tonightsBill];
-    }
-    
-    if (!_dataController) {
-        _dataController = [[MCWeAllPayStoreController defaultStore] sharedBillPeoplePresentDataControllerForDelegate:self];
-        [self performFetch];
-        [[self tableView] reloadData];
-        [self setEmptyMessageNow];
-    }
-}
-
-- (void)viewDidAppear:(BOOL)animated
-{
-    [super viewDidAppear:animated];
-    
-    NSLog(@"People on screen");
-}
-
-- (void)dealloc
-{
-    [[NSNotificationCenter defaultCenter] removeObserver:self];
-}
-
 #pragma mark - Core Data Notifications
 
 - (void)storeWillBeSwapped:(NSNotification *)notification
@@ -159,18 +109,11 @@
 
 #pragma mark - NSFetchedResultsControllerDelegate
 
-- (void)controllerWillChangeContent:(NSFetchedResultsController *)controller
-{
+- (void)controllerWillChangeContent:(NSFetchedResultsController *)controller {
     [[self tableView] beginUpdates];
 }
 
-- (void)controllerDidChangeContent:(NSFetchedResultsController *)controller
-{
-    [[self tableView] endUpdates];
-}
-
-- (void)controller:(NSFetchedResultsController *)controller didChangeObject:(id)anObject atIndexPath:(NSIndexPath *)indexPath forChangeType:(NSFetchedResultsChangeType)type newIndexPath:(NSIndexPath *)newIndexPath
-{
+- (void)controller:(NSFetchedResultsController *)controller didChangeObject:(id)anObject atIndexPath:(NSIndexPath *)indexPath forChangeType:(NSFetchedResultsChangeType)type newIndexPath:(NSIndexPath *)newIndexPath {
     switch(type) {
             
         case NSFetchedResultsChangeInsert:
@@ -194,31 +137,22 @@
     }
 }
 
-#pragma mark - UITableViewDelegate
-
-- (CGFloat)tableView:(UITableView *)tableView heightForRowAtIndexPath:(NSIndexPath *)indexPath
-{
-    return 120;
+- (void)controllerDidChangeContent:(NSFetchedResultsController *)controller {
+    [[self tableView] endUpdates];
 }
 
-- (void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath
-{
-    [FIRAnalytics logEventWithName:@"Open person details" parameters:nil];
-    [self performSegueWithIdentifier:@"openPerson" sender:self];
-}
+#pragma mark - UITableViewController
 
-#pragma mark - Table view data source
+#pragma mark - UITableViewDataSource
 
-- (NSInteger)numberOfSectionsInTableView:(UITableView *)tableView
-{
-    // Return the number of sections.
-    return 1;
-}
-
-- (NSInteger)tableView:(UITableView *)tableView numberOfRowsInSection:(NSInteger)section
-{
+- (NSInteger)tableView:(UITableView *)tableView numberOfRowsInSection:(NSInteger)section {
     // Return the number of rows in the section.
     return [[_dataController fetchedObjects] count];
+}
+
+- (NSInteger)numberOfSectionsInTableView:(UITableView *)tableView {
+    // Return the number of sections.
+    return 1;
 }
 
 - (UITableViewCell *)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath {
@@ -236,20 +170,8 @@
     return thisCell;
 }
 
-// Override to support conditional editing of the table view.
-- (BOOL)tableView:(UITableView *)tableView canEditRowAtIndexPath:(NSIndexPath *)indexPath
-{
-    // Return NO if you do not want the specified item to be editable.
-    if ([_tonightsBill hasPersonPaidSomething:[_dataController objectAtIndexPath:indexPath]]) {
-        return NO;
-    } else {
-        return [tableView isEditing];
-    }
-}
-
 // Override to support editing the table view.
-- (void)tableView:(UITableView *)tableView commitEditingStyle:(UITableViewCellEditingStyle)editingStyle forRowAtIndexPath:(NSIndexPath *)indexPath
-{
+- (void)tableView:(UITableView *)tableView commitEditingStyle:(UITableViewCellEditingStyle)editingStyle forRowAtIndexPath:(NSIndexPath *)indexPath {
     if (editingStyle == UITableViewCellEditingStyleDelete) {
         // Delete the row from the data source
         [FIRAnalytics logEventWithName:@"Delete Person" parameters:nil];
@@ -258,40 +180,81 @@
         [[MCWeAllPayStoreController defaultStore] saveMainThreadContext];
     } else if (editingStyle == UITableViewCellEditingStyleInsert) {
         // Create a new instance of the appropriate class, insert it into the array, and add a new row to the table view
-    }   
-}
-
-/*
-// Override to support rearranging the table view.
-- (void)tableView:(UITableView *)tableView moveRowAtIndexPath:(NSIndexPath *)fromIndexPath toIndexPath:(NSIndexPath *)toIndexPath
-{
-}
-*/
-
-/*
-// Override to support conditional rearranging of the table view.
-- (BOOL)tableView:(UITableView *)tableView canMoveRowAtIndexPath:(NSIndexPath *)indexPath
-{
-    // Return NO if you do not want the item to be re-orderable.
-    return YES;
-}
-*/
-
-#pragma mark - Navigation
-
-// In a storyboard-based application, you will often want to do a little preparation before navigation
-- (void)prepareForSegue:(UIStoryboardSegue *)segue sender:(id)sender
-{
-    // Get the new view controller using [segue destinationViewController].
-    // Pass the selected object to the new view controller.
-    if ([[segue identifier] isEqualToString:@"openPerson"]) {
-        id destination = [[segue destinationViewController] viewControllers][0];
-        if ([destination conformsToProtocol:@protocol(MCThisPersonProtocol)]) {
-            NSIndexPath *ip = [[self tableView] indexPathForSelectedRow];
-            [destination setThisPerson:[_dataController objectAtIndexPath:ip]];
-            [[self tableView] deselectRowAtIndexPath:ip animated:YES];
-        }
     }
+}
+
+// Override to support conditional editing of the table view.
+- (BOOL)tableView:(UITableView *)tableView canEditRowAtIndexPath:(NSIndexPath *)indexPath {
+    // Return NO if you do not want the specified item to be editable.
+    if ([_tonightsBill hasPersonPaidSomething:[_dataController objectAtIndexPath:indexPath]]) {
+        return NO;
+    } else {
+        return [tableView isEditing];
+    }
+}
+
+#pragma mark - UITableViewDelegate
+
+- (void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath {
+    [FIRAnalytics logEventWithName:@"Open person details" parameters:nil];
+    [self performSegueWithIdentifier:@"openPerson" sender:self];
+}
+
+- (CGFloat)tableView:(UITableView *)tableView heightForRowAtIndexPath:(NSIndexPath *)indexPath {
+    return 120;
+}
+
+#pragma mark - UIViewController
+
+- (void)viewDidLoad {
+    [super viewDidLoad];
+
+    [self startRespondingToStoreChangeNotifications];
+    
+    _emptyMessage = [[NSBundle mainBundle] loadNibNamed:@"MCTableEmptyMessage_iPad" owner:self options:nil][0];
+    [[_emptyMessage bigMessage] setText:NSLocalizedString(@"PEOPLE_LIST_EMPTY_MESSAGE", @"Press \"add Person\" to add a person who you'd like to share this bill with.")];
+    [[_emptyMessage bigMessage] setAlpha:0.0];
+    [[self tableView] setBackgroundView:_emptyMessage];
+    self.tableView.estimatedRowHeight = 120.0;
+}
+
+- (void)viewWillAppear:(BOOL)animated {
+    [super viewWillAppear:animated];
+    
+    // Get tonightsBill from parentViewController
+    id myParent = [self parentViewController];
+    if ([myParent conformsToProtocol:@protocol(MCTonightsBillTransfer)]) {
+        _tonightsBill = [myParent tonightsBill];
+    }
+    
+    if (!_dataController) {
+        _dataController = [[MCWeAllPayStoreController defaultStore] sharedBillPeoplePresentDataControllerForDelegate:self];
+        [self performFetch];
+        [[self tableView] reloadData];
+        [self setEmptyMessageNow];
+    }
+}
+
+- (void)prepareForSegue:(UIStoryboardSegue *)segue sender:(id)sender {
+
+    if ([[segue identifier] isEqualToString:@"openPerson"]) {
+        UINavigationController *navController = (UINavigationController *)segue.destinationViewController;
+        if (@available(iOS 13.0, *)) {
+            navController.modalInPresentation = YES;
+        }
+        MCPersonTableViewController_iPad *destination = (MCPersonTableViewController_iPad *)navController.viewControllers.firstObject;
+        NSIndexPath *indexPath = self.tableView.indexPathForSelectedRow;
+        destination.thisPerson = [_dataController objectAtIndexPath:indexPath];
+        [self.tableView deselectRowAtIndexPath:indexPath animated:YES];
+    }
+}
+
+#pragma mark - UIResponder
+
+#pragma mark - NSObject
+
+- (void)dealloc {
+    [[NSNotificationCenter defaultCenter] removeObserver:self];
 }
 
 @end

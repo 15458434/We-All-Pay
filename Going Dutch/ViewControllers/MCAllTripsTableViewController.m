@@ -279,8 +279,11 @@ typedef NS_ENUM(BOOL, MCTonightsBillStatus) {
     [self startRespondingToStoreChangeNotifications];
     
     [self prepareUserActivity];
+    
+#ifdef ADTEST
+    [MCAdEngine presentAdTestSuiteFromPresentingViewController:self];
+#endif
 }
-
 
 - (void)viewWillAppear:(BOOL)animated {
     [super viewWillAppear:animated];
@@ -307,6 +310,8 @@ typedef NS_ENUM(BOOL, MCTonightsBillStatus) {
     if (self.userActivity) {
         [self.userActivity becomeCurrent];
     }
+    
+    [MCAdEngine presentPrivacyConsentRequestIfNecessaryFromViewController:self];
 }
 
 - (void)prepareForSegue:(UIStoryboardSegue *)segue sender:(id)sender {

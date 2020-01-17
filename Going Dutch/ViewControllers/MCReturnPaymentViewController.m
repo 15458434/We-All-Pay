@@ -49,7 +49,11 @@ typedef NS_ENUM(BOOL, MCXRateStatus) {
 
 - (IBAction)mainCancelButtonPressed:(id)sender
 {
-    [[[self navigationController] presentingViewController] dismissViewControllerAnimated:YES completion:nil];
+    if (self.adEngine.interstitialAd.isReady) {
+        [self.adEngine putOnScreenIfAvailableWithPresentingViewController:self];
+    } else {
+        [self.navigationController.presentingViewController dismissViewControllerAnimated:YES completion:nil];
+    }
 }
 
 #pragma mark - Public in this class
@@ -57,6 +61,13 @@ typedef NS_ENUM(BOOL, MCXRateStatus) {
 - (void)openMailView:(id)sender
 {
 
+}
+
+- (void)updateEvent:(MCSharedBill *)event andSendMailDelegate:(MCSharedBillPageViewController *)sendMailDelegate andAdEngine:(MCInterstitialAdEngine *)adEngine {
+    _tonightsBill = event;
+    self.sendMailObject = sendMailDelegate;
+    self.loadInterstitialOnViewDidLoad = YES;
+    self.adEngine = adEngine;
 }
 
 #pragma mark - Private in this class
@@ -182,10 +193,25 @@ typedef NS_ENUM(BOOL, MCXRateStatus) {
     }
 }
 
-#pragma mark - Inherited from super.
+#pragma mark - MCGenericInterstitialAdTableViewController
 
-- (void)viewDidLoad
-{
+- (NSString *)adUnitId {
+    return @"ca-app-pub-5354415674074435/8899635256";
+}
+
+#pragma mark - MCInterstitialAdEngineDelegate
+
+- (void)willDismissInterstatialFor:(MCInterstitialAdEngine *)adEngine {
+//    __weak typeof(self) weakSelf = self;
+//    dispatch_async(dispatch_get_main_queue(), ^{
+//        [weakSelf.navigationController.presentingViewController dismissViewControllerAnimated:YES completion:nil];
+//    });
+    [self.navigationController.presentingViewController dismissViewControllerAnimated:YES completion:nil];
+}
+
+#pragma mark - UIViewController
+
+- (void)viewDidLoad {
     [super viewDidLoad];
 
     // Uncomment the following line to preserve selection between presentations.
@@ -203,8 +229,7 @@ typedef NS_ENUM(BOOL, MCXRateStatus) {
     
 }
 
-- (void)viewWillAppear:(BOOL)animated
-{
+- (void)viewWillAppear:(BOOL)animated {
     [super viewWillAppear:animated];
     
     [self giveSolution];
@@ -218,11 +243,6 @@ typedef NS_ENUM(BOOL, MCXRateStatus) {
     } else {
         _emptyMessage.bigMessage.text = @"";
     }
-}
-
-- (BOOL)shouldPresentInterstitialAd
-{
-    return NO;
 }
 
 #pragma mark - UITableViewDelegate

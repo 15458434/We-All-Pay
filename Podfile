@@ -8,7 +8,10 @@ target 'We all pay' do
 pod 'Firebase/Core'
 pod 'Firebase/AdMob'
 pod 'GoogleMobileAdsMediationFacebook'
-#pod 'GoogleMobileAdsMediationTestSuite', :configurations => ['Debug'], :path => '/path/to/GoogleMobileAdsMediationTestSuite/'
+pod 'GoogleMobileAdsMediationInMobi'
+pod 'GoogleMobileAdsMediationAdColony'
+pod 'PersonalizedAdConsent'
+pod 'GoogleMobileAdsMediationTestSuite', :configurations => ['AdTest']
 
     target 'We all pay Tests' do
         inherit! :search_paths

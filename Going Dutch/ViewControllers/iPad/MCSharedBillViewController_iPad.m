@@ -10,6 +10,7 @@
 @import GoogleMobileAds;
 
 #import "MCSharedBillViewController_iPad.h"
+#import "MCPersonTableViewController_iPad.h"
 
 #import "MCPerson+addons.h"
 #import "MCSharedBill+addons.h"
@@ -20,16 +21,16 @@
 
 #import "We_all_pay-Swift.h"
 
-@interface MCSharedBillViewController_iPad () <GADBannerViewDelegate>
+@interface MCSharedBillViewController_iPad ()
 
-@property (nonatomic, readonly) GADRequest *generalAdRequest;
-@property (weak, nonatomic) IBOutlet GADBannerView *worstSalesPitchEverView;
 @property (weak, nonatomic) IBOutlet NSLayoutConstraint *worstSalesPitchEverViewHeight;
 @property (weak, nonatomic) IBOutlet NSLayoutConstraint *bottomLayoutConstraintToLeftContainerView;
 @property (weak, nonatomic) IBOutlet NSLayoutConstraint *bottomLayoutConstraintToRightContainerView;
 
 @property (weak, nonatomic) IBOutlet UITextField *tripNameField;
 @property (weak, nonatomic) IBOutlet UIView *leftTopView;
+
+@property (strong, nonatomic) IBOutlet MCInterstitialAdEngine *interstitialAdEngine;
 
 @property (strong, nonatomic) ContactsDataReceiver *contactsInserter;
 
@@ -102,21 +103,16 @@
     }
 }
 
-- (IBAction)addressBookButtonPressed:(id)sender
-{
+- (IBAction)addressBookButtonPressed:(id)sender {
     [FIRAnalytics logEventWithName:@"Contacts pressed" parameters:nil];
     if (!_contactsInserter) {
         _contactsInserter = [[ContactsDataReceiver alloc] initWith:_tonightsBill];
     }
     [_contactsInserter presentContactsPickerWith:self completion:^{
-#ifdef DEBUG
-        NSLog(@"I love Ilse.");
-#endif
     }];
 }
 
-- (IBAction)addPaymentPressed:(id)sender
-{
+- (IBAction)addPaymentPressed:(id)sender {
     [FIRAnalytics logEventWithName:@"Add Person pressed" parameters:nil];
     if (_tonightsBill.peoplePresent.count == 0) {
         NSString *title = NSLocalizedString(@"Add some people first", @"Title for an alert message, because there are no people added to this event.");
@@ -134,19 +130,7 @@
 
 #pragma mark - New in this class
 
-- (GADRequest *)generalAdRequest
-{
-    GADRequest *request = [GADRequest request];
-#ifdef DEBUG
-    NSString *kiPhone5S = @"109c8d87d59d27b62a53157e313d1a49";
-    NSString *kiPhone4S = @"87ebfc252a3675f03375aa13fce9286f";
-    NSString *iPadRetina = @"63f51db641e29b85012042e407de3cba";
-    GADMobileAds.sharedInstance.requestConfiguration.testDeviceIdentifiers = @[kGADSimulatorID, kiPhone5S, kiPhone4S, iPadRetina];
-#endif
-    return request;
-}
-
-- (void)putBannerOnScreen:(BOOL)animate
+- (void)putBannerOnScreenWithAnimation:(BOOL)animate
 {
     BOOL isNotPurchased = ![[MCStoreInterface defaultStoreInterface] isProProductPurchased];
     if (isNotPurchased) {
@@ -156,7 +140,9 @@
 #endif
             [UIView animateWithDuration:0.3 delay:0.0 options:UIViewAnimationOptionCurveEaseOut animations:^{
                 self.bottomLayoutConstraintToLeftContainerView.priority = UILayoutPriorityDefaultHigh - 1;
+                self.bottomLayoutConstraintToLeftContainerView.constant = 0;
                 self.bottomLayoutConstraintToRightContainerView.priority = UILayoutPriorityDefaultHigh - 1;
+                self.bottomLayoutConstraintToRightContainerView.constant = 0;
                 [[self view] layoutIfNeeded];
             } completion:nil];
         } else {
@@ -164,15 +150,17 @@
             NSLog(@"putting banner on screen immediately.");
 #endif
             self.bottomLayoutConstraintToLeftContainerView.priority = UILayoutPriorityDefaultHigh - 1;
+            self.bottomLayoutConstraintToLeftContainerView.constant = 0;
             self.bottomLayoutConstraintToRightContainerView.priority = UILayoutPriorityDefaultHigh - 1;
+            self.bottomLayoutConstraintToRightContainerView.constant = 0;
             [[self view] layoutIfNeeded];
         }
     } else {
-        [self putBannerOffScreen:animate];
+        [self putBannerOffScreenWithAnimation:animate];
     }
 }
 
-- (void)putBannerOffScreen:(BOOL)animate
+- (void)putBannerOffScreenWithAnimation:(BOOL)animate
 {
     if (animate) {
 #ifdef DEBUG
@@ -180,7 +168,9 @@
 #endif
         [UIView animateWithDuration:0.3 delay:0.0 options:UIViewAnimationOptionCurveEaseIn animations:^{
             self.bottomLayoutConstraintToLeftContainerView.priority = UILayoutPriorityDefaultHigh + 1;
+            self.bottomLayoutConstraintToLeftContainerView.constant = -self.view.safeAreaInsets.bottom;
             self.bottomLayoutConstraintToRightContainerView.priority = UILayoutPriorityDefaultHigh + 1;
+            self.bottomLayoutConstraintToRightContainerView.constant = -self.view.safeAreaInsets.bottom;
             [[self view] layoutIfNeeded];
         } completion:nil];
     } else {
@@ -188,47 +178,11 @@
         NSLog(@"putting banner off screen immediately.");
 #endif
         self.bottomLayoutConstraintToLeftContainerView.priority = UILayoutPriorityDefaultHigh + 1;
+        self.bottomLayoutConstraintToLeftContainerView.constant = -self.view.safeAreaInsets.bottom;
         self.bottomLayoutConstraintToRightContainerView.priority = UILayoutPriorityDefaultHigh + 1;
+        self.bottomLayoutConstraintToRightContainerView.constant = -self.view.safeAreaInsets.bottom;
         [[self view] layoutIfNeeded];
     }
-}
-
-- (void)updateBannerSize:(CGSize)size
-{
-    if (size.height > size.width) {
-        self.worstSalesPitchEverView.adSize = kGADAdSizeSmartBannerPortrait;
-    } else {
-        self.worstSalesPitchEverView.adSize = kGADAdSizeSmartBannerLandscape;
-    }
-    
-    if (size.height <= 400) {
-        self.worstSalesPitchEverViewHeight.constant = 32;
-    } else if (size.height > 400 && size.height <= 720) {
-        self.worstSalesPitchEverViewHeight.constant = 50;
-    } else if (size.height > 720) {
-        self.worstSalesPitchEverViewHeight.constant = 90;
-    }
-}
-
-- (void)prepareWorstSalesPitchEverView
-{
-#ifdef SCREENSHOTS
-    self.worstSalesPitchEverView.autoloadEnabled = NO;
-#else
-    BOOL isNotPurchased = ![[MCStoreInterface defaultStoreInterface] isProProductPurchased];
-    if (isNotPurchased) {
-        NSParameterAssert(_worstSalesPitchEverView);
-        [[self worstSalesPitchEverView] layoutIfNeeded];
-        [self updateBannerSize:[[UIScreen mainScreen] bounds].size];
-        
-        self.worstSalesPitchEverView.rootViewController = self;
-        self.worstSalesPitchEverView.delegate = self;
-        [[self worstSalesPitchEverView] loadRequest:self.generalAdRequest];
-        self.worstSalesPitchEverView.autoloadEnabled = YES;
-    } else {
-        self.worstSalesPitchEverView.autoloadEnabled = NO;
-    }
-#endif
 }
 
 - (void)openFirstPaymentWithoutAPayer
@@ -238,48 +192,79 @@
 
 #pragma mark - Notifications
 
-- (void)applyProVersion:(NSNotification *)notification
-{
+- (void)applyProVersion:(NSNotification *)notification {
+    __weak typeof(self) weakSelf = self;
     [[NSOperationQueue mainQueue] addOperationWithBlock:^{
-        [self putBannerOffScreen:YES];
-        self.worstSalesPitchEverView.autoloadEnabled = NO;
+        [weakSelf adEngine:weakSelf.adBannerEngine putOffScreenBannerView:self.worstSalesPitchEverView];
+        weakSelf.worstSalesPitchEverView.autoloadEnabled = NO;
     }];
 }
 
-- (void)applicationWillEnterForegroundHandler:(NSNotification *) notication
-{
+- (void)applicationWillEnterForegroundHandler:(NSNotification *) notication {
     BOOL isNotPurchased = ![[MCStoreInterface defaultStoreInterface] isProProductPurchased];
     if (isNotPurchased) {
-        GADRequest *request = [self generalAdRequest];
-        [[self worstSalesPitchEverView] loadRequest:request];
+        [self.adBannerEngine prepareAdBanner:self.worstSalesPitchEverView withAdUnitId:self.adUnitId andViewController:self];
     }
 }
 
-#pragma mark - GADBannerViewDelegate
+#pragma mark - UITextFieldDelegate
 
-- (void)adViewDidReceiveAd:(GADBannerView *)bannerView
+- (BOOL)textFieldShouldBeginEditing:(UITextField *)textField
 {
-    [self putBannerOnScreen:YES];
+    if (textField == _tripNameField) {
+        return YES;
+    } else {
+#ifdef DEBUG
+        NSLog(@"There is only one textField in this ViewController.");
+#endif
+        return NO;
+    }
 }
 
-- (void)adView:(GADBannerView *)bannerView didFailToReceiveAdWithError:(GADRequestError *)error
+- (void)textFieldDidBeginEditing:(UITextField *)textField
 {
-    [self putBannerOffScreen:YES];
+    if (textField == _tripNameField) {
+        [FIRAnalytics logEventWithName:@"Begin edit Event name" parameters:nil];
+    }
 }
 
-#pragma mark - Inherited From super
-
-- (void)viewDidLoad
+- (void)textFieldDidEndEditing:(UITextField *)textField
 {
+    if (textField == _tripNameField) {
+        [FIRAnalytics logEventWithName:@"End edit Event name" parameters:nil];
+        [_tonightsBill setTripName:[_tripNameField text]];
+    }
+}
+
+#pragma mark - MCGenericAdBannerViewController
+
+- (NSString *)adUnitId {
+    return @"ca-app-pub-5354415674074435/1457854707";
+}
+
+#pragma mark - AdEngineDelegate
+
+- (void)adEngine:(MCAdEngine *)adEngine putOnScreenBannerView:(GADBannerView *)bannerView {
+    [self putBannerOnScreenWithAnimation:YES];
+}
+
+- (void)adEngine:(MCAdEngine *)adEngine putOffScreenBannerView:(GADBannerView *)bannerView {
+    if (adEngine) {
+        [self putBannerOffScreenWithAnimation:YES];
+    } else {
+        [self putBannerOffScreenWithAnimation:NO];
+    }
+}
+
+#pragma mark - UIViewController
+
+- (void)viewDidLoad {
     [super viewDidLoad];
     // Do any additional setup after loading the view.
     
     [[self navigationController] setToolbarHidden:YES animated:YES];
     
-    // Hide AdBanner
-    self.bottomLayoutConstraintToLeftContainerView.priority = UILayoutPriorityDefaultHigh + 1;
-    self.bottomLayoutConstraintToRightContainerView.priority = UILayoutPriorityDefaultHigh + 1;
-    [self prepareWorstSalesPitchEverView];
+    [self putBannerOffScreenWithAnimation:NO];
 }
 
 - (void)viewWillAppear:(BOOL)animated
@@ -322,96 +307,61 @@
     }
 }
 
-- (void)viewWillTransitionToSize:(CGSize)size withTransitionCoordinator:(id<UIViewControllerTransitionCoordinator>)coordinator
-{
-    [super viewWillTransitionToSize:size withTransitionCoordinator:coordinator];
-    
-    [coordinator animateAlongsideTransition:^(id<UIViewControllerTransitionCoordinatorContext>  _Nonnull context) {
-        [self putBannerOffScreen:NO];
-        [self updateBannerSize:size];
-    } completion:^(id<UIViewControllerTransitionCoordinatorContext>  _Nonnull context) {
-#ifdef DEBUG
-        NSLog(@"Yes, I'm done.");
-#endif
-    }];
-}
-
-#pragma mark - UITextFieldDelegate
-
-- (BOOL)textFieldShouldBeginEditing:(UITextField *)textField
-{
-    if (textField == _tripNameField) {
-        return YES;
-    } else {
-#ifdef DEBUG
-        NSLog(@"There is only one textField in this ViewController.");
-#endif
-        return NO;
-    }
-}
-
-- (void)textFieldDidBeginEditing:(UITextField *)textField
-{
-    if (textField == _tripNameField) {
-        [FIRAnalytics logEventWithName:@"Begin edit Event name" parameters:nil];
-    }
-}
-
-- (void)textFieldDidEndEditing:(UITextField *)textField
-{
-    if (textField == _tripNameField) {
-        [FIRAnalytics logEventWithName:@"End edit Event name" parameters:nil];
-        [_tonightsBill setTripName:[_tripNameField text]];
-    }
-}
-
-#pragma mark - Navigation
- 
-// In a storyboard-based application, you will often want to do a little preparation before navigation
-- (void)prepareForSegue:(UIStoryboardSegue *)segue sender:(id)sender
-{
-    // Get the new view controller using [segue destinationViewController].
-    // Pass the selected object to the new view controller.
+- (void)prepareForSegue:(UIStoryboardSegue *)segue sender:(id)sender {
     
     // When newPerson segue is used add a person to tonightsBill.
     if ([[segue identifier] isEqualToString:@"newPerson"]) {
-        id destination = [[segue destinationViewController] viewControllers][0];
-        if ([destination conformsToProtocol:@protocol(MCTonightsBillTransfer)]) {
-            [destination setTonightsBill:_tonightsBill];
+        UINavigationController *navController = (UINavigationController *)segue.destinationViewController;
+        if (@available(iOS 13.0, *)) {
+            navController.modalInPresentation = YES;
         }
+        MCPersonTableViewController_iPad *destination = (MCPersonTableViewController_iPad * )navController.viewControllers.firstObject;
+        destination.tonightsBill = _tonightsBill;
+        return;
     }
     
     // When newPerson segue is used to add a new payment to tonightsbill.
     if ([[segue identifier] isEqualToString:@"newPayment"]) {
-        id destination = [[segue destinationViewController] viewControllers][0];
-        if ([destination conformsToProtocol:@protocol(MCTonightsBillTransfer)]) {
-            [destination setTonightsBill:_tonightsBill];
+        UINavigationController *navController = (UINavigationController *)segue.destinationViewController;
+        if (@available(iOS 13.0, *)) {
+            navController.modalInPresentation = YES;
         }
+        PaymentViewController *destination = (PaymentViewController *)navController.viewControllers.firstObject;
+        destination.tonightsBill = _tonightsBill;
+        return;
     }
     
     // Use this string to open payment view with the first payment without payer.
     if ([segue.identifier isEqualToString:@"firstPaymentWithoutPayer"]) {
-        id<MCThisPaymentProtocol, MCTonightsBillTransfer> destination = [segue.destinationViewController viewControllers][0];
-        [destination setTonightsBill:_tonightsBill];
-        [destination setThisPayment:[_tonightsBill getFirstPaymentWithoutAPayer]];
+        UINavigationController *navController = (UINavigationController *)segue.destinationViewController;
+        if (@available(iOS 13.0, *)) {
+            navController.modalInPresentation = YES;
+        }
+        PaymentViewController *destination = (PaymentViewController *)navController.viewControllers.firstObject;
+        destination.tonightsBill = _tonightsBill;
+        destination.thisPayment = [_tonightsBill getFirstPaymentWithoutAPayer];
+        return;
     }
     
     // When openSolutionView is used to go to the solution screen.
     if ([[segue identifier] isEqualToString:@"openSolutionView"]) {
-        id destination = [[segue destinationViewController] viewControllers][0];
-        if ([destination conformsToProtocol:@protocol(MCTonightsBillTransfer)]) {
-            [destination setTonightsBill:_tonightsBill];
-        }
-        if ([destination conformsToProtocol:@protocol(MCDismissMeBlockProtocol)]) {
-            __weak MCSharedBillViewController_iPad *weakSelf = self;
-            [destination setDismissMe:^{
-                MCSharedBillViewController_iPad *strongSelf = weakSelf;
-                if (strongSelf) {
-                    [weakSelf dismissViewControllerAnimated:YES completion:nil];
-                }
-            }];
-        }
+        UINavigationController *navController = (UINavigationController *)segue.destinationViewController;
+        SolutionTableViewController_iPad *destination = (SolutionTableViewController_iPad *)navController.viewControllers.firstObject;
+        __weak MCSharedBillViewController_iPad *weakSelf = self;
+        [destination updateAdEngine:_interstitialAdEngine andEvent:_tonightsBill andDismissBlock:^{
+            MCSharedBillViewController_iPad *strongSelf = weakSelf;
+            if (strongSelf) {
+                [strongSelf dismissViewControllerAnimated:YES completion:nil];
+            }
+        }];
+        return;
     }
 }
+
+#pragma mark - UIContentContainer
+
+#pragma mark - UIResponder
+
+#pragma mark - NSObject
 
 @end

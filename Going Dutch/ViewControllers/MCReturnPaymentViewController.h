@@ -8,6 +8,8 @@
 
 @import UIKit;
 
+#import "MCGenericInterstitialAdTableViewController.h"
+
 @class MCSharedBill;
 
 @class MCTwoLabelsTitleView;
@@ -15,7 +17,7 @@
 
 @class MCSharedBillPageViewController;
 
-@interface MCReturnPaymentViewController : UITableViewController
+@interface MCReturnPaymentViewController : MCGenericInterstitialAdTableViewController
 
 @property (nonatomic, strong) MCTwoLabelsTitleView *twoLabelTitleView;
 
@@ -26,5 +28,7 @@
 - (IBAction)mainCancelButtonPressed:(id)sender;
 
 - (void)openMailView:(id)sender;
+- (void)updateEvent:(MCSharedBill *)event andSendMailDelegate:(MCSharedBillPageViewController *)sendMailDelegate andAdEngine:(MCInterstitialAdEngine *)adEngine;
+
 
 @end
