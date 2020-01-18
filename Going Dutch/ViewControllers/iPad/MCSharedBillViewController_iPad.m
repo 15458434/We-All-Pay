@@ -275,9 +275,9 @@
     [_tripNameField setText:[_tonightsBill tripName]];
     
     // Set the color of the backButton.
-    UIColor *backButtonColor = [Colors getButtonColor];
-    [[[self navigationController] navigationBar] setTintColor:backButtonColor];
-    [[[self navigationItem] rightBarButtonItem] setTintColor:backButtonColor];
+    UIColor *backButtonColor = [UIColor colorNamed:@"button - enabled"];
+    self.navigationController.navigationBar.tintColor = backButtonColor;
+    self.navigationItem.rightBarButtonItem.tintColor = backButtonColor;
     
     // TODO: Add observer for notifications.
     [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(applyProVersion:) name:[ MCStoreInterface applyProVersionNotification] object:[MCStoreInterface defaultStoreInterface]];

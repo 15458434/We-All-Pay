@@ -309,9 +309,9 @@ typedef NS_ENUM(BOOL, MCXRateStatus) {
 #pragma mark - UITableViewDelegate
 
 - (void)tableView:(UITableView *)tableView willDisplayHeaderView:(UIView *)view forSection:(NSInteger)section {
-    [view setTintColor:[Colors getbackgroundColor]];
+    view.tintColor = [UIColor colorNamed:@"background"];
     UITableViewHeaderFooterView *sectionTitleHeader = (UITableViewHeaderFooterView *)view;
-    [[sectionTitleHeader textLabel] setTextColor:[Colors getEmptyMessageTextColor]];
+    sectionTitleHeader.textLabel.textColor = [UIColor colorNamed:@"emptyMessageText"];
 }
 
 - (CGFloat)tableView:(UITableView *)tableView heightForRowAtIndexPath:(NSIndexPath *)indexPath {
