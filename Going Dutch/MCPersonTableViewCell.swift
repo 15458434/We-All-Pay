@@ -8,7 +8,7 @@
 
 import UIKit
 
-class MCPersonTableViewCell: UITableViewCell {
+final class MCPersonTableViewCell: UITableViewCell {
     @IBOutlet var fetchingExchangeRateIndicator: UIActivityIndicatorView!
     @IBOutlet var personImage: UIImageView!
     @IBOutlet var nameLabel: UILabel!

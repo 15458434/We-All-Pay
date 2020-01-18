@@ -8,7 +8,7 @@
 
 import UIKit
 
-class MCSelectCategoryTableViewCell_iPhone: UITableViewCell {
+final class MCSelectCategoryTableViewCell_iPhone: UITableViewCell {
     @IBOutlet var categoryImageView: UIImageView!
     @IBOutlet var categoryNameLabel: UILabel!
 }

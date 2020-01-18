@@ -10,7 +10,7 @@ import UIKit
 import NotificationCenter
 import WhoPayingUserDefaultsStoreInterface
 
-class TodayViewController: UIViewController, NCWidgetProviding {
+final class TodayViewController: UIViewController, NCWidgetProviding {
     @IBOutlet weak var theLabel: UILabel!
     
     var tonightsBillID: String!

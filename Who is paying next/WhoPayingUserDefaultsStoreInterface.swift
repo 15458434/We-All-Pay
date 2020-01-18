@@ -15,7 +15,7 @@ private let kFullNameOfNextPayer = "MCFullNameOfNextPayerKey"
 private let kValid = "MCIsTodayExchangeValidKey"
 private let kDateSaved = "MCDateSavedKey"
 
-public class WhoPayingUserDefaultsStoreInterface: NSObject {
+final public class WhoPayingUserDefaultsStoreInterface: NSObject {
     // MARK: Properties
     public var tonightsBillUUID: String?
     public var tripName: String?

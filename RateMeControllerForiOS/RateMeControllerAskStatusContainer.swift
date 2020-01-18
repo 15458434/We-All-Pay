@@ -29,7 +29,7 @@ public enum RateMeControllerAskStatus: Int32, CustomStringConvertible {
 private let kRateMeControllerAskStatusContainerShouldAsk = "kRateMeControllerAskStatusContainerShouldAsk"
 private let kRateMeControllerAskStatusContainerLastVersion = "kRateMeControllerAskStatusContainerLastVersion"
 
-internal class RateMeControllerAskStatusContainer: NSObject, NSCoding {
+final internal class RateMeControllerAskStatusContainer: NSObject, NSCoding {
     var shouldAsk: RateMeControllerAskStatus
     var lastVersion: String?
     

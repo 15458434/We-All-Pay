@@ -14,7 +14,7 @@ import GoogleMobileAds
 import InMobiAdapter
 import AdColonyAdapter
 
-@objc(MCAdEngine) @objcMembers class AdEngine: NSObject {
+@objc(MCAdEngine) @objcMembers open class AdEngine: NSObject {
     static let kAdBannerConsent = "7DE9F9CF-B4B9-4DCB-94FC-F0FD62F432DC"
     
     #if SCREENSHOTS

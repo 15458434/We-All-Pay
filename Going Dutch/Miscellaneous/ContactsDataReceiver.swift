@@ -9,7 +9,7 @@
 import UIKit
 import ContactsUI
 
-class ContactsDataReceiver: NSObject, ThisEventReadOnly, CNContactPickerDelegate {
+final class ContactsDataReceiver: NSObject, ThisEventReadOnly, CNContactPickerDelegate {
     
     @objc init(with tonightsBill: MCSharedBill) {
         self.event = tonightsBill
@@ -39,7 +39,7 @@ class ContactsDataReceiver: NSObject, ThisEventReadOnly, CNContactPickerDelegate
     
     // MARK: CNContactPickerDelegate
     
-    @objc func contactPicker(_ picker: CNContactPickerViewController, didSelect contact: CNContact) {
+    func contactPicker(_ picker: CNContactPickerViewController, didSelect contact: CNContact) {
         let tonightsBillID: NSManagedObjectID = event.objectID
         let backgroundContext: NSManagedObjectContext = MCWeAllPayStoreController.defaultStore().backgroundThreadContext!
         
