@@ -21,11 +21,15 @@ import UIKit
         self.layer.mask = mask
     }
     
+    // MARK: UIResponder
+    
+    // MARK: NSObject
+    
+    #if TARGET_INTERFACE_BUILDER
     override func prepareForInterfaceBuilder() {
         super.prepareForInterfaceBuilder()
-        let processInfo = ProcessInfo.processInfo
-        let environment = processInfo.environment
-        let projectSourceDirectories : AnyObject = environment["IB_PROJECT_SOURCE_DIRECTORIES"]! as AnyObject
+        let environment = ProcessInfo.processInfo.environment
+        let projectSourceDirectories : String = environment["IB_PROJECT_SOURCE_DIRECTORIES"]!
         let directories = projectSourceDirectories.components(separatedBy: ":")
         
         if directories.count != 0 {
@@ -37,5 +41,6 @@ import UIKit
         }
         
     }
+    #endif
 }
 
