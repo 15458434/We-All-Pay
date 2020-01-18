@@ -7,7 +7,7 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
-		38001C9B194EE284008ACD94 /* Images.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 38001C9A194EE284008ACD94 /* Images.xcassets */; };
+		38001C9B194EE284008ACD94 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 38001C9A194EE284008ACD94 /* Assets.xcassets */; };
 		38010E0F1A3F4A4F0056F8F8 /* Localizable.strings in Resources */ = {isa = PBXBuildFile; fileRef = 38010E111A3F4A4F0056F8F8 /* Localizable.strings */; };
 		380700A51A1B616000C7FB37 /* MCPaymentUpdateTo4.m in Sources */ = {isa = PBXBuildFile; fileRef = 380700A41A1B616000C7FB37 /* MCPaymentUpdateTo4.m */; };
 		380C48161BE1330E00C82B0F /* CurrencyFormatter.swift in Sources */ = {isa = PBXBuildFile; fileRef = 380C48151BE1330E00C82B0F /* CurrencyFormatter.swift */; };
@@ -311,7 +311,7 @@
 /* Begin PBXFileReference section */
 		05EDF07B2511B97DE2958D91 /* Pods-We all pay Tests.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-We all pay Tests.release.xcconfig"; path = "Target Support Files/Pods-We all pay Tests/Pods-We all pay Tests.release.xcconfig"; sourceTree = "<group>"; };
 		2AB005B5CC869EC6282F29C6 /* Pods-We all pay Tests.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-We all pay Tests.debug.xcconfig"; path = "Target Support Files/Pods-We all pay Tests/Pods-We all pay Tests.debug.xcconfig"; sourceTree = "<group>"; };
-		38001C9A194EE284008ACD94 /* Images.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Images.xcassets; sourceTree = "<group>"; };
+		38001C9A194EE284008ACD94 /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
 		38010E101A3F4A4F0056F8F8 /* Base */ = {isa = PBXFileReference; fileEncoding = 10; lastKnownFileType = text.plist.strings; name = Base; path = Base.lproj/Localizable.strings; sourceTree = "<group>"; };
 		38010E121A3F4A510056F8F8 /* en */ = {isa = PBXFileReference; fileEncoding = 10; lastKnownFileType = text.plist.strings; name = en; path = en.lproj/Localizable.strings; sourceTree = "<group>"; };
 		38010E131A3F4A530056F8F8 /* nl */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.strings; name = nl; path = nl.lproj/Localizable.strings; sourceTree = "<group>"; };
@@ -954,7 +954,7 @@
 			children = (
 				3863148C235C6D8B00748B9F /* ScreenshotPopulationEngine.swift */,
 				38E51C201D899C2800DA8ABA /* circularPictureInCodeDemo.png */,
-				38001C9A194EE284008ACD94 /* Images.xcassets */,
+				38001C9A194EE284008ACD94 /* Assets.xcassets */,
 				3870C22C1D34FDF80030035A /* We all pay app keywords.plist */,
 			);
 			name = Resources;
@@ -1626,7 +1626,7 @@
 				38E88B40226B19EE008EB4BE /* GoogleService-Info.plist in Resources */,
 				387D3A911870652B0060FAF8 /* Localizable.strings in Resources */,
 				382B79CA1A419D9D00538E96 /* categoryPictures.plist in Resources */,
-				38001C9B194EE284008ACD94 /* Images.xcassets in Resources */,
+				38001C9B194EE284008ACD94 /* Assets.xcassets in Resources */,
 				38DC8B4319097FEA00762235 /* Main-iPad.storyboard in Resources */,
 				3835EBF92115C40900E2BC3F /* Settings.bundle in Resources */,
 				3860575019EE963600BD5B78 /* categoryPictures.xcassets in Resources */,
