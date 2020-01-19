@@ -153,8 +153,7 @@ enum CancelButtonPressed {
     
     // MARK: DismissKeyboardProtocol
     func dismissTheKeyboard() {
-        let fr = view.getFirstResponder()
-        fr?.resignFirstResponder()
+        self.view.endEditing(true)
     }
     
     // MARK: UITextFieldDelegate 

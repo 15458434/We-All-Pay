@@ -15,7 +15,6 @@
 		381275FF1BBD84650004C8C2 /* InfoScreenTableViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 381275FE1BBD84650004C8C2 /* InfoScreenTableViewController.swift */; };
 		381276041BBD8F130004C8C2 /* InfoPlist.strings in Resources */ = {isa = PBXBuildFile; fileRef = 381276061BBD8F130004C8C2 /* InfoPlist.strings */; };
 		381276081BBE68F10004C8C2 /* InfoScreenContainerViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 381276071BBE68F10004C8C2 /* InfoScreenContainerViewController.swift */; };
-		3812760A1BBE74520004C8C2 /* UIViewExtension.swift in Sources */ = {isa = PBXBuildFile; fileRef = 381276091BBE74520004C8C2 /* UIViewExtension.swift */; };
 		3812760C1BBE74EF0004C8C2 /* UIViewControllerExtension.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3812760B1BBE74EF0004C8C2 /* UIViewControllerExtension.swift */; };
 		3812760E1BBE76B40004C8C2 /* PaymentViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3812760D1BBE76B40004C8C2 /* PaymentViewController.swift */; };
 		381276101BBE9A7F0004C8C2 /* MCPaymentPresenceTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3812760F1BBE9A7F0004C8C2 /* MCPaymentPresenceTableViewCell.swift */; };
@@ -338,7 +337,6 @@
 		381276011BBD8F120004C8C2 /* nl */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = nl; path = nl.lproj/InfoPlist.strings; sourceTree = "<group>"; };
 		381276051BBD8F130004C8C2 /* nl */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = nl; path = nl.lproj/InfoPlist.strings; sourceTree = "<group>"; };
 		381276071BBE68F10004C8C2 /* InfoScreenContainerViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = InfoScreenContainerViewController.swift; sourceTree = "<group>"; };
-		381276091BBE74520004C8C2 /* UIViewExtension.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = UIViewExtension.swift; sourceTree = "<group>"; };
 		3812760B1BBE74EF0004C8C2 /* UIViewControllerExtension.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = UIViewControllerExtension.swift; sourceTree = "<group>"; };
 		3812760D1BBE76B40004C8C2 /* PaymentViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = PaymentViewController.swift; sourceTree = "<group>"; };
 		3812760F1BBE9A7F0004C8C2 /* MCPaymentPresenceTableViewCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = MCPaymentPresenceTableViewCell.swift; sourceTree = "<group>"; };
@@ -1247,7 +1245,6 @@
 				38CDE8FF17135B6300387CAA /* MCTools.m */,
 				384EC9131BC3E78C00A80799 /* Colors.swift */,
 				384EC9151BC3EA4C00A80799 /* UIColorExtension.swift */,
-				381276091BBE74520004C8C2 /* UIViewExtension.swift */,
 				3825A82219990BA400A8885D /* UIViewController+WeAllPayStore.h */,
 				3825A82319990BA400A8885D /* UIViewController+WeAllPayStore.m */,
 				388A32741C11EA1400F7459C /* WhoPayingUserDefaultsStoreInterfaceWeAllPayExtension.swift */,
@@ -1905,7 +1902,6 @@
 				381275FF1BBD84650004C8C2 /* InfoScreenTableViewController.swift in Sources */,
 				38C700F21D8EC24100D785BB /* LaunchCounter.swift in Sources */,
 				38E0C5EA18E9B2BD005A3F17 /* MCAllTripsTableViewController-iPad.m in Sources */,
-				3812760A1BBE74520004C8C2 /* UIViewExtension.swift in Sources */,
 				3892E3A417903EF00038894B /* MCEditTripViewController.m in Sources */,
 				381276081BBE68F10004C8C2 /* InfoScreenContainerViewController.swift in Sources */,
 				38977E571B2A2C57008484A4 /* MCPaymentPresenceTableViewCell_iPhone.swift in Sources */,
