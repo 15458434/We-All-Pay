@@ -20,8 +20,6 @@
     [dc addObserver:self selector:@selector(storeWillSave:) name:NSManagedObjectContextWillSaveNotification object:backgroundSaveContext];
     [dc addObserver:self selector:@selector(storeDidSave:) name:NSManagedObjectContextDidSaveNotification object:mainQueueContext];
     [dc addObserver:self selector:@selector(storeDidSave:) name:NSManagedObjectContextDidSaveNotification object:backgroundSaveContext];
-    [dc addObserver:self selector:@selector(storeWillBeSwapped:) name:NSPersistentStoreCoordinatorStoresWillChangeNotification object:[[MCWeAllPayStoreController defaultStore] persistentStoreCoordinator]];
-    [dc addObserver:self selector:@selector(storeDidSwap:) name:NSPersistentStoreCoordinatorStoresDidChangeNotification object:[[MCWeAllPayStoreController defaultStore] persistentStoreCoordinator]];
 }
 
 - (void)stopRespondingToStorechangeNotifications
@@ -42,22 +40,6 @@
 #ifdef DEBUG
     NSLog(@"%@addon: Store did save.", self);
 #endif
-}
-
-- (void)storeWillBeSwapped:(NSNotification *)notification
-{
-#ifdef DEBUG
-    NSLog(@"%@addon: Store will be swapped.", self);
-#endif
-    // Deactivate UI
-}
-
-- (void)storeDidSwap:(NSNotification *)notification
-{
-#ifdef DEBUG
-    NSLog(@"%@addon: Store did swap.", self);
-#endif
-    // Reactivate UI and refetch.
 }
 
 @end
