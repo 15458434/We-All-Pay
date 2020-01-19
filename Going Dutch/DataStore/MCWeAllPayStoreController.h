@@ -19,6 +19,8 @@
 The We All Pay Store Controller is designed to do writing in the background and fetching on the mainThread. This way write actions won't interfere with the user interface.
  */
 
+NS_ASSUME_NONNULL_BEGIN
+
 @interface MCWeAllPayStoreController : NSObject
 
 @property (nonatomic, strong, readonly) NSManagedObjectContext *mainThreadContext;
@@ -58,3 +60,5 @@ The We All Pay Store Controller is designed to do writing in the background and 
 - (NSArray *)getEmailaddressesFrom:(MCPerson *)thisPerson;
 
 @end
+
+NS_ASSUME_NONNULL_END

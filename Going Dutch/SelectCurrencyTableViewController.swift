@@ -322,7 +322,7 @@ class PaymentUpdateCurrencyModel: NSObject, CurrencyUpdateModel {
         let oldCurrency = payment.currency
         payment.currency = newCurrency
         if oldCurrency?.sharedBill.count == 0 && oldCurrency?.payment.count == 0 {
-            mainThreadContext?.delete(oldCurrency!)
+            mainThreadContext.delete(oldCurrency!)
         }
         
         payment.setNewCurrencyAndAutomaticallyUpdateExchangeRate(newCurrency, withCompletionHandler: completion)
