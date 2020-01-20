@@ -8,7 +8,7 @@
 
 import UIKit
 
-class SelectCurrencyTableViewCell_iPad: UITableViewCell {
+final class SelectCurrencyTableViewCell_iPad: UITableViewCell {
     // MARK: IB Outlets
     @IBOutlet var currencyNameLabel: UILabel!
     @IBOutlet var currencySymbolLabel: UILabel!

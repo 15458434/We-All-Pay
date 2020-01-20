@@ -9,7 +9,7 @@
 import UIKit
 import CoreData
 
-@objc(MCCoreDataSaveHandlerWhenEnteringBackground) class CoreDataSaveHandlerWhenEnteringBackground: NSObject {
+@objc(MCCoreDataSaveHandlerWhenEnteringBackground) final class CoreDataSaveHandlerWhenEnteringBackground: NSObject {
     @objc let context: NSManagedObjectContext
     private(set) var willSaveObserver: NSObjectProtocol!
     private(set) var didSaveObserver: NSObjectProtocol!

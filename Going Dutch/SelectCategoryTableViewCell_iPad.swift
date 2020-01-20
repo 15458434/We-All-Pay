@@ -8,7 +8,7 @@
 
 import UIKit
 
-class SelectCategoryTableViewCell_iPad: UITableViewCell {
+final class SelectCategoryTableViewCell_iPad: UITableViewCell {
     // MARK: IB Outlets
     @IBOutlet var categoryImageView: UIImageView!
     @IBOutlet var categoryNameLabel: UILabel!

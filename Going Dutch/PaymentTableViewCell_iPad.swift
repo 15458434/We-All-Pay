@@ -8,7 +8,7 @@
 
 import UIKit
 
-class PaymentTableViewCell_iPad: UITableViewCell {
+final class PaymentTableViewCell_iPad: UITableViewCell {
     // MARK: IB Outlets
     @IBOutlet var namePayerLabel: UILabel!
     @IBOutlet var whatPaidLabel: UILabel!

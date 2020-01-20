@@ -24,7 +24,7 @@ import GoogleMobileAds
     @objc(adEngine:putOffScreenBannerView:) func adEngine(_ adEngine: AdBannerEngine?, putOffScreen bannerView: GADBannerView)
 }
 
-@objc(MCAdBannerEngine) @objcMembers class AdBannerEngine: AdEngine, GADBannerViewDelegate {
+@objc(MCAdBannerEngine) @objcMembers final class AdBannerEngine: AdEngine, GADBannerViewDelegate {
     
     private(set) var delegate: AdBannerEngineDelegate!
     

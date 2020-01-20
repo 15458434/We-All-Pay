@@ -8,7 +8,7 @@
 
 import UIKit
 
-class SelectPayerTableViewCell_iPad: UITableViewCell {
+final class SelectPayerTableViewCell_iPad: UITableViewCell {
     // MARK: IB Outlets
     @IBOutlet var thumbnailView: UIImageView!
     @IBOutlet var fullNameLabel: UILabel!

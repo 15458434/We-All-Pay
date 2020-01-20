@@ -8,7 +8,7 @@
 
 import Foundation
 
-class CategoryPictureStoreController: NSObject {
+final class CategoryPictureStoreController: NSObject {
     @objc enum PaymentCategory: Int {
         case none = 0
         case dinner = 1

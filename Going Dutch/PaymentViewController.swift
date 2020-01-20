@@ -26,7 +26,7 @@ enum CancelButtonPressed {
     case notPressed, isPressed
 }
 
-@objc class PaymentViewController: UITableViewController, MCTonightsBillTransfer, MCThisPaymentProtocol, MCDismissMeBlockProtocol, MCDismissKeyboardProtocol, MCPathComponentsToOpenProtocol, UITextFieldDelegate, NSFetchedResultsControllerDelegate {
+final class PaymentViewController: UITableViewController, MCTonightsBillTransfer, MCThisPaymentProtocol, MCDismissMeBlockProtocol, MCDismissKeyboardProtocol, MCPathComponentsToOpenProtocol, UITextFieldDelegate, NSFetchedResultsControllerDelegate {
     public var pathComponentsToOpen: [Any]!
 
     // MARK: IB Outlet
@@ -276,16 +276,16 @@ enum CancelButtonPressed {
     }
     
     override func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
-        let cell = tableView.dequeueReusableCell(withIdentifier: "paymentPresenceTableViewCell", for: indexPath) as! MCPaymentPresenceTableViewCell
+        let cell: MCPaymentPresenceTableViewCell = tableView.dequeueReusableCell(withIdentifier: "paymentPresenceTableViewCell", for: indexPath) as! MCPaymentPresenceTableViewCell
         cell.accessibilityIdentifier = "PaymentPresenceTableViewCell-\(indexPath.row)"
         
-        let paymentPresenceForThisCell = dataController.object(at: indexPath)
+        let paymentPresenceForThisCell: MCPaymentPresence = dataController.object(at: indexPath)
         cell.nameLabel.text = paymentPresenceForThisCell.person.getFullName
         cell.personView.image = paymentPresenceForThisCell.person.thumbnail
         cell.theSwitch.setOn(paymentPresenceForThisCell.isPersonPresent.boolValue, animated: false)
 
-        let cf = CurrencyFormatter(currencyCode: paymentPresenceForThisCell.payment.currency.code)
-        let averageOweFromPayment = NSNumber(value: -paymentPresenceForThisCell.averageOweFromPayment.doubleValue)
+        let cf: CurrencyFormatter = CurrencyFormatter(currencyCode: paymentPresenceForThisCell.payment.currency.code)
+        let averageOweFromPayment: NSNumber = NSNumber(value: -paymentPresenceForThisCell.averageOweFromPayment.doubleValue)
         cell.owesMoneyLabel.text = cf.string(for: averageOweFromPayment)
         cell.thisCellsPaymentPresence = paymentPresenceForThisCell
         cell.keyboardDismissDelegate = self

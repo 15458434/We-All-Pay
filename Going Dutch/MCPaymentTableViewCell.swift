@@ -8,7 +8,7 @@
 
 import UIKit
 
-class MCPaymentTableViewCell: UITableViewCell {
+final class MCPaymentTableViewCell: UITableViewCell {
     @IBOutlet var namePayerLabel: UILabel!
     @IBOutlet var whatPaidLabel: UILabel!
     @IBOutlet var moneyPaidLabel: UILabel!

@@ -8,24 +8,24 @@
 
 import UIKit
 
-@objcMembers public class SideMenuTransitioner: NSObject, UIViewControllerTransitioningDelegate {
+final class SideMenuTransitioner: NSObject, UIViewControllerTransitioningDelegate {
     
     // MARK: UIViewControllerTransitioningDelegate
     
-    public func presentationController(forPresented presented: UIViewController, presenting: UIViewController?, source: UIViewController) -> UIPresentationController? {
+    func presentationController(forPresented presented: UIViewController, presenting: UIViewController?, source: UIViewController) -> UIPresentationController? {
         return SideMenuPresentationController(presentedViewController: presented, presenting: presenting)
     }
     
-    public func animationController(forPresented presented: UIViewController, presenting: UIViewController, source: UIViewController) -> UIViewControllerAnimatedTransitioning? {
+    func animationController(forPresented presented: UIViewController, presenting: UIViewController, source: UIViewController) -> UIViewControllerAnimatedTransitioning? {
         return SideMenuPresentAnimationController()
     }
     
-    public func animationController(forDismissed dismissed: UIViewController) -> UIViewControllerAnimatedTransitioning? {
+    func animationController(forDismissed dismissed: UIViewController) -> UIViewControllerAnimatedTransitioning? {
         let interactiveDismissableNavigationController = dismissed as! SwipeLeftDissmissableNavigationController
         return SideMenuDismissAnimationController(with: interactiveDismissableNavigationController.dismissInteractionController!)
     }
     
-    public func interactionControllerForDismissal(using animator: UIViewControllerAnimatedTransitioning) -> UIViewControllerInteractiveTransitioning? {
+    func interactionControllerForDismissal(using animator: UIViewControllerAnimatedTransitioning) -> UIViewControllerInteractiveTransitioning? {
         let existingAnimator = animator as! SideMenuDismissAnimationController
         guard existingAnimator.interactionController.interactionInProgress else {
             return nil
@@ -36,7 +36,7 @@ import UIKit
     // MARK: NSObject
 }
 
-@objcMembers public class SideMenuPresentationController: UIPresentationController, UIGestureRecognizerDelegate {
+final class SideMenuPresentationController: UIPresentationController, UIGestureRecognizerDelegate {
     private weak var backgroundTapGestureRecognizer: UITapGestureRecognizer!
     
     @objc private func backgroundTapped(_ sender: UITapGestureRecognizer) {
@@ -49,7 +49,7 @@ import UIKit
     
     // MARK: UIGestureRecognizerDelegate
     
-    public func gestureRecognizerShouldBegin(_ gestureRecognizer: UIGestureRecognizer) -> Bool {
+    func gestureRecognizerShouldBegin(_ gestureRecognizer: UIGestureRecognizer) -> Bool {
         let presentedViewFrame = self.presentedViewController.view.frame
         if presentedViewFrame.contains(gestureRecognizer.location(in: containerView)) {
             return false
@@ -60,20 +60,20 @@ import UIKit
     
     // MARK: UIPresentationController
     
-    public override var frameOfPresentedViewInContainerView: CGRect {
+    override var frameOfPresentedViewInContainerView: CGRect {
         var frameOfPresentingViewController = presentingViewController.view.frame
         frameOfPresentingViewController.size.width = 280
         return frameOfPresentingViewController
     }
     
-    public override func presentationTransitionWillBegin() {
+    override func presentationTransitionWillBegin() {
         let backgroundTapGestureRecognizer = UITapGestureRecognizer(target: self, action: #selector(backgroundTapped(_:)))
         backgroundTapGestureRecognizer.delegate = self
         self.backgroundTapGestureRecognizer = backgroundTapGestureRecognizer
         containerView!.addGestureRecognizer(backgroundTapGestureRecognizer)
     }
     
-    public override func presentationTransitionDidEnd(_ completed: Bool) {
+    override func presentationTransitionDidEnd(_ completed: Bool) {
         self.presentedViewController.view.clipsToBounds = false
         let presentedLayer = self.presentedViewController.view.layer
         presentedLayer.shadowOpacity = 0.5
@@ -85,24 +85,24 @@ import UIKit
     // MARK: NSObject
 }
 
-@objcMembers public class SideMenuPresentAnimationController: NSObject, UIViewControllerAnimatedTransitioning {
+final class SideMenuPresentAnimationController: NSObject, UIViewControllerAnimatedTransitioning {
     
     // MARK: UIViewControllerAnimatedTransitioning
     
-    public func transitionDuration(using transitionContext: UIViewControllerContextTransitioning?) -> TimeInterval {
+    func transitionDuration(using transitionContext: UIViewControllerContextTransitioning?) -> TimeInterval {
         return 0.35
     }
     
-    public func animateTransition(using transitionContext: UIViewControllerContextTransitioning) {
-        guard let _ = transitionContext.viewController(forKey: .from), let toViewController = transitionContext.viewController(forKey: .to) else {
+    func animateTransition(using transitionContext: UIViewControllerContextTransitioning) {
+        guard let _ = transitionContext.viewController(forKey: UITransitionContextViewControllerKey.from), let toViewController: UIViewController = transitionContext.viewController(forKey: UITransitionContextViewControllerKey.to) else {
             return
         }
 
-        let finalFrame = transitionContext.finalFrame(for: toViewController)
-        let initialFrame = CGRect(x: -finalFrame.width, y: 0, width: finalFrame.width, height: finalFrame.height)
+        let finalFrame: CGRect = transitionContext.finalFrame(for: toViewController)
+        let initialFrame: CGRect = CGRect(x: -finalFrame.width, y: CGFloat(0), width: finalFrame.width, height: finalFrame.height)
         toViewController.view.frame = initialFrame
         
-        guard let snapshot = toViewController.view.snapshotView(afterScreenUpdates: true) else {
+        guard let snapshot: UIView = toViewController.view.snapshotView(afterScreenUpdates: true) else {
             return
         }
         
@@ -113,12 +113,12 @@ import UIKit
         snapshot.layer.shadowPath = CGPath(rect: snapshot.bounds.insetBy(dx: 0, dy: -15), transform: nil)
         snapshot.layer.shadowColor = UIColor.black.cgColor
 
-        let containerView = transitionContext.containerView
+        let containerView: UIView = transitionContext.containerView
         containerView.addSubview(toViewController.view)
         containerView.addSubview(snapshot)
         toViewController.view.isHidden = true
         
-        let duration = transitionDuration(using: transitionContext)
+        let duration: TimeInterval = transitionDuration(using: transitionContext)
         
         UIView.animateKeyframes(withDuration: duration, delay: 0, options: [.calculationModeLinear], animations: {
             UIView.addKeyframe(withRelativeStartTime: 0, relativeDuration: 1, animations: {
@@ -136,7 +136,7 @@ import UIKit
     // MARK: NSObject
 }
 
-@objcMembers public class SideMenuDismissAnimationController: NSObject, UIViewControllerAnimatedTransitioning {
+final class SideMenuDismissAnimationController: NSObject, UIViewControllerAnimatedTransitioning {
     let interactionController: SideMenuDismissInteractionController
     
     init(with interactionController: SideMenuDismissInteractionController) {
@@ -146,11 +146,11 @@ import UIKit
     
     // MARK: UIViewControllerAnimatedTransitioning
     
-    public func transitionDuration(using transitionContext: UIViewControllerContextTransitioning?) -> TimeInterval {
+    func transitionDuration(using transitionContext: UIViewControllerContextTransitioning?) -> TimeInterval {
         return 0.35
     }
     
-    public func animateTransition(using transitionContext: UIViewControllerContextTransitioning) {
+    func animateTransition(using transitionContext: UIViewControllerContextTransitioning) {
         guard let fromViewController = transitionContext.viewController(forKey: .from), let snapshot = fromViewController.view.snapshotView(afterScreenUpdates: false) else {
             return
         }
@@ -188,7 +188,7 @@ import UIKit
     var dismissInteractionController: SideMenuDismissInteractionController? { get }
 }
 
-class SideMenuDismissInteractionController: UIPercentDrivenInteractiveTransition {
+final class SideMenuDismissInteractionController: UIPercentDrivenInteractiveTransition {
     var interactionInProgress: Bool
     
     private var shouldCompleteTransition: Bool
@@ -251,7 +251,7 @@ class SideMenuDismissInteractionController: UIPercentDrivenInteractiveTransition
     }
 }
 
-class SwipeLeftDissmissableNavigationController: UINavigationController, SideMenuDismissInteractionControllerSource {
+final class SwipeLeftDissmissableNavigationController: UINavigationController, SideMenuDismissInteractionControllerSource {
     
     // MARK: SideMenuDismissInteractionControllerSource
     
