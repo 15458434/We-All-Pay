@@ -4,6 +4,7 @@
     <dependencies>
         <deployment identifier="iOS"/>
         <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="15706"/>
+        <capability name="Named colors" minToolsVersion="9.0"/>
         <capability name="Safe area layout guides" minToolsVersion="9.0"/>
         <capability name="documents saved in the Xcode 8 format" minToolsVersion="8.0"/>
     </dependencies>
@@ -962,12 +963,14 @@
                         </connections>
                     </tableView>
                     <navigationItem key="navigationItem" id="84o-i7-hdm">
-                        <barButtonItem key="leftBarButtonItem" systemItem="cancel" id="oJb-TP-76X">
+                        <barButtonItem key="leftBarButtonItem" image="barbutton - cancel" id="oJb-TP-76X">
+                            <color key="tintColor" name="button - enabled"/>
                             <connections>
                                 <action selector="cancelButtonPressed:" destination="eE2-xD-YRT" id="PAs-ih-ReK"/>
                             </connections>
                         </barButtonItem>
-                        <barButtonItem key="rightBarButtonItem" systemItem="done" id="7Pt-zo-ZpA">
+                        <barButtonItem key="rightBarButtonItem" image="barbutton - done" id="7Pt-zo-ZpA">
+                            <color key="tintColor" name="button - enabled"/>
                             <connections>
                                 <action selector="doneButtonPressed:" destination="eE2-xD-YRT" id="AcP-1x-E97"/>
                             </connections>
@@ -1170,7 +1173,7 @@
                     </tableView>
                     <toolbarItems/>
                     <navigationItem key="navigationItem" id="Bt1-bA-YQq">
-                        <barButtonItem key="leftBarButtonItem" systemItem="cancel" id="YZg-Lh-fAa">
+                        <barButtonItem key="leftBarButtonItem" image="barbutton - cancel" id="YZg-Lh-fAa">
                             <userDefinedRuntimeAttributes>
                                 <userDefinedRuntimeAttribute type="string" keyPath="accessibilityIdentifier" value="Cancel"/>
                             </userDefinedRuntimeAttributes>
@@ -1178,7 +1181,7 @@
                                 <action selector="mainCancelButtonPressed:" destination="A1E-EB-xnZ" id="sP1-9x-5f7"/>
                             </connections>
                         </barButtonItem>
-                        <barButtonItem key="rightBarButtonItem" systemItem="done" id="mIQ-hS-seo">
+                        <barButtonItem key="rightBarButtonItem" image="barbutton - done" id="mIQ-hS-seo">
                             <connections>
                                 <action selector="mainDoneButtonPressed:" destination="A1E-EB-xnZ" id="h4T-9H-xsa"/>
                             </connections>
@@ -1468,7 +1471,12 @@
         </scene>
     </scenes>
     <resources>
+        <image name="barbutton - cancel" width="22" height="22"/>
+        <image name="barbutton - done" width="22" height="22"/>
         <image name="iScreen button" width="26" height="26"/>
+        <namedColor name="button - enabled">
+            <color red="1" green="0.52941176470588236" blue="0.67843137254901964" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+        </namedColor>
     </resources>
     <inferredMetricsTieBreakers>
         <segue reference="DSi-fr-DCr"/>
