@@ -17,7 +17,7 @@
 @class MCSharedBill;
 @class MCTwoLabelsTitleView;
 
-@interface MCPersonViewController : UITableViewController <MCTonightsBillTransfer, MCThisPersonProtocol>
+@interface MCPersonViewController : UIViewController <MCTonightsBillTransfer, MCThisPersonProtocol>
 
 // Only accessible on the mainThread.
 @property (nonatomic, strong) MCSharedBill *tonightsBill;
