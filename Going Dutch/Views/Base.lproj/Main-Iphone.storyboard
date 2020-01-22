@@ -477,7 +477,7 @@
                                 <constraint firstAttribute="centerY" secondItem="7Ul-ek-GSq" secondAttribute="centerY" constant="7" id="xv6-SP-BJ6"/>
                             </constraints>
                         </view>
-                        <barButtonItem key="rightBarButtonItem" systemItem="cancel" id="frT-jZ-Lwi">
+                        <barButtonItem key="rightBarButtonItem" image="barbutton - cancel" id="frT-jZ-Lwi">
                             <connections>
                                 <action selector="mainCancelButtonPressed:" destination="bYr-Fd-K6x" id="sXK-Bg-gtf"/>
                             </connections>
