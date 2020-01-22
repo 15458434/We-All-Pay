@@ -967,7 +967,7 @@
                                 <viewLayoutGuide key="frameLayoutGuide" id="0A7-av-Slz"/>
                             </scrollView>
                         </subviews>
-                        <color key="backgroundColor" name="background"/>
+                        <color key="backgroundColor" systemColor="systemBackgroundColor" cocoaTouchSystemColor="whiteColor"/>
                         <constraints>
                             <constraint firstAttribute="trailing" secondItem="LRt-Bn-rJz" secondAttribute="trailing" id="ctP-Q5-rfj"/>
                             <constraint firstItem="LRt-Bn-rJz" firstAttribute="top" secondItem="rbL-uz-KLA" secondAttribute="top" id="iJb-v2-qlT"/>
@@ -1492,9 +1492,6 @@
         <image name="barbutton - done" width="22" height="22"/>
         <image name="circularPictureInCodeDemo.png" width="1219.199951171875" height="1219.199951171875"/>
         <image name="iScreen button" width="26" height="26"/>
-        <namedColor name="background">
-            <color red="0.83529411764705885" green="0.92549019607843142" blue="0.99215686274509807" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
-        </namedColor>
         <namedColor name="button - enabled">
             <color red="1" green="0.52941176470588236" blue="0.67843137254901964" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
         </namedColor>
