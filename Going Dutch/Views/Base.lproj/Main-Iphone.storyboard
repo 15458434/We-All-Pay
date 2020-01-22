@@ -4,6 +4,7 @@
     <dependencies>
         <deployment identifier="iOS"/>
         <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="15706"/>
+        <capability name="Named colors" minToolsVersion="9.0"/>
         <capability name="Safe area layout guides" minToolsVersion="9.0"/>
         <capability name="documents saved in the Xcode 8 format" minToolsVersion="8.0"/>
     </dependencies>
@@ -476,7 +477,7 @@
                                 <constraint firstAttribute="centerY" secondItem="7Ul-ek-GSq" secondAttribute="centerY" constant="7" id="xv6-SP-BJ6"/>
                             </constraints>
                         </view>
-                        <barButtonItem key="rightBarButtonItem" systemItem="cancel" id="frT-jZ-Lwi">
+                        <barButtonItem key="rightBarButtonItem" image="barbutton - cancel" id="frT-jZ-Lwi">
                             <connections>
                                 <action selector="mainCancelButtonPressed:" destination="bYr-Fd-K6x" id="sXK-Bg-gtf"/>
                             </connections>
@@ -715,7 +716,7 @@
                         </connections>
                     </tableView>
                     <navigationItem key="navigationItem" title="solution" id="cWM-Oj-MA0">
-                        <barButtonItem key="rightBarButtonItem" systemItem="cancel" id="Fxs-Kw-Mmm">
+                        <barButtonItem key="rightBarButtonItem" image="barbutton - cancel" id="Fxs-Kw-Mmm">
                             <userDefinedRuntimeAttributes>
                                 <userDefinedRuntimeAttribute type="string" keyPath="accessibilityIdentifier" value="Cancel"/>
                             </userDefinedRuntimeAttributes>
@@ -765,7 +766,7 @@
                                     </state>
                                     <connections>
                                         <action selector="addPersonButton:" destination="AUO-87-nmq" eventType="touchUpInside" id="ebu-qs-nCl"/>
-                                        <segue destination="IqG-HS-4of" kind="presentation" identifier="openEditPerson" id="12G-Hg-hF4"/>
+                                        <segue destination="nkD-cc-jGs" kind="presentation" identifier="openEditPerson" id="k2G-tm-5CJ"/>
                                     </connections>
                                 </button>
                                 <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="asZ-Na-2wd">
@@ -892,100 +893,131 @@
             </objects>
             <point key="canvasLocation" x="2257" y="-50"/>
         </scene>
-        <!--Person View Controller-->
-        <scene sceneID="kPW-Sp-0Xw">
+        <!--Person-->
+        <scene sceneID="Big-qq-xRW">
             <objects>
-                <tableViewController id="eE2-xD-YRT" customClass="MCPersonViewController" sceneMemberID="viewController">
-                    <tableView key="view" clipsSubviews="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" dataMode="prototypes" style="plain" separatorStyle="none" rowHeight="44" sectionHeaderHeight="22" sectionFooterHeight="22" id="glU-ha-KV8">
+                <viewController storyboardIdentifier="PersonViewController" useStoryboardIdentifierAsRestorationIdentifier="YES" id="5gk-H5-rXD" customClass="MCPersonViewController" sceneMemberID="viewController">
+                    <view key="view" contentMode="scaleToFill" id="rbL-uz-KLA">
                         <rect key="frame" x="0.0" y="0.0" width="375" height="702"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
-                        <color key="backgroundColor" red="1" green="1" blue="1" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
-                        <viewLayoutGuide key="safeArea" id="8gD-cp-rW9"/>
-                        <view key="tableHeaderView" contentMode="scaleToFill" restorationIdentifier="personView" id="YgD-ot-OKq">
-                            <rect key="frame" x="0.0" y="0.0" width="375" height="192"/>
-                            <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
-                            <subviews>
-                                <textField opaque="NO" clipsSubviews="YES" contentMode="scaleToFill" restorationIdentifier="firstNameField" contentHorizontalAlignment="left" contentVerticalAlignment="center" borderStyle="roundedRect" placeholder="First Name" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="Tln-WZ-m8Z">
-                                    <rect key="frame" x="100" y="16" width="263" height="34"/>
-                                    <fontDescription key="fontDescription" type="system" pointSize="14"/>
-                                    <textInputTraits key="textInputTraits" autocapitalizationType="words" autocorrectionType="no" textContentType="name"/>
-                                </textField>
-                                <textField opaque="NO" clipsSubviews="YES" contentMode="scaleToFill" restorationIdentifier="emailaddressField" contentHorizontalAlignment="left" contentVerticalAlignment="center" borderStyle="roundedRect" placeholder="e-mail address" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="4YY-Cv-Jxg">
-                                    <rect key="frame" x="100" y="100" width="263" height="34"/>
-                                    <fontDescription key="fontDescription" type="system" pointSize="14"/>
-                                    <textInputTraits key="textInputTraits" autocorrectionType="no" keyboardType="emailAddress" textContentType="email"/>
-                                </textField>
-                                <button opaque="NO" contentMode="scaleToFill" restorationIdentifier="selectEmailAddressButton" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="Iac-jb-ETA">
-                                    <rect key="frame" x="160.66666666666666" y="142" width="141.99999999999997" height="30"/>
-                                    <fontDescription key="fontDescription" type="system" pointSize="15"/>
-                                    <state key="normal" title="Select email address">
-                                        <color key="titleShadowColor" red="0.5" green="0.5" blue="0.5" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
-                                    </state>
-                                    <connections>
-                                        <action selector="selectEmailAddressPressed:" destination="eE2-xD-YRT" eventType="touchDown" id="oNn-Z3-P2Y"/>
-                                    </connections>
-                                </button>
-                                <textField opaque="NO" clipsSubviews="YES" contentMode="scaleToFill" restorationIdentifier="lastNameField" contentHorizontalAlignment="left" contentVerticalAlignment="center" borderStyle="roundedRect" placeholder="Last name" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="E8v-zR-iZl">
-                                    <rect key="frame" x="100" y="58" width="263" height="34"/>
-                                    <fontDescription key="fontDescription" type="system" pointSize="14"/>
-                                    <textInputTraits key="textInputTraits" autocapitalizationType="sentences" autocorrectionType="no" textContentType="family-name"/>
-                                </textField>
-                                <imageView userInteractionEnabled="NO" contentMode="scaleAspectFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" translatesAutoresizingMaskIntoConstraints="NO" id="rBP-Ui-O3X" customClass="CircularImageView" customModule="We_all_pay" customModuleProvider="target">
-                                    <rect key="frame" x="12" y="12" width="80" height="80"/>
-                                    <constraints>
-                                        <constraint firstAttribute="width" constant="80" id="I30-ou-1iT"/>
-                                        <constraint firstAttribute="width" secondItem="rBP-Ui-O3X" secondAttribute="height" multiplier="1:1" id="b3n-aU-ykT"/>
-                                    </constraints>
-                                </imageView>
-                            </subviews>
-                            <color key="backgroundColor" red="1" green="1" blue="1" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
-                            <constraints>
-                                <constraint firstItem="tgm-ni-PG9" firstAttribute="trailing" secondItem="E8v-zR-iZl" secondAttribute="trailingMargin" constant="20" id="7sf-qv-LdH"/>
-                                <constraint firstItem="rBP-Ui-O3X" firstAttribute="leading" secondItem="tgm-ni-PG9" secondAttribute="leading" constant="12" id="8vR-fF-xoR"/>
-                                <constraint firstAttribute="bottom" secondItem="Iac-jb-ETA" secondAttribute="bottom" constant="20" id="A6U-RG-1HP"/>
-                                <constraint firstItem="E8v-zR-iZl" firstAttribute="top" secondItem="Tln-WZ-m8Z" secondAttribute="bottom" constant="8" symbolic="YES" id="Bh1-H5-A7y"/>
-                                <constraint firstItem="Iac-jb-ETA" firstAttribute="top" secondItem="4YY-Cv-Jxg" secondAttribute="bottom" constant="8" id="LAl-KS-mpZ"/>
-                                <constraint firstItem="rBP-Ui-O3X" firstAttribute="bottom" secondItem="E8v-zR-iZl" secondAttribute="bottom" id="SR3-6i-u5p"/>
-                                <constraint firstItem="E8v-zR-iZl" firstAttribute="width" secondItem="Tln-WZ-m8Z" secondAttribute="width" id="UjM-Ua-I45"/>
-                                <constraint firstItem="E8v-zR-iZl" firstAttribute="leading" secondItem="rBP-Ui-O3X" secondAttribute="trailing" constant="8" id="Yi4-oD-fmQ"/>
-                                <constraint firstItem="E8v-zR-iZl" firstAttribute="width" secondItem="4YY-Cv-Jxg" secondAttribute="width" id="aND-oH-kDq"/>
-                                <constraint firstItem="E8v-zR-iZl" firstAttribute="centerX" secondItem="4YY-Cv-Jxg" secondAttribute="centerX" id="b14-lo-yiW"/>
-                                <constraint firstItem="Iac-jb-ETA" firstAttribute="centerX" secondItem="4YY-Cv-Jxg" secondAttribute="centerX" id="bgg-de-lac"/>
-                                <constraint firstItem="E8v-zR-iZl" firstAttribute="centerX" secondItem="Tln-WZ-m8Z" secondAttribute="centerX" id="ese-uB-tSC"/>
-                                <constraint firstItem="4YY-Cv-Jxg" firstAttribute="top" secondItem="E8v-zR-iZl" secondAttribute="bottom" constant="8" id="p3U-F4-0f1"/>
-                            </constraints>
-                            <viewLayoutGuide key="safeArea" id="tgm-ni-PG9"/>
-                        </view>
-                        <connections>
-                            <outlet property="dataSource" destination="eE2-xD-YRT" id="nlk-PP-QQN"/>
-                            <outlet property="delegate" destination="eE2-xD-YRT" id="Reu-io-q7l"/>
-                        </connections>
-                    </tableView>
-                    <navigationItem key="navigationItem" id="84o-i7-hdm">
-                        <barButtonItem key="leftBarButtonItem" systemItem="cancel" id="oJb-TP-76X">
+                        <subviews>
+                            <scrollView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" ambiguous="YES" translatesAutoresizingMaskIntoConstraints="NO" id="LRt-Bn-rJz">
+                                <rect key="frame" x="0.0" y="0.0" width="375" height="812"/>
+                                <subviews>
+                                    <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="HQ1-HW-3Ht">
+                                        <rect key="frame" x="0.0" y="0.0" width="375" height="309"/>
+                                        <subviews>
+                                            <stackView opaque="NO" contentMode="scaleToFill" axis="vertical" alignment="center" spacing="10" translatesAutoresizingMaskIntoConstraints="NO" id="U7J-zz-CBD">
+                                                <rect key="frame" x="87.666666666666686" y="10" width="200" height="289"/>
+                                                <subviews>
+                                                    <imageView opaque="NO" userInteractionEnabled="NO" contentMode="scaleAspectFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="circularPictureInCodeDemo.png" translatesAutoresizingMaskIntoConstraints="NO" id="jMQ-DN-rdu" customClass="CircularImageView" customModule="We_all_pay" customModuleProvider="target">
+                                                        <rect key="frame" x="41.333333333333329" y="0.0" width="116.99999999999999" height="117"/>
+                                                        <constraints>
+                                                            <constraint firstAttribute="width" secondItem="jMQ-DN-rdu" secondAttribute="height" multiplier="1:1" id="WAT-1N-Djc"/>
+                                                            <constraint firstAttribute="width" constant="117" id="sG3-hE-ZLH"/>
+                                                        </constraints>
+                                                    </imageView>
+                                                    <textField opaque="NO" clipsSubviews="YES" contentMode="scaleToFill" restorationIdentifier="firstNameField" contentHorizontalAlignment="left" contentVerticalAlignment="center" borderStyle="roundedRect" placeholder="First Name" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="GN1-dN-HP2">
+                                                        <rect key="frame" x="0.0" y="127" width="200" height="34"/>
+                                                        <constraints>
+                                                            <constraint firstAttribute="width" relation="greaterThanOrEqual" priority="999" constant="200" id="OiN-ZH-752"/>
+                                                        </constraints>
+                                                        <fontDescription key="fontDescription" type="system" pointSize="14"/>
+                                                        <textInputTraits key="textInputTraits" autocapitalizationType="words" autocorrectionType="no" textContentType="name"/>
+                                                    </textField>
+                                                    <textField opaque="NO" clipsSubviews="YES" contentMode="scaleToFill" restorationIdentifier="lastNameField" contentHorizontalAlignment="left" contentVerticalAlignment="center" borderStyle="roundedRect" placeholder="Last name" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="alT-pu-m9B">
+                                                        <rect key="frame" x="0.0" y="171" width="200" height="34"/>
+                                                        <constraints>
+                                                            <constraint firstAttribute="width" relation="greaterThanOrEqual" priority="998" constant="200" id="lng-sf-PMQ"/>
+                                                        </constraints>
+                                                        <fontDescription key="fontDescription" type="system" pointSize="14"/>
+                                                        <textInputTraits key="textInputTraits" autocapitalizationType="sentences" autocorrectionType="no" textContentType="family-name"/>
+                                                    </textField>
+                                                    <textField opaque="NO" clipsSubviews="YES" contentMode="scaleToFill" restorationIdentifier="emailaddressField" contentHorizontalAlignment="left" contentVerticalAlignment="center" borderStyle="roundedRect" placeholder="e-mail address" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="xVh-Xm-oA9">
+                                                        <rect key="frame" x="0.0" y="215" width="200" height="34"/>
+                                                        <constraints>
+                                                            <constraint firstAttribute="width" relation="greaterThanOrEqual" constant="200" id="QGU-m2-0ub"/>
+                                                        </constraints>
+                                                        <fontDescription key="fontDescription" type="system" pointSize="14"/>
+                                                        <textInputTraits key="textInputTraits" autocorrectionType="no" keyboardType="emailAddress" textContentType="email"/>
+                                                    </textField>
+                                                    <button opaque="NO" contentMode="scaleToFill" restorationIdentifier="selectEmailAddressButton" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="BUE-es-n4t">
+                                                        <rect key="frame" x="29" y="259" width="142" height="30"/>
+                                                        <fontDescription key="fontDescription" type="system" pointSize="15"/>
+                                                        <state key="normal" title="Select email address">
+                                                            <color key="titleShadowColor" red="0.5" green="0.5" blue="0.5" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                                                        </state>
+                                                        <connections>
+                                                            <action selector="selectEmailAddressPressed:" destination="5gk-H5-rXD" eventType="touchUpInside" id="xNV-Tg-VTq"/>
+                                                        </connections>
+                                                    </button>
+                                                </subviews>
+                                            </stackView>
+                                        </subviews>
+                                        <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                                        <constraints>
+                                            <constraint firstItem="U7J-zz-CBD" firstAttribute="centerX" secondItem="HQ1-HW-3Ht" secondAttribute="centerX" id="4hn-Zc-HQn"/>
+                                            <constraint firstAttribute="bottom" secondItem="U7J-zz-CBD" secondAttribute="bottom" constant="10" id="JjJ-hL-RSD"/>
+                                            <constraint firstItem="U7J-zz-CBD" firstAttribute="top" secondItem="HQ1-HW-3Ht" secondAttribute="top" constant="10" id="ojy-AF-des"/>
+                                        </constraints>
+                                    </view>
+                                </subviews>
+                                <constraints>
+                                    <constraint firstItem="HQ1-HW-3Ht" firstAttribute="top" secondItem="FGP-Nq-0XT" secondAttribute="top" id="4i8-Wf-qNf"/>
+                                    <constraint firstItem="HQ1-HW-3Ht" firstAttribute="centerX" secondItem="LRt-Bn-rJz" secondAttribute="centerX" id="tdU-Vh-XCt"/>
+                                </constraints>
+                                <viewLayoutGuide key="contentLayoutGuide" id="FGP-Nq-0XT"/>
+                                <viewLayoutGuide key="frameLayoutGuide" id="0A7-av-Slz"/>
+                            </scrollView>
+                        </subviews>
+                        <color key="backgroundColor" systemColor="systemBackgroundColor" cocoaTouchSystemColor="whiteColor"/>
+                        <constraints>
+                            <constraint firstAttribute="trailing" secondItem="LRt-Bn-rJz" secondAttribute="trailing" id="ctP-Q5-rfj"/>
+                            <constraint firstItem="LRt-Bn-rJz" firstAttribute="top" secondItem="rbL-uz-KLA" secondAttribute="top" id="iJb-v2-qlT"/>
+                            <constraint firstItem="LRt-Bn-rJz" firstAttribute="leading" secondItem="rbL-uz-KLA" secondAttribute="leading" id="j31-sg-haG"/>
+                            <constraint firstItem="HQ1-HW-3Ht" firstAttribute="width" secondItem="rbL-uz-KLA" secondAttribute="width" id="vEx-5c-qX9"/>
+                            <constraint firstAttribute="bottom" secondItem="LRt-Bn-rJz" secondAttribute="bottom" id="y0h-dr-Ak2"/>
+                        </constraints>
+                        <viewLayoutGuide key="safeArea" id="kL9-O6-cNc"/>
+                    </view>
+                    <navigationItem key="navigationItem" title="Person" id="YXl-NB-NJJ">
+                        <barButtonItem key="leftBarButtonItem" image="barbutton - cancel" id="nvM-MT-hWV">
+                            <color key="tintColor" name="button - enabled"/>
                             <connections>
-                                <action selector="cancelButtonPressed:" destination="eE2-xD-YRT" id="PAs-ih-ReK"/>
+                                <action selector="cancelButtonPressed:" destination="5gk-H5-rXD" id="lTR-ft-v9D"/>
                             </connections>
                         </barButtonItem>
-                        <barButtonItem key="rightBarButtonItem" systemItem="done" id="7Pt-zo-ZpA">
+                        <barButtonItem key="rightBarButtonItem" image="barbutton - done" id="dzf-gh-qAj">
+                            <color key="tintColor" name="button - enabled"/>
                             <connections>
-                                <action selector="doneButtonPressed:" destination="eE2-xD-YRT" id="AcP-1x-E97"/>
+                                <action selector="doneButtonPressed:" destination="5gk-H5-rXD" id="UoU-Mh-Sky"/>
                             </connections>
                         </barButtonItem>
                     </navigationItem>
                     <connections>
-                        <outlet property="emailField" destination="4YY-Cv-Jxg" id="AnM-aA-aZd"/>
-                        <outlet property="firstNameField" destination="Tln-WZ-m8Z" id="d1N-5q-L5I"/>
-                        <outlet property="lastNameField" destination="E8v-zR-iZl" id="w1N-70-q1B"/>
-                        <outlet property="model" destination="ILW-6f-ftK" id="4wN-2R-Vcb"/>
-                        <outlet property="pictureView" destination="rBP-Ui-O3X" id="ohX-6M-fE4"/>
-                        <outlet property="selectEmailAddressButton" destination="Iac-jb-ETA" id="5Kp-U2-FF1"/>
+                        <outlet property="emailField" destination="xVh-Xm-oA9" id="rAz-51-Pe4"/>
+                        <outlet property="firstNameField" destination="GN1-dN-HP2" id="QfC-yN-Ulp"/>
+                        <outlet property="lastNameField" destination="alT-pu-m9B" id="eGG-xd-AZ1"/>
+                        <outlet property="model" destination="RYr-B0-7YP" id="LZJ-Jh-rtH"/>
+                        <outlet property="pictureView" destination="jMQ-DN-rdu" id="O5l-PF-H4C"/>
+                        <outlet property="selectEmailAddressButton" destination="BUE-es-n4t" id="uLy-3b-fkJ"/>
+                        <segue destination="KCD-1Q-SRW" kind="popoverPresentation" identifier="openSelectEmailAddress" popoverAnchorView="BUE-es-n4t" id="hGI-77-PTT">
+                            <popoverArrowDirection key="popoverArrowDirection" up="YES" down="YES" left="YES" right="YES"/>
+                        </segue>
                     </connections>
-                </tableViewController>
-                <placeholder placeholderIdentifier="IBFirstResponder" id="3DJ-Qy-W7F" userLabel="First Responder" sceneMemberID="firstResponder"/>
-                <customObject id="ILW-6f-ftK" customClass="MCPersonModel"/>
+                </viewController>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="EKP-xb-u6V" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
+                <customObject id="RYr-B0-7YP" customClass="MCPersonModel"/>
             </objects>
-            <point key="canvasLocation" x="4349.6000000000004" y="-49.925037481259373"/>
+            <point key="canvasLocation" x="4284" y="-50.246305418719217"/>
+        </scene>
+        <!--MCSelectEmailAddressTableViewController_iPad-->
+        <scene sceneID="f2t-F2-H8B">
+            <objects>
+                <viewControllerPlaceholder storyboardName="Main-iPad" referencedIdentifier="MCSelectEmailAddressTableViewController_iPad" id="KCD-1Q-SRW" sceneMemberID="viewController"/>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="ULb-sH-2wh" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
+            </objects>
+            <point key="canvasLocation" x="5025" y="-50"/>
         </scene>
         <!--Navigation Controller-->
         <scene sceneID="mlr-FR-5OU">
@@ -1170,7 +1202,7 @@
                     </tableView>
                     <toolbarItems/>
                     <navigationItem key="navigationItem" id="Bt1-bA-YQq">
-                        <barButtonItem key="leftBarButtonItem" systemItem="cancel" id="YZg-Lh-fAa">
+                        <barButtonItem key="leftBarButtonItem" image="barbutton - cancel" id="YZg-Lh-fAa">
                             <userDefinedRuntimeAttributes>
                                 <userDefinedRuntimeAttribute type="string" keyPath="accessibilityIdentifier" value="Cancel"/>
                             </userDefinedRuntimeAttributes>
@@ -1178,7 +1210,7 @@
                                 <action selector="mainCancelButtonPressed:" destination="A1E-EB-xnZ" id="sP1-9x-5f7"/>
                             </connections>
                         </barButtonItem>
-                        <barButtonItem key="rightBarButtonItem" systemItem="done" id="mIQ-hS-seo">
+                        <barButtonItem key="rightBarButtonItem" image="barbutton - done" id="mIQ-hS-seo">
                             <connections>
                                 <action selector="mainDoneButtonPressed:" destination="A1E-EB-xnZ" id="h4T-9H-xsa"/>
                             </connections>
@@ -1447,32 +1479,40 @@
             <point key="canvasLocation" x="5325" y="1480.9859154929577"/>
         </scene>
         <!--Navigation Controller-->
-        <scene sceneID="VbY-vI-BzS">
+        <scene sceneID="ctA-J5-Wan">
             <objects>
-                <navigationController automaticallyAdjustsScrollViewInsets="NO" id="IqG-HS-4of" sceneMemberID="viewController">
+                <navigationController storyboardIdentifier="PersonNavigationController" automaticallyAdjustsScrollViewInsets="NO" useStoryboardIdentifierAsRestorationIdentifier="YES" id="nkD-cc-jGs" sceneMemberID="viewController">
                     <toolbarItems/>
-                    <simulatedStatusBarMetrics key="simulatedStatusBarMetrics" statusBarStyle="lightContent"/>
-                    <simulatedNavigationBarMetrics key="simulatedTopBarMetrics" translucent="NO" prompted="NO"/>
-                    <navigationBar key="navigationBar" contentMode="scaleToFill" translucent="NO" id="MAT-Cj-gua">
+                    <simulatedNavigationBarMetrics key="simulatedTopBarMetrics" barStyle="black" translucent="NO" prompted="NO"/>
+                    <navigationBar key="navigationBar" contentMode="scaleToFill" insetsLayoutMarginsFromSafeArea="NO" barStyle="black" translucent="NO" id="aT1-i5-Ri7">
                         <rect key="frame" x="0.0" y="0.0" width="375" height="56"/>
                         <autoresizingMask key="autoresizingMask"/>
+                        <textAttributes key="titleTextAttributes">
+                            <color key="textColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                        </textAttributes>
                     </navigationBar>
                     <nil name="viewControllers"/>
                     <connections>
-                        <segue destination="eE2-xD-YRT" kind="relationship" relationship="rootViewController" id="0oC-b8-PyC"/>
+                        <segue destination="5gk-H5-rXD" kind="relationship" relationship="rootViewController" id="25V-ul-VXu"/>
                     </connections>
                 </navigationController>
-                <placeholder placeholderIdentifier="IBFirstResponder" id="yjC-3a-EEF" userLabel="First Responder" sceneMemberID="firstResponder"/>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="1fh-kT-0Vp" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="3352.5" y="-49.647887323943657"/>
+            <point key="canvasLocation" x="3340" y="-50"/>
         </scene>
     </scenes>
     <resources>
+        <image name="barbutton - cancel" width="22" height="22"/>
+        <image name="barbutton - done" width="22" height="22"/>
+        <image name="circularPictureInCodeDemo.png" width="1219.199951171875" height="1219.199951171875"/>
         <image name="iScreen button" width="26" height="26"/>
+        <namedColor name="button - enabled">
+            <color red="1" green="0.52941176470588236" blue="0.67843137254901964" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+        </namedColor>
     </resources>
     <inferredMetricsTieBreakers>
         <segue reference="DSi-fr-DCr"/>
-        <segue reference="z3e-Vr-AS7"/>
+        <segue reference="eZd-I3-t8D"/>
         <segue reference="C0F-pM-cfm"/>
         <segue reference="5Vh-JE-OCd"/>
     </inferredMetricsTieBreakers>
