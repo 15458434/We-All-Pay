@@ -155,7 +155,6 @@
 		38C1956323C8C575006255AE /* MCGenericAdBannerViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 38C1956223C8C575006255AE /* MCGenericAdBannerViewController.m */; };
 		38C3AB151CBCF3200011C10C /* ViewControllerProtocols.swift in Sources */ = {isa = PBXBuildFile; fileRef = 38C3AB141CBCF3200011C10C /* ViewControllerProtocols.swift */; };
 		38C700F21D8EC24100D785BB /* LaunchCounter.swift in Sources */ = {isa = PBXBuildFile; fileRef = 38C700F11D8EC24100D785BB /* LaunchCounter.swift */; };
-		38CC8C4A18ED61FD006D99E7 /* MCPersonTableViewController_iPad.m in Sources */ = {isa = PBXBuildFile; fileRef = 38CC8C4918ED61FD006D99E7 /* MCPersonTableViewController_iPad.m */; };
 		38CDE90017135B6300387CAA /* MCTools.m in Sources */ = {isa = PBXBuildFile; fileRef = 38CDE8FF17135B6300387CAA /* MCTools.m */; };
 		38D177111C3A5E640084604C /* SelectCategoryTableViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 38D177101C3A5E640084604C /* SelectCategoryTableViewController.swift */; };
 		38D177131C3A85C00084604C /* SelectCurrencyTableViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 38D177121C3A85C00084604C /* SelectCurrencyTableViewController.swift */; };
@@ -524,8 +523,6 @@
 		38C3AB141CBCF3200011C10C /* ViewControllerProtocols.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ViewControllerProtocols.swift; sourceTree = "<group>"; };
 		38C700F11D8EC24100D785BB /* LaunchCounter.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = LaunchCounter.swift; sourceTree = "<group>"; };
 		38C725031A2E082D003173E6 /* Who is paying next.entitlements */ = {isa = PBXFileReference; lastKnownFileType = text.xml; path = "Who is paying next.entitlements"; sourceTree = "<group>"; };
-		38CC8C4818ED61FD006D99E7 /* MCPersonTableViewController_iPad.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = MCPersonTableViewController_iPad.h; path = ViewControllers/iPad/MCPersonTableViewController_iPad.h; sourceTree = "<group>"; };
-		38CC8C4918ED61FD006D99E7 /* MCPersonTableViewController_iPad.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = MCPersonTableViewController_iPad.m; path = ViewControllers/iPad/MCPersonTableViewController_iPad.m; sourceTree = "<group>"; };
 		38CDE8FE17135B6300387CAA /* MCTools.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = MCTools.h; sourceTree = "<group>"; };
 		38CDE8FF17135B6300387CAA /* MCTools.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = MCTools.m; sourceTree = "<group>"; };
 		38D177101C3A5E640084604C /* SelectCategoryTableViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SelectCategoryTableViewController.swift; sourceTree = "<group>"; };
@@ -1191,8 +1188,6 @@
 				38AAFBA118EC406300CD3E12 /* MCSharedBillPeoplePresentTableViewController-iPad.m */,
 				38AAFB9D18EC404200CD3E12 /* MCSharedBillPaymentsTableViewController-iPad.h */,
 				38AAFB9E18EC404200CD3E12 /* MCSharedBillPaymentsTableViewController-iPad.m */,
-				38CC8C4818ED61FD006D99E7 /* MCPersonTableViewController_iPad.h */,
-				38CC8C4918ED61FD006D99E7 /* MCPersonTableViewController_iPad.m */,
 				384EC9111BC3008300A80799 /* SelectEmailAddressTableViewController_iPad.swift */,
 				3812760D1BBE76B40004C8C2 /* PaymentViewController.swift */,
 				38E2CB471BC2ABFB0092B5C8 /* SelectPayerTableViewController_iPad.swift */,
@@ -1919,7 +1914,6 @@
 				385295CF1C10583E0081894D /* CategoryPictureObject.swift in Sources */,
 				38977E5D1B2A31A2008484A4 /* MCSolutionOverViewTableViewCell_iPhone.swift in Sources */,
 				38D6A3E81C73E04300968BB2 /* UIViewControllerRateMeControllerExtension.swift in Sources */,
-				38CC8C4A18ED61FD006D99E7 /* MCPersonTableViewController_iPad.m in Sources */,
 				389C2F56193391E300BB9F3E /* MCPaymentPresenceEntityMigrationPolicy.m in Sources */,
 				38B7E9521D86F8F600400E72 /* ContactsDataReceiver.swift in Sources */,
 				3812760C1BBE74EF0004C8C2 /* UIViewControllerExtension.swift in Sources */,

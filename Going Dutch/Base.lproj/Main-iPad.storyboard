@@ -449,156 +449,12 @@
             </objects>
             <point key="canvasLocation" x="3243.75" y="-73.2421875"/>
         </scene>
-        <!--Person Details-->
-        <scene sceneID="Gor-rB-6iQ">
-            <objects>
-                <tableViewController storyboardIdentifier="MCPersonViewController_iPadTableViewController" useStoryboardIdentifierAsRestorationIdentifier="YES" id="ULr-7Y-8VH" customClass="MCPersonTableViewController_iPad" sceneMemberID="viewController">
-                    <tableView key="view" clipsSubviews="YES" contentMode="scaleToFill" restorationIdentifier="personDetailsTableView" alwaysBounceVertical="YES" scrollEnabled="NO" dataMode="prototypes" style="plain" separatorStyle="none" rowHeight="162" sectionHeaderHeight="22" sectionFooterHeight="22" id="tj2-iS-uXP">
-                        <rect key="frame" x="0.0" y="0.0" width="540" height="564"/>
-                        <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
-                        <color key="backgroundColor" red="1" green="1" blue="1" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
-                        <view key="tableHeaderView" contentMode="scaleToFill" restorationIdentifier="personHeaderView" id="8Td-nC-R1B" customClass="UITableViewHeaderFooterView">
-                            <rect key="frame" x="0.0" y="0.0" width="540" height="276"/>
-                            <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
-                            <subviews>
-                                <view contentMode="scaleToFill" restorationIdentifier="tapableBackground" translatesAutoresizingMaskIntoConstraints="NO" id="W8e-8y-G2k" customClass="UIControl">
-                                    <rect key="frame" x="0.0" y="0.0" width="540" height="276"/>
-                                    <subviews>
-                                        <button contentMode="scaleToFill" restorationIdentifier="selectemailAddressButton" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="Z0f-Hu-kcp">
-                                            <rect key="frame" x="263" y="190" width="142" height="30"/>
-                                            <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
-                                            <fontDescription key="fontDescription" type="system" pointSize="15"/>
-                                            <state key="normal" title="Select email address">
-                                                <color key="titleColor" red="0.98952531814575195" green="0.45403587818145752" blue="0.5264095664024353" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
-                                                <color key="titleShadowColor" red="0.5" green="0.5" blue="0.5" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
-                                            </state>
-                                            <connections>
-                                                <action selector="selectEmailAddressButtonPressed:" destination="ULr-7Y-8VH" eventType="touchUpInside" id="cvR-2M-q2x"/>
-                                                <segue destination="Xu3-9f-Jho" kind="popover" identifier="openSelectEmailAddress" popoverAnchorView="Z0f-Hu-kcp" id="XF6-bM-0hX">
-                                                    <popoverArrowDirection key="popoverArrowDirection" up="YES" down="YES" left="YES" right="YES"/>
-                                                </segue>
-                                            </connections>
-                                        </button>
-                                        <textField clipsSubviews="YES" contentMode="scaleToFill" restorationIdentifier="firstNameField" contentHorizontalAlignment="left" contentVerticalAlignment="center" borderStyle="roundedRect" placeholder="first name" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="nPF-0g-HeJ">
-                                            <rect key="frame" x="148" y="64" width="372" height="34"/>
-                                            <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
-                                            <fontDescription key="fontDescription" type="system" pointSize="14"/>
-                                            <textInputTraits key="textInputTraits" autocapitalizationType="sentences" autocorrectionType="no" textContentType="name"/>
-                                            <connections>
-                                                <outlet property="delegate" destination="ULr-7Y-8VH" id="qs1-2T-gw7"/>
-                                            </connections>
-                                        </textField>
-                                        <textField clipsSubviews="YES" contentMode="scaleToFill" restorationIdentifier="lastNameField" contentHorizontalAlignment="left" contentVerticalAlignment="center" borderStyle="roundedRect" placeholder="last name" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="JRX-hO-2n8">
-                                            <rect key="frame" x="148" y="106" width="372" height="34"/>
-                                            <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
-                                            <fontDescription key="fontDescription" type="system" pointSize="14"/>
-                                            <textInputTraits key="textInputTraits" autocapitalizationType="sentences" autocorrectionType="no" textContentType="additional-name"/>
-                                            <connections>
-                                                <outlet property="delegate" destination="ULr-7Y-8VH" id="Ov4-sg-a0L"/>
-                                            </connections>
-                                        </textField>
-                                        <textField clipsSubviews="YES" contentMode="scaleToFill" restorationIdentifier="emailAddressField" contentHorizontalAlignment="left" contentVerticalAlignment="center" borderStyle="roundedRect" placeholder="emailaddress" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="eax-dw-aIf">
-                                            <rect key="frame" x="148" y="148" width="372" height="34"/>
-                                            <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
-                                            <fontDescription key="fontDescription" type="system" pointSize="14"/>
-                                            <textInputTraits key="textInputTraits" autocorrectionType="no" keyboardType="emailAddress" textContentType="email"/>
-                                            <connections>
-                                                <outlet property="delegate" destination="ULr-7Y-8VH" id="KHm-EH-bnf"/>
-                                            </connections>
-                                        </textField>
-                                        <imageView userInteractionEnabled="NO" contentMode="scaleAspectFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" translatesAutoresizingMaskIntoConstraints="NO" id="gsF-fz-iel" customClass="CircularImageView" customModule="We_all_pay" customModuleProvider="target">
-                                            <rect key="frame" x="20" y="20" width="120" height="120"/>
-                                            <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
-                                            <constraints>
-                                                <constraint firstAttribute="height" constant="120" id="Vta-fP-fpA"/>
-                                                <constraint firstAttribute="width" secondItem="gsF-fz-iel" secondAttribute="height" multiplier="1:1" id="Xd2-bB-4SV"/>
-                                            </constraints>
-                                        </imageView>
-                                    </subviews>
-                                    <color key="backgroundColor" red="1" green="1" blue="1" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
-                                    <constraints>
-                                        <constraint firstItem="gsF-fz-iel" firstAttribute="top" secondItem="W8e-8y-G2k" secondAttribute="top" constant="20" id="4fB-mS-C3S"/>
-                                        <constraint firstItem="JRX-hO-2n8" firstAttribute="centerX" secondItem="Z0f-Hu-kcp" secondAttribute="centerX" id="Gkv-fT-wxs"/>
-                                        <constraint firstAttribute="trailing" secondItem="JRX-hO-2n8" secondAttribute="trailing" constant="20" symbolic="YES" id="R9w-T9-RQa"/>
-                                        <constraint firstItem="eax-dw-aIf" firstAttribute="leading" secondItem="JRX-hO-2n8" secondAttribute="leading" id="RLs-fk-drF"/>
-                                        <constraint firstItem="JRX-hO-2n8" firstAttribute="top" secondItem="nPF-0g-HeJ" secondAttribute="bottom" constant="8" symbolic="YES" id="U8k-rK-5rX"/>
-                                        <constraint firstItem="nPF-0g-HeJ" firstAttribute="leading" secondItem="JRX-hO-2n8" secondAttribute="leading" id="ZHv-G2-ihQ"/>
-                                        <constraint firstItem="nPF-0g-HeJ" firstAttribute="trailing" secondItem="JRX-hO-2n8" secondAttribute="trailing" id="cTn-mo-auW"/>
-                                        <constraint firstItem="gsF-fz-iel" firstAttribute="bottom" secondItem="JRX-hO-2n8" secondAttribute="bottom" id="hob-yn-NX7"/>
-                                        <constraint firstItem="gsF-fz-iel" firstAttribute="leading" secondItem="W8e-8y-G2k" secondAttribute="leading" constant="20" id="lNY-qf-2MC"/>
-                                        <constraint firstItem="eax-dw-aIf" firstAttribute="top" secondItem="JRX-hO-2n8" secondAttribute="bottom" constant="8" symbolic="YES" id="mE2-wL-Udp"/>
-                                        <constraint firstItem="Z0f-Hu-kcp" firstAttribute="top" secondItem="eax-dw-aIf" secondAttribute="bottom" constant="8" symbolic="YES" id="nMz-Py-N9T"/>
-                                        <constraint firstItem="JRX-hO-2n8" firstAttribute="leading" secondItem="gsF-fz-iel" secondAttribute="trailing" constant="8" id="tYI-Tr-53a"/>
-                                        <constraint firstItem="eax-dw-aIf" firstAttribute="trailing" secondItem="JRX-hO-2n8" secondAttribute="trailing" id="zba-oY-C7T"/>
-                                    </constraints>
-                                    <connections>
-                                        <action selector="backgroundTappedToDismissKeyboard:" destination="ULr-7Y-8VH" eventType="touchUpInside" id="GJe-OU-jme"/>
-                                    </connections>
-                                </view>
-                            </subviews>
-                            <color key="backgroundColor" red="1" green="1" blue="1" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
-                            <constraints>
-                                <constraint firstAttribute="trailing" secondItem="W8e-8y-G2k" secondAttribute="trailing" id="OUz-bz-K58"/>
-                                <constraint firstAttribute="bottom" secondItem="W8e-8y-G2k" secondAttribute="bottom" id="a9l-ef-t5b"/>
-                                <constraint firstItem="W8e-8y-G2k" firstAttribute="top" secondItem="8Td-nC-R1B" secondAttribute="top" id="fGV-h2-lAz"/>
-                                <constraint firstItem="W8e-8y-G2k" firstAttribute="leading" secondItem="8Td-nC-R1B" secondAttribute="leading" id="hW6-jc-lmT"/>
-                            </constraints>
-                        </view>
-                        <prototypes>
-                            <tableViewCell contentMode="scaleToFill" restorationIdentifier="personDetailsTableViewCell" selectionStyle="blue" hidesAccessoryWhenEditing="NO" indentationLevel="1" indentationWidth="0.0" reuseIdentifier="personDetailsTableViewCell" rowHeight="162" id="xwS-Q8-wm4">
-                                <rect key="frame" x="0.0" y="304" width="540" height="162"/>
-                                <autoresizingMask key="autoresizingMask"/>
-                                <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" restorationIdentifier="personDetailsTableViewCellContent" tableViewCell="xwS-Q8-wm4" id="Icx-z4-Hz8">
-                                    <rect key="frame" x="0.0" y="0.0" width="540" height="162"/>
-                                    <autoresizingMask key="autoresizingMask"/>
-                                </tableViewCellContentView>
-                            </tableViewCell>
-                        </prototypes>
-                        <connections>
-                            <outlet property="dataSource" destination="ULr-7Y-8VH" id="Au8-Hw-D0W"/>
-                            <outlet property="delegate" destination="ULr-7Y-8VH" id="hua-fs-LGK"/>
-                        </connections>
-                    </tableView>
-                    <navigationItem key="navigationItem" title="Person Details" id="1ZS-Vk-Q4D">
-                        <barButtonItem key="leftBarButtonItem" image="barbutton - cancel" id="AkN-eI-Z3u">
-                            <color key="tintColor" name="button - enabled"/>
-                            <userDefinedRuntimeAttributes>
-                                <userDefinedRuntimeAttribute type="string" keyPath="accessibilityIdentifier" value="Cancel"/>
-                            </userDefinedRuntimeAttributes>
-                            <connections>
-                                <action selector="mainCancelButtonPressed:" destination="ULr-7Y-8VH" id="Di1-bg-uRo"/>
-                            </connections>
-                        </barButtonItem>
-                        <barButtonItem key="rightBarButtonItem" image="barbutton - done" id="GfK-Qn-5Kr">
-                            <color key="tintColor" name="button - enabled"/>
-                            <connections>
-                                <action selector="mainDoneButtonPressed:" destination="ULr-7Y-8VH" id="2lV-Uo-kUc"/>
-                            </connections>
-                        </barButtonItem>
-                        <userDefinedRuntimeAttributes>
-                            <userDefinedRuntimeAttribute type="string" keyPath="accessibilityIdentifier" value="New person"/>
-                        </userDefinedRuntimeAttributes>
-                    </navigationItem>
-                    <simulatedNavigationBarMetrics key="simulatedTopBarMetrics" translucent="NO" prompted="NO"/>
-                    <modalFormSheetSimulatedSizeMetrics key="simulatedDestinationMetrics"/>
-                    <connections>
-                        <outlet property="emailField" destination="eax-dw-aIf" id="0Ut-q9-KG6"/>
-                        <outlet property="firstNameField" destination="nPF-0g-HeJ" id="6Rv-Sb-joB"/>
-                        <outlet property="lastNameField" destination="JRX-hO-2n8" id="GZn-BY-HJR"/>
-                        <outlet property="pictureView" destination="gsF-fz-iel" id="giS-dt-bid"/>
-                        <outlet property="selectEmailAddressButton" destination="Z0f-Hu-kcp" id="MX3-jZ-fgo"/>
-                    </connections>
-                </tableViewController>
-                <placeholder placeholderIdentifier="IBFirstResponder" id="zsu-bI-OEB" userLabel="First Responder" sceneMemberID="firstResponder"/>
-            </objects>
-            <point key="canvasLocation" x="4754" y="-808"/>
-        </scene>
         <!--Select Email Address Table View Controller i Pad-->
         <scene sceneID="cSm-9q-ez4">
             <objects>
                 <tableViewController storyboardIdentifier="MCSelectEmailAddressTableViewController_iPad" useStoryboardIdentifierAsRestorationIdentifier="YES" id="Xu3-9f-Jho" customClass="SelectEmailAddressTableViewController_iPad" customModule="We_all_pay" customModuleProvider="target" sceneMemberID="viewController">
                     <tableView key="view" clipsSubviews="YES" contentMode="scaleToFill" restorationIdentifier="selectEmailTableView" alwaysBounceVertical="YES" dataMode="prototypes" style="plain" separatorStyle="default" rowHeight="44" sectionHeaderHeight="22" sectionFooterHeight="22" id="GQd-6t-K1V">
-                        <rect key="frame" x="0.0" y="0.0" width="320" height="220"/>
+                        <rect key="frame" x="0.0" y="0.0" width="320" height="240"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <color key="backgroundColor" red="1" green="1" blue="1" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                         <prototypes>
@@ -639,7 +495,7 @@
                 </tableViewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="7M6-xh-WQ9" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="5376" y="-808"/>
+            <point key="canvasLocation" x="3404" y="-808"/>
         </scene>
         <!--Info Screen Table View Controller-->
         <scene sceneID="o8z-Nc-xfe">
@@ -1458,28 +1314,6 @@
                 <placeholder placeholderIdentifier="IBFirstResponder" id="52t-Sk-hPv" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
             </objects>
             <point key="canvasLocation" x="3109" y="-808"/>
-        </scene>
-        <!--Navigation Controller-->
-        <scene sceneID="hlD-P6-Uqv">
-            <objects>
-                <navigationController storyboardIdentifier="personDetailNavigationController" automaticallyAdjustsScrollViewInsets="NO" useStoryboardIdentifierAsRestorationIdentifier="YES" id="Eyq-nw-te5" sceneMemberID="viewController">
-                    <toolbarItems/>
-                    <navigationBar key="navigationBar" contentMode="scaleToFill" restorationIdentifier="personDetailsNavigationBar" id="PyI-c7-8bw">
-                        <rect key="frame" x="0.0" y="0.0" width="834" height="50"/>
-                        <autoresizingMask key="autoresizingMask"/>
-                        <color key="barTintColor" red="0.018172375857830048" green="0.098393335938453674" blue="0.30674564838409424" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
-                        <textAttributes key="titleTextAttributes">
-                            <color key="textColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
-                        </textAttributes>
-                    </navigationBar>
-                    <nil name="viewControllers"/>
-                    <connections>
-                        <segue destination="ULr-7Y-8VH" kind="relationship" relationship="rootViewController" id="c1G-dc-wpx"/>
-                    </connections>
-                </navigationController>
-                <placeholder placeholderIdentifier="IBFirstResponder" id="Bcn-NC-MGU" userLabel="First Responder" sceneMemberID="firstResponder"/>
-            </objects>
-            <point key="canvasLocation" x="4002" y="-807"/>
         </scene>
         <!--Navigation Controller-->
         <scene sceneID="gXJ-3f-jQp">
