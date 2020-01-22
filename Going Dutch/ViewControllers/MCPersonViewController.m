@@ -65,7 +65,6 @@
         _emailField.tintColor = UIColor.clearColor;
         [_emailField becomeFirstResponder];
     }
-
 }
 
 - (IBAction)doneButtonPressed:(id)sender
@@ -157,8 +156,8 @@
     if (!_twoLabelTitleView) {
         _twoLabelTitleView = [[NSBundle mainBundle] loadNibNamed:@"MCTwoLabelsTitleView" owner:self options:nil][0];
         if (_isNew) {
-            _twoLabelTitleView.mainLabel.text = NSLocalizedString(@"NEW_PERSON_HEADER", @"Header in the personView which state new person.");
-            _twoLabelTitleView.subLabel.text = NSLocalizedString(@"NEW_PERSON_SUBHEADER", @"Sub header in the personView which states add new data");
+            _twoLabelTitleView.mainLabel.text = NSLocalizedString(@"Person", @"Header in the personView which state new person.");
+            _twoLabelTitleView.subLabel.text = NSLocalizedString(@"Add", @"Sub header in the personView which states add new data");
         } else {
             _twoLabelTitleView.mainLabel.text = NSLocalizedString(@"EXISTING_PERSON_HEADER", @"Header in the personView which states person");
             _twoLabelTitleView.subLabel.text = NSLocalizedString(@"EXISTING_PERSON_SUBHEADER", @"Sub header in the personView which state edit data");

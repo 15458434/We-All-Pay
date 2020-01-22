@@ -227,10 +227,10 @@
 
 /* Header in the personView which state new person.
    new person */
-"NEW_PERSON_HEADER" = "Nieuw persoon";
+"Person" = "Persoon";
 
 /* Sub header in the personView which states add new data */
-"NEW_PERSON_SUBHEADER" = "Vul gegevens in";
+"Add" = "Nieuw";
 
 /* last name example for appstore screenshots */
 "Nichelson" = "Vos";
