@@ -1467,7 +1467,7 @@
         <!--Navigation Controller-->
         <scene sceneID="ctA-J5-Wan">
             <objects>
-                <navigationController automaticallyAdjustsScrollViewInsets="NO" id="nkD-cc-jGs" sceneMemberID="viewController">
+                <navigationController storyboardIdentifier="PersonNavigationController" automaticallyAdjustsScrollViewInsets="NO" useStoryboardIdentifierAsRestorationIdentifier="YES" id="nkD-cc-jGs" sceneMemberID="viewController">
                     <toolbarItems/>
                     <simulatedNavigationBarMetrics key="simulatedTopBarMetrics" barStyle="black" translucent="NO" prompted="NO"/>
                     <navigationBar key="navigationBar" contentMode="scaleToFill" insetsLayoutMarginsFromSafeArea="NO" barStyle="black" translucent="NO" id="aT1-i5-Ri7">

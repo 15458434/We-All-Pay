@@ -177,7 +177,7 @@
                                             <color key="titleShadowColor" red="0.5" green="0.5" blue="0.5" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                                         </state>
                                         <connections>
-                                            <segue destination="Eyq-nw-te5" kind="modal" identifier="newPerson" modalPresentationStyle="formSheet" id="8Cc-ux-2co"/>
+                                            <segue destination="f3U-rN-bgR" kind="modal" identifier="newPerson" modalPresentationStyle="formSheet" id="bBe-4f-24C"/>
                                         </connections>
                                     </button>
                                     <button contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="H3d-ki-tdJ">
@@ -591,7 +591,7 @@
                 </tableViewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="zsu-bI-OEB" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="3968.75" y="-807.421875"/>
+            <point key="canvasLocation" x="4754" y="-808"/>
         </scene>
         <!--Select Email Address Table View Controller i Pad-->
         <scene sceneID="cSm-9q-ez4">
@@ -639,7 +639,7 @@
                 </tableViewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="7M6-xh-WQ9" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="4542.1875" y="-696.09375"/>
+            <point key="canvasLocation" x="5376" y="-808"/>
         </scene>
         <!--Info Screen Table View Controller-->
         <scene sceneID="o8z-Nc-xfe">
@@ -1361,7 +1361,7 @@
                     <freeformSimulatedSizeMetrics key="simulatedDestinationMetrics"/>
                     <size key="freeformSize" width="768" height="1024"/>
                     <connections>
-                        <segue destination="Eyq-nw-te5" kind="modal" identifier="openPerson" modalPresentationStyle="formSheet" id="1Uw-eh-0NI"/>
+                        <segue destination="f3U-rN-bgR" kind="modal" identifier="openPerson" modalPresentationStyle="formSheet" id="qrR-J2-mhx"/>
                     </connections>
                 </tableViewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="5n1-fZ-PhI" userLabel="First Responder" sceneMemberID="firstResponder"/>
@@ -1451,13 +1451,21 @@
             </objects>
             <point key="canvasLocation" x="71.875" y="-73.2421875"/>
         </scene>
+        <!--PersonNavigationController-->
+        <scene sceneID="PyR-Ng-SAg">
+            <objects>
+                <viewControllerPlaceholder storyboardName="Main-Iphone" referencedIdentifier="PersonNavigationController" id="f3U-rN-bgR" sceneMemberID="viewController"/>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="52t-Sk-hPv" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
+            </objects>
+            <point key="canvasLocation" x="3109" y="-808"/>
+        </scene>
         <!--Navigation Controller-->
         <scene sceneID="hlD-P6-Uqv">
             <objects>
                 <navigationController storyboardIdentifier="personDetailNavigationController" automaticallyAdjustsScrollViewInsets="NO" useStoryboardIdentifierAsRestorationIdentifier="YES" id="Eyq-nw-te5" sceneMemberID="viewController">
                     <toolbarItems/>
                     <navigationBar key="navigationBar" contentMode="scaleToFill" restorationIdentifier="personDetailsNavigationBar" id="PyI-c7-8bw">
-                        <rect key="frame" x="0.0" y="0.0" width="540" height="56"/>
+                        <rect key="frame" x="0.0" y="0.0" width="834" height="50"/>
                         <autoresizingMask key="autoresizingMask"/>
                         <color key="barTintColor" red="0.018172375857830048" green="0.098393335938453674" blue="0.30674564838409424" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                         <textAttributes key="titleTextAttributes">
@@ -1471,7 +1479,7 @@
                 </navigationController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="Bcn-NC-MGU" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="3379.6875" y="-807.421875"/>
+            <point key="canvasLocation" x="4002" y="-807"/>
         </scene>
         <!--Navigation Controller-->
         <scene sceneID="gXJ-3f-jQp">
@@ -1529,7 +1537,7 @@
     </resources>
     <inferredMetricsTieBreakers>
         <segue reference="eXg-7Q-xwo"/>
-        <segue reference="8Cc-ux-2co"/>
+        <segue reference="bBe-4f-24C"/>
         <segue reference="aJ5-e8-dvs"/>
         <segue reference="NBY-n3-S8k"/>
     </inferredMetricsTieBreakers>
