@@ -4,6 +4,7 @@
     <dependencies>
         <deployment identifier="iOS"/>
         <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="15706"/>
+        <capability name="Named colors" minToolsVersion="9.0"/>
         <capability name="documents saved in the Xcode 8 format" minToolsVersion="8.0"/>
     </dependencies>
     <scenes>
@@ -12,7 +13,7 @@
             <objects>
                 <tableViewController storyboardIdentifier="MCAllTripsTableViewController_iPad" useStoryboardIdentifierAsRestorationIdentifier="YES" id="svo-bC-Qfm" customClass="MCAllTripsTableViewController_iPad" sceneMemberID="viewController">
                     <tableView key="view" clipsSubviews="YES" contentMode="scaleToFill" restorationIdentifier="allTripsTableView" alwaysBounceVertical="YES" dataMode="prototypes" style="plain" separatorStyle="default" rowHeight="118" sectionHeaderHeight="22" sectionFooterHeight="22" id="3Dd-mZ-9Xg">
-                        <rect key="frame" x="0.0" y="0.0" width="768" height="974"/>
+                        <rect key="frame" x="0.0" y="0.0" width="768" height="1124"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <color key="backgroundColor" red="1" green="1" blue="1" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                         <view key="tableHeaderView" contentMode="scaleToFill" restorationIdentifier="AllTripsHeaderView" id="jcU-e9-rsB" customClass="UITableViewHeaderFooterView">
@@ -433,8 +434,8 @@
                         </connections>
                     </tableView>
                     <navigationItem key="navigationItem" title="Solution" id="Vay-2v-DoQ">
-                        <barButtonItem key="rightBarButtonItem" systemItem="cancel" id="Wkf-up-Zxw">
-                            <color key="tintColor" red="0.98952531814575195" green="0.45403587818145752" blue="0.5264095664024353" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                        <barButtonItem key="rightBarButtonItem" image="barbutton - cancel" id="Wkf-up-Zxw">
+                            <color key="tintColor" name="button - enabled"/>
                             <userDefinedRuntimeAttributes>
                                 <userDefinedRuntimeAttribute type="string" keyPath="accessibilityIdentifier" value="Cancel"/>
                             </userDefinedRuntimeAttributes>
@@ -559,8 +560,8 @@
                         </connections>
                     </tableView>
                     <navigationItem key="navigationItem" title="Person Details" id="1ZS-Vk-Q4D">
-                        <barButtonItem key="leftBarButtonItem" systemItem="cancel" id="AkN-eI-Z3u">
-                            <color key="tintColor" red="0.98952531814575195" green="0.45403587818145752" blue="0.5264095664024353" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                        <barButtonItem key="leftBarButtonItem" image="barbutton - cancel" id="AkN-eI-Z3u">
+                            <color key="tintColor" name="button - enabled"/>
                             <userDefinedRuntimeAttributes>
                                 <userDefinedRuntimeAttribute type="string" keyPath="accessibilityIdentifier" value="Cancel"/>
                             </userDefinedRuntimeAttributes>
@@ -568,8 +569,8 @@
                                 <action selector="mainCancelButtonPressed:" destination="ULr-7Y-8VH" id="Di1-bg-uRo"/>
                             </connections>
                         </barButtonItem>
-                        <barButtonItem key="rightBarButtonItem" systemItem="done" id="GfK-Qn-5Kr">
-                            <color key="tintColor" red="0.98952531814575195" green="0.45403587818145752" blue="0.5264095664024353" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                        <barButtonItem key="rightBarButtonItem" image="barbutton - done" id="GfK-Qn-5Kr">
+                            <color key="tintColor" name="button - enabled"/>
                             <connections>
                                 <action selector="mainDoneButtonPressed:" destination="ULr-7Y-8VH" id="2lV-Uo-kUc"/>
                             </connections>
@@ -1053,8 +1054,8 @@
                         </connections>
                     </tableView>
                     <navigationItem key="navigationItem" title="Payment details" id="Du0-aV-eeD">
-                        <barButtonItem key="leftBarButtonItem" systemItem="cancel" id="gKd-pZ-mW9">
-                            <color key="tintColor" red="0.98952531814575195" green="0.45403587818145752" blue="0.5264095664024353" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                        <barButtonItem key="leftBarButtonItem" image="barbutton - cancel" id="gKd-pZ-mW9">
+                            <color key="tintColor" name="button - enabled"/>
                             <userDefinedRuntimeAttributes>
                                 <userDefinedRuntimeAttribute type="string" keyPath="accessibilityIdentifier" value="Cancel"/>
                             </userDefinedRuntimeAttributes>
@@ -1062,8 +1063,8 @@
                                 <action selector="mainCancelPressed:" destination="3NB-dQ-HNX" id="eMS-SE-dIK"/>
                             </connections>
                         </barButtonItem>
-                        <barButtonItem key="rightBarButtonItem" systemItem="done" id="Db5-21-ggn">
-                            <color key="tintColor" red="0.98952531814575195" green="0.45403587818145752" blue="0.5264095664024353" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                        <barButtonItem key="rightBarButtonItem" image="barbutton - done" id="Db5-21-ggn">
+                            <color key="tintColor" name="button - enabled"/>
                             <connections>
                                 <action selector="mainDonePressed:" destination="3NB-dQ-HNX" id="nWw-fv-1e4"/>
                             </connections>
@@ -1519,7 +1520,12 @@
         </scene>
     </scenes>
     <resources>
+        <image name="barbutton - cancel" width="22" height="22"/>
+        <image name="barbutton - done" width="22" height="22"/>
         <image name="iScreen button" width="26" height="26"/>
+        <namedColor name="button - enabled">
+            <color red="1" green="0.52941176470588236" blue="0.67843137254901964" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+        </namedColor>
     </resources>
     <inferredMetricsTieBreakers>
         <segue reference="eXg-7Q-xwo"/>
