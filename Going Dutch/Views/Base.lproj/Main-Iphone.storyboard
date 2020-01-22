@@ -947,6 +947,9 @@
                                                         <state key="normal" title="Select email address">
                                                             <color key="titleShadowColor" red="0.5" green="0.5" blue="0.5" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                                                         </state>
+                                                        <connections>
+                                                            <action selector="selectEmailAddressPressed:" destination="5gk-H5-rXD" eventType="touchUpInside" id="xNV-Tg-VTq"/>
+                                                        </connections>
                                                     </button>
                                                 </subviews>
                                             </stackView>
@@ -998,12 +1001,23 @@
                         <outlet property="model" destination="RYr-B0-7YP" id="LZJ-Jh-rtH"/>
                         <outlet property="pictureView" destination="jMQ-DN-rdu" id="O5l-PF-H4C"/>
                         <outlet property="selectEmailAddressButton" destination="BUE-es-n4t" id="uLy-3b-fkJ"/>
+                        <segue destination="KCD-1Q-SRW" kind="popoverPresentation" identifier="openSelectEmailAddress" popoverAnchorView="BUE-es-n4t" id="hGI-77-PTT">
+                            <popoverArrowDirection key="popoverArrowDirection" up="YES" down="YES" left="YES" right="YES"/>
+                        </segue>
                     </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="EKP-xb-u6V" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
                 <customObject id="RYr-B0-7YP" customClass="MCPersonModel"/>
             </objects>
             <point key="canvasLocation" x="4284" y="-50.246305418719217"/>
+        </scene>
+        <!--MCSelectEmailAddressTableViewController_iPad-->
+        <scene sceneID="f2t-F2-H8B">
+            <objects>
+                <viewControllerPlaceholder storyboardName="Main-iPad" referencedIdentifier="MCSelectEmailAddressTableViewController_iPad" id="KCD-1Q-SRW" sceneMemberID="viewController"/>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="ULb-sH-2wh" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
+            </objects>
+            <point key="canvasLocation" x="5025" y="-50"/>
         </scene>
         <!--Navigation Controller-->
         <scene sceneID="mlr-FR-5OU">

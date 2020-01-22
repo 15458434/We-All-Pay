@@ -49,15 +49,23 @@
     // If any of the fields is first responder resign them first.
     [self.view endEditing:YES];
     
-    _emailTextInputReceiver.target = MCEmailTextInputProxyTargetPicker;
-    UIPickerView *inputView = [[UIPickerView alloc] init];
-    inputView.delegate = _emailTextInputReceiver;
-    inputView.dataSource = _emailTextInputReceiver;
-    inputView.showsSelectionIndicator = YES;
-    [inputView selectRow:_model.indexOfDefaultEmailAddress inComponent:0 animated:YES];
-    _emailField.inputView = inputView;
-    _emailField.tintColor = UIColor.clearColor;
-    [_emailField becomeFirstResponder];
+    UIViewController *presenting = self.navigationController.presentingViewController;
+    if (presenting.traitCollection.horizontalSizeClass == UIUserInterfaceSizeClassRegular && presenting.traitCollection.verticalSizeClass == UIUserInterfaceSizeClassRegular) {
+        // iPad size
+        [self performSegueWithIdentifier:@"openSelectEmailAddress" sender:self];
+    } else {
+        // iPhone sizes
+        _emailTextInputReceiver.target = MCEmailTextInputProxyTargetPicker;
+        UIPickerView *inputView = [[UIPickerView alloc] init];
+        inputView.delegate = _emailTextInputReceiver;
+        inputView.dataSource = _emailTextInputReceiver;
+        inputView.showsSelectionIndicator = YES;
+        [inputView selectRow:_model.indexOfDefaultEmailAddress inComponent:0 animated:YES];
+        _emailField.inputView = inputView;
+        _emailField.tintColor = UIColor.clearColor;
+        [_emailField becomeFirstResponder];
+    }
+
 }
 
 - (IBAction)doneButtonPressed:(id)sender
@@ -161,6 +169,23 @@
     
     // Dismiss the keyboard on backgroundtap.
     [self startResigningFirstResponderOnBackgroundTap];
+}
+
+- (void)prepareForSegue:(UIStoryboardSegue *)segue sender:(id)sender {
+    if ([[segue identifier] isEqualToString:@"openSelectEmailAddress"]) {
+        __weak SelectEmailAddressTableViewController_iPad *destination = [segue destinationViewController];
+        destination.thisPerson = _thisPerson;
+        if ([destination conformsToProtocol:@protocol(MCDismissMeBlockProtocol)]) {
+            [destination setDismissMe:^{
+                [FIRAnalytics logEventWithName:@"dismiss select email address" parameters:nil];
+                if (destination) {
+                    [destination dismissViewControllerAnimated:YES completion:^{
+                        self.emailField.text = self.thisPerson.defaultEmailAddress;
+                    }];
+                }
+            }];
+        }
+    }
 }
 
 #pragma mark - UIResponder
