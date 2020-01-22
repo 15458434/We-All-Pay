@@ -716,7 +716,7 @@
                         </connections>
                     </tableView>
                     <navigationItem key="navigationItem" title="solution" id="cWM-Oj-MA0">
-                        <barButtonItem key="rightBarButtonItem" systemItem="cancel" id="Fxs-Kw-Mmm">
+                        <barButtonItem key="rightBarButtonItem" image="barbutton - cancel" id="Fxs-Kw-Mmm">
                             <userDefinedRuntimeAttributes>
                                 <userDefinedRuntimeAttribute type="string" keyPath="accessibilityIdentifier" value="Cancel"/>
                             </userDefinedRuntimeAttributes>
