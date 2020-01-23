@@ -13,6 +13,7 @@
 		380C48161BE1330E00C82B0F /* CurrencyFormatter.swift in Sources */ = {isa = PBXBuildFile; fileRef = 380C48151BE1330E00C82B0F /* CurrencyFormatter.swift */; };
 		381179D01A82D1FC00020538 /* MailComposer.swift in Sources */ = {isa = PBXBuildFile; fileRef = 381179CF1A82D1FC00020538 /* MailComposer.swift */; };
 		38121EEF23D97AA400A3068D /* MCGenericMediumAdBannerViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 38121EEE23D97AA400A3068D /* MCGenericMediumAdBannerViewController.m */; };
+		38121EF223D9E2F100A3068D /* MCGenericAdBannerTableViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 38121EF123D9E2F100A3068D /* MCGenericAdBannerTableViewController.m */; };
 		381275FF1BBD84650004C8C2 /* InfoScreenTableViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 381275FE1BBD84650004C8C2 /* InfoScreenTableViewController.swift */; };
 		381276041BBD8F130004C8C2 /* InfoPlist.strings in Resources */ = {isa = PBXBuildFile; fileRef = 381276061BBD8F130004C8C2 /* InfoPlist.strings */; };
 		381276081BBE68F10004C8C2 /* InfoScreenContainerViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 381276071BBE68F10004C8C2 /* InfoScreenContainerViewController.swift */; };
@@ -331,6 +332,8 @@
 		381179CF1A82D1FC00020538 /* MailComposer.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = MailComposer.swift; sourceTree = "<group>"; };
 		38121EED23D97AA400A3068D /* MCGenericMediumAdBannerViewController.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = MCGenericMediumAdBannerViewController.h; sourceTree = "<group>"; };
 		38121EEE23D97AA400A3068D /* MCGenericMediumAdBannerViewController.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = MCGenericMediumAdBannerViewController.m; sourceTree = "<group>"; };
+		38121EF023D9E2F100A3068D /* MCGenericAdBannerTableViewController.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = MCGenericAdBannerTableViewController.h; sourceTree = "<group>"; };
+		38121EF123D9E2F100A3068D /* MCGenericAdBannerTableViewController.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = MCGenericAdBannerTableViewController.m; sourceTree = "<group>"; };
 		381275FE1BBD84650004C8C2 /* InfoScreenTableViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = InfoScreenTableViewController.swift; sourceTree = "<group>"; };
 		381276001BBD8F110004C8C2 /* nl */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = nl; path = nl.lproj/MainInterface.strings; sourceTree = "<group>"; };
 		381276011BBD8F120004C8C2 /* nl */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = nl; path = nl.lproj/InfoPlist.strings; sourceTree = "<group>"; };
@@ -1052,6 +1055,8 @@
 				38C1956223C8C575006255AE /* MCGenericAdBannerViewController.m */,
 				38121EED23D97AA400A3068D /* MCGenericMediumAdBannerViewController.h */,
 				38121EEE23D97AA400A3068D /* MCGenericMediumAdBannerViewController.m */,
+				38121EF023D9E2F100A3068D /* MCGenericAdBannerTableViewController.h */,
+				38121EF123D9E2F100A3068D /* MCGenericAdBannerTableViewController.m */,
 				38B4E83023CDFD930034CA95 /* AdBannerEngine.swift */,
 			);
 			name = GenericAdBannerViewController;
@@ -1823,6 +1828,7 @@
 				38977E4F1B2A26D4008484A4 /* MCTwoLabelIscreenTableViewCell.swift in Sources */,
 				38490D2D1D7052E700A297BA /* SolutionViewController.swift in Sources */,
 				38572AE3169D437B00969C62 /* main.m in Sources */,
+				38121EF223D9E2F100A3068D /* MCGenericAdBannerTableViewController.m in Sources */,
 				38B4E83823CE09070034CA95 /* MCGenericInterstitialAdTableViewController.m in Sources */,
 				389DE900197FB2BA00169645 /* MCSharedBill.m in Sources */,
 				38977E531B2A297E008484A4 /* MCWhoPaidHowMuchTableViewCell_iPhone.swift in Sources */,

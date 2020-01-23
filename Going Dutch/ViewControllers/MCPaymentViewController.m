@@ -25,7 +25,7 @@ typedef NS_ENUM(BOOL, ChildViewStatus) {
     ChildViewStatusIsOpened
 };
 
-@interface MCPaymentViewController ()
+@interface MCPaymentViewController () <MCAdBannerEngineDelegate>
 
 @property (weak, nonatomic) IBOutlet UITextField *payerNameField;
 @property (strong, nonatomic) MCPayerTextInputPicker *payerTextInputPicker;
@@ -42,6 +42,8 @@ typedef NS_ENUM(BOOL, ChildViewStatus) {
 @property (strong, nonatomic) UIBarButtonItem *theDoneButton;
 @property (strong, nonatomic) UIBarButtonItem *cancelChangesForEntirePaymentButton;
 @property (strong, nonatomic) MCTwoLabelsTitleView *twoLabelTitleView;
+
+@property (weak, nonatomic) IBOutlet UIView *bannerContainerView;
 
 @property (strong, nonatomic) MCPerson *payerViewPerson;
 @property (strong, nonatomic) NSNumber *paidViewNumber;
@@ -112,9 +114,9 @@ typedef NS_ENUM(BOOL, ChildViewStatus) {
     [self performSegueWithIdentifier:@"openSelectCurrency" sender:self];
 }
 
-- (IBAction)selectCategoryPressed:(id)sender
-{
+- (IBAction)selectCategoryPressed:(UIButton *)sender {
     [FIRAnalytics logEventWithName:@"Open Select Category" parameters:nil];
+    [self performSegueWithIdentifier:@"selectCategory" sender:self];
 }
 
 - (UIStatusBarStyle)preferredStatusBarStyle
@@ -185,6 +187,32 @@ typedef NS_ENUM(BOOL, ChildViewStatus) {
     }
 }
 
+#pragma mark - MCGenericAdBannerTableViewController
+
+- (NSString *)adUnitId {
+#ifdef DEBUG
+    // This is a test Unit ID for banner from Google themselves.
+    return @"ca-app-pub-3940256099942544/2934735716";
+#else
+    return @"ca-app-pub-5354415674074435/2765341863";
+#endif
+}
+
+
+#pragma mark - MCAdBannerEngineDelegate
+
+- (void)adEngine:(MCAdBannerEngine *)adEngine putOnScreenBannerView:(GADBannerView *)bannerView {
+    [UIView animateWithDuration:0.3 delay:0.0 options:UIViewAnimationOptionCurveEaseOut animations:^{
+        self.bannerContainerView.hidden = NO;
+    } completion:nil];
+}
+
+- (void)adEngine:(MCAdBannerEngine *)adEngine putOffScreenBannerView:(GADBannerView *)bannerView {
+    [UIView animateWithDuration:0.3 delay:0.0 options:UIViewAnimationOptionCurveEaseOut animations:^{
+        self.bannerContainerView.hidden = YES;
+    } completion:nil];
+}
+
 #pragma mark - UITableViewController
 
 #pragma mark - UITableViewDataSource
@@ -227,11 +255,14 @@ typedef NS_ENUM(BOOL, ChildViewStatus) {
 
 #pragma mark - UITableViewDelegate
 
-- (CGFloat)tableView:(UITableView *)tableView heightForRowAtIndexPath:(NSIndexPath *)indexPath
-{
+- (CGFloat)tableView:(UITableView *)tableView heightForRowAtIndexPath:(NSIndexPath *)indexPath {
     return 52.0;
 }
 
+//- (CGFloat)tableView:(UITableView *)tableView heightForHeaderInSection:(NSInteger)section {
+//    return UITableViewAutomaticDimension;
+//}
+//
 #pragma mark - UIViewController
 
 - (void)viewDidLoad
@@ -276,6 +307,12 @@ typedef NS_ENUM(BOOL, ChildViewStatus) {
     [super viewWillAppear:animated];
     
     [self setNeedsStatusBarAppearanceUpdate];
+    
+    if (self.adBannerEngine.isReady) {
+        self.bannerContainerView.hidden = NO;
+    } else {
+        self.bannerContainerView.hidden = YES;
+    }
     
     // Navigationbar stuff
     if (!_twoLabelTitleView) {
