@@ -120,6 +120,31 @@
     }
 }
 
+#pragma mark - MCGenericMediumAdBannerViewController
+
+- (NSString *)adUnitId {
+#ifdef DEBUG
+    // This is a test Unit ID for banner from Google themselves.
+    return @"ca-app-pub-3940256099942544/2934735716";
+#else
+    return @"ca-app-pub-5354415674074435/6095865179";
+#endif
+}
+
+#pragma mark - MCAdBannerEngineDelegate
+
+- (void)adEngine:(MCAdBannerEngine *)adEngine putOnScreenBannerView:(GADBannerView *)bannerView {
+    [UIView animateWithDuration:0.3 delay:0.0 options:UIViewAnimationOptionCurveEaseOut animations:^{
+        self.worstSalesPitchEverView.hidden = NO;
+    } completion:nil];
+}
+
+- (void)adEngine:(MCAdBannerEngine *)adEngine putOffScreenBannerView:(GADBannerView *)bannerView {
+    [UIView animateWithDuration:0.3 delay:0.0 options:UIViewAnimationOptionCurveEaseOut animations:^{
+        self.worstSalesPitchEverView.hidden = YES;
+    } completion:nil];
+}
+
 #pragma mark - UIViewController
 
 - (void)viewDidLoad {
