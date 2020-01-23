@@ -9,6 +9,8 @@
 @import UIKit;
 @import CoreData;
 
+#import "MCGenericMediumAdBannerViewController.h"
+
 #import "We_all_pay-Swift.h"
 
 #import "MCTonightsBillTransfer.h"
@@ -17,7 +19,7 @@
 @class MCSharedBill;
 @class MCTwoLabelsTitleView;
 
-@interface MCPersonViewController : UIViewController <MCTonightsBillTransfer, MCThisPersonProtocol>
+@interface MCPersonViewController : MCGenericMediumAdBannerViewController <MCTonightsBillTransfer, MCThisPersonProtocol>
 
 // Only accessible on the mainThread.
 @property (nonatomic, strong) MCSharedBill *tonightsBill;
