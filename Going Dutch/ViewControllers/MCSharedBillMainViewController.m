@@ -141,7 +141,12 @@
 #pragma mark - Inherited from super
 
 - (NSString *)adUnitId {
+#ifdef DEBUG
+    // This is a test Unit ID for banner from Google themselves.
+    return @"ca-app-pub-3940256099942544/2934735716";
+#else
     return @"ca-app-pub-5354415674074435/1457854707";
+#endif
 }
 
 - (void)viewDidLoad {
