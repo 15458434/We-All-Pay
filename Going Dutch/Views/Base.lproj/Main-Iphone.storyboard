@@ -1253,7 +1253,7 @@
                                                     </constraints>
                                                 </view>
                                             </subviews>
-                                            <color key="backgroundColor" name="background"/>
+                                            <color key="backgroundColor" systemColor="systemBackgroundColor" cocoaTouchSystemColor="whiteColor"/>
                                             <constraints>
                                                 <constraint firstItem="bbf-I9-yWg" firstAttribute="centerX" secondItem="iF7-Nz-3na" secondAttribute="centerX" id="eXc-ta-wPT"/>
                                                 <constraint firstAttribute="bottom" secondItem="bbf-I9-yWg" secondAttribute="bottom" priority="999" id="gWh-jA-Ac4"/>
@@ -1662,9 +1662,6 @@
         <image name="barbutton - done" width="22" height="22"/>
         <image name="circularPictureInCodeDemo.png" width="1219.199951171875" height="1219.199951171875"/>
         <image name="iScreen button" width="26" height="26"/>
-        <namedColor name="background">
-            <color red="0.83529411764705885" green="0.92549019607843142" blue="0.99215686274509807" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
-        </namedColor>
         <namedColor name="button - enabled">
             <color red="1" green="0.52941176470588236" blue="0.67843137254901964" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
         </namedColor>
