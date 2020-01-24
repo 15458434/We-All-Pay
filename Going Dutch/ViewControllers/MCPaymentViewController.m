@@ -203,13 +203,13 @@ typedef NS_ENUM(BOOL, ChildViewStatus) {
 
 - (void)adEngine:(MCAdBannerEngine *)adEngine putOnScreenBannerView:(GADBannerView *)bannerView {
     [UIView animateWithDuration:0.3 delay:0.0 options:UIViewAnimationOptionCurveEaseOut animations:^{
-        self.bannerContainerView.hidden = NO;
+        self.worstSalesPitchEverView.hidden = NO;
     } completion:nil];
 }
 
 - (void)adEngine:(MCAdBannerEngine *)adEngine putOffScreenBannerView:(GADBannerView *)bannerView {
     [UIView animateWithDuration:0.3 delay:0.0 options:UIViewAnimationOptionCurveEaseOut animations:^{
-        self.bannerContainerView.hidden = YES;
+        self.worstSalesPitchEverView.hidden = YES;
     } completion:nil];
 }
 
@@ -309,9 +309,9 @@ typedef NS_ENUM(BOOL, ChildViewStatus) {
     [self setNeedsStatusBarAppearanceUpdate];
     
     if (self.adBannerEngine.isReady) {
-        self.bannerContainerView.hidden = NO;
+        self.worstSalesPitchEverView.hidden = NO;
     } else {
-        self.bannerContainerView.hidden = YES;
+        self.worstSalesPitchEverView.hidden = YES;
     }
     
     // Navigationbar stuff
