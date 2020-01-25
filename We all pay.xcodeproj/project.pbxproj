@@ -79,6 +79,8 @@
 		3868780623721751003D40A9 /* EmailTextInputValidator.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3868780523721751003D40A9 /* EmailTextInputValidator.swift */; };
 		38687808237217B3003D40A9 /* TextInputValidator.swift in Sources */ = {isa = PBXBuildFile; fileRef = 38687807237217B3003D40A9 /* TextInputValidator.swift */; };
 		3868780A23721967003D40A9 /* PersonModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3868780923721967003D40A9 /* PersonModel.swift */; };
+		38696B6823DCD24E00E941EA /* Screenshots.swift in Sources */ = {isa = PBXBuildFile; fileRef = 38696B6723DCD24E00E941EA /* Screenshots.swift */; };
+		38696B7223DCD2B200E941EA /* SnapshotHelper.swift in Sources */ = {isa = PBXBuildFile; fileRef = 38696B7123DCD2B200E941EA /* SnapshotHelper.swift */; };
 		386EB43323C723BE00FB20B9 /* AdEngine.swift in Sources */ = {isa = PBXBuildFile; fileRef = 386EB43223C723BE00FB20B9 /* AdEngine.swift */; };
 		386FC32518E5855400428294 /* MCSharedBillMainViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 386FC32418E5855400428294 /* MCSharedBillMainViewController.m */; };
 		3870C22A1D34FDF80030035A /* We all pay app keywords.plist in Resources */ = {isa = PBXBuildFile; fileRef = 3870C22C1D34FDF80030035A /* We all pay app keywords.plist */; };
@@ -233,6 +235,13 @@
 			remoteInfo = "Who is paying next";
 		};
 		385F530A191C2C360012773D /* PBXContainerItemProxy */ = {
+			isa = PBXContainerItemProxy;
+			containerPortal = 38572AC9169D437B00969C62 /* Project object */;
+			proxyType = 1;
+			remoteGlobalIDString = 38572AD1169D437B00969C62;
+			remoteInfo = "We all pay";
+		};
+		38696B6A23DCD24E00E941EA /* PBXContainerItemProxy */ = {
 			isa = PBXContainerItemProxy;
 			containerPortal = 38572AC9169D437B00969C62 /* Project object */;
 			proxyType = 1;
@@ -413,6 +422,10 @@
 		3868780523721751003D40A9 /* EmailTextInputValidator.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = EmailTextInputValidator.swift; sourceTree = "<group>"; };
 		38687807237217B3003D40A9 /* TextInputValidator.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TextInputValidator.swift; sourceTree = "<group>"; };
 		3868780923721967003D40A9 /* PersonModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PersonModel.swift; sourceTree = "<group>"; };
+		38696B6523DCD24E00E941EA /* Screenshots.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = Screenshots.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
+		38696B6723DCD24E00E941EA /* Screenshots.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Screenshots.swift; sourceTree = "<group>"; };
+		38696B6923DCD24E00E941EA /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
+		38696B7123DCD2B200E941EA /* SnapshotHelper.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = SnapshotHelper.swift; path = fastlane/SnapshotHelper.swift; sourceTree = SOURCE_ROOT; };
 		386EB43223C723BE00FB20B9 /* AdEngine.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AdEngine.swift; sourceTree = "<group>"; };
 		386FC32318E5855400428294 /* MCSharedBillMainViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = MCSharedBillMainViewController.h; path = ViewControllers/MCSharedBillMainViewController.h; sourceTree = "<group>"; };
 		386FC32418E5855400428294 /* MCSharedBillMainViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = MCSharedBillMainViewController.m; path = ViewControllers/MCSharedBillMainViewController.m; sourceTree = "<group>"; };
@@ -650,6 +663,13 @@
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
+		38696B6223DCD24E00E941EA /* Frameworks */ = {
+			isa = PBXFrameworksBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
 		388A32781C11EDBD00F7459C /* Frameworks */ = {
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
@@ -806,6 +826,7 @@
 				382B76EF1C398249000C203A /* CurrencyConverterTests */,
 				38D6A3BD1C73DDBF00968BB2 /* RateMeControllerForiOS */,
 				38D6A3CB1C73DDC000968BB2 /* RateMeControllerForiOSTests */,
+				38696B6623DCD24E00E941EA /* Screenshots */,
 				38572AD3169D437B00969C62 /* Products */,
 				A64C2FCC22C8F3F53074E7EB /* Pods */,
 				8AA57C6157892F74604CB04B /* Frameworks */,
@@ -824,6 +845,7 @@
 				382B76E91C398249000C203A /* CurrencyConverterTests.xctest */,
 				38D6A3BC1C73DDBF00968BB2 /* RateMeControllerForiOS.framework */,
 				38D6A3C51C73DDBF00968BB2 /* RateMeControllerForiOSTests.xctest */,
+				38696B6523DCD24E00E941EA /* Screenshots.xctest */,
 			);
 			name = Products;
 			sourceTree = "<group>";
@@ -944,6 +966,16 @@
 				38DC8B4519097FEA00762235 /* Main-iPad.storyboard */,
 			);
 			name = Storyboard;
+			sourceTree = "<group>";
+		};
+		38696B6623DCD24E00E941EA /* Screenshots */ = {
+			isa = PBXGroup;
+			children = (
+				38696B6723DCD24E00E941EA /* Screenshots.swift */,
+				38696B7123DCD2B200E941EA /* SnapshotHelper.swift */,
+				38696B6923DCD24E00E941EA /* Info.plist */,
+			);
+			path = Screenshots;
 			sourceTree = "<group>";
 		};
 		386EB43123C7238400FB20B9 /* EventDetailMainViewController */ = {
@@ -1412,6 +1444,24 @@
 			productReference = 385F52FD191C2C360012773D /* We all pay Tests.xctest */;
 			productType = "com.apple.product-type.bundle.unit-test";
 		};
+		38696B6423DCD24E00E941EA /* Screenshots */ = {
+			isa = PBXNativeTarget;
+			buildConfigurationList = 38696B7023DCD24F00E941EA /* Build configuration list for PBXNativeTarget "Screenshots" */;
+			buildPhases = (
+				38696B6123DCD24E00E941EA /* Sources */,
+				38696B6223DCD24E00E941EA /* Frameworks */,
+				38696B6323DCD24E00E941EA /* Resources */,
+			);
+			buildRules = (
+			);
+			dependencies = (
+				38696B6B23DCD24E00E941EA /* PBXTargetDependency */,
+			);
+			name = Screenshots;
+			productName = Screenshots;
+			productReference = 38696B6523DCD24E00E941EA /* Screenshots.xctest */;
+			productType = "com.apple.product-type.bundle.ui-testing";
+		};
 		388A327B1C11EDBD00F7459C /* WhoPayingUserDefaultsStoreInterface */ = {
 			isa = PBXNativeTarget;
 			buildConfigurationList = 388A32931C11EDBD00F7459C /* Build configuration list for PBXNativeTarget "WhoPayingUserDefaultsStoreInterface" */;
@@ -1546,6 +1596,10 @@
 						LastSwiftMigration = 0940;
 						TestTargetID = 38572AD1169D437B00969C62;
 					};
+					38696B6423DCD24E00E941EA = {
+						CreatedOnToolsVersion = 11.3.1;
+						TestTargetID = 38572AD1169D437B00969C62;
+					};
 					388A327B1C11EDBD00F7459C = {
 						CreatedOnToolsVersion = 7.1.1;
 						DevelopmentTeam = Z6JP26PUUY;
@@ -1603,6 +1657,7 @@
 				382B76E81C398249000C203A /* CurrencyConverterTests */,
 				38D6A3BB1C73DDBF00968BB2 /* RateMeControllerForiOS */,
 				38D6A3C41C73DDBF00968BB2 /* RateMeControllerForiOSTests */,
+				38696B6423DCD24E00E941EA /* Screenshots */,
 			);
 		};
 /* End PBXProject section */
@@ -1653,6 +1708,13 @@
 			buildActionMask = 2147483647;
 			files = (
 				385F5306191C2C360012773D /* InfoPlist.strings in Resources */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+		38696B6323DCD24E00E941EA /* Resources */ = {
+			isa = PBXResourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -1958,6 +2020,15 @@
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
+		38696B6123DCD24E00E941EA /* Sources */ = {
+			isa = PBXSourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				38696B6823DCD24E00E941EA /* Screenshots.swift in Sources */,
+				38696B7223DCD2B200E941EA /* SnapshotHelper.swift in Sources */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
 		388A32771C11EDBD00F7459C /* Sources */ = {
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
@@ -2027,6 +2098,11 @@
 			isa = PBXTargetDependency;
 			target = 38572AD1169D437B00969C62 /* We all pay */;
 			targetProxy = 385F530A191C2C360012773D /* PBXContainerItemProxy */;
+		};
+		38696B6B23DCD24E00E941EA /* PBXTargetDependency */ = {
+			isa = PBXTargetDependency;
+			target = 38572AD1169D437B00969C62 /* We all pay */;
+			targetProxy = 38696B6A23DCD24E00E941EA /* PBXContainerItemProxy */;
 		};
 		388A32881C11EDBD00F7459C /* PBXTargetDependency */ = {
 			isa = PBXTargetDependency;
@@ -3233,6 +3309,150 @@
 			};
 			name = Screenshots;
 		};
+		38696B6C23DCD24F00E941EA /* Debug */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				CLANG_ANALYZER_NONNULL = YES;
+				CLANG_ANALYZER_NUMBER_OBJECT_CONVERSION = YES_AGGRESSIVE;
+				CLANG_CXX_LANGUAGE_STANDARD = "gnu++14";
+				CLANG_ENABLE_OBJC_WEAK = YES;
+				CLANG_WARN_DIRECT_OBJC_ISA_USAGE = YES_ERROR;
+				CLANG_WARN_DOCUMENTATION_COMMENTS = YES;
+				CLANG_WARN_OBJC_ROOT_CLASS = YES_ERROR;
+				CLANG_WARN_UNGUARDED_AVAILABILITY = YES_AGGRESSIVE;
+				CODE_SIGN_STYLE = Automatic;
+				DEBUG_INFORMATION_FORMAT = dwarf;
+				DEVELOPMENT_TEAM = Z6JP26PUUY;
+				GCC_C_LANGUAGE_STANDARD = gnu11;
+				GCC_WARN_ABOUT_RETURN_TYPE = YES_ERROR;
+				GCC_WARN_UNINITIALIZED_AUTOS = YES_AGGRESSIVE;
+				INFOPLIST_FILE = Screenshots/Info.plist;
+				IPHONEOS_DEPLOYMENT_TARGET = 13.2;
+				LD_RUNPATH_SEARCH_PATHS = (
+					"$(inherited)",
+					"@executable_path/Frameworks",
+					"@loader_path/Frameworks",
+				);
+				MTL_ENABLE_DEBUG_INFO = INCLUDE_SOURCE;
+				MTL_FAST_MATH = YES;
+				PRODUCT_BUNDLE_IDENTIFIER = com.greenhair.Screenshots;
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				SWIFT_ACTIVE_COMPILATION_CONDITIONS = DEBUG;
+				SWIFT_OPTIMIZATION_LEVEL = "-Onone";
+				SWIFT_VERSION = 5.0;
+				TARGETED_DEVICE_FAMILY = "1,2";
+				TEST_TARGET_NAME = "We all pay";
+			};
+			name = Debug;
+		};
+		38696B6D23DCD24F00E941EA /* AdTest */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				CLANG_ANALYZER_NONNULL = YES;
+				CLANG_ANALYZER_NUMBER_OBJECT_CONVERSION = YES_AGGRESSIVE;
+				CLANG_CXX_LANGUAGE_STANDARD = "gnu++14";
+				CLANG_ENABLE_OBJC_WEAK = YES;
+				CLANG_WARN_DIRECT_OBJC_ISA_USAGE = YES_ERROR;
+				CLANG_WARN_DOCUMENTATION_COMMENTS = YES;
+				CLANG_WARN_OBJC_ROOT_CLASS = YES_ERROR;
+				CLANG_WARN_UNGUARDED_AVAILABILITY = YES_AGGRESSIVE;
+				CODE_SIGN_STYLE = Automatic;
+				COPY_PHASE_STRIP = NO;
+				DEBUG_INFORMATION_FORMAT = "dwarf-with-dsym";
+				DEVELOPMENT_TEAM = Z6JP26PUUY;
+				ENABLE_NS_ASSERTIONS = NO;
+				GCC_C_LANGUAGE_STANDARD = gnu11;
+				GCC_WARN_ABOUT_RETURN_TYPE = YES_ERROR;
+				GCC_WARN_UNINITIALIZED_AUTOS = YES_AGGRESSIVE;
+				INFOPLIST_FILE = Screenshots/Info.plist;
+				IPHONEOS_DEPLOYMENT_TARGET = 13.2;
+				LD_RUNPATH_SEARCH_PATHS = (
+					"$(inherited)",
+					"@executable_path/Frameworks",
+					"@loader_path/Frameworks",
+				);
+				MTL_ENABLE_DEBUG_INFO = NO;
+				MTL_FAST_MATH = YES;
+				PRODUCT_BUNDLE_IDENTIFIER = com.greenhair.Screenshots;
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				SWIFT_VERSION = 5.0;
+				TARGETED_DEVICE_FAMILY = "1,2";
+				TEST_TARGET_NAME = "We all pay";
+			};
+			name = AdTest;
+		};
+		38696B6E23DCD24F00E941EA /* Screenshots */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				CLANG_ANALYZER_NONNULL = YES;
+				CLANG_ANALYZER_NUMBER_OBJECT_CONVERSION = YES_AGGRESSIVE;
+				CLANG_CXX_LANGUAGE_STANDARD = "gnu++14";
+				CLANG_ENABLE_OBJC_WEAK = YES;
+				CLANG_WARN_DIRECT_OBJC_ISA_USAGE = YES_ERROR;
+				CLANG_WARN_DOCUMENTATION_COMMENTS = YES;
+				CLANG_WARN_OBJC_ROOT_CLASS = YES_ERROR;
+				CLANG_WARN_UNGUARDED_AVAILABILITY = YES_AGGRESSIVE;
+				CODE_SIGN_STYLE = Automatic;
+				COPY_PHASE_STRIP = NO;
+				DEBUG_INFORMATION_FORMAT = "dwarf-with-dsym";
+				DEVELOPMENT_TEAM = Z6JP26PUUY;
+				ENABLE_NS_ASSERTIONS = NO;
+				GCC_C_LANGUAGE_STANDARD = gnu11;
+				GCC_WARN_ABOUT_RETURN_TYPE = YES_ERROR;
+				GCC_WARN_UNINITIALIZED_AUTOS = YES_AGGRESSIVE;
+				INFOPLIST_FILE = Screenshots/Info.plist;
+				IPHONEOS_DEPLOYMENT_TARGET = 13.2;
+				LD_RUNPATH_SEARCH_PATHS = (
+					"$(inherited)",
+					"@executable_path/Frameworks",
+					"@loader_path/Frameworks",
+				);
+				MTL_ENABLE_DEBUG_INFO = NO;
+				MTL_FAST_MATH = YES;
+				PRODUCT_BUNDLE_IDENTIFIER = com.greenhair.Screenshots;
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				SWIFT_VERSION = 5.0;
+				TARGETED_DEVICE_FAMILY = "1,2";
+				TEST_TARGET_NAME = "We all pay";
+			};
+			name = Screenshots;
+		};
+		38696B6F23DCD24F00E941EA /* Release */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				CLANG_ANALYZER_NONNULL = YES;
+				CLANG_ANALYZER_NUMBER_OBJECT_CONVERSION = YES_AGGRESSIVE;
+				CLANG_CXX_LANGUAGE_STANDARD = "gnu++14";
+				CLANG_ENABLE_OBJC_WEAK = YES;
+				CLANG_WARN_DIRECT_OBJC_ISA_USAGE = YES_ERROR;
+				CLANG_WARN_DOCUMENTATION_COMMENTS = YES;
+				CLANG_WARN_OBJC_ROOT_CLASS = YES_ERROR;
+				CLANG_WARN_UNGUARDED_AVAILABILITY = YES_AGGRESSIVE;
+				CODE_SIGN_STYLE = Automatic;
+				COPY_PHASE_STRIP = NO;
+				DEBUG_INFORMATION_FORMAT = "dwarf-with-dsym";
+				DEVELOPMENT_TEAM = Z6JP26PUUY;
+				ENABLE_NS_ASSERTIONS = NO;
+				GCC_C_LANGUAGE_STANDARD = gnu11;
+				GCC_WARN_ABOUT_RETURN_TYPE = YES_ERROR;
+				GCC_WARN_UNINITIALIZED_AUTOS = YES_AGGRESSIVE;
+				INFOPLIST_FILE = Screenshots/Info.plist;
+				IPHONEOS_DEPLOYMENT_TARGET = 13.2;
+				LD_RUNPATH_SEARCH_PATHS = (
+					"$(inherited)",
+					"@executable_path/Frameworks",
+					"@loader_path/Frameworks",
+				);
+				MTL_ENABLE_DEBUG_INFO = NO;
+				MTL_FAST_MATH = YES;
+				PRODUCT_BUNDLE_IDENTIFIER = com.greenhair.Screenshots;
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				SWIFT_VERSION = 5.0;
+				TARGETED_DEVICE_FAMILY = "1,2";
+				TEST_TARGET_NAME = "We all pay";
+			};
+			name = Release;
+		};
 		388A32941C11EDBD00F7459C /* Debug */ = {
 			isa = XCBuildConfiguration;
 			buildSettings = {
@@ -4236,6 +4456,17 @@
 				38E0FCC523CC4E1C002A4488 /* AdTest */,
 				38631484235C6A7800748B9F /* Screenshots */,
 				385F530E191C2C360012773D /* Release */,
+			);
+			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
+		};
+		38696B7023DCD24F00E941EA /* Build configuration list for PBXNativeTarget "Screenshots" */ = {
+			isa = XCConfigurationList;
+			buildConfigurations = (
+				38696B6C23DCD24F00E941EA /* Debug */,
+				38696B6D23DCD24F00E941EA /* AdTest */,
+				38696B6E23DCD24F00E941EA /* Screenshots */,
+				38696B6F23DCD24F00E941EA /* Release */,
 			);
 			defaultConfigurationIsVisible = 0;
 			defaultConfigurationName = Release;
