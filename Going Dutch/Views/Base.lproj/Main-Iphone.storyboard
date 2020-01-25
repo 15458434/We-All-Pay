@@ -1010,6 +1010,9 @@
                     <navigationItem key="navigationItem" title="Person" id="YXl-NB-NJJ">
                         <barButtonItem key="leftBarButtonItem" image="barbutton - cancel" id="nvM-MT-hWV">
                             <color key="tintColor" name="button - enabled"/>
+                            <userDefinedRuntimeAttributes>
+                                <userDefinedRuntimeAttribute type="string" keyPath="accessibilityIdentifier" value="Cancel"/>
+                            </userDefinedRuntimeAttributes>
                             <connections>
                                 <action selector="cancelButtonPressed:" destination="5gk-H5-rXD" id="lTR-ft-v9D"/>
                             </connections>
