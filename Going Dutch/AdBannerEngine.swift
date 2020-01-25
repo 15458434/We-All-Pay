@@ -24,18 +24,62 @@ import GoogleMobileAds
     @objc(adEngine:putOffScreenBannerView:) func adEngine(_ adEngine: AdBannerEngine?, putOffScreen bannerView: GADBannerView)
 }
 
-@objc(MCAdBannerEngine) @objcMembers class AdBannerEngine: AdEngine, GADBannerViewDelegate {
+@objc(MCAdBannerEngine) @objcMembers final class AdBannerEngine: AdEngine, GADBannerViewDelegate {
     
     private(set) var delegate: AdBannerEngineDelegate!
     
     @objc(prepareAdBanner:withAdUnitId:andViewController:) func prepare(adBanner: GADBannerView, with adUnitID: String, and viewController: UIViewController) {
         func prepareAdBanner(with consent: PACConsentStatus = .unknown) {
             self.updateSize(for: adBanner, withScreenSize: UIScreen.main.bounds.size)
-//            adBanner.adUnitID = self.adUnitID
+            adBanner.adUnitID = adUnitID
             adBanner.rootViewController = viewController
             adBanner.delegate = self
             adBanner.load(self.request)
             adBanner.isAutoloadEnabled = true
+        }
+        
+        guard AdEngine.isEnabled else {
+            return
+        }
+        
+        self.delegate = (viewController as! AdBannerEngineDelegate)
+        
+        let consent = PACConsentStatus(rawValue: UserDefaults.standard.integer(forKey: AdEngine.kAdBannerConsent))!
+        if (!MCStoreInterface.defaultStoreInterface.isProProductPurchased && (consent == PACConsentStatus.nonPersonalized) || (consent == PACConsentStatus.personalized) || !PACConsentInformation.sharedInstance.isRequestLocationInEEAOrUnknown) {
+            prepareAdBanner(with: consent)
+        }
+    }
+    
+    @objc(prepareAdSizeBanner:withAdUnitId:andViewController:) func prepare(adSizeBanner: GADBannerView, with adUnitID: String, and viewController: UIViewController) {
+        func prepareAdBanner(with consent: PACConsentStatus = .unknown) {
+            adSizeBanner.adSize = kGADAdSizeBanner
+            adSizeBanner.adUnitID = adUnitID
+            adSizeBanner.rootViewController = viewController
+            adSizeBanner.delegate = self
+            adSizeBanner.load(self.request)
+            adSizeBanner.isAutoloadEnabled = true
+        }
+        
+        guard AdEngine.isEnabled else {
+            return
+        }
+        
+        self.delegate = (viewController as! AdBannerEngineDelegate)
+        
+        let consent = PACConsentStatus(rawValue: UserDefaults.standard.integer(forKey: AdEngine.kAdBannerConsent))!
+        if (!MCStoreInterface.defaultStoreInterface.isProProductPurchased && (consent == PACConsentStatus.nonPersonalized) || (consent == PACConsentStatus.personalized) || !PACConsentInformation.sharedInstance.isRequestLocationInEEAOrUnknown) {
+            prepareAdBanner(with: consent)
+        }
+    }
+    
+    @objc(prepareMediumAdBanner:withAdUnitId:andViewController:) func prepare(mediumAdBanner: GADBannerView, with adUnitID: String, and viewController: UIViewController) {
+        func prepareAdBanner(with consent: PACConsentStatus = .unknown) {
+            mediumAdBanner.adUnitID = adUnitID
+            mediumAdBanner.adSize = kGADAdSizeMediumRectangle
+            mediumAdBanner.rootViewController = viewController
+            mediumAdBanner.delegate = self
+            mediumAdBanner.load(self.request)
+            mediumAdBanner.isAutoloadEnabled = true
         }
         
         guard AdEngine.isEnabled else {
@@ -60,6 +104,8 @@ import GoogleMobileAds
             bannerView.adSize = kGADAdSizeSmartBannerLandscape
         }
     }
+    
+    private(set) var isReady: Bool = false
 
     // MARK: GADBannerViewDelegate
     
@@ -68,6 +114,7 @@ import GoogleMobileAds
             return
         }
         debugPrint("adViewDidReceiveAd: \(String(describing: bannerView.responseInfo?.responseIdentifier)) for \(String(describing: bannerView.responseInfo?.adNetworkClassName))")
+        isReady = true
         delegate.adEngine(self, putOnscreen: bannerView)
     }
     
@@ -76,6 +123,7 @@ import GoogleMobileAds
             return
         }
         debugPrint("didFailToReceiveAdWithError: \(error)")
+        isReady = false
         delegate.adEngine(self, putOffScreen: bannerView)
     }
     

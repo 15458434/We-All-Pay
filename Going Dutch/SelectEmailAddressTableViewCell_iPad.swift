@@ -8,7 +8,7 @@
 
 import UIKit
 
-class SelectEmailAddressTableViewCell_iPad: UITableViewCell {
+final class SelectEmailAddressTableViewCell_iPad: UITableViewCell {
     // MARK: IB Outlets
     @IBOutlet var emailAddressLabel: UILabel!
 }

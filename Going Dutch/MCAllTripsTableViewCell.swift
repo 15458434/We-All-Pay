@@ -8,7 +8,7 @@
 
 import UIKit
 
-class MCAllTripsTableViewCell: UITableViewCell {
+final class MCAllTripsTableViewCell: UITableViewCell {
     @IBOutlet var waitingForXRatesIndicator: UIActivityIndicatorView!
     @IBOutlet var tripLabel: UILabel!
     @IBOutlet var totalCostLabel: UILabel!

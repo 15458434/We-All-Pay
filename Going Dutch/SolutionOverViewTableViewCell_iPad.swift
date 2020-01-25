@@ -8,7 +8,7 @@
 
 import UIKit
 
-class SolutionOverViewTableViewCell_iPad: UITableViewCell {
+final class SolutionOverViewTableViewCell_iPad: UITableViewCell {
     // MARK: IB Outlets
     @IBOutlet var firstLabel: UILabel!
     @IBOutlet var lastLabel: UILabel!

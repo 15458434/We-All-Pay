@@ -8,7 +8,7 @@
 
 import UIKit
 
-class MCTwoLabelIscreenTableViewCell: UITableViewCell {
+final class MCTwoLabelIscreenTableViewCell: UITableViewCell {
     @IBOutlet var leftLabel: UILabel!
     @IBOutlet var rightLabel: UILabel!
 }

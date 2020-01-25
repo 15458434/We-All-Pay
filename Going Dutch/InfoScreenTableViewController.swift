@@ -40,17 +40,12 @@ class InfoScreenTableViewController: UITableViewController, MFMailComposeViewCon
     
     private func showAllMyApps() {
         let url = URL(string: "itms-apps://search.itunes.apple.com/WebObjects/MZContentLink.woa/wa/link?mt=8&path=apps%2fmarkcornelisse")!
-        if #available(iOS 10.0, *) {
-            UIApplication.shared.open(url, options: [:]) { (success) in
-                guard success else {
-                    debugPrint("Unable to open url")
-                    return
-                }
+        UIApplication.shared.open(url, options: [:]) { (success) in
+            guard success else {
+                debugPrint("Unable to open url")
+                return
             }
-        } else {
-            UIApplication.shared.openURL(url)
         }
-        
     }
     
     private func openMailComposer() {
@@ -77,19 +72,22 @@ class InfoScreenTableViewController: UITableViewController, MFMailComposeViewCon
     // MARK: Notifications
     @objc func applyProVersion(_ notification: Notification) {
         Analytics.logEvent("Applying Pro version", parameters: nil)
-        OperationQueue.main.addOperation { () -> Void in
+        DispatchQueue.main.async {
             self.tableView.beginUpdates()
             self.tableView.deleteRows(at: [IndexPath(row: 0, section: 0), IndexPath(row: 1, section: 0)], with: UITableView.RowAnimation.automatic)
             self.tableView.endUpdates()
             
             var title: String!
             var message: String?
-            if (notification as NSNotification).userInfo!["Kind of purchase"] as? String == "new buy" {
+            let kindOfPurchaseString = notification.userInfo!["Kind of purchase"] as? String
+            switch kindOfPurchaseString {
+            case "new buy":
                 title = NSLocalizedString("Thank you for purchasing", comment: "Thank you for purchasing")
                 message = NSLocalizedString("\(productName) is now free of any ads.", comment: "\(productName) is now free of any ads.")
-
-            } else if (notification as NSNotification).userInfo!["Kind of purchase"] as? String == "restore purchase" {
+            case "restore purchase":
                 title = NSLocalizedString("Ad free version restored.", comment: "Ad free version restored.")
+            default:
+                fatalError("Purchase info invalid")
             }
             let dismissText = NSLocalizedString("Dismiss", comment: "Dismiss")
             var alertController: UIAlertController!
@@ -109,7 +107,7 @@ class InfoScreenTableViewController: UITableViewController, MFMailComposeViewCon
     
     @objc func restorePreviousPurchasesFailed(_ notification: Notification) {
         Analytics.logEvent("Restore Previous Purchases", parameters: nil)
-        if (notification as NSNotification).userInfo!["status"] as? String == "Not restored" {
+        if notification.userInfo!["status"] as? String == "Not restored" {
             let myPresenter = presentingViewController!
             let title = NSLocalizedString("Nothing to restore", comment: "Nothing to restore")
             let dismiss = NSLocalizedString("Dismiss", comment: "Dismiss")

@@ -8,7 +8,7 @@
 
 import UIKit
 
-class WhoOwesWhoTableViewCell_iPad: UITableViewCell {
+final class WhoOwesWhoTableViewCell_iPad: UITableViewCell {
     // MARK: IB Outlets
     @IBOutlet var whoOwesWhoLabel: UILabel!
     @IBOutlet var moneyLabel: UILabel!

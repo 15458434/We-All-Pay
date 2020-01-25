@@ -8,7 +8,7 @@
 
 import UIKit
 
-class AllTripsTableViewCell_iPad: UITableViewCell {
+final class AllTripsTableViewCell_iPad: UITableViewCell {
     // MARK: IB Outlets
     @IBOutlet var tripLabel: UILabel!
     @IBOutlet var totalCostLabel: UILabel!

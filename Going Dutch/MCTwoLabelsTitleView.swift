@@ -8,7 +8,7 @@
 
 import UIKit
 
-class MCTwoLabelsTitleView: UIView {
+final class MCTwoLabelsTitleView: UIView {
     @IBOutlet var mainLabel: UILabel!
     @IBOutlet var subLabel: UILabel!
 }

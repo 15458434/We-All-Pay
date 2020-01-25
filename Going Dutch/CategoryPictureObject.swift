@@ -12,7 +12,7 @@ private let categoryDescriptionKey = "categoryDescription"
 private let categoryPictureFilenameKey = "categoryPictureFilename"
 private let categoryIdKey = "categoryId"
 
-class CategoryPictureObject: NSObject {
+final class CategoryPictureObject: NSObject {
     // MARK: Properties
     @objc let categoryId: Int16
     @objc let pictureFilename: String

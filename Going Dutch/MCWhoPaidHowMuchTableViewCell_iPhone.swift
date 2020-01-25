@@ -8,7 +8,7 @@
 
 import UIKit
 
-class MCWhoPaidHowMuchTableViewCell_iPhone: UITableViewCell {
+final class MCWhoPaidHowMuchTableViewCell_iPhone: UITableViewCell {
     @IBOutlet var whoPaidHowMuchLabel: UILabel!
     @IBOutlet var moneyLabel: UILabel!
 }
