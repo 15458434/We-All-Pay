@@ -10,7 +10,7 @@ import UIKit
 
 import FirebaseAnalytics
 
-class MCPaymentPresenceTableViewCell: UITableViewCell {
+final class MCPaymentPresenceTableViewCell: UITableViewCell {
     // MARK: IB Outlets
     @IBOutlet var theSwitch: UISwitch!
     @IBOutlet var nameLabel: UILabel!

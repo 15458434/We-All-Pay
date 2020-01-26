@@ -8,7 +8,7 @@
 
 import UIKit
 
-class MCSelectCurrencyTableViewCell_iPhone: UITableViewCell {
+final class MCSelectCurrencyTableViewCell_iPhone: UITableViewCell {
     @IBOutlet var currencyNameLabel: UILabel!
     @IBOutlet var currencySymbolLabel: UILabel!
 }

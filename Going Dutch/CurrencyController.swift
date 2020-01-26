@@ -8,7 +8,7 @@
 
 import Foundation
 
-public class Currency: NSObject {
+final public class Currency: NSObject {
     @objc public let name: String
     public let code: String
     public var symbol: String {
@@ -37,7 +37,7 @@ public class Currency: NSObject {
     }
 }
 
-@objc public class CurrencyController: NSObject {
+@objc final public class CurrencyController: NSObject {
     @objc public let currencies: [Currency]
     
     @objc public func currencySymbol(_ code: String) -> String {

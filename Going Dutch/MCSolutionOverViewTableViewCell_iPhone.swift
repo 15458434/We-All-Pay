@@ -8,7 +8,7 @@
 
 import UIKit
 
-class MCSolutionOverViewTableViewCell_iPhone: UITableViewCell {
+final class MCSolutionOverViewTableViewCell_iPhone: UITableViewCell {
     @IBOutlet var totalLabel: UILabel!
     @IBOutlet var moneyLabel: UILabel!
 }

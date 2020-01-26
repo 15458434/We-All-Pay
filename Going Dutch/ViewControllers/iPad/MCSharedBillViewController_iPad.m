@@ -10,7 +10,7 @@
 @import GoogleMobileAds;
 
 #import "MCSharedBillViewController_iPad.h"
-#import "MCPersonTableViewController_iPad.h"
+#import "MCPersonViewController.h"
 
 #import "MCPerson+addons.h"
 #import "MCSharedBill+addons.h"
@@ -275,9 +275,9 @@
     [_tripNameField setText:[_tonightsBill tripName]];
     
     // Set the color of the backButton.
-    UIColor *backButtonColor = [Colors getButtonColor];
-    [[[self navigationController] navigationBar] setTintColor:backButtonColor];
-    [[[self navigationItem] rightBarButtonItem] setTintColor:backButtonColor];
+    UIColor *backButtonColor = [UIColor colorNamed:@"button - enabled"];
+    self.navigationController.navigationBar.tintColor = backButtonColor;
+    self.navigationItem.rightBarButtonItem.tintColor = backButtonColor;
     
     // TODO: Add observer for notifications.
     [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(applyProVersion:) name:[ MCStoreInterface applyProVersionNotification] object:[MCStoreInterface defaultStoreInterface]];
@@ -310,8 +310,14 @@
         if (@available(iOS 13.0, *)) {
             navController.modalInPresentation = YES;
         }
-        MCPersonTableViewController_iPad *destination = (MCPersonTableViewController_iPad * )navController.viewControllers.firstObject;
-        destination.tonightsBill = _tonightsBill;
+        MCPersonViewController *destination = navController.viewControllers.firstObject;
+        [[MCWeAllPayStoreController defaultStore] beginUndoGroup];
+        // No person present create a new one.
+        MCPerson *thePerson = [_tonightsBill addPerson];
+        [thePerson setThumbnailDataFromImage:nil];
+        [thePerson setPictureDataFromImage:nil];
+        destination.thisPerson = thePerson;
+        destination.isNew = YES;
         return;
     }
     

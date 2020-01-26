@@ -15,7 +15,7 @@ import GoogleMobileAds
     func willDismissInterstatial(for adEngine: InterstitialAdEngine)
 }
 
-@objc(MCInterstitialAdEngine) @objcMembers class InterstitialAdEngine: AdEngine, GADInterstitialDelegate {
+@objc(MCInterstitialAdEngine) final class InterstitialAdEngine: AdEngine, GADInterstitialDelegate {
     
     private(set) weak var delegate: InterstitialAdEngineDelegate!
 

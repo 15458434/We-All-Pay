@@ -20,7 +20,7 @@ private let kRateMeControllerFirstLaunchDate = "kFirstLaunchDate"
 private let kRateMeControllerCounterValue = "kRateMeControllerCounterValue"
 private let kRateMeControllerShouldAskContainer = "kRateMeControllerAskStatus"
 
-public class RateMeController: NSObject {
+final public class RateMeController: NSObject {
     // MARK: Properties
     private let firstLaunchDate: Date
     private var currentDate = Date()

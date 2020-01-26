@@ -9,7 +9,8 @@
 @import FirebaseAnalytics;
 
 #import "MCSharedBillPeoplePresentTableViewController-iPad.h"
-#import "MCPersonTableViewController_iPad.h"
+//#import "MCPersonTableViewControll er_iPad.h"
+#import "MCPersonViewController.h"
 #import "UIViewController+WeAllPayStore.h"
 
 #import "MCPerson+addons.h"
@@ -209,10 +210,23 @@
         if (@available(iOS 13.0, *)) {
             navController.modalInPresentation = YES;
         }
-        MCPersonTableViewController_iPad *destination = (MCPersonTableViewController_iPad *)navController.viewControllers.firstObject;
-        NSIndexPath *indexPath = self.tableView.indexPathForSelectedRow;
-        destination.thisPerson = [_dataController objectAtIndexPath:indexPath];
-        [self.tableView deselectRowAtIndexPath:indexPath animated:YES];
+        MCPersonViewController *destination = (MCPersonViewController *)navController.viewControllers.firstObject;
+        NSIndexPath *indexPathOfSelectedRow = self.tableView.indexPathForSelectedRow;
+        MCPerson *thePerson = [_dataController objectAtIndexPath:indexPathOfSelectedRow];
+        [[MCWeAllPayStoreController defaultStore] beginUndoGroup];
+        if (!thePerson) {
+            // No person present create a new one.
+            thePerson = [_tonightsBill addPerson];
+            [thePerson setThumbnailDataFromImage:nil];
+            [thePerson setPictureDataFromImage:nil];
+            destination.thisPerson = thePerson;
+            destination.isNew = YES;
+        } else {
+            // Person present open it.
+            destination.thisPerson = thePerson;
+            destination.isNew = NO;
+            [self.tableView deselectRowAtIndexPath:indexPathOfSelectedRow animated:YES];
+        }
     }
 }
 

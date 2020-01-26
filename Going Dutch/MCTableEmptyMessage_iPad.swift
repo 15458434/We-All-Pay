@@ -8,7 +8,7 @@
 
 import Foundation
 
-class MCTableEmptyMessage_iPad: UIView {
+final class MCTableEmptyMessage_iPad: UIView {
     @IBOutlet var bigMessage: UILabel!
     @IBOutlet var activityIndicator: UIActivityIndicatorView!
 }

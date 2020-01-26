@@ -8,7 +8,7 @@
 
 import UIKit
 
-class PersonTableViewCell_iPad: UITableViewCell {
+final class PersonTableViewCell_iPad: UITableViewCell {
     // MARK: IB Outlets
     @IBOutlet var personImage: UIImageView!
     @IBOutlet var nameLabel: UILabel!

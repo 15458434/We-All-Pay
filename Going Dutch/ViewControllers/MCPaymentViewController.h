@@ -10,6 +10,8 @@
 @import CoreData;
 @import NotificationCenter;
 
+#import "MCGenericAdBannerTableViewController.h"
+
 #import "MCThisPaymentProtocol.h"
 #import "MCPathComponentsToOpenProtocol.h"
 
@@ -33,7 +35,7 @@ typedef NS_ENUM(NSUInteger, MCMoneyValueFieldDismissStatus) {
 
 @end
 
-@interface MCPaymentViewController : UITableViewController <NSFetchedResultsControllerDelegate, MCThisPaymentProtocol, MCPathComponentsToOpenProtocol>
+@interface MCPaymentViewController : MCGenericAdBannerTableViewController <NSFetchedResultsControllerDelegate, MCThisPaymentProtocol, MCPathComponentsToOpenProtocol>
 
 @property (nonatomic, strong) MCPayment *thisPayment;
 @property (nonatomic, strong) MCSharedBill *tonightsBill;

@@ -33,26 +33,11 @@
             skipped = "NO">
             <BuildableReference
                BuildableIdentifier = "primary"
-               BlueprintIdentifier = "380C92B122A9657B000BD574"
+               BlueprintIdentifier = "38696B6423DCD24E00E941EA"
                BuildableName = "Screenshots.xctest"
                BlueprintName = "Screenshots"
                ReferencedContainer = "container:We all pay.xcodeproj">
             </BuildableReference>
-         </TestableReference>
-         <TestableReference
-            skipped = "NO">
-            <BuildableReference
-               BuildableIdentifier = "primary"
-               BlueprintIdentifier = "38D6A3C41C73DDBF00968BB2"
-               BuildableName = "RateMeControllerForiOSTests.xctest"
-               BlueprintName = "RateMeControllerForiOSTests"
-               ReferencedContainer = "container:We all pay.xcodeproj">
-            </BuildableReference>
-            <SkippedTests>
-               <Test
-                  Identifier = "RateMeControllerTests">
-               </Test>
-            </SkippedTests>
          </TestableReference>
       </Testables>
    </TestAction>
@@ -76,6 +61,12 @@
             ReferencedContainer = "container:We all pay.xcodeproj">
          </BuildableReference>
       </BuildableProductRunnable>
+      <CommandLineArguments>
+         <CommandLineArgument
+            argument = "-FIRAnalyticsDebugEnabled"
+            isEnabled = "YES">
+         </CommandLineArgument>
+      </CommandLineArguments>
    </LaunchAction>
    <ProfileAction
       buildConfiguration = "Release"

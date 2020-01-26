@@ -10,7 +10,7 @@ import UIKit
 
 import FirebaseAnalytics
 
-class MCPaymentPresenceTableViewCell_iPhone: UITableViewCell {
+final class MCPaymentPresenceTableViewCell_iPhone: UITableViewCell {
     @IBOutlet var personView: UIImageView!
     @IBOutlet var nameLabel: UILabel!
     @IBOutlet var isPresentSwitch: UISwitch!

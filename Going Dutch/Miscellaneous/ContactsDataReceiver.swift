@@ -9,7 +9,7 @@
 import UIKit
 import ContactsUI
 
-class ContactsDataReceiver: NSObject, ThisEventReadOnly, CNContactPickerDelegate {
+final class ContactsDataReceiver: NSObject, ThisEventReadOnly, CNContactPickerDelegate {
     
     @objc init(with tonightsBill: MCSharedBill) {
         self.event = tonightsBill
@@ -40,12 +40,12 @@ class ContactsDataReceiver: NSObject, ThisEventReadOnly, CNContactPickerDelegate
     // MARK: CNContactPickerDelegate
     
     func contactPicker(_ picker: CNContactPickerViewController, didSelect contact: CNContact) {
-        let tonightsBillID = event.objectID
-        let backgroundContext = MCWeAllPayStoreController.defaultStore().backgroundThreadContext!
+        let tonightsBillID: NSManagedObjectID = event.objectID
+        let backgroundContext: NSManagedObjectContext = MCWeAllPayStoreController.defaultStore().backgroundThreadContext
         
         backgroundContext.perform {
-            let backgroundTonightsBill = backgroundContext.object(with: tonightsBillID) as! MCSharedBill
-            let newPerson = backgroundTonightsBill.addPerson()!
+            let backgroundTonightsBill: MCSharedBill = backgroundContext.object(with: tonightsBillID) as! MCSharedBill
+            let newPerson: MCPerson = backgroundTonightsBill.addPerson()!
             newPerson.firstName = contact.givenName
             newPerson.lastName = contact.middleName + contact.familyName
             for emailAddress in contact.emailAddresses {
