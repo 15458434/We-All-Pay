@@ -202,10 +202,6 @@ typedef NS_ENUM(BOOL, MCXRateStatus) {
 #pragma mark - MCInterstitialAdEngineDelegate
 
 - (void)willDismissInterstatialFor:(MCInterstitialAdEngine *)adEngine {
-//    __weak typeof(self) weakSelf = self;
-//    dispatch_async(dispatch_get_main_queue(), ^{
-//        [weakSelf.navigationController.presentingViewController dismissViewControllerAnimated:YES completion:nil];
-//    });
     [self.navigationController.presentingViewController dismissViewControllerAnimated:YES completion:nil];
 }
 
