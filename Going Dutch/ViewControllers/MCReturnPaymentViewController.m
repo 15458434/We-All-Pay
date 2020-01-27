@@ -196,7 +196,11 @@ typedef NS_ENUM(BOOL, MCXRateStatus) {
 #pragma mark - MCGenericInterstitialAdTableViewController
 
 - (NSString *)adUnitId {
+#ifdef DEBUG
+    return @"ca-app-pub-3940256099942544/4411468910";
+#else
     return @"ca-app-pub-5354415674074435/8899635256";
+#endif
 }
 
 #pragma mark - MCInterstitialAdEngineDelegate
