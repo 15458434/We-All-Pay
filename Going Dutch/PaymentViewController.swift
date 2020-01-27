@@ -153,8 +153,7 @@ final class PaymentViewController: UITableViewController, MCTonightsBillTransfer
     
     // MARK: DismissKeyboardProtocol
     func dismissTheKeyboard() {
-        let fr = view.getFirstResponder()
-        fr?.resignFirstResponder()
+        self.view.endEditing(true)
     }
     
     // MARK: UITextFieldDelegate 

@@ -108,8 +108,7 @@ typedef NS_ENUM(BOOL, ChildViewStatus) {
     NSLog(@"%@, currencySelectionPressed", self);
 #endif
     _kindOfPaidFieldDismiss = MCMoneyValueFieldDismissStatusCurrencySelectionTapped;
-    UIView *myFirstResponder = [[self view] getFirstResponder];
-    [myFirstResponder resignFirstResponder];
+    [self.view endEditing:YES];
     
     [self performSegueWithIdentifier:@"openSelectCurrency" sender:self];
 }

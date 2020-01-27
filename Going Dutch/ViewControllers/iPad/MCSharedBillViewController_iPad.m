@@ -293,15 +293,10 @@
     [[NSNotificationCenter defaultCenter] removeObserver:self name:UIApplicationWillEnterForegroundNotification object:nil];
 }
 
-- (void)willMoveToParentViewController:(UIViewController *)parent
-{
+- (void)willMoveToParentViewController:(UIViewController *)parent {
     if (!parent) {
         // Parent is null when back button is pressed in navigationbar
-        
-        UIView *firstResponder = [[self view] getFirstResponder];
-        if (firstResponder) {
-            [firstResponder resignFirstResponder];
-        }
+        [self.view endEditing:YES];
         [_tonightsBill deleteIfStillNew];
         [[MCWeAllPayStoreController defaultStore] saveMainThreadContext];
     }

@@ -105,30 +105,6 @@
     [[MCWeAllPayStoreController defaultStore] saveMainThreadContext];
 }
 
-#pragma mark - Core Data Notifications
-
-- (void)storeWillBeSwapped:(NSNotification *)notification {
-    [super storeWillBeSwapped:notification];
-    dispatch_sync(dispatch_get_main_queue(), ^{
-        self.view.userInteractionEnabled = NO;
-    });
-}
-
-- (void)storeDidSwap:(NSNotification *)notification {
-    [super storeDidSwap:notification];
-    dispatch_sync(dispatch_get_main_queue(), ^{
-        if (self.dataController) {
-            NSError *fetchError;
-            if (![self.dataController performFetch:&fetchError]) {
-                NSLog(@"Error fetching: %@", fetchError);
-            }
-        }
-        [[self tableView] reloadData];
-        [self setEmptyMessage];
-        self.view.userInteractionEnabled = YES;
-    });
-}
-
 #pragma mark - NSFetchedResultsController
 
 - (void)controllerWillChangeContent:(NSFetchedResultsController *)controller {

@@ -13,8 +13,6 @@
 - (void)startRespondingToStoreChangeNotifications;
 - (void)stopRespondingToStorechangeNotifications;
 - (void)storeWillSave:(NSNotification *)notification;
-- (void)storeDidSave:(NSNotification *)notification;
-- (void)storeWillBeSwapped:(NSNotification *)notification;
-- (void)storeDidSwap:(NSNotification *)notification;
+- (void)storeDidSave:(NSNotification *)notification;;
 
 @end
