@@ -41,14 +41,12 @@ typedef NS_ENUM(BOOL, MCXRateStatus) {
 
 #pragma mark - Actions
 
-- (IBAction)sendAsEmailButtonPressed:(id)sender
-{
+- (IBAction)sendAsEmailButtonPressed:(id)sender {
     [FIRAnalytics logEventWithName:@"Send email pressed" parameters:nil];
     [self shareBill:self];
 }
 
-- (IBAction)mainCancelButtonPressed:(id)sender
-{
+- (IBAction)mainCancelButtonPressed:(id)sender {
     if (self.adEngine.interstitialAd.isReady) {
         [self.adEngine putOnScreenIfAvailableWithPresentingViewController:self];
     } else {
@@ -72,8 +70,7 @@ typedef NS_ENUM(BOOL, MCXRateStatus) {
 
 #pragma mark - Private in this class
 
-- (void)shareBill:(id)sender
-{
+- (void)shareBill:(id)sender {
     if ([[self tonightsBill] doesEveryoneHaveAnEmailAddress]) {
         [self openMailView:sender];
     } else {
@@ -98,9 +95,8 @@ typedef NS_ENUM(BOOL, MCXRateStatus) {
     }
 }
 
-- (void)setEmptyMessageNow
-{
-    if ([_solution count] != 0) {
+- (void)setEmptyMessageNow {
+    if (_solution.count != 0) {
         [UIView animateWithDuration:0.0 animations:^{
             [[self.emptyMessage bigMessage] setAlpha:0.0];
             [[self tableView] setSeparatorStyle:UITableViewCellSeparatorStyleSingleLine];
@@ -115,8 +111,7 @@ typedef NS_ENUM(BOOL, MCXRateStatus) {
     }
 }
 
-- (void)giveSolution
-{
+- (void)giveSolution {
     [_emptyMessage.activityIndicator startAnimating];
     _areXRatesMissing = xRatesMissing;
     
@@ -180,7 +175,7 @@ typedef NS_ENUM(BOOL, MCXRateStatus) {
 
 - (void)setEmptyMessage
 {
-    if (!([_solution count] == 0 || _emptyMessage.activityIndicator.isAnimating)) {
+    if (!(_solution.count == 0 || _emptyMessage.activityIndicator.isAnimating)) {
         [UIView animateWithDuration:1.0 animations:^{
             [[self->_emptyMessage bigMessage] setAlpha:0.0];
             [[self tableView] setSeparatorStyle:UITableViewCellSeparatorStyleSingleLine];
@@ -280,48 +275,39 @@ typedef NS_ENUM(BOOL, MCXRateStatus) {
     return nil;
 }
 
-- (NSInteger)numberOfSectionsInTableView:(UITableView *)tableView
-{
+- (NSInteger)numberOfSectionsInTableView:(UITableView *)tableView {
     if (_areXRatesMissing == xRatesMissing) {
-#ifdef DEBUG
-        NSLog(@"Amount of sections is 0.");
-#endif
         return 0;
     } else if (_solution == nil) {
-#ifdef DEBUG
-        NSLog(@"Amount of sections is 0.");
-#endif
         return 0;
     } else {
         return 3;
     }
 }
 
-- (NSInteger)tableView:(UITableView *)tableView numberOfRowsInSection:(NSInteger)section
-{
+- (NSInteger)tableView:(UITableView *)tableView numberOfRowsInSection:(NSInteger)section {
     switch (section) {
         case 0:
-            return [_solution count];
+            return _solution.count;
         case 1:
-            if ([_solution count] == 0) {
+            if (_solution.count == 0) {
                 return 0;
             } else {
-                return [_peoplePresent count];
+                return _peoplePresent.count;
             }
         case 2:
-            if ([_solution count] == 0) {
+            if (_solution.count == 0) {
                 return 0;
             } else {
-                return [_peoplePresent count] + 1;
+                return _peoplePresent.count + 1;
             }
         default:
             return 0;
     }
 }
 
-- (UITableViewCell *)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath
-{
-    if ([indexPath section] == 0) {
+- (UITableViewCell *)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath {
+    if (indexPath.section == 0) {
         ReturnPayment *thisCellsReturnPayment = _solution[[indexPath row]];
         MCWhoOwesWhoTableViewCell_iPhone *returnPaymentCell = [tableView dequeueReusableCellWithIdentifier:@"MCWhoOwesWhoTableViewCell_iPhone"];
         CurrencyFormatter *cf = [[CurrencyFormatter alloc] initWithCurrencyCode:_tonightsBill.mainCurrency.code];
@@ -335,7 +321,7 @@ typedef NS_ENUM(BOOL, MCXRateStatus) {
         return returnPaymentCell;
     }
     
-    if ([indexPath section] == 1) {
+    if (indexPath.section == 1) {
         MCWhoPaidHowMuchTableViewCell_iPhone *cell = [tableView dequeueReusableCellWithIdentifier:@"MCWhoPaidHowMuchTableViewCell_iPhone"];
         
         MCPerson *person = [_peoplePresent objectAtIndex:[indexPath row]];
@@ -346,8 +332,8 @@ typedef NS_ENUM(BOOL, MCXRateStatus) {
         return cell;
     }
     
-    if ([indexPath section] == 2) {
-        if ([indexPath row] < [_peoplePresent count]) {
+    if (indexPath.section == 2) {
+        if (indexPath.row < _peoplePresent.count) {
             MCWhoPaidHowMuchTableViewCell_iPhone *cell = [tableView dequeueReusableCellWithIdentifier:@"MCWhoPaidHowMuchTableViewCell_iPhone"];
             
             MCPerson *person = [_peoplePresent objectAtIndex:[indexPath row]];
