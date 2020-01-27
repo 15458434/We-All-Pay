@@ -21,6 +21,7 @@
 
 @property (nonatomic, strong) MCTwoLabelsTitleView *twoLabelTitleView;
 
+@property (nonatomic, weak) IBOutlet UIScrollView *scrollView;
 @property (nonatomic, weak) IBOutlet UIImageView *pictureView;
 @property (nonatomic, weak) IBOutlet UITextField *firstNameField;
 @property (nonatomic, strong) MCNameTextInputValidator *firstNameFieldValidator;
@@ -30,6 +31,7 @@
 @property (nonatomic, weak) IBOutlet UIButton *selectEmailAddressButton;
 @property (nonatomic, strong) MCEmailTextInputProxy *emailTextInputReceiver;
 
+@property (nonatomic, strong) IBOutlet MCScrollViewAdjusterToKeyboard *keyboardNotificationHandler;
 @property (nonatomic, strong) IBOutlet MCPersonModel *model;
 
 @end
@@ -165,6 +167,8 @@
     MCEmailTextInputValidator *validator = [[MCEmailTextInputValidator alloc] initWithTextField:_emailField andModel:_model];
     MCEmailTextInputPicker *picker = [[MCEmailTextInputPicker alloc] initWithTextField:_emailField andModel:_model];
     _emailTextInputReceiver = [[MCEmailTextInputProxy alloc] initWithValidator:validator andPicker:picker andTarget:MCEmailTextInputProxyTargetValidator];
+    
+    [_keyboardNotificationHandler prepareForUseWithScrollView:_scrollView andTextFields:@[_firstNameField, _lastNameField, _emailField]];
 }
 
 - (void)viewWillAppear:(BOOL)animated {
@@ -192,6 +196,14 @@
     
     // Dismiss the keyboard on backgroundtap.
     [self startResigningFirstResponderOnBackgroundTap];
+    
+    [_keyboardNotificationHandler start];
+}
+
+- (void)viewWillDisappear:(BOOL)animated {
+    [super viewWillDisappear:animated];
+    
+    [_keyboardNotificationHandler stop];
 }
 
 - (void)prepareForSegue:(UIStoryboardSegue *)segue sender:(id)sender {
