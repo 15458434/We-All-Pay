@@ -84,5 +84,7 @@
 	<string>Light</string>
 	<key>UIViewControllerBasedStatusBarAppearance</key>
 	<false/>
+	<key>AppLovinSdkKey</key>
+	<string>Bgx0IpOaUPDFIyQbvEdyCviFhtkOEbsZfvnTX6mrdsS8Ze53tPSAZkL-lw6b2kfWDFqNWRhJleJXaa_UwfcNX3</string>
 </dict>
 </plist>
