@@ -1,5 +1,6 @@
 PODS:
   - AdColony (4.1.2)
+  - AppLovinSDK (6.10.1)
   - FBAudienceNetwork (5.6.0):
     - FBSDKCoreKit/Basics (>= 5.6.0)
   - FBSDKCoreKit/Basics (5.15.0)
@@ -55,6 +56,9 @@ PODS:
     - nanopb (~> 0.3.901)
   - GoogleMobileAdsMediationAdColony (4.1.2.0):
     - AdColony (= 4.1.2)
+    - Google-Mobile-Ads-SDK (>= 7.52.0)
+  - GoogleMobileAdsMediationAppLovin (6.10.1.0):
+    - AppLovinSDK (= 6.10.1)
     - Google-Mobile-Ads-SDK (>= 7.52.0)
   - GoogleMobileAdsMediationFacebook (5.6.0.0):
     - FBAudienceNetwork (= 5.6.0)
@@ -215,6 +219,7 @@ DEPENDENCIES:
   - Firebase/AdMob
   - Firebase/Core
   - GoogleMobileAdsMediationAdColony
+  - GoogleMobileAdsMediationAppLovin
   - GoogleMobileAdsMediationFacebook
   - GoogleMobileAdsMediationInMobi
   - GoogleMobileAdsMediationTestSuite
@@ -223,6 +228,7 @@ DEPENDENCIES:
 SPEC REPOS:
   https://github.com/CocoaPods/Specs.git:
     - AdColony
+    - AppLovinSDK
     - FBAudienceNetwork
     - FBSDKCoreKit
     - Firebase
@@ -237,6 +243,7 @@ SPEC REPOS:
     - GoogleDataTransport
     - GoogleDataTransportCCTSupport
     - GoogleMobileAdsMediationAdColony
+    - GoogleMobileAdsMediationAppLovin
     - GoogleMobileAdsMediationFacebook
     - GoogleMobileAdsMediationInMobi
     - GoogleMobileAdsMediationTestSuite
@@ -251,6 +258,7 @@ SPEC REPOS:
 
 SPEC CHECKSUMS:
   AdColony: 0a1e13349ce430ce29374c665611013fd78f792c
+  AppLovinSDK: ebc27a9dfeb1f73b9eb0c4f37d76b279198abf5f
   FBAudienceNetwork: 1ea63543665445a3a5b4a059e8210a343b6ab3c1
   FBSDKCoreKit: 083ba8c8e37939c0b4c84250654c9be0aef0c2f8
   Firebase: 5d77105d9740a07ca6b16927ca971db7e860faaf
@@ -265,6 +273,7 @@ SPEC CHECKSUMS:
   GoogleDataTransport: 574a983e829327d7c18f2627f65d9e80164ea8a4
   GoogleDataTransportCCTSupport: cad3cd6cdbdbad6b5c2c9206ec413402755faaaa
   GoogleMobileAdsMediationAdColony: daf702a10767a1137dae29b92c34491fc3ce7b43
+  GoogleMobileAdsMediationAppLovin: 016477ede32744ab79a9a0f2d15aeb24eb9ad844
   GoogleMobileAdsMediationFacebook: 2306b9822775e4ddb50c29fc758d6b45efcf6a72
   GoogleMobileAdsMediationInMobi: 49d5af05829c4596e6442a4257360bdd9568eb13
   GoogleMobileAdsMediationTestSuite: 188825108a95af95560c355de70bbaa3b4fd1b5c
@@ -277,6 +286,6 @@ SPEC CHECKSUMS:
   PersonalizedAdConsent: 4b87320b7a0f22576bec530ae3b7adba88a24c78
   PromisesObjC: c119f3cd559f50b7ae681fa59dc1acd19173b7e6
 
-PODFILE CHECKSUM: f9eabf17799753d48c7cf27ed24164c88ac78beb
+PODFILE CHECKSUM: 0b7311ae8e57188ebc909659c068d8366da016e9
 
 COCOAPODS: 1.8.4
