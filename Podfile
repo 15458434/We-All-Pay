@@ -7,6 +7,8 @@ platform :ios, '12.0'
 target 'We all pay' do
     
 pod 'Firebase/Core'
+pod 'Firebase/Analytics'
+pod 'Firebase/Crashlytics'
 pod 'Firebase/AdMob'
 pod 'GoogleMobileAdsMediationFacebook'
 pod 'GoogleMobileAdsMediationInMobi'
