@@ -24,6 +24,21 @@
 		</dict>
 		<dict>
 			<key>FooterText</key>
+			<string>
+Copyright 2019 AppLovin Corp. All rights reserved.
+
+The AppLovin SDK is available under a commercial license (https://www.applovin.com/eula).
+
+</string>
+			<key>License</key>
+			<string>Commercial License</string>
+			<key>Title</key>
+			<string>AppLovinSDK</string>
+			<key>Type</key>
+			<string>PSGroupSpecifier</string>
+		</dict>
+		<dict>
+			<key>FooterText</key>
 			<string>Copyright 2004-present Facebook. All Rights Reserved.
 
 You are hereby granted a non-exclusive, worldwide, royalty-free license to use,
@@ -1809,6 +1824,16 @@ CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE SOFTWARE.
 			<string>Apache 2.0</string>
 			<key>Title</key>
 			<string>GoogleMobileAdsMediationAdColony</string>
+			<key>Type</key>
+			<string>PSGroupSpecifier</string>
+		</dict>
+		<dict>
+			<key>FooterText</key>
+			<string>Copyright 2017 Google Inc.</string>
+			<key>License</key>
+			<string>Apache 2.0</string>
+			<key>Title</key>
+			<string>GoogleMobileAdsMediationAppLovin</string>
 			<key>Type</key>
 			<string>PSGroupSpecifier</string>
 		</dict>
