@@ -485,45 +485,40 @@ typedef NS_OPTIONS(NSUInteger, MCReturnPaymentViewControllerState) {
     if (self.uiState == MCReturnPaymentViewControllerStateNone) {
         NSLog(@"This value shouldn't exist");
         NSParameterAssert(NO);
-        return [[UITableViewCell alloc] init];
     } else if (self.uiState == MCReturnPaymentViewControllerStateXRatesPresent) {
-        if (indexPath.section == 0) {
-            return [self whoOwesWhoCellForIndexPath:indexPath inTableView:tableView];
-        }
-        
-        if (indexPath.section == 1) {
-            return [self whoPaidHowMuchCellForIndexPath:indexPath inTableView:tableView];
-        }
-        
-        if (indexPath.section == 2) {
-            return [self totalsCellForIndexPath:indexPath inTableView:tableView];
+        switch (indexPath.section) {
+            case 0:
+                return [self whoOwesWhoCellForIndexPath:indexPath inTableView:tableView];
+            case 1:
+                return [self whoPaidHowMuchCellForIndexPath:indexPath inTableView:tableView];
+            case 2:
+                return [self totalsCellForIndexPath:indexPath inTableView:tableView];
+            default:
+                NSParameterAssert(NO);
         }
     } else if (self.uiState == MCReturnPaymentViewControllerStateShowAdBanner) {
         NSLog(@"This value shouldn't exist");
         NSParameterAssert(NO);
-        return [[UITableViewCell alloc] init];
     } else if (self.uiState == (MCReturnPaymentViewControllerStateShowAdBanner | MCReturnPaymentViewControllerStateXRatesPresent)) {
-        if (indexPath.section == 0) {
-            return [self whoOwesWhoCellForIndexPath:indexPath inTableView:tableView];
-        }
-        
-        if (indexPath.section == 1) {
-            MCAdBannerTableViewCell *cell = [tableView dequeueReusableCellWithIdentifier:@"MCAdBannerTableViewCell" forIndexPath:indexPath];
-            [cell updateBannerView:_worstSalesPitchEverView];
-            return cell;
-        }
-        
-        if (indexPath.section == 2) {
-            return [self whoPaidHowMuchCellForIndexPath:indexPath inTableView:tableView];
-        }
-        
-        if (indexPath.section == 3) {
-            return [self totalsCellForIndexPath:indexPath inTableView:tableView];
+        switch (indexPath.section) {
+            case 0:
+                return [self whoOwesWhoCellForIndexPath:indexPath inTableView:tableView];
+            case 1:
+            {
+                MCAdBannerTableViewCell *cell = [tableView dequeueReusableCellWithIdentifier:@"MCAdBannerTableViewCell" forIndexPath:indexPath];
+                [cell updateBannerView:_worstSalesPitchEverView];
+                return cell;
+            }
+            case 2:
+                return [self whoPaidHowMuchCellForIndexPath:indexPath inTableView:tableView];
+            case 3:
+                return [self totalsCellForIndexPath:indexPath inTableView:tableView];
+            default:
+                NSParameterAssert(NO);
         }
     } else {
         NSLog(@"This value shouldn't exist");
         NSParameterAssert(NO);
-        return [[UITableViewCell alloc] init];
     }
     
     return nil;
