@@ -206,6 +206,52 @@ typedef NS_OPTIONS(NSUInteger, MCReturnPaymentViewControllerState) {
     return [NSIndexSet indexSetWithIndex:1];
 }
 
+- (MCWhoOwesWhoTableViewCell_iPhone *)whoOwesWhoCellForIndexPath:(NSIndexPath *)indexPath inTableView:(UITableView *)tableView {
+    ReturnPayment *thisCellsReturnPayment = _solution[[indexPath row]];
+    MCWhoOwesWhoTableViewCell_iPhone *returnPaymentCell = [tableView dequeueReusableCellWithIdentifier:@"MCWhoOwesWhoTableViewCell_iPhone"];
+    CurrencyFormatter *cf = [[CurrencyFormatter alloc] initWithCurrencyCode:_tonightsBill.mainCurrency.code];
+    returnPaymentCell.moneyLabel.text = [cf stringForObjectValue:thisCellsReturnPayment.money];
+    
+    NSString *owesString = NSLocalizedString(@"OWES", @"As in Mark owes Arjen, but then just the word owes.");
+    NSString *whoOwesWho = [[NSString alloc] initWithFormat:@"%@ %@ %@:", [[thisCellsReturnPayment payer] getName], owesString, [[thisCellsReturnPayment receiver] getName]];
+    [[returnPaymentCell whoOwesWhoLabel] setText:whoOwesWho];
+    [returnPaymentCell setSelectionStyle:UITableViewCellSelectionStyleNone];
+    
+    return returnPaymentCell;
+}
+
+- (MCWhoPaidHowMuchTableViewCell_iPhone *)whoPaidHowMuchCellForIndexPath:(NSIndexPath *)indexPath inTableView:(UITableView *)tableView {
+    MCWhoPaidHowMuchTableViewCell_iPhone *cell = [tableView dequeueReusableCellWithIdentifier:@"MCWhoPaidHowMuchTableViewCell_iPhone"];
+    
+    MCPerson *person = [_peoplePresent objectAtIndex:[indexPath row]];
+    [[cell whoPaidHowMuchLabel] setText:[person getFullName]];
+    NSNumber *sumSpentByPerson = @(-[[_tonightsBill amountShouldHavePaidBy:person] doubleValue]);
+    CurrencyFormatter *cf = [[CurrencyFormatter alloc] initWithCurrencyCode:_tonightsBill.mainCurrency.code];
+    cell.moneyLabel.text = [cf stringForObjectValue:sumSpentByPerson];
+    return cell;
+}
+
+- (UITableViewCell *)totalsCellForIndexPath:(NSIndexPath *)indexPath inTableView:(UITableView *)tableView {
+    if (indexPath.row < _peoplePresent.count) {
+        MCWhoPaidHowMuchTableViewCell_iPhone *cell = [tableView dequeueReusableCellWithIdentifier:@"MCWhoPaidHowMuchTableViewCell_iPhone"];
+        
+        MCPerson *person = [_peoplePresent objectAtIndex:[indexPath row]];
+        [[cell whoPaidHowMuchLabel] setText:[person getFullName]];
+        
+        CurrencyFormatter *cf = [[CurrencyFormatter alloc] initWithCurrencyCode:_tonightsBill.mainCurrency.code];
+        cell.moneyLabel.text = [cf stringForObjectValue:person.totalSumPaid];
+        return cell;
+    } else {
+        MCSolutionOverViewTableViewCell_iPhone *cell = [tableView dequeueReusableCellWithIdentifier:@"MCSolutionOverViewTableViewCell_iPhone"];
+        NSString *totalSpentString = NSLocalizedString(@"TOTAL_SPENT", @"Total spent:");
+        [[cell totalLabel] setText:totalSpentString];
+        
+        CurrencyFormatter *cf = [[CurrencyFormatter alloc] initWithCurrencyCode:_tonightsBill.mainCurrency.code];
+        cell.moneyLabel.text = [cf stringForObjectValue:_tonightsBill.totalSumOfMoneyOfThisSharedBill];
+        return cell;
+    }
+}
+
 #pragma mark - MCAdBannerEngineDelegate
 
 - (void)adEngine:(MCAdBannerEngine *)adEngine putOnScreenBannerView:(GADBannerView *)bannerView {
@@ -442,49 +488,15 @@ typedef NS_OPTIONS(NSUInteger, MCReturnPaymentViewControllerState) {
         return [[UITableViewCell alloc] init];
     } else if (self.uiState == MCReturnPaymentViewControllerStateXRatesPresent) {
         if (indexPath.section == 0) {
-            ReturnPayment *thisCellsReturnPayment = _solution[[indexPath row]];
-            MCWhoOwesWhoTableViewCell_iPhone *returnPaymentCell = [tableView dequeueReusableCellWithIdentifier:@"MCWhoOwesWhoTableViewCell_iPhone"];
-            CurrencyFormatter *cf = [[CurrencyFormatter alloc] initWithCurrencyCode:_tonightsBill.mainCurrency.code];
-            returnPaymentCell.moneyLabel.text = [cf stringForObjectValue:thisCellsReturnPayment.money];
-            
-            NSString *owesString = NSLocalizedString(@"OWES", @"As in Mark owes Arjen, but then just the word owes.");
-            NSString *whoOwesWho = [[NSString alloc] initWithFormat:@"%@ %@ %@:", [[thisCellsReturnPayment payer] getName], owesString, [[thisCellsReturnPayment receiver] getName]];
-            [[returnPaymentCell whoOwesWhoLabel] setText:whoOwesWho];
-            [returnPaymentCell setSelectionStyle:UITableViewCellSelectionStyleNone];
-            
-            return returnPaymentCell;
+            return [self whoOwesWhoCellForIndexPath:indexPath inTableView:tableView];
         }
         
         if (indexPath.section == 1) {
-            MCWhoPaidHowMuchTableViewCell_iPhone *cell = [tableView dequeueReusableCellWithIdentifier:@"MCWhoPaidHowMuchTableViewCell_iPhone"];
-            
-            MCPerson *person = [_peoplePresent objectAtIndex:[indexPath row]];
-            [[cell whoPaidHowMuchLabel] setText:[person getFullName]];
-            NSNumber *sumSpentByPerson = @(-[[_tonightsBill amountShouldHavePaidBy:person] doubleValue]);
-            CurrencyFormatter *cf = [[CurrencyFormatter alloc] initWithCurrencyCode:_tonightsBill.mainCurrency.code];
-            cell.moneyLabel.text = [cf stringForObjectValue:sumSpentByPerson];
-            return cell;
+            return [self whoPaidHowMuchCellForIndexPath:indexPath inTableView:tableView];
         }
         
         if (indexPath.section == 2) {
-            if (indexPath.row < _peoplePresent.count) {
-                MCWhoPaidHowMuchTableViewCell_iPhone *cell = [tableView dequeueReusableCellWithIdentifier:@"MCWhoPaidHowMuchTableViewCell_iPhone"];
-                
-                MCPerson *person = [_peoplePresent objectAtIndex:[indexPath row]];
-                [[cell whoPaidHowMuchLabel] setText:[person getFullName]];
-                
-                CurrencyFormatter *cf = [[CurrencyFormatter alloc] initWithCurrencyCode:_tonightsBill.mainCurrency.code];
-                cell.moneyLabel.text = [cf stringForObjectValue:person.totalSumPaid];
-                return cell;
-            } else {
-                MCSolutionOverViewTableViewCell_iPhone *cell = [tableView dequeueReusableCellWithIdentifier:@"MCSolutionOverViewTableViewCell_iPhone"];
-                NSString *totalSpentString = NSLocalizedString(@"TOTAL_SPENT", @"Total spent:");
-                [[cell totalLabel] setText:totalSpentString];
-                
-                CurrencyFormatter *cf = [[CurrencyFormatter alloc] initWithCurrencyCode:_tonightsBill.mainCurrency.code];
-                cell.moneyLabel.text = [cf stringForObjectValue:_tonightsBill.totalSumOfMoneyOfThisSharedBill];
-                return cell;
-            }
+            return [self totalsCellForIndexPath:indexPath inTableView:tableView];
         }
     } else if (self.uiState == MCReturnPaymentViewControllerStateShowAdBanner) {
         NSLog(@"This value shouldn't exist");
@@ -492,17 +504,7 @@ typedef NS_OPTIONS(NSUInteger, MCReturnPaymentViewControllerState) {
         return [[UITableViewCell alloc] init];
     } else if (self.uiState == (MCReturnPaymentViewControllerStateShowAdBanner | MCReturnPaymentViewControllerStateXRatesPresent)) {
         if (indexPath.section == 0) {
-            ReturnPayment *thisCellsReturnPayment = _solution[[indexPath row]];
-            MCWhoOwesWhoTableViewCell_iPhone *returnPaymentCell = [tableView dequeueReusableCellWithIdentifier:@"MCWhoOwesWhoTableViewCell_iPhone"];
-            CurrencyFormatter *cf = [[CurrencyFormatter alloc] initWithCurrencyCode:_tonightsBill.mainCurrency.code];
-            returnPaymentCell.moneyLabel.text = [cf stringForObjectValue:thisCellsReturnPayment.money];
-            
-            NSString *owesString = NSLocalizedString(@"OWES", @"As in Mark owes Arjen, but then just the word owes.");
-            NSString *whoOwesWho = [[NSString alloc] initWithFormat:@"%@ %@ %@:", [[thisCellsReturnPayment payer] getName], owesString, [[thisCellsReturnPayment receiver] getName]];
-            [[returnPaymentCell whoOwesWhoLabel] setText:whoOwesWho];
-            [returnPaymentCell setSelectionStyle:UITableViewCellSelectionStyleNone];
-            
-            return returnPaymentCell;
+            return [self whoOwesWhoCellForIndexPath:indexPath inTableView:tableView];
         }
         
         if (indexPath.section == 1) {
@@ -512,35 +514,11 @@ typedef NS_OPTIONS(NSUInteger, MCReturnPaymentViewControllerState) {
         }
         
         if (indexPath.section == 2) {
-            MCWhoPaidHowMuchTableViewCell_iPhone *cell = [tableView dequeueReusableCellWithIdentifier:@"MCWhoPaidHowMuchTableViewCell_iPhone"];
-            
-            MCPerson *person = [_peoplePresent objectAtIndex:[indexPath row]];
-            [[cell whoPaidHowMuchLabel] setText:[person getFullName]];
-            NSNumber *sumSpentByPerson = @(-[[_tonightsBill amountShouldHavePaidBy:person] doubleValue]);
-            CurrencyFormatter *cf = [[CurrencyFormatter alloc] initWithCurrencyCode:_tonightsBill.mainCurrency.code];
-            cell.moneyLabel.text = [cf stringForObjectValue:sumSpentByPerson];
-            return cell;
+            return [self whoPaidHowMuchCellForIndexPath:indexPath inTableView:tableView];
         }
         
         if (indexPath.section == 3) {
-            if (indexPath.row < _peoplePresent.count) {
-                MCWhoPaidHowMuchTableViewCell_iPhone *cell = [tableView dequeueReusableCellWithIdentifier:@"MCWhoPaidHowMuchTableViewCell_iPhone"];
-                
-                MCPerson *person = [_peoplePresent objectAtIndex:[indexPath row]];
-                [[cell whoPaidHowMuchLabel] setText:[person getFullName]];
-                
-                CurrencyFormatter *cf = [[CurrencyFormatter alloc] initWithCurrencyCode:_tonightsBill.mainCurrency.code];
-                cell.moneyLabel.text = [cf stringForObjectValue:person.totalSumPaid];
-                return cell;
-            } else {
-                MCSolutionOverViewTableViewCell_iPhone *cell = [tableView dequeueReusableCellWithIdentifier:@"MCSolutionOverViewTableViewCell_iPhone"];
-                NSString *totalSpentString = NSLocalizedString(@"TOTAL_SPENT", @"Total spent:");
-                [[cell totalLabel] setText:totalSpentString];
-                
-                CurrencyFormatter *cf = [[CurrencyFormatter alloc] initWithCurrencyCode:_tonightsBill.mainCurrency.code];
-                cell.moneyLabel.text = [cf stringForObjectValue:_tonightsBill.totalSumOfMoneyOfThisSharedBill];
-                return cell;
-            }
+            return [self totalsCellForIndexPath:indexPath inTableView:tableView];
         }
     } else {
         NSLog(@"This value shouldn't exist");
