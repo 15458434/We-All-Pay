@@ -13,6 +13,7 @@ import PersonalizedAdConsent
 import GoogleMobileAds
 import InMobiAdapter
 import AdColonyAdapter
+import AppLovinSDK
 
 @objc(MCAdEngine) @objcMembers open class AdEngine: NSObject {
     static let kAdBannerConsent = "7DE9F9CF-B4B9-4DCB-94FC-F0FD62F432DC"
@@ -87,6 +88,29 @@ import AdColonyAdapter
             options.gdprConsentString = consentString
         }
         
+        func gdprConsentAppLovin(economicArea: AdEngine.EconomicArea = .unknown, consentStatus: PACConsentStatus) {
+            var gdprRequired: Bool {
+                switch economicArea {
+                case .unknown:
+                    return false
+                case .eea:
+                    return true
+                }
+            }
+            var consentValue: Bool {
+                switch consentStatus {
+                case .personalized:
+                    return true
+                default:
+                    return false
+                }
+            }
+            
+            if gdprRequired {
+                ALPrivacySettings.setHasUserConsent(consentValue)
+            }
+        }
+        
         guard AdEngine.isEnabled else {
             return
         }
@@ -112,10 +136,12 @@ import AdColonyAdapter
                 case .personalized:
                     gdprConsentInMobi(economicArea: .eea, consentStatus: consentStatus)
                     gdprConsentAdcolony(economicArea: .eea, consentStatus: consentStatus)
+                    gdprConsentAppLovin(economicArea: .eea, consentStatus: consentStatus)
                     ()
                 case .nonPersonalized:
                     gdprConsentInMobi(economicArea: .eea, consentStatus: consentStatus)
                     gdprConsentAdcolony(economicArea: .eea, consentStatus: consentStatus)
+                    gdprConsentAppLovin(economicArea: .eea, consentStatus: consentStatus)
                     ()
                 default:
                     guard let privacyUrl = URL(string: "https://www.iubenda.com/privacy-policy/7876418"),

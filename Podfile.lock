@@ -1,16 +1,22 @@
 PODS:
   - AdColony (4.1.2)
+  - AppLovinSDK (6.10.1)
   - FBAudienceNetwork (5.6.0):
     - FBSDKCoreKit/Basics (>= 5.6.0)
   - FBSDKCoreKit/Basics (5.15.0)
   - Firebase/AdMob (6.15.0):
     - Firebase/CoreOnly
     - Google-Mobile-Ads-SDK (~> 7.50)
+  - Firebase/Analytics (6.15.0):
+    - Firebase/Core
   - Firebase/Core (6.15.0):
     - Firebase/CoreOnly
     - FirebaseAnalytics (= 6.2.1)
   - Firebase/CoreOnly (6.15.0):
     - FirebaseCore (= 6.6.0)
+  - Firebase/Crashlytics (6.15.0):
+    - Firebase/CoreOnly
+    - FirebaseCrashlytics (~> 4.0.0-beta.1)
   - FirebaseAnalytics (6.2.1):
     - FirebaseCore (~> 6.6)
     - FirebaseInstanceID (~> 4.3)
@@ -20,6 +26,7 @@ PODS:
     - GoogleUtilities/Network (~> 6.0)
     - "GoogleUtilities/NSData+zlib (~> 6.0)"
     - nanopb (= 0.3.9011)
+  - FirebaseAnalyticsInterop (1.5.0)
   - FirebaseCore (6.6.0):
     - FirebaseCoreDiagnostics (~> 1.2)
     - FirebaseCoreDiagnosticsInterop (~> 1.2)
@@ -32,6 +39,11 @@ PODS:
     - GoogleUtilities/Logger (~> 6.5)
     - nanopb (~> 0.3.901)
   - FirebaseCoreDiagnosticsInterop (1.2.0)
+  - FirebaseCrashlytics (4.0.0-beta.1):
+    - FirebaseAnalyticsInterop (~> 1.2)
+    - FirebaseCore (>= 6.3.2, ~> 6.3)
+    - FirebaseInstanceID (~> 4.1)
+    - PromisesObjC (~> 1.2)
   - FirebaseInstallations (1.1.0):
     - FirebaseCore (~> 6.6)
     - GoogleUtilities/UserDefaults (~> 6.5)
@@ -55,6 +67,9 @@ PODS:
     - nanopb (~> 0.3.901)
   - GoogleMobileAdsMediationAdColony (4.1.2.0):
     - AdColony (= 4.1.2)
+    - Google-Mobile-Ads-SDK (>= 7.52.0)
+  - GoogleMobileAdsMediationAppLovin (6.10.1.0):
+    - AppLovinSDK (= 6.10.1)
     - Google-Mobile-Ads-SDK (>= 7.52.0)
   - GoogleMobileAdsMediationFacebook (5.6.0.0):
     - FBAudienceNetwork (= 5.6.0)
@@ -213,8 +228,11 @@ PODS:
 
 DEPENDENCIES:
   - Firebase/AdMob
+  - Firebase/Analytics
   - Firebase/Core
+  - Firebase/Crashlytics
   - GoogleMobileAdsMediationAdColony
+  - GoogleMobileAdsMediationAppLovin
   - GoogleMobileAdsMediationFacebook
   - GoogleMobileAdsMediationInMobi
   - GoogleMobileAdsMediationTestSuite
@@ -223,13 +241,16 @@ DEPENDENCIES:
 SPEC REPOS:
   https://github.com/CocoaPods/Specs.git:
     - AdColony
+    - AppLovinSDK
     - FBAudienceNetwork
     - FBSDKCoreKit
     - Firebase
     - FirebaseAnalytics
+    - FirebaseAnalyticsInterop
     - FirebaseCore
     - FirebaseCoreDiagnostics
     - FirebaseCoreDiagnosticsInterop
+    - FirebaseCrashlytics
     - FirebaseInstallations
     - FirebaseInstanceID
     - Google-Mobile-Ads-SDK
@@ -237,6 +258,7 @@ SPEC REPOS:
     - GoogleDataTransport
     - GoogleDataTransportCCTSupport
     - GoogleMobileAdsMediationAdColony
+    - GoogleMobileAdsMediationAppLovin
     - GoogleMobileAdsMediationFacebook
     - GoogleMobileAdsMediationInMobi
     - GoogleMobileAdsMediationTestSuite
@@ -251,13 +273,16 @@ SPEC REPOS:
 
 SPEC CHECKSUMS:
   AdColony: 0a1e13349ce430ce29374c665611013fd78f792c
+  AppLovinSDK: ebc27a9dfeb1f73b9eb0c4f37d76b279198abf5f
   FBAudienceNetwork: 1ea63543665445a3a5b4a059e8210a343b6ab3c1
   FBSDKCoreKit: 083ba8c8e37939c0b4c84250654c9be0aef0c2f8
   Firebase: 5d77105d9740a07ca6b16927ca971db7e860faaf
   FirebaseAnalytics: e83e64b1231dedcd9ddd4bdecd9bcfd6ba341679
+  FirebaseAnalyticsInterop: 3f86269c38ae41f47afeb43ebf32a001f58fcdae
   FirebaseCore: 4aeb81ff53dcd9a3634ca725dc1fb8c2a4622046
   FirebaseCoreDiagnostics: 5e78803ab276bc5b50340e3c539c06c3de35c649
   FirebaseCoreDiagnosticsInterop: 296e2c5f5314500a850ad0b83e9e7c10b011a850
+  FirebaseCrashlytics: 98c17c7e764cfe17422ffb7510b44f7085d586aa
   FirebaseInstallations: 575cd32f2aec0feeb0e44f5d0110a09e5e60b47b
   FirebaseInstanceID: 6668efc1655a4052c083f287a7141f1ead12f9c2
   Google-Mobile-Ads-SDK: fac081606dbd438d8db57198b83ba8b5f875a601
@@ -265,6 +290,7 @@ SPEC CHECKSUMS:
   GoogleDataTransport: 574a983e829327d7c18f2627f65d9e80164ea8a4
   GoogleDataTransportCCTSupport: cad3cd6cdbdbad6b5c2c9206ec413402755faaaa
   GoogleMobileAdsMediationAdColony: daf702a10767a1137dae29b92c34491fc3ce7b43
+  GoogleMobileAdsMediationAppLovin: 016477ede32744ab79a9a0f2d15aeb24eb9ad844
   GoogleMobileAdsMediationFacebook: 2306b9822775e4ddb50c29fc758d6b45efcf6a72
   GoogleMobileAdsMediationInMobi: 49d5af05829c4596e6442a4257360bdd9568eb13
   GoogleMobileAdsMediationTestSuite: 188825108a95af95560c355de70bbaa3b4fd1b5c
@@ -277,6 +303,6 @@ SPEC CHECKSUMS:
   PersonalizedAdConsent: 4b87320b7a0f22576bec530ae3b7adba88a24c78
   PromisesObjC: c119f3cd559f50b7ae681fa59dc1acd19173b7e6
 
-PODFILE CHECKSUM: f9eabf17799753d48c7cf27ed24164c88ac78beb
+PODFILE CHECKSUM: d786839099b2f226898aaedf60fd8cd095e42d41
 
 COCOAPODS: 1.8.4
