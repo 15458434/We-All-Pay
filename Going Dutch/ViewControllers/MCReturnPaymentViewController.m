@@ -56,7 +56,9 @@ typedef NS_OPTIONS(NSUInteger, MCReturnPaymentViewControllerState) {
 }
 
 - (IBAction)mainCancelButtonPressed:(id)sender {
-    if (self.adEngine.interstitialAd.isReady) {
+    if (_solution == nil || _solution.count == 0) {
+        [self.navigationController.presentingViewController dismissViewControllerAnimated:YES completion:nil];
+    } else if (self.adEngine.interstitialAd.isReady) {
         NSError *adError;
         [self.adEngine putOnScreenIfAvailableWithPresentingViewController:self error:&adError];
         if (adError) {

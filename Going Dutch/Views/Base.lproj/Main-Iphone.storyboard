@@ -1101,8 +1101,8 @@
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <color key="backgroundColor" red="1" green="1" blue="1" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                         <inset key="separatorInset" minX="88" minY="0.0" maxX="0.0" maxY="0.0"/>
-                        <view key="tableHeaderView" contentMode="scaleToFill" misplaced="YES" restorationIdentifier="paymentHeaderView" translatesAutoresizingMaskIntoConstraints="NO" id="msZ-li-bka" customClass="UITableViewHeaderFooterView">
-                            <rect key="frame" x="0.0" y="0.0" width="375" height="310"/>
+                        <view key="tableHeaderView" contentMode="scaleToFill" restorationIdentifier="paymentHeaderView" translatesAutoresizingMaskIntoConstraints="NO" id="msZ-li-bka" customClass="UITableViewHeaderFooterView">
+                            <rect key="frame" x="0.0" y="0.0" width="375" height="340"/>
                             <subviews>
                                 <stackView opaque="NO" contentMode="scaleToFill" axis="vertical" distribution="equalSpacing" spacing="8" translatesAutoresizingMaskIntoConstraints="NO" id="qs4-hY-OKe" userLabel="Main Stack View">
                                     <rect key="frame" x="0.0" y="10" width="395" height="330"/>
@@ -1277,7 +1277,6 @@
                                                 <constraint firstItem="bbf-I9-yWg" firstAttribute="centerX" secondItem="iF7-Nz-3na" secondAttribute="centerX" id="eXc-ta-wPT"/>
                                                 <constraint firstAttribute="bottom" secondItem="bbf-I9-yWg" secondAttribute="bottom" priority="999" id="gWh-jA-Ac4"/>
                                                 <constraint firstItem="bbf-I9-yWg" firstAttribute="top" secondItem="iF7-Nz-3na" secondAttribute="top" id="lVc-Ho-ccz"/>
-                                                <constraint firstAttribute="height" priority="251" constant="50" id="wQF-U7-3Ug"/>
                                             </constraints>
                                         </view>
                                         <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="e6E-Uh-FE0">
@@ -1313,7 +1312,7 @@
                         </view>
                         <prototypes>
                             <tableViewCell contentMode="scaleToFill" restorationIdentifier="paymentPresenceCell" selectionStyle="none" hidesAccessoryWhenEditing="NO" indentationLevel="1" indentationWidth="0.0" reuseIdentifier="paymentPresenceCell_iPhone" rowHeight="52" id="AcN-yE-tRP" customClass="MCPaymentPresenceTableViewCell_iPhone" customModule="We_all_pay" customModuleProvider="target">
-                                <rect key="frame" x="0.0" y="338" width="375" height="52"/>
+                                <rect key="frame" x="0.0" y="368" width="375" height="52"/>
                                 <autoresizingMask key="autoresizingMask"/>
                                 <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" restorationIdentifier="tableViewCellContent" tableViewCell="AcN-yE-tRP" id="WHI-GF-nBf">
                                     <rect key="frame" x="0.0" y="0.0" width="375" height="52"/>
