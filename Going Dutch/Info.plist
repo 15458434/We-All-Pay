@@ -2,6 +2,8 @@
 <!DOCTYPE plist PUBLIC "-//Apple//DTD PLIST 1.0//EN" "http://www.apple.com/DTDs/PropertyList-1.0.dtd">
 <plist version="1.0">
 <dict>
+	<key>AppLovinSdkKey</key>
+	<string>Bgx0IpOaUPDFIyQbvEdyCviFhtkOEbsZfvnTX6mrdsS8Ze53tPSAZkL-lw6b2kfWDFqNWRhJleJXaa_UwfcNX3</string>
 	<key>CFBundleDevelopmentRegion</key>
 	<string>en</string>
 	<key>CFBundleDisplayName</key>
@@ -84,7 +86,5 @@
 	<string>Light</string>
 	<key>UIViewControllerBasedStatusBarAppearance</key>
 	<false/>
-	<key>AppLovinSdkKey</key>
-	<string>Bgx0IpOaUPDFIyQbvEdyCviFhtkOEbsZfvnTX6mrdsS8Ze53tPSAZkL-lw6b2kfWDFqNWRhJleJXaa_UwfcNX3</string>
 </dict>
 </plist>
