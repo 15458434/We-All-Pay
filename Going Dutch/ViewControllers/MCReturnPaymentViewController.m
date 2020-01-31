@@ -265,12 +265,12 @@ typedef NS_OPTIONS(NSUInteger, MCReturnPaymentViewControllerState) {
     UITableView *tableView = self.tableView;
     if (containsBits(self.uiState, MCReturnPaymentViewControllerStateShowAdBanner)) {
         [tableView beginUpdates];
-        [tableView reloadSections:self.adBannerSectionIndexSet withRowAnimation:UITableViewRowAnimationAutomatic];
+        [tableView reloadSections:self.adBannerSectionIndexSet withRowAnimation:UITableViewRowAnimationFade];
         [tableView endUpdates];
     } else {
         self.uiState = enableBits(self.uiState, MCReturnPaymentViewControllerStateShowAdBanner);
         [tableView beginUpdates];
-        [tableView insertSections:self.adBannerSectionIndexSet withRowAnimation:UITableViewRowAnimationAutomatic];
+        [tableView insertSections:self.adBannerSectionIndexSet withRowAnimation:UITableViewRowAnimationFade];
         [tableView endUpdates];
     }
 }
@@ -284,7 +284,7 @@ typedef NS_OPTIONS(NSUInteger, MCReturnPaymentViewControllerState) {
     self.uiState = disableBits(self.uiState, MCReturnPaymentViewControllerStateShowAdBanner);
     UITableView *tableView = self.tableView;
     [tableView beginUpdates];
-    [tableView deleteSections:self.adBannerSectionIndexSet withRowAnimation:UITableViewRowAnimationAutomatic];
+    [tableView deleteSections:self.adBannerSectionIndexSet withRowAnimation:UITableViewRowAnimationFade];
     [tableView endUpdates];
 }
 
