@@ -36,7 +36,9 @@ typedef NS_ENUM(BOOL, MCXRateStatus) {
 #pragma mark - IBAction
 
 - (IBAction)mainCancelButton:(id)sender {
-    if (self.adEngine.interstitialAd.isReady) {
+    if (_solution == nil || _solution.count == 0) {
+        _dismissMe();
+    } else if (self.adEngine.interstitialAd.isReady) {
         NSError *adError;
         [self.adEngine putOnScreenIfAvailableWithPresentingViewController:self error:&adError];
         if (adError) {
