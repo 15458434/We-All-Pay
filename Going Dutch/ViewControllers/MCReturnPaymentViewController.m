@@ -47,10 +47,14 @@ typedef NS_ENUM(BOOL, MCXRateStatus) {
     [self shareBill:self];
 }
 
-- (IBAction)mainCancelButtonPressed:(id)sender
-{
+- (IBAction)mainCancelButtonPressed:(id)sender {
     if (self.adEngine.interstitialAd.isReady) {
-        [self.adEngine putOnScreenIfAvailableWithPresentingViewController:self];
+        NSError *adError;
+        [self.adEngine putOnScreenIfAvailableWithPresentingViewController:self error:&adError];
+        if (adError) {
+            NSLog(@"Error show interstitial: %@", adError);
+            [self.navigationController.presentingViewController dismissViewControllerAnimated:YES completion:nil];
+        }
     } else {
         [self.navigationController.presentingViewController dismissViewControllerAnimated:YES completion:nil];
     }
