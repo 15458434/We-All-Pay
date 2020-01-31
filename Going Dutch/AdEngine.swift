@@ -14,6 +14,7 @@ import GoogleMobileAds
 import InMobiAdapter
 import AdColonyAdapter
 import AppLovinSDK
+import MoPub
 
 @objc(MCAdEngine) @objcMembers open class AdEngine: NSObject {
     static let kAdBannerConsent = "7DE9F9CF-B4B9-4DCB-94FC-F0FD62F432DC"
@@ -111,6 +112,38 @@ import AppLovinSDK
             }
         }
         
+        func gdprConsentMoPub(economicArea: AdEngine.EconomicArea = .unknown, consentStatus: PACConsentStatus) {
+            var gdprRequired: Bool {
+                switch economicArea {
+                case .unknown:
+                    return false
+                case .eea:
+                    return true
+                }
+            }
+            var consentValue: Bool {
+                switch consentStatus {
+                case .personalized:
+                    return true
+                default:
+                    return false
+                }
+            }
+            
+            let moPubConfig = MPMoPubConfiguration(adUnitIdForAppInitialization: "b63c7628b51e41c497d6159df9a922b0")
+            let moPubInstance = MoPub.sharedInstance()
+            moPubInstance.initializeSdk(with: moPubConfig, completion: nil)
+            
+            if gdprRequired {
+                if consentValue {
+                    moPubInstance.grantConsent()
+                } else {
+                    moPubInstance.revokeConsent()
+                }
+            }
+        }
+
+        
         guard AdEngine.isEnabled else {
             return
         }
@@ -137,12 +170,12 @@ import AppLovinSDK
                     gdprConsentInMobi(economicArea: .eea, consentStatus: consentStatus)
                     gdprConsentAdcolony(economicArea: .eea, consentStatus: consentStatus)
                     gdprConsentAppLovin(economicArea: .eea, consentStatus: consentStatus)
-                    ()
+                    gdprConsentMoPub(economicArea: .eea, consentStatus: consentStatus)
                 case .nonPersonalized:
                     gdprConsentInMobi(economicArea: .eea, consentStatus: consentStatus)
                     gdprConsentAdcolony(economicArea: .eea, consentStatus: consentStatus)
                     gdprConsentAppLovin(economicArea: .eea, consentStatus: consentStatus)
-                    ()
+                    gdprConsentMoPub(economicArea: .eea, consentStatus: consentStatus)
                 default:
                     guard let privacyUrl = URL(string: "https://www.iubenda.com/privacy-policy/7876418"),
                         let form = PACConsentForm(applicationPrivacyPolicyURL: privacyUrl) else {
@@ -164,6 +197,8 @@ import AppLovinSDK
                             UserDefaults.standard.set(consentStatus.rawValue, forKey: AdEngine.kAdBannerConsent)
                             gdprConsentInMobi(economicArea: .eea, consentStatus: consentStatus)
                             gdprConsentAdcolony(economicArea: .eea, consentStatus: consentStatus)
+                            gdprConsentAppLovin(economicArea: .eea, consentStatus: consentStatus)
+                            gdprConsentMoPub(economicArea: .eea, consentStatus: consentStatus)
                         }
                     }
                 }
