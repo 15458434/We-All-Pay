@@ -37,7 +37,7 @@ typedef NS_OPTIONS(NSUInteger, MCReturnPaymentViewControllerState) {
 @property (nonatomic, strong) MCTableEmptyMessage *emptyMessage;
 
 // Ad Banner
-@property (strong, nonatomic) DFPBannerView *worstSalesPitchEverView;
+@property (strong, nonatomic) GADBannerView *worstSalesPitchEverView;
 @property (strong, nonatomic) IBOutlet MCAdBannerEngine *adBannerEngine;
 @property (nonatomic, readonly) NSString *adBannerUnitId;
 @property (nonatomic) NSIndexSet *adBannerSectionIndexSet;
@@ -324,7 +324,7 @@ typedef NS_OPTIONS(NSUInteger, MCReturnPaymentViewControllerState) {
     
     [self giveSolutionWithCompletion:^(BOOL success) {
         if (success && (self.solution.count > 0)) {
-            self.worstSalesPitchEverView = [[DFPBannerView alloc] initWithAdSize:kGADAdSizeBanner];
+            self.worstSalesPitchEverView = [[GADBannerView alloc] initWithAdSize:kGADAdSizeBanner];
             [self.adBannerEngine prepareAdBanner:self.worstSalesPitchEverView withAdUnitId:self.adBannerUnitId andViewController:self];
         }
     }];
