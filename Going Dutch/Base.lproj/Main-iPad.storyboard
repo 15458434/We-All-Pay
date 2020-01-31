@@ -699,7 +699,7 @@
                         <color key="backgroundColor" red="1" green="1" blue="1" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                         <inset key="separatorInset" minX="128" minY="0.0" maxX="0.0" maxY="0.0"/>
                         <view key="tableHeaderView" contentMode="scaleToFill" id="zfO-fv-PpY" customClass="UITableViewHeaderFooterView">
-                            <rect key="frame" x="0.0" y="0.0" width="540" height="343"/>
+                            <rect key="frame" x="0.0" y="0.0" width="540" height="380"/>
                             <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                             <subviews>
                                 <textField clipsSubviews="YES" contentMode="scaleToFill" verticalCompressionResistancePriority="749" contentHorizontalAlignment="left" contentVerticalAlignment="center" borderStyle="roundedRect" placeholder="What was paid?" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="LDs-9i-ZRZ">
@@ -716,7 +716,7 @@
                                     </connections>
                                 </textField>
                                 <label clipsSubviews="YES" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="People sharing this payment" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="Lbm-k4-s3a">
-                                    <rect key="frame" x="134" y="325" width="386" height="18"/>
+                                    <rect key="frame" x="134" y="362" width="386" height="18"/>
                                     <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                     <fontDescription key="fontDescription" type="system" pointSize="15"/>
                                     <nil key="highlightedColor"/>
@@ -797,6 +797,19 @@
                                         </segue>
                                     </connections>
                                 </button>
+                                <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="ega-E2-5BA" customClass="GADBannerView">
+                                    <rect key="frame" x="110" y="290" width="320" height="50"/>
+                                    <color key="backgroundColor" systemColor="systemBackgroundColor" cocoaTouchSystemColor="whiteColor"/>
+                                    <constraints>
+                                        <constraint firstAttribute="width" constant="320" id="07Z-pz-D09"/>
+                                        <constraint firstAttribute="height" constant="50" id="crq-Vg-kez"/>
+                                    </constraints>
+                                    <userDefinedRuntimeAttributes>
+                                        <userDefinedRuntimeAttribute type="number" keyPath="alpha">
+                                            <integer key="value" value="0"/>
+                                        </userDefinedRuntimeAttribute>
+                                    </userDefinedRuntimeAttributes>
+                                </view>
                             </subviews>
                             <color key="backgroundColor" red="1" green="1" blue="1" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                             <constraints>
@@ -810,12 +823,14 @@
                                 <constraint firstItem="q8F-9H-eKt" firstAttribute="leading" secondItem="zfO-fv-PpY" secondAttribute="leading" constant="20" id="LED-MH-yy2"/>
                                 <constraint firstItem="8ht-EA-kJE" firstAttribute="top" secondItem="q8F-9H-eKt" secondAttribute="bottom" constant="8" id="Uxq-CY-MnK"/>
                                 <constraint firstItem="ZlS-5v-dlc" firstAttribute="trailing" secondItem="Lbm-k4-s3a" secondAttribute="trailing" id="XST-xW-kTc"/>
+                                <constraint firstItem="Lbm-k4-s3a" firstAttribute="top" secondItem="ega-E2-5BA" secondAttribute="bottom" priority="999" constant="22" id="avT-ru-2PZ"/>
                                 <constraint firstItem="LnO-mX-ELw" firstAttribute="leading" secondItem="LDs-9i-ZRZ" secondAttribute="leading" constant="6" id="dCm-fN-aPA"/>
                                 <constraint firstItem="q8F-9H-eKt" firstAttribute="top" secondItem="xcc-E7-c0h" secondAttribute="bottom" constant="8" id="hGt-Vg-5wT"/>
-                                <constraint firstItem="Lbm-k4-s3a" firstAttribute="top" secondItem="ZlS-5v-dlc" secondAttribute="bottom" priority="250" constant="46" id="iRs-hR-mpC"/>
+                                <constraint firstItem="ega-E2-5BA" firstAttribute="top" secondItem="ZlS-5v-dlc" secondAttribute="bottom" constant="22" id="j58-k2-kFC"/>
                                 <constraint firstItem="Lbm-k4-s3a" firstAttribute="leading" secondItem="LnO-mX-ELw" secondAttribute="leading" id="k1z-tR-Nn9"/>
                                 <constraint firstItem="LDs-9i-ZRZ" firstAttribute="leading" secondItem="q8F-9H-eKt" secondAttribute="trailing" constant="8" id="kAy-xx-Xh8"/>
                                 <constraint firstItem="xcc-E7-c0h" firstAttribute="leading" secondItem="zfO-fv-PpY" secondAttribute="leading" constant="20" id="nHw-a6-MrS"/>
+                                <constraint firstItem="ega-E2-5BA" firstAttribute="centerX" secondItem="zfO-fv-PpY" secondAttribute="centerX" id="onx-oj-Com"/>
                                 <constraint firstItem="LnO-mX-ELw" firstAttribute="leading" secondItem="hi9-hq-PS5" secondAttribute="leading" id="ru4-w9-xj8"/>
                                 <constraint firstItem="ZlS-5v-dlc" firstAttribute="trailing" secondItem="LDs-9i-ZRZ" secondAttribute="trailing" id="tOZ-10-71l"/>
                                 <constraint firstItem="xcc-E7-c0h" firstAttribute="top" secondItem="zfO-fv-PpY" secondAttribute="top" constant="20" id="xhR-IQ-sGT"/>
@@ -824,7 +839,7 @@
                         </view>
                         <prototypes>
                             <tableViewCell contentMode="scaleToFill" restorationIdentifier="paymentPresenceTableViewCell" selectionStyle="none" hidesAccessoryWhenEditing="NO" indentationLevel="1" indentationWidth="0.0" reuseIdentifier="paymentPresenceTableViewCell" rowHeight="60" id="SXa-Nq-OdV" customClass="MCPaymentPresenceTableViewCell" customModule="We_all_pay" customModuleProvider="target">
-                                <rect key="frame" x="0.0" y="371" width="540" height="60"/>
+                                <rect key="frame" x="0.0" y="408" width="540" height="60"/>
                                 <autoresizingMask key="autoresizingMask"/>
                                 <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" restorationIdentifier="contentView" tableViewCell="SXa-Nq-OdV" id="qHN-Ki-paQ">
                                     <rect key="frame" x="0.0" y="0.0" width="540" height="60"/>
@@ -929,6 +944,7 @@
                     <simulatedNavigationBarMetrics key="simulatedTopBarMetrics" translucent="NO" prompted="NO"/>
                     <modalFormSheetSimulatedSizeMetrics key="simulatedDestinationMetrics"/>
                     <connections>
+                        <outlet property="adBannerEngine" destination="aJi-mF-eiq" id="UPl-Ag-EKs"/>
                         <outlet property="categoryButton" destination="LnO-mX-ELw" id="Ida-i0-tne"/>
                         <outlet property="categoryImage" destination="q8F-9H-eKt" id="jbf-mh-8bo"/>
                         <outlet property="itemField" destination="LDs-9i-ZRZ" id="8d1-wG-1tG"/>
@@ -936,12 +952,14 @@
                         <outlet property="paidField" destination="ZlS-5v-dlc" id="UZl-Ot-u5Z"/>
                         <outlet property="payerView" destination="xcc-E7-c0h" id="yaP-15-Yuz"/>
                         <outlet property="selectButton" destination="hi9-hq-PS5" id="dUx-qL-RDT"/>
+                        <outlet property="worstSalesPitchEverView" destination="ega-E2-5BA" id="cWk-vF-1Xf"/>
                     </connections>
                 </tableViewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="Qvw-hj-044" userLabel="First Responder" sceneMemberID="firstResponder"/>
                 <customObject id="Ltw-CZ-2zU" customClass="MCPaymentModel"/>
+                <customObject id="aJi-mF-eiq" customClass="MCAdBannerEngine"/>
             </objects>
-            <point key="canvasLocation" x="4729.6875" y="756.4453125"/>
+            <point key="canvasLocation" x="4729.4964028776985" y="756.2814070351759"/>
         </scene>
         <!--Select Category Table View Controller-->
         <scene sceneID="XF6-yS-Ica">
