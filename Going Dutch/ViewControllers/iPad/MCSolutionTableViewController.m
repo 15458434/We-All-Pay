@@ -37,7 +37,12 @@ typedef NS_ENUM(BOOL, MCXRateStatus) {
 
 - (IBAction)mainCancelButton:(id)sender {
     if (self.adEngine.interstitialAd.isReady) {
-        [self.adEngine putOnScreenIfAvailableWithPresentingViewController:self];
+        NSError *adError;
+        [self.adEngine putOnScreenIfAvailableWithPresentingViewController:self error:&adError];
+        if (adError) {
+            NSLog(@"Error: Unable to show interstitial: %@", adError);
+            _dismissMe();
+        }
     } else {
         _dismissMe();
     }
