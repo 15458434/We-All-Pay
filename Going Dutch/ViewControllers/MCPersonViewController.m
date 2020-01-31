@@ -136,14 +136,14 @@
 #pragma mark - MCAdBannerEngineDelegate
 
 - (void)adEngine:(MCAdBannerEngine *)adEngine putOnScreenBannerView:(GADBannerView *)bannerView {
-    [UIView animateWithDuration:0.3 delay:0.0 options:UIViewAnimationOptionCurveEaseOut animations:^{
-        self.worstSalesPitchEverView.hidden = NO;
+    [UIView animateWithDuration:0.35 delay:0.0 options:UIViewAnimationOptionCurveEaseOut animations:^{
+        self.worstSalesPitchEverView.alpha = 1;
     } completion:nil];
 }
 
 - (void)adEngine:(MCAdBannerEngine *)adEngine putOffScreenBannerView:(GADBannerView *)bannerView {
-    [UIView animateWithDuration:0.3 delay:0.0 options:UIViewAnimationOptionCurveEaseOut animations:^{
-        self.worstSalesPitchEverView.hidden = YES;
+    [UIView animateWithDuration:0.35 delay:0.0 options:UIViewAnimationOptionCurveEaseOut animations:^{
+        self.worstSalesPitchEverView.alpha = 0;
     } completion:nil];
 }
 
@@ -169,6 +169,8 @@
     _emailTextInputReceiver = [[MCEmailTextInputProxy alloc] initWithValidator:validator andPicker:picker andTarget:MCEmailTextInputProxyTargetValidator];
     
     [_keyboardNotificationHandler prepareForUseWithScrollView:_scrollView andTextFields:@[_firstNameField, _lastNameField, _emailField]];
+    
+    self.worstSalesPitchEverView.alpha = 0;
 }
 
 - (void)viewWillAppear:(BOOL)animated {
