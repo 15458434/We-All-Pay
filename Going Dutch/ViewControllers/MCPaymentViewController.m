@@ -108,8 +108,7 @@ typedef NS_ENUM(BOOL, ChildViewStatus) {
     NSLog(@"%@, currencySelectionPressed", self);
 #endif
     _kindOfPaidFieldDismiss = MCMoneyValueFieldDismissStatusCurrencySelectionTapped;
-    UIView *myFirstResponder = [[self view] getFirstResponder];
-    [myFirstResponder resignFirstResponder];
+    [self.view endEditing:YES];
     
     [self performSegueWithIdentifier:@"openSelectCurrency" sender:self];
 }
@@ -202,14 +201,14 @@ typedef NS_ENUM(BOOL, ChildViewStatus) {
 #pragma mark - MCAdBannerEngineDelegate
 
 - (void)adEngine:(MCAdBannerEngine *)adEngine putOnScreenBannerView:(GADBannerView *)bannerView {
-    [UIView animateWithDuration:0.3 delay:0.0 options:UIViewAnimationOptionCurveEaseOut animations:^{
-        self.worstSalesPitchEverView.hidden = NO;
+    [UIView animateWithDuration:0.35 delay:0.0 options:UIViewAnimationOptionCurveEaseOut animations:^{
+        self.worstSalesPitchEverView.alpha = 1;
     } completion:nil];
 }
 
 - (void)adEngine:(MCAdBannerEngine *)adEngine putOffScreenBannerView:(GADBannerView *)bannerView {
-    [UIView animateWithDuration:0.3 delay:0.0 options:UIViewAnimationOptionCurveEaseOut animations:^{
-        self.worstSalesPitchEverView.hidden = YES;
+    [UIView animateWithDuration:0.35 delay:0.0 options:UIViewAnimationOptionCurveEaseOut animations:^{
+        self.worstSalesPitchEverView.alpha = 0;
     } completion:nil];
 }
 
@@ -309,9 +308,9 @@ typedef NS_ENUM(BOOL, ChildViewStatus) {
     [self setNeedsStatusBarAppearanceUpdate];
     
     if (self.adBannerEngine.isReady) {
-        self.worstSalesPitchEverView.hidden = NO;
+        self.worstSalesPitchEverView.alpha = 1;
     } else {
-        self.worstSalesPitchEverView.hidden = YES;
+        self.worstSalesPitchEverView.alpha = 0;
     }
     
     // Navigationbar stuff

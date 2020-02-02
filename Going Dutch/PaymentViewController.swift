@@ -26,7 +26,7 @@ enum CancelButtonPressed {
     case notPressed, isPressed
 }
 
-final class PaymentViewController: UITableViewController, MCTonightsBillTransfer, MCThisPaymentProtocol, MCDismissMeBlockProtocol, MCDismissKeyboardProtocol, MCPathComponentsToOpenProtocol, UITextFieldDelegate, NSFetchedResultsControllerDelegate {
+final class PaymentViewController: MCGenericAdBannerTableViewController, AdBannerEngineDelegate, MCTonightsBillTransfer, MCThisPaymentProtocol, MCDismissMeBlockProtocol, MCDismissKeyboardProtocol, MCPathComponentsToOpenProtocol, UITextFieldDelegate, NSFetchedResultsControllerDelegate {
     public var pathComponentsToOpen: [Any]!
 
     // MARK: IB Outlet
@@ -153,8 +153,7 @@ final class PaymentViewController: UITableViewController, MCTonightsBillTransfer
     
     // MARK: DismissKeyboardProtocol
     func dismissTheKeyboard() {
-        let fr = view.getFirstResponder()
-        fr?.resignFirstResponder()
+        self.view.endEditing(true)
     }
     
     // MARK: UITextFieldDelegate 
@@ -259,6 +258,30 @@ final class PaymentViewController: UITableViewController, MCTonightsBillTransfer
     func controllerDidChangeContent(_ controller: NSFetchedResultsController<NSFetchRequestResult>) {
         debugPrint("controllerDidChangeContent")
         tableView.endUpdates()
+    }
+    
+    // MARK: AdBannerEngineDelegate
+    
+    func adEngine(_ adEngine: AdBannerEngine?, putOnscreen bannerView: GADBannerView) {
+        UIView.animate(withDuration: 0.35, delay: 0.0, options: .curveEaseOut, animations: {
+            self.worstSalesPitchEverView!.alpha = 1
+        }, completion: nil)
+    }
+    
+    func adEngine(_ adEngine: AdBannerEngine?, putOffScreen bannerView: GADBannerView) {
+        UIView.animate(withDuration: 0.35, delay: 0.0, options: .curveEaseOut, animations: {
+            self.worstSalesPitchEverView!.alpha = 0
+        }, completion: nil)
+    }
+    
+    // MARK: GenericAdBannerTableViewController
+    
+    override var adUnitId: String {
+        #if DEBUG
+        return "ca-app-pub-3940256099942544/2934735716"
+        #else
+        return "ca-app-pub-5354415674074435/2765341863"
+        #endif
     }
 
     // MARK: UITableViewDelegate

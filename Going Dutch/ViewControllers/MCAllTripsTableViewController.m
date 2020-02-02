@@ -110,30 +110,6 @@ typedef NS_ENUM(BOOL, MCTonightsBillStatus) {
     [[MCWeAllPayStoreController defaultStore] saveMainThreadContext];
 }
 
-#pragma mark - UIViewController+WeAllPayStore notifications
-
-- (void)storeWillBeSwapped:(NSNotification *)notification {
-    [super storeWillBeSwapped:notification];
-    dispatch_sync(dispatch_get_main_queue(), ^{
-        [[self view] setUserInteractionEnabled:NO];
-    });
-}
-
-- (void)storeDidSwap:(NSNotification *)notification {
-    [super storeDidSwap:notification];
-    dispatch_sync(dispatch_get_main_queue(), ^{
-        if (self.model.fetchEventsController) {
-            NSError *fetchError;
-            if (![self.model.fetchEventsController performFetch:&fetchError]) {
-                NSLog(@"Error fetching: %@", fetchError);
-            }
-        }
-        [[self tableView] reloadData];
-        [self setEmptyMessage];
-        [[self view] setUserInteractionEnabled:YES];
-    });
-}
-
 #pragma mark - MCReturnPaymentViewControllerDelegate
 
 #pragma mark - NSFetchedResultsControllerDelegate

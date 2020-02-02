@@ -21,6 +21,7 @@
 
 @property (nonatomic, strong) MCTwoLabelsTitleView *twoLabelTitleView;
 
+@property (nonatomic, weak) IBOutlet UIScrollView *scrollView;
 @property (nonatomic, weak) IBOutlet UIImageView *pictureView;
 @property (nonatomic, weak) IBOutlet UITextField *firstNameField;
 @property (nonatomic, strong) MCNameTextInputValidator *firstNameFieldValidator;
@@ -30,6 +31,7 @@
 @property (nonatomic, weak) IBOutlet UIButton *selectEmailAddressButton;
 @property (nonatomic, strong) MCEmailTextInputProxy *emailTextInputReceiver;
 
+@property (nonatomic, strong) IBOutlet MCScrollViewAdjusterToKeyboard *keyboardNotificationHandler;
 @property (nonatomic, strong) IBOutlet MCPersonModel *model;
 
 @end
@@ -134,14 +136,14 @@
 #pragma mark - MCAdBannerEngineDelegate
 
 - (void)adEngine:(MCAdBannerEngine *)adEngine putOnScreenBannerView:(GADBannerView *)bannerView {
-    [UIView animateWithDuration:0.3 delay:0.0 options:UIViewAnimationOptionCurveEaseOut animations:^{
-        self.worstSalesPitchEverView.hidden = NO;
+    [UIView animateWithDuration:0.35 delay:0.0 options:UIViewAnimationOptionCurveEaseOut animations:^{
+        self.worstSalesPitchEverView.alpha = 1;
     } completion:nil];
 }
 
 - (void)adEngine:(MCAdBannerEngine *)adEngine putOffScreenBannerView:(GADBannerView *)bannerView {
-    [UIView animateWithDuration:0.3 delay:0.0 options:UIViewAnimationOptionCurveEaseOut animations:^{
-        self.worstSalesPitchEverView.hidden = YES;
+    [UIView animateWithDuration:0.35 delay:0.0 options:UIViewAnimationOptionCurveEaseOut animations:^{
+        self.worstSalesPitchEverView.alpha = 0;
     } completion:nil];
 }
 
@@ -165,6 +167,10 @@
     MCEmailTextInputValidator *validator = [[MCEmailTextInputValidator alloc] initWithTextField:_emailField andModel:_model];
     MCEmailTextInputPicker *picker = [[MCEmailTextInputPicker alloc] initWithTextField:_emailField andModel:_model];
     _emailTextInputReceiver = [[MCEmailTextInputProxy alloc] initWithValidator:validator andPicker:picker andTarget:MCEmailTextInputProxyTargetValidator];
+    
+    [_keyboardNotificationHandler prepareForUseWithScrollView:_scrollView andTextFields:@[_firstNameField, _lastNameField, _emailField]];
+    
+    self.worstSalesPitchEverView.alpha = 0;
 }
 
 - (void)viewWillAppear:(BOOL)animated {
@@ -192,6 +198,14 @@
     
     // Dismiss the keyboard on backgroundtap.
     [self startResigningFirstResponderOnBackgroundTap];
+    
+    [_keyboardNotificationHandler start];
+}
+
+- (void)viewWillDisappear:(BOOL)animated {
+    [super viewWillDisappear:animated];
+    
+    [_keyboardNotificationHandler stop];
 }
 
 - (void)prepareForSegue:(UIStoryboardSegue *)segue sender:(id)sender {

@@ -239,7 +239,12 @@
 #pragma mark - MCGenericAdBannerViewController
 
 - (NSString *)adUnitId {
+#ifdef DEBUG
+    // This is a test Unit ID for banner from Google themselves.
+    return @"ca-app-pub-3940256099942544/2934735716";
+#else
     return @"ca-app-pub-5354415674074435/1457854707";
+#endif
 }
 
 #pragma mark - AdEngineDelegate
@@ -293,15 +298,10 @@
     [[NSNotificationCenter defaultCenter] removeObserver:self name:UIApplicationWillEnterForegroundNotification object:nil];
 }
 
-- (void)willMoveToParentViewController:(UIViewController *)parent
-{
+- (void)willMoveToParentViewController:(UIViewController *)parent {
     if (!parent) {
         // Parent is null when back button is pressed in navigationbar
-        
-        UIView *firstResponder = [[self view] getFirstResponder];
-        if (firstResponder) {
-            [firstResponder resignFirstResponder];
-        }
+        [self.view endEditing:YES];
         [_tonightsBill deleteIfStillNew];
         [[MCWeAllPayStoreController defaultStore] saveMainThreadContext];
     }

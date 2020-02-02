@@ -13,7 +13,6 @@
 
 NS_ASSUME_NONNULL_BEGIN
 
-NS_SWIFT_NAME(GenericAdBannerTableViewController)
 @interface MCGenericAdBannerTableViewController : UITableViewController
 
 @property (weak, nonatomic) IBOutlet GADBannerView *worstSalesPitchEverView;

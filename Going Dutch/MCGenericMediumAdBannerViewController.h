@@ -15,7 +15,7 @@ NS_ASSUME_NONNULL_BEGIN
 
 @interface MCGenericMediumAdBannerViewController : UIViewController
 
-@property (weak, nonatomic) IBOutlet DFPBannerView *worstSalesPitchEverView;
+@property (weak, nonatomic) IBOutlet GADBannerView *worstSalesPitchEverView;
 @property (strong, nonatomic) IBOutlet MCAdBannerEngine *adBannerEngine;
 @property (nonatomic, readonly) NSString *adUnitId;
 

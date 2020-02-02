@@ -36,8 +36,15 @@ typedef NS_ENUM(BOOL, MCXRateStatus) {
 #pragma mark - IBAction
 
 - (IBAction)mainCancelButton:(id)sender {
-    if (self.adEngine.interstitialAd.isReady) {
-        [self.adEngine putOnScreenIfAvailableWithPresentingViewController:self];
+    if (_solution == nil || _solution.count == 0) {
+        _dismissMe();
+    } else if (self.adEngine.interstitialAd.isReady) {
+        NSError *adError;
+        [self.adEngine putOnScreenIfAvailableWithPresentingViewController:self error:&adError];
+        if (adError) {
+            NSLog(@"Error: Unable to show interstitial: %@", adError);
+            _dismissMe();
+        }
     } else {
         _dismissMe();
     }
@@ -177,7 +184,11 @@ typedef NS_ENUM(BOOL, MCXRateStatus) {
 #pragma mark - MCGenericInterstitialAdTableViewController
 
 - (NSString *)adUnitId {
+#ifdef DEBUG
+    return @"ca-app-pub-3940256099942544/4411468910";
+#else
     return @"ca-app-pub-5354415674074435/8899635256";
+#endif
 }
 
 #pragma mark - MCInterstitialAdEngineDelegate

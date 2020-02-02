@@ -42,19 +42,15 @@ import GoogleMobileAds
         }
     }
     
-    @objc(putOnScreenIfAvailableWithPresentingViewController:) func putOnScreenIfAvailable(with presentingVienController: UIViewController) {
+    @objc(putOnScreenIfAvailableWithPresentingViewController:error:) func putOnScreenIfAvailable(with presentingVienController: UIViewController) throws {
         guard self.interstitialAd.isReady else {
             return
         }
         
-        do {
-            self.viewController = presentingVienController
-            try self.interstitialAd.canPresent(fromRootViewController: presentingVienController)
-            self.interstitialAd.present(fromRootViewController: presentingVienController)
-            self.isOnScreen = true
-        } catch {
-            fatalError("Should be able to present on this viewController: \(presentingVienController)")
-        }
+        self.viewController = presentingVienController
+        try self.interstitialAd.canPresent(fromRootViewController: presentingVienController)
+        self.interstitialAd.present(fromRootViewController: presentingVienController)
+        self.isOnScreen = true
     }
     
     func putOffScreen() {

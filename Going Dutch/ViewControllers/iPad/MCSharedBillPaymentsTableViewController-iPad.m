@@ -72,37 +72,6 @@
     }
 }
 
-#pragma mark - Core Data Notifications
-
-- (void)storeWillBeSwapped:(NSNotification *)notification {
-    [super storeWillBeSwapped:notification];
-    typeof(self) weakSelf = self;
-    dispatch_sync(dispatch_get_main_queue(), ^{
-        typeof(weakSelf) strongSelf = weakSelf;
-        if (strongSelf) {
-            self.view.userInteractionEnabled = NO;
-        }
-    });
-}
-
-- (void)storeDidSwap:(NSNotification *)notification {
-    [super storeDidSwap:notification];
-    typeof(self) weakSelf = self;
-    dispatch_sync(dispatch_get_main_queue(), ^{
-        typeof(self) strongSelf = weakSelf;
-        if (strongSelf) {
-            if (strongSelf.dataController) {
-                NSError *fetchError;
-                if (![strongSelf.dataController performFetch:&fetchError]) {
-                    NSLog(@"Error fetching: %@", fetchError);
-                }
-            }
-            [[strongSelf tableView] reloadData];
-            strongSelf.view.userInteractionEnabled = YES;
-        }
-    });
-}
-
 #pragma mark - NSFetchedResultsControllerDelegate
 
 - (void)controllerWillChangeContent:(NSFetchedResultsController *)controller {

@@ -362,8 +362,6 @@ NSString * const MCiCloudWeAllPayStoreName = @"iCloud-WeAllPayStore";
     [dc addObserver:self selector:@selector(storeWillSave:) name:NSManagedObjectContextWillSaveNotification object:_backgroundThreadContext];
     [dc addObserver:self selector:@selector(storeDidSave:) name:NSManagedObjectContextDidSaveNotification object:_mainThreadContext];
     [dc addObserver:self selector:@selector(storeDidSave:) name:NSManagedObjectContextDidSaveNotification object:_backgroundThreadContext];
-    [dc addObserver:self selector:@selector(storeWillBeSwapped:) name:NSPersistentStoreCoordinatorStoresWillChangeNotification object:_persistentStoreCoordinator];
-    [dc addObserver:self selector:@selector(storeDidSwap:) name:NSPersistentStoreCoordinatorStoresDidChangeNotification object:_persistentStoreCoordinator];
 }
 
 - (void)stopRespondingToStorechangeNotifications
@@ -400,37 +398,6 @@ NSString * const MCiCloudWeAllPayStoreName = @"iCloud-WeAllPayStore";
             [self.backgroundThreadContext mergeChangesFromContextDidSaveNotification:notification];
         }];
     }
-}
-
-- (void)storeWillBeSwapped:(NSNotification *)notification
-{
-#ifdef DEBUG
-    NSLog(@"MCWeAllPayStoreController: Store will be swapped.");
-#endif
-    // Has main Context changes if yes save.
-    [_mainThreadContext performBlockAndWait:^{
-        if ([self.mainThreadContext hasChanges]) {
-            [self saveMainThreadContext];
-        }
-    // mainContext reset.
-        [self.mainThreadContext reset];
-    }];
-    // Has backgroundContext changes if yes save.
-    [_backgroundThreadContext performBlockAndWait:^{
-        if ([self->_backgroundThreadContext hasChanges]) {
-            [self savebackgroundContext];
-        }
-    // backgroundContext reset.
-        [self->_backgroundThreadContext reset];
-    }];
-
-}
-
-- (void)storeDidSwap:(NSNotification *)notification
-{
-#ifdef DEBUG
-    NSLog(@"MCWeAllPayStoreController: Store did swap.");
-#endif
 }
 
 #pragma mark - Core Data Stack

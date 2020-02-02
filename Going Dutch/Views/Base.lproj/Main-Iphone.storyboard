@@ -617,8 +617,17 @@
                                     <outlet property="whoOwesWhoLabel" destination="1oB-AD-QyT" id="i5E-Sh-pVG"/>
                                 </connections>
                             </tableViewCell>
+                            <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" preservesSuperviewLayoutMargins="YES" selectionStyle="none" indentationWidth="10" reuseIdentifier="MCAdBannerTableViewCell" id="ctr-BF-qDe" customClass="MCAdBannerTableViewCell">
+                                <rect key="frame" x="0.0" y="147" width="375" height="43.666667938232422"/>
+                                <autoresizingMask key="autoresizingMask"/>
+                                <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" preservesSuperviewLayoutMargins="YES" insetsLayoutMarginsFromSafeArea="NO" tableViewCell="ctr-BF-qDe" id="98z-Tx-hs0">
+                                    <rect key="frame" x="0.0" y="0.0" width="375" height="43.666667938232422"/>
+                                    <autoresizingMask key="autoresizingMask"/>
+                                </tableViewCellContentView>
+                                <accessibility key="accessibilityConfiguration" identifier="MCAdBannerTableViewCell"/>
+                            </tableViewCell>
                             <tableViewCell contentMode="scaleToFill" restorationIdentifier="MCSolutionOverViewTableViewCell_iPhone" selectionStyle="none" hidesAccessoryWhenEditing="NO" indentationLevel="1" indentationWidth="0.0" reuseIdentifier="MCSolutionOverViewTableViewCell_iPhone" id="AeB-PX-SS3" customClass="MCSolutionOverViewTableViewCell_iPhone" customModule="We_all_pay" customModuleProvider="target">
-                                <rect key="frame" x="0.0" y="147" width="375" height="41.666667938232422"/>
+                                <rect key="frame" x="0.0" y="190.66666793823242" width="375" height="41.666667938232422"/>
                                 <autoresizingMask key="autoresizingMask"/>
                                 <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" tableViewCell="AeB-PX-SS3" id="S1p-0e-b3A">
                                     <rect key="frame" x="0.0" y="0.0" width="375" height="41.666667938232422"/>
@@ -666,7 +675,7 @@
                                 </connections>
                             </tableViewCell>
                             <tableViewCell contentMode="scaleToFill" restorationIdentifier="MCWhoPaidHowMuchTableViewCell_iPhone" selectionStyle="default" indentationWidth="10" reuseIdentifier="MCWhoPaidHowMuchTableViewCell_iPhone" id="rCL-6C-Xqz" customClass="MCWhoPaidHowMuchTableViewCell_iPhone" customModule="We_all_pay" customModuleProvider="target">
-                                <rect key="frame" x="0.0" y="188.66666793823242" width="375" height="41.666667938232422"/>
+                                <rect key="frame" x="0.0" y="232.33333587646484" width="375" height="41.666667938232422"/>
                                 <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                                 <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" restorationIdentifier="contentView" tableViewCell="rCL-6C-Xqz" id="yHy-np-QOe">
                                     <rect key="frame" x="0.0" y="0.0" width="375" height="41.666667938232422"/>
@@ -728,8 +737,12 @@
                     <simulatedStatusBarMetrics key="simulatedStatusBarMetrics" statusBarStyle="lightContent"/>
                     <simulatedNavigationBarMetrics key="simulatedTopBarMetrics" translucent="NO" prompted="NO"/>
                     <nil key="simulatedBottomBarMetrics"/>
+                    <connections>
+                        <outlet property="adBannerEngine" destination="XfM-xE-BZB" id="PIf-7l-DzT"/>
+                    </connections>
                 </tableViewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="Ohk-bB-ROF" userLabel="First Responder" sceneMemberID="firstResponder"/>
+                <customObject id="XfM-xE-BZB" customClass="MCAdBannerEngine"/>
             </objects>
             <point key="canvasLocation" x="4338.3999999999996" y="1480.7881773399015"/>
         </scene>
@@ -814,7 +827,7 @@
                                                         <constraint firstAttribute="width" relation="greaterThanOrEqual" priority="750" constant="44" id="cuG-DW-DOP"/>
                                                     </constraints>
                                                 </imageView>
-                                                <stackView opaque="NO" contentMode="scaleToFill" axis="vertical" distribution="equalSpacing" spacing="6" translatesAutoresizingMaskIntoConstraints="NO" id="Pgs-ka-nFX">
+                                                <stackView opaque="NO" contentMode="scaleToFill" verticalHuggingPriority="750" axis="vertical" distribution="equalSpacing" spacing="6" translatesAutoresizingMaskIntoConstraints="NO" id="Pgs-ka-nFX">
                                                     <rect key="frame" x="58" y="0.0" width="229" height="40.666666666666664"/>
                                                     <subviews>
                                                         <label opaque="NO" clipsSubviews="YES" userInteractionEnabled="NO" contentMode="left" restorationIdentifier="nameLabel" text="1" lineBreakMode="tailTruncation" numberOfLines="0" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="b9P-q2-ulM" userLabel="fullName">
@@ -965,7 +978,7 @@
                                                             <constraint firstItem="eky-6N-svd" firstAttribute="trailing" secondItem="GN1-dN-HP2" secondAttribute="trailing" id="b4I-U8-bul"/>
                                                         </constraints>
                                                     </stackView>
-                                                    <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="g3p-zb-dy0" customClass="DFPBannerView">
+                                                    <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="g3p-zb-dy0" customClass="GADBannerView">
                                                         <rect key="frame" x="17.666666666666657" y="333" width="300" height="250"/>
                                                         <color key="backgroundColor" systemColor="systemBackgroundColor" cocoaTouchSystemColor="whiteColor"/>
                                                         <constraints>
@@ -1010,6 +1023,9 @@
                     <navigationItem key="navigationItem" title="Person" id="YXl-NB-NJJ">
                         <barButtonItem key="leftBarButtonItem" image="barbutton - cancel" id="nvM-MT-hWV">
                             <color key="tintColor" name="button - enabled"/>
+                            <userDefinedRuntimeAttributes>
+                                <userDefinedRuntimeAttribute type="string" keyPath="accessibilityIdentifier" value="Cancel"/>
+                            </userDefinedRuntimeAttributes>
                             <connections>
                                 <action selector="cancelButtonPressed:" destination="5gk-H5-rXD" id="lTR-ft-v9D"/>
                             </connections>
@@ -1025,9 +1041,11 @@
                         <outlet property="adBannerEngine" destination="bd3-jn-cX4" id="1pu-rm-PH9"/>
                         <outlet property="emailField" destination="xVh-Xm-oA9" id="rAz-51-Pe4"/>
                         <outlet property="firstNameField" destination="GN1-dN-HP2" id="QfC-yN-Ulp"/>
+                        <outlet property="keyboardNotificationHandler" destination="De6-a2-hHV" id="oMj-Py-gtC"/>
                         <outlet property="lastNameField" destination="alT-pu-m9B" id="eGG-xd-AZ1"/>
                         <outlet property="model" destination="RYr-B0-7YP" id="LZJ-Jh-rtH"/>
                         <outlet property="pictureView" destination="jMQ-DN-rdu" id="O5l-PF-H4C"/>
+                        <outlet property="scrollView" destination="LRt-Bn-rJz" id="cEW-Pd-AYb"/>
                         <outlet property="selectEmailAddressButton" destination="BUE-es-n4t" id="uLy-3b-fkJ"/>
                         <outlet property="worstSalesPitchEverView" destination="g3p-zb-dy0" id="q5S-sF-04d"/>
                         <segue destination="KCD-1Q-SRW" kind="popoverPresentation" identifier="openSelectEmailAddress" popoverAnchorView="BUE-es-n4t" id="hGI-77-PTT">
@@ -1036,6 +1054,7 @@
                     </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="EKP-xb-u6V" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
+                <customObject id="De6-a2-hHV" customClass="MCScrollViewAdjusterToKeyboard"/>
                 <customObject id="RYr-B0-7YP" customClass="MCPersonModel"/>
                 <customObject id="bd3-jn-cX4" customClass="MCAdBannerEngine"/>
             </objects>
@@ -1082,8 +1101,8 @@
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <color key="backgroundColor" red="1" green="1" blue="1" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                         <inset key="separatorInset" minX="88" minY="0.0" maxX="0.0" maxY="0.0"/>
-                        <view key="tableHeaderView" contentMode="scaleToFill" misplaced="YES" restorationIdentifier="paymentHeaderView" translatesAutoresizingMaskIntoConstraints="NO" id="msZ-li-bka" customClass="UITableViewHeaderFooterView">
-                            <rect key="frame" x="0.0" y="0.0" width="375" height="310"/>
+                        <view key="tableHeaderView" contentMode="scaleToFill" restorationIdentifier="paymentHeaderView" translatesAutoresizingMaskIntoConstraints="NO" id="msZ-li-bka" customClass="UITableViewHeaderFooterView">
+                            <rect key="frame" x="0.0" y="0.0" width="375" height="340"/>
                             <subviews>
                                 <stackView opaque="NO" contentMode="scaleToFill" axis="vertical" distribution="equalSpacing" spacing="8" translatesAutoresizingMaskIntoConstraints="NO" id="qs4-hY-OKe" userLabel="Main Stack View">
                                     <rect key="frame" x="0.0" y="10" width="395" height="330"/>
@@ -1244,7 +1263,7 @@
                                         <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="iF7-Nz-3na">
                                             <rect key="frame" x="0.0" y="252" width="395" height="50"/>
                                             <subviews>
-                                                <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="bbf-I9-yWg" customClass="DFPBannerView">
+                                                <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="bbf-I9-yWg" customClass="GADBannerView">
                                                     <rect key="frame" x="37.666666666666657" y="0.0" width="320" height="50"/>
                                                     <color key="backgroundColor" systemColor="systemBackgroundColor" cocoaTouchSystemColor="whiteColor"/>
                                                     <constraints>
@@ -1258,7 +1277,6 @@
                                                 <constraint firstItem="bbf-I9-yWg" firstAttribute="centerX" secondItem="iF7-Nz-3na" secondAttribute="centerX" id="eXc-ta-wPT"/>
                                                 <constraint firstAttribute="bottom" secondItem="bbf-I9-yWg" secondAttribute="bottom" priority="999" id="gWh-jA-Ac4"/>
                                                 <constraint firstItem="bbf-I9-yWg" firstAttribute="top" secondItem="iF7-Nz-3na" secondAttribute="top" id="lVc-Ho-ccz"/>
-                                                <constraint firstAttribute="height" priority="251" constant="50" id="wQF-U7-3Ug"/>
                                             </constraints>
                                         </view>
                                         <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="e6E-Uh-FE0">
@@ -1285,16 +1303,16 @@
                                 </stackView>
                             </subviews>
                             <constraints>
-                                <constraint firstItem="qs4-hY-OKe" firstAttribute="leading" secondItem="msZ-li-bka" secondAttribute="leading" id="Hx4-QV-wfw"/>
+                                <constraint firstItem="qs4-hY-OKe" firstAttribute="leading" secondItem="YKs-7U-wo6" secondAttribute="leading" id="Hx4-QV-wfw"/>
                                 <constraint firstItem="qs4-hY-OKe" firstAttribute="top" secondItem="msZ-li-bka" secondAttribute="top" constant="10" id="J3K-6S-wTw"/>
                                 <constraint firstAttribute="bottom" secondItem="qs4-hY-OKe" secondAttribute="bottom" priority="999" id="j6Z-Nf-0X8"/>
-                                <constraint firstAttribute="trailing" secondItem="qs4-hY-OKe" secondAttribute="trailing" id="jSt-4q-1Lr"/>
+                                <constraint firstItem="YKs-7U-wo6" firstAttribute="trailing" secondItem="qs4-hY-OKe" secondAttribute="trailing" id="jSt-4q-1Lr"/>
                             </constraints>
                             <viewLayoutGuide key="safeArea" id="YKs-7U-wo6"/>
                         </view>
                         <prototypes>
                             <tableViewCell contentMode="scaleToFill" restorationIdentifier="paymentPresenceCell" selectionStyle="none" hidesAccessoryWhenEditing="NO" indentationLevel="1" indentationWidth="0.0" reuseIdentifier="paymentPresenceCell_iPhone" rowHeight="52" id="AcN-yE-tRP" customClass="MCPaymentPresenceTableViewCell_iPhone" customModule="We_all_pay" customModuleProvider="target">
-                                <rect key="frame" x="0.0" y="338" width="375" height="52"/>
+                                <rect key="frame" x="0.0" y="368" width="375" height="52"/>
                                 <autoresizingMask key="autoresizingMask"/>
                                 <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" restorationIdentifier="tableViewCellContent" tableViewCell="AcN-yE-tRP" id="WHI-GF-nBf">
                                     <rect key="frame" x="0.0" y="0.0" width="375" height="52"/>

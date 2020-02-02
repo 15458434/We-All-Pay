@@ -150,7 +150,10 @@
 }
 
 - (void)viewDidLoad {
+#ifdef SCREENSHOTS
+#else
     MCAdEngine.isEnabled = !MCStoreInterface.defaultStoreInterface.isProProductPurchased;
+#endif
     [super viewDidLoad];
     // Do any additional setup after loading the view.
     [self.navigationController setToolbarHidden:YES animated:YES];
@@ -194,11 +197,7 @@
 - (void)willMoveToParentViewController:(UIViewController *)parent {
     if (!parent) {
         // Parent is null when back button is pressed in navigationbar
-        
-        UIView *firstResponder = [[self view] getFirstResponder];
-        if (firstResponder) {
-            [firstResponder resignFirstResponder];
-        }
+        [self.view endEditing:YES];
         [_tonightsBill deleteIfStillNew];
         [[MCWeAllPayStoreController defaultStore] saveMainThreadContext];
     }

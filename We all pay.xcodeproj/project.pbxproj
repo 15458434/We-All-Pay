@@ -17,7 +17,6 @@
 		381275FF1BBD84650004C8C2 /* InfoScreenTableViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 381275FE1BBD84650004C8C2 /* InfoScreenTableViewController.swift */; };
 		381276041BBD8F130004C8C2 /* InfoPlist.strings in Resources */ = {isa = PBXBuildFile; fileRef = 381276061BBD8F130004C8C2 /* InfoPlist.strings */; };
 		381276081BBE68F10004C8C2 /* InfoScreenContainerViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 381276071BBE68F10004C8C2 /* InfoScreenContainerViewController.swift */; };
-		3812760A1BBE74520004C8C2 /* UIViewExtension.swift in Sources */ = {isa = PBXBuildFile; fileRef = 381276091BBE74520004C8C2 /* UIViewExtension.swift */; };
 		3812760C1BBE74EF0004C8C2 /* UIViewControllerExtension.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3812760B1BBE74EF0004C8C2 /* UIViewControllerExtension.swift */; };
 		3812760E1BBE76B40004C8C2 /* PaymentViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3812760D1BBE76B40004C8C2 /* PaymentViewController.swift */; };
 		381276101BBE9A7F0004C8C2 /* MCPaymentPresenceTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3812760F1BBE9A7F0004C8C2 /* MCPaymentPresenceTableViewCell.swift */; };
@@ -73,11 +72,14 @@
 		3860575019EE963600BD5B78 /* categoryPictures.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 3860574F19EE963600BD5B78 /* categoryPictures.xcassets */; };
 		3860575519EEB28300BD5B78 /* MCCategoryPictureStoreTest.m in Sources */ = {isa = PBXBuildFile; fileRef = 3860575419EEB28300BD5B78 /* MCCategoryPictureStoreTest.m */; };
 		3863148D235C6D8C00748B9F /* ScreenshotPopulationEngine.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3863148C235C6D8B00748B9F /* ScreenshotPopulationEngine.swift */; };
+		3867253B23DB248E009607E8 /* fastlane in Resources */ = {isa = PBXBuildFile; fileRef = 3867253A23DB248E009607E8 /* fastlane */; };
 		3867CE4718704B2E001EC222 /* Main-Iphone.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 3867CE4918704B2E001EC222 /* Main-Iphone.storyboard */; };
 		3867CE5118704DAF001EC222 /* MCTableEmptyMessage.xib in Resources */ = {isa = PBXBuildFile; fileRef = 3867CE5318704DAF001EC222 /* MCTableEmptyMessage.xib */; };
 		3868780623721751003D40A9 /* EmailTextInputValidator.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3868780523721751003D40A9 /* EmailTextInputValidator.swift */; };
 		38687808237217B3003D40A9 /* TextInputValidator.swift in Sources */ = {isa = PBXBuildFile; fileRef = 38687807237217B3003D40A9 /* TextInputValidator.swift */; };
 		3868780A23721967003D40A9 /* PersonModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3868780923721967003D40A9 /* PersonModel.swift */; };
+		38696B6823DCD24E00E941EA /* Screenshots.swift in Sources */ = {isa = PBXBuildFile; fileRef = 38696B6723DCD24E00E941EA /* Screenshots.swift */; };
+		38696B7223DCD2B200E941EA /* SnapshotHelper.swift in Sources */ = {isa = PBXBuildFile; fileRef = 38696B7123DCD2B200E941EA /* SnapshotHelper.swift */; };
 		386EB43323C723BE00FB20B9 /* AdEngine.swift in Sources */ = {isa = PBXBuildFile; fileRef = 386EB43223C723BE00FB20B9 /* AdEngine.swift */; };
 		386FC32518E5855400428294 /* MCSharedBillMainViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 386FC32418E5855400428294 /* MCSharedBillMainViewController.m */; };
 		3870C22A1D34FDF80030035A /* We all pay app keywords.plist in Resources */ = {isa = PBXBuildFile; fileRef = 3870C22C1D34FDF80030035A /* We all pay app keywords.plist */; };
@@ -156,6 +158,7 @@
 		38B88E2E1D81FF6E0069A44D /* MailComposeViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 38B88E2D1D81FF6E0069A44D /* MailComposeViewController.swift */; };
 		38C1956323C8C575006255AE /* MCGenericAdBannerViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 38C1956223C8C575006255AE /* MCGenericAdBannerViewController.m */; };
 		38C3AB151CBCF3200011C10C /* ViewControllerProtocols.swift in Sources */ = {isa = PBXBuildFile; fileRef = 38C3AB141CBCF3200011C10C /* ViewControllerProtocols.swift */; };
+		38C44BCE23DEDEC900264BBB /* ScrollViewAdjusterToKeyboard.swift in Sources */ = {isa = PBXBuildFile; fileRef = 38C44BCD23DEDEC900264BBB /* ScrollViewAdjusterToKeyboard.swift */; };
 		38C700F21D8EC24100D785BB /* LaunchCounter.swift in Sources */ = {isa = PBXBuildFile; fileRef = 38C700F11D8EC24100D785BB /* LaunchCounter.swift */; };
 		38CDE90017135B6300387CAA /* MCTools.m in Sources */ = {isa = PBXBuildFile; fileRef = 38CDE8FF17135B6300387CAA /* MCTools.m */; };
 		38D177111C3A5E640084604C /* SelectCategoryTableViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 38D177101C3A5E640084604C /* SelectCategoryTableViewController.swift */; };
@@ -173,6 +176,8 @@
 		38D6A3EB1C73E64E00968BB2 /* InfoPlist.strings in Resources */ = {isa = PBXBuildFile; fileRef = 38D6A3ED1C73E64E00968BB2 /* InfoPlist.strings */; };
 		38D6A3F01C73E64F00968BB2 /* InfoPlist.strings in Resources */ = {isa = PBXBuildFile; fileRef = 38D6A3F21C73E64F00968BB2 /* InfoPlist.strings */; };
 		38D796151B2F1CBD00F3872F /* ExchangeRateFetcherForMCExchangeRate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 38D796141B2F1CBD00F3872F /* ExchangeRateFetcherForMCExchangeRate.swift */; };
+		38D96ED423E30F5E00C03170 /* MCAdBannerTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 38D96ED323E30F5E00C03170 /* MCAdBannerTableViewCell.swift */; };
+		38D96ED623E31BE000C03170 /* MCBitwiseStuff.m in Sources */ = {isa = PBXBuildFile; fileRef = 38D96ED523E31BE000C03170 /* MCBitwiseStuff.m */; };
 		38DB85D417E45BCA006237CF /* MCPayment+addons.m in Sources */ = {isa = PBXBuildFile; fileRef = 38DB85D317E45BCA006237CF /* MCPayment+addons.m */; };
 		38DB85D717E45CA4006237CF /* MCSharedBill+addons.m in Sources */ = {isa = PBXBuildFile; fileRef = 38DB85D617E45CA4006237CF /* MCSharedBill+addons.m */; };
 		38DB85DA17E45DEA006237CF /* MCPerson+addons.m in Sources */ = {isa = PBXBuildFile; fileRef = 38DB85D917E45DEA006237CF /* MCPerson+addons.m */; };
@@ -232,6 +237,13 @@
 			remoteInfo = "Who is paying next";
 		};
 		385F530A191C2C360012773D /* PBXContainerItemProxy */ = {
+			isa = PBXContainerItemProxy;
+			containerPortal = 38572AC9169D437B00969C62 /* Project object */;
+			proxyType = 1;
+			remoteGlobalIDString = 38572AD1169D437B00969C62;
+			remoteInfo = "We all pay";
+		};
+		38696B6A23DCD24E00E941EA /* PBXContainerItemProxy */ = {
 			isa = PBXContainerItemProxy;
 			containerPortal = 38572AC9169D437B00969C62 /* Project object */;
 			proxyType = 1;
@@ -339,7 +351,6 @@
 		381276011BBD8F120004C8C2 /* nl */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = nl; path = nl.lproj/InfoPlist.strings; sourceTree = "<group>"; };
 		381276051BBD8F130004C8C2 /* nl */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = nl; path = nl.lproj/InfoPlist.strings; sourceTree = "<group>"; };
 		381276071BBE68F10004C8C2 /* InfoScreenContainerViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = InfoScreenContainerViewController.swift; sourceTree = "<group>"; };
-		381276091BBE74520004C8C2 /* UIViewExtension.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = UIViewExtension.swift; sourceTree = "<group>"; };
 		3812760B1BBE74EF0004C8C2 /* UIViewControllerExtension.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = UIViewControllerExtension.swift; sourceTree = "<group>"; };
 		3812760D1BBE76B40004C8C2 /* PaymentViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = PaymentViewController.swift; sourceTree = "<group>"; };
 		3812760F1BBE9A7F0004C8C2 /* MCPaymentPresenceTableViewCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = MCPaymentPresenceTableViewCell.swift; sourceTree = "<group>"; };
@@ -403,6 +414,7 @@
 		3860575419EEB28300BD5B78 /* MCCategoryPictureStoreTest.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = MCCategoryPictureStoreTest.m; sourceTree = "<group>"; };
 		3861739F1A530371000C2EE5 /* MCPathComponentsToOpenProtocol.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = MCPathComponentsToOpenProtocol.h; sourceTree = "<group>"; };
 		3863148C235C6D8B00748B9F /* ScreenshotPopulationEngine.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = ScreenshotPopulationEngine.swift; path = "Going Dutch/ScreenshotPopulationEngine.swift"; sourceTree = SOURCE_ROOT; };
+		3867253A23DB248E009607E8 /* fastlane */ = {isa = PBXFileReference; lastKnownFileType = folder; path = fastlane; sourceTree = "<group>"; };
 		3867CE4018703E9A001EC222 /* nl */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.strings; name = nl; path = nl.lproj/InfoPlist.strings; sourceTree = "<group>"; };
 		3867CE4A18704B48001EC222 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = "Base.lproj/Main-Iphone.storyboard"; sourceTree = "<group>"; };
 		3867CE4D18704C60001EC222 /* Base */ = {isa = PBXFileReference; fileEncoding = 10; lastKnownFileType = text.plist.strings; name = Base; path = Base.lproj/InfoPlist.strings; sourceTree = "<group>"; };
@@ -411,6 +423,10 @@
 		3868780523721751003D40A9 /* EmailTextInputValidator.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = EmailTextInputValidator.swift; sourceTree = "<group>"; };
 		38687807237217B3003D40A9 /* TextInputValidator.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TextInputValidator.swift; sourceTree = "<group>"; };
 		3868780923721967003D40A9 /* PersonModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PersonModel.swift; sourceTree = "<group>"; };
+		38696B6523DCD24E00E941EA /* Screenshots.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = Screenshots.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
+		38696B6723DCD24E00E941EA /* Screenshots.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Screenshots.swift; sourceTree = "<group>"; };
+		38696B6923DCD24E00E941EA /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
+		38696B7123DCD2B200E941EA /* SnapshotHelper.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = SnapshotHelper.swift; path = fastlane/SnapshotHelper.swift; sourceTree = SOURCE_ROOT; };
 		386EB43223C723BE00FB20B9 /* AdEngine.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AdEngine.swift; sourceTree = "<group>"; };
 		386FC32318E5855400428294 /* MCSharedBillMainViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = MCSharedBillMainViewController.h; path = ViewControllers/MCSharedBillMainViewController.h; sourceTree = "<group>"; };
 		386FC32418E5855400428294 /* MCSharedBillMainViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = MCSharedBillMainViewController.m; path = ViewControllers/MCSharedBillMainViewController.m; sourceTree = "<group>"; };
@@ -527,6 +543,7 @@
 		38C1956123C8C575006255AE /* MCGenericAdBannerViewController.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = MCGenericAdBannerViewController.h; sourceTree = "<group>"; };
 		38C1956223C8C575006255AE /* MCGenericAdBannerViewController.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = MCGenericAdBannerViewController.m; sourceTree = "<group>"; };
 		38C3AB141CBCF3200011C10C /* ViewControllerProtocols.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ViewControllerProtocols.swift; sourceTree = "<group>"; };
+		38C44BCD23DEDEC900264BBB /* ScrollViewAdjusterToKeyboard.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ScrollViewAdjusterToKeyboard.swift; sourceTree = "<group>"; };
 		38C700F11D8EC24100D785BB /* LaunchCounter.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = LaunchCounter.swift; sourceTree = "<group>"; };
 		38C725031A2E082D003173E6 /* Who is paying next.entitlements */ = {isa = PBXFileReference; lastKnownFileType = text.xml; path = "Who is paying next.entitlements"; sourceTree = "<group>"; };
 		38CDE8FE17135B6300387CAA /* MCTools.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = MCTools.h; sourceTree = "<group>"; };
@@ -550,6 +567,9 @@
 		38D785FC18DC53C30074B670 /* WeAllPayStoreTests.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; name = WeAllPayStoreTests.m; path = ../WeAllPayTests/WeAllPayStoreTests.m; sourceTree = "<group>"; };
 		38D796121B2DF30800F3872F /* ExchangeRateFetcherTest.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = ExchangeRateFetcherTest.swift; path = "../We all pay Tests/ExchangeRateFetcherTest.swift"; sourceTree = "<group>"; };
 		38D796141B2F1CBD00F3872F /* ExchangeRateFetcherForMCExchangeRate.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ExchangeRateFetcherForMCExchangeRate.swift; sourceTree = "<group>"; };
+		38D96ED323E30F5E00C03170 /* MCAdBannerTableViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MCAdBannerTableViewCell.swift; sourceTree = "<group>"; };
+		38D96ED523E31BE000C03170 /* MCBitwiseStuff.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = MCBitwiseStuff.m; sourceTree = "<group>"; };
+		38D96ED723E31BF200C03170 /* MCBitwiseStuff.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = MCBitwiseStuff.h; sourceTree = "<group>"; };
 		38DB85D217E45BCA006237CF /* MCPayment+addons.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = "MCPayment+addons.h"; path = "DataStore/MCPayment+addons.h"; sourceTree = "<group>"; };
 		38DB85D317E45BCA006237CF /* MCPayment+addons.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = "MCPayment+addons.m"; path = "DataStore/MCPayment+addons.m"; sourceTree = "<group>"; };
 		38DB85D517E45CA4006237CF /* MCSharedBill+addons.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = "MCSharedBill+addons.h"; path = "DataStore/MCSharedBill+addons.h"; sourceTree = "<group>"; };
@@ -645,6 +665,13 @@
 			buildActionMask = 2147483647;
 			files = (
 				6F6301818939C1F366BBE983 /* Pods_We_all_pay_Tests.framework in Frameworks */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+		38696B6223DCD24E00E941EA /* Frameworks */ = {
+			isa = PBXFrameworksBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -794,6 +821,7 @@
 		38572AC7169D437B00969C62 = {
 			isa = PBXGroup;
 			children = (
+				3867253A23DB248E009607E8 /* fastlane */,
 				38572ADC169D437B00969C62 /* We all pay */,
 				385F5301191C2C360012773D /* We all pay Tests */,
 				38B6E0EE1A28BBAB009E69D7 /* Who is paying next */,
@@ -803,6 +831,7 @@
 				382B76EF1C398249000C203A /* CurrencyConverterTests */,
 				38D6A3BD1C73DDBF00968BB2 /* RateMeControllerForiOS */,
 				38D6A3CB1C73DDC000968BB2 /* RateMeControllerForiOSTests */,
+				38696B6623DCD24E00E941EA /* Screenshots */,
 				38572AD3169D437B00969C62 /* Products */,
 				A64C2FCC22C8F3F53074E7EB /* Pods */,
 				8AA57C6157892F74604CB04B /* Frameworks */,
@@ -821,6 +850,7 @@
 				382B76E91C398249000C203A /* CurrencyConverterTests.xctest */,
 				38D6A3BC1C73DDBF00968BB2 /* RateMeControllerForiOS.framework */,
 				38D6A3C51C73DDBF00968BB2 /* RateMeControllerForiOSTests.xctest */,
+				38696B6523DCD24E00E941EA /* Screenshots.xctest */,
 			);
 			name = Products;
 			sourceTree = "<group>";
@@ -943,6 +973,16 @@
 			name = Storyboard;
 			sourceTree = "<group>";
 		};
+		38696B6623DCD24E00E941EA /* Screenshots */ = {
+			isa = PBXGroup;
+			children = (
+				38696B6723DCD24E00E941EA /* Screenshots.swift */,
+				38696B7123DCD2B200E941EA /* SnapshotHelper.swift */,
+				38696B6923DCD24E00E941EA /* Info.plist */,
+			);
+			path = Screenshots;
+			sourceTree = "<group>";
+		};
 		386EB43123C7238400FB20B9 /* EventDetailMainViewController */ = {
 			isa = PBXGroup;
 			children = (
@@ -989,6 +1029,7 @@
 			children = (
 				382E7BDB17E5E57500A1040A /* MCReturnPaymentViewController.h */,
 				382E7BDC17E5E57500A1040A /* MCReturnPaymentViewController.m */,
+				38D96ED323E30F5E00C03170 /* MCAdBannerTableViewCell.swift */,
 				38490D2C1D7052E700A297BA /* SolutionViewController.swift */,
 			);
 			name = SolutionViewController;
@@ -1232,6 +1273,7 @@
 				389ACFE02374A1E60025139F /* EmailTextInputPicker.swift */,
 				389ACFE22374B5060025139F /* MCEmailTextInputProxy.h */,
 				389ACFE32374B5060025139F /* MCEmailTextInputProxy.m */,
+				38C44BCD23DEDEC900264BBB /* ScrollViewAdjusterToKeyboard.swift */,
 			);
 			name = Person;
 			sourceTree = "<group>";
@@ -1246,7 +1288,6 @@
 				380C48151BE1330E00C82B0F /* CurrencyFormatter.swift */,
 				38CDE8FE17135B6300387CAA /* MCTools.h */,
 				38CDE8FF17135B6300387CAA /* MCTools.m */,
-				381276091BBE74520004C8C2 /* UIViewExtension.swift */,
 				3825A82219990BA400A8885D /* UIViewController+WeAllPayStore.h */,
 				3825A82319990BA400A8885D /* UIViewController+WeAllPayStore.m */,
 				388A32741C11EA1400F7459C /* WhoPayingUserDefaultsStoreInterfaceWeAllPayExtension.swift */,
@@ -1255,6 +1296,8 @@
 				38C700F11D8EC24100D785BB /* LaunchCounter.swift */,
 				38687807237217B3003D40A9 /* TextInputValidator.swift */,
 				38FE5A072346957100BBA722 /* SideMenuTransitioner.swift */,
+				38D96ED723E31BF200C03170 /* MCBitwiseStuff.h */,
+				38D96ED523E31BE000C03170 /* MCBitwiseStuff.m */,
 			);
 			path = Miscellaneous;
 			sourceTree = "<group>";
@@ -1409,6 +1452,24 @@
 			productReference = 385F52FD191C2C360012773D /* We all pay Tests.xctest */;
 			productType = "com.apple.product-type.bundle.unit-test";
 		};
+		38696B6423DCD24E00E941EA /* Screenshots */ = {
+			isa = PBXNativeTarget;
+			buildConfigurationList = 38696B7023DCD24F00E941EA /* Build configuration list for PBXNativeTarget "Screenshots" */;
+			buildPhases = (
+				38696B6123DCD24E00E941EA /* Sources */,
+				38696B6223DCD24E00E941EA /* Frameworks */,
+				38696B6323DCD24E00E941EA /* Resources */,
+			);
+			buildRules = (
+			);
+			dependencies = (
+				38696B6B23DCD24E00E941EA /* PBXTargetDependency */,
+			);
+			name = Screenshots;
+			productName = Screenshots;
+			productReference = 38696B6523DCD24E00E941EA /* Screenshots.xctest */;
+			productType = "com.apple.product-type.bundle.ui-testing";
+		};
 		388A327B1C11EDBD00F7459C /* WhoPayingUserDefaultsStoreInterface */ = {
 			isa = PBXNativeTarget;
 			buildConfigurationList = 388A32931C11EDBD00F7459C /* Build configuration list for PBXNativeTarget "WhoPayingUserDefaultsStoreInterface" */;
@@ -1508,7 +1569,7 @@
 			attributes = {
 				CLASSPREFIX = MC;
 				LastSwiftMigration = 0700;
-				LastSwiftUpdateCheck = 0730;
+				LastSwiftUpdateCheck = 1130;
 				LastUpgradeCheck = 1010;
 				ORGANIZATIONNAME = "Mark Cornelisse";
 				TargetAttributes = {
@@ -1541,6 +1602,10 @@
 					385F52FC191C2C360012773D = {
 						DevelopmentTeam = Z6JP26PUUY;
 						LastSwiftMigration = 0940;
+						TestTargetID = 38572AD1169D437B00969C62;
+					};
+					38696B6423DCD24E00E941EA = {
+						CreatedOnToolsVersion = 11.3.1;
 						TestTargetID = 38572AD1169D437B00969C62;
 					};
 					388A327B1C11EDBD00F7459C = {
@@ -1600,6 +1665,7 @@
 				382B76E81C398249000C203A /* CurrencyConverterTests */,
 				38D6A3BB1C73DDBF00968BB2 /* RateMeControllerForiOS */,
 				38D6A3C41C73DDBF00968BB2 /* RateMeControllerForiOSTests */,
+				38696B6423DCD24E00E941EA /* Screenshots */,
 			);
 		};
 /* End PBXProject section */
@@ -1632,6 +1698,7 @@
 				387D3A911870652B0060FAF8 /* Localizable.strings in Resources */,
 				382B79CA1A419D9D00538E96 /* categoryPictures.plist in Resources */,
 				38001C9B194EE284008ACD94 /* Assets.xcassets in Resources */,
+				3867253B23DB248E009607E8 /* fastlane in Resources */,
 				38DC8B4319097FEA00762235 /* Main-iPad.storyboard in Resources */,
 				3835EBF92115C40900E2BC3F /* Settings.bundle in Resources */,
 				3860575019EE963600BD5B78 /* categoryPictures.xcassets in Resources */,
@@ -1649,6 +1716,13 @@
 			buildActionMask = 2147483647;
 			files = (
 				385F5306191C2C360012773D /* InfoPlist.strings in Resources */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+		38696B6323DCD24E00E941EA /* Resources */ = {
+			isa = PBXResourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -1824,6 +1898,7 @@
 				383D5D841C0708F800BE9F94 /* ReturnPayment.swift in Sources */,
 				384EC90C1BC2F17500A80799 /* SelectCategoryTableViewCell_iPad.swift in Sources */,
 				38A8F2A923C2883600CB3B73 /* PayerTextInputPicker.swift in Sources */,
+				38C44BCE23DEDEC900264BBB /* ScrollViewAdjusterToKeyboard.swift in Sources */,
 				3812760E1BBE76B40004C8C2 /* PaymentViewController.swift in Sources */,
 				38977E4F1B2A26D4008484A4 /* MCTwoLabelIscreenTableViewCell.swift in Sources */,
 				38490D2D1D7052E700A297BA /* SolutionViewController.swift in Sources */,
@@ -1872,6 +1947,7 @@
 				38977E5B1B2A30A7008484A4 /* MCWhoOwesWhoTableViewCell_iPhone.swift in Sources */,
 				38E2CB661BC2EA6C0092B5C8 /* RootViewController.swift in Sources */,
 				38F44CCB2364993400215B1C /* MoneyTextInputValidator.swift in Sources */,
+				38D96ED623E31BE000C03170 /* MCBitwiseStuff.m in Sources */,
 				38E2CB401BC2A5A20092B5C8 /* SolutionOverViewTableViewCell_iPad.swift in Sources */,
 				38490D2F1D7056D100A297BA /* ShowMailViewProtocol.swift in Sources */,
 				387494D419F053C2001614CA /* WeAllPayStore3to4.xcmappingmodel in Sources */,
@@ -1904,7 +1980,6 @@
 				381275FF1BBD84650004C8C2 /* InfoScreenTableViewController.swift in Sources */,
 				38C700F21D8EC24100D785BB /* LaunchCounter.swift in Sources */,
 				38E0C5EA18E9B2BD005A3F17 /* MCAllTripsTableViewController-iPad.m in Sources */,
-				3812760A1BBE74520004C8C2 /* UIViewExtension.swift in Sources */,
 				3892E3A417903EF00038894B /* MCEditTripViewController.m in Sources */,
 				381276081BBE68F10004C8C2 /* InfoScreenContainerViewController.swift in Sources */,
 				38977E571B2A2C57008484A4 /* MCPaymentPresenceTableViewCell_iPhone.swift in Sources */,
@@ -1920,6 +1995,7 @@
 				389950A4191A90F1000B00BC /* MCPaymentPresence+addons.m in Sources */,
 				389ACFE12374A1E60025139F /* EmailTextInputPicker.swift in Sources */,
 				389DE90E197FD41900169645 /* MCCurrency+addons.m in Sources */,
+				38D96ED423E30F5E00C03170 /* MCAdBannerTableViewCell.swift in Sources */,
 				384EC9121BC3008300A80799 /* SelectEmailAddressTableViewController_iPad.swift in Sources */,
 				38B88E2E1D81FF6E0069A44D /* MailComposeViewController.swift in Sources */,
 				38977E5F1B2A32EF008484A4 /* MCPersonTableViewCell.swift in Sources */,
@@ -1951,6 +2027,15 @@
 				388A326F1C10966000F7459C /* CategoryPictureStoreController.swift in Sources */,
 				385F5312191C2D140012773D /* MCSharedBillAddOnsTest.m in Sources */,
 				385F5313191C2D140012773D /* WeAllPayStoreTests.m in Sources */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+		38696B6123DCD24E00E941EA /* Sources */ = {
+			isa = PBXSourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				38696B6823DCD24E00E941EA /* Screenshots.swift in Sources */,
+				38696B7223DCD2B200E941EA /* SnapshotHelper.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -2023,6 +2108,11 @@
 			isa = PBXTargetDependency;
 			target = 38572AD1169D437B00969C62 /* We all pay */;
 			targetProxy = 385F530A191C2C360012773D /* PBXContainerItemProxy */;
+		};
+		38696B6B23DCD24E00E941EA /* PBXTargetDependency */ = {
+			isa = PBXTargetDependency;
+			target = 38572AD1169D437B00969C62 /* We all pay */;
+			targetProxy = 38696B6A23DCD24E00E941EA /* PBXContainerItemProxy */;
 		};
 		388A32881C11EDBD00F7459C /* PBXTargetDependency */ = {
 			isa = PBXTargetDependency;
@@ -2253,7 +2343,7 @@
 				CODE_SIGN_IDENTITY = "";
 				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer";
 				"CODE_SIGN_IDENTITY[sdk=macosx*]" = "Mac Developer";
-				CURRENT_PROJECT_VERSION = 142;
+				CURRENT_PROJECT_VERSION = 143;
 				DEBUG_INFORMATION_FORMAT = dwarf;
 				DEFINES_MODULE = YES;
 				DEVELOPMENT_TEAM = "";
@@ -2275,7 +2365,7 @@
 					"@executable_path/Frameworks",
 					"@loader_path/Frameworks",
 				);
-				MARKETING_VERSION = 1.7.12;
+				MARKETING_VERSION = 1.7.13;
 				MTL_ENABLE_DEBUG_INFO = YES;
 				OTHER_LDFLAGS = "-Wpartial-availability";
 				PRODUCT_BUNDLE_IDENTIFIER = com.GreenHair.CurrencyConverter;
@@ -2309,7 +2399,7 @@
 				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer";
 				"CODE_SIGN_IDENTITY[sdk=macosx*]" = "Mac Developer";
 				COPY_PHASE_STRIP = NO;
-				CURRENT_PROJECT_VERSION = 142;
+				CURRENT_PROJECT_VERSION = 143;
 				DEBUG_INFORMATION_FORMAT = "dwarf-with-dsym";
 				DEFINES_MODULE = YES;
 				DEVELOPMENT_TEAM = "";
@@ -2332,7 +2422,7 @@
 					"@executable_path/Frameworks",
 					"@loader_path/Frameworks",
 				);
-				MARKETING_VERSION = 1.7.12;
+				MARKETING_VERSION = 1.7.13;
 				MTL_ENABLE_DEBUG_INFO = NO;
 				OTHER_LDFLAGS = "-Wpartial-availability";
 				PRODUCT_BUNDLE_IDENTIFIER = com.GreenHair.CurrencyConverter;
@@ -2477,6 +2567,7 @@
 				"PROVISIONING_PROFILE[sdk=iphoneos*]" = "";
 				SDKROOT = iphoneos;
 				SWIFT_VERSION = 4.2;
+				TARGETED_DEVICE_FAMILY = "1,2";
 				WARNING_CFLAGS = "-Wpartial-availability";
 			};
 			name = Debug;
@@ -2532,6 +2623,7 @@
 				SWIFT_COMPILATION_MODE = wholemodule;
 				SWIFT_OPTIMIZATION_LEVEL = "-O";
 				SWIFT_VERSION = 4.2;
+				TARGETED_DEVICE_FAMILY = "1,2";
 				VALIDATE_PRODUCT = YES;
 				WARNING_CFLAGS = "-Wpartial-availability";
 			};
@@ -2549,7 +2641,7 @@
 				CODE_SIGN_IDENTITY = "iPhone Developer";
 				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer";
 				"CODE_SIGN_IDENTITY[sdk=macosx*]" = "Mac Developer";
-				CURRENT_PROJECT_VERSION = 142;
+				CURRENT_PROJECT_VERSION = 143;
 				FRAMEWORK_SEARCH_PATHS = (
 					"$(inherited)",
 					"$(PROJECT_DIR)/Pods/Google-Mobile-Ads-SDK/Frameworks/frameworks",
@@ -2581,7 +2673,7 @@
 					"$(inherited)",
 					"$(PROJECT_DIR)/**",
 				);
-				MARKETING_VERSION = 1.7.12;
+				MARKETING_VERSION = 1.7.13;
 				OTHER_LDFLAGS = (
 					"$(inherited)",
 					"-Wpartial-availability",
@@ -2613,7 +2705,7 @@
 				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer";
 				"CODE_SIGN_IDENTITY[sdk=macosx*]" = "Mac Developer";
 				COPY_PHASE_STRIP = NO;
-				CURRENT_PROJECT_VERSION = 142;
+				CURRENT_PROJECT_VERSION = 143;
 				FRAMEWORK_SEARCH_PATHS = (
 					"$(inherited)",
 					"$(PROJECT_DIR)/Pods/Google-Mobile-Ads-SDK/Frameworks/frameworks",
@@ -2631,7 +2723,7 @@
 					"$(inherited)",
 					"$(PROJECT_DIR)/**",
 				);
-				MARKETING_VERSION = 1.7.12;
+				MARKETING_VERSION = 1.7.13;
 				OTHER_LDFLAGS = (
 					"$(inherited)",
 					"-Wpartial-availability",
@@ -2803,6 +2895,7 @@
 				"PROVISIONING_PROFILE[sdk=iphoneos*]" = "";
 				SDKROOT = iphoneos;
 				SWIFT_VERSION = 4.2;
+				TARGETED_DEVICE_FAMILY = "1,2";
 				WARNING_CFLAGS = "-Wpartial-availability";
 			};
 			name = Screenshots;
@@ -2819,7 +2912,7 @@
 				CODE_SIGN_IDENTITY = "iPhone Developer";
 				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer";
 				"CODE_SIGN_IDENTITY[sdk=macosx*]" = "Mac Developer";
-				CURRENT_PROJECT_VERSION = 142;
+				CURRENT_PROJECT_VERSION = 143;
 				FRAMEWORK_SEARCH_PATHS = (
 					"$(inherited)",
 					"$(PROJECT_DIR)/Pods/Google-Mobile-Ads-SDK/Frameworks/frameworks",
@@ -2841,7 +2934,7 @@
 					"$(inherited)",
 					"$(PROJECT_DIR)/**",
 				);
-				MARKETING_VERSION = 1.7.12;
+				MARKETING_VERSION = 1.7.13;
 				OTHER_LDFLAGS = (
 					"$(inherited)",
 					"-Wpartial-availability",
@@ -2924,7 +3017,7 @@
 				CODE_SIGN_IDENTITY = "iPhone Developer";
 				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer";
 				"CODE_SIGN_IDENTITY[sdk=macosx*]" = "Mac Developer";
-				CURRENT_PROJECT_VERSION = 142;
+				CURRENT_PROJECT_VERSION = 143;
 				DEFINES_MODULE = YES;
 				ENABLE_STRICT_OBJC_MSGSEND = YES;
 				GCC_PREPROCESSOR_DEFINITIONS = (
@@ -2943,7 +3036,7 @@
 					"@executable_path/Frameworks",
 					"@executable_path/../../Frameworks",
 				);
-				MARKETING_VERSION = 1.7.12;
+				MARKETING_VERSION = 1.7.13;
 				MTL_ENABLE_DEBUG_INFO = YES;
 				OTHER_LDFLAGS = "-Wpartial-availability";
 				PRODUCT_BUNDLE_IDENTIFIER = "com.GreenHair.We-all-pay.$(PRODUCT_NAME:rfc1034identifier)";
@@ -2975,7 +3068,7 @@
 				CODE_SIGN_IDENTITY = "";
 				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer";
 				"CODE_SIGN_IDENTITY[sdk=macosx*]" = "Mac Developer";
-				CURRENT_PROJECT_VERSION = 142;
+				CURRENT_PROJECT_VERSION = 143;
 				DEBUG_INFORMATION_FORMAT = dwarf;
 				DEFINES_MODULE = YES;
 				DEVELOPMENT_TEAM = "";
@@ -2997,7 +3090,7 @@
 					"@executable_path/Frameworks",
 					"@loader_path/Frameworks",
 				);
-				MARKETING_VERSION = 1.7.12;
+				MARKETING_VERSION = 1.7.13;
 				MTL_ENABLE_DEBUG_INFO = YES;
 				OTHER_LDFLAGS = "-Wpartial-availability";
 				PRODUCT_BUNDLE_IDENTIFIER = com.GreenHair.WhoPayingUserDefaultsStoreInterface;
@@ -3065,7 +3158,7 @@
 				CODE_SIGN_IDENTITY = "";
 				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer";
 				"CODE_SIGN_IDENTITY[sdk=macosx*]" = "Mac Developer";
-				CURRENT_PROJECT_VERSION = 142;
+				CURRENT_PROJECT_VERSION = 143;
 				DEBUG_INFORMATION_FORMAT = dwarf;
 				DEFINES_MODULE = YES;
 				DEVELOPMENT_TEAM = "";
@@ -3087,7 +3180,7 @@
 					"@executable_path/Frameworks",
 					"@loader_path/Frameworks",
 				);
-				MARKETING_VERSION = 1.7.12;
+				MARKETING_VERSION = 1.7.13;
 				MTL_ENABLE_DEBUG_INFO = YES;
 				OTHER_LDFLAGS = "-Wpartial-availability";
 				PRODUCT_BUNDLE_IDENTIFIER = com.GreenHair.CurrencyConverter;
@@ -3155,7 +3248,7 @@
 				CODE_SIGN_IDENTITY = "";
 				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer";
 				"CODE_SIGN_IDENTITY[sdk=macosx*]" = "Mac Developer";
-				CURRENT_PROJECT_VERSION = 142;
+				CURRENT_PROJECT_VERSION = 143;
 				DEBUG_INFORMATION_FORMAT = dwarf;
 				DEFINES_MODULE = YES;
 				DEVELOPMENT_TEAM = "";
@@ -3177,7 +3270,7 @@
 					"@executable_path/Frameworks",
 					"@loader_path/Frameworks",
 				);
-				MARKETING_VERSION = 1.7.12;
+				MARKETING_VERSION = 1.7.13;
 				MTL_ENABLE_DEBUG_INFO = YES;
 				OTHER_LDFLAGS = "-Wpartial-availability";
 				PRODUCT_BUNDLE_IDENTIFIER = com.GreenHair.RateMeControllerForiOS;
@@ -3229,6 +3322,150 @@
 			};
 			name = Screenshots;
 		};
+		38696B6C23DCD24F00E941EA /* Debug */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				CLANG_ANALYZER_NONNULL = YES;
+				CLANG_ANALYZER_NUMBER_OBJECT_CONVERSION = YES_AGGRESSIVE;
+				CLANG_CXX_LANGUAGE_STANDARD = "gnu++14";
+				CLANG_ENABLE_OBJC_WEAK = YES;
+				CLANG_WARN_DIRECT_OBJC_ISA_USAGE = YES_ERROR;
+				CLANG_WARN_DOCUMENTATION_COMMENTS = YES;
+				CLANG_WARN_OBJC_ROOT_CLASS = YES_ERROR;
+				CLANG_WARN_UNGUARDED_AVAILABILITY = YES_AGGRESSIVE;
+				CODE_SIGN_STYLE = Automatic;
+				DEBUG_INFORMATION_FORMAT = dwarf;
+				DEVELOPMENT_TEAM = Z6JP26PUUY;
+				GCC_C_LANGUAGE_STANDARD = gnu11;
+				GCC_WARN_ABOUT_RETURN_TYPE = YES_ERROR;
+				GCC_WARN_UNINITIALIZED_AUTOS = YES_AGGRESSIVE;
+				INFOPLIST_FILE = Screenshots/Info.plist;
+				IPHONEOS_DEPLOYMENT_TARGET = 12.0;
+				LD_RUNPATH_SEARCH_PATHS = (
+					"$(inherited)",
+					"@executable_path/Frameworks",
+					"@loader_path/Frameworks",
+				);
+				MTL_ENABLE_DEBUG_INFO = INCLUDE_SOURCE;
+				MTL_FAST_MATH = YES;
+				PRODUCT_BUNDLE_IDENTIFIER = com.greenhair.Screenshots;
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				SWIFT_ACTIVE_COMPILATION_CONDITIONS = DEBUG;
+				SWIFT_OPTIMIZATION_LEVEL = "-Onone";
+				SWIFT_VERSION = 5.0;
+				TARGETED_DEVICE_FAMILY = "1,2";
+				TEST_TARGET_NAME = "We all pay";
+			};
+			name = Debug;
+		};
+		38696B6D23DCD24F00E941EA /* AdTest */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				CLANG_ANALYZER_NONNULL = YES;
+				CLANG_ANALYZER_NUMBER_OBJECT_CONVERSION = YES_AGGRESSIVE;
+				CLANG_CXX_LANGUAGE_STANDARD = "gnu++14";
+				CLANG_ENABLE_OBJC_WEAK = YES;
+				CLANG_WARN_DIRECT_OBJC_ISA_USAGE = YES_ERROR;
+				CLANG_WARN_DOCUMENTATION_COMMENTS = YES;
+				CLANG_WARN_OBJC_ROOT_CLASS = YES_ERROR;
+				CLANG_WARN_UNGUARDED_AVAILABILITY = YES_AGGRESSIVE;
+				CODE_SIGN_STYLE = Automatic;
+				COPY_PHASE_STRIP = NO;
+				DEBUG_INFORMATION_FORMAT = "dwarf-with-dsym";
+				DEVELOPMENT_TEAM = Z6JP26PUUY;
+				ENABLE_NS_ASSERTIONS = NO;
+				GCC_C_LANGUAGE_STANDARD = gnu11;
+				GCC_WARN_ABOUT_RETURN_TYPE = YES_ERROR;
+				GCC_WARN_UNINITIALIZED_AUTOS = YES_AGGRESSIVE;
+				INFOPLIST_FILE = Screenshots/Info.plist;
+				IPHONEOS_DEPLOYMENT_TARGET = 12.0;
+				LD_RUNPATH_SEARCH_PATHS = (
+					"$(inherited)",
+					"@executable_path/Frameworks",
+					"@loader_path/Frameworks",
+				);
+				MTL_ENABLE_DEBUG_INFO = NO;
+				MTL_FAST_MATH = YES;
+				PRODUCT_BUNDLE_IDENTIFIER = com.greenhair.Screenshots;
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				SWIFT_VERSION = 5.0;
+				TARGETED_DEVICE_FAMILY = "1,2";
+				TEST_TARGET_NAME = "We all pay";
+			};
+			name = AdTest;
+		};
+		38696B6E23DCD24F00E941EA /* Screenshots */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				CLANG_ANALYZER_NONNULL = YES;
+				CLANG_ANALYZER_NUMBER_OBJECT_CONVERSION = YES_AGGRESSIVE;
+				CLANG_CXX_LANGUAGE_STANDARD = "gnu++14";
+				CLANG_ENABLE_OBJC_WEAK = YES;
+				CLANG_WARN_DIRECT_OBJC_ISA_USAGE = YES_ERROR;
+				CLANG_WARN_DOCUMENTATION_COMMENTS = YES;
+				CLANG_WARN_OBJC_ROOT_CLASS = YES_ERROR;
+				CLANG_WARN_UNGUARDED_AVAILABILITY = YES_AGGRESSIVE;
+				CODE_SIGN_STYLE = Automatic;
+				COPY_PHASE_STRIP = NO;
+				DEBUG_INFORMATION_FORMAT = "dwarf-with-dsym";
+				DEVELOPMENT_TEAM = Z6JP26PUUY;
+				ENABLE_NS_ASSERTIONS = NO;
+				GCC_C_LANGUAGE_STANDARD = gnu11;
+				GCC_WARN_ABOUT_RETURN_TYPE = YES_ERROR;
+				GCC_WARN_UNINITIALIZED_AUTOS = YES_AGGRESSIVE;
+				INFOPLIST_FILE = Screenshots/Info.plist;
+				IPHONEOS_DEPLOYMENT_TARGET = 12.0;
+				LD_RUNPATH_SEARCH_PATHS = (
+					"$(inherited)",
+					"@executable_path/Frameworks",
+					"@loader_path/Frameworks",
+				);
+				MTL_ENABLE_DEBUG_INFO = NO;
+				MTL_FAST_MATH = YES;
+				PRODUCT_BUNDLE_IDENTIFIER = com.greenhair.Screenshots;
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				SWIFT_VERSION = 5.0;
+				TARGETED_DEVICE_FAMILY = "1,2";
+				TEST_TARGET_NAME = "We all pay";
+			};
+			name = Screenshots;
+		};
+		38696B6F23DCD24F00E941EA /* Release */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				CLANG_ANALYZER_NONNULL = YES;
+				CLANG_ANALYZER_NUMBER_OBJECT_CONVERSION = YES_AGGRESSIVE;
+				CLANG_CXX_LANGUAGE_STANDARD = "gnu++14";
+				CLANG_ENABLE_OBJC_WEAK = YES;
+				CLANG_WARN_DIRECT_OBJC_ISA_USAGE = YES_ERROR;
+				CLANG_WARN_DOCUMENTATION_COMMENTS = YES;
+				CLANG_WARN_OBJC_ROOT_CLASS = YES_ERROR;
+				CLANG_WARN_UNGUARDED_AVAILABILITY = YES_AGGRESSIVE;
+				CODE_SIGN_STYLE = Automatic;
+				COPY_PHASE_STRIP = NO;
+				DEBUG_INFORMATION_FORMAT = "dwarf-with-dsym";
+				DEVELOPMENT_TEAM = Z6JP26PUUY;
+				ENABLE_NS_ASSERTIONS = NO;
+				GCC_C_LANGUAGE_STANDARD = gnu11;
+				GCC_WARN_ABOUT_RETURN_TYPE = YES_ERROR;
+				GCC_WARN_UNINITIALIZED_AUTOS = YES_AGGRESSIVE;
+				INFOPLIST_FILE = Screenshots/Info.plist;
+				IPHONEOS_DEPLOYMENT_TARGET = 12.0;
+				LD_RUNPATH_SEARCH_PATHS = (
+					"$(inherited)",
+					"@executable_path/Frameworks",
+					"@loader_path/Frameworks",
+				);
+				MTL_ENABLE_DEBUG_INFO = NO;
+				MTL_FAST_MATH = YES;
+				PRODUCT_BUNDLE_IDENTIFIER = com.greenhair.Screenshots;
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				SWIFT_VERSION = 5.0;
+				TARGETED_DEVICE_FAMILY = "1,2";
+				TEST_TARGET_NAME = "We all pay";
+			};
+			name = Release;
+		};
 		388A32941C11EDBD00F7459C /* Debug */ = {
 			isa = XCBuildConfiguration;
 			buildSettings = {
@@ -3244,7 +3481,7 @@
 				CODE_SIGN_IDENTITY = "";
 				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer";
 				"CODE_SIGN_IDENTITY[sdk=macosx*]" = "Mac Developer";
-				CURRENT_PROJECT_VERSION = 142;
+				CURRENT_PROJECT_VERSION = 143;
 				DEBUG_INFORMATION_FORMAT = dwarf;
 				DEFINES_MODULE = YES;
 				DEVELOPMENT_TEAM = "";
@@ -3266,7 +3503,7 @@
 					"@executable_path/Frameworks",
 					"@loader_path/Frameworks",
 				);
-				MARKETING_VERSION = 1.7.12;
+				MARKETING_VERSION = 1.7.13;
 				MTL_ENABLE_DEBUG_INFO = YES;
 				OTHER_LDFLAGS = "-Wpartial-availability";
 				PRODUCT_BUNDLE_IDENTIFIER = com.GreenHair.WhoPayingUserDefaultsStoreInterface;
@@ -3299,7 +3536,7 @@
 				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer";
 				"CODE_SIGN_IDENTITY[sdk=macosx*]" = "Mac Developer";
 				COPY_PHASE_STRIP = NO;
-				CURRENT_PROJECT_VERSION = 142;
+				CURRENT_PROJECT_VERSION = 143;
 				DEBUG_INFORMATION_FORMAT = "dwarf-with-dsym";
 				DEFINES_MODULE = YES;
 				DEVELOPMENT_TEAM = "";
@@ -3322,7 +3559,7 @@
 					"@executable_path/Frameworks",
 					"@loader_path/Frameworks",
 				);
-				MARKETING_VERSION = 1.7.12;
+				MARKETING_VERSION = 1.7.13;
 				MTL_ENABLE_DEBUG_INFO = NO;
 				OTHER_LDFLAGS = "-Wpartial-availability";
 				PRODUCT_BUNDLE_IDENTIFIER = com.GreenHair.WhoPayingUserDefaultsStoreInterface;
@@ -3425,7 +3662,7 @@
 				CODE_SIGN_IDENTITY = "iPhone Developer";
 				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer";
 				"CODE_SIGN_IDENTITY[sdk=macosx*]" = "Mac Developer";
-				CURRENT_PROJECT_VERSION = 142;
+				CURRENT_PROJECT_VERSION = 143;
 				DEFINES_MODULE = YES;
 				ENABLE_STRICT_OBJC_MSGSEND = YES;
 				GCC_PREPROCESSOR_DEFINITIONS = (
@@ -3444,7 +3681,7 @@
 					"@executable_path/Frameworks",
 					"@executable_path/../../Frameworks",
 				);
-				MARKETING_VERSION = 1.7.12;
+				MARKETING_VERSION = 1.7.13;
 				MTL_ENABLE_DEBUG_INFO = YES;
 				OTHER_LDFLAGS = "-Wpartial-availability";
 				PRODUCT_BUNDLE_IDENTIFIER = "com.GreenHair.We-all-pay.$(PRODUCT_NAME:rfc1034identifier)";
@@ -3476,7 +3713,7 @@
 				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer";
 				"CODE_SIGN_IDENTITY[sdk=macosx*]" = "Mac Developer";
 				COPY_PHASE_STRIP = NO;
-				CURRENT_PROJECT_VERSION = 142;
+				CURRENT_PROJECT_VERSION = 143;
 				DEFINES_MODULE = YES;
 				ENABLE_NS_ASSERTIONS = NO;
 				ENABLE_STRICT_OBJC_MSGSEND = YES;
@@ -3492,7 +3729,7 @@
 					"@executable_path/Frameworks",
 					"@executable_path/../../Frameworks",
 				);
-				MARKETING_VERSION = 1.7.12;
+				MARKETING_VERSION = 1.7.13;
 				MTL_ENABLE_DEBUG_INFO = NO;
 				OTHER_LDFLAGS = "-Wpartial-availability";
 				PRODUCT_BUNDLE_IDENTIFIER = "com.GreenHair.We-all-pay.$(PRODUCT_NAME:rfc1034identifier)";
@@ -3522,7 +3759,7 @@
 				CODE_SIGN_IDENTITY = "";
 				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer";
 				"CODE_SIGN_IDENTITY[sdk=macosx*]" = "Mac Developer";
-				CURRENT_PROJECT_VERSION = 142;
+				CURRENT_PROJECT_VERSION = 143;
 				DEBUG_INFORMATION_FORMAT = dwarf;
 				DEFINES_MODULE = YES;
 				DEVELOPMENT_TEAM = "";
@@ -3544,7 +3781,7 @@
 					"@executable_path/Frameworks",
 					"@loader_path/Frameworks",
 				);
-				MARKETING_VERSION = 1.7.12;
+				MARKETING_VERSION = 1.7.13;
 				MTL_ENABLE_DEBUG_INFO = YES;
 				OTHER_LDFLAGS = "-Wpartial-availability";
 				PRODUCT_BUNDLE_IDENTIFIER = com.GreenHair.RateMeControllerForiOS;
@@ -3576,7 +3813,7 @@
 				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer";
 				"CODE_SIGN_IDENTITY[sdk=macosx*]" = "Mac Developer";
 				COPY_PHASE_STRIP = NO;
-				CURRENT_PROJECT_VERSION = 142;
+				CURRENT_PROJECT_VERSION = 143;
 				DEBUG_INFORMATION_FORMAT = "dwarf-with-dsym";
 				DEFINES_MODULE = YES;
 				DEVELOPMENT_TEAM = "";
@@ -3599,7 +3836,7 @@
 					"@executable_path/Frameworks",
 					"@loader_path/Frameworks",
 				);
-				MARKETING_VERSION = 1.7.12;
+				MARKETING_VERSION = 1.7.13;
 				MTL_ENABLE_DEBUG_INFO = NO;
 				OTHER_LDFLAGS = "-Wpartial-availability";
 				PRODUCT_BUNDLE_IDENTIFIER = com.GreenHair.RateMeControllerForiOS;
@@ -3741,6 +3978,7 @@
 				"PROVISIONING_PROFILE[sdk=iphoneos*]" = "";
 				SDKROOT = iphoneos;
 				SWIFT_VERSION = 4.2;
+				TARGETED_DEVICE_FAMILY = "1,2";
 				WARNING_CFLAGS = "-Wpartial-availability";
 			};
 			name = AdTest;
@@ -3757,7 +3995,7 @@
 				CODE_SIGN_IDENTITY = "iPhone Developer";
 				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer";
 				"CODE_SIGN_IDENTITY[sdk=macosx*]" = "Mac Developer";
-				CURRENT_PROJECT_VERSION = 142;
+				CURRENT_PROJECT_VERSION = 143;
 				FRAMEWORK_SEARCH_PATHS = (
 					"$(inherited)",
 					"$(PROJECT_DIR)/Pods/Google-Mobile-Ads-SDK/Frameworks/frameworks",
@@ -3789,7 +4027,7 @@
 					"$(inherited)",
 					"$(PROJECT_DIR)/**",
 				);
-				MARKETING_VERSION = 1.7.12;
+				MARKETING_VERSION = 1.7.13;
 				OTHER_LDFLAGS = (
 					"$(inherited)",
 					"-Wpartial-availability",
@@ -3873,7 +4111,7 @@
 				CODE_SIGN_IDENTITY = "iPhone Developer";
 				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer";
 				"CODE_SIGN_IDENTITY[sdk=macosx*]" = "Mac Developer";
-				CURRENT_PROJECT_VERSION = 142;
+				CURRENT_PROJECT_VERSION = 143;
 				DEFINES_MODULE = YES;
 				ENABLE_STRICT_OBJC_MSGSEND = YES;
 				GCC_PREPROCESSOR_DEFINITIONS = (
@@ -3892,7 +4130,7 @@
 					"@executable_path/Frameworks",
 					"@executable_path/../../Frameworks",
 				);
-				MARKETING_VERSION = 1.7.12;
+				MARKETING_VERSION = 1.7.13;
 				MTL_ENABLE_DEBUG_INFO = YES;
 				OTHER_LDFLAGS = "-Wpartial-availability";
 				PRODUCT_BUNDLE_IDENTIFIER = "com.GreenHair.We-all-pay.$(PRODUCT_NAME:rfc1034identifier)";
@@ -3924,7 +4162,7 @@
 				CODE_SIGN_IDENTITY = "";
 				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer";
 				"CODE_SIGN_IDENTITY[sdk=macosx*]" = "Mac Developer";
-				CURRENT_PROJECT_VERSION = 142;
+				CURRENT_PROJECT_VERSION = 143;
 				DEBUG_INFORMATION_FORMAT = dwarf;
 				DEFINES_MODULE = YES;
 				DEVELOPMENT_TEAM = "";
@@ -3946,7 +4184,7 @@
 					"@executable_path/Frameworks",
 					"@loader_path/Frameworks",
 				);
-				MARKETING_VERSION = 1.7.12;
+				MARKETING_VERSION = 1.7.13;
 				MTL_ENABLE_DEBUG_INFO = YES;
 				OTHER_LDFLAGS = "-Wpartial-availability";
 				PRODUCT_BUNDLE_IDENTIFIER = com.GreenHair.WhoPayingUserDefaultsStoreInterface;
@@ -4014,7 +4252,7 @@
 				CODE_SIGN_IDENTITY = "";
 				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer";
 				"CODE_SIGN_IDENTITY[sdk=macosx*]" = "Mac Developer";
-				CURRENT_PROJECT_VERSION = 142;
+				CURRENT_PROJECT_VERSION = 143;
 				DEBUG_INFORMATION_FORMAT = dwarf;
 				DEFINES_MODULE = YES;
 				DEVELOPMENT_TEAM = "";
@@ -4036,7 +4274,7 @@
 					"@executable_path/Frameworks",
 					"@loader_path/Frameworks",
 				);
-				MARKETING_VERSION = 1.7.12;
+				MARKETING_VERSION = 1.7.13;
 				MTL_ENABLE_DEBUG_INFO = YES;
 				OTHER_LDFLAGS = "-Wpartial-availability";
 				PRODUCT_BUNDLE_IDENTIFIER = com.GreenHair.CurrencyConverter;
@@ -4104,7 +4342,7 @@
 				CODE_SIGN_IDENTITY = "";
 				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer";
 				"CODE_SIGN_IDENTITY[sdk=macosx*]" = "Mac Developer";
-				CURRENT_PROJECT_VERSION = 142;
+				CURRENT_PROJECT_VERSION = 143;
 				DEBUG_INFORMATION_FORMAT = dwarf;
 				DEFINES_MODULE = YES;
 				DEVELOPMENT_TEAM = "";
@@ -4126,7 +4364,7 @@
 					"@executable_path/Frameworks",
 					"@loader_path/Frameworks",
 				);
-				MARKETING_VERSION = 1.7.12;
+				MARKETING_VERSION = 1.7.13;
 				MTL_ENABLE_DEBUG_INFO = YES;
 				OTHER_LDFLAGS = "-Wpartial-availability";
 				PRODUCT_BUNDLE_IDENTIFIER = com.GreenHair.RateMeControllerForiOS;
@@ -4232,6 +4470,17 @@
 				38E0FCC523CC4E1C002A4488 /* AdTest */,
 				38631484235C6A7800748B9F /* Screenshots */,
 				385F530E191C2C360012773D /* Release */,
+			);
+			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
+		};
+		38696B7023DCD24F00E941EA /* Build configuration list for PBXNativeTarget "Screenshots" */ = {
+			isa = XCConfigurationList;
+			buildConfigurations = (
+				38696B6C23DCD24F00E941EA /* Debug */,
+				38696B6D23DCD24F00E941EA /* AdTest */,
+				38696B6E23DCD24F00E941EA /* Screenshots */,
+				38696B6F23DCD24F00E941EA /* Release */,
 			);
 			defaultConfigurationIsVisible = 0;
 			defaultConfigurationName = Release;
