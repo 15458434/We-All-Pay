@@ -1,9 +1,9 @@
 PODS:
-  - AdColony (4.1.2)
+  - AdColony (4.1.3)
   - AppLovinSDK (6.11.1)
-  - FBAudienceNetwork (5.6.0):
+  - FBAudienceNetwork (5.6.1):
     - FBSDKCoreKit/Basics (>= 5.6.0)
-  - FBSDKCoreKit/Basics (5.15.1)
+  - FBSDKCoreKit/Basics (6.0.0)
   - Firebase/AdMob (6.16.0):
     - Firebase/CoreOnly
     - Google-Mobile-Ads-SDK (~> 7.50)
@@ -39,7 +39,7 @@ PODS:
     - GoogleUtilities/Logger (~> 6.5)
     - nanopb (~> 0.3.901)
   - FirebaseCoreDiagnosticsInterop (1.2.0)
-  - FirebaseCrashlytics (4.0.0-beta.2):
+  - FirebaseCrashlytics (4.0.0-beta.3):
     - FirebaseAnalyticsInterop (~> 1.2)
     - FirebaseCore (~> 6.6)
     - FirebaseInstanceID (~> 4.3)
@@ -53,7 +53,7 @@ PODS:
     - FirebaseInstallations (~> 1.0)
     - GoogleUtilities/Environment (~> 6.5)
     - GoogleUtilities/UserDefaults (~> 6.5)
-  - Google-Mobile-Ads-SDK (7.54.0):
+  - Google-Mobile-Ads-SDK (7.55.0):
     - GoogleAppMeasurement (~> 6.0)
   - GoogleAppMeasurement (6.2.2):
     - GoogleUtilities/AppDelegateSwizzler (~> 6.0)
@@ -65,18 +65,18 @@ PODS:
   - GoogleDataTransportCCTSupport (1.3.1):
     - GoogleDataTransport (~> 3.3)
     - nanopb (~> 0.3.901)
-  - GoogleMobileAdsMediationAdColony (4.1.2.0):
-    - AdColony (= 4.1.2)
-    - Google-Mobile-Ads-SDK (>= 7.52.0)
+  - GoogleMobileAdsMediationAdColony (4.1.3.0):
+    - AdColony (= 4.1.3)
+    - Google-Mobile-Ads-SDK (>= 7.55.0)
   - GoogleMobileAdsMediationAppLovin (6.11.1.0):
     - AppLovinSDK (= 6.11.1)
     - Google-Mobile-Ads-SDK (>= 7.53.1)
-  - GoogleMobileAdsMediationFacebook (5.6.0.0):
-    - FBAudienceNetwork (= 5.6.0)
-    - Google-Mobile-Ads-SDK (>= 7.51.0)
-  - GoogleMobileAdsMediationInMobi (7.4.0.0):
-    - Google-Mobile-Ads-SDK (>= 7.50.0)
-    - InMobiSDK (= 7.4.0)
+  - GoogleMobileAdsMediationFacebook (5.6.1.0):
+    - FBAudienceNetwork (= 5.6.1)
+    - Google-Mobile-Ads-SDK (>= 7.53.1)
+  - GoogleMobileAdsMediationInMobi (9.0.0.0):
+    - Google-Mobile-Ads-SDK (>= 7.53.1)
+    - InMobiSDK (= 9.0.0)
   - GoogleMobileAdsMediationMoPub (5.10.0.0):
     - Google-Mobile-Ads-SDK (>= 7.52.0)
     - mopub-ios-sdk/Core (= 5.10.0)
@@ -104,7 +104,7 @@ PODS:
     - GoogleUtilities/Logger
   - GoogleUtilities/UserDefaults (6.5.1):
     - GoogleUtilities/Logger
-  - InMobiSDK (7.4.0)
+  - InMobiSDK (9.0.0)
   - MaterialComponents/AnimationTiming (94.5.0)
   - MaterialComponents/Buttons (94.5.0):
     - MaterialComponents/Elevation
@@ -279,31 +279,31 @@ SPEC REPOS:
     - PromisesObjC
 
 SPEC CHECKSUMS:
-  AdColony: 0a1e13349ce430ce29374c665611013fd78f792c
+  AdColony: 9d01d79b185e1d7ffdb95244bd9be1f027d11e6c
   AppLovinSDK: 604c3120850d65f1a5c708d51a86326a52f083f5
-  FBAudienceNetwork: 1ea63543665445a3a5b4a059e8210a343b6ab3c1
-  FBSDKCoreKit: 1d5acf7c9d7a2f92bb1a242dc60cae5b7adb91df
+  FBAudienceNetwork: 223ab6f31d2aed94a79a9c7ffa0fad0dee644023
+  FBSDKCoreKit: fe738b172590e622c86735b45e20d196848b54df
   Firebase: 497158b816d0a86fc31babbd05546fcd7e6083ff
   FirebaseAnalytics: cf95d3aab897612783020fbd98401d5366f135ee
   FirebaseAnalyticsInterop: 3f86269c38ae41f47afeb43ebf32a001f58fcdae
   FirebaseCore: 85064903ed6c28e47fec9c7bd149d94ba1b6b6e7
   FirebaseCoreDiagnostics: 5e78803ab276bc5b50340e3c539c06c3de35c649
   FirebaseCoreDiagnosticsInterop: 296e2c5f5314500a850ad0b83e9e7c10b011a850
-  FirebaseCrashlytics: aec855c2157989f8bfd396f8fd2d199e0e027840
+  FirebaseCrashlytics: 81ac4950302353dc6b5f8d5cc287397725b54c97
   FirebaseInstallations: 575cd32f2aec0feeb0e44f5d0110a09e5e60b47b
   FirebaseInstanceID: 6668efc1655a4052c083f287a7141f1ead12f9c2
-  Google-Mobile-Ads-SDK: 8241b4bd0f11b4f03f5dcd4affccb04ca938f050
+  Google-Mobile-Ads-SDK: 09d1c182f144b456fce626f9234ab4d35397ea10
   GoogleAppMeasurement: d0560d915abf15e692e8538ba1d58442217b6aff
   GoogleDataTransport: 0048df6388dab1c254799f2a30365b1dffe20422
   GoogleDataTransportCCTSupport: f880d70972efa2ed1be4e9173a0f4c5f3dc2d176
-  GoogleMobileAdsMediationAdColony: daf702a10767a1137dae29b92c34491fc3ce7b43
+  GoogleMobileAdsMediationAdColony: aeec8cf52c7adb4c35200ca27d7c2b39326d9204
   GoogleMobileAdsMediationAppLovin: 4ee8d4debe9c0d20ecb369f622d3a0c23eef5ba6
-  GoogleMobileAdsMediationFacebook: 2306b9822775e4ddb50c29fc758d6b45efcf6a72
-  GoogleMobileAdsMediationInMobi: 49d5af05829c4596e6442a4257360bdd9568eb13
+  GoogleMobileAdsMediationFacebook: fa98b95804b5191cad365b034974f99825ce7f64
+  GoogleMobileAdsMediationInMobi: dc150ec9441fd9ed681efffe2c618e931a1d929b
   GoogleMobileAdsMediationMoPub: 2da3fe1802746259585edbff8aac232164c1f09c
   GoogleMobileAdsMediationTestSuite: 188825108a95af95560c355de70bbaa3b4fd1b5c
   GoogleUtilities: 06eb53bb579efe7099152735900dd04bf09e7275
-  InMobiSDK: 546ebed22609efcb42489f6cee12f6eda2a68c74
+  InMobiSDK: 9a2b09bc66c8d9d6906f98227fa380a8d6ac091b
   MaterialComponents: 36435454351719ef5c9bf1192a25fdcd2191c712
   MDFInternationalization: 010097556d6b09d2c4ea38e0820ea6d37be6a314
   MDFTextAccessibility: 85c09a1bd9c321f494348e632a25063bcda35a53
