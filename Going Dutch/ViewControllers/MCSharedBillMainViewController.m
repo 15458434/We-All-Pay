@@ -154,6 +154,9 @@
 #else
     MCAdEngine.isEnabled = !MCStoreInterface.defaultStoreInterface.isProProductPurchased;
 #endif
+    MCRemoteConfigEngine *configEngine = [[MCRemoteConfigEngine alloc] init];
+    self.adBannerEngine.shouldShowEngine = [[MCRemoteConfigTrueCasino alloc] initWithEngine:configEngine andRemoteConfigItem:ConfigEngineItemPercentageOfTimeShowMainBottomBannerOniPhone];
+     
     [super viewDidLoad];
     // Do any additional setup after loading the view.
     [self.navigationController setToolbarHidden:YES animated:YES];

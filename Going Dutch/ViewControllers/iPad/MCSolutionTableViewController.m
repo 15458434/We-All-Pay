@@ -187,7 +187,7 @@ typedef NS_ENUM(BOOL, MCXRateStatus) {
 #ifdef DEBUG
     return @"ca-app-pub-3940256099942544/4411468910";
 #else
-    return @"ca-app-pub-5354415674074435/8899635256";
+    return @"ca-app-pub-5354415674074435/1117722855";
 #endif
 }
 
@@ -332,6 +332,9 @@ typedef NS_ENUM(BOOL, MCXRateStatus) {
 #pragma mark - UIViewController
 
 - (void)viewDidLoad {
+    MCRemoteConfigEngine *configEngine = [[MCRemoteConfigEngine alloc] init];
+    self.adEngine.shouldShowEngine = [[MCRemoteConfigTrueCasino alloc] initWithEngine:configEngine andRemoteConfigItem:ConfigEngineItemPercentageOfTimeShowAfterSolveInterstitialOniPad];
+    
     [super viewDidLoad];
     
     // Uncomment the following line to preserve selection between presentations.

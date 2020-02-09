@@ -36,7 +36,9 @@
 - (void)viewDidLoad {
     [super viewDidLoad];
     
-    [self.adBannerEngine prepareMediumAdBanner:_worstSalesPitchEverView withAdUnitId:self.adUnitId andViewController:self];
+    if (_isAdBannerEnabled) {
+        [self.adBannerEngine prepareMediumAdBanner:_worstSalesPitchEverView withAdUnitId:self.adUnitId andViewController:self];
+    }
 }
 
 #pragma mark - UIResponder
