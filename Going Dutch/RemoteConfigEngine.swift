@@ -17,7 +17,6 @@ import FirebaseRemoteConfig
         case percentageOfTimeShowSolutionViewBannerOniPhone = 3
         case percentageOfTimeShowAfterSolveInterstitialOniPhone = 4
         case percentageOfTimeShowMainBottomBannerOniPad = 5
-        case percentageOfTimeShowPersonViewBannerOniPad = 6
         case percentageOfTimeShowPaymentViewBannerOniPad = 7
         case percentageOfTimeShowSolutionViewBannerOniPad = 8
         case percentageOfTimeShowAfterSolveInterstitialOniPad = 9
@@ -36,8 +35,6 @@ import FirebaseRemoteConfig
                 return "v1_Percentage_Of_Time_Show_After_Solve_Interstitial_On_iPhone"
             case .percentageOfTimeShowMainBottomBannerOniPad:
                 return "v1_Percentage_Of_Time_Show_Main_Bottom_Banner_On_iPad"
-            case .percentageOfTimeShowPersonViewBannerOniPad:
-                return "v1_Percentage_Of_Time_Show_Person_View_Banner_On_iPad"
             case .percentageOfTimeShowPaymentViewBannerOniPad:
                 return "v1_Percentage_Of_Time_Show_Payment_View_Banner_On_iPad"
             case .percentageOfTimeShowSolutionViewBannerOniPad:
@@ -58,6 +55,8 @@ import FirebaseRemoteConfig
                 var dict = dict
                 switch item {
                 case .percentageOfTimeShowAfterSolveInterstitialOniPhone, .percentageOfTimeShowAfterSolveInterstitialOniPad:
+                    dict[item.stringValue] = 0 as NSNumber
+                case .percentageOfTimeShowPaymentViewBannerOniPad, .percentageOfTimeShowSolutionViewBannerOniPad:
                     dict[item.stringValue] = 0 as NSNumber
                 default:
                     dict[item.stringValue] = 1 as NSNumber

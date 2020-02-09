@@ -18,6 +18,7 @@ import GoogleMobileAds;
             existingBannerView.removeConstraints(constraints)
             existingBannerView.removeFromSuperview()
         }
+        bannerView.translatesAutoresizingMaskIntoConstraints = false
         self.addSubview(bannerView)
         self.bannerView = bannerView
         self.bannerView!.topAnchor.constraint(equalTo: self.topAnchor, constant: 0).isActive = true

@@ -332,6 +332,9 @@ typedef NS_ENUM(BOOL, MCXRateStatus) {
 #pragma mark - UIViewController
 
 - (void)viewDidLoad {
+    MCRemoteConfigEngine *configEngine = [[MCRemoteConfigEngine alloc] init];
+    self.adEngine.shouldShowEngine = [[MCRemoteConfigTrueCasino alloc] initWithEngine:configEngine andRemoteConfigItem:ConfigEngineItemPercentageOfTimeShowAfterSolveInterstitialOniPad];
+    
     [super viewDidLoad];
     
     // Uncomment the following line to preserve selection between presentations.

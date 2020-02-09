@@ -18,6 +18,7 @@ import GoogleMobileAds
 @objc(MCInterstitialAdEngine) final class InterstitialAdEngine: AdEngine, GADInterstitialDelegate {
     
     private(set) weak var delegate: InterstitialAdEngineDelegate!
+    var shouldShowEngine: RemoteConfigTrueCasino?
 
     private(set) var interstitialAd: GADInterstitial!
     private(set) weak var viewController: UIViewController!
@@ -32,6 +33,12 @@ import GoogleMobileAds
         
         guard AdEngine.isEnabled else {
             return
+        }
+        
+        if let shouldShow = self.shouldShowEngine {
+            guard shouldShow.isTrue else {
+                return
+            }
         }
         
         self.delegate = delegate

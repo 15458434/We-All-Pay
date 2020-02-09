@@ -325,6 +325,10 @@ final class PaymentViewController: MCGenericAdBannerTableViewController, AdBanne
     // MARK: UIViewController
     
     override func viewDidLoad() {
+        let configEngine = RemoteConfigEngine()
+        let trueCasino = RemoteConfigTrueCasino(with: configEngine, and: .percentageOfTimeShowPaymentViewBannerOniPad)
+        (self.value(forKey: "adBannerEngine") as! AdBannerEngine).shouldShowEngine = trueCasino
+        
         super.viewDidLoad()
         
         self.respondToPresenceOfPathComponentsFromAppLaunch()
