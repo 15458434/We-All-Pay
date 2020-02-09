@@ -373,6 +373,7 @@
             navController.modalInPresentation = YES;
         }
         MCPersonViewController *destination = navController.viewControllers.firstObject;
+        destination.isAdBannerEnabled = YES;
         if ([destination conformsToProtocol:@protocol(MCTonightsBillTransfer)] && [destination conformsToProtocol:@protocol(MCThisPersonProtocol)]) {
             NSIndexPath *indexPathOfSelectedRow = [[self tableView] indexPathForSelectedRow];
             MCPerson *thePerson = [_dataController objectAtIndexPath:indexPathOfSelectedRow];
