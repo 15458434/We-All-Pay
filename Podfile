@@ -9,6 +9,7 @@ target 'We all pay' do
 pod 'Firebase/Core'
 pod 'Firebase/Analytics'
 pod 'Firebase/Crashlytics'
+pod 'Firebase/RemoteConfig'
 pod 'Firebase/AdMob'
 pod 'GoogleMobileAdsMediationFacebook'
 pod 'GoogleMobileAdsMediationInMobi'

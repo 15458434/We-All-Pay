@@ -34,11 +34,10 @@
 
 #pragma mark - New in this class
 
-- (void)activateFirebase
-{
-#ifndef DEBUG
+- (void)activateFirebase {
     [FIRApp configure];
-#endif
+    [MCRemoteConfigEngine prepareRemoteConfig];
+    
     _launchCounter = [[MCLaunchCounter alloc] init];
     uint64_t result = [_launchCounter increment];
     [FIRAnalytics logEventWithName:@"Start_counter" parameters:@{@"Counter Value": @(result)}];

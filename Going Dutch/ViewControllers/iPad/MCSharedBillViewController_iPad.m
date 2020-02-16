@@ -264,6 +264,9 @@
 #pragma mark - UIViewController
 
 - (void)viewDidLoad {
+    MCRemoteConfigEngine *configEngine = [[MCRemoteConfigEngine alloc] init];
+    self.adBannerEngine.shouldShowEngine = [[MCRemoteConfigTrueCasino alloc] initWithEngine:configEngine andRemoteConfigItem:ConfigEngineItemPercentageOfTimeShowMainBottomBannerOniPad];
+    
     [super viewDidLoad];
     // Do any additional setup after loading the view.
     

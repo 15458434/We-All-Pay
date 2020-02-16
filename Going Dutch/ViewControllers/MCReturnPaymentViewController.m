@@ -294,7 +294,7 @@ typedef NS_OPTIONS(NSUInteger, MCReturnPaymentViewControllerState) {
 #ifdef DEBUG
     return @"ca-app-pub-3940256099942544/4411468910";
 #else
-    return @"ca-app-pub-5354415674074435/8899635256";
+    return @"ca-app-pub-5354415674074435/1117722855";
 #endif
 }
 
@@ -307,6 +307,9 @@ typedef NS_OPTIONS(NSUInteger, MCReturnPaymentViewControllerState) {
 #pragma mark - UIViewController
 
 - (void)viewDidLoad {
+    MCRemoteConfigEngine *remoteConfigEngine = [[MCRemoteConfigEngine alloc] init];
+    self.adEngine.shouldShowEngine = [[MCRemoteConfigTrueCasino alloc] initWithEngine:remoteConfigEngine andRemoteConfigItem:ConfigEngineItemPercentageOfTimeShowAfterSolveInterstitialOniPhone];
+    
     [super viewDidLoad];
 
     // Uncomment the following line to preserve selection between presentations.
@@ -324,6 +327,7 @@ typedef NS_OPTIONS(NSUInteger, MCReturnPaymentViewControllerState) {
     
     [self giveSolutionWithCompletion:^(BOOL success) {
         if (success && (self.solution.count > 0)) {
+            self.adBannerEngine.shouldShowEngine = [[MCRemoteConfigTrueCasino alloc] initWithEngine:remoteConfigEngine andRemoteConfigItem:ConfigEngineItemPercentageOfTimeShowSolutionViewBannerOniPhone];
             self.worstSalesPitchEverView = [[GADBannerView alloc] initWithAdSize:kGADAdSizeBanner];
             [self.adBannerEngine prepareAdBanner:self.worstSalesPitchEverView withAdUnitId:self.adBannerUnitId andViewController:self];
         }
