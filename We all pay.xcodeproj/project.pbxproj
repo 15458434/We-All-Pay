@@ -1432,6 +1432,7 @@
 				384A8D9D1D54776300A69E15 /* Embed App Extensions */,
 				3BDC63DFC49C900DDF74EF7A /* [CP] Embed Pods Frameworks */,
 				881F432E4F92327FAB3B6598 /* [CP] Copy Pods Resources */,
+				38F2A4A323E097C40021F574 /* Crashlytics - This should be the very last step. */,
 			);
 			buildRules = (
 			);
@@ -1785,6 +1786,26 @@
 /* End PBXResourcesBuildPhase section */
 
 /* Begin PBXShellScriptBuildPhase section */
+		38F2A4A323E097C40021F574 /* Crashlytics - This should be the very last step. */ = {
+			isa = PBXShellScriptBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			inputFileListPaths = (
+			);
+			inputPaths = (
+				"${DWARF_DSYM_FOLDER_PATH}/${DWARF_DSYM_FILE_NAME}/Contents/Resources/DWARF/${TARGET_NAME}",
+				"$(SRCROOT)/$(BUILT_PRODUCTS_DIR)/$(INFOPLIST_PATH)",
+			);
+			name = "Crashlytics - This should be the very last step.";
+			outputFileListPaths = (
+			);
+			outputPaths = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+			shellPath = /bin/sh;
+			shellScript = "# Type a script or drag a script file from your workspace to insert its path.\n\"${PODS_ROOT}/FirebaseCrashlytics/run\"\n";
+		};
 		3BDC63DFC49C900DDF74EF7A /* [CP] Embed Pods Frameworks */ = {
 			isa = PBXShellScriptBuildPhase;
 			buildActionMask = 2147483647;
