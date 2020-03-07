@@ -31,11 +31,14 @@ import UIKit
     }
     
     @objc private func keyboardWillUpdate(_ notification: Notification) {
+        guard let activeTextField = self.activeTextField else {
+            return
+        }
         let userInfo = notification.userInfo!
         let endRect = userInfo[UIResponder.keyboardFrameEndUserInfoKey] as! CGRect
         let animationCurve = UIView.AnimationOptions(rawValue: userInfo[UIResponder.keyboardAnimationCurveUserInfoKey] as! UInt)
         let duration = userInfo[UIResponder.keyboardAnimationDurationUserInfoKey] as! TimeInterval
-        adjustscrollViewToKeyboard(for: activeTextField!, with: endRect.height, and: duration, and: animationCurve)
+        adjustscrollViewToKeyboard(for: activeTextField, with: endRect.height, and: duration, and: animationCurve)
     }
     
     @objc private func keyboardWillHide(_ notification: Notification) {
