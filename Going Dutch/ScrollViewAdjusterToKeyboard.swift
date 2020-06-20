@@ -42,10 +42,13 @@ import UIKit
     }
     
     @objc private func keyboardWillHide(_ notification: Notification) {
+        guard let activeTextField = activeTextField else {
+            return
+        }
         let userInfo = notification.userInfo!
         let animationCurve = UIView.AnimationOptions(rawValue: userInfo[UIResponder.keyboardAnimationCurveUserInfoKey] as! UInt)
         let duration = userInfo[UIResponder.keyboardAnimationDurationUserInfoKey] as! TimeInterval
-        adjustscrollViewToKeyboard(for: activeTextField!, with: 0, and: duration, and: animationCurve)
+        adjustscrollViewToKeyboard(for: activeTextField, with: 0, and: duration, and: animationCurve)
     }
     
     private func adjustscrollViewToKeyboard(for textField: UITextField, with bottomInset: CGFloat, and duration: TimeInterval, and animationCurve: UIView.AnimationOptions) {
