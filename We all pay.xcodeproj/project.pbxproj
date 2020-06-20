@@ -21,6 +21,7 @@
 		3812760E1BBE76B40004C8C2 /* PaymentViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3812760D1BBE76B40004C8C2 /* PaymentViewController.swift */; };
 		381276101BBE9A7F0004C8C2 /* MCPaymentPresenceTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3812760F1BBE9A7F0004C8C2 /* MCPaymentPresenceTableViewCell.swift */; };
 		3813D8951D8983C900E6B7A4 /* CircularImageView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3813D8941D8983C900E6B7A4 /* CircularImageView.swift */; };
+		38163E0F249E193D009E889C /* CoreServices.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 38163E0E249E193D009E889C /* CoreServices.framework */; };
 		3825A82419990BA400A8885D /* UIViewController+WeAllPayStore.m in Sources */ = {isa = PBXBuildFile; fileRef = 3825A82319990BA400A8885D /* UIViewController+WeAllPayStore.m */; };
 		3825A826199A2A5500A8885D /* MCTonightsBillTransfer.m in Sources */ = {isa = PBXBuildFile; fileRef = 3825A825199A2A5500A8885D /* MCTonightsBillTransfer.m */; };
 		3826D4D123CC574E009CAC30 /* WebKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 3826D4D023CC574E009CAC30 /* WebKit.framework */; };
@@ -151,7 +152,6 @@
 		38B4E82323CDE6180034CA95 /* CoreTelephony.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 38B4E82223CDE6180034CA95 /* CoreTelephony.framework */; };
 		38B4E82523CDE6220034CA95 /* JavaScriptCore.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 38B4E82423CDE6210034CA95 /* JavaScriptCore.framework */; };
 		38B4E82723CDE62C0034CA95 /* MessageUI.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 38B4E82623CDE62C0034CA95 /* MessageUI.framework */; };
-		38B4E82923CDE6370034CA95 /* MobileCoreServices.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 38B4E82823CDE6370034CA95 /* MobileCoreServices.framework */; };
 		38B4E82B23CDE6410034CA95 /* SystemConfiguration.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 38B4E82A23CDE6410034CA95 /* SystemConfiguration.framework */; };
 		38B4E83123CDFD930034CA95 /* AdBannerEngine.swift in Sources */ = {isa = PBXBuildFile; fileRef = 38B4E83023CDFD930034CA95 /* AdBannerEngine.swift */; };
 		38B4E83823CE09070034CA95 /* MCGenericInterstitialAdTableViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 38B4E83723CE09070034CA95 /* MCGenericInterstitialAdTableViewController.m */; };
@@ -359,6 +359,7 @@
 		3813D8941D8983C900E6B7A4 /* CircularImageView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; lineEnding = 0; path = CircularImageView.swift; sourceTree = "<group>"; xcLanguageSpecificationIdentifier = xcode.lang.swift; };
 		38156B2818706B750047AEEF /* nl */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.strings; lineEnding = 0; name = nl; path = nl.lproj/Localizable.strings; sourceTree = "<group>"; };
 		38156B2918706BAC0047AEEF /* Base */ = {isa = PBXFileReference; fileEncoding = 10; lastKnownFileType = text.plist.strings; lineEnding = 0; name = Base; path = Base.lproj/Localizable.strings; sourceTree = "<group>"; };
+		38163E0E249E193D009E889C /* CoreServices.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = CoreServices.framework; path = System/Library/Frameworks/CoreServices.framework; sourceTree = SDKROOT; };
 		3825A82219990BA400A8885D /* UIViewController+WeAllPayStore.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "UIViewController+WeAllPayStore.h"; sourceTree = "<group>"; };
 		3825A82319990BA400A8885D /* UIViewController+WeAllPayStore.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "UIViewController+WeAllPayStore.m"; sourceTree = "<group>"; };
 		3825A825199A2A5500A8885D /* MCTonightsBillTransfer.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = MCTonightsBillTransfer.m; path = ViewControllers/MCTonightsBillTransfer.m; sourceTree = "<group>"; };
@@ -645,7 +646,6 @@
 			buildActionMask = 2147483647;
 			files = (
 				38B4E82B23CDE6410034CA95 /* SystemConfiguration.framework in Frameworks */,
-				38B4E82923CDE6370034CA95 /* MobileCoreServices.framework in Frameworks */,
 				38B4E82723CDE62C0034CA95 /* MessageUI.framework in Frameworks */,
 				38B4E82523CDE6220034CA95 /* JavaScriptCore.framework in Frameworks */,
 				38B4E82323CDE6180034CA95 /* CoreTelephony.framework in Frameworks */,
@@ -657,6 +657,7 @@
 				3826D4D323CC5777009CAC30 /* libz.tbd in Frameworks */,
 				3826D4D223CC576C009CAC30 /* libsqlite3.0.tbd in Frameworks */,
 				3826D4D123CC574E009CAC30 /* WebKit.framework in Frameworks */,
+				38163E0F249E193D009E889C /* CoreServices.framework in Frameworks */,
 				38D6A3D11C73DDC000968BB2 /* RateMeControllerForiOS.framework in Frameworks */,
 				388A32911C11EDBD00F7459C /* WhoPayingUserDefaultsStoreInterface.framework in Frameworks */,
 				382B76F51C398249000C203A /* CurrencyConverter.framework in Frameworks */,
@@ -1319,6 +1320,7 @@
 		8AA57C6157892F74604CB04B /* Frameworks */ = {
 			isa = PBXGroup;
 			children = (
+				38163E0E249E193D009E889C /* CoreServices.framework */,
 				38B4E82A23CDE6410034CA95 /* SystemConfiguration.framework */,
 				38B4E82823CDE6370034CA95 /* MobileCoreServices.framework */,
 				38B4E82623CDE62C0034CA95 /* MessageUI.framework */,
