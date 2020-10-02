@@ -71,7 +71,6 @@ class InfoScreenTableViewController: UITableViewController, MFMailComposeViewCon
     
     // MARK: Notifications
     @objc func applyProVersion(_ notification: Notification) {
-        Analytics.logEvent("Applying Pro version", parameters: nil)
         DispatchQueue.main.async {
             self.tableView.beginUpdates()
             self.tableView.deleteRows(at: [IndexPath(row: 0, section: 0), IndexPath(row: 1, section: 0)], with: UITableView.RowAnimation.automatic)
@@ -106,7 +105,6 @@ class InfoScreenTableViewController: UITableViewController, MFMailComposeViewCon
     }
     
     @objc func restorePreviousPurchasesFailed(_ notification: Notification) {
-        Analytics.logEvent("Restore Previous Purchases", parameters: nil)
         if notification.userInfo!["status"] as? String == "Not restored" {
             let myPresenter = presentingViewController!
             let title = NSLocalizedString("Nothing to restore", comment: "Nothing to restore")
@@ -149,20 +147,13 @@ class InfoScreenTableViewController: UITableViewController, MFMailComposeViewCon
     func mailComposeController(_ controller: MFMailComposeViewController, didFinishWith result: MFMailComposeResult, error: Error?) {
         switch (result) {
         case MFMailComposeResult.cancelled:
-            Analytics.logEvent("Feedback email cancelled", parameters: nil)
             dismiss(animated: true, completion: nil)
         case MFMailComposeResult.saved:
-            Analytics.logEvent("Feedback email saved", parameters: nil)
             dismiss(animated: true, completion: nil)
         case MFMailComposeResult.sent:
-            Analytics.logEvent("Feedback email send", parameters: nil)
             dismiss(animated: true, completion: nil)
         case MFMailComposeResult.failed:
-            if let error = error {
-                Analytics.logEvent("Feedback email failed", parameters: ["error": error as NSError])
-            } else {
-                Analytics.logEvent("Feedback email failed", parameters: nil)
-            }
+            // TODO: Add failure handling
             print("Failed to open mailComposeController")
         @unknown default:
             fatalError("Unknown value for MFMailComposeResult")
@@ -181,19 +172,14 @@ class InfoScreenTableViewController: UITableViewController, MFMailComposeViewCon
     override func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
         switch ((indexPath as NSIndexPath).section, (indexPath as NSIndexPath).row) {
         case (0, 0):
-            Analytics.logEvent("Buy Pro Product Pressed", parameters: nil)
             MCStoreInterface.defaultStoreInterface.buyProProductSendFrom(self)
         case (0, 1):
-            Analytics.logEvent("Restore Previous Purchases pressed", parameters: nil)
             MCStoreInterface.defaultStoreInterface.restorePreviousPurchases()
         case (1, 0):
-            Analytics.logEvent("Rate Me pressed", parameters: nil)
             RateMeController.openReviewLink()
         case (1, 1):
-            Analytics.logEvent("My Apps pressed", parameters: nil)
             showAllMyApps()
         case (2, 0):
-            Analytics.logEvent("Send Feedback pressed", parameters: nil)
             openMailComposer()
         default:
             print("Nothing to open")

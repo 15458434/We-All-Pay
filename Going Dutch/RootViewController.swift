@@ -14,7 +14,7 @@ class RootViewController: UIViewController {
     // MARK: IBActions
     
     @IBAction func infoButtonTapped(_ sender: AnyObject) {
-        Analytics.logEvent("Open Info Screen", parameters: nil)
+        
     }
     
     // MARK: - UIViewController

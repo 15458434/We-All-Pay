@@ -48,11 +48,11 @@ typedef NS_ENUM(BOOL, MCTonightsBillStatus) {
 #pragma mark - Actions
 
 - (IBAction)newEventPressed:(id)sender {
-    [FIRAnalytics logEventWithName:@"New Event" parameters:nil];
+    
 }
 
 - (IBAction)iButtonPressed:(id)sender {
-    [FIRAnalytics logEventWithName:@"Open Info Screen" parameters:nil];
+    
 }
 
 #pragma mark - New in this class.
@@ -197,16 +197,6 @@ typedef NS_ENUM(BOOL, MCTonightsBillStatus) {
     if (editingStyle == UITableViewCellEditingStyleDelete) {
         [self deleteBillAtIndexpath:indexPath];
     }
-}
-
-- (void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath {
-    MCSharedBill *selectedEvent = [_model.fetchEventsController objectAtIndexPath:indexPath];
-    if (selectedEvent.tripName) {
-        [FIRAnalytics logEventWithName:@"Open event" parameters:@{@"Event name": selectedEvent.tripName, @"Event identifier": selectedEvent.uniqueBillId}];
-    } else {
-        [FIRAnalytics logEventWithName:@"Open event" parameters:@{@"Event identifier": selectedEvent.uniqueBillId}];
-    }
-    
 }
 
 #pragma mark - UITableViewDelegate

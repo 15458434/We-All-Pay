@@ -18,7 +18,6 @@ final class MCPaymentPresenceTableViewCell_iPhone: UITableViewCell {
     @objc var thisCellsPaymentPresence: MCPaymentPresence?
     
     @IBAction func presenceIsSwitched(_ sender: UISwitch) {
-        Analytics.logEvent("SwitchPresence on payment", parameters: ["Presence Value": (isPresentSwitch.isOn as NSNumber)])
         thisCellsPaymentPresence!.isPersonPresent = NSNumber(value: isPresentSwitch.isOn)
         thisCellsPaymentPresence!.payment.recalculateAveragePeopleOweAndStore()
     }

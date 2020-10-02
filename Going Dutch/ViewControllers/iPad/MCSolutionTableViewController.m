@@ -50,9 +50,7 @@ typedef NS_ENUM(BOOL, MCXRateStatus) {
     }
 }
 
-- (IBAction)sendEmailButtonPressed:(id)sender
-{
-    [FIRAnalytics logEventWithName:@"Send Email pressed" parameters:nil];
+- (IBAction)sendEmailButtonPressed:(id)sender {
     [self openMailView:self];
 }
 

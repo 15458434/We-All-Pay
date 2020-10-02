@@ -34,7 +34,6 @@ class SelectPayerTableViewController_iPad: UITableViewController, MCTonightsBill
     }
     
     override func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
-        Analytics.logEvent("Select payer", parameters: nil)
         let payingPerson = people[indexPath.row]
         payingPerson.addPaymentsObject(thisPayment)
         thisPayment.payingPerson = payingPerson

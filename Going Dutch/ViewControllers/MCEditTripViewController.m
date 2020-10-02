@@ -45,7 +45,6 @@
 #pragma mark - actions of this class
 
 - (IBAction)addressBookButton:(id)sender {
-    [FIRAnalytics logEventWithName:@"Contacts pressed" parameters:nil];
     if (!_contactsInserter) {
         _contactsInserter = [[ContactsDataReceiver alloc] initWith:_tonightsBill];
     }
@@ -54,15 +53,12 @@
 
 
 - (IBAction)addPersonButton:(id)sender {
-    [FIRAnalytics logEventWithName:@"Add Person pressed" parameters:nil];
     if ([_tripNameField isEditing]) {
         [_tripNameField resignFirstResponder];
     }
 }
 
-- (void)tappedInTheBackground:(id)sender
-{
-    [FIRAnalytics logEventWithName:@"Background tapped" parameters:nil];
+- (void)tappedInTheBackground:(id)sender {
     [_tripNameField resignFirstResponder];
 }
 
@@ -207,21 +203,10 @@
     return YES;
 }
 
-- (void)textFieldDidBeginEditing:(UITextField *)textField
-{
-    if ([textField isEqual:_tripNameField]) {
-        [FIRAnalytics logEventWithName:@"Did begin editing event name" parameters:nil];
-    }
-}
-
--(void)textFieldDidEndEditing:(UITextField *)textField
-{
-    if ([textField isEqual:_tripNameField]) {
-        [FIRAnalytics logEventWithName:@"Did end editing event name" parameters:nil];
-    }
-    [_tonightsBill setTripName:[_tripNameField text]];
+- (void)textFieldDidEndEditing:(UITextField *)textField {
+    _tonightsBill.tripName = _tripNameField.text;
     NSDate *now = [NSDate date];
-    [_tonightsBill setDateModified:now];
+    _tonightsBill.dateModified = now;
     [[MCWeAllPayStoreController defaultStore] saveMainThreadContext];
     if (!_didSomethingChange) {
         _didSomethingChange = YES;
@@ -323,10 +308,8 @@
 }
 
 // Override to support editing the table view.
-- (void)tableView:(UITableView *)tableView commitEditingStyle:(UITableViewCellEditingStyle)editingStyle forRowAtIndexPath:(NSIndexPath *)indexPath
-{
+- (void)tableView:(UITableView *)tableView commitEditingStyle:(UITableViewCellEditingStyle)editingStyle forRowAtIndexPath:(NSIndexPath *)indexPath {
     if (editingStyle == UITableViewCellEditingStyleDelete) {
-        [FIRAnalytics logEventWithName:@"Delete Person" parameters:nil];
         MCPerson *removablePerson = [_dataController objectAtIndexPath:indexPath];
         [_tonightsBill deletePerson:removablePerson];
         [[MCWeAllPayStoreController defaultStore] saveMainThreadContext];
@@ -357,9 +340,7 @@
     return 60;
 }
 
-- (void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath
-{
-    [FIRAnalytics logEventWithName:@"Open person details" parameters:nil];
+- (void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath {
     [self performSegueWithIdentifier:@"openEditPerson" sender:self];
 }
 

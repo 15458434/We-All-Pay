@@ -66,13 +66,10 @@ typedef NS_ENUM(BOOL, ChildViewStatus) {
 @synthesize delegate;
 
 - (IBAction)tabElseWhereAndDismissKeyboard:(id)sender {
-    [FIRAnalytics logEventWithName:@"tabElseWhereAndDismissKeyboard pressed" parameters:nil];
     [self.view endEditing:YES];
 }
 
-- (IBAction)mainCancelButtonPressed:(id)sender
-{
-    [FIRAnalytics logEventWithName:@"Main Canncel Pressed" parameters:nil];
+- (IBAction)mainCancelButtonPressed:(id)sender {
     [self.view endEditing:YES];
     if ([[[[MCWeAllPayStoreController defaultStore] mainThreadContext] undoManager] canUndo]) {
         [[MCWeAllPayStoreController defaultStore] endUndoGroupAndUndo];
@@ -82,9 +79,7 @@ typedef NS_ENUM(BOOL, ChildViewStatus) {
     [[[self navigationController] presentingViewController] dismissViewControllerAnimated:YES completion:nil];
 }
 
-- (IBAction)mainDoneButtonPressed:(id)sender
-{
-    [FIRAnalytics logEventWithName:@"Main Done Pressed" parameters:nil];
+- (IBAction)mainDoneButtonPressed:(id)sender {
 #ifdef DEBUG
     NSLog(@"MCPaymentViewController: Done button pressed.");
 #endif
@@ -101,9 +96,7 @@ typedef NS_ENUM(BOOL, ChildViewStatus) {
     }];
 }
 
-- (IBAction)currencySelectionPressed:(id)sender
-{
-    [FIRAnalytics logEventWithName:@"Open Select Currency" parameters:nil];
+- (IBAction)currencySelectionPressed:(id)sender {
 #ifdef DEBUG
     NSLog(@"%@, currencySelectionPressed", self);
 #endif
@@ -114,7 +107,6 @@ typedef NS_ENUM(BOOL, ChildViewStatus) {
 }
 
 - (IBAction)selectCategoryPressed:(UIButton *)sender {
-    [FIRAnalytics logEventWithName:@"Open Select Category" parameters:nil];
     [self performSegueWithIdentifier:@"selectCategory" sender:self];
 }
 
