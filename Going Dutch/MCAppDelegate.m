@@ -40,7 +40,6 @@
     
     _launchCounter = [[MCLaunchCounter alloc] init];
     uint64_t result = [_launchCounter increment];
-    [FIRAnalytics logEventWithName:@"Start_counter" parameters:@{@"Counter Value": @(result)}];
 }
 
 - (void)executeOnlyOnceDuringStartup {
@@ -190,9 +189,7 @@
     // Use this method to pause ongoing tasks, disable timers, and throttle down OpenGL ES frame rates. Games should use this method to pause the game.
 }
 
-- (void)applicationDidEnterBackground:(UIApplication *)application
-{
-    [FIRAnalytics logEventWithName:@"application_did_enter_background" parameters:nil];
+- (void)applicationDidEnterBackground:(UIApplication *)application {
     __block UIBackgroundTaskIdentifier taskIdentifier = [application beginBackgroundTaskWithExpirationHandler:^{
         [application endBackgroundTask:taskIdentifier];
         taskIdentifier = UIBackgroundTaskInvalid;
@@ -212,7 +209,6 @@
 {
     // Restart any tasks that were paused (or not yet started) while the application was inactive. If the application was previously in the background, optionally refresh the user interface.
 //    [self startGoogleAnalyticsSession];
-    [FIRAnalytics logEventWithName:@"application_did_become_active" parameters:nil];
 }
 
 - (void)applicationWillTerminate:(UIApplication *)application

@@ -40,9 +40,7 @@
 
 #pragma mark - Actions
 
-- (IBAction)solveButtonPressed:(id)sender
-{
-    [FIRAnalytics logEventWithName:@"Solve pressed" parameters:nil];
+- (IBAction)solveButtonPressed:(id)sender {
     if (_tonightsBill.peoplePresent.count == 0) {
         NSString *title = NSLocalizedString(@"Add some people first", @"Title for an alert message, because there are no people added to this event.");
         NSString *message = NSLocalizedString(@"You can't add a payment when no people are present. There is no one to split the expenses among.", @"A message to the user thay can't add a payment when they didn't add people to the even.");
@@ -93,18 +91,15 @@
     }
     isEditingMode = !isEditingMode;
     if (isEditingMode) {
-        [FIRAnalytics logEventWithName:@"Edit Pressed" parameters:nil];
         UIBarButtonItem *doneButton = [[UIBarButtonItem alloc] initWithBarButtonSystemItem:UIBarButtonSystemItemDone target:self action:@selector(editButtonPressed:)];
         [[self navigationItem] setRightBarButtonItem:doneButton];
     } else {
-        [FIRAnalytics logEventWithName:@"Done Pressed" parameters:nil];
         UIBarButtonItem *editButton = [[UIBarButtonItem alloc] initWithBarButtonSystemItem:UIBarButtonSystemItemEdit target:self action:@selector(editButtonPressed:)];
         [[self navigationItem] setRightBarButtonItem:editButton];
     }
 }
 
 - (IBAction)addressBookButtonPressed:(id)sender {
-    [FIRAnalytics logEventWithName:@"Contacts pressed" parameters:nil];
     if (!_contactsInserter) {
         _contactsInserter = [[ContactsDataReceiver alloc] initWith:_tonightsBill];
     }
@@ -113,7 +108,6 @@
 }
 
 - (IBAction)addPaymentPressed:(id)sender {
-    [FIRAnalytics logEventWithName:@"Add Person pressed" parameters:nil];
     if (_tonightsBill.peoplePresent.count == 0) {
         NSString *title = NSLocalizedString(@"Add some people first", @"Title for an alert message, because there are no people added to this event.");
         NSString *message = NSLocalizedString(@"You can't add a payment when no people are present. There is no one to split the expenses among.", @"A message to the user thay can't add a payment when they didn't add people to the even.");
@@ -221,17 +215,8 @@
     }
 }
 
-- (void)textFieldDidBeginEditing:(UITextField *)textField
-{
+- (void)textFieldDidEndEditing:(UITextField *)textField {
     if (textField == _tripNameField) {
-        [FIRAnalytics logEventWithName:@"Begin edit Event name" parameters:nil];
-    }
-}
-
-- (void)textFieldDidEndEditing:(UITextField *)textField
-{
-    if (textField == _tripNameField) {
-        [FIRAnalytics logEventWithName:@"End edit Event name" parameters:nil];
         [_tonightsBill setTripName:[_tripNameField text]];
     }
 }

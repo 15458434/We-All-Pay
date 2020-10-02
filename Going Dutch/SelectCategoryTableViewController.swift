@@ -34,7 +34,6 @@ class SelectCategoryTableViewController: UITableViewController, MCDismissMeBlock
     // MARK: Actions
     
     @IBAction func mainCancelPressed(_ sender: AnyObject) {
-        Analytics.logEvent("Main Cancel Pressed", parameters: nil)
         navigationController!.presentingViewController?.dismiss(animated: true, completion: nil)
     }
     
@@ -94,7 +93,6 @@ class SelectCategoryTableViewController: UITableViewController, MCDismissMeBlock
             categoryObject = filteredCategory
         }
         
-        Analytics.logEvent("didSelecCategory", parameters: ["categoryID": NSNumber.init(value: categoryObject.categoryId)])
         model.beginUpdates()
         model.update(categoryObject: categoryObject)
         model.endUpdates()

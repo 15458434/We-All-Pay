@@ -37,7 +37,7 @@
 #pragma mark - IBActions
 
 - (IBAction)newEventPressed:(id)sender {
-    [FIRAnalytics logEventWithName:@"New Event" parameters:nil];
+    
 }
 
 
@@ -143,7 +143,7 @@
 #pragma mark - UITableViewDelegate
 
 - (void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath {
-    [FIRAnalytics logEventWithName:@"Open Event" parameters:nil];
+    
 }
 
 - (NSArray<UITableViewRowAction *> *)tableView:(UITableView *)tableView editActionsForRowAtIndexPath:(NSIndexPath *)indexPath {
@@ -223,7 +223,6 @@
 - (void)tableView:(UITableView *)tableView commitEditingStyle:(UITableViewCellEditingStyle)editingStyle forRowAtIndexPath:(NSIndexPath *)indexPath
 {
     if (editingStyle == UITableViewCellEditingStyleDelete) {
-        [FIRAnalytics logEventWithName:@"Delete event" parameters:nil];
         // Delete the row from the data source
         [self deleteBillAtIndexpath:indexPath];
     } else if (editingStyle == UITableViewCellEditingStyleInsert) {

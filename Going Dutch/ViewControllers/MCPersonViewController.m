@@ -38,16 +38,13 @@
 
 @implementation MCPersonViewController
 
-- (IBAction)cancelButtonPressed:(id)sender
-{
-    [FIRAnalytics logEventWithName:@"Cancel button pressed" parameters:nil];
+- (IBAction)cancelButtonPressed:(id)sender {
     [self.view endEditing:YES];
     [[MCWeAllPayStoreController defaultStore] endUndoGroupAndUndo];
     [self.navigationController.presentingViewController dismissViewControllerAnimated:YES completion:nil];
 }
 
 - (IBAction)selectEmailAddressPressed:(id)sender {
-    [FIRAnalytics logEventWithName:@"Select email address pressed" parameters:nil];
     // If any of the fields is first responder resign them first.
     [self.view endEditing:YES];
     
@@ -69,9 +66,7 @@
     }
 }
 
-- (IBAction)doneButtonPressed:(id)sender
-{
-    [FIRAnalytics logEventWithName:@"Done button pressed" parameters:nil];
+- (IBAction)doneButtonPressed:(id)sender {
     [self.view endEditing:YES];
     [[MCWeAllPayStoreController defaultStore] endUndoGroupAndProcess];
     [[MCWeAllPayStoreController defaultStore] saveMainThreadContext];
@@ -217,7 +212,6 @@
         destination.thisPerson = _thisPerson;
         if ([destination conformsToProtocol:@protocol(MCDismissMeBlockProtocol)]) {
             [destination setDismissMe:^{
-                [FIRAnalytics logEventWithName:@"dismiss select email address" parameters:nil];
                 if (destination) {
                     [destination dismissViewControllerAnimated:YES completion:^{
                         self.emailField.text = self.thisPerson.defaultEmailAddress;
