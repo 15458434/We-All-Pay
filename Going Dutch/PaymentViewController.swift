@@ -56,7 +56,6 @@ final class PaymentViewController: MCGenericAdBannerTableViewController, AdBanne
     
     // MARK: IB Actions
     @IBAction func mainCancelPressed(_ sender: UIButton) {
-        Analytics.logEvent("Main Canncel Pressed", parameters: nil)
         mainCancelIsPressed = .isPressed
         dataController.delegate = nil
         if MCWeAllPayStoreController.defaultStore().mainThreadContext.undoManager?.canUndo == true {
@@ -69,7 +68,6 @@ final class PaymentViewController: MCGenericAdBannerTableViewController, AdBanne
     }
     
     @IBAction func mainDonePressed(_ sender: UIButton) {
-        Analytics.logEvent("Main Done Pressed", parameters: nil)
         let now = Date()
         tonightsBill.dateModified = now
         MCWeAllPayStoreController.defaultStore().endUndoGroupAndProcess()
@@ -81,15 +79,15 @@ final class PaymentViewController: MCGenericAdBannerTableViewController, AdBanne
     }
     
     @IBAction func selectPayerButtonPressed(_ sender: AnyObject) {
-        Analytics.logEvent("Select Payer button Pressed", parameters: nil)
+        
     }
     
     @IBAction func categoryButtonPressed(_ sender: AnyObject) {
-        Analytics.logEvent("Open Select Category", parameters: nil)
+        
     }
     
     @IBAction func selectCurrencyPressed(_ sender: AnyObject) {
-        Analytics.logEvent("Open Select Currency", parameters: nil)
+        
     }
     
     // MARK: New in this class
@@ -169,15 +167,6 @@ final class PaymentViewController: MCGenericAdBannerTableViewController, AdBanne
         return true
     }
     
-    func textFieldDidBeginEditing(_ textField: UITextField) {
-        if textField == itemField {
-            Analytics.logEvent("ItemView didBeginEditing", parameters: nil)
-        }
-        if textField == paidField {
-            Analytics.logEvent("PaidView didBeginEditing", parameters: nil)
-        }
-    }
-    
     func textFieldShouldReturn(_ textField: UITextField) -> Bool {
         return true
     }
@@ -190,10 +179,8 @@ final class PaymentViewController: MCGenericAdBannerTableViewController, AdBanne
         if mainCancelIsPressed == CancelButtonPressed.notPressed {
             switch textField {
             case itemField:
-                Analytics.logEvent("itemView DidEndEditing", parameters: nil)
                 thisPayment.descriptionOfPayment = itemField.text
             case paidField:
-                Analytics.logEvent("payerNameField didEndEditing", parameters: nil)
                 let cf = CurrencyFormatter(currencyCode: thisPayment.currency.code)
                 MCWeAllPayStoreController.defaultStore().beginUndoGroupWithoutRegistration()
                 if paidField.text == nil {
@@ -381,7 +368,6 @@ final class PaymentViewController: MCGenericAdBannerTableViewController, AdBanne
         
             destination.dismissMe = {
                 destination.dismiss(animated: true, completion: {
-                    Analytics.logEvent("Close select payer", parameters: nil)
                     self.reloadPayerView()
                 })
             }
@@ -392,7 +378,6 @@ final class PaymentViewController: MCGenericAdBannerTableViewController, AdBanne
             
             destination.dismissMe = {
                 destination.dismiss(animated: true, completion: {
-                    Analytics.logEvent("Close select currency", parameters: nil)
                     MCWeAllPayStoreController.defaultStore().endUndoGroupAndProcessWithoutRegistration()
                 })
             }
@@ -404,7 +389,6 @@ final class PaymentViewController: MCGenericAdBannerTableViewController, AdBanne
             }
             
             destination.dismissMe = {
-                Analytics.logEvent("Close select category", parameters: nil)
                 destination.dismiss(animated: true)
             }
         default:

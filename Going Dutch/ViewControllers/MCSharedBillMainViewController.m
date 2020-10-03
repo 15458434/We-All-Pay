@@ -36,12 +36,10 @@
 
 - (IBAction)toggleEdit:(id)sender {
     if ([[self childViewControllers][0] toggleEditTableView:sender]) {
-        [FIRAnalytics logEventWithName:@"Edit Pressed" parameters:nil];
         // Set Done Button
         UIBarButtonItem *doneButton = [[UIBarButtonItem alloc] initWithBarButtonSystemItem:UIBarButtonSystemItemDone target:self action:@selector(toggleEdit:)];
         [[self navigationItem] setRightBarButtonItem:doneButton];
     } else {
-        [FIRAnalytics logEventWithName:@"Done Pressed" parameters:nil];
         // Set Edit Button
         UIBarButtonItem *editButton = [[UIBarButtonItem alloc] initWithBarButtonSystemItem:UIBarButtonSystemItemEdit target:self action:@selector(toggleEdit:)];
         [[self navigationItem] setRightBarButtonItem:editButton];

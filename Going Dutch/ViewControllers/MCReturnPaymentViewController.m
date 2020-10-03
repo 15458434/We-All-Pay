@@ -51,7 +51,6 @@ typedef NS_OPTIONS(NSUInteger, MCReturnPaymentViewControllerState) {
 #pragma mark - Actions
 
 - (IBAction)sendAsEmailButtonPressed:(id)sender {
-    [FIRAnalytics logEventWithName:@"Send email pressed" parameters:nil];
     [self shareBill:self];
 }
 

@@ -142,7 +142,6 @@
 - (void)tableView:(UITableView *)tableView commitEditingStyle:(UITableViewCellEditingStyle)editingStyle forRowAtIndexPath:(NSIndexPath *)indexPath {
     if (editingStyle == UITableViewCellEditingStyleDelete) {
         // Delete the row from the data source
-        [FIRAnalytics logEventWithName:@"Delete Person" parameters:nil];
         [WhoPayingUserDefaultsStoreInterface sendToUserDefaultsStoreInterface:_tonightsBill];
         [MCPerson deletePerson:[_dataController objectAtIndexPath:indexPath]];
         [[MCWeAllPayStoreController defaultStore] saveMainThreadContext];
@@ -164,7 +163,6 @@
 #pragma mark - UITableViewDelegate
 
 - (void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath {
-    [FIRAnalytics logEventWithName:@"Open person details" parameters:nil];
     [self performSegueWithIdentifier:@"openPerson" sender:self];
 }
 
