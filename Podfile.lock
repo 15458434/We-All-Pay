@@ -321,11 +321,11 @@ SPEC CHECKSUMS:
   Google-Mobile-Ads-SDK: 7d7074359c040f5add4e0963bf860e14690060d0
   GoogleAppMeasurement: 966e88df9d19c15715137bb2ddaf52373f111436
   GoogleDataTransport: b7f406340a291370045a270c599e53c6fa6ec20f
-  GoogleMobileAdsMediationAdColony: 10edb22908eab4a66db2ba00c49a120265b5b663
-  GoogleMobileAdsMediationAppLovin: da6fed6218d60c449a3b3e5d02d19abb5fa51a86
-  GoogleMobileAdsMediationFacebook: 22e37144dabf56418439e7a48a12495838f153f2
-  GoogleMobileAdsMediationInMobi: 3870cd1ed8905ac0b833b45eb5f656eb640b309d
-  GoogleMobileAdsMediationMoPub: f145abc734440e08cb3664d36a5346972786a9db
+  GoogleMobileAdsMediationAdColony: b2002127d64cc4bb43a7f18cb00203b101f45c0f
+  GoogleMobileAdsMediationAppLovin: 8f21b9c4836804cbc20c497867a517b9c6e84a89
+  GoogleMobileAdsMediationFacebook: 820ca7b27e14fbe3a93cf3b17f18c0bf85e04016
+  GoogleMobileAdsMediationInMobi: 58db87dab0140965cacef3d665658597b3b4d562
+  GoogleMobileAdsMediationMoPub: ce3054caf5d816b532ee77360bf74ec440a4d28f
   GoogleMobileAdsMediationTestSuite: f46b44f1360a17f5ad275eb1b8245848a63c30a9
   GoogleUserMessagingPlatform: c85530d930ba509583aa5a6d50a10aca22cf8502
   GoogleUtilities: 7f2f5a07f888cdb145101d6042bc4422f57e70b3
@@ -340,4 +340,4 @@ SPEC CHECKSUMS:
 
 PODFILE CHECKSUM: 2230d429dc894e6947cf28d273937dc62fdea945
 
-COCOAPODS: 1.9.3
+COCOAPODS: 1.10.1
