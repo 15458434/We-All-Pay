@@ -10,6 +10,11 @@ import UIKit
 
 class NotificationsCountTableViewCell: UITableViewCell {
     @IBOutlet weak var leftLabel: UILabel!
+    @IBOutlet weak var countView: NotificationsCountView!
+    
+    func update(count: Int) {
+        countView.count = count
+    }
     
     // MARK: UITableViewCell
     

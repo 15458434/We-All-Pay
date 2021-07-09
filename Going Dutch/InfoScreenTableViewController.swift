@@ -176,6 +176,7 @@ class InfoScreenTableViewController: UITableViewController, MFMailComposeViewCon
             return cell
         case (1, 0):
             let cell = tableView.dequeueReusableCell(withIdentifier: "NotificationsCountTableViewCell", for: indexPath) as! NotificationsCountTableViewCell
+            cell.update(count: notificationModel.messageCount)
             return cell
         case (2, 0):
             let cell = tableView.dequeueReusableCell(withIdentifier: "MCTwoLabelIscreenTableViewCell", for: indexPath) as! MCTwoLabelIscreenTableViewCell
