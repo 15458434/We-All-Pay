@@ -442,6 +442,36 @@
                                     <segue destination="pOx-Hv-jd4" kind="show" identifier="proVersionDescription" trigger="accessoryAction" id="xF4-sX-Pum"/>
                                 </connections>
                             </tableViewCell>
+                            <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" preservesSuperviewLayoutMargins="YES" selectionStyle="default" indentationWidth="10" reuseIdentifier="NotificationsCountTableViewCell" id="P8J-qh-17v" customClass="NotificationsCountTableViewCell" customModule="We_all_pay" customModuleProvider="target">
+                                <rect key="frame" x="0.0" y="90.666667938232422" width="375" height="41.666667938232422"/>
+                                <autoresizingMask key="autoresizingMask"/>
+                                <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" preservesSuperviewLayoutMargins="YES" insetsLayoutMarginsFromSafeArea="NO" tableViewCell="P8J-qh-17v" id="sUP-wJ-H4Y">
+                                    <rect key="frame" x="0.0" y="0.0" width="375" height="41.666667938232422"/>
+                                    <autoresizingMask key="autoresizingMask"/>
+                                    <subviews>
+                                        <stackView opaque="NO" contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="JAb-jy-84u">
+                                            <rect key="frame" x="20" y="11.000000000000002" width="335" height="20.666666666666671"/>
+                                            <subviews>
+                                                <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Notifications" textAlignment="natural" lineBreakMode="tailTruncation" numberOfLines="0" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="YPb-Py-Acz">
+                                                    <rect key="frame" x="0.0" y="0.0" width="335" height="20.666666666666668"/>
+                                                    <fontDescription key="fontDescription" type="system" weight="thin" pointSize="17"/>
+                                                    <nil key="textColor"/>
+                                                    <nil key="highlightedColor"/>
+                                                </label>
+                                            </subviews>
+                                        </stackView>
+                                    </subviews>
+                                    <constraints>
+                                        <constraint firstAttribute="trailing" secondItem="JAb-jy-84u" secondAttribute="trailing" constant="20" symbolic="YES" id="axT-ao-xyF"/>
+                                        <constraint firstAttribute="bottom" secondItem="JAb-jy-84u" secondAttribute="bottom" constant="10" id="cYg-vf-c7b"/>
+                                        <constraint firstItem="JAb-jy-84u" firstAttribute="leading" secondItem="sUP-wJ-H4Y" secondAttribute="leading" constant="20" symbolic="YES" id="fK7-MK-Gf0"/>
+                                        <constraint firstItem="JAb-jy-84u" firstAttribute="top" secondItem="sUP-wJ-H4Y" secondAttribute="top" constant="11" id="iRL-W4-VJy"/>
+                                    </constraints>
+                                </tableViewCellContentView>
+                                <connections>
+                                    <outlet property="leftLabel" destination="YPb-Py-Acz" id="3f4-l5-4fq"/>
+                                </connections>
+                            </tableViewCell>
                         </prototypes>
                         <sections/>
                         <connections>
@@ -493,7 +523,7 @@
                 <placeholder placeholderIdentifier="IBFirstResponder" id="Zpx-6T-7TS" userLabel="First Responder" sceneMemberID="firstResponder"/>
                 <customObject id="GOJ-dB-kUL" customClass="NotificationsInfoModel" customModule="We_all_pay" customModuleProvider="target"/>
             </objects>
-            <point key="canvasLocation" x="1284" y="1479"/>
+            <point key="canvasLocation" x="1284" y="1478.5714285714287"/>
         </scene>
         <!--View Controller-->
         <scene sceneID="RKH-Z5-4NG">
@@ -1685,7 +1715,7 @@
         </designable>
     </designables>
     <inferredMetricsTieBreakers>
-        <segue reference="AFT-dx-z90"/>
+        <segue reference="EWs-3n-BSY"/>
         <segue reference="eZd-I3-t8D"/>
         <segue reference="C0F-pM-cfm"/>
         <segue reference="6AC-aI-bIB"/>

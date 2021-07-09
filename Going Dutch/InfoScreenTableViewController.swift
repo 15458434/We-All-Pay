@@ -233,6 +233,9 @@ class InfoScreenTableViewController: UITableViewController, MFMailComposeViewCon
             cell.leftLabel.text = NSLocalizedString("Restore previous purchases", comment: "Restore previous purchases")
             cell.rightLabel.isHidden = true
             return cell
+        case (1, 0):
+            let cell = tableView.dequeueReusableCell(withIdentifier: "NotificationsCountTableViewCell", for: indexPath) as! NotificationsCountTableViewCell
+            return cell
         case (2, 0):
             let cell = tableView.dequeueReusableCell(withIdentifier: "MCTwoLabelIscreenTableViewCell", for: indexPath) as! MCTwoLabelIscreenTableViewCell
             cell.leftLabel.text = NSLocalizedString("Rate me", comment: "Text of the Rate me button")
