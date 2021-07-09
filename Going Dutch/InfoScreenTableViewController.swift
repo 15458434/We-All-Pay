@@ -21,7 +21,8 @@ private let versionString = Bundle.main.infoDictionary!["CFBundleVersion"] as! S
 class InfoScreenTableViewController: UITableViewController, MFMailComposeViewControllerDelegate {
     @IBOutlet var notificationModel: NotificationsInfoModel!
     
-    // MARK: Properties
+    @IBOutlet var versionLabel: UILabel!
+    
     private var numberOfRowsInSection0: Int {
         if (MCStoreInterface.canMakePayments() && !(MCStoreInterface.defaultStoreInterface.isProProductPurchased)) {
             return 2
@@ -30,15 +31,9 @@ class InfoScreenTableViewController: UITableViewController, MFMailComposeViewCon
         }
     }
     
-    // MARK: IB Outlet
-    @IBOutlet var versionLabel: UILabel!
-    
-    // MARK: IB Actions
     @IBAction func mainCancelButtonPressed(_ sender: AnyObject) {
         self.navigationController?.presentingViewController!.dismiss(animated: true, completion: nil)
     }
-    
-    // MARK: New in this class
     
     private func showAllMyApps() {
         let url = URL(string: "itms-apps://search.itunes.apple.com/WebObjects/MZContentLink.woa/wa/link?mt=8&path=apps%2fmarkcornelisse")!
@@ -71,7 +66,6 @@ class InfoScreenTableViewController: UITableViewController, MFMailComposeViewCon
         }
     }
     
-    // MARK: Notifications
     @objc func applyProVersion(_ notification: Notification) {
         DispatchQueue.main.async {
             self.tableView.beginUpdates()
@@ -118,33 +112,8 @@ class InfoScreenTableViewController: UITableViewController, MFMailComposeViewCon
             myPresenter.present(alertController, animated: true, completion: nil)
         }
     }
-    
-    // MARK: Inherited from super
-    override func viewDidLoad() {
-        super.viewDidLoad()
-        
-        versionLabel.text = "\(shortVersionString) build \(versionString)"
-    }
-    
-    override func viewDidAppear(_ animated: Bool) {
-        super.viewDidAppear(animated)
-        
-        NotificationCenter.default.addObserver(self, selector: #selector(InfoScreenTableViewController.applyProVersion(_:)), name: NSNotification.Name(rawValue: MCStoreInterface.applyProVersionNotification()), object: MCStoreInterface.defaultStoreInterface)
-        NotificationCenter.default.addObserver(self, selector: #selector(InfoScreenTableViewController.postProductPrice(_:)), name: NSNotification.Name(rawValue: "Product price"), object: MCStoreInterface.defaultStoreInterface)
-        NotificationCenter.default.addObserver(self, selector: #selector(InfoScreenTableViewController.restorePreviousPurchasesFailed(_:)), name: NSNotification.Name(rawValue:"Restore previous purchases"), object: MCStoreInterface.defaultStoreInterface)
-    }
-    
-    override func viewDidDisappear(_ animated: Bool) {
-        super.viewDidDisappear(animated)
-        
-        NotificationCenter.default.removeObserver(self)
-    }
-    
-    override var prefersStatusBarHidden: Bool {
-        return true
-    }
-    
-    // MARK: MF MAil Compose Delegate
+
+    // MARK: MFMailComposeViewControllerDelegate
     
     func mailComposeController(_ controller: MFMailComposeViewController, didFinishWith result: MFMailComposeResult, error: Error?) {
         switch (result) {
@@ -161,38 +130,10 @@ class InfoScreenTableViewController: UITableViewController, MFMailComposeViewCon
             fatalError("Unknown value for MFMailComposeResult")
         }
     }
+    // MARK: UITableViewController
     
-    // MARK: UI Table View Delegate
-    override func tableView(_ tableView: UITableView, heightForRowAt indexPath: IndexPath) -> CGFloat {
-        return UITableView.automaticDimension
-    }
+    // MARK: UITableViewDataSource
     
-    override func tableView(_ tableView: UITableView, estimatedHeightForRowAt indexPath: IndexPath) -> CGFloat {
-        return 50.0
-    }
-    
-    override func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
-        switch (indexPath.section, indexPath.row) {
-        case (0, 0):
-            MCStoreInterface.defaultStoreInterface.buyProProductSendFrom(self)
-        case (0, 1):
-            MCStoreInterface.defaultStoreInterface.restorePreviousPurchases()
-        case (1, 0):
-            debugPrint("Open notifications.\n")
-        case (2, 0):
-            RateMeController.openReviewLink()
-        case (2, 1):
-            showAllMyApps()
-        case (3, 0):
-            openMailComposer()
-        default:
-            print("Nothing to open")
-        }
-        let thisCell = tableView.cellForRow(at: indexPath)
-        thisCell!.setSelected(false, animated: true)
-    }
-    
-    // MARK: UI Table View Data Source
     override func numberOfSections(in tableView: UITableView) -> Int {
         return 4
     }
@@ -256,4 +197,65 @@ class InfoScreenTableViewController: UITableViewController, MFMailComposeViewCon
             return UITableViewCell()
         }
     }
+    
+    // MARK: UITableViewDelegate
+    
+    override func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
+        switch (indexPath.section, indexPath.row) {
+        case (0, 0):
+            MCStoreInterface.defaultStoreInterface.buyProProductSendFrom(self)
+        case (0, 1):
+            MCStoreInterface.defaultStoreInterface.restorePreviousPurchases()
+        case (1, 0):
+            debugPrint("Open notifications.\n")
+        case (2, 0):
+            RateMeController.openReviewLink()
+        case (2, 1):
+            showAllMyApps()
+        case (3, 0):
+            openMailComposer()
+        default:
+            print("Nothing to open")
+        }
+        let thisCell = tableView.cellForRow(at: indexPath)
+        thisCell!.setSelected(false, animated: true)
+    }
+    
+    override func tableView(_ tableView: UITableView, heightForRowAt indexPath: IndexPath) -> CGFloat {
+        return UITableView.automaticDimension
+    }
+    
+    override func tableView(_ tableView: UITableView, estimatedHeightForRowAt indexPath: IndexPath) -> CGFloat {
+        return 50.0
+    }
+    
+    // MARK: UIViewController
+    
+    override func viewDidLoad() {
+        super.viewDidLoad()
+        
+        versionLabel.text = "\(shortVersionString) build \(versionString)"
+    }
+    
+    override func viewDidAppear(_ animated: Bool) {
+        super.viewDidAppear(animated)
+        
+        NotificationCenter.default.addObserver(self, selector: #selector(InfoScreenTableViewController.applyProVersion(_:)), name: NSNotification.Name(rawValue: MCStoreInterface.applyProVersionNotification()), object: MCStoreInterface.defaultStoreInterface)
+        NotificationCenter.default.addObserver(self, selector: #selector(InfoScreenTableViewController.postProductPrice(_:)), name: NSNotification.Name(rawValue: "Product price"), object: MCStoreInterface.defaultStoreInterface)
+        NotificationCenter.default.addObserver(self, selector: #selector(InfoScreenTableViewController.restorePreviousPurchasesFailed(_:)), name: NSNotification.Name(rawValue:"Restore previous purchases"), object: MCStoreInterface.defaultStoreInterface)
+    }
+    
+    override func viewDidDisappear(_ animated: Bool) {
+        super.viewDidDisappear(animated)
+        
+        NotificationCenter.default.removeObserver(self)
+    }
+    
+    override var prefersStatusBarHidden: Bool {
+        return true
+    }
+    
+    // MARK: UIResponder
+    
+    // MARK: NSObject
 }
