@@ -208,7 +208,8 @@ class InfoScreenTableViewController: UITableViewController, MFMailComposeViewCon
         case (0, 1):
             MCStoreInterface.defaultStoreInterface.restorePreviousPurchases()
         case (1, 0):
-            debugPrint("Open notifications.\n")
+            let cellPressed = tableView.cellForRow(at: indexPath)
+            performSegue(withIdentifier: "OpenNotifications", sender: cellPressed)
         case (2, 0):
             RateMeController.openReviewLink()
         case (2, 1):
