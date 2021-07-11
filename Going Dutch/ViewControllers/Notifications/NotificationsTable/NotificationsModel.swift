@@ -11,6 +11,8 @@ import UIKit
 class NotificationsModel: NSObject {
     @objc dynamic private(set) var notifications: [NotificationsItemProtocol] = [NotificationsItemProtocol]()
     
+    /// addItem to the notifications array in the correct order and trigger KVO.
+    /// - Parameter notificationsItem: The item add to the notifications array.
     private func addItem(_ notificationsItem: NotificationsItemProtocol) {
         let mutableNotifications: NSMutableArray = self.mutableArrayValue(forKey: "notifications")
         let index = mutableNotifications.indexOfObject { item, index, stop in
@@ -34,10 +36,11 @@ class NotificationsModel: NSObject {
     
     override init() {
         super.init()
-        let item1 = NotificationsItem(uuid: UUID(), date: Date(), title: "Your feedback please.", subTitle: "We can improve this.")
-        let item2 = NotificationsItem(uuid: UUID(), date: Date(), title: "Your feedback please 2.", subTitle: "We can improve this 2.")
-        let item3 = NotificationsItem(uuid: UUID(), date: Date(), title: "Your feedback please 3.", subTitle: "We can improve this 3.")
-        let item4 = NotificationsItem(uuid: UUID(), date: Date(), title: "Your feedback please 4.", subTitle: "We can improve this 4.")
+        // TODO: Remove this population code to test the TableView.
+        let item1 = NotificationsItem(uuid: UUID(), date: Date(), image: #imageLiteral(resourceName: "We All Pay - Sender"), title: "Your feedback please.", subTitle: "We can improve this.")
+        let item2 = NotificationsItem(uuid: UUID(), date: Date(), image: #imageLiteral(resourceName: "We All Pay - Sender"), title: "Your feedback please 2.", subTitle: "We can improve this 2.")
+        let item3 = NotificationsItem(uuid: UUID(), date: Date(), image: #imageLiteral(resourceName: "We All Pay - Sender"), title: "Your feedback please 3.", subTitle: "We can improve this 3.")
+        let item4 = NotificationsItem(uuid: UUID(), date: Date(), image: #imageLiteral(resourceName: "We All Pay - Sender"), title: "Your feedback please 4.", subTitle: "We can improve this 4.")
         self.addItem(item4)
         self.addItem(item2)
         self.addItem(item1)

@@ -80,6 +80,7 @@
 		3864147F269B185400590ABA /* NotificationsTableViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3864147E269B185300590ABA /* NotificationsTableViewController.swift */; };
 		38641482269B18C400590ABA /* NotificationsModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 38641481269B18C400590ABA /* NotificationsModel.swift */; };
 		38641484269B2E7A00590ABA /* NotificationTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 38641483269B2E7A00590ABA /* NotificationTableViewCell.swift */; };
+		38641486269B5E9F00590ABA /* Notifications.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 38641485269B5E9F00590ABA /* Notifications.xcassets */; };
 		3866D66523EF6921004554FF /* RemoteConfigTrueCasino.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3866D66423EF6921004554FF /* RemoteConfigTrueCasino.swift */; };
 		3867253B23DB248E009607E8 /* fastlane in Resources */ = {isa = PBXBuildFile; fileRef = 3867253A23DB248E009607E8 /* fastlane */; };
 		3867CE4718704B2E001EC222 /* Main-Iphone.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 3867CE4918704B2E001EC222 /* Main-Iphone.storyboard */; };
@@ -430,6 +431,7 @@
 		3864147E269B185300590ABA /* NotificationsTableViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NotificationsTableViewController.swift; sourceTree = "<group>"; };
 		38641481269B18C400590ABA /* NotificationsModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NotificationsModel.swift; sourceTree = "<group>"; };
 		38641483269B2E7A00590ABA /* NotificationTableViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NotificationTableViewCell.swift; sourceTree = "<group>"; };
+		38641485269B5E9F00590ABA /* Notifications.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Notifications.xcassets; sourceTree = "<group>"; };
 		3866D66423EF6921004554FF /* RemoteConfigTrueCasino.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RemoteConfigTrueCasino.swift; sourceTree = "<group>"; };
 		3867253A23DB248E009607E8 /* fastlane */ = {isa = PBXFileReference; lastKnownFileType = folder; path = fastlane; sourceTree = "<group>"; };
 		3867CE4018703E9A001EC222 /* nl */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.strings; name = nl; path = nl.lproj/InfoPlist.strings; sourceTree = "<group>"; };
@@ -999,6 +1001,7 @@
 			isa = PBXGroup;
 			children = (
 				3864147C269B183A00590ABA /* Notifications.storyboard */,
+				38641485269B5E9F00590ABA /* Notifications.xcassets */,
 				38641480269B189900590ABA /* NotificationsTable */,
 			);
 			name = Notifications;
@@ -1755,6 +1758,7 @@
 			isa = PBXResourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				38641486269B5E9F00590ABA /* Notifications.xcassets in Resources */,
 				38572AE1169D437B00969C62 /* InfoPlist.strings in Resources */,
 				3867CE5118704DAF001EC222 /* MCTableEmptyMessage.xib in Resources */,
 				38E88B40226B19EE008EB4BE /* GoogleService-Info.plist in Resources */,
