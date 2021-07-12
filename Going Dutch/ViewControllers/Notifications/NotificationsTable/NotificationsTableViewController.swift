@@ -55,7 +55,7 @@ class NotificationsTableViewController: UITableViewController {
                     let section: Int = 0
                     switch kind {
                     case .setting:
-                        self.tableView.reloadSections(IndexSet(integer: section), with: .automatic)
+                        mySelf.tableView.reloadSections(IndexSet(integer: section), with: .automatic)
                     case .insertion:
                         let indexes = change.indexes!
                         let indexPaths = indexes.map { row in
