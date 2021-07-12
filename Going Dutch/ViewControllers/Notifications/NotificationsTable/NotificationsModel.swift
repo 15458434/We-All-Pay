@@ -31,6 +31,15 @@ class NotificationsModel: NSObject {
         }
     }
     
+    private func remove(at index: Int) {
+        let mutableNotifications: NSMutableArray = self.mutableArrayValue(forKey: "notifications")
+        mutableNotifications.removeObject(at: index)
+    }
+    
+    func add() {
+        let item = NotificationsItem(uuid: UUID(), date: Date(), image: #imageLiteral(resourceName: "We All Pay - Sender"), title: UUID().uuidString, subTitle: "\(notifications.count)")
+        self.addItem(item)
+    }
     
     // MARK: NSObject
     
