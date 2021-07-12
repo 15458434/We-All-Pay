@@ -9,7 +9,7 @@
 import UIKit
 
 class NotificationsInfoModel: NSObject {
-    @objc dynamic var messageCount: Int = 0
+    @objc dynamic var messageCount: Int = 1
     
     func determineMessageCount() {
         messageCount = 1

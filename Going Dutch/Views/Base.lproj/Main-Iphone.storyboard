@@ -439,27 +439,26 @@
                                 <connections>
                                     <outlet property="leftLabel" destination="JaE-Fp-cO9" id="OQn-ld-6Xq"/>
                                     <outlet property="rightLabel" destination="Yd0-Ev-8xr" id="im2-za-bNh"/>
-                                    <segue destination="pOx-Hv-jd4" kind="show" identifier="proVersionDescription" trigger="accessoryAction" id="xF4-sX-Pum"/>
                                 </connections>
                             </tableViewCell>
                             <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" preservesSuperviewLayoutMargins="YES" selectionStyle="default" indentationWidth="10" reuseIdentifier="NotificationsCountTableViewCell" id="P8J-qh-17v" customClass="NotificationsCountTableViewCell" customModule="We_all_pay" customModuleProvider="target">
-                                <rect key="frame" x="0.0" y="90.666667938232422" width="375" height="71.333335876464844"/>
+                                <rect key="frame" x="0.0" y="90.666667938232422" width="375" height="41.666667938232422"/>
                                 <autoresizingMask key="autoresizingMask"/>
                                 <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" preservesSuperviewLayoutMargins="YES" insetsLayoutMarginsFromSafeArea="NO" tableViewCell="P8J-qh-17v" id="sUP-wJ-H4Y">
-                                    <rect key="frame" x="0.0" y="0.0" width="375" height="71.333335876464844"/>
+                                    <rect key="frame" x="0.0" y="0.0" width="375" height="41.666667938232422"/>
                                     <autoresizingMask key="autoresizingMask"/>
                                     <subviews>
                                         <stackView opaque="NO" contentMode="scaleToFill" distribution="equalSpacing" alignment="center" spacing="6" translatesAutoresizingMaskIntoConstraints="NO" id="JAb-jy-84u">
-                                            <rect key="frame" x="20" y="11.000000000000004" width="335" height="50.333333333333343"/>
+                                            <rect key="frame" x="20" y="11.000000000000002" width="335" height="20.666666666666671"/>
                                             <subviews>
                                                 <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Notifications" textAlignment="natural" lineBreakMode="tailTruncation" numberOfLines="0" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="YPb-Py-Acz">
-                                                    <rect key="frame" x="0.0" y="14.999999999999998" width="164.66666666666666" height="20.333333333333329"/>
+                                                    <rect key="frame" x="0.0" y="0.33333333333333393" width="164.66666666666666" height="20.333333333333329"/>
                                                     <fontDescription key="fontDescription" type="system" weight="thin" pointSize="17"/>
                                                     <nil key="textColor"/>
                                                     <nil key="highlightedColor"/>
                                                 </label>
-                                                <view clipsSubviews="YES" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" horizontalCompressionResistancePriority="751" verticalCompressionResistancePriority="751" ambiguous="YES" translatesAutoresizingMaskIntoConstraints="NO" id="PXr-ct-Ja1" customClass="NotificationsCountView" customModule="We_all_pay" customModuleProvider="target">
-                                                    <rect key="frame" x="285" y="0.3333333333333357" width="50" height="50"/>
+                                                <view clipsSubviews="YES" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" horizontalCompressionResistancePriority="751" verticalCompressionResistancePriority="751" translatesAutoresizingMaskIntoConstraints="NO" id="PXr-ct-Ja1" customClass="NotificationsCountView" customModule="We_all_pay" customModuleProvider="target">
+                                                    <rect key="frame" x="317.33333333333331" y="0.33333333333333393" width="17.666666666666686" height="20"/>
                                                     <color key="backgroundColor" systemColor="systemBackgroundColor"/>
                                                     <userDefinedRuntimeAttributes>
                                                         <userDefinedRuntimeAttribute type="color" keyPath="textColor">
@@ -537,37 +536,23 @@
                     <connections>
                         <outlet property="notificationModel" destination="GOJ-dB-kUL" id="VbI-4g-vPW"/>
                         <outlet property="versionLabel" destination="IrA-LQ-aX2" id="cfd-7b-p72"/>
+                        <segue destination="3mD-HN-ynv" kind="show" identifier="OpenNotifications" id="S98-wj-e9R"/>
                     </connections>
                 </tableViewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="Zpx-6T-7TS" userLabel="First Responder" sceneMemberID="firstResponder"/>
                 <customObject id="GOJ-dB-kUL" customClass="NotificationsInfoModel" customModule="We_all_pay" customModuleProvider="target"/>
             </objects>
-            <point key="canvasLocation" x="1284" y="1478.5714285714287"/>
+            <point key="canvasLocation" x="1284" y="1481"/>
         </scene>
-        <!--View Controller-->
-        <scene sceneID="RKH-Z5-4NG">
+        <!--NotificationsTableViewController-->
+        <scene sceneID="eFd-pQ-f3n">
             <objects>
-                <viewController id="pOx-Hv-jd4" sceneMemberID="viewController">
-                    <view key="view" contentMode="scaleToFill" id="K0I-VY-Xx5">
-                        <rect key="frame" x="0.0" y="0.0" width="375" height="702"/>
-                        <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
-                        <subviews>
-                            <textView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" fixedFrame="YES" showsHorizontalScrollIndicator="NO" editable="NO" selectable="NO" translatesAutoresizingMaskIntoConstraints="NO" id="X3n-7F-5pw">
-                                <rect key="frame" x="0.0" y="0.0" width="320" height="504"/>
-                                <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
-                                <color key="backgroundColor" red="1" green="1" blue="1" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
-                                <fontDescription key="fontDescription" type="system" pointSize="14"/>
-                                <textInputTraits key="textInputTraits" autocapitalizationType="sentences"/>
-                            </textView>
-                        </subviews>
-                        <viewLayoutGuide key="safeArea" id="9nm-hQ-dF7"/>
-                        <color key="backgroundColor" red="1" green="1" blue="1" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
-                    </view>
-                    <navigationItem key="navigationItem" id="3B9-vz-vQb"/>
-                </viewController>
-                <placeholder placeholderIdentifier="IBFirstResponder" id="fMS-Wk-MA3" userLabel="First Responder" sceneMemberID="firstResponder"/>
+                <viewControllerPlaceholder storyboardName="Notifications" referencedIdentifier="NotificationsTableViewController" id="3mD-HN-ynv" sceneMemberID="viewController">
+                    <navigationItem key="navigationItem" id="zd7-xd-12h"/>
+                </viewControllerPlaceholder>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="6fo-qh-8yh" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="2332.5" y="1480.9859154929577"/>
+            <point key="canvasLocation" x="2039" y="1481"/>
         </scene>
         <!--Shared Bill Page View Controller-->
         <scene sceneID="BLZ-lN-WQF">
@@ -1729,8 +1714,20 @@
         </scene>
     </scenes>
     <designables>
+        <designable name="PXr-ct-Ja1">
+            <size key="intrinsicContentSize" width="17.59765625" height="20.287109375"/>
+        </designable>
+        <designable name="Y6i-cu-NDo">
+            <size key="intrinsicContentSize" width="480" height="480"/>
+        </designable>
+        <designable name="ZjT-qg-OGx">
+            <size key="intrinsicContentSize" width="480" height="480"/>
+        </designable>
         <designable name="jMQ-DN-rdu">
-            <size key="intrinsicContentSize" width="1219.2000071055095" height="1219.2000071055095"/>
+            <size key="intrinsicContentSize" width="480" height="480"/>
+        </designable>
+        <designable name="rmI-7G-oMX">
+            <size key="intrinsicContentSize" width="480" height="480"/>
         </designable>
     </designables>
     <inferredMetricsTieBreakers>
