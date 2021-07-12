@@ -36,7 +36,7 @@ final class SideMenuTransitioner: NSObject, UIViewControllerTransitioningDelegat
     // MARK: NSObject
 }
 
-final class SideMenuPresentationController: UIPresentationController, UIGestureRecognizerDelegate {
+final class SideMenuPresentationController: UIPresentationController, UIGestureRecognizerDelegate, UINavigationControllerDelegate {
     private weak var backgroundTapGestureRecognizer: UITapGestureRecognizer!
     
     @objc private func backgroundTapped(_ sender: UITapGestureRecognizer) {
@@ -45,6 +45,29 @@ final class SideMenuPresentationController: UIPresentationController, UIGestureR
         }
         
         self.presentedViewController.dismiss(animated: true, completion: nil)
+    }
+    
+    // MARK: UINavigationControllerDelegate
+    
+    func navigationController(_ navigationController: UINavigationController, willShow viewController: UIViewController, animated: Bool) {
+        if let transitionCoordinator = navigationController.transitionCoordinator {
+            transitionCoordinator.animate(alongsideTransition: { transitionCoordinatorContext in
+                var navigationControllerViewframe = navigationController.view.frame
+                var viewControllerViewFrame = viewController.view.frame
+                switch viewController {
+                case is InfoScreenTableViewController:
+                    navigationControllerViewframe.size.width = 280
+                    viewControllerViewFrame.size.width = 280
+                case is NotificationsTableViewController:
+                    navigationControllerViewframe.size.width = self.containerView!.bounds.width
+                    viewControllerViewFrame.size.width = self.containerView!.bounds.width
+                default:
+                    ()
+                }
+                navigationController.view.frame = navigationControllerViewframe
+                viewController.view.frame = viewControllerViewFrame
+            }, completion: nil)
+        }
     }
     
     // MARK: UIGestureRecognizerDelegate
@@ -59,6 +82,13 @@ final class SideMenuPresentationController: UIPresentationController, UIGestureR
     }
     
     // MARK: UIPresentationController
+    
+    override init(presentedViewController: UIViewController, presenting presentingViewController: UIViewController?) {
+        super.init(presentedViewController: presentedViewController, presenting: presentingViewController)
+        if let navigationController = presentedViewController as? UINavigationController {
+            navigationController.delegate = self
+        }
+    }
     
     override var frameOfPresentedViewInContainerView: CGRect {
         var frameOfPresentingViewController = presentingViewController.view.frame
