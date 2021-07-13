@@ -99,6 +99,7 @@
 		387494D619F053E9001614CA /* WeAllPayStore2to4.xcmappingmodel in Sources */ = {isa = PBXBuildFile; fileRef = 387494D519F053E9001614CA /* WeAllPayStore2to4.xcmappingmodel */; };
 		387494D819F05476001614CA /* WeAllPayStore1to4.xcmappingmodel in Sources */ = {isa = PBXBuildFile; fileRef = 387494D719F05476001614CA /* WeAllPayStore1to4.xcmappingmodel */; };
 		387D3A911870652B0060FAF8 /* Localizable.strings in Resources */ = {isa = PBXBuildFile; fileRef = 387D3A931870652B0060FAF8 /* Localizable.strings */; };
+		38819071269D914E000949F4 /* MCNotificationReadIndicator.m in Sources */ = {isa = PBXBuildFile; fileRef = 38819070269D914E000949F4 /* MCNotificationReadIndicator.m */; };
 		38894980211C2DDE00BDF9CD /* CoreDataSaveHandlerWhenEnteringBackground.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3889497F211C2DDE00BDF9CD /* CoreDataSaveHandlerWhenEnteringBackground.swift */; };
 		388A326E1C10965D00F7459C /* CategoryPictureObject.swift in Sources */ = {isa = PBXBuildFile; fileRef = 385295CE1C10583E0081894D /* CategoryPictureObject.swift */; };
 		388A326F1C10966000F7459C /* CategoryPictureStoreController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 385295D01C105C580081894D /* CategoryPictureStoreController.swift */; };
@@ -459,6 +460,8 @@
 		387494D519F053E9001614CA /* WeAllPayStore2to4.xcmappingmodel */ = {isa = PBXFileReference; lastKnownFileType = wrapper.xcmappingmodel; path = WeAllPayStore2to4.xcmappingmodel; sourceTree = "<group>"; };
 		387494D719F05476001614CA /* WeAllPayStore1to4.xcmappingmodel */ = {isa = PBXFileReference; lastKnownFileType = wrapper.xcmappingmodel; path = WeAllPayStore1to4.xcmappingmodel; sourceTree = "<group>"; };
 		387D3A8E187053BA0060FAF8 /* nl */ = {isa = PBXFileReference; fileEncoding = 10; lastKnownFileType = text.plist.strings; name = nl; path = "nl.lproj/Main-Iphone.strings"; sourceTree = "<group>"; };
+		3881906F269D914E000949F4 /* MCNotificationReadIndicator.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = MCNotificationReadIndicator.h; sourceTree = "<group>"; };
+		38819070269D914E000949F4 /* MCNotificationReadIndicator.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = MCNotificationReadIndicator.m; sourceTree = "<group>"; };
 		3889497F211C2DDE00BDF9CD /* CoreDataSaveHandlerWhenEnteringBackground.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CoreDataSaveHandlerWhenEnteringBackground.swift; sourceTree = "<group>"; };
 		388A32701C11C51F00F7459C /* WhoPayingUserDefaultsStoreInterface.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = WhoPayingUserDefaultsStoreInterface.swift; path = "../Who is paying next/WhoPayingUserDefaultsStoreInterface.swift"; sourceTree = "<group>"; };
 		388A32741C11EA1400F7459C /* WhoPayingUserDefaultsStoreInterfaceWeAllPayExtension.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = WhoPayingUserDefaultsStoreInterfaceWeAllPayExtension.swift; sourceTree = "<group>"; };
@@ -1013,6 +1016,8 @@
 			children = (
 				3864147E269B185300590ABA /* NotificationsTableViewController.swift */,
 				38641483269B2E7A00590ABA /* NotificationTableViewCell.swift */,
+				3881906F269D914E000949F4 /* MCNotificationReadIndicator.h */,
+				38819070269D914E000949F4 /* MCNotificationReadIndicator.m */,
 				38641481269B18C400590ABA /* NotificationsModel.swift */,
 			);
 			path = NotificationsTable;
@@ -2093,6 +2098,7 @@
 				38641482269B18C400590ABA /* NotificationsModel.swift in Sources */,
 				38D96ED423E30F5E00C03170 /* MCAdBannerTableViewCell.swift in Sources */,
 				384EC9121BC3008300A80799 /* SelectEmailAddressTableViewController_iPad.swift in Sources */,
+				38819071269D914E000949F4 /* MCNotificationReadIndicator.m in Sources */,
 				38B88E2E1D81FF6E0069A44D /* MailComposeViewController.swift in Sources */,
 				38977E5F1B2A32EF008484A4 /* MCPersonTableViewCell.swift in Sources */,
 				385295CF1C10583E0081894D /* CategoryPictureObject.swift in Sources */,

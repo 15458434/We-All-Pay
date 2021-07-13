@@ -35,7 +35,8 @@ class NotificationsTableViewController: UITableViewController {
     }
     
     override func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
-        
+        model.updateIsRead(for: indexPath.row)
+        tableView.deselectRow(at: indexPath, animated: true)
     }
     
     // MARK: UIViewController
