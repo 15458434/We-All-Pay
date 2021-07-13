@@ -25,10 +25,12 @@ import UIKit
             update()
         }
     }
+    private var countStringRect: CGRect = .zero
     
     private func update() {
         let attrs: [NSAttributedString.Key: Any] = [.font: UIFont.systemFont(ofSize: fontSize), .foregroundColor: UIColor.white]
         countString = NSAttributedString(string: "\(count)", attributes: attrs)
+        countStringRect = countString.boundingRect(with: CGSize(width: CGFloat.infinity, height: CGFloat.infinity), options: [], context: nil)
         self.setNeedsDisplay()
     }
     
@@ -40,19 +42,22 @@ import UIKit
         self.layer.cornerRadius = self.bounds.height / 2
         self.layer.masksToBounds = true
         
-        var stringRect = self.bounds
-        let width = self.bounds.width
-        let height = self.bounds.height
-        let widthOfTheText = width - (height / 2)
-        stringRect.origin.x = (width - widthOfTheText) / 2
+        var stringRect = countStringRect
+        stringRect.origin.x = self.bounds.midX - (countStringRect.size.width / 2)
+        stringRect.origin.y = self.bounds.midY - (countStringRect.size.height / 2)
+        // fix draw position
         countString.draw(in: stringRect)
     }
     
     override var intrinsicContentSize: CGSize {
-        var rect = countString.boundingRect(with: CGSize(width: CGFloat.infinity, height: CGFloat.infinity), options: [], context: nil)
-        print("rect: \(rect)")
+        var rect = countStringRect
         rect.origin = CGPoint.zero
-        rect.size.width += (rect.size.height / 2)
+        let halfHeight = (rect.size.height / 2)
+        if halfHeight > rect.size.width {
+            rect.size.width = rect.size.height
+        } else {
+            rect.size.width += halfHeight
+        }
         return rect.size
     }
     
