@@ -30,4 +30,6 @@
 #import "MCReturnPaymentViewController.h"
 #import "MCSolutionTableViewController.h"
 
+#import "MCNotificationReadIndicator.h"
+
 #import "MCEmailTextInputProxy.h"

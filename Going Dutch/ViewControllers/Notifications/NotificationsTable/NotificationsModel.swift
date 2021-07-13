@@ -37,8 +37,13 @@ class NotificationsModel: NSObject {
     }
     
     func add() {
-        let item = NotificationsItem(uuid: UUID(), date: Date(), image: #imageLiteral(resourceName: "We All Pay - Sender"), title: UUID().uuidString, subTitle: "\(notifications.count)")
+        let item = NotificationsItem(uuid: UUID(), date: Date(), image: #imageLiteral(resourceName: "We All Pay - Sender"), title: UUID().uuidString, subTitle: "\(notifications.count)", isRead: false)
         self.addItem(item)
+    }
+    
+    func updateIsRead(for index: Int) {
+        let item = notifications[index]
+        item.isRead = true
     }
     
     // MARK: NSObject
@@ -46,10 +51,10 @@ class NotificationsModel: NSObject {
     override init() {
         super.init()
         // TODO: Remove this population code to test the TableView.
-        let item1 = NotificationsItem(uuid: UUID(), date: Date(), image: #imageLiteral(resourceName: "We All Pay - Sender"), title: "Your feedback please.", subTitle: "We can improve this.")
-        let item2 = NotificationsItem(uuid: UUID(), date: Date(), image: #imageLiteral(resourceName: "We All Pay - Sender"), title: "Your feedback please 2.", subTitle: "We can improve this 2.")
-        let item3 = NotificationsItem(uuid: UUID(), date: Date(), image: #imageLiteral(resourceName: "We All Pay - Sender"), title: "Your feedback please 3.", subTitle: "We can improve this 3.")
-        let item4 = NotificationsItem(uuid: UUID(), date: Date(), image: #imageLiteral(resourceName: "We All Pay - Sender"), title: "Your feedback please 4.", subTitle: "We can improve this 4.")
+        let item1 = NotificationsItem(uuid: UUID(), date: Date(), image: #imageLiteral(resourceName: "We All Pay - Sender"), title: "Your feedback please 1.", subTitle: "We can improve this 1.", isRead: false)
+        let item2 = NotificationsItem(uuid: UUID(), date: Date(), image: #imageLiteral(resourceName: "We All Pay - Sender"), title: "Your feedback please 2.", subTitle: "We can improve this 2.", isRead: false)
+        let item3 = NotificationsItem(uuid: UUID(), date: Date(), image: #imageLiteral(resourceName: "We All Pay - Sender"), title: "Your feedback please 3.", subTitle: "We can improve this 3.", isRead: false)
+        let item4 = NotificationsItem(uuid: UUID(), date: Date(), image: #imageLiteral(resourceName: "We All Pay - Sender"), title: "Your feedback please 4.", subTitle: "We can improve this 4.", isRead: false)
         self.addItem(item4)
         self.addItem(item2)
         self.addItem(item1)
@@ -63,22 +68,24 @@ class NotificationsModel: NSObject {
     var image: UIImage? { get set }
     var title: String! { get set }
     var subTitle: String? { get set }
+    var isRead: Bool { get set }
 }
 
 class NotificationsItem: NSObject, NotificationsItemProtocol {
     
-    init(uuid: UUID, date: Date? = nil) {
+    init(uuid: UUID, date: Date? = nil, isRead: Bool) {
         self.uuid = uuid
         if let date = date {
             self.date = date
         } else {
             self.date = Date()
         }
+        self.isRead = isRead
         super.init()
     }
     
-    convenience init(uuid: UUID, date: Date? = nil, image: UIImage? = nil, title: String!, subTitle: String? = nil) {
-        self.init(uuid: uuid)
+    convenience init(uuid: UUID, date: Date? = nil, image: UIImage? = nil, title: String!, subTitle: String? = nil, isRead: Bool) {
+        self.init(uuid: uuid, isRead: isRead)
         self.image = image
         self.title = title
         self.subTitle = subTitle
@@ -91,6 +98,7 @@ class NotificationsItem: NSObject, NotificationsItemProtocol {
     var image: UIImage?
     var title: String!
     var subTitle: String?
+    @objc dynamic var isRead: Bool
     
     // MARK: NSObject
 }
