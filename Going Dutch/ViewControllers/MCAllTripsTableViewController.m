@@ -33,6 +33,8 @@ typedef NS_ENUM(BOOL, MCTonightsBillStatus) {
 
 @property (nonatomic, strong) IBOutlet MCEventsModel *model;
 
+@property (nonatomic, weak) IBOutlet UIButton *infoButton;
+
 @property (nonatomic) MCTonightsBillStatus isATonightsBillOpened;
 
 @property (nonatomic) BOOL isEmptyMessageShownInstantForFirstBoot;
@@ -51,8 +53,11 @@ typedef NS_ENUM(BOOL, MCTonightsBillStatus) {
     
 }
 
-- (IBAction)iButtonPressed:(id)sender {
-    
+- (IBAction)iButtonPressed:(UIButton *)sender {
+    NSParameterAssert(sender);
+    if ([sender isEqual:self.infoButton]) {
+        [self performSegueWithIdentifier:@"iScreenSegue" sender:sender];
+    }
 }
 
 #pragma mark - New in this class.

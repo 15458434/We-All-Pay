@@ -130,17 +130,24 @@
                     </tableView>
                     <toolbarItems/>
                     <navigationItem key="navigationItem" title="events" id="j9s-0f-8Vh">
-                        <barButtonItem key="leftBarButtonItem" image="iScreen button" id="85f-Et-Abg">
-                            <color key="tintColor" red="0.98952531814575195" green="0.45403587818145752" blue="0.5264095664024353" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
-                            <connections>
-                                <action selector="iButtonPressed:" destination="v9b-wE-q9L" id="Q0f-hY-39Z"/>
-                                <segue destination="syc-O8-8LU" kind="presentation" identifier="iScreenSegue" modalTransitionStyle="coverVertical" id="tQ6-am-nQu"/>
-                            </connections>
+                        <barButtonItem key="leftBarButtonItem" style="plain" id="Ymw-U8-i2H">
+                            <button key="customView" opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" id="JqD-7h-B4v">
+                                <rect key="frame" x="16" y="9" width="26" height="26"/>
+                                <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                                <state key="normal" image="iScreen button">
+                                    <color key="titleColor" name="button - enabled"/>
+                                </state>
+                                <connections>
+                                    <action selector="iButtonPressed:" destination="v9b-wE-q9L" eventType="touchUpInside" id="PqT-gM-i2Y"/>
+                                </connections>
+                            </button>
                         </barButtonItem>
                     </navigationItem>
                     <connections>
+                        <outlet property="infoButton" destination="JqD-7h-B4v" id="rnd-uh-eI2"/>
                         <outlet property="model" destination="I1d-JY-yVm" id="PLh-yY-3qa"/>
                         <segue destination="fIg-ri-deX" kind="presentation" identifier="selectMainCurrency" id="AFT-dx-z90"/>
+                        <segue destination="syc-O8-8LU" kind="presentation" identifier="iScreenSegue" modalTransitionStyle="coverVertical" id="Hbz-75-wqX"/>
                     </connections>
                 </tableViewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="dgz-Pk-24M" userLabel="First Responder" sceneMemberID="firstResponder"/>
@@ -458,7 +465,7 @@
                                                     <nil key="highlightedColor"/>
                                                 </label>
                                                 <view clipsSubviews="YES" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" horizontalCompressionResistancePriority="751" verticalCompressionResistancePriority="751" translatesAutoresizingMaskIntoConstraints="NO" id="PXr-ct-Ja1" customClass="NotificationsCountView" customModule="We_all_pay" customModuleProvider="target">
-                                                    <rect key="frame" x="317.33333333333331" y="0.33333333333333393" width="17.666666666666686" height="20"/>
+                                                    <rect key="frame" x="314.66666666666669" y="0.33333333333333393" width="20.333333333333314" height="20"/>
                                                     <color key="backgroundColor" systemColor="systemBackgroundColor"/>
                                                     <userDefinedRuntimeAttributes>
                                                         <userDefinedRuntimeAttribute type="color" keyPath="textColor">
@@ -1715,7 +1722,7 @@
     </scenes>
     <designables>
         <designable name="PXr-ct-Ja1">
-            <size key="intrinsicContentSize" width="17.59765625" height="20.287109375"/>
+            <size key="intrinsicContentSize" width="20.287109375" height="20.287109375"/>
         </designable>
         <designable name="Y6i-cu-NDo">
             <size key="intrinsicContentSize" width="480" height="480"/>
@@ -1731,7 +1738,7 @@
         </designable>
     </designables>
     <inferredMetricsTieBreakers>
-        <segue reference="EWs-3n-BSY"/>
+        <segue reference="AFT-dx-z90"/>
         <segue reference="eZd-I3-t8D"/>
         <segue reference="C0F-pM-cfm"/>
         <segue reference="6AC-aI-bIB"/>
