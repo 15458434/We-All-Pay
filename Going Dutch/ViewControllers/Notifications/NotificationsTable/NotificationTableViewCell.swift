@@ -8,7 +8,7 @@
 
 import UIKit
 
-class NotificationTableViewCell: UITableViewCell {
+final class NotificationTableViewCell: UITableViewCell {
     @objc private weak var model: NotificationsItemProtocol!
     
     @IBOutlet weak var senderView: UIImageView!

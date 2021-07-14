@@ -18,7 +18,7 @@ private let productName = Bundle.main.infoDictionary!["CFBundleDisplayName"] as!
 private let shortVersionString = Bundle.main.infoDictionary!["CFBundleShortVersionString"] as! String
 private let versionString = Bundle.main.infoDictionary!["CFBundleVersion"] as! String
 
-class InfoScreenTableViewController: UITableViewController, MFMailComposeViewControllerDelegate {
+final class InfoScreenTableViewController: UITableViewController, MFMailComposeViewControllerDelegate {
     @objc var notificationEnvironmentModel: NotificationsInfoModel!
     
     @IBOutlet var versionLabel: UILabel!

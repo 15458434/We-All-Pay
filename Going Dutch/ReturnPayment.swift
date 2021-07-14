@@ -8,7 +8,7 @@
 
 import Foundation
 
-@objc class ReturnPayment: NSObject {
+@objc final class ReturnPayment: NSObject {
     // MARK: Properties
     @objc let payer: MCPerson?
     @objc let receiver: MCPerson?

@@ -8,7 +8,7 @@
 
 import UIKit
 
-@IBDesignable @objc(MCUnreadNotificationsCountView) class UnreadNotificationsCountView: UIView {
+@IBDesignable @objc(MCUnreadNotificationsCountView) final class UnreadNotificationsCountView: UIView {
     @IBInspectable var count: Int = 1 {
         didSet {
             update()

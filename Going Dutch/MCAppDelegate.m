@@ -37,6 +37,7 @@
 - (void)activateFirebase {
     [FIRApp configure];
     [MCRemoteConfigEngine prepareRemoteConfig];
+    [FIRConfiguration.sharedInstance setLoggerLevel:FIRLoggerLevelMin];
     
     _launchCounter = [[MCLaunchCounter alloc] init];
     uint64_t result = [_launchCounter increment];

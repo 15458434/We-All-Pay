@@ -8,7 +8,7 @@
 
 import UIKit
 
-@IBDesignable class CircularImageView: UIImageView {
+@IBDesignable final class CircularImageView: UIImageView {
     // MARK: UIImageView
     
     // MARK: UIView

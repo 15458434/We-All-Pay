@@ -11,7 +11,7 @@ import MessageUI
 
 import FirebaseAnalytics
 
-class SolutionViewController: MCReturnPaymentViewController, MFMailComposeViewControllerDelegate, ThisEvent, ShowMailViewProtocol {
+final class SolutionViewController: MCReturnPaymentViewController, MFMailComposeViewControllerDelegate, ThisEvent, ShowMailViewProtocol {
     
     // MARK: New in this class
     override func openMailView(_ sender: Any!) {

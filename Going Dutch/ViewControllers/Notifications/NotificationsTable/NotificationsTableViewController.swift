@@ -8,7 +8,7 @@
 
 import UIKit
 
-class NotificationsTableViewController: UITableViewController {
+final class NotificationsTableViewController: UITableViewController {
     @IBOutlet var model: NotificationsModel!
     
     private var notificationsObservation: NSKeyValueObservation!

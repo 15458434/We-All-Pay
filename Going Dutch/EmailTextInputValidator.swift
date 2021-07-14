@@ -8,7 +8,7 @@
 
 import UIKit
 
-@objc(MCEmailTextInputValidator) @objcMembers class EmailTextInputValidator: TextInputValidator {
+@objc(MCEmailTextInputValidator) @objcMembers final class EmailTextInputValidator: TextInputValidator {
     private(set) weak var model: PersonModel!
     
     @objc(initWithTextField:andModel:) init(with textField: UITextField, and model: PersonModel) {

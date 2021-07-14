@@ -12,7 +12,7 @@ import Security
 
 let kApplyProVersionNotification = "Apply pro version"
 
-@objc class MCStoreInterface: NSObject, SKPaymentTransactionObserver, SKRequestDelegate, SKProductsRequestDelegate, UIAlertViewDelegate {
+@objc final class MCStoreInterface: NSObject, SKPaymentTransactionObserver, SKRequestDelegate, SKProductsRequestDelegate, UIAlertViewDelegate {
     private var productRequest: SKProductsRequest?
     private var lastSKProductsRequestError: NSError?
     

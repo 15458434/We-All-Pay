@@ -8,7 +8,7 @@
 
 import UIKit
 
-class InfoScreenContainerViewController: UIViewController {
+final class InfoScreenContainerViewController: UIViewController {
     @objc var notificationEnvironmentModel: NotificationsInfoModel!
     
     // MARK: IB Outlets
