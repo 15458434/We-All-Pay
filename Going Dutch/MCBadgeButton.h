@@ -12,10 +12,15 @@ NS_ASSUME_NONNULL_BEGIN
 
 IB_DESIGNABLE
 NS_SWIFT_NAME(BadgeButton)
-@interface MCBadgeButton : UIButton
+@interface MCBadgeButton : UIControl
 
-@property (nonatomic) NSInteger count;
+@property (nonatomic) IBInspectable NSInteger count;
+@property IBInspectable UIColor *fontColor;
+@property IBInspectable CGFloat fontSize;
+@property IBInspectable UIColor *badgeColor;
 @property (nonatomic, getter=isShowingBadge) IBInspectable BOOL showBadge;
+
+@property (nonatomic, strong) IBInspectable UIImage *normalImage;
 
 @end
 

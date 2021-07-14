@@ -26,6 +26,39 @@
     self.unreadIndicator.hidden = isHidden;
 }
 
+- (NSInteger)count {
+    return self.unreadIndicator.count;
+}
+
+- (void)setFontColor:(UIColor *)fontColor {
+    self.unreadIndicator.textColor = fontColor;
+}
+
+- (UIColor *)fontColor {
+    return self.unreadIndicator.textColor;
+}
+
+- (void)setFontSize:(CGFloat)fontSize {
+    self.unreadIndicator.fontSize = fontSize;
+}
+
+- (CGFloat)fontSize {
+    return self.unreadIndicator.fontSize;
+}
+
+- (void)setBadgeColor:(UIColor *)badgeColor {
+    self.unreadIndicator.backgroundColor = badgeColor;
+}
+
+- (UIColor *)badgeColor {
+    return self.unreadIndicator.backgroundColor;
+}
+
+- (void)setNormalImage:(UIImage *)normalImage {
+    _normalImage = normalImage;
+    [self setNeedsDisplay];
+}
+
 #pragma mark - UIButton
 
 #pragma mark - UIView
@@ -36,8 +69,8 @@
         _unreadIndicator = [[MCUnreadNotificationsCountView alloc] init];
         _unreadIndicator.translatesAutoresizingMaskIntoConstraints = NO;
         [self addSubview:_unreadIndicator];
-        [self.topAnchor constraintEqualToAnchor:_unreadIndicator.topAnchor constant:0].active = YES;
-        [self.trailingAnchor constraintEqualToAnchor:_unreadIndicator.trailingAnchor constant:0].active = YES;
+        [self.topAnchor constraintEqualToAnchor:_unreadIndicator.topAnchor constant:3].active = YES;
+        [self.trailingAnchor constraintEqualToAnchor:_unreadIndicator.trailingAnchor constant:-3].active = YES;
         _unreadIndicator.hidden = YES;
     }
     return self;
@@ -48,16 +81,31 @@
     self.unreadIndicator.backgroundColor = tintColor;
 }
 
+- (CGSize)intrinsicContentSize {
+    return _normalImage.size;
+}
+
+- (void)drawRect:(CGRect)rect {
+    [super drawRect:rect];
+    
+    CGContextRef context = UIGraphicsGetCurrentContext();
+    CGContextSaveGState(context);
+    CGContextTranslateCTM(context, 0.0, self.normalImage.size.height);
+    CGContextScaleCTM(context, 1.0, -1.0);
+    CGContextDrawImage(context, self.bounds, self.normalImage.CGImage);
+    CGContextRestoreGState(context);
+}
+
 #pragma mark - NSCoding
 
 - (instancetype)initWithCoder:(NSCoder *)coder {
     self = [super initWithCoder:coder];
     if (self) {
-        _unreadIndicator = [[MCUnreadNotificationsCountView alloc] init];
+        _unreadIndicator = [[MCUnreadNotificationsCountView alloc] initWithFrame:self.bounds];
         _unreadIndicator.translatesAutoresizingMaskIntoConstraints = NO;
         [self addSubview:_unreadIndicator];
-        [self.topAnchor constraintEqualToAnchor:_unreadIndicator.topAnchor constant:0].active = YES;
-        [self.trailingAnchor constraintEqualToAnchor:_unreadIndicator.trailingAnchor constant:0].active = YES;
+        [self.topAnchor constraintEqualToAnchor:_unreadIndicator.topAnchor constant:3].active = YES;
+        [self.trailingAnchor constraintEqualToAnchor:_unreadIndicator.trailingAnchor constant:-3].active = YES;
         self.unreadIndicator.hidden = YES;
     }
     return self;
@@ -73,8 +121,8 @@
         _unreadIndicator = [[MCUnreadNotificationsCountView alloc] init];
         _unreadIndicator.translatesAutoresizingMaskIntoConstraints = NO;
         [self addSubview:_unreadIndicator];
-        [self.topAnchor constraintEqualToAnchor:_unreadIndicator.topAnchor constant:0].active = YES;
-        [self.trailingAnchor constraintEqualToAnchor:_unreadIndicator.trailingAnchor constant:0].active = YES;
+        [self.topAnchor constraintEqualToAnchor:_unreadIndicator.topAnchor constant:3].active = YES;
+        [self.trailingAnchor constraintEqualToAnchor:_unreadIndicator.trailingAnchor constant:-3].active = YES;
         self.unreadIndicator.hidden = YES;
     }
     return self;
