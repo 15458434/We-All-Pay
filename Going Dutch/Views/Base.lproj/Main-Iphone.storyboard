@@ -130,24 +130,35 @@
                     </tableView>
                     <toolbarItems/>
                     <navigationItem key="navigationItem" title="events" id="j9s-0f-8Vh">
-                        <barButtonItem key="leftBarButtonItem" style="plain" id="Ymw-U8-i2H">
-                            <button key="customView" opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" id="JqD-7h-B4v" customClass="MCBadgeButton">
-                                <rect key="frame" x="16" y="9" width="26" height="26"/>
+                        <barButtonItem key="leftBarButtonItem" style="plain" id="rG6-kl-x9x">
+                            <view key="customView" contentMode="scaleToFill" id="iBP-xp-dgD" customClass="MCBadgeButton">
+                                <rect key="frame" x="16" y="10" width="24" height="24"/>
                                 <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
-                                <state key="normal" image="iScreen button">
-                                    <color key="titleColor" name="button - enabled"/>
-                                </state>
+                                <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                 <userDefinedRuntimeAttributes>
+                                    <userDefinedRuntimeAttribute type="image" keyPath="normalImage" value="iScreen button"/>
+                                    <userDefinedRuntimeAttribute type="number" keyPath="count">
+                                        <integer key="value" value="1"/>
+                                    </userDefinedRuntimeAttribute>
                                     <userDefinedRuntimeAttribute type="boolean" keyPath="showBadge" value="YES"/>
+                                    <userDefinedRuntimeAttribute type="color" keyPath="badgeColor">
+                                        <color key="value" name="button - enabled"/>
+                                    </userDefinedRuntimeAttribute>
+                                    <userDefinedRuntimeAttribute type="color" keyPath="fontColor">
+                                        <color key="value" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                                    </userDefinedRuntimeAttribute>
+                                    <userDefinedRuntimeAttribute type="number" keyPath="fontSize">
+                                        <real key="value" value="11"/>
+                                    </userDefinedRuntimeAttribute>
                                 </userDefinedRuntimeAttributes>
                                 <connections>
-                                    <action selector="iButtonPressed:" destination="v9b-wE-q9L" eventType="touchUpInside" id="PqT-gM-i2Y"/>
+                                    <action selector="iButtonPressed:" destination="v9b-wE-q9L" eventType="touchUpInside" id="I2Y-W6-iHF"/>
                                 </connections>
-                            </button>
+                            </view>
                         </barButtonItem>
                     </navigationItem>
                     <connections>
-                        <outlet property="infoButton" destination="JqD-7h-B4v" id="rnd-uh-eI2"/>
+                        <outlet property="infoButton" destination="iBP-xp-dgD" id="yq8-ga-U2H"/>
                         <outlet property="model" destination="I1d-JY-yVm" id="PLh-yY-3qa"/>
                         <outlet property="notificationsStateModel" destination="1Xp-pv-4eE" id="XyB-iT-wlq"/>
                         <segue destination="fIg-ri-deX" kind="presentation" identifier="selectMainCurrency" id="AFT-dx-z90"/>

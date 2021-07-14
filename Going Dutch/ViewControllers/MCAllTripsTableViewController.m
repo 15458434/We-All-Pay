@@ -57,7 +57,7 @@ static void * notificationCountContext = &notificationCountContext;
     
 }
 
-- (IBAction)iButtonPressed:(UIButton *)sender {
+- (IBAction)iButtonPressed:(MCBadgeButton *)sender {
     NSParameterAssert(sender);
     if ([sender isEqual:self.infoButton]) {
         [self performSegueWithIdentifier:@"iScreenSegue" sender:sender];
