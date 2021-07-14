@@ -1,14 +1,14 @@
 //
-//  MCNotificationReadIndicator.m
+//  MCNotificationUnreadIndicator.m
 //  We all pay
 //
 //  Created by Mark Cornelisse on 13/07/2021.
 //  Copyright © 2021 Mark Cornelisse. All rights reserved.
 //
 
-#import "MCNotificationReadIndicator.h"
+#import "MCNotificationUnreadIndicator.h"
 
-@implementation MCNotificationReadIndicator
+@implementation MCNotificationUnreadIndicator
 
 - (void)setShow:(BOOL)show {
     [self willChangeValueForKey:@"show"];

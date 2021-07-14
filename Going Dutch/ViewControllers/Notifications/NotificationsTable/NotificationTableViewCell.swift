@@ -14,7 +14,7 @@ class NotificationTableViewCell: UITableViewCell {
     @IBOutlet weak var senderView: UIImageView!
     @IBOutlet weak var titleLabel: UILabel!
     @IBOutlet weak var subTitleLabel: UILabel!
-    @IBOutlet weak var isReadIndicator: NotificationReadIndicator!
+    @IBOutlet weak var isReadIndicator: NotificationUnreadIndicator!
     
     private var isReadObservation: NSKeyValueObservation!
     

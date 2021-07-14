@@ -19,7 +19,7 @@ private let shortVersionString = Bundle.main.infoDictionary!["CFBundleShortVersi
 private let versionString = Bundle.main.infoDictionary!["CFBundleVersion"] as! String
 
 class InfoScreenTableViewController: UITableViewController, MFMailComposeViewControllerDelegate {
-    @IBOutlet var notificationModel: NotificationsInfoModel!
+    @objc var notificationEnvironmentModel: NotificationsInfoModel!
     
     @IBOutlet var versionLabel: UILabel!
     
@@ -147,7 +147,7 @@ class InfoScreenTableViewController: UITableViewController, MFMailComposeViewCon
                 return 0
             }
         case 1:
-            return notificationModel.messageCount > 0 ? 1 : 0
+            return notificationEnvironmentModel.messageCount > 0 ? 1 : 0
         case 2:
             return 2
         case 3:
@@ -176,7 +176,7 @@ class InfoScreenTableViewController: UITableViewController, MFMailComposeViewCon
             return cell
         case (1, 0):
             let cell = tableView.dequeueReusableCell(withIdentifier: "NotificationsCountTableViewCell", for: indexPath) as! NotificationsCountTableViewCell
-            cell.update(count: notificationModel.messageCount)
+            cell.update(count: notificationEnvironmentModel.messageCount)
             return cell
         case (2, 0):
             let cell = tableView.dequeueReusableCell(withIdentifier: "MCTwoLabelIscreenTableViewCell", for: indexPath) as! MCTwoLabelIscreenTableViewCell

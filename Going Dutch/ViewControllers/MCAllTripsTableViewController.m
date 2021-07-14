@@ -13,6 +13,8 @@
 #import "MCPaymentViewController.h"
 #import "MCEditTripViewController.h"
 
+#import "MCBadgeButton.h"
+
 #import "MCWeAllPayStoreController.h"
 #import "MCSharedBill+addons.h"
 #import "MCPerson+addons.h"
@@ -29,11 +31,13 @@ typedef NS_ENUM(BOOL, MCTonightsBillStatus) {
     MCTonightsBillStatusOpened
 };
 
+static void * notificationCountContext = &notificationCountContext;
+
 @interface MCAllTripsTableViewController ()
 
 @property (nonatomic, strong) IBOutlet MCEventsModel *model;
 
-@property (nonatomic, weak) IBOutlet UIButton *infoButton;
+@property (nonatomic, weak) IBOutlet MCBadgeButton *infoButton;
 
 @property (nonatomic) MCTonightsBillStatus isATonightsBillOpened;
 
@@ -283,6 +287,17 @@ typedef NS_ENUM(BOOL, MCTonightsBillStatus) {
     }
     
     [MCAdEngine presentPrivacyConsentRequestIfNecessaryFromViewController:self];
+    
+    // Start KVO
+    NSKeyValueObservingOptions options = NSKeyValueObservingOptionInitial | NSKeyValueObservingOptionNew;
+    [self.notificationsStateModel addObserver:self forKeyPath:@"messageCount" options:options context:notificationCountContext];
+}
+
+- (void)viewWillDisappear:(BOOL)animated {
+    [super viewWillDisappear:animated];
+    
+    // Stop KVO
+    [self.notificationsStateModel removeObserver:self forKeyPath:@"messageCount" context:notificationCountContext];
 }
 
 - (void)prepareForSegue:(UIStoryboardSegue *)segue sender:(id)sender {
@@ -325,10 +340,12 @@ typedef NS_ENUM(BOOL, MCTonightsBillStatus) {
         SelectCurrencyTableViewController *currencySelector = (SelectCurrencyTableViewController *)navController.viewControllers.firstObject;
         currencySelector.currencyUpdateModel = [[EventUpdateCurrencyModel alloc] initWith:theBill];
     } else if ([segue.identifier isEqualToString:@"iScreenSegue"]) {
-        UIViewController *navigationController = segue.destinationViewController;
+        UINavigationController *navigationController = (UINavigationController *)segue.destinationViewController;
         navigationController.modalPresentationStyle = UIModalPresentationCustom;
         _iScreenTransitioner = [[SideMenuTransitioner alloc] init];
         navigationController.transitioningDelegate = _iScreenTransitioner;
+        InfoScreenContainerViewController *infoContainerViewController = navigationController.viewControllers.lastObject;
+        infoContainerViewController.notificationEnvironmentModel = self.notificationsStateModel;
     }
 }
 
@@ -345,6 +362,31 @@ typedef NS_ENUM(BOOL, MCTonightsBillStatus) {
     
     _isATonightsBillOpened = MCTonightsBillStatusClosed;
     _isEmptyMessageShownInstantForFirstBoot = NO;
+}
+
+- (void)observeValueForKeyPath:(NSString *)keyPath ofObject:(id)object change:(NSDictionary<NSKeyValueChangeKey,id> *)change context:(void *)context {
+    if (context == notificationCountContext) {
+#ifdef DEBUG
+        NSLog(@"change: %@", change);
+#endif
+        NSNumber *changeKeyNumber = (NSNumber *)change[NSKeyValueChangeKindKey];
+        NSKeyValueChange keyValueChange = changeKeyNumber.unsignedIntegerValue;
+        switch (keyValueChange) {
+            case NSKeyValueChangeSetting:
+            {
+                id new = change[NSKeyValueChangeNewKey];
+                if ([new isKindOfClass:[NSNumber class]]) {
+                    NSNumber *newMesaageCount = (NSNumber *)new;
+                    self.infoButton.count = newMesaageCount.integerValue;
+                } else {
+                    self.infoButton.count = 0;
+                }
+            }
+                break;
+            default:
+                break;
+        }
+    }
 }
 
 @end

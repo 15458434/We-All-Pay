@@ -1,5 +1,5 @@
 //
-//  MCNotificationReadIndicator.h
+//  MCNotificationUnreadIndicator.h
 //  We all pay
 //
 //  Created by Mark Cornelisse on 13/07/2021.
@@ -11,8 +11,8 @@
 NS_ASSUME_NONNULL_BEGIN
 
 IB_DESIGNABLE
-NS_SWIFT_NAME(NotificationReadIndicator)
-@interface MCNotificationReadIndicator : UIView
+NS_SWIFT_NAME(NotificationUnreadIndicator)
+@interface MCNotificationUnreadIndicator : UIView
 
 @property (nonatomic, strong) IBInspectable UIColor *indicatorColor;
 @property (nonatomic, getter=isShowing) IBInspectable BOOL show;

@@ -9,6 +9,8 @@
 import UIKit
 
 class InfoScreenContainerViewController: UIViewController {
+    @objc var notificationEnvironmentModel: NotificationsInfoModel!
+    
     // MARK: IB Outlets
     @IBOutlet var weAllPayVersionLabel: UILabel!
     
@@ -19,6 +21,7 @@ class InfoScreenContainerViewController: UIViewController {
         case let identifier where identifier == "EmbedInfoScreenViewController_iPad":
             let destination = segue.destination as! InfoScreenTableViewController
             destination.versionLabel = weAllPayVersionLabel
+            destination.notificationEnvironmentModel = notificationEnvironmentModel
         default:
             print("Error: segue to nowhere?")
         }
