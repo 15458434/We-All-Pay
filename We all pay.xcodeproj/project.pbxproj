@@ -799,7 +799,6 @@
 			children = (
 				381275FE1BBD84650004C8C2 /* InfoScreenTableViewController.swift */,
 				380328012698804500744710 /* NotificationsCountTableViewCell.swift */,
-				380327FF2698443300744710 /* NotificationsInfoModel.swift */,
 				3803280326988B2800744710 /* UnreadNotificationsCountView.swift */,
 			);
 			name = InfoScreenTable;
@@ -855,6 +854,7 @@
 				38572AF6169D443C00969C62 /* MCAllTripsTableViewController.h */,
 				38572B09169F3D2700969C62 /* MCAllTripsTableViewController.m */,
 				3841F8D223893A0A00882E40 /* EventsModel.swift */,
+				380327FF2698443300744710 /* NotificationsInfoModel.swift */,
 				3881907A269EE287000949F4 /* MCBadgeButton.h */,
 				3881907B269EE287000949F4 /* MCBadgeButton.m */,
 			);
