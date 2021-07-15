@@ -101,6 +101,7 @@
 		387D3A911870652B0060FAF8 /* Localizable.strings in Resources */ = {isa = PBXBuildFile; fileRef = 387D3A931870652B0060FAF8 /* Localizable.strings */; };
 		38819071269D914E000949F4 /* MCNotificationUnreadIndicator.m in Sources */ = {isa = PBXBuildFile; fileRef = 38819070269D914E000949F4 /* MCNotificationUnreadIndicator.m */; };
 		3881907C269EE287000949F4 /* MCBadgeButton.m in Sources */ = {isa = PBXBuildFile; fileRef = 3881907B269EE287000949F4 /* MCBadgeButton.m */; };
+		38870FE426A044820003E1D6 /* MCImageFunctions.m in Sources */ = {isa = PBXBuildFile; fileRef = 38870FE326A044820003E1D6 /* MCImageFunctions.m */; };
 		38894980211C2DDE00BDF9CD /* CoreDataSaveHandlerWhenEnteringBackground.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3889497F211C2DDE00BDF9CD /* CoreDataSaveHandlerWhenEnteringBackground.swift */; };
 		388A326E1C10965D00F7459C /* CategoryPictureObject.swift in Sources */ = {isa = PBXBuildFile; fileRef = 385295CE1C10583E0081894D /* CategoryPictureObject.swift */; };
 		388A326F1C10966000F7459C /* CategoryPictureStoreController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 385295D01C105C580081894D /* CategoryPictureStoreController.swift */; };
@@ -465,6 +466,8 @@
 		38819070269D914E000949F4 /* MCNotificationUnreadIndicator.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = MCNotificationUnreadIndicator.m; sourceTree = "<group>"; };
 		3881907A269EE287000949F4 /* MCBadgeButton.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = MCBadgeButton.h; sourceTree = "<group>"; };
 		3881907B269EE287000949F4 /* MCBadgeButton.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = MCBadgeButton.m; sourceTree = "<group>"; };
+		38870FE226A044820003E1D6 /* MCImageFunctions.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = MCImageFunctions.h; sourceTree = "<group>"; };
+		38870FE326A044820003E1D6 /* MCImageFunctions.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = MCImageFunctions.m; sourceTree = "<group>"; };
 		3889497F211C2DDE00BDF9CD /* CoreDataSaveHandlerWhenEnteringBackground.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CoreDataSaveHandlerWhenEnteringBackground.swift; sourceTree = "<group>"; };
 		388A32701C11C51F00F7459C /* WhoPayingUserDefaultsStoreInterface.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = WhoPayingUserDefaultsStoreInterface.swift; path = "../Who is paying next/WhoPayingUserDefaultsStoreInterface.swift"; sourceTree = "<group>"; };
 		388A32741C11EA1400F7459C /* WhoPayingUserDefaultsStoreInterfaceWeAllPayExtension.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = WhoPayingUserDefaultsStoreInterfaceWeAllPayExtension.swift; sourceTree = "<group>"; };
@@ -1372,6 +1375,8 @@
 				38FE5A072346957100BBA722 /* SideMenuTransitioner.swift */,
 				38D96ED723E31BF200C03170 /* MCBitwiseStuff.h */,
 				38D96ED523E31BE000C03170 /* MCBitwiseStuff.m */,
+				38870FE226A044820003E1D6 /* MCImageFunctions.h */,
+				38870FE326A044820003E1D6 /* MCImageFunctions.m */,
 			);
 			path = Miscellaneous;
 			sourceTree = "<group>";
@@ -2002,6 +2007,7 @@
 				38977E4F1B2A26D4008484A4 /* MCTwoLabelIscreenTableViewCell.swift in Sources */,
 				38490D2D1D7052E700A297BA /* SolutionViewController.swift in Sources */,
 				38572AE3169D437B00969C62 /* main.m in Sources */,
+				38870FE426A044820003E1D6 /* MCImageFunctions.m in Sources */,
 				38121EF223D9E2F100A3068D /* MCGenericAdBannerTableViewController.m in Sources */,
 				38B4E83823CE09070034CA95 /* MCGenericInterstitialAdTableViewController.m in Sources */,
 				389DE900197FB2BA00169645 /* MCSharedBill.m in Sources */,

@@ -21,6 +21,9 @@ NS_SWIFT_NAME(BadgeButton)
 @property (nonatomic, getter=isShowingBadge) IBInspectable BOOL showBadge;
 
 @property (nonatomic, strong) IBInspectable UIImage *normalImage;
+@property (nonatomic, strong) IBInspectable UIImage *highlightedImage;
+
+@property (nonatomic, strong) IBInspectable UIColor *highlightedTintColor;
 
 @end
 
