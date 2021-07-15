@@ -10,10 +10,13 @@
 @import CoreData;
 @import Social;
 
+@class MCNotificationsInfoModel;
 @class MCWeAllPayStoreController;
 @class MCTableEmptyMessage;
 
 @interface MCAllTripsTableViewController : UITableViewController < NSFetchedResultsControllerDelegate>
+
+@property (nonatomic, strong) IBOutlet MCNotificationsInfoModel *notificationsStateModel;
 
 @property (nonatomic, strong) MCTableEmptyMessage *emptyMessage;
 @property (nonatomic, strong) NSDateFormatter *df;

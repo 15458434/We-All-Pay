@@ -10,7 +10,7 @@ import UIKit
 
 import FirebaseAnalytics
 
-class RootViewController: UIViewController {
+final class RootViewController: UIViewController {
     // MARK: IBActions
     
     @IBAction func infoButtonTapped(_ sender: AnyObject) {

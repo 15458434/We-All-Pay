@@ -11,7 +11,7 @@
 		38010E0F1A3F4A4F0056F8F8 /* Localizable.strings in Resources */ = {isa = PBXBuildFile; fileRef = 38010E111A3F4A4F0056F8F8 /* Localizable.strings */; };
 		380328002698443300744710 /* NotificationsInfoModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 380327FF2698443300744710 /* NotificationsInfoModel.swift */; };
 		380328022698804500744710 /* NotificationsCountTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 380328012698804500744710 /* NotificationsCountTableViewCell.swift */; };
-		3803280426988B2800744710 /* NotificationsCountView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3803280326988B2800744710 /* NotificationsCountView.swift */; };
+		3803280426988B2800744710 /* UnreadNotificationsCountView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3803280326988B2800744710 /* UnreadNotificationsCountView.swift */; };
 		380700A51A1B616000C7FB37 /* MCPaymentUpdateTo4.m in Sources */ = {isa = PBXBuildFile; fileRef = 380700A41A1B616000C7FB37 /* MCPaymentUpdateTo4.m */; };
 		380C48161BE1330E00C82B0F /* CurrencyFormatter.swift in Sources */ = {isa = PBXBuildFile; fileRef = 380C48151BE1330E00C82B0F /* CurrencyFormatter.swift */; };
 		381179D01A82D1FC00020538 /* MailComposer.swift in Sources */ = {isa = PBXBuildFile; fileRef = 381179CF1A82D1FC00020538 /* MailComposer.swift */; };
@@ -99,7 +99,9 @@
 		387494D619F053E9001614CA /* WeAllPayStore2to4.xcmappingmodel in Sources */ = {isa = PBXBuildFile; fileRef = 387494D519F053E9001614CA /* WeAllPayStore2to4.xcmappingmodel */; };
 		387494D819F05476001614CA /* WeAllPayStore1to4.xcmappingmodel in Sources */ = {isa = PBXBuildFile; fileRef = 387494D719F05476001614CA /* WeAllPayStore1to4.xcmappingmodel */; };
 		387D3A911870652B0060FAF8 /* Localizable.strings in Resources */ = {isa = PBXBuildFile; fileRef = 387D3A931870652B0060FAF8 /* Localizable.strings */; };
-		38819071269D914E000949F4 /* MCNotificationReadIndicator.m in Sources */ = {isa = PBXBuildFile; fileRef = 38819070269D914E000949F4 /* MCNotificationReadIndicator.m */; };
+		38819071269D914E000949F4 /* MCNotificationUnreadIndicator.m in Sources */ = {isa = PBXBuildFile; fileRef = 38819070269D914E000949F4 /* MCNotificationUnreadIndicator.m */; };
+		3881907C269EE287000949F4 /* MCBadgeButton.m in Sources */ = {isa = PBXBuildFile; fileRef = 3881907B269EE287000949F4 /* MCBadgeButton.m */; };
+		38870FE426A044820003E1D6 /* MCImageFunctions.m in Sources */ = {isa = PBXBuildFile; fileRef = 38870FE326A044820003E1D6 /* MCImageFunctions.m */; };
 		38894980211C2DDE00BDF9CD /* CoreDataSaveHandlerWhenEnteringBackground.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3889497F211C2DDE00BDF9CD /* CoreDataSaveHandlerWhenEnteringBackground.swift */; };
 		388A326E1C10965D00F7459C /* CategoryPictureObject.swift in Sources */ = {isa = PBXBuildFile; fileRef = 385295CE1C10583E0081894D /* CategoryPictureObject.swift */; };
 		388A326F1C10966000F7459C /* CategoryPictureStoreController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 385295D01C105C580081894D /* CategoryPictureStoreController.swift */; };
@@ -342,7 +344,7 @@
 		3801B1111A1E23D5005B69D7 /* We all pay empty.xcappdata */ = {isa = PBXFileReference; lastKnownFileType = wrapper; path = "We all pay empty.xcappdata"; sourceTree = "<group>"; };
 		380327FF2698443300744710 /* NotificationsInfoModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NotificationsInfoModel.swift; sourceTree = "<group>"; };
 		380328012698804500744710 /* NotificationsCountTableViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NotificationsCountTableViewCell.swift; sourceTree = "<group>"; };
-		3803280326988B2800744710 /* NotificationsCountView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NotificationsCountView.swift; sourceTree = "<group>"; };
+		3803280326988B2800744710 /* UnreadNotificationsCountView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UnreadNotificationsCountView.swift; sourceTree = "<group>"; };
 		380700A01A16283500C7FB37 /* MCIndexProtocol.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = MCIndexProtocol.h; sourceTree = "<group>"; };
 		380700A21A174FFB00C7FB37 /* MCIsEditingProtocol.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = MCIsEditingProtocol.h; sourceTree = "<group>"; };
 		380700A31A1B616000C7FB37 /* MCPaymentUpdateTo4.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = MCPaymentUpdateTo4.h; path = "DataStore/Entity Migration Policies/MCPaymentUpdateTo4.h"; sourceTree = "<group>"; };
@@ -460,8 +462,12 @@
 		387494D519F053E9001614CA /* WeAllPayStore2to4.xcmappingmodel */ = {isa = PBXFileReference; lastKnownFileType = wrapper.xcmappingmodel; path = WeAllPayStore2to4.xcmappingmodel; sourceTree = "<group>"; };
 		387494D719F05476001614CA /* WeAllPayStore1to4.xcmappingmodel */ = {isa = PBXFileReference; lastKnownFileType = wrapper.xcmappingmodel; path = WeAllPayStore1to4.xcmappingmodel; sourceTree = "<group>"; };
 		387D3A8E187053BA0060FAF8 /* nl */ = {isa = PBXFileReference; fileEncoding = 10; lastKnownFileType = text.plist.strings; name = nl; path = "nl.lproj/Main-Iphone.strings"; sourceTree = "<group>"; };
-		3881906F269D914E000949F4 /* MCNotificationReadIndicator.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = MCNotificationReadIndicator.h; sourceTree = "<group>"; };
-		38819070269D914E000949F4 /* MCNotificationReadIndicator.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = MCNotificationReadIndicator.m; sourceTree = "<group>"; };
+		3881906F269D914E000949F4 /* MCNotificationUnreadIndicator.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = MCNotificationUnreadIndicator.h; sourceTree = "<group>"; };
+		38819070269D914E000949F4 /* MCNotificationUnreadIndicator.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = MCNotificationUnreadIndicator.m; sourceTree = "<group>"; };
+		3881907A269EE287000949F4 /* MCBadgeButton.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = MCBadgeButton.h; sourceTree = "<group>"; };
+		3881907B269EE287000949F4 /* MCBadgeButton.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = MCBadgeButton.m; sourceTree = "<group>"; };
+		38870FE226A044820003E1D6 /* MCImageFunctions.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = MCImageFunctions.h; sourceTree = "<group>"; };
+		38870FE326A044820003E1D6 /* MCImageFunctions.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = MCImageFunctions.m; sourceTree = "<group>"; };
 		3889497F211C2DDE00BDF9CD /* CoreDataSaveHandlerWhenEnteringBackground.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CoreDataSaveHandlerWhenEnteringBackground.swift; sourceTree = "<group>"; };
 		388A32701C11C51F00F7459C /* WhoPayingUserDefaultsStoreInterface.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = WhoPayingUserDefaultsStoreInterface.swift; path = "../Who is paying next/WhoPayingUserDefaultsStoreInterface.swift"; sourceTree = "<group>"; };
 		388A32741C11EA1400F7459C /* WhoPayingUserDefaultsStoreInterfaceWeAllPayExtension.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = WhoPayingUserDefaultsStoreInterfaceWeAllPayExtension.swift; sourceTree = "<group>"; };
@@ -793,8 +799,7 @@
 			children = (
 				381275FE1BBD84650004C8C2 /* InfoScreenTableViewController.swift */,
 				380328012698804500744710 /* NotificationsCountTableViewCell.swift */,
-				380327FF2698443300744710 /* NotificationsInfoModel.swift */,
-				3803280326988B2800744710 /* NotificationsCountView.swift */,
+				3803280326988B2800744710 /* UnreadNotificationsCountView.swift */,
 			);
 			name = InfoScreenTable;
 			sourceTree = "<group>";
@@ -849,6 +854,9 @@
 				38572AF6169D443C00969C62 /* MCAllTripsTableViewController.h */,
 				38572B09169F3D2700969C62 /* MCAllTripsTableViewController.m */,
 				3841F8D223893A0A00882E40 /* EventsModel.swift */,
+				380327FF2698443300744710 /* NotificationsInfoModel.swift */,
+				3881907A269EE287000949F4 /* MCBadgeButton.h */,
+				3881907B269EE287000949F4 /* MCBadgeButton.m */,
 			);
 			name = Events;
 			sourceTree = "<group>";
@@ -1016,8 +1024,8 @@
 			children = (
 				3864147E269B185300590ABA /* NotificationsTableViewController.swift */,
 				38641483269B2E7A00590ABA /* NotificationTableViewCell.swift */,
-				3881906F269D914E000949F4 /* MCNotificationReadIndicator.h */,
-				38819070269D914E000949F4 /* MCNotificationReadIndicator.m */,
+				3881906F269D914E000949F4 /* MCNotificationUnreadIndicator.h */,
+				38819070269D914E000949F4 /* MCNotificationUnreadIndicator.m */,
 				38641481269B18C400590ABA /* NotificationsModel.swift */,
 			);
 			path = NotificationsTable;
@@ -1367,6 +1375,8 @@
 				38FE5A072346957100BBA722 /* SideMenuTransitioner.swift */,
 				38D96ED723E31BF200C03170 /* MCBitwiseStuff.h */,
 				38D96ED523E31BE000C03170 /* MCBitwiseStuff.m */,
+				38870FE226A044820003E1D6 /* MCImageFunctions.h */,
+				38870FE326A044820003E1D6 /* MCImageFunctions.m */,
 			);
 			path = Miscellaneous;
 			sourceTree = "<group>";
@@ -1997,6 +2007,7 @@
 				38977E4F1B2A26D4008484A4 /* MCTwoLabelIscreenTableViewCell.swift in Sources */,
 				38490D2D1D7052E700A297BA /* SolutionViewController.swift in Sources */,
 				38572AE3169D437B00969C62 /* main.m in Sources */,
+				38870FE426A044820003E1D6 /* MCImageFunctions.m in Sources */,
 				38121EF223D9E2F100A3068D /* MCGenericAdBannerTableViewController.m in Sources */,
 				38B4E83823CE09070034CA95 /* MCGenericInterstitialAdTableViewController.m in Sources */,
 				389DE900197FB2BA00169645 /* MCSharedBill.m in Sources */,
@@ -2028,7 +2039,7 @@
 				38DB85D717E45CA4006237CF /* MCSharedBill+addons.m in Sources */,
 				386EB43323C723BE00FB20B9 /* AdEngine.swift in Sources */,
 				38DB85DD17E45FB7006237CF /* MCEmailAddress+addons.m in Sources */,
-				3803280426988B2800744710 /* NotificationsCountView.swift in Sources */,
+				3803280426988B2800744710 /* UnreadNotificationsCountView.swift in Sources */,
 				38977E4D1B2A2591008484A4 /* MCSelectCategoryTableViewCell_iPhone.swift in Sources */,
 				380328002698443300744710 /* NotificationsInfoModel.swift in Sources */,
 				38EF31451938BA07004912F0 /* UINavigationController+KeyboardDismiss.m in Sources */,
@@ -2044,6 +2055,7 @@
 				38977E5B1B2A30A7008484A4 /* MCWhoOwesWhoTableViewCell_iPhone.swift in Sources */,
 				38E2CB661BC2EA6C0092B5C8 /* RootViewController.swift in Sources */,
 				38F44CCB2364993400215B1C /* MoneyTextInputValidator.swift in Sources */,
+				3881907C269EE287000949F4 /* MCBadgeButton.m in Sources */,
 				38D96ED623E31BE000C03170 /* MCBitwiseStuff.m in Sources */,
 				38E2CB401BC2A5A20092B5C8 /* SolutionOverViewTableViewCell_iPad.swift in Sources */,
 				38490D2F1D7056D100A297BA /* ShowMailViewProtocol.swift in Sources */,
@@ -2098,7 +2110,7 @@
 				38641482269B18C400590ABA /* NotificationsModel.swift in Sources */,
 				38D96ED423E30F5E00C03170 /* MCAdBannerTableViewCell.swift in Sources */,
 				384EC9121BC3008300A80799 /* SelectEmailAddressTableViewController_iPad.swift in Sources */,
-				38819071269D914E000949F4 /* MCNotificationReadIndicator.m in Sources */,
+				38819071269D914E000949F4 /* MCNotificationUnreadIndicator.m in Sources */,
 				38B88E2E1D81FF6E0069A44D /* MailComposeViewController.swift in Sources */,
 				38977E5F1B2A32EF008484A4 /* MCPersonTableViewCell.swift in Sources */,
 				385295CF1C10583E0081894D /* CategoryPictureObject.swift in Sources */,

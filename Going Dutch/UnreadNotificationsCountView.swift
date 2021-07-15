@@ -1,5 +1,5 @@
 //
-//  NotificationsCountView.swift
+//  UnreadNotificationsCountView.swift
 //  We all pay
 //
 //  Created by Mark Cornelisse on 09/07/2021.
@@ -8,7 +8,7 @@
 
 import UIKit
 
-@IBDesignable class NotificationsCountView: UIView {
+@IBDesignable @objc(MCUnreadNotificationsCountView) final class UnreadNotificationsCountView: UIView {
     @IBInspectable var count: Int = 1 {
         didSet {
             update()

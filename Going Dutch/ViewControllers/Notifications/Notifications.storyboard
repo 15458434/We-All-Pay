@@ -29,7 +29,7 @@
                                         <stackView opaque="NO" contentMode="scaleToFill" alignment="center" spacing="8" translatesAutoresizingMaskIntoConstraints="NO" id="Xgg-wS-8bs">
                                             <rect key="frame" x="8" y="8" width="398" height="44.5"/>
                                             <subviews>
-                                                <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="GDp-Gq-nEt" customClass="MCNotificationReadIndicator">
+                                                <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="GDp-Gq-nEt" customClass="MCNotificationUnreadIndicator">
                                                     <rect key="frame" x="0.0" y="15.5" width="14" height="14"/>
                                                     <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                                     <constraints>

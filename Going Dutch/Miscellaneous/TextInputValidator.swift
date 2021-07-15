@@ -8,7 +8,7 @@
 
 import UIKit
 
-@objc(MCTextInputValidator) @objcMembers class TextInputValidator: NSObject, UITextFieldDelegate {
+@objc(MCTextInputValidator) @objcMembers open class TextInputValidator: NSObject, UITextFieldDelegate {
     private(set) weak var textField: UITextField!
     
     @objc(initWithTextField:) init(with textField: UITextField) {

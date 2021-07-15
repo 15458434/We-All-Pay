@@ -11,7 +11,7 @@ import MessageUI
 
 import FirebaseAnalytics
 
-class SolutionTableViewController_iPad: MCSolutionTableViewController, MFMailComposeViewControllerDelegate, ThisEvent, ShowMailViewProtocol {
+final class SolutionTableViewController_iPad: MCSolutionTableViewController, MFMailComposeViewControllerDelegate, ThisEvent, ShowMailViewProtocol {
     
     // MARK: New in this class
     override func openMailView(_ sender: Any!) {

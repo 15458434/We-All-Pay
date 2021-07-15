@@ -8,7 +8,7 @@
 
 import UIKit
 
-@objc(MCPersonModel) @objcMembers class PersonModel: NSObject {
+@objc(MCPersonModel) @objcMembers final class PersonModel: NSObject {
     public private(set) dynamic var person: MCPerson!
     private(set) var personFetchedResultsController: NSFetchedResultsController<MCPerson>!
     private(set) var defaultEmailAddressFetchedResultsController: NSFetchedResultsController<MCEmailAddress>!

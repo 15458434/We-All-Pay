@@ -130,21 +130,48 @@
                     </tableView>
                     <toolbarItems/>
                     <navigationItem key="navigationItem" title="events" id="j9s-0f-8Vh">
-                        <barButtonItem key="leftBarButtonItem" image="iScreen button" id="85f-Et-Abg">
-                            <color key="tintColor" red="0.98952531814575195" green="0.45403587818145752" blue="0.5264095664024353" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
-                            <connections>
-                                <action selector="iButtonPressed:" destination="v9b-wE-q9L" id="Q0f-hY-39Z"/>
-                                <segue destination="syc-O8-8LU" kind="presentation" identifier="iScreenSegue" modalTransitionStyle="coverVertical" id="tQ6-am-nQu"/>
-                            </connections>
+                        <barButtonItem key="leftBarButtonItem" style="plain" id="rG6-kl-x9x">
+                            <view key="customView" contentMode="scaleToFill" id="iBP-xp-dgD" customClass="MCBadgeButton">
+                                <rect key="frame" x="16" y="10" width="24" height="24"/>
+                                <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                                <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                                <color key="tintColor" name="button - enabled"/>
+                                <userDefinedRuntimeAttributes>
+                                    <userDefinedRuntimeAttribute type="image" keyPath="normalImage" value="iScreen button"/>
+                                    <userDefinedRuntimeAttribute type="number" keyPath="count">
+                                        <integer key="value" value="1"/>
+                                    </userDefinedRuntimeAttribute>
+                                    <userDefinedRuntimeAttribute type="boolean" keyPath="showBadge" value="YES"/>
+                                    <userDefinedRuntimeAttribute type="color" keyPath="badgeColor">
+                                        <color key="value" name="button - enabled"/>
+                                    </userDefinedRuntimeAttribute>
+                                    <userDefinedRuntimeAttribute type="color" keyPath="fontColor">
+                                        <color key="value" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                                    </userDefinedRuntimeAttribute>
+                                    <userDefinedRuntimeAttribute type="number" keyPath="fontSize">
+                                        <real key="value" value="11"/>
+                                    </userDefinedRuntimeAttribute>
+                                    <userDefinedRuntimeAttribute type="color" keyPath="highlightedTintColor">
+                                        <color key="value" name="button - highlighted"/>
+                                    </userDefinedRuntimeAttribute>
+                                </userDefinedRuntimeAttributes>
+                                <connections>
+                                    <action selector="iButtonPressed:" destination="v9b-wE-q9L" eventType="touchUpInside" id="I2Y-W6-iHF"/>
+                                </connections>
+                            </view>
                         </barButtonItem>
                     </navigationItem>
                     <connections>
+                        <outlet property="infoButton" destination="iBP-xp-dgD" id="yq8-ga-U2H"/>
                         <outlet property="model" destination="I1d-JY-yVm" id="PLh-yY-3qa"/>
+                        <outlet property="notificationsStateModel" destination="1Xp-pv-4eE" id="XyB-iT-wlq"/>
                         <segue destination="fIg-ri-deX" kind="presentation" identifier="selectMainCurrency" id="AFT-dx-z90"/>
+                        <segue destination="syc-O8-8LU" kind="presentation" identifier="iScreenSegue" modalTransitionStyle="coverVertical" id="Hbz-75-wqX"/>
                     </connections>
                 </tableViewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="dgz-Pk-24M" userLabel="First Responder" sceneMemberID="firstResponder"/>
                 <customObject id="I1d-JY-yVm" customClass="MCEventsModel"/>
+                <customObject id="1Xp-pv-4eE" customClass="MCNotificationsInfoModel"/>
             </objects>
             <point key="canvasLocation" x="-823.125" y="727.81690140845069"/>
         </scene>
@@ -442,23 +469,23 @@
                                 </connections>
                             </tableViewCell>
                             <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" preservesSuperviewLayoutMargins="YES" selectionStyle="default" indentationWidth="10" reuseIdentifier="NotificationsCountTableViewCell" id="P8J-qh-17v" customClass="NotificationsCountTableViewCell" customModule="We_all_pay" customModuleProvider="target">
-                                <rect key="frame" x="0.0" y="90.666667938232422" width="375" height="41.666667938232422"/>
+                                <rect key="frame" x="0.0" y="90.666667938232422" width="375" height="71.333335876464844"/>
                                 <autoresizingMask key="autoresizingMask"/>
                                 <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" preservesSuperviewLayoutMargins="YES" insetsLayoutMarginsFromSafeArea="NO" tableViewCell="P8J-qh-17v" id="sUP-wJ-H4Y">
-                                    <rect key="frame" x="0.0" y="0.0" width="375" height="41.666667938232422"/>
+                                    <rect key="frame" x="0.0" y="0.0" width="375" height="71.333335876464844"/>
                                     <autoresizingMask key="autoresizingMask"/>
                                     <subviews>
                                         <stackView opaque="NO" contentMode="scaleToFill" distribution="equalSpacing" alignment="center" spacing="6" translatesAutoresizingMaskIntoConstraints="NO" id="JAb-jy-84u">
-                                            <rect key="frame" x="20" y="11.000000000000002" width="335" height="20.666666666666671"/>
+                                            <rect key="frame" x="20" y="11.000000000000004" width="335" height="50.333333333333343"/>
                                             <subviews>
                                                 <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Notifications" textAlignment="natural" lineBreakMode="tailTruncation" numberOfLines="0" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="YPb-Py-Acz">
-                                                    <rect key="frame" x="0.0" y="0.33333333333333393" width="164.66666666666666" height="20.333333333333329"/>
+                                                    <rect key="frame" x="0.0" y="14.999999999999998" width="164.66666666666666" height="20.333333333333329"/>
                                                     <fontDescription key="fontDescription" type="system" weight="thin" pointSize="17"/>
                                                     <nil key="textColor"/>
                                                     <nil key="highlightedColor"/>
                                                 </label>
-                                                <view clipsSubviews="YES" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" horizontalCompressionResistancePriority="751" verticalCompressionResistancePriority="751" translatesAutoresizingMaskIntoConstraints="NO" id="PXr-ct-Ja1" customClass="NotificationsCountView" customModule="We_all_pay" customModuleProvider="target">
-                                                    <rect key="frame" x="317.33333333333331" y="0.33333333333333393" width="17.666666666666686" height="20"/>
+                                                <view clipsSubviews="YES" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" horizontalCompressionResistancePriority="751" verticalCompressionResistancePriority="751" ambiguous="YES" translatesAutoresizingMaskIntoConstraints="NO" id="PXr-ct-Ja1" customClass="MCUnreadNotificationsCountView">
+                                                    <rect key="frame" x="285" y="0.3333333333333357" width="50" height="50"/>
                                                     <color key="backgroundColor" systemColor="systemBackgroundColor"/>
                                                     <userDefinedRuntimeAttributes>
                                                         <userDefinedRuntimeAttribute type="color" keyPath="textColor">
@@ -534,13 +561,11 @@
                     </navigationItem>
                     <simulatedStatusBarMetrics key="simulatedStatusBarMetrics" statusBarStyle="lightContent"/>
                     <connections>
-                        <outlet property="notificationModel" destination="GOJ-dB-kUL" id="VbI-4g-vPW"/>
                         <outlet property="versionLabel" destination="IrA-LQ-aX2" id="cfd-7b-p72"/>
                         <segue destination="3mD-HN-ynv" kind="show" identifier="OpenNotifications" id="S98-wj-e9R"/>
                     </connections>
                 </tableViewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="Zpx-6T-7TS" userLabel="First Responder" sceneMemberID="firstResponder"/>
-                <customObject id="GOJ-dB-kUL" customClass="NotificationsInfoModel" customModule="We_all_pay" customModuleProvider="target"/>
             </objects>
             <point key="canvasLocation" x="1284" y="1481"/>
         </scene>
@@ -1714,24 +1739,12 @@
         </scene>
     </scenes>
     <designables>
-        <designable name="PXr-ct-Ja1">
-            <size key="intrinsicContentSize" width="17.59765625" height="20.287109375"/>
-        </designable>
-        <designable name="Y6i-cu-NDo">
-            <size key="intrinsicContentSize" width="480" height="480"/>
-        </designable>
-        <designable name="ZjT-qg-OGx">
-            <size key="intrinsicContentSize" width="480" height="480"/>
-        </designable>
         <designable name="jMQ-DN-rdu">
-            <size key="intrinsicContentSize" width="480" height="480"/>
-        </designable>
-        <designable name="rmI-7G-oMX">
-            <size key="intrinsicContentSize" width="480" height="480"/>
+            <size key="intrinsicContentSize" width="1219.2000071055095" height="1219.2000071055095"/>
         </designable>
     </designables>
     <inferredMetricsTieBreakers>
-        <segue reference="EWs-3n-BSY"/>
+        <segue reference="AFT-dx-z90"/>
         <segue reference="eZd-I3-t8D"/>
         <segue reference="C0F-pM-cfm"/>
         <segue reference="6AC-aI-bIB"/>
@@ -1743,6 +1756,9 @@
         <image name="iScreen button" width="26" height="26"/>
         <namedColor name="button - enabled">
             <color red="1" green="0.52941176470588236" blue="0.67843137254901964" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+        </namedColor>
+        <namedColor name="button - highlighted">
+            <color red="1" green="0.52941176470588236" blue="0.67843137254901964" alpha="0.20000000000000001" colorSpace="custom" customColorSpace="sRGB"/>
         </namedColor>
         <systemColor name="secondaryLabelColor">
             <color red="0.23529411764705882" green="0.23529411764705882" blue="0.2627450980392157" alpha="0.59999999999999998" colorSpace="custom" customColorSpace="sRGB"/>

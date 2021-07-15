@@ -8,7 +8,7 @@
 
 import UIKit
 
-class NotificationsModel: NSObject {
+final class NotificationsModel: NSObject {
     @objc dynamic private(set) var notifications: [NotificationsItemProtocol] = [NotificationsItemProtocol]()
     
     /// addItem to the notifications array in the correct order and trigger KVO.
