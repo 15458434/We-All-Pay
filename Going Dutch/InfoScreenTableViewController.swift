@@ -253,6 +253,16 @@ final class InfoScreenTableViewController: UITableViewController, MFMailComposeV
         NotificationCenter.default.removeObserver(self)
     }
     
+    override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
+        switch segue.identifier! {
+        case "OpenNotifications":
+            let destination = segue.destination as! NotificationsTableViewController
+            destination.preferredContentSize = self.navigationController!.presentationController!.containerView!.bounds.size
+        default:
+            fatalError("Unknown segue with identifier: \(segue.identifier!)")
+        }
+    }
+    
     override var prefersStatusBarHidden: Bool {
         return true
     }
