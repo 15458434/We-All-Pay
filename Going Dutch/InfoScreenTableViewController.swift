@@ -257,7 +257,7 @@ final class InfoScreenTableViewController: UITableViewController, MFMailComposeV
         switch segue.identifier! {
         case "OpenNotifications":
             let destination = segue.destination as! NotificationsTableViewController
-            destination.preferredContentSize = self.navigationController!.presentationController!.containerView!.bounds.size
+            destination.preferredContentSize = CGSize(width: self.navigationController!.presentationController!.containerView!.bounds.size.width, height: 0)
         default:
             fatalError("Unknown segue with identifier: \(segue.identifier!)")
         }
