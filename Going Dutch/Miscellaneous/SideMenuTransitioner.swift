@@ -51,13 +51,14 @@ final class SideMenuPresentationController: UIPresentationController, UIGestureR
     
     func navigationController(_ navigationController: UINavigationController, willShow viewController: UIViewController, animated: Bool) {
         if let transitionCoordinator = navigationController.transitionCoordinator {
+            var navigationControllerViewframe = navigationController.view.frame
+            navigationControllerViewframe.size.width = viewController.preferredContentSize.width
+            
+            var viewControllerViewFrame = viewController.view.frame
+            viewControllerViewFrame.size.width = viewController.preferredContentSize.width
+            
             transitionCoordinator.animate(alongsideTransition: { transitionCoordinatorContext in
-                var navigationControllerViewframe = navigationController.view.frame
-                navigationControllerViewframe.size.width = viewController.preferredContentSize.width
                 navigationController.view!.frame = navigationControllerViewframe
-                
-                var viewControllerViewFrame = viewController.view.frame
-                viewControllerViewFrame.size.width = viewController.preferredContentSize.width
                 viewController.view!.frame = viewControllerViewFrame
             }, completion: nil)
         }
