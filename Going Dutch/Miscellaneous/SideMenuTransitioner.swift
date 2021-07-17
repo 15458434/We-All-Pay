@@ -55,12 +55,14 @@ final class SideMenuPresentationController: UIPresentationController, UIGestureR
             navigationControllerViewframe.size.width = viewController.preferredContentSize.width
             
             var viewControllerViewFrame = viewController.view.frame
+            viewControllerViewFrame.origin.y = 0
             viewControllerViewFrame.size.width = viewController.preferredContentSize.width
             
             transitionCoordinator.animate(alongsideTransition: { transitionCoordinatorContext in
                 navigationController.view!.frame = navigationControllerViewframe
                 viewController.view!.frame = viewControllerViewFrame
             }, completion: nil)
+            navigationController.viewWillTransition(to: navigationControllerViewframe.size, with: transitionCoordinator)
         }
     }
     
