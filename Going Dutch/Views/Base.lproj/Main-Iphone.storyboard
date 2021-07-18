@@ -166,7 +166,7 @@
                         <outlet property="model" destination="I1d-JY-yVm" id="PLh-yY-3qa"/>
                         <outlet property="notificationsStateModel" destination="1Xp-pv-4eE" id="XyB-iT-wlq"/>
                         <segue destination="fIg-ri-deX" kind="presentation" identifier="selectMainCurrency" id="AFT-dx-z90"/>
-                        <segue destination="syc-O8-8LU" kind="presentation" identifier="iScreenSegue" modalTransitionStyle="coverVertical" id="Hbz-75-wqX"/>
+                        <segue destination="syc-O8-8LU" kind="presentation" identifier="iScreenSegue" modalPresentationStyle="overCurrentContext" modalTransitionStyle="coverVertical" id="Hbz-75-wqX"/>
                     </connections>
                 </tableViewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="dgz-Pk-24M" userLabel="First Responder" sceneMemberID="firstResponder"/>
@@ -425,9 +425,9 @@
         <!--Info Screen Table View Controller-->
         <scene sceneID="FkC-Sc-sp2">
             <objects>
-                <tableViewController storyboardIdentifier="MCiScreenTableViewController" useStoryboardIdentifierAsRestorationIdentifier="YES" id="bYr-Fd-K6x" customClass="InfoScreenTableViewController" customModule="We_all_pay" customModuleProvider="target" sceneMemberID="viewController">
+                <tableViewController storyboardIdentifier="MCiScreenTableViewController" extendedLayoutIncludesOpaqueBars="YES" useStoryboardIdentifierAsRestorationIdentifier="YES" id="bYr-Fd-K6x" customClass="InfoScreenTableViewController" customModule="We_all_pay" customModuleProvider="target" sceneMemberID="viewController">
                     <tableView key="view" opaque="NO" clipsSubviews="YES" clearsContextBeforeDrawing="NO" contentMode="scaleToFill" restorationIdentifier="tableView" alwaysBounceVertical="YES" dataMode="prototypes" style="grouped" rowHeight="-1" estimatedRowHeight="-1" sectionHeaderHeight="-1" estimatedSectionHeaderHeight="-1" sectionFooterHeight="-1" estimatedSectionFooterHeight="-1" id="2Mj-Me-UVb">
-                        <rect key="frame" x="0.0" y="0.0" width="375" height="702"/>
+                        <rect key="frame" x="0.0" y="0.0" width="375" height="812"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <color key="backgroundColor" red="0.75745260715484619" green="0.83339643478393555" blue="0.92594647407531738" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                         <prototypes>
@@ -469,23 +469,23 @@
                                 </connections>
                             </tableViewCell>
                             <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" preservesSuperviewLayoutMargins="YES" selectionStyle="default" indentationWidth="10" reuseIdentifier="NotificationsCountTableViewCell" id="P8J-qh-17v" customClass="NotificationsCountTableViewCell" customModule="We_all_pay" customModuleProvider="target">
-                                <rect key="frame" x="0.0" y="90.666667938232422" width="375" height="71.333335876464844"/>
+                                <rect key="frame" x="0.0" y="90.666667938232422" width="375" height="41.666667938232422"/>
                                 <autoresizingMask key="autoresizingMask"/>
                                 <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" preservesSuperviewLayoutMargins="YES" insetsLayoutMarginsFromSafeArea="NO" tableViewCell="P8J-qh-17v" id="sUP-wJ-H4Y">
-                                    <rect key="frame" x="0.0" y="0.0" width="375" height="71.333335876464844"/>
+                                    <rect key="frame" x="0.0" y="0.0" width="375" height="41.666667938232422"/>
                                     <autoresizingMask key="autoresizingMask"/>
                                     <subviews>
                                         <stackView opaque="NO" contentMode="scaleToFill" distribution="equalSpacing" alignment="center" spacing="6" translatesAutoresizingMaskIntoConstraints="NO" id="JAb-jy-84u">
-                                            <rect key="frame" x="20" y="11.000000000000004" width="335" height="50.333333333333343"/>
+                                            <rect key="frame" x="20" y="11.000000000000002" width="335" height="20.666666666666671"/>
                                             <subviews>
                                                 <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Notifications" textAlignment="natural" lineBreakMode="tailTruncation" numberOfLines="0" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="YPb-Py-Acz">
-                                                    <rect key="frame" x="0.0" y="14.999999999999998" width="164.66666666666666" height="20.333333333333329"/>
+                                                    <rect key="frame" x="0.0" y="0.33333333333333393" width="164.66666666666666" height="20.333333333333329"/>
                                                     <fontDescription key="fontDescription" type="system" weight="thin" pointSize="17"/>
                                                     <nil key="textColor"/>
                                                     <nil key="highlightedColor"/>
                                                 </label>
-                                                <view clipsSubviews="YES" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" horizontalCompressionResistancePriority="751" verticalCompressionResistancePriority="751" ambiguous="YES" translatesAutoresizingMaskIntoConstraints="NO" id="PXr-ct-Ja1" customClass="MCUnreadNotificationsCountView">
-                                                    <rect key="frame" x="285" y="0.3333333333333357" width="50" height="50"/>
+                                                <view clipsSubviews="YES" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" horizontalCompressionResistancePriority="751" verticalCompressionResistancePriority="751" translatesAutoresizingMaskIntoConstraints="NO" id="PXr-ct-Ja1" customClass="MCUnreadNotificationsCountView">
+                                                    <rect key="frame" x="314.66666666666669" y="0.33333333333333393" width="20.333333333333314" height="20"/>
                                                     <color key="backgroundColor" systemColor="systemBackgroundColor"/>
                                                     <userDefinedRuntimeAttributes>
                                                         <userDefinedRuntimeAttribute type="color" keyPath="textColor">
@@ -527,7 +527,7 @@
                     <navigationItem key="navigationItem" id="Ntt-oe-ct4">
                         <nil key="title"/>
                         <view key="titleView" contentMode="scaleToFill" id="Fp6-vz-fRL">
-                            <rect key="frame" x="123.66666666666669" y="12" width="128" height="32"/>
+                            <rect key="frame" x="123.66666666666669" y="6" width="128" height="32"/>
                             <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                             <subviews>
                                 <label opaque="NO" clipsSubviews="YES" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="We all pay" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="7Ul-ek-GSq">
@@ -1660,7 +1660,7 @@
                     <simulatedStatusBarMetrics key="simulatedStatusBarMetrics" statusBarStyle="lightContent"/>
                     <simulatedNavigationBarMetrics key="simulatedTopBarMetrics" translucent="NO" prompted="NO"/>
                     <navigationBar key="navigationBar" contentMode="scaleToFill" translucent="NO" id="EMf-M2-Bqt">
-                        <rect key="frame" x="0.0" y="0.0" width="375" height="56"/>
+                        <rect key="frame" x="0.0" y="44" width="375" height="44"/>
                         <autoresizingMask key="autoresizingMask"/>
                         <color key="backgroundColor" red="0.018172375857830048" green="0.098393335938453674" blue="0.30674564838409424" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                         <textAttributes key="titleTextAttributes">
@@ -1739,8 +1739,20 @@
         </scene>
     </scenes>
     <designables>
+        <designable name="PXr-ct-Ja1">
+            <size key="intrinsicContentSize" width="20.287109375" height="20.287109375"/>
+        </designable>
+        <designable name="Y6i-cu-NDo">
+            <size key="intrinsicContentSize" width="480" height="480"/>
+        </designable>
+        <designable name="ZjT-qg-OGx">
+            <size key="intrinsicContentSize" width="480" height="480"/>
+        </designable>
         <designable name="jMQ-DN-rdu">
-            <size key="intrinsicContentSize" width="1219.2000071055095" height="1219.2000071055095"/>
+            <size key="intrinsicContentSize" width="480" height="480"/>
+        </designable>
+        <designable name="rmI-7G-oMX">
+            <size key="intrinsicContentSize" width="480" height="480"/>
         </designable>
     </designables>
     <inferredMetricsTieBreakers>
@@ -1758,7 +1770,7 @@
             <color red="1" green="0.52941176470588236" blue="0.67843137254901964" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
         </namedColor>
         <namedColor name="button - highlighted">
-            <color red="1" green="0.52941176470588236" blue="0.67843137254901964" alpha="0.20000000000000001" colorSpace="custom" customColorSpace="sRGB"/>
+            <color red="1" green="0.52941176470588236" blue="0.67843137254901964" alpha="0.20000000298023224" colorSpace="custom" customColorSpace="sRGB"/>
         </namedColor>
         <systemColor name="secondaryLabelColor">
             <color red="0.23529411764705882" green="0.23529411764705882" blue="0.2627450980392157" alpha="0.59999999999999998" colorSpace="custom" customColorSpace="sRGB"/>

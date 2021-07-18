@@ -14,7 +14,7 @@ final class InfoScreenContainerViewController: UIViewController {
     // MARK: IB Outlets
     @IBOutlet var weAllPayVersionLabel: UILabel!
     
-    // MARK: New in this class
+    // MARK: UIViewController
     
     override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
         switch (segue.identifier) {
@@ -26,4 +26,8 @@ final class InfoScreenContainerViewController: UIViewController {
             print("Error: segue to nowhere?")
         }
     }
+    
+    // MARK: UIResponder
+    
+    // MARK: NSObject
 }

@@ -95,6 +95,7 @@
                             <outlet property="delegate" destination="W8k-NJ-k5N" id="MDb-m7-KmQ"/>
                         </connections>
                     </tableView>
+                    <extendedEdge key="edgesForExtendedLayout"/>
                     <connections>
                         <outlet property="model" destination="25z-U9-eOY" id="OYg-iA-9at"/>
                     </connections>
