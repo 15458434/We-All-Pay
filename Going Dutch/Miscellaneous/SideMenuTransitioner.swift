@@ -51,25 +51,27 @@ final class SideMenuPresentationController: UIPresentationController, UIGestureR
     
     func navigationController(_ navigationController: UINavigationController, willShow viewController: UIViewController, animated: Bool) {
         if let transitionCoordinator = navigationController.transitionCoordinator {
+            var navigationControllerViewframe = navigationController.view.frame
+            navigationControllerViewframe.size.width = viewController.preferredContentSize.width
+            
+            var viewControllerViewFrame = viewController.view.frame
+            viewControllerViewFrame.origin.y = 0
+            viewControllerViewFrame.size.width = viewController.preferredContentSize.width
+            
             transitionCoordinator.animate(alongsideTransition: { transitionCoordinatorContext in
-                var navigationControllerViewframe = navigationController.view.frame
-                var viewControllerViewFrame = viewController.view.frame
-                switch viewController {
-                case is InfoScreenTableViewController:
-                    navigationControllerViewframe.size.width = 280
-                    viewControllerViewFrame.size.width = 280
-                case is NotificationsTableViewController:
-                    navigationControllerViewframe.size.width = self.containerView!.bounds.width
-                    viewControllerViewFrame.size.width = self.containerView!.bounds.width
-                default:
-                    ()
-                }
-                navigationController.view.frame = navigationControllerViewframe
-                viewController.view.frame = viewControllerViewFrame
+                navigationController.view!.frame = navigationControllerViewframe
+                viewController.view!.frame = viewControllerViewFrame
             }, completion: nil)
+            navigationController.viewWillTransition(to: navigationControllerViewframe.size, with: transitionCoordinator)
         }
     }
     
+    func navigationController(_ navigationController: UINavigationController, didShow viewController: UIViewController, animated: Bool) {
+        var frame = viewController.view.frame
+        frame.size.width = viewController.preferredContentSize.width
+        viewController.view.frame = frame
+    }
+        
     // MARK: UIGestureRecognizerDelegate
     
     func gestureRecognizerShouldBegin(_ gestureRecognizer: UIGestureRecognizer) -> Bool {
@@ -295,6 +297,10 @@ final class SwipeLeftDissmissableNavigationController: UINavigationController, S
         super.viewDidLoad()
         
         dismissInteractionController = SideMenuDismissInteractionController(with: self)
+    }
+    
+    override func viewWillTransition(to size: CGSize, with coordinator: UIViewControllerTransitionCoordinator) {
+        super.viewWillTransition(to: size, with: coordinator)
     }
     
     // MARK: UIResponder
