@@ -6,6 +6,8 @@
 //  Copyright (c) 2013 Mark Cornelisse. All rights reserved.
 //
 
+@import FirebaseCrashlytics;
+
 #import "MCPayment+addons.h"
 #import "MCPerson.h"
 #import "MCSharedBill.h"
@@ -24,8 +26,9 @@
     return [MCPayment addPaymentInContext:context];
 }
 
-+ (MCPayment *)addPaymentInContext:(NSManagedObjectContext *)context
-{
++ (MCPayment *)addPaymentInContext:(NSManagedObjectContext *)context {
+    BOOL isContextPresent = context ? YES : NO;
+    [[FIRCrashlytics crashlytics] logWithFormat:@"isContextPresent: %@", @(isContextPresent)];
     MCPayment *newPayment = [NSEntityDescription insertNewObjectForEntityForName:@"MCPayment" inManagedObjectContext:context];
     newPayment.uniquePaymentId = [[NSUUID UUID] UUIDString];
     newPayment.dateCreated = [NSDate date];

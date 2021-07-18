@@ -6,6 +6,8 @@
 //  Copyright (c) 2013 Mark Cornelisse. All rights reserved.
 //
 
+@import FirebaseCrashlytics;
+
 #import "MCSharedBill+addons.h"
 #import "MCPerson+addons.h"
 #import "MCEmailAddress+addons.h"
@@ -223,9 +225,14 @@
     }
 }
 
-- (MCPerson *)addPerson
-{
+- (MCPerson *)addPerson {
+    NSArray *keysToExtract = @[@"tripName", @"uniqueBillId"];
+    NSDictionary *selfAsADictionary = [self dictionaryWithValuesForKeys:keysToExtract];
+    [[FIRCrashlytics crashlytics] logWithFormat:@"add person on sharedBill: %@", selfAsADictionary];
     NSManagedObjectContext *context = [self managedObjectContext];
+    BOOL isContextPresent = context ? YES : NO;
+    [[FIRCrashlytics crashlytics] logWithFormat:@"isContextPresent: %@", @(isContextPresent)];
+    
     MCPerson *newPerson = [MCPerson addPersonInContext:context];
     for (MCPayment *payment in [self payments]) {
         // Presence of all the exisiting payments on this sharedBill will be created and set tot NO.
