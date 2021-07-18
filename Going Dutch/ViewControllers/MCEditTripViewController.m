@@ -355,25 +355,21 @@
         }
         MCPersonViewController *destination = navController.viewControllers.firstObject;
         destination.isAdBannerEnabled = YES;
-        if ([destination conformsToProtocol:@protocol(MCTonightsBillTransfer)] && [destination conformsToProtocol:@protocol(MCThisPersonProtocol)]) {
-            NSIndexPath *indexPathOfSelectedRow = [[self tableView] indexPathForSelectedRow];
-            MCPerson *thePerson = [_dataController objectAtIndexPath:indexPathOfSelectedRow];
-            [[MCWeAllPayStoreController defaultStore] beginUndoGroup];
-            if (!thePerson) {
-                // No person present create a new one.
-                thePerson = [_tonightsBill addPerson];
-                [thePerson setThumbnailDataFromImage:nil];
-                [thePerson setPictureDataFromImage:nil];
-                destination.thisPerson = thePerson;
-                destination.isNew = YES;
-            } else {
-                // Person present open it.
-                destination.thisPerson = thePerson;
-                destination.isNew = NO;
-                [self.tableView deselectRowAtIndexPath:indexPathOfSelectedRow animated:YES];
-            }
+        NSIndexPath *indexPathOfSelectedRow = [[self tableView] indexPathForSelectedRow];
+        MCPerson *thePerson = [_dataController objectAtIndexPath:indexPathOfSelectedRow];
+        [[MCWeAllPayStoreController defaultStore] beginUndoGroup];
+        if (!thePerson) {
+            // No person present create a new one.
+            thePerson = [_tonightsBill addPerson];
+            [thePerson setThumbnailDataFromImage:nil];
+            [thePerson setPictureDataFromImage:nil];
+            destination.thisPerson = thePerson;
+            destination.isNew = YES;
         } else {
-            NSLog(@"%@: Unable to pass tonightsBill and thisPerson.", self);
+            // Person present open it.
+            destination.thisPerson = thePerson;
+            destination.isNew = NO;
+            [self.tableView deselectRowAtIndexPath:indexPathOfSelectedRow animated:YES];
         }
     }
 }
