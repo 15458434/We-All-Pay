@@ -7,6 +7,7 @@
 //
 
 import UIKit
+import FirebaseCrashlytics
 
 @objc(MCPayerTextInputPicker) @objcMembers class PayerTextInputPicker: NSObject, UITextFieldDelegate, UIPickerViewDelegate, UIPickerViewDataSource {
     private(set) var keyboardWillShowObserver: NSObjectProtocol!
@@ -56,6 +57,12 @@ import UIKit
     }
     
     func pickerView(_ pickerView: UIPickerView, didSelectRow row: Int, inComponent component: Int) {
+        let arrayOfPeoplePresentAsArrayOfDictionaries = arrayOfPeoplePresent.map { person -> [String: Any] in
+            let dictionary = person.dictionaryWithValues(forKeys: ["defaultEmailAddress", "firstName", "lastName", "totalSumPaid", "uniquePersonId"])
+            return dictionary
+        }
+        Crashlytics.crashlytics().log("arrayOfPeoplePresent: \(arrayOfPeoplePresentAsArrayOfDictionaries)")
+        Crashlytics.crashlytics().log("didSelected row: \(row), inComponent: \(component)")
         let payingPerson = arrayOfPeoplePresent[row]
         model.update(payingPerson: payingPerson)
         
