@@ -51,7 +51,7 @@
 
 
 - (IBAction)addPersonButton:(id)sender {
-    if ([_tripNameField isEditing]) {
+    if (_tripNameField.isEditing) {
         [_tripNameField resignFirstResponder];
     }
 }
@@ -69,11 +69,11 @@
 }
 
 - (void)setEmptyMessage {
-    if ([[_dataController fetchedObjects] count] != 0) {
-        if ([[_emptyMessage bigMessage] alpha] > 0.0) {
+    if (_dataController.fetchedObjects.count != 0) {
+        if (_emptyMessage.bigMessage.alpha > 0.0) {
             [UIView animateWithDuration:1.0 animations:^{
-                [[self.emptyMessage bigMessage] setAlpha:0.0];
-                [[self tableView] setSeparatorStyle:UITableViewCellSeparatorStyleSingleLine];
+                self.emptyMessage.bigMessage.alpha = 0.0;
+                self.tableView.separatorStyle = UITableViewCellSeparatorStyleSingleLine;
             } completion:nil];
         }
     } else {
@@ -87,33 +87,19 @@
 }
 
 - (void)setEmptyMessageNow {
-    if ([[_dataController fetchedObjects] count] != 0) {
+    if (_dataController.fetchedObjects.count != 0) {
         [UIView animateWithDuration:0.0 animations:^{
-            [[self->_emptyMessage bigMessage] setAlpha:0.0];
+            self.emptyMessage.bigMessage.alpha = 0.0;
             [[self tableView] setSeparatorStyle:UITableViewCellSeparatorStyleSingleLine];
         } completion:nil];
     } else {
-        if ([[_emptyMessage bigMessage] alpha] < 1.0) {
+        if (_emptyMessage.bigMessage.alpha < 1.0) {
             [UIView animateWithDuration:0.0 animations:^{
-                [[self->_emptyMessage bigMessage] setAlpha:1.0];
-                [[self tableView] setSeparatorStyle:UITableViewCellSeparatorStyleNone];
+                self.emptyMessage.bigMessage.alpha = 1.0;
+                self.tableView.separatorStyle = UITableViewCellSeparatorStyleNone;
             } completion:nil];
         }
     }
-}
-
-#pragma mark - Notifications
-
-- (void)writeableTonightsBillIsCreated:(NSNotification *)notification {
-    // Should be executed on the background thread.
-    NSDictionary *userInfo = [notification userInfo];
-    _writableTonightsBill = [userInfo objectForKey:MCwritableTonightsBillKey];
-    NSManagedObjectContext *mainContext = [[MCWeAllPayStoreController defaultStore] mainThreadContext];
-    NSManagedObjectID *tonightsBillID = [_writableTonightsBill objectID];
-    [mainContext performBlock:^{
-        self->_tonightsBill = (MCSharedBill *)[mainContext objectWithID:tonightsBillID];
-    }];
-    NSLog(@"PeoplePresent: WritableTonightsBillIsCreated has been executed.");
 }
 
 #pragma mark - UITextFieldDelegate
@@ -128,7 +114,7 @@
     _tonightsBill.tripName = _tripNameField.text;
     NSDate *now = [NSDate date];
     _tonightsBill.dateModified = now;
-    [[MCWeAllPayStoreController defaultStore] saveMainThreadContext];
+    [MCWeAllPayStoreController.defaultStore saveMainThreadContext];
     if (!_didSomethingChange) {
         _didSomethingChange = YES;
     }
@@ -142,34 +128,34 @@
 #pragma mark - NSFetchedResultsControllerDelegate
 
 - (void)controllerWillChangeContent:(NSFetchedResultsController *)controller {
-    [[self tableView] beginUpdates];
+    [self.tableView beginUpdates];
 }
 
 - (void)controllerDidChangeContent:(NSFetchedResultsController *)controller {
-    [[self tableView] endUpdates];
+    [self.tableView endUpdates];
 }
 
 - (void)controller:(NSFetchedResultsController *)controller didChangeObject:(id)anObject atIndexPath:(NSIndexPath *)indexPath forChangeType:(NSFetchedResultsChangeType)type newIndexPath:(NSIndexPath *)newIndexPath {
     switch(type) {
             
         case NSFetchedResultsChangeInsert:
-            [[self tableView] insertRowsAtIndexPaths:@[newIndexPath] withRowAnimation:UITableViewRowAnimationFade];
+            [self.tableView insertRowsAtIndexPaths:@[newIndexPath] withRowAnimation:UITableViewRowAnimationFade];
             [self setEmptyMessage];
             break;
             
         case NSFetchedResultsChangeDelete:
-            [[self tableView] deleteRowsAtIndexPaths:@[indexPath] withRowAnimation:UITableViewRowAnimationFade];
+            [self.tableView deleteRowsAtIndexPaths:@[indexPath] withRowAnimation:UITableViewRowAnimationFade];
             [self setEmptyMessage];
             break;
             
         case NSFetchedResultsChangeUpdate:
-            [[self tableView] reloadRowsAtIndexPaths:@[indexPath] withRowAnimation:UITableViewRowAnimationAutomatic];
+            [self.tableView reloadRowsAtIndexPaths:@[indexPath] withRowAnimation:UITableViewRowAnimationAutomatic];
             _didSomethingChange = YES;
             break;
             
         case NSFetchedResultsChangeMove:
-            [[self tableView] deleteRowsAtIndexPaths:@[indexPath] withRowAnimation:UITableViewRowAnimationFade];
-            [[self tableView] insertRowsAtIndexPaths:@[newIndexPath] withRowAnimation:UITableViewRowAnimationFade];
+            [self.tableView deleteRowsAtIndexPaths:@[indexPath] withRowAnimation:UITableViewRowAnimationFade];
+            [self.tableView insertRowsAtIndexPaths:@[newIndexPath] withRowAnimation:UITableViewRowAnimationFade];
             break;
     }
 }
@@ -178,18 +164,15 @@
 
 #pragma mark - UITableViewDataSource
 
-- (NSInteger)numberOfSectionsInTableView:(UITableView *)tableView
-{
-    return [[_dataController sections] count];
+- (NSInteger)numberOfSectionsInTableView:(UITableView *)tableView {
+    return _dataController.sections.count;
 }
 
-- (NSInteger)tableView:(UITableView *)tableView numberOfRowsInSection:(NSInteger)section
-{
-    return [[_dataController fetchedObjects] count];
+- (NSInteger)tableView:(UITableView *)tableView numberOfRowsInSection:(NSInteger)section {
+    return _dataController.fetchedObjects.count;
 }
 
-- (UITableViewCell *)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath
-{
+- (UITableViewCell *)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath {
     MCPerson *thisCellsPerson = [_dataController objectAtIndexPath:indexPath];
     MCPersonTableViewCell *thisCell = [tableView dequeueReusableCellWithIdentifier:@"MCPersonTableViewCell"];
     
@@ -229,15 +212,14 @@
     if (editingStyle == UITableViewCellEditingStyleDelete) {
         MCPerson *removablePerson = [_dataController objectAtIndexPath:indexPath];
         [_tonightsBill deletePerson:removablePerson];
-        [[MCWeAllPayStoreController defaultStore] saveMainThreadContext];
+        [MCWeAllPayStoreController.defaultStore saveMainThreadContext];
         _didSomethingChange = YES;
     }
 }
 
 #pragma mark - UITableViewDelegate
 
-- (CGFloat)tableView:(UITableView *)tableView heightForRowAtIndexPath:(NSIndexPath *)indexPath
-{
+- (CGFloat)tableView:(UITableView *)tableView heightForRowAtIndexPath:(NSIndexPath *)indexPath {
     return 60;
 }
 
@@ -256,48 +238,40 @@
     // Uncomment the following line to display an Edit button in the navigation bar for this view controller.
     // self.navigationItem.rightBarButtonItem = self.editButtonItem;
     
-    [self setEdgesForExtendedLayout:UIRectEdgeNone];
+    self.edgesForExtendedLayout = UIRectEdgeNone;
     
     [self startRespondingToStoreChangeNotifications];
     
-    _emptyMessage = [[NSBundle mainBundle] loadNibNamed:@"MCTableEmptyMessage" owner:self options:nil][0];
-    [[_emptyMessage bigMessage] setText:NSLocalizedString(@"PEOPLE_LIST_EMPTY_MESSAGE", @"Press \"add Person\" to add a person who you'd like to share this bill with.")];
-    if ([[_dataController fetchedObjects] count] > 0) {
-        [[_emptyMessage bigMessage] setAlpha:0.0];
+    _emptyMessage = [NSBundle.mainBundle loadNibNamed:@"MCTableEmptyMessage" owner:self options:nil][0];
+    _emptyMessage.bigMessage.text = NSLocalizedString(@"PEOPLE_LIST_EMPTY_MESSAGE", @"Press \"add Person\" to add a person who you'd like to share this bill with.");
+    if (_dataController.fetchedObjects.count > 0) {
+        _emptyMessage.bigMessage.alpha = 0.0;
     }
-    [[self tableView] setBackgroundView:_emptyMessage];
+    self.tableView.backgroundView = _emptyMessage;
     
     // Make sure a tap in the background dismisses the keyboard as well.
     UITapGestureRecognizer *thatTickles = [[UITapGestureRecognizer alloc] initWithTarget:self action:@selector(tappedInTheBackground:)];
-    [thatTickles setCancelsTouchesInView:NO];
-    [[self tableView] addGestureRecognizer:thatTickles];
+    thatTickles.cancelsTouchesInView = NO;
+    [self.tableView addGestureRecognizer:thatTickles];
 }
 
 
 - (void)viewWillAppear:(BOOL)animated {
     [super viewWillAppear:animated];
     
-    [_tripNameField setText:[_tonightsBill tripName]];
-    [_tripNameField setDelegate:self];
+    _tripNameField.text = _tonightsBill.tripName;
+    _tripNameField.delegate = self;
     
     if (!_dataController) {
-        _dataController = [[MCWeAllPayStoreController defaultStore] sharedBillPeoplePresentDataControllerForDelegate:self];
+        _dataController = [MCWeAllPayStoreController.defaultStore sharedBillPeoplePresentDataControllerForDelegate:self];
         [self performFetch];
-        [[self tableView] reloadData];
+        [self.tableView reloadData];
     }
     
     BOOL shouldAppearAsEditing = [_myParent isChildTableViewEditing];
-    [[self tableView] setEditing:shouldAppearAsEditing animated:NO];
+    [self.tableView setEditing:shouldAppearAsEditing animated:NO];
 
     [self setEmptyMessageNow];
-}
-
-- (void)viewDidAppear:(BOOL)animated {
-    [super viewDidAppear:animated];
-    
-    if ([_tonightsBill tripName]) {
-        [_tripNameField setPlaceholder:[[NSString alloc] initWithFormat:@"Enter something to rename %@", [_tonightsBill tripName]]];
-    }
 }
 
 - (void)viewDidDisappear:(BOOL)animated {
@@ -306,8 +280,7 @@
     _dataController = nil;
 }
 
-- (void)prepareForSegue:(UIStoryboardSegue *)segue sender:(id)sender
-{
+- (void)prepareForSegue:(UIStoryboardSegue *)segue sender:(id)sender {
     if ([[segue identifier] isEqualToString:@"openEditPerson"]) {
         UINavigationController *navController = (UINavigationController *)segue.destinationViewController;
         if (@available(iOS 13.0, *)) {
@@ -317,7 +290,7 @@
         destination.isAdBannerEnabled = YES;
         NSIndexPath *indexPathOfSelectedRow = [[self tableView] indexPathForSelectedRow];
         MCPerson *thePerson = [_dataController objectAtIndexPath:indexPathOfSelectedRow];
-        [[MCWeAllPayStoreController defaultStore] beginUndoGroup];
+        [MCWeAllPayStoreController.defaultStore beginUndoGroup];
         if (!thePerson) {
             // No person present create a new one.
             thePerson = [_tonightsBill addPerson];
@@ -331,6 +304,10 @@
             destination.isNew = NO;
             [self.tableView deselectRowAtIndexPath:indexPathOfSelectedRow animated:YES];
         }
+    } else {
+        NSString *reason = [NSString stringWithFormat:@"Invalid segue.identifier: %@", segue.identifier];
+        NSDictionary *userInfo = [segue dictionaryWithValuesForKeys:@[@"source", @"destimation", @"identifier"]];
+        @throw [NSException exceptionWithName:@"segue identifiter" reason:reason userInfo:userInfo];
     }
 }
 
