@@ -42,8 +42,6 @@
 
 @implementation MCEditTripViewController
 
-#pragma mark - actions of this class
-
 - (IBAction)addressBookButton:(id)sender {
     if (!_contactsInserter) {
         _contactsInserter = [[ContactsDataReceiver alloc] initWith:_tonightsBill];
@@ -62,10 +60,7 @@
     [_tripNameField resignFirstResponder];
 }
 
-#pragma mark - new in this class.
-
-- (void)performFetch
-{
+- (void)performFetch {
     NSError *error;
     BOOL success = [_dataController performFetch:&error];
     if (!success) {
@@ -73,8 +68,7 @@
     }
 }
 
-- (void)setEmptyMessage
-{
+- (void)setEmptyMessage {
     if ([[_dataController fetchedObjects] count] != 0) {
         if ([[_emptyMessage bigMessage] alpha] > 0.0) {
             [UIView animateWithDuration:1.0 animations:^{
@@ -92,8 +86,7 @@
     }
 }
 
-- (void)setEmptyMessageNow
-{
+- (void)setEmptyMessageNow {
     if ([[_dataController fetchedObjects] count] != 0) {
         [UIView animateWithDuration:0.0 animations:^{
             [[self->_emptyMessage bigMessage] setAlpha:0.0];
@@ -109,80 +102,9 @@
     }
 }
 
-#pragma mark - inherited from super
-
-- (void)viewDidLoad
-{
-    [super viewDidLoad];
-    
-    // Uncomment the following line to preserve selection between presentations.
-    // self.clearsSelectionOnViewWillAppear = NO;
-    
-    // Uncomment the following line to display an Edit button in the navigation bar for this view controller.
-    // self.navigationItem.rightBarButtonItem = self.editButtonItem;
-    
-    [self setEdgesForExtendedLayout:UIRectEdgeNone];
-    
-    [self startRespondingToStoreChangeNotifications];
-    
-    _emptyMessage = [[NSBundle mainBundle] loadNibNamed:@"MCTableEmptyMessage" owner:self options:nil][0];
-    [[_emptyMessage bigMessage] setText:NSLocalizedString(@"PEOPLE_LIST_EMPTY_MESSAGE", @"Press \"add Person\" to add a person who you'd like to share this bill with.")];
-    if ([[_dataController fetchedObjects] count] > 0) {
-        [[_emptyMessage bigMessage] setAlpha:0.0];
-    }
-    [[self tableView] setBackgroundView:_emptyMessage];
-    
-    // Make sure a tap in the background dismisses the keyboard as well.
-    UITapGestureRecognizer *thatTickles = [[UITapGestureRecognizer alloc] initWithTarget:self action:@selector(tappedInTheBackground:)];
-    [thatTickles setCancelsTouchesInView:NO];
-    [[self tableView] addGestureRecognizer:thatTickles];
-}
-
-
-- (void)viewWillAppear:(BOOL)animated
-{
-    [super viewWillAppear:animated];
-    
-    [_tripNameField setText:[_tonightsBill tripName]];
-    [_tripNameField setDelegate:self];
-    
-    if (!_dataController) {
-        _dataController = [[MCWeAllPayStoreController defaultStore] sharedBillPeoplePresentDataControllerForDelegate:self];
-        [self performFetch];
-        [[self tableView] reloadData];
-    }
-    
-    BOOL shouldAppearAsEditing = [_myParent isChildTableViewEditing];
-    [[self tableView] setEditing:shouldAppearAsEditing animated:NO];
-
-    [self setEmptyMessageNow];
-}
-
-- (void)viewDidAppear:(BOOL)animated
-{
-    [super viewDidAppear:animated];
-    
-    if ([_tonightsBill tripName]) {
-        [_tripNameField setPlaceholder:[[NSString alloc] initWithFormat:@"Enter something to rename %@", [_tonightsBill tripName]]];
-    }
-}
-
-- (void)viewDidDisappear:(BOOL)animated
-{
-    [super viewDidDisappear:animated];
-    
-    _dataController = nil;
-}
-
-- (void)dealloc
-{
-    [[NSNotificationCenter defaultCenter] removeObserver:self];
-}
-
 #pragma mark - Notifications
 
-- (void)writeableTonightsBillIsCreated:(NSNotification *)notification
-{
+- (void)writeableTonightsBillIsCreated:(NSNotification *)notification {
     // Should be executed on the background thread.
     NSDictionary *userInfo = [notification userInfo];
     _writableTonightsBill = [userInfo objectForKey:MCwritableTonightsBillKey];
@@ -196,8 +118,7 @@
 
 #pragma mark - UITextFieldDelegate
 
-- (BOOL)textFieldShouldReturn:(UITextField *)textField
-{
+- (BOOL)textFieldShouldReturn:(UITextField *)textField {
     [textField resignFirstResponder];
     
     return YES;
@@ -218,20 +139,17 @@
     [[NCWidgetController widgetController] setHasContent:YES forWidgetWithBundleIdentifier:[WhoPayingUserDefaultsStoreInterface MCWhoIsPayingNextBundleIdentifier]];
 }
 
-#pragma mark - NSFetchedResultsControllerDelegat
+#pragma mark - NSFetchedResultsControllerDelegate
 
-- (void)controllerWillChangeContent:(NSFetchedResultsController *)controller
-{
+- (void)controllerWillChangeContent:(NSFetchedResultsController *)controller {
     [[self tableView] beginUpdates];
 }
 
-- (void)controllerDidChangeContent:(NSFetchedResultsController *)controller
-{
+- (void)controllerDidChangeContent:(NSFetchedResultsController *)controller {
     [[self tableView] endUpdates];
 }
 
-- (void)controller:(NSFetchedResultsController *)controller didChangeObject:(id)anObject atIndexPath:(NSIndexPath *)indexPath forChangeType:(NSFetchedResultsChangeType)type newIndexPath:(NSIndexPath *)newIndexPath
-{
+- (void)controller:(NSFetchedResultsController *)controller didChangeObject:(id)anObject atIndexPath:(NSIndexPath *)indexPath forChangeType:(NSFetchedResultsChangeType)type newIndexPath:(NSIndexPath *)newIndexPath {
     switch(type) {
             
         case NSFetchedResultsChangeInsert:
@@ -256,7 +174,9 @@
     }
 }
 
-#pragma mark - Table view data source
+#pragma mark - UITableViewController
+
+#pragma mark - UITableViewDataSource
 
 - (NSInteger)numberOfSectionsInTableView:(UITableView *)tableView
 {
@@ -292,9 +212,7 @@
     return thisCell;
 }
 
-// Override to support conditional editing of the table view.
-- (BOOL)tableView:(UITableView *)tableView canEditRowAtIndexPath:(NSIndexPath *)indexPath
-{
+- (BOOL)tableView:(UITableView *)tableView canEditRowAtIndexPath:(NSIndexPath *)indexPath {
     if ([[self tableView] isEditing]) {
         MCPerson *person = [_dataController objectAtIndexPath:indexPath];
         if ([_tonightsBill hasPersonPaidSomething:person]) {
@@ -307,7 +225,6 @@
     }
 }
 
-// Override to support editing the table view.
 - (void)tableView:(UITableView *)tableView commitEditingStyle:(UITableViewCellEditingStyle)editingStyle forRowAtIndexPath:(NSIndexPath *)indexPath {
     if (editingStyle == UITableViewCellEditingStyleDelete) {
         MCPerson *removablePerson = [_dataController objectAtIndexPath:indexPath];
@@ -317,23 +234,7 @@
     }
 }
 
-/*
-// Override to support rearranging the table view.
-- (void)tableView:(UITableView *)tableView moveRowAtIndexPath:(NSIndexPath *)fromIndexPath toIndexPath:(NSIndexPath *)toIndexPath
-{
-}
-*/
-
-/*
-// Override to support conditional rearranging of the table view.
-- (BOOL)tableView:(UITableView *)tableView canMoveRowAtIndexPath:(NSIndexPath *)indexPath
-{
-    // Return NO if you do not want the item to be re-orderable.
-    return YES;
-}
-*/
-
-#pragma mark - Table view delegate
+#pragma mark - UITableViewDelegate
 
 - (CGFloat)tableView:(UITableView *)tableView heightForRowAtIndexPath:(NSIndexPath *)indexPath
 {
@@ -344,7 +245,66 @@
     [self performSegueWithIdentifier:@"openEditPerson" sender:self];
 }
 
-#pragma mark - UIStoryboard
+#pragma mark - UIViewController
+
+- (void)viewDidLoad {
+    [super viewDidLoad];
+    
+    // Uncomment the following line to preserve selection between presentations.
+    // self.clearsSelectionOnViewWillAppear = NO;
+    
+    // Uncomment the following line to display an Edit button in the navigation bar for this view controller.
+    // self.navigationItem.rightBarButtonItem = self.editButtonItem;
+    
+    [self setEdgesForExtendedLayout:UIRectEdgeNone];
+    
+    [self startRespondingToStoreChangeNotifications];
+    
+    _emptyMessage = [[NSBundle mainBundle] loadNibNamed:@"MCTableEmptyMessage" owner:self options:nil][0];
+    [[_emptyMessage bigMessage] setText:NSLocalizedString(@"PEOPLE_LIST_EMPTY_MESSAGE", @"Press \"add Person\" to add a person who you'd like to share this bill with.")];
+    if ([[_dataController fetchedObjects] count] > 0) {
+        [[_emptyMessage bigMessage] setAlpha:0.0];
+    }
+    [[self tableView] setBackgroundView:_emptyMessage];
+    
+    // Make sure a tap in the background dismisses the keyboard as well.
+    UITapGestureRecognizer *thatTickles = [[UITapGestureRecognizer alloc] initWithTarget:self action:@selector(tappedInTheBackground:)];
+    [thatTickles setCancelsTouchesInView:NO];
+    [[self tableView] addGestureRecognizer:thatTickles];
+}
+
+
+- (void)viewWillAppear:(BOOL)animated {
+    [super viewWillAppear:animated];
+    
+    [_tripNameField setText:[_tonightsBill tripName]];
+    [_tripNameField setDelegate:self];
+    
+    if (!_dataController) {
+        _dataController = [[MCWeAllPayStoreController defaultStore] sharedBillPeoplePresentDataControllerForDelegate:self];
+        [self performFetch];
+        [[self tableView] reloadData];
+    }
+    
+    BOOL shouldAppearAsEditing = [_myParent isChildTableViewEditing];
+    [[self tableView] setEditing:shouldAppearAsEditing animated:NO];
+
+    [self setEmptyMessageNow];
+}
+
+- (void)viewDidAppear:(BOOL)animated {
+    [super viewDidAppear:animated];
+    
+    if ([_tonightsBill tripName]) {
+        [_tripNameField setPlaceholder:[[NSString alloc] initWithFormat:@"Enter something to rename %@", [_tonightsBill tripName]]];
+    }
+}
+
+- (void)viewDidDisappear:(BOOL)animated {
+    [super viewDidDisappear:animated];
+    
+    _dataController = nil;
+}
 
 - (void)prepareForSegue:(UIStoryboardSegue *)segue sender:(id)sender
 {
@@ -372,6 +332,14 @@
             [self.tableView deselectRowAtIndexPath:indexPathOfSelectedRow animated:YES];
         }
     }
+}
+
+#pragma mark - UIResponder
+
+#pragma mark - NSObject
+
+- (void)dealloc {
+    [[NSNotificationCenter defaultCenter] removeObserver:self];
 }
 
 @end
