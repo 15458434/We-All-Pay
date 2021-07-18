@@ -11,7 +11,7 @@ import UIKit
 
 import FirebaseAnalytics
 
-class SelectEmailAddressTableViewController_iPad: UITableViewController, ThisPersonProtocol, MCDismissMeBlockProtocol {
+final class SelectEmailAddressTableViewController_iPad: UITableViewController, ThisPersonProtocol, MCDismissMeBlockProtocol {
     // MARK: Properties
     var allEmailAddresses: [MCEmailAddress]!
     

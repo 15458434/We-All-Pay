@@ -10,6 +10,9 @@
 		13B4AFD76B135F2BE42C32D0 /* Pods_We_all_pay_Tests.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 7B9655082A0AA851009E96F1 /* Pods_We_all_pay_Tests.framework */; };
 		38001C9B194EE284008ACD94 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 38001C9A194EE284008ACD94 /* Assets.xcassets */; };
 		38010E0F1A3F4A4F0056F8F8 /* Localizable.strings in Resources */ = {isa = PBXBuildFile; fileRef = 38010E111A3F4A4F0056F8F8 /* Localizable.strings */; };
+		380328002698443300744710 /* NotificationsInfoModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 380327FF2698443300744710 /* NotificationsInfoModel.swift */; };
+		380328022698804500744710 /* NotificationsCountTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 380328012698804500744710 /* NotificationsCountTableViewCell.swift */; };
+		3803280426988B2800744710 /* UnreadNotificationsCountView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3803280326988B2800744710 /* UnreadNotificationsCountView.swift */; };
 		380700A51A1B616000C7FB37 /* MCPaymentUpdateTo4.m in Sources */ = {isa = PBXBuildFile; fileRef = 380700A41A1B616000C7FB37 /* MCPaymentUpdateTo4.m */; };
 		380C48161BE1330E00C82B0F /* CurrencyFormatter.swift in Sources */ = {isa = PBXBuildFile; fileRef = 380C48151BE1330E00C82B0F /* CurrencyFormatter.swift */; };
 		381179D01A82D1FC00020538 /* MailComposer.swift in Sources */ = {isa = PBXBuildFile; fileRef = 381179CF1A82D1FC00020538 /* MailComposer.swift */; };
@@ -74,6 +77,11 @@
 		3860575019EE963600BD5B78 /* categoryPictures.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 3860574F19EE963600BD5B78 /* categoryPictures.xcassets */; };
 		3860575519EEB28300BD5B78 /* MCCategoryPictureStoreTest.m in Sources */ = {isa = PBXBuildFile; fileRef = 3860575419EEB28300BD5B78 /* MCCategoryPictureStoreTest.m */; };
 		3863148D235C6D8C00748B9F /* ScreenshotPopulationEngine.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3863148C235C6D8B00748B9F /* ScreenshotPopulationEngine.swift */; };
+		3864147D269B183A00590ABA /* Notifications.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 3864147C269B183A00590ABA /* Notifications.storyboard */; };
+		3864147F269B185400590ABA /* NotificationsTableViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3864147E269B185300590ABA /* NotificationsTableViewController.swift */; };
+		38641482269B18C400590ABA /* NotificationsModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 38641481269B18C400590ABA /* NotificationsModel.swift */; };
+		38641484269B2E7A00590ABA /* NotificationTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 38641483269B2E7A00590ABA /* NotificationTableViewCell.swift */; };
+		38641486269B5E9F00590ABA /* Notifications.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 38641485269B5E9F00590ABA /* Notifications.xcassets */; };
 		3866D66523EF6921004554FF /* RemoteConfigTrueCasino.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3866D66423EF6921004554FF /* RemoteConfigTrueCasino.swift */; };
 		3867253B23DB248E009607E8 /* fastlane in Resources */ = {isa = PBXBuildFile; fileRef = 3867253A23DB248E009607E8 /* fastlane */; };
 		3867CE4718704B2E001EC222 /* Main-Iphone.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 3867CE4918704B2E001EC222 /* Main-Iphone.storyboard */; };
@@ -92,6 +100,9 @@
 		387494D619F053E9001614CA /* WeAllPayStore2to4.xcmappingmodel in Sources */ = {isa = PBXBuildFile; fileRef = 387494D519F053E9001614CA /* WeAllPayStore2to4.xcmappingmodel */; };
 		387494D819F05476001614CA /* WeAllPayStore1to4.xcmappingmodel in Sources */ = {isa = PBXBuildFile; fileRef = 387494D719F05476001614CA /* WeAllPayStore1to4.xcmappingmodel */; };
 		387D3A911870652B0060FAF8 /* Localizable.strings in Resources */ = {isa = PBXBuildFile; fileRef = 387D3A931870652B0060FAF8 /* Localizable.strings */; };
+		38819071269D914E000949F4 /* MCNotificationUnreadIndicator.m in Sources */ = {isa = PBXBuildFile; fileRef = 38819070269D914E000949F4 /* MCNotificationUnreadIndicator.m */; };
+		3881907C269EE287000949F4 /* MCBadgeButton.m in Sources */ = {isa = PBXBuildFile; fileRef = 3881907B269EE287000949F4 /* MCBadgeButton.m */; };
+		38870FE426A044820003E1D6 /* MCImageFunctions.m in Sources */ = {isa = PBXBuildFile; fileRef = 38870FE326A044820003E1D6 /* MCImageFunctions.m */; };
 		38894980211C2DDE00BDF9CD /* CoreDataSaveHandlerWhenEnteringBackground.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3889497F211C2DDE00BDF9CD /* CoreDataSaveHandlerWhenEnteringBackground.swift */; };
 		388A326E1C10965D00F7459C /* CategoryPictureObject.swift in Sources */ = {isa = PBXBuildFile; fileRef = 385295CE1C10583E0081894D /* CategoryPictureObject.swift */; };
 		388A326F1C10966000F7459C /* CategoryPictureStoreController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 385295D01C105C580081894D /* CategoryPictureStoreController.swift */; };
@@ -206,7 +217,8 @@
 		38F2A1AD1ADCF7E100831D48 /* WhoIsPayingNextTextLocalizer.swift in Sources */ = {isa = PBXBuildFile; fileRef = 38F2A1AB1ADCF7E100831D48 /* WhoIsPayingNextTextLocalizer.swift */; };
 		38F44CCB2364993400215B1C /* MoneyTextInputValidator.swift in Sources */ = {isa = PBXBuildFile; fileRef = 38F44CCA2364993400215B1C /* MoneyTextInputValidator.swift */; };
 		38FE5A082346957100BBA722 /* SideMenuTransitioner.swift in Sources */ = {isa = PBXBuildFile; fileRef = 38FE5A072346957100BBA722 /* SideMenuTransitioner.swift */; };
-		9D8212B2D521A261B15EFF4E /* Pods_We_all_pay.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = C4296607227A3049C6258E0A /* Pods_We_all_pay.framework */; };
+		737702B54AA608A56DE0BC42 /* Pods_We_all_pay.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 1067E342D597911C06B4102F /* Pods_We_all_pay.framework */; };
+		A267F6CA7870ED54B6778710 /* Pods_We_all_pay_Tests.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 46610E99AB618EAC85A9AF44 /* Pods_We_all_pay_Tests.framework */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -324,14 +336,17 @@
 /* End PBXCopyFilesBuildPhase section */
 
 /* Begin PBXFileReference section */
-		029812FA1B7F7011635ACA73 /* Pods-We all pay.adtest.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-We all pay.adtest.xcconfig"; path = "Target Support Files/Pods-We all pay/Pods-We all pay.adtest.xcconfig"; sourceTree = "<group>"; };
-		12454BC63F4488F7CF0DE277 /* Pods-We all pay.screenshots.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-We all pay.screenshots.xcconfig"; path = "Target Support Files/Pods-We all pay/Pods-We all pay.screenshots.xcconfig"; sourceTree = "<group>"; };
+		1067E342D597911C06B4102F /* Pods_We_all_pay.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_We_all_pay.framework; sourceTree = BUILT_PRODUCTS_DIR; };
+		2918126C17B46D509DF3C87B /* Pods-We all pay.adtest.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-We all pay.adtest.xcconfig"; path = "Target Support Files/Pods-We all pay/Pods-We all pay.adtest.xcconfig"; sourceTree = "<group>"; };
 		38001C9A194EE284008ACD94 /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
 		38010E101A3F4A4F0056F8F8 /* Base */ = {isa = PBXFileReference; fileEncoding = 10; lastKnownFileType = text.plist.strings; name = Base; path = Base.lproj/Localizable.strings; sourceTree = "<group>"; };
 		38010E121A3F4A510056F8F8 /* en */ = {isa = PBXFileReference; fileEncoding = 10; lastKnownFileType = text.plist.strings; name = en; path = en.lproj/Localizable.strings; sourceTree = "<group>"; };
 		38010E131A3F4A530056F8F8 /* nl */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.strings; name = nl; path = nl.lproj/Localizable.strings; sourceTree = "<group>"; };
 		3801881A1938D8E70085A5AE /* MCDismissKeyboardProtocol.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = MCDismissKeyboardProtocol.h; path = ViewControllers/MCDismissKeyboardProtocol.h; sourceTree = "<group>"; };
 		3801B1111A1E23D5005B69D7 /* We all pay empty.xcappdata */ = {isa = PBXFileReference; lastKnownFileType = wrapper; path = "We all pay empty.xcappdata"; sourceTree = "<group>"; };
+		380327FF2698443300744710 /* NotificationsInfoModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NotificationsInfoModel.swift; sourceTree = "<group>"; };
+		380328012698804500744710 /* NotificationsCountTableViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NotificationsCountTableViewCell.swift; sourceTree = "<group>"; };
+		3803280326988B2800744710 /* UnreadNotificationsCountView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UnreadNotificationsCountView.swift; sourceTree = "<group>"; };
 		380700A01A16283500C7FB37 /* MCIndexProtocol.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = MCIndexProtocol.h; sourceTree = "<group>"; };
 		380700A21A174FFB00C7FB37 /* MCIsEditingProtocol.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = MCIsEditingProtocol.h; sourceTree = "<group>"; };
 		380700A31A1B616000C7FB37 /* MCPaymentUpdateTo4.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = MCPaymentUpdateTo4.h; path = "DataStore/Entity Migration Policies/MCPaymentUpdateTo4.h"; sourceTree = "<group>"; };
@@ -417,6 +432,11 @@
 		3860575419EEB28300BD5B78 /* MCCategoryPictureStoreTest.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = MCCategoryPictureStoreTest.m; sourceTree = "<group>"; };
 		3861739F1A530371000C2EE5 /* MCPathComponentsToOpenProtocol.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = MCPathComponentsToOpenProtocol.h; sourceTree = "<group>"; };
 		3863148C235C6D8B00748B9F /* ScreenshotPopulationEngine.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = ScreenshotPopulationEngine.swift; path = "Going Dutch/ScreenshotPopulationEngine.swift"; sourceTree = SOURCE_ROOT; };
+		3864147C269B183A00590ABA /* Notifications.storyboard */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; path = Notifications.storyboard; sourceTree = "<group>"; };
+		3864147E269B185300590ABA /* NotificationsTableViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NotificationsTableViewController.swift; sourceTree = "<group>"; };
+		38641481269B18C400590ABA /* NotificationsModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NotificationsModel.swift; sourceTree = "<group>"; };
+		38641483269B2E7A00590ABA /* NotificationTableViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NotificationTableViewCell.swift; sourceTree = "<group>"; };
+		38641485269B5E9F00590ABA /* Notifications.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Notifications.xcassets; sourceTree = "<group>"; };
 		3866D66423EF6921004554FF /* RemoteConfigTrueCasino.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RemoteConfigTrueCasino.swift; sourceTree = "<group>"; };
 		3867253A23DB248E009607E8 /* fastlane */ = {isa = PBXFileReference; lastKnownFileType = folder; path = fastlane; sourceTree = "<group>"; };
 		3867CE4018703E9A001EC222 /* nl */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.strings; name = nl; path = nl.lproj/InfoPlist.strings; sourceTree = "<group>"; };
@@ -444,6 +464,12 @@
 		387494D519F053E9001614CA /* WeAllPayStore2to4.xcmappingmodel */ = {isa = PBXFileReference; lastKnownFileType = wrapper.xcmappingmodel; path = WeAllPayStore2to4.xcmappingmodel; sourceTree = "<group>"; };
 		387494D719F05476001614CA /* WeAllPayStore1to4.xcmappingmodel */ = {isa = PBXFileReference; lastKnownFileType = wrapper.xcmappingmodel; path = WeAllPayStore1to4.xcmappingmodel; sourceTree = "<group>"; };
 		387D3A8E187053BA0060FAF8 /* nl */ = {isa = PBXFileReference; fileEncoding = 10; lastKnownFileType = text.plist.strings; name = nl; path = "nl.lproj/Main-Iphone.strings"; sourceTree = "<group>"; };
+		3881906F269D914E000949F4 /* MCNotificationUnreadIndicator.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = MCNotificationUnreadIndicator.h; sourceTree = "<group>"; };
+		38819070269D914E000949F4 /* MCNotificationUnreadIndicator.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = MCNotificationUnreadIndicator.m; sourceTree = "<group>"; };
+		3881907A269EE287000949F4 /* MCBadgeButton.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = MCBadgeButton.h; sourceTree = "<group>"; };
+		3881907B269EE287000949F4 /* MCBadgeButton.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = MCBadgeButton.m; sourceTree = "<group>"; };
+		38870FE226A044820003E1D6 /* MCImageFunctions.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = MCImageFunctions.h; sourceTree = "<group>"; };
+		38870FE326A044820003E1D6 /* MCImageFunctions.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = MCImageFunctions.m; sourceTree = "<group>"; };
 		3889497F211C2DDE00BDF9CD /* CoreDataSaveHandlerWhenEnteringBackground.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CoreDataSaveHandlerWhenEnteringBackground.swift; sourceTree = "<group>"; };
 		388A32701C11C51F00F7459C /* WhoPayingUserDefaultsStoreInterface.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = WhoPayingUserDefaultsStoreInterface.swift; path = "../Who is paying next/WhoPayingUserDefaultsStoreInterface.swift"; sourceTree = "<group>"; };
 		388A32741C11EA1400F7459C /* WhoPayingUserDefaultsStoreInterfaceWeAllPayExtension.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = WhoPayingUserDefaultsStoreInterfaceWeAllPayExtension.swift; sourceTree = "<group>"; };
@@ -615,14 +641,14 @@
 		38F7F9A81B2C49C20059DE51 /* nl */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; name = nl; path = "nl.lproj/Available Currencies.plist"; sourceTree = "<group>"; };
 		38F7F9A91B2C4A120059DE51 /* CurrencyController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = CurrencyController.swift; path = "../Going Dutch/CurrencyController.swift"; sourceTree = "<group>"; };
 		38FE5A072346957100BBA722 /* SideMenuTransitioner.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SideMenuTransitioner.swift; sourceTree = "<group>"; };
-		6144363CD87C9A5C4188693C /* Pods-We all pay Tests.adtest.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-We all pay Tests.adtest.xcconfig"; path = "Target Support Files/Pods-We all pay Tests/Pods-We all pay Tests.adtest.xcconfig"; sourceTree = "<group>"; };
-		6D1D4143D00577798BFB8725 /* Pods-We all pay Tests.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-We all pay Tests.release.xcconfig"; path = "Target Support Files/Pods-We all pay Tests/Pods-We all pay Tests.release.xcconfig"; sourceTree = "<group>"; };
-		7B9655082A0AA851009E96F1 /* Pods_We_all_pay_Tests.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_We_all_pay_Tests.framework; sourceTree = BUILT_PRODUCTS_DIR; };
-		9582D009A553D7A2EB6C5549 /* Pods-We all pay.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-We all pay.release.xcconfig"; path = "Target Support Files/Pods-We all pay/Pods-We all pay.release.xcconfig"; sourceTree = "<group>"; };
-		A3CC57BC347930B81E7F7858 /* Pods-We all pay.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-We all pay.debug.xcconfig"; path = "Target Support Files/Pods-We all pay/Pods-We all pay.debug.xcconfig"; sourceTree = "<group>"; };
-		AA1BAFB72E71266B8954F432 /* Pods-We all pay Tests.screenshots.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-We all pay Tests.screenshots.xcconfig"; path = "Target Support Files/Pods-We all pay Tests/Pods-We all pay Tests.screenshots.xcconfig"; sourceTree = "<group>"; };
-		C4296607227A3049C6258E0A /* Pods_We_all_pay.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_We_all_pay.framework; sourceTree = BUILT_PRODUCTS_DIR; };
-		C715BD2FC91E0D70179D57CC /* Pods-We all pay Tests.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-We all pay Tests.debug.xcconfig"; path = "Target Support Files/Pods-We all pay Tests/Pods-We all pay Tests.debug.xcconfig"; sourceTree = "<group>"; };
+		46610E99AB618EAC85A9AF44 /* Pods_We_all_pay_Tests.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_We_all_pay_Tests.framework; sourceTree = BUILT_PRODUCTS_DIR; };
+		53B9101EAE15E755E6A5BF3F /* Pods-We all pay.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-We all pay.debug.xcconfig"; path = "Target Support Files/Pods-We all pay/Pods-We all pay.debug.xcconfig"; sourceTree = "<group>"; };
+		83C893F73F42924B9B6570D7 /* Pods-We all pay Tests.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-We all pay Tests.debug.xcconfig"; path = "Target Support Files/Pods-We all pay Tests/Pods-We all pay Tests.debug.xcconfig"; sourceTree = "<group>"; };
+		964875B862FD92B0DAC707E9 /* Pods-We all pay Tests.adtest.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-We all pay Tests.adtest.xcconfig"; path = "Target Support Files/Pods-We all pay Tests/Pods-We all pay Tests.adtest.xcconfig"; sourceTree = "<group>"; };
+		B5EBF0436EA7EEE9A588C7B6 /* Pods-We all pay.screenshots.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-We all pay.screenshots.xcconfig"; path = "Target Support Files/Pods-We all pay/Pods-We all pay.screenshots.xcconfig"; sourceTree = "<group>"; };
+		B7A2759B44FBE16A8E9DAD31 /* Pods-We all pay.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-We all pay.release.xcconfig"; path = "Target Support Files/Pods-We all pay/Pods-We all pay.release.xcconfig"; sourceTree = "<group>"; };
+		E249D39F757E5A07E7FD8AC5 /* Pods-We all pay Tests.screenshots.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-We all pay Tests.screenshots.xcconfig"; path = "Target Support Files/Pods-We all pay Tests/Pods-We all pay Tests.screenshots.xcconfig"; sourceTree = "<group>"; };
+		F7E92ECABA778199C261D9B0 /* Pods-We all pay Tests.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-We all pay Tests.release.xcconfig"; path = "Target Support Files/Pods-We all pay Tests/Pods-We all pay Tests.release.xcconfig"; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -661,7 +687,7 @@
 				38D6A3D11C73DDC000968BB2 /* RateMeControllerForiOS.framework in Frameworks */,
 				388A32911C11EDBD00F7459C /* WhoPayingUserDefaultsStoreInterface.framework in Frameworks */,
 				382B76F51C398249000C203A /* CurrencyConverter.framework in Frameworks */,
-				9D8212B2D521A261B15EFF4E /* Pods_We_all_pay.framework in Frameworks */,
+				737702B54AA608A56DE0BC42 /* Pods_We_all_pay.framework in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -669,7 +695,7 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				13B4AFD76B135F2BE42C32D0 /* Pods_We_all_pay_Tests.framework in Frameworks */,
+				A267F6CA7870ED54B6778710 /* Pods_We_all_pay_Tests.framework in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -769,6 +795,16 @@
 			name = DataStore;
 			sourceTree = "<group>";
 		};
+		380327FE269843E900744710 /* InfoScreenTable */ = {
+			isa = PBXGroup;
+			children = (
+				381275FE1BBD84650004C8C2 /* InfoScreenTableViewController.swift */,
+				380328012698804500744710 /* NotificationsCountTableViewCell.swift */,
+				3803280326988B2800744710 /* UnreadNotificationsCountView.swift */,
+			);
+			name = InfoScreenTable;
+			sourceTree = "<group>";
+		};
 		380700A61A1B750500C7FB37 /* Test files english */ = {
 			isa = PBXGroup;
 			children = (
@@ -819,6 +855,9 @@
 				38572AF6169D443C00969C62 /* MCAllTripsTableViewController.h */,
 				38572B09169F3D2700969C62 /* MCAllTripsTableViewController.m */,
 				3841F8D223893A0A00882E40 /* EventsModel.swift */,
+				380327FF2698443300744710 /* NotificationsInfoModel.swift */,
+				3881907A269EE287000949F4 /* MCBadgeButton.h */,
+				3881907B269EE287000949F4 /* MCBadgeButton.m */,
 			);
 			name = Events;
 			sourceTree = "<group>";
@@ -906,7 +945,8 @@
 			isa = PBXGroup;
 			children = (
 				381276071BBE68F10004C8C2 /* InfoScreenContainerViewController.swift */,
-				381275FE1BBD84650004C8C2 /* InfoScreenTableViewController.swift */,
+				380327FE269843E900744710 /* InfoScreenTable */,
+				3864147B269B173100590ABA /* Notifications */,
 				38D177101C3A5E640084604C /* SelectCategoryTableViewController.swift */,
 				38D177121C3A85C00084604C /* SelectCurrencyTableViewController.swift */,
 				38E0C5E418E9B244005A3F17 /* iPad */,
@@ -967,6 +1007,29 @@
 				3860574F19EE963600BD5B78 /* categoryPictures.xcassets */,
 			);
 			name = CategoryPicturesStore;
+			sourceTree = "<group>";
+		};
+		3864147B269B173100590ABA /* Notifications */ = {
+			isa = PBXGroup;
+			children = (
+				3864147C269B183A00590ABA /* Notifications.storyboard */,
+				38641485269B5E9F00590ABA /* Notifications.xcassets */,
+				38641480269B189900590ABA /* NotificationsTable */,
+			);
+			name = Notifications;
+			path = ViewControllers/Notifications;
+			sourceTree = "<group>";
+		};
+		38641480269B189900590ABA /* NotificationsTable */ = {
+			isa = PBXGroup;
+			children = (
+				3864147E269B185300590ABA /* NotificationsTableViewController.swift */,
+				38641483269B2E7A00590ABA /* NotificationTableViewCell.swift */,
+				3881906F269D914E000949F4 /* MCNotificationUnreadIndicator.h */,
+				38819070269D914E000949F4 /* MCNotificationUnreadIndicator.m */,
+				38641481269B18C400590ABA /* NotificationsModel.swift */,
+			);
+			path = NotificationsTable;
 			sourceTree = "<group>";
 		};
 		3866D65C23EF6150004554FF /* RemoteConfigEngine */ = {
@@ -1313,6 +1376,8 @@
 				38FE5A072346957100BBA722 /* SideMenuTransitioner.swift */,
 				38D96ED723E31BF200C03170 /* MCBitwiseStuff.h */,
 				38D96ED523E31BE000C03170 /* MCBitwiseStuff.m */,
+				38870FE226A044820003E1D6 /* MCImageFunctions.h */,
+				38870FE326A044820003E1D6 /* MCImageFunctions.m */,
 			);
 			path = Miscellaneous;
 			sourceTree = "<group>";
@@ -1334,8 +1399,8 @@
 				3826D4D023CC574E009CAC30 /* WebKit.framework */,
 				3826D4CF23CC5745009CAC30 /* libz.tbd */,
 				3826D4CE23CC573B009CAC30 /* libsqlite3.0.tbd */,
-				C4296607227A3049C6258E0A /* Pods_We_all_pay.framework */,
-				7B9655082A0AA851009E96F1 /* Pods_We_all_pay_Tests.framework */,
+				1067E342D597911C06B4102F /* Pods_We_all_pay.framework */,
+				46610E99AB618EAC85A9AF44 /* Pods_We_all_pay_Tests.framework */,
 			);
 			name = Frameworks;
 			sourceTree = "<group>";
@@ -1343,14 +1408,14 @@
 		A64C2FCC22C8F3F53074E7EB /* Pods */ = {
 			isa = PBXGroup;
 			children = (
-				A3CC57BC347930B81E7F7858 /* Pods-We all pay.debug.xcconfig */,
-				029812FA1B7F7011635ACA73 /* Pods-We all pay.adtest.xcconfig */,
-				12454BC63F4488F7CF0DE277 /* Pods-We all pay.screenshots.xcconfig */,
-				9582D009A553D7A2EB6C5549 /* Pods-We all pay.release.xcconfig */,
-				C715BD2FC91E0D70179D57CC /* Pods-We all pay Tests.debug.xcconfig */,
-				6144363CD87C9A5C4188693C /* Pods-We all pay Tests.adtest.xcconfig */,
-				AA1BAFB72E71266B8954F432 /* Pods-We all pay Tests.screenshots.xcconfig */,
-				6D1D4143D00577798BFB8725 /* Pods-We all pay Tests.release.xcconfig */,
+				53B9101EAE15E755E6A5BF3F /* Pods-We all pay.debug.xcconfig */,
+				2918126C17B46D509DF3C87B /* Pods-We all pay.adtest.xcconfig */,
+				B5EBF0436EA7EEE9A588C7B6 /* Pods-We all pay.screenshots.xcconfig */,
+				B7A2759B44FBE16A8E9DAD31 /* Pods-We all pay.release.xcconfig */,
+				83C893F73F42924B9B6570D7 /* Pods-We all pay Tests.debug.xcconfig */,
+				964875B862FD92B0DAC707E9 /* Pods-We all pay Tests.adtest.xcconfig */,
+				E249D39F757E5A07E7FD8AC5 /* Pods-We all pay Tests.screenshots.xcconfig */,
+				F7E92ECABA778199C261D9B0 /* Pods-We all pay Tests.release.xcconfig */,
 			);
 			path = Pods;
 			sourceTree = "<group>";
@@ -1426,15 +1491,15 @@
 			isa = PBXNativeTarget;
 			buildConfigurationList = 38572AF0169D437B00969C62 /* Build configuration list for PBXNativeTarget "We all pay" */;
 			buildPhases = (
-				BECDE48E530780E4B44230DA /* [CP] Check Pods Manifest.lock */,
+				1F34A5D5DB121127A1AAC629 /* [CP] Check Pods Manifest.lock */,
 				38572ACE169D437B00969C62 /* Sources */,
 				38572ACF169D437B00969C62 /* Frameworks */,
 				38572AD0169D437B00969C62 /* Resources */,
 				380D611E1B299B94006F8AE4 /* Embed Frameworks */,
 				384A8D9D1D54776300A69E15 /* Embed App Extensions */,
 				38F2A4A323E097C40021F574 /* Crashlytics - This should be the very last step. */,
-				AFAC99D61AAD104DD062FA93 /* [CP] Embed Pods Frameworks */,
-				E723719D1C9CA03C615464FC /* [CP] Copy Pods Resources */,
+				87BA0AD79CC15676A080C89F /* [CP] Embed Pods Frameworks */,
+				63F9E3980542B86175C95FC5 /* [CP] Copy Pods Resources */,
 			);
 			buildRules = (
 			);
@@ -1453,11 +1518,11 @@
 			isa = PBXNativeTarget;
 			buildConfigurationList = 385F530C191C2C360012773D /* Build configuration list for PBXNativeTarget "We all pay Tests" */;
 			buildPhases = (
-				51B4E971160E4C089DC1E01A /* [CP] Check Pods Manifest.lock */,
+				BA5E24CA0675AC1FBFDBBCFA /* [CP] Check Pods Manifest.lock */,
 				385F52F9191C2C360012773D /* Sources */,
 				385F52FA191C2C360012773D /* Frameworks */,
 				385F52FB191C2C360012773D /* Resources */,
-				77CEA367B24A9E86408BC279 /* [CP] Embed Pods Frameworks */,
+				161BFA9355BA5C590A28C902 /* [CP] Embed Pods Frameworks */,
 			);
 			buildRules = (
 			);
@@ -1709,6 +1774,7 @@
 			isa = PBXResourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				38641486269B5E9F00590ABA /* Notifications.xcassets in Resources */,
 				38572AE1169D437B00969C62 /* InfoPlist.strings in Resources */,
 				3867CE5118704DAF001EC222 /* MCTableEmptyMessage.xib in Resources */,
 				38E88B40226B19EE008EB4BE /* GoogleService-Info.plist in Resources */,
@@ -1719,6 +1785,7 @@
 				38DC8B4319097FEA00762235 /* Main-iPad.storyboard in Resources */,
 				3835EBF92115C40900E2BC3F /* Settings.bundle in Resources */,
 				3860575019EE963600BD5B78 /* categoryPictures.xcassets in Resources */,
+				3864147D269B183A00590ABA /* Notifications.storyboard in Resources */,
 				3867CE4718704B2E001EC222 /* Main-Iphone.storyboard in Resources */,
 				3870C22A1D34FDF80030035A /* We all pay app keywords.plist in Resources */,
 				3872C0DD19041C95008C54D7 /* MCTableEmptyMessage_iPad.xib in Resources */,
@@ -1788,6 +1855,45 @@
 /* End PBXResourcesBuildPhase section */
 
 /* Begin PBXShellScriptBuildPhase section */
+		161BFA9355BA5C590A28C902 /* [CP] Embed Pods Frameworks */ = {
+			isa = PBXShellScriptBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			inputFileListPaths = (
+				"${PODS_ROOT}/Target Support Files/Pods-We all pay Tests/Pods-We all pay Tests-frameworks-${CONFIGURATION}-input-files.xcfilelist",
+			);
+			name = "[CP] Embed Pods Frameworks";
+			outputFileListPaths = (
+				"${PODS_ROOT}/Target Support Files/Pods-We all pay Tests/Pods-We all pay Tests-frameworks-${CONFIGURATION}-output-files.xcfilelist",
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+			shellPath = /bin/sh;
+			shellScript = "\"${PODS_ROOT}/Target Support Files/Pods-We all pay Tests/Pods-We all pay Tests-frameworks.sh\"\n";
+			showEnvVarsInLog = 0;
+		};
+		1F34A5D5DB121127A1AAC629 /* [CP] Check Pods Manifest.lock */ = {
+			isa = PBXShellScriptBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			inputFileListPaths = (
+			);
+			inputPaths = (
+				"${PODS_PODFILE_DIR_PATH}/Podfile.lock",
+				"${PODS_ROOT}/Manifest.lock",
+			);
+			name = "[CP] Check Pods Manifest.lock";
+			outputFileListPaths = (
+			);
+			outputPaths = (
+				"$(DERIVED_FILE_DIR)/Pods-We all pay-checkManifestLockResult.txt",
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+			shellPath = /bin/sh;
+			shellScript = "diff \"${PODS_PODFILE_DIR_PATH}/Podfile.lock\" \"${PODS_ROOT}/Manifest.lock\" > /dev/null\nif [ $? != 0 ] ; then\n    # print error to STDERR\n    echo \"error: The sandbox is not in sync with the Podfile.lock. Run 'pod install' or update your CocoaPods installation.\" >&2\n    exit 1\nfi\n# This output is used by Xcode 'outputs' to avoid re-running this script phase.\necho \"SUCCESS\" > \"${SCRIPT_OUTPUT_FILE_0}\"\n";
+			showEnvVarsInLog = 0;
+		};
 		38F2A4A323E097C40021F574 /* Crashlytics - This should be the very last step. */ = {
 			isa = PBXShellScriptBuildPhase;
 			buildActionMask = 2147483647;
@@ -1886,7 +1992,7 @@
 			shellScript = "diff \"${PODS_PODFILE_DIR_PATH}/Podfile.lock\" \"${PODS_ROOT}/Manifest.lock\" > /dev/null\nif [ $? != 0 ] ; then\n    # print error to STDERR\n    echo \"error: The sandbox is not in sync with the Podfile.lock. Run 'pod install' or update your CocoaPods installation.\" >&2\n    exit 1\nfi\n# This output is used by Xcode 'outputs' to avoid re-running this script phase.\necho \"SUCCESS\" > \"${SCRIPT_OUTPUT_FILE_0}\"\n";
 			showEnvVarsInLog = 0;
 		};
-		E723719D1C9CA03C615464FC /* [CP] Copy Pods Resources */ = {
+		63F9E3980542B86175C95FC5 /* [CP] Copy Pods Resources */ = {
 			isa = PBXShellScriptBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
@@ -1901,6 +2007,45 @@
 			runOnlyForDeploymentPostprocessing = 0;
 			shellPath = /bin/sh;
 			shellScript = "\"${PODS_ROOT}/Target Support Files/Pods-We all pay/Pods-We all pay-resources.sh\"\n";
+			showEnvVarsInLog = 0;
+		};
+		87BA0AD79CC15676A080C89F /* [CP] Embed Pods Frameworks */ = {
+			isa = PBXShellScriptBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			inputFileListPaths = (
+				"${PODS_ROOT}/Target Support Files/Pods-We all pay/Pods-We all pay-frameworks-${CONFIGURATION}-input-files.xcfilelist",
+			);
+			name = "[CP] Embed Pods Frameworks";
+			outputFileListPaths = (
+				"${PODS_ROOT}/Target Support Files/Pods-We all pay/Pods-We all pay-frameworks-${CONFIGURATION}-output-files.xcfilelist",
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+			shellPath = /bin/sh;
+			shellScript = "\"${PODS_ROOT}/Target Support Files/Pods-We all pay/Pods-We all pay-frameworks.sh\"\n";
+			showEnvVarsInLog = 0;
+		};
+		BA5E24CA0675AC1FBFDBBCFA /* [CP] Check Pods Manifest.lock */ = {
+			isa = PBXShellScriptBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			inputFileListPaths = (
+			);
+			inputPaths = (
+				"${PODS_PODFILE_DIR_PATH}/Podfile.lock",
+				"${PODS_ROOT}/Manifest.lock",
+			);
+			name = "[CP] Check Pods Manifest.lock";
+			outputFileListPaths = (
+			);
+			outputPaths = (
+				"$(DERIVED_FILE_DIR)/Pods-We all pay Tests-checkManifestLockResult.txt",
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+			shellPath = /bin/sh;
+			shellScript = "diff \"${PODS_PODFILE_DIR_PATH}/Podfile.lock\" \"${PODS_ROOT}/Manifest.lock\" > /dev/null\nif [ $? != 0 ] ; then\n    # print error to STDERR\n    echo \"error: The sandbox is not in sync with the Podfile.lock. Run 'pod install' or update your CocoaPods installation.\" >&2\n    exit 1\nfi\n# This output is used by Xcode 'outputs' to avoid re-running this script phase.\necho \"SUCCESS\" > \"${SCRIPT_OUTPUT_FILE_0}\"\n";
 			showEnvVarsInLog = 0;
 		};
 /* End PBXShellScriptBuildPhase section */
@@ -1941,6 +2086,7 @@
 				38977E4F1B2A26D4008484A4 /* MCTwoLabelIscreenTableViewCell.swift in Sources */,
 				38490D2D1D7052E700A297BA /* SolutionViewController.swift in Sources */,
 				38572AE3169D437B00969C62 /* main.m in Sources */,
+				38870FE426A044820003E1D6 /* MCImageFunctions.m in Sources */,
 				38121EF223D9E2F100A3068D /* MCGenericAdBannerTableViewController.m in Sources */,
 				38B4E83823CE09070034CA95 /* MCGenericInterstitialAdTableViewController.m in Sources */,
 				389DE900197FB2BA00169645 /* MCSharedBill.m in Sources */,
@@ -1968,10 +2114,13 @@
 				38CDE90017135B6300387CAA /* MCTools.m in Sources */,
 				3829AD0F178B41320025969D /* WeAllPayStore.xcdatamodeld in Sources */,
 				384EC90E1BC2F35700A80799 /* SelectCurrencyTableViewCell_iPad.swift in Sources */,
+				380328022698804500744710 /* NotificationsCountTableViewCell.swift in Sources */,
 				38DB85D717E45CA4006237CF /* MCSharedBill+addons.m in Sources */,
 				386EB43323C723BE00FB20B9 /* AdEngine.swift in Sources */,
 				38DB85DD17E45FB7006237CF /* MCEmailAddress+addons.m in Sources */,
+				3803280426988B2800744710 /* UnreadNotificationsCountView.swift in Sources */,
 				38977E4D1B2A2591008484A4 /* MCSelectCategoryTableViewCell_iPhone.swift in Sources */,
+				380328002698443300744710 /* NotificationsInfoModel.swift in Sources */,
 				38EF31451938BA07004912F0 /* UINavigationController+KeyboardDismiss.m in Sources */,
 				38955048178B4FCA0077A95A /* MCWeAllPayStoreController.m in Sources */,
 				389DE8FA197FB2BA00169645 /* MCPayment.m in Sources */,
@@ -1985,6 +2134,7 @@
 				38977E5B1B2A30A7008484A4 /* MCWhoOwesWhoTableViewCell_iPhone.swift in Sources */,
 				38E2CB661BC2EA6C0092B5C8 /* RootViewController.swift in Sources */,
 				38F44CCB2364993400215B1C /* MoneyTextInputValidator.swift in Sources */,
+				3881907C269EE287000949F4 /* MCBadgeButton.m in Sources */,
 				38D96ED623E31BE000C03170 /* MCBitwiseStuff.m in Sources */,
 				38E2CB401BC2A5A20092B5C8 /* SolutionOverViewTableViewCell_iPad.swift in Sources */,
 				38490D2F1D7056D100A297BA /* ShowMailViewProtocol.swift in Sources */,
@@ -2019,6 +2169,8 @@
 				381275FF1BBD84650004C8C2 /* InfoScreenTableViewController.swift in Sources */,
 				38C700F21D8EC24100D785BB /* LaunchCounter.swift in Sources */,
 				38E0C5EA18E9B2BD005A3F17 /* MCAllTripsTableViewController-iPad.m in Sources */,
+				38641484269B2E7A00590ABA /* NotificationTableViewCell.swift in Sources */,
+				3864147F269B185400590ABA /* NotificationsTableViewController.swift in Sources */,
 				3892E3A417903EF00038894B /* MCEditTripViewController.m in Sources */,
 				381276081BBE68F10004C8C2 /* InfoScreenContainerViewController.swift in Sources */,
 				38977E571B2A2C57008484A4 /* MCPaymentPresenceTableViewCell_iPhone.swift in Sources */,
@@ -2034,8 +2186,10 @@
 				389950A4191A90F1000B00BC /* MCPaymentPresence+addons.m in Sources */,
 				389ACFE12374A1E60025139F /* EmailTextInputPicker.swift in Sources */,
 				389DE90E197FD41900169645 /* MCCurrency+addons.m in Sources */,
+				38641482269B18C400590ABA /* NotificationsModel.swift in Sources */,
 				38D96ED423E30F5E00C03170 /* MCAdBannerTableViewCell.swift in Sources */,
 				384EC9121BC3008300A80799 /* SelectEmailAddressTableViewController_iPad.swift in Sources */,
+				38819071269D914E000949F4 /* MCNotificationUnreadIndicator.m in Sources */,
 				38B88E2E1D81FF6E0069A44D /* MailComposeViewController.swift in Sources */,
 				38977E5F1B2A32EF008484A4 /* MCPersonTableViewCell.swift in Sources */,
 				385295CF1C10583E0081894D /* CategoryPictureObject.swift in Sources */,
@@ -2672,7 +2826,7 @@
 		};
 		38572AF1169D437B00969C62 /* Debug */ = {
 			isa = XCBuildConfiguration;
-			baseConfigurationReference = A3CC57BC347930B81E7F7858 /* Pods-We all pay.debug.xcconfig */;
+			baseConfigurationReference = 53B9101EAE15E755E6A5BF3F /* Pods-We all pay.debug.xcconfig */;
 			buildSettings = {
 				ALWAYS_EMBED_SWIFT_STANDARD_LIBRARIES = NO;
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
@@ -2735,7 +2889,7 @@
 		};
 		38572AF2169D437B00969C62 /* Release */ = {
 			isa = XCBuildConfiguration;
-			baseConfigurationReference = 9582D009A553D7A2EB6C5549 /* Pods-We all pay.release.xcconfig */;
+			baseConfigurationReference = B7A2759B44FBE16A8E9DAD31 /* Pods-We all pay.release.xcconfig */;
 			buildSettings = {
 				ALWAYS_EMBED_SWIFT_STANDARD_LIBRARIES = NO;
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
@@ -2784,7 +2938,7 @@
 		};
 		385F530D191C2C360012773D /* Debug */ = {
 			isa = XCBuildConfiguration;
-			baseConfigurationReference = C715BD2FC91E0D70179D57CC /* Pods-We all pay Tests.debug.xcconfig */;
+			baseConfigurationReference = 83C893F73F42924B9B6570D7 /* Pods-We all pay Tests.debug.xcconfig */;
 			buildSettings = {
 				ALWAYS_EMBED_SWIFT_STANDARD_LIBRARIES = NO;
 				BUNDLE_LOADER = "$(BUILT_PRODUCTS_DIR)/We all pay.app/We all pay";
@@ -2835,7 +2989,7 @@
 		};
 		385F530E191C2C360012773D /* Release */ = {
 			isa = XCBuildConfiguration;
-			baseConfigurationReference = 6D1D4143D00577798BFB8725 /* Pods-We all pay Tests.release.xcconfig */;
+			baseConfigurationReference = F7E92ECABA778199C261D9B0 /* Pods-We all pay Tests.release.xcconfig */;
 			buildSettings = {
 				ALWAYS_EMBED_SWIFT_STANDARD_LIBRARIES = NO;
 				BUNDLE_LOADER = "$(BUILT_PRODUCTS_DIR)/We all pay.app/We all pay";
@@ -2944,7 +3098,7 @@
 		};
 		38631483235C6A7800748B9F /* Screenshots */ = {
 			isa = XCBuildConfiguration;
-			baseConfigurationReference = 12454BC63F4488F7CF0DE277 /* Pods-We all pay.screenshots.xcconfig */;
+			baseConfigurationReference = B5EBF0436EA7EEE9A588C7B6 /* Pods-We all pay.screenshots.xcconfig */;
 			buildSettings = {
 				ALWAYS_EMBED_SWIFT_STANDARD_LIBRARIES = NO;
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
@@ -2996,7 +3150,7 @@
 		};
 		38631484235C6A7800748B9F /* Screenshots */ = {
 			isa = XCBuildConfiguration;
-			baseConfigurationReference = AA1BAFB72E71266B8954F432 /* Pods-We all pay Tests.screenshots.xcconfig */;
+			baseConfigurationReference = E249D39F757E5A07E7FD8AC5 /* Pods-We all pay Tests.screenshots.xcconfig */;
 			buildSettings = {
 				ALWAYS_EMBED_SWIFT_STANDARD_LIBRARIES = NO;
 				BUNDLE_LOADER = "$(BUILT_PRODUCTS_DIR)/We all pay.app/We all pay";
@@ -4028,7 +4182,7 @@
 		};
 		38E0FCC423CC4E1C002A4488 /* AdTest */ = {
 			isa = XCBuildConfiguration;
-			baseConfigurationReference = 029812FA1B7F7011635ACA73 /* Pods-We all pay.adtest.xcconfig */;
+			baseConfigurationReference = 2918126C17B46D509DF3C87B /* Pods-We all pay.adtest.xcconfig */;
 			buildSettings = {
 				ALWAYS_EMBED_SWIFT_STANDARD_LIBRARIES = NO;
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
@@ -4091,7 +4245,7 @@
 		};
 		38E0FCC523CC4E1C002A4488 /* AdTest */ = {
 			isa = XCBuildConfiguration;
-			baseConfigurationReference = 6144363CD87C9A5C4188693C /* Pods-We all pay Tests.adtest.xcconfig */;
+			baseConfigurationReference = 964875B862FD92B0DAC707E9 /* Pods-We all pay Tests.adtest.xcconfig */;
 			buildSettings = {
 				ALWAYS_EMBED_SWIFT_STANDARD_LIBRARIES = NO;
 				BUNDLE_LOADER = "$(BUILT_PRODUCTS_DIR)/We all pay.app/We all pay";

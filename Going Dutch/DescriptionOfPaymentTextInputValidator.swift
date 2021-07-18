@@ -8,7 +8,7 @@
 
 import UIKit
 
-@objc(MCDescriptionOfPaymentTextInputValidator) @objcMembers class DescriptionOfPaymentTextInputValidator: TextInputValidator {
+@objc(MCDescriptionOfPaymentTextInputValidator) @objcMembers final class DescriptionOfPaymentTextInputValidator: TextInputValidator {
     private(set) weak var model: PaymentModel!
     
     @objc(initWithModel:andTextField:) init(with model: PaymentModel, and textField: UITextField) {

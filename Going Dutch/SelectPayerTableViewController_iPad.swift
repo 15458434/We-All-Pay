@@ -11,7 +11,7 @@ import CoreData
 
 import FirebaseAnalytics
 
-class SelectPayerTableViewController_iPad: UITableViewController, MCTonightsBillTransfer, MCThisPaymentProtocol {
+final class SelectPayerTableViewController_iPad: UITableViewController, MCTonightsBillTransfer, MCThisPaymentProtocol {
     // MARK: Properties
     var people: [MCPerson]!
     var tonightsBill: MCSharedBill!

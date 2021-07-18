@@ -8,7 +8,7 @@
 
 import UIKit
 
-@objc(MCEventsModel) @objcMembers class EventsModel: NSObject {
+@objc(MCEventsModel) @objcMembers final class EventsModel: NSObject {
     private(set) var managedObjectContext: NSManagedObjectContext!
     
     private(set) var fetchEventsController: NSFetchedResultsController<MCSharedBill>!

@@ -8,7 +8,7 @@
 
 import Foundation
 
-class CurrencyFormatter: Formatter {
+final class CurrencyFormatter: Formatter {
     var currencyCode: String?
     
     @objc convenience init(currencyCode: String) {

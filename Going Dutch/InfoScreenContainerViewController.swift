@@ -8,19 +8,26 @@
 
 import UIKit
 
-class InfoScreenContainerViewController: UIViewController {
+final class InfoScreenContainerViewController: UIViewController {
+    @objc var notificationEnvironmentModel: NotificationsInfoModel!
+    
     // MARK: IB Outlets
     @IBOutlet var weAllPayVersionLabel: UILabel!
     
-    // MARK: New in this class
+    // MARK: UIViewController
     
     override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
         switch (segue.identifier) {
         case let identifier where identifier == "EmbedInfoScreenViewController_iPad":
             let destination = segue.destination as! InfoScreenTableViewController
             destination.versionLabel = weAllPayVersionLabel
+            destination.notificationEnvironmentModel = notificationEnvironmentModel
         default:
             print("Error: segue to nowhere?")
         }
     }
+    
+    // MARK: UIResponder
+    
+    // MARK: NSObject
 }

@@ -9,7 +9,7 @@
 import UIKit
 import FirebaseCrashlytics
 
-@objc(MCPayerTextInputPicker) @objcMembers class PayerTextInputPicker: NSObject, UITextFieldDelegate, UIPickerViewDelegate, UIPickerViewDataSource {
+@objc(MCPayerTextInputPicker) @objcMembers final class PayerTextInputPicker: NSObject, UITextFieldDelegate, UIPickerViewDelegate, UIPickerViewDataSource {
     private(set) var keyboardWillShowObserver: NSObjectProtocol!
     private(set) weak var model: PaymentModel!
     private(set) weak var textField: UITextField!
