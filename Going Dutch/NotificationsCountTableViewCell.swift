@@ -9,11 +9,33 @@
 import UIKit
 
 final class NotificationsCountTableViewCell: UITableViewCell {
+    @objc private weak var model: NotificationsInfoModel!
+    
     @IBOutlet weak var leftLabel: UILabel!
     @IBOutlet weak var countView: UnreadNotificationsCountView!
     
-    func update(count: Int) {
-        countView.count = count
+    private var messageCountObservation: NSKeyValueObservation!
+    
+    func update(model: NotificationsInfoModel?) {
+        if model != nil {
+            self.model = model
+            messageCountObservation = self.observe(\.model.messageCount, options: [.initial, .new], changeHandler: { mySelf, change in
+                guard let model = mySelf.model else {
+                    return
+                }
+                
+                let messageCount = model.messageCount
+                if messageCount > 0 {
+                    mySelf.countView.isHidden = false
+                    mySelf.countView.count = messageCount
+                } else {
+                    mySelf.countView.isHidden = true
+                }
+            })
+        } else {
+            self.messageCountObservation = nil
+            self.model = nil
+        }
     }
     
     // MARK: UITableViewCell
