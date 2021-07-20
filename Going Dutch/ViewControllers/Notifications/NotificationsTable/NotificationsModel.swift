@@ -48,18 +48,6 @@ final class NotificationsModel: NSObject {
     
     // MARK: NSObject
     
-    override init() {
-        super.init()
-        // TODO: Remove this population code to test the TableView.
-        let item1 = NotificationsItem(uuid: UUID(), date: Date(), image: #imageLiteral(resourceName: "We All Pay - Sender"), title: "Your feedback please 1.", subTitle: "We can improve this 1.", isRead: false)
-        let item2 = NotificationsItem(uuid: UUID(), date: Date(), image: #imageLiteral(resourceName: "We All Pay - Sender"), title: "Your feedback please 2.", subTitle: "We can improve this 2.", isRead: false)
-        let item3 = NotificationsItem(uuid: UUID(), date: Date(), image: #imageLiteral(resourceName: "We All Pay - Sender"), title: "Your feedback please 3.", subTitle: "We can improve this 3.", isRead: false)
-        let item4 = NotificationsItem(uuid: UUID(), date: Date(), image: #imageLiteral(resourceName: "We All Pay - Sender"), title: "Your feedback please 4.", subTitle: "We can improve this 4.", isRead: false)
-        self.addItem(item4)
-        self.addItem(item2)
-        self.addItem(item1)
-        self.addItem(item3)
-    }
 }
 
 @objc protocol NotificationsItemProtocol {

@@ -147,7 +147,7 @@ final class InfoScreenTableViewController: UITableViewController, MFMailComposeV
                 return 0
             }
         case 1:
-            return notificationEnvironmentModel.messageCount > 0 ? 1 : 0
+            return 1
         case 2:
             return 2
         case 3:
@@ -176,7 +176,7 @@ final class InfoScreenTableViewController: UITableViewController, MFMailComposeV
             return cell
         case (1, 0):
             let cell = tableView.dequeueReusableCell(withIdentifier: "NotificationsCountTableViewCell", for: indexPath) as! NotificationsCountTableViewCell
-            cell.update(count: notificationEnvironmentModel.messageCount)
+            cell.update(model: notificationEnvironmentModel)
             return cell
         case (2, 0):
             let cell = tableView.dequeueReusableCell(withIdentifier: "MCTwoLabelIscreenTableViewCell", for: indexPath) as! MCTwoLabelIscreenTableViewCell
