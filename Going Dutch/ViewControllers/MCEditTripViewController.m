@@ -23,20 +23,14 @@
 
 @interface MCEditTripViewController ()
 
-@property (weak, nonatomic) IBOutlet UIButton *addPersonButton;
-
-@property (weak, nonatomic) IBOutlet UIButton *contactsButton;
+@property (strong, nonatomic) MCTableEmptyMessage *emptyMessage;
 
 @property (weak, nonatomic) IBOutlet UITextField *tripNameField;
-@property (weak, nonatomic) IBOutlet UIBarButtonItem *doneButton;
-@property (strong, nonatomic) IBOutlet MCTwoLabelsTitleView *twoLabelTitleView;
-
-@property (strong, nonatomic) MCTableEmptyMessage *emptyMessage;
+@property (weak, nonatomic) IBOutlet UIButton *addPersonButton;
+@property (weak, nonatomic) IBOutlet UIButton *contactsButton;
 
 @property (nonatomic, strong) NSFetchedResultsController *dataController;
 @property (nonatomic, strong) ContactsDataReceiver *contactsInserter;
-
-@property (nonatomic) BOOL cancelPressed;
 
 @end
 
@@ -68,34 +62,20 @@
     }
 }
 
-- (void)setEmptyMessage {
+- (void)setEmptyMessageWithDuration:(NSTimeInterval)duration {
     if (_dataController.fetchedObjects.count != 0) {
         if (_emptyMessage.bigMessage.alpha > 0.0) {
-            [UIView animateWithDuration:1.0 animations:^{
+            [UIView animateWithDuration:duration animations:^{
                 self.emptyMessage.bigMessage.alpha = 0.0;
+                self.emptyMessage.borderlineView.alpha = 0.0;
                 self.tableView.separatorStyle = UITableViewCellSeparatorStyleSingleLine;
             } completion:nil];
         }
     } else {
-        if ([[_emptyMessage bigMessage] alpha] < 1.0) {
-            [UIView animateWithDuration:1.0 animations:^{
-                [[self.emptyMessage bigMessage] setAlpha:1.0];
-                [[self tableView] setSeparatorStyle:UITableViewCellSeparatorStyleNone];
-            } completion:nil];
-        }
-    }
-}
-
-- (void)setEmptyMessageNow {
-    if (_dataController.fetchedObjects.count != 0) {
-        [UIView animateWithDuration:0.0 animations:^{
-            self.emptyMessage.bigMessage.alpha = 0.0;
-            [[self tableView] setSeparatorStyle:UITableViewCellSeparatorStyleSingleLine];
-        } completion:nil];
-    } else {
         if (_emptyMessage.bigMessage.alpha < 1.0) {
-            [UIView animateWithDuration:0.0 animations:^{
+            [UIView animateWithDuration:duration animations:^{
                 self.emptyMessage.bigMessage.alpha = 1.0;
+                self.emptyMessage.borderlineView.alpha = 1.0;
                 self.tableView.separatorStyle = UITableViewCellSeparatorStyleNone;
             } completion:nil];
         }
@@ -132,6 +112,7 @@
 }
 
 - (void)controllerDidChangeContent:(NSFetchedResultsController *)controller {
+    [self setEmptyMessageWithDuration:1.0];
     [self.tableView endUpdates];
 }
 
@@ -140,12 +121,10 @@
             
         case NSFetchedResultsChangeInsert:
             [self.tableView insertRowsAtIndexPaths:@[newIndexPath] withRowAnimation:UITableViewRowAnimationFade];
-            [self setEmptyMessage];
             break;
             
         case NSFetchedResultsChangeDelete:
             [self.tableView deleteRowsAtIndexPaths:@[indexPath] withRowAnimation:UITableViewRowAnimationFade];
-            [self setEmptyMessage];
             break;
             
         case NSFetchedResultsChangeUpdate:
@@ -271,7 +250,7 @@
     BOOL shouldAppearAsEditing = [_myParent isChildTableViewEditing];
     [self.tableView setEditing:shouldAppearAsEditing animated:NO];
 
-    [self setEmptyMessageNow];
+    [self setEmptyMessageWithDuration:0.0];
 }
 
 - (void)viewDidDisappear:(BOOL)animated {
