@@ -71,14 +71,14 @@ static void * notificationCountContext = &notificationCountContext;
 #pragma mark - New in this class.
 
 - (void)setEmptyMessageWithDuration:(NSTimeInterval)duration {
-    if ([[_model.fetchEventsController fetchedObjects] count] != 0) {
+    if (_model.fetchEventsController.fetchedObjects.count != 0) {
         [UIView animateWithDuration:duration animations:^{
             self.emptyMessage.bigMessage.alpha = 0.0;
             self.emptyMessage.borderlineView.alpha = 0.0;
             self.tableView.separatorStyle = UITableViewCellSeparatorStyleSingleLine;
         } completion:nil];
     } else {
-        if ([[_emptyMessage bigMessage] alpha] < 1.0) {
+        if (_emptyMessage.bigMessage.alpha < 1.0) {
             [UIView animateWithDuration:duration animations:^{
                 self.emptyMessage.bigMessage.alpha = 1.0;
                 self.emptyMessage.borderlineView.alpha = 1.0;
@@ -139,7 +139,7 @@ static void * notificationCountContext = &notificationCountContext;
 }
 
 - (void)controllerDidChangeContent:(NSFetchedResultsController *)controller {
-    [self setEmptyMessageWithDuration:1.0];
+    [self setEmptyMessageWithDuration:0.25];
     [self.tableView endUpdates];
 }
 
@@ -231,14 +231,18 @@ static void * notificationCountContext = &notificationCountContext;
 
 #pragma mark - UIViewController
 
+- (void)loadView {
+    [super loadView];
+    
+    _emptyMessage = [[NSBundle mainBundle] loadNibNamed:@"MCTableEmptyMessage" owner:self options:nil][0];
+    _emptyMessage.borderlineView.dyInset = 1;
+    self.tableView.backgroundView = _emptyMessage;
+}
+
 - (void)viewDidLoad {
     [super viewDidLoad];
     
     [self setEdgesForExtendedLayout:UIRectEdgeNone];
-    
-    _emptyMessage = [[NSBundle mainBundle] loadNibNamed:@"MCTableEmptyMessage" owner:self options:nil][0];
-    _emptyMessage.bigMessage.alpha = 0.0;
-    self.tableView.backgroundView = _emptyMessage;
     
     [self startRespondingToStoreChangeNotifications];
     
@@ -260,16 +264,10 @@ static void * notificationCountContext = &notificationCountContext;
         NSManagedObjectContext *managedObjectContext = MCWeAllPayStoreController.defaultStore.mainThreadContext;
         [_model prepareForUseWithManagedObjectContext:managedObjectContext forDelegate:self];
         [[self tableView] reloadData];
+        [self setEmptyMessageWithDuration:0.0];
     }
     
     _emptyMessage.topConstraint.constant = self.headerView.frame.size.height;
-    
-    if (_isEmptyMessageShownInstantForFirstBoot == false) {
-        [self setEmptyMessageWithDuration:0.0];
-        _isEmptyMessageShownInstantForFirstBoot = true;
-    } else {
-        [self setEmptyMessageWithDuration:1.0];
-    }
     
     [[self navigationController] setToolbarHidden:YES animated:YES];
     

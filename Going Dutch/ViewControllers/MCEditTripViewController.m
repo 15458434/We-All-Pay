@@ -113,7 +113,7 @@
 }
 
 - (void)controllerDidChangeContent:(NSFetchedResultsController *)controller {
-    [self setEmptyMessageWithDuration:1.0];
+    [self setEmptyMessageWithDuration:0.25];
     [self.tableView endUpdates];
 }
 
@@ -209,6 +209,15 @@
 
 #pragma mark - UIViewController
 
+- (void)loadView {
+    [super loadView];
+    
+    _emptyMessage = [NSBundle.mainBundle loadNibNamed:@"MCTableEmptyMessage" owner:self options:nil][0];
+    _emptyMessage.borderlineView.dyInset = 1;
+    _emptyMessage.bigMessage.text = NSLocalizedString(@"PEOPLE_LIST_EMPTY_MESSAGE", @"Press \"add Person\" to add a person who you'd like to share this bill with.");
+    self.tableView.backgroundView = _emptyMessage;
+}
+
 - (void)viewDidLoad {
     [super viewDidLoad];
     
@@ -221,12 +230,6 @@
     self.edgesForExtendedLayout = UIRectEdgeNone;
     
     [self startRespondingToStoreChangeNotifications];
-    
-    _emptyMessage = [NSBundle.mainBundle loadNibNamed:@"MCTableEmptyMessage" owner:self options:nil][0];
-    self.tableView.backgroundView = _emptyMessage;
-    _emptyMessage.topConstraint.constant = _headerView.frame.size.height;
-    _emptyMessage.bigMessage.text = NSLocalizedString(@"PEOPLE_LIST_EMPTY_MESSAGE", @"Press \"add Person\" to add a person who you'd like to share this bill with.");
-    [self setEmptyMessageWithDuration:0.0];
     
     // Make sure a tap in the background dismisses the keyboard as well.
     UITapGestureRecognizer *thatTickles = [[UITapGestureRecognizer alloc] initWithTarget:self action:@selector(tappedInTheBackground:)];
@@ -245,12 +248,14 @@
         _dataController = [MCWeAllPayStoreController.defaultStore sharedBillPeoplePresentDataControllerForDelegate:self];
         [self performFetch];
         [self.tableView reloadData];
+        [self setEmptyMessageWithDuration:0.0];
     }
     
     BOOL shouldAppearAsEditing = [_myParent isChildTableViewEditing];
     [self.tableView setEditing:shouldAppearAsEditing animated:NO];
 
-    [self setEmptyMessageWithDuration:0.0];
+    _emptyMessage.topConstraint.constant = _headerView.frame.size.height;
+    
 }
 
 - (void)viewDidDisappear:(BOOL)animated {

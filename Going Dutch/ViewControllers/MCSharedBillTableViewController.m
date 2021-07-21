@@ -270,17 +270,21 @@
 
 #pragma mark - UIViewController
 
+- (void)loadView {
+    [super loadView];
+    
+    _emptyMessage = [[NSBundle mainBundle] loadNibNamed:@"MCTableEmptyMessage" owner:self options:nil][0];
+    _emptyMessage.borderlineView.dyInset = 1;
+    self.tableView.backgroundView = _emptyMessage;
+    _emptyMessage.bigMessage.text = NSLocalizedString(@"EMPTY_PAYMENT_LIST_MESSAGE", @"Press \"add payment\" to add a payment to this event.");
+}
+
 - (void)viewDidLoad {
     [super viewDidLoad];
     
     [self setEdgesForExtendedLayout:UIRectEdgeNone];
     
     [self startRespondingToStoreChangeNotifications];
-    
-    _emptyMessage = [[NSBundle mainBundle] loadNibNamed:@"MCTableEmptyMessage" owner:self options:nil][0];
-    self.tableView.backgroundView = _emptyMessage;
-    _emptyMessage.bigMessage.text = NSLocalizedString(@"EMPTY_PAYMENT_LIST_MESSAGE", @"Press \"add payment\" to add a payment to this event.");
-    _emptyMessage.topConstraint.constant = self.headerView.frame.size.height;
 }
 
 - (void)viewWillAppear:(BOOL)animated {
@@ -291,11 +295,13 @@
     if (!_dataController) {
         [self prepareDataControllerAndFetch];
         [[self tableView] reloadData];
+        [self setEmptyMessageWithDuration:0.0];
     }
-    [self setEmptyMessageWithDuration:0.0];
     
     BOOL shouldAppearAsEditing = [_myParent isChildTableViewEditing];
     [[self tableView] setEditing:shouldAppearAsEditing animated:NO];
+    
+    _emptyMessage.topConstraint.constant = self.headerView.frame.size.height;
 }
 
 - (void)viewWillDisappear:(BOOL)animated {

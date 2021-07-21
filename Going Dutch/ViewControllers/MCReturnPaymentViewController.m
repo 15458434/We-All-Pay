@@ -312,6 +312,14 @@ typedef NS_OPTIONS(NSUInteger, MCReturnPaymentViewControllerState) {
 
 #pragma mark - UIViewController
 
+- (void)loadView {
+    [super loadView];
+    
+    _emptyMessage = [[NSBundle mainBundle] loadNibNamed:@"MCTableEmptyMessage" owner:self options:nil][0];
+    _emptyMessage.borderlineView.dyInset = 20;
+    self.tableView.backgroundView = _emptyMessage;
+}
+
 - (void)viewDidLoad {
     MCRemoteConfigEngine *remoteConfigEngine = [[MCRemoteConfigEngine alloc] init];
     self.adEngine.shouldShowEngine = [[MCRemoteConfigTrueCasino alloc] initWithEngine:remoteConfigEngine andRemoteConfigItem:ConfigEngineItemPercentageOfTimeShowAfterSolveInterstitialOniPhone];
@@ -323,9 +331,6 @@ typedef NS_OPTIONS(NSUInteger, MCReturnPaymentViewControllerState) {
  
     // Uncomment the following line to display an Edit button in the navigation bar for this view controller.
     // self.navigationItem.rightBarButtonItem = self.editButtonItem;
-    
-    _emptyMessage = [[NSBundle mainBundle] loadNibNamed:@"MCTableEmptyMessage" owner:self options:nil][0];
-    self.tableView.backgroundView = _emptyMessage;
     
     self.tableView.estimatedRowHeight = 44.0;
     self.tableView.rowHeight = UITableViewAutomaticDimension;
