@@ -29,6 +29,8 @@
 
 @interface MCSharedBillTableViewController () <ShowPayment>
 
+@property (weak, nonatomic) IBOutlet MCTableEmptyMessage *headerView;
+
 @property (nonatomic, strong) NSFetchedResultsController *dataController;
 @property (nonatomic, strong) MCPayment *forOpenPaymentWithMissingDataForSegue;
 
@@ -104,20 +106,21 @@
     }
 }
 
-- (void)setEmptyMessage
-{
-    if ([[_dataController fetchedObjects] count] != 0) {
-        if ([[_emptyMessage bigMessage] alpha] > 0.0) {
-            [UIView animateWithDuration:1.0 animations:^{
-                [[self.emptyMessage bigMessage] setAlpha:0.0];
-                [[self tableView] setSeparatorStyle:UITableViewCellSeparatorStyleSingleLine];
+- (void)setEmptyMessageWithDuration:(NSTimeInterval)duration {
+    if (_dataController.fetchedObjects.count != 0) {
+        if (_emptyMessage.bigMessage.alpha > 0.0) {
+            [UIView animateWithDuration:duration animations:^{
+                self.emptyMessage.bigMessage.alpha = 0.0;
+                self.emptyMessage.borderlineView.alpha = 0.0;
+                self.tableView.separatorStyle = UITableViewCellSeparatorStyleSingleLine;
             } completion:nil];
         }
     } else {
-        if ([[_emptyMessage bigMessage] alpha] < 1.0) {
-            [UIView animateWithDuration:1.0 animations:^{
-                [[self.emptyMessage bigMessage] setAlpha:1.0];
-                [[self tableView] setSeparatorStyle:UITableViewCellSeparatorStyleNone];
+        if (_emptyMessage.bigMessage.alpha < 1.0) {
+            [UIView animateWithDuration:duration animations:^{
+                self.emptyMessage.bigMessage.alpha = 1.0;
+                self.emptyMessage.borderlineView.alpha = 1.0;
+                self.tableView.separatorStyle = UITableViewCellSeparatorStyleNone;
             } completion:nil];
         }
     }
@@ -179,22 +182,22 @@
     switch(type) {
             
         case NSFetchedResultsChangeInsert:
-            [[self tableView] insertRowsAtIndexPaths:@[newIndexPath] withRowAnimation:UITableViewRowAnimationFade];
-            [self setEmptyMessage];
+            [self.tableView insertRowsAtIndexPaths:@[newIndexPath] withRowAnimation:UITableViewRowAnimationFade];
+            [self setEmptyMessageWithDuration:1.0];
             break;
             
         case NSFetchedResultsChangeDelete:
-            [[self tableView] deleteRowsAtIndexPaths:@[indexPath] withRowAnimation:UITableViewRowAnimationFade];
-            [self setEmptyMessage];
+            [self.tableView deleteRowsAtIndexPaths:@[indexPath] withRowAnimation:UITableViewRowAnimationFade];
+            [self setEmptyMessageWithDuration:1.0];
             break;
             
         case NSFetchedResultsChangeUpdate:
-            [[self tableView] reloadRowsAtIndexPaths:@[indexPath] withRowAnimation:UITableViewRowAnimationAutomatic];
+            [self.tableView reloadRowsAtIndexPaths:@[indexPath] withRowAnimation:UITableViewRowAnimationAutomatic];
             break;
             
         case NSFetchedResultsChangeMove:
-            [[self tableView] deleteRowsAtIndexPaths:@[indexPath] withRowAnimation:UITableViewRowAnimationFade];
-            [[self tableView] insertRowsAtIndexPaths:@[newIndexPath] withRowAnimation:UITableViewRowAnimationFade];
+            [self.tableView deleteRowsAtIndexPaths:@[indexPath] withRowAnimation:UITableViewRowAnimationFade];
+            [self.tableView insertRowsAtIndexPaths:@[newIndexPath] withRowAnimation:UITableViewRowAnimationFade];
             break;
     }
 }
@@ -204,11 +207,11 @@
 #pragma mark - UITableViewDataSource
 
 - (NSInteger)tableView:(UITableView *)tableView numberOfRowsInSection:(NSInteger)section {
-    return [[_dataController sections][section] numberOfObjects];
+    return _dataController.sections[section].numberOfObjects;
 }
 
 - (NSInteger)numberOfSectionsInTableView:(UITableView *)tableView {
-    return [[_dataController sections] count];
+    return _dataController.sections.count;
 }
 
 - (UITableViewCell *)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath {
@@ -247,16 +250,12 @@
         MCPayment *toBeDeletedPayment = [_dataController objectAtIndexPath:indexPath];
         [MCPayment deletePayment:toBeDeletedPayment];
         [WhoPayingUserDefaultsStoreInterface sendToUserDefaultsStoreInterface:_tonightsBill];
-        [[[MCWeAllPayStoreController defaultStore] mainThreadContext] processPendingChanges];
+        [MCWeAllPayStoreController.defaultStore.mainThreadContext processPendingChanges];
     }
 }
 
 - (BOOL)tableView:(UITableView *)tableView canEditRowAtIndexPath:(NSIndexPath *)indexPath {
-    if ([[self tableView] isEditing]) {
-        return YES;
-    } else {
-        return NO;
-    }
+    return self.tableView.isEditing ? YES : NO;
 }
 
 #pragma mark - UITableViewDelegate
@@ -271,16 +270,21 @@
 
 #pragma mark - UIViewController
 
+- (void)loadView {
+    [super loadView];
+    
+    _emptyMessage = [[NSBundle mainBundle] loadNibNamed:@"MCTableEmptyMessage" owner:self options:nil][0];
+    _emptyMessage.borderlineView.dyInset = 1;
+    self.tableView.backgroundView = _emptyMessage;
+    _emptyMessage.bigMessage.text = NSLocalizedString(@"EMPTY_PAYMENT_LIST_MESSAGE", @"Press \"add payment\" to add a payment to this event.");
+}
+
 - (void)viewDidLoad {
     [super viewDidLoad];
     
     [self setEdgesForExtendedLayout:UIRectEdgeNone];
     
     [self startRespondingToStoreChangeNotifications];
-    
-    _emptyMessage = [[NSBundle mainBundle] loadNibNamed:@"MCTableEmptyMessage" owner:self options:nil][0];
-    [[self tableView] setBackgroundView:_emptyMessage];
-    [[_emptyMessage bigMessage] setText:NSLocalizedString(@"EMPTY_PAYMENT_LIST_MESSAGE", @"Press \"add payment\" to add a payment to this event.")];
 }
 
 - (void)viewWillAppear:(BOOL)animated {
@@ -291,15 +295,13 @@
     if (!_dataController) {
         [self prepareDataControllerAndFetch];
         [[self tableView] reloadData];
-    }
-    if ([[_dataController fetchedObjects] count] > 0) {
-        [[_emptyMessage bigMessage] setAlpha:0.0];
-    } else {
-        [[_emptyMessage bigMessage] setAlpha:1.0];
+        [self setEmptyMessageWithDuration:0.0];
     }
     
     BOOL shouldAppearAsEditing = [_myParent isChildTableViewEditing];
     [[self tableView] setEditing:shouldAppearAsEditing animated:NO];
+    
+    _emptyMessage.topConstraint.constant = self.headerView.frame.size.height;
 }
 
 - (void)viewWillDisappear:(BOOL)animated {

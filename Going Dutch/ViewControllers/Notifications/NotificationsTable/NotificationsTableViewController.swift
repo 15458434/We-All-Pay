@@ -11,7 +11,25 @@ import UIKit
 final class NotificationsTableViewController: UITableViewController {
     @IBOutlet var model: NotificationsModel!
     
+    var emptyMessage: MCTableEmptyMessage!
+    
     private var notificationsObservation: NSKeyValueObservation!
+    
+    func setEmptyMessage(for count: Int, with duration: TimeInterval) {
+        if count > 0  {
+            UIView.animate(withDuration: duration) {
+                self.emptyMessage.bigMessage.alpha = 0.0
+                self.emptyMessage.borderlineView.alpha = 0.0
+                self.tableView.separatorStyle = .singleLine
+            }
+        } else {
+            UIView.animate(withDuration: duration) {
+                self.emptyMessage.bigMessage.alpha = 1.0
+                self.emptyMessage.borderlineView.alpha = 1.0
+                self.tableView.separatorStyle = .none
+            }
+        }
+    }
     
     // MARK: UITableViewController
     
@@ -41,21 +59,31 @@ final class NotificationsTableViewController: UITableViewController {
     
     // MARK: UIViewController
     
+    override func loadView() {
+        super.loadView()
+        
+        emptyMessage = (Bundle.main.loadNibNamed("MCTableEmptyMessage", owner: self, options: nil)!.first as! MCTableEmptyMessage)
+        self.tableView.backgroundView = emptyMessage
+    }
+    
     override func viewDidLoad() {
         super.viewDidLoad()
         self.title = NSLocalizedString("Notifications", comment: "")
+        
+        emptyMessage.bigMessage.text = NSLocalizedString("Nothing new right now.", comment: "A message for no notifications in the notifications screen.")
     }
     
     override func viewWillAppear(_ animated: Bool) {
         func createKVO() {
-            notificationsObservation = self.observe(\.model.notifications, options: [.old, .new, .prior], changeHandler: { mySelf, change in
+            notificationsObservation = self.observe(\.model.notifications, options: [.initial, .old, .new, .prior], changeHandler: { mySelf, change in
                 if change.isPrior {
-                    self.tableView.beginUpdates()
+                    mySelf.tableView.beginUpdates()
                 } else {
                     let kind = change.kind
                     let section: Int = 0
                     switch kind {
                     case .setting:
+                        mySelf.tableView.beginUpdates()
                         mySelf.tableView.reloadSections(IndexSet(integer: section), with: .automatic)
                     case .insertion:
                         let indexes = change.indexes!
@@ -74,7 +102,8 @@ final class NotificationsTableViewController: UITableViewController {
                     @unknown default:
                         fatalError("This kind is not available.")
                     }
-                    self.tableView.endUpdates()
+                    mySelf.tableView.endUpdates()
+                    mySelf.setEmptyMessage(for: mySelf.model.notifications.count, with: 0.33)
                 }
             })
         }

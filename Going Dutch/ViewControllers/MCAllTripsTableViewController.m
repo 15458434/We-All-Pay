@@ -38,6 +38,10 @@ static void * notificationCountContext = &notificationCountContext;
 @property (nonatomic, strong) IBOutlet MCEventsModel *model;
 
 @property (nonatomic, weak) IBOutlet MCBadgeButton *infoButton;
+@property (nonatomic, strong) MCTableEmptyMessage *emptyMessage;
+@property (weak, nonatomic) IBOutlet UITableViewHeaderFooterView *headerView;
+
+@property (nonatomic, strong) NSDateFormatter *df;
 
 @property (nonatomic) MCTonightsBillStatus isATonightsBillOpened;
 
@@ -66,33 +70,19 @@ static void * notificationCountContext = &notificationCountContext;
 
 #pragma mark - New in this class.
 
-- (void)setEmptyMessage {
-    if ([[_model.fetchEventsController fetchedObjects] count] != 0) {
-        [UIView animateWithDuration:1.0 animations:^{
-            [[self.emptyMessage bigMessage] setAlpha:0.0];
-            [[self tableView] setSeparatorStyle:UITableViewCellSeparatorStyleSingleLine];
+- (void)setEmptyMessageWithDuration:(NSTimeInterval)duration {
+    if (_model.fetchEventsController.fetchedObjects.count != 0) {
+        [UIView animateWithDuration:duration animations:^{
+            self.emptyMessage.bigMessage.alpha = 0.0;
+            self.emptyMessage.borderlineView.alpha = 0.0;
+            self.tableView.separatorStyle = UITableViewCellSeparatorStyleSingleLine;
         } completion:nil];
     } else {
-        if ([[_emptyMessage bigMessage] alpha] < 1.0) {
-            [UIView animateWithDuration:1.0 animations:^{
-                [[self.emptyMessage bigMessage] setAlpha:1.0];
-                [[self tableView] setSeparatorStyle:UITableViewCellSeparatorStyleNone];
-            } completion:nil];
-        }
-    }
-}
-
-- (void)setEmptyMessageNow {
-    if ([[_model.fetchEventsController fetchedObjects] count] != 0) {
-        [UIView animateWithDuration:0.0 animations:^{
-            [[self.emptyMessage bigMessage] setAlpha:0.0];
-            [[self tableView] setSeparatorStyle:UITableViewCellSeparatorStyleSingleLine];
-        } completion:nil];
-    } else {
-        if ([[_emptyMessage bigMessage] alpha] < 1.0) {
-            [UIView animateWithDuration:0.0 animations:^{
-                [[self.emptyMessage bigMessage] setAlpha:1.0];
-                [[self tableView] setSeparatorStyle:UITableViewCellSeparatorStyleNone];
+        if (_emptyMessage.bigMessage.alpha < 1.0) {
+            [UIView animateWithDuration:duration animations:^{
+                self.emptyMessage.bigMessage.alpha = 1.0;
+                self.emptyMessage.borderlineView.alpha = 1.0;
+                self.tableView.separatorStyle = UITableViewCellSeparatorStyleNone;
             } completion:nil];
         }
     }
@@ -131,12 +121,10 @@ static void * notificationCountContext = &notificationCountContext;
     switch(type) {
         case NSFetchedResultsChangeInsert:
             [[self tableView] insertRowsAtIndexPaths:@[newIndexPath] withRowAnimation:UITableViewRowAnimationFade];
-            [self setEmptyMessage];
             break;
             
         case NSFetchedResultsChangeDelete:
             [[self tableView] deleteRowsAtIndexPaths:@[indexPath] withRowAnimation:UITableViewRowAnimationFade];
-            [self setEmptyMessage];
             break;
             
         case NSFetchedResultsChangeUpdate:
@@ -151,6 +139,7 @@ static void * notificationCountContext = &notificationCountContext;
 }
 
 - (void)controllerDidChangeContent:(NSFetchedResultsController *)controller {
+    [self setEmptyMessageWithDuration:0.25];
     [self.tableView endUpdates];
 }
 
@@ -242,14 +231,18 @@ static void * notificationCountContext = &notificationCountContext;
 
 #pragma mark - UIViewController
 
+- (void)loadView {
+    [super loadView];
+    
+    _emptyMessage = [[NSBundle mainBundle] loadNibNamed:@"MCTableEmptyMessage" owner:self options:nil][0];
+    _emptyMessage.borderlineView.dyInset = 1;
+    self.tableView.backgroundView = _emptyMessage;
+}
+
 - (void)viewDidLoad {
     [super viewDidLoad];
     
     [self setEdgesForExtendedLayout:UIRectEdgeNone];
-    
-    _emptyMessage = [[NSBundle mainBundle] loadNibNamed:@"MCTableEmptyMessage" owner:self options:nil][0];
-    [[_emptyMessage bigMessage] setAlpha:0.0];
-    [[self tableView] setBackgroundView:_emptyMessage];
     
     [self startRespondingToStoreChangeNotifications];
     
@@ -271,14 +264,10 @@ static void * notificationCountContext = &notificationCountContext;
         NSManagedObjectContext *managedObjectContext = MCWeAllPayStoreController.defaultStore.mainThreadContext;
         [_model prepareForUseWithManagedObjectContext:managedObjectContext forDelegate:self];
         [[self tableView] reloadData];
+        [self setEmptyMessageWithDuration:0.0];
     }
     
-    if (_isEmptyMessageShownInstantForFirstBoot == false) {
-        [self setEmptyMessageNow];
-        _isEmptyMessageShownInstantForFirstBoot = true;
-    } else {
-        [self setEmptyMessage];
-    }
+    _emptyMessage.topConstraint.constant = self.headerView.frame.size.height;
     
     [[self navigationController] setToolbarHidden:YES animated:YES];
     
