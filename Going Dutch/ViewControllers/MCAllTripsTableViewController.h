@@ -18,7 +18,4 @@
 
 @property (nonatomic, strong) IBOutlet MCNotificationsInfoModel *notificationsStateModel;
 
-@property (nonatomic, strong) MCTableEmptyMessage *emptyMessage;
-@property (nonatomic, strong) NSDateFormatter *df;
-
 @end

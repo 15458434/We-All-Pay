@@ -39,5 +39,6 @@
 #pragma mark - Views
 #import "MCNotificationUnreadIndicator.h"
 #import "MCBadgeButton.h"
+#import "MCBorderLineView.h"
 
 #import "MCEmailTextInputProxy.h"

@@ -7,7 +7,6 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
-		13B4AFD76B135F2BE42C32D0 /* Pods_We_all_pay_Tests.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 7B9655082A0AA851009E96F1 /* Pods_We_all_pay_Tests.framework */; };
 		38001C9B194EE284008ACD94 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 38001C9A194EE284008ACD94 /* Assets.xcassets */; };
 		38010E0F1A3F4A4F0056F8F8 /* Localizable.strings in Resources */ = {isa = PBXBuildFile; fileRef = 38010E111A3F4A4F0056F8F8 /* Localizable.strings */; };
 		380328002698443300744710 /* NotificationsInfoModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 380327FF2698443300744710 /* NotificationsInfoModel.swift */; };
@@ -56,6 +55,7 @@
 		38490D2D1D7052E700A297BA /* SolutionViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 38490D2C1D7052E700A297BA /* SolutionViewController.swift */; };
 		38490D2F1D7056D100A297BA /* ShowMailViewProtocol.swift in Sources */ = {isa = PBXBuildFile; fileRef = 38490D2E1D7056D100A297BA /* ShowMailViewProtocol.swift */; };
 		38490D311D705A7700A297BA /* ThisEvent.swift in Sources */ = {isa = PBXBuildFile; fileRef = 38490D301D705A7700A297BA /* ThisEvent.swift */; };
+		38494B4426A735F400F10C64 /* MCBorderLineView.m in Sources */ = {isa = PBXBuildFile; fileRef = 38494B4326A735F400F10C64 /* MCBorderLineView.m */; };
 		384A8D9A1D54776200A69E15 /* Who is paying next.appex in Embed App Extensions */ = {isa = PBXBuildFile; fileRef = 38B6E0EC1A28BBAB009E69D7 /* Who is paying next.appex */; settings = {ATTRIBUTES = (RemoveHeadersOnCopy, ); }; };
 		384EC90A1BC2F03F00A80799 /* PaymentTableViewCell_iPad.swift in Sources */ = {isa = PBXBuildFile; fileRef = 384EC9091BC2F03F00A80799 /* PaymentTableViewCell_iPad.swift */; };
 		384EC90C1BC2F17500A80799 /* SelectCategoryTableViewCell_iPad.swift in Sources */ = {isa = PBXBuildFile; fileRef = 384EC90B1BC2F17500A80799 /* SelectCategoryTableViewCell_iPad.swift */; };
@@ -406,6 +406,8 @@
 		38490D2C1D7052E700A297BA /* SolutionViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = SolutionViewController.swift; path = ViewControllers/iPhone/SolutionViewController.swift; sourceTree = "<group>"; };
 		38490D2E1D7056D100A297BA /* ShowMailViewProtocol.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ShowMailViewProtocol.swift; sourceTree = "<group>"; };
 		38490D301D705A7700A297BA /* ThisEvent.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ThisEvent.swift; sourceTree = "<group>"; };
+		38494B4226A735F400F10C64 /* MCBorderLineView.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = MCBorderLineView.h; sourceTree = "<group>"; };
+		38494B4326A735F400F10C64 /* MCBorderLineView.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = MCBorderLineView.m; sourceTree = "<group>"; };
 		384EC9091BC2F03F00A80799 /* PaymentTableViewCell_iPad.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = PaymentTableViewCell_iPad.swift; sourceTree = "<group>"; };
 		384EC90B1BC2F17500A80799 /* SelectCategoryTableViewCell_iPad.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SelectCategoryTableViewCell_iPad.swift; sourceTree = "<group>"; };
 		384EC90D1BC2F35700A80799 /* SelectCurrencyTableViewCell_iPad.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SelectCurrencyTableViewCell_iPad.swift; sourceTree = "<group>"; };
@@ -967,6 +969,8 @@
 				3867CE4218704161001EC222 /* Storyboard */,
 				3867CE5318704DAF001EC222 /* MCTableEmptyMessage.xib */,
 				38E9DA1A1B29F5C40097D719 /* MCTableEmptyMessage.swift */,
+				38494B4226A735F400F10C64 /* MCBorderLineView.h */,
+				38494B4326A735F400F10C64 /* MCBorderLineView.m */,
 			);
 			name = Views;
 			sourceTree = "<group>";
@@ -1914,84 +1918,6 @@
 			shellPath = /bin/sh;
 			shellScript = "# Type a script or drag a script file from your workspace to insert its path.\n\"${PODS_ROOT}/FirebaseCrashlytics/run\"\n";
 		};
-		51B4E971160E4C089DC1E01A /* [CP] Check Pods Manifest.lock */ = {
-			isa = PBXShellScriptBuildPhase;
-			buildActionMask = 2147483647;
-			files = (
-			);
-			inputFileListPaths = (
-			);
-			inputPaths = (
-				"${PODS_PODFILE_DIR_PATH}/Podfile.lock",
-				"${PODS_ROOT}/Manifest.lock",
-			);
-			name = "[CP] Check Pods Manifest.lock";
-			outputFileListPaths = (
-			);
-			outputPaths = (
-				"$(DERIVED_FILE_DIR)/Pods-We all pay Tests-checkManifestLockResult.txt",
-			);
-			runOnlyForDeploymentPostprocessing = 0;
-			shellPath = /bin/sh;
-			shellScript = "diff \"${PODS_PODFILE_DIR_PATH}/Podfile.lock\" \"${PODS_ROOT}/Manifest.lock\" > /dev/null\nif [ $? != 0 ] ; then\n    # print error to STDERR\n    echo \"error: The sandbox is not in sync with the Podfile.lock. Run 'pod install' or update your CocoaPods installation.\" >&2\n    exit 1\nfi\n# This output is used by Xcode 'outputs' to avoid re-running this script phase.\necho \"SUCCESS\" > \"${SCRIPT_OUTPUT_FILE_0}\"\n";
-			showEnvVarsInLog = 0;
-		};
-		77CEA367B24A9E86408BC279 /* [CP] Embed Pods Frameworks */ = {
-			isa = PBXShellScriptBuildPhase;
-			buildActionMask = 2147483647;
-			files = (
-			);
-			inputFileListPaths = (
-				"${PODS_ROOT}/Target Support Files/Pods-We all pay Tests/Pods-We all pay Tests-frameworks-${CONFIGURATION}-input-files.xcfilelist",
-			);
-			name = "[CP] Embed Pods Frameworks";
-			outputFileListPaths = (
-				"${PODS_ROOT}/Target Support Files/Pods-We all pay Tests/Pods-We all pay Tests-frameworks-${CONFIGURATION}-output-files.xcfilelist",
-			);
-			runOnlyForDeploymentPostprocessing = 0;
-			shellPath = /bin/sh;
-			shellScript = "\"${PODS_ROOT}/Target Support Files/Pods-We all pay Tests/Pods-We all pay Tests-frameworks.sh\"\n";
-			showEnvVarsInLog = 0;
-		};
-		AFAC99D61AAD104DD062FA93 /* [CP] Embed Pods Frameworks */ = {
-			isa = PBXShellScriptBuildPhase;
-			buildActionMask = 2147483647;
-			files = (
-			);
-			inputFileListPaths = (
-				"${PODS_ROOT}/Target Support Files/Pods-We all pay/Pods-We all pay-frameworks-${CONFIGURATION}-input-files.xcfilelist",
-			);
-			name = "[CP] Embed Pods Frameworks";
-			outputFileListPaths = (
-				"${PODS_ROOT}/Target Support Files/Pods-We all pay/Pods-We all pay-frameworks-${CONFIGURATION}-output-files.xcfilelist",
-			);
-			runOnlyForDeploymentPostprocessing = 0;
-			shellPath = /bin/sh;
-			shellScript = "\"${PODS_ROOT}/Target Support Files/Pods-We all pay/Pods-We all pay-frameworks.sh\"\n";
-			showEnvVarsInLog = 0;
-		};
-		BECDE48E530780E4B44230DA /* [CP] Check Pods Manifest.lock */ = {
-			isa = PBXShellScriptBuildPhase;
-			buildActionMask = 2147483647;
-			files = (
-			);
-			inputFileListPaths = (
-			);
-			inputPaths = (
-				"${PODS_PODFILE_DIR_PATH}/Podfile.lock",
-				"${PODS_ROOT}/Manifest.lock",
-			);
-			name = "[CP] Check Pods Manifest.lock";
-			outputFileListPaths = (
-			);
-			outputPaths = (
-				"$(DERIVED_FILE_DIR)/Pods-We all pay-checkManifestLockResult.txt",
-			);
-			runOnlyForDeploymentPostprocessing = 0;
-			shellPath = /bin/sh;
-			shellScript = "diff \"${PODS_PODFILE_DIR_PATH}/Podfile.lock\" \"${PODS_ROOT}/Manifest.lock\" > /dev/null\nif [ $? != 0 ] ; then\n    # print error to STDERR\n    echo \"error: The sandbox is not in sync with the Podfile.lock. Run 'pod install' or update your CocoaPods installation.\" >&2\n    exit 1\nfi\n# This output is used by Xcode 'outputs' to avoid re-running this script phase.\necho \"SUCCESS\" > \"${SCRIPT_OUTPUT_FILE_0}\"\n";
-			showEnvVarsInLog = 0;
-		};
 		63F9E3980542B86175C95FC5 /* [CP] Copy Pods Resources */ = {
 			isa = PBXShellScriptBuildPhase;
 			buildActionMask = 2147483647;
@@ -2137,6 +2063,7 @@
 				3881907C269EE287000949F4 /* MCBadgeButton.m in Sources */,
 				38D96ED623E31BE000C03170 /* MCBitwiseStuff.m in Sources */,
 				38E2CB401BC2A5A20092B5C8 /* SolutionOverViewTableViewCell_iPad.swift in Sources */,
+				38494B4426A735F400F10C64 /* MCBorderLineView.m in Sources */,
 				38490D2F1D7056D100A297BA /* ShowMailViewProtocol.swift in Sources */,
 				387494D419F053C2001614CA /* WeAllPayStore3to4.xcmappingmodel in Sources */,
 				387494D619F053E9001614CA /* WeAllPayStore2to4.xcmappingmodel in Sources */,
