@@ -70,34 +70,18 @@ static void * notificationCountContext = &notificationCountContext;
 
 #pragma mark - New in this class.
 
-- (void)setEmptyMessage {
+- (void)setEmptyMessageWithDuration:(NSTimeInterval)duration {
     if ([[_model.fetchEventsController fetchedObjects] count] != 0) {
-        [UIView animateWithDuration:1.0 animations:^{
+        [UIView animateWithDuration:duration animations:^{
             self.emptyMessage.bigMessage.alpha = 0.0;
             self.emptyMessage.borderlineView.alpha = 0.0;
             self.tableView.separatorStyle = UITableViewCellSeparatorStyleSingleLine;
         } completion:nil];
     } else {
         if ([[_emptyMessage bigMessage] alpha] < 1.0) {
-            [UIView animateWithDuration:1.0 animations:^{
+            [UIView animateWithDuration:duration animations:^{
                 self.emptyMessage.bigMessage.alpha = 1.0;
                 self.emptyMessage.borderlineView.alpha = 1.0;
-                self.tableView.separatorStyle = UITableViewCellSeparatorStyleNone;
-            } completion:nil];
-        }
-    }
-}
-
-- (void)setEmptyMessageNow {
-    if ([[_model.fetchEventsController fetchedObjects] count] != 0) {
-        [UIView animateWithDuration:0.0 animations:^{
-            self.emptyMessage.bigMessage.alpha = 0.0;
-            self.tableView.separatorStyle = UITableViewCellSeparatorStyleSingleLine;
-        } completion:nil];
-    } else {
-        if ([[_emptyMessage bigMessage] alpha] < 1.0) {
-            [UIView animateWithDuration:0.0 animations:^{
-                self.emptyMessage.bigMessage.alpha = 1.0;
                 self.tableView.separatorStyle = UITableViewCellSeparatorStyleNone;
             } completion:nil];
         }
@@ -137,12 +121,10 @@ static void * notificationCountContext = &notificationCountContext;
     switch(type) {
         case NSFetchedResultsChangeInsert:
             [[self tableView] insertRowsAtIndexPaths:@[newIndexPath] withRowAnimation:UITableViewRowAnimationFade];
-            [self setEmptyMessage];
             break;
             
         case NSFetchedResultsChangeDelete:
             [[self tableView] deleteRowsAtIndexPaths:@[indexPath] withRowAnimation:UITableViewRowAnimationFade];
-            [self setEmptyMessage];
             break;
             
         case NSFetchedResultsChangeUpdate:
@@ -157,6 +139,7 @@ static void * notificationCountContext = &notificationCountContext;
 }
 
 - (void)controllerDidChangeContent:(NSFetchedResultsController *)controller {
+    [self setEmptyMessageWithDuration:1.0];
     [self.tableView endUpdates];
 }
 
@@ -282,10 +265,10 @@ static void * notificationCountContext = &notificationCountContext;
     _emptyMessage.topConstraint.constant = self.headerView.frame.size.height;
     
     if (_isEmptyMessageShownInstantForFirstBoot == false) {
-        [self setEmptyMessageNow];
+        [self setEmptyMessageWithDuration:0.0];
         _isEmptyMessageShownInstantForFirstBoot = true;
     } else {
-        [self setEmptyMessage];
+        [self setEmptyMessageWithDuration:1.0];
     }
     
     [[self navigationController] setToolbarHidden:YES animated:YES];
