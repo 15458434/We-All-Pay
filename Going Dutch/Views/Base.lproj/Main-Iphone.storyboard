@@ -301,6 +301,7 @@
                     <nil key="simulatedBottomBarMetrics"/>
                     <connections>
                         <outlet property="adEngine" destination="Wrz-hc-wsi" id="CyB-qd-Ku6"/>
+                        <outlet property="headerView" destination="eaE-b1-r5K" id="uaF-mz-n1g"/>
                         <segue destination="HxE-bK-sSq" kind="presentation" identifier="solveButton" id="ZLi-dv-Z0Y"/>
                         <segue destination="R4f-Dn-Lh4" kind="presentation" identifier="openFirstPaymentWithoutPayer" id="eZd-I3-t8D"/>
                         <segue destination="R4f-Dn-Lh4" kind="presentation" identifier="openPaymentView" id="z3e-Vr-AS7"/>

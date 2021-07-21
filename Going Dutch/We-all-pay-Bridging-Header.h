@@ -25,7 +25,7 @@
 #import "MCDismissKeyboardProtocol.h"
 #import "MCPathComponentsToOpenProtocol.h"
 
-#pragma mark - Miscellanwous
+#pragma mark - Miscellaneous
 #import "MCTools.h"
 
 #pragma mark - ViewControllers
