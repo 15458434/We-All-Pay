@@ -804,6 +804,7 @@
                     <nil key="simulatedBottomBarMetrics"/>
                     <connections>
                         <outlet property="adBannerEngine" destination="XfM-xE-BZB" id="PIf-7l-DzT"/>
+                        <outlet property="headerView" destination="kmK-CE-AdT" id="w4u-sP-Sgb"/>
                     </connections>
                 </tableViewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="Ohk-bB-ROF" userLabel="First Responder" sceneMemberID="firstResponder"/>

@@ -34,6 +34,7 @@ typedef NS_OPTIONS(NSUInteger, MCReturnPaymentViewControllerState) {
 
 @property (nonatomic) MCReturnPaymentViewControllerState uiState;
 
+@property (weak, nonatomic) IBOutlet UITableViewHeaderFooterView *headerView;
 @property (nonatomic, strong) MCTableEmptyMessage *emptyMessage;
 
 // Ad Banner
@@ -110,17 +111,21 @@ typedef NS_OPTIONS(NSUInteger, MCReturnPaymentViewControllerState) {
     }
 }
 
-- (void)setEmptyMessageNow {
+- (void)setEmptyMessageWithDuration:(NSTimeInterval)duration {
     if (_solution.count != 0) {
-        [UIView animateWithDuration:0.0 animations:^{
-            [[self.emptyMessage bigMessage] setAlpha:0.0];
-            [[self tableView] setSeparatorStyle:UITableViewCellSeparatorStyleSingleLine];
-        } completion:nil];
+        if (_emptyMessage.bigMessage.alpha > 0.0) {
+            [UIView animateWithDuration:duration animations:^{
+                self.emptyMessage.bigMessage.alpha = 0.0;
+                self.emptyMessage.borderlineView.alpha = 0.0;
+                self.tableView.separatorStyle = UITableViewCellSeparatorStyleSingleLine;
+            } completion:nil];
+        }
     } else {
-        if ([[_emptyMessage bigMessage] alpha] < 1.0) {
-            [UIView animateWithDuration:0.0 animations:^{
-                [[self.emptyMessage bigMessage] setAlpha:1.0];
-                [[self tableView] setSeparatorStyle:UITableViewCellSeparatorStyleNone];
+        if (_emptyMessage.bigMessage.alpha < 1.0) {
+            [UIView animateWithDuration:duration animations:^{
+                self.emptyMessage.bigMessage.alpha = 1.0;
+                self.emptyMessage.borderlineView.alpha = 1.0;
+                self.tableView.separatorStyle = UITableViewCellSeparatorStyleNone;
             } completion:nil];
         }
     }
@@ -175,7 +180,7 @@ typedef NS_OPTIONS(NSUInteger, MCReturnPaymentViewControllerState) {
         self.peoplePresent = [[self.tonightsBill peoplePresent] sortedArrayUsingDescriptors:@[sortDescriptor]];
         [[[self emptyMessage] activityIndicator] stopAnimating];
         
-        [self setEmptyMessageNow];
+        [self setEmptyMessageWithDuration:0.0];
         
         [[self tableView] beginUpdates];
         NSIndexSet *indexes = [[NSIndexSet alloc] initWithIndexesInRange:NSMakeRange(0, 3)];
@@ -188,12 +193,14 @@ typedef NS_OPTIONS(NSUInteger, MCReturnPaymentViewControllerState) {
 - (void)setEmptyMessage {
     if (!(_solution.count == 0 || _emptyMessage.activityIndicator.isAnimating)) {
         [UIView animateWithDuration:1.0 animations:^{
-            [[self->_emptyMessage bigMessage] setAlpha:0.0];
+            self.emptyMessage.bigMessage.alpha = 0.0;
+            self.emptyMessage.borderlineView.alpha = 0.0;
             [[self tableView] setSeparatorStyle:UITableViewCellSeparatorStyleSingleLine];
         } completion:nil];
     } else {
         [UIView animateWithDuration:1.0 animations:^{
-            [[self->_emptyMessage bigMessage] setAlpha:1.0];
+            self.emptyMessage.bigMessage.alpha = 1.0;
+            self.emptyMessage.borderlineView.alpha = 1.0;
             [[self tableView] setSeparatorStyle:UITableViewCellSeparatorStyleNone];
         } completion:nil];
     }
@@ -318,6 +325,7 @@ typedef NS_OPTIONS(NSUInteger, MCReturnPaymentViewControllerState) {
     // self.navigationItem.rightBarButtonItem = self.editButtonItem;
     
     _emptyMessage = [[NSBundle mainBundle] loadNibNamed:@"MCTableEmptyMessage" owner:self options:nil][0];
+    self.tableView.backgroundView = _emptyMessage;
     
     self.tableView.estimatedRowHeight = 44.0;
     self.tableView.rowHeight = UITableViewAutomaticDimension;
@@ -336,9 +344,9 @@ typedef NS_OPTIONS(NSUInteger, MCReturnPaymentViewControllerState) {
 - (void)viewWillAppear:(BOOL)animated {
     [super viewWillAppear:animated];
     
-    [[_emptyMessage bigMessage] setText:NSLocalizedString(@"RETURNPAYMENTSVIEW_NOPAYMENTS", @"Please add payments and/or people if you want a solution on who owes who.")];
-    [[self tableView] setBackgroundView:_emptyMessage];
-    [self setEmptyMessageNow];
+    _emptyMessage.topConstraint.constant = self.headerView.frame.size.height;
+    _emptyMessage.bigMessage.text = NSLocalizedString(@"RETURNPAYMENTSVIEW_NOPAYMENTS", @"Please add payments and/or people if you want a solution on who owes who.");
+    [self setEmptyMessageWithDuration:0.0];
     
     if (_tonightsBill.peoplePresent.count == 0 || _tonightsBill.payments.count == 0) {
         [[_emptyMessage bigMessage] setText:NSLocalizedString(@"RETURNPAYMENTSVIEW_NOPAYMENTS", @"Please add payments and/or people if you want a solution on who owes who.")];
