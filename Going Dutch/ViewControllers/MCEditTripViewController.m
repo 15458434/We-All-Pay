@@ -25,6 +25,7 @@
 
 @property (strong, nonatomic) MCTableEmptyMessage *emptyMessage;
 
+@property (weak, nonatomic) IBOutlet UITableViewHeaderFooterView *headerView;
 @property (weak, nonatomic) IBOutlet UITextField *tripNameField;
 @property (weak, nonatomic) IBOutlet UIButton *addPersonButton;
 @property (weak, nonatomic) IBOutlet UIButton *contactsButton;
@@ -222,11 +223,10 @@
     [self startRespondingToStoreChangeNotifications];
     
     _emptyMessage = [NSBundle.mainBundle loadNibNamed:@"MCTableEmptyMessage" owner:self options:nil][0];
-    _emptyMessage.bigMessage.text = NSLocalizedString(@"PEOPLE_LIST_EMPTY_MESSAGE", @"Press \"add Person\" to add a person who you'd like to share this bill with.");
-    if (_dataController.fetchedObjects.count > 0) {
-        _emptyMessage.bigMessage.alpha = 0.0;
-    }
     self.tableView.backgroundView = _emptyMessage;
+    _emptyMessage.topConstraint.constant = _headerView.frame.size.height;
+    _emptyMessage.bigMessage.text = NSLocalizedString(@"PEOPLE_LIST_EMPTY_MESSAGE", @"Press \"add Person\" to add a person who you'd like to share this bill with.");
+    [self setEmptyMessageWithDuration:0.0];
     
     // Make sure a tap in the background dismisses the keyboard as well.
     UITapGestureRecognizer *thatTickles = [[UITapGestureRecognizer alloc] initWithTarget:self action:@selector(tappedInTheBackground:)];

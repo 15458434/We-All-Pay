@@ -964,6 +964,7 @@
                     <connections>
                         <outlet property="addPersonButton" destination="gfv-ln-Tgv" id="kQ0-08-UfA"/>
                         <outlet property="contactsButton" destination="asZ-Na-2wd" id="LA0-ly-LPC"/>
+                        <outlet property="headerView" destination="wmR-8m-HJR" id="ZdS-Im-m8c"/>
                         <outlet property="tripNameField" destination="BJS-wA-qlM" id="mRl-pt-rEN"/>
                     </connections>
                 </tableViewController>
