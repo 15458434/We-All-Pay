@@ -111,6 +111,7 @@
         if (_emptyMessage.bigMessage.alpha > 0.0) {
             [UIView animateWithDuration:duration animations:^{
                 self.emptyMessage.bigMessage.alpha = 0.0;
+                self.emptyMessage.borderlineView.alpha = 0.0;
                 self.tableView.separatorStyle = UITableViewCellSeparatorStyleSingleLine;
             } completion:nil];
         }
@@ -118,6 +119,7 @@
         if (_emptyMessage.bigMessage.alpha < 1.0) {
             [UIView animateWithDuration:duration animations:^{
                 self.emptyMessage.bigMessage.alpha = 1.0;
+                self.emptyMessage.borderlineView.alpha = 1.0;
                 self.tableView.separatorStyle = UITableViewCellSeparatorStyleNone;
             } completion:nil];
         }
