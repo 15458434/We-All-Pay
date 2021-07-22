@@ -11,6 +11,7 @@
 
 @class MCCurrency, MCExchangeRate, MCPaymentPresence, MCPerson, MCSharedBill;
 
+__attribute__((objc_subclassing_restricted))
 @interface MCPayment : NSManagedObject
 
 @property (nonatomic, retain) NSNumber * categoryId;

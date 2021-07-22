@@ -8,6 +8,7 @@
 
 @import CoreData;
 
+__attribute__((objc_subclassing_restricted))
 @interface MCAddCurrenciesEntityMigrationPolicy : NSEntityMigrationPolicy
 
 @end

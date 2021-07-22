@@ -22,6 +22,7 @@
 @class MCTwoLabelsTitleView;
 @class MCTableEmptyMessage;
 
+__attribute__((objc_subclassing_restricted))
 @interface MCEditTripViewController : UITableViewController <NSFetchedResultsControllerDelegate, UITextFieldDelegate, MCTonightsBillTransfer>
 
 @property (nonatomic) BOOL isInitAsNew;

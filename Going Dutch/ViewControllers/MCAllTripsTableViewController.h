@@ -14,6 +14,7 @@
 @class MCWeAllPayStoreController;
 @class MCTableEmptyMessage;
 
+__attribute__((objc_subclassing_restricted))
 @interface MCAllTripsTableViewController : UITableViewController < NSFetchedResultsControllerDelegate>
 
 @property (nonatomic, strong) IBOutlet MCNotificationsInfoModel *notificationsStateModel;

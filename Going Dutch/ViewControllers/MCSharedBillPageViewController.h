@@ -25,6 +25,7 @@
 
 @end
 
+__attribute__((objc_subclassing_restricted))
 @interface MCSharedBillPageViewController : UIPageViewController <UIPageViewControllerDataSource, UIPageViewControllerDelegate, UIAlertViewDelegate, MCIsEditingProtocol>
 
 @property (weak, nonatomic) MCSharedBillMainViewController *mainViewController;

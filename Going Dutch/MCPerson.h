@@ -12,6 +12,7 @@
 
 @class MCEmailAddress, MCPayment, MCPaymentPresence, MCSharedBill;
 
+__attribute__((objc_subclassing_restricted))
 @interface MCPerson : NSManagedObject
 
 @property (nonatomic, retain) NSDate * dateCreated;

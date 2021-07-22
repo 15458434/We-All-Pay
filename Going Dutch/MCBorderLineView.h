@@ -12,6 +12,7 @@ NS_ASSUME_NONNULL_BEGIN
 
 IB_DESIGNABLE
 NS_SWIFT_NAME(BorderLineView)
+__attribute__((objc_subclassing_restricted))
 @interface MCBorderLineView : UIView
 
 @property (nonatomic, strong) IBInspectable UIColor *borderColor;

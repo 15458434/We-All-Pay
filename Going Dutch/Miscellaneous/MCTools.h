@@ -9,6 +9,7 @@
 @import Foundation;
 @import UIKit;
 
+__attribute__((objc_subclassing_restricted))
 @interface MCTools : NSObject
 
 + (BOOL)isStringAnEmailAddress:(NSString * _Nonnull)stringThatIsSupposedToBeEmailAddress;
