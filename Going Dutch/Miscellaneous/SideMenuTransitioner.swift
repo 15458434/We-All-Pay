@@ -299,10 +299,6 @@ final class SwipeLeftDissmissableNavigationController: UINavigationController, S
         dismissInteractionController = SideMenuDismissInteractionController(with: self)
     }
     
-    override func viewWillTransition(to size: CGSize, with coordinator: UIViewControllerTransitionCoordinator) {
-        super.viewWillTransition(to: size, with: coordinator)
-    }
-    
     // MARK: UIResponder
     
     // MARK: NSObject
