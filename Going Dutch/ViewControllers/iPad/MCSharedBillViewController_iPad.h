@@ -15,6 +15,7 @@
 
 @class MCSharedBill;
 
+__attribute__((objc_subclassing_restricted))
 @interface MCSharedBillViewController_iPad : MCGenericAdBannerViewController <MCTonightsBillTransfer, UITextFieldDelegate>
 
 @property (strong, nonatomic) MCSharedBill *tonightsBill;

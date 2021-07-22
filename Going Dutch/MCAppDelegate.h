@@ -8,6 +8,7 @@
 
 @import UIKit;
 
+__attribute__((objc_subclassing_restricted))
 @interface MCAppDelegate : UIResponder <UIApplicationDelegate>
 
 @property (strong, nonatomic) UIWindow *window;

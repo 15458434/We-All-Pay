@@ -14,6 +14,7 @@
 @class MCSharedBill;
 @class MCTableEmptyMessage_iPad;
 
+__attribute__((objc_subclassing_restricted))
 @interface MCSharedBillPaymentsTableViewController_iPad : UITableViewController <NSFetchedResultsControllerDelegate, MCTonightsBillTransfer>
 
 @property (nonatomic, strong) MCTableEmptyMessage_iPad *emptyMessage;

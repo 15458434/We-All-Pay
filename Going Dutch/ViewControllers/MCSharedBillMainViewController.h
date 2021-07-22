@@ -17,6 +17,7 @@
 
 @class MCSharedBill;
 
+__attribute__((objc_subclassing_restricted))
 @interface MCSharedBillMainViewController : MCGenericAdBannerViewController <MCTonightsBillTransfer, MCCurrentViewDelegate, MCPathComponentsToOpenProtocol>
 
 @property (nonatomic) MCSharedBillViewSelector currentView;

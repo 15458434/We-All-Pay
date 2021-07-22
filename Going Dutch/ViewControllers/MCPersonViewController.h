@@ -19,6 +19,7 @@
 @class MCSharedBill;
 @class MCTwoLabelsTitleView;
 
+__attribute__((objc_subclassing_restricted))
 @interface MCPersonViewController : MCGenericMediumAdBannerViewController <MCTonightsBillTransfer, MCThisPersonProtocol>
 
 // Only accessible on the mainThread.

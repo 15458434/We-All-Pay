@@ -11,6 +11,7 @@
 
 @class MCExchangeRate, MCPayment, MCSharedBill;
 
+__attribute__((objc_subclassing_restricted))
 @interface MCCurrency : NSManagedObject
 
 @property (nonatomic, retain) NSString * code;

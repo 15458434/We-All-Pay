@@ -11,6 +11,7 @@
 
 @class MCTableEmptyMessage_iPad;
 
+__attribute__((objc_subclassing_restricted))
 @interface MCAllTripsTableViewController_iPad : UITableViewController <NSFetchedResultsControllerDelegate>
 
 @end

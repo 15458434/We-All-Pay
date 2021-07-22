@@ -19,6 +19,7 @@ typedef NS_ENUM(NSInteger, MCEmailTextInputProxyTarget) {
 NS_ASSUME_NONNULL_BEGIN
 
 NS_SWIFT_NAME(EmailTextInputProxy)
+__attribute__((objc_subclassing_restricted))
 @interface MCEmailTextInputProxy : NSProxy <UITextFieldDelegate, UIPickerViewDelegate, UIPickerViewDataSource>
 
 @property (nonatomic) MCEmailTextInputProxyTarget target;

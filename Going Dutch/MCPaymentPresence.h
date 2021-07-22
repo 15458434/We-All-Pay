@@ -11,6 +11,7 @@
 
 @class MCPayment, MCPerson;
 
+__attribute__((objc_subclassing_restricted))
 @interface MCPaymentPresence : NSManagedObject
 
 @property (nonatomic, retain) NSNumber * averageOweFromPayment;

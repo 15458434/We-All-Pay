@@ -12,6 +12,7 @@ NS_ASSUME_NONNULL_BEGIN
 
 IB_DESIGNABLE
 NS_SWIFT_NAME(BadgeButton)
+__attribute__((objc_subclassing_restricted))
 @interface MCBadgeButton : UIControl
 
 @property (nonatomic) IBInspectable NSInteger count;

@@ -8,6 +8,7 @@
 
 @import CoreData;
 
+__attribute__((objc_subclassing_restricted))
 @interface MCPaymentUpdateTo4 : NSEntityMigrationPolicy
 
 @end
