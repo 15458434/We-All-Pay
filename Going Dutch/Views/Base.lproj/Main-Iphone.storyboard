@@ -22,13 +22,22 @@
                             <rect key="frame" x="0.0" y="0.0" width="375" height="60"/>
                             <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                             <subviews>
-                                <button contentMode="scaleToFill" restorationIdentifier="newEventButton" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="system" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="PRz-eP-dNH">
-                                    <rect key="frame" x="151" y="15" width="73" height="30"/>
-                                    <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
-                                    <fontDescription key="fontDescription" type="system" pointSize="15"/>
+                                <button contentMode="redraw" restorationIdentifier="newEventButton" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="PRz-eP-dNH" customClass="MCRoundedButton">
+                                    <rect key="frame" x="149.66666666666666" y="15" width="76" height="30"/>
+                                    <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                                    <fontDescription key="fontDescription" type="system" weight="semibold" pointSize="15"/>
                                     <state key="normal" title="New event">
+                                        <color key="titleColor" systemColor="systemBackgroundColor"/>
                                         <color key="titleShadowColor" red="0.5" green="0.5" blue="0.5" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                                     </state>
+                                    <userDefinedRuntimeAttributes>
+                                        <userDefinedRuntimeAttribute type="color" keyPath="normalBackgroundColor">
+                                            <color key="value" name="button - enabled"/>
+                                        </userDefinedRuntimeAttribute>
+                                        <userDefinedRuntimeAttribute type="color" keyPath="highlightedBackgroundColor">
+                                            <color key="value" name="button - disabled"/>
+                                        </userDefinedRuntimeAttribute>
+                                    </userDefinedRuntimeAttributes>
                                     <connections>
                                         <action selector="newEventPressed:" destination="v9b-wE-q9L" eventType="touchUpOutside" id="prp-rC-WBJ"/>
                                         <segue destination="Ltx-xd-qSj" kind="show" identifier="newTonightsBill" id="9a8-44-zBn"/>
@@ -184,36 +193,52 @@
                         <rect key="frame" x="0.0" y="0.0" width="375" height="812"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <color key="backgroundColor" red="0.75745260715484619" green="0.83339643478393555" blue="0.92594647407531738" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
-                        <view key="tableHeaderView" contentMode="scaleToFill" restorationIdentifier="MCSharedBillHeaderView" id="eaE-b1-r5K" customClass="UITableViewHeaderFooterView">
+                        <view key="tableHeaderView" contentMode="scaleToFill" restorationIdentifier="MCSharedBillHeaderView" preservesSuperviewLayoutMargins="YES" id="eaE-b1-r5K" customClass="UITableViewHeaderFooterView">
                             <rect key="frame" x="0.0" y="0.0" width="375" height="70"/>
                             <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                             <subviews>
-                                <button contentMode="scaleToFill" restorationIdentifier="addPaymentButton" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="system" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="x8t-7z-SNG">
-                                    <rect key="frame" x="20" y="20" width="92" height="30"/>
-                                    <color key="backgroundColor" red="0.75686274509803919" green="0.83529411764705885" blue="0.92549019607843142" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                                <button contentMode="redraw" restorationIdentifier="addPaymentButton" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="system" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="x8t-7z-SNG" customClass="MCRoundedButton">
+                                    <rect key="frame" x="20" y="20" width="95" height="30"/>
+                                    <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                     <accessibility key="accessibilityConfiguration" identifier="Add Payment"/>
                                     <constraints>
                                         <constraint firstAttribute="width" relation="greaterThanOrEqual" constant="92" id="pvF-EA-v7U"/>
                                     </constraints>
-                                    <fontDescription key="fontDescription" type="system" pointSize="15"/>
+                                    <fontDescription key="fontDescription" type="system" weight="semibold" pointSize="15"/>
                                     <state key="normal" title="Add payment">
                                         <color key="titleShadowColor" red="0.5" green="0.5" blue="0.5" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                                     </state>
+                                    <userDefinedRuntimeAttributes>
+                                        <userDefinedRuntimeAttribute type="color" keyPath="normalBackgroundColor">
+                                            <color key="value" name="button - enabled"/>
+                                        </userDefinedRuntimeAttribute>
+                                        <userDefinedRuntimeAttribute type="color" keyPath="highlightedBackgroundColor">
+                                            <color key="value" name="button - disabled"/>
+                                        </userDefinedRuntimeAttribute>
+                                    </userDefinedRuntimeAttributes>
                                     <connections>
                                         <action selector="addPaymentPressed:" destination="iz5-ZP-pZr" eventType="touchUpInside" id="ber-nU-3oF"/>
                                     </connections>
                                 </button>
-                                <button contentMode="scaleToFill" restorationIdentifier="solveBillButton" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="system" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="Prv-KL-M67">
+                                <button contentMode="redraw" restorationIdentifier="solveBillButton" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="system" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="Prv-KL-M67" customClass="MCRoundedButton">
                                     <rect key="frame" x="263" y="20" width="92" height="30"/>
-                                    <color key="backgroundColor" red="0.75686274509803919" green="0.83529411764705885" blue="0.92549019607843142" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                                    <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                     <accessibility key="accessibilityConfiguration" identifier="Solve"/>
                                     <constraints>
                                         <constraint firstAttribute="width" constant="92" id="zEE-fy-gT6"/>
                                     </constraints>
-                                    <fontDescription key="fontDescription" type="system" pointSize="15"/>
+                                    <fontDescription key="fontDescription" type="system" weight="semibold" pointSize="15"/>
                                     <state key="normal" title="Solve">
                                         <color key="titleShadowColor" red="0.5" green="0.5" blue="0.5" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                                     </state>
+                                    <userDefinedRuntimeAttributes>
+                                        <userDefinedRuntimeAttribute type="color" keyPath="normalBackgroundColor">
+                                            <color key="value" name="button - enabled"/>
+                                        </userDefinedRuntimeAttribute>
+                                        <userDefinedRuntimeAttribute type="color" keyPath="highlightedBackgroundColor">
+                                            <color key="value" name="button - disabled"/>
+                                        </userDefinedRuntimeAttribute>
+                                    </userDefinedRuntimeAttributes>
                                     <connections>
                                         <action selector="solveButtonPressed:" destination="iz5-ZP-pZr" eventType="touchUpInside" id="fcI-KU-HYR"/>
                                     </connections>
@@ -471,23 +496,23 @@
                                 </connections>
                             </tableViewCell>
                             <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" preservesSuperviewLayoutMargins="YES" selectionStyle="default" indentationWidth="10" reuseIdentifier="NotificationsCountTableViewCell" id="P8J-qh-17v" customClass="NotificationsCountTableViewCell" customModule="We_all_pay" customModuleProvider="target">
-                                <rect key="frame" x="0.0" y="90.666667938232422" width="375" height="41.666667938232422"/>
+                                <rect key="frame" x="0.0" y="90.666667938232422" width="375" height="71.333335876464844"/>
                                 <autoresizingMask key="autoresizingMask"/>
                                 <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" preservesSuperviewLayoutMargins="YES" insetsLayoutMarginsFromSafeArea="NO" tableViewCell="P8J-qh-17v" id="sUP-wJ-H4Y">
-                                    <rect key="frame" x="0.0" y="0.0" width="375" height="41.666667938232422"/>
+                                    <rect key="frame" x="0.0" y="0.0" width="375" height="71.333335876464844"/>
                                     <autoresizingMask key="autoresizingMask"/>
                                     <subviews>
                                         <stackView opaque="NO" contentMode="scaleToFill" distribution="equalSpacing" alignment="center" spacing="6" translatesAutoresizingMaskIntoConstraints="NO" id="JAb-jy-84u">
-                                            <rect key="frame" x="20" y="11.000000000000002" width="335" height="20.666666666666671"/>
+                                            <rect key="frame" x="20" y="11.000000000000004" width="335" height="50.333333333333343"/>
                                             <subviews>
                                                 <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Notifications" textAlignment="natural" lineBreakMode="tailTruncation" numberOfLines="0" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="YPb-Py-Acz">
-                                                    <rect key="frame" x="0.0" y="0.33333333333333393" width="164.66666666666666" height="20.333333333333329"/>
+                                                    <rect key="frame" x="0.0" y="14.999999999999998" width="164.66666666666666" height="20.333333333333329"/>
                                                     <fontDescription key="fontDescription" type="system" weight="thin" pointSize="17"/>
                                                     <nil key="textColor"/>
                                                     <nil key="highlightedColor"/>
                                                 </label>
-                                                <view clipsSubviews="YES" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" horizontalCompressionResistancePriority="751" verticalCompressionResistancePriority="751" translatesAutoresizingMaskIntoConstraints="NO" id="PXr-ct-Ja1" customClass="MCUnreadNotificationsCountView">
-                                                    <rect key="frame" x="314.66666666666669" y="0.33333333333333393" width="20.333333333333314" height="20"/>
+                                                <view clipsSubviews="YES" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" horizontalCompressionResistancePriority="751" verticalCompressionResistancePriority="751" ambiguous="YES" translatesAutoresizingMaskIntoConstraints="NO" id="PXr-ct-Ja1" customClass="MCUnreadNotificationsCountView">
+                                                    <rect key="frame" x="285" y="0.3333333333333357" width="50" height="50"/>
                                                     <color key="backgroundColor" systemColor="systemBackgroundColor"/>
                                                     <userDefinedRuntimeAttributes>
                                                         <userDefinedRuntimeAttribute type="color" keyPath="textColor">
@@ -611,16 +636,19 @@
                             <rect key="frame" x="0.0" y="0.0" width="375" height="50"/>
                             <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                             <subviews>
-                                <button contentMode="scaleToFill" restorationIdentifier="sendButton" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="system" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="ROW-vp-ekh">
-                                    <rect key="frame" x="139" y="20" width="97" height="30"/>
-                                    <color key="backgroundColor" red="0.75686274509803919" green="0.83529411764705885" blue="0.92549019607843142" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
-                                    <constraints>
-                                        <constraint firstAttribute="width" constant="97" id="BT0-AI-MoG"/>
-                                    </constraints>
-                                    <fontDescription key="fontDescription" type="system" pointSize="15"/>
-                                    <state key="normal" title="send email">
-                                        <color key="titleShadowColor" red="0.5" green="0.5" blue="0.5" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
-                                    </state>
+                                <button contentMode="redraw" restorationIdentifier="sendButton" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="system" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="ROW-vp-ekh" customClass="MCRoundedButton">
+                                    <rect key="frame" x="149" y="20" width="77" height="30"/>
+                                    <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                                    <fontDescription key="fontDescription" type="system" weight="semibold" pointSize="15"/>
+                                    <state key="normal" title="send email"/>
+                                    <userDefinedRuntimeAttributes>
+                                        <userDefinedRuntimeAttribute type="color" keyPath="normalBackgroundColor">
+                                            <color key="value" name="button - enabled"/>
+                                        </userDefinedRuntimeAttribute>
+                                        <userDefinedRuntimeAttribute type="color" keyPath="highlightedBackgroundColor">
+                                            <color key="value" name="button - disabled"/>
+                                        </userDefinedRuntimeAttribute>
+                                    </userDefinedRuntimeAttributes>
                                     <connections>
                                         <action selector="sendAsEmailButtonPressed:" destination="Wal-rm-jmd" eventType="touchUpInside" id="ykl-BS-3Wc"/>
                                     </connections>
@@ -833,30 +861,46 @@
                                         <outlet property="delegate" destination="AUO-87-nmq" id="I8H-Dv-Zcm"/>
                                     </connections>
                                 </textField>
-                                <button opaque="NO" contentMode="scaleToFill" placeholderIntrinsicWidth="127" placeholderIntrinsicHeight="30" restorationIdentifier="addPersonButton" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="system" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="gfv-ln-Tgv">
+                                <button opaque="NO" contentMode="redraw" placeholderIntrinsicWidth="127" placeholderIntrinsicHeight="30" restorationIdentifier="addPersonButton" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="gfv-ln-Tgv" customClass="MCRoundedButton">
                                     <rect key="frame" x="20" y="64" width="127" height="30"/>
                                     <color key="backgroundColor" red="0.75686274509803919" green="0.83529411764705885" blue="0.92549019607843142" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                                     <constraints>
                                         <constraint firstAttribute="width" constant="127" id="Lmg-bJ-KJf"/>
                                     </constraints>
-                                    <fontDescription key="fontDescription" type="system" pointSize="15"/>
+                                    <fontDescription key="fontDescription" type="system" weight="semibold" pointSize="15"/>
                                     <state key="normal" title="Add person">
                                         <color key="titleShadowColor" red="0.5" green="0.5" blue="0.5" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                                     </state>
+                                    <userDefinedRuntimeAttributes>
+                                        <userDefinedRuntimeAttribute type="color" keyPath="normalBackgroundColor">
+                                            <color key="value" name="button - enabled"/>
+                                        </userDefinedRuntimeAttribute>
+                                        <userDefinedRuntimeAttribute type="color" keyPath="highlightedBackgroundColor">
+                                            <color key="value" name="button - disabled"/>
+                                        </userDefinedRuntimeAttribute>
+                                    </userDefinedRuntimeAttributes>
                                     <connections>
                                         <action selector="addPersonButton:" destination="AUO-87-nmq" eventType="touchUpInside" id="ebu-qs-nCl"/>
                                         <segue destination="nkD-cc-jGs" kind="presentation" identifier="openEditPerson" id="k2G-tm-5CJ"/>
                                     </connections>
                                 </button>
-                                <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="system" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="asZ-Na-2wd">
+                                <button opaque="NO" contentMode="redraw" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="asZ-Na-2wd" customClass="MCRoundedButton">
                                     <rect key="frame" x="228" y="64" width="127" height="30"/>
                                     <constraints>
                                         <constraint firstAttribute="width" constant="127" id="xIl-jG-WPs"/>
                                     </constraints>
-                                    <fontDescription key="fontDescription" type="system" pointSize="15"/>
+                                    <fontDescription key="fontDescription" type="system" weight="semibold" pointSize="15"/>
                                     <state key="normal" title="Contacts">
                                         <color key="titleShadowColor" red="0.5" green="0.5" blue="0.5" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                                     </state>
+                                    <userDefinedRuntimeAttributes>
+                                        <userDefinedRuntimeAttribute type="color" keyPath="normalBackgroundColor">
+                                            <color key="value" name="button - enabled"/>
+                                        </userDefinedRuntimeAttribute>
+                                        <userDefinedRuntimeAttribute type="color" keyPath="highlightedBackgroundColor">
+                                            <color key="value" name="button - disabled"/>
+                                        </userDefinedRuntimeAttribute>
+                                    </userDefinedRuntimeAttributes>
                                     <connections>
                                         <action selector="addressBookButton:" destination="AUO-87-nmq" eventType="touchUpInside" id="fqX-Eq-4hv"/>
                                     </connections>
@@ -1018,12 +1062,21 @@
                                                                 <fontDescription key="fontDescription" type="system" pointSize="14"/>
                                                                 <textInputTraits key="textInputTraits" autocorrectionType="no" keyboardType="emailAddress" textContentType="email"/>
                                                             </textField>
-                                                            <button opaque="NO" contentMode="scaleToFill" restorationIdentifier="selectEmailAddressButton" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="system" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="BUE-es-n4t">
-                                                                <rect key="frame" x="29" y="282" width="142" height="30"/>
-                                                                <fontDescription key="fontDescription" type="system" pointSize="15"/>
+                                                            <button opaque="NO" contentMode="redraw" restorationIdentifier="selectEmailAddressButton" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="system" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="BUE-es-n4t" customClass="MCRoundedButton">
+                                                                <rect key="frame" x="25.333333333333329" y="282" width="149" height="30"/>
+                                                                <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                                                                <fontDescription key="fontDescription" type="system" weight="semibold" pointSize="15"/>
                                                                 <state key="normal" title="Select email address">
                                                                     <color key="titleShadowColor" red="0.5" green="0.5" blue="0.5" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                                                                 </state>
+                                                                <userDefinedRuntimeAttributes>
+                                                                    <userDefinedRuntimeAttribute type="color" keyPath="normalBackgroundColor">
+                                                                        <color key="value" name="button - enabled"/>
+                                                                    </userDefinedRuntimeAttribute>
+                                                                    <userDefinedRuntimeAttribute type="color" keyPath="highlightedBackgroundColor">
+                                                                        <color key="value" name="button - disabled"/>
+                                                                    </userDefinedRuntimeAttribute>
+                                                                </userDefinedRuntimeAttributes>
                                                                 <connections>
                                                                     <action selector="selectEmailAddressPressed:" destination="5gk-H5-rXD" eventType="touchUpInside" id="xNV-Tg-VTq"/>
                                                                 </connections>
@@ -1172,16 +1225,16 @@
                             <rect key="frame" x="0.0" y="0.0" width="375" height="340"/>
                             <subviews>
                                 <stackView opaque="NO" contentMode="scaleToFill" axis="vertical" distribution="equalSpacing" spacing="8" translatesAutoresizingMaskIntoConstraints="NO" id="qs4-hY-OKe" userLabel="Main Stack View">
-                                    <rect key="frame" x="0.0" y="10" width="395" height="330"/>
+                                    <rect key="frame" x="0.0" y="10" width="445" height="330"/>
                                     <subviews>
                                         <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="dtw-1h-URy">
-                                            <rect key="frame" x="0.0" y="0.0" width="395" height="244"/>
+                                            <rect key="frame" x="0.0" y="0.0" width="445" height="244"/>
                                             <subviews>
                                                 <stackView opaque="NO" contentMode="scaleToFill" axis="vertical" distribution="equalSpacing" spacing="8" translatesAutoresizingMaskIntoConstraints="NO" id="7B7-Y2-HRx" userLabel="Payment Stack View">
-                                                    <rect key="frame" x="10" y="0.0" width="375" height="244"/>
+                                                    <rect key="frame" x="20" y="0.0" width="405" height="244"/>
                                                     <subviews>
                                                         <stackView opaque="NO" contentMode="scaleToFill" alignment="center" spacing="8" translatesAutoresizingMaskIntoConstraints="NO" id="wwH-1w-p3i">
-                                                            <rect key="frame" x="0.0" y="0.0" width="375" height="60"/>
+                                                            <rect key="frame" x="0.0" y="0.0" width="405" height="60"/>
                                                             <subviews>
                                                                 <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="0bu-A5-ptg">
                                                                     <rect key="frame" x="0.0" y="0.0" width="70" height="60"/>
@@ -1204,7 +1257,7 @@
                                                                     </constraints>
                                                                 </view>
                                                                 <textField opaque="NO" clipsSubviews="YES" contentMode="scaleToFill" horizontalCompressionResistancePriority="749" restorationIdentifier="payerField" contentHorizontalAlignment="left" contentVerticalAlignment="center" borderStyle="roundedRect" placeholder="Who paid?" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="Gtj-b7-bzJ">
-                                                                    <rect key="frame" x="78" y="13" width="297" height="34"/>
+                                                                    <rect key="frame" x="78" y="13" width="327" height="34"/>
                                                                     <fontDescription key="fontDescription" type="system" pointSize="14"/>
                                                                     <textInputTraits key="textInputTraits" autocapitalizationType="sentences"/>
                                                                 </textField>
@@ -1212,12 +1265,12 @@
                                                             <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                                         </stackView>
                                                         <stackView opaque="NO" contentMode="scaleToFill" alignment="center" spacing="8" translatesAutoresizingMaskIntoConstraints="NO" id="tYf-um-kE6">
-                                                            <rect key="frame" x="0.0" y="68" width="375" height="60"/>
+                                                            <rect key="frame" x="0.0" y="68" width="405" height="60"/>
                                                             <subviews>
-                                                                <view contentMode="scaleToFill" ambiguous="YES" translatesAutoresizingMaskIntoConstraints="NO" id="dXS-pO-7Ud">
+                                                                <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="dXS-pO-7Ud">
                                                                     <rect key="frame" x="0.0" y="0.0" width="70" height="60"/>
                                                                     <subviews>
-                                                                        <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" ambiguous="YES" translatesAutoresizingMaskIntoConstraints="NO" id="q95-mM-YFr">
+                                                                        <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" translatesAutoresizingMaskIntoConstraints="NO" id="q95-mM-YFr">
                                                                             <rect key="frame" x="10" y="0.0" width="60" height="60"/>
                                                                             <constraints>
                                                                                 <constraint firstAttribute="width" priority="999" constant="60" id="eeJ-qN-QN1"/>
@@ -1234,14 +1287,24 @@
                                                                         <constraint firstItem="q95-mM-YFr" firstAttribute="top" secondItem="dXS-pO-7Ud" secondAttribute="top" id="rwi-vD-PGr"/>
                                                                     </constraints>
                                                                 </view>
-                                                                <view contentMode="scaleToFill" ambiguous="YES" translatesAutoresizingMaskIntoConstraints="NO" id="Nap-zl-JCf">
-                                                                    <rect key="frame" x="78" y="0.0" width="297" height="60"/>
+                                                                <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="Nap-zl-JCf">
+                                                                    <rect key="frame" x="78" y="0.0" width="327" height="60"/>
                                                                     <subviews>
-                                                                        <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="system" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="wM4-4I-DFk">
-                                                                            <rect key="frame" x="6" y="0.0" width="63" height="60"/>
+                                                                        <button opaque="NO" contentMode="redraw" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="system" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="wM4-4I-DFk" customClass="MCRoundedButton">
+                                                                            <rect key="frame" x="6" y="15" width="66" height="30"/>
+                                                                            <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                                                                            <fontDescription key="fontDescription" type="system" weight="semibold" pointSize="15"/>
                                                                             <state key="normal" title="Category">
-                                                                                <color key="titleColor" name="button - enabled"/>
+                                                                                <color key="titleColor" systemColor="systemBackgroundColor"/>
                                                                             </state>
+                                                                            <userDefinedRuntimeAttributes>
+                                                                                <userDefinedRuntimeAttribute type="color" keyPath="normalBackgroundColor">
+                                                                                    <color key="value" name="button - enabled"/>
+                                                                                </userDefinedRuntimeAttribute>
+                                                                                <userDefinedRuntimeAttribute type="color" keyPath="highlightedBackgroundColor">
+                                                                                    <color key="value" name="button - disabled"/>
+                                                                                </userDefinedRuntimeAttribute>
+                                                                            </userDefinedRuntimeAttributes>
                                                                             <connections>
                                                                                 <action selector="selectCategoryPressed:" destination="A1E-EB-xnZ" eventType="touchUpInside" id="cMf-A3-TFD"/>
                                                                             </connections>
@@ -1249,9 +1312,9 @@
                                                                     </subviews>
                                                                     <color key="backgroundColor" systemColor="systemBackgroundColor"/>
                                                                     <constraints>
-                                                                        <constraint firstItem="wM4-4I-DFk" firstAttribute="top" secondItem="Nap-zl-JCf" secondAttribute="top" id="0M4-cB-wW9"/>
-                                                                        <constraint firstAttribute="bottom" secondItem="wM4-4I-DFk" secondAttribute="bottom" id="Vpe-R1-CRS"/>
-                                                                        <constraint firstItem="wM4-4I-DFk" firstAttribute="leading" secondItem="Nap-zl-JCf" secondAttribute="leading" constant="6" id="ytF-xc-509"/>
+                                                                        <constraint firstItem="wM4-4I-DFk" firstAttribute="centerY" secondItem="Nap-zl-JCf" secondAttribute="centerY" id="rPF-Ni-U8h"/>
+                                                                        <constraint firstAttribute="trailing" relation="greaterThanOrEqual" secondItem="wM4-4I-DFk" secondAttribute="trailing" id="tor-ap-h2d"/>
+                                                                        <constraint firstItem="wM4-4I-DFk" firstAttribute="leading" secondItem="Nap-zl-JCf" secondAttribute="leading" priority="250" constant="6" id="ytF-xc-509"/>
                                                                     </constraints>
                                                                 </view>
                                                             </subviews>
@@ -1261,7 +1324,7 @@
                                                             </constraints>
                                                         </stackView>
                                                         <stackView opaque="NO" contentMode="scaleToFill" alignment="center" spacing="8" translatesAutoresizingMaskIntoConstraints="NO" id="WrE-cx-6eT">
-                                                            <rect key="frame" x="0.0" y="136" width="375" height="50"/>
+                                                            <rect key="frame" x="0.0" y="136" width="405" height="50"/>
                                                             <subviews>
                                                                 <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="kSi-0b-Enl">
                                                                     <rect key="frame" x="0.0" y="0.0" width="70" height="50"/>
@@ -1271,7 +1334,7 @@
                                                                     </constraints>
                                                                 </view>
                                                                 <textField opaque="NO" clipsSubviews="YES" contentMode="scaleToFill" horizontalCompressionResistancePriority="749" restorationIdentifier="itemField" contentHorizontalAlignment="left" contentVerticalAlignment="center" borderStyle="roundedRect" placeholder="What got paid?" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="Zmm-zR-L97">
-                                                                    <rect key="frame" x="78" y="8" width="297" height="34"/>
+                                                                    <rect key="frame" x="78" y="8" width="327" height="34"/>
                                                                     <fontDescription key="fontDescription" type="system" pointSize="14"/>
                                                                     <textInputTraits key="textInputTraits" autocapitalizationType="sentences"/>
                                                                 </textField>
@@ -1279,18 +1342,27 @@
                                                             <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                                         </stackView>
                                                         <stackView opaque="NO" contentMode="scaleToFill" alignment="center" spacing="8" translatesAutoresizingMaskIntoConstraints="NO" id="ePu-r4-jb2">
-                                                            <rect key="frame" x="0.0" y="194" width="375" height="50"/>
+                                                            <rect key="frame" x="0.0" y="194" width="405" height="50"/>
                                                             <subviews>
                                                                 <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="pvb-lW-snJ">
                                                                     <rect key="frame" x="0.0" y="0.0" width="70" height="50"/>
                                                                     <subviews>
-                                                                        <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="system" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="BiQ-RU-tkG">
-                                                                            <rect key="frame" x="33" y="0.0" width="37" height="50"/>
-                                                                            <fontDescription key="fontDescription" type="system" pointSize="15"/>
+                                                                        <button opaque="NO" contentMode="redraw" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="system" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="BiQ-RU-tkG" customClass="MCRoundedButton">
+                                                                            <rect key="frame" x="31" y="10" width="39" height="30"/>
+                                                                            <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                                                                            <fontDescription key="fontDescription" type="system" weight="semibold" pointSize="15"/>
                                                                             <state key="normal" title="€$£¥">
-                                                                                <color key="titleColor" name="button - enabled"/>
+                                                                                <color key="titleColor" systemColor="secondarySystemBackgroundColor"/>
                                                                                 <color key="titleShadowColor" red="0.5" green="0.5" blue="0.5" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                                                                             </state>
+                                                                            <userDefinedRuntimeAttributes>
+                                                                                <userDefinedRuntimeAttribute type="color" keyPath="normalBackgroundColor">
+                                                                                    <color key="value" name="button - enabled"/>
+                                                                                </userDefinedRuntimeAttribute>
+                                                                                <userDefinedRuntimeAttribute type="color" keyPath="highlightedBackgroundColor">
+                                                                                    <color key="value" name="button - disabled"/>
+                                                                                </userDefinedRuntimeAttribute>
+                                                                            </userDefinedRuntimeAttributes>
                                                                             <connections>
                                                                                 <action selector="currencySelectionPressed:" destination="A1E-EB-xnZ" eventType="touchUpInside" id="O1r-3T-ctd"/>
                                                                                 <segue destination="fIg-ri-deX" kind="presentation" identifier="openSelectCurrency" id="EWs-3n-BSY"/>
@@ -1300,13 +1372,13 @@
                                                                     <color key="backgroundColor" systemColor="systemBackgroundColor"/>
                                                                     <constraints>
                                                                         <constraint firstAttribute="width" constant="70" id="4CL-3y-rnE"/>
-                                                                        <constraint firstAttribute="bottom" secondItem="BiQ-RU-tkG" secondAttribute="bottom" id="SUe-uo-Uxc"/>
-                                                                        <constraint firstItem="BiQ-RU-tkG" firstAttribute="top" secondItem="pvb-lW-snJ" secondAttribute="top" id="rvv-eY-rOj"/>
+                                                                        <constraint firstItem="BiQ-RU-tkG" firstAttribute="centerY" secondItem="pvb-lW-snJ" secondAttribute="centerY" id="Mpo-me-2Tp"/>
+                                                                        <constraint firstItem="BiQ-RU-tkG" firstAttribute="leading" relation="greaterThanOrEqual" secondItem="pvb-lW-snJ" secondAttribute="leading" id="Zwy-fh-J8H"/>
                                                                         <constraint firstAttribute="trailing" secondItem="BiQ-RU-tkG" secondAttribute="trailing" id="wee-qx-ZhG"/>
                                                                     </constraints>
                                                                 </view>
                                                                 <textField opaque="NO" clipsSubviews="YES" contentMode="scaleToFill" horizontalCompressionResistancePriority="749" restorationIdentifier="moneyField" contentHorizontalAlignment="left" contentVerticalAlignment="center" borderStyle="roundedRect" placeholder="How much is spent?" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="ZTv-D4-TBc">
-                                                                    <rect key="frame" x="78" y="8" width="297" height="34"/>
+                                                                    <rect key="frame" x="78" y="8" width="327" height="34"/>
                                                                     <fontDescription key="fontDescription" type="system" pointSize="14"/>
                                                                     <textInputTraits key="textInputTraits" spellCheckingType="no" keyboardType="decimalPad"/>
                                                                 </textField>
@@ -1321,17 +1393,17 @@
                                             </subviews>
                                             <color key="backgroundColor" systemColor="systemBackgroundColor"/>
                                             <constraints>
-                                                <constraint firstItem="7B7-Y2-HRx" firstAttribute="leading" secondItem="dtw-1h-URy" secondAttribute="leading" constant="10" id="0W1-yx-qlK"/>
+                                                <constraint firstItem="7B7-Y2-HRx" firstAttribute="leading" secondItem="dtw-1h-URy" secondAttribute="leading" constant="20" symbolic="YES" id="0W1-yx-qlK"/>
                                                 <constraint firstItem="7B7-Y2-HRx" firstAttribute="top" secondItem="dtw-1h-URy" secondAttribute="top" id="2L8-77-GY7"/>
-                                                <constraint firstAttribute="trailing" secondItem="7B7-Y2-HRx" secondAttribute="trailing" constant="10" id="9Aw-h7-ScY"/>
+                                                <constraint firstAttribute="trailing" secondItem="7B7-Y2-HRx" secondAttribute="trailing" constant="20" symbolic="YES" id="9Aw-h7-ScY"/>
                                                 <constraint firstAttribute="bottom" secondItem="7B7-Y2-HRx" secondAttribute="bottom" id="Wvf-cJ-4Ku"/>
                                             </constraints>
                                         </view>
                                         <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="iF7-Nz-3na">
-                                            <rect key="frame" x="0.0" y="252" width="395" height="50"/>
+                                            <rect key="frame" x="0.0" y="252" width="445" height="50"/>
                                             <subviews>
                                                 <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="bbf-I9-yWg" customClass="GADBannerView">
-                                                    <rect key="frame" x="37.666666666666657" y="0.0" width="320" height="50"/>
+                                                    <rect key="frame" x="62.666666666666657" y="0.0" width="320" height="50"/>
                                                     <color key="backgroundColor" systemColor="systemBackgroundColor"/>
                                                     <constraints>
                                                         <constraint firstAttribute="height" constant="50" id="Wme-93-e4f"/>
@@ -1347,10 +1419,10 @@
                                             </constraints>
                                         </view>
                                         <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="e6E-Uh-FE0">
-                                            <rect key="frame" x="0.0" y="310" width="395" height="20"/>
+                                            <rect key="frame" x="0.0" y="310" width="445" height="20"/>
                                             <subviews>
-                                                <label opaque="NO" clipsSubviews="YES" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" horizontalCompressionResistancePriority="749" ambiguous="YES" restorationIdentifier="dateLabel" text="Presence on payment" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="mh0-5W-fIa">
-                                                    <rect key="frame" x="94" y="2" width="148.66666666666663" height="18"/>
+                                                <label opaque="NO" clipsSubviews="YES" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" horizontalCompressionResistancePriority="749" restorationIdentifier="dateLabel" text="Presence on payment" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="mh0-5W-fIa">
+                                                    <rect key="frame" x="103.99999999999999" y="2" width="148.66666666666663" height="18"/>
                                                     <fontDescription key="fontDescription" type="system" pointSize="15"/>
                                                     <color key="textColor" red="0.0" green="0.0" blue="0.0" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                                                     <nil key="highlightedColor"/>
@@ -1358,7 +1430,9 @@
                                             </subviews>
                                             <color key="backgroundColor" systemColor="systemBackgroundColor"/>
                                             <constraints>
+                                                <constraint firstAttribute="trailing" relation="greaterThanOrEqual" secondItem="mh0-5W-fIa" secondAttribute="trailing" constant="20" symbolic="YES" id="0gQ-XZ-fIW"/>
                                                 <constraint firstAttribute="height" constant="20" id="0k0-DZ-8DT"/>
+                                                <constraint firstItem="mh0-5W-fIa" firstAttribute="leading" secondItem="e6E-Uh-FE0" secondAttribute="leading" priority="1" constant="94" id="U5C-zb-W0C"/>
                                                 <constraint firstAttribute="bottom" secondItem="mh0-5W-fIa" secondAttribute="bottom" id="spc-il-hyT"/>
                                             </constraints>
                                         </view>
@@ -1743,24 +1817,12 @@
         </scene>
     </scenes>
     <designables>
-        <designable name="PXr-ct-Ja1">
-            <size key="intrinsicContentSize" width="20.287109375" height="20.287109375"/>
-        </designable>
-        <designable name="Y6i-cu-NDo">
-            <size key="intrinsicContentSize" width="480" height="480"/>
-        </designable>
-        <designable name="ZjT-qg-OGx">
-            <size key="intrinsicContentSize" width="480" height="480"/>
-        </designable>
         <designable name="jMQ-DN-rdu">
             <size key="intrinsicContentSize" width="1219.2000071055095" height="1219.2000071055095"/>
         </designable>
-        <designable name="rmI-7G-oMX">
-            <size key="intrinsicContentSize" width="480" height="480"/>
-        </designable>
     </designables>
     <inferredMetricsTieBreakers>
-        <segue reference="AFT-dx-z90"/>
+        <segue reference="EWs-3n-BSY"/>
         <segue reference="eZd-I3-t8D"/>
         <segue reference="C0F-pM-cfm"/>
         <segue reference="6AC-aI-bIB"/>
@@ -1770,6 +1832,9 @@
         <image name="barbutton - done" width="22" height="22"/>
         <image name="circularPictureInCodeDemo.png" width="1219.199951171875" height="1219.199951171875"/>
         <image name="iScreen button" width="26" height="26"/>
+        <namedColor name="button - disabled">
+            <color red="1" green="0.87058823529411766" blue="0.89411764705882357" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+        </namedColor>
         <namedColor name="button - enabled">
             <color red="1" green="0.52941176470588236" blue="0.67843137254901964" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
         </namedColor>
@@ -1778,6 +1843,9 @@
         </namedColor>
         <systemColor name="secondaryLabelColor">
             <color red="0.23529411764705882" green="0.23529411764705882" blue="0.2627450980392157" alpha="0.59999999999999998" colorSpace="custom" customColorSpace="sRGB"/>
+        </systemColor>
+        <systemColor name="secondarySystemBackgroundColor">
+            <color red="0.94901960784313721" green="0.94901960784313721" blue="0.96862745098039216" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
         </systemColor>
         <systemColor name="systemBackgroundColor">
             <color white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>

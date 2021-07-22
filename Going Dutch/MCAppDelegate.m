@@ -13,6 +13,8 @@
 #import "MCAllTripsTableViewController.h"
 #import "MCPaymentViewController.h"
 
+#import "MCRoundedButton.h"
+
 #import "MCAllTripsTableViewController-iPad.h"
 
 #import "MCWeAllPayStoreController.h"
@@ -61,6 +63,14 @@
     UINavigationBar.appearance.tintColor = [UIColor colorNamed:@"button - enabled"];
     [[UINavigationBar appearance] setTitleTextAttributes:@{NSForegroundColorAttributeName: [UIColor whiteColor]}];
     [UIButton.appearance setTitleColor:[UIColor colorNamed:@"button - enabled"] forState:UIControlStateNormal];
+    if (@available(iOS 13.0, *)) {
+        [MCRoundedButton.appearance setTitleColor:UIColor.systemBackgroundColor forState:UIControlStateNormal];
+        [MCRoundedButton.appearance setTitleColor:UIColor.systemBackgroundColor forState:UIControlStateHighlighted];
+    } else {
+        [MCRoundedButton.appearance setTitleColor:UIColor.whiteColor forState:UIControlStateNormal];
+        [MCRoundedButton.appearance setTitleColor:UIColor.whiteColor forState:UIControlStateHighlighted];
+    }
+
     [UIButton.appearance setTitleColor:[UIColor colorNamed:@"button - disabled"] forState:UIControlStateDisabled];
     UIBarButtonItem.appearance.tintColor = [UIColor colorNamed:@"button - enabled"];
     UINavigationBar.appearance.barStyle = UIBarStyleBlackTranslucent;
