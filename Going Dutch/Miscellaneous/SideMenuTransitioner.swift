@@ -293,6 +293,12 @@ final class SwipeLeftDissmissableNavigationController: UINavigationController, S
     
     // MARK: UIViewController
     
+    override func loadView() {
+        super.loadView()
+        
+        self.view.autoresizingMask = []
+    }
+    
     override func viewDidLoad() {
         super.viewDidLoad()
         
