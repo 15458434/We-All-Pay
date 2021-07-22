@@ -293,14 +293,16 @@ final class SwipeLeftDissmissableNavigationController: UINavigationController, S
     
     // MARK: UIViewController
     
+    override func loadView() {
+        super.loadView()
+        
+        self.view.autoresizingMask = []
+    }
+    
     override func viewDidLoad() {
         super.viewDidLoad()
         
         dismissInteractionController = SideMenuDismissInteractionController(with: self)
-    }
-    
-    override func viewWillTransition(to size: CGSize, with coordinator: UIViewControllerTransitionCoordinator) {
-        super.viewWillTransition(to: size, with: coordinator)
     }
     
     // MARK: UIResponder
