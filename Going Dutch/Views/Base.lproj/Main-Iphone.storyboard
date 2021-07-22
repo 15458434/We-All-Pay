@@ -636,16 +636,18 @@
                             <rect key="frame" x="0.0" y="0.0" width="375" height="50"/>
                             <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                             <subviews>
-                                <button contentMode="scaleToFill" restorationIdentifier="sendButton" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="system" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="ROW-vp-ekh">
-                                    <rect key="frame" x="139" y="20" width="97" height="30"/>
-                                    <color key="backgroundColor" red="0.75686274509803919" green="0.83529411764705885" blue="0.92549019607843142" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
-                                    <constraints>
-                                        <constraint firstAttribute="width" constant="97" id="BT0-AI-MoG"/>
-                                    </constraints>
-                                    <fontDescription key="fontDescription" type="system" pointSize="15"/>
-                                    <state key="normal" title="send email">
-                                        <color key="titleShadowColor" red="0.5" green="0.5" blue="0.5" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
-                                    </state>
+                                <button contentMode="redraw" restorationIdentifier="sendButton" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="system" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="ROW-vp-ekh" customClass="MCRoundedButton">
+                                    <rect key="frame" x="150.66666666666666" y="20" width="74" height="30"/>
+                                    <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                                    <state key="normal" title="send email"/>
+                                    <userDefinedRuntimeAttributes>
+                                        <userDefinedRuntimeAttribute type="color" keyPath="normalBackgroundColor">
+                                            <color key="value" name="button - enabled"/>
+                                        </userDefinedRuntimeAttribute>
+                                        <userDefinedRuntimeAttribute type="color" keyPath="highlightedBackgroundColor">
+                                            <color key="value" name="button - disabled"/>
+                                        </userDefinedRuntimeAttribute>
+                                    </userDefinedRuntimeAttributes>
                                     <connections>
                                         <action selector="sendAsEmailButtonPressed:" destination="Wal-rm-jmd" eventType="touchUpInside" id="ykl-BS-3Wc"/>
                                     </connections>
@@ -1784,9 +1786,6 @@
         </scene>
     </scenes>
     <designables>
-        <designable name="ZjT-qg-OGx">
-            <size key="intrinsicContentSize" width="480" height="480"/>
-        </designable>
         <designable name="jMQ-DN-rdu">
             <size key="intrinsicContentSize" width="1219.2000071055095" height="1219.2000071055095"/>
         </designable>
