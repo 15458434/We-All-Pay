@@ -497,112 +497,6 @@
             </objects>
             <point key="canvasLocation" x="3404" y="-808"/>
         </scene>
-        <!--Info Screen Table View Controller-->
-        <scene sceneID="o8z-Nc-xfe">
-            <objects>
-                <tableViewController storyboardIdentifier="MCiScreenTableViewController_iPad" useStoryboardIdentifierAsRestorationIdentifier="YES" id="zKy-vN-cPg" customClass="InfoScreenTableViewController" customModule="We_all_pay" customModuleProvider="target" sceneMemberID="viewController">
-                    <tableView key="view" clipsSubviews="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" dataMode="prototypes" style="grouped" separatorStyle="default" rowHeight="44" sectionHeaderHeight="10" sectionFooterHeight="10" id="0ro-oF-XIG">
-                        <rect key="frame" x="0.0" y="0.0" width="320" height="480"/>
-                        <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
-                        <color key="backgroundColor" red="0.93725490199999995" green="0.93725490199999995" blue="0.95686274510000002" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
-                        <prototypes>
-                            <tableViewCell contentMode="scaleToFill" restorationIdentifier="MCTwoLabelIscreenTableViewCell" selectionStyle="none" hidesAccessoryWhenEditing="NO" indentationLevel="1" indentationWidth="0.0" reuseIdentifier="MCTwoLabelIscreenTableViewCell" id="Pug-dk-lX2" customClass="MCTwoLabelIscreenTableViewCell" customModule="We_all_pay" customModuleProvider="target">
-                                <rect key="frame" x="0.0" y="49.5" width="320" height="44"/>
-                                <autoresizingMask key="autoresizingMask"/>
-                                <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" tableViewCell="Pug-dk-lX2" id="nuv-1N-bnt">
-                                    <rect key="frame" x="0.0" y="0.0" width="320" height="44"/>
-                                    <autoresizingMask key="autoresizingMask"/>
-                                    <subviews>
-                                        <label opaque="NO" clipsSubviews="YES" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Label" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="3tl-Bm-2JN">
-                                            <rect key="frame" x="20" y="12" width="210" height="20.5"/>
-                                            <fontDescription key="fontDescription" type="system" weight="thin" pointSize="17"/>
-                                            <nil key="highlightedColor"/>
-                                        </label>
-                                        <label opaque="NO" clipsSubviews="YES" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Label" textAlignment="right" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="mlf-8m-v7R">
-                                            <rect key="frame" x="238" y="12" width="62" height="20.5"/>
-                                            <constraints>
-                                                <constraint firstAttribute="width" constant="62" id="wtL-cK-oEw"/>
-                                            </constraints>
-                                            <fontDescription key="fontDescription" type="system" weight="thin" pointSize="17"/>
-                                            <nil key="highlightedColor"/>
-                                        </label>
-                                    </subviews>
-                                    <constraints>
-                                        <constraint firstAttribute="centerY" secondItem="3tl-Bm-2JN" secondAttribute="centerY" id="Cqf-r2-G2B"/>
-                                        <constraint firstAttribute="trailing" secondItem="mlf-8m-v7R" secondAttribute="trailing" constant="20" id="LvP-Of-FJh"/>
-                                        <constraint firstItem="mlf-8m-v7R" firstAttribute="leading" secondItem="3tl-Bm-2JN" secondAttribute="trailing" constant="8" id="PqZ-dK-59D"/>
-                                        <constraint firstItem="mlf-8m-v7R" firstAttribute="baseline" secondItem="3tl-Bm-2JN" secondAttribute="baseline" id="ap5-5n-4ZR"/>
-                                        <constraint firstItem="3tl-Bm-2JN" firstAttribute="leading" secondItem="nuv-1N-bnt" secondAttribute="leading" constant="20" id="vcc-Rl-LZ3"/>
-                                    </constraints>
-                                </tableViewCellContentView>
-                                <connections>
-                                    <outlet property="leftLabel" destination="3tl-Bm-2JN" id="YOD-vQ-0v6"/>
-                                    <outlet property="rightLabel" destination="mlf-8m-v7R" id="DQ5-Go-ce7"/>
-                                </connections>
-                            </tableViewCell>
-                        </prototypes>
-                        <connections>
-                            <outlet property="dataSource" destination="zKy-vN-cPg" id="slc-my-ds5"/>
-                            <outlet property="delegate" destination="zKy-vN-cPg" id="8b7-ZX-Box"/>
-                        </connections>
-                    </tableView>
-                    <navigationItem key="navigationItem" id="mCr-Bz-8bX"/>
-                    <freeformSimulatedSizeMetrics key="simulatedDestinationMetrics"/>
-                    <size key="freeformSize" width="320" height="480"/>
-                </tableViewController>
-                <placeholder placeholderIdentifier="IBFirstResponder" id="hEd-8J-dBz" userLabel="First Responder" sceneMemberID="firstResponder"/>
-            </objects>
-            <point key="canvasLocation" x="1208.59375" y="641.6015625"/>
-        </scene>
-        <!--Info Screen Container View Controller-->
-        <scene sceneID="yly-yv-znR">
-            <objects>
-                <viewController storyboardIdentifier="MCiScreenRootViewController_iPad" useStoryboardIdentifierAsRestorationIdentifier="YES" id="aDp-IF-sxb" customClass="InfoScreenContainerViewController" customModule="We_all_pay" customModuleProvider="target" sceneMemberID="viewController">
-                    <layoutGuides>
-                        <viewControllerLayoutGuide type="top" id="rUh-QP-5uw"/>
-                        <viewControllerLayoutGuide type="bottom" id="tMq-is-erq"/>
-                    </layoutGuides>
-                    <view key="view" contentMode="scaleToFill" id="CEE-bk-i1E">
-                        <rect key="frame" x="0.0" y="0.0" width="320" height="460"/>
-                        <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
-                        <subviews>
-                            <label opaque="NO" clipsSubviews="YES" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Label" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="6KC-0i-Ccp">
-                                <rect key="frame" x="0.0" y="441.5" width="320" height="13.5"/>
-                                <fontDescription key="fontDescription" type="system" pointSize="11"/>
-                                <color key="textColor" red="0.38278937339782715" green="0.51381617784500122" blue="0.66400408744812012" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
-                                <color key="highlightedColor" red="1" green="1" blue="1" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
-                            </label>
-                            <containerView contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="pco-Nf-lnX">
-                                <rect key="frame" x="0.0" y="0.0" width="320" height="441.5"/>
-                                <color key="backgroundColor" red="0.0" green="0.0" blue="0.0" alpha="0.0" colorSpace="custom" customColorSpace="sRGB"/>
-                                <connections>
-                                    <segue destination="zKy-vN-cPg" kind="embed" identifier="EmbedInfoScreenViewController_iPad" id="hsU-V5-XfZ"/>
-                                </connections>
-                            </containerView>
-                        </subviews>
-                        <constraints>
-                            <constraint firstItem="6KC-0i-Ccp" firstAttribute="top" secondItem="pco-Nf-lnX" secondAttribute="bottom" id="6WE-4E-KJb"/>
-                            <constraint firstAttribute="trailing" secondItem="pco-Nf-lnX" secondAttribute="trailing" id="Cfu-BY-R2g"/>
-                            <constraint firstItem="pco-Nf-lnX" firstAttribute="leading" secondItem="CEE-bk-i1E" secondAttribute="leading" id="EAB-6K-9nB"/>
-                            <constraint firstItem="tMq-is-erq" firstAttribute="top" secondItem="6KC-0i-Ccp" secondAttribute="bottom" constant="5" id="JFI-xH-egJ"/>
-                            <constraint firstItem="6KC-0i-Ccp" firstAttribute="leading" secondItem="CEE-bk-i1E" secondAttribute="leading" id="Zmo-lv-0br"/>
-                            <constraint firstItem="pco-Nf-lnX" firstAttribute="top" secondItem="rUh-QP-5uw" secondAttribute="bottom" id="h61-TI-9WK"/>
-                            <constraint firstAttribute="trailing" secondItem="6KC-0i-Ccp" secondAttribute="trailing" id="oQI-rl-2vM"/>
-                        </constraints>
-                    </view>
-                    <nil key="simulatedStatusBarMetrics"/>
-                    <nil key="simulatedTopBarMetrics"/>
-                    <nil key="simulatedBottomBarMetrics"/>
-                    <freeformSimulatedSizeMetrics key="simulatedDestinationMetrics"/>
-                    <size key="freeformSize" width="320" height="480"/>
-                    <connections>
-                        <outlet property="weAllPayVersionLabel" destination="6KC-0i-Ccp" id="MxR-gb-mng"/>
-                    </connections>
-                </viewController>
-                <placeholder placeholderIdentifier="IBFirstResponder" id="BBb-aa-oAJ" userLabel="First Responder" sceneMemberID="firstResponder"/>
-            </objects>
-            <point key="canvasLocation" x="858.59375" y="641.6015625"/>
-        </scene>
         <!--Shared Bill Payments Table View Controller i Pad-->
         <scene sceneID="qG2-Zg-IFZ">
             <objects>
@@ -1284,7 +1178,7 @@
                                     <constraint firstAttribute="width" constant="768" id="VgJ-Q8-tfi"/>
                                 </constraints>
                                 <connections>
-                                    <segue destination="svo-bC-Qfm" kind="embed" id="T74-xe-1k1"/>
+                                    <segue destination="svo-bC-Qfm" kind="embed" identifier="Open Events" id="T74-xe-1k1"/>
                                 </connections>
                             </containerView>
                         </subviews>
@@ -1310,20 +1204,28 @@
                             <color key="tintColor" red="0.98874974250793457" green="0.39337372779846191" blue="0.49714547395706177" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                             <connections>
                                 <action selector="infoButtonTapped:" destination="LcN-QB-1Nf" id="KEH-rH-vj3"/>
-                                <segue destination="aDp-IF-sxb" kind="popover" identifier="iScreenSegue" popoverAnchorBarButtonItem="mQW-My-2QR" id="DKp-Bx-3Ur">
-                                    <popoverArrowDirection key="popoverArrowDirection" up="YES" down="YES" left="YES" right="YES"/>
-                                </segue>
                             </connections>
                         </barButtonItem>
                     </navigationItem>
                     <nil key="simulatedBottomBarMetrics"/>
                     <connections>
+                        <outlet property="notificationsStateModel" destination="xV9-E6-ExF" id="IzW-ei-pYo"/>
                         <segue destination="R7R-eq-O5O" kind="push" identifier="openEvent" id="NBY-n3-S8k"/>
+                        <segue destination="mHt-41-6d4" kind="modal" identifier="OpenInfoScreenView" id="G8s-Qr-LlN"/>
                     </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="h3E-GA-raJ" userLabel="First Responder" sceneMemberID="firstResponder"/>
+                <customObject id="xV9-E6-ExF" customClass="MCNotificationsInfoModel"/>
             </objects>
             <point key="canvasLocation" x="71.875" y="-73.2421875"/>
+        </scene>
+        <!--InfoScreenNavigationViewController-->
+        <scene sceneID="8r7-1r-gzv">
+            <objects>
+                <viewControllerPlaceholder storyboardName="Main-Iphone" referencedIdentifier="InfoScreenNavigationViewController" id="mHt-41-6d4" sceneMemberID="viewController"/>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="F0D-nY-to4" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
+            </objects>
+            <point key="canvasLocation" x="71" y="338"/>
         </scene>
         <!--PersonNavigationController-->
         <scene sceneID="PyR-Ng-SAg">
@@ -1379,6 +1281,14 @@
             <point key="canvasLocation" x="2482.8125" y="-73.2421875"/>
         </scene>
     </scenes>
+    <designables>
+        <designable name="Z3O-c0-2tS">
+            <size key="intrinsicContentSize" width="480" height="480"/>
+        </designable>
+        <designable name="jaj-RZ-MiC">
+            <size key="intrinsicContentSize" width="480" height="480"/>
+        </designable>
+    </designables>
     <inferredMetricsTieBreakers>
         <segue reference="eXg-7Q-xwo"/>
         <segue reference="bBe-4f-24C"/>

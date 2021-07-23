@@ -15,7 +15,7 @@
             <objects>
                 <tableViewController storyboardIdentifier="MCAllTripsTableViewController" useStoryboardIdentifierAsRestorationIdentifier="YES" id="v9b-wE-q9L" customClass="MCAllTripsTableViewController" sceneMemberID="viewController">
                     <tableView key="view" opaque="NO" clipsSubviews="YES" clearsContextBeforeDrawing="NO" contentMode="scaleToFill" restorationIdentifier="AllTripTableView" alwaysBounceVertical="YES" dataMode="prototypes" style="plain" separatorStyle="none" rowHeight="76" sectionHeaderHeight="22" sectionFooterHeight="22" id="dFL-jL-DGD">
-                        <rect key="frame" x="0.0" y="0.0" width="375" height="724"/>
+                        <rect key="frame" x="0.0" y="0.0" width="375" height="758"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <color key="backgroundColor" red="1" green="1" blue="1" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                         <view key="tableHeaderView" contentMode="scaleToFill" restorationIdentifier="MCAllTripsActionHeader" id="b5c-w1-Nq5" customClass="UITableViewHeaderFooterView">
@@ -343,18 +343,18 @@
             <objects>
                 <viewController id="Ltx-xd-qSj" customClass="MCSharedBillMainViewController" sceneMemberID="viewController">
                     <view key="view" contentMode="scaleToFill" restorationIdentifier="sharedBillMainViewController" id="hQT-KL-JNT">
-                        <rect key="frame" x="0.0" y="0.0" width="375" height="724"/>
+                        <rect key="frame" x="0.0" y="0.0" width="375" height="758"/>
                         <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                         <subviews>
                             <containerView contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="5xC-6r-YOL">
-                                <rect key="frame" x="0.0" y="0.0" width="375" height="724"/>
+                                <rect key="frame" x="0.0" y="0.0" width="375" height="758"/>
                                 <color key="backgroundColor" red="0.75745260715484619" green="0.83339643478393555" blue="0.92594647407531738" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                                 <connections>
                                     <segue destination="4g7-52-2bw" kind="embed" identifier="pageViewController" id="aSD-UO-zEs"/>
                                 </connections>
                             </containerView>
                             <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="XpA-qR-01e" customClass="GADBannerView">
-                                <rect key="frame" x="0.0" y="724" width="375" height="50"/>
+                                <rect key="frame" x="0.0" y="758" width="375" height="50"/>
                                 <color key="backgroundColor" red="1" green="1" blue="1" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                                 <constraints>
                                     <constraint firstAttribute="width" priority="1" constant="600" id="Ylf-Wj-vUa"/>
@@ -1729,7 +1729,7 @@
         <!--Swipe Left Dissmissable Navigation Controller-->
         <scene sceneID="oPW-ak-Yda">
             <objects>
-                <navigationController automaticallyAdjustsScrollViewInsets="NO" id="syc-O8-8LU" customClass="SwipeLeftDissmissableNavigationController" customModule="We_all_pay" customModuleProvider="target" sceneMemberID="viewController">
+                <navigationController storyboardIdentifier="InfoScreenNavigationViewController" automaticallyAdjustsScrollViewInsets="NO" useStoryboardIdentifierAsRestorationIdentifier="YES" id="syc-O8-8LU" customClass="SwipeLeftDissmissableNavigationController" customModule="We_all_pay" customModuleProvider="target" sceneMemberID="viewController">
                     <toolbarItems/>
                     <simulatedStatusBarMetrics key="simulatedStatusBarMetrics" statusBarStyle="lightContent"/>
                     <simulatedNavigationBarMetrics key="simulatedTopBarMetrics" translucent="NO" prompted="NO"/>
@@ -1816,10 +1816,16 @@
         <designable name="PXr-ct-Ja1">
             <size key="intrinsicContentSize" width="20.287109375" height="20.287109375"/>
         </designable>
+        <designable name="Y6i-cu-NDo">
+            <size key="intrinsicContentSize" width="480" height="480"/>
+        </designable>
         <designable name="ZjT-qg-OGx">
             <size key="intrinsicContentSize" width="480" height="480"/>
         </designable>
         <designable name="jMQ-DN-rdu">
+            <size key="intrinsicContentSize" width="480" height="480"/>
+        </designable>
+        <designable name="rmI-7G-oMX">
             <size key="intrinsicContentSize" width="480" height="480"/>
         </designable>
     </designables>
@@ -1827,7 +1833,7 @@
         <segue reference="M9w-sI-koW"/>
         <segue reference="eZd-I3-t8D"/>
         <segue reference="C0F-pM-cfm"/>
-        <segue reference="6AC-aI-bIB"/>
+        <segue reference="5Vh-JE-OCd"/>
     </inferredMetricsTieBreakers>
     <resources>
         <image name="barbutton - cancel" width="22" height="22"/>
