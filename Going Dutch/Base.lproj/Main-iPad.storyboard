@@ -497,63 +497,6 @@
             </objects>
             <point key="canvasLocation" x="3404" y="-808"/>
         </scene>
-        <!--MCiScreenTableViewController-->
-        <scene sceneID="rK4-xD-NAV">
-            <objects>
-                <viewControllerPlaceholder storyboardName="Main-Iphone" referencedIdentifier="MCiScreenTableViewController" id="6JT-8W-JTj" sceneMemberID="viewController"/>
-                <placeholder placeholderIdentifier="IBFirstResponder" id="beQ-wG-f3D" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
-            </objects>
-            <point key="canvasLocation" x="1198" y="641"/>
-        </scene>
-        <!--Info Screen Container View Controller-->
-        <scene sceneID="yly-yv-znR">
-            <objects>
-                <viewController storyboardIdentifier="MCiScreenRootViewController_iPad" useStoryboardIdentifierAsRestorationIdentifier="YES" id="aDp-IF-sxb" customClass="InfoScreenContainerViewController" customModule="We_all_pay" customModuleProvider="target" sceneMemberID="viewController">
-                    <layoutGuides>
-                        <viewControllerLayoutGuide type="top" id="rUh-QP-5uw"/>
-                        <viewControllerLayoutGuide type="bottom" id="tMq-is-erq"/>
-                    </layoutGuides>
-                    <view key="view" contentMode="scaleToFill" id="CEE-bk-i1E">
-                        <rect key="frame" x="0.0" y="0.0" width="320" height="480"/>
-                        <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
-                        <subviews>
-                            <label opaque="NO" clipsSubviews="YES" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Label" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="6KC-0i-Ccp">
-                                <rect key="frame" x="0.0" y="461.5" width="320" height="13.5"/>
-                                <fontDescription key="fontDescription" type="system" pointSize="11"/>
-                                <color key="textColor" red="0.38278937339782715" green="0.51381617784500122" blue="0.66400408744812012" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
-                                <color key="highlightedColor" red="1" green="1" blue="1" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
-                            </label>
-                            <containerView contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="pco-Nf-lnX">
-                                <rect key="frame" x="0.0" y="0.0" width="320" height="461.5"/>
-                                <color key="backgroundColor" red="0.0" green="0.0" blue="0.0" alpha="0.0" colorSpace="custom" customColorSpace="sRGB"/>
-                                <connections>
-                                    <segue destination="6JT-8W-JTj" kind="embed" identifier="EmbedInfoScreenViewController_iPad" id="5m9-rd-rUK"/>
-                                </connections>
-                            </containerView>
-                        </subviews>
-                        <constraints>
-                            <constraint firstItem="6KC-0i-Ccp" firstAttribute="top" secondItem="pco-Nf-lnX" secondAttribute="bottom" id="6WE-4E-KJb"/>
-                            <constraint firstAttribute="trailing" secondItem="pco-Nf-lnX" secondAttribute="trailing" id="Cfu-BY-R2g"/>
-                            <constraint firstItem="pco-Nf-lnX" firstAttribute="leading" secondItem="CEE-bk-i1E" secondAttribute="leading" id="EAB-6K-9nB"/>
-                            <constraint firstItem="tMq-is-erq" firstAttribute="top" secondItem="6KC-0i-Ccp" secondAttribute="bottom" constant="5" id="JFI-xH-egJ"/>
-                            <constraint firstItem="6KC-0i-Ccp" firstAttribute="leading" secondItem="CEE-bk-i1E" secondAttribute="leading" id="Zmo-lv-0br"/>
-                            <constraint firstItem="pco-Nf-lnX" firstAttribute="top" secondItem="rUh-QP-5uw" secondAttribute="bottom" id="h61-TI-9WK"/>
-                            <constraint firstAttribute="trailing" secondItem="6KC-0i-Ccp" secondAttribute="trailing" id="oQI-rl-2vM"/>
-                        </constraints>
-                    </view>
-                    <nil key="simulatedStatusBarMetrics"/>
-                    <nil key="simulatedTopBarMetrics"/>
-                    <nil key="simulatedBottomBarMetrics"/>
-                    <freeformSimulatedSizeMetrics key="simulatedDestinationMetrics"/>
-                    <size key="freeformSize" width="320" height="480"/>
-                    <connections>
-                        <outlet property="weAllPayVersionLabel" destination="6KC-0i-Ccp" id="MxR-gb-mng"/>
-                    </connections>
-                </viewController>
-                <placeholder placeholderIdentifier="IBFirstResponder" id="BBb-aa-oAJ" userLabel="First Responder" sceneMemberID="firstResponder"/>
-            </objects>
-            <point key="canvasLocation" x="858.59375" y="641.6015625"/>
-        </scene>
         <!--Shared Bill Payments Table View Controller i Pad-->
         <scene sceneID="qG2-Zg-IFZ">
             <objects>
@@ -1282,7 +1225,7 @@
                 <viewControllerPlaceholder storyboardName="Main-Iphone" referencedIdentifier="InfoScreenNavigationViewController" id="mHt-41-6d4" sceneMemberID="viewController"/>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="F0D-nY-to4" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="87" y="347"/>
+            <point key="canvasLocation" x="71" y="338"/>
         </scene>
         <!--PersonNavigationController-->
         <scene sceneID="PyR-Ng-SAg">
@@ -1339,19 +1282,10 @@
         </scene>
     </scenes>
     <designables>
-        <designable name="9MV-Ie-wK3">
-            <size key="intrinsicContentSize" width="480" height="480"/>
-        </designable>
         <designable name="Z3O-c0-2tS">
             <size key="intrinsicContentSize" width="480" height="480"/>
         </designable>
-        <designable name="gvW-A9-uVj">
-            <size key="intrinsicContentSize" width="480" height="480"/>
-        </designable>
         <designable name="jaj-RZ-MiC">
-            <size key="intrinsicContentSize" width="480" height="480"/>
-        </designable>
-        <designable name="xcc-E7-c0h">
             <size key="intrinsicContentSize" width="480" height="480"/>
         </designable>
     </designables>
