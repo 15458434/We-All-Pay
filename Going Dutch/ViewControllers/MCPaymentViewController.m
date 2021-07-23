@@ -369,22 +369,6 @@ typedef NS_ENUM(BOOL, ChildViewStatus) {
 
 #pragma mark - UIResponder
 
-- (void)touchesBegan:(NSSet<UITouch *> *)touches withEvent:(UIEvent *)event {
-    [super touchesBegan:touches withEvent:event];
-    
-#ifdef DEBUG
-    NSLog(@"paymentViewController touchesBegan: %@ withEvent: %@", touches, event);
-#endif
-}
-
-- (void)touchesEnded:(NSSet<UITouch *> *)touches withEvent:(UIEvent *)event {
-    [super touchesEnded:touches withEvent:event];
-    
-#ifdef DEBUG
-    NSLog(@"paymentViewController touchesEnded: %@ withEvent: %@", touches, event);
-#endif
-}
-
 #pragma mark - NSObject
 
 - (void)awakeFromNib {

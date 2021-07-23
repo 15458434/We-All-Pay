@@ -47,24 +47,6 @@
     [super drawRect:rect];
 }
 
-- (UIView *)hitTest:(CGPoint)point withEvent:(UIEvent *)event {
-    UIView *result = [super hitTest:point withEvent:event];
-#ifdef DEBUG
-    NSLog(@"%@ hitTest: (%@,%@), withEvent: %@", self, @(point.x), @(point.y), event);
-    NSLog(@"resultOfHitTest: %@", result);
-#endif
-    return result;
-}
-
-- (BOOL)pointInside:(CGPoint)point withEvent:(UIEvent *)event {
-    BOOL result = [super pointInside:point withEvent:event];
-#ifdef DEBUG
-    NSLog(@"%@ pointInside: (%@,%@), withEvent: %@", self, @(point.x), @(point.y), event);
-    NSLog(@"resultPointInside: %@", @(result));
-#endif
-    return result;
-}
-
 #pragma mark - NSCoding
 
 - (instancetype)initWithCoder:(NSCoder *)coder {
@@ -78,31 +60,6 @@
 }
 
 #pragma mark - UIResponder
-
-- (BOOL)beginTrackingWithTouch:(UITouch *)touch withEvent:(UIEvent *)event {
-    BOOL result = [super beginTrackingWithTouch:touch withEvent:event];
-#ifdef DEBUG
-    NSLog(@"roundedButton beginTrackingWithTouch: %@ withEvent: %@ will return: %@", touch, event, @(result));
-#endif
-    return result;
-}
-
-- (void)touchesBegan:(NSSet<UITouch *> *)touches withEvent:(UIEvent *)event {
-    [super touchesBegan:touches withEvent:event];
-    
-#ifdef DEBUG
-    NSLog(@"roundedButton touchesBegan: %@ withEvent: %@", touches, event);
-#endif
-}
-
-- (void)touchesEnded:(NSSet<UITouch *> *)touches withEvent:(UIEvent *)event {
-    [super touchesEnded:touches withEvent:event];
-    
-#ifdef DEBUG
-    NSLog(@"roundedButton borderlineView touchesEnded: %@ withEvent: %@", touches, event);
-#endif
-}
-
 
 #pragma mark - NSObject
 
