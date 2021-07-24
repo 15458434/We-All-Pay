@@ -23,6 +23,8 @@
 
 @interface MCAllTripsTableViewController_iPad ()
 
+@property (weak, nonatomic) IBOutlet MCRoundedButton *createEventButton;
+
 @property (nonatomic, strong) MCTableEmptyMessage_iPad *emptyMessage;
 @property (nonatomic, strong) NSDateFormatter *df;
 
@@ -35,13 +37,6 @@
 @end
 
 @implementation MCAllTripsTableViewController_iPad
-
-#pragma mark - IBActions
-
-- (IBAction)newEventPressed:(id)sender {
-    
-}
-
 
 #pragma mark - New in this class
 
