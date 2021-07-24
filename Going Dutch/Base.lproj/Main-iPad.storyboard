@@ -681,17 +681,25 @@
                                     <fontDescription key="fontDescription" type="system" pointSize="15"/>
                                     <nil key="highlightedColor"/>
                                 </label>
-                                <button contentMode="scaleToFill" horizontalCompressionResistancePriority="751" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="system" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="8ht-EA-kJE" userLabel="Currency - €$£¥">
+                                <button contentMode="redraw" horizontalCompressionResistancePriority="751" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="system" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="8ht-EA-kJE" userLabel="Currency - €$£¥" customClass="MCRoundedButton">
                                     <rect key="frame" x="83" y="236" width="37" height="32"/>
-                                    <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                                    <color key="backgroundColor" systemColor="systemBackgroundColor"/>
                                     <constraints>
                                         <constraint firstAttribute="height" constant="32" id="Min-U4-NiV"/>
                                     </constraints>
                                     <fontDescription key="fontDescription" type="system" pointSize="15"/>
                                     <state key="normal" title="€$£¥">
-                                        <color key="titleColor" red="0.98952531814575195" green="0.45403587818145752" blue="0.5264095664024353" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                                        <color key="titleColor" systemColor="systemBackgroundColor"/>
                                         <color key="titleShadowColor" red="0.5" green="0.5" blue="0.5" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                                     </state>
+                                    <userDefinedRuntimeAttributes>
+                                        <userDefinedRuntimeAttribute type="color" keyPath="normalBackgroundColor">
+                                            <color key="value" name="button - enabled"/>
+                                        </userDefinedRuntimeAttribute>
+                                        <userDefinedRuntimeAttribute type="color" keyPath="highlightedBackgroundColor">
+                                            <color key="value" name="button - disabled"/>
+                                        </userDefinedRuntimeAttribute>
+                                    </userDefinedRuntimeAttributes>
                                     <connections>
                                         <action selector="selectCurrencyPressed:" destination="3NB-dQ-HNX" eventType="touchUpInside" id="cc7-6w-qUV"/>
                                         <segue destination="Z9a-Hu-qSZ" kind="popover" identifier="openSelectCurrency_iPad" popoverAnchorView="8ht-EA-kJE" id="aJ5-e8-dvs">
@@ -720,14 +728,22 @@
                                         <constraint firstAttribute="width" constant="100" id="t7Z-J3-b7z"/>
                                     </constraints>
                                 </imageView>
-                                <button contentMode="scaleToFill" horizontalCompressionResistancePriority="1000" verticalCompressionResistancePriority="1000" contentHorizontalAlignment="left" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="LnO-mX-ELw" userLabel="selectCategory">
-                                    <rect key="frame" x="134" y="148" width="63" height="30"/>
+                                <button contentMode="redraw" horizontalCompressionResistancePriority="1000" verticalCompressionResistancePriority="1000" contentHorizontalAlignment="left" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="LnO-mX-ELw" userLabel="selectCategory" customClass="MCRoundedButton">
+                                    <rect key="frame" x="134" y="148" width="66" height="30"/>
                                     <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
-                                    <fontDescription key="fontDescription" type="system" pointSize="15"/>
+                                    <fontDescription key="fontDescription" type="system" weight="semibold" pointSize="15"/>
                                     <state key="normal" title="Category">
-                                        <color key="titleColor" red="0.89411764705882357" green="0.35294117647058826" blue="0.44705882352941179" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                                        <color key="titleColor" systemColor="systemBackgroundColor"/>
                                         <color key="titleShadowColor" red="0.5" green="0.5" blue="0.5" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                                     </state>
+                                    <userDefinedRuntimeAttributes>
+                                        <userDefinedRuntimeAttribute type="color" keyPath="normalBackgroundColor">
+                                            <color key="value" name="button - enabled"/>
+                                        </userDefinedRuntimeAttribute>
+                                        <userDefinedRuntimeAttribute type="color" keyPath="highlightedBackgroundColor">
+                                            <color key="value" name="button - disabled"/>
+                                        </userDefinedRuntimeAttribute>
+                                    </userDefinedRuntimeAttributes>
                                     <connections>
                                         <action selector="categoryButtonPressed:" destination="3NB-dQ-HNX" eventType="touchUpInside" id="ssy-iD-9pY"/>
                                         <segue destination="8dJ-8n-R7R" kind="popover" identifier="selectCategory_iPad" popoverAnchorView="LnO-mX-ELw" id="XSg-uj-dfR">
@@ -742,14 +758,22 @@
                                         <constraint firstAttribute="width" secondItem="xcc-E7-c0h" secondAttribute="height" multiplier="1:1" id="let-m7-eSl"/>
                                     </constraints>
                                 </imageView>
-                                <button contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="hi9-hq-PS5">
-                                    <rect key="frame" x="134" y="55" width="86" height="30"/>
+                                <button contentMode="redraw" contentHorizontalAlignment="left" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="hi9-hq-PS5" customClass="MCRoundedButton">
+                                    <rect key="frame" x="134" y="55" width="89" height="30"/>
                                     <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
-                                    <fontDescription key="fontDescription" type="system" pointSize="15"/>
+                                    <fontDescription key="fontDescription" type="system" weight="semibold" pointSize="15"/>
                                     <state key="normal" title="Select payer">
-                                        <color key="titleColor" red="0.89411764705882357" green="0.34901960784313724" blue="0.44313725490196076" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                                        <color key="titleColor" systemColor="systemBackgroundColor"/>
                                         <color key="titleShadowColor" red="0.5" green="0.5" blue="0.5" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                                     </state>
+                                    <userDefinedRuntimeAttributes>
+                                        <userDefinedRuntimeAttribute type="color" keyPath="normalBackgroundColor">
+                                            <color key="value" name="button - enabled"/>
+                                        </userDefinedRuntimeAttribute>
+                                        <userDefinedRuntimeAttribute type="color" keyPath="highlightedBackgroundColor">
+                                            <color key="value" name="button - disabled"/>
+                                        </userDefinedRuntimeAttribute>
+                                    </userDefinedRuntimeAttributes>
                                     <connections>
                                         <action selector="selectPayerButtonPressed:" destination="3NB-dQ-HNX" eventType="touchUpInside" id="d7e-Iv-NpV"/>
                                         <segue destination="XpR-6M-QF5" kind="popover" identifier="selectPayer_iPad" popoverAnchorView="hi9-hq-PS5" id="xdi-HG-Wvg">
