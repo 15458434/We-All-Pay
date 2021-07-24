@@ -161,102 +161,153 @@
                         <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                         <subviews>
                             <containerView contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="CpF-MJ-vN0">
-                                <rect key="frame" x="352" y="112" width="352" height="737.5"/>
-                                <color key="backgroundColor" red="1" green="1" blue="1" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                                <rect key="frame" x="352" y="124" width="352" height="725.5"/>
+                                <color key="backgroundColor" name="background"/>
                                 <connections>
                                     <segue destination="NKD-wF-4e4" kind="embed" id="rOa-zk-LNb"/>
                                 </connections>
                             </containerView>
                             <containerView contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="cqE-dH-zdR">
-                                <rect key="frame" x="0.0" y="112" width="352" height="737.5"/>
-                                <color key="backgroundColor" red="1" green="1" blue="1" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                                <rect key="frame" x="0.0" y="124" width="352" height="725.5"/>
+                                <color key="backgroundColor" name="background"/>
                                 <connections>
                                     <segue destination="YMW-gY-bCa" kind="embed" id="00m-OO-9HG"/>
                                 </connections>
                             </containerView>
                             <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="rqj-np-zHP">
-                                <rect key="frame" x="0.0" y="0.0" width="352" height="112"/>
+                                <rect key="frame" x="0.0" y="0.0" width="352" height="124"/>
                                 <subviews>
-                                    <button contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="system" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="Nxq-6f-abw">
-                                        <rect key="frame" x="20" y="62" width="79" height="30"/>
-                                        <color key="backgroundColor" red="0.75686274509999996" green="0.83529411760000005" blue="0.92549019610000005" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
-                                        <accessibility key="accessibilityConfiguration" identifier="Add  Person"/>
-                                        <fontDescription key="fontDescription" type="system" pointSize="15"/>
-                                        <state key="normal" title="Add Person">
-                                            <color key="titleColor" red="0.98952531814575195" green="0.45403587818145752" blue="0.5264095664024353" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
-                                            <color key="titleShadowColor" red="0.5" green="0.5" blue="0.5" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
-                                        </state>
-                                        <connections>
-                                            <segue destination="f3U-rN-bgR" kind="modal" identifier="newPerson" modalPresentationStyle="formSheet" id="bBe-4f-24C"/>
-                                        </connections>
-                                    </button>
-                                    <button contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="system" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="H3d-ki-tdJ">
-                                        <rect key="frame" x="270" y="62" width="62" height="30"/>
-                                        <color key="backgroundColor" red="0.75686274509999996" green="0.83529411760000005" blue="0.92549019610000005" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
-                                        <fontDescription key="fontDescription" type="system" pointSize="15"/>
-                                        <state key="normal" title="Contacts">
-                                            <color key="titleColor" red="0.98952531814575195" green="0.45403587818145752" blue="0.5264095664024353" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
-                                            <color key="titleShadowColor" red="0.5" green="0.5" blue="0.5" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
-                                        </state>
-                                        <connections>
-                                            <action selector="addressBookButtonPressed:" destination="R7R-eq-O5O" eventType="touchUpInside" id="dWE-ge-5c5"/>
-                                        </connections>
-                                    </button>
-                                    <textField clipsSubviews="YES" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" borderStyle="roundedRect" placeholder="Event name" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="01X-vX-W0B">
-                                        <rect key="frame" x="20" y="20" width="312" height="34"/>
-                                        <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
-                                        <fontDescription key="fontDescription" type="system" pointSize="14"/>
-                                        <textInputTraits key="textInputTraits"/>
-                                        <connections>
-                                            <outlet property="delegate" destination="R7R-eq-O5O" id="ENt-BA-z5w"/>
-                                        </connections>
-                                    </textField>
+                                    <stackView opaque="NO" contentMode="scaleToFill" axis="vertical" spacing="20" translatesAutoresizingMaskIntoConstraints="NO" id="0m5-Fl-ytG">
+                                        <rect key="frame" x="20" y="20" width="312" height="84"/>
+                                        <subviews>
+                                            <textField clipsSubviews="YES" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" borderStyle="roundedRect" placeholder="Event name" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="01X-vX-W0B">
+                                                <rect key="frame" x="0.0" y="0.0" width="312" height="34"/>
+                                                <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                                                <fontDescription key="fontDescription" type="system" pointSize="14"/>
+                                                <textInputTraits key="textInputTraits"/>
+                                                <connections>
+                                                    <outlet property="delegate" destination="R7R-eq-O5O" id="ENt-BA-z5w"/>
+                                                </connections>
+                                            </textField>
+                                            <stackView opaque="NO" contentMode="scaleToFill" distribution="equalSpacing" translatesAutoresizingMaskIntoConstraints="NO" id="gFh-1j-IGV">
+                                                <rect key="frame" x="0.0" y="54" width="312" height="30"/>
+                                                <subviews>
+                                                    <button contentMode="redraw" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="system" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="Nxq-6f-abw" customClass="MCRoundedButton">
+                                                        <rect key="frame" x="0.0" y="0.0" width="83" height="30"/>
+                                                        <color key="backgroundColor" red="0.75686274509999996" green="0.83529411760000005" blue="0.92549019610000005" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                                                        <accessibility key="accessibilityConfiguration" identifier="Add  Person"/>
+                                                        <fontDescription key="fontDescription" type="system" weight="semibold" pointSize="15"/>
+                                                        <state key="normal" title="Add Person">
+                                                            <color key="titleColor" systemColor="systemBackgroundColor"/>
+                                                            <color key="titleShadowColor" red="0.5" green="0.5" blue="0.5" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                                                        </state>
+                                                        <userDefinedRuntimeAttributes>
+                                                            <userDefinedRuntimeAttribute type="color" keyPath="normalBackgroundColor">
+                                                                <color key="value" name="button - enabled"/>
+                                                            </userDefinedRuntimeAttribute>
+                                                            <userDefinedRuntimeAttribute type="color" keyPath="highlightedBackgroundColor">
+                                                                <color key="value" name="button - disabled"/>
+                                                            </userDefinedRuntimeAttribute>
+                                                        </userDefinedRuntimeAttributes>
+                                                        <connections>
+                                                            <segue destination="f3U-rN-bgR" kind="modal" identifier="newPerson" modalPresentationStyle="formSheet" id="bBe-4f-24C"/>
+                                                        </connections>
+                                                    </button>
+                                                    <button contentMode="redraw" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="system" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="H3d-ki-tdJ" customClass="MCRoundedButton">
+                                                        <rect key="frame" x="247" y="0.0" width="65" height="30"/>
+                                                        <color key="backgroundColor" red="0.75686274509999996" green="0.83529411760000005" blue="0.92549019610000005" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                                                        <fontDescription key="fontDescription" type="system" weight="semibold" pointSize="15"/>
+                                                        <state key="normal" title="Contacts">
+                                                            <color key="titleColor" systemColor="systemBackgroundColor"/>
+                                                            <color key="titleShadowColor" red="0.5" green="0.5" blue="0.5" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                                                        </state>
+                                                        <userDefinedRuntimeAttributes>
+                                                            <userDefinedRuntimeAttribute type="color" keyPath="normalBackgroundColor">
+                                                                <color key="value" name="button - enabled"/>
+                                                            </userDefinedRuntimeAttribute>
+                                                            <userDefinedRuntimeAttribute type="color" keyPath="highlightedBackgroundColor">
+                                                                <color key="value" name="button - disabled"/>
+                                                            </userDefinedRuntimeAttribute>
+                                                        </userDefinedRuntimeAttributes>
+                                                        <connections>
+                                                            <action selector="addressBookButtonPressed:" destination="R7R-eq-O5O" eventType="touchUpInside" id="dWE-ge-5c5"/>
+                                                        </connections>
+                                                    </button>
+                                                </subviews>
+                                            </stackView>
+                                        </subviews>
+                                    </stackView>
                                 </subviews>
                                 <color key="backgroundColor" red="0.75745260715484619" green="0.83339643478393555" blue="0.92594647407531738" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                                 <constraints>
-                                    <constraint firstItem="01X-vX-W0B" firstAttribute="top" secondItem="rqj-np-zHP" secondAttribute="top" constant="20" id="4If-o6-ezf"/>
-                                    <constraint firstAttribute="bottom" secondItem="Nxq-6f-abw" secondAttribute="bottom" constant="20" symbolic="YES" id="Y2P-dA-Ce9"/>
-                                    <constraint firstItem="H3d-ki-tdJ" firstAttribute="baseline" secondItem="Nxq-6f-abw" secondAttribute="baseline" id="aJO-FV-Zz2"/>
-                                    <constraint firstItem="01X-vX-W0B" firstAttribute="leading" secondItem="rqj-np-zHP" secondAttribute="leading" constant="20" id="jRi-gp-Orl"/>
-                                    <constraint firstAttribute="trailing" secondItem="01X-vX-W0B" secondAttribute="trailing" constant="20" id="sGe-W2-k5i"/>
-                                    <constraint firstItem="Nxq-6f-abw" firstAttribute="top" secondItem="01X-vX-W0B" secondAttribute="bottom" constant="8" id="uJe-p0-jxM"/>
+                                    <constraint firstItem="0m5-Fl-ytG" firstAttribute="leading" secondItem="rqj-np-zHP" secondAttribute="leading" constant="20" symbolic="YES" id="4Ub-mp-iDn"/>
+                                    <constraint firstAttribute="bottom" secondItem="0m5-Fl-ytG" secondAttribute="bottom" constant="20" symbolic="YES" id="SyU-GO-9BS"/>
+                                    <constraint firstItem="0m5-Fl-ytG" firstAttribute="top" secondItem="rqj-np-zHP" secondAttribute="top" constant="20" symbolic="YES" id="ToH-0g-0eP"/>
+                                    <constraint firstAttribute="trailing" secondItem="0m5-Fl-ytG" secondAttribute="trailing" constant="20" symbolic="YES" id="j5E-Wf-jKQ"/>
                                 </constraints>
                             </view>
                             <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="Muu-sU-mX8">
-                                <rect key="frame" x="352" y="0.0" width="352" height="112"/>
+                                <rect key="frame" x="352" y="0.0" width="352" height="124"/>
                                 <subviews>
-                                    <button contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="system" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="egw-0d-cT1">
-                                        <rect key="frame" x="20" y="62" width="91" height="30"/>
-                                        <color key="backgroundColor" red="0.75686274509999996" green="0.83529411760000005" blue="0.92549019610000005" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
-                                        <accessibility key="accessibilityConfiguration" identifier="Add Payment"/>
-                                        <fontDescription key="fontDescription" type="system" pointSize="15"/>
-                                        <state key="normal" title="Add payment">
-                                            <color key="titleColor" red="0.98952531814575195" green="0.45403587818145752" blue="0.5264095664024353" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
-                                            <color key="titleShadowColor" red="0.5" green="0.5" blue="0.5" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
-                                        </state>
-                                        <connections>
-                                            <action selector="addPaymentPressed:" destination="R7R-eq-O5O" eventType="touchUpInside" id="lX9-aM-cZo"/>
-                                        </connections>
-                                    </button>
-                                    <button contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="system" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="9og-gt-gwG">
-                                        <rect key="frame" x="241" y="62" width="91" height="30"/>
-                                        <color key="backgroundColor" red="0.75686274509999996" green="0.83529411760000005" blue="0.92549019610000005" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
-                                        <accessibility key="accessibilityConfiguration" identifier="Solve"/>
-                                        <fontDescription key="fontDescription" type="system" pointSize="15"/>
-                                        <state key="normal" title="Solve">
-                                            <color key="titleColor" red="0.98952531814575195" green="0.45403587818145752" blue="0.5264095664024353" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
-                                            <color key="titleShadowColor" red="0.5" green="0.5" blue="0.5" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
-                                        </state>
-                                        <connections>
-                                            <action selector="solveButtonPressed:" destination="R7R-eq-O5O" eventType="touchUpInside" id="Om2-Iw-fZO"/>
-                                        </connections>
-                                    </button>
+                                    <stackView opaque="NO" contentMode="scaleToFill" axis="vertical" translatesAutoresizingMaskIntoConstraints="NO" id="bpF-uQ-91f">
+                                        <rect key="frame" x="20" y="74" width="312" height="30"/>
+                                        <subviews>
+                                            <stackView opaque="NO" contentMode="scaleToFill" distribution="equalSpacing" translatesAutoresizingMaskIntoConstraints="NO" id="MdI-Ub-fdv">
+                                                <rect key="frame" x="0.0" y="0.0" width="312" height="30"/>
+                                                <subviews>
+                                                    <button contentMode="redraw" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="system" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="egw-0d-cT1" customClass="MCRoundedButton">
+                                                        <rect key="frame" x="0.0" y="0.0" width="95" height="30"/>
+                                                        <color key="backgroundColor" red="0.75686274509999996" green="0.83529411760000005" blue="0.92549019610000005" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                                                        <accessibility key="accessibilityConfiguration" identifier="Add Payment"/>
+                                                        <fontDescription key="fontDescription" type="system" weight="semibold" pointSize="15"/>
+                                                        <state key="normal" title="Add payment">
+                                                            <color key="titleColor" red="0.98952531814575195" green="0.45403587818145752" blue="0.5264095664024353" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                                                            <color key="titleShadowColor" red="0.5" green="0.5" blue="0.5" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                                                        </state>
+                                                        <userDefinedRuntimeAttributes>
+                                                            <userDefinedRuntimeAttribute type="color" keyPath="normalBackgroundColor">
+                                                                <color key="value" name="button - enabled"/>
+                                                            </userDefinedRuntimeAttribute>
+                                                            <userDefinedRuntimeAttribute type="color" keyPath="highlightedBackgroundColor">
+                                                                <color key="value" name="button - disabled"/>
+                                                            </userDefinedRuntimeAttribute>
+                                                        </userDefinedRuntimeAttributes>
+                                                        <connections>
+                                                            <action selector="addPaymentPressed:" destination="R7R-eq-O5O" eventType="touchUpInside" id="lX9-aM-cZo"/>
+                                                        </connections>
+                                                    </button>
+                                                    <button contentMode="redraw" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="system" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="9og-gt-gwG" customClass="MCRoundedButton">
+                                                        <rect key="frame" x="272" y="0.0" width="40" height="30"/>
+                                                        <color key="backgroundColor" red="0.75686274509999996" green="0.83529411760000005" blue="0.92549019610000005" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                                                        <accessibility key="accessibilityConfiguration" identifier="Solve"/>
+                                                        <fontDescription key="fontDescription" type="system" weight="semibold" pointSize="15"/>
+                                                        <state key="normal" title="Solve">
+                                                            <color key="titleColor" red="0.98952531814575195" green="0.45403587818145752" blue="0.5264095664024353" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                                                            <color key="titleShadowColor" red="0.5" green="0.5" blue="0.5" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                                                        </state>
+                                                        <userDefinedRuntimeAttributes>
+                                                            <userDefinedRuntimeAttribute type="color" keyPath="normalBackgroundColor">
+                                                                <color key="value" name="button - enabled"/>
+                                                            </userDefinedRuntimeAttribute>
+                                                            <userDefinedRuntimeAttribute type="color" keyPath="highlightedBackgroundColor">
+                                                                <color key="value" name="button - disabled"/>
+                                                            </userDefinedRuntimeAttribute>
+                                                        </userDefinedRuntimeAttributes>
+                                                        <connections>
+                                                            <action selector="solveButtonPressed:" destination="R7R-eq-O5O" eventType="touchUpInside" id="Om2-Iw-fZO"/>
+                                                        </connections>
+                                                    </button>
+                                                </subviews>
+                                            </stackView>
+                                        </subviews>
+                                    </stackView>
                                 </subviews>
                                 <color key="backgroundColor" red="0.75745260715484619" green="0.83339643478393555" blue="0.92594647407531738" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                                 <constraints>
-                                    <constraint firstAttribute="bottom" secondItem="egw-0d-cT1" secondAttribute="bottom" constant="20" symbolic="YES" id="6Mx-cv-ddy"/>
-                                    <constraint firstItem="egw-0d-cT1" firstAttribute="width" secondItem="9og-gt-gwG" secondAttribute="width" id="MtK-cg-KgS"/>
-                                    <constraint firstItem="egw-0d-cT1" firstAttribute="baseline" secondItem="9og-gt-gwG" secondAttribute="baseline" id="k17-cV-NKs"/>
+                                    <constraint firstItem="bpF-uQ-91f" firstAttribute="top" relation="greaterThanOrEqual" secondItem="Muu-sU-mX8" secondAttribute="top" constant="20" symbolic="YES" id="Fpf-ZL-kcb"/>
+                                    <constraint firstAttribute="bottom" secondItem="bpF-uQ-91f" secondAttribute="bottom" constant="20" symbolic="YES" id="KK0-i9-TNh"/>
+                                    <constraint firstAttribute="trailing" secondItem="bpF-uQ-91f" secondAttribute="trailing" constant="20" symbolic="YES" id="Nar-ll-qoO"/>
+                                    <constraint firstItem="bpF-uQ-91f" firstAttribute="leading" secondItem="Muu-sU-mX8" secondAttribute="leading" constant="20" symbolic="YES" id="gsG-Ae-Kjn"/>
                                 </constraints>
                             </view>
                             <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="YDY-MC-Y9W" customClass="GADBannerView">
@@ -274,19 +325,15 @@
                         <color key="backgroundColor" red="0.75686274509999996" green="0.83529411760000005" blue="0.92549019610000005" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                         <constraints>
                             <constraint firstAttribute="trailing" secondItem="Muu-sU-mX8" secondAttribute="trailing" id="1bu-M6-927"/>
-                            <constraint firstItem="cqE-dH-zdR" firstAttribute="leading" secondItem="Nxq-6f-abw" secondAttribute="leading" constant="-20" id="6nL-3b-Qdi"/>
                             <constraint firstItem="Muu-sU-mX8" firstAttribute="width" secondItem="CpF-MJ-vN0" secondAttribute="width" id="9O4-Ag-g4T"/>
                             <constraint firstAttribute="trailing" secondItem="YDY-MC-Y9W" secondAttribute="trailing" id="AU1-TV-blG"/>
                             <constraint firstItem="YDY-MC-Y9W" firstAttribute="leading" secondItem="0z4-ag-Hbv" secondAttribute="leading" id="D3L-xK-dLS"/>
-                            <constraint firstItem="egw-0d-cT1" firstAttribute="leading" secondItem="CpF-MJ-vN0" secondAttribute="leading" constant="20" id="D7E-7e-Rvy"/>
-                            <constraint firstItem="CpF-MJ-vN0" firstAttribute="trailing" secondItem="9og-gt-gwG" secondAttribute="trailing" constant="20" id="DgI-tb-cZV"/>
                             <constraint firstItem="LQO-sC-QG1" firstAttribute="top" secondItem="CpF-MJ-vN0" secondAttribute="bottom" priority="749" id="Ks4-BC-Pyi"/>
                             <constraint firstItem="rqj-np-zHP" firstAttribute="top" secondItem="Y3V-5W-BVu" secondAttribute="bottom" id="LAb-vN-Xwa"/>
                             <constraint firstItem="cqE-dH-zdR" firstAttribute="top" secondItem="rqj-np-zHP" secondAttribute="bottom" id="NEU-XJ-Beh"/>
                             <constraint firstItem="YDY-MC-Y9W" firstAttribute="top" secondItem="cqE-dH-zdR" secondAttribute="bottom" id="Odr-Bi-jjv"/>
                             <constraint firstItem="CpF-MJ-vN0" firstAttribute="top" secondItem="rqj-np-zHP" secondAttribute="bottom" id="TXp-WY-bC1"/>
                             <constraint firstItem="CpF-MJ-vN0" firstAttribute="leading" secondItem="cqE-dH-zdR" secondAttribute="trailing" id="ULg-5p-tLS"/>
-                            <constraint firstItem="cqE-dH-zdR" firstAttribute="trailing" secondItem="H3d-ki-tdJ" secondAttribute="trailing" constant="20" id="XkQ-sc-NRA"/>
                             <constraint firstItem="cqE-dH-zdR" firstAttribute="leading" secondItem="0z4-ag-Hbv" secondAttribute="leading" id="aIx-SA-6G6"/>
                             <constraint firstItem="rqj-np-zHP" firstAttribute="width" secondItem="cqE-dH-zdR" secondAttribute="width" id="aZh-W7-KAw"/>
                             <constraint firstItem="YDY-MC-Y9W" firstAttribute="top" secondItem="CpF-MJ-vN0" secondAttribute="bottom" id="bAa-B6-t89"/>
@@ -511,15 +558,15 @@
         <scene sceneID="qG2-Zg-IFZ">
             <objects>
                 <tableViewController storyboardIdentifier="MCSharedBillPaymentsTableViewController_iPad" useStoryboardIdentifierAsRestorationIdentifier="YES" id="NKD-wF-4e4" customClass="MCSharedBillPaymentsTableViewController_iPad" sceneMemberID="viewController">
-                    <tableView key="view" clipsSubviews="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" dataMode="prototypes" style="grouped" separatorStyle="default" rowHeight="83" sectionHeaderHeight="10" sectionFooterHeight="10" id="hse-0g-6ne">
+                    <tableView key="view" clipsSubviews="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" dataMode="prototypes" style="plain" separatorStyle="default" rowHeight="83" sectionHeaderHeight="28" sectionFooterHeight="28" id="hse-0g-6ne">
                         <rect key="frame" x="0.0" y="0.0" width="768" height="1024"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
-                        <color key="backgroundColor" red="0.75745260715484619" green="0.83339643478393555" blue="0.92594647407531738" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                        <color key="backgroundColor" name="background"/>
                         <inset key="separatorInset" minX="90" minY="0.0" maxX="0.0" maxY="0.0"/>
                         <color key="sectionIndexBackgroundColor" red="0.75745260715484619" green="0.83339643478393555" blue="0.92594647407531738" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                         <prototypes>
                             <tableViewCell contentMode="scaleToFill" selectionStyle="blue" hidesAccessoryWhenEditing="NO" indentationLevel="1" indentationWidth="0.0" reuseIdentifier="MCPaymentTableViewCell_iPad" rowHeight="80" id="18w-nV-pxt" customClass="PaymentTableViewCell_iPad" customModule="We_all_pay" customModuleProvider="target">
-                                <rect key="frame" x="0.0" y="49.5" width="768" height="80"/>
+                                <rect key="frame" x="0.0" y="24.5" width="768" height="80"/>
                                 <autoresizingMask key="autoresizingMask"/>
                                 <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" tableViewCell="18w-nV-pxt" id="k1I-hi-NZL">
                                     <rect key="frame" x="0.0" y="0.0" width="768" height="80"/>
@@ -1068,14 +1115,14 @@
         <scene sceneID="Yvv-Fb-1pz">
             <objects>
                 <tableViewController storyboardIdentifier="MCSharedBillPeoplePresentTableViewController_iPad" useStoryboardIdentifierAsRestorationIdentifier="YES" id="YMW-gY-bCa" customClass="MCSharedBillPeoplePresentTableViewController_iPad" sceneMemberID="viewController">
-                    <tableView key="view" clipsSubviews="YES" contentMode="scaleToFill" restorationIdentifier="peoplePresentTableView" alwaysBounceVertical="YES" dataMode="prototypes" style="grouped" separatorStyle="default" rowHeight="44" sectionHeaderHeight="10" sectionFooterHeight="10" id="6SI-AW-NVw">
+                    <tableView key="view" clipsSubviews="YES" contentMode="scaleToFill" restorationIdentifier="peoplePresentTableView" alwaysBounceVertical="YES" dataMode="prototypes" style="plain" separatorStyle="default" rowHeight="44" sectionHeaderHeight="28" sectionFooterHeight="28" id="6SI-AW-NVw">
                         <rect key="frame" x="0.0" y="0.0" width="768" height="1024"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
-                        <color key="backgroundColor" red="0.75745260715484619" green="0.83339643478393555" blue="0.92594647407531738" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                        <color key="backgroundColor" name="background"/>
                         <inset key="separatorInset" minX="108" minY="0.0" maxX="0.0" maxY="0.0"/>
                         <prototypes>
                             <tableViewCell contentMode="scaleToFill" restorationIdentifier="MCPersonTableViewCell_iPad" selectionStyle="blue" hidesAccessoryWhenEditing="NO" indentationLevel="1" indentationWidth="0.0" reuseIdentifier="MCPersonTableViewCell_iPad" rowHeight="120" id="XYG-pX-SLw" customClass="PersonTableViewCell_iPad" customModule="We_all_pay" customModuleProvider="target">
-                                <rect key="frame" x="0.0" y="49.5" width="768" height="120"/>
+                                <rect key="frame" x="0.0" y="24.5" width="768" height="120"/>
                                 <autoresizingMask key="autoresizingMask"/>
                                 <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" restorationIdentifier="MCPersonTableViewCellContentView" tableViewCell="XYG-pX-SLw" id="AwB-Bu-x24">
                                     <rect key="frame" x="0.0" y="0.0" width="768" height="120"/>
@@ -1291,23 +1338,6 @@
             <point key="canvasLocation" x="2482.8125" y="-73.2421875"/>
         </scene>
     </scenes>
-    <designables>
-        <designable name="9MV-Ie-wK3">
-            <size key="intrinsicContentSize" width="480" height="480"/>
-        </designable>
-        <designable name="Z3O-c0-2tS">
-            <size key="intrinsicContentSize" width="480" height="480"/>
-        </designable>
-        <designable name="gvW-A9-uVj">
-            <size key="intrinsicContentSize" width="480" height="480"/>
-        </designable>
-        <designable name="jaj-RZ-MiC">
-            <size key="intrinsicContentSize" width="480" height="480"/>
-        </designable>
-        <designable name="xcc-E7-c0h">
-            <size key="intrinsicContentSize" width="480" height="480"/>
-        </designable>
-    </designables>
     <inferredMetricsTieBreakers>
         <segue reference="eXg-7Q-xwo"/>
         <segue reference="bBe-4f-24C"/>
@@ -1318,6 +1348,9 @@
         <image name="barbutton - cancel" width="22" height="22"/>
         <image name="barbutton - done" width="22" height="22"/>
         <image name="iScreen button" width="26" height="26"/>
+        <namedColor name="background">
+            <color red="0.83529411764705885" green="0.92549019607843142" blue="0.99215686274509807" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+        </namedColor>
         <namedColor name="button - disabled">
             <color red="1" green="0.87058823529411766" blue="0.89411764705882357" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
         </namedColor>
