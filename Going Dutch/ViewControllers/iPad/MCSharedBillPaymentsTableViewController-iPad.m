@@ -41,13 +41,13 @@
 }
 
 - (void)setEmptyMessage {
-    if ([[_dataController fetchedObjects] count] != 0) {
+    if (_dataController.fetchedObjects.count != 0) {
         [UIView animateWithDuration:1.0 animations:^{
             self.emptyMessage.bigMessage.alpha = 0.0;
             self.tableView.separatorStyle = UITableViewCellSeparatorStyleSingleLine;
         } completion:nil];
     } else {
-        if ([[_emptyMessage bigMessage] alpha] < 1.0) {
+        if (_emptyMessage.bigMessage.alpha < 1.0) {
             [UIView animateWithDuration:1.0 animations:^{
                 self.emptyMessage.bigMessage.alpha = 1.0;
                 self.tableView.separatorStyle = UITableViewCellSeparatorStyleNone;
@@ -57,16 +57,16 @@
 }
 
 - (void)setEmptyMessageNow {
-    if ([[_dataController fetchedObjects] count] != 0) {
+    if (_dataController.fetchedObjects.count != 0) {
         [UIView animateWithDuration:0.0 animations:^{
-            [[self->_emptyMessage bigMessage] setAlpha:0.0];
+            self.emptyMessage.bigMessage.alpha = 0.0;
             self.tableView.separatorStyle = UITableViewCellSeparatorStyleSingleLine;
         } completion:nil];
     } else {
-        if ([[_emptyMessage bigMessage] alpha] < 1.0) {
+        if (_emptyMessage.bigMessage.alpha < 1.0) {
             [UIView animateWithDuration:0.0 animations:^{
-                [[self->_emptyMessage bigMessage] setAlpha:1.0];
-                self.tableView.separatorStyle = UITableViewCellSeparatorStyleSingleLine;
+                self.emptyMessage.bigMessage.alpha = 1.0;
+                self.tableView.separatorStyle = UITableViewCellSeparatorStyleNone;
             } completion:nil];
         }
     }
