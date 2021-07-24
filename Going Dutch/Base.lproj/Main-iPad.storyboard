@@ -382,24 +382,33 @@
                     <tableView key="view" clipsSubviews="YES" contentMode="scaleToFill" restorationIdentifier="solutionTableView" alwaysBounceVertical="YES" dataMode="prototypes" style="grouped" rowHeight="44" sectionHeaderHeight="10" sectionFooterHeight="10" id="DEn-mU-FyZ">
                         <rect key="frame" x="0.0" y="0.0" width="704" height="995.5"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
-                        <color key="backgroundColor" red="0.75745260715484619" green="0.83339643478393555" blue="0.92594647407531738" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                        <color key="backgroundColor" name="background"/>
                         <view key="tableHeaderView" contentMode="scaleToFill" restorationIdentifier="solutionHeaderView" id="mI7-Ux-H5Q" customClass="UITableViewHeaderFooterView">
                             <rect key="frame" x="0.0" y="0.0" width="704" height="50"/>
                             <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                             <subviews>
-                                <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="system" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="fi4-m8-emE">
+                                <button opaque="NO" contentMode="redraw" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="system" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="fi4-m8-emE" customClass="MCRoundedButton">
                                     <rect key="frame" x="314" y="20" width="76" height="30"/>
+                                    <color key="backgroundColor" name="background"/>
                                     <fontDescription key="fontDescription" type="system" pointSize="15"/>
                                     <state key="normal" title="Send Email">
                                         <color key="titleColor" red="0.98952531814575195" green="0.45403587818145752" blue="0.5264095664024353" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                                         <color key="titleShadowColor" red="0.5" green="0.5" blue="0.5" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                                     </state>
+                                    <userDefinedRuntimeAttributes>
+                                        <userDefinedRuntimeAttribute type="color" keyPath="normalBackgroundColor">
+                                            <color key="value" name="button - enabled"/>
+                                        </userDefinedRuntimeAttribute>
+                                        <userDefinedRuntimeAttribute type="color" keyPath="highlightedBackgroundColor">
+                                            <color key="value" name="button - disabled"/>
+                                        </userDefinedRuntimeAttribute>
+                                    </userDefinedRuntimeAttributes>
                                     <connections>
                                         <action selector="sendEmailButtonPressed:" destination="70X-Xq-8Hw" eventType="touchUpInside" id="UKL-pn-muP"/>
                                     </connections>
                                 </button>
                             </subviews>
-                            <color key="backgroundColor" red="1" green="1" blue="1" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                            <color key="backgroundColor" name="background"/>
                             <constraints>
                                 <constraint firstAttribute="centerX" secondItem="fi4-m8-emE" secondAttribute="centerX" id="5wa-pG-1nu"/>
                                 <constraint firstItem="fi4-m8-emE" firstAttribute="top" secondItem="mI7-Ux-H5Q" secondAttribute="top" constant="20" symbolic="YES" id="8Be-Ab-QYi"/>
@@ -1338,6 +1347,23 @@
             <point key="canvasLocation" x="2482.8125" y="-73.2421875"/>
         </scene>
     </scenes>
+    <designables>
+        <designable name="9MV-Ie-wK3">
+            <size key="intrinsicContentSize" width="480" height="480"/>
+        </designable>
+        <designable name="Z3O-c0-2tS">
+            <size key="intrinsicContentSize" width="480" height="480"/>
+        </designable>
+        <designable name="gvW-A9-uVj">
+            <size key="intrinsicContentSize" width="480" height="480"/>
+        </designable>
+        <designable name="jaj-RZ-MiC">
+            <size key="intrinsicContentSize" width="480" height="480"/>
+        </designable>
+        <designable name="xcc-E7-c0h">
+            <size key="intrinsicContentSize" width="480" height="480"/>
+        </designable>
+    </designables>
     <inferredMetricsTieBreakers>
         <segue reference="eXg-7Q-xwo"/>
         <segue reference="bBe-4f-24C"/>
