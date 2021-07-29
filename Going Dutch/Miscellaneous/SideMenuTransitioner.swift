@@ -51,12 +51,13 @@ final class SideMenuPresentationController: UIPresentationController, UIGestureR
     
     func navigationController(_ navigationController: UINavigationController, willShow viewController: UIViewController, animated: Bool) {
         if let transitionCoordinator = navigationController.transitionCoordinator {
+            let newPreferredWidth = viewController.preferredContentSize.width == 0 ? self.containerView!.bounds.size.width : viewController.preferredContentSize.width
             var navigationControllerViewframe = navigationController.view.frame
-            navigationControllerViewframe.size.width = viewController.preferredContentSize.width
+            navigationControllerViewframe.size.width = newPreferredWidth
             
             var viewControllerViewFrame = viewController.view.frame
             viewControllerViewFrame.origin.y = 0
-            viewControllerViewFrame.size.width = viewController.preferredContentSize.width
+            viewControllerViewFrame.size.width = newPreferredWidth
             
             transitionCoordinator.animate(alongsideTransition: { transitionCoordinatorContext in
                 navigationController.view!.frame = navigationControllerViewframe
@@ -94,7 +95,7 @@ final class SideMenuPresentationController: UIPresentationController, UIGestureR
     
     override var frameOfPresentedViewInContainerView: CGRect {
         var frameOfPresentingViewController = presentingViewController.view.frame
-        frameOfPresentingViewController.size.width = 280
+        frameOfPresentingViewController.size.width = 320
         return frameOfPresentingViewController
     }
     
@@ -112,6 +113,34 @@ final class SideMenuPresentationController: UIPresentationController, UIGestureR
         presentedLayer.shadowRadius = 15
         presentedLayer.shadowPath = CGPath(rect: presentedLayer.frame.insetBy(dx: 0, dy: -15), transform: nil)
         presentedLayer.shadowColor = UIColor.black.cgColor
+    }
+    
+    // MARK: UIContentContainer
+    
+    override func viewWillTransition(to size: CGSize, with coordinator: UIViewControllerTransitionCoordinator) {
+        if let navigationController = self.presentedViewController as? UINavigationController, let topViewController = navigationController.topViewController {
+            let newPreferredWidth = topViewController.preferredContentSize.width == 0 ? self.containerView!.bounds.size.width : topViewController.preferredContentSize.width
+            var navigationControllerViewframe = navigationController.view.frame
+            navigationControllerViewframe.size.width = newPreferredWidth
+            navigationControllerViewframe.size.height = size.height
+            
+            var viewControllerViewFrame = topViewController.view.frame
+            viewControllerViewFrame.origin.y = 0
+            viewControllerViewFrame.size.width = newPreferredWidth
+            viewControllerViewFrame.size.height = size.height
+            
+            coordinator.animate(alongsideTransition: { context in
+                navigationController.view!.frame = navigationControllerViewframe
+                topViewController.view!.frame = viewControllerViewFrame
+            }, completion: nil)
+        }
+        
+        super.viewWillTransition(to: size, with: coordinator)
+    }
+    
+    override func willTransition(to newCollection: UITraitCollection, with coordinator: UIViewControllerTransitionCoordinator) {
+        overrideTraitCollection = UITraitCollection(traitsFrom: [newCollection, UITraitCollection(horizontalSizeClass: .compact)])
+        super.willTransition(to: newCollection, with: coordinator)
     }
     
     // MARK: NSObject
