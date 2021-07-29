@@ -44,7 +44,7 @@ final class RootViewController: UIViewController {
             infoScreenTransitioner = SideMenuTransitioner()
             navigationController.transitioningDelegate = infoScreenTransitioner
             let infoContainerViewController = navigationController.viewControllers.last as! InfoScreenTableViewController
-            infoContainerViewController.preferredContentSize = CGSize(width: 280, height: 0);
+            infoContainerViewController.preferredContentSize = CGSize(width: 320, height: 0);
             infoContainerViewController.notificationEnvironmentModel = notificationsStateModel
         default:
             fatalError("\(segue.identifier!) is an unknown segue.")

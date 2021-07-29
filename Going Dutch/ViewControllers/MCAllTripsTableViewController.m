@@ -334,7 +334,7 @@ static void * notificationCountContext = &notificationCountContext;
         _iScreenTransitioner = [[SideMenuTransitioner alloc] init];
         navigationController.transitioningDelegate = _iScreenTransitioner;
         InfoScreenTableViewController *infoContainerViewController = navigationController.viewControllers.lastObject;
-        infoContainerViewController.preferredContentSize = CGSizeMake(280, 0);
+        infoContainerViewController.preferredContentSize = CGSizeMake(320, 0);
         infoContainerViewController.notificationEnvironmentModel = self.notificationsStateModel;
     }
 }
