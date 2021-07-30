@@ -12,7 +12,7 @@
         <scene sceneID="TmB-D7-Q0u">
             <objects>
                 <tableViewController storyboardIdentifier="MCAllTripsTableViewController_iPad" useStoryboardIdentifierAsRestorationIdentifier="YES" id="svo-bC-Qfm" customClass="MCAllTripsTableViewController_iPad" sceneMemberID="viewController">
-                    <tableView key="view" clipsSubviews="YES" contentMode="scaleToFill" restorationIdentifier="allTripsTableView" alwaysBounceVertical="YES" dataMode="prototypes" style="plain" separatorStyle="default" rowHeight="118" sectionHeaderHeight="22" sectionFooterHeight="22" id="3Dd-mZ-9Xg">
+                    <tableView key="view" clipsSubviews="YES" contentMode="scaleToFill" restorationIdentifier="allTripsTableView" alwaysBounceVertical="YES" dataMode="prototypes" style="plain" separatorStyle="none" rowHeight="118" sectionHeaderHeight="22" sectionFooterHeight="22" id="3Dd-mZ-9Xg">
                         <rect key="frame" x="0.0" y="0.0" width="768" height="1124"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <color key="backgroundColor" red="1" green="1" blue="1" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
@@ -262,7 +262,7 @@
                                                         <accessibility key="accessibilityConfiguration" identifier="Add Payment"/>
                                                         <fontDescription key="fontDescription" type="system" weight="semibold" pointSize="15"/>
                                                         <state key="normal" title="Add payment">
-                                                            <color key="titleColor" red="0.98952531814575195" green="0.45403587818145752" blue="0.5264095664024353" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                                                            <color key="titleColor" systemColor="systemBackgroundColor"/>
                                                             <color key="titleShadowColor" red="0.5" green="0.5" blue="0.5" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                                                         </state>
                                                         <userDefinedRuntimeAttributes>
@@ -283,7 +283,7 @@
                                                         <accessibility key="accessibilityConfiguration" identifier="Solve"/>
                                                         <fontDescription key="fontDescription" type="system" weight="semibold" pointSize="15"/>
                                                         <state key="normal" title="Solve">
-                                                            <color key="titleColor" red="0.98952531814575195" green="0.45403587818145752" blue="0.5264095664024353" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                                                            <color key="titleColor" systemColor="systemBackgroundColor"/>
                                                             <color key="titleShadowColor" red="0.5" green="0.5" blue="0.5" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                                                         </state>
                                                         <userDefinedRuntimeAttributes>
@@ -393,7 +393,7 @@
                                     <color key="backgroundColor" name="background"/>
                                     <fontDescription key="fontDescription" type="system" pointSize="15"/>
                                     <state key="normal" title="Send Email">
-                                        <color key="titleColor" red="0.98952531814575195" green="0.45403587818145752" blue="0.5264095664024353" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                                        <color key="titleColor" systemColor="systemBackgroundColor"/>
                                         <color key="titleShadowColor" red="0.5" green="0.5" blue="0.5" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                                     </state>
                                     <userDefinedRuntimeAttributes>
@@ -1375,9 +1375,26 @@
             <point key="canvasLocation" x="2482.8125" y="-73.2421875"/>
         </scene>
     </scenes>
+    <designables>
+        <designable name="9MV-Ie-wK3">
+            <size key="intrinsicContentSize" width="480" height="480"/>
+        </designable>
+        <designable name="Z3O-c0-2tS">
+            <size key="intrinsicContentSize" width="480" height="480"/>
+        </designable>
+        <designable name="gvW-A9-uVj">
+            <size key="intrinsicContentSize" width="480" height="480"/>
+        </designable>
+        <designable name="jaj-RZ-MiC">
+            <size key="intrinsicContentSize" width="480" height="480"/>
+        </designable>
+        <designable name="xcc-E7-c0h">
+            <size key="intrinsicContentSize" width="480" height="480"/>
+        </designable>
+    </designables>
     <inferredMetricsTieBreakers>
-        <segue reference="pZQ-Y2-0Nm"/>
-        <segue reference="qrR-J2-mhx"/>
+        <segue reference="eXg-7Q-xwo"/>
+        <segue reference="bBe-4f-24C"/>
         <segue reference="aJ5-e8-dvs"/>
         <segue reference="fEV-Fb-0pC"/>
     </inferredMetricsTieBreakers>
