@@ -12,12 +12,12 @@
 #import "MCTonightsBillTransfer.h"
 
 @class MCSharedBill;
-@class MCTableEmptyMessage_iPad;
+@class MCTableEmptyMessage;
 
 __attribute__((objc_subclassing_restricted))
 @interface MCSharedBillPaymentsTableViewController_iPad : UITableViewController <NSFetchedResultsControllerDelegate, MCTonightsBillTransfer>
 
-@property (nonatomic, strong) MCTableEmptyMessage_iPad *emptyMessage;
+@property (nonatomic, strong) MCTableEmptyMessage *emptyMessage;
 
 @property (strong, nonatomic) MCSharedBill *tonightsBill;
 @property (strong, nonatomic) MCSharedBill *writableTonightsBill;

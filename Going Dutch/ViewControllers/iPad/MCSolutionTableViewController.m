@@ -26,7 +26,10 @@ typedef NS_ENUM(BOOL, MCXRateStatus) {
 @interface MCSolutionTableViewController ()
 
 @property (nonatomic, strong) NSArray *solution;
-@property (nonatomic, strong) MCTableEmptyMessage_iPad *emptyMessage;
+
+@property (nonatomic, strong) MCTableEmptyMessage *emptyMessage;
+@property (weak, nonatomic) IBOutlet UITableViewHeaderFooterView *headerView;
+
 @property (nonatomic) MCXRateStatus areXRatesMissing;
 
 @end
@@ -61,45 +64,24 @@ typedef NS_ENUM(BOOL, MCXRateStatus) {
 
 }
 
-- (void)setEmptyMessage
-{
-    if ([_solution count] != 0) {
-        [UIView animateWithDuration:0.3 animations:^{
-            [[self.emptyMessage bigMessage] setAlpha:0.0];
-            [[self tableView] setSeparatorStyle:UITableViewCellSeparatorStyleSingleLine];
+- (void)setEmptyMessageWithDuration:(NSTimeInterval)duration {
+    if (_solution.count != 0) {
+        [UIView animateWithDuration:duration animations:^{
+            self.emptyMessage.bigMessage.alpha = 0.0;
+            self.emptyMessage.borderlineView.alpha = 0.0;
+            self.tableView.separatorStyle = UITableViewCellSeparatorStyleSingleLine;
         } completion:nil];
     } else if (!_solution) {
-        [UIView animateWithDuration:0.3 animations:^{
-            [[self.emptyMessage bigMessage] setAlpha:1.0];
-            [[self tableView] setSeparatorStyle:UITableViewCellSeparatorStyleNone];
+        [UIView animateWithDuration:duration animations:^{
+            self.emptyMessage.bigMessage.alpha = 1.0;
+            self.tableView.separatorStyle = UITableViewCellSeparatorStyleNone;
         } completion:nil];
     } else {
         if ([[_emptyMessage bigMessage] alpha] < 1.0) {
-            [UIView animateWithDuration:0.3 animations:^{
-                [[self.emptyMessage bigMessage] setAlpha:1.0];
-                [[self tableView] setSeparatorStyle:UITableViewCellSeparatorStyleNone];
-            } completion:nil];
-        }
-    }
-}
-
-- (void)setEmptyMessageNow
-{
-    if ([_solution count] != 0) {
-        [UIView animateWithDuration:0.3 animations:^{
-            [[self.emptyMessage bigMessage] setAlpha:0.0];
-            [[self tableView] setSeparatorStyle:UITableViewCellSeparatorStyleSingleLine];
-        } completion:nil];
-    } else if (!_solution) {
-        [UIView animateWithDuration:0.3 animations:^{
-            [[self.emptyMessage bigMessage] setAlpha:1.0];
-            [[self tableView] setSeparatorStyle:UITableViewCellSeparatorStyleNone];
-        } completion:nil];
-    } else {
-        if ([[self.emptyMessage bigMessage] alpha] < 1.0) {
-            [UIView animateWithDuration:0.3 animations:^{
-                [[self.emptyMessage bigMessage] setAlpha:1.0];
-                [[self tableView] setSeparatorStyle:UITableViewCellSeparatorStyleNone];
+            [UIView animateWithDuration:duration animations:^{
+                self.emptyMessage.bigMessage.alpha = 1.0;
+                self.emptyMessage.borderlineView.alpha = 1.0;
+                self.tableView.separatorStyle = UITableViewCellSeparatorStyleNone;
             } completion:nil];
         }
     }
@@ -117,7 +99,7 @@ typedef NS_ENUM(BOOL, MCXRateStatus) {
             UIAlertAction *dismissAction = [UIAlertAction actionWithTitle:dismissTitle style:UIAlertActionStyleCancel handler:^(UIAlertAction * _Nonnull action) {
                 [self.emptyMessage.activityIndicator stopAnimating];
                 self.emptyMessage.bigMessage.text = message;
-                [self setEmptyMessage];
+                [self setEmptyMessageWithDuration:0.3];
             }];
             [alertController addAction:dismissAction];
             [self presentViewController:alertController animated:YES completion:nil];
@@ -156,7 +138,7 @@ typedef NS_ENUM(BOOL, MCXRateStatus) {
         
         NSLog(@"Stop animating.");
         [[[self emptyMessage] activityIndicator] stopAnimating];
-        [self setEmptyMessageNow];
+        [self setEmptyMessageWithDuration:0.0];
         
         NSIndexSet *indexes = [[NSIndexSet alloc] initWithIndexesInRange:NSMakeRange(0, 3)];
         [[self tableView] insertSections:indexes withRowAnimation:UITableViewRowAnimationTop];
@@ -329,6 +311,13 @@ typedef NS_ENUM(BOOL, MCXRateStatus) {
 
 #pragma mark - UIViewController
 
+- (void)loadView {
+    [super loadView];
+    
+    _emptyMessage = [[NSBundle mainBundle] loadNibNamed:@"MCTableEmptyMessage" owner:self options:nil][0];
+    self.tableView.backgroundView = _emptyMessage;
+}
+
 - (void)viewDidLoad {
     MCRemoteConfigEngine *configEngine = [[MCRemoteConfigEngine alloc] init];
     self.adEngine.shouldShowEngine = [[MCRemoteConfigTrueCasino alloc] initWithEngine:configEngine andRemoteConfigItem:ConfigEngineItemPercentageOfTimeShowAfterSolveInterstitialOniPad];
@@ -341,7 +330,6 @@ typedef NS_ENUM(BOOL, MCXRateStatus) {
     // Uncomment the following line to display an Edit button in the navigation bar for this view controller.
     // self.navigationItem.rightBarButtonItem = self.editButtonItem;
 
-    _emptyMessage = [[NSBundle mainBundle] loadNibNamed:@"MCTableEmptyMessage_iPad" owner:self options:nil][0];
     [self giveSolution];
 }
 
@@ -351,11 +339,11 @@ typedef NS_ENUM(BOOL, MCXRateStatus) {
     if ([_tonightsBill areAllExchangeRatesValid]) {
         _areXRatesMissing = xRatesPresent;
         [[_emptyMessage activityIndicator] stopAnimating];
-        [[_emptyMessage bigMessage] setAlpha:0.0];
+        [self setEmptyMessageWithDuration:0.0];
     } else {
         _areXRatesMissing = xRatesMissing;
         [[_emptyMessage activityIndicator] startAnimating];
-        [[_emptyMessage bigMessage] setAlpha:0.0];
+        [self setEmptyMessageWithDuration:0.0];
     }
     
     if (_tonightsBill.peoplePresent.count == 0 || _tonightsBill.payments.count == 0) {
@@ -364,8 +352,8 @@ typedef NS_ENUM(BOOL, MCXRateStatus) {
         _emptyMessage.bigMessage.text = @"";
     }
 
-    [[self tableView] setBackgroundView:_emptyMessage];
-    [self setEmptyMessageNow];
+    _emptyMessage.topConstraint.constant = _headerView.frame.size.height + self.navigationController.navigationBar.frame.size.height + 10;
+    [self setEmptyMessageWithDuration:0.0];
 }
 
 #pragma mark - UIResponder
