@@ -23,9 +23,10 @@
 
 @interface MCAllTripsTableViewController_iPad ()
 
+@property (weak, nonatomic) IBOutlet UITableViewHeaderFooterView *headerView;
 @property (weak, nonatomic) IBOutlet MCRoundedButton *createEventButton;
 
-@property (nonatomic, strong) MCTableEmptyMessage_iPad *emptyMessage;
+@property (nonatomic, strong) MCTableEmptyMessage *emptyMessage;
 @property (nonatomic, strong) NSDateFormatter *df;
 
 @property (nonatomic, strong) NSFetchedResultsController *dataController;
@@ -48,32 +49,18 @@
     }
 }
 
-- (void)setEmptyMessage {
+- (void)setEmptyMessageWithDuration:(NSTimeInterval)duration {
     if (_dataController.fetchedObjects.count != 0) {
-        [UIView animateWithDuration:1.0 animations:^{
+        [UIView animateWithDuration:duration animations:^{
             self.emptyMessage.bigMessage.alpha = 0.0;
+            self.emptyMessage.borderlineView.alpha = 0.0;
             self.tableView.separatorStyle = UITableViewCellSeparatorStyleSingleLine;
         } completion:nil];
     } else {
         if (_emptyMessage.bigMessage.alpha < 1.0) {
-            [UIView animateWithDuration:1.0 animations:^{
+            [UIView animateWithDuration:duration animations:^{
                 self.emptyMessage.bigMessage.alpha = 1.0;
-                self.tableView.separatorStyle = UITableViewCellSeparatorStyleNone;
-            } completion:nil];
-        }
-    }
-}
-
-- (void)setEmptyMessageNow {
-    if (_dataController.fetchedObjects.count != 0) {
-        [UIView animateWithDuration:0.0 animations:^{
-            self.emptyMessage.bigMessage.alpha = 0.0;
-            self.tableView.separatorStyle = UITableViewCellSeparatorStyleSingleLine;
-        } completion:nil];
-    } else {
-        if (_emptyMessage.bigMessage.alpha < 1.0) {
-            [UIView animateWithDuration:0.0 animations:^{
-                self.emptyMessage.bigMessage.alpha = 1.0;
+                self.emptyMessage.borderlineView.alpha = 1.0;
                 self.tableView.separatorStyle = UITableViewCellSeparatorStyleNone;
             } completion:nil];
         }
@@ -102,26 +89,20 @@
     [[MCWeAllPayStoreController defaultStore] saveMainThreadContext];
 }
 
-#pragma mark - NSFetchedResultsController
+#pragma mark - NSFetchedResultsControllerDelegate
 
 - (void)controllerWillChangeContent:(NSFetchedResultsController *)controller {
     [[self tableView] beginUpdates];
-}
-
-- (void)controllerDidChangeContent:(NSFetchedResultsController *)controller {
-    [[self tableView] endUpdates];
 }
 
 - (void)controller:(NSFetchedResultsController *)controller didChangeObject:(id)anObject atIndexPath:(NSIndexPath *)indexPath forChangeType:(NSFetchedResultsChangeType)type newIndexPath:(NSIndexPath *)newIndexPath {
     switch(type) {
         case NSFetchedResultsChangeInsert:
             [[self tableView] insertRowsAtIndexPaths:@[newIndexPath] withRowAnimation:UITableViewRowAnimationFade];
-            [self setEmptyMessage];
             break;
             
         case NSFetchedResultsChangeDelete:
             [[self tableView] deleteRowsAtIndexPaths:@[indexPath] withRowAnimation:UITableViewRowAnimationFade];
-            [self setEmptyMessage];
             break;
             
         case NSFetchedResultsChangeUpdate:
@@ -133,6 +114,11 @@
             [[self tableView] insertRowsAtIndexPaths:@[newIndexPath] withRowAnimation:UITableViewRowAnimationFade];
             break;
     }
+}
+
+- (void)controllerDidChangeContent:(NSFetchedResultsController *)controller {
+    [[self tableView] endUpdates];
+    [self setEmptyMessageWithDuration:0.25];
 }
 
 #pragma mark - UITableViewController
@@ -227,6 +213,13 @@
 
 #pragma mark - UIViewController
 
+- (void)loadView {
+    [super loadView];
+    
+    _emptyMessage = [[NSBundle mainBundle] loadNibNamed:@"MCTableEmptyMessage" owner:self options:nil][0];
+    self.tableView.backgroundView = _emptyMessage;
+}
+
 - (void)viewDidLoad {
     [super viewDidLoad];
     
@@ -238,12 +231,9 @@
     
     [self startRespondingToStoreChangeNotifications];
     
-    _emptyMessage = [[NSBundle mainBundle] loadNibNamed:@"MCTableEmptyMessage_iPad" owner:self options:nil][0];
-    _emptyMessage.bigMessage.alpha = 0.0;
-    self.tableView.backgroundView = _emptyMessage;
+    _emptyMessage.topConstraint.constant = self.headerView.frame.size.height;
     
     [self setNeedsStatusBarAppearanceUpdate];
-    
     [self prepareUserActivity];
 }
 
@@ -255,10 +245,10 @@
         [self performFetch];
         [[self tableView] reloadData];
         if (_isEmptyMessageShownInstantForFirstBoot == false) {
-            [self setEmptyMessageNow];
+            [self setEmptyMessageWithDuration:0.0];
             _isEmptyMessageShownInstantForFirstBoot = true;
         } else {
-            [self setEmptyMessage];
+            [self setEmptyMessageWithDuration:0.25];
         }
     }
     

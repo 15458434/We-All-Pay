@@ -9,7 +9,7 @@
 @import UIKit;
 @import CoreData;
 
-@class MCTableEmptyMessage_iPad;
+@class MCTableEmptyMessage;
 @class MCNotificationsInfoModel;
 
 NS_ASSUME_NONNULL_BEGIN
