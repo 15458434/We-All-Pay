@@ -863,7 +863,7 @@
                                 </textField>
                                 <button opaque="NO" contentMode="redraw" placeholderIntrinsicWidth="127" placeholderIntrinsicHeight="30" restorationIdentifier="addPersonButton" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="gfv-ln-Tgv" customClass="MCRoundedButton">
                                     <rect key="frame" x="20" y="64" width="127" height="30"/>
-                                    <color key="backgroundColor" red="0.75686274509803919" green="0.83529411764705885" blue="0.92549019607843142" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                                    <color key="backgroundColor" name="background"/>
                                     <constraints>
                                         <constraint firstAttribute="width" constant="127" id="Lmg-bJ-KJf"/>
                                     </constraints>
@@ -1823,7 +1823,7 @@
             <size key="intrinsicContentSize" width="480" height="480"/>
         </designable>
         <designable name="jMQ-DN-rdu">
-            <size key="intrinsicContentSize" width="1219.2000071055095" height="1219.2000071055095"/>
+            <size key="intrinsicContentSize" width="480" height="480"/>
         </designable>
         <designable name="rmI-7G-oMX">
             <size key="intrinsicContentSize" width="480" height="480"/>
