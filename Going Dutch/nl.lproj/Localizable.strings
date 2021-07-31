@@ -234,6 +234,9 @@
 /* A message when there are no people present inside this shared bill */
 "NO_PEOPLE_PRESENT" = "Niemand aanwezig";
 
+/* A message for no notifications in the notifications screen. */
+"Nothing new right now." = "Er is niks nieuws op dit moment.";
+
 /* Nothing to restore */
 "Nothing to restore" = "Niks om te herstellen";
 
