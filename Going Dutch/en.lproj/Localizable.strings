@@ -1,6 +1,149 @@
+/*
+  Localizable.strings
+  We all pay
+
+  Created by Mark Cornelisse on 29-12-13.
+  Copyright (c) 2013 Mark Cornelisse. All rights reserved.
+*/
+
+/* AllTripsTableView */
+"BACK_TITLE_ALL_TRIPS_VIEW" = "back";
+
+/* MCSharedBill+addons */
+/* A message when there are no people present inside this shared bill */
+"NO_PEOPLE_PRESENT" = "No people present";
+/* The word \"and\" between two people */
+"AND_STRING" = "and";
+/* A list of people like Mark, Ilse and other where the \"and others\" needs to be translated. */
+"AND_OTHERS" = "and others";
+
+/* SharedBillPageView */
+"PEOPLE_PRESENT_PAGEVIEWCONTROLLER" = "People present";
+"PAYMENTS_PAGEVIEWCONTROLLER" = "Payments";
+"EMAIL_CONSTRUCTION_FAILURE_TITLE" = "Unable to send email to all people.";
+"EMAIL_CONSTRUCTION_FAILURE_MESSAGE" = "Reason: Not all people have a mail address.";
+"CANCEL" = "Cancel";
+"SEND_ANYWAY" = "Send anyway";
+
+/* Email */
 /* Bill overview of our trip to "movies" */
 "EMAIL_SUBJECT_WITH_TRIPNAME" = "Expenses overview of our trip to %1$@";
+/* Bill overview of our event" */
+"EMAIL_SUBJECT" = "Expenses overview of our event.";
+/* Just Dear as in \"Dear Mark\" */
+"EMAIL_DEAR" = "Dear %1$@,";
+/* From a total of \"$ 20,45\", which was spend on our last trip to \"Movies\". We all have to pay an equal share of \"$6,82\". */
+"EMAIL_INTRO_WITH_TRIPNAME" = "Here you go. The full overview of the %1$@ which we spend on our last event %2$@. We spent an average of %3$@ a person. You can find more details below.";
+/* Here you go. The full overview of the %1$@ which we spend on our last event. We spent an average of %2$@ a person. You can find more of the details below. */
+"EMAIL_INTRO" = "Here you go. The full overview of the %1$@ which we spend on our last event. We spent an average of %2$@ a person. You can find more of the details below.";
+/* The message that nobody has paid so far */
+"EMAIL_NOBODY_HAS_PAID" = "Nobody has paid so far.";
+/* The person who has payed %1$@ */
+"EMAIL_ONE_PERSON_HAS_PAID" = "%1$@ has paid for everything:";
+/* The people who have paid are */
+"EMAIL_MULTIPLE_PEOPLE_HAVE_PAID" = "This is what we all paid:";
+/* %1$@ has paid %2$@ for %3$@. */
+"EMAIL_WHO_HAS_PAID" = "%1$@ paid %2$@ for %3$@.";
+/* %1$@ has paid %2$@(%3$@) for %4$@. */
+"EMAIL_WHO_HAS_PAID_INTERNATIONAL" = "%1$@ has paid %2$@(%3$@) for %4$@";
+/* Part one of: To have everybody pay the average of $7.00, I suggest the following solution */
+"EMAIL_AVERAGE_SENTENCES_ONE" = "When everybody pays the average of";
+"EMAIL_AVERAGE_SENTENCES_TWO" = ", I suggest the following solution";
+/* "The amount of money we used: */
+"EMAIL_AVERAGE_OF_USE_SENTENCE" = "We each used these amounts:";
+/* %1$@ used %2$@ in total. */
+"EMAIL_AMOUNT_USED" = "%1$@ used %2$@ in total.";
+"EMAIL_I_SUGGEST" = "Based on all of this, I suggest the following solution:";
+/* The sentence: "Mark" pays $6.80 to Ilse. */
+"EMAIL_OWES_PART_ONE" = "pays";
+"EMAIL_OWES_PART_TWO" = "to";
+/* %1$@ pays %2$@ to %3$@. */
+"EMAIL_OWES" = "%1$@ pays %2$@ to %3$@.";
+/* Closing sentence of the email: If you have any remarks please let me know. */
+"EMAIL_FINAL_SENTENCE" = "If you have any remarks, please let me know.";
 
 /* SharedBillTableView */
 "EMPTY_PAYMENT_LIST_MESSAGE" = "Press \"Add payment\" to add a payment to this event";
+"PAYMENTCELL_PAYERNAME_EXTRA" = " paid";
+"PAYMENT_CELL_PAIDFOR_EXTRA" = "for ";
+"THISPAYMENTCELL_NOPAYERNAME" = "Someone";
+"THISPAYMENTCELL_NOOBJECT" = "something";
+/* One of the payments is missing a payer. */
+"At least one of the payments is missing a payer." = "At least one of the payment is missing a payer.";
+"Go to" = "Go to";
 
+/* MCReturnPaymentView */
+/* "EACH_USED", "Mark used:" */
+"EACH_USED" = "used:";
+/* Each pays: $ string inside the header of the solution screen. */
+"EACH_PAYS" = "Each pays:";
+/* Ilse total paid: inside the solution screen. */
+"TOTAL_PAID" ="total paid:";
+/* Total spent: $ string inside the header of the solution screen */
+"TOTAL_SPENT" = "Total spent:";
+/* As in Mark owes Arjen, but then just the word owes. */
+"OWES" = "owes";
+/* Please add payments and/or people if you want a solution on who owes who.*/
+"RETURNPAYMENTSVIEW_NOPAYMENTS" = "Please add people and payments if you want a solution on who owes who.";
+/* Section header in the tableView Who owes who */
+"SOLUTION_SECTION_WHO_OWES_WHO" = "Who owes whom";
+/* Section header in the tableView Total owes */
+"SOLUTION_SECTION_TOTAL_OWES" = "Total owes";
+/* Section header in the tableView Total paid */
+"SOLUTION_SECTION_TOTAL_PAID" = "Total paid";
+
+/* MCEditTripView */
+/* Press \"add Person\" to add a person who you'd like to share this bill with. */
+"PEOPLE_LIST_EMPTY_MESSAGE" = "Press \"Add person\" to add a person who you'd like to share this bill with.";
+"CONTACTS_DISABLED_TITLE" = "Contacts disabled";
+"CONTACTS_DISABLED_MESSAGE" = "You can enable access to Contacts in Settings->We All Pay->Privacy";
+
+/* PaymentView */
+/* Header in the paymentView which state new Payment. */
+"NEW_PAYMENT_HEADER" = "New payment";
+/* Sub header in the paymentView which states Add payment data */
+"NEW_PAYMENT_SUBHEADER" = "Add payment data";
+/* Header in the paymentView which states payment */
+"EXISTING_PAYMENT_HEADER" = "Payment";
+/* Sub header in the paymentView which states edit data */
+"EXISTING_PAYMENT_SUBHEADER" = "Edit payment data";
+/* Owes as in Mark owes $5*/
+"OWES_FROM_THIS_PAYMENT" = "owes";
+"SELECT_PAYER" = "Select payer";
+"SELECT_CATEGORY" = "Select Category";
+
+/* PersonView */
+/* Header in the personView which state new person. */
+"Person" = "Person";
+/* Sub header in the personView which states add new data */
+"Add" = "Create";
+/* Sub header in the personView which state edit data */
+"Edit" = "Edit";
+
+/* Invalid email address alertView */
+/* Title */
+"INVALID_EMAIL_ADDRESS" = "Invalid email address";
+/* Message */
+"INVALID_EMAIL_ADDRESS_MESSAGE" = "The email address you provided doesn't appear to be an email address. This might cause improper behavior. Are you sure you want to continue?";
+"YES" = "yes";
+"NO" = "no";
+
+/* XRates missing alert */
+"UNABLE_TO_SOLVE" = "Unable to solve";
+"UNABLE_TO_SOLVE_MESSAGE" = "Exchange rates missing. Would you like to fetch them now?";
+
+/* iScreen */
+"GIVE_FEEDBACK" = "Give feedback";
+"BUY_PRO" = "Remove Ads";
+"RESTORE_PREVIOUS_PURCHASES" = "Restore previous purchases";
+"WHAT_IS_PRO" = "What is the Pro Version?";
+"THANK_YOU_FOR_PURCHASING" = "Thank you for purchasing.";
+"I_WILL_SHOW_NO_ADS" = "We all pay is now an ad free experience.";
+"PURCHASE_RESTORED" ="Ad free version restored.";
+"RESTORE_PURCHASE_FAILED" = "Nothing to restore";
+"OK" = "Ok";
+
+/* Store Interface */
+"App Store unavailable" = "App Store unavailable";
+"Unable to connect to the App Store. Please connect to the internet." = "Unable to connect to the App Store. Please connect to the internet.";
+"Dismiss" = "Dismiss";
