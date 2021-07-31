@@ -1,6 +1,6 @@
-/* For your event %1$@, %2$@ should pay next. */
+/* For your event $1EventName, $2Person should pay next. */
 "For your event %@, %@ should pay next" = "Voor jullie rekening %1$@, is %2$@ als volgende aan de beurt om te betalen";
 
-/* There is no data to display */
+/* I don't know who's paying next. Tap here to open We all pay and add a payment to an event. */
 "There is no data to display" = "Ik weet niet wie de volgende is om te betalen. Druk hier om We all pay to openen en voeg een betaling toe op een rekening.";
 
