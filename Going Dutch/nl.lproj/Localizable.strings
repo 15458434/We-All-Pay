@@ -4,6 +4,9 @@
 /* Ad free version restored. */
 "Ad free version restored." = "Advertentie vrije versie is hersteld";
 
+/* Sub header in the personView which states add new data */
+"Add" = "Nieuw";
+
 /* Title for an alert message, because there are no people added to this event. */
 "Add some people first" = "Voeg eerst aanwezigen toe";
 
@@ -19,7 +22,7 @@
 /* example for appstore screenshots */
 "ann_burwell@work.com" = "anne_groen@werk.com";
 
-/* Message that pops up when the App Store is not available. */
+/* Store Interface */
 "App Store unavailable" = "App Store niet beschikbaar";
 
 /* One of the payments is missing a payer. */
@@ -84,13 +87,16 @@
 /* Each pays: $ string inside the header of the solution screen. */
 "EACH_PAYS" = "Per persoon:";
 
-/* Each used: */
+/* "EACH_USED", "Mark used:" */
 "EACH_USED" = "gebruikte:";
+
+/* Sub header in the personView which state edit data */
+"Edit" = "Bewerk";
 
 /* %1$@ used %2$@ in total. */
 "EMAIL_AMOUNT_USED" = "%1$@ gebruikte in totaal %2$@.";
 
-/* The amount of money we used: */
+/* "The amount of money we used: */
 "EMAIL_AVERAGE_OF_USE_SENTENCE" = "We hebben deze kosten gemaakt:";
 
 /* Part one of: To have everybody pay the average of $7.00, I suggest the following solution */
@@ -105,10 +111,10 @@
 /* Unable to send email to all people. */
 "EMAIL_CONSTRUCTION_FAILURE_TITLE" = "Kan niet iedereen een email sturen.";
 
-/* Dear %1$@, */
+/* Just Dear as in \"Dear Mark\" */
 "EMAIL_DEAR" = "Beste %1$@,";
 
-/* If you have any remarks please let me know. */
+/* Closing sentence of the email: If you have any remarks please let me know. */
 "EMAIL_FINAL_SENTENCE" = "Als jullie nog opmerkingen hebben dan hoor ik dat graag.";
 
 /* I suggest the following solution. */
@@ -117,7 +123,7 @@
 /* Here you go. The full overview of the %1$@ which we spend on our last event. We spent an average of %2$@ a person. You can find more of the details below. */
 "EMAIL_INTRO" = "Alsjeblieft, het overzicht van de %1$@ aan kosten die we gemaakt hebben voor ons uitje. De gemiddelde kosten per persoon zijn %3$@. Het complete overzicht staat hieronder.";
 
-/* Here you go. The full overview of the %1$@ which we spend on our last event %2$@. We spent an average of %3$@ a person. You can find more of the details below. */
+/* From a total of \"$ 20,45\", which was spend on our last trip to \"Movies\". We all have to pay an equal share of \"$6,82\". */
 "EMAIL_INTRO_WITH_TRIPNAME" = "Alsjeblieft, het overzicht van de %1$@ aan kosten die we gemaakt hebben voor ons uitje naar %2$@. De gemiddelde kosten per persoon zijn %3$@. Het complete overzicht staat hieronder.";
 
 /* The people who have paid are */
@@ -129,7 +135,7 @@
 /* The person who has payed %1$@ */
 "EMAIL_ONE_PERSON_HAS_PAID" = "%1$@ is de enige die heeft betaald.";
 
-/* %1$@ pays %2$@ to %3$@ */
+/* %1$@ pays %2$@ to %3$@. */
 "EMAIL_OWES" = "%1$@ geeft %2$@ aan %3$@.";
 
 /* The sentence: "Mark" pays $6.80 to Ilse. */
@@ -138,10 +144,10 @@
 /* (No Comment) */
 "EMAIL_OWES_PART_TWO" = "aan";
 
-/* Bill overview of our event. */
+/* Bill overview of our event" */
 "EMAIL_SUBJECT" = "Onkosten overzicht van ons uitje.";
 
-/* Bill overview of our trip to %1$@ */
+/* Bill overview of our trip to "movies" */
 "EMAIL_SUBJECT_WITH_TRIPNAME" = "Onkosten overzicht van ons uitje %1$@.";
 
 /* %1$@ has paid %2$@ for %3$@. */
@@ -150,17 +156,14 @@
 /* %1$@ has paid %2$@(%3$@) for %4$@. */
 "EMAIL_WHO_HAS_PAID_INTERNATIONAL" = "%1$@ betaalde %2$@(%3$@) voor %4$@.";
 
-/* Press \"add payment\" to add a payment to this event. */
+/* SharedBillTableView */
 "EMPTY_PAYMENT_LIST_MESSAGE" = "Druk op \"Nieuwe betaling\" om een betaling toe te voegen op deze rekening.";
 
 /* Header in the paymentView which states payment */
 "EXISTING_PAYMENT_HEADER" = "Betaling";
 
-/* Sub header in the paymentView which states edit payment data */
+/* Sub header in the paymentView which states edit data */
 "EXISTING_PAYMENT_SUBHEADER" = "Bewerk gegevens";
-
-/* Sub header in the personView which state edit data */
-"Edit" = "Bewerk";
 
 /* Message explaining what the user can do to refetch exchange rates */
 "Fetching exchange rates is not possible at this moment. Check your internet connection and/or hit solve to fetch all missing exchange rates at a later time" = "Het ophalen van de wisselkoers is niet mogelijk op dit moment. Controleer je internet verbinding en/of druk later op 'Oplossing' om all ontbrekende wisselkoersen op te halen.";
@@ -180,10 +183,10 @@
 /* (No Comment) */
 "I_WILL_SHOW_NO_ADS" = "We all pay is nu een advertentie vrije ervaring.";
 
-/* Invalid email address */
+/* Title */
 "INVALID_EMAIL_ADDRESS" = "Ongeldig emailadres";
 
-/* The email address you provided doesn't appear to be an email address. This might cause improper behavior. Are you sure you want to continu? */
+/* Message */
 "INVALID_EMAIL_ADDRESS_MESSAGE" = "Het ingevoerde emailadres lijkt niet op een geldig email adres. Dit kan ongewenst gedrag veroorzaken. Weet u zeker dat u door wilt gaan?";
 
 /* first name example for app store screenshots */
@@ -216,23 +219,16 @@
 /* Screen name saying this is a new payment. */
 "New Payment" = "Nieuwe betaling";
 
-/* Header in the paymentView which state new Payment */
+/* Header in the paymentView which state new Payment. */
 "NEW_PAYMENT_HEADER" = "Nieuwe betaling";
 
 /* Sub header in the paymentView which states Add payment data */
 "NEW_PAYMENT_SUBHEADER" = "Vul gegevens in";
 
-/* Header in the personView which state new person.
-   new person */
-"Person" = "Persoon";
-
-/* Sub header in the personView which states add new data */
-"Add" = "Nieuw";
-
 /* last name example for appstore screenshots */
 "Nichelson" = "Vos";
 
-/* no */
+/* (No Comment) */
 "NO" = "nee";
 
 /* A message when there are no people present inside this shared bill */
@@ -264,6 +260,9 @@
 
 /* SharedBillPageView */
 "PEOPLE_PRESENT_PAGEVIEWCONTROLLER" = "Aanwezigen";
+
+/* Header in the personView which state new person. */
+"Person" = "Persoon";
 
 /* Alert message suggesting the user that there is missing data on a payment. */
 "Please check the payment for missing data" = "Controleer de betaling op ontbrekende data";
@@ -317,13 +316,13 @@
 /* payed item example for app store screenshots */
 "Soft drinks" = "Frisdrank";
 
-/* Total owes */
+/* Section header in the tableView Total owes */
 "SOLUTION_SECTION_TOTAL_OWES" = "Totaal verschuldigd";
 
-/* Total paid */
+/* Section header in the tableView Total paid */
 "SOLUTION_SECTION_TOTAL_PAID" = "Totaal uitgegeven";
 
-/* Who ows who */
+/* Section header in the tableView Who owes who */
 "SOLUTION_SECTION_WHO_OWES_WHO" = "Wie betaalt wie";
 
 /* Title of a Yes button. */
@@ -353,10 +352,10 @@
 /* payed item example for app store screenshots */
 "Tickets" = "Kaartjes";
 
-/* total paid: */
+/* Ilse total paid: inside the solution screen. */
 "TOTAL_PAID" = "totaal uitgegeven:";
 
-/* Total spent: */
+/* Total spent: $ string inside the header of the solution screen */
 "TOTAL_SPENT" = "Totaal:";
 
 /* last name example for appstore screenshots */
@@ -373,7 +372,7 @@
    Unable to send email */
 "Unable to send email" = "Kan email niet versturen";
 
-/* Unable to solve */
+/* XRates missing alert */
 "UNABLE_TO_SOLVE" = "Onoplosbaar";
 
 /* (No Comment) */
@@ -382,7 +381,7 @@
 /* (No Comment) */
 "WHAT_IS_PRO" = "Wat is de Pro versie?";
 
-/* yes */
+/* (No Comment) */
 "YES" = "ja";
 
 /* A message to the user thay can't add a payment when they didn't add people to the even. */
