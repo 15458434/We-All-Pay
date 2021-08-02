@@ -8,12 +8,12 @@
 
 import UIKit
 
-@IBDesignable final class CircularImageView: UIImageView {
+@IBDesignable final public class CircularImageView: UIImageView {
     // MARK: UIImageView
     
     // MARK: UIView
     
-    override func layoutSubviews() {
+    override public func layoutSubviews() {
         super.layoutSubviews()
 
         let mask = CAShapeLayer()
@@ -26,7 +26,7 @@ import UIKit
     // MARK: NSObject
     
     #if TARGET_INTERFACE_BUILDER
-    override func prepareForInterfaceBuilder() {
+    override public func prepareForInterfaceBuilder() {
         super.prepareForInterfaceBuilder()
         let environment = ProcessInfo.processInfo.environment
         let projectSourceDirectories : String = environment["IB_PROJECT_SOURCE_DIRECTORIES"]!

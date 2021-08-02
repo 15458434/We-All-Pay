@@ -15,7 +15,7 @@
             <objects>
                 <tableViewController storyboardIdentifier="MCAllTripsTableViewController" useStoryboardIdentifierAsRestorationIdentifier="YES" id="v9b-wE-q9L" customClass="MCAllTripsTableViewController" sceneMemberID="viewController">
                     <tableView key="view" opaque="NO" clipsSubviews="YES" clearsContextBeforeDrawing="NO" contentMode="scaleToFill" restorationIdentifier="AllTripTableView" alwaysBounceVertical="YES" dataMode="prototypes" style="plain" separatorStyle="none" rowHeight="76" sectionHeaderHeight="22" sectionFooterHeight="22" id="dFL-jL-DGD">
-                        <rect key="frame" x="0.0" y="0.0" width="375" height="758"/>
+                        <rect key="frame" x="0.0" y="0.0" width="375" height="724"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <color key="backgroundColor" red="1" green="1" blue="1" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                         <view key="tableHeaderView" contentMode="scaleToFill" restorationIdentifier="MCAllTripsActionHeader" id="b5c-w1-Nq5" customClass="UITableViewHeaderFooterView">
@@ -140,7 +140,7 @@
                     <toolbarItems/>
                     <navigationItem key="navigationItem" title="events" id="j9s-0f-8Vh">
                         <barButtonItem key="leftBarButtonItem" style="plain" id="rG6-kl-x9x">
-                            <view key="customView" contentMode="scaleToFill" id="iBP-xp-dgD" customClass="MCBadgeButton">
+                            <view key="customView" opaque="NO" contentMode="scaleToFill" id="iBP-xp-dgD" customClass="MCBadgeButton">
                                 <rect key="frame" x="16" y="10" width="24" height="24"/>
                                 <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                                 <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
@@ -343,18 +343,18 @@
             <objects>
                 <viewController id="Ltx-xd-qSj" customClass="MCSharedBillMainViewController" sceneMemberID="viewController">
                     <view key="view" contentMode="scaleToFill" restorationIdentifier="sharedBillMainViewController" id="hQT-KL-JNT">
-                        <rect key="frame" x="0.0" y="0.0" width="375" height="758"/>
+                        <rect key="frame" x="0.0" y="0.0" width="375" height="724"/>
                         <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                         <subviews>
                             <containerView contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="5xC-6r-YOL">
-                                <rect key="frame" x="0.0" y="0.0" width="375" height="758"/>
+                                <rect key="frame" x="0.0" y="0.0" width="375" height="724"/>
                                 <color key="backgroundColor" name="background"/>
                                 <connections>
                                     <segue destination="4g7-52-2bw" kind="embed" identifier="pageViewController" id="aSD-UO-zEs"/>
                                 </connections>
                             </containerView>
                             <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="XpA-qR-01e" customClass="GADBannerView">
-                                <rect key="frame" x="0.0" y="758" width="375" height="50"/>
+                                <rect key="frame" x="0.0" y="724" width="375" height="50"/>
                                 <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                 <constraints>
                                     <constraint firstAttribute="width" priority="1" constant="600" id="Ylf-Wj-vUa"/>
@@ -496,23 +496,23 @@
                                 </connections>
                             </tableViewCell>
                             <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" preservesSuperviewLayoutMargins="YES" selectionStyle="default" indentationWidth="10" reuseIdentifier="NotificationsCountTableViewCell" id="P8J-qh-17v" customClass="NotificationsCountTableViewCell" customModule="We_all_pay" customModuleProvider="target">
-                                <rect key="frame" x="0.0" y="90.666667938232422" width="375" height="71.333335876464844"/>
+                                <rect key="frame" x="0.0" y="90.666667938232422" width="375" height="41.666667938232422"/>
                                 <autoresizingMask key="autoresizingMask"/>
                                 <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" preservesSuperviewLayoutMargins="YES" insetsLayoutMarginsFromSafeArea="NO" tableViewCell="P8J-qh-17v" id="sUP-wJ-H4Y">
-                                    <rect key="frame" x="0.0" y="0.0" width="375" height="71.333335876464844"/>
+                                    <rect key="frame" x="0.0" y="0.0" width="375" height="41.666667938232422"/>
                                     <autoresizingMask key="autoresizingMask"/>
                                     <subviews>
                                         <stackView opaque="NO" contentMode="scaleToFill" distribution="equalSpacing" alignment="center" spacing="6" translatesAutoresizingMaskIntoConstraints="NO" id="JAb-jy-84u">
-                                            <rect key="frame" x="20" y="11.000000000000004" width="335" height="50.333333333333343"/>
+                                            <rect key="frame" x="20" y="11.000000000000002" width="335" height="20.666666666666671"/>
                                             <subviews>
                                                 <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Notifications" textAlignment="natural" lineBreakMode="tailTruncation" numberOfLines="0" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="YPb-Py-Acz">
-                                                    <rect key="frame" x="0.0" y="14.999999999999998" width="164.66666666666666" height="20.333333333333329"/>
+                                                    <rect key="frame" x="0.0" y="0.33333333333333393" width="164.66666666666666" height="20.333333333333329"/>
                                                     <fontDescription key="fontDescription" type="system" weight="thin" pointSize="17"/>
                                                     <nil key="textColor"/>
                                                     <nil key="highlightedColor"/>
                                                 </label>
-                                                <view clipsSubviews="YES" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" horizontalCompressionResistancePriority="751" verticalCompressionResistancePriority="751" ambiguous="YES" translatesAutoresizingMaskIntoConstraints="NO" id="PXr-ct-Ja1" customClass="MCUnreadNotificationsCountView">
-                                                    <rect key="frame" x="285" y="0.3333333333333357" width="50" height="50"/>
+                                                <view clipsSubviews="YES" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" horizontalCompressionResistancePriority="751" verticalCompressionResistancePriority="751" translatesAutoresizingMaskIntoConstraints="NO" id="PXr-ct-Ja1" customClass="MCUnreadNotificationsCountView">
+                                                    <rect key="frame" x="314.66666666666669" y="0.33333333333333393" width="20.333333333333314" height="20"/>
                                                     <color key="backgroundColor" systemColor="systemBackgroundColor"/>
                                                     <userDefinedRuntimeAttributes>
                                                         <userDefinedRuntimeAttribute type="color" keyPath="textColor">
@@ -929,7 +929,7 @@
                                         <stackView opaque="NO" contentMode="scaleToFill" alignment="top" spacing="6" baselineRelativeArrangement="YES" translatesAutoresizingMaskIntoConstraints="NO" id="lDY-bl-ZCc">
                                             <rect key="frame" x="20" y="8" width="335" height="52"/>
                                             <subviews>
-                                                <imageView opaque="NO" userInteractionEnabled="NO" contentMode="scaleAspectFill" restorationIdentifier="personPhoto" translatesAutoresizingMaskIntoConstraints="NO" id="ZjT-qg-OGx" customClass="CircularImageView" customModule="We_all_pay" customModuleProvider="target">
+                                                <imageView opaque="NO" userInteractionEnabled="NO" contentMode="scaleAspectFill" restorationIdentifier="personPhoto" translatesAutoresizingMaskIntoConstraints="NO" id="ZjT-qg-OGx" customClass="CircularImageView" customModule="WeAllPayDesignableUI">
                                                     <rect key="frame" x="0.0" y="0.0" width="52" height="52"/>
                                                     <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                                     <constraints>
@@ -1037,7 +1037,7 @@
                                                     <stackView opaque="NO" contentMode="scaleToFill" axis="vertical" alignment="center" spacing="10" translatesAutoresizingMaskIntoConstraints="NO" id="U7J-zz-CBD">
                                                         <rect key="frame" x="67.666666666666686" y="0.0" width="200" height="323"/>
                                                         <subviews>
-                                                            <imageView opaque="NO" userInteractionEnabled="NO" contentMode="scaleAspectFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="circularPictureInCodeDemo.png" translatesAutoresizingMaskIntoConstraints="NO" id="jMQ-DN-rdu" customClass="CircularImageView" customModule="We_all_pay" customModuleProvider="target">
+                                                            <imageView opaque="NO" userInteractionEnabled="NO" contentMode="scaleAspectFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="circularPictureInCodeDemo.png" translatesAutoresizingMaskIntoConstraints="NO" id="jMQ-DN-rdu" customClass="CircularImageView" customModule="WeAllPayDesignableUI">
                                                                 <rect key="frame" x="30" y="0.0" width="140" height="140"/>
                                                                 <constraints>
                                                                     <constraint firstAttribute="width" secondItem="jMQ-DN-rdu" secondAttribute="height" multiplier="1:1" id="WAT-1N-Djc"/>
@@ -1240,7 +1240,7 @@
                                                                 <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="0bu-A5-ptg">
                                                                     <rect key="frame" x="0.0" y="0.0" width="70" height="60"/>
                                                                     <subviews>
-                                                                        <imageView userInteractionEnabled="NO" contentMode="scaleAspectFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" translatesAutoresizingMaskIntoConstraints="NO" id="rmI-7G-oMX" customClass="CircularImageView" customModule="We_all_pay" customModuleProvider="target">
+                                                                        <imageView userInteractionEnabled="NO" contentMode="scaleAspectFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" translatesAutoresizingMaskIntoConstraints="NO" id="rmI-7G-oMX" customClass="CircularImageView" customModule="WeAllPayDesignableUI">
                                                                             <rect key="frame" x="10" y="0.0" width="60" height="60"/>
                                                                             <constraints>
                                                                                 <constraint firstAttribute="width" constant="60" id="BHd-Kf-Zud"/>
@@ -1472,7 +1472,7 @@
                                             <color key="textColor" red="0.0" green="0.0" blue="0.0" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                                             <nil key="highlightedColor"/>
                                         </label>
-                                        <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" translatesAutoresizingMaskIntoConstraints="NO" id="Y6i-cu-NDo" customClass="CircularImageView" customModule="We_all_pay" customModuleProvider="target">
+                                        <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" translatesAutoresizingMaskIntoConstraints="NO" id="Y6i-cu-NDo" customClass="CircularImageView" customModule="WeAllPayDesignableUI">
                                             <rect key="frame" x="161.33333333333334" y="6" width="40" height="40"/>
                                             <constraints>
                                                 <constraint firstAttribute="width" constant="40" id="4Ko-rK-sT7"/>
@@ -1813,15 +1813,27 @@
         </scene>
     </scenes>
     <designables>
+        <designable name="PXr-ct-Ja1">
+            <size key="intrinsicContentSize" width="20.287109375" height="20.287109375"/>
+        </designable>
+        <designable name="Y6i-cu-NDo">
+            <size key="intrinsicContentSize" width="480" height="480"/>
+        </designable>
+        <designable name="ZjT-qg-OGx">
+            <size key="intrinsicContentSize" width="480" height="480"/>
+        </designable>
         <designable name="jMQ-DN-rdu">
-            <size key="intrinsicContentSize" width="1219.2000071055095" height="1219.2000071055095"/>
+            <size key="intrinsicContentSize" width="480" height="480"/>
+        </designable>
+        <designable name="rmI-7G-oMX">
+            <size key="intrinsicContentSize" width="480" height="480"/>
         </designable>
     </designables>
     <inferredMetricsTieBreakers>
         <segue reference="AFT-dx-z90"/>
         <segue reference="eZd-I3-t8D"/>
         <segue reference="C0F-pM-cfm"/>
-        <segue reference="5Vh-JE-OCd"/>
+        <segue reference="6AC-aI-bIB"/>
     </inferredMetricsTieBreakers>
     <resources>
         <image name="barbutton - cancel" width="22" height="22"/>
