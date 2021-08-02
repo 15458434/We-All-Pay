@@ -22,7 +22,6 @@
 		3812760C1BBE74EF0004C8C2 /* UIViewControllerExtension.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3812760B1BBE74EF0004C8C2 /* UIViewControllerExtension.swift */; };
 		3812760E1BBE76B40004C8C2 /* PaymentViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3812760D1BBE76B40004C8C2 /* PaymentViewController.swift */; };
 		381276101BBE9A7F0004C8C2 /* MCPaymentPresenceTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3812760F1BBE9A7F0004C8C2 /* MCPaymentPresenceTableViewCell.swift */; };
-		3813D8951D8983C900E6B7A4 /* CircularImageView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3813D8941D8983C900E6B7A4 /* CircularImageView.swift */; };
 		38163E0F249E193D009E889C /* CoreServices.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 38163E0E249E193D009E889C /* CoreServices.framework */; };
 		3825A82419990BA400A8885D /* UIViewController+WeAllPayStore.m in Sources */ = {isa = PBXBuildFile; fileRef = 3825A82319990BA400A8885D /* UIViewController+WeAllPayStore.m */; };
 		3825A826199A2A5500A8885D /* MCTonightsBillTransfer.m in Sources */ = {isa = PBXBuildFile; fileRef = 3825A825199A2A5500A8885D /* MCTonightsBillTransfer.m */; };
@@ -56,6 +55,7 @@
 		382E797826B8455A00A0D1C1 /* MCRoundedButton.m in Sources */ = {isa = PBXBuildFile; fileRef = 384DCF7026A9710C00DF2ACA /* MCRoundedButton.m */; };
 		382E797926B845AD00A0D1C1 /* MCRoundedButton.h in Headers */ = {isa = PBXBuildFile; fileRef = 384DCF6F26A9710C00DF2ACA /* MCRoundedButton.h */; settings = {ATTRIBUTES = (Public, ); }; };
 		382E797A26B845B200A0D1C1 /* MCBorderLineView.h in Headers */ = {isa = PBXBuildFile; fileRef = 38494B4226A735F400F10C64 /* MCBorderLineView.h */; settings = {ATTRIBUTES = (Public, ); }; };
+		382E797B26B8464A00A0D1C1 /* CircularImageView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3813D8941D8983C900E6B7A4 /* CircularImageView.swift */; };
 		382E7BDD17E5E57500A1040A /* MCReturnPaymentViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 382E7BDC17E5E57500A1040A /* MCReturnPaymentViewController.m */; };
 		3830F6F6179872B400904FAF /* MCPaymentViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 3830F6F5179872B400904FAF /* MCPaymentViewController.m */; };
 		3835EBF92115C40900E2BC3F /* Settings.bundle in Resources */ = {isa = PBXBuildFile; fileRef = 3835EBF82115C40900E2BC3F /* Settings.bundle */; };
@@ -920,6 +920,7 @@
 				384DCF7026A9710C00DF2ACA /* MCRoundedButton.m */,
 				38494B4226A735F400F10C64 /* MCBorderLineView.h */,
 				38494B4326A735F400F10C64 /* MCBorderLineView.m */,
+				3813D8941D8983C900E6B7A4 /* CircularImageView.swift */,
 			);
 			path = Generic;
 			sourceTree = "<group>";
@@ -938,7 +939,6 @@
 		384DCF6E26A970F100DF2ACA /* Views */ = {
 			isa = PBXGroup;
 			children = (
-				3813D8941D8983C900E6B7A4 /* CircularImageView.swift */,
 			);
 			path = Views;
 			sourceTree = "<group>";
@@ -2125,6 +2125,7 @@
 			files = (
 				382E797226B7F86800A0D1C1 /* UnreadNotificationsCountView.swift in Sources */,
 				382E797826B8455A00A0D1C1 /* MCRoundedButton.m in Sources */,
+				382E797B26B8464A00A0D1C1 /* CircularImageView.swift in Sources */,
 				382E797426B7F91700A0D1C1 /* MCImageFunctions.m in Sources */,
 				382E796C26B7F49800A0D1C1 /* MCNotificationUnreadIndicator.m in Sources */,
 				382E797626B8446600A0D1C1 /* MCBorderLineView.m in Sources */,
@@ -2237,7 +2238,6 @@
 				3825A82419990BA400A8885D /* UIViewController+WeAllPayStore.m in Sources */,
 				383A86C518F7EE48001F128E /* MCSolutionTableViewController.m in Sources */,
 				389DE8F7197FB2B900169645 /* MCPaymentPresence.m in Sources */,
-				3813D8951D8983C900E6B7A4 /* CircularImageView.swift in Sources */,
 				3892E3AA17904A240038894B /* MCPersonViewController.m in Sources */,
 				389950A4191A90F1000B00BC /* MCPaymentPresence+addons.m in Sources */,
 				389ACFE12374A1E60025139F /* EmailTextInputPicker.swift in Sources */,
