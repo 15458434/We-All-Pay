@@ -585,7 +585,7 @@
                                     <rect key="frame" x="0.0" y="0.0" width="768" height="80"/>
                                     <autoresizingMask key="autoresizingMask"/>
                                     <subviews>
-                                        <imageView userInteractionEnabled="NO" contentMode="scaleAspectFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" translatesAutoresizingMaskIntoConstraints="NO" id="gvW-A9-uVj" customClass="CircularImageView" customModule="We_all_pay" customModuleProvider="target">
+                                        <imageView userInteractionEnabled="NO" contentMode="scaleAspectFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" translatesAutoresizingMaskIntoConstraints="NO" id="gvW-A9-uVj" customClass="CircularImageView" customModule="WeAllPayDesignableUI">
                                             <rect key="frame" x="20" y="10" width="60" height="60"/>
                                             <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                             <constraints>
@@ -755,7 +755,7 @@
                                         </segue>
                                     </connections>
                                 </button>
-                                <imageView userInteractionEnabled="NO" contentMode="scaleAspectFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" translatesAutoresizingMaskIntoConstraints="NO" id="xcc-E7-c0h" customClass="CircularImageView" customModule="We_all_pay" customModuleProvider="target">
+                                <imageView userInteractionEnabled="NO" contentMode="scaleAspectFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" translatesAutoresizingMaskIntoConstraints="NO" id="xcc-E7-c0h" customClass="CircularImageView" customModule="WeAllPayDesignableUI">
                                     <rect key="frame" x="20" y="20" width="100" height="100"/>
                                     <constraints>
                                         <constraint firstAttribute="width" constant="100" id="2Uc-CR-kbk"/>
@@ -836,7 +836,7 @@
                                         <view contentMode="scaleToFill" restorationIdentifier="backgroundTapThing" translatesAutoresizingMaskIntoConstraints="NO" id="HNw-5s-Znp" customClass="UIControl">
                                             <rect key="frame" x="0.0" y="0.0" width="540" height="60"/>
                                             <subviews>
-                                                <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" translatesAutoresizingMaskIntoConstraints="NO" id="9MV-Ie-wK3" customClass="CircularImageView" customModule="We_all_pay" customModuleProvider="target">
+                                                <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" translatesAutoresizingMaskIntoConstraints="NO" id="9MV-Ie-wK3" customClass="CircularImageView" customModule="WeAllPayDesignableUI">
                                                     <rect key="frame" x="290" y="5" width="50" height="50"/>
                                                     <constraints>
                                                         <constraint firstAttribute="width" secondItem="9MV-Ie-wK3" secondAttribute="height" multiplier="1:1" id="ZIY-EF-1OP"/>
@@ -1028,7 +1028,7 @@
                                     <rect key="frame" x="0.0" y="0.0" width="320" height="44"/>
                                     <autoresizingMask key="autoresizingMask"/>
                                     <subviews>
-                                        <imageView userInteractionEnabled="NO" contentMode="scaleAspectFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" translatesAutoresizingMaskIntoConstraints="NO" id="jaj-RZ-MiC" customClass="CircularImageView" customModule="We_all_pay" customModuleProvider="target">
+                                        <imageView userInteractionEnabled="NO" contentMode="scaleAspectFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" translatesAutoresizingMaskIntoConstraints="NO" id="jaj-RZ-MiC" customClass="CircularImageView" customModule="WeAllPayDesignableUI">
                                             <rect key="frame" x="14" y="2.5" width="40" height="39"/>
                                             <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                             <constraints>
@@ -1074,7 +1074,7 @@
                 </tableViewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="Es4-LX-ASU" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="5254.6875" y="759.9609375"/>
+            <point key="canvasLocation" x="5255" y="744"/>
         </scene>
         <!--Navigation Controller-->
         <scene sceneID="g7U-q4-hyE">
@@ -1165,7 +1165,7 @@
                                     <rect key="frame" x="0.0" y="0.0" width="768" height="120"/>
                                     <autoresizingMask key="autoresizingMask"/>
                                     <subviews>
-                                        <imageView opaque="NO" userInteractionEnabled="NO" contentMode="scaleAspectFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" restorationIdentifier="pictureView" translatesAutoresizingMaskIntoConstraints="NO" id="Z3O-c0-2tS" customClass="CircularImageView" customModule="We_all_pay">
+                                        <imageView opaque="NO" userInteractionEnabled="NO" contentMode="scaleAspectFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" restorationIdentifier="pictureView" translatesAutoresizingMaskIntoConstraints="NO" id="Z3O-c0-2tS" customClass="CircularImageView" customModule="WeAllPayDesignableUI">
                                             <rect key="frame" x="20" y="20" width="80" height="80"/>
                                             <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                             <constraints>
@@ -1375,6 +1375,23 @@
             <point key="canvasLocation" x="2482.8125" y="-73.2421875"/>
         </scene>
     </scenes>
+    <designables>
+        <designable name="9MV-Ie-wK3">
+            <size key="intrinsicContentSize" width="480" height="480"/>
+        </designable>
+        <designable name="Z3O-c0-2tS">
+            <size key="intrinsicContentSize" width="480" height="480"/>
+        </designable>
+        <designable name="gvW-A9-uVj">
+            <size key="intrinsicContentSize" width="480" height="480"/>
+        </designable>
+        <designable name="jaj-RZ-MiC">
+            <size key="intrinsicContentSize" width="480" height="480"/>
+        </designable>
+        <designable name="xcc-E7-c0h">
+            <size key="intrinsicContentSize" width="480" height="480"/>
+        </designable>
+    </designables>
     <inferredMetricsTieBreakers>
         <segue reference="pZQ-Y2-0Nm"/>
         <segue reference="qrR-J2-mhx"/>
