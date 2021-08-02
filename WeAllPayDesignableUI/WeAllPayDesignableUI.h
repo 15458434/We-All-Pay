@@ -18,3 +18,5 @@ FOUNDATION_EXPORT const unsigned char WeAllPayDesignableUIVersionString[];
 
 #import "MCNotificationUnreadIndicator.h"
 #import "MCBadgeButton.h"
+#import "MCBorderLineView.h"
+#import "MCRoundedButton.h"

@@ -52,6 +52,10 @@
 		382E797226B7F86800A0D1C1 /* UnreadNotificationsCountView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3803280326988B2800744710 /* UnreadNotificationsCountView.swift */; };
 		382E797426B7F91700A0D1C1 /* MCImageFunctions.m in Sources */ = {isa = PBXBuildFile; fileRef = 38870FE326A044820003E1D6 /* MCImageFunctions.m */; };
 		382E797526B7F93400A0D1C1 /* MCImageFunctions.h in Headers */ = {isa = PBXBuildFile; fileRef = 38870FE226A044820003E1D6 /* MCImageFunctions.h */; settings = {ATTRIBUTES = (Private, ); }; };
+		382E797626B8446600A0D1C1 /* MCBorderLineView.m in Sources */ = {isa = PBXBuildFile; fileRef = 38494B4326A735F400F10C64 /* MCBorderLineView.m */; };
+		382E797826B8455A00A0D1C1 /* MCRoundedButton.m in Sources */ = {isa = PBXBuildFile; fileRef = 384DCF7026A9710C00DF2ACA /* MCRoundedButton.m */; };
+		382E797926B845AD00A0D1C1 /* MCRoundedButton.h in Headers */ = {isa = PBXBuildFile; fileRef = 384DCF6F26A9710C00DF2ACA /* MCRoundedButton.h */; settings = {ATTRIBUTES = (Public, ); }; };
+		382E797A26B845B200A0D1C1 /* MCBorderLineView.h in Headers */ = {isa = PBXBuildFile; fileRef = 38494B4226A735F400F10C64 /* MCBorderLineView.h */; settings = {ATTRIBUTES = (Public, ); }; };
 		382E7BDD17E5E57500A1040A /* MCReturnPaymentViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 382E7BDC17E5E57500A1040A /* MCReturnPaymentViewController.m */; };
 		3830F6F6179872B400904FAF /* MCPaymentViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 3830F6F5179872B400904FAF /* MCPaymentViewController.m */; };
 		3835EBF92115C40900E2BC3F /* Settings.bundle in Resources */ = {isa = PBXBuildFile; fileRef = 3835EBF82115C40900E2BC3F /* Settings.bundle */; };
@@ -64,9 +68,7 @@
 		38490D2D1D7052E700A297BA /* SolutionViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 38490D2C1D7052E700A297BA /* SolutionViewController.swift */; };
 		38490D2F1D7056D100A297BA /* ShowMailViewProtocol.swift in Sources */ = {isa = PBXBuildFile; fileRef = 38490D2E1D7056D100A297BA /* ShowMailViewProtocol.swift */; };
 		38490D311D705A7700A297BA /* ThisEvent.swift in Sources */ = {isa = PBXBuildFile; fileRef = 38490D301D705A7700A297BA /* ThisEvent.swift */; };
-		38494B4426A735F400F10C64 /* MCBorderLineView.m in Sources */ = {isa = PBXBuildFile; fileRef = 38494B4326A735F400F10C64 /* MCBorderLineView.m */; };
 		384A8D9A1D54776200A69E15 /* Who is paying next.appex in Embed App Extensions */ = {isa = PBXBuildFile; fileRef = 38B6E0EC1A28BBAB009E69D7 /* Who is paying next.appex */; settings = {ATTRIBUTES = (RemoveHeadersOnCopy, ); }; };
-		384DCF7126A9710C00DF2ACA /* MCRoundedButton.m in Sources */ = {isa = PBXBuildFile; fileRef = 384DCF7026A9710C00DF2ACA /* MCRoundedButton.m */; };
 		384EC90A1BC2F03F00A80799 /* PaymentTableViewCell_iPad.swift in Sources */ = {isa = PBXBuildFile; fileRef = 384EC9091BC2F03F00A80799 /* PaymentTableViewCell_iPad.swift */; };
 		384EC90C1BC2F17500A80799 /* SelectCategoryTableViewCell_iPad.swift in Sources */ = {isa = PBXBuildFile; fileRef = 384EC90B1BC2F17500A80799 /* SelectCategoryTableViewCell_iPad.swift */; };
 		384EC90E1BC2F35700A80799 /* SelectCurrencyTableViewCell_iPad.swift in Sources */ = {isa = PBXBuildFile; fileRef = 384EC90D1BC2F35700A80799 /* SelectCurrencyTableViewCell_iPad.swift */; };
@@ -877,6 +879,7 @@
 				382E797326B7F86D00A0D1C1 /* InfoScreenTable */,
 				382E796F26B7F7DF00A0D1C1 /* NotificationsTable */,
 				382E797026B7F7F200A0D1C1 /* AllTripsTable */,
+				382E797726B8446E00A0D1C1 /* Generic */,
 				382E796126B7F48200A0D1C1 /* Info.plist */,
 			);
 			path = WeAllPayDesignableUI;
@@ -910,6 +913,17 @@
 			path = InfoScreenTable;
 			sourceTree = "<group>";
 		};
+		382E797726B8446E00A0D1C1 /* Generic */ = {
+			isa = PBXGroup;
+			children = (
+				384DCF6F26A9710C00DF2ACA /* MCRoundedButton.h */,
+				384DCF7026A9710C00DF2ACA /* MCRoundedButton.m */,
+				38494B4226A735F400F10C64 /* MCBorderLineView.h */,
+				38494B4326A735F400F10C64 /* MCBorderLineView.m */,
+			);
+			path = Generic;
+			sourceTree = "<group>";
+		};
 		3841F8D1238939F600882E40 /* Events */ = {
 			isa = PBXGroup;
 			children = (
@@ -925,8 +939,6 @@
 			isa = PBXGroup;
 			children = (
 				3813D8941D8983C900E6B7A4 /* CircularImageView.swift */,
-				384DCF6F26A9710C00DF2ACA /* MCRoundedButton.h */,
-				384DCF7026A9710C00DF2ACA /* MCRoundedButton.m */,
 			);
 			path = Views;
 			sourceTree = "<group>";
@@ -1193,8 +1205,6 @@
 			children = (
 				3867CE5318704DAF001EC222 /* MCTableEmptyMessage.xib */,
 				38E9DA1A1B29F5C40097D719 /* MCTableEmptyMessage.swift */,
-				38494B4226A735F400F10C64 /* MCBorderLineView.h */,
-				38494B4326A735F400F10C64 /* MCBorderLineView.m */,
 			);
 			name = EmptyMessage;
 			sourceTree = "<group>";
@@ -1513,6 +1523,8 @@
 				382E797126B7F80000A0D1C1 /* MCBadgeButton.h in Headers */,
 				382E796D26B7F69300A0D1C1 /* MCNotificationUnreadIndicator.h in Headers */,
 				382E796226B7F48200A0D1C1 /* WeAllPayDesignableUI.h in Headers */,
+				382E797926B845AD00A0D1C1 /* MCRoundedButton.h in Headers */,
+				382E797A26B845B200A0D1C1 /* MCBorderLineView.h in Headers */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -2112,8 +2124,10 @@
 			buildActionMask = 2147483647;
 			files = (
 				382E797226B7F86800A0D1C1 /* UnreadNotificationsCountView.swift in Sources */,
+				382E797826B8455A00A0D1C1 /* MCRoundedButton.m in Sources */,
 				382E797426B7F91700A0D1C1 /* MCImageFunctions.m in Sources */,
 				382E796C26B7F49800A0D1C1 /* MCNotificationUnreadIndicator.m in Sources */,
+				382E797626B8446600A0D1C1 /* MCBorderLineView.m in Sources */,
 				382E796E26B7F7D900A0D1C1 /* MCBadgeButton.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
@@ -2181,7 +2195,6 @@
 				38F44CCB2364993400215B1C /* MoneyTextInputValidator.swift in Sources */,
 				38D96ED623E31BE000C03170 /* MCBitwiseStuff.m in Sources */,
 				38E2CB401BC2A5A20092B5C8 /* SolutionOverViewTableViewCell_iPad.swift in Sources */,
-				38494B4426A735F400F10C64 /* MCBorderLineView.m in Sources */,
 				38490D2F1D7056D100A297BA /* ShowMailViewProtocol.swift in Sources */,
 				387494D419F053C2001614CA /* WeAllPayStore3to4.xcmappingmodel in Sources */,
 				387494D619F053E9001614CA /* WeAllPayStore2to4.xcmappingmodel in Sources */,
@@ -2240,7 +2253,6 @@
 				389C2F56193391E300BB9F3E /* MCPaymentPresenceEntityMigrationPolicy.m in Sources */,
 				38B7E9521D86F8F600400E72 /* ContactsDataReceiver.swift in Sources */,
 				3812760C1BBE74EF0004C8C2 /* UIViewControllerExtension.swift in Sources */,
-				384DCF7126A9710C00DF2ACA /* MCRoundedButton.m in Sources */,
 				38D6A3E61C73DF2600968BB2 /* RateMeControllerExtension.swift in Sources */,
 				3830F6F6179872B400904FAF /* MCPaymentViewController.m in Sources */,
 				389ACFE42374B5060025139F /* MCEmailTextInputProxy.m in Sources */,
