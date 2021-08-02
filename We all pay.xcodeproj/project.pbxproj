@@ -43,6 +43,11 @@
 		382B77021C3982C8000C203A /* CurrencyControllerTest.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3858D6551B2DB55B006A4E2B /* CurrencyControllerTest.swift */; };
 		382B77031C3982CE000C203A /* ExchangeRateFetcherTest.swift in Sources */ = {isa = PBXBuildFile; fileRef = 38D796121B2DF30800F3872F /* ExchangeRateFetcherTest.swift */; };
 		382B79CA1A419D9D00538E96 /* categoryPictures.plist in Resources */ = {isa = PBXBuildFile; fileRef = 382B79CC1A419D9D00538E96 /* categoryPictures.plist */; };
+		382E796226B7F48200A0D1C1 /* WeAllPayDesignableUI.h in Headers */ = {isa = PBXBuildFile; fileRef = 382E796026B7F48200A0D1C1 /* WeAllPayDesignableUI.h */; settings = {ATTRIBUTES = (Public, ); }; };
+		382E796526B7F48200A0D1C1 /* WeAllPayDesignableUI.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 382E795E26B7F48200A0D1C1 /* WeAllPayDesignableUI.framework */; };
+		382E796626B7F48200A0D1C1 /* WeAllPayDesignableUI.framework in Embed Frameworks */ = {isa = PBXBuildFile; fileRef = 382E795E26B7F48200A0D1C1 /* WeAllPayDesignableUI.framework */; settings = {ATTRIBUTES = (CodeSignOnCopy, RemoveHeadersOnCopy, ); }; };
+		382E796C26B7F49800A0D1C1 /* MCNotificationUnreadIndicator.m in Sources */ = {isa = PBXBuildFile; fileRef = 38819070269D914E000949F4 /* MCNotificationUnreadIndicator.m */; };
+		382E796D26B7F69300A0D1C1 /* MCNotificationUnreadIndicator.h in Headers */ = {isa = PBXBuildFile; fileRef = 3881906F269D914E000949F4 /* MCNotificationUnreadIndicator.h */; settings = {ATTRIBUTES = (Public, ); }; };
 		382E7BDD17E5E57500A1040A /* MCReturnPaymentViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 382E7BDC17E5E57500A1040A /* MCReturnPaymentViewController.m */; };
 		3830F6F6179872B400904FAF /* MCPaymentViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 3830F6F5179872B400904FAF /* MCPaymentViewController.m */; };
 		3835EBF92115C40900E2BC3F /* Settings.bundle in Resources */ = {isa = PBXBuildFile; fileRef = 3835EBF82115C40900E2BC3F /* Settings.bundle */; };
@@ -100,7 +105,6 @@
 		387494D619F053E9001614CA /* WeAllPayStore2to4.xcmappingmodel in Sources */ = {isa = PBXBuildFile; fileRef = 387494D519F053E9001614CA /* WeAllPayStore2to4.xcmappingmodel */; };
 		387494D819F05476001614CA /* WeAllPayStore1to4.xcmappingmodel in Sources */ = {isa = PBXBuildFile; fileRef = 387494D719F05476001614CA /* WeAllPayStore1to4.xcmappingmodel */; };
 		387D3A911870652B0060FAF8 /* Localizable.strings in Resources */ = {isa = PBXBuildFile; fileRef = 387D3A931870652B0060FAF8 /* Localizable.strings */; };
-		38819071269D914E000949F4 /* MCNotificationUnreadIndicator.m in Sources */ = {isa = PBXBuildFile; fileRef = 38819070269D914E000949F4 /* MCNotificationUnreadIndicator.m */; };
 		3881907C269EE287000949F4 /* MCBadgeButton.m in Sources */ = {isa = PBXBuildFile; fileRef = 3881907B269EE287000949F4 /* MCBadgeButton.m */; };
 		38870FE426A044820003E1D6 /* MCImageFunctions.m in Sources */ = {isa = PBXBuildFile; fileRef = 38870FE326A044820003E1D6 /* MCImageFunctions.m */; };
 		38894980211C2DDE00BDF9CD /* CoreDataSaveHandlerWhenEnteringBackground.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3889497F211C2DDE00BDF9CD /* CoreDataSaveHandlerWhenEnteringBackground.swift */; };
@@ -241,6 +245,13 @@
 			remoteGlobalIDString = 382B76DF1C398249000C203A;
 			remoteInfo = CurrencyConverter;
 		};
+		382E796326B7F48200A0D1C1 /* PBXContainerItemProxy */ = {
+			isa = PBXContainerItemProxy;
+			containerPortal = 38572AC9169D437B00969C62 /* Project object */;
+			proxyType = 1;
+			remoteGlobalIDString = 382E795D26B7F48200A0D1C1;
+			remoteInfo = WeAllPayDesignableUI;
+		};
 		384A8D9B1D54776300A69E15 /* PBXContainerItemProxy */ = {
 			isa = PBXContainerItemProxy;
 			containerPortal = 38572AC9169D437B00969C62 /* Project object */;
@@ -314,6 +325,7 @@
 			dstSubfolderSpec = 10;
 			files = (
 				382B76F61C398249000C203A /* CurrencyConverter.framework in Embed Frameworks */,
+				382E796626B7F48200A0D1C1 /* WeAllPayDesignableUI.framework in Embed Frameworks */,
 				38D6A3D21C73DDC000968BB2 /* RateMeControllerForiOS.framework in Embed Frameworks */,
 				388A32921C11EDBD00F7459C /* WhoPayingUserDefaultsStoreInterface.framework in Embed Frameworks */,
 			);
@@ -389,6 +401,9 @@
 		382B79CB1A419D9D00538E96 /* Base */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; name = Base; path = Base.lproj/categoryPictures.plist; sourceTree = "<group>"; };
 		382B79CE1A419DA000538E96 /* nl */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; name = nl; path = nl.lproj/categoryPictures.plist; sourceTree = "<group>"; };
 		382B79CF1A41BB6A00538E96 /* en */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; name = en; path = en.lproj/categoryPictures.plist; sourceTree = "<group>"; };
+		382E795E26B7F48200A0D1C1 /* WeAllPayDesignableUI.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = WeAllPayDesignableUI.framework; sourceTree = BUILT_PRODUCTS_DIR; };
+		382E796026B7F48200A0D1C1 /* WeAllPayDesignableUI.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = WeAllPayDesignableUI.h; sourceTree = "<group>"; };
+		382E796126B7F48200A0D1C1 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		382E7BDB17E5E57500A1040A /* MCReturnPaymentViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = MCReturnPaymentViewController.h; path = ViewControllers/MCReturnPaymentViewController.h; sourceTree = "<group>"; };
 		382E7BDC17E5E57500A1040A /* MCReturnPaymentViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = MCReturnPaymentViewController.m; path = ViewControllers/MCReturnPaymentViewController.m; sourceTree = "<group>"; };
 		382F9BD118F7285400818276 /* MCDismissMeBlockProtocol.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = MCDismissMeBlockProtocol.h; path = ViewControllers/MCDismissMeBlockProtocol.h; sourceTree = "<group>"; };
@@ -664,6 +679,13 @@
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
+		382E795B26B7F48200A0D1C1 /* Frameworks */ = {
+			isa = PBXFrameworksBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
 		38572ACF169D437B00969C62 /* Frameworks */ = {
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
@@ -673,6 +695,7 @@
 				38B4E82523CDE6220034CA95 /* JavaScriptCore.framework in Frameworks */,
 				38B4E82323CDE6180034CA95 /* CoreTelephony.framework in Frameworks */,
 				38B4E82123CDE6100034CA95 /* CoreMedia.framework in Frameworks */,
+				382E796526B7F48200A0D1C1 /* WeAllPayDesignableUI.framework in Frameworks */,
 				38B4E81F23CDE6050034CA95 /* AVFoundation.framework in Frameworks */,
 				38B4E81D23CDE5FC0034CA95 /* AudioToolbox.framework in Frameworks */,
 				38B4E81B23CDE5F40034CA95 /* AdSupport.framework in Frameworks */,
@@ -846,6 +869,17 @@
 			path = CurrencyConverterTests;
 			sourceTree = "<group>";
 		};
+		382E795F26B7F48200A0D1C1 /* WeAllPayDesignableUI */ = {
+			isa = PBXGroup;
+			children = (
+				382E796026B7F48200A0D1C1 /* WeAllPayDesignableUI.h */,
+				3881906F269D914E000949F4 /* MCNotificationUnreadIndicator.h */,
+				38819070269D914E000949F4 /* MCNotificationUnreadIndicator.m */,
+				382E796126B7F48200A0D1C1 /* Info.plist */,
+			);
+			path = WeAllPayDesignableUI;
+			sourceTree = "<group>";
+		};
 		3841F8D1238939F600882E40 /* Events */ = {
 			isa = PBXGroup;
 			children = (
@@ -875,6 +909,7 @@
 				3867253A23DB248E009607E8 /* fastlane */,
 				38572ADC169D437B00969C62 /* We all pay */,
 				385F5301191C2C360012773D /* We all pay Tests */,
+				382E795F26B7F48200A0D1C1 /* WeAllPayDesignableUI */,
 				38B6E0EE1A28BBAB009E69D7 /* Who is paying next */,
 				388A327D1C11EDBD00F7459C /* WhoPayingUserDefaultsStoreInterface */,
 				388A328B1C11EDBD00F7459C /* WhoPayingUserDefaultsStoreInterfaceTests */,
@@ -902,6 +937,7 @@
 				38D6A3BC1C73DDBF00968BB2 /* RateMeControllerForiOS.framework */,
 				38D6A3C51C73DDBF00968BB2 /* RateMeControllerForiOSTests.xctest */,
 				38696B6523DCD24E00E941EA /* Screenshots.xctest */,
+				382E795E26B7F48200A0D1C1 /* WeAllPayDesignableUI.framework */,
 			);
 			name = Products;
 			sourceTree = "<group>";
@@ -1029,8 +1065,6 @@
 			children = (
 				3864147E269B185300590ABA /* NotificationsTableViewController.swift */,
 				38641483269B2E7A00590ABA /* NotificationTableViewCell.swift */,
-				3881906F269D914E000949F4 /* MCNotificationUnreadIndicator.h */,
-				38819070269D914E000949F4 /* MCNotificationUnreadIndicator.m */,
 				38641481269B18C400590ABA /* NotificationsModel.swift */,
 			);
 			path = NotificationsTable;
@@ -1445,6 +1479,15 @@
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
+		382E795926B7F48200A0D1C1 /* Headers */ = {
+			isa = PBXHeadersBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				382E796D26B7F69300A0D1C1 /* MCNotificationUnreadIndicator.h in Headers */,
+				382E796226B7F48200A0D1C1 /* WeAllPayDesignableUI.h in Headers */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
 		388A32791C11EDBD00F7459C /* Headers */ = {
 			isa = PBXHeadersBuildPhase;
 			buildActionMask = 2147483647;
@@ -1501,6 +1544,24 @@
 			productReference = 382B76E91C398249000C203A /* CurrencyConverterTests.xctest */;
 			productType = "com.apple.product-type.bundle.unit-test";
 		};
+		382E795D26B7F48200A0D1C1 /* WeAllPayDesignableUI */ = {
+			isa = PBXNativeTarget;
+			buildConfigurationList = 382E796B26B7F48200A0D1C1 /* Build configuration list for PBXNativeTarget "WeAllPayDesignableUI" */;
+			buildPhases = (
+				382E795926B7F48200A0D1C1 /* Headers */,
+				382E795A26B7F48200A0D1C1 /* Sources */,
+				382E795B26B7F48200A0D1C1 /* Frameworks */,
+				382E795C26B7F48200A0D1C1 /* Resources */,
+			);
+			buildRules = (
+			);
+			dependencies = (
+			);
+			name = WeAllPayDesignableUI;
+			productName = WeAllPayDesignableUI;
+			productReference = 382E795E26B7F48200A0D1C1 /* WeAllPayDesignableUI.framework */;
+			productType = "com.apple.product-type.framework";
+		};
 		38572AD1169D437B00969C62 /* We all pay */ = {
 			isa = PBXNativeTarget;
 			buildConfigurationList = 38572AF0169D437B00969C62 /* Build configuration list for PBXNativeTarget "We all pay" */;
@@ -1522,6 +1583,7 @@
 				382B76F41C398249000C203A /* PBXTargetDependency */,
 				38D6A3D01C73DDC000968BB2 /* PBXTargetDependency */,
 				384A8D9C1D54776300A69E15 /* PBXTargetDependency */,
+				382E796426B7F48200A0D1C1 /* PBXTargetDependency */,
 			);
 			name = "We all pay";
 			productName = "Going Dutch";
@@ -1680,6 +1742,9 @@
 						LastSwiftMigration = 0940;
 						TestTargetID = 38572AD1169D437B00969C62;
 					};
+					382E795D26B7F48200A0D1C1 = {
+						CreatedOnToolsVersion = 12.5.1;
+					};
 					38572AD1169D437B00969C62 = {
 						DevelopmentTeam = Z6JP26PUUY;
 						LastSwiftMigration = 0940;
@@ -1762,6 +1827,7 @@
 				38D6A3BB1C73DDBF00968BB2 /* RateMeControllerForiOS */,
 				38D6A3C41C73DDBF00968BB2 /* RateMeControllerForiOSTests */,
 				38696B6423DCD24E00E941EA /* Screenshots */,
+				382E795D26B7F48200A0D1C1 /* WeAllPayDesignableUI */,
 			);
 		};
 /* End PBXProject section */
@@ -1781,6 +1847,13 @@
 			buildActionMask = 2147483647;
 			files = (
 				38EACFF81C6894960091A9AF /* InfoPlist.strings in Resources */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+		382E795C26B7F48200A0D1C1 /* Resources */ = {
+			isa = PBXResourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -2006,6 +2079,14 @@
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
+		382E795A26B7F48200A0D1C1 /* Sources */ = {
+			isa = PBXSourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				382E796C26B7F49800A0D1C1 /* MCNotificationUnreadIndicator.m in Sources */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
 		38572ACE169D437B00969C62 /* Sources */ = {
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
@@ -2123,7 +2204,6 @@
 				38641482269B18C400590ABA /* NotificationsModel.swift in Sources */,
 				38D96ED423E30F5E00C03170 /* MCAdBannerTableViewCell.swift in Sources */,
 				384EC9121BC3008300A80799 /* SelectEmailAddressTableViewController_iPad.swift in Sources */,
-				38819071269D914E000949F4 /* MCNotificationUnreadIndicator.m in Sources */,
 				38B88E2E1D81FF6E0069A44D /* MailComposeViewController.swift in Sources */,
 				38977E5F1B2A32EF008484A4 /* MCPersonTableViewCell.swift in Sources */,
 				385295CF1C10583E0081894D /* CategoryPictureObject.swift in Sources */,
@@ -2226,6 +2306,11 @@
 			isa = PBXTargetDependency;
 			target = 382B76DF1C398249000C203A /* CurrencyConverter */;
 			targetProxy = 382B76F31C398249000C203A /* PBXContainerItemProxy */;
+		};
+		382E796426B7F48200A0D1C1 /* PBXTargetDependency */ = {
+			isa = PBXTargetDependency;
+			target = 382E795D26B7F48200A0D1C1 /* WeAllPayDesignableUI */;
+			targetProxy = 382E796326B7F48200A0D1C1 /* PBXContainerItemProxy */;
 		};
 		384A8D9C1D54776300A69E15 /* PBXTargetDependency */ = {
 			isa = PBXTargetDependency;
@@ -2629,6 +2714,188 @@
 			};
 			name = Release;
 		};
+		382E796726B7F48200A0D1C1 /* Debug */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				CLANG_ALLOW_NON_MODULAR_INCLUDES_IN_FRAMEWORK_MODULES = YES;
+				CLANG_ANALYZER_NONNULL = YES;
+				CLANG_ANALYZER_NUMBER_OBJECT_CONVERSION = YES_AGGRESSIVE;
+				CLANG_CXX_LANGUAGE_STANDARD = "gnu++14";
+				CLANG_ENABLE_OBJC_WEAK = YES;
+				CLANG_WARN_DIRECT_OBJC_ISA_USAGE = YES_ERROR;
+				CLANG_WARN_DOCUMENTATION_COMMENTS = YES;
+				CLANG_WARN_OBJC_ROOT_CLASS = YES_ERROR;
+				CLANG_WARN_UNGUARDED_AVAILABILITY = YES_AGGRESSIVE;
+				CODE_SIGN_IDENTITY = "iPhone Developer";
+				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer";
+				"CODE_SIGN_IDENTITY[sdk=macosx*]" = "Mac Developer";
+				CODE_SIGN_STYLE = Automatic;
+				CURRENT_PROJECT_VERSION = 1;
+				DEBUG_INFORMATION_FORMAT = dwarf;
+				DEFINES_MODULE = YES;
+				DYLIB_COMPATIBILITY_VERSION = 1;
+				DYLIB_CURRENT_VERSION = 1;
+				DYLIB_INSTALL_NAME_BASE = "@rpath";
+				GCC_C_LANGUAGE_STANDARD = gnu11;
+				GCC_WARN_ABOUT_RETURN_TYPE = YES_ERROR;
+				GCC_WARN_UNINITIALIZED_AUTOS = YES_AGGRESSIVE;
+				INFOPLIST_FILE = WeAllPayDesignableUI/Info.plist;
+				INSTALL_PATH = "$(LOCAL_LIBRARY_DIR)/Frameworks";
+				IPHONEOS_DEPLOYMENT_TARGET = 14.5;
+				LD_RUNPATH_SEARCH_PATHS = (
+					"$(inherited)",
+					"@executable_path/Frameworks",
+					"@loader_path/Frameworks",
+				);
+				MTL_ENABLE_DEBUG_INFO = INCLUDE_SOURCE;
+				MTL_FAST_MATH = YES;
+				PRODUCT_BUNDLE_IDENTIFIER = com.greenhair.WeAllPayDesignableUI;
+				PRODUCT_NAME = "$(TARGET_NAME:c99extidentifier)";
+				SKIP_INSTALL = YES;
+				TARGETED_DEVICE_FAMILY = "1,2";
+				VERSIONING_SYSTEM = "apple-generic";
+				VERSION_INFO_PREFIX = "";
+			};
+			name = Debug;
+		};
+		382E796826B7F48200A0D1C1 /* AdTest */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				CLANG_ALLOW_NON_MODULAR_INCLUDES_IN_FRAMEWORK_MODULES = YES;
+				CLANG_ANALYZER_NONNULL = YES;
+				CLANG_ANALYZER_NUMBER_OBJECT_CONVERSION = YES_AGGRESSIVE;
+				CLANG_CXX_LANGUAGE_STANDARD = "gnu++14";
+				CLANG_ENABLE_OBJC_WEAK = YES;
+				CLANG_WARN_DIRECT_OBJC_ISA_USAGE = YES_ERROR;
+				CLANG_WARN_DOCUMENTATION_COMMENTS = YES;
+				CLANG_WARN_OBJC_ROOT_CLASS = YES_ERROR;
+				CLANG_WARN_UNGUARDED_AVAILABILITY = YES_AGGRESSIVE;
+				CODE_SIGN_IDENTITY = "iPhone Developer";
+				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer";
+				"CODE_SIGN_IDENTITY[sdk=macosx*]" = "Mac Developer";
+				CODE_SIGN_STYLE = Automatic;
+				COPY_PHASE_STRIP = NO;
+				CURRENT_PROJECT_VERSION = 1;
+				DEBUG_INFORMATION_FORMAT = "dwarf-with-dsym";
+				DEFINES_MODULE = YES;
+				DYLIB_COMPATIBILITY_VERSION = 1;
+				DYLIB_CURRENT_VERSION = 1;
+				DYLIB_INSTALL_NAME_BASE = "@rpath";
+				ENABLE_NS_ASSERTIONS = NO;
+				GCC_C_LANGUAGE_STANDARD = gnu11;
+				GCC_WARN_ABOUT_RETURN_TYPE = YES_ERROR;
+				GCC_WARN_UNINITIALIZED_AUTOS = YES_AGGRESSIVE;
+				INFOPLIST_FILE = WeAllPayDesignableUI/Info.plist;
+				INSTALL_PATH = "$(LOCAL_LIBRARY_DIR)/Frameworks";
+				IPHONEOS_DEPLOYMENT_TARGET = 14.5;
+				LD_RUNPATH_SEARCH_PATHS = (
+					"$(inherited)",
+					"@executable_path/Frameworks",
+					"@loader_path/Frameworks",
+				);
+				MTL_ENABLE_DEBUG_INFO = NO;
+				MTL_FAST_MATH = YES;
+				PRODUCT_BUNDLE_IDENTIFIER = com.greenhair.WeAllPayDesignableUI;
+				PRODUCT_NAME = "$(TARGET_NAME:c99extidentifier)";
+				SKIP_INSTALL = YES;
+				TARGETED_DEVICE_FAMILY = "1,2";
+				VERSIONING_SYSTEM = "apple-generic";
+				VERSION_INFO_PREFIX = "";
+			};
+			name = AdTest;
+		};
+		382E796926B7F48200A0D1C1 /* Screenshots */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				CLANG_ALLOW_NON_MODULAR_INCLUDES_IN_FRAMEWORK_MODULES = YES;
+				CLANG_ANALYZER_NONNULL = YES;
+				CLANG_ANALYZER_NUMBER_OBJECT_CONVERSION = YES_AGGRESSIVE;
+				CLANG_CXX_LANGUAGE_STANDARD = "gnu++14";
+				CLANG_ENABLE_OBJC_WEAK = YES;
+				CLANG_WARN_DIRECT_OBJC_ISA_USAGE = YES_ERROR;
+				CLANG_WARN_DOCUMENTATION_COMMENTS = YES;
+				CLANG_WARN_OBJC_ROOT_CLASS = YES_ERROR;
+				CLANG_WARN_UNGUARDED_AVAILABILITY = YES_AGGRESSIVE;
+				CODE_SIGN_IDENTITY = "iPhone Developer";
+				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer";
+				"CODE_SIGN_IDENTITY[sdk=macosx*]" = "Mac Developer";
+				CODE_SIGN_STYLE = Automatic;
+				COPY_PHASE_STRIP = NO;
+				CURRENT_PROJECT_VERSION = 1;
+				DEBUG_INFORMATION_FORMAT = "dwarf-with-dsym";
+				DEFINES_MODULE = YES;
+				DYLIB_COMPATIBILITY_VERSION = 1;
+				DYLIB_CURRENT_VERSION = 1;
+				DYLIB_INSTALL_NAME_BASE = "@rpath";
+				ENABLE_NS_ASSERTIONS = NO;
+				GCC_C_LANGUAGE_STANDARD = gnu11;
+				GCC_WARN_ABOUT_RETURN_TYPE = YES_ERROR;
+				GCC_WARN_UNINITIALIZED_AUTOS = YES_AGGRESSIVE;
+				INFOPLIST_FILE = WeAllPayDesignableUI/Info.plist;
+				INSTALL_PATH = "$(LOCAL_LIBRARY_DIR)/Frameworks";
+				IPHONEOS_DEPLOYMENT_TARGET = 14.5;
+				LD_RUNPATH_SEARCH_PATHS = (
+					"$(inherited)",
+					"@executable_path/Frameworks",
+					"@loader_path/Frameworks",
+				);
+				MTL_ENABLE_DEBUG_INFO = NO;
+				MTL_FAST_MATH = YES;
+				PRODUCT_BUNDLE_IDENTIFIER = com.greenhair.WeAllPayDesignableUI;
+				PRODUCT_NAME = "$(TARGET_NAME:c99extidentifier)";
+				SKIP_INSTALL = YES;
+				TARGETED_DEVICE_FAMILY = "1,2";
+				VERSIONING_SYSTEM = "apple-generic";
+				VERSION_INFO_PREFIX = "";
+			};
+			name = Screenshots;
+		};
+		382E796A26B7F48200A0D1C1 /* Release */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				CLANG_ALLOW_NON_MODULAR_INCLUDES_IN_FRAMEWORK_MODULES = YES;
+				CLANG_ANALYZER_NONNULL = YES;
+				CLANG_ANALYZER_NUMBER_OBJECT_CONVERSION = YES_AGGRESSIVE;
+				CLANG_CXX_LANGUAGE_STANDARD = "gnu++14";
+				CLANG_ENABLE_OBJC_WEAK = YES;
+				CLANG_WARN_DIRECT_OBJC_ISA_USAGE = YES_ERROR;
+				CLANG_WARN_DOCUMENTATION_COMMENTS = YES;
+				CLANG_WARN_OBJC_ROOT_CLASS = YES_ERROR;
+				CLANG_WARN_UNGUARDED_AVAILABILITY = YES_AGGRESSIVE;
+				CODE_SIGN_IDENTITY = "iPhone Developer";
+				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer";
+				"CODE_SIGN_IDENTITY[sdk=macosx*]" = "Mac Developer";
+				CODE_SIGN_STYLE = Automatic;
+				COPY_PHASE_STRIP = NO;
+				CURRENT_PROJECT_VERSION = 1;
+				DEBUG_INFORMATION_FORMAT = "dwarf-with-dsym";
+				DEFINES_MODULE = YES;
+				DYLIB_COMPATIBILITY_VERSION = 1;
+				DYLIB_CURRENT_VERSION = 1;
+				DYLIB_INSTALL_NAME_BASE = "@rpath";
+				ENABLE_NS_ASSERTIONS = NO;
+				GCC_C_LANGUAGE_STANDARD = gnu11;
+				GCC_WARN_ABOUT_RETURN_TYPE = YES_ERROR;
+				GCC_WARN_UNINITIALIZED_AUTOS = YES_AGGRESSIVE;
+				INFOPLIST_FILE = WeAllPayDesignableUI/Info.plist;
+				INSTALL_PATH = "$(LOCAL_LIBRARY_DIR)/Frameworks";
+				IPHONEOS_DEPLOYMENT_TARGET = 14.5;
+				LD_RUNPATH_SEARCH_PATHS = (
+					"$(inherited)",
+					"@executable_path/Frameworks",
+					"@loader_path/Frameworks",
+				);
+				MTL_ENABLE_DEBUG_INFO = NO;
+				MTL_FAST_MATH = YES;
+				PRODUCT_BUNDLE_IDENTIFIER = com.greenhair.WeAllPayDesignableUI;
+				PRODUCT_NAME = "$(TARGET_NAME:c99extidentifier)";
+				SKIP_INSTALL = YES;
+				TARGETED_DEVICE_FAMILY = "1,2";
+				VERSIONING_SYSTEM = "apple-generic";
+				VERSION_INFO_PREFIX = "";
+			};
+			name = Release;
+		};
 		38572AEE169D437B00969C62 /* Debug */ = {
 			isa = XCBuildConfiguration;
 			buildSettings = {
@@ -2755,6 +3022,7 @@
 				ALWAYS_EMBED_SWIFT_STANDARD_LIBRARIES = NO;
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				ASSETCATALOG_COMPILER_LAUNCHIMAGE_NAME = LaunchImage;
+				CLANG_ALLOW_NON_MODULAR_INCLUDES_IN_FRAMEWORK_MODULES = NO;
 				CLANG_ENABLE_MODULES = YES;
 				CODE_SIGN_ENTITLEMENTS = "We all pay.entitlements";
 				CODE_SIGN_IDENTITY = "iPhone Developer";
@@ -2818,6 +3086,7 @@
 				ALWAYS_EMBED_SWIFT_STANDARD_LIBRARIES = NO;
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				ASSETCATALOG_COMPILER_LAUNCHIMAGE_NAME = LaunchImage;
+				CLANG_ALLOW_NON_MODULAR_INCLUDES_IN_FRAMEWORK_MODULES = NO;
 				CLANG_ENABLE_MODULES = YES;
 				CODE_SIGN_ENTITLEMENTS = "We all pay.entitlements";
 				CODE_SIGN_IDENTITY = "iPhone Developer";
@@ -3027,6 +3296,7 @@
 				ALWAYS_EMBED_SWIFT_STANDARD_LIBRARIES = NO;
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				ASSETCATALOG_COMPILER_LAUNCHIMAGE_NAME = LaunchImage;
+				CLANG_ALLOW_NON_MODULAR_INCLUDES_IN_FRAMEWORK_MODULES = NO;
 				CLANG_ENABLE_MODULES = YES;
 				CODE_SIGN_ENTITLEMENTS = "We all pay.entitlements";
 				CODE_SIGN_IDENTITY = "iPhone Developer";
@@ -4111,6 +4381,7 @@
 				ALWAYS_EMBED_SWIFT_STANDARD_LIBRARIES = NO;
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				ASSETCATALOG_COMPILER_LAUNCHIMAGE_NAME = LaunchImage;
+				CLANG_ALLOW_NON_MODULAR_INCLUDES_IN_FRAMEWORK_MODULES = NO;
 				CLANG_ENABLE_MODULES = YES;
 				CODE_SIGN_ENTITLEMENTS = "We all pay.entitlements";
 				CODE_SIGN_IDENTITY = "iPhone Developer";
@@ -4558,6 +4829,17 @@
 				38E0FCCA23CC4E1C002A4488 /* AdTest */,
 				38631489235C6A7800748B9F /* Screenshots */,
 				382B76FA1C398249000C203A /* Release */,
+			);
+			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
+		};
+		382E796B26B7F48200A0D1C1 /* Build configuration list for PBXNativeTarget "WeAllPayDesignableUI" */ = {
+			isa = XCConfigurationList;
+			buildConfigurations = (
+				382E796726B7F48200A0D1C1 /* Debug */,
+				382E796826B7F48200A0D1C1 /* AdTest */,
+				382E796926B7F48200A0D1C1 /* Screenshots */,
+				382E796A26B7F48200A0D1C1 /* Release */,
 			);
 			defaultConfigurationIsVisible = 0;
 			defaultConfigurationName = Release;

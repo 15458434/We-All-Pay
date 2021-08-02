@@ -7,6 +7,7 @@
 //
 
 import UIKit
+import WeAllPayDesignableUI
 
 final class NotificationTableViewCell: UITableViewCell {
     @objc private weak var model: NotificationsItemProtocol!
