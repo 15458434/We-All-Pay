@@ -17,3 +17,4 @@ FOUNDATION_EXPORT const unsigned char WeAllPayDesignableUIVersionString[];
 // In this header, you should import all the public headers of your framework using statements like #import <WeAllPayDesignableUI/PublicHeader.h>
 
 #import "MCNotificationUnreadIndicator.h"
+#import "MCBadgeButton.h"

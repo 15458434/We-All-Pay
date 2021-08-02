@@ -12,7 +12,6 @@
 		38010E0F1A3F4A4F0056F8F8 /* Localizable.strings in Resources */ = {isa = PBXBuildFile; fileRef = 38010E111A3F4A4F0056F8F8 /* Localizable.strings */; };
 		380328002698443300744710 /* NotificationsInfoModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 380327FF2698443300744710 /* NotificationsInfoModel.swift */; };
 		380328022698804500744710 /* NotificationsCountTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 380328012698804500744710 /* NotificationsCountTableViewCell.swift */; };
-		3803280426988B2800744710 /* UnreadNotificationsCountView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3803280326988B2800744710 /* UnreadNotificationsCountView.swift */; };
 		380700A51A1B616000C7FB37 /* MCPaymentUpdateTo4.m in Sources */ = {isa = PBXBuildFile; fileRef = 380700A41A1B616000C7FB37 /* MCPaymentUpdateTo4.m */; };
 		380C48161BE1330E00C82B0F /* CurrencyFormatter.swift in Sources */ = {isa = PBXBuildFile; fileRef = 380C48151BE1330E00C82B0F /* CurrencyFormatter.swift */; };
 		381179D01A82D1FC00020538 /* MailComposer.swift in Sources */ = {isa = PBXBuildFile; fileRef = 381179CF1A82D1FC00020538 /* MailComposer.swift */; };
@@ -48,6 +47,11 @@
 		382E796626B7F48200A0D1C1 /* WeAllPayDesignableUI.framework in Embed Frameworks */ = {isa = PBXBuildFile; fileRef = 382E795E26B7F48200A0D1C1 /* WeAllPayDesignableUI.framework */; settings = {ATTRIBUTES = (CodeSignOnCopy, RemoveHeadersOnCopy, ); }; };
 		382E796C26B7F49800A0D1C1 /* MCNotificationUnreadIndicator.m in Sources */ = {isa = PBXBuildFile; fileRef = 38819070269D914E000949F4 /* MCNotificationUnreadIndicator.m */; };
 		382E796D26B7F69300A0D1C1 /* MCNotificationUnreadIndicator.h in Headers */ = {isa = PBXBuildFile; fileRef = 3881906F269D914E000949F4 /* MCNotificationUnreadIndicator.h */; settings = {ATTRIBUTES = (Public, ); }; };
+		382E796E26B7F7D900A0D1C1 /* MCBadgeButton.m in Sources */ = {isa = PBXBuildFile; fileRef = 3881907B269EE287000949F4 /* MCBadgeButton.m */; };
+		382E797126B7F80000A0D1C1 /* MCBadgeButton.h in Headers */ = {isa = PBXBuildFile; fileRef = 3881907A269EE287000949F4 /* MCBadgeButton.h */; settings = {ATTRIBUTES = (Public, ); }; };
+		382E797226B7F86800A0D1C1 /* UnreadNotificationsCountView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3803280326988B2800744710 /* UnreadNotificationsCountView.swift */; };
+		382E797426B7F91700A0D1C1 /* MCImageFunctions.m in Sources */ = {isa = PBXBuildFile; fileRef = 38870FE326A044820003E1D6 /* MCImageFunctions.m */; };
+		382E797526B7F93400A0D1C1 /* MCImageFunctions.h in Headers */ = {isa = PBXBuildFile; fileRef = 38870FE226A044820003E1D6 /* MCImageFunctions.h */; settings = {ATTRIBUTES = (Private, ); }; };
 		382E7BDD17E5E57500A1040A /* MCReturnPaymentViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 382E7BDC17E5E57500A1040A /* MCReturnPaymentViewController.m */; };
 		3830F6F6179872B400904FAF /* MCPaymentViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 3830F6F5179872B400904FAF /* MCPaymentViewController.m */; };
 		3835EBF92115C40900E2BC3F /* Settings.bundle in Resources */ = {isa = PBXBuildFile; fileRef = 3835EBF82115C40900E2BC3F /* Settings.bundle */; };
@@ -105,8 +109,6 @@
 		387494D619F053E9001614CA /* WeAllPayStore2to4.xcmappingmodel in Sources */ = {isa = PBXBuildFile; fileRef = 387494D519F053E9001614CA /* WeAllPayStore2to4.xcmappingmodel */; };
 		387494D819F05476001614CA /* WeAllPayStore1to4.xcmappingmodel in Sources */ = {isa = PBXBuildFile; fileRef = 387494D719F05476001614CA /* WeAllPayStore1to4.xcmappingmodel */; };
 		387D3A911870652B0060FAF8 /* Localizable.strings in Resources */ = {isa = PBXBuildFile; fileRef = 387D3A931870652B0060FAF8 /* Localizable.strings */; };
-		3881907C269EE287000949F4 /* MCBadgeButton.m in Sources */ = {isa = PBXBuildFile; fileRef = 3881907B269EE287000949F4 /* MCBadgeButton.m */; };
-		38870FE426A044820003E1D6 /* MCImageFunctions.m in Sources */ = {isa = PBXBuildFile; fileRef = 38870FE326A044820003E1D6 /* MCImageFunctions.m */; };
 		38894980211C2DDE00BDF9CD /* CoreDataSaveHandlerWhenEnteringBackground.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3889497F211C2DDE00BDF9CD /* CoreDataSaveHandlerWhenEnteringBackground.swift */; };
 		388A326E1C10965D00F7459C /* CategoryPictureObject.swift in Sources */ = {isa = PBXBuildFile; fileRef = 385295CE1C10583E0081894D /* CategoryPictureObject.swift */; };
 		388A326F1C10966000F7459C /* CategoryPictureStoreController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 385295D01C105C580081894D /* CategoryPictureStoreController.swift */; };
@@ -820,7 +822,6 @@
 			children = (
 				381275FE1BBD84650004C8C2 /* InfoScreenTableViewController.swift */,
 				380328012698804500744710 /* NotificationsCountTableViewCell.swift */,
-				3803280326988B2800744710 /* UnreadNotificationsCountView.swift */,
 			);
 			name = InfoScreenTable;
 			sourceTree = "<group>";
@@ -873,11 +874,40 @@
 			isa = PBXGroup;
 			children = (
 				382E796026B7F48200A0D1C1 /* WeAllPayDesignableUI.h */,
-				3881906F269D914E000949F4 /* MCNotificationUnreadIndicator.h */,
-				38819070269D914E000949F4 /* MCNotificationUnreadIndicator.m */,
+				382E797326B7F86D00A0D1C1 /* InfoScreenTable */,
+				382E796F26B7F7DF00A0D1C1 /* NotificationsTable */,
+				382E797026B7F7F200A0D1C1 /* AllTripsTable */,
 				382E796126B7F48200A0D1C1 /* Info.plist */,
 			);
 			path = WeAllPayDesignableUI;
+			sourceTree = "<group>";
+		};
+		382E796F26B7F7DF00A0D1C1 /* NotificationsTable */ = {
+			isa = PBXGroup;
+			children = (
+				3881906F269D914E000949F4 /* MCNotificationUnreadIndicator.h */,
+				38819070269D914E000949F4 /* MCNotificationUnreadIndicator.m */,
+			);
+			path = NotificationsTable;
+			sourceTree = "<group>";
+		};
+		382E797026B7F7F200A0D1C1 /* AllTripsTable */ = {
+			isa = PBXGroup;
+			children = (
+				3881907A269EE287000949F4 /* MCBadgeButton.h */,
+				3881907B269EE287000949F4 /* MCBadgeButton.m */,
+				38870FE226A044820003E1D6 /* MCImageFunctions.h */,
+				38870FE326A044820003E1D6 /* MCImageFunctions.m */,
+			);
+			path = AllTripsTable;
+			sourceTree = "<group>";
+		};
+		382E797326B7F86D00A0D1C1 /* InfoScreenTable */ = {
+			isa = PBXGroup;
+			children = (
+				3803280326988B2800744710 /* UnreadNotificationsCountView.swift */,
+			);
+			path = InfoScreenTable;
 			sourceTree = "<group>";
 		};
 		3841F8D1238939F600882E40 /* Events */ = {
@@ -887,8 +917,6 @@
 				38572B09169F3D2700969C62 /* MCAllTripsTableViewController.m */,
 				3841F8D223893A0A00882E40 /* EventsModel.swift */,
 				380327FF2698443300744710 /* NotificationsInfoModel.swift */,
-				3881907A269EE287000949F4 /* MCBadgeButton.h */,
-				3881907B269EE287000949F4 /* MCBadgeButton.m */,
 			);
 			name = Events;
 			sourceTree = "<group>";
@@ -1424,8 +1452,6 @@
 				38FE5A072346957100BBA722 /* SideMenuTransitioner.swift */,
 				38D96ED723E31BF200C03170 /* MCBitwiseStuff.h */,
 				38D96ED523E31BE000C03170 /* MCBitwiseStuff.m */,
-				38870FE226A044820003E1D6 /* MCImageFunctions.h */,
-				38870FE326A044820003E1D6 /* MCImageFunctions.m */,
 			);
 			path = Miscellaneous;
 			sourceTree = "<group>";
@@ -1483,6 +1509,8 @@
 			isa = PBXHeadersBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				382E797526B7F93400A0D1C1 /* MCImageFunctions.h in Headers */,
+				382E797126B7F80000A0D1C1 /* MCBadgeButton.h in Headers */,
 				382E796D26B7F69300A0D1C1 /* MCNotificationUnreadIndicator.h in Headers */,
 				382E796226B7F48200A0D1C1 /* WeAllPayDesignableUI.h in Headers */,
 			);
@@ -2083,7 +2111,10 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				382E797226B7F86800A0D1C1 /* UnreadNotificationsCountView.swift in Sources */,
+				382E797426B7F91700A0D1C1 /* MCImageFunctions.m in Sources */,
 				382E796C26B7F49800A0D1C1 /* MCNotificationUnreadIndicator.m in Sources */,
+				382E796E26B7F7D900A0D1C1 /* MCBadgeButton.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -2102,7 +2133,6 @@
 				38977E4F1B2A26D4008484A4 /* MCTwoLabelIscreenTableViewCell.swift in Sources */,
 				38490D2D1D7052E700A297BA /* SolutionViewController.swift in Sources */,
 				38572AE3169D437B00969C62 /* main.m in Sources */,
-				38870FE426A044820003E1D6 /* MCImageFunctions.m in Sources */,
 				38121EF223D9E2F100A3068D /* MCGenericAdBannerTableViewController.m in Sources */,
 				38B4E83823CE09070034CA95 /* MCGenericInterstitialAdTableViewController.m in Sources */,
 				389DE900197FB2BA00169645 /* MCSharedBill.m in Sources */,
@@ -2134,7 +2164,6 @@
 				38DB85D717E45CA4006237CF /* MCSharedBill+addons.m in Sources */,
 				386EB43323C723BE00FB20B9 /* AdEngine.swift in Sources */,
 				38DB85DD17E45FB7006237CF /* MCEmailAddress+addons.m in Sources */,
-				3803280426988B2800744710 /* UnreadNotificationsCountView.swift in Sources */,
 				38977E4D1B2A2591008484A4 /* MCSelectCategoryTableViewCell_iPhone.swift in Sources */,
 				380328002698443300744710 /* NotificationsInfoModel.swift in Sources */,
 				38EF31451938BA07004912F0 /* UINavigationController+KeyboardDismiss.m in Sources */,
@@ -2150,7 +2179,6 @@
 				38977E5B1B2A30A7008484A4 /* MCWhoOwesWhoTableViewCell_iPhone.swift in Sources */,
 				38E2CB661BC2EA6C0092B5C8 /* RootViewController.swift in Sources */,
 				38F44CCB2364993400215B1C /* MoneyTextInputValidator.swift in Sources */,
-				3881907C269EE287000949F4 /* MCBadgeButton.m in Sources */,
 				38D96ED623E31BE000C03170 /* MCBitwiseStuff.m in Sources */,
 				38E2CB401BC2A5A20092B5C8 /* SolutionOverViewTableViewCell_iPad.swift in Sources */,
 				38494B4426A735F400F10C64 /* MCBorderLineView.m in Sources */,
@@ -2741,7 +2769,7 @@
 				GCC_WARN_UNINITIALIZED_AUTOS = YES_AGGRESSIVE;
 				INFOPLIST_FILE = WeAllPayDesignableUI/Info.plist;
 				INSTALL_PATH = "$(LOCAL_LIBRARY_DIR)/Frameworks";
-				IPHONEOS_DEPLOYMENT_TARGET = 14.5;
+				IPHONEOS_DEPLOYMENT_TARGET = 12.0;
 				LD_RUNPATH_SEARCH_PATHS = (
 					"$(inherited)",
 					"@executable_path/Frameworks",
@@ -2752,6 +2780,7 @@
 				PRODUCT_BUNDLE_IDENTIFIER = com.greenhair.WeAllPayDesignableUI;
 				PRODUCT_NAME = "$(TARGET_NAME:c99extidentifier)";
 				SKIP_INSTALL = YES;
+				SUPPORTS_MACCATALYST = NO;
 				TARGETED_DEVICE_FAMILY = "1,2";
 				VERSIONING_SYSTEM = "apple-generic";
 				VERSION_INFO_PREFIX = "";
@@ -2787,7 +2816,7 @@
 				GCC_WARN_UNINITIALIZED_AUTOS = YES_AGGRESSIVE;
 				INFOPLIST_FILE = WeAllPayDesignableUI/Info.plist;
 				INSTALL_PATH = "$(LOCAL_LIBRARY_DIR)/Frameworks";
-				IPHONEOS_DEPLOYMENT_TARGET = 14.5;
+				IPHONEOS_DEPLOYMENT_TARGET = 12.0;
 				LD_RUNPATH_SEARCH_PATHS = (
 					"$(inherited)",
 					"@executable_path/Frameworks",
@@ -2798,6 +2827,7 @@
 				PRODUCT_BUNDLE_IDENTIFIER = com.greenhair.WeAllPayDesignableUI;
 				PRODUCT_NAME = "$(TARGET_NAME:c99extidentifier)";
 				SKIP_INSTALL = YES;
+				SUPPORTS_MACCATALYST = NO;
 				TARGETED_DEVICE_FAMILY = "1,2";
 				VERSIONING_SYSTEM = "apple-generic";
 				VERSION_INFO_PREFIX = "";
@@ -2833,7 +2863,7 @@
 				GCC_WARN_UNINITIALIZED_AUTOS = YES_AGGRESSIVE;
 				INFOPLIST_FILE = WeAllPayDesignableUI/Info.plist;
 				INSTALL_PATH = "$(LOCAL_LIBRARY_DIR)/Frameworks";
-				IPHONEOS_DEPLOYMENT_TARGET = 14.5;
+				IPHONEOS_DEPLOYMENT_TARGET = 12.0;
 				LD_RUNPATH_SEARCH_PATHS = (
 					"$(inherited)",
 					"@executable_path/Frameworks",
@@ -2844,6 +2874,7 @@
 				PRODUCT_BUNDLE_IDENTIFIER = com.greenhair.WeAllPayDesignableUI;
 				PRODUCT_NAME = "$(TARGET_NAME:c99extidentifier)";
 				SKIP_INSTALL = YES;
+				SUPPORTS_MACCATALYST = NO;
 				TARGETED_DEVICE_FAMILY = "1,2";
 				VERSIONING_SYSTEM = "apple-generic";
 				VERSION_INFO_PREFIX = "";
@@ -2879,7 +2910,7 @@
 				GCC_WARN_UNINITIALIZED_AUTOS = YES_AGGRESSIVE;
 				INFOPLIST_FILE = WeAllPayDesignableUI/Info.plist;
 				INSTALL_PATH = "$(LOCAL_LIBRARY_DIR)/Frameworks";
-				IPHONEOS_DEPLOYMENT_TARGET = 14.5;
+				IPHONEOS_DEPLOYMENT_TARGET = 12.0;
 				LD_RUNPATH_SEARCH_PATHS = (
 					"$(inherited)",
 					"@executable_path/Frameworks",
@@ -2890,6 +2921,7 @@
 				PRODUCT_BUNDLE_IDENTIFIER = com.greenhair.WeAllPayDesignableUI;
 				PRODUCT_NAME = "$(TARGET_NAME:c99extidentifier)";
 				SKIP_INSTALL = YES;
+				SUPPORTS_MACCATALYST = NO;
 				TARGETED_DEVICE_FAMILY = "1,2";
 				VERSIONING_SYSTEM = "apple-generic";
 				VERSION_INFO_PREFIX = "";

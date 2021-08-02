@@ -8,19 +8,19 @@
 
 import UIKit
 
-@IBDesignable @objc(MCUnreadNotificationsCountView) final class UnreadNotificationsCountView: UIView {
-    @IBInspectable var count: Int = 1 {
+@IBDesignable @objc(MCUnreadNotificationsCountView) final public class UnreadNotificationsCountView: UIView {
+    @IBInspectable public var count: Int = 1 {
         didSet {
             update()
         }
     }
     private var countString: NSAttributedString!
-    @IBInspectable var textColor: UIColor = .white {
+    @IBInspectable public var textColor: UIColor = .white {
         didSet {
             update()
         }
     }
-    @IBInspectable var fontSize: CGFloat = 17 {
+    @IBInspectable public var fontSize: CGFloat = 17 {
         didSet {
             update()
         }
@@ -36,7 +36,7 @@ import UIKit
     
     // MARK: UIView
     
-    override func draw(_ rect: CGRect) {
+    override public func draw(_ rect: CGRect) {
         super.draw(rect)
         
         self.layer.cornerRadius = self.bounds.height / 2
@@ -49,7 +49,7 @@ import UIKit
         countString.draw(in: stringRect)
     }
     
-    override var intrinsicContentSize: CGSize {
+    override public var intrinsicContentSize: CGSize {
         var rect = countStringRect
         rect.origin = CGPoint.zero
         let halfHeight = (rect.size.height / 2)
