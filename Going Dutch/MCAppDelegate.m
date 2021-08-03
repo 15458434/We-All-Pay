@@ -15,8 +15,6 @@
 
 #import "MCRoundedButton.h"
 
-#import "MCAllTripsTableViewController-iPad.h"
-
 #import "MCWeAllPayStoreController.h"
 
 #import "MCSharedBill+addons.h"

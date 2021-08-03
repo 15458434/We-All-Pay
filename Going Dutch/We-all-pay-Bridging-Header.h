@@ -32,7 +32,6 @@
 #import "MCGenericInterstitialAdTableViewController.h"
 #import "MCGenericAdBannerTableViewController.h"
 #import "MCAllTripsTableViewController.h"
-#import "MCAllTripsTableViewController-iPad.h"
 #import "MCReturnPaymentViewController.h"
 #import "MCSolutionTableViewController.h"
 
