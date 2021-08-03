@@ -15,8 +15,6 @@
 
 #import "MCRoundedButton.h"
 
-#import "MCAllTripsTableViewController-iPad.h"
-
 #import "MCWeAllPayStoreController.h"
 
 #import "MCSharedBill+addons.h"
@@ -139,29 +137,16 @@
     UINavigationController *navController = (UINavigationController *)self.window.rootViewController;
     [navController popToRootViewControllerAnimated:NO];
     
-    if ([[UIDevice currentDevice] userInterfaceIdiom] == UIUserInterfaceIdiomPad) {
-        // open add payment
-        UIStoryboard *storyboard = self.window.rootViewController.storyboard;
-        UINavigationController *navPaymentViewController = [storyboard instantiateViewControllerWithIdentifier:@"navPaymentViewController"];
-        PaymentViewController *paymentViewController = (PaymentViewController *)[navPaymentViewController viewControllers][0];
-        paymentViewController.pathComponentsToOpen = pathDuringOpening;
-        paymentViewController.tonightsBill = tonightsBill;
-        [navController presentViewController:navPaymentViewController animated:YES completion:nil];
-        // open tonightsBill
-        UIViewController *mcRootViewController = navController.viewControllers[0];
-        [mcRootViewController performSegueWithIdentifier:@"openEvent" sender:pathDuringOpening];
-    } else {
-        // open add payment
-        UIStoryboard *storyboard = self.window.rootViewController.storyboard;
-        UINavigationController *navPaymentViewController = [storyboard instantiateViewControllerWithIdentifier:@"navPaymentViewController"];
-        MCPaymentViewController *paymentViewController = (MCPaymentViewController *)[navPaymentViewController viewControllers][0];
-        paymentViewController.pathComponentsToOpen = pathDuringOpening;
-        paymentViewController.tonightsBill = tonightsBill;
-        [navController presentViewController:navPaymentViewController animated:YES completion:nil];
-        // open tonightsBill
-        UIViewController *allTripsViewController = navController.viewControllers[0];
-        [allTripsViewController performSegueWithIdentifier:@"openTonightsBill" sender:pathDuringOpening];
-    }
+    // open add payment
+    UIStoryboard *storyboard = self.window.rootViewController.storyboard;
+    UINavigationController *navPaymentViewController = [storyboard instantiateViewControllerWithIdentifier:@"navPaymentViewController"];
+    MCPaymentViewController *paymentViewController = (MCPaymentViewController *)[navPaymentViewController viewControllers][0];
+    paymentViewController.pathComponentsToOpen = pathDuringOpening;
+    paymentViewController.tonightsBill = tonightsBill;
+    [navController presentViewController:navPaymentViewController animated:YES completion:nil];
+    // open tonightsBill
+    UIViewController *allTripsViewController = navController.viewControllers[0];
+    [allTripsViewController performSegueWithIdentifier:@"openTonightsBill" sender:pathDuringOpening];
     
     return YES;
 }

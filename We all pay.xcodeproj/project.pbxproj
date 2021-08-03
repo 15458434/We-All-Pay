@@ -204,14 +204,11 @@
 		38DB85DA17E45DEA006237CF /* MCPerson+addons.m in Sources */ = {isa = PBXBuildFile; fileRef = 38DB85D917E45DEA006237CF /* MCPerson+addons.m */; };
 		38DB85DD17E45FB7006237CF /* MCEmailAddress+addons.m in Sources */ = {isa = PBXBuildFile; fileRef = 38DB85DC17E45FB7006237CF /* MCEmailAddress+addons.m */; };
 		38DC8B4319097FEA00762235 /* Main-iPad.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 38DC8B4519097FEA00762235 /* Main-iPad.storyboard */; };
-		38E0C5EA18E9B2BD005A3F17 /* MCAllTripsTableViewController-iPad.m in Sources */ = {isa = PBXBuildFile; fileRef = 38E0C5E918E9B2BD005A3F17 /* MCAllTripsTableViewController-iPad.m */; };
 		38E2CB3E1BC2A49C0092B5C8 /* SelectPayerTableViewCell_iPad.swift in Sources */ = {isa = PBXBuildFile; fileRef = 38E2CB3D1BC2A49C0092B5C8 /* SelectPayerTableViewCell_iPad.swift */; };
 		38E2CB401BC2A5A20092B5C8 /* SolutionOverViewTableViewCell_iPad.swift in Sources */ = {isa = PBXBuildFile; fileRef = 38E2CB3F1BC2A5A20092B5C8 /* SolutionOverViewTableViewCell_iPad.swift */; };
 		38E2CB421BC2A6C60092B5C8 /* WhoOwesWhoTableViewCell_iPad.swift in Sources */ = {isa = PBXBuildFile; fileRef = 38E2CB411BC2A6C60092B5C8 /* WhoOwesWhoTableViewCell_iPad.swift */; };
-		38E2CB441BC2A7D30092B5C8 /* AllTripsTableViewCell_iPad.swift in Sources */ = {isa = PBXBuildFile; fileRef = 38E2CB431BC2A7D30092B5C8 /* AllTripsTableViewCell_iPad.swift */; };
 		38E2CB461BC2A8E10092B5C8 /* PersonTableViewCell_iPad.swift in Sources */ = {isa = PBXBuildFile; fileRef = 38E2CB451BC2A8E10092B5C8 /* PersonTableViewCell_iPad.swift */; };
 		38E2CB481BC2ABFB0092B5C8 /* SelectPayerTableViewController_iPad.swift in Sources */ = {isa = PBXBuildFile; fileRef = 38E2CB471BC2ABFB0092B5C8 /* SelectPayerTableViewController_iPad.swift */; };
-		38E2CB661BC2EA6C0092B5C8 /* RootViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 38E2CB651BC2EA6C0092B5C8 /* RootViewController.swift */; };
 		38E36EEE1BBD7E820026ED7E /* MCTwoLabelsTitleView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 38E36EED1BBD7E820026ED7E /* MCTwoLabelsTitleView.swift */; };
 		38E88B40226B19EE008EB4BE /* GoogleService-Info.plist in Resources */ = {isa = PBXBuildFile; fileRef = 38E88B3F226B19ED008EB4BE /* GoogleService-Info.plist */; };
 		38E9DA1C1B29F8990097D719 /* MCTableEmptyMessage.swift in Sources */ = {isa = PBXBuildFile; fileRef = 38E9DA1A1B29F5C40097D719 /* MCTableEmptyMessage.swift */; };
@@ -632,15 +629,11 @@
 		38DC8B4919097FFE00762235 /* nl */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.strings; name = nl; path = "nl.lproj/Main-iPad.strings"; sourceTree = "<group>"; };
 		38E0C5DE18E5C94D005A3F17 /* MCTonightsBillTransfer.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = MCTonightsBillTransfer.h; path = ViewControllers/MCTonightsBillTransfer.h; sourceTree = "<group>"; };
 		38E0C5DF18E97A8A005A3F17 /* MCCurrentViewDelegate.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = MCCurrentViewDelegate.h; path = ViewControllers/MCCurrentViewDelegate.h; sourceTree = "<group>"; };
-		38E0C5E818E9B2BD005A3F17 /* MCAllTripsTableViewController-iPad.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = "MCAllTripsTableViewController-iPad.h"; path = "ViewControllers/iPad/MCAllTripsTableViewController-iPad.h"; sourceTree = "<group>"; };
-		38E0C5E918E9B2BD005A3F17 /* MCAllTripsTableViewController-iPad.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = "MCAllTripsTableViewController-iPad.m"; path = "ViewControllers/iPad/MCAllTripsTableViewController-iPad.m"; sourceTree = "<group>"; };
 		38E2CB3D1BC2A49C0092B5C8 /* SelectPayerTableViewCell_iPad.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SelectPayerTableViewCell_iPad.swift; sourceTree = "<group>"; };
 		38E2CB3F1BC2A5A20092B5C8 /* SolutionOverViewTableViewCell_iPad.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SolutionOverViewTableViewCell_iPad.swift; sourceTree = "<group>"; };
 		38E2CB411BC2A6C60092B5C8 /* WhoOwesWhoTableViewCell_iPad.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = WhoOwesWhoTableViewCell_iPad.swift; sourceTree = "<group>"; };
-		38E2CB431BC2A7D30092B5C8 /* AllTripsTableViewCell_iPad.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = AllTripsTableViewCell_iPad.swift; sourceTree = "<group>"; };
 		38E2CB451BC2A8E10092B5C8 /* PersonTableViewCell_iPad.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = PersonTableViewCell_iPad.swift; sourceTree = "<group>"; };
 		38E2CB471BC2ABFB0092B5C8 /* SelectPayerTableViewController_iPad.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SelectPayerTableViewController_iPad.swift; sourceTree = "<group>"; };
-		38E2CB651BC2EA6C0092B5C8 /* RootViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = RootViewController.swift; sourceTree = "<group>"; };
 		38E36EED1BBD7E820026ED7E /* MCTwoLabelsTitleView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = MCTwoLabelsTitleView.swift; sourceTree = "<group>"; };
 		38E51C201D899C2800DA8ABA /* circularPictureInCodeDemo.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = circularPictureInCodeDemo.png; sourceTree = "<group>"; };
 		38E88B3F226B19ED008EB4BE /* GoogleService-Info.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; path = "GoogleService-Info.plist"; sourceTree = "<group>"; };
@@ -936,13 +929,6 @@
 			name = Events;
 			sourceTree = "<group>";
 		};
-		384DCF6E26A970F100DF2ACA /* Views */ = {
-			isa = PBXGroup;
-			children = (
-			);
-			path = Views;
-			sourceTree = "<group>";
-		};
 		38572AC7169D437B00969C62 = {
 			isa = PBXGroup;
 			children = (
@@ -1223,7 +1209,6 @@
 				38E2CB3D1BC2A49C0092B5C8 /* SelectPayerTableViewCell_iPad.swift */,
 				38E2CB3F1BC2A5A20092B5C8 /* SolutionOverViewTableViewCell_iPad.swift */,
 				38E2CB411BC2A6C60092B5C8 /* WhoOwesWhoTableViewCell_iPad.swift */,
-				38E2CB431BC2A7D30092B5C8 /* AllTripsTableViewCell_iPad.swift */,
 				38E2CB451BC2A8E10092B5C8 /* PersonTableViewCell_iPad.swift */,
 				384EC9091BC2F03F00A80799 /* PaymentTableViewCell_iPad.swift */,
 				3812760F1BBE9A7F0004C8C2 /* MCPaymentPresenceTableViewCell.swift */,
@@ -1394,9 +1379,6 @@
 		38E0C5E418E9B244005A3F17 /* iPad */ = {
 			isa = PBXGroup;
 			children = (
-				38E2CB651BC2EA6C0092B5C8 /* RootViewController.swift */,
-				38E0C5E818E9B2BD005A3F17 /* MCAllTripsTableViewController-iPad.h */,
-				38E0C5E918E9B2BD005A3F17 /* MCAllTripsTableViewController-iPad.m */,
 				38AAFBA318EC529300CD3E12 /* MCSharedBillViewController_iPad.h */,
 				38AAFBA418EC529300CD3E12 /* MCSharedBillViewController_iPad.m */,
 				38AAFBA018EC406300CD3E12 /* MCSharedBillPeoplePresentTableViewController-iPad.h */,
@@ -1456,7 +1438,6 @@
 				3825A82319990BA400A8885D /* UIViewController+WeAllPayStore.m */,
 				388A32741C11EA1400F7459C /* WhoPayingUserDefaultsStoreInterfaceWeAllPayExtension.swift */,
 				38B7E9511D86F8F600400E72 /* ContactsDataReceiver.swift */,
-				384DCF6E26A970F100DF2ACA /* Views */,
 				38C700F11D8EC24100D785BB /* LaunchCounter.swift */,
 				38687807237217B3003D40A9 /* TextInputValidator.swift */,
 				38FE5A072346957100BBA722 /* SideMenuTransitioner.swift */,
@@ -2192,7 +2173,6 @@
 				387494D819F05476001614CA /* WeAllPayStore1to4.xcmappingmodel in Sources */,
 				3863148D235C6D8C00748B9F /* ScreenshotPopulationEngine.swift in Sources */,
 				38977E5B1B2A30A7008484A4 /* MCWhoOwesWhoTableViewCell_iPhone.swift in Sources */,
-				38E2CB661BC2EA6C0092B5C8 /* RootViewController.swift in Sources */,
 				38F44CCB2364993400215B1C /* MoneyTextInputValidator.swift in Sources */,
 				38D96ED623E31BE000C03170 /* MCBitwiseStuff.m in Sources */,
 				38E2CB401BC2A5A20092B5C8 /* SolutionOverViewTableViewCell_iPad.swift in Sources */,
@@ -2206,7 +2186,6 @@
 				389FBD40198BDA1C003B4409 /* MCExchangeRate.m in Sources */,
 				3825A826199A2A5500A8885D /* MCTonightsBillTransfer.m in Sources */,
 				38977E551B2A2AE3008484A4 /* MCSelectCurrencyTableViewCell_iPhone.swift in Sources */,
-				38E2CB441BC2A7D30092B5C8 /* AllTripsTableViewCell_iPad.swift in Sources */,
 				38FE5A082346957100BBA722 /* SideMenuTransitioner.swift in Sources */,
 				38E2CB481BC2ABFB0092B5C8 /* SelectPayerTableViewController_iPad.swift in Sources */,
 				38AAFB9F18EC404200CD3E12 /* MCSharedBillPaymentsTableViewController-iPad.m in Sources */,
@@ -2226,7 +2205,6 @@
 				38ACC5A3236B1FAE000BDEEC /* PaymentModel.swift in Sources */,
 				381275FF1BBD84650004C8C2 /* InfoScreenTableViewController.swift in Sources */,
 				38C700F21D8EC24100D785BB /* LaunchCounter.swift in Sources */,
-				38E0C5EA18E9B2BD005A3F17 /* MCAllTripsTableViewController-iPad.m in Sources */,
 				38641484269B2E7A00590ABA /* NotificationTableViewCell.swift in Sources */,
 				3864147F269B185400590ABA /* NotificationsTableViewController.swift in Sources */,
 				3892E3A417903EF00038894B /* MCEditTripViewController.m in Sources */,

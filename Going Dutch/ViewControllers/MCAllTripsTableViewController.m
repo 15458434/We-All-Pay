@@ -58,7 +58,13 @@ static void * notificationCountContext = &notificationCountContext;
 #pragma mark - Actions
 
 - (IBAction)newEventPressed:(id)sender {
-    
+    UIUserInterfaceSizeClass horizontalSizeClass = self.traitCollection.horizontalSizeClass;
+    UIUserInterfaceSizeClass verticalSizeClass = self.traitCollection.verticalSizeClass;
+    if (horizontalSizeClass == UIUserInterfaceSizeClassRegular && verticalSizeClass == UIUserInterfaceSizeClassRegular) {
+        [self performSegueWithIdentifier:@"newTonightsBill-iPad" sender:self];
+    } else {
+        [self performSegueWithIdentifier:@"newTonightsBill" sender:self];
+    }
 }
 
 - (IBAction)iButtonPressed:(MCBadgeButton *)sender {
@@ -199,6 +205,16 @@ static void * notificationCountContext = &notificationCountContext;
 
 #pragma mark - UITableViewDelegate
 
+- (void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath {
+    UIUserInterfaceSizeClass horizontalSizeClass = self.traitCollection.horizontalSizeClass;
+    UIUserInterfaceSizeClass verticalSizeClass = self.traitCollection.verticalSizeClass;
+    if (horizontalSizeClass == UIUserInterfaceSizeClassRegular && verticalSizeClass == UIUserInterfaceSizeClassRegular) {
+        [self performSegueWithIdentifier:@"openTonightsBill-iPad" sender:self];
+    } else {
+        [self performSegueWithIdentifier:@"openTonightsBill" sender:self];
+    }
+}
+
 - (CGFloat)tableView:(UITableView *)tableView heightForRowAtIndexPath:(NSIndexPath *)indexPath {
     return UITableViewAutomaticDimension;
 }
@@ -293,49 +309,67 @@ static void * notificationCountContext = &notificationCountContext;
 #ifdef DEBUG
     NSLog(@"prepareForSegue: %@", [segue identifier]);
 #endif
-    if ([[segue identifier] isEqualToString:@"newTonightsBill"]) {
-        _isATonightsBillOpened = MCTonightsBillStatusOpened;
-    }
-    if ([[segue identifier] isEqualToString:@"openTonightsBill"]) {
-        _isATonightsBillOpened = MCTonightsBillStatusOpened;
-    }
-    MCSharedBill *theBill;
-    if ([sender isKindOfClass:[NSArray class]]) {
-        if ([[segue destinationViewController] conformsToProtocol:@protocol(MCTonightsBillTransfer)]) {
-            [[segue destinationViewController] setTonightsBill:[sender firstObject]];
-        }
-    } else {
+    UIUserInterfaceSizeClass horizontalSizeClass = self.traitCollection.horizontalSizeClass;
+    UIUserInterfaceSizeClass verticalSizeClass = self.traitCollection.verticalSizeClass;
+    if (horizontalSizeClass == UIUserInterfaceSizeClassRegular && verticalSizeClass == UIUserInterfaceSizeClassRegular) {
+        MCSharedBill *theBill;
         NSIndexPath *indexPathOfSelectedRow = [[self tableView] indexPathForSelectedRow];
         if (indexPathOfSelectedRow) {
             theBill = [_model.fetchEventsController objectAtIndexPath:indexPathOfSelectedRow];
         }
         if ([[segue destinationViewController] conformsToProtocol:@protocol(MCTonightsBillTransfer)]) {
-            [[segue destinationViewController] setTonightsBill:theBill];
+            if (theBill) {
+                [[segue destinationViewController] setTonightsBill:theBill];
+            } else {
+                [[segue destinationViewController] setTonightsBill:[MCSharedBill addSharedBill]];
+                [[MCWeAllPayStoreController defaultStore] saveMainThreadContext];
+            }
         }
-    }
-    
-    if ([[segue identifier] isEqualToString:@"newPaymentFromEvents"]) {
-        MCSharedBill *theBill = [sender firstObject];
-        if ([[segue destinationViewController] conformsToProtocol:@protocol(MCTonightsBillTransfer)]) {
-            [[segue destinationViewController] setTonightsBill:theBill];
+    } else {
+        if ([[segue identifier] isEqualToString:@"newTonightsBill"]) {
+            _isATonightsBillOpened = MCTonightsBillStatusOpened;
         }
-        if ([[segue destinationViewController] conformsToProtocol:@protocol(MCPathComponentsToOpenProtocol) ]) {
-            [[segue destinationViewController] setPathComponentsToOpen:sender];
+        if ([[segue identifier] isEqualToString:@"openTonightsBill"]) {
+            _isATonightsBillOpened = MCTonightsBillStatusOpened;
         }
-    }
-    if ([[segue identifier] isEqualToString:@"selectMainCurrency"]) {
-        MCSharedBill *theBill = _model.fetchEventsController.fetchedObjects[_selectedIndexPathForAction.row];
-        UINavigationController *navController = (UINavigationController *)segue.destinationViewController;
-        SelectCurrencyTableViewController *currencySelector = (SelectCurrencyTableViewController *)navController.viewControllers.firstObject;
-        currencySelector.currencyUpdateModel = [[EventUpdateCurrencyModel alloc] initWith:theBill];
-    } else if ([segue.identifier isEqualToString:@"iScreenSegue"]) {
-        UINavigationController *navigationController = (UINavigationController *)segue.destinationViewController;
-        navigationController.modalPresentationStyle = UIModalPresentationCustom;
-        _iScreenTransitioner = [[SideMenuTransitioner alloc] init];
-        navigationController.transitioningDelegate = _iScreenTransitioner;
-        InfoScreenTableViewController *infoContainerViewController = navigationController.viewControllers.lastObject;
-        infoContainerViewController.preferredContentSize = CGSizeMake(320, 0);
-        infoContainerViewController.notificationEnvironmentModel = self.notificationsStateModel;
+        MCSharedBill *theBill;
+        if ([sender isKindOfClass:[NSArray class]]) {
+            if ([[segue destinationViewController] conformsToProtocol:@protocol(MCTonightsBillTransfer)]) {
+                [[segue destinationViewController] setTonightsBill:[sender firstObject]];
+            }
+        } else {
+            NSIndexPath *indexPathOfSelectedRow = [[self tableView] indexPathForSelectedRow];
+            if (indexPathOfSelectedRow) {
+                theBill = [_model.fetchEventsController objectAtIndexPath:indexPathOfSelectedRow];
+            }
+            if ([[segue destinationViewController] conformsToProtocol:@protocol(MCTonightsBillTransfer)]) {
+                [[segue destinationViewController] setTonightsBill:theBill];
+            }
+        }
+        
+        if ([[segue identifier] isEqualToString:@"newPaymentFromEvents"]) {
+            MCSharedBill *theBill = [sender firstObject];
+            if ([[segue destinationViewController] conformsToProtocol:@protocol(MCTonightsBillTransfer)]) {
+                [[segue destinationViewController] setTonightsBill:theBill];
+            }
+            if ([[segue destinationViewController] conformsToProtocol:@protocol(MCPathComponentsToOpenProtocol) ]) {
+                [[segue destinationViewController] setPathComponentsToOpen:sender];
+            }
+        }
+        if ([[segue identifier] isEqualToString:@"selectMainCurrency"]) {
+            MCSharedBill *theBill = _model.fetchEventsController.fetchedObjects[_selectedIndexPathForAction.row];
+            UINavigationController *navController = (UINavigationController *)segue.destinationViewController;
+            SelectCurrencyTableViewController *currencySelector = (SelectCurrencyTableViewController *)navController.viewControllers.firstObject;
+            currencySelector.currencyUpdateModel = [[EventUpdateCurrencyModel alloc] initWith:theBill];
+        } else if ([segue.identifier isEqualToString:@"iScreenSegue"]) {
+            UINavigationController *navigationController = (UINavigationController *)segue.destinationViewController;
+            navigationController.modalPresentationStyle = UIModalPresentationCustom;
+            _iScreenTransitioner = [[SideMenuTransitioner alloc] init];
+            navigationController.transitioningDelegate = _iScreenTransitioner;
+            InfoScreenTableViewController *infoContainerViewController = navigationController.viewControllers.lastObject;
+            infoContainerViewController.preferredContentSize = CGSizeMake(320, 0);
+            infoContainerViewController.notificationEnvironmentModel = self.notificationsStateModel;
+        }
     }
 }
 
