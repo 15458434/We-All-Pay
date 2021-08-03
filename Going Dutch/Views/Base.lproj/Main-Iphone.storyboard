@@ -39,8 +39,7 @@
                                         </userDefinedRuntimeAttribute>
                                     </userDefinedRuntimeAttributes>
                                     <connections>
-                                        <action selector="newEventPressed:" destination="v9b-wE-q9L" eventType="touchUpOutside" id="prp-rC-WBJ"/>
-                                        <segue destination="Ltx-xd-qSj" kind="show" identifier="newTonightsBill" id="9a8-44-zBn"/>
+                                        <action selector="newEventPressed:" destination="dgz-Pk-24M" eventType="touchUpInside" id="FnL-yR-6Na"/>
                                     </connections>
                                 </button>
                             </subviews>
@@ -128,7 +127,6 @@
                                     <outlet property="totalCostLabel" destination="PB8-pK-prC" id="21C-gP-gGS"/>
                                     <outlet property="tripLabel" destination="4gi-jX-9d6" id="bGa-aJ-WLo"/>
                                     <outlet property="waitingForXRatesIndicator" destination="e3M-J8-W8E" id="3Sz-Wl-5xG"/>
-                                    <segue destination="Ltx-xd-qSj" kind="show" identifier="openTonightsBill" id="C0F-pM-cfm"/>
                                 </connections>
                             </tableViewCell>
                         </prototypes>
@@ -177,6 +175,10 @@
                         <outlet property="notificationsStateModel" destination="1Xp-pv-4eE" id="XyB-iT-wlq"/>
                         <segue destination="fIg-ri-deX" kind="presentation" identifier="selectMainCurrency" id="AFT-dx-z90"/>
                         <segue destination="syc-O8-8LU" kind="presentation" identifier="iScreenSegue" modalPresentationStyle="overCurrentContext" modalTransitionStyle="coverVertical" id="Hbz-75-wqX"/>
+                        <segue destination="Ltx-xd-qSj" kind="show" identifier="newTonightsBill" id="d0L-aB-5Md"/>
+                        <segue destination="m5E-EH-9xg" kind="show" identifier="newTonightsBill-iPad" id="gU2-IB-ero"/>
+                        <segue destination="m5E-EH-9xg" kind="show" identifier="openTonightsBill-iPad" id="d9O-xp-imC"/>
+                        <segue destination="Ltx-xd-qSj" kind="show" identifier="openTonightsBill" id="3RZ-mk-Dh4"/>
                     </connections>
                 </tableViewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="dgz-Pk-24M" userLabel="First Responder" sceneMemberID="firstResponder"/>
@@ -338,6 +340,16 @@
             </objects>
             <point key="canvasLocation" x="2332" y="721.92118226600985"/>
         </scene>
+        <!--MCSharedBillViewController_iPad-->
+        <scene sceneID="Lxh-Mk-tcO">
+            <objects>
+                <viewControllerPlaceholder storyboardName="Main-iPad" referencedIdentifier="MCSharedBillViewController_iPad" id="m5E-EH-9xg" sceneMemberID="viewController">
+                    <navigationItem key="navigationItem" id="r7n-p6-gTX"/>
+                </viewControllerPlaceholder>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="hIv-t7-2wJ" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
+            </objects>
+            <point key="canvasLocation" x="92" y="239"/>
+        </scene>
         <!--Shared Bill Main View Controller-->
         <scene sceneID="Ebm-Gv-16n">
             <objects>
@@ -496,23 +508,23 @@
                                 </connections>
                             </tableViewCell>
                             <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" preservesSuperviewLayoutMargins="YES" selectionStyle="default" indentationWidth="10" reuseIdentifier="NotificationsCountTableViewCell" id="P8J-qh-17v" customClass="NotificationsCountTableViewCell" customModule="We_all_pay" customModuleProvider="target">
-                                <rect key="frame" x="0.0" y="90.666667938232422" width="375" height="41.666667938232422"/>
+                                <rect key="frame" x="0.0" y="90.666667938232422" width="375" height="71.333335876464844"/>
                                 <autoresizingMask key="autoresizingMask"/>
                                 <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" preservesSuperviewLayoutMargins="YES" insetsLayoutMarginsFromSafeArea="NO" tableViewCell="P8J-qh-17v" id="sUP-wJ-H4Y">
-                                    <rect key="frame" x="0.0" y="0.0" width="375" height="41.666667938232422"/>
+                                    <rect key="frame" x="0.0" y="0.0" width="375" height="71.333335876464844"/>
                                     <autoresizingMask key="autoresizingMask"/>
                                     <subviews>
                                         <stackView opaque="NO" contentMode="scaleToFill" distribution="equalSpacing" alignment="center" spacing="6" translatesAutoresizingMaskIntoConstraints="NO" id="JAb-jy-84u">
-                                            <rect key="frame" x="20" y="11.000000000000002" width="335" height="20.666666666666671"/>
+                                            <rect key="frame" x="20" y="11.000000000000004" width="335" height="50.333333333333343"/>
                                             <subviews>
                                                 <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Notifications" textAlignment="natural" lineBreakMode="tailTruncation" numberOfLines="0" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="YPb-Py-Acz">
-                                                    <rect key="frame" x="0.0" y="0.33333333333333393" width="164.66666666666666" height="20.333333333333329"/>
+                                                    <rect key="frame" x="0.0" y="14.999999999999998" width="164.66666666666666" height="20.333333333333329"/>
                                                     <fontDescription key="fontDescription" type="system" weight="thin" pointSize="17"/>
                                                     <nil key="textColor"/>
                                                     <nil key="highlightedColor"/>
                                                 </label>
-                                                <view clipsSubviews="YES" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" horizontalCompressionResistancePriority="751" verticalCompressionResistancePriority="751" translatesAutoresizingMaskIntoConstraints="NO" id="PXr-ct-Ja1" customClass="MCUnreadNotificationsCountView">
-                                                    <rect key="frame" x="314.66666666666669" y="0.33333333333333393" width="20.333333333333314" height="20"/>
+                                                <view clipsSubviews="YES" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" horizontalCompressionResistancePriority="751" verticalCompressionResistancePriority="751" ambiguous="YES" translatesAutoresizingMaskIntoConstraints="NO" id="PXr-ct-Ja1" customClass="MCUnreadNotificationsCountView">
+                                                    <rect key="frame" x="285" y="0.3333333333333357" width="50" height="50"/>
                                                     <color key="backgroundColor" systemColor="systemBackgroundColor"/>
                                                     <userDefinedRuntimeAttributes>
                                                         <userDefinedRuntimeAttribute type="color" keyPath="textColor">
@@ -1813,26 +1825,15 @@
         </scene>
     </scenes>
     <designables>
-        <designable name="PXr-ct-Ja1">
-            <size key="intrinsicContentSize" width="20.287109375" height="20.287109375"/>
-        </designable>
-        <designable name="Y6i-cu-NDo">
-            <size key="intrinsicContentSize" width="480" height="480"/>
-        </designable>
-        <designable name="ZjT-qg-OGx">
-            <size key="intrinsicContentSize" width="480" height="480"/>
-        </designable>
         <designable name="jMQ-DN-rdu">
-            <size key="intrinsicContentSize" width="480" height="480"/>
-        </designable>
-        <designable name="rmI-7G-oMX">
-            <size key="intrinsicContentSize" width="480" height="480"/>
+            <size key="intrinsicContentSize" width="1219.2000071055095" height="1219.2000071055095"/>
         </designable>
     </designables>
     <inferredMetricsTieBreakers>
         <segue reference="AFT-dx-z90"/>
         <segue reference="eZd-I3-t8D"/>
-        <segue reference="C0F-pM-cfm"/>
+        <segue reference="3RZ-mk-Dh4"/>
+        <segue reference="d9O-xp-imC"/>
         <segue reference="6AC-aI-bIB"/>
     </inferredMetricsTieBreakers>
     <resources>
