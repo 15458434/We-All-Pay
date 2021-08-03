@@ -936,13 +936,6 @@
 			name = Events;
 			sourceTree = "<group>";
 		};
-		384DCF6E26A970F100DF2ACA /* Views */ = {
-			isa = PBXGroup;
-			children = (
-			);
-			path = Views;
-			sourceTree = "<group>";
-		};
 		38572AC7169D437B00969C62 = {
 			isa = PBXGroup;
 			children = (
@@ -1456,7 +1449,6 @@
 				3825A82319990BA400A8885D /* UIViewController+WeAllPayStore.m */,
 				388A32741C11EA1400F7459C /* WhoPayingUserDefaultsStoreInterfaceWeAllPayExtension.swift */,
 				38B7E9511D86F8F600400E72 /* ContactsDataReceiver.swift */,
-				384DCF6E26A970F100DF2ACA /* Views */,
 				38C700F11D8EC24100D785BB /* LaunchCounter.swift */,
 				38687807237217B3003D40A9 /* TextInputValidator.swift */,
 				38FE5A072346957100BBA722 /* SideMenuTransitioner.swift */,
