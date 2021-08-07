@@ -443,6 +443,18 @@
                 <key>SKAdNetworkIdentifier</key>
                 <string>n38lu8286q.skadnetwork</string>
             </dict>
+            <dict>
+                <key>SKAdNetworkIdentifier</key>
+                <string>22mmun2rn5.skadnetwork</string>
+            </dict>
+            <dict>
+                <key>SKAdNetworkIdentifier</key>
+                <string>23zd986j2c.skadnetwork</string>
+            </dict>
+            <dict>
+                <key>SKAdNetworkIdentifier</key>
+                <string>3l6bd9hu43.skadnetwork</string>
+            </dict>
         </array>
     </dict>
 </plist>
