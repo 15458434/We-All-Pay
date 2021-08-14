@@ -78,9 +78,11 @@ import MoPub
             return
         }
         
-        // clean up old stuff in UserDefaults
-        UserDefaults.standard.removeObject(forKey: kAdBannerConsent)
-        PACConsentInformation.sharedInstance.reset()
+        // clean up old stuff if it exists.
+        if UserDefaults.standard.integer(forKey: kAdBannerConsent) > 0 {
+            UserDefaults.standard.removeObject(forKey: kAdBannerConsent)
+            PACConsentInformation.sharedInstance.reset()
+        }
         
         // Create a UMPRequestParameters object.
         let parameters = UMPRequestParameters()
