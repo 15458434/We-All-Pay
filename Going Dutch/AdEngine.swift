@@ -9,6 +9,8 @@
 import UIKit
 import AdSupport
 
+import UserMessagingPlatform
+
 import PersonalizedAdConsent
 import GoogleMobileAds
 import InMobiAdapter
@@ -25,6 +27,34 @@ import MoPub
     static var isEnabled: Bool = true
     #endif
     
+    enum ConsentStatus: Int {
+        case unknown = 0
+        case nonPersonalized = 1
+        case personalized = 2
+        
+        init(consentStatus: PACConsentStatus) {
+            switch consentStatus {
+            case .nonPersonalized:
+                self = .nonPersonalized
+            case .personalized:
+                self = .personalized
+            default:
+                self = .unknown
+            }
+        }
+        
+        init(consentType: UMPConsentType) {
+            switch consentType {
+            case .personalized:
+                self = .personalized
+            case .nonPersonalized:
+                self = .nonPersonalized
+            default:
+                self = .unknown
+            }
+        }
+    }
+    
     enum EconomicArea {
         case unknown
         case eea
@@ -38,111 +68,111 @@ import MoPub
         GADMobileAds.sharedInstance().requestConfiguration.testDeviceIdentifiers = [(kGADSimulatorID as! String), iPhoneX, iPadRetina]
     }
     
+    private class func gdprConsentInMobi(economicArea: AdEngine.EconomicArea = .unknown, consentStatus: ConsentStatus) {
+        var economicAreaString: String {
+            switch economicArea {
+            case .unknown:
+                return "0"
+            case .eea:
+                return "1"
+            }
+        }
+        var consentString: String {
+            switch consentStatus {
+            case .personalized:
+                return "true"
+            default:
+                return "false"
+            }
+        }
+        
+        if let _ = GADMInMobiConsent.consent {
+            // Nothing todo.
+            return
+        }
+        
+        let consentDictionary: [String: String] = ["gdpr": economicAreaString, IM_GDPR_CONSENT_AVAILABLE: consentString]
+        GADMInMobiConsent.updateGDPRConsent(consentDictionary)
+    }
+    
+    private class func gdprConsentAdcolony(economicArea: AdEngine.EconomicArea = .unknown, consentStatus: ConsentStatus) {
+        var gdprRequired: Bool {
+            switch economicArea {
+            case .unknown:
+                return false
+            case .eea:
+                return true
+            }
+        }
+        var consentString: String {
+            switch consentStatus {
+            case .personalized:
+                return "1"
+            default:
+                return "0"
+            }
+        }
+        
+        let options = GADMediationAdapterAdColony.appOptions!
+        options.gdprRequired = gdprRequired
+        options.gdprConsentString = consentString
+    }
+    
+    private class func gdprConsentAppLovin(economicArea: AdEngine.EconomicArea = .unknown, consentStatus: ConsentStatus) {
+        var gdprRequired: Bool {
+            switch economicArea {
+            case .unknown:
+                return false
+            case .eea:
+                return true
+            }
+        }
+        var consentValue: Bool {
+            switch consentStatus {
+            case .personalized:
+                return true
+            default:
+                return false
+            }
+        }
+        
+        if gdprRequired {
+            ALPrivacySettings.setHasUserConsent(consentValue)
+        }
+    }
+    
+    private class func gdprConsentMoPub(economicArea: AdEngine.EconomicArea = .unknown, consentStatus: ConsentStatus) {
+        var gdprRequired: Bool {
+            switch economicArea {
+            case .unknown:
+                return false
+            case .eea:
+                return true
+            }
+        }
+        var consentValue: Bool {
+            switch consentStatus {
+            case .personalized:
+                return true
+            default:
+                return false
+            }
+        }
+        
+        let moPubConfig = MPMoPubConfiguration(adUnitIdForAppInitialization: "b63c7628b51e41c497d6159df9a922b0")
+        let moPubInstance = MoPub.sharedInstance()
+        moPubInstance.initializeSdk(with: moPubConfig, completion: nil)
+        
+        if gdprRequired {
+            if consentValue {
+                moPubInstance.grantConsent()
+            } else {
+                moPubInstance.revokeConsent()
+            }
+        }
+    }
+    
     @objc(presentPrivacyConsentRequestIfNecessaryFromViewController:) class func presentPrivacyConsentRequestIfNecessary(from viewController: UIViewController) {
-        func gdprConsentInMobi(economicArea: AdEngine.EconomicArea = .unknown, consentStatus: PACConsentStatus) {
-            var economicAreaString: String {
-                switch economicArea {
-                case .unknown:
-                    return "0"
-                case .eea:
-                    return "1"
-                }
-            }
-            var consentString: String {
-                switch consentStatus {
-                case .personalized:
-                    return "true"
-                default:
-                    return "false"
-                }
-            }
-
-            if let _ = GADMInMobiConsent.consent {
-                // Nothing todo.
-                return
-            }
-
-            let consentDictionary: [String: String] = ["gdpr": economicAreaString, IM_GDPR_CONSENT_AVAILABLE: consentString]
-            GADMInMobiConsent.updateGDPRConsent(consentDictionary)
-        }
-        
-        func gdprConsentAdcolony(economicArea: AdEngine.EconomicArea = .unknown, consentStatus: PACConsentStatus) {
-            var gdprRequired: Bool {
-                switch economicArea {
-                case .unknown:
-                    return false
-                case .eea:
-                    return true
-                }
-            }
-            var consentString: String {
-                switch consentStatus {
-                case .personalized:
-                    return "1"
-                default:
-                    return "0"
-                }
-            }
-            
-            let options = GADMediationAdapterAdColony.appOptions!
-            options.gdprRequired = gdprRequired
-            options.gdprConsentString = consentString
-        }
-        
-        func gdprConsentAppLovin(economicArea: AdEngine.EconomicArea = .unknown, consentStatus: PACConsentStatus) {
-            var gdprRequired: Bool {
-                switch economicArea {
-                case .unknown:
-                    return false
-                case .eea:
-                    return true
-                }
-            }
-            var consentValue: Bool {
-                switch consentStatus {
-                case .personalized:
-                    return true
-                default:
-                    return false
-                }
-            }
-            
-            if gdprRequired {
-                ALPrivacySettings.setHasUserConsent(consentValue)
-            }
-        }
-        
-        func gdprConsentMoPub(economicArea: AdEngine.EconomicArea = .unknown, consentStatus: PACConsentStatus) {
-            var gdprRequired: Bool {
-                switch economicArea {
-                case .unknown:
-                    return false
-                case .eea:
-                    return true
-                }
-            }
-            var consentValue: Bool {
-                switch consentStatus {
-                case .personalized:
-                    return true
-                default:
-                    return false
-                }
-            }
-            
-            let moPubConfig = MPMoPubConfiguration(adUnitIdForAppInitialization: "b63c7628b51e41c497d6159df9a922b0")
-            let moPubInstance = MoPub.sharedInstance()
-            moPubInstance.initializeSdk(with: moPubConfig, completion: nil)
-            
-            if gdprRequired {
-                if consentValue {
-                    moPubInstance.grantConsent()
-                } else {
-                    moPubInstance.revokeConsent()
-                }
-            }
-        }
-
         
         guard AdEngine.isEnabled else {
             return
@@ -164,7 +194,8 @@ import MoPub
                 debugPrint("InEEAorUnknown")
                 
                 let userDefaults = UserDefaults.standard
-                let consentStatus = PACConsentStatus(rawValue: userDefaults.integer(forKey: AdEngine.kAdBannerConsent))!
+                let storedConsentStatus = PACConsentStatus(rawValue: userDefaults.integer(forKey: AdEngine.kAdBannerConsent))!
+                let consentStatus = ConsentStatus(consentStatus: storedConsentStatus)
                 switch consentStatus {
                 case .personalized:
                     gdprConsentInMobi(economicArea: .eea, consentStatus: consentStatus)
@@ -178,9 +209,9 @@ import MoPub
                     gdprConsentMoPub(economicArea: .eea, consentStatus: consentStatus)
                 default:
                     guard let privacyUrl = URL(string: "https://www.iubenda.com/privacy-policy/7876418"),
-                        let form = PACConsentForm(applicationPrivacyPolicyURL: privacyUrl) else {
-                            print("incorrect privacy URL.")
-                            return
+                          let form = PACConsentForm(applicationPrivacyPolicyURL: privacyUrl) else {
+                        print("incorrect privacy URL.")
+                        return
                     }
                     form.shouldOfferPersonalizedAds = true
                     form.shouldOfferNonPersonalizedAds = true
@@ -193,8 +224,9 @@ import MoPub
                         }
                         
                         form.present(from: viewController) { (error, success) in
-                            let consentStatus = PACConsentInformation.sharedInstance.consentStatus
+                            let currentConsentStatus = PACConsentInformation.sharedInstance.consentStatus
                             UserDefaults.standard.set(consentStatus.rawValue, forKey: AdEngine.kAdBannerConsent)
+                            let consentStatus = ConsentStatus(consentStatus: currentConsentStatus)
                             gdprConsentInMobi(economicArea: .eea, consentStatus: consentStatus)
                             gdprConsentAdcolony(economicArea: .eea, consentStatus: consentStatus)
                             gdprConsentAppLovin(economicArea: .eea, consentStatus: consentStatus)
@@ -208,12 +240,6 @@ import MoPub
     
     var request: GADRequest {
         let newRequest = DFPRequest()
-        let consent = PACConsentStatus(rawValue: UserDefaults.standard.integer(forKey: AdEngine.kAdBannerConsent))
-        if consent == .nonPersonalized {
-            let extras = GADExtras()
-            extras.additionalParameters = ["npa" : 1]
-            newRequest.register(extras)
-        }
         return newRequest
     }
     

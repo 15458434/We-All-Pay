@@ -169,6 +169,7 @@
 		38B4E83A23CE09680034CA95 /* InterstitialAdEngine.swift in Sources */ = {isa = PBXBuildFile; fileRef = 38B4E83923CE09680034CA95 /* InterstitialAdEngine.swift */; };
 		38B7E9521D86F8F600400E72 /* ContactsDataReceiver.swift in Sources */ = {isa = PBXBuildFile; fileRef = 38B7E9511D86F8F600400E72 /* ContactsDataReceiver.swift */; };
 		38B88E2E1D81FF6E0069A44D /* MailComposeViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 38B88E2D1D81FF6E0069A44D /* MailComposeViewController.swift */; };
+		38BCCA5026C6A19E00D4C854 /* AppTrackingTransparency.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 38BCCA4F26C6A19E00D4C854 /* AppTrackingTransparency.framework */; };
 		38C1956323C8C575006255AE /* MCGenericAdBannerViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 38C1956223C8C575006255AE /* MCGenericAdBannerViewController.m */; };
 		38C3AB151CBCF3200011C10C /* ViewControllerProtocols.swift in Sources */ = {isa = PBXBuildFile; fileRef = 38C3AB141CBCF3200011C10C /* ViewControllerProtocols.swift */; };
 		38C44BCE23DEDEC900264BBB /* ScrollViewAdjusterToKeyboard.swift in Sources */ = {isa = PBXBuildFile; fileRef = 38C44BCD23DEDEC900264BBB /* ScrollViewAdjusterToKeyboard.swift */; };
@@ -570,6 +571,7 @@
 		38B6E0F01A28BBAB009E69D7 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		38B7E9511D86F8F600400E72 /* ContactsDataReceiver.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ContactsDataReceiver.swift; sourceTree = "<group>"; };
 		38B88E2D1D81FF6E0069A44D /* MailComposeViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = MailComposeViewController.swift; sourceTree = "<group>"; };
+		38BCCA4F26C6A19E00D4C854 /* AppTrackingTransparency.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = AppTrackingTransparency.framework; path = System/Library/Frameworks/AppTrackingTransparency.framework; sourceTree = SDKROOT; };
 		38C1956123C8C575006255AE /* MCGenericAdBannerViewController.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = MCGenericAdBannerViewController.h; sourceTree = "<group>"; };
 		38C1956223C8C575006255AE /* MCGenericAdBannerViewController.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = MCGenericAdBannerViewController.m; sourceTree = "<group>"; };
 		38C3AB141CBCF3200011C10C /* ViewControllerProtocols.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ViewControllerProtocols.swift; sourceTree = "<group>"; };
@@ -671,6 +673,7 @@
 				38B4E82B23CDE6410034CA95 /* SystemConfiguration.framework in Frameworks */,
 				38B4E82723CDE62C0034CA95 /* MessageUI.framework in Frameworks */,
 				38B4E82523CDE6220034CA95 /* JavaScriptCore.framework in Frameworks */,
+				38BCCA5026C6A19E00D4C854 /* AppTrackingTransparency.framework in Frameworks */,
 				38B4E82323CDE6180034CA95 /* CoreTelephony.framework in Frameworks */,
 				38B4E82123CDE6100034CA95 /* CoreMedia.framework in Frameworks */,
 				38B4E81F23CDE6050034CA95 /* AVFoundation.framework in Frameworks */,
@@ -1399,6 +1402,7 @@
 		8AA57C6157892F74604CB04B /* Frameworks */ = {
 			isa = PBXGroup;
 			children = (
+				38BCCA4F26C6A19E00D4C854 /* AppTrackingTransparency.framework */,
 				38163E0E249E193D009E889C /* CoreServices.framework */,
 				38B4E82A23CDE6410034CA95 /* SystemConfiguration.framework */,
 				38B4E82823CDE6370034CA95 /* MobileCoreServices.framework */,
