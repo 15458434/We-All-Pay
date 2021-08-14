@@ -91,7 +91,7 @@ import MoPub
         
         let debugSettings = UMPDebugSettings()
         debugSettings.testDeviceIdentifiers = ["00000000-0000-0000-0000-000000000000", "E0C4F2B0-1AD9-4FEE-B467-7DE63D5E8939"]
-        debugSettings.geography = .notEEA
+        debugSettings.geography = .disabled
         parameters.debugSettings = debugSettings
         
         // Request an update to the consent information.
