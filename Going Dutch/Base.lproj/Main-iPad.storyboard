@@ -4,7 +4,6 @@
     <dependencies>
         <deployment identifier="iOS"/>
         <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="18093"/>
-        <capability name="Named colors" minToolsVersion="9.0"/>
         <capability name="documents saved in the Xcode 8 format" minToolsVersion="8.0"/>
     </dependencies>
     <scenes>
@@ -22,14 +21,14 @@
                         <subviews>
                             <containerView contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="CpF-MJ-vN0">
                                 <rect key="frame" x="417" y="124" width="417" height="910"/>
-                                <color key="backgroundColor" name="background"/>
+                                <color key="backgroundColor" red="0.83529411764705885" green="0.92549019607843142" blue="0.99215686274509807" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                                 <connections>
                                     <segue destination="NKD-wF-4e4" kind="embed" id="rOa-zk-LNb"/>
                                 </connections>
                             </containerView>
                             <containerView contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="cqE-dH-zdR">
                                 <rect key="frame" x="0.0" y="124" width="417" height="910"/>
-                                <color key="backgroundColor" name="background"/>
+                                <color key="backgroundColor" red="0.83529411764705885" green="0.92549019607843142" blue="0.99215686274509807" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                                 <connections>
                                     <segue destination="YMW-gY-bCa" kind="embed" id="00m-OO-9HG"/>
                                 </connections>
@@ -54,7 +53,7 @@
                                                 <subviews>
                                                     <button contentMode="redraw" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="system" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="Nxq-6f-abw" customClass="MCRoundedButton">
                                                         <rect key="frame" x="0.0" y="0.0" width="83" height="30"/>
-                                                        <color key="backgroundColor" name="background"/>
+                                                        <color key="backgroundColor" red="0.83529411764705885" green="0.92549019607843142" blue="0.99215686274509807" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                                                         <accessibility key="accessibilityConfiguration" identifier="Add  Person"/>
                                                         <fontDescription key="fontDescription" type="system" weight="semibold" pointSize="15"/>
                                                         <state key="normal" title="Add Person">
@@ -63,10 +62,10 @@
                                                         </state>
                                                         <userDefinedRuntimeAttributes>
                                                             <userDefinedRuntimeAttribute type="color" keyPath="normalBackgroundColor">
-                                                                <color key="value" name="button - enabled"/>
+                                                                <color key="value" red="1" green="0.52941176470588236" blue="0.67843137254901964" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                                                             </userDefinedRuntimeAttribute>
                                                             <userDefinedRuntimeAttribute type="color" keyPath="highlightedBackgroundColor">
-                                                                <color key="value" name="button - disabled"/>
+                                                                <color key="value" red="1" green="0.87058823529411766" blue="0.89411764705882357" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                                                             </userDefinedRuntimeAttribute>
                                                         </userDefinedRuntimeAttributes>
                                                         <connections>
@@ -75,7 +74,7 @@
                                                     </button>
                                                     <button contentMode="redraw" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="system" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="H3d-ki-tdJ" customClass="MCRoundedButton">
                                                         <rect key="frame" x="312" y="0.0" width="65" height="30"/>
-                                                        <color key="backgroundColor" name="background"/>
+                                                        <color key="backgroundColor" red="0.83529411764705885" green="0.92549019607843142" blue="0.99215686274509807" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                                                         <fontDescription key="fontDescription" type="system" weight="semibold" pointSize="15"/>
                                                         <state key="normal" title="Contacts">
                                                             <color key="titleColor" systemColor="systemBackgroundColor"/>
@@ -83,10 +82,10 @@
                                                         </state>
                                                         <userDefinedRuntimeAttributes>
                                                             <userDefinedRuntimeAttribute type="color" keyPath="normalBackgroundColor">
-                                                                <color key="value" name="button - enabled"/>
+                                                                <color key="value" red="1" green="0.52941176470588236" blue="0.67843137254901964" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                                                             </userDefinedRuntimeAttribute>
                                                             <userDefinedRuntimeAttribute type="color" keyPath="highlightedBackgroundColor">
-                                                                <color key="value" name="button - disabled"/>
+                                                                <color key="value" red="1" green="0.87058823529411766" blue="0.89411764705882357" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                                                             </userDefinedRuntimeAttribute>
                                                         </userDefinedRuntimeAttributes>
                                                         <connections>
@@ -98,7 +97,7 @@
                                         </subviews>
                                     </stackView>
                                 </subviews>
-                                <color key="backgroundColor" name="background"/>
+                                <color key="backgroundColor" red="0.83529411764705885" green="0.92549019607843142" blue="0.99215686274509807" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                                 <constraints>
                                     <constraint firstItem="0m5-Fl-ytG" firstAttribute="leading" secondItem="rqj-np-zHP" secondAttribute="leading" constant="20" symbolic="YES" id="4Ub-mp-iDn"/>
                                     <constraint firstAttribute="bottom" secondItem="0m5-Fl-ytG" secondAttribute="bottom" constant="20" symbolic="YES" id="SyU-GO-9BS"/>
@@ -117,7 +116,7 @@
                                                 <subviews>
                                                     <button contentMode="redraw" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="system" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="egw-0d-cT1" customClass="MCRoundedButton">
                                                         <rect key="frame" x="0.0" y="0.0" width="95" height="30"/>
-                                                        <color key="backgroundColor" name="background"/>
+                                                        <color key="backgroundColor" red="0.83529411764705885" green="0.92549019607843142" blue="0.99215686274509807" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                                                         <accessibility key="accessibilityConfiguration" identifier="Add Payment"/>
                                                         <fontDescription key="fontDescription" type="system" weight="semibold" pointSize="15"/>
                                                         <state key="normal" title="Add payment">
@@ -126,10 +125,10 @@
                                                         </state>
                                                         <userDefinedRuntimeAttributes>
                                                             <userDefinedRuntimeAttribute type="color" keyPath="normalBackgroundColor">
-                                                                <color key="value" name="button - enabled"/>
+                                                                <color key="value" red="1" green="0.52941176470588236" blue="0.67843137254901964" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                                                             </userDefinedRuntimeAttribute>
                                                             <userDefinedRuntimeAttribute type="color" keyPath="highlightedBackgroundColor">
-                                                                <color key="value" name="button - disabled"/>
+                                                                <color key="value" red="1" green="0.87058823529411766" blue="0.89411764705882357" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                                                             </userDefinedRuntimeAttribute>
                                                         </userDefinedRuntimeAttributes>
                                                         <connections>
@@ -138,7 +137,7 @@
                                                     </button>
                                                     <button contentMode="redraw" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="system" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="9og-gt-gwG" customClass="MCRoundedButton">
                                                         <rect key="frame" x="337" y="0.0" width="40" height="30"/>
-                                                        <color key="backgroundColor" name="background"/>
+                                                        <color key="backgroundColor" red="0.83529411764705885" green="0.92549019607843142" blue="0.99215686274509807" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                                                         <accessibility key="accessibilityConfiguration" identifier="Solve"/>
                                                         <fontDescription key="fontDescription" type="system" weight="semibold" pointSize="15"/>
                                                         <state key="normal" title="Solve">
@@ -147,10 +146,10 @@
                                                         </state>
                                                         <userDefinedRuntimeAttributes>
                                                             <userDefinedRuntimeAttribute type="color" keyPath="normalBackgroundColor">
-                                                                <color key="value" name="button - enabled"/>
+                                                                <color key="value" red="1" green="0.52941176470588236" blue="0.67843137254901964" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                                                             </userDefinedRuntimeAttribute>
                                                             <userDefinedRuntimeAttribute type="color" keyPath="highlightedBackgroundColor">
-                                                                <color key="value" name="button - disabled"/>
+                                                                <color key="value" red="1" green="0.87058823529411766" blue="0.89411764705882357" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                                                             </userDefinedRuntimeAttribute>
                                                         </userDefinedRuntimeAttributes>
                                                         <connections>
@@ -162,7 +161,7 @@
                                         </subviews>
                                     </stackView>
                                 </subviews>
-                                <color key="backgroundColor" name="background"/>
+                                <color key="backgroundColor" red="0.83529411764705885" green="0.92549019607843142" blue="0.99215686274509807" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                                 <constraints>
                                     <constraint firstItem="bpF-uQ-91f" firstAttribute="top" relation="greaterThanOrEqual" secondItem="Muu-sU-mX8" secondAttribute="top" constant="20" symbolic="YES" id="Fpf-ZL-kcb"/>
                                     <constraint firstAttribute="bottom" secondItem="bpF-uQ-91f" secondAttribute="bottom" constant="20" symbolic="YES" id="KK0-i9-TNh"/>
@@ -182,7 +181,7 @@
                                 </userDefinedRuntimeAttributes>
                             </view>
                         </subviews>
-                        <color key="backgroundColor" name="background"/>
+                        <color key="backgroundColor" red="0.83529411764705885" green="0.92549019607843142" blue="0.99215686274509807" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                         <constraints>
                             <constraint firstAttribute="trailing" secondItem="Muu-sU-mX8" secondAttribute="trailing" id="1bu-M6-927"/>
                             <constraint firstItem="Muu-sU-mX8" firstAttribute="width" secondItem="CpF-MJ-vN0" secondAttribute="width" id="9O4-Ag-g4T"/>
@@ -242,14 +241,14 @@
                     <tableView key="view" clipsSubviews="YES" contentMode="scaleToFill" restorationIdentifier="solutionTableView" alwaysBounceVertical="YES" dataMode="prototypes" style="grouped" rowHeight="44" sectionHeaderHeight="10" sectionFooterHeight="10" id="DEn-mU-FyZ">
                         <rect key="frame" x="0.0" y="0.0" width="704" height="995.5"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
-                        <color key="backgroundColor" name="background"/>
+                        <color key="backgroundColor" red="0.83529411764705885" green="0.92549019607843142" blue="0.99215686274509807" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                         <view key="tableHeaderView" contentMode="scaleToFill" restorationIdentifier="solutionHeaderView" id="mI7-Ux-H5Q" customClass="UITableViewHeaderFooterView">
                             <rect key="frame" x="0.0" y="0.0" width="704" height="50"/>
                             <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                             <subviews>
                                 <button opaque="NO" contentMode="redraw" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="system" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="fi4-m8-emE" customClass="MCRoundedButton">
                                     <rect key="frame" x="314" y="20" width="76" height="30"/>
-                                    <color key="backgroundColor" name="background"/>
+                                    <color key="backgroundColor" red="0.83529411764705885" green="0.92549019607843142" blue="0.99215686274509807" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                                     <fontDescription key="fontDescription" type="system" pointSize="15"/>
                                     <state key="normal" title="Send Email">
                                         <color key="titleColor" systemColor="systemBackgroundColor"/>
@@ -257,10 +256,10 @@
                                     </state>
                                     <userDefinedRuntimeAttributes>
                                         <userDefinedRuntimeAttribute type="color" keyPath="normalBackgroundColor">
-                                            <color key="value" name="button - enabled"/>
+                                            <color key="value" red="1" green="0.52941176470588236" blue="0.67843137254901964" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                                         </userDefinedRuntimeAttribute>
                                         <userDefinedRuntimeAttribute type="color" keyPath="highlightedBackgroundColor">
-                                            <color key="value" name="button - disabled"/>
+                                            <color key="value" red="1" green="0.87058823529411766" blue="0.89411764705882357" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                                         </userDefinedRuntimeAttribute>
                                     </userDefinedRuntimeAttributes>
                                     <connections>
@@ -268,7 +267,7 @@
                                     </connections>
                                 </button>
                             </subviews>
-                            <color key="backgroundColor" name="background"/>
+                            <color key="backgroundColor" red="0.83529411764705885" green="0.92549019607843142" blue="0.99215686274509807" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                             <constraints>
                                 <constraint firstAttribute="centerX" secondItem="fi4-m8-emE" secondAttribute="centerX" id="5wa-pG-1nu"/>
                                 <constraint firstItem="fi4-m8-emE" firstAttribute="top" secondItem="mI7-Ux-H5Q" secondAttribute="top" constant="20" symbolic="YES" id="8Be-Ab-QYi"/>
@@ -361,7 +360,7 @@
                     </tableView>
                     <navigationItem key="navigationItem" title="Solution" id="Vay-2v-DoQ">
                         <barButtonItem key="rightBarButtonItem" image="barbutton - cancel" id="Wkf-up-Zxw">
-                            <color key="tintColor" name="button - enabled"/>
+                            <color key="tintColor" red="1" green="0.52941176470588236" blue="0.67843137254901964" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                             <userDefinedRuntimeAttributes>
                                 <userDefinedRuntimeAttribute type="string" keyPath="accessibilityIdentifier" value="Cancel"/>
                             </userDefinedRuntimeAttributes>
@@ -433,9 +432,9 @@
                     <tableView key="view" clipsSubviews="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" dataMode="prototypes" style="plain" separatorStyle="none" rowHeight="83" sectionHeaderHeight="28" sectionFooterHeight="28" id="hse-0g-6ne">
                         <rect key="frame" x="0.0" y="0.0" width="768" height="1024"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
-                        <color key="backgroundColor" name="background"/>
+                        <color key="backgroundColor" red="0.83529411764705885" green="0.92549019607843142" blue="0.99215686274509807" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                         <inset key="separatorInset" minX="90" minY="0.0" maxX="0.0" maxY="0.0"/>
-                        <color key="sectionIndexBackgroundColor" red="0.75745260715484619" green="0.83339643478393555" blue="0.92594647407531738" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                        <color key="sectionIndexBackgroundColor" red="0.83529411764705885" green="0.92549019607843142" blue="0.99215686274509807" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                         <prototypes>
                             <tableViewCell contentMode="scaleToFill" selectionStyle="blue" hidesAccessoryWhenEditing="NO" indentationLevel="1" indentationWidth="0.0" reuseIdentifier="MCPaymentTableViewCell_iPad" rowHeight="80" id="18w-nV-pxt" customClass="PaymentTableViewCell_iPad" customModule="We_all_pay" customModuleProvider="target">
                                 <rect key="frame" x="0.0" y="24.5" width="768" height="80"/>
@@ -557,10 +556,10 @@
                                     </state>
                                     <userDefinedRuntimeAttributes>
                                         <userDefinedRuntimeAttribute type="color" keyPath="normalBackgroundColor">
-                                            <color key="value" name="button - enabled"/>
+                                            <color key="value" red="1" green="0.52941176470588236" blue="0.67843137254901964" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                                         </userDefinedRuntimeAttribute>
                                         <userDefinedRuntimeAttribute type="color" keyPath="highlightedBackgroundColor">
-                                            <color key="value" name="button - disabled"/>
+                                            <color key="value" red="1" green="0.87058823529411766" blue="0.89411764705882357" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                                         </userDefinedRuntimeAttribute>
                                     </userDefinedRuntimeAttributes>
                                     <connections>
@@ -601,10 +600,10 @@
                                     </state>
                                     <userDefinedRuntimeAttributes>
                                         <userDefinedRuntimeAttribute type="color" keyPath="normalBackgroundColor">
-                                            <color key="value" name="button - enabled"/>
+                                            <color key="value" red="1" green="0.52941176470588236" blue="0.67843137254901964" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                                         </userDefinedRuntimeAttribute>
                                         <userDefinedRuntimeAttribute type="color" keyPath="highlightedBackgroundColor">
-                                            <color key="value" name="button - disabled"/>
+                                            <color key="value" red="1" green="0.87058823529411766" blue="0.89411764705882357" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                                         </userDefinedRuntimeAttribute>
                                     </userDefinedRuntimeAttributes>
                                     <connections>
@@ -631,10 +630,10 @@
                                     </state>
                                     <userDefinedRuntimeAttributes>
                                         <userDefinedRuntimeAttribute type="color" keyPath="normalBackgroundColor">
-                                            <color key="value" name="button - enabled"/>
+                                            <color key="value" red="1" green="0.52941176470588236" blue="0.67843137254901964" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                                         </userDefinedRuntimeAttribute>
                                         <userDefinedRuntimeAttribute type="color" keyPath="highlightedBackgroundColor">
-                                            <color key="value" name="button - disabled"/>
+                                            <color key="value" red="1" green="0.87058823529411766" blue="0.89411764705882357" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                                         </userDefinedRuntimeAttribute>
                                     </userDefinedRuntimeAttributes>
                                     <connections>
@@ -773,7 +772,7 @@
                     </tableView>
                     <navigationItem key="navigationItem" title="Payment details" id="Du0-aV-eeD">
                         <barButtonItem key="leftBarButtonItem" image="barbutton - cancel" id="gKd-pZ-mW9">
-                            <color key="tintColor" name="button - enabled"/>
+                            <color key="tintColor" red="1" green="0.52941176470588236" blue="0.67843137254901964" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                             <userDefinedRuntimeAttributes>
                                 <userDefinedRuntimeAttribute type="string" keyPath="accessibilityIdentifier" value="Cancel"/>
                             </userDefinedRuntimeAttributes>
@@ -782,7 +781,7 @@
                             </connections>
                         </barButtonItem>
                         <barButtonItem key="rightBarButtonItem" image="barbutton - done" id="Db5-21-ggn">
-                            <color key="tintColor" name="button - enabled"/>
+                            <color key="tintColor" red="1" green="0.52941176470588236" blue="0.67843137254901964" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                             <connections>
                                 <action selector="mainDonePressed:" destination="3NB-dQ-HNX" id="nWw-fv-1e4"/>
                             </connections>
@@ -938,6 +937,7 @@
         <!--Navigation Controller-->
         <scene sceneID="g7U-q4-hyE">
             <objects>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="z0I-Oj-QeZ" userLabel="First Responder" sceneMemberID="firstResponder"/>
                 <navigationController id="lZi-iw-OMC" sceneMemberID="viewController">
                     <navigationBar key="navigationBar" contentMode="scaleToFill" id="1Lb-dr-wWg">
                         <rect key="frame" x="0.0" y="0.0" width="834" height="50"/>
@@ -947,7 +947,6 @@
                         <segue destination="Z9a-Hu-qSZ" kind="relationship" relationship="rootViewController" id="hVz-7y-nVI"/>
                     </connections>
                 </navigationController>
-                <placeholder placeholderIdentifier="IBFirstResponder" id="z0I-Oj-QeZ" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
             <point key="canvasLocation" x="4706" y="1443"/>
         </scene>
@@ -956,7 +955,7 @@
             <objects>
                 <tableViewController storyboardIdentifier="MCSelectCurrencyTableViewController_iPad" useStoryboardIdentifierAsRestorationIdentifier="YES" id="Z9a-Hu-qSZ" customClass="SelectCurrencyTableViewController" customModule="We_all_pay" customModuleProvider="target" sceneMemberID="viewController">
                     <tableView key="view" clipsSubviews="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" dataMode="prototypes" style="plain" separatorStyle="default" rowHeight="44" sectionHeaderHeight="22" sectionFooterHeight="22" id="rkF-gV-exG">
-                        <rect key="frame" x="0.0" y="0.0" width="320" height="460"/>
+                        <rect key="frame" x="0.0" y="0.0" width="320" height="480"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <color key="backgroundColor" red="1" green="1" blue="1" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                         <prototypes>
@@ -1014,7 +1013,7 @@
                     <tableView key="view" clipsSubviews="YES" contentMode="scaleToFill" restorationIdentifier="peoplePresentTableView" alwaysBounceVertical="YES" dataMode="prototypes" style="plain" separatorStyle="none" rowHeight="44" sectionHeaderHeight="28" sectionFooterHeight="28" id="6SI-AW-NVw">
                         <rect key="frame" x="0.0" y="0.0" width="768" height="1024"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
-                        <color key="backgroundColor" name="background"/>
+                        <color key="backgroundColor" red="0.83529411764705885" green="0.92549019607843142" blue="0.99215686274509807" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                         <inset key="separatorInset" minX="108" minY="0.0" maxX="0.0" maxY="0.0"/>
                         <prototypes>
                             <tableViewCell contentMode="scaleToFill" restorationIdentifier="MCPersonTableViewCell_iPad" selectionStyle="blue" hidesAccessoryWhenEditing="NO" indentationLevel="1" indentationWidth="0.0" reuseIdentifier="MCPersonTableViewCell_iPad" rowHeight="120" id="XYG-pX-SLw" customClass="PersonTableViewCell_iPad" customModule="We_all_pay" customModuleProvider="target">
@@ -1143,23 +1142,31 @@
             <point key="canvasLocation" x="2482.8125" y="-73.2421875"/>
         </scene>
     </scenes>
+    <designables>
+        <designable name="9MV-Ie-wK3">
+            <size key="intrinsicContentSize" width="480" height="480"/>
+        </designable>
+        <designable name="Z3O-c0-2tS">
+            <size key="intrinsicContentSize" width="480" height="480"/>
+        </designable>
+        <designable name="gvW-A9-uVj">
+            <size key="intrinsicContentSize" width="480" height="480"/>
+        </designable>
+        <designable name="jaj-RZ-MiC">
+            <size key="intrinsicContentSize" width="480" height="480"/>
+        </designable>
+        <designable name="xcc-E7-c0h">
+            <size key="intrinsicContentSize" width="480" height="480"/>
+        </designable>
+    </designables>
     <inferredMetricsTieBreakers>
-        <segue reference="eXg-7Q-xwo"/>
-        <segue reference="bBe-4f-24C"/>
-        <segue reference="aJ5-e8-dvs"/>
+        <segue reference="pZQ-Y2-0Nm"/>
+        <segue reference="qrR-J2-mhx"/>
+        <segue reference="hVz-7y-nVI"/>
     </inferredMetricsTieBreakers>
     <resources>
         <image name="barbutton - cancel" width="22" height="22"/>
         <image name="barbutton - done" width="22" height="22"/>
-        <namedColor name="background">
-            <color red="0.83529411764705885" green="0.92549019607843142" blue="0.99215686274509807" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
-        </namedColor>
-        <namedColor name="button - disabled">
-            <color red="1" green="0.87058823529411766" blue="0.89411764705882357" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
-        </namedColor>
-        <namedColor name="button - enabled">
-            <color red="1" green="0.52941176470588236" blue="0.67843137254901964" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
-        </namedColor>
         <systemColor name="secondaryLabelColor">
             <color red="0.23529411764705882" green="0.23529411764705882" blue="0.2627450980392157" alpha="0.59999999999999998" colorSpace="custom" customColorSpace="sRGB"/>
         </systemColor>
