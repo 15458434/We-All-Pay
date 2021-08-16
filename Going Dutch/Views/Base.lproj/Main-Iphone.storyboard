@@ -4,7 +4,6 @@
     <dependencies>
         <deployment identifier="iOS"/>
         <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="18093"/>
-        <capability name="Named colors" minToolsVersion="9.0"/>
         <capability name="Safe area layout guides" minToolsVersion="9.0"/>
         <capability name="System colors in document resources" minToolsVersion="11.0"/>
         <capability name="documents saved in the Xcode 8 format" minToolsVersion="8.0"/>
@@ -32,10 +31,10 @@
                                     </state>
                                     <userDefinedRuntimeAttributes>
                                         <userDefinedRuntimeAttribute type="color" keyPath="normalBackgroundColor">
-                                            <color key="value" name="button - enabled"/>
+                                            <color key="value" red="1" green="0.52941176470588236" blue="0.67843137254901964" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                                         </userDefinedRuntimeAttribute>
                                         <userDefinedRuntimeAttribute type="color" keyPath="highlightedBackgroundColor">
-                                            <color key="value" name="button - disabled"/>
+                                            <color key="value" red="1" green="0.87058823529411766" blue="0.89411764705882357" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                                         </userDefinedRuntimeAttribute>
                                     </userDefinedRuntimeAttributes>
                                     <connections>
@@ -143,7 +142,7 @@
                                 <rect key="frame" x="16" y="10" width="24" height="24"/>
                                 <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                                 <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
-                                <color key="tintColor" name="button - enabled"/>
+                                <color key="tintColor" red="1" green="0.52941176470588236" blue="0.67843137254901964" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                                 <userDefinedRuntimeAttributes>
                                     <userDefinedRuntimeAttribute type="image" keyPath="normalImage" value="iScreen button"/>
                                     <userDefinedRuntimeAttribute type="number" keyPath="count">
@@ -151,7 +150,7 @@
                                     </userDefinedRuntimeAttribute>
                                     <userDefinedRuntimeAttribute type="boolean" keyPath="showBadge" value="YES"/>
                                     <userDefinedRuntimeAttribute type="color" keyPath="badgeColor">
-                                        <color key="value" name="button - enabled"/>
+                                        <color key="value" red="1" green="0.52941176470588236" blue="0.67843137254901964" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                                     </userDefinedRuntimeAttribute>
                                     <userDefinedRuntimeAttribute type="color" keyPath="fontColor">
                                         <color key="value" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
@@ -160,7 +159,7 @@
                                         <real key="value" value="11"/>
                                     </userDefinedRuntimeAttribute>
                                     <userDefinedRuntimeAttribute type="color" keyPath="highlightedTintColor">
-                                        <color key="value" name="button - highlighted"/>
+                                        <color key="value" red="1" green="0.52941176470588236" blue="0.67843137254901964" alpha="0.20000000298023224" colorSpace="custom" customColorSpace="sRGB"/>
                                     </userDefinedRuntimeAttribute>
                                 </userDefinedRuntimeAttributes>
                                 <connections>
@@ -195,7 +194,7 @@
                     <tableView key="view" opaque="NO" clipsSubviews="YES" clearsContextBeforeDrawing="NO" contentMode="scaleToFill" restorationIdentifier="sharedBillTableView" alwaysBounceVertical="YES" pagingEnabled="YES" showsHorizontalScrollIndicator="NO" dataMode="prototypes" style="grouped" separatorStyle="default" rowHeight="66" sectionHeaderHeight="10" sectionFooterHeight="10" id="ING-BM-Jf7">
                         <rect key="frame" x="0.0" y="0.0" width="375" height="812"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
-                        <color key="backgroundColor" name="background"/>
+                        <color key="backgroundColor" red="0.83529411764705885" green="0.92549019607843142" blue="0.99215686274509807" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                         <view key="tableHeaderView" contentMode="scaleToFill" restorationIdentifier="MCSharedBillHeaderView" preservesSuperviewLayoutMargins="YES" id="eaE-b1-r5K" customClass="UITableViewHeaderFooterView">
                             <rect key="frame" x="0.0" y="0.0" width="375" height="70"/>
                             <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
@@ -213,10 +212,10 @@
                                     </state>
                                     <userDefinedRuntimeAttributes>
                                         <userDefinedRuntimeAttribute type="color" keyPath="normalBackgroundColor">
-                                            <color key="value" name="button - enabled"/>
+                                            <color key="value" red="1" green="0.52941176470588236" blue="0.67843137254901964" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                                         </userDefinedRuntimeAttribute>
                                         <userDefinedRuntimeAttribute type="color" keyPath="highlightedBackgroundColor">
-                                            <color key="value" name="button - disabled"/>
+                                            <color key="value" red="1" green="0.87058823529411766" blue="0.89411764705882357" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                                         </userDefinedRuntimeAttribute>
                                     </userDefinedRuntimeAttributes>
                                     <connections>
@@ -236,10 +235,10 @@
                                     </state>
                                     <userDefinedRuntimeAttributes>
                                         <userDefinedRuntimeAttribute type="color" keyPath="normalBackgroundColor">
-                                            <color key="value" name="button - enabled"/>
+                                            <color key="value" red="1" green="0.52941176470588236" blue="0.67843137254901964" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                                         </userDefinedRuntimeAttribute>
                                         <userDefinedRuntimeAttribute type="color" keyPath="highlightedBackgroundColor">
-                                            <color key="value" name="button - disabled"/>
+                                            <color key="value" red="1" green="0.87058823529411766" blue="0.89411764705882357" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                                         </userDefinedRuntimeAttribute>
                                     </userDefinedRuntimeAttributes>
                                     <connections>
@@ -361,7 +360,7 @@
                         <subviews>
                             <containerView contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="5xC-6r-YOL">
                                 <rect key="frame" x="0.0" y="0.0" width="375" height="724"/>
-                                <color key="backgroundColor" name="background"/>
+                                <color key="backgroundColor" red="0.83529411764705885" green="0.92549019607843142" blue="0.99215686274509807" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                                 <connections>
                                     <segue destination="4g7-52-2bw" kind="embed" identifier="pageViewController" id="aSD-UO-zEs"/>
                                 </connections>
@@ -380,7 +379,7 @@
                             </view>
                         </subviews>
                         <viewLayoutGuide key="safeArea" id="uPK-t8-Id2"/>
-                        <color key="backgroundColor" name="background"/>
+                        <color key="backgroundColor" red="0.83529411764705885" green="0.92549019607843142" blue="0.99215686274509807" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                         <constraints>
                             <constraint firstItem="uPK-t8-Id2" firstAttribute="trailing" secondItem="XpA-qR-01e" secondAttribute="trailing" id="56e-0B-XfJ"/>
                             <constraint firstItem="XpA-qR-01e" firstAttribute="leading" secondItem="hQT-KL-JNT" secondAttribute="leading" id="8ud-Vh-DB1"/>
@@ -469,7 +468,7 @@
                     <tableView key="view" opaque="NO" clipsSubviews="YES" clearsContextBeforeDrawing="NO" contentMode="scaleToFill" restorationIdentifier="tableView" preservesSuperviewLayoutMargins="YES" alwaysBounceVertical="YES" dataMode="prototypes" style="grouped" rowHeight="-1" estimatedRowHeight="-1" sectionHeaderHeight="-1" estimatedSectionHeaderHeight="-1" sectionFooterHeight="-1" estimatedSectionFooterHeight="-1" id="2Mj-Me-UVb">
                         <rect key="frame" x="0.0" y="0.0" width="375" height="812"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
-                        <color key="backgroundColor" name="background"/>
+                        <color key="backgroundColor" red="0.83529411764705885" green="0.92549019607843142" blue="0.99215686274509807" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                         <prototypes>
                             <tableViewCell contentMode="scaleToFill" restorationIdentifier="MCTwoLabelIscreenTableViewCell" selectionStyle="none" hidesAccessoryWhenEditing="NO" indentationLevel="1" indentationWidth="0.0" reuseIdentifier="MCTwoLabelIscreenTableViewCell" id="WQg-5R-RbW" customClass="MCTwoLabelIscreenTableViewCell" customModule="We_all_pay" customModuleProvider="target">
                                 <rect key="frame" x="0.0" y="49" width="375" height="41.666667938232422"/>
@@ -509,23 +508,23 @@
                                 </connections>
                             </tableViewCell>
                             <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" preservesSuperviewLayoutMargins="YES" selectionStyle="default" indentationWidth="10" reuseIdentifier="NotificationsCountTableViewCell" id="P8J-qh-17v" customClass="NotificationsCountTableViewCell" customModule="We_all_pay" customModuleProvider="target">
-                                <rect key="frame" x="0.0" y="90.666667938232422" width="375" height="71.333335876464844"/>
+                                <rect key="frame" x="0.0" y="90.666667938232422" width="375" height="41.666667938232422"/>
                                 <autoresizingMask key="autoresizingMask"/>
                                 <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" preservesSuperviewLayoutMargins="YES" insetsLayoutMarginsFromSafeArea="NO" tableViewCell="P8J-qh-17v" id="sUP-wJ-H4Y">
-                                    <rect key="frame" x="0.0" y="0.0" width="375" height="71.333335876464844"/>
+                                    <rect key="frame" x="0.0" y="0.0" width="375" height="41.666667938232422"/>
                                     <autoresizingMask key="autoresizingMask"/>
                                     <subviews>
                                         <stackView opaque="NO" contentMode="scaleToFill" distribution="equalSpacing" alignment="center" spacing="6" translatesAutoresizingMaskIntoConstraints="NO" id="JAb-jy-84u">
-                                            <rect key="frame" x="20" y="11.000000000000004" width="335" height="50.333333333333343"/>
+                                            <rect key="frame" x="20" y="11.000000000000002" width="335" height="20.666666666666671"/>
                                             <subviews>
                                                 <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Notifications" textAlignment="natural" lineBreakMode="tailTruncation" numberOfLines="0" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="YPb-Py-Acz">
-                                                    <rect key="frame" x="0.0" y="14.999999999999998" width="164.66666666666666" height="20.333333333333329"/>
+                                                    <rect key="frame" x="0.0" y="0.33333333333333393" width="164.66666666666666" height="20.333333333333329"/>
                                                     <fontDescription key="fontDescription" type="system" weight="thin" pointSize="17"/>
                                                     <nil key="textColor"/>
                                                     <nil key="highlightedColor"/>
                                                 </label>
-                                                <view clipsSubviews="YES" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" horizontalCompressionResistancePriority="751" verticalCompressionResistancePriority="751" ambiguous="YES" translatesAutoresizingMaskIntoConstraints="NO" id="PXr-ct-Ja1" customClass="MCUnreadNotificationsCountView">
-                                                    <rect key="frame" x="285" y="0.3333333333333357" width="50" height="50"/>
+                                                <view clipsSubviews="YES" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" horizontalCompressionResistancePriority="751" verticalCompressionResistancePriority="751" translatesAutoresizingMaskIntoConstraints="NO" id="PXr-ct-Ja1" customClass="MCUnreadNotificationsCountView">
+                                                    <rect key="frame" x="314.66666666666669" y="0.33333333333333393" width="20.333333333333314" height="20"/>
                                                     <color key="backgroundColor" systemColor="systemBackgroundColor"/>
                                                     <userDefinedRuntimeAttributes>
                                                         <userDefinedRuntimeAttribute type="color" keyPath="textColor">
@@ -538,7 +537,7 @@
                                                             <integer key="value" value="1"/>
                                                         </userDefinedRuntimeAttribute>
                                                         <userDefinedRuntimeAttribute type="color" keyPath="backgroundColor">
-                                                            <color key="value" name="button - enabled"/>
+                                                            <color key="value" red="1" green="0.52941176470588236" blue="0.67843137254901964" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                                                         </userDefinedRuntimeAttribute>
                                                     </userDefinedRuntimeAttributes>
                                                 </view>
@@ -644,7 +643,7 @@
                     <tableView key="view" opaque="NO" clipsSubviews="YES" clearsContextBeforeDrawing="NO" contentMode="scaleToFill" restorationIdentifier="solveTableView" alwaysBounceVertical="YES" dataMode="prototypes" style="grouped" separatorStyle="default" allowsSelection="NO" rowHeight="-1" estimatedRowHeight="-1" sectionHeaderHeight="-1" estimatedSectionHeaderHeight="-1" sectionFooterHeight="-1" estimatedSectionFooterHeight="-1" id="zpp-aB-s1w">
                         <rect key="frame" x="0.0" y="0.0" width="375" height="702"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
-                        <color key="backgroundColor" name="background"/>
+                        <color key="backgroundColor" red="0.83529411764705885" green="0.92549019607843142" blue="0.99215686274509807" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                         <view key="tableHeaderView" contentMode="scaleToFill" restorationIdentifier="sendEmailButtonView" id="kmK-CE-AdT" customClass="UITableViewHeaderFooterView">
                             <rect key="frame" x="0.0" y="0.0" width="375" height="50"/>
                             <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
@@ -656,10 +655,10 @@
                                     <state key="normal" title="send email"/>
                                     <userDefinedRuntimeAttributes>
                                         <userDefinedRuntimeAttribute type="color" keyPath="normalBackgroundColor">
-                                            <color key="value" name="button - enabled"/>
+                                            <color key="value" red="1" green="0.52941176470588236" blue="0.67843137254901964" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                                         </userDefinedRuntimeAttribute>
                                         <userDefinedRuntimeAttribute type="color" keyPath="highlightedBackgroundColor">
-                                            <color key="value" name="button - disabled"/>
+                                            <color key="value" red="1" green="0.87058823529411766" blue="0.89411764705882357" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                                         </userDefinedRuntimeAttribute>
                                     </userDefinedRuntimeAttributes>
                                     <connections>
@@ -667,7 +666,7 @@
                                     </connections>
                                 </button>
                             </subviews>
-                            <color key="backgroundColor" name="background"/>
+                            <color key="backgroundColor" red="0.83529411764705885" green="0.92549019607843142" blue="0.99215686274509807" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                             <constraints>
                                 <constraint firstItem="ROW-vp-ekh" firstAttribute="top" secondItem="kmK-CE-AdT" secondAttribute="top" constant="20" id="ipA-bX-VvO"/>
                                 <constraint firstAttribute="centerX" secondItem="ROW-vp-ekh" secondAttribute="centerX" id="vh2-bQ-qPB"/>
@@ -860,7 +859,7 @@
                     <tableView key="view" opaque="NO" clipsSubviews="YES" clearsContextBeforeDrawing="NO" contentMode="scaleToFill" restorationIdentifier="editTripTableView" alwaysBounceVertical="YES" dataMode="prototypes" style="grouped" separatorStyle="default" rowHeight="68" sectionHeaderHeight="10" sectionFooterHeight="10" id="jnY-JK-dH0">
                         <rect key="frame" x="0.0" y="0.0" width="375" height="812"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
-                        <color key="backgroundColor" name="background"/>
+                        <color key="backgroundColor" red="0.83529411764705885" green="0.92549019607843142" blue="0.99215686274509807" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                         <view key="tableHeaderView" contentMode="scaleToFill" restorationIdentifier="MCTripInfoHeaderView" id="wmR-8m-HJR" customClass="UITableViewHeaderFooterView">
                             <rect key="frame" x="0.0" y="0.0" width="375" height="102"/>
                             <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
@@ -876,7 +875,7 @@
                                 </textField>
                                 <button opaque="NO" contentMode="redraw" placeholderIntrinsicWidth="127" placeholderIntrinsicHeight="30" restorationIdentifier="addPersonButton" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="gfv-ln-Tgv" customClass="MCRoundedButton">
                                     <rect key="frame" x="20" y="64" width="127" height="30"/>
-                                    <color key="backgroundColor" name="background"/>
+                                    <color key="backgroundColor" red="0.83529411764705885" green="0.92549019607843142" blue="0.99215686274509807" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                                     <constraints>
                                         <constraint firstAttribute="width" constant="127" id="Lmg-bJ-KJf"/>
                                     </constraints>
@@ -886,10 +885,10 @@
                                     </state>
                                     <userDefinedRuntimeAttributes>
                                         <userDefinedRuntimeAttribute type="color" keyPath="normalBackgroundColor">
-                                            <color key="value" name="button - enabled"/>
+                                            <color key="value" red="1" green="0.52941176470588236" blue="0.67843137254901964" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                                         </userDefinedRuntimeAttribute>
                                         <userDefinedRuntimeAttribute type="color" keyPath="highlightedBackgroundColor">
-                                            <color key="value" name="button - disabled"/>
+                                            <color key="value" red="1" green="0.87058823529411766" blue="0.89411764705882357" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                                         </userDefinedRuntimeAttribute>
                                     </userDefinedRuntimeAttributes>
                                     <connections>
@@ -908,10 +907,10 @@
                                     </state>
                                     <userDefinedRuntimeAttributes>
                                         <userDefinedRuntimeAttribute type="color" keyPath="normalBackgroundColor">
-                                            <color key="value" name="button - enabled"/>
+                                            <color key="value" red="1" green="0.52941176470588236" blue="0.67843137254901964" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                                         </userDefinedRuntimeAttribute>
                                         <userDefinedRuntimeAttribute type="color" keyPath="highlightedBackgroundColor">
-                                            <color key="value" name="button - disabled"/>
+                                            <color key="value" red="1" green="0.87058823529411766" blue="0.89411764705882357" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                                         </userDefinedRuntimeAttribute>
                                     </userDefinedRuntimeAttributes>
                                     <connections>
@@ -920,7 +919,7 @@
                                 </button>
                             </subviews>
                             <viewLayoutGuide key="safeArea" id="X3E-Wj-Cnd"/>
-                            <color key="backgroundColor" name="background"/>
+                            <color key="backgroundColor" red="0.83529411764705885" green="0.92549019607843142" blue="0.99215686274509807" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                             <constraints>
                                 <constraint firstItem="BJS-wA-qlM" firstAttribute="leading" secondItem="X3E-Wj-Cnd" secondAttribute="leading" constant="20" id="74N-hX-AFj"/>
                                 <constraint firstItem="gfv-ln-Tgv" firstAttribute="baseline" secondItem="asZ-Na-2wd" secondAttribute="baseline" id="C1c-Dw-9ce"/>
@@ -1084,10 +1083,10 @@
                                                                 </state>
                                                                 <userDefinedRuntimeAttributes>
                                                                     <userDefinedRuntimeAttribute type="color" keyPath="normalBackgroundColor">
-                                                                        <color key="value" name="button - enabled"/>
+                                                                        <color key="value" red="1" green="0.52941176470588236" blue="0.67843137254901964" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                                                                     </userDefinedRuntimeAttribute>
                                                                     <userDefinedRuntimeAttribute type="color" keyPath="highlightedBackgroundColor">
-                                                                        <color key="value" name="button - disabled"/>
+                                                                        <color key="value" red="1" green="0.87058823529411766" blue="0.89411764705882357" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                                                                     </userDefinedRuntimeAttribute>
                                                                 </userDefinedRuntimeAttributes>
                                                                 <connections>
@@ -1155,7 +1154,7 @@
                     </view>
                     <navigationItem key="navigationItem" title="Person" id="YXl-NB-NJJ">
                         <barButtonItem key="leftBarButtonItem" image="barbutton - cancel" id="nvM-MT-hWV">
-                            <color key="tintColor" name="button - enabled"/>
+                            <color key="tintColor" red="1" green="0.52941176470588236" blue="0.67843137254901964" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                             <userDefinedRuntimeAttributes>
                                 <userDefinedRuntimeAttribute type="string" keyPath="accessibilityIdentifier" value="Cancel"/>
                             </userDefinedRuntimeAttributes>
@@ -1164,7 +1163,7 @@
                             </connections>
                         </barButtonItem>
                         <barButtonItem key="rightBarButtonItem" image="barbutton - done" id="dzf-gh-qAj">
-                            <color key="tintColor" name="button - enabled"/>
+                            <color key="tintColor" red="1" green="0.52941176470588236" blue="0.67843137254901964" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                             <connections>
                                 <action selector="doneButtonPressed:" destination="5gk-H5-rXD" id="UoU-Mh-Sky"/>
                             </connections>
@@ -1313,10 +1312,10 @@
                                                                             </state>
                                                                             <userDefinedRuntimeAttributes>
                                                                                 <userDefinedRuntimeAttribute type="color" keyPath="normalBackgroundColor">
-                                                                                    <color key="value" name="button - enabled"/>
+                                                                                    <color key="value" red="1" green="0.52941176470588236" blue="0.67843137254901964" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                                                                                 </userDefinedRuntimeAttribute>
                                                                                 <userDefinedRuntimeAttribute type="color" keyPath="highlightedBackgroundColor">
-                                                                                    <color key="value" name="button - disabled"/>
+                                                                                    <color key="value" red="1" green="0.87058823529411766" blue="0.89411764705882357" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                                                                                 </userDefinedRuntimeAttribute>
                                                                             </userDefinedRuntimeAttributes>
                                                                             <connections>
@@ -1368,10 +1367,10 @@
                                                                             <state key="normal" title="€$£¥"/>
                                                                             <userDefinedRuntimeAttributes>
                                                                                 <userDefinedRuntimeAttribute type="color" keyPath="normalBackgroundColor">
-                                                                                    <color key="value" name="button - enabled"/>
+                                                                                    <color key="value" red="1" green="0.52941176470588236" blue="0.67843137254901964" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                                                                                 </userDefinedRuntimeAttribute>
                                                                                 <userDefinedRuntimeAttribute type="color" keyPath="highlightedBackgroundColor">
-                                                                                    <color key="value" name="button - disabled"/>
+                                                                                    <color key="value" red="1" green="0.87058823529411766" blue="0.89411764705882357" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                                                                                 </userDefinedRuntimeAttribute>
                                                                             </userDefinedRuntimeAttributes>
                                                                             <connections>
@@ -1826,8 +1825,20 @@
         </scene>
     </scenes>
     <designables>
+        <designable name="PXr-ct-Ja1">
+            <size key="intrinsicContentSize" width="20.287109375" height="20.287109375"/>
+        </designable>
+        <designable name="Y6i-cu-NDo">
+            <size key="intrinsicContentSize" width="480" height="480"/>
+        </designable>
+        <designable name="ZjT-qg-OGx">
+            <size key="intrinsicContentSize" width="480" height="480"/>
+        </designable>
         <designable name="jMQ-DN-rdu">
-            <size key="intrinsicContentSize" width="1219.2000071055095" height="1219.2000071055095"/>
+            <size key="intrinsicContentSize" width="480" height="480"/>
+        </designable>
+        <designable name="rmI-7G-oMX">
+            <size key="intrinsicContentSize" width="480" height="480"/>
         </designable>
     </designables>
     <inferredMetricsTieBreakers>
@@ -1842,18 +1853,6 @@
         <image name="barbutton - done" width="22" height="22"/>
         <image name="circularPictureInCodeDemo.png" width="1219.199951171875" height="1219.199951171875"/>
         <image name="iScreen button" width="26" height="26"/>
-        <namedColor name="background">
-            <color red="0.83529411764705885" green="0.92549019607843142" blue="0.99215686274509807" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
-        </namedColor>
-        <namedColor name="button - disabled">
-            <color red="1" green="0.87058823529411766" blue="0.89411764705882357" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
-        </namedColor>
-        <namedColor name="button - enabled">
-            <color red="1" green="0.52941176470588236" blue="0.67843137254901964" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
-        </namedColor>
-        <namedColor name="button - highlighted">
-            <color red="1" green="0.52941176470588236" blue="0.67843137254901964" alpha="0.20000000298023224" colorSpace="custom" customColorSpace="sRGB"/>
-        </namedColor>
         <systemColor name="secondaryLabelColor">
             <color red="0.23529411764705882" green="0.23529411764705882" blue="0.2627450980392157" alpha="0.59999999999999998" colorSpace="custom" customColorSpace="sRGB"/>
         </systemColor>
