@@ -15,7 +15,7 @@ import PersonalizedAdConsent
 import GoogleMobileAds
 import InMobiAdapter
 import AdColonyAdapter
-import AppLovinSDK
+//import AppLovinSDK
 import MoPub
 
 @objc(MCAdEngine) @objcMembers open class AdEngine: NSObject {

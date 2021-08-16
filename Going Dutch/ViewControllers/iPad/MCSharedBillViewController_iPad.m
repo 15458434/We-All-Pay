@@ -162,9 +162,17 @@
 #endif
         [UIView animateWithDuration:0.3 delay:0.0 options:UIViewAnimationOptionCurveEaseIn animations:^{
             self.bottomLayoutConstraintToLeftContainerView.priority = UILayoutPriorityDefaultHigh + 1;
-            self.bottomLayoutConstraintToLeftContainerView.constant = -self.view.safeAreaInsets.bottom;
+            if (@available(iOS 11.0, *)) {
+                self.bottomLayoutConstraintToLeftContainerView.constant = -self.view.safeAreaInsets.bottom;
+            } else {
+                self.bottomLayoutConstraintToLeftContainerView.constant = 0;
+            }
             self.bottomLayoutConstraintToRightContainerView.priority = UILayoutPriorityDefaultHigh + 1;
-            self.bottomLayoutConstraintToRightContainerView.constant = -self.view.safeAreaInsets.bottom;
+            if (@available(iOS 11.0, *)) {
+                self.bottomLayoutConstraintToRightContainerView.constant = -self.view.safeAreaInsets.bottom;
+            } else {
+                self.bottomLayoutConstraintToRightContainerView.constant = 0;
+            }
             [[self view] layoutIfNeeded];
         } completion:nil];
     } else {
@@ -172,9 +180,17 @@
         NSLog(@"putting banner off screen immediately.");
 #endif
         self.bottomLayoutConstraintToLeftContainerView.priority = UILayoutPriorityDefaultHigh + 1;
-        self.bottomLayoutConstraintToLeftContainerView.constant = -self.view.safeAreaInsets.bottom;
+        if (@available(iOS 11.0, *)) {
+            self.bottomLayoutConstraintToLeftContainerView.constant = -self.view.safeAreaInsets.bottom;
+        } else {
+            self.bottomLayoutConstraintToLeftContainerView.constant = 0;
+        }
         self.bottomLayoutConstraintToRightContainerView.priority = UILayoutPriorityDefaultHigh + 1;
-        self.bottomLayoutConstraintToRightContainerView.constant = -self.view.safeAreaInsets.bottom;
+        if (@available(iOS 11.0, *)) {
+            self.bottomLayoutConstraintToRightContainerView.constant = -self.view.safeAreaInsets.bottom;
+        } else {
+            self.bottomLayoutConstraintToRightContainerView.constant = 0;
+        }
         [[self view] layoutIfNeeded];
     }
 }
@@ -268,7 +284,12 @@
     [_tripNameField setText:[_tonightsBill tripName]];
     
     // Set the color of the backButton.
-    UIColor *backButtonColor = [UIColor colorNamed:@"button - enabled"];
+    UIColor *backButtonColor;
+    if (@available(iOS 11.0, *)) {
+        backButtonColor = [UIColor colorNamed:@"button - enabled"];
+    } else {
+        // Fallback on earlier versions
+    }
     self.navigationController.navigationBar.tintColor = backButtonColor;
     self.navigationItem.rightBarButtonItem.tintColor = backButtonColor;
     
