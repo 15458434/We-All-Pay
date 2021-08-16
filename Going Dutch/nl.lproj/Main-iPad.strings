@@ -1,9 +1,6 @@
 /* Class = "UITextField"; placeholder = "Event name"; ObjectID = "01X-vX-W0B"; */
 "01X-vX-W0B.placeholder" = "Naam van de totaal rekening";
 
-/* Class = "UINavigationItem"; title = "Person Details"; ObjectID = "1ZS-Vk-Q4D"; */
-"1ZS-Vk-Q4D.title" = "Persoonsdetails";
-
 /* Class = "UILabel"; text = "peoplePresent"; ObjectID = "4LN-EL-yNj"; */
 "4LN-EL-yNj.text" = "peoplePresent";
 
@@ -24,9 +21,6 @@
 
 /* Class = "UINavigationItem"; title = "Payment details"; ObjectID = "Du0-aV-eeD"; */
 "Du0-aV-eeD.title" = "Betalingsdetails";
-
-/* Class = "UITextField"; placeholder = "emailaddress"; ObjectID = "eax-dw-aIf"; */
-"eax-dw-aIf.placeholder" = "E-mailadres";
 
 /* Class = "UILabel"; text = "nameLabel"; ObjectID = "eD2-1r-4uR"; */
 "eD2-1r-4uR.text" = "nameLabel";
@@ -52,9 +46,6 @@
 /* Class = "UILabel"; text = "extraLabel"; ObjectID = "hKu-l5-7vA"; */
 "hKu-l5-7vA.text" = "extraLabel";
 
-/* Class = "UITextField"; placeholder = "last name"; ObjectID = "JRX-hO-2n8"; */
-"JRX-hO-2n8.placeholder" = "Achternaam";
-
 /* Class = "UILabel"; text = "emailAddress"; ObjectID = "KBE-ZP-DFn"; */
 "KBE-ZP-DFn.text" = "emailadres";
 
@@ -73,9 +64,6 @@
 /* Class = "UILabel"; text = "emailLabel"; ObjectID = "MCZ-yM-Hrf"; */
 "MCZ-yM-Hrf.text" = "emailLabel";
 
-/* Class = "UITextField"; placeholder = "first name"; ObjectID = "nPF-0g-HeJ"; */
-"nPF-0g-HeJ.placeholder" = "Voornaam";
-
 /* Class = "UIButton"; normalTitle = "Add Person"; ObjectID = "Nxq-6f-abw"; */
 "Nxq-6f-abw.normalTitle" = "Nieuwe persoon";
 
@@ -87,9 +75,6 @@
 
 /* Class = "UILabel"; text = "Label"; ObjectID = "rt5-oo-0IR"; */
 "rt5-oo-0IR.text" = "Label";
-
-/* Class = "UISearchBar"; placeholder = "Search currency"; ObjectID = "Sxt-5n-jx4"; */
-"Sxt-5n-jx4.placeholder" = "Zoek valuta";
 
 /* Class = "UILabel"; text = "Symbol"; ObjectID = "szY-aN-Vq8"; */
 "szY-aN-Vq8.text" = "Symbool";
@@ -111,9 +96,6 @@
 
 /* Class = "UILabel"; text = "payerField"; ObjectID = "xU7-yf-2N6"; */
 "xU7-yf-2N6.text" = "payerField";
-
-/* Class = "UIButton"; normalTitle = "Select email address"; ObjectID = "Z0f-Hu-kcp"; */
-"Z0f-Hu-kcp.normalTitle" = "Selecteer emailadres";
 
 /* Class = "UILabel"; text = "Label"; ObjectID = "ZFw-P0-QBI"; */
 "ZFw-P0-QBI.text" = "Label";

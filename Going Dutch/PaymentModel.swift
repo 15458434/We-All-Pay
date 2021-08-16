@@ -8,7 +8,7 @@
 
 import UIKit
 
-@objc(MCPaymentModel) @objcMembers public class PaymentModel: NSObject {
+@objc(MCPaymentModel) @objcMembers public final class PaymentModel: NSObject {
     @objc public private(set) dynamic var payment: MCPayment!
     private(set) var currencyFormatter: CurrencyFormatter!
     private var changeHandler: ((_ payment: MCPayment) -> ())!

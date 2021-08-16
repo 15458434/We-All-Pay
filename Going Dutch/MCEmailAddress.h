@@ -11,6 +11,7 @@
 
 @class MCPerson;
 
+__attribute__((objc_subclassing_restricted))
 @interface MCEmailAddress : NSManagedObject
 
 @property (nonatomic, retain) NSDate * dateCreated;

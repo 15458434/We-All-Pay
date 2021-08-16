@@ -8,7 +8,7 @@
 
 import UIKit
 
-@objc(MCMailComposeViewController) class MailComposeViewController: MFMailComposeViewController {
+@objc(MCMailComposeViewController) final class MailComposeViewController: MFMailComposeViewController {
 
     // MARK: UINavigationController
     

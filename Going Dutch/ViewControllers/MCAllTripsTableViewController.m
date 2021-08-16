@@ -13,6 +13,8 @@
 #import "MCPaymentViewController.h"
 #import "MCEditTripViewController.h"
 
+#import "MCBadgeButton.h"
+
 #import "MCWeAllPayStoreController.h"
 #import "MCSharedBill+addons.h"
 #import "MCPerson+addons.h"
@@ -29,9 +31,17 @@ typedef NS_ENUM(BOOL, MCTonightsBillStatus) {
     MCTonightsBillStatusOpened
 };
 
+static void * notificationCountContext = &notificationCountContext;
+
 @interface MCAllTripsTableViewController ()
 
 @property (nonatomic, strong) IBOutlet MCEventsModel *model;
+
+@property (nonatomic, weak) IBOutlet MCBadgeButton *infoButton;
+@property (nonatomic, strong) MCTableEmptyMessage *emptyMessage;
+@property (weak, nonatomic) IBOutlet UITableViewHeaderFooterView *headerView;
+
+@property (nonatomic, strong) NSDateFormatter *df;
 
 @property (nonatomic) MCTonightsBillStatus isATonightsBillOpened;
 
@@ -51,39 +61,28 @@ typedef NS_ENUM(BOOL, MCTonightsBillStatus) {
     
 }
 
-- (IBAction)iButtonPressed:(id)sender {
-    
+- (IBAction)iButtonPressed:(MCBadgeButton *)sender {
+    NSParameterAssert(sender);
+    if ([sender isEqual:self.infoButton]) {
+        [self performSegueWithIdentifier:@"iScreenSegue" sender:sender];
+    }
 }
 
 #pragma mark - New in this class.
 
-- (void)setEmptyMessage {
-    if ([[_model.fetchEventsController fetchedObjects] count] != 0) {
-        [UIView animateWithDuration:1.0 animations:^{
-            [[self.emptyMessage bigMessage] setAlpha:0.0];
-            [[self tableView] setSeparatorStyle:UITableViewCellSeparatorStyleSingleLine];
+- (void)setEmptyMessageWithDuration:(NSTimeInterval)duration {
+    if (_model.fetchEventsController.fetchedObjects.count != 0) {
+        [UIView animateWithDuration:duration animations:^{
+            self.emptyMessage.bigMessage.alpha = 0.0;
+            self.emptyMessage.borderlineView.alpha = 0.0;
+            self.tableView.separatorStyle = UITableViewCellSeparatorStyleSingleLine;
         } completion:nil];
     } else {
-        if ([[_emptyMessage bigMessage] alpha] < 1.0) {
-            [UIView animateWithDuration:1.0 animations:^{
-                [[self.emptyMessage bigMessage] setAlpha:1.0];
-                [[self tableView] setSeparatorStyle:UITableViewCellSeparatorStyleNone];
-            } completion:nil];
-        }
-    }
-}
-
-- (void)setEmptyMessageNow {
-    if ([[_model.fetchEventsController fetchedObjects] count] != 0) {
-        [UIView animateWithDuration:0.0 animations:^{
-            [[self.emptyMessage bigMessage] setAlpha:0.0];
-            [[self tableView] setSeparatorStyle:UITableViewCellSeparatorStyleSingleLine];
-        } completion:nil];
-    } else {
-        if ([[_emptyMessage bigMessage] alpha] < 1.0) {
-            [UIView animateWithDuration:0.0 animations:^{
-                [[self.emptyMessage bigMessage] setAlpha:1.0];
-                [[self tableView] setSeparatorStyle:UITableViewCellSeparatorStyleNone];
+        if (_emptyMessage.bigMessage.alpha < 1.0) {
+            [UIView animateWithDuration:duration animations:^{
+                self.emptyMessage.bigMessage.alpha = 1.0;
+                self.emptyMessage.borderlineView.alpha = 1.0;
+                self.tableView.separatorStyle = UITableViewCellSeparatorStyleNone;
             } completion:nil];
         }
     }
@@ -122,12 +121,10 @@ typedef NS_ENUM(BOOL, MCTonightsBillStatus) {
     switch(type) {
         case NSFetchedResultsChangeInsert:
             [[self tableView] insertRowsAtIndexPaths:@[newIndexPath] withRowAnimation:UITableViewRowAnimationFade];
-            [self setEmptyMessage];
             break;
             
         case NSFetchedResultsChangeDelete:
             [[self tableView] deleteRowsAtIndexPaths:@[indexPath] withRowAnimation:UITableViewRowAnimationFade];
-            [self setEmptyMessage];
             break;
             
         case NSFetchedResultsChangeUpdate:
@@ -142,6 +139,7 @@ typedef NS_ENUM(BOOL, MCTonightsBillStatus) {
 }
 
 - (void)controllerDidChangeContent:(NSFetchedResultsController *)controller {
+    [self setEmptyMessageWithDuration:0.25];
     [self.tableView endUpdates];
 }
 
@@ -233,14 +231,18 @@ typedef NS_ENUM(BOOL, MCTonightsBillStatus) {
 
 #pragma mark - UIViewController
 
+- (void)loadView {
+    [super loadView];
+    
+    _emptyMessage = [[NSBundle mainBundle] loadNibNamed:@"MCTableEmptyMessage" owner:self options:nil][0];
+    _emptyMessage.borderlineView.dyInset = 1;
+    self.tableView.backgroundView = _emptyMessage;
+}
+
 - (void)viewDidLoad {
     [super viewDidLoad];
     
     [self setEdgesForExtendedLayout:UIRectEdgeNone];
-    
-    _emptyMessage = [[NSBundle mainBundle] loadNibNamed:@"MCTableEmptyMessage" owner:self options:nil][0];
-    [[_emptyMessage bigMessage] setAlpha:0.0];
-    [[self tableView] setBackgroundView:_emptyMessage];
     
     [self startRespondingToStoreChangeNotifications];
     
@@ -262,14 +264,10 @@ typedef NS_ENUM(BOOL, MCTonightsBillStatus) {
         NSManagedObjectContext *managedObjectContext = MCWeAllPayStoreController.defaultStore.mainThreadContext;
         [_model prepareForUseWithManagedObjectContext:managedObjectContext forDelegate:self];
         [[self tableView] reloadData];
+        [self setEmptyMessageWithDuration:0.0];
     }
     
-    if (_isEmptyMessageShownInstantForFirstBoot == false) {
-        [self setEmptyMessageNow];
-        _isEmptyMessageShownInstantForFirstBoot = true;
-    } else {
-        [self setEmptyMessage];
-    }
+    _emptyMessage.topConstraint.constant = self.headerView.frame.size.height;
     
     [[self navigationController] setToolbarHidden:YES animated:YES];
     
@@ -278,6 +276,17 @@ typedef NS_ENUM(BOOL, MCTonightsBillStatus) {
     }
     
     [MCAdEngine presentPrivacyConsentRequestIfNecessaryFromViewController:self];
+    
+    // Start KVO
+    NSKeyValueObservingOptions options = NSKeyValueObservingOptionInitial | NSKeyValueObservingOptionNew;
+    [self.notificationsStateModel addObserver:self forKeyPath:@"messageCount" options:options context:notificationCountContext];
+}
+
+- (void)viewWillDisappear:(BOOL)animated {
+    [super viewWillDisappear:animated];
+    
+    // Stop KVO
+    [self.notificationsStateModel removeObserver:self forKeyPath:@"messageCount" context:notificationCountContext];
 }
 
 - (void)prepareForSegue:(UIStoryboardSegue *)segue sender:(id)sender {
@@ -320,10 +329,13 @@ typedef NS_ENUM(BOOL, MCTonightsBillStatus) {
         SelectCurrencyTableViewController *currencySelector = (SelectCurrencyTableViewController *)navController.viewControllers.firstObject;
         currencySelector.currencyUpdateModel = [[EventUpdateCurrencyModel alloc] initWith:theBill];
     } else if ([segue.identifier isEqualToString:@"iScreenSegue"]) {
-        UIViewController *navigationController = segue.destinationViewController;
+        UINavigationController *navigationController = (UINavigationController *)segue.destinationViewController;
         navigationController.modalPresentationStyle = UIModalPresentationCustom;
         _iScreenTransitioner = [[SideMenuTransitioner alloc] init];
         navigationController.transitioningDelegate = _iScreenTransitioner;
+        InfoScreenTableViewController *infoContainerViewController = navigationController.viewControllers.lastObject;
+        infoContainerViewController.preferredContentSize = CGSizeMake(320, 0);
+        infoContainerViewController.notificationEnvironmentModel = self.notificationsStateModel;
     }
 }
 
@@ -340,6 +352,31 @@ typedef NS_ENUM(BOOL, MCTonightsBillStatus) {
     
     _isATonightsBillOpened = MCTonightsBillStatusClosed;
     _isEmptyMessageShownInstantForFirstBoot = NO;
+}
+
+- (void)observeValueForKeyPath:(NSString *)keyPath ofObject:(id)object change:(NSDictionary<NSKeyValueChangeKey,id> *)change context:(void *)context {
+    if (context == notificationCountContext) {
+#ifdef DEBUG
+        NSLog(@"change: %@", change);
+#endif
+        NSNumber *changeKeyNumber = (NSNumber *)change[NSKeyValueChangeKindKey];
+        NSKeyValueChange keyValueChange = changeKeyNumber.unsignedIntegerValue;
+        switch (keyValueChange) {
+            case NSKeyValueChangeSetting:
+            {
+                id new = change[NSKeyValueChangeNewKey];
+                if ([new isKindOfClass:[NSNumber class]]) {
+                    NSNumber *newMesaageCount = (NSNumber *)new;
+                    self.infoButton.count = newMesaageCount.integerValue;
+                } else {
+                    self.infoButton.count = 0;
+                }
+            }
+                break;
+            default:
+                break;
+        }
+    }
 }
 
 @end

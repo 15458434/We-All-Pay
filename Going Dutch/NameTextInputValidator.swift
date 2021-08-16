@@ -8,7 +8,7 @@
 
 import UIKit
 
-@objc(MCNameTextInputValidator) @objcMembers class NameTextInputValidator: TextInputValidator {
+@objc(MCNameTextInputValidator) @objcMembers final class NameTextInputValidator: TextInputValidator {
     @objc(MCNameTextInputValidatorConfig) enum Config: Int {
         case firstName
         case familyName

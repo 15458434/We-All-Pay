@@ -11,6 +11,7 @@
 
 @class MCCurrency, MCPayment;
 
+__attribute__((objc_subclassing_restricted))
 @interface MCExchangeRate : NSManagedObject
 
 @property (nonatomic, retain) NSDate * dateCreated;

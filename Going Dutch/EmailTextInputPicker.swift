@@ -8,7 +8,7 @@
 
 import UIKit
 
-@objc(MCEmailTextInputPicker) @objcMembers class EmailTextInputPicker: NSObject, UITextFieldDelegate, UIPickerViewDelegate, UIPickerViewDataSource {
+@objc(MCEmailTextInputPicker) @objcMembers final class EmailTextInputPicker: NSObject, UITextFieldDelegate, UIPickerViewDelegate, UIPickerViewDataSource {
     private(set) weak var textField: UITextField!
     private(set) weak var model: PersonModel!
     

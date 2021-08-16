@@ -40,33 +40,21 @@
     }
 }
 
-- (void)setEmptyMessage {
-    if ([[_dataController fetchedObjects] count] != 0) {
-        [UIView animateWithDuration:1.0 animations:^{
-            self.emptyMessage.bigMessage.alpha = 0.0;
-            self.tableView.separatorStyle = UITableViewCellSeparatorStyleSingleLine;
-        } completion:nil];
-    } else {
-        if ([[_emptyMessage bigMessage] alpha] < 1.0) {
-            [UIView animateWithDuration:1.0 animations:^{
-                self.emptyMessage.bigMessage.alpha = 1.0;
-                self.tableView.separatorStyle = UITableViewCellSeparatorStyleNone;
+- (void)setEmptyMessageWithDuration:(NSTimeInterval)duration {
+    if (_dataController.fetchedObjects.count != 0) {
+        if (_emptyMessage.bigMessage.alpha > 0.0) {
+            [UIView animateWithDuration:duration animations:^{
+                self.emptyMessage.bigMessage.alpha = 0.0;
+                self.emptyMessage.borderlineView.alpha = 0.0;
+                self.tableView.separatorStyle = UITableViewCellSeparatorStyleSingleLine;
             } completion:nil];
         }
-    }
-}
-
-- (void)setEmptyMessageNow {
-    if ([[_dataController fetchedObjects] count] != 0) {
-        [UIView animateWithDuration:0.0 animations:^{
-            [[self->_emptyMessage bigMessage] setAlpha:0.0];
-            self.tableView.separatorStyle = UITableViewCellSeparatorStyleSingleLine;
-        } completion:nil];
     } else {
-        if ([[_emptyMessage bigMessage] alpha] < 1.0) {
-            [UIView animateWithDuration:0.0 animations:^{
-                [[self->_emptyMessage bigMessage] setAlpha:1.0];
-                self.tableView.separatorStyle = UITableViewCellSeparatorStyleSingleLine;
+        if (_emptyMessage.bigMessage.alpha < 1.0) {
+            [UIView animateWithDuration:duration animations:^{
+                self.emptyMessage.bigMessage.alpha = 1.0;
+                self.emptyMessage.borderlineView.alpha = 1.0;
+                self.tableView.separatorStyle = UITableViewCellSeparatorStyleNone;
             } completion:nil];
         }
     }
@@ -83,11 +71,9 @@
     switch(type) {
         case NSFetchedResultsChangeInsert:
             [tableView insertRowsAtIndexPaths:@[newIndexPath] withRowAnimation:UITableViewRowAnimationFade];
-            [self setEmptyMessage];
             break;
         case NSFetchedResultsChangeDelete:
             [tableView deleteRowsAtIndexPaths:@[indexPath] withRowAnimation:UITableViewRowAnimationFade];
-            [self setEmptyMessage];
             break;
         case NSFetchedResultsChangeUpdate:
             [tableView reloadRowsAtIndexPaths:@[indexPath] withRowAnimation:UITableViewRowAnimationAutomatic];
@@ -100,6 +86,7 @@
 }
 
 - (void)controllerDidChangeContent:(NSFetchedResultsController *)controller {
+    [self setEmptyMessageWithDuration:0.25];
     [[self tableView] endUpdates];
 }
 
@@ -171,15 +158,19 @@
 
 #pragma mark - UIViewController
 
+- (void)loadView {
+    [super loadView];
+    
+    _emptyMessage = [[NSBundle mainBundle] loadNibNamed:@"MCTableEmptyMessage" owner:self options:nil][0];
+    _emptyMessage.borderlineView.dyInset = 1.0;
+    _emptyMessage.bigMessage.text = NSLocalizedString(@"EMPTY_PAYMENT_LIST_MESSAGE", @"Press \"add payment\" to add a payment to this event.");
+    self.tableView.backgroundView = _emptyMessage;
+}
+
 - (void)viewDidLoad {
     [super viewDidLoad];
     
     [self startRespondingToStoreChangeNotifications];
-    
-    _emptyMessage = [[NSBundle mainBundle] loadNibNamed:@"MCTableEmptyMessage_iPad" owner:self options:nil][0];
-    _emptyMessage.bigMessage.text = NSLocalizedString(@"EMPTY_PAYMENT_LIST_MESSAGE", @"Press \"add payment\" to add a payment to this event.");
-    _emptyMessage.bigMessage.alpha = 0.0;
-    self.tableView.backgroundView = _emptyMessage;
 }
 
 - (void)viewWillAppear:(BOOL)animated {
@@ -195,8 +186,8 @@
         _dataController = [[MCWeAllPayStoreController defaultStore] sharedBillPaymentsDataControllerForDelegate:self];
     }
     [self performFetch];
-    [[self tableView] reloadData];
-    [self setEmptyMessageNow];
+    [self.tableView reloadSections:[NSIndexSet indexSetWithIndex:0] withRowAnimation:UITableViewRowAnimationAutomatic];
+    [self setEmptyMessageWithDuration:0.0];
 }
 
 

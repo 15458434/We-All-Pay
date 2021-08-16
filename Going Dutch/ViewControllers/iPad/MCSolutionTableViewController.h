@@ -17,7 +17,7 @@
 @class MCInterstitialAdEngine;
 
 @class MCSharedBill;
-@class MCTableEmptyMessage_iPad;
+@class MCTableEmptyMessage;
 
 @interface MCSolutionTableViewController : MCGenericInterstitialAdTableViewController <MCTonightsBillTransfer, MCDismissMeBlockProtocol>
 

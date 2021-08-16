@@ -8,7 +8,7 @@
 
 import UIKit
 
-@objcMembers @objc(MCMoneyTextInputValidator) class MoneyTextInputValidator: NSObject, UITextFieldDelegate {
+@objcMembers @objc(MCMoneyTextInputValidator) final class MoneyTextInputValidator: NSObject, UITextFieldDelegate {
     @IBOutlet weak var textField: UITextField! {
         willSet {
             newValue.delegate = self

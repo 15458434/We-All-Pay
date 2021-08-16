@@ -9,6 +9,10 @@
 import UIKit
 
 class MCTableEmptyMessage: UIView {
-    @IBOutlet var bigMessage: UILabel!
-    @IBOutlet var activityIndicator: UIActivityIndicatorView!
+    @IBOutlet weak var borderlineView: BorderLineView!
+    @IBOutlet weak var bigMessage: UILabel!
+    @IBOutlet weak var activityIndicator: UIActivityIndicatorView!
+    
+    @IBOutlet weak var topConstraint: NSLayoutConstraint!
+    
 }

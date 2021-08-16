@@ -36,7 +36,7 @@ final class SideMenuTransitioner: NSObject, UIViewControllerTransitioningDelegat
     // MARK: NSObject
 }
 
-final class SideMenuPresentationController: UIPresentationController, UIGestureRecognizerDelegate {
+final class SideMenuPresentationController: UIPresentationController, UIGestureRecognizerDelegate, UINavigationControllerDelegate {
     private weak var backgroundTapGestureRecognizer: UITapGestureRecognizer!
     
     @objc private func backgroundTapped(_ sender: UITapGestureRecognizer) {
@@ -47,6 +47,32 @@ final class SideMenuPresentationController: UIPresentationController, UIGestureR
         self.presentedViewController.dismiss(animated: true, completion: nil)
     }
     
+    // MARK: UINavigationControllerDelegate
+    
+    func navigationController(_ navigationController: UINavigationController, willShow viewController: UIViewController, animated: Bool) {
+        if let transitionCoordinator = navigationController.transitionCoordinator {
+            let newPreferredWidth = viewController.preferredContentSize.width == 0 ? self.containerView!.bounds.size.width : viewController.preferredContentSize.width
+            var navigationControllerViewframe = navigationController.view.frame
+            navigationControllerViewframe.size.width = newPreferredWidth
+            
+            var viewControllerViewFrame = viewController.view.frame
+            viewControllerViewFrame.origin.y = 0
+            viewControllerViewFrame.size.width = newPreferredWidth
+            
+            transitionCoordinator.animate(alongsideTransition: { transitionCoordinatorContext in
+                navigationController.view!.frame = navigationControllerViewframe
+                viewController.view!.frame = viewControllerViewFrame
+            }, completion: nil)
+            navigationController.viewWillTransition(to: navigationControllerViewframe.size, with: transitionCoordinator)
+        }
+    }
+    
+    func navigationController(_ navigationController: UINavigationController, didShow viewController: UIViewController, animated: Bool) {
+        var frame = viewController.view.frame
+        frame.size.width = viewController.preferredContentSize.width
+        viewController.view.frame = frame
+    }
+        
     // MARK: UIGestureRecognizerDelegate
     
     func gestureRecognizerShouldBegin(_ gestureRecognizer: UIGestureRecognizer) -> Bool {
@@ -60,9 +86,16 @@ final class SideMenuPresentationController: UIPresentationController, UIGestureR
     
     // MARK: UIPresentationController
     
+    override init(presentedViewController: UIViewController, presenting presentingViewController: UIViewController?) {
+        super.init(presentedViewController: presentedViewController, presenting: presentingViewController)
+        if let navigationController = presentedViewController as? UINavigationController {
+            navigationController.delegate = self
+        }
+    }
+    
     override var frameOfPresentedViewInContainerView: CGRect {
         var frameOfPresentingViewController = presentingViewController.view.frame
-        frameOfPresentingViewController.size.width = 280
+        frameOfPresentingViewController.size.width = 320
         return frameOfPresentingViewController
     }
     
@@ -80,6 +113,34 @@ final class SideMenuPresentationController: UIPresentationController, UIGestureR
         presentedLayer.shadowRadius = 15
         presentedLayer.shadowPath = CGPath(rect: presentedLayer.frame.insetBy(dx: 0, dy: -15), transform: nil)
         presentedLayer.shadowColor = UIColor.black.cgColor
+    }
+    
+    // MARK: UIContentContainer
+    
+    override func viewWillTransition(to size: CGSize, with coordinator: UIViewControllerTransitionCoordinator) {
+        if let navigationController = self.presentedViewController as? UINavigationController, let topViewController = navigationController.topViewController {
+            let newPreferredWidth = topViewController.preferredContentSize.width == 0 ? self.containerView!.bounds.size.width : topViewController.preferredContentSize.width
+            var navigationControllerViewframe = navigationController.view.frame
+            navigationControllerViewframe.size.width = newPreferredWidth
+            navigationControllerViewframe.size.height = size.height
+            
+            var viewControllerViewFrame = topViewController.view.frame
+            viewControllerViewFrame.origin.y = 0
+            viewControllerViewFrame.size.width = newPreferredWidth
+            viewControllerViewFrame.size.height = size.height
+            
+            coordinator.animate(alongsideTransition: { context in
+                navigationController.view!.frame = navigationControllerViewframe
+                topViewController.view!.frame = viewControllerViewFrame
+            }, completion: nil)
+        }
+        
+        super.viewWillTransition(to: size, with: coordinator)
+    }
+    
+    override func willTransition(to newCollection: UITraitCollection, with coordinator: UIViewControllerTransitionCoordinator) {
+        overrideTraitCollection = UITraitCollection(traitsFrom: [newCollection, UITraitCollection(horizontalSizeClass: .compact)])
+        super.willTransition(to: newCollection, with: coordinator)
     }
     
     // MARK: NSObject
@@ -260,6 +321,12 @@ final class SwipeLeftDissmissableNavigationController: UINavigationController, S
     // MARK: UINavigationController
     
     // MARK: UIViewController
+    
+    override func loadView() {
+        super.loadView()
+        
+        self.view.autoresizingMask = [.flexibleBottomMargin, .flexibleTopMargin, .flexibleHeight]
+    }
     
     override func viewDidLoad() {
         super.viewDidLoad()

@@ -29,6 +29,7 @@
 
 @end
 
+__attribute__((objc_subclassing_restricted))
 @interface MCSharedBillTableViewController : MCGenericInterstitialAdTableViewController <NSFetchedResultsControllerDelegate, MFMailComposeViewControllerDelegate, MCTonightsBillTransfer, MCIndexProtocol>
 
 @property (nonatomic, strong) MCTableEmptyMessage *emptyMessage;

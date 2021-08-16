@@ -21,6 +21,7 @@ The We All Pay Store Controller is designed to do writing in the background and 
 
 NS_ASSUME_NONNULL_BEGIN
 
+__attribute__((objc_subclassing_restricted))
 @interface MCWeAllPayStoreController : NSObject
 
 @property (nonatomic, strong, readonly) NSManagedObjectContext *mainThreadContext;

@@ -8,7 +8,7 @@
 
 import UIKit
 
-@objc public class ExchangeRateFetcher: NSObject {
+@objc public final class ExchangeRateFetcher: NSObject {
     @objc public let currencyController: CurrencyController = CurrencyController()
     public private(set) var baseCurrencyCode: String!
     public private(set) var rates: Dictionary<String, Double>!

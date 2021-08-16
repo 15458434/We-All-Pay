@@ -9,8 +9,16 @@
 @import UIKit;
 @import CoreData;
 
-@class MCTableEmptyMessage_iPad;
+@class MCTableEmptyMessage;
+@class MCNotificationsInfoModel;
 
+NS_ASSUME_NONNULL_BEGIN
+
+__attribute__((objc_subclassing_restricted))
 @interface MCAllTripsTableViewController_iPad : UITableViewController <NSFetchedResultsControllerDelegate>
 
+@property (nonatomic, strong) IBOutlet MCNotificationsInfoModel *notificationsStateModel;
+
 @end
+
+NS_ASSUME_NONNULL_END

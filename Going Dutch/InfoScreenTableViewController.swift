@@ -18,8 +18,11 @@ private let productName = Bundle.main.infoDictionary!["CFBundleDisplayName"] as!
 private let shortVersionString = Bundle.main.infoDictionary!["CFBundleShortVersionString"] as! String
 private let versionString = Bundle.main.infoDictionary!["CFBundleVersion"] as! String
 
-class InfoScreenTableViewController: UITableViewController, MFMailComposeViewControllerDelegate {
-    // MARK: Properties
+final class InfoScreenTableViewController: UITableViewController, MFMailComposeViewControllerDelegate {
+    @objc var notificationEnvironmentModel: NotificationsInfoModel!
+    
+    @IBOutlet var versionLabel: UILabel!
+    
     private var numberOfRowsInSection0: Int {
         if (MCStoreInterface.canMakePayments() && !(MCStoreInterface.defaultStoreInterface.isProProductPurchased)) {
             return 2
@@ -28,15 +31,9 @@ class InfoScreenTableViewController: UITableViewController, MFMailComposeViewCon
         }
     }
     
-    // MARK: IB Outlet
-    @IBOutlet var versionLabel: UILabel!
-    
-    // MARK: IB Actions
     @IBAction func mainCancelButtonPressed(_ sender: AnyObject) {
         self.navigationController?.presentingViewController!.dismiss(animated: true, completion: nil)
     }
-    
-    // MARK: New in this class
     
     private func showAllMyApps() {
         let url = URL(string: "itms-apps://search.itunes.apple.com/WebObjects/MZContentLink.woa/wa/link?mt=8&path=apps%2fmarkcornelisse")!
@@ -69,7 +66,6 @@ class InfoScreenTableViewController: UITableViewController, MFMailComposeViewCon
         }
     }
     
-    // MARK: Notifications
     @objc func applyProVersion(_ notification: Notification) {
         DispatchQueue.main.async {
             self.tableView.beginUpdates()
@@ -116,8 +112,127 @@ class InfoScreenTableViewController: UITableViewController, MFMailComposeViewCon
             myPresenter.present(alertController, animated: true, completion: nil)
         }
     }
+
+    // MARK: MFMailComposeViewControllerDelegate
     
-    // MARK: Inherited from super
+    func mailComposeController(_ controller: MFMailComposeViewController, didFinishWith result: MFMailComposeResult, error: Error?) {
+        switch (result) {
+        case MFMailComposeResult.cancelled:
+            dismiss(animated: true, completion: nil)
+        case MFMailComposeResult.saved:
+            dismiss(animated: true, completion: nil)
+        case MFMailComposeResult.sent:
+            dismiss(animated: true, completion: nil)
+        case MFMailComposeResult.failed:
+            // TODO: Add failure handling
+            print("Failed to open mailComposeController")
+        @unknown default:
+            fatalError("Unknown value for MFMailComposeResult")
+        }
+    }
+    // MARK: UITableViewController
+    
+    // MARK: UITableViewDataSource
+    
+    override func numberOfSections(in tableView: UITableView) -> Int {
+        return 4
+    }
+    
+    override func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
+        switch (section) {
+        case 0:
+            if (MCStoreInterface.canMakePayments()) && !MCStoreInterface.defaultStoreInterface.isProProductPurchased {
+                return numberOfRowsInSection0
+            } else {
+                return 0
+            }
+        case 1:
+            return 1
+        case 2:
+            return 2
+        case 3:
+            return 1
+        default:
+            return 0
+        }
+    }
+    
+    override func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
+        switch (indexPath.section, indexPath.row) {
+        case (0, 0):
+            let cell = tableView.dequeueReusableCell(withIdentifier: "MCTwoLabelIscreenTableViewCell", for: indexPath) as! MCTwoLabelIscreenTableViewCell
+            cell.leftLabel.text = NSLocalizedString("Buy ad free version", comment: "Buy ad free Version")
+            cell.rightLabel.isHidden = false
+            if MCStoreInterface.defaultStoreInterface.proProduct != nil {
+                cell.rightLabel.text = MCStoreInterface.defaultStoreInterface.proProduct.priceString
+            } else {
+                cell.rightLabel.text = ""
+            }
+            return cell
+        case (0, 1):
+            let cell = tableView.dequeueReusableCell(withIdentifier: "MCTwoLabelIscreenTableViewCell", for: indexPath) as! MCTwoLabelIscreenTableViewCell
+            cell.leftLabel.text = NSLocalizedString("Restore previous purchases", comment: "Restore previous purchases")
+            cell.rightLabel.isHidden = true
+            return cell
+        case (1, 0):
+            let cell = tableView.dequeueReusableCell(withIdentifier: "NotificationsCountTableViewCell", for: indexPath) as! NotificationsCountTableViewCell
+            cell.update(model: notificationEnvironmentModel)
+            return cell
+        case (2, 0):
+            let cell = tableView.dequeueReusableCell(withIdentifier: "MCTwoLabelIscreenTableViewCell", for: indexPath) as! MCTwoLabelIscreenTableViewCell
+            cell.leftLabel.text = NSLocalizedString("Rate me", comment: "Text of the Rate me button")
+            cell.rightLabel.isHidden = true
+            return cell
+        case (2, 1):
+            let cell = tableView.dequeueReusableCell(withIdentifier: "MCTwoLabelIscreenTableViewCell", for: indexPath) as! MCTwoLabelIscreenTableViewCell
+            cell.leftLabel.text = NSLocalizedString("My Apps", comment: "Text of the the button that takes you to my apps in the AppStore")
+            cell.rightLabel.isHidden = true
+            return cell
+        case (3, 0):
+            let cell = tableView.dequeueReusableCell(withIdentifier: "MCTwoLabelIscreenTableViewCell", for: indexPath) as! MCTwoLabelIscreenTableViewCell
+            cell.leftLabel.text = NSLocalizedString("Give feedback", comment: "Give feedback")
+            cell.rightLabel.isHidden = true
+            return cell
+        default:
+            assert(false, "This section: \(indexPath.section) and row: \(indexPath.row) are not valid")
+            return UITableViewCell()
+        }
+    }
+    
+    // MARK: UITableViewDelegate
+    
+    override func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
+        switch (indexPath.section, indexPath.row) {
+        case (0, 0):
+            MCStoreInterface.defaultStoreInterface.buyProProductSendFrom(self)
+        case (0, 1):
+            MCStoreInterface.defaultStoreInterface.restorePreviousPurchases()
+        case (1, 0):
+            let cellPressed = tableView.cellForRow(at: indexPath)
+            performSegue(withIdentifier: "OpenNotifications", sender: cellPressed)
+        case (2, 0):
+            RateMeController.openReviewLink()
+        case (2, 1):
+            showAllMyApps()
+        case (3, 0):
+            openMailComposer()
+        default:
+            print("Nothing to open")
+        }
+        let thisCell = tableView.cellForRow(at: indexPath)
+        thisCell!.setSelected(false, animated: true)
+    }
+    
+    override func tableView(_ tableView: UITableView, heightForRowAt indexPath: IndexPath) -> CGFloat {
+        return UITableView.automaticDimension
+    }
+    
+    override func tableView(_ tableView: UITableView, estimatedHeightForRowAt indexPath: IndexPath) -> CGFloat {
+        return 50.0
+    }
+    
+    // MARK: UIViewController
+    
     override func viewDidLoad() {
         super.viewDidLoad()
         
@@ -138,113 +253,21 @@ class InfoScreenTableViewController: UITableViewController, MFMailComposeViewCon
         NotificationCenter.default.removeObserver(self)
     }
     
+    override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
+        switch segue.identifier! {
+        case "OpenNotifications":
+            let destination = segue.destination as! NotificationsTableViewController
+            destination.preferredContentSize = CGSize(width: 320, height: 0)
+        default:
+            fatalError("Unknown segue with identifier: \(segue.identifier!)")
+        }
+    }
+    
     override var prefersStatusBarHidden: Bool {
         return true
     }
     
-    // MARK: MF MAil Compose Delegate
+    // MARK: UIResponder
     
-    func mailComposeController(_ controller: MFMailComposeViewController, didFinishWith result: MFMailComposeResult, error: Error?) {
-        switch (result) {
-        case MFMailComposeResult.cancelled:
-            dismiss(animated: true, completion: nil)
-        case MFMailComposeResult.saved:
-            dismiss(animated: true, completion: nil)
-        case MFMailComposeResult.sent:
-            dismiss(animated: true, completion: nil)
-        case MFMailComposeResult.failed:
-            // TODO: Add failure handling
-            print("Failed to open mailComposeController")
-        @unknown default:
-            fatalError("Unknown value for MFMailComposeResult")
-        }
-    }
-    
-    // MARK: UI Table View Delegate
-    override func tableView(_ tableView: UITableView, heightForRowAt indexPath: IndexPath) -> CGFloat {
-        return UITableView.automaticDimension
-    }
-    
-    override func tableView(_ tableView: UITableView, estimatedHeightForRowAt indexPath: IndexPath) -> CGFloat {
-        return 50.0
-    }
-    
-    override func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
-        switch ((indexPath as NSIndexPath).section, (indexPath as NSIndexPath).row) {
-        case (0, 0):
-            MCStoreInterface.defaultStoreInterface.buyProProductSendFrom(self)
-        case (0, 1):
-            MCStoreInterface.defaultStoreInterface.restorePreviousPurchases()
-        case (1, 0):
-            RateMeController.openReviewLink()
-        case (1, 1):
-            showAllMyApps()
-        case (2, 0):
-            openMailComposer()
-        default:
-            print("Nothing to open")
-        }
-        let thisCell = tableView.cellForRow(at: indexPath)
-        thisCell!.setSelected(false, animated: true)
-    }
-    
-    // MARK: UI Table View Data Source
-    override func numberOfSections(in tableView: UITableView) -> Int {
-        return 3
-    }
-    
-    override func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
-        switch (section) {
-        case 0:
-            if (MCStoreInterface.canMakePayments()) && !MCStoreInterface.defaultStoreInterface.isProProductPurchased {
-                return numberOfRowsInSection0
-            } else {
-                return 0
-            }
-        case 1:
-            return 2
-        case 2:
-            return 1
-        default:
-            return 0
-        }
-    }
-    
-    override func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
-        switch ((indexPath as NSIndexPath).section, (indexPath as NSIndexPath).row) {
-        case (0, 0):
-            let cell = tableView.dequeueReusableCell(withIdentifier: "MCTwoLabelIscreenTableViewCell", for: indexPath) as! MCTwoLabelIscreenTableViewCell
-            cell.leftLabel.text = NSLocalizedString("Buy ad free version", comment: "Buy ad free Version")
-            cell.rightLabel.isHidden = false
-            if MCStoreInterface.defaultStoreInterface.proProduct != nil {
-                cell.rightLabel.text = MCStoreInterface.defaultStoreInterface.proProduct.priceString
-            } else {
-                cell.rightLabel.text = ""
-            }
-            return cell
-        case (0, 1):
-            let cell = tableView.dequeueReusableCell(withIdentifier: "MCTwoLabelIscreenTableViewCell", for: indexPath) as! MCTwoLabelIscreenTableViewCell
-            cell.leftLabel.text = NSLocalizedString("Restore previous purchases", comment: "Restore previous purchases")
-            cell.rightLabel.isHidden = true
-            return cell
-        case (1, 0):
-            let cell = tableView.dequeueReusableCell(withIdentifier: "MCTwoLabelIscreenTableViewCell", for: indexPath) as! MCTwoLabelIscreenTableViewCell
-            cell.leftLabel.text = NSLocalizedString("Rate me", comment: "Text of the Rate me button")
-            cell.rightLabel.isHidden = true
-            return cell
-        case (1, 1):
-            let cell = tableView.dequeueReusableCell(withIdentifier: "MCTwoLabelIscreenTableViewCell", for: indexPath) as! MCTwoLabelIscreenTableViewCell
-            cell.leftLabel.text = NSLocalizedString("My Apps", comment: "Text of the the button that takes you to my apps in the AppStore")
-            cell.rightLabel.isHidden = true
-            return cell
-        case (2, 0):
-            let cell = tableView.dequeueReusableCell(withIdentifier: "MCTwoLabelIscreenTableViewCell", for: indexPath) as! MCTwoLabelIscreenTableViewCell
-            cell.leftLabel.text = NSLocalizedString("Give feedback", comment: "Give feedback")
-            cell.rightLabel.isHidden = true
-            return cell
-        default:
-            assert(false, "This section: \((indexPath as NSIndexPath).section) and row: \((indexPath as NSIndexPath).row) are not valid")
-            return UITableViewCell()
-        }
-    }
+    // MARK: NSObject
 }
