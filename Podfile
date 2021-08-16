@@ -13,7 +13,7 @@ target 'We all pay' do
   pod 'GoogleMobileAdsMediationFacebook'
   pod 'GoogleMobileAdsMediationInMobi'
   pod 'GoogleMobileAdsMediationAdColony'
-  pod 'GoogleMobileAdsMediationAppLovin'
+  #pod 'GoogleMobileAdsMediationAppLovin'
   pod 'GoogleMobileAdsMediationMoPub'
   pod 'PersonalizedAdConsent'
   pod 'GoogleMobileAdsMediationTestSuite', :configurations => ['AdTest']
