@@ -10,6 +10,6 @@
 
 NS_ASSUME_NONNULL_BEGIN
 
-OBJC_EXTERN UIImage *UIImageCreateImageTemplateWithTintColor(UIImage *, UIColor *color) NS_DEPRECATED_IOS(12_0, 13_0);
+OBJC_EXTERN UIImage *UIImageCreateImageTemplateWithTintColor(UIImage *, UIColor *color) NS_DEPRECATED_IOS(10_0, 13_0);
 
 NS_ASSUME_NONNULL_END
