@@ -176,8 +176,6 @@
                         <segue destination="fIg-ri-deX" kind="presentation" identifier="selectMainCurrency" id="AFT-dx-z90"/>
                         <segue destination="syc-O8-8LU" kind="presentation" identifier="iScreenSegue" modalPresentationStyle="overCurrentContext" modalTransitionStyle="coverVertical" id="Hbz-75-wqX"/>
                         <segue destination="Ltx-xd-qSj" kind="show" identifier="newTonightsBill" id="d0L-aB-5Md"/>
-                        <segue destination="m5E-EH-9xg" kind="show" identifier="newTonightsBill-iPad" id="gU2-IB-ero"/>
-                        <segue destination="m5E-EH-9xg" kind="show" identifier="openTonightsBill-iPad" id="d9O-xp-imC"/>
                         <segue destination="Ltx-xd-qSj" kind="show" identifier="openTonightsBill" id="3RZ-mk-Dh4"/>
                     </connections>
                 </tableViewController>
@@ -344,16 +342,6 @@
                 <customObject id="Wrz-hc-wsi" customClass="MCInterstitialAdEngine"/>
             </objects>
             <point key="canvasLocation" x="2332" y="721.92118226600985"/>
-        </scene>
-        <!--MCSharedBillViewController_iPad-->
-        <scene sceneID="Lxh-Mk-tcO">
-            <objects>
-                <viewControllerPlaceholder storyboardName="Main-iPad" referencedIdentifier="MCSharedBillViewController_iPad" id="m5E-EH-9xg" sceneMemberID="viewController">
-                    <navigationItem key="navigationItem" id="r7n-p6-gTX"/>
-                </viewControllerPlaceholder>
-                <placeholder placeholderIdentifier="IBFirstResponder" id="hIv-t7-2wJ" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
-            </objects>
-            <point key="canvasLocation" x="92" y="239"/>
         </scene>
         <!--Shared Bill Main View Controller-->
         <scene sceneID="Ebm-Gv-16n">
@@ -1852,7 +1840,6 @@
         <segue reference="jjg-NC-1KA"/>
         <segue reference="9O1-vs-VOI"/>
         <segue reference="3RZ-mk-Dh4"/>
-        <segue reference="d9O-xp-imC"/>
         <segue reference="6AC-aI-bIB"/>
     </inferredMetricsTieBreakers>
     <resources>
