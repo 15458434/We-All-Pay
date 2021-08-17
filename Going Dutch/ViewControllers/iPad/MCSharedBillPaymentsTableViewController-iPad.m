@@ -195,18 +195,6 @@
 - (void)prepareForSegue:(UIStoryboardSegue *)segue sender:(id)sender {
     // Get the new view controller using [segue destinationViewController].
     // Pass the selected object to the new view controller.
-    
-    if ([[segue identifier] isEqualToString:@"openPayment"]) {
-        UINavigationController *navController = segue.destinationViewController;
-        if (@available(iOS 13.0, *)) {
-            navController.modalInPresentation = YES;
-        }
-        PaymentViewController *destination = (PaymentViewController *)navController.viewControllers.firstObject;
-        NSIndexPath *indexPath = [self.tableView indexPathForSelectedRow];
-        destination.thisPayment = [_dataController objectAtIndexPath:indexPath];
-        destination.tonightsBill = _tonightsBill;
-        [[self tableView] deselectRowAtIndexPath:indexPath animated:YES];
-    }
 }
 
 #pragma mark - UIResponder

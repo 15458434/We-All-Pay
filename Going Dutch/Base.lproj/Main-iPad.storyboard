@@ -493,7 +493,6 @@
                                     <outlet property="namePayerLabel" destination="xU7-yf-2N6" id="Ds2-x7-Wiz"/>
                                     <outlet property="pictureOfPayer" destination="gvW-A9-uVj" id="V8N-41-Ip6"/>
                                     <outlet property="whatPaidLabel" destination="LTB-3b-Z1S" id="coN-2L-gYD"/>
-                                    <segue destination="cne-yA-g1T" kind="modal" identifier="openPayment" modalPresentationStyle="formSheet" id="pZQ-Y2-0Nm"/>
                                 </connections>
                             </tableViewCell>
                         </prototypes>
@@ -1125,7 +1124,6 @@
         </scene>
     </scenes>
     <inferredMetricsTieBreakers>
-        <segue reference="eXg-7Q-xwo"/>
         <segue reference="bBe-4f-24C"/>
     </inferredMetricsTieBreakers>
     <resources>

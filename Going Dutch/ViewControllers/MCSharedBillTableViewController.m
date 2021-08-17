@@ -279,7 +279,13 @@
 }
 
 - (void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath {
-    [self performSegueWithIdentifier:@"openPaymentView" sender:self];
+    UIUserInterfaceSizeClass horizontalSizeClass = self.traitCollection.horizontalSizeClass;
+    UIUserInterfaceSizeClass verticalSizeClass = self.traitCollection.verticalSizeClass;
+    if (horizontalSizeClass == UIUserInterfaceSizeClassRegular && verticalSizeClass == UIUserInterfaceSizeClassRegular) {
+        [self performSegueWithIdentifier:@"openPayment_iPad" sender:self];
+    } else {
+        [self performSegueWithIdentifier:@"openPaymentView" sender:self];
+    }
 }
 
 #pragma mark - UIViewController
@@ -375,6 +381,16 @@
         }
         PaymentViewController *destination = (PaymentViewController *)navController.viewControllers.firstObject;
         destination.tonightsBill = _tonightsBill;
+    } else if ([segue.identifier isEqualToString:@"openPayment_iPad"]) {
+        UINavigationController *navController = segue.destinationViewController;
+        if (@available(iOS 13.0, *)) {
+            navController.modalInPresentation = YES;
+        }
+        PaymentViewController *destination = (PaymentViewController *)navController.viewControllers.firstObject;
+        NSIndexPath *indexPath = [self.tableView indexPathForSelectedRow];
+        destination.thisPayment = [_dataController objectAtIndexPath:indexPath];
+        destination.tonightsBill = _tonightsBill;
+        [[self tableView] deselectRowAtIndexPath:indexPath animated:YES];
     } else if ([segue.identifier isEqualToString:@"openSolutionView_iPad"]) {
         UINavigationController *navController = (UINavigationController *)segue.destinationViewController;
         SolutionTableViewController_iPad *destination = (SolutionTableViewController_iPad *)navController.viewControllers.firstObject;
