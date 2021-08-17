@@ -904,7 +904,7 @@
                                     </userDefinedRuntimeAttributes>
                                     <connections>
                                         <action selector="addPersonButton:" destination="AUO-87-nmq" eventType="touchUpInside" id="ebu-qs-nCl"/>
-                                        <segue destination="nkD-cc-jGs" kind="presentation" identifier="openEditPerson" id="k2G-tm-5CJ"/>
+                                        <segue destination="nkD-cc-jGs" kind="presentation" identifier="openEditPerson" modalPresentationStyle="formSheet" id="k2G-tm-5CJ"/>
                                     </connections>
                                 </button>
                                 <button opaque="NO" contentMode="redraw" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="asZ-Na-2wd" customClass="MCRoundedButton">

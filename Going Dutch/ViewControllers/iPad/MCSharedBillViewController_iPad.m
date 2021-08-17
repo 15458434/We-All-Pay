@@ -318,23 +318,6 @@
 
 - (void)prepareForSegue:(UIStoryboardSegue *)segue sender:(id)sender {
     
-    // When newPerson segue is used add a person to tonightsBill.
-    if ([[segue identifier] isEqualToString:@"newPerson"]) {
-        UINavigationController *navController = (UINavigationController *)segue.destinationViewController;
-        if (@available(iOS 13.0, *)) {
-            navController.modalInPresentation = YES;
-        }
-        MCPersonViewController *destination = navController.viewControllers.firstObject;
-        [[MCWeAllPayStoreController defaultStore] beginUndoGroup];
-        // No person present create a new one.
-        MCPerson *thePerson = [_tonightsBill addPerson];
-        [thePerson setThumbnailDataFromImage:nil];
-        [thePerson setPictureDataFromImage:nil];
-        destination.thisPerson = thePerson;
-        destination.isNew = YES;
-        return;
-    }
-    
     // Use this string to open payment view with the first payment without payer.
     if ([segue.identifier isEqualToString:@"firstPaymentWithoutPayer"]) {
         UINavigationController *navController = (UINavigationController *)segue.destinationViewController;

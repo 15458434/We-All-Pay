@@ -196,29 +196,6 @@
 
 - (void)prepareForSegue:(UIStoryboardSegue *)segue sender:(id)sender {
 
-    if ([[segue identifier] isEqualToString:@"openPerson"]) {
-        UINavigationController *navController = (UINavigationController *)segue.destinationViewController;
-        if (@available(iOS 13.0, *)) {
-            navController.modalInPresentation = YES;
-        }
-        MCPersonViewController *destination = (MCPersonViewController *)navController.viewControllers.firstObject;
-        NSIndexPath *indexPathOfSelectedRow = self.tableView.indexPathForSelectedRow;
-        MCPerson *thePerson = [_dataController objectAtIndexPath:indexPathOfSelectedRow];
-        [[MCWeAllPayStoreController defaultStore] beginUndoGroup];
-        if (!thePerson) {
-            // No person present create a new one.
-            thePerson = [_tonightsBill addPerson];
-            [thePerson setThumbnailDataFromImage:nil];
-            [thePerson setPictureDataFromImage:nil];
-            destination.thisPerson = thePerson;
-            destination.isNew = YES;
-        } else {
-            // Person present open it.
-            destination.thisPerson = thePerson;
-            destination.isNew = NO;
-            [self.tableView deselectRowAtIndexPath:indexPathOfSelectedRow animated:YES];
-        }
-    }
 }
 
 #pragma mark - UIResponder

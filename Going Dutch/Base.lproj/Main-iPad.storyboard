@@ -68,9 +68,6 @@
                                                                 <color key="value" red="1" green="0.87058823529411766" blue="0.89411764705882357" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                                                             </userDefinedRuntimeAttribute>
                                                         </userDefinedRuntimeAttributes>
-                                                        <connections>
-                                                            <segue destination="f3U-rN-bgR" kind="modal" identifier="newPerson" modalPresentationStyle="formSheet" id="bBe-4f-24C"/>
-                                                        </connections>
                                                     </button>
                                                     <button contentMode="redraw" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="system" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="H3d-ki-tdJ" customClass="MCRoundedButton">
                                                         <rect key="frame" x="312" y="0.0" width="65" height="30"/>
@@ -1061,21 +1058,10 @@
                     </tableView>
                     <freeformSimulatedSizeMetrics key="simulatedDestinationMetrics"/>
                     <size key="freeformSize" width="768" height="1024"/>
-                    <connections>
-                        <segue destination="f3U-rN-bgR" kind="modal" identifier="openPerson" modalPresentationStyle="formSheet" id="qrR-J2-mhx"/>
-                    </connections>
                 </tableViewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="5n1-fZ-PhI" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
             <point key="canvasLocation" x="2482.8125" y="-807.421875"/>
-        </scene>
-        <!--PersonNavigationController-->
-        <scene sceneID="PyR-Ng-SAg">
-            <objects>
-                <viewControllerPlaceholder storyboardName="Main-Iphone" referencedIdentifier="PersonNavigationController" id="f3U-rN-bgR" sceneMemberID="viewController"/>
-                <placeholder placeholderIdentifier="IBFirstResponder" id="52t-Sk-hPv" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
-            </objects>
-            <point key="canvasLocation" x="3109" y="-808"/>
         </scene>
         <!--Navigation Controller-->
         <scene sceneID="gXJ-3f-jQp">
@@ -1123,9 +1109,6 @@
             <point key="canvasLocation" x="2482.8125" y="-73.2421875"/>
         </scene>
     </scenes>
-    <inferredMetricsTieBreakers>
-        <segue reference="bBe-4f-24C"/>
-    </inferredMetricsTieBreakers>
     <resources>
         <image name="barbutton - cancel" width="22" height="22"/>
         <image name="barbutton - done" width="22" height="22"/>
