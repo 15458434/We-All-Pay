@@ -336,6 +336,8 @@
                         <segue destination="TN3-5I-Xh1" kind="presentation" identifier="openSolutionView_iPad" modalPresentationStyle="pageSheet" id="0JD-7F-G1N"/>
                         <segue destination="ydW-Fj-sXo" kind="presentation" identifier="newPayment_iPad" id="rBl-ko-MHe"/>
                         <segue destination="ydW-Fj-sXo" kind="presentation" identifier="openPayment_iPad" id="zKF-pf-8oc"/>
+                        <segue destination="ydW-Fj-sXo" kind="presentation" identifier="openFirstPaymentWithoutPayer_iPad" id="sDW-eR-aHj"/>
+                        <segue destination="ydW-Fj-sXo" kind="presentation" identifier="openPaymentWithMissingData_iPad" id="9O1-vs-VOI"/>
                     </connections>
                 </tableViewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="aDR-YO-8As" userLabel="First Responder" sceneMemberID="firstResponder"/>
@@ -617,7 +619,7 @@
                 <viewControllerPlaceholder storyboardName="Main-iPad" referencedIdentifier="solutionNavigationController" id="TN3-5I-Xh1" sceneMemberID="viewController"/>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="Nzn-J2-Ftr" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="2606" y="1176"/>
+            <point key="canvasLocation" x="2609" y="1150"/>
         </scene>
         <!--NotificationsTableViewController-->
         <scene sceneID="eFd-pQ-f3n">
@@ -1577,7 +1579,7 @@
                 <viewControllerPlaceholder storyboardName="Main-iPad" referencedIdentifier="navPaymentViewController" id="ydW-Fj-sXo" sceneMemberID="viewController"/>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="nW1-mr-hxl" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="2062" y="1176"/>
+            <point key="canvasLocation" x="2065" y="1228"/>
         </scene>
         <!--Select currency-->
         <scene sceneID="U7d-49-WP1">
@@ -1846,9 +1848,9 @@
         </designable>
     </designables>
     <inferredMetricsTieBreakers>
-        <segue reference="M9w-sI-koW"/>
-        <segue reference="eZd-I3-t8D"/>
-        <segue reference="zKF-pf-8oc"/>
+        <segue reference="AFT-dx-z90"/>
+        <segue reference="jjg-NC-1KA"/>
+        <segue reference="9O1-vs-VOI"/>
         <segue reference="3RZ-mk-Dh4"/>
         <segue reference="d9O-xp-imC"/>
         <segue reference="6AC-aI-bIB"/>
