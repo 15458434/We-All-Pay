@@ -71,7 +71,14 @@
     // Check for all payers present.
     if ([_tonightsBill doAllPaymentHaveAPayer]) {
         // perform segue
-        [self performSegueWithIdentifier:@"solveButton" sender:self];
+        UIUserInterfaceSizeClass horizontalSizeClass = self.traitCollection.horizontalSizeClass;
+        UIUserInterfaceSizeClass verticalSizeClass = self.traitCollection.verticalSizeClass;
+        if (horizontalSizeClass == UIUserInterfaceSizeClassRegular && verticalSizeClass == UIUserInterfaceSizeClassRegular) {
+            [self performSegueWithIdentifier:@"openSolutionView_iPad" sender:self];
+        } else {
+            [self performSegueWithIdentifier:@"solveButton" sender:self];
+        }
+        
     } else {
         // Give user alert.
         NSString *title = NSLocalizedString(@"UNABLE_TO_SOLVE", @"Unable to solve");
@@ -354,6 +361,10 @@
         UINavigationController *navController = (UINavigationController *)segue.destinationViewController;
         SolutionViewController *destination = navController.viewControllers.firstObject;
         [destination updateEvent:_tonightsBill andSendMailDelegate:_mailDelegate andAdEngine:self.adEngine];
+    } else if ([segue.identifier isEqualToString:@"openSolutionView_iPad"]) {
+        UINavigationController *navController = (UINavigationController *)segue.destinationViewController;
+        SolutionTableViewController_iPad *destination = (SolutionTableViewController_iPad *)navController.viewControllers.firstObject;
+        [destination updateEvent:_tonightsBill];
     } else {
         NSLog(@"Unknown segue with identifier: %@", segue.identifier);
         NSParameterAssert(NO);

@@ -357,20 +357,6 @@
         destination.thisPayment = [_tonightsBill getFirstPaymentWithoutAPayer];
         return;
     }
-    
-    // When openSolutionView is used to go to the solution screen.
-    if ([[segue identifier] isEqualToString:@"openSolutionView"]) {
-        UINavigationController *navController = (UINavigationController *)segue.destinationViewController;
-        SolutionTableViewController_iPad *destination = (SolutionTableViewController_iPad *)navController.viewControllers.firstObject;
-        __weak MCSharedBillViewController_iPad *weakSelf = self;
-        [destination updateAdEngine:_interstitialAdEngine andEvent:_tonightsBill andDismissBlock:^{
-            MCSharedBillViewController_iPad *strongSelf = weakSelf;
-            if (strongSelf) {
-                [strongSelf dismissViewControllerAnimated:YES completion:nil];
-            }
-        }];
-        return;
-    }
 }
 
 #pragma mark - UIContentContainer
