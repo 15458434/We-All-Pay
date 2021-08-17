@@ -40,5 +40,6 @@
 #import "MCBadgeButton.h"
 #import "MCBorderLineView.h"
 #import "MCNotificationsCountTableViewCell.h"
+#import "MCNotificationTableViewCell.h"
 
 #import "MCEmailTextInputProxy.h"

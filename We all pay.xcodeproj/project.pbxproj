@@ -23,6 +23,7 @@
 		3812760E1BBE76B40004C8C2 /* PaymentViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3812760D1BBE76B40004C8C2 /* PaymentViewController.swift */; };
 		381276101BBE9A7F0004C8C2 /* MCPaymentPresenceTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3812760F1BBE9A7F0004C8C2 /* MCPaymentPresenceTableViewCell.swift */; };
 		3813150926CBA1BA00C27CBB /* MCNotificationsCountTableViewCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 3813150826CBA1BA00C27CBB /* MCNotificationsCountTableViewCell.m */; };
+		3813150C26CBAC3600C27CBB /* MCNotificationTableViewCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 3813150B26CBAC3600C27CBB /* MCNotificationTableViewCell.m */; };
 		38163E0F249E193D009E889C /* CoreServices.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 38163E0E249E193D009E889C /* CoreServices.framework */; };
 		3825A82419990BA400A8885D /* UIViewController+WeAllPayStore.m in Sources */ = {isa = PBXBuildFile; fileRef = 3825A82319990BA400A8885D /* UIViewController+WeAllPayStore.m */; };
 		3825A826199A2A5500A8885D /* MCTonightsBillTransfer.m in Sources */ = {isa = PBXBuildFile; fileRef = 3825A825199A2A5500A8885D /* MCTonightsBillTransfer.m */; };
@@ -93,7 +94,6 @@
 		3864147D269B183A00590ABA /* Notifications.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 3864147C269B183A00590ABA /* Notifications.storyboard */; };
 		3864147F269B185400590ABA /* NotificationsTableViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3864147E269B185300590ABA /* NotificationsTableViewController.swift */; };
 		38641482269B18C400590ABA /* NotificationsModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 38641481269B18C400590ABA /* NotificationsModel.swift */; };
-		38641484269B2E7A00590ABA /* NotificationTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 38641483269B2E7A00590ABA /* NotificationTableViewCell.swift */; };
 		38641486269B5E9F00590ABA /* Notifications.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 38641485269B5E9F00590ABA /* Notifications.xcassets */; };
 		3866D66523EF6921004554FF /* RemoteConfigTrueCasino.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3866D66423EF6921004554FF /* RemoteConfigTrueCasino.swift */; };
 		3867253B23DB248E009607E8 /* fastlane in Resources */ = {isa = PBXBuildFile; fileRef = 3867253A23DB248E009607E8 /* fastlane */; };
@@ -387,6 +387,8 @@
 		3812760F1BBE9A7F0004C8C2 /* MCPaymentPresenceTableViewCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = MCPaymentPresenceTableViewCell.swift; sourceTree = "<group>"; };
 		3813150726CBA1BA00C27CBB /* MCNotificationsCountTableViewCell.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = MCNotificationsCountTableViewCell.h; sourceTree = "<group>"; };
 		3813150826CBA1BA00C27CBB /* MCNotificationsCountTableViewCell.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = MCNotificationsCountTableViewCell.m; sourceTree = "<group>"; };
+		3813150A26CBAC3600C27CBB /* MCNotificationTableViewCell.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = MCNotificationTableViewCell.h; sourceTree = "<group>"; };
+		3813150B26CBAC3600C27CBB /* MCNotificationTableViewCell.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = MCNotificationTableViewCell.m; sourceTree = "<group>"; };
 		3813D8941D8983C900E6B7A4 /* CircularImageView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; lineEnding = 0; path = CircularImageView.swift; sourceTree = "<group>"; xcLanguageSpecificationIdentifier = xcode.lang.swift; };
 		38156B2918706BAC0047AEEF /* Base */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.strings; lineEnding = 0; name = Base; path = Base.lproj/Localizable.strings; sourceTree = "<group>"; };
 		38163E0E249E193D009E889C /* CoreServices.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = CoreServices.framework; path = System/Library/Frameworks/CoreServices.framework; sourceTree = SDKROOT; };
@@ -457,7 +459,6 @@
 		3864147C269B183A00590ABA /* Notifications.storyboard */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; path = Notifications.storyboard; sourceTree = "<group>"; };
 		3864147E269B185300590ABA /* NotificationsTableViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NotificationsTableViewController.swift; sourceTree = "<group>"; };
 		38641481269B18C400590ABA /* NotificationsModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NotificationsModel.swift; sourceTree = "<group>"; };
-		38641483269B2E7A00590ABA /* NotificationTableViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NotificationTableViewCell.swift; sourceTree = "<group>"; };
 		38641485269B5E9F00590ABA /* Notifications.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Notifications.xcassets; sourceTree = "<group>"; };
 		3866D66423EF6921004554FF /* RemoteConfigTrueCasino.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RemoteConfigTrueCasino.swift; sourceTree = "<group>"; };
 		3867253A23DB248E009607E8 /* fastlane */ = {isa = PBXFileReference; lastKnownFileType = folder; path = fastlane; sourceTree = "<group>"; };
@@ -1098,7 +1099,8 @@
 			isa = PBXGroup;
 			children = (
 				3864147E269B185300590ABA /* NotificationsTableViewController.swift */,
-				38641483269B2E7A00590ABA /* NotificationTableViewCell.swift */,
+				3813150A26CBAC3600C27CBB /* MCNotificationTableViewCell.h */,
+				3813150B26CBAC3600C27CBB /* MCNotificationTableViewCell.m */,
 				38641481269B18C400590ABA /* NotificationsModel.swift */,
 			);
 			path = NotificationsTable;
@@ -2216,7 +2218,6 @@
 				38ACC5A3236B1FAE000BDEEC /* PaymentModel.swift in Sources */,
 				381275FF1BBD84650004C8C2 /* InfoScreenTableViewController.swift in Sources */,
 				38C700F21D8EC24100D785BB /* LaunchCounter.swift in Sources */,
-				38641484269B2E7A00590ABA /* NotificationTableViewCell.swift in Sources */,
 				3864147F269B185400590ABA /* NotificationsTableViewController.swift in Sources */,
 				3892E3A417903EF00038894B /* MCEditTripViewController.m in Sources */,
 				38977E571B2A2C57008484A4 /* MCPaymentPresenceTableViewCell_iPhone.swift in Sources */,
@@ -2232,6 +2233,7 @@
 				389950A4191A90F1000B00BC /* MCPaymentPresence+addons.m in Sources */,
 				389ACFE12374A1E60025139F /* EmailTextInputPicker.swift in Sources */,
 				389DE90E197FD41900169645 /* MCCurrency+addons.m in Sources */,
+				3813150C26CBAC3600C27CBB /* MCNotificationTableViewCell.m in Sources */,
 				38641482269B18C400590ABA /* NotificationsModel.swift in Sources */,
 				38D96ED423E30F5E00C03170 /* MCAdBannerTableViewCell.swift in Sources */,
 				384EC9121BC3008300A80799 /* SelectEmailAddressTableViewController_iPad.swift in Sources */,

@@ -13,6 +13,7 @@
 
 NS_ASSUME_NONNULL_BEGIN
 
+__attribute__((objc_subclassing_restricted))
 NS_SWIFT_NAME(NotificationsCountTableViewCell)
 @interface MCNotificationsCountTableViewCell : UITableViewCell
 
