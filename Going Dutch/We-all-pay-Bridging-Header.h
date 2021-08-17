@@ -39,5 +39,6 @@
 #import "MCNotificationUnreadIndicator.h"
 #import "MCBadgeButton.h"
 #import "MCBorderLineView.h"
+#import "MCNotificationsCountTableViewCell.h"
 
 #import "MCEmailTextInputProxy.h"
