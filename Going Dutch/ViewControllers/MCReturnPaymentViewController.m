@@ -364,8 +364,13 @@ typedef NS_OPTIONS(NSUInteger, MCReturnPaymentViewControllerState) {
 
 - (void)tableView:(UITableView *)tableView willDisplayHeaderView:(UIView *)view forSection:(NSInteger)section {
     UITableViewHeaderFooterView *sectionTitleHeader = (UITableViewHeaderFooterView *)view;
-    view.tintColor = [UIColor colorNamed:@"background"];
-    sectionTitleHeader.textLabel.textColor = [UIColor colorNamed:@"emptyMessageText"];
+    if (@available(iOS 11.0, *)) {
+        view.tintColor = [UIColor colorNamed:@"background"];
+        sectionTitleHeader.textLabel.textColor = [UIColor colorNamed:@"emptyMessageText"];
+    } else {
+        // Fallback on earlier versions
+    }
+    
 }
 
 - (void)tableView:(UITableView *)tableView didEndDisplayingHeaderView:(UIView *)view forSection:(NSInteger)section

@@ -7,8 +7,9 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
-		1D254A247DE0BAB84F25226A /* Pods_We_all_pay.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 1DCFCC1481229EB383CD4CA2 /* Pods_We_all_pay.framework */; };
+		157275C935AA7EC411292CA1 /* Pods_We_all_pay_Tests.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = D0580290993A655737C44711 /* Pods_We_all_pay_Tests.framework */; };
 		38001C9B194EE284008ACD94 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 38001C9A194EE284008ACD94 /* Assets.xcassets */; };
+		380046BE26CA9802003586F2 /* UIColor+ColorSpawn.m in Sources */ = {isa = PBXBuildFile; fileRef = 380046BD26CA9802003586F2 /* UIColor+ColorSpawn.m */; };
 		38010E0F1A3F4A4F0056F8F8 /* Localizable.strings in Resources */ = {isa = PBXBuildFile; fileRef = 38010E111A3F4A4F0056F8F8 /* Localizable.strings */; };
 		380328002698443300744710 /* NotificationsInfoModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 380327FF2698443300744710 /* NotificationsInfoModel.swift */; };
 		380328022698804500744710 /* NotificationsCountTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 380328012698804500744710 /* NotificationsCountTableViewCell.swift */; };
@@ -222,7 +223,7 @@
 		38F2A1AD1ADCF7E100831D48 /* WhoIsPayingNextTextLocalizer.swift in Sources */ = {isa = PBXBuildFile; fileRef = 38F2A1AB1ADCF7E100831D48 /* WhoIsPayingNextTextLocalizer.swift */; };
 		38F44CCB2364993400215B1C /* MoneyTextInputValidator.swift in Sources */ = {isa = PBXBuildFile; fileRef = 38F44CCA2364993400215B1C /* MoneyTextInputValidator.swift */; };
 		38FE5A082346957100BBA722 /* SideMenuTransitioner.swift in Sources */ = {isa = PBXBuildFile; fileRef = 38FE5A072346957100BBA722 /* SideMenuTransitioner.swift */; };
-		D4768686E46D68D4747B5150 /* Pods_We_all_pay_Tests.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 618E44D1F8C8C17459BB1F54 /* Pods_We_all_pay_Tests.framework */; };
+		D7F1F674BD7F1D6F55F292E0 /* Pods_We_all_pay.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = FF1CF28EF27F3080C89344C2 /* Pods_We_all_pay.framework */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -348,12 +349,12 @@
 /* End PBXCopyFilesBuildPhase section */
 
 /* Begin PBXFileReference section */
-		0066679B286A8C26F92F3491 /* Pods-We all pay Tests.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-We all pay Tests.debug.xcconfig"; path = "Target Support Files/Pods-We all pay Tests/Pods-We all pay Tests.debug.xcconfig"; sourceTree = "<group>"; };
-		0DD08E9688A7AC237DACDDE8 /* Pods-We all pay Tests.adtest.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-We all pay Tests.adtest.xcconfig"; path = "Target Support Files/Pods-We all pay Tests/Pods-We all pay Tests.adtest.xcconfig"; sourceTree = "<group>"; };
-		171290C91236FB3BAFA9C102 /* Pods-We all pay.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-We all pay.release.xcconfig"; path = "Target Support Files/Pods-We all pay/Pods-We all pay.release.xcconfig"; sourceTree = "<group>"; };
-		1DCFCC1481229EB383CD4CA2 /* Pods_We_all_pay.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_We_all_pay.framework; sourceTree = BUILT_PRODUCTS_DIR; };
-		300310A132E7251AAAC7DE8D /* Pods-We all pay Tests.screenshots.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-We all pay Tests.screenshots.xcconfig"; path = "Target Support Files/Pods-We all pay Tests/Pods-We all pay Tests.screenshots.xcconfig"; sourceTree = "<group>"; };
+		0AC0C6B8AE42E198B7DCBCA0 /* Pods-We all pay Tests.adtest.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-We all pay Tests.adtest.xcconfig"; path = "Target Support Files/Pods-We all pay Tests/Pods-We all pay Tests.adtest.xcconfig"; sourceTree = "<group>"; };
+		32C4E0B2862F43B84230004F /* Pods-We all pay.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-We all pay.release.xcconfig"; path = "Target Support Files/Pods-We all pay/Pods-We all pay.release.xcconfig"; sourceTree = "<group>"; };
+		35E5A25E2A04851F0A6E9CE9 /* Pods-We all pay.screenshots.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-We all pay.screenshots.xcconfig"; path = "Target Support Files/Pods-We all pay/Pods-We all pay.screenshots.xcconfig"; sourceTree = "<group>"; };
 		38001C9A194EE284008ACD94 /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
+		380046BC26CA9802003586F2 /* UIColor+ColorSpawn.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = "UIColor+ColorSpawn.h"; sourceTree = "<group>"; };
+		380046BD26CA9802003586F2 /* UIColor+ColorSpawn.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = "UIColor+ColorSpawn.m"; sourceTree = "<group>"; };
 		38010E101A3F4A4F0056F8F8 /* Base */ = {isa = PBXFileReference; fileEncoding = 10; lastKnownFileType = text.plist.strings; name = Base; path = Base.lproj/Localizable.strings; sourceTree = "<group>"; };
 		38010E121A3F4A510056F8F8 /* en */ = {isa = PBXFileReference; fileEncoding = 10; lastKnownFileType = text.plist.strings; name = en; path = en.lproj/Localizable.strings; sourceTree = "<group>"; };
 		38010E131A3F4A530056F8F8 /* nl */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.strings; name = nl; path = nl.lproj/Localizable.strings; sourceTree = "<group>"; };
@@ -655,11 +656,13 @@
 		38F7F9A81B2C49C20059DE51 /* nl */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; name = nl; path = "nl.lproj/Available Currencies.plist"; sourceTree = "<group>"; };
 		38F7F9A91B2C4A120059DE51 /* CurrencyController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = CurrencyController.swift; path = "../Going Dutch/CurrencyController.swift"; sourceTree = "<group>"; };
 		38FE5A072346957100BBA722 /* SideMenuTransitioner.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SideMenuTransitioner.swift; sourceTree = "<group>"; };
-		5791FFD3C55DF5CED3EDA133 /* Pods-We all pay Tests.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-We all pay Tests.release.xcconfig"; path = "Target Support Files/Pods-We all pay Tests/Pods-We all pay Tests.release.xcconfig"; sourceTree = "<group>"; };
-		618E44D1F8C8C17459BB1F54 /* Pods_We_all_pay_Tests.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_We_all_pay_Tests.framework; sourceTree = BUILT_PRODUCTS_DIR; };
-		A567869166237B132CB2E70B /* Pods-We all pay.adtest.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-We all pay.adtest.xcconfig"; path = "Target Support Files/Pods-We all pay/Pods-We all pay.adtest.xcconfig"; sourceTree = "<group>"; };
-		CC2E5B95E55F75C4CD17F74D /* Pods-We all pay.screenshots.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-We all pay.screenshots.xcconfig"; path = "Target Support Files/Pods-We all pay/Pods-We all pay.screenshots.xcconfig"; sourceTree = "<group>"; };
-		D6E8FBEB6959EFE06B33C684 /* Pods-We all pay.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-We all pay.debug.xcconfig"; path = "Target Support Files/Pods-We all pay/Pods-We all pay.debug.xcconfig"; sourceTree = "<group>"; };
+		5696DE762A51B9FE3ABFB3C2 /* Pods-We all pay.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-We all pay.debug.xcconfig"; path = "Target Support Files/Pods-We all pay/Pods-We all pay.debug.xcconfig"; sourceTree = "<group>"; };
+		897E890AFC5AE324D50BDF95 /* Pods-We all pay Tests.screenshots.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-We all pay Tests.screenshots.xcconfig"; path = "Target Support Files/Pods-We all pay Tests/Pods-We all pay Tests.screenshots.xcconfig"; sourceTree = "<group>"; };
+		B625A876EE8842BE11110341 /* Pods-We all pay Tests.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-We all pay Tests.debug.xcconfig"; path = "Target Support Files/Pods-We all pay Tests/Pods-We all pay Tests.debug.xcconfig"; sourceTree = "<group>"; };
+		CD20D6060285BDFDB4C3ABBE /* Pods-We all pay.adtest.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-We all pay.adtest.xcconfig"; path = "Target Support Files/Pods-We all pay/Pods-We all pay.adtest.xcconfig"; sourceTree = "<group>"; };
+		D0580290993A655737C44711 /* Pods_We_all_pay_Tests.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_We_all_pay_Tests.framework; sourceTree = BUILT_PRODUCTS_DIR; };
+		E1351BEF2EB267A52384EA3D /* Pods-We all pay Tests.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-We all pay Tests.release.xcconfig"; path = "Target Support Files/Pods-We all pay Tests/Pods-We all pay Tests.release.xcconfig"; sourceTree = "<group>"; };
+		FF1CF28EF27F3080C89344C2 /* Pods_We_all_pay.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_We_all_pay.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -707,7 +710,7 @@
 				38D6A3D11C73DDC000968BB2 /* RateMeControllerForiOS.framework in Frameworks */,
 				388A32911C11EDBD00F7459C /* WhoPayingUserDefaultsStoreInterface.framework in Frameworks */,
 				382B76F51C398249000C203A /* CurrencyConverter.framework in Frameworks */,
-				1D254A247DE0BAB84F25226A /* Pods_We_all_pay.framework in Frameworks */,
+				D7F1F674BD7F1D6F55F292E0 /* Pods_We_all_pay.framework in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -715,7 +718,7 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				D4768686E46D68D4747B5150 /* Pods_We_all_pay_Tests.framework in Frameworks */,
+				157275C935AA7EC411292CA1 /* Pods_We_all_pay_Tests.framework in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -1437,6 +1440,8 @@
 				380C48151BE1330E00C82B0F /* CurrencyFormatter.swift */,
 				38CDE8FE17135B6300387CAA /* MCTools.h */,
 				38CDE8FF17135B6300387CAA /* MCTools.m */,
+				380046BC26CA9802003586F2 /* UIColor+ColorSpawn.h */,
+				380046BD26CA9802003586F2 /* UIColor+ColorSpawn.m */,
 				3825A82219990BA400A8885D /* UIViewController+WeAllPayStore.h */,
 				3825A82319990BA400A8885D /* UIViewController+WeAllPayStore.m */,
 				388A32741C11EA1400F7459C /* WhoPayingUserDefaultsStoreInterfaceWeAllPayExtension.swift */,
@@ -1468,8 +1473,8 @@
 				3826D4D023CC574E009CAC30 /* WebKit.framework */,
 				3826D4CF23CC5745009CAC30 /* libz.tbd */,
 				3826D4CE23CC573B009CAC30 /* libsqlite3.0.tbd */,
-				1DCFCC1481229EB383CD4CA2 /* Pods_We_all_pay.framework */,
-				618E44D1F8C8C17459BB1F54 /* Pods_We_all_pay_Tests.framework */,
+				FF1CF28EF27F3080C89344C2 /* Pods_We_all_pay.framework */,
+				D0580290993A655737C44711 /* Pods_We_all_pay_Tests.framework */,
 			);
 			name = Frameworks;
 			sourceTree = "<group>";
@@ -1477,14 +1482,14 @@
 		A64C2FCC22C8F3F53074E7EB /* Pods */ = {
 			isa = PBXGroup;
 			children = (
-				D6E8FBEB6959EFE06B33C684 /* Pods-We all pay.debug.xcconfig */,
-				A567869166237B132CB2E70B /* Pods-We all pay.adtest.xcconfig */,
-				CC2E5B95E55F75C4CD17F74D /* Pods-We all pay.screenshots.xcconfig */,
-				171290C91236FB3BAFA9C102 /* Pods-We all pay.release.xcconfig */,
-				0066679B286A8C26F92F3491 /* Pods-We all pay Tests.debug.xcconfig */,
-				0DD08E9688A7AC237DACDDE8 /* Pods-We all pay Tests.adtest.xcconfig */,
-				300310A132E7251AAAC7DE8D /* Pods-We all pay Tests.screenshots.xcconfig */,
-				5791FFD3C55DF5CED3EDA133 /* Pods-We all pay Tests.release.xcconfig */,
+				5696DE762A51B9FE3ABFB3C2 /* Pods-We all pay.debug.xcconfig */,
+				CD20D6060285BDFDB4C3ABBE /* Pods-We all pay.adtest.xcconfig */,
+				35E5A25E2A04851F0A6E9CE9 /* Pods-We all pay.screenshots.xcconfig */,
+				32C4E0B2862F43B84230004F /* Pods-We all pay.release.xcconfig */,
+				B625A876EE8842BE11110341 /* Pods-We all pay Tests.debug.xcconfig */,
+				0AC0C6B8AE42E198B7DCBCA0 /* Pods-We all pay Tests.adtest.xcconfig */,
+				897E890AFC5AE324D50BDF95 /* Pods-We all pay Tests.screenshots.xcconfig */,
+				E1351BEF2EB267A52384EA3D /* Pods-We all pay Tests.release.xcconfig */,
 			);
 			path = Pods;
 			sourceTree = "<group>";
@@ -1591,15 +1596,15 @@
 			isa = PBXNativeTarget;
 			buildConfigurationList = 38572AF0169D437B00969C62 /* Build configuration list for PBXNativeTarget "We all pay" */;
 			buildPhases = (
-				E6C4CA61EADBDC663A0E544D /* [CP] Check Pods Manifest.lock */,
+				30377EB536B752B9F5475AE2 /* [CP] Check Pods Manifest.lock */,
 				38572ACE169D437B00969C62 /* Sources */,
 				38572ACF169D437B00969C62 /* Frameworks */,
 				38572AD0169D437B00969C62 /* Resources */,
 				380D611E1B299B94006F8AE4 /* Embed Frameworks */,
 				384A8D9D1D54776300A69E15 /* Embed App Extensions */,
 				38F2A4A323E097C40021F574 /* Crashlytics - This should be the very last step. */,
-				CDD80ADD1332E0442A4BDEBD /* [CP] Embed Pods Frameworks */,
-				19961072CE5F2909E1729F61 /* [CP] Copy Pods Resources */,
+				86079344347BDA8853CB8BC5 /* [CP] Embed Pods Frameworks */,
+				9EC93E18F3223CFF6D4E30B4 /* [CP] Copy Pods Resources */,
 			);
 			buildRules = (
 			);
@@ -1619,11 +1624,11 @@
 			isa = PBXNativeTarget;
 			buildConfigurationList = 385F530C191C2C360012773D /* Build configuration list for PBXNativeTarget "We all pay Tests" */;
 			buildPhases = (
-				882E40C2D88A6550C1263BE4 /* [CP] Check Pods Manifest.lock */,
+				0E5B02A7AE58B2FC29479C09 /* [CP] Check Pods Manifest.lock */,
 				385F52F9191C2C360012773D /* Sources */,
 				385F52FA191C2C360012773D /* Frameworks */,
 				385F52FB191C2C360012773D /* Resources */,
-				CE1756805C50491532A9C94E /* [CP] Embed Pods Frameworks */,
+				7C869AA30D7191311349AEA8 /* [CP] Embed Pods Frameworks */,
 			);
 			buildRules = (
 			);
@@ -1966,21 +1971,48 @@
 /* End PBXResourcesBuildPhase section */
 
 /* Begin PBXShellScriptBuildPhase section */
-		19961072CE5F2909E1729F61 /* [CP] Copy Pods Resources */ = {
+		0E5B02A7AE58B2FC29479C09 /* [CP] Check Pods Manifest.lock */ = {
 			isa = PBXShellScriptBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
 			);
 			inputFileListPaths = (
-				"${PODS_ROOT}/Target Support Files/Pods-We all pay/Pods-We all pay-resources-${CONFIGURATION}-input-files.xcfilelist",
 			);
-			name = "[CP] Copy Pods Resources";
+			inputPaths = (
+				"${PODS_PODFILE_DIR_PATH}/Podfile.lock",
+				"${PODS_ROOT}/Manifest.lock",
+			);
+			name = "[CP] Check Pods Manifest.lock";
 			outputFileListPaths = (
-				"${PODS_ROOT}/Target Support Files/Pods-We all pay/Pods-We all pay-resources-${CONFIGURATION}-output-files.xcfilelist",
+			);
+			outputPaths = (
+				"$(DERIVED_FILE_DIR)/Pods-We all pay Tests-checkManifestLockResult.txt",
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 			shellPath = /bin/sh;
-			shellScript = "\"${PODS_ROOT}/Target Support Files/Pods-We all pay/Pods-We all pay-resources.sh\"\n";
+			shellScript = "diff \"${PODS_PODFILE_DIR_PATH}/Podfile.lock\" \"${PODS_ROOT}/Manifest.lock\" > /dev/null\nif [ $? != 0 ] ; then\n    # print error to STDERR\n    echo \"error: The sandbox is not in sync with the Podfile.lock. Run 'pod install' or update your CocoaPods installation.\" >&2\n    exit 1\nfi\n# This output is used by Xcode 'outputs' to avoid re-running this script phase.\necho \"SUCCESS\" > \"${SCRIPT_OUTPUT_FILE_0}\"\n";
+			showEnvVarsInLog = 0;
+		};
+		30377EB536B752B9F5475AE2 /* [CP] Check Pods Manifest.lock */ = {
+			isa = PBXShellScriptBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			inputFileListPaths = (
+			);
+			inputPaths = (
+				"${PODS_PODFILE_DIR_PATH}/Podfile.lock",
+				"${PODS_ROOT}/Manifest.lock",
+			);
+			name = "[CP] Check Pods Manifest.lock";
+			outputFileListPaths = (
+			);
+			outputPaths = (
+				"$(DERIVED_FILE_DIR)/Pods-We all pay-checkManifestLockResult.txt",
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+			shellPath = /bin/sh;
+			shellScript = "diff \"${PODS_PODFILE_DIR_PATH}/Podfile.lock\" \"${PODS_ROOT}/Manifest.lock\" > /dev/null\nif [ $? != 0 ] ; then\n    # print error to STDERR\n    echo \"error: The sandbox is not in sync with the Podfile.lock. Run 'pod install' or update your CocoaPods installation.\" >&2\n    exit 1\nfi\n# This output is used by Xcode 'outputs' to avoid re-running this script phase.\necho \"SUCCESS\" > \"${SCRIPT_OUTPUT_FILE_0}\"\n";
 			showEnvVarsInLog = 0;
 		};
 		38F2A4A323E097C40021F574 /* Crashlytics - This should be the very last step. */ = {
@@ -2003,46 +2035,7 @@
 			shellPath = /bin/sh;
 			shellScript = "# Type a script or drag a script file from your workspace to insert its path.\n\"${PODS_ROOT}/FirebaseCrashlytics/run\"\n";
 		};
-		882E40C2D88A6550C1263BE4 /* [CP] Check Pods Manifest.lock */ = {
-			isa = PBXShellScriptBuildPhase;
-			buildActionMask = 2147483647;
-			files = (
-			);
-			inputFileListPaths = (
-			);
-			inputPaths = (
-				"${PODS_PODFILE_DIR_PATH}/Podfile.lock",
-				"${PODS_ROOT}/Manifest.lock",
-			);
-			name = "[CP] Check Pods Manifest.lock";
-			outputFileListPaths = (
-			);
-			outputPaths = (
-				"$(DERIVED_FILE_DIR)/Pods-We all pay Tests-checkManifestLockResult.txt",
-			);
-			runOnlyForDeploymentPostprocessing = 0;
-			shellPath = /bin/sh;
-			shellScript = "diff \"${PODS_PODFILE_DIR_PATH}/Podfile.lock\" \"${PODS_ROOT}/Manifest.lock\" > /dev/null\nif [ $? != 0 ] ; then\n    # print error to STDERR\n    echo \"error: The sandbox is not in sync with the Podfile.lock. Run 'pod install' or update your CocoaPods installation.\" >&2\n    exit 1\nfi\n# This output is used by Xcode 'outputs' to avoid re-running this script phase.\necho \"SUCCESS\" > \"${SCRIPT_OUTPUT_FILE_0}\"\n";
-			showEnvVarsInLog = 0;
-		};
-		CDD80ADD1332E0442A4BDEBD /* [CP] Embed Pods Frameworks */ = {
-			isa = PBXShellScriptBuildPhase;
-			buildActionMask = 2147483647;
-			files = (
-			);
-			inputFileListPaths = (
-				"${PODS_ROOT}/Target Support Files/Pods-We all pay/Pods-We all pay-frameworks-${CONFIGURATION}-input-files.xcfilelist",
-			);
-			name = "[CP] Embed Pods Frameworks";
-			outputFileListPaths = (
-				"${PODS_ROOT}/Target Support Files/Pods-We all pay/Pods-We all pay-frameworks-${CONFIGURATION}-output-files.xcfilelist",
-			);
-			runOnlyForDeploymentPostprocessing = 0;
-			shellPath = /bin/sh;
-			shellScript = "\"${PODS_ROOT}/Target Support Files/Pods-We all pay/Pods-We all pay-frameworks.sh\"\n";
-			showEnvVarsInLog = 0;
-		};
-		CE1756805C50491532A9C94E /* [CP] Embed Pods Frameworks */ = {
+		7C869AA30D7191311349AEA8 /* [CP] Embed Pods Frameworks */ = {
 			isa = PBXShellScriptBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
@@ -2059,26 +2052,38 @@
 			shellScript = "\"${PODS_ROOT}/Target Support Files/Pods-We all pay Tests/Pods-We all pay Tests-frameworks.sh\"\n";
 			showEnvVarsInLog = 0;
 		};
-		E6C4CA61EADBDC663A0E544D /* [CP] Check Pods Manifest.lock */ = {
+		86079344347BDA8853CB8BC5 /* [CP] Embed Pods Frameworks */ = {
 			isa = PBXShellScriptBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
 			);
 			inputFileListPaths = (
+				"${PODS_ROOT}/Target Support Files/Pods-We all pay/Pods-We all pay-frameworks-${CONFIGURATION}-input-files.xcfilelist",
 			);
-			inputPaths = (
-				"${PODS_PODFILE_DIR_PATH}/Podfile.lock",
-				"${PODS_ROOT}/Manifest.lock",
-			);
-			name = "[CP] Check Pods Manifest.lock";
+			name = "[CP] Embed Pods Frameworks";
 			outputFileListPaths = (
-			);
-			outputPaths = (
-				"$(DERIVED_FILE_DIR)/Pods-We all pay-checkManifestLockResult.txt",
+				"${PODS_ROOT}/Target Support Files/Pods-We all pay/Pods-We all pay-frameworks-${CONFIGURATION}-output-files.xcfilelist",
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 			shellPath = /bin/sh;
-			shellScript = "diff \"${PODS_PODFILE_DIR_PATH}/Podfile.lock\" \"${PODS_ROOT}/Manifest.lock\" > /dev/null\nif [ $? != 0 ] ; then\n    # print error to STDERR\n    echo \"error: The sandbox is not in sync with the Podfile.lock. Run 'pod install' or update your CocoaPods installation.\" >&2\n    exit 1\nfi\n# This output is used by Xcode 'outputs' to avoid re-running this script phase.\necho \"SUCCESS\" > \"${SCRIPT_OUTPUT_FILE_0}\"\n";
+			shellScript = "\"${PODS_ROOT}/Target Support Files/Pods-We all pay/Pods-We all pay-frameworks.sh\"\n";
+			showEnvVarsInLog = 0;
+		};
+		9EC93E18F3223CFF6D4E30B4 /* [CP] Copy Pods Resources */ = {
+			isa = PBXShellScriptBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			inputFileListPaths = (
+				"${PODS_ROOT}/Target Support Files/Pods-We all pay/Pods-We all pay-resources-${CONFIGURATION}-input-files.xcfilelist",
+			);
+			name = "[CP] Copy Pods Resources";
+			outputFileListPaths = (
+				"${PODS_ROOT}/Target Support Files/Pods-We all pay/Pods-We all pay-resources-${CONFIGURATION}-output-files.xcfilelist",
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+			shellPath = /bin/sh;
+			shellScript = "\"${PODS_ROOT}/Target Support Files/Pods-We all pay/Pods-We all pay-resources.sh\"\n";
 			showEnvVarsInLog = 0;
 		};
 /* End PBXShellScriptBuildPhase section */
@@ -2144,6 +2149,7 @@
 				38E2CB3E1BC2A49C0092B5C8 /* SelectPayerTableViewCell_iPad.swift in Sources */,
 				38572B0A169F3D2700969C62 /* MCAllTripsTableViewController.m in Sources */,
 				389DE8F4197FB2B900169645 /* MCEmailAddress.m in Sources */,
+				380046BE26CA9802003586F2 /* UIColor+ColorSpawn.m in Sources */,
 				38121EEF23D97AA400A3068D /* MCGenericMediumAdBannerViewController.m in Sources */,
 				38D177111C3A5E640084604C /* SelectCategoryTableViewController.swift in Sources */,
 				385295D11C105C580081894D /* CategoryPictureStoreController.swift in Sources */,
@@ -2583,7 +2589,7 @@
 				GCC_WARN_UNUSED_FUNCTION = YES;
 				INFOPLIST_FILE = CurrencyConverter/Info.plist;
 				INSTALL_PATH = "$(LOCAL_LIBRARY_DIR)/Frameworks";
-				IPHONEOS_DEPLOYMENT_TARGET = 12.0;
+				IPHONEOS_DEPLOYMENT_TARGET = 11.0;
 				LD_RUNPATH_SEARCH_PATHS = (
 					"$(inherited)",
 					"@executable_path/Frameworks",
@@ -2640,7 +2646,7 @@
 				GCC_WARN_UNUSED_FUNCTION = YES;
 				INFOPLIST_FILE = CurrencyConverter/Info.plist;
 				INSTALL_PATH = "$(LOCAL_LIBRARY_DIR)/Frameworks";
-				IPHONEOS_DEPLOYMENT_TARGET = 12.0;
+				IPHONEOS_DEPLOYMENT_TARGET = 11.0;
 				LD_RUNPATH_SEARCH_PATHS = (
 					"$(inherited)",
 					"@executable_path/Frameworks",
@@ -2763,7 +2769,7 @@
 				GCC_WARN_UNINITIALIZED_AUTOS = YES_AGGRESSIVE;
 				INFOPLIST_FILE = WeAllPayDesignableUI/Info.plist;
 				INSTALL_PATH = "$(LOCAL_LIBRARY_DIR)/Frameworks";
-				IPHONEOS_DEPLOYMENT_TARGET = 12.0;
+				IPHONEOS_DEPLOYMENT_TARGET = 11.0;
 				LD_RUNPATH_SEARCH_PATHS = (
 					"$(inherited)",
 					"@executable_path/Frameworks",
@@ -2811,7 +2817,7 @@
 				GCC_WARN_UNINITIALIZED_AUTOS = YES_AGGRESSIVE;
 				INFOPLIST_FILE = WeAllPayDesignableUI/Info.plist;
 				INSTALL_PATH = "$(LOCAL_LIBRARY_DIR)/Frameworks";
-				IPHONEOS_DEPLOYMENT_TARGET = 12.0;
+				IPHONEOS_DEPLOYMENT_TARGET = 11.0;
 				LD_RUNPATH_SEARCH_PATHS = (
 					"$(inherited)",
 					"@executable_path/Frameworks",
@@ -2859,7 +2865,7 @@
 				GCC_WARN_UNINITIALIZED_AUTOS = YES_AGGRESSIVE;
 				INFOPLIST_FILE = WeAllPayDesignableUI/Info.plist;
 				INSTALL_PATH = "$(LOCAL_LIBRARY_DIR)/Frameworks";
-				IPHONEOS_DEPLOYMENT_TARGET = 12.0;
+				IPHONEOS_DEPLOYMENT_TARGET = 11.0;
 				LD_RUNPATH_SEARCH_PATHS = (
 					"$(inherited)",
 					"@executable_path/Frameworks",
@@ -2907,7 +2913,7 @@
 				GCC_WARN_UNINITIALIZED_AUTOS = YES_AGGRESSIVE;
 				INFOPLIST_FILE = WeAllPayDesignableUI/Info.plist;
 				INSTALL_PATH = "$(LOCAL_LIBRARY_DIR)/Frameworks";
-				IPHONEOS_DEPLOYMENT_TARGET = 12.0;
+				IPHONEOS_DEPLOYMENT_TARGET = 11.0;
 				LD_RUNPATH_SEARCH_PATHS = (
 					"$(inherited)",
 					"@executable_path/Frameworks",
@@ -2975,7 +2981,7 @@
 				GCC_WARN_UNINITIALIZED_AUTOS = YES;
 				GCC_WARN_UNUSED_FUNCTION = YES;
 				GCC_WARN_UNUSED_VARIABLE = YES;
-				IPHONEOS_DEPLOYMENT_TARGET = 12.0;
+				IPHONEOS_DEPLOYMENT_TARGET = 10.0;
 				ONLY_ACTIVE_ARCH = YES;
 				OTHER_SWIFT_FLAGS = "";
 				PROVISIONING_PROFILE = "";
@@ -3030,7 +3036,7 @@
 				GCC_WARN_UNINITIALIZED_AUTOS = YES;
 				GCC_WARN_UNUSED_FUNCTION = YES;
 				GCC_WARN_UNUSED_VARIABLE = YES;
-				IPHONEOS_DEPLOYMENT_TARGET = 12.0;
+				IPHONEOS_DEPLOYMENT_TARGET = 10.0;
 				OTHER_CFLAGS = "-DNS_BLOCK_ASSERTIONS=1";
 				OTHER_SWIFT_FLAGS = "";
 				PROVISIONING_PROFILE = "";
@@ -3047,7 +3053,7 @@
 		};
 		38572AF1169D437B00969C62 /* Debug */ = {
 			isa = XCBuildConfiguration;
-			baseConfigurationReference = D6E8FBEB6959EFE06B33C684 /* Pods-We all pay.debug.xcconfig */;
+			baseConfigurationReference = 5696DE762A51B9FE3ABFB3C2 /* Pods-We all pay.debug.xcconfig */;
 			buildSettings = {
 				ALWAYS_EMBED_SWIFT_STANDARD_LIBRARIES = NO;
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
@@ -3059,6 +3065,8 @@
 				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer";
 				"CODE_SIGN_IDENTITY[sdk=macosx*]" = "Mac Developer";
 				CURRENT_PROJECT_VERSION = 156;
+				EXCLUDED_ARCHS = "";
+				"EXCLUDED_ARCHS[sdk=iphonesimulator*]" = "$(inherited)";
 				FRAMEWORK_SEARCH_PATHS = (
 					"$(inherited)",
 					"$(PROJECT_DIR)/Pods/Google-Mobile-Ads-SDK/Frameworks/frameworks",
@@ -3081,7 +3089,7 @@
 					/Applications/Xcode.app/Contents/Developer/Toolchains/XcodeDefault.xctoolchain/usr/include,
 				);
 				INFOPLIST_FILE = "Going Dutch/Info.plist";
-				IPHONEOS_DEPLOYMENT_TARGET = 12.0;
+				IPHONEOS_DEPLOYMENT_TARGET = 11.0;
 				LD_RUNPATH_SEARCH_PATHS = (
 					"$(inherited)",
 					"@executable_path/Frameworks",
@@ -3111,7 +3119,7 @@
 		};
 		38572AF2169D437B00969C62 /* Release */ = {
 			isa = XCBuildConfiguration;
-			baseConfigurationReference = 171290C91236FB3BAFA9C102 /* Pods-We all pay.release.xcconfig */;
+			baseConfigurationReference = 32C4E0B2862F43B84230004F /* Pods-We all pay.release.xcconfig */;
 			buildSettings = {
 				ALWAYS_EMBED_SWIFT_STANDARD_LIBRARIES = NO;
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
@@ -3124,6 +3132,8 @@
 				"CODE_SIGN_IDENTITY[sdk=macosx*]" = "Mac Developer";
 				COPY_PHASE_STRIP = NO;
 				CURRENT_PROJECT_VERSION = 156;
+				EXCLUDED_ARCHS = "";
+				"EXCLUDED_ARCHS[sdk=iphonesimulator*]" = "$(inherited)";
 				FRAMEWORK_SEARCH_PATHS = (
 					"$(inherited)",
 					"$(PROJECT_DIR)/Pods/Google-Mobile-Ads-SDK/Frameworks/frameworks",
@@ -3132,7 +3142,7 @@
 				GCC_PREFIX_HEADER = "Going Dutch/We all pay-Prefix.pch";
 				GCC_SYMBOLS_PRIVATE_EXTERN = YES;
 				INFOPLIST_FILE = "Going Dutch/Info.plist";
-				IPHONEOS_DEPLOYMENT_TARGET = 12.0;
+				IPHONEOS_DEPLOYMENT_TARGET = 11.0;
 				LD_RUNPATH_SEARCH_PATHS = (
 					"$(inherited)",
 					"@executable_path/Frameworks",
@@ -3161,7 +3171,7 @@
 		};
 		385F530D191C2C360012773D /* Debug */ = {
 			isa = XCBuildConfiguration;
-			baseConfigurationReference = 0066679B286A8C26F92F3491 /* Pods-We all pay Tests.debug.xcconfig */;
+			baseConfigurationReference = B625A876EE8842BE11110341 /* Pods-We all pay Tests.debug.xcconfig */;
 			buildSettings = {
 				ALWAYS_EMBED_SWIFT_STANDARD_LIBRARIES = NO;
 				BUNDLE_LOADER = "$(BUILT_PRODUCTS_DIR)/We all pay.app/We all pay";
@@ -3212,7 +3222,7 @@
 		};
 		385F530E191C2C360012773D /* Release */ = {
 			isa = XCBuildConfiguration;
-			baseConfigurationReference = 5791FFD3C55DF5CED3EDA133 /* Pods-We all pay Tests.release.xcconfig */;
+			baseConfigurationReference = E1351BEF2EB267A52384EA3D /* Pods-We all pay Tests.release.xcconfig */;
 			buildSettings = {
 				ALWAYS_EMBED_SWIFT_STANDARD_LIBRARIES = NO;
 				BUNDLE_LOADER = "$(BUILT_PRODUCTS_DIR)/We all pay.app/We all pay";
@@ -3306,7 +3316,7 @@
 				GCC_WARN_UNINITIALIZED_AUTOS = YES;
 				GCC_WARN_UNUSED_FUNCTION = YES;
 				GCC_WARN_UNUSED_VARIABLE = YES;
-				IPHONEOS_DEPLOYMENT_TARGET = 12.0;
+				IPHONEOS_DEPLOYMENT_TARGET = 10.0;
 				ONLY_ACTIVE_ARCH = YES;
 				OTHER_CFLAGS = "-DSCREENSHOTS=1";
 				OTHER_SWIFT_FLAGS = "-DSCREENSHOTS";
@@ -3321,7 +3331,7 @@
 		};
 		38631483235C6A7800748B9F /* Screenshots */ = {
 			isa = XCBuildConfiguration;
-			baseConfigurationReference = CC2E5B95E55F75C4CD17F74D /* Pods-We all pay.screenshots.xcconfig */;
+			baseConfigurationReference = 35E5A25E2A04851F0A6E9CE9 /* Pods-We all pay.screenshots.xcconfig */;
 			buildSettings = {
 				ALWAYS_EMBED_SWIFT_STANDARD_LIBRARIES = NO;
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
@@ -3333,6 +3343,8 @@
 				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer";
 				"CODE_SIGN_IDENTITY[sdk=macosx*]" = "Mac Developer";
 				CURRENT_PROJECT_VERSION = 156;
+				EXCLUDED_ARCHS = "";
+				"EXCLUDED_ARCHS[sdk=iphonesimulator*]" = "$(inherited)";
 				FRAMEWORK_SEARCH_PATHS = (
 					"$(inherited)",
 					"$(PROJECT_DIR)/Pods/Google-Mobile-Ads-SDK/Frameworks/frameworks",
@@ -3345,7 +3357,7 @@
 					/Applications/Xcode.app/Contents/Developer/Toolchains/XcodeDefault.xctoolchain/usr/include,
 				);
 				INFOPLIST_FILE = "Going Dutch/Info.plist";
-				IPHONEOS_DEPLOYMENT_TARGET = 12.0;
+				IPHONEOS_DEPLOYMENT_TARGET = 11.0;
 				LD_RUNPATH_SEARCH_PATHS = (
 					"$(inherited)",
 					"@executable_path/Frameworks",
@@ -3374,7 +3386,7 @@
 		};
 		38631484235C6A7800748B9F /* Screenshots */ = {
 			isa = XCBuildConfiguration;
-			baseConfigurationReference = 300310A132E7251AAAC7DE8D /* Pods-We all pay Tests.screenshots.xcconfig */;
+			baseConfigurationReference = 897E890AFC5AE324D50BDF95 /* Pods-We all pay Tests.screenshots.xcconfig */;
 			buildSettings = {
 				ALWAYS_EMBED_SWIFT_STANDARD_LIBRARIES = NO;
 				BUNDLE_LOADER = "$(BUILT_PRODUCTS_DIR)/We all pay.app/We all pay";
@@ -3450,7 +3462,7 @@
 				GCC_WARN_UNINITIALIZED_AUTOS = YES_AGGRESSIVE;
 				GCC_WARN_UNUSED_FUNCTION = YES;
 				INFOPLIST_FILE = "Who is paying next/Info.plist";
-				IPHONEOS_DEPLOYMENT_TARGET = 12.0;
+				IPHONEOS_DEPLOYMENT_TARGET = 11.0;
 				LD_RUNPATH_SEARCH_PATHS = (
 					"$(inherited)",
 					"@executable_path/Frameworks",
@@ -3504,7 +3516,7 @@
 				GCC_WARN_UNUSED_FUNCTION = YES;
 				INFOPLIST_FILE = WhoPayingUserDefaultsStoreInterface/Info.plist;
 				INSTALL_PATH = "$(LOCAL_LIBRARY_DIR)/Frameworks";
-				IPHONEOS_DEPLOYMENT_TARGET = 12.0;
+				IPHONEOS_DEPLOYMENT_TARGET = 11.0;
 				LD_RUNPATH_SEARCH_PATHS = (
 					"$(inherited)",
 					"@executable_path/Frameworks",
@@ -3594,7 +3606,7 @@
 				GCC_WARN_UNUSED_FUNCTION = YES;
 				INFOPLIST_FILE = CurrencyConverter/Info.plist;
 				INSTALL_PATH = "$(LOCAL_LIBRARY_DIR)/Frameworks";
-				IPHONEOS_DEPLOYMENT_TARGET = 12.0;
+				IPHONEOS_DEPLOYMENT_TARGET = 11.0;
 				LD_RUNPATH_SEARCH_PATHS = (
 					"$(inherited)",
 					"@executable_path/Frameworks",
@@ -3684,7 +3696,7 @@
 				GCC_WARN_UNUSED_FUNCTION = YES;
 				INFOPLIST_FILE = RateMeControllerForiOS/Info.plist;
 				INSTALL_PATH = "$(LOCAL_LIBRARY_DIR)/Frameworks";
-				IPHONEOS_DEPLOYMENT_TARGET = 12.0;
+				IPHONEOS_DEPLOYMENT_TARGET = 11.0;
 				LD_RUNPATH_SEARCH_PATHS = (
 					"$(inherited)",
 					"@executable_path/Frameworks",
@@ -3917,7 +3929,7 @@
 				GCC_WARN_UNUSED_FUNCTION = YES;
 				INFOPLIST_FILE = WhoPayingUserDefaultsStoreInterface/Info.plist;
 				INSTALL_PATH = "$(LOCAL_LIBRARY_DIR)/Frameworks";
-				IPHONEOS_DEPLOYMENT_TARGET = 12.0;
+				IPHONEOS_DEPLOYMENT_TARGET = 11.0;
 				LD_RUNPATH_SEARCH_PATHS = (
 					"$(inherited)",
 					"@executable_path/Frameworks",
@@ -3973,7 +3985,7 @@
 				GCC_WARN_UNUSED_FUNCTION = YES;
 				INFOPLIST_FILE = WhoPayingUserDefaultsStoreInterface/Info.plist;
 				INSTALL_PATH = "$(LOCAL_LIBRARY_DIR)/Frameworks";
-				IPHONEOS_DEPLOYMENT_TARGET = 12.0;
+				IPHONEOS_DEPLOYMENT_TARGET = 11.0;
 				LD_RUNPATH_SEARCH_PATHS = (
 					"$(inherited)",
 					"@executable_path/Frameworks",
@@ -4095,7 +4107,7 @@
 				GCC_WARN_UNINITIALIZED_AUTOS = YES_AGGRESSIVE;
 				GCC_WARN_UNUSED_FUNCTION = YES;
 				INFOPLIST_FILE = "Who is paying next/Info.plist";
-				IPHONEOS_DEPLOYMENT_TARGET = 12.0;
+				IPHONEOS_DEPLOYMENT_TARGET = 11.0;
 				LD_RUNPATH_SEARCH_PATHS = (
 					"$(inherited)",
 					"@executable_path/Frameworks",
@@ -4143,7 +4155,7 @@
 				GCC_WARN_UNINITIALIZED_AUTOS = YES_AGGRESSIVE;
 				GCC_WARN_UNUSED_FUNCTION = YES;
 				INFOPLIST_FILE = "Who is paying next/Info.plist";
-				IPHONEOS_DEPLOYMENT_TARGET = 12.0;
+				IPHONEOS_DEPLOYMENT_TARGET = 11.0;
 				LD_RUNPATH_SEARCH_PATHS = (
 					"$(inherited)",
 					"@executable_path/Frameworks",
@@ -4195,7 +4207,7 @@
 				GCC_WARN_UNUSED_FUNCTION = YES;
 				INFOPLIST_FILE = RateMeControllerForiOS/Info.plist;
 				INSTALL_PATH = "$(LOCAL_LIBRARY_DIR)/Frameworks";
-				IPHONEOS_DEPLOYMENT_TARGET = 12.0;
+				IPHONEOS_DEPLOYMENT_TARGET = 11.0;
 				LD_RUNPATH_SEARCH_PATHS = (
 					"$(inherited)",
 					"@executable_path/Frameworks",
@@ -4250,7 +4262,7 @@
 				GCC_WARN_UNUSED_FUNCTION = YES;
 				INFOPLIST_FILE = RateMeControllerForiOS/Info.plist;
 				INSTALL_PATH = "$(LOCAL_LIBRARY_DIR)/Frameworks";
-				IPHONEOS_DEPLOYMENT_TARGET = 12.0;
+				IPHONEOS_DEPLOYMENT_TARGET = 11.0;
 				LD_RUNPATH_SEARCH_PATHS = (
 					"$(inherited)",
 					"@executable_path/Frameworks",
@@ -4392,7 +4404,7 @@
 				GCC_WARN_UNINITIALIZED_AUTOS = YES;
 				GCC_WARN_UNUSED_FUNCTION = YES;
 				GCC_WARN_UNUSED_VARIABLE = YES;
-				IPHONEOS_DEPLOYMENT_TARGET = 12.0;
+				IPHONEOS_DEPLOYMENT_TARGET = 10.0;
 				ONLY_ACTIVE_ARCH = YES;
 				OTHER_SWIFT_FLAGS = "";
 				PROVISIONING_PROFILE = "";
@@ -4406,7 +4418,7 @@
 		};
 		38E0FCC423CC4E1C002A4488 /* AdTest */ = {
 			isa = XCBuildConfiguration;
-			baseConfigurationReference = A567869166237B132CB2E70B /* Pods-We all pay.adtest.xcconfig */;
+			baseConfigurationReference = CD20D6060285BDFDB4C3ABBE /* Pods-We all pay.adtest.xcconfig */;
 			buildSettings = {
 				ALWAYS_EMBED_SWIFT_STANDARD_LIBRARIES = NO;
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
@@ -4418,6 +4430,8 @@
 				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer";
 				"CODE_SIGN_IDENTITY[sdk=macosx*]" = "Mac Developer";
 				CURRENT_PROJECT_VERSION = 156;
+				EXCLUDED_ARCHS = "";
+				"EXCLUDED_ARCHS[sdk=iphonesimulator*]" = "$(inherited)";
 				FRAMEWORK_SEARCH_PATHS = (
 					"$(inherited)",
 					"$(PROJECT_DIR)/Pods/Google-Mobile-Ads-SDK/Frameworks/frameworks",
@@ -4440,7 +4454,7 @@
 					/Applications/Xcode.app/Contents/Developer/Toolchains/XcodeDefault.xctoolchain/usr/include,
 				);
 				INFOPLIST_FILE = "Going Dutch/Info.plist";
-				IPHONEOS_DEPLOYMENT_TARGET = 12.0;
+				IPHONEOS_DEPLOYMENT_TARGET = 11.0;
 				LD_RUNPATH_SEARCH_PATHS = (
 					"$(inherited)",
 					"@executable_path/Frameworks",
@@ -4470,7 +4484,7 @@
 		};
 		38E0FCC523CC4E1C002A4488 /* AdTest */ = {
 			isa = XCBuildConfiguration;
-			baseConfigurationReference = 0DD08E9688A7AC237DACDDE8 /* Pods-We all pay Tests.adtest.xcconfig */;
+			baseConfigurationReference = 0AC0C6B8AE42E198B7DCBCA0 /* Pods-We all pay Tests.adtest.xcconfig */;
 			buildSettings = {
 				ALWAYS_EMBED_SWIFT_STANDARD_LIBRARIES = NO;
 				BUNDLE_LOADER = "$(BUILT_PRODUCTS_DIR)/We all pay.app/We all pay";
@@ -4546,7 +4560,7 @@
 				GCC_WARN_UNINITIALIZED_AUTOS = YES_AGGRESSIVE;
 				GCC_WARN_UNUSED_FUNCTION = YES;
 				INFOPLIST_FILE = "Who is paying next/Info.plist";
-				IPHONEOS_DEPLOYMENT_TARGET = 12.0;
+				IPHONEOS_DEPLOYMENT_TARGET = 11.0;
 				LD_RUNPATH_SEARCH_PATHS = (
 					"$(inherited)",
 					"@executable_path/Frameworks",
@@ -4600,7 +4614,7 @@
 				GCC_WARN_UNUSED_FUNCTION = YES;
 				INFOPLIST_FILE = WhoPayingUserDefaultsStoreInterface/Info.plist;
 				INSTALL_PATH = "$(LOCAL_LIBRARY_DIR)/Frameworks";
-				IPHONEOS_DEPLOYMENT_TARGET = 12.0;
+				IPHONEOS_DEPLOYMENT_TARGET = 11.0;
 				LD_RUNPATH_SEARCH_PATHS = (
 					"$(inherited)",
 					"@executable_path/Frameworks",
@@ -4690,7 +4704,7 @@
 				GCC_WARN_UNUSED_FUNCTION = YES;
 				INFOPLIST_FILE = CurrencyConverter/Info.plist;
 				INSTALL_PATH = "$(LOCAL_LIBRARY_DIR)/Frameworks";
-				IPHONEOS_DEPLOYMENT_TARGET = 12.0;
+				IPHONEOS_DEPLOYMENT_TARGET = 11.0;
 				LD_RUNPATH_SEARCH_PATHS = (
 					"$(inherited)",
 					"@executable_path/Frameworks",
@@ -4780,7 +4794,7 @@
 				GCC_WARN_UNUSED_FUNCTION = YES;
 				INFOPLIST_FILE = RateMeControllerForiOS/Info.plist;
 				INSTALL_PATH = "$(LOCAL_LIBRARY_DIR)/Frameworks";
-				IPHONEOS_DEPLOYMENT_TARGET = 12.0;
+				IPHONEOS_DEPLOYMENT_TARGET = 11.0;
 				LD_RUNPATH_SEARCH_PATHS = (
 					"$(inherited)",
 					"@executable_path/Frameworks",

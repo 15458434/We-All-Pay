@@ -111,7 +111,7 @@
 - (UITableViewCell *)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath {
     MCPerson *thisCellsPerson = [_dataController objectAtIndexPath:indexPath];
     PersonTableViewCell_iPad *thisCell = [tableView dequeueReusableCellWithIdentifier:@"MCPersonTableViewCell_iPad"];
-    thisCell.accessibilityLabel = [NSString stringWithFormat:@"PersonTableViewCell-%lu", indexPath.row];
+    thisCell.accessibilityLabel = [NSString stringWithFormat:@"PersonTableViewCell-%d", (int32_t)indexPath.row];
     
     thisCell.personImage.image = thisCellsPerson.picture;
     thisCell.nameLabel.text = [thisCellsPerson getFullName];

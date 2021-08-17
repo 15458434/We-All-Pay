@@ -21,6 +21,8 @@
 #import "MCPerson+addons.h"
 #import "MCPayment+addons.h"
 
+#import "UIColor+ColorSpawn.h"
+
 #import "We_all_pay-Swift.h"
 
 @interface MCAppDelegate ()
@@ -39,7 +41,7 @@
     [MCRemoteConfigEngine prepareRemoteConfig];
     
     _launchCounter = [[MCLaunchCounter alloc] init];
-    uint64_t result = [_launchCounter increment];
+    [_launchCounter increment];
 }
 
 - (void)executeOnlyOnceDuringStartup {
@@ -57,10 +59,22 @@
     }];
 
     // Set colors throughout the App.
-    UINavigationBar.appearance.barTintColor = [UIColor colorNamed:@"navigationBar"];
-    UINavigationBar.appearance.tintColor = [UIColor colorNamed:@"button - enabled"];
+    if (@available(iOS 11.0, *)) {
+        UINavigationBar.appearance.barTintColor = [UIColor colorNamed:@"navigationBar"];
+        UINavigationBar.appearance.tintColor = [UIColor colorNamed:@"button - enabled"];
+    } else {
+        // Fallback on earlier versions
+        UINavigationBar.appearance.barTintColor = [UIColor colorWithColorType:MCColorTypeNavigationBar];
+        UINavigationBar.appearance.tintColor = [UIColor colorWithColorType:MCColorTypeButtonEnabled];
+        
+    };
     [[UINavigationBar appearance] setTitleTextAttributes:@{NSForegroundColorAttributeName: [UIColor whiteColor]}];
-    [UIButton.appearance setTitleColor:[UIColor colorNamed:@"button - enabled"] forState:UIControlStateNormal];
+    if (@available(iOS 11.0, *)) {
+        [UIButton.appearance setTitleColor:[UIColor colorNamed:@"button - enabled"] forState:UIControlStateNormal];
+    } else {
+        // Fallback on earlier versions
+        [UIButton.appearance setTitleColor:[UIColor colorWithColorType:MCColorTypeButtonEnabled] forState:UIControlStateNormal];
+    }
     if (@available(iOS 13.0, *)) {
         [MCRoundedButton.appearance setTitleColor:UIColor.systemBackgroundColor forState:UIControlStateNormal];
         [MCRoundedButton.appearance setTitleColor:UIColor.systemBackgroundColor forState:UIControlStateHighlighted];
@@ -69,16 +83,37 @@
         [MCRoundedButton.appearance setTitleColor:UIColor.whiteColor forState:UIControlStateHighlighted];
     }
 
-    [UIButton.appearance setTitleColor:[UIColor colorNamed:@"button - disabled"] forState:UIControlStateDisabled];
-    UIBarButtonItem.appearance.tintColor = [UIColor colorNamed:@"button - enabled"];
+    if (@available(iOS 11.0, *)) {
+        [UIButton.appearance setTitleColor:[UIColor colorNamed:@"button - disabled"] forState:UIControlStateDisabled];
+    } else {
+        // Fallback on earlier versions
+        [UIButton.appearance setTitleColor:[UIColor colorWithColorType:MCColorTypeButtonDisabled] forState:UIControlStateDisabled];
+    }
+    if (@available(iOS 11.0, *)) {
+        UIBarButtonItem.appearance.tintColor = [UIColor colorNamed:@"button - enabled"];
+    } else {
+        // Fallback on earlier versions
+        UIBarButtonItem.appearance.tintColor = [UIColor colorWithColorType:MCColorTypeButtonEnabled];
+    }
     UINavigationBar.appearance.barStyle = UIBarStyleBlackTranslucent;
     [[UIButton appearanceWhenContainedInInstancesOfClasses:@[[UITableViewCell class]]] setTitleColor:[UIColor whiteColor] forState:UIControlStateNormal];
     // Set the background color in the peoplepicker.
-    UISearchBar.appearance.barTintColor = [UIColor colorNamed:@"background"];
+    if (@available(iOS 11.0, *)) {
+        UISearchBar.appearance.barTintColor = [UIColor colorNamed:@"background"];
+    } else {
+        // Fallback on earlier versions
+        UISearchBar.appearance.barTintColor = [UIColor colorWithColorType:MCColorTypeBackground];
+    }
     
     // Set the color of the cancelButton of the search bar
     UIBarButtonItem *addressBookSearchBarCancelButton = [UIBarButtonItem appearanceWhenContainedInInstancesOfClasses:@[[UISearchBar class]]];
-    UIColor *addressBookSearchBarCancelButtonColor = [UIColor colorNamed:@"button - enabled"];
+    UIColor *addressBookSearchBarCancelButtonColor;
+    if (@available(iOS 11.0, *)) {
+        addressBookSearchBarCancelButtonColor = [UIColor colorNamed:@"button - enabled"];
+    } else {
+        // Fallback on earlier versions
+        addressBookSearchBarCancelButtonColor = [UIColor colorWithColorType:MCColorTypeButtonEnabled];
+    }
     NSMutableDictionary *colorDictionary = [NSMutableDictionary dictionaryWithObjectsAndKeys:
                                             addressBookSearchBarCancelButtonColor,
                                             NSForegroundColorAttributeName,
@@ -90,7 +125,12 @@
     }
     
     // Set the sectionIndex color in the people picker
-    UITableView.appearance.sectionIndexColor = [UIColor colorNamed:@"button - enabled"];
+    if (@available(iOS 11.0, *)) {
+        UITableView.appearance.sectionIndexColor = [UIColor colorNamed:@"button - enabled"];
+    } else {
+        // Fallback on earlier versions
+        UITableView.appearance.sectionIndexColor = [UIColor colorWithColorType:MCColorTypeButtonEnabled];
+    }
     
 //    [[UINavigationBar appearance] setBarStyle:UIBarStyleBlack];
     

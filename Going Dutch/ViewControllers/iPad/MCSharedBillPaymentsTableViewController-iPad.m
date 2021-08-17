@@ -105,7 +105,7 @@
 - (UITableViewCell *)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath {
     MCPayment *thisCellsPayment = [_dataController objectAtIndexPath:indexPath];
     PaymentTableViewCell_iPad *thisCell = [tableView dequeueReusableCellWithIdentifier:@"MCPaymentTableViewCell_iPad"];
-    thisCell.accessibilityIdentifier = [NSString stringWithFormat:@"PaymentTableViewCell-%lu", indexPath.row];
+    thisCell.accessibilityIdentifier = [NSString stringWithFormat:@"PaymentTableViewCell-%d", (int32_t)indexPath.row];
     
     NSString *thisCellsPayerName;
     if ([thisCellsPayment payingPerson]) {
