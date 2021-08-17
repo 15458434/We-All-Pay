@@ -52,7 +52,14 @@
         [self presentViewController:alertController animated:YES completion:nil];
         return;
     }
-    [self performSegueWithIdentifier:@"openPaymentView" sender:self];
+    
+    UIUserInterfaceSizeClass horizontalSizeClass = self.traitCollection.horizontalSizeClass;
+    UIUserInterfaceSizeClass verticalSizeClass = self.traitCollection.verticalSizeClass;
+    if (horizontalSizeClass == UIUserInterfaceSizeClassRegular && verticalSizeClass == UIUserInterfaceSizeClassRegular) {
+        [self performSegueWithIdentifier:@"newPayment_iPad" sender:self];
+    } else {
+        [self performSegueWithIdentifier:@"openPaymentView" sender:self];
+    }
 }
 
 - (IBAction)solveButtonPressed:(id)sender {
@@ -361,6 +368,13 @@
         UINavigationController *navController = (UINavigationController *)segue.destinationViewController;
         SolutionViewController *destination = navController.viewControllers.firstObject;
         [destination updateEvent:_tonightsBill andSendMailDelegate:_mailDelegate andAdEngine:self.adEngine];
+    } else if ([segue.identifier isEqualToString:@"newPayment_iPad"]) {
+        UINavigationController *navController = (UINavigationController *)segue.destinationViewController;
+        if (@available(iOS 13.0, *)) {
+            navController.modalInPresentation = YES;
+        }
+        PaymentViewController *destination = (PaymentViewController *)navController.viewControllers.firstObject;
+        destination.tonightsBill = _tonightsBill;
     } else if ([segue.identifier isEqualToString:@"openSolutionView_iPad"]) {
         UINavigationController *navController = (UINavigationController *)segue.destinationViewController;
         SolutionTableViewController_iPad *destination = (SolutionTableViewController_iPad *)navController.viewControllers.firstObject;

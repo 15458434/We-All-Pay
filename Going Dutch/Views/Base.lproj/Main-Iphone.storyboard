@@ -334,6 +334,7 @@
                         <segue destination="R4f-Dn-Lh4" kind="presentation" identifier="openPaymentView" id="z3e-Vr-AS7"/>
                         <segue destination="R4f-Dn-Lh4" kind="presentation" identifier="openPaymentWithMissingData" id="jjg-NC-1KA"/>
                         <segue destination="TN3-5I-Xh1" kind="presentation" identifier="openSolutionView_iPad" modalPresentationStyle="pageSheet" id="0JD-7F-G1N"/>
+                        <segue destination="ydW-Fj-sXo" kind="presentation" identifier="newPayment_iPad" id="rBl-ko-MHe"/>
                     </connections>
                 </tableViewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="aDR-YO-8As" userLabel="First Responder" sceneMemberID="firstResponder"/>
@@ -615,7 +616,7 @@
                 <viewControllerPlaceholder storyboardName="Main-iPad" referencedIdentifier="solutionNavigationController" id="TN3-5I-Xh1" sceneMemberID="viewController"/>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="Nzn-J2-Ftr" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="2332" y="1175"/>
+            <point key="canvasLocation" x="2606" y="1176"/>
         </scene>
         <!--NotificationsTableViewController-->
         <scene sceneID="eFd-pQ-f3n">
@@ -859,7 +860,7 @@
                 <placeholder placeholderIdentifier="IBFirstResponder" id="Ohk-bB-ROF" userLabel="First Responder" sceneMemberID="firstResponder"/>
                 <customObject id="XfM-xE-BZB" customClass="MCAdBannerEngine"/>
             </objects>
-            <point key="canvasLocation" x="4338.3999999999996" y="1480.7881773399015"/>
+            <point key="canvasLocation" x="3266" y="1880"/>
         </scene>
         <!--Edit Trip View Controller-->
         <scene sceneID="oI0-bg-Ai3">
@@ -1569,6 +1570,14 @@
             </objects>
             <point key="canvasLocation" x="4338.3999999999996" y="721.92118226600985"/>
         </scene>
+        <!--navPaymentViewController-->
+        <scene sceneID="Fsn-Rc-QGP">
+            <objects>
+                <viewControllerPlaceholder storyboardName="Main-iPad" referencedIdentifier="navPaymentViewController" id="ydW-Fj-sXo" sceneMemberID="viewController"/>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="nW1-mr-hxl" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
+            </objects>
+            <point key="canvasLocation" x="2062" y="1176"/>
+        </scene>
         <!--Select currency-->
         <scene sceneID="U7d-49-WP1">
             <objects>
@@ -1721,7 +1730,7 @@
                 </navigationController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="WYW-P2-ana" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="3352.5" y="1480.9859154929577"/>
+            <point key="canvasLocation" x="2332" y="1880"/>
         </scene>
         <!--Navigation Controller-->
         <scene sceneID="kuh-rf-mIe">
@@ -1836,7 +1845,7 @@
         </designable>
     </designables>
     <inferredMetricsTieBreakers>
-        <segue reference="AFT-dx-z90"/>
+        <segue reference="M9w-sI-koW"/>
         <segue reference="eZd-I3-t8D"/>
         <segue reference="3RZ-mk-Dh4"/>
         <segue reference="d9O-xp-imC"/>

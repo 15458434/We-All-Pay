@@ -335,17 +335,6 @@
         return;
     }
     
-    // When newPerson segue is used to add a new payment to tonightsbill.
-    if ([[segue identifier] isEqualToString:@"newPayment"]) {
-        UINavigationController *navController = (UINavigationController *)segue.destinationViewController;
-        if (@available(iOS 13.0, *)) {
-            navController.modalInPresentation = YES;
-        }
-        PaymentViewController *destination = (PaymentViewController *)navController.viewControllers.firstObject;
-        destination.tonightsBill = _tonightsBill;
-        return;
-    }
-    
     // Use this string to open payment view with the first payment without payer.
     if ([segue.identifier isEqualToString:@"firstPaymentWithoutPayer"]) {
         UINavigationController *navController = (UINavigationController *)segue.destinationViewController;
