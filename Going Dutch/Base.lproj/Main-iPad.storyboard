@@ -934,22 +934,6 @@
             </objects>
             <point key="canvasLocation" x="5255" y="744"/>
         </scene>
-        <!--Navigation Controller-->
-        <scene sceneID="g7U-q4-hyE">
-            <objects>
-                <placeholder placeholderIdentifier="IBFirstResponder" id="z0I-Oj-QeZ" userLabel="First Responder" sceneMemberID="firstResponder"/>
-                <navigationController id="lZi-iw-OMC" sceneMemberID="viewController">
-                    <navigationBar key="navigationBar" contentMode="scaleToFill" id="1Lb-dr-wWg">
-                        <rect key="frame" x="0.0" y="0.0" width="834" height="50"/>
-                        <autoresizingMask key="autoresizingMask"/>
-                    </navigationBar>
-                    <connections>
-                        <segue destination="Z9a-Hu-qSZ" kind="relationship" relationship="rootViewController" id="hVz-7y-nVI"/>
-                    </connections>
-                </navigationController>
-            </objects>
-            <point key="canvasLocation" x="4706" y="1443"/>
-        </scene>
         <!--Select Currency Table View Controller-->
         <scene sceneID="ThZ-ve-uHv">
             <objects>
@@ -1142,27 +1126,9 @@
             <point key="canvasLocation" x="2482.8125" y="-73.2421875"/>
         </scene>
     </scenes>
-    <designables>
-        <designable name="9MV-Ie-wK3">
-            <size key="intrinsicContentSize" width="480" height="480"/>
-        </designable>
-        <designable name="Z3O-c0-2tS">
-            <size key="intrinsicContentSize" width="480" height="480"/>
-        </designable>
-        <designable name="gvW-A9-uVj">
-            <size key="intrinsicContentSize" width="480" height="480"/>
-        </designable>
-        <designable name="jaj-RZ-MiC">
-            <size key="intrinsicContentSize" width="480" height="480"/>
-        </designable>
-        <designable name="xcc-E7-c0h">
-            <size key="intrinsicContentSize" width="480" height="480"/>
-        </designable>
-    </designables>
     <inferredMetricsTieBreakers>
         <segue reference="pZQ-Y2-0Nm"/>
         <segue reference="qrR-J2-mhx"/>
-        <segue reference="aJ5-e8-dvs"/>
     </inferredMetricsTieBreakers>
     <resources>
         <image name="barbutton - cancel" width="22" height="22"/>
