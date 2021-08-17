@@ -1,5 +1,5 @@
 source 'https://github.com/CocoaPods/Specs.git'
-platform :ios, '11.0'
+platform :ios, '10.0'
 
 target 'We all pay' do
     use_frameworks!
@@ -30,8 +30,8 @@ post_install do | installer |
     FileUtils.cp_r('Pods/Target Support Files/Pods-We all pay/Pods-We all pay-acknowledgements.plist', 'Going Dutch/Settings.bundle/Acknowledgements.plist', :remove_destination => true)
     installer.pods_project.targets.each do |target|
         target.build_configurations.each do |config|
-            if config.build_settings['IPHONEOS_DEPLOYMENT_TARGET'].to_f < 11.0
-                config.build_settings['IPHONEOS_DEPLOYMENT_TARGET'] = '11.0'
+            if config.build_settings['IPHONEOS_DEPLOYMENT_TARGET'].to_f < 10.0
+                config.build_settings['IPHONEOS_DEPLOYMENT_TARGET'] = '10.0'
             end
             config.build_settings['Architectures'] = '$(ARCHS_STANDARD)'
         end

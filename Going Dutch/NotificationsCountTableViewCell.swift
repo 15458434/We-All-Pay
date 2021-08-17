@@ -9,7 +9,7 @@
 import UIKit
 import WeAllPayDesignableUI
 
-final class NotificationsCountTableViewCell: UITableViewCell {
+@objc(MCNotificationsCountTableViewCell) final class NotificationsCountTableViewCell: UITableViewCell {
     @objc private weak var model: NotificationsInfoModel!
     
     @IBOutlet weak var leftLabel: UILabel!
