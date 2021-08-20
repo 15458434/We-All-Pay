@@ -470,7 +470,7 @@
                                     <rect key="frame" x="0.0" y="0.0" width="375" height="38.333332061767578"/>
                                     <autoresizingMask key="autoresizingMask"/>
                                     <subviews>
-                                        <stackView opaque="NO" contentMode="scaleToFill" distribution="equalSpacing" alignment="firstBaseline" spacing="6" translatesAutoresizingMaskIntoConstraints="NO" id="oy1-ge-dQV">
+                                        <stackView opaque="NO" contentMode="scaleToFill" distribution="equalSpacing" alignment="center" spacing="6" translatesAutoresizingMaskIntoConstraints="NO" id="oy1-ge-dQV">
                                             <rect key="frame" x="20" y="10.999999999999998" width="335" height="17.333333333333329"/>
                                             <subviews>
                                                 <label clipsSubviews="YES" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" restorationIdentifier="firstLabel" text="Label" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" minimumScaleFactor="0.5" translatesAutoresizingMaskIntoConstraints="NO" id="JaE-Fp-cO9">
@@ -480,7 +480,7 @@
                                                     <nil key="highlightedColor"/>
                                                 </label>
                                                 <label clipsSubviews="YES" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="252" verticalHuggingPriority="251" horizontalCompressionResistancePriority="751" restorationIdentifier="rightLabel" text="Label" textAlignment="right" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="Yd0-Ev-8xr">
-                                                    <rect key="frame" x="304" y="2.333333333333333" width="31" height="14.333333333333336"/>
+                                                    <rect key="frame" x="304" y="1.6666666666666652" width="31" height="14.333333333333336"/>
                                                     <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                                     <fontDescription key="fontDescription" style="UICTFontTextStyleSubhead"/>
                                                     <nil key="highlightedColor"/>
