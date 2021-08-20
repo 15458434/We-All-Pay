@@ -40,16 +40,16 @@ typedef NS_ENUM(BOOL, MCXRateStatus) {
 
 - (IBAction)mainCancelButton:(id)sender {
     if (_solution == nil || _solution.count == 0) {
-        _dismissMe();
+        [self.navigationController.presentingViewController dismissViewControllerAnimated:YES completion:nil];
     } else if (self.adEngine.interstitialAd.isReady) {
         NSError *adError;
         [self.adEngine putOnScreenIfAvailableWithPresentingViewController:self error:&adError];
         if (adError) {
             NSLog(@"Error: Unable to show interstitial: %@", adError);
-            _dismissMe();
+            [self.navigationController.presentingViewController dismissViewControllerAnimated:YES completion:nil];
         }
     } else {
-        _dismissMe();
+        [self.navigationController.presentingViewController dismissViewControllerAnimated:YES completion:nil];
     }
 }
 
@@ -154,11 +154,8 @@ typedef NS_ENUM(BOOL, MCXRateStatus) {
     }
 }
 
-- (void)updateAdEngine:(MCInterstitialAdEngine *)adEngine andEvent:(MCSharedBill *)event andDismissBlock:(void (^)(void))dismissMe {
-    self.adEngine = adEngine;
-    self.loadInterstitialOnViewDidLoad = YES;
+- (void)updateEvent:(MCSharedBill *)event {
     self.tonightsBill = event;
-    self.dismissMe = dismissMe;
 }
 
 #pragma mark - MCGenericInterstitialAdTableViewController
@@ -174,7 +171,7 @@ typedef NS_ENUM(BOOL, MCXRateStatus) {
 #pragma mark - MCInterstitialAdEngineDelegate
 
 - (void)willDismissInterstatialFor:(MCInterstitialAdEngine *)adEngine {
-    _dismissMe();
+    [self.navigationController.presentingViewController dismissViewControllerAnimated:YES completion:nil];
 }
 
 #pragma mark - UITableViewController

@@ -14,4 +14,22 @@ final class MCPersonTableViewCell: UITableViewCell {
     @IBOutlet var nameLabel: UILabel!
     @IBOutlet var emailLabel: UILabel!
     @IBOutlet var totalSpent: UILabel!
+    
+    // MARK: UITableViewCell
+    
+    // MARK: UIView
+    
+    // MARK: UIResponder
+    
+    // MARK: NSObject
+    
+    #if TARGET_INTERFACE_BUILDER
+    override class func prepareForInterfaceBuilder() {
+        super.prepareForInterfaceBuilder()
+        self.nameLabel.text = "Merit Koelink"
+        self.emailLabel.text = "merit@gitaarspelen.nl"
+        self.totalSpent.text = "$67,42"
+    }
+    #endif
+
 }
