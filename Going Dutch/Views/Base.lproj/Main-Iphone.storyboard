@@ -1585,26 +1585,29 @@
                                     <rect key="frame" x="0.0" y="0.0" width="375" height="44"/>
                                     <autoresizingMask key="autoresizingMask"/>
                                     <subviews>
-                                        <label opaque="NO" clipsSubviews="YES" userInteractionEnabled="NO" contentMode="left" horizontalCompressionResistancePriority="250" text="Label" lineBreakMode="wordWrap" numberOfLines="0" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="aOd-AZ-MTT">
-                                            <rect key="frame" x="20" y="14" width="286" height="16"/>
-                                            <fontDescription key="fontDescription" type="system" weight="light" pointSize="17"/>
-                                            <color key="textColor" red="0.0" green="0.0" blue="0.0" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
-                                            <nil key="highlightedColor"/>
-                                        </label>
-                                        <label opaque="NO" clipsSubviews="YES" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" horizontalCompressionResistancePriority="251" text="Label" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="DOO-YK-wFy">
-                                            <rect key="frame" x="314" y="14.000000000000002" width="41" height="20.666666666666671"/>
-                                            <fontDescription key="fontDescription" type="system" weight="light" pointSize="17"/>
-                                            <nil key="highlightedColor"/>
-                                        </label>
+                                        <stackView opaque="NO" contentMode="scaleToFill" distribution="equalSpacing" alignment="center" spacing="8" translatesAutoresizingMaskIntoConstraints="NO" id="QT2-00-KgV">
+                                            <rect key="frame" x="20" y="3" width="335" height="38"/>
+                                            <subviews>
+                                                <label opaque="NO" clipsSubviews="YES" userInteractionEnabled="NO" contentMode="left" horizontalCompressionResistancePriority="250" text="Label" lineBreakMode="wordWrap" numberOfLines="0" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="aOd-AZ-MTT">
+                                                    <rect key="frame" x="0.0" y="10.666666666666664" width="163.66666666666666" height="17"/>
+                                                    <fontDescription key="fontDescription" style="UICTFontTextStyleHeadline"/>
+                                                    <color key="textColor" red="0.0" green="0.0" blue="0.0" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                                                    <nil key="highlightedColor"/>
+                                                </label>
+                                                <label opaque="NO" clipsSubviews="YES" userInteractionEnabled="NO" contentMode="left" verticalHuggingPriority="251" text="Label" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="DOO-YK-wFy">
+                                                    <rect key="frame" x="304" y="12" width="31" height="14.333333333333336"/>
+                                                    <fontDescription key="fontDescription" style="UICTFontTextStyleSubhead"/>
+                                                    <nil key="highlightedColor"/>
+                                                </label>
+                                            </subviews>
+                                            <viewLayoutGuide key="safeArea" id="CQ4-dW-Djg"/>
+                                        </stackView>
                                     </subviews>
                                     <constraints>
-                                        <constraint firstItem="aOd-AZ-MTT" firstAttribute="leading" secondItem="fam-A9-hoy" secondAttribute="leading" constant="20" symbolic="YES" id="39U-WF-qdL"/>
-                                        <constraint firstAttribute="centerY" secondItem="aOd-AZ-MTT" secondAttribute="centerY" priority="800" id="Nff-al-cse"/>
-                                        <constraint firstAttribute="bottomMargin" secondItem="aOd-AZ-MTT" secondAttribute="bottom" constant="3" id="WVx-la-ca9"/>
-                                        <constraint firstItem="aOd-AZ-MTT" firstAttribute="top" secondItem="DOO-YK-wFy" secondAttribute="top" id="Wmo-1V-Qi4"/>
-                                        <constraint firstAttribute="trailing" secondItem="DOO-YK-wFy" secondAttribute="trailing" constant="20" symbolic="YES" id="erl-R2-W0f"/>
-                                        <constraint firstItem="aOd-AZ-MTT" firstAttribute="top" secondItem="fam-A9-hoy" secondAttribute="topMargin" constant="3" id="kvO-38-xfD"/>
-                                        <constraint firstItem="DOO-YK-wFy" firstAttribute="leading" secondItem="aOd-AZ-MTT" secondAttribute="trailing" constant="8" symbolic="YES" id="rMJ-GZ-pUh"/>
+                                        <constraint firstAttribute="bottom" secondItem="QT2-00-KgV" secondAttribute="bottom" constant="3" id="R4J-zn-F3u"/>
+                                        <constraint firstItem="QT2-00-KgV" firstAttribute="leading" secondItem="fam-A9-hoy" secondAttribute="leading" constant="20" symbolic="YES" id="U9D-9N-EeN"/>
+                                        <constraint firstAttribute="trailing" secondItem="QT2-00-KgV" secondAttribute="trailing" constant="20" symbolic="YES" id="YLP-zh-cAe"/>
+                                        <constraint firstItem="QT2-00-KgV" firstAttribute="top" secondItem="fam-A9-hoy" secondAttribute="top" constant="3" id="oMg-OG-O1P"/>
                                     </constraints>
                                 </tableViewCellContentView>
                                 <connections>
