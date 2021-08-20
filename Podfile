@@ -32,7 +32,6 @@ post_install do | installer |
             if config.build_settings['IPHONEOS_DEPLOYMENT_TARGET'].to_f < 10.0
                 config.build_settings['IPHONEOS_DEPLOYMENT_TARGET'] = '10.0'
             end
-            #config.build_settings['Architectures'] = '$(ARCHS_STANDARD)'
         end
     end
 end
