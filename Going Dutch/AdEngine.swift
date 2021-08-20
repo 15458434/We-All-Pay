@@ -39,17 +39,6 @@ import GoogleMobileAds
                 self = .unknown
             }
         }
-        
-        init(consentType: UMPConsentType) {
-            switch consentType {
-            case .personalized:
-                self = .personalized
-            case .nonPersonalized:
-                self = .nonPersonalized
-            default:
-                self = .unknown
-            }
-        }
     }
     
     enum EconomicArea {
@@ -137,7 +126,7 @@ import GoogleMobileAds
     }
     
     var request: GADRequest {
-        let newRequest = DFPRequest()
+        let newRequest = GADRequest()
         return newRequest
     }
     
