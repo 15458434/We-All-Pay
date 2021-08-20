@@ -13,10 +13,6 @@ import UserMessagingPlatform
 
 import PersonalizedAdConsent
 import GoogleMobileAds
-import InMobiAdapter
-import AdColonyAdapter
-//import AppLovinSDK
-import MoPub
 
 @objc(MCAdEngine) @objcMembers open class AdEngine: NSObject {
     // TODO: Remove on 14-08-2022
