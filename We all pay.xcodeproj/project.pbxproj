@@ -813,6 +813,8 @@
 				381275FE1BBD84650004C8C2 /* InfoScreenTableViewController.swift */,
 				3813150726CBA1BA00C27CBB /* MCNotificationsCountTableViewCell.h */,
 				3813150826CBA1BA00C27CBB /* MCNotificationsCountTableViewCell.m */,
+				3897157917901D0F005BE03E /* MCTwoLabelsTitleView.xib */,
+				38E36EED1BBD7E820026ED7E /* MCTwoLabelsTitleView.swift */,
 			);
 			name = InfoScreenTable;
 			sourceTree = "<group>";
@@ -919,6 +921,7 @@
 			children = (
 				38572AF6169D443C00969C62 /* MCAllTripsTableViewController.h */,
 				38572B09169F3D2700969C62 /* MCAllTripsTableViewController.m */,
+				38977E621B2A37BC008484A4 /* MCAllTripsTableViewCell.swift */,
 				3841F8D223893A0A00882E40 /* EventsModel.swift */,
 				380327FF2698443300744710 /* NotificationsInfoModel.swift */,
 			);
@@ -1025,8 +1028,6 @@
 			isa = PBXGroup;
 			children = (
 				3898F33718F2CBCD00BFFC61 /* iPad */,
-				3897157917901D0F005BE03E /* MCTwoLabelsTitleView.xib */,
-				38E36EED1BBD7E820026ED7E /* MCTwoLabelsTitleView.swift */,
 				38DC8B38190911BE00762235 /* iPhone */,
 				3867CE4218704161001EC222 /* Storyboard */,
 			);
@@ -1339,12 +1340,10 @@
 		38DC8B38190911BE00762235 /* iPhone */ = {
 			isa = PBXGroup;
 			children = (
-				38977E621B2A37BC008484A4 /* MCAllTripsTableViewCell.swift */,
 				38977E601B2A367E008484A4 /* MCPaymentTableViewCell.swift */,
 				38977E5E1B2A32EF008484A4 /* MCPersonTableViewCell.swift */,
 				38977E5C1B2A31A2008484A4 /* MCSolutionOverViewTableViewCell_iPhone.swift */,
 				38977E5A1B2A30A7008484A4 /* MCWhoOwesWhoTableViewCell_iPhone.swift */,
-				38977E561B2A2C57008484A4 /* MCPaymentPresenceTableViewCell_iPhone.swift */,
 				38977E541B2A2AE3008484A4 /* MCSelectCurrencyTableViewCell_iPhone.swift */,
 				38977E521B2A297E008484A4 /* MCWhoPaidHowMuchTableViewCell_iPhone.swift */,
 				38977E4E1B2A26D4008484A4 /* MCTwoLabelIscreenTableViewCell.swift */,
@@ -1389,6 +1388,7 @@
 			children = (
 				3830F6F4179872B400904FAF /* MCPaymentViewController.h */,
 				3830F6F5179872B400904FAF /* MCPaymentViewController.m */,
+				38977E561B2A2C57008484A4 /* MCPaymentPresenceTableViewCell_iPhone.swift */,
 				38ACC5A2236B1FAE000BDEEC /* PaymentModel.swift */,
 				38A8F2A823C2883600CB3B73 /* PayerTextInputPicker.swift */,
 				38A8F2A523C2583200CB3B73 /* DescriptionOfPaymentTextInputValidator.swift */,
