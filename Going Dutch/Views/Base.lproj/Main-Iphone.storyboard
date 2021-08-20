@@ -1048,35 +1048,35 @@
                                                 <rect key="frame" x="20" y="10" width="335" height="583"/>
                                                 <subviews>
                                                     <stackView opaque="NO" contentMode="scaleToFill" axis="vertical" alignment="center" spacing="10" translatesAutoresizingMaskIntoConstraints="NO" id="U7J-zz-CBD">
-                                                        <rect key="frame" x="67.666666666666686" y="0.0" width="200" height="323"/>
+                                                        <rect key="frame" x="17.666666666666657" y="0.0" width="300" height="323"/>
                                                         <subviews>
                                                             <imageView opaque="NO" userInteractionEnabled="NO" contentMode="scaleAspectFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="circularPictureInCodeDemo.png" translatesAutoresizingMaskIntoConstraints="NO" id="jMQ-DN-rdu" customClass="CircularImageView" customModule="WeAllPayDesignableUI">
-                                                                <rect key="frame" x="30" y="0.0" width="140" height="140"/>
+                                                                <rect key="frame" x="80" y="0.0" width="140" height="140"/>
                                                                 <constraints>
                                                                     <constraint firstAttribute="width" secondItem="jMQ-DN-rdu" secondAttribute="height" multiplier="1:1" id="WAT-1N-Djc"/>
                                                                     <constraint firstAttribute="width" constant="140" id="sG3-hE-ZLH"/>
                                                                 </constraints>
                                                             </imageView>
                                                             <textField opaque="NO" clipsSubviews="YES" contentMode="scaleToFill" restorationIdentifier="firstNameField" contentHorizontalAlignment="left" contentVerticalAlignment="center" borderStyle="roundedRect" placeholder="First Name" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="GN1-dN-HP2">
-                                                                <rect key="frame" x="0.0" y="150" width="200" height="34"/>
+                                                                <rect key="frame" x="0.0" y="150" width="300" height="34"/>
                                                                 <constraints>
-                                                                    <constraint firstAttribute="width" relation="greaterThanOrEqual" priority="999" constant="200" id="OiN-ZH-752"/>
+                                                                    <constraint firstAttribute="width" priority="999" constant="300" id="OiN-ZH-752"/>
                                                                 </constraints>
-                                                                <fontDescription key="fontDescription" type="system" pointSize="14"/>
+                                                                <fontDescription key="fontDescription" style="UICTFontTextStyleBody"/>
                                                                 <textInputTraits key="textInputTraits" autocapitalizationType="words" autocorrectionType="no" textContentType="name"/>
                                                             </textField>
                                                             <textField opaque="NO" clipsSubviews="YES" contentMode="scaleToFill" restorationIdentifier="lastNameField" contentHorizontalAlignment="left" contentVerticalAlignment="center" borderStyle="roundedRect" placeholder="Last name" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="alT-pu-m9B">
-                                                                <rect key="frame" x="0.0" y="194" width="200" height="34"/>
-                                                                <fontDescription key="fontDescription" type="system" pointSize="14"/>
+                                                                <rect key="frame" x="0.0" y="194" width="300" height="34"/>
+                                                                <fontDescription key="fontDescription" style="UICTFontTextStyleBody"/>
                                                                 <textInputTraits key="textInputTraits" autocapitalizationType="sentences" autocorrectionType="no" textContentType="family-name"/>
                                                             </textField>
                                                             <textField opaque="NO" clipsSubviews="YES" contentMode="scaleToFill" restorationIdentifier="emailaddressField" contentHorizontalAlignment="left" contentVerticalAlignment="center" borderStyle="roundedRect" placeholder="e-mail address" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="xVh-Xm-oA9">
-                                                                <rect key="frame" x="0.0" y="238" width="200" height="34"/>
-                                                                <fontDescription key="fontDescription" type="system" pointSize="14"/>
+                                                                <rect key="frame" x="0.0" y="238" width="300" height="34"/>
+                                                                <fontDescription key="fontDescription" style="UICTFontTextStyleBody"/>
                                                                 <textInputTraits key="textInputTraits" autocorrectionType="no" keyboardType="emailAddress" textContentType="email"/>
                                                             </textField>
                                                             <button opaque="NO" contentMode="redraw" restorationIdentifier="selectEmailAddressButton" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="system" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="BUE-es-n4t" customClass="MCRoundedButton">
-                                                                <rect key="frame" x="25.333333333333329" y="282" width="149" height="30"/>
+                                                                <rect key="frame" x="75.333333333333343" y="282" width="149" height="30"/>
                                                                 <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                                                 <fontDescription key="fontDescription" type="system" weight="semibold" pointSize="15"/>
                                                                 <state key="normal" title="Select email address">
@@ -1095,7 +1095,7 @@
                                                                 </connections>
                                                             </button>
                                                             <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="eky-6N-svd">
-                                                                <rect key="frame" x="0.0" y="322" width="200" height="1"/>
+                                                                <rect key="frame" x="0.0" y="322" width="300" height="1"/>
                                                                 <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                                                 <constraints>
                                                                     <constraint firstAttribute="height" constant="1" id="MW8-SS-eFD"/>
