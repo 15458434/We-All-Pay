@@ -84,6 +84,12 @@ typedef NS_ENUM(BOOL, ChildViewStatus) {
     NSLog(@"MCPaymentViewController: Done button pressed.");
 #endif
     [self.view endEditing:YES];
+    
+    NSString *descriptionOfPayment = [_thisPayment.descriptionOfPayment stringByTrimmingCharactersInSet:NSCharacterSet.whitespaceAndNewlineCharacterSet];
+    NSString *parameterItemID = [NSString stringWithFormat:@"id-%@", descriptionOfPayment];
+    NSString *parameterName = _thisPayment.descriptionOfPayment;
+    NSString *paremeterContentType = @"shared_payment";
+    [FIRAnalytics logEventWithName:@"save_item" parameters:@{kFIRParameterItemID: parameterItemID, kFIRParameterItemName: parameterName, kFIRParameterContentType: paremeterContentType}];
 
     if (MCWeAllPayStoreController.defaultStore.mainThreadContext.undoManager.canUndo) {
         [[MCWeAllPayStoreController defaultStore] endUndoGroupAndProcess];
