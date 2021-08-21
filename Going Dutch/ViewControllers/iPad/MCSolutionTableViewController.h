@@ -9,17 +9,13 @@
 @import UIKit;
 @import MessageUI;
 
-#import "MCGenericInterstitialAdTableViewController.h"
-
 #import "MCTonightsBillTransfer.h"
 #import "MCDismissMeBlockProtocol.h"
-
-@class MCInterstitialAdEngine;
 
 @class MCSharedBill;
 @class MCTableEmptyMessage;
 
-@interface MCSolutionTableViewController : MCGenericInterstitialAdTableViewController <MCTonightsBillTransfer, MCDismissMeBlockProtocol>
+@interface MCSolutionTableViewController : UITableViewController <MCTonightsBillTransfer>
 
 @property (strong, nonatomic) MFMailComposeViewController *mailController;
 @property (strong, nonatomic) NSArray *peoplePresent;

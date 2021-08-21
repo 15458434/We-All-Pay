@@ -29,7 +29,6 @@
 #import "MCTools.h"
 
 #pragma mark - ViewControllers
-#import "MCGenericInterstitialAdTableViewController.h"
 #import "MCGenericAdBannerTableViewController.h"
 #import "MCAllTripsTableViewController.h"
 #import "MCReturnPaymentViewController.h"

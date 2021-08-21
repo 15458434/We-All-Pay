@@ -5,15 +5,14 @@ target 'We all pay' do
     use_frameworks!
     inhibit_all_warnings!
     
-    pod 'Firebase/Core'
     pod 'Firebase/Analytics'
     pod 'Firebase/Crashlytics'
     pod 'Firebase/RemoteConfig'
-    pod 'Firebase/AdMob'
+    pod 'Google-Mobile-Ads-SDK'
     pod 'GoogleMobileAdsMediationFacebook'
     pod 'GoogleMobileAdsMediationInMobi'
     pod 'GoogleMobileAdsMediationAdColony'
-    #pod 'GoogleMobileAdsMediationAppLovin'
+    pod 'GoogleMobileAdsMediationAppLovin'
     pod 'GoogleMobileAdsMediationMoPub'
     pod 'PersonalizedAdConsent'
     pod 'GoogleMobileAdsMediationTestSuite', :configurations => ['AdTest']
@@ -33,7 +32,6 @@ post_install do | installer |
             if config.build_settings['IPHONEOS_DEPLOYMENT_TARGET'].to_f < 10.0
                 config.build_settings['IPHONEOS_DEPLOYMENT_TARGET'] = '10.0'
             end
-            config.build_settings['Architectures'] = '$(ARCHS_STANDARD)'
         end
     end
 end

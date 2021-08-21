@@ -128,7 +128,7 @@ import GoogleMobileAds
 
     // MARK: GADBannerViewDelegate
     
-    func adViewDidReceiveAd(_ bannerView: GADBannerView) {
+    func bannerViewDidReceiveAd(_ bannerView: GADBannerView) {
         guard AdEngine.isEnabled else {
             return
         }
@@ -137,7 +137,7 @@ import GoogleMobileAds
         delegate.adEngine(self, putOnscreen: bannerView)
     }
     
-    func adView(_ bannerView: GADBannerView, didFailToReceiveAdWithError error: GADRequestError) {
+    func bannerView(_ bannerView: GADBannerView, didFailToReceiveAdWithError error: Error) {
         guard AdEngine.isEnabled else {
             return
         }
@@ -146,15 +146,15 @@ import GoogleMobileAds
         delegate.adEngine(self, putOffScreen: bannerView)
     }
     
-    func adViewWillPresentScreen(_ bannerView: GADBannerView) {
+    func bannerViewWillPresentScreen(_ bannerView: GADBannerView) {
         
     }
     
-    func adViewWillDismissScreen(_ bannerView: GADBannerView) {
+    func bannerViewWillDismissScreen(_ bannerView: GADBannerView) {
         
     }
     
-    func adViewDidDismissScreen(_ bannerView: GADBannerView) {
+    func bannerViewDidDismissScreen(_ bannerView: GADBannerView) {
         
     }
     
