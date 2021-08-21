@@ -92,6 +92,12 @@
 }
 
 - (void)textFieldDidEndEditing:(UITextField *)textField {
+    NSString *eventName = [textField.text stringByTrimmingCharactersInSet:NSCharacterSet.whitespaceAndNewlineCharacterSet];
+    NSString *parameterItemID = [NSString stringWithFormat:@"id-%@", eventName];
+    NSString *parameterName = eventName;
+    NSString *paremeterContentType = @"shared_event";
+    [FIRAnalytics logEventWithName:@"save_item" parameters:@{kFIRParameterItemID: parameterItemID, kFIRParameterItemName: parameterName, kFIRParameterContentType: paremeterContentType}];
+    
     _tonightsBill.tripName = _tripNameField.text;
     NSDate *now = [NSDate date];
     _tonightsBill.dateModified = now;
