@@ -17,7 +17,6 @@
 #import "MCPerson+addons.h"
 #import "MCPayment+addons.h"
 
-#import "MCGenericInterstitialAdTableViewController.h"
 #import "MCAllTripsTableViewController.h"
 #import "MCEditTripViewController.h"
 #import "MCPaymentViewController.h"
@@ -383,7 +382,7 @@
     } else if ([segue.identifier isEqualToString:@"solveButton"]) {
         UINavigationController *navController = (UINavigationController *)segue.destinationViewController;
         SolutionViewController *destination = navController.viewControllers.firstObject;
-        [destination updateEvent:_tonightsBill andSendMailDelegate:_mailDelegate andAdEngine:self.adEngine];
+        [destination updateEvent:_tonightsBill andSendMailDelegate:_mailDelegate];
     } else if ([segue.identifier isEqualToString:@"openFirstPaymentWithoutPayer_iPad"]) {
         NSParameterAssert([[[segue destinationViewController] viewControllers][0] conformsToProtocol:@protocol(MCThisPaymentProtocol)]);
         UINavigationController *navigationController = (UINavigationController *)segue.destinationViewController;

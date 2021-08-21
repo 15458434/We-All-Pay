@@ -41,13 +41,6 @@ typedef NS_ENUM(BOOL, MCXRateStatus) {
 - (IBAction)mainCancelButton:(id)sender {
     if (_solution == nil || _solution.count == 0) {
         [self.navigationController.presentingViewController dismissViewControllerAnimated:YES completion:nil];
-    } else if (self.adEngine.interstitialAd.isReady) {
-        NSError *adError;
-        [self.adEngine putOnScreenIfAvailableWithPresentingViewController:self error:&adError];
-        if (adError) {
-            NSLog(@"Error: Unable to show interstitial: %@", adError);
-            [self.navigationController.presentingViewController dismissViewControllerAnimated:YES completion:nil];
-        }
     } else {
         [self.navigationController.presentingViewController dismissViewControllerAnimated:YES completion:nil];
     }
@@ -166,12 +159,6 @@ typedef NS_ENUM(BOOL, MCXRateStatus) {
 #else
     return @"ca-app-pub-5354415674074435/1117722855";
 #endif
-}
-
-#pragma mark - MCInterstitialAdEngineDelegate
-
-- (void)willDismissInterstatialFor:(MCInterstitialAdEngine *)adEngine {
-    [self.navigationController.presentingViewController dismissViewControllerAnimated:YES completion:nil];
 }
 
 #pragma mark - UITableViewController
@@ -320,9 +307,6 @@ typedef NS_ENUM(BOOL, MCXRateStatus) {
 }
 
 - (void)viewDidLoad {
-    MCRemoteConfigEngine *configEngine = [[MCRemoteConfigEngine alloc] init];
-    self.adEngine.shouldShowEngine = [[MCRemoteConfigTrueCasino alloc] initWithEngine:configEngine andRemoteConfigItem:ConfigEngineItemPercentageOfTimeShowAfterSolveInterstitialOniPad];
-    
     [super viewDidLoad];
     
     // Uncomment the following line to preserve selection between presentations.
