@@ -54,13 +54,17 @@ class Screenshots: XCTestCase {
 
         case .pad:
             snapshot("01-AllEventsViewController")
-            app.tables/*@START_MENU_TOKEN@*/.staticTexts["EventTableViewCell-0"]/*[[".cells",".staticTexts[\"Movie\"]",".staticTexts[\"EventTableViewCell-0\"]"],[[[-1,2],[-1,1],[-1,0,1]],[[-1,2],[-1,1]]],[0]]@END_MENU_TOKEN@*/.tap()
-            snapshot("02-EventOverviewViewController")
-            app/*@START_MENU_TOKEN@*/.buttons["Add  Person"]/*[[".buttons[\"Add person\"]",".buttons[\"Add  Person\"]"],[[[-1,1],[-1,0]]],[0]]@END_MENU_TOKEN@*/.tap()
-            snapshot("03-AddPersonViewController")
-            app.navigationBars.element(boundBy: 1).buttons["Cancel"].tap()
-            app/*@START_MENU_TOKEN@*/.buttons["Add Payment"]/*[[".buttons[\"Add payment\"]",".buttons[\"Add Payment\"]"],[[[-1,1],[-1,0]]],[0]]@END_MENU_TOKEN@*/.tap()
-            snapshot("04-AddPaymentViewController")
+            app.tables.cells.element(boundBy: 0).tap()
+            let mcsharedbillmainviewNavigationBar = app.navigationBars["MCSharedBillMainView"]
+            mcsharedbillmainviewNavigationBar.segmentedControls.buttons.element(boundBy: 0).tap()
+
+            app!.navigationBars["MCSharedBillMainView"].segmentedControls.buttons.element(boundBy: 0).tap()
+            snapshot("02-PeoplePresentViewController")
+            app!.navigationBars["MCSharedBillMainView"].segmentedControls.buttons.element(boundBy: 1).tap()
+            snapshot("03-PaymentsViewController")
+            let tablesQuery = app.scrollViews.otherElements.tables
+            tablesQuery/*@START_MENU_TOKEN@*/.buttons["Add Payment"]/*[[".buttons[\"Add payment\"]",".buttons[\"Add Payment\"]"],[[[-1,1],[-1,0]]],[0]]@END_MENU_TOKEN@*/.tap()
+            snapshot("04-PaymentViewController")
             app.navigationBars.element(boundBy: 1).buttons["Cancel"].tap()
             app.buttons["Solve"].tap()
             snapshot("05-SolutionViewController")
