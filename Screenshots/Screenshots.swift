@@ -79,9 +79,4 @@ class Screenshots: XCTestCase {
             fatalError("Unknown interface idiom")
         }
     }
-
-}
-
-func testOpenPayment() {
-    
 }
