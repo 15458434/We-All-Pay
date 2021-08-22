@@ -8,9 +8,8 @@
 
 #import "MCBadgeButton.h"
 #import "MCImageFunctions.h"
-#import "MCBitwiseStuff.h"
 
-#import "We_all_pay-Swift.h"
+#import <WeAllPayDesignableUI/WeAllPayDesignableUI-Swift.h>
 
 @interface MCBadgeButton ()
 

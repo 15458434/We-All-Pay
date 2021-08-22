@@ -11,8 +11,6 @@
 @import MessageUI;
 @import NotificationCenter;
 
-#import "MCGenericInterstitialAdTableViewController.h"
-
 #import "MCTonightsBillTransfer.h"
 #import "MCIndexProtocol.h"
 #import "MCIsEditingProtocol.h"
@@ -30,7 +28,7 @@
 @end
 
 __attribute__((objc_subclassing_restricted))
-@interface MCSharedBillTableViewController : MCGenericInterstitialAdTableViewController <NSFetchedResultsControllerDelegate, MFMailComposeViewControllerDelegate, MCTonightsBillTransfer, MCIndexProtocol>
+@interface MCSharedBillTableViewController : UITableViewController <NSFetchedResultsControllerDelegate, MFMailComposeViewControllerDelegate, MCTonightsBillTransfer, MCIndexProtocol>
 
 @property (nonatomic, strong) MCTableEmptyMessage *emptyMessage;
 

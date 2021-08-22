@@ -40,16 +40,9 @@ typedef NS_ENUM(BOOL, MCXRateStatus) {
 
 - (IBAction)mainCancelButton:(id)sender {
     if (_solution == nil || _solution.count == 0) {
-        _dismissMe();
-    } else if (self.adEngine.interstitialAd.isReady) {
-        NSError *adError;
-        [self.adEngine putOnScreenIfAvailableWithPresentingViewController:self error:&adError];
-        if (adError) {
-            NSLog(@"Error: Unable to show interstitial: %@", adError);
-            _dismissMe();
-        }
+        [self.navigationController.presentingViewController dismissViewControllerAnimated:YES completion:nil];
     } else {
-        _dismissMe();
+        [self.navigationController.presentingViewController dismissViewControllerAnimated:YES completion:nil];
     }
 }
 
@@ -154,11 +147,8 @@ typedef NS_ENUM(BOOL, MCXRateStatus) {
     }
 }
 
-- (void)updateAdEngine:(MCInterstitialAdEngine *)adEngine andEvent:(MCSharedBill *)event andDismissBlock:(void (^)(void))dismissMe {
-    self.adEngine = adEngine;
-    self.loadInterstitialOnViewDidLoad = YES;
+- (void)updateEvent:(MCSharedBill *)event {
     self.tonightsBill = event;
-    self.dismissMe = dismissMe;
 }
 
 #pragma mark - MCGenericInterstitialAdTableViewController
@@ -169,12 +159,6 @@ typedef NS_ENUM(BOOL, MCXRateStatus) {
 #else
     return @"ca-app-pub-5354415674074435/1117722855";
 #endif
-}
-
-#pragma mark - MCInterstitialAdEngineDelegate
-
-- (void)willDismissInterstatialFor:(MCInterstitialAdEngine *)adEngine {
-    _dismissMe();
 }
 
 #pragma mark - UITableViewController
@@ -300,9 +284,13 @@ typedef NS_ENUM(BOOL, MCXRateStatus) {
 #pragma mark - UITableViewDelegate
 
 - (void)tableView:(UITableView *)tableView willDisplayHeaderView:(UIView *)view forSection:(NSInteger)section {
-    view.tintColor = [UIColor colorNamed:@"background"];
     UITableViewHeaderFooterView *sectionTitleHeader = (UITableViewHeaderFooterView *)view;
-    sectionTitleHeader.textLabel.textColor = [UIColor colorNamed:@"emptyMessageText"];
+    if (@available(iOS 11.0, *)) {
+        view.tintColor = [UIColor colorNamed:@"background"];
+        sectionTitleHeader.textLabel.textColor = [UIColor colorNamed:@"emptyMessageText"];
+    } else {
+        // Fallback on earlier versions
+    }
 }
 
 - (CGFloat)tableView:(UITableView *)tableView heightForRowAtIndexPath:(NSIndexPath *)indexPath {
@@ -319,9 +307,6 @@ typedef NS_ENUM(BOOL, MCXRateStatus) {
 }
 
 - (void)viewDidLoad {
-    MCRemoteConfigEngine *configEngine = [[MCRemoteConfigEngine alloc] init];
-    self.adEngine.shouldShowEngine = [[MCRemoteConfigTrueCasino alloc] initWithEngine:configEngine andRemoteConfigItem:ConfigEngineItemPercentageOfTimeShowAfterSolveInterstitialOniPad];
-    
     [super viewDidLoad];
     
     // Uncomment the following line to preserve selection between presentations.

@@ -58,13 +58,6 @@ typedef NS_OPTIONS(NSUInteger, MCReturnPaymentViewControllerState) {
 - (IBAction)mainCancelButtonPressed:(id)sender {
     if (_solution == nil || _solution.count == 0) {
         [self.navigationController.presentingViewController dismissViewControllerAnimated:YES completion:nil];
-    } else if (self.adEngine.interstitialAd.isReady) {
-        NSError *adError;
-        [self.adEngine putOnScreenIfAvailableWithPresentingViewController:self error:&adError];
-        if (adError) {
-            NSLog(@"Error show interstitial: %@", adError);
-            [self.navigationController.presentingViewController dismissViewControllerAnimated:YES completion:nil];
-        }
     } else {
         [self.navigationController.presentingViewController dismissViewControllerAnimated:YES completion:nil];
     }
@@ -77,11 +70,9 @@ typedef NS_OPTIONS(NSUInteger, MCReturnPaymentViewControllerState) {
 
 }
 
-- (void)updateEvent:(MCSharedBill *)event andSendMailDelegate:(MCSharedBillPageViewController *)sendMailDelegate andAdEngine:(MCInterstitialAdEngine *)adEngine {
+- (void)updateEvent:(MCSharedBill *)event andSendMailDelegate:(MCSharedBillPageViewController *)sendMailDelegate {
     _tonightsBill = event;
     self.sendMailObject = sendMailDelegate;
-    self.loadInterstitialOnViewDidLoad = YES;
-    self.adEngine = adEngine;
 }
 
 #pragma mark - Private in this class
@@ -294,22 +285,6 @@ typedef NS_OPTIONS(NSUInteger, MCReturnPaymentViewControllerState) {
     [tableView endUpdates];
 }
 
-#pragma mark - MCGenericInterstitialAdTableViewController
-
-- (NSString *)adUnitId {
-#ifdef DEBUG
-    return @"ca-app-pub-3940256099942544/4411468910";
-#else
-    return @"ca-app-pub-5354415674074435/1117722855";
-#endif
-}
-
-#pragma mark - MCInterstitialAdEngineDelegate
-
-- (void)willDismissInterstatialFor:(MCInterstitialAdEngine *)adEngine {
-    [self.navigationController.presentingViewController dismissViewControllerAnimated:YES completion:nil];
-}
-
 #pragma mark - UIViewController
 
 - (void)loadView {
@@ -321,9 +296,6 @@ typedef NS_OPTIONS(NSUInteger, MCReturnPaymentViewControllerState) {
 }
 
 - (void)viewDidLoad {
-    MCRemoteConfigEngine *remoteConfigEngine = [[MCRemoteConfigEngine alloc] init];
-    self.adEngine.shouldShowEngine = [[MCRemoteConfigTrueCasino alloc] initWithEngine:remoteConfigEngine andRemoteConfigItem:ConfigEngineItemPercentageOfTimeShowAfterSolveInterstitialOniPhone];
-    
     [super viewDidLoad];
 
     // Uncomment the following line to preserve selection between presentations.
@@ -339,7 +311,6 @@ typedef NS_OPTIONS(NSUInteger, MCReturnPaymentViewControllerState) {
     
     [self giveSolutionWithCompletion:^(BOOL success) {
         if (success && (self.solution.count > 0)) {
-            self.adBannerEngine.shouldShowEngine = [[MCRemoteConfigTrueCasino alloc] initWithEngine:remoteConfigEngine andRemoteConfigItem:ConfigEngineItemPercentageOfTimeShowSolutionViewBannerOniPhone];
             self.worstSalesPitchEverView = [[GADBannerView alloc] initWithAdSize:kGADAdSizeBanner];
             [self.adBannerEngine prepareAdBanner:self.worstSalesPitchEverView withAdUnitId:self.adBannerUnitId andViewController:self];
         }
@@ -364,8 +335,13 @@ typedef NS_OPTIONS(NSUInteger, MCReturnPaymentViewControllerState) {
 
 - (void)tableView:(UITableView *)tableView willDisplayHeaderView:(UIView *)view forSection:(NSInteger)section {
     UITableViewHeaderFooterView *sectionTitleHeader = (UITableViewHeaderFooterView *)view;
-    view.tintColor = [UIColor colorNamed:@"background"];
-    sectionTitleHeader.textLabel.textColor = [UIColor colorNamed:@"emptyMessageText"];
+    if (@available(iOS 11.0, *)) {
+        view.tintColor = [UIColor colorNamed:@"background"];
+        sectionTitleHeader.textLabel.textColor = [UIColor colorNamed:@"emptyMessageText"];
+    } else {
+        // Fallback on earlier versions
+    }
+    
 }
 
 - (void)tableView:(UITableView *)tableView didEndDisplayingHeaderView:(UIView *)view forSection:(NSInteger)section

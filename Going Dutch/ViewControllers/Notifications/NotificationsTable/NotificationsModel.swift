@@ -9,14 +9,14 @@
 import UIKit
 
 final class NotificationsModel: NSObject {
-    @objc dynamic private(set) var notifications: [NotificationsItemProtocol] = [NotificationsItemProtocol]()
+    @objc dynamic private(set) var notifications: [NotificationsItem] = [NotificationsItem]()
     
     /// addItem to the notifications array in the correct order and trigger KVO.
     /// - Parameter notificationsItem: The item add to the notifications array.
-    private func addItem(_ notificationsItem: NotificationsItemProtocol) {
+    private func addItem(_ notificationsItem: NotificationsItem) {
         let mutableNotifications: NSMutableArray = self.mutableArrayValue(forKey: "notifications")
         let index = mutableNotifications.indexOfObject { item, index, stop in
-            let item = item as! NotificationsItemProtocol
+            let item = item as! NotificationsItem
             if notificationsItem.date <= item.date {
                 return false
             } else {
@@ -50,16 +50,13 @@ final class NotificationsModel: NSObject {
     
 }
 
-@objc protocol NotificationsItemProtocol {
-    var uuid: UUID { get }
-    var date: Date { get }
-    var image: UIImage? { get set }
-    var title: String! { get set }
-    var subTitle: String? { get set }
-    var isRead: Bool { get set }
-}
-
-class NotificationsItem: NSObject, NotificationsItemProtocol {
+@objc(MCNotificationsItem) final class NotificationsItem: NSObject {
+    @objc let uuid: UUID
+    @objc var date: Date
+    @objc var image: UIImage?
+    @objc var title: String!
+    @objc var subTitle: String?
+    @objc dynamic var isRead: Bool
     
     init(uuid: UUID, date: Date? = nil, isRead: Bool) {
         self.uuid = uuid
@@ -78,15 +75,6 @@ class NotificationsItem: NSObject, NotificationsItemProtocol {
         self.title = title
         self.subTitle = subTitle
     }
-    
-    // MARK: NotificationsItemProtocol
-    
-    let uuid: UUID
-    var date: Date
-    var image: UIImage?
-    var title: String!
-    var subTitle: String?
-    @objc dynamic var isRead: Bool
     
     // MARK: NSObject
 }

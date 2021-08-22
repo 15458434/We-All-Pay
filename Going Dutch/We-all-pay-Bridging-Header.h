@@ -29,10 +29,8 @@
 #import "MCTools.h"
 
 #pragma mark - ViewControllers
-#import "MCGenericInterstitialAdTableViewController.h"
 #import "MCGenericAdBannerTableViewController.h"
 #import "MCAllTripsTableViewController.h"
-#import "MCAllTripsTableViewController-iPad.h"
 #import "MCReturnPaymentViewController.h"
 #import "MCSolutionTableViewController.h"
 
@@ -40,5 +38,7 @@
 #import "MCNotificationUnreadIndicator.h"
 #import "MCBadgeButton.h"
 #import "MCBorderLineView.h"
+#import "MCNotificationsCountTableViewCell.h"
+#import "MCNotificationTableViewCell.h"
 
 #import "MCEmailTextInputProxy.h"

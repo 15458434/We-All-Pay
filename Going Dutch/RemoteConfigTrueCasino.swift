@@ -24,11 +24,8 @@ import FirebaseRemoteConfig
             debugPrint("Item is not an RemoteConfigValue: \(engine.config(for: self.item))")
             return false
         }
-        guard let numberValue = item.numberValue else {
-            debugPrint("Item is not an NSNumber: \(engine.config(for: self.item))")
-            return false
-        }
-        let floatValue = numberValue.floatValue
+
+        let floatValue = item.numberValue.floatValue
         guard floatValue > 0 && floatValue <= 1 else {
             debugPrint("Invalid floatValue: \(floatValue)")
             return false

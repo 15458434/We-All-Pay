@@ -58,7 +58,7 @@ static void * notificationCountContext = &notificationCountContext;
 #pragma mark - Actions
 
 - (IBAction)newEventPressed:(id)sender {
-    
+    [self performSegueWithIdentifier:@"newTonightsBill" sender:self];
 }
 
 - (IBAction)iButtonPressed:(MCBadgeButton *)sender {
@@ -199,6 +199,10 @@ static void * notificationCountContext = &notificationCountContext;
 
 #pragma mark - UITableViewDelegate
 
+- (void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath {
+    [self performSegueWithIdentifier:@"openTonightsBill" sender:self];
+}
+
 - (CGFloat)tableView:(UITableView *)tableView heightForRowAtIndexPath:(NSIndexPath *)indexPath {
     return UITableViewAutomaticDimension;
 }
@@ -314,15 +318,6 @@ static void * notificationCountContext = &notificationCountContext;
         }
     }
     
-    if ([[segue identifier] isEqualToString:@"newPaymentFromEvents"]) {
-        MCSharedBill *theBill = [sender firstObject];
-        if ([[segue destinationViewController] conformsToProtocol:@protocol(MCTonightsBillTransfer)]) {
-            [[segue destinationViewController] setTonightsBill:theBill];
-        }
-        if ([[segue destinationViewController] conformsToProtocol:@protocol(MCPathComponentsToOpenProtocol) ]) {
-            [[segue destinationViewController] setPathComponentsToOpen:sender];
-        }
-    }
     if ([[segue identifier] isEqualToString:@"selectMainCurrency"]) {
         MCSharedBill *theBill = _model.fetchEventsController.fetchedObjects[_selectedIndexPathForAction.row];
         UINavigationController *navController = (UINavigationController *)segue.destinationViewController;
@@ -336,6 +331,14 @@ static void * notificationCountContext = &notificationCountContext;
         InfoScreenTableViewController *infoContainerViewController = navigationController.viewControllers.lastObject;
         infoContainerViewController.preferredContentSize = CGSizeMake(320, 0);
         infoContainerViewController.notificationEnvironmentModel = self.notificationsStateModel;
+    } else if ([[segue identifier] isEqualToString:@"newPaymentFromEvents"]) {
+        MCSharedBill *theBill = [sender firstObject];
+        if ([[segue destinationViewController] conformsToProtocol:@protocol(MCTonightsBillTransfer)]) {
+            [[segue destinationViewController] setTonightsBill:theBill];
+        }
+        if ([[segue destinationViewController] conformsToProtocol:@protocol(MCPathComponentsToOpenProtocol) ]) {
+            [[segue destinationViewController] setPathComponentsToOpen:sender];
+        }
     }
 }
 

@@ -17,7 +17,6 @@
 #import "MCPerson+addons.h"
 #import "MCPayment+addons.h"
 
-#import "MCGenericInterstitialAdTableViewController.h"
 #import "MCAllTripsTableViewController.h"
 #import "MCEditTripViewController.h"
 #import "MCPaymentViewController.h"
@@ -52,7 +51,14 @@
         [self presentViewController:alertController animated:YES completion:nil];
         return;
     }
-    [self performSegueWithIdentifier:@"openPaymentView" sender:self];
+    
+    UIUserInterfaceSizeClass horizontalSizeClass = self.traitCollection.horizontalSizeClass;
+    UIUserInterfaceSizeClass verticalSizeClass = self.traitCollection.verticalSizeClass;
+    if (horizontalSizeClass == UIUserInterfaceSizeClassRegular && verticalSizeClass == UIUserInterfaceSizeClassRegular) {
+        [self performSegueWithIdentifier:@"newPayment_iPad" sender:self];
+    } else {
+        [self performSegueWithIdentifier:@"openPaymentView" sender:self];
+    }
 }
 
 - (IBAction)solveButtonPressed:(id)sender {
@@ -71,7 +77,14 @@
     // Check for all payers present.
     if ([_tonightsBill doAllPaymentHaveAPayer]) {
         // perform segue
-        [self performSegueWithIdentifier:@"solveButton" sender:self];
+        UIUserInterfaceSizeClass horizontalSizeClass = self.traitCollection.horizontalSizeClass;
+        UIUserInterfaceSizeClass verticalSizeClass = self.traitCollection.verticalSizeClass;
+        if (horizontalSizeClass == UIUserInterfaceSizeClassRegular && verticalSizeClass == UIUserInterfaceSizeClassRegular) {
+            [self performSegueWithIdentifier:@"openSolutionView_iPad" sender:self];
+        } else {
+            [self performSegueWithIdentifier:@"solveButton" sender:self];
+        }
+        
     } else {
         // Give user alert.
         NSString *title = NSLocalizedString(@"UNABLE_TO_SOLVE", @"Unable to solve");
@@ -126,10 +139,15 @@
     }
 }
 
-- (void)openFirstPaymentWithoutAPayer
-{
+- (void)openFirstPaymentWithoutAPayer {
     // This opens the payment detail view with the first payment on the tonightsBill which, doesn't have a payer.
-    [self performSegueWithIdentifier:@"openFirstPaymentWithoutPayer" sender:self];
+    UIUserInterfaceSizeClass horizontalSizeClass = self.traitCollection.horizontalSizeClass;
+    UIUserInterfaceSizeClass verticalSizeClass = self.traitCollection.verticalSizeClass;
+    if (horizontalSizeClass == UIUserInterfaceSizeClassRegular && verticalSizeClass == UIUserInterfaceSizeClassRegular) {
+        [self performSegueWithIdentifier:@"openFirstPaymentWithoutPayer_iPad" sender:self];
+    } else {
+        [self performSegueWithIdentifier:@"openFirstPaymentWithoutPayer" sender:self];
+    }
 }
 
 #pragma mark - NSNotification
@@ -144,9 +162,14 @@
 
 #pragma mark - ShowPayment
 
-- (void)show:(MCPayment *)payment
-{
-    [self performSegueWithIdentifier:@"openPaymentWithMissingData" sender:self];
+- (void)show:(MCPayment *)payment {
+    UIUserInterfaceSizeClass horizontalSizeClass = self.traitCollection.horizontalSizeClass;
+    UIUserInterfaceSizeClass verticalSizeClass = self.traitCollection.verticalSizeClass;
+    if (horizontalSizeClass == UIUserInterfaceSizeClassRegular && verticalSizeClass == UIUserInterfaceSizeClassRegular) {
+        [self performSegueWithIdentifier:@"openPaymentWithMissingData_iPad" sender:self];
+    } else {
+        [self performSegueWithIdentifier:@"openPaymentWithMissingData" sender:self];
+    }
 }
 
 #pragma mark - MFMailViewControllerDelegate
@@ -265,13 +288,21 @@
 }
 
 - (void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath {
-    [self performSegueWithIdentifier:@"openPaymentView" sender:self];
+    UIUserInterfaceSizeClass horizontalSizeClass = self.traitCollection.horizontalSizeClass;
+    UIUserInterfaceSizeClass verticalSizeClass = self.traitCollection.verticalSizeClass;
+    if (horizontalSizeClass == UIUserInterfaceSizeClassRegular && verticalSizeClass == UIUserInterfaceSizeClassRegular) {
+        [self performSegueWithIdentifier:@"openPayment_iPad" sender:self];
+    } else {
+        [self performSegueWithIdentifier:@"openPaymentView" sender:self];
+    }
 }
 
 #pragma mark - UIViewController
 
 - (void)loadView {
     [super loadView];
+    
+    self.tableView.accessibilityIdentifier = @"PaymentsTableViewController";
     
     _emptyMessage = [[NSBundle mainBundle] loadNibNamed:@"MCTableEmptyMessage" owner:self options:nil][0];
     _emptyMessage.borderlineView.dyInset = 1;
@@ -353,7 +384,48 @@
     } else if ([segue.identifier isEqualToString:@"solveButton"]) {
         UINavigationController *navController = (UINavigationController *)segue.destinationViewController;
         SolutionViewController *destination = navController.viewControllers.firstObject;
-        [destination updateEvent:_tonightsBill andSendMailDelegate:_mailDelegate andAdEngine:self.adEngine];
+        [destination updateEvent:_tonightsBill andSendMailDelegate:_mailDelegate];
+    } else if ([segue.identifier isEqualToString:@"openFirstPaymentWithoutPayer_iPad"]) {
+        NSParameterAssert([[[segue destinationViewController] viewControllers][0] conformsToProtocol:@protocol(MCThisPaymentProtocol)]);
+        UINavigationController *navigationController = (UINavigationController *)segue.destinationViewController;
+        PaymentViewController *destination = (PaymentViewController *)navigationController.viewControllers[0];
+        destination.thisPayment = [_tonightsBill getFirstPaymentWithoutAPayer];
+        destination.tonightsBill = _tonightsBill;
+        if (@available(iOS 13.0, *)) {
+            UINavigationController *navController = (UINavigationController *)segue.destinationViewController;
+            navController.modalInPresentation = YES;
+        }
+    } else if ([segue.identifier isEqualToString:@"openPaymentWithMissingData_iPad"]) {
+        UINavigationController *navigationController = (UINavigationController *)segue.destinationViewController;
+        PaymentViewController *destination = navigationController.viewControllers[0];
+        destination.tonightsBill = _tonightsBill;
+        destination.thisPayment = _forOpenPaymentWithMissingDataForSegue;
+        _forOpenPaymentWithMissingDataForSegue = nil;
+        if (@available(iOS 13.0, *)) {
+            UINavigationController *navController = (UINavigationController *)segue.destinationViewController;
+            navController.modalInPresentation = YES;
+        }
+    } else if ([segue.identifier isEqualToString:@"newPayment_iPad"]) {
+        UINavigationController *navController = (UINavigationController *)segue.destinationViewController;
+        if (@available(iOS 13.0, *)) {
+            navController.modalInPresentation = YES;
+        }
+        PaymentViewController *destination = (PaymentViewController *)navController.viewControllers.firstObject;
+        destination.tonightsBill = _tonightsBill;
+    } else if ([segue.identifier isEqualToString:@"openPayment_iPad"]) {
+        UINavigationController *navController = segue.destinationViewController;
+        if (@available(iOS 13.0, *)) {
+            navController.modalInPresentation = YES;
+        }
+        PaymentViewController *destination = (PaymentViewController *)navController.viewControllers.firstObject;
+        NSIndexPath *indexPath = [self.tableView indexPathForSelectedRow];
+        destination.thisPayment = [_dataController objectAtIndexPath:indexPath];
+        destination.tonightsBill = _tonightsBill;
+        [[self tableView] deselectRowAtIndexPath:indexPath animated:YES];
+    } else if ([segue.identifier isEqualToString:@"openSolutionView_iPad"]) {
+        UINavigationController *navController = (UINavigationController *)segue.destinationViewController;
+        SolutionTableViewController_iPad *destination = (SolutionTableViewController_iPad *)navController.viewControllers.firstObject;
+        [destination updateEvent:_tonightsBill];
     } else {
         NSLog(@"Unknown segue with identifier: %@", segue.identifier);
         NSParameterAssert(NO);

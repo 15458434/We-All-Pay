@@ -13,10 +13,6 @@ import UserMessagingPlatform
 
 import PersonalizedAdConsent
 import GoogleMobileAds
-import InMobiAdapter
-import AdColonyAdapter
-import AppLovinSDK
-import MoPub
 
 @objc(MCAdEngine) @objcMembers open class AdEngine: NSObject {
     // TODO: Remove on 14-08-2022
@@ -39,17 +35,6 @@ import MoPub
                 self = .nonPersonalized
             case .personalized:
                 self = .personalized
-            default:
-                self = .unknown
-            }
-        }
-        
-        init(consentType: UMPConsentType) {
-            switch consentType {
-            case .personalized:
-                self = .personalized
-            case .nonPersonalized:
-                self = .nonPersonalized
             default:
                 self = .unknown
             }
@@ -141,7 +126,7 @@ import MoPub
     }
     
     var request: GADRequest {
-        let newRequest = DFPRequest()
+        let newRequest = GADRequest()
         return newRequest
     }
     

@@ -82,7 +82,7 @@ import FirebaseRemoteConfig
                 return
             }
             
-            remoteConfig.activate { (error) in
+            remoteConfig.activate { success, error in
                 guard error == nil else {
                     debugPrint("Error activating new RemoteConfigSettings: \(error!)")
                     return
