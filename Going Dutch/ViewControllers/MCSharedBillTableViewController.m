@@ -302,6 +302,8 @@
 - (void)loadView {
     [super loadView];
     
+    self.tableView.accessibilityIdentifier = @"PaymentsTableViewController";
+    
     _emptyMessage = [[NSBundle mainBundle] loadNibNamed:@"MCTableEmptyMessage" owner:self options:nil][0];
     _emptyMessage.borderlineView.dyInset = 1;
     self.tableView.backgroundView = _emptyMessage;
