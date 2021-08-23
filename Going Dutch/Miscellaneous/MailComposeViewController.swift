@@ -7,6 +7,7 @@
 //
 
 import UIKit
+import MessageUI
 
 @objc(MCMailComposeViewController) final class MailComposeViewController: MFMailComposeViewController {
 
