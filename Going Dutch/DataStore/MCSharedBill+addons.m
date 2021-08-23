@@ -139,30 +139,6 @@
     }
 }
 
-- (NSString *)stringOfApproxPeoplePresentWithFullNames;
-{
-    NSArray *allPeople;
-    NSArray *sda = @[[NSSortDescriptor sortDescriptorWithKey:@"dateCreated" ascending:YES]];
-    allPeople = [[self peoplePresent] sortedArrayUsingDescriptors:sda];
-    NSMutableString *returnString = [[NSMutableString alloc] init];
-    if ([allPeople count] == 0) {
-        return NSLocalizedString(@"NO_PEOPLE_PRESENT", @"A message when there are no people present inside this shared bill");
-    } else if ([allPeople count] == 1) {
-        return [allPeople[0] getFullName];
-    } else if ([allPeople count] == 2) {
-        NSString *enString = [NSString stringWithFormat:NSLocalizedString(@"AND_STRING", @"The word \"and\" between two people")];
-        [returnString appendFormat:@"%@ %@ %@", [allPeople[0] getFullName], enString,[allPeople[1] getFullName]];
-        return returnString;
-    } else if ([allPeople count] >= 3) {
-        NSString *andOthers = [NSString stringWithFormat:NSLocalizedString(@"AND_OTHERS", @"A list of people like Mark, Ilse and other where the \"and others\" needs to be translated.")];
-        [returnString appendFormat:@"%@, %@ %@", [allPeople[0] getFullName], [allPeople[1] getFullName], andOthers];
-        return returnString;
-    } else {
-        @throw [NSException exceptionWithName:@"Negative amount of people." reason:@"Should not be possible." userInfo:nil];
-        return nil;
-    }
-}
-
 - (void)addPeoplePresentObject:(MCPerson *)value
 {
     NSMutableSet *mutableListOfPeople = [[self peoplePresent] mutableCopy];

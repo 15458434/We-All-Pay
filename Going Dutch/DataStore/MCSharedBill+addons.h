@@ -21,7 +21,6 @@
 + (BOOL)isTableInDatabaseEmptyForContext:(NSManagedObjectContext *)context;
 
 - (NSString *)stringOfApproxPeoplePresent;
-- (NSString *)stringOfApproxPeoplePresentWithFullNames;
 
 - (MCPayment *)addPayment;
 - (void)deletePayment:(MCPayment *)toBeDeletePayment;
