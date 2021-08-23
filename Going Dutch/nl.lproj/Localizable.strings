@@ -4,6 +4,9 @@
 /* A label showing \"person1 and person2\" */
 "%1$@ and %2$@" = "%1$@ en %2$@";
 
+/* A label showing person1, person2 and other */
+"%1$@, %2$@ and others" = "%1$@, %2$@ en anderen";
+
 /* Ad free version restored. */
 "Ad free version restored." = "Advertentie vrije versie is hersteld";
 
@@ -12,9 +15,6 @@
 
 /* Title for an alert message, because there are no people added to this event. */
 "Add some people first" = "Voeg eerst aanwezigen toe";
-
-/* A list of people like Mark, Ilse and other where the \"and others\" needs to be translated. */
-"AND_OTHERS" = "en anderen";
 
 /* first name example for app store screenshots */
 "Ann" = "Anne";

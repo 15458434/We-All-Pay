@@ -131,8 +131,8 @@
         NSString *localizedString = NSLocalizedString(@"%1$@ and %2$@", "A label showing \"person1 and person2\"");
         return [NSString stringWithFormat:localizedString, [allPeople[0] getName], [allPeople[1] getName]];
     } else if ([allPeople count] >= 3) {
-        NSString *andOthers = [NSString stringWithFormat:NSLocalizedString(@"AND_OTHERS", @"A list of people like Mark, Ilse and other where the \"and others\" needs to be translated.")];
-        return [NSString stringWithFormat:@"%@, %@ %@", [allPeople[0] getName], [allPeople[1] getName], andOthers];
+        NSString *localizedString = NSLocalizedString(@"%1$@, %2$@ and others", @"A label showing person1, person2 and other");
+        return [NSString stringWithFormat:localizedString, [allPeople[0] getName], [allPeople[1] getName]];
     } else {
         @throw [NSException exceptionWithName:@"Negative amount of people." reason:@"Should not be possible." userInfo:nil];
         return nil;
