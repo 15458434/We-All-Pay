@@ -68,7 +68,7 @@
         UIAlertController *alertController = [UIAlertController alertControllerWithTitle:title message:message preferredStyle:UIAlertControllerStyleAlert];
         NSString *cancelActionTitle = NSLocalizedString(@"Cancel", @"Text on button to cancel something");
         [alertController addAction:[UIAlertAction actionWithTitle:cancelActionTitle style:UIAlertActionStyleCancel handler:^(UIAlertAction * _Nonnull action) {
-        
+            
         }]];
         [self presentViewController:alertController animated:YES completion:nil];
         return;
@@ -77,14 +77,7 @@
     // Check for all payers present.
     if ([_tonightsBill doAllPaymentHaveAPayer]) {
         // perform segue
-        UIUserInterfaceSizeClass horizontalSizeClass = self.traitCollection.horizontalSizeClass;
-        UIUserInterfaceSizeClass verticalSizeClass = self.traitCollection.verticalSizeClass;
-        if (horizontalSizeClass == UIUserInterfaceSizeClassRegular && verticalSizeClass == UIUserInterfaceSizeClassRegular) {
-            [self performSegueWithIdentifier:@"openSolutionView_iPad" sender:self];
-        } else {
-            [self performSegueWithIdentifier:@"solveButton" sender:self];
-        }
-        
+        [self performSegueWithIdentifier:@"solveButton" sender:self];
     } else {
         // Give user alert.
         NSString *title = NSLocalizedString(@"UNABLE_TO_SOLVE", @"Unable to solve");
@@ -422,11 +415,7 @@
         destination.thisPayment = [_dataController objectAtIndexPath:indexPath];
         destination.tonightsBill = _tonightsBill;
         [[self tableView] deselectRowAtIndexPath:indexPath animated:YES];
-    } else if ([segue.identifier isEqualToString:@"openSolutionView_iPad"]) {
-        UINavigationController *navController = (UINavigationController *)segue.destinationViewController;
-        SolutionTableViewController_iPad *destination = (SolutionTableViewController_iPad *)navController.viewControllers.firstObject;
-        [destination updateEvent:_tonightsBill];
-    } else {
+    } else  {
         NSLog(@"Unknown segue with identifier: %@", segue.identifier);
         NSParameterAssert(NO);
     }
