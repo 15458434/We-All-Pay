@@ -32,7 +32,6 @@
 #import "MCGenericAdBannerTableViewController.h"
 #import "MCAllTripsTableViewController.h"
 #import "MCReturnPaymentViewController.h"
-#import "MCSolutionTableViewController.h"
 
 #pragma mark - Views
 #import "MCNotificationUnreadIndicator.h"

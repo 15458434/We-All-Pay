@@ -330,7 +330,6 @@
                         <segue destination="R4f-Dn-Lh4" kind="presentation" identifier="openFirstPaymentWithoutPayer" id="eZd-I3-t8D"/>
                         <segue destination="R4f-Dn-Lh4" kind="presentation" identifier="openPaymentView" id="z3e-Vr-AS7"/>
                         <segue destination="R4f-Dn-Lh4" kind="presentation" identifier="openPaymentWithMissingData" id="jjg-NC-1KA"/>
-                        <segue destination="TN3-5I-Xh1" kind="presentation" identifier="openSolutionView_iPad" modalPresentationStyle="pageSheet" id="0JD-7F-G1N"/>
                         <segue destination="ydW-Fj-sXo" kind="presentation" identifier="newPayment_iPad" id="rBl-ko-MHe"/>
                         <segue destination="ydW-Fj-sXo" kind="presentation" identifier="openPayment_iPad" id="zKF-pf-8oc"/>
                         <segue destination="ydW-Fj-sXo" kind="presentation" identifier="openFirstPaymentWithoutPayer_iPad" id="sDW-eR-aHj"/>
@@ -598,14 +597,6 @@
                 <placeholder placeholderIdentifier="IBFirstResponder" id="Zpx-6T-7TS" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
             <point key="canvasLocation" x="1284" y="1481"/>
-        </scene>
-        <!--solutionNavigationController-->
-        <scene sceneID="iqm-0w-agX">
-            <objects>
-                <viewControllerPlaceholder storyboardName="Main-iPad" referencedIdentifier="solutionNavigationController" id="TN3-5I-Xh1" sceneMemberID="viewController"/>
-                <placeholder placeholderIdentifier="IBFirstResponder" id="Nzn-J2-Ftr" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
-            </objects>
-            <point key="canvasLocation" x="2609" y="1150"/>
         </scene>
         <!--NotificationsTableViewController-->
         <scene sceneID="eFd-pQ-f3n">
