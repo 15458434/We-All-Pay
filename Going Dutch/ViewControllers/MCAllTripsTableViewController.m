@@ -156,38 +156,7 @@ static void * notificationCountContext = &notificationCountContext;
 }
 
 - (UITableViewCell *)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath {
-    MCSharedBill *thisTrip = [_model.fetchEventsController objectAtIndexPath:indexPath];
     MCAllTripsTableViewCell *allTripsTableViewCell = [tableView dequeueReusableCellWithIdentifier:@"MCAllTripsTableViewCell"];
-    
-    if (![thisTrip tripName]) {
-        [[allTripsTableViewCell tripLabel] setText:NSLocalizedString(@"...", @"String that shows empty string")];
-    } else {
-        [[allTripsTableViewCell tripLabel] setText:[thisTrip tripName]];
-    }
-    [[allTripsTableViewCell peoplePresentLabel] setText:[thisTrip stringOfApproxPeoplePresent]];
-
-    if ([thisTrip areAllExchangeRatesValid]) {
-        CurrencyFormatter *cf = [[CurrencyFormatter alloc] initWithCurrencyCode:thisTrip.mainCurrency.code];
-        NSString *moneyString = [cf stringForObjectValue:[thisTrip totalSumOfMoneyOfThisSharedBill]];
-        [[allTripsTableViewCell totalCostLabel] setHidden:NO];
-        [[allTripsTableViewCell waitingForXRatesIndicator] stopAnimating];
-        [[allTripsTableViewCell totalCostLabel] setText:moneyString];
-    } else {
-        CurrencyFormatter *cf = [[CurrencyFormatter alloc] initWithCurrencyCode:thisTrip.mainCurrency.code];
-        NSString *moneyString = [cf stringForObjectValue:[thisTrip totalSumOfMoneyOfThisSharedBill]];
-        [[allTripsTableViewCell totalCostLabel] setText:moneyString];
-        [[allTripsTableViewCell totalCostLabel] setHidden:YES];
-        [[allTripsTableViewCell waitingForXRatesIndicator] startAnimating];
-    }
-
-    // fill extraLabel with dateModified.
-    if (!_df) {
-        _df = [[NSDateFormatter alloc] init];
-        [_df setDateStyle:NSDateFormatterMediumStyle];
-        [_df setTimeStyle:NSDateFormatterShortStyle];
-    }
-    [[allTripsTableViewCell extraLabel] setText:[_df stringFromDate:[thisTrip dateModified]]];
-    
     return allTripsTableViewCell;
 }
 
@@ -198,6 +167,43 @@ static void * notificationCountContext = &notificationCountContext;
 }
 
 #pragma mark - UITableViewDelegate
+
+- (void)tableView:(UITableView *)tableView willDisplayCell:(UITableViewCell *)cell forRowAtIndexPath:(NSIndexPath *)indexPath {
+    MCSharedBill *event = [_model.fetchEventsController objectAtIndexPath:indexPath];
+    MCAllTripsTableViewCell *eventCell = (MCAllTripsTableViewCell *)cell;
+    
+    if (!event.tripName) {
+        eventCell.tripLabel.text = NSLocalizedString(@"...", @"String that shows empty string");
+    } else {
+        eventCell.tripLabel.text = event.tripName;
+    }
+    eventCell.peoplePresentLabel.text = [event stringOfApproxPeoplePresent];
+
+    if ([event areAllExchangeRatesValid]) {
+        CurrencyFormatter *cf = [[CurrencyFormatter alloc] initWithCurrencyCode:event.mainCurrency.code];
+        NSString *moneyString = [cf stringForObjectValue:[event totalSumOfMoneyOfThisSharedBill]];
+        eventCell.totalCostLabel.hidden = NO;
+        [eventCell.waitingForXRatesIndicator stopAnimating];
+        eventCell.totalCostLabel.text = moneyString;
+    } else {
+        CurrencyFormatter *cf = [[CurrencyFormatter alloc] initWithCurrencyCode:event.mainCurrency.code];
+        NSString *moneyString = [cf stringForObjectValue:[event totalSumOfMoneyOfThisSharedBill]];
+        [[eventCell totalCostLabel] setText:moneyString];
+        eventCell.totalCostLabel.text = moneyString;
+        eventCell.totalCostLabel.hidden = YES;
+        [eventCell.waitingForXRatesIndicator startAnimating];
+    }
+
+    // fill extraLabel with dateModified.
+    if (!_df) {
+        _df = [[NSDateFormatter alloc] init];
+        _df.dateStyle = NSDateFormatterMediumStyle;
+        _df.timeStyle = NSDateFormatterShortStyle;
+    }
+    eventCell.extraLabel.text = [_df stringFromDate:event.dateModified];
+    
+    return;
+}
 
 - (void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath {
     [self performSegueWithIdentifier:@"openTonightsBill" sender:self];

@@ -14,4 +14,21 @@ final class MCAllTripsTableViewCell: UITableViewCell {
     @IBOutlet var totalCostLabel: UILabel!
     @IBOutlet var peoplePresentLabel: UILabel!
     @IBOutlet var extraLabel: UILabel!
+    
+    // MARK: UITableViewCell
+    
+    // MARK: UIView
+    
+    // MARK: UIResponder
+    
+    // MARK: NSObject
+    
+    override func awakeFromNib() {
+        if #available(iOS 13.0, *) {
+            tripLabel.backgroundColor = .clear
+            totalCostLabel.backgroundColor = .clear
+            peoplePresentLabel.backgroundColor = .clear
+            extraLabel.backgroundColor = .clear
+        }
+    }
 }
