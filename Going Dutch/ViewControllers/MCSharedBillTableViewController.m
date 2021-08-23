@@ -415,7 +415,7 @@
         destination.thisPayment = [_dataController objectAtIndexPath:indexPath];
         destination.tonightsBill = _tonightsBill;
         [[self tableView] deselectRowAtIndexPath:indexPath animated:YES];
-    } else  {
+    } else {
         NSLog(@"Unknown segue with identifier: %@", segue.identifier);
         NSParameterAssert(NO);
     }
