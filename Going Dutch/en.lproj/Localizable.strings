@@ -16,10 +16,10 @@
 /* SharedBillPageView */
 "PEOPLE_PRESENT_PAGEVIEWCONTROLLER" = "People present";
 "PAYMENTS_PAGEVIEWCONTROLLER" = "Payments";
-"EMAIL_CONSTRUCTION_FAILURE_TITLE" = "Unable to send email to all people.";
-"EMAIL_CONSTRUCTION_FAILURE_MESSAGE" = "Reason: Not all people have a mail address.";
+"Unable to send email to all people." = "Unable to send email to all people.";
+"Reason: Not all people have a mail address." = "Reason: Not all people have a mail address.";
 "CANCEL" = "Cancel";
-"SEND_ANYWAY" = "Send anyway";
+"Send anyway" = "Send anyway";
 
 /* Email */
 /* Bill overview of our trip to "movies" */

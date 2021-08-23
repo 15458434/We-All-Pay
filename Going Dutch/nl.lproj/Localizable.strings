@@ -106,10 +106,10 @@
 "EMAIL_AVERAGE_SENTENCES_TWO" = " laten betalen, dan stel ik volgende oplossing voor";
 
 /* Reason: Not all people have a mail address. */
-"EMAIL_CONSTRUCTION_FAILURE_MESSAGE" = "Van sommigen is het email adres niet bekend.";
+"Reason: Not all people have a mail address." = "Van sommigen aanwzezigen is het email adres niet bekend.";
 
 /* Unable to send email to all people. */
-"EMAIL_CONSTRUCTION_FAILURE_TITLE" = "Kan niet iedereen een email sturen.";
+"Unable to send email to all people." = "Kan niet iedereen een email sturen.";
 
 /* Just Dear as in \"Dear Mark\" */
 "EMAIL_DEAR" = "Beste %1$@,";
@@ -314,7 +314,7 @@
 "SELECT_PAYER" = "Betaler";
 
 /* Send anyway */
-"SEND_ANYWAY" = "Stuur alsnog";
+"Send anyway" = "Stuur alsnog";
 
 /* first name example for app store screenshots */
 "Sheila" = "Sophie";

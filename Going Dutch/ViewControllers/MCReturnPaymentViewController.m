@@ -82,10 +82,10 @@ typedef NS_OPTIONS(NSUInteger, MCReturnPaymentViewControllerState) {
         [self openMailView:sender];
     } else {
         NSLog(@"Not everyone has an email address");
-        NSString *title = NSLocalizedString(@"EMAIL_CONSTRUCTION_FAILURE_TITLE", @"Unable to send email to all people.");
-        NSString *message = NSLocalizedString(@"EMAIL_CONSTRUCTION_FAILURE_MESSAGE", @"Reason: Not all people have a mail address.");
+        NSString *title = NSLocalizedString(@"Unable to send email to all people.", @"Unable to send email to all people.");
+        NSString *message = NSLocalizedString(@"Reason: Not all people have a mail address.", @"Reason: Not all people have a mail address.");
         NSString *cancel = NSLocalizedString(@"Cancel", @"Text on button to cancel something");
-        NSString *sendAnyway = NSLocalizedString(@"SEND_ANYWAY", @"Send anyway");
+        NSString *sendAnyway = NSLocalizedString(@"Send anyway", @"Send anyway");
         
         UIAlertController *alertController = [UIAlertController alertControllerWithTitle:title message:message preferredStyle:UIAlertControllerStyleAlert];
         [alertController addAction:[UIAlertAction actionWithTitle:cancel style:UIAlertActionStyleCancel handler:^(UIAlertAction * _Nonnull action) {
