@@ -38,7 +38,7 @@
 "Buy ad free version" = "Koop ads vrije versie";
 
 /* (No Comment) */
-"BUY_PRO" = "Verwijder Ads";
+"Remove Ads" = "Verwijder Ads";
 
 /* event name example for app store screenshots */
 "Camping trip" = "Kamperen";
@@ -171,9 +171,6 @@
 /* Give feedback */
 "Give feedback" = "Geef feedback";
 
-/* iScreen */
-"GIVE_FEEDBACK" = "Geef feedback";
-
 /* Go to */
 "Go to" = "Ga naar";
 
@@ -181,7 +178,7 @@
 "Hell no" = "Absoluut niet";
 
 /* (No Comment) */
-"I_WILL_SHOW_NO_ADS" = "We all pay is nu een advertentie vrije ervaring.";
+"We all pay is now an ad free experience." = "We all pay is nu een advertentie vrije ervaring.";
 
 /* Title */
 "INVALID_EMAIL_ADDRESS" = "Ongeldig emailadres";
@@ -244,7 +241,7 @@
 "Notifications" = "Berichten";
 
 /* (No Comment) */
-"OK" = "Ok";
+"Ok" = "Ok";
 
 /* As in Mark owes Arjen, but then just the word owes. */
 "OWES" = "betaalt";
@@ -258,14 +255,8 @@
 /* (No Comment) */
 "PAYMENTCELL_PAYERNAME_EXTRA" = "";
 
-/* (No Comment) */
-"PAYMENTS_PAGEVIEWCONTROLLER" = "Betalingen";
-
 /* Press \"add Person\" to add a person who you'd like to share this bill with. */
 "PEOPLE_LIST_EMPTY_MESSAGE" = "Druk op \"Nieuwe persoon\" om iemand toe te voegen waarmee je de rekening wilt delen.";
-
-/* SharedBillPageView */
-"PEOPLE_PRESENT_PAGEVIEWCONTROLLER" = "Aanwezigen";
 
 /* Header in the personView which state new person. */
 "Person" = "Persoon";
@@ -284,7 +275,7 @@
 "Popcorn" = "Popcorn";
 
 /* (No Comment) */
-"PURCHASE_RESTORED" = "Ad vrije versie hersteld.";
+"Ad free version restored." = "Ad vrije versie hersteld.";
 
 /* Text of the Rate me button */
 "Rate me" = "Waardeer mij";
@@ -296,10 +287,10 @@
 "Restore previous purchases" = "Herstel eerdere aankopen";
 
 /* (No Comment) */
-"RESTORE_PREVIOUS_PURCHASES" = "Herstel eerdere aankopen";
+"Restore previous purchases" = "Herstel eerdere aankopen";
 
 /* (No Comment) */
-"RESTORE_PURCHASE_FAILED" = "Geen aankoop om te herstellen";
+"Nothing to restore" = "Geen aankoop om te herstellen";
 
 /* Please add payments and/or people if you want a solution on who owes who. */
 "RETURNPAYMENTSVIEW_NOPAYMENTS" = "Druk op \"Annuleer\" en voeg mensen en betalingen toe.";
@@ -341,7 +332,7 @@
 "Thank you for purchasing" = "Dank u wel voor uw aankoop";
 
 /* (No Comment) */
-"THANK_YOU_FOR_PURCHASING" = "Dank u wel voor uw aankoop.";
+"Thank you for purchasing." = "Dank u wel voor uw aankoop.";
 
 /* event name example for app store screenshots */
 "Theatre" = "Theater";
@@ -379,13 +370,13 @@
 "Unable to send email" = "Kan email niet versturen";
 
 /* XRates missing alert */
-"UNABLE_TO_SOLVE" = "Onoplosbaar";
+"Unable to solve" = "Onoplosbaar";
 
 /* (No Comment) */
-"UNABLE_TO_SOLVE_MESSAGE" = "Valuta conversie gegevens niet bekend. Nu ophalen?";
+"Exchange rates missing. Would you like to fetch them now?" = "Valuta conversie gegevens niet bekend. Nu ophalen?";
 
 /* (No Comment) */
-"WHAT_IS_PRO" = "Wat is de Pro versie?";
+"What is the Pro Version?" = "Wat is de Pro versie?";
 
 /* (No Comment) */
 "YES" = "ja";

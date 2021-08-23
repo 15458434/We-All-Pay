@@ -14,8 +14,6 @@
 "No people present" = "No people present";
 
 /* SharedBillPageView */
-"PEOPLE_PRESENT_PAGEVIEWCONTROLLER" = "People present";
-"PAYMENTS_PAGEVIEWCONTROLLER" = "Payments";
 "Unable to send email to all people." = "Unable to send email to all people.";
 "Reason: Not all people have a mail address." = "Reason: Not all people have a mail address.";
 "CANCEL" = "Cancel";
@@ -125,19 +123,18 @@
 "NO" = "no";
 
 /* XRates missing alert */
-"UNABLE_TO_SOLVE" = "Unable to solve";
-"UNABLE_TO_SOLVE_MESSAGE" = "Exchange rates missing. Would you like to fetch them now?";
+"Unable to solve" = "Unable to solve";
+"Exchange rates missing. Would you like to fetch them now?" = "Exchange rates missing. Would you like to fetch them now?";
 
 /* iScreen */
-"GIVE_FEEDBACK" = "Give feedback";
-"BUY_PRO" = "Remove Ads";
-"RESTORE_PREVIOUS_PURCHASES" = "Restore previous purchases";
-"WHAT_IS_PRO" = "What is the Pro Version?";
-"THANK_YOU_FOR_PURCHASING" = "Thank you for purchasing.";
-"I_WILL_SHOW_NO_ADS" = "We all pay is now an ad free experience.";
-"PURCHASE_RESTORED" ="Ad free version restored.";
-"RESTORE_PURCHASE_FAILED" = "Nothing to restore";
-"OK" = "Ok";
+"Remove Ads" = "Remove Ads";
+"Restore previous purchases" = "Restore previous purchases";
+"What is the Pro Version?" = "What is the Pro Version?";
+"Thank you for purchasing." = "Thank you for purchasing.";
+"We all pay is now an ad free experience." = "We all pay is now an ad free experience.";
+"Ad free version restored." ="Ad free version restored.";
+"Nothing to restore" = "Nothing to restore";
+"Ok" = "Ok";
 
 /* Store Interface */
 "App Store unavailable" = "App Store unavailable";

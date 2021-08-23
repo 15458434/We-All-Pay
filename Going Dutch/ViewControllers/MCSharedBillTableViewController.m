@@ -80,7 +80,7 @@
         [self performSegueWithIdentifier:@"solveButton" sender:self];
     } else {
         // Give user alert.
-        NSString *title = NSLocalizedString(@"UNABLE_TO_SOLVE", @"Unable to solve");
+        NSString *title = NSLocalizedString(@"Unable to solve", @"Unable to solve");
         NSString *message = NSLocalizedString(@"At least one of the payments is missing a payer.", @"One of the payments is missing a payer.");
         NSString *cancelButtonTitle = NSLocalizedString(@"Cancel", @"Text on button to cancel something");
         NSString *fixItButtonTitle = NSLocalizedString(@"Go to", @"Go to");
