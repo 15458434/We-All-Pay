@@ -128,8 +128,8 @@
     } else if ([allPeople count] == 1) {
         return [allPeople[0] getName];
     } else if ([allPeople count] == 2) {
-        NSString *enString = [NSString stringWithFormat:NSLocalizedString(@"AND_STRING", @"The word \"and\" between two people")];
-        return [NSString stringWithFormat:@"%@ %@ %@", [allPeople[0] getName], enString,[allPeople[1] getName]];
+        NSString *localizedString = NSLocalizedString(@"%1$@ and %2$@", "A label showing \"person1 and person2\"");
+        return [NSString stringWithFormat:localizedString, [allPeople[0] getName], [allPeople[1] getName]];
     } else if ([allPeople count] >= 3) {
         NSString *andOthers = [NSString stringWithFormat:NSLocalizedString(@"AND_OTHERS", @"A list of people like Mark, Ilse and other where the \"and others\" needs to be translated.")];
         return [NSString stringWithFormat:@"%@, %@ %@", [allPeople[0] getName], [allPeople[1] getName], andOthers];

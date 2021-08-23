@@ -1,6 +1,9 @@
 /* \(productName) is now free of any ads. */
 "(productName) is now free of any ads." = "(productName) is nu vrij van advertenties";
 
+/* A label showing \"person1 and person2\" */
+"%1$@ and %2$@" = "%1$@ en %2$@";
+
 /* Ad free version restored. */
 "Ad free version restored." = "Advertentie vrije versie is hersteld";
 
@@ -12,9 +15,6 @@
 
 /* A list of people like Mark, Ilse and other where the \"and others\" needs to be translated. */
 "AND_OTHERS" = "en anderen";
-
-/* The word \"and\" between two people */
-"AND_STRING" = "en";
 
 /* first name example for app store screenshots */
 "Ann" = "Anne";

@@ -12,8 +12,6 @@
 /* MCSharedBill+addons */
 /* A message when there are no people present inside this shared bill */
 "No people present" = "No people present";
-/* The word \"and\" between two people */
-"AND_STRING" = "and";
 /* A list of people like Mark, Ilse and other where the \"and others\" needs to be translated. */
 "AND_OTHERS" = "and others";
 
