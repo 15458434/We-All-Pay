@@ -232,7 +232,7 @@
 "NO" = "nee";
 
 /* A message when there are no people present inside this shared bill */
-"NO_PEOPLE_PRESENT" = "Niemand aanwezig";
+"No people present" = "Niemand aanwezig";
 
 /* A message for no notifications in the notifications screen. */
 "Nothing new right now." = "Er is niks nieuws op dit moment.";

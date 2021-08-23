@@ -124,7 +124,7 @@
 {
     NSArray *allPeople = [[self peoplePresent] sortedArrayUsingDescriptors:@[[NSSortDescriptor sortDescriptorWithKey:@"dateCreated" ascending:YES]]];
     if ([allPeople count] == 0) {
-        return NSLocalizedString(@"NO_PEOPLE_PRESENT", @"A message when there are no people present inside this shared bill");
+        return NSLocalizedString(@"No people present", @"A message when there are no people present inside this shared bill");
     } else if ([allPeople count] == 1) {
         return [allPeople[0] getName];
     } else if ([allPeople count] == 2) {
