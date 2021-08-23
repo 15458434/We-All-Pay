@@ -240,7 +240,7 @@
     if ([thisCellsPayment payingPerson]) {
         thisCellsPayerName = thisCellsPayment.payingPerson.getFullName;
     } else {
-        thisCellsPayerName = NSLocalizedString(@"THISPAYMENTCELL_NOPAYERNAME", @"Someone");
+        thisCellsPayerName = NSLocalizedString(@"Someone", @"Someone");
     }
     paymentCell.namePayerLabel.text = thisCellsPayerName;
     
@@ -251,7 +251,7 @@
     
     NSString *thisCellsDescriptionOfPayment = [thisCellsPayment descriptionOfPayment];
     if (!thisCellsDescriptionOfPayment) {
-        thisCellsDescriptionOfPayment = NSLocalizedString(@"THISPAYMENTCELL_NOOBJECT", @"Something");
+        thisCellsDescriptionOfPayment = NSLocalizedString(@"something", @"Something");
     }
     paymentCell.whatPaidLabel.text =thisCellsDescriptionOfPayment;
     
@@ -300,7 +300,7 @@
     _emptyMessage = [[NSBundle mainBundle] loadNibNamed:@"MCTableEmptyMessage" owner:self options:nil][0];
     _emptyMessage.borderlineView.dyInset = 1;
     self.tableView.backgroundView = _emptyMessage;
-    _emptyMessage.bigMessage.text = NSLocalizedString(@"EMPTY_PAYMENT_LIST_MESSAGE", @"Press \"add payment\" to add a payment to this event.");
+    _emptyMessage.bigMessage.text = NSLocalizedString(@"Press \"Add payment\" to add a payment to this event.", @"Press \"add payment\" to add a payment to this event.");
 }
 
 - (void)viewDidLoad {

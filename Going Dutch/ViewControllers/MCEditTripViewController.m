@@ -220,7 +220,7 @@
     
     _emptyMessage = [NSBundle.mainBundle loadNibNamed:@"MCTableEmptyMessage" owner:self options:nil][0];
     _emptyMessage.borderlineView.dyInset = 1;
-    _emptyMessage.bigMessage.text = NSLocalizedString(@"PEOPLE_LIST_EMPTY_MESSAGE", @"Press \"add Person\" to add a person who you'd like to share this bill with.");
+    _emptyMessage.bigMessage.text = NSLocalizedString(@"Press \"Add person\" to add a person who you'd like to share this bill with.", @"Press \"add Person\" to add a person who you'd like to share this bill with.");
     self.tableView.backgroundView = _emptyMessage;
 }
 

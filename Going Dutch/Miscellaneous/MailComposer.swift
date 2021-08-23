@@ -33,7 +33,7 @@ extension MailComposer where Self: ThisEvent {
     
     func subject() throws -> String {
         if let tripName = self.event.tripName {
-            return String.localizedStringWithFormat(NSLocalizedString("EMAIL_SUBJECT_WITH_TRIPNAME", comment: "Bill overview of our trip to %1$@"), tripName)
+            return String.localizedStringWithFormat(NSLocalizedString("Expenses overview of our event %1$@", comment: "Bill overview of our trip to %1$@"), tripName)
         } else {
             return NSLocalizedString("EMAIL_SUBJECT", comment: "Bill overview of our event.")
         }

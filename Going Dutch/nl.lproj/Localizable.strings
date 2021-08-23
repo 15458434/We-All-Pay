@@ -28,9 +28,6 @@
 /* One of the payments is missing a payer. */
 "At least one of the payments is missing a payer." = "Minstens één betaling heeft een onbekende betaler.";
 
-/* AllTripsTableView */
-"BACK_TITLE_ALL_TRIPS_VIEW" = "terug";
-
 /* last name example for appstore screenshots */
 "Burwell" = "Groen";
 
@@ -53,10 +50,10 @@
 "Concert" = "Concert";
 
 /* (No Comment) */
-"CONTACTS_DISABLED_MESSAGE" = "Toegang tot Contacten kan aangezet worden in Instellingen->We All Pay->Privacy";
+"You can enable access to Contacts in Settings->We All Pay->Privacy" = "Toegang tot Contacten kan aangezet worden in Instellingen->We All Pay->Privacy";
 
 /* (No Comment) */
-"CONTACTS_DISABLED_TITLE" = "Contacten uitgeschakeld";
+"Contacts disabled" = "Contacten uitgeschakeld";
 
 /* Alert title stating that data is missing in a payment */
 "Data missing in payment" = "Ontbrekende gegevens in betaling";
@@ -148,7 +145,7 @@
 "EMAIL_SUBJECT" = "Onkosten overzicht van ons uitje.";
 
 /* Bill overview of our trip to "movies" */
-"EMAIL_SUBJECT_WITH_TRIPNAME" = "Onkosten overzicht van ons uitje %1$@.";
+"Expenses overview of our event %1$@" = "Onkosten overzicht van ons uitje %1$@.";
 
 /* %1$@ has paid %2$@ for %3$@. */
 "EMAIL_WHO_HAS_PAID" = "%1$@ betaalde %2$@ voor %3$@.";
@@ -157,13 +154,13 @@
 "EMAIL_WHO_HAS_PAID_INTERNATIONAL" = "%1$@ betaalde %2$@(%3$@) voor %4$@.";
 
 /* SharedBillTableView */
-"EMPTY_PAYMENT_LIST_MESSAGE" = "Druk op \"Nieuwe betaling\" om een betaling toe te voegen op deze rekening.";
+"Press \"Add payment\" to add a payment to this event." = "Druk op \"Nieuwe betaling\" om een betaling toe te voegen op deze rekening.";
 
 /* Header in the paymentView which states payment */
-"EXISTING_PAYMENT_HEADER" = "Betaling";
+"Payment" = "Betaling";
 
 /* Sub header in the paymentView which states edit data */
-"EXISTING_PAYMENT_SUBHEADER" = "Bewerk gegevens";
+"Edit payment data" = "Bewerk gegevens";
 
 /* Message explaining what the user can do to refetch exchange rates */
 "Fetching exchange rates is not possible at this moment. Check your internet connection and/or hit solve to fetch all missing exchange rates at a later time" = "Het ophalen van de wisselkoers is niet mogelijk op dit moment. Controleer je internet verbinding en/of druk later op 'Oplossing' om all ontbrekende wisselkoersen op te halen.";
@@ -181,10 +178,10 @@
 "We all pay is now an ad free experience." = "We all pay is nu een advertentie vrije ervaring.";
 
 /* Title */
-"INVALID_EMAIL_ADDRESS" = "Ongeldig emailadres";
+"Invalid email address" = "Ongeldig emailadres";
 
 /* Message */
-"INVALID_EMAIL_ADDRESS_MESSAGE" = "Het ingevoerde emailadres lijkt niet op een geldig email adres. Dit kan ongewenst gedrag veroorzaken. Weet u zeker dat u door wilt gaan?";
+"The email address you provided doesn't appear to be an email address. This might cause improper behavior. Are you sure you want to continue?" = "Het ingevoerde emailadres lijkt niet op een geldig email adres. Dit kan ongewenst gedrag veroorzaken. Weet u zeker dat u door wilt gaan?";
 
 /* first name example for app store screenshots */
 "Jake" = "Rik";
@@ -217,10 +214,10 @@
 "New Payment" = "Nieuwe betaling";
 
 /* Header in the paymentView which state new Payment. */
-"NEW_PAYMENT_HEADER" = "Nieuwe betaling";
+"New payment" = "Nieuwe betaling";
 
 /* Sub header in the paymentView which states Add payment data */
-"NEW_PAYMENT_SUBHEADER" = "Vul gegevens in";
+"Add payment data" = "Vul gegevens in";
 
 /* last name example for appstore screenshots */
 "Nichelson" = "Vos";
@@ -247,7 +244,7 @@
 "OWES" = "betaalt";
 
 /* Owes as in Mark owes $5 */
-"OWES_FROM_THIS_PAYMENT" = "gebruikt";
+"owes" = "gebruikt";
 
 /* (No Comment) */
 "PAYMENT_CELL_PAIDFOR_EXTRA" = "betaalde ";
@@ -256,7 +253,7 @@
 "PAYMENTCELL_PAYERNAME_EXTRA" = "";
 
 /* Press \"add Person\" to add a person who you'd like to share this bill with. */
-"PEOPLE_LIST_EMPTY_MESSAGE" = "Druk op \"Nieuwe persoon\" om iemand toe te voegen waarmee je de rekening wilt delen.";
+"Press \"Add person\" to add a person who you'd like to share this bill with." = "Druk op \"Nieuwe persoon\" om iemand toe te voegen waarmee je de rekening wilt delen.";
 
 /* Header in the personView which state new person. */
 "Person" = "Persoon";
@@ -299,10 +296,10 @@
 "Select Category" = "Selecteer Categorie";
 
 /* Select Category */
-"SELECT_CATEGORY" = "Selecteer Categorie";
+"Select Category" = "Selecteer Categorie";
 
 /* (No Comment) */
-"SELECT_PAYER" = "Betaler";
+"Select payer" = "Betaler";
 
 /* Send anyway */
 "Send anyway" = "Stuur alsnog";
@@ -341,10 +338,10 @@
 "This month food costs" = "Boodschappen deze maand";
 
 /* Something */
-"THISPAYMENTCELL_NOOBJECT" = "iets";
+"something" = "iets";
 
 /* Someone */
-"THISPAYMENTCELL_NOPAYERNAME" = "Iemand";
+"Someone" = "Iemand";
 
 /* payed item example for app store screenshots */
 "Tickets" = "Kaartjes";

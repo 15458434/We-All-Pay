@@ -6,9 +6,6 @@
   Copyright (c) 2013 Mark Cornelisse. All rights reserved.
 */
 
-/* AllTripsTableView */
-"BACK_TITLE_ALL_TRIPS_VIEW" = "back";
-
 /* MCSharedBill+addons */
 /* A message when there are no people present inside this shared bill */
 "No people present" = "No people present";
@@ -21,7 +18,7 @@
 
 /* Email */
 /* Bill overview of our trip to "movies" */
-"EMAIL_SUBJECT_WITH_TRIPNAME" = "Expenses overview of our event %1$@";
+"Expenses overview of our event %1$@" = "Expenses overview of our event %1$@";
 /* Bill overview of our event" */
 "EMAIL_SUBJECT" = "Expenses overview of our event.";
 /* Just Dear as in \"Dear Mark\" */
@@ -57,11 +54,11 @@
 "EMAIL_FINAL_SENTENCE" = "If you have any remarks, please let me know.";
 
 /* SharedBillTableView */
-"EMPTY_PAYMENT_LIST_MESSAGE" = "Press \"Add payment\" to add a payment to this event.";
+"Press \"Add payment\" to add a payment to this event." = "Press \"Add payment\" to add a payment to this event.";
 "PAYMENTCELL_PAYERNAME_EXTRA" = " paid";
 "PAYMENT_CELL_PAIDFOR_EXTRA" = "for ";
-"THISPAYMENTCELL_NOPAYERNAME" = "Someone";
-"THISPAYMENTCELL_NOOBJECT" = "something";
+"Someone" = "Someone";
+"something" = "something";
 /* One of the payments is missing a payer. */
 "At least one of the payments is missing a payer." = "At least one of the payment is missing a payer.";
 "Go to" = "Go to";
@@ -88,23 +85,23 @@
 
 /* MCEditTripView */
 /* Press \"add Person\" to add a person who you'd like to share this bill with. */
-"PEOPLE_LIST_EMPTY_MESSAGE" = "Press \"Add person\" to add a person who you'd like to share this bill with.";
-"CONTACTS_DISABLED_TITLE" = "Contacts disabled";
-"CONTACTS_DISABLED_MESSAGE" = "You can enable access to Contacts in Settings->We All Pay->Privacy";
+"Press \"Add person\" to add a person who you'd like to share this bill with." = "Press \"Add person\" to add a person who you'd like to share this bill with.";
+"Contacts disabled" = "Contacts disabled";
+"You can enable access to Contacts in Settings->We All Pay->Privacy" = "You can enable access to Contacts in Settings->We All Pay->Privacy";
 
 /* PaymentView */
 /* Header in the paymentView which state new Payment. */
-"NEW_PAYMENT_HEADER" = "New payment";
+"New payment" = "New payment";
 /* Sub header in the paymentView which states Add payment data */
-"NEW_PAYMENT_SUBHEADER" = "Add payment data";
+"Add payment data" = "Add payment data";
 /* Header in the paymentView which states payment */
-"EXISTING_PAYMENT_HEADER" = "Payment";
+"Payment" = "Payment";
 /* Sub header in the paymentView which states edit data */
-"EXISTING_PAYMENT_SUBHEADER" = "Edit payment data";
+"Edit payment data" = "Edit payment data";
 /* Owes as in Mark owes $5*/
-"OWES_FROM_THIS_PAYMENT" = "owes";
-"SELECT_PAYER" = "Select payer";
-"SELECT_CATEGORY" = "Select Category";
+"owes" = "owes";
+"Select payer" = "Select payer";
+"Select Category" = "Select Category";
 
 /* PersonView */
 /* Header in the personView which state new person. */
@@ -116,9 +113,9 @@
 
 /* Invalid email address alertView */
 /* Title */
-"INVALID_EMAIL_ADDRESS" = "Invalid email address";
+"Invalid email address" = "Invalid email address";
 /* Message */
-"INVALID_EMAIL_ADDRESS_MESSAGE" = "The email address you provided doesn't appear to be an email address. This might cause improper behavior. Are you sure you want to continue?";
+"The email address you provided doesn't appear to be an email address. This might cause improper behavior. Are you sure you want to continue?" = "The email address you provided doesn't appear to be an email address. This might cause improper behavior. Are you sure you want to continue?";
 "YES" = "yes";
 "NO" = "no";
 
