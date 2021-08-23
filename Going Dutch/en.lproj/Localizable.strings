@@ -20,13 +20,13 @@
 /* Bill overview of our trip to "movies" */
 "Expenses overview of our event %1$@" = "Expenses overview of our trip to %1$@";
 /* Bill overview of our event" */
-"EMAIL_SUBJECT" = "Expenses overview of our event.";
+"Expenses overview of our event." = "Expenses overview of our event.";
 /* Just Dear as in \"Dear Mark\" */
-"EMAIL_DEAR" = "Dear %1$@,";
+"Dear %1$@," = "Dear %1$@,";
 /* From a total of \"$ 20,45\", which was spend on our last trip to \"Movies\". We all have to pay an equal share of \"$6,82\". */
-"EMAIL_INTRO_WITH_TRIPNAME" = "Here you go. The full overview of the %1$@ which we spend on our last event %2$@. We spent an average of %3$@ a person. You can find more details below.";
+"Here you go. The full overview of the %1$@ which we spend on our last event %2$@. We spent an average of %3$@ a person. You can find more details below." = "Here you go. The full overview of the %1$@ which we spend on our last event %2$@. We spent an average of %3$@ a person. You can find more details below.";
 /* Here you go. The full overview of the %1$@ which we spend on our last event. We spent an average of %2$@ a person. You can find more of the details below. */
-"EMAIL_INTRO" = "Here you go. The full overview of the %1$@ which we spend on our last event. We spent an average of %2$@ a person. You can find more of the details below.";
+"Here you go. The full overview of the %1$@ which we spend on our last event. We spent an average of %2$@ a person. You can find more of the details below." = "Here you go. The full overview of the %1$@ which we spend on our last event. We spent an average of %2$@ a person. You can find more of the details below.";
 /* The message that nobody has paid so far */
 "EMAIL_NOBODY_HAS_PAID" = "Nobody has paid so far.";
 /* The person who has payed %1$@ */
@@ -34,29 +34,21 @@
 /* The people who have paid are */
 "EMAIL_MULTIPLE_PEOPLE_HAVE_PAID" = "This is what we all paid:";
 /* %1$@ has paid %2$@ for %3$@. */
-"EMAIL_WHO_HAS_PAID" = "%1$@ paid %2$@ for %3$@.";
+"%1$@ paid %2$@ for %3$@." = "%1$@ paid %2$@ for %3$@.";
 /* %1$@ has paid %2$@(%3$@) for %4$@. */
-"EMAIL_WHO_HAS_PAID_INTERNATIONAL" = "%1$@ has paid %2$@(%3$@) for %4$@";
-/* Part one of: To have everybody pay the average of $7.00, I suggest the following solution */
-"EMAIL_AVERAGE_SENTENCES_ONE" = "When everybody pays the average of";
-"EMAIL_AVERAGE_SENTENCES_TWO" = ", I suggest the following solution";
+"%1$@ has paid %2$@(%3$@) for %4$@" = "%1$@ has paid %2$@(%3$@) for %4$@";
 /* "The amount of money we used: */
-"EMAIL_AVERAGE_OF_USE_SENTENCE" = "We each used these amounts:";
+"We each used these amounts:" = "We each used these amounts:";
 /* %1$@ used %2$@ in total. */
-"EMAIL_AMOUNT_USED" = "%1$@ used %2$@ in total.";
-"EMAIL_I_SUGGEST" = "Based on all of this, I suggest the following solution:";
-/* The sentence: "Mark" pays $6.80 to Ilse. */
-"EMAIL_OWES_PART_ONE" = "pays";
-"EMAIL_OWES_PART_TWO" = "to";
+"%1$@ used %2$@ in total." = "%1$@ used %2$@ in total.";
+"Based on all of this, I suggest the following solution:" = "Based on all of this, I suggest the following solution:";
 /* %1$@ pays %2$@ to %3$@. */
-"EMAIL_OWES" = "%1$@ pays %2$@ to %3$@.";
+"%1$@ pays %2$@ to %3$@." = "%1$@ pays %2$@ to %3$@.";
 /* Closing sentence of the email: If you have any remarks please let me know. */
-"EMAIL_FINAL_SENTENCE" = "If you have any remarks, please let me know.";
+"If you have any remarks, please let me know." = "If you have any remarks, please let me know.";
 
 /* SharedBillTableView */
 "Press \"Add payment\" to add a payment to this event." = "Press \"Add payment\" to add a payment to this event";
-"PAYMENTCELL_PAYERNAME_EXTRA" = " paid";
-"PAYMENT_CELL_PAIDFOR_EXTRA" = "for ";
 "Someone" = "Someone";
 "something" = "something";
 /* One of the payments is missing a payer. */
@@ -64,24 +56,16 @@
 "Go to" = "Go to";
 
 /* MCReturnPaymentView */
-/* "EACH_USED", "Mark used:" */
-"EACH_USED" = "used:";
-/* Each pays: $ string inside the header of the solution screen. */
-"EACH_PAYS" = "Each pays:";
-/* Ilse total paid: inside the solution screen. */
-"TOTAL_PAID" ="total paid:";
 /* Total spent: $ string inside the header of the solution screen */
-"TOTAL_SPENT" = "Total spent:";
-/* As in Mark owes Arjen, but then just the word owes. */
-"OWES" = "owes";
+"Total spent:" = "Total spent:";
 /* Please add payments and/or people if you want a solution on who owes who.*/
-"RETURNPAYMENTSVIEW_NOPAYMENTS" = "Please add people and payments if you want a solution on who owes who.";
+"Please add people and payments if you want a solution on who owes who." = "Please add people and payments if you want a solution on who owes who.";
 /* Section header in the tableView Who owes who */
-"SOLUTION_SECTION_WHO_OWES_WHO" = "Who owes whom";
+"Who owes whom" = "Who owes whom";
 /* Section header in the tableView Total owes */
-"SOLUTION_SECTION_TOTAL_OWES" = "Total owes";
+"Total owes" = "Total owes";
 /* Section header in the tableView Total paid */
-"SOLUTION_SECTION_TOTAL_PAID" = "Total paid";
+"Total paid" = "Total paid";
 
 /* MCEditTripView */
 /* Press \"add Person\" to add a person who you'd like to share this bill with. */
@@ -116,8 +100,8 @@
 "Invalid email address" = "Invalid email address";
 /* Message */
 "The email address you provided doesn't appear to be an email address. This might cause improper behavior. Are you sure you want to continue?" = "The email address you provided doesn't appear to be an email address. This might cause improper behavior. Are you sure you want to continue?";
-"YES" = "yes";
-"NO" = "no";
+"yes" = "yes";
+"no" = "no";
 
 /* XRates missing alert */
 "Unable to solve" = "Unable to solve";

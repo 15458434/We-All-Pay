@@ -216,8 +216,8 @@ typedef NS_OPTIONS(NSUInteger, MCReturnPaymentViewControllerState) {
     CurrencyFormatter *cf = [[CurrencyFormatter alloc] initWithCurrencyCode:_tonightsBill.mainCurrency.code];
     returnPaymentCell.moneyLabel.text = [cf stringForObjectValue:thisCellsReturnPayment.money];
     
-    NSString *owesString = NSLocalizedString(@"OWES", @"As in Mark owes Arjen, but then just the word owes.");
-    NSString *whoOwesWho = [[NSString alloc] initWithFormat:@"%@ %@ %@:", [[thisCellsReturnPayment payer] getName], owesString, [[thisCellsReturnPayment receiver] getName]];
+    NSString *owesString = NSLocalizedString(@"%1$@ paid %2$@", @"As in Mark owes Arjen, but then just the word owes.");
+    NSString *whoOwesWho = [[NSString alloc] initWithFormat:owesString, [[thisCellsReturnPayment payer] getName], owesString, [[thisCellsReturnPayment receiver] getName]];
     [[returnPaymentCell whoOwesWhoLabel] setText:whoOwesWho];
     [returnPaymentCell setSelectionStyle:UITableViewCellSelectionStyleNone];
     
@@ -247,7 +247,7 @@ typedef NS_OPTIONS(NSUInteger, MCReturnPaymentViewControllerState) {
         return cell;
     } else {
         MCSolutionOverViewTableViewCell_iPhone *cell = [tableView dequeueReusableCellWithIdentifier:@"MCSolutionOverViewTableViewCell_iPhone"];
-        NSString *totalSpentString = NSLocalizedString(@"TOTAL_SPENT", @"Total spent:");
+        NSString *totalSpentString = NSLocalizedString(@"Total spent:", @"Total spent:");
         [[cell totalLabel] setText:totalSpentString];
         
         CurrencyFormatter *cf = [[CurrencyFormatter alloc] initWithCurrencyCode:_tonightsBill.mainCurrency.code];
@@ -321,11 +321,11 @@ typedef NS_OPTIONS(NSUInteger, MCReturnPaymentViewControllerState) {
     [super viewWillAppear:animated];
     
     _emptyMessage.topConstraint.constant = self.headerView.frame.size.height;
-    _emptyMessage.bigMessage.text = NSLocalizedString(@"RETURNPAYMENTSVIEW_NOPAYMENTS", @"Please add payments and/or people if you want a solution on who owes who.");
+    _emptyMessage.bigMessage.text = NSLocalizedString(@"Please add people and payments if you want a solution on who owes who.", @"Please add payments and/or people if you want a solution on who owes who.");
     [self setEmptyMessageWithDuration:0.0];
     
     if (_tonightsBill.peoplePresent.count == 0 || _tonightsBill.payments.count == 0) {
-        [[_emptyMessage bigMessage] setText:NSLocalizedString(@"RETURNPAYMENTSVIEW_NOPAYMENTS", @"Please add payments and/or people if you want a solution on who owes who.")];
+        [[_emptyMessage bigMessage] setText:NSLocalizedString(@"Please add people and payments if you want a solution on who owes who.", @"Please add payments and/or people if you want a solution on who owes who.")];
     } else {
         _emptyMessage.bigMessage.text = @"";
     }
@@ -363,11 +363,11 @@ typedef NS_OPTIONS(NSUInteger, MCReturnPaymentViewControllerState) {
         if ([_solution count] > 0) {
             switch (section) {
                 case 0:
-                    return NSLocalizedString(@"SOLUTION_SECTION_WHO_OWES_WHO", @"Who ows who");
+                    return NSLocalizedString(@"Who owes whom", @"Who ows who");
                 case 1:
-                    return NSLocalizedString(@"SOLUTION_SECTION_TOTAL_OWES", @"Total owes");
+                    return NSLocalizedString(@"Total owes", @"Total owes");
                 case 2:
-                    return NSLocalizedString(@"SOLUTION_SECTION_TOTAL_PAID", @"Total paid");
+                    return NSLocalizedString(@"Total paid", @"Total paid");
                 default:
                     return nil;
             }
@@ -380,13 +380,13 @@ typedef NS_OPTIONS(NSUInteger, MCReturnPaymentViewControllerState) {
         if ([_solution count] > 0) {
             switch (section) {
                 case 0:
-                    return NSLocalizedString(@"SOLUTION_SECTION_WHO_OWES_WHO", @"Who ows who");
+                    return NSLocalizedString(@"Who owes whom", @"Who ows who");
                 case 1:
                     return nil;
                 case 2:
-                    return NSLocalizedString(@"SOLUTION_SECTION_TOTAL_OWES", @"Total owes");
+                    return NSLocalizedString(@"Total owes", @"Total owes");
                 case 3:
-                    return NSLocalizedString(@"SOLUTION_SECTION_TOTAL_PAID", @"Total paid");
+                    return NSLocalizedString(@"Total paid", @"Total paid");
                 default:
                     return nil;
             }
