@@ -87,7 +87,7 @@ typedef NS_ENUM(BOOL, ChildViewStatus) {
     
     NSString *descriptionOfPayment = [_thisPayment.descriptionOfPayment stringByTrimmingCharactersInSet:NSCharacterSet.whitespaceAndNewlineCharacterSet];
     NSString *parameterItemID = [NSString stringWithFormat:@"id-%@", descriptionOfPayment];
-    NSString *parameterName = _thisPayment.descriptionOfPayment;
+    NSString *parameterName = [NSString stringWithFormat:@"%@", descriptionOfPayment];
     NSString *paremeterContentType = @"shared_payment";
     [FIRAnalytics logEventWithName:@"save_item" parameters:@{kFIRParameterItemID: parameterItemID, kFIRParameterItemName: parameterName, kFIRParameterContentType: paremeterContentType}];
 
