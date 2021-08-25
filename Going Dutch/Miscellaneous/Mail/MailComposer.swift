@@ -62,14 +62,6 @@ extension MailComposer where Self: ThisEvent {
         }
         mailBody += "\n\n"
         
-//        switch event.totalAmountOfPeopleWhoHavePaid() {
-//        case 1:
-//            mailBody += String.localizedStringWithFormat(NSLocalizedString("EMAIL_ONE_PERSON_HAS_PAID", comment: "The person who has payed %1$@"), allPayments.first!.payingPerson!.getFullName!)
-//        case let totalAmountOfPeoplewhoHavePaid where totalAmountOfPeoplewhoHavePaid > 1:
-//            mailBody += String.localizedStringWithFormat(NSLocalizedString("EMAIL_MULTIPLE_PEOPLE_HAVE_PAID", comment: "The people who have paid are"))
-//        default:
-//            mailBody += String.localizedStringWithFormat(NSLocalizedString("EMAIL_NOBODY_HAS_PAID", comment: "The message that nobody has paid so far"))
-//        }
         let pluralString = NSLocalizedString("This is what we all paid:", comment: "")
         mailBody += String.localizedStringWithFormat(pluralString, event.totalAmountOfPeopleWhoHavePaid())
         mailBody += "\n"
