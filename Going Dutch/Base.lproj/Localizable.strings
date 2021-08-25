@@ -26,12 +26,6 @@
 "Here you go. The full overview of the %1$@ which we spend on our last event %2$@. We spent an average of %3$@ a person. You can find more details below." = "Here you go. The full overview of the %1$@ which we spend on our last event %2$@. We spent an average of %3$@ a person. You can find more details below.";
 /* Here you go. The full overview of the %1$@ which we spend on our last event. We spent an average of %2$@ a person. You can find more of the details below. */
 "Here you go. The full overview of the %1$@ which we spend on our last event. We spent an average of %2$@ a person. You can find more of the details below." = "Here you go. The full overview of the %1$@ which we spend on our last event. We spent an average of %2$@ a person. You can find more of the details below.";
-/* The message that nobody has paid so far */
-"EMAIL_NOBODY_HAS_PAID" = "Nobody has paid so far.";
-/* The person who has payed %1$@ */
-"EMAIL_ONE_PERSON_HAS_PAID" = "%1$@ has paid for everything:";
-/* The people who have paid are */
-"EMAIL_MULTIPLE_PEOPLE_HAVE_PAID" = "This is what we all paid:";
 /* %1$@ has paid %2$@ for %3$@. */
 "%1$@ paid %2$@ for %3$@." = "%1$@ paid %2$@ for %3$@.";
 /* %1$@ has paid %2$@(%3$@) for %4$@. */

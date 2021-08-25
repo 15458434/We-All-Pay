@@ -102,15 +102,6 @@
 /* Sub header in the paymentView which states edit data */
 "Edit payment data" = "Bewerk gegevens";
 
-/* The people who have paid are */
-"EMAIL_MULTIPLE_PEOPLE_HAVE_PAID" = "Wie heeft wat betaald:";
-
-/* The message that nobody has paid so far */
-"EMAIL_NOBODY_HAS_PAID" = "Niemand heeft tot nu toe nog betaald.";
-
-/* The person who has payed %1$@ */
-"EMAIL_ONE_PERSON_HAS_PAID" = "%1$@ is de enige die heeft betaald.";
-
 /* (No Comment) */
 "Exchange rates missing. Would you like to fetch them now?" = "Valuta conversie gegevens niet bekend. Nu ophalen?";
 
