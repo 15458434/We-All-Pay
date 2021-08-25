@@ -61,9 +61,6 @@
 /* Text on button to cancel something */
 "Cancel" = "Annuleer";
 
-/* (No Comment) */
-"CANCEL" = "Annuleer";
-
 /* event name example for app store screenshots */
 "Concert" = "Concert";
 
@@ -210,6 +207,9 @@
 /* Header in the personView which state new person. */
 "Person" = "Persoon";
 
+/* Please add payments and/or people if you want a solution on who owes who. */
+"Please add people and payments if you want a solution on who owes who." = "Druk op \"Annuleer\" en voeg mensen en betalingen toe.";
+
 /* Alert message suggesting the user that there is missing data on a payment. */
 "Please check the payment for missing data" = "Controleer de betaling op ontbrekende data";
 
@@ -244,9 +244,6 @@
 /* Restore previous purchases */
 "Restore previous purchases" = "Herstel eerdere aankopen";
 
-/* Please add payments and/or people if you want a solution on who owes who. */
-"Please add people and payments if you want a solution on who owes who." = "Druk op \"Annuleer\" en voeg mensen en betalingen toe.";
-
 /* Select Category
    Text of the payment category selection button */
 "Select Category" = "Selecteer Categorie";
@@ -262,15 +259,6 @@
 
 /* payed item example for app store screenshots */
 "Soft drinks" = "Frisdrank";
-
-/* Section header in the tableView Total owes */
-"Total owes" = "Totaal verschuldigd";
-
-/* Section header in the tableView Total paid */
-"Total paid" = "Totaal uitgegeven";
-
-/* Section header in the tableView Who owes who */
-"Who owes whom" = "Wie betaalt wie";
 
 /* Someone */
 "Someone" = "Iemand";
@@ -301,6 +289,12 @@
 
 /* payed item example for app store screenshots */
 "Tickets" = "Kaartjes";
+
+/* Section header in the tableView Total owes */
+"Total owes" = "Totaal verschuldigd";
+
+/* Section header in the tableView Total paid */
+"Total paid" = "Totaal uitgegeven";
 
 /* Total spent: $ string inside the header of the solution screen */
 "Total spent:" = "Totaal:";
@@ -333,6 +327,9 @@
 
 /* (No Comment) */
 "What is the Pro Version?" = "Wat is de Pro versie?";
+
+/* Section header in the tableView Who owes who */
+"Who owes whom" = "Wie betaalt wie";
 
 /* (No Comment) */
 "yes" = "ja";

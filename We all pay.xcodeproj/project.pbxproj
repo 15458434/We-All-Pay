@@ -13,6 +13,7 @@
 		38010E0F1A3F4A4F0056F8F8 /* Localizable.strings in Resources */ = {isa = PBXBuildFile; fileRef = 38010E111A3F4A4F0056F8F8 /* Localizable.strings */; };
 		380328002698443300744710 /* NotificationsInfoModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 380327FF2698443300744710 /* NotificationsInfoModel.swift */; };
 		380700A51A1B616000C7FB37 /* MCPaymentUpdateTo4.m in Sources */ = {isa = PBXBuildFile; fileRef = 380700A41A1B616000C7FB37 /* MCPaymentUpdateTo4.m */; };
+		380A76AB26D62EB3000FEABB /* Localizable.stringsdict in Resources */ = {isa = PBXBuildFile; fileRef = 380A76AD26D62EB3000FEABB /* Localizable.stringsdict */; };
 		380C48161BE1330E00C82B0F /* CurrencyFormatter.swift in Sources */ = {isa = PBXBuildFile; fileRef = 380C48151BE1330E00C82B0F /* CurrencyFormatter.swift */; };
 		381179D01A82D1FC00020538 /* MailComposer.swift in Sources */ = {isa = PBXBuildFile; fileRef = 381179CF1A82D1FC00020538 /* MailComposer.swift */; };
 		381275FF1BBD84650004C8C2 /* InfoScreenTableViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 381275FE1BBD84650004C8C2 /* InfoScreenTableViewController.swift */; };
@@ -362,6 +363,8 @@
 		380700AA1A1B751E00C7FB37 /* We all pay database version 4.xcappdata */ = {isa = PBXFileReference; lastKnownFileType = wrapper; path = "We all pay database version 4.xcappdata"; sourceTree = "<group>"; };
 		380700AF1A1B76B200C7FB37 /* We all pay database version 2.xcappdata */ = {isa = PBXFileReference; lastKnownFileType = wrapper; path = "We all pay database version 2.xcappdata"; sourceTree = "<group>"; };
 		380700B41A1B785C00C7FB37 /* We all pay database dutch version 4.xcappdata */ = {isa = PBXFileReference; lastKnownFileType = wrapper; path = "We all pay database dutch version 4.xcappdata"; sourceTree = "<group>"; };
+		380A76AC26D62EB3000FEABB /* en */ = {isa = PBXFileReference; lastKnownFileType = text.plist.stringsdict; name = en; path = en.lproj/Localizable.stringsdict; sourceTree = "<group>"; };
+		380A76AE26D63585000FEABB /* nl */ = {isa = PBXFileReference; lastKnownFileType = text.plist.stringsdict; name = nl; path = nl.lproj/Localizable.stringsdict; sourceTree = "<group>"; };
 		380C48151BE1330E00C82B0F /* CurrencyFormatter.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = CurrencyFormatter.swift; sourceTree = "<group>"; };
 		381179CE1A82D1FC00020538 /* We all pay Tests-Bridging-Header.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; name = "We all pay Tests-Bridging-Header.h"; path = "../Going Dutch/We all pay Tests-Bridging-Header.h"; sourceTree = "<group>"; };
 		381179CF1A82D1FC00020538 /* MailComposer.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = MailComposer.swift; sourceTree = "<group>"; };
@@ -829,6 +832,15 @@
 			name = "Test files dutch";
 			sourceTree = "<group>";
 		};
+		380B841E26D3F15E00E77368 /* Mail */ = {
+			isa = PBXGroup;
+			children = (
+				38B88E2D1D81FF6E0069A44D /* MailComposeViewController.swift */,
+				381179CF1A82D1FC00020538 /* MailComposer.swift */,
+			);
+			path = Mail;
+			sourceTree = "<group>";
+		};
 		382B76E11C398249000C203A /* CurrencyConverter */ = {
 			isa = PBXGroup;
 			children = (
@@ -989,6 +1001,7 @@
 			isa = PBXGroup;
 			children = (
 				387D3A931870652B0060FAF8 /* Localizable.strings */,
+				380A76AD26D62EB3000FEABB /* Localizable.stringsdict */,
 				38572ADE169D437B00969C62 /* Info.plist */,
 				38E88B3F226B19ED008EB4BE /* GoogleService-Info.plist */,
 				38572ADF169D437B00969C62 /* InfoPlist.strings */,
@@ -1384,9 +1397,8 @@
 		38FE5A062346943400BBA722 /* Miscellaneous */ = {
 			isa = PBXGroup;
 			children = (
-				38B88E2D1D81FF6E0069A44D /* MailComposeViewController.swift */,
+				380B841E26D3F15E00E77368 /* Mail */,
 				3812760B1BBE74EF0004C8C2 /* UIViewControllerExtension.swift */,
-				381179CF1A82D1FC00020538 /* MailComposer.swift */,
 				38490D2E1D7056D100A297BA /* ShowMailViewProtocol.swift */,
 				380C48151BE1330E00C82B0F /* CurrencyFormatter.swift */,
 				38CDE8FE17135B6300387CAA /* MCTools.h */,
@@ -1853,6 +1865,7 @@
 				38DC8B4319097FEA00762235 /* Main-iPad.storyboard in Resources */,
 				3835EBF92115C40900E2BC3F /* Settings.bundle in Resources */,
 				3860575019EE963600BD5B78 /* categoryPictures.xcassets in Resources */,
+				380A76AB26D62EB3000FEABB /* Localizable.stringsdict in Resources */,
 				3864147D269B183A00590ABA /* Notifications.storyboard in Resources */,
 				3867CE4718704B2E001EC222 /* Main-Iphone.storyboard in Resources */,
 				3870C22A1D34FDF80030035A /* We all pay app keywords.plist in Resources */,
@@ -2338,6 +2351,15 @@
 				38010E131A3F4A530056F8F8 /* nl */,
 			);
 			name = Localizable.strings;
+			sourceTree = "<group>";
+		};
+		380A76AD26D62EB3000FEABB /* Localizable.stringsdict */ = {
+			isa = PBXVariantGroup;
+			children = (
+				380A76AC26D62EB3000FEABB /* en */,
+				380A76AE26D63585000FEABB /* nl */,
+			);
+			name = Localizable.stringsdict;
 			sourceTree = "<group>";
 		};
 		381276061BBD8F130004C8C2 /* InfoPlist.strings */ = {
