@@ -135,7 +135,7 @@ typedef NS_ENUM(BOOL, ChildViewStatus) {
         _categoryView.image = categoryObject.largePicture;
         [_categoryButton setTitle:categoryObject.categoryDescription forState:UIControlStateNormal];
     } else {
-        NSString *buttonText = NSLocalizedString(@"SELECT_CATEGORY", @"Select Category");
+        NSString *buttonText = NSLocalizedString(@"Select Category", @"Select Category");
         _categoryView.image = categoryObject.largePicture;
         [_categoryButton setTitle:buttonText forState:UIControlStateNormal];
     }
@@ -317,11 +317,11 @@ typedef NS_ENUM(BOOL, ChildViewStatus) {
     if (!_twoLabelTitleView) {
         _twoLabelTitleView = [[NSBundle mainBundle] loadNibNamed:@"MCTwoLabelsTitleView" owner:self options:nil][0];
         if (_isNew) {
-            [[_twoLabelTitleView mainLabel] setText:NSLocalizedString(@"NEW_PAYMENT_HEADER", @"Header in the paymentView which state new Payment")];
-            [[_twoLabelTitleView subLabel] setText:NSLocalizedString(@"NEW_PAYMENT_SUBHEADER", @"Sub header in the paymentView which states Add payment data")];
+            [[_twoLabelTitleView mainLabel] setText:NSLocalizedString(@"New payment", @"Header in the paymentView which state new Payment")];
+            [[_twoLabelTitleView subLabel] setText:NSLocalizedString(@"Add payment data", @"Sub header in the paymentView which states Add payment data")];
         } else {
-            [[_twoLabelTitleView mainLabel] setText:NSLocalizedString(@"EXISTING_PAYMENT_HEADER", @"Header in the paymentView which states payment")];
-            [[_twoLabelTitleView subLabel] setText:NSLocalizedString(@"EXISTING_PAYMENT_SUBHEADER", @"Sub header in the paymentView which states edit payment data")];
+            [[_twoLabelTitleView mainLabel] setText:NSLocalizedString(@"Payment", @"Header in the paymentView which states payment")];
+            [[_twoLabelTitleView subLabel] setText:NSLocalizedString(@"Edit payment data", @"Sub header in the paymentView which states edit payment data")];
         }
         [[self navigationItem] setTitleView:_twoLabelTitleView];
     }
