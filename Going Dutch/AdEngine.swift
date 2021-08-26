@@ -8,11 +8,13 @@
 
 import UIKit
 import AdSupport
+import AppTrackingTransparency
 
 import UserMessagingPlatform
 
 import PersonalizedAdConsent
 import GoogleMobileAds
+import AppLovinSDK
 
 @objc(MCAdEngine) @objcMembers open class AdEngine: NSObject {
     // TODO: Remove on 14-08-2022
@@ -49,12 +51,13 @@ import GoogleMobileAds
     var adUnitID: String?
     
     class func registerDebugDevices() {
-        let iPhoneX = "3a960c027f1ea390326793600324a891"
+        let iPhoneX = "23915c03dc297a967b28ed1458c0f269"
         let iPadRetina = "63f51db641e29b85012042e407de3cba"
-        GADMobileAds.sharedInstance().requestConfiguration.testDeviceIdentifiers = [(kGADSimulatorID as! String), iPhoneX, iPadRetina]
+        GADMobileAds.sharedInstance().requestConfiguration.testDeviceIdentifiers = [kGADSimulatorID, iPhoneX, iPadRetina]
     }
     
     @objc(presentPrivacyConsentRequestIfNecessaryFromViewController:) class func presentPrivacyConsentRequestIfNecessary(from viewController: UIViewController) {
+        debugPrint("My IDFA: \(ASIdentifierManager.shared().advertisingIdentifier)")
         guard AdEngine.isEnabled else {
             return
         }
@@ -75,7 +78,7 @@ import GoogleMobileAds
         parameters.tagForUnderAgeOfConsent = false
         
         let debugSettings = UMPDebugSettings()
-        debugSettings.testDeviceIdentifiers = ["00000000-0000-0000-0000-000000000000", "E0C4F2B0-1AD9-4FEE-B467-7DE63D5E8939"]
+        debugSettings.testDeviceIdentifiers = ["00000000-0000-0000-0000-000000000000", "E0C4F2B0-1AD9-4FEE-B467-7DE63D5E8939", "73A44587-F726-466C-BB61-E090FC096D70", "B54D6D4B-66D7-47EF-A24C-53152802D822"]
         debugSettings.geography = .disabled
         parameters.debugSettings = debugSettings
         
@@ -112,6 +115,19 @@ import GoogleMobileAds
                                 if UMPConsentInformation.sharedInstance.consentStatus == UMPConsentStatus.obtained {
                                     // App can start requesting ads.
                                     GADMobileAds.sharedInstance().start(completionHandler: nil)
+                                    if #available(iOS 14.0, *) {
+                                        switch ATTrackingManager.trackingAuthorizationStatus {
+                                        case .authorized, .restricted:
+                                            ALPrivacySettings.setHasUserConsent(true)
+                                        case .denied, .notDetermined:
+                                            ALPrivacySettings.setHasUserConsent(false)
+                                        @unknown default:
+                                            ALPrivacySettings.setHasUserConsent(false)
+                                        }
+                                    } else {
+                                        ALPrivacySettings.setHasUserConsent(true)
+                                    }
+
                                 }
                             })
                         } else {

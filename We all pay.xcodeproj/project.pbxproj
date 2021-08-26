@@ -15,6 +15,10 @@
 		380700A51A1B616000C7FB37 /* MCPaymentUpdateTo4.m in Sources */ = {isa = PBXBuildFile; fileRef = 380700A41A1B616000C7FB37 /* MCPaymentUpdateTo4.m */; };
 		380A76AB26D62EB3000FEABB /* Localizable.stringsdict in Resources */ = {isa = PBXBuildFile; fileRef = 380A76AD26D62EB3000FEABB /* Localizable.stringsdict */; };
 		380C48161BE1330E00C82B0F /* CurrencyFormatter.swift in Sources */ = {isa = PBXBuildFile; fileRef = 380C48151BE1330E00C82B0F /* CurrencyFormatter.swift */; };
+		380FB70D26D6B86600B46038 /* CoreGraphics.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 380FB70C26D6B86600B46038 /* CoreGraphics.framework */; };
+		380FB70E26D6B87400B46038 /* CoreMedia.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 38B4E82023CDE6100034CA95 /* CoreMedia.framework */; };
+		380FB71026D6B88100B46038 /* StoreKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 380FB70F26D6B88100B46038 /* StoreKit.framework */; };
+		380FB71226D6B88F00B46038 /* UIKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 380FB71126D6B88F00B46038 /* UIKit.framework */; };
 		381179D01A82D1FC00020538 /* MailComposer.swift in Sources */ = {isa = PBXBuildFile; fileRef = 381179CF1A82D1FC00020538 /* MailComposer.swift */; };
 		381275FF1BBD84650004C8C2 /* InfoScreenTableViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 381275FE1BBD84650004C8C2 /* InfoScreenTableViewController.swift */; };
 		381276041BBD8F130004C8C2 /* InfoPlist.strings in Resources */ = {isa = PBXBuildFile; fileRef = 381276061BBD8F130004C8C2 /* InfoPlist.strings */; };
@@ -366,6 +370,9 @@
 		380A76AC26D62EB3000FEABB /* en */ = {isa = PBXFileReference; lastKnownFileType = text.plist.stringsdict; name = en; path = en.lproj/Localizable.stringsdict; sourceTree = "<group>"; };
 		380A76AE26D63585000FEABB /* nl */ = {isa = PBXFileReference; lastKnownFileType = text.plist.stringsdict; name = nl; path = nl.lproj/Localizable.stringsdict; sourceTree = "<group>"; };
 		380C48151BE1330E00C82B0F /* CurrencyFormatter.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = CurrencyFormatter.swift; sourceTree = "<group>"; };
+		380FB70C26D6B86600B46038 /* CoreGraphics.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = CoreGraphics.framework; path = System/Library/Frameworks/CoreGraphics.framework; sourceTree = SDKROOT; };
+		380FB70F26D6B88100B46038 /* StoreKit.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = StoreKit.framework; path = System/Library/Frameworks/StoreKit.framework; sourceTree = SDKROOT; };
+		380FB71126D6B88F00B46038 /* UIKit.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = UIKit.framework; path = System/Library/Frameworks/UIKit.framework; sourceTree = SDKROOT; };
 		381179CE1A82D1FC00020538 /* We all pay Tests-Bridging-Header.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; name = "We all pay Tests-Bridging-Header.h"; path = "../Going Dutch/We all pay Tests-Bridging-Header.h"; sourceTree = "<group>"; };
 		381179CF1A82D1FC00020538 /* MailComposer.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = MailComposer.swift; sourceTree = "<group>"; };
 		381275FE1BBD84650004C8C2 /* InfoScreenTableViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = InfoScreenTableViewController.swift; sourceTree = "<group>"; };
@@ -679,9 +686,12 @@
 				38B4E82523CDE6220034CA95 /* JavaScriptCore.framework in Frameworks */,
 				38BCCA5026C6A19E00D4C854 /* AppTrackingTransparency.framework in Frameworks */,
 				38B4E82323CDE6180034CA95 /* CoreTelephony.framework in Frameworks */,
+				380FB71226D6B88F00B46038 /* UIKit.framework in Frameworks */,
 				38B4E82123CDE6100034CA95 /* CoreMedia.framework in Frameworks */,
+				380FB70E26D6B87400B46038 /* CoreMedia.framework in Frameworks */,
 				382E796526B7F48200A0D1C1 /* WeAllPayDesignableUI.framework in Frameworks */,
 				38B4E81F23CDE6050034CA95 /* AVFoundation.framework in Frameworks */,
+				380FB70D26D6B86600B46038 /* CoreGraphics.framework in Frameworks */,
 				38B4E81D23CDE5FC0034CA95 /* AudioToolbox.framework in Frameworks */,
 				38B4E81B23CDE5F40034CA95 /* AdSupport.framework in Frameworks */,
 				38B4E81923CDE5D40034CA95 /* libz.1.2.5.tbd in Frameworks */,
@@ -693,6 +703,7 @@
 				388A32911C11EDBD00F7459C /* WhoPayingUserDefaultsStoreInterface.framework in Frameworks */,
 				382B76F51C398249000C203A /* CurrencyConverter.framework in Frameworks */,
 				D7F1F674BD7F1D6F55F292E0 /* Pods_We_all_pay.framework in Frameworks */,
+				380FB71026D6B88100B46038 /* StoreKit.framework in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -1421,6 +1432,9 @@
 		8AA57C6157892F74604CB04B /* Frameworks */ = {
 			isa = PBXGroup;
 			children = (
+				380FB71126D6B88F00B46038 /* UIKit.framework */,
+				380FB70F26D6B88100B46038 /* StoreKit.framework */,
+				380FB70C26D6B86600B46038 /* CoreGraphics.framework */,
 				38BCCA4F26C6A19E00D4C854 /* AppTrackingTransparency.framework */,
 				38163E0E249E193D009E889C /* CoreServices.framework */,
 				38B4E82A23CDE6410034CA95 /* SystemConfiguration.framework */,
