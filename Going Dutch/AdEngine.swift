@@ -15,6 +15,7 @@ import UserMessagingPlatform
 import PersonalizedAdConsent
 import GoogleMobileAds
 import AppLovinSDK
+import MoPubSDK
 
 @objc(MCAdEngine) @objcMembers open class AdEngine: NSObject {
     // TODO: Remove on 14-08-2022
@@ -113,21 +114,12 @@ import AppLovinSDK
                                 }
                                 
                                 if UMPConsentInformation.sharedInstance.consentStatus == UMPConsentStatus.obtained {
-                                    // App can start requesting ads.
+                                    
                                     GADMobileAds.sharedInstance().start(completionHandler: nil)
-                                    if #available(iOS 14.0, *) {
-                                        switch ATTrackingManager.trackingAuthorizationStatus {
-                                        case .authorized, .restricted:
-                                            ALPrivacySettings.setHasUserConsent(true)
-                                        case .denied, .notDetermined:
-                                            ALPrivacySettings.setHasUserConsent(false)
-                                        @unknown default:
-                                            ALPrivacySettings.setHasUserConsent(false)
-                                        }
-                                    } else {
-                                        ALPrivacySettings.setHasUserConsent(true)
+                                    ALPrivacySettings.setHasUserConsent(true)
+                                    if MoPub.sharedInstance().isGDPRApplicable == .yes {
+                                        MoPub.sharedInstance().grantConsent()
                                     }
-
                                 }
                             })
                         } else {
@@ -137,6 +129,14 @@ import AppLovinSDK
                 }
             default:
                 GADMobileAds.sharedInstance().start(completionHandler: nil)
+                ALPrivacySettings.setHasUserConsent(true)
+                if MoPub.sharedInstance().isGDPRApplicable == .yes {
+                    MoPub.sharedInstance().grantConsent()
+                }
+                // App can start requesting ads.
+                GADMobileAds.sharedInstance().start { status in
+                    debugPrint("consentStatus: \(status.adapterStatusesByClassName)")
+                }
             }
         })
     }
