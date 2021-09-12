@@ -14,7 +14,7 @@
 
 #import "We_all_pay-Swift.h"
 
-static void * Context = &Context;
+static void * AverageOweFromPaymentContext = &AverageOweFromPaymentContext;
 
 @interface MCPaymentPresenceTableViewCell_iPhone ()
 
@@ -30,13 +30,15 @@ static void * Context = &Context;
 }
 
 - (void)updatePaymentPresence:(MCPaymentPresence *)paymentPresence {
+    if (self.model) {
+        [self.model removeObserver:self forKeyPath:@"averageOweFromPayment" context:AverageOweFromPaymentContext];
+    }
     self.model = paymentPresence;
     self.nameLabel.text = [self.model.person getFullName];
     self.personView.image = self.model.person.thumbnail;
     self.isPresentSwitch.on = self.model.isPersonPresent.boolValue;
-    CurrencyFormatter *cf = [[CurrencyFormatter alloc] initWithCurrencyCode:self.model.payment.currency.code];
-    NSNumber *averageOwe = @(-self.model.averageOweFromPayment.doubleValue);
-    self.owesLabel.text = [cf stringForObjectValue:averageOwe];
+    NSKeyValueObservingOptions options = NSKeyValueObservingOptionInitial | NSKeyValueObservingOptionNew;
+    [self.model addObserver:self forKeyPath:@"averageOweFromPayment" options:options context:AverageOweFromPaymentContext];
 }
 
 #pragma mark - UITableViewCell
@@ -46,5 +48,40 @@ static void * Context = &Context;
 #pragma mark - UIResponder
 
 #pragma mark - NSObject
+
+- (void)dealloc {
+    if (self.model) {
+        [self.model removeObserver:self forKeyPath:@"averageOweFromPayment" context:AverageOweFromPaymentContext];
+    }
+}
+
+#pragma mark - NSKeyValueObservation
+
+- (void)observeValueForKeyPath:(NSString *)keyPath ofObject:(id)object change:(NSDictionary<NSKeyValueChangeKey,id> *)change context:(void *)context {
+    if (context == AverageOweFromPaymentContext) {
+#ifdef DEBUG
+        NSLog(@"change: %@", change);
+#endif
+        NSNumber *changeKeyNumber = (NSNumber *)change[NSKeyValueChangeKindKey];
+        NSKeyValueChange keyValueChange = changeKeyNumber.unsignedIntegerValue;
+        switch (keyValueChange) {
+            case NSKeyValueChangeSetting:
+            {
+                id new = change[NSKeyValueChangeNewKey];
+                if ([new isKindOfClass:[NSNumber class]]) {
+                    NSNumber *averageOweFromPayment = (NSNumber *)new;
+                    CurrencyFormatter *cf = [[CurrencyFormatter alloc] initWithCurrencyCode:self.model.payment.currency.code];
+                    NSNumber *averageOwe = @(-averageOweFromPayment.doubleValue);
+                    self.owesLabel.text = [cf stringForObjectValue:averageOwe];
+                } else {
+                    self.owesLabel.text = @"";
+                }
+            }
+                break;
+            default:
+                break;
+        }
+    }
+}
 
 @end
