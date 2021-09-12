@@ -216,6 +216,19 @@ typedef NS_ENUM(BOOL, ChildViewStatus) {
 
 #pragma mark - UITableViewController
 
+#pragma mark - UITableViewDelegate
+
+- (void)tableView:(UITableView *)tableView willDisplayCell:(UITableViewCell *)cell forRowAtIndexPath:(NSIndexPath *)indexPath {
+    MCPaymentPresenceTableViewCell_iPhone *paymentPresenceCell = (MCPaymentPresenceTableViewCell_iPhone *)cell;
+    // Set the cell contents
+    MCPaymentPresence *paymentPresence = [_dataController objectAtIndexPath:indexPath];
+    [paymentPresenceCell updatePaymentPresence:paymentPresence];
+}
+
+- (CGFloat)tableView:(UITableView *)tableView heightForRowAtIndexPath:(NSIndexPath *)indexPath {
+    return 52.0;
+}
+
 #pragma mark - UITableViewDataSource
 
 - (NSInteger)numberOfSectionsInTableView:(UITableView *)tableView
@@ -247,23 +260,6 @@ typedef NS_ENUM(BOOL, ChildViewStatus) {
     return cell;
 }
 
-#pragma mark - UITableViewDelegate
-
-- (void)tableView:(UITableView *)tableView willDisplayCell:(UITableViewCell *)cell forRowAtIndexPath:(NSIndexPath *)indexPath {
-    MCPaymentPresenceTableViewCell_iPhone *paymentPresenceCell = (MCPaymentPresenceTableViewCell_iPhone *)cell;
-    // Set the cell contents
-    MCPaymentPresence *paymentPresence = [_dataController objectAtIndexPath:indexPath];
-    [paymentPresenceCell updatePaymentPresence:paymentPresence];
-}
-
-- (CGFloat)tableView:(UITableView *)tableView heightForRowAtIndexPath:(NSIndexPath *)indexPath {
-    return 52.0;
-}
-
-//- (CGFloat)tableView:(UITableView *)tableView heightForHeaderInSection:(NSInteger)section {
-//    return UITableViewAutomaticDimension;
-//}
-//
 #pragma mark - UIViewController
 
 - (void)viewDidLoad {
