@@ -9,6 +9,7 @@
 @import FirebaseAnalytics;
 
 #import "MCPaymentViewController.h"
+#import "MCPaymentPresenceTableViewCell_iPhone.h"
 
 #import "MCPayment+addons.h"
 #import "MCPerson+addons.h"
