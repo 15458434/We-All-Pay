@@ -165,14 +165,17 @@ typedef NS_ENUM(BOOL, ChildViewStatus) {
                 break;
                 
             case NSFetchedResultsChangeMove:
+            {
                 [[self tableView] deleteRowsAtIndexPaths:@[indexPath] withRowAnimation:UITableViewRowAnimationFade];
                 [[self tableView] insertRowsAtIndexPaths:@[newIndexPath] withRowAnimation:UITableViewRowAnimationFade];
+            }
                 break;
                 
             case NSFetchedResultsChangeUpdate:
-                [[self tableView] reloadRowsAtIndexPaths:@[indexPath] withRowAnimation:UITableViewRowAnimationAutomatic];
+            {
                 CurrencyFormatter *cf = [[CurrencyFormatter alloc] initWithCurrencyCode:_thisPayment.currency.code];
                 _paidView.text = [cf stringForObjectValue:_thisPayment.money];
+            }
                 break;
         }
     }
