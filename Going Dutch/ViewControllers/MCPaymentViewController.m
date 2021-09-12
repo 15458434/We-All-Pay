@@ -233,13 +233,7 @@ typedef NS_ENUM(BOOL, ChildViewStatus) {
     
     // Set the cell contents
     MCPaymentPresence *thisCellsPresence = [_dataController objectAtIndexPath:indexPath];
-    cell.nameLabel.text = thisCellsPresence.person.getFullName;
-    cell.personView.image = thisCellsPresence.person.thumbnail;
-    [[cell isPresentSwitch] setOn:[[thisCellsPresence isPersonPresent] boolValue]];
-    CurrencyFormatter *cf = [[CurrencyFormatter alloc] initWithCurrencyCode:thisCellsPresence.payment.currency.code];
-    NSNumber *averageOwe = @(-thisCellsPresence.averageOweFromPayment.doubleValue);
-    cell.owesLabel.text = [cf stringForObjectValue:averageOwe];
-    cell.thisCellsPaymentPresence = thisCellsPresence;
+    [cell updatePaymentPresence:thisCellsPresence];
     
     // Set the cell alignment to headerView stuff
     NSLayoutConstraint *payerViewToCellNameLabel = [NSLayoutConstraint constraintWithItem:_payerNameField attribute:NSLayoutAttributeLeading relatedBy:NSLayoutRelationEqual toItem:[cell nameLabel] attribute:NSLayoutAttributeLeading multiplier:1.0 constant:-6.0];

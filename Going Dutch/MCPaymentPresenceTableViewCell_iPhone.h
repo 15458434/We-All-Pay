@@ -21,9 +21,7 @@ __attribute__((objc_subclassing_restricted))
 @property (nonatomic, weak) IBOutlet UISwitch *isPresentSwitch;
 @property (nonatomic, weak) UILabel *owesLabel;
 
-@property (nonatomic, strong) MCPaymentPresence *thisCellsPaymentPresence;
-
-- (IBAction)presenceIsSwitched:(UISwitch *)sender;
+- (void)updatePaymentPresence:(MCPaymentPresence *)paymentPresence;
 
 @end
 
