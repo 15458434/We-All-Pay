@@ -12,6 +12,8 @@
 
 NS_ASSUME_NONNULL_BEGIN
 
+NS_SWIFT_NAME(PaymentPresenceTableViewCell_iPhone)
+__attribute__((objc_subclassing_restricted))
 @interface MCPaymentPresenceTableViewCell_iPhone : UITableViewCell
 
 @property (nonatomic, weak) IBOutlet UIImageView *personView;
