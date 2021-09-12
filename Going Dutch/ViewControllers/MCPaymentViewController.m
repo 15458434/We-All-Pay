@@ -233,7 +233,6 @@ typedef NS_ENUM(BOOL, ChildViewStatus) {
     
     // Set the cell contents
     MCPaymentPresence *thisCellsPresence = [_dataController objectAtIndexPath:indexPath];
-    [cell updatePaymentPresence:thisCellsPresence];
     
     // Set the cell alignment to headerView stuff
     NSLayoutConstraint *payerViewToCellNameLabel = [NSLayoutConstraint constraintWithItem:_payerNameField attribute:NSLayoutAttributeLeading relatedBy:NSLayoutRelationEqual toItem:[cell nameLabel] attribute:NSLayoutAttributeLeading multiplier:1.0 constant:-6.0];
@@ -246,6 +245,13 @@ typedef NS_ENUM(BOOL, ChildViewStatus) {
 }
 
 #pragma mark - UITableViewDelegate
+
+- (void)tableView:(UITableView *)tableView willDisplayCell:(UITableViewCell *)cell forRowAtIndexPath:(NSIndexPath *)indexPath {
+    MCPaymentPresenceTableViewCell_iPhone *paymentPresenceCell = (MCPaymentPresenceTableViewCell_iPhone *)cell;
+    // Set the cell contents
+    MCPaymentPresence *paymentPresence = [_dataController objectAtIndexPath:indexPath];
+    [paymentPresenceCell updatePaymentPresence:paymentPresence];
+}
 
 - (CGFloat)tableView:(UITableView *)tableView heightForRowAtIndexPath:(NSIndexPath *)indexPath {
     return 52.0;
