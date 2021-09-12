@@ -129,7 +129,6 @@
 		38977E4F1B2A26D4008484A4 /* MCTwoLabelIscreenTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 38977E4E1B2A26D4008484A4 /* MCTwoLabelIscreenTableViewCell.swift */; };
 		38977E531B2A297E008484A4 /* MCWhoPaidHowMuchTableViewCell_iPhone.swift in Sources */ = {isa = PBXBuildFile; fileRef = 38977E521B2A297E008484A4 /* MCWhoPaidHowMuchTableViewCell_iPhone.swift */; };
 		38977E551B2A2AE3008484A4 /* MCSelectCurrencyTableViewCell_iPhone.swift in Sources */ = {isa = PBXBuildFile; fileRef = 38977E541B2A2AE3008484A4 /* MCSelectCurrencyTableViewCell_iPhone.swift */; };
-		38977E571B2A2C57008484A4 /* MCPaymentPresenceTableViewCell_iPhone.swift in Sources */ = {isa = PBXBuildFile; fileRef = 38977E561B2A2C57008484A4 /* MCPaymentPresenceTableViewCell_iPhone.swift */; };
 		38977E5B1B2A30A7008484A4 /* MCWhoOwesWhoTableViewCell_iPhone.swift in Sources */ = {isa = PBXBuildFile; fileRef = 38977E5A1B2A30A7008484A4 /* MCWhoOwesWhoTableViewCell_iPhone.swift */; };
 		38977E5D1B2A31A2008484A4 /* MCSolutionOverViewTableViewCell_iPhone.swift in Sources */ = {isa = PBXBuildFile; fileRef = 38977E5C1B2A31A2008484A4 /* MCSolutionOverViewTableViewCell_iPhone.swift */; };
 		38977E5F1B2A32EF008484A4 /* MCPersonTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 38977E5E1B2A32EF008484A4 /* MCPersonTableViewCell.swift */; };
@@ -169,6 +168,7 @@
 		38B7E9521D86F8F600400E72 /* ContactsDataReceiver.swift in Sources */ = {isa = PBXBuildFile; fileRef = 38B7E9511D86F8F600400E72 /* ContactsDataReceiver.swift */; };
 		38B88E2E1D81FF6E0069A44D /* MailComposeViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 38B88E2D1D81FF6E0069A44D /* MailComposeViewController.swift */; };
 		38BCCA5026C6A19E00D4C854 /* AppTrackingTransparency.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 38BCCA4F26C6A19E00D4C854 /* AppTrackingTransparency.framework */; };
+		38C1AD4726EE871D00E09E09 /* MCPaymentPresenceTableViewCell_iPhone.m in Sources */ = {isa = PBXBuildFile; fileRef = 38C1AD4626EE871D00E09E09 /* MCPaymentPresenceTableViewCell_iPhone.m */; };
 		38C3AB151CBCF3200011C10C /* ViewControllerProtocols.swift in Sources */ = {isa = PBXBuildFile; fileRef = 38C3AB141CBCF3200011C10C /* ViewControllerProtocols.swift */; };
 		38C44BCE23DEDEC900264BBB /* ScrollViewAdjusterToKeyboard.swift in Sources */ = {isa = PBXBuildFile; fileRef = 38C44BCD23DEDEC900264BBB /* ScrollViewAdjusterToKeyboard.swift */; };
 		38C700F21D8EC24100D785BB /* LaunchCounter.swift in Sources */ = {isa = PBXBuildFile; fileRef = 38C700F11D8EC24100D785BB /* LaunchCounter.swift */; };
@@ -499,7 +499,6 @@
 		38977E4E1B2A26D4008484A4 /* MCTwoLabelIscreenTableViewCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = MCTwoLabelIscreenTableViewCell.swift; sourceTree = "<group>"; };
 		38977E521B2A297E008484A4 /* MCWhoPaidHowMuchTableViewCell_iPhone.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = MCWhoPaidHowMuchTableViewCell_iPhone.swift; sourceTree = "<group>"; };
 		38977E541B2A2AE3008484A4 /* MCSelectCurrencyTableViewCell_iPhone.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = MCSelectCurrencyTableViewCell_iPhone.swift; sourceTree = "<group>"; };
-		38977E561B2A2C57008484A4 /* MCPaymentPresenceTableViewCell_iPhone.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = MCPaymentPresenceTableViewCell_iPhone.swift; sourceTree = "<group>"; };
 		38977E581B2A2F09008484A4 /* We-all-pay-Bridging-Header.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "We-all-pay-Bridging-Header.h"; sourceTree = "<group>"; };
 		38977E5A1B2A30A7008484A4 /* MCWhoOwesWhoTableViewCell_iPhone.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = MCWhoOwesWhoTableViewCell_iPhone.swift; sourceTree = "<group>"; };
 		38977E5C1B2A31A2008484A4 /* MCSolutionOverViewTableViewCell_iPhone.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = MCSolutionOverViewTableViewCell_iPhone.swift; sourceTree = "<group>"; };
@@ -567,6 +566,8 @@
 		38B7E9511D86F8F600400E72 /* ContactsDataReceiver.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ContactsDataReceiver.swift; sourceTree = "<group>"; };
 		38B88E2D1D81FF6E0069A44D /* MailComposeViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = MailComposeViewController.swift; sourceTree = "<group>"; };
 		38BCCA4F26C6A19E00D4C854 /* AppTrackingTransparency.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = AppTrackingTransparency.framework; path = System/Library/Frameworks/AppTrackingTransparency.framework; sourceTree = SDKROOT; };
+		38C1AD4526EE871D00E09E09 /* MCPaymentPresenceTableViewCell_iPhone.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = MCPaymentPresenceTableViewCell_iPhone.h; sourceTree = "<group>"; };
+		38C1AD4626EE871D00E09E09 /* MCPaymentPresenceTableViewCell_iPhone.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = MCPaymentPresenceTableViewCell_iPhone.m; sourceTree = "<group>"; };
 		38C3AB141CBCF3200011C10C /* ViewControllerProtocols.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ViewControllerProtocols.swift; sourceTree = "<group>"; };
 		38C44BCD23DEDEC900264BBB /* ScrollViewAdjusterToKeyboard.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ScrollViewAdjusterToKeyboard.swift; sourceTree = "<group>"; };
 		38C700F11D8EC24100D785BB /* LaunchCounter.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = LaunchCounter.swift; sourceTree = "<group>"; };
@@ -1369,7 +1370,8 @@
 			children = (
 				3830F6F4179872B400904FAF /* MCPaymentViewController.h */,
 				3830F6F5179872B400904FAF /* MCPaymentViewController.m */,
-				38977E561B2A2C57008484A4 /* MCPaymentPresenceTableViewCell_iPhone.swift */,
+				38C1AD4526EE871D00E09E09 /* MCPaymentPresenceTableViewCell_iPhone.h */,
+				38C1AD4626EE871D00E09E09 /* MCPaymentPresenceTableViewCell_iPhone.m */,
 				38ACC5A2236B1FAE000BDEEC /* PaymentModel.swift */,
 				38A8F2A823C2883600CB3B73 /* PayerTextInputPicker.swift */,
 				38A8F2A523C2583200CB3B73 /* DescriptionOfPaymentTextInputValidator.swift */,
@@ -2123,6 +2125,7 @@
 				38E2CB421BC2A6C60092B5C8 /* WhoOwesWhoTableViewCell_iPad.swift in Sources */,
 				381276101BBE9A7F0004C8C2 /* MCPaymentPresenceTableViewCell.swift in Sources */,
 				38AD8C12197E8926005C3436 /* MCAddCurrenciesEntityMigrationPolicy.m in Sources */,
+				38C1AD4726EE871D00E09E09 /* MCPaymentPresenceTableViewCell_iPhone.m in Sources */,
 				38D796151B2F1CBD00F3872F /* ExchangeRateFetcherForMCExchangeRate.swift in Sources */,
 				38CDE90017135B6300387CAA /* MCTools.m in Sources */,
 				3829AD0F178B41320025969D /* WeAllPayStore.xcdatamodeld in Sources */,
@@ -2171,7 +2174,6 @@
 				38C700F21D8EC24100D785BB /* LaunchCounter.swift in Sources */,
 				3864147F269B185400590ABA /* NotificationsTableViewController.swift in Sources */,
 				3892E3A417903EF00038894B /* MCEditTripViewController.m in Sources */,
-				38977E571B2A2C57008484A4 /* MCPaymentPresenceTableViewCell_iPhone.swift in Sources */,
 				38DB85D417E45BCA006237CF /* MCPayment+addons.m in Sources */,
 				3868780623721751003D40A9 /* EmailTextInputValidator.swift in Sources */,
 				38C3AB151CBCF3200011C10C /* ViewControllerProtocols.swift in Sources */,

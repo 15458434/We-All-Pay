@@ -9,6 +9,7 @@
 @import FirebaseAnalytics;
 
 #import "MCPaymentViewController.h"
+#import "MCPaymentPresenceTableViewCell_iPhone.h"
 
 #import "MCPayment+addons.h"
 #import "MCPerson+addons.h"
@@ -164,14 +165,17 @@ typedef NS_ENUM(BOOL, ChildViewStatus) {
                 break;
                 
             case NSFetchedResultsChangeMove:
+            {
                 [[self tableView] deleteRowsAtIndexPaths:@[indexPath] withRowAnimation:UITableViewRowAnimationFade];
                 [[self tableView] insertRowsAtIndexPaths:@[newIndexPath] withRowAnimation:UITableViewRowAnimationFade];
+            }
                 break;
                 
             case NSFetchedResultsChangeUpdate:
-                [[self tableView] reloadRowsAtIndexPaths:@[indexPath] withRowAnimation:UITableViewRowAnimationAutomatic];
+            {
                 CurrencyFormatter *cf = [[CurrencyFormatter alloc] initWithCurrencyCode:_thisPayment.currency.code];
                 _paidView.text = [cf stringForObjectValue:_thisPayment.money];
+            }
                 break;
         }
     }
@@ -212,6 +216,19 @@ typedef NS_ENUM(BOOL, ChildViewStatus) {
 
 #pragma mark - UITableViewController
 
+#pragma mark - UITableViewDelegate
+
+- (void)tableView:(UITableView *)tableView willDisplayCell:(UITableViewCell *)cell forRowAtIndexPath:(NSIndexPath *)indexPath {
+    MCPaymentPresenceTableViewCell_iPhone *paymentPresenceCell = (MCPaymentPresenceTableViewCell_iPhone *)cell;
+    // Set the cell contents
+    MCPaymentPresence *paymentPresence = [_dataController objectAtIndexPath:indexPath];
+    [paymentPresenceCell updatePaymentPresence:paymentPresence];
+}
+
+- (CGFloat)tableView:(UITableView *)tableView heightForRowAtIndexPath:(NSIndexPath *)indexPath {
+    return 52.0;
+}
+
 #pragma mark - UITableViewDataSource
 
 - (NSInteger)numberOfSectionsInTableView:(UITableView *)tableView
@@ -232,13 +249,6 @@ typedef NS_ENUM(BOOL, ChildViewStatus) {
     
     // Set the cell contents
     MCPaymentPresence *thisCellsPresence = [_dataController objectAtIndexPath:indexPath];
-    cell.nameLabel.text = thisCellsPresence.person.getFullName;
-    cell.personView.image = thisCellsPresence.person.thumbnail;
-    [[cell isPresentSwitch] setOn:[[thisCellsPresence isPersonPresent] boolValue]];
-    CurrencyFormatter *cf = [[CurrencyFormatter alloc] initWithCurrencyCode:thisCellsPresence.payment.currency.code];
-    NSNumber *averageOwe = @(-thisCellsPresence.averageOweFromPayment.doubleValue);
-    cell.owesLabel.text = [cf stringForObjectValue:averageOwe];
-    cell.thisCellsPaymentPresence = thisCellsPresence;
     
     // Set the cell alignment to headerView stuff
     NSLayoutConstraint *payerViewToCellNameLabel = [NSLayoutConstraint constraintWithItem:_payerNameField attribute:NSLayoutAttributeLeading relatedBy:NSLayoutRelationEqual toItem:[cell nameLabel] attribute:NSLayoutAttributeLeading multiplier:1.0 constant:-6.0];
@@ -250,16 +260,6 @@ typedef NS_ENUM(BOOL, ChildViewStatus) {
     return cell;
 }
 
-#pragma mark - UITableViewDelegate
-
-- (CGFloat)tableView:(UITableView *)tableView heightForRowAtIndexPath:(NSIndexPath *)indexPath {
-    return 52.0;
-}
-
-//- (CGFloat)tableView:(UITableView *)tableView heightForHeaderInSection:(NSInteger)section {
-//    return UITableViewAutomaticDimension;
-//}
-//
 #pragma mark - UIViewController
 
 - (void)viewDidLoad {
