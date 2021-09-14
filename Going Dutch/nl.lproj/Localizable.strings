@@ -8,7 +8,7 @@
 "%1$@ has paid %2$@(%3$@) for %4$@" = "%1$@ betaalde %2$@(%3$@) voor %4$@.";
 
 /* As in Mark owes Arjen, but then just the word owes. */
-"%1$@ paid %2$@" = "%1$@ betaalt %2$@";
+"%1$@ owes %2$@" = "%1$@ betaalt %2$@";
 
 /* %1$@ has paid %2$@ for %3$@. */
 "%1$@ paid %2$@ for %3$@." = "%1$@ betaalde %2$@ voor %3$@.";

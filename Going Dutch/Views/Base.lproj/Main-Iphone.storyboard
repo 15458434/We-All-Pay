@@ -1446,7 +1446,7 @@
                             </constraints>
                         </view>
                         <prototypes>
-                            <tableViewCell contentMode="scaleToFill" restorationIdentifier="paymentPresenceCell" selectionStyle="none" hidesAccessoryWhenEditing="NO" indentationLevel="1" indentationWidth="0.0" reuseIdentifier="paymentPresenceCell_iPhone" rowHeight="52" id="AcN-yE-tRP" customClass="MCPaymentPresenceTableViewCell_iPhone" customModule="We_all_pay" customModuleProvider="target">
+                            <tableViewCell contentMode="scaleToFill" restorationIdentifier="paymentPresenceCell" selectionStyle="none" hidesAccessoryWhenEditing="NO" indentationLevel="1" indentationWidth="0.0" reuseIdentifier="paymentPresenceCell_iPhone" rowHeight="52" id="AcN-yE-tRP" customClass="MCPaymentPresenceTableViewCell_iPhone">
                                 <rect key="frame" x="0.0" y="364.33333396911621" width="375" height="52"/>
                                 <autoresizingMask key="autoresizingMask"/>
                                 <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" restorationIdentifier="tableViewCellContent" tableViewCell="AcN-yE-tRP" id="WHI-GF-nBf">

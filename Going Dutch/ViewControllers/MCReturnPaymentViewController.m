@@ -211,7 +211,7 @@ typedef NS_OPTIONS(NSUInteger, MCReturnPaymentViewControllerState) {
     CurrencyFormatter *cf = [[CurrencyFormatter alloc] initWithCurrencyCode:_tonightsBill.mainCurrency.code];
     returnPaymentCell.moneyLabel.text = [cf stringForObjectValue:thisCellsReturnPayment.money];
     
-    NSString *owesString = NSLocalizedString(@"%1$@ paid %2$@", @"As in Mark owes Arjen, but then just the word owes.");
+    NSString *owesString = NSLocalizedString(@"%1$@ owes %2$@", @"As in Mark owes Arjen, but then just the word owes.");
     NSString *whoOwesWho = [NSString stringWithFormat:owesString, [thisCellsReturnPayment.payer getName], [thisCellsReturnPayment.receiver getName]];
     [[returnPaymentCell whoOwesWhoLabel] setText:whoOwesWho];
     [returnPaymentCell setSelectionStyle:UITableViewCellSelectionStyleNone];
