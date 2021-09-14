@@ -58,6 +58,12 @@ import MoPubSDK
     }
     
     @objc(presentPrivacyConsentRequestIfNecessaryFromViewController:) class func presentPrivacyConsentRequestIfNecessary(from viewController: UIViewController) {
+        func printUserDefaults() {
+            debugPrint("********************************************************** UserDefaults.standard begin **********************************************************\n")
+            let string = NSString(format: "%@", UserDefaults.standard.dictionaryRepresentation())
+            debugPrint(string)
+            debugPrint("*********************************************************** UserDefaults.standard end ***********************************************************\n")
+        }
         debugPrint("My IDFA: \(ASIdentifierManager.shared().advertisingIdentifier)")
         guard AdEngine.isEnabled else {
             return
@@ -114,12 +120,14 @@ import MoPubSDK
                                 }
                                 
                                 if UMPConsentInformation.sharedInstance.consentStatus == UMPConsentStatus.obtained {
-                                    
-                                    GADMobileAds.sharedInstance().start(completionHandler: nil)
-                                    ALPrivacySettings.setHasUserConsent(true)
-                                    if MoPub.sharedInstance().isGDPRApplicable == .yes {
-                                        MoPub.sharedInstance().grantConsent()
+                                    printUserDefaults()
+                                    GADMobileAds.sharedInstance().start { status in
+                                        debugPrint("consentStatus: \(status.adapterStatusesByClassName)")
                                     }
+//                                    ALPrivacySettings.setHasUserConsent(true)
+//                                    if MoPub.sharedInstance().isGDPRApplicable == .yes {
+//                                        MoPub.sharedInstance().grantConsent()
+//                                    }
                                 }
                             })
                         } else {
@@ -128,12 +136,8 @@ import MoPubSDK
                     })
                 }
             default:
-                GADMobileAds.sharedInstance().start(completionHandler: nil)
-                ALPrivacySettings.setHasUserConsent(true)
-                if MoPub.sharedInstance().isGDPRApplicable == .yes {
-                    MoPub.sharedInstance().grantConsent()
-                }
                 // App can start requesting ads.
+                printUserDefaults()
                 GADMobileAds.sharedInstance().start { status in
                     debugPrint("consentStatus: \(status.adapterStatusesByClassName)")
                 }
