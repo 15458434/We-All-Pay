@@ -258,6 +258,7 @@ static void * notificationCountContext = &notificationCountContext;
     
     [self prepareUserActivity];
     
+    [MCAdEngine presentPrivacyConsentRequestIfNecessaryFromViewController:self];
 #ifdef ADTEST
     [MCAdEngine presentAdTestSuiteFromPresentingViewController:self];
 #endif
@@ -284,8 +285,6 @@ static void * notificationCountContext = &notificationCountContext;
     if (self.userActivity) {
         [self.userActivity becomeCurrent];
     }
-    
-    [MCAdEngine presentPrivacyConsentRequestIfNecessaryFromViewController:self];
     
     // Start KVO
     NSKeyValueObservingOptions options = NSKeyValueObservingOptionInitial | NSKeyValueObservingOptionNew;

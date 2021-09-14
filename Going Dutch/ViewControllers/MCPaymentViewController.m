@@ -191,12 +191,7 @@ typedef NS_ENUM(BOOL, ChildViewStatus) {
 #pragma mark - MCGenericAdBannerTableViewController
 
 - (NSString *)adUnitId {
-#ifdef DEBUG
-    // This is a test Unit ID for banner from Google themselves.
-    return @"ca-app-pub-3940256099942544/2934735716";
-#else
     return @"ca-app-pub-5354415674074435/2765341863";
-#endif
 }
 
 
