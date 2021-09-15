@@ -329,5 +329,5 @@
 "You can enable access to Contacts in Settings->We All Pay->Privacy" = "Toegang tot Contacten kan aangezet worden in Instellingen->We All Pay->Privacy";
 
 /* A message to the user thay can't add a payment when they didn't add people to the even. */
-"You can't add a payment when no people are present. There is no one to split the expenses among." = "Je kan geen betaling toevoegen, als er geen aanwezigen zijn. Er is niemand om de rekening van dit evenement te delen.";
+"You can't add a payment when no people are present. There is no one to split the expenses of this event with." = "Je kan geen betaling toevoegen, als er geen aanwezigen zijn. Er is niemand om de rekening van dit evenement te delen.";
 
