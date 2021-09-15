@@ -1,5 +1,5 @@
 /* Localized versions of Info.plist keys */
-"NSContactsUsageDescription" = "Voeg direct vrienden toe aan een rekening vanuit Contacten.";
+"NSContactsUsageDescription" = "Voeg direct vrienden toe aan een evenement vanuit Contacten om de rekening te delen.";
 
 /* Privacy - Tracking Usage Description */
 "NSUserTrackingUsageDescription" = "Deze identifier wordt gebruikt om meer gepersonaliseerde advertenties aan je te laten zien.";
