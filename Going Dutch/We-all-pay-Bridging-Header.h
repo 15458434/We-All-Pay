@@ -39,5 +39,6 @@
 #import "MCBorderLineView.h"
 #import "MCNotificationsCountTableViewCell.h"
 #import "MCNotificationTableViewCell.h"
+#import "MCPurchaseTableViewCell.h"
 
 #import "MCEmailTextInputProxy.h"
