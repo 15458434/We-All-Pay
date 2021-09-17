@@ -474,6 +474,7 @@
 		386FC32418E5855400428294 /* MCSharedBillMainViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = MCSharedBillMainViewController.m; path = ViewControllers/MCSharedBillMainViewController.m; sourceTree = "<group>"; };
 		3870C22B1D34FDF80030035A /* Base */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; name = Base; path = "Base.lproj/We all pay app keywords.plist"; sourceTree = "<group>"; };
 		3870C22D1D34FDFA0030035A /* nl */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; name = nl; path = "nl.lproj/We all pay app keywords.plist"; sourceTree = "<group>"; };
+		38727E5326F306ED00847DEA /* MCEditorType.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = MCEditorType.h; sourceTree = "<group>"; };
 		387494D319F053C2001614CA /* WeAllPayStore3to4.xcmappingmodel */ = {isa = PBXFileReference; lastKnownFileType = wrapper.xcmappingmodel; path = WeAllPayStore3to4.xcmappingmodel; sourceTree = "<group>"; };
 		387494D519F053E9001614CA /* WeAllPayStore2to4.xcmappingmodel */ = {isa = PBXFileReference; lastKnownFileType = wrapper.xcmappingmodel; path = WeAllPayStore2to4.xcmappingmodel; sourceTree = "<group>"; };
 		387494D719F05476001614CA /* WeAllPayStore1to4.xcmappingmodel */ = {isa = PBXFileReference; lastKnownFileType = wrapper.xcmappingmodel; path = WeAllPayStore1to4.xcmappingmodel; sourceTree = "<group>"; };
@@ -1157,6 +1158,14 @@
 			name = Resources;
 			sourceTree = "<group>";
 		};
+		38727E5226F306CD00847DEA /* Generic Enums */ = {
+			isa = PBXGroup;
+			children = (
+				38727E5326F306ED00847DEA /* MCEditorType.h */,
+			);
+			path = "Generic Enums";
+			sourceTree = "<group>";
+		};
 		388A327D1C11EDBD00F7459C /* WhoPayingUserDefaultsStoreInterface */ = {
 			isa = PBXGroup;
 			children = (
@@ -1410,6 +1419,7 @@
 		38FE5A062346943400BBA722 /* Miscellaneous */ = {
 			isa = PBXGroup;
 			children = (
+				38727E5226F306CD00847DEA /* Generic Enums */,
 				380B841E26D3F15E00E77368 /* Mail */,
 				3812760B1BBE74EF0004C8C2 /* UIViewControllerExtension.swift */,
 				38490D2E1D7056D100A297BA /* ShowMailViewProtocol.swift */,
