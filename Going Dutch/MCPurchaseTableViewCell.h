@@ -8,12 +8,16 @@
 
 @import UIKit;
 
+@class MCStoreInterface;
+
 NS_ASSUME_NONNULL_BEGIN
 
 @interface MCPurchaseTableViewCell : UITableViewCell
 
 @property (nonatomic, weak) IBOutlet UILabel *purchaseDescriptionLabel;
 @property (nonatomic, weak) IBOutlet UILabel *priceLabel;
+
+- (void)updateStoreInterface:(MCStoreInterface *)model;
 
 @end
 

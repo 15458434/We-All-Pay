@@ -18,7 +18,7 @@ let kApplyProVersionNotification = "Apply pro version"
     
     private var applyProVersionSuccesful: Bool = false
     
-    var proProduct: SKProduct!
+    @objc dynamic var proProduct: SKProduct?
     
     var productIdentifiers: [String] {
         let url = Bundle.main.url(forResource: "Product ids", withExtension: "plist")!
@@ -87,11 +87,7 @@ let kApplyProVersionNotification = "Apply pro version"
     }
     
     func buyProProductSendFrom(_ viewController: UIViewController) {
-        if proProduct != nil {
-            let payment = SKMutablePayment(product: proProduct)
-            payment.quantity = 1
-            SKPaymentQueue.default().add(payment)
-        } else {
+        guard let proProduct = self.proProduct else {
             let title = NSLocalizedString("App Store unavailable", comment: "Message that pops up when the App Store is not available.")
             let message = NSLocalizedString("Unable to connect to the App Store. Please connect to the internet.", comment: "Message body explaining the App Store can't be reached.")
             let dismissButtonTitle = NSLocalizedString("Dismiss", comment: "Button that says dismiss.")
@@ -101,7 +97,11 @@ let kApplyProVersionNotification = "Apply pro version"
             })
             alertController.addAction(dismissAction)
             viewController.present(alertController, animated: true, completion: nil)
+            return
         }
+        let payment = SKMutablePayment(product: proProduct)
+        payment.quantity = 1
+        SKPaymentQueue.default().add(payment)
     }
     
     func restorePreviousPurchases() {
@@ -141,7 +141,7 @@ let kApplyProVersionNotification = "Apply pro version"
         }
         proProduct = response.products.first
         lastSKProductsRequestError = nil
-        NotificationCenter.default.post(name: Notification.Name(rawValue: "Product price"), object: self, userInfo: [proProduct.productIdentifier: proProduct.price])
+        NotificationCenter.default.post(name: Notification.Name(rawValue: "Product price"), object: self, userInfo: [proProduct!.productIdentifier: proProduct!.price])
     }
     
     // MARK: SK Payment Transaction Observer
@@ -179,7 +179,7 @@ let kApplyProVersionNotification = "Apply pro version"
 }
 
 extension SKProduct {
-    var priceString: String {
+    @objc var localizedPriceString: String {
         let numberFormatter = NumberFormatter()
         numberFormatter.formatterBehavior = .default
         numberFormatter.numberStyle = .currency

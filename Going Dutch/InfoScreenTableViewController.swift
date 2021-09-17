@@ -96,7 +96,7 @@ final class InfoScreenTableViewController: UITableViewController, MFMailComposeV
     @objc func postProductPrice(_ notification: Notification) {
         if !MCStoreInterface.defaultStoreInterface.isProProductPurchased {
             let cell = tableView.cellForRow(at: IndexPath(row: 0, section: 0)) as! MCTwoLabelIscreenTableViewCell
-            cell.rightLabel.text = MCStoreInterface.defaultStoreInterface.proProduct.priceString
+            cell.rightLabel.text = MCStoreInterface.defaultStoreInterface.proProduct?.localizedPriceString
         }
     }
     
@@ -138,13 +138,8 @@ final class InfoScreenTableViewController: UITableViewController, MFMailComposeV
         switch (indexPath.section, indexPath.row) {
         case (0, 0):
             let cell = cell as! MCPurchaseTableViewCell
-            cell.purchaseDescriptionLabel!.text = NSLocalizedString("Buy ad free version", comment: "Buy ad free Version")
             cell.priceLabel!.isHidden = false
-            if MCStoreInterface.defaultStoreInterface.proProduct != nil {
-                cell.priceLabel!.text = MCStoreInterface.defaultStoreInterface.proProduct.priceString
-            } else {
-                cell.priceLabel!.text = ""
-            }
+            cell.update(MCStoreInterface.defaultStoreInterface)
         case (0, 1):
             let cell = cell as! MCTwoLabelIscreenTableViewCell
             cell.leftLabel.text = NSLocalizedString("Restore previous purchases", comment: "Restore previous purchases")
