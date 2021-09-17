@@ -12,6 +12,7 @@
 #import "MCSharedBillTableViewController.h"
 #import "MCPaymentViewController.h"
 #import "MCEditTripViewController.h"
+#import "MCSharedBillMainViewController.h"
 
 #import "MCBadgeButton.h"
 
@@ -305,26 +306,14 @@ static void * notificationCountContext = &notificationCountContext;
 #endif
     if ([segue.identifier isEqualToString:@"newTonightsBill"]) {
         _isATonightsBillOpened = MCTonightsBillStatusOpened;
-    }
-    if ([segue.identifier isEqualToString:@"openTonightsBill"]) {
+    } else if ([segue.identifier isEqualToString:@"openTonightsBill"]) {
         _isATonightsBillOpened = MCTonightsBillStatusOpened;
-    }
-    MCSharedBill *theBill;
-    if ([sender isKindOfClass:[NSArray class]]) {
-        if ([segue.destinationViewController conformsToProtocol:@protocol(MCTonightsBillTransfer)]) {
-            [segue.destinationViewController setTonightsBill:[sender firstObject]];
-        }
-    } else {
         NSIndexPath *indexPathOfSelectedRow = self.tableView.indexPathForSelectedRow;
-        if (indexPathOfSelectedRow) {
-            theBill = [_model.fetchEventsController objectAtIndexPath:indexPathOfSelectedRow];
-        }
-        if ([segue.destinationViewController conformsToProtocol:@protocol(MCTonightsBillTransfer)]) {
-            [segue.destinationViewController setTonightsBill:theBill];
-        }
-    }
-    
-    if ([segue.identifier isEqualToString:@"selectMainCurrency"]) {
+        NSParameterAssert(indexPathOfSelectedRow);
+        MCSharedBill *selectedEvent = [_model.fetchEventsController objectAtIndexPath:indexPathOfSelectedRow];
+        MCSharedBillMainViewController *destination = (MCSharedBillMainViewController *)segue.destinationViewController;
+        [destination updateEventWithObjectID:selectedEvent.objectID];
+    } else if ([segue.identifier isEqualToString:@"selectMainCurrency"]) {
         MCSharedBill *theBill = _model.fetchEventsController.fetchedObjects[_selectedIndexPathForAction.row];
         UINavigationController *navController = (UINavigationController *)segue.destinationViewController;
         SelectCurrencyTableViewController *currencySelector = (SelectCurrencyTableViewController *)navController.viewControllers.firstObject;
