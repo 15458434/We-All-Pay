@@ -326,14 +326,6 @@ static void * notificationCountContext = &notificationCountContext;
         InfoScreenTableViewController *infoContainerViewController = navigationController.viewControllers.lastObject;
         infoContainerViewController.preferredContentSize = CGSizeMake(320, 0);
         infoContainerViewController.notificationEnvironmentModel = self.notificationsStateModel;
-    } else if ([segue.identifier isEqualToString:@"newPaymentFromEvents"]) {
-        MCSharedBill *theBill = [sender firstObject];
-        if ([segue.destinationViewController conformsToProtocol:@protocol(MCTonightsBillTransfer)]) {
-            [segue.destinationViewController setTonightsBill:theBill];
-        }
-        if ([segue.destinationViewController conformsToProtocol:@protocol(MCPathComponentsToOpenProtocol) ]) {
-            [segue.destinationViewController setPathComponentsToOpen:sender];
-        }
     }
 }
 
