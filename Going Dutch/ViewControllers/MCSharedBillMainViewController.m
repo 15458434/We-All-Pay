@@ -32,6 +32,12 @@
 
 @implementation MCSharedBillMainViewController
 
+- (void)updateEventWithObjectID:(NSManagedObjectID *)objectID {
+    NSManagedObjectContext *managedObjectContext = MCWeAllPayStoreController.defaultStore.mainThreadContext;
+    MCSharedBill *event = [managedObjectContext objectWithID:objectID];
+    self.tonightsBill = event;
+}
+
 #pragma mark - IBActions
 
 - (IBAction)toggleEdit:(id)sender {

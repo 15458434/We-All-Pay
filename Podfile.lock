@@ -1,7 +1,7 @@
 PODS:
   - AdColony (4.7.1)
   - AppLovinSDK (10.3.5)
-  - FBAudienceNetwork (6.6.0):
+  - FBAudienceNetwork (6.7.0):
     - FBSDKCoreKit_Basics
   - FBSDKCoreKit_Basics (11.2.0):
     - FBSDKCoreKit_Basics/Basics (= 11.2.0)
@@ -92,8 +92,8 @@ PODS:
   - GoogleMobileAdsMediationAppLovin (10.3.5.0):
     - AppLovinSDK (= 10.3.5)
     - Google-Mobile-Ads-SDK (~> 8.0)
-  - GoogleMobileAdsMediationFacebook (6.6.0.0):
-    - FBAudienceNetwork (= 6.6.0)
+  - GoogleMobileAdsMediationFacebook (6.7.0.0):
+    - FBAudienceNetwork (= 6.7.0)
     - Google-Mobile-Ads-SDK (~> 8.0)
   - GoogleMobileAdsMediationInMobi (9.2.1.0):
     - Google-Mobile-Ads-SDK (~> 8.0)
@@ -329,7 +329,7 @@ SPEC REPOS:
 SPEC CHECKSUMS:
   AdColony: f019aa76e21d2d728871a2441f95f309bb8558cc
   AppLovinSDK: 3188b9df77128b503cea9822b77e1b4fe7e4761b
-  FBAudienceNetwork: 9226b1e415de489e80bb5f83b3b8b61cbf75efde
+  FBAudienceNetwork: 7aec5ffa73ff9d972a9dbcc2477d0fcaf9ef3b53
   FBSDKCoreKit_Basics: 69e0acab6b97b7b8cae9d452407050e78795c34d
   Firebase: bc9325d5ee2041524bac78a5213d0e530c651309
   FirebaseABTesting: 5a72ea0e88422f9e223614cb4016cafffb2af8d1
@@ -344,7 +344,7 @@ SPEC CHECKSUMS:
   GoogleDataTransport: 85fd18ff3019bb85d3f2c551d04c481dedf71fc9
   GoogleMobileAdsMediationAdColony: 7d404f53fec55a5cbdd75b0efef3f8ae03f0c38e
   GoogleMobileAdsMediationAppLovin: 9d18d14015e306a5b475c055774f8ff125d83a92
-  GoogleMobileAdsMediationFacebook: 4c08d64ef644ca29073be0839683cfeb4fd9d8a1
+  GoogleMobileAdsMediationFacebook: 18421476a09d6246c86d58d63ef3815bce196573
   GoogleMobileAdsMediationInMobi: a0f5e8051115abf7c6a8ab7e9df6d02762d230cc
   GoogleMobileAdsMediationMoPub: ae9c7b3ac439e3b60418b7742c64e6e2d519b83a
   GoogleMobileAdsMediationTestSuite: 1e45292ed37896267fe82c0faf0a01de3b06fa18
@@ -361,4 +361,4 @@ SPEC CHECKSUMS:
 
 PODFILE CHECKSUM: 9105234d47dbe676788145dc71926d2c52bf94df
 
-COCOAPODS: 1.11.0
+COCOAPODS: 1.11.2

@@ -1729,7 +1729,6 @@
                     <nil name="viewControllers"/>
                     <connections>
                         <segue destination="A1E-EB-xnZ" kind="relationship" relationship="rootViewController" id="V9y-d1-1LO"/>
-                        <segue destination="v9b-wE-q9L" kind="presentation" identifier="newPaymentFromEvents" id="5Vh-JE-OCd"/>
                     </connections>
                 </navigationController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="bmD-Nz-QbR" userLabel="First Responder" sceneMemberID="firstResponder"/>
@@ -1832,7 +1831,6 @@
         <segue reference="jjg-NC-1KA"/>
         <segue reference="9O1-vs-VOI"/>
         <segue reference="3RZ-mk-Dh4"/>
-        <segue reference="6AC-aI-bIB"/>
     </inferredMetricsTieBreakers>
     <resources>
         <image name="barbutton - cancel" width="22" height="22"/>
