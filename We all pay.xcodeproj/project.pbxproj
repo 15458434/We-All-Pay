@@ -482,6 +482,7 @@
 		387D3A8E187053BA0060FAF8 /* nl */ = {isa = PBXFileReference; fileEncoding = 10; lastKnownFileType = text.plist.strings; name = nl; path = "nl.lproj/Main-Iphone.strings"; sourceTree = "<group>"; };
 		387E79CD26F48EDC00C2A424 /* MCPurchaseTableViewCell.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = MCPurchaseTableViewCell.h; sourceTree = "<group>"; };
 		387E79CE26F48EDC00C2A424 /* MCPurchaseTableViewCell.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = MCPurchaseTableViewCell.m; sourceTree = "<group>"; };
+		387E79D026F4952700C2A424 /* AdFreePurchaseStoreKitTestConfiguration.storekit */ = {isa = PBXFileReference; lastKnownFileType = text; path = AdFreePurchaseStoreKitTestConfiguration.storekit; sourceTree = "<group>"; };
 		3881906F269D914E000949F4 /* MCNotificationUnreadIndicator.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = MCNotificationUnreadIndicator.h; sourceTree = "<group>"; };
 		38819070269D914E000949F4 /* MCNotificationUnreadIndicator.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = MCNotificationUnreadIndicator.m; sourceTree = "<group>"; };
 		3881907A269EE287000949F4 /* MCBadgeButton.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = MCBadgeButton.h; sourceTree = "<group>"; };
@@ -1005,6 +1006,7 @@
 				3889497F211C2DDE00BDF9CD /* CoreDataSaveHandlerWhenEnteringBackground.swift */,
 				38D6A3E51C73DF2600968BB2 /* RateMeControllerExtension.swift */,
 				38D6A3E71C73E04300968BB2 /* UIViewControllerRateMeControllerExtension.swift */,
+				387E79D126F4953D00C2A424 /* Test Files */,
 				3835EBF82115C40900E2BC3F /* Settings.bundle */,
 				3870C2291D34FD5D0030035A /* Resources */,
 				380700B11A1B76FE00C7FB37 /* Test files dutch */,
@@ -1169,6 +1171,14 @@
 				38727E5326F306ED00847DEA /* MCEditorType.h */,
 			);
 			path = "Generic Enums";
+			sourceTree = "<group>";
+		};
+		387E79D126F4953D00C2A424 /* Test Files */ = {
+			isa = PBXGroup;
+			children = (
+				387E79D026F4952700C2A424 /* AdFreePurchaseStoreKitTestConfiguration.storekit */,
+			);
+			path = "Test Files";
 			sourceTree = "<group>";
 		};
 		388A327D1C11EDBD00F7459C /* WhoPayingUserDefaultsStoreInterface */ = {
