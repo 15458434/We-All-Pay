@@ -497,8 +497,45 @@
                                     <outlet property="rightLabel" destination="Yd0-Ev-8xr" id="im2-za-bNh"/>
                                 </connections>
                             </tableViewCell>
+                            <tableViewCell contentMode="scaleToFill" restorationIdentifier="MCPurchaseTableViewCell" selectionStyle="none" hidesAccessoryWhenEditing="NO" indentationLevel="1" indentationWidth="0.0" reuseIdentifier="MCPurchaseTableViewCell" id="2kR-oU-fDd" userLabel="MCPurchaseTableViewCell" customClass="MCPurchaseTableViewCell">
+                                <rect key="frame" x="0.0" y="87.333332061767578" width="375" height="38.333332061767578"/>
+                                <autoresizingMask key="autoresizingMask"/>
+                                <tableViewCellContentView key="contentView" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" restorationIdentifier="MCPurchaseTableViewCellContentView" tableViewCell="2kR-oU-fDd" id="65f-kc-Aa9">
+                                    <rect key="frame" x="0.0" y="0.0" width="375" height="38.333332061767578"/>
+                                    <autoresizingMask key="autoresizingMask"/>
+                                    <subviews>
+                                        <stackView opaque="NO" contentMode="scaleToFill" distribution="equalSpacing" alignment="center" spacing="6" translatesAutoresizingMaskIntoConstraints="NO" id="VkD-L5-OBF">
+                                            <rect key="frame" x="20" y="10.999999999999998" width="335" height="17.333333333333329"/>
+                                            <subviews>
+                                                <label clipsSubviews="YES" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" restorationIdentifier="purchaseDescriptionLabel" text="Label" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" minimumScaleFactor="0.5" translatesAutoresizingMaskIntoConstraints="NO" id="pI6-ZF-3x9">
+                                                    <rect key="frame" x="0.0" y="0.33333333333333393" width="36.666666666666664" height="17"/>
+                                                    <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                                                    <fontDescription key="fontDescription" style="UICTFontTextStyleHeadline"/>
+                                                    <nil key="highlightedColor"/>
+                                                </label>
+                                                <label clipsSubviews="YES" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="252" verticalHuggingPriority="251" horizontalCompressionResistancePriority="751" restorationIdentifier="priceLabel" text="Label" textAlignment="right" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="ffO-XB-JLd">
+                                                    <rect key="frame" x="304" y="1.6666666666666652" width="31" height="14.333333333333336"/>
+                                                    <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                                                    <fontDescription key="fontDescription" style="UICTFontTextStyleSubhead"/>
+                                                    <nil key="highlightedColor"/>
+                                                </label>
+                                            </subviews>
+                                        </stackView>
+                                    </subviews>
+                                    <constraints>
+                                        <constraint firstItem="VkD-L5-OBF" firstAttribute="leading" secondItem="65f-kc-Aa9" secondAttribute="leading" constant="20" symbolic="YES" id="3e8-kp-jF5"/>
+                                        <constraint firstAttribute="bottom" secondItem="VkD-L5-OBF" secondAttribute="bottom" constant="10" id="GTB-ZE-e4q"/>
+                                        <constraint firstAttribute="trailing" secondItem="VkD-L5-OBF" secondAttribute="trailing" constant="20" symbolic="YES" id="RUO-rq-czj"/>
+                                        <constraint firstItem="VkD-L5-OBF" firstAttribute="top" secondItem="65f-kc-Aa9" secondAttribute="top" constant="11" id="lYH-Kh-dj5"/>
+                                    </constraints>
+                                </tableViewCellContentView>
+                                <connections>
+                                    <outlet property="priceLabel" destination="ffO-XB-JLd" id="uDC-zB-KA7"/>
+                                    <outlet property="purchaseDescriptionLabel" destination="pI6-ZF-3x9" id="HBt-yK-Vsj"/>
+                                </connections>
+                            </tableViewCell>
                             <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" preservesSuperviewLayoutMargins="YES" selectionStyle="default" indentationWidth="10" reuseIdentifier="NotificationsCountTableViewCell" id="P8J-qh-17v" customClass="MCNotificationsCountTableViewCell">
-                                <rect key="frame" x="0.0" y="87.333332061767578" width="375" height="71.333335876464844"/>
+                                <rect key="frame" x="0.0" y="125.66666412353516" width="375" height="71.333335876464844"/>
                                 <autoresizingMask key="autoresizingMask"/>
                                 <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" preservesSuperviewLayoutMargins="YES" insetsLayoutMarginsFromSafeArea="NO" tableViewCell="P8J-qh-17v" id="sUP-wJ-H4Y">
                                     <rect key="frame" x="0.0" y="0.0" width="375" height="71.333335876464844"/>

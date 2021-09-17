@@ -113,6 +113,7 @@
 		387494D619F053E9001614CA /* WeAllPayStore2to4.xcmappingmodel in Sources */ = {isa = PBXBuildFile; fileRef = 387494D519F053E9001614CA /* WeAllPayStore2to4.xcmappingmodel */; };
 		387494D819F05476001614CA /* WeAllPayStore1to4.xcmappingmodel in Sources */ = {isa = PBXBuildFile; fileRef = 387494D719F05476001614CA /* WeAllPayStore1to4.xcmappingmodel */; };
 		387D3A911870652B0060FAF8 /* Localizable.strings in Resources */ = {isa = PBXBuildFile; fileRef = 387D3A931870652B0060FAF8 /* Localizable.strings */; };
+		387E79CF26F48EDC00C2A424 /* MCPurchaseTableViewCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 387E79CE26F48EDC00C2A424 /* MCPurchaseTableViewCell.m */; };
 		38894980211C2DDE00BDF9CD /* CoreDataSaveHandlerWhenEnteringBackground.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3889497F211C2DDE00BDF9CD /* CoreDataSaveHandlerWhenEnteringBackground.swift */; };
 		388A326E1C10965D00F7459C /* CategoryPictureObject.swift in Sources */ = {isa = PBXBuildFile; fileRef = 385295CE1C10583E0081894D /* CategoryPictureObject.swift */; };
 		388A326F1C10966000F7459C /* CategoryPictureStoreController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 385295D01C105C580081894D /* CategoryPictureStoreController.swift */; };
@@ -479,6 +480,9 @@
 		387494D519F053E9001614CA /* WeAllPayStore2to4.xcmappingmodel */ = {isa = PBXFileReference; lastKnownFileType = wrapper.xcmappingmodel; path = WeAllPayStore2to4.xcmappingmodel; sourceTree = "<group>"; };
 		387494D719F05476001614CA /* WeAllPayStore1to4.xcmappingmodel */ = {isa = PBXFileReference; lastKnownFileType = wrapper.xcmappingmodel; path = WeAllPayStore1to4.xcmappingmodel; sourceTree = "<group>"; };
 		387D3A8E187053BA0060FAF8 /* nl */ = {isa = PBXFileReference; fileEncoding = 10; lastKnownFileType = text.plist.strings; name = nl; path = "nl.lproj/Main-Iphone.strings"; sourceTree = "<group>"; };
+		387E79CD26F48EDC00C2A424 /* MCPurchaseTableViewCell.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = MCPurchaseTableViewCell.h; sourceTree = "<group>"; };
+		387E79CE26F48EDC00C2A424 /* MCPurchaseTableViewCell.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = MCPurchaseTableViewCell.m; sourceTree = "<group>"; };
+		387E79D026F4952700C2A424 /* AdFreePurchaseStoreKitTestConfiguration.storekit */ = {isa = PBXFileReference; lastKnownFileType = text; path = AdFreePurchaseStoreKitTestConfiguration.storekit; sourceTree = "<group>"; };
 		3881906F269D914E000949F4 /* MCNotificationUnreadIndicator.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = MCNotificationUnreadIndicator.h; sourceTree = "<group>"; };
 		38819070269D914E000949F4 /* MCNotificationUnreadIndicator.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = MCNotificationUnreadIndicator.m; sourceTree = "<group>"; };
 		3881907A269EE287000949F4 /* MCBadgeButton.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = MCBadgeButton.h; sourceTree = "<group>"; };
@@ -817,6 +821,8 @@
 			isa = PBXGroup;
 			children = (
 				381275FE1BBD84650004C8C2 /* InfoScreenTableViewController.swift */,
+				387E79CD26F48EDC00C2A424 /* MCPurchaseTableViewCell.h */,
+				387E79CE26F48EDC00C2A424 /* MCPurchaseTableViewCell.m */,
 				3813150726CBA1BA00C27CBB /* MCNotificationsCountTableViewCell.h */,
 				3813150826CBA1BA00C27CBB /* MCNotificationsCountTableViewCell.m */,
 				3897157917901D0F005BE03E /* MCTwoLabelsTitleView.xib */,
@@ -1000,6 +1006,7 @@
 				3889497F211C2DDE00BDF9CD /* CoreDataSaveHandlerWhenEnteringBackground.swift */,
 				38D6A3E51C73DF2600968BB2 /* RateMeControllerExtension.swift */,
 				38D6A3E71C73E04300968BB2 /* UIViewControllerRateMeControllerExtension.swift */,
+				387E79D126F4953D00C2A424 /* Test Files */,
 				3835EBF82115C40900E2BC3F /* Settings.bundle */,
 				3870C2291D34FD5D0030035A /* Resources */,
 				380700B11A1B76FE00C7FB37 /* Test files dutch */,
@@ -1164,6 +1171,14 @@
 				38727E5326F306ED00847DEA /* MCEditorType.h */,
 			);
 			path = "Generic Enums";
+			sourceTree = "<group>";
+		};
+		387E79D126F4953D00C2A424 /* Test Files */ = {
+			isa = PBXGroup;
+			children = (
+				387E79D026F4952700C2A424 /* AdFreePurchaseStoreKitTestConfiguration.storekit */,
+			);
+			path = "Test Files";
 			sourceTree = "<group>";
 		};
 		388A327D1C11EDBD00F7459C /* WhoPayingUserDefaultsStoreInterface */ = {
@@ -2201,6 +2216,7 @@
 				38DB85D417E45BCA006237CF /* MCPayment+addons.m in Sources */,
 				3868780623721751003D40A9 /* EmailTextInputValidator.swift in Sources */,
 				38C3AB151CBCF3200011C10C /* ViewControllerProtocols.swift in Sources */,
+				387E79CF26F48EDC00C2A424 /* MCPurchaseTableViewCell.m in Sources */,
 				38D177131C3A85C00084604C /* SelectCurrencyTableViewController.swift in Sources */,
 				3813150926CBA1BA00C27CBB /* MCNotificationsCountTableViewCell.m in Sources */,
 				3825A82419990BA400A8885D /* UIViewController+WeAllPayStore.m in Sources */,

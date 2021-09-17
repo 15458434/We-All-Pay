@@ -1,0 +1,38 @@
+{
+  "identifier" : "010F59A8",
+  "nonRenewingSubscriptions" : [
+
+  ],
+  "products" : [
+    {
+      "displayPrice" : "0.99",
+      "familyShareable" : false,
+      "internalID" : "B1D2232C",
+      "localizations" : [
+        {
+          "description" : "Full ad free experience.",
+          "displayName" : "Remove Ads",
+          "locale" : "en_US"
+        },
+        {
+          "description" : "Volledig advertentie vrij.",
+          "displayName" : "Verwijder Ads",
+          "locale" : "nl"
+        }
+      ],
+      "productID" : "com.Greenhair.We_all_pay.pro",
+      "referenceName" : "Remove Ads",
+      "type" : "NonConsumable"
+    }
+  ],
+  "settings" : {
+
+  },
+  "subscriptionGroups" : [
+
+  ],
+  "version" : {
+    "major" : 1,
+    "minor" : 1
+  }
+}

@@ -96,7 +96,7 @@ final class InfoScreenTableViewController: UITableViewController, MFMailComposeV
     @objc func postProductPrice(_ notification: Notification) {
         if !MCStoreInterface.defaultStoreInterface.isProProductPurchased {
             let cell = tableView.cellForRow(at: IndexPath(row: 0, section: 0)) as! MCTwoLabelIscreenTableViewCell
-            cell.rightLabel.text = MCStoreInterface.defaultStoreInterface.proProduct.priceString
+            cell.rightLabel.text = MCStoreInterface.defaultStoreInterface.proProduct?.localizedPriceString
         }
     }
     
@@ -132,74 +132,22 @@ final class InfoScreenTableViewController: UITableViewController, MFMailComposeV
     }
     // MARK: UITableViewController
     
-    // MARK: UITableViewDataSource
+    // MARK: UITableViewDelegate
     
-    override func numberOfSections(in tableView: UITableView) -> Int {
-        return 4
-    }
-    
-    override func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
-        switch (section) {
-        case 0:
-            if (MCStoreInterface.canMakePayments()) && !MCStoreInterface.defaultStoreInterface.isProProductPurchased {
-                return numberOfRowsInSection0
-            } else {
-                return 0
-            }
-        case 1:
-            return 1
-        case 2:
-            return 2
-        case 3:
-            return 1
-        default:
-            return 0
-        }
-    }
-    
-    override func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
+    override func tableView(_ tableView: UITableView, willDisplay cell: UITableViewCell, forRowAt indexPath: IndexPath) {
         switch (indexPath.section, indexPath.row) {
         case (0, 0):
-            let cell = tableView.dequeueReusableCell(withIdentifier: "MCTwoLabelIscreenTableViewCell", for: indexPath) as! MCTwoLabelIscreenTableViewCell
-            cell.leftLabel.text = NSLocalizedString("Buy ad free version", comment: "Buy ad free Version")
-            cell.rightLabel.isHidden = false
-            if MCStoreInterface.defaultStoreInterface.proProduct != nil {
-                cell.rightLabel.text = MCStoreInterface.defaultStoreInterface.proProduct.priceString
-            } else {
-                cell.rightLabel.text = ""
-            }
-            return cell
+            let cell = cell as! MCPurchaseTableViewCell
+            cell.priceLabel!.isHidden = false
+            cell.update(MCStoreInterface.defaultStoreInterface)
         case (0, 1):
-            let cell = tableView.dequeueReusableCell(withIdentifier: "MCTwoLabelIscreenTableViewCell", for: indexPath) as! MCTwoLabelIscreenTableViewCell
+            let cell = cell as! MCTwoLabelIscreenTableViewCell
             cell.leftLabel.text = NSLocalizedString("Restore previous purchases", comment: "Restore previous purchases")
             cell.rightLabel.isHidden = true
-            return cell
-        case (1, 0):
-            let cell = tableView.dequeueReusableCell(withIdentifier: "NotificationsCountTableViewCell", for: indexPath) as! NotificationsCountTableViewCell
-            cell.update(model: notificationEnvironmentModel)
-            return cell
-        case (2, 0):
-            let cell = tableView.dequeueReusableCell(withIdentifier: "MCTwoLabelIscreenTableViewCell", for: indexPath) as! MCTwoLabelIscreenTableViewCell
-            cell.leftLabel.text = NSLocalizedString("Rate me", comment: "Text of the Rate me button")
-            cell.rightLabel.isHidden = true
-            return cell
-        case (2, 1):
-            let cell = tableView.dequeueReusableCell(withIdentifier: "MCTwoLabelIscreenTableViewCell", for: indexPath) as! MCTwoLabelIscreenTableViewCell
-            cell.leftLabel.text = NSLocalizedString("My Apps", comment: "Text of the the button that takes you to my apps in the AppStore")
-            cell.rightLabel.isHidden = true
-            return cell
-        case (3, 0):
-            let cell = tableView.dequeueReusableCell(withIdentifier: "MCTwoLabelIscreenTableViewCell", for: indexPath) as! MCTwoLabelIscreenTableViewCell
-            cell.leftLabel.text = NSLocalizedString("Give feedback", comment: "Give feedback")
-            cell.rightLabel.isHidden = true
-            return cell
         default:
-            assert(false, "This section: \(indexPath.section) and row: \(indexPath.row) are not valid")
-            return UITableViewCell()
+            ()
         }
     }
-    
-    // MARK: UITableViewDelegate
     
     override func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
         switch (indexPath.section, indexPath.row) {
@@ -229,6 +177,64 @@ final class InfoScreenTableViewController: UITableViewController, MFMailComposeV
     
     override func tableView(_ tableView: UITableView, estimatedHeightForRowAt indexPath: IndexPath) -> CGFloat {
         return 50.0
+    }
+    
+    // MARK: UITableViewDataSource
+    
+    override func numberOfSections(in tableView: UITableView) -> Int {
+        return 4
+    }
+    
+    override func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
+        switch (section) {
+        case 0:
+            if (MCStoreInterface.canMakePayments()) && !MCStoreInterface.defaultStoreInterface.isProProductPurchased {
+                return numberOfRowsInSection0
+            } else {
+                return 0
+            }
+        case 1:
+            return 1
+        case 2:
+            return 2
+        case 3:
+            return 1
+        default:
+            return 0
+        }
+    }
+    
+    override func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
+        switch (indexPath.section, indexPath.row) {
+        case (0, 0):
+            let cell = tableView.dequeueReusableCell(withIdentifier: "MCPurchaseTableViewCell", for: indexPath) as! MCPurchaseTableViewCell
+            return cell
+        case (0, 1):
+            let cell = tableView.dequeueReusableCell(withIdentifier: "MCTwoLabelIscreenTableViewCell", for: indexPath) as! MCTwoLabelIscreenTableViewCell
+            return cell
+        case (1, 0):
+            let cell = tableView.dequeueReusableCell(withIdentifier: "NotificationsCountTableViewCell", for: indexPath) as! NotificationsCountTableViewCell
+            cell.update(model: notificationEnvironmentModel)
+            return cell
+        case (2, 0):
+            let cell = tableView.dequeueReusableCell(withIdentifier: "MCTwoLabelIscreenTableViewCell", for: indexPath) as! MCTwoLabelIscreenTableViewCell
+            cell.leftLabel.text = NSLocalizedString("Rate me", comment: "Text of the Rate me button")
+            cell.rightLabel.isHidden = true
+            return cell
+        case (2, 1):
+            let cell = tableView.dequeueReusableCell(withIdentifier: "MCTwoLabelIscreenTableViewCell", for: indexPath) as! MCTwoLabelIscreenTableViewCell
+            cell.leftLabel.text = NSLocalizedString("My Apps", comment: "Text of the the button that takes you to my apps in the AppStore")
+            cell.rightLabel.isHidden = true
+            return cell
+        case (3, 0):
+            let cell = tableView.dequeueReusableCell(withIdentifier: "MCTwoLabelIscreenTableViewCell", for: indexPath) as! MCTwoLabelIscreenTableViewCell
+            cell.leftLabel.text = NSLocalizedString("Give feedback", comment: "Give feedback")
+            cell.rightLabel.isHidden = true
+            return cell
+        default:
+            assert(false, "This section: \(indexPath.section) and row: \(indexPath.row) are not valid")
+            return UITableViewCell()
+        }
     }
     
     // MARK: UIViewController
