@@ -42,7 +42,7 @@
 - (IBAction)addPaymentPressed:(id)sender {
     if (_tonightsBill.peoplePresent.count == 0) {
         NSString *title = NSLocalizedString(@"Add some people first", @"Title for an alert message, because there are no people added to this event.");
-        NSString *message = NSLocalizedString(@"You can't add a payment when no people are present. There is no one to split the expenses among.", @"A message to the user thay can't add a payment when they didn't add people to the even.");
+        NSString *message = NSLocalizedString(@"You can't add a payment when no people are present. There is no one to split the expenses of this event with.", @"A message to the user thay can't add a payment when they didn't add people to the even.");
         UIAlertController *alertController = [UIAlertController alertControllerWithTitle:title message:message preferredStyle:UIAlertControllerStyleAlert];
         NSString *cancelActionTitle = NSLocalizedString(@"Cancel", @"Text on button to cancel something");
         [alertController addAction:[UIAlertAction actionWithTitle:cancelActionTitle style:UIAlertActionStyleCancel handler:^(UIAlertAction * _Nonnull action) {
@@ -64,11 +64,11 @@
 - (IBAction)solveButtonPressed:(id)sender {
     if (_tonightsBill.peoplePresent.count == 0) {
         NSString *title = NSLocalizedString(@"Add some people first", @"Title for an alert message, because there are no people added to this event.");
-        NSString *message = NSLocalizedString(@"You can't add a payment when no people are present. There is no one to split the expenses among.", @"A message to the user thay can't add a payment when they didn't add people to the even.");
+        NSString *message = NSLocalizedString(@"You can't add a payment when no people are present. There is no one to split the expenses of this event with.", @"A message to the user thay can't add a payment when they didn't add people to the even.");
         UIAlertController *alertController = [UIAlertController alertControllerWithTitle:title message:message preferredStyle:UIAlertControllerStyleAlert];
         NSString *cancelActionTitle = NSLocalizedString(@"Cancel", @"Text on button to cancel something");
         [alertController addAction:[UIAlertAction actionWithTitle:cancelActionTitle style:UIAlertActionStyleCancel handler:^(UIAlertAction * _Nonnull action) {
-        
+            
         }]];
         [self presentViewController:alertController animated:YES completion:nil];
         return;
@@ -77,17 +77,10 @@
     // Check for all payers present.
     if ([_tonightsBill doAllPaymentHaveAPayer]) {
         // perform segue
-        UIUserInterfaceSizeClass horizontalSizeClass = self.traitCollection.horizontalSizeClass;
-        UIUserInterfaceSizeClass verticalSizeClass = self.traitCollection.verticalSizeClass;
-        if (horizontalSizeClass == UIUserInterfaceSizeClassRegular && verticalSizeClass == UIUserInterfaceSizeClassRegular) {
-            [self performSegueWithIdentifier:@"openSolutionView_iPad" sender:self];
-        } else {
-            [self performSegueWithIdentifier:@"solveButton" sender:self];
-        }
-        
+        [self performSegueWithIdentifier:@"solveButton" sender:self];
     } else {
         // Give user alert.
-        NSString *title = NSLocalizedString(@"UNABLE_TO_SOLVE", @"Unable to solve");
+        NSString *title = NSLocalizedString(@"Unable to solve", @"Unable to solve");
         NSString *message = NSLocalizedString(@"At least one of the payments is missing a payer.", @"One of the payments is missing a payer.");
         NSString *cancelButtonTitle = NSLocalizedString(@"Cancel", @"Text on button to cancel something");
         NSString *fixItButtonTitle = NSLocalizedString(@"Go to", @"Go to");
@@ -247,7 +240,7 @@
     if ([thisCellsPayment payingPerson]) {
         thisCellsPayerName = thisCellsPayment.payingPerson.getFullName;
     } else {
-        thisCellsPayerName = NSLocalizedString(@"THISPAYMENTCELL_NOPAYERNAME", @"Someone");
+        thisCellsPayerName = NSLocalizedString(@"Someone", @"Someone");
     }
     paymentCell.namePayerLabel.text = thisCellsPayerName;
     
@@ -258,7 +251,7 @@
     
     NSString *thisCellsDescriptionOfPayment = [thisCellsPayment descriptionOfPayment];
     if (!thisCellsDescriptionOfPayment) {
-        thisCellsDescriptionOfPayment = NSLocalizedString(@"THISPAYMENTCELL_NOOBJECT", @"Something");
+        thisCellsDescriptionOfPayment = NSLocalizedString(@"something", @"Something");
     }
     paymentCell.whatPaidLabel.text =thisCellsDescriptionOfPayment;
     
@@ -307,7 +300,7 @@
     _emptyMessage = [[NSBundle mainBundle] loadNibNamed:@"MCTableEmptyMessage" owner:self options:nil][0];
     _emptyMessage.borderlineView.dyInset = 1;
     self.tableView.backgroundView = _emptyMessage;
-    _emptyMessage.bigMessage.text = NSLocalizedString(@"EMPTY_PAYMENT_LIST_MESSAGE", @"Press \"add payment\" to add a payment to this event.");
+    _emptyMessage.bigMessage.text = NSLocalizedString(@"Press \"Add payment\" to add a payment to this event.", @"Press \"add payment\" to add a payment to this event.");
 }
 
 - (void)viewDidLoad {
@@ -422,10 +415,6 @@
         destination.thisPayment = [_dataController objectAtIndexPath:indexPath];
         destination.tonightsBill = _tonightsBill;
         [[self tableView] deselectRowAtIndexPath:indexPath animated:YES];
-    } else if ([segue.identifier isEqualToString:@"openSolutionView_iPad"]) {
-        UINavigationController *navController = (UINavigationController *)segue.destinationViewController;
-        SolutionTableViewController_iPad *destination = (SolutionTableViewController_iPad *)navController.viewControllers.firstObject;
-        [destination updateEvent:_tonightsBill];
     } else {
         NSLog(@"Unknown segue with identifier: %@", segue.identifier);
         NSParameterAssert(NO);

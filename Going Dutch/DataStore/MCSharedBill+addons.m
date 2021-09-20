@@ -124,39 +124,15 @@
 {
     NSArray *allPeople = [[self peoplePresent] sortedArrayUsingDescriptors:@[[NSSortDescriptor sortDescriptorWithKey:@"dateCreated" ascending:YES]]];
     if ([allPeople count] == 0) {
-        return NSLocalizedString(@"NO_PEOPLE_PRESENT", @"A message when there are no people present inside this shared bill");
+        return NSLocalizedString(@"No people present", @"A message when there are no people present inside this shared bill");
     } else if ([allPeople count] == 1) {
         return [allPeople[0] getName];
     } else if ([allPeople count] == 2) {
-        NSString *enString = [NSString stringWithFormat:NSLocalizedString(@"AND_STRING", @"The word \"and\" between two people")];
-        return [NSString stringWithFormat:@"%@ %@ %@", [allPeople[0] getName], enString,[allPeople[1] getName]];
+        NSString *localizedString = NSLocalizedString(@"%1$@ and %2$@", "A label showing \"person1 and person2\"");
+        return [NSString stringWithFormat:localizedString, [allPeople[0] getName], [allPeople[1] getName]];
     } else if ([allPeople count] >= 3) {
-        NSString *andOthers = [NSString stringWithFormat:NSLocalizedString(@"AND_OTHERS", @"A list of people like Mark, Ilse and other where the \"and others\" needs to be translated.")];
-        return [NSString stringWithFormat:@"%@, %@ %@", [allPeople[0] getName], [allPeople[1] getName], andOthers];
-    } else {
-        @throw [NSException exceptionWithName:@"Negative amount of people." reason:@"Should not be possible." userInfo:nil];
-        return nil;
-    }
-}
-
-- (NSString *)stringOfApproxPeoplePresentWithFullNames;
-{
-    NSArray *allPeople;
-    NSArray *sda = @[[NSSortDescriptor sortDescriptorWithKey:@"dateCreated" ascending:YES]];
-    allPeople = [[self peoplePresent] sortedArrayUsingDescriptors:sda];
-    NSMutableString *returnString = [[NSMutableString alloc] init];
-    if ([allPeople count] == 0) {
-        return NSLocalizedString(@"NO_PEOPLE_PRESENT", @"A message when there are no people present inside this shared bill");
-    } else if ([allPeople count] == 1) {
-        return [allPeople[0] getFullName];
-    } else if ([allPeople count] == 2) {
-        NSString *enString = [NSString stringWithFormat:NSLocalizedString(@"AND_STRING", @"The word \"and\" between two people")];
-        [returnString appendFormat:@"%@ %@ %@", [allPeople[0] getFullName], enString,[allPeople[1] getFullName]];
-        return returnString;
-    } else if ([allPeople count] >= 3) {
-        NSString *andOthers = [NSString stringWithFormat:NSLocalizedString(@"AND_OTHERS", @"A list of people like Mark, Ilse and other where the \"and others\" needs to be translated.")];
-        [returnString appendFormat:@"%@, %@ %@", [allPeople[0] getFullName], [allPeople[1] getFullName], andOthers];
-        return returnString;
+        NSString *localizedString = NSLocalizedString(@"%1$@, %2$@ and others", @"A label showing person1, person2 and other");
+        return [NSString stringWithFormat:localizedString, [allPeople[0] getName], [allPeople[1] getName]];
     } else {
         @throw [NSException exceptionWithName:@"Negative amount of people." reason:@"Should not be possible." userInfo:nil];
         return nil;

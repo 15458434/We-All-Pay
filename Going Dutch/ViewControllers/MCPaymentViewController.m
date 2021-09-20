@@ -9,6 +9,7 @@
 @import FirebaseAnalytics;
 
 #import "MCPaymentViewController.h"
+#import "MCPaymentPresenceTableViewCell_iPhone.h"
 
 #import "MCPayment+addons.h"
 #import "MCPerson+addons.h"
@@ -135,7 +136,7 @@ typedef NS_ENUM(BOOL, ChildViewStatus) {
         _categoryView.image = categoryObject.largePicture;
         [_categoryButton setTitle:categoryObject.categoryDescription forState:UIControlStateNormal];
     } else {
-        NSString *buttonText = NSLocalizedString(@"SELECT_CATEGORY", @"Select Category");
+        NSString *buttonText = NSLocalizedString(@"Select Category", @"Select Category");
         _categoryView.image = categoryObject.largePicture;
         [_categoryButton setTitle:buttonText forState:UIControlStateNormal];
     }
@@ -164,14 +165,17 @@ typedef NS_ENUM(BOOL, ChildViewStatus) {
                 break;
                 
             case NSFetchedResultsChangeMove:
+            {
                 [[self tableView] deleteRowsAtIndexPaths:@[indexPath] withRowAnimation:UITableViewRowAnimationFade];
                 [[self tableView] insertRowsAtIndexPaths:@[newIndexPath] withRowAnimation:UITableViewRowAnimationFade];
+            }
                 break;
                 
             case NSFetchedResultsChangeUpdate:
-                [[self tableView] reloadRowsAtIndexPaths:@[indexPath] withRowAnimation:UITableViewRowAnimationAutomatic];
+            {
                 CurrencyFormatter *cf = [[CurrencyFormatter alloc] initWithCurrencyCode:_thisPayment.currency.code];
                 _paidView.text = [cf stringForObjectValue:_thisPayment.money];
+            }
                 break;
         }
     }
@@ -187,12 +191,7 @@ typedef NS_ENUM(BOOL, ChildViewStatus) {
 #pragma mark - MCGenericAdBannerTableViewController
 
 - (NSString *)adUnitId {
-#ifdef DEBUG
-    // This is a test Unit ID for banner from Google themselves.
-    return @"ca-app-pub-3940256099942544/2934735716";
-#else
     return @"ca-app-pub-5354415674074435/2765341863";
-#endif
 }
 
 
@@ -211,6 +210,19 @@ typedef NS_ENUM(BOOL, ChildViewStatus) {
 }
 
 #pragma mark - UITableViewController
+
+#pragma mark - UITableViewDelegate
+
+- (void)tableView:(UITableView *)tableView willDisplayCell:(UITableViewCell *)cell forRowAtIndexPath:(NSIndexPath *)indexPath {
+    MCPaymentPresenceTableViewCell_iPhone *paymentPresenceCell = (MCPaymentPresenceTableViewCell_iPhone *)cell;
+    // Set the cell contents
+    MCPaymentPresence *paymentPresence = [_dataController objectAtIndexPath:indexPath];
+    [paymentPresenceCell updatePaymentPresence:paymentPresence];
+}
+
+- (CGFloat)tableView:(UITableView *)tableView heightForRowAtIndexPath:(NSIndexPath *)indexPath {
+    return 52.0;
+}
 
 #pragma mark - UITableViewDataSource
 
@@ -232,13 +244,6 @@ typedef NS_ENUM(BOOL, ChildViewStatus) {
     
     // Set the cell contents
     MCPaymentPresence *thisCellsPresence = [_dataController objectAtIndexPath:indexPath];
-    cell.nameLabel.text = thisCellsPresence.person.getFullName;
-    cell.personView.image = thisCellsPresence.person.thumbnail;
-    [[cell isPresentSwitch] setOn:[[thisCellsPresence isPersonPresent] boolValue]];
-    CurrencyFormatter *cf = [[CurrencyFormatter alloc] initWithCurrencyCode:thisCellsPresence.payment.currency.code];
-    NSNumber *averageOwe = @(-thisCellsPresence.averageOweFromPayment.doubleValue);
-    cell.owesLabel.text = [cf stringForObjectValue:averageOwe];
-    cell.thisCellsPaymentPresence = thisCellsPresence;
     
     // Set the cell alignment to headerView stuff
     NSLayoutConstraint *payerViewToCellNameLabel = [NSLayoutConstraint constraintWithItem:_payerNameField attribute:NSLayoutAttributeLeading relatedBy:NSLayoutRelationEqual toItem:[cell nameLabel] attribute:NSLayoutAttributeLeading multiplier:1.0 constant:-6.0];
@@ -250,16 +255,6 @@ typedef NS_ENUM(BOOL, ChildViewStatus) {
     return cell;
 }
 
-#pragma mark - UITableViewDelegate
-
-- (CGFloat)tableView:(UITableView *)tableView heightForRowAtIndexPath:(NSIndexPath *)indexPath {
-    return 52.0;
-}
-
-//- (CGFloat)tableView:(UITableView *)tableView heightForHeaderInSection:(NSInteger)section {
-//    return UITableViewAutomaticDimension;
-//}
-//
 #pragma mark - UIViewController
 
 - (void)viewDidLoad {
@@ -317,11 +312,11 @@ typedef NS_ENUM(BOOL, ChildViewStatus) {
     if (!_twoLabelTitleView) {
         _twoLabelTitleView = [[NSBundle mainBundle] loadNibNamed:@"MCTwoLabelsTitleView" owner:self options:nil][0];
         if (_isNew) {
-            [[_twoLabelTitleView mainLabel] setText:NSLocalizedString(@"NEW_PAYMENT_HEADER", @"Header in the paymentView which state new Payment")];
-            [[_twoLabelTitleView subLabel] setText:NSLocalizedString(@"NEW_PAYMENT_SUBHEADER", @"Sub header in the paymentView which states Add payment data")];
+            [[_twoLabelTitleView mainLabel] setText:NSLocalizedString(@"New payment", @"Header in the paymentView which state new Payment")];
+            [[_twoLabelTitleView subLabel] setText:NSLocalizedString(@"Add payment data", @"Sub header in the paymentView which states Add payment data")];
         } else {
-            [[_twoLabelTitleView mainLabel] setText:NSLocalizedString(@"EXISTING_PAYMENT_HEADER", @"Header in the paymentView which states payment")];
-            [[_twoLabelTitleView subLabel] setText:NSLocalizedString(@"EXISTING_PAYMENT_SUBHEADER", @"Sub header in the paymentView which states edit payment data")];
+            [[_twoLabelTitleView mainLabel] setText:NSLocalizedString(@"Payment", @"Header in the paymentView which states payment")];
+            [[_twoLabelTitleView subLabel] setText:NSLocalizedString(@"Edit payment data", @"Sub header in the paymentView which states edit payment data")];
         }
         [[self navigationItem] setTitleView:_twoLabelTitleView];
     }

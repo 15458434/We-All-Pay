@@ -330,7 +330,6 @@
                         <segue destination="R4f-Dn-Lh4" kind="presentation" identifier="openFirstPaymentWithoutPayer" id="eZd-I3-t8D"/>
                         <segue destination="R4f-Dn-Lh4" kind="presentation" identifier="openPaymentView" id="z3e-Vr-AS7"/>
                         <segue destination="R4f-Dn-Lh4" kind="presentation" identifier="openPaymentWithMissingData" id="jjg-NC-1KA"/>
-                        <segue destination="TN3-5I-Xh1" kind="presentation" identifier="openSolutionView_iPad" modalPresentationStyle="pageSheet" id="0JD-7F-G1N"/>
                         <segue destination="ydW-Fj-sXo" kind="presentation" identifier="newPayment_iPad" id="rBl-ko-MHe"/>
                         <segue destination="ydW-Fj-sXo" kind="presentation" identifier="openPayment_iPad" id="zKF-pf-8oc"/>
                         <segue destination="ydW-Fj-sXo" kind="presentation" identifier="openFirstPaymentWithoutPayer_iPad" id="sDW-eR-aHj"/>
@@ -498,8 +497,45 @@
                                     <outlet property="rightLabel" destination="Yd0-Ev-8xr" id="im2-za-bNh"/>
                                 </connections>
                             </tableViewCell>
+                            <tableViewCell contentMode="scaleToFill" restorationIdentifier="MCPurchaseTableViewCell" selectionStyle="none" hidesAccessoryWhenEditing="NO" indentationLevel="1" indentationWidth="0.0" reuseIdentifier="MCPurchaseTableViewCell" id="2kR-oU-fDd" userLabel="MCPurchaseTableViewCell" customClass="MCPurchaseTableViewCell">
+                                <rect key="frame" x="0.0" y="87.333332061767578" width="375" height="38.333332061767578"/>
+                                <autoresizingMask key="autoresizingMask"/>
+                                <tableViewCellContentView key="contentView" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" restorationIdentifier="MCPurchaseTableViewCellContentView" tableViewCell="2kR-oU-fDd" id="65f-kc-Aa9">
+                                    <rect key="frame" x="0.0" y="0.0" width="375" height="38.333332061767578"/>
+                                    <autoresizingMask key="autoresizingMask"/>
+                                    <subviews>
+                                        <stackView opaque="NO" contentMode="scaleToFill" distribution="equalSpacing" alignment="center" spacing="6" translatesAutoresizingMaskIntoConstraints="NO" id="VkD-L5-OBF">
+                                            <rect key="frame" x="20" y="10.999999999999998" width="335" height="17.333333333333329"/>
+                                            <subviews>
+                                                <label clipsSubviews="YES" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" restorationIdentifier="purchaseDescriptionLabel" text="Label" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" minimumScaleFactor="0.5" translatesAutoresizingMaskIntoConstraints="NO" id="pI6-ZF-3x9">
+                                                    <rect key="frame" x="0.0" y="0.33333333333333393" width="36.666666666666664" height="17"/>
+                                                    <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                                                    <fontDescription key="fontDescription" style="UICTFontTextStyleHeadline"/>
+                                                    <nil key="highlightedColor"/>
+                                                </label>
+                                                <label clipsSubviews="YES" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="252" verticalHuggingPriority="251" horizontalCompressionResistancePriority="751" restorationIdentifier="priceLabel" text="Label" textAlignment="right" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="ffO-XB-JLd">
+                                                    <rect key="frame" x="304" y="1.6666666666666652" width="31" height="14.333333333333336"/>
+                                                    <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                                                    <fontDescription key="fontDescription" style="UICTFontTextStyleSubhead"/>
+                                                    <nil key="highlightedColor"/>
+                                                </label>
+                                            </subviews>
+                                        </stackView>
+                                    </subviews>
+                                    <constraints>
+                                        <constraint firstItem="VkD-L5-OBF" firstAttribute="leading" secondItem="65f-kc-Aa9" secondAttribute="leading" constant="20" symbolic="YES" id="3e8-kp-jF5"/>
+                                        <constraint firstAttribute="bottom" secondItem="VkD-L5-OBF" secondAttribute="bottom" constant="10" id="GTB-ZE-e4q"/>
+                                        <constraint firstAttribute="trailing" secondItem="VkD-L5-OBF" secondAttribute="trailing" constant="20" symbolic="YES" id="RUO-rq-czj"/>
+                                        <constraint firstItem="VkD-L5-OBF" firstAttribute="top" secondItem="65f-kc-Aa9" secondAttribute="top" constant="11" id="lYH-Kh-dj5"/>
+                                    </constraints>
+                                </tableViewCellContentView>
+                                <connections>
+                                    <outlet property="priceLabel" destination="ffO-XB-JLd" id="uDC-zB-KA7"/>
+                                    <outlet property="purchaseDescriptionLabel" destination="pI6-ZF-3x9" id="HBt-yK-Vsj"/>
+                                </connections>
+                            </tableViewCell>
                             <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" preservesSuperviewLayoutMargins="YES" selectionStyle="default" indentationWidth="10" reuseIdentifier="NotificationsCountTableViewCell" id="P8J-qh-17v" customClass="MCNotificationsCountTableViewCell">
-                                <rect key="frame" x="0.0" y="87.333332061767578" width="375" height="71.333335876464844"/>
+                                <rect key="frame" x="0.0" y="125.66666412353516" width="375" height="71.333335876464844"/>
                                 <autoresizingMask key="autoresizingMask"/>
                                 <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" preservesSuperviewLayoutMargins="YES" insetsLayoutMarginsFromSafeArea="NO" tableViewCell="P8J-qh-17v" id="sUP-wJ-H4Y">
                                     <rect key="frame" x="0.0" y="0.0" width="375" height="71.333335876464844"/>
@@ -598,14 +634,6 @@
                 <placeholder placeholderIdentifier="IBFirstResponder" id="Zpx-6T-7TS" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
             <point key="canvasLocation" x="1284" y="1481"/>
-        </scene>
-        <!--solutionNavigationController-->
-        <scene sceneID="iqm-0w-agX">
-            <objects>
-                <viewControllerPlaceholder storyboardName="Main-iPad" referencedIdentifier="solutionNavigationController" id="TN3-5I-Xh1" sceneMemberID="viewController"/>
-                <placeholder placeholderIdentifier="IBFirstResponder" id="Nzn-J2-Ftr" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
-            </objects>
-            <point key="canvasLocation" x="2609" y="1150"/>
         </scene>
         <!--NotificationsTableViewController-->
         <scene sceneID="eFd-pQ-f3n">
@@ -1455,7 +1483,7 @@
                             </constraints>
                         </view>
                         <prototypes>
-                            <tableViewCell contentMode="scaleToFill" restorationIdentifier="paymentPresenceCell" selectionStyle="none" hidesAccessoryWhenEditing="NO" indentationLevel="1" indentationWidth="0.0" reuseIdentifier="paymentPresenceCell_iPhone" rowHeight="52" id="AcN-yE-tRP" customClass="MCPaymentPresenceTableViewCell_iPhone" customModule="We_all_pay" customModuleProvider="target">
+                            <tableViewCell contentMode="scaleToFill" restorationIdentifier="paymentPresenceCell" selectionStyle="none" hidesAccessoryWhenEditing="NO" indentationLevel="1" indentationWidth="0.0" reuseIdentifier="paymentPresenceCell_iPhone" rowHeight="52" id="AcN-yE-tRP" customClass="MCPaymentPresenceTableViewCell_iPhone">
                                 <rect key="frame" x="0.0" y="364.33333396911621" width="375" height="52"/>
                                 <autoresizingMask key="autoresizingMask"/>
                                 <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" restorationIdentifier="tableViewCellContent" tableViewCell="AcN-yE-tRP" id="WHI-GF-nBf">
@@ -1738,7 +1766,6 @@
                     <nil name="viewControllers"/>
                     <connections>
                         <segue destination="A1E-EB-xnZ" kind="relationship" relationship="rootViewController" id="V9y-d1-1LO"/>
-                        <segue destination="v9b-wE-q9L" kind="presentation" identifier="newPaymentFromEvents" id="5Vh-JE-OCd"/>
                     </connections>
                 </navigationController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="bmD-Nz-QbR" userLabel="First Responder" sceneMemberID="firstResponder"/>
@@ -1837,11 +1864,10 @@
         </designable>
     </designables>
     <inferredMetricsTieBreakers>
-        <segue reference="M9w-sI-koW"/>
+        <segue reference="AFT-dx-z90"/>
         <segue reference="jjg-NC-1KA"/>
         <segue reference="9O1-vs-VOI"/>
         <segue reference="3RZ-mk-Dh4"/>
-        <segue reference="6AC-aI-bIB"/>
     </inferredMetricsTieBreakers>
     <resources>
         <image name="barbutton - cancel" width="22" height="22"/>

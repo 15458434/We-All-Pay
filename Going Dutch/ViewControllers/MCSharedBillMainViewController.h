@@ -7,6 +7,7 @@
 //
 
 @import UIKit;
+@import CoreData;
 #import "MCGenericAdBannerViewController.h"
 
 #import "MCTonightsBillTransfer.h"
@@ -27,5 +28,7 @@ __attribute__((objc_subclassing_restricted))
 @property (strong, nonatomic) NSArray *pathComponentsToOpen;
 
 @property (weak, nonatomic) IBOutlet UISegmentedControl *peopleOrPaymentsSelectionControl;
+
+- (void)updateEventWithObjectID:(NSManagedObjectID *)objectID;
 
 @end

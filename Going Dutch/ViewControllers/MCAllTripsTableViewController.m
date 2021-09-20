@@ -12,6 +12,7 @@
 #import "MCSharedBillTableViewController.h"
 #import "MCPaymentViewController.h"
 #import "MCEditTripViewController.h"
+#import "MCSharedBillMainViewController.h"
 
 #import "MCBadgeButton.h"
 
@@ -21,6 +22,7 @@
 #import "MCCurrency+addons.h"
 
 #import "MCTonightsBillTransfer.h"
+#import "MCEditorType.h"
 
 #import "UIViewController+WeAllPayStore.h"
 
@@ -156,38 +158,7 @@ static void * notificationCountContext = &notificationCountContext;
 }
 
 - (UITableViewCell *)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath {
-    MCSharedBill *thisTrip = [_model.fetchEventsController objectAtIndexPath:indexPath];
     MCAllTripsTableViewCell *allTripsTableViewCell = [tableView dequeueReusableCellWithIdentifier:@"MCAllTripsTableViewCell"];
-    
-    if (![thisTrip tripName]) {
-        [[allTripsTableViewCell tripLabel] setText:NSLocalizedString(@"...", @"String that shows empty string")];
-    } else {
-        [[allTripsTableViewCell tripLabel] setText:[thisTrip tripName]];
-    }
-    [[allTripsTableViewCell peoplePresentLabel] setText:[thisTrip stringOfApproxPeoplePresent]];
-
-    if ([thisTrip areAllExchangeRatesValid]) {
-        CurrencyFormatter *cf = [[CurrencyFormatter alloc] initWithCurrencyCode:thisTrip.mainCurrency.code];
-        NSString *moneyString = [cf stringForObjectValue:[thisTrip totalSumOfMoneyOfThisSharedBill]];
-        [[allTripsTableViewCell totalCostLabel] setHidden:NO];
-        [[allTripsTableViewCell waitingForXRatesIndicator] stopAnimating];
-        [[allTripsTableViewCell totalCostLabel] setText:moneyString];
-    } else {
-        CurrencyFormatter *cf = [[CurrencyFormatter alloc] initWithCurrencyCode:thisTrip.mainCurrency.code];
-        NSString *moneyString = [cf stringForObjectValue:[thisTrip totalSumOfMoneyOfThisSharedBill]];
-        [[allTripsTableViewCell totalCostLabel] setText:moneyString];
-        [[allTripsTableViewCell totalCostLabel] setHidden:YES];
-        [[allTripsTableViewCell waitingForXRatesIndicator] startAnimating];
-    }
-
-    // fill extraLabel with dateModified.
-    if (!_df) {
-        _df = [[NSDateFormatter alloc] init];
-        [_df setDateStyle:NSDateFormatterMediumStyle];
-        [_df setTimeStyle:NSDateFormatterShortStyle];
-    }
-    [[allTripsTableViewCell extraLabel] setText:[_df stringFromDate:[thisTrip dateModified]]];
-    
     return allTripsTableViewCell;
 }
 
@@ -198,6 +169,43 @@ static void * notificationCountContext = &notificationCountContext;
 }
 
 #pragma mark - UITableViewDelegate
+
+- (void)tableView:(UITableView *)tableView willDisplayCell:(UITableViewCell *)cell forRowAtIndexPath:(NSIndexPath *)indexPath {
+    MCSharedBill *event = [_model.fetchEventsController objectAtIndexPath:indexPath];
+    MCAllTripsTableViewCell *eventCell = (MCAllTripsTableViewCell *)cell;
+    
+    if (!event.tripName) {
+        eventCell.tripLabel.text = NSLocalizedString(@"...", @"String that shows empty string");
+    } else {
+        eventCell.tripLabel.text = event.tripName;
+    }
+    eventCell.peoplePresentLabel.text = [event stringOfApproxPeoplePresent];
+
+    if ([event areAllExchangeRatesValid]) {
+        CurrencyFormatter *cf = [[CurrencyFormatter alloc] initWithCurrencyCode:event.mainCurrency.code];
+        NSString *moneyString = [cf stringForObjectValue:[event totalSumOfMoneyOfThisSharedBill]];
+        eventCell.totalCostLabel.hidden = NO;
+        [eventCell.waitingForXRatesIndicator stopAnimating];
+        eventCell.totalCostLabel.text = moneyString;
+    } else {
+        CurrencyFormatter *cf = [[CurrencyFormatter alloc] initWithCurrencyCode:event.mainCurrency.code];
+        NSString *moneyString = [cf stringForObjectValue:[event totalSumOfMoneyOfThisSharedBill]];
+        [[eventCell totalCostLabel] setText:moneyString];
+        eventCell.totalCostLabel.text = moneyString;
+        eventCell.totalCostLabel.hidden = YES;
+        [eventCell.waitingForXRatesIndicator startAnimating];
+    }
+
+    // fill extraLabel with dateModified.
+    if (!_df) {
+        _df = [[NSDateFormatter alloc] init];
+        _df.dateStyle = NSDateFormatterMediumStyle;
+        _df.timeStyle = NSDateFormatterShortStyle;
+    }
+    eventCell.extraLabel.text = [_df stringFromDate:event.dateModified];
+    
+    return;
+}
 
 - (void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath {
     [self performSegueWithIdentifier:@"openTonightsBill" sender:self];
@@ -252,6 +260,7 @@ static void * notificationCountContext = &notificationCountContext;
     
     [self prepareUserActivity];
     
+    [MCAdEngine presentPrivacyConsentRequestIfNecessaryFromViewController:self];
 #ifdef ADTEST
     [MCAdEngine presentAdTestSuiteFromPresentingViewController:self];
 #endif
@@ -279,8 +288,6 @@ static void * notificationCountContext = &notificationCountContext;
         [self.userActivity becomeCurrent];
     }
     
-    [MCAdEngine presentPrivacyConsentRequestIfNecessaryFromViewController:self];
-    
     // Start KVO
     NSKeyValueObservingOptions options = NSKeyValueObservingOptionInitial | NSKeyValueObservingOptionNew;
     [self.notificationsStateModel addObserver:self forKeyPath:@"messageCount" options:options context:notificationCountContext];
@@ -295,30 +302,18 @@ static void * notificationCountContext = &notificationCountContext;
 
 - (void)prepareForSegue:(UIStoryboardSegue *)segue sender:(id)sender {
 #ifdef DEBUG
-    NSLog(@"prepareForSegue: %@", [segue identifier]);
+    NSLog(@"prepareForSegue: %@", segue.identifier);
 #endif
-    if ([[segue identifier] isEqualToString:@"newTonightsBill"]) {
+    if ([segue.identifier isEqualToString:@"newTonightsBill"]) {
         _isATonightsBillOpened = MCTonightsBillStatusOpened;
-    }
-    if ([[segue identifier] isEqualToString:@"openTonightsBill"]) {
+    } else if ([segue.identifier isEqualToString:@"openTonightsBill"]) {
         _isATonightsBillOpened = MCTonightsBillStatusOpened;
-    }
-    MCSharedBill *theBill;
-    if ([sender isKindOfClass:[NSArray class]]) {
-        if ([[segue destinationViewController] conformsToProtocol:@protocol(MCTonightsBillTransfer)]) {
-            [[segue destinationViewController] setTonightsBill:[sender firstObject]];
-        }
-    } else {
-        NSIndexPath *indexPathOfSelectedRow = [[self tableView] indexPathForSelectedRow];
-        if (indexPathOfSelectedRow) {
-            theBill = [_model.fetchEventsController objectAtIndexPath:indexPathOfSelectedRow];
-        }
-        if ([[segue destinationViewController] conformsToProtocol:@protocol(MCTonightsBillTransfer)]) {
-            [[segue destinationViewController] setTonightsBill:theBill];
-        }
-    }
-    
-    if ([[segue identifier] isEqualToString:@"selectMainCurrency"]) {
+        NSIndexPath *indexPathOfSelectedRow = self.tableView.indexPathForSelectedRow;
+        NSParameterAssert(indexPathOfSelectedRow);
+        MCSharedBill *selectedEvent = [_model.fetchEventsController objectAtIndexPath:indexPathOfSelectedRow];
+        MCSharedBillMainViewController *destination = (MCSharedBillMainViewController *)segue.destinationViewController;
+        [destination updateEventWithObjectID:selectedEvent.objectID];
+    } else if ([segue.identifier isEqualToString:@"selectMainCurrency"]) {
         MCSharedBill *theBill = _model.fetchEventsController.fetchedObjects[_selectedIndexPathForAction.row];
         UINavigationController *navController = (UINavigationController *)segue.destinationViewController;
         SelectCurrencyTableViewController *currencySelector = (SelectCurrencyTableViewController *)navController.viewControllers.firstObject;
@@ -331,14 +326,6 @@ static void * notificationCountContext = &notificationCountContext;
         InfoScreenTableViewController *infoContainerViewController = navigationController.viewControllers.lastObject;
         infoContainerViewController.preferredContentSize = CGSizeMake(320, 0);
         infoContainerViewController.notificationEnvironmentModel = self.notificationsStateModel;
-    } else if ([[segue identifier] isEqualToString:@"newPaymentFromEvents"]) {
-        MCSharedBill *theBill = [sender firstObject];
-        if ([[segue destinationViewController] conformsToProtocol:@protocol(MCTonightsBillTransfer)]) {
-            [[segue destinationViewController] setTonightsBill:theBill];
-        }
-        if ([[segue destinationViewController] conformsToProtocol:@protocol(MCPathComponentsToOpenProtocol) ]) {
-            [[segue destinationViewController] setPathComponentsToOpen:sender];
-        }
     }
 }
 

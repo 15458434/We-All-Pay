@@ -197,6 +197,12 @@
 }
 
 - (BOOL)application:(UIApplication *)application willFinishLaunchingWithOptions:(NSDictionary *)launchOptions {
+#ifdef DEBUG
+    NSLog(@"UserDefaults on launch");
+    NSLog(@"%@", NSUserDefaults.standardUserDefaults.dictionaryRepresentation);
+    NSLog(@"**********************");
+#endif
+    
     [self executeOnlyOnceDuringStartup];
 #ifdef SCREENSHOTS
     [[MCWeAllPayStoreController defaultStore] openStore:^(MCWeAllPayStoreController *store, BOOL success) {

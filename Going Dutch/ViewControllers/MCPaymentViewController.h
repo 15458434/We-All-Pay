@@ -35,6 +35,7 @@ typedef NS_ENUM(NSUInteger, MCMoneyValueFieldDismissStatus) {
 
 @end
 
+__attribute__((objc_subclassing_restricted))
 @interface MCPaymentViewController : MCGenericAdBannerTableViewController <NSFetchedResultsControllerDelegate, MCThisPaymentProtocol, MCPathComponentsToOpenProtocol>
 
 @property (nonatomic, strong) MCPayment *thisPayment;
