@@ -62,6 +62,7 @@
     if (@available(iOS 15.0, *)) {
         UINavigationBar.appearance.tintColor = [UIColor colorNamed:@"button - enabled"];
         UINavigationBar.appearance.backgroundColor = [UIColor colorNamed:@"navigationBar"];
+        UINavigationBar.appearance.barTintColor = [UIColor colorWithColorType:MCColorTypeNavigationBar];
     } else if (@available(iOS 11.0, *)) {
         UINavigationBar.appearance.barTintColor = [UIColor colorNamed:@"navigationBar"];
         UINavigationBar.appearance.tintColor = [UIColor colorNamed:@"button - enabled"];
