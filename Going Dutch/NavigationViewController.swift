@@ -8,7 +8,7 @@
 
 import UIKit
 
-@objc(MCNavigationViewController) final class NavigationViewController: UINavigationController {
+@objc(MCNavigationViewController) class NavigationViewController: UINavigationController {
     
     // MARK: UINavigationController
     
