@@ -1723,10 +1723,10 @@
             </objects>
             <point key="canvasLocation" x="6322.5" y="1479.9295774647887"/>
         </scene>
-        <!--Navigation Controller-->
+        <!--Navigation View Controller-->
         <scene sceneID="qWC-0I-5hi">
             <objects>
-                <navigationController storyboardIdentifier="solveSharedBillNavController" automaticallyAdjustsScrollViewInsets="NO" useStoryboardIdentifierAsRestorationIdentifier="YES" id="HxE-bK-sSq" sceneMemberID="viewController">
+                <navigationController storyboardIdentifier="solveSharedBillNavController" automaticallyAdjustsScrollViewInsets="NO" useStoryboardIdentifierAsRestorationIdentifier="YES" id="HxE-bK-sSq" customClass="MCNavigationViewController" sceneMemberID="viewController">
                     <toolbarItems/>
                     <navigationItem key="navigationItem" id="YeZ-K7-qlV"/>
                     <simulatedStatusBarMetrics key="simulatedStatusBarMetrics" statusBarStyle="lightContent"/>
@@ -1789,10 +1789,10 @@
             </objects>
             <point key="canvasLocation" x="243.75" y="1480.9859154929577"/>
         </scene>
-        <!--Navigation Controller-->
+        <!--Navigation View Controller-->
         <scene sceneID="hij-lA-Qdw">
             <objects>
-                <navigationController id="fIg-ri-deX" sceneMemberID="viewController">
+                <navigationController id="fIg-ri-deX" customClass="MCNavigationViewController" sceneMemberID="viewController">
                     <toolbarItems/>
                     <simulatedNavigationBarMetrics key="simulatedTopBarMetrics" barStyle="black" translucent="NO" prompted="NO"/>
                     <navigationBar key="navigationBar" contentMode="scaleToFill" barStyle="black" translucent="NO" id="GLN-WH-Wa0">
@@ -1808,10 +1808,10 @@
             </objects>
             <point key="canvasLocation" x="5325" y="722.53521126760563"/>
         </scene>
-        <!--Navigation Controller-->
+        <!--Navigation View Controller-->
         <scene sceneID="Z1s-0v-uJX">
             <objects>
-                <navigationController id="7fo-xG-Qjc" sceneMemberID="viewController">
+                <navigationController id="7fo-xG-Qjc" customClass="MCNavigationViewController" sceneMemberID="viewController">
                     <toolbarItems/>
                     <simulatedNavigationBarMetrics key="simulatedTopBarMetrics" barStyle="black" translucent="NO" prompted="NO"/>
                     <navigationBar key="navigationBar" contentMode="scaleToFill" barStyle="black" translucent="NO" id="Arg-tu-g9C">
