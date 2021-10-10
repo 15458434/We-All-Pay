@@ -1827,12 +1827,11 @@
             </objects>
             <point key="canvasLocation" x="5325" y="1480.9859154929577"/>
         </scene>
-        <!--Navigation Controller-->
+        <!--Navigation View Controller-->
         <scene sceneID="ctA-J5-Wan">
             <objects>
-                <navigationController storyboardIdentifier="PersonNavigationController" automaticallyAdjustsScrollViewInsets="NO" useStoryboardIdentifierAsRestorationIdentifier="YES" id="nkD-cc-jGs" sceneMemberID="viewController">
+                <navigationController storyboardIdentifier="PersonNavigationController" automaticallyAdjustsScrollViewInsets="NO" useStoryboardIdentifierAsRestorationIdentifier="YES" id="nkD-cc-jGs" customClass="MCNavigationViewController" sceneMemberID="viewController">
                     <toolbarItems/>
-                    <simulatedNavigationBarMetrics key="simulatedTopBarMetrics" barStyle="black" translucent="NO" prompted="NO"/>
                     <navigationBar key="navigationBar" contentMode="scaleToFill" insetsLayoutMarginsFromSafeArea="NO" barStyle="black" translucent="NO" id="aT1-i5-Ri7">
                         <rect key="frame" x="0.0" y="0.0" width="375" height="56"/>
                         <autoresizingMask key="autoresizingMask"/>
