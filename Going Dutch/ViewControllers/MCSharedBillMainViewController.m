@@ -156,9 +156,8 @@
         topSegmentedControl.backgroundColor = [UIColor colorWithWhite:1.0 alpha:0.05];
         [topSegmentedControl setTitleTextAttributes:@{NSForegroundColorAttributeName: UIColor.systemBackgroundColor} forState:UIControlStateNormal];
         [topSegmentedControl setTitleTextAttributes:@{NSForegroundColorAttributeName: UIColor.systemBackgroundColor} forState:UIControlStateSelected];
-        [topSegmentedControl setSelectedSegmentTintColor:[UIColor colorWithWhite:1.0 alpha:0.25]];
+        topSegmentedControl.selectedSegmentTintColor = [UIColor colorWithWhite:1.0 alpha:0.25];
     }
-
 }
 
 - (void)viewDidLoad {
