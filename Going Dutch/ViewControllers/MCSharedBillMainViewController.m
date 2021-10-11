@@ -148,6 +148,18 @@
     return @"ca-app-pub-5354415674074435/1457854707";
 }
 
+- (void)loadView {
+    [super loadView];
+    
+    if (@available(iOS 13.0, *)) {
+        UISegmentedControl *topSegmentedControl = self.peopleOrPaymentsSelectionControl;
+        topSegmentedControl.backgroundColor = [UIColor colorWithWhite:1.0 alpha:0.05];
+        [topSegmentedControl setTitleTextAttributes:@{NSForegroundColorAttributeName: UIColor.systemBackgroundColor} forState:UIControlStateNormal];
+        [topSegmentedControl setTitleTextAttributes:@{NSForegroundColorAttributeName: UIColor.systemBackgroundColor} forState:UIControlStateSelected];
+        topSegmentedControl.selectedSegmentTintColor = [UIColor colorWithWhite:1.0 alpha:0.25];
+    }
+}
+
 - (void)viewDidLoad {
 #ifdef SCREENSHOTS
 #else

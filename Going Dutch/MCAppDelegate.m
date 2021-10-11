@@ -57,9 +57,13 @@
         NSLog(@"The current language code is: %@", languageCode);
 #endif
     }];
-
-    // Set colors throughout the App.
-    if (@available(iOS 11.0, *)) {
+    
+    // UINavigationBar.appearance
+    if (@available(iOS 15.0, *)) {
+        UINavigationBar.appearance.tintColor = [UIColor colorNamed:@"button - enabled"];
+        UINavigationBar.appearance.backgroundColor = [UIColor colorNamed:@"navigationBar"];
+        UINavigationBar.appearance.barTintColor = [UIColor colorWithColorType:MCColorTypeNavigationBar];
+    } else if (@available(iOS 11.0, *)) {
         UINavigationBar.appearance.barTintColor = [UIColor colorNamed:@"navigationBar"];
         UINavigationBar.appearance.tintColor = [UIColor colorNamed:@"button - enabled"];
     } else {
@@ -68,7 +72,32 @@
         UINavigationBar.appearance.tintColor = [UIColor colorWithColorType:MCColorTypeButtonEnabled];
         
     };
-    [[UINavigationBar appearance] setTitleTextAttributes:@{NSForegroundColorAttributeName: [UIColor whiteColor]}];
+    UINavigationBar.appearance.titleTextAttributes = @{NSForegroundColorAttributeName: UIColor.whiteColor};
+    
+    if (@available(iOS 11.0, *)) {
+        UIBarButtonItem.appearance.tintColor = [UIColor colorNamed:@"button - enabled"];
+    } else {
+        // Fallback on earlier versions
+        UIBarButtonItem.appearance.tintColor = [UIColor colorWithColorType:MCColorTypeButtonEnabled];
+    }
+    UINavigationBar.appearance.barStyle = UIBarStyleBlackTranslucent;
+    
+    // Set the color of the cancelButton of the search bar
+    UIBarButtonItem *addressBookSearchBarCancelButton = [UIBarButtonItem appearanceWhenContainedInInstancesOfClasses:@[[UISearchBar class]]];
+    UIColor *addressBookSearchBarCancelButtonColor;
+    if (@available(iOS 11.0, *)) {
+        addressBookSearchBarCancelButtonColor = [UIColor colorNamed:@"button - enabled"];
+    } else {
+        // Fallback on earlier versions
+        addressBookSearchBarCancelButtonColor = [UIColor colorWithColorType:MCColorTypeButtonEnabled];
+    }
+    NSMutableDictionary *colorDictionary = [NSMutableDictionary dictionaryWithObjectsAndKeys:
+                                            addressBookSearchBarCancelButtonColor,
+                                            NSForegroundColorAttributeName,
+                                            nil];
+    [colorDictionary setObject:addressBookSearchBarCancelButtonColor forKey:NSForegroundColorAttributeName];
+    [addressBookSearchBarCancelButton setTitleTextAttributes:colorDictionary forState:UIControlStateNormal];
+    
     if (@available(iOS 11.0, *)) {
         [UIButton.appearance setTitleColor:[UIColor colorNamed:@"button - enabled"] forState:UIControlStateNormal];
     } else {
@@ -89,13 +118,6 @@
         // Fallback on earlier versions
         [UIButton.appearance setTitleColor:[UIColor colorWithColorType:MCColorTypeButtonDisabled] forState:UIControlStateDisabled];
     }
-    if (@available(iOS 11.0, *)) {
-        UIBarButtonItem.appearance.tintColor = [UIColor colorNamed:@"button - enabled"];
-    } else {
-        // Fallback on earlier versions
-        UIBarButtonItem.appearance.tintColor = [UIColor colorWithColorType:MCColorTypeButtonEnabled];
-    }
-    UINavigationBar.appearance.barStyle = UIBarStyleBlackTranslucent;
     [[UIButton appearanceWhenContainedInInstancesOfClasses:@[[UITableViewCell class]]] setTitleColor:[UIColor whiteColor] forState:UIControlStateNormal];
     // Set the background color in the peoplepicker.
     if (@available(iOS 11.0, *)) {
@@ -105,21 +127,6 @@
         UISearchBar.appearance.barTintColor = [UIColor colorWithColorType:MCColorTypeBackground];
     }
     
-    // Set the color of the cancelButton of the search bar
-    UIBarButtonItem *addressBookSearchBarCancelButton = [UIBarButtonItem appearanceWhenContainedInInstancesOfClasses:@[[UISearchBar class]]];
-    UIColor *addressBookSearchBarCancelButtonColor;
-    if (@available(iOS 11.0, *)) {
-        addressBookSearchBarCancelButtonColor = [UIColor colorNamed:@"button - enabled"];
-    } else {
-        // Fallback on earlier versions
-        addressBookSearchBarCancelButtonColor = [UIColor colorWithColorType:MCColorTypeButtonEnabled];
-    }
-    NSMutableDictionary *colorDictionary = [NSMutableDictionary dictionaryWithObjectsAndKeys:
-                                            addressBookSearchBarCancelButtonColor,
-                                            NSForegroundColorAttributeName,
-                                            nil];
-    [colorDictionary setObject:addressBookSearchBarCancelButtonColor forKey:NSForegroundColorAttributeName];
-    [addressBookSearchBarCancelButton setTitleTextAttributes:colorDictionary forState:UIControlStateNormal];
     if (@available(iOS 11.0, *)) {
         [[UIButton appearanceWhenContainedInInstancesOfClasses:@[NSClassFromString(@"UISwipeActionPullView")]] setTitleColor:[UIColor whiteColor] forState:UIControlStateNormal];
     }
@@ -131,8 +138,6 @@
         // Fallback on earlier versions
         UITableView.appearance.sectionIndexColor = [UIColor colorWithColorType:MCColorTypeButtonEnabled];
     }
-    
-//    [[UINavigationBar appearance] setBarStyle:UIBarStyleBlack];
     
     // Uncomment the following line to remove the In-App Purchase.
 //    [[NSUserDefaults standardUserDefaults] removeObjectForKey:@"com.Greenhair.We_all_pay.pro"];

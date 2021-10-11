@@ -312,7 +312,7 @@ final class SideMenuDismissInteractionController: UIPercentDrivenInteractiveTran
     }
 }
 
-final class SwipeLeftDissmissableNavigationController: UINavigationController, SideMenuDismissInteractionControllerSource {
+final class SwipeLeftDissmissableNavigationController: NavigationViewController, SideMenuDismissInteractionControllerSource {
     
     // MARK: SideMenuDismissInteractionControllerSource
     
