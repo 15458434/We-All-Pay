@@ -7,7 +7,7 @@
 //
 
 #import "MCPaymentUpdateTo4.h"
-#import "MCPayment.h"
+#import "MCPayment+CoreDataProperties.h"
 
 @implementation MCPaymentUpdateTo4
 
