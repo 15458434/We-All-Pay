@@ -15,17 +15,17 @@ import UIKit
     
     @objc(prepareForUseWithPayment:andChangeHandler:) func prepareForUse(with payment: MCPayment, and changeHandler:@escaping ((_ payment: MCPayment) -> ())) {
         self.payment = payment
-        currencyFormatter = CurrencyFormatter(currencyCode: payment.currency.code)
+        currencyFormatter = CurrencyFormatter(currencyCode: payment.currency!.code!)
         
         self.changeHandler = changeHandler
     }
     
     var arrayOfPeoplePresent: [MCPerson] {
-        return self.payment.onWhichBill.getArrayOfPeopleSortedOnFullNames()
+        return self.payment.onWhichBill!.getArrayOfPeopleSortedOnFullNames()
     }
     
     var suggestedNextPayer: MCPerson? {
-        let peoplePresent = payment.onWhichBill.fetchPeoplePresentOrdered(byAmountPaid: true)
+        let peoplePresent = payment.onWhichBill!.fetchPeoplePresentOrdered(byAmountPaid: true)
         return peoplePresent?.first
     }
     
@@ -61,7 +61,7 @@ import UIKit
     @nonobjc private func updateDateModified() {
         let nu = Date()
         payment.dateModified = nu
-        payment.onWhichBill.dateModified = nu
+        payment.onWhichBill!.dateModified = nu
     }
     
     func endUpdates() {
