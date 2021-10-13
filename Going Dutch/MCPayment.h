@@ -15,7 +15,3 @@ __attribute__((objc_subclassing_restricted))
 @interface MCPayment : NSManagedObject
 
 @end
-
-@interface MCPayment (CoreDataGeneratedAccessors)
-
-@end
