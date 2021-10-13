@@ -21,7 +21,7 @@
         <attribute name="uniqueEmailId" attributeType="String"/>
         <relationship name="owner" minCount="1" maxCount="1" deletionRule="Nullify" destinationEntity="MCPerson" inverseName="emailAddress" inverseEntity="MCPerson"/>
     </entity>
-    <entity name="MCExchangeRate" representedClassName="MCExchangeRate" syncable="YES">
+    <entity name="MCExchangeRate" representedClassName="MCExchangeRate" syncable="YES" codeGenerationType="category">
         <attribute name="dateCreated" optional="YES" attributeType="Date" usesScalarValueType="NO"/>
         <attribute name="dateFetched" optional="YES" attributeType="Date" usesScalarValueType="NO"/>
         <attribute name="dateModified" optional="YES" attributeType="Date" usesScalarValueType="NO"/>
@@ -97,7 +97,7 @@
     <elements>
         <element name="MCCurrency" positionX="-900" positionY="108" width="128" height="194"/>
         <element name="MCEmailAddress" positionX="-1118" positionY="9" width="128" height="119"/>
-        <element name="MCExchangeRate" positionX="-891" positionY="117" width="128" height="193"/>
+        <element name="MCExchangeRate" positionX="-891" positionY="117" width="128" height="179"/>
         <element name="MCPayment" positionX="-342" positionY="-0" width="128" height="225"/>
         <element name="MCPaymentPresence" positionX="-533" positionY="-27" width="128" height="150"/>
         <element name="MCPerson" positionX="-837" positionY="-54" width="128" height="300"/>

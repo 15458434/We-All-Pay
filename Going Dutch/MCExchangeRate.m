@@ -13,15 +13,4 @@
 
 @implementation MCExchangeRate
 
-@dynamic dateCreated;
-@dynamic dateFetched;
-@dynamic dateModified;
-@dynamic exchangeRate;
-@dynamic source;
-@dynamic uniqueID;
-@dynamic status;
-@dynamic fromCurrency;
-@dynamic payment;
-@dynamic toCurrency;
-
 @end
