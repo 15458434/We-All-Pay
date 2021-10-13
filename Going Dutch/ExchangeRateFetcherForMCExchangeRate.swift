@@ -12,9 +12,9 @@ import CurrencyConverter
 extension ExchangeRateFetcher {
     private func update(_ exchangeRates: [MCExchangeRate]) {
         for exchangeRate in exchangeRates {
-            let fromCode = exchangeRate.fromCurrency.code
-            let toCode = exchangeRate.toCurrency.code
-            let newExchangeRate = calculateExchangeRate(fromCode!, toCode: toCode!)
+            let fromCode = exchangeRate.fromCurrency!.code!
+            let toCode = exchangeRate.toCurrency!.code!
+            let newExchangeRate = calculateExchangeRate(fromCode, toCode: toCode)
             exchangeRate.exchangeRate = NSNumber(value: newExchangeRate)
             exchangeRate.status = NSNumber(value: MCExchangeRateStatus.valid.rawValue)
         }

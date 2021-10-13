@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="UTF-8" standalone="yes"?>
-<model type="com.apple.IDECoreDataModeler.DataModel" documentVersion="1.0" lastSavedToolsVersion="15702" systemVersion="19C57" minimumToolsVersion="Automatic" sourceLanguage="Objective-C" userDefinedModelVersionIdentifier="4">
-    <entity name="MCCurrency" representedClassName="MCCurrency" syncable="YES">
+<model type="com.apple.IDECoreDataModeler.DataModel" documentVersion="1.0" lastSavedToolsVersion="19206" systemVersion="20G165" minimumToolsVersion="Automatic" sourceLanguage="Objective-C" userDefinedModelVersionIdentifier="4">
+    <entity name="MCCurrency" representedClassName="MCCurrency" syncable="YES" codeGenerationType="category">
         <attribute name="code" optional="YES" attributeType="String"/>
         <attribute name="dateCreated" optional="YES" attributeType="Date" usesScalarValueType="NO"/>
         <attribute name="dateModified" optional="YES" attributeType="Date" usesScalarValueType="NO"/>
@@ -13,7 +13,7 @@
         <relationship name="payment" optional="YES" toMany="YES" deletionRule="Nullify" destinationEntity="MCPayment" inverseName="currency" inverseEntity="MCPayment"/>
         <relationship name="sharedBill" optional="YES" toMany="YES" deletionRule="Deny" destinationEntity="MCSharedBill" inverseName="mainCurrency" inverseEntity="MCSharedBill"/>
     </entity>
-    <entity name="MCEmailAddress" representedClassName="MCEmailAddress" syncable="YES">
+    <entity name="MCEmailAddress" representedClassName="MCEmailAddress" syncable="YES" codeGenerationType="category">
         <attribute name="dateCreated" optional="YES" attributeType="Date" usesScalarValueType="NO"/>
         <attribute name="dateModified" optional="YES" attributeType="Date" usesScalarValueType="NO"/>
         <attribute name="emailAddress" attributeType="String"/>
@@ -21,7 +21,7 @@
         <attribute name="uniqueEmailId" attributeType="String"/>
         <relationship name="owner" minCount="1" maxCount="1" deletionRule="Nullify" destinationEntity="MCPerson" inverseName="emailAddress" inverseEntity="MCPerson"/>
     </entity>
-    <entity name="MCExchangeRate" representedClassName="MCExchangeRate" syncable="YES">
+    <entity name="MCExchangeRate" representedClassName="MCExchangeRate" syncable="YES" codeGenerationType="category">
         <attribute name="dateCreated" optional="YES" attributeType="Date" usesScalarValueType="NO"/>
         <attribute name="dateFetched" optional="YES" attributeType="Date" usesScalarValueType="NO"/>
         <attribute name="dateModified" optional="YES" attributeType="Date" usesScalarValueType="NO"/>
@@ -33,7 +33,7 @@
         <relationship name="payment" optional="YES" maxCount="1" deletionRule="Nullify" destinationEntity="MCPayment" inverseName="exchangeRate" inverseEntity="MCPayment"/>
         <relationship name="toCurrency" optional="YES" maxCount="1" deletionRule="Nullify" destinationEntity="MCCurrency" inverseName="exchangeRateToCurrency" inverseEntity="MCCurrency"/>
     </entity>
-    <entity name="MCPayment" representedClassName="MCPayment" syncable="YES">
+    <entity name="MCPayment" representedClassName="MCPayment" syncable="YES" codeGenerationType="category">
         <attribute name="categoryId" optional="YES" attributeType="Integer 16" defaultValueString="0" usesScalarValueType="NO"/>
         <attribute name="dateCreated" optional="YES" attributeType="Date" usesScalarValueType="NO"/>
         <attribute name="dateModified" optional="YES" attributeType="Date" usesScalarValueType="NO"/>
@@ -50,7 +50,7 @@
             <fetchIndexElement property="dateCreated" type="Binary" order="ascending"/>
         </fetchIndex>
     </entity>
-    <entity name="MCPaymentPresence" representedClassName="MCPaymentPresence" syncable="YES">
+    <entity name="MCPaymentPresence" representedClassName="MCPaymentPresence" syncable="YES" codeGenerationType="category">
         <attribute name="averageOweFromPayment" optional="YES" attributeType="Double" defaultValueString="0.0" usesScalarValueType="NO"/>
         <attribute name="dateCreated" optional="YES" attributeType="Date" usesScalarValueType="NO"/>
         <attribute name="dateModified" optional="YES" attributeType="Date" usesScalarValueType="NO"/>
@@ -59,7 +59,7 @@
         <relationship name="payment" optional="YES" maxCount="1" deletionRule="Nullify" destinationEntity="MCPayment" inverseName="peopleSharingPayment" inverseEntity="MCPayment"/>
         <relationship name="person" optional="YES" maxCount="1" deletionRule="Nullify" destinationEntity="MCPerson" inverseName="sharingPayment" inverseEntity="MCPerson"/>
     </entity>
-    <entity name="MCPerson" representedClassName="MCPerson" syncable="YES">
+    <entity name="MCPerson" representedClassName="MCPerson" syncable="YES" codeGenerationType="category">
         <attribute name="dateCreated" optional="YES" attributeType="Date" usesScalarValueType="NO"/>
         <attribute name="dateModified" optional="YES" attributeType="Date" usesScalarValueType="NO"/>
         <attribute name="defaultEmailAddress" optional="YES" transient="YES" attributeType="String"/>
@@ -67,9 +67,9 @@
         <attribute name="getFullName" optional="YES" transient="YES" attributeType="String"/>
         <attribute name="lastName" optional="YES" attributeType="String"/>
         <attribute name="phoneNumber" optional="YES" attributeType="String"/>
-        <attribute name="picture" optional="YES" transient="YES"/>
+        <attribute name="picture" optional="YES" transient="YES" customClassName="UIImage"/>
         <attribute name="pictureData" optional="YES" attributeType="Binary" allowsExternalBinaryDataStorage="YES"/>
-        <attribute name="thumbnail" optional="YES" transient="YES"/>
+        <attribute name="thumbnail" optional="YES" transient="YES" customClassName="UIImage"/>
         <attribute name="thumbnailData" optional="YES" attributeType="Binary" allowsExternalBinaryDataStorage="YES"/>
         <attribute name="totalSumPaid" optional="YES" transient="YES" attributeType="Double" usesScalarValueType="NO"/>
         <attribute name="uniquePersonId" attributeType="String"/>
@@ -81,7 +81,7 @@
             <fetchIndexElement property="dateCreated" type="Binary" order="ascending"/>
         </fetchIndex>
     </entity>
-    <entity name="MCSharedBill" representedClassName="MCSharedBill" syncable="YES">
+    <entity name="MCSharedBill" representedClassName="MCSharedBill" syncable="YES" codeGenerationType="category">
         <attribute name="dateCreated" optional="YES" attributeType="Date" usesScalarValueType="NO"/>
         <attribute name="dateModified" optional="YES" attributeType="Date" usesScalarValueType="NO"/>
         <attribute name="hasTheMailBeenSent" optional="YES" attributeType="Boolean" usesScalarValueType="NO"/>
@@ -95,12 +95,12 @@
         </fetchIndex>
     </entity>
     <elements>
-        <element name="MCCurrency" positionX="-900" positionY="108" width="128" height="210"/>
-        <element name="MCEmailAddress" positionX="-1118" positionY="9" width="128" height="135"/>
-        <element name="MCExchangeRate" positionX="-891" positionY="117" width="128" height="193"/>
-        <element name="MCPayment" positionX="-342" positionY="-0" width="128" height="225"/>
-        <element name="MCPaymentPresence" positionX="-533" positionY="-27" width="128" height="150"/>
-        <element name="MCPerson" positionX="-837" positionY="-54" width="128" height="300"/>
-        <element name="MCSharedBill" positionX="-558" positionY="225" width="128" height="165"/>
+        <element name="MCCurrency" positionX="-900" positionY="108" width="128" height="194"/>
+        <element name="MCEmailAddress" positionX="-1118" positionY="9" width="128" height="119"/>
+        <element name="MCExchangeRate" positionX="-891" positionY="117" width="128" height="179"/>
+        <element name="MCPayment" positionX="-342" positionY="-0" width="128" height="209"/>
+        <element name="MCPaymentPresence" positionX="-533" positionY="-27" width="128" height="134"/>
+        <element name="MCPerson" positionX="-837" positionY="-54" width="128" height="284"/>
+        <element name="MCSharedBill" positionX="-558" positionY="225" width="128" height="149"/>
     </elements>
 </model>

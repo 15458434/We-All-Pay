@@ -54,7 +54,7 @@ final class SelectPayerTableViewController_iPad: UITableViewController, MCTonigh
         let cell = tableView.dequeueReusableCell(withIdentifier: "selectPayerTableViewCell", for: indexPath) as! SelectPayerTableViewCell_iPad
         let thisPerson = people[indexPath.row]
         cell.thumbnailView.image = thisPerson.thumbnail
-        cell.fullNameLabel.text = thisPerson.getFullName
+        cell.fullNameLabel.text = thisPerson.getFullName()
         
         return cell
     }

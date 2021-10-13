@@ -122,7 +122,7 @@ class SelectCurrencyTableViewController: UITableViewController, UISearchResultsU
                 return filteredCurrencies[indexPath.row];
             case let (searchActive, rc, section) where searchActive == false && rc > 0 && section == 0:
                 let result = recentUsedForeignCurrencies[indexPath.row]
-                return Currency(name: result.name, code: result.code)
+                return Currency(name: result.name!, code: result.code!)
             case let (searchActive, rc, section) where searchActive == false && rc > 0 && section > 0:
                 return sections[section - 1][indexPath.row]
             default:
@@ -224,7 +224,7 @@ class SelectCurrencyTableViewController: UITableViewController, UISearchResultsU
                 return filteredCurrencies[indexPath.row];
             case let (searchActive, rc, section) where searchActive == false && rc > 0 && section == 0:
                 let result = recentUsedForeignCurrencies[indexPath.row]
-                return Currency(name: result.name, code: result.code)
+                return Currency(name: result.name!, code: result.code!)
             case let (searchActive, rc, section) where searchActive == false && rc > 0 && section > 0:
                 return sections[section - 1][indexPath.row]
             default:
@@ -276,7 +276,7 @@ class EventUpdateCurrencyModel: NSObject, CurrencyUpdateModel {
     // MARK: CurrencyUpdateModel
     
     var currencyCode: String {
-        return self.event.mainCurrency.code
+        return self.event.mainCurrency!.code!
     }
     
     func updateCurrency(with code: String, with completion: @escaping ((Error?) -> Void)) {
@@ -299,7 +299,7 @@ class PaymentUpdateCurrencyModel: NSObject, CurrencyUpdateModel {
     // MARK: CurrencyUpdateModel
     
     var currencyCode: String {
-        return self.payment.currency.code
+        return self.payment.currency!.code!
     }
     
     func updateCurrency(with code: String, with completion: @escaping ((Error?) -> Void)) {
@@ -307,7 +307,7 @@ class PaymentUpdateCurrencyModel: NSObject, CurrencyUpdateModel {
         let newCurrency = MCCurrency(from: code, from: mainThreadContext)
         let oldCurrency = payment.currency
         payment.currency = newCurrency
-        if oldCurrency?.sharedBill.count == 0 && oldCurrency?.payment.count == 0 {
+        if oldCurrency?.sharedBill?.count == 0 && oldCurrency?.payment?.count == 0 {
             mainThreadContext.delete(oldCurrency!)
         }
         
@@ -315,6 +315,6 @@ class PaymentUpdateCurrencyModel: NSObject, CurrencyUpdateModel {
     }
     
     var recentSelectedCurrencies: [MCCurrency] {
-        return payment.onWhichBill.recentUsedForeignCurrencies(5) ?? [MCCurrency]()
+        return payment.onWhichBill!.recentUsedForeignCurrencies(5) ?? [MCCurrency]()
     }
 }

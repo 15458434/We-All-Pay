@@ -92,7 +92,7 @@ final class PaymentViewController: MCGenericAdBannerTableViewController, AdBanne
     
     // MARK: New in this class
     private func reloadCategoryImageView() {
-        let categoryId = thisPayment.categoryId.intValue
+        let categoryId = thisPayment.categoryId!.intValue
         let categoryObject = CategoryPictureStoreController.shared.pictureObjects[categoryId]
         if categoryId > 0 {
             categoryImage.image = categoryObject.largePicture
@@ -102,7 +102,7 @@ final class PaymentViewController: MCGenericAdBannerTableViewController, AdBanne
     }
     
     private func setTextForCategoryButton() {
-        let categoryId = thisPayment.categoryId.intValue
+        let categoryId = thisPayment.categoryId!.intValue
         let categoryObject = CategoryPictureStoreController.shared.pictureObjects[categoryId]
         if categoryId > 0 {
             categoryImage.image = categoryObject.largePicture
@@ -137,7 +137,7 @@ final class PaymentViewController: MCGenericAdBannerTableViewController, AdBanne
             selectButton.invalidateIntrinsicContentSize()
             return
         }
-        selectButton.setTitle(payingPerson.getFullName, for: UIControl.State())
+        selectButton.setTitle(payingPerson.getFullName(), for: UIControl.State())
         selectButton.invalidateIntrinsicContentSize()
     }
     
@@ -160,7 +160,7 @@ final class PaymentViewController: MCGenericAdBannerTableViewController, AdBanne
             if thisPayment.money?.doubleValue ?? 0.0 <= 0.005 {
                 paidField.text = ""
             } else {
-                let cf = CurrencyFormatter(currencyCode: thisPayment.currency.code)
+                let cf = CurrencyFormatter(currencyCode: thisPayment.currency!.code!)
                 paidField.text = cf.editingString(for: thisPayment.money ?? NSNumber(value: 0)) ?? nil
             }
         }
@@ -181,7 +181,7 @@ final class PaymentViewController: MCGenericAdBannerTableViewController, AdBanne
             case itemField:
                 thisPayment.descriptionOfPayment = itemField.text
             case paidField:
-                let cf = CurrencyFormatter(currencyCode: thisPayment.currency.code)
+                let cf = CurrencyFormatter(currencyCode: thisPayment.currency!.code!)
                 MCWeAllPayStoreController.defaultStore().beginUndoGroupWithoutRegistration()
                 if paidField.text == nil {
                     thisPayment.money = nil
@@ -290,12 +290,12 @@ final class PaymentViewController: MCGenericAdBannerTableViewController, AdBanne
         cell.accessibilityIdentifier = "PaymentPresenceTableViewCell-\(indexPath.row)"
         
         let paymentPresenceForThisCell: MCPaymentPresence = dataController.object(at: indexPath)
-        cell.nameLabel.text = paymentPresenceForThisCell.person.getFullName
-        cell.personView.image = paymentPresenceForThisCell.person.thumbnail
-        cell.theSwitch.setOn(paymentPresenceForThisCell.isPersonPresent.boolValue, animated: false)
+        cell.nameLabel.text = paymentPresenceForThisCell.person!.getFullName()
+        cell.personView.image = paymentPresenceForThisCell.person!.thumbnail
+        cell.theSwitch.setOn(paymentPresenceForThisCell.isPersonPresent!.boolValue, animated: false)
 
-        let cf: CurrencyFormatter = CurrencyFormatter(currencyCode: paymentPresenceForThisCell.payment.currency.code)
-        let averageOweFromPayment: NSNumber = NSNumber(value: -paymentPresenceForThisCell.averageOweFromPayment.doubleValue)
+        let cf: CurrencyFormatter = CurrencyFormatter(currencyCode: paymentPresenceForThisCell.payment!.currency!.code!)
+        let averageOweFromPayment: NSNumber = NSNumber(value: -paymentPresenceForThisCell.averageOweFromPayment!.doubleValue)
         cell.owesMoneyLabel.text = cf.string(for: averageOweFromPayment)
         cell.thisCellsPaymentPresence = paymentPresenceForThisCell
         cell.keyboardDismissDelegate = self
@@ -336,7 +336,7 @@ final class PaymentViewController: MCGenericAdBannerTableViewController, AdBanne
         } else {
             itemField.text = thisPayment.descriptionOfPayment
             if thisPayment.money != nil {
-                let cf = CurrencyFormatter(currencyCode: thisPayment.currency.code)
+                let cf = CurrencyFormatter(currencyCode: thisPayment.currency!.code!)
                 paidField.text = cf.string(for: thisPayment.money)
             }
             reloadPayerView()

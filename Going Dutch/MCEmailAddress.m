@@ -12,11 +12,4 @@
 
 @implementation MCEmailAddress
 
-@dynamic dateCreated;
-@dynamic dateModified;
-@dynamic emailAddress;
-@dynamic selected;
-@dynamic uniqueEmailId;
-@dynamic owner;
-
 @end

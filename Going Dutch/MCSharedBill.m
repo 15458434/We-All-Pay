@@ -14,13 +14,4 @@
 
 @implementation MCSharedBill
 
-@dynamic dateCreated;
-@dynamic dateModified;
-@dynamic hasTheMailBeenSent;
-@dynamic tripName;
-@dynamic uniqueBillId;
-@dynamic mainCurrency;
-@dynamic payments;
-@dynamic peoplePresent;
-
 @end
