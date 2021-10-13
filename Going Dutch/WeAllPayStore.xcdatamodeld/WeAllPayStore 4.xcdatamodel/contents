@@ -81,7 +81,7 @@
             <fetchIndexElement property="dateCreated" type="Binary" order="ascending"/>
         </fetchIndex>
     </entity>
-    <entity name="MCSharedBill" representedClassName="MCSharedBill" syncable="YES">
+    <entity name="MCSharedBill" representedClassName="MCSharedBill" syncable="YES" codeGenerationType="category">
         <attribute name="dateCreated" optional="YES" attributeType="Date" usesScalarValueType="NO"/>
         <attribute name="dateModified" optional="YES" attributeType="Date" usesScalarValueType="NO"/>
         <attribute name="hasTheMailBeenSent" optional="YES" attributeType="Boolean" usesScalarValueType="NO"/>
@@ -101,6 +101,6 @@
         <element name="MCPayment" positionX="-342" positionY="-0" width="128" height="209"/>
         <element name="MCPaymentPresence" positionX="-533" positionY="-27" width="128" height="134"/>
         <element name="MCPerson" positionX="-837" positionY="-54" width="128" height="284"/>
-        <element name="MCSharedBill" positionX="-558" positionY="225" width="128" height="165"/>
+        <element name="MCSharedBill" positionX="-558" positionY="225" width="128" height="149"/>
     </elements>
 </model>

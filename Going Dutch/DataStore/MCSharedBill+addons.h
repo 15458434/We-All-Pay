@@ -6,7 +6,7 @@
 //  Copyright (c) 2013 Mark Cornelisse. All rights reserved.
 //
 
-#import "MCSharedBill.h"
+#import "MCSharedBill+CoreDataProperties.h"
 #import "MCPerson+addons.h"
 
 @interface MCSharedBill (addons)
