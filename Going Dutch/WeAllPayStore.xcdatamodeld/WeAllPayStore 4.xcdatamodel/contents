@@ -67,9 +67,9 @@
         <attribute name="getFullName" optional="YES" transient="YES" attributeType="String"/>
         <attribute name="lastName" optional="YES" attributeType="String"/>
         <attribute name="phoneNumber" optional="YES" attributeType="String"/>
-        <attribute name="picture" optional="YES" transient="YES"/>
+        <attribute name="picture" optional="YES" transient="YES" customClassName="UIImage"/>
         <attribute name="pictureData" optional="YES" attributeType="Binary" allowsExternalBinaryDataStorage="YES"/>
-        <attribute name="thumbnail" optional="YES" transient="YES"/>
+        <attribute name="thumbnail" optional="YES" transient="YES" customClassName="UIImage"/>
         <attribute name="thumbnailData" optional="YES" attributeType="Binary" allowsExternalBinaryDataStorage="YES"/>
         <attribute name="totalSumPaid" optional="YES" transient="YES" attributeType="Double" usesScalarValueType="NO"/>
         <attribute name="uniquePersonId" attributeType="String"/>
