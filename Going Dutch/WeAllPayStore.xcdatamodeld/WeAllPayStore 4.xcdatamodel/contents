@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="UTF-8" standalone="yes"?>
-<model type="com.apple.IDECoreDataModeler.DataModel" documentVersion="1.0" lastSavedToolsVersion="15702" systemVersion="19C57" minimumToolsVersion="Automatic" sourceLanguage="Objective-C" userDefinedModelVersionIdentifier="4">
-    <entity name="MCCurrency" representedClassName="MCCurrency" syncable="YES">
+<model type="com.apple.IDECoreDataModeler.DataModel" documentVersion="1.0" lastSavedToolsVersion="19206" systemVersion="20G165" minimumToolsVersion="Automatic" sourceLanguage="Objective-C" userDefinedModelVersionIdentifier="4">
+    <entity name="MCCurrency" representedClassName="MCCurrency" syncable="YES" codeGenerationType="category">
         <attribute name="code" optional="YES" attributeType="String"/>
         <attribute name="dateCreated" optional="YES" attributeType="Date" usesScalarValueType="NO"/>
         <attribute name="dateModified" optional="YES" attributeType="Date" usesScalarValueType="NO"/>
@@ -95,7 +95,7 @@
         </fetchIndex>
     </entity>
     <elements>
-        <element name="MCCurrency" positionX="-900" positionY="108" width="128" height="210"/>
+        <element name="MCCurrency" positionX="-900" positionY="108" width="128" height="194"/>
         <element name="MCEmailAddress" positionX="-1118" positionY="9" width="128" height="135"/>
         <element name="MCExchangeRate" positionX="-891" positionY="117" width="128" height="193"/>
         <element name="MCPayment" positionX="-342" positionY="-0" width="128" height="225"/>
