@@ -59,7 +59,7 @@
         <relationship name="payment" optional="YES" maxCount="1" deletionRule="Nullify" destinationEntity="MCPayment" inverseName="peopleSharingPayment" inverseEntity="MCPayment"/>
         <relationship name="person" optional="YES" maxCount="1" deletionRule="Nullify" destinationEntity="MCPerson" inverseName="sharingPayment" inverseEntity="MCPerson"/>
     </entity>
-    <entity name="MCPerson" representedClassName="MCPerson" syncable="YES">
+    <entity name="MCPerson" representedClassName="MCPerson" syncable="YES" codeGenerationType="category">
         <attribute name="dateCreated" optional="YES" attributeType="Date" usesScalarValueType="NO"/>
         <attribute name="dateModified" optional="YES" attributeType="Date" usesScalarValueType="NO"/>
         <attribute name="defaultEmailAddress" optional="YES" transient="YES" attributeType="String"/>
@@ -100,7 +100,7 @@
         <element name="MCExchangeRate" positionX="-891" positionY="117" width="128" height="179"/>
         <element name="MCPayment" positionX="-342" positionY="-0" width="128" height="209"/>
         <element name="MCPaymentPresence" positionX="-533" positionY="-27" width="128" height="134"/>
-        <element name="MCPerson" positionX="-837" positionY="-54" width="128" height="300"/>
+        <element name="MCPerson" positionX="-837" positionY="-54" width="128" height="284"/>
         <element name="MCSharedBill" positionX="-558" positionY="225" width="128" height="165"/>
     </elements>
 </model>

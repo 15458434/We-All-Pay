@@ -15,23 +15,6 @@
 __attribute__((objc_subclassing_restricted))
 @interface MCPerson : NSManagedObject
 
-@property (nonatomic, retain) NSDate * dateCreated;
-@property (nonatomic, retain) NSDate * dateModified;
-@property (nonatomic, retain) NSString * defaultEmailAddress;
-@property (nonatomic, retain) NSString * firstName;
-@property (nonatomic, retain) NSString * getFullName;
-@property (nonatomic, retain) NSString * lastName;
-@property (nonatomic, retain) NSString * phoneNumber;
-@property (nonatomic, retain) UIImage * picture;
-@property (nonatomic, retain) NSData * pictureData;
-@property (nonatomic, retain) UIImage * thumbnail;
-@property (nonatomic, retain) NSData * thumbnailData;
-@property (nonatomic, retain) NSNumber * totalSumPaid;
-@property (nonatomic, retain) NSString * uniquePersonId;
-@property (nonatomic, retain) NSSet *emailAddress;
-@property (nonatomic, retain) NSSet *payments;
-@property (nonatomic, retain) NSSet *sharedBill;
-@property (nonatomic, retain) NSSet *sharingPayment;
 @end
 
 @interface MCPerson (CoreDataGeneratedAccessors)

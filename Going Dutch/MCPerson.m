@@ -16,33 +16,15 @@
 
 @implementation MCPerson
 
-@dynamic dateCreated;
-@dynamic dateModified;
-@dynamic defaultEmailAddress;
-@dynamic firstName;
-@dynamic getFullName;
-@dynamic lastName;
-@dynamic phoneNumber;
-@dynamic picture;
-@dynamic pictureData;
-@dynamic thumbnail;
-@dynamic thumbnailData;
-@dynamic totalSumPaid;
-@dynamic uniquePersonId;
-@dynamic emailAddress;
-@dynamic payments;
-@dynamic sharedBill;
-@dynamic sharingPayment;
-
-- (void)addPaymentsObject:(MCPayment *)value {
-    NSDictionary *valueAsDictionary = [value dictionaryWithValuesForKeys:@[@"categoryId", @"descriptionOfPayment", @"money", @"moneyInMainCurrency", @"uniquePaymentId"]];
-    [FIRCrashlytics.crashlytics logWithFormat:@"The current value given is %@", valueAsDictionary];
-    NSPredicate *predicate = [NSPredicate predicateWithFormat:@"uniquePaymentId = %@", value.uniquePaymentId];
-    NSSet *filteredForValue = [self.payments filteredSetUsingPredicate:predicate];
-    if (filteredForValue.count == 0) {
-        NSSet *result = [self.payments setByAddingObject:value];
-        self.payments = result;
-    } 
-}
+//- (void)addPaymentsObject:(MCPayment *)value {
+//    NSDictionary *valueAsDictionary = [value dictionaryWithValuesForKeys:@[@"categoryId", @"descriptionOfPayment", @"money", @"moneyInMainCurrency", @"uniquePaymentId"]];
+//    [FIRCrashlytics.crashlytics logWithFormat:@"The current value given is %@", valueAsDictionary];
+//    NSPredicate *predicate = [NSPredicate predicateWithFormat:@"uniquePaymentId = %@", value.uniquePaymentId];
+//    NSSet *filteredForValue = [self.payments filteredSetUsingPredicate:predicate];
+//    if (filteredForValue.count == 0) {
+//        NSSet *result = [self.payments setByAddingObject:value];
+//        self.payments = result;
+//    } 
+//}
 
 @end
