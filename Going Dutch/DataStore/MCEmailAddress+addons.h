@@ -6,7 +6,7 @@
 //  Copyright (c) 2013 Mark Cornelisse. All rights reserved.
 //
 
-#import "MCEmailAddress.h"
+#import "MCEmailAddress+CoreDataProperties.h"
 
 @interface MCEmailAddress (addons)
 
