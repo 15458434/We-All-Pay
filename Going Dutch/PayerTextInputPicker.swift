@@ -26,7 +26,7 @@ import FirebaseCrashlytics
         pickerView.showsSelectionIndicator = true
         textField.inputView = pickerView
         keyboardWillShowObserver = NotificationCenter.default.addObserver(forName: UITextField.keyboardWillShowNotification, object: textField, queue: nil, using: { [unowned self] (notification) in
-            if let index = self.arrayOfPeoplePresent.firstIndex(of: model.payment.payingPerson) {
+            if let payingPerson = model.payment.payingPerson, let index = self.arrayOfPeoplePresent.firstIndex(of: payingPerson) {
                 self.pickerView.selectedRow(inComponent: index)
             } else {
                 let nextPayer = model.suggestedNextPayer!
@@ -47,13 +47,13 @@ import FirebaseCrashlytics
     }
     
     func pickerView(_ pickerView: UIPickerView, numberOfRowsInComponent component: Int) -> Int {
-        return model.payment.onWhichBill.peoplePresent.count
+        return model.payment!.onWhichBill!.peoplePresent!.count
     }
     
     // MARK: UIPickerViewDelegate
     
     func pickerView(_ pickerView: UIPickerView, titleForRow row: Int, forComponent component: Int) -> String? {
-        return arrayOfPeoplePresent[row].getFullName
+        return arrayOfPeoplePresent[row].getFullName()
     }
     
     func pickerView(_ pickerView: UIPickerView, didSelectRow row: Int, inComponent component: Int) {
@@ -66,13 +66,13 @@ import FirebaseCrashlytics
         let payingPerson = arrayOfPeoplePresent[row]
         model.update(payingPerson: payingPerson)
         
-        textField.text = payingPerson.getFullName
+        textField.text = payingPerson.getFullName()
     }
     
     // MARK: UITextFieldDelegate
     
     func textFieldShouldBeginEditing(_ textField: UITextField) -> Bool {
-        guard model.payment.onWhichBill.peoplePresent.count > 0 else {
+        guard model!.payment!.onWhichBill!.peoplePresent!.count > 0 else {
             return false
         }
         return true
