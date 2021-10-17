@@ -7,10 +7,11 @@
 //
 
 import UIKit
+import FirebaseInstallations
 import FirebaseRemoteConfig
 
 @objc(MCRemoteConfigEngine) @objcMembers final class RemoteConfigEngine: NSObject {
-    @objc(ConfigEngineItem) enum Item: UInt, CaseIterable {
+    @objc(MCRemoteConfigEngineItem) enum Item: UInt, CaseIterable {
         case solutionAdBannerHeight
         
         var stringValue: String {
@@ -26,6 +27,19 @@ import FirebaseRemoteConfig
     private static let remoteConfig = RemoteConfig.remoteConfig()
     
     class func prepareRemoteConfig() {
+        #if DEBUG
+        Installations.installations().authTokenForcingRefresh(true, completion: { (result, error) in
+            if let error = error {
+                print("Error fetching token: \(error)")
+                return
+            }
+            guard let result = result else {
+                return
+            }
+            print("Installation auth token: \(result.authToken)")
+        })
+        #endif
+        
         var defaults: [String: NSObject] {
             let newValues = RemoteConfigEngine.Item.allCases.reduce([String: NSObject]()) { (dict, item) -> [String: NSObject] in
                 var dict = dict

@@ -24,7 +24,8 @@ import GoogleMobileAds;
         self.bannerView!.topAnchor.constraint(equalTo: self.topAnchor, constant: 0).isActive = true
         self.bannerView!.bottomAnchor.constraint(equalTo: self.bottomAnchor, constant: 0).isActive = true
         self.bannerView!.centerXAnchor.constraint(equalTo: self.centerXAnchor, constant: 0).isActive = true
-        self.bannerView!.heightAnchor.constraint(equalToConstant: 50).isActive = true
+        let height: CGFloat = CGFloat(RemoteConfigEngine().number(for: .solutionAdBannerHeight)!.doubleValue)
+        self.bannerView!.heightAnchor.constraint(equalToConstant: height).isActive = true
         self.bannerView!.widthAnchor.constraint(equalToConstant: 320).isActive = true
     }
     
