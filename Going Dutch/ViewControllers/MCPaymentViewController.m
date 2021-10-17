@@ -258,9 +258,6 @@ typedef NS_ENUM(BOOL, ChildViewStatus) {
 #pragma mark - UIViewController
 
 - (void)viewDidLoad {
-    MCRemoteConfigEngine *configEngine = [[MCRemoteConfigEngine alloc] init];
-    self.adBannerEngine.shouldShowEngine = [[MCRemoteConfigTrueCasino alloc] initWithEngine:configEngine andRemoteConfigItem:ConfigEngineItemPercentageOfTimeShowPaymentViewBannerOniPhone];
-    
     [super viewDidLoad];
     // Do any additional setup after loading the view from its nib.
     
