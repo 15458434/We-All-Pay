@@ -97,7 +97,6 @@
 		3864147F269B185400590ABA /* NotificationsTableViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3864147E269B185300590ABA /* NotificationsTableViewController.swift */; };
 		38641482269B18C400590ABA /* NotificationsModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 38641481269B18C400590ABA /* NotificationsModel.swift */; };
 		38641486269B5E9F00590ABA /* Notifications.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 38641485269B5E9F00590ABA /* Notifications.xcassets */; };
-		3866D66523EF6921004554FF /* RemoteConfigTrueCasino.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3866D66423EF6921004554FF /* RemoteConfigTrueCasino.swift */; };
 		3867253B23DB248E009607E8 /* fastlane in Resources */ = {isa = PBXBuildFile; fileRef = 3867253A23DB248E009607E8 /* fastlane */; };
 		3867CE4718704B2E001EC222 /* Main-Iphone.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 3867CE4918704B2E001EC222 /* Main-Iphone.storyboard */; };
 		3867CE5118704DAF001EC222 /* MCTableEmptyMessage.xib in Resources */ = {isa = PBXBuildFile; fileRef = 3867CE5318704DAF001EC222 /* MCTableEmptyMessage.xib */; };
@@ -457,7 +456,6 @@
 		3864147E269B185300590ABA /* NotificationsTableViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NotificationsTableViewController.swift; sourceTree = "<group>"; };
 		38641481269B18C400590ABA /* NotificationsModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NotificationsModel.swift; sourceTree = "<group>"; };
 		38641485269B5E9F00590ABA /* Notifications.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Notifications.xcassets; sourceTree = "<group>"; };
-		3866D66423EF6921004554FF /* RemoteConfigTrueCasino.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RemoteConfigTrueCasino.swift; sourceTree = "<group>"; };
 		3867253A23DB248E009607E8 /* fastlane */ = {isa = PBXFileReference; lastKnownFileType = folder; path = fastlane; sourceTree = "<group>"; };
 		3867CE4018703E9A001EC222 /* nl */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.strings; name = nl; path = nl.lproj/InfoPlist.strings; sourceTree = "<group>"; };
 		3867CE4A18704B48001EC222 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = "Base.lproj/Main-Iphone.storyboard"; sourceTree = "<group>"; };
@@ -1123,7 +1121,6 @@
 			isa = PBXGroup;
 			children = (
 				386DDA6623ED9DBF0000B3BF /* RemoteConfigEngine.swift */,
-				3866D66423EF6921004554FF /* RemoteConfigTrueCasino.swift */,
 			);
 			name = RemoteConfigEngine;
 			sourceTree = "<group>";
@@ -2140,7 +2137,6 @@
 				384EC90C1BC2F17500A80799 /* SelectCategoryTableViewCell_iPad.swift in Sources */,
 				38A8F2A923C2883600CB3B73 /* PayerTextInputPicker.swift in Sources */,
 				38C44BCE23DEDEC900264BBB /* ScrollViewAdjusterToKeyboard.swift in Sources */,
-				3866D66523EF6921004554FF /* RemoteConfigTrueCasino.swift in Sources */,
 				3812760E1BBE76B40004C8C2 /* PaymentViewController.swift in Sources */,
 				38977E4F1B2A26D4008484A4 /* MCTwoLabelIscreenTableViewCell.swift in Sources */,
 				38490D2D1D7052E700A297BA /* SolutionViewController.swift in Sources */,
