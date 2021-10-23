@@ -71,7 +71,7 @@ import UIKit
                 UIApplication.shared.isNetworkActivityIndicatorVisible = false
             }
             
-            if error != nil {
+            guard error == nil else {
                 debugPrint("Error fetching exchangeRate from OpenExchangeRates: \(String(describing: error))")
                 OperationQueue.main.addOperation({ () -> Void in
                     completionHandler(nil, nil, error as NSError?)
