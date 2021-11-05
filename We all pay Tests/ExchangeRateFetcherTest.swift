@@ -18,6 +18,42 @@ extension ExchangeRateFetcher {
         }
         return true
     }
+    
+    @available(iOS 13, *)
+    var receivedCurrenciesAndLocalListIsTheSame: Bool {
+        var localCurrencies: [[String: Any]] = currencyController.currencies.sorted {
+            $0.code < $1.code
+        }.map { currency in
+            var currencyDictionary = currency.dictionaryWithValues(forKeys: ["name", "code"])
+            if currencyDictionary["type"] == nil {
+                currencyDictionary["type"] = Currency.Kind.payment.rawValue
+            }
+            return currencyDictionary
+        }
+        let localCurrencyCodes: [String] = localCurrencies.map {
+            $0["code"] as! String
+        }
+        let remoteCurrencyCodes: [String] = self.rates.keys.sorted {
+            $0 < $1
+        }
+        
+        let difference = remoteCurrencyCodes.difference(from: localCurrencyCodes)
+        if difference.count == 0 {
+            return true
+        } else {
+            for change in difference {
+                switch change {
+                case let .remove(offset, _, _):
+                    localCurrencies.remove(at: offset)
+                case let .insert(offset, newCurrencyCode, _):
+                    let newElement: [String: Any] = ["code": newCurrencyCode, "type": 0]
+                    localCurrencies.insert(newElement, at: offset)
+                }
+            }
+            printArrayAsPlist(localCurrencies)
+            return false
+        }
+    }
 }
 
 class ExchangeRateFetcherTest: XCTestCase {
@@ -26,7 +62,7 @@ class ExchangeRateFetcherTest: XCTestCase {
     override func setUp() {
         super.setUp()
         
-        fetcher = ExchangeRateFetcher()
+        fetcher = ExchangeRateFetcher(filterUnusedCurrencies: false)
     }
     
     override func tearDown() {
@@ -61,7 +97,12 @@ class ExchangeRateFetcherTest: XCTestCase {
         
         waitForExpectations(timeout: 90, handler: { (error) -> Void in
             XCTAssertNil(error, "Error waiting for exchangeRate results: \(String(describing: error))")
-            XCTAssertTrue(self.fetcher.allCurrenciesAvailable, "All currencies should be available.")
+            if #available(iOS 13, *) {
+                XCTAssertTrue(self.fetcher.receivedCurrenciesAndLocalListIsTheSame, "There should be no differences between the local list and the received list of currencies with exchange rates.")
+            } else {
+                XCTAssertTrue(self.fetcher.allCurrenciesAvailable, "All currencies should be available.")
+            }
+            
         })
     }
     

@@ -16,7 +16,6 @@
 		380A76AB26D62EB3000FEABB /* Localizable.stringsdict in Resources */ = {isa = PBXBuildFile; fileRef = 380A76AD26D62EB3000FEABB /* Localizable.stringsdict */; };
 		380C48161BE1330E00C82B0F /* CurrencyFormatter.swift in Sources */ = {isa = PBXBuildFile; fileRef = 380C48151BE1330E00C82B0F /* CurrencyFormatter.swift */; };
 		380FB70D26D6B86600B46038 /* CoreGraphics.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 380FB70C26D6B86600B46038 /* CoreGraphics.framework */; };
-		380FB70E26D6B87400B46038 /* CoreMedia.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 38B4E82023CDE6100034CA95 /* CoreMedia.framework */; };
 		380FB71026D6B88100B46038 /* StoreKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 380FB70F26D6B88100B46038 /* StoreKit.framework */; };
 		380FB71226D6B88F00B46038 /* UIKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 380FB71126D6B88F00B46038 /* UIKit.framework */; };
 		381179D01A82D1FC00020538 /* MailComposer.swift in Sources */ = {isa = PBXBuildFile; fileRef = 381179CF1A82D1FC00020538 /* MailComposer.swift */; };
@@ -114,6 +113,7 @@
 		387494D819F05476001614CA /* WeAllPayStore1to4.xcmappingmodel in Sources */ = {isa = PBXBuildFile; fileRef = 387494D719F05476001614CA /* WeAllPayStore1to4.xcmappingmodel */; };
 		387D3A911870652B0060FAF8 /* Localizable.strings in Resources */ = {isa = PBXBuildFile; fileRef = 387D3A931870652B0060FAF8 /* Localizable.strings */; };
 		387E79CF26F48EDC00C2A424 /* MCPurchaseTableViewCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 387E79CE26F48EDC00C2A424 /* MCPurchaseTableViewCell.m */; };
+		388474BE272419B4008D6C33 /* WeAllPayStore.xcdatamodeld in Sources */ = {isa = PBXBuildFile; fileRef = 3829AD0D178B41320025969D /* WeAllPayStore.xcdatamodeld */; };
 		38894980211C2DDE00BDF9CD /* CoreDataSaveHandlerWhenEnteringBackground.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3889497F211C2DDE00BDF9CD /* CoreDataSaveHandlerWhenEnteringBackground.swift */; };
 		388A326E1C10965D00F7459C /* CategoryPictureObject.swift in Sources */ = {isa = PBXBuildFile; fileRef = 385295CE1C10583E0081894D /* CategoryPictureObject.swift */; };
 		388A326F1C10966000F7459C /* CategoryPictureStoreController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 385295D01C105C580081894D /* CategoryPictureStoreController.swift */; };
@@ -125,6 +125,7 @@
 		388A32921C11EDBD00F7459C /* WhoPayingUserDefaultsStoreInterface.framework in Embed Frameworks */ = {isa = PBXBuildFile; fileRef = 388A327C1C11EDBD00F7459C /* WhoPayingUserDefaultsStoreInterface.framework */; settings = {ATTRIBUTES = (CodeSignOnCopy, RemoveHeadersOnCopy, ); }; };
 		388A32991C11EEA700F7459C /* WhoPayingUserDefaultsStoreInterface.swift in Sources */ = {isa = PBXBuildFile; fileRef = 388A32701C11C51F00F7459C /* WhoPayingUserDefaultsStoreInterface.swift */; };
 		388A329A1C11EF4700F7459C /* WhoPayingUserDefaultsStoreInterface.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 388A327C1C11EDBD00F7459C /* WhoPayingUserDefaultsStoreInterface.framework */; };
+		388FD1E927353CFC00758400 /* PlistTools.swift in Sources */ = {isa = PBXBuildFile; fileRef = 388FD1E827353CFC00758400 /* PlistTools.swift */; };
 		3892E3A417903EF00038894B /* MCEditTripViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 3892E3A317903EF00038894B /* MCEditTripViewController.m */; };
 		3892E3AA17904A240038894B /* MCPersonViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 3892E3A917904A240038894B /* MCPersonViewController.m */; };
 		38955048178B4FCA0077A95A /* MCWeAllPayStoreController.m in Sources */ = {isa = PBXBuildFile; fileRef = 38955047178B4FCA0077A95A /* MCWeAllPayStoreController.m */; };
@@ -498,6 +499,7 @@
 		388A32851C11EDBD00F7459C /* WhoPayingUserDefaultsStoreInterfaceTests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = WhoPayingUserDefaultsStoreInterfaceTests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
 		388A328C1C11EDBD00F7459C /* WhoPayingUserDefaultsStoreInterfaceTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = WhoPayingUserDefaultsStoreInterfaceTests.swift; sourceTree = "<group>"; };
 		388A328E1C11EDBD00F7459C /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
+		388FD1E827353CFC00758400 /* PlistTools.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PlistTools.swift; sourceTree = "<group>"; };
 		3892E3A217903EF00038894B /* MCEditTripViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = MCEditTripViewController.h; path = ViewControllers/MCEditTripViewController.h; sourceTree = "<group>"; };
 		3892E3A317903EF00038894B /* MCEditTripViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = MCEditTripViewController.m; path = ViewControllers/MCEditTripViewController.m; sourceTree = "<group>"; };
 		3892E3A817904A240038894B /* MCPersonViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = MCPersonViewController.h; path = ViewControllers/MCPersonViewController.h; sourceTree = "<group>"; };
@@ -694,7 +696,6 @@
 				38B4E82323CDE6180034CA95 /* CoreTelephony.framework in Frameworks */,
 				380FB71226D6B88F00B46038 /* UIKit.framework in Frameworks */,
 				38B4E82123CDE6100034CA95 /* CoreMedia.framework in Frameworks */,
-				380FB70E26D6B87400B46038 /* CoreMedia.framework in Frameworks */,
 				382E796526B7F48200A0D1C1 /* WeAllPayDesignableUI.framework in Frameworks */,
 				38B4E81F23CDE6050034CA95 /* AVFoundation.framework in Frameworks */,
 				380FB70D26D6B86600B46038 /* CoreGraphics.framework in Frameworks */,
@@ -879,6 +880,7 @@
 				38EACFFA1C6894960091A9AF /* InfoPlist.strings */,
 				3858D6551B2DB55B006A4E2B /* CurrencyControllerTest.swift */,
 				38D796121B2DF30800F3872F /* ExchangeRateFetcherTest.swift */,
+				388FD1E827353CFC00758400 /* PlistTools.swift */,
 				382B76F21C398249000C203A /* Info.plist */,
 			);
 			path = CurrencyConverterTests;
@@ -1762,7 +1764,7 @@
 				CLASSPREFIX = MC;
 				LastSwiftMigration = 0700;
 				LastSwiftUpdateCheck = 1130;
-				LastUpgradeCheck = 1250;
+				LastUpgradeCheck = 1310;
 				ORGANIZATIONNAME = "Mark Cornelisse";
 				TargetAttributes = {
 					382B76DF1C398249000C203A = {
@@ -2109,6 +2111,7 @@
 			files = (
 				382B76FF1C398261000C203A /* CurrencyController.swift in Sources */,
 				382B77021C3982C8000C203A /* CurrencyControllerTest.swift in Sources */,
+				388FD1E927353CFC00758400 /* PlistTools.swift in Sources */,
 				382B77031C3982CE000C203A /* ExchangeRateFetcherTest.swift in Sources */,
 				382B77011C398269000C203A /* ExchangeRateFetcher.swift in Sources */,
 			);
@@ -2255,6 +2258,7 @@
 				383D5D851C07106600BE9F94 /* ReturnPayment.swift in Sources */,
 				385F5310191C2D140012773D /* MCPaymentAddonsTest.m in Sources */,
 				385F5311191C2D140012773D /* MCPersonAddonsTest.m in Sources */,
+				388474BE272419B4008D6C33 /* WeAllPayStore.xcdatamodeld in Sources */,
 				389DE910197FD6DF00169645 /* MCCurrencyTest.m in Sources */,
 				388A326E1C10965D00F7459C /* CategoryPictureObject.swift in Sources */,
 				388A326F1C10966000F7459C /* CategoryPictureStoreController.swift in Sources */,

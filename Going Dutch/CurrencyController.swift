@@ -7,10 +7,19 @@
 //
 
 import Foundation
+import UIKit
 
 final public class Currency: NSObject {
+    @objc(MCCurrencyType) enum Kind: Int {
+        case unknown = 0
+        case payment = 1
+        case noOfficialcode = 2
+        case unused = 3
+        case legacy = 4
+        case commodity = 5
+    }
     @objc public let name: String
-    public let code: String
+    @objc public let code: String
     public var symbol: String {
         return (Locale.current as NSLocale).displayName(forKey: .currencySymbol, value: code) ?? ""
     }
@@ -44,15 +53,34 @@ final public class Currency: NSObject {
         return Locale.current.localizedString(forCurrencyCode: code) ?? ""
     }
     
+    @objc init(with filterUnusedCurrencies: Bool) {
+        let currencyFilePath = Bundle(identifier: "com.GreenHair.CurrencyConverter")!.path(forResource: "Available Currencies", ofType: "plist")
+        let readCurrencies = NSArray(contentsOfFile: currencyFilePath!) as! [Dictionary<String, Any>]
+        if filterUnusedCurrencies {
+            currencies = readCurrencies.filter({ currencyDictionary in
+                if let type = currencyDictionary["type"] as? Int {
+                    return Currency.Kind(rawValue: type) == .payment
+                } else {
+                    return true
+                }
+            }).map {
+                return Currency(name: $0["name"] as! String, code: $0["code"] as! String)
+            }
+        } else {
+            currencies = readCurrencies.map {
+                let name = $0["name"] as! String
+                let code = $0["code"] as! String
+                return Currency(name: name, code: code)
+            }
+        }
+
+        super.init()
+    }
+    
     // MARK: NSObject
     
-    @objc public override init() {
-        let currencyFilePath = Bundle(identifier: "com.GreenHair.CurrencyConverter")!.path(forResource: "Available Currencies", ofType: "plist")
-        let readCurrencies = NSArray(contentsOfFile: currencyFilePath!) as! [Dictionary<String, String>]
-        currencies = readCurrencies.map {
-            return Currency(name: $0["name"]!, code: $0["code"]!)
-        }
-        super.init()
+    @objc convenience public override init() {
+        self.init(with: true)
     }
     
     public subscript(index: Int) -> Currency {
