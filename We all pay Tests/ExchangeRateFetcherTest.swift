@@ -18,6 +18,34 @@ extension ExchangeRateFetcher {
         }
         return true
     }
+    
+    @available(iOS 13, *)
+    var receivedCurrenciesAndLocalListIsTheSame: Bool {
+        var localCurrencies: [[String: String]] = currencyController.currencies.sorted {
+            $0.code < $1.code
+        }.map { currency in
+            return currency.dictionaryWithValues(forKeys: ["name", "code"]) as! [String: String]
+        }
+        let localCurrencyCodes: [String] = localCurrencies.map {
+            $0["code"]!
+        }
+        let remoteCurrencyCodes: [String] = self.rates.keys.sorted {
+            $0 < $1
+        }
+        
+        let difference = remoteCurrencyCodes.difference(from: localCurrencyCodes)
+        for change in difference {
+            switch change {
+            case let .remove(offset, _, _):
+                localCurrencies.remove(at: offset)
+            case let .insert(offset, newCurrencyCode, _):
+                let newElement: [String: String] = ["code": newCurrencyCode]
+                localCurrencies.insert(newElement, at: offset)
+            }
+        }
+        printArrayAsPlist(localCurrencies)
+        return difference.count == 0
+    }
 }
 
 class ExchangeRateFetcherTest: XCTestCase {
@@ -61,7 +89,12 @@ class ExchangeRateFetcherTest: XCTestCase {
         
         waitForExpectations(timeout: 90, handler: { (error) -> Void in
             XCTAssertNil(error, "Error waiting for exchangeRate results: \(String(describing: error))")
-            XCTAssertTrue(self.fetcher.allCurrenciesAvailable, "All currencies should be available.")
+            if #available(iOS 13, *) {
+                XCTAssertTrue(self.fetcher.receivedCurrenciesAndLocalListIsTheSame, "There should be no differences between the local list and the received list of currencies with exchange rates.")
+            } else {
+                XCTAssertTrue(self.fetcher.allCurrenciesAvailable, "All currencies should be available.")
+            }
+            
         })
     }
     
