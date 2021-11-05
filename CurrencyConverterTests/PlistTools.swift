@@ -8,7 +8,7 @@
 
 import Foundation
 
-func printArrayAsPlist(_ array: [Dictionary<String, Encodable>]) {
+func printArrayAsPlist(_ array: [Dictionary<String, Any>]) {
     print("************************************** Begin Plist **************************************")
     let plistData = try! PropertyListSerialization.data(fromPropertyList: array, format: .xml, options: 0)
     let text = NSString(data: plistData, encoding: String.Encoding.utf8.rawValue)!

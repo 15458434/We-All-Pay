@@ -21,30 +21,38 @@ extension ExchangeRateFetcher {
     
     @available(iOS 13, *)
     var receivedCurrenciesAndLocalListIsTheSame: Bool {
-        var localCurrencies: [[String: String]] = currencyController.currencies.sorted {
+        var localCurrencies: [[String: Any]] = currencyController.currencies.sorted {
             $0.code < $1.code
         }.map { currency in
-            return currency.dictionaryWithValues(forKeys: ["name", "code"]) as! [String: String]
+            var currencyDictionary = currency.dictionaryWithValues(forKeys: ["name", "code"])
+            if currencyDictionary["type"] == nil {
+                currencyDictionary["type"] = Currency.Kind.payment.rawValue
+            }
+            return currencyDictionary
         }
         let localCurrencyCodes: [String] = localCurrencies.map {
-            $0["code"]!
+            $0["code"] as! String
         }
         let remoteCurrencyCodes: [String] = self.rates.keys.sorted {
             $0 < $1
         }
         
         let difference = remoteCurrencyCodes.difference(from: localCurrencyCodes)
-        for change in difference {
-            switch change {
-            case let .remove(offset, _, _):
-                localCurrencies.remove(at: offset)
-            case let .insert(offset, newCurrencyCode, _):
-                let newElement: [String: String] = ["code": newCurrencyCode]
-                localCurrencies.insert(newElement, at: offset)
+        if difference.count == 0 {
+            return true
+        } else {
+            for change in difference {
+                switch change {
+                case let .remove(offset, _, _):
+                    localCurrencies.remove(at: offset)
+                case let .insert(offset, newCurrencyCode, _):
+                    let newElement: [String: Any] = ["code": newCurrencyCode, "type": 0]
+                    localCurrencies.insert(newElement, at: offset)
+                }
             }
+            printArrayAsPlist(localCurrencies)
+            return false
         }
-        printArrayAsPlist(localCurrencies)
-        return difference.count == 0
     }
 }
 
@@ -54,7 +62,7 @@ class ExchangeRateFetcherTest: XCTestCase {
     override func setUp() {
         super.setUp()
         
-        fetcher = ExchangeRateFetcher()
+        fetcher = ExchangeRateFetcher(filterUnusedCurrencies: false)
     }
     
     override func tearDown() {
