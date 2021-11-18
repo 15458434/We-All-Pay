@@ -372,8 +372,11 @@
             payment = [_dataController objectAtIndexPath:indexPathOfSelectedRow];
         }
         MCPaymentViewController *paymentViewController = (MCPaymentViewController *)navController.viewControllers[0];
-        paymentViewController.thisPayment = payment;
-        paymentViewController.tonightsBill = _tonightsBill;
+        if (!payment) {
+            [paymentViewController prepareForUseWithEvent:_tonightsBill];
+        } else {
+            [paymentViewController prepareForUseWithPayment:payment];
+        }
     } else if ([segue.identifier isEqualToString:@"solveButton"]) {
         UINavigationController *navController = (UINavigationController *)segue.destinationViewController;
         SolutionViewController *destination = navController.viewControllers.firstObject;

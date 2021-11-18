@@ -50,7 +50,6 @@ typedef NS_ENUM(BOOL, ChildViewStatus) {
 @property (strong, nonatomic) NSNumber *paidViewNumber;
 
 @property (nonatomic, strong) NSArray *paymentPresenceArray;
-@property (nonatomic, strong) NSFetchedResultsController *dataController;
 
 @property (nonatomic, strong) UIPickerView *personPickerView;
 @property (nonatomic, strong) NSArray<MCPerson *> *listOfPeople;
@@ -86,7 +85,7 @@ typedef NS_ENUM(BOOL, ChildViewStatus) {
 #endif
     [self.view endEditing:YES];
     
-    NSString *descriptionOfPayment = [_thisPayment.descriptionOfPayment stringByTrimmingCharactersInSet:NSCharacterSet.whitespaceAndNewlineCharacterSet];
+    NSString *descriptionOfPayment = [_model.payment.descriptionOfPayment stringByTrimmingCharactersInSet:NSCharacterSet.whitespaceAndNewlineCharacterSet];
     NSString *parameterItemID = [NSString stringWithFormat:@"id-%@", descriptionOfPayment];
     NSString *parameterName = [NSString stringWithFormat:@"%@", descriptionOfPayment];
     NSString *paremeterContentType = @"shared_payment";
@@ -99,7 +98,7 @@ typedef NS_ENUM(BOOL, ChildViewStatus) {
     }
     [[MCWeAllPayStoreController defaultStore] saveMainThreadContext];
     [self.navigationController.presentingViewController dismissViewControllerAnimated:YES completion:^{
-        [WhoPayingUserDefaultsStoreInterface sendToUserDefaultsStoreInterface:self.tonightsBill];
+        [WhoPayingUserDefaultsStoreInterface sendToUserDefaultsStoreInterface:_model.payment.onWhichBill];
     }];
 }
 
@@ -117,13 +116,11 @@ typedef NS_ENUM(BOOL, ChildViewStatus) {
     [self performSegueWithIdentifier:@"selectCategory" sender:self];
 }
 
-- (UIStatusBarStyle)preferredStatusBarStyle
-{
+- (UIStatusBarStyle)preferredStatusBarStyle {
     return UIStatusBarStyleLightContent;
 }
 
-- (void)tappedInTheBackground:(id)selector
-{
+- (void)tappedInTheBackground:(id)selector {
     _kindOfPaidFieldDismiss = MCMoneyValueFieldDismissStatusBackgroundTapped;
     [self.view endEditing:YES];
 }
@@ -131,7 +128,7 @@ typedef NS_ENUM(BOOL, ChildViewStatus) {
 - (void)showCategory {
     // Get category picture.
     NSArray *pictureObjects = CategoryPictureStoreController.shared.pictureObjects;
-    CategoryPictureObject *categoryObject = pictureObjects[_thisPayment.categoryId.shortValue];
+    CategoryPictureObject *categoryObject = pictureObjects[_model.payment.categoryId.shortValue];
     if (categoryObject.categoryId > 0) {
         _categoryView.image = categoryObject.largePicture;
         [_categoryButton setTitle:categoryObject.categoryDescription forState:UIControlStateNormal];
@@ -142,50 +139,68 @@ typedef NS_ENUM(BOOL, ChildViewStatus) {
     }
 }
 
+- (void)prepareForUseWithEvent:(MCSharedBill *)event {
+    NSParameterAssert(event);
+    [[MCWeAllPayStoreController defaultStore] beginUndoGroup];
+    MCPayment *newPayment = [event addPayment];
+    _isNew = YES;
+    if (_pathComponentsToOpen) {
+        newPayment.payingPerson = _pathComponentsToOpen.lastObject;
+    }
+    
+    __weak typeof(self) weakSelf = self;
+    [_model prepareForUseWithPayment:newPayment andChangeHandler:^(MCPayment * _Nonnull payment) {
+        [weakSelf showCategory];
+        weakSelf.payerPicture.image = payment.payingPerson.picture;
+        weakSelf.payerNameField.text = payment.payingPerson.getFullName;
+    }];
+}
+
+- (void)prepareForUseWithPayment:(MCPayment *)payment {
+    NSParameterAssert(payment);
+    [[MCWeAllPayStoreController defaultStore] beginUndoGroup];
+    _isNew = NO;
+    __weak typeof(self) weakSelf = self;
+    [_model prepareForUseWithPayment:payment andChangeHandler:^(MCPayment * _Nonnull payment) {
+        [weakSelf showCategory];
+        weakSelf.payerPicture.image = payment.payingPerson.picture;
+        weakSelf.payerNameField.text = payment.payingPerson.getFullName;
+    }];
+}
+
 #pragma mark - NSFetchedResultsControllerDelegate
 
-- (void)controllerWillChangeContent:(NSFetchedResultsController *)controller
-{
-    if (self.isViewLoaded && self.view.window) {
-        [[self tableView] beginUpdates];
-    }
+- (void)controllerWillChangeContent:(NSFetchedResultsController *)controller {
+    [self.tableView beginUpdates];
 }
 
-- (void)controller:(NSFetchedResultsController *)controller didChangeObject:(id)anObject atIndexPath:(NSIndexPath *)indexPath forChangeType:(NSFetchedResultsChangeType)type newIndexPath:(NSIndexPath *)newIndexPath
-{
-    if (self.isViewLoaded && self.view.window) {
-        switch(type) {
-                
-            case NSFetchedResultsChangeInsert:
-                [[self tableView] insertRowsAtIndexPaths:@[newIndexPath] withRowAnimation:UITableViewRowAnimationFade];
-                break;
-                
-            case NSFetchedResultsChangeDelete:
-                [[self tableView] deleteRowsAtIndexPaths:@[indexPath] withRowAnimation:UITableViewRowAnimationFade];
-                break;
-                
-            case NSFetchedResultsChangeMove:
-            {
-                [[self tableView] deleteRowsAtIndexPaths:@[indexPath] withRowAnimation:UITableViewRowAnimationFade];
-                [[self tableView] insertRowsAtIndexPaths:@[newIndexPath] withRowAnimation:UITableViewRowAnimationFade];
-            }
-                break;
-                
-            case NSFetchedResultsChangeUpdate:
-            {
-                CurrencyFormatter *cf = [[CurrencyFormatter alloc] initWithCurrencyCode:_thisPayment.currency.code];
-                _paidView.text = [cf stringForObjectValue:_thisPayment.money];
-            }
-                break;
+- (void)controller:(NSFetchedResultsController *)controller didChangeObject:(id)anObject atIndexPath:(NSIndexPath *)indexPath forChangeType:(NSFetchedResultsChangeType)type newIndexPath:(NSIndexPath *)newIndexPath {
+    switch(type) {
+            
+        case NSFetchedResultsChangeInsert:
+            [self.tableView insertRowsAtIndexPaths:@[newIndexPath] withRowAnimation:UITableViewRowAnimationAutomatic];
+            break;
+            
+        case NSFetchedResultsChangeDelete:
+            [self.tableView deleteRowsAtIndexPaths:@[indexPath] withRowAnimation:UITableViewRowAnimationAutomatic];
+            break;
+            
+        case NSFetchedResultsChangeMove: {
+            [self.tableView deleteRowsAtIndexPaths:@[indexPath] withRowAnimation:UITableViewRowAnimationAutomatic];
+            [self.tableView insertRowsAtIndexPaths:@[newIndexPath] withRowAnimation:UITableViewRowAnimationAutomatic];
         }
+            break;
+            
+        case NSFetchedResultsChangeUpdate: {
+            CurrencyFormatter *cf = [[CurrencyFormatter alloc] initWithCurrencyCode:_model.payment.currency.code];
+            _paidView.text = [cf stringForObjectValue:_model.payment.money];
+        }
+            break;
     }
 }
 
-- (void)controllerDidChangeContent:(NSFetchedResultsController *)controller
-{
-    if (self.isViewLoaded && self.view.window) {
-        [[self tableView] endUpdates];
-    }
+- (void)controllerDidChangeContent:(NSFetchedResultsController *)controller {
+    [self.tableView endUpdates];
 }
 
 #pragma mark - MCGenericAdBannerTableViewController
@@ -216,7 +231,7 @@ typedef NS_ENUM(BOOL, ChildViewStatus) {
 - (void)tableView:(UITableView *)tableView willDisplayCell:(UITableViewCell *)cell forRowAtIndexPath:(NSIndexPath *)indexPath {
     MCPaymentPresenceTableViewCell_iPhone *paymentPresenceCell = (MCPaymentPresenceTableViewCell_iPhone *)cell;
     // Set the cell contents
-    MCPaymentPresence *paymentPresence = [_dataController objectAtIndexPath:indexPath];
+    MCPaymentPresence *paymentPresence = [_model.peoplePresenceController objectAtIndexPath:indexPath];
     [paymentPresenceCell updatePaymentPresence:paymentPresence];
 }
 
@@ -226,24 +241,21 @@ typedef NS_ENUM(BOOL, ChildViewStatus) {
 
 #pragma mark - UITableViewDataSource
 
-- (NSInteger)numberOfSectionsInTableView:(UITableView *)tableView
-{
+- (NSInteger)numberOfSectionsInTableView:(UITableView *)tableView {
     // Return the number of sections.
     return 1;
 }
 
-- (NSInteger)tableView:(UITableView *)tableView numberOfRowsInSection:(NSInteger)section
-{
+- (NSInteger)tableView:(UITableView *)tableView numberOfRowsInSection:(NSInteger)section {
     // Return the number of rows in the section.
-    return [[_dataController fetchedObjects] count];
+    return _model.peoplePresenceController.fetchedObjects.count;
 }
 
-- (UITableViewCell *)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath
-{
+- (UITableViewCell *)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath {
     MCPaymentPresenceTableViewCell_iPhone *cell = [tableView dequeueReusableCellWithIdentifier:@"paymentPresenceCell_iPhone" forIndexPath:indexPath];
     
     // Set the cell contents
-    MCPaymentPresence *thisCellsPresence = [_dataController objectAtIndexPath:indexPath];
+    MCPaymentPresence *thisCellsPresence = [_model.peoplePresenceController objectAtIndexPath:indexPath];
     
     // Set the cell alignment to headerView stuff
     NSLayoutConstraint *payerViewToCellNameLabel = [NSLayoutConstraint constraintWithItem:_payerNameField attribute:NSLayoutAttributeLeading relatedBy:NSLayoutRelationEqual toItem:[cell nameLabel] attribute:NSLayoutAttributeLeading multiplier:1.0 constant:-6.0];
@@ -257,55 +269,10 @@ typedef NS_ENUM(BOOL, ChildViewStatus) {
 
 #pragma mark - UIViewController
 
-- (void)viewDidLoad {
-    [super viewDidLoad];
-    // Do any additional setup after loading the view from its nib.
+- (void)loadView {
+    [super loadView];
     
-    [[MCWeAllPayStoreController defaultStore] beginUndoGroup];
-    
-    // When _thisPayment was not passed along a new one should be created.
-    if (!_thisPayment) {
-        _thisPayment = [_tonightsBill addPayment];
-        _isNew = YES;
-        if (_pathComponentsToOpen) {
-            _thisPayment.payingPerson = _pathComponentsToOpen.lastObject;
-        }
-//        didSomethingChange = YES;
-    } else {
-        _isNew = NO;
-    }
-    
-    __weak typeof(self) weakSelf = self;
-    [_model prepareForUseWithPayment:_thisPayment andChangeHandler:^(MCPayment * _Nonnull payment) {
-        [weakSelf showCategory];
-        weakSelf.payerPicture.image = payment.payingPerson.picture;
-        weakSelf.payerNameField.text = payment.payingPerson.getFullName;
-    }];
-    
-    // If tonight's bill wasn't passed along.
-    NSParameterAssert(_tonightsBill);
-    
-    _payerTextInputPicker = [[MCPayerTextInputPicker alloc] initWith:_model and:_payerNameField];
-    _itemViewDelegate = [[MCDescriptionOfPaymentTextInputValidator alloc] initWithModel:_model andTextField:_itemView];
-    
-    // Make sure a tap in the background dismisses the keyboard as well.
-    UITapGestureRecognizer *thatTickles = [[UITapGestureRecognizer alloc] initWithTarget:self action:@selector(tappedInTheBackground:)];
-    [thatTickles setCancelsTouchesInView:YES];
-    [[self tableView] addGestureRecognizer:thatTickles];
-}
-
-- (void)viewWillAppear:(BOOL)animated {
-    [super viewWillAppear:animated];
-    
-    [self setNeedsStatusBarAppearanceUpdate];
-    
-    if (self.adBannerEngine.isReady) {
-        self.worstSalesPitchEverView.alpha = 1;
-    } else {
-        self.worstSalesPitchEverView.alpha = 0;
-    }
-    
-    // Navigationbar stuff
+    // Load the titleView for the title bar.
     if (!_twoLabelTitleView) {
         _twoLabelTitleView = [[NSBundle mainBundle] loadNibNamed:@"MCTwoLabelsTitleView" owner:self options:nil][0];
         if (_isNew) {
@@ -318,25 +285,60 @@ typedef NS_ENUM(BOOL, ChildViewStatus) {
         [[self navigationItem] setTitleView:_twoLabelTitleView];
     }
     
-    if (!_dataController) {
-        _dataController = [[MCWeAllPayStoreController defaultStore] paymentPresenceDataControllerForDelegate:self];
-        CurrencyFormatter *cf = [[CurrencyFormatter alloc] initWithCurrencyCode:_thisPayment.currency.code];
-        _paidView.text = [cf stringForObjectValue:_thisPayment.money];
-        [[self tableView] reloadData];
-        _selectCurrencyTableViewController = ChildViewStatusIsNotOpened;
+    // Make sure a tap in the background dismisses the keyboard as well.
+    UITapGestureRecognizer *thatTickles = [[UITapGestureRecognizer alloc] initWithTarget:self action:@selector(tappedInTheBackground:)];
+    [thatTickles setCancelsTouchesInView:YES];
+    [[self tableView] addGestureRecognizer:thatTickles];
+}
+
+- (void)viewDidLoad {
+    [super viewDidLoad];
+    // Do any additional setup after loading the view from its nib.
+    
+    _payerTextInputPicker = [[MCPayerTextInputPicker alloc] initWith:_model and:_payerNameField];
+    _itemViewDelegate = [[MCDescriptionOfPaymentTextInputValidator alloc] initWithModel:_model andTextField:_itemView];
+}
+
+- (void)viewWillAppear:(BOOL)animated {
+    [super viewWillAppear:animated];
+    
+    [self setNeedsStatusBarAppearanceUpdate];
+    
+    if (self.adBannerEngine.isReady) {
+        self.worstSalesPitchEverView.alpha = 1;
+    } else {
+        self.worstSalesPitchEverView.alpha = 0;
     }
-    [[self tableView] reloadData];
+
+    _model.peoplePresenceController.delegate = self;
+    NSError *fetchError;
+    [_model.peoplePresenceController performFetch:&fetchError];
+    if (fetchError) {
+        NSLog(@"Unable to fetch people present: %@", fetchError.localizedDescription);
+    } else {
+        [self.tableView reloadData];
+    }
+    
+    // TODO: Need to clean this uncommented code
+//    if (!_dataController) {
+//        _dataController = [[MCWeAllPayStoreController defaultStore] paymentPresenceDataControllerForDelegate:self];
+//        CurrencyFormatter *cf = [[CurrencyFormatter alloc] initWithCurrencyCode:_model.payment.currency.code];
+//        _paidView.text = [cf stringForObjectValue:_model.payment.money];
+//        [[self tableView] reloadData];
+//        _selectCurrencyTableViewController = ChildViewStatusIsNotOpened;
+//    }
+//    [[self tableView] reloadData];
     
     // Fill in the form if data is present.
     _payerNameField.text = _model.payment.payingPerson.getFullName;
     _itemView.text = _model.payment.descriptionOfPayment;
-    if ([_thisPayment payingPerson]) {
-        _payerPicture.image = _thisPayment.payingPerson.picture;
+    if (_model.payment.payingPerson) {
+        _payerPicture.image = _model.payment.payingPerson.picture;
     }
     [self showCategory];
     if (!_isNew || _selectCurrencyTableViewController == ChildViewStatusIsOpened) {
-        CurrencyFormatter *cf = [[CurrencyFormatter alloc] initWithCurrencyCode:_thisPayment.currency.code];
-        _paidView.text = [cf stringForObjectValue:_thisPayment.money];
+        CurrencyFormatter *cf = [[CurrencyFormatter alloc] initWithCurrencyCode:_model.payment.currency.code];
+        _paidView.text = [cf stringForObjectValue:_model.payment.money];
     }
 }
 
@@ -348,7 +350,7 @@ typedef NS_ENUM(BOOL, ChildViewStatus) {
         _selectCurrencyTableViewController = ChildViewStatusIsOpened;
         UINavigationController *navController = (UINavigationController *)segue.destinationViewController;
         SelectCurrencyTableViewController *selectCurrencyViewController = (SelectCurrencyTableViewController *)navController.viewControllers.firstObject;
-        selectCurrencyViewController.currencyUpdateModel = [[PaymentUpdateCurrencyModel alloc] initWith:_thisPayment];
+        selectCurrencyViewController.currencyUpdateModel = [[PaymentUpdateCurrencyModel alloc] initWith:_model.payment];
     }
     if ([segue.identifier isEqualToString:@"selectCategory"]) {
         UINavigationController *navigationController = (UINavigationController *)segue.destinationViewController;

@@ -187,7 +187,7 @@
     UINavigationController *navPaymentViewController = [storyboard instantiateViewControllerWithIdentifier:@"navPaymentViewController"];
     MCPaymentViewController *paymentViewController = (MCPaymentViewController *)[navPaymentViewController viewControllers][0];
     paymentViewController.pathComponentsToOpen = pathDuringOpening;
-    paymentViewController.tonightsBill = tonightsBill;
+    [paymentViewController prepareForUseWithEvent:tonightsBill];
     [navController presentViewController:navPaymentViewController animated:YES completion:nil];
     // open tonightsBill
     UIViewController *allTripsViewController = navController.viewControllers[0];

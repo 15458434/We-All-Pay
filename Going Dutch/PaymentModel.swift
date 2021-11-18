@@ -14,11 +14,23 @@ import UIKit
     private var changeHandler: ((_ payment: MCPayment) -> ())!
     
     @objc(prepareForUseWithPayment:andChangeHandler:) func prepareForUse(with payment: MCPayment, and changeHandler:@escaping ((_ payment: MCPayment) -> ())) {
+        func createPeoplePresenceController(for payment: MCPayment) {
+            let request = MCPaymentPresence.fetchRequest()
+            request.relationshipKeyPathsForPrefetching = [ "person", "payment", "payment.currency", "onWhichBill.mainCurrency", "payment.exchangeRate" ]
+            request.sortDescriptors = [NSSortDescriptor(keyPath: \MCPaymentPresence.dateCreated, ascending: false)]
+            request.predicate = NSPredicate(format: "payment = %@", payment)
+            
+            peoplePresenceController = NSFetchedResultsController(fetchRequest: request, managedObjectContext: payment.managedObjectContext!, sectionNameKeyPath: nil, cacheName: nil)
+            
+        }
         self.payment = payment
+        createPeoplePresenceController(for: payment)
         currencyFormatter = CurrencyFormatter(currencyCode: payment.currency!.code!)
         
         self.changeHandler = changeHandler
     }
+    
+    private(set) var peoplePresenceController: NSFetchedResultsController<MCPaymentPresence>!
     
     var arrayOfPeoplePresent: [MCPerson] {
         return self.payment.onWhichBill!.getArrayOfPeopleSortedOnFullNames()
