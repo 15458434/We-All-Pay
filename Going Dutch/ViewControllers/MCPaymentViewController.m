@@ -26,6 +26,11 @@ typedef NS_ENUM(BOOL, ChildViewStatus) {
     ChildViewStatusIsOpened
 };
 
+static void * PayingPersonContext = &PayingPersonContext;
+static void * DescriptionOfPaymentContext = &DescriptionOfPaymentContext;
+static void * MoneyContext = &MoneyContext;
+static void * CategoryIdContext = &CategoryIdContext;
+
 @interface MCPaymentViewController () <MCAdBannerEngineDelegate>
 
 @property (weak, nonatomic) IBOutlet UITextField *payerNameField;
@@ -98,7 +103,7 @@ typedef NS_ENUM(BOOL, ChildViewStatus) {
     }
     [[MCWeAllPayStoreController defaultStore] saveMainThreadContext];
     [self.navigationController.presentingViewController dismissViewControllerAnimated:YES completion:^{
-        [WhoPayingUserDefaultsStoreInterface sendToUserDefaultsStoreInterface:_model.payment.onWhichBill];
+        [WhoPayingUserDefaultsStoreInterface sendToUserDefaultsStoreInterface:self.model.payment.onWhichBill];
     }];
 }
 
@@ -125,20 +130,6 @@ typedef NS_ENUM(BOOL, ChildViewStatus) {
     [self.view endEditing:YES];
 }
 
-- (void)showCategory {
-    // Get category picture.
-    NSArray *pictureObjects = CategoryPictureStoreController.shared.pictureObjects;
-    CategoryPictureObject *categoryObject = pictureObjects[_model.payment.categoryId.shortValue];
-    if (categoryObject.categoryId > 0) {
-        _categoryView.image = categoryObject.largePicture;
-        [_categoryButton setTitle:categoryObject.categoryDescription forState:UIControlStateNormal];
-    } else {
-        NSString *buttonText = NSLocalizedString(@"Select Category", @"Select Category");
-        _categoryView.image = categoryObject.largePicture;
-        [_categoryButton setTitle:buttonText forState:UIControlStateNormal];
-    }
-}
-
 - (void)prepareForUseWithEvent:(MCSharedBill *)event {
     NSParameterAssert(event);
     [[MCWeAllPayStoreController defaultStore] beginUndoGroup];
@@ -148,11 +139,8 @@ typedef NS_ENUM(BOOL, ChildViewStatus) {
         newPayment.payingPerson = _pathComponentsToOpen.lastObject;
     }
     
-    __weak typeof(self) weakSelf = self;
     [_model prepareForUseWithPayment:newPayment andChangeHandler:^(MCPayment * _Nonnull payment) {
-        [weakSelf showCategory];
-        weakSelf.payerPicture.image = payment.payingPerson.picture;
-        weakSelf.payerNameField.text = payment.payingPerson.getFullName;
+        
     }];
 }
 
@@ -160,11 +148,8 @@ typedef NS_ENUM(BOOL, ChildViewStatus) {
     NSParameterAssert(payment);
     [[MCWeAllPayStoreController defaultStore] beginUndoGroup];
     _isNew = NO;
-    __weak typeof(self) weakSelf = self;
     [_model prepareForUseWithPayment:payment andChangeHandler:^(MCPayment * _Nonnull payment) {
-        [weakSelf showCategory];
-        weakSelf.payerPicture.image = payment.payingPerson.picture;
-        weakSelf.payerNameField.text = payment.payingPerson.getFullName;
+        
     }];
 }
 
@@ -315,31 +300,22 @@ typedef NS_ENUM(BOOL, ChildViewStatus) {
     [_model.peoplePresenceController performFetch:&fetchError];
     if (fetchError) {
         NSLog(@"Unable to fetch people present: %@", fetchError.localizedDescription);
-    } else {
-        [self.tableView reloadData];
     }
     
-    // TODO: Need to clean this uncommented code
-//    if (!_dataController) {
-//        _dataController = [[MCWeAllPayStoreController defaultStore] paymentPresenceDataControllerForDelegate:self];
-//        CurrencyFormatter *cf = [[CurrencyFormatter alloc] initWithCurrencyCode:_model.payment.currency.code];
-//        _paidView.text = [cf stringForObjectValue:_model.payment.money];
-//        [[self tableView] reloadData];
-//        _selectCurrencyTableViewController = ChildViewStatusIsNotOpened;
-//    }
-//    [[self tableView] reloadData];
+    NSKeyValueObservingOptions options = NSKeyValueObservingOptionInitial | NSKeyValueObservingOptionNew;
+    [self.model.payment addObserver:self forKeyPath:@"payingPerson" options:options context:PayingPersonContext];
+    [self.model.payment addObserver:self forKeyPath:@"descriptionOfPayment" options:options context:DescriptionOfPaymentContext];
+    [self.model.payment addObserver:self forKeyPath:@"money" options:options context:MoneyContext];
+    [self.model.payment addObserver:self forKeyPath:@"categoryId" options:options context:CategoryIdContext];
+}
+
+- (void)viewWillDisappear:(BOOL)animated {
+    [super viewWillDisappear:animated];
     
-    // Fill in the form if data is present.
-    _payerNameField.text = _model.payment.payingPerson.getFullName;
-    _itemView.text = _model.payment.descriptionOfPayment;
-    if (_model.payment.payingPerson) {
-        _payerPicture.image = _model.payment.payingPerson.picture;
-    }
-    [self showCategory];
-    if (!_isNew || _selectCurrencyTableViewController == ChildViewStatusIsOpened) {
-        CurrencyFormatter *cf = [[CurrencyFormatter alloc] initWithCurrencyCode:_model.payment.currency.code];
-        _paidView.text = [cf stringForObjectValue:_model.payment.money];
-    }
+    [self.model.payment removeObserver:self forKeyPath:@"payingPerson" context:PayingPersonContext];
+    [self.model.payment removeObserver:self forKeyPath:@"descriptionOfPayment" context:DescriptionOfPaymentContext];
+    [self.model.payment removeObserver:self forKeyPath:@"money" context:MoneyContext];
+    [self.model.payment removeObserver:self forKeyPath:@"categoryId" context:CategoryIdContext];
 }
 
 - (void)prepareForSegue:(UIStoryboardSegue *)segue sender:(id)sender {
@@ -355,9 +331,8 @@ typedef NS_ENUM(BOOL, ChildViewStatus) {
     if ([segue.identifier isEqualToString:@"selectCategory"]) {
         UINavigationController *navigationController = (UINavigationController *)segue.destinationViewController;
         SelectCategoryTableViewController *destinationViewController = (SelectCategoryTableViewController *)navigationController.viewControllers.firstObject;
-        __weak typeof(self) weakSelf = self;
         [destinationViewController prepareForUseWithPayment:_model.payment andChangeHandler:^(MCPayment * _Nonnull payment) {
-            [weakSelf showCategory];
+            
         }];
     }
 }
@@ -374,6 +349,94 @@ typedef NS_ENUM(BOOL, ChildViewStatus) {
 - (void)awakeFromNib {
     [super awakeFromNib];
     _selectCurrencyTableViewController = ChildViewStatusIsNotOpened;
+}
+
+- (void)observeValueForKeyPath:(NSString *)keyPath ofObject:(id)object change:(NSDictionary<NSKeyValueChangeKey,id> *)change context:(void *)context {
+#ifdef DEBUG
+        NSLog(@"change: %@", change);
+#endif
+    if (context == PayingPersonContext) {
+        NSNumber *changeKeyNumber = (NSNumber *)change[NSKeyValueChangeKindKey];
+        NSKeyValueChange keyValueChange = changeKeyNumber.unsignedIntegerValue;
+        switch (keyValueChange) {
+            case NSKeyValueChangeSetting: {
+                id new = change[NSKeyValueChangeNewKey];
+                if ([new isKindOfClass:[MCPerson class]]) {
+                    _payerNameField.text = ((MCPerson *)new).getFullName;
+                    if (_model.payment.payingPerson) {
+                        _payerPicture.image = _model.payment.payingPerson.picture;
+                    }
+                } else {
+                    _payerNameField.text = nil;
+                    _payerPicture.image = nil;
+                }
+            }
+                break;
+            default:
+                break;
+        }
+    } else if (context == DescriptionOfPaymentContext) {
+        NSNumber *changeKeyNumber = (NSNumber *)change[NSKeyValueChangeKindKey];
+        NSKeyValueChange keyValueChange = changeKeyNumber.unsignedIntegerValue;
+        switch (keyValueChange) {
+            case NSKeyValueChangeSetting: {
+                id new = change[NSKeyValueChangeNewKey];
+                if ([new isKindOfClass:[NSString class]]) {
+                    _itemView.text = _model.payment.descriptionOfPayment;
+                } else {
+                    _itemView.text = nil;
+                }
+            }
+                break;
+            default:
+                break;
+        }
+    } else if (context == MoneyContext) {
+        NSNumber *changeKeyNumber = (NSNumber *)change[NSKeyValueChangeKindKey];
+        NSKeyValueChange keyValueChange = changeKeyNumber.unsignedIntegerValue;
+        switch (keyValueChange) {
+            case NSKeyValueChangeSetting: {
+                id new = change[NSKeyValueChangeNewKey];
+                if ([new isKindOfClass:[NSNumber class]]) {
+                    _paidView.text = [_model.currencyFormatter stringForObjectValue:_model.payment.money];
+                } else {
+                    _paidView.text = nil;
+                }
+            }
+                break;
+            default:
+                break;
+        }
+    } else if (context == CategoryIdContext) {
+        NSNumber *changeKeyNumber = (NSNumber *)change[NSKeyValueChangeKindKey];
+        NSKeyValueChange keyValueChange = changeKeyNumber.unsignedIntegerValue;
+        switch (keyValueChange) {
+            case NSKeyValueChangeSetting: {
+                id new = change[NSKeyValueChangeNewKey];
+                if ([new isKindOfClass:[NSNumber class]]) {
+                    NSArray *pictureObjects = CategoryPictureStoreController.shared.pictureObjects;
+                    CategoryPictureObject *categoryObject = pictureObjects[((NSNumber *)new).shortValue];
+                    if (categoryObject.categoryId > 0) {
+                        _categoryView.image = categoryObject.largePicture;
+                        [_categoryButton setTitle:categoryObject.categoryDescription forState:UIControlStateNormal];
+                    } else {
+                        NSString *buttonText = NSLocalizedString(@"Select Category", @"Select Category");
+                        _categoryView.image = categoryObject.largePicture;
+                        [_categoryButton setTitle:buttonText forState:UIControlStateNormal];
+                    }
+                } else {
+                    NSArray *pictureObjects = CategoryPictureStoreController.shared.pictureObjects;
+                    CategoryPictureObject *categoryObject = pictureObjects[((NSNumber *)new).shortValue];
+                    NSString *buttonText = NSLocalizedString(@"Select Category", @"Select Category");
+                    _categoryView.image = categoryObject.largePicture;
+                    [_categoryButton setTitle:buttonText forState:UIControlStateNormal];
+                }
+            }
+                break;
+            default:
+                break;
+        }
+    }
 }
 
 @end
