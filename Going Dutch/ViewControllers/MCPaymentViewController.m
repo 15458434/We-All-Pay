@@ -139,18 +139,14 @@ static void * CategoryIdContext = &CategoryIdContext;
         newPayment.payingPerson = _pathComponentsToOpen.lastObject;
     }
     
-    [_model prepareForUseWithPayment:newPayment andChangeHandler:^(MCPayment * _Nonnull payment) {
-        
-    }];
+    [_model prepareForUseWithPayment:newPayment];
 }
 
 - (void)prepareForUseWithPayment:(MCPayment *)payment {
     NSParameterAssert(payment);
     [[MCWeAllPayStoreController defaultStore] beginUndoGroup];
     _isNew = NO;
-    [_model prepareForUseWithPayment:payment andChangeHandler:^(MCPayment * _Nonnull payment) {
-        
-    }];
+    [_model prepareForUseWithPayment:payment];
 }
 
 #pragma mark - NSFetchedResultsControllerDelegate
