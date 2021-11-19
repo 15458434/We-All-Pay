@@ -26,8 +26,7 @@ enum CancelButtonPressed {
     case notPressed, isPressed
 }
 
-final class PaymentViewController: MCGenericAdBannerTableViewController, AdBannerEngineDelegate, MCTonightsBillTransfer, MCThisPaymentProtocol, MCDismissMeBlockProtocol, MCDismissKeyboardProtocol, MCPathComponentsToOpenProtocol, UITextFieldDelegate, NSFetchedResultsControllerDelegate {
-    public var pathComponentsToOpen: [Any]!
+final class PaymentViewController: MCGenericAdBannerTableViewController, AdBannerEngineDelegate, MCDismissMeBlockProtocol, MCDismissKeyboardProtocol, MCPathComponentsToOpenProtocol, UITextFieldDelegate, NSFetchedResultsControllerDelegate {
 
     // MARK: IB Outlet
     @IBOutlet var itemField: UITextField!
@@ -43,21 +42,20 @@ final class PaymentViewController: MCGenericAdBannerTableViewController, AdBanne
     var didSomethingChange: DidSomethingChange?
     var isNew: IsNew?
     
-    var dataController: NSFetchedResultsController<MCPaymentPresence>!
     var paymentPresenceArray: [MCPaymentPresence]!
-    
-    var thisPayment: MCPayment!
-    var tonightsBill: MCSharedBill!
-    var writableTonightsBill: MCSharedBill!
     
     var dismissMe: (()->())?
     
     var mainCancelIsPressed = CancelButtonPressed.notPressed
     
+    private var payingPersonObservation: NSKeyValueObservation!
+    private var descriptionOfPaymentObservation: NSKeyValueObservation!
+    private var moneyObservation:NSKeyValueObservation!
+    private var categoryIdObservation: NSKeyValueObservation!
+    
     // MARK: IB Actions
     @IBAction func mainCancelPressed(_ sender: UIButton) {
         mainCancelIsPressed = .isPressed
-        dataController.delegate = nil
         if MCWeAllPayStoreController.defaultStore().mainThreadContext.undoManager?.canUndo == true {
             MCWeAllPayStoreController.defaultStore().endUndoGroupAndUndo()
         } else {
@@ -68,12 +66,10 @@ final class PaymentViewController: MCGenericAdBannerTableViewController, AdBanne
     }
     
     @IBAction func mainDonePressed(_ sender: UIButton) {
-        let now = Date()
-        tonightsBill.dateModified = now
         MCWeAllPayStoreController.defaultStore().endUndoGroupAndProcess()
         MCWeAllPayStoreController.defaultStore().saveMainThreadContext()
         navigationController!.presentingViewController!.dismiss(animated: true, completion: { () -> Void in
-            WhoPayingUserDefaultsStoreInterface.sendToUserDefaultsStoreInterface(self.tonightsBill)
+            WhoPayingUserDefaultsStoreInterface.sendToUserDefaultsStoreInterface(self.model.payment.onWhichBill)
         })
         dismissMe?()
     }
@@ -90,63 +86,25 @@ final class PaymentViewController: MCGenericAdBannerTableViewController, AdBanne
         
     }
     
-    // MARK: New in this class
-    private func reloadCategoryImageView() {
-        let categoryId = thisPayment.categoryId!.intValue
-        let categoryObject = CategoryPictureStoreController.shared.pictureObjects[categoryId]
-        if categoryId > 0 {
-            categoryImage.image = categoryObject.largePicture
-        } else {
-            categoryImage.image = nil
-        }
+    @objc(prepareForUseWithPathComponentsToOpen:) func prepareForUse(with pathComponentsToOpen: [NSManagedObject]) {
+        let event = pathComponentsToOpen[0] as! MCSharedBill
+        self.prepareForUse(with: event)
+        let predefinedPayingPerson = pathComponentsToOpen[1] as! MCPerson
+        model.update(payingPerson: predefinedPayingPerson)
     }
     
-    private func setTextForCategoryButton() {
-        let categoryId = thisPayment.categoryId!.intValue
-        let categoryObject = CategoryPictureStoreController.shared.pictureObjects[categoryId]
-        if categoryId > 0 {
-            categoryImage.image = categoryObject.largePicture
-            categoryButton.setTitle(categoryObject.categoryDescription, for: UIControl.State())
-        } else {
-            categoryImage.image = nil
-            let title = NSLocalizedString("Select Category", comment: "Text of the payment category selection button")
-            categoryButton.setTitle(title, for: UIControl.State())
-        }
-        categoryButton.sizeToFit()
+    @objc(prepareForUseWithEvent:) func prepareForUse(with event: MCSharedBill) {
+        MCWeAllPayStoreController.defaultStore().beginUndoGroup()
+        let newPayment = event.addPayment()!
+        title = NSLocalizedString("New Payment", comment: "Screen name saying this is a new payment.")
+        isNew = .isNew
+        model.prepareForUse(with: newPayment)
     }
     
-    private func performFetchAndReloadTableView(_ notification: Notification) {
-        print("Should not be executed")
-    }
-    
-    private func performFetch() throws {
-        do {
-            try dataController.performFetch()
-        } catch let fetchError {
-            print("Error fetching from WeAllPayStorage: \(fetchError)")
-        }
-    }
-    
-    func reloadPayerView() {
-        setTextPayerButton()
-        payerView.image = thisPayment?.payingPerson?.picture
-    }
-    
-    private func setTextPayerButton() {
-        guard let payingPerson = thisPayment.payingPerson else {
-            selectButton.invalidateIntrinsicContentSize()
-            return
-        }
-        selectButton.setTitle(payingPerson.getFullName(), for: UIControl.State())
-        selectButton.invalidateIntrinsicContentSize()
-    }
-    
-    private func respondToPresenceOfPathComponentsFromAppLaunch() {
-        if pathComponentsToOpen != nil {
-            tonightsBill = (pathComponentsToOpen![0] as! MCSharedBill)
-            thisPayment = tonightsBill.addPayment()
-            thisPayment.payingPerson = (pathComponentsToOpen![1] as! MCPerson)
-        }
+    @objc(prepareForUseWithPayment:) func prepareForUse(with payment: MCPayment) {
+        MCWeAllPayStoreController.defaultStore().beginUndoGroup()
+        isNew = .isNotNew
+        model.prepareForUse(with: payment)
     }
     
     // MARK: DismissKeyboardProtocol
@@ -157,11 +115,10 @@ final class PaymentViewController: MCGenericAdBannerTableViewController, AdBanne
     // MARK: UITextFieldDelegate 
     func textFieldShouldBeginEditing(_ textField: UITextField) -> Bool {
         if textField == paidField {
-            if thisPayment.money?.doubleValue ?? 0.0 <= 0.005 {
+            if model.payment.money?.doubleValue ?? 0.0 <= 0.005 {
                 paidField.text = ""
             } else {
-                let cf = CurrencyFormatter(currencyCode: thisPayment.currency!.code!)
-                paidField.text = cf.editingString(for: thisPayment.money ?? NSNumber(value: 0)) ?? nil
+                paidField.text = model.currencyFormatter.editingString(for: model.payment.money ?? NSNumber(value: 0)) ?? nil
             }
         }
         return true
@@ -179,18 +136,11 @@ final class PaymentViewController: MCGenericAdBannerTableViewController, AdBanne
         if mainCancelIsPressed == CancelButtonPressed.notPressed {
             switch textField {
             case itemField:
-                thisPayment.descriptionOfPayment = itemField.text
+                model.update(descriptionOfPayment: itemField.text ?? "")
             case paidField:
-                let cf = CurrencyFormatter(currencyCode: thisPayment.currency!.code!)
-                MCWeAllPayStoreController.defaultStore().beginUndoGroupWithoutRegistration()
-                if paidField.text == nil {
-                    thisPayment.money = nil
-                } else {
-                    thisPayment.money = cf.doubleFromString(paidField.text!)
-                }
-                thisPayment.recalculateAveragePeopleOweAndStore()
-                MCWeAllPayStoreController.defaultStore().endUndoGroupAndProcessWithoutRegistration()
-                paidField.text = cf.string(for: thisPayment.money ?? NSNumber(value: 0))
+                model.beginUpdates()
+                model.update(money: model.currencyFormatter.doubleFromString(paidField.text ?? ""))
+                model.endUpdates()
             default:
                 debugPrint("textFieldDidEndEditing for unknown textfield: \(textField)")
             }
@@ -282,14 +232,14 @@ final class PaymentViewController: MCGenericAdBannerTableViewController, AdBanne
     }
     
     override func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
-        return dataController.fetchedObjects!.count
+        return model.peoplePresenceController.fetchedObjects!.count
     }
     
     override func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
         let cell: MCPaymentPresenceTableViewCell = tableView.dequeueReusableCell(withIdentifier: "paymentPresenceTableViewCell", for: indexPath) as! MCPaymentPresenceTableViewCell
         cell.accessibilityIdentifier = "PaymentPresenceTableViewCell-\(indexPath.row)"
         
-        let paymentPresenceForThisCell: MCPaymentPresence = dataController.object(at: indexPath)
+        let paymentPresenceForThisCell: MCPaymentPresence = model.peoplePresenceController.object(at: indexPath)
         cell.nameLabel.text = paymentPresenceForThisCell.person!.getFullName()
         cell.personView.image = paymentPresenceForThisCell.person!.thumbnail
         cell.theSwitch.setOn(paymentPresenceForThisCell.isPersonPresent!.boolValue, animated: false)
@@ -311,67 +261,97 @@ final class PaymentViewController: MCGenericAdBannerTableViewController, AdBanne
     
     // MARK: UIViewController
     
-    override func viewDidLoad() {
-        
-        super.viewDidLoad()
-        
-        self.respondToPresenceOfPathComponentsFromAppLaunch()
-        
-        MCWeAllPayStoreController.defaultStore().beginUndoGroup()
+    override func loadView() {
+        super.loadView()
         
         startResigningFirstResponderOnBackgroundTap()
     }
     
     override func viewWillAppear(_ animated: Bool) {
+        func createKVO() {
+            self.payingPersonObservation = self.observe(\.model!.payment!.payingPerson, options: [.initial, .new], changeHandler: { mySelf, change in
+                guard let newValue = change.newValue as? MCPerson else {
+                    mySelf.selectButton.invalidateIntrinsicContentSize()
+                    return
+                }
+                
+                mySelf.selectButton.setTitle(newValue.getFullName(), for: .normal)
+                mySelf.selectButton.invalidateIntrinsicContentSize()
+                
+                mySelf.payerView.image = newValue.picture
+            })
+            self.descriptionOfPaymentObservation = self.observe(\.model!.payment!.descriptionOfPayment, options: [.initial, .new], changeHandler: { mySelf, change in
+                guard let newValue = change.newValue as? String else {
+                    return
+                }
+                
+                mySelf.itemField.text = newValue
+            })
+            self.moneyObservation = self.observe(\.model!.payment!.money, options: [.initial, .new], changeHandler: { mySelf, change in
+                guard let newValue = change.newValue as? NSNumber else {
+                    mySelf.paidField.text = nil
+                    return
+                }
+                
+                mySelf.paidField.text = mySelf.model.currencyFormatter.string(for: newValue)
+            })
+            self.categoryIdObservation = self.observe(\.model!.payment!.categoryId, options: [.initial, .new], changeHandler: { mySelf, change in
+                guard let newValue = change.newValue as? NSNumber else {
+                    return
+                }
+                
+                let categoryId = newValue.intValue
+                let categoryObject = CategoryPictureStoreController.shared.pictureObjects[categoryId]
+                if categoryId > 0 {
+                    mySelf.categoryImage.image = categoryObject.largePicture
+                    mySelf.categoryButton.setTitle(categoryObject.categoryDescription, for: .normal)
+                } else {
+                    mySelf.categoryImage.image = nil
+                    let title = NSLocalizedString("Select Category", comment: "Text of the payment category selection button")
+                    mySelf.categoryButton.setTitle(title, for: .normal)
+                }
+                
+                mySelf.categoryButton.sizeToFit()
+            })
+        }
         super.viewWillAppear(animated)
         
-        if thisPayment == nil {
-            thisPayment = tonightsBill.addPayment()
-            let screenTitle = NSLocalizedString("New Payment", comment: "Screen name saying this is a new payment.")
-            title = screenTitle
-            isNew = .isNew
-        } else {
-            itemField.text = thisPayment.descriptionOfPayment
-            if thisPayment.money != nil {
-                let cf = CurrencyFormatter(currencyCode: thisPayment.currency!.code!)
-                paidField.text = cf.string(for: thisPayment.money)
-            }
-            reloadPayerView()
-            setTextPayerButton()
-            isNew = .isNotNew
+        model.peoplePresenceController.delegate = self
+        do {
+            try model.peoplePresenceController.performFetch()
+        } catch let fetchError {
+            print("Error fetching from WeAllPayStorage: \(fetchError)")
         }
         
-        reloadCategoryImageView()
-        setTextForCategoryButton()
-        
-        if dataController == nil {
-            dataController = (MCWeAllPayStoreController.defaultStore().paymentPresenceDataController(forDelegate: self) as! NSFetchedResultsController<MCPaymentPresence>)
-        }
+        createKVO()
     }
     
-    override func viewDidDisappear(_ animated: Bool) {
-        super.viewDidDisappear(animated)
+    override func viewWillDisappear(_ animated: Bool) {
+        func destroyKVO() {
+            self.payingPersonObservation = nil
+            self.descriptionOfPaymentObservation = nil
+            self.moneyObservation = nil
+            self.categoryIdObservation = nil
+        }
+        super.viewWillDisappear(animated)
+        
+        model.peoplePresenceController.delegate = nil
+        
+        destroyKVO()
         
         NotificationCenter.default.removeObserver(self)
-        dataController = nil
     }
     
     override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
         switch (segue.identifier) {
         case let identifier where identifier == "selectPayer_iPad":
             let destination = segue.destination as! SelectPayerTableViewController_iPad
-            destination.tonightsBill = tonightsBill
-            destination.thisPayment = thisPayment
-        
-            destination.dismissMe = {
-                destination.dismiss(animated: true, completion: {
-                    self.reloadPayerView()
-                })
-            }
+            destination.tonightsBill = model.payment.onWhichBill
+            destination.thisPayment = model.payment
         case let identifier where identifier == "openSelectCurrency_iPad":
             MCWeAllPayStoreController.defaultStore().beginUndoGroupWithoutRegistration()
             let destination = segue.destination as! SelectCurrencyTableViewController
-            destination.currencyUpdateModel = PaymentUpdateCurrencyModel(with: thisPayment)
+            destination.currencyUpdateModel = PaymentUpdateCurrencyModel(with: model.payment)
             
             destination.dismissMe = {
                 destination.dismiss(animated: true, completion: {
@@ -380,10 +360,7 @@ final class PaymentViewController: MCGenericAdBannerTableViewController, AdBanne
             }
         case let identifier where identifier == "selectCategory_iPad":
             let destination = segue.destination as! SelectCategoryTableViewController
-            destination.prepareForUse(with: thisPayment) { [unowned self] (payment) in
-                self.reloadCategoryImageView()
-                self.setTextForCategoryButton()
-            }
+            destination.prepareForUse(with: model.payment)
             
             destination.dismissMe = {
                 destination.dismiss(animated: true)

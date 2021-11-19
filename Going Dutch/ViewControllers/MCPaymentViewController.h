@@ -12,8 +12,7 @@
 
 #import "MCGenericAdBannerTableViewController.h"
 
-#import "MCThisPaymentProtocol.h"
-#import "MCPathComponentsToOpenProtocol.h"
+#import "We_all_pay-Swift.h"
 
 @class MCPayment;
 @class MCSharedBill;
@@ -41,7 +40,6 @@ __attribute__((objc_subclassing_restricted))
 @property (nonatomic, readonly) BOOL didSomethingChange;
 @property (nonatomic, readonly) BOOL isNew;
 @property (nonatomic, weak) id delegate;
-@property (nonatomic, strong) NSArray *pathComponentsToOpen;
 
 - (IBAction)mainCancelButtonPressed:(id)sender;
 - (IBAction)mainDoneButtonPressed:(id)sender;

@@ -38,8 +38,6 @@
     self.tonightsBill = event;
 }
 
-#pragma mark - IBActions
-
 - (IBAction)toggleEdit:(id)sender {
     if ([[self childViewControllers][0] toggleEditTableView:sender]) {
         // Set Done Button
@@ -56,8 +54,6 @@
     [_pageViewController peopleOrPaymentsSelectionControlTapped:self];
 }
 
-#pragma mark - private functions
-
 - (void)putBannerOnScreen:(BOOL)animate {
     BOOL isNotPurchased = ![[MCStoreInterface defaultStoreInterface] isProProductPurchased];
     if (isNotPurchased) {
@@ -67,14 +63,14 @@
 #endif
             [UIView animateWithDuration:0.3 delay:0.0 options:UIViewAnimationOptionCurveEaseOut animations:^{
                 self.bottomLayoutCustomContainer.priority = UILayoutPriorityDefaultHigh - 1;
-                [[self view] layoutIfNeeded];
+                [self.view layoutIfNeeded];
             } completion:nil];
         } else {
 #ifdef DEBUG
             NSLog(@"putting banner on screen immediately.");
 #endif
             self.bottomLayoutCustomContainer.priority = UILayoutPriorityDefaultHigh - 1;
-            [[self view] layoutIfNeeded];
+            [self.view layoutIfNeeded];
         }
     } else {
         [self putBannerOffScreen:animate];
@@ -89,28 +85,14 @@
 #endif
         [UIView animateWithDuration:0.3 delay:0.0 options:UIViewAnimationOptionCurveEaseIn animations:^{
             self.bottomLayoutCustomContainer.priority = UILayoutPriorityDefaultHigh + 1;
-            [[self view] layoutIfNeeded];
+            [self.view layoutIfNeeded];
         } completion:nil];
     } else {
 #ifdef DEBUG
         NSLog(@"putting banner off screen immediately.");
 #endif
         self.bottomLayoutCustomContainer.priority = UILayoutPriorityDefaultHigh + 1;
-        [[self view] layoutIfNeeded];
-    }
-}
-
-#pragma mark - AdEngineDelegate
-
-- (void)adEngine:(MCAdEngine *)adEngine putOnScreenBannerView:(GADBannerView *)bannerView {
-    [self putBannerOnScreen:YES];
-}
-
-- (void)adEngine:(MCAdEngine *)adEngine putOffScreenBannerView:(GADBannerView *)bannerView {
-    if (adEngine) {
-        [self putBannerOffScreen:YES];
-    } else {
-        [self putBannerOnScreen:NO];
+        [self.view layoutIfNeeded];
     }
 }
 
@@ -131,6 +113,34 @@
     }
 }
 
+#pragma mark - AdEngineDelegate
+
+- (void)adEngine:(MCAdEngine *)adEngine putOnScreenBannerView:(GADBannerView *)bannerView {
+    [self putBannerOnScreen:YES];
+}
+
+- (void)adEngine:(MCAdEngine *)adEngine putOffScreenBannerView:(GADBannerView *)bannerView {
+    if (adEngine) {
+        [self putBannerOffScreen:YES];
+    } else {
+        [self putBannerOnScreen:NO];
+    }
+}
+
+#pragma mark - MCPathComponentsToOpenProtocol
+
+- (void)prepareForUseWithPathComponentsToOpen:(NSArray<NSManagedObject *> *)pathComponentsToOpen {
+    MCSharedBill *event = (MCSharedBill *)pathComponentsToOpen[0];
+    NSParameterAssert(event);
+    [self updateEventWithObjectID:event.objectID];
+}
+
+#pragma mark - MCGenericAdBannerViewController
+
+- (NSString *)adUnitId {
+    return @"ca-app-pub-5354415674074435/1457854707";
+}
+
 #pragma mark - From UIViewController+WeAllPayStore
 
 - (void)storeDidChange:(NSNotification *)notification {
@@ -142,11 +152,7 @@
     }
 }
 
-#pragma mark - Inherited from super
-
-- (NSString *)adUnitId {
-    return @"ca-app-pub-5354415674074435/1457854707";
-}
+#pragma mark - UIViewController
 
 - (void)loadView {
     [super loadView];
@@ -215,14 +221,7 @@
     }
 }
 
-- (void)dealloc {
-    [[NSNotificationCenter defaultCenter] removeObserver:self];
-}
-
-#pragma mark - Navigation
-
-// In a storyboard-based application, you will often want to do a little preparation before navigation
-- (void)prepareForSegue:(UIStoryboardSegue *)segue sender:(id)sender {    
+- (void)prepareForSegue:(UIStoryboardSegue *)segue sender:(id)sender {
     if ([[segue identifier] isEqualToString:@"pageViewController"]) {
         _pageViewController = (MCSharedBillPageViewController *)[segue destinationViewController];
         _pageViewController.mainViewController = self;
@@ -246,6 +245,14 @@
             }
         }];
     }
+}
+
+#pragma mark - UIResponder
+
+#pragma mark - NSObject
+
+- (void)dealloc {
+    [[NSNotificationCenter defaultCenter] removeObserver:self];
 }
 
 @end

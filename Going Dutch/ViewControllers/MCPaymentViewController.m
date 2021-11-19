@@ -135,10 +135,6 @@ static void * CategoryIdContext = &CategoryIdContext;
     [[MCWeAllPayStoreController defaultStore] beginUndoGroup];
     MCPayment *newPayment = [event addPayment];
     _isNew = YES;
-    if (_pathComponentsToOpen) {
-        newPayment.payingPerson = _pathComponentsToOpen.lastObject;
-    }
-    
     [_model prepareForUseWithPayment:newPayment];
 }
 
@@ -147,6 +143,17 @@ static void * CategoryIdContext = &CategoryIdContext;
     [[MCWeAllPayStoreController defaultStore] beginUndoGroup];
     _isNew = NO;
     [_model prepareForUseWithPayment:payment];
+}
+
+#pragma mark - MCPathComponentsToOpenProtocol
+
+- (void)prepareForUseWithPathComponentsToOpen:(NSArray<NSManagedObject *> *)pathComponentsToOpen {
+    MCSharedBill *event = (MCSharedBill *)pathComponentsToOpen[0];
+    NSParameterAssert(event);
+    [self prepareForUseWithEvent:event];
+    MCPerson *predefinedPayingPerson = (MCPerson *)pathComponentsToOpen[1];
+    NSParameterAssert(predefinedPayingPerson);
+    [_model updatePayingPerson:predefinedPayingPerson];
 }
 
 #pragma mark - NSFetchedResultsControllerDelegate
@@ -327,9 +334,7 @@ static void * CategoryIdContext = &CategoryIdContext;
     if ([segue.identifier isEqualToString:@"selectCategory"]) {
         UINavigationController *navigationController = (UINavigationController *)segue.destinationViewController;
         SelectCategoryTableViewController *destinationViewController = (SelectCategoryTableViewController *)navigationController.viewControllers.firstObject;
-        [destinationViewController prepareForUseWithPayment:_model.payment andChangeHandler:^(MCPayment * _Nonnull payment) {
-            
-        }];
+        [destinationViewController prepareForUseWithPayment:_model.payment];
     }
 }
 
