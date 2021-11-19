@@ -7,18 +7,29 @@
 //
 
 import UIKit
+import CurrencyConverter
 
 @objc(MCPaymentModel) @objcMembers public final class PaymentModel: NSObject {
     @objc public private(set) dynamic var payment: MCPayment!
     private(set) var currencyFormatter: CurrencyFormatter!
-    private var changeHandler: ((_ payment: MCPayment) -> ())!
-    
-    @objc(prepareForUseWithPayment:andChangeHandler:) func prepareForUse(with payment: MCPayment, and changeHandler:@escaping ((_ payment: MCPayment) -> ())) {
+    @objc dynamic var error: NSError?
+
+    @objc(prepareForUseWithPayment:) func prepareForUse(with payment: MCPayment) {
+        func createPeoplePresenceController(for payment: MCPayment) {
+            let request = MCPaymentPresence.fetchRequest()
+            request.relationshipKeyPathsForPrefetching = [ "person", "payment", "payment.currency", "onWhichBill.mainCurrency", "payment.exchangeRate" ]
+            request.sortDescriptors = [NSSortDescriptor(keyPath: \MCPaymentPresence.dateCreated, ascending: false)]
+            request.predicate = NSPredicate(format: "payment = %@", payment)
+            
+            peoplePresenceController = NSFetchedResultsController(fetchRequest: request, managedObjectContext: payment.managedObjectContext!, sectionNameKeyPath: nil, cacheName: nil)
+            
+        }
         self.payment = payment
+        createPeoplePresenceController(for: payment)
         currencyFormatter = CurrencyFormatter(currencyCode: payment.currency!.code!)
-        
-        self.changeHandler = changeHandler
     }
+    
+    private(set) var peoplePresenceController: NSFetchedResultsController<MCPaymentPresence>!
     
     var arrayOfPeoplePresent: [MCPerson] {
         return self.payment.onWhichBill!.getArrayOfPeopleSortedOnFullNames()
@@ -37,25 +48,40 @@ import UIKit
         payingPerson.addPaymentsObject(payment)
         payment.payingPerson = payingPerson
         updateDateModified()
-        changeHandler(payment)
     }
     
     @objc(updateCategoryWithObject:) func update(categoryObject: CategoryPictureObject) {
         payment.categoryId = NSNumber(value: categoryObject.categoryId)
         updateDateModified()
-        changeHandler(payment)
     }
     
     @objc(updateDescriptionOfPayment:) func update(descriptionOfPayment: String) {
         payment.descriptionOfPayment = descriptionOfPayment
         updateDateModified()
-        changeHandler(payment)
     }
     
-    @objc(updateMoney:) func update(money: NSNumber) {
+    @objc(updateMoney:) func update(money: NSNumber?) {
         payment.money = money
         payment.recalculateAveragePeopleOweAndStore()
-        changeHandler(payment)
+    }
+    
+    @objc(updateCurrency:) func update(currency: Currency) {
+        currencyFormatter = CurrencyFormatter(currencyCode: currency.code)
+        let mainThreadContext = payment.managedObjectContext!
+        let newCurrency = MCCurrency(from: currency.code, from: mainThreadContext)
+        let oldCurrency = payment.currency
+        payment.currency = newCurrency
+        if oldCurrency?.sharedBill?.count == 0 && oldCurrency?.payment?.count == 0 {
+            mainThreadContext.delete(oldCurrency!)
+        }
+        
+        payment.setNewCurrencyAndAutomaticallyUpdateExchangeRate(newCurrency) { [weak self] error in
+            guard error == nil else {
+                // TODO: Handle error
+                self?.error = error! as NSError
+                return
+            }
+        }
     }
     
     @nonobjc private func updateDateModified() {

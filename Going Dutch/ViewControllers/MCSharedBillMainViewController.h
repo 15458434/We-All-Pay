@@ -12,9 +12,10 @@
 
 #import "MCTonightsBillTransfer.h"
 #import "MCCurrentViewDelegate.h"
-#import "MCPathComponentsToOpenProtocol.h"
 
 #import "UIViewController+WeAllPayStore.h"
+
+#import "We_all_pay-Swift.h"
 
 @class MCSharedBill;
 
@@ -24,8 +25,6 @@ __attribute__((objc_subclassing_restricted))
 @property (nonatomic) MCSharedBillViewSelector currentView;
 @property (strong, nonatomic) MCSharedBill *tonightsBill;
 @property (nonatomic, strong) MCSharedBill *writableTonightsBill;
-
-@property (strong, nonatomic) NSArray *pathComponentsToOpen;
 
 @property (weak, nonatomic) IBOutlet UISegmentedControl *peopleOrPaymentsSelectionControl;
 

@@ -89,6 +89,9 @@
 		385F5311191C2D140012773D /* MCPersonAddonsTest.m in Sources */ = {isa = PBXBuildFile; fileRef = 3898F33D18F40CC100BFFC61 /* MCPersonAddonsTest.m */; };
 		385F5312191C2D140012773D /* MCSharedBillAddOnsTest.m in Sources */ = {isa = PBXBuildFile; fileRef = 3898F33B18F40B9D00BFFC61 /* MCSharedBillAddOnsTest.m */; };
 		385F5313191C2D140012773D /* WeAllPayStoreTests.m in Sources */ = {isa = PBXBuildFile; fileRef = 38D785FC18DC53C30074B670 /* WeAllPayStoreTests.m */; };
+		385F6AE02747AC5E009ED08D /* MCPathComponentsToOpenProtocol.swift in Sources */ = {isa = PBXBuildFile; fileRef = 385F6ADF2747AC5E009ED08D /* MCPathComponentsToOpenProtocol.swift */; };
+		385F6AE22747CFBF009ED08D /* PaymentStateModelProtocol.swift in Sources */ = {isa = PBXBuildFile; fileRef = 385F6AE12747CFBF009ED08D /* PaymentStateModelProtocol.swift */; };
+		385F6AE62747E45B009ED08D /* PaymentNavigationController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 385F6AE52747E45B009ED08D /* PaymentNavigationController.swift */; };
 		3860575019EE963600BD5B78 /* categoryPictures.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 3860574F19EE963600BD5B78 /* categoryPictures.xcassets */; };
 		3860575519EEB28300BD5B78 /* MCCategoryPictureStoreTest.m in Sources */ = {isa = PBXBuildFile; fileRef = 3860575419EEB28300BD5B78 /* MCCategoryPictureStoreTest.m */; };
 		3863148D235C6D8C00748B9F /* ScreenshotPopulationEngine.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3863148C235C6D8B00748B9F /* ScreenshotPopulationEngine.swift */; };
@@ -448,10 +451,12 @@
 		385F5303191C2C360012773D /* We all pay Tests-Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = "We all pay Tests-Info.plist"; sourceTree = "<group>"; };
 		385F5305191C2C360012773D /* en */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = en; path = en.lproj/InfoPlist.strings; sourceTree = "<group>"; };
 		385F5309191C2C360012773D /* We all pay Tests-Prefix.pch */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = "We all pay Tests-Prefix.pch"; sourceTree = "<group>"; };
+		385F6ADF2747AC5E009ED08D /* MCPathComponentsToOpenProtocol.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MCPathComponentsToOpenProtocol.swift; sourceTree = "<group>"; };
+		385F6AE12747CFBF009ED08D /* PaymentStateModelProtocol.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PaymentStateModelProtocol.swift; sourceTree = "<group>"; };
+		385F6AE52747E45B009ED08D /* PaymentNavigationController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PaymentNavigationController.swift; sourceTree = "<group>"; };
 		3860574419EE904B00BD5B78 /* WeAllPayStore 4.xcdatamodel */ = {isa = PBXFileReference; lastKnownFileType = wrapper.xcdatamodel; path = "WeAllPayStore 4.xcdatamodel"; sourceTree = "<group>"; };
 		3860574F19EE963600BD5B78 /* categoryPictures.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = categoryPictures.xcassets; sourceTree = "<group>"; };
 		3860575419EEB28300BD5B78 /* MCCategoryPictureStoreTest.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = MCCategoryPictureStoreTest.m; sourceTree = "<group>"; };
-		3861739F1A530371000C2EE5 /* MCPathComponentsToOpenProtocol.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = MCPathComponentsToOpenProtocol.h; sourceTree = "<group>"; };
 		3863148C235C6D8B00748B9F /* ScreenshotPopulationEngine.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = ScreenshotPopulationEngine.swift; path = "Going Dutch/ScreenshotPopulationEngine.swift"; sourceTree = SOURCE_ROOT; };
 		3864147C269B183A00590ABA /* Notifications.storyboard */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; path = Notifications.storyboard; sourceTree = "<group>"; };
 		3864147E269B185300590ABA /* NotificationsTableViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NotificationsTableViewController.swift; sourceTree = "<group>"; };
@@ -1291,6 +1296,7 @@
 				38F2370526D012E300A22F9E /* AdBanner */,
 				3890963C26B2E23100B0EF37 /* EmptyMessage */,
 				3814B494270C500000737A06 /* NavigationViewController.swift */,
+				385F6AE52747E45B009ED08D /* PaymentNavigationController.swift */,
 			);
 			name = GenericViewController;
 			sourceTree = "<group>";
@@ -1337,7 +1343,8 @@
 				3801881A1938D8E70085A5AE /* MCDismissKeyboardProtocol.h */,
 				380700A01A16283500C7FB37 /* MCIndexProtocol.h */,
 				380700A21A174FFB00C7FB37 /* MCIsEditingProtocol.h */,
-				3861739F1A530371000C2EE5 /* MCPathComponentsToOpenProtocol.h */,
+				385F6AE12747CFBF009ED08D /* PaymentStateModelProtocol.swift */,
+				385F6ADF2747AC5E009ED08D /* MCPathComponentsToOpenProtocol.swift */,
 				38C3AB141CBCF3200011C10C /* ViewControllerProtocols.swift */,
 			);
 			name = "ViewController Protocols";
@@ -1782,7 +1789,6 @@
 						CreatedOnToolsVersion = 12.5.1;
 					};
 					38572AD1169D437B00969C62 = {
-						DevelopmentTeam = Z6JP26PUUY;
 						LastSwiftMigration = 0940;
 						SystemCapabilities = {
 							com.apple.ApplicationGroups.iOS = {
@@ -2211,6 +2217,7 @@
 				383E0C5D186737EB00AA688D /* MCSharedBillPageViewController.m in Sources */,
 				381179D01A82D1FC00020538 /* MailComposer.swift in Sources */,
 				38B08C591B383A4C00FB84B1 /* MCStoreInterface.swift in Sources */,
+				385F6AE22747CFBF009ED08D /* PaymentStateModelProtocol.swift in Sources */,
 				38ACC5A3236B1FAE000BDEEC /* PaymentModel.swift in Sources */,
 				381275FF1BBD84650004C8C2 /* InfoScreenTableViewController.swift in Sources */,
 				38C700F21D8EC24100D785BB /* LaunchCounter.swift in Sources */,
@@ -2230,6 +2237,7 @@
 				389DE90E197FD41900169645 /* MCCurrency+addons.m in Sources */,
 				3813150C26CBAC3600C27CBB /* MCNotificationTableViewCell.m in Sources */,
 				38641482269B18C400590ABA /* NotificationsModel.swift in Sources */,
+				385F6AE02747AC5E009ED08D /* MCPathComponentsToOpenProtocol.swift in Sources */,
 				38D96ED423E30F5E00C03170 /* MCAdBannerTableViewCell.swift in Sources */,
 				384EC9121BC3008300A80799 /* SelectEmailAddressTableViewController_iPad.swift in Sources */,
 				38B88E2E1D81FF6E0069A44D /* MailComposeViewController.swift in Sources */,
@@ -2238,6 +2246,7 @@
 				38977E5D1B2A31A2008484A4 /* MCSolutionOverViewTableViewCell_iPhone.swift in Sources */,
 				38D6A3E81C73E04300968BB2 /* UIViewControllerRateMeControllerExtension.swift in Sources */,
 				389C2F56193391E300BB9F3E /* MCPaymentPresenceEntityMigrationPolicy.m in Sources */,
+				385F6AE62747E45B009ED08D /* PaymentNavigationController.swift in Sources */,
 				38B7E9521D86F8F600400E72 /* ContactsDataReceiver.swift in Sources */,
 				3812760C1BBE74EF0004C8C2 /* UIViewControllerExtension.swift in Sources */,
 				38D6A3E61C73DF2600968BB2 /* RateMeControllerExtension.swift in Sources */,
@@ -2992,7 +3001,7 @@
 				GCC_WARN_UNINITIALIZED_AUTOS = YES;
 				GCC_WARN_UNUSED_FUNCTION = YES;
 				GCC_WARN_UNUSED_VARIABLE = YES;
-				IPHONEOS_DEPLOYMENT_TARGET = 10.0;
+				IPHONEOS_DEPLOYMENT_TARGET = 12.0;
 				ONLY_ACTIVE_ARCH = YES;
 				OTHER_SWIFT_FLAGS = "";
 				PROVISIONING_PROFILE = "";
@@ -3048,7 +3057,7 @@
 				GCC_WARN_UNINITIALIZED_AUTOS = YES;
 				GCC_WARN_UNUSED_FUNCTION = YES;
 				GCC_WARN_UNUSED_VARIABLE = YES;
-				IPHONEOS_DEPLOYMENT_TARGET = 10.0;
+				IPHONEOS_DEPLOYMENT_TARGET = 12.0;
 				OTHER_CFLAGS = "-DNS_BLOCK_ASSERTIONS=1";
 				OTHER_SWIFT_FLAGS = "";
 				PROVISIONING_PROFILE = "";
@@ -3077,6 +3086,7 @@
 				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer";
 				"CODE_SIGN_IDENTITY[sdk=macosx*]" = "Mac Developer";
 				CURRENT_PROJECT_VERSION = 161;
+				DEVELOPMENT_TEAM = Z6JP26PUUY;
 				EXCLUDED_ARCHS = "$(inherited)";
 				"EXCLUDED_ARCHS[sdk=iphonesimulator*]" = "$(inherited) i386";
 				FRAMEWORK_SEARCH_PATHS = (
@@ -3144,6 +3154,7 @@
 				"CODE_SIGN_IDENTITY[sdk=macosx*]" = "Mac Developer";
 				COPY_PHASE_STRIP = NO;
 				CURRENT_PROJECT_VERSION = 161;
+				DEVELOPMENT_TEAM = Z6JP26PUUY;
 				EXCLUDED_ARCHS = "$(inherited)";
 				"EXCLUDED_ARCHS[sdk=iphonesimulator*]" = "$(inherited) i386";
 				FRAMEWORK_SEARCH_PATHS = (
@@ -3329,7 +3340,7 @@
 				GCC_WARN_UNINITIALIZED_AUTOS = YES;
 				GCC_WARN_UNUSED_FUNCTION = YES;
 				GCC_WARN_UNUSED_VARIABLE = YES;
-				IPHONEOS_DEPLOYMENT_TARGET = 10.0;
+				IPHONEOS_DEPLOYMENT_TARGET = 12.0;
 				ONLY_ACTIVE_ARCH = YES;
 				OTHER_CFLAGS = "-DSCREENSHOTS=1";
 				OTHER_SWIFT_FLAGS = "-DSCREENSHOTS";
@@ -3356,6 +3367,7 @@
 				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer";
 				"CODE_SIGN_IDENTITY[sdk=macosx*]" = "Mac Developer";
 				CURRENT_PROJECT_VERSION = 161;
+				DEVELOPMENT_TEAM = Z6JP26PUUY;
 				EXCLUDED_ARCHS = "$(inherited)";
 				"EXCLUDED_ARCHS[sdk=iphonesimulator*]" = "$(inherited) i386";
 				FRAMEWORK_SEARCH_PATHS = (
@@ -4419,7 +4431,7 @@
 				GCC_WARN_UNINITIALIZED_AUTOS = YES;
 				GCC_WARN_UNUSED_FUNCTION = YES;
 				GCC_WARN_UNUSED_VARIABLE = YES;
-				IPHONEOS_DEPLOYMENT_TARGET = 10.0;
+				IPHONEOS_DEPLOYMENT_TARGET = 12.0;
 				ONLY_ACTIVE_ARCH = YES;
 				OTHER_SWIFT_FLAGS = "";
 				PROVISIONING_PROFILE = "";
@@ -4445,6 +4457,7 @@
 				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer";
 				"CODE_SIGN_IDENTITY[sdk=macosx*]" = "Mac Developer";
 				CURRENT_PROJECT_VERSION = 161;
+				DEVELOPMENT_TEAM = Z6JP26PUUY;
 				EXCLUDED_ARCHS = "$(inherited)";
 				"EXCLUDED_ARCHS[sdk=iphonesimulator*]" = "$(inherited) i386";
 				FRAMEWORK_SEARCH_PATHS = (

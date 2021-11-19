@@ -10,6 +10,7 @@ import UIKit
 
 @objc(MCDescriptionOfPaymentTextInputValidator) @objcMembers final class DescriptionOfPaymentTextInputValidator: TextInputValidator {
     private(set) weak var model: PaymentModel!
+    private var changedText: String!
     
     @objc(initWithModel:andTextField:) init(with model: PaymentModel, and textField: UITextField) {
         self.model = model
@@ -26,12 +27,12 @@ import UIKit
     
     func textField(_ textField: UITextField, shouldChangeCharactersIn range: NSRange, replacementString string: String) -> Bool {
         let currentText = (textField.text ?? "")
-        let changedText = currentText.replacingCharacters(in: Range(range, in: currentText)!, with: string)
-        model.update(descriptionOfPayment: changedText)
+        changedText = currentText.replacingCharacters(in: Range(range, in: currentText)!, with: string)
         return true
     }
     
     func textFieldDidEndEditing(_ textField: UITextField) {
+        model.update(descriptionOfPayment: changedText)
         model.endUpdates()
     }
     
