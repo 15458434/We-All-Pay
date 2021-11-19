@@ -133,29 +133,27 @@ class SelectCurrencyTableViewController: UITableViewController, UISearchResultsU
         
         let thisCellsCurrency = data(indexPath: indexPath)
         
-        let target: PaymentStateModelProtocol = self.target(forAction: #selector(getter: PaymentStateModelProtocol.paymentStateModel), withSender: self) as! PaymentStateModelProtocol
-        target.paymentStateModel.update(currency: thisCellsCurrency)
-        
-        
-//        currencyUpdateModel.updateCurrency(with: thisCellsCurrency.code) { (error) in
-//            guard error == nil else {
-//                Swift.debugPrint("Error fetching ExchangeRate: \(error!)")
-//                
-//                let title = NSLocalizedString("Unable to fetch exchange rates", comment: "itle message of an alert that pops up when fetching exchange rates is impossibl")
-//                let message = NSLocalizedString("Fetching exchange rates is not possible at this moment. Check your internet connection and/or hit solve to fetch all missing exchange rates at a later time", comment: "Message explaining what the user can do to refetch exchange rates")
-//                let dismissTitle = NSLocalizedString("Dismiss", comment: "Title of a button that dismisses an alart")
-//                
-//                let alertController = UIAlertController(title: title, message: message, preferredStyle: .alert)
-//                let dismissAction = UIAlertAction(title: dismissTitle, style: .cancel, handler: nil)
-//                alertController.addAction(dismissAction)
-//                
-//                myPresenter?.present(alertController, animated: true, completion: nil)
-//                
-//                return
-//            }
-//            
-//            
-//        }
+        if let target: PaymentStateModelProtocol = self.target(forAction: #selector(getter: PaymentStateModelProtocol.paymentStateModel), withSender: self) as? PaymentStateModelProtocol {
+            target.paymentStateModel.update(currency: thisCellsCurrency)
+        } else {
+            currencyUpdateModel.updateCurrency(with: thisCellsCurrency.code) { (error) in
+                guard error == nil else {
+                    Swift.debugPrint("Error fetching ExchangeRate: \(error!)")
+
+                    let title = NSLocalizedString("Unable to fetch exchange rates", comment: "itle message of an alert that pops up when fetching exchange rates is impossibl")
+                    let message = NSLocalizedString("Fetching exchange rates is not possible at this moment. Check your internet connection and/or hit solve to fetch all missing exchange rates at a later time", comment: "Message explaining what the user can do to refetch exchange rates")
+                    let dismissTitle = NSLocalizedString("Dismiss", comment: "Title of a button that dismisses an alart")
+
+                    let alertController = UIAlertController(title: title, message: message, preferredStyle: .alert)
+                    let dismissAction = UIAlertAction(title: dismissTitle, style: .cancel, handler: nil)
+                    alertController.addAction(dismissAction)
+
+                    myPresenter?.present(alertController, animated: true, completion: nil)
+
+                    return
+                }
+            }
+        }
         
         if let navigationController = navigationController {
             navigationController.presentingViewController!.dismiss(animated: true, completion: nil)
