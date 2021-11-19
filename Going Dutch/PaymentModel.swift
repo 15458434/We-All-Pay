@@ -7,10 +7,12 @@
 //
 
 import UIKit
+import CurrencyConverter
 
 @objc(MCPaymentModel) @objcMembers public final class PaymentModel: NSObject {
     @objc public private(set) dynamic var payment: MCPayment!
     private(set) var currencyFormatter: CurrencyFormatter!
+    @objc dynamic var error: NSError?
 
     @objc(prepareForUseWithPayment:) func prepareForUse(with payment: MCPayment) {
         func createPeoplePresenceController(for payment: MCPayment) {
@@ -61,6 +63,25 @@ import UIKit
     @objc(updateMoney:) func update(money: NSNumber?) {
         payment.money = money
         payment.recalculateAveragePeopleOweAndStore()
+    }
+    
+    @objc(updateCurrency:) func update(currency: Currency) {
+        currencyFormatter = CurrencyFormatter(currencyCode: currency.code)
+        let mainThreadContext = payment.managedObjectContext!
+        let newCurrency = MCCurrency(from: currency.code, from: mainThreadContext)
+        let oldCurrency = payment.currency
+        payment.currency = newCurrency
+        if oldCurrency?.sharedBill?.count == 0 && oldCurrency?.payment?.count == 0 {
+            mainThreadContext.delete(oldCurrency!)
+        }
+        
+        payment.setNewCurrencyAndAutomaticallyUpdateExchangeRate(newCurrency) { [weak self] error in
+            guard error == nil else {
+                // TODO: Handle error
+                self?.error = error! as NSError
+                return
+            }
+        }
     }
     
     @nonobjc private func updateDateModified() {

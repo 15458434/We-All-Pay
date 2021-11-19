@@ -35,7 +35,7 @@ typedef NS_ENUM(NSUInteger, MCMoneyValueFieldDismissStatus) {
 @end
 
 __attribute__((objc_subclassing_restricted))
-@interface MCPaymentViewController : MCGenericAdBannerTableViewController <NSFetchedResultsControllerDelegate, MCPathComponentsToOpenProtocol>
+@interface MCPaymentViewController : MCGenericAdBannerTableViewController <NSFetchedResultsControllerDelegate, MCPathComponentsToOpenProtocol, MCPaymentStateModelProtocol>
 
 @property (nonatomic, readonly) BOOL didSomethingChange;
 @property (nonatomic, readonly) BOOL isNew;

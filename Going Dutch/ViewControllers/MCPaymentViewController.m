@@ -156,6 +156,13 @@ static void * CategoryIdContext = &CategoryIdContext;
     [_model updatePayingPerson:predefinedPayingPerson];
 }
 
+#pragma mark - MCPaymentStateModelProtocol
+
+- (MCPaymentModel *)paymentStateModel {
+    NSParameterAssert(_model);
+    return _model;
+}
+
 #pragma mark - NSFetchedResultsControllerDelegate
 
 - (void)controllerWillChangeContent:(NSFetchedResultsController *)controller {

@@ -26,7 +26,7 @@ enum CancelButtonPressed {
     case notPressed, isPressed
 }
 
-final class PaymentViewController: MCGenericAdBannerTableViewController, AdBannerEngineDelegate, MCDismissKeyboardProtocol, MCPathComponentsToOpenProtocol, UITextFieldDelegate, NSFetchedResultsControllerDelegate {
+final class PaymentViewController: MCGenericAdBannerTableViewController, AdBannerEngineDelegate, MCDismissKeyboardProtocol, MCPathComponentsToOpenProtocol, UITextFieldDelegate, NSFetchedResultsControllerDelegate, PaymentStateModelProtocol {
 
     // MARK: IB Outlet
     @IBOutlet var itemField: UITextField!
@@ -48,6 +48,7 @@ final class PaymentViewController: MCGenericAdBannerTableViewController, AdBanne
     private var descriptionOfPaymentObservation: NSKeyValueObservation!
     private var moneyObservation:NSKeyValueObservation!
     private var categoryIdObservation: NSKeyValueObservation!
+    private var currencyObservation: NSKeyValueObservation!
     
     // MARK: IB Actions
     @IBAction func mainCancelPressed(_ sender: UIButton) {
@@ -191,6 +192,12 @@ final class PaymentViewController: MCGenericAdBannerTableViewController, AdBanne
         tableView.endUpdates()
     }
     
+    // MARK: PaymentStateModelProtocol
+    
+    @objc var paymentStateModel: PaymentModel {
+        return self.model
+    }
+    
     // MARK: AdBannerEngineDelegate
     
     func adEngine(_ adEngine: AdBannerEngine?, putOnscreen bannerView: GADBannerView) {
@@ -307,6 +314,13 @@ final class PaymentViewController: MCGenericAdBannerTableViewController, AdBanne
                 
                 mySelf.categoryButton.sizeToFit()
             })
+            self.currencyObservation = self.observe(\.model!.payment!.currency, options: [.new], changeHandler: { mySelf, change in
+                guard (change.newValue as? MCCurrency) != nil else {
+                    return
+                }
+                
+                mySelf.paidField.text = mySelf.model.currencyFormatter.string(for: mySelf.model.payment.money)
+            })
         }
         super.viewWillAppear(animated)
         
@@ -326,6 +340,7 @@ final class PaymentViewController: MCGenericAdBannerTableViewController, AdBanne
             self.descriptionOfPaymentObservation = nil
             self.moneyObservation = nil
             self.categoryIdObservation = nil
+            self.currencyObservation = nil
         }
         super.viewWillDisappear(animated)
         
