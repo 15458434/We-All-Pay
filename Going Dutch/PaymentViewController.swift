@@ -26,7 +26,7 @@ enum CancelButtonPressed {
     case notPressed, isPressed
 }
 
-final class PaymentViewController: MCGenericAdBannerTableViewController, AdBannerEngineDelegate, MCDismissMeBlockProtocol, MCDismissKeyboardProtocol, MCPathComponentsToOpenProtocol, UITextFieldDelegate, NSFetchedResultsControllerDelegate {
+final class PaymentViewController: MCGenericAdBannerTableViewController, AdBannerEngineDelegate, MCDismissKeyboardProtocol, MCPathComponentsToOpenProtocol, UITextFieldDelegate, NSFetchedResultsControllerDelegate {
 
     // MARK: IB Outlet
     @IBOutlet var itemField: UITextField!
@@ -41,10 +41,6 @@ final class PaymentViewController: MCGenericAdBannerTableViewController, AdBanne
     // MARK: Properties
     var didSomethingChange: DidSomethingChange?
     var isNew: IsNew?
-    
-    var paymentPresenceArray: [MCPaymentPresence]!
-    
-    var dismissMe: (()->())?
     
     var mainCancelIsPressed = CancelButtonPressed.notPressed
     
@@ -62,7 +58,6 @@ final class PaymentViewController: MCGenericAdBannerTableViewController, AdBanne
             MCWeAllPayStoreController.defaultStore().endUndoGroup()
         }
         navigationController?.presentingViewController?.dismiss(animated: true, completion: nil)
-        dismissMe?()
     }
     
     @IBAction func mainDonePressed(_ sender: UIButton) {
@@ -71,7 +66,6 @@ final class PaymentViewController: MCGenericAdBannerTableViewController, AdBanne
         navigationController!.presentingViewController!.dismiss(animated: true, completion: { () -> Void in
             WhoPayingUserDefaultsStoreInterface.sendToUserDefaultsStoreInterface(self.model.payment.onWhichBill)
         })
-        dismissMe?()
     }
     
     @IBAction func selectPayerButtonPressed(_ sender: AnyObject) {
