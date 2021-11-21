@@ -1562,6 +1562,7 @@
                         <outlet property="paidViewDelegate" destination="V6Z-Uo-FMI" id="4Cz-03-XGv"/>
                         <outlet property="payerNameField" destination="Gtj-b7-bzJ" id="DtP-Z1-0CW"/>
                         <outlet property="payerPicture" destination="rmI-7G-oMX" id="CVV-HJ-rIG"/>
+                        <outlet property="worstSalesPitchEverHeightConstraint" destination="Wme-93-e4f" id="BW9-PK-O4O"/>
                         <outlet property="worstSalesPitchEverView" destination="bbf-I9-yWg" id="BYZ-ym-tIE"/>
                         <segue destination="7fo-xG-Qjc" kind="presentation" identifier="selectCategory" id="i0u-H5-IBk"/>
                         <segue destination="fIg-ri-deX" kind="presentation" identifier="openSelectCurrency" id="M9w-sI-koW"/>
@@ -1855,7 +1856,7 @@
         </designable>
     </designables>
     <inferredMetricsTieBreakers>
-        <segue reference="AFT-dx-z90"/>
+        <segue reference="M9w-sI-koW"/>
         <segue reference="jjg-NC-1KA"/>
         <segue reference="9O1-vs-VOI"/>
         <segue reference="3RZ-mk-Dh4"/>

@@ -269,21 +269,24 @@ static void * CategoryIdContext = &CategoryIdContext;
     
     // Load the titleView for the title bar.
     if (!_twoLabelTitleView) {
-        _twoLabelTitleView = [[NSBundle mainBundle] loadNibNamed:@"MCTwoLabelsTitleView" owner:self options:nil][0];
+        _twoLabelTitleView = [NSBundle.mainBundle loadNibNamed:@"MCTwoLabelsTitleView" owner:self options:nil][0];
         if (_isNew) {
-            [[_twoLabelTitleView mainLabel] setText:NSLocalizedString(@"New payment", @"Header in the paymentView which state new Payment")];
-            [[_twoLabelTitleView subLabel] setText:NSLocalizedString(@"Add payment data", @"Sub header in the paymentView which states Add payment data")];
+            _twoLabelTitleView.mainLabel.text = NSLocalizedString(@"New payment", @"Header in the paymentView which state new Payment");
+            _twoLabelTitleView.subLabel.text = NSLocalizedString(@"Add payment data", @"Sub header in the paymentView which states Add payment data");
         } else {
-            [[_twoLabelTitleView mainLabel] setText:NSLocalizedString(@"Payment", @"Header in the paymentView which states payment")];
-            [[_twoLabelTitleView subLabel] setText:NSLocalizedString(@"Edit payment data", @"Sub header in the paymentView which states edit payment data")];
+            _twoLabelTitleView.mainLabel.text = NSLocalizedString(@"Payment", @"Header in the paymentView which states payment");
+            _twoLabelTitleView.subLabel.text = NSLocalizedString(@"Edit payment data", @"Sub header in the paymentView which states edit payment data");
         }
-        [[self navigationItem] setTitleView:_twoLabelTitleView];
+        self.navigationItem.titleView = _twoLabelTitleView;
     }
     
     // Make sure a tap in the background dismisses the keyboard as well.
     UITapGestureRecognizer *thatTickles = [[UITapGestureRecognizer alloc] initWithTarget:self action:@selector(tappedInTheBackground:)];
-    [thatTickles setCancelsTouchesInView:YES];
-    [[self tableView] addGestureRecognizer:thatTickles];
+    thatTickles.cancelsTouchesInView = YES;
+    [self.tableView addGestureRecognizer:thatTickles];
+    
+    // Set the height constraint for the ad banner.
+    self.worstSalesPitchEverHeightConstraint.constant = (CGFloat)[[[MCRemoteConfigEngine alloc] init] numberFor:MCRemoteConfigEngineItemPaymentAdBannerHeight].doubleValue;
 }
 
 - (void)viewDidLoad {
