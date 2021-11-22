@@ -230,8 +230,42 @@ static void * CategoryIdContext = &CategoryIdContext;
     [paymentPresenceCell updatePaymentPresence:paymentPresence];
 }
 
+- (UIView *)tableView:(UITableView *)tableView viewForHeaderInSection:(NSInteger)section {
+    switch (section) {
+        case 0: {
+            MCPaymentTableViewHeaderFooterView *headerView = (MCPaymentTableViewHeaderFooterView *)[self.tableView dequeueReusableHeaderFooterViewWithIdentifier:@"PaymentTableViewHeaderFooterView"];
+            return headerView;
+        }
+            break;
+        default:
+            return nil;
+            break;
+    }
+}
+
+- (void)tableView:(UITableView *)tableView willDisplayHeaderView:(UIView *)view forSection:(NSInteger)section {
+    switch (section) {
+        case 0: {
+            MCPaymentTableViewHeaderFooterView *headerView = (MCPaymentTableViewHeaderFooterView *)view;
+            [headerView prepareForUseWithPaymentModel:_model];
+        }
+            break;
+        default:
+            break;
+            
+    }
+}
+
 - (CGFloat)tableView:(UITableView *)tableView heightForRowAtIndexPath:(NSIndexPath *)indexPath {
     return 52.0;
+}
+
+- (CGFloat)tableView:(UITableView *)tableView heightForHeaderInSection:(NSInteger)section {
+    return UITableViewAutomaticDimension;
+}
+
+- (CGFloat)tableView:(UITableView *)tableView estimatedHeightForHeaderInSection:(NSInteger)section {
+    return 340.0;
 }
 
 #pragma mark - UITableViewDataSource
@@ -257,7 +291,7 @@ static void * CategoryIdContext = &CategoryIdContext;
     payerViewToCellNameLabel.identifier = [[thisCellsPresence.person getFullName] stringByAppendingString:@"payerViewToCellNameLabel"];
     NSLayoutConstraint *payerPictureToUser = [NSLayoutConstraint constraintWithItem:_payerPicture attribute:NSLayoutAttributeTrailing relatedBy:NSLayoutRelationEqual toItem:[cell personView] attribute:NSLayoutAttributeTrailing multiplier:1.0 constant:0.0];
     payerPictureToUser.identifier = [[thisCellsPresence.person getFullName] stringByAppendingString:@"payerPictureToUser"];
-    [[self tableView] addConstraints:@[payerViewToCellNameLabel, payerPictureToUser]];
+    [self.tableView addConstraints:@[payerViewToCellNameLabel, payerPictureToUser]];
     
     return cell;
 }
@@ -291,10 +325,9 @@ static void * CategoryIdContext = &CategoryIdContext;
 
 - (void)viewDidLoad {
     [super viewDidLoad];
-    // Do any additional setup after loading the view from its nib.
     
-    _payerTextInputPicker = [[MCPayerTextInputPicker alloc] initWith:_model and:_payerNameField];
-    _itemViewDelegate = [[MCDescriptionOfPaymentTextInputValidator alloc] initWithModel:_model andTextField:_itemView];
+    UINib *paymentTableViewHeaderNib = [UINib nibWithNibName:@"PaymentTableViewHeaderFooterView" bundle:NSBundle.mainBundle];
+    [self.tableView registerNib:paymentTableViewHeaderNib forHeaderFooterViewReuseIdentifier:@"PaymentTableViewHeaderFooterView"];
 }
 
 - (void)viewWillAppear:(BOOL)animated {
@@ -437,7 +470,7 @@ static void * CategoryIdContext = &CategoryIdContext;
                     }
                 } else {
                     NSArray *pictureObjects = CategoryPictureStoreController.shared.pictureObjects;
-                    CategoryPictureObject *categoryObject = pictureObjects[((NSNumber *)new).shortValue];
+                    CategoryPictureObject *categoryObject = pictureObjects[0];
                     NSString *buttonText = NSLocalizedString(@"Select Category", @"Select Category");
                     _categoryView.image = categoryObject.largePicture;
                     [_categoryButton setTitle:buttonText forState:UIControlStateNormal];
