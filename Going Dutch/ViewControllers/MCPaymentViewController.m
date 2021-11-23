@@ -30,6 +30,7 @@ static void * PayingPersonContext = &PayingPersonContext;
 static void * DescriptionOfPaymentContext = &DescriptionOfPaymentContext;
 static void * MoneyContext = &MoneyContext;
 static void * CategoryIdContext = &CategoryIdContext;
+static void * CurrencyContext = &CurrencyContext;
 
 @interface MCPaymentViewController () <MCAdBannerEngineDelegate>
 
@@ -187,10 +188,7 @@ static void * CategoryIdContext = &CategoryIdContext;
         }
             break;
             
-        case NSFetchedResultsChangeUpdate: {
-            CurrencyFormatter *cf = [[CurrencyFormatter alloc] initWithCurrencyCode:_model.payment.currency.code];
-            _paidView.text = [cf stringForObjectValue:_model.payment.money];
-        }
+        case NSFetchedResultsChangeUpdate:
             break;
     }
 }
@@ -328,6 +326,7 @@ static void * CategoryIdContext = &CategoryIdContext;
     [self.model.payment addObserver:self forKeyPath:@"descriptionOfPayment" options:options context:DescriptionOfPaymentContext];
     [self.model.payment addObserver:self forKeyPath:@"money" options:options context:MoneyContext];
     [self.model.payment addObserver:self forKeyPath:@"categoryId" options:options context:CategoryIdContext];
+    [self.model.payment addObserver:self forKeyPath:@"currency" options:NSKeyValueObservingOptionNew context:CurrencyContext];
 }
 
 - (void)viewWillDisappear:(BOOL)animated {
@@ -337,6 +336,7 @@ static void * CategoryIdContext = &CategoryIdContext;
     [self.model.payment removeObserver:self forKeyPath:@"descriptionOfPayment" context:DescriptionOfPaymentContext];
     [self.model.payment removeObserver:self forKeyPath:@"money" context:MoneyContext];
     [self.model.payment removeObserver:self forKeyPath:@"categoryId" context:CategoryIdContext];
+    [self.model.payment removeObserver:self forKeyPath:@"currency" context:CurrencyContext];
 }
 
 - (void)prepareForSegue:(UIStoryboardSegue *)segue sender:(id)sender {
@@ -464,6 +464,22 @@ static void * CategoryIdContext = &CategoryIdContext;
                     NSString *buttonText = NSLocalizedString(@"Select Category", @"Select Category");
                     _categoryView.image = categoryObject.largePicture;
                     [_categoryButton setTitle:buttonText forState:UIControlStateNormal];
+                }
+            }
+                break;
+            default:
+                break;
+        }
+    } else if (context == CurrencyContext) {
+        NSNumber *changeKeyNumber = (NSNumber *)change[NSKeyValueChangeKindKey];
+        NSKeyValueChange keyValueChange = changeKeyNumber.unsignedIntegerValue;
+        switch (keyValueChange) {
+            case NSKeyValueChangeSetting: {
+                id new = change[NSKeyValueChangeNewKey];
+                if ([new isKindOfClass:[MCCurrency class]]) {
+                    _paidView.text = [_model.currencyFormatter stringForObjectValue:_model.payment.money];
+                } else {
+                    _paidView.text = nil;
                 }
             }
                 break;
