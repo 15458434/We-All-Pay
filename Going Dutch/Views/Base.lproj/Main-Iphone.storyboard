@@ -1244,7 +1244,7 @@
         <scene sceneID="Kuf-Fs-RQr">
             <objects>
                 <tableViewController storyboardIdentifier="paymentViewController_iPhone" useStoryboardIdentifierAsRestorationIdentifier="YES" id="A1E-EB-xnZ" customClass="MCPaymentViewController" sceneMemberID="viewController">
-                    <tableView key="view" opaque="NO" clipsSubviews="YES" clearsContextBeforeDrawing="NO" contentMode="scaleToFill" alwaysBounceVertical="YES" dataMode="prototypes" style="plain" separatorStyle="default" allowsSelection="NO" rowHeight="44" sectionHeaderHeight="22" sectionFooterHeight="22" id="TUn-FM-iHT">
+                    <tableView key="view" opaque="NO" clipsSubviews="YES" clearsContextBeforeDrawing="NO" contentMode="scaleToFill" alwaysBounceVertical="YES" dataMode="prototypes" style="plain" separatorStyle="default" allowsSelection="NO" rowHeight="-1" estimatedRowHeight="-1" sectionHeaderHeight="-1" estimatedSectionHeaderHeight="-1" sectionFooterHeight="22" id="TUn-FM-iHT">
                         <rect key="frame" x="0.0" y="0.0" width="375" height="702"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <color key="backgroundColor" red="1" green="1" blue="1" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
@@ -1556,13 +1556,15 @@
                         <outlet property="bannerContainerView" destination="iF7-Nz-3na" id="zVu-0q-lTl"/>
                         <outlet property="categoryButton" destination="wM4-4I-DFk" id="LgE-bv-xQB"/>
                         <outlet property="categoryView" destination="q95-mM-YFr" id="H2E-Ib-NI6"/>
+                        <outlet property="headerView" destination="msZ-li-bka" id="xR7-z9-mnM"/>
                         <outlet property="itemView" destination="Zmm-zR-L97" id="Rmb-IB-snM"/>
                         <outlet property="model" destination="kPl-Jh-cgm" id="1Yn-aH-38C"/>
                         <outlet property="paidView" destination="ZTv-D4-TBc" id="vfR-Td-aAj"/>
                         <outlet property="paidViewDelegate" destination="V6Z-Uo-FMI" id="4Cz-03-XGv"/>
                         <outlet property="payerNameField" destination="Gtj-b7-bzJ" id="DtP-Z1-0CW"/>
                         <outlet property="payerPicture" destination="rmI-7G-oMX" id="CVV-HJ-rIG"/>
-                        <outlet property="worstSalesPitchEverView" destination="bbf-I9-yWg" id="BYZ-ym-tIE"/>
+                        <outlet property="worstSalesPitchEverHeightConstraint" destination="Wme-93-e4f" id="BW9-PK-O4O"/>
+                        <outlet property="worstSalesPitchEverView" destination="bbf-I9-yWg" id="YNv-0m-xRJ"/>
                         <segue destination="7fo-xG-Qjc" kind="presentation" identifier="selectCategory" id="i0u-H5-IBk"/>
                         <segue destination="fIg-ri-deX" kind="presentation" identifier="openSelectCurrency" id="M9w-sI-koW"/>
                     </connections>
@@ -1855,7 +1857,7 @@
         </designable>
     </designables>
     <inferredMetricsTieBreakers>
-        <segue reference="AFT-dx-z90"/>
+        <segue reference="M9w-sI-koW"/>
         <segue reference="jjg-NC-1KA"/>
         <segue reference="9O1-vs-VOI"/>
         <segue reference="3RZ-mk-Dh4"/>

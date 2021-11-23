@@ -30,9 +30,11 @@ static void * PayingPersonContext = &PayingPersonContext;
 static void * DescriptionOfPaymentContext = &DescriptionOfPaymentContext;
 static void * MoneyContext = &MoneyContext;
 static void * CategoryIdContext = &CategoryIdContext;
+static void * CurrencyContext = &CurrencyContext;
 
 @interface MCPaymentViewController () <MCAdBannerEngineDelegate>
 
+@property (weak, nonatomic) IBOutlet UITableViewHeaderFooterView *headerView;
 @property (weak, nonatomic) IBOutlet UITextField *payerNameField;
 @property (strong, nonatomic) MCPayerTextInputPicker *payerTextInputPicker;
 @property (weak, nonatomic) IBOutlet UITextField *itemView;
@@ -186,10 +188,7 @@ static void * CategoryIdContext = &CategoryIdContext;
         }
             break;
             
-        case NSFetchedResultsChangeUpdate: {
-            CurrencyFormatter *cf = [[CurrencyFormatter alloc] initWithCurrencyCode:_model.payment.currency.code];
-            _paidView.text = [cf stringForObjectValue:_model.payment.money];
-        }
+        case NSFetchedResultsChangeUpdate:
             break;
     }
 }
@@ -257,7 +256,7 @@ static void * CategoryIdContext = &CategoryIdContext;
     payerViewToCellNameLabel.identifier = [[thisCellsPresence.person getFullName] stringByAppendingString:@"payerViewToCellNameLabel"];
     NSLayoutConstraint *payerPictureToUser = [NSLayoutConstraint constraintWithItem:_payerPicture attribute:NSLayoutAttributeTrailing relatedBy:NSLayoutRelationEqual toItem:[cell personView] attribute:NSLayoutAttributeTrailing multiplier:1.0 constant:0.0];
     payerPictureToUser.identifier = [[thisCellsPresence.person getFullName] stringByAppendingString:@"payerPictureToUser"];
-    [[self tableView] addConstraints:@[payerViewToCellNameLabel, payerPictureToUser]];
+    [self.tableView addConstraints:@[payerViewToCellNameLabel, payerPictureToUser]];
     
     return cell;
 }
@@ -269,26 +268,28 @@ static void * CategoryIdContext = &CategoryIdContext;
     
     // Load the titleView for the title bar.
     if (!_twoLabelTitleView) {
-        _twoLabelTitleView = [[NSBundle mainBundle] loadNibNamed:@"MCTwoLabelsTitleView" owner:self options:nil][0];
+        _twoLabelTitleView = [NSBundle.mainBundle loadNibNamed:@"MCTwoLabelsTitleView" owner:self options:nil][0];
         if (_isNew) {
-            [[_twoLabelTitleView mainLabel] setText:NSLocalizedString(@"New payment", @"Header in the paymentView which state new Payment")];
-            [[_twoLabelTitleView subLabel] setText:NSLocalizedString(@"Add payment data", @"Sub header in the paymentView which states Add payment data")];
+            _twoLabelTitleView.mainLabel.text = NSLocalizedString(@"New payment", @"Header in the paymentView which state new Payment");
+            _twoLabelTitleView.subLabel.text = NSLocalizedString(@"Add payment data", @"Sub header in the paymentView which states Add payment data");
         } else {
-            [[_twoLabelTitleView mainLabel] setText:NSLocalizedString(@"Payment", @"Header in the paymentView which states payment")];
-            [[_twoLabelTitleView subLabel] setText:NSLocalizedString(@"Edit payment data", @"Sub header in the paymentView which states edit payment data")];
+            _twoLabelTitleView.mainLabel.text = NSLocalizedString(@"Payment", @"Header in the paymentView which states payment");
+            _twoLabelTitleView.subLabel.text = NSLocalizedString(@"Edit payment data", @"Sub header in the paymentView which states edit payment data");
         }
-        [[self navigationItem] setTitleView:_twoLabelTitleView];
+        self.navigationItem.titleView = _twoLabelTitleView;
     }
     
     // Make sure a tap in the background dismisses the keyboard as well.
     UITapGestureRecognizer *thatTickles = [[UITapGestureRecognizer alloc] initWithTarget:self action:@selector(tappedInTheBackground:)];
-    [thatTickles setCancelsTouchesInView:YES];
-    [[self tableView] addGestureRecognizer:thatTickles];
+    thatTickles.cancelsTouchesInView = YES;
+    [self.tableView addGestureRecognizer:thatTickles];
+    
+    // Set the height constraint for the ad banner.
+    self.worstSalesPitchEverHeightConstraint.constant = (CGFloat)[[[MCRemoteConfigEngine alloc] init] numberFor:MCRemoteConfigEngineItemPaymentAdBannerHeight].doubleValue;
 }
 
 - (void)viewDidLoad {
     [super viewDidLoad];
-    // Do any additional setup after loading the view from its nib.
     
     _payerTextInputPicker = [[MCPayerTextInputPicker alloc] initWith:_model and:_payerNameField];
     _itemViewDelegate = [[MCDescriptionOfPaymentTextInputValidator alloc] initWithModel:_model andTextField:_itemView];
@@ -317,6 +318,7 @@ static void * CategoryIdContext = &CategoryIdContext;
     [self.model.payment addObserver:self forKeyPath:@"descriptionOfPayment" options:options context:DescriptionOfPaymentContext];
     [self.model.payment addObserver:self forKeyPath:@"money" options:options context:MoneyContext];
     [self.model.payment addObserver:self forKeyPath:@"categoryId" options:options context:CategoryIdContext];
+    [self.model.payment addObserver:self forKeyPath:@"currency" options:NSKeyValueObservingOptionNew context:CurrencyContext];
 }
 
 - (void)viewWillDisappear:(BOOL)animated {
@@ -326,6 +328,7 @@ static void * CategoryIdContext = &CategoryIdContext;
     [self.model.payment removeObserver:self forKeyPath:@"descriptionOfPayment" context:DescriptionOfPaymentContext];
     [self.model.payment removeObserver:self forKeyPath:@"money" context:MoneyContext];
     [self.model.payment removeObserver:self forKeyPath:@"categoryId" context:CategoryIdContext];
+    [self.model.payment removeObserver:self forKeyPath:@"currency" context:CurrencyContext];
 }
 
 - (void)prepareForSegue:(UIStoryboardSegue *)segue sender:(id)sender {
@@ -345,8 +348,23 @@ static void * CategoryIdContext = &CategoryIdContext;
     }
 }
 
-- (BOOL)disablesAutomaticKeyboardDismissal
-{
+- (void)viewDidLayoutSubviews {
+    [super viewDidLayoutSubviews];
+    
+    NSParameterAssert(_headerView);
+    CGSize size = [_headerView systemLayoutSizeFittingSize:UILayoutFittingCompressedSize];
+    if (_headerView.frame.size.height != size.height) {
+        CGFloat x = _headerView.frame.origin.x;
+        CGFloat y = _headerView.frame.origin.y;
+        CGFloat width = _headerView.frame.size.width;
+        CGFloat height = size.height;
+        CGRect newFrame = CGRectMake(x, y, width, height);
+        _headerView.frame = newFrame;
+        self.tableView.tableHeaderView = _headerView;
+    }
+}
+
+- (BOOL)disablesAutomaticKeyboardDismissal {
     return NO;
 }
 
@@ -434,10 +452,26 @@ static void * CategoryIdContext = &CategoryIdContext;
                     }
                 } else {
                     NSArray *pictureObjects = CategoryPictureStoreController.shared.pictureObjects;
-                    CategoryPictureObject *categoryObject = pictureObjects[((NSNumber *)new).shortValue];
+                    CategoryPictureObject *categoryObject = pictureObjects[0];
                     NSString *buttonText = NSLocalizedString(@"Select Category", @"Select Category");
                     _categoryView.image = categoryObject.largePicture;
                     [_categoryButton setTitle:buttonText forState:UIControlStateNormal];
+                }
+            }
+                break;
+            default:
+                break;
+        }
+    } else if (context == CurrencyContext) {
+        NSNumber *changeKeyNumber = (NSNumber *)change[NSKeyValueChangeKindKey];
+        NSKeyValueChange keyValueChange = changeKeyNumber.unsignedIntegerValue;
+        switch (keyValueChange) {
+            case NSKeyValueChangeSetting: {
+                id new = change[NSKeyValueChangeNewKey];
+                if ([new isKindOfClass:[MCCurrency class]]) {
+                    _paidView.text = [_model.currencyFormatter stringForObjectValue:_model.payment.money];
+                } else {
+                    _paidView.text = nil;
                 }
             }
                 break;

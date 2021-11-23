@@ -13,11 +13,14 @@ import FirebaseRemoteConfig
 @objc(MCRemoteConfigEngine) @objcMembers final class RemoteConfigEngine: NSObject {
     @objc(MCRemoteConfigEngineItem) enum Item: UInt, CaseIterable {
         case solutionAdBannerHeight
+        case paymentAdBannerHeight
         
         var stringValue: String {
             switch self {
             case .solutionAdBannerHeight:
                 return "v2_solutionView_adBanner_height"
+            case .paymentAdBannerHeight:
+                return "v2_paymentView_adBannerHeight"
             default:
                 fatalError("Value doesn't exist")
             }
@@ -45,6 +48,8 @@ import FirebaseRemoteConfig
                 var dict = dict
                 switch item {
                 case .solutionAdBannerHeight:
+                    dict[item.stringValue] = 50 as NSNumber
+                case .paymentAdBannerHeight:
                     dict[item.stringValue] = 50 as NSNumber
                 }
                 return dict
