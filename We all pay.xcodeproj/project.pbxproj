@@ -33,8 +33,6 @@
 		3826D4D123CC574E009CAC30 /* WebKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 3826D4D023CC574E009CAC30 /* WebKit.framework */; };
 		3826D4D223CC576C009CAC30 /* libsqlite3.0.tbd in Frameworks */ = {isa = PBXBuildFile; fileRef = 3826D4CE23CC573B009CAC30 /* libsqlite3.0.tbd */; };
 		3826D4D323CC5777009CAC30 /* libz.tbd in Frameworks */ = {isa = PBXBuildFile; fileRef = 3826D4CF23CC5745009CAC30 /* libz.tbd */; };
-		38288131274ACBD000620378 /* PaymentTableViewHeaderFooterView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 38288130274ACBD000620378 /* PaymentTableViewHeaderFooterView.swift */; };
-		38288133274ACC5400620378 /* PaymentTableViewHeaderFooterView.xib in Resources */ = {isa = PBXBuildFile; fileRef = 38288132274ACC5400620378 /* PaymentTableViewHeaderFooterView.xib */; };
 		3829AD0F178B41320025969D /* WeAllPayStore.xcdatamodeld in Sources */ = {isa = PBXBuildFile; fileRef = 3829AD0D178B41320025969D /* WeAllPayStore.xcdatamodeld */; };
 		382B76E31C398249000C203A /* CurrencyConverter.h in Headers */ = {isa = PBXBuildFile; fileRef = 382B76E21C398249000C203A /* CurrencyConverter.h */; settings = {ATTRIBUTES = (Public, ); }; };
 		382B76EA1C398249000C203A /* CurrencyConverter.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 382B76E01C398249000C203A /* CurrencyConverter.framework */; };
@@ -403,8 +401,6 @@
 		3826D4CE23CC573B009CAC30 /* libsqlite3.0.tbd */ = {isa = PBXFileReference; lastKnownFileType = "sourcecode.text-based-dylib-definition"; name = libsqlite3.0.tbd; path = usr/lib/libsqlite3.0.tbd; sourceTree = SDKROOT; };
 		3826D4CF23CC5745009CAC30 /* libz.tbd */ = {isa = PBXFileReference; lastKnownFileType = "sourcecode.text-based-dylib-definition"; name = libz.tbd; path = usr/lib/libz.tbd; sourceTree = SDKROOT; };
 		3826D4D023CC574E009CAC30 /* WebKit.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = WebKit.framework; path = System/Library/Frameworks/WebKit.framework; sourceTree = SDKROOT; };
-		38288130274ACBD000620378 /* PaymentTableViewHeaderFooterView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PaymentTableViewHeaderFooterView.swift; sourceTree = "<group>"; };
-		38288132274ACC5400620378 /* PaymentTableViewHeaderFooterView.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = PaymentTableViewHeaderFooterView.xib; sourceTree = "<group>"; };
 		3829AD0E178B41320025969D /* WeAllPayStore.xcdatamodel */ = {isa = PBXFileReference; lastKnownFileType = wrapper.xcdatamodel; path = WeAllPayStore.xcdatamodel; sourceTree = "<group>"; };
 		382B76E01C398249000C203A /* CurrencyConverter.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = CurrencyConverter.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		382B76E21C398249000C203A /* CurrencyConverter.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = CurrencyConverter.h; sourceTree = "<group>"; };
@@ -1418,8 +1414,6 @@
 			children = (
 				3830F6F4179872B400904FAF /* MCPaymentViewController.h */,
 				3830F6F5179872B400904FAF /* MCPaymentViewController.m */,
-				38288132274ACC5400620378 /* PaymentTableViewHeaderFooterView.xib */,
-				38288130274ACBD000620378 /* PaymentTableViewHeaderFooterView.swift */,
 				38C1AD4526EE871D00E09E09 /* MCPaymentPresenceTableViewCell_iPhone.h */,
 				38C1AD4626EE871D00E09E09 /* MCPaymentPresenceTableViewCell_iPhone.m */,
 				38ACC5A2236B1FAE000BDEEC /* PaymentModel.swift */,
@@ -1927,7 +1921,6 @@
 				3897157D17901D0F005BE03E /* MCTwoLabelsTitleView.xib in Resources */,
 				38D1C3801A8A38B5008F2A8E /* LaunchScreen.storyboard in Resources */,
 				3899D3F4194F43AF00893323 /* Product ids.plist in Resources */,
-				38288133274ACC5400620378 /* PaymentTableViewHeaderFooterView.xib in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -2221,7 +2214,6 @@
 				388A32761C11ED2F00F7459C /* WhoPayingUserDefaultsStoreInterfaceWeAllPayExtension.swift in Sources */,
 				38490D311D705A7700A297BA /* ThisEvent.swift in Sources */,
 				382E7BDD17E5E57500A1040A /* MCReturnPaymentViewController.m in Sources */,
-				38288131274ACBD000620378 /* PaymentTableViewHeaderFooterView.swift in Sources */,
 				383E0C5D186737EB00AA688D /* MCSharedBillPageViewController.m in Sources */,
 				381179D01A82D1FC00020538 /* MailComposer.swift in Sources */,
 				38B08C591B383A4C00FB84B1 /* MCStoreInterface.swift in Sources */,

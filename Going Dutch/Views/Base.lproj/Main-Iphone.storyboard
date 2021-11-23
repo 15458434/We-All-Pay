@@ -1556,6 +1556,7 @@
                         <outlet property="bannerContainerView" destination="iF7-Nz-3na" id="zVu-0q-lTl"/>
                         <outlet property="categoryButton" destination="wM4-4I-DFk" id="LgE-bv-xQB"/>
                         <outlet property="categoryView" destination="q95-mM-YFr" id="H2E-Ib-NI6"/>
+                        <outlet property="headerView" destination="msZ-li-bka" id="xR7-z9-mnM"/>
                         <outlet property="itemView" destination="Zmm-zR-L97" id="Rmb-IB-snM"/>
                         <outlet property="model" destination="kPl-Jh-cgm" id="1Yn-aH-38C"/>
                         <outlet property="paidView" destination="ZTv-D4-TBc" id="vfR-Td-aAj"/>
@@ -1563,7 +1564,7 @@
                         <outlet property="payerNameField" destination="Gtj-b7-bzJ" id="DtP-Z1-0CW"/>
                         <outlet property="payerPicture" destination="rmI-7G-oMX" id="CVV-HJ-rIG"/>
                         <outlet property="worstSalesPitchEverHeightConstraint" destination="Wme-93-e4f" id="BW9-PK-O4O"/>
-                        <outlet property="worstSalesPitchEverView" destination="bbf-I9-yWg" id="BYZ-ym-tIE"/>
+                        <outlet property="worstSalesPitchEverView" destination="bbf-I9-yWg" id="YNv-0m-xRJ"/>
                         <segue destination="7fo-xG-Qjc" kind="presentation" identifier="selectCategory" id="i0u-H5-IBk"/>
                         <segue destination="fIg-ri-deX" kind="presentation" identifier="openSelectCurrency" id="M9w-sI-koW"/>
                     </connections>

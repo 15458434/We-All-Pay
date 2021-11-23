@@ -33,6 +33,7 @@ static void * CategoryIdContext = &CategoryIdContext;
 
 @interface MCPaymentViewController () <MCAdBannerEngineDelegate>
 
+@property (weak, nonatomic) IBOutlet UITableViewHeaderFooterView *headerView;
 @property (weak, nonatomic) IBOutlet UITextField *payerNameField;
 @property (strong, nonatomic) MCPayerTextInputPicker *payerTextInputPicker;
 @property (weak, nonatomic) IBOutlet UITextField *itemView;
@@ -230,32 +231,6 @@ static void * CategoryIdContext = &CategoryIdContext;
     [paymentPresenceCell updatePaymentPresence:paymentPresence];
 }
 
-- (UIView *)tableView:(UITableView *)tableView viewForHeaderInSection:(NSInteger)section {
-    switch (section) {
-        case 0: {
-            MCPaymentTableViewHeaderFooterView *headerView = (MCPaymentTableViewHeaderFooterView *)[self.tableView dequeueReusableHeaderFooterViewWithIdentifier:@"PaymentTableViewHeaderFooterView"];
-            return headerView;
-        }
-            break;
-        default:
-            return nil;
-            break;
-    }
-}
-
-- (void)tableView:(UITableView *)tableView willDisplayHeaderView:(UIView *)view forSection:(NSInteger)section {
-    switch (section) {
-        case 0: {
-            MCPaymentTableViewHeaderFooterView *headerView = (MCPaymentTableViewHeaderFooterView *)view;
-            [headerView prepareForUseWithPaymentModel:_model];
-        }
-            break;
-        default:
-            break;
-            
-    }
-}
-
 - (CGFloat)tableView:(UITableView *)tableView heightForRowAtIndexPath:(NSIndexPath *)indexPath {
     return 52.0;
 }
@@ -326,8 +301,8 @@ static void * CategoryIdContext = &CategoryIdContext;
 - (void)viewDidLoad {
     [super viewDidLoad];
     
-    UINib *paymentTableViewHeaderNib = [UINib nibWithNibName:@"PaymentTableViewHeaderFooterView" bundle:NSBundle.mainBundle];
-    [self.tableView registerNib:paymentTableViewHeaderNib forHeaderFooterViewReuseIdentifier:@"PaymentTableViewHeaderFooterView"];
+    _payerTextInputPicker = [[MCPayerTextInputPicker alloc] initWith:_model and:_payerNameField];
+    _itemViewDelegate = [[MCDescriptionOfPaymentTextInputValidator alloc] initWithModel:_model andTextField:_itemView];
 }
 
 - (void)viewWillAppear:(BOOL)animated {
@@ -381,8 +356,23 @@ static void * CategoryIdContext = &CategoryIdContext;
     }
 }
 
-- (BOOL)disablesAutomaticKeyboardDismissal
-{
+- (void)viewDidLayoutSubviews {
+    [super viewDidLayoutSubviews];
+    
+    NSParameterAssert(_headerView);
+    CGSize size = [_headerView systemLayoutSizeFittingSize:UILayoutFittingCompressedSize];
+    if (_headerView.frame.size.height != size.height) {
+        CGFloat x = _headerView.frame.origin.x;
+        CGFloat y = _headerView.frame.origin.y;
+        CGFloat width = _headerView.frame.size.width;
+        CGFloat height = size.height;
+        CGRect newFrame = CGRectMake(x, y, width, height);
+        _headerView.frame = newFrame;
+        self.tableView.tableHeaderView = _headerView;
+    }
+}
+
+- (BOOL)disablesAutomaticKeyboardDismissal {
     return NO;
 }
 
