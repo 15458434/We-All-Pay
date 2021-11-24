@@ -193,6 +193,7 @@
                         <segue destination="syc-O8-8LU" kind="presentation" identifier="iScreenSegue" modalPresentationStyle="overCurrentContext" modalTransitionStyle="coverVertical" id="Hbz-75-wqX"/>
                         <segue destination="Ltx-xd-qSj" kind="show" identifier="newTonightsBill" id="d0L-aB-5Md"/>
                         <segue destination="Ltx-xd-qSj" kind="show" identifier="openTonightsBill" id="3RZ-mk-Dh4"/>
+                        <segue destination="Ltx-xd-qSj" kind="show" identifier="openEventWithPathComponents" id="Wg4-xh-sS5"/>
                     </connections>
                 </tableViewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="dgz-Pk-24M" userLabel="First Responder" sceneMemberID="firstResponder"/>
@@ -1857,10 +1858,10 @@
         </designable>
     </designables>
     <inferredMetricsTieBreakers>
-        <segue reference="M9w-sI-koW"/>
+        <segue reference="AFT-dx-z90"/>
         <segue reference="jjg-NC-1KA"/>
         <segue reference="9O1-vs-VOI"/>
-        <segue reference="3RZ-mk-Dh4"/>
+        <segue reference="Wg4-xh-sS5"/>
     </inferredMetricsTieBreakers>
     <resources>
         <image name="barbutton - cancel" width="22" height="22"/>

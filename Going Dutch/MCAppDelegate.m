@@ -178,7 +178,7 @@
         return NO;
     }
     // Navigate to the add payment screen.
-    NSArray *pathDuringOpening = @[tonightsBill, nextPayer];
+    NSArray<NSManagedObject *> *pathDuringOpening = @[tonightsBill, nextPayer];
     UINavigationController *navController = (UINavigationController *)self.window.rootViewController;
     [navController popToRootViewControllerAnimated:NO];
     
@@ -189,8 +189,8 @@
     [paymentViewController prepareForUseWithPathComponentsToOpen:pathDuringOpening];
     [navController presentViewController:navPaymentViewController animated:YES completion:nil];
     // open tonightsBill
-    UIViewController *allTripsViewController = navController.viewControllers[0];
-    [allTripsViewController performSegueWithIdentifier:@"openTonightsBill" sender:pathDuringOpening];
+    MCAllTripsTableViewController *allTripsViewController = (MCAllTripsTableViewController *)navController.viewControllers[0];
+    [allTripsViewController prepareForUseWithPathComponentsToOpen:pathDuringOpening];
     
     return YES;
 }
