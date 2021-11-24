@@ -12,6 +12,8 @@
 
 #import "MCGenericAdBannerTableViewController.h"
 
+#import "MCPathComponentsToOpenProtocol.h"
+
 #import "We_all_pay-Swift.h"
 
 @class MCPayment;

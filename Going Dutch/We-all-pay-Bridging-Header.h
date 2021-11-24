@@ -23,6 +23,7 @@
 #import "MCThisPaymentProtocol.h"
 #import "MCDismissMeBlockProtocol.h"
 #import "MCDismissKeyboardProtocol.h"
+#import "MCPathComponentsToOpenProtocol.h"
 
 #pragma mark - Miscellaneous
 #import "MCTools.h"
