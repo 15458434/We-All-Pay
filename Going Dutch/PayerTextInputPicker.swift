@@ -14,7 +14,7 @@ import FirebaseCrashlytics
         case none(String)
         case person(MCPerson)
     }
-    private(set) var keyboardWillShowObserver: NSObjectProtocol!
+    
     private(set) weak var model: PaymentModel!
     private(set) weak var textField: UITextField!
     private(set) var pickerView: UIPickerView!
@@ -29,29 +29,6 @@ import FirebaseCrashlytics
         pickerView.dataSource = self
         pickerView.showsSelectionIndicator = true
         textField.inputView = pickerView
-        keyboardWillShowObserver = NotificationCenter.default.addObserver(forName: UITextField.keyboardWillShowNotification, object: textField, queue: nil, using: { [unowned self] (notification) in
-            if let payingPerson = model.payment.payingPerson, let index = self.selectableFromPeoplePresent.firstIndex(where: { selectable in
-                switch selectable {
-                case .person(let person):
-                    return person == payingPerson
-                case .none(_):
-                    return false
-                }
-            }) {
-                self.pickerView.selectedRow(inComponent: index)
-            } else {
-                let nextPayer = model.suggestedNextPayer!
-                let index = self.selectableFromPeoplePresent.firstIndex(where: { selectable in
-                    switch selectable {
-                    case .person(let person):
-                        return person == nextPayer
-                    case .none(_):
-                        return false
-                    }
-                })!
-                self.pickerView.selectedRow(inComponent: index)
-            }
-        })
     }
     
     private lazy var selectableFromPeoplePresent: [SelectablePeoplePresent] = {
@@ -123,6 +100,19 @@ import FirebaseCrashlytics
     
     func textFieldDidBeginEditing(_ textField: UITextField) {
         model.beginUpdates()
+        
+        if let payingPerson = self.model.payment.payingPerson, let index = self.selectableFromPeoplePresent.firstIndex(where: { selectable in
+            switch selectable {
+            case .person(let person):
+                return person == payingPerson
+            case .none(_):
+                return false
+            }
+        }) {
+            self.pickerView.selectRow(index, inComponent: 0, animated: false)
+        } else {
+            self.pickerView.selectRow(0, inComponent: 0, animated: false)
+        }
     }
     
     func textFieldDidEndEditing(_ textField: UITextField, reason: UITextField.DidEndEditingReason) {
