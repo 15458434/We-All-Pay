@@ -198,6 +198,9 @@
 /* Header in the personView which state new person. */
 "Person" = "Persoon";
 
+/* An string that indicates that no person is selected in the select payer picker */
+"picker_option_none" = "geen";
+
 /* Please add payments and/or people if you want a solution on who owes who. */
 "Please add people and payments if you want a solution on who owes who." = "Druk op \"Annuleer\" en voeg mensen en betalingen toe.";
 

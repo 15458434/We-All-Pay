@@ -58,7 +58,8 @@ import FirebaseCrashlytics
         var selectablePeople = model.arrayOfPeoplePresent.map { person in
             SelectablePeoplePresent.person(person)
         }
-        selectablePeople.insert(.none(NSLocalizedString("none", value: "-- none --", comment: "An string that indicates that no person is selected in the select payer picker")), at: 0)
+        let noneString = "-- \(NSLocalizedString("picker_option_none", value: "none", comment: "An string that indicates that no person is selected in the select payer picker")) --"
+        selectablePeople.insert(.none(noneString), at: 0)
         return selectablePeople
     }()
     
