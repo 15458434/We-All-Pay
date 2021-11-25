@@ -44,9 +44,15 @@ import CurrencyConverter
         payment.managedObjectContext!.undoManager!.beginUndoGrouping()
     }
     
-    @objc(updatePayingPerson:) func update(payingPerson: MCPerson) {
-        payingPerson.addPaymentsObject(payment)
-        payment.payingPerson = payingPerson
+    @objc(updatePayingPerson:) func update(payingPerson: MCPerson?) {
+        if let payingPerson = payingPerson {
+            payingPerson.addPaymentsObject(payment)
+            payment.payingPerson = payingPerson
+        } else {
+            let personToBeRemoved = payment.payingPerson
+            personToBeRemoved?.removePaymentsObject(payment)
+            payment.payingPerson = nil
+        }
         updateDateModified()
     }
     
