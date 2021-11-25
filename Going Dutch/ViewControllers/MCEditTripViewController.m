@@ -10,7 +10,7 @@
 
 #import "MCEditTripViewController.h"
 #import "MCPersonViewController.h"
-#import "MCSharedBillTableViewController.h"
+#import "MCPaymentsTableViewController.h"
 #import "MCSharedBillPageViewController.h"
 #import "UIViewController+WeAllPayStore.h"
 

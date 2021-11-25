@@ -15,7 +15,7 @@
 @class MCSharedBill;
 
 @class MCEditTripViewController;
-@class MCSharedBillTableViewController;
+@class MCPaymentsTableViewController;
 @class MCSharedBillMainViewController;
 
 @protocol MCTonightsBillTitleDelegate <NSObject>
@@ -29,7 +29,7 @@ __attribute__((objc_subclassing_restricted))
 @interface MCSharedBillPageViewController : UIPageViewController <UIPageViewControllerDataSource, UIPageViewControllerDelegate, UIAlertViewDelegate, MCIsEditingProtocol>
 
 @property (weak, nonatomic) MCSharedBillMainViewController *mainViewController;
-@property (nonatomic, strong) MCSharedBillTableViewController *sharedBillTableViewController;
+@property (nonatomic, strong) MCPaymentsTableViewController *sharedBillTableViewController;
 @property (nonatomic, strong) MCEditTripViewController *editTripTableViewController;
 
 @property (nonatomic, strong) MCSharedBill *tonightsBill;

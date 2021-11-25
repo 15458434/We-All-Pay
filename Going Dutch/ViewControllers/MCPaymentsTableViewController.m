@@ -1,5 +1,5 @@
 //
-//  MCSharedBillTableViewController.m
+//  MCPaymentsTableViewController.m
 //  Going Dutch
 //
 //  Created by Mark Cornelisse on 09-01-13.
@@ -9,7 +9,7 @@
 @import FirebaseAnalytics;
 @import WhoPayingUserDefaultsStoreInterface;
 
-#import "MCSharedBillTableViewController.h"
+#import "MCPaymentsTableViewController.h"
 #import "UIViewController+WeAllPayStore.h"
 
 #import "MCWeAllPayStoreController.h"
@@ -26,7 +26,7 @@
 
 #import "We_all_pay-Swift.h"
 
-@interface MCSharedBillTableViewController () <ShowPayment>
+@interface MCPaymentsTableViewController () <ShowPayment>
 
 @property (weak, nonatomic) IBOutlet MCTableEmptyMessage *headerView;
 
@@ -35,7 +35,7 @@
 
 @end
 
-@implementation MCSharedBillTableViewController
+@implementation MCPaymentsTableViewController
 
 #pragma mark - Actions
 
@@ -207,13 +207,12 @@
             [self setEmptyMessageWithDuration:1.0];
             break;
             
-        case NSFetchedResultsChangeUpdate:
-            [self.tableView reloadRowsAtIndexPaths:@[indexPath] withRowAnimation:UITableViewRowAnimationAutomatic];
-            break;
-            
         case NSFetchedResultsChangeMove:
             [self.tableView deleteRowsAtIndexPaths:@[indexPath] withRowAnimation:UITableViewRowAnimationFade];
             [self.tableView insertRowsAtIndexPaths:@[newIndexPath] withRowAnimation:UITableViewRowAnimationFade];
+            break;
+            
+        case NSFetchedResultsChangeUpdate:
             break;
     }
 }
@@ -222,8 +221,10 @@
 
 #pragma mark - UITableViewDelegate
 
-- (CGFloat)tableView:(UITableView *)tableView heightForRowAtIndexPath:(NSIndexPath *)indexPath {
-    return 60;
+- (void)tableView:(UITableView *)tableView willDisplayCell:(UITableViewCell *)cell forRowAtIndexPath:(NSIndexPath *)indexPath {
+    MCPayment *payment = [_dataController objectAtIndexPath:indexPath];
+    MCPaymentTableViewCell *paymentCell = (MCPaymentTableViewCell *)cell;
+    [paymentCell updateWithPayment:payment];
 }
 
 - (void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath {
@@ -234,6 +235,10 @@
     } else {
         [self performSegueWithIdentifier:@"openPaymentView" sender:self];
     }
+}
+
+- (CGFloat)tableView:(UITableView *)tableView heightForRowAtIndexPath:(NSIndexPath *)indexPath {
+    return 60;
 }
 
 #pragma mark - UITableViewDataSource
@@ -247,33 +252,7 @@
 }
 
 - (UITableViewCell *)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath {
-    MCPayment *thisCellsPayment = [_dataController objectAtIndexPath:indexPath];
-    if (!thisCellsPayment) {
-    }
     MCPaymentTableViewCell *paymentCell = [tableView dequeueReusableCellWithIdentifier:@"MCPaymentTableViewCell"];
-    
-    NSString *thisCellsPayerName;
-    if ([thisCellsPayment payingPerson]) {
-        thisCellsPayerName = thisCellsPayment.payingPerson.getFullName;
-    } else {
-        thisCellsPayerName = NSLocalizedString(@"Someone", @"Someone");
-    }
-    paymentCell.namePayerLabel.text = thisCellsPayerName;
-    
-    // Get category picture.
-    NSArray *pictureObjects = CategoryPictureStoreController.shared.pictureObjects;
-    CategoryPictureObject *categoryObject = pictureObjects[thisCellsPayment.categoryId.shortValue];
-    paymentCell.itemTypeImageView.image = categoryObject.smallPicture;
-    
-    NSString *thisCellsDescriptionOfPayment = [thisCellsPayment descriptionOfPayment];
-    if (!thisCellsDescriptionOfPayment) {
-        thisCellsDescriptionOfPayment = NSLocalizedString(@"something", @"Something");
-    }
-    paymentCell.whatPaidLabel.text =thisCellsDescriptionOfPayment;
-    
-    CurrencyFormatter *cf = [[CurrencyFormatter alloc] initWithCurrencyCode:thisCellsPayment.currency.code];
-    paymentCell.moneyPaidLabel.text = [cf stringForObjectValue:thisCellsPayment.money];
-    
     return paymentCell;
 }
 

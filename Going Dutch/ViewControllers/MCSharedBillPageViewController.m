@@ -9,7 +9,7 @@
 #import "MCSharedBillPageViewController.h"
 
 #import "MCSharedBillMainViewController.h"
-#import "MCSharedBillTableViewController.h"
+#import "MCPaymentsTableViewController.h"
 #import "MCEditTripViewController.h"
 #import "MCReturnPaymentViewController.h"
 
@@ -159,7 +159,7 @@ NSInteger const maxPageIndex = 1;
 {
     //[self performSegueWithIdentifier:@"openTripInfo" sender:self];
     [[self presentedViewController] dismissViewControllerAnimated:YES completion:nil];
-    if ([[self viewControllers][0] isKindOfClass:[MCSharedBillTableViewController class]]) {
+    if ([[self viewControllers][0] isKindOfClass:[MCPaymentsTableViewController class]]) {
         
     }
 }
@@ -196,7 +196,7 @@ NSInteger const maxPageIndex = 1;
     return _editTripTableViewController;
 }
 
-- (MCSharedBillTableViewController *)sharedBillTableViewController
+- (MCPaymentsTableViewController *)sharedBillTableViewController
 {
     // if no sharedBillTableViewController create one.
     if (_sharedBillTableViewController) {
@@ -273,7 +273,7 @@ NSInteger const maxPageIndex = 1;
         case 1:
         {
             _lastSetIndex = 1;
-            MCSharedBillTableViewController *myFirstView = (MCSharedBillTableViewController *)[self viewControllerForIndex:1];
+            MCPaymentsTableViewController *myFirstView = (MCPaymentsTableViewController *)[self viewControllerForIndex:1];
             __weak typeof(self) weakSelf = self;
             [self setViewControllers:@[myFirstView] direction:UIPageViewControllerNavigationDirectionForward animated:NO completion:^(BOOL finished) {
                 if (finished) {
@@ -421,7 +421,7 @@ NSInteger const maxPageIndex = 1;
         if ([[self viewControllers][0] isKindOfClass:[MCEditTripViewController class]]) {
             self.mainViewController.peopleOrPaymentsSelectionControl.selectedSegmentIndex = 0;
             _lastSetIndex = 0;
-        } else if ([[self viewControllers][0] isKindOfClass:[MCSharedBillTableViewController class]]) {
+        } else if ([[self viewControllers][0] isKindOfClass:[MCPaymentsTableViewController class]]) {
             self.mainViewController.peopleOrPaymentsSelectionControl.selectedSegmentIndex = 1;
             _lastSetIndex = 1;
         }

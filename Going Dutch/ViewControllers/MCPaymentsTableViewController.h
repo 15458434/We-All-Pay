@@ -1,5 +1,5 @@
 //
-//  MCSharedBillTableViewController.h
+//  MCPaymentsTableViewController.h
 //  Going Dutch
 //
 //  Created by Mark Cornelisse on 09-01-13.
@@ -28,7 +28,8 @@
 @end
 
 __attribute__((objc_subclassing_restricted))
-@interface MCSharedBillTableViewController : UITableViewController <NSFetchedResultsControllerDelegate, MFMailComposeViewControllerDelegate, MCTonightsBillTransfer, MCIndexProtocol>
+NS_SWIFT_NAME(PaymentsTableViewController)
+@interface MCPaymentsTableViewController : UITableViewController <NSFetchedResultsControllerDelegate, MFMailComposeViewControllerDelegate, MCTonightsBillTransfer, MCIndexProtocol>
 
 @property (nonatomic, strong) MCTableEmptyMessage *emptyMessage;
 
