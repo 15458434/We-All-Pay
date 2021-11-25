@@ -1338,6 +1338,7 @@
 			children = (
 				3897159017902E35005BE03E /* MCPaymentsTableViewController.h */,
 				3897159117902E35005BE03E /* MCPaymentsTableViewController.m */,
+				38977E601B2A367E008484A4 /* MCPaymentTableViewCell.swift */,
 			);
 			name = Payments;
 			sourceTree = "<group>";
@@ -1364,7 +1365,6 @@
 		38DC8B38190911BE00762235 /* iPhone */ = {
 			isa = PBXGroup;
 			children = (
-				38977E601B2A367E008484A4 /* MCPaymentTableViewCell.swift */,
 				38977E5E1B2A32EF008484A4 /* MCPersonTableViewCell.swift */,
 				38977E5C1B2A31A2008484A4 /* MCSolutionOverViewTableViewCell_iPhone.swift */,
 				38977E5A1B2A30A7008484A4 /* MCWhoOwesWhoTableViewCell_iPhone.swift */,
