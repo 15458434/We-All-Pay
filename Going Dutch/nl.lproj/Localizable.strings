@@ -144,6 +144,12 @@
 /* example for appstore screenshots */
 "l.d.mortimer@internet.com" = "l.d.boer@internet.nl";
 
+/* A string that is shown when the description of the item it not available. */
+"label_no_item_description" = "Iets";
+
+/* A string to indicate no person is available on this payment */
+"label_no_person" = "Niemand";
+
 /* first name example for app store screenshots */
 "Lauren" = "Laurentien";
 
@@ -254,10 +260,10 @@
 /* payed item example for app store screenshots */
 "Soft drinks" = "Frisdrank";
 
-/* Someone */
+/* (No Comment) */
 "Someone" = "Iemand";
 
-/* Something */
+/* (No Comment) */
 "something" = "iets";
 
 /* Title of a Yes button. */
