@@ -1,5 +1,5 @@
 //
-//  MCSharedBillTableViewController.m
+//  MCPaymentsTableViewController.m
 //  Going Dutch
 //
 //  Created by Mark Cornelisse on 09-01-13.
@@ -9,7 +9,7 @@
 @import FirebaseAnalytics;
 @import WhoPayingUserDefaultsStoreInterface;
 
-#import "MCSharedBillTableViewController.h"
+#import "MCPaymentsTableViewController.h"
 #import "UIViewController+WeAllPayStore.h"
 
 #import "MCWeAllPayStoreController.h"
@@ -26,7 +26,7 @@
 
 #import "We_all_pay-Swift.h"
 
-@interface MCSharedBillTableViewController () <ShowPayment>
+@interface MCPaymentsTableViewController () <ShowPayment>
 
 @property (weak, nonatomic) IBOutlet MCTableEmptyMessage *headerView;
 
@@ -35,7 +35,7 @@
 
 @end
 
-@implementation MCSharedBillTableViewController
+@implementation MCPaymentsTableViewController
 
 #pragma mark - Actions
 

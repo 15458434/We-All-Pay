@@ -9,7 +9,7 @@
 @import FirebaseAnalytics;
 
 #import "MCAllTripsTableViewController.h"
-#import "MCSharedBillTableViewController.h"
+#import "MCPaymentsTableViewController.h"
 #import "MCPaymentViewController.h"
 #import "MCEditTripViewController.h"
 #import "MCSharedBillMainViewController.h"
