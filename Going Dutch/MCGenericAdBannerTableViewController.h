@@ -16,6 +16,8 @@ NS_ASSUME_NONNULL_BEGIN
 @interface MCGenericAdBannerTableViewController : UITableViewController
 
 @property (weak, nonatomic) IBOutlet GADBannerView *worstSalesPitchEverView;
+@property (weak, nonatomic) IBOutlet NSLayoutConstraint *worstSalesPitchEverHeightConstraint;
+
 @property (strong, nonatomic) IBOutlet MCAdBannerEngine *adBannerEngine;
 @property (nonatomic, readonly) NSString *adUnitId;
 

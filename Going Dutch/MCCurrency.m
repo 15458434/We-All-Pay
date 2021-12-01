@@ -11,19 +11,6 @@
 #import "MCPayment.h"
 #import "MCSharedBill.h"
 
-
 @implementation MCCurrency
-
-@dynamic code;
-@dynamic dateCreated;
-@dynamic dateModified;
-@dynamic isStillValid;
-@dynamic name;
-@dynamic symbol;
-@dynamic uniqueID;
-@dynamic exchangeRateFromCurrency;
-@dynamic exchangeRateToCurrency;
-@dynamic payment;
-@dynamic sharedBill;
 
 @end

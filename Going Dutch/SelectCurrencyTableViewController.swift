@@ -122,7 +122,7 @@ class SelectCurrencyTableViewController: UITableViewController, UISearchResultsU
                 return filteredCurrencies[indexPath.row];
             case let (searchActive, rc, section) where searchActive == false && rc > 0 && section == 0:
                 let result = recentUsedForeignCurrencies[indexPath.row]
-                return Currency(name: result.name, code: result.code)
+                return Currency(name: result.name!, code: result.code!)
             case let (searchActive, rc, section) where searchActive == false && rc > 0 && section > 0:
                 return sections[section - 1][indexPath.row]
             default:
@@ -133,26 +133,32 @@ class SelectCurrencyTableViewController: UITableViewController, UISearchResultsU
         
         let thisCellsCurrency = data(indexPath: indexPath)
         
-        currencyUpdateModel.updateCurrency(with: thisCellsCurrency.code) { (error) in
-            if (error != nil) {
-                Swift.debugPrint("Error fetching ExchangeRate: \(error!)")
-                
-                let title = NSLocalizedString("Unable to fetch exchange rates", comment: "itle message of an alert that pops up when fetching exchange rates is impossibl")
-                let message = NSLocalizedString("Fetching exchange rates is not possible at this moment. Check your internet connection and/or hit solve to fetch all missing exchange rates at a later time", comment: "Message explaining what the user can do to refetch exchange rates")
-                let dismissTitle = NSLocalizedString("Dismiss", comment: "Title of a button that dismisses an alart")
-                
-                let alertController = UIAlertController(title: title, message: message, preferredStyle: .alert)
-                let dismissAction = UIAlertAction(title: dismissTitle, style: .cancel, handler: nil)
-                alertController.addAction(dismissAction)
-                
-                myPresenter?.present(alertController, animated: true, completion: nil)
+        if let target: PaymentStateModelProtocol = self.target(forAction: #selector(getter: PaymentStateModelProtocol.paymentStateModel), withSender: self) as? PaymentStateModelProtocol {
+            target.paymentStateModel.update(currency: thisCellsCurrency)
+        } else {
+            currencyUpdateModel.updateCurrency(with: thisCellsCurrency.code) { (error) in
+                guard error == nil else {
+                    Swift.debugPrint("Error fetching ExchangeRate: \(error!)")
+
+                    let title = NSLocalizedString("Unable to fetch exchange rates", comment: "itle message of an alert that pops up when fetching exchange rates is impossibl")
+                    let message = NSLocalizedString("Fetching exchange rates is not possible at this moment. Check your internet connection and/or hit solve to fetch all missing exchange rates at a later time", comment: "Message explaining what the user can do to refetch exchange rates")
+                    let dismissTitle = NSLocalizedString("Dismiss", comment: "Title of a button that dismisses an alart")
+
+                    let alertController = UIAlertController(title: title, message: message, preferredStyle: .alert)
+                    let dismissAction = UIAlertAction(title: dismissTitle, style: .cancel, handler: nil)
+                    alertController.addAction(dismissAction)
+
+                    myPresenter?.present(alertController, animated: true, completion: nil)
+
+                    return
+                }
             }
         }
         
-        if let dismissMe = dismissMe {
-            dismissMe()
+        if let navigationController = navigationController {
+            navigationController.presentingViewController!.dismiss(animated: true, completion: nil)
         } else {
-            navigationController!.presentingViewController!.dismiss(animated: true, completion: nil)
+            presentingViewController!.dismiss(animated: true)
         }
     }
     
@@ -224,7 +230,7 @@ class SelectCurrencyTableViewController: UITableViewController, UISearchResultsU
                 return filteredCurrencies[indexPath.row];
             case let (searchActive, rc, section) where searchActive == false && rc > 0 && section == 0:
                 let result = recentUsedForeignCurrencies[indexPath.row]
-                return Currency(name: result.name, code: result.code)
+                return Currency(name: result.name!, code: result.code!)
             case let (searchActive, rc, section) where searchActive == false && rc > 0 && section > 0:
                 return sections[section - 1][indexPath.row]
             default:
@@ -276,7 +282,7 @@ class EventUpdateCurrencyModel: NSObject, CurrencyUpdateModel {
     // MARK: CurrencyUpdateModel
     
     var currencyCode: String {
-        return self.event.mainCurrency.code
+        return self.event.mainCurrency!.code!
     }
     
     func updateCurrency(with code: String, with completion: @escaping ((Error?) -> Void)) {
@@ -299,7 +305,7 @@ class PaymentUpdateCurrencyModel: NSObject, CurrencyUpdateModel {
     // MARK: CurrencyUpdateModel
     
     var currencyCode: String {
-        return self.payment.currency.code
+        return self.payment.currency!.code!
     }
     
     func updateCurrency(with code: String, with completion: @escaping ((Error?) -> Void)) {
@@ -307,7 +313,7 @@ class PaymentUpdateCurrencyModel: NSObject, CurrencyUpdateModel {
         let newCurrency = MCCurrency(from: code, from: mainThreadContext)
         let oldCurrency = payment.currency
         payment.currency = newCurrency
-        if oldCurrency?.sharedBill.count == 0 && oldCurrency?.payment.count == 0 {
+        if oldCurrency?.sharedBill?.count == 0 && oldCurrency?.payment?.count == 0 {
             mainThreadContext.delete(oldCurrency!)
         }
         
@@ -315,6 +321,6 @@ class PaymentUpdateCurrencyModel: NSObject, CurrencyUpdateModel {
     }
     
     var recentSelectedCurrencies: [MCCurrency] {
-        return payment.onWhichBill.recentUsedForeignCurrencies(5) ?? [MCCurrency]()
+        return payment.onWhichBill!.recentUsedForeignCurrencies(5) ?? [MCCurrency]()
     }
 }

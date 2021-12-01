@@ -6,7 +6,7 @@
 //  Copyright (c) 2014 Mark Cornelisse. All rights reserved.
 //
 
-#import "MCExchangeRate.h"
+#import "MCExchangeRate+CoreDataProperties.h"
 
 typedef NS_ENUM(short, MCExchangeRateStatus){
     MCExchangeRateStatusValid NS_SWIFT_NAME(valid),

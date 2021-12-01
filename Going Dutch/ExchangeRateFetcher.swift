@@ -9,12 +9,18 @@
 import UIKit
 
 @objc public final class ExchangeRateFetcher: NSObject {
-    @objc public let currencyController: CurrencyController = CurrencyController()
+    @objc public let currencyController: CurrencyController
     public private(set) var baseCurrencyCode: String!
     public private(set) var rates: Dictionary<String, Double>!
     public private(set) var date: Date!
     
     public private(set) var isFetching: Bool = false
+    
+    init(filterUnusedCurrencies: Bool = true) {
+        self.currencyController = CurrencyController(with: filterUnusedCurrencies)
+        super.init()
+        
+    }
     
     public var isLastFetchOlderThanAnHour: Bool {
         if date == nil {
@@ -71,7 +77,7 @@ import UIKit
                 UIApplication.shared.isNetworkActivityIndicatorVisible = false
             }
             
-            if error != nil {
+            guard error == nil else {
                 debugPrint("Error fetching exchangeRate from OpenExchangeRates: \(String(describing: error))")
                 OperationQueue.main.addOperation({ () -> Void in
                     completionHandler(nil, nil, error as NSError?)
@@ -122,6 +128,12 @@ import UIKit
             print("CurrencyCode: \(code) not present.")
             return false
         }
+    }
+    
+    // MARK: NSObject
+    
+    @objc public convenience override init() {
+        self.init(filterUnusedCurrencies: true)
     }
     
     public subscript(code: String) -> Double {

@@ -27,7 +27,6 @@ import GoogleMobileAds
 @objc(MCAdBannerEngine) @objcMembers final class AdBannerEngine: AdEngine, GADBannerViewDelegate {
     
     private(set) var delegate: AdBannerEngineDelegate!
-    var shouldShowEngine: RemoteConfigTrueCasino?
     
     @objc(prepareAdBanner:withAdUnitId:andViewController:) func prepare(adBanner: GADBannerView, with adUnitID: String, and viewController: UIViewController) {
         func prepareAdBanner(with consent: PACConsentStatus = .unknown) {
@@ -41,12 +40,6 @@ import GoogleMobileAds
         
         guard AdEngine.isEnabled else {
             return
-        }
-        
-        if let shouldShow = self.shouldShowEngine {
-            guard shouldShow.isTrue else {
-                return
-            }
         }
         
         self.delegate = (viewController as! AdBannerEngineDelegate)
@@ -71,12 +64,6 @@ import GoogleMobileAds
             return
         }
         
-        if let shouldShow = self.shouldShowEngine {
-            guard shouldShow.isTrue else {
-                return
-            }
-        }
-        
         self.delegate = (viewController as! AdBannerEngineDelegate)
         
         let consent = PACConsentStatus(rawValue: UserDefaults.standard.integer(forKey: AdEngine.kAdBannerConsent))!
@@ -97,12 +84,6 @@ import GoogleMobileAds
         
         guard AdEngine.isEnabled else {
             return
-        }
-        
-        if let shouldShow = self.shouldShowEngine {
-            guard shouldShow.isTrue else {
-                return
-            }
         }
         
         self.delegate = (viewController as! AdBannerEngineDelegate)

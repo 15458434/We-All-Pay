@@ -7,9 +7,9 @@
 //
 
 #import "MCPaymentPresenceEntityMigrationPolicy.h"
-#import "MCSharedBill.h"
-#import "MCPayment.h"
-#import "MCCurrency.h"
+#import "MCSharedBill+CoreDataProperties.h"
+#import "MCPayment+CoreDataProperties.h"
+#import "MCCurrency+CoreDataProperties.h"
 
 @implementation MCPaymentPresenceEntityMigrationPolicy
 

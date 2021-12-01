@@ -1,5 +1,5 @@
 //
-//  MCSharedBillTableViewController.m
+//  MCPaymentsTableViewController.m
 //  Going Dutch
 //
 //  Created by Mark Cornelisse on 09-01-13.
@@ -9,7 +9,7 @@
 @import FirebaseAnalytics;
 @import WhoPayingUserDefaultsStoreInterface;
 
-#import "MCSharedBillTableViewController.h"
+#import "MCPaymentsTableViewController.h"
 #import "UIViewController+WeAllPayStore.h"
 
 #import "MCWeAllPayStoreController.h"
@@ -26,7 +26,7 @@
 
 #import "We_all_pay-Swift.h"
 
-@interface MCSharedBillTableViewController () <ShowPayment>
+@interface MCPaymentsTableViewController () <ShowPayment>
 
 @property (weak, nonatomic) IBOutlet MCTableEmptyMessage *headerView;
 
@@ -35,7 +35,7 @@
 
 @end
 
-@implementation MCSharedBillTableViewController
+@implementation MCPaymentsTableViewController
 
 #pragma mark - Actions
 
@@ -207,18 +207,39 @@
             [self setEmptyMessageWithDuration:1.0];
             break;
             
-        case NSFetchedResultsChangeUpdate:
-            [self.tableView reloadRowsAtIndexPaths:@[indexPath] withRowAnimation:UITableViewRowAnimationAutomatic];
-            break;
-            
         case NSFetchedResultsChangeMove:
             [self.tableView deleteRowsAtIndexPaths:@[indexPath] withRowAnimation:UITableViewRowAnimationFade];
             [self.tableView insertRowsAtIndexPaths:@[newIndexPath] withRowAnimation:UITableViewRowAnimationFade];
+            break;
+            
+        case NSFetchedResultsChangeUpdate:
             break;
     }
 }
 
 #pragma mark - UITableViewController
+
+#pragma mark - UITableViewDelegate
+
+- (void)tableView:(UITableView *)tableView willDisplayCell:(UITableViewCell *)cell forRowAtIndexPath:(NSIndexPath *)indexPath {
+    MCPayment *payment = [_dataController objectAtIndexPath:indexPath];
+    MCPaymentTableViewCell *paymentCell = (MCPaymentTableViewCell *)cell;
+    [paymentCell updateWithPayment:payment];
+}
+
+- (void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath {
+    UIUserInterfaceSizeClass horizontalSizeClass = self.traitCollection.horizontalSizeClass;
+    UIUserInterfaceSizeClass verticalSizeClass = self.traitCollection.verticalSizeClass;
+    if (horizontalSizeClass == UIUserInterfaceSizeClassRegular && verticalSizeClass == UIUserInterfaceSizeClassRegular) {
+        [self performSegueWithIdentifier:@"openPayment_iPad" sender:self];
+    } else {
+        [self performSegueWithIdentifier:@"openPaymentView" sender:self];
+    }
+}
+
+- (CGFloat)tableView:(UITableView *)tableView heightForRowAtIndexPath:(NSIndexPath *)indexPath {
+    return 60;
+}
 
 #pragma mark - UITableViewDataSource
 
@@ -231,33 +252,7 @@
 }
 
 - (UITableViewCell *)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath {
-    MCPayment *thisCellsPayment = [_dataController objectAtIndexPath:indexPath];
-    if (!thisCellsPayment) {
-    }
     MCPaymentTableViewCell *paymentCell = [tableView dequeueReusableCellWithIdentifier:@"MCPaymentTableViewCell"];
-    
-    NSString *thisCellsPayerName;
-    if ([thisCellsPayment payingPerson]) {
-        thisCellsPayerName = thisCellsPayment.payingPerson.getFullName;
-    } else {
-        thisCellsPayerName = NSLocalizedString(@"Someone", @"Someone");
-    }
-    paymentCell.namePayerLabel.text = thisCellsPayerName;
-    
-    // Get category picture.
-    NSArray *pictureObjects = CategoryPictureStoreController.shared.pictureObjects;
-    CategoryPictureObject *categoryObject = pictureObjects[thisCellsPayment.categoryId.shortValue];
-    paymentCell.itemTypeImageView.image = categoryObject.smallPicture;
-    
-    NSString *thisCellsDescriptionOfPayment = [thisCellsPayment descriptionOfPayment];
-    if (!thisCellsDescriptionOfPayment) {
-        thisCellsDescriptionOfPayment = NSLocalizedString(@"something", @"Something");
-    }
-    paymentCell.whatPaidLabel.text =thisCellsDescriptionOfPayment;
-    
-    CurrencyFormatter *cf = [[CurrencyFormatter alloc] initWithCurrencyCode:thisCellsPayment.currency.code];
-    paymentCell.moneyPaidLabel.text = [cf stringForObjectValue:thisCellsPayment.money];
-    
     return paymentCell;
 }
 
@@ -272,22 +267,6 @@
 
 - (BOOL)tableView:(UITableView *)tableView canEditRowAtIndexPath:(NSIndexPath *)indexPath {
     return self.tableView.isEditing ? YES : NO;
-}
-
-#pragma mark - UITableViewDelegate
-
-- (CGFloat)tableView:(UITableView *)tableView heightForRowAtIndexPath:(NSIndexPath *)indexPath {
-    return 60;
-}
-
-- (void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath {
-    UIUserInterfaceSizeClass horizontalSizeClass = self.traitCollection.horizontalSizeClass;
-    UIUserInterfaceSizeClass verticalSizeClass = self.traitCollection.verticalSizeClass;
-    if (horizontalSizeClass == UIUserInterfaceSizeClassRegular && verticalSizeClass == UIUserInterfaceSizeClassRegular) {
-        [self performSegueWithIdentifier:@"openPayment_iPad" sender:self];
-    } else {
-        [self performSegueWithIdentifier:@"openPaymentView" sender:self];
-    }
 }
 
 #pragma mark - UIViewController
@@ -372,8 +351,11 @@
             payment = [_dataController objectAtIndexPath:indexPathOfSelectedRow];
         }
         MCPaymentViewController *paymentViewController = (MCPaymentViewController *)navController.viewControllers[0];
-        paymentViewController.thisPayment = payment;
-        paymentViewController.tonightsBill = _tonightsBill;
+        if (!payment) {
+            [paymentViewController prepareForUseWithEvent:_tonightsBill];
+        } else {
+            [paymentViewController prepareForUseWithPayment:payment];
+        }
     } else if ([segue.identifier isEqualToString:@"solveButton"]) {
         UINavigationController *navController = (UINavigationController *)segue.destinationViewController;
         SolutionViewController *destination = navController.viewControllers.firstObject;
@@ -382,8 +364,12 @@
         NSParameterAssert([[[segue destinationViewController] viewControllers][0] conformsToProtocol:@protocol(MCThisPaymentProtocol)]);
         UINavigationController *navigationController = (UINavigationController *)segue.destinationViewController;
         PaymentViewController *destination = (PaymentViewController *)navigationController.viewControllers[0];
-        destination.thisPayment = [_tonightsBill getFirstPaymentWithoutAPayer];
-        destination.tonightsBill = _tonightsBill;
+        MCPayment *payment = [_tonightsBill getFirstPaymentWithoutAPayer];
+        if (payment) {
+            [destination prepareForUseWithPayment:payment];
+        } else {
+            [destination prepareForUseWithEvent:_tonightsBill];
+        }
         if (@available(iOS 13.0, *)) {
             UINavigationController *navController = (UINavigationController *)segue.destinationViewController;
             navController.modalInPresentation = YES;
@@ -391,8 +377,7 @@
     } else if ([segue.identifier isEqualToString:@"openPaymentWithMissingData_iPad"]) {
         UINavigationController *navigationController = (UINavigationController *)segue.destinationViewController;
         PaymentViewController *destination = navigationController.viewControllers[0];
-        destination.tonightsBill = _tonightsBill;
-        destination.thisPayment = _forOpenPaymentWithMissingDataForSegue;
+        [destination prepareForUseWithPayment:_forOpenPaymentWithMissingDataForSegue];
         _forOpenPaymentWithMissingDataForSegue = nil;
         if (@available(iOS 13.0, *)) {
             UINavigationController *navController = (UINavigationController *)segue.destinationViewController;
@@ -404,7 +389,7 @@
             navController.modalInPresentation = YES;
         }
         PaymentViewController *destination = (PaymentViewController *)navController.viewControllers.firstObject;
-        destination.tonightsBill = _tonightsBill;
+        [destination prepareForUseWithEvent:_tonightsBill];
     } else if ([segue.identifier isEqualToString:@"openPayment_iPad"]) {
         UINavigationController *navController = segue.destinationViewController;
         if (@available(iOS 13.0, *)) {
@@ -412,8 +397,8 @@
         }
         PaymentViewController *destination = (PaymentViewController *)navController.viewControllers.firstObject;
         NSIndexPath *indexPath = [self.tableView indexPathForSelectedRow];
-        destination.thisPayment = [_dataController objectAtIndexPath:indexPath];
-        destination.tonightsBill = _tonightsBill;
+        MCPayment *payment = [_dataController objectAtIndexPath:indexPath];
+        [destination prepareForUseWithPayment:payment];
         [[self tableView] deselectRowAtIndexPath:indexPath animated:YES];
     } else {
         NSLog(@"Unknown segue with identifier: %@", segue.identifier);

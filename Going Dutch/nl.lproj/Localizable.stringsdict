@@ -6,18 +6,18 @@
 	<dict>
 		<key>NSStringLocalizedFormatKey</key>
 		<string>%#@v1_wie_heeft_betaald_count@</string>
-		<key>v1_wie_heeft_betaald_count</key>
+		<key>v1_who_paid_count</key>
 		<dict>
 			<key>NSStringFormatSpecTypeKey</key>
 			<string>NSStringPluralRuleType</string>
 			<key>NSStringFormatValueTypeKey</key>
 			<string>lu</string>
-			<key>zero</key>
-			<string>Niemand heeft tot nu toe iets betaald.</string>
 			<key>one</key>
-			<string>%lu persoon heeft voor alles betaald:</string>
+			<string>%lu person has paid for everything:</string>
 			<key>other</key>
-			<string>%lu personen hebben alles betaald:</string>
+			<string>%lu people have paid everything:</string>
+			<key>zero</key>
+			<string>Nobody has paid anything so far.</string>
 		</dict>
 	</dict>
 </dict>

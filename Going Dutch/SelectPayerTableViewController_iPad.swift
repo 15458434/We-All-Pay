@@ -17,7 +17,6 @@ final class SelectPayerTableViewController_iPad: UITableViewController, MCTonigh
     var tonightsBill: MCSharedBill!
     @objc(writableTonightsBill) var writableTonightsBill: MCSharedBill!
     var thisPayment: MCPayment!
-    var dismissMe: (()->())?
 
     // MARK: New in this class
     
@@ -37,7 +36,7 @@ final class SelectPayerTableViewController_iPad: UITableViewController, MCTonigh
         let payingPerson = people[indexPath.row]
         payingPerson.addPaymentsObject(thisPayment)
         thisPayment.payingPerson = payingPerson
-        dismissMe?()
+        self.presentingViewController!.dismiss(animated: true)
     }
     
     // MARK: UI Table View Data Source
@@ -54,7 +53,7 @@ final class SelectPayerTableViewController_iPad: UITableViewController, MCTonigh
         let cell = tableView.dequeueReusableCell(withIdentifier: "selectPayerTableViewCell", for: indexPath) as! SelectPayerTableViewCell_iPad
         let thisPerson = people[indexPath.row]
         cell.thumbnailView.image = thisPerson.thumbnail
-        cell.fullNameLabel.text = thisPerson.getFullName
+        cell.fullNameLabel.text = thisPerson.getFullName()
         
         return cell
     }

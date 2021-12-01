@@ -14,11 +14,4 @@
 __attribute__((objc_subclassing_restricted))
 @interface MCEmailAddress : NSManagedObject
 
-@property (nonatomic, retain) NSDate * dateCreated;
-@property (nonatomic, retain) NSDate * dateModified;
-@property (nonatomic, retain) NSString * emailAddress;
-@property (nonatomic, retain) NSNumber * selected;
-@property (nonatomic, retain) NSString * uniqueEmailId;
-@property (nonatomic, retain) MCPerson *owner;
-
 @end

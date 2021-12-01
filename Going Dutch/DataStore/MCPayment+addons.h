@@ -6,7 +6,7 @@
 //  Copyright (c) 2013 Mark Cornelisse. All rights reserved.
 //
 
-#import "MCPayment.h"
+#import "MCPayment+CoreDataProperties.h"
 
 @class MCPaymentPresence;
 

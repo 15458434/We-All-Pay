@@ -21,10 +21,10 @@ enum MailComposerError: Error {
 
 extension MailComposer where Self: ThisEvent {
     func mailAdresses() throws -> [String] {
-        let allPeople = Array(event.peoplePresent) as! [MCPerson]
+        let allPeople = Array(event.peoplePresent ?? Set<MCPerson>())
         var listOfMailAddresses = [String]()
         for person in allPeople {
-            if let emailAddress = person.defaultEmailAddress {
+            if let emailAddress = person.defaultEmailAddress() {
                 listOfMailAddresses.append(emailAddress)
             }
         }
@@ -42,12 +42,12 @@ extension MailComposer where Self: ThisEvent {
     func mailBody() throws -> String {
         let mainCurrencyFormatter = CurrencyFormatter()
         let localCurrencyFormatter = CurrencyFormatter()
-        mainCurrencyFormatter.currencyCode = event.mainCurrency.code
+        mainCurrencyFormatter.currencyCode = event.mainCurrency!.code
         
         let solution = event.solveWhoHasToPayWhoFromThisBill() as! [ReturnPayment]
 //        let sortDescriptorOnDateCreated = NSSortDescriptor(key: "dateCreated", ascending: true)
-        let allPayments = Array(event.payments) as! [MCPayment]
-        let allPeople = Array(event.peoplePresent) as! [MCPerson]
+        let allPayments = Array(event.payments ?? Set<MCPayment>())
+        let allPeople = Array(event.peoplePresent ?? Set<MCPerson>())
         
         var mailBody = String()
         mailBody += "https://itunes.apple.com/us/app/we-all-pay/id642135963?mt=8&uo=4\n\n"
@@ -73,11 +73,11 @@ extension MailComposer where Self: ThisEvent {
             guard payment.payingPerson != nil else {
                 throw MailComposerError.missingCrititcalInformationIn(payment: payment)
             }
-            if payment.exchangeRate.exchangeRate.doubleValue == 1.0 {
-                mailBody += String.localizedStringWithFormat(NSLocalizedString("%1$@ paid %2$@ for %3$@.", comment: "%1$@ has paid %2$@ for %3$@."), payment.payingPerson!.getFullName!, mainCurrencyFormatter.string(for: payment.moneyInMainCurrency)!, payment.fullDescriptionOfPayment()!)
+            if payment.exchangeRate!.exchangeRate!.doubleValue == 1.0 {
+                mailBody += String.localizedStringWithFormat(NSLocalizedString("%1$@ paid %2$@ for %3$@.", comment: "%1$@ has paid %2$@ for %3$@."), payment.payingPerson!.getFullName(), mainCurrencyFormatter.string(for: payment.moneyInMainCurrency)!, payment.fullDescriptionOfPayment()!)
             } else {
-                localCurrencyFormatter.currencyCode = payment.currency.code
-                mailBody += String.localizedStringWithFormat(NSLocalizedString("%1$@ has paid %2$@(%3$@) for %4$@", comment: "%1$@ has paid %2$@(%3$@) for %4$@."), payment.payingPerson!.getFullName!, mainCurrencyFormatter.string(for: payment.moneyInMainCurrency)!, localCurrencyFormatter.string(for: payment.money)!, payment.fullDescriptionOfPayment()!)
+                localCurrencyFormatter.currencyCode = payment.currency!.code!
+                mailBody += String.localizedStringWithFormat(NSLocalizedString("%1$@ has paid %2$@(%3$@) for %4$@", comment: "%1$@ has paid %2$@(%3$@) for %4$@."), payment.payingPerson!.getFullName(), mainCurrencyFormatter.string(for: payment.moneyInMainCurrency)!, localCurrencyFormatter.string(for: payment.money!)!, payment.fullDescriptionOfPayment())
             }
             
             mailBody += "\n"
@@ -87,7 +87,7 @@ extension MailComposer where Self: ThisEvent {
         mailBody += String.localizedStringWithFormat(NSLocalizedString("We each used these amounts:", comment: "The amount of money we used:"))
         mailBody += "\n"
         for person in allPeople {
-            mailBody += String.localizedStringWithFormat(NSLocalizedString("%1$@ used %2$@ in total.", comment: "%1$@ used %2$@ in total."), person.getFullName, mainCurrencyFormatter.string(for: event.amountShouldHavePaid(by: person))!)
+            mailBody += String.localizedStringWithFormat(NSLocalizedString("%1$@ used %2$@ in total.", comment: "%1$@ used %2$@ in total."), person.getFullName(), mainCurrencyFormatter.string(for: event.amountShouldHavePaid(by: person))!)
             mailBody += "\n"
         }
         mailBody += "\n"
@@ -96,10 +96,10 @@ extension MailComposer where Self: ThisEvent {
         mailBody += "\n"
         
         for returnPayment in solution {
-            let payerFullName: String = returnPayment.payer?.getFullName ?? ""
+            let payerFullName: String = returnPayment.payer?.getFullName() ?? ""
             let moneyNumber = returnPayment.money ?? NSNumber(value: 0.0)
             let moneyString: String = mainCurrencyFormatter.string(for: moneyNumber)!
-            let receiverFullName: String = returnPayment.receiver?.getFullName ?? ""
+            let receiverFullName: String = returnPayment.receiver?.getFullName() ?? ""
             mailBody += String.localizedStringWithFormat(NSLocalizedString("%1$@ pays %2$@ to %3$@.", comment: "%1$@ pays %2$@ to %3$@"), payerFullName, moneyString, receiverFullName)
             mailBody += "\n"
         }

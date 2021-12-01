@@ -6,7 +6,7 @@
 //  Copyright (c) 2014 Mark Cornelisse. All rights reserved.
 //
 
-#import "MCCurrency.h"
+#import "MCCurrency+CoreDataProperties.h"
 
 @class XRCurrency;
 

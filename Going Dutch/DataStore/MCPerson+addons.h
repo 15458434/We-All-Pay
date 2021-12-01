@@ -6,7 +6,7 @@
 //  Copyright (c) 2013 Mark Cornelisse. All rights reserved.
 //
 
-#import "MCPerson.h"
+#import "MCPerson+CoreDataProperties.h"
 
 @interface MCPerson (addons)
 

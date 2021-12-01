@@ -39,8 +39,8 @@ class SelectCategoryTableViewController: UITableViewController, MCDismissMeBlock
     
     // MARK: New in this class
     
-    @objc(prepareForUseWithPayment:andChangeHandler:) func prepareForUse(with payment: MCPayment, and changeHandler:@escaping ((_ payment: MCPayment) -> ())) {
-        self.model.prepareForUse(with: payment, and: changeHandler)
+    @objc(prepareForUseWithPayment:) func prepareForUse(with payment: MCPayment) {
+        self.model.prepareForUse(with: payment)
     }
     
     // MARK: Inherited From super

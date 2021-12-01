@@ -13,12 +13,4 @@
 
 @implementation MCPaymentPresence
 
-@dynamic averageOweFromPayment;
-@dynamic dateCreated;
-@dynamic dateModified;
-@dynamic isPersonPresent;
-@dynamic uniqueId;
-@dynamic payment;
-@dynamic person;
-
 @end

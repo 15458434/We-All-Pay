@@ -6,7 +6,7 @@
 //  Copyright (c) 2014 Mark Cornelisse. All rights reserved.
 //
 
-#import "MCPaymentPresence.h"
+#import "MCPaymentPresence+CoreDataProperties.h"
 
 @interface MCPaymentPresence (addons)
 

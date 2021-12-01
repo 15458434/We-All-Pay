@@ -10,7 +10,7 @@
 @import GoogleMobileAds;
 
 #import "MCReturnPaymentViewController.h"
-#import "MCSharedBillTableViewController.h"
+#import "MCPaymentsTableViewController.h"
 #import "MCSharedBillPageViewController.h"
 
 #import "MCCurrency+addons.h"

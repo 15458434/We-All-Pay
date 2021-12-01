@@ -9,7 +9,7 @@
 @import FirebaseAnalytics;
 
 #import "MCAllTripsTableViewController.h"
-#import "MCSharedBillTableViewController.h"
+#import "MCPaymentsTableViewController.h"
 #import "MCPaymentViewController.h"
 #import "MCEditTripViewController.h"
 #import "MCSharedBillMainViewController.h"
@@ -25,8 +25,6 @@
 #import "MCEditorType.h"
 
 #import "UIViewController+WeAllPayStore.h"
-
-#import "We_all_pay-Swift.h"
 
 typedef NS_ENUM(BOOL, MCTonightsBillStatus) {
     MCTonightsBillStatusClosed,
@@ -52,6 +50,8 @@ static void * notificationCountContext = &notificationCountContext;
 @property (nonatomic, strong) NSIndexPath *selectedIndexPathForAction;
 
 @property (nonatomic, strong) SideMenuTransitioner *iScreenTransitioner;
+
+@property (nonatomic, strong) NSArray<NSManagedObject *> *pathComponents;
 
 @end
 
@@ -109,6 +109,13 @@ static void * notificationCountContext = &notificationCountContext;
     [WhoPayingUserDefaultsStoreInterface sendInvalidUserDefaultsIfTonightsBillIs:poorSucker];
     [_model deleteWithEvent:poorSucker];
     [[MCWeAllPayStoreController defaultStore] saveMainThreadContext];
+}
+
+#pragma mark - MCPathComponentsToOpenProtocol
+
+- (void)prepareForUseWithPathComponentsToOpen:(NSArray<NSManagedObject *> *)pathComponentsToOpen {
+    _pathComponents = pathComponentsToOpen;
+    [self performSegueWithIdentifier:@"openEventWithPathComponents" sender:self];
 }
 
 #pragma mark - MCReturnPaymentViewControllerDelegate
@@ -326,6 +333,14 @@ static void * notificationCountContext = &notificationCountContext;
         InfoScreenTableViewController *infoContainerViewController = navigationController.viewControllers.lastObject;
         infoContainerViewController.preferredContentSize = CGSizeMake(320, 0);
         infoContainerViewController.notificationEnvironmentModel = self.notificationsStateModel;
+    } else if ([segue.identifier isEqualToString:@"openEventWithPathComponents"]) {
+        _isATonightsBillOpened = MCTonightsBillStatusOpened;
+        NSParameterAssert(_pathComponents);
+        MCSharedBill *event = (MCSharedBill *)_pathComponents[0];
+        NSParameterAssert(event);
+        MCSharedBillMainViewController *destination = (MCSharedBillMainViewController *)segue.destinationViewController;
+        [destination updateEventWithObjectID:event.objectID];
+        _pathComponents = nil;
     }
 }
 

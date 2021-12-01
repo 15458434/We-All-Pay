@@ -47,8 +47,8 @@ import UIKit
                 textField.textColor = .red
             }
         case .cancelled:
-            if model.person.emailAddress.count >= 1 {
-                textField.text = model.person.defaultEmailAddress
+            if model.person.emailAddress!.count >= 1 {
+                textField.text = model.person.defaultEmailAddress()
             } else {
                 textField.text = nil
             }

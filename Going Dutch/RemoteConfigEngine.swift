@@ -7,40 +7,20 @@
 //
 
 import UIKit
+import FirebaseInstallations
 import FirebaseRemoteConfig
 
-@objc(MCRemoteConfigEngine) @objcMembers class RemoteConfigEngine: NSObject {
-    @objc(ConfigEngineItem) enum Item: UInt, CaseIterable {
-        case percentageOfTimeShowMainBottomBannerOniPhone = 0
-        case percentageOfTimeShowPersonViewBannerOniPhone = 1
-        case percentageOfTimeShowPaymentViewBannerOniPhone = 2
-        case percentageOfTimeShowSolutionViewBannerOniPhone = 3
-        case percentageOfTimeShowAfterSolveInterstitialOniPhone = 4
-        case percentageOfTimeShowMainBottomBannerOniPad = 5
-        case percentageOfTimeShowPaymentViewBannerOniPad = 7
-        case percentageOfTimeShowSolutionViewBannerOniPad = 8
-        case percentageOfTimeShowAfterSolveInterstitialOniPad = 9
+@objc(MCRemoteConfigEngine) @objcMembers final class RemoteConfigEngine: NSObject {
+    @objc(MCRemoteConfigEngineItem) enum Item: UInt, CaseIterable {
+        case solutionAdBannerHeight
+        case paymentAdBannerHeight
         
         var stringValue: String {
             switch self {
-            case .percentageOfTimeShowMainBottomBannerOniPhone:
-                return "v1_Percentage_Of_Time_Show_Main_Bottom_Banner_On_iPhone"
-            case .percentageOfTimeShowPersonViewBannerOniPhone:
-                return "v1_Percentage_Of_Time_Show_Person_View_Banner_On_iPhone"
-            case .percentageOfTimeShowPaymentViewBannerOniPhone:
-                return "v1_Percentage_Of_Time_Show_Payment_View_Banner_On_iPhone"
-            case .percentageOfTimeShowSolutionViewBannerOniPhone:
-                return "v1_Percentage_Of_Time_Show_Solution_View_Banner_On_iPhone"
-            case .percentageOfTimeShowAfterSolveInterstitialOniPhone:
-                return "v1_Percentage_Of_Time_Show_After_Solve_Interstitial_On_iPhone"
-            case .percentageOfTimeShowMainBottomBannerOniPad:
-                return "v1_Percentage_Of_Time_Show_Main_Bottom_Banner_On_iPad"
-            case .percentageOfTimeShowPaymentViewBannerOniPad:
-                return "v1_Percentage_Of_Time_Show_Payment_View_Banner_On_iPad"
-            case .percentageOfTimeShowSolutionViewBannerOniPad:
-                return "v1_Percentage_Of_Time_Show_Solution_View_Banner_On_iPad"
-            case .percentageOfTimeShowAfterSolveInterstitialOniPad:
-                return "v1_Percentage_Of_Time_Show_After_Solve_Interstitial_On_iPad"
+            case .solutionAdBannerHeight:
+                return "v2_solutionView_adBanner_height"
+            case .paymentAdBannerHeight:
+                return "v2_paymentView_adBannerHeight"
             default:
                 fatalError("Value doesn't exist")
             }
@@ -50,16 +30,27 @@ import FirebaseRemoteConfig
     private static let remoteConfig = RemoteConfig.remoteConfig()
     
     class func prepareRemoteConfig() {
+        #if DEBUG
+        Installations.installations().authTokenForcingRefresh(true, completion: { (result, error) in
+            if let error = error {
+                print("Error fetching token: \(error)")
+                return
+            }
+            guard let result = result else {
+                return
+            }
+            print("Installation auth token: \(result.authToken)")
+        })
+        #endif
+        
         var defaults: [String: NSObject] {
             let newValues = RemoteConfigEngine.Item.allCases.reduce([String: NSObject]()) { (dict, item) -> [String: NSObject] in
                 var dict = dict
                 switch item {
-                case .percentageOfTimeShowAfterSolveInterstitialOniPhone, .percentageOfTimeShowAfterSolveInterstitialOniPad:
-                    dict[item.stringValue] = 0 as NSNumber
-                case .percentageOfTimeShowPaymentViewBannerOniPad, .percentageOfTimeShowSolutionViewBannerOniPad:
-                    dict[item.stringValue] = 0 as NSNumber
-                default:
-                    dict[item.stringValue] = 1 as NSNumber
+                case .solutionAdBannerHeight:
+                    dict[item.stringValue] = 50 as NSNumber
+                case .paymentAdBannerHeight:
+                    dict[item.stringValue] = 50 as NSNumber
                 }
                 return dict
             }
@@ -94,6 +85,29 @@ import FirebaseRemoteConfig
     
     func config(for item: RemoteConfigEngine.Item) -> NSObject {
         return RemoteConfigEngine.remoteConfig.configValue(forKey: item.stringValue)
+    }
+    
+    func number(for item: RemoteConfigEngine.Item) -> NSNumber? {
+        guard let value = self.config(for: item) as? RemoteConfigValue else {
+            debugPrint("key: \(item.stringValue) doesn't exist.")
+            return nil
+        }
+        return value.numberValue
+    }
+    
+    func string(for item: RemoteConfigEngine.Item) -> String? {
+        guard let value = self.config(for: item) as? RemoteConfigValue else {
+            debugPrint("key: \(item.stringValue) doesn't exist.")
+            return nil
+        }
+        return value.stringValue
+    }
+    
+    func boolean(for item: RemoteConfigEngine.Item) -> Bool {
+        guard let value = self.config(for: item) as? RemoteConfigValue else {
+            fatalError("key: \(item.stringValue) doesn't exist.")
+        }
+        return value.boolValue
     }
     
     // MARK: NSObject

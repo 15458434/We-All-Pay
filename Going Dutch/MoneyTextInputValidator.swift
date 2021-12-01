@@ -16,6 +16,12 @@ import UIKit
     }
     @IBOutlet weak var model: PaymentModel!
     
+    convenience init(with model: PaymentModel, and textField: UITextField) {
+        self.init()
+        self.model = model
+        self.textField = textField
+    }
+    
     func updateTextFieldColor(for string: String) {
         if model.currencyFormatter.doubleFromString(string) != nil {
             if #available(iOS 13.0, *) {

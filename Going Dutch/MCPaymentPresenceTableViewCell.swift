@@ -24,7 +24,7 @@ final class MCPaymentPresenceTableViewCell: UITableViewCell {
     // MARK: IB Actions
     @IBAction func switchPresence(_ sender: UISwitch) {
         thisCellsPaymentPresence.isPersonPresent = NSNumber(value: sender.isOn)
-        thisCellsPaymentPresence.payment.recalculateAveragePeopleOweAndStore()
+        thisCellsPaymentPresence.payment!.recalculateAveragePeopleOweAndStore()
     }
     
     @IBAction func backgroundTappedToDismissKeyboard(_ sender: AnyObject) {
