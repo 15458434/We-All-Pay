@@ -243,9 +243,6 @@
 /* A placeholder of who paid text field in the edit payment view */
 "payment_view_payerNameField_placeholder" = "Wie heeft er betaald?";
 
-/* Title of the list of people who are present on the current payment in the edit payment view. */
-"payment_view_presence_list_title" = "Aanwezigheid hierbij";
-
 /* A placeholder of the price fireld in the edit payment view. */
 "payment_view_price_placeholder" = "Hoeveel is er betaald?";
 
