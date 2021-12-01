@@ -99,6 +99,12 @@
 /* Sub header in the paymentView which states edit data */
 "Edit payment data" = "Bewerk gegevens";
 
+/* A selection button at the top of the event view that allows for selection between the people and the payments on the event. This button is for selecting the payments. */
+"event_view_segmentedControl_payments_title" = "Betalingen";
+
+/* A selection button at the top of the event view that allows for selection between the people and the payments on the event. This button is for selecting the people. */
+"event_view_segmentedControl_people_title" = "Aanwezigen";
+
 /* Text on a button to select a different main currency for an event */
 "events_view_button_change_main_currency" = "€$£¥";
 

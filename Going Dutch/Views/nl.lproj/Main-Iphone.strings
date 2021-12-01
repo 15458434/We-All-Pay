@@ -22,12 +22,6 @@
 /* Class = "UIButton"; normalTitle = "Add person"; ObjectID = "gfv-ln-Tgv"; */
 "gfv-ln-Tgv.normalTitle" = "Nieuwe persoon";
 
-/* Class = "UISegmentedControl"; gfW-p5-dHb.segmentTitles[0] = "People"; ObjectID = "gfW-p5-dHb"; */
-"gfW-p5-dHb.segmentTitles[0]" = "Aanwezigen";
-
-/* Class = "UISegmentedControl"; gfW-p5-dHb.segmentTitles[1] = "Payments"; ObjectID = "gfW-p5-dHb"; */
-"gfW-p5-dHb.segmentTitles[1]" = "Betalingen";
-
 /* Class = "UITextField"; placeholder = "First Name"; ObjectID = "GN1-dN-HP2"; */
 "GN1-dN-HP2.placeholder" = "Voornaam";
 
