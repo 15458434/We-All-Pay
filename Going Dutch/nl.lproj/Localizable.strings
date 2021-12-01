@@ -255,6 +255,27 @@
 /* Header in the personView which state new person. */
 "Person" = "Persoon";
 
+/* Button in the person view to select an email address of the user in case the user has multiple email addresses from an import of the addressbook */
+"person_view_button_select_email" = "selecteer emailadres";
+
+/* Sub header in the personView which state edit data */
+"person_view_button_subLabel_edit_person" = "bewerk gegevens";
+
+/* Header in the personView which state new person. */
+"person_view_mainLabel_title" = "Persoon";
+
+/* Placeholder of the e-mail address field in the edit person view */
+"person_view_placeholder_email_address" = "e-mailadres";
+
+/* Placeholder of the First Name field in the edit person view */
+"person_view_placeholder_first_name" = "voornaam";
+
+/* Placeholder of the Last name field in the edit person view */
+"person_view_placeholder_last_name" = "achternaam";
+
+/* Sub header in the personView which states add new data */
+"person_view_subLabel_new_person" = "vul gegevens in";
+
 /* An string that indicates that no person is selected in the select payer picker */
 "picker_option_none" = "geen";
 

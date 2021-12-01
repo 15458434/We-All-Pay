@@ -1,17 +1,11 @@
 /* Class = "UILabel"; text = "some person"; ObjectID = "6uD-Ru-yqC"; */
 "6uD-Ru-yqC.text" = "een persoon";
 
-/* Class = "UITextField"; placeholder = "Last name"; ObjectID = "alT-pu-m9B"; */
-"alT-pu-m9B.placeholder" = "Achternaam";
-
 /* Class = "UIButton"; normalTitle = "Contacts"; ObjectID = "asZ-Na-2wd"; */
 "asZ-Na-2wd.normalTitle" = "Contacten";
 
 /* Class = "UITextField"; placeholder = "Activity name"; ObjectID = "BJS-wA-qlM"; */
 "BJS-wA-qlM.placeholder" = "naam van het evenement";
-
-/* Class = "UIButton"; normalTitle = "Select email address"; ObjectID = "BUE-es-n4t"; */
-"BUE-es-n4t.normalTitle" = "Selecteer emailadres";
 
 /* Class = "UINavigationItem"; title = "solution"; ObjectID = "cWM-Oj-MA0"; */
 "cWM-Oj-MA0.title" = "Oplossing";
@@ -21,9 +15,6 @@
 
 /* Class = "UIButton"; normalTitle = "Add person"; ObjectID = "gfv-ln-Tgv"; */
 "gfv-ln-Tgv.normalTitle" = "Nieuwe persoon";
-
-/* Class = "UITextField"; placeholder = "First Name"; ObjectID = "GN1-dN-HP2"; */
-"GN1-dN-HP2.placeholder" = "Voornaam";
 
 /* Class = "UINavigationItem"; title = "events"; ObjectID = "j9s-0f-8Vh"; */
 "j9s-0f-8Vh.title" = "Rekeningen";
@@ -42,9 +33,6 @@
 
 /* Class = "UIButton"; normalTitle = "Add payment"; ObjectID = "x8t-7z-SNG"; */
 "x8t-7z-SNG.normalTitle" = "Nieuwe betaling";
-
-/* Class = "UITextField"; placeholder = "e-mail address"; ObjectID = "xVh-Xm-oA9"; */
-"xVh-Xm-oA9.placeholder" = "emailadres";
 
 /* Class = "UILabel"; text = "Notifications"; ObjectID = "YPb-Py-Acz"; */
 "YPb-Py-Acz.text" = "Berichten";
