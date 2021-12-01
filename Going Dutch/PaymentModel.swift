@@ -61,7 +61,7 @@ import CurrencyConverter
         updateDateModified()
     }
     
-    @objc(updateDescriptionOfPayment:) func update(descriptionOfPayment: String) {
+    @objc(updateDescriptionOfPayment:) func update(descriptionOfPayment: String?) {
         payment.descriptionOfPayment = descriptionOfPayment
         updateDateModified()
     }
