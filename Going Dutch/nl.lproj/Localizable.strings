@@ -79,9 +79,6 @@
 /* Just Dear as in \"Dear Mark\" */
 "Dear %1$@," = "Beste %1$@,";
 
-/* Text on a delete button */
-"Delete" = "Verwijder";
-
 /* event name example for app store screenshots */
 "Dinner" = "Diner";
 
@@ -101,6 +98,18 @@
 
 /* Sub header in the paymentView which states edit data */
 "Edit payment data" = "Bewerk gegevens";
+
+/* Button in the events view that creates a new event */
+"events_view_button_create_event" = "Nieuw Evenement";
+
+/* Text on a delete button */
+"events_view_button_delete_event" = "Verwijder";
+
+/* A message shown to the user when the list of events is empty. */
+"events_view_empty_message" = "Druk op \"Nieuw Evenement\" om een nieuw evenement toe te voegen waarvan je de kosten wilt delen met je vrienden.";
+
+/* A list of all the events on which payments have been shared on the people present */
+"events_view_title" = "Evenementen";
 
 /* (No Comment) */
 "Exchange rates missing. Would you like to fetch them now?" = "Valuta conversie gegevens niet bekend. Nu ophalen?";
