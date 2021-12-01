@@ -38,9 +38,12 @@ static void * CurrencyContext = &CurrencyContext;
 @property (weak, nonatomic) IBOutlet UITextField *payerNameField;
 @property (strong, nonatomic) MCPayerTextInputPicker *payerTextInputPicker;
 @property (weak, nonatomic) IBOutlet UITextField *itemView;
+@property (weak, nonatomic) IBOutlet MCRoundedButton *selectCurrencyButton;
 @property (strong, nonatomic) MCDescriptionOfPaymentTextInputValidator *itemViewDelegate;
 @property (weak, nonatomic) IBOutlet UITextField *paidView;
 @property (strong, nonatomic) IBOutlet MCMoneyTextInputValidator *paidViewDelegate;
+
+@property (weak, nonatomic) IBOutlet UILabel *presenceListLabel;
 
 @property (weak, nonatomic) IBOutlet UIButton *categoryButton;
 @property (weak, nonatomic) IBOutlet UIImageView *payerPicture;
@@ -278,6 +281,13 @@ static void * CurrencyContext = &CurrencyContext;
         }
         self.navigationItem.titleView = _twoLabelTitleView;
     }
+    
+    _payerNameField.placeholder = NSLocalizedStringWithDefaultValue(@"payment_view_payerNameField_placeholder", nil, NSBundle.mainBundle, @"Who paid?", @"A placeholder of who paid text field in the edit payment view");
+    _itemView.placeholder = NSLocalizedStringWithDefaultValue(@"payment_view_item_description_placeholder", nil, NSBundle.mainBundle, @"What got paid?", @"A placeholder of the item description field in the edit payment view.");
+    NSString *currencyButtonTitle = NSLocalizedStringWithDefaultValue(@"payment_view_button_select_currency", nil, NSBundle.mainBundle, @"€$£¥", @"Text on the button that changes the currency in which the currently entered payment was made.");
+    [_selectCurrencyButton setTitle:currencyButtonTitle forState:UIControlStateNormal];
+    _paidView.placeholder = NSLocalizedStringWithDefaultValue(@"payment_view_price_placeholder", nil, NSBundle.mainBundle, @"How much is spent?", @"A placeholder of the price fireld in the edit payment view.");
+    _presenceListLabel.text = NSLocalizedStringWithDefaultValue(@"payment_view_presence_list_title", nil, NSBundle.mainBundle, @"Presence of payment", @"Title of the list of people who are present on the current payment in the edit payment view.");
     
     // Make sure a tap in the background dismisses the keyboard as well.
     UITapGestureRecognizer *thatTickles = [[UITapGestureRecognizer alloc] initWithTarget:self action:@selector(tappedInTheBackground:)];

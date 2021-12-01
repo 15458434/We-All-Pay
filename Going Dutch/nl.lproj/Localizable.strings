@@ -99,6 +99,9 @@
 /* Sub header in the paymentView which states edit data */
 "Edit payment data" = "Bewerk gegevens";
 
+/* Text on a button to select a different main currency for an event */
+"events_view_button_change_main_currency" = "€$£¥";
+
 /* Button in the events view that creates a new event */
 "events_view_button_create_event" = "Nieuw Evenement";
 
@@ -213,11 +216,26 @@
 /* Text of the payment category selection button */
 "payment_view_button_select_category" = "Selecteer Categorie";
 
+/* Text on the button that changes the currency in which the currently entered payment was made. */
+"payment_view_button_select_currency" = "€$£¥";
+
+/* A placeholder of the item description field in the edit payment view. */
+"payment_view_item_description_placeholder" = "Waarvoor is er betaald?";
+
 /* Header in the paymentView which states payment */
 "payment_view_mainLabel_edit_payment" = "Betaling";
 
 /* Header in the paymentView which state new Payment */
 "payment_view_mainLabel_new_payment" = "Nieuwe betaling";
+
+/* A placeholder of who paid text field in the edit payment view */
+"payment_view_payerNameField_placeholder" = "Wie heeft er betaald?";
+
+/* Title of the list of people who are present on the current payment in the edit payment view. */
+"payment_view_presence_list_title" = "Aanwezigheid hierbij";
+
+/* A placeholder of the price fireld in the edit payment view. */
+"payment_view_price_placeholder" = "Hoeveel is er betaald?";
 
 /* Sub header in the paymentView which states Add payment data */
 "payment_view_subLabel_add_payment" = "Vul gegevens in";
