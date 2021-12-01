@@ -341,7 +341,9 @@
                         <outlet property="model" destination="Ltw-CZ-2zU" id="uWB-J4-QIn"/>
                         <outlet property="paidField" destination="ZlS-5v-dlc" id="UZl-Ot-u5Z"/>
                         <outlet property="payerView" destination="xcc-E7-c0h" id="yaP-15-Yuz"/>
-                        <outlet property="selectButton" destination="hi9-hq-PS5" id="dUx-qL-RDT"/>
+                        <outlet property="presenceListLabel" destination="Lbm-k4-s3a" id="B0O-ok-yCW"/>
+                        <outlet property="selectCurrencyButton" destination="8ht-EA-kJE" id="l5Q-X2-xC3"/>
+                        <outlet property="selectPayerButton" destination="hi9-hq-PS5" id="dUx-qL-RDT"/>
                         <outlet property="worstSalesPitchEverView" destination="ega-E2-5BA" id="cWk-vF-1Xf"/>
                     </connections>
                 </tableViewController>

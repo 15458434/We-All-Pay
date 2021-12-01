@@ -228,6 +228,9 @@
 /* Text on the button that changes the currency in which the currently entered payment was made. */
 "payment_view_button_select_currency" = "€$£¥";
 
+/* Button in the edit payment view that allows the user to select a new payer */
+"payment_view_button_select_payer" = "Selecteer betaler";
+
 /* A placeholder of the item description field in the edit payment view. */
 "payment_view_item_description_placeholder" = "Waarvoor is er betaald?";
 
@@ -316,7 +319,7 @@
 /* Restore previous purchases */
 "Restore previous purchases" = "Herstel eerdere aankopen";
 
-/* Text of the payment category selection button */
+/* (No Comment) */
 "Select Category" = "Selecteer Categorie";
 
 /* (No Comment) */

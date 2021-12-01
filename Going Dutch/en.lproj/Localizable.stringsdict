@@ -2,6 +2,16 @@
 <!DOCTYPE plist PUBLIC "-//Apple//DTD PLIST 1.0//EN" "http://www.apple.com/DTDs/PropertyList-1.0.dtd">
 <plist version="1.0">
 <dict>
+	<key>payment_view_presence_list_title</key>
+	<dict>
+		<key>NSStringVariableWidthRuleType</key>
+		<dict>
+			<key>25</key>
+			<string>Presence on payment</string>
+			<key>50</key>
+			<string>People sharing this payment</string>
+		</dict>
+	</dict>
 	<key>This is what we all paid:</key>
 	<dict>
 		<key>NSStringLocalizedFormatKey</key>

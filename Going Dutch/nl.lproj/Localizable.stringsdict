@@ -20,5 +20,15 @@
 			<string>Nobody has paid anything so far.</string>
 		</dict>
 	</dict>
+	<key>payment_view_presence_list_title</key>
+	<dict>
+		<key>NSStringVariableWidthRuleType</key>
+		<dict>
+			<key>25</key>
+			<string>Aanwezigheid</string>
+			<key>50</key>
+			<string>Aanwezigen die deze betaling delen</string>
+		</dict>
+	</dict>
 </dict>
 </plist>
