@@ -183,7 +183,7 @@ static void * notificationCountContext = &notificationCountContext;
     MCAllTripsTableViewCell *eventCell = (MCAllTripsTableViewCell *)cell;
     
     if (!event.tripName) {
-        eventCell.tripLabel.text = NSLocalizedString(@"...", @"String that shows empty string");
+        eventCell.tripLabel.text = NSLocalizedStringWithDefaultValue(@"events_view_event_cell_no_event_name", nil, NSBundle.mainBundle, @"Unnamed event", @"The name of the event shown in the events list when the user didn't add an event name to the event.");
     } else {
         eventCell.tripLabel.text = event.tripName;
     }

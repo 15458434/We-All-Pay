@@ -111,6 +111,9 @@
 /* A message shown to the user when the list of events is empty. */
 "events_view_empty_message" = "Druk op \"Nieuw Evenement\" om een nieuw evenement toe te voegen waarvan je de kosten wilt delen met je vrienden.";
 
+/* The name of the event shown in the events list when the user didn't add an event name to the event. */
+"events_view_event_cell_no_event_name" = "Onbekend evenement";
+
 /* A list of all the events on which payments have been shared on the people present */
 "events_view_title" = "Evenementen";
 
