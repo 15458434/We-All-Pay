@@ -201,6 +201,21 @@
 /* Header in the paymentView which states payment */
 "Payment" = "Betaling";
 
+/* Text of the payment category selection button */
+"payment_view_button_select_category" = "Selecteer Categorie";
+
+/* Header in the paymentView which states payment */
+"payment_view_mainLabel_edit_payment" = "Betaling";
+
+/* Header in the paymentView which state new Payment */
+"payment_view_mainLabel_new_payment" = "Nieuwe betaling";
+
+/* Sub header in the paymentView which states Add payment data */
+"payment_view_subLabel_add_payment" = "Vul gegevens in";
+
+/* Sub header in the paymentView which states edit payment data */
+"payment_view_subLabel_edit_payment" = "Bewerk gegevens";
+
 /* Header in the personView which state new person. */
 "Person" = "Persoon";
 
@@ -244,8 +259,7 @@
 /* Restore previous purchases */
 "Restore previous purchases" = "Herstel eerdere aankopen";
 
-/* Select Category
-   Text of the payment category selection button */
+/* Text of the payment category selection button */
 "Select Category" = "Selecteer Categorie";
 
 /* (No Comment) */

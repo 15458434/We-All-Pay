@@ -270,11 +270,11 @@ static void * CurrencyContext = &CurrencyContext;
     if (!_twoLabelTitleView) {
         _twoLabelTitleView = [NSBundle.mainBundle loadNibNamed:@"MCTwoLabelsTitleView" owner:self options:nil][0];
         if (_isNew) {
-            _twoLabelTitleView.mainLabel.text = NSLocalizedString(@"New payment", @"Header in the paymentView which state new Payment");
-            _twoLabelTitleView.subLabel.text = NSLocalizedString(@"Add payment data", @"Sub header in the paymentView which states Add payment data");
+            _twoLabelTitleView.mainLabel.text = NSLocalizedStringWithDefaultValue(@"payment_view_mainLabel_new_payment", nil, NSBundle.mainBundle, @"New payment", @"Header in the paymentView which state new Payment");
+            _twoLabelTitleView.subLabel.text = NSLocalizedStringWithDefaultValue(@"payment_view_subLabel_add_payment", nil, NSBundle.mainBundle, @"Add payment data", @"Sub header in the paymentView which states Add payment data");
         } else {
-            _twoLabelTitleView.mainLabel.text = NSLocalizedString(@"Payment", @"Header in the paymentView which states payment");
-            _twoLabelTitleView.subLabel.text = NSLocalizedString(@"Edit payment data", @"Sub header in the paymentView which states edit payment data");
+            _twoLabelTitleView.mainLabel.text = NSLocalizedStringWithDefaultValue(@"payment_view_mainLabel_edit_payment", nil, NSBundle.mainBundle, @"Payment", @"Header in the paymentView which states payment");
+            _twoLabelTitleView.subLabel.text = NSLocalizedStringWithDefaultValue(@"payment_view_subLabel_edit_payment", nil, NSBundle.mainBundle, @"Edit payment data", @"Sub header in the paymentView which states edit payment data");
         }
         self.navigationItem.titleView = _twoLabelTitleView;
     }
@@ -446,14 +446,14 @@ static void * CurrencyContext = &CurrencyContext;
                         _categoryView.image = categoryObject.largePicture;
                         [_categoryButton setTitle:categoryObject.categoryDescription forState:UIControlStateNormal];
                     } else {
-                        NSString *buttonText = NSLocalizedString(@"Select Category", @"Select Category");
+                        NSString *buttonText = NSLocalizedStringWithDefaultValue(@"payment_view_button_select_category", nil, NSBundle.mainBundle, @"Select Category", @"Text of the payment category selection button");
                         _categoryView.image = categoryObject.largePicture;
                         [_categoryButton setTitle:buttonText forState:UIControlStateNormal];
                     }
                 } else {
                     NSArray *pictureObjects = CategoryPictureStoreController.shared.pictureObjects;
                     CategoryPictureObject *categoryObject = pictureObjects[0];
-                    NSString *buttonText = NSLocalizedString(@"Select Category", @"Select Category");
+                    NSString *buttonText = NSLocalizedStringWithDefaultValue(@"payment_view_button_select_category", nil, NSBundle.mainBundle, @"Select Category", @"Text of the payment category selection button");
                     _categoryView.image = categoryObject.largePicture;
                     [_categoryButton setTitle:buttonText forState:UIControlStateNormal];
                 }
