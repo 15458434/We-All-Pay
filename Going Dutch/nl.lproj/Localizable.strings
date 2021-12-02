@@ -1,6 +1,3 @@
-/* \(productName) is now free of any ads. */
-"(productName) is now free of any ads." = "(productName) is nu vrij van advertenties";
-
 /* A label showing \"person1 and person2\" */
 "%1$@ and %2$@" = "%1$@ en %2$@";
 
@@ -22,7 +19,7 @@
 /* A label showing person1, person2 and other */
 "%1$@, %2$@ and others" = "%1$@, %2$@ en anderen";
 
-/* Ad free version restored. */
+/* (No Comment) */
 "Ad free version restored." = "Ad vrije versie hersteld.";
 
 /* Sub header in the personView which states add new data */
@@ -51,9 +48,6 @@
 
 /* last name example for appstore screenshots */
 "Burwell" = "Groen";
-
-/* Buy ad free Version */
-"Buy ad free version" = "Koop ads vrije versie";
 
 /* event name example for app store screenshots */
 "Camping trip" = "Kamperen";
@@ -84,7 +78,6 @@
 
 /* Button that says dismiss
    Button that says dismiss.
-   Dismiss
    Text on a button that dismisses the alert
    Title of a button that dismisses an alart
    Title of a button that dismisses an alert. */
@@ -135,9 +128,6 @@
 /* Message explaining what the user can do to refetch exchange rates */
 "Fetching exchange rates is not possible at this moment. Check your internet connection and/or hit solve to fetch all missing exchange rates at a later time" = "Het ophalen van de wisselkoers is niet mogelijk op dit moment. Controleer je internet verbinding en/of druk later op 'Oplossing' om all ontbrekende wisselkoersen op te halen.";
 
-/* Give feedback */
-"Give feedback" = "Geef feedback";
-
 /* Go to */
 "Go to" = "Ga naar";
 
@@ -152,6 +142,45 @@
 
 /* Closing sentence of the email: If you have any remarks please let me know. */
 "If you have any remarks, please let me know." = "Als jullie nog opmerkingen hebben dan hoor ik dat graag.";
+
+/* Option button on the an alert view to dismiss the alert. */
+"info_view_alert_button_dismiss" = "Negeer";
+
+/* Title of an alert that is shown when the restoration of in app purchases failed to restore */
+"info_view_alert_failed_to_restore" = "Geen aankoop om te herstellen";
+
+/* Message of the cannot send email alert title with an action for the user to take. */
+"info_view_alert_message_cannot_send_email" = "Configureer je mail in de instellingen van iOS.";
+
+/* Title of an alert to the user that thanks them for making the ad free in app purchase. */
+"info_view_alert_purchased_title" = "Dank je wel voor je aankoop";
+
+/* message of an alert to the user that says their ad free version is restored */
+"info_view_alert_restore_purchase_message" = "Welkom terug. Je advertentie vrije ervaring is hersteld";
+
+/* title of an alert to the user that says their ad free version is restored */
+"info_view_alert_restore_purchase_title" = "Advertentie vrij hersteld";
+
+/* Title of an alert to tell the user he's unable to send email. */
+"info_view_alert_title_cannot_send_email" = "Kan email niet versturen";
+
+/* Button in the info view that will make the ad free in app purchase for the user */
+"info_view_cell_buy_ad_free" = "Koop advertentie vrij";
+
+/* Text of a button in the info view that opens up a mail dialogue to send feedback to support */
+"info_view_cell_feedback" = "Geef feedback";
+
+/* Text of a button in the info view that opens the page in the App Store with all of my apps. */
+"info_view_cell_my_apps" = "Mijn Apps";
+
+/* Text of a button in the info view that opens the notifications view */
+"info_view_cell_notifications" = "Berichten";
+
+/* Text of a button in the info view that opens the rate me dialogue */
+"info_view_cell_rate_me" = "Waardeer mij";
+
+/* Text of a button in the info view that initiates restoring the in app purchases */
+"info_view_cell_restore_purchases" = "Herstel eerdere aankopen";
 
 /* Title */
 "Invalid email address" = "Ongeldig emailadres";
@@ -186,14 +215,8 @@
 /* event name example for app store screenshots */
 "Movie" = "Film";
 
-/* Text of the the button that takes you to my apps in the AppStore */
-"My Apps" = "Mijn apps";
-
 /* Header in the paymentView which state new Payment. */
 "New payment" = "Nieuwe betaling";
-
-/* Screen name saying this is a new payment. */
-"New Payment" = "Nieuwe betaling";
 
 /* last name example for appstore screenshots */
 "Nichelson" = "Vos";
@@ -207,7 +230,7 @@
 /* A message for no notifications in the notifications screen. */
 "Nothing new right now." = "Er is niks nieuws op dit moment.";
 
-/* Nothing to restore */
+/* (No Comment) */
 "Nothing to restore" = "Geen aankoop om te herstellen";
 
 /* No comment provided by engineer. */
@@ -285,8 +308,7 @@
 /* Alert message suggesting the user that there is missing data on a payment. */
 "Please check the payment for missing data" = "Controleer de betaling op ontbrekende data";
 
-/* Instruction in an alert to tell the user that they should check their email address for a valid configuration.
-   Please configure your mail in Settings */
+/* Instruction in an alert to tell the user that they should check their email address for a valid configuration. */
 "Please configure your mail in Settings" = "Configureer je mail in instellingen";
 
 /* Message to the user to give We all pay a five star rating. */
@@ -301,9 +323,6 @@
 /* Press \"add Person\" to add a person who you'd like to share this bill with. */
 "Press \"Add person\" to add a person who you'd like to share this bill with." = "Druk op \"Nieuwe persoon\" om iemand toe te voegen waarmee je de rekening van dit evenment wilt delen.";
 
-/* Text of the Rate me button */
-"Rate me" = "Waardeer mij";
-
 /* Reason: Not all people have a mail address. */
 "Reason: Not all people have a mail address." = "Van sommigen aanwzezigen is het email adres niet bekend.";
 
@@ -313,7 +332,7 @@
 /* iScreen */
 "Remove Ads" = "Verwijder Ads";
 
-/* Restore previous purchases */
+/* (No Comment) */
 "Restore previous purchases" = "Herstel eerdere aankopen";
 
 /* (No Comment) */
@@ -342,9 +361,6 @@
 
 /* payed item example for app store screenshots */
 "Sushi" = "Sushi";
-
-/* Thank you for purchasing */
-"Thank you for purchasing" = "Dank u wel voor uw aankoop";
 
 /* (No Comment) */
 "Thank you for purchasing." = "Dank u wel voor uw aankoop.";
@@ -380,8 +396,7 @@
    Title message of an alert that pops up when fetching exchange rates is impossible */
 "Unable to fetch exchange rates" = "Kan wisselkoers niet ophalen";
 
-/* Title of an alert that notifies the user the app is unable to send email.
-   Unable to send email */
+/* Title of an alert that notifies the user the app is unable to send email. */
 "Unable to send email" = "Kan email niet versturen";
 
 /* SharedBillPageView */

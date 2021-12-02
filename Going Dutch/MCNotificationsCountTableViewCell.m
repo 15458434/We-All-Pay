@@ -30,6 +30,7 @@ static void * messageCountContext = &messageCountContext;
     self.model = model;
     NSKeyValueObservingOptions options = NSKeyValueObservingOptionInitial | NSKeyValueObservingOptionNew;
     [self addObserver:self forKeyPath:@"model.messageCount" options:options context:messageCountContext];
+    _leftLabel.text = NSLocalizedStringWithDefaultValue(@"info_view_cell_notifications", nil, NSBundle.mainBundle, @"Notifications", @"Text of a button in the info view that opens the notifications view");
 }
 
 #pragma mark - UITableViewCell

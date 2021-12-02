@@ -34,9 +34,6 @@
 /* Class = "UIButton"; normalTitle = "Add payment"; ObjectID = "x8t-7z-SNG"; */
 "x8t-7z-SNG.normalTitle" = "Nieuwe betaling";
 
-/* Class = "UILabel"; text = "Notifications"; ObjectID = "YPb-Py-Acz"; */
-"YPb-Py-Acz.text" = "Berichten";
-
 /* Class = "UINavigationItem"; title = "Person"; ObjectID = "YXl-NB-NJJ"; */
 "YXl-NB-NJJ.title" = "Persoon";
 

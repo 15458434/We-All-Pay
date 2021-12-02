@@ -48,7 +48,7 @@ static void * ProProductContext = &ProProductContext;
 
 - (void)observeValueForKeyPath:(NSString *)keyPath ofObject:(id)object change:(NSDictionary<NSKeyValueChangeKey,id> *)change context:(void *)context {
     if (context == ProProductContext) {
-        self.purchaseDescriptionLabel.text = NSLocalizedString(@"Buy ad free version", comment: @"Buy ad free Version");
+        self.purchaseDescriptionLabel.text = NSLocalizedStringWithDefaultValue(@"info_view_cell_buy_ad_free", nil, NSBundle.mainBundle, @"Buy ad free version", @"Button in the info view that will make the ad free in app purchase for the user");
         NSNumber *changeKeyNumber = (NSNumber *)change[NSKeyValueChangeKindKey];
         NSKeyValueChange keyValueChange = changeKeyNumber.unsignedIntegerValue;
         switch (keyValueChange) {

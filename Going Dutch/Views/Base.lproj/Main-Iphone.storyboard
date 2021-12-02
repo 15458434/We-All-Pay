@@ -645,11 +645,13 @@
                     </navigationItem>
                     <simulatedStatusBarMetrics key="simulatedStatusBarMetrics" statusBarStyle="lightContent"/>
                     <connections>
+                        <outlet property="model" destination="Xax-wZ-Ew7" id="dJA-z3-dAh"/>
                         <outlet property="versionLabel" destination="IrA-LQ-aX2" id="cfd-7b-p72"/>
                         <segue destination="3mD-HN-ynv" kind="show" identifier="OpenNotifications" id="S98-wj-e9R"/>
                     </connections>
                 </tableViewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="Zpx-6T-7TS" userLabel="First Responder" sceneMemberID="firstResponder"/>
+                <customObject id="Xax-wZ-Ew7" customClass="InfoModel" customModule="We_all_pay" customModuleProvider="target"/>
             </objects>
             <point key="canvasLocation" x="1284" y="1481"/>
         </scene>
