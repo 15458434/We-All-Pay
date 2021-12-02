@@ -277,6 +277,7 @@
     self.tableView.accessibilityIdentifier = @"PaymentsTableViewController";
     
     _emptyMessage = [[NSBundle mainBundle] loadNibNamed:@"MCTableEmptyMessage" owner:self options:nil][0];
+    _emptyMessage.borderlineView.dxInset = 20;
     _emptyMessage.borderlineView.dyInset = 1;
     self.tableView.backgroundView = _emptyMessage;
     _emptyMessage.bigMessage.text = NSLocalizedString(@"Press \"Add payment\" to add a payment to this event.", @"Press \"add payment\" to add a payment to this event.");

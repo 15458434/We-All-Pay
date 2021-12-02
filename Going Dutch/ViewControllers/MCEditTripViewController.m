@@ -227,7 +227,8 @@
     [_addPersonFromContactsButton setTitle:addPersonFromContactsButton forState:UIControlStateNormal];
     
     _emptyMessage = [NSBundle.mainBundle loadNibNamed:@"MCTableEmptyMessage" owner:self options:nil][0];
-    _emptyMessage.borderlineView.dyInset = 1;
+    _emptyMessage.borderlineView.dxInset = 20;
+    _emptyMessage.borderlineView.dyInset = 9;
     _emptyMessage.bigMessage.text = NSLocalizedStringWithDefaultValue(@"people_view_label_empty_message", nil, NSBundle.mainBundle, @"Press \"Add person\" to add a person who you'd like to share this bill with.", @"Empty message for the people list view.");
     self.tableView.backgroundView = _emptyMessage;
 }
@@ -306,6 +307,22 @@
         NSString *reason = [NSString stringWithFormat:@"Invalid segue.identifier: %@", segue.identifier];
         NSDictionary *userInfo = [segue dictionaryWithValuesForKeys:@[@"source", @"destimation", @"identifier"]];
         @throw [NSException exceptionWithName:@"segue identifiter" reason:reason userInfo:userInfo];
+    }
+}
+
+- (void)viewDidLayoutSubviews {
+    [super viewDidLayoutSubviews];
+    
+    NSParameterAssert(_headerView);
+    CGSize size = [_headerView systemLayoutSizeFittingSize:UILayoutFittingCompressedSize];
+    if (_headerView.frame.size.height != size.height) {
+        CGFloat x = _headerView.frame.origin.x;
+        CGFloat y = _headerView.frame.origin.y;
+        CGFloat width = _headerView.frame.size.width;
+        CGFloat height = size.height;
+        CGRect newFrame = CGRectMake(x, y, width, height);
+        _headerView.frame = newFrame;
+        self.tableView.tableHeaderView = _headerView;
     }
 }
 
