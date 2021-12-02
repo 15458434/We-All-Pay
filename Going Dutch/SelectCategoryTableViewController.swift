@@ -132,6 +132,12 @@ class SelectCategoryTableViewController: UITableViewController, UISearchBarDeleg
     
     // MARK: UIViewController
     
+    override func loadView() {
+        super.loadView()
+        
+        self.navigationItem.title = NSLocalizedString("select_category_view_title", value: "Select category", comment: "The title of the select category screen. It allows for selecting a categoy of the payment.")
+    }
+    
     override func viewDidLoad() {
         func prepareCategories() {
             categories = CategoryPictureStoreController.shared.pictureObjects

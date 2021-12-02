@@ -290,6 +290,9 @@
 /* Title for an alert message, because there are no people added to this event. */
 "payments_view_alert_title_add_people_first" = "Voeg eerst aanwezigen toe";
 
+/* Title of an alert shown to the user when solve has been pressed the We All Pay is unable to solve due to a missing payer on an payment. */
+"payments_view_alert_title_cannot_solve" = "Onoplosbaar";
+
 /* Title of a button that adds a payment and opens the new payment view to enter the information on a new payment */
 "payments_view_button_add_payment" = "Nieuwe betaling";
 
@@ -376,6 +379,9 @@
 
 /* (No Comment) */
 "Select payer" = "Betaler";
+
+/* The title of the select category screen. It allows for selecting a categoy of the payment. */
+"select_category_view_title" = "Selecteer category";
 
 /* Send anyway */
 "Send anyway" = "Stuur alsnog";
