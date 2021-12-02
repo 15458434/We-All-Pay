@@ -28,9 +28,6 @@
 /* Sub header in the paymentView which states Add payment data */
 "Add payment data" = "Vul gegevens in";
 
-/* Title for an alert message, because there are no people added to this event. */
-"Add some people first" = "Voeg eerst aanwezigen toe";
-
 /* first name example for app store screenshots */
 "Ann" = "Anne";
 
@@ -278,6 +275,33 @@
 /* Sub header in the paymentView which states edit payment data */
 "payment_view_subLabel_edit_payment" = "Bewerk gegevens";
 
+/* Text for button on an alert that dismisses the alert */
+"payments_view_alert_button_dismiss" = "Negeer";
+
+/* Text on a button to press the cancel action on an alert that tells the user the current event can't be solved due to missing information on who paid something. */
+"payments_view_alert_cancel" = "Annuleer";
+
+/* Button on an alert that navigates the payment that's missing the information who paid that particular payment */
+"payments_view_alert_go_to" = "Open betaling";
+
+/* Message of an alert shown to the user when solve has been pressed and We All Pay is unable to solve due to a missing payer on a payment. */
+"payments_view_alert_message_cannot_solve" = "Er is een betaling zonder dat er een betaler is geregistreerd. Druk op open betaling om die te openen.";
+
+/* Title for an alert message, because there are no people added to this event. */
+"payments_view_alert_title_add_people_first" = "Voeg eerst aanwezigen toe";
+
+/* Title of a button that adds a payment and opens the new payment view to enter the information on a new payment */
+"payments_view_button_add_payment" = "Nieuwe betaling";
+
+/* Title of a button that solves who needs to pay whom on the current event. */
+"payments_view_button_solve_event" = "Oplossing";
+
+/* Empty message list for when the list of payments is empty and there are no payments on the current event */
+"payments_view_label_empty_list" = "Druk op \"Nieuwe betaling\" om een betaling toe te voegen aan dit evenement.";
+
+/* A message to the user they can't add a payment when they didn't add people to the event. */
+"payments_view_message_add_people_first" = "Je kan geen betaling toevoegen, als er geen aanwezigen zijn geregistreerd. Ga naar \"Aanwezigen\" om de mensen waarmee je een betaling wilt delen toe te voegen.";
+
 /* Add person button in the people view that adds a person to the event. */
 "people_view_button_add_person" = "Nieuwe persoon";
 
@@ -434,7 +458,4 @@
 
 /* (No Comment) */
 "You can enable access to Contacts in Settings->We All Pay->Privacy" = "Toegang tot Contacten kan aangezet worden in Instellingen->We All Pay->Privacy";
-
-/* A message to the user thay can't add a payment when they didn't add people to the even. */
-"You can't add a payment when no people are present. There is no one to split the expenses of this event with." = "Je kan geen betaling toevoegen, als er geen aanwezigen zijn. Er is niemand om de rekening van dit evenement te delen.";
 
