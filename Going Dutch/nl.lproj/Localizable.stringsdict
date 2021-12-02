@@ -30,5 +30,15 @@
 			<string>Aanwezigen die deze betaling delen</string>
 		</dict>
 	</dict>
+	<key>people_view_button_contacts</key>
+	<dict>
+		<key>NSStringVariableWidthRuleType</key>
+		<dict>
+			<key>25</key>
+			<string>Contacten</string>
+			<key>50</key>
+			<string>Import uit contacten</string>
+		</dict>
+	</dict>
 </dict>
 </plist>

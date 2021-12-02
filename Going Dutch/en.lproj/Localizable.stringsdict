@@ -30,5 +30,15 @@
 			<string>%lu people have paid everything:</string>
 		</dict>
 	</dict>
+	<key>people_view_button_contacts</key>
+	<dict>
+		<key>NSStringVariableWidthRuleType</key>
+		<dict>
+			<key>25</key>
+			<string>Contacts</string>
+			<key>50</key>
+			<string>Import from Contacts</string>
+		</dict>
+	</dict>
 </dict>
 </plist>

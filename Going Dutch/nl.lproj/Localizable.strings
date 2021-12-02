@@ -152,6 +152,9 @@
 /* Message of the cannot send email alert title with an action for the user to take. */
 "info_view_alert_message_cannot_send_email" = "Configureer je mail in de instellingen van iOS.";
 
+/* Messages of an alert to the user that thanks them for making the ad free in app purchase */
+"info_view_alert_purchased_message" = "(productName) is nu vrij van advertenties";
+
 /* Title of an alert to the user that thanks them for making the ad free in app purchase. */
 "info_view_alert_purchased_title" = "Dank je wel voor je aankoop";
 
@@ -274,6 +277,15 @@
 
 /* Sub header in the paymentView which states edit payment data */
 "payment_view_subLabel_edit_payment" = "Bewerk gegevens";
+
+/* Add person button in the people view that adds a person to the event. */
+"people_view_button_add_person" = "Nieuwe persoon";
+
+/* Empty message for the people list view. */
+"people_view_label_empty_message" = "Druk op \"Nieuwe persoon\" om een persoon toe te voegen aan dit evenement of druk op \"Contacten\" om een iemand uit je adresboek te importeren.";
+
+/* Placeholder for the field where you end the name of the event. */
+"people_view_placeholder_event_name" = "Naam evenement";
 
 /* Header in the personView which state new person. */
 "Person" = "Persoon";

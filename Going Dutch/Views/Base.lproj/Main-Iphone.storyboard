@@ -939,7 +939,7 @@
                                         </userDefinedRuntimeAttribute>
                                     </userDefinedRuntimeAttributes>
                                     <connections>
-                                        <action selector="addPersonButton:" destination="AUO-87-nmq" eventType="touchUpInside" id="ebu-qs-nCl"/>
+                                        <action selector="addPersonButtonTouchUpInside:" destination="AUO-87-nmq" eventType="touchUpInside" id="ebu-qs-nCl"/>
                                         <segue destination="nkD-cc-jGs" kind="presentation" identifier="openEditPerson" modalPresentationStyle="formSheet" id="k2G-tm-5CJ"/>
                                     </connections>
                                 </button>
@@ -961,7 +961,7 @@
                                         </userDefinedRuntimeAttribute>
                                     </userDefinedRuntimeAttributes>
                                     <connections>
-                                        <action selector="addressBookButton:" destination="AUO-87-nmq" eventType="touchUpInside" id="fqX-Eq-4hv"/>
+                                        <action selector="addPersonFromContactsTouchUpInside:" destination="AUO-87-nmq" eventType="touchUpInside" id="fqX-Eq-4hv"/>
                                     </connections>
                                 </button>
                             </subviews>
@@ -1067,9 +1067,9 @@
                     <nil key="simulatedBottomBarMetrics"/>
                     <connections>
                         <outlet property="addPersonButton" destination="gfv-ln-Tgv" id="kQ0-08-UfA"/>
-                        <outlet property="contactsButton" destination="asZ-Na-2wd" id="LA0-ly-LPC"/>
+                        <outlet property="addPersonFromContactsButton" destination="asZ-Na-2wd" id="LA0-ly-LPC"/>
+                        <outlet property="eventNameTextField" destination="BJS-wA-qlM" id="mRl-pt-rEN"/>
                         <outlet property="headerView" destination="wmR-8m-HJR" id="ZdS-Im-m8c"/>
-                        <outlet property="tripNameField" destination="BJS-wA-qlM" id="mRl-pt-rEN"/>
                     </connections>
                 </tableViewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="RjQ-v9-WwD" userLabel="First Responder" sceneMemberID="firstResponder"/>
