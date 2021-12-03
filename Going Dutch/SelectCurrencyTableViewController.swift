@@ -65,6 +65,12 @@ class SelectCurrencyTableViewController: UITableViewController, UISearchResultsU
     
     // MARK: Inherited Froms super
     
+    override func loadView() {
+        super.loadView()
+        
+        self.navigationItem.title = NSLocalizedString("select_currency_view_title", value: "Select currency", comment: "Title of the select currency view that allows for selecting a currency.")
+    }
+    
     override func viewDidLoad() {
         func prepareCurrencies() {
             currencies = MCWeAllPayStoreController.defaultStore().fetcher.currencyController.currencies
