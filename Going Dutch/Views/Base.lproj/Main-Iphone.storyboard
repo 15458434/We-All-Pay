@@ -893,9 +893,12 @@
                     <connections>
                         <outlet property="adBannerEngine" destination="XfM-xE-BZB" id="PIf-7l-DzT"/>
                         <outlet property="headerView" destination="kmK-CE-AdT" id="w4u-sP-Sgb"/>
+                        <outlet property="model" destination="s3G-rj-OxG" id="wIv-EE-Z6Q"/>
+                        <outlet property="sendEmailButton" destination="ROW-vp-ekh" id="Q5K-lv-kqn"/>
                     </connections>
                 </tableViewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="Ohk-bB-ROF" userLabel="First Responder" sceneMemberID="firstResponder"/>
+                <customObject id="s3G-rj-OxG" customClass="MCSolutionModel"/>
                 <customObject id="XfM-xE-BZB" customClass="MCAdBannerEngine"/>
             </objects>
             <point key="canvasLocation" x="3266" y="1880"/>

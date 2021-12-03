@@ -4,9 +4,6 @@
 /* %1$@ has paid %2$@(%3$@) for %4$@. */
 "%1$@ has paid %2$@(%3$@) for %4$@" = "%1$@ betaalde %2$@(%3$@) voor %4$@.";
 
-/* As in Mark owes Arjen, but then just the word owes. */
-"%1$@ owes %2$@" = "%1$@ betaalt %2$@";
-
 /* %1$@ has paid %2$@ for %3$@. */
 "%1$@ paid %2$@ for %3$@." = "%1$@ betaalde %2$@ voor %3$@.";
 
@@ -76,8 +73,7 @@
 /* Button that says dismiss
    Button that says dismiss.
    Text on a button that dismisses the alert
-   Title of a button that dismisses an alart
-   Title of a button that dismisses an alert. */
+   Title of a button that dismisses an alart */
 "Dismiss" = "Negeer";
 
 /* Question to the user whether or not they like this app. */
@@ -123,7 +119,7 @@
 "Expenses overview of our event." = "Onkosten overzicht van ons uitje.";
 
 /* Message explaining what the user can do to refetch exchange rates */
-"Fetching exchange rates is not possible at this moment. Check your internet connection and/or hit solve to fetch all missing exchange rates at a later time" = "Het ophalen van de wisselkoers is niet mogelijk op dit moment. Controleer je internet verbinding en/of druk later op 'Oplossing' om all ontbrekende wisselkoersen op te halen.";
+"Fetching exchange rates is not possible at this moment. Check your internet connection and/or hit solve to fetch all missing exchange rates at a later time" = "Het ophalen van de wisselkoers is niet mogelijk op dit moment. Controleer je internet verbinding en/of druk later op 'Oplossing' om alle ontbrekende wisselkoersen op te halen.";
 
 /* Go to */
 "Go to" = "Ga naar";
@@ -392,6 +388,33 @@
 /* payed item example for app store screenshots */
 "Soft drinks" = "Frisdrank";
 
+/* Button title of an alert view to tell the user We All Pay is unable to fetch exchange rates to calculation a solution. */
+"solution_view_alert_action_dismiss_cannot_fetch_exchange_rates" = "Negeer";
+
+/* Message in an alert of the solution view that pops up when fetching exchange rates is impossible. It explains what the user can do to refetch exchange rates. */
+"solution_view_alert_message_cannot_fetch_exchange_rates" = "Het ophalen van de wisselkoers is niet mogelijk op dit moment. Controleer je internet verbinding en/of druk later op 'Oplossing' om alle ontbrekende wisselkoersen op te halen.";
+
+/* Title message of an alert that pops up when fetching exchange rates is impossible */
+"solution_view_alert_title_cannot_fetch_exchange_rates" = "Kan wisselkoers niet ophalen";
+
+/* Title of a button that allows for sending the email with the solution. */
+"solution_view_button_send_email" = "stuur email";
+
+/* In the solution view: As in Mark owes Yvette x amount of money. */
+"solution_view_cell_who_owes_who_label" = "%1$@ betaalt %2$@";
+
+/* Section title in the solution screen that shows the title of the section that shows who owes how much to the group */
+"solution_view_section_title_total_owes" = "Totaal verschuldigd";
+
+/* Section title in the solution screen that shows the title of the section that shows who paid how much on the entire event */
+"solution_view_section_title_total_paid" = "Totaal uitgegeven:";
+
+/* Section title in the solution screen that shows the title of the section that shows who owes who what how much money */
+"solution_view_section_title_who_owes_who" = "Wie betaalt wie";
+
+/* Title of the screen that shows the solution to the user of who owes who, what amount of money. */
+"solution_view_title" = "oplossing";
+
 /* (No Comment) */
 "Someone" = "Iemand";
 
@@ -434,8 +457,7 @@
 /* Message body explaining the App Store can't be reached. */
 "Unable to connect to the App Store. Please connect to the internet." = "Kan de App Store niet bereiken. Verbind met het internet.";
 
-/* itle message of an alert that pops up when fetching exchange rates is impossibl
-   Title message of an alert that pops up when fetching exchange rates is impossible */
+/* itle message of an alert that pops up when fetching exchange rates is impossibl */
 "Unable to fetch exchange rates" = "Kan wisselkoers niet ophalen";
 
 /* Title of an alert that notifies the user the app is unable to send email. */

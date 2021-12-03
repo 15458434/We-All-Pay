@@ -40,5 +40,15 @@
 			<string>Import uit contacten</string>
 		</dict>
 	</dict>
+	<key>solution_view_cell_label_total_spent</key>
+	<dict>
+		<key>NSStringVariableWidthRuleType</key>
+		<dict>
+			<key>20</key>
+			<string>Totaal:</string>
+			<key>25</key>
+			<string>Totaal uitgegeven:</string>
+		</dict>
+	</dict>
 </dict>
 </plist>

@@ -40,5 +40,15 @@
 			<string>Import from Contacts</string>
 		</dict>
 	</dict>
+	<key>solution_view_cell_label_total_spent</key>
+	<dict>
+		<key>NSStringVariableWidthRuleType</key>
+		<dict>
+			<key>20</key>
+			<string>Total:</string>
+			<key>25</key>
+			<string>Total spent:</string>
+		</dict>
+	</dict>
 </dict>
 </plist>
