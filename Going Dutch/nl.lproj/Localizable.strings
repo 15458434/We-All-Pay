@@ -55,9 +55,6 @@
 /* (No Comment) */
 "Contacts disabled" = "Contacten uitgeschakeld";
 
-/* Alert title stating that data is missing in a payment */
-"Data missing in payment" = "Ontbrekende gegevens in betaling";
-
 /* first name example for app store screenshots */
 "David" = "David";
 
@@ -70,9 +67,7 @@
 /* event name example for app store screenshots */
 "Dinner" = "Diner";
 
-/* Button that says dismiss
-   Button that says dismiss.
-   Text on a button that dismisses the alert
+/* Button that says dismiss.
    Title of a button that dismisses an alart */
 "Dismiss" = "Negeer";
 
@@ -121,7 +116,7 @@
 /* Message explaining what the user can do to refetch exchange rates */
 "Fetching exchange rates is not possible at this moment. Check your internet connection and/or hit solve to fetch all missing exchange rates at a later time" = "Het ophalen van de wisselkoers is niet mogelijk op dit moment. Controleer je internet verbinding en/of druk later op 'Oplossing' om alle ontbrekende wisselkoersen op te halen.";
 
-/* Go to */
+/* (No Comment) */
 "Go to" = "Ga naar";
 
 /* Title of a No button. */
@@ -340,12 +335,6 @@
 /* Please add payments and/or people if you want a solution on who owes who. */
 "Please add people and payments if you want a solution on who owes who." = "Druk op \"Annuleer\" en voeg mensen en betalingen toe.";
 
-/* Alert message suggesting the user that there is missing data on a payment. */
-"Please check the payment for missing data" = "Controleer de betaling op ontbrekende data";
-
-/* Instruction in an alert to tell the user that they should check their email address for a valid configuration. */
-"Please configure your mail in Settings" = "Configureer je mail in instellingen";
-
 /* Message to the user to give We all pay a five star rating. */
 "Please give We all pay a 5 star rating and help other people find the benefits We all pay." = "Zou je We all pay een 5 sterren waardering willen geven, zodat andere mensen de voordelen van We all pay kunnen ontdekken?";
 
@@ -391,14 +380,35 @@
 /* payed item example for app store screenshots */
 "Soft drinks" = "Frisdrank";
 
+/* Text on a button that dismisses the alert */
+"solution_view_alert_action_cannot_send_email_dismiss" = "Negeer";
+
+/* Button that says dismiss */
+"solution_view_alert_action_data_missing_in_payment_dimiss" = "Negeer";
+
+/* An action button in an alert that allows for instant navigation to a payment with missing data. */
+"solution_view_alert_action_data_missing_in_payment_go_to" = "Ga naar";
+
 /* Button title of an alert view to tell the user We All Pay is unable to fetch exchange rates to calculation a solution. */
 "solution_view_alert_action_dismiss_cannot_fetch_exchange_rates" = "Negeer";
 
 /* Message in an alert of the solution view that pops up when fetching exchange rates is impossible. It explains what the user can do to refetch exchange rates. */
 "solution_view_alert_message_cannot_fetch_exchange_rates" = "Het ophalen van de wisselkoers is niet mogelijk op dit moment. Controleer je internet verbinding en/of druk later op 'Oplossing' om alle ontbrekende wisselkoersen op te halen.";
 
+/* Instruction in an alert to tell the user that they should check their email address for a valid configuration. */
+"solution_view_alert_message_cannot_send_mail" = "Stel je e-mail in in settings.";
+
+/* Alert message suggesting the user that there is missing data on a payment. */
+"solution_view_alert_message_data_missing_in_payment" = "Controleer betalingen voor onbekende gegevens.";
+
 /* Title message of an alert that pops up when fetching exchange rates is impossible */
 "solution_view_alert_title_cannot_fetch_exchange_rates" = "Kan wisselkoers niet ophalen";
+
+/* Title of an alert that notifies the user the app is unable to send email. */
+"solution_view_alert_title_cannot_send_mail" = "E-mail niet beschikbaar";
+
+/* Alert title stating that data is missing in a payment */
+"solution_view_alert_title_data_missing_in_payment" = "Er ontbreken gegevens in een betaling";
 
 /* Title of a button that allows for sending the email with the solution. */
 "solution_view_button_send_email" = "Stuur Email";
@@ -462,9 +472,6 @@
 
 /* itle message of an alert that pops up when fetching exchange rates is impossibl */
 "Unable to fetch exchange rates" = "Kan wisselkoers niet ophalen";
-
-/* Title of an alert that notifies the user the app is unable to send email. */
-"Unable to send email" = "Kan email niet versturen";
 
 /* SharedBillPageView */
 "Unable to send email to all people." = "Kan niet iedereen een email sturen.";
