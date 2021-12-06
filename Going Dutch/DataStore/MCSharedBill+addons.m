@@ -139,20 +139,6 @@
     }
 }
 
-- (void)addPeoplePresentObject:(MCPerson *)value
-{
-    NSMutableSet *mutableListOfPeople = [[self peoplePresent] mutableCopy];
-    [mutableListOfPeople addObject:value];
-    [self setPeoplePresent:mutableListOfPeople];
-}
-
-- (void)removePeoplePresentObject:(MCPerson *)value
-{
-    NSMutableSet *mutableListOfPeople = [[self peoplePresent] mutableCopy];
-    [mutableListOfPeople removeObject:value];
-    [self setPeoplePresent:mutableListOfPeople];
-}
-
 - (MCPayment *)addPayment
 {
     MCPayment *payment = [MCPayment addPaymentInContext:self.managedObjectContext];
