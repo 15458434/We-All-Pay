@@ -166,7 +166,7 @@ static void * notificationCountContext = &notificationCountContext;
 }
 
 - (UITableViewCell *)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath {
-    MCAllTripsTableViewCell *allTripsTableViewCell = [tableView dequeueReusableCellWithIdentifier:@"MCAllTripsTableViewCell"];
+    MCEventTableViewCell *allTripsTableViewCell = [tableView dequeueReusableCellWithIdentifier:@"MCAllTripsTableViewCell"];
     return allTripsTableViewCell;
 }
 
@@ -180,7 +180,7 @@ static void * notificationCountContext = &notificationCountContext;
 
 - (void)tableView:(UITableView *)tableView willDisplayCell:(UITableViewCell *)cell forRowAtIndexPath:(NSIndexPath *)indexPath {
     MCSharedBill *event = [_model.fetchEventsController objectAtIndexPath:indexPath];
-    MCAllTripsTableViewCell *eventCell = (MCAllTripsTableViewCell *)cell;
+    MCEventTableViewCell *eventCell = (MCEventTableViewCell *)cell;
     
     if (!event.tripName) {
         eventCell.tripLabel.text = NSLocalizedStringWithDefaultValue(@"events_view_event_cell_no_event_name", nil, NSBundle.mainBundle, @"Unnamed event", @"The name of the event shown in the events list when the user didn't add an event name to the event.");

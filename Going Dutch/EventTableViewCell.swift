@@ -1,5 +1,5 @@
 //
-//  MCAllTripsTableViewCell.swift
+//  EventTableViewCell.swift
 //  We all pay
 //
 //  Created by Mark Cornelisse on 11/06/15.
@@ -8,7 +8,7 @@
 
 import UIKit
 
-final class MCAllTripsTableViewCell: UITableViewCell {
+@objc(MCEventTableViewCell) final class EventTableViewCell: UITableViewCell {
     @IBOutlet var waitingForXRatesIndicator: UIActivityIndicatorView!
     @IBOutlet var tripLabel: UILabel!
     @IBOutlet var totalCostLabel: UILabel!
