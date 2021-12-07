@@ -115,7 +115,6 @@
 		387494D419F053C2001614CA /* WeAllPayStore3to4.xcmappingmodel in Sources */ = {isa = PBXBuildFile; fileRef = 387494D319F053C2001614CA /* WeAllPayStore3to4.xcmappingmodel */; };
 		387494D619F053E9001614CA /* WeAllPayStore2to4.xcmappingmodel in Sources */ = {isa = PBXBuildFile; fileRef = 387494D519F053E9001614CA /* WeAllPayStore2to4.xcmappingmodel */; };
 		387494D819F05476001614CA /* WeAllPayStore1to4.xcmappingmodel in Sources */ = {isa = PBXBuildFile; fileRef = 387494D719F05476001614CA /* WeAllPayStore1to4.xcmappingmodel */; };
-		387D3A911870652B0060FAF8 /* Localizable.strings in Resources */ = {isa = PBXBuildFile; fileRef = 387D3A931870652B0060FAF8 /* Localizable.strings */; };
 		387E79CF26F48EDC00C2A424 /* MCPurchaseTableViewCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 387E79CE26F48EDC00C2A424 /* MCPurchaseTableViewCell.m */; };
 		388474BE272419B4008D6C33 /* WeAllPayStore.xcdatamodeld in Sources */ = {isa = PBXBuildFile; fileRef = 3829AD0D178B41320025969D /* WeAllPayStore.xcdatamodeld */; };
 		38894980211C2DDE00BDF9CD /* CoreDataSaveHandlerWhenEnteringBackground.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3889497F211C2DDE00BDF9CD /* CoreDataSaveHandlerWhenEnteringBackground.swift */; };
@@ -180,6 +179,7 @@
 		38B88E2E1D81FF6E0069A44D /* MailComposeViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 38B88E2D1D81FF6E0069A44D /* MailComposeViewController.swift */; };
 		38BCCA5026C6A19E00D4C854 /* AppTrackingTransparency.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 38BCCA4F26C6A19E00D4C854 /* AppTrackingTransparency.framework */; };
 		38BEA791275E228B00D05D8B /* EventModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 38BEA790275E228B00D05D8B /* EventModel.swift */; };
+		38BEA796275F765800D05D8B /* Localizable.strings in Resources */ = {isa = PBXBuildFile; fileRef = 38BEA798275F765800D05D8B /* Localizable.strings */; };
 		38C1AD4726EE871D00E09E09 /* MCPaymentPresenceTableViewCell_iPhone.m in Sources */ = {isa = PBXBuildFile; fileRef = 38C1AD4626EE871D00E09E09 /* MCPaymentPresenceTableViewCell_iPhone.m */; };
 		38C3AB151CBCF3200011C10C /* ViewControllerProtocols.swift in Sources */ = {isa = PBXBuildFile; fileRef = 38C3AB141CBCF3200011C10C /* ViewControllerProtocols.swift */; };
 		38C44BCE23DEDEC900264BBB /* ScrollViewAdjusterToKeyboard.swift in Sources */ = {isa = PBXBuildFile; fileRef = 38C44BCD23DEDEC900264BBB /* ScrollViewAdjusterToKeyboard.swift */; };
@@ -395,7 +395,6 @@
 		3813150B26CBAC3600C27CBB /* MCNotificationTableViewCell.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = MCNotificationTableViewCell.m; sourceTree = "<group>"; };
 		3813D8941D8983C900E6B7A4 /* CircularImageView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; lineEnding = 0; path = CircularImageView.swift; sourceTree = "<group>"; xcLanguageSpecificationIdentifier = xcode.lang.swift; };
 		3814B494270C500000737A06 /* NavigationViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NavigationViewController.swift; sourceTree = "<group>"; };
-		38156B2918706BAC0047AEEF /* Base */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.strings; lineEnding = 0; name = Base; path = Base.lproj/Localizable.strings; sourceTree = "<group>"; };
 		38163E0E249E193D009E889C /* CoreServices.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = CoreServices.framework; path = System/Library/Frameworks/CoreServices.framework; sourceTree = SDKROOT; };
 		381C2C39275A095D00CD82D2 /* SolutionModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SolutionModel.swift; sourceTree = "<group>"; };
 		381C2C3B275A412100CD82D2 /* MCTableEmptyMessage.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; name = MCTableEmptyMessage.xib; path = Views/MCTableEmptyMessage.xib; sourceTree = "<group>"; };
@@ -586,6 +585,7 @@
 		38B88E2D1D81FF6E0069A44D /* MailComposeViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = MailComposeViewController.swift; sourceTree = "<group>"; };
 		38BCCA4F26C6A19E00D4C854 /* AppTrackingTransparency.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = AppTrackingTransparency.framework; path = System/Library/Frameworks/AppTrackingTransparency.framework; sourceTree = SDKROOT; };
 		38BEA790275E228B00D05D8B /* EventModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = EventModel.swift; sourceTree = "<group>"; };
+		38BEA799275F765C00D05D8B /* nl */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = nl; path = nl.lproj/Localizable.strings; sourceTree = "<group>"; };
 		38C1AD4526EE871D00E09E09 /* MCPaymentPresenceTableViewCell_iPhone.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = MCPaymentPresenceTableViewCell_iPhone.h; sourceTree = "<group>"; };
 		38C1AD4626EE871D00E09E09 /* MCPaymentPresenceTableViewCell_iPhone.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = MCPaymentPresenceTableViewCell_iPhone.m; sourceTree = "<group>"; };
 		38C3AB141CBCF3200011C10C /* ViewControllerProtocols.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ViewControllerProtocols.swift; sourceTree = "<group>"; };
@@ -649,7 +649,6 @@
 		38F2370726D0140100A22F9E /* MCGenericMediumAdBannerViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = MCGenericMediumAdBannerViewController.h; sourceTree = "<group>"; };
 		38F2A1AA1ADCF7E100831D48 /* TodayViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = TodayViewController.swift; sourceTree = "<group>"; };
 		38F2A1AB1ADCF7E100831D48 /* WhoIsPayingNextTextLocalizer.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = WhoIsPayingNextTextLocalizer.swift; sourceTree = "<group>"; };
-		38F3E8D826B55F39007AFC4D /* nl */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = nl; path = nl.lproj/Localizable.strings; sourceTree = "<group>"; };
 		38F44CCA2364993400215B1C /* MoneyTextInputValidator.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MoneyTextInputValidator.swift; sourceTree = "<group>"; };
 		38F7F9A51B2C49B80059DE51 /* Base */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; name = Base; path = "Base.lproj/Available Currencies.plist"; sourceTree = "<group>"; };
 		38F7F9A71B2C49C00059DE51 /* en */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; name = en; path = "en.lproj/Available Currencies.plist"; sourceTree = "<group>"; };
@@ -1026,7 +1025,7 @@
 		38572ADD169D437B00969C62 /* Supporting Files */ = {
 			isa = PBXGroup;
 			children = (
-				387D3A931870652B0060FAF8 /* Localizable.strings */,
+				38BEA798275F765800D05D8B /* Localizable.strings */,
 				380A76AD26D62EB3000FEABB /* Localizable.stringsdict */,
 				38572ADE169D437B00969C62 /* Info.plist */,
 				38E88B3F226B19ED008EB4BE /* GoogleService-Info.plist */,
@@ -1923,7 +1922,6 @@
 				38641486269B5E9F00590ABA /* Notifications.xcassets in Resources */,
 				38572AE1169D437B00969C62 /* InfoPlist.strings in Resources */,
 				38E88B40226B19EE008EB4BE /* GoogleService-Info.plist in Resources */,
-				387D3A911870652B0060FAF8 /* Localizable.strings in Resources */,
 				382B79CA1A419D9D00538E96 /* categoryPictures.plist in Resources */,
 				38001C9B194EE284008ACD94 /* Assets.xcassets in Resources */,
 				3867253B23DB248E009607E8 /* fastlane in Resources */,
@@ -1934,6 +1932,7 @@
 				381C2C40275A419900CD82D2 /* Main-iPad.storyboard in Resources */,
 				3870C22A1D34FDF80030035A /* We all pay app keywords.plist in Resources */,
 				381C2C3C275A412100CD82D2 /* MCTableEmptyMessage.xib in Resources */,
+				38BEA796275F765800D05D8B /* Localizable.strings in Resources */,
 				381C2C3E275A414A00CD82D2 /* Main-Iphone.storyboard in Resources */,
 				3897157D17901D0F005BE03E /* MCTwoLabelsTitleView.xib in Resources */,
 				38D1C3801A8A38B5008F2A8E /* LaunchScreen.storyboard in Resources */,
@@ -2492,11 +2491,10 @@
 			name = "We all pay app keywords.plist";
 			sourceTree = "<group>";
 		};
-		387D3A931870652B0060FAF8 /* Localizable.strings */ = {
+		38BEA798275F765800D05D8B /* Localizable.strings */ = {
 			isa = PBXVariantGroup;
 			children = (
-				38156B2918706BAC0047AEEF /* Base */,
-				38F3E8D826B55F39007AFC4D /* nl */,
+				38BEA799275F765C00D05D8B /* nl */,
 			);
 			name = Localizable.strings;
 			sourceTree = "<group>";
