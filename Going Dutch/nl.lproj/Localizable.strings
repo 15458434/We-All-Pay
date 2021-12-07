@@ -37,7 +37,7 @@
 /* One of the payments is missing a payer. */
 "At least one of the payments is missing a payer." = "Minstens één betaling heeft een onbekende betaler.";
 
-/* I suggest the following solution. */
+/* (No Comment) */
 "Based on all of this, I suggest the following solution:" = "Ik stel de volgende oplossing voor:";
 
 /* last name example for appstore screenshots */
@@ -388,6 +388,42 @@
 
 /* payed item example for app store screenshots */
 "Soft drinks" = "Frisdrank";
+
+/* Bill overview of our trip to %1$@ */
+"solution_email_subject" = "Onkosten overzicht van ons uitje %1$@.";
+
+/* Bill overview of our event. */
+"solution_email_subject_no_event_name" = "Onkosten overzicht van ons uitje.";
+
+/* Here you go. The full overview of the %1$@ which we spend on our last event %2$@. We spent an average of %3$@ a person. You can find more of the details below. */
+"solution_mail_body_1a" = "Alsjeblieft, het overzicht van de %1$@ aan kosten die we gemaakt hebben voor ons uitje naar %2$@. De gemiddelde kosten per persoon zijn %3$@. Het complete overzicht staat hieronder.";
+
+/* Here you go. The full overview of the %1$@ which we spend on our last event. We spent an average of %2$@ a person. You can find more of the details below. */
+"solution_mail_body_1b" = "Alsjeblieft, het overzicht van de %1$@ aan kosten die we gemaakt hebben voor ons uitje. De gemiddelde kosten per persoon zijn %3$@. Het complete overzicht staat hieronder.";
+
+/* %1$@ has paid %2$@ for %3$@. */
+"solution_mail_body_2a" = "%1$@ betaalde %2$@ voor %3$@.";
+
+/* %1$@ has paid %2$@(%3$@) for %4$@. */
+"solution_mail_body_2b" = "%1$@ betaalde %2$@(%3$@) voor %4$@.";
+
+/* The amount of money we used: */
+"solution_mail_body_3" = "We hebben deze kosten gemaakt:";
+
+/* %1$@ used %2$@ in total. */
+"solution_mail_body_4" = "%1$@ gebruikte in totaal %2$@.";
+
+/* I suggest the following solution. */
+"solution_mail_body_5" = "Op basis hiervan stel ik de volgende oplossing voor:";
+
+/* %1$@ pays %2$@ to %3$@ */
+"solution_mail_body_6" = "%1$@ geeft %2$@ aan %3$@.";
+
+/* If you have any remarks please let me know. */
+"solution_mail_body_7" = "Als jullie nog opmerkingen hebben dan hoor ik dat graag.";
+
+/* Dear %1$@, */
+"solution_mail_header" = "Beste %1$@,";
 
 /* Text on a button that dismisses the alert */
 "solution_view_alert_action_cannot_send_email_dismiss" = "Negeer";

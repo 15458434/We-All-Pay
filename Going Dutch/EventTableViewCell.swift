@@ -67,7 +67,12 @@ import UIKit
                 return
             }
             
-            mySelf.extraLabel.text = mySelf.model.dateFormatter.string(from: newValue!)
+            if let existingValue = newValue {
+                mySelf.extraLabel.text = mySelf.model.dateFormatter.string(from: existingValue)
+            } else {
+                mySelf.extraLabel.text = nil
+            }
+            
         })
     }
     
