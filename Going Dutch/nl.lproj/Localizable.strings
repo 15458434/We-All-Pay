@@ -19,9 +19,6 @@
 /* event name example for app store screenshots */
 "Camping trip" = "Kamperen";
 
-/* Text on button to cancel something */
-"Cancel" = "Annuleer";
-
 /* event name example for app store screenshots */
 "Concert" = "Concert";
 
@@ -283,9 +280,6 @@
 /* Title of the select currency view that allows for selecting a currency. */
 "select_currency_view_title" = "Selecteer munteenheid";
 
-/* Send anyway */
-"Send anyway" = "Stuur alsnog";
-
 /* first name example for app store screenshots */
 "Sheila" = "Sophie";
 
@@ -337,8 +331,14 @@
 /* An action button in an alert that allows for instant navigation to a payment with missing data. */
 "solution_view_alert_action_data_missing_in_payment_go_to" = "Ga naar";
 
+/* Text on button to cancel the alert that says there are people without email addresses. */
+"solution_view_alert_action_dismiss" = "Annuleer";
+
 /* Button title of an alert view to tell the user We All Pay is unable to fetch exchange rates to calculation a solution. */
 "solution_view_alert_action_dismiss_cannot_fetch_exchange_rates" = "Negeer";
+
+/* Action button on an alert to send email anyway in case not all email addresses have been entered. */
+"solution_view_alert_action_send_anyway" = "Stuur alsnog";
 
 /* Message explaining what the user can do to refetch exchange rates
    Message in an alert of the solution view that pops up when fetching exchange rates is impossible. It explains what the user can do to refetch exchange rates. */
@@ -350,6 +350,9 @@
 /* Alert message suggesting the user that there is missing data on a payment. */
 "solution_view_alert_message_data_missing_in_payment" = "Controleer betalingen voor onbekende gegevens.";
 
+/* Message of an alert shown to the user in case not everyone on the event has an email address. */
+"solution_view_alert_message_missing_email_address" = "Van sommigen aanwezigen is het email adres niet bekend.";
+
 /* itle message of an alert that pops up when fetching exchange rates is impossibl
    Title message of an alert that pops up when fetching exchange rates is impossible */
 "solution_view_alert_title_cannot_fetch_exchange_rates" = "Kan wisselkoers niet ophalen";
@@ -359,6 +362,9 @@
 
 /* Alert title stating that data is missing in a payment */
 "solution_view_alert_title_data_missing_in_payment" = "Er ontbreken gegevens in een betaling";
+
+/* Title of an alert shown to the user in case not everyone on the event has an email address. */
+"solution_view_alert_title_missing_email_address" = "Kan niet iedereen een email sturen.";
 
 /* Title of a button that allows for sending the email with the solution. */
 "solution_view_button_send_email" = "Stuur Email";
@@ -392,7 +398,4 @@
 
 /* last name example for appstore screenshots */
 "Tucker" = "Smits";
-
-/* Unable to send email to all people. */
-"Unable to send email to all people." = "Kan niet iedereen een email sturen.";
 

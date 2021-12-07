@@ -84,11 +84,11 @@ typedef NS_OPTIONS(NSUInteger, MCReturnPaymentViewControllerState) {
     if ([[self tonightsBill] doesEveryoneHaveAnEmailAddress]) {
         [self openMailView:sender];
     } else {
-        NSLog(@"Not everyone has an email address");
-        NSString *title = NSLocalizedString(@"Unable to send email to all people.", @"Unable to send email to all people.");
+        NSString *title = NSLocalizedStringWithDefaultValue(@"solution_view_alert_title_missing_email_address", nil, NSBundle.mainBundle, @"Unable to send email to all people.", @"Title of an alert shown to the user in case not everyone on the event has an email address.");
         NSString *message = NSLocalizedString(@"Reason: Not all people have a mail address.", @"Reason: Not all people have a mail address.");
-        NSString *cancel = NSLocalizedString(@"Cancel", @"Text on button to cancel something");
-        NSString *sendAnyway = NSLocalizedString(@"Send anyway", @"Send anyway");
+        NSString *message = NSLocalizedStringWithDefaultValue(@"solution_view_alert_message_missing_email_address", nil, NSBundle.mainBundle, @"Not all people have a mail address. Add the missing email addresses or send it anyway.", @"Message of an alert shown to the user in case not everyone on the event has an email address.");
+        NSString *cancel = NSLocalizedStringWithDefaultValue(@"solution_view_alert_action_dismiss", nil, NSBundle.mainBundle, @"Cancel", @"Text on button to cancel the alert that says there are people without email addresses.");
+        NSString *sendAnyway = NSLocalizedStringWithDefaultValue(@"solution_view_alert_action_send_anyway", nil, NSBundle.mainBundle, @"Send anyway", @"Action button on an alert to send email anyway in case not all email addresses have been entered.");
         
         UIAlertController *alertController = [UIAlertController alertControllerWithTitle:title message:message preferredStyle:UIAlertControllerStyleAlert];
         [alertController addAction:[UIAlertAction actionWithTitle:cancel style:UIAlertActionStyleCancel handler:^(UIAlertAction * _Nonnull action) {
