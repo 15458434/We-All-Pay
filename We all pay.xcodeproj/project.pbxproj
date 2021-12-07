@@ -83,7 +83,6 @@
 		384EC9121BC3008300A80799 /* SelectEmailAddressTableViewController_iPad.swift in Sources */ = {isa = PBXBuildFile; fileRef = 384EC9111BC3008300A80799 /* SelectEmailAddressTableViewController_iPad.swift */; };
 		385295CF1C10583E0081894D /* CategoryPictureObject.swift in Sources */ = {isa = PBXBuildFile; fileRef = 385295CE1C10583E0081894D /* CategoryPictureObject.swift */; };
 		385295D11C105C580081894D /* CategoryPictureStoreController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 385295D01C105C580081894D /* CategoryPictureStoreController.swift */; };
-		38572AE1169D437B00969C62 /* InfoPlist.strings in Resources */ = {isa = PBXBuildFile; fileRef = 38572ADF169D437B00969C62 /* InfoPlist.strings */; };
 		38572AE3169D437B00969C62 /* main.m in Sources */ = {isa = PBXBuildFile; fileRef = 38572AE2169D437B00969C62 /* main.m */; };
 		38572AE7169D437B00969C62 /* MCAppDelegate.m in Sources */ = {isa = PBXBuildFile; fileRef = 38572AE6169D437B00969C62 /* MCAppDelegate.m */; };
 		38572B0A169F3D2700969C62 /* MCAllTripsTableViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 38572B09169F3D2700969C62 /* MCAllTripsTableViewController.m */; };
@@ -180,6 +179,7 @@
 		38BCCA5026C6A19E00D4C854 /* AppTrackingTransparency.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 38BCCA4F26C6A19E00D4C854 /* AppTrackingTransparency.framework */; };
 		38BEA791275E228B00D05D8B /* EventModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 38BEA790275E228B00D05D8B /* EventModel.swift */; };
 		38BEA796275F765800D05D8B /* Localizable.strings in Resources */ = {isa = PBXBuildFile; fileRef = 38BEA798275F765800D05D8B /* Localizable.strings */; };
+		38BEA79C275F783400D05D8B /* InfoPlist.strings in Resources */ = {isa = PBXBuildFile; fileRef = 38BEA79E275F783400D05D8B /* InfoPlist.strings */; };
 		38C1AD4726EE871D00E09E09 /* MCPaymentPresenceTableViewCell_iPhone.m in Sources */ = {isa = PBXBuildFile; fileRef = 38C1AD4626EE871D00E09E09 /* MCPaymentPresenceTableViewCell_iPhone.m */; };
 		38C3AB151CBCF3200011C10C /* ViewControllerProtocols.swift in Sources */ = {isa = PBXBuildFile; fileRef = 38C3AB141CBCF3200011C10C /* ViewControllerProtocols.swift */; };
 		38C44BCE23DEDEC900264BBB /* ScrollViewAdjusterToKeyboard.swift in Sources */ = {isa = PBXBuildFile; fileRef = 38C44BCD23DEDEC900264BBB /* ScrollViewAdjusterToKeyboard.swift */; };
@@ -468,8 +468,6 @@
 		38641481269B18C400590ABA /* NotificationsModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NotificationsModel.swift; sourceTree = "<group>"; };
 		38641485269B5E9F00590ABA /* Notifications.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Notifications.xcassets; sourceTree = "<group>"; };
 		3867253A23DB248E009607E8 /* fastlane */ = {isa = PBXFileReference; lastKnownFileType = folder; path = fastlane; sourceTree = "<group>"; };
-		3867CE4018703E9A001EC222 /* nl */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.strings; name = nl; path = nl.lproj/InfoPlist.strings; sourceTree = "<group>"; };
-		3867CE4D18704C60001EC222 /* Base */ = {isa = PBXFileReference; fileEncoding = 10; lastKnownFileType = text.plist.strings; name = Base; path = Base.lproj/InfoPlist.strings; sourceTree = "<group>"; };
 		3868780523721751003D40A9 /* EmailTextInputValidator.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = EmailTextInputValidator.swift; sourceTree = "<group>"; };
 		38687807237217B3003D40A9 /* TextInputValidator.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TextInputValidator.swift; sourceTree = "<group>"; };
 		3868780923721967003D40A9 /* PersonModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PersonModel.swift; sourceTree = "<group>"; };
@@ -558,7 +556,6 @@
 		389DE90F197FD6DF00169645 /* MCCurrencyTest.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = MCCurrencyTest.m; sourceTree = "<group>"; };
 		389DE9141982540D00169645 /* MCCurrency.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = MCCurrency.h; sourceTree = "<group>"; };
 		389DE9151982540D00169645 /* MCCurrency.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = MCCurrency.m; sourceTree = "<group>"; };
-		389E92651889E6CC0005F063 /* en */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = en; path = en.lproj/InfoPlist.strings; sourceTree = "<group>"; };
 		389FBD3E198BDA1C003B4409 /* MCExchangeRate.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = MCExchangeRate.h; sourceTree = "<group>"; };
 		389FBD3F198BDA1C003B4409 /* MCExchangeRate.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = MCExchangeRate.m; sourceTree = "<group>"; };
 		38A8F2A523C2583200CB3B73 /* DescriptionOfPaymentTextInputValidator.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DescriptionOfPaymentTextInputValidator.swift; sourceTree = "<group>"; };
@@ -586,6 +583,7 @@
 		38BCCA4F26C6A19E00D4C854 /* AppTrackingTransparency.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = AppTrackingTransparency.framework; path = System/Library/Frameworks/AppTrackingTransparency.framework; sourceTree = SDKROOT; };
 		38BEA790275E228B00D05D8B /* EventModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = EventModel.swift; sourceTree = "<group>"; };
 		38BEA799275F765C00D05D8B /* nl */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = nl; path = nl.lproj/Localizable.strings; sourceTree = "<group>"; };
+		38BEA79F275F783800D05D8B /* nl */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = nl; path = nl.lproj/InfoPlist.strings; sourceTree = "<group>"; };
 		38C1AD4526EE871D00E09E09 /* MCPaymentPresenceTableViewCell_iPhone.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = MCPaymentPresenceTableViewCell_iPhone.h; sourceTree = "<group>"; };
 		38C1AD4626EE871D00E09E09 /* MCPaymentPresenceTableViewCell_iPhone.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = MCPaymentPresenceTableViewCell_iPhone.m; sourceTree = "<group>"; };
 		38C3AB141CBCF3200011C10C /* ViewControllerProtocols.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ViewControllerProtocols.swift; sourceTree = "<group>"; };
@@ -1028,8 +1026,8 @@
 				38BEA798275F765800D05D8B /* Localizable.strings */,
 				380A76AD26D62EB3000FEABB /* Localizable.stringsdict */,
 				38572ADE169D437B00969C62 /* Info.plist */,
+				38BEA79E275F783400D05D8B /* InfoPlist.strings */,
 				38E88B3F226B19ED008EB4BE /* GoogleService-Info.plist */,
-				38572ADF169D437B00969C62 /* InfoPlist.strings */,
 				38572AE2169D437B00969C62 /* main.m */,
 				38572AE4169D437B00969C62 /* We all pay-Prefix.pch */,
 				38977E581B2A2F09008484A4 /* We-all-pay-Bridging-Header.h */,
@@ -1920,13 +1918,13 @@
 			buildActionMask = 2147483647;
 			files = (
 				38641486269B5E9F00590ABA /* Notifications.xcassets in Resources */,
-				38572AE1169D437B00969C62 /* InfoPlist.strings in Resources */,
 				38E88B40226B19EE008EB4BE /* GoogleService-Info.plist in Resources */,
 				382B79CA1A419D9D00538E96 /* categoryPictures.plist in Resources */,
 				38001C9B194EE284008ACD94 /* Assets.xcassets in Resources */,
 				3867253B23DB248E009607E8 /* fastlane in Resources */,
 				3835EBF92115C40900E2BC3F /* Settings.bundle in Resources */,
 				3860575019EE963600BD5B78 /* categoryPictures.xcassets in Resources */,
+				38BEA79C275F783400D05D8B /* InfoPlist.strings in Resources */,
 				380A76AB26D62EB3000FEABB /* Localizable.stringsdict in Resources */,
 				3864147D269B183A00590ABA /* Notifications.storyboard in Resources */,
 				381C2C40275A419900CD82D2 /* Main-iPad.storyboard in Resources */,
@@ -2463,16 +2461,6 @@
 			name = MainInterface.storyboard;
 			sourceTree = "<group>";
 		};
-		38572ADF169D437B00969C62 /* InfoPlist.strings */ = {
-			isa = PBXVariantGroup;
-			children = (
-				3867CE4018703E9A001EC222 /* nl */,
-				3867CE4D18704C60001EC222 /* Base */,
-				389E92651889E6CC0005F063 /* en */,
-			);
-			name = InfoPlist.strings;
-			sourceTree = "<group>";
-		};
 		385F5304191C2C360012773D /* InfoPlist.strings */ = {
 			isa = PBXVariantGroup;
 			children = (
@@ -2497,6 +2485,14 @@
 				38BEA799275F765C00D05D8B /* nl */,
 			);
 			name = Localizable.strings;
+			sourceTree = "<group>";
+		};
+		38BEA79E275F783400D05D8B /* InfoPlist.strings */ = {
+			isa = PBXVariantGroup;
+			children = (
+				38BEA79F275F783800D05D8B /* nl */,
+			);
+			name = InfoPlist.strings;
 			sourceTree = "<group>";
 		};
 		38D6A3ED1C73E64E00968BB2 /* InfoPlist.strings */ = {
