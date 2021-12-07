@@ -1,3 +1,6 @@
+/* Symbol for recent used currencies */
+"!" = "!";
+
 /* A label showing \"person1 and person2\" */
 "%1$@ and %2$@" = "%1$@ en %2$@";
 
@@ -9,9 +12,6 @@
 
 /* example for appstore screenshots */
 "ann_burwell@work.com" = "anne_groen@werk.com";
-
-/* Message that pops up when the App Store is not available. */
-"App Store unavailable" = "App Store niet beschikbaar";
 
 /* last name example for appstore screenshots */
 "Burwell" = "Groen";
@@ -25,6 +25,9 @@
 /* event name example for app store screenshots */
 "Concert" = "Concert";
 
+/* Message to the user that this section in the tableview contains recently used foreign currencies */
+"currency_view_list_section_title_recent" = "Recent";
+
 /* first name example for app store screenshots */
 "David" = "David";
 
@@ -33,10 +36,6 @@
 
 /* event name example for app store screenshots */
 "Dinner" = "Diner";
-
-/* Button that says dismiss.
-   Title of a button that dismisses an alart */
-"Dismiss" = "Negeer";
 
 /* A message when there are no people present inside this shared bill */
 "event_label_no_people_present" = "Niemand aanwezig";
@@ -71,17 +70,20 @@
 /* A list of all the events on which payments have been shared on the people present */
 "events_view_title" = "Evenementen";
 
-/* Message explaining what the user can do to refetch exchange rates */
-"Fetching exchange rates is not possible at this moment. Check your internet connection and/or hit solve to fetch all missing exchange rates at a later time" = "Het ophalen van de wisselkoers is niet mogelijk op dit moment. Controleer je internet verbinding en/of druk later op 'Oplossing' om alle ontbrekende wisselkoersen op te halen.";
-
 /* Option button on the an alert view to dismiss the alert. */
 "info_view_alert_button_dismiss" = "Negeer";
+
+/* Button that says dismiss. */
+"info_view_alert_dismiss_no_app_store" = "Negeer";
 
 /* Title of an alert that is shown when the restoration of in app purchases failed to restore */
 "info_view_alert_failed_to_restore" = "Geen aankoop om te herstellen";
 
 /* Message of the cannot send email alert title with an action for the user to take. */
 "info_view_alert_message_cannot_send_email" = "Configureer je mail in de instellingen van iOS.";
+
+/* Message body explaining the App Store can't be reached. */
+"info_view_alert_message_no_app_store" = "Kan de App Store niet bereiken. Verbind met het internet.";
 
 /* Messages of an alert to the user that thanks them for making the ad free in app purchase */
 "info_view_alert_purchased_message" = "(productName) is nu vrij van advertenties";
@@ -97,6 +99,9 @@
 
 /* Title of an alert to tell the user he's unable to send email. */
 "info_view_alert_title_cannot_send_email" = "Kan email niet versturen";
+
+/* Message that pops up when the App Store is not available. */
+"info_view_alert_title_no_app_store" = "App Store niet bereikbaar";
 
 /* Button in the info view that will make the ad free in app purchase for the user */
 "info_view_cell_buy_ad_free" = "Koop advertentie vrij";
@@ -272,9 +277,6 @@
 /* Reason: Not all people have a mail address. */
 "Reason: Not all people have a mail address." = "Van sommigen aanwzezigen is het email adres niet bekend.";
 
-/* Message to the user that this section in the tableview contains recently used foreign currencies */
-"Recent" = "Recent";
-
 /* The title of the select category screen. It allows for selecting a categoy of the payment. */
 "select_category_view_title" = "Selecteer category";
 
@@ -338,7 +340,8 @@
 /* Button title of an alert view to tell the user We All Pay is unable to fetch exchange rates to calculation a solution. */
 "solution_view_alert_action_dismiss_cannot_fetch_exchange_rates" = "Negeer";
 
-/* Message in an alert of the solution view that pops up when fetching exchange rates is impossible. It explains what the user can do to refetch exchange rates. */
+/* Message explaining what the user can do to refetch exchange rates
+   Message in an alert of the solution view that pops up when fetching exchange rates is impossible. It explains what the user can do to refetch exchange rates. */
 "solution_view_alert_message_cannot_fetch_exchange_rates" = "Het ophalen van de wisselkoers is niet mogelijk op dit moment. Controleer je internet verbinding en/of druk later op 'Oplossing' om alle ontbrekende wisselkoersen op te halen.";
 
 /* Instruction in an alert to tell the user that they should check their email address for a valid configuration. */
@@ -347,7 +350,8 @@
 /* Alert message suggesting the user that there is missing data on a payment. */
 "solution_view_alert_message_data_missing_in_payment" = "Controleer betalingen voor onbekende gegevens.";
 
-/* Title message of an alert that pops up when fetching exchange rates is impossible */
+/* itle message of an alert that pops up when fetching exchange rates is impossibl
+   Title message of an alert that pops up when fetching exchange rates is impossible */
 "solution_view_alert_title_cannot_fetch_exchange_rates" = "Kan wisselkoers niet ophalen";
 
 /* Title of an alert that notifies the user the app is unable to send email. */
@@ -388,12 +392,6 @@
 
 /* last name example for appstore screenshots */
 "Tucker" = "Smits";
-
-/* Message body explaining the App Store can't be reached. */
-"Unable to connect to the App Store. Please connect to the internet." = "Kan de App Store niet bereiken. Verbind met het internet.";
-
-/* itle message of an alert that pops up when fetching exchange rates is impossibl */
-"Unable to fetch exchange rates" = "Kan wisselkoers niet ophalen";
 
 /* Unable to send email to all people. */
 "Unable to send email to all people." = "Kan niet iedereen een email sturen.";

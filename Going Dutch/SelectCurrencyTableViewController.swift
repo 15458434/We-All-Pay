@@ -146,9 +146,9 @@ class SelectCurrencyTableViewController: UITableViewController, UISearchResultsU
                 guard error == nil else {
                     Swift.debugPrint("Error fetching ExchangeRate: \(error!)")
 
-                    let title = NSLocalizedString("Unable to fetch exchange rates", comment: "itle message of an alert that pops up when fetching exchange rates is impossibl")
-                    let message = NSLocalizedString("Fetching exchange rates is not possible at this moment. Check your internet connection and/or hit solve to fetch all missing exchange rates at a later time", comment: "Message explaining what the user can do to refetch exchange rates")
-                    let dismissTitle = NSLocalizedString("Dismiss", comment: "Title of a button that dismisses an alart")
+                    let title = NSLocalizedString("solution_view_alert_title_cannot_fetch_exchange_rates", value: "Unable to fetch exchange rates", comment: "itle message of an alert that pops up when fetching exchange rates is impossibl")
+                    let message = NSLocalizedString("solution_view_alert_message_cannot_fetch_exchange_rates", value: "Fetching exchange rates is not possible at this moment. Check your internet connection and/or hit solve to fetch all missing exchange rates at a later time", comment: "Message explaining what the user can do to refetch exchange rates")
+                    let dismissTitle = NSLocalizedString("solution_view_alert_action_dismiss_cannot_fetch_exchange_rates", value: "Dismiss", comment: "Button title of an alert view to tell the user We All Pay is unable to fetch exchange rates to calculation a solution.")
 
                     let alertController = UIAlertController(title: title, message: message, preferredStyle: .alert)
                     let dismissAction = UIAlertAction(title: dismissTitle, style: .cancel, handler: nil)
@@ -174,7 +174,7 @@ class SelectCurrencyTableViewController: UITableViewController, UISearchResultsU
         func data(section: Int) -> String {
             switch (searchActive, recentUsedForeignCurrencies?.count ?? 0, section) {
             case let (searchActive, rc, section) where searchActive == false && rc > 0 && section == 0:
-                return NSLocalizedString("Recent", comment: "Message to the user that this section in the tableview contains recently used foreign currencies")
+                return NSLocalizedString("currency_view_list_section_title_recent", value: "Recent", comment: "Message to the user that this section in the tableview contains recently used foreign currencies")
             case let (searchActive, rc, section) where searchActive == false && rc > 0 && section > 0:
                 return collation.sectionTitles[section - 1]
             default:
