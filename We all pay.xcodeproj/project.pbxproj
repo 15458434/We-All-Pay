@@ -179,6 +179,7 @@
 		38B7E9521D86F8F600400E72 /* ContactsDataReceiver.swift in Sources */ = {isa = PBXBuildFile; fileRef = 38B7E9511D86F8F600400E72 /* ContactsDataReceiver.swift */; };
 		38B88E2E1D81FF6E0069A44D /* MailComposeViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 38B88E2D1D81FF6E0069A44D /* MailComposeViewController.swift */; };
 		38BCCA5026C6A19E00D4C854 /* AppTrackingTransparency.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 38BCCA4F26C6A19E00D4C854 /* AppTrackingTransparency.framework */; };
+		38BEA791275E228B00D05D8B /* EventModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 38BEA790275E228B00D05D8B /* EventModel.swift */; };
 		38C1AD4726EE871D00E09E09 /* MCPaymentPresenceTableViewCell_iPhone.m in Sources */ = {isa = PBXBuildFile; fileRef = 38C1AD4626EE871D00E09E09 /* MCPaymentPresenceTableViewCell_iPhone.m */; };
 		38C3AB151CBCF3200011C10C /* ViewControllerProtocols.swift in Sources */ = {isa = PBXBuildFile; fileRef = 38C3AB141CBCF3200011C10C /* ViewControllerProtocols.swift */; };
 		38C44BCE23DEDEC900264BBB /* ScrollViewAdjusterToKeyboard.swift in Sources */ = {isa = PBXBuildFile; fileRef = 38C44BCD23DEDEC900264BBB /* ScrollViewAdjusterToKeyboard.swift */; };
@@ -585,6 +586,7 @@
 		38B7E9511D86F8F600400E72 /* ContactsDataReceiver.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ContactsDataReceiver.swift; sourceTree = "<group>"; };
 		38B88E2D1D81FF6E0069A44D /* MailComposeViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = MailComposeViewController.swift; sourceTree = "<group>"; };
 		38BCCA4F26C6A19E00D4C854 /* AppTrackingTransparency.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = AppTrackingTransparency.framework; path = System/Library/Frameworks/AppTrackingTransparency.framework; sourceTree = SDKROOT; };
+		38BEA790275E228B00D05D8B /* EventModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = EventModel.swift; sourceTree = "<group>"; };
 		38C1AD4526EE871D00E09E09 /* MCPaymentPresenceTableViewCell_iPhone.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = MCPaymentPresenceTableViewCell_iPhone.h; sourceTree = "<group>"; };
 		38C1AD4626EE871D00E09E09 /* MCPaymentPresenceTableViewCell_iPhone.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = MCPaymentPresenceTableViewCell_iPhone.m; sourceTree = "<group>"; };
 		38C3AB141CBCF3200011C10C /* ViewControllerProtocols.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ViewControllerProtocols.swift; sourceTree = "<group>"; };
@@ -947,7 +949,7 @@
 			children = (
 				38572AF6169D443C00969C62 /* MCAllTripsTableViewController.h */,
 				38572B09169F3D2700969C62 /* MCAllTripsTableViewController.m */,
-				38977E621B2A37BC008484A4 /* EventTableViewCell.swift */,
+				38BEA78F275E226D00D05D8B /* EventTableViewCell */,
 				3841F8D223893A0A00882E40 /* EventsModel.swift */,
 				380327FF2698443300744710 /* NotificationsInfoModel.swift */,
 			);
@@ -1290,6 +1292,15 @@
 				38010E111A3F4A4F0056F8F8 /* Localizable.strings */,
 			);
 			name = "Supporting Files";
+			sourceTree = "<group>";
+		};
+		38BEA78F275E226D00D05D8B /* EventTableViewCell */ = {
+			isa = PBXGroup;
+			children = (
+				38977E621B2A37BC008484A4 /* EventTableViewCell.swift */,
+				38BEA790275E228B00D05D8B /* EventModel.swift */,
+			);
+			name = EventTableViewCell;
 			sourceTree = "<group>";
 		};
 		38C1956423C8C58A006255AE /* GenericViewController */ = {
@@ -2186,6 +2197,7 @@
 				38CDE90017135B6300387CAA /* MCTools.m in Sources */,
 				3829AD0F178B41320025969D /* WeAllPayStore.xcdatamodeld in Sources */,
 				384EC90E1BC2F35700A80799 /* SelectCurrencyTableViewCell_iPad.swift in Sources */,
+				38BEA791275E228B00D05D8B /* EventModel.swift in Sources */,
 				38DB85D717E45CA4006237CF /* MCSharedBill+addons.m in Sources */,
 				386EB43323C723BE00FB20B9 /* AdEngine.swift in Sources */,
 				38DB85DD17E45FB7006237CF /* MCEmailAddress+addons.m in Sources */,

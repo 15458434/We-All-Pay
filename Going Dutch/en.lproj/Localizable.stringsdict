@@ -12,7 +12,7 @@
 			<string>People sharing this payment</string>
 		</dict>
 	</dict>
-	<key>This is what we all paid:</key>
+	<key>solution_view_email_result_total_sum_paid_by</key>
 	<dict>
 		<key>NSStringLocalizedFormatKey</key>
 		<string>%#@v1_who_paid_count@</string>

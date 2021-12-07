@@ -80,6 +80,15 @@
 /* Sub header in the paymentView which states edit data */
 "Edit payment data" = "Bewerk gegevens";
 
+/* A message when there are no people present inside this shared bill */
+"event_label_no_people_present" = "Niemand aanwezig";
+
+/* A label showing person1, person2 and other */
+"event_label_three_or_more_people_present" = "%1$@, %2$@ en anderen";
+
+/* A label showing \"person1 and person2\" */
+"event_label_two_people_present" = "%1$@ en %2$@";
+
 /* A selection button at the top of the event view that allows for selection between the people and the payments on the event. This button is for selecting the payments. */
 "event_view_segmentedControl_payments_title" = "Betalingen";
 

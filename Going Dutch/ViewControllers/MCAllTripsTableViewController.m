@@ -182,35 +182,7 @@ static void * notificationCountContext = &notificationCountContext;
     MCSharedBill *event = [_model.fetchEventsController objectAtIndexPath:indexPath];
     MCEventTableViewCell *eventCell = (MCEventTableViewCell *)cell;
     
-    if (!event.tripName) {
-        eventCell.tripLabel.text = NSLocalizedStringWithDefaultValue(@"events_view_event_cell_no_event_name", nil, NSBundle.mainBundle, @"Unnamed event", @"The name of the event shown in the events list when the user didn't add an event name to the event.");
-    } else {
-        eventCell.tripLabel.text = event.tripName;
-    }
-    eventCell.peoplePresentLabel.text = [event stringOfApproxPeoplePresent];
-
-    if ([event areAllExchangeRatesValid]) {
-        CurrencyFormatter *cf = [[CurrencyFormatter alloc] initWithCurrencyCode:event.mainCurrency.code];
-        NSString *moneyString = [cf stringForObjectValue:[event totalSumOfMoneyOfThisSharedBill]];
-        eventCell.totalCostLabel.hidden = NO;
-        [eventCell.waitingForXRatesIndicator stopAnimating];
-        eventCell.totalCostLabel.text = moneyString;
-    } else {
-        CurrencyFormatter *cf = [[CurrencyFormatter alloc] initWithCurrencyCode:event.mainCurrency.code];
-        NSString *moneyString = [cf stringForObjectValue:[event totalSumOfMoneyOfThisSharedBill]];
-        [[eventCell totalCostLabel] setText:moneyString];
-        eventCell.totalCostLabel.text = moneyString;
-        eventCell.totalCostLabel.hidden = YES;
-        [eventCell.waitingForXRatesIndicator startAnimating];
-    }
-
-    // fill extraLabel with dateModified.
-    if (!_df) {
-        _df = [[NSDateFormatter alloc] init];
-        _df.dateStyle = NSDateFormatterMediumStyle;
-        _df.timeStyle = NSDateFormatterShortStyle;
-    }
-    eventCell.extraLabel.text = [_df stringFromDate:event.dateModified];
+    [eventCell prepareForUseWith:event];
     
     return;
 }

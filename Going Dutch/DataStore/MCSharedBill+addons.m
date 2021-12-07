@@ -128,7 +128,7 @@
     } else if ([allPeople count] == 1) {
         return [allPeople[0] getName];
     } else if ([allPeople count] == 2) {
-        NSString *localizedString = NSLocalizedString(@"%1$@ and %2$@", "A label showing \"person1 and person2\"");
+        NSString *localizedString = NSLocalizedString(@"%1$@ and %2$@", @"A label showing \"person1 and person2\"");
         return [NSString stringWithFormat:localizedString, [allPeople[0] getName], [allPeople[1] getName]];
     } else if ([allPeople count] >= 3) {
         NSString *localizedString = NSLocalizedString(@"%1$@, %2$@ and others", @"A label showing person1, person2 and other");

@@ -2,24 +2,6 @@
 <!DOCTYPE plist PUBLIC "-//Apple//DTD PLIST 1.0//EN" "http://www.apple.com/DTDs/PropertyList-1.0.dtd">
 <plist version="1.0">
 <dict>
-	<key>This is what we all paid:</key>
-	<dict>
-		<key>NSStringLocalizedFormatKey</key>
-		<string>%#@v1_wie_heeft_betaald_count@</string>
-		<key>v1_who_paid_count</key>
-		<dict>
-			<key>NSStringFormatSpecTypeKey</key>
-			<string>NSStringPluralRuleType</string>
-			<key>NSStringFormatValueTypeKey</key>
-			<string>lu</string>
-			<key>one</key>
-			<string>%lu person has paid for everything:</string>
-			<key>other</key>
-			<string>%lu people have paid everything:</string>
-			<key>zero</key>
-			<string>Nobody has paid anything so far.</string>
-		</dict>
-	</dict>
 	<key>payment_view_presence_list_title</key>
 	<dict>
 		<key>NSStringVariableWidthRuleType</key>
@@ -48,6 +30,24 @@
 			<string>Totaal:</string>
 			<key>25</key>
 			<string>Totaal uitgegeven:</string>
+		</dict>
+	</dict>
+	<key>solution_view_email_result_total_sum_paid_by</key>
+	<dict>
+		<key>NSStringLocalizedFormatKey</key>
+		<string>%#@v1_wie_heeft_betaald_count@</string>
+		<key>v1_who_paid_count</key>
+		<dict>
+			<key>NSStringFormatSpecTypeKey</key>
+			<string>NSStringPluralRuleType</string>
+			<key>NSStringFormatValueTypeKey</key>
+			<string>lu</string>
+			<key>one</key>
+			<string>%lu person has paid for everything:</string>
+			<key>other</key>
+			<string>%lu people have paid everything:</string>
+			<key>zero</key>
+			<string>Nobody has paid anything so far.</string>
 		</dict>
 	</dict>
 </dict>

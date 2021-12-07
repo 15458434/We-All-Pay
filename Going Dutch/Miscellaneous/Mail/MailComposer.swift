@@ -62,7 +62,7 @@ extension MailComposer where Self: ThisEvent {
         }
         mailBody += "\n\n"
         
-        let pluralString = NSLocalizedString("This is what we all paid:", comment: "")
+        let pluralString = NSLocalizedString("solution_view_email_result_total_sum_paid_by", comment: "")
         mailBody += String.localizedStringWithFormat(pluralString, event.totalAmountOfPeopleWhoHavePaid())
         mailBody += "\n"
         
