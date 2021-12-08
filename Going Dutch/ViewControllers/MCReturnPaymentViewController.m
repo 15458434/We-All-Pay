@@ -85,7 +85,6 @@ typedef NS_OPTIONS(NSUInteger, MCReturnPaymentViewControllerState) {
         [self openMailView:sender];
     } else {
         NSString *title = NSLocalizedStringWithDefaultValue(@"solution_view_alert_title_missing_email_address", nil, NSBundle.mainBundle, @"Unable to send email to all people.", @"Title of an alert shown to the user in case not everyone on the event has an email address.");
-        NSString *message = NSLocalizedString(@"Reason: Not all people have a mail address.", @"Reason: Not all people have a mail address.");
         NSString *message = NSLocalizedStringWithDefaultValue(@"solution_view_alert_message_missing_email_address", nil, NSBundle.mainBundle, @"Not all people have a mail address. Add the missing email addresses or send it anyway.", @"Message of an alert shown to the user in case not everyone on the event has an email address.");
         NSString *cancel = NSLocalizedStringWithDefaultValue(@"solution_view_alert_action_dismiss", nil, NSBundle.mainBundle, @"Cancel", @"Text on button to cancel the alert that says there are people without email addresses.");
         NSString *sendAnyway = NSLocalizedStringWithDefaultValue(@"solution_view_alert_action_send_anyway", nil, NSBundle.mainBundle, @"Send anyway", @"Action button on an alert to send email anyway in case not all email addresses have been entered.");
@@ -511,11 +510,11 @@ typedef NS_OPTIONS(NSUInteger, MCReturnPaymentViewControllerState) {
     [super viewWillAppear:animated];
     
     _emptyMessage.topConstraint.constant = self.headerView.frame.size.height;
-    _emptyMessage.bigMessage.text = NSLocalizedString(@"Please add people and payments if you want a solution on who owes who.", @"Please add payments and/or people if you want a solution on who owes who.");
+    _emptyMessage.bigMessage.text = NSLocalizedStringWithDefaultValue(@"solution_view_list_empty_message", nil, NSBundle.mainBundle, @"Please add people and payments if you want a solution on who owes who.", @"Please add payments and/or people if you want a solution on who owes who.");
     [self setEmptyMessageWithDuration:0.0];
     
     if (_tonightsBill.peoplePresent.count == 0 || _tonightsBill.payments.count == 0) {
-        [[_emptyMessage bigMessage] setText:NSLocalizedString(@"Please add people and payments if you want a solution on who owes who.", @"Please add payments and/or people if you want a solution on who owes who.")];
+        _emptyMessage.bigMessage.text = NSLocalizedStringWithDefaultValue(@"solution_view_list_empty_message", nil, NSBundle.mainBundle, @"Please add people and payments if you want a solution on who owes who.", @"Please add payments and/or people if you want a solution on who owes who.");
     } else {
         _emptyMessage.bigMessage.text = @"";
     }

@@ -253,9 +253,6 @@
 /* An string that indicates that no person is selected in the select payer picker */
 "picker_option_none" = "geen";
 
-/* Please add payments and/or people if you want a solution on who owes who. */
-"Please add people and payments if you want a solution on who owes who." = "Druk op \"Annuleer\" en voeg mensen en betalingen toe.";
-
 /* payed item example for app store screenshots */
 "Popcorn" = "Popcorn";
 
@@ -270,9 +267,6 @@
 
 /* Title of a Yes button on the rate me in the App Store button. */
 "rate_me_alert_yes" = "Jazeker";
-
-/* Reason: Not all people have a mail address. */
-"Reason: Not all people have a mail address." = "Van sommigen aanwzezigen is het email adres niet bekend.";
 
 /* The title of the select category screen. It allows for selecting a categoy of the payment. */
 "select_category_view_title" = "Selecteer category";
@@ -371,6 +365,9 @@
 
 /* In the solution view: As in Mark owes Yvette x amount of money. */
 "solution_view_cell_who_owes_who_label" = "%1$@ betaalt %2$@";
+
+/* Please add payments and/or people if you want a solution on who owes who. */
+"solution_view_list_empty_message" = "Druk op \"Annuleer\" en voeg mensen en betalingen toe.";
 
 /* Section title in the solution screen that shows the title of the section that shows who owes how much to the group */
 "solution_view_section_title_total_owes" = "Totaal verschuldigd";
