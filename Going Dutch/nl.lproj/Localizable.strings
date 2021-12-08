@@ -155,10 +155,10 @@
 "No people present" = "Niemand aanwezig";
 
 /* A message for no notifications in the notifications screen. */
-"Nothing new right now." = "Er is niks nieuws op dit moment.";
+"notifications_view_empty_message" = "Er is niks nieuws op dit moment.";
 
 /* No comment provided by engineer. */
-"Notifications" = "Berichten";
+"notifications_view_title" = "Berichten";
 
 /* Text of the payment category selection button */
 "payment_view_button_select_category" = "Selecteer Categorie";
