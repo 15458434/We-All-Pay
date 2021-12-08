@@ -33,9 +33,9 @@
             skipped = "NO">
             <BuildableReference
                BuildableIdentifier = "primary"
-               BlueprintIdentifier = "38696B6423DCD24E00E941EA"
-               BuildableName = "Screenshots.xctest"
-               BlueprintName = "Screenshots"
+               BlueprintIdentifier = "382B76E81C398249000C203A"
+               BuildableName = "CurrencyConverterTests.xctest"
+               BlueprintName = "CurrencyConverterTests"
                ReferencedContainer = "container:We all pay.xcodeproj">
             </BuildableReference>
          </TestableReference>

@@ -155,8 +155,8 @@ import CoreData
             softDrinks.money = NSNumber(value: 24.78)
             softDrinks.categoryId = CategoryPictureStoreController.PaymentCategory.drinks.number
             
-            movie.payments.forEach { (item) in
-                let payment = item as! MCPayment
+            movie.payments!.forEach { (item) in
+                let payment = item
                 payment.recalculateAveragePeopleOweAndStore()
             }
         }
