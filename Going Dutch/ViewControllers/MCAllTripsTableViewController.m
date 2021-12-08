@@ -94,7 +94,7 @@ static void * notificationCountContext = &notificationCountContext;
 - (void)prepareUserActivity {
     if (@available(iOS 9.0, *)) {
         NSUserActivity *activity = [[NSUserActivity alloc] initWithActivityType:@"com.GreenHair.We-all-pay.SharingExpenses"];
-        activity.title = NSLocalizedString(@"We all pay - Sharing Expenses and bill splitting made easy", @"The title of the app");
+        activity.title = NSLocalizedStringWithDefaultValue(@"app_name", nil, NSBundle.mainBundle, @"We all pay", @"The name of We all pay");
         NSString *keywordsFilePath = [[NSBundle mainBundle] pathForResource:@"We all pay keywords" ofType:@"plist"];
         activity.keywords = [NSSet setWithArray:[NSArray arrayWithContentsOfFile:keywordsFilePath]];
         activity.eligibleForHandoff = NO;

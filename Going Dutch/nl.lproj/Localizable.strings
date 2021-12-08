@@ -1,3 +1,6 @@
+/* The name of We all pay */
+"app_name" = "We all pay";
+
 /* event name example for app store screenshots */
 "app_store_screenshots_eventname_1" = "Concert";
 
