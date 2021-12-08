@@ -24,7 +24,7 @@ func betterCreateAttributesStringForWhoIsPayingNext(_ tripName: String, fullName
     let normalAttributes: Dictionary = createAttributesForFontStyle(UIFont.TextStyle.body.rawValue, withTrait: nullTrait)
 //    let boldAttributes: Dictionary = createAttributesForFontStyle(UIFontTextStyleBody, withTrait: .TraitBold)
     
-    let text = String.localizedStringWithFormat(NSLocalizedString("For your event %@, %@ should pay next", comment: "For your event %1$@, %2$@ should pay next."), tripName, fullNameNextPayer)
+    let text = String.localizedStringWithFormat(NSLocalizedString("who_is_paying_next_text", value: "For your event %@, %@ should pay next", comment: "For your event %1$@, %2$@ should pay next."), tripName, fullNameNextPayer)
     let attributedText = NSMutableAttributedString(string: text, attributes: normalAttributes)
     
     return attributedText
@@ -33,7 +33,7 @@ func betterCreateAttributesStringForWhoIsPayingNext(_ tripName: String, fullName
 func createErrorMessage() -> NSMutableAttributedString {
     let fontDescriptor = UIFontDescriptor.preferredFontDescriptor(withTextStyle: UIFont.TextStyle.body)
     let font = UIFont(descriptor: fontDescriptor, size: 0)
-    let text = NSLocalizedString("There is no data to display", comment: "There is no data to display")
+    let text = NSLocalizedString("who_is_paying_next_empty", value: "There is no data to display", comment: "There is no data to display")
     let attributedResult = NSMutableAttributedString(string: text, attributes: [NSAttributedString.Key.font : font])
     return attributedResult
 }
