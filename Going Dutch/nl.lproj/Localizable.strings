@@ -1,38 +1,83 @@
 /* Symbol for recent used currencies */
 "!" = "!";
 
-/* A label showing \"person1 and person2\" */
-"%1$@ and %2$@" = "%1$@ en %2$@";
+/* event name example for app store screenshots */
+"app_store_screenshots_eventname_1" = "Concert";
 
-/* A label showing person1, person2 and other */
-"%1$@, %2$@ and others" = "%1$@, %2$@ en anderen";
+/* event name example for app store screenshots */
+"app_store_screenshots_eventname_2" = "Theater";
 
-/* first name example for app store screenshots */
-"Ann" = "Anne";
+/* event name example for app store screenshots */
+"app_store_screenshots_eventname_3" = "Boodschappen deze maand";
+
+/* event name example for app store screenshots */
+"app_store_screenshots_eventname_4" = "Kamperen";
+
+/* event name example for app store screenshots */
+"app_store_screenshots_eventname_5" = "Diner";
+
+/* payed item example for app store screenshots */
+"app_store_screenshots_eventname_5_payment_1" = "Sushi";
+
+/* event name example for app store screenshots */
+"app_store_screenshots_eventname_6" = "Film";
+
+/* payed item example for app store screenshots */
+"app_store_screenshots_eventname_6_payment_1" = "Kaartjes";
+
+/* payed item example for app store screenshots */
+"app_store_screenshots_eventname_6_payment_2" = "Popcorn";
+
+/* payed item example for app store screenshots */
+"app_store_screenshots_eventname_6_payment_3" = "Frisdrank";
 
 /* example for appstore screenshots */
-"ann_burwell@work.com" = "anne_groen@werk.com";
+"app_store_screenshots_person_email_1" = "davidsmits@ergens.nl";
+
+/* example for appstore screenshots */
+"app_store_screenshots_person_email_2" = "rik@aarde.nl";
+
+/* example for appstore screenshots */
+"app_store_screenshots_person_email_3" = "anne_groen@werk.com";
+
+/* example for appstore screenshots */
+"app_store_screenshots_person_email_4" = "l.d.boer@internet.nl";
+
+/* example for appstore screenshots */
+"app_store_screenshots_person_email_5" = "mailsophie@thuis.nl";
+
+/* first name example for app store screenshots */
+"app_store_screenshots_person_firstname_1" = "David";
+
+/* first name example for app store screenshots */
+"app_store_screenshots_person_firstname_2" = "Rik";
+
+/* first name example for app store screenshots */
+"app_store_screenshots_person_firstname_3" = "Anne";
+
+/* first name example for app store screenshots */
+"app_store_screenshots_person_firstname_4" = "Laurentien";
+
+/* first name example for app store screenshots */
+"app_store_screenshots_person_firstname_5" = "Sophie";
 
 /* last name example for appstore screenshots */
-"Burwell" = "Groen";
+"app_store_screenshots_person_lastname_1" = "Smits";
 
-/* event name example for app store screenshots */
-"Camping trip" = "Kamperen";
+/* last name example for appstore screenshots */
+"app_store_screenshots_person_lastname_2" = "Vos";
 
-/* event name example for app store screenshots */
-"Concert" = "Concert";
+/* last name example for appstore screenshots */
+"app_store_screenshots_person_lastName_3" = "Groen";
+
+/* last name example for appstore screenshots */
+"app_store_screenshots_person_lastname_4" = "Boer";
+
+/* last name example for appstore screenshots */
+"app_store_screenshots_person_lastname_5" = "van der Meulen";
 
 /* Message to the user that this section in the tableview contains recently used foreign currencies */
 "currency_view_list_section_title_recent" = "Recent";
-
-/* first name example for app store screenshots */
-"David" = "David";
-
-/* example for appstore screenshots */
-"davidtucker@somewhere.com" = "davidsmits@ergens.nl";
-
-/* event name example for app store screenshots */
-"Dinner" = "Diner";
 
 /* A message when there are no people present inside this shared bill */
 "event_label_no_people_present" = "Niemand aanwezig";
@@ -118,46 +163,16 @@
 /* Text of a button in the info view that initiates restoring the in app purchases */
 "info_view_cell_restore_purchases" = "Herstel eerdere aankopen";
 
-/* first name example for app store screenshots */
-"Jake" = "Rik";
-
-/* example for appstore screenshots */
-"jake@earth.com" = "rik@aarde.nl";
-
-/* example for appstore screenshots */
-"l.d.mortimer@internet.com" = "l.d.boer@internet.nl";
-
 /* A string that is shown when the description of the item it not available. */
 "label_no_item_description" = "Iets";
 
 /* A string to indicate no person is available on this payment */
 "label_no_person" = "Niemand";
 
-/* first name example for app store screenshots */
-"Lauren" = "Laurentien";
-
-/* example for appstore screenshots */
-"mailsheila@home.com" = "mailsophie@thuis.nl";
-
-/* last name example for appstore screenshots */
-"Miller" = "van der Meulen";
-
-/* last name example for appstore screenshots */
-"Mortimer" = "Boer";
-
-/* event name example for app store screenshots */
-"Movie" = "Film";
-
-/* last name example for appstore screenshots */
-"Nichelson" = "Vos";
-
-/* A message when there are no people present inside this shared bill */
-"No people present" = "Niemand aanwezig";
-
 /* A message for no notifications in the notifications screen. */
 "notifications_view_empty_message" = "Er is niks nieuws op dit moment.";
 
-/* No comment provided by engineer. */
+/* Title of the screen that contains a list of notifications to the user. */
 "notifications_view_title" = "Berichten";
 
 /* Text of the payment category selection button */
@@ -253,9 +268,6 @@
 /* An string that indicates that no person is selected in the select payer picker */
 "picker_option_none" = "geen";
 
-/* payed item example for app store screenshots */
-"Popcorn" = "Popcorn";
-
 /* Message to the user to give We all pay a five star rating. */
 "rate_me_alert_message" = "Zou je We all pay een 5 sterren waardering willen geven, zodat andere mensen de voordelen van We all pay kunnen ontdekken?";
 
@@ -273,12 +285,6 @@
 
 /* Title of the select currency view that allows for selecting a currency. */
 "select_currency_view_title" = "Selecteer munteenheid";
-
-/* first name example for app store screenshots */
-"Sheila" = "Sophie";
-
-/* payed item example for app store screenshots */
-"Soft drinks" = "Frisdrank";
 
 /* Bill overview of our trip to %1$@ */
 "solution_email_subject" = "Onkosten overzicht van ons uitje %1$@.";
@@ -380,19 +386,4 @@
 
 /* Title of the screen that shows the solution to the user of who owes who, what amount of money. */
 "solution_view_title" = "Oplossing";
-
-/* payed item example for app store screenshots */
-"Sushi" = "Sushi";
-
-/* event name example for app store screenshots */
-"Theatre" = "Theater";
-
-/* event name example for app store screenshots */
-"This month food costs" = "Boodschappen deze maand";
-
-/* payed item example for app store screenshots */
-"Tickets" = "Kaartjes";
-
-/* last name example for appstore screenshots */
-"Tucker" = "Smits";
 
