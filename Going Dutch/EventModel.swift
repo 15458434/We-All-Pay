@@ -13,6 +13,11 @@ import UIKit
     @objc var mainCurrencyFormatter: CurrencyFormatter!
     @objc var dateFormatter: DateFormatter!
     
+    convenience init(andPrepareWith event: MCSharedBill) {
+        self.init()
+        self.prepareForUse(with: event)
+    }
+    
     func prepareForUse(with event: MCSharedBill) {
         self.event = event
         mainCurrencyFormatter = CurrencyFormatter(currencyCode: event.mainCurrency!.code!)

@@ -43,6 +43,7 @@ extension MailComposer where Self: ThisEvent {
         let mainCurrencyFormatter = CurrencyFormatter()
         let localCurrencyFormatter = CurrencyFormatter()
         mainCurrencyFormatter.currencyCode = event.mainCurrency!.code
+        let model = EventModel(andPrepareWith: event)
         
         let solution = event.solveWhoHasToPayWhoFromThisBill() as! [ReturnPayment]
 //        let sortDescriptorOnDateCreated = NSSortDescriptor(key: "dateCreated", ascending: true)
@@ -52,7 +53,7 @@ extension MailComposer where Self: ThisEvent {
         var mailBody = String()
         mailBody += "https://itunes.apple.com/us/app/we-all-pay/id642135963?mt=8&uo=4\n\n"
         
-        mailBody += String.localizedStringWithFormat(NSLocalizedString("solution_mail_header", value: "Dear %1$@,", comment: "Dear %1$@,"), self.event.stringOfApproxPeoplePresent())
+        mailBody += String.localizedStringWithFormat(NSLocalizedString("solution_mail_header", value: "Dear %1$@,", comment: "Dear %1$@,"), model.stringOfApproxPeoplePresent)
         mailBody += "\n\n"
         
         if let tripName = self.event.tripName {
