@@ -47,7 +47,6 @@
 		382B77011C398269000C203A /* ExchangeRateFetcher.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3858D6591B2DB6B3006A4E2B /* ExchangeRateFetcher.swift */; };
 		382B77021C3982C8000C203A /* CurrencyControllerTest.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3858D6551B2DB55B006A4E2B /* CurrencyControllerTest.swift */; };
 		382B77031C3982CE000C203A /* ExchangeRateFetcherTest.swift in Sources */ = {isa = PBXBuildFile; fileRef = 38D796121B2DF30800F3872F /* ExchangeRateFetcherTest.swift */; };
-		382B79CA1A419D9D00538E96 /* categoryPictures.plist in Resources */ = {isa = PBXBuildFile; fileRef = 382B79CC1A419D9D00538E96 /* categoryPictures.plist */; };
 		382E796226B7F48200A0D1C1 /* WeAllPayDesignableUI.h in Headers */ = {isa = PBXBuildFile; fileRef = 382E796026B7F48200A0D1C1 /* WeAllPayDesignableUI.h */; settings = {ATTRIBUTES = (Public, ); }; };
 		382E796526B7F48200A0D1C1 /* WeAllPayDesignableUI.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 382E795E26B7F48200A0D1C1 /* WeAllPayDesignableUI.framework */; };
 		382E796626B7F48200A0D1C1 /* WeAllPayDesignableUI.framework in Embed Frameworks */ = {isa = PBXBuildFile; fileRef = 382E795E26B7F48200A0D1C1 /* WeAllPayDesignableUI.framework */; settings = {ATTRIBUTES = (CodeSignOnCopy, RemoveHeadersOnCopy, ); }; };
@@ -131,6 +130,7 @@
 		38955048178B4FCA0077A95A /* MCWeAllPayStoreController.m in Sources */ = {isa = PBXBuildFile; fileRef = 38955047178B4FCA0077A95A /* MCWeAllPayStoreController.m */; };
 		3896D1402760E5F600DC7381 /* Localizable.strings in Resources */ = {isa = PBXBuildFile; fileRef = 3896D1422760E5F600DC7381 /* Localizable.strings */; };
 		3896D1492760F6D400DC7381 /* Available Currencies.plist in Resources */ = {isa = PBXBuildFile; fileRef = 3896D14B2760F6D400DC7381 /* Available Currencies.plist */; };
+		3896D14F2760F9E700DC7381 /* categoryPictures.plist in Resources */ = {isa = PBXBuildFile; fileRef = 3896D1512760F9E700DC7381 /* categoryPictures.plist */; };
 		3897157D17901D0F005BE03E /* MCTwoLabelsTitleView.xib in Resources */ = {isa = PBXBuildFile; fileRef = 3897157917901D0F005BE03E /* MCTwoLabelsTitleView.xib */; };
 		3897159217902E35005BE03E /* MCPaymentsTableViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 3897159117902E35005BE03E /* MCPaymentsTableViewController.m */; };
 		38977E4D1B2A2591008484A4 /* MCSelectCategoryTableViewCell_iPhone.swift in Sources */ = {isa = PBXBuildFile; fileRef = 38977E4C1B2A2591008484A4 /* MCSelectCategoryTableViewCell_iPhone.swift */; };
@@ -408,9 +408,6 @@
 		382B76E41C398249000C203A /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		382B76E91C398249000C203A /* CurrencyConverterTests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = CurrencyConverterTests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
 		382B76F21C398249000C203A /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
-		382B79CB1A419D9D00538E96 /* Base */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; name = Base; path = Base.lproj/categoryPictures.plist; sourceTree = "<group>"; };
-		382B79CE1A419DA000538E96 /* nl */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; name = nl; path = nl.lproj/categoryPictures.plist; sourceTree = "<group>"; };
-		382B79CF1A41BB6A00538E96 /* en */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; name = en; path = en.lproj/categoryPictures.plist; sourceTree = "<group>"; };
 		382E795E26B7F48200A0D1C1 /* WeAllPayDesignableUI.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = WeAllPayDesignableUI.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		382E796026B7F48200A0D1C1 /* WeAllPayDesignableUI.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = WeAllPayDesignableUI.h; sourceTree = "<group>"; };
 		382E796126B7F48200A0D1C1 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
@@ -509,6 +506,8 @@
 		3896D1432760E5FA00DC7381 /* nl */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = nl; path = nl.lproj/Localizable.strings; sourceTree = "<group>"; };
 		3896D14A2760F6D400DC7381 /* en */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; name = en; path = "en.lproj/Available Currencies.plist"; sourceTree = "<group>"; };
 		3896D14C2760F6D900DC7381 /* nl */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; name = nl; path = "nl.lproj/Available Currencies.plist"; sourceTree = "<group>"; };
+		3896D1502760F9E700DC7381 /* en */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; name = en; path = en.lproj/categoryPictures.plist; sourceTree = "<group>"; };
+		3896D1522760F9ED00DC7381 /* nl */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; name = nl; path = nl.lproj/categoryPictures.plist; sourceTree = "<group>"; };
 		3897157917901D0F005BE03E /* MCTwoLabelsTitleView.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; name = MCTwoLabelsTitleView.xib; path = Views/MCTwoLabelsTitleView.xib; sourceTree = "<group>"; };
 		3897159017902E35005BE03E /* MCPaymentsTableViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = MCPaymentsTableViewController.h; path = ViewControllers/MCPaymentsTableViewController.h; sourceTree = "<group>"; };
 		3897159117902E35005BE03E /* MCPaymentsTableViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = MCPaymentsTableViewController.m; path = ViewControllers/MCPaymentsTableViewController.m; sourceTree = "<group>"; };
@@ -1088,7 +1087,7 @@
 			children = (
 				385295CE1C10583E0081894D /* CategoryPictureObject.swift */,
 				385295D01C105C580081894D /* CategoryPictureStoreController.swift */,
-				382B79CC1A419D9D00538E96 /* categoryPictures.plist */,
+				3896D1512760F9E700DC7381 /* categoryPictures.plist */,
 				3860574F19EE963600BD5B78 /* categoryPictures.xcassets */,
 			);
 			name = CategoryPicturesStore;
@@ -1890,6 +1889,7 @@
 			buildActionMask = 2147483647;
 			files = (
 				3896D1492760F6D400DC7381 /* Available Currencies.plist in Resources */,
+				3896D14F2760F9E700DC7381 /* categoryPictures.plist in Resources */,
 				38EACFF31C6894950091A9AF /* InfoPlist.strings in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
@@ -1915,7 +1915,6 @@
 			files = (
 				38641486269B5E9F00590ABA /* Notifications.xcassets in Resources */,
 				38E88B40226B19EE008EB4BE /* GoogleService-Info.plist in Resources */,
-				382B79CA1A419D9D00538E96 /* categoryPictures.plist in Resources */,
 				38001C9B194EE284008ACD94 /* Assets.xcassets in Resources */,
 				3867253B23DB248E009607E8 /* fastlane in Resources */,
 				3835EBF92115C40900E2BC3F /* Settings.bundle in Resources */,
@@ -2427,17 +2426,6 @@
 			name = InfoPlist.strings;
 			sourceTree = "<group>";
 		};
-		382B79CC1A419D9D00538E96 /* categoryPictures.plist */ = {
-			isa = PBXVariantGroup;
-			children = (
-				382B79CB1A419D9D00538E96 /* Base */,
-				382B79CE1A419DA000538E96 /* nl */,
-				382B79CF1A41BB6A00538E96 /* en */,
-			);
-			name = categoryPictures.plist;
-			path = CategoryPicturesStore;
-			sourceTree = "<group>";
-		};
 		38370CF71A40DBC300B56460 /* MainInterface.storyboard */ = {
 			isa = PBXVariantGroup;
 			children = (
@@ -2479,6 +2467,16 @@
 				3896D14C2760F6D900DC7381 /* nl */,
 			);
 			name = "Available Currencies.plist";
+			sourceTree = "<group>";
+		};
+		3896D1512760F9E700DC7381 /* categoryPictures.plist */ = {
+			isa = PBXVariantGroup;
+			children = (
+				3896D1502760F9E700DC7381 /* en */,
+				3896D1522760F9ED00DC7381 /* nl */,
+			);
+			name = categoryPictures.plist;
+			path = CategoryPicturesStore;
 			sourceTree = "<group>";
 		};
 		38BEA798275F765800D05D8B /* Localizable.strings */ = {
