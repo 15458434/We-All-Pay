@@ -139,6 +139,16 @@
 
 #pragma mark - UIViewController
 
+- (void)loadView {
+    [super loadView];
+    
+    _firstNameField.placeholder = NSLocalizedStringWithDefaultValue(@"person_view_placeholder_first_name", nil, NSBundle.mainBundle, @"first name", @"Placeholder of the First Name field in the edit person view");
+    _lastNameField.placeholder = NSLocalizedStringWithDefaultValue(@"person_view_placeholder_last_name", nil, NSBundle.mainBundle, @"last name", @"Placeholder of the Last name field in the edit person view");
+    _emailField.placeholder = NSLocalizedStringWithDefaultValue(@"person_view_placeholder_email_address", nil, NSBundle.mainBundle, @"e-mail address", @"Placeholder of the e-mail address field in the edit person view");
+    NSString *selectEmailAddressButtonTitle = NSLocalizedStringWithDefaultValue(@"person_view_button_select_email", nil, NSBundle.mainBundle, @"Select email address", @"Button in the person view to select an email address of the user in case the user has multiple email addresses from an import of the addressbook");
+    [_selectEmailAddressButton setTitle:selectEmailAddressButtonTitle forState:UIControlStateNormal];
+}
+
 - (void)viewDidLoad {
     [super viewDidLoad];
     
@@ -176,11 +186,11 @@
     
     if (!_twoLabelTitleView) {
         _twoLabelTitleView = [[NSBundle mainBundle] loadNibNamed:@"MCTwoLabelsTitleView" owner:self options:nil][0];
-        _twoLabelTitleView.mainLabel.text = NSLocalizedString(@"Person", @"Header in the personView which state new person.");
+        _twoLabelTitleView.mainLabel.text = NSLocalizedStringWithDefaultValue(@"person_view_mainLabel_title", nil, NSBundle.mainBundle, @"Person", @"Header in the personView which state new person.");
         if (_isNew) {
-            _twoLabelTitleView.subLabel.text = NSLocalizedString(@"Add", @"Sub header in the personView which states add new data");
+            _twoLabelTitleView.subLabel.text = NSLocalizedStringWithDefaultValue(@"person_view_subLabel_new_person", nil, NSBundle.mainBundle, @"Add", @"Sub header in the personView which states add new data");
         } else {
-            _twoLabelTitleView.subLabel.text = NSLocalizedString(@"Edit", @"Sub header in the personView which state edit data");
+            _twoLabelTitleView.subLabel.text = NSLocalizedStringWithDefaultValue(@"person_view_button_subLabel_edit_person", nil, NSBundle.mainBundle, @"Edit", @"Sub header in the personView which state edit data");
         }
 
         self.navigationItem.titleView = _twoLabelTitleView;

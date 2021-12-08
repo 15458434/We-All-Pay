@@ -38,6 +38,7 @@ static void * notificationCountContext = &notificationCountContext;
 @property (nonatomic, strong) IBOutlet MCEventsModel *model;
 
 @property (nonatomic, weak) IBOutlet MCBadgeButton *infoButton;
+@property (weak, nonatomic) IBOutlet MCRoundedButton *createEventButton;
 @property (nonatomic, strong) MCTableEmptyMessage *emptyMessage;
 @property (weak, nonatomic) IBOutlet UITableViewHeaderFooterView *headerView;
 
@@ -59,7 +60,7 @@ static void * notificationCountContext = &notificationCountContext;
 
 #pragma mark - Actions
 
-- (IBAction)newEventPressed:(id)sender {
+- (IBAction)createEventPressed:(id)sender {
     [self performSegueWithIdentifier:@"newTonightsBill" sender:self];
 }
 
@@ -93,7 +94,7 @@ static void * notificationCountContext = &notificationCountContext;
 - (void)prepareUserActivity {
     if (@available(iOS 9.0, *)) {
         NSUserActivity *activity = [[NSUserActivity alloc] initWithActivityType:@"com.GreenHair.We-all-pay.SharingExpenses"];
-        activity.title = NSLocalizedString(@"We all pay - Sharing Expenses and bill splitting made easy", @"The title of the app");
+        activity.title = NSLocalizedStringWithDefaultValue(@"app_name", nil, NSBundle.mainBundle, @"We all pay", @"The name of We all pay");
         NSString *keywordsFilePath = [[NSBundle mainBundle] pathForResource:@"We all pay keywords" ofType:@"plist"];
         activity.keywords = [NSSet setWithArray:[NSArray arrayWithContentsOfFile:keywordsFilePath]];
         activity.eligibleForHandoff = NO;
@@ -165,7 +166,7 @@ static void * notificationCountContext = &notificationCountContext;
 }
 
 - (UITableViewCell *)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath {
-    MCAllTripsTableViewCell *allTripsTableViewCell = [tableView dequeueReusableCellWithIdentifier:@"MCAllTripsTableViewCell"];
+    MCEventTableViewCell *allTripsTableViewCell = [tableView dequeueReusableCellWithIdentifier:@"MCAllTripsTableViewCell"];
     return allTripsTableViewCell;
 }
 
@@ -179,37 +180,9 @@ static void * notificationCountContext = &notificationCountContext;
 
 - (void)tableView:(UITableView *)tableView willDisplayCell:(UITableViewCell *)cell forRowAtIndexPath:(NSIndexPath *)indexPath {
     MCSharedBill *event = [_model.fetchEventsController objectAtIndexPath:indexPath];
-    MCAllTripsTableViewCell *eventCell = (MCAllTripsTableViewCell *)cell;
+    MCEventTableViewCell *eventCell = (MCEventTableViewCell *)cell;
     
-    if (!event.tripName) {
-        eventCell.tripLabel.text = NSLocalizedString(@"...", @"String that shows empty string");
-    } else {
-        eventCell.tripLabel.text = event.tripName;
-    }
-    eventCell.peoplePresentLabel.text = [event stringOfApproxPeoplePresent];
-
-    if ([event areAllExchangeRatesValid]) {
-        CurrencyFormatter *cf = [[CurrencyFormatter alloc] initWithCurrencyCode:event.mainCurrency.code];
-        NSString *moneyString = [cf stringForObjectValue:[event totalSumOfMoneyOfThisSharedBill]];
-        eventCell.totalCostLabel.hidden = NO;
-        [eventCell.waitingForXRatesIndicator stopAnimating];
-        eventCell.totalCostLabel.text = moneyString;
-    } else {
-        CurrencyFormatter *cf = [[CurrencyFormatter alloc] initWithCurrencyCode:event.mainCurrency.code];
-        NSString *moneyString = [cf stringForObjectValue:[event totalSumOfMoneyOfThisSharedBill]];
-        [[eventCell totalCostLabel] setText:moneyString];
-        eventCell.totalCostLabel.text = moneyString;
-        eventCell.totalCostLabel.hidden = YES;
-        [eventCell.waitingForXRatesIndicator startAnimating];
-    }
-
-    // fill extraLabel with dateModified.
-    if (!_df) {
-        _df = [[NSDateFormatter alloc] init];
-        _df.dateStyle = NSDateFormatterMediumStyle;
-        _df.timeStyle = NSDateFormatterShortStyle;
-    }
-    eventCell.extraLabel.text = [_df stringFromDate:event.dateModified];
+    [eventCell prepareForUseWith:event];
     
     return;
 }
@@ -228,7 +201,7 @@ static void * notificationCountContext = &notificationCountContext;
 
 - (NSArray<UITableViewRowAction *> *)tableView:(UITableView *)tableView editActionsForRowAtIndexPath:(NSIndexPath *)indexPath {
     // Delete action
-    NSString *deleteTitle = NSLocalizedString(@"Delete", @"Text on a delete button");
+    NSString *deleteTitle = NSLocalizedStringWithDefaultValue(@"events_view_button_delete_event", nil, NSBundle.mainBundle, @"Delete", @"Text on a delete button");
     UITableViewRowAction *deleteAction = [UITableViewRowAction rowActionWithStyle:UITableViewRowActionStyleDestructive title:deleteTitle handler:^(UITableViewRowAction * _Nonnull action, NSIndexPath * _Nonnull indexPath) {
 #ifdef DEBUG
         NSLog(@"Delete action pressed");
@@ -236,7 +209,7 @@ static void * notificationCountContext = &notificationCountContext;
         [self deleteBillAtIndexpath:indexPath];
     }];
     // Change MainCurrency action
-    NSString *selectMainCurrencyTitle = NSLocalizedString(@"€$£¥", @"Text on a button to select a different currency");
+    NSString *selectMainCurrencyTitle = NSLocalizedStringWithDefaultValue(@"events_view_button_change_main_currency", nil, NSBundle.mainBundle, @"€$£¥", @"Text on a button to select a different main currency for an event");
     UITableViewRowAction *selectCurrencyAction = [UITableViewRowAction rowActionWithStyle:UITableViewRowActionStyleNormal title:selectMainCurrencyTitle handler:^(UITableViewRowAction * _Nonnull action, NSIndexPath * _Nonnull indexPath) {
 #ifdef DEBUG
         NSLog(@"Change currency pressed");
@@ -253,7 +226,12 @@ static void * notificationCountContext = &notificationCountContext;
 - (void)loadView {
     [super loadView];
     
-    _emptyMessage = [[NSBundle mainBundle] loadNibNamed:@"MCTableEmptyMessage" owner:self options:nil][0];
+    self.navigationItem.title = NSLocalizedStringWithDefaultValue(@"events_view_title", nil, NSBundle.mainBundle , @"Events", @"A list of all the events on which payments have been shared on the people present");
+    NSString *createEventButtonTitle = NSLocalizedStringWithDefaultValue(@"events_view_button_create_event", nil, NSBundle.mainBundle, @"New Event", @"Button in the events view that creates a new event");
+    [self.createEventButton setTitle:createEventButtonTitle forState:UIControlStateNormal];
+    
+    _emptyMessage = [NSBundle.mainBundle loadNibNamed:@"MCTableEmptyMessage" owner:self options:nil][0];
+    _emptyMessage.bigMessage.text = NSLocalizedStringWithDefaultValue(@"events_view_empty_message", nil, NSBundle.mainBundle, @"Press \"New event\" to add the event on which you'd like to share the expenses with your friends.", @"A message shown to the user when the list of events is empty.");
     _emptyMessage.borderlineView.dyInset = 1;
     self.tableView.backgroundView = _emptyMessage;
 }

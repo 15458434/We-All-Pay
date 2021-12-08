@@ -29,12 +29,14 @@ enum CancelButtonPressed {
 final class PaymentViewController: MCGenericAdBannerTableViewController, AdBannerEngineDelegate, MCDismissKeyboardProtocol, MCPathComponentsToOpenProtocol, UITextFieldDelegate, NSFetchedResultsControllerDelegate, PaymentStateModelProtocol {
 
     // MARK: IB Outlet
-    @IBOutlet var itemField: UITextField!
-    @IBOutlet var paidField: UITextField!
-    @IBOutlet var categoryImage: UIImageView!
-    @IBOutlet var categoryButton: UIButton!
-    @IBOutlet var payerView: UIImageView!
-    @IBOutlet var selectButton: UIButton!
+    @IBOutlet weak var itemField: UITextField!
+    @IBOutlet weak var paidField: UITextField!
+    @IBOutlet weak var categoryImage: UIImageView!
+    @IBOutlet weak var categoryButton: UIButton!
+    @IBOutlet weak var payerView: UIImageView!
+    @IBOutlet weak var selectPayerButton: UIButton!
+    @IBOutlet weak var selectCurrencyButton: RoundedButton!
+    @IBOutlet weak var presenceListLabel: UILabel!
     
     @IBOutlet var model: PaymentModel!
     
@@ -91,13 +93,14 @@ final class PaymentViewController: MCGenericAdBannerTableViewController, AdBanne
     @objc(prepareForUseWithEvent:) func prepareForUse(with event: MCSharedBill) {
         MCWeAllPayStoreController.defaultStore().beginUndoGroup()
         let newPayment = event.addPayment()!
-        title = NSLocalizedString("New Payment", comment: "Screen name saying this is a new payment.")
+        title = NSLocalizedString("payment_view_mainLabel_new_payment", value: "New payment", comment: "Header in the paymentView which state new Payment")
         isNew = .isNew
         model.prepareForUse(with: newPayment)
     }
     
     @objc(prepareForUseWithPayment:) func prepareForUse(with payment: MCPayment) {
         MCWeAllPayStoreController.defaultStore().beginUndoGroup()
+        title = NSLocalizedString("payment_view_mainLabel_edit_payment", value: "Payment", comment: "Header in the paymentView which states payment")
         isNew = .isNotNew
         model.prepareForUse(with: payment)
     }
@@ -251,7 +254,7 @@ final class PaymentViewController: MCGenericAdBannerTableViewController, AdBanne
         cell.thisCellsPaymentPresence = paymentPresenceForThisCell
         cell.keyboardDismissDelegate = self
         
-        let constraintBetweenNameLabelAndPayerLabel = NSLayoutConstraint(item: selectButton!, attribute: .leading, relatedBy: .equal, toItem: cell.nameLabel, attribute: .leading, multiplier: 1.0, constant: 0.0)
+        let constraintBetweenNameLabelAndPayerLabel = NSLayoutConstraint(item: selectPayerButton!, attribute: .leading, relatedBy: .equal, toItem: cell.nameLabel, attribute: .leading, multiplier: 1.0, constant: 0.0)
         let constraintBetweenPictureInCellAndPictureOfPayer = NSLayoutConstraint(item: cell.personView!, attribute: .trailing, relatedBy: .equal, toItem: categoryImage, attribute: .trailing, multiplier: 1.0, constant: 0.0)
         self.tableView.addConstraints([constraintBetweenNameLabelAndPayerLabel, constraintBetweenPictureInCellAndPictureOfPayer])
         
@@ -265,6 +268,14 @@ final class PaymentViewController: MCGenericAdBannerTableViewController, AdBanne
     override func loadView() {
         super.loadView()
         
+        let selectPayerButtonTitle = NSLocalizedString("payment_view_button_select_payer", value: "Select payer", comment: "Button in the edit payment view that allows the user to select a new payer")
+        selectPayerButton.setTitle(selectPayerButtonTitle, for: .normal)
+        itemField.placeholder = NSLocalizedString("payment_view_item_description_placeholder", value: "What got paid?", comment: "A placeholder of the item description field in the edit payment view.")
+        let selectCurrencyTitle = NSLocalizedString("payment_view_button_select_currency", value: "€$£¥", comment: "Text on the button that changes the currency in which the currently entered payment was made.")
+        selectCurrencyButton.setTitle(selectCurrencyTitle, for: .normal)
+        paidField.placeholder = NSLocalizedString("payment_view_price_placeholder", value: "How much is spent?", comment: "A placeholder of the price fireld in the edit payment view.")
+        presenceListLabel.text = NSLocalizedString("payment_view_presence_list_title", value: "Presence on payment", comment: "Title of the list of people who are present on the current payment in the edit payment view.")
+        
         startResigningFirstResponderOnBackgroundTap()
     }
     
@@ -272,12 +283,14 @@ final class PaymentViewController: MCGenericAdBannerTableViewController, AdBanne
         func createKVO() {
             self.payingPersonObservation = self.observe(\.model!.payment!.payingPerson, options: [.initial, .new], changeHandler: { mySelf, change in
                 guard let newValue = change.newValue as? MCPerson else {
-                    mySelf.selectButton.invalidateIntrinsicContentSize()
+                    let selectPayerButtonTitle = NSLocalizedString("payment_view_button_select_payer", value: "Select payer", comment: "Button in the edit payment view that allows the user to select a new payer")
+                    mySelf.selectPayerButton.setTitle(selectPayerButtonTitle, for: .normal)
+                    mySelf.selectPayerButton.invalidateIntrinsicContentSize()
                     return
                 }
                 
-                mySelf.selectButton.setTitle(newValue.getFullName(), for: .normal)
-                mySelf.selectButton.invalidateIntrinsicContentSize()
+                mySelf.selectPayerButton.setTitle(newValue.getFullName(), for: .normal)
+                mySelf.selectPayerButton.invalidateIntrinsicContentSize()
                 
                 mySelf.payerView.image = newValue.picture
             })
@@ -308,7 +321,7 @@ final class PaymentViewController: MCGenericAdBannerTableViewController, AdBanne
                     mySelf.categoryButton.setTitle(categoryObject.categoryDescription, for: .normal)
                 } else {
                     mySelf.categoryImage.image = nil
-                    let title = NSLocalizedString("Select Category", comment: "Text of the payment category selection button")
+                    let title = NSLocalizedString("payment_view_button_select_category", value: "Select Category", comment: "Text of the payment category selection button")
                     mySelf.categoryButton.setTitle(title, for: .normal)
                 }
                 

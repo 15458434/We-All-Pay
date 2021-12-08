@@ -94,6 +94,10 @@ import UIKit
     }
     
     func endUpdates() {
+        person.sharedBill?.forEach({ event in
+            let mutableSet = event.mutableSetValue(forKey: "peoplePresent")
+            mutableSet.add(person!)
+        })
         person.managedObjectContext!.undoManager!.endUndoGrouping()
         self.changeHandler(self.person)
     }

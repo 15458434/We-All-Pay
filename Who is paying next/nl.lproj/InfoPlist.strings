@@ -1,1 +1,6 @@
-/* No Localized Strings */
+/* Bundle display name */
+"CFBundleDisplayName" = "Who is paying next";
+
+/* Bundle name */
+"CFBundleName" = "Who is paying next";
+

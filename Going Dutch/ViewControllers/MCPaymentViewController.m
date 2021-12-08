@@ -38,9 +38,12 @@ static void * CurrencyContext = &CurrencyContext;
 @property (weak, nonatomic) IBOutlet UITextField *payerNameField;
 @property (strong, nonatomic) MCPayerTextInputPicker *payerTextInputPicker;
 @property (weak, nonatomic) IBOutlet UITextField *itemView;
+@property (weak, nonatomic) IBOutlet MCRoundedButton *selectCurrencyButton;
 @property (strong, nonatomic) MCDescriptionOfPaymentTextInputValidator *itemViewDelegate;
 @property (weak, nonatomic) IBOutlet UITextField *paidView;
 @property (strong, nonatomic) IBOutlet MCMoneyTextInputValidator *paidViewDelegate;
+
+@property (weak, nonatomic) IBOutlet UILabel *presenceListLabel;
 
 @property (weak, nonatomic) IBOutlet UIButton *categoryButton;
 @property (weak, nonatomic) IBOutlet UIImageView *payerPicture;
@@ -270,14 +273,21 @@ static void * CurrencyContext = &CurrencyContext;
     if (!_twoLabelTitleView) {
         _twoLabelTitleView = [NSBundle.mainBundle loadNibNamed:@"MCTwoLabelsTitleView" owner:self options:nil][0];
         if (_isNew) {
-            _twoLabelTitleView.mainLabel.text = NSLocalizedString(@"New payment", @"Header in the paymentView which state new Payment");
-            _twoLabelTitleView.subLabel.text = NSLocalizedString(@"Add payment data", @"Sub header in the paymentView which states Add payment data");
+            _twoLabelTitleView.mainLabel.text = NSLocalizedStringWithDefaultValue(@"payment_view_mainLabel_new_payment", nil, NSBundle.mainBundle, @"New payment", @"Header in the paymentView which state new Payment");
+            _twoLabelTitleView.subLabel.text = NSLocalizedStringWithDefaultValue(@"payment_view_subLabel_add_payment", nil, NSBundle.mainBundle, @"Add payment data", @"Sub header in the paymentView which states Add payment data");
         } else {
-            _twoLabelTitleView.mainLabel.text = NSLocalizedString(@"Payment", @"Header in the paymentView which states payment");
-            _twoLabelTitleView.subLabel.text = NSLocalizedString(@"Edit payment data", @"Sub header in the paymentView which states edit payment data");
+            _twoLabelTitleView.mainLabel.text = NSLocalizedStringWithDefaultValue(@"payment_view_mainLabel_edit_payment", nil, NSBundle.mainBundle, @"Payment", @"Header in the paymentView which states payment");
+            _twoLabelTitleView.subLabel.text = NSLocalizedStringWithDefaultValue(@"payment_view_subLabel_edit_payment", nil, NSBundle.mainBundle, @"Edit payment data", @"Sub header in the paymentView which states edit payment data");
         }
         self.navigationItem.titleView = _twoLabelTitleView;
     }
+    
+    _payerNameField.placeholder = NSLocalizedStringWithDefaultValue(@"payment_view_payerNameField_placeholder", nil, NSBundle.mainBundle, @"Who paid?", @"A placeholder of who paid text field in the edit payment view");
+    _itemView.placeholder = NSLocalizedStringWithDefaultValue(@"payment_view_item_description_placeholder", nil, NSBundle.mainBundle, @"What got paid?", @"A placeholder of the item description field in the edit payment view.");
+    NSString *currencyButtonTitle = NSLocalizedStringWithDefaultValue(@"payment_view_button_select_currency", nil, NSBundle.mainBundle, @"€$£¥", @"Text on the button that changes the currency in which the currently entered payment was made.");
+    [_selectCurrencyButton setTitle:currencyButtonTitle forState:UIControlStateNormal];
+    _paidView.placeholder = NSLocalizedStringWithDefaultValue(@"payment_view_price_placeholder", nil, NSBundle.mainBundle, @"How much is spent?", @"A placeholder of the price fireld in the edit payment view.");
+    _presenceListLabel.text = NSLocalizedStringWithDefaultValue(@"payment_view_presence_list_title", nil, NSBundle.mainBundle, @"Presence of payment", @"Title of the list of people who are present on the current payment in the edit payment view.");
     
     // Make sure a tap in the background dismisses the keyboard as well.
     UITapGestureRecognizer *thatTickles = [[UITapGestureRecognizer alloc] initWithTarget:self action:@selector(tappedInTheBackground:)];
@@ -446,14 +456,14 @@ static void * CurrencyContext = &CurrencyContext;
                         _categoryView.image = categoryObject.largePicture;
                         [_categoryButton setTitle:categoryObject.categoryDescription forState:UIControlStateNormal];
                     } else {
-                        NSString *buttonText = NSLocalizedString(@"Select Category", @"Select Category");
+                        NSString *buttonText = NSLocalizedStringWithDefaultValue(@"payment_view_button_select_category", nil, NSBundle.mainBundle, @"Select Category", @"Text of the payment category selection button");
                         _categoryView.image = categoryObject.largePicture;
                         [_categoryButton setTitle:buttonText forState:UIControlStateNormal];
                     }
                 } else {
                     NSArray *pictureObjects = CategoryPictureStoreController.shared.pictureObjects;
                     CategoryPictureObject *categoryObject = pictureObjects[0];
-                    NSString *buttonText = NSLocalizedString(@"Select Category", @"Select Category");
+                    NSString *buttonText = NSLocalizedStringWithDefaultValue(@"payment_view_button_select_category", nil, NSBundle.mainBundle, @"Select Category", @"Text of the payment category selection button");
                     _categoryView.image = categoryObject.largePicture;
                     [_categoryButton setTitle:buttonText forState:UIControlStateNormal];
                 }

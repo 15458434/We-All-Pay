@@ -26,9 +26,9 @@
 @property (strong, nonatomic) MCTableEmptyMessage *emptyMessage;
 
 @property (weak, nonatomic) IBOutlet UITableViewHeaderFooterView *headerView;
-@property (weak, nonatomic) IBOutlet UITextField *tripNameField;
+@property (weak, nonatomic) IBOutlet UITextField *eventNameTextField;
 @property (weak, nonatomic) IBOutlet UIButton *addPersonButton;
-@property (weak, nonatomic) IBOutlet UIButton *contactsButton;
+@property (weak, nonatomic) IBOutlet UIButton *addPersonFromContactsButton;
 
 @property (nonatomic, strong) NSFetchedResultsController *dataController;
 @property (nonatomic, strong) ContactsDataReceiver *contactsInserter;
@@ -37,7 +37,7 @@
 
 @implementation MCEditTripViewController
 
-- (IBAction)addressBookButton:(id)sender {
+- (IBAction)addPersonFromContactsTouchUpInside:(UIButton *)sender {
     if (!_contactsInserter) {
         _contactsInserter = [[ContactsDataReceiver alloc] initWith:_tonightsBill];
     }
@@ -45,14 +45,14 @@
 }
 
 
-- (IBAction)addPersonButton:(id)sender {
-    if (_tripNameField.isEditing) {
-        [_tripNameField resignFirstResponder];
+- (IBAction)addPersonButtonTouchUpInside:(UIButton *)sender {
+    if (_eventNameTextField.isEditing) {
+        [_eventNameTextField resignFirstResponder];
     }
 }
 
 - (void)tappedInTheBackground:(id)sender {
-    [_tripNameField resignFirstResponder];
+    [_eventNameTextField resignFirstResponder];
 }
 
 - (void)performFetch {
@@ -98,7 +98,7 @@
     NSString *paremeterContentType = @"shared_event";
     [FIRAnalytics logEventWithName:@"save_item" parameters:@{kFIRParameterItemID: parameterItemID, kFIRParameterItemName: parameterName, kFIRParameterContentType: paremeterContentType}];
     
-    _tonightsBill.tripName = _tripNameField.text;
+    _tonightsBill.tripName = _eventNameTextField.text;
     NSDate *now = [NSDate date];
     _tonightsBill.dateModified = now;
     [MCWeAllPayStoreController.defaultStore saveMainThreadContext];
@@ -218,9 +218,18 @@
 - (void)loadView {
     [super loadView];
     
+    _eventNameTextField.placeholder = NSLocalizedStringWithDefaultValue(@"people_view_placeholder_event_name", nil, NSBundle.mainBundle, @"Event name", @"Placeholder for the field where you end the name of the event.");
+    
+    NSString *addPersonButtonTitle = NSLocalizedStringWithDefaultValue(@"people_view_button_add_person", nil, NSBundle.mainBundle, @"Add person", @"Add person button in the people view that adds a person to the event.");
+    [_addPersonButton setTitle:addPersonButtonTitle forState:UIControlStateNormal];
+    
+    NSString *addPersonFromContactsButton = NSLocalizedStringWithDefaultValue(@"people_view_button_contacts", nil, NSBundle.mainBundle, @"Contacts", @"Add person from contacts button inthe people view that imports a person from the addressbook to the event");
+    [_addPersonFromContactsButton setTitle:addPersonFromContactsButton forState:UIControlStateNormal];
+    
     _emptyMessage = [NSBundle.mainBundle loadNibNamed:@"MCTableEmptyMessage" owner:self options:nil][0];
-    _emptyMessage.borderlineView.dyInset = 1;
-    _emptyMessage.bigMessage.text = NSLocalizedString(@"Press \"Add person\" to add a person who you'd like to share this bill with.", @"Press \"add Person\" to add a person who you'd like to share this bill with.");
+    _emptyMessage.borderlineView.dxInset = 20;
+    _emptyMessage.borderlineView.dyInset = 9;
+    _emptyMessage.bigMessage.text = NSLocalizedStringWithDefaultValue(@"people_view_label_empty_message", nil, NSBundle.mainBundle, @"Press \"Add person\" to add a person who you'd like to share this bill with.", @"Empty message for the people list view.");
     self.tableView.backgroundView = _emptyMessage;
 }
 
@@ -247,8 +256,8 @@
 - (void)viewWillAppear:(BOOL)animated {
     [super viewWillAppear:animated];
     
-    _tripNameField.text = _tonightsBill.tripName;
-    _tripNameField.delegate = self;
+    _eventNameTextField.text = _tonightsBill.tripName;
+    _eventNameTextField.delegate = self;
     
     if (!_dataController) {
         _dataController = [MCWeAllPayStoreController.defaultStore sharedBillPeoplePresentDataControllerForDelegate:self];
@@ -298,6 +307,22 @@
         NSString *reason = [NSString stringWithFormat:@"Invalid segue.identifier: %@", segue.identifier];
         NSDictionary *userInfo = [segue dictionaryWithValuesForKeys:@[@"source", @"destimation", @"identifier"]];
         @throw [NSException exceptionWithName:@"segue identifiter" reason:reason userInfo:userInfo];
+    }
+}
+
+- (void)viewDidLayoutSubviews {
+    [super viewDidLayoutSubviews];
+    
+    NSParameterAssert(_headerView);
+    CGSize size = [_headerView systemLayoutSizeFittingSize:UILayoutFittingCompressedSize];
+    if (_headerView.frame.size.height != size.height) {
+        CGFloat x = _headerView.frame.origin.x;
+        CGFloat y = _headerView.frame.origin.y;
+        CGFloat width = _headerView.frame.size.width;
+        CGFloat height = size.height;
+        CGRect newFrame = CGRectMake(x, y, width, height);
+        _headerView.frame = newFrame;
+        self.tableView.tableHeaderView = _headerView;
     }
 }
 

@@ -28,6 +28,9 @@
 
 @interface MCPaymentsTableViewController () <ShowPayment>
 
+@property (weak, nonatomic) IBOutlet MCRoundedButton *addPaymentButton;
+@property (weak, nonatomic) IBOutlet MCRoundedButton *solveEventButton;
+
 @property (weak, nonatomic) IBOutlet MCTableEmptyMessage *headerView;
 
 @property (nonatomic, strong) NSFetchedResultsController *dataController;
@@ -39,16 +42,9 @@
 
 #pragma mark - Actions
 
-- (IBAction)addPaymentPressed:(id)sender {
+- (IBAction)addPaymentTouchUpInside:(MCRoundedButton *)sender {
     if (_tonightsBill.peoplePresent.count == 0) {
-        NSString *title = NSLocalizedString(@"Add some people first", @"Title for an alert message, because there are no people added to this event.");
-        NSString *message = NSLocalizedString(@"You can't add a payment when no people are present. There is no one to split the expenses of this event with.", @"A message to the user thay can't add a payment when they didn't add people to the even.");
-        UIAlertController *alertController = [UIAlertController alertControllerWithTitle:title message:message preferredStyle:UIAlertControllerStyleAlert];
-        NSString *cancelActionTitle = NSLocalizedString(@"Cancel", @"Text on button to cancel something");
-        [alertController addAction:[UIAlertAction actionWithTitle:cancelActionTitle style:UIAlertActionStyleCancel handler:^(UIAlertAction * _Nonnull action) {
-            
-        }]];
-        [self presentViewController:alertController animated:YES completion:nil];
+        [self showNoPeoplePresentAlert];
         return;
     }
     
@@ -61,16 +57,9 @@
     }
 }
 
-- (IBAction)solveButtonPressed:(id)sender {
+- (IBAction)solveEventButtonTouchUpInside:(UIButton *)sender {
     if (_tonightsBill.peoplePresent.count == 0) {
-        NSString *title = NSLocalizedString(@"Add some people first", @"Title for an alert message, because there are no people added to this event.");
-        NSString *message = NSLocalizedString(@"You can't add a payment when no people are present. There is no one to split the expenses of this event with.", @"A message to the user thay can't add a payment when they didn't add people to the even.");
-        UIAlertController *alertController = [UIAlertController alertControllerWithTitle:title message:message preferredStyle:UIAlertControllerStyleAlert];
-        NSString *cancelActionTitle = NSLocalizedString(@"Cancel", @"Text on button to cancel something");
-        [alertController addAction:[UIAlertAction actionWithTitle:cancelActionTitle style:UIAlertActionStyleCancel handler:^(UIAlertAction * _Nonnull action) {
-            
-        }]];
-        [self presentViewController:alertController animated:YES completion:nil];
+        [self showNoPeoplePresentAlert];
         return;
     }
     
@@ -80,14 +69,12 @@
         [self performSegueWithIdentifier:@"solveButton" sender:self];
     } else {
         // Give user alert.
-        NSString *title = NSLocalizedString(@"Unable to solve", @"Unable to solve");
-        NSString *message = NSLocalizedString(@"At least one of the payments is missing a payer.", @"One of the payments is missing a payer.");
-        NSString *cancelButtonTitle = NSLocalizedString(@"Cancel", @"Text on button to cancel something");
-        NSString *fixItButtonTitle = NSLocalizedString(@"Go to", @"Go to");
+        NSString *title = NSLocalizedStringWithDefaultValue(@"payments_view_alert_title_cannot_solve", nil, NSBundle.mainBundle, @"Unable to solve", @"Title of an alert shown to the user when solve has been pressed the We All Pay is unable to solve due to a missing payer on an payment.");
+        NSString *message = NSLocalizedStringWithDefaultValue(@"payments_view_alert_message_cannot_solve", nil, NSBundle.mainBundle, @"One of the payments is missing information on who paid it", @"Message of an alert shown to the user when solve has been pressed and We All Pay is unable to solve due to a missing payer on a payment.");
+        NSString *cancelButtonTitle = NSLocalizedStringWithDefaultValue(@"payments_view_alert_cancel", nil, NSBundle.mainBundle, @"Cancel", @"Text on a button to press the cancel action on an alert that tells the user the current event can't be solved due to missing information on who paid something.");
+        NSString *fixItButtonTitle = NSLocalizedStringWithDefaultValue(@"payments_view_alert_go_to", nil, NSBundle.mainBundle, @"Open Payment", @"Button on an alert that navigates the payment that's missing the information who paid that particular payment");
         UIAlertController *alertController = [UIAlertController alertControllerWithTitle:title message:message preferredStyle:UIAlertControllerStyleAlert];
-        [alertController addAction:[UIAlertAction actionWithTitle:cancelButtonTitle style:UIAlertActionStyleCancel handler:^(UIAlertAction * _Nonnull action) {
-            
-        }]];
+        [alertController addAction:[UIAlertAction actionWithTitle:cancelButtonTitle style:UIAlertActionStyleCancel handler:nil]];
         [alertController addAction:[UIAlertAction actionWithTitle:fixItButtonTitle style:UIAlertActionStyleDefault handler:^(UIAlertAction * _Nonnull action) {
             
             [self openFirstPaymentWithoutAPayer];
@@ -101,6 +88,15 @@
 }
 
 #pragma mark - New in this class.
+
+- (void)showNoPeoplePresentAlert {
+    NSString *title = NSLocalizedStringWithDefaultValue(@"payments_view_alert_title_add_people_first", nil, NSBundle.mainBundle, @"Add some people first", @"Title for an alert message, because there are no people added to this event.");
+    NSString *message = NSLocalizedStringWithDefaultValue(@"payments_view_message_add_people_first", nil, NSBundle.mainBundle, @"You can't add a payment when no people are present. There is no one to split the expenses of this event with.", @"A message to the user they can't add a payment when they didn't add people to the event.");
+    UIAlertController *alertController = [UIAlertController alertControllerWithTitle:title message:message preferredStyle:UIAlertControllerStyleAlert];
+    NSString *cancelActionTitle = NSLocalizedStringWithDefaultValue(@"payments_view_alert_button_dismiss", nil, NSBundle.mainBundle, @"Dismiss", @"Text for button on an alert that dismisses the alert");
+    [alertController addAction:[UIAlertAction actionWithTitle:cancelActionTitle style:UIAlertActionStyleCancel handler:nil]];
+    [self presentViewController:alertController animated:YES completion:nil];
+}
 
 - (void)prepareDataControllerAndFetch
 {
@@ -274,18 +270,23 @@
 - (void)loadView {
     [super loadView];
     
+    NSString *addPaymentButtonTitle = NSLocalizedStringWithDefaultValue(@"payments_view_button_add_payment", nil, NSBundle.mainBundle, @"Add payment", @"Title of a button that adds a payment and opens the new payment view to enter the information on a new payment");
+    [_addPaymentButton setTitle:addPaymentButtonTitle forState:UIControlStateNormal];
+    
+    NSString *solveEventButtonTitle = NSLocalizedStringWithDefaultValue(@"payments_view_button_solve_event", nil, NSBundle.mainBundle, @"Solve", @"Title of a button that solves who needs to pay whom on the current event.");
+    [_solveEventButton setTitle:solveEventButtonTitle forState:UIControlStateNormal];
+    
     self.tableView.accessibilityIdentifier = @"PaymentsTableViewController";
     
     _emptyMessage = [[NSBundle mainBundle] loadNibNamed:@"MCTableEmptyMessage" owner:self options:nil][0];
+    _emptyMessage.borderlineView.dxInset = 20;
     _emptyMessage.borderlineView.dyInset = 1;
     self.tableView.backgroundView = _emptyMessage;
-    _emptyMessage.bigMessage.text = NSLocalizedString(@"Press \"Add payment\" to add a payment to this event.", @"Press \"add payment\" to add a payment to this event.");
+    _emptyMessage.bigMessage.text = NSLocalizedStringWithDefaultValue(@"payments_view_label_empty_list", nil, NSBundle.mainBundle, @"Press \"Add payment\" to add a payment to this event.", @"Empty message list for when the list of payments is empty and there are no payments on the current event");
 }
 
 - (void)viewDidLoad {
     [super viewDidLoad];
-    
-    [self setEdgesForExtendedLayout:UIRectEdgeNone];
     
     [self startRespondingToStoreChangeNotifications];
 }
@@ -403,6 +404,22 @@
     } else {
         NSLog(@"Unknown segue with identifier: %@", segue.identifier);
         NSParameterAssert(NO);
+    }
+}
+
+- (void)viewDidLayoutSubviews {
+    [super viewDidLayoutSubviews];
+    
+    NSParameterAssert(_headerView);
+    CGSize size = [_headerView systemLayoutSizeFittingSize:UILayoutFittingCompressedSize];
+    if (_headerView.frame.size.height != size.height) {
+        CGFloat x = _headerView.frame.origin.x;
+        CGFloat y = _headerView.frame.origin.y;
+        CGFloat width = _headerView.frame.size.width;
+        CGFloat height = size.height;
+        CGRect newFrame = CGRectMake(x, y, width, height);
+        _headerView.frame = newFrame;
+        self.tableView.tableHeaderView = _headerView;
     }
 }
 

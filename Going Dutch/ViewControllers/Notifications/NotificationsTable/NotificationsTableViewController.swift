@@ -68,9 +68,9 @@ final class NotificationsTableViewController: UITableViewController {
     
     override func viewDidLoad() {
         super.viewDidLoad()
-        self.title = NSLocalizedString("Notifications", comment: "")
+        self.title = NSLocalizedString("notifications_view_title", value: "Notifications", comment: "Title of the screen that contains a list of notifications to the user.")
         
-        emptyMessage.bigMessage.text = NSLocalizedString("Nothing new right now.", comment: "A message for no notifications in the notifications screen.")
+        emptyMessage.bigMessage.text = NSLocalizedString("notifications_view_empty_message", value: "Nothing new right now.", comment: "A message for no notifications in the notifications screen.")
     }
     
     override func viewWillAppear(_ animated: Bool) {
