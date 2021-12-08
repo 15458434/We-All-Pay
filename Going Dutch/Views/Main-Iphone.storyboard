@@ -1720,7 +1720,7 @@
                         </connections>
                     </tableView>
                     <navigationItem key="navigationItem" title="Select category" id="D32-AO-Av1">
-                        <barButtonItem key="rightBarButtonItem" systemItem="cancel" id="VOj-mp-9lT">
+                        <barButtonItem key="rightBarButtonItem" image="barbutton - cancel" id="VOj-mp-9lT">
                             <connections>
                                 <action selector="mainCancelPressed:" destination="f20-bj-0qT" id="XML-nZ-X4P"/>
                             </connections>
