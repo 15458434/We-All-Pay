@@ -130,7 +130,7 @@
 		38955048178B4FCA0077A95A /* MCWeAllPayStoreController.m in Sources */ = {isa = PBXBuildFile; fileRef = 38955047178B4FCA0077A95A /* MCWeAllPayStoreController.m */; };
 		3896D1402760E5F600DC7381 /* Localizable.strings in Resources */ = {isa = PBXBuildFile; fileRef = 3896D1422760E5F600DC7381 /* Localizable.strings */; };
 		3896D1492760F6D400DC7381 /* Available Currencies.plist in Resources */ = {isa = PBXBuildFile; fileRef = 3896D14B2760F6D400DC7381 /* Available Currencies.plist */; };
-		3896D14F2760F9E700DC7381 /* categoryPictures.plist in Resources */ = {isa = PBXBuildFile; fileRef = 3896D1512760F9E700DC7381 /* categoryPictures.plist */; };
+		3896D156276103E100DC7381 /* categoryPictures.plist in Resources */ = {isa = PBXBuildFile; fileRef = 3896D1512760F9E700DC7381 /* categoryPictures.plist */; };
 		3897157D17901D0F005BE03E /* MCTwoLabelsTitleView.xib in Resources */ = {isa = PBXBuildFile; fileRef = 3897157917901D0F005BE03E /* MCTwoLabelsTitleView.xib */; };
 		3897159217902E35005BE03E /* MCPaymentsTableViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 3897159117902E35005BE03E /* MCPaymentsTableViewController.m */; };
 		38977E4D1B2A2591008484A4 /* MCSelectCategoryTableViewCell_iPhone.swift in Sources */ = {isa = PBXBuildFile; fileRef = 38977E4C1B2A2591008484A4 /* MCSelectCategoryTableViewCell_iPhone.swift */; };
@@ -505,9 +505,9 @@
 		3896D1432760E5FA00DC7381 /* nl */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = nl; path = nl.lproj/Localizable.strings; sourceTree = "<group>"; };
 		3896D14A2760F6D400DC7381 /* en */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; name = en; path = "en.lproj/Available Currencies.plist"; sourceTree = "<group>"; };
 		3896D14C2760F6D900DC7381 /* nl */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; name = nl; path = "nl.lproj/Available Currencies.plist"; sourceTree = "<group>"; };
-		3896D1502760F9E700DC7381 /* en */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; name = en; path = en.lproj/categoryPictures.plist; sourceTree = "<group>"; };
 		3896D1522760F9ED00DC7381 /* nl */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; name = nl; path = nl.lproj/categoryPictures.plist; sourceTree = "<group>"; };
 		3896D1532760FA8E00DC7381 /* en */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; name = en; path = "en.lproj/We all pay app keywords.plist"; sourceTree = "<group>"; };
+		3896D155276103B500DC7381 /* en */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; name = en; path = en.lproj/categoryPictures.plist; sourceTree = "<group>"; };
 		3897157917901D0F005BE03E /* MCTwoLabelsTitleView.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; name = MCTwoLabelsTitleView.xib; path = Views/MCTwoLabelsTitleView.xib; sourceTree = "<group>"; };
 		3897159017902E35005BE03E /* MCPaymentsTableViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = MCPaymentsTableViewController.h; path = ViewControllers/MCPaymentsTableViewController.h; sourceTree = "<group>"; };
 		3897159117902E35005BE03E /* MCPaymentsTableViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = MCPaymentsTableViewController.m; path = ViewControllers/MCPaymentsTableViewController.m; sourceTree = "<group>"; };
@@ -1889,7 +1889,6 @@
 			buildActionMask = 2147483647;
 			files = (
 				3896D1492760F6D400DC7381 /* Available Currencies.plist in Resources */,
-				3896D14F2760F9E700DC7381 /* categoryPictures.plist in Resources */,
 				38EACFF31C6894950091A9AF /* InfoPlist.strings in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
@@ -1914,6 +1913,7 @@
 			buildActionMask = 2147483647;
 			files = (
 				38641486269B5E9F00590ABA /* Notifications.xcassets in Resources */,
+				3896D156276103E100DC7381 /* categoryPictures.plist in Resources */,
 				38E88B40226B19EE008EB4BE /* GoogleService-Info.plist in Resources */,
 				38001C9B194EE284008ACD94 /* Assets.xcassets in Resources */,
 				3867253B23DB248E009607E8 /* fastlane in Resources */,
@@ -2472,8 +2472,8 @@
 		3896D1512760F9E700DC7381 /* categoryPictures.plist */ = {
 			isa = PBXVariantGroup;
 			children = (
-				3896D1502760F9E700DC7381 /* en */,
 				3896D1522760F9ED00DC7381 /* nl */,
+				3896D155276103B500DC7381 /* en */,
 			);
 			name = categoryPictures.plist;
 			path = CategoryPicturesStore;
