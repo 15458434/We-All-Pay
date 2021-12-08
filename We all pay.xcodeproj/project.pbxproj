@@ -472,7 +472,6 @@
 		386EB43223C723BE00FB20B9 /* AdEngine.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AdEngine.swift; sourceTree = "<group>"; };
 		386FC32318E5855400428294 /* MCSharedBillMainViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = MCSharedBillMainViewController.h; path = ViewControllers/MCSharedBillMainViewController.h; sourceTree = "<group>"; };
 		386FC32418E5855400428294 /* MCSharedBillMainViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = MCSharedBillMainViewController.m; path = ViewControllers/MCSharedBillMainViewController.m; sourceTree = "<group>"; };
-		3870C22B1D34FDF80030035A /* Base */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; name = Base; path = "Base.lproj/We all pay app keywords.plist"; sourceTree = "<group>"; };
 		3870C22D1D34FDFA0030035A /* nl */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; name = nl; path = "nl.lproj/We all pay app keywords.plist"; sourceTree = "<group>"; };
 		38727E5326F306ED00847DEA /* MCEditorType.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = MCEditorType.h; sourceTree = "<group>"; };
 		387494D319F053C2001614CA /* WeAllPayStore3to4.xcmappingmodel */ = {isa = PBXFileReference; lastKnownFileType = wrapper.xcmappingmodel; path = WeAllPayStore3to4.xcmappingmodel; sourceTree = "<group>"; };
@@ -508,6 +507,7 @@
 		3896D14C2760F6D900DC7381 /* nl */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; name = nl; path = "nl.lproj/Available Currencies.plist"; sourceTree = "<group>"; };
 		3896D1502760F9E700DC7381 /* en */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; name = en; path = en.lproj/categoryPictures.plist; sourceTree = "<group>"; };
 		3896D1522760F9ED00DC7381 /* nl */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; name = nl; path = nl.lproj/categoryPictures.plist; sourceTree = "<group>"; };
+		3896D1532760FA8E00DC7381 /* en */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; name = en; path = "en.lproj/We all pay app keywords.plist"; sourceTree = "<group>"; };
 		3897157917901D0F005BE03E /* MCTwoLabelsTitleView.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; name = MCTwoLabelsTitleView.xib; path = Views/MCTwoLabelsTitleView.xib; sourceTree = "<group>"; };
 		3897159017902E35005BE03E /* MCPaymentsTableViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = MCPaymentsTableViewController.h; path = ViewControllers/MCPaymentsTableViewController.h; sourceTree = "<group>"; };
 		3897159117902E35005BE03E /* MCPaymentsTableViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = MCPaymentsTableViewController.m; path = ViewControllers/MCPaymentsTableViewController.m; sourceTree = "<group>"; };
@@ -2446,8 +2446,8 @@
 		3870C22C1D34FDF80030035A /* We all pay app keywords.plist */ = {
 			isa = PBXVariantGroup;
 			children = (
-				3870C22B1D34FDF80030035A /* Base */,
 				3870C22D1D34FDFA0030035A /* nl */,
+				3896D1532760FA8E00DC7381 /* en */,
 			);
 			name = "We all pay app keywords.plist";
 			sourceTree = "<group>";
