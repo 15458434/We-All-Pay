@@ -186,7 +186,7 @@ class SelectCurrencyTableViewController: UITableViewController, UISearchResultsU
 
     func sectionIndexTitlesForTableView(tableView: UITableView) -> [String]? {
         var result = collation.sectionIndexTitles
-        result.insert(NSLocalizedString("!", comment: "Symbol for recent used currencies"), at: 0)
+        result.insert(NSLocalizedString("select_currency_view_section_index_recent_currencies", value: "!", comment: "Section Index Symbol for recent used currencies in the select currencies view."), at: 0)
         return result
     }
     
