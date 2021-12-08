@@ -27,6 +27,9 @@ typedef NS_OPTIONS(NSUInteger, MCReturnPaymentViewControllerState) {
     MCReturnPaymentViewControllerStateShowAdBanner = 1 << 1
 };
 
+static void * peoplePresentContext = &peoplePresentContext;
+static void * paymentsContext = &paymentsContext;
+
 @interface MCReturnPaymentViewController () <MCAdBannerEngineDelegate>
 
 @property (strong, nonatomic) IBOutlet MCSolutionModel *model;
@@ -75,6 +78,7 @@ typedef NS_OPTIONS(NSUInteger, MCReturnPaymentViewControllerState) {
 
 - (void)updateEvent:(MCSharedBill *)event andSendMailDelegate:(MCSharedBillPageViewController *)sendMailDelegate {
     _tonightsBill = event;
+    [_model prepareForUseWith:event];
     self.sendMailObject = sendMailDelegate;
 }
 
@@ -183,22 +187,6 @@ typedef NS_OPTIONS(NSUInteger, MCReturnPaymentViewControllerState) {
     }];
 }
 
-- (void)setEmptyMessage {
-    if (!(_solution.count == 0 || _emptyMessage.activityIndicator.isAnimating)) {
-        [UIView animateWithDuration:1.0 animations:^{
-            self.emptyMessage.bigMessage.alpha = 0.0;
-            self.emptyMessage.borderlineView.alpha = 0.0;
-            [[self tableView] setSeparatorStyle:UITableViewCellSeparatorStyleSingleLine];
-        } completion:nil];
-    } else {
-        [UIView animateWithDuration:1.0 animations:^{
-            self.emptyMessage.bigMessage.alpha = 1.0;
-            self.emptyMessage.borderlineView.alpha = 1.0;
-            [[self tableView] setSeparatorStyle:UITableViewCellSeparatorStyleNone];
-        } completion:nil];
-    }
-}
-
 - (NSString *)adBannerUnitId {
     return @"ca-app-pub-5354415674074435/5892377702";
 }
@@ -251,6 +239,11 @@ typedef NS_OPTIONS(NSUInteger, MCReturnPaymentViewControllerState) {
         cell.moneyLabel.text = [cf stringForObjectValue:_tonightsBill.totalSumOfMoneyOfThisSharedBill];
         return cell;
     }
+}
+
+- (void)startAdBanner {
+    self.worstSalesPitchEverView = [[GADBannerView alloc] initWithAdSize:kGADAdSizeBanner];
+    [self.adBannerEngine prepareAdBanner:self.worstSalesPitchEverView withAdUnitId:self.adBannerUnitId andViewController:self];
 }
 
 #pragma mark - MCAdBannerEngineDelegate
@@ -475,6 +468,7 @@ typedef NS_OPTIONS(NSUInteger, MCReturnPaymentViewControllerState) {
     [super loadView];
     
     _emptyMessage = [[NSBundle mainBundle] loadNibNamed:@"MCTableEmptyMessage" owner:self options:nil][0];
+    _emptyMessage.bigMessage.text = NSLocalizedStringWithDefaultValue(@"solution_view_list_empty_message", nil, NSBundle.mainBundle, @"Please add people and payments if you want a solution on who owes who.", @"Please add payments and/or people if you want a solution on who owes who.");
     _emptyMessage.borderlineView.dyInset = 20;
     self.tableView.backgroundView = _emptyMessage;
     
@@ -496,12 +490,12 @@ typedef NS_OPTIONS(NSUInteger, MCReturnPaymentViewControllerState) {
     self.tableView.estimatedRowHeight = 44.0;
     self.tableView.rowHeight = UITableViewAutomaticDimension;
     
-    [self setEdgesForExtendedLayout:UIRectEdgeNone];
+    self.edgesForExtendedLayout = UIRectEdgeNone;
     
+    __weak typeof(self) weakSelf = self;
     [self giveSolutionWithCompletion:^(BOOL success) {
         if (success && (self.solution.count > 0)) {
-            self.worstSalesPitchEverView = [[GADBannerView alloc] initWithAdSize:kGADAdSizeBanner];
-            [self.adBannerEngine prepareAdBanner:self.worstSalesPitchEverView withAdUnitId:self.adBannerUnitId andViewController:self];
+            [weakSelf startAdBanner];
         }
     }];
 }
@@ -510,18 +504,59 @@ typedef NS_OPTIONS(NSUInteger, MCReturnPaymentViewControllerState) {
     [super viewWillAppear:animated];
     
     _emptyMessage.topConstraint.constant = self.headerView.frame.size.height;
-    _emptyMessage.bigMessage.text = NSLocalizedStringWithDefaultValue(@"solution_view_list_empty_message", nil, NSBundle.mainBundle, @"Please add people and payments if you want a solution on who owes who.", @"Please add payments and/or people if you want a solution on who owes who.");
-    [self setEmptyMessageWithDuration:0.0];
     
-    if (_tonightsBill.peoplePresent.count == 0 || _tonightsBill.payments.count == 0) {
-        _emptyMessage.bigMessage.text = NSLocalizedStringWithDefaultValue(@"solution_view_list_empty_message", nil, NSBundle.mainBundle, @"Please add people and payments if you want a solution on who owes who.", @"Please add payments and/or people if you want a solution on who owes who.");
-    } else {
-        _emptyMessage.bigMessage.text = @"";
-    }
+    // Create KVO
+    NSKeyValueObservingOptions options = NSKeyValueObservingOptionInitial | NSKeyValueObservingOptionNew;
+    [self.model addObserver:self forKeyPath:@"peoplePresentLocalizedSorted" options:options context:peoplePresentContext];
+    [self.model.event addObserver:self forKeyPath:@"payments" options:options context:paymentsContext];
+}
+
+- (void)viewWillDisappear:(BOOL)animated {
+    [super viewWillDisappear:animated];
+    
+    // Destroy KVO
+    [self.model removeObserver:self forKeyPath:@"peoplePresentLocalizedSorted" context:peoplePresentContext];
+    [self.model.event removeObserver:self forKeyPath:@"payments" context:paymentsContext];
 }
 
 #pragma mark - UIResponder
 
 #pragma mark - NSObject
+
+- (void)observeValueForKeyPath:(NSString *)keyPath ofObject:(id)object change:(NSDictionary<NSKeyValueChangeKey,id> *)change context:(void *)context {
+    if (context == peoplePresentContext) {
+        NSNumber *changeKeyNumber = (NSNumber *)change[NSKeyValueChangeKindKey];
+        NSKeyValueChange keyValueChange = changeKeyNumber.unsignedIntegerValue;
+        switch (keyValueChange) {
+            case NSKeyValueChangeSetting: {
+                id new = change[NSKeyValueChangeNewKey];
+                if ([new isKindOfClass:[NSSet class]]) {
+                    [self setEmptyMessageWithDuration:0.0];
+                } else {
+                    [self setEmptyMessageWithDuration:0.0];
+                }
+            }
+                break;
+            default:
+                break;
+        }
+    } else if (context == paymentsContext) {
+        NSNumber *changeKeyNumber = (NSNumber *)change[NSKeyValueChangeKindKey];
+        NSKeyValueChange keyValueChange = changeKeyNumber.unsignedIntegerValue;
+        switch (keyValueChange) {
+            case NSKeyValueChangeSetting: {
+                id new = change[NSKeyValueChangeNewKey];
+                if ([new isKindOfClass:[NSSet class]]) {
+                    [self setEmptyMessageWithDuration:0.0];
+                } else {
+                    [self setEmptyMessageWithDuration:0.0];
+                }
+            }
+                break;
+            default:
+                break;
+        }
+    }
+}
 
 @end
