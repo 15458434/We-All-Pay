@@ -9,7 +9,7 @@
 import UIKit
 
 @objc(MCSolutionModel) final class SolutionModel: NSObject {
-    @objc(MCSolutionViewSectionTitle) enum SectionTitle: UInt {
+    @objc(MCSolutionModelSectionTitle) enum SectionTitle: UInt {
         case whoOwesWho = 0
         case totalOwes = 1
         case totalPaid = 2
