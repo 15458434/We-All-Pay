@@ -34,7 +34,6 @@ static void * paymentsContext = &paymentsContext;
 
 @property (strong, nonatomic) IBOutlet MCSolutionModel *model;
 
-@property (nonatomic, strong) NSArray<MCPerson *> *peoplePresent;
 @property (nonatomic, strong) NSArray<ReturnPayment *> *solution;
 
 @property (nonatomic) MCReturnPaymentViewControllerState uiState;
@@ -173,8 +172,6 @@ static void * paymentsContext = &paymentsContext;
         // Update tableView.
         weakSelf.uiState = enableBits(weakSelf.uiState, MCReturnPaymentViewControllerStateXRatesPresent);
         self.solution = results;
-        NSSortDescriptor *sortDescriptor = [NSSortDescriptor sortDescriptorWithKey:@"firstName" ascending:YES];
-        self.peoplePresent = [[self.tonightsBill peoplePresent] sortedArrayUsingDescriptors:@[sortDescriptor]];
         [[[self emptyMessage] activityIndicator] stopAnimating];
         
         [self setEmptyMessageWithDuration:0.0];
@@ -212,7 +209,7 @@ static void * paymentsContext = &paymentsContext;
 - (MCWhoPaidHowMuchTableViewCell_iPhone *)whoPaidHowMuchCellForIndexPath:(NSIndexPath *)indexPath inTableView:(UITableView *)tableView {
     MCWhoPaidHowMuchTableViewCell_iPhone *cell = [tableView dequeueReusableCellWithIdentifier:@"MCWhoPaidHowMuchTableViewCell_iPhone"];
     
-    MCPerson *person = [_peoplePresent objectAtIndex:[indexPath row]];
+    MCPerson *person = [_model.peoplePresentLocalizedSorted objectAtIndex:[indexPath row]];
     [[cell whoPaidHowMuchLabel] setText:[person getFullName]];
     NSNumber *sumSpentByPerson = @(-[[_tonightsBill amountShouldHavePaidBy:person] doubleValue]);
     CurrencyFormatter *cf = [[CurrencyFormatter alloc] initWithCurrencyCode:_tonightsBill.mainCurrency.code];
@@ -221,10 +218,10 @@ static void * paymentsContext = &paymentsContext;
 }
 
 - (UITableViewCell *)totalsCellForIndexPath:(NSIndexPath *)indexPath inTableView:(UITableView *)tableView {
-    if (indexPath.row < _peoplePresent.count) {
+    if (indexPath.row < _model.peoplePresentLocalizedSorted.count) {
         MCWhoPaidHowMuchTableViewCell_iPhone *cell = [tableView dequeueReusableCellWithIdentifier:@"MCWhoPaidHowMuchTableViewCell_iPhone"];
         
-        MCPerson *person = [_peoplePresent objectAtIndex:[indexPath row]];
+        MCPerson *person = [_model.peoplePresentLocalizedSorted objectAtIndex:[indexPath row]];
         [[cell whoPaidHowMuchLabel] setText:[person getFullName]];
         
         CurrencyFormatter *cf = [[CurrencyFormatter alloc] initWithCurrencyCode:_tonightsBill.mainCurrency.code];
@@ -376,13 +373,13 @@ static void * paymentsContext = &paymentsContext;
                 if (_solution.count == 0) {
                     return 0;
                 } else {
-                    return _peoplePresent.count;
+                    return _model.peoplePresentLocalizedSorted.count;
                 }
             case 2:
                 if (_solution.count == 0) {
                     return 0;
                 } else {
-                    return _peoplePresent.count + 1;
+                    return _model.peoplePresentLocalizedSorted.count + 1;
                 }
             default:
                 return 0;
@@ -401,13 +398,13 @@ static void * paymentsContext = &paymentsContext;
                 if (_solution.count == 0) {
                     return 0;
                 } else {
-                    return _peoplePresent.count;
+                    return _model.peoplePresentLocalizedSorted.count;
                 }
             case 3:
                 if (_solution.count == 0) {
                     return 0;
                 } else {
-                    return _peoplePresent.count + 1;
+                    return _model.peoplePresentLocalizedSorted.count + 1;
                 }
             default:
                 return 0;
