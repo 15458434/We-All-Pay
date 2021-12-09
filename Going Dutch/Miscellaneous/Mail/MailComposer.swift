@@ -19,7 +19,7 @@ enum MailComposerError: Error {
     case missingInformationIn(payment: MCPayment)
 }
 
-extension MailComposer where Self: ThisEvent {
+extension MailComposer where Self: ThisEventReadOnly {
     func mailAdresses() throws -> [String] {
         let allPeople = Array(event.peoplePresent ?? Set<MCPerson>())
         var listOfMailAddresses = [String]()

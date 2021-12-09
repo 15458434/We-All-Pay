@@ -32,8 +32,6 @@ static void * paymentsContext = &paymentsContext;
 
 @interface MCReturnPaymentViewController () <MCAdBannerEngineDelegate>
 
-@property (strong, nonatomic) IBOutlet MCSolutionModel *model;
-
 @property (nonatomic) MCReturnPaymentViewControllerState uiState;
 
 @property (weak, nonatomic) IBOutlet UITableViewHeaderFooterView *headerView;
@@ -74,7 +72,6 @@ static void * paymentsContext = &paymentsContext;
 }
 
 - (void)updateEvent:(MCSharedBill *)event andSendMailDelegate:(MCSharedBillPageViewController *)sendMailDelegate {
-    _tonightsBill = event;
     [_model prepareForUseWith:event];
     self.sendMailObject = sendMailDelegate;
 }
@@ -82,7 +79,7 @@ static void * paymentsContext = &paymentsContext;
 #pragma mark - Private in this class
 
 - (void)shareBill:(id)sender {
-    if ([[self tonightsBill] doesEveryoneHaveAnEmailAddress]) {
+    if ([self.model.event doesEveryoneHaveAnEmailAddress]) {
         [self openMailView:sender];
     } else {
         NSString *title = NSLocalizedStringWithDefaultValue(@"solution_view_alert_title_missing_email_address", nil, NSBundle.mainBundle, @"Unable to send email to all people.", @"Title of an alert shown to the user in case not everyone on the event has an email address.");
@@ -130,7 +127,7 @@ static void * paymentsContext = &paymentsContext;
     _uiState = disableBits(_uiState, MCReturnPaymentViewControllerStateXRatesPresent);
     
     __weak typeof(self) weakSelf = self;
-    [_tonightsBill solveWithHandler:^(NSArray *results, NSError *error) {
+    [_model.event solveWithHandler:^(NSArray *results, NSError *error) {
         NSParameterAssert([NSThread isMainThread]);
         if (error) {
 #ifdef DEBUG
@@ -193,7 +190,7 @@ static void * paymentsContext = &paymentsContext;
 - (MCWhoOwesWhoTableViewCell_iPhone *)whoOwesWhoCellForIndexPath:(NSIndexPath *)indexPath inTableView:(UITableView *)tableView {
     MCReturnPayment *thisCellsReturnPayment = _model.solution[[indexPath row]];
     MCWhoOwesWhoTableViewCell_iPhone *returnPaymentCell = [tableView dequeueReusableCellWithIdentifier:@"MCWhoOwesWhoTableViewCell_iPhone"];
-    CurrencyFormatter *cf = [[CurrencyFormatter alloc] initWithCurrencyCode:_tonightsBill.mainCurrency.code];
+    CurrencyFormatter *cf = [[CurrencyFormatter alloc] initWithCurrencyCode:_model.event.mainCurrency.code];
     returnPaymentCell.moneyLabel.text = [cf stringForObjectValue:thisCellsReturnPayment.money];
     
     NSString *owesString = NSLocalizedStringWithDefaultValue(@"solution_view_cell_who_owes_who_label", nil, NSBundle.mainBundle, @"%1$@ owes %2$@", @"In the solution view: As in Mark owes Yvette x amount of money.");
@@ -209,8 +206,8 @@ static void * paymentsContext = &paymentsContext;
     
     MCPerson *person = [_model.peoplePresentLocalizedSorted objectAtIndex:[indexPath row]];
     [[cell whoPaidHowMuchLabel] setText:[person getFullName]];
-    NSNumber *sumSpentByPerson = @(-[[_tonightsBill amountShouldHavePaidBy:person] doubleValue]);
-    CurrencyFormatter *cf = [[CurrencyFormatter alloc] initWithCurrencyCode:_tonightsBill.mainCurrency.code];
+    NSNumber *sumSpentByPerson = @(-[[_model.event amountShouldHavePaidBy:person] doubleValue]);
+    CurrencyFormatter *cf = [[CurrencyFormatter alloc] initWithCurrencyCode:_model.event.mainCurrency.code];
     cell.moneyLabel.text = [cf stringForObjectValue:sumSpentByPerson];
     return cell;
 }
@@ -222,7 +219,7 @@ static void * paymentsContext = &paymentsContext;
         MCPerson *person = [_model.peoplePresentLocalizedSorted objectAtIndex:[indexPath row]];
         [[cell whoPaidHowMuchLabel] setText:[person getFullName]];
         
-        CurrencyFormatter *cf = [[CurrencyFormatter alloc] initWithCurrencyCode:_tonightsBill.mainCurrency.code];
+        CurrencyFormatter *cf = [[CurrencyFormatter alloc] initWithCurrencyCode:_model.event.mainCurrency.code];
         cell.moneyLabel.text = [cf stringForObjectValue:person.totalSumPaid];
         return cell;
     } else {
@@ -230,8 +227,8 @@ static void * paymentsContext = &paymentsContext;
         NSString *totalSpentString = NSLocalizedStringWithDefaultValue(@"solution_view_cell_label_total_spent", nil, NSBundle.mainBundle, @"Total spent:", @"In the solution view: a label before the total amount of money spent on the entire event.");
         [[cell totalLabel] setText:totalSpentString];
         
-        CurrencyFormatter *cf = [[CurrencyFormatter alloc] initWithCurrencyCode:_tonightsBill.mainCurrency.code];
-        cell.moneyLabel.text = [cf stringForObjectValue:_tonightsBill.totalSumOfMoneyOfThisSharedBill];
+        CurrencyFormatter *cf = [[CurrencyFormatter alloc] initWithCurrencyCode:_model.event.mainCurrency.code];
+        cell.moneyLabel.text = [cf stringForObjectValue:_model.event.totalSumOfMoneyOfThisSharedBill];
         return cell;
     }
 }

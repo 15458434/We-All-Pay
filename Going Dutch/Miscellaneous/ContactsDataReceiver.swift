@@ -35,7 +35,7 @@ final class ContactsDataReceiver: NSObject, ThisEventReadOnly, CNContactPickerDe
     
     // MARK: ThisEventReadOnly
     
-    let event: MCSharedBill
+    let event: MCSharedBill!
     
     // MARK: CNContactPickerDelegate
     
