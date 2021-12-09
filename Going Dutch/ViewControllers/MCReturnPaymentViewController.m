@@ -34,8 +34,6 @@ static void * paymentsContext = &paymentsContext;
 
 @property (strong, nonatomic) IBOutlet MCSolutionModel *model;
 
-@property (nonatomic, strong) NSArray<ReturnPayment *> *solution;
-
 @property (nonatomic) MCReturnPaymentViewControllerState uiState;
 
 @property (weak, nonatomic) IBOutlet UITableViewHeaderFooterView *headerView;
@@ -61,7 +59,7 @@ static void * paymentsContext = &paymentsContext;
 }
 
 - (IBAction)mainCancelButtonPressed:(id)sender {
-    if (_solution == nil || _solution.count == 0) {
+    if (_model.solution == nil || _model.solution.count == 0) {
         [self.navigationController.presentingViewController dismissViewControllerAnimated:YES completion:nil];
     } else {
         [self.navigationController.presentingViewController dismissViewControllerAnimated:YES completion:nil];
@@ -108,7 +106,7 @@ static void * paymentsContext = &paymentsContext;
 }
 
 - (void)setEmptyMessageWithDuration:(NSTimeInterval)duration {
-    if (_solution.count != 0) {
+    if (_model.solution.count != 0) {
         if (_emptyMessage.bigMessage.alpha > 0.0) {
             [UIView animateWithDuration:duration animations:^{
                 self.emptyMessage.bigMessage.alpha = 0.0;
@@ -171,7 +169,7 @@ static void * paymentsContext = &paymentsContext;
         
         // Update tableView.
         weakSelf.uiState = enableBits(weakSelf.uiState, MCReturnPaymentViewControllerStateXRatesPresent);
-        self.solution = results;
+        self.model.solution = results;
         [[[self emptyMessage] activityIndicator] stopAnimating];
         
         [self setEmptyMessageWithDuration:0.0];
@@ -193,7 +191,7 @@ static void * paymentsContext = &paymentsContext;
 }
 
 - (MCWhoOwesWhoTableViewCell_iPhone *)whoOwesWhoCellForIndexPath:(NSIndexPath *)indexPath inTableView:(UITableView *)tableView {
-    ReturnPayment *thisCellsReturnPayment = _solution[[indexPath row]];
+    MCReturnPayment *thisCellsReturnPayment = _model.solution[[indexPath row]];
     MCWhoOwesWhoTableViewCell_iPhone *returnPaymentCell = [tableView dequeueReusableCellWithIdentifier:@"MCWhoOwesWhoTableViewCell_iPhone"];
     CurrencyFormatter *cf = [[CurrencyFormatter alloc] initWithCurrencyCode:_tonightsBill.mainCurrency.code];
     returnPaymentCell.moneyLabel.text = [cf stringForObjectValue:thisCellsReturnPayment.money];
@@ -301,7 +299,7 @@ static void * paymentsContext = &paymentsContext;
         NSParameterAssert(NO);
         return nil;
     } else if (self.uiState == MCReturnPaymentViewControllerStateXRatesPresent) {
-        if ([_solution count] > 0) {
+        if (_model.solution.count > 0) {
             return [_model sectionTitleForSection:section];
         }
     } else if (self.uiState == MCReturnPaymentViewControllerStateShowAdBanner) {
@@ -309,7 +307,7 @@ static void * paymentsContext = &paymentsContext;
         NSParameterAssert(NO);
         return nil;
     } else if (self.uiState == (MCReturnPaymentViewControllerStateShowAdBanner | MCReturnPaymentViewControllerStateXRatesPresent)) {
-        if ([_solution count] > 0) {
+        if (_model.solution.count > 0) {
             switch (section) {
                 case 0:
                     return [_model sectionTitleForSection:section];
@@ -340,7 +338,7 @@ static void * paymentsContext = &paymentsContext;
     if (self.uiState == MCReturnPaymentViewControllerStateNone) {
         return 0;
     } else if (self.uiState == MCReturnPaymentViewControllerStateXRatesPresent) {
-        if (_solution == nil) {
+        if (_model.solution == nil) {
             return 0;
         } else {
             return 3;
@@ -348,7 +346,7 @@ static void * paymentsContext = &paymentsContext;
     } else if (self.uiState == MCReturnPaymentViewControllerStateShowAdBanner) {
         return 0;
     } else if (self.uiState == (MCReturnPaymentViewControllerStateShowAdBanner | MCReturnPaymentViewControllerStateXRatesPresent)) {
-        if (_solution == nil) {
+        if (_model.solution == nil) {
             return 0;
         } else {
             return 4;
@@ -368,15 +366,15 @@ static void * paymentsContext = &paymentsContext;
     } else if (self.uiState == MCReturnPaymentViewControllerStateXRatesPresent) {
         switch (section) {
             case 0:
-                return _solution.count;
+                return _model.solution.count;
             case 1:
-                if (_solution.count == 0) {
+                if (_model.solution.count == 0) {
                     return 0;
                 } else {
                     return _model.peoplePresentLocalizedSorted.count;
                 }
             case 2:
-                if (_solution.count == 0) {
+                if (_model.solution.count == 0) {
                     return 0;
                 } else {
                     return _model.peoplePresentLocalizedSorted.count + 1;
@@ -391,17 +389,17 @@ static void * paymentsContext = &paymentsContext;
     } else if (self.uiState == (MCReturnPaymentViewControllerStateShowAdBanner | MCReturnPaymentViewControllerStateXRatesPresent)) {
         switch (section) {
             case 0:
-                return _solution.count;
+                return _model.solution.count;
             case 1:
                 return 1;
             case 2:
-                if (_solution.count == 0) {
+                if (_model.solution.count == 0) {
                     return 0;
                 } else {
                     return _model.peoplePresentLocalizedSorted.count;
                 }
             case 3:
-                if (_solution.count == 0) {
+                if (_model.solution.count == 0) {
                     return 0;
                 } else {
                     return _model.peoplePresentLocalizedSorted.count + 1;
@@ -491,7 +489,7 @@ static void * paymentsContext = &paymentsContext;
     
     __weak typeof(self) weakSelf = self;
     [self giveSolutionWithCompletion:^(BOOL success) {
-        if (success && (self.solution.count > 0)) {
+        if (success && (self.model.solution.count > 0)) {
             [weakSelf startAdBanner];
         }
     }];

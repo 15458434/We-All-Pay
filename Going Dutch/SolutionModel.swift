@@ -16,7 +16,8 @@ import UIKit
     }
     
     @objc private(set) var event: MCSharedBill!
-    @objc dynamic private(set) var peoplePresentLocalizedSorted: [MCPerson]!
+    @objc dynamic private(set) var peoplePresentLocalizedSorted: [MCPerson]?
+    @objc dynamic var solution: [SolutionReturnPaymentItem]?
     
     @objc(sectionTitleForSection:) func sectionTitle(for section: SectionTitle) -> String {
         switch section {
