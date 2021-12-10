@@ -29,6 +29,7 @@ typedef NS_OPTIONS(NSUInteger, MCReturnPaymentViewControllerState) {
 
 static void * peoplePresentContext = &peoplePresentContext;
 static void * paymentsContext = &paymentsContext;
+static void * solutionsContext = &solutionsContext;
 
 @interface MCReturnPaymentViewController () <MCAdBannerEngineDelegate>
 
@@ -95,7 +96,7 @@ static void * paymentsContext = &paymentsContext;
         [alertController addAction:[UIAlertAction actionWithTitle:sendAnyway style:UIAlertActionStyleDefault handler:^(UIAlertAction * _Nonnull action) {
             typeof(self) strongSelf = weakSelf;
             if (strongSelf) {
-                [self openMailView:self];
+                [strongSelf openMailView:strongSelf];
             }
         }]];
         [self presentViewController:alertController animated:YES completion:nil];
@@ -171,10 +172,10 @@ static void * paymentsContext = &paymentsContext;
         
         [self setEmptyMessageWithDuration:0.0];
         
-        [[self tableView] beginUpdates];
-        NSIndexSet *indexes = [[NSIndexSet alloc] initWithIndexesInRange:NSMakeRange(0, 3)];
-        [[self tableView] insertSections:indexes withRowAnimation:UITableViewRowAnimationTop];
-        [[self tableView] endUpdates];
+//        [[self tableView] beginUpdates];
+//        NSIndexSet *indexes = [[NSIndexSet alloc] initWithIndexesInRange:NSMakeRange(0, 3)];
+//        [[self tableView] insertSections:indexes withRowAnimation:UITableViewRowAnimationTop];
+//        [[self tableView] endUpdates];
         completion(YES);
     }];
 }
@@ -244,12 +245,12 @@ static void * paymentsContext = &paymentsContext;
     UITableView *tableView = self.tableView;
     if (containsBits(self.uiState, MCReturnPaymentViewControllerStateShowAdBanner)) {
         [tableView beginUpdates];
-        [tableView reloadSections:self.adBannerSectionIndexSet withRowAnimation:UITableViewRowAnimationFade];
+        [tableView reloadSections:self.adBannerSectionIndexSet withRowAnimation:UITableViewRowAnimationAutomatic];
         [tableView endUpdates];
     } else {
         self.uiState = enableBits(self.uiState, MCReturnPaymentViewControllerStateShowAdBanner);
         [tableView beginUpdates];
-        [tableView insertSections:self.adBannerSectionIndexSet withRowAnimation:UITableViewRowAnimationFade];
+        [tableView insertSections:self.adBannerSectionIndexSet withRowAnimation:UITableViewRowAnimationAutomatic];
         [tableView endUpdates];
     }
 }
@@ -280,12 +281,10 @@ static void * paymentsContext = &paymentsContext;
     
 }
 
-- (void)tableView:(UITableView *)tableView didEndDisplayingHeaderView:(UIView *)view forSection:(NSInteger)section
-{
+- (void)tableView:(UITableView *)tableView didEndDisplayingHeaderView:(UIView *)view forSection:(NSInteger)section {
     UITableViewHeaderFooterView *sectionTitleHeader = (UITableViewHeaderFooterView *)view;
-    [view setTintColor:nil];
-    [[sectionTitleHeader textLabel] setTextColor:nil];
-
+    view.tintColor = nil;
+    sectionTitleHeader.textLabel.textColor = nil;
 }
 
 #pragma mark - UITableViewDataSource
@@ -472,12 +471,6 @@ static void * paymentsContext = &paymentsContext;
 
 - (void)viewDidLoad {
     [super viewDidLoad];
-
-    // Uncomment the following line to preserve selection between presentations.
-    // self.clearsSelectionOnViewWillAppear = NO;
- 
-    // Uncomment the following line to display an Edit button in the navigation bar for this view controller.
-    // self.navigationItem.rightBarButtonItem = self.editButtonItem;
     
     self.tableView.estimatedRowHeight = 44.0;
     self.tableView.rowHeight = UITableViewAutomaticDimension;
@@ -501,6 +494,7 @@ static void * paymentsContext = &paymentsContext;
     NSKeyValueObservingOptions options = NSKeyValueObservingOptionInitial | NSKeyValueObservingOptionNew;
     [self.model addObserver:self forKeyPath:@"peoplePresentLocalizedSorted" options:options context:peoplePresentContext];
     [self.model.event addObserver:self forKeyPath:@"payments" options:options context:paymentsContext];
+    [self.model addObserver:self forKeyPath:@"solution" options:options context:solutionsContext];
 }
 
 - (void)viewWillDisappear:(BOOL)animated {
@@ -509,6 +503,7 @@ static void * paymentsContext = &paymentsContext;
     // Destroy KVO
     [self.model removeObserver:self forKeyPath:@"peoplePresentLocalizedSorted" context:peoplePresentContext];
     [self.model.event removeObserver:self forKeyPath:@"payments" context:paymentsContext];
+    [self.model removeObserver:self forKeyPath:@"solution" context:solutionsContext];
 }
 
 #pragma mark - UIResponder
@@ -542,6 +537,26 @@ static void * paymentsContext = &paymentsContext;
                     [self setEmptyMessageWithDuration:0.0];
                 } else {
                     [self setEmptyMessageWithDuration:0.0];
+                }
+            }
+                break;
+            default:
+                break;
+        }
+    } else if (context == solutionsContext) {
+        NSNumber *changeKeyNumber = (NSNumber *)change[NSKeyValueChangeKindKey];
+        NSKeyValueChange keyValueChange = changeKeyNumber.unsignedIntegerValue;
+        switch (keyValueChange) {
+            case NSKeyValueChangeSetting: {
+                id new = change[NSKeyValueChangeNewKey];
+                if ([new isKindOfClass:[NSArray class]]) {
+                    // populate tableview
+                    [self.tableView beginUpdates];
+                    NSIndexSet *indexes = [[NSIndexSet alloc] initWithIndexesInRange:NSMakeRange(0, 3)];
+                    [self.tableView insertSections:indexes withRowAnimation:UITableViewRowAnimationAutomatic];
+                    [self.tableView endUpdates];
+                } else {
+                    // clear tableview
                 }
             }
                 break;
