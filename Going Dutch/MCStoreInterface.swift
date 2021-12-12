@@ -88,9 +88,9 @@ let kApplyProVersionNotification = "Apply pro version"
     
     func buyProProductSendFrom(_ viewController: UIViewController) {
         guard let proProduct = self.proProduct else {
-            let title = NSLocalizedString("App Store unavailable", comment: "Message that pops up when the App Store is not available.")
-            let message = NSLocalizedString("Unable to connect to the App Store. Please connect to the internet.", comment: "Message body explaining the App Store can't be reached.")
-            let dismissButtonTitle = NSLocalizedString("Dismiss", comment: "Button that says dismiss.")
+            let title = NSLocalizedString("info_view_alert_title_no_app_store", value: "App Store unavailable", comment: "Message that pops up when the App Store is not available.")
+            let message = NSLocalizedString("info_view_alert_message_no_app_store", value: "Unable to connect to the App Store. Please connect to the internet.", comment: "Message body explaining the App Store can't be reached.")
+            let dismissButtonTitle = NSLocalizedString("info_view_alert_dismiss_no_app_store", value: "Dismiss", comment: "Button that says dismiss.")
             let alertController = UIAlertController(title: title, message: message, preferredStyle: .alert)
             let dismissAction = UIAlertAction(title: dismissButtonTitle, style: .default, handler: { (action) -> Void in
                 print("App Store unavailable dismissed.")

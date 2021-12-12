@@ -1,5 +1,8 @@
-/* Localized versions of Info.plist keys */
-"NSContactsUsageDescription" = "Voeg direct vrienden toe aan een evenement vanuit Contacten om de rekening te delen.";
+/* Bundle display name */
+"CFBundleDisplayName" = "We all pay";
+
+/* Bundle name */
+"CFBundleName" = "We all pay";
 
 /* Privacy - Tracking Usage Description */
 "NSUserTrackingUsageDescription" = "Deze identifier wordt gebruikt om meer gepersonaliseerde advertenties aan je te laten zien.";

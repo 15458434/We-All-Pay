@@ -15,17 +15,17 @@ extension UIViewController {
         if rmc.shouldDisplayRateMeQuestion {
             print("Should show.")
             // show rate me alert
-            let title = NSLocalizedString("Do you like We all pay?", comment: "Question to the user whether or not they like this app.")
-            let message = NSLocalizedString("Please give We all pay a 5 star rating and help other people find the benefits We all pay.", comment: "Message to the user to give We all pay a five star rating.")
-            let alertController = UIAlertController(title: title, message: message, preferredStyle: UIAlertController.Style.alert)
-            let noTitle = NSLocalizedString("Hell no", comment: "Title of a No button.")
-            let noAction = UIAlertAction(title: noTitle, style: UIAlertAction.Style.cancel, handler: { (action) -> Void in
+            let title = NSLocalizedString("rate_me_alert_title", value: "Do you like We all pay?", comment: "Question to the user whether or not they like this app.")
+            let message = NSLocalizedString("rate_me_alert_message", value: "Please give We all pay a 5 star rating and help other people find the benefits We all pay.", comment: "Message to the user to give We all pay a five star rating.")
+            let alertController = UIAlertController(title: title, message: message, preferredStyle: .alert)
+            let noTitle = NSLocalizedString("rate_me_alert_no", value: "Hell no", comment: "Title of the No button on the rate me in the App Store button.")
+            let noAction = UIAlertAction(title: noTitle, style: .cancel, handler: { (action) -> Void in
                 rmc.rateMeDisplayed(RateMeControllerAskStatus.no)
                 _ = rmc.save()
             })
             alertController.addAction(noAction)
-            let yesTitle = NSLocalizedString("Sure", comment: "Title of a Yes button.")
-            let yesAction = UIAlertAction(title: yesTitle, style: UIAlertAction.Style.default, handler: { (action) -> Void in
+            let yesTitle = NSLocalizedString("rate_me_alert_yes", value: "Sure", comment: "Title of a Yes button on the rate me in the App Store button.")
+            let yesAction = UIAlertAction(title: yesTitle, style: .default, handler: { (action) -> Void in
                 RateMeController.openReviewLink()
                 rmc.rateMeDisplayed(RateMeControllerAskStatus.alreadyRated)
                 _ = rmc.save()

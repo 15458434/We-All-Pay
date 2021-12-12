@@ -34,7 +34,4 @@ __attribute__((objc_subclassing_restricted))
 
 @property (nonatomic) NSInteger index;
 
-- (IBAction)addressBookButton:(id)sender;
-- (IBAction)addPersonButton:(id)sender;
-
 @end

@@ -29,6 +29,8 @@ typedef NS_OPTIONS(NSUInteger, MCReturnPaymentViewControllerState) {
 
 @interface MCReturnPaymentViewController () <MCAdBannerEngineDelegate>
 
+@property (strong, nonatomic) IBOutlet MCSolutionModel *model;
+
 @property (nonatomic, strong) NSArray<MCPerson *> *peoplePresent;
 @property (nonatomic, strong) NSArray<ReturnPayment *> *solution;
 
@@ -36,6 +38,7 @@ typedef NS_OPTIONS(NSUInteger, MCReturnPaymentViewControllerState) {
 
 @property (weak, nonatomic) IBOutlet UITableViewHeaderFooterView *headerView;
 @property (nonatomic, strong) MCTableEmptyMessage *emptyMessage;
+@property (weak, nonatomic) IBOutlet MCRoundedButton *sendEmailButton;
 
 // Ad Banner
 @property (strong, nonatomic) GADBannerView *worstSalesPitchEverView;
@@ -51,7 +54,7 @@ typedef NS_OPTIONS(NSUInteger, MCReturnPaymentViewControllerState) {
 
 #pragma mark - Actions
 
-- (IBAction)sendAsEmailButtonPressed:(id)sender {
+- (IBAction)sendAsEmailButtonPressed:(MCRoundedButton *)sender {
     [self shareBill:self];
 }
 
@@ -81,11 +84,10 @@ typedef NS_OPTIONS(NSUInteger, MCReturnPaymentViewControllerState) {
     if ([[self tonightsBill] doesEveryoneHaveAnEmailAddress]) {
         [self openMailView:sender];
     } else {
-        NSLog(@"Not everyone has an email address");
-        NSString *title = NSLocalizedString(@"Unable to send email to all people.", @"Unable to send email to all people.");
-        NSString *message = NSLocalizedString(@"Reason: Not all people have a mail address.", @"Reason: Not all people have a mail address.");
-        NSString *cancel = NSLocalizedString(@"Cancel", @"Text on button to cancel something");
-        NSString *sendAnyway = NSLocalizedString(@"Send anyway", @"Send anyway");
+        NSString *title = NSLocalizedStringWithDefaultValue(@"solution_view_alert_title_missing_email_address", nil, NSBundle.mainBundle, @"Unable to send email to all people.", @"Title of an alert shown to the user in case not everyone on the event has an email address.");
+        NSString *message = NSLocalizedStringWithDefaultValue(@"solution_view_alert_message_missing_email_address", nil, NSBundle.mainBundle, @"Not all people have a mail address. Add the missing email addresses or send it anyway.", @"Message of an alert shown to the user in case not everyone on the event has an email address.");
+        NSString *cancel = NSLocalizedStringWithDefaultValue(@"solution_view_alert_action_dismiss", nil, NSBundle.mainBundle, @"Cancel", @"Text on button to cancel the alert that says there are people without email addresses.");
+        NSString *sendAnyway = NSLocalizedStringWithDefaultValue(@"solution_view_alert_action_send_anyway", nil, NSBundle.mainBundle, @"Send anyway", @"Action button on an alert to send email anyway in case not all email addresses have been entered.");
         
         UIAlertController *alertController = [UIAlertController alertControllerWithTitle:title message:message preferredStyle:UIAlertControllerStyleAlert];
         [alertController addAction:[UIAlertAction actionWithTitle:cancel style:UIAlertActionStyleCancel handler:^(UIAlertAction * _Nonnull action) {
@@ -133,9 +135,9 @@ typedef NS_OPTIONS(NSUInteger, MCReturnPaymentViewControllerState) {
 #ifdef DEBUG
             NSLog(@"Error solving: %@", error);
 #endif
-            NSString *title = NSLocalizedString(@"Unable to fetch exchange rates", @"Title message of an alert that pops up when fetching exchange rates is impossible");
-            NSString *message = NSLocalizedString(@"Fetching exchange rates is not possible at this moment. Check your internet connection and/or hit solve to fetch all missing exchange rates at a later time", @"Message explaining what the user can do to refetch exchange rates");
-            NSString *dismissTitle = NSLocalizedString(@"Dismiss", @"Title of a button that dismisses an alert.");
+            NSString *title = NSLocalizedStringWithDefaultValue(@"solution_view_alert_title_cannot_fetch_exchange_rates", nil, NSBundle.mainBundle, @"Unable to fetch exchange rates", @"Title message of an alert that pops up when fetching exchange rates is impossible");
+            NSString *message = NSLocalizedStringWithDefaultValue(@"solution_view_alert_message_cannot_fetch_exchange_rates", nil, NSBundle.mainBundle, @"Fetching exchange rates is not possible at this moment. Check your internet connection and/or hit solve to fetch all missing exchange rates at a later time", @"Message in an alert of the solution view that pops up when fetching exchange rates is impossible. It explains what the user can do to refetch exchange rates.");
+            NSString *dismissTitle = NSLocalizedStringWithDefaultValue(@"solution_view_alert_action_dismiss_cannot_fetch_exchange_rates", nil, NSBundle.mainBundle, @"Dismiss", @"Button title of an alert view to tell the user We All Pay is unable to fetch exchange rates to calculation a solution.");
             
             UIAlertController *alertController = [UIAlertController alertControllerWithTitle:title message:message preferredStyle:UIAlertControllerStyleAlert];
             UIAlertAction *dismissAction = [UIAlertAction actionWithTitle:dismissTitle style:UIAlertActionStyleCancel handler:^(UIAlertAction * _Nonnull action) {
@@ -211,7 +213,7 @@ typedef NS_OPTIONS(NSUInteger, MCReturnPaymentViewControllerState) {
     CurrencyFormatter *cf = [[CurrencyFormatter alloc] initWithCurrencyCode:_tonightsBill.mainCurrency.code];
     returnPaymentCell.moneyLabel.text = [cf stringForObjectValue:thisCellsReturnPayment.money];
     
-    NSString *owesString = NSLocalizedString(@"%1$@ owes %2$@", @"As in Mark owes Arjen, but then just the word owes.");
+    NSString *owesString = NSLocalizedStringWithDefaultValue(@"solution_view_cell_who_owes_who_label", nil, NSBundle.mainBundle, @"%1$@ owes %2$@", @"In the solution view: As in Mark owes Yvette x amount of money.");
     NSString *whoOwesWho = [NSString stringWithFormat:owesString, [thisCellsReturnPayment.payer getName], [thisCellsReturnPayment.receiver getName]];
     [[returnPaymentCell whoOwesWhoLabel] setText:whoOwesWho];
     [returnPaymentCell setSelectionStyle:UITableViewCellSelectionStyleNone];
@@ -242,7 +244,7 @@ typedef NS_OPTIONS(NSUInteger, MCReturnPaymentViewControllerState) {
         return cell;
     } else {
         MCSolutionOverViewTableViewCell_iPhone *cell = [tableView dequeueReusableCellWithIdentifier:@"MCSolutionOverViewTableViewCell_iPhone"];
-        NSString *totalSpentString = NSLocalizedString(@"Total spent:", @"Total spent:");
+        NSString *totalSpentString = NSLocalizedStringWithDefaultValue(@"solution_view_cell_label_total_spent", nil, NSBundle.mainBundle, @"Total spent:", @"In the solution view: a label before the total amount of money spent on the entire event.");
         [[cell totalLabel] setText:totalSpentString];
         
         CurrencyFormatter *cf = [[CurrencyFormatter alloc] initWithCurrencyCode:_tonightsBill.mainCurrency.code];
@@ -280,52 +282,6 @@ typedef NS_OPTIONS(NSUInteger, MCReturnPaymentViewControllerState) {
     [tableView endUpdates];
 }
 
-#pragma mark - UIViewController
-
-- (void)loadView {
-    [super loadView];
-    
-    _emptyMessage = [[NSBundle mainBundle] loadNibNamed:@"MCTableEmptyMessage" owner:self options:nil][0];
-    _emptyMessage.borderlineView.dyInset = 20;
-    self.tableView.backgroundView = _emptyMessage;
-}
-
-- (void)viewDidLoad {
-    [super viewDidLoad];
-
-    // Uncomment the following line to preserve selection between presentations.
-    // self.clearsSelectionOnViewWillAppear = NO;
- 
-    // Uncomment the following line to display an Edit button in the navigation bar for this view controller.
-    // self.navigationItem.rightBarButtonItem = self.editButtonItem;
-    
-    self.tableView.estimatedRowHeight = 44.0;
-    self.tableView.rowHeight = UITableViewAutomaticDimension;
-    
-    [self setEdgesForExtendedLayout:UIRectEdgeNone];
-    
-    [self giveSolutionWithCompletion:^(BOOL success) {
-        if (success && (self.solution.count > 0)) {
-            self.worstSalesPitchEverView = [[GADBannerView alloc] initWithAdSize:kGADAdSizeBanner];
-            [self.adBannerEngine prepareAdBanner:self.worstSalesPitchEverView withAdUnitId:self.adBannerUnitId andViewController:self];
-        }
-    }];
-}
-
-- (void)viewWillAppear:(BOOL)animated {
-    [super viewWillAppear:animated];
-    
-    _emptyMessage.topConstraint.constant = self.headerView.frame.size.height;
-    _emptyMessage.bigMessage.text = NSLocalizedString(@"Please add people and payments if you want a solution on who owes who.", @"Please add payments and/or people if you want a solution on who owes who.");
-    [self setEmptyMessageWithDuration:0.0];
-    
-    if (_tonightsBill.peoplePresent.count == 0 || _tonightsBill.payments.count == 0) {
-        [[_emptyMessage bigMessage] setText:NSLocalizedString(@"Please add people and payments if you want a solution on who owes who.", @"Please add payments and/or people if you want a solution on who owes who.")];
-    } else {
-        _emptyMessage.bigMessage.text = @"";
-    }
-}
-
 #pragma mark - UITableViewDelegate
 
 - (void)tableView:(UITableView *)tableView willDisplayHeaderView:(UIView *)view forSection:(NSInteger)section {
@@ -347,7 +303,7 @@ typedef NS_OPTIONS(NSUInteger, MCReturnPaymentViewControllerState) {
 
 }
 
-#pragma mark - Table view data source
+#pragma mark - UITableViewDataSource
 
 - (NSString *)tableView:(UITableView *)tableView titleForHeaderInSection:(NSInteger)section {
     if (self.uiState == MCReturnPaymentViewControllerStateNone) {
@@ -356,16 +312,7 @@ typedef NS_OPTIONS(NSUInteger, MCReturnPaymentViewControllerState) {
         return nil;
     } else if (self.uiState == MCReturnPaymentViewControllerStateXRatesPresent) {
         if ([_solution count] > 0) {
-            switch (section) {
-                case 0:
-                    return NSLocalizedString(@"Who owes whom", @"Who ows who");
-                case 1:
-                    return NSLocalizedString(@"Total owes", @"Total owes");
-                case 2:
-                    return NSLocalizedString(@"Total paid", @"Total paid");
-                default:
-                    return nil;
-            }
+            return [_model sectionTitleForSection:section];
         }
     } else if (self.uiState == MCReturnPaymentViewControllerStateShowAdBanner) {
         NSLog(@"Showing only a banner is useless this shouldn't happen");
@@ -375,13 +322,17 @@ typedef NS_OPTIONS(NSUInteger, MCReturnPaymentViewControllerState) {
         if ([_solution count] > 0) {
             switch (section) {
                 case 0:
-                    return NSLocalizedString(@"Who owes whom", @"Who ows who");
+                    return [_model sectionTitleForSection:section];
                 case 1:
                     return nil;
-                case 2:
-                    return NSLocalizedString(@"Total owes", @"Total owes");
-                case 3:
-                    return NSLocalizedString(@"Total paid", @"Total paid");
+                case 2: {
+                    NSUInteger adaptedSectionNumber = section - 1;
+                    return [_model sectionTitleForSection:adaptedSectionNumber];
+                }
+                case 3: {
+                    NSUInteger adaptedSectionNumber = section - 1;
+                    return [_model sectionTitleForSection:adaptedSectionNumber];
+                }
                 default:
                     return nil;
             }
@@ -517,5 +468,60 @@ typedef NS_OPTIONS(NSUInteger, MCReturnPaymentViewControllerState) {
     
     return nil;
 }
+
+#pragma mark - UIViewController
+
+- (void)loadView {
+    [super loadView];
+    
+    _emptyMessage = [[NSBundle mainBundle] loadNibNamed:@"MCTableEmptyMessage" owner:self options:nil][0];
+    _emptyMessage.borderlineView.dyInset = 20;
+    self.tableView.backgroundView = _emptyMessage;
+    
+    self.navigationItem.title = NSLocalizedStringWithDefaultValue(@"solution_view_title", nil, NSBundle.mainBundle, @"solution", @"Title of the screen that shows the solution to the user of who owes who, what amount of money.");
+    
+    NSString *sendEmailButtonTitle = NSLocalizedStringWithDefaultValue(@"solution_view_button_send_email", nil, NSBundle.mainBundle, @"send email", @"Title of a button that allows for sending the email with the solution.");
+    [_sendEmailButton setTitle:sendEmailButtonTitle forState:UIControlStateNormal];
+}
+
+- (void)viewDidLoad {
+    [super viewDidLoad];
+
+    // Uncomment the following line to preserve selection between presentations.
+    // self.clearsSelectionOnViewWillAppear = NO;
+ 
+    // Uncomment the following line to display an Edit button in the navigation bar for this view controller.
+    // self.navigationItem.rightBarButtonItem = self.editButtonItem;
+    
+    self.tableView.estimatedRowHeight = 44.0;
+    self.tableView.rowHeight = UITableViewAutomaticDimension;
+    
+    [self setEdgesForExtendedLayout:UIRectEdgeNone];
+    
+    [self giveSolutionWithCompletion:^(BOOL success) {
+        if (success && (self.solution.count > 0)) {
+            self.worstSalesPitchEverView = [[GADBannerView alloc] initWithAdSize:kGADAdSizeBanner];
+            [self.adBannerEngine prepareAdBanner:self.worstSalesPitchEverView withAdUnitId:self.adBannerUnitId andViewController:self];
+        }
+    }];
+}
+
+- (void)viewWillAppear:(BOOL)animated {
+    [super viewWillAppear:animated];
+    
+    _emptyMessage.topConstraint.constant = self.headerView.frame.size.height;
+    _emptyMessage.bigMessage.text = NSLocalizedStringWithDefaultValue(@"solution_view_list_empty_message", nil, NSBundle.mainBundle, @"Please add people and payments if you want a solution on who owes who.", @"Please add payments and/or people if you want a solution on who owes who.");
+    [self setEmptyMessageWithDuration:0.0];
+    
+    if (_tonightsBill.peoplePresent.count == 0 || _tonightsBill.payments.count == 0) {
+        _emptyMessage.bigMessage.text = NSLocalizedStringWithDefaultValue(@"solution_view_list_empty_message", nil, NSBundle.mainBundle, @"Please add people and payments if you want a solution on who owes who.", @"Please add payments and/or people if you want a solution on who owes who.");
+    } else {
+        _emptyMessage.bigMessage.text = @"";
+    }
+}
+
+#pragma mark - UIResponder
+
+#pragma mark - NSObject
 
 @end

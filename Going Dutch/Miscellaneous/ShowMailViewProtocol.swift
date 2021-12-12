@@ -21,13 +21,30 @@ protocol ShowMailViewProtocol: MailComposer {
 
 extension ShowMailViewProtocol where Self: UIViewController, Self: MFMailComposeViewControllerDelegate {
     func showMailView(_ sender: AnyObject) {
-        debugPrint("\(self) showMailViewProtocol: \(sender)")
+        func showDataMissingAlert(for payment: MCPayment? = nil) {
+            let title = NSLocalizedString("solution_view_alert_title_data_missing_in_payment", value: "Data missing in payment", comment: "Alert title stating that data is missing in a payment")
+            let message = NSLocalizedString("solution_view_alert_message_data_missing_in_payment", value: "Please check the payment for missing data", comment: "Alert message suggesting the user that there is missing data on a payment.")
+            let alertController = UIAlertController(title: title, message: message, preferredStyle: .alert)
+            // If payment is present add a goto button so the user can instantly navigate there.
+            if let payment = payment {
+                let gotoTitle = NSLocalizedString("solution_view_alert_action_data_missing_in_payment_go_to", value: "Go to", comment: "An action button in an alert that allows for instant navigation to a payment with missing data.")
+                let gotoAction = UIAlertAction(title: gotoTitle, style: .default, handler: { [unowned self] (action) in
+                    let viewControllerThatCanShowPayment = self.presentingViewController as! ShowPayment
+                    viewControllerThatCanShowPayment.show(payment)
+                })
+                alertController.addAction(gotoAction)
+            }
+            let dismissTitle = NSLocalizedString("solution_view_alert_action_data_missing_in_payment_dimiss", value: "Dismiss", comment: "Button that says dismiss")
+            let dismissAction = UIAlertAction(title: dismissTitle, style: .cancel, handler: nil)
+            alertController.addAction(dismissAction)
+            present(alertController, animated: true, completion: nil)
+        }
         
         guard MFMailComposeViewController.canSendMail() else {
-            let title = NSLocalizedString("Unable to send email", comment: "Title of an alert that notifies the user the app is unable to send email.")
-            let message = NSLocalizedString("Please configure your mail in Settings", comment: "Instruction in an alert to tell the user that they should check their email address for a valid configuration.")
+            let title = NSLocalizedString("solution_view_alert_title_cannot_send_mail", value: "Unable to send email", comment: "Title of an alert that notifies the user the app is unable to send email.")
+            let message = NSLocalizedString("solution_view_alert_message_cannot_send_mail", value: "Please configure your mail in Settings", comment: "Instruction in an alert to tell the user that they should check their email address for a valid configuration.")
             let alertController = UIAlertController(title: title, message: message, preferredStyle: .alert)
-            let dismissButtonTitle = NSLocalizedString("Dismiss", comment: "Text on a button that dismisses the alert")
+            let dismissButtonTitle = NSLocalizedString("solution_view_alert_action_cannot_send_email_dismiss", value: "Dismiss", comment: "Text on a button that dismisses the alert")
             let dismissAction = UIAlertAction(title: dismissButtonTitle, style: .default, handler: nil)
             alertController.addAction(dismissAction)
             present(alertController, animated: true, completion: nil)
@@ -48,52 +65,13 @@ extension ShowMailViewProtocol where Self: UIViewController, Self: MFMailCompose
                     UIApplication.shared.statusBarStyle = .lightContent
                     mailViewController.setNeedsStatusBarAppearanceUpdate()
                 }
-
             })
         } catch MailComposerError.missingCrititcalInformationIn(let payment) {
-            let title = NSLocalizedString("Data missing in payment", comment: "Alert title stating that data is missing in a payment")
-            let message = NSLocalizedString("Please check the payment for missing data", comment: "Alert message suggesting the user that there is missing data on a payment.")
-            let alertController = UIAlertController(title: title, message: message, preferredStyle: .alert)
-            let gotoTitle = NSLocalizedString("Go to", comment: "Go to")
-            let dismissTitle = NSLocalizedString("Dismiss", comment: "Button that says dismiss")
-            let gotoAction = UIAlertAction(title: gotoTitle, style: .default, handler: { [unowned self] (action) in
-                guard let vc = self.presentingViewController as? ShowPayment else {
-                    debugPrint("The programmer is an idiot")
-                    abort()
-                }
-
-                vc.show(payment)
-            })
-            let dismissAction = UIAlertAction(title: dismissTitle, style: .cancel, handler: nil)
-            alertController.addAction(gotoAction)
-            alertController.addAction(dismissAction)
-            present(alertController, animated: true, completion: nil)
+            showDataMissingAlert(for: payment)
         } catch MailComposerError.missingInformationIn(let payment) {
-            let title = NSLocalizedString("Data missing in payment", comment: "Alert title stating that data is missing in a payment")
-            let message = NSLocalizedString("Please check the payment for missing data", comment: "Alert message suggesting the user that there is missing data on a payment.")
-            let alertController = UIAlertController(title: title, message: message, preferredStyle: .alert)
-            let gotoTitle = NSLocalizedString("Go to", comment: "Go to")
-            let dismissTitle = NSLocalizedString("Dismiss", comment: "Button that says dismiss")
-            let gotoAction = UIAlertAction(title: gotoTitle, style: .default, handler: { [unowned self] (action) in
-                guard let vc = self.presentingViewController as? ShowPayment else {
-                    debugPrint("The programmer is an idiot")
-                    abort()
-                }
-                
-                vc.show(payment)
-            })
-            let dismissAction = UIAlertAction(title: dismissTitle, style: .cancel, handler: nil)
-            alertController.addAction(gotoAction)
-            alertController.addAction(dismissAction)
-            present(alertController, animated: true, completion: nil)
+            showDataMissingAlert(for: payment)
         } catch {
-            let title = NSLocalizedString("Data missing in payment", comment: "Alert title stating that data is missing in a payment")
-            let message = NSLocalizedString("Please check the payment for missing data", comment: "Alert message suggesting the user that there is missing data on a payment.")
-            let alertController = UIAlertController(title: title, message: message, preferredStyle: .alert)
-            let dismissTitle = NSLocalizedString("Dismiss", comment: "Button that says dismiss")
-            let dismissAction = UIAlertAction(title: dismissTitle, style: .cancel, handler: nil)
-            alertController.addAction(dismissAction)
-            present(alertController, animated: true, completion: nil)
+            showDataMissingAlert()
         }
     }
 }

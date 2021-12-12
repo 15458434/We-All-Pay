@@ -1,148 +1,167 @@
-/* \(productName) is now free of any ads. */
-"(productName) is now free of any ads." = "(productName) is nu vrij van advertenties";
+/* The name of We all pay */
+"app_name" = "We all pay";
 
-/* A label showing \"person1 and person2\" */
-"%1$@ and %2$@" = "%1$@ en %2$@";
+/* event name example for app store screenshots */
+"app_store_screenshots_eventname_1" = "Concert";
 
-/* %1$@ has paid %2$@(%3$@) for %4$@. */
-"%1$@ has paid %2$@(%3$@) for %4$@" = "%1$@ betaalde %2$@(%3$@) voor %4$@.";
+/* event name example for app store screenshots */
+"app_store_screenshots_eventname_2" = "Theater";
 
-/* As in Mark owes Arjen, but then just the word owes. */
-"%1$@ owes %2$@" = "%1$@ betaalt %2$@";
+/* event name example for app store screenshots */
+"app_store_screenshots_eventname_3" = "Boodschappen deze maand";
 
-/* %1$@ has paid %2$@ for %3$@. */
-"%1$@ paid %2$@ for %3$@." = "%1$@ betaalde %2$@ voor %3$@.";
+/* event name example for app store screenshots */
+"app_store_screenshots_eventname_4" = "Kamperen";
 
-/* %1$@ pays %2$@ to %3$@. */
-"%1$@ pays %2$@ to %3$@." = "%1$@ geeft %2$@ aan %3$@.";
+/* event name example for app store screenshots */
+"app_store_screenshots_eventname_5" = "Diner";
 
-/* %1$@ used %2$@ in total. */
-"%1$@ used %2$@ in total." = "%1$@ gebruikte in totaal %2$@.";
+/* payed item example for app store screenshots */
+"app_store_screenshots_eventname_5_payment_1" = "Sushi";
 
-/* A label showing person1, person2 and other */
-"%1$@, %2$@ and others" = "%1$@, %2$@ en anderen";
+/* event name example for app store screenshots */
+"app_store_screenshots_eventname_6" = "Film";
 
-/* Ad free version restored. */
-"Ad free version restored." = "Ad vrije versie hersteld.";
+/* payed item example for app store screenshots */
+"app_store_screenshots_eventname_6_payment_1" = "Kaartjes";
 
-/* Sub header in the personView which states add new data */
-"Add" = "Nieuw";
+/* payed item example for app store screenshots */
+"app_store_screenshots_eventname_6_payment_2" = "Popcorn";
 
-/* Sub header in the paymentView which states Add payment data */
-"Add payment data" = "Vul gegevens in";
-
-/* Title for an alert message, because there are no people added to this event. */
-"Add some people first" = "Voeg eerst aanwezigen toe";
-
-/* first name example for app store screenshots */
-"Ann" = "Anne";
+/* payed item example for app store screenshots */
+"app_store_screenshots_eventname_6_payment_3" = "Frisdrank";
 
 /* example for appstore screenshots */
-"ann_burwell@work.com" = "anne_groen@werk.com";
+"app_store_screenshots_person_email_1" = "davidsmits@ergens.nl";
 
-/* Store Interface */
-"App Store unavailable" = "App Store niet beschikbaar";
+/* example for appstore screenshots */
+"app_store_screenshots_person_email_2" = "rik@aarde.nl";
 
-/* One of the payments is missing a payer. */
-"At least one of the payments is missing a payer." = "Minstens één betaling heeft een onbekende betaler.";
+/* example for appstore screenshots */
+"app_store_screenshots_person_email_3" = "anne_groen@werk.com";
 
-/* I suggest the following solution. */
-"Based on all of this, I suggest the following solution:" = "Ik stel de volgende oplossing voor:";
+/* example for appstore screenshots */
+"app_store_screenshots_person_email_4" = "l.d.boer@internet.nl";
+
+/* example for appstore screenshots */
+"app_store_screenshots_person_email_5" = "mailsophie@thuis.nl";
+
+/* first name example for app store screenshots */
+"app_store_screenshots_person_firstname_1" = "David";
+
+/* first name example for app store screenshots */
+"app_store_screenshots_person_firstname_2" = "Rik";
+
+/* first name example for app store screenshots */
+"app_store_screenshots_person_firstname_3" = "Anne";
+
+/* first name example for app store screenshots */
+"app_store_screenshots_person_firstname_4" = "Laurentien";
+
+/* first name example for app store screenshots */
+"app_store_screenshots_person_firstname_5" = "Sophie";
 
 /* last name example for appstore screenshots */
-"Burwell" = "Groen";
+"app_store_screenshots_person_lastname_1" = "Smits";
 
-/* Buy ad free Version */
-"Buy ad free version" = "Koop ads vrije versie";
+/* last name example for appstore screenshots */
+"app_store_screenshots_person_lastname_2" = "Vos";
 
-/* event name example for app store screenshots */
-"Camping trip" = "Kamperen";
+/* last name example for appstore screenshots */
+"app_store_screenshots_person_lastName_3" = "Groen";
 
-/* Text on button to cancel something */
-"Cancel" = "Annuleer";
+/* last name example for appstore screenshots */
+"app_store_screenshots_person_lastname_4" = "Boer";
 
-/* event name example for app store screenshots */
-"Concert" = "Concert";
+/* last name example for appstore screenshots */
+"app_store_screenshots_person_lastname_5" = "van der Meulen";
 
-/* (No Comment) */
-"Contacts disabled" = "Contacten uitgeschakeld";
+/* Message to the user that this section in the tableview contains recently used foreign currencies */
+"currency_view_list_section_title_recent" = "Recent";
 
-/* Alert title stating that data is missing in a payment */
-"Data missing in payment" = "Ontbrekende gegevens in betaling";
+/* A message when there are no people present inside this shared bill */
+"event_label_no_people_present" = "Niemand aanwezig";
 
-/* first name example for app store screenshots */
-"David" = "David";
+/* A label showing person1, person2 and other */
+"event_label_three_or_more_people_present" = "%1$@, %2$@ en anderen";
 
-/* example for appstore screenshots */
-"davidtucker@somewhere.com" = "davidsmits@ergens.nl";
+/* A label showing \"person1 and person2\" */
+"event_label_two_people_present" = "%1$@ en %2$@";
 
-/* Just Dear as in \"Dear Mark\" */
-"Dear %1$@," = "Beste %1$@,";
+/* A selection button at the top of the event view that allows for selection between the people and the payments on the event. This button is for selecting the payments. */
+"event_view_segmentedControl_payments_title" = "Betalingen";
+
+/* A selection button at the top of the event view that allows for selection between the people and the payments on the event. This button is for selecting the people. */
+"event_view_segmentedControl_people_title" = "Aanwezigen";
+
+/* Text on a button to select a different main currency for an event */
+"events_view_button_change_main_currency" = "€$£¥";
+
+/* Button in the events view that creates a new event */
+"events_view_button_create_event" = "Nieuw Evenement";
 
 /* Text on a delete button */
-"Delete" = "Verwijder";
+"events_view_button_delete_event" = "Verwijder";
 
-/* event name example for app store screenshots */
-"Dinner" = "Diner";
+/* A message shown to the user when the list of events is empty. */
+"events_view_empty_message" = "Druk op \"Nieuw Evenement\" om een nieuw evenement toe te voegen waarvan je de kosten wilt delen met je vrienden.";
 
-/* Button that says dismiss
-   Button that says dismiss.
-   Dismiss
-   Text on a button that dismisses the alert
-   Title of a button that dismisses an alart
-   Title of a button that dismisses an alert. */
-"Dismiss" = "Negeer";
+/* The name of the event shown in the events list when the user didn't add an event name to the event. */
+"events_view_event_cell_no_event_name" = "Onbekend evenement";
 
-/* Question to the user whether or not they like this app. */
-"Do you like We all pay?" = "Vind je We all pay handig?";
+/* A list of all the events on which payments have been shared on the people present */
+"events_view_title" = "Evenementen";
 
-/* Sub header in the personView which state edit data */
-"Edit" = "Bewerk";
+/* Option button on the an alert view to dismiss the alert. */
+"info_view_alert_button_dismiss" = "Negeer";
 
-/* Sub header in the paymentView which states edit data */
-"Edit payment data" = "Bewerk gegevens";
+/* Button that says dismiss. */
+"info_view_alert_dismiss_no_app_store" = "Negeer";
 
-/* (No Comment) */
-"Exchange rates missing. Would you like to fetch them now?" = "Valuta conversie gegevens niet bekend. Nu ophalen?";
+/* Title of an alert that is shown when the restoration of in app purchases failed to restore */
+"info_view_alert_failed_to_restore" = "Geen aankoop om te herstellen";
 
-/* Bill overview of our trip to "movies" */
-"Expenses overview of our event %1$@" = "Onkosten overzicht van ons uitje %1$@.";
+/* Message of the cannot send email alert title with an action for the user to take. */
+"info_view_alert_message_cannot_send_email" = "Configureer je mail in de instellingen van iOS.";
 
-/* Bill overview of our event" */
-"Expenses overview of our event." = "Onkosten overzicht van ons uitje.";
+/* Message body explaining the App Store can't be reached. */
+"info_view_alert_message_no_app_store" = "Kan de App Store niet bereiken. Verbind met het internet.";
 
-/* Message explaining what the user can do to refetch exchange rates */
-"Fetching exchange rates is not possible at this moment. Check your internet connection and/or hit solve to fetch all missing exchange rates at a later time" = "Het ophalen van de wisselkoers is niet mogelijk op dit moment. Controleer je internet verbinding en/of druk later op 'Oplossing' om all ontbrekende wisselkoersen op te halen.";
+/* Messages of an alert to the user that thanks them for making the ad free in app purchase */
+"info_view_alert_purchased_message" = "(productName) is nu vrij van advertenties";
 
-/* Give feedback */
-"Give feedback" = "Geef feedback";
+/* Title of an alert to the user that thanks them for making the ad free in app purchase. */
+"info_view_alert_purchased_title" = "Dank je wel voor je aankoop";
 
-/* Go to */
-"Go to" = "Ga naar";
+/* message of an alert to the user that says their ad free version is restored */
+"info_view_alert_restore_purchase_message" = "Welkom terug. Je advertentie vrije ervaring is hersteld";
 
-/* Title of a No button. */
-"Hell no" = "Absoluut niet";
+/* title of an alert to the user that says their ad free version is restored */
+"info_view_alert_restore_purchase_title" = "Advertentie vrij hersteld";
 
-/* From a total of \"$ 20,45\", which was spend on our last trip to \"Movies\". We all have to pay an equal share of \"$6,82\". */
-"Here you go. The full overview of the %1$@ which we spend on our last event %2$@. We spent an average of %3$@ a person. You can find more details below." = "Alsjeblieft, het overzicht van de %1$@ aan kosten die we gemaakt hebben voor ons uitje naar %2$@. De gemiddelde kosten per persoon zijn %3$@. Het complete overzicht staat hieronder.";
+/* Title of an alert to tell the user he's unable to send email. */
+"info_view_alert_title_cannot_send_email" = "Kan email niet versturen";
 
-/* Here you go. The full overview of the %1$@ which we spend on our last event. We spent an average of %2$@ a person. You can find more of the details below. */
-"Here you go. The full overview of the %1$@ which we spend on our last event. We spent an average of %2$@ a person. You can find more of the details below." = "Alsjeblieft, het overzicht van de %1$@ aan kosten die we gemaakt hebben voor ons uitje. De gemiddelde kosten per persoon zijn %3$@. Het complete overzicht staat hieronder.";
+/* Message that pops up when the App Store is not available. */
+"info_view_alert_title_no_app_store" = "App Store niet bereikbaar";
 
-/* Closing sentence of the email: If you have any remarks please let me know. */
-"If you have any remarks, please let me know." = "Als jullie nog opmerkingen hebben dan hoor ik dat graag.";
+/* Button in the info view that will make the ad free in app purchase for the user */
+"info_view_cell_buy_ad_free" = "Koop advertentie vrij";
 
-/* Title */
-"Invalid email address" = "Ongeldig emailadres";
+/* Text of a button in the info view that opens up a mail dialogue to send feedback to support */
+"info_view_cell_feedback" = "Geef feedback";
 
-/* first name example for app store screenshots */
-"Jake" = "Rik";
+/* Text of a button in the info view that opens the page in the App Store with all of my apps. */
+"info_view_cell_my_apps" = "Mijn Apps";
 
-/* example for appstore screenshots */
-"jake@earth.com" = "rik@aarde.nl";
+/* Text of a button in the info view that opens the notifications view */
+"info_view_cell_notifications" = "Berichten";
 
-/* example for appstore screenshots */
-"l.d.mortimer@internet.com" = "l.d.boer@internet.nl";
+/* Text of a button in the info view that opens the rate me dialogue */
+"info_view_cell_rate_me" = "Waardeer mij";
+
+/* Text of a button in the info view that initiates restoring the in app purchases */
+"info_view_cell_restore_purchases" = "Herstel eerdere aankopen";
 
 /* A string that is shown when the description of the item it not available. */
 "label_no_item_description" = "Iets";
@@ -150,193 +169,224 @@
 /* A string to indicate no person is available on this payment */
 "label_no_person" = "Niemand";
 
-/* first name example for app store screenshots */
-"Lauren" = "Laurentien";
-
-/* example for appstore screenshots */
-"mailsheila@home.com" = "mailsophie@thuis.nl";
-
-/* last name example for appstore screenshots */
-"Miller" = "van der Meulen";
-
-/* last name example for appstore screenshots */
-"Mortimer" = "Boer";
-
-/* event name example for app store screenshots */
-"Movie" = "Film";
-
-/* Text of the the button that takes you to my apps in the AppStore */
-"My Apps" = "Mijn apps";
-
-/* Header in the paymentView which state new Payment. */
-"New payment" = "Nieuwe betaling";
-
-/* Screen name saying this is a new payment. */
-"New Payment" = "Nieuwe betaling";
-
-/* last name example for appstore screenshots */
-"Nichelson" = "Vos";
-
-/* (No Comment) */
-"no" = "nee";
-
-/* A message when there are no people present inside this shared bill */
-"No people present" = "Niemand aanwezig";
-
 /* A message for no notifications in the notifications screen. */
-"Nothing new right now." = "Er is niks nieuws op dit moment.";
+"notifications_view_empty_message" = "Er is niks nieuws op dit moment.";
 
-/* Nothing to restore */
-"Nothing to restore" = "Geen aankoop om te herstellen";
+/* Title of the screen that contains a list of notifications to the user. */
+"notifications_view_title" = "Berichten";
 
-/* No comment provided by engineer. */
-"Notifications" = "Berichten";
+/* Text of the payment category selection button */
+"payment_view_button_select_category" = "Selecteer Categorie";
 
-/* (No Comment) */
-"Ok" = "Ok";
+/* Text on the button that changes the currency in which the currently entered payment was made. */
+"payment_view_button_select_currency" = "€$£¥";
 
-/* Owes as in Mark owes $5 */
-"owes" = "gebruikt";
+/* Button in the edit payment view that allows the user to select a new payer */
+"payment_view_button_select_payer" = "Selecteer betaler";
+
+/* A placeholder of the item description field in the edit payment view. */
+"payment_view_item_description_placeholder" = "Waarvoor is er betaald?";
 
 /* Header in the paymentView which states payment */
-"Payment" = "Betaling";
+"payment_view_mainLabel_edit_payment" = "Betaling";
+
+/* Header in the paymentView which state new Payment */
+"payment_view_mainLabel_new_payment" = "Nieuwe betaling";
+
+/* A placeholder of who paid text field in the edit payment view */
+"payment_view_payerNameField_placeholder" = "Wie heeft er betaald?";
+
+/* A placeholder of the price fireld in the edit payment view. */
+"payment_view_price_placeholder" = "Hoeveel is er betaald?";
+
+/* Sub header in the paymentView which states Add payment data */
+"payment_view_subLabel_add_payment" = "Vul gegevens in";
+
+/* Sub header in the paymentView which states edit payment data */
+"payment_view_subLabel_edit_payment" = "Bewerk gegevens";
+
+/* Text for button on an alert that dismisses the alert */
+"payments_view_alert_button_dismiss" = "Negeer";
+
+/* Text on a button to press the cancel action on an alert that tells the user the current event can't be solved due to missing information on who paid something. */
+"payments_view_alert_cancel" = "Annuleer";
+
+/* Button on an alert that navigates the payment that's missing the information who paid that particular payment */
+"payments_view_alert_go_to" = "Open betaling";
+
+/* Message of an alert shown to the user when solve has been pressed and We All Pay is unable to solve due to a missing payer on a payment. */
+"payments_view_alert_message_cannot_solve" = "Er is een betaling zonder dat er een betaler is geregistreerd. Druk op open betaling om die te openen.";
+
+/* Title for an alert message, because there are no people added to this event. */
+"payments_view_alert_title_add_people_first" = "Voeg eerst aanwezigen toe";
+
+/* Title of an alert shown to the user when solve has been pressed the We All Pay is unable to solve due to a missing payer on an payment. */
+"payments_view_alert_title_cannot_solve" = "Onoplosbaar";
+
+/* Title of a button that adds a payment and opens the new payment view to enter the information on a new payment */
+"payments_view_button_add_payment" = "Nieuwe betaling";
+
+/* Title of a button that solves who needs to pay whom on the current event. */
+"payments_view_button_solve_event" = "Oplossing";
+
+/* Empty message list for when the list of payments is empty and there are no payments on the current event */
+"payments_view_label_empty_list" = "Druk op \"Nieuwe betaling\" om een betaling toe te voegen aan dit evenement.";
+
+/* A message to the user they can't add a payment when they didn't add people to the event. */
+"payments_view_message_add_people_first" = "Je kan geen betaling toevoegen, als er geen aanwezigen zijn geregistreerd. Ga naar \"Aanwezigen\" om de mensen waarmee je een betaling wilt delen toe te voegen.";
+
+/* Add person button in the people view that adds a person to the event. */
+"people_view_button_add_person" = "Nieuwe Persoon";
+
+/* Empty message for the people list view. */
+"people_view_label_empty_message" = "Druk op \"Nieuwe persoon\" om een persoon toe te voegen aan dit evenement of druk op \"Contacten\" om een iemand uit je adresboek te importeren.";
+
+/* Placeholder for the field where you end the name of the event. */
+"people_view_placeholder_event_name" = "Naam evenement";
+
+/* Button in the person view to select an email address of the user in case the user has multiple email addresses from an import of the addressbook */
+"person_view_button_select_email" = "Selecteer Emailadres";
+
+/* Sub header in the personView which state edit data */
+"person_view_button_subLabel_edit_person" = "bewerk gegevens";
 
 /* Header in the personView which state new person. */
-"Person" = "Persoon";
+"person_view_mainLabel_title" = "Persoon";
+
+/* Placeholder of the e-mail address field in the edit person view */
+"person_view_placeholder_email_address" = "e-mailadres";
+
+/* Placeholder of the First Name field in the edit person view */
+"person_view_placeholder_first_name" = "voornaam";
+
+/* Placeholder of the Last name field in the edit person view */
+"person_view_placeholder_last_name" = "achternaam";
+
+/* Sub header in the personView which states add new data */
+"person_view_subLabel_new_person" = "vul gegevens in";
 
 /* An string that indicates that no person is selected in the select payer picker */
 "picker_option_none" = "geen";
 
-/* Please add payments and/or people if you want a solution on who owes who. */
-"Please add people and payments if you want a solution on who owes who." = "Druk op \"Annuleer\" en voeg mensen en betalingen toe.";
+/* Message to the user to give We all pay a five star rating. */
+"rate_me_alert_message" = "Zou je We all pay een 5 sterren waardering willen geven, zodat andere mensen de voordelen van We all pay kunnen ontdekken?";
+
+/* Title of the No button on the rate me in the App Store button. */
+"rate_me_alert_no" = "Absoluut niet";
+
+/* Question to the user whether or not they like this app. */
+"rate_me_alert_title" = "Vind je We all pay handig?";
+
+/* Title of a Yes button on the rate me in the App Store button. */
+"rate_me_alert_yes" = "Jazeker";
+
+/* The title of the select category screen. It allows for selecting a categoy of the payment. */
+"select_category_view_title" = "Selecteer category";
+
+/* Section Index Symbol for recent used currencies in the select currencies view. */
+"select_currency_view_section_index_recent_currencies" = "!";
+
+/* Title of the select currency view that allows for selecting a currency. */
+"select_currency_view_title" = "Selecteer munteenheid";
+
+/* Bill overview of our trip to %1$@ */
+"solution_email_subject" = "Onkosten overzicht van ons uitje %1$@.";
+
+/* Bill overview of our event. */
+"solution_email_subject_no_event_name" = "Onkosten overzicht van ons uitje.";
+
+/* Here you go. The full overview of the %1$@ which we spend on our last event %2$@. We spent an average of %3$@ a person. You can find more of the details below. */
+"solution_mail_body_1a" = "Alsjeblieft, het overzicht van de %1$@ aan kosten die we gemaakt hebben voor ons uitje naar %2$@. De gemiddelde kosten per persoon zijn %3$@. Het complete overzicht staat hieronder.";
+
+/* Here you go. The full overview of the %1$@ which we spend on our last event. We spent an average of %2$@ a person. You can find more of the details below. */
+"solution_mail_body_1b" = "Alsjeblieft, het overzicht van de %1$@ aan kosten die we gemaakt hebben voor ons uitje. De gemiddelde kosten per persoon zijn %3$@. Het complete overzicht staat hieronder.";
+
+/* %1$@ has paid %2$@ for %3$@. */
+"solution_mail_body_2a" = "%1$@ betaalde %2$@ voor %3$@.";
+
+/* %1$@ has paid %2$@(%3$@) for %4$@. */
+"solution_mail_body_2b" = "%1$@ betaalde %2$@(%3$@) voor %4$@.";
+
+/* The amount of money we used: */
+"solution_mail_body_3" = "We hebben deze kosten gemaakt:";
+
+/* %1$@ used %2$@ in total. */
+"solution_mail_body_4" = "%1$@ gebruikte in totaal %2$@.";
+
+/* I suggest the following solution. */
+"solution_mail_body_5" = "Op basis hiervan stel ik de volgende oplossing voor:";
+
+/* %1$@ pays %2$@ to %3$@ */
+"solution_mail_body_6" = "%1$@ geeft %2$@ aan %3$@.";
+
+/* If you have any remarks please let me know. */
+"solution_mail_body_7" = "Als jullie nog opmerkingen hebben dan hoor ik dat graag.";
+
+/* Dear %1$@, */
+"solution_mail_header" = "Beste %1$@,";
+
+/* Text on a button that dismisses the alert */
+"solution_view_alert_action_cannot_send_email_dismiss" = "Negeer";
+
+/* Button that says dismiss */
+"solution_view_alert_action_data_missing_in_payment_dimiss" = "Negeer";
+
+/* An action button in an alert that allows for instant navigation to a payment with missing data. */
+"solution_view_alert_action_data_missing_in_payment_go_to" = "Ga naar";
+
+/* Text on button to cancel the alert that says there are people without email addresses. */
+"solution_view_alert_action_dismiss" = "Annuleer";
+
+/* Button title of an alert view to tell the user We All Pay is unable to fetch exchange rates to calculation a solution. */
+"solution_view_alert_action_dismiss_cannot_fetch_exchange_rates" = "Negeer";
+
+/* Action button on an alert to send email anyway in case not all email addresses have been entered. */
+"solution_view_alert_action_send_anyway" = "Stuur alsnog";
+
+/* Message explaining what the user can do to refetch exchange rates
+   Message in an alert of the solution view that pops up when fetching exchange rates is impossible. It explains what the user can do to refetch exchange rates. */
+"solution_view_alert_message_cannot_fetch_exchange_rates" = "Het ophalen van de wisselkoers is niet mogelijk op dit moment. Controleer je internet verbinding en/of druk later op 'Oplossing' om alle ontbrekende wisselkoersen op te halen.";
+
+/* Instruction in an alert to tell the user that they should check their email address for a valid configuration. */
+"solution_view_alert_message_cannot_send_mail" = "Stel je e-mail in in settings.";
 
 /* Alert message suggesting the user that there is missing data on a payment. */
-"Please check the payment for missing data" = "Controleer de betaling op ontbrekende data";
+"solution_view_alert_message_data_missing_in_payment" = "Controleer betalingen voor onbekende gegevens.";
 
-/* Instruction in an alert to tell the user that they should check their email address for a valid configuration.
-   Please configure your mail in Settings */
-"Please configure your mail in Settings" = "Configureer je mail in instellingen";
-
-/* Message to the user to give We all pay a five star rating. */
-"Please give We all pay a 5 star rating and help other people find the benefits We all pay." = "Zou je We all pay een 5 sterren waardering willen geven, zodat andere mensen de voordelen van We all pay kunnen ontdekken?";
-
-/* payed item example for app store screenshots */
-"Popcorn" = "Popcorn";
-
-/* SharedBillTableView */
-"Press \"Add payment\" to add a payment to this event." = "Druk op \"Nieuwe betaling\" om een betaling toe te voegen aan dit evenement.";
-
-/* Press \"add Person\" to add a person who you'd like to share this bill with. */
-"Press \"Add person\" to add a person who you'd like to share this bill with." = "Druk op \"Nieuwe persoon\" om iemand toe te voegen waarmee je de rekening van dit evenment wilt delen.";
-
-/* Text of the Rate me button */
-"Rate me" = "Waardeer mij";
-
-/* Reason: Not all people have a mail address. */
-"Reason: Not all people have a mail address." = "Van sommigen aanwzezigen is het email adres niet bekend.";
-
-/* Message to the user that this section in the tableview contains recently used foreign currencies */
-"Recent" = "Recent";
-
-/* iScreen */
-"Remove Ads" = "Verwijder Ads";
-
-/* Restore previous purchases */
-"Restore previous purchases" = "Herstel eerdere aankopen";
-
-/* Select Category
-   Text of the payment category selection button */
-"Select Category" = "Selecteer Categorie";
-
-/* (No Comment) */
-"Select payer" = "Betaler";
-
-/* Send anyway */
-"Send anyway" = "Stuur alsnog";
-
-/* first name example for app store screenshots */
-"Sheila" = "Sophie";
-
-/* payed item example for app store screenshots */
-"Soft drinks" = "Frisdrank";
-
-/* (No Comment) */
-"Someone" = "Iemand";
-
-/* (No Comment) */
-"something" = "iets";
-
-/* Title of a Yes button. */
-"Sure" = "Jazeker";
-
-/* payed item example for app store screenshots */
-"Sushi" = "Sushi";
-
-/* Thank you for purchasing */
-"Thank you for purchasing" = "Dank u wel voor uw aankoop";
-
-/* (No Comment) */
-"Thank you for purchasing." = "Dank u wel voor uw aankoop.";
-
-/* Message */
-"The email address you provided doesn't appear to be an email address. This might cause improper behavior. Are you sure you want to continue?" = "Het ingevoerde emailadres lijkt niet op een geldig email adres. Dit kan ongewenst gedrag veroorzaken. Weet u zeker dat u door wilt gaan?";
-
-/* event name example for app store screenshots */
-"Theatre" = "Theater";
-
-/* event name example for app store screenshots */
-"This month food costs" = "Boodschappen deze maand";
-
-/* payed item example for app store screenshots */
-"Tickets" = "Kaartjes";
-
-/* Section header in the tableView Total owes */
-"Total owes" = "Totaal verschuldigd";
-
-/* Section header in the tableView Total paid */
-"Total paid" = "Totaal uitgegeven";
-
-/* Total spent: $ string inside the header of the solution screen */
-"Total spent:" = "Totaal:";
-
-/* last name example for appstore screenshots */
-"Tucker" = "Smits";
-
-/* Message body explaining the App Store can't be reached. */
-"Unable to connect to the App Store. Please connect to the internet." = "Kan de App Store niet bereiken. Verbind met het internet.";
+/* Message of an alert shown to the user in case not everyone on the event has an email address. */
+"solution_view_alert_message_missing_email_address" = "Van sommigen aanwezigen is het email adres niet bekend.";
 
 /* itle message of an alert that pops up when fetching exchange rates is impossibl
    Title message of an alert that pops up when fetching exchange rates is impossible */
-"Unable to fetch exchange rates" = "Kan wisselkoers niet ophalen";
+"solution_view_alert_title_cannot_fetch_exchange_rates" = "Kan wisselkoers niet ophalen";
 
-/* Title of an alert that notifies the user the app is unable to send email.
-   Unable to send email */
-"Unable to send email" = "Kan email niet versturen";
+/* Title of an alert that notifies the user the app is unable to send email. */
+"solution_view_alert_title_cannot_send_mail" = "E-mail niet beschikbaar";
 
-/* SharedBillPageView */
-"Unable to send email to all people." = "Kan niet iedereen een email sturen.";
+/* Alert title stating that data is missing in a payment */
+"solution_view_alert_title_data_missing_in_payment" = "Er ontbreken gegevens in een betaling";
 
-/* XRates missing alert */
-"Unable to solve" = "Onoplosbaar";
+/* Title of an alert shown to the user in case not everyone on the event has an email address. */
+"solution_view_alert_title_missing_email_address" = "Kan niet iedereen een email sturen.";
 
-/* (No Comment) */
-"We all pay is now an ad free experience." = "We all pay is nu een advertentie vrije ervaring.";
+/* Title of a button that allows for sending the email with the solution. */
+"solution_view_button_send_email" = "Stuur Email";
 
-/* "The amount of money we used: */
-"We each used these amounts:" = "We hebben deze kosten gemaakt:";
+/* In the solution view: As in Mark owes Yvette x amount of money. */
+"solution_view_cell_who_owes_who_label" = "%1$@ betaalt %2$@";
 
-/* (No Comment) */
-"What is the Pro Version?" = "Wat is de Pro versie?";
+/* Please add payments and/or people if you want a solution on who owes who. */
+"solution_view_list_empty_message" = "Druk op \"Annuleer\" en voeg mensen en betalingen toe.";
 
-/* Section header in the tableView Who owes who */
-"Who owes whom" = "Wie betaalt wie";
+/* Section title in the solution screen that shows the title of the section that shows who owes how much to the group */
+"solution_view_section_title_total_owes" = "Totaal verschuldigd";
 
-/* (No Comment) */
-"yes" = "ja";
+/* Section title in the solution screen that shows the title of the section that shows who paid how much on the entire event */
+"solution_view_section_title_total_paid" = "Totaal uitgegeven:";
 
-/* (No Comment) */
-"You can enable access to Contacts in Settings->We All Pay->Privacy" = "Toegang tot Contacten kan aangezet worden in Instellingen->We All Pay->Privacy";
+/* Section title in the solution screen that shows the title of the section that shows who owes who what how much money */
+"solution_view_section_title_who_owes_who" = "Wie betaalt wie";
 
-/* A message to the user thay can't add a payment when they didn't add people to the even. */
-"You can't add a payment when no people are present. There is no one to split the expenses of this event with." = "Je kan geen betaling toevoegen, als er geen aanwezigen zijn. Er is niemand om de rekening van dit evenement te delen.";
+/* Title of the screen that shows the solution to the user of who owes who, what amount of money. */
+"solution_view_title" = "Oplossing";
 
