@@ -75,7 +75,7 @@ extension MailComposer where Self: ThisEvent {
                 throw MailComposerError.missingCrititcalInformationIn(payment: payment)
             }
             if payment.exchangeRate!.exchangeRate!.doubleValue == 1.0 {
-                mailBody += String.localizedStringWithFormat(NSLocalizedString("solution_mail_body_2a", value: "%1$@ paid %2$@ for %3$@.", comment: "%1$@ has paid %2$@ for %3$@."), payment.payingPerson!.getFullName(), mainCurrencyFormatter.string(for: payment.moneyInMainCurrency)!, payment.fullDescriptionOfPayment()!)
+                mailBody += String.localizedStringWithFormat(NSLocalizedString("solution_mail_body_2a", value: "%1$@ paid %2$@ for %3$@.", comment: "%1$@ has paid %2$@ for %3$@."), payment.payingPerson!.getFullName(), mainCurrencyFormatter.string(for: payment.moneyInMainCurrency())!, payment.fullDescriptionOfPayment()!)
             } else {
                 localCurrencyFormatter.currencyCode = payment.currency!.code!
                 mailBody += String.localizedStringWithFormat(NSLocalizedString("solution_mail_body_2b", value: "%1$@ has paid %2$@(%3$@) for %4$@", comment: "%1$@ has paid %2$@(%3$@) for %4$@."), payment.payingPerson!.getFullName(), mainCurrencyFormatter.string(for: payment.moneyInMainCurrency)!, localCurrencyFormatter.string(for: payment.money!)!, payment.fullDescriptionOfPayment())

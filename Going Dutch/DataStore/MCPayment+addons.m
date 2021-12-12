@@ -240,7 +240,10 @@
 - (NSString *)fullDescriptionOfPayment
 {
     // Not unit tested, because of multiple languages.
-    if (self.categoryId.shortValue == 0) {
+    if (!self.descriptionOfPayment) {
+        NSString *result = NSLocalizedStringWithDefaultValue(@"payment_view_no_full_description", nil, NSBundle.mainBundle, @"Something", @"A term that replaced the description of an a payment when no description is entered in the payment.");
+        return result;
+    } else if (self.categoryId.shortValue == 0) {
         return [NSString stringWithFormat:@"%@", self.descriptionOfPayment];
     } else {
         NSString *categoryName = CategoryPictureStoreController.shared.pictureObjects[self.categoryId.shortValue].categoryDescription;
