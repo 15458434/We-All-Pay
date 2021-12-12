@@ -193,6 +193,9 @@
 /* Header in the paymentView which state new Payment */
 "payment_view_mainLabel_new_payment" = "Nieuwe betaling";
 
+/* A term that replaced the description of an a payment when no description is entered in the payment. */
+"payment_view_no_full_description" = "Iets";
+
 /* A placeholder of who paid text field in the edit payment view */
 "payment_view_payerNameField_placeholder" = "Wie heeft er betaald?";
 
