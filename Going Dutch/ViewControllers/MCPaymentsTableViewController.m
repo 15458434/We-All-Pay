@@ -321,19 +321,17 @@
 
 - (void)prepareForSegue:(UIStoryboardSegue *)segue sender:(id)sender {
     if ([segue.identifier isEqualToString:@"openFirstPaymentWithoutPayer"]) {
-        NSParameterAssert([[[segue destinationViewController] viewControllers][0] conformsToProtocol:@protocol(MCThisPaymentProtocol)]);
-        id<MCThisPaymentProtocol, MCTonightsBillTransfer> theDestination = [[segue destinationViewController] viewControllers][0];
-        [theDestination setThisPayment:[_tonightsBill getFirstPaymentWithoutAPayer]];
-        [theDestination setTonightsBill:_tonightsBill];
+        MCPaymentNavigationController *navigationController = (MCPaymentNavigationController *)segue.destinationViewController;
+        MCPaymentViewController *destination = (MCPaymentViewController *)navigationController.viewControllers[0];
+        [destination prepareForUseWithPayment:[_tonightsBill getFirstPaymentWithoutAPayer]];
         if (@available(iOS 13.0, *)) {
             UINavigationController *navController = (UINavigationController *)segue.destinationViewController;
             navController.modalInPresentation = YES;
         }
     } else if ([segue.identifier isEqualToString:@"openPaymentWithMissingData"]) {
-        NSParameterAssert([[[segue destinationViewController] viewControllers][0] conformsToProtocol:@protocol(MCThisPaymentProtocol)]);
-        id<MCThisPaymentProtocol, MCTonightsBillTransfer> theDestination = [[segue destinationViewController] viewControllers][0];
-        [theDestination setTonightsBill:_tonightsBill];
-        [theDestination setThisPayment:_forOpenPaymentWithMissingDataForSegue];
+        MCPaymentNavigationController *navigationController = (MCPaymentNavigationController *)segue.destinationViewController;
+        MCPaymentViewController *destination = (MCPaymentViewController *)navigationController.viewControllers[0];
+        [destination prepareForUseWithPayment:_forOpenPaymentWithMissingDataForSegue];
         _forOpenPaymentWithMissingDataForSegue = nil;
         if (@available(iOS 13.0, *)) {
             UINavigationController *navController = (UINavigationController *)segue.destinationViewController;
