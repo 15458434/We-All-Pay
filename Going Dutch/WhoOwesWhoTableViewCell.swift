@@ -1,5 +1,5 @@
 //
-//  MCWhoOwesWhoTableViewCell_iPhone.swift
+//  WhoOwesWhoTableViewCell.swift
 //  We all pay
 //
 //  Created by Mark Cornelisse on 11/06/15.
@@ -8,7 +8,7 @@
 
 import UIKit
 
-final class MCWhoOwesWhoTableViewCell_iPhone: UITableViewCell {
+@objc(MCWhoOwesWhoTableViewCell) final class WhoOwesWhoTableViewCell: UITableViewCell {
     @IBOutlet var whoOwesWhoLabel: UILabel!
     @IBOutlet var moneyLabel: UILabel!
 }

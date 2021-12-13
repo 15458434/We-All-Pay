@@ -184,9 +184,9 @@ static void * sectionsContext = &sectionsContext;
     return [NSIndexSet indexSetWithIndex:1];
 }
 
-- (MCWhoOwesWhoTableViewCell_iPhone *)whoOwesWhoCellForIndexPath:(NSIndexPath *)indexPath inTableView:(UITableView *)tableView {
+- (MCWhoOwesWhoTableViewCell *)whoOwesWhoCellForIndexPath:(NSIndexPath *)indexPath inTableView:(UITableView *)tableView {
     MCReturnPayment *thisCellsReturnPayment = _model.solution[[indexPath row]];
-    MCWhoOwesWhoTableViewCell_iPhone *returnPaymentCell = [tableView dequeueReusableCellWithIdentifier:@"MCWhoOwesWhoTableViewCell_iPhone"];
+    MCWhoOwesWhoTableViewCell *returnPaymentCell = [tableView dequeueReusableCellWithIdentifier:@"MCWhoOwesWhoTableViewCell_iPhone"];
     CurrencyFormatter *cf = [[CurrencyFormatter alloc] initWithCurrencyCode:_model.event.mainCurrency.code];
     returnPaymentCell.moneyLabel.text = [cf stringForObjectValue:thisCellsReturnPayment.money];
     
@@ -350,14 +350,14 @@ static void * sectionsContext = &sectionsContext;
     
     // Create KVO
     NSKeyValueObservingOptions options = NSKeyValueObservingOptionInitial | NSKeyValueObservingOptionNew;
-    [self.model addObserver:self forKeyPath:@"sections" options:options context:solutionsContext];
+    [self.model addObserver:self forKeyPath:@"sections" options:options context:sectionsContext];
 }
 
 - (void)viewWillDisappear:(BOOL)animated {
     [super viewWillDisappear:animated];
     
     // Destroy KVO
-    [self.model removeObserver:self forKeyPath:@"sections" context:solutionsContext];
+    [self.model removeObserver:self forKeyPath:@"sections" context:sectionsContext];
 }
 
 #pragma mark - UIResponder
@@ -366,7 +366,7 @@ static void * sectionsContext = &sectionsContext;
 
 - (void)observeValueForKeyPath:(NSString *)keyPath ofObject:(id)object change:(NSDictionary<NSKeyValueChangeKey,id> *)change context:(void *)context {
     NSLog(@"Something changed in an object:");
-    if (context == solutionsContext) {
+    if (context == sectionsContext) {
         NSLog(@"Something changed in section array:");
         NSLog(@"%@", change);
         NSNumber *kindValue = change[NSKeyValueChangeKindKey];
