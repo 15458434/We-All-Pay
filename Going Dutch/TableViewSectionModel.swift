@@ -78,6 +78,7 @@ final class AdSectionItemsModel: TableViewSectionItemsModel {
     override init() {
         super.init()
         self.sortIndex = .ad
+        self.items = [NSNull()]
     }
 }
 
@@ -126,7 +127,7 @@ class TableViewSectionModel: NSObject {
     }
     
     @objc(containsSection:) func contains(_ section: TableViewSectionItemsModel) -> Bool {
-        return sections.contains(section)
+        return sections.contains { $0 == section }
     }
     
     @objc func removeSection(_ poorSucker: TableViewSectionItemsModel) {

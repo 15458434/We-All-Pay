@@ -246,7 +246,14 @@ static void * sectionsContext = &sectionsContext;
             [solutionCell prepareForUseWithItem:sectionModel.items[indexPath.row] fromModel:_model];
         }
             break;
+        case MCTableViewSectionItemsModelKindTotalUsed: {
             
+        }
+            break;
+        case MCTableViewSectionItemsModelKindTotalSpent: {
+            
+        }
+            break;
         default:
             break;
     }
@@ -340,7 +347,7 @@ static void * sectionsContext = &sectionsContext;
     
     __weak typeof(self) weakSelf = self;
     [self giveSolutionWithCompletion:^(BOOL success) {
-        if (success && (self.model.solution.count > 0)) {
+        if (success && (self.model.sections.count > 0)) {
             [weakSelf startAdBanner];
         }
     }];
