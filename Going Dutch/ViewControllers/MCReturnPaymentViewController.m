@@ -352,7 +352,7 @@ static void * sectionsContext = &sectionsContext;
     _emptyMessage.topConstraint.constant = self.headerView.frame.size.height;
     
     // Create KVO
-    NSKeyValueObservingOptions options = NSKeyValueObservingOptionInitial | NSKeyValueObservingOptionNew;
+    NSKeyValueObservingOptions options = NSKeyValueObservingOptionInitial | NSKeyValueObservingOptionNew | NSKeyValueObservingOptionPrior;
     [self.model addObserver:self forKeyPath:@"sections" options:options context:sectionsContext];
 }
 
@@ -368,10 +368,7 @@ static void * sectionsContext = &sectionsContext;
 #pragma mark - NSObject
 
 - (void)observeValueForKeyPath:(NSString *)keyPath ofObject:(id)object change:(NSDictionary<NSKeyValueChangeKey,id> *)change context:(void *)context {
-    NSLog(@"Something changed in an object:");
     if (context == sectionsContext) {
-        NSLog(@"Something changed in section array:");
-        NSLog(@"%@", change);
         NSNumber *kindValue = change[NSKeyValueChangeKindKey];
         NSKeyValueChange kind = kindValue.unsignedIntegerValue;
         NSNumber *notificationIsPrior = (NSNumber *)change[NSKeyValueChangeNotificationIsPriorKey];
