@@ -184,20 +184,6 @@ static void * sectionsContext = &sectionsContext;
     return [NSIndexSet indexSetWithIndex:1];
 }
 
-- (MCWhoOwesWhoTableViewCell *)whoOwesWhoCellForIndexPath:(NSIndexPath *)indexPath inTableView:(UITableView *)tableView {
-    MCReturnPayment *thisCellsReturnPayment = _model.solution[[indexPath row]];
-    MCWhoOwesWhoTableViewCell *returnPaymentCell = [tableView dequeueReusableCellWithIdentifier:@"MCWhoOwesWhoTableViewCell_iPhone"];
-    CurrencyFormatter *cf = [[CurrencyFormatter alloc] initWithCurrencyCode:_model.event.mainCurrency.code];
-    returnPaymentCell.moneyLabel.text = [cf stringForObjectValue:thisCellsReturnPayment.money];
-    
-    NSString *owesString = NSLocalizedStringWithDefaultValue(@"solution_view_cell_who_owes_who_label", nil, NSBundle.mainBundle, @"%1$@ owes %2$@", @"In the solution view: As in Mark owes Yvette x amount of money.");
-    NSString *whoOwesWho = [NSString stringWithFormat:owesString, [thisCellsReturnPayment.payer getName], [thisCellsReturnPayment.receiver getName]];
-    [[returnPaymentCell whoOwesWhoLabel] setText:whoOwesWho];
-    [returnPaymentCell setSelectionStyle:UITableViewCellSelectionStyleNone];
-    
-    return returnPaymentCell;
-}
-
 - (MCWhoPaidHowMuchTableViewCell_iPhone *)whoPaidHowMuchCellForIndexPath:(NSIndexPath *)indexPath inTableView:(UITableView *)tableView {
     MCWhoPaidHowMuchTableViewCell_iPhone *cell = [tableView dequeueReusableCellWithIdentifier:@"MCWhoPaidHowMuchTableViewCell_iPhone"];
     
@@ -251,6 +237,21 @@ static void * sectionsContext = &sectionsContext;
 
 #pragma mark - UITableViewDelegate
 
+- (void)tableView:(UITableView *)tableView willDisplayCell:(UITableViewCell *)cell forRowAtIndexPath:(NSIndexPath *)indexPath {
+    NSInteger section = indexPath.section;
+    MCTableViewSectionItemsModel *sectionModel = _model.sections[section];
+    switch (sectionModel.sortIndex) {
+        case MCTableViewSectionItemsModelKindSolution: {
+            MCWhoOwesWhoTableViewCell *solutionCell = (MCWhoOwesWhoTableViewCell *)cell;
+            [solutionCell prepareForUseWithItem:sectionModel.items[indexPath.row] fromModel:_model];
+        }
+            break;
+            
+        default:
+            break;
+    }
+}
+
 - (void)tableView:(UITableView *)tableView willDisplayHeaderView:(UIView *)view forSection:(NSInteger)section {
     UITableViewHeaderFooterView *sectionTitleHeader = (UITableViewHeaderFooterView *)view;
     if (@available(iOS 11.0, *)) {
@@ -289,8 +290,10 @@ static void * sectionsContext = &sectionsContext;
 - (UITableViewCell *)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath {
     MCTableViewSectionItemsModel *sectionModel = _model.sections[indexPath.section];
     switch (sectionModel.sortIndex) {
-        case MCTableViewSectionItemsModelKindSolution:
-            return [self whoOwesWhoCellForIndexPath:indexPath inTableView:tableView];
+        case MCTableViewSectionItemsModelKindSolution: {
+            MCWhoOwesWhoTableViewCell *cell = [tableView dequeueReusableCellWithIdentifier:@"MCWhoOwesWhoTableViewCell_iPhone"];
+            return cell;
+        }
             break;
         case MCTableViewSectionItemsModelKindAd: {
             MCAdBannerTableViewCell *cell = [tableView dequeueReusableCellWithIdentifier:@"MCAdBannerTableViewCell" forIndexPath:indexPath];

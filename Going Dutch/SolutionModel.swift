@@ -16,6 +16,7 @@ import UIKit
     }
     
     @objc private(set) var event: MCSharedBill!
+    private(set) var currencyFormatter: CurrencyFormatter!
     @objc dynamic private(set) var peoplePresentLocalizedSorted: [MCPerson]?
     @objc dynamic var solution: [SolutionReturnPaymentItem]?
     
@@ -32,6 +33,7 @@ import UIKit
     
     @objc(prepareForUseWith:) func prepareForUse(with event: MCSharedBill) {
         self.event = event
+        currencyFormatter = CurrencyFormatter(currencyCode: event.mainCurrency!.code!)
         if let peoplePresentSet = self.event.peoplePresent {
             let unsortedPeoplePresent: [MCPerson] = [MCPerson](peoplePresentSet)
             peoplePresentLocalizedSorted = (UILocalizedIndexedCollation.current().sortedArray(from: unsortedPeoplePresent, collationStringSelector: #selector(MCPerson.getFullName)) as! [MCPerson])
