@@ -137,3 +137,59 @@ class TableViewSectionModel: NSObject {
         }
     }
 }
+
+class ShadowTableViewSectionModel: TableViewSectionModel {
+    private var shadowSections: [TableViewSectionItemsModel] = [TableViewSectionItemsModel]()
+    
+    @objc var isShowing: Bool = false {
+        willSet {
+            if !isShowing {
+                if newValue {
+                    shadowSections.forEach { shadowSection in
+                        super.addSection(shadowSection)
+                    }
+                }
+            } else {
+                if !newValue {
+                    shadowSections.forEach { shadowSection in
+                        super.removeSection(shadowSection)
+                    }
+                }
+            }
+        }
+    }
+    
+    // MARK: TableViewSectionModel
+    
+    override func addSection(_ newSection: TableViewSectionItemsModel) {
+        if let index = sections.firstIndex(where: { section in
+            return section > newSection
+        }) {
+            shadowSections.insert(newSection, at: index)
+        } else {
+            shadowSections.append(newSection)
+        }
+        if isShowing {
+            super.addSection(newSection)
+        }
+    }
+    
+    override func contains(_ section: TableViewSectionItemsModel) -> Bool {
+        if isShowing {
+            return super.contains(section)
+        } else {
+            return shadowSections.contains { $0 == section }
+        }
+    }
+    
+    override func removeSection(_ poorSucker: TableViewSectionItemsModel) {
+        if let index = sections.firstIndex(of: poorSucker) {
+            shadowSections.remove(at: index)
+        }
+        if isShowing {
+            super.removeSection(poorSucker)
+        }
+    }
+    
+    // MARK: NSObject
+}

@@ -56,11 +56,7 @@ static void * sectionsContext = &sectionsContext;
 }
 
 - (IBAction)mainCancelButtonPressed:(id)sender {
-    if (_model.solution == nil || _model.solution.count == 0) {
-        [self.navigationController.presentingViewController dismissViewControllerAnimated:YES completion:nil];
-    } else {
-        [self.navigationController.presentingViewController dismissViewControllerAnimated:YES completion:nil];
-    }
+    [self.navigationController.presentingViewController dismissViewControllerAnimated:YES completion:nil];
 }
 
 #pragma mark - Public in this class
@@ -102,7 +98,7 @@ static void * sectionsContext = &sectionsContext;
 }
 
 - (void)setEmptyMessageWithDuration:(NSTimeInterval)duration {
-    if (_model.solution.count != 0) {
+    if (_model.sections.count != 0) {
         if (_emptyMessage.bigMessage.alpha > 0.0) {
             [UIView animateWithDuration:duration animations:^{
                 self.emptyMessage.bigMessage.alpha = 0.0;
@@ -168,6 +164,9 @@ static void * sectionsContext = &sectionsContext;
         NSString *sectionTitle = [self.model sectionTitleForSection:MCSolutionModelSectionTitleWhoOwesWho];
         SolutionSectionItemsModel *solutionSection = [[SolutionSectionItemsModel alloc] initWithTitle:sectionTitle items:results];
         [self.model addSection:solutionSection];
+        if (solutionSection.items.count > 0) {
+            self.model.isShowing = YES;
+        }
         [[[self emptyMessage] activityIndicator] stopAnimating];
         
         [self setEmptyMessageWithDuration:0.0];
@@ -187,7 +186,7 @@ static void * sectionsContext = &sectionsContext;
 - (MCWhoPaidHowMuchTableViewCell_iPhone *)whoPaidHowMuchCellForIndexPath:(NSIndexPath *)indexPath inTableView:(UITableView *)tableView {
     MCWhoPaidHowMuchTableViewCell_iPhone *cell = [tableView dequeueReusableCellWithIdentifier:@"MCWhoPaidHowMuchTableViewCell_iPhone"];
     
-    MCPerson *person = [_model.peoplePresentLocalizedSorted objectAtIndex:[indexPath row]];
+    MCPerson *person = [_model.sections[indexPath.section].items objectAtIndex:[indexPath row]];
     [[cell whoPaidHowMuchLabel] setText:[person getFullName]];
     NSNumber *sumSpentByPerson = @(-[[_model.event amountShouldHavePaidBy:person] doubleValue]);
     CurrencyFormatter *cf = [[CurrencyFormatter alloc] initWithCurrencyCode:_model.event.mainCurrency.code];
@@ -196,10 +195,10 @@ static void * sectionsContext = &sectionsContext;
 }
 
 - (UITableViewCell *)totalsCellForIndexPath:(NSIndexPath *)indexPath inTableView:(UITableView *)tableView {
-    if (indexPath.row < _model.peoplePresentLocalizedSorted.count) {
+    if (indexPath.row < _model.sections[indexPath.section].items.count) {
         MCWhoPaidHowMuchTableViewCell_iPhone *cell = [tableView dequeueReusableCellWithIdentifier:@"MCWhoPaidHowMuchTableViewCell_iPhone"];
         
-        MCPerson *person = [_model.peoplePresentLocalizedSorted objectAtIndex:[indexPath row]];
+        MCPerson *person = [_model.sections[indexPath.section].items objectAtIndex:[indexPath row]];
         [[cell whoPaidHowMuchLabel] setText:[person getFullName]];
         
         CurrencyFormatter *cf = [[CurrencyFormatter alloc] initWithCurrencyCode:_model.event.mainCurrency.code];
@@ -361,6 +360,7 @@ static void * sectionsContext = &sectionsContext;
     // Create KVO
     NSKeyValueObservingOptions options = NSKeyValueObservingOptionInitial | NSKeyValueObservingOptionNew | NSKeyValueObservingOptionPrior;
     [self.model addObserver:self forKeyPath:@"sections" options:options context:sectionsContext];
+    options = NSKeyValueObservingOptionInitial | NSKeyValueObservingOptionNew;
 }
 
 - (void)viewWillDisappear:(BOOL)animated {
@@ -405,6 +405,7 @@ static void * sectionsContext = &sectionsContext;
             default:
                 break;
         }
+        [self setEmptyMessageWithDuration:0.27];
         [self.tableView endUpdates];
     }
 }

@@ -8,7 +8,7 @@
 
 import UIKit
 
-@objc(MCSolutionModel) final class SolutionModel: TableViewSectionModel {
+@objc(MCSolutionModel) final class SolutionModel: ShadowTableViewSectionModel {
     @objc(MCSolutionModelSectionTitle) enum SectionTitle: UInt {
         case whoOwesWho = 0
         case totalOwes = 1
@@ -17,8 +17,6 @@ import UIKit
     
     @objc private(set) var event: MCSharedBill!
     private(set) var currencyFormatter: CurrencyFormatter!
-    @objc dynamic private(set) var peoplePresentLocalizedSorted: [MCPerson]?
-    @objc dynamic var solution: [SolutionReturnPaymentItem]?
     
     @objc(sectionTitleForSection:) func sectionTitle(for section: SectionTitle) -> String {
         switch section {
@@ -34,15 +32,14 @@ import UIKit
     @objc(prepareForUseWith:) func prepareForUse(with event: MCSharedBill) {
         self.event = event
         currencyFormatter = CurrencyFormatter(currencyCode: event.mainCurrency!.code!)
+        
         if let peoplePresentSet = self.event.peoplePresent {
             let unsortedPeoplePresent: [MCPerson] = [MCPerson](peoplePresentSet)
-            peoplePresentLocalizedSorted = (UILocalizedIndexedCollation.current().sortedArray(from: unsortedPeoplePresent, collationStringSelector: #selector(MCPerson.getFullName)) as! [MCPerson])
+            let peoplePresentLocalizedSorted = (UILocalizedIndexedCollation.current().sortedArray(from: unsortedPeoplePresent, collationStringSelector: #selector(MCPerson.getFullName)) as! [MCPerson])
             let totalUsedModel = TotalUsedSectionItemsModel(title: sectionTitle(for: .totalOwes), items: peoplePresentLocalizedSorted)
             let totalSpentModel = TotalSpentSectionItemsModel(title: sectionTitle(for: .totalPaid), items: peoplePresentLocalizedSorted)
             self.addSection(totalUsedModel)
             self.addSection(totalSpentModel)
-        } else {
-            peoplePresentLocalizedSorted = [MCPerson]()
         }
     }
 }

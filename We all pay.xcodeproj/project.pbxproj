@@ -105,6 +105,7 @@
 		38696B6823DCD24E00E941EA /* Screenshots.swift in Sources */ = {isa = PBXBuildFile; fileRef = 38696B6723DCD24E00E941EA /* Screenshots.swift */; };
 		38696B7223DCD2B200E941EA /* SnapshotHelper.swift in Sources */ = {isa = PBXBuildFile; fileRef = 38696B7123DCD2B200E941EA /* SnapshotHelper.swift */; };
 		386DDA6723ED9DBF0000B3BF /* RemoteConfigEngine.swift in Sources */ = {isa = PBXBuildFile; fileRef = 386DDA6623ED9DBF0000B3BF /* RemoteConfigEngine.swift */; };
+		386E05C92767AE7B005FDD89 /* NSManagedObjectContextExtension.swift in Sources */ = {isa = PBXBuildFile; fileRef = 386E05C82767AE7B005FDD89 /* NSManagedObjectContextExtension.swift */; };
 		386EB43323C723BE00FB20B9 /* AdEngine.swift in Sources */ = {isa = PBXBuildFile; fileRef = 386EB43223C723BE00FB20B9 /* AdEngine.swift */; };
 		386FC32518E5855400428294 /* MCSharedBillMainViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 386FC32418E5855400428294 /* MCSharedBillMainViewController.m */; };
 		3870C22A1D34FDF80030035A /* We all pay app keywords.plist in Resources */ = {isa = PBXBuildFile; fileRef = 3870C22C1D34FDF80030035A /* We all pay app keywords.plist */; };
@@ -469,6 +470,7 @@
 		38696B6923DCD24E00E941EA /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		38696B7123DCD2B200E941EA /* SnapshotHelper.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = SnapshotHelper.swift; path = fastlane/SnapshotHelper.swift; sourceTree = SOURCE_ROOT; };
 		386DDA6623ED9DBF0000B3BF /* RemoteConfigEngine.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RemoteConfigEngine.swift; sourceTree = "<group>"; };
+		386E05C82767AE7B005FDD89 /* NSManagedObjectContextExtension.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NSManagedObjectContextExtension.swift; sourceTree = "<group>"; };
 		386EB43223C723BE00FB20B9 /* AdEngine.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AdEngine.swift; sourceTree = "<group>"; };
 		386FC32318E5855400428294 /* MCSharedBillMainViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = MCSharedBillMainViewController.h; path = ViewControllers/MCSharedBillMainViewController.h; sourceTree = "<group>"; };
 		386FC32418E5855400428294 /* MCSharedBillMainViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = MCSharedBillMainViewController.m; path = ViewControllers/MCSharedBillMainViewController.m; sourceTree = "<group>"; };
@@ -1461,6 +1463,7 @@
 				38FE5A072346957100BBA722 /* SideMenuTransitioner.swift */,
 				38D96ED723E31BF200C03170 /* MCBitwiseStuff.h */,
 				38D96ED523E31BE000C03170 /* MCBitwiseStuff.m */,
+				386E05C82767AE7B005FDD89 /* NSManagedObjectContextExtension.swift */,
 			);
 			path = Miscellaneous;
 			sourceTree = "<group>";
@@ -2168,6 +2171,7 @@
 				385295D11C105C580081894D /* CategoryPictureStoreController.swift in Sources */,
 				386FC32518E5855400428294 /* MCSharedBillMainViewController.m in Sources */,
 				38977E611B2A367E008484A4 /* MCPaymentTableViewCell.swift in Sources */,
+				386E05C92767AE7B005FDD89 /* NSManagedObjectContextExtension.swift in Sources */,
 				38687808237217B3003D40A9 /* TextInputValidator.swift in Sources */,
 				389DE8F1197FB2B900169645 /* MCPerson.m in Sources */,
 				38DB85DA17E45DEA006237CF /* MCPerson+addons.m in Sources */,
