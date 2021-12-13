@@ -8,7 +8,7 @@
 
 import UIKit
 
-@objc(MCSolutionModel) final class SolutionModel: NSObject {
+@objc(MCSolutionModel) final class SolutionModel: TableViewSectionModel {
     @objc(MCSolutionModelSectionTitle) enum SectionTitle: UInt {
         case whoOwesWho = 0
         case totalOwes = 1
@@ -35,6 +35,10 @@ import UIKit
         if let peoplePresentSet = self.event.peoplePresent {
             let unsortedPeoplePresent: [MCPerson] = [MCPerson](peoplePresentSet)
             peoplePresentLocalizedSorted = (UILocalizedIndexedCollation.current().sortedArray(from: unsortedPeoplePresent, collationStringSelector: #selector(MCPerson.getFullName)) as! [MCPerson])
+            let totalUsedModel = TotalUsedSectionItemsModel(title: sectionTitle(for: .totalOwes), items: peoplePresentLocalizedSorted)
+            let totalSpentModel = TotalSpentSectionItemsModel(title: sectionTitle(for: .totalPaid), items: peoplePresentLocalizedSorted)
+            self.addSection(totalUsedModel)
+            self.addSection(totalSpentModel)
         } else {
             peoplePresentLocalizedSorted = [MCPerson]()
         }

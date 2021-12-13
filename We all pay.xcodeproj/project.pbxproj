@@ -12,6 +12,7 @@
 		380046BE26CA9802003586F2 /* UIColor+ColorSpawn.m in Sources */ = {isa = PBXBuildFile; fileRef = 380046BD26CA9802003586F2 /* UIColor+ColorSpawn.m */; };
 		380328002698443300744710 /* NotificationsInfoModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 380327FF2698443300744710 /* NotificationsInfoModel.swift */; };
 		380700A51A1B616000C7FB37 /* MCPaymentUpdateTo4.m in Sources */ = {isa = PBXBuildFile; fileRef = 380700A41A1B616000C7FB37 /* MCPaymentUpdateTo4.m */; };
+		3809A459276377110083D3A8 /* TableViewSectionModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3809A458276377110083D3A8 /* TableViewSectionModel.swift */; };
 		380A76AB26D62EB3000FEABB /* Localizable.stringsdict in Resources */ = {isa = PBXBuildFile; fileRef = 380A76AD26D62EB3000FEABB /* Localizable.stringsdict */; };
 		380C48161BE1330E00C82B0F /* CurrencyFormatter.swift in Sources */ = {isa = PBXBuildFile; fileRef = 380C48151BE1330E00C82B0F /* CurrencyFormatter.swift */; };
 		380FB70D26D6B86600B46038 /* CoreGraphics.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 380FB70C26D6B86600B46038 /* CoreGraphics.framework */; };
@@ -370,6 +371,7 @@
 		380700AA1A1B751E00C7FB37 /* We all pay database version 4.xcappdata */ = {isa = PBXFileReference; lastKnownFileType = wrapper; path = "We all pay database version 4.xcappdata"; sourceTree = "<group>"; };
 		380700AF1A1B76B200C7FB37 /* We all pay database version 2.xcappdata */ = {isa = PBXFileReference; lastKnownFileType = wrapper; path = "We all pay database version 2.xcappdata"; sourceTree = "<group>"; };
 		380700B41A1B785C00C7FB37 /* We all pay database dutch version 4.xcappdata */ = {isa = PBXFileReference; lastKnownFileType = wrapper; path = "We all pay database dutch version 4.xcappdata"; sourceTree = "<group>"; };
+		3809A458276377110083D3A8 /* TableViewSectionModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TableViewSectionModel.swift; sourceTree = "<group>"; };
 		380A76AC26D62EB3000FEABB /* en */ = {isa = PBXFileReference; lastKnownFileType = text.plist.stringsdict; name = en; path = en.lproj/Localizable.stringsdict; sourceTree = "<group>"; };
 		380A76AE26D63585000FEABB /* nl */ = {isa = PBXFileReference; lastKnownFileType = text.plist.stringsdict; name = nl; path = nl.lproj/Localizable.stringsdict; sourceTree = "<group>"; };
 		380C48151BE1330E00C82B0F /* CurrencyFormatter.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = CurrencyFormatter.swift; sourceTree = "<group>"; };
@@ -1208,6 +1210,7 @@
 				38D96ED323E30F5E00C03170 /* MCAdBannerTableViewCell.swift */,
 				38490D2C1D7052E700A297BA /* SolutionViewController.swift */,
 				381C2C39275A095D00CD82D2 /* SolutionModel.swift */,
+				3809A458276377110083D3A8 /* TableViewSectionModel.swift */,
 				383D5D831C0708F800BE9F94 /* SolutionReturnPaymentItem.swift */,
 			);
 			name = SolutionViewController;
@@ -2244,6 +2247,7 @@
 				384EC9121BC3008300A80799 /* SelectEmailAddressTableViewController_iPad.swift in Sources */,
 				38B88E2E1D81FF6E0069A44D /* MailComposeViewController.swift in Sources */,
 				38977E5F1B2A32EF008484A4 /* MCPersonTableViewCell.swift in Sources */,
+				3809A459276377110083D3A8 /* TableViewSectionModel.swift in Sources */,
 				385295CF1C10583E0081894D /* CategoryPictureObject.swift in Sources */,
 				38977E5D1B2A31A2008484A4 /* MCSolutionOverViewTableViewCell_iPhone.swift in Sources */,
 				38D6A3E81C73E04300968BB2 /* UIViewControllerRateMeControllerExtension.swift in Sources */,

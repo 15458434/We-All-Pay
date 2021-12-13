@@ -27,9 +27,7 @@ typedef NS_OPTIONS(NSUInteger, MCReturnPaymentViewControllerState) {
     MCReturnPaymentViewControllerStateShowAdBanner = 1 << 1
 };
 
-static void * peoplePresentContext = &peoplePresentContext;
-static void * paymentsContext = &paymentsContext;
-static void * solutionsContext = &solutionsContext;
+static void * sectionsContext = &sectionsContext;
 
 @interface MCReturnPaymentViewController () <MCAdBannerEngineDelegate>
 
@@ -167,15 +165,13 @@ static void * solutionsContext = &solutionsContext;
         
         // Update tableView.
         weakSelf.uiState = enableBits(weakSelf.uiState, MCReturnPaymentViewControllerStateXRatesPresent);
-        self.model.solution = results;
+        NSString *sectionTitle = [self.model sectionTitleForSection:MCSolutionModelSectionTitleWhoOwesWho];
+        SolutionSectionItemsModel *solutionSection = [[SolutionSectionItemsModel alloc] initWithTitle:sectionTitle items:results];
+        [self.model addSection:solutionSection];
         [[[self emptyMessage] activityIndicator] stopAnimating];
         
         [self setEmptyMessageWithDuration:0.0];
         
-//        [[self tableView] beginUpdates];
-//        NSIndexSet *indexes = [[NSIndexSet alloc] initWithIndexesInRange:NSMakeRange(0, 3)];
-//        [[self tableView] insertSections:indexes withRowAnimation:UITableViewRowAnimationTop];
-//        [[self tableView] endUpdates];
         completion(YES);
     }];
 }
@@ -242,30 +238,15 @@ static void * solutionsContext = &solutionsContext;
 #pragma mark - MCAdBannerEngineDelegate
 
 - (void)adEngine:(MCAdBannerEngine *)adEngine putOnScreenBannerView:(GADBannerView *)bannerView {
-    UITableView *tableView = self.tableView;
-    if (containsBits(self.uiState, MCReturnPaymentViewControllerStateShowAdBanner)) {
-        [tableView beginUpdates];
-        [tableView reloadSections:self.adBannerSectionIndexSet withRowAnimation:UITableViewRowAnimationAutomatic];
-        [tableView endUpdates];
-    } else {
-        self.uiState = enableBits(self.uiState, MCReturnPaymentViewControllerStateShowAdBanner);
-        [tableView beginUpdates];
-        [tableView insertSections:self.adBannerSectionIndexSet withRowAnimation:UITableViewRowAnimationAutomatic];
-        [tableView endUpdates];
+    AdSectionItemsModel *section = [[AdSectionItemsModel alloc] init];
+    if (![_model containsSection:section]) {
+        [_model addSection:section];
     }
 }
 
 - (void)adEngine:(MCAdBannerEngine *)adEngine putOffScreenBannerView:(GADBannerView *)bannerView {
-    if (!containsBits(self.uiState, MCReturnPaymentViewControllerStateShowAdBanner)) {
-        // BannerView is not on screen nothing to do.
-        return;
-    }
-    
-    self.uiState = disableBits(self.uiState, MCReturnPaymentViewControllerStateShowAdBanner);
-    UITableView *tableView = self.tableView;
-    [tableView beginUpdates];
-    [tableView deleteSections:self.adBannerSectionIndexSet withRowAnimation:UITableViewRowAnimationFade];
-    [tableView endUpdates];
+    AdSectionItemsModel *section = [[AdSectionItemsModel alloc] init];
+    [_model removeSection:section];
 }
 
 #pragma mark - UITableViewDelegate
@@ -290,164 +271,41 @@ static void * solutionsContext = &solutionsContext;
 #pragma mark - UITableViewDataSource
 
 - (NSString *)tableView:(UITableView *)tableView titleForHeaderInSection:(NSInteger)section {
-    if (self.uiState == MCReturnPaymentViewControllerStateNone) {
-        NSLog(@"No contents this shouldn't be called");
-        NSParameterAssert(NO);
-        return nil;
-    } else if (self.uiState == MCReturnPaymentViewControllerStateXRatesPresent) {
-        if (_model.solution.count > 0) {
-            return [_model sectionTitleForSection:section];
-        }
-    } else if (self.uiState == MCReturnPaymentViewControllerStateShowAdBanner) {
-        NSLog(@"Showing only a banner is useless this shouldn't happen");
-        NSParameterAssert(NO);
-        return nil;
-    } else if (self.uiState == (MCReturnPaymentViewControllerStateShowAdBanner | MCReturnPaymentViewControllerStateXRatesPresent)) {
-        if (_model.solution.count > 0) {
-            switch (section) {
-                case 0:
-                    return [_model sectionTitleForSection:section];
-                case 1:
-                    return nil;
-                case 2: {
-                    NSUInteger adaptedSectionNumber = section - 1;
-                    return [_model sectionTitleForSection:adaptedSectionNumber];
-                }
-                case 3: {
-                    NSUInteger adaptedSectionNumber = section - 1;
-                    return [_model sectionTitleForSection:adaptedSectionNumber];
-                }
-                default:
-                    return nil;
-            }
-        }
-    } else {
-        NSLog(@"This value shouldn't exist");
-        NSParameterAssert(NO);
-        return 0;
-    }
-
-    return nil;
+    MCTableViewSectionItemsModel *sectionModel = _model.sections[section];
+    return sectionModel.title;
 }
 
 - (NSInteger)numberOfSectionsInTableView:(UITableView *)tableView {
-    if (self.uiState == MCReturnPaymentViewControllerStateNone) {
-        return 0;
-    } else if (self.uiState == MCReturnPaymentViewControllerStateXRatesPresent) {
-        if (_model.solution == nil) {
-            return 0;
-        } else {
-            return 3;
-        }
-    } else if (self.uiState == MCReturnPaymentViewControllerStateShowAdBanner) {
-        return 0;
-    } else if (self.uiState == (MCReturnPaymentViewControllerStateShowAdBanner | MCReturnPaymentViewControllerStateXRatesPresent)) {
-        if (_model.solution == nil) {
-            return 0;
-        } else {
-            return 4;
-        }
-    } else {
-        NSLog(@"This value shouldn't exist");
-        NSParameterAssert(NO);
-        return 0;
-    }
+    NSInteger result = _model.sections.count;
+    return result;
 }
 
 - (NSInteger)tableView:(UITableView *)tableView numberOfRowsInSection:(NSInteger)section {
-    if (self.uiState == MCReturnPaymentViewControllerStateNone) {
-        NSLog(@"No tableview contents");
-        NSParameterAssert(NO);
-        return 0;
-    } else if (self.uiState == MCReturnPaymentViewControllerStateXRatesPresent) {
-        switch (section) {
-            case 0:
-                return _model.solution.count;
-            case 1:
-                if (_model.solution.count == 0) {
-                    return 0;
-                } else {
-                    return _model.peoplePresentLocalizedSorted.count;
-                }
-            case 2:
-                if (_model.solution.count == 0) {
-                    return 0;
-                } else {
-                    return _model.peoplePresentLocalizedSorted.count + 1;
-                }
-            default:
-                return 0;
-        }
-    } else if (self.uiState == MCReturnPaymentViewControllerStateShowAdBanner) {
-        NSLog(@"No tableview contents");
-        NSParameterAssert(NO);
-        return 0;
-    } else if (self.uiState == (MCReturnPaymentViewControllerStateShowAdBanner | MCReturnPaymentViewControllerStateXRatesPresent)) {
-        switch (section) {
-            case 0:
-                return _model.solution.count;
-            case 1:
-                return 1;
-            case 2:
-                if (_model.solution.count == 0) {
-                    return 0;
-                } else {
-                    return _model.peoplePresentLocalizedSorted.count;
-                }
-            case 3:
-                if (_model.solution.count == 0) {
-                    return 0;
-                } else {
-                    return _model.peoplePresentLocalizedSorted.count + 1;
-                }
-            default:
-                return 0;
-        }
-    } else {
-        NSLog(@"This value shouldn't exist");
-        NSParameterAssert(NO);
-        return 0;
-    }
+    MCTableViewSectionItemsModel *sectionModel = _model.sections[section];
+    NSInteger count = sectionModel.items.count;
+    return count;
 }
 
 - (UITableViewCell *)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath {
-    if (self.uiState == MCReturnPaymentViewControllerStateNone) {
-        NSLog(@"This value shouldn't exist");
-        NSParameterAssert(NO);
-    } else if (self.uiState == MCReturnPaymentViewControllerStateXRatesPresent) {
-        switch (indexPath.section) {
-            case 0:
-                return [self whoOwesWhoCellForIndexPath:indexPath inTableView:tableView];
-            case 1:
-                return [self whoPaidHowMuchCellForIndexPath:indexPath inTableView:tableView];
-            case 2:
-                return [self totalsCellForIndexPath:indexPath inTableView:tableView];
-            default:
-                NSParameterAssert(NO);
+    MCTableViewSectionItemsModel *sectionModel = _model.sections[indexPath.section];
+    switch (sectionModel.sortIndex) {
+        case MCTableViewSectionItemsModelKindSolution:
+            return [self whoOwesWhoCellForIndexPath:indexPath inTableView:tableView];
+            break;
+        case MCTableViewSectionItemsModelKindAd: {
+            MCAdBannerTableViewCell *cell = [tableView dequeueReusableCellWithIdentifier:@"MCAdBannerTableViewCell" forIndexPath:indexPath];
+            [cell updateBannerView:_worstSalesPitchEverView];
+            return cell;
         }
-    } else if (self.uiState == MCReturnPaymentViewControllerStateShowAdBanner) {
-        NSLog(@"This value shouldn't exist");
-        NSParameterAssert(NO);
-    } else if (self.uiState == (MCReturnPaymentViewControllerStateShowAdBanner | MCReturnPaymentViewControllerStateXRatesPresent)) {
-        switch (indexPath.section) {
-            case 0:
-                return [self whoOwesWhoCellForIndexPath:indexPath inTableView:tableView];
-            case 1:
-            {
-                MCAdBannerTableViewCell *cell = [tableView dequeueReusableCellWithIdentifier:@"MCAdBannerTableViewCell" forIndexPath:indexPath];
-                [cell updateBannerView:_worstSalesPitchEverView];
-                return cell;
-            }
-            case 2:
-                return [self whoPaidHowMuchCellForIndexPath:indexPath inTableView:tableView];
-            case 3:
-                return [self totalsCellForIndexPath:indexPath inTableView:tableView];
-            default:
-                NSParameterAssert(NO);
-        }
-    } else {
-        NSLog(@"This value shouldn't exist");
-        NSParameterAssert(NO);
+            break;
+        case MCTableViewSectionItemsModelKindTotalUsed:
+            return [self whoPaidHowMuchCellForIndexPath:indexPath inTableView:tableView];;
+            break;
+        case MCTableViewSectionItemsModelKindTotalSpent:
+            return [self totalsCellForIndexPath:indexPath inTableView:tableView];
+            break;
+        default:
+            break;
     }
     
     return nil;
@@ -492,18 +350,14 @@ static void * solutionsContext = &solutionsContext;
     
     // Create KVO
     NSKeyValueObservingOptions options = NSKeyValueObservingOptionInitial | NSKeyValueObservingOptionNew;
-    [self.model addObserver:self forKeyPath:@"peoplePresentLocalizedSorted" options:options context:peoplePresentContext];
-    [self.model.event addObserver:self forKeyPath:@"payments" options:options context:paymentsContext];
-    [self.model addObserver:self forKeyPath:@"solution" options:options context:solutionsContext];
+    [self.model addObserver:self forKeyPath:@"sections" options:options context:solutionsContext];
 }
 
 - (void)viewWillDisappear:(BOOL)animated {
     [super viewWillDisappear:animated];
     
     // Destroy KVO
-    [self.model removeObserver:self forKeyPath:@"peoplePresentLocalizedSorted" context:peoplePresentContext];
-    [self.model.event removeObserver:self forKeyPath:@"payments" context:paymentsContext];
-    [self.model removeObserver:self forKeyPath:@"solution" context:solutionsContext];
+    [self.model removeObserver:self forKeyPath:@"sections" context:solutionsContext];
 }
 
 #pragma mark - UIResponder
@@ -511,58 +365,40 @@ static void * solutionsContext = &solutionsContext;
 #pragma mark - NSObject
 
 - (void)observeValueForKeyPath:(NSString *)keyPath ofObject:(id)object change:(NSDictionary<NSKeyValueChangeKey,id> *)change context:(void *)context {
-    if (context == peoplePresentContext) {
-        NSNumber *changeKeyNumber = (NSNumber *)change[NSKeyValueChangeKindKey];
-        NSKeyValueChange keyValueChange = changeKeyNumber.unsignedIntegerValue;
-        switch (keyValueChange) {
-            case NSKeyValueChangeSetting: {
-                id new = change[NSKeyValueChangeNewKey];
-                if ([new isKindOfClass:[NSSet class]]) {
-                    [self setEmptyMessageWithDuration:0.0];
-                } else {
-                    [self setEmptyMessageWithDuration:0.0];
-                }
+    NSLog(@"Something changed in an object:");
+    if (context == solutionsContext) {
+        NSLog(@"Something changed in section array:");
+        NSLog(@"%@", change);
+        NSNumber *kindValue = change[NSKeyValueChangeKindKey];
+        NSKeyValueChange kind = kindValue.unsignedIntegerValue;
+        NSNumber *notificationIsPrior = (NSNumber *)change[NSKeyValueChangeNotificationIsPriorKey];
+        if (notificationIsPrior.boolValue) {
+            [self.tableView beginUpdates];
+            return;
+        }
+        switch (kind) {
+            case NSKeyValueChangeInsertion: {
+                NSIndexSet *indexes = change[NSKeyValueChangeIndexesKey];
+                [self.tableView insertSections:indexes withRowAnimation:UITableViewRowAnimationAutomatic];
+                break;
+            }
+            case NSKeyValueChangeReplacement: {
+                NSIndexSet *indexes = change[NSKeyValueChangeIndexesKey];
+                [self.tableView reloadSections:indexes withRowAnimation:UITableViewRowAnimationAutomatic];
             }
                 break;
+            case NSKeyValueChangeRemoval: {
+                NSIndexSet *indexes = change[NSKeyValueChangeIndexesKey];
+                [self.tableView deleteSections:indexes withRowAnimation:UITableViewRowAnimationAutomatic];
+                break;
+            }
+            case NSKeyValueChangeSetting: {
+                [self.tableView reloadData];
+            }
             default:
                 break;
         }
-    } else if (context == paymentsContext) {
-        NSNumber *changeKeyNumber = (NSNumber *)change[NSKeyValueChangeKindKey];
-        NSKeyValueChange keyValueChange = changeKeyNumber.unsignedIntegerValue;
-        switch (keyValueChange) {
-            case NSKeyValueChangeSetting: {
-                id new = change[NSKeyValueChangeNewKey];
-                if ([new isKindOfClass:[NSSet class]]) {
-                    [self setEmptyMessageWithDuration:0.0];
-                } else {
-                    [self setEmptyMessageWithDuration:0.0];
-                }
-            }
-                break;
-            default:
-                break;
-        }
-    } else if (context == solutionsContext) {
-        NSNumber *changeKeyNumber = (NSNumber *)change[NSKeyValueChangeKindKey];
-        NSKeyValueChange keyValueChange = changeKeyNumber.unsignedIntegerValue;
-        switch (keyValueChange) {
-            case NSKeyValueChangeSetting: {
-                id new = change[NSKeyValueChangeNewKey];
-                if ([new isKindOfClass:[NSArray class]]) {
-                    // populate tableview
-                    [self.tableView beginUpdates];
-                    NSIndexSet *indexes = [[NSIndexSet alloc] initWithIndexesInRange:NSMakeRange(0, 3)];
-                    [self.tableView insertSections:indexes withRowAnimation:UITableViewRowAnimationAutomatic];
-                    [self.tableView endUpdates];
-                } else {
-                    // clear tableview
-                }
-            }
-                break;
-            default:
-                break;
-        }
+        [self.tableView endUpdates];
     }
 }
 
