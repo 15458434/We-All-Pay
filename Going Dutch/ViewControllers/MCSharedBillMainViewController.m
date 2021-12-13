@@ -157,8 +157,12 @@
 - (void)loadView {
     [super loadView];
     
+    UISegmentedControl *topSegmentedControl = self.peopleOrPaymentsSelectionControl;
+    NSString *selectPeopleButton = NSLocalizedStringWithDefaultValue(@"event_view_segmentedControl_people_title", nil, NSBundle.mainBundle, @"People", @"A selection button at the top of the event view that allows for selection between the people and the payments on the event. This button is for selecting the people.");
+    [topSegmentedControl setTitle:selectPeopleButton forSegmentAtIndex:0];
+    NSString *selectPaymentsButton = NSLocalizedStringWithDefaultValue(@"event_view_segmentedControl_payments_title", nil, NSBundle.mainBundle, @"Payments", @"A selection button at the top of the event view that allows for selection between the people and the payments on the event. This button is for selecting the payments.");
+    [topSegmentedControl setTitle:selectPaymentsButton forSegmentAtIndex:1];
     if (@available(iOS 13.0, *)) {
-        UISegmentedControl *topSegmentedControl = self.peopleOrPaymentsSelectionControl;
         topSegmentedControl.backgroundColor = [UIColor colorWithWhite:1.0 alpha:0.05];
         [topSegmentedControl setTitleTextAttributes:@{NSForegroundColorAttributeName: UIColor.systemBackgroundColor} forState:UIControlStateNormal];
         [topSegmentedControl setTitleTextAttributes:@{NSForegroundColorAttributeName: UIColor.systemBackgroundColor} forState:UIControlStateSelected];

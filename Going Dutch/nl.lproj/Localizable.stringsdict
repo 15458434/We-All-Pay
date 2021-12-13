@@ -2,7 +2,37 @@
 <!DOCTYPE plist PUBLIC "-//Apple//DTD PLIST 1.0//EN" "http://www.apple.com/DTDs/PropertyList-1.0.dtd">
 <plist version="1.0">
 <dict>
-	<key>This is what we all paid:</key>
+	<key>payment_view_presence_list_title</key>
+	<dict>
+		<key>NSStringVariableWidthRuleType</key>
+		<dict>
+			<key>25</key>
+			<string>Aanwezigheid</string>
+			<key>50</key>
+			<string>Aanwezigen die deze betaling delen</string>
+		</dict>
+	</dict>
+	<key>people_view_button_contacts</key>
+	<dict>
+		<key>NSStringVariableWidthRuleType</key>
+		<dict>
+			<key>25</key>
+			<string>Contacten</string>
+			<key>50</key>
+			<string>Import uit contacten</string>
+		</dict>
+	</dict>
+	<key>solution_view_cell_label_total_spent</key>
+	<dict>
+		<key>NSStringVariableWidthRuleType</key>
+		<dict>
+			<key>20</key>
+			<string>Totaal:</string>
+			<key>25</key>
+			<string>Totaal uitgegeven:</string>
+		</dict>
+	</dict>
+	<key>solution_view_email_result_total_sum_paid_by</key>
 	<dict>
 		<key>NSStringLocalizedFormatKey</key>
 		<string>%#@v1_wie_heeft_betaald_count@</string>

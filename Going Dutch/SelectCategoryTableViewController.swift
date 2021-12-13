@@ -12,9 +12,8 @@ import UIKit
 
 import FirebaseAnalytics
 
-class SelectCategoryTableViewController: UITableViewController, MCDismissMeBlockProtocol {
+class SelectCategoryTableViewController: UITableViewController, UISearchBarDelegate, UISearchResultsUpdating, MCDismissMeBlockProtocol {
     @IBOutlet var model: PaymentModel!
-    // MARK: Properties
     
     var sections: [[CategoryPictureObject]]!
     var categories: [CategoryPictureObject]! {
@@ -31,53 +30,45 @@ class SelectCategoryTableViewController: UITableViewController, MCDismissMeBlock
     var searchController = UISearchController(searchResultsController: nil)
     var filteredCategories: [CategoryPictureObject]!
     
-    // MARK: Actions
-    
     @IBAction func mainCancelPressed(_ sender: AnyObject) {
         navigationController!.presentingViewController?.dismiss(animated: true, completion: nil)
     }
-    
-    // MARK: New in this class
     
     @objc(prepareForUseWithPayment:) func prepareForUse(with payment: MCPayment) {
         self.model.prepareForUse(with: payment)
     }
     
-    // MARK: Inherited From super
+    // MARK: MCDismissMeBlockProtocol
     
-    override func viewDidLoad() {
-        func prepareCategories() {
-            categories = CategoryPictureStoreController.shared.pictureObjects
-            filteredCategories = [CategoryPictureObject]()
-        }
-        
-        func prepareForSearchController() {
-            searchController.searchResultsUpdater = self
-            searchController.obscuresBackgroundDuringPresentation = false
-            searchController.hidesNavigationBarDuringPresentation = false
-            tableView.tableHeaderView = searchController.searchBar
-            searchController.searchBar.delegate = self
-            searchController.searchBar.searchBarStyle = .prominent
-            searchController.searchBar.scopeButtonTitles = []
-            definesPresentationContext = true
-            
-            self.extendedLayoutIncludesOpaqueBars = true
-            self.edgesForExtendedLayout = UIRectEdge.all
-        }
-        
-        super.viewDidLoad()
-        
-        prepareCategories()
-        prepareForSearchController()
+    var dismissMe: (()->())?
+    
+    // MARK: UISearchResultsUpdating
+    
+    func filteredContentForSearchText(_ searchText: String) {
+        filteredCategories = sortedCategories.filter({ (category) -> Bool in
+            return category.categoryDescription.lowercased().contains(searchText.lowercased())
+        })
+        tableView.reloadData()
     }
     
-    override func viewWillAppear(_ animated: Bool) {
-        super.viewWillAppear(animated)
-        
-        searchController.searchBar.sizeToFit()
+    func updateSearchResults(for searchController: UISearchController) {
+        let searchBar = searchController.searchBar
+        filteredContentForSearchText(searchBar.text!)
     }
     
-    // MARK: UI Table View Delegate
+    // MARK: UISearchBarDelegate
+    
+    func position(for bar: UIBarPositioning) -> UIBarPosition {
+        if (bar as! UISearchBar == searchController.searchBar) {
+            return UIBarPosition.top
+        } else {
+            return UIBarPosition.any
+        }
+    }
+    
+    // MARK: UITableViewController
+    
+    // MARK: UITableViewDelegate
     
     override func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
         let categoryObject: CategoryPictureObject
@@ -103,7 +94,7 @@ class SelectCategoryTableViewController: UITableViewController, MCDismissMeBlock
         }
     }
     
-    // MARK: UI Table View Data Source
+    // MARK: UITableViewDataSource
     
     override func numberOfSections(in tableView: UITableView) -> Int {
         return 1
@@ -139,31 +130,47 @@ class SelectCategoryTableViewController: UITableViewController, MCDismissMeBlock
         return cell
     }
     
-    // MARK: MC Dismiss Me Block Protocol
+    // MARK: UIViewController
     
-    var dismissMe: (()->())?
-}
-
-extension SelectCategoryTableViewController: UISearchResultsUpdating {
-    func filteredContentForSearchText(_ searchText: String) {
-        filteredCategories = sortedCategories.filter({ (category) -> Bool in
-            return category.categoryDescription.lowercased().contains(searchText.lowercased())
-        })
-        tableView.reloadData()
+    override func loadView() {
+        super.loadView()
+        
+        self.navigationItem.title = NSLocalizedString("select_category_view_title", value: "Select category", comment: "The title of the select category screen. It allows for selecting a categoy of the payment.")
     }
     
-    func updateSearchResults(for searchController: UISearchController) {
-        let searchBar = searchController.searchBar
-        filteredContentForSearchText(searchBar.text!)
-    }
-}
-
-extension SelectCategoryTableViewController: UISearchBarDelegate {
-    func position(for bar: UIBarPositioning) -> UIBarPosition {
-        if (bar as! UISearchBar == searchController.searchBar) {
-            return UIBarPosition.top
-        } else {
-            return UIBarPosition.any
+    override func viewDidLoad() {
+        func prepareCategories() {
+            categories = CategoryPictureStoreController.shared.pictureObjects
+            filteredCategories = [CategoryPictureObject]()
         }
+        
+        func prepareForSearchController() {
+            searchController.searchResultsUpdater = self
+            searchController.obscuresBackgroundDuringPresentation = false
+            searchController.hidesNavigationBarDuringPresentation = false
+            tableView.tableHeaderView = searchController.searchBar
+            searchController.searchBar.delegate = self
+            searchController.searchBar.searchBarStyle = .prominent
+            searchController.searchBar.scopeButtonTitles = []
+            definesPresentationContext = true
+            
+            self.extendedLayoutIncludesOpaqueBars = true
+            self.edgesForExtendedLayout = UIRectEdge.all
+        }
+        
+        super.viewDidLoad()
+        
+        prepareCategories()
+        prepareForSearchController()
     }
+    
+    override func viewWillAppear(_ animated: Bool) {
+        super.viewWillAppear(animated)
+        
+        searchController.searchBar.sizeToFit()
+    }
+    
+    // MARK: UIResponder
+    
+    // MARK: NSObject
 }

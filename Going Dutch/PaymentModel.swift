@@ -61,7 +61,7 @@ import CurrencyConverter
         updateDateModified()
     }
     
-    @objc(updateDescriptionOfPayment:) func update(descriptionOfPayment: String) {
+    @objc(updateDescriptionOfPayment:) func update(descriptionOfPayment: String?) {
         payment.descriptionOfPayment = descriptionOfPayment
         updateDateModified()
     }
@@ -97,6 +97,8 @@ import CurrencyConverter
     }
     
     func endUpdates() {
+        let mutablePayment = payment.onWhichBill!.mutableSetValue(forKey: "payments")
+        mutablePayment.add(payment!)
         payment.managedObjectContext!.undoManager!.endUndoGrouping()
     }
     

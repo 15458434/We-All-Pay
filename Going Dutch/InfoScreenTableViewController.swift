@@ -20,6 +20,7 @@ private let versionString = Bundle.main.infoDictionary!["CFBundleVersion"] as! S
 
 final class InfoScreenTableViewController: UITableViewController, MFMailComposeViewControllerDelegate {
     @objc var notificationEnvironmentModel: NotificationsInfoModel!
+    @IBOutlet var model: InfoModel!
     
     @IBOutlet var versionLabel: UILabel!
     
@@ -56,10 +57,10 @@ final class InfoScreenTableViewController: UITableViewController, MFMailComposeV
                 // Nothing to do.
             }
         } else {
-            let title = NSLocalizedString("Unable to send email", comment: "Unable to send email")
-            let message = NSLocalizedString("Please configure your mail in Settings", comment: "Please configure your mail in Settings")
+            let title = NSLocalizedString("info_view_alert_title_cannot_send_email", value: "Unable to send email", comment: "Title of an alert to tell the user he's unable to send email.")
+            let message = NSLocalizedString("info_view_alert_message_cannot_send_email", value: "Please configure your mail in Settings", comment: "Message of the cannot send email alert title with an action for the user to take.")
             let alertController = UIAlertController(title: title, message: message, preferredStyle: .alert)
-            let cancelButtonText = NSLocalizedString("Dismiss", comment: "Dismiss")
+            let cancelButtonText = model.dismissButtonTitle
             let cancelAction = UIAlertAction(title: cancelButtonText, style: .cancel, handler: nil)
             alertController.addAction(cancelAction)
             present(alertController, animated: true, completion: nil)
@@ -77,14 +78,15 @@ final class InfoScreenTableViewController: UITableViewController, MFMailComposeV
             let kindOfPurchaseString = notification.userInfo!["Kind of purchase"] as? String
             switch kindOfPurchaseString {
             case "new buy":
-                title = NSLocalizedString("Thank you for purchasing", comment: "Thank you for purchasing")
-                message = NSLocalizedString("\(productName) is now free of any ads.", comment: "\(productName) is now free of any ads.")
+                title = NSLocalizedString("info_view_alert_purchased_title", value: "Thank you for purchasing", comment: "Title of an alert to the user that thanks them for making the ad free in app purchase.")
+                message = NSLocalizedString("info_view_alert_purchased_message", value: "\(productName) is now free of any ads.", comment: "Messages of an alert to the user that thanks them for making the ad free in app purchase")
             case "restore purchase":
-                title = NSLocalizedString("Ad free version restored.", comment: "Ad free version restored.")
+                title = NSLocalizedString("info_view_alert_restore_purchase_title", value: "Ad free version restored", comment: "title of an alert to the user that says their ad free version is restored")
+                message = NSLocalizedString("info_view_alert_restore_purchase_message", value: "Welcome back. Your ad free experience has been restored for you", comment: "message of an alert to the user that says their ad free version is restored")
             default:
                 fatalError("Purchase info invalid")
             }
-            let dismissText = NSLocalizedString("Dismiss", comment: "Dismiss")
+            let dismissText = self.model.dismissButtonTitle
             var alertController: UIAlertController!
             alertController = UIAlertController(title: title, message: message, preferredStyle: .alert)
             let cancelAction = UIAlertAction(title: dismissText, style: .cancel, handler:nil)
@@ -103,8 +105,8 @@ final class InfoScreenTableViewController: UITableViewController, MFMailComposeV
     @objc func restorePreviousPurchasesFailed(_ notification: Notification) {
         if notification.userInfo!["status"] as? String == "Not restored" {
             let myPresenter = presentingViewController!
-            let title = NSLocalizedString("Nothing to restore", comment: "Nothing to restore")
-            let dismiss = NSLocalizedString("Dismiss", comment: "Dismiss")
+            let title = NSLocalizedString("info_view_alert_failed_to_restore", value: "Nothing to restore", comment: "Title of an alert that is shown when the restoration of in app purchases failed to restore")
+            let dismiss = model.dismissButtonTitle
             let alertController = UIAlertController(title: title, message: nil, preferredStyle: .alert)
             
             let cancelAction = UIAlertAction(title: dismiss, style: .cancel, handler:nil)
@@ -142,8 +144,11 @@ final class InfoScreenTableViewController: UITableViewController, MFMailComposeV
             cell.update(MCStoreInterface.defaultStoreInterface)
         case (0, 1):
             let cell = cell as! MCTwoLabelIscreenTableViewCell
-            cell.leftLabel.text = NSLocalizedString("Restore previous purchases", comment: "Restore previous purchases")
+            cell.leftLabel.text = NSLocalizedString("info_view_cell_restore_purchases", value: "Restore previous purchases", comment: "Text of a button in the info view that initiates restoring the in app purchases")
             cell.rightLabel.isHidden = true
+        case (1, 0):
+            let cell = cell as! NotificationsCountTableViewCell
+            cell.update(model: notificationEnvironmentModel)
         default:
             ()
         }
@@ -214,26 +219,24 @@ final class InfoScreenTableViewController: UITableViewController, MFMailComposeV
             return cell
         case (1, 0):
             let cell = tableView.dequeueReusableCell(withIdentifier: "NotificationsCountTableViewCell", for: indexPath) as! NotificationsCountTableViewCell
-            cell.update(model: notificationEnvironmentModel)
             return cell
         case (2, 0):
             let cell = tableView.dequeueReusableCell(withIdentifier: "MCTwoLabelIscreenTableViewCell", for: indexPath) as! MCTwoLabelIscreenTableViewCell
-            cell.leftLabel.text = NSLocalizedString("Rate me", comment: "Text of the Rate me button")
+            cell.leftLabel.text = NSLocalizedString("info_view_cell_rate_me", value: "Rate me", comment: "Text of a button in the info view that opens the rate me dialogue")
             cell.rightLabel.isHidden = true
             return cell
         case (2, 1):
             let cell = tableView.dequeueReusableCell(withIdentifier: "MCTwoLabelIscreenTableViewCell", for: indexPath) as! MCTwoLabelIscreenTableViewCell
-            cell.leftLabel.text = NSLocalizedString("My Apps", comment: "Text of the the button that takes you to my apps in the AppStore")
+            cell.leftLabel.text = NSLocalizedString("info_view_cell_my_apps", value: "My Apps", comment: "Text of a button in the info view that opens the page in the App Store with all of my apps.")
             cell.rightLabel.isHidden = true
             return cell
         case (3, 0):
             let cell = tableView.dequeueReusableCell(withIdentifier: "MCTwoLabelIscreenTableViewCell", for: indexPath) as! MCTwoLabelIscreenTableViewCell
-            cell.leftLabel.text = NSLocalizedString("Give feedback", comment: "Give feedback")
+            cell.leftLabel.text = NSLocalizedString("info_view_cell_feedback", value: "Give feedback", comment: "Text of a button in the info view that opens up a mail dialogue to send feedback to support")
             cell.rightLabel.isHidden = true
             return cell
         default:
-            assert(false, "This section: \(indexPath.section) and row: \(indexPath.row) are not valid")
-            return UITableViewCell()
+            fatalError("This section: \(indexPath.section) and row: \(indexPath.row) are not valid")
         }
     }
     
