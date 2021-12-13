@@ -1207,9 +1207,9 @@
 			children = (
 				382E7BDB17E5E57500A1040A /* MCReturnPaymentViewController.h */,
 				382E7BDC17E5E57500A1040A /* MCReturnPaymentViewController.m */,
+				38490D2C1D7052E700A297BA /* SolutionViewController.swift */,
 				38977E5A1B2A30A7008484A4 /* SolutionItemTableViewCell.swift */,
 				38D96ED323E30F5E00C03170 /* MCAdBannerTableViewCell.swift */,
-				38490D2C1D7052E700A297BA /* SolutionViewController.swift */,
 				381C2C39275A095D00CD82D2 /* SolutionModel.swift */,
 				3809A458276377110083D3A8 /* TableViewSectionModel.swift */,
 				383D5D831C0708F800BE9F94 /* SolutionReturnPaymentItem.swift */,
