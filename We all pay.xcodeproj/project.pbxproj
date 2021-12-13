@@ -137,7 +137,7 @@
 		38977E4F1B2A26D4008484A4 /* MCTwoLabelIscreenTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 38977E4E1B2A26D4008484A4 /* MCTwoLabelIscreenTableViewCell.swift */; };
 		38977E531B2A297E008484A4 /* MCWhoPaidHowMuchTableViewCell_iPhone.swift in Sources */ = {isa = PBXBuildFile; fileRef = 38977E521B2A297E008484A4 /* MCWhoPaidHowMuchTableViewCell_iPhone.swift */; };
 		38977E551B2A2AE3008484A4 /* MCSelectCurrencyTableViewCell_iPhone.swift in Sources */ = {isa = PBXBuildFile; fileRef = 38977E541B2A2AE3008484A4 /* MCSelectCurrencyTableViewCell_iPhone.swift */; };
-		38977E5B1B2A30A7008484A4 /* WhoOwesWhoTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 38977E5A1B2A30A7008484A4 /* WhoOwesWhoTableViewCell.swift */; };
+		38977E5B1B2A30A7008484A4 /* SolutionItemTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 38977E5A1B2A30A7008484A4 /* SolutionItemTableViewCell.swift */; };
 		38977E5D1B2A31A2008484A4 /* MCSolutionOverViewTableViewCell_iPhone.swift in Sources */ = {isa = PBXBuildFile; fileRef = 38977E5C1B2A31A2008484A4 /* MCSolutionOverViewTableViewCell_iPhone.swift */; };
 		38977E5F1B2A32EF008484A4 /* MCPersonTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 38977E5E1B2A32EF008484A4 /* MCPersonTableViewCell.swift */; };
 		38977E611B2A367E008484A4 /* MCPaymentTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 38977E601B2A367E008484A4 /* MCPaymentTableViewCell.swift */; };
@@ -516,7 +516,7 @@
 		38977E521B2A297E008484A4 /* MCWhoPaidHowMuchTableViewCell_iPhone.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = MCWhoPaidHowMuchTableViewCell_iPhone.swift; sourceTree = "<group>"; };
 		38977E541B2A2AE3008484A4 /* MCSelectCurrencyTableViewCell_iPhone.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = MCSelectCurrencyTableViewCell_iPhone.swift; sourceTree = "<group>"; };
 		38977E581B2A2F09008484A4 /* We-all-pay-Bridging-Header.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "We-all-pay-Bridging-Header.h"; sourceTree = "<group>"; };
-		38977E5A1B2A30A7008484A4 /* WhoOwesWhoTableViewCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = WhoOwesWhoTableViewCell.swift; sourceTree = "<group>"; };
+		38977E5A1B2A30A7008484A4 /* SolutionItemTableViewCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SolutionItemTableViewCell.swift; sourceTree = "<group>"; };
 		38977E5C1B2A31A2008484A4 /* MCSolutionOverViewTableViewCell_iPhone.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = MCSolutionOverViewTableViewCell_iPhone.swift; sourceTree = "<group>"; };
 		38977E5E1B2A32EF008484A4 /* MCPersonTableViewCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = MCPersonTableViewCell.swift; sourceTree = "<group>"; };
 		38977E601B2A367E008484A4 /* MCPaymentTableViewCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = MCPaymentTableViewCell.swift; sourceTree = "<group>"; };
@@ -1205,7 +1205,7 @@
 			children = (
 				382E7BDB17E5E57500A1040A /* MCReturnPaymentViewController.h */,
 				382E7BDC17E5E57500A1040A /* MCReturnPaymentViewController.m */,
-				38977E5A1B2A30A7008484A4 /* WhoOwesWhoTableViewCell.swift */,
+				38977E5A1B2A30A7008484A4 /* SolutionItemTableViewCell.swift */,
 				38D96ED323E30F5E00C03170 /* MCAdBannerTableViewCell.swift */,
 				38490D2C1D7052E700A297BA /* SolutionViewController.swift */,
 				381C2C39275A095D00CD82D2 /* SolutionModel.swift */,
@@ -2193,7 +2193,7 @@
 				38977E631B2A37BC008484A4 /* EventTableViewCell.swift in Sources */,
 				387494D819F05476001614CA /* WeAllPayStore1to4.xcmappingmodel in Sources */,
 				3863148D235C6D8C00748B9F /* ScreenshotPopulationEngine.swift in Sources */,
-				38977E5B1B2A30A7008484A4 /* WhoOwesWhoTableViewCell.swift in Sources */,
+				38977E5B1B2A30A7008484A4 /* SolutionItemTableViewCell.swift in Sources */,
 				38F44CCB2364993400215B1C /* MoneyTextInputValidator.swift in Sources */,
 				38D96ED623E31BE000C03170 /* MCBitwiseStuff.m in Sources */,
 				38E2CB401BC2A5A20092B5C8 /* SolutionOverViewTableViewCell_iPad.swift in Sources */,

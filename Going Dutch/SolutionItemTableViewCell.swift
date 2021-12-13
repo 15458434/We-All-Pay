@@ -1,5 +1,5 @@
 //
-//  WhoOwesWhoTableViewCell.swift
+//  SolutionItemTableViewCell.swift
 //  We all pay
 //
 //  Created by Mark Cornelisse on 11/06/15.
@@ -8,7 +8,7 @@
 
 import UIKit
 
-@objc(MCWhoOwesWhoTableViewCell) final class WhoOwesWhoTableViewCell: UITableViewCell {
+@objc(MCWhoOwesWhoTableViewCell) final class SolutionItemTableViewCell: UITableViewCell {
     private var item: SolutionReturnPaymentItem?
     
     @IBOutlet var whoOwesWhoLabel: UILabel!
