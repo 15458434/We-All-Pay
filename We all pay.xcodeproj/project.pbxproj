@@ -1247,6 +1247,16 @@
 			name = "In-App Purchase";
 			sourceTree = "<group>";
 		};
+		38B1201D2768F00400EB4969 /* People */ = {
+			isa = PBXGroup;
+			children = (
+				3892E3A217903EF00038894B /* MCEditTripViewController.h */,
+				3892E3A317903EF00038894B /* MCEditTripViewController.m */,
+				38977E5E1B2A32EF008484A4 /* MCPersonTableViewCell.swift */,
+			);
+			name = People;
+			sourceTree = "<group>";
+		};
 		38B4E82C23CDFC840034CA95 /* Engines */ = {
 			isa = PBXGroup;
 			children = (
@@ -1374,8 +1384,7 @@
 				386EB43123C7238400FB20B9 /* EventDetailMainViewController */,
 				388E90311D708BB3004CD257 /* SolutionViewController */,
 				38F44CC92364978400215B1C /* Payment */,
-				3892E3A217903EF00038894B /* MCEditTripViewController.h */,
-				3892E3A317903EF00038894B /* MCEditTripViewController.m */,
+				38B1201D2768F00400EB4969 /* People */,
 				38FBB4B7236C353700E30EE8 /* Person */,
 			);
 			name = iPhone;
