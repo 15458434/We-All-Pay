@@ -21,17 +21,9 @@
 
 #import "We_all_pay-Swift.h"
 
-typedef NS_OPTIONS(NSUInteger, MCReturnPaymentViewControllerState) {
-    MCReturnPaymentViewControllerStateNone = 0,
-    MCReturnPaymentViewControllerStateXRatesPresent = 1 << 0,
-    MCReturnPaymentViewControllerStateShowAdBanner = 1 << 1
-};
-
 static void * sectionsContext = &sectionsContext;
 
 @interface MCReturnPaymentViewController () <MCAdBannerEngineDelegate>
-
-@property (nonatomic) MCReturnPaymentViewControllerState uiState;
 
 @property (weak, nonatomic) IBOutlet UITableViewHeaderFooterView *headerView;
 @property (nonatomic, strong) MCTableEmptyMessage *emptyMessage;
@@ -119,7 +111,6 @@ static void * sectionsContext = &sectionsContext;
 
 - (void)giveSolutionWithCompletion:(void (^)(BOOL success))completion {
     [_emptyMessage.activityIndicator startAnimating];
-    _uiState = disableBits(_uiState, MCReturnPaymentViewControllerStateXRatesPresent);
     
     __weak typeof(self) weakSelf = self;
     [_model.event solveWithHandler:^(NSArray *results, NSError *error) {
@@ -160,7 +151,6 @@ static void * sectionsContext = &sectionsContext;
         }
         
         // Update tableView.
-        weakSelf.uiState = enableBits(weakSelf.uiState, MCReturnPaymentViewControllerStateXRatesPresent);
         NSString *sectionTitle = [self.model sectionTitleForSection:MCSolutionModelSectionTitleWhoOwesWho];
         SolutionSectionItemsModel *solutionSection = [[SolutionSectionItemsModel alloc] initWithTitle:sectionTitle items:results];
         [self.model addSection:solutionSection];
