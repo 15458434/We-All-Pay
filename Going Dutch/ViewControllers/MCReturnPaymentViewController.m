@@ -183,29 +183,6 @@ static void * sectionsContext = &sectionsContext;
     return [NSIndexSet indexSetWithIndex:1];
 }
 
-- (MCSolutionTotalUsedTableViewCell *)whoPaidHowMuchCellForIndexPath:(NSIndexPath *)indexPath inTableView:(UITableView *)tableView {
-    MCSolutionTotalUsedTableViewCell *cell = [tableView dequeueReusableCellWithIdentifier:@"MCWhoPaidHowMuchTableViewCell_iPhone"];
-    
-    MCPerson *person = [_model.sections[indexPath.section].items objectAtIndex:[indexPath row]];
-    cell.whoPaidHowMuchLabel.text = [person getFullName];
-    NSNumber *sumSpentByPerson = @(-[[_model.event amountShouldHavePaidBy:person] doubleValue]);
-    cell.moneyLabel.text = [_model.currencyFormatter stringForObjectValue:sumSpentByPerson];
-    return cell;
-}
-
-- (UITableViewCell *)totalsCellForIndexPath:(NSIndexPath *)indexPath inTableView:(UITableView *)tableView {
-    MCSolutionTotalSpentTableViewCell *cell = [tableView dequeueReusableCellWithIdentifier:@"MCSolutionTotalSpentTableViewCell"];
-    if (indexPath.row < _model.sections[indexPath.section].items.count) {
-        MCPerson *person = [_model.sections[indexPath.section].items objectAtIndex:[indexPath row]];
-        [cell prepareForUseWithPerson:person fromSolutionModel:_model];
-        return cell;
-    } else {
-        MCSolutionTotalSpentTableViewCell *cell = [tableView dequeueReusableCellWithIdentifier:@"MCSolutionTotalSpentTableViewCell"];
-        [cell prepareForUseWithModel:_model];
-        return cell;
-    }
-}
-
 - (void)startAdBanner {
     self.worstSalesPitchEverView = [[GADBannerView alloc] initWithAdSize:kGADAdSizeBanner];
     [self.adBannerEngine prepareAdBanner:self.worstSalesPitchEverView withAdUnitId:self.adBannerUnitId andViewController:self];
@@ -237,11 +214,19 @@ static void * sectionsContext = &sectionsContext;
         }
             break;
         case MCTableViewSectionItemsModelKindTotalUsed: {
-            
+            MCSolutionTotalUsedTableViewCell *solutionCell = (MCSolutionTotalUsedTableViewCell *)cell;
+            MCPerson *person = [_model.sections[indexPath.section].items objectAtIndex:[indexPath row]];
+            [solutionCell prepareForUseWithPerson:person fromSolutionModel:_model];
         }
             break;
         case MCTableViewSectionItemsModelKindTotalSpent: {
-            
+            MCSolutionTotalSpentTableViewCell *solutionCell = (MCSolutionTotalSpentTableViewCell *)cell;
+            if (indexPath.row < _model.sections[indexPath.section].items.count) {
+                MCPerson *person = [_model.sections[indexPath.section].items objectAtIndex:[indexPath row]];
+                [solutionCell prepareForUseWithPerson:person fromSolutionModel:_model];
+            } else {
+                [solutionCell prepareForUseWithModel:_model];
+            }
         }
             break;
         default:
@@ -281,6 +266,9 @@ static void * sectionsContext = &sectionsContext;
 - (NSInteger)tableView:(UITableView *)tableView numberOfRowsInSection:(NSInteger)section {
     MCTableViewSectionItemsModel *sectionModel = _model.sections[section];
     NSInteger count = sectionModel.items.count;
+    if (sectionModel.sortIndex == MCTableViewSectionItemsModelKindTotalSpent) {
+        count++;
+    }
     return count;
 }
 
@@ -298,11 +286,15 @@ static void * sectionsContext = &sectionsContext;
             return cell;
         }
             break;
-        case MCTableViewSectionItemsModelKindTotalUsed:
-            return [self whoPaidHowMuchCellForIndexPath:indexPath inTableView:tableView];;
+        case MCTableViewSectionItemsModelKindTotalUsed: {
+            MCSolutionTotalUsedTableViewCell *cell = [tableView dequeueReusableCellWithIdentifier:@"MCWhoPaidHowMuchTableViewCell_iPhone"];
+            return cell;
+        }
             break;
-        case MCTableViewSectionItemsModelKindTotalSpent:
-            return [self totalsCellForIndexPath:indexPath inTableView:tableView];
+        case MCTableViewSectionItemsModelKindTotalSpent: {
+            MCSolutionTotalSpentTableViewCell *cell = [tableView dequeueReusableCellWithIdentifier:@"MCSolutionTotalSpentTableViewCell"];
+            return cell;
+        }
             break;
         default:
             break;

@@ -25,7 +25,7 @@ import UIKit
     @objc(prepareForUseWithModel:) func prepareForUse(with model: SolutionModel) {
         self.model = model
         nameLabel.text = NSLocalizedString("solution_view_cell_label_total_spent", value: "Total spent:", comment: "In the solution view: a label before the total amount of money spent on the entire event.")
-        moneyLabel.text = model.currencyFormatter.string(for: model.event.totalSumOfMoneyOfThisSharedBill)
+        moneyLabel.text = model.currencyFormatter.string(for: model.event.totalSumOfMoneyOfThisSharedBill())
     }
     
     // MARK: UITableViewCell
