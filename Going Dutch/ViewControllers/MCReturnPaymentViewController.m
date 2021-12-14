@@ -183,8 +183,8 @@ static void * sectionsContext = &sectionsContext;
     return [NSIndexSet indexSetWithIndex:1];
 }
 
-- (MCWhoPaidHowMuchTableViewCell_iPhone *)whoPaidHowMuchCellForIndexPath:(NSIndexPath *)indexPath inTableView:(UITableView *)tableView {
-    MCWhoPaidHowMuchTableViewCell_iPhone *cell = [tableView dequeueReusableCellWithIdentifier:@"MCWhoPaidHowMuchTableViewCell_iPhone"];
+- (MCSolutionTotalUsedTableViewCell *)whoPaidHowMuchCellForIndexPath:(NSIndexPath *)indexPath inTableView:(UITableView *)tableView {
+    MCSolutionTotalUsedTableViewCell *cell = [tableView dequeueReusableCellWithIdentifier:@"MCWhoPaidHowMuchTableViewCell_iPhone"];
     
     MCPerson *person = [_model.sections[indexPath.section].items objectAtIndex:[indexPath row]];
     cell.whoPaidHowMuchLabel.text = [person getFullName];

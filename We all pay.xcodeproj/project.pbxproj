@@ -136,7 +136,7 @@
 		3897159217902E35005BE03E /* MCPaymentsTableViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 3897159117902E35005BE03E /* MCPaymentsTableViewController.m */; };
 		38977E4D1B2A2591008484A4 /* MCSelectCategoryTableViewCell_iPhone.swift in Sources */ = {isa = PBXBuildFile; fileRef = 38977E4C1B2A2591008484A4 /* MCSelectCategoryTableViewCell_iPhone.swift */; };
 		38977E4F1B2A26D4008484A4 /* MCTwoLabelIscreenTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 38977E4E1B2A26D4008484A4 /* MCTwoLabelIscreenTableViewCell.swift */; };
-		38977E531B2A297E008484A4 /* SolutionTotalSpentTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 38977E521B2A297E008484A4 /* SolutionTotalSpentTableViewCell.swift */; };
+		38977E531B2A297E008484A4 /* SolutionTotalUsedTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 38977E521B2A297E008484A4 /* SolutionTotalUsedTableViewCell.swift */; };
 		38977E551B2A2AE3008484A4 /* MCSelectCurrencyTableViewCell_iPhone.swift in Sources */ = {isa = PBXBuildFile; fileRef = 38977E541B2A2AE3008484A4 /* MCSelectCurrencyTableViewCell_iPhone.swift */; };
 		38977E5B1B2A30A7008484A4 /* SolutionItemTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 38977E5A1B2A30A7008484A4 /* SolutionItemTableViewCell.swift */; };
 		38977E5D1B2A31A2008484A4 /* MCSolutionOverViewTableViewCell_iPhone.swift in Sources */ = {isa = PBXBuildFile; fileRef = 38977E5C1B2A31A2008484A4 /* MCSolutionOverViewTableViewCell_iPhone.swift */; };
@@ -515,7 +515,7 @@
 		3897159117902E35005BE03E /* MCPaymentsTableViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = MCPaymentsTableViewController.m; path = ViewControllers/MCPaymentsTableViewController.m; sourceTree = "<group>"; };
 		38977E4C1B2A2591008484A4 /* MCSelectCategoryTableViewCell_iPhone.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = MCSelectCategoryTableViewCell_iPhone.swift; sourceTree = "<group>"; };
 		38977E4E1B2A26D4008484A4 /* MCTwoLabelIscreenTableViewCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = MCTwoLabelIscreenTableViewCell.swift; sourceTree = "<group>"; };
-		38977E521B2A297E008484A4 /* SolutionTotalSpentTableViewCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SolutionTotalSpentTableViewCell.swift; sourceTree = "<group>"; };
+		38977E521B2A297E008484A4 /* SolutionTotalUsedTableViewCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SolutionTotalUsedTableViewCell.swift; sourceTree = "<group>"; };
 		38977E541B2A2AE3008484A4 /* MCSelectCurrencyTableViewCell_iPhone.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = MCSelectCurrencyTableViewCell_iPhone.swift; sourceTree = "<group>"; };
 		38977E581B2A2F09008484A4 /* We-all-pay-Bridging-Header.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "We-all-pay-Bridging-Header.h"; sourceTree = "<group>"; };
 		38977E5A1B2A30A7008484A4 /* SolutionItemTableViewCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SolutionItemTableViewCell.swift; sourceTree = "<group>"; };
@@ -1210,7 +1210,7 @@
 				38490D2C1D7052E700A297BA /* SolutionViewController.swift */,
 				38977E5A1B2A30A7008484A4 /* SolutionItemTableViewCell.swift */,
 				38D96ED323E30F5E00C03170 /* MCAdBannerTableViewCell.swift */,
-				38977E521B2A297E008484A4 /* SolutionTotalSpentTableViewCell.swift */,
+				38977E521B2A297E008484A4 /* SolutionTotalUsedTableViewCell.swift */,
 				381C2C39275A095D00CD82D2 /* SolutionModel.swift */,
 				3809A458276377110083D3A8 /* TableViewSectionModel.swift */,
 				383D5D831C0708F800BE9F94 /* SolutionReturnPaymentItem.swift */,
@@ -2154,7 +2154,7 @@
 				38490D2D1D7052E700A297BA /* SolutionViewController.swift in Sources */,
 				38572AE3169D437B00969C62 /* main.m in Sources */,
 				389DE900197FB2BA00169645 /* MCSharedBill.m in Sources */,
-				38977E531B2A297E008484A4 /* SolutionTotalSpentTableViewCell.swift in Sources */,
+				38977E531B2A297E008484A4 /* SolutionTotalUsedTableViewCell.swift in Sources */,
 				38572AE7169D437B00969C62 /* MCAppDelegate.m in Sources */,
 				381C2C3A275A095D00CD82D2 /* SolutionModel.swift in Sources */,
 				38E36EEE1BBD7E820026ED7E /* MCTwoLabelsTitleView.swift in Sources */,
