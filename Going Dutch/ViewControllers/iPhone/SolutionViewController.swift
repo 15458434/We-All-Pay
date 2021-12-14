@@ -11,7 +11,7 @@ import MessageUI
 
 import FirebaseAnalytics
 
-final class SolutionViewController: MCReturnPaymentViewController, MFMailComposeViewControllerDelegate, ThisEvent, ShowMailViewProtocol {
+final class SolutionViewController: MCReturnPaymentViewController, MFMailComposeViewControllerDelegate, ThisEventReadOnly, ShowMailViewProtocol {
     
     // MARK: New in this class
     override func openMailView(_ sender: Any!) {
@@ -20,11 +20,8 @@ final class SolutionViewController: MCReturnPaymentViewController, MFMailCompose
     
     // MARK: ThisEvent
     var event: MCSharedBill! {
-        set {
-            tonightsBill = newValue
-        }
         get {
-            return tonightsBill
+            return model.event
         }
     }
     

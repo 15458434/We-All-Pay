@@ -19,7 +19,7 @@ enum MailComposerError: Error {
     case missingInformationIn(payment: MCPayment)
 }
 
-extension MailComposer where Self: ThisEvent {
+extension MailComposer where Self: ThisEventReadOnly {
     func mailAdresses() throws -> [String] {
         let allPeople = Array(event.peoplePresent ?? Set<MCPerson>())
         var listOfMailAddresses = [String]()
@@ -45,7 +45,7 @@ extension MailComposer where Self: ThisEvent {
         mainCurrencyFormatter.currencyCode = event.mainCurrency!.code
         let model = EventModel(andPrepareWith: event)
         
-        let solution = event.solveWhoHasToPayWhoFromThisBill() as! [ReturnPayment]
+        let solution = event.solveWhoHasToPayWhoFromThisBill() as! [SolutionReturnPaymentItem]
 //        let sortDescriptorOnDateCreated = NSSortDescriptor(key: "dateCreated", ascending: true)
         let allPayments = Array(event.payments ?? Set<MCPayment>())
         let allPeople = Array(event.peoplePresent ?? Set<MCPerson>())

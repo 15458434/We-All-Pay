@@ -10,6 +10,8 @@
 
 @class MCSharedBill;
 
+@class MCSolutionModel;
+
 @class MCTwoLabelsTitleView;
 @class MCTableEmptyMessage;
 
@@ -17,9 +19,10 @@
 
 @interface MCReturnPaymentViewController : UITableViewController
 
+@property (strong, nonatomic) IBOutlet MCSolutionModel *model;
+
 @property (nonatomic, strong) MCTwoLabelsTitleView *twoLabelTitleView;
 
-@property (nonatomic, strong) MCSharedBill *tonightsBill;
 @property (nonatomic, weak) MCSharedBillPageViewController *sendMailObject;
 
 - (IBAction)sendAsEmailButtonPressed:(id)sender;
