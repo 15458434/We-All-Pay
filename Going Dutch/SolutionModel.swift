@@ -16,7 +16,7 @@ import UIKit
     }
     
     @objc private(set) var event: MCSharedBill!
-    private(set) var currencyFormatter: CurrencyFormatter!
+    @objc private(set) var currencyFormatter: CurrencyFormatter!
     
     @objc(sectionTitleForSection:) func sectionTitle(for section: SectionTitle) -> String {
         switch section {

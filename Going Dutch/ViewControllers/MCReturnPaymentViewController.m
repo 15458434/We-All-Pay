@@ -187,10 +187,9 @@ static void * sectionsContext = &sectionsContext;
     MCWhoPaidHowMuchTableViewCell_iPhone *cell = [tableView dequeueReusableCellWithIdentifier:@"MCWhoPaidHowMuchTableViewCell_iPhone"];
     
     MCPerson *person = [_model.sections[indexPath.section].items objectAtIndex:[indexPath row]];
-    [[cell whoPaidHowMuchLabel] setText:[person getFullName]];
+    cell.whoPaidHowMuchLabel.text = [person getFullName];
     NSNumber *sumSpentByPerson = @(-[[_model.event amountShouldHavePaidBy:person] doubleValue]);
-    CurrencyFormatter *cf = [[CurrencyFormatter alloc] initWithCurrencyCode:_model.event.mainCurrency.code];
-    cell.moneyLabel.text = [cf stringForObjectValue:sumSpentByPerson];
+    cell.moneyLabel.text = [_model.currencyFormatter stringForObjectValue:sumSpentByPerson];
     return cell;
 }
 
@@ -199,18 +198,16 @@ static void * sectionsContext = &sectionsContext;
         MCWhoPaidHowMuchTableViewCell_iPhone *cell = [tableView dequeueReusableCellWithIdentifier:@"MCWhoPaidHowMuchTableViewCell_iPhone"];
         
         MCPerson *person = [_model.sections[indexPath.section].items objectAtIndex:[indexPath row]];
-        [[cell whoPaidHowMuchLabel] setText:[person getFullName]];
+        cell.whoPaidHowMuchLabel.text = [person getFullName];
         
-        CurrencyFormatter *cf = [[CurrencyFormatter alloc] initWithCurrencyCode:_model.event.mainCurrency.code];
-        cell.moneyLabel.text = [cf stringForObjectValue:person.totalSumPaid];
+        cell.moneyLabel.text = [_model.currencyFormatter stringForObjectValue:person.totalSumPaid];
         return cell;
     } else {
         MCSolutionOverViewTableViewCell_iPhone *cell = [tableView dequeueReusableCellWithIdentifier:@"MCSolutionOverViewTableViewCell_iPhone"];
         NSString *totalSpentString = NSLocalizedStringWithDefaultValue(@"solution_view_cell_label_total_spent", nil, NSBundle.mainBundle, @"Total spent:", @"In the solution view: a label before the total amount of money spent on the entire event.");
-        [[cell totalLabel] setText:totalSpentString];
+        cell.totalLabel.text = totalSpentString;
         
-        CurrencyFormatter *cf = [[CurrencyFormatter alloc] initWithCurrencyCode:_model.event.mainCurrency.code];
-        cell.moneyLabel.text = [cf stringForObjectValue:_model.event.totalSumOfMoneyOfThisSharedBill];
+        cell.moneyLabel.text = [_model.currencyFormatter stringForObjectValue:_model.event.totalSumOfMoneyOfThisSharedBill];
         return cell;
     }
 }
