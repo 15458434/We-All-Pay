@@ -1,5 +1,5 @@
 //
-//  MCWhoPaidHowMuchTableViewCell_iPhone.swift
+//  SolutionTotalSpentTableViewCell.swift
 //  We all pay
 //
 //  Created by Mark Cornelisse on 11/06/15.
@@ -8,7 +8,7 @@
 
 import UIKit
 
-final class MCWhoPaidHowMuchTableViewCell_iPhone: UITableViewCell {
+final class SolutionTotalSpentTableViewCell: UITableViewCell {
     @IBOutlet var whoPaidHowMuchLabel: UILabel!
     @IBOutlet var moneyLabel: UILabel!
 }
