@@ -11,8 +11,8 @@ import UIKit
 @objc(MCSolutionTotalUsedTableViewCell) final class SolutionTotalUsedTableViewCell: UITableViewCell {
     private weak var item: MCPerson?
     
-    @IBOutlet var whoPaidHowMuchLabel: UILabel!
-    @IBOutlet var moneyLabel: UILabel!
+    @IBOutlet weak var whoPaidHowMuchLabel: UILabel!
+    @IBOutlet weak var moneyLabel: UILabel!
     
     @objc(prepareForUseWithPerson:fromSolutionModel:) func prepareForUse(with person: MCPerson, from model: SolutionModel) {
         self.item = person

@@ -194,20 +194,14 @@ static void * sectionsContext = &sectionsContext;
 }
 
 - (UITableViewCell *)totalsCellForIndexPath:(NSIndexPath *)indexPath inTableView:(UITableView *)tableView {
+    MCSolutionTotalSpentTableViewCell *cell = [tableView dequeueReusableCellWithIdentifier:@"MCSolutionTotalSpentTableViewCell"];
     if (indexPath.row < _model.sections[indexPath.section].items.count) {
-        MCWhoPaidHowMuchTableViewCell_iPhone *cell = [tableView dequeueReusableCellWithIdentifier:@"MCWhoPaidHowMuchTableViewCell_iPhone"];
-        
         MCPerson *person = [_model.sections[indexPath.section].items objectAtIndex:[indexPath row]];
-        cell.whoPaidHowMuchLabel.text = [person getFullName];
-        
-        cell.moneyLabel.text = [_model.currencyFormatter stringForObjectValue:person.totalSumPaid];
+        [cell prepareForUseWithPerson:person fromSolutionModel:_model];
         return cell;
     } else {
-        MCSolutionOverViewTableViewCell_iPhone *cell = [tableView dequeueReusableCellWithIdentifier:@"MCSolutionOverViewTableViewCell_iPhone"];
-        NSString *totalSpentString = NSLocalizedStringWithDefaultValue(@"solution_view_cell_label_total_spent", nil, NSBundle.mainBundle, @"Total spent:", @"In the solution view: a label before the total amount of money spent on the entire event.");
-        cell.totalLabel.text = totalSpentString;
-        
-        cell.moneyLabel.text = [_model.currencyFormatter stringForObjectValue:_model.event.totalSumOfMoneyOfThisSharedBill];
+        MCSolutionTotalSpentTableViewCell *cell = [tableView dequeueReusableCellWithIdentifier:@"MCSolutionTotalSpentTableViewCell"];
+        [cell prepareForUseWithModel:_model];
         return cell;
     }
 }
