@@ -1206,13 +1206,8 @@
 				382E7BDB17E5E57500A1040A /* MCReturnPaymentViewController.h */,
 				382E7BDC17E5E57500A1040A /* MCReturnPaymentViewController.m */,
 				38490D2C1D7052E700A297BA /* SolutionViewController.swift */,
-				38977E5A1B2A30A7008484A4 /* SolutionItemTableViewCell.swift */,
-				38D96ED323E30F5E00C03170 /* MCAdBannerTableViewCell.swift */,
-				38977E521B2A297E008484A4 /* SolutionTotalUsedTableViewCell.swift */,
-				38E1CEA52768AC4600D78CDE /* SolutionTotalSpentTableViewCell.swift */,
-				381C2C39275A095D00CD82D2 /* SolutionModel.swift */,
-				3809A458276377110083D3A8 /* TableViewSectionModel.swift */,
-				383D5D831C0708F800BE9F94 /* SolutionReturnPaymentItem.swift */,
+				38E1CEA72768B48700D78CDE /* Views */,
+				38E1CEA82768B49700D78CDE /* Model */,
 			);
 			name = SolutionViewController;
 			sourceTree = "<group>";
@@ -1400,6 +1395,27 @@
 				38EF31441938BA07004912F0 /* UINavigationController+KeyboardDismiss.m */,
 			);
 			name = iPad;
+			sourceTree = "<group>";
+		};
+		38E1CEA72768B48700D78CDE /* Views */ = {
+			isa = PBXGroup;
+			children = (
+				38977E5A1B2A30A7008484A4 /* SolutionItemTableViewCell.swift */,
+				38D96ED323E30F5E00C03170 /* MCAdBannerTableViewCell.swift */,
+				38977E521B2A297E008484A4 /* SolutionTotalUsedTableViewCell.swift */,
+				38E1CEA52768AC4600D78CDE /* SolutionTotalSpentTableViewCell.swift */,
+			);
+			name = Views;
+			sourceTree = "<group>";
+		};
+		38E1CEA82768B49700D78CDE /* Model */ = {
+			isa = PBXGroup;
+			children = (
+				381C2C39275A095D00CD82D2 /* SolutionModel.swift */,
+				3809A458276377110083D3A8 /* TableViewSectionModel.swift */,
+				383D5D831C0708F800BE9F94 /* SolutionReturnPaymentItem.swift */,
+			);
+			name = Model;
 			sourceTree = "<group>";
 		};
 		38F2370526D012E300A22F9E /* AdBanner */ = {
