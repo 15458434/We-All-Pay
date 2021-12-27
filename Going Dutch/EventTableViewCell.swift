@@ -83,6 +83,7 @@ import UIKit
         peoplePresentObservation = nil
         paymentsObservation = nil
         dateCreatedObservation = nil
+        super.prepareForReuse()
     }
     
     // MARK: UIView

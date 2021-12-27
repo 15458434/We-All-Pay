@@ -23,6 +23,14 @@ final class MCPaymentTableViewCell: UITableViewCell {
     private var categoryIdObservation: NSKeyValueObservation!
     private var currencyObservation: NSKeyValueObservation!
     
+    private func destroyKVO() {
+        self.payingPersonObservation = nil
+        self.descriptionOfPaymentObservation = nil
+        self.moneyObservation = nil
+        self.categoryIdObservation = nil
+        self.currencyObservation = nil
+    }
+    
     @objc(updateWithPayment:) func update(with payment: MCPayment) {
         func createKVO() {
             self.payingPersonObservation = self.observe(\.payment.payingPerson, options: [.initial, .new], changeHandler: { mySelf, change in
@@ -73,13 +81,6 @@ final class MCPaymentTableViewCell: UITableViewCell {
                 mySelf.moneyPaidLabel.text = mySelf.currencyFormatter.string(for: mySelf.payment.money)
             })
         }
-        func destroyKVO() {
-            self.payingPersonObservation = nil
-            self.descriptionOfPaymentObservation = nil
-            self.moneyObservation = nil
-            self.categoryIdObservation = nil
-            self.currencyObservation = nil
-        }
         
         if self.payment != nil {
             destroyKVO()
@@ -90,6 +91,14 @@ final class MCPaymentTableViewCell: UITableViewCell {
     }
     
     // MARK: UITableViewCell
+    
+    override func prepareForReuse() {
+        destroyKVO()
+        self.payment = nil
+        self.currencyFormatter = nil
+        
+        super.prepareForReuse()
+    }
     
     // MARK: UIView
     

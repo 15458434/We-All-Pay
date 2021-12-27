@@ -24,8 +24,8 @@ import UIKit
     // MARK: UITableViewCell
     
     override func prepareForReuse() {
-        super.prepareForReuse()
         item = nil
+        super.prepareForReuse()
     }
     
     // MARK: UIView
