@@ -508,7 +508,7 @@
     NSNumber *leftToPay;
     NSNumber *leftToReceive;
     NSMutableArray *receivers = [[NSMutableArray alloc] init];
-    NSMutableArray<ReturnPayment *> *whoHasToPayWho = [[NSMutableArray alloc] init];
+    NSMutableArray<MCReturnPayment *> *whoHasToPayWho = [[NSMutableArray alloc] init];
     NSArray *sortDescriptorArray1 = @[[NSSortDescriptor sortDescriptorWithKey:@"dateCreated" ascending:YES]];
     NSArray<MCPerson *> *people = [[self peoplePresent] sortedArrayUsingDescriptors:sortDescriptorArray1];
     
@@ -542,13 +542,13 @@
             for (NSMutableArray *receiver in receivers) {
                 double ltp = [payer[3] doubleValue];
                 double ltr = [receiver[3] doubleValue];
-                ReturnPayment *returnPayment;
+                MCReturnPayment *returnPayment;
                 if (ltp >= ltr) {
-                    returnPayment = [[ReturnPayment alloc] initWithPayer:payer[0] money:@(ltr) receiver:receiver[0]];
+                    returnPayment = [[MCReturnPayment alloc] initWithPayer:payer[0] money:@(ltr) receiver:receiver[0]];
                     ltp -= ltr;
                     ltr = 0;
                 } else {
-                    returnPayment = [[ReturnPayment alloc] initWithPayer:payer[0] money:@(ltp) receiver:receiver[0]];
+                    returnPayment = [[MCReturnPayment alloc] initWithPayer:payer[0] money:@(ltp) receiver:receiver[0]];
                     ltr -= ltp;
                     ltp = 0;
                 }
@@ -575,7 +575,7 @@
 - (void)solveWithHandler:(void (^)(NSArray *results, NSError *error))solution {
     NSOperationQueue *currentQueue = [NSOperationQueue currentQueue];
     if ([self areAllExchangeRatesValid]) {
-        NSArray<ReturnPayment *> *results = [self originalSolveWhoHasToPayWhoFromThisBill];
+        NSArray<MCReturnPayment *> *results = [self originalSolveWhoHasToPayWhoFromThisBill];
         [currentQueue addOperationWithBlock:^{
             solution(results, nil);
         }];

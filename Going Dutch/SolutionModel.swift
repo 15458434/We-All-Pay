@@ -8,12 +8,15 @@
 
 import UIKit
 
-@objc(MCSolutionModel) final class SolutionModel: NSObject {
-    @objc(MCSolutionViewSectionTitle) enum SectionTitle: UInt {
+@objc(MCSolutionModel) final class SolutionModel: ShadowTableViewSectionModel {
+    @objc(MCSolutionModelSectionTitle) enum SectionTitle: UInt {
         case whoOwesWho = 0
         case totalOwes = 1
         case totalPaid = 2
     }
+    
+    @objc private(set) var event: MCSharedBill!
+    @objc private(set) var currencyFormatter: CurrencyFormatter!
     
     @objc(sectionTitleForSection:) func sectionTitle(for section: SectionTitle) -> String {
         switch section {
@@ -23,6 +26,20 @@ import UIKit
             return NSLocalizedString("solution_view_section_title_total_owes", value: "Total owes", comment: "Section title in the solution screen that shows the title of the section that shows who owes how much to the group")
         case .totalPaid:
             return NSLocalizedString("solution_view_section_title_total_paid", value: "Total paid", comment: "Section title in the solution screen that shows the title of the section that shows who paid how much on the entire event")
+        }
+    }
+    
+    @objc(prepareForUseWith:) func prepareForUse(with event: MCSharedBill) {
+        self.event = event
+        currencyFormatter = CurrencyFormatter(currencyCode: event.mainCurrency!.code!)
+        
+        if let peoplePresentSet = self.event.peoplePresent {
+            let unsortedPeoplePresent: [MCPerson] = [MCPerson](peoplePresentSet)
+            let peoplePresentLocalizedSorted = (UILocalizedIndexedCollation.current().sortedArray(from: unsortedPeoplePresent, collationStringSelector: #selector(MCPerson.getFullName)) as! [MCPerson])
+            let totalUsedModel = TotalUsedSectionItemsModel(title: sectionTitle(for: .totalOwes), items: peoplePresentLocalizedSorted)
+            let totalSpentModel = TotalSpentSectionItemsModel(title: sectionTitle(for: .totalPaid), items: peoplePresentLocalizedSorted)
+            self.addSection(totalUsedModel)
+            self.addSection(totalSpentModel)
         }
     }
 }

@@ -1,5 +1,5 @@
 //
-//  ReturnPayment.swift
+//  SolutionReturnPaymentItem.swift
 //  We all pay
 //
 //  Created by Mark Cornelisse on 26/11/15.
@@ -8,8 +8,7 @@
 
 import Foundation
 
-@objc final class ReturnPayment: NSObject {
-    // MARK: Properties
+@objc(MCReturnPayment) final class SolutionReturnPaymentItem: NSObject {
     @objc let payer: MCPerson?
     @objc let receiver: MCPerson?
     @objc let money: NSNumber?
@@ -21,7 +20,8 @@ import Foundation
         super.init()
     }
     
-    // MARK: Inherited from super.
+    // MARK: NSObject
+    
     override var description: String {
         return "\(String(describing: payer)) owes \(String(describing: money)) to \(String(describing: receiver))."
     }

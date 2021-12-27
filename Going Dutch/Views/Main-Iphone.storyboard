@@ -1,9 +1,9 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="19455" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" useSafeAreas="YES" colorMatched="YES" initialViewController="LJ2-SP-EGf">
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="19529" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" useSafeAreas="YES" colorMatched="YES" initialViewController="LJ2-SP-EGf">
     <device id="retina6_1" orientation="portrait" appearance="light"/>
     <dependencies>
         <deployment identifier="iOS"/>
-        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="19454"/>
+        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="19519"/>
         <capability name="Safe area layout guides" minToolsVersion="9.0"/>
         <capability name="System colors in document resources" minToolsVersion="11.0"/>
         <capability name="documents saved in the Xcode 8 format" minToolsVersion="8.0"/>
@@ -721,7 +721,7 @@
                             </constraints>
                         </view>
                         <prototypes>
-                            <tableViewCell contentMode="scaleToFill" restorationIdentifier="MCWhoOwesWhoTableViewCell_iPhone" selectionStyle="none" indentationWidth="10" reuseIdentifier="MCWhoOwesWhoTableViewCell_iPhone" id="kHO-oe-rlC" customClass="MCWhoOwesWhoTableViewCell_iPhone" customModule="We_all_pay" customModuleProvider="target">
+                            <tableViewCell contentMode="scaleToFill" restorationIdentifier="MCWhoOwesWhoTableViewCell_iPhone" selectionStyle="none" indentationWidth="10" reuseIdentifier="MCWhoOwesWhoTableViewCell_iPhone" id="kHO-oe-rlC" customClass="MCWhoOwesWhoTableViewCell">
                                 <rect key="frame" x="0.0" y="99.5" width="414" height="38.5"/>
                                 <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                                 <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" tableViewCell="kHO-oe-rlC" id="kda-p7-7ZX">
@@ -779,8 +779,52 @@
                                 <color key="backgroundColor" systemColor="tableCellGroupedBackgroundColor"/>
                                 <accessibility key="accessibilityConfiguration" identifier="MCAdBannerTableViewCell"/>
                             </tableViewCell>
-                            <tableViewCell contentMode="scaleToFill" restorationIdentifier="MCSolutionOverViewTableViewCell_iPhone" selectionStyle="none" hidesAccessoryWhenEditing="NO" indentationLevel="1" indentationWidth="0.0" reuseIdentifier="MCSolutionOverViewTableViewCell_iPhone" id="AeB-PX-SS3" customClass="MCSolutionOverViewTableViewCell_iPhone" customModule="We_all_pay" customModuleProvider="target">
+                            <tableViewCell contentMode="scaleToFill" restorationIdentifier="MCWhoPaidHowMuchTableViewCell_iPhone" selectionStyle="default" indentationWidth="10" reuseIdentifier="MCWhoPaidHowMuchTableViewCell_iPhone" id="rCL-6C-Xqz" customClass="SolutionTotalUsedTableViewCell" customModule="We_all_pay" customModuleProvider="target">
                                 <rect key="frame" x="0.0" y="181.5" width="414" height="38.5"/>
+                                <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                                <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" restorationIdentifier="contentView" tableViewCell="rCL-6C-Xqz" id="yHy-np-QOe">
+                                    <rect key="frame" x="0.0" y="0.0" width="414" height="38.5"/>
+                                    <autoresizingMask key="autoresizingMask"/>
+                                    <subviews>
+                                        <stackView opaque="NO" contentMode="scaleToFill" distribution="equalSpacing" alignment="firstBaseline" spacing="6" baselineRelativeArrangement="YES" translatesAutoresizingMaskIntoConstraints="NO" id="yyg-Cl-3vR">
+                                            <rect key="frame" x="20" y="11" width="374" height="17.5"/>
+                                            <subviews>
+                                                <label opaque="NO" clipsSubviews="YES" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" horizontalCompressionResistancePriority="250" restorationIdentifier="whoPaidLabel" text="whoPaidHowMuchLabel" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="1y3-o3-jkI">
+                                                    <rect key="frame" x="0.0" y="0.5" width="161.5" height="17"/>
+                                                    <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                                                    <fontDescription key="fontDescription" style="UICTFontTextStyleHeadline"/>
+                                                    <color key="textColor" red="0.0" green="0.0" blue="0.0" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                                                    <nil key="highlightedColor"/>
+                                                </label>
+                                                <label opaque="NO" clipsSubviews="YES" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" restorationIdentifier="moneyLabel" text="moneyLabel" textAlignment="right" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="7i7-OE-25w">
+                                                    <rect key="frame" x="292" y="0.5" width="82" height="17"/>
+                                                    <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                                                    <constraints>
+                                                        <constraint firstAttribute="width" priority="250" constant="40" id="Yvz-tk-rPQ"/>
+                                                        <constraint firstAttribute="width" relation="lessThanOrEqual" constant="100" id="n8h-YA-g4Q"/>
+                                                    </constraints>
+                                                    <fontDescription key="fontDescription" style="UICTFontTextStyleHeadline"/>
+                                                    <nil key="highlightedColor"/>
+                                                </label>
+                                            </subviews>
+                                        </stackView>
+                                    </subviews>
+                                    <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                                    <constraints>
+                                        <constraint firstItem="yyg-Cl-3vR" firstAttribute="top" secondItem="yHy-np-QOe" secondAttribute="top" constant="11" id="1Ch-OQ-1tX"/>
+                                        <constraint firstAttribute="trailing" secondItem="yyg-Cl-3vR" secondAttribute="trailing" constant="20" symbolic="YES" id="AsH-46-tuP"/>
+                                        <constraint firstItem="yyg-Cl-3vR" firstAttribute="leading" secondItem="yHy-np-QOe" secondAttribute="leading" constant="20" symbolic="YES" id="Rko-1J-eAW"/>
+                                        <constraint firstAttribute="bottom" secondItem="yyg-Cl-3vR" secondAttribute="bottom" constant="10" id="hz6-2b-c3l"/>
+                                    </constraints>
+                                </tableViewCellContentView>
+                                <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                                <connections>
+                                    <outlet property="moneyLabel" destination="7i7-OE-25w" id="9v8-Fa-LK6"/>
+                                    <outlet property="whoPaidHowMuchLabel" destination="1y3-o3-jkI" id="4of-Jq-51Z"/>
+                                </connections>
+                            </tableViewCell>
+                            <tableViewCell contentMode="scaleToFill" restorationIdentifier="MCSolutionTotalSpentTableViewCell" selectionStyle="none" hidesAccessoryWhenEditing="NO" indentationLevel="1" indentationWidth="0.0" reuseIdentifier="MCSolutionTotalSpentTableViewCell" id="AeB-PX-SS3" customClass="MCSolutionTotalSpentTableViewCell">
+                                <rect key="frame" x="0.0" y="220" width="414" height="38.5"/>
                                 <autoresizingMask key="autoresizingMask"/>
                                 <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" tableViewCell="AeB-PX-SS3" id="S1p-0e-b3A">
                                     <rect key="frame" x="0.0" y="0.0" width="414" height="38.5"/>
@@ -824,51 +868,7 @@
                                 <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                 <connections>
                                     <outlet property="moneyLabel" destination="Ogq-Im-0WR" id="Av6-WU-6ZI"/>
-                                    <outlet property="totalLabel" destination="MHu-fw-WGA" id="Cst-GA-AQR"/>
-                                </connections>
-                            </tableViewCell>
-                            <tableViewCell contentMode="scaleToFill" restorationIdentifier="MCWhoPaidHowMuchTableViewCell_iPhone" selectionStyle="default" indentationWidth="10" reuseIdentifier="MCWhoPaidHowMuchTableViewCell_iPhone" id="rCL-6C-Xqz" customClass="MCWhoPaidHowMuchTableViewCell_iPhone" customModule="We_all_pay" customModuleProvider="target">
-                                <rect key="frame" x="0.0" y="220" width="414" height="38.5"/>
-                                <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
-                                <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" restorationIdentifier="contentView" tableViewCell="rCL-6C-Xqz" id="yHy-np-QOe">
-                                    <rect key="frame" x="0.0" y="0.0" width="414" height="38.5"/>
-                                    <autoresizingMask key="autoresizingMask"/>
-                                    <subviews>
-                                        <stackView opaque="NO" contentMode="scaleToFill" distribution="equalSpacing" alignment="firstBaseline" spacing="6" baselineRelativeArrangement="YES" translatesAutoresizingMaskIntoConstraints="NO" id="yyg-Cl-3vR">
-                                            <rect key="frame" x="20" y="11" width="374" height="17.5"/>
-                                            <subviews>
-                                                <label opaque="NO" clipsSubviews="YES" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" horizontalCompressionResistancePriority="250" restorationIdentifier="whoPaidLabel" text="whoPaidHowMuchLabel" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="1y3-o3-jkI">
-                                                    <rect key="frame" x="0.0" y="0.5" width="161.5" height="17"/>
-                                                    <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
-                                                    <fontDescription key="fontDescription" style="UICTFontTextStyleHeadline"/>
-                                                    <color key="textColor" red="0.0" green="0.0" blue="0.0" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
-                                                    <nil key="highlightedColor"/>
-                                                </label>
-                                                <label opaque="NO" clipsSubviews="YES" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" restorationIdentifier="moneyLabel" text="moneyLabel" textAlignment="right" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="7i7-OE-25w">
-                                                    <rect key="frame" x="292" y="0.5" width="82" height="17"/>
-                                                    <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
-                                                    <constraints>
-                                                        <constraint firstAttribute="width" priority="250" constant="40" id="Yvz-tk-rPQ"/>
-                                                        <constraint firstAttribute="width" relation="lessThanOrEqual" constant="100" id="n8h-YA-g4Q"/>
-                                                    </constraints>
-                                                    <fontDescription key="fontDescription" style="UICTFontTextStyleHeadline"/>
-                                                    <nil key="highlightedColor"/>
-                                                </label>
-                                            </subviews>
-                                        </stackView>
-                                    </subviews>
-                                    <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
-                                    <constraints>
-                                        <constraint firstItem="yyg-Cl-3vR" firstAttribute="top" secondItem="yHy-np-QOe" secondAttribute="top" constant="11" id="1Ch-OQ-1tX"/>
-                                        <constraint firstAttribute="trailing" secondItem="yyg-Cl-3vR" secondAttribute="trailing" constant="20" symbolic="YES" id="AsH-46-tuP"/>
-                                        <constraint firstItem="yyg-Cl-3vR" firstAttribute="leading" secondItem="yHy-np-QOe" secondAttribute="leading" constant="20" symbolic="YES" id="Rko-1J-eAW"/>
-                                        <constraint firstAttribute="bottom" secondItem="yyg-Cl-3vR" secondAttribute="bottom" constant="10" id="hz6-2b-c3l"/>
-                                    </constraints>
-                                </tableViewCellContentView>
-                                <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
-                                <connections>
-                                    <outlet property="moneyLabel" destination="7i7-OE-25w" id="9v8-Fa-LK6"/>
-                                    <outlet property="whoPaidHowMuchLabel" destination="1y3-o3-jkI" id="4of-Jq-51Z"/>
+                                    <outlet property="nameLabel" destination="MHu-fw-WGA" id="yWK-rx-9x4"/>
                                 </connections>
                             </tableViewCell>
                         </prototypes>
