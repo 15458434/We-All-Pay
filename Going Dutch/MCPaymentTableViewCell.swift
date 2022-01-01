@@ -9,7 +9,7 @@
 import UIKit
 
 final class MCPaymentTableViewCell: UITableViewCell {
-    @objc weak var payment: MCPayment!
+    @objc private var payment: MCPayment!
     private var currencyFormatter: CurrencyFormatter!
     
     @IBOutlet var namePayerLabel: UILabel!
