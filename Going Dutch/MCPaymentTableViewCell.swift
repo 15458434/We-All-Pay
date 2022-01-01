@@ -83,19 +83,23 @@ final class MCPaymentTableViewCell: UITableViewCell {
         }
         
         if self.payment != nil {
-            destroyKVO()
+            reset()
         }
         self.payment = payment
         currencyFormatter = CurrencyFormatter(currencyCode: payment.currency!.code!)
         createKVO()
     }
     
-    // MARK: UITableViewCell
-    
-    override func prepareForReuse() {
+    private func reset() {
         destroyKVO()
         self.payment = nil
         self.currencyFormatter = nil
+    }
+    
+    // MARK: UITableViewCell
+    
+    override func prepareForReuse() {
+        reset()
         
         super.prepareForReuse()
     }
