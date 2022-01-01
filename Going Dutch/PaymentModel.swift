@@ -10,9 +10,9 @@ import UIKit
 import CurrencyConverter
 
 @objc(MCPaymentModel) @objcMembers public final class PaymentModel: NSObject {
-    @objc public private(set) dynamic var payment: MCPayment!
+    @objc private(set) var payment: MCPayment!
     private(set) var currencyFormatter: CurrencyFormatter!
-    @objc dynamic var error: NSError?
+    @objc private(set) dynamic var error: NSError?
 
     @objc(prepareForUseWithPayment:) func prepareForUse(with payment: MCPayment) {
         func createPeoplePresenceController(for payment: MCPayment) {
