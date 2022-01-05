@@ -48,9 +48,9 @@ import FirebaseRemoteConfig
                 var dict = dict
                 switch item {
                 case .solutionAdBannerHeight:
-                    dict[item.stringValue] = 50 as NSNumber
+                    dict[item.stringValue] = 100 as NSNumber
                 case .paymentAdBannerHeight:
-                    dict[item.stringValue] = 50 as NSNumber
+                    dict[item.stringValue] = 100 as NSNumber
                 }
                 return dict
             }
