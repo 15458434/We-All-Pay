@@ -152,6 +152,8 @@ struct TCFReader {
                     let canShowPersonalizedAds = tcf.canShowPersonalizedAds()
                     // AppLovin
                     ALPrivacySettings.setHasUserConsent(tcf.canShowPersonalizedAds())
+                    // Facebook
+                    FBAdSettings.setAdvertiserTrackingEnabled(canShowPersonalizedAds)
                     // Mopub
                     if canShowPersonalizedAds {
                         MoPub.sharedInstance().grantConsent()
