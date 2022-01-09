@@ -9,10 +9,12 @@
 import UIKit
 import CurrencyConverter
 
+import FirebaseCrashlytics
+
 @objc(MCPaymentModel) @objcMembers public final class PaymentModel: NSObject {
-    @objc public private(set) dynamic var payment: MCPayment!
+    @objc private(set) var payment: MCPayment!
     private(set) var currencyFormatter: CurrencyFormatter!
-    @objc dynamic var error: NSError?
+    @objc private(set) dynamic var error: NSError?
 
     @objc(prepareForUseWithPayment:) func prepareForUse(with payment: MCPayment) {
         func createPeoplePresenceController(for payment: MCPayment) {
@@ -24,6 +26,11 @@ import CurrencyConverter
             peoplePresenceController = NSFetchedResultsController(fetchRequest: request, managedObjectContext: payment.managedObjectContext!, sectionNameKeyPath: nil, cacheName: nil)
             
         }
+        
+        // #971 - Logging to see what's going on exactly.
+        let paymentDictionary = payment.dictionaryWithValues(forKeys: ["categoryId", "dateCreated", "dateModified", "descriptionOfPayment", "money", "moneyInMainCurrency", "uniquePaymentId", "managedObjectContext"])
+        Crashlytics.crashlytics().log("prepareForUseWithPayment: \(paymentDictionary)")
+        
         self.payment = payment
         createPeoplePresenceController(for: payment)
         currencyFormatter = CurrencyFormatter(currencyCode: payment.currency!.code!)

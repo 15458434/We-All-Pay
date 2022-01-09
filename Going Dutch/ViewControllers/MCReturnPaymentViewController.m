@@ -359,17 +359,17 @@ static void * sectionsContext = &sectionsContext;
         switch (kind) {
             case NSKeyValueChangeInsertion: {
                 NSIndexSet *indexes = change[NSKeyValueChangeIndexesKey];
-                [self.tableView insertSections:indexes withRowAnimation:UITableViewRowAnimationAutomatic];
+                [self.tableView insertSections:indexes withRowAnimation:UITableViewRowAnimationFade];
                 break;
             }
             case NSKeyValueChangeReplacement: {
                 NSIndexSet *indexes = change[NSKeyValueChangeIndexesKey];
-                [self.tableView reloadSections:indexes withRowAnimation:UITableViewRowAnimationAutomatic];
+                [self.tableView reloadSections:indexes withRowAnimation:UITableViewRowAnimationFade];
             }
                 break;
             case NSKeyValueChangeRemoval: {
                 NSIndexSet *indexes = change[NSKeyValueChangeIndexesKey];
-                [self.tableView deleteSections:indexes withRowAnimation:UITableViewRowAnimationAutomatic];
+                [self.tableView deleteSections:indexes withRowAnimation:UITableViewRowAnimationFade];
                 break;
             }
             case NSKeyValueChangeSetting: {

@@ -9,7 +9,7 @@
 import UIKit
 
 final class MCPaymentTableViewCell: UITableViewCell {
-    @objc weak var payment: MCPayment!
+    @objc private var payment: MCPayment!
     private var currencyFormatter: CurrencyFormatter!
     
     @IBOutlet var namePayerLabel: UILabel!
@@ -22,6 +22,14 @@ final class MCPaymentTableViewCell: UITableViewCell {
     private var moneyObservation:NSKeyValueObservation!
     private var categoryIdObservation: NSKeyValueObservation!
     private var currencyObservation: NSKeyValueObservation!
+    
+    private func destroyKVO() {
+        self.payingPersonObservation = nil
+        self.descriptionOfPaymentObservation = nil
+        self.moneyObservation = nil
+        self.categoryIdObservation = nil
+        self.currencyObservation = nil
+    }
     
     @objc(updateWithPayment:) func update(with payment: MCPayment) {
         func createKVO() {
@@ -73,23 +81,28 @@ final class MCPaymentTableViewCell: UITableViewCell {
                 mySelf.moneyPaidLabel.text = mySelf.currencyFormatter.string(for: mySelf.payment.money)
             })
         }
-        func destroyKVO() {
-            self.payingPersonObservation = nil
-            self.descriptionOfPaymentObservation = nil
-            self.moneyObservation = nil
-            self.categoryIdObservation = nil
-            self.currencyObservation = nil
-        }
         
         if self.payment != nil {
-            destroyKVO()
+            reset()
         }
         self.payment = payment
         currencyFormatter = CurrencyFormatter(currencyCode: payment.currency!.code!)
         createKVO()
     }
     
+    private func reset() {
+        destroyKVO()
+        self.payment = nil
+        self.currencyFormatter = nil
+    }
+    
     // MARK: UITableViewCell
+    
+    override func prepareForReuse() {
+        reset()
+        
+        super.prepareForReuse()
+    }
     
     // MARK: UIView
     
