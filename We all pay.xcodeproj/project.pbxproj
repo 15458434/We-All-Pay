@@ -1147,6 +1147,7 @@
 				386FC32418E5855400428294 /* MCSharedBillMainViewController.m */,
 				383E0C5B186737EB00AA688D /* MCSharedBillPageViewController.h */,
 				383E0C5C186737EB00AA688D /* MCSharedBillPageViewController.m */,
+				38B1201D2768F00400EB4969 /* People */,
 				38D8CB612750263B00CC1C03 /* Payments */,
 			);
 			name = EventDetailMainViewController;
@@ -1377,10 +1378,9 @@
 			children = (
 				3841F8D1238939F600882E40 /* Events */,
 				386EB43123C7238400FB20B9 /* EventDetailMainViewController */,
-				388E90311D708BB3004CD257 /* SolutionViewController */,
-				38F44CC92364978400215B1C /* Payment */,
-				38B1201D2768F00400EB4969 /* People */,
 				38FBB4B7236C353700E30EE8 /* Person */,
+				38F44CC92364978400215B1C /* Payment */,
+				388E90311D708BB3004CD257 /* SolutionViewController */,
 			);
 			name = iPhone;
 			sourceTree = "<group>";

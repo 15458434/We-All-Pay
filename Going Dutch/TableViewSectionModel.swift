@@ -64,11 +64,12 @@ final class SolutionSectionItemsModel: TableViewSectionItemsModel {
     }
 }
 
-final class AdSectionItemsModel: TableViewSectionItemsModel {
-    @objc(MCAdSectionItemsModel) enum Status: Int {
+@objc(MCAdSectionItemsModel) final class AdSectionItemsModel: TableViewSectionItemsModel {
+    @objc(MCAdSectionItemsModelStatus) enum Status: Int {
         case isNotShowing
         case isShowing
     }
+    
     @objc dynamic var adStatus: Status = .isNotShowing
     
     // MARK: TableViewSectionItemsModel
@@ -130,6 +131,10 @@ class TableViewSectionModel: NSObject {
         return sections.contains { $0 == section }
     }
     
+    @objc(indexOfSection:) func index(of section: TableViewSectionItemsModel) -> Int {
+        return sections.firstIndex(of: section) ?? NSNotFound
+    }
+    
     @objc func removeSection(_ poorSucker: TableViewSectionItemsModel) {
         if let index = sections.firstIndex(of: poorSucker) {
             let mutableArray = mutableArrayValue(forKey: "sections")
@@ -179,6 +184,14 @@ class ShadowTableViewSectionModel: TableViewSectionModel {
             return super.contains(section)
         } else {
             return shadowSections.contains { $0 == section }
+        }
+    }
+    
+    override func index(of section: TableViewSectionItemsModel) -> Int {
+        if isShowing {
+            return super.index(of: section)
+        } else {
+            return shadowSections.firstIndex(of: section) ?? NSNotFound
         }
     }
     
