@@ -29,6 +29,7 @@ enum CancelButtonPressed {
 final class PaymentViewController: MCGenericAdBannerTableViewController, AdBannerEngineDelegate, MCDismissKeyboardProtocol, MCPathComponentsToOpenProtocol, UITextFieldDelegate, NSFetchedResultsControllerDelegate, PaymentStateModelProtocol {
 
     // MARK: IB Outlet
+    @IBOutlet weak var headerView: UITableViewHeaderFooterView!
     @IBOutlet weak var itemField: UITextField!
     @IBOutlet weak var paidField: UITextField!
     @IBOutlet weak var categoryImage: UIImageView!
@@ -218,11 +219,7 @@ final class PaymentViewController: MCGenericAdBannerTableViewController, AdBanne
     // MARK: GenericAdBannerTableViewController
     
     override var adUnitId: String {
-        #if DEBUG
-        return "ca-app-pub-3940256099942544/2934735716"
-        #else
         return "ca-app-pub-5354415674074435/2765341863"
-        #endif
     }
 
     // MARK: UITableViewDelegate
@@ -392,6 +389,21 @@ final class PaymentViewController: MCGenericAdBannerTableViewController, AdBanne
             abort()
         }
     }
+    
+    override func viewDidLayoutSubviews() {
+        super.viewDidLayoutSubviews()
+        
+        let size = headerView.systemLayoutSizeFitting(UIView.layoutFittingCompressedSize)
+        if (headerView.frame.self.height != size.height) {
+            let x = headerView.frame.origin.x
+            let y = headerView.frame.origin.y
+            let width = headerView.frame.size.width
+            let height = size.height
+            headerView.frame = CGRect(x: x, y: y, width: width, height: height)
+            self.tableView.tableHeaderView = headerView
+        }
+    }
+    
     
     // MARK: UIResponder
     

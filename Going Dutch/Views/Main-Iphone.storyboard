@@ -1266,10 +1266,10 @@
                                     <rect key="frame" x="0.0" y="10" width="414" height="330"/>
                                     <subviews>
                                         <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="dtw-1h-URy">
-                                            <rect key="frame" x="0.0" y="0.0" width="414" height="244"/>
+                                            <rect key="frame" x="0.0" y="0.0" width="414" height="204"/>
                                             <subviews>
                                                 <stackView opaque="NO" contentMode="scaleToFill" axis="vertical" distribution="equalSpacing" spacing="8" translatesAutoresizingMaskIntoConstraints="NO" id="7B7-Y2-HRx" userLabel="Payment Stack View">
-                                                    <rect key="frame" x="20" y="0.0" width="374" height="244"/>
+                                                    <rect key="frame" x="20" y="0.0" width="374" height="204"/>
                                                     <subviews>
                                                         <stackView opaque="NO" contentMode="scaleToFill" alignment="center" spacing="8" translatesAutoresizingMaskIntoConstraints="NO" id="wwH-1w-p3i">
                                                             <rect key="frame" x="0.0" y="0.0" width="374" height="60"/>
@@ -1361,32 +1361,32 @@
                                                                 <constraint firstItem="dXS-pO-7Ud" firstAttribute="top" secondItem="Nap-zl-JCf" secondAttribute="top" id="G51-d4-xSu"/>
                                                             </constraints>
                                                         </stackView>
-                                                        <stackView opaque="NO" contentMode="scaleToFill" alignment="center" spacing="8" translatesAutoresizingMaskIntoConstraints="NO" id="WrE-cx-6eT">
-                                                            <rect key="frame" x="0.0" y="136" width="374" height="50"/>
+                                                        <stackView opaque="NO" contentMode="scaleToFill" ambiguous="YES" alignment="center" spacing="8" translatesAutoresizingMaskIntoConstraints="NO" id="WrE-cx-6eT">
+                                                            <rect key="frame" x="0.0" y="136" width="374" height="30"/>
                                                             <subviews>
-                                                                <view userInteractionEnabled="NO" contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="kSi-0b-Enl">
-                                                                    <rect key="frame" x="0.0" y="0.0" width="70" height="50"/>
+                                                                <view userInteractionEnabled="NO" contentMode="scaleToFill" ambiguous="YES" translatesAutoresizingMaskIntoConstraints="NO" id="kSi-0b-Enl">
+                                                                    <rect key="frame" x="0.0" y="0.0" width="70" height="30"/>
                                                                     <color key="backgroundColor" systemColor="systemBackgroundColor"/>
                                                                     <constraints>
                                                                         <constraint firstAttribute="width" constant="70" id="HxT-a9-puS"/>
                                                                     </constraints>
                                                                 </view>
-                                                                <textField opaque="NO" clipsSubviews="YES" contentMode="scaleToFill" horizontalCompressionResistancePriority="749" restorationIdentifier="itemField" contentHorizontalAlignment="left" contentVerticalAlignment="center" borderStyle="roundedRect" placeholder="What got paid?" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="Zmm-zR-L97">
-                                                                    <rect key="frame" x="78" y="8" width="296" height="34"/>
+                                                                <textField opaque="NO" clipsSubviews="YES" contentMode="scaleToFill" horizontalCompressionResistancePriority="749" ambiguous="YES" restorationIdentifier="itemField" contentHorizontalAlignment="left" contentVerticalAlignment="center" borderStyle="roundedRect" placeholder="What got paid?" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="Zmm-zR-L97">
+                                                                    <rect key="frame" x="78" y="0.0" width="296" height="30"/>
                                                                     <fontDescription key="fontDescription" style="UICTFontTextStyleBody"/>
                                                                     <textInputTraits key="textInputTraits" autocapitalizationType="sentences"/>
                                                                 </textField>
                                                             </subviews>
                                                             <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                                         </stackView>
-                                                        <stackView opaque="NO" contentMode="scaleToFill" alignment="center" spacing="8" translatesAutoresizingMaskIntoConstraints="NO" id="ePu-r4-jb2">
-                                                            <rect key="frame" x="0.0" y="194" width="374" height="50"/>
+                                                        <stackView opaque="NO" contentMode="scaleToFill" ambiguous="YES" alignment="center" spacing="8" translatesAutoresizingMaskIntoConstraints="NO" id="ePu-r4-jb2">
+                                                            <rect key="frame" x="0.0" y="174" width="374" height="30"/>
                                                             <subviews>
-                                                                <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="pvb-lW-snJ">
-                                                                    <rect key="frame" x="0.0" y="0.0" width="70" height="50"/>
+                                                                <view contentMode="scaleToFill" ambiguous="YES" translatesAutoresizingMaskIntoConstraints="NO" id="pvb-lW-snJ">
+                                                                    <rect key="frame" x="0.0" y="0.0" width="70" height="30"/>
                                                                     <subviews>
                                                                         <button contentMode="redraw" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="system" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="BiQ-RU-tkG" customClass="MCRoundedButton">
-                                                                            <rect key="frame" x="31" y="0.0" width="39" height="50"/>
+                                                                            <rect key="frame" x="31" y="0.0" width="39" height="30"/>
                                                                             <color key="backgroundColor" systemColor="systemBackgroundColor"/>
                                                                             <fontDescription key="fontDescription" type="system" weight="semibold" pointSize="15"/>
                                                                             <state key="normal" title="€$£¥"/>
@@ -1412,8 +1412,8 @@
                                                                         <constraint firstItem="BiQ-RU-tkG" firstAttribute="leading" relation="greaterThanOrEqual" secondItem="pvb-lW-snJ" secondAttribute="leading" priority="999" id="zb7-to-epe"/>
                                                                     </constraints>
                                                                 </view>
-                                                                <textField opaque="NO" clipsSubviews="YES" contentMode="scaleToFill" horizontalCompressionResistancePriority="749" restorationIdentifier="moneyField" contentHorizontalAlignment="left" contentVerticalAlignment="center" borderStyle="roundedRect" placeholder="How much is spent?" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="ZTv-D4-TBc">
-                                                                    <rect key="frame" x="78" y="8" width="296" height="34"/>
+                                                                <textField opaque="NO" clipsSubviews="YES" contentMode="scaleToFill" horizontalCompressionResistancePriority="749" ambiguous="YES" restorationIdentifier="moneyField" contentHorizontalAlignment="left" contentVerticalAlignment="center" borderStyle="roundedRect" placeholder="How much is spent?" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="ZTv-D4-TBc">
+                                                                    <rect key="frame" x="78" y="0.0" width="296" height="30"/>
                                                                     <fontDescription key="fontDescription" style="UICTFontTextStyleBody"/>
                                                                     <textInputTraits key="textInputTraits" spellCheckingType="no" keyboardType="decimalPad"/>
                                                                 </textField>
@@ -1432,10 +1432,10 @@
                                             </constraints>
                                         </view>
                                         <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="iF7-Nz-3na">
-                                            <rect key="frame" x="0.0" y="252" width="414" height="50"/>
+                                            <rect key="frame" x="0.0" y="212" width="414" height="90"/>
                                             <subviews>
                                                 <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="bbf-I9-yWg" customClass="GADBannerView">
-                                                    <rect key="frame" x="47" y="0.0" width="320" height="50"/>
+                                                    <rect key="frame" x="47" y="20" width="320" height="50"/>
                                                     <color key="backgroundColor" systemColor="systemBackgroundColor"/>
                                                     <constraints>
                                                         <constraint firstAttribute="height" constant="50" id="Wme-93-e4f"/>
@@ -1446,8 +1446,8 @@
                                             <color key="backgroundColor" systemColor="systemBackgroundColor"/>
                                             <constraints>
                                                 <constraint firstItem="bbf-I9-yWg" firstAttribute="centerX" secondItem="iF7-Nz-3na" secondAttribute="centerX" id="eXc-ta-wPT"/>
-                                                <constraint firstAttribute="bottom" secondItem="bbf-I9-yWg" secondAttribute="bottom" priority="999" id="gWh-jA-Ac4"/>
-                                                <constraint firstItem="bbf-I9-yWg" firstAttribute="top" secondItem="iF7-Nz-3na" secondAttribute="top" id="lVc-Ho-ccz"/>
+                                                <constraint firstAttribute="bottom" secondItem="bbf-I9-yWg" secondAttribute="bottom" priority="999" constant="20" symbolic="YES" id="gWh-jA-Ac4"/>
+                                                <constraint firstItem="bbf-I9-yWg" firstAttribute="top" secondItem="iF7-Nz-3na" secondAttribute="top" constant="20" symbolic="YES" id="lVc-Ho-ccz"/>
                                             </constraints>
                                         </view>
                                         <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="e6E-Uh-FE0">
@@ -1868,7 +1868,7 @@
         </designable>
     </designables>
     <inferredMetricsTieBreakers>
-        <segue reference="AFT-dx-z90"/>
+        <segue reference="M9w-sI-koW"/>
         <segue reference="jjg-NC-1KA"/>
         <segue reference="9O1-vs-VOI"/>
         <segue reference="Wg4-xh-sS5"/>
