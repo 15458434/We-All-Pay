@@ -219,11 +219,7 @@ final class PaymentViewController: MCGenericAdBannerTableViewController, AdBanne
     // MARK: GenericAdBannerTableViewController
     
     override var adUnitId: String {
-        #if DEBUG
-        return "ca-app-pub-3940256099942544/2934735716"
-        #else
         return "ca-app-pub-5354415674074435/2765341863"
-        #endif
     }
 
     // MARK: UITableViewDelegate
