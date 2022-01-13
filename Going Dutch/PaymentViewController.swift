@@ -29,6 +29,7 @@ enum CancelButtonPressed {
 final class PaymentViewController: MCGenericAdBannerTableViewController, AdBannerEngineDelegate, MCDismissKeyboardProtocol, MCPathComponentsToOpenProtocol, UITextFieldDelegate, NSFetchedResultsControllerDelegate, PaymentStateModelProtocol {
 
     // MARK: IB Outlet
+    @IBOutlet weak var headerView: UITableViewHeaderFooterView!
     @IBOutlet weak var itemField: UITextField!
     @IBOutlet weak var paidField: UITextField!
     @IBOutlet weak var categoryImage: UIImageView!
@@ -392,6 +393,21 @@ final class PaymentViewController: MCGenericAdBannerTableViewController, AdBanne
             abort()
         }
     }
+    
+    override func viewDidLayoutSubviews() {
+        super.viewDidLayoutSubviews()
+        
+        let size = headerView.systemLayoutSizeFitting(UIView.layoutFittingCompressedSize)
+        if (headerView.frame.self.height != size.height) {
+            let x = headerView.frame.origin.x
+            let y = headerView.frame.origin.y
+            let width = headerView.frame.size.width
+            let height = size.height
+            headerView.frame = CGRect(x: x, y: y, width: width, height: height)
+            self.tableView.tableHeaderView = headerView
+        }
+    }
+    
     
     // MARK: UIResponder
     
