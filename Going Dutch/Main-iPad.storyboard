@@ -188,7 +188,7 @@
                                     </connections>
                                 </button>
                                 <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="ega-E2-5BA" customClass="GADBannerView">
-                                    <rect key="frame" x="110" y="284.5" width="320" height="100"/>
+                                    <rect key="frame" x="110" y="288.5" width="320" height="100"/>
                                     <color key="backgroundColor" systemColor="systemBackgroundColor"/>
                                     <constraints>
                                         <constraint firstAttribute="width" constant="320" id="07Z-pz-D09"/>
@@ -213,10 +213,10 @@
                                 <constraint firstItem="q8F-9H-eKt" firstAttribute="leading" secondItem="zfO-fv-PpY" secondAttribute="leading" constant="20" id="LED-MH-yy2"/>
                                 <constraint firstItem="8ht-EA-kJE" firstAttribute="top" secondItem="q8F-9H-eKt" secondAttribute="bottom" constant="8" id="Uxq-CY-MnK"/>
                                 <constraint firstItem="ZlS-5v-dlc" firstAttribute="trailing" secondItem="Lbm-k4-s3a" secondAttribute="trailing" id="XST-xW-kTc"/>
-                                <constraint firstItem="Lbm-k4-s3a" firstAttribute="top" secondItem="ega-E2-5BA" secondAttribute="bottom" priority="999" constant="22" id="avT-ru-2PZ"/>
+                                <constraint firstItem="Lbm-k4-s3a" firstAttribute="top" secondItem="ega-E2-5BA" secondAttribute="bottom" priority="999" constant="26" id="avT-ru-2PZ"/>
                                 <constraint firstItem="LnO-mX-ELw" firstAttribute="leading" secondItem="LDs-9i-ZRZ" secondAttribute="leading" constant="6" id="dCm-fN-aPA"/>
                                 <constraint firstItem="q8F-9H-eKt" firstAttribute="top" secondItem="xcc-E7-c0h" secondAttribute="bottom" constant="8" id="hGt-Vg-5wT"/>
-                                <constraint firstItem="ega-E2-5BA" firstAttribute="top" secondItem="ZlS-5v-dlc" secondAttribute="bottom" constant="22" id="j58-k2-kFC"/>
+                                <constraint firstItem="ega-E2-5BA" firstAttribute="top" secondItem="ZlS-5v-dlc" secondAttribute="bottom" constant="26" id="j58-k2-kFC"/>
                                 <constraint firstItem="Lbm-k4-s3a" firstAttribute="leading" secondItem="LnO-mX-ELw" secondAttribute="leading" id="k1z-tR-Nn9"/>
                                 <constraint firstItem="LDs-9i-ZRZ" firstAttribute="leading" secondItem="q8F-9H-eKt" secondAttribute="trailing" constant="8" id="kAy-xx-Xh8"/>
                                 <constraint firstItem="xcc-E7-c0h" firstAttribute="leading" secondItem="zfO-fv-PpY" secondAttribute="leading" constant="20" id="nHw-a6-MrS"/>
