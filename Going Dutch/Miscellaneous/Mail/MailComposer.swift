@@ -7,6 +7,7 @@
 //
 
 import Foundation
+import FirebaseCrashlytics
 
 protocol MailComposer {
     func mailAdresses() throws -> [String]
@@ -40,6 +41,27 @@ extension MailComposer where Self: ThisEventReadOnly {
     }
     
     func mailBody() throws -> String {
+        // Too many crashes happen here. Some logging should show where it goes wrong.
+        Crashlytics.crashlytics().log("************** start mail body **************")
+        Crashlytics.crashlytics().log("\(String(describing: event))")
+        Crashlytics.crashlytics().log("  \(String(describing: event.mainCurrency))")
+        event.peoplePresent?.forEach { person in
+            Crashlytics.crashlytics().log("  \(person)")
+            person.emailAddress?.forEach { emailAddress in
+                Crashlytics.crashlytics().log(    "\(emailAddress)")
+            }
+            person.sharingPayment?.forEach { presence in
+                Crashlytics.crashlytics().log(    "\(presence)")
+            }
+        }
+        event.payments?.forEach { payment in
+            Crashlytics.crashlytics().log("  \(payment)")
+            payment.peopleSharingPayment?.forEach { peoplePresence in
+                Crashlytics.crashlytics().log("    \(peoplePresence)")
+            }
+        }
+        Crashlytics.crashlytics().log("*************** end mail body ***************")
+        
         let mainCurrencyFormatter = CurrencyFormatter()
         let localCurrencyFormatter = CurrencyFormatter()
         mainCurrencyFormatter.currencyCode = event.mainCurrency!.code

@@ -174,22 +174,32 @@ static void * sectionsContext = &sectionsContext;
 }
 
 - (void)startAdBanner {
-    self.worstSalesPitchEverView = [[GADBannerView alloc] initWithAdSize:kGADAdSizeBanner];
+    self.worstSalesPitchEverView = [[GADBannerView alloc] initWithAdSize:GADAdSizeLargeBanner];
+    self.worstSalesPitchEverView.alpha = 0.0;
     [self.adBannerEngine prepareAdBanner:self.worstSalesPitchEverView withAdUnitId:self.adBannerUnitId andViewController:self];
+    MCAdSectionItemsModel *section = [[MCAdSectionItemsModel alloc] init];
+    if (![_model containsSection:section]) {
+        section.adStatus = MCAdSectionItemsModelStatusIsShowing;
+        [_model addSection:section];
+    }
 }
 
 #pragma mark - MCAdBannerEngineDelegate
 
 - (void)adEngine:(MCAdBannerEngine *)adEngine putOnScreenBannerView:(GADBannerView *)bannerView {
-    AdSectionItemsModel *section = [[AdSectionItemsModel alloc] init];
-    if (![_model containsSection:section]) {
-        [_model addSection:section];
+    NSInteger index = [_model indexOfSection:[[MCAdSectionItemsModel alloc] init]];
+    if (index != NSNotFound) {
+        MCAdSectionItemsModel *itemsModel = (MCAdSectionItemsModel *)_model.sections[index];
+        itemsModel.adStatus = MCAdSectionItemsModelStatusIsShowing;
     }
 }
 
 - (void)adEngine:(MCAdBannerEngine *)adEngine putOffScreenBannerView:(GADBannerView *)bannerView {
-    AdSectionItemsModel *section = [[AdSectionItemsModel alloc] init];
-    [_model removeSection:section];
+    NSInteger index = [_model indexOfSection:[[MCAdSectionItemsModel alloc] init]];
+    if (index != NSNotFound) {
+        MCAdSectionItemsModel *itemsModel = (MCAdSectionItemsModel *)_model.sections[index];
+        itemsModel.adStatus = MCAdSectionItemsModelStatusIsNotShowing;
+    }
 }
 
 #pragma mark - UITableViewDelegate
@@ -272,7 +282,8 @@ static void * sectionsContext = &sectionsContext;
             break;
         case MCTableViewSectionItemsModelKindAd: {
             MCAdBannerTableViewCell *cell = [tableView dequeueReusableCellWithIdentifier:@"MCAdBannerTableViewCell" forIndexPath:indexPath];
-            [cell updateBannerView:_worstSalesPitchEverView];
+            MCAdSectionItemsModel *itemsModel = (MCAdSectionItemsModel *)self.model.sections[indexPath.section];
+            [cell updateBannerView:_worstSalesPitchEverView andItemsModel:itemsModel];
             return cell;
         }
             break;
