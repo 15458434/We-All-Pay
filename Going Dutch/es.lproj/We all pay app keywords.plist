@@ -2,21 +2,21 @@
 <!DOCTYPE plist PUBLIC "-//Apple//DTD PLIST 1.0//EN" "http://www.apple.com/DTDs/PropertyList-1.0.dtd">
 <plist version="1.0">
 <array>
-	<string>share</string>
-	<string>bills</string>
-	<string>split</string>
-	<string>trip</string>
-	<string>money</string>
-	<string>expense</string>
-	<string>payback</string>
-	<string>group</string>
-	<string>tab</string>
-	<string>shared</string>
-	<string>calculator</string>
-	<string>iou</string>
-	<string>i</string>
-	<string>owe</string>
-	<string>you</string>
-	<string>finance</string>
+	<string>compartir</string>
+	<string>facturas</string>
+	<string>dividir</string>
+	<string>viaje</string>
+	<string>dinero</string>
+	<string>gastos</string>
+	<string>devolver</string>
+	<string>grupo</string>
+	<string>cuenta</string>
+	<string>compartido</string>
+	<string>calculadora</string>
+	<string>deuda</string>
+	<string>te</string>
+	<string>lo</string>
+	<string>debo</string>
+	<string>finanzas</string>
 </array>
 </plist>

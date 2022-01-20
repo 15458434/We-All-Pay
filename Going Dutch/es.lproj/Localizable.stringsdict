@@ -7,9 +7,9 @@
 		<key>NSStringVariableWidthRuleType</key>
 		<dict>
 			<key>25</key>
-			<string>Presence on payment</string>
+			<string>Presentes en el evento</string>
 			<key>50</key>
-			<string>People sharing this payment</string>
+			<string>Personas compartiendo el pago</string>
 		</dict>
 	</dict>
 	<key>solution_view_email_result_total_sum_paid_by</key>
@@ -23,11 +23,11 @@
 			<key>NSStringFormatValueTypeKey</key>
 			<string>lu</string>
 			<key>zero</key>
-			<string>Nobody has paid anything so far.</string>
+			<string>Nadie ha pagado nada por ahora.</string>
 			<key>one</key>
-			<string>%lu person has paid for everything:</string>
+			<string>%lu persona ha pagado por todo:</string>
 			<key>other</key>
-			<string>%lu people have paid everything:</string>
+			<string>%lu personas han pagado por todo:</string>
 		</dict>
 	</dict>
 	<key>people_view_button_contacts</key>
@@ -35,9 +35,9 @@
 		<key>NSStringVariableWidthRuleType</key>
 		<dict>
 			<key>25</key>
-			<string>Contacts</string>
+			<string>Contactos</string>
 			<key>50</key>
-			<string>Import from Contacts</string>
+			<string>Importar de tus contactos</string>
 		</dict>
 	</dict>
 	<key>solution_view_cell_label_total_spent</key>
@@ -47,7 +47,7 @@
 			<key>20</key>
 			<string>Total:</string>
 			<key>25</key>
-			<string>Total spent:</string>
+			<string>Total gastado:</string>
 		</dict>
 	</dict>
 </dict>
