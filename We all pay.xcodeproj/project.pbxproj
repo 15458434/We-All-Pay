@@ -614,6 +614,7 @@
 		38CB1C072799BAC20074769F /* de */ = {isa = PBXFileReference; lastKnownFileType = text.plist.stringsdict; name = de; path = de.lproj/Localizable.stringsdict; sourceTree = "<group>"; };
 		38CB1C082799BAC20074769F /* de */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = de; path = de.lproj/InfoPlist.strings; sourceTree = "<group>"; };
 		38CB1C092799BAC20074769F /* de */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; name = de; path = "de.lproj/Available Currencies.plist"; sourceTree = "<group>"; };
+		38CB1C0A2799C2590074769F /* de */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = de; path = de.lproj/InfoPlist.strings; sourceTree = "<group>"; };
 		38CDE8FE17135B6300387CAA /* MCTools.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = MCTools.h; sourceTree = "<group>"; };
 		38CDE8FF17135B6300387CAA /* MCTools.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = MCTools.m; sourceTree = "<group>"; };
 		38D177101C3A5E640084604C /* SelectCategoryTableViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SelectCategoryTableViewController.swift; sourceTree = "<group>"; };
@@ -2593,6 +2594,7 @@
 			children = (
 				38BEA79F275F783800D05D8B /* nl */,
 				38CB1BE227995B9E0074769F /* es */,
+				38CB1C0A2799C2590074769F /* de */,
 			);
 			name = InfoPlist.strings;
 			sourceTree = "<group>";
