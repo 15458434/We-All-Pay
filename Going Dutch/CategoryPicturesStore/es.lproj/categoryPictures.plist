@@ -14,7 +14,7 @@
 		<key>categoryDescription</key>
 		<string>Cena</string>
 		<key>categoryPictureFilename</key>
-		<string>Dinner-Red</string>
+		<string>Dinner-Orange</string>
 		<key>categoryId</key>
 		<integer>1</integer>
 	</dict>
@@ -22,7 +22,7 @@
 		<key>categoryDescription</key>
 		<string>Tragos</string>
 		<key>categoryPictureFilename</key>
-		<string>Drinks-Orange</string>
+		<string>Drinks-Yellow</string>
 		<key>categoryId</key>
 		<integer>2</integer>
 	</dict>
@@ -46,7 +46,7 @@
 		<key>categoryDescription</key>
 		<string>Hotel</string>
 		<key>categoryPictureFilename</key>
-		<string>Hotel-Blue</string>
+		<string>Hotel-Purple</string>
 		<key>categoryId</key>
 		<integer>5</integer>
 	</dict>
@@ -54,7 +54,7 @@
 		<key>categoryDescription</key>
 		<string>Entradas</string>
 		<key>categoryPictureFilename</key>
-		<string>Tickets-Green</string>
+		<string>Tickets-Blue</string>
 		<key>categoryId</key>
 		<integer>6</integer>
 	</dict>
@@ -62,7 +62,7 @@
 		<key>categoryDescription</key>
 		<string>Alquiler</string>
 		<key>categoryPictureFilename</key>
-		<string>Rent-Orange</string>
+		<string>Rent-Red</string>
 		<key>categoryId</key>
 		<integer>7</integer>
 	</dict>
@@ -70,7 +70,7 @@
 		<key>categoryDescription</key>
 		<string>Spa &amp; Relax</string>
 		<key>categoryPictureFilename</key>
-		<string>Spa-Yellow</string>
+		<string>Spa-Orange</string>
 		<key>categoryId</key>
 		<integer>8</integer>
 	</dict>
@@ -86,7 +86,7 @@
 		<key>categoryDescription</key>
 		<string>Varios</string>
 		<key>categoryPictureFilename</key>
-		<string>Misc-Purple</string>
+		<string>Misc-Green</string>
 		<key>categoryId</key>
 		<integer>10</integer>
 	</dict>
