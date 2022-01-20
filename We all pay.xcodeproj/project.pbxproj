@@ -609,6 +609,11 @@
 		38CB1BE727995E960074769F /* acpm */ = {isa = PBXFileReference; explicitFileType = "compiled.mach-o.executable"; includeInIndex = 0; path = acpm; sourceTree = BUILT_PRODUCTS_DIR; };
 		38CB1BE927995E960074769F /* main.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = main.swift; sourceTree = "<group>"; };
 		38CB1BF02799639E0074769F /* CurrencyItem.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CurrencyItem.swift; sourceTree = "<group>"; };
+		38CB1C052799BAC20074769F /* de */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; name = de; path = de.lproj/categoryPictures.plist; sourceTree = "<group>"; };
+		38CB1C062799BAC20074769F /* de */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; name = de; path = "de.lproj/We all pay app keywords.plist"; sourceTree = "<group>"; };
+		38CB1C072799BAC20074769F /* de */ = {isa = PBXFileReference; lastKnownFileType = text.plist.stringsdict; name = de; path = de.lproj/Localizable.stringsdict; sourceTree = "<group>"; };
+		38CB1C082799BAC20074769F /* de */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = de; path = de.lproj/InfoPlist.strings; sourceTree = "<group>"; };
+		38CB1C092799BAC20074769F /* de */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; name = de; path = "de.lproj/Available Currencies.plist"; sourceTree = "<group>"; };
 		38CDE8FE17135B6300387CAA /* MCTools.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = MCTools.h; sourceTree = "<group>"; };
 		38CDE8FF17135B6300387CAA /* MCTools.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = MCTools.m; sourceTree = "<group>"; };
 		38D177101C3A5E640084604C /* SelectCategoryTableViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SelectCategoryTableViewController.swift; sourceTree = "<group>"; };
@@ -1937,6 +1942,7 @@
 				nl,
 				Base,
 				es,
+				de,
 			);
 			mainGroup = 38572AC7169D437B00969C62;
 			productRefGroup = 38572AD3169D437B00969C62 /* Products */;
@@ -2499,6 +2505,7 @@
 				380A76AC26D62EB3000FEABB /* en */,
 				380A76AE26D63585000FEABB /* nl */,
 				38CB1BDD279948DA0074769F /* es */,
+				38CB1C072799BAC20074769F /* de */,
 			);
 			name = Localizable.stringsdict;
 			sourceTree = "<group>";
@@ -2525,6 +2532,7 @@
 				385F5305191C2C360012773D /* en */,
 				381276011BBD8F120004C8C2 /* nl */,
 				38CB1BDE279948DA0074769F /* es */,
+				38CB1C082799BAC20074769F /* de */,
 			);
 			name = InfoPlist.strings;
 			sourceTree = "<group>";
@@ -2535,6 +2543,7 @@
 				3870C22D1D34FDFA0030035A /* nl */,
 				3896D1532760FA8E00DC7381 /* en */,
 				38CB1BDC279948DA0074769F /* es */,
+				38CB1C062799BAC20074769F /* de */,
 			);
 			name = "We all pay app keywords.plist";
 			sourceTree = "<group>";
@@ -2553,6 +2562,7 @@
 				3896D14A2760F6D400DC7381 /* en */,
 				3896D14C2760F6D900DC7381 /* nl */,
 				38CB1BDF279948DA0074769F /* es */,
+				38CB1C092799BAC20074769F /* de */,
 			);
 			name = "Available Currencies.plist";
 			sourceTree = "<group>";
@@ -2563,6 +2573,7 @@
 				3896D1522760F9ED00DC7381 /* nl */,
 				3896D155276103B500DC7381 /* en */,
 				38CB1BDB279948DA0074769F /* es */,
+				38CB1C052799BAC20074769F /* de */,
 			);
 			name = categoryPictures.plist;
 			path = CategoryPicturesStore;
