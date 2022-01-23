@@ -64,7 +64,7 @@
     }
     
     // Check for all payers present.
-    if ([_tonightsBill doAllPaymentHaveAPayer]) {
+    if ([_tonightsBill doAllPaymentsHaveAPayer]) {
         // perform segue
         [self performSegueWithIdentifier:@"solveButton" sender:self];
     } else {
