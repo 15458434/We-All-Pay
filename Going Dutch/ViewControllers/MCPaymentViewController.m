@@ -294,8 +294,13 @@ static void * CurrencyContext = &CurrencyContext;
     thatTickles.cancelsTouchesInView = YES;
     [self.tableView addGestureRecognizer:thatTickles];
     
-    // Set the height constraint for the ad banner.
-    self.worstSalesPitchEverHeightConstraint.constant = (CGFloat)[[[MCRemoteConfigEngine alloc] init] numberFor:MCRemoteConfigEngineItemPaymentAdBannerHeight].doubleValue;
+    if (MCAdEngine.isEnabled) {
+        // Set the height constraint for the ad banner.
+        self.worstSalesPitchEverHeightConstraint.constant = (CGFloat)[[[MCRemoteConfigEngine alloc] init] numberFor:MCRemoteConfigEngineItemPaymentAdBannerHeight].doubleValue;
+    } else {
+        self.worstSalesPitchEverHeightConstraint.constant = 0;
+    }
+
 }
 
 - (void)viewDidLoad {

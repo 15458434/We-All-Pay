@@ -1,0 +1,9 @@
+/* Bundle display name */
+"CFBundleDisplayName" = "Pagamos Todos";
+
+/* Bundle name */
+"CFBundleName" = "Pagamos Todos";
+
+/* Privacy - Tracking Usage Description */
+"NSUserTrackingUsageDescription" = "Este identificador será usado para presentarte publicidad personalizada.";
+

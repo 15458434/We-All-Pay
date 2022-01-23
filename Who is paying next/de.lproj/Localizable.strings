@@ -1,0 +1,6 @@
+/* There is no data to display */
+"who_is_paying_next_empty" = "Keine Daten vorhanden, die angezeigt werden könnten";
+
+/* For your event %1$@, %2$@ should pay next. */
+"who_is_paying_next_text" = "Für Dein Ereignis %1$@, sollte als nächstes %2$@ zahlen";
+

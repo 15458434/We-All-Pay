@@ -98,12 +98,6 @@ PODS:
   - GoogleMobileAdsMediationFacebook (6.9.0.0):
     - FBAudienceNetwork (= 6.9.0)
     - Google-Mobile-Ads-SDK (~> 8.0)
-  - GoogleMobileAdsMediationInMobi (10.0.1.0):
-    - Google-Mobile-Ads-SDK (~> 8.0)
-    - InMobiSDK/Core (= 10.0.1)
-  - GoogleMobileAdsMediationMoPub (5.18.2.0):
-    - Google-Mobile-Ads-SDK (~> 8.0)
-    - mopub-ios-sdk (= 5.18.2)
   - GoogleMobileAdsMediationTestSuite (2.0.0):
     - Google-Mobile-Ads-SDK (>= 8.0.0)
     - MaterialComponents/Cards (~> 124.0)
@@ -130,7 +124,6 @@ PODS:
     - GoogleUtilities/Logger
   - GoogleUtilities/UserDefaults (7.6.0):
     - GoogleUtilities/Logger
-  - InMobiSDK/Core (10.0.1)
   - MaterialComponents/AnimationTiming (124.2.0)
   - MaterialComponents/Availability (124.2.0)
   - MaterialComponents/Buttons (124.2.0):
@@ -265,14 +258,6 @@ PODS:
     - MDFTextAccessibility
   - MDFInternationalization (3.0.0)
   - MDFTextAccessibility (2.0.1)
-  - mopub-ios-sdk (5.18.2):
-    - mopub-ios-sdk/MoPubSDK (= 5.18.2)
-  - mopub-ios-sdk/Core (5.18.2)
-  - mopub-ios-sdk/MoPubSDK (5.18.2):
-    - mopub-ios-sdk/Core
-    - mopub-ios-sdk/NativeAds
-  - mopub-ios-sdk/NativeAds (5.18.2):
-    - mopub-ios-sdk/Core
   - nanopb (2.30908.0):
     - nanopb/decode (= 2.30908.0)
     - nanopb/encode (= 2.30908.0)
@@ -290,8 +275,6 @@ DEPENDENCIES:
   - GoogleMobileAdsMediationAdColony
   - GoogleMobileAdsMediationAppLovin
   - GoogleMobileAdsMediationFacebook
-  - GoogleMobileAdsMediationInMobi
-  - GoogleMobileAdsMediationMoPub
   - GoogleMobileAdsMediationTestSuite
   - PersonalizedAdConsent
 
@@ -314,16 +297,12 @@ SPEC REPOS:
     - GoogleMobileAdsMediationAdColony
     - GoogleMobileAdsMediationAppLovin
     - GoogleMobileAdsMediationFacebook
-    - GoogleMobileAdsMediationInMobi
-    - GoogleMobileAdsMediationMoPub
     - GoogleMobileAdsMediationTestSuite
     - GoogleUserMessagingPlatform
     - GoogleUtilities
-    - InMobiSDK
     - MaterialComponents
     - MDFInternationalization
     - MDFTextAccessibility
-    - mopub-ios-sdk
     - nanopb
     - PersonalizedAdConsent
     - PromisesObjC
@@ -346,20 +325,16 @@ SPEC CHECKSUMS:
   GoogleMobileAdsMediationAdColony: 9fdd5b256c350cb94d89400f9a2e86bbcc2967fa
   GoogleMobileAdsMediationAppLovin: f63e32388883f6611c521b5603efd5b8ceb53bac
   GoogleMobileAdsMediationFacebook: 74a727b7e4b2113d1203e771ff750a298169bf7e
-  GoogleMobileAdsMediationInMobi: 710ef7767ebff587cc7fe87835e74f5f68c3befa
-  GoogleMobileAdsMediationMoPub: 2ec7769ce7918107f3ec2dc514c31a4ee557ece7
   GoogleMobileAdsMediationTestSuite: 1e45292ed37896267fe82c0faf0a01de3b06fa18
   GoogleUserMessagingPlatform: ab890ce5f6620f293a21b6bdd82e416a2c73aeca
   GoogleUtilities: 684ee790a24f73ebb2d1d966e9711c203f2a4237
-  InMobiSDK: 91a9ce7070f892a28e005605c23c58434be6c4c5
   MaterialComponents: 1a9b2d9d45b1601ae544de85089adc4c464306d4
   MDFInternationalization: d697c55307816222a55685c4ccb1044ffb030c12
   MDFTextAccessibility: f4bb4cc2194286651b59a215fdeaa0e05dc90ba5
-  mopub-ios-sdk: 39dd404dc791e543979b91aa8e3b27197af91377
   nanopb: a0ba3315591a9ae0a16a309ee504766e90db0c96
   PersonalizedAdConsent: dbecabb3467df967c16d9cebc2ef4a8890e4bbd8
   PromisesObjC: 68159ce6952d93e17b2dfe273b8c40907db5ba58
 
-PODFILE CHECKSUM: 4739c8fec8962886681704b621e3801e042cd9f0
+PODFILE CHECKSUM: ae60c7d354aa6da376e575b481bdcab0ffd33695
 
 COCOAPODS: 1.11.2

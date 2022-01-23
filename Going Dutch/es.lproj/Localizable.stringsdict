@@ -1,0 +1,54 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE plist PUBLIC "-//Apple//DTD PLIST 1.0//EN" "http://www.apple.com/DTDs/PropertyList-1.0.dtd">
+<plist version="1.0">
+<dict>
+	<key>payment_view_presence_list_title</key>
+	<dict>
+		<key>NSStringVariableWidthRuleType</key>
+		<dict>
+			<key>25</key>
+			<string>Presentes en el evento</string>
+			<key>50</key>
+			<string>Personas compartiendo el pago</string>
+		</dict>
+	</dict>
+	<key>solution_view_email_result_total_sum_paid_by</key>
+	<dict>
+		<key>NSStringLocalizedFormatKey</key>
+		<string>%#@v1_who_paid_count@</string>
+		<key>v1_who_paid_count</key>
+		<dict>
+			<key>NSStringFormatSpecTypeKey</key>
+			<string>NSStringPluralRuleType</string>
+			<key>NSStringFormatValueTypeKey</key>
+			<string>lu</string>
+			<key>zero</key>
+			<string>Nadie ha pagado nada por ahora.</string>
+			<key>one</key>
+			<string>%lu persona ha pagado por todo:</string>
+			<key>other</key>
+			<string>%lu personas han pagado por todo:</string>
+		</dict>
+	</dict>
+	<key>people_view_button_contacts</key>
+	<dict>
+		<key>NSStringVariableWidthRuleType</key>
+		<dict>
+			<key>25</key>
+			<string>Contactos</string>
+			<key>50</key>
+			<string>Importar de tus contactos</string>
+		</dict>
+	</dict>
+	<key>solution_view_cell_label_total_spent</key>
+	<dict>
+		<key>NSStringVariableWidthRuleType</key>
+		<dict>
+			<key>20</key>
+			<string>Total:</string>
+			<key>25</key>
+			<string>Total gastado:</string>
+		</dict>
+	</dict>
+</dict>
+</plist>

@@ -32,7 +32,7 @@
 - (NSUInteger)totalAmountOfPeoplePresent;
 - (NSUInteger)totalAmountOfPeopleWhoHavePaid;
 
-- (BOOL)doAllPaymentHaveAPayer;
+- (BOOL)doAllPaymentsHaveAPayer;
 - (MCPayment *)getFirstPaymentWithoutAPayer;
 - (BOOL)areAllExchangeRatesValid;
 - (void)updateMainCurrencyFromCode:(NSString *)code withCompletion:(void (^)(NSError *error))completion;

@@ -6,7 +6,7 @@
 //  Copyright (c) 2014 Mark Cornelisse. All rights reserved.
 //
 
-#import <XCTest/XCTest.h>
+@import XCTest;
 
 #import "MCWeAllPayStoreController.h"
 #import "MCSharedBill+addons.h"
@@ -462,16 +462,16 @@
     MCPayment *payment = [tonightsbill addPayment];
     payment.money = @1.00;
     payment.descriptionOfPayment = @"Knuffel";
-    BOOL noPaymentsWithoutPayers = tonightsbill.doAllPaymentHaveAPayer;
+    BOOL noPaymentsWithoutPayers = tonightsbill.doAllPaymentsHaveAPayer;
     XCTAssertFalse(noPaymentsWithoutPayers, @"There should be a payment without a payer.");
     MCPayment *paymentWithPayer = [tonightsbill addPayment];
     payment.money = @34.00;
     paymentWithPayer.descriptionOfPayment = @"Massage";
     paymentWithPayer.payingPerson = merit;
-    noPaymentsWithoutPayers = tonightsbill.doAllPaymentHaveAPayer;
+    noPaymentsWithoutPayers = tonightsbill.doAllPaymentsHaveAPayer;
     XCTAssertFalse(noPaymentsWithoutPayers, @"There should be a payment without a payer.");
     payment.payingPerson = mark;
-    noPaymentsWithoutPayers = tonightsbill.doAllPaymentHaveAPayer;
+    noPaymentsWithoutPayers = tonightsbill.doAllPaymentsHaveAPayer;
     XCTAssertTrue(noPaymentsWithoutPayers, @"All payments should have a payer.");
 }
 
