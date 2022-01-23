@@ -4,7 +4,7 @@
 <array>
 	<dict>
 		<key>categoryDescription</key>
-		<string>None</string>
+		<string>Keine</string>
 		<key>categoryPictureFilename</key>
 		<string></string>
 		<key>categoryId</key>
@@ -12,7 +12,7 @@
 	</dict>
 	<dict>
 		<key>categoryDescription</key>
-		<string>Dinner</string>
+		<string>Abendessen</string>
 		<key>categoryPictureFilename</key>
 		<string>Dinner-Red</string>
 		<key>categoryId</key>
@@ -20,25 +20,25 @@
 	</dict>
 	<dict>
 		<key>categoryDescription</key>
-		<string>Drinks</string>
+		<string>Getränke</string>
 		<key>categoryPictureFilename</key>
-		<string>Drinks-Orange</string>
+		<string>Drinks-Green</string>
 		<key>categoryId</key>
 		<integer>2</integer>
 	</dict>
 	<dict>
 		<key>categoryDescription</key>
-		<string>Fuel</string>
+		<string>Sprit</string>
 		<key>categoryPictureFilename</key>
-		<string>Fuel-Yellow</string>
+		<string>Fuel-Blue</string>
 		<key>categoryId</key>
 		<integer>3</integer>
 	</dict>
 	<dict>
 		<key>categoryDescription</key>
-		<string>Groceries</string>
+		<string>Lebensmittel</string>
 		<key>categoryPictureFilename</key>
-		<string>Groceries-Green</string>
+		<string>Groceries-Purple</string>
 		<key>categoryId</key>
 		<integer>4</integer>
 	</dict>
@@ -52,49 +52,49 @@
 	</dict>
 	<dict>
 		<key>categoryDescription</key>
-		<string>Tickets</string>
+		<string>Eintrittskarten</string>
 		<key>categoryPictureFilename</key>
-		<string>Tickets-Green</string>
+		<string>Tickets-Orange</string>
 		<key>categoryId</key>
 		<integer>6</integer>
 	</dict>
 	<dict>
 		<key>categoryDescription</key>
-		<string>Rent</string>
+		<string>Miete</string>
 		<key>categoryPictureFilename</key>
-		<string>Rent-Orange</string>
+		<string>Rent-Red</string>
 		<key>categoryId</key>
 		<integer>7</integer>
 	</dict>
 	<dict>
 		<key>categoryDescription</key>
-		<string>Spa &amp; Relaxation</string>
+		<string>Spa &amp; Wellness</string>
 		<key>categoryPictureFilename</key>
-		<string>Spa-Yellow</string>
+		<string>Spa-Green</string>
 		<key>categoryId</key>
 		<integer>8</integer>
 	</dict>
 	<dict>
 		<key>categoryDescription</key>
-		<string>Travel</string>
+		<string>Reisen</string>
 		<key>categoryPictureFilename</key>
-		<string>Travel-Blue</string>
+		<string>Travel-Orange</string>
 		<key>categoryId</key>
 		<integer>9</integer>
 	</dict>
 	<dict>
 		<key>categoryDescription</key>
-		<string>Miscellaneous</string>
+		<string>Sonstiges</string>
 		<key>categoryPictureFilename</key>
-		<string>Misc-Purple</string>
+		<string>Misc-Yellow</string>
 		<key>categoryId</key>
 		<integer>10</integer>
 	</dict>
 	<dict>
 		<key>categoryDescription</key>
-		<string>Present</string>
+		<string>Geschenk</string>
 		<key>categoryPictureFilename</key>
-		<string>Present-Red</string>
+		<string>Present-Yellow</string>
 		<key>categoryId</key>
 		<integer>11</integer>
 	</dict>
