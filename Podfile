@@ -10,10 +10,8 @@ target 'We all pay' do
     pod 'Firebase/RemoteConfig'
     pod 'Google-Mobile-Ads-SDK'
     pod 'GoogleMobileAdsMediationFacebook'
-    pod 'GoogleMobileAdsMediationInMobi'
     pod 'GoogleMobileAdsMediationAdColony'
     pod 'GoogleMobileAdsMediationAppLovin'
-    pod 'GoogleMobileAdsMediationMoPub'
     pod 'PersonalizedAdConsent'
     pod 'GoogleMobileAdsMediationTestSuite', :configurations => ['AdTest']
     
