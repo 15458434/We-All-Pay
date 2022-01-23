@@ -174,13 +174,15 @@ static void * sectionsContext = &sectionsContext;
 }
 
 - (void)startAdBanner {
-    self.worstSalesPitchEverView = [[GADBannerView alloc] initWithAdSize:GADAdSizeLargeBanner];
-    self.worstSalesPitchEverView.alpha = 0.0;
-    [self.adBannerEngine prepareAdBanner:self.worstSalesPitchEverView withAdUnitId:self.adBannerUnitId andViewController:self];
-    MCAdSectionItemsModel *section = [[MCAdSectionItemsModel alloc] init];
-    if (![_model containsSection:section]) {
-        section.adStatus = MCAdSectionItemsModelStatusIsShowing;
-        [_model addSection:section];
+    if (MCAdEngine.isEnabled) {
+        self.worstSalesPitchEverView = [[GADBannerView alloc] initWithAdSize:GADAdSizeLargeBanner];
+        self.worstSalesPitchEverView.alpha = 0.0;
+        [self.adBannerEngine prepareAdBanner:self.worstSalesPitchEverView withAdUnitId:self.adBannerUnitId andViewController:self];
+        MCAdSectionItemsModel *section = [[MCAdSectionItemsModel alloc] init];
+        if (![_model containsSection:section]) {
+            section.adStatus = MCAdSectionItemsModelStatusIsShowing;
+            [_model addSection:section];
+        }
     }
 }
 
