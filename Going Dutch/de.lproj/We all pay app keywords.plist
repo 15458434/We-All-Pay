@@ -1,22 +1,21 @@
-<?xml version="1.0" encoding="UTF-8"?>
+<?xml version='1.0' encoding='UTF-8'?>
 <!DOCTYPE plist PUBLIC "-//Apple//DTD PLIST 1.0//EN" "http://www.apple.com/DTDs/PropertyList-1.0.dtd">
 <plist version="1.0">
 <array>
-	<string>share</string>
-	<string>bills</string>
-	<string>split</string>
-	<string>trip</string>
-	<string>money</string>
-	<string>expense</string>
-	<string>payback</string>
-	<string>group</string>
-	<string>tab</string>
-	<string>shared</string>
-	<string>calculator</string>
-	<string>iou</string>
-	<string>i</string>
-	<string>owe</string>
-	<string>you</string>
-	<string>finance</string>
+	<string>teilen</string>
+	<string>Beleg</string>
+	<string>Quittung</string>
+	<string>Ausflug</string>
+	<string>Geld</string>
+	<string>Kosten</string>
+	<string>zurückzahlen</string>
+	<string>Gruppe</string>
+	<string>Rechnung</string>
+	<string>geteilt</string>
+	<string>Rechner</string>
+	<string>ich</string>
+	<string>schulde</string>
+	<string>dir</string>
+	<string>Finanzen</string>
 </array>
 </plist>

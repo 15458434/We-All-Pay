@@ -593,6 +593,9 @@
 		38BEA790275E228B00D05D8B /* EventModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = EventModel.swift; sourceTree = "<group>"; };
 		38BEA799275F765C00D05D8B /* nl */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = nl; path = nl.lproj/Localizable.strings; sourceTree = "<group>"; };
 		38BEA79F275F783800D05D8B /* nl */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = nl; path = nl.lproj/InfoPlist.strings; sourceTree = "<group>"; };
+		38BF97D4279D3B270033BF38 /* de */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = de; path = de.lproj/Localizable.strings; sourceTree = "<group>"; };
+		38BF97D5279D3B270033BF38 /* de */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = de; path = de.lproj/InfoPlist.strings; sourceTree = "<group>"; };
+		38BF97D6279D3B270033BF38 /* de */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = de; path = de.lproj/Localizable.strings; sourceTree = "<group>"; };
 		38C1AD4526EE871D00E09E09 /* MCPaymentPresenceTableViewCell_iPhone.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = MCPaymentPresenceTableViewCell_iPhone.h; sourceTree = "<group>"; };
 		38C1AD4626EE871D00E09E09 /* MCPaymentPresenceTableViewCell_iPhone.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = MCPaymentPresenceTableViewCell_iPhone.m; sourceTree = "<group>"; };
 		38C3AB141CBCF3200011C10C /* ViewControllerProtocols.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ViewControllerProtocols.swift; sourceTree = "<group>"; };
@@ -2515,6 +2518,7 @@
 			isa = PBXVariantGroup;
 			children = (
 				381276051BBD8F130004C8C2 /* nl */,
+				38BF97D5279D3B270033BF38 /* de */,
 			);
 			name = InfoPlist.strings;
 			sourceTree = "<group>";
@@ -2553,6 +2557,7 @@
 			isa = PBXVariantGroup;
 			children = (
 				3896D1432760E5FA00DC7381 /* nl */,
+				38BF97D6279D3B270033BF38 /* de */,
 			);
 			name = Localizable.strings;
 			sourceTree = "<group>";
@@ -2585,6 +2590,7 @@
 			children = (
 				38BEA799275F765C00D05D8B /* nl */,
 				38CB1BE02799490C0074769F /* es */,
+				38BF97D4279D3B270033BF38 /* de */,
 			);
 			name = Localizable.strings;
 			sourceTree = "<group>";

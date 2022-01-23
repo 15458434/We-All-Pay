@@ -7,9 +7,29 @@
 		<key>NSStringVariableWidthRuleType</key>
 		<dict>
 			<key>25</key>
-			<string>Presence on payment</string>
+			<string>Anwesenheit bei der Zahlung</string>
 			<key>50</key>
-			<string>People sharing this payment</string>
+			<string>Personen, die sich diese Zahlung teilen</string>
+		</dict>
+	</dict>
+	<key>people_view_button_contacts</key>
+	<dict>
+		<key>NSStringVariableWidthRuleType</key>
+		<dict>
+			<key>25</key>
+			<string>Kontakte</string>
+			<key>50</key>
+			<string>Aus Kontakten importieren</string>
+		</dict>
+	</dict>
+	<key>solution_view_cell_label_total_spent</key>
+	<dict>
+		<key>NSStringVariableWidthRuleType</key>
+		<dict>
+			<key>20</key>
+			<string>Insgesamt:</string>
+			<key>25</key>
+			<string>Insgesamt ausgegeben:</string>
 		</dict>
 	</dict>
 	<key>solution_view_email_result_total_sum_paid_by</key>
@@ -22,32 +42,12 @@
 			<string>NSStringPluralRuleType</string>
 			<key>NSStringFormatValueTypeKey</key>
 			<string>lu</string>
-			<key>zero</key>
-			<string>Nobody has paid anything so far.</string>
 			<key>one</key>
-			<string>%lu person has paid for everything:</string>
+			<string>%lu Person hat für alles bezahlt:</string>
 			<key>other</key>
-			<string>%lu people have paid everything:</string>
-		</dict>
-	</dict>
-	<key>people_view_button_contacts</key>
-	<dict>
-		<key>NSStringVariableWidthRuleType</key>
-		<dict>
-			<key>25</key>
-			<string>Contacts</string>
-			<key>50</key>
-			<string>Import from Contacts</string>
-		</dict>
-	</dict>
-	<key>solution_view_cell_label_total_spent</key>
-	<dict>
-		<key>NSStringVariableWidthRuleType</key>
-		<dict>
-			<key>20</key>
-			<string>Total:</string>
-			<key>25</key>
-			<string>Total spent:</string>
+			<string>%lu Personen haben alles bezahlt:</string>
+			<key>zero</key>
+			<string>Bisher hat noch niemand etwas bezahlt.</string>
 		</dict>
 	</dict>
 </dict>
