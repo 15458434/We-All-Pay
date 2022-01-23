@@ -16,7 +16,8 @@ devices([
 
 languages([
     "en-US",
-    "nl-NL"
+    "nl-NL",
+    "es-ES"
 ])
 #   "de-DE",
 #   "it-IT",
