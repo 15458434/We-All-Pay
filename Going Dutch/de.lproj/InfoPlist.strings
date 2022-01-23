@@ -1,0 +1,9 @@
+/* Bundle display name */
+"CFBundleDisplayName" = "We all pay";
+
+/* Bundle name */
+"CFBundleName" = "We all pay";
+
+/* Privacy - Tracking Usage Description */
+"NSUserTrackingUsageDescription" = "Diese Kennung wird verwendet, um Dir personalisierte Werbung anzuzeigen.";
+

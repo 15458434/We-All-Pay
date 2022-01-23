@@ -37,7 +37,7 @@ let sourceArray = try! PropertyListSerialization.propertyList(from: sourceData, 
 let destinationArray = sourceArray.map { sourceItem -> CurrencyItem in
     let item = CurrencyItem()
     item.setValuesForKeys(sourceItem as! [String : Any])
-    let currencyLocale = Locale(identifier: "es")
+    let currencyLocale = Locale(identifier: "de")
     let currencyName = (currencyLocale as NSLocale).displayName(forKey: NSLocale.Key.currencyCode, value: item.code!)
     if let currencyName = currencyName {
         item.name = currencyName

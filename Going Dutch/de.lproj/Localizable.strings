@@ -1,0 +1,407 @@
+/* The name of We all pay */
+"app_name" = "We all pay";
+
+/* event name example for app store screenshots */
+"app_store_screenshots_eventname_1" = "Konzert";
+
+/* event name example for app store screenshots */
+"app_store_screenshots_eventname_2" = "Theater";
+
+/* event name example for app store screenshots */
+"app_store_screenshots_eventname_3" = "Essensausgaben in diesem Monat";
+
+/* event name example for app store screenshots */
+"app_store_screenshots_eventname_4" = "Campingausflug";
+
+/* event name example for app store screenshots */
+"app_store_screenshots_eventname_5" = "Abendessen";
+
+/* payed item example for app store screenshots */
+"app_store_screenshots_eventname_5_payment_1" = "Sushi";
+
+/* event name example for app store screenshots */
+"app_store_screenshots_eventname_6" = "Film";
+
+/* payed item example for app store screenshots */
+"app_store_screenshots_eventname_6_payment_1" = "Eintrittskarten";
+
+/* payed item example for app store screenshots */
+"app_store_screenshots_eventname_6_payment_2" = "Popcorn";
+
+/* payed item example for app store screenshots */
+"app_store_screenshots_eventname_6_payment_3" = "Getränke";
+
+/* example for appstore screenshots */
+"app_store_screenshots_person_email_1" = "robertmaier@irgendwo.de";
+
+/* example for appstore screenshots */
+"app_store_screenshots_person_email_2" = "peter@erde.de";
+
+/* example for appstore screenshots */
+"app_store_screenshots_person_email_3" = "anne_krause@arbeit.de";
+
+/* example for appstore screenshots */
+"app_store_screenshots_person_email_4" = "j.p.schneider@internet.de";
+
+/* example for appstore screenshots */
+"app_store_screenshots_person_email_5" = "mailkatja@zuhause.de";
+
+/* first name example for app store screenshots */
+"app_store_screenshots_person_firstname_1" = "Robert";
+
+/* first name example for app store screenshots */
+"app_store_screenshots_person_firstname_2" = "Peter";
+
+/* first name example for app store screenshots */
+"app_store_screenshots_person_firstname_3" = "Anne";
+
+/* first name example for app store screenshots */
+"app_store_screenshots_person_firstname_4" = "Julia";
+
+/* first name example for app store screenshots */
+"app_store_screenshots_person_firstname_5" = "Katja";
+
+/* last name example for appstore screenshots */
+"app_store_screenshots_person_lastname_1" = "Maier";
+
+/* last name example for appstore screenshots */
+"app_store_screenshots_person_lastname_2" = "König";
+
+/* last name example for appstore screenshots */
+"app_store_screenshots_person_lastName_3" = "Krause";
+
+/* last name example for appstore screenshots */
+"app_store_screenshots_person_lastname_4" = "Schneider";
+
+/* last name example for appstore screenshots */
+"app_store_screenshots_person_lastname_5" = "Müller";
+
+/* Message to the user that this section in the tableview contains recently used foreign currencies */
+"currency_view_list_section_title_recent" = "Kürzlich verwendet";
+
+/* A message when there are no people present inside this shared bill */
+"event_label_no_people_present" = "Keine Personen anwesend";
+
+/* A label showing person1, person2 and other */
+"event_label_three_or_more_people_present" = "%1$@, %2$@ und andere";
+
+/* A label showing \"person1 and person2\" */
+"event_label_two_people_present" = "%1$@ und %2$@";
+
+/* A selection button at the top of the event view that allows for selection between the people and the payments on the event. This button is for selecting the payments. */
+"event_view_segmentedControl_payments_title" = "Zahlungen";
+
+/* A selection button at the top of the event view that allows for selection between the people and the payments on the event. This button is for selecting the people. */
+"event_view_segmentedControl_people_title" = "Personen";
+
+/* Text on a button to select a different main currency for an event */
+"events_view_button_change_main_currency" = "€$£¥";
+
+/* Button in the events view that creates a new event */
+"events_view_button_create_event" = "Neues Ereignis";
+
+/* Text on a delete button */
+"events_view_button_delete_event" = "Löschen";
+
+/* A message shown to the user when the list of events is empty. */
+"events_view_empty_message" = "Tippe auf \"Neues Ereignis\", um das Ereignis hinzuzufügen, für das Du die Ausgaben mit Deinen Freunden teilen möchtest.";
+
+/* The name of the event shown in the events list when the user didn't add an event name to the event. */
+"events_view_event_cell_no_event_name" = "Unbenanntes Ereignis";
+
+/* A list of all the events on which payments have been shared on the people present */
+"events_view_title" = "Ereignisse";
+
+/* Option button on the an alert view to dismiss the alert. */
+"info_view_alert_button_dismiss" = "Schließen";
+
+/* Button that says dismiss. */
+"info_view_alert_dismiss_no_app_store" = "Schließen";
+
+/* Title of an alert that is shown when the restoration of in app purchases failed to restore */
+"info_view_alert_failed_to_restore" = "Nichts zum Wiederherstellen";
+
+/* Message of the cannot send email alert title with an action for the user to take. */
+"info_view_alert_message_cannot_send_email" = "Bitte konfiguriere Deine E-Mail-Adresse unter Einstellungen";
+
+/* Message body explaining the App Store can't be reached. */
+"info_view_alert_message_no_app_store" = "Es kann keine Verbindung zum App Store hergestellt werden. Bitte stelle eine Verbindung mit dem Internet her.";
+
+/* Messages of an alert to the user that thanks them for making the ad free in app purchase */
+"info_view_alert_purchased_message" = "(productName) ist jetzt frei von jeder Werbung.";
+
+/* Title of an alert to the user that thanks them for making the ad free in app purchase. */
+"info_view_alert_purchased_title" = "Vielen Dank für Deinen Kauf";
+
+/* message of an alert to the user that says their ad free version is restored */
+"info_view_alert_restore_purchase_message" = "Willkommen zurück. Dein werbefreies Erlebnis wurde für Dich wiederhergestellt";
+
+/* title of an alert to the user that says their ad free version is restored */
+"info_view_alert_restore_purchase_title" = "Werbefreie Version wiederhergestellt";
+
+/* Title of an alert to tell the user he's unable to send email. */
+"info_view_alert_title_cannot_send_email" = "E-Mail kann nicht gesendet werden";
+
+/* Message that pops up when the App Store is not available. */
+"info_view_alert_title_no_app_store" = "App Store nicht verfügbar";
+
+/* Button in the info view that will make the ad free in app purchase for the user */
+"info_view_cell_buy_ad_free" = "Werbefreie Version kaufen";
+
+/* Text of a button in the info view that opens up a mail dialogue to send feedback to support */
+"info_view_cell_feedback" = "Feedback geben";
+
+/* Text of a button in the info view that opens the page in the App Store with all of my apps. */
+"info_view_cell_my_apps" = "Meine Apps";
+
+/* Text of a button in the info view that opens the notifications view */
+"info_view_cell_notifications" = "Benachrichtigungen";
+
+/* Text of a button in the info view that opens the rate me dialogue */
+"info_view_cell_rate_me" = "Bewerte mich";
+
+/* Text of a button in the info view that initiates restoring the in app purchases */
+"info_view_cell_restore_purchases" = "Wiederherstellung früherer Käufe";
+
+/* A string that is shown when the description of the item it not available. */
+"label_no_item_description" = "Irgendetwas";
+
+/* A string to indicate no person is available on this payment */
+"label_no_person" = "Niemand";
+
+/* A message for no notifications in the notifications screen. */
+"notifications_view_empty_message" = "Im Moment nichts Neues.";
+
+/* Title of the screen that contains a list of notifications to the user. */
+"notifications_view_title" = "Benachrichtigungen";
+
+/* Text of the payment category selection button */
+"payment_view_button_select_category" = "Kategorie auswählen";
+
+/* Text on the button that changes the currency in which the currently entered payment was made. */
+"payment_view_button_select_currency" = "€$£¥";
+
+/* Button in the edit payment view that allows the user to select a new payer */
+"payment_view_button_select_payer" = "Bezahler auswählen";
+
+/* A placeholder of the item description field in the edit payment view. */
+"payment_view_item_description_placeholder" = "Was wurde bezahlt?";
+
+/* Header in the paymentView which states payment */
+"payment_view_mainLabel_edit_payment" = "Zahlung";
+
+/* Header in the paymentView which state new Payment */
+"payment_view_mainLabel_new_payment" = "Neue Zahlung";
+
+/* A term that replaced the description of an a payment when no description is entered in the payment. */
+"payment_view_no_full_description" = "Irgendetwas";
+
+/* A placeholder of who paid text field in the edit payment view */
+"payment_view_payerNameField_placeholder" = "Wer hat bezahlt?";
+
+/* Title of the list of people who are present on the current payment in the edit payment view. */
+"payment_view_presence_list_title" = "Anwesenheit bei der Zahlung";
+
+/* A placeholder of the price fireld in the edit payment view. */
+"payment_view_price_placeholder" = "Wie viel wird ausgegeben?";
+
+/* Sub header in the paymentView which states Add payment data */
+"payment_view_subLabel_add_payment" = "Zahlungsdaten hinzufügen";
+
+/* Sub header in the paymentView which states edit payment data */
+"payment_view_subLabel_edit_payment" = "Zahlungsdaten bearbeiten";
+
+/* Text for button on an alert that dismisses the alert */
+"payments_view_alert_button_dismiss" = "Schließen";
+
+/* Text on a button to press the cancel action on an alert that tells the user the current event can't be solved due to missing information on who paid something. */
+"payments_view_alert_cancel" = "Abbrechen";
+
+/* Button on an alert that navigates the payment that's missing the information who paid that particular payment */
+"payments_view_alert_go_to" = "Zahlung öffnen";
+
+/* Message of an alert shown to the user when solve has been pressed and We All Pay is unable to solve due to a missing payer on a payment. */
+"payments_view_alert_message_cannot_solve" = "Bei einer der Zahlungen fehlt die Information, wer bezahlt hat";
+
+/* Title for an alert message, because there are no people added to this event. */
+"payments_view_alert_title_add_people_first" = "Füge zuerst Personen hinzu";
+
+/* Title of an alert shown to the user when solve has been pressed the We All Pay is unable to solve due to a missing payer on an payment. */
+"payments_view_alert_title_cannot_solve" = "Unmöglich zu berechnen";
+
+/* Title of a button that adds a payment and opens the new payment view to enter the information on a new payment */
+"payments_view_button_add_payment" = "Zahlung hinzufügen";
+
+/* Title of a button that solves who needs to pay whom on the current event. */
+"payments_view_button_solve_event" = "Berechnen";
+
+/* Empty message list for when the list of payments is empty and there are no payments on the current event */
+"payments_view_label_empty_list" = "Tippe auf \"Zahlung hinzufügen\", um eine Zahlung zu diesem Ereignis hinzuzufügen.";
+
+/* A message to the user they can't add a payment when they didn't add people to the event. */
+"payments_view_message_add_people_first" = "Du kannst keine Zahlung hinzufügen, wenn keine Personen anwesend sind. Es gibt niemanden, mit dem Du die Kosten für dieses Ereignis teilen kannst.";
+
+/* Add person button in the people view that adds a person to the event. */
+"people_view_button_add_person" = "Person hinzufügen";
+
+/* Add person from contacts button inthe people view that imports a person from the addressbook to the event */
+"people_view_button_contacts" = "Kontakte";
+
+/* Empty message for the people list view. */
+"people_view_label_empty_message" = "Tippe auf \"Person hinzufügen\", um eine Person hinzuzufügen, mit der Du diese Rechnung teilen möchtest.";
+
+/* Placeholder for the field where you end the name of the event. */
+"people_view_placeholder_event_name" = "Name des Ereignisses";
+
+/* Button in the person view to select an email address of the user in case the user has multiple email addresses from an import of the addressbook */
+"person_view_button_select_email" = "E-Mail-Adresse auswählen";
+
+/* Sub header in the personView which state edit data */
+"person_view_button_subLabel_edit_person" = "Bearbeiten";
+
+/* Header in the personView which state new person. */
+"person_view_mainLabel_title" = "Person";
+
+/* Placeholder of the e-mail address field in the edit person view */
+"person_view_placeholder_email_address" = "E-Mail-Adresse";
+
+/* Placeholder of the First Name field in the edit person view */
+"person_view_placeholder_first_name" = "Vorname";
+
+/* Placeholder of the Last name field in the edit person view */
+"person_view_placeholder_last_name" = "Nachname";
+
+/* Sub header in the personView which states add new data */
+"person_view_subLabel_new_person" = "Hinzufügen";
+
+/* An string that indicates that no person is selected in the select payer picker */
+"picker_option_none" = "niemand";
+
+/* Message to the user to give We all pay a five star rating. */
+"rate_me_alert_message" = "Bitte gib We all pay eine 5-Sterne-Bewertung und helfe anderen Menschen, die Vorteile von We all pay zu entdecken.";
+
+/* Title of the No button on the rate me in the App Store button. */
+"rate_me_alert_no" = "Definitiv nicht";
+
+/* Question to the user whether or not they like this app. */
+"rate_me_alert_title" = "Magst Du We all pay?";
+
+/* Title of a Yes button on the rate me in the App Store button. */
+"rate_me_alert_yes" = "Klar";
+
+/* The title of the select category screen. It allows for selecting a categoy of the payment. */
+"select_category_view_title" = "Kategorie auswählen";
+
+/* Section Index Symbol for recent used currencies in the select currencies view. */
+"select_currency_view_section_index_recent_currencies" = "!";
+
+/* Title of the select currency view that allows for selecting a currency. */
+"select_currency_view_title" = "Währung auswählen";
+
+/* Bill overview of our trip to %1$@ */
+"solution_email_subject" = "Kostenübersicht für unser Ereignis %1$@";
+
+/* Bill overview of our event. */
+"solution_email_subject_no_event_name" = "Überblick über die Kosten unseres Ereignisses.";
+
+/* Here you go. The full overview of the %1$@ which we spend on our last event %2$@. We spent an average of %3$@ a person. You can find more of the details below. */
+"solution_mail_body_1a" = "Hier ist sie. Die vollständige Übersicht über die %1$@, die wir bei unserem letzten Ereignis %2$@ ausgegeben haben. Wir haben durchschnittlich %3$@ pro Person ausgegeben. Weitere Details findest Du unten.";
+
+/* Here you go. The full overview of the %1$@ which we spend on our last event. We spent an average of %2$@ a person. You can find more of the details below. */
+"solution_mail_body_1b" = "Hier ist sie. Die vollständige Übersicht über die %1$@, die wir bei unserem letzten Ereignis ausgegeben haben. Wir haben durchschnittlich %2$@ pro Person ausgegeben. Weitere Details findest Du unten.";
+
+/* %1$@ has paid %2$@ for %3$@. */
+"solution_mail_body_2a" = "%1$@ hat %2$@ für %3$@ bezahlt.";
+
+/* %1$@ has paid %2$@(%3$@) for %4$@. */
+"solution_mail_body_2b" = "%1$@ hat %2$@(%3$@) für %4$@ bezahlt";
+
+/* The amount of money we used: */
+"solution_mail_body_3" = "Jeder von uns hat diese Beiträge geleistet:";
+
+/* %1$@ used %2$@ in total. */
+"solution_mail_body_4" = "%1$@ hat insgesamt %2$@ beigetragen.";
+
+/* I suggest the following solution. */
+"solution_mail_body_5" = "Auf dieser Grundlage schlage ich folgende Lösung vor:";
+
+/* %1$@ pays %2$@ to %3$@ */
+"solution_mail_body_6" = "%1$@ bezahlt %2$@ bis %3$@.";
+
+/* If you have any remarks please let me know. */
+"solution_mail_body_7" = "Falls Du Anmerkungen hast, gib mir bitte Bescheid.";
+
+/* Dear %1$@, */
+"solution_mail_header" = "Liebe/r %1$@,";
+
+/* Text on a button that dismisses the alert */
+"solution_view_alert_action_cannot_send_email_dismiss" = "Schließen";
+
+/* Button that says dismiss */
+"solution_view_alert_action_data_missing_in_payment_dimiss" = "Schließen";
+
+/* An action button in an alert that allows for instant navigation to a payment with missing data. */
+"solution_view_alert_action_data_missing_in_payment_go_to" = "Öffnen";
+
+/* Text on button to cancel the alert that says there are people without email addresses. */
+"solution_view_alert_action_dismiss" = "Abbrechen";
+
+/* Button title of an alert view to tell the user We All Pay is unable to fetch exchange rates to calculation a solution. */
+"solution_view_alert_action_dismiss_cannot_fetch_exchange_rates" = "Schließen";
+
+/* Action button on an alert to send email anyway in case not all email addresses have been entered. */
+"solution_view_alert_action_send_anyway" = "Trotzdem senden";
+
+/* Message explaining what the user can do to refetch exchange rates
+   Message in an alert of the solution view that pops up when fetching exchange rates is impossible. It explains what the user can do to refetch exchange rates. */
+"solution_view_alert_message_cannot_fetch_exchange_rates" = "Das Abrufen der Wechselkurse ist im Moment nicht möglich. Überprüfe Deine Internetverbindung und/oder tippe auf \"Berechnen\", um alle fehlenden Wechselkurse zu einem späteren Zeitpunkt abzurufen.";
+
+/* Instruction in an alert to tell the user that they should check their email address for a valid configuration. */
+"solution_view_alert_message_cannot_send_mail" = "Bitte konfiguriere Deine E-Mail-Adresse unter Einstellungen";
+
+/* Alert message suggesting the user that there is missing data on a payment. */
+"solution_view_alert_message_data_missing_in_payment" = "Bitte prüfe die Zahlung auf fehlende Angaben";
+
+/* Message of an alert shown to the user in case not everyone on the event has an email address. */
+"solution_view_alert_message_missing_email_address" = "Nicht alle Personen haben eine E-Mail-Adresse. Füge die fehlenden E-Mail-Adressen hinzu oder sende es trotzdem.";
+
+/* itle message of an alert that pops up when fetching exchange rates is impossibl
+   Title message of an alert that pops up when fetching exchange rates is impossible */
+"solution_view_alert_title_cannot_fetch_exchange_rates" = "Wechselkurse können nicht abgerufen werden";
+
+/* Title of an alert that notifies the user the app is unable to send email. */
+"solution_view_alert_title_cannot_send_mail" = "E-Mail kann nicht gesendet werden";
+
+/* Alert title stating that data is missing in a payment */
+"solution_view_alert_title_data_missing_in_payment" = "Fehlende Daten bei der Zahlung";
+
+/* Title of an alert shown to the user in case not everyone on the event has an email address. */
+"solution_view_alert_title_missing_email_address" = "Es ist nicht möglich, eine E-Mail an alle Personen zu senden.";
+
+/* Title of a button that allows for sending the email with the solution. */
+"solution_view_button_send_email" = "E-Mail senden";
+
+/* In the solution view: a label before the total amount of money spent on the entire event. */
+"solution_view_cell_label_total_spent" = "Insgesamt ausgegeben:";
+
+/* In the solution view: As in Mark owes Yvette x amount of money. */
+"solution_view_cell_who_owes_who_label" = "%1$@ schuldet %2$@";
+
+/* No comment provided by engineer. */
+"solution_view_email_result_total_sum_paid_by" = "solution_view_email_result_total_sum_paid_by";
+
+/* Please add payments and/or people if you want a solution on who owes who. */
+"solution_view_list_empty_message" = "Bitte füge Personen und Zahlungen hinzu, wenn Du berechnen möchtest, wer wem etwas schuldet.";
+
+/* Section title in the solution screen that shows the title of the section that shows who owes how much to the group */
+"solution_view_section_title_total_owes" = "Insgesamt geschuldet";
+
+/* Section title in the solution screen that shows the title of the section that shows who paid how much on the entire event */
+"solution_view_section_title_total_paid" = "Insgesamt bezahlt";
+
+/* Section title in the solution screen that shows the title of the section that shows who owes who what how much money */
+"solution_view_section_title_who_owes_who" = "Wer schuldet wem";
+
+/* Title of the screen that shows the solution to the user of who owes who, what amount of money. */
+"solution_view_title" = "Berechnung";
+
