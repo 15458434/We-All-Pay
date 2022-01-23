@@ -15,7 +15,6 @@ import UserMessagingPlatform
 import PersonalizedAdConsent
 import GoogleMobileAds
 import AppLovinSDK
-import MoPubSDK
 import FBAudienceNetwork
 
 struct TCFReader {
@@ -154,12 +153,6 @@ struct TCFReader {
                     ALPrivacySettings.setHasUserConsent(tcf.canShowPersonalizedAds())
                     // Facebook
                     FBAdSettings.setAdvertiserTrackingEnabled(canShowPersonalizedAds)
-                    // Mopub
-                    if canShowPersonalizedAds {
-                        MoPub.sharedInstance().grantConsent()
-                    } else {
-                        MoPub.sharedInstance().revokeConsent()
-                    }
                 }
             }
         }
