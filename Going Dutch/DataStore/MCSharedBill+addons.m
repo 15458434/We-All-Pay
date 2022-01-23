@@ -364,21 +364,20 @@
     return @(sumOfAllOwes);
 }
 
-- (BOOL)doAllPaymentHaveAPayer
-{
+- (BOOL)doAllPaymentsHaveAPayer {
     // Query that checks to see if all the payments have a payer.
-    NSFetchRequest *request = [[NSFetchRequest alloc] initWithEntityName:@"MCPayment"];
+    NSFetchRequest *request = MCPayment.fetchRequest;
     request.sortDescriptors = @[[NSSortDescriptor sortDescriptorWithKey:@"dateCreated" ascending:YES]];
-    request.predicate = [NSPredicate predicateWithFormat:@"payingPerson = nil"];
-    NSError *fetchError;
-    NSUInteger amountOfPaymentWithoutPayers = [[self managedObjectContext] countForFetchRequest:request error:&fetchError];
-    if (fetchError) {
-        NSLog(@"Something went wrong counting payments without payers: %@", fetchError);
+    request.predicate = [NSPredicate predicateWithFormat:@"onWhichBill = %@ AND payingPerson = %@", self, [NSNull null]];
+    NSError *countError;
+    NSUInteger amountOfPaymentWithoutPayers = [[self managedObjectContext] countForFetchRequest:request error:&countError];
+    if (countError) {
+        NSLog(@"Something went wrong counting payments without payers: %@", countError);
     }
     if (amountOfPaymentWithoutPayers > 0) {
-        return false;
+        return NO;
     } else {
-        return true;
+        return YES;
     }
 }
 
