@@ -190,6 +190,7 @@
 		38D177111C3A5E640084604C /* SelectCategoryTableViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 38D177101C3A5E640084604C /* SelectCategoryTableViewController.swift */; };
 		38D177131C3A85C00084604C /* SelectCurrencyTableViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 38D177121C3A85C00084604C /* SelectCurrencyTableViewController.swift */; };
 		38D1C3801A8A38B5008F2A8E /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 38D1C37F1A8A38B5008F2A8E /* LaunchScreen.storyboard */; };
+		38D34D07279FE3F5004AA290 /* SolutionReturnPaymentItem.swift in Sources */ = {isa = PBXBuildFile; fileRef = 383D5D831C0708F800BE9F94 /* SolutionReturnPaymentItem.swift */; };
 		38D6A3C61C73DDC000968BB2 /* RateMeControllerForiOS.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 38D6A3BC1C73DDBF00968BB2 /* RateMeControllerForiOS.framework */; };
 		38D6A3D11C73DDC000968BB2 /* RateMeControllerForiOS.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 38D6A3BC1C73DDBF00968BB2 /* RateMeControllerForiOS.framework */; };
 		38D6A3D21C73DDC000968BB2 /* RateMeControllerForiOS.framework in Embed Frameworks */ = {isa = PBXBuildFile; fileRef = 38D6A3BC1C73DDBF00968BB2 /* RateMeControllerForiOS.framework */; settings = {ATTRIBUTES = (CodeSignOnCopy, RemoveHeadersOnCopy, ); }; };
@@ -2362,6 +2363,7 @@
 				3860575519EEB28300BD5B78 /* MCCategoryPictureStoreTest.m in Sources */,
 				385F530F191C2D140012773D /* MCPaymentPresenceTest.m in Sources */,
 				385F5310191C2D140012773D /* MCPaymentAddonsTest.m in Sources */,
+				38D34D07279FE3F5004AA290 /* SolutionReturnPaymentItem.swift in Sources */,
 				385F5311191C2D140012773D /* MCPersonAddonsTest.m in Sources */,
 				388474BE272419B4008D6C33 /* WeAllPayStore.xcdatamodeld in Sources */,
 				389DE910197FD6DF00169645 /* MCCurrencyTest.m in Sources */,
