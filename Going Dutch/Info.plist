@@ -43,6 +43,11 @@
 	<string>ca-app-pub-5354415674074435~7504388301</string>
 	<key>GADDelayAppMeasurementInit</key>
 	<true/>
+	<key>LSApplicationCategoryType</key>
+	<dict>
+		<key>UIImageName</key>
+		<string></string>
+	</dict>
 	<key>LSApplicationQueriesSchemes</key>
 	<array>
 		<string>fb</string>
