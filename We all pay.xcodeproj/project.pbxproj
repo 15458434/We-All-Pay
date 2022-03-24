@@ -1627,9 +1627,9 @@
 			isa = PBXNativeTarget;
 			buildConfigurationList = 382B76FB1C398249000C203A /* Build configuration list for PBXNativeTarget "CurrencyConverter" */;
 			buildPhases = (
+				382B76DD1C398249000C203A /* Headers */,
 				382B76DB1C398249000C203A /* Sources */,
 				382B76DC1C398249000C203A /* Frameworks */,
-				382B76DD1C398249000C203A /* Headers */,
 				382B76DE1C398249000C203A /* Resources */,
 			);
 			buildRules = (
@@ -1748,9 +1748,9 @@
 			isa = PBXNativeTarget;
 			buildConfigurationList = 388A32931C11EDBD00F7459C /* Build configuration list for PBXNativeTarget "WhoPayingUserDefaultsStoreInterface" */;
 			buildPhases = (
+				388A32791C11EDBD00F7459C /* Headers */,
 				388A32771C11EDBD00F7459C /* Sources */,
 				388A32781C11EDBD00F7459C /* Frameworks */,
-				388A32791C11EDBD00F7459C /* Headers */,
 				388A327A1C11EDBD00F7459C /* Resources */,
 			);
 			buildRules = (
@@ -1819,9 +1819,9 @@
 			isa = PBXNativeTarget;
 			buildConfigurationList = 38D6A3D31C73DDC100968BB2 /* Build configuration list for PBXNativeTarget "RateMeControllerForiOS" */;
 			buildPhases = (
+				38D6A3B91C73DDBF00968BB2 /* Headers */,
 				38D6A3B71C73DDBF00968BB2 /* Sources */,
 				38D6A3B81C73DDBF00968BB2 /* Frameworks */,
-				38D6A3B91C73DDBF00968BB2 /* Headers */,
 				38D6A3BA1C73DDBF00968BB2 /* Resources */,
 			);
 			buildRules = (
