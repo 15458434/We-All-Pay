@@ -1861,7 +1861,7 @@
 				CLASSPREFIX = MC;
 				LastSwiftMigration = 0700;
 				LastSwiftUpdateCheck = 1320;
-				LastUpgradeCheck = 1310;
+				LastUpgradeCheck = 1330;
 				ORGANIZATIONNAME = "Mark Cornelisse";
 				TargetAttributes = {
 					382B76DF1C398249000C203A = {
@@ -4385,6 +4385,7 @@
 				CLANG_WARN_DOCUMENTATION_COMMENTS = YES;
 				CLANG_WARN_OBJC_ROOT_CLASS = YES_ERROR;
 				CLANG_WARN_UNGUARDED_AVAILABILITY = YES_AGGRESSIVE;
+				CODE_SIGN_IDENTITY = "-";
 				CODE_SIGN_STYLE = Automatic;
 				COPY_PHASE_STRIP = NO;
 				DEBUG_INFORMATION_FORMAT = "dwarf-with-dsym";
