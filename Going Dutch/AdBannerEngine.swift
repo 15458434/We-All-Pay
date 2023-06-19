@@ -52,7 +52,7 @@ import GoogleMobileAds
     
     @objc(prepareAdSizeBanner:withAdUnitId:andViewController:) func prepare(adSizeBanner: GADBannerView, with adUnitID: String, and viewController: UIViewController) {
         func prepareAdBanner(with consent: PACConsentStatus = .unknown) {
-            adSizeBanner.adSize = kGADAdSizeBanner
+            adSizeBanner.adSize = GADAdSizeBanner
             adSizeBanner.adUnitID = adUnitID
             adSizeBanner.rootViewController = viewController
             adSizeBanner.delegate = self
@@ -75,7 +75,7 @@ import GoogleMobileAds
     @objc(prepareMediumAdBanner:withAdUnitId:andViewController:) func prepare(mediumAdBanner: GADBannerView, with adUnitID: String, and viewController: UIViewController) {
         func prepareAdBanner(with consent: PACConsentStatus = .unknown) {
             mediumAdBanner.adUnitID = adUnitID
-            mediumAdBanner.adSize = kGADAdSizeMediumRectangle
+            mediumAdBanner.adSize = GADAdSizeMediumRectangle
             mediumAdBanner.rootViewController = viewController
             mediumAdBanner.delegate = self
             mediumAdBanner.load(self.request)

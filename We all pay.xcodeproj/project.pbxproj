@@ -1914,7 +1914,6 @@
 					};
 					38B6E0EB1A28BBAB009E69D7 = {
 						CreatedOnToolsVersion = 6.1;
-						DevelopmentTeam = Z6JP26PUUY;
 						LastSwiftMigration = 0940;
 						SystemCapabilities = {
 							com.apple.ApplicationGroups.iOS = {
@@ -3166,7 +3165,7 @@
 				CODE_SIGN_IDENTITY = "iPhone Developer";
 				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer";
 				"CODE_SIGN_IDENTITY[sdk=macosx*]" = "Mac Developer";
-				CURRENT_PROJECT_VERSION = 168;
+				CURRENT_PROJECT_VERSION = 169;
 				DEVELOPMENT_TEAM = Z6JP26PUUY;
 				EXCLUDED_ARCHS = "$(inherited)";
 				"EXCLUDED_ARCHS[sdk=iphonesimulator*]" = "$(inherited) i386";
@@ -3201,7 +3200,7 @@
 					"$(inherited)",
 					"$(PROJECT_DIR)/**",
 				);
-				MARKETING_VERSION = 1.7.26;
+				MARKETING_VERSION = 1.7.27;
 				OTHER_LDFLAGS = (
 					"$(inherited)",
 					"-Wpartial-availability",
@@ -3234,7 +3233,7 @@
 				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer";
 				"CODE_SIGN_IDENTITY[sdk=macosx*]" = "Mac Developer";
 				COPY_PHASE_STRIP = NO;
-				CURRENT_PROJECT_VERSION = 168;
+				CURRENT_PROJECT_VERSION = 169;
 				DEVELOPMENT_TEAM = Z6JP26PUUY;
 				EXCLUDED_ARCHS = "$(inherited)";
 				"EXCLUDED_ARCHS[sdk=iphonesimulator*]" = "$(inherited) i386";
@@ -3255,7 +3254,7 @@
 					"$(inherited)",
 					"$(PROJECT_DIR)/**",
 				);
-				MARKETING_VERSION = 1.7.26;
+				MARKETING_VERSION = 1.7.27;
 				OTHER_LDFLAGS = (
 					"$(inherited)",
 					"-Wpartial-availability",
@@ -3447,7 +3446,7 @@
 				CODE_SIGN_IDENTITY = "iPhone Developer";
 				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer";
 				"CODE_SIGN_IDENTITY[sdk=macosx*]" = "Mac Developer";
-				CURRENT_PROJECT_VERSION = 168;
+				CURRENT_PROJECT_VERSION = 169;
 				DEVELOPMENT_TEAM = Z6JP26PUUY;
 				EXCLUDED_ARCHS = "$(inherited)";
 				"EXCLUDED_ARCHS[sdk=iphonesimulator*]" = "$(inherited) i386";
@@ -3472,7 +3471,7 @@
 					"$(inherited)",
 					"$(PROJECT_DIR)/**",
 				);
-				MARKETING_VERSION = 1.7.26;
+				MARKETING_VERSION = 1.7.27;
 				OTHER_LDFLAGS = (
 					"$(inherited)",
 					"-Wpartial-availability",
@@ -3558,6 +3557,7 @@
 				"CODE_SIGN_IDENTITY[sdk=macosx*]" = "Mac Developer";
 				CURRENT_PROJECT_VERSION = 168;
 				DEFINES_MODULE = YES;
+				DEVELOPMENT_TEAM = Z6JP26PUUY;
 				ENABLE_STRICT_OBJC_MSGSEND = YES;
 				GCC_PREPROCESSOR_DEFINITIONS = (
 					"DEBUG=1",
@@ -4203,6 +4203,7 @@
 				"CODE_SIGN_IDENTITY[sdk=macosx*]" = "Mac Developer";
 				CURRENT_PROJECT_VERSION = 168;
 				DEFINES_MODULE = YES;
+				DEVELOPMENT_TEAM = Z6JP26PUUY;
 				ENABLE_STRICT_OBJC_MSGSEND = YES;
 				GCC_PREPROCESSOR_DEFINITIONS = (
 					"DEBUG=1",
@@ -4254,6 +4255,7 @@
 				COPY_PHASE_STRIP = NO;
 				CURRENT_PROJECT_VERSION = 168;
 				DEFINES_MODULE = YES;
+				DEVELOPMENT_TEAM = Z6JP26PUUY;
 				ENABLE_NS_ASSERTIONS = NO;
 				ENABLE_STRICT_OBJC_MSGSEND = YES;
 				GCC_WARN_64_TO_32_BIT_CONVERSION = YES;
@@ -4657,7 +4659,7 @@
 				CODE_SIGN_IDENTITY = "iPhone Developer";
 				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer";
 				"CODE_SIGN_IDENTITY[sdk=macosx*]" = "Mac Developer";
-				CURRENT_PROJECT_VERSION = 168;
+				CURRENT_PROJECT_VERSION = 169;
 				DEVELOPMENT_TEAM = Z6JP26PUUY;
 				EXCLUDED_ARCHS = "$(inherited)";
 				"EXCLUDED_ARCHS[sdk=iphonesimulator*]" = "$(inherited) i386";
@@ -4692,7 +4694,7 @@
 					"$(inherited)",
 					"$(PROJECT_DIR)/**",
 				);
-				MARKETING_VERSION = 1.7.26;
+				MARKETING_VERSION = 1.7.27;
 				OTHER_LDFLAGS = (
 					"$(inherited)",
 					"-Wpartial-availability",
@@ -4778,6 +4780,7 @@
 				"CODE_SIGN_IDENTITY[sdk=macosx*]" = "Mac Developer";
 				CURRENT_PROJECT_VERSION = 168;
 				DEFINES_MODULE = YES;
+				DEVELOPMENT_TEAM = Z6JP26PUUY;
 				ENABLE_STRICT_OBJC_MSGSEND = YES;
 				GCC_PREPROCESSOR_DEFINITIONS = (
 					"DEBUG=1",

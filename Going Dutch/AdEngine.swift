@@ -126,7 +126,7 @@ struct TCFReader {
     class func registerDebugDevices() {
         let iPhoneX = "23915c03dc297a967b28ed1458c0f269"
         let iPadRetina = "63f51db641e29b85012042e407de3cba"
-        GADMobileAds.sharedInstance().requestConfiguration.testDeviceIdentifiers = [kGADSimulatorID, iPhoneX, iPadRetina]
+        GADMobileAds.sharedInstance().requestConfiguration.testDeviceIdentifiers = [GADSimulatorID, iPhoneX, iPadRetina]
     }
     
     @objc(presentPrivacyConsentRequestIfNecessaryFromViewController:) class func presentPrivacyConsentRequestIfNecessary(from viewController: UIViewController) {
