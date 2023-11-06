@@ -434,7 +434,7 @@
     NSError *fetchError;
     NSArray<MCExchangeRate *> *arrayOfAllExchangeRates = [[self managedObjectContext] executeFetchRequest:request error:&fetchError];
     if (fetchError) {
-        *error = fetchError;
+        if (error != NULL) *error = fetchError;
         NSLog(@"Something went wrong fetching all ExchangeRates on this bill: %@", fetchError.localizedDescription);
         return nil;
     }
