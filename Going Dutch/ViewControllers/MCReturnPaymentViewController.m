@@ -300,6 +300,7 @@ static void * sectionsContext = &sectionsContext;
         }
             break;
         default:
+            [NSException raise:@"CellNotAvailable" format:@"Cell for index type %@ is not available", @(sectionModel.sortIndex)];
             break;
     }
     
@@ -346,7 +347,6 @@ static void * sectionsContext = &sectionsContext;
     // Create KVO
     NSKeyValueObservingOptions options = NSKeyValueObservingOptionInitial | NSKeyValueObservingOptionNew | NSKeyValueObservingOptionPrior;
     [self.model addObserver:self forKeyPath:@"sections" options:options context:sectionsContext];
-    options = NSKeyValueObservingOptionInitial | NSKeyValueObservingOptionNew;
 }
 
 - (void)viewWillDisappear:(BOOL)animated {
