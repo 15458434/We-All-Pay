@@ -6,7 +6,7 @@
 //  Copyright (c) 2013 Mark Cornelisse. All rights reserved.
 //
 
-@import Firebase;
+@import FirebaseCore;
 @import FirebaseAnalytics;
 
 #import "MCAppDelegate.h"
