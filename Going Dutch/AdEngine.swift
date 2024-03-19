@@ -14,7 +14,6 @@ import UserMessagingPlatform
 
 import PersonalizedAdConsent
 import GoogleMobileAds
-import AppLovinSDK
 import FBAudienceNetwork
 
 struct TCFReader {
@@ -149,8 +148,6 @@ struct TCFReader {
                 let tcf = TCFReader()
                 if tcf.gdprApplies() {
                     let canShowPersonalizedAds = tcf.canShowPersonalizedAds()
-                    // AppLovin
-                    ALPrivacySettings.setHasUserConsent(tcf.canShowPersonalizedAds())
                     // Facebook
                     FBAdSettings.setAdvertiserTrackingEnabled(canShowPersonalizedAds)
                 }

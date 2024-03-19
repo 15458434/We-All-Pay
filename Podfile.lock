@@ -1,5 +1,4 @@
 PODS:
-  - AppLovinSDK (12.1.0)
   - FBAudienceNetwork (6.14.0)
   - FirebaseABTesting (10.22.0):
     - FirebaseCore (~> 10.0)
@@ -85,9 +84,6 @@ PODS:
     - GoogleUtilities/Environment (~> 7.7)
     - nanopb (< 2.30911.0, >= 2.30908.0)
     - PromisesObjC (< 3.0, >= 1.2)
-  - GoogleMobileAdsMediationAppLovin (12.1.0.1):
-    - AppLovinSDK (= 12.1.0)
-    - Google-Mobile-Ads-SDK (~> 10.4)
   - GoogleMobileAdsMediationFacebook (6.14.0.0):
     - FBAudienceNetwork (= 6.14.0)
     - Google-Mobile-Ads-SDK (~> 10.4)
@@ -276,14 +272,12 @@ DEPENDENCIES:
   - FirebaseCrashlytics
   - FirebaseRemoteConfig
   - Google-Mobile-Ads-SDK
-  - GoogleMobileAdsMediationAppLovin
   - GoogleMobileAdsMediationFacebook (~> 6.14)
   - GoogleMobileAdsMediationTestSuite
   - PersonalizedAdConsent
 
 SPEC REPOS:
   https://github.com/CocoaPods/Specs.git:
-    - AppLovinSDK
     - FBAudienceNetwork
     - FirebaseABTesting
     - FirebaseAnalytics
@@ -298,7 +292,6 @@ SPEC REPOS:
     - Google-Mobile-Ads-SDK
     - GoogleAppMeasurement
     - GoogleDataTransport
-    - GoogleMobileAdsMediationAppLovin
     - GoogleMobileAdsMediationFacebook
     - GoogleMobileAdsMediationTestSuite
     - GoogleUserMessagingPlatform
@@ -312,7 +305,6 @@ SPEC REPOS:
     - PromisesSwift
 
 SPEC CHECKSUMS:
-  AppLovinSDK: 179d509c258e01a3a77eb8416f0ba843a12ed322
   FBAudienceNetwork: 4d6223a9a88a22e9dca8c9e6c1829a8745b86228
   FirebaseABTesting: 66d2594b36d4ff6e7d3c8719802100990de05857
   FirebaseAnalytics: 8d0ff929c63b7f72260f332b86ccf569776b75d3
@@ -327,7 +319,6 @@ SPEC CHECKSUMS:
   Google-Mobile-Ads-SDK: 8f67a72f88d057335b1ac3f501e2b68ad054116e
   GoogleAppMeasurement: ccefe3eac9b0aa27f96066809fb1a7fe4b462626
   GoogleDataTransport: 6c09b596d841063d76d4288cc2d2f42cc36e1e2a
-  GoogleMobileAdsMediationAppLovin: 1b88297e51b4e84c0d9d8c86aa7fa76ce5153b61
   GoogleMobileAdsMediationFacebook: 13b1e1b86cca4f186fdfa0ba50467479b842c342
   GoogleMobileAdsMediationTestSuite: 072c67cb9b10b6f7847b0733baadf7c77e2d737f
   GoogleUserMessagingPlatform: b1ad7bb1ee3ce64749d4fec24f667b36e45c396c
@@ -340,6 +331,6 @@ SPEC CHECKSUMS:
   PromisesObjC: f5707f49cb48b9636751c5b2e7d227e43fba9f47
   PromisesSwift: 9d77319bbe72ebf6d872900551f7eeba9bce2851
 
-PODFILE CHECKSUM: 3caa3596514099233050c49393e99ddd7693be04
+PODFILE CHECKSUM: 5abdedac8c10d5661f57a2bac248f926403d95f0
 
 COCOAPODS: 1.15.2
