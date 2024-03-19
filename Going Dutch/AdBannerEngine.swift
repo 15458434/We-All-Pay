@@ -113,7 +113,7 @@ import GoogleMobileAds
         guard AdEngine.isEnabled else {
             return
         }
-        debugPrint("adViewDidReceiveAd: \(String(describing: bannerView.responseInfo?.responseIdentifier)) for \(String(describing: bannerView.responseInfo?.adNetworkClassName))")
+        debugPrint("adViewDidReceiveAd: \(String(describing: bannerView.responseInfo?.responseIdentifier)) for \(String(describing: bannerView.responseInfo?.loadedAdNetworkResponseInfo))")
         isReady = true
         delegate.adEngine(self, putOnscreen: bannerView)
     }
