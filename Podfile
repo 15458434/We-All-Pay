@@ -5,9 +5,9 @@ target 'We all pay' do
     use_frameworks!
     inhibit_all_warnings!
     
-    pod 'Firebase/Analytics'
-    pod 'Firebase/Crashlytics'
-    pod 'Firebase/RemoteConfig'
+    pod 'FirebaseAnalytics'
+    pod 'FirebaseCrashlytics'
+    pod 'FirebaseRemoteConfig'
     pod 'Google-Mobile-Ads-SDK'
     pod 'GoogleMobileAdsMediationFacebook'
     pod 'GoogleMobileAdsMediationAdColony'
@@ -17,7 +17,7 @@ target 'We all pay' do
     
     target 'We all pay Tests' do
         inherit! :search_paths
-        pod 'Firebase/Core'
+        pod 'FirebaseCore'
     end
     
 end

@@ -4,19 +4,6 @@ PODS:
   - FBAudienceNetwork (6.4.1):
     - FBSDKCoreKit/Basics (>= 7.0.1)
   - FBSDKCoreKit/Basics (9.3.0)
-  - Firebase/Analytics (10.22.0):
-    - Firebase/Core
-  - Firebase/Core (10.22.0):
-    - Firebase/CoreOnly
-    - FirebaseAnalytics (~> 10.22.0)
-  - Firebase/CoreOnly (10.22.0):
-    - FirebaseCore (= 10.22.0)
-  - Firebase/Crashlytics (10.22.0):
-    - Firebase/CoreOnly
-    - FirebaseCrashlytics (~> 10.22.0)
-  - Firebase/RemoteConfig (10.22.0):
-    - Firebase/CoreOnly
-    - FirebaseRemoteConfig (~> 10.22.0)
   - FirebaseABTesting (10.22.0):
     - FirebaseCore (~> 10.0)
   - FirebaseAnalytics (10.22.0):
@@ -289,10 +276,10 @@ PODS:
     - PromisesObjC (= 2.4.0)
 
 DEPENDENCIES:
-  - Firebase/Analytics
-  - Firebase/Core
-  - Firebase/Crashlytics
-  - Firebase/RemoteConfig
+  - FirebaseAnalytics
+  - FirebaseCore
+  - FirebaseCrashlytics
+  - FirebaseRemoteConfig
   - Google-Mobile-Ads-SDK
   - GoogleMobileAdsMediationAdColony
   - GoogleMobileAdsMediationAppLovin
@@ -306,7 +293,6 @@ SPEC REPOS:
     - AppLovinSDK
     - FBAudienceNetwork
     - FBSDKCoreKit
-    - Firebase
     - FirebaseABTesting
     - FirebaseAnalytics
     - FirebaseCore
@@ -339,7 +325,6 @@ SPEC CHECKSUMS:
   AppLovinSDK: ed2ea453fc6cc836f4f829046865e6731010c139
   FBAudienceNetwork: 1974ec59ef88102f284c29941d73d0cbec3f2874
   FBSDKCoreKit: 0d1ae58388a458b8222f72025804cdc84eb5d0c3
-  Firebase: 797fd7297b7e1be954432743a0b3f90038e45a71
   FirebaseABTesting: 66d2594b36d4ff6e7d3c8719802100990de05857
   FirebaseAnalytics: 8d0ff929c63b7f72260f332b86ccf569776b75d3
   FirebaseCore: 0326ec9b05fbed8f8716cddbf0e36894a13837f7
@@ -367,6 +352,6 @@ SPEC CHECKSUMS:
   PromisesObjC: f5707f49cb48b9636751c5b2e7d227e43fba9f47
   PromisesSwift: 9d77319bbe72ebf6d872900551f7eeba9bce2851
 
-PODFILE CHECKSUM: 2f77f056206b828a7f4a8e90022a86c1cf3b7159
+PODFILE CHECKSUM: 761ec0d70fe40442e6dc9581bb7e71b303067507
 
 COCOAPODS: 1.15.2
