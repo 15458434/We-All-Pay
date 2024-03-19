@@ -9,8 +9,8 @@ target 'We all pay' do
     pod 'FirebaseCrashlytics'
     pod 'FirebaseRemoteConfig'
     pod 'Google-Mobile-Ads-SDK'
-    pod 'GoogleMobileAdsMediationFacebook'
-    pod 'GoogleMobileAdsMediationAdColony'
+    pod 'GoogleMobileAdsMediationFacebook', '~> 6.14'
+    #pod 'GoogleMobileAdsMediationAdColony'
     pod 'GoogleMobileAdsMediationAppLovin'
     pod 'PersonalizedAdConsent'
     pod 'GoogleMobileAdsMediationTestSuite', :configurations => ['AdTest']

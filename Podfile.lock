@@ -1,9 +1,7 @@
 PODS:
-  - AdColony (4.6.1)
-  - AppLovinSDK (12.2.1)
-  - FBAudienceNetwork (6.4.1):
-    - FBSDKCoreKit/Basics (>= 7.0.1)
-  - FBSDKCoreKit/Basics (9.3.0)
+  - AdColony (4.9.0)
+  - AppLovinSDK (12.1.0)
+  - FBAudienceNetwork (6.14.0)
   - FirebaseABTesting (10.22.0):
     - FirebaseCore (~> 10.0)
   - FirebaseAnalytics (10.22.0):
@@ -61,7 +59,8 @@ PODS:
     - nanopb (< 2.30911.0, >= 2.30908.0)
     - PromisesSwift (~> 2.1)
   - FirebaseSharedSwift (10.22.0)
-  - Google-Mobile-Ads-SDK (11.2.0):
+  - Google-Mobile-Ads-SDK (10.14.0):
+    - GoogleAppMeasurement (< 11.0, >= 7.0)
     - GoogleUserMessagingPlatform (>= 1.1)
   - GoogleAppMeasurement (10.22.0):
     - GoogleAppMeasurement/AdIdSupport (= 10.22.0)
@@ -87,15 +86,15 @@ PODS:
     - GoogleUtilities/Environment (~> 7.7)
     - nanopb (< 2.30911.0, >= 2.30908.0)
     - PromisesObjC (< 3.0, >= 1.2)
-  - GoogleMobileAdsMediationAdColony (4.6.1.0):
-    - AdColony (= 4.6.1.0)
-    - Google-Mobile-Ads-SDK (>= 8.4.0)
-  - GoogleMobileAdsMediationAppLovin (12.2.1.0):
-    - AppLovinSDK (= 12.2.1)
-    - Google-Mobile-Ads-SDK (~> 11.0)
-  - GoogleMobileAdsMediationFacebook (6.4.1.0):
-    - FBAudienceNetwork (= 6.4.1)
-    - Google-Mobile-Ads-SDK (>= 8.4.0)
+  - GoogleMobileAdsMediationAdColony (4.9.0.2):
+    - AdColony (= 4.9.0)
+    - Google-Mobile-Ads-SDK (~> 10.0)
+  - GoogleMobileAdsMediationAppLovin (12.1.0.1):
+    - AppLovinSDK (= 12.1.0)
+    - Google-Mobile-Ads-SDK (~> 10.4)
+  - GoogleMobileAdsMediationFacebook (6.14.0.0):
+    - FBAudienceNetwork (= 6.14.0)
+    - Google-Mobile-Ads-SDK (~> 10.4)
   - GoogleMobileAdsMediationTestSuite (3.0.0):
     - Google-Mobile-Ads-SDK (>= 9.0.0)
     - MaterialComponents/Cards (~> 124.0)
@@ -283,7 +282,7 @@ DEPENDENCIES:
   - Google-Mobile-Ads-SDK
   - GoogleMobileAdsMediationAdColony
   - GoogleMobileAdsMediationAppLovin
-  - GoogleMobileAdsMediationFacebook
+  - GoogleMobileAdsMediationFacebook (~> 6.14)
   - GoogleMobileAdsMediationTestSuite
   - PersonalizedAdConsent
 
@@ -292,7 +291,6 @@ SPEC REPOS:
     - AdColony
     - AppLovinSDK
     - FBAudienceNetwork
-    - FBSDKCoreKit
     - FirebaseABTesting
     - FirebaseAnalytics
     - FirebaseCore
@@ -321,10 +319,9 @@ SPEC REPOS:
     - PromisesSwift
 
 SPEC CHECKSUMS:
-  AdColony: 6a30691e39f12bd65b351b29afd52bf497bca4f8
-  AppLovinSDK: ed2ea453fc6cc836f4f829046865e6731010c139
-  FBAudienceNetwork: 1974ec59ef88102f284c29941d73d0cbec3f2874
-  FBSDKCoreKit: 0d1ae58388a458b8222f72025804cdc84eb5d0c3
+  AdColony: af8b7414f317641e0e1e9d23a7b739879e40e4b9
+  AppLovinSDK: 179d509c258e01a3a77eb8416f0ba843a12ed322
+  FBAudienceNetwork: 4d6223a9a88a22e9dca8c9e6c1829a8745b86228
   FirebaseABTesting: 66d2594b36d4ff6e7d3c8719802100990de05857
   FirebaseAnalytics: 8d0ff929c63b7f72260f332b86ccf569776b75d3
   FirebaseCore: 0326ec9b05fbed8f8716cddbf0e36894a13837f7
@@ -335,12 +332,12 @@ SPEC CHECKSUMS:
   FirebaseRemoteConfig: e1b992a94d3674dddbcaf5d0d31a0312156ceb1c
   FirebaseSessions: cd97fb07674f3906619c871eefbd260a1546c9d3
   FirebaseSharedSwift: 48076404e6e52372290d15a07d2ed1d2f1754023
-  Google-Mobile-Ads-SDK: 5a6d005a6cb5b5e8f4c7b69ca05cdea79c181139
+  Google-Mobile-Ads-SDK: 8f67a72f88d057335b1ac3f501e2b68ad054116e
   GoogleAppMeasurement: ccefe3eac9b0aa27f96066809fb1a7fe4b462626
   GoogleDataTransport: 6c09b596d841063d76d4288cc2d2f42cc36e1e2a
-  GoogleMobileAdsMediationAdColony: 1c298567ea72cb02883016c80142b36349897cb5
-  GoogleMobileAdsMediationAppLovin: bdced6cc448b66c961f929994159cad83c1c3498
-  GoogleMobileAdsMediationFacebook: b1a98c90211ef76afd766804d07207c436709a47
+  GoogleMobileAdsMediationAdColony: 739e508a44288b54d59d4deb211340008d46d8f5
+  GoogleMobileAdsMediationAppLovin: 1b88297e51b4e84c0d9d8c86aa7fa76ce5153b61
+  GoogleMobileAdsMediationFacebook: 13b1e1b86cca4f186fdfa0ba50467479b842c342
   GoogleMobileAdsMediationTestSuite: 072c67cb9b10b6f7847b0733baadf7c77e2d737f
   GoogleUserMessagingPlatform: b1ad7bb1ee3ce64749d4fec24f667b36e45c396c
   GoogleUtilities: d053d902a8edaa9904e1bd00c37535385b8ed152
@@ -352,6 +349,6 @@ SPEC CHECKSUMS:
   PromisesObjC: f5707f49cb48b9636751c5b2e7d227e43fba9f47
   PromisesSwift: 9d77319bbe72ebf6d872900551f7eeba9bce2851
 
-PODFILE CHECKSUM: 761ec0d70fe40442e6dc9581bb7e71b303067507
+PODFILE CHECKSUM: 1517145c7287497cea95600c2ed59077df37e840
 
 COCOAPODS: 1.15.2
