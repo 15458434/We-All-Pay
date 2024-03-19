@@ -9,8 +9,8 @@ target 'We all pay' do
     pod 'FirebaseCrashlytics'
     pod 'FirebaseRemoteConfig'
     pod 'Google-Mobile-Ads-SDK'
-    pod 'GoogleMobileAdsMediationFacebook', '~> 6.14'
-    #pod 'GoogleMobileAdsMediationAdColony'
+    pod 'GoogleMobileAdsMediationFacebook', '~> 6.14' # 19-Mar-24 Explicit version added because dependencies were broken and an older version was selected. Test to use without in the future.
+    #pod 'GoogleMobileAdsMediationAdColony' #19-Mar-24 AdColony disabled. Adapter doesn't initialize. Can't get into AdColony account. 
     pod 'GoogleMobileAdsMediationAppLovin'
     pod 'PersonalizedAdConsent'
     pod 'GoogleMobileAdsMediationTestSuite', :configurations => ['AdTest']
