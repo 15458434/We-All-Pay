@@ -10,7 +10,8 @@ target 'We all pay' do
     pod 'FirebaseRemoteConfig'
     pod 'Google-Mobile-Ads-SDK'
     pod 'GoogleMobileAdsMediationFacebook', '~> 6.0' # 19-Mar-24 Explicit version added because dependencies were broken and an older version was selected. Test to use without in the future.
-    pod 'FBSDKCoreKit'
+    pod 'FBSDKCoreKit' # 19-Mar-24 Explicit added because dependencies were broken. Test to use without in the future.
+    pod 'GoogleUtilities'
     pod 'PersonalizedAdConsent'
     pod 'GoogleMobileAdsMediationTestSuite', :configurations => ['AdTest']
     
