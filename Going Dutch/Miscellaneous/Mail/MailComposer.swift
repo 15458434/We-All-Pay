@@ -45,20 +45,17 @@ extension MailComposer where Self: ThisEventReadOnly {
         Crashlytics.crashlytics().log("************** start mail body **************")
         Crashlytics.crashlytics().log("\(String(describing: event))")
         Crashlytics.crashlytics().log("  \(String(describing: event.mainCurrency))")
-        event.peoplePresent?.forEach { person in
-            Crashlytics.crashlytics().log("  \(person)")
-            person.emailAddress?.forEach { emailAddress in
-                Crashlytics.crashlytics().log(    "\(emailAddress)")
+        event.peoplePresent?.enumerated().forEach { (index, person) in
+            Crashlytics.crashlytics().log("  index \(index): \(person)")
+            person.emailAddress?.enumerated().forEach { (index, emailAddress) in
+                Crashlytics.crashlytics().log("    index \(index): \(emailAddress)")
             }
-            person.sharingPayment?.forEach { presence in
-                Crashlytics.crashlytics().log(    "\(presence)")
-            }
+//            person.sharingPayment?.enumerated().forEach { (index, presence) in
+//                Crashlytics.crashlytics().log("    index \(index): \(presence)")
+//            }
         }
-        event.payments?.forEach { payment in
-            Crashlytics.crashlytics().log("  \(payment)")
-            payment.peopleSharingPayment?.forEach { peoplePresence in
-                Crashlytics.crashlytics().log("    \(peoplePresence)")
-            }
+        event.payments?.enumerated().forEach { (index, payment) in
+            Crashlytics.crashlytics().log("  index \(index): \(payment)")
         }
         Crashlytics.crashlytics().log("*************** end mail body ***************")
         
@@ -96,11 +93,15 @@ extension MailComposer where Self: ThisEventReadOnly {
             guard payment.payingPerson != nil else {
                 throw MailComposerError.missingCrititcalInformationIn(payment: payment)
             }
+            let fullname = payment.payingPerson!.getFullName()
+            let moneyInMainCurrency = mainCurrencyFormatter.string(for: payment.moneyInMainCurrency)!
+            let paymentDescription = payment.fullDescriptionOfPayment()
             if payment.exchangeRate!.exchangeRate!.doubleValue == 1.0 {
-                mailBody += String.localizedStringWithFormat(NSLocalizedString("solution_mail_body_2a", value: "%1$@ paid %2$@ for %3$@.", comment: "%1$@ has paid %2$@ for %3$@."), payment.payingPerson!.getFullName(), mainCurrencyFormatter.string(for: payment.moneyInMainCurrency())!, payment.fullDescriptionOfPayment()!)
+                mailBody += String.localizedStringWithFormat(NSLocalizedString("solution_mail_body_2a", value: "%1$@ paid %2$@ for %3$@.", comment: "%1$@ has paid %2$@ for %3$@."), fullname, moneyInMainCurrency, paymentDescription)
             } else {
                 localCurrencyFormatter.currencyCode = payment.currency!.code!
-                mailBody += String.localizedStringWithFormat(NSLocalizedString("solution_mail_body_2b", value: "%1$@ has paid %2$@(%3$@) for %4$@", comment: "%1$@ has paid %2$@(%3$@) for %4$@."), payment.payingPerson!.getFullName(), mainCurrencyFormatter.string(for: payment.moneyInMainCurrency)!, localCurrencyFormatter.string(for: payment.money!)!, payment.fullDescriptionOfPayment())
+                let localCurrency = localCurrencyFormatter.string(for: payment.money!)!
+                mailBody += String.localizedStringWithFormat(NSLocalizedString("solution_mail_body_2b", value: "%1$@ has paid %2$@(%3$@) for %4$@", comment: "%1$@ has paid %2$@(%3$@) for %4$@."), fullname, moneyInMainCurrency, localCurrency, paymentDescription)
             }
             
             mailBody += "\n"
