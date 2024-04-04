@@ -10,6 +10,8 @@
 
 @class XRCurrency;
 
+NS_ASSUME_NONNULL_BEGIN
+
 @interface MCCurrency (addons)
 
 + (MCCurrency *)generateCurrencyFromSelectedLocaleForContext:(NSManagedObjectContext *)context;
@@ -20,3 +22,5 @@
 + (MCCurrency *)currencyFrom:(NSString *)code fromContext:(NSManagedObjectContext *)context;
 
 @end
+
+NS_ASSUME_NONNULL_END

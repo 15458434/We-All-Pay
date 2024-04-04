@@ -18,6 +18,8 @@
 
 #import "We_all_pay-Swift.h"
 
+NS_ASSUME_NONNULL_BEGIN
+
 @implementation MCPayment (addons)
 
 + (MCPayment *)addPayment
@@ -223,7 +225,7 @@
     return [self exchangeRate];
 }
 
-- (void)setNewCurrencyAndAutomaticallyUpdateExchangeRate:(MCCurrency *)newCurrency withCompletionHandler:(void (^)(NSError *))completionHandler
+- (void)setNewCurrencyAndAutomaticallyUpdateExchangeRate:(MCCurrency *)newCurrency withCompletionHandler:(void (^)(NSError * _Nullable))completionHandler
 {
     self.currency = newCurrency;
     self.exchangeRate.fromCurrency = newCurrency;
@@ -256,3 +258,5 @@
 #pragma mark - NSManagedObject stuff
 
 @end
+
+NS_ASSUME_NONNULL_END
