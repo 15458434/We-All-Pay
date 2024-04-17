@@ -406,8 +406,7 @@ NSString * const MCiCloudWeAllPayStoreName = @"iCloud-WeAllPayStore";
 
 // Returns the managed object context for the application.
 // If the context doesn't already exist, it is created and bound to the persistent store coordinator for the application.
-- (NSManagedObjectContext *)mainThreadContext
-{
+- (NSManagedObjectContext *)mainThreadContext {
     if (_mainThreadContext != nil) {
         return _mainThreadContext;
     }
@@ -416,6 +415,7 @@ NSString * const MCiCloudWeAllPayStoreName = @"iCloud-WeAllPayStore";
     if (coordinator != nil) {
         _mainThreadContext = [[NSManagedObjectContext alloc] initWithConcurrencyType:NSMainQueueConcurrencyType];
         _mainThreadContext.mergePolicy = NSMergeByPropertyObjectTrumpMergePolicy;
+        _mainThreadContext.retainsRegisteredObjects = YES;
         [_mainThreadContext setPersistentStoreCoordinator:coordinator];
     }
 #ifdef DEBUG
