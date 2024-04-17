@@ -202,6 +202,7 @@
 
 - (BOOL)application:(UIApplication *)application willFinishLaunchingWithOptions:(NSDictionary *)launchOptions {
 #ifdef DEBUG
+    NSLog(@"Application folder: %@", NSHomeDirectory());
     NSLog(@"UserDefaults on launch");
     NSLog(@"%@", NSUserDefaults.standardUserDefaults.dictionaryRepresentation);
     NSLog(@"**********************");
