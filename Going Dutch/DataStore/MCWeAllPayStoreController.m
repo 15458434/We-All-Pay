@@ -327,6 +327,7 @@ NSString * const MCiCloudWeAllPayStoreName = @"iCloud-WeAllPayStore";
     NSArray *result = [context executeFetchRequest:request error:&error];
     if (!result) {
         NSLog(@"Error fetching people: %@", error);
+        [NSException raise:@"PeopleFetchFail" format:@"Fetching people on thisBill %@ failed", thisBill];
         return nil;
     } else {
         return result;
@@ -347,6 +348,7 @@ NSString * const MCiCloudWeAllPayStoreName = @"iCloud-WeAllPayStore";
     NSArray *result = [context executeFetchRequest:request error:&error];
     if (!result) {
         NSLog(@"Error fetching this person emailAddresses.");
+        [NSException raise:@"GetEmailAddressesFromFail" format:@"Fetching EmailAddresses from thisPerson %@", thisPerson];
         return nil;
     } else {
         return result;

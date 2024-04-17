@@ -12,6 +12,8 @@
 #import "MCEmailAddress+addons.h"
 #import "MCWeAllPayStoreController.h"
 
+NS_ASSUME_NONNULL_BEGIN
+
 @implementation MCPerson (addons)
 
 #pragma mark - Core Data Mutations
@@ -64,7 +66,7 @@
     }
 }
 
-- (void)setThumbnailDataFromImage:(UIImage *)image
+- (void)setThumbnailDataFromImage:(nullable UIImage *)image
 {
     UIImage *thisImage = image;
     if (!thisImage) {
@@ -74,7 +76,7 @@
     self.thumbnailData = UIImagePNGRepresentation(thisImage);
 }
 
-- (void)setPictureDataFromImage:(UIImage *)image
+- (void)setPictureDataFromImage:(nullable UIImage *)image
 {
     UIImage *thisImage = image;
     if (!thisImage) {
@@ -138,7 +140,7 @@
     }
 }
 
-- (NSString *)defaultEmailAddress
+- (nullable NSString *)defaultEmailAddress
 {
     MCEmailAddress *emailAddress = [self getDefaultEmailAddressObject];
     return [emailAddress emailAddress];
@@ -157,7 +159,7 @@
     [self setDateModified:[NSDate date]];
 }
 
-- (MCEmailAddress *)getDefaultEmailAddressObject
+- (nullable MCEmailAddress *)getDefaultEmailAddressObject
 {
     NSFetchRequest *request = [NSFetchRequest fetchRequestWithEntityName:@"MCEmailAddress"];
     NSPredicate *predicate = [NSPredicate predicateWithFormat:@"owner = %@ AND selected = YES", self];
@@ -259,7 +261,7 @@
 
 #pragma mark - Getter and setter stuff.
 
-- (NSNumber *)totalSumPaid
+- (nullable NSNumber *)totalSumPaid
 {
     // This doesn't check for the absense of total presence on this tonightsBill
     NSArray *sortDescriptors = @[[NSSortDescriptor sortDescriptorWithKey:@"dateCreated" ascending:YES]];
@@ -267,12 +269,12 @@
     return [fetchResult valueForKeyPath:@"@sum.moneyInMainCurrency"];
 }
 
-- (UIImage *)thumbnail
+- (nullable UIImage *)thumbnail
 {
     return [UIImage imageWithData:[self thumbnailData]];
 }
 
-- (UIImage *)picture
+- (nullable UIImage *)picture
 {
     return [UIImage imageWithData:[self pictureData]];
 }
@@ -290,3 +292,5 @@
 }
 
 @end
+
+NS_ASSUME_NONNULL_END

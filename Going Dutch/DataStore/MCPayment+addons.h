@@ -10,6 +10,8 @@
 
 @class MCPaymentPresence;
 
+NS_ASSUME_NONNULL_BEGIN
+
 @interface MCPayment (addons)
 
 + (MCPayment *)addPayment;
@@ -34,8 +36,10 @@
 - (void)recalculateAveragePeopleOweAndStore;
 - (NSNumber *)moneyInMainCurrency;
 - (MCExchangeRate *)addExchangeRate;
-- (void)setNewCurrencyAndAutomaticallyUpdateExchangeRate:(MCCurrency *)newCurrency withCompletionHandler:(void (^)(NSError *error))completionHandler;
+- (void)setNewCurrencyAndAutomaticallyUpdateExchangeRate:(MCCurrency *)newCurrency withCompletionHandler:(void (^)(NSError * _Nullable error))completionHandler;
 
 - (NSString *)fullDescriptionOfPayment;
 
 @end
+
+NS_ASSUME_NONNULL_END

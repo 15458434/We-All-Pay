@@ -8,6 +8,8 @@
 
 #import "MCPerson+CoreDataProperties.h"
 
+NS_ASSUME_NONNULL_BEGIN
+
 @interface MCPerson (addons)
 
 + (MCPerson *)addPerson;
@@ -16,15 +18,15 @@
 
 + (BOOL)isTableInDatabaseEmpty;
 
-- (void)setThumbnailDataFromImage:(UIImage *)image;
-- (void)setPictureDataFromImage:(UIImage *)image;
+- (void)setThumbnailDataFromImage:(nullable UIImage *)image;
+- (void)setPictureDataFromImage:(nullable UIImage *)image;
 
 - (NSString *)getFullName;
 - (NSString *)getName;
-- (NSString *)defaultEmailAddress;
+- (nullable NSString *)defaultEmailAddress;
 - (void)addNewDefaultEmailAddressFromAString:(NSString *)newEmailAddressString;
 - (void)addOneEmailAddressFromAString:(NSString *)emailAddressAsString;
-- (MCEmailAddress *)getDefaultEmailAddressObject;
+- (nullable MCEmailAddress *)getDefaultEmailAddressObject;
 - (void)setNewDefaultEmailaddressObject:(MCEmailAddress *)newDefaultEmailAddress;
 - (void)deleteEmailAddress:(MCEmailAddress *)eAddress;
 - (void)deletAllEmailAddresses;
@@ -32,3 +34,5 @@
 - (BOOL)hasPersonMadePaymentWithInvalidExchangeRates;
 
 @end
+
+NS_ASSUME_NONNULL_END
