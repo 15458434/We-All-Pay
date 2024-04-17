@@ -438,6 +438,7 @@
 		38490D301D705A7700A297BA /* ThisEvent.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ThisEvent.swift; sourceTree = "<group>"; };
 		38494B4226A735F400F10C64 /* MCBorderLineView.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = MCBorderLineView.h; sourceTree = "<group>"; };
 		38494B4326A735F400F10C64 /* MCBorderLineView.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = MCBorderLineView.m; sourceTree = "<group>"; };
+		384D6A282BD01146005E6E30 /* We all pay database version 4.1.xcappdata */ = {isa = PBXFileReference; lastKnownFileType = wrapper; path = "We all pay database version 4.1.xcappdata"; sourceTree = "<group>"; };
 		384DCF6F26A9710C00DF2ACA /* MCRoundedButton.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = MCRoundedButton.h; sourceTree = "<group>"; };
 		384DCF7026A9710C00DF2ACA /* MCRoundedButton.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = MCRoundedButton.m; sourceTree = "<group>"; };
 		384EC90B1BC2F17500A80799 /* SelectCategoryTableViewCell_iPad.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SelectCategoryTableViewCell_iPad.swift; sourceTree = "<group>"; };
@@ -873,6 +874,7 @@
 				380700AF1A1B76B200C7FB37 /* We all pay database version 2.xcappdata */,
 				380700A91A1B751E00C7FB37 /* We all pay database version 3.xcappdata */,
 				380700AA1A1B751E00C7FB37 /* We all pay database version 4.xcappdata */,
+				384D6A282BD01146005E6E30 /* We all pay database version 4.1.xcappdata */,
 			);
 			name = "Test files english";
 			sourceTree = "<group>";
