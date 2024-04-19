@@ -17,7 +17,7 @@
 		<key>CurrencyConverter.xcscheme_^#shared#^_</key>
 		<dict>
 			<key>orderHint</key>
-			<integer>55</integer>
+			<integer>52</integer>
 		</dict>
 		<key>CurrencyConverterTests.xcscheme_^#shared#^_</key>
 		<dict>
@@ -47,7 +47,7 @@
 		<key>RateMeControllerForiOS.xcscheme_^#shared#^_</key>
 		<dict>
 			<key>orderHint</key>
-			<integer>53</integer>
+			<integer>50</integer>
 		</dict>
 		<key>RateMeControllerForiOSTests.xcscheme_^#shared#^_</key>
 		<dict>
@@ -87,7 +87,7 @@
 		<key>Who is paying next.xcscheme_^#shared#^_</key>
 		<dict>
 			<key>orderHint</key>
-			<integer>52</integer>
+			<integer>51</integer>
 		</dict>
 		<key>WhoPayingUserDefaultsStoreInterface.xcscheme</key>
 		<dict>
@@ -97,7 +97,7 @@
 		<key>WhoPayingUserDefaultsStoreInterface.xcscheme_^#shared#^_</key>
 		<dict>
 			<key>orderHint</key>
-			<integer>54</integer>
+			<integer>53</integer>
 		</dict>
 		<key>WhoPayingUserDefaultsStoreInterfaceTests.xcscheme_^#shared#^_</key>
 		<dict>

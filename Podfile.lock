@@ -1,11 +1,5 @@
 PODS:
-  - FBAEMKit (17.0.0):
-    - FBSDKCoreKit_Basics (= 17.0.0)
   - FBAudienceNetwork (6.15.0)
-  - FBSDKCoreKit (17.0.0):
-    - FBAEMKit (= 17.0.0)
-    - FBSDKCoreKit_Basics (= 17.0.0)
-  - FBSDKCoreKit_Basics (17.0.0)
   - FirebaseABTesting (10.24.0):
     - FirebaseCore (~> 10.0)
   - FirebaseAnalytics (10.24.0):
@@ -291,23 +285,19 @@ PODS:
     - PromisesObjC (= 2.4.0)
 
 DEPENDENCIES:
-  - FBSDKCoreKit
   - FirebaseAnalytics
   - FirebaseCore
   - FirebaseCrashlytics
   - FirebaseRemoteConfig
   - Google-Mobile-Ads-SDK
-  - GoogleMobileAdsMediationFacebook (~> 6.0)
+  - GoogleMobileAdsMediationFacebook
   - GoogleMobileAdsMediationTestSuite
   - GoogleUtilities
   - PersonalizedAdConsent
 
 SPEC REPOS:
   https://github.com/CocoaPods/Specs.git:
-    - FBAEMKit
     - FBAudienceNetwork
-    - FBSDKCoreKit
-    - FBSDKCoreKit_Basics
     - FirebaseABTesting
     - FirebaseAnalytics
     - FirebaseCore
@@ -335,10 +325,7 @@ SPEC REPOS:
     - PromisesSwift
 
 SPEC CHECKSUMS:
-  FBAEMKit: 31a20c2d8744d8c57d3a5b7ae4e27b4fdd819193
   FBAudienceNetwork: 80a035aa69cc3a71c99e44cb5c2874e4cef9909f
-  FBSDKCoreKit: dac911b656816f8d0b06e5fa4bac60e89505bb3b
-  FBSDKCoreKit_Basics: 92b7b7458d57091370b0b6cc197578874c3b4b16
   FirebaseABTesting: 4431c2c56ac6e56f463b9cab05cc111078639f99
   FirebaseAnalytics: b5efc493eb0f40ec560b04a472e3e1a15d39ca13
   FirebaseCore: 11dc8a16dfb7c5e3c3f45ba0e191a33ac4f50894
@@ -365,6 +352,6 @@ SPEC CHECKSUMS:
   PromisesObjC: f5707f49cb48b9636751c5b2e7d227e43fba9f47
   PromisesSwift: 9d77319bbe72ebf6d872900551f7eeba9bce2851
 
-PODFILE CHECKSUM: 8ebd03667019b47ee59cc1b89275f70f9d0d1ef8
+PODFILE CHECKSUM: 1aaef48d60ad0c96ca101673e302105400dffc52
 
 COCOAPODS: 1.15.2
