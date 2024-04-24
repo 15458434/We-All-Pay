@@ -5,12 +5,8 @@ target 'We all pay' do
     use_frameworks!
     inhibit_all_warnings!
     
-    pod 'FirebaseAnalytics'
-    pod 'FirebaseCrashlytics'
-    pod 'FirebaseRemoteConfig'
     pod 'Google-Mobile-Ads-SDK'
     pod 'GoogleMobileAdsMediationFacebook'
-    pod 'GoogleUtilities'
     pod 'PersonalizedAdConsent'
     pod 'GoogleMobileAdsMediationTestSuite', :configurations => ['AdTest']
     

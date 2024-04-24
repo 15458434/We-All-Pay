@@ -3,7 +3,7 @@
 	archiveVersion = 1;
 	classes = {
 	};
-	objectVersion = 51;
+	objectVersion = 54;
 	objects = {
 
 /* Begin PBXBuildFile section */
@@ -90,6 +90,14 @@
 		385F5313191C2D140012773D /* WeAllPayStoreTests.m in Sources */ = {isa = PBXBuildFile; fileRef = 38D785FC18DC53C30074B670 /* WeAllPayStoreTests.m */; };
 		385F6AE22747CFBF009ED08D /* PaymentStateModelProtocol.swift in Sources */ = {isa = PBXBuildFile; fileRef = 385F6AE12747CFBF009ED08D /* PaymentStateModelProtocol.swift */; };
 		385F6AE62747E45B009ED08D /* PaymentNavigationController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 385F6AE52747E45B009ED08D /* PaymentNavigationController.swift */; };
+		385FD24E2BD8FF25004B7A52 /* FirebaseAnalytics in Frameworks */ = {isa = PBXBuildFile; productRef = 385FD24D2BD8FF25004B7A52 /* FirebaseAnalytics */; };
+		385FD2502BD8FF25004B7A52 /* FirebaseAnalyticsOnDeviceConversion in Frameworks */ = {isa = PBXBuildFile; productRef = 385FD24F2BD8FF25004B7A52 /* FirebaseAnalyticsOnDeviceConversion */; };
+		385FD2522BD8FF25004B7A52 /* FirebaseAnalyticsSwift in Frameworks */ = {isa = PBXBuildFile; productRef = 385FD2512BD8FF25004B7A52 /* FirebaseAnalyticsSwift */; };
+		385FD2542BD8FF25004B7A52 /* FirebaseAppCheck in Frameworks */ = {isa = PBXBuildFile; productRef = 385FD2532BD8FF25004B7A52 /* FirebaseAppCheck */; };
+		385FD2562BD8FF25004B7A52 /* FirebaseCrashlytics in Frameworks */ = {isa = PBXBuildFile; productRef = 385FD2552BD8FF25004B7A52 /* FirebaseCrashlytics */; };
+		385FD2582BD8FF25004B7A52 /* FirebasePerformance in Frameworks */ = {isa = PBXBuildFile; productRef = 385FD2572BD8FF25004B7A52 /* FirebasePerformance */; };
+		385FD25A2BD8FF25004B7A52 /* FirebaseRemoteConfig in Frameworks */ = {isa = PBXBuildFile; productRef = 385FD2592BD8FF25004B7A52 /* FirebaseRemoteConfig */; };
+		385FD25C2BD8FF25004B7A52 /* FirebaseRemoteConfigSwift in Frameworks */ = {isa = PBXBuildFile; productRef = 385FD25B2BD8FF25004B7A52 /* FirebaseRemoteConfigSwift */; };
 		3860575019EE963600BD5B78 /* categoryPictures.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 3860574F19EE963600BD5B78 /* categoryPictures.xcassets */; };
 		3860575519EEB28300BD5B78 /* MCCategoryPictureStoreTest.m in Sources */ = {isa = PBXBuildFile; fileRef = 3860575419EEB28300BD5B78 /* MCCategoryPictureStoreTest.m */; };
 		3863148D235C6D8C00748B9F /* ScreenshotPopulationEngine.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3863148C235C6D8B00748B9F /* ScreenshotPopulationEngine.swift */; };
@@ -722,19 +730,27 @@
 				38B4E82323CDE6180034CA95 /* CoreTelephony.framework in Frameworks */,
 				380FB71226D6B88F00B46038 /* UIKit.framework in Frameworks */,
 				38B4E82123CDE6100034CA95 /* CoreMedia.framework in Frameworks */,
+				385FD2502BD8FF25004B7A52 /* FirebaseAnalyticsOnDeviceConversion in Frameworks */,
 				382E796526B7F48200A0D1C1 /* WeAllPayDesignableUI.framework in Frameworks */,
 				38B4E81F23CDE6050034CA95 /* AVFoundation.framework in Frameworks */,
 				380FB70D26D6B86600B46038 /* CoreGraphics.framework in Frameworks */,
 				38B4E81D23CDE5FC0034CA95 /* AudioToolbox.framework in Frameworks */,
+				385FD24E2BD8FF25004B7A52 /* FirebaseAnalytics in Frameworks */,
 				38B4E81B23CDE5F40034CA95 /* AdSupport.framework in Frameworks */,
+				385FD2582BD8FF25004B7A52 /* FirebasePerformance in Frameworks */,
+				385FD2542BD8FF25004B7A52 /* FirebaseAppCheck in Frameworks */,
 				38B4E81923CDE5D40034CA95 /* libz.1.2.5.tbd in Frameworks */,
 				3826D4D323CC5777009CAC30 /* libz.tbd in Frameworks */,
 				3826D4D223CC576C009CAC30 /* libsqlite3.0.tbd in Frameworks */,
+				385FD25A2BD8FF25004B7A52 /* FirebaseRemoteConfig in Frameworks */,
 				3826D4D123CC574E009CAC30 /* WebKit.framework in Frameworks */,
 				38163E0F249E193D009E889C /* CoreServices.framework in Frameworks */,
+				385FD2522BD8FF25004B7A52 /* FirebaseAnalyticsSwift in Frameworks */,
 				38D6A3D11C73DDC000968BB2 /* RateMeControllerForiOS.framework in Frameworks */,
 				388A32911C11EDBD00F7459C /* WhoPayingUserDefaultsStoreInterface.framework in Frameworks */,
 				382B76F51C398249000C203A /* CurrencyConverter.framework in Frameworks */,
+				385FD2562BD8FF25004B7A52 /* FirebaseCrashlytics in Frameworks */,
+				385FD25C2BD8FF25004B7A52 /* FirebaseRemoteConfigSwift in Frameworks */,
 				380FB71026D6B88100B46038 /* StoreKit.framework in Frameworks */,
 				6F6CEECF1E58A332ECA671AD /* Pods_We_all_pay.framework in Frameworks */,
 			);
@@ -1704,6 +1720,16 @@
 				382E796426B7F48200A0D1C1 /* PBXTargetDependency */,
 			);
 			name = "We all pay";
+			packageProductDependencies = (
+				385FD24D2BD8FF25004B7A52 /* FirebaseAnalytics */,
+				385FD24F2BD8FF25004B7A52 /* FirebaseAnalyticsOnDeviceConversion */,
+				385FD2512BD8FF25004B7A52 /* FirebaseAnalyticsSwift */,
+				385FD2532BD8FF25004B7A52 /* FirebaseAppCheck */,
+				385FD2552BD8FF25004B7A52 /* FirebaseCrashlytics */,
+				385FD2572BD8FF25004B7A52 /* FirebasePerformance */,
+				385FD2592BD8FF25004B7A52 /* FirebaseRemoteConfig */,
+				385FD25B2BD8FF25004B7A52 /* FirebaseRemoteConfigSwift */,
+			);
 			productName = "Going Dutch";
 			productReference = 38572AD2169D437B00969C62 /* We all pay.app */;
 			productType = "com.apple.product-type.application";
@@ -1951,6 +1977,9 @@
 				de,
 			);
 			mainGroup = 38572AC7169D437B00969C62;
+			packageReferences = (
+				385FD24C2BD8FF25004B7A52 /* XCRemoteSwiftPackageReference "firebase-ios-sdk" */,
+			);
 			productRefGroup = 38572AD3169D437B00969C62 /* Products */;
 			projectDirPath = "";
 			projectRoot = "";
@@ -2099,7 +2128,7 @@
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 			shellPath = /bin/sh;
-			shellScript = "# Type a script or drag a script file from your workspace to insert its path.\n\"${PODS_ROOT}/FirebaseCrashlytics/run\"\n";
+			shellScript = "# Type a script or drag a script file from your workspace to insert its path.\necho \"Configuration = $CONFIGURATION\";\nif [ $CONFIGURATION == 'Debug' ] || [ $CONFIGURATION == 'Release' ]; then\n  echo \"PROD\";\n  ${BUILD_DIR%Build/*}/SourcePackages/checkouts/firebase-ios-sdk/Crashlytics/run -gsp ${PROJECT_DIR}/Going\\ Dutch/GoogleService-Info.plist;\nfi\n";
 		};
 		3A0B44C7A86199FA8728561C /* [CP] Embed Pods Frameworks */ = {
 			isa = PBXShellScriptBuildPhase;
@@ -3189,6 +3218,7 @@
 					/Applications/Xcode.app/Contents/Developer/Toolchains/XcodeDefault.xctoolchain/usr/include,
 				);
 				INFOPLIST_FILE = "Going Dutch/Info.plist";
+				INFOPLIST_KEY_LSApplicationCategoryType = "public.app-category.finance";
 				IPHONEOS_DEPLOYMENT_TARGET = 15.0;
 				LD_RUNPATH_SEARCH_PATHS = (
 					"$(inherited)",
@@ -3242,6 +3272,7 @@
 				GCC_PREFIX_HEADER = "Going Dutch/We all pay-Prefix.pch";
 				GCC_SYMBOLS_PRIVATE_EXTERN = YES;
 				INFOPLIST_FILE = "Going Dutch/Info.plist";
+				INFOPLIST_KEY_LSApplicationCategoryType = "public.app-category.finance";
 				IPHONEOS_DEPLOYMENT_TARGET = 15.0;
 				LD_RUNPATH_SEARCH_PATHS = (
 					"$(inherited)",
@@ -3460,6 +3491,7 @@
 					/Applications/Xcode.app/Contents/Developer/Toolchains/XcodeDefault.xctoolchain/usr/include,
 				);
 				INFOPLIST_FILE = "Going Dutch/Info.plist";
+				INFOPLIST_KEY_LSApplicationCategoryType = "public.app-category.finance";
 				IPHONEOS_DEPLOYMENT_TARGET = 15.0;
 				LD_RUNPATH_SEARCH_PATHS = (
 					"$(inherited)",
@@ -4683,6 +4715,7 @@
 					/Applications/Xcode.app/Contents/Developer/Toolchains/XcodeDefault.xctoolchain/usr/include,
 				);
 				INFOPLIST_FILE = "Going Dutch/Info.plist";
+				INFOPLIST_KEY_LSApplicationCategoryType = "public.app-category.finance";
 				IPHONEOS_DEPLOYMENT_TARGET = 15.0;
 				LD_RUNPATH_SEARCH_PATHS = (
 					"$(inherited)",
@@ -5230,6 +5263,60 @@
 			defaultConfigurationName = Release;
 		};
 /* End XCConfigurationList section */
+
+/* Begin XCRemoteSwiftPackageReference section */
+		385FD24C2BD8FF25004B7A52 /* XCRemoteSwiftPackageReference "firebase-ios-sdk" */ = {
+			isa = XCRemoteSwiftPackageReference;
+			repositoryURL = "https://github.com/firebase/firebase-ios-sdk";
+			requirement = {
+				kind = upToNextMajorVersion;
+				minimumVersion = 10.24.0;
+			};
+		};
+/* End XCRemoteSwiftPackageReference section */
+
+/* Begin XCSwiftPackageProductDependency section */
+		385FD24D2BD8FF25004B7A52 /* FirebaseAnalytics */ = {
+			isa = XCSwiftPackageProductDependency;
+			package = 385FD24C2BD8FF25004B7A52 /* XCRemoteSwiftPackageReference "firebase-ios-sdk" */;
+			productName = FirebaseAnalytics;
+		};
+		385FD24F2BD8FF25004B7A52 /* FirebaseAnalyticsOnDeviceConversion */ = {
+			isa = XCSwiftPackageProductDependency;
+			package = 385FD24C2BD8FF25004B7A52 /* XCRemoteSwiftPackageReference "firebase-ios-sdk" */;
+			productName = FirebaseAnalyticsOnDeviceConversion;
+		};
+		385FD2512BD8FF25004B7A52 /* FirebaseAnalyticsSwift */ = {
+			isa = XCSwiftPackageProductDependency;
+			package = 385FD24C2BD8FF25004B7A52 /* XCRemoteSwiftPackageReference "firebase-ios-sdk" */;
+			productName = FirebaseAnalyticsSwift;
+		};
+		385FD2532BD8FF25004B7A52 /* FirebaseAppCheck */ = {
+			isa = XCSwiftPackageProductDependency;
+			package = 385FD24C2BD8FF25004B7A52 /* XCRemoteSwiftPackageReference "firebase-ios-sdk" */;
+			productName = FirebaseAppCheck;
+		};
+		385FD2552BD8FF25004B7A52 /* FirebaseCrashlytics */ = {
+			isa = XCSwiftPackageProductDependency;
+			package = 385FD24C2BD8FF25004B7A52 /* XCRemoteSwiftPackageReference "firebase-ios-sdk" */;
+			productName = FirebaseCrashlytics;
+		};
+		385FD2572BD8FF25004B7A52 /* FirebasePerformance */ = {
+			isa = XCSwiftPackageProductDependency;
+			package = 385FD24C2BD8FF25004B7A52 /* XCRemoteSwiftPackageReference "firebase-ios-sdk" */;
+			productName = FirebasePerformance;
+		};
+		385FD2592BD8FF25004B7A52 /* FirebaseRemoteConfig */ = {
+			isa = XCSwiftPackageProductDependency;
+			package = 385FD24C2BD8FF25004B7A52 /* XCRemoteSwiftPackageReference "firebase-ios-sdk" */;
+			productName = FirebaseRemoteConfig;
+		};
+		385FD25B2BD8FF25004B7A52 /* FirebaseRemoteConfigSwift */ = {
+			isa = XCSwiftPackageProductDependency;
+			package = 385FD24C2BD8FF25004B7A52 /* XCRemoteSwiftPackageReference "firebase-ios-sdk" */;
+			productName = FirebaseRemoteConfigSwift;
+		};
+/* End XCSwiftPackageProductDependency section */
 
 /* Begin XCVersionGroup section */
 		3829AD0D178B41320025969D /* WeAllPayStore.xcdatamodeld */ = {
