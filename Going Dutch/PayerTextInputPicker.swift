@@ -27,7 +27,6 @@ import FirebaseCrashlytics
         pickerView = UIPickerView()
         pickerView.delegate = self
         pickerView.dataSource = self
-        pickerView.showsSelectionIndicator = true
         textField.inputView = pickerView
     }
     
