@@ -7,11 +7,14 @@
 //
 
 import UIKit
+import Combine
 
 @objc(MCEventModel) final class EventModel: NSObject {
     @objc dynamic var event: MCSharedBill!
-    @objc var mainCurrencyFormatter: CurrencyFormatter!
+    @objc dynamic var mainCurrencyFormatter: CurrencyFormatter!
     @objc var dateFormatter: DateFormatter!
+    
+    private var bag = Set<AnyCancellable>()
     
     convenience init(andPrepareWith event: MCSharedBill) {
         self.init()
@@ -20,7 +23,11 @@ import UIKit
     
     func prepareForUse(with event: MCSharedBill) {
         self.event = event
-        mainCurrencyFormatter = CurrencyFormatter(currencyCode: event.mainCurrency!.code!)
+        self.publisher(for: \.event!.mainCurrency!.code!, options: [.initial, .new])
+            .sink { [unowned self] currencyCode in
+                self.mainCurrencyFormatter = CurrencyFormatter(currencyCode: currencyCode)
+            }
+            .store(in: &bag)
         dateFormatter = DateFormatter()
         dateFormatter.dateStyle = .medium
         dateFormatter.timeStyle = .short
@@ -59,12 +66,14 @@ import UIKit
         request.sortDescriptors = [NSSortDescriptor(keyPath: \MCPayment.dateCreated, ascending: true)]
         let context = event.managedObjectContext!
         let paymentsWithPeoplePresent: [MCPayment] = try! context.fetch(request)
-        let result =  paymentsWithPeoplePresent.reduce(NSDecimalNumber(value: 0)) { partialResult, payment in
-            let moneyInMainCurrencyDecimal = NSDecimalNumber(decimal: payment.moneyInMainCurrency().decimalValue)
-            let result = partialResult.adding(moneyInMainCurrencyDecimal)
-            return result
-        }
+        let result = paymentsWithPeoplePresent.totalSumOfMoneyInMainCurrency
         return result
+    }
+    
+    func reset() {
+        if !bag.isEmpty {
+            bag.removeAll(keepingCapacity: true)
+        }
     }
 
     // MARK: NSObject

@@ -199,10 +199,10 @@ static void * notificationCountContext = &notificationCountContext;
     return 76;
 }
 
-- (NSArray<UITableViewRowAction *> *)tableView:(UITableView *)tableView editActionsForRowAtIndexPath:(NSIndexPath *)indexPath {
+- (UISwipeActionsConfiguration *)tableView:(UITableView *)tableView trailingSwipeActionsConfigurationForRowAtIndexPath:(NSIndexPath *)indexPath {
     // Delete action
     NSString *deleteTitle = NSLocalizedStringWithDefaultValue(@"events_view_button_delete_event", nil, NSBundle.mainBundle, @"Delete", @"Text on a delete button");
-    UITableViewRowAction *deleteAction = [UITableViewRowAction rowActionWithStyle:UITableViewRowActionStyleDestructive title:deleteTitle handler:^(UITableViewRowAction * _Nonnull action, NSIndexPath * _Nonnull indexPath) {
+    UIContextualAction *deleteAction = [UIContextualAction contextualActionWithStyle:UIContextualActionStyleDestructive title:deleteTitle handler:^(UIContextualAction * _Nonnull action, __kindof UIView * _Nonnull sourceView, void (^ _Nonnull completionHandler)(BOOL)) {
 #ifdef DEBUG
         NSLog(@"Delete action pressed");
 #endif
@@ -210,7 +210,7 @@ static void * notificationCountContext = &notificationCountContext;
     }];
     // Change MainCurrency action
     NSString *selectMainCurrencyTitle = NSLocalizedStringWithDefaultValue(@"events_view_button_change_main_currency", nil, NSBundle.mainBundle, @"€$£¥", @"Text on a button to select a different main currency for an event");
-    UITableViewRowAction *selectCurrencyAction = [UITableViewRowAction rowActionWithStyle:UITableViewRowActionStyleNormal title:selectMainCurrencyTitle handler:^(UITableViewRowAction * _Nonnull action, NSIndexPath * _Nonnull indexPath) {
+    UIContextualAction *selectMainCurrencyAction = [UIContextualAction contextualActionWithStyle:UIContextualActionStyleNormal title:selectMainCurrencyTitle handler:^(UIContextualAction * _Nonnull action, __kindof UIView * _Nonnull sourceView, void (^ _Nonnull completionHandler)(BOOL)) {
 #ifdef DEBUG
         NSLog(@"Change currency pressed");
 #endif
@@ -218,7 +218,10 @@ static void * notificationCountContext = &notificationCountContext;
         [self performSegueWithIdentifier:@"selectMainCurrency" sender:self];
         self.selectedIndexPathForAction = indexPath;
     }];
-    return @[deleteAction, selectCurrencyAction];
+    
+    NSArray *actions = @[deleteAction, selectMainCurrencyAction];
+    UISwipeActionsConfiguration *swipeActions = [UISwipeActionsConfiguration configurationWithActions:actions];
+    return swipeActions;
 }
 
 #pragma mark - UIViewController

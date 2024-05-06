@@ -227,6 +227,7 @@
 		38EFCBF22BD902670044E15B /* FirebaseRemoteConfig in Frameworks */ = {isa = PBXBuildFile; productRef = 38EFCBF12BD902670044E15B /* FirebaseRemoteConfig */; };
 		38EFCBF42BD902670044E15B /* FirebaseRemoteConfigSwift in Frameworks */ = {isa = PBXBuildFile; productRef = 38EFCBF32BD902670044E15B /* FirebaseRemoteConfigSwift */; };
 		38EFCBF62BD902A90044E15B /* FirebaseCrashlytics in Frameworks */ = {isa = PBXBuildFile; productRef = 38EFCBF52BD902A90044E15B /* FirebaseCrashlytics */; };
+		38F0DDBD2BE93652004B1A19 /* SequenceExtension.swift in Sources */ = {isa = PBXBuildFile; fileRef = 38F0DDBC2BE93652004B1A19 /* SequenceExtension.swift */; };
 		38F2370126D012CF00A22F9E /* MCGenericAdBannerTableViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 38F236FF26D012CF00A22F9E /* MCGenericAdBannerTableViewController.m */; };
 		38F2370226D012CF00A22F9E /* MCGenericAdBannerViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 38F2370026D012CF00A22F9E /* MCGenericAdBannerViewController.m */; };
 		38F2370426D012D900A22F9E /* AdBannerEngine.swift in Sources */ = {isa = PBXBuildFile; fileRef = 38F2370326D012D900A22F9E /* AdBannerEngine.swift */; };
@@ -673,6 +674,7 @@
 		38EACFFE1C6894960091A9AF /* nl */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = nl; path = nl.lproj/InfoPlist.strings; sourceTree = "<group>"; };
 		38EF31431938BA07004912F0 /* UINavigationController+KeyboardDismiss.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = "UINavigationController+KeyboardDismiss.h"; path = "ViewControllers/iPad/UINavigationController+KeyboardDismiss.h"; sourceTree = "<group>"; };
 		38EF31441938BA07004912F0 /* UINavigationController+KeyboardDismiss.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = "UINavigationController+KeyboardDismiss.m"; path = "ViewControllers/iPad/UINavigationController+KeyboardDismiss.m"; sourceTree = "<group>"; };
+		38F0DDBC2BE93652004B1A19 /* SequenceExtension.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SequenceExtension.swift; sourceTree = "<group>"; };
 		38F236FD26D012CE00A22F9E /* MCGenericAdBannerViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = MCGenericAdBannerViewController.h; sourceTree = "<group>"; };
 		38F236FE26D012CF00A22F9E /* MCGenericAdBannerTableViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = MCGenericAdBannerTableViewController.h; sourceTree = "<group>"; };
 		38F236FF26D012CF00A22F9E /* MCGenericAdBannerTableViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = MCGenericAdBannerTableViewController.m; sourceTree = "<group>"; };
@@ -1485,6 +1487,14 @@
 			name = Model;
 			sourceTree = "<group>";
 		};
+		38F0DDBB2BE93629004B1A19 /* Calculations */ = {
+			isa = PBXGroup;
+			children = (
+				38F0DDBC2BE93652004B1A19 /* SequenceExtension.swift */,
+			);
+			path = Calculations;
+			sourceTree = "<group>";
+		};
 		38F2370526D012E300A22F9E /* AdBanner */ = {
 			isa = PBXGroup;
 			children = (
@@ -1536,6 +1546,7 @@
 				38727E5226F306CD00847DEA /* Generic Enums */,
 				380B841E26D3F15E00E77368 /* Mail */,
 				3812760B1BBE74EF0004C8C2 /* UIViewControllerExtension.swift */,
+				38F0DDBB2BE93629004B1A19 /* Calculations */,
 				38490D2E1D7056D100A297BA /* ShowMailViewProtocol.swift */,
 				380C48151BE1330E00C82B0F /* CurrencyFormatter.swift */,
 				38CDE8FE17135B6300387CAA /* MCTools.h */,
@@ -2283,6 +2294,7 @@
 				38E36EEE1BBD7E820026ED7E /* MCTwoLabelsTitleView.swift in Sources */,
 				3814B495270C500000737A06 /* NavigationViewController.swift in Sources */,
 				38A8F2A623C2583200CB3B73 /* DescriptionOfPaymentTextInputValidator.swift in Sources */,
+				38F0DDBD2BE93652004B1A19 /* SequenceExtension.swift in Sources */,
 				389ACFDA23742C650025139F /* NameTextInputValidator.swift in Sources */,
 				38E2CB3E1BC2A49C0092B5C8 /* SelectPayerTableViewCell_iPad.swift in Sources */,
 				38572B0A169F3D2700969C62 /* MCAllTripsTableViewController.m in Sources */,
