@@ -58,7 +58,6 @@
         UIPickerView *inputView = [[UIPickerView alloc] init];
         inputView.delegate = _emailTextInputReceiver;
         inputView.dataSource = _emailTextInputReceiver;
-        inputView.showsSelectionIndicator = YES;
         [inputView selectRow:_model.indexOfDefaultEmailAddress inComponent:0 animated:YES];
         _emailField.inputView = inputView;
         _emailField.tintColor = UIColor.clearColor;
