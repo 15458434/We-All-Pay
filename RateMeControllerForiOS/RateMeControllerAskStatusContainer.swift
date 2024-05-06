@@ -29,7 +29,7 @@ public enum RateMeControllerAskStatus: Int32, CustomStringConvertible {
 private let kRateMeControllerAskStatusContainerShouldAsk = "kRateMeControllerAskStatusContainerShouldAsk"
 private let kRateMeControllerAskStatusContainerLastVersion = "kRateMeControllerAskStatusContainerLastVersion"
 
-final internal class RateMeControllerAskStatusContainer: NSObject, NSCoding {
+final internal class RateMeControllerAskStatusContainer: NSObject, NSSecureCoding {
     var shouldAsk: RateMeControllerAskStatus
     var lastVersion: String?
     
@@ -47,7 +47,11 @@ final internal class RateMeControllerAskStatusContainer: NSObject, NSCoding {
         self.init(shouldAsk: RateMeControllerAskStatus.yes, lastVersion: nil)
     }
     
-    // MARK: NS Coding
+    // MARK: NSSecureCoding
+    
+    static var supportsSecureCoding: Bool = false
+    
+    // MARK: NSCoding
     
     required init?(coder aDecoder: NSCoder) {
         self.shouldAsk = RateMeControllerAskStatus(rawValue: aDecoder.decodeInt32(forKey: kRateMeControllerAskStatusContainerShouldAsk))!
