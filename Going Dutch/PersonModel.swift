@@ -43,7 +43,7 @@ import UIKit
         let request = MCEmailAddress.fetchRequest()
         request.predicate = NSPredicate(format: "owner = %@", person)
         request.sortDescriptors = [NSSortDescriptor(key: "emailAddress", ascending: true)]
-        let result = try! person.managedObjectContext!.fetch(request) as! [MCEmailAddress]
+        let result = try! person.managedObjectContext!.fetch(request)
         return result
     }
     
