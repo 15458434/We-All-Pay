@@ -282,9 +282,7 @@
 - (void)prepareForSegue:(UIStoryboardSegue *)segue sender:(id)sender {
     if ([[segue identifier] isEqualToString:@"openEditPerson"]) {
         UINavigationController *navController = (UINavigationController *)segue.destinationViewController;
-        if (@available(iOS 13.0, *)) {
-            navController.modalInPresentation = YES;
-        }
+        navController.modalInPresentation = YES;
         MCPersonViewController *destination = navController.viewControllers.firstObject;
         destination.isAdBannerEnabled = YES;
         NSIndexPath *indexPathOfSelectedRow = [[self tableView] indexPathForSelectedRow];

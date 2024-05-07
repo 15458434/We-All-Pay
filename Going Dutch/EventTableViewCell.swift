@@ -93,11 +93,9 @@ import Combine
     override func awakeFromNib() {
         self.model = EventModel()
         
-        if #available(iOS 13.0, *) {
-            tripLabel.backgroundColor = .clear
-            totalCostLabel.backgroundColor = .clear
-            peoplePresentLabel.backgroundColor = .clear
-            extraLabel.backgroundColor = .clear
-        }
+        tripLabel.backgroundColor = .clear
+        totalCostLabel.backgroundColor = .clear
+        peoplePresentLabel.backgroundColor = .clear
+        extraLabel.backgroundColor = .clear
     }
 }
