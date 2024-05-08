@@ -6,7 +6,7 @@
 //  Copyright © 2021 Mark Cornelisse. All rights reserved.
 //
 
-@import UIKit;
+#import <UIKit/UIKit.h>
 
 //! Project version number for WeAllPayDesignableUI.
 FOUNDATION_EXPORT double WeAllPayDesignableUIVersionNumber;
@@ -16,7 +16,7 @@ FOUNDATION_EXPORT const unsigned char WeAllPayDesignableUIVersionString[];
 
 // In this header, you should import all the public headers of your framework using statements like #import <WeAllPayDesignableUI/PublicHeader.h>
 
-#import "MCNotificationUnreadIndicator.h"
-#import "MCBadgeButton.h"
-#import "MCBorderLineView.h"
-#import "MCRoundedButton.h"
+#import <WeAllPayDesignableUI/MCNotificationUnreadIndicator.h>
+#import <WeAllPayDesignableUI/MCBadgeButton.h>
+#import <WeAllPayDesignableUI/MCBorderLineView.h>
+#import <WeAllPayDesignableUI/MCRoundedButton.h>
