@@ -8,7 +8,6 @@
 
 import UIKit
 
-import PersonalizedAdConsent
 import GoogleMobileAds
 
 @objc(MCAdBannerEngineDelegate) protocol AdBannerEngineDelegate {

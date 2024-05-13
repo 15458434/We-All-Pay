@@ -1717,9 +1717,9 @@
 				38572AD0169D437B00969C62 /* Resources */,
 				380D611E1B299B94006F8AE4 /* Embed Frameworks */,
 				384A8D9D1D54776300A69E15 /* Embed App Extensions */,
-				38F2A4A323E097C40021F574 /* Crashlytics - This should be the very last step. */,
 				3A0B44C7A86199FA8728561C /* [CP] Embed Pods Frameworks */,
 				74F383D11455E8926023E33F /* [CP] Copy Pods Resources */,
+				38F2A4A323E097C40021F574 /* Crashlytics - This should be the very last step. */,
 			);
 			buildRules = (
 			);

@@ -12,7 +12,6 @@ import AppTrackingTransparency
 
 import UserMessagingPlatform
 
-import PersonalizedAdConsent
 import GoogleMobileAds
 import FBAudienceNetwork
 
@@ -95,23 +94,6 @@ struct TCFReader {
     #else
     static var isEnabled: Bool = true
     #endif
-    
-    enum ConsentStatus: Int {
-        case unknown = 0
-        case nonPersonalized = 1
-        case personalized = 2
-        
-        init(consentStatus: PACConsentStatus) {
-            switch consentStatus {
-            case .nonPersonalized:
-                self = .nonPersonalized
-            case .personalized:
-                self = .personalized
-            default:
-                self = .unknown
-            }
-        }
-    }
     
     enum EconomicArea {
         case unknown
