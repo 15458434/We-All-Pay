@@ -87,9 +87,6 @@ extension MailComposer where Self: ThisEventReadOnly {
         mailBody += "\n"
         
         for payment in allPayments {
-            guard payment.moneyInMainCurrency != nil else {
-                throw MailComposerError.missingCrititcalInformationIn(payment: payment)
-            }
             guard payment.payingPerson != nil else {
                 throw MailComposerError.missingCrititcalInformationIn(payment: payment)
             }
