@@ -161,7 +161,6 @@ PODS:
     - MDFTextAccessibility
   - MDFInternationalization (3.0.0)
   - MDFTextAccessibility (2.0.1)
-  - PersonalizedAdConsent (1.0.5)
   - PromisesObjC (2.4.0)
 
 DEPENDENCIES:
@@ -169,7 +168,6 @@ DEPENDENCIES:
   - Google-Mobile-Ads-SDK
   - GoogleMobileAdsMediationFacebook
   - GoogleMobileAdsMediationTestSuite
-  - PersonalizedAdConsent
 
 SPEC REPOS:
   https://github.com/CocoaPods/Specs.git:
@@ -184,7 +182,6 @@ SPEC REPOS:
     - MaterialComponents
     - MDFInternationalization
     - MDFTextAccessibility
-    - PersonalizedAdConsent
     - PromisesObjC
 
 SPEC CHECKSUMS:
@@ -199,9 +196,8 @@ SPEC CHECKSUMS:
   MaterialComponents: 1a9b2d9d45b1601ae544de85089adc4c464306d4
   MDFInternationalization: d697c55307816222a55685c4ccb1044ffb030c12
   MDFTextAccessibility: f4bb4cc2194286651b59a215fdeaa0e05dc90ba5
-  PersonalizedAdConsent: dbecabb3467df967c16d9cebc2ef4a8890e4bbd8
   PromisesObjC: f5707f49cb48b9636751c5b2e7d227e43fba9f47
 
-PODFILE CHECKSUM: 749be9e8c3dfc9940aabdb105dd6132273c2911e
+PODFILE CHECKSUM: f6c206fe571a0e72562faab1437c80ccab88f46b
 
 COCOAPODS: 1.15.2

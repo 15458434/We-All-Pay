@@ -7,7 +7,6 @@ target 'We all pay' do
     
     pod 'Google-Mobile-Ads-SDK'
     pod 'GoogleMobileAdsMediationFacebook'
-    pod 'PersonalizedAdConsent'
     pod 'GoogleMobileAdsMediationTestSuite', :configurations => ['AdTest']
     
     target 'We all pay Tests' do
