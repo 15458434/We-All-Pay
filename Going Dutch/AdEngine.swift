@@ -55,7 +55,7 @@ struct TCFReader {
         return purposes.allSatisfy { (hasAttribute(input: purposeLI, index: $0) && hasVendorLI) || (hasAttribute(input: purposeConsent, index: $0) && hasVendorConsent) }
     }
 
-    fileprivate func canShowAds() -> Bool {
+    func canShowAds() -> Bool {
         let purposeConsent = UserDefaults.standard.string(forKey: "IABTCF_PurposeConsents") ?? ""
         let vendorConsent = UserDefaults.standard.string(forKey: "IABTCF_VendorConsents") ?? ""
         let vendorLI = UserDefaults.standard.string(forKey: "IABTCF_VendorLegitimateInterests") ?? ""
@@ -89,8 +89,6 @@ struct TCFReader {
 }
 
 @objc(MCAdEngine) @objcMembers open class AdEngine: NSObject {
-    // TODO: Remove on 14-08-2022
-    static let kAdBannerConsent = "7DE9F9CF-B4B9-4DCB-94FC-F0FD62F432DC"
     
     #if SCREENSHOTS
     static var isEnabled: Bool = false
@@ -161,12 +159,6 @@ struct TCFReader {
         
         guard !MCStoreInterface.defaultStoreInterface.isProProductPurchased else {
             return
-        }
-        
-        // clean up old stuff if it exists.
-        if UserDefaults.standard.integer(forKey: kAdBannerConsent) > 0 {
-            UserDefaults.standard.removeObject(forKey: kAdBannerConsent)
-            PACConsentInformation.sharedInstance.reset()
         }
         
         // Create a UMPRequestParameters object.

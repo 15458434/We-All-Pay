@@ -44,8 +44,7 @@ import GoogleMobileAds
         
         self.delegate = (viewController as! AdBannerEngineDelegate)
         
-        let consent = PACConsentStatus(rawValue: UserDefaults.standard.integer(forKey: AdEngine.kAdBannerConsent))!
-        if (!MCStoreInterface.defaultStoreInterface.isProProductPurchased && (consent == PACConsentStatus.nonPersonalized) || (consent == PACConsentStatus.personalized) || !PACConsentInformation.sharedInstance.isRequestLocationInEEAOrUnknown) {
+        if (!MCStoreInterface.defaultStoreInterface.isProProductPurchased && TCFReader().canShowAds()) {
             prepareAdBanner()
         }
     }
@@ -66,8 +65,7 @@ import GoogleMobileAds
         
         self.delegate = (viewController as! AdBannerEngineDelegate)
         
-        let consent = PACConsentStatus(rawValue: UserDefaults.standard.integer(forKey: AdEngine.kAdBannerConsent))!
-        if (!MCStoreInterface.defaultStoreInterface.isProProductPurchased && (consent == PACConsentStatus.nonPersonalized) || (consent == PACConsentStatus.personalized) || !PACConsentInformation.sharedInstance.isRequestLocationInEEAOrUnknown) {
+        if (!MCStoreInterface.defaultStoreInterface.isProProductPurchased && TCFReader().canShowAds()) {
             prepareAdBanner()
         }
     }
@@ -88,8 +86,7 @@ import GoogleMobileAds
         
         self.delegate = (viewController as! AdBannerEngineDelegate)
         
-        let consent = PACConsentStatus(rawValue: UserDefaults.standard.integer(forKey: AdEngine.kAdBannerConsent))!
-        if (!MCStoreInterface.defaultStoreInterface.isProProductPurchased && (consent == PACConsentStatus.nonPersonalized) || (consent == PACConsentStatus.personalized) || !PACConsentInformation.sharedInstance.isRequestLocationInEEAOrUnknown) {
+        if (!MCStoreInterface.defaultStoreInterface.isProProductPurchased && TCFReader().canShowAds()) {
             prepareAdBanner()
         }
     }
@@ -98,11 +95,7 @@ import GoogleMobileAds
         guard AdEngine.isEnabled else {
             return
         }
-        if size.height > size.width {
-            bannerView.adSize = kGADAdSizeSmartBannerPortrait
-        } else {
-            bannerView.adSize = kGADAdSizeSmartBannerLandscape
-        }
+        bannerView.adSize = GADCurrentOrientationAnchoredAdaptiveBannerAdSizeWithWidth(size.width)
     }
     
     private(set) var isReady: Bool = false
