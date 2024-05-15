@@ -27,7 +27,7 @@ static void * sectionsContext = &sectionsContext;
 
 @property (weak, nonatomic) IBOutlet UITableViewHeaderFooterView *headerView;
 @property (nonatomic, strong) MCTableEmptyMessage *emptyMessage;
-@property (weak, nonatomic) IBOutlet MCRoundedButton *sendEmailButton;
+@property (weak, nonatomic) IBOutlet UIButton *sendEmailButton;
 
 // Ad Banner
 @property (strong, nonatomic) GADBannerView *worstSalesPitchEverView;
@@ -43,7 +43,7 @@ static void * sectionsContext = &sectionsContext;
 
 #pragma mark - Actions
 
-- (IBAction)sendAsEmailButtonPressed:(MCRoundedButton *)sender {
+- (IBAction)sendAsEmailButtonPressed:(UIButton *)sender {
     [self shareBill:self];
 }
 
@@ -319,8 +319,11 @@ static void * sectionsContext = &sectionsContext;
     
     self.navigationItem.title = NSLocalizedStringWithDefaultValue(@"solution_view_title", nil, NSBundle.mainBundle, @"solution", @"Title of the screen that shows the solution to the user of who owes who, what amount of money.");
     
-    NSString *sendEmailButtonTitle = NSLocalizedStringWithDefaultValue(@"solution_view_button_send_email", nil, NSBundle.mainBundle, @"send email", @"Title of a button that allows for sending the email with the solution.");
-    [_sendEmailButton setTitle:sendEmailButtonTitle forState:UIControlStateNormal];
+    NSString *sendEmailButtonTitle = NSLocalizedStringWithDefaultValue(@"solution_view_button_send_email", nil, NSBundle.mainBundle, @"Send email", @"Title of a button that allows for sending the email with the solution.");
+    UIFont *font = [UIFont systemFontOfSize:15 weight:UIFontWeightSemibold];
+    NSDictionary<NSAttributedStringKey,id> *attrs = @{NSFontAttributeName: font};
+    NSAttributedString *attributedTitle = [[NSAttributedString alloc] initWithString:sendEmailButtonTitle attributes:attrs];
+    [_sendEmailButton setAttributedTitle:attributedTitle forState:UIControlStateNormal];
 }
 
 - (void)viewDidLoad {

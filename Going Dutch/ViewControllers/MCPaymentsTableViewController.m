@@ -28,8 +28,8 @@
 
 @interface MCPaymentsTableViewController () <ShowPayment>
 
-@property (weak, nonatomic) IBOutlet MCRoundedButton *addPaymentButton;
-@property (weak, nonatomic) IBOutlet MCRoundedButton *solveEventButton;
+@property (weak, nonatomic) IBOutlet UIButton *addPaymentButton;
+@property (weak, nonatomic) IBOutlet UIButton *solveEventButton;
 
 @property (weak, nonatomic) IBOutlet MCTableEmptyMessage *headerView;
 
@@ -42,7 +42,7 @@
 
 #pragma mark - Actions
 
-- (IBAction)addPaymentTouchUpInside:(MCRoundedButton *)sender {
+- (IBAction)addPaymentTouchUpInside:(UIButton *)sender {
     if (_tonightsBill.peoplePresent.count == 0) {
         [self showNoPeoplePresentAlert];
         return;
@@ -265,10 +265,14 @@
     [super loadView];
     
     NSString *addPaymentButtonTitle = NSLocalizedStringWithDefaultValue(@"payments_view_button_add_payment", nil, NSBundle.mainBundle, @"Add payment", @"Title of a button that adds a payment and opens the new payment view to enter the information on a new payment");
-    [_addPaymentButton setTitle:addPaymentButtonTitle forState:UIControlStateNormal];
+    UIFont *font = [UIFont systemFontOfSize:15 weight:UIFontWeightSemibold];
+    NSDictionary<NSAttributedStringKey,id> *attrs = @{NSFontAttributeName: font};
+    NSAttributedString *attributedTitle = [[NSAttributedString alloc] initWithString:addPaymentButtonTitle attributes:attrs];
+    [_addPaymentButton setAttributedTitle:attributedTitle forState:UIControlStateNormal];
     
     NSString *solveEventButtonTitle = NSLocalizedStringWithDefaultValue(@"payments_view_button_solve_event", nil, NSBundle.mainBundle, @"Solve", @"Title of a button that solves who needs to pay whom on the current event.");
-    [_solveEventButton setTitle:solveEventButtonTitle forState:UIControlStateNormal];
+    NSAttributedString *attributedsolveEventButtonTitle = [[NSAttributedString alloc] initWithString:solveEventButtonTitle attributes:attrs];
+    [_solveEventButton setAttributedTitle:attributedsolveEventButtonTitle forState:UIControlStateNormal];
     
     self.tableView.accessibilityIdentifier = @"PaymentsTableViewController";
     

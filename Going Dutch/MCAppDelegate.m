@@ -13,7 +13,6 @@
 #import "MCAllTripsTableViewController.h"
 #import "MCPaymentViewController.h"
 
-#import "MCRoundedButton.h"
 
 #import "MCWeAllPayStoreController.h"
 
@@ -66,18 +65,9 @@
     
     UIBarButtonItem.appearance.tintColor = [UIColor colorNamed:@"button - enabled"];
     UINavigationBar.appearance.barStyle = UIBarStyleDefault;
-        
-    [UIButton.appearance setTitleColor:[UIColor colorNamed:@"button - enabled"] forState:UIControlStateNormal];
-    [MCRoundedButton.appearance setTitleColor:UIColor.systemBackgroundColor forState:UIControlStateNormal];
-    [MCRoundedButton.appearance setTitleColor:UIColor.systemBackgroundColor forState:UIControlStateHighlighted];
     
-    
-    [UIButton.appearance setTitleColor:[UIColor colorNamed:@"button - disabled"] forState:UIControlStateDisabled];
-    [[UIButton appearanceWhenContainedInInstancesOfClasses:@[[UITableViewCell class]]] setTitleColor:[UIColor whiteColor] forState:UIControlStateNormal];
     // Set the background color in the peoplepicker.
     UISearchBar.appearance.barTintColor = [UIColor colorNamed:@"background"];
-    
-    [[UIButton appearanceWhenContainedInInstancesOfClasses:@[NSClassFromString(@"UISwipeActionPullView")]] setTitleColor:[UIColor whiteColor] forState:UIControlStateNormal];
     
     // Set the sectionIndex color in the people picker
     UITableView.appearance.sectionIndexColor = [UIColor colorNamed:@"button - enabled"];

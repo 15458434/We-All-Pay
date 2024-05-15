@@ -38,7 +38,7 @@ static void * notificationCountContext = &notificationCountContext;
 @property (nonatomic, strong) IBOutlet MCEventsModel *model;
 
 @property (nonatomic, weak) IBOutlet MCBadgeButton *infoButton;
-@property (weak, nonatomic) IBOutlet MCRoundedButton *createEventButton;
+@property (weak, nonatomic) IBOutlet UIButton *createEventButton;
 @property (nonatomic, strong) MCTableEmptyMessage *emptyMessage;
 @property (weak, nonatomic) IBOutlet UITableViewHeaderFooterView *headerView;
 
@@ -231,7 +231,10 @@ static void * notificationCountContext = &notificationCountContext;
     
     self.navigationItem.title = NSLocalizedStringWithDefaultValue(@"events_view_title", nil, NSBundle.mainBundle , @"Events", @"A list of all the events on which payments have been shared on the people present");
     NSString *createEventButtonTitle = NSLocalizedStringWithDefaultValue(@"events_view_button_create_event", nil, NSBundle.mainBundle, @"New Event", @"Button in the events view that creates a new event");
-    [self.createEventButton setTitle:createEventButtonTitle forState:UIControlStateNormal];
+    UIFont *font = [UIFont systemFontOfSize:15 weight:UIFontWeightSemibold];
+    NSDictionary<NSAttributedStringKey,id> *attrs = @{NSFontAttributeName: font};
+    NSAttributedString *attributedTitle = [[NSAttributedString alloc] initWithString:createEventButtonTitle attributes:attrs];
+    [_createEventButton setAttributedTitle:attributedTitle forState:UIControlStateNormal];
     
     _emptyMessage = [NSBundle.mainBundle loadNibNamed:@"MCTableEmptyMessage" owner:self options:nil][0];
     _emptyMessage.bigMessage.text = NSLocalizedStringWithDefaultValue(@"events_view_empty_message", nil, NSBundle.mainBundle, @"Press \"New event\" to add the event on which you'd like to share the expenses with your friends.", @"A message shown to the user when the list of events is empty.");

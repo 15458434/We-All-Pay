@@ -221,10 +221,14 @@
     _eventNameTextField.placeholder = NSLocalizedStringWithDefaultValue(@"people_view_placeholder_event_name", nil, NSBundle.mainBundle, @"Event name", @"Placeholder for the field where you end the name of the event.");
     
     NSString *addPersonButtonTitle = NSLocalizedStringWithDefaultValue(@"people_view_button_add_person", nil, NSBundle.mainBundle, @"Add person", @"Add person button in the people view that adds a person to the event.");
-    [_addPersonButton setTitle:addPersonButtonTitle forState:UIControlStateNormal];
+    UIFont *font = [UIFont systemFontOfSize:15 weight:UIFontWeightSemibold];
+    NSDictionary<NSAttributedStringKey,id> *attrs = @{NSFontAttributeName: font};
+    NSAttributedString *attributedTitle = [[NSAttributedString alloc] initWithString:addPersonButtonTitle attributes:attrs];
+    [_addPersonButton setAttributedTitle:attributedTitle forState:UIControlStateNormal];
     
-    NSString *addPersonFromContactsButton = NSLocalizedStringWithDefaultValue(@"people_view_button_contacts", nil, NSBundle.mainBundle, @"Contacts", @"Add person from contacts button inthe people view that imports a person from the addressbook to the event");
-    [_addPersonFromContactsButton setTitle:addPersonFromContactsButton forState:UIControlStateNormal];
+    NSString *addPersonFromContactsButtonTitle = NSLocalizedStringWithDefaultValue(@"people_view_button_contacts", nil, NSBundle.mainBundle, @"Contacts", @"Add person from contacts button inthe people view that imports a person from the addressbook to the event");
+    NSAttributedString *attributedAddPersonFromContactsButtonTitle = [[NSAttributedString alloc] initWithString:addPersonFromContactsButtonTitle attributes:attrs];
+    [_addPersonFromContactsButton setAttributedTitle:attributedAddPersonFromContactsButtonTitle forState:UIControlStateNormal];
     
     _emptyMessage = [NSBundle.mainBundle loadNibNamed:@"MCTableEmptyMessage" owner:self options:nil][0];
     _emptyMessage.borderlineView.dxInset = 20;

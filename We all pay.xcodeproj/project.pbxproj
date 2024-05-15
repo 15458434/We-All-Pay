@@ -58,8 +58,6 @@
 		382E797426B7F91700A0D1C1 /* MCImageFunctions.m in Sources */ = {isa = PBXBuildFile; fileRef = 38870FE326A044820003E1D6 /* MCImageFunctions.m */; };
 		382E797526B7F93400A0D1C1 /* MCImageFunctions.h in Headers */ = {isa = PBXBuildFile; fileRef = 38870FE226A044820003E1D6 /* MCImageFunctions.h */; settings = {ATTRIBUTES = (Private, ); }; };
 		382E797626B8446600A0D1C1 /* MCBorderLineView.m in Sources */ = {isa = PBXBuildFile; fileRef = 38494B4326A735F400F10C64 /* MCBorderLineView.m */; };
-		382E797826B8455A00A0D1C1 /* MCRoundedButton.m in Sources */ = {isa = PBXBuildFile; fileRef = 384DCF7026A9710C00DF2ACA /* MCRoundedButton.m */; };
-		382E797926B845AD00A0D1C1 /* MCRoundedButton.h in Headers */ = {isa = PBXBuildFile; fileRef = 384DCF6F26A9710C00DF2ACA /* MCRoundedButton.h */; settings = {ATTRIBUTES = (Public, ); }; };
 		382E797A26B845B200A0D1C1 /* MCBorderLineView.h in Headers */ = {isa = PBXBuildFile; fileRef = 38494B4226A735F400F10C64 /* MCBorderLineView.h */; settings = {ATTRIBUTES = (Public, ); }; };
 		382E797B26B8464A00A0D1C1 /* CircularImageView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3813D8941D8983C900E6B7A4 /* CircularImageView.swift */; };
 		382E7BDD17E5E57500A1040A /* MCReturnPaymentViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 382E7BDC17E5E57500A1040A /* MCReturnPaymentViewController.m */; };
@@ -448,8 +446,6 @@
 		38494B4226A735F400F10C64 /* MCBorderLineView.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = MCBorderLineView.h; sourceTree = "<group>"; };
 		38494B4326A735F400F10C64 /* MCBorderLineView.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = MCBorderLineView.m; sourceTree = "<group>"; };
 		384D6A282BD01146005E6E30 /* We all pay database version 4.1.xcappdata */ = {isa = PBXFileReference; lastKnownFileType = wrapper; path = "We all pay database version 4.1.xcappdata"; sourceTree = "<group>"; };
-		384DCF6F26A9710C00DF2ACA /* MCRoundedButton.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = MCRoundedButton.h; sourceTree = "<group>"; };
-		384DCF7026A9710C00DF2ACA /* MCRoundedButton.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = MCRoundedButton.m; sourceTree = "<group>"; };
 		384EC90B1BC2F17500A80799 /* SelectCategoryTableViewCell_iPad.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SelectCategoryTableViewCell_iPad.swift; sourceTree = "<group>"; };
 		384EC90D1BC2F35700A80799 /* SelectCurrencyTableViewCell_iPad.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SelectCurrencyTableViewCell_iPad.swift; sourceTree = "<group>"; };
 		384EC90F1BC2F48C00A80799 /* SelectEmailAddressTableViewCell_iPad.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SelectEmailAddressTableViewCell_iPad.swift; sourceTree = "<group>"; };
@@ -983,8 +979,6 @@
 		382E797726B8446E00A0D1C1 /* Generic */ = {
 			isa = PBXGroup;
 			children = (
-				384DCF6F26A9710C00DF2ACA /* MCRoundedButton.h */,
-				384DCF7026A9710C00DF2ACA /* MCRoundedButton.m */,
 				38494B4226A735F400F10C64 /* MCBorderLineView.h */,
 				38494B4326A735F400F10C64 /* MCBorderLineView.m */,
 				3813D8941D8983C900E6B7A4 /* CircularImageView.swift */,
@@ -1628,7 +1622,6 @@
 				382E797126B7F80000A0D1C1 /* MCBadgeButton.h in Headers */,
 				382E796D26B7F69300A0D1C1 /* MCNotificationUnreadIndicator.h in Headers */,
 				382E796226B7F48200A0D1C1 /* WeAllPayDesignableUI.h in Headers */,
-				382E797926B845AD00A0D1C1 /* MCRoundedButton.h in Headers */,
 				382E797A26B845B200A0D1C1 /* MCBorderLineView.h in Headers */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
@@ -2265,7 +2258,6 @@
 			buildActionMask = 2147483647;
 			files = (
 				382E797226B7F86800A0D1C1 /* UnreadNotificationsCountView.swift in Sources */,
-				382E797826B8455A00A0D1C1 /* MCRoundedButton.m in Sources */,
 				382E797B26B8464A00A0D1C1 /* CircularImageView.swift in Sources */,
 				382E797426B7F91700A0D1C1 /* MCImageFunctions.m in Sources */,
 				382E796C26B7F49800A0D1C1 /* MCNotificationUnreadIndicator.m in Sources */,

@@ -36,7 +36,7 @@ final class PaymentViewController: MCGenericAdBannerTableViewController, AdBanne
     @IBOutlet weak var categoryButton: UIButton!
     @IBOutlet weak var payerView: UIImageView!
     @IBOutlet weak var selectPayerButton: UIButton!
-    @IBOutlet weak var selectCurrencyButton: RoundedButton!
+    @IBOutlet weak var selectCurrencyButton: UIButton!
     @IBOutlet weak var presenceListLabel: UILabel!
     
     @IBOutlet var model: PaymentModel!
