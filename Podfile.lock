@@ -6,7 +6,7 @@ PODS:
     - GoogleUtilities/Logger (~> 7.12)
   - FirebaseCoreInternal (10.25.0):
     - "GoogleUtilities/NSData+zlib (~> 7.8)"
-  - Google-Mobile-Ads-SDK (11.4.0):
+  - Google-Mobile-Ads-SDK (11.5.0):
     - GoogleUserMessagingPlatform (>= 1.1)
   - GoogleMobileAdsMediationFacebook (6.15.0.0):
     - FBAudienceNetwork (= 6.15.0)
@@ -188,7 +188,7 @@ SPEC CHECKSUMS:
   FBAudienceNetwork: 80a035aa69cc3a71c99e44cb5c2874e4cef9909f
   FirebaseCore: 7ec4d0484817f12c3373955bc87762d96842d483
   FirebaseCoreInternal: 910a81992c33715fec9263ca7381d59ab3a750b7
-  Google-Mobile-Ads-SDK: d097dca17b9344135dcf592e79df0c7fbd89947b
+  Google-Mobile-Ads-SDK: 7db2098033ad3bfcd72a11e7503b49700a93029e
   GoogleMobileAdsMediationFacebook: 26dec5611c04af55eba3dd16c564bafa8ebd7131
   GoogleMobileAdsMediationTestSuite: 072c67cb9b10b6f7847b0733baadf7c77e2d737f
   GoogleUserMessagingPlatform: f131fa7978d2ba88d7426702b057c2cc318e6595
