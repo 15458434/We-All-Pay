@@ -7,6 +7,7 @@
 //
 
 import UIKit
+import Combine
 
 @objc(MCEventTableViewCell) final class EventTableViewCell: UITableViewCell {
     @objc private var model: EventModel!
@@ -19,8 +20,9 @@ import UIKit
     
     private var nameObservation: NSKeyValueObservation!
     private var peoplePresentObservation: NSKeyValueObservation!
-    private var paymentsObservation: NSKeyValueObservation!
     private var dateCreatedObservation: NSKeyValueObservation!
+    
+    private var bag = Set<AnyCancellable>()
     
     @objc func prepareForUse(with event: MCSharedBill) {
         self.model.prepareForUse(with: event)
@@ -42,26 +44,6 @@ import UIKit
                 ()
             }
         })
-        self.paymentsObservation = self.observe(\.model!.event!.payments, options: [.initial, .new], changeHandler: { mySelf, change in
-            guard change.newValue != nil else {
-                return
-            }
-            switch change.kind {
-            case .setting:
-                let event = mySelf.model.event!
-                if event.areAllExchangeRatesValid() {
-                    mySelf.totalCostLabel.isHidden = false
-                    mySelf.waitingForXRatesIndicator.stopAnimating()
-                    mySelf.totalCostLabel.text = mySelf.model.mainCurrencyFormatter.string(for: mySelf.model.totalSumOfMoneySpend)
-                } else {
-                    mySelf.totalCostLabel.text = mySelf.model.mainCurrencyFormatter.string(for: mySelf.model.totalSumOfMoneySpend)
-                    mySelf.totalCostLabel.isHidden = true
-                    mySelf.waitingForXRatesIndicator.startAnimating()
-                }
-            default:
-                ()
-            }
-        })
         self.dateCreatedObservation = self.observe(\.model!.event!.dateModified, options: [.initial, .new], changeHandler: { mySelf, change in
             guard let newValue = change.newValue else {
                 return
@@ -72,8 +54,23 @@ import UIKit
             } else {
                 mySelf.extraLabel.text = nil
             }
-            
         })
+        let paymentsPublisher = self.publisher(for: \.model!.event!.payments, options: [.initial, .new])
+        self.publisher(for: \.model!.mainCurrencyFormatter, options: [.initial, .new])
+            .combineLatest(paymentsPublisher)
+            .sink { [unowned self] mainCurrency, payments in
+                let totalAmountOfMoneyInMainCurrency = payments?.totalSumOfMoneyInMainCurrency
+                let event = self.model.event!
+                if event.areAllExchangeRatesValid() {
+                    self.totalCostLabel.isHidden = false
+                    self.waitingForXRatesIndicator.stopAnimating()
+                    self.totalCostLabel.text = self.model.mainCurrencyFormatter.string(for: totalAmountOfMoneyInMainCurrency)
+                } else {
+                    self.totalCostLabel.text = self.model.mainCurrencyFormatter.string(for: totalAmountOfMoneyInMainCurrency)
+                    self.totalCostLabel.isHidden = true
+                    self.waitingForXRatesIndicator.startAnimating()
+                }
+            }.store(in: &bag)
     }
     
     // MARK: UITableViewCell
@@ -81,8 +78,9 @@ import UIKit
     override func prepareForReuse() {
         nameObservation = nil
         peoplePresentObservation = nil
-        paymentsObservation = nil
         dateCreatedObservation = nil
+        bag.removeAll(keepingCapacity: true)
+        model.reset()
         super.prepareForReuse()
     }
     
@@ -95,11 +93,9 @@ import UIKit
     override func awakeFromNib() {
         self.model = EventModel()
         
-        if #available(iOS 13.0, *) {
-            tripLabel.backgroundColor = .clear
-            totalCostLabel.backgroundColor = .clear
-            peoplePresentLabel.backgroundColor = .clear
-            extraLabel.backgroundColor = .clear
-        }
+        tripLabel.backgroundColor = .clear
+        totalCostLabel.backgroundColor = .clear
+        peoplePresentLabel.backgroundColor = .clear
+        extraLabel.backgroundColor = .clear
     }
 }

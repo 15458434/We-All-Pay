@@ -67,7 +67,7 @@ NSString * const MCiCloudWeAllPayStoreName = @"iCloud-WeAllPayStore";
 }
 
 #ifdef SCREENSHOTS
-- (void)openStore:(void (^)(MCWeAllPayStoreController *store, BOOL success))completionHandler {
+- (void)openStore:(void (^_Nullable)(MCWeAllPayStoreController *store, BOOL success))completionHandler {
     [self mainThreadContext];
     [self backgroundThreadContext];
     [self startRespondingToStoreChangeNotifications];
@@ -85,7 +85,7 @@ NSString * const MCiCloudWeAllPayStoreName = @"iCloud-WeAllPayStore";
     }
 }
 #else
-- (void)openStore:(void (^)(BOOL success))completionHandler {
+- (void)openStore:(void (^_Nullable)(BOOL success))completionHandler {
     [self mainThreadContext];
     [self backgroundThreadContext];
     [self startRespondingToStoreChangeNotifications];

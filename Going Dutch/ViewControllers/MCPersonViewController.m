@@ -58,7 +58,6 @@
         UIPickerView *inputView = [[UIPickerView alloc] init];
         inputView.delegate = _emailTextInputReceiver;
         inputView.dataSource = _emailTextInputReceiver;
-        inputView.showsSelectionIndicator = YES;
         [inputView selectRow:_model.indexOfDefaultEmailAddress inComponent:0 animated:YES];
         _emailField.inputView = inputView;
         _emailField.tintColor = UIColor.clearColor;
@@ -146,7 +145,7 @@
     _lastNameField.placeholder = NSLocalizedStringWithDefaultValue(@"person_view_placeholder_last_name", nil, NSBundle.mainBundle, @"last name", @"Placeholder of the Last name field in the edit person view");
     _emailField.placeholder = NSLocalizedStringWithDefaultValue(@"person_view_placeholder_email_address", nil, NSBundle.mainBundle, @"e-mail address", @"Placeholder of the e-mail address field in the edit person view");
     NSString *selectEmailAddressButtonTitle = NSLocalizedStringWithDefaultValue(@"person_view_button_select_email", nil, NSBundle.mainBundle, @"Select email address", @"Button in the person view to select an email address of the user in case the user has multiple email addresses from an import of the addressbook");
-    [_selectEmailAddressButton setTitle:selectEmailAddressButtonTitle forState:UIControlStateNormal];
+    _selectEmailAddressButton.titleLabel.text = selectEmailAddressButtonTitle;
 }
 
 - (void)viewDidLoad {

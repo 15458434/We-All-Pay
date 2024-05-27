@@ -34,9 +34,9 @@ __attribute__((objc_subclassing_restricted))
 + (instancetype)defaultStore;
 
 #ifdef SCREENSHOTS
-- (void)openStore:(void (^)(MCWeAllPayStoreController *store, BOOL success))completionHandler;
+- (void)openStore:(void (^_Nullable)(MCWeAllPayStoreController *store, BOOL success))completionHandler;
 #else
-- (void)openStore:(void (^)(BOOL success))completionHandler;
+- (void)openStore:(void (^_Nullable)(BOOL success))completionHandler;
 #endif
 - (void)saveMainThreadContext;
 - (void)savebackgroundContext;

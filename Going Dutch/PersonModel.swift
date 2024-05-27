@@ -19,7 +19,7 @@ import UIKit
             let request = MCPerson.fetchRequest()
             request.predicate = NSPredicate(format: "self = %@", person)
             request.sortDescriptors = [NSSortDescriptor(key: "dateCreated", ascending: true)]
-            personFetchedResultsController = NSFetchedResultsController(fetchRequest: request, managedObjectContext: person.managedObjectContext!, sectionNameKeyPath: nil, cacheName: nil) as? NSFetchedResultsController<MCPerson>
+            personFetchedResultsController = NSFetchedResultsController(fetchRequest: request, managedObjectContext: person.managedObjectContext!, sectionNameKeyPath: nil, cacheName: nil)
             personFetchedResultsController.delegate = fetchedResultsControllerDelegate
             try! personFetchedResultsController.performFetch()
         }
@@ -27,7 +27,7 @@ import UIKit
             let request = MCEmailAddress.fetchRequest()
             request.predicate = NSPredicate(format: "owner = %@ AND selected = %@", person, NSNumber(value: true))
             request.sortDescriptors = [NSSortDescriptor(key: "emailAddress", ascending: true)]
-            defaultEmailAddressFetchedResultsController = NSFetchedResultsController(fetchRequest: request, managedObjectContext: person.managedObjectContext!, sectionNameKeyPath: nil, cacheName: nil) as? NSFetchedResultsController<MCEmailAddress>
+            defaultEmailAddressFetchedResultsController = NSFetchedResultsController(fetchRequest: request, managedObjectContext: person.managedObjectContext!, sectionNameKeyPath: nil, cacheName: nil)
             defaultEmailAddressFetchedResultsController.delegate = fetchedResultsControllerDelegate
             try! defaultEmailAddressFetchedResultsController.performFetch()
         }
@@ -43,7 +43,7 @@ import UIKit
         let request = MCEmailAddress.fetchRequest()
         request.predicate = NSPredicate(format: "owner = %@", person)
         request.sortDescriptors = [NSSortDescriptor(key: "emailAddress", ascending: true)]
-        let result = try! person.managedObjectContext!.fetch(request) as! [MCEmailAddress]
+        let result = try! person.managedObjectContext!.fetch(request)
         return result
     }
     
@@ -72,7 +72,7 @@ import UIKit
     
     @objc(updateDefaultEmailAddressWithString:) func update(defaultEmailAddress: String) {
         var defaultEmailAddressObject: MCEmailAddress? {
-            let request: NSFetchRequest<MCEmailAddress> = MCEmailAddress.fetchRequest() as! NSFetchRequest<MCEmailAddress>
+            let request: NSFetchRequest<MCEmailAddress> = MCEmailAddress.fetchRequest()
             request.predicate = NSPredicate(format: "owner = %@ AND selected = %@", person, NSNumber(value: true))
             request.sortDescriptors = [NSSortDescriptor(key: "uniqueEmailId", ascending: true)]
             let emailAddresses = try! person.managedObjectContext!.fetch(request)

@@ -38,7 +38,7 @@ static void * notificationCountContext = &notificationCountContext;
 @property (nonatomic, strong) IBOutlet MCEventsModel *model;
 
 @property (nonatomic, weak) IBOutlet MCBadgeButton *infoButton;
-@property (weak, nonatomic) IBOutlet MCRoundedButton *createEventButton;
+@property (weak, nonatomic) IBOutlet UIButton *createEventButton;
 @property (nonatomic, strong) MCTableEmptyMessage *emptyMessage;
 @property (weak, nonatomic) IBOutlet UITableViewHeaderFooterView *headerView;
 
@@ -199,10 +199,10 @@ static void * notificationCountContext = &notificationCountContext;
     return 76;
 }
 
-- (NSArray<UITableViewRowAction *> *)tableView:(UITableView *)tableView editActionsForRowAtIndexPath:(NSIndexPath *)indexPath {
+- (UISwipeActionsConfiguration *)tableView:(UITableView *)tableView trailingSwipeActionsConfigurationForRowAtIndexPath:(NSIndexPath *)indexPath {
     // Delete action
     NSString *deleteTitle = NSLocalizedStringWithDefaultValue(@"events_view_button_delete_event", nil, NSBundle.mainBundle, @"Delete", @"Text on a delete button");
-    UITableViewRowAction *deleteAction = [UITableViewRowAction rowActionWithStyle:UITableViewRowActionStyleDestructive title:deleteTitle handler:^(UITableViewRowAction * _Nonnull action, NSIndexPath * _Nonnull indexPath) {
+    UIContextualAction *deleteAction = [UIContextualAction contextualActionWithStyle:UIContextualActionStyleDestructive title:deleteTitle handler:^(UIContextualAction * _Nonnull action, __kindof UIView * _Nonnull sourceView, void (^ _Nonnull completionHandler)(BOOL)) {
 #ifdef DEBUG
         NSLog(@"Delete action pressed");
 #endif
@@ -210,7 +210,7 @@ static void * notificationCountContext = &notificationCountContext;
     }];
     // Change MainCurrency action
     NSString *selectMainCurrencyTitle = NSLocalizedStringWithDefaultValue(@"events_view_button_change_main_currency", nil, NSBundle.mainBundle, @"€$£¥", @"Text on a button to select a different main currency for an event");
-    UITableViewRowAction *selectCurrencyAction = [UITableViewRowAction rowActionWithStyle:UITableViewRowActionStyleNormal title:selectMainCurrencyTitle handler:^(UITableViewRowAction * _Nonnull action, NSIndexPath * _Nonnull indexPath) {
+    UIContextualAction *selectMainCurrencyAction = [UIContextualAction contextualActionWithStyle:UIContextualActionStyleNormal title:selectMainCurrencyTitle handler:^(UIContextualAction * _Nonnull action, __kindof UIView * _Nonnull sourceView, void (^ _Nonnull completionHandler)(BOOL)) {
 #ifdef DEBUG
         NSLog(@"Change currency pressed");
 #endif
@@ -218,7 +218,10 @@ static void * notificationCountContext = &notificationCountContext;
         [self performSegueWithIdentifier:@"selectMainCurrency" sender:self];
         self.selectedIndexPathForAction = indexPath;
     }];
-    return @[deleteAction, selectCurrencyAction];
+    
+    NSArray *actions = @[deleteAction, selectMainCurrencyAction];
+    UISwipeActionsConfiguration *swipeActions = [UISwipeActionsConfiguration configurationWithActions:actions];
+    return swipeActions;
 }
 
 #pragma mark - UIViewController
@@ -228,7 +231,10 @@ static void * notificationCountContext = &notificationCountContext;
     
     self.navigationItem.title = NSLocalizedStringWithDefaultValue(@"events_view_title", nil, NSBundle.mainBundle , @"Events", @"A list of all the events on which payments have been shared on the people present");
     NSString *createEventButtonTitle = NSLocalizedStringWithDefaultValue(@"events_view_button_create_event", nil, NSBundle.mainBundle, @"New Event", @"Button in the events view that creates a new event");
-    [self.createEventButton setTitle:createEventButtonTitle forState:UIControlStateNormal];
+    UIFont *font = [UIFont systemFontOfSize:15 weight:UIFontWeightSemibold];
+    NSDictionary<NSAttributedStringKey,id> *attrs = @{NSFontAttributeName: font};
+    NSAttributedString *attributedTitle = [[NSAttributedString alloc] initWithString:createEventButtonTitle attributes:attrs];
+    [_createEventButton setAttributedTitle:attributedTitle forState:UIControlStateNormal];
     
     _emptyMessage = [NSBundle.mainBundle loadNibNamed:@"MCTableEmptyMessage" owner:self options:nil][0];
     _emptyMessage.bigMessage.text = NSLocalizedStringWithDefaultValue(@"events_view_empty_message", nil, NSBundle.mainBundle, @"Press \"New event\" to add the event on which you'd like to share the expenses with your friends.", @"A message shown to the user when the list of events is empty.");

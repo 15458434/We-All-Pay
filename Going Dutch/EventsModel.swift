@@ -15,7 +15,7 @@ import UIKit
     
     @objc(prepareForUseWithManagedObjectContext:forDelegate:) func prepareForUse(with managedObjectContext: NSManagedObjectContext, for delegate: NSFetchedResultsControllerDelegate) {
         func createFetchEventsController() {
-            let request = MCSharedBill.fetchRequest() as! NSFetchRequest<MCSharedBill>
+            let request = MCSharedBill.fetchRequest()
             request.predicate = NSPredicate(value: true)
             request.sortDescriptors = [NSSortDescriptor(key: "dateCreated", ascending: false)]
             request.relationshipKeyPathsForPrefetching = [ "payments", "peoplePresent", "mainCurrency", "payments.exchangeRate", "payments.peopleSharingPayment" ]

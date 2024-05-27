@@ -6,10 +6,10 @@
 //  Copyright © 2021 Mark Cornelisse. All rights reserved.
 //
 
-@import UIKit;
+#import <UIKit/UIKit.h>
 
 NS_ASSUME_NONNULL_BEGIN
 
-OBJC_EXTERN UIImage *UIImageCreateImageTemplateWithTintColor(UIImage *, UIColor *color) NS_DEPRECATED_IOS(10_0, 13_0);
+OBJC_EXTERN UIImage *UIImageCreateImageTemplateWithTintColor(UIImage *, UIColor *color);
 
 NS_ASSUME_NONNULL_END

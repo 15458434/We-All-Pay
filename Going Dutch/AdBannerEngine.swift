@@ -8,7 +8,6 @@
 
 import UIKit
 
-import PersonalizedAdConsent
 import GoogleMobileAds
 
 @objc(MCAdBannerEngineDelegate) protocol AdBannerEngineDelegate {
@@ -29,7 +28,7 @@ import GoogleMobileAds
     private(set) var delegate: AdBannerEngineDelegate!
     
     @objc(prepareAdBanner:withAdUnitId:andViewController:) func prepare(adBanner: GADBannerView, with adUnitID: String, and viewController: UIViewController) {
-        func prepareAdBanner(with consent: PACConsentStatus = .unknown) {
+        func prepareAdBanner() {
             self.updateSize(for: adBanner, withScreenSize: UIScreen.main.bounds.size)
             adBanner.adUnitID = adUnitID
             adBanner.rootViewController = viewController
@@ -44,14 +43,13 @@ import GoogleMobileAds
         
         self.delegate = (viewController as! AdBannerEngineDelegate)
         
-        let consent = PACConsentStatus(rawValue: UserDefaults.standard.integer(forKey: AdEngine.kAdBannerConsent))!
-        if (!MCStoreInterface.defaultStoreInterface.isProProductPurchased && (consent == PACConsentStatus.nonPersonalized) || (consent == PACConsentStatus.personalized) || !PACConsentInformation.sharedInstance.isRequestLocationInEEAOrUnknown) {
-            prepareAdBanner(with: consent)
+        if (!MCStoreInterface.defaultStoreInterface.isProProductPurchased && TCFReader().canShowAds()) {
+            prepareAdBanner()
         }
     }
     
     @objc(prepareAdSizeBanner:withAdUnitId:andViewController:) func prepare(adSizeBanner: GADBannerView, with adUnitID: String, and viewController: UIViewController) {
-        func prepareAdBanner(with consent: PACConsentStatus = .unknown) {
+        func prepareAdBanner() {
             adSizeBanner.adSize = GADAdSizeBanner
             adSizeBanner.adUnitID = adUnitID
             adSizeBanner.rootViewController = viewController
@@ -66,14 +64,13 @@ import GoogleMobileAds
         
         self.delegate = (viewController as! AdBannerEngineDelegate)
         
-        let consent = PACConsentStatus(rawValue: UserDefaults.standard.integer(forKey: AdEngine.kAdBannerConsent))!
-        if (!MCStoreInterface.defaultStoreInterface.isProProductPurchased && (consent == PACConsentStatus.nonPersonalized) || (consent == PACConsentStatus.personalized) || !PACConsentInformation.sharedInstance.isRequestLocationInEEAOrUnknown) {
-            prepareAdBanner(with: consent)
+        if (!MCStoreInterface.defaultStoreInterface.isProProductPurchased && TCFReader().canShowAds()) {
+            prepareAdBanner()
         }
     }
     
     @objc(prepareMediumAdBanner:withAdUnitId:andViewController:) func prepare(mediumAdBanner: GADBannerView, with adUnitID: String, and viewController: UIViewController) {
-        func prepareAdBanner(with consent: PACConsentStatus = .unknown) {
+        func prepareAdBanner() {
             mediumAdBanner.adUnitID = adUnitID
             mediumAdBanner.adSize = GADAdSizeMediumRectangle
             mediumAdBanner.rootViewController = viewController
@@ -88,9 +85,8 @@ import GoogleMobileAds
         
         self.delegate = (viewController as! AdBannerEngineDelegate)
         
-        let consent = PACConsentStatus(rawValue: UserDefaults.standard.integer(forKey: AdEngine.kAdBannerConsent))!
-        if (!MCStoreInterface.defaultStoreInterface.isProProductPurchased && (consent == PACConsentStatus.nonPersonalized) || (consent == PACConsentStatus.personalized) || !PACConsentInformation.sharedInstance.isRequestLocationInEEAOrUnknown) {
-            prepareAdBanner(with: consent)
+        if (!MCStoreInterface.defaultStoreInterface.isProProductPurchased && TCFReader().canShowAds()) {
+            prepareAdBanner()
         }
     }
     
@@ -98,11 +94,7 @@ import GoogleMobileAds
         guard AdEngine.isEnabled else {
             return
         }
-        if size.height > size.width {
-            bannerView.adSize = kGADAdSizeSmartBannerPortrait
-        } else {
-            bannerView.adSize = kGADAdSizeSmartBannerLandscape
-        }
+        bannerView.adSize = GADCurrentOrientationAnchoredAdaptiveBannerAdSizeWithWidth(size.width)
     }
     
     private(set) var isReady: Bool = false

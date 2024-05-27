@@ -28,8 +28,8 @@
 
 @interface MCPaymentsTableViewController () <ShowPayment>
 
-@property (weak, nonatomic) IBOutlet MCRoundedButton *addPaymentButton;
-@property (weak, nonatomic) IBOutlet MCRoundedButton *solveEventButton;
+@property (weak, nonatomic) IBOutlet UIButton *addPaymentButton;
+@property (weak, nonatomic) IBOutlet UIButton *solveEventButton;
 
 @property (weak, nonatomic) IBOutlet MCTableEmptyMessage *headerView;
 
@@ -42,7 +42,7 @@
 
 #pragma mark - Actions
 
-- (IBAction)addPaymentTouchUpInside:(MCRoundedButton *)sender {
+- (IBAction)addPaymentTouchUpInside:(UIButton *)sender {
     if (_tonightsBill.peoplePresent.count == 0) {
         [self showNoPeoplePresentAlert];
         return;
@@ -265,10 +265,14 @@
     [super loadView];
     
     NSString *addPaymentButtonTitle = NSLocalizedStringWithDefaultValue(@"payments_view_button_add_payment", nil, NSBundle.mainBundle, @"Add payment", @"Title of a button that adds a payment and opens the new payment view to enter the information on a new payment");
-    [_addPaymentButton setTitle:addPaymentButtonTitle forState:UIControlStateNormal];
+    UIFont *font = [UIFont systemFontOfSize:15 weight:UIFontWeightSemibold];
+    NSDictionary<NSAttributedStringKey,id> *attrs = @{NSFontAttributeName: font};
+    NSAttributedString *attributedTitle = [[NSAttributedString alloc] initWithString:addPaymentButtonTitle attributes:attrs];
+    [_addPaymentButton setAttributedTitle:attributedTitle forState:UIControlStateNormal];
     
     NSString *solveEventButtonTitle = NSLocalizedStringWithDefaultValue(@"payments_view_button_solve_event", nil, NSBundle.mainBundle, @"Solve", @"Title of a button that solves who needs to pay whom on the current event.");
-    [_solveEventButton setTitle:solveEventButtonTitle forState:UIControlStateNormal];
+    NSAttributedString *attributedsolveEventButtonTitle = [[NSAttributedString alloc] initWithString:solveEventButtonTitle attributes:attrs];
+    [_solveEventButton setAttributedTitle:attributedsolveEventButtonTitle forState:UIControlStateNormal];
     
     self.tableView.accessibilityIdentifier = @"PaymentsTableViewController";
     
@@ -319,24 +323,18 @@
         MCPaymentNavigationController *navigationController = (MCPaymentNavigationController *)segue.destinationViewController;
         MCPaymentViewController *destination = (MCPaymentViewController *)navigationController.viewControllers[0];
         [destination prepareForUseWithPayment:[_tonightsBill getFirstPaymentWithoutAPayer]];
-        if (@available(iOS 13.0, *)) {
-            UINavigationController *navController = (UINavigationController *)segue.destinationViewController;
-            navController.modalInPresentation = YES;
-        }
+        UINavigationController *navController = (UINavigationController *)segue.destinationViewController;
+        navController.modalInPresentation = YES;
     } else if ([segue.identifier isEqualToString:@"openPaymentWithMissingData"]) {
         MCPaymentNavigationController *navigationController = (MCPaymentNavigationController *)segue.destinationViewController;
         MCPaymentViewController *destination = (MCPaymentViewController *)navigationController.viewControllers[0];
         [destination prepareForUseWithPayment:_forOpenPaymentWithMissingDataForSegue];
         _forOpenPaymentWithMissingDataForSegue = nil;
-        if (@available(iOS 13.0, *)) {
-            UINavigationController *navController = (UINavigationController *)segue.destinationViewController;
-            navController.modalInPresentation = YES;
-        }
+        UINavigationController *navController = (UINavigationController *)segue.destinationViewController;
+        navController.modalInPresentation = YES;
     } else if ([segue.identifier isEqualToString:@"openPaymentView"]) {
         UINavigationController *navController = (UINavigationController *)segue.destinationViewController;
-        if (@available(iOS 13.0, *)) {
-            navController.modalInPresentation = YES;
-        }
+        navController.modalInPresentation = YES;
         MCPayment *payment;
         NSIndexPath *indexPathOfSelectedRow = self.tableView.indexPathForSelectedRow;
         if (indexPathOfSelectedRow) {
@@ -363,31 +361,23 @@
         } else {
             [destination prepareForUseWithEvent:_tonightsBill];
         }
-        if (@available(iOS 13.0, *)) {
-            UINavigationController *navController = (UINavigationController *)segue.destinationViewController;
-            navController.modalInPresentation = YES;
-        }
+        UINavigationController *navController = (UINavigationController *)segue.destinationViewController;
+        navController.modalInPresentation = YES;
     } else if ([segue.identifier isEqualToString:@"openPaymentWithMissingData_iPad"]) {
         UINavigationController *navigationController = (UINavigationController *)segue.destinationViewController;
         PaymentViewController *destination = navigationController.viewControllers[0];
         [destination prepareForUseWithPayment:_forOpenPaymentWithMissingDataForSegue];
         _forOpenPaymentWithMissingDataForSegue = nil;
-        if (@available(iOS 13.0, *)) {
-            UINavigationController *navController = (UINavigationController *)segue.destinationViewController;
-            navController.modalInPresentation = YES;
-        }
+        UINavigationController *navController = (UINavigationController *)segue.destinationViewController;
+        navController.modalInPresentation = YES;
     } else if ([segue.identifier isEqualToString:@"newPayment_iPad"]) {
         UINavigationController *navController = (UINavigationController *)segue.destinationViewController;
-        if (@available(iOS 13.0, *)) {
-            navController.modalInPresentation = YES;
-        }
+        navController.modalInPresentation = YES;
         PaymentViewController *destination = (PaymentViewController *)navController.viewControllers.firstObject;
         [destination prepareForUseWithEvent:_tonightsBill];
     } else if ([segue.identifier isEqualToString:@"openPayment_iPad"]) {
         UINavigationController *navController = segue.destinationViewController;
-        if (@available(iOS 13.0, *)) {
-            navController.modalInPresentation = YES;
-        }
+        navController.modalInPresentation = YES;
         PaymentViewController *destination = (PaymentViewController *)navController.viewControllers.firstObject;
         NSIndexPath *indexPath = [self.tableView indexPathForSelectedRow];
         MCPayment *payment = [_dataController objectAtIndexPath:indexPath];
