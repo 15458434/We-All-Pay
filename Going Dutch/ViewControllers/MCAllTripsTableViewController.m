@@ -123,6 +123,7 @@ static void * notificationCountContext = &notificationCountContext;
 #pragma mark - NSFetchedResultsControllerDelegate
 
 - (void)controller:(NSFetchedResultsController *)controller didChangeContentWithSnapshot:(NSDiffableDataSourceSnapshot<NSString *,NSManagedObjectID *> *)snapshot {
+    [self setEmptyMessageWithDuration:0.25];
     [_diffableDataSource applySnapshot:snapshot animatingDifferences:YES];
 }
 
