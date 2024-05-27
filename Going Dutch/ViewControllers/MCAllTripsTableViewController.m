@@ -36,6 +36,7 @@ static void * notificationCountContext = &notificationCountContext;
 @interface MCAllTripsTableViewController ()
 
 @property (nonatomic, strong) IBOutlet MCEventsModel *model;
+@property (nonatomic, strong) UITableViewDiffableDataSource *diffableDataSource;
 
 @property (nonatomic, weak) IBOutlet MCBadgeButton *infoButton;
 @property (weak, nonatomic) IBOutlet UIButton *createEventButton;
@@ -123,68 +124,20 @@ static void * notificationCountContext = &notificationCountContext;
 
 #pragma mark - NSFetchedResultsControllerDelegate
 
-- (void)controllerWillChangeContent:(NSFetchedResultsController *)controller {
-    [self.tableView beginUpdates];
-}
-
-- (void)controller:(NSFetchedResultsController *)controller didChangeObject:(id)anObject atIndexPath:(NSIndexPath *)indexPath forChangeType:(NSFetchedResultsChangeType)type newIndexPath:(NSIndexPath *)newIndexPath {
-    switch(type) {
-        case NSFetchedResultsChangeInsert:
-            [self.tableView insertRowsAtIndexPaths:@[newIndexPath] withRowAnimation:UITableViewRowAnimationFade];
-            break;
-            
-        case NSFetchedResultsChangeDelete:
-            [self.tableView deleteRowsAtIndexPaths:@[indexPath] withRowAnimation:UITableViewRowAnimationFade];
-            break;
-            
-        case NSFetchedResultsChangeUpdate:
-            break;
-            
-        case NSFetchedResultsChangeMove: {
-            [self.tableView deleteRowsAtIndexPaths:@[indexPath] withRowAnimation:UITableViewRowAnimationFade];
-            [self.tableView insertRowsAtIndexPaths:@[newIndexPath] withRowAnimation:UITableViewRowAnimationFade];
-        }
-            break;
-    }
-}
-
-- (void)controllerDidChangeContent:(NSFetchedResultsController *)controller {
-    [self setEmptyMessageWithDuration:0.25];
-    [self.tableView endUpdates];
+- (void)controller:(NSFetchedResultsController *)controller didChangeContentWithSnapshot:(NSDiffableDataSourceSnapshot<NSString *,NSManagedObjectID *> *)snapshot {
+    [_diffableDataSource applySnapshot:snapshot animatingDifferences:YES];
 }
 
 #pragma mark - UITableViewController
 
 #pragma mark - UITableViewDataSource
 
-- (NSInteger)numberOfSectionsInTableView:(UITableView *)tableView {
-    return _model.fetchEventsController.sections.count;
-}
-
-- (NSInteger)tableView:(UITableView *)tableView numberOfRowsInSection:(NSInteger)section {
-    return _model.fetchEventsController.sections[section].numberOfObjects;
-}
-
-- (UITableViewCell *)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath {
-    MCEventTableViewCell *allTripsTableViewCell = [tableView dequeueReusableCellWithIdentifier:@"MCAllTripsTableViewCell"];
-    return allTripsTableViewCell;
-}
-
-- (void)tableView:(UITableView *)tableView commitEditingStyle:(UITableViewCellEditingStyle)editingStyle forRowAtIndexPath:(NSIndexPath *)indexPath {
-    if (editingStyle == UITableViewCellEditingStyleDelete) {
-        [self deleteBillAtIndexpath:indexPath];
-    }
-}
-
 #pragma mark - UITableViewDelegate
 
 - (void)tableView:(UITableView *)tableView willDisplayCell:(UITableViewCell *)cell forRowAtIndexPath:(NSIndexPath *)indexPath {
     MCSharedBill *event = [_model.fetchEventsController objectAtIndexPath:indexPath];
     MCEventTableViewCell *eventCell = (MCEventTableViewCell *)cell;
-    
     [eventCell prepareForUseWith:event];
-    
-    return;
 }
 
 - (void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath {
@@ -250,6 +203,14 @@ static void * notificationCountContext = &notificationCountContext;
     [self startRespondingToStoreChangeNotifications];
     
     [self prepareUserActivity];
+    
+    _diffableDataSource = [[UITableViewDiffableDataSource alloc] initWithTableView:self.tableView cellProvider:^UITableViewCell * _Nullable(UITableView * _Nonnull tableView, NSIndexPath * _Nonnull indexPath, id  _Nonnull itemIdentifier) {
+        MCEventTableViewCell *allTripsTableViewCell = [tableView dequeueReusableCellWithIdentifier:@"MCAllTripsTableViewCell" forIndexPath:indexPath];
+        MCSharedBill *event = [self.model.fetchEventsController objectAtIndexPath:indexPath];
+        [allTripsTableViewCell prepareForUseWith:event];
+        return allTripsTableViewCell;
+    }];
+    self.tableView.dataSource = _diffableDataSource;
     
     [MCAdEngine presentPrivacyConsentRequestIfNecessaryFromViewController:self];
 #ifdef ADTEST
