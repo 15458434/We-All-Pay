@@ -23,9 +23,11 @@ import Combine
     
     func prepareForUse(with event: MCSharedBill) {
         self.event = event
-        self.publisher(for: \.event!.mainCurrency!.code!, options: [.initial, .new])
-            .sink { [unowned self] currencyCode in
-                self.mainCurrencyFormatter = CurrencyFormatter(currencyCode: currencyCode)
+        self.publisher(for: \.event!.mainCurrency, options: [.initial, .new])
+            .sink { [unowned self] currency in
+                if let currency, let code = currency.code {
+                    self.mainCurrencyFormatter = CurrencyFormatter(currencyCode: code)
+                }
             }
             .store(in: &bag)
         dateFormatter = DateFormatter()
