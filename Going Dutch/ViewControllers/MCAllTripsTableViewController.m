@@ -93,17 +93,15 @@ static void * notificationCountContext = &notificationCountContext;
 }
 
 - (void)prepareUserActivity {
-    if (@available(iOS 9.0, *)) {
-        NSUserActivity *activity = [[NSUserActivity alloc] initWithActivityType:@"com.GreenHair.We-all-pay.SharingExpenses"];
-        activity.title = NSLocalizedStringWithDefaultValue(@"app_name", nil, NSBundle.mainBundle, @"We all pay", @"The name of We all pay");
-        NSString *keywordsFilePath = [[NSBundle mainBundle] pathForResource:@"We all pay keywords" ofType:@"plist"];
-        activity.keywords = [NSSet setWithArray:[NSArray arrayWithContentsOfFile:keywordsFilePath]];
-        activity.eligibleForHandoff = NO;
-        activity.eligibleForSearch = YES;
-        activity.eligibleForPublicIndexing = YES;
-        activity.requiredUserInfoKeys = [[NSSet alloc] init];
-        self.userActivity = activity;
-    }
+    NSUserActivity *activity = [[NSUserActivity alloc] initWithActivityType:@"com.GreenHair.We-all-pay.SharingExpenses"];
+    activity.title = NSLocalizedStringWithDefaultValue(@"app_name", nil, NSBundle.mainBundle, @"We all pay", @"The name of We all pay");
+    NSString *keywordsFilePath = [[NSBundle mainBundle] pathForResource:@"We all pay keywords" ofType:@"plist"];
+    activity.keywords = [NSSet setWithArray:[NSArray arrayWithContentsOfFile:keywordsFilePath]];
+    activity.eligibleForHandoff = NO;
+    activity.eligibleForSearch = YES;
+    activity.eligibleForPublicIndexing = YES;
+    activity.requiredUserInfoKeys = [[NSSet alloc] init];
+    self.userActivity = activity;
 }
 
 - (void)deleteBillAtIndexpath:(NSIndexPath *)indexPath {
