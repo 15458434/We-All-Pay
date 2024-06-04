@@ -1,0 +1,8 @@
+#!/bin/sh
+# Type a script or drag a script file from your workspace to insert its path.
+echo "Configuration = $CONFIGURATION";
+if [ $CONFIGURATION == 'Debug' ] || [ $CONFIGURATION == 'Release' ]; then
+  echo "PROD";
+  ${BUILD_DIR%Build/*}/SourcePackages/checkouts/firebase-ios-sdk/Crashlytics/run -gsp ${PROJECT_DIR}/Going\ Dutch/GoogleService-Info.plist;
+fi
+

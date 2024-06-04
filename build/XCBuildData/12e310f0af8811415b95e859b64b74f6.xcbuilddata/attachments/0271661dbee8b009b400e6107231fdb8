@@ -1,0 +1,11 @@
+framework module WeAllPayDesignableUI {
+  umbrella header "WeAllPayDesignableUI.h"
+  export *
+
+  module * { export * }
+}
+
+module WeAllPayDesignableUI.Swift {
+  header "WeAllPayDesignableUI-Swift.h"
+  requires objc
+}

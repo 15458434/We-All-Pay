@@ -1,0 +1,18 @@
+{
+  "" : {
+    "diagnostics" : "/Users/markcornelisse/Developer/Apps/going-dutch/build/We all pay.build/Debug-iphoneos/WhoPayingUserDefaultsStoreInterface.build/Objects-normal/arm64/WhoPayingUserDefaultsStoreInterface-master.dia",
+    "emit-module-dependencies" : "/Users/markcornelisse/Developer/Apps/going-dutch/build/We all pay.build/Debug-iphoneos/WhoPayingUserDefaultsStoreInterface.build/Objects-normal/arm64/WhoPayingUserDefaultsStoreInterface-master-emit-module.d",
+    "emit-module-diagnostics" : "/Users/markcornelisse/Developer/Apps/going-dutch/build/We all pay.build/Debug-iphoneos/WhoPayingUserDefaultsStoreInterface.build/Objects-normal/arm64/WhoPayingUserDefaultsStoreInterface-master-emit-module.dia",
+    "swift-dependencies" : "/Users/markcornelisse/Developer/Apps/going-dutch/build/We all pay.build/Debug-iphoneos/WhoPayingUserDefaultsStoreInterface.build/Objects-normal/arm64/WhoPayingUserDefaultsStoreInterface-master.swiftdeps"
+  },
+  "/Users/markcornelisse/Developer/Apps/going-dutch/Who is paying next/WhoPayingUserDefaultsStoreInterface.swift" : {
+    "const-values" : "/Users/markcornelisse/Developer/Apps/going-dutch/build/We all pay.build/Debug-iphoneos/WhoPayingUserDefaultsStoreInterface.build/Objects-normal/arm64/WhoPayingUserDefaultsStoreInterface.swiftconstvalues",
+    "dependencies" : "/Users/markcornelisse/Developer/Apps/going-dutch/build/We all pay.build/Debug-iphoneos/WhoPayingUserDefaultsStoreInterface.build/Objects-normal/arm64/WhoPayingUserDefaultsStoreInterface.d",
+    "diagnostics" : "/Users/markcornelisse/Developer/Apps/going-dutch/build/We all pay.build/Debug-iphoneos/WhoPayingUserDefaultsStoreInterface.build/Objects-normal/arm64/WhoPayingUserDefaultsStoreInterface.dia",
+    "index-unit-output-path" : "/We all pay.build/Debug-iphoneos/WhoPayingUserDefaultsStoreInterface.build/Objects-normal/arm64/WhoPayingUserDefaultsStoreInterface.o",
+    "llvm-bc" : "/Users/markcornelisse/Developer/Apps/going-dutch/build/We all pay.build/Debug-iphoneos/WhoPayingUserDefaultsStoreInterface.build/Objects-normal/arm64/WhoPayingUserDefaultsStoreInterface.bc",
+    "object" : "/Users/markcornelisse/Developer/Apps/going-dutch/build/We all pay.build/Debug-iphoneos/WhoPayingUserDefaultsStoreInterface.build/Objects-normal/arm64/WhoPayingUserDefaultsStoreInterface.o",
+    "swift-dependencies" : "/Users/markcornelisse/Developer/Apps/going-dutch/build/We all pay.build/Debug-iphoneos/WhoPayingUserDefaultsStoreInterface.build/Objects-normal/arm64/WhoPayingUserDefaultsStoreInterface.swiftdeps",
+    "swiftmodule" : "/Users/markcornelisse/Developer/Apps/going-dutch/build/We all pay.build/Debug-iphoneos/WhoPayingUserDefaultsStoreInterface.build/Objects-normal/arm64/WhoPayingUserDefaultsStoreInterface~partial.swiftmodule"
+  }
+}

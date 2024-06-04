@@ -1,0 +1,235 @@
+{
+  "buildCommand" : {
+    "command" : "prepareForIndexing",
+    "enableIndexBuildArena" : false,
+    "targets" : null
+  },
+  "configuredTargets" : [
+    {
+      "guid" : "8699adb1dd336b26511df848a716bd42c16926158ef45fa2ac81bd3203fcd49e"
+    },
+    {
+      "guid" : "8699adb1dd336b26511df848a716bd428a4e25c3b6648d4c88499e02f77b811a"
+    },
+    {
+      "guid" : "8699adb1dd336b26511df848a716bd424d1b80eb520d7ec9828b3cb4e14dcb65"
+    },
+    {
+      "guid" : "8699adb1dd336b26511df848a716bd42b9cce05bc25808e2e3952904a4034443"
+    },
+    {
+      "guid" : "8699adb1dd336b26511df848a716bd421f1bf5397e3bf6b03ce2b5ab2078e9b4"
+    },
+    {
+      "guid" : "8699adb1dd336b26511df848a716bd42a408a4c1f668e62161cdeba76f57d50c"
+    },
+    {
+      "guid" : "8699adb1dd336b26511df848a716bd42678fb6500ea02c78520816441717cc14"
+    },
+    {
+      "guid" : "8699adb1dd336b26511df848a716bd422fcb5e27d041e48b96b3ab14ce32d5f2"
+    },
+    {
+      "guid" : "8699adb1dd336b26511df848a716bd42c04ead258c2ba3f656422d1784107881"
+    },
+    {
+      "guid" : "8699adb1dd336b26511df848a716bd42020791fd2e7b7ddc8fb2658339c42e16"
+    },
+    {
+      "guid" : "8699adb1dd336b26511df848a716bd42e5b592b076e092ab7ac9d9b5c85edc6f"
+    },
+    {
+      "guid" : "8699adb1dd336b26511df848a716bd426f81f65466c0a2e7395c158e76999d58"
+    },
+    {
+      "guid" : "8699adb1dd336b26511df848a716bd420c5ce7972ce50f1749855d2e6c168f02"
+    },
+    {
+      "guid" : "8699adb1dd336b26511df848a716bd42566ec9a1d71c4629f4f85ecb735ce614"
+    },
+    {
+      "guid" : "8699adb1dd336b26511df848a716bd424535f130e81fa6507008242e4e8916fc"
+    },
+    {
+      "guid" : "8699adb1dd336b26511df848a716bd42928855ae8620d13300183deed96c33a1"
+    },
+    {
+      "guid" : "8699adb1dd336b26511df848a716bd42012330f90a37c9d15a390c6b73b6dbca"
+    },
+    {
+      "guid" : "8699adb1dd336b26511df848a716bd424b1e8e5f67fa144e5e34058df6e2f50c"
+    },
+    {
+      "guid" : "8699adb1dd336b26511df848a716bd42424a0579f05b8aa7b116a0e1ae14c72d"
+    },
+    {
+      "guid" : "8699adb1dd336b26511df848a716bd422a62e2c60acb8d344a6411a0606a13d4"
+    },
+    {
+      "guid" : "8699adb1dd336b26511df848a716bd42cd53d937e824fad9f4527eeeb684cb40"
+    },
+    {
+      "guid" : "8699adb1dd336b26511df848a716bd42468089666b04a941512e80a0cc9cf153"
+    },
+    {
+      "guid" : "8699adb1dd336b26511df848a716bd42bbbb266cb4185458611c79148d1a9d13"
+    },
+    {
+      "guid" : "8699adb1dd336b26511df848a716bd42d3c8dfff2c580c352f83d3850ad17775"
+    },
+    {
+      "guid" : "8699adb1dd336b26511df848a716bd42bb3e3ebadbb0b9a8a4f20f605e3cb3cb"
+    },
+    {
+      "guid" : "8699adb1dd336b26511df848a716bd42bbd9e0ed4cdc41b93625c3661dbcaa81"
+    },
+    {
+      "guid" : "8699adb1dd336b26511df848a716bd422c6f0f2aed89326ee25919a1f8ba6fe9"
+    },
+    {
+      "guid" : "8699adb1dd336b26511df848a716bd42c777611770584bd7c20ebf80e3d30200"
+    },
+    {
+      "guid" : "8699adb1dd336b26511df848a716bd424a8eac8d5b6bc897e9823b3668d5ca68"
+    },
+    {
+      "guid" : "8699adb1dd336b26511df848a716bd423ec3883d6b26b272c4622da35f479aac"
+    },
+    {
+      "guid" : "8699adb1dd336b26511df848a716bd42b8adc555cfeb1a48742760a371516589"
+    },
+    {
+      "guid" : "8699adb1dd336b26511df848a716bd42d6355214e315158cd7c19861dfacc233"
+    },
+    {
+      "guid" : "8699adb1dd336b26511df848a716bd424a5cb08a830320081a43dfe7c32aef76"
+    },
+    {
+      "guid" : "8699adb1dd336b26511df848a716bd42631b70fce688f434a0f39db8576618f7"
+    },
+    {
+      "guid" : "8699adb1dd336b26511df848a716bd429a2391bd2a03f78aacfa9abfb6bff288"
+    },
+    {
+      "guid" : "8699adb1dd336b26511df848a716bd42ef949c11201f22027132dc0d42f6635e"
+    },
+    {
+      "guid" : "8699adb1dd336b26511df848a716bd4237bec44a771640260f7e311313fe49e5"
+    },
+    {
+      "guid" : "8699adb1dd336b26511df848a716bd42b7ce475cf593cf7b7df3c044cd51d629"
+    },
+    {
+      "guid" : "8699adb1dd336b26511df848a716bd429903f92a26a518f20e081774ca1d45a5"
+    },
+    {
+      "guid" : "8699adb1dd336b26511df848a716bd42f10882e1684b8a3dfdec597bc0a47af3"
+    },
+    {
+      "guid" : "8699adb1dd336b26511df848a716bd42ad53226b339581a6725de188f2c8f823"
+    },
+    {
+      "guid" : "8699adb1dd336b26511df848a716bd42ed40b4d6efca84b18a65efda8999ea5d"
+    },
+    {
+      "guid" : "8699adb1dd336b26511df848a716bd422423904c0fec8d69fb48f8811a58f1b3"
+    },
+    {
+      "guid" : "8699adb1dd336b26511df848a716bd420062393f91a1d2d94e3e5ed3a5aa5da9"
+    },
+    {
+      "guid" : "8699adb1dd336b26511df848a716bd42c9e4d77647dbd2f60d4df5fb297112b6"
+    },
+    {
+      "guid" : "958b432775d866ddb2e9971e84fb05b3b6408b69117a0cfe61f24734d1bbacca"
+    },
+    {
+      "guid" : "958b432775d866ddb2e9971e84fb05b30679bfe32e769420225a90d47a463c91"
+    },
+    {
+      "guid" : "958b432775d866ddb2e9971e84fb05b37baff8a6cb526da0f6670d376a708b22"
+    },
+    {
+      "guid" : "958b432775d866ddb2e9971e84fb05b3a3ed6b8456e661f6c2866ebcfd2f8fa7"
+    },
+    {
+      "guid" : "958b432775d866ddb2e9971e84fb05b373b14c351364d514eaa908d0037a0cf9"
+    },
+    {
+      "guid" : "958b432775d866ddb2e9971e84fb05b39d71477f4d6a21f5dfc683c8130491f9"
+    },
+    {
+      "guid" : "958b432775d866ddb2e9971e84fb05b3aa584e3bc5a47d160429503113a92636"
+    },
+    {
+      "guid" : "958b432775d866ddb2e9971e84fb05b38a5eefa688a746b9223d3752a7341558"
+    },
+    {
+      "guid" : "958b432775d866ddb2e9971e84fb05b37209703a31b4a36308eb4348201475ea"
+    },
+    {
+      "guid" : "958b432775d866ddb2e9971e84fb05b3c6d408a2d80c2f773e206011ad487f84"
+    },
+    {
+      "guid" : "958b432775d866ddb2e9971e84fb05b327674a34f427cf478ac4974221cad100"
+    },
+    {
+      "guid" : "958b432775d866ddb2e9971e84fb05b3a4491df6e17246cef356c200393e358c"
+    }
+  ],
+  "containerPath" : "/Users/markcornelisse/Developer/Apps/going-dutch/We all pay.xcworkspace",
+  "continueBuildingAfterErrors" : true,
+  "dependencyScope" : "workspace",
+  "enableIndexBuildArena" : false,
+  "hideShellScriptEnvironment" : false,
+  "parameters" : {
+    "action" : "build",
+    "activeArchitecture" : "arm64",
+    "activeRunDestination" : {
+      "disableOnlyActiveArch" : false,
+      "platform" : "iphoneos",
+      "sdk" : "iphoneos17.5",
+      "sdkVariant" : "iphoneos",
+      "supportedArchitectures" : [
+        "arm64e",
+        "arm64v8",
+        "arm64",
+        "armv8"
+      ],
+      "targetArchitecture" : "arm64"
+    },
+    "arenaInfo" : {
+      "buildIntermediatesPath" : "",
+      "buildProductsPath" : "",
+      "derivedDataPath" : "/Users/markcornelisse/Library/Developer/Xcode/DerivedData",
+      "indexDataStoreFolderPath" : "/Users/markcornelisse/Library/Developer/Xcode/DerivedData/We_all_pay-ggyyrlkzpinmypbghoumyqfbfhqc/Index.noindex/DataStore",
+      "indexEnableDataStore" : true,
+      "indexPCHPath" : "/Users/markcornelisse/Library/Developer/Xcode/DerivedData/We_all_pay-ggyyrlkzpinmypbghoumyqfbfhqc/Index.noindex/PrecompiledHeaders",
+      "pchPath" : ""
+    },
+    "configurationName" : "Debug",
+    "overrides" : {
+      "synthesized" : {
+        "table" : {
+          "ASSETCATALOG_FILTER_FOR_DEVICE_MODEL" : "iPhone12,3",
+          "ASSETCATALOG_FILTER_FOR_DEVICE_OS_VERSION" : "17.5.1",
+          "ASSETCATALOG_FILTER_FOR_THINNING_DEVICE_CONFIGURATION" : "iPhone12,3",
+          "BUILD_ACTIVE_RESOURCES_ONLY" : "YES",
+          "ENABLE_PREVIEWS" : "NO",
+          "ENABLE_XOJIT_PREVIEWS" : "NO",
+          "TARGET_DEVICE_IDENTIFIER" : "00008030-001D75C02642802E",
+          "TARGET_DEVICE_MODEL" : "iPhone12,3",
+          "TARGET_DEVICE_OS_VERSION" : "17.5.1",
+          "TARGET_DEVICE_PLATFORM_NAME" : "iphoneos"
+        }
+      }
+    }
+  },
+  "qos" : "default",
+  "schemeCommand" : "launch",
+  "showNonLoggedProgress" : true,
+  "useDryRun" : true,
+  "useImplicitDependencies" : true,
+  "useLegacyBuildLocations" : false,
+  "useParallelTargets" : true
+}

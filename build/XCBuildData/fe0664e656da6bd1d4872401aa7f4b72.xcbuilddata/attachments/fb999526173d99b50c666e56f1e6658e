@@ -1,0 +1,28 @@
+{
+  "" : {
+    "diagnostics" : "/Users/markcornelisse/Developer/Apps/going-dutch/build/We all pay.build/Debug-iphoneos/CurrencyConverter.build/Objects-normal/arm64/CurrencyConverter-master.dia",
+    "emit-module-dependencies" : "/Users/markcornelisse/Developer/Apps/going-dutch/build/We all pay.build/Debug-iphoneos/CurrencyConverter.build/Objects-normal/arm64/CurrencyConverter-master-emit-module.d",
+    "emit-module-diagnostics" : "/Users/markcornelisse/Developer/Apps/going-dutch/build/We all pay.build/Debug-iphoneos/CurrencyConverter.build/Objects-normal/arm64/CurrencyConverter-master-emit-module.dia",
+    "swift-dependencies" : "/Users/markcornelisse/Developer/Apps/going-dutch/build/We all pay.build/Debug-iphoneos/CurrencyConverter.build/Objects-normal/arm64/CurrencyConverter-master.swiftdeps"
+  },
+  "/Users/markcornelisse/Developer/Apps/going-dutch/Going Dutch/CurrencyController.swift" : {
+    "const-values" : "/Users/markcornelisse/Developer/Apps/going-dutch/build/We all pay.build/Debug-iphoneos/CurrencyConverter.build/Objects-normal/arm64/CurrencyController.swiftconstvalues",
+    "dependencies" : "/Users/markcornelisse/Developer/Apps/going-dutch/build/We all pay.build/Debug-iphoneos/CurrencyConverter.build/Objects-normal/arm64/CurrencyController.d",
+    "diagnostics" : "/Users/markcornelisse/Developer/Apps/going-dutch/build/We all pay.build/Debug-iphoneos/CurrencyConverter.build/Objects-normal/arm64/CurrencyController.dia",
+    "index-unit-output-path" : "/We all pay.build/Debug-iphoneos/CurrencyConverter.build/Objects-normal/arm64/CurrencyController.o",
+    "llvm-bc" : "/Users/markcornelisse/Developer/Apps/going-dutch/build/We all pay.build/Debug-iphoneos/CurrencyConverter.build/Objects-normal/arm64/CurrencyController.bc",
+    "object" : "/Users/markcornelisse/Developer/Apps/going-dutch/build/We all pay.build/Debug-iphoneos/CurrencyConverter.build/Objects-normal/arm64/CurrencyController.o",
+    "swift-dependencies" : "/Users/markcornelisse/Developer/Apps/going-dutch/build/We all pay.build/Debug-iphoneos/CurrencyConverter.build/Objects-normal/arm64/CurrencyController.swiftdeps",
+    "swiftmodule" : "/Users/markcornelisse/Developer/Apps/going-dutch/build/We all pay.build/Debug-iphoneos/CurrencyConverter.build/Objects-normal/arm64/CurrencyController~partial.swiftmodule"
+  },
+  "/Users/markcornelisse/Developer/Apps/going-dutch/Going Dutch/ExchangeRateFetcher.swift" : {
+    "const-values" : "/Users/markcornelisse/Developer/Apps/going-dutch/build/We all pay.build/Debug-iphoneos/CurrencyConverter.build/Objects-normal/arm64/ExchangeRateFetcher.swiftconstvalues",
+    "dependencies" : "/Users/markcornelisse/Developer/Apps/going-dutch/build/We all pay.build/Debug-iphoneos/CurrencyConverter.build/Objects-normal/arm64/ExchangeRateFetcher.d",
+    "diagnostics" : "/Users/markcornelisse/Developer/Apps/going-dutch/build/We all pay.build/Debug-iphoneos/CurrencyConverter.build/Objects-normal/arm64/ExchangeRateFetcher.dia",
+    "index-unit-output-path" : "/We all pay.build/Debug-iphoneos/CurrencyConverter.build/Objects-normal/arm64/ExchangeRateFetcher.o",
+    "llvm-bc" : "/Users/markcornelisse/Developer/Apps/going-dutch/build/We all pay.build/Debug-iphoneos/CurrencyConverter.build/Objects-normal/arm64/ExchangeRateFetcher.bc",
+    "object" : "/Users/markcornelisse/Developer/Apps/going-dutch/build/We all pay.build/Debug-iphoneos/CurrencyConverter.build/Objects-normal/arm64/ExchangeRateFetcher.o",
+    "swift-dependencies" : "/Users/markcornelisse/Developer/Apps/going-dutch/build/We all pay.build/Debug-iphoneos/CurrencyConverter.build/Objects-normal/arm64/ExchangeRateFetcher.swiftdeps",
+    "swiftmodule" : "/Users/markcornelisse/Developer/Apps/going-dutch/build/We all pay.build/Debug-iphoneos/CurrencyConverter.build/Objects-normal/arm64/ExchangeRateFetcher~partial.swiftmodule"
+  }
+}

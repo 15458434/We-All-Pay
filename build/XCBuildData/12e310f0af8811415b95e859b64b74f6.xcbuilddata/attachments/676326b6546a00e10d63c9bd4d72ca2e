@@ -1,0 +1,5 @@
+ extern const unsigned char Pods_We_all_payVersionString[];
+ extern const double Pods_We_all_payVersionNumber;
+
+ const unsigned char Pods_We_all_payVersionString[] __attribute__ ((used)) = "@(#)PROGRAM:Pods_We_all_pay  PROJECT:Pods-1" "\n";
+ const double Pods_We_all_payVersionNumber __attribute__ ((used)) = (double)1.;

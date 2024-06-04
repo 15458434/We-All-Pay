@@ -1,0 +1,10 @@
+framework module WeAllPayDesignableUI {
+  umbrella header "WeAllPayDesignableUI.h"
+  export *
+
+  module * { export * }
+}
+
+module WeAllPayDesignableUI.__Swift {
+  exclude header "WeAllPayDesignableUI-Swift.h"
+}

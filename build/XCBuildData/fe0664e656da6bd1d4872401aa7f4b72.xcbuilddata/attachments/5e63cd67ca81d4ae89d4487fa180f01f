@@ -1,0 +1,28 @@
+{
+  "" : {
+    "diagnostics" : "/Users/markcornelisse/Developer/Apps/going-dutch/build/We all pay.build/Debug-iphoneos/Who is paying next.build/Objects-normal/arm64/Who is paying next-master.dia",
+    "emit-module-dependencies" : "/Users/markcornelisse/Developer/Apps/going-dutch/build/We all pay.build/Debug-iphoneos/Who is paying next.build/Objects-normal/arm64/Who is paying next-master-emit-module.d",
+    "emit-module-diagnostics" : "/Users/markcornelisse/Developer/Apps/going-dutch/build/We all pay.build/Debug-iphoneos/Who is paying next.build/Objects-normal/arm64/Who is paying next-master-emit-module.dia",
+    "swift-dependencies" : "/Users/markcornelisse/Developer/Apps/going-dutch/build/We all pay.build/Debug-iphoneos/Who is paying next.build/Objects-normal/arm64/Who is paying next-master.swiftdeps"
+  },
+  "/Users/markcornelisse/Developer/Apps/going-dutch/Who is paying next/TodayViewController.swift" : {
+    "const-values" : "/Users/markcornelisse/Developer/Apps/going-dutch/build/We all pay.build/Debug-iphoneos/Who is paying next.build/Objects-normal/arm64/TodayViewController.swiftconstvalues",
+    "dependencies" : "/Users/markcornelisse/Developer/Apps/going-dutch/build/We all pay.build/Debug-iphoneos/Who is paying next.build/Objects-normal/arm64/TodayViewController.d",
+    "diagnostics" : "/Users/markcornelisse/Developer/Apps/going-dutch/build/We all pay.build/Debug-iphoneos/Who is paying next.build/Objects-normal/arm64/TodayViewController.dia",
+    "index-unit-output-path" : "/We all pay.build/Debug-iphoneos/Who is paying next.build/Objects-normal/arm64/TodayViewController.o",
+    "llvm-bc" : "/Users/markcornelisse/Developer/Apps/going-dutch/build/We all pay.build/Debug-iphoneos/Who is paying next.build/Objects-normal/arm64/TodayViewController.bc",
+    "object" : "/Users/markcornelisse/Developer/Apps/going-dutch/build/We all pay.build/Debug-iphoneos/Who is paying next.build/Objects-normal/arm64/TodayViewController.o",
+    "swift-dependencies" : "/Users/markcornelisse/Developer/Apps/going-dutch/build/We all pay.build/Debug-iphoneos/Who is paying next.build/Objects-normal/arm64/TodayViewController.swiftdeps",
+    "swiftmodule" : "/Users/markcornelisse/Developer/Apps/going-dutch/build/We all pay.build/Debug-iphoneos/Who is paying next.build/Objects-normal/arm64/TodayViewController~partial.swiftmodule"
+  },
+  "/Users/markcornelisse/Developer/Apps/going-dutch/Who is paying next/WhoIsPayingNextTextLocalizer.swift" : {
+    "const-values" : "/Users/markcornelisse/Developer/Apps/going-dutch/build/We all pay.build/Debug-iphoneos/Who is paying next.build/Objects-normal/arm64/WhoIsPayingNextTextLocalizer.swiftconstvalues",
+    "dependencies" : "/Users/markcornelisse/Developer/Apps/going-dutch/build/We all pay.build/Debug-iphoneos/Who is paying next.build/Objects-normal/arm64/WhoIsPayingNextTextLocalizer.d",
+    "diagnostics" : "/Users/markcornelisse/Developer/Apps/going-dutch/build/We all pay.build/Debug-iphoneos/Who is paying next.build/Objects-normal/arm64/WhoIsPayingNextTextLocalizer.dia",
+    "index-unit-output-path" : "/We all pay.build/Debug-iphoneos/Who is paying next.build/Objects-normal/arm64/WhoIsPayingNextTextLocalizer.o",
+    "llvm-bc" : "/Users/markcornelisse/Developer/Apps/going-dutch/build/We all pay.build/Debug-iphoneos/Who is paying next.build/Objects-normal/arm64/WhoIsPayingNextTextLocalizer.bc",
+    "object" : "/Users/markcornelisse/Developer/Apps/going-dutch/build/We all pay.build/Debug-iphoneos/Who is paying next.build/Objects-normal/arm64/WhoIsPayingNextTextLocalizer.o",
+    "swift-dependencies" : "/Users/markcornelisse/Developer/Apps/going-dutch/build/We all pay.build/Debug-iphoneos/Who is paying next.build/Objects-normal/arm64/WhoIsPayingNextTextLocalizer.swiftdeps",
+    "swiftmodule" : "/Users/markcornelisse/Developer/Apps/going-dutch/build/We all pay.build/Debug-iphoneos/Who is paying next.build/Objects-normal/arm64/WhoIsPayingNextTextLocalizer~partial.swiftmodule"
+  }
+}

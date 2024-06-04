@@ -1,0 +1,5 @@
+ extern const unsigned char WeAllPayDesignableUIVersionString[];
+ extern const double WeAllPayDesignableUIVersionNumber;
+
+ const unsigned char WeAllPayDesignableUIVersionString[] __attribute__ ((used)) = "@(#)PROGRAM:WeAllPayDesignableUI  PROJECT:We all pay-168" "\n";
+ const double WeAllPayDesignableUIVersionNumber __attribute__ ((used)) = (double)168.;

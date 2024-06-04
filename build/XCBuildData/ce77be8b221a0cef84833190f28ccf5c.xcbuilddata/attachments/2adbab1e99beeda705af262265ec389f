@@ -1,0 +1,5 @@
+ extern const unsigned char RateMeControllerForiOSVersionString[];
+ extern const double RateMeControllerForiOSVersionNumber;
+
+ const unsigned char RateMeControllerForiOSVersionString[] __attribute__ ((used)) = "@(#)PROGRAM:RateMeControllerForiOS  PROJECT:We all pay-168" "\n";
+ const double RateMeControllerForiOSVersionNumber __attribute__ ((used)) = (double)168.;

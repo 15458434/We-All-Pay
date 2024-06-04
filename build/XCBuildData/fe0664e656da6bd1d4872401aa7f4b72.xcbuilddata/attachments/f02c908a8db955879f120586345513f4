@@ -1,0 +1,718 @@
+{
+  "" : {
+    "diagnostics" : "/Users/markcornelisse/Developer/Apps/going-dutch/build/We all pay.build/Debug-iphoneos/We all pay.build/Objects-normal/arm64/We all pay-master.dia",
+    "emit-module-dependencies" : "/Users/markcornelisse/Developer/Apps/going-dutch/build/We all pay.build/Debug-iphoneos/We all pay.build/Objects-normal/arm64/We all pay-master-emit-module.d",
+    "emit-module-diagnostics" : "/Users/markcornelisse/Developer/Apps/going-dutch/build/We all pay.build/Debug-iphoneos/We all pay.build/Objects-normal/arm64/We all pay-master-emit-module.dia",
+    "swift-dependencies" : "/Users/markcornelisse/Developer/Apps/going-dutch/build/We all pay.build/Debug-iphoneos/We all pay.build/Objects-normal/arm64/We all pay-master.swiftdeps"
+  },
+  "/Users/markcornelisse/Developer/Apps/going-dutch/build/We all pay.build/Debug-iphoneos/We all pay.build/DerivedSources/GeneratedAssetSymbols.swift" : {
+    "const-values" : "/Users/markcornelisse/Developer/Apps/going-dutch/build/We all pay.build/Debug-iphoneos/We all pay.build/Objects-normal/arm64/GeneratedAssetSymbols.swiftconstvalues",
+    "dependencies" : "/Users/markcornelisse/Developer/Apps/going-dutch/build/We all pay.build/Debug-iphoneos/We all pay.build/Objects-normal/arm64/GeneratedAssetSymbols.d",
+    "diagnostics" : "/Users/markcornelisse/Developer/Apps/going-dutch/build/We all pay.build/Debug-iphoneos/We all pay.build/Objects-normal/arm64/GeneratedAssetSymbols.dia",
+    "index-unit-output-path" : "/We all pay.build/Debug-iphoneos/We all pay.build/Objects-normal/arm64/GeneratedAssetSymbols.o",
+    "llvm-bc" : "/Users/markcornelisse/Developer/Apps/going-dutch/build/We all pay.build/Debug-iphoneos/We all pay.build/Objects-normal/arm64/GeneratedAssetSymbols.bc",
+    "object" : "/Users/markcornelisse/Developer/Apps/going-dutch/build/We all pay.build/Debug-iphoneos/We all pay.build/Objects-normal/arm64/GeneratedAssetSymbols.o",
+    "swift-dependencies" : "/Users/markcornelisse/Developer/Apps/going-dutch/build/We all pay.build/Debug-iphoneos/We all pay.build/Objects-normal/arm64/GeneratedAssetSymbols.swiftdeps",
+    "swiftmodule" : "/Users/markcornelisse/Developer/Apps/going-dutch/build/We all pay.build/Debug-iphoneos/We all pay.build/Objects-normal/arm64/GeneratedAssetSymbols~partial.swiftmodule"
+  },
+  "/Users/markcornelisse/Developer/Apps/going-dutch/Going Dutch/AdBannerEngine.swift" : {
+    "const-values" : "/Users/markcornelisse/Developer/Apps/going-dutch/build/We all pay.build/Debug-iphoneos/We all pay.build/Objects-normal/arm64/AdBannerEngine.swiftconstvalues",
+    "dependencies" : "/Users/markcornelisse/Developer/Apps/going-dutch/build/We all pay.build/Debug-iphoneos/We all pay.build/Objects-normal/arm64/AdBannerEngine.d",
+    "diagnostics" : "/Users/markcornelisse/Developer/Apps/going-dutch/build/We all pay.build/Debug-iphoneos/We all pay.build/Objects-normal/arm64/AdBannerEngine.dia",
+    "index-unit-output-path" : "/We all pay.build/Debug-iphoneos/We all pay.build/Objects-normal/arm64/AdBannerEngine.o",
+    "llvm-bc" : "/Users/markcornelisse/Developer/Apps/going-dutch/build/We all pay.build/Debug-iphoneos/We all pay.build/Objects-normal/arm64/AdBannerEngine.bc",
+    "object" : "/Users/markcornelisse/Developer/Apps/going-dutch/build/We all pay.build/Debug-iphoneos/We all pay.build/Objects-normal/arm64/AdBannerEngine.o",
+    "swift-dependencies" : "/Users/markcornelisse/Developer/Apps/going-dutch/build/We all pay.build/Debug-iphoneos/We all pay.build/Objects-normal/arm64/AdBannerEngine.swiftdeps",
+    "swiftmodule" : "/Users/markcornelisse/Developer/Apps/going-dutch/build/We all pay.build/Debug-iphoneos/We all pay.build/Objects-normal/arm64/AdBannerEngine~partial.swiftmodule"
+  },
+  "/Users/markcornelisse/Developer/Apps/going-dutch/Going Dutch/AdEngine.swift" : {
+    "const-values" : "/Users/markcornelisse/Developer/Apps/going-dutch/build/We all pay.build/Debug-iphoneos/We all pay.build/Objects-normal/arm64/AdEngine.swiftconstvalues",
+    "dependencies" : "/Users/markcornelisse/Developer/Apps/going-dutch/build/We all pay.build/Debug-iphoneos/We all pay.build/Objects-normal/arm64/AdEngine.d",
+    "diagnostics" : "/Users/markcornelisse/Developer/Apps/going-dutch/build/We all pay.build/Debug-iphoneos/We all pay.build/Objects-normal/arm64/AdEngine.dia",
+    "index-unit-output-path" : "/We all pay.build/Debug-iphoneos/We all pay.build/Objects-normal/arm64/AdEngine.o",
+    "llvm-bc" : "/Users/markcornelisse/Developer/Apps/going-dutch/build/We all pay.build/Debug-iphoneos/We all pay.build/Objects-normal/arm64/AdEngine.bc",
+    "object" : "/Users/markcornelisse/Developer/Apps/going-dutch/build/We all pay.build/Debug-iphoneos/We all pay.build/Objects-normal/arm64/AdEngine.o",
+    "swift-dependencies" : "/Users/markcornelisse/Developer/Apps/going-dutch/build/We all pay.build/Debug-iphoneos/We all pay.build/Objects-normal/arm64/AdEngine.swiftdeps",
+    "swiftmodule" : "/Users/markcornelisse/Developer/Apps/going-dutch/build/We all pay.build/Debug-iphoneos/We all pay.build/Objects-normal/arm64/AdEngine~partial.swiftmodule"
+  },
+  "/Users/markcornelisse/Developer/Apps/going-dutch/Going Dutch/CategoryPictureObject.swift" : {
+    "const-values" : "/Users/markcornelisse/Developer/Apps/going-dutch/build/We all pay.build/Debug-iphoneos/We all pay.build/Objects-normal/arm64/CategoryPictureObject.swiftconstvalues",
+    "dependencies" : "/Users/markcornelisse/Developer/Apps/going-dutch/build/We all pay.build/Debug-iphoneos/We all pay.build/Objects-normal/arm64/CategoryPictureObject.d",
+    "diagnostics" : "/Users/markcornelisse/Developer/Apps/going-dutch/build/We all pay.build/Debug-iphoneos/We all pay.build/Objects-normal/arm64/CategoryPictureObject.dia",
+    "index-unit-output-path" : "/We all pay.build/Debug-iphoneos/We all pay.build/Objects-normal/arm64/CategoryPictureObject.o",
+    "llvm-bc" : "/Users/markcornelisse/Developer/Apps/going-dutch/build/We all pay.build/Debug-iphoneos/We all pay.build/Objects-normal/arm64/CategoryPictureObject.bc",
+    "object" : "/Users/markcornelisse/Developer/Apps/going-dutch/build/We all pay.build/Debug-iphoneos/We all pay.build/Objects-normal/arm64/CategoryPictureObject.o",
+    "swift-dependencies" : "/Users/markcornelisse/Developer/Apps/going-dutch/build/We all pay.build/Debug-iphoneos/We all pay.build/Objects-normal/arm64/CategoryPictureObject.swiftdeps",
+    "swiftmodule" : "/Users/markcornelisse/Developer/Apps/going-dutch/build/We all pay.build/Debug-iphoneos/We all pay.build/Objects-normal/arm64/CategoryPictureObject~partial.swiftmodule"
+  },
+  "/Users/markcornelisse/Developer/Apps/going-dutch/Going Dutch/CategoryPictureStoreController.swift" : {
+    "const-values" : "/Users/markcornelisse/Developer/Apps/going-dutch/build/We all pay.build/Debug-iphoneos/We all pay.build/Objects-normal/arm64/CategoryPictureStoreController.swiftconstvalues",
+    "dependencies" : "/Users/markcornelisse/Developer/Apps/going-dutch/build/We all pay.build/Debug-iphoneos/We all pay.build/Objects-normal/arm64/CategoryPictureStoreController.d",
+    "diagnostics" : "/Users/markcornelisse/Developer/Apps/going-dutch/build/We all pay.build/Debug-iphoneos/We all pay.build/Objects-normal/arm64/CategoryPictureStoreController.dia",
+    "index-unit-output-path" : "/We all pay.build/Debug-iphoneos/We all pay.build/Objects-normal/arm64/CategoryPictureStoreController.o",
+    "llvm-bc" : "/Users/markcornelisse/Developer/Apps/going-dutch/build/We all pay.build/Debug-iphoneos/We all pay.build/Objects-normal/arm64/CategoryPictureStoreController.bc",
+    "object" : "/Users/markcornelisse/Developer/Apps/going-dutch/build/We all pay.build/Debug-iphoneos/We all pay.build/Objects-normal/arm64/CategoryPictureStoreController.o",
+    "swift-dependencies" : "/Users/markcornelisse/Developer/Apps/going-dutch/build/We all pay.build/Debug-iphoneos/We all pay.build/Objects-normal/arm64/CategoryPictureStoreController.swiftdeps",
+    "swiftmodule" : "/Users/markcornelisse/Developer/Apps/going-dutch/build/We all pay.build/Debug-iphoneos/We all pay.build/Objects-normal/arm64/CategoryPictureStoreController~partial.swiftmodule"
+  },
+  "/Users/markcornelisse/Developer/Apps/going-dutch/Going Dutch/CoreDataSaveHandlerWhenEnteringBackground.swift" : {
+    "const-values" : "/Users/markcornelisse/Developer/Apps/going-dutch/build/We all pay.build/Debug-iphoneos/We all pay.build/Objects-normal/arm64/CoreDataSaveHandlerWhenEnteringBackground.swiftconstvalues",
+    "dependencies" : "/Users/markcornelisse/Developer/Apps/going-dutch/build/We all pay.build/Debug-iphoneos/We all pay.build/Objects-normal/arm64/CoreDataSaveHandlerWhenEnteringBackground.d",
+    "diagnostics" : "/Users/markcornelisse/Developer/Apps/going-dutch/build/We all pay.build/Debug-iphoneos/We all pay.build/Objects-normal/arm64/CoreDataSaveHandlerWhenEnteringBackground.dia",
+    "index-unit-output-path" : "/We all pay.build/Debug-iphoneos/We all pay.build/Objects-normal/arm64/CoreDataSaveHandlerWhenEnteringBackground.o",
+    "llvm-bc" : "/Users/markcornelisse/Developer/Apps/going-dutch/build/We all pay.build/Debug-iphoneos/We all pay.build/Objects-normal/arm64/CoreDataSaveHandlerWhenEnteringBackground.bc",
+    "object" : "/Users/markcornelisse/Developer/Apps/going-dutch/build/We all pay.build/Debug-iphoneos/We all pay.build/Objects-normal/arm64/CoreDataSaveHandlerWhenEnteringBackground.o",
+    "swift-dependencies" : "/Users/markcornelisse/Developer/Apps/going-dutch/build/We all pay.build/Debug-iphoneos/We all pay.build/Objects-normal/arm64/CoreDataSaveHandlerWhenEnteringBackground.swiftdeps",
+    "swiftmodule" : "/Users/markcornelisse/Developer/Apps/going-dutch/build/We all pay.build/Debug-iphoneos/We all pay.build/Objects-normal/arm64/CoreDataSaveHandlerWhenEnteringBackground~partial.swiftmodule"
+  },
+  "/Users/markcornelisse/Developer/Apps/going-dutch/Going Dutch/DescriptionOfPaymentTextInputValidator.swift" : {
+    "const-values" : "/Users/markcornelisse/Developer/Apps/going-dutch/build/We all pay.build/Debug-iphoneos/We all pay.build/Objects-normal/arm64/DescriptionOfPaymentTextInputValidator.swiftconstvalues",
+    "dependencies" : "/Users/markcornelisse/Developer/Apps/going-dutch/build/We all pay.build/Debug-iphoneos/We all pay.build/Objects-normal/arm64/DescriptionOfPaymentTextInputValidator.d",
+    "diagnostics" : "/Users/markcornelisse/Developer/Apps/going-dutch/build/We all pay.build/Debug-iphoneos/We all pay.build/Objects-normal/arm64/DescriptionOfPaymentTextInputValidator.dia",
+    "index-unit-output-path" : "/We all pay.build/Debug-iphoneos/We all pay.build/Objects-normal/arm64/DescriptionOfPaymentTextInputValidator.o",
+    "llvm-bc" : "/Users/markcornelisse/Developer/Apps/going-dutch/build/We all pay.build/Debug-iphoneos/We all pay.build/Objects-normal/arm64/DescriptionOfPaymentTextInputValidator.bc",
+    "object" : "/Users/markcornelisse/Developer/Apps/going-dutch/build/We all pay.build/Debug-iphoneos/We all pay.build/Objects-normal/arm64/DescriptionOfPaymentTextInputValidator.o",
+    "swift-dependencies" : "/Users/markcornelisse/Developer/Apps/going-dutch/build/We all pay.build/Debug-iphoneos/We all pay.build/Objects-normal/arm64/DescriptionOfPaymentTextInputValidator.swiftdeps",
+    "swiftmodule" : "/Users/markcornelisse/Developer/Apps/going-dutch/build/We all pay.build/Debug-iphoneos/We all pay.build/Objects-normal/arm64/DescriptionOfPaymentTextInputValidator~partial.swiftmodule"
+  },
+  "/Users/markcornelisse/Developer/Apps/going-dutch/Going Dutch/EmailTextInputPicker.swift" : {
+    "const-values" : "/Users/markcornelisse/Developer/Apps/going-dutch/build/We all pay.build/Debug-iphoneos/We all pay.build/Objects-normal/arm64/EmailTextInputPicker.swiftconstvalues",
+    "dependencies" : "/Users/markcornelisse/Developer/Apps/going-dutch/build/We all pay.build/Debug-iphoneos/We all pay.build/Objects-normal/arm64/EmailTextInputPicker.d",
+    "diagnostics" : "/Users/markcornelisse/Developer/Apps/going-dutch/build/We all pay.build/Debug-iphoneos/We all pay.build/Objects-normal/arm64/EmailTextInputPicker.dia",
+    "index-unit-output-path" : "/We all pay.build/Debug-iphoneos/We all pay.build/Objects-normal/arm64/EmailTextInputPicker.o",
+    "llvm-bc" : "/Users/markcornelisse/Developer/Apps/going-dutch/build/We all pay.build/Debug-iphoneos/We all pay.build/Objects-normal/arm64/EmailTextInputPicker.bc",
+    "object" : "/Users/markcornelisse/Developer/Apps/going-dutch/build/We all pay.build/Debug-iphoneos/We all pay.build/Objects-normal/arm64/EmailTextInputPicker.o",
+    "swift-dependencies" : "/Users/markcornelisse/Developer/Apps/going-dutch/build/We all pay.build/Debug-iphoneos/We all pay.build/Objects-normal/arm64/EmailTextInputPicker.swiftdeps",
+    "swiftmodule" : "/Users/markcornelisse/Developer/Apps/going-dutch/build/We all pay.build/Debug-iphoneos/We all pay.build/Objects-normal/arm64/EmailTextInputPicker~partial.swiftmodule"
+  },
+  "/Users/markcornelisse/Developer/Apps/going-dutch/Going Dutch/EmailTextInputValidator.swift" : {
+    "const-values" : "/Users/markcornelisse/Developer/Apps/going-dutch/build/We all pay.build/Debug-iphoneos/We all pay.build/Objects-normal/arm64/EmailTextInputValidator.swiftconstvalues",
+    "dependencies" : "/Users/markcornelisse/Developer/Apps/going-dutch/build/We all pay.build/Debug-iphoneos/We all pay.build/Objects-normal/arm64/EmailTextInputValidator.d",
+    "diagnostics" : "/Users/markcornelisse/Developer/Apps/going-dutch/build/We all pay.build/Debug-iphoneos/We all pay.build/Objects-normal/arm64/EmailTextInputValidator.dia",
+    "index-unit-output-path" : "/We all pay.build/Debug-iphoneos/We all pay.build/Objects-normal/arm64/EmailTextInputValidator.o",
+    "llvm-bc" : "/Users/markcornelisse/Developer/Apps/going-dutch/build/We all pay.build/Debug-iphoneos/We all pay.build/Objects-normal/arm64/EmailTextInputValidator.bc",
+    "object" : "/Users/markcornelisse/Developer/Apps/going-dutch/build/We all pay.build/Debug-iphoneos/We all pay.build/Objects-normal/arm64/EmailTextInputValidator.o",
+    "swift-dependencies" : "/Users/markcornelisse/Developer/Apps/going-dutch/build/We all pay.build/Debug-iphoneos/We all pay.build/Objects-normal/arm64/EmailTextInputValidator.swiftdeps",
+    "swiftmodule" : "/Users/markcornelisse/Developer/Apps/going-dutch/build/We all pay.build/Debug-iphoneos/We all pay.build/Objects-normal/arm64/EmailTextInputValidator~partial.swiftmodule"
+  },
+  "/Users/markcornelisse/Developer/Apps/going-dutch/Going Dutch/EventModel.swift" : {
+    "const-values" : "/Users/markcornelisse/Developer/Apps/going-dutch/build/We all pay.build/Debug-iphoneos/We all pay.build/Objects-normal/arm64/EventModel.swiftconstvalues",
+    "dependencies" : "/Users/markcornelisse/Developer/Apps/going-dutch/build/We all pay.build/Debug-iphoneos/We all pay.build/Objects-normal/arm64/EventModel.d",
+    "diagnostics" : "/Users/markcornelisse/Developer/Apps/going-dutch/build/We all pay.build/Debug-iphoneos/We all pay.build/Objects-normal/arm64/EventModel.dia",
+    "index-unit-output-path" : "/We all pay.build/Debug-iphoneos/We all pay.build/Objects-normal/arm64/EventModel.o",
+    "llvm-bc" : "/Users/markcornelisse/Developer/Apps/going-dutch/build/We all pay.build/Debug-iphoneos/We all pay.build/Objects-normal/arm64/EventModel.bc",
+    "object" : "/Users/markcornelisse/Developer/Apps/going-dutch/build/We all pay.build/Debug-iphoneos/We all pay.build/Objects-normal/arm64/EventModel.o",
+    "swift-dependencies" : "/Users/markcornelisse/Developer/Apps/going-dutch/build/We all pay.build/Debug-iphoneos/We all pay.build/Objects-normal/arm64/EventModel.swiftdeps",
+    "swiftmodule" : "/Users/markcornelisse/Developer/Apps/going-dutch/build/We all pay.build/Debug-iphoneos/We all pay.build/Objects-normal/arm64/EventModel~partial.swiftmodule"
+  },
+  "/Users/markcornelisse/Developer/Apps/going-dutch/Going Dutch/EventsModel.swift" : {
+    "const-values" : "/Users/markcornelisse/Developer/Apps/going-dutch/build/We all pay.build/Debug-iphoneos/We all pay.build/Objects-normal/arm64/EventsModel.swiftconstvalues",
+    "dependencies" : "/Users/markcornelisse/Developer/Apps/going-dutch/build/We all pay.build/Debug-iphoneos/We all pay.build/Objects-normal/arm64/EventsModel.d",
+    "diagnostics" : "/Users/markcornelisse/Developer/Apps/going-dutch/build/We all pay.build/Debug-iphoneos/We all pay.build/Objects-normal/arm64/EventsModel.dia",
+    "index-unit-output-path" : "/We all pay.build/Debug-iphoneos/We all pay.build/Objects-normal/arm64/EventsModel.o",
+    "llvm-bc" : "/Users/markcornelisse/Developer/Apps/going-dutch/build/We all pay.build/Debug-iphoneos/We all pay.build/Objects-normal/arm64/EventsModel.bc",
+    "object" : "/Users/markcornelisse/Developer/Apps/going-dutch/build/We all pay.build/Debug-iphoneos/We all pay.build/Objects-normal/arm64/EventsModel.o",
+    "swift-dependencies" : "/Users/markcornelisse/Developer/Apps/going-dutch/build/We all pay.build/Debug-iphoneos/We all pay.build/Objects-normal/arm64/EventsModel.swiftdeps",
+    "swiftmodule" : "/Users/markcornelisse/Developer/Apps/going-dutch/build/We all pay.build/Debug-iphoneos/We all pay.build/Objects-normal/arm64/EventsModel~partial.swiftmodule"
+  },
+  "/Users/markcornelisse/Developer/Apps/going-dutch/Going Dutch/EventTableViewCell.swift" : {
+    "const-values" : "/Users/markcornelisse/Developer/Apps/going-dutch/build/We all pay.build/Debug-iphoneos/We all pay.build/Objects-normal/arm64/EventTableViewCell.swiftconstvalues",
+    "dependencies" : "/Users/markcornelisse/Developer/Apps/going-dutch/build/We all pay.build/Debug-iphoneos/We all pay.build/Objects-normal/arm64/EventTableViewCell.d",
+    "diagnostics" : "/Users/markcornelisse/Developer/Apps/going-dutch/build/We all pay.build/Debug-iphoneos/We all pay.build/Objects-normal/arm64/EventTableViewCell.dia",
+    "index-unit-output-path" : "/We all pay.build/Debug-iphoneos/We all pay.build/Objects-normal/arm64/EventTableViewCell.o",
+    "llvm-bc" : "/Users/markcornelisse/Developer/Apps/going-dutch/build/We all pay.build/Debug-iphoneos/We all pay.build/Objects-normal/arm64/EventTableViewCell.bc",
+    "object" : "/Users/markcornelisse/Developer/Apps/going-dutch/build/We all pay.build/Debug-iphoneos/We all pay.build/Objects-normal/arm64/EventTableViewCell.o",
+    "swift-dependencies" : "/Users/markcornelisse/Developer/Apps/going-dutch/build/We all pay.build/Debug-iphoneos/We all pay.build/Objects-normal/arm64/EventTableViewCell.swiftdeps",
+    "swiftmodule" : "/Users/markcornelisse/Developer/Apps/going-dutch/build/We all pay.build/Debug-iphoneos/We all pay.build/Objects-normal/arm64/EventTableViewCell~partial.swiftmodule"
+  },
+  "/Users/markcornelisse/Developer/Apps/going-dutch/Going Dutch/ExchangeRateFetcherForMCExchangeRate.swift" : {
+    "const-values" : "/Users/markcornelisse/Developer/Apps/going-dutch/build/We all pay.build/Debug-iphoneos/We all pay.build/Objects-normal/arm64/ExchangeRateFetcherForMCExchangeRate.swiftconstvalues",
+    "dependencies" : "/Users/markcornelisse/Developer/Apps/going-dutch/build/We all pay.build/Debug-iphoneos/We all pay.build/Objects-normal/arm64/ExchangeRateFetcherForMCExchangeRate.d",
+    "diagnostics" : "/Users/markcornelisse/Developer/Apps/going-dutch/build/We all pay.build/Debug-iphoneos/We all pay.build/Objects-normal/arm64/ExchangeRateFetcherForMCExchangeRate.dia",
+    "index-unit-output-path" : "/We all pay.build/Debug-iphoneos/We all pay.build/Objects-normal/arm64/ExchangeRateFetcherForMCExchangeRate.o",
+    "llvm-bc" : "/Users/markcornelisse/Developer/Apps/going-dutch/build/We all pay.build/Debug-iphoneos/We all pay.build/Objects-normal/arm64/ExchangeRateFetcherForMCExchangeRate.bc",
+    "object" : "/Users/markcornelisse/Developer/Apps/going-dutch/build/We all pay.build/Debug-iphoneos/We all pay.build/Objects-normal/arm64/ExchangeRateFetcherForMCExchangeRate.o",
+    "swift-dependencies" : "/Users/markcornelisse/Developer/Apps/going-dutch/build/We all pay.build/Debug-iphoneos/We all pay.build/Objects-normal/arm64/ExchangeRateFetcherForMCExchangeRate.swiftdeps",
+    "swiftmodule" : "/Users/markcornelisse/Developer/Apps/going-dutch/build/We all pay.build/Debug-iphoneos/We all pay.build/Objects-normal/arm64/ExchangeRateFetcherForMCExchangeRate~partial.swiftmodule"
+  },
+  "/Users/markcornelisse/Developer/Apps/going-dutch/Going Dutch/InfoModel.swift" : {
+    "const-values" : "/Users/markcornelisse/Developer/Apps/going-dutch/build/We all pay.build/Debug-iphoneos/We all pay.build/Objects-normal/arm64/InfoModel.swiftconstvalues",
+    "dependencies" : "/Users/markcornelisse/Developer/Apps/going-dutch/build/We all pay.build/Debug-iphoneos/We all pay.build/Objects-normal/arm64/InfoModel.d",
+    "diagnostics" : "/Users/markcornelisse/Developer/Apps/going-dutch/build/We all pay.build/Debug-iphoneos/We all pay.build/Objects-normal/arm64/InfoModel.dia",
+    "index-unit-output-path" : "/We all pay.build/Debug-iphoneos/We all pay.build/Objects-normal/arm64/InfoModel.o",
+    "llvm-bc" : "/Users/markcornelisse/Developer/Apps/going-dutch/build/We all pay.build/Debug-iphoneos/We all pay.build/Objects-normal/arm64/InfoModel.bc",
+    "object" : "/Users/markcornelisse/Developer/Apps/going-dutch/build/We all pay.build/Debug-iphoneos/We all pay.build/Objects-normal/arm64/InfoModel.o",
+    "swift-dependencies" : "/Users/markcornelisse/Developer/Apps/going-dutch/build/We all pay.build/Debug-iphoneos/We all pay.build/Objects-normal/arm64/InfoModel.swiftdeps",
+    "swiftmodule" : "/Users/markcornelisse/Developer/Apps/going-dutch/build/We all pay.build/Debug-iphoneos/We all pay.build/Objects-normal/arm64/InfoModel~partial.swiftmodule"
+  },
+  "/Users/markcornelisse/Developer/Apps/going-dutch/Going Dutch/InfoScreenTableViewController.swift" : {
+    "const-values" : "/Users/markcornelisse/Developer/Apps/going-dutch/build/We all pay.build/Debug-iphoneos/We all pay.build/Objects-normal/arm64/InfoScreenTableViewController.swiftconstvalues",
+    "dependencies" : "/Users/markcornelisse/Developer/Apps/going-dutch/build/We all pay.build/Debug-iphoneos/We all pay.build/Objects-normal/arm64/InfoScreenTableViewController.d",
+    "diagnostics" : "/Users/markcornelisse/Developer/Apps/going-dutch/build/We all pay.build/Debug-iphoneos/We all pay.build/Objects-normal/arm64/InfoScreenTableViewController.dia",
+    "index-unit-output-path" : "/We all pay.build/Debug-iphoneos/We all pay.build/Objects-normal/arm64/InfoScreenTableViewController.o",
+    "llvm-bc" : "/Users/markcornelisse/Developer/Apps/going-dutch/build/We all pay.build/Debug-iphoneos/We all pay.build/Objects-normal/arm64/InfoScreenTableViewController.bc",
+    "object" : "/Users/markcornelisse/Developer/Apps/going-dutch/build/We all pay.build/Debug-iphoneos/We all pay.build/Objects-normal/arm64/InfoScreenTableViewController.o",
+    "swift-dependencies" : "/Users/markcornelisse/Developer/Apps/going-dutch/build/We all pay.build/Debug-iphoneos/We all pay.build/Objects-normal/arm64/InfoScreenTableViewController.swiftdeps",
+    "swiftmodule" : "/Users/markcornelisse/Developer/Apps/going-dutch/build/We all pay.build/Debug-iphoneos/We all pay.build/Objects-normal/arm64/InfoScreenTableViewController~partial.swiftmodule"
+  },
+  "/Users/markcornelisse/Developer/Apps/going-dutch/Going Dutch/MCAdBannerTableViewCell.swift" : {
+    "const-values" : "/Users/markcornelisse/Developer/Apps/going-dutch/build/We all pay.build/Debug-iphoneos/We all pay.build/Objects-normal/arm64/MCAdBannerTableViewCell.swiftconstvalues",
+    "dependencies" : "/Users/markcornelisse/Developer/Apps/going-dutch/build/We all pay.build/Debug-iphoneos/We all pay.build/Objects-normal/arm64/MCAdBannerTableViewCell.d",
+    "diagnostics" : "/Users/markcornelisse/Developer/Apps/going-dutch/build/We all pay.build/Debug-iphoneos/We all pay.build/Objects-normal/arm64/MCAdBannerTableViewCell.dia",
+    "index-unit-output-path" : "/We all pay.build/Debug-iphoneos/We all pay.build/Objects-normal/arm64/MCAdBannerTableViewCell.o",
+    "llvm-bc" : "/Users/markcornelisse/Developer/Apps/going-dutch/build/We all pay.build/Debug-iphoneos/We all pay.build/Objects-normal/arm64/MCAdBannerTableViewCell.bc",
+    "object" : "/Users/markcornelisse/Developer/Apps/going-dutch/build/We all pay.build/Debug-iphoneos/We all pay.build/Objects-normal/arm64/MCAdBannerTableViewCell.o",
+    "swift-dependencies" : "/Users/markcornelisse/Developer/Apps/going-dutch/build/We all pay.build/Debug-iphoneos/We all pay.build/Objects-normal/arm64/MCAdBannerTableViewCell.swiftdeps",
+    "swiftmodule" : "/Users/markcornelisse/Developer/Apps/going-dutch/build/We all pay.build/Debug-iphoneos/We all pay.build/Objects-normal/arm64/MCAdBannerTableViewCell~partial.swiftmodule"
+  },
+  "/Users/markcornelisse/Developer/Apps/going-dutch/Going Dutch/MCPaymentPresenceTableViewCell.swift" : {
+    "const-values" : "/Users/markcornelisse/Developer/Apps/going-dutch/build/We all pay.build/Debug-iphoneos/We all pay.build/Objects-normal/arm64/MCPaymentPresenceTableViewCell.swiftconstvalues",
+    "dependencies" : "/Users/markcornelisse/Developer/Apps/going-dutch/build/We all pay.build/Debug-iphoneos/We all pay.build/Objects-normal/arm64/MCPaymentPresenceTableViewCell.d",
+    "diagnostics" : "/Users/markcornelisse/Developer/Apps/going-dutch/build/We all pay.build/Debug-iphoneos/We all pay.build/Objects-normal/arm64/MCPaymentPresenceTableViewCell.dia",
+    "index-unit-output-path" : "/We all pay.build/Debug-iphoneos/We all pay.build/Objects-normal/arm64/MCPaymentPresenceTableViewCell.o",
+    "llvm-bc" : "/Users/markcornelisse/Developer/Apps/going-dutch/build/We all pay.build/Debug-iphoneos/We all pay.build/Objects-normal/arm64/MCPaymentPresenceTableViewCell.bc",
+    "object" : "/Users/markcornelisse/Developer/Apps/going-dutch/build/We all pay.build/Debug-iphoneos/We all pay.build/Objects-normal/arm64/MCPaymentPresenceTableViewCell.o",
+    "swift-dependencies" : "/Users/markcornelisse/Developer/Apps/going-dutch/build/We all pay.build/Debug-iphoneos/We all pay.build/Objects-normal/arm64/MCPaymentPresenceTableViewCell.swiftdeps",
+    "swiftmodule" : "/Users/markcornelisse/Developer/Apps/going-dutch/build/We all pay.build/Debug-iphoneos/We all pay.build/Objects-normal/arm64/MCPaymentPresenceTableViewCell~partial.swiftmodule"
+  },
+  "/Users/markcornelisse/Developer/Apps/going-dutch/Going Dutch/MCPaymentTableViewCell.swift" : {
+    "const-values" : "/Users/markcornelisse/Developer/Apps/going-dutch/build/We all pay.build/Debug-iphoneos/We all pay.build/Objects-normal/arm64/MCPaymentTableViewCell.swiftconstvalues",
+    "dependencies" : "/Users/markcornelisse/Developer/Apps/going-dutch/build/We all pay.build/Debug-iphoneos/We all pay.build/Objects-normal/arm64/MCPaymentTableViewCell.d",
+    "diagnostics" : "/Users/markcornelisse/Developer/Apps/going-dutch/build/We all pay.build/Debug-iphoneos/We all pay.build/Objects-normal/arm64/MCPaymentTableViewCell.dia",
+    "index-unit-output-path" : "/We all pay.build/Debug-iphoneos/We all pay.build/Objects-normal/arm64/MCPaymentTableViewCell.o",
+    "llvm-bc" : "/Users/markcornelisse/Developer/Apps/going-dutch/build/We all pay.build/Debug-iphoneos/We all pay.build/Objects-normal/arm64/MCPaymentTableViewCell.bc",
+    "object" : "/Users/markcornelisse/Developer/Apps/going-dutch/build/We all pay.build/Debug-iphoneos/We all pay.build/Objects-normal/arm64/MCPaymentTableViewCell.o",
+    "swift-dependencies" : "/Users/markcornelisse/Developer/Apps/going-dutch/build/We all pay.build/Debug-iphoneos/We all pay.build/Objects-normal/arm64/MCPaymentTableViewCell.swiftdeps",
+    "swiftmodule" : "/Users/markcornelisse/Developer/Apps/going-dutch/build/We all pay.build/Debug-iphoneos/We all pay.build/Objects-normal/arm64/MCPaymentTableViewCell~partial.swiftmodule"
+  },
+  "/Users/markcornelisse/Developer/Apps/going-dutch/Going Dutch/MCPersonTableViewCell.swift" : {
+    "const-values" : "/Users/markcornelisse/Developer/Apps/going-dutch/build/We all pay.build/Debug-iphoneos/We all pay.build/Objects-normal/arm64/MCPersonTableViewCell.swiftconstvalues",
+    "dependencies" : "/Users/markcornelisse/Developer/Apps/going-dutch/build/We all pay.build/Debug-iphoneos/We all pay.build/Objects-normal/arm64/MCPersonTableViewCell.d",
+    "diagnostics" : "/Users/markcornelisse/Developer/Apps/going-dutch/build/We all pay.build/Debug-iphoneos/We all pay.build/Objects-normal/arm64/MCPersonTableViewCell.dia",
+    "index-unit-output-path" : "/We all pay.build/Debug-iphoneos/We all pay.build/Objects-normal/arm64/MCPersonTableViewCell.o",
+    "llvm-bc" : "/Users/markcornelisse/Developer/Apps/going-dutch/build/We all pay.build/Debug-iphoneos/We all pay.build/Objects-normal/arm64/MCPersonTableViewCell.bc",
+    "object" : "/Users/markcornelisse/Developer/Apps/going-dutch/build/We all pay.build/Debug-iphoneos/We all pay.build/Objects-normal/arm64/MCPersonTableViewCell.o",
+    "swift-dependencies" : "/Users/markcornelisse/Developer/Apps/going-dutch/build/We all pay.build/Debug-iphoneos/We all pay.build/Objects-normal/arm64/MCPersonTableViewCell.swiftdeps",
+    "swiftmodule" : "/Users/markcornelisse/Developer/Apps/going-dutch/build/We all pay.build/Debug-iphoneos/We all pay.build/Objects-normal/arm64/MCPersonTableViewCell~partial.swiftmodule"
+  },
+  "/Users/markcornelisse/Developer/Apps/going-dutch/Going Dutch/MCSelectCategoryTableViewCell_iPhone.swift" : {
+    "const-values" : "/Users/markcornelisse/Developer/Apps/going-dutch/build/We all pay.build/Debug-iphoneos/We all pay.build/Objects-normal/arm64/MCSelectCategoryTableViewCell_iPhone.swiftconstvalues",
+    "dependencies" : "/Users/markcornelisse/Developer/Apps/going-dutch/build/We all pay.build/Debug-iphoneos/We all pay.build/Objects-normal/arm64/MCSelectCategoryTableViewCell_iPhone.d",
+    "diagnostics" : "/Users/markcornelisse/Developer/Apps/going-dutch/build/We all pay.build/Debug-iphoneos/We all pay.build/Objects-normal/arm64/MCSelectCategoryTableViewCell_iPhone.dia",
+    "index-unit-output-path" : "/We all pay.build/Debug-iphoneos/We all pay.build/Objects-normal/arm64/MCSelectCategoryTableViewCell_iPhone.o",
+    "llvm-bc" : "/Users/markcornelisse/Developer/Apps/going-dutch/build/We all pay.build/Debug-iphoneos/We all pay.build/Objects-normal/arm64/MCSelectCategoryTableViewCell_iPhone.bc",
+    "object" : "/Users/markcornelisse/Developer/Apps/going-dutch/build/We all pay.build/Debug-iphoneos/We all pay.build/Objects-normal/arm64/MCSelectCategoryTableViewCell_iPhone.o",
+    "swift-dependencies" : "/Users/markcornelisse/Developer/Apps/going-dutch/build/We all pay.build/Debug-iphoneos/We all pay.build/Objects-normal/arm64/MCSelectCategoryTableViewCell_iPhone.swiftdeps",
+    "swiftmodule" : "/Users/markcornelisse/Developer/Apps/going-dutch/build/We all pay.build/Debug-iphoneos/We all pay.build/Objects-normal/arm64/MCSelectCategoryTableViewCell_iPhone~partial.swiftmodule"
+  },
+  "/Users/markcornelisse/Developer/Apps/going-dutch/Going Dutch/MCSelectCurrencyTableViewCell_iPhone.swift" : {
+    "const-values" : "/Users/markcornelisse/Developer/Apps/going-dutch/build/We all pay.build/Debug-iphoneos/We all pay.build/Objects-normal/arm64/MCSelectCurrencyTableViewCell_iPhone.swiftconstvalues",
+    "dependencies" : "/Users/markcornelisse/Developer/Apps/going-dutch/build/We all pay.build/Debug-iphoneos/We all pay.build/Objects-normal/arm64/MCSelectCurrencyTableViewCell_iPhone.d",
+    "diagnostics" : "/Users/markcornelisse/Developer/Apps/going-dutch/build/We all pay.build/Debug-iphoneos/We all pay.build/Objects-normal/arm64/MCSelectCurrencyTableViewCell_iPhone.dia",
+    "index-unit-output-path" : "/We all pay.build/Debug-iphoneos/We all pay.build/Objects-normal/arm64/MCSelectCurrencyTableViewCell_iPhone.o",
+    "llvm-bc" : "/Users/markcornelisse/Developer/Apps/going-dutch/build/We all pay.build/Debug-iphoneos/We all pay.build/Objects-normal/arm64/MCSelectCurrencyTableViewCell_iPhone.bc",
+    "object" : "/Users/markcornelisse/Developer/Apps/going-dutch/build/We all pay.build/Debug-iphoneos/We all pay.build/Objects-normal/arm64/MCSelectCurrencyTableViewCell_iPhone.o",
+    "swift-dependencies" : "/Users/markcornelisse/Developer/Apps/going-dutch/build/We all pay.build/Debug-iphoneos/We all pay.build/Objects-normal/arm64/MCSelectCurrencyTableViewCell_iPhone.swiftdeps",
+    "swiftmodule" : "/Users/markcornelisse/Developer/Apps/going-dutch/build/We all pay.build/Debug-iphoneos/We all pay.build/Objects-normal/arm64/MCSelectCurrencyTableViewCell_iPhone~partial.swiftmodule"
+  },
+  "/Users/markcornelisse/Developer/Apps/going-dutch/Going Dutch/MCStoreInterface.swift" : {
+    "const-values" : "/Users/markcornelisse/Developer/Apps/going-dutch/build/We all pay.build/Debug-iphoneos/We all pay.build/Objects-normal/arm64/MCStoreInterface.swiftconstvalues",
+    "dependencies" : "/Users/markcornelisse/Developer/Apps/going-dutch/build/We all pay.build/Debug-iphoneos/We all pay.build/Objects-normal/arm64/MCStoreInterface.d",
+    "diagnostics" : "/Users/markcornelisse/Developer/Apps/going-dutch/build/We all pay.build/Debug-iphoneos/We all pay.build/Objects-normal/arm64/MCStoreInterface.dia",
+    "index-unit-output-path" : "/We all pay.build/Debug-iphoneos/We all pay.build/Objects-normal/arm64/MCStoreInterface.o",
+    "llvm-bc" : "/Users/markcornelisse/Developer/Apps/going-dutch/build/We all pay.build/Debug-iphoneos/We all pay.build/Objects-normal/arm64/MCStoreInterface.bc",
+    "object" : "/Users/markcornelisse/Developer/Apps/going-dutch/build/We all pay.build/Debug-iphoneos/We all pay.build/Objects-normal/arm64/MCStoreInterface.o",
+    "swift-dependencies" : "/Users/markcornelisse/Developer/Apps/going-dutch/build/We all pay.build/Debug-iphoneos/We all pay.build/Objects-normal/arm64/MCStoreInterface.swiftdeps",
+    "swiftmodule" : "/Users/markcornelisse/Developer/Apps/going-dutch/build/We all pay.build/Debug-iphoneos/We all pay.build/Objects-normal/arm64/MCStoreInterface~partial.swiftmodule"
+  },
+  "/Users/markcornelisse/Developer/Apps/going-dutch/Going Dutch/MCTableEmptyMessage.swift" : {
+    "const-values" : "/Users/markcornelisse/Developer/Apps/going-dutch/build/We all pay.build/Debug-iphoneos/We all pay.build/Objects-normal/arm64/MCTableEmptyMessage.swiftconstvalues",
+    "dependencies" : "/Users/markcornelisse/Developer/Apps/going-dutch/build/We all pay.build/Debug-iphoneos/We all pay.build/Objects-normal/arm64/MCTableEmptyMessage.d",
+    "diagnostics" : "/Users/markcornelisse/Developer/Apps/going-dutch/build/We all pay.build/Debug-iphoneos/We all pay.build/Objects-normal/arm64/MCTableEmptyMessage.dia",
+    "index-unit-output-path" : "/We all pay.build/Debug-iphoneos/We all pay.build/Objects-normal/arm64/MCTableEmptyMessage.o",
+    "llvm-bc" : "/Users/markcornelisse/Developer/Apps/going-dutch/build/We all pay.build/Debug-iphoneos/We all pay.build/Objects-normal/arm64/MCTableEmptyMessage.bc",
+    "object" : "/Users/markcornelisse/Developer/Apps/going-dutch/build/We all pay.build/Debug-iphoneos/We all pay.build/Objects-normal/arm64/MCTableEmptyMessage.o",
+    "swift-dependencies" : "/Users/markcornelisse/Developer/Apps/going-dutch/build/We all pay.build/Debug-iphoneos/We all pay.build/Objects-normal/arm64/MCTableEmptyMessage.swiftdeps",
+    "swiftmodule" : "/Users/markcornelisse/Developer/Apps/going-dutch/build/We all pay.build/Debug-iphoneos/We all pay.build/Objects-normal/arm64/MCTableEmptyMessage~partial.swiftmodule"
+  },
+  "/Users/markcornelisse/Developer/Apps/going-dutch/Going Dutch/MCTwoLabelIscreenTableViewCell.swift" : {
+    "const-values" : "/Users/markcornelisse/Developer/Apps/going-dutch/build/We all pay.build/Debug-iphoneos/We all pay.build/Objects-normal/arm64/MCTwoLabelIscreenTableViewCell.swiftconstvalues",
+    "dependencies" : "/Users/markcornelisse/Developer/Apps/going-dutch/build/We all pay.build/Debug-iphoneos/We all pay.build/Objects-normal/arm64/MCTwoLabelIscreenTableViewCell.d",
+    "diagnostics" : "/Users/markcornelisse/Developer/Apps/going-dutch/build/We all pay.build/Debug-iphoneos/We all pay.build/Objects-normal/arm64/MCTwoLabelIscreenTableViewCell.dia",
+    "index-unit-output-path" : "/We all pay.build/Debug-iphoneos/We all pay.build/Objects-normal/arm64/MCTwoLabelIscreenTableViewCell.o",
+    "llvm-bc" : "/Users/markcornelisse/Developer/Apps/going-dutch/build/We all pay.build/Debug-iphoneos/We all pay.build/Objects-normal/arm64/MCTwoLabelIscreenTableViewCell.bc",
+    "object" : "/Users/markcornelisse/Developer/Apps/going-dutch/build/We all pay.build/Debug-iphoneos/We all pay.build/Objects-normal/arm64/MCTwoLabelIscreenTableViewCell.o",
+    "swift-dependencies" : "/Users/markcornelisse/Developer/Apps/going-dutch/build/We all pay.build/Debug-iphoneos/We all pay.build/Objects-normal/arm64/MCTwoLabelIscreenTableViewCell.swiftdeps",
+    "swiftmodule" : "/Users/markcornelisse/Developer/Apps/going-dutch/build/We all pay.build/Debug-iphoneos/We all pay.build/Objects-normal/arm64/MCTwoLabelIscreenTableViewCell~partial.swiftmodule"
+  },
+  "/Users/markcornelisse/Developer/Apps/going-dutch/Going Dutch/MCTwoLabelsTitleView.swift" : {
+    "const-values" : "/Users/markcornelisse/Developer/Apps/going-dutch/build/We all pay.build/Debug-iphoneos/We all pay.build/Objects-normal/arm64/MCTwoLabelsTitleView.swiftconstvalues",
+    "dependencies" : "/Users/markcornelisse/Developer/Apps/going-dutch/build/We all pay.build/Debug-iphoneos/We all pay.build/Objects-normal/arm64/MCTwoLabelsTitleView.d",
+    "diagnostics" : "/Users/markcornelisse/Developer/Apps/going-dutch/build/We all pay.build/Debug-iphoneos/We all pay.build/Objects-normal/arm64/MCTwoLabelsTitleView.dia",
+    "index-unit-output-path" : "/We all pay.build/Debug-iphoneos/We all pay.build/Objects-normal/arm64/MCTwoLabelsTitleView.o",
+    "llvm-bc" : "/Users/markcornelisse/Developer/Apps/going-dutch/build/We all pay.build/Debug-iphoneos/We all pay.build/Objects-normal/arm64/MCTwoLabelsTitleView.bc",
+    "object" : "/Users/markcornelisse/Developer/Apps/going-dutch/build/We all pay.build/Debug-iphoneos/We all pay.build/Objects-normal/arm64/MCTwoLabelsTitleView.o",
+    "swift-dependencies" : "/Users/markcornelisse/Developer/Apps/going-dutch/build/We all pay.build/Debug-iphoneos/We all pay.build/Objects-normal/arm64/MCTwoLabelsTitleView.swiftdeps",
+    "swiftmodule" : "/Users/markcornelisse/Developer/Apps/going-dutch/build/We all pay.build/Debug-iphoneos/We all pay.build/Objects-normal/arm64/MCTwoLabelsTitleView~partial.swiftmodule"
+  },
+  "/Users/markcornelisse/Developer/Apps/going-dutch/Going Dutch/Miscellaneous/Calculations/SequenceExtension.swift" : {
+    "const-values" : "/Users/markcornelisse/Developer/Apps/going-dutch/build/We all pay.build/Debug-iphoneos/We all pay.build/Objects-normal/arm64/SequenceExtension.swiftconstvalues",
+    "dependencies" : "/Users/markcornelisse/Developer/Apps/going-dutch/build/We all pay.build/Debug-iphoneos/We all pay.build/Objects-normal/arm64/SequenceExtension.d",
+    "diagnostics" : "/Users/markcornelisse/Developer/Apps/going-dutch/build/We all pay.build/Debug-iphoneos/We all pay.build/Objects-normal/arm64/SequenceExtension.dia",
+    "index-unit-output-path" : "/We all pay.build/Debug-iphoneos/We all pay.build/Objects-normal/arm64/SequenceExtension.o",
+    "llvm-bc" : "/Users/markcornelisse/Developer/Apps/going-dutch/build/We all pay.build/Debug-iphoneos/We all pay.build/Objects-normal/arm64/SequenceExtension.bc",
+    "object" : "/Users/markcornelisse/Developer/Apps/going-dutch/build/We all pay.build/Debug-iphoneos/We all pay.build/Objects-normal/arm64/SequenceExtension.o",
+    "swift-dependencies" : "/Users/markcornelisse/Developer/Apps/going-dutch/build/We all pay.build/Debug-iphoneos/We all pay.build/Objects-normal/arm64/SequenceExtension.swiftdeps",
+    "swiftmodule" : "/Users/markcornelisse/Developer/Apps/going-dutch/build/We all pay.build/Debug-iphoneos/We all pay.build/Objects-normal/arm64/SequenceExtension~partial.swiftmodule"
+  },
+  "/Users/markcornelisse/Developer/Apps/going-dutch/Going Dutch/Miscellaneous/ContactsDataReceiver.swift" : {
+    "const-values" : "/Users/markcornelisse/Developer/Apps/going-dutch/build/We all pay.build/Debug-iphoneos/We all pay.build/Objects-normal/arm64/ContactsDataReceiver.swiftconstvalues",
+    "dependencies" : "/Users/markcornelisse/Developer/Apps/going-dutch/build/We all pay.build/Debug-iphoneos/We all pay.build/Objects-normal/arm64/ContactsDataReceiver.d",
+    "diagnostics" : "/Users/markcornelisse/Developer/Apps/going-dutch/build/We all pay.build/Debug-iphoneos/We all pay.build/Objects-normal/arm64/ContactsDataReceiver.dia",
+    "index-unit-output-path" : "/We all pay.build/Debug-iphoneos/We all pay.build/Objects-normal/arm64/ContactsDataReceiver.o",
+    "llvm-bc" : "/Users/markcornelisse/Developer/Apps/going-dutch/build/We all pay.build/Debug-iphoneos/We all pay.build/Objects-normal/arm64/ContactsDataReceiver.bc",
+    "object" : "/Users/markcornelisse/Developer/Apps/going-dutch/build/We all pay.build/Debug-iphoneos/We all pay.build/Objects-normal/arm64/ContactsDataReceiver.o",
+    "swift-dependencies" : "/Users/markcornelisse/Developer/Apps/going-dutch/build/We all pay.build/Debug-iphoneos/We all pay.build/Objects-normal/arm64/ContactsDataReceiver.swiftdeps",
+    "swiftmodule" : "/Users/markcornelisse/Developer/Apps/going-dutch/build/We all pay.build/Debug-iphoneos/We all pay.build/Objects-normal/arm64/ContactsDataReceiver~partial.swiftmodule"
+  },
+  "/Users/markcornelisse/Developer/Apps/going-dutch/Going Dutch/Miscellaneous/CurrencyFormatter.swift" : {
+    "const-values" : "/Users/markcornelisse/Developer/Apps/going-dutch/build/We all pay.build/Debug-iphoneos/We all pay.build/Objects-normal/arm64/CurrencyFormatter.swiftconstvalues",
+    "dependencies" : "/Users/markcornelisse/Developer/Apps/going-dutch/build/We all pay.build/Debug-iphoneos/We all pay.build/Objects-normal/arm64/CurrencyFormatter.d",
+    "diagnostics" : "/Users/markcornelisse/Developer/Apps/going-dutch/build/We all pay.build/Debug-iphoneos/We all pay.build/Objects-normal/arm64/CurrencyFormatter.dia",
+    "index-unit-output-path" : "/We all pay.build/Debug-iphoneos/We all pay.build/Objects-normal/arm64/CurrencyFormatter.o",
+    "llvm-bc" : "/Users/markcornelisse/Developer/Apps/going-dutch/build/We all pay.build/Debug-iphoneos/We all pay.build/Objects-normal/arm64/CurrencyFormatter.bc",
+    "object" : "/Users/markcornelisse/Developer/Apps/going-dutch/build/We all pay.build/Debug-iphoneos/We all pay.build/Objects-normal/arm64/CurrencyFormatter.o",
+    "swift-dependencies" : "/Users/markcornelisse/Developer/Apps/going-dutch/build/We all pay.build/Debug-iphoneos/We all pay.build/Objects-normal/arm64/CurrencyFormatter.swiftdeps",
+    "swiftmodule" : "/Users/markcornelisse/Developer/Apps/going-dutch/build/We all pay.build/Debug-iphoneos/We all pay.build/Objects-normal/arm64/CurrencyFormatter~partial.swiftmodule"
+  },
+  "/Users/markcornelisse/Developer/Apps/going-dutch/Going Dutch/Miscellaneous/LaunchCounter.swift" : {
+    "const-values" : "/Users/markcornelisse/Developer/Apps/going-dutch/build/We all pay.build/Debug-iphoneos/We all pay.build/Objects-normal/arm64/LaunchCounter.swiftconstvalues",
+    "dependencies" : "/Users/markcornelisse/Developer/Apps/going-dutch/build/We all pay.build/Debug-iphoneos/We all pay.build/Objects-normal/arm64/LaunchCounter.d",
+    "diagnostics" : "/Users/markcornelisse/Developer/Apps/going-dutch/build/We all pay.build/Debug-iphoneos/We all pay.build/Objects-normal/arm64/LaunchCounter.dia",
+    "index-unit-output-path" : "/We all pay.build/Debug-iphoneos/We all pay.build/Objects-normal/arm64/LaunchCounter.o",
+    "llvm-bc" : "/Users/markcornelisse/Developer/Apps/going-dutch/build/We all pay.build/Debug-iphoneos/We all pay.build/Objects-normal/arm64/LaunchCounter.bc",
+    "object" : "/Users/markcornelisse/Developer/Apps/going-dutch/build/We all pay.build/Debug-iphoneos/We all pay.build/Objects-normal/arm64/LaunchCounter.o",
+    "swift-dependencies" : "/Users/markcornelisse/Developer/Apps/going-dutch/build/We all pay.build/Debug-iphoneos/We all pay.build/Objects-normal/arm64/LaunchCounter.swiftdeps",
+    "swiftmodule" : "/Users/markcornelisse/Developer/Apps/going-dutch/build/We all pay.build/Debug-iphoneos/We all pay.build/Objects-normal/arm64/LaunchCounter~partial.swiftmodule"
+  },
+  "/Users/markcornelisse/Developer/Apps/going-dutch/Going Dutch/Miscellaneous/Mail/MailComposer.swift" : {
+    "const-values" : "/Users/markcornelisse/Developer/Apps/going-dutch/build/We all pay.build/Debug-iphoneos/We all pay.build/Objects-normal/arm64/MailComposer.swiftconstvalues",
+    "dependencies" : "/Users/markcornelisse/Developer/Apps/going-dutch/build/We all pay.build/Debug-iphoneos/We all pay.build/Objects-normal/arm64/MailComposer.d",
+    "diagnostics" : "/Users/markcornelisse/Developer/Apps/going-dutch/build/We all pay.build/Debug-iphoneos/We all pay.build/Objects-normal/arm64/MailComposer.dia",
+    "index-unit-output-path" : "/We all pay.build/Debug-iphoneos/We all pay.build/Objects-normal/arm64/MailComposer.o",
+    "llvm-bc" : "/Users/markcornelisse/Developer/Apps/going-dutch/build/We all pay.build/Debug-iphoneos/We all pay.build/Objects-normal/arm64/MailComposer.bc",
+    "object" : "/Users/markcornelisse/Developer/Apps/going-dutch/build/We all pay.build/Debug-iphoneos/We all pay.build/Objects-normal/arm64/MailComposer.o",
+    "swift-dependencies" : "/Users/markcornelisse/Developer/Apps/going-dutch/build/We all pay.build/Debug-iphoneos/We all pay.build/Objects-normal/arm64/MailComposer.swiftdeps",
+    "swiftmodule" : "/Users/markcornelisse/Developer/Apps/going-dutch/build/We all pay.build/Debug-iphoneos/We all pay.build/Objects-normal/arm64/MailComposer~partial.swiftmodule"
+  },
+  "/Users/markcornelisse/Developer/Apps/going-dutch/Going Dutch/Miscellaneous/Mail/MailComposeViewController.swift" : {
+    "const-values" : "/Users/markcornelisse/Developer/Apps/going-dutch/build/We all pay.build/Debug-iphoneos/We all pay.build/Objects-normal/arm64/MailComposeViewController.swiftconstvalues",
+    "dependencies" : "/Users/markcornelisse/Developer/Apps/going-dutch/build/We all pay.build/Debug-iphoneos/We all pay.build/Objects-normal/arm64/MailComposeViewController.d",
+    "diagnostics" : "/Users/markcornelisse/Developer/Apps/going-dutch/build/We all pay.build/Debug-iphoneos/We all pay.build/Objects-normal/arm64/MailComposeViewController.dia",
+    "index-unit-output-path" : "/We all pay.build/Debug-iphoneos/We all pay.build/Objects-normal/arm64/MailComposeViewController.o",
+    "llvm-bc" : "/Users/markcornelisse/Developer/Apps/going-dutch/build/We all pay.build/Debug-iphoneos/We all pay.build/Objects-normal/arm64/MailComposeViewController.bc",
+    "object" : "/Users/markcornelisse/Developer/Apps/going-dutch/build/We all pay.build/Debug-iphoneos/We all pay.build/Objects-normal/arm64/MailComposeViewController.o",
+    "swift-dependencies" : "/Users/markcornelisse/Developer/Apps/going-dutch/build/We all pay.build/Debug-iphoneos/We all pay.build/Objects-normal/arm64/MailComposeViewController.swiftdeps",
+    "swiftmodule" : "/Users/markcornelisse/Developer/Apps/going-dutch/build/We all pay.build/Debug-iphoneos/We all pay.build/Objects-normal/arm64/MailComposeViewController~partial.swiftmodule"
+  },
+  "/Users/markcornelisse/Developer/Apps/going-dutch/Going Dutch/Miscellaneous/NSManagedObjectContextExtension.swift" : {
+    "const-values" : "/Users/markcornelisse/Developer/Apps/going-dutch/build/We all pay.build/Debug-iphoneos/We all pay.build/Objects-normal/arm64/NSManagedObjectContextExtension.swiftconstvalues",
+    "dependencies" : "/Users/markcornelisse/Developer/Apps/going-dutch/build/We all pay.build/Debug-iphoneos/We all pay.build/Objects-normal/arm64/NSManagedObjectContextExtension.d",
+    "diagnostics" : "/Users/markcornelisse/Developer/Apps/going-dutch/build/We all pay.build/Debug-iphoneos/We all pay.build/Objects-normal/arm64/NSManagedObjectContextExtension.dia",
+    "index-unit-output-path" : "/We all pay.build/Debug-iphoneos/We all pay.build/Objects-normal/arm64/NSManagedObjectContextExtension.o",
+    "llvm-bc" : "/Users/markcornelisse/Developer/Apps/going-dutch/build/We all pay.build/Debug-iphoneos/We all pay.build/Objects-normal/arm64/NSManagedObjectContextExtension.bc",
+    "object" : "/Users/markcornelisse/Developer/Apps/going-dutch/build/We all pay.build/Debug-iphoneos/We all pay.build/Objects-normal/arm64/NSManagedObjectContextExtension.o",
+    "swift-dependencies" : "/Users/markcornelisse/Developer/Apps/going-dutch/build/We all pay.build/Debug-iphoneos/We all pay.build/Objects-normal/arm64/NSManagedObjectContextExtension.swiftdeps",
+    "swiftmodule" : "/Users/markcornelisse/Developer/Apps/going-dutch/build/We all pay.build/Debug-iphoneos/We all pay.build/Objects-normal/arm64/NSManagedObjectContextExtension~partial.swiftmodule"
+  },
+  "/Users/markcornelisse/Developer/Apps/going-dutch/Going Dutch/Miscellaneous/ShowMailViewProtocol.swift" : {
+    "const-values" : "/Users/markcornelisse/Developer/Apps/going-dutch/build/We all pay.build/Debug-iphoneos/We all pay.build/Objects-normal/arm64/ShowMailViewProtocol.swiftconstvalues",
+    "dependencies" : "/Users/markcornelisse/Developer/Apps/going-dutch/build/We all pay.build/Debug-iphoneos/We all pay.build/Objects-normal/arm64/ShowMailViewProtocol.d",
+    "diagnostics" : "/Users/markcornelisse/Developer/Apps/going-dutch/build/We all pay.build/Debug-iphoneos/We all pay.build/Objects-normal/arm64/ShowMailViewProtocol.dia",
+    "index-unit-output-path" : "/We all pay.build/Debug-iphoneos/We all pay.build/Objects-normal/arm64/ShowMailViewProtocol.o",
+    "llvm-bc" : "/Users/markcornelisse/Developer/Apps/going-dutch/build/We all pay.build/Debug-iphoneos/We all pay.build/Objects-normal/arm64/ShowMailViewProtocol.bc",
+    "object" : "/Users/markcornelisse/Developer/Apps/going-dutch/build/We all pay.build/Debug-iphoneos/We all pay.build/Objects-normal/arm64/ShowMailViewProtocol.o",
+    "swift-dependencies" : "/Users/markcornelisse/Developer/Apps/going-dutch/build/We all pay.build/Debug-iphoneos/We all pay.build/Objects-normal/arm64/ShowMailViewProtocol.swiftdeps",
+    "swiftmodule" : "/Users/markcornelisse/Developer/Apps/going-dutch/build/We all pay.build/Debug-iphoneos/We all pay.build/Objects-normal/arm64/ShowMailViewProtocol~partial.swiftmodule"
+  },
+  "/Users/markcornelisse/Developer/Apps/going-dutch/Going Dutch/Miscellaneous/SideMenuTransitioner.swift" : {
+    "const-values" : "/Users/markcornelisse/Developer/Apps/going-dutch/build/We all pay.build/Debug-iphoneos/We all pay.build/Objects-normal/arm64/SideMenuTransitioner.swiftconstvalues",
+    "dependencies" : "/Users/markcornelisse/Developer/Apps/going-dutch/build/We all pay.build/Debug-iphoneos/We all pay.build/Objects-normal/arm64/SideMenuTransitioner.d",
+    "diagnostics" : "/Users/markcornelisse/Developer/Apps/going-dutch/build/We all pay.build/Debug-iphoneos/We all pay.build/Objects-normal/arm64/SideMenuTransitioner.dia",
+    "index-unit-output-path" : "/We all pay.build/Debug-iphoneos/We all pay.build/Objects-normal/arm64/SideMenuTransitioner.o",
+    "llvm-bc" : "/Users/markcornelisse/Developer/Apps/going-dutch/build/We all pay.build/Debug-iphoneos/We all pay.build/Objects-normal/arm64/SideMenuTransitioner.bc",
+    "object" : "/Users/markcornelisse/Developer/Apps/going-dutch/build/We all pay.build/Debug-iphoneos/We all pay.build/Objects-normal/arm64/SideMenuTransitioner.o",
+    "swift-dependencies" : "/Users/markcornelisse/Developer/Apps/going-dutch/build/We all pay.build/Debug-iphoneos/We all pay.build/Objects-normal/arm64/SideMenuTransitioner.swiftdeps",
+    "swiftmodule" : "/Users/markcornelisse/Developer/Apps/going-dutch/build/We all pay.build/Debug-iphoneos/We all pay.build/Objects-normal/arm64/SideMenuTransitioner~partial.swiftmodule"
+  },
+  "/Users/markcornelisse/Developer/Apps/going-dutch/Going Dutch/Miscellaneous/TextInputValidator.swift" : {
+    "const-values" : "/Users/markcornelisse/Developer/Apps/going-dutch/build/We all pay.build/Debug-iphoneos/We all pay.build/Objects-normal/arm64/TextInputValidator.swiftconstvalues",
+    "dependencies" : "/Users/markcornelisse/Developer/Apps/going-dutch/build/We all pay.build/Debug-iphoneos/We all pay.build/Objects-normal/arm64/TextInputValidator.d",
+    "diagnostics" : "/Users/markcornelisse/Developer/Apps/going-dutch/build/We all pay.build/Debug-iphoneos/We all pay.build/Objects-normal/arm64/TextInputValidator.dia",
+    "index-unit-output-path" : "/We all pay.build/Debug-iphoneos/We all pay.build/Objects-normal/arm64/TextInputValidator.o",
+    "llvm-bc" : "/Users/markcornelisse/Developer/Apps/going-dutch/build/We all pay.build/Debug-iphoneos/We all pay.build/Objects-normal/arm64/TextInputValidator.bc",
+    "object" : "/Users/markcornelisse/Developer/Apps/going-dutch/build/We all pay.build/Debug-iphoneos/We all pay.build/Objects-normal/arm64/TextInputValidator.o",
+    "swift-dependencies" : "/Users/markcornelisse/Developer/Apps/going-dutch/build/We all pay.build/Debug-iphoneos/We all pay.build/Objects-normal/arm64/TextInputValidator.swiftdeps",
+    "swiftmodule" : "/Users/markcornelisse/Developer/Apps/going-dutch/build/We all pay.build/Debug-iphoneos/We all pay.build/Objects-normal/arm64/TextInputValidator~partial.swiftmodule"
+  },
+  "/Users/markcornelisse/Developer/Apps/going-dutch/Going Dutch/Miscellaneous/UIViewControllerExtension.swift" : {
+    "const-values" : "/Users/markcornelisse/Developer/Apps/going-dutch/build/We all pay.build/Debug-iphoneos/We all pay.build/Objects-normal/arm64/UIViewControllerExtension.swiftconstvalues",
+    "dependencies" : "/Users/markcornelisse/Developer/Apps/going-dutch/build/We all pay.build/Debug-iphoneos/We all pay.build/Objects-normal/arm64/UIViewControllerExtension.d",
+    "diagnostics" : "/Users/markcornelisse/Developer/Apps/going-dutch/build/We all pay.build/Debug-iphoneos/We all pay.build/Objects-normal/arm64/UIViewControllerExtension.dia",
+    "index-unit-output-path" : "/We all pay.build/Debug-iphoneos/We all pay.build/Objects-normal/arm64/UIViewControllerExtension.o",
+    "llvm-bc" : "/Users/markcornelisse/Developer/Apps/going-dutch/build/We all pay.build/Debug-iphoneos/We all pay.build/Objects-normal/arm64/UIViewControllerExtension.bc",
+    "object" : "/Users/markcornelisse/Developer/Apps/going-dutch/build/We all pay.build/Debug-iphoneos/We all pay.build/Objects-normal/arm64/UIViewControllerExtension.o",
+    "swift-dependencies" : "/Users/markcornelisse/Developer/Apps/going-dutch/build/We all pay.build/Debug-iphoneos/We all pay.build/Objects-normal/arm64/UIViewControllerExtension.swiftdeps",
+    "swiftmodule" : "/Users/markcornelisse/Developer/Apps/going-dutch/build/We all pay.build/Debug-iphoneos/We all pay.build/Objects-normal/arm64/UIViewControllerExtension~partial.swiftmodule"
+  },
+  "/Users/markcornelisse/Developer/Apps/going-dutch/Going Dutch/Miscellaneous/WhoPayingUserDefaultsStoreInterfaceWeAllPayExtension.swift" : {
+    "const-values" : "/Users/markcornelisse/Developer/Apps/going-dutch/build/We all pay.build/Debug-iphoneos/We all pay.build/Objects-normal/arm64/WhoPayingUserDefaultsStoreInterfaceWeAllPayExtension.swiftconstvalues",
+    "dependencies" : "/Users/markcornelisse/Developer/Apps/going-dutch/build/We all pay.build/Debug-iphoneos/We all pay.build/Objects-normal/arm64/WhoPayingUserDefaultsStoreInterfaceWeAllPayExtension.d",
+    "diagnostics" : "/Users/markcornelisse/Developer/Apps/going-dutch/build/We all pay.build/Debug-iphoneos/We all pay.build/Objects-normal/arm64/WhoPayingUserDefaultsStoreInterfaceWeAllPayExtension.dia",
+    "index-unit-output-path" : "/We all pay.build/Debug-iphoneos/We all pay.build/Objects-normal/arm64/WhoPayingUserDefaultsStoreInterfaceWeAllPayExtension.o",
+    "llvm-bc" : "/Users/markcornelisse/Developer/Apps/going-dutch/build/We all pay.build/Debug-iphoneos/We all pay.build/Objects-normal/arm64/WhoPayingUserDefaultsStoreInterfaceWeAllPayExtension.bc",
+    "object" : "/Users/markcornelisse/Developer/Apps/going-dutch/build/We all pay.build/Debug-iphoneos/We all pay.build/Objects-normal/arm64/WhoPayingUserDefaultsStoreInterfaceWeAllPayExtension.o",
+    "swift-dependencies" : "/Users/markcornelisse/Developer/Apps/going-dutch/build/We all pay.build/Debug-iphoneos/We all pay.build/Objects-normal/arm64/WhoPayingUserDefaultsStoreInterfaceWeAllPayExtension.swiftdeps",
+    "swiftmodule" : "/Users/markcornelisse/Developer/Apps/going-dutch/build/We all pay.build/Debug-iphoneos/We all pay.build/Objects-normal/arm64/WhoPayingUserDefaultsStoreInterfaceWeAllPayExtension~partial.swiftmodule"
+  },
+  "/Users/markcornelisse/Developer/Apps/going-dutch/Going Dutch/MoneyTextInputValidator.swift" : {
+    "const-values" : "/Users/markcornelisse/Developer/Apps/going-dutch/build/We all pay.build/Debug-iphoneos/We all pay.build/Objects-normal/arm64/MoneyTextInputValidator.swiftconstvalues",
+    "dependencies" : "/Users/markcornelisse/Developer/Apps/going-dutch/build/We all pay.build/Debug-iphoneos/We all pay.build/Objects-normal/arm64/MoneyTextInputValidator.d",
+    "diagnostics" : "/Users/markcornelisse/Developer/Apps/going-dutch/build/We all pay.build/Debug-iphoneos/We all pay.build/Objects-normal/arm64/MoneyTextInputValidator.dia",
+    "index-unit-output-path" : "/We all pay.build/Debug-iphoneos/We all pay.build/Objects-normal/arm64/MoneyTextInputValidator.o",
+    "llvm-bc" : "/Users/markcornelisse/Developer/Apps/going-dutch/build/We all pay.build/Debug-iphoneos/We all pay.build/Objects-normal/arm64/MoneyTextInputValidator.bc",
+    "object" : "/Users/markcornelisse/Developer/Apps/going-dutch/build/We all pay.build/Debug-iphoneos/We all pay.build/Objects-normal/arm64/MoneyTextInputValidator.o",
+    "swift-dependencies" : "/Users/markcornelisse/Developer/Apps/going-dutch/build/We all pay.build/Debug-iphoneos/We all pay.build/Objects-normal/arm64/MoneyTextInputValidator.swiftdeps",
+    "swiftmodule" : "/Users/markcornelisse/Developer/Apps/going-dutch/build/We all pay.build/Debug-iphoneos/We all pay.build/Objects-normal/arm64/MoneyTextInputValidator~partial.swiftmodule"
+  },
+  "/Users/markcornelisse/Developer/Apps/going-dutch/Going Dutch/NameTextInputValidator.swift" : {
+    "const-values" : "/Users/markcornelisse/Developer/Apps/going-dutch/build/We all pay.build/Debug-iphoneos/We all pay.build/Objects-normal/arm64/NameTextInputValidator.swiftconstvalues",
+    "dependencies" : "/Users/markcornelisse/Developer/Apps/going-dutch/build/We all pay.build/Debug-iphoneos/We all pay.build/Objects-normal/arm64/NameTextInputValidator.d",
+    "diagnostics" : "/Users/markcornelisse/Developer/Apps/going-dutch/build/We all pay.build/Debug-iphoneos/We all pay.build/Objects-normal/arm64/NameTextInputValidator.dia",
+    "index-unit-output-path" : "/We all pay.build/Debug-iphoneos/We all pay.build/Objects-normal/arm64/NameTextInputValidator.o",
+    "llvm-bc" : "/Users/markcornelisse/Developer/Apps/going-dutch/build/We all pay.build/Debug-iphoneos/We all pay.build/Objects-normal/arm64/NameTextInputValidator.bc",
+    "object" : "/Users/markcornelisse/Developer/Apps/going-dutch/build/We all pay.build/Debug-iphoneos/We all pay.build/Objects-normal/arm64/NameTextInputValidator.o",
+    "swift-dependencies" : "/Users/markcornelisse/Developer/Apps/going-dutch/build/We all pay.build/Debug-iphoneos/We all pay.build/Objects-normal/arm64/NameTextInputValidator.swiftdeps",
+    "swiftmodule" : "/Users/markcornelisse/Developer/Apps/going-dutch/build/We all pay.build/Debug-iphoneos/We all pay.build/Objects-normal/arm64/NameTextInputValidator~partial.swiftmodule"
+  },
+  "/Users/markcornelisse/Developer/Apps/going-dutch/Going Dutch/NavigationViewController.swift" : {
+    "const-values" : "/Users/markcornelisse/Developer/Apps/going-dutch/build/We all pay.build/Debug-iphoneos/We all pay.build/Objects-normal/arm64/NavigationViewController.swiftconstvalues",
+    "dependencies" : "/Users/markcornelisse/Developer/Apps/going-dutch/build/We all pay.build/Debug-iphoneos/We all pay.build/Objects-normal/arm64/NavigationViewController.d",
+    "diagnostics" : "/Users/markcornelisse/Developer/Apps/going-dutch/build/We all pay.build/Debug-iphoneos/We all pay.build/Objects-normal/arm64/NavigationViewController.dia",
+    "index-unit-output-path" : "/We all pay.build/Debug-iphoneos/We all pay.build/Objects-normal/arm64/NavigationViewController.o",
+    "llvm-bc" : "/Users/markcornelisse/Developer/Apps/going-dutch/build/We all pay.build/Debug-iphoneos/We all pay.build/Objects-normal/arm64/NavigationViewController.bc",
+    "object" : "/Users/markcornelisse/Developer/Apps/going-dutch/build/We all pay.build/Debug-iphoneos/We all pay.build/Objects-normal/arm64/NavigationViewController.o",
+    "swift-dependencies" : "/Users/markcornelisse/Developer/Apps/going-dutch/build/We all pay.build/Debug-iphoneos/We all pay.build/Objects-normal/arm64/NavigationViewController.swiftdeps",
+    "swiftmodule" : "/Users/markcornelisse/Developer/Apps/going-dutch/build/We all pay.build/Debug-iphoneos/We all pay.build/Objects-normal/arm64/NavigationViewController~partial.swiftmodule"
+  },
+  "/Users/markcornelisse/Developer/Apps/going-dutch/Going Dutch/NotificationsInfoModel.swift" : {
+    "const-values" : "/Users/markcornelisse/Developer/Apps/going-dutch/build/We all pay.build/Debug-iphoneos/We all pay.build/Objects-normal/arm64/NotificationsInfoModel.swiftconstvalues",
+    "dependencies" : "/Users/markcornelisse/Developer/Apps/going-dutch/build/We all pay.build/Debug-iphoneos/We all pay.build/Objects-normal/arm64/NotificationsInfoModel.d",
+    "diagnostics" : "/Users/markcornelisse/Developer/Apps/going-dutch/build/We all pay.build/Debug-iphoneos/We all pay.build/Objects-normal/arm64/NotificationsInfoModel.dia",
+    "index-unit-output-path" : "/We all pay.build/Debug-iphoneos/We all pay.build/Objects-normal/arm64/NotificationsInfoModel.o",
+    "llvm-bc" : "/Users/markcornelisse/Developer/Apps/going-dutch/build/We all pay.build/Debug-iphoneos/We all pay.build/Objects-normal/arm64/NotificationsInfoModel.bc",
+    "object" : "/Users/markcornelisse/Developer/Apps/going-dutch/build/We all pay.build/Debug-iphoneos/We all pay.build/Objects-normal/arm64/NotificationsInfoModel.o",
+    "swift-dependencies" : "/Users/markcornelisse/Developer/Apps/going-dutch/build/We all pay.build/Debug-iphoneos/We all pay.build/Objects-normal/arm64/NotificationsInfoModel.swiftdeps",
+    "swiftmodule" : "/Users/markcornelisse/Developer/Apps/going-dutch/build/We all pay.build/Debug-iphoneos/We all pay.build/Objects-normal/arm64/NotificationsInfoModel~partial.swiftmodule"
+  },
+  "/Users/markcornelisse/Developer/Apps/going-dutch/Going Dutch/PayerTextInputPicker.swift" : {
+    "const-values" : "/Users/markcornelisse/Developer/Apps/going-dutch/build/We all pay.build/Debug-iphoneos/We all pay.build/Objects-normal/arm64/PayerTextInputPicker.swiftconstvalues",
+    "dependencies" : "/Users/markcornelisse/Developer/Apps/going-dutch/build/We all pay.build/Debug-iphoneos/We all pay.build/Objects-normal/arm64/PayerTextInputPicker.d",
+    "diagnostics" : "/Users/markcornelisse/Developer/Apps/going-dutch/build/We all pay.build/Debug-iphoneos/We all pay.build/Objects-normal/arm64/PayerTextInputPicker.dia",
+    "index-unit-output-path" : "/We all pay.build/Debug-iphoneos/We all pay.build/Objects-normal/arm64/PayerTextInputPicker.o",
+    "llvm-bc" : "/Users/markcornelisse/Developer/Apps/going-dutch/build/We all pay.build/Debug-iphoneos/We all pay.build/Objects-normal/arm64/PayerTextInputPicker.bc",
+    "object" : "/Users/markcornelisse/Developer/Apps/going-dutch/build/We all pay.build/Debug-iphoneos/We all pay.build/Objects-normal/arm64/PayerTextInputPicker.o",
+    "swift-dependencies" : "/Users/markcornelisse/Developer/Apps/going-dutch/build/We all pay.build/Debug-iphoneos/We all pay.build/Objects-normal/arm64/PayerTextInputPicker.swiftdeps",
+    "swiftmodule" : "/Users/markcornelisse/Developer/Apps/going-dutch/build/We all pay.build/Debug-iphoneos/We all pay.build/Objects-normal/arm64/PayerTextInputPicker~partial.swiftmodule"
+  },
+  "/Users/markcornelisse/Developer/Apps/going-dutch/Going Dutch/PaymentModel.swift" : {
+    "const-values" : "/Users/markcornelisse/Developer/Apps/going-dutch/build/We all pay.build/Debug-iphoneos/We all pay.build/Objects-normal/arm64/PaymentModel.swiftconstvalues",
+    "dependencies" : "/Users/markcornelisse/Developer/Apps/going-dutch/build/We all pay.build/Debug-iphoneos/We all pay.build/Objects-normal/arm64/PaymentModel.d",
+    "diagnostics" : "/Users/markcornelisse/Developer/Apps/going-dutch/build/We all pay.build/Debug-iphoneos/We all pay.build/Objects-normal/arm64/PaymentModel.dia",
+    "index-unit-output-path" : "/We all pay.build/Debug-iphoneos/We all pay.build/Objects-normal/arm64/PaymentModel.o",
+    "llvm-bc" : "/Users/markcornelisse/Developer/Apps/going-dutch/build/We all pay.build/Debug-iphoneos/We all pay.build/Objects-normal/arm64/PaymentModel.bc",
+    "object" : "/Users/markcornelisse/Developer/Apps/going-dutch/build/We all pay.build/Debug-iphoneos/We all pay.build/Objects-normal/arm64/PaymentModel.o",
+    "swift-dependencies" : "/Users/markcornelisse/Developer/Apps/going-dutch/build/We all pay.build/Debug-iphoneos/We all pay.build/Objects-normal/arm64/PaymentModel.swiftdeps",
+    "swiftmodule" : "/Users/markcornelisse/Developer/Apps/going-dutch/build/We all pay.build/Debug-iphoneos/We all pay.build/Objects-normal/arm64/PaymentModel~partial.swiftmodule"
+  },
+  "/Users/markcornelisse/Developer/Apps/going-dutch/Going Dutch/PaymentNavigationController.swift" : {
+    "const-values" : "/Users/markcornelisse/Developer/Apps/going-dutch/build/We all pay.build/Debug-iphoneos/We all pay.build/Objects-normal/arm64/PaymentNavigationController.swiftconstvalues",
+    "dependencies" : "/Users/markcornelisse/Developer/Apps/going-dutch/build/We all pay.build/Debug-iphoneos/We all pay.build/Objects-normal/arm64/PaymentNavigationController.d",
+    "diagnostics" : "/Users/markcornelisse/Developer/Apps/going-dutch/build/We all pay.build/Debug-iphoneos/We all pay.build/Objects-normal/arm64/PaymentNavigationController.dia",
+    "index-unit-output-path" : "/We all pay.build/Debug-iphoneos/We all pay.build/Objects-normal/arm64/PaymentNavigationController.o",
+    "llvm-bc" : "/Users/markcornelisse/Developer/Apps/going-dutch/build/We all pay.build/Debug-iphoneos/We all pay.build/Objects-normal/arm64/PaymentNavigationController.bc",
+    "object" : "/Users/markcornelisse/Developer/Apps/going-dutch/build/We all pay.build/Debug-iphoneos/We all pay.build/Objects-normal/arm64/PaymentNavigationController.o",
+    "swift-dependencies" : "/Users/markcornelisse/Developer/Apps/going-dutch/build/We all pay.build/Debug-iphoneos/We all pay.build/Objects-normal/arm64/PaymentNavigationController.swiftdeps",
+    "swiftmodule" : "/Users/markcornelisse/Developer/Apps/going-dutch/build/We all pay.build/Debug-iphoneos/We all pay.build/Objects-normal/arm64/PaymentNavigationController~partial.swiftmodule"
+  },
+  "/Users/markcornelisse/Developer/Apps/going-dutch/Going Dutch/PaymentStateModelProtocol.swift" : {
+    "const-values" : "/Users/markcornelisse/Developer/Apps/going-dutch/build/We all pay.build/Debug-iphoneos/We all pay.build/Objects-normal/arm64/PaymentStateModelProtocol.swiftconstvalues",
+    "dependencies" : "/Users/markcornelisse/Developer/Apps/going-dutch/build/We all pay.build/Debug-iphoneos/We all pay.build/Objects-normal/arm64/PaymentStateModelProtocol.d",
+    "diagnostics" : "/Users/markcornelisse/Developer/Apps/going-dutch/build/We all pay.build/Debug-iphoneos/We all pay.build/Objects-normal/arm64/PaymentStateModelProtocol.dia",
+    "index-unit-output-path" : "/We all pay.build/Debug-iphoneos/We all pay.build/Objects-normal/arm64/PaymentStateModelProtocol.o",
+    "llvm-bc" : "/Users/markcornelisse/Developer/Apps/going-dutch/build/We all pay.build/Debug-iphoneos/We all pay.build/Objects-normal/arm64/PaymentStateModelProtocol.bc",
+    "object" : "/Users/markcornelisse/Developer/Apps/going-dutch/build/We all pay.build/Debug-iphoneos/We all pay.build/Objects-normal/arm64/PaymentStateModelProtocol.o",
+    "swift-dependencies" : "/Users/markcornelisse/Developer/Apps/going-dutch/build/We all pay.build/Debug-iphoneos/We all pay.build/Objects-normal/arm64/PaymentStateModelProtocol.swiftdeps",
+    "swiftmodule" : "/Users/markcornelisse/Developer/Apps/going-dutch/build/We all pay.build/Debug-iphoneos/We all pay.build/Objects-normal/arm64/PaymentStateModelProtocol~partial.swiftmodule"
+  },
+  "/Users/markcornelisse/Developer/Apps/going-dutch/Going Dutch/PaymentViewController.swift" : {
+    "const-values" : "/Users/markcornelisse/Developer/Apps/going-dutch/build/We all pay.build/Debug-iphoneos/We all pay.build/Objects-normal/arm64/PaymentViewController.swiftconstvalues",
+    "dependencies" : "/Users/markcornelisse/Developer/Apps/going-dutch/build/We all pay.build/Debug-iphoneos/We all pay.build/Objects-normal/arm64/PaymentViewController.d",
+    "diagnostics" : "/Users/markcornelisse/Developer/Apps/going-dutch/build/We all pay.build/Debug-iphoneos/We all pay.build/Objects-normal/arm64/PaymentViewController.dia",
+    "index-unit-output-path" : "/We all pay.build/Debug-iphoneos/We all pay.build/Objects-normal/arm64/PaymentViewController.o",
+    "llvm-bc" : "/Users/markcornelisse/Developer/Apps/going-dutch/build/We all pay.build/Debug-iphoneos/We all pay.build/Objects-normal/arm64/PaymentViewController.bc",
+    "object" : "/Users/markcornelisse/Developer/Apps/going-dutch/build/We all pay.build/Debug-iphoneos/We all pay.build/Objects-normal/arm64/PaymentViewController.o",
+    "swift-dependencies" : "/Users/markcornelisse/Developer/Apps/going-dutch/build/We all pay.build/Debug-iphoneos/We all pay.build/Objects-normal/arm64/PaymentViewController.swiftdeps",
+    "swiftmodule" : "/Users/markcornelisse/Developer/Apps/going-dutch/build/We all pay.build/Debug-iphoneos/We all pay.build/Objects-normal/arm64/PaymentViewController~partial.swiftmodule"
+  },
+  "/Users/markcornelisse/Developer/Apps/going-dutch/Going Dutch/PersonModel.swift" : {
+    "const-values" : "/Users/markcornelisse/Developer/Apps/going-dutch/build/We all pay.build/Debug-iphoneos/We all pay.build/Objects-normal/arm64/PersonModel.swiftconstvalues",
+    "dependencies" : "/Users/markcornelisse/Developer/Apps/going-dutch/build/We all pay.build/Debug-iphoneos/We all pay.build/Objects-normal/arm64/PersonModel.d",
+    "diagnostics" : "/Users/markcornelisse/Developer/Apps/going-dutch/build/We all pay.build/Debug-iphoneos/We all pay.build/Objects-normal/arm64/PersonModel.dia",
+    "index-unit-output-path" : "/We all pay.build/Debug-iphoneos/We all pay.build/Objects-normal/arm64/PersonModel.o",
+    "llvm-bc" : "/Users/markcornelisse/Developer/Apps/going-dutch/build/We all pay.build/Debug-iphoneos/We all pay.build/Objects-normal/arm64/PersonModel.bc",
+    "object" : "/Users/markcornelisse/Developer/Apps/going-dutch/build/We all pay.build/Debug-iphoneos/We all pay.build/Objects-normal/arm64/PersonModel.o",
+    "swift-dependencies" : "/Users/markcornelisse/Developer/Apps/going-dutch/build/We all pay.build/Debug-iphoneos/We all pay.build/Objects-normal/arm64/PersonModel.swiftdeps",
+    "swiftmodule" : "/Users/markcornelisse/Developer/Apps/going-dutch/build/We all pay.build/Debug-iphoneos/We all pay.build/Objects-normal/arm64/PersonModel~partial.swiftmodule"
+  },
+  "/Users/markcornelisse/Developer/Apps/going-dutch/Going Dutch/RateMeControllerExtension.swift" : {
+    "const-values" : "/Users/markcornelisse/Developer/Apps/going-dutch/build/We all pay.build/Debug-iphoneos/We all pay.build/Objects-normal/arm64/RateMeControllerExtension.swiftconstvalues",
+    "dependencies" : "/Users/markcornelisse/Developer/Apps/going-dutch/build/We all pay.build/Debug-iphoneos/We all pay.build/Objects-normal/arm64/RateMeControllerExtension.d",
+    "diagnostics" : "/Users/markcornelisse/Developer/Apps/going-dutch/build/We all pay.build/Debug-iphoneos/We all pay.build/Objects-normal/arm64/RateMeControllerExtension.dia",
+    "index-unit-output-path" : "/We all pay.build/Debug-iphoneos/We all pay.build/Objects-normal/arm64/RateMeControllerExtension.o",
+    "llvm-bc" : "/Users/markcornelisse/Developer/Apps/going-dutch/build/We all pay.build/Debug-iphoneos/We all pay.build/Objects-normal/arm64/RateMeControllerExtension.bc",
+    "object" : "/Users/markcornelisse/Developer/Apps/going-dutch/build/We all pay.build/Debug-iphoneos/We all pay.build/Objects-normal/arm64/RateMeControllerExtension.o",
+    "swift-dependencies" : "/Users/markcornelisse/Developer/Apps/going-dutch/build/We all pay.build/Debug-iphoneos/We all pay.build/Objects-normal/arm64/RateMeControllerExtension.swiftdeps",
+    "swiftmodule" : "/Users/markcornelisse/Developer/Apps/going-dutch/build/We all pay.build/Debug-iphoneos/We all pay.build/Objects-normal/arm64/RateMeControllerExtension~partial.swiftmodule"
+  },
+  "/Users/markcornelisse/Developer/Apps/going-dutch/Going Dutch/RemoteConfigEngine.swift" : {
+    "const-values" : "/Users/markcornelisse/Developer/Apps/going-dutch/build/We all pay.build/Debug-iphoneos/We all pay.build/Objects-normal/arm64/RemoteConfigEngine.swiftconstvalues",
+    "dependencies" : "/Users/markcornelisse/Developer/Apps/going-dutch/build/We all pay.build/Debug-iphoneos/We all pay.build/Objects-normal/arm64/RemoteConfigEngine.d",
+    "diagnostics" : "/Users/markcornelisse/Developer/Apps/going-dutch/build/We all pay.build/Debug-iphoneos/We all pay.build/Objects-normal/arm64/RemoteConfigEngine.dia",
+    "index-unit-output-path" : "/We all pay.build/Debug-iphoneos/We all pay.build/Objects-normal/arm64/RemoteConfigEngine.o",
+    "llvm-bc" : "/Users/markcornelisse/Developer/Apps/going-dutch/build/We all pay.build/Debug-iphoneos/We all pay.build/Objects-normal/arm64/RemoteConfigEngine.bc",
+    "object" : "/Users/markcornelisse/Developer/Apps/going-dutch/build/We all pay.build/Debug-iphoneos/We all pay.build/Objects-normal/arm64/RemoteConfigEngine.o",
+    "swift-dependencies" : "/Users/markcornelisse/Developer/Apps/going-dutch/build/We all pay.build/Debug-iphoneos/We all pay.build/Objects-normal/arm64/RemoteConfigEngine.swiftdeps",
+    "swiftmodule" : "/Users/markcornelisse/Developer/Apps/going-dutch/build/We all pay.build/Debug-iphoneos/We all pay.build/Objects-normal/arm64/RemoteConfigEngine~partial.swiftmodule"
+  },
+  "/Users/markcornelisse/Developer/Apps/going-dutch/Going Dutch/ScreenshotPopulationEngine.swift" : {
+    "const-values" : "/Users/markcornelisse/Developer/Apps/going-dutch/build/We all pay.build/Debug-iphoneos/We all pay.build/Objects-normal/arm64/ScreenshotPopulationEngine.swiftconstvalues",
+    "dependencies" : "/Users/markcornelisse/Developer/Apps/going-dutch/build/We all pay.build/Debug-iphoneos/We all pay.build/Objects-normal/arm64/ScreenshotPopulationEngine.d",
+    "diagnostics" : "/Users/markcornelisse/Developer/Apps/going-dutch/build/We all pay.build/Debug-iphoneos/We all pay.build/Objects-normal/arm64/ScreenshotPopulationEngine.dia",
+    "index-unit-output-path" : "/We all pay.build/Debug-iphoneos/We all pay.build/Objects-normal/arm64/ScreenshotPopulationEngine.o",
+    "llvm-bc" : "/Users/markcornelisse/Developer/Apps/going-dutch/build/We all pay.build/Debug-iphoneos/We all pay.build/Objects-normal/arm64/ScreenshotPopulationEngine.bc",
+    "object" : "/Users/markcornelisse/Developer/Apps/going-dutch/build/We all pay.build/Debug-iphoneos/We all pay.build/Objects-normal/arm64/ScreenshotPopulationEngine.o",
+    "swift-dependencies" : "/Users/markcornelisse/Developer/Apps/going-dutch/build/We all pay.build/Debug-iphoneos/We all pay.build/Objects-normal/arm64/ScreenshotPopulationEngine.swiftdeps",
+    "swiftmodule" : "/Users/markcornelisse/Developer/Apps/going-dutch/build/We all pay.build/Debug-iphoneos/We all pay.build/Objects-normal/arm64/ScreenshotPopulationEngine~partial.swiftmodule"
+  },
+  "/Users/markcornelisse/Developer/Apps/going-dutch/Going Dutch/ScrollViewAdjusterToKeyboard.swift" : {
+    "const-values" : "/Users/markcornelisse/Developer/Apps/going-dutch/build/We all pay.build/Debug-iphoneos/We all pay.build/Objects-normal/arm64/ScrollViewAdjusterToKeyboard.swiftconstvalues",
+    "dependencies" : "/Users/markcornelisse/Developer/Apps/going-dutch/build/We all pay.build/Debug-iphoneos/We all pay.build/Objects-normal/arm64/ScrollViewAdjusterToKeyboard.d",
+    "diagnostics" : "/Users/markcornelisse/Developer/Apps/going-dutch/build/We all pay.build/Debug-iphoneos/We all pay.build/Objects-normal/arm64/ScrollViewAdjusterToKeyboard.dia",
+    "index-unit-output-path" : "/We all pay.build/Debug-iphoneos/We all pay.build/Objects-normal/arm64/ScrollViewAdjusterToKeyboard.o",
+    "llvm-bc" : "/Users/markcornelisse/Developer/Apps/going-dutch/build/We all pay.build/Debug-iphoneos/We all pay.build/Objects-normal/arm64/ScrollViewAdjusterToKeyboard.bc",
+    "object" : "/Users/markcornelisse/Developer/Apps/going-dutch/build/We all pay.build/Debug-iphoneos/We all pay.build/Objects-normal/arm64/ScrollViewAdjusterToKeyboard.o",
+    "swift-dependencies" : "/Users/markcornelisse/Developer/Apps/going-dutch/build/We all pay.build/Debug-iphoneos/We all pay.build/Objects-normal/arm64/ScrollViewAdjusterToKeyboard.swiftdeps",
+    "swiftmodule" : "/Users/markcornelisse/Developer/Apps/going-dutch/build/We all pay.build/Debug-iphoneos/We all pay.build/Objects-normal/arm64/ScrollViewAdjusterToKeyboard~partial.swiftmodule"
+  },
+  "/Users/markcornelisse/Developer/Apps/going-dutch/Going Dutch/SelectCategoryTableViewCell_iPad.swift" : {
+    "const-values" : "/Users/markcornelisse/Developer/Apps/going-dutch/build/We all pay.build/Debug-iphoneos/We all pay.build/Objects-normal/arm64/SelectCategoryTableViewCell_iPad.swiftconstvalues",
+    "dependencies" : "/Users/markcornelisse/Developer/Apps/going-dutch/build/We all pay.build/Debug-iphoneos/We all pay.build/Objects-normal/arm64/SelectCategoryTableViewCell_iPad.d",
+    "diagnostics" : "/Users/markcornelisse/Developer/Apps/going-dutch/build/We all pay.build/Debug-iphoneos/We all pay.build/Objects-normal/arm64/SelectCategoryTableViewCell_iPad.dia",
+    "index-unit-output-path" : "/We all pay.build/Debug-iphoneos/We all pay.build/Objects-normal/arm64/SelectCategoryTableViewCell_iPad.o",
+    "llvm-bc" : "/Users/markcornelisse/Developer/Apps/going-dutch/build/We all pay.build/Debug-iphoneos/We all pay.build/Objects-normal/arm64/SelectCategoryTableViewCell_iPad.bc",
+    "object" : "/Users/markcornelisse/Developer/Apps/going-dutch/build/We all pay.build/Debug-iphoneos/We all pay.build/Objects-normal/arm64/SelectCategoryTableViewCell_iPad.o",
+    "swift-dependencies" : "/Users/markcornelisse/Developer/Apps/going-dutch/build/We all pay.build/Debug-iphoneos/We all pay.build/Objects-normal/arm64/SelectCategoryTableViewCell_iPad.swiftdeps",
+    "swiftmodule" : "/Users/markcornelisse/Developer/Apps/going-dutch/build/We all pay.build/Debug-iphoneos/We all pay.build/Objects-normal/arm64/SelectCategoryTableViewCell_iPad~partial.swiftmodule"
+  },
+  "/Users/markcornelisse/Developer/Apps/going-dutch/Going Dutch/SelectCategoryTableViewController.swift" : {
+    "const-values" : "/Users/markcornelisse/Developer/Apps/going-dutch/build/We all pay.build/Debug-iphoneos/We all pay.build/Objects-normal/arm64/SelectCategoryTableViewController.swiftconstvalues",
+    "dependencies" : "/Users/markcornelisse/Developer/Apps/going-dutch/build/We all pay.build/Debug-iphoneos/We all pay.build/Objects-normal/arm64/SelectCategoryTableViewController.d",
+    "diagnostics" : "/Users/markcornelisse/Developer/Apps/going-dutch/build/We all pay.build/Debug-iphoneos/We all pay.build/Objects-normal/arm64/SelectCategoryTableViewController.dia",
+    "index-unit-output-path" : "/We all pay.build/Debug-iphoneos/We all pay.build/Objects-normal/arm64/SelectCategoryTableViewController.o",
+    "llvm-bc" : "/Users/markcornelisse/Developer/Apps/going-dutch/build/We all pay.build/Debug-iphoneos/We all pay.build/Objects-normal/arm64/SelectCategoryTableViewController.bc",
+    "object" : "/Users/markcornelisse/Developer/Apps/going-dutch/build/We all pay.build/Debug-iphoneos/We all pay.build/Objects-normal/arm64/SelectCategoryTableViewController.o",
+    "swift-dependencies" : "/Users/markcornelisse/Developer/Apps/going-dutch/build/We all pay.build/Debug-iphoneos/We all pay.build/Objects-normal/arm64/SelectCategoryTableViewController.swiftdeps",
+    "swiftmodule" : "/Users/markcornelisse/Developer/Apps/going-dutch/build/We all pay.build/Debug-iphoneos/We all pay.build/Objects-normal/arm64/SelectCategoryTableViewController~partial.swiftmodule"
+  },
+  "/Users/markcornelisse/Developer/Apps/going-dutch/Going Dutch/SelectCurrencyTableViewCell_iPad.swift" : {
+    "const-values" : "/Users/markcornelisse/Developer/Apps/going-dutch/build/We all pay.build/Debug-iphoneos/We all pay.build/Objects-normal/arm64/SelectCurrencyTableViewCell_iPad.swiftconstvalues",
+    "dependencies" : "/Users/markcornelisse/Developer/Apps/going-dutch/build/We all pay.build/Debug-iphoneos/We all pay.build/Objects-normal/arm64/SelectCurrencyTableViewCell_iPad.d",
+    "diagnostics" : "/Users/markcornelisse/Developer/Apps/going-dutch/build/We all pay.build/Debug-iphoneos/We all pay.build/Objects-normal/arm64/SelectCurrencyTableViewCell_iPad.dia",
+    "index-unit-output-path" : "/We all pay.build/Debug-iphoneos/We all pay.build/Objects-normal/arm64/SelectCurrencyTableViewCell_iPad.o",
+    "llvm-bc" : "/Users/markcornelisse/Developer/Apps/going-dutch/build/We all pay.build/Debug-iphoneos/We all pay.build/Objects-normal/arm64/SelectCurrencyTableViewCell_iPad.bc",
+    "object" : "/Users/markcornelisse/Developer/Apps/going-dutch/build/We all pay.build/Debug-iphoneos/We all pay.build/Objects-normal/arm64/SelectCurrencyTableViewCell_iPad.o",
+    "swift-dependencies" : "/Users/markcornelisse/Developer/Apps/going-dutch/build/We all pay.build/Debug-iphoneos/We all pay.build/Objects-normal/arm64/SelectCurrencyTableViewCell_iPad.swiftdeps",
+    "swiftmodule" : "/Users/markcornelisse/Developer/Apps/going-dutch/build/We all pay.build/Debug-iphoneos/We all pay.build/Objects-normal/arm64/SelectCurrencyTableViewCell_iPad~partial.swiftmodule"
+  },
+  "/Users/markcornelisse/Developer/Apps/going-dutch/Going Dutch/SelectCurrencyTableViewController.swift" : {
+    "const-values" : "/Users/markcornelisse/Developer/Apps/going-dutch/build/We all pay.build/Debug-iphoneos/We all pay.build/Objects-normal/arm64/SelectCurrencyTableViewController.swiftconstvalues",
+    "dependencies" : "/Users/markcornelisse/Developer/Apps/going-dutch/build/We all pay.build/Debug-iphoneos/We all pay.build/Objects-normal/arm64/SelectCurrencyTableViewController.d",
+    "diagnostics" : "/Users/markcornelisse/Developer/Apps/going-dutch/build/We all pay.build/Debug-iphoneos/We all pay.build/Objects-normal/arm64/SelectCurrencyTableViewController.dia",
+    "index-unit-output-path" : "/We all pay.build/Debug-iphoneos/We all pay.build/Objects-normal/arm64/SelectCurrencyTableViewController.o",
+    "llvm-bc" : "/Users/markcornelisse/Developer/Apps/going-dutch/build/We all pay.build/Debug-iphoneos/We all pay.build/Objects-normal/arm64/SelectCurrencyTableViewController.bc",
+    "object" : "/Users/markcornelisse/Developer/Apps/going-dutch/build/We all pay.build/Debug-iphoneos/We all pay.build/Objects-normal/arm64/SelectCurrencyTableViewController.o",
+    "swift-dependencies" : "/Users/markcornelisse/Developer/Apps/going-dutch/build/We all pay.build/Debug-iphoneos/We all pay.build/Objects-normal/arm64/SelectCurrencyTableViewController.swiftdeps",
+    "swiftmodule" : "/Users/markcornelisse/Developer/Apps/going-dutch/build/We all pay.build/Debug-iphoneos/We all pay.build/Objects-normal/arm64/SelectCurrencyTableViewController~partial.swiftmodule"
+  },
+  "/Users/markcornelisse/Developer/Apps/going-dutch/Going Dutch/SelectEmailAddressTableViewCell_iPad.swift" : {
+    "const-values" : "/Users/markcornelisse/Developer/Apps/going-dutch/build/We all pay.build/Debug-iphoneos/We all pay.build/Objects-normal/arm64/SelectEmailAddressTableViewCell_iPad.swiftconstvalues",
+    "dependencies" : "/Users/markcornelisse/Developer/Apps/going-dutch/build/We all pay.build/Debug-iphoneos/We all pay.build/Objects-normal/arm64/SelectEmailAddressTableViewCell_iPad.d",
+    "diagnostics" : "/Users/markcornelisse/Developer/Apps/going-dutch/build/We all pay.build/Debug-iphoneos/We all pay.build/Objects-normal/arm64/SelectEmailAddressTableViewCell_iPad.dia",
+    "index-unit-output-path" : "/We all pay.build/Debug-iphoneos/We all pay.build/Objects-normal/arm64/SelectEmailAddressTableViewCell_iPad.o",
+    "llvm-bc" : "/Users/markcornelisse/Developer/Apps/going-dutch/build/We all pay.build/Debug-iphoneos/We all pay.build/Objects-normal/arm64/SelectEmailAddressTableViewCell_iPad.bc",
+    "object" : "/Users/markcornelisse/Developer/Apps/going-dutch/build/We all pay.build/Debug-iphoneos/We all pay.build/Objects-normal/arm64/SelectEmailAddressTableViewCell_iPad.o",
+    "swift-dependencies" : "/Users/markcornelisse/Developer/Apps/going-dutch/build/We all pay.build/Debug-iphoneos/We all pay.build/Objects-normal/arm64/SelectEmailAddressTableViewCell_iPad.swiftdeps",
+    "swiftmodule" : "/Users/markcornelisse/Developer/Apps/going-dutch/build/We all pay.build/Debug-iphoneos/We all pay.build/Objects-normal/arm64/SelectEmailAddressTableViewCell_iPad~partial.swiftmodule"
+  },
+  "/Users/markcornelisse/Developer/Apps/going-dutch/Going Dutch/SelectEmailAddressTableViewController_iPad.swift" : {
+    "const-values" : "/Users/markcornelisse/Developer/Apps/going-dutch/build/We all pay.build/Debug-iphoneos/We all pay.build/Objects-normal/arm64/SelectEmailAddressTableViewController_iPad.swiftconstvalues",
+    "dependencies" : "/Users/markcornelisse/Developer/Apps/going-dutch/build/We all pay.build/Debug-iphoneos/We all pay.build/Objects-normal/arm64/SelectEmailAddressTableViewController_iPad.d",
+    "diagnostics" : "/Users/markcornelisse/Developer/Apps/going-dutch/build/We all pay.build/Debug-iphoneos/We all pay.build/Objects-normal/arm64/SelectEmailAddressTableViewController_iPad.dia",
+    "index-unit-output-path" : "/We all pay.build/Debug-iphoneos/We all pay.build/Objects-normal/arm64/SelectEmailAddressTableViewController_iPad.o",
+    "llvm-bc" : "/Users/markcornelisse/Developer/Apps/going-dutch/build/We all pay.build/Debug-iphoneos/We all pay.build/Objects-normal/arm64/SelectEmailAddressTableViewController_iPad.bc",
+    "object" : "/Users/markcornelisse/Developer/Apps/going-dutch/build/We all pay.build/Debug-iphoneos/We all pay.build/Objects-normal/arm64/SelectEmailAddressTableViewController_iPad.o",
+    "swift-dependencies" : "/Users/markcornelisse/Developer/Apps/going-dutch/build/We all pay.build/Debug-iphoneos/We all pay.build/Objects-normal/arm64/SelectEmailAddressTableViewController_iPad.swiftdeps",
+    "swiftmodule" : "/Users/markcornelisse/Developer/Apps/going-dutch/build/We all pay.build/Debug-iphoneos/We all pay.build/Objects-normal/arm64/SelectEmailAddressTableViewController_iPad~partial.swiftmodule"
+  },
+  "/Users/markcornelisse/Developer/Apps/going-dutch/Going Dutch/SelectPayerTableViewCell_iPad.swift" : {
+    "const-values" : "/Users/markcornelisse/Developer/Apps/going-dutch/build/We all pay.build/Debug-iphoneos/We all pay.build/Objects-normal/arm64/SelectPayerTableViewCell_iPad.swiftconstvalues",
+    "dependencies" : "/Users/markcornelisse/Developer/Apps/going-dutch/build/We all pay.build/Debug-iphoneos/We all pay.build/Objects-normal/arm64/SelectPayerTableViewCell_iPad.d",
+    "diagnostics" : "/Users/markcornelisse/Developer/Apps/going-dutch/build/We all pay.build/Debug-iphoneos/We all pay.build/Objects-normal/arm64/SelectPayerTableViewCell_iPad.dia",
+    "index-unit-output-path" : "/We all pay.build/Debug-iphoneos/We all pay.build/Objects-normal/arm64/SelectPayerTableViewCell_iPad.o",
+    "llvm-bc" : "/Users/markcornelisse/Developer/Apps/going-dutch/build/We all pay.build/Debug-iphoneos/We all pay.build/Objects-normal/arm64/SelectPayerTableViewCell_iPad.bc",
+    "object" : "/Users/markcornelisse/Developer/Apps/going-dutch/build/We all pay.build/Debug-iphoneos/We all pay.build/Objects-normal/arm64/SelectPayerTableViewCell_iPad.o",
+    "swift-dependencies" : "/Users/markcornelisse/Developer/Apps/going-dutch/build/We all pay.build/Debug-iphoneos/We all pay.build/Objects-normal/arm64/SelectPayerTableViewCell_iPad.swiftdeps",
+    "swiftmodule" : "/Users/markcornelisse/Developer/Apps/going-dutch/build/We all pay.build/Debug-iphoneos/We all pay.build/Objects-normal/arm64/SelectPayerTableViewCell_iPad~partial.swiftmodule"
+  },
+  "/Users/markcornelisse/Developer/Apps/going-dutch/Going Dutch/SelectPayerTableViewController_iPad.swift" : {
+    "const-values" : "/Users/markcornelisse/Developer/Apps/going-dutch/build/We all pay.build/Debug-iphoneos/We all pay.build/Objects-normal/arm64/SelectPayerTableViewController_iPad.swiftconstvalues",
+    "dependencies" : "/Users/markcornelisse/Developer/Apps/going-dutch/build/We all pay.build/Debug-iphoneos/We all pay.build/Objects-normal/arm64/SelectPayerTableViewController_iPad.d",
+    "diagnostics" : "/Users/markcornelisse/Developer/Apps/going-dutch/build/We all pay.build/Debug-iphoneos/We all pay.build/Objects-normal/arm64/SelectPayerTableViewController_iPad.dia",
+    "index-unit-output-path" : "/We all pay.build/Debug-iphoneos/We all pay.build/Objects-normal/arm64/SelectPayerTableViewController_iPad.o",
+    "llvm-bc" : "/Users/markcornelisse/Developer/Apps/going-dutch/build/We all pay.build/Debug-iphoneos/We all pay.build/Objects-normal/arm64/SelectPayerTableViewController_iPad.bc",
+    "object" : "/Users/markcornelisse/Developer/Apps/going-dutch/build/We all pay.build/Debug-iphoneos/We all pay.build/Objects-normal/arm64/SelectPayerTableViewController_iPad.o",
+    "swift-dependencies" : "/Users/markcornelisse/Developer/Apps/going-dutch/build/We all pay.build/Debug-iphoneos/We all pay.build/Objects-normal/arm64/SelectPayerTableViewController_iPad.swiftdeps",
+    "swiftmodule" : "/Users/markcornelisse/Developer/Apps/going-dutch/build/We all pay.build/Debug-iphoneos/We all pay.build/Objects-normal/arm64/SelectPayerTableViewController_iPad~partial.swiftmodule"
+  },
+  "/Users/markcornelisse/Developer/Apps/going-dutch/Going Dutch/SolutionItemTableViewCell.swift" : {
+    "const-values" : "/Users/markcornelisse/Developer/Apps/going-dutch/build/We all pay.build/Debug-iphoneos/We all pay.build/Objects-normal/arm64/SolutionItemTableViewCell.swiftconstvalues",
+    "dependencies" : "/Users/markcornelisse/Developer/Apps/going-dutch/build/We all pay.build/Debug-iphoneos/We all pay.build/Objects-normal/arm64/SolutionItemTableViewCell.d",
+    "diagnostics" : "/Users/markcornelisse/Developer/Apps/going-dutch/build/We all pay.build/Debug-iphoneos/We all pay.build/Objects-normal/arm64/SolutionItemTableViewCell.dia",
+    "index-unit-output-path" : "/We all pay.build/Debug-iphoneos/We all pay.build/Objects-normal/arm64/SolutionItemTableViewCell.o",
+    "llvm-bc" : "/Users/markcornelisse/Developer/Apps/going-dutch/build/We all pay.build/Debug-iphoneos/We all pay.build/Objects-normal/arm64/SolutionItemTableViewCell.bc",
+    "object" : "/Users/markcornelisse/Developer/Apps/going-dutch/build/We all pay.build/Debug-iphoneos/We all pay.build/Objects-normal/arm64/SolutionItemTableViewCell.o",
+    "swift-dependencies" : "/Users/markcornelisse/Developer/Apps/going-dutch/build/We all pay.build/Debug-iphoneos/We all pay.build/Objects-normal/arm64/SolutionItemTableViewCell.swiftdeps",
+    "swiftmodule" : "/Users/markcornelisse/Developer/Apps/going-dutch/build/We all pay.build/Debug-iphoneos/We all pay.build/Objects-normal/arm64/SolutionItemTableViewCell~partial.swiftmodule"
+  },
+  "/Users/markcornelisse/Developer/Apps/going-dutch/Going Dutch/SolutionModel.swift" : {
+    "const-values" : "/Users/markcornelisse/Developer/Apps/going-dutch/build/We all pay.build/Debug-iphoneos/We all pay.build/Objects-normal/arm64/SolutionModel.swiftconstvalues",
+    "dependencies" : "/Users/markcornelisse/Developer/Apps/going-dutch/build/We all pay.build/Debug-iphoneos/We all pay.build/Objects-normal/arm64/SolutionModel.d",
+    "diagnostics" : "/Users/markcornelisse/Developer/Apps/going-dutch/build/We all pay.build/Debug-iphoneos/We all pay.build/Objects-normal/arm64/SolutionModel.dia",
+    "index-unit-output-path" : "/We all pay.build/Debug-iphoneos/We all pay.build/Objects-normal/arm64/SolutionModel.o",
+    "llvm-bc" : "/Users/markcornelisse/Developer/Apps/going-dutch/build/We all pay.build/Debug-iphoneos/We all pay.build/Objects-normal/arm64/SolutionModel.bc",
+    "object" : "/Users/markcornelisse/Developer/Apps/going-dutch/build/We all pay.build/Debug-iphoneos/We all pay.build/Objects-normal/arm64/SolutionModel.o",
+    "swift-dependencies" : "/Users/markcornelisse/Developer/Apps/going-dutch/build/We all pay.build/Debug-iphoneos/We all pay.build/Objects-normal/arm64/SolutionModel.swiftdeps",
+    "swiftmodule" : "/Users/markcornelisse/Developer/Apps/going-dutch/build/We all pay.build/Debug-iphoneos/We all pay.build/Objects-normal/arm64/SolutionModel~partial.swiftmodule"
+  },
+  "/Users/markcornelisse/Developer/Apps/going-dutch/Going Dutch/SolutionReturnPaymentItem.swift" : {
+    "const-values" : "/Users/markcornelisse/Developer/Apps/going-dutch/build/We all pay.build/Debug-iphoneos/We all pay.build/Objects-normal/arm64/SolutionReturnPaymentItem.swiftconstvalues",
+    "dependencies" : "/Users/markcornelisse/Developer/Apps/going-dutch/build/We all pay.build/Debug-iphoneos/We all pay.build/Objects-normal/arm64/SolutionReturnPaymentItem.d",
+    "diagnostics" : "/Users/markcornelisse/Developer/Apps/going-dutch/build/We all pay.build/Debug-iphoneos/We all pay.build/Objects-normal/arm64/SolutionReturnPaymentItem.dia",
+    "index-unit-output-path" : "/We all pay.build/Debug-iphoneos/We all pay.build/Objects-normal/arm64/SolutionReturnPaymentItem.o",
+    "llvm-bc" : "/Users/markcornelisse/Developer/Apps/going-dutch/build/We all pay.build/Debug-iphoneos/We all pay.build/Objects-normal/arm64/SolutionReturnPaymentItem.bc",
+    "object" : "/Users/markcornelisse/Developer/Apps/going-dutch/build/We all pay.build/Debug-iphoneos/We all pay.build/Objects-normal/arm64/SolutionReturnPaymentItem.o",
+    "swift-dependencies" : "/Users/markcornelisse/Developer/Apps/going-dutch/build/We all pay.build/Debug-iphoneos/We all pay.build/Objects-normal/arm64/SolutionReturnPaymentItem.swiftdeps",
+    "swiftmodule" : "/Users/markcornelisse/Developer/Apps/going-dutch/build/We all pay.build/Debug-iphoneos/We all pay.build/Objects-normal/arm64/SolutionReturnPaymentItem~partial.swiftmodule"
+  },
+  "/Users/markcornelisse/Developer/Apps/going-dutch/Going Dutch/SolutionTotalSpentTableViewCell.swift" : {
+    "const-values" : "/Users/markcornelisse/Developer/Apps/going-dutch/build/We all pay.build/Debug-iphoneos/We all pay.build/Objects-normal/arm64/SolutionTotalSpentTableViewCell.swiftconstvalues",
+    "dependencies" : "/Users/markcornelisse/Developer/Apps/going-dutch/build/We all pay.build/Debug-iphoneos/We all pay.build/Objects-normal/arm64/SolutionTotalSpentTableViewCell.d",
+    "diagnostics" : "/Users/markcornelisse/Developer/Apps/going-dutch/build/We all pay.build/Debug-iphoneos/We all pay.build/Objects-normal/arm64/SolutionTotalSpentTableViewCell.dia",
+    "index-unit-output-path" : "/We all pay.build/Debug-iphoneos/We all pay.build/Objects-normal/arm64/SolutionTotalSpentTableViewCell.o",
+    "llvm-bc" : "/Users/markcornelisse/Developer/Apps/going-dutch/build/We all pay.build/Debug-iphoneos/We all pay.build/Objects-normal/arm64/SolutionTotalSpentTableViewCell.bc",
+    "object" : "/Users/markcornelisse/Developer/Apps/going-dutch/build/We all pay.build/Debug-iphoneos/We all pay.build/Objects-normal/arm64/SolutionTotalSpentTableViewCell.o",
+    "swift-dependencies" : "/Users/markcornelisse/Developer/Apps/going-dutch/build/We all pay.build/Debug-iphoneos/We all pay.build/Objects-normal/arm64/SolutionTotalSpentTableViewCell.swiftdeps",
+    "swiftmodule" : "/Users/markcornelisse/Developer/Apps/going-dutch/build/We all pay.build/Debug-iphoneos/We all pay.build/Objects-normal/arm64/SolutionTotalSpentTableViewCell~partial.swiftmodule"
+  },
+  "/Users/markcornelisse/Developer/Apps/going-dutch/Going Dutch/SolutionTotalUsedTableViewCell.swift" : {
+    "const-values" : "/Users/markcornelisse/Developer/Apps/going-dutch/build/We all pay.build/Debug-iphoneos/We all pay.build/Objects-normal/arm64/SolutionTotalUsedTableViewCell.swiftconstvalues",
+    "dependencies" : "/Users/markcornelisse/Developer/Apps/going-dutch/build/We all pay.build/Debug-iphoneos/We all pay.build/Objects-normal/arm64/SolutionTotalUsedTableViewCell.d",
+    "diagnostics" : "/Users/markcornelisse/Developer/Apps/going-dutch/build/We all pay.build/Debug-iphoneos/We all pay.build/Objects-normal/arm64/SolutionTotalUsedTableViewCell.dia",
+    "index-unit-output-path" : "/We all pay.build/Debug-iphoneos/We all pay.build/Objects-normal/arm64/SolutionTotalUsedTableViewCell.o",
+    "llvm-bc" : "/Users/markcornelisse/Developer/Apps/going-dutch/build/We all pay.build/Debug-iphoneos/We all pay.build/Objects-normal/arm64/SolutionTotalUsedTableViewCell.bc",
+    "object" : "/Users/markcornelisse/Developer/Apps/going-dutch/build/We all pay.build/Debug-iphoneos/We all pay.build/Objects-normal/arm64/SolutionTotalUsedTableViewCell.o",
+    "swift-dependencies" : "/Users/markcornelisse/Developer/Apps/going-dutch/build/We all pay.build/Debug-iphoneos/We all pay.build/Objects-normal/arm64/SolutionTotalUsedTableViewCell.swiftdeps",
+    "swiftmodule" : "/Users/markcornelisse/Developer/Apps/going-dutch/build/We all pay.build/Debug-iphoneos/We all pay.build/Objects-normal/arm64/SolutionTotalUsedTableViewCell~partial.swiftmodule"
+  },
+  "/Users/markcornelisse/Developer/Apps/going-dutch/Going Dutch/TableViewSectionModel.swift" : {
+    "const-values" : "/Users/markcornelisse/Developer/Apps/going-dutch/build/We all pay.build/Debug-iphoneos/We all pay.build/Objects-normal/arm64/TableViewSectionModel.swiftconstvalues",
+    "dependencies" : "/Users/markcornelisse/Developer/Apps/going-dutch/build/We all pay.build/Debug-iphoneos/We all pay.build/Objects-normal/arm64/TableViewSectionModel.d",
+    "diagnostics" : "/Users/markcornelisse/Developer/Apps/going-dutch/build/We all pay.build/Debug-iphoneos/We all pay.build/Objects-normal/arm64/TableViewSectionModel.dia",
+    "index-unit-output-path" : "/We all pay.build/Debug-iphoneos/We all pay.build/Objects-normal/arm64/TableViewSectionModel.o",
+    "llvm-bc" : "/Users/markcornelisse/Developer/Apps/going-dutch/build/We all pay.build/Debug-iphoneos/We all pay.build/Objects-normal/arm64/TableViewSectionModel.bc",
+    "object" : "/Users/markcornelisse/Developer/Apps/going-dutch/build/We all pay.build/Debug-iphoneos/We all pay.build/Objects-normal/arm64/TableViewSectionModel.o",
+    "swift-dependencies" : "/Users/markcornelisse/Developer/Apps/going-dutch/build/We all pay.build/Debug-iphoneos/We all pay.build/Objects-normal/arm64/TableViewSectionModel.swiftdeps",
+    "swiftmodule" : "/Users/markcornelisse/Developer/Apps/going-dutch/build/We all pay.build/Debug-iphoneos/We all pay.build/Objects-normal/arm64/TableViewSectionModel~partial.swiftmodule"
+  },
+  "/Users/markcornelisse/Developer/Apps/going-dutch/Going Dutch/ThisEvent.swift" : {
+    "const-values" : "/Users/markcornelisse/Developer/Apps/going-dutch/build/We all pay.build/Debug-iphoneos/We all pay.build/Objects-normal/arm64/ThisEvent.swiftconstvalues",
+    "dependencies" : "/Users/markcornelisse/Developer/Apps/going-dutch/build/We all pay.build/Debug-iphoneos/We all pay.build/Objects-normal/arm64/ThisEvent.d",
+    "diagnostics" : "/Users/markcornelisse/Developer/Apps/going-dutch/build/We all pay.build/Debug-iphoneos/We all pay.build/Objects-normal/arm64/ThisEvent.dia",
+    "index-unit-output-path" : "/We all pay.build/Debug-iphoneos/We all pay.build/Objects-normal/arm64/ThisEvent.o",
+    "llvm-bc" : "/Users/markcornelisse/Developer/Apps/going-dutch/build/We all pay.build/Debug-iphoneos/We all pay.build/Objects-normal/arm64/ThisEvent.bc",
+    "object" : "/Users/markcornelisse/Developer/Apps/going-dutch/build/We all pay.build/Debug-iphoneos/We all pay.build/Objects-normal/arm64/ThisEvent.o",
+    "swift-dependencies" : "/Users/markcornelisse/Developer/Apps/going-dutch/build/We all pay.build/Debug-iphoneos/We all pay.build/Objects-normal/arm64/ThisEvent.swiftdeps",
+    "swiftmodule" : "/Users/markcornelisse/Developer/Apps/going-dutch/build/We all pay.build/Debug-iphoneos/We all pay.build/Objects-normal/arm64/ThisEvent~partial.swiftmodule"
+  },
+  "/Users/markcornelisse/Developer/Apps/going-dutch/Going Dutch/UIViewControllerRateMeControllerExtension.swift" : {
+    "const-values" : "/Users/markcornelisse/Developer/Apps/going-dutch/build/We all pay.build/Debug-iphoneos/We all pay.build/Objects-normal/arm64/UIViewControllerRateMeControllerExtension.swiftconstvalues",
+    "dependencies" : "/Users/markcornelisse/Developer/Apps/going-dutch/build/We all pay.build/Debug-iphoneos/We all pay.build/Objects-normal/arm64/UIViewControllerRateMeControllerExtension.d",
+    "diagnostics" : "/Users/markcornelisse/Developer/Apps/going-dutch/build/We all pay.build/Debug-iphoneos/We all pay.build/Objects-normal/arm64/UIViewControllerRateMeControllerExtension.dia",
+    "index-unit-output-path" : "/We all pay.build/Debug-iphoneos/We all pay.build/Objects-normal/arm64/UIViewControllerRateMeControllerExtension.o",
+    "llvm-bc" : "/Users/markcornelisse/Developer/Apps/going-dutch/build/We all pay.build/Debug-iphoneos/We all pay.build/Objects-normal/arm64/UIViewControllerRateMeControllerExtension.bc",
+    "object" : "/Users/markcornelisse/Developer/Apps/going-dutch/build/We all pay.build/Debug-iphoneos/We all pay.build/Objects-normal/arm64/UIViewControllerRateMeControllerExtension.o",
+    "swift-dependencies" : "/Users/markcornelisse/Developer/Apps/going-dutch/build/We all pay.build/Debug-iphoneos/We all pay.build/Objects-normal/arm64/UIViewControllerRateMeControllerExtension.swiftdeps",
+    "swiftmodule" : "/Users/markcornelisse/Developer/Apps/going-dutch/build/We all pay.build/Debug-iphoneos/We all pay.build/Objects-normal/arm64/UIViewControllerRateMeControllerExtension~partial.swiftmodule"
+  },
+  "/Users/markcornelisse/Developer/Apps/going-dutch/Going Dutch/ViewControllerProtocols.swift" : {
+    "const-values" : "/Users/markcornelisse/Developer/Apps/going-dutch/build/We all pay.build/Debug-iphoneos/We all pay.build/Objects-normal/arm64/ViewControllerProtocols.swiftconstvalues",
+    "dependencies" : "/Users/markcornelisse/Developer/Apps/going-dutch/build/We all pay.build/Debug-iphoneos/We all pay.build/Objects-normal/arm64/ViewControllerProtocols.d",
+    "diagnostics" : "/Users/markcornelisse/Developer/Apps/going-dutch/build/We all pay.build/Debug-iphoneos/We all pay.build/Objects-normal/arm64/ViewControllerProtocols.dia",
+    "index-unit-output-path" : "/We all pay.build/Debug-iphoneos/We all pay.build/Objects-normal/arm64/ViewControllerProtocols.o",
+    "llvm-bc" : "/Users/markcornelisse/Developer/Apps/going-dutch/build/We all pay.build/Debug-iphoneos/We all pay.build/Objects-normal/arm64/ViewControllerProtocols.bc",
+    "object" : "/Users/markcornelisse/Developer/Apps/going-dutch/build/We all pay.build/Debug-iphoneos/We all pay.build/Objects-normal/arm64/ViewControllerProtocols.o",
+    "swift-dependencies" : "/Users/markcornelisse/Developer/Apps/going-dutch/build/We all pay.build/Debug-iphoneos/We all pay.build/Objects-normal/arm64/ViewControllerProtocols.swiftdeps",
+    "swiftmodule" : "/Users/markcornelisse/Developer/Apps/going-dutch/build/We all pay.build/Debug-iphoneos/We all pay.build/Objects-normal/arm64/ViewControllerProtocols~partial.swiftmodule"
+  },
+  "/Users/markcornelisse/Developer/Apps/going-dutch/Going Dutch/ViewControllers/iPhone/SolutionViewController.swift" : {
+    "const-values" : "/Users/markcornelisse/Developer/Apps/going-dutch/build/We all pay.build/Debug-iphoneos/We all pay.build/Objects-normal/arm64/SolutionViewController.swiftconstvalues",
+    "dependencies" : "/Users/markcornelisse/Developer/Apps/going-dutch/build/We all pay.build/Debug-iphoneos/We all pay.build/Objects-normal/arm64/SolutionViewController.d",
+    "diagnostics" : "/Users/markcornelisse/Developer/Apps/going-dutch/build/We all pay.build/Debug-iphoneos/We all pay.build/Objects-normal/arm64/SolutionViewController.dia",
+    "index-unit-output-path" : "/We all pay.build/Debug-iphoneos/We all pay.build/Objects-normal/arm64/SolutionViewController.o",
+    "llvm-bc" : "/Users/markcornelisse/Developer/Apps/going-dutch/build/We all pay.build/Debug-iphoneos/We all pay.build/Objects-normal/arm64/SolutionViewController.bc",
+    "object" : "/Users/markcornelisse/Developer/Apps/going-dutch/build/We all pay.build/Debug-iphoneos/We all pay.build/Objects-normal/arm64/SolutionViewController.o",
+    "swift-dependencies" : "/Users/markcornelisse/Developer/Apps/going-dutch/build/We all pay.build/Debug-iphoneos/We all pay.build/Objects-normal/arm64/SolutionViewController.swiftdeps",
+    "swiftmodule" : "/Users/markcornelisse/Developer/Apps/going-dutch/build/We all pay.build/Debug-iphoneos/We all pay.build/Objects-normal/arm64/SolutionViewController~partial.swiftmodule"
+  },
+  "/Users/markcornelisse/Developer/Apps/going-dutch/Going Dutch/ViewControllers/Notifications/NotificationsTable/NotificationsModel.swift" : {
+    "const-values" : "/Users/markcornelisse/Developer/Apps/going-dutch/build/We all pay.build/Debug-iphoneos/We all pay.build/Objects-normal/arm64/NotificationsModel.swiftconstvalues",
+    "dependencies" : "/Users/markcornelisse/Developer/Apps/going-dutch/build/We all pay.build/Debug-iphoneos/We all pay.build/Objects-normal/arm64/NotificationsModel.d",
+    "diagnostics" : "/Users/markcornelisse/Developer/Apps/going-dutch/build/We all pay.build/Debug-iphoneos/We all pay.build/Objects-normal/arm64/NotificationsModel.dia",
+    "index-unit-output-path" : "/We all pay.build/Debug-iphoneos/We all pay.build/Objects-normal/arm64/NotificationsModel.o",
+    "llvm-bc" : "/Users/markcornelisse/Developer/Apps/going-dutch/build/We all pay.build/Debug-iphoneos/We all pay.build/Objects-normal/arm64/NotificationsModel.bc",
+    "object" : "/Users/markcornelisse/Developer/Apps/going-dutch/build/We all pay.build/Debug-iphoneos/We all pay.build/Objects-normal/arm64/NotificationsModel.o",
+    "swift-dependencies" : "/Users/markcornelisse/Developer/Apps/going-dutch/build/We all pay.build/Debug-iphoneos/We all pay.build/Objects-normal/arm64/NotificationsModel.swiftdeps",
+    "swiftmodule" : "/Users/markcornelisse/Developer/Apps/going-dutch/build/We all pay.build/Debug-iphoneos/We all pay.build/Objects-normal/arm64/NotificationsModel~partial.swiftmodule"
+  },
+  "/Users/markcornelisse/Developer/Apps/going-dutch/Going Dutch/ViewControllers/Notifications/NotificationsTable/NotificationsTableViewController.swift" : {
+    "const-values" : "/Users/markcornelisse/Developer/Apps/going-dutch/build/We all pay.build/Debug-iphoneos/We all pay.build/Objects-normal/arm64/NotificationsTableViewController.swiftconstvalues",
+    "dependencies" : "/Users/markcornelisse/Developer/Apps/going-dutch/build/We all pay.build/Debug-iphoneos/We all pay.build/Objects-normal/arm64/NotificationsTableViewController.d",
+    "diagnostics" : "/Users/markcornelisse/Developer/Apps/going-dutch/build/We all pay.build/Debug-iphoneos/We all pay.build/Objects-normal/arm64/NotificationsTableViewController.dia",
+    "index-unit-output-path" : "/We all pay.build/Debug-iphoneos/We all pay.build/Objects-normal/arm64/NotificationsTableViewController.o",
+    "llvm-bc" : "/Users/markcornelisse/Developer/Apps/going-dutch/build/We all pay.build/Debug-iphoneos/We all pay.build/Objects-normal/arm64/NotificationsTableViewController.bc",
+    "object" : "/Users/markcornelisse/Developer/Apps/going-dutch/build/We all pay.build/Debug-iphoneos/We all pay.build/Objects-normal/arm64/NotificationsTableViewController.o",
+    "swift-dependencies" : "/Users/markcornelisse/Developer/Apps/going-dutch/build/We all pay.build/Debug-iphoneos/We all pay.build/Objects-normal/arm64/NotificationsTableViewController.swiftdeps",
+    "swiftmodule" : "/Users/markcornelisse/Developer/Apps/going-dutch/build/We all pay.build/Debug-iphoneos/We all pay.build/Objects-normal/arm64/NotificationsTableViewController~partial.swiftmodule"
+  }
+}

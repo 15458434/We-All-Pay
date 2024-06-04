@@ -1,0 +1,23 @@
+{
+  'version': 0,
+  'use-external-names': 'false',
+  'case-sensitive': 'false',
+  'roots': [{
+    'type': 'directory',
+    'name': "/Users/markcornelisse/Developer/Apps/going-dutch/build/Debug-iphoneos/FirebaseSessions/FirebaseSessions.framework/Modules"
+    'contents': [{
+      'type': 'file',
+      'name': "module.modulemap",
+      'external-contents': "/Users/markcornelisse/Developer/Apps/going-dutch/build/Pods.build/Debug-iphoneos/FirebaseSessions.build/unextended-module.modulemap",
+    }]
+    },
+    {
+    'type': 'directory',
+    'name': "/Users/markcornelisse/Developer/Apps/going-dutch/build/Debug-iphoneos/FirebaseSessions/FirebaseSessions.framework/Headers"
+    'contents': [{
+      'type': 'file',
+      'name': "FirebaseSessions-Swift.h",
+      'external-contents': "/Users/markcornelisse/Developer/Apps/going-dutch/build/Pods.build/Debug-iphoneos/FirebaseSessions.build/unextended-interface-header.h",
+    }]
+    }]
+}

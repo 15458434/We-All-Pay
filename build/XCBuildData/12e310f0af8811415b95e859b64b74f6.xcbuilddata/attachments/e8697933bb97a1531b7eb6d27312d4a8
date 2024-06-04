@@ -1,0 +1,10 @@
+framework module RateMeControllerForiOS {
+  umbrella header "RateMeControllerForiOS.h"
+  export *
+
+  module * { export * }
+}
+
+module RateMeControllerForiOS.__Swift {
+  exclude header "RateMeControllerForiOS-Swift.h"
+}

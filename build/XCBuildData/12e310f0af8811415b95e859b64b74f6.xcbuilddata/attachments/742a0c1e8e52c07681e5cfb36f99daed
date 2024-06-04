@@ -1,0 +1,10 @@
+framework module WhoPayingUserDefaultsStoreInterface {
+  umbrella header "WhoPayingUserDefaultsStoreInterface.h"
+  export *
+
+  module * { export * }
+}
+
+module WhoPayingUserDefaultsStoreInterface.__Swift {
+  exclude header "WhoPayingUserDefaultsStoreInterface-Swift.h"
+}

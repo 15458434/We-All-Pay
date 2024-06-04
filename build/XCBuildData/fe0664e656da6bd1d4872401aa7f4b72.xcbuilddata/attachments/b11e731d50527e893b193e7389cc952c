@@ -1,0 +1,28 @@
+{
+  "" : {
+    "diagnostics" : "/Users/markcornelisse/Developer/Apps/going-dutch/build/We all pay.build/Debug/acpm.build/Objects-normal/arm64/acpm-master.dia",
+    "emit-module-dependencies" : "/Users/markcornelisse/Developer/Apps/going-dutch/build/We all pay.build/Debug/acpm.build/Objects-normal/arm64/acpm-master-emit-module.d",
+    "emit-module-diagnostics" : "/Users/markcornelisse/Developer/Apps/going-dutch/build/We all pay.build/Debug/acpm.build/Objects-normal/arm64/acpm-master-emit-module.dia",
+    "swift-dependencies" : "/Users/markcornelisse/Developer/Apps/going-dutch/build/We all pay.build/Debug/acpm.build/Objects-normal/arm64/acpm-master.swiftdeps"
+  },
+  "/Users/markcornelisse/Developer/Apps/going-dutch/acpm/CurrencyItem.swift" : {
+    "const-values" : "/Users/markcornelisse/Developer/Apps/going-dutch/build/We all pay.build/Debug/acpm.build/Objects-normal/arm64/CurrencyItem.swiftconstvalues",
+    "dependencies" : "/Users/markcornelisse/Developer/Apps/going-dutch/build/We all pay.build/Debug/acpm.build/Objects-normal/arm64/CurrencyItem.d",
+    "diagnostics" : "/Users/markcornelisse/Developer/Apps/going-dutch/build/We all pay.build/Debug/acpm.build/Objects-normal/arm64/CurrencyItem.dia",
+    "index-unit-output-path" : "/We all pay.build/Debug/acpm.build/Objects-normal/arm64/CurrencyItem.o",
+    "llvm-bc" : "/Users/markcornelisse/Developer/Apps/going-dutch/build/We all pay.build/Debug/acpm.build/Objects-normal/arm64/CurrencyItem.bc",
+    "object" : "/Users/markcornelisse/Developer/Apps/going-dutch/build/We all pay.build/Debug/acpm.build/Objects-normal/arm64/CurrencyItem.o",
+    "swift-dependencies" : "/Users/markcornelisse/Developer/Apps/going-dutch/build/We all pay.build/Debug/acpm.build/Objects-normal/arm64/CurrencyItem.swiftdeps",
+    "swiftmodule" : "/Users/markcornelisse/Developer/Apps/going-dutch/build/We all pay.build/Debug/acpm.build/Objects-normal/arm64/CurrencyItem~partial.swiftmodule"
+  },
+  "/Users/markcornelisse/Developer/Apps/going-dutch/acpm/main.swift" : {
+    "const-values" : "/Users/markcornelisse/Developer/Apps/going-dutch/build/We all pay.build/Debug/acpm.build/Objects-normal/arm64/main.swiftconstvalues",
+    "dependencies" : "/Users/markcornelisse/Developer/Apps/going-dutch/build/We all pay.build/Debug/acpm.build/Objects-normal/arm64/main.d",
+    "diagnostics" : "/Users/markcornelisse/Developer/Apps/going-dutch/build/We all pay.build/Debug/acpm.build/Objects-normal/arm64/main.dia",
+    "index-unit-output-path" : "/We all pay.build/Debug/acpm.build/Objects-normal/arm64/main.o",
+    "llvm-bc" : "/Users/markcornelisse/Developer/Apps/going-dutch/build/We all pay.build/Debug/acpm.build/Objects-normal/arm64/main.bc",
+    "object" : "/Users/markcornelisse/Developer/Apps/going-dutch/build/We all pay.build/Debug/acpm.build/Objects-normal/arm64/main.o",
+    "swift-dependencies" : "/Users/markcornelisse/Developer/Apps/going-dutch/build/We all pay.build/Debug/acpm.build/Objects-normal/arm64/main.swiftdeps",
+    "swiftmodule" : "/Users/markcornelisse/Developer/Apps/going-dutch/build/We all pay.build/Debug/acpm.build/Objects-normal/arm64/main~partial.swiftmodule"
+  }
+}
