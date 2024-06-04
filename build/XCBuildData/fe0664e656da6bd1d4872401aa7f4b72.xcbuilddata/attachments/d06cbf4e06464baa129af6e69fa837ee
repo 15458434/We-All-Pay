@@ -1,5 +1,0 @@
- extern const unsigned char CurrencyConverterVersionString[];
- extern const double CurrencyConverterVersionNumber;
-
- const unsigned char CurrencyConverterVersionString[] __attribute__ ((used)) = "@(#)PROGRAM:CurrencyConverter  PROJECT:We all pay-168" "\n";
- const double CurrencyConverterVersionNumber __attribute__ ((used)) = (double)168.;

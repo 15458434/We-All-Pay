@@ -1,5 +1,0 @@
- extern const unsigned char WhoPayingUserDefaultsStoreInterfaceVersionString[];
- extern const double WhoPayingUserDefaultsStoreInterfaceVersionNumber;
-
- const unsigned char WhoPayingUserDefaultsStoreInterfaceVersionString[] __attribute__ ((used)) = "@(#)PROGRAM:WhoPayingUserDefaultsStoreInterface  PROJECT:We all pay-168" "\n";
- const double WhoPayingUserDefaultsStoreInterfaceVersionNumber __attribute__ ((used)) = (double)168.;

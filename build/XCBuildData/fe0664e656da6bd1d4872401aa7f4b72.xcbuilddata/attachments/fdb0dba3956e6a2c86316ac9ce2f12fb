@@ -1,6 +1,0 @@
-framework module Pods_We_all_pay {
-  umbrella header "Pods-We all pay-umbrella.h"
-
-  export *
-  module * { export * }
-}
