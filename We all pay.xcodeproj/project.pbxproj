@@ -217,14 +217,6 @@
 		38EACFF81C6894960091A9AF /* InfoPlist.strings in Resources */ = {isa = PBXBuildFile; fileRef = 38EACFFA1C6894960091A9AF /* InfoPlist.strings */; };
 		38EACFFD1C6894960091A9AF /* InfoPlist.strings in Resources */ = {isa = PBXBuildFile; fileRef = 38EACFFF1C6894960091A9AF /* InfoPlist.strings */; };
 		38EF31451938BA07004912F0 /* UINavigationController+KeyboardDismiss.m in Sources */ = {isa = PBXBuildFile; fileRef = 38EF31441938BA07004912F0 /* UINavigationController+KeyboardDismiss.m */; };
-		38EFCBE82BD902670044E15B /* FirebaseAnalytics in Frameworks */ = {isa = PBXBuildFile; productRef = 38EFCBE72BD902670044E15B /* FirebaseAnalytics */; };
-		38EFCBEA2BD902670044E15B /* FirebaseAnalyticsOnDeviceConversion in Frameworks */ = {isa = PBXBuildFile; productRef = 38EFCBE92BD902670044E15B /* FirebaseAnalyticsOnDeviceConversion */; };
-		38EFCBEC2BD902670044E15B /* FirebaseAnalyticsSwift in Frameworks */ = {isa = PBXBuildFile; productRef = 38EFCBEB2BD902670044E15B /* FirebaseAnalyticsSwift */; };
-		38EFCBEE2BD902670044E15B /* FirebaseAppCheck in Frameworks */ = {isa = PBXBuildFile; productRef = 38EFCBED2BD902670044E15B /* FirebaseAppCheck */; };
-		38EFCBF02BD902670044E15B /* FirebasePerformance in Frameworks */ = {isa = PBXBuildFile; productRef = 38EFCBEF2BD902670044E15B /* FirebasePerformance */; };
-		38EFCBF22BD902670044E15B /* FirebaseRemoteConfig in Frameworks */ = {isa = PBXBuildFile; productRef = 38EFCBF12BD902670044E15B /* FirebaseRemoteConfig */; };
-		38EFCBF42BD902670044E15B /* FirebaseRemoteConfigSwift in Frameworks */ = {isa = PBXBuildFile; productRef = 38EFCBF32BD902670044E15B /* FirebaseRemoteConfigSwift */; };
-		38EFCBF62BD902A90044E15B /* FirebaseCrashlytics in Frameworks */ = {isa = PBXBuildFile; productRef = 38EFCBF52BD902A90044E15B /* FirebaseCrashlytics */; };
 		38F0DDBD2BE93652004B1A19 /* SequenceExtension.swift in Sources */ = {isa = PBXBuildFile; fileRef = 38F0DDBC2BE93652004B1A19 /* SequenceExtension.swift */; };
 		38F2370126D012CF00A22F9E /* MCGenericAdBannerTableViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 38F236FF26D012CF00A22F9E /* MCGenericAdBannerTableViewController.m */; };
 		38F2370226D012CF00A22F9E /* MCGenericAdBannerViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 38F2370026D012CF00A22F9E /* MCGenericAdBannerViewController.m */; };
@@ -235,7 +227,6 @@
 		38F44CCB2364993400215B1C /* MoneyTextInputValidator.swift in Sources */ = {isa = PBXBuildFile; fileRef = 38F44CCA2364993400215B1C /* MoneyTextInputValidator.swift */; };
 		38FE5A082346957100BBA722 /* SideMenuTransitioner.swift in Sources */ = {isa = PBXBuildFile; fileRef = 38FE5A072346957100BBA722 /* SideMenuTransitioner.swift */; };
 		6F6CEECF1E58A332ECA671AD /* Pods_We_all_pay.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = B48C96B2DFBD420A590C8093 /* Pods_We_all_pay.framework */; };
-		8014B62D55C7060E30B5BB31 /* Pods_We_all_pay_Tests.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = BC200F02E5A8122ECA04051C /* Pods_We_all_pay_Tests.framework */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -370,7 +361,6 @@
 /* End PBXCopyFilesBuildPhase section */
 
 /* Begin PBXFileReference section */
-		2F2C2B21DC68357692CB8C19 /* Pods-We all pay Tests.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-We all pay Tests.debug.xcconfig"; path = "Target Support Files/Pods-We all pay Tests/Pods-We all pay Tests.debug.xcconfig"; sourceTree = "<group>"; };
 		38001C9A194EE284008ACD94 /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
 		380046BC26CA9802003586F2 /* UIColor+ColorSpawn.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = "UIColor+ColorSpawn.h"; sourceTree = "<group>"; };
 		380046BD26CA9802003586F2 /* UIColor+ColorSpawn.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = "UIColor+ColorSpawn.m"; sourceTree = "<group>"; };
@@ -684,12 +674,8 @@
 		38F7F9A91B2C4A120059DE51 /* CurrencyController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = CurrencyController.swift; path = "../Going Dutch/CurrencyController.swift"; sourceTree = "<group>"; };
 		38FE5A072346957100BBA722 /* SideMenuTransitioner.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SideMenuTransitioner.swift; sourceTree = "<group>"; };
 		3BB3BF0F9FF45FB3F9898605 /* Pods-We all pay.screenshots.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-We all pay.screenshots.xcconfig"; path = "Target Support Files/Pods-We all pay/Pods-We all pay.screenshots.xcconfig"; sourceTree = "<group>"; };
-		4064906A205408BD0BA6A7D1 /* Pods-We all pay Tests.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-We all pay Tests.release.xcconfig"; path = "Target Support Files/Pods-We all pay Tests/Pods-We all pay Tests.release.xcconfig"; sourceTree = "<group>"; };
-		6C38D777B368B03CC28F8342 /* Pods-We all pay Tests.adtest.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-We all pay Tests.adtest.xcconfig"; path = "Target Support Files/Pods-We all pay Tests/Pods-We all pay Tests.adtest.xcconfig"; sourceTree = "<group>"; };
-		72A8F8961A8BB7CFB7771EAA /* Pods-We all pay Tests.screenshots.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-We all pay Tests.screenshots.xcconfig"; path = "Target Support Files/Pods-We all pay Tests/Pods-We all pay Tests.screenshots.xcconfig"; sourceTree = "<group>"; };
 		B48C96B2DFBD420A590C8093 /* Pods_We_all_pay.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_We_all_pay.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		BA9B90B933839086D910698A /* Pods-We all pay.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-We all pay.release.xcconfig"; path = "Target Support Files/Pods-We all pay/Pods-We all pay.release.xcconfig"; sourceTree = "<group>"; };
-		BC200F02E5A8122ECA04051C /* Pods_We_all_pay_Tests.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_We_all_pay_Tests.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		CC837EE0E054E7D09B9230F9 /* Pods-We all pay.adtest.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-We all pay.adtest.xcconfig"; path = "Target Support Files/Pods-We all pay/Pods-We all pay.adtest.xcconfig"; sourceTree = "<group>"; };
 		D0E8C82A6743C1122D352E43 /* Pods-We all pay.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-We all pay.debug.xcconfig"; path = "Target Support Files/Pods-We all pay/Pods-We all pay.debug.xcconfig"; sourceTree = "<group>"; };
 /* End PBXFileReference section */
@@ -723,32 +709,24 @@
 			files = (
 				38B4E82B23CDE6410034CA95 /* SystemConfiguration.framework in Frameworks */,
 				38B4E82723CDE62C0034CA95 /* MessageUI.framework in Frameworks */,
-				38EFCBF02BD902670044E15B /* FirebasePerformance in Frameworks */,
-				38EFCBF22BD902670044E15B /* FirebaseRemoteConfig in Frameworks */,
 				38B4E82523CDE6220034CA95 /* JavaScriptCore.framework in Frameworks */,
 				38BCCA5026C6A19E00D4C854 /* AppTrackingTransparency.framework in Frameworks */,
 				38B4E82323CDE6180034CA95 /* CoreTelephony.framework in Frameworks */,
 				380FB71226D6B88F00B46038 /* UIKit.framework in Frameworks */,
 				38B4E82123CDE6100034CA95 /* CoreMedia.framework in Frameworks */,
-				38EFCBEA2BD902670044E15B /* FirebaseAnalyticsOnDeviceConversion in Frameworks */,
 				382E796526B7F48200A0D1C1 /* WeAllPayDesignableUI.framework in Frameworks */,
 				38B4E81F23CDE6050034CA95 /* AVFoundation.framework in Frameworks */,
 				380FB70D26D6B86600B46038 /* CoreGraphics.framework in Frameworks */,
 				38B4E81D23CDE5FC0034CA95 /* AudioToolbox.framework in Frameworks */,
-				38EFCBE82BD902670044E15B /* FirebaseAnalytics in Frameworks */,
 				38B4E81B23CDE5F40034CA95 /* AdSupport.framework in Frameworks */,
-				38EFCBEE2BD902670044E15B /* FirebaseAppCheck in Frameworks */,
 				38B4E81923CDE5D40034CA95 /* libz.1.2.5.tbd in Frameworks */,
 				3826D4D323CC5777009CAC30 /* libz.tbd in Frameworks */,
 				3826D4D223CC576C009CAC30 /* libsqlite3.0.tbd in Frameworks */,
 				3826D4D123CC574E009CAC30 /* WebKit.framework in Frameworks */,
 				38163E0F249E193D009E889C /* CoreServices.framework in Frameworks */,
-				38EFCBEC2BD902670044E15B /* FirebaseAnalyticsSwift in Frameworks */,
 				38D6A3D11C73DDC000968BB2 /* RateMeControllerForiOS.framework in Frameworks */,
-				38EFCBF42BD902670044E15B /* FirebaseRemoteConfigSwift in Frameworks */,
 				388A32911C11EDBD00F7459C /* WhoPayingUserDefaultsStoreInterface.framework in Frameworks */,
 				382B76F51C398249000C203A /* CurrencyConverter.framework in Frameworks */,
-				38EFCBF62BD902A90044E15B /* FirebaseCrashlytics in Frameworks */,
 				380FB71026D6B88100B46038 /* StoreKit.framework in Frameworks */,
 				6F6CEECF1E58A332ECA671AD /* Pods_We_all_pay.framework in Frameworks */,
 			);
@@ -758,7 +736,6 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				8014B62D55C7060E30B5BB31 /* Pods_We_all_pay_Tests.framework in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -1583,7 +1560,6 @@
 				3826D4CF23CC5745009CAC30 /* libz.tbd */,
 				3826D4CE23CC573B009CAC30 /* libsqlite3.0.tbd */,
 				B48C96B2DFBD420A590C8093 /* Pods_We_all_pay.framework */,
-				BC200F02E5A8122ECA04051C /* Pods_We_all_pay_Tests.framework */,
 			);
 			name = Frameworks;
 			sourceTree = "<group>";
@@ -1595,10 +1571,6 @@
 				CC837EE0E054E7D09B9230F9 /* Pods-We all pay.adtest.xcconfig */,
 				3BB3BF0F9FF45FB3F9898605 /* Pods-We all pay.screenshots.xcconfig */,
 				BA9B90B933839086D910698A /* Pods-We all pay.release.xcconfig */,
-				2F2C2B21DC68357692CB8C19 /* Pods-We all pay Tests.debug.xcconfig */,
-				6C38D777B368B03CC28F8342 /* Pods-We all pay Tests.adtest.xcconfig */,
-				72A8F8961A8BB7CFB7771EAA /* Pods-We all pay Tests.screenshots.xcconfig */,
-				4064906A205408BD0BA6A7D1 /* Pods-We all pay Tests.release.xcconfig */,
 			);
 			path = Pods;
 			sourceTree = "<group>";
@@ -1724,16 +1696,6 @@
 				382E796426B7F48200A0D1C1 /* PBXTargetDependency */,
 			);
 			name = "We all pay";
-			packageProductDependencies = (
-				38EFCBE72BD902670044E15B /* FirebaseAnalytics */,
-				38EFCBE92BD902670044E15B /* FirebaseAnalyticsOnDeviceConversion */,
-				38EFCBEB2BD902670044E15B /* FirebaseAnalyticsSwift */,
-				38EFCBED2BD902670044E15B /* FirebaseAppCheck */,
-				38EFCBEF2BD902670044E15B /* FirebasePerformance */,
-				38EFCBF12BD902670044E15B /* FirebaseRemoteConfig */,
-				38EFCBF32BD902670044E15B /* FirebaseRemoteConfigSwift */,
-				38EFCBF52BD902A90044E15B /* FirebaseCrashlytics */,
-			);
 			productName = "Going Dutch";
 			productReference = 38572AD2169D437B00969C62 /* We all pay.app */;
 			productType = "com.apple.product-type.application";
@@ -1742,11 +1704,9 @@
 			isa = PBXNativeTarget;
 			buildConfigurationList = 385F530C191C2C360012773D /* Build configuration list for PBXNativeTarget "We all pay Tests" */;
 			buildPhases = (
-				A0F55595A08F5CD5F6361A31 /* [CP] Check Pods Manifest.lock */,
 				385F52F9191C2C360012773D /* Sources */,
 				385F52FA191C2C360012773D /* Frameworks */,
 				385F52FB191C2C360012773D /* Resources */,
-				8D3F19EE0BF3DE0BE05DEB8E /* [CP] Embed Pods Frameworks */,
 			);
 			buildRules = (
 			);
@@ -1981,9 +1941,6 @@
 				de,
 			);
 			mainGroup = 38572AC7169D437B00969C62;
-			packageReferences = (
-				38EFCBE62BD902670044E15B /* XCRemoteSwiftPackageReference "firebase-ios-sdk" */,
-			);
 			productRefGroup = 38572AD3169D437B00969C62 /* Products */;
 			projectDirPath = "";
 			projectRoot = "";
@@ -2166,45 +2123,6 @@
 			runOnlyForDeploymentPostprocessing = 0;
 			shellPath = /bin/sh;
 			shellScript = "\"${PODS_ROOT}/Target Support Files/Pods-We all pay/Pods-We all pay-resources.sh\"\n";
-			showEnvVarsInLog = 0;
-		};
-		8D3F19EE0BF3DE0BE05DEB8E /* [CP] Embed Pods Frameworks */ = {
-			isa = PBXShellScriptBuildPhase;
-			buildActionMask = 2147483647;
-			files = (
-			);
-			inputFileListPaths = (
-				"${PODS_ROOT}/Target Support Files/Pods-We all pay Tests/Pods-We all pay Tests-frameworks-${CONFIGURATION}-input-files.xcfilelist",
-			);
-			name = "[CP] Embed Pods Frameworks";
-			outputFileListPaths = (
-				"${PODS_ROOT}/Target Support Files/Pods-We all pay Tests/Pods-We all pay Tests-frameworks-${CONFIGURATION}-output-files.xcfilelist",
-			);
-			runOnlyForDeploymentPostprocessing = 0;
-			shellPath = /bin/sh;
-			shellScript = "\"${PODS_ROOT}/Target Support Files/Pods-We all pay Tests/Pods-We all pay Tests-frameworks.sh\"\n";
-			showEnvVarsInLog = 0;
-		};
-		A0F55595A08F5CD5F6361A31 /* [CP] Check Pods Manifest.lock */ = {
-			isa = PBXShellScriptBuildPhase;
-			buildActionMask = 2147483647;
-			files = (
-			);
-			inputFileListPaths = (
-			);
-			inputPaths = (
-				"${PODS_PODFILE_DIR_PATH}/Podfile.lock",
-				"${PODS_ROOT}/Manifest.lock",
-			);
-			name = "[CP] Check Pods Manifest.lock";
-			outputFileListPaths = (
-			);
-			outputPaths = (
-				"$(DERIVED_FILE_DIR)/Pods-We all pay Tests-checkManifestLockResult.txt",
-			);
-			runOnlyForDeploymentPostprocessing = 0;
-			shellPath = /bin/sh;
-			shellScript = "diff \"${PODS_PODFILE_DIR_PATH}/Podfile.lock\" \"${PODS_ROOT}/Manifest.lock\" > /dev/null\nif [ $? != 0 ] ; then\n    # print error to STDERR\n    echo \"error: The sandbox is not in sync with the Podfile.lock. Run 'pod install' or update your CocoaPods installation.\" >&2\n    exit 1\nfi\n# This output is used by Xcode 'outputs' to avoid re-running this script phase.\necho \"SUCCESS\" > \"${SCRIPT_OUTPUT_FILE_0}\"\n";
 			showEnvVarsInLog = 0;
 		};
 		EE5D67DF4963E690039B76FF /* [CP] Check Pods Manifest.lock */ = {
@@ -2736,7 +2654,10 @@
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				PROVISIONING_PROFILE_SPECIFIER = "";
 				SKIP_INSTALL = YES;
+				SUPPORTED_PLATFORMS = "iphoneos iphonesimulator";
 				SUPPORTS_MACCATALYST = NO;
+				SUPPORTS_MAC_DESIGNED_FOR_IPHONE_IPAD = NO;
+				SUPPORTS_XR_DESIGNED_FOR_IPHONE_IPAD = NO;
 				SWIFT_OBJC_BRIDGING_HEADER = "";
 				SWIFT_OPTIMIZATION_LEVEL = "-Onone";
 				SWIFT_SWIFT3_OBJC_INFERENCE = Default;
@@ -2793,7 +2714,10 @@
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				PROVISIONING_PROFILE_SPECIFIER = "";
 				SKIP_INSTALL = YES;
+				SUPPORTED_PLATFORMS = "iphoneos iphonesimulator";
 				SUPPORTS_MACCATALYST = NO;
+				SUPPORTS_MAC_DESIGNED_FOR_IPHONE_IPAD = NO;
+				SUPPORTS_XR_DESIGNED_FOR_IPHONE_IPAD = NO;
 				SWIFT_OBJC_BRIDGING_HEADER = "";
 				SWIFT_SWIFT3_OBJC_INFERENCE = Default;
 				SWIFT_VERSION = 5.0;
@@ -2832,9 +2756,14 @@
 				MTL_ENABLE_DEBUG_INFO = YES;
 				PRODUCT_BUNDLE_IDENTIFIER = com.GreenHair.CurrencyConverterTests;
 				PRODUCT_NAME = "$(TARGET_NAME)";
+				SUPPORTED_PLATFORMS = "iphoneos iphonesimulator";
+				SUPPORTS_MACCATALYST = NO;
+				SUPPORTS_MAC_DESIGNED_FOR_IPHONE_IPAD = NO;
+				SUPPORTS_XR_DESIGNED_FOR_IPHONE_IPAD = NO;
 				SWIFT_OPTIMIZATION_LEVEL = "-Onone";
 				SWIFT_SWIFT3_OBJC_INFERENCE = Default;
 				SWIFT_VERSION = 5.0;
+				TARGETED_DEVICE_FAMILY = "1,2";
 				TEST_HOST = "$(BUILT_PRODUCTS_DIR)/We all pay.app/We all pay";
 			};
 			name = Debug;
@@ -2870,8 +2799,13 @@
 				MTL_ENABLE_DEBUG_INFO = NO;
 				PRODUCT_BUNDLE_IDENTIFIER = com.GreenHair.CurrencyConverterTests;
 				PRODUCT_NAME = "$(TARGET_NAME)";
+				SUPPORTED_PLATFORMS = "iphoneos iphonesimulator";
+				SUPPORTS_MACCATALYST = NO;
+				SUPPORTS_MAC_DESIGNED_FOR_IPHONE_IPAD = NO;
+				SUPPORTS_XR_DESIGNED_FOR_IPHONE_IPAD = NO;
 				SWIFT_SWIFT3_OBJC_INFERENCE = Default;
 				SWIFT_VERSION = 5.0;
+				TARGETED_DEVICE_FAMILY = "1,2";
 				TEST_HOST = "$(BUILT_PRODUCTS_DIR)/We all pay.app/We all pay";
 			};
 			name = Release;
@@ -2915,7 +2849,10 @@
 				PRODUCT_BUNDLE_IDENTIFIER = com.greenhair.WeAllPayDesignableUI;
 				PRODUCT_NAME = "$(TARGET_NAME:c99extidentifier)";
 				SKIP_INSTALL = YES;
+				SUPPORTED_PLATFORMS = "iphoneos iphonesimulator";
 				SUPPORTS_MACCATALYST = NO;
+				SUPPORTS_MAC_DESIGNED_FOR_IPHONE_IPAD = NO;
+				SUPPORTS_XR_DESIGNED_FOR_IPHONE_IPAD = NO;
 				TARGETED_DEVICE_FAMILY = "1,2";
 				VERSIONING_SYSTEM = "apple-generic";
 				VERSION_INFO_PREFIX = "";
@@ -2963,7 +2900,10 @@
 				PRODUCT_BUNDLE_IDENTIFIER = com.greenhair.WeAllPayDesignableUI;
 				PRODUCT_NAME = "$(TARGET_NAME:c99extidentifier)";
 				SKIP_INSTALL = YES;
+				SUPPORTED_PLATFORMS = "iphoneos iphonesimulator";
 				SUPPORTS_MACCATALYST = NO;
+				SUPPORTS_MAC_DESIGNED_FOR_IPHONE_IPAD = NO;
+				SUPPORTS_XR_DESIGNED_FOR_IPHONE_IPAD = NO;
 				TARGETED_DEVICE_FAMILY = "1,2";
 				VERSIONING_SYSTEM = "apple-generic";
 				VERSION_INFO_PREFIX = "";
@@ -3011,7 +2951,10 @@
 				PRODUCT_BUNDLE_IDENTIFIER = com.greenhair.WeAllPayDesignableUI;
 				PRODUCT_NAME = "$(TARGET_NAME:c99extidentifier)";
 				SKIP_INSTALL = YES;
+				SUPPORTED_PLATFORMS = "iphoneos iphonesimulator";
 				SUPPORTS_MACCATALYST = NO;
+				SUPPORTS_MAC_DESIGNED_FOR_IPHONE_IPAD = NO;
+				SUPPORTS_XR_DESIGNED_FOR_IPHONE_IPAD = NO;
 				TARGETED_DEVICE_FAMILY = "1,2";
 				VERSIONING_SYSTEM = "apple-generic";
 				VERSION_INFO_PREFIX = "";
@@ -3059,7 +3002,10 @@
 				PRODUCT_BUNDLE_IDENTIFIER = com.greenhair.WeAllPayDesignableUI;
 				PRODUCT_NAME = "$(TARGET_NAME:c99extidentifier)";
 				SKIP_INSTALL = YES;
+				SUPPORTED_PLATFORMS = "iphoneos iphonesimulator";
 				SUPPORTS_MACCATALYST = NO;
+				SUPPORTS_MAC_DESIGNED_FOR_IPHONE_IPAD = NO;
+				SUPPORTS_XR_DESIGNED_FOR_IPHONE_IPAD = NO;
 				TARGETED_DEVICE_FAMILY = "1,2";
 				VERSIONING_SYSTEM = "apple-generic";
 				VERSION_INFO_PREFIX = "";
@@ -3242,6 +3188,10 @@
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				PROVISIONING_PROFILE = "";
 				"PROVISIONING_PROFILE[sdk=iphoneos*]" = "";
+				SUPPORTED_PLATFORMS = "iphoneos iphonesimulator";
+				SUPPORTS_MACCATALYST = NO;
+				SUPPORTS_MAC_DESIGNED_FOR_IPHONE_IPAD = NO;
+				SUPPORTS_XR_DESIGNED_FOR_IPHONE_IPAD = NO;
 				SWIFT_OBJC_BRIDGING_HEADER = "Going Dutch/We-all-pay-Bridging-Header.h";
 				SWIFT_OPTIMIZATION_LEVEL = "-Onone";
 				SWIFT_SWIFT3_OBJC_INFERENCE = Default;
@@ -3296,6 +3246,10 @@
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				PROVISIONING_PROFILE = "";
 				"PROVISIONING_PROFILE[sdk=iphoneos*]" = "";
+				SUPPORTED_PLATFORMS = "iphoneos iphonesimulator";
+				SUPPORTS_MACCATALYST = NO;
+				SUPPORTS_MAC_DESIGNED_FOR_IPHONE_IPAD = NO;
+				SUPPORTS_XR_DESIGNED_FOR_IPHONE_IPAD = NO;
 				SWIFT_OBJC_BRIDGING_HEADER = "Going Dutch/We-all-pay-Bridging-Header.h";
 				SWIFT_SWIFT3_OBJC_INFERENCE = Default;
 				SWIFT_VERSION = 5.0;
@@ -3306,7 +3260,6 @@
 		};
 		385F530D191C2C360012773D /* Debug */ = {
 			isa = XCBuildConfiguration;
-			baseConfigurationReference = 2F2C2B21DC68357692CB8C19 /* Pods-We all pay Tests.debug.xcconfig */;
 			buildSettings = {
 				ALWAYS_EMBED_SWIFT_STANDARD_LIBRARIES = "$(inherited)";
 				BUNDLE_LOADER = "$(BUILT_PRODUCTS_DIR)/We all pay.app/We all pay";
@@ -3347,10 +3300,15 @@
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				PROVISIONING_PROFILE = "";
 				STRIP_STYLE = all;
+				SUPPORTED_PLATFORMS = "iphoneos iphonesimulator";
+				SUPPORTS_MACCATALYST = NO;
+				SUPPORTS_MAC_DESIGNED_FOR_IPHONE_IPAD = NO;
+				SUPPORTS_XR_DESIGNED_FOR_IPHONE_IPAD = NO;
 				SWIFT_OBJC_BRIDGING_HEADER = "Going Dutch/We all pay Tests-Bridging-Header.h";
 				SWIFT_OPTIMIZATION_LEVEL = "-Onone";
 				SWIFT_SWIFT3_OBJC_INFERENCE = Default;
 				SWIFT_VERSION = 5.0;
+				TARGETED_DEVICE_FAMILY = "1,2";
 				TEST_HOST = "$(BUNDLE_LOADER)";
 				WRAPPER_EXTENSION = xctest;
 			};
@@ -3358,7 +3316,6 @@
 		};
 		385F530E191C2C360012773D /* Release */ = {
 			isa = XCBuildConfiguration;
-			baseConfigurationReference = 4064906A205408BD0BA6A7D1 /* Pods-We all pay Tests.release.xcconfig */;
 			buildSettings = {
 				ALWAYS_EMBED_SWIFT_STANDARD_LIBRARIES = "$(inherited)";
 				BUNDLE_LOADER = "$(BUILT_PRODUCTS_DIR)/We all pay.app/We all pay";
@@ -3396,9 +3353,14 @@
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				PROVISIONING_PROFILE = "";
 				STRIP_STYLE = all;
+				SUPPORTED_PLATFORMS = "iphoneos iphonesimulator";
+				SUPPORTS_MACCATALYST = NO;
+				SUPPORTS_MAC_DESIGNED_FOR_IPHONE_IPAD = NO;
+				SUPPORTS_XR_DESIGNED_FOR_IPHONE_IPAD = NO;
 				SWIFT_OBJC_BRIDGING_HEADER = "Going Dutch/We all pay Tests-Bridging-Header.h";
 				SWIFT_SWIFT3_OBJC_INFERENCE = Default;
 				SWIFT_VERSION = 5.0;
+				TARGETED_DEVICE_FAMILY = "1,2";
 				TEST_HOST = "$(BUNDLE_LOADER)";
 				WRAPPER_EXTENSION = xctest;
 			};
@@ -3515,6 +3477,10 @@
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				PROVISIONING_PROFILE = "";
 				"PROVISIONING_PROFILE[sdk=iphoneos*]" = "";
+				SUPPORTED_PLATFORMS = "iphoneos iphonesimulator";
+				SUPPORTS_MACCATALYST = NO;
+				SUPPORTS_MAC_DESIGNED_FOR_IPHONE_IPAD = NO;
+				SUPPORTS_XR_DESIGNED_FOR_IPHONE_IPAD = NO;
 				SWIFT_OBJC_BRIDGING_HEADER = "Going Dutch/We-all-pay-Bridging-Header.h";
 				SWIFT_OPTIMIZATION_LEVEL = "-Onone";
 				SWIFT_SWIFT3_OBJC_INFERENCE = Default;
@@ -3526,7 +3492,6 @@
 		};
 		38631484235C6A7800748B9F /* Screenshots */ = {
 			isa = XCBuildConfiguration;
-			baseConfigurationReference = 72A8F8961A8BB7CFB7771EAA /* Pods-We all pay Tests.screenshots.xcconfig */;
 			buildSettings = {
 				ALWAYS_EMBED_SWIFT_STANDARD_LIBRARIES = "$(inherited)";
 				BUNDLE_LOADER = "$(BUILT_PRODUCTS_DIR)/We all pay.app/We all pay";
@@ -3567,10 +3532,15 @@
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				PROVISIONING_PROFILE = "";
 				STRIP_STYLE = all;
+				SUPPORTED_PLATFORMS = "iphoneos iphonesimulator";
+				SUPPORTS_MACCATALYST = NO;
+				SUPPORTS_MAC_DESIGNED_FOR_IPHONE_IPAD = NO;
+				SUPPORTS_XR_DESIGNED_FOR_IPHONE_IPAD = NO;
 				SWIFT_OBJC_BRIDGING_HEADER = "Going Dutch/We all pay Tests-Bridging-Header.h";
 				SWIFT_OPTIMIZATION_LEVEL = "-Onone";
 				SWIFT_SWIFT3_OBJC_INFERENCE = Default;
 				SWIFT_VERSION = 5.0;
+				TARGETED_DEVICE_FAMILY = "1,2";
 				TEST_HOST = "$(BUNDLE_LOADER)";
 				WRAPPER_EXTENSION = xctest;
 			};
@@ -3619,6 +3589,10 @@
 				"PROVISIONING_PROFILE[sdk=iphoneos*]" = "";
 				SKIP_INSTALL = YES;
 				STRIP_STYLE = all;
+				SUPPORTED_PLATFORMS = "iphoneos iphonesimulator";
+				SUPPORTS_MACCATALYST = NO;
+				SUPPORTS_MAC_DESIGNED_FOR_IPHONE_IPAD = NO;
+				SUPPORTS_XR_DESIGNED_FOR_IPHONE_IPAD = NO;
 				SWIFT_OBJC_BRIDGING_HEADER = "Whoispayingnext-Bridging-Header.h";
 				SWIFT_OPTIMIZATION_LEVEL = "-Onone";
 				SWIFT_SWIFT3_OBJC_INFERENCE = Default;
@@ -3671,7 +3645,10 @@
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				PROVISIONING_PROFILE_SPECIFIER = "";
 				SKIP_INSTALL = YES;
+				SUPPORTED_PLATFORMS = "iphoneos iphonesimulator";
 				SUPPORTS_MACCATALYST = NO;
+				SUPPORTS_MAC_DESIGNED_FOR_IPHONE_IPAD = NO;
+				SUPPORTS_XR_DESIGNED_FOR_IPHONE_IPAD = NO;
 				SWIFT_OPTIMIZATION_LEVEL = "-Onone";
 				SWIFT_SWIFT3_OBJC_INFERENCE = Default;
 				SWIFT_VERSION = 5.0;
@@ -3710,9 +3687,14 @@
 				MTL_ENABLE_DEBUG_INFO = YES;
 				PRODUCT_BUNDLE_IDENTIFIER = com.GreenHair.WhoPayingUserDefaultsStoreInterfaceTests;
 				PRODUCT_NAME = "$(TARGET_NAME)";
+				SUPPORTED_PLATFORMS = "iphoneos iphonesimulator";
+				SUPPORTS_MACCATALYST = NO;
+				SUPPORTS_MAC_DESIGNED_FOR_IPHONE_IPAD = NO;
+				SUPPORTS_XR_DESIGNED_FOR_IPHONE_IPAD = NO;
 				SWIFT_OPTIMIZATION_LEVEL = "-Onone";
 				SWIFT_SWIFT3_OBJC_INFERENCE = Default;
 				SWIFT_VERSION = 5.0;
+				TARGETED_DEVICE_FAMILY = "1,2";
 				TEST_HOST = "$(BUILT_PRODUCTS_DIR)/We all pay.app/We all pay";
 			};
 			name = Screenshots;
@@ -3761,7 +3743,10 @@
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				PROVISIONING_PROFILE_SPECIFIER = "";
 				SKIP_INSTALL = YES;
+				SUPPORTED_PLATFORMS = "iphoneos iphonesimulator";
 				SUPPORTS_MACCATALYST = NO;
+				SUPPORTS_MAC_DESIGNED_FOR_IPHONE_IPAD = NO;
+				SUPPORTS_XR_DESIGNED_FOR_IPHONE_IPAD = NO;
 				SWIFT_OBJC_BRIDGING_HEADER = "";
 				SWIFT_OPTIMIZATION_LEVEL = "-Onone";
 				SWIFT_SWIFT3_OBJC_INFERENCE = Default;
@@ -3801,9 +3786,14 @@
 				MTL_ENABLE_DEBUG_INFO = YES;
 				PRODUCT_BUNDLE_IDENTIFIER = com.GreenHair.CurrencyConverterTests;
 				PRODUCT_NAME = "$(TARGET_NAME)";
+				SUPPORTED_PLATFORMS = "iphoneos iphonesimulator";
+				SUPPORTS_MACCATALYST = NO;
+				SUPPORTS_MAC_DESIGNED_FOR_IPHONE_IPAD = NO;
+				SUPPORTS_XR_DESIGNED_FOR_IPHONE_IPAD = NO;
 				SWIFT_OPTIMIZATION_LEVEL = "-Onone";
 				SWIFT_SWIFT3_OBJC_INFERENCE = Default;
 				SWIFT_VERSION = 5.0;
+				TARGETED_DEVICE_FAMILY = "1,2";
 				TEST_HOST = "$(BUILT_PRODUCTS_DIR)/We all pay.app/We all pay";
 			};
 			name = Screenshots;
@@ -3851,7 +3841,10 @@
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				PROVISIONING_PROFILE_SPECIFIER = "";
 				SKIP_INSTALL = YES;
+				SUPPORTED_PLATFORMS = "iphoneos iphonesimulator";
 				SUPPORTS_MACCATALYST = NO;
+				SUPPORTS_MAC_DESIGNED_FOR_IPHONE_IPAD = NO;
+				SUPPORTS_XR_DESIGNED_FOR_IPHONE_IPAD = NO;
 				SWIFT_OPTIMIZATION_LEVEL = "-Onone";
 				SWIFT_SWIFT3_OBJC_INFERENCE = Default;
 				SWIFT_VERSION = 5.0;
@@ -3889,9 +3882,14 @@
 				MTL_ENABLE_DEBUG_INFO = YES;
 				PRODUCT_BUNDLE_IDENTIFIER = com.GreenHair.RateMeControllerForiOSTests;
 				PRODUCT_NAME = "$(TARGET_NAME)";
+				SUPPORTED_PLATFORMS = "iphoneos iphonesimulator";
+				SUPPORTS_MACCATALYST = NO;
+				SUPPORTS_MAC_DESIGNED_FOR_IPHONE_IPAD = NO;
+				SUPPORTS_XR_DESIGNED_FOR_IPHONE_IPAD = NO;
 				SWIFT_OPTIMIZATION_LEVEL = "-Onone";
 				SWIFT_SWIFT3_OBJC_INFERENCE = Default;
 				SWIFT_VERSION = 5.0;
+				TARGETED_DEVICE_FAMILY = "1,2";
 				TEST_HOST = "$(BUILT_PRODUCTS_DIR)/We all pay.app/We all pay";
 			};
 			name = Screenshots;
@@ -3924,6 +3922,10 @@
 				MTL_FAST_MATH = YES;
 				PRODUCT_BUNDLE_IDENTIFIER = com.greenhair.Screenshots;
 				PRODUCT_NAME = "$(TARGET_NAME)";
+				SUPPORTED_PLATFORMS = "iphoneos iphonesimulator";
+				SUPPORTS_MACCATALYST = NO;
+				SUPPORTS_MAC_DESIGNED_FOR_IPHONE_IPAD = NO;
+				SUPPORTS_XR_DESIGNED_FOR_IPHONE_IPAD = NO;
 				SWIFT_ACTIVE_COMPILATION_CONDITIONS = DEBUG;
 				SWIFT_OPTIMIZATION_LEVEL = "-Onone";
 				SWIFT_VERSION = 5.0;
@@ -3962,6 +3964,10 @@
 				MTL_FAST_MATH = YES;
 				PRODUCT_BUNDLE_IDENTIFIER = com.greenhair.Screenshots;
 				PRODUCT_NAME = "$(TARGET_NAME)";
+				SUPPORTED_PLATFORMS = "iphoneos iphonesimulator";
+				SUPPORTS_MACCATALYST = NO;
+				SUPPORTS_MAC_DESIGNED_FOR_IPHONE_IPAD = NO;
+				SUPPORTS_XR_DESIGNED_FOR_IPHONE_IPAD = NO;
 				SWIFT_VERSION = 5.0;
 				TARGETED_DEVICE_FAMILY = "1,2";
 				TEST_TARGET_NAME = "We all pay";
@@ -3998,6 +4004,10 @@
 				MTL_FAST_MATH = YES;
 				PRODUCT_BUNDLE_IDENTIFIER = com.greenhair.Screenshots;
 				PRODUCT_NAME = "$(TARGET_NAME)";
+				SUPPORTED_PLATFORMS = "iphoneos iphonesimulator";
+				SUPPORTS_MACCATALYST = NO;
+				SUPPORTS_MAC_DESIGNED_FOR_IPHONE_IPAD = NO;
+				SUPPORTS_XR_DESIGNED_FOR_IPHONE_IPAD = NO;
 				SWIFT_VERSION = 5.0;
 				TARGETED_DEVICE_FAMILY = "1,2";
 				TEST_TARGET_NAME = "We all pay";
@@ -4034,6 +4044,10 @@
 				MTL_FAST_MATH = YES;
 				PRODUCT_BUNDLE_IDENTIFIER = com.greenhair.Screenshots;
 				PRODUCT_NAME = "$(TARGET_NAME)";
+				SUPPORTED_PLATFORMS = "iphoneos iphonesimulator";
+				SUPPORTS_MACCATALYST = NO;
+				SUPPORTS_MAC_DESIGNED_FOR_IPHONE_IPAD = NO;
+				SUPPORTS_XR_DESIGNED_FOR_IPHONE_IPAD = NO;
 				SWIFT_VERSION = 5.0;
 				TARGETED_DEVICE_FAMILY = "1,2";
 				TEST_TARGET_NAME = "We all pay";
@@ -4084,7 +4098,10 @@
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				PROVISIONING_PROFILE_SPECIFIER = "";
 				SKIP_INSTALL = YES;
+				SUPPORTED_PLATFORMS = "iphoneos iphonesimulator";
 				SUPPORTS_MACCATALYST = NO;
+				SUPPORTS_MAC_DESIGNED_FOR_IPHONE_IPAD = NO;
+				SUPPORTS_XR_DESIGNED_FOR_IPHONE_IPAD = NO;
 				SWIFT_OPTIMIZATION_LEVEL = "-Onone";
 				SWIFT_SWIFT3_OBJC_INFERENCE = Default;
 				SWIFT_VERSION = 5.0;
@@ -4140,7 +4157,10 @@
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				PROVISIONING_PROFILE_SPECIFIER = "";
 				SKIP_INSTALL = YES;
+				SUPPORTED_PLATFORMS = "iphoneos iphonesimulator";
 				SUPPORTS_MACCATALYST = NO;
+				SUPPORTS_MAC_DESIGNED_FOR_IPHONE_IPAD = NO;
+				SUPPORTS_XR_DESIGNED_FOR_IPHONE_IPAD = NO;
 				SWIFT_SWIFT3_OBJC_INFERENCE = Default;
 				SWIFT_VERSION = 5.0;
 				TARGETED_DEVICE_FAMILY = "1,2";
@@ -4178,9 +4198,14 @@
 				MTL_ENABLE_DEBUG_INFO = YES;
 				PRODUCT_BUNDLE_IDENTIFIER = com.GreenHair.WhoPayingUserDefaultsStoreInterfaceTests;
 				PRODUCT_NAME = "$(TARGET_NAME)";
+				SUPPORTED_PLATFORMS = "iphoneos iphonesimulator";
+				SUPPORTS_MACCATALYST = NO;
+				SUPPORTS_MAC_DESIGNED_FOR_IPHONE_IPAD = NO;
+				SUPPORTS_XR_DESIGNED_FOR_IPHONE_IPAD = NO;
 				SWIFT_OPTIMIZATION_LEVEL = "-Onone";
 				SWIFT_SWIFT3_OBJC_INFERENCE = Default;
 				SWIFT_VERSION = 5.0;
+				TARGETED_DEVICE_FAMILY = "1,2";
 				TEST_HOST = "$(BUILT_PRODUCTS_DIR)/We all pay.app/We all pay";
 			};
 			name = Debug;
@@ -4216,8 +4241,13 @@
 				MTL_ENABLE_DEBUG_INFO = NO;
 				PRODUCT_BUNDLE_IDENTIFIER = com.GreenHair.WhoPayingUserDefaultsStoreInterfaceTests;
 				PRODUCT_NAME = "$(TARGET_NAME)";
+				SUPPORTED_PLATFORMS = "iphoneos iphonesimulator";
+				SUPPORTS_MACCATALYST = NO;
+				SUPPORTS_MAC_DESIGNED_FOR_IPHONE_IPAD = NO;
+				SUPPORTS_XR_DESIGNED_FOR_IPHONE_IPAD = NO;
 				SWIFT_SWIFT3_OBJC_INFERENCE = Default;
 				SWIFT_VERSION = 5.0;
+				TARGETED_DEVICE_FAMILY = "1,2";
 				TEST_HOST = "$(BUILT_PRODUCTS_DIR)/We all pay.app/We all pay";
 			};
 			name = Release;
@@ -4265,6 +4295,10 @@
 				"PROVISIONING_PROFILE[sdk=iphoneos*]" = "";
 				SKIP_INSTALL = YES;
 				STRIP_STYLE = all;
+				SUPPORTED_PLATFORMS = "iphoneos iphonesimulator";
+				SUPPORTS_MACCATALYST = NO;
+				SUPPORTS_MAC_DESIGNED_FOR_IPHONE_IPAD = NO;
+				SUPPORTS_XR_DESIGNED_FOR_IPHONE_IPAD = NO;
 				SWIFT_OBJC_BRIDGING_HEADER = "Whoispayingnext-Bridging-Header.h";
 				SWIFT_OPTIMIZATION_LEVEL = "-Onone";
 				SWIFT_SWIFT3_OBJC_INFERENCE = Default;
@@ -4314,6 +4348,10 @@
 				"PROVISIONING_PROFILE[sdk=iphoneos*]" = "";
 				SKIP_INSTALL = YES;
 				STRIP_STYLE = all;
+				SUPPORTED_PLATFORMS = "iphoneos iphonesimulator";
+				SUPPORTS_MACCATALYST = NO;
+				SUPPORTS_MAC_DESIGNED_FOR_IPHONE_IPAD = NO;
+				SUPPORTS_XR_DESIGNED_FOR_IPHONE_IPAD = NO;
 				SWIFT_OBJC_BRIDGING_HEADER = "Whoispayingnext-Bridging-Header.h";
 				SWIFT_SWIFT3_OBJC_INFERENCE = Default;
 				SWIFT_VERSION = 5.0;
@@ -4484,7 +4522,10 @@
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				PROVISIONING_PROFILE_SPECIFIER = "";
 				SKIP_INSTALL = YES;
+				SUPPORTED_PLATFORMS = "iphoneos iphonesimulator";
 				SUPPORTS_MACCATALYST = NO;
+				SUPPORTS_MAC_DESIGNED_FOR_IPHONE_IPAD = NO;
+				SUPPORTS_XR_DESIGNED_FOR_IPHONE_IPAD = NO;
 				SWIFT_OPTIMIZATION_LEVEL = "-Onone";
 				SWIFT_SWIFT3_OBJC_INFERENCE = Default;
 				SWIFT_VERSION = 5.0;
@@ -4539,7 +4580,10 @@
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				PROVISIONING_PROFILE_SPECIFIER = "";
 				SKIP_INSTALL = YES;
+				SUPPORTED_PLATFORMS = "iphoneos iphonesimulator";
 				SUPPORTS_MACCATALYST = NO;
+				SUPPORTS_MAC_DESIGNED_FOR_IPHONE_IPAD = NO;
+				SUPPORTS_XR_DESIGNED_FOR_IPHONE_IPAD = NO;
 				SWIFT_SWIFT3_OBJC_INFERENCE = Default;
 				SWIFT_VERSION = 5.0;
 				TARGETED_DEVICE_FAMILY = "1,2";
@@ -4576,9 +4620,14 @@
 				MTL_ENABLE_DEBUG_INFO = YES;
 				PRODUCT_BUNDLE_IDENTIFIER = com.GreenHair.RateMeControllerForiOSTests;
 				PRODUCT_NAME = "$(TARGET_NAME)";
+				SUPPORTED_PLATFORMS = "iphoneos iphonesimulator";
+				SUPPORTS_MACCATALYST = NO;
+				SUPPORTS_MAC_DESIGNED_FOR_IPHONE_IPAD = NO;
+				SUPPORTS_XR_DESIGNED_FOR_IPHONE_IPAD = NO;
 				SWIFT_OPTIMIZATION_LEVEL = "-Onone";
 				SWIFT_SWIFT3_OBJC_INFERENCE = Default;
 				SWIFT_VERSION = 5.0;
+				TARGETED_DEVICE_FAMILY = "1,2";
 				TEST_HOST = "$(BUILT_PRODUCTS_DIR)/We all pay.app/We all pay";
 			};
 			name = Debug;
@@ -4613,8 +4662,13 @@
 				MTL_ENABLE_DEBUG_INFO = NO;
 				PRODUCT_BUNDLE_IDENTIFIER = com.GreenHair.RateMeControllerForiOSTests;
 				PRODUCT_NAME = "$(TARGET_NAME)";
+				SUPPORTED_PLATFORMS = "iphoneos iphonesimulator";
+				SUPPORTS_MACCATALYST = NO;
+				SUPPORTS_MAC_DESIGNED_FOR_IPHONE_IPAD = NO;
+				SUPPORTS_XR_DESIGNED_FOR_IPHONE_IPAD = NO;
 				SWIFT_SWIFT3_OBJC_INFERENCE = Default;
 				SWIFT_VERSION = 5.0;
+				TARGETED_DEVICE_FAMILY = "1,2";
 				TEST_HOST = "$(BUILT_PRODUCTS_DIR)/We all pay.app/We all pay";
 			};
 			name = Release;
@@ -4739,6 +4793,10 @@
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				PROVISIONING_PROFILE = "";
 				"PROVISIONING_PROFILE[sdk=iphoneos*]" = "";
+				SUPPORTED_PLATFORMS = "iphoneos iphonesimulator";
+				SUPPORTS_MACCATALYST = NO;
+				SUPPORTS_MAC_DESIGNED_FOR_IPHONE_IPAD = NO;
+				SUPPORTS_XR_DESIGNED_FOR_IPHONE_IPAD = NO;
 				SWIFT_OBJC_BRIDGING_HEADER = "Going Dutch/We-all-pay-Bridging-Header.h";
 				SWIFT_OPTIMIZATION_LEVEL = "-Onone";
 				SWIFT_SWIFT3_OBJC_INFERENCE = Default;
@@ -4750,7 +4808,6 @@
 		};
 		38E0FCC523CC4E1C002A4488 /* AdTest */ = {
 			isa = XCBuildConfiguration;
-			baseConfigurationReference = 6C38D777B368B03CC28F8342 /* Pods-We all pay Tests.adtest.xcconfig */;
 			buildSettings = {
 				ALWAYS_EMBED_SWIFT_STANDARD_LIBRARIES = "$(inherited)";
 				BUNDLE_LOADER = "$(BUILT_PRODUCTS_DIR)/We all pay.app/We all pay";
@@ -4791,10 +4848,15 @@
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				PROVISIONING_PROFILE = "";
 				STRIP_STYLE = all;
+				SUPPORTED_PLATFORMS = "iphoneos iphonesimulator";
+				SUPPORTS_MACCATALYST = NO;
+				SUPPORTS_MAC_DESIGNED_FOR_IPHONE_IPAD = NO;
+				SUPPORTS_XR_DESIGNED_FOR_IPHONE_IPAD = NO;
 				SWIFT_OBJC_BRIDGING_HEADER = "Going Dutch/We all pay Tests-Bridging-Header.h";
 				SWIFT_OPTIMIZATION_LEVEL = "-Onone";
 				SWIFT_SWIFT3_OBJC_INFERENCE = Default;
 				SWIFT_VERSION = 5.0;
+				TARGETED_DEVICE_FAMILY = "1,2";
 				TEST_HOST = "$(BUNDLE_LOADER)";
 				WRAPPER_EXTENSION = xctest;
 			};
@@ -4843,6 +4905,10 @@
 				"PROVISIONING_PROFILE[sdk=iphoneos*]" = "";
 				SKIP_INSTALL = YES;
 				STRIP_STYLE = all;
+				SUPPORTED_PLATFORMS = "iphoneos iphonesimulator";
+				SUPPORTS_MACCATALYST = NO;
+				SUPPORTS_MAC_DESIGNED_FOR_IPHONE_IPAD = NO;
+				SUPPORTS_XR_DESIGNED_FOR_IPHONE_IPAD = NO;
 				SWIFT_OBJC_BRIDGING_HEADER = "Whoispayingnext-Bridging-Header.h";
 				SWIFT_OPTIMIZATION_LEVEL = "-Onone";
 				SWIFT_SWIFT3_OBJC_INFERENCE = Default;
@@ -4895,7 +4961,10 @@
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				PROVISIONING_PROFILE_SPECIFIER = "";
 				SKIP_INSTALL = YES;
+				SUPPORTED_PLATFORMS = "iphoneos iphonesimulator";
 				SUPPORTS_MACCATALYST = NO;
+				SUPPORTS_MAC_DESIGNED_FOR_IPHONE_IPAD = NO;
+				SUPPORTS_XR_DESIGNED_FOR_IPHONE_IPAD = NO;
 				SWIFT_OPTIMIZATION_LEVEL = "-Onone";
 				SWIFT_SWIFT3_OBJC_INFERENCE = Default;
 				SWIFT_VERSION = 5.0;
@@ -4934,9 +5003,14 @@
 				MTL_ENABLE_DEBUG_INFO = YES;
 				PRODUCT_BUNDLE_IDENTIFIER = com.GreenHair.WhoPayingUserDefaultsStoreInterfaceTests;
 				PRODUCT_NAME = "$(TARGET_NAME)";
+				SUPPORTED_PLATFORMS = "iphoneos iphonesimulator";
+				SUPPORTS_MACCATALYST = NO;
+				SUPPORTS_MAC_DESIGNED_FOR_IPHONE_IPAD = NO;
+				SUPPORTS_XR_DESIGNED_FOR_IPHONE_IPAD = NO;
 				SWIFT_OPTIMIZATION_LEVEL = "-Onone";
 				SWIFT_SWIFT3_OBJC_INFERENCE = Default;
 				SWIFT_VERSION = 5.0;
+				TARGETED_DEVICE_FAMILY = "1,2";
 				TEST_HOST = "$(BUILT_PRODUCTS_DIR)/We all pay.app/We all pay";
 			};
 			name = AdTest;
@@ -4985,7 +5059,10 @@
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				PROVISIONING_PROFILE_SPECIFIER = "";
 				SKIP_INSTALL = YES;
+				SUPPORTED_PLATFORMS = "iphoneos iphonesimulator";
 				SUPPORTS_MACCATALYST = NO;
+				SUPPORTS_MAC_DESIGNED_FOR_IPHONE_IPAD = NO;
+				SUPPORTS_XR_DESIGNED_FOR_IPHONE_IPAD = NO;
 				SWIFT_OBJC_BRIDGING_HEADER = "";
 				SWIFT_OPTIMIZATION_LEVEL = "-Onone";
 				SWIFT_SWIFT3_OBJC_INFERENCE = Default;
@@ -5025,9 +5102,14 @@
 				MTL_ENABLE_DEBUG_INFO = YES;
 				PRODUCT_BUNDLE_IDENTIFIER = com.GreenHair.CurrencyConverterTests;
 				PRODUCT_NAME = "$(TARGET_NAME)";
+				SUPPORTED_PLATFORMS = "iphoneos iphonesimulator";
+				SUPPORTS_MACCATALYST = NO;
+				SUPPORTS_MAC_DESIGNED_FOR_IPHONE_IPAD = NO;
+				SUPPORTS_XR_DESIGNED_FOR_IPHONE_IPAD = NO;
 				SWIFT_OPTIMIZATION_LEVEL = "-Onone";
 				SWIFT_SWIFT3_OBJC_INFERENCE = Default;
 				SWIFT_VERSION = 5.0;
+				TARGETED_DEVICE_FAMILY = "1,2";
 				TEST_HOST = "$(BUILT_PRODUCTS_DIR)/We all pay.app/We all pay";
 			};
 			name = AdTest;
@@ -5075,7 +5157,10 @@
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				PROVISIONING_PROFILE_SPECIFIER = "";
 				SKIP_INSTALL = YES;
+				SUPPORTED_PLATFORMS = "iphoneos iphonesimulator";
 				SUPPORTS_MACCATALYST = NO;
+				SUPPORTS_MAC_DESIGNED_FOR_IPHONE_IPAD = NO;
+				SUPPORTS_XR_DESIGNED_FOR_IPHONE_IPAD = NO;
 				SWIFT_OPTIMIZATION_LEVEL = "-Onone";
 				SWIFT_SWIFT3_OBJC_INFERENCE = Default;
 				SWIFT_VERSION = 5.0;
@@ -5113,9 +5198,14 @@
 				MTL_ENABLE_DEBUG_INFO = YES;
 				PRODUCT_BUNDLE_IDENTIFIER = com.GreenHair.RateMeControllerForiOSTests;
 				PRODUCT_NAME = "$(TARGET_NAME)";
+				SUPPORTED_PLATFORMS = "iphoneos iphonesimulator";
+				SUPPORTS_MACCATALYST = NO;
+				SUPPORTS_MAC_DESIGNED_FOR_IPHONE_IPAD = NO;
+				SUPPORTS_XR_DESIGNED_FOR_IPHONE_IPAD = NO;
 				SWIFT_OPTIMIZATION_LEVEL = "-Onone";
 				SWIFT_SWIFT3_OBJC_INFERENCE = Default;
 				SWIFT_VERSION = 5.0;
+				TARGETED_DEVICE_FAMILY = "1,2";
 				TEST_HOST = "$(BUILT_PRODUCTS_DIR)/We all pay.app/We all pay";
 			};
 			name = AdTest;
@@ -5267,60 +5357,6 @@
 			defaultConfigurationName = Release;
 		};
 /* End XCConfigurationList section */
-
-/* Begin XCRemoteSwiftPackageReference section */
-		38EFCBE62BD902670044E15B /* XCRemoteSwiftPackageReference "firebase-ios-sdk" */ = {
-			isa = XCRemoteSwiftPackageReference;
-			repositoryURL = "https://github.com/firebase/firebase-ios-sdk";
-			requirement = {
-				kind = upToNextMajorVersion;
-				minimumVersion = 10.24.0;
-			};
-		};
-/* End XCRemoteSwiftPackageReference section */
-
-/* Begin XCSwiftPackageProductDependency section */
-		38EFCBE72BD902670044E15B /* FirebaseAnalytics */ = {
-			isa = XCSwiftPackageProductDependency;
-			package = 38EFCBE62BD902670044E15B /* XCRemoteSwiftPackageReference "firebase-ios-sdk" */;
-			productName = FirebaseAnalytics;
-		};
-		38EFCBE92BD902670044E15B /* FirebaseAnalyticsOnDeviceConversion */ = {
-			isa = XCSwiftPackageProductDependency;
-			package = 38EFCBE62BD902670044E15B /* XCRemoteSwiftPackageReference "firebase-ios-sdk" */;
-			productName = FirebaseAnalyticsOnDeviceConversion;
-		};
-		38EFCBEB2BD902670044E15B /* FirebaseAnalyticsSwift */ = {
-			isa = XCSwiftPackageProductDependency;
-			package = 38EFCBE62BD902670044E15B /* XCRemoteSwiftPackageReference "firebase-ios-sdk" */;
-			productName = FirebaseAnalyticsSwift;
-		};
-		38EFCBED2BD902670044E15B /* FirebaseAppCheck */ = {
-			isa = XCSwiftPackageProductDependency;
-			package = 38EFCBE62BD902670044E15B /* XCRemoteSwiftPackageReference "firebase-ios-sdk" */;
-			productName = FirebaseAppCheck;
-		};
-		38EFCBEF2BD902670044E15B /* FirebasePerformance */ = {
-			isa = XCSwiftPackageProductDependency;
-			package = 38EFCBE62BD902670044E15B /* XCRemoteSwiftPackageReference "firebase-ios-sdk" */;
-			productName = FirebasePerformance;
-		};
-		38EFCBF12BD902670044E15B /* FirebaseRemoteConfig */ = {
-			isa = XCSwiftPackageProductDependency;
-			package = 38EFCBE62BD902670044E15B /* XCRemoteSwiftPackageReference "firebase-ios-sdk" */;
-			productName = FirebaseRemoteConfig;
-		};
-		38EFCBF32BD902670044E15B /* FirebaseRemoteConfigSwift */ = {
-			isa = XCSwiftPackageProductDependency;
-			package = 38EFCBE62BD902670044E15B /* XCRemoteSwiftPackageReference "firebase-ios-sdk" */;
-			productName = FirebaseRemoteConfigSwift;
-		};
-		38EFCBF52BD902A90044E15B /* FirebaseCrashlytics */ = {
-			isa = XCSwiftPackageProductDependency;
-			package = 38EFCBE62BD902670044E15B /* XCRemoteSwiftPackageReference "firebase-ios-sdk" */;
-			productName = FirebaseCrashlytics;
-		};
-/* End XCSwiftPackageProductDependency section */
 
 /* Begin XCVersionGroup section */
 		3829AD0D178B41320025969D /* WeAllPayStore.xcdatamodeld */ = {
