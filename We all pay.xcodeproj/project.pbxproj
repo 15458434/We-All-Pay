@@ -975,6 +975,15 @@
 			name = Events;
 			sourceTree = "<group>";
 		};
+		3842750F2C301E3E00D1A93D /* Select Emailaddress */ = {
+			isa = PBXGroup;
+			children = (
+				384EC9111BC3008300A80799 /* SelectEmailAddressTableViewController_iPad.swift */,
+				384EC90F1BC2F48C00A80799 /* SelectEmailAddressTableViewCell_iPad.swift */,
+			);
+			name = "Select Emailaddress";
+			sourceTree = "<group>";
+		};
 		38572AC7169D437B00969C62 = {
 			isa = PBXGroup;
 			children = (
@@ -1260,7 +1269,6 @@
 				3812760F1BBE9A7F0004C8C2 /* MCPaymentPresenceTableViewCell.swift */,
 				384EC90B1BC2F17500A80799 /* SelectCategoryTableViewCell_iPad.swift */,
 				384EC90D1BC2F35700A80799 /* SelectCurrencyTableViewCell_iPad.swift */,
-				384EC90F1BC2F48C00A80799 /* SelectEmailAddressTableViewCell_iPad.swift */,
 			);
 			name = iPad;
 			sourceTree = "<group>";
@@ -1428,7 +1436,6 @@
 		38E0C5E418E9B244005A3F17 /* iPad */ = {
 			isa = PBXGroup;
 			children = (
-				384EC9111BC3008300A80799 /* SelectEmailAddressTableViewController_iPad.swift */,
 				3812760D1BBE76B40004C8C2 /* PaymentViewController.swift */,
 				38E2CB471BC2ABFB0092B5C8 /* SelectPayerTableViewController_iPad.swift */,
 				38EF31431938BA07004912F0 /* UINavigationController+KeyboardDismiss.h */,
@@ -1507,6 +1514,7 @@
 				389ACFE22374B5060025139F /* MCEmailTextInputProxy.h */,
 				389ACFE32374B5060025139F /* MCEmailTextInputProxy.m */,
 				38C44BCD23DEDEC900264BBB /* ScrollViewAdjusterToKeyboard.swift */,
+				3842750F2C301E3E00D1A93D /* Select Emailaddress */,
 			);
 			name = Person;
 			sourceTree = "<group>";

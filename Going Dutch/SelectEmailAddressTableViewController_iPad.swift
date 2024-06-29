@@ -6,21 +6,18 @@
 //  Copyright © 2015 Mark Cornelisse. All rights reserved.
 //
 
-
 import UIKit
 
 import FirebaseAnalytics
 
 final class SelectEmailAddressTableViewController_iPad: UITableViewController, ThisPersonProtocol, MCDismissMeBlockProtocol {
-    // MARK: Properties
     var allEmailAddresses: [MCEmailAddress]!
     
     var thisPerson: MCPerson! 
     var dismissMe: (()->())?
     
-    var writableThisPerson: MCPerson!
+    // MARK: UITableViewController
     
-    // MARK: Inherited From Super
     override func viewDidLoad() {
         super.viewDidLoad()
         
@@ -29,14 +26,8 @@ final class SelectEmailAddressTableViewController_iPad: UITableViewController, T
         allEmailAddresses = (UILocalizedIndexedCollation.current().sortedArray(from: arrayOfEmailAddresses, collationStringSelector: emailAddressSelector) as! [MCEmailAddress])
     }
     
-    // MARK: UI Table View Delegate
-    override func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
-        let newDefaulEmailAddressObject = allEmailAddresses[(indexPath as NSIndexPath).row]
-        thisPerson.setNewDefaultEmailaddressObject(newDefaulEmailAddressObject)
-        dismissMe!()
-    }
+    // MARK: UITableViewDataSource
     
-    // MARK: UI Table View Data Source
     override func numberOfSections(in tableView: UITableView) -> Int {
         return 1
     }
@@ -47,8 +38,21 @@ final class SelectEmailAddressTableViewController_iPad: UITableViewController, T
     
     override func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
         let cell = tableView.dequeueReusableCell(withIdentifier: "MCSelectEmailAddressTableViewCell_iPad", for: indexPath) as! SelectEmailAddressTableViewCell_iPad
-        let emailAddress = allEmailAddresses[(indexPath as NSIndexPath).row]
-        cell.emailAddressLabel.text = emailAddress.emailAddress
+        let emailAddress = allEmailAddresses[indexPath.row]
+        cell.update(with: emailAddress)
         return cell
     }
+    
+    // MARK: UITableViewDelegate
+    override func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
+        let newDefaulEmailAddressObject = allEmailAddresses[indexPath.row]
+        thisPerson.setNewDefaultEmailaddressObject(newDefaulEmailAddressObject)
+        dismissMe!()
+    }
+    
+    // MARK: UIViewController
+    
+    // MARK: UIResponder
+    
+    // MARK: NSObject
 }
