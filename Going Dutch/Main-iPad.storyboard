@@ -12,34 +12,51 @@
         <scene sceneID="cSm-9q-ez4">
             <objects>
                 <tableViewController storyboardIdentifier="MCSelectEmailAddressTableViewController_iPad" useStoryboardIdentifierAsRestorationIdentifier="YES" id="Xu3-9f-Jho" customClass="SelectEmailAddressTableViewController_iPad" customModule="We_all_pay" customModuleProvider="target" sceneMemberID="viewController">
-                    <tableView key="view" clipsSubviews="YES" contentMode="scaleToFill" restorationIdentifier="selectEmailTableView" alwaysBounceVertical="YES" dataMode="prototypes" style="plain" separatorStyle="default" rowHeight="44" sectionHeaderHeight="22" sectionFooterHeight="22" id="GQd-6t-K1V">
+                    <tableView key="view" clipsSubviews="YES" contentMode="scaleToFill" restorationIdentifier="selectEmailTableView" alwaysBounceVertical="YES" dataMode="prototypes" style="plain" separatorStyle="default" rowHeight="-1" estimatedRowHeight="-1" sectionHeaderHeight="22" sectionFooterHeight="22" id="GQd-6t-K1V">
                         <rect key="frame" x="0.0" y="0.0" width="320" height="240"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <color key="backgroundColor" red="1" green="1" blue="1" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                         <prototypes>
                             <tableViewCell contentMode="scaleToFill" restorationIdentifier="MCSelectEmailAddressTableViewCell_iPad" selectionStyle="blue" hidesAccessoryWhenEditing="NO" indentationLevel="1" indentationWidth="0.0" reuseIdentifier="MCSelectEmailAddressTableViewCell_iPad" id="4r6-PB-WJw" customClass="SelectEmailAddressTableViewCell_iPad" customModule="We_all_pay" customModuleProvider="target">
-                                <rect key="frame" x="0.0" y="50" width="320" height="44"/>
+                                <rect key="frame" x="0.0" y="50" width="320" height="45.5"/>
                                 <autoresizingMask key="autoresizingMask"/>
                                 <tableViewCellContentView key="contentView" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" restorationIdentifier="emailAddressContentView" tableViewCell="4r6-PB-WJw" id="bd1-y0-CA7">
-                                    <rect key="frame" x="0.0" y="0.0" width="320" height="44"/>
+                                    <rect key="frame" x="0.0" y="0.0" width="320" height="45.5"/>
                                     <autoresizingMask key="autoresizingMask"/>
                                     <subviews>
-                                        <label clipsSubviews="YES" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" restorationIdentifier="emailAddressLabel" text="emailAddress" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="KBE-ZP-DFn">
-                                            <rect key="frame" x="20" y="11" width="280" height="22"/>
-                                            <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
-                                            <fontDescription key="fontDescription" style="UICTFontTextStyleHeadline"/>
-                                            <color key="textColor" red="0.0" green="0.0" blue="0.0" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
-                                            <nil key="highlightedColor"/>
-                                        </label>
+                                        <stackView opaque="NO" contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="eAB-8Y-MhZ">
+                                            <rect key="frame" x="20" y="12" width="280" height="21.5"/>
+                                            <subviews>
+                                                <label clipsSubviews="YES" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" restorationIdentifier="emailAddressLabel" text="emailAddress" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="KBE-ZP-DFn">
+                                                    <rect key="frame" x="0.0" y="0.0" width="258.5" height="21.5"/>
+                                                    <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                                                    <fontDescription key="fontDescription" style="UICTFontTextStyleHeadline"/>
+                                                    <color key="textColor" red="0.0" green="0.0" blue="0.0" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                                                    <nil key="highlightedColor"/>
+                                                </label>
+                                                <imageView clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleAspectFit" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="checkmark" catalog="system" translatesAutoresizingMaskIntoConstraints="NO" id="yNC-nX-jbs">
+                                                    <rect key="frame" x="258.5" y="2" width="21.5" height="18"/>
+                                                    <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                                                    <color key="tintColor" name="button - enabled"/>
+                                                    <constraints>
+                                                        <constraint firstAttribute="width" secondItem="yNC-nX-jbs" secondAttribute="height" multiplier="1:1" id="ZQk-aB-Vp8"/>
+                                                        <constraint firstAttribute="height" constant="21" id="sk0-vQ-sr5"/>
+                                                    </constraints>
+                                                </imageView>
+                                            </subviews>
+                                            <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                                        </stackView>
                                     </subviews>
                                     <constraints>
-                                        <constraint firstAttribute="trailing" secondItem="KBE-ZP-DFn" secondAttribute="trailing" constant="20" id="5zu-Gv-VPe"/>
-                                        <constraint firstAttribute="bottom" secondItem="KBE-ZP-DFn" secondAttribute="bottom" constant="11" id="ICs-eB-9In"/>
-                                        <constraint firstItem="KBE-ZP-DFn" firstAttribute="top" secondItem="bd1-y0-CA7" secondAttribute="top" constant="11" id="uVu-0a-ejT"/>
-                                        <constraint firstItem="KBE-ZP-DFn" firstAttribute="leading" secondItem="bd1-y0-CA7" secondAttribute="leading" constant="20" id="wKl-jr-hd8"/>
+                                        <constraint firstAttribute="bottom" secondItem="eAB-8Y-MhZ" secondAttribute="bottom" constant="12" id="MH1-Gs-jcj"/>
+                                        <constraint firstAttribute="trailing" secondItem="eAB-8Y-MhZ" secondAttribute="trailing" constant="20" symbolic="YES" id="MVA-4b-fZH"/>
+                                        <constraint firstItem="eAB-8Y-MhZ" firstAttribute="leading" secondItem="bd1-y0-CA7" secondAttribute="leading" constant="20" symbolic="YES" id="RKO-ft-KBy"/>
+                                        <constraint firstItem="eAB-8Y-MhZ" firstAttribute="top" secondItem="bd1-y0-CA7" secondAttribute="top" constant="12" id="cZ4-Ep-mkC"/>
                                     </constraints>
                                 </tableViewCellContentView>
+                                <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                 <connections>
+                                    <outlet property="checkMarkImageView" destination="yNC-nX-jbs" id="0GF-qe-AQW"/>
                                     <outlet property="emailAddressLabel" destination="KBE-ZP-DFn" id="Pb4-YT-otx"/>
                                 </connections>
                             </tableViewCell>
@@ -556,6 +573,7 @@
     <resources>
         <image name="barbutton - cancel" width="22" height="22"/>
         <image name="barbutton - done" width="22" height="22"/>
+        <image name="checkmark" catalog="system" width="128" height="114"/>
         <namedColor name="button - enabled">
             <color red="1" green="0.52941176470588236" blue="0.67843137254901964" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
         </namedColor>

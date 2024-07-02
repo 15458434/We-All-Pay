@@ -87,6 +87,11 @@
             value = "disable"
             isEnabled = "NO">
          </EnvironmentVariable>
+         <EnvironmentVariable
+            key = "com.apple.CoreData.SQLDebug"
+            value = "2"
+            isEnabled = "NO">
+         </EnvironmentVariable>
       </EnvironmentVariables>
       <AdditionalOptions>
          <AdditionalOption

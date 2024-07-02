@@ -11,6 +11,7 @@ import UIKit
 @objc(MCPersonModel) @objcMembers final class PersonModel: NSObject {
     public private(set) dynamic var person: MCPerson!
     private(set) var personFetchedResultsController: NSFetchedResultsController<MCPerson>!
+    private(set) var allEmailaddressesFetchedResultsController: NSFetchedResultsController<MCEmailAddress>!
     private(set) var defaultEmailAddressFetchedResultsController: NSFetchedResultsController<MCEmailAddress>!
     private var changeHandler: ((_ person: MCPerson) -> ())!
     
@@ -23,7 +24,15 @@ import UIKit
             personFetchedResultsController.delegate = fetchedResultsControllerDelegate
             try! personFetchedResultsController.performFetch()
         }
-        func createEmailAddressResultsController() {
+        func createAllEmailAddressesFetchedResultsController() {
+            let request = MCEmailAddress.fetchRequest()
+            request.predicate = NSPredicate(format: "owner = %@", person)
+            request.sortDescriptors = [NSSortDescriptor(keyPath: \MCEmailAddress.emailAddress, ascending: true)]
+            allEmailaddressesFetchedResultsController = NSFetchedResultsController(fetchRequest: request, managedObjectContext: person.managedObjectContext!, sectionNameKeyPath: nil, cacheName: nil)
+            allEmailaddressesFetchedResultsController.delegate = fetchedResultsControllerDelegate
+            try! allEmailaddressesFetchedResultsController.performFetch()
+        }
+        func createDefaultEmailAddressResultsController() {
             let request = MCEmailAddress.fetchRequest()
             request.predicate = NSPredicate(format: "owner = %@ AND selected = %@", person, NSNumber(value: true))
             request.sortDescriptors = [NSSortDescriptor(key: "emailAddress", ascending: true)]
@@ -34,12 +43,13 @@ import UIKit
         
         self.person = person
         createPersonFetchedResultsController()
-        createEmailAddressResultsController()
+        createAllEmailAddressesFetchedResultsController()
+        createDefaultEmailAddressResultsController()
         self.changeHandler = changeHandler
     }
     
     
-    var emailAddreses: [MCEmailAddress] {
+    var emailaddresses: [MCEmailAddress] {
         let request = MCEmailAddress.fetchRequest()
         request.predicate = NSPredicate(format: "owner = %@", person)
         request.sortDescriptors = [NSSortDescriptor(key: "emailAddress", ascending: true)]
@@ -47,11 +57,15 @@ import UIKit
         return result
     }
     
+    var defaultEmailaddress: MCEmailAddress? {
+        emailaddresses.first(where: { $0.selected!.boolValue })
+    }
+    
     var indexOfDefaultEmailAddress: Int {
         guard let defaultEmailAddressObject = person.getDefaultEmailAddressObject() else {
             return -1
         }
-        return emailAddreses.firstIndex(of: defaultEmailAddressObject) ?? -1
+        return emailaddresses.firstIndex(of: defaultEmailAddressObject) ?? -1
     }
     
     func beginUpdates() {
@@ -70,7 +84,7 @@ import UIKit
         person.dateModified = nu
     }
     
-    @objc(updateDefaultEmailAddressWithString:) func update(defaultEmailAddress: String) {
+    @objc(updateDefaultEmailAddressWithString:) public func update(defaultEmailAddress: String) {
         var defaultEmailAddressObject: MCEmailAddress? {
             let request: NSFetchRequest<MCEmailAddress> = MCEmailAddress.fetchRequest()
             request.predicate = NSPredicate(format: "owner = %@ AND selected = %@", person, NSNumber(value: true))
@@ -89,8 +103,10 @@ import UIKit
         person.dateModified = nu
     }
     
-    @objc(updateDefaultEmailAddressWithEmailAddress:) func update(defaultEmailAddress: MCEmailAddress) {
-        person.setNewDefaultEmailaddressObject(defaultEmailAddress)
+    @objc(updateDefaultEmailAddressObject:) public func update(default newEmailaddress: MCEmailAddress) {
+        // TODO: Write test function for this test.
+        person.setNewDefaultEmailaddressObject(newEmailaddress)
+        self.changeHandler(self.person)
     }
     
     func endUpdates() {

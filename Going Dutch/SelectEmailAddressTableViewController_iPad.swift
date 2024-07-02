@@ -6,37 +6,30 @@
 //  Copyright © 2015 Mark Cornelisse. All rights reserved.
 //
 
-
 import UIKit
 
 import FirebaseAnalytics
 
-final class SelectEmailAddressTableViewController_iPad: UITableViewController, ThisPersonProtocol, MCDismissMeBlockProtocol {
-    // MARK: Properties
+final class SelectEmailAddressTableViewController_iPad: UITableViewController {
+    private var model: PersonModel!
     var allEmailAddresses: [MCEmailAddress]!
     
-    var thisPerson: MCPerson! 
-    var dismissMe: (()->())?
+    @objc(updateModel:) func update(model: PersonModel) {
+        self.model = model
+    }
     
-    var writableThisPerson: MCPerson!
+    // MARK: UITableViewController
     
-    // MARK: Inherited From Super
     override func viewDidLoad() {
         super.viewDidLoad()
         
-        let arrayOfEmailAddresses = Array(thisPerson.emailAddress ?? Set<MCEmailAddress>())
+        let arrayOfEmailAddresses = Array(model.person.emailAddress ?? Set<MCEmailAddress>())
         let emailAddressSelector: Selector = #selector(getter: MCPerson.emailAddress)
         allEmailAddresses = (UILocalizedIndexedCollation.current().sortedArray(from: arrayOfEmailAddresses, collationStringSelector: emailAddressSelector) as! [MCEmailAddress])
     }
     
-    // MARK: UI Table View Delegate
-    override func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
-        let newDefaulEmailAddressObject = allEmailAddresses[(indexPath as NSIndexPath).row]
-        thisPerson.setNewDefaultEmailaddressObject(newDefaulEmailAddressObject)
-        dismissMe!()
-    }
+    // MARK: UITableViewDataSource
     
-    // MARK: UI Table View Data Source
     override func numberOfSections(in tableView: UITableView) -> Int {
         return 1
     }
@@ -47,8 +40,22 @@ final class SelectEmailAddressTableViewController_iPad: UITableViewController, T
     
     override func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
         let cell = tableView.dequeueReusableCell(withIdentifier: "MCSelectEmailAddressTableViewCell_iPad", for: indexPath) as! SelectEmailAddressTableViewCell_iPad
-        let emailAddress = allEmailAddresses[(indexPath as NSIndexPath).row]
-        cell.emailAddressLabel.text = emailAddress.emailAddress
+        let emailAddress = allEmailAddresses[indexPath.row]
+        cell.update(with: emailAddress)
         return cell
     }
+    
+    // MARK: UITableViewDelegate
+    
+    override func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
+        let newDefaulEmailAddressObject = allEmailAddresses[indexPath.row]
+        model.update(default: newDefaulEmailAddressObject)
+        self.presentingViewController!.dismiss(animated: true)
+    }
+    
+    // MARK: UIViewController
+    
+    // MARK: UIResponder
+    
+    // MARK: NSObject
 }

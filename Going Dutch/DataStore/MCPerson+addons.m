@@ -177,16 +177,14 @@ NS_ASSUME_NONNULL_BEGIN
     return [emailAddresses firstObject];
 }
 
-- (void)setNewDefaultEmailaddressObject:(MCEmailAddress *)newDefaultEmailAddress
-{
+- (void)setNewDefaultEmailaddressObject:(MCEmailAddress *)newDefaultEmailAddress {
     // Get current defaultEmailAddressObject.
     MCEmailAddress *currentDefaultEmailAddress = [self getDefaultEmailAddressObject];
-    [currentDefaultEmailAddress setSelected:@NO];
-    [newDefaultEmailAddress setSelected:@YES];
-    NSDate *nu = [NSDate date];
-    [self setDateModified:nu];
-    [newDefaultEmailAddress setDateModified:nu];
-    [currentDefaultEmailAddress setDateModified:nu];
+    currentDefaultEmailAddress.selected = @NO;
+    newDefaultEmailAddress.selected = @YES;
+    NSDate *now = [NSDate date];
+    newDefaultEmailAddress.dateModified = now;
+    currentDefaultEmailAddress.dateModified = now;
 }
 
 - (void)deleteEmailAddress:(MCEmailAddress *)eAddress
