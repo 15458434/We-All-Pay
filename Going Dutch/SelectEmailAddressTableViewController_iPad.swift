@@ -46,6 +46,7 @@ final class SelectEmailAddressTableViewController_iPad: UITableViewController {
     }
     
     // MARK: UITableViewDelegate
+    
     override func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
         let newDefaulEmailAddressObject = allEmailAddresses[indexPath.row]
         model.update(default: newDefaulEmailAddressObject)
