@@ -8,14 +8,14 @@
 
 import UIKit
 
-@objc(MCPersonModel) @objcMembers public final class PersonModel: NSObject {
+@objc(MCPersonModel) @objcMembers final class PersonModel: NSObject {
     public private(set) dynamic var person: MCPerson!
     private(set) var personFetchedResultsController: NSFetchedResultsController<MCPerson>!
     private(set) var allEmailaddressesFetchedResultsController: NSFetchedResultsController<MCEmailAddress>!
     private(set) var defaultEmailAddressFetchedResultsController: NSFetchedResultsController<MCEmailAddress>!
     private var changeHandler: ((_ person: MCPerson) -> ())!
     
-    @objc(prepareForUseWithPerson:andFetchedResultsControllerDelegate:andChangeHandler:) public func prepareForUse(with person: MCPerson, and fetchedResultsControllerDelegate: NSFetchedResultsControllerDelegate, and changeHandler:@escaping ((_ person: MCPerson) -> ())) {
+    @objc(prepareForUseWithPerson:andFetchedResultsControllerDelegate:andChangeHandler:) func prepareForUse(with person: MCPerson, and fetchedResultsControllerDelegate: NSFetchedResultsControllerDelegate, and changeHandler:@escaping ((_ person: MCPerson) -> ())) {
         func createPersonFetchedResultsController() {
             let request = MCPerson.fetchRequest()
             request.predicate = NSPredicate(format: "self = %@", person)
