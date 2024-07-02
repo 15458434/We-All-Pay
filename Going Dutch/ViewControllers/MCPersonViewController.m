@@ -210,16 +210,7 @@
 - (void)prepareForSegue:(UIStoryboardSegue *)segue sender:(id)sender {
     if ([[segue identifier] isEqualToString:@"openSelectEmailAddress"]) {
         __weak SelectEmailAddressTableViewController_iPad *destination = [segue destinationViewController];
-        destination.thisPerson = _thisPerson;
-        if ([destination conformsToProtocol:@protocol(MCDismissMeBlockProtocol)]) {
-            [destination setDismissMe:^{
-                if (destination) {
-                    [destination dismissViewControllerAnimated:YES completion:^{
-                        self.emailField.text = self.thisPerson.defaultEmailAddress;
-                    }];
-                }
-            }];
-        }
+        [destination updateModel:_model];
     }
 }
 

@@ -10,18 +10,20 @@ import UIKit
 
 import FirebaseAnalytics
 
-final class SelectEmailAddressTableViewController_iPad: UITableViewController, ThisPersonProtocol, MCDismissMeBlockProtocol {
+final class SelectEmailAddressTableViewController_iPad: UITableViewController {
+    private var model: PersonModel!
     var allEmailAddresses: [MCEmailAddress]!
     
-    var thisPerson: MCPerson! 
-    var dismissMe: (()->())?
+    @objc(updateModel:) func update(model: PersonModel) {
+        self.model = model
+    }
     
     // MARK: UITableViewController
     
     override func viewDidLoad() {
         super.viewDidLoad()
         
-        let arrayOfEmailAddresses = Array(thisPerson.emailAddress ?? Set<MCEmailAddress>())
+        let arrayOfEmailAddresses = Array(model.person.emailAddress ?? Set<MCEmailAddress>())
         let emailAddressSelector: Selector = #selector(getter: MCPerson.emailAddress)
         allEmailAddresses = (UILocalizedIndexedCollation.current().sortedArray(from: arrayOfEmailAddresses, collationStringSelector: emailAddressSelector) as! [MCEmailAddress])
     }
@@ -46,8 +48,8 @@ final class SelectEmailAddressTableViewController_iPad: UITableViewController, T
     // MARK: UITableViewDelegate
     override func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
         let newDefaulEmailAddressObject = allEmailAddresses[indexPath.row]
-        thisPerson.setNewDefaultEmailaddressObject(newDefaulEmailAddressObject)
-        dismissMe!()
+        model.update(default: newDefaulEmailAddressObject)
+        self.presentingViewController!.dismiss(animated: true)
     }
     
     // MARK: UIViewController
