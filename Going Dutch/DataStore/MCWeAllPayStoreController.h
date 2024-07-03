@@ -51,14 +51,14 @@ __attribute__((objc_subclassing_restricted))
 - (void)endUndoGroupAndUndoWithoutRegistration;
 
 #pragma mark - TableViewSources
-- (NSFetchedResultsController *)allTripsDataControllerForDelegate:(id)delegate;
-- (NSFetchedResultsController *)sharedBillPaymentsDataControllerForDelegate:(id)delegate;
-- (NSFetchedResultsController *)sharedBillPeoplePresentDataControllerForDelegate:(id)delegate;
-- (NSFetchedResultsController *)paymentPresenceDataControllerForDelegate:(id)delegate;
-- (NSFetchedResultsController *)availableCurrencyControllerForDelegate:(id)delegate;
-- (NSFetchedResultsController *)searchCurrencyControllerWithSearchText:(NSString *)searchText withDelegate:(id)delegate;
-- (NSArray *)getPeopleOnSharedBill:(MCSharedBill *)thisBill;
-- (NSArray *)getEmailaddressesFrom:(MCPerson *)thisPerson;
+- (NSFetchedResultsController *)allTripsDataControllerForDelegate:(id)delegate __deprecated;
+- (NSFetchedResultsController *)sharedBillPaymentsDataControllerForDelegate:(id)delegate __deprecated;
+- (NSFetchedResultsController *)sharedBillPeoplePresentDataControllerForDelegate:(id)delegate __deprecated;
+- (NSFetchedResultsController *)paymentPresenceDataControllerForDelegate:(id)delegate __deprecated;
+- (NSFetchedResultsController *)availableCurrencyControllerForDelegate:(id)delegate __deprecated;
+- (NSFetchedResultsController *)searchCurrencyControllerWithSearchText:(NSString *)searchText withDelegate:(id)delegate __deprecated;
+- (NSArray *)getPeopleOnSharedBill:(MCSharedBill *)thisBill __deprecated;
+- (NSArray *)getEmailaddressesFrom:(MCPerson *)thisPerson __deprecated;
 
 @end
 

@@ -26,8 +26,6 @@ NSString * const MCWeAllPayStoreDirectoryName = @"WeAllPayStore/StoreContent";
 // File of the WeAllPayStore Database model file.
 NSString * const MCWeAllPayStoreModelName = @"WeAllPayStore";
 
-NSString * const MCiCloudWeAllPayStoreName = @"iCloud-WeAllPayStore";
-
 @interface MCWeAllPayStoreController ()
 
 @end
@@ -182,8 +180,7 @@ NSString * const MCiCloudWeAllPayStoreName = @"iCloud-WeAllPayStore";
 
 #pragma mark - TableView fill sources.
 
-- (NSFetchedResultsController *)allTripsDataControllerForDelegate:(id)delegate
-{
+- (NSFetchedResultsController *)allTripsDataControllerForDelegate:(id)delegate __deprecated {
 #ifdef DEBUG
     NSLog(@"%@, allTripsDataControllerForDelegate", self);
 #endif
@@ -191,17 +188,12 @@ NSString * const MCiCloudWeAllPayStoreName = @"iCloud-WeAllPayStore";
     NSFetchRequest *request = [NSFetchRequest fetchRequestWithEntityName:@"MCSharedBill"];
     request.sortDescriptors = @[[NSSortDescriptor sortDescriptorWithKey:@"dateCreated" ascending:NO]];
     request.relationshipKeyPathsForPrefetching = @[ @"payments", @"peoplePresent", @"mainCurrency", @"payments.exchangeRate", @"payments.peopleSharingPayment" ];
-    NSFetchedResultsController *dataController = [[NSFetchedResultsController alloc] initWithFetchRequest:request
-                                                         managedObjectContext:_mainThreadContext
-                                                           sectionNameKeyPath:nil
-                                                                    cacheName:nil];
-    [dataController setDelegate:delegate];
-    
+    NSFetchedResultsController *dataController = [[NSFetchedResultsController alloc] initWithFetchRequest:request managedObjectContext:_mainThreadContext sectionNameKeyPath:nil cacheName:nil];
+    dataController.delegate = delegate;
     return dataController;
 }
 
-- (NSFetchedResultsController *)sharedBillPaymentsDataControllerForDelegate:(id)delegate
-{
+- (NSFetchedResultsController *)sharedBillPaymentsDataControllerForDelegate:(id)delegate  __deprecated {
 #ifdef DEBUG
     NSLog(@"%@, sharedBillPaymentsDataControllerForDelegate", self);
 #endif
@@ -212,21 +204,17 @@ NSString * const MCiCloudWeAllPayStoreName = @"iCloud-WeAllPayStore";
     NSFetchRequest *request = [NSFetchRequest fetchRequestWithEntityName:@"MCPayment"];
     [request setRelationshipKeyPathsForPrefetching:@[ @"payingPerson", @"exchangeRate", @"currency" ]];
     // How to sort the data.
-    NSSortDescriptor *sortDescriptor = [NSSortDescriptor sortDescriptorWithKey:@"dateCreated" ascending:NO];
-    NSArray *sortDescriptorArray = @[sortDescriptor];
-    [request setSortDescriptors:sortDescriptorArray];
+    request.sortDescriptors = @[[NSSortDescriptor sortDescriptorWithKey:@"dateCreated" ascending:NO]];
     // Select only people from tonightsBill.
-    NSPredicate *predicate = [NSPredicate predicateWithFormat:@"onWhichBill = %@", tonightsBill];
-    [request setPredicate:predicate];
+    request.predicate = [NSPredicate predicateWithFormat:@"onWhichBill = %@", tonightsBill];
     
     // Create the FetchedResultsController.
     NSFetchedResultsController *dataController = [[NSFetchedResultsController alloc] initWithFetchRequest:request managedObjectContext:_mainThreadContext sectionNameKeyPath:nil cacheName:nil];
-    [dataController setDelegate:delegate];
+    dataController.delegate = delegate;
     return dataController;
 }
 
-- (NSFetchedResultsController *)sharedBillPeoplePresentDataControllerForDelegate:(id)delegate
-{
+- (NSFetchedResultsController *)sharedBillPeoplePresentDataControllerForDelegate:(id)delegate __deprecated {
 #ifdef DEBUG
     NSLog(@"%@ sharedBillPeoplePresentDataControllerForDelegate", self);
 #endif
@@ -247,8 +235,7 @@ NSString * const MCiCloudWeAllPayStoreName = @"iCloud-WeAllPayStore";
     return dataController;
 }
 
-- (NSFetchedResultsController *)paymentPresenceDataControllerForDelegate:(id)delegate
-{
+- (NSFetchedResultsController *)paymentPresenceDataControllerForDelegate:(id)delegate __deprecated {
 #ifdef DEBUG
     NSLog(@"%@ paymentPresenceDataControllerForDelegate", self);
 #endif
@@ -265,7 +252,7 @@ NSString * const MCiCloudWeAllPayStoreName = @"iCloud-WeAllPayStore";
     
     // Create the FetchedResultsController.
     NSFetchedResultsController *dataController = [[NSFetchedResultsController alloc] initWithFetchRequest:request managedObjectContext:_mainThreadContext sectionNameKeyPath:nil cacheName:nil];
-    [dataController setDelegate:delegate];
+    dataController.delegate = delegate;
     NSError *error;
     BOOL success = [dataController performFetch:&error];
     if (!success) {
@@ -274,8 +261,7 @@ NSString * const MCiCloudWeAllPayStoreName = @"iCloud-WeAllPayStore";
     return dataController;
 }
 
-- (NSFetchedResultsController *)availableCurrencyControllerForDelegate:(id)delegate
-{
+- (NSFetchedResultsController *)availableCurrencyControllerForDelegate:(id)delegate __deprecated {
 #ifdef DEBUG
     NSLog(@"%@ availableCurrencyControllerForDelegate", self);
 #endif
@@ -295,8 +281,7 @@ NSString * const MCiCloudWeAllPayStoreName = @"iCloud-WeAllPayStore";
     return dataController;
 }
 
-- (NSFetchedResultsController *)searchCurrencyControllerWithSearchText:(NSString *)searchText withDelegate:(id)delegate
-{
+- (NSFetchedResultsController *)searchCurrencyControllerWithSearchText:(NSString *)searchText withDelegate:(id)delegate __deprecated {
     NSParameterAssert([delegate conformsToProtocol:@protocol(NSFetchedResultsControllerDelegate)]);
     NSManagedObjectContext *context = [self mainThreadContext];
     NSFetchRequest *request = [NSFetchRequest fetchRequestWithEntityName:@"MCCurrency"];
@@ -313,16 +298,13 @@ NSString * const MCiCloudWeAllPayStoreName = @"iCloud-WeAllPayStore";
     return dataController;
 }
 
-- (NSArray *)getPeopleOnSharedBill:(MCSharedBill *)thisBill
-{
+- (NSArray *)getPeopleOnSharedBill:(MCSharedBill *)thisBill __deprecated {
     // Should be run on the mainThread
     NSParameterAssert(thisBill);
     NSManagedObjectContext *context = _mainThreadContext;
     NSFetchRequest *request = [NSFetchRequest fetchRequestWithEntityName:@"MCPerson"];
-    NSSortDescriptor *sda = [NSSortDescriptor sortDescriptorWithKey:@"firstName" ascending:YES];
-    [request setSortDescriptors:@[sda]];
-    NSPredicate *predicate = [NSPredicate predicateWithFormat:@"ANY sharedBill = %@", thisBill];
-    [request setPredicate:predicate];
+    request.sortDescriptors = @[[NSSortDescriptor sortDescriptorWithKey:@"firstName" ascending:YES]];
+    request.predicate = [NSPredicate predicateWithFormat:@"ANY sharedBill = %@", thisBill];
     NSError *error;
     NSArray *result = [context executeFetchRequest:request error:&error];
     if (!result) {
@@ -334,16 +316,13 @@ NSString * const MCiCloudWeAllPayStoreName = @"iCloud-WeAllPayStore";
     }
 }
 
-- (NSArray *)getEmailaddressesFrom:(MCPerson *)thisPerson
-{
+- (NSArray *)getEmailaddressesFrom:(MCPerson *)thisPerson __deprecated {
     // Should be run on the mainThread
     NSParameterAssert(thisPerson);
     NSManagedObjectContext *context = _mainThreadContext;
     NSFetchRequest *request = [NSFetchRequest fetchRequestWithEntityName:@"MCEmailAddress"];
-    NSSortDescriptor *sd = [NSSortDescriptor sortDescriptorWithKey:@"emailAddress" ascending:YES];
-    [request setSortDescriptors:@[sd]];
-    NSPredicate *predicate = [NSPredicate predicateWithFormat:@"owner = %@", thisPerson];
-    [request setPredicate:predicate];
+    request.sortDescriptors = @[[NSSortDescriptor sortDescriptorWithKey:@"emailAddress" ascending:YES]];
+    request.predicate = [NSPredicate predicateWithFormat:@"owner = %@", thisPerson];
     NSError *error;
     NSArray *result = [context executeFetchRequest:request error:&error];
     if (!result) {
