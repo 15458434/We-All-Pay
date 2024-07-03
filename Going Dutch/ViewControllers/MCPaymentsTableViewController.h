@@ -31,18 +31,17 @@ __attribute__((objc_subclassing_restricted))
 NS_SWIFT_NAME(PaymentsTableViewController)
 @interface MCPaymentsTableViewController : UITableViewController <NSFetchedResultsControllerDelegate, MFMailComposeViewControllerDelegate, MCTonightsBillTransfer, MCIndexProtocol>
 
+@property (nonatomic, strong) MCEventModel *eventModel;
+@property (nonatomic, strong) MCToggleModel *isEditingModel;
+
 @property (nonatomic, strong) MCTableEmptyMessage *emptyMessage;
 
 @property (nonatomic, weak) MCSharedBillPageViewController *mailDelegate;
-@property (nonatomic, strong) MCSharedBill *tonightsBill;
-
-@property (nonatomic, strong) MCToggleModel *isEditingModel;
+@property (nonatomic, strong) MCSharedBill *tonightsBill __deprecated;
 
 @property (nonatomic) NSInteger index;
 
 // Only accessible through backgroundContext
-@property (nonatomic, strong) MCSharedBill *writableTonightsBill;
-
-- (void)writableTonightsBillIsCreated:(NSNotification *)notification;
+@property (nonatomic, strong) MCSharedBill *writableTonightsBill __deprecated;
 
 @end

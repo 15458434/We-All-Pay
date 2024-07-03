@@ -26,10 +26,9 @@ __attribute__((objc_subclassing_restricted))
 
 @property (nonatomic) BOOL isInitAsNew;
 
+@property (nonatomic, strong) MCEventModel *eventModel;
 @property (nonatomic, strong) MCToggleModel *isEditingModel;
 
-@property (nonatomic, strong) MCSharedBill *tonightsBill;
-@property (nonatomic, strong) MCSharedBill *writableTonightsBill;
 @property (nonatomic, readonly) BOOL didSomethingChange;
 
 @property (nonatomic) NSInteger index;

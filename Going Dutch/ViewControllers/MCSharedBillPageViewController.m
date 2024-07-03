@@ -35,8 +35,6 @@ NSInteger const maxPageIndex = 1;
 
 @implementation MCSharedBillPageViewController
 
-@synthesize tonightsBill = _tonightsBill;
-
 #pragma mark - actions
 
 - (void)peopleOrPaymentsSelectionControlTapped:(id)sender
@@ -148,23 +146,11 @@ NSInteger const maxPageIndex = 1;
     
     UIStoryboard *storyboard = [UIStoryboard storyboardWithName:@"Main-Iphone" bundle:nil];
     _editTripTableViewController = [storyboard instantiateViewControllerWithIdentifier:@"MCEditTripViewController"];
+    _editTripTableViewController.eventModel = _eventModel;
     _editTripTableViewController.isEditingModel = _isEditingModel;
     _editTripTableViewController.index = 0;
-    [_editTripTableViewController setTonightsBill:_tonightsBill];
     [self setDelegate:self];
     [self setDataSource:self];
-    NSManagedObjectContext *backgroundContext = [[MCWeAllPayStoreController defaultStore] backgroundThreadContext];
-    [backgroundContext performBlock:^{
-        if (self.writableTonightsBill) {
-            [self.editTripTableViewController setWritableTonightsBill:self.writableTonightsBill];
-            NSManagedObjectContext *mainContext = [[MCWeAllPayStoreController defaultStore] mainThreadContext];
-            [mainContext performBlock:^{
-                [self.editTripTableViewController setTonightsBill:self.tonightsBill];
-            }];
-        } else {
-            [[NSNotificationCenter defaultCenter] addObserver:self.editTripTableViewController selector:@selector(writableTonightsBillIsCreated:) name:MCWritableTonightsBillReady object:self];
-        }
-    }];
     
     return _editTripTableViewController;
 }
@@ -177,20 +163,12 @@ NSInteger const maxPageIndex = 1;
     
     UIStoryboard *storyboard = [UIStoryboard storyboardWithName:@"Main-Iphone" bundle:nil];
     _sharedBillTableViewController = [storyboard instantiateViewControllerWithIdentifier:@"MCSharedBillTableViewController"];
+    _sharedBillTableViewController.eventModel = _eventModel;
     _sharedBillTableViewController.isEditingModel = _isEditingModel;
     _sharedBillTableViewController.index = 1;
-    [_sharedBillTableViewController setTonightsBill:_tonightsBill];
     [_sharedBillTableViewController setMailDelegate:self];
     [self setDelegate:self];
     [self setDataSource:self];
-    NSManagedObjectContext *backgroundContext = [[MCWeAllPayStoreController defaultStore] backgroundThreadContext];
-    [backgroundContext performBlock:^{
-        if (self.writableTonightsBill) {
-            [self.sharedBillTableViewController setWritableTonightsBill:self.writableTonightsBill];
-        } else {
-            [[NSNotificationCenter defaultCenter] addObserver:self.sharedBillTableViewController selector:@selector(writableTonightsBillIsCreated:) name:MCWritableTonightsBillReady object:self];
-        }
-    }];
     
     return _sharedBillTableViewController;
 }
@@ -268,62 +246,6 @@ NSInteger const maxPageIndex = 1;
 - (void)dealloc
 {
     [[NSNotificationCenter defaultCenter] removeObserver:self];
-}
-
-#pragma mark - MCTonightsBillTransfer
-
-- (MCSharedBill *)tonightsBill
-{
-    if (!_tonightsBill) {
-        id destination = [self parentViewController];
-        if ([destination conformsToProtocol:@protocol(MCTonightsBillTransfer)]) {
-            _tonightsBill = [destination tonightsBill];
-            return _tonightsBill;
-        } else {
-            NSLog(@"The destination object doesn't conform tonightsBill.");
-            return nil;
-        }
-    } else {
-        return _tonightsBill;
-    }
-}
-
-- (void) setTonightsBill:(MCSharedBill  * _Nonnull )tonightsBill
-{
-    [self willChangeValueForKey:@"tonightsBill"];
-    _tonightsBill = tonightsBill;
-    [self didChangeValueForKey:@"tonightsBill"];
-}
-
-- (MCSharedBill *)writeableTonightsBill
-{
-    // This should be executed on the private thread.
-    id destination = [self parentViewController];
-    if ([destination conformsToProtocol:@protocol(MCTonightsBillTransfer)]) {
-        return [destination writeableTonightsBill];
-    } else {
-        NSLog(@"The destination object doesn't conform tonightsBill.");
-        return nil;
-    }
-}
-
-- (void)writeableTonightsBillIsCreated:(NSNotification *)notification
-{
-    // Should be executed on the background thread.
-    NSDictionary *userInfo = notification.userInfo;
-    _writableTonightsBill = userInfo[MCwritableTonightsBillKey];
-    NSManagedObjectID *tonightsBillID = _writableTonightsBill.objectID;
-    NSManagedObjectContext *mainContext = [[MCWeAllPayStoreController defaultStore] mainThreadContext];
-    __weak typeof(self) weakSelf = self;
-    [mainContext performBlock:^{
-        typeof(self) strongSelf = weakSelf;
-        if (strongSelf) {
-            strongSelf.tonightsBill = (MCSharedBill *)[mainContext objectWithID:tonightsBillID];
-        }
-    }];
-#ifdef DEBUG
-    NSLog(@"WritableTonightsBillIsCreated has been executed.");
-#endif
 }
 
 #pragma mark - UIPageViewControllerDataSource

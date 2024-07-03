@@ -25,7 +25,7 @@ import Combine
     private var bag = Set<AnyCancellable>()
     
     @objc func prepareForUse(with event: MCSharedBill) {
-        self.model.prepareForDisplayOnly(with: event)
+        self.model.prepareForUse(with: event)
         self.nameObservation = self.observe(\.model.event!.tripName, options: [.initial, .new], changeHandler: { mySelf, change in
             guard let newValue = change.newValue else {
                 return

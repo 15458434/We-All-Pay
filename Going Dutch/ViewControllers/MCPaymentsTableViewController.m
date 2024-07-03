@@ -143,14 +143,6 @@ static void * isEditingToggleContext = &isEditingToggleContext;
 
 #pragma mark - NSNotification
 
-- (void)writableTonightsBillIsCreated:(NSNotification *)notification
-{
-    // Should be executed on the background thread.
-    NSDictionary *userInfo = [notification userInfo];
-    _writableTonightsBill = [userInfo objectForKey:MCwritableTonightsBillKey];
-    NSLog(@"WritableTonightsBillIsCreated has been executed.");
-}
-
 #pragma mark - ShowPayment
 
 - (void)show:(MCPayment *)payment {

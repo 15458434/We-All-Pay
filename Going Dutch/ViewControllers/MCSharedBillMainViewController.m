@@ -39,7 +39,6 @@ static void * isEditingToggleContext = &isEditingToggleContext;
 - (void)updateEventWithObjectID:(NSManagedObjectID *)objectID {
     NSManagedObjectContext *managedObjectContext = MCWeAllPayStoreController.defaultStore.mainThreadContext;
     MCSharedBill *event = [managedObjectContext objectWithID:objectID];
-    self.tonightsBill = event;
 }
 
 - (void)prepareForUseWithEventModel:(MCEventModel *)model {
@@ -145,12 +144,13 @@ static void * isEditingToggleContext = &isEditingToggleContext;
 #pragma mark - From UIViewController+WeAllPayStore
 
 - (void)storeDidChange:(NSNotification *)notification {
-    if (!_tonightsBill) {
-        NSManagedObjectContext *context = [[MCWeAllPayStoreController defaultStore] mainThreadContext];
-        [context performBlock:^{
-            self.tonightsBill = (MCSharedBill *)[context objectWithID:[self.writableTonightsBill objectID]];
-        }];
-    }
+    // TODO: Clean up
+//    if (!_tonightsBill) {
+//        NSManagedObjectContext *context = [[MCWeAllPayStoreController defaultStore] mainThreadContext];
+//        [context performBlock:^{
+//            self.tonightsBill = (MCSharedBill *)[context objectWithID:[self.writableTonightsBill objectID]];
+//        }];
+//    }
 }
 
 #pragma mark - UIViewController
@@ -183,8 +183,6 @@ static void * isEditingToggleContext = &isEditingToggleContext;
     _peopleOrPaymentsSelectionControl.subviews[1].accessibilityIdentifier = @"Payments";
     
     [self startRespondingToStoreChangeNotifications];
-    
-    _pageViewController.tonightsBill = _eventModel.event;
     
     self.bottomLayoutCustomContainer.priority = UILayoutPriorityDefaultHigh + 1;
 }
@@ -228,26 +226,13 @@ static void * isEditingToggleContext = &isEditingToggleContext;
     if ([[segue identifier] isEqualToString:@"pageViewController"]) {
         _pageViewController = (MCSharedBillPageViewController *)[segue destinationViewController];
         _pageViewController.mainViewController = self;
+        _pageViewController.eventModel = _eventModel;
         _pageViewController.isEditingModel = _isEditingModel;
-        if (_tonightsBill.peoplePresent.count > 0) {
+        if (_eventModel.amountOfPeoplePresentOnEvent > 0) {
             self.peopleOrPaymentsSelectionControl.selectedSegmentIndex = 1;
         } else {
             self.peopleOrPaymentsSelectionControl.selectedSegmentIndex = 0;
         }
-        NSManagedObjectContext *backgroundContext = [[MCWeAllPayStoreController defaultStore] backgroundThreadContext];
-        [backgroundContext performBlock:^{
-            id<MCTonightsBillTransfer> destination = (id<MCTonightsBillTransfer>)[segue destinationViewController];
-            if (self.writableTonightsBill) {
-                [destination setWritableTonightsBill:self.writableTonightsBill];
-                NSManagedObjectContext *mainContext = [[MCWeAllPayStoreController defaultStore] mainThreadContext];
-                [mainContext performBlock:^{
-                    [destination setTonightsBill:self.tonightsBill];
-                }];
-            } else {
-                SEL writeableTonightsBillIsCreated = NSSelectorFromString(@"writeableTonightsBillIsCreated:");
-                [[NSNotificationCenter defaultCenter] addObserver:destination selector:writeableTonightsBillIsCreated name:MCWritableTonightsBillReady object:nil];
-            }
-        }];
     }
 }
 

@@ -28,14 +28,12 @@
 __attribute__((objc_subclassing_restricted))
 @interface MCSharedBillPageViewController : UIPageViewController <UIPageViewControllerDataSource, UIPageViewControllerDelegate, UIAlertViewDelegate>
 
+@property (nonatomic, strong) MCEventModel *eventModel;
 @property (nonatomic, strong) MCToggleModel *isEditingModel;
 
 @property (weak, nonatomic) MCSharedBillMainViewController *mainViewController;
 @property (nonatomic, strong) MCPaymentsTableViewController *sharedBillTableViewController;
 @property (nonatomic, strong) MCEditTripViewController *editTripTableViewController;
-
-@property (nonatomic, strong) MCSharedBill *tonightsBill;
-@property (nonatomic, strong) MCSharedBill *writableTonightsBill;
 
 - (void)peopleOrPaymentsSelectionControlTapped:(id)sender;
 

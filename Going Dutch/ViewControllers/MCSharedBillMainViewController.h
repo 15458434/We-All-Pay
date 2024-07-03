@@ -20,11 +20,9 @@
 @class MCSharedBill;
 
 __attribute__((objc_subclassing_restricted))
-@interface MCSharedBillMainViewController : MCGenericAdBannerViewController <MCTonightsBillTransfer, MCCurrentViewDelegate, MCPathComponentsToOpenProtocol>
+@interface MCSharedBillMainViewController : MCGenericAdBannerViewController <MCCurrentViewDelegate, MCPathComponentsToOpenProtocol>
 
 @property (nonatomic) MCSharedBillViewSelector currentView;
-@property (strong, nonatomic) MCSharedBill *tonightsBill __deprecated;
-@property (nonatomic, strong) MCSharedBill *writableTonightsBill __deprecated;
 
 @property (weak, nonatomic) IBOutlet UISegmentedControl *peopleOrPaymentsSelectionControl;
 
