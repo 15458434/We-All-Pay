@@ -27,6 +27,7 @@
 		3813150C26CBAC3600C27CBB /* MCNotificationTableViewCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 3813150B26CBAC3600C27CBB /* MCNotificationTableViewCell.m */; };
 		3814B495270C500000737A06 /* NavigationViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3814B494270C500000737A06 /* NavigationViewController.swift */; };
 		38163E0F249E193D009E889C /* CoreServices.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 38163E0E249E193D009E889C /* CoreServices.framework */; };
+		381848342C355A030088DC7E /* ToggleModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 381848332C355A030088DC7E /* ToggleModel.swift */; };
 		381C2C3A275A095D00CD82D2 /* SolutionModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 381C2C39275A095D00CD82D2 /* SolutionModel.swift */; };
 		381C2C3C275A412100CD82D2 /* MCTableEmptyMessage.xib in Resources */ = {isa = PBXBuildFile; fileRef = 381C2C3B275A412100CD82D2 /* MCTableEmptyMessage.xib */; };
 		381C2C3E275A414A00CD82D2 /* Main-Iphone.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 381C2C3D275A414A00CD82D2 /* Main-Iphone.storyboard */; };
@@ -368,7 +369,6 @@
 		380327FF2698443300744710 /* NotificationsInfoModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NotificationsInfoModel.swift; sourceTree = "<group>"; };
 		3803280326988B2800744710 /* UnreadNotificationsCountView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UnreadNotificationsCountView.swift; sourceTree = "<group>"; };
 		380700A01A16283500C7FB37 /* MCIndexProtocol.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = MCIndexProtocol.h; sourceTree = "<group>"; };
-		380700A21A174FFB00C7FB37 /* MCIsEditingProtocol.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = MCIsEditingProtocol.h; sourceTree = "<group>"; };
 		380700A31A1B616000C7FB37 /* MCPaymentUpdateTo4.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = MCPaymentUpdateTo4.h; path = "DataStore/Entity Migration Policies/MCPaymentUpdateTo4.h"; sourceTree = "<group>"; };
 		380700A41A1B616000C7FB37 /* MCPaymentUpdateTo4.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = MCPaymentUpdateTo4.m; path = "DataStore/Entity Migration Policies/MCPaymentUpdateTo4.m"; sourceTree = "<group>"; };
 		380700A71A1B751E00C7FB37 /* We all pay database version 1.xcappdata */ = {isa = PBXFileReference; lastKnownFileType = wrapper; path = "We all pay database version 1.xcappdata"; sourceTree = "<group>"; };
@@ -398,6 +398,7 @@
 		3813D8941D8983C900E6B7A4 /* CircularImageView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; lineEnding = 0; path = CircularImageView.swift; sourceTree = "<group>"; xcLanguageSpecificationIdentifier = xcode.lang.swift; };
 		3814B494270C500000737A06 /* NavigationViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NavigationViewController.swift; sourceTree = "<group>"; };
 		38163E0E249E193D009E889C /* CoreServices.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = CoreServices.framework; path = System/Library/Frameworks/CoreServices.framework; sourceTree = SDKROOT; };
+		381848332C355A030088DC7E /* ToggleModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ToggleModel.swift; sourceTree = "<group>"; };
 		381C2C39275A095D00CD82D2 /* SolutionModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SolutionModel.swift; sourceTree = "<group>"; };
 		381C2C3B275A412100CD82D2 /* MCTableEmptyMessage.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; name = MCTableEmptyMessage.xib; path = Views/MCTableEmptyMessage.xib; sourceTree = "<group>"; };
 		381C2C3D275A414A00CD82D2 /* Main-Iphone.storyboard */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.storyboard; name = "Main-Iphone.storyboard"; path = "Views/Main-Iphone.storyboard"; sourceTree = "<group>"; };
@@ -1185,6 +1186,7 @@
 				386FC32318E5855400428294 /* MCSharedBillMainViewController.h */,
 				386FC32418E5855400428294 /* MCSharedBillMainViewController.m */,
 				38BEA790275E228B00D05D8B /* EventModel.swift */,
+				381848332C355A030088DC7E /* ToggleModel.swift */,
 				383E0C5B186737EB00AA688D /* MCSharedBillPageViewController.h */,
 				383E0C5C186737EB00AA688D /* MCSharedBillPageViewController.m */,
 				38B1201D2768F00400EB4969 /* People */,
@@ -1402,7 +1404,6 @@
 				382F9BD118F7285400818276 /* MCDismissMeBlockProtocol.h */,
 				3801881A1938D8E70085A5AE /* MCDismissKeyboardProtocol.h */,
 				380700A01A16283500C7FB37 /* MCIndexProtocol.h */,
-				380700A21A174FFB00C7FB37 /* MCIsEditingProtocol.h */,
 				385F6AE12747CFBF009ED08D /* PaymentStateModelProtocol.swift */,
 				38358D4C274D0E9E00EA5177 /* MCPathComponentsToOpenProtocol.h */,
 				38C3AB141CBCF3200011C10C /* ViewControllerProtocols.swift */,
@@ -2246,6 +2247,7 @@
 				389DE8FA197FB2BA00169645 /* MCPayment.m in Sources */,
 				3841F8D323893A0B00882E40 /* EventsModel.swift in Sources */,
 				38894980211C2DDE00BDF9CD /* CoreDataSaveHandlerWhenEnteringBackground.swift in Sources */,
+				381848342C355A030088DC7E /* ToggleModel.swift in Sources */,
 				389DE907197FBE8400169645 /* MCExchangeRate+addons.m in Sources */,
 				38977E631B2A37BC008484A4 /* EventTableViewCell.swift in Sources */,
 				387494D819F05476001614CA /* WeAllPayStore1to4.xcmappingmodel in Sources */,

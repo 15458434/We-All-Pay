@@ -13,7 +13,7 @@
 
 #import "MCTonightsBillTransfer.h"
 #import "MCIndexProtocol.h"
-#import "MCIsEditingProtocol.h"
+#import "We_all_pay-Swift.h"
 
 @class MCSharedBill;
 @class MCAllTripsTableViewController;
@@ -33,9 +33,10 @@ NS_SWIFT_NAME(PaymentsTableViewController)
 
 @property (nonatomic, strong) MCTableEmptyMessage *emptyMessage;
 
-@property (nonatomic, weak) id<MCIsEditingProtocol> myParent;
 @property (nonatomic, weak) MCSharedBillPageViewController *mailDelegate;
 @property (nonatomic, strong) MCSharedBill *tonightsBill;
+
+@property (nonatomic, strong) MCToggleModel *isEditingModel;
 
 @property (nonatomic) NSInteger index;
 

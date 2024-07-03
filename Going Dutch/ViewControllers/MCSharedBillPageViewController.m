@@ -39,23 +39,6 @@ NSInteger const maxPageIndex = 1;
 
 #pragma mark - actions
 
-- (BOOL)toggleEditTableView:(id)sender
-{
-#ifdef DEBUG
-    NSNumber *freakyBooleaon = @([[[self viewControllers][0] tableView] isEditing]);
-    NSLog(@"toggleEditTableView: %@", freakyBooleaon);
-#endif
-    if ([[[self viewControllers][0] tableView] isEditing]) {
-        _isChildTableViewEditing = NO;
-        [[[self viewControllers][0] tableView] setEditing:_isChildTableViewEditing animated:YES];
-        return NO;
-    } else {
-        _isChildTableViewEditing = YES;
-        [[[self viewControllers][0] tableView] setEditing:_isChildTableViewEditing animated:YES];
-        return YES;
-    }
-}
-
 - (void)peopleOrPaymentsSelectionControlTapped:(id)sender
 {
     NSParameterAssert(_mainViewController);
@@ -155,19 +138,9 @@ NSInteger const maxPageIndex = 1;
     }
 }
 
-- (void)editBillData:(id)sender
-{
-    //[self performSegueWithIdentifier:@"openTripInfo" sender:self];
-    [[self presentedViewController] dismissViewControllerAnimated:YES completion:nil];
-    if ([[self viewControllers][0] isKindOfClass:[MCPaymentsTableViewController class]]) {
-        
-    }
-}
-
 #pragma mark - new in this class
 
-- (MCEditTripViewController *)editTripTableViewController
-{
+- (MCEditTripViewController *)editTripTableViewController {
     // if no editTripViewController create one.
     if (_editTripTableViewController) {
         return _editTripTableViewController;
@@ -175,8 +148,8 @@ NSInteger const maxPageIndex = 1;
     
     UIStoryboard *storyboard = [UIStoryboard storyboardWithName:@"Main-Iphone" bundle:nil];
     _editTripTableViewController = [storyboard instantiateViewControllerWithIdentifier:@"MCEditTripViewController"];
+    _editTripTableViewController.isEditingModel = _isEditingModel;
     _editTripTableViewController.index = 0;
-    _editTripTableViewController.myParent = self;
     [_editTripTableViewController setTonightsBill:_tonightsBill];
     [self setDelegate:self];
     [self setDataSource:self];
@@ -196,8 +169,7 @@ NSInteger const maxPageIndex = 1;
     return _editTripTableViewController;
 }
 
-- (MCPaymentsTableViewController *)sharedBillTableViewController
-{
+- (MCPaymentsTableViewController *)sharedBillTableViewController {
     // if no sharedBillTableViewController create one.
     if (_sharedBillTableViewController) {
         return _sharedBillTableViewController;
@@ -205,8 +177,8 @@ NSInteger const maxPageIndex = 1;
     
     UIStoryboard *storyboard = [UIStoryboard storyboardWithName:@"Main-Iphone" bundle:nil];
     _sharedBillTableViewController = [storyboard instantiateViewControllerWithIdentifier:@"MCSharedBillTableViewController"];
+    _sharedBillTableViewController.isEditingModel = _isEditingModel;
     _sharedBillTableViewController.index = 1;
-    _sharedBillTableViewController.myParent = self;
     [_sharedBillTableViewController setTonightsBill:_tonightsBill];
     [_sharedBillTableViewController setMailDelegate:self];
     [self setDelegate:self];

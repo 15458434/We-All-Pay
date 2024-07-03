@@ -21,6 +21,8 @@
 
 #import "We_all_pay-Swift.h"
 
+static void * isEditingToggleContext = &isEditingToggleContext;
+
 @interface MCEditTripViewController ()
 
 @property (strong, nonatomic) MCTableEmptyMessage *emptyMessage;
@@ -269,12 +271,19 @@
         [self.tableView reloadData];
         [self setEmptyMessageWithDuration:0.0];
     }
-    
-    BOOL shouldAppearAsEditing = [_myParent isChildTableViewEditing];
-    [self.tableView setEditing:shouldAppearAsEditing animated:NO];
 
     _emptyMessage.topConstraint.constant = _headerView.frame.size.height;
     
+    // Create KVO
+    NSKeyValueObservingOptions options = NSKeyValueObservingOptionInitial | NSKeyValueObservingOptionNew;
+    [self.isEditingModel addObserver:self forKeyPath:@"boolValue" options:options context:isEditingToggleContext];
+}
+
+- (void)viewWillDisappear:(BOOL)animated {
+    [super viewWillDisappear:animated];
+    
+    // Destroy KVO
+    [self.isEditingModel removeObserver:self forKeyPath:@"boolValue" context:isEditingToggleContext];
 }
 
 - (void)viewDidDisappear:(BOOL)animated {
@@ -334,6 +343,31 @@
 
 - (void)dealloc {
     [[NSNotificationCenter defaultCenter] removeObserver:self];
+}
+
+- (void)observeValueForKeyPath:(NSString *)keyPath ofObject:(id)object change:(NSDictionary<NSKeyValueChangeKey,id> *)change context:(void *)context {
+    if (context == &isEditingToggleContext) {
+#ifdef DEBUG
+        NSLog(@"change: %@", change);
+#endif
+        NSNumber *changeKeyNumber = (NSNumber *)change[NSKeyValueChangeKindKey];
+        NSKeyValueChange keyValueChange = changeKeyNumber.unsignedIntegerValue;
+        switch (keyValueChange) {
+            case NSKeyValueChangeSetting:
+            {
+                id new = change[NSKeyValueChangeNewKey];
+                if ([new isKindOfClass:[NSNumber class]]) {
+                    NSNumber *isEditing = (NSNumber *)new;
+                    [self.tableView setEditing:isEditing.boolValue animated:YES];
+                }
+            }
+                break;
+            default:
+                break;
+        }
+    } else {
+        [super observeValueForKeyPath:keyPath ofObject:object change:change context:context];
+    }
 }
 
 @end

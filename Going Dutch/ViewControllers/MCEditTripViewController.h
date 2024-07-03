@@ -15,7 +15,6 @@
 
 #import "MCTonightsBillTransfer.h"
 #import "MCIndexProtocol.h"
-#import "MCIsEditingProtocol.h"
 
 @class MCPeople;
 @class MCSharedBill;
@@ -27,7 +26,8 @@ __attribute__((objc_subclassing_restricted))
 
 @property (nonatomic) BOOL isInitAsNew;
 
-@property (nonatomic, weak) id<MCIsEditingProtocol> myParent;
+@property (nonatomic, strong) MCToggleModel *isEditingModel;
+
 @property (nonatomic, strong) MCSharedBill *tonightsBill;
 @property (nonatomic, strong) MCSharedBill *writableTonightsBill;
 @property (nonatomic, readonly) BOOL didSomethingChange;

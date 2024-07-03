@@ -19,10 +19,13 @@
 
 #import "We_all_pay-Swift.h"
 
+static void * isEditingToggleContext = &isEditingToggleContext;
+
 @interface MCSharedBillMainViewController ()
 
 @property (strong, nonatomic) MCSharedBillPageViewController *pageViewController;
 @property (strong, nonatomic) IBOutlet MCEventModel *eventModel;
+@property (strong, nonatomic) IBOutlet MCToggleModel *isEditingModel;
 
 @property (weak, nonatomic) IBOutlet NSLayoutConstraint *worstSalesPitchEverViewWidth;
 @property (weak, nonatomic) IBOutlet NSLayoutConstraint *worstSalesPitchEverViewHeight;
@@ -44,15 +47,7 @@
 }
 
 - (IBAction)toggleEdit:(id)sender {
-    if ([[self childViewControllers][0] toggleEditTableView:sender]) {
-        // Set Done Button
-        UIBarButtonItem *doneButton = [[UIBarButtonItem alloc] initWithBarButtonSystemItem:UIBarButtonSystemItemDone target:self action:@selector(toggleEdit:)];
-        [[self navigationItem] setRightBarButtonItem:doneButton];
-    } else {
-        // Set Edit Button
-        UIBarButtonItem *editButton = [[UIBarButtonItem alloc] initWithBarButtonSystemItem:UIBarButtonSystemItemEdit target:self action:@selector(toggleEdit:)];
-        [[self navigationItem] setRightBarButtonItem:editButton];
-    }
+    [_isEditingModel toggle];
 }
 
 - (IBAction)peopleOrPaymentsSelectionChangedValue:(id)sender {
@@ -199,18 +194,25 @@
     
     [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(applyProVersion:) name:[MCStoreInterface applyProVersionNotification] object:[MCStoreInterface defaultStoreInterface]];
     [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(applicationWillEnterForegroundHandler:) name:UIApplicationWillEnterForegroundNotification object:nil];
+    
+    // Create KVO
+    NSKeyValueObservingOptions options = NSKeyValueObservingOptionInitial | NSKeyValueObservingOptionNew;
+    [self.isEditingModel addObserver:self forKeyPath:@"boolValue" options:options context:isEditingToggleContext];
+}
+
+- (void)viewWillDisappear:(BOOL)animated {
+    [super viewWillAppear:animated];
+    
+    [[NSNotificationCenter defaultCenter] removeObserver:self name:UIApplicationWillEnterForegroundNotification object:nil];
+    
+    // Destroy KVO
+    [self.isEditingModel removeObserver:self forKeyPath:@"boolValue" context:isEditingToggleContext];
 }
 
 - (void)viewDidAppear:(BOOL)animated {
     [super viewDidAppear:animated];
     
     [[NSNotificationCenter defaultCenter] removeObserver:self name:[MCStoreInterface applyProVersionNotification] object:[MCStoreInterface defaultStoreInterface]];
-}
-
-- (void)viewWillDisappear:(BOOL)animated {
-    [super viewWillDisappear:animated];
-    
-    [[NSNotificationCenter defaultCenter] removeObserver:self name:UIApplicationWillEnterForegroundNotification object:nil];
 }
 
 - (void)willMoveToParentViewController:(UIViewController *)parent {
@@ -226,6 +228,7 @@
     if ([[segue identifier] isEqualToString:@"pageViewController"]) {
         _pageViewController = (MCSharedBillPageViewController *)[segue destinationViewController];
         _pageViewController.mainViewController = self;
+        _pageViewController.isEditingModel = _isEditingModel;
         if (_tonightsBill.peoplePresent.count > 0) {
             self.peopleOrPaymentsSelectionControl.selectedSegmentIndex = 1;
         } else {
@@ -254,6 +257,40 @@
 
 - (void)dealloc {
     [[NSNotificationCenter defaultCenter] removeObserver:self];
+}
+
+- (void)observeValueForKeyPath:(NSString *)keyPath ofObject:(id)object change:(NSDictionary<NSKeyValueChangeKey,id> *)change context:(void *)context {
+    if (context == isEditingToggleContext) {
+#ifdef DEBUG
+        NSLog(@"change: %@", change);
+#endif
+        NSNumber *changeKeyNumber = (NSNumber *)change[NSKeyValueChangeKindKey];
+        NSKeyValueChange keyValueChange = changeKeyNumber.unsignedIntegerValue;
+        switch (keyValueChange) {
+            case NSKeyValueChangeSetting:
+            {
+                id new = change[NSKeyValueChangeNewKey];
+                if ([new isKindOfClass:[NSNumber class]]) {
+                    NSNumber *newValue = (NSNumber *)new;
+                    BOOL boolValue = newValue.boolValue;
+                    if (boolValue) {
+                        // Set Done Button
+                        UIBarButtonItem *doneButton = [[UIBarButtonItem alloc] initWithBarButtonSystemItem:UIBarButtonSystemItemDone target:self action:@selector(toggleEdit:)];
+                        self.navigationItem.rightBarButtonItem = doneButton;
+                    } else {
+                        // Set Edit Button
+                        UIBarButtonItem *editButton = [[UIBarButtonItem alloc] initWithBarButtonSystemItem:UIBarButtonSystemItemEdit target:self action:@selector(toggleEdit:)];
+                        self.navigationItem.rightBarButtonItem = editButton;
+                    }
+                }
+            }
+                break;
+            default:
+                break;
+        }
+    } else {
+        [super observeValueForKeyPath:keyPath ofObject:object change:change context:context];
+    }
 }
 
 @end
