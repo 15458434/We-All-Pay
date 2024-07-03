@@ -52,8 +52,6 @@ __attribute__((objc_subclassing_restricted))
 
 #pragma mark - TableViewSources
 - (NSFetchedResultsController *)allTripsDataControllerForDelegate:(id)delegate __deprecated;
-- (NSFetchedResultsController *)sharedBillPaymentsDataControllerForDelegate:(id)delegate __deprecated;
-- (NSFetchedResultsController *)sharedBillPeoplePresentDataControllerForDelegate:(id)delegate __deprecated;
 - (NSFetchedResultsController *)paymentPresenceDataControllerForDelegate:(id)delegate __deprecated;
 - (NSFetchedResultsController *)availableCurrencyControllerForDelegate:(id)delegate __deprecated;
 - (NSFetchedResultsController *)searchCurrencyControllerWithSearchText:(NSString *)searchText withDelegate:(id)delegate __deprecated;

@@ -193,48 +193,6 @@ NSString * const MCWeAllPayStoreModelName = @"WeAllPayStore";
     return dataController;
 }
 
-- (NSFetchedResultsController *)sharedBillPaymentsDataControllerForDelegate:(id)delegate  __deprecated {
-#ifdef DEBUG
-    NSLog(@"%@, sharedBillPaymentsDataControllerForDelegate", self);
-#endif
-    NSParameterAssert([delegate conformsToProtocol:@protocol(NSFetchedResultsControllerDelegate)]);
-    NSParameterAssert([delegate conformsToProtocol:@protocol(MCTonightsBillTransfer)]);
-    MCSharedBill *tonightsBill = [delegate tonightsBill];
-    // What entities will be fetched.
-    NSFetchRequest *request = [NSFetchRequest fetchRequestWithEntityName:@"MCPayment"];
-    [request setRelationshipKeyPathsForPrefetching:@[ @"payingPerson", @"exchangeRate", @"currency" ]];
-    // How to sort the data.
-    request.sortDescriptors = @[[NSSortDescriptor sortDescriptorWithKey:@"dateCreated" ascending:NO]];
-    // Select only people from tonightsBill.
-    request.predicate = [NSPredicate predicateWithFormat:@"onWhichBill = %@", tonightsBill];
-    
-    // Create the FetchedResultsController.
-    NSFetchedResultsController *dataController = [[NSFetchedResultsController alloc] initWithFetchRequest:request managedObjectContext:_mainThreadContext sectionNameKeyPath:nil cacheName:nil];
-    dataController.delegate = delegate;
-    return dataController;
-}
-
-- (NSFetchedResultsController *)sharedBillPeoplePresentDataControllerForDelegate:(id)delegate __deprecated {
-#ifdef DEBUG
-    NSLog(@"%@ sharedBillPeoplePresentDataControllerForDelegate", self);
-#endif
-    NSParameterAssert([delegate conformsToProtocol:@protocol(NSFetchedResultsControllerDelegate)]);
-    NSParameterAssert([delegate conformsToProtocol:@protocol(MCTonightsBillTransfer)]);
-    MCSharedBill *tonightsBill = [delegate tonightsBill];
-    // What entities will be fetched.
-    NSFetchRequest *request = [NSFetchRequest fetchRequestWithEntityName:@"MCPerson"];
-    // How to sort the data.
-    request.relationshipKeyPathsForPrefetching = @[ @"emailAddress", @"payments", @"sharedBill", @"sharedBill.mainCurrency", @"payments.currency" ];
-    request.sortDescriptors = @[[NSSortDescriptor sortDescriptorWithKey:@"dateCreated" ascending:NO]];
-    // Select only people from tonightsBill.
-    request.predicate = [NSPredicate predicateWithFormat:@"ANY sharedBill = %@", tonightsBill];
-    
-    // Create the FetchedResultsController.
-    NSFetchedResultsController *dataController = [[NSFetchedResultsController alloc] initWithFetchRequest:request managedObjectContext:_mainThreadContext sectionNameKeyPath:nil cacheName:nil];
-    [dataController setDelegate:delegate];
-    return dataController;
-}
-
 - (NSFetchedResultsController *)paymentPresenceDataControllerForDelegate:(id)delegate __deprecated {
 #ifdef DEBUG
     NSLog(@"%@ paymentPresenceDataControllerForDelegate", self);

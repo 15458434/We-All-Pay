@@ -39,6 +39,7 @@ static void * isEditingToggleContext = &isEditingToggleContext;
 - (void)updateEventWithObjectID:(NSManagedObjectID *)objectID {
     NSManagedObjectContext *managedObjectContext = MCWeAllPayStoreController.defaultStore.mainThreadContext;
     MCSharedBill *event = [managedObjectContext objectWithID:objectID];
+    _eventModel = [[MCEventModel alloc] initWithEvent:event];
 }
 
 - (void)prepareForUseWithEventModel:(MCEventModel *)model {

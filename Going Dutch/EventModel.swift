@@ -98,12 +98,20 @@ import Combine
         event.peoplePresent?.count ?? 0
     }
     
+    @objc var doAllPaymentsHaveAPayer: Bool {
+        event.doAllPaymentsHaveAPayer()
+    }
+    
     @objc var nextPayer: MCPerson? {
         event.fetchPeoplePresentOrdered(byAmountPaid: true).first
     }
     
     @objc func hasPersonPaidSometing(person: MCPerson) -> Bool {
         event.hasPersonPaidSomething(person)
+    }
+    
+    @objc var firstPaymentWithoutAPayer: MCPayment {
+        event.getFirstPaymentWithoutAPayer()
     }
     
     @objc func addPerson() -> MCPerson {
@@ -114,8 +122,12 @@ import Combine
         event.deleteIfStillNew()
     }
     
-    @objc func delete(person: MCPerson) {
+    @objc(deletePerson:) func delete(person: MCPerson) {
         event.delete(person)
+    }
+    
+    @objc(deletePayment:) func delete(payment: MCPayment) {
+        MCPayment.delete(payment)
     }
     
     func reset() {

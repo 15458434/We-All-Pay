@@ -37,11 +37,7 @@ NS_SWIFT_NAME(PaymentsTableViewController)
 @property (nonatomic, strong) MCTableEmptyMessage *emptyMessage;
 
 @property (nonatomic, weak) MCSharedBillPageViewController *mailDelegate;
-@property (nonatomic, strong) MCSharedBill *tonightsBill __deprecated;
 
 @property (nonatomic) NSInteger index;
-
-// Only accessible through backgroundContext
-@property (nonatomic, strong) MCSharedBill *writableTonightsBill __deprecated;
 
 @end

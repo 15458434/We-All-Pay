@@ -195,7 +195,7 @@ static void * isEditingToggleContext = &isEditingToggleContext;
 - (void)tableView:(UITableView *)tableView commitEditingStyle:(UITableViewCellEditingStyle)editingStyle forRowAtIndexPath:(NSIndexPath *)indexPath {
     if (editingStyle == UITableViewCellEditingStyleDelete) {
         MCPerson *poorSucker = [_fetchedResultsController objectAtIndexPath:indexPath];
-        [_eventModel deleteWithPerson:poorSucker];
+        [_eventModel deletePerson:poorSucker];
         [MCWeAllPayStoreController.defaultStore saveMainThreadContext];
         _didSomethingChange = YES;
     }
@@ -263,6 +263,7 @@ static void * isEditingToggleContext = &isEditingToggleContext;
     
     if (!_fetchedResultsController) {
         _fetchedResultsController = _eventModel.peopleFetchedResultsController;
+        _fetchedResultsController.delegate = self;
         [self performFetch];
         [self.tableView reloadData];
         [self setEmptyMessageWithDuration:0.0];
@@ -277,6 +278,8 @@ static void * isEditingToggleContext = &isEditingToggleContext;
 
 - (void)viewWillDisappear:(BOOL)animated {
     [super viewWillDisappear:animated];
+    
+    _fetchedResultsController = nil;
     
     // Destroy KVO
     [self.isEditingModel removeObserver:self forKeyPath:@"boolValue" context:isEditingToggleContext];
