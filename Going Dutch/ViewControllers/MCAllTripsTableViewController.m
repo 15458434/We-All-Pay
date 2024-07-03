@@ -257,13 +257,20 @@ static void * notificationCountContext = &notificationCountContext;
 #endif
     if ([segue.identifier isEqualToString:@"newTonightsBill"]) {
         _isATonightsBillOpened = MCTonightsBillStatusOpened;
+        MCSharedBill *newEvent = [_model addEvent];
+        MCEventModel *eventModel = [[MCEventModel alloc] initAndPrepareWithEvent:newEvent forDisplayOnly:false];
+        MCSharedBillMainViewController *destination = (MCSharedBillMainViewController *)segue.destinationViewController;
+        [destination prepareForUseWithEventModel:eventModel];
+        destination.currentView = MCSelectEditTripTableView;
     } else if ([segue.identifier isEqualToString:@"openTonightsBill"]) {
         _isATonightsBillOpened = MCTonightsBillStatusOpened;
         NSIndexPath *indexPathOfSelectedRow = self.tableView.indexPathForSelectedRow;
         NSParameterAssert(indexPathOfSelectedRow);
         MCSharedBill *selectedEvent = [_model.fetchEventsController objectAtIndexPath:indexPathOfSelectedRow];
+        MCEventModel *model = [[MCEventModel alloc] initAndPrepareWithEvent:selectedEvent forDisplayOnly:NO];
         MCSharedBillMainViewController *destination = (MCSharedBillMainViewController *)segue.destinationViewController;
-        [destination updateEventWithObjectID:selectedEvent.objectID];
+        [destination prepareForUseWithEventModel:model];
+        destination.currentView = MCSelectSharedBillTableView;
     } else if ([segue.identifier isEqualToString:@"selectMainCurrency"]) {
         MCSharedBill *theBill = _model.fetchEventsController.fetchedObjects[_selectedIndexPathForAction.row];
         UINavigationController *navController = (UINavigationController *)segue.destinationViewController;
@@ -282,8 +289,9 @@ static void * notificationCountContext = &notificationCountContext;
         NSParameterAssert(_pathComponents);
         MCSharedBill *event = (MCSharedBill *)_pathComponents[0];
         NSParameterAssert(event);
+        MCEventModel *model = [[MCEventModel alloc] initAndPrepareWithEvent:event forDisplayOnly:NO];
         MCSharedBillMainViewController *destination = (MCSharedBillMainViewController *)segue.destinationViewController;
-        [destination updateEventWithObjectID:event.objectID];
+        [destination prepareForUseWithEventModel:model];
         _pathComponents = nil;
     }
 }

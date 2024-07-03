@@ -1179,17 +1179,18 @@
 			path = Screenshots;
 			sourceTree = "<group>";
 		};
-		386EB43123C7238400FB20B9 /* EventDetailMainViewController */ = {
+		386EB43123C7238400FB20B9 /* Event */ = {
 			isa = PBXGroup;
 			children = (
 				386FC32318E5855400428294 /* MCSharedBillMainViewController.h */,
 				386FC32418E5855400428294 /* MCSharedBillMainViewController.m */,
+				38BEA790275E228B00D05D8B /* EventModel.swift */,
 				383E0C5B186737EB00AA688D /* MCSharedBillPageViewController.h */,
 				383E0C5C186737EB00AA688D /* MCSharedBillPageViewController.m */,
 				38B1201D2768F00400EB4969 /* People */,
 				38D8CB612750263B00CC1C03 /* Payments */,
 			);
-			name = EventDetailMainViewController;
+			name = Event;
 			sourceTree = "<group>";
 		};
 		3870C2291D34FD5D0030035A /* Resources */ = {
@@ -1326,7 +1327,6 @@
 			isa = PBXGroup;
 			children = (
 				38977E621B2A37BC008484A4 /* EventTableViewCell.swift */,
-				38BEA790275E228B00D05D8B /* EventModel.swift */,
 			);
 			name = EventTableViewCell;
 			sourceTree = "<group>";
@@ -1424,7 +1424,7 @@
 			isa = PBXGroup;
 			children = (
 				3841F8D1238939F600882E40 /* Events */,
-				386EB43123C7238400FB20B9 /* EventDetailMainViewController */,
+				386EB43123C7238400FB20B9 /* Event */,
 				38FBB4B7236C353700E30EE8 /* Person */,
 				38F44CC92364978400215B1C /* Payment */,
 				388E90311D708BB3004CD257 /* SolutionViewController */,

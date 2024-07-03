@@ -14,14 +14,26 @@ import Combine
     @objc dynamic var mainCurrencyFormatter: CurrencyFormatter!
     @objc var dateFormatter: DateFormatter!
     
+    @objc dynamic var peopleFetchedResultsController: NSFetchedResultsController<MCPerson>?
+    @objc dynamic var paymentsFetchedResultsController: NSFetchedResultsController<MCPayment>?
+    
     private var bag = Set<AnyCancellable>()
     
     convenience init(andPrepareWith event: MCSharedBill) {
         self.init()
-        self.prepareForUse(with: event)
+        self.prepareForDisplayOnly(with: event)
     }
     
-    func prepareForUse(with event: MCSharedBill) {
+    @objc(initAndPrepareWithEvent:forDisplayOnly:) convenience init(andPrepareWith event: MCSharedBill, forDisplayOnly isDisplayOnly: Bool) {
+        self.init()
+        if isDisplayOnly {
+            self.prepareForDisplayOnly(with: event)
+        } else {
+            self.prepareForUse(with: event)
+        }
+    }
+    
+    func prepareForDisplayOnly(with event: MCSharedBill) {
         self.event = event
         self.publisher(for: \.event!.mainCurrency, options: [.initial, .new])
             .sink { [unowned self] currency in
@@ -33,6 +45,28 @@ import Combine
         dateFormatter = DateFormatter()
         dateFormatter.dateStyle = .medium
         dateFormatter.timeStyle = .short
+    }
+    
+    func prepareForUse(with event: MCSharedBill) {
+        var peopleFetchedResultsController: NSFetchedResultsController<MCPerson> {
+            let request = MCPerson.fetchRequest()
+            request.relationshipKeyPathsForPrefetching = ["emailAddress", "payments", "sharedBill", "sharedBill.mainCurrency", "payments.currency"]
+            request.sortDescriptors = [NSSortDescriptor(keyPath: \MCPerson.dateCreated, ascending: false)]
+            request.predicate = NSPredicate(format: "ANY sharedBill = %@", event)
+            let new = NSFetchedResultsController(fetchRequest: request, managedObjectContext: event.managedObjectContext!, sectionNameKeyPath: nil, cacheName: nil)
+            return new
+        }
+        var paymentsFetchedResultsController: NSFetchedResultsController<MCPayment> {
+            let request = MCPayment.fetchRequest()
+            request.relationshipKeyPathsForPrefetching = ["payingPerson", "exchangeRate", "currency"]
+            request.sortDescriptors = [NSSortDescriptor(keyPath: \MCPayment.dateCreated, ascending: false)]
+            request.predicate = NSPredicate(format: "onWhichBill = %@", event)
+            let new = NSFetchedResultsController(fetchRequest: request, managedObjectContext: event.managedObjectContext!, sectionNameKeyPath: nil, cacheName: nil)
+            return new
+        }
+        self.prepareForDisplayOnly(with: event)
+        self.peopleFetchedResultsController = peopleFetchedResultsController
+        self.paymentsFetchedResultsController = paymentsFetchedResultsController
     }
     
     var stringOfApproxPeoplePresent: String {
@@ -70,6 +104,10 @@ import Combine
         let paymentsWithPeoplePresent: [MCPayment] = try! context.fetch(request)
         let result = paymentsWithPeoplePresent.totalSumOfMoneyInMainCurrency
         return result
+    }
+    
+    @objc func deleteIfStillNew() {
+        event.deleteIfStillNew()
     }
     
     func reset() {

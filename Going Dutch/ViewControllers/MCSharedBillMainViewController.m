@@ -22,6 +22,7 @@
 @interface MCSharedBillMainViewController ()
 
 @property (strong, nonatomic) MCSharedBillPageViewController *pageViewController;
+@property (strong, nonatomic) IBOutlet MCEventModel *eventModel;
 
 @property (weak, nonatomic) IBOutlet NSLayoutConstraint *worstSalesPitchEverViewWidth;
 @property (weak, nonatomic) IBOutlet NSLayoutConstraint *worstSalesPitchEverViewHeight;
@@ -36,6 +37,10 @@
     NSManagedObjectContext *managedObjectContext = MCWeAllPayStoreController.defaultStore.mainThreadContext;
     MCSharedBill *event = [managedObjectContext objectWithID:objectID];
     self.tonightsBill = event;
+}
+
+- (void)prepareForUseWithEventModel:(MCEventModel *)model {
+    _eventModel = model;
 }
 
 - (IBAction)toggleEdit:(id)sender {
@@ -132,6 +137,7 @@
 - (void)prepareForUseWithPathComponentsToOpen:(NSArray<NSManagedObject *> *)pathComponentsToOpen {
     MCSharedBill *event = (MCSharedBill *)pathComponentsToOpen[0];
     NSParameterAssert(event);
+    
     [self updateEventWithObjectID:event.objectID];
 }
 
@@ -183,14 +189,7 @@
     
     [self startRespondingToStoreChangeNotifications];
     
-    if (!_tonightsBill) {
-        _tonightsBill = [MCSharedBill addSharedBillToContext:[[MCWeAllPayStoreController defaultStore] mainThreadContext]];
-        [[MCWeAllPayStoreController defaultStore] saveMainThreadContext];
-        _currentView = MCSelectEditTripTableView;
-    } else {
-        _currentView = MCSelectSharedBillTableView;
-    }
-    _pageViewController.tonightsBill = _tonightsBill;
+    _pageViewController.tonightsBill = _eventModel.event;
     
     self.bottomLayoutCustomContainer.priority = UILayoutPriorityDefaultHigh + 1;
 }
@@ -218,7 +217,7 @@
     if (!parent) {
         // Parent is null when back button is pressed in navigationbar
         [self.view endEditing:YES];
-        [_tonightsBill deleteIfStillNew];
+        [_eventModel deleteIfStillNew];
         [[MCWeAllPayStoreController defaultStore] saveMainThreadContext];
     }
 }
