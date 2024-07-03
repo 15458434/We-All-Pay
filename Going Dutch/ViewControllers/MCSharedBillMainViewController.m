@@ -144,16 +144,6 @@ static void * isEditingToggleContext = &isEditingToggleContext;
 
 #pragma mark - From UIViewController+WeAllPayStore
 
-- (void)storeDidChange:(NSNotification *)notification {
-    // TODO: Clean up
-//    if (!_tonightsBill) {
-//        NSManagedObjectContext *context = [[MCWeAllPayStoreController defaultStore] mainThreadContext];
-//        [context performBlock:^{
-//            self.tonightsBill = (MCSharedBill *)[context objectWithID:[self.writableTonightsBill objectID]];
-//        }];
-//    }
-}
-
 #pragma mark - UIViewController
 
 - (void)loadView {

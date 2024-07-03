@@ -9,7 +9,6 @@
 @import Foundation;
 @import UIKit;
 
-#import "MCTonightsBillTransfer.h"
 #import "We_all_pay-Swift.h"
 
 @class MCSharedBill;

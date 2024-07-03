@@ -21,7 +21,6 @@
 #import "MCPerson+addons.h"
 #import "MCCurrency+addons.h"
 
-#import "MCTonightsBillTransfer.h"
 #import "MCEditorType.h"
 
 #import "UIViewController+WeAllPayStore.h"

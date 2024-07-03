@@ -11,7 +11,6 @@
 @import MessageUI;
 @import NotificationCenter;
 
-#import "MCTonightsBillTransfer.h"
 #import "MCIndexProtocol.h"
 #import "We_all_pay-Swift.h"
 
@@ -29,7 +28,7 @@
 
 __attribute__((objc_subclassing_restricted))
 NS_SWIFT_NAME(PaymentsTableViewController)
-@interface MCPaymentsTableViewController : UITableViewController <NSFetchedResultsControllerDelegate, MFMailComposeViewControllerDelegate, MCTonightsBillTransfer, MCIndexProtocol>
+@interface MCPaymentsTableViewController : UITableViewController <NSFetchedResultsControllerDelegate, MFMailComposeViewControllerDelegate, MCIndexProtocol>
 
 @property (nonatomic, strong) MCEventModel *eventModel;
 @property (nonatomic, strong) MCToggleModel *isEditingModel;

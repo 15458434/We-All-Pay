@@ -14,7 +14,6 @@
 #import "MCCurrency+addons.h"
 #import "MCExchangeRate+addons.h"
 
-#import "MCTonightsBillTransfer.h"
 #import "MCThisPaymentProtocol.h"
 
 #import "We_all_pay-Swift.h"
@@ -176,120 +175,6 @@ NSString * const MCWeAllPayStoreModelName = @"WeAllPayStore";
 {
     [[_mainThreadContext undoManager] endUndoGrouping];
     [[_mainThreadContext undoManager] undoNestedGroup];
-}
-
-#pragma mark - TableView fill sources.
-
-- (NSFetchedResultsController *)allTripsDataControllerForDelegate:(id)delegate __deprecated {
-#ifdef DEBUG
-    NSLog(@"%@, allTripsDataControllerForDelegate", self);
-#endif
-    NSParameterAssert([delegate conformsToProtocol:@protocol(NSFetchedResultsControllerDelegate)]);
-    NSFetchRequest *request = [NSFetchRequest fetchRequestWithEntityName:@"MCSharedBill"];
-    request.sortDescriptors = @[[NSSortDescriptor sortDescriptorWithKey:@"dateCreated" ascending:NO]];
-    request.relationshipKeyPathsForPrefetching = @[ @"payments", @"peoplePresent", @"mainCurrency", @"payments.exchangeRate", @"payments.peopleSharingPayment" ];
-    NSFetchedResultsController *dataController = [[NSFetchedResultsController alloc] initWithFetchRequest:request managedObjectContext:_mainThreadContext sectionNameKeyPath:nil cacheName:nil];
-    dataController.delegate = delegate;
-    return dataController;
-}
-
-- (NSFetchedResultsController *)paymentPresenceDataControllerForDelegate:(id)delegate __deprecated {
-#ifdef DEBUG
-    NSLog(@"%@ paymentPresenceDataControllerForDelegate", self);
-#endif
-    NSParameterAssert([delegate conformsToProtocol:@protocol(NSFetchedResultsControllerDelegate)]);
-    NSParameterAssert([delegate conformsToProtocol:@protocol(MCThisPaymentProtocol)]);
-    MCPayment *thisPayment = [delegate thisPayment];
-    // What entities will be fetched.
-    NSFetchRequest *request = [NSFetchRequest fetchRequestWithEntityName:@"MCPaymentPresence"];
-    // How to sort the data.
-    request.relationshipKeyPathsForPrefetching = @[ @"person", @"payment", @"payment.currency", @"onWhichBill.mainCurrency", @"payment.exchangeRate" ];
-    request.sortDescriptors = @[[NSSortDescriptor sortDescriptorWithKey:@"dateCreated" ascending:NO]];
-    // Select only people from tonightsBill.
-    request.predicate = [NSPredicate predicateWithFormat:@"payment = %@", thisPayment];
-    
-    // Create the FetchedResultsController.
-    NSFetchedResultsController *dataController = [[NSFetchedResultsController alloc] initWithFetchRequest:request managedObjectContext:_mainThreadContext sectionNameKeyPath:nil cacheName:nil];
-    dataController.delegate = delegate;
-    NSError *error;
-    BOOL success = [dataController performFetch:&error];
-    if (!success) {
-        NSLog(@"Unable to fetch data for paymentPresenceDataController.");
-    }
-    return dataController;
-}
-
-- (NSFetchedResultsController *)availableCurrencyControllerForDelegate:(id)delegate __deprecated {
-#ifdef DEBUG
-    NSLog(@"%@ availableCurrencyControllerForDelegate", self);
-#endif
-    NSParameterAssert([delegate conformsToProtocol:@protocol(NSFetchedResultsControllerDelegate)]);
-    NSManagedObjectContext *context = [self mainThreadContext];
-    NSFetchRequest *request = [NSFetchRequest fetchRequestWithEntityName:@"MCCurrency"];
-    request.sortDescriptors = @[[NSSortDescriptor sortDescriptorWithKey:@"name" ascending:YES]];
-    request.predicate = [NSPredicate predicateWithFormat:@"isStillValid = YES"];
-    request.fetchBatchSize = 20;
-    NSFetchedResultsController *dataController = [[NSFetchedResultsController alloc] initWithFetchRequest:request managedObjectContext:context sectionNameKeyPath:nil cacheName:nil];
-    dataController.delegate = delegate;
-    NSError *fetchError;
-    BOOL success = [dataController performFetch:&fetchError];
-    if (!success) {
-        NSLog(@"Error fetching available currencies: %@", fetchError);
-    }
-    return dataController;
-}
-
-- (NSFetchedResultsController *)searchCurrencyControllerWithSearchText:(NSString *)searchText withDelegate:(id)delegate __deprecated {
-    NSParameterAssert([delegate conformsToProtocol:@protocol(NSFetchedResultsControllerDelegate)]);
-    NSManagedObjectContext *context = [self mainThreadContext];
-    NSFetchRequest *request = [NSFetchRequest fetchRequestWithEntityName:@"MCCurrency"];
-    request.sortDescriptors = @[[NSSortDescriptor sortDescriptorWithKey:@"name" ascending:YES]];
-    request.predicate = [NSPredicate predicateWithFormat:@"isStillValid = YES AND name contains[c] %@", searchText];
-    request.fetchBatchSize = 20;
-    NSFetchedResultsController *dataController = [[NSFetchedResultsController alloc] initWithFetchRequest:request managedObjectContext:context sectionNameKeyPath:nil cacheName:nil];
-    dataController.delegate = delegate;
-    NSError *fetchError;
-    BOOL success = [dataController performFetch:&fetchError];
-    if (!success) {
-        NSLog(@"Error fetching available currencies: %@", fetchError);
-    }
-    return dataController;
-}
-
-- (NSArray *)getPeopleOnSharedBill:(MCSharedBill *)thisBill __deprecated {
-    // Should be run on the mainThread
-    NSParameterAssert(thisBill);
-    NSManagedObjectContext *context = _mainThreadContext;
-    NSFetchRequest *request = [NSFetchRequest fetchRequestWithEntityName:@"MCPerson"];
-    request.sortDescriptors = @[[NSSortDescriptor sortDescriptorWithKey:@"firstName" ascending:YES]];
-    request.predicate = [NSPredicate predicateWithFormat:@"ANY sharedBill = %@", thisBill];
-    NSError *error;
-    NSArray *result = [context executeFetchRequest:request error:&error];
-    if (!result) {
-        NSLog(@"Error fetching people: %@", error);
-        [NSException raise:@"PeopleFetchFail" format:@"Fetching people on thisBill %@ failed", thisBill];
-        return nil;
-    } else {
-        return result;
-    }
-}
-
-- (NSArray *)getEmailaddressesFrom:(MCPerson *)thisPerson __deprecated {
-    // Should be run on the mainThread
-    NSParameterAssert(thisPerson);
-    NSManagedObjectContext *context = _mainThreadContext;
-    NSFetchRequest *request = [NSFetchRequest fetchRequestWithEntityName:@"MCEmailAddress"];
-    request.sortDescriptors = @[[NSSortDescriptor sortDescriptorWithKey:@"emailAddress" ascending:YES]];
-    request.predicate = [NSPredicate predicateWithFormat:@"owner = %@", thisPerson];
-    NSError *error;
-    NSArray *result = [context executeFetchRequest:request error:&error];
-    if (!result) {
-        NSLog(@"Error fetching this person emailAddresses.");
-        [NSException raise:@"GetEmailAddressesFromFail" format:@"Fetching EmailAddresses from thisPerson %@", thisPerson];
-        return nil;
-    } else {
-        return result;
-    }
 }
 
 #pragma mark - Core Data Messages

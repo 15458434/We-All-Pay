@@ -13,7 +13,6 @@
 
 #import "MCPersonViewController.h"
 
-#import "MCTonightsBillTransfer.h"
 #import "MCIndexProtocol.h"
 
 @class MCPeople;
@@ -22,7 +21,7 @@
 @class MCTableEmptyMessage;
 
 __attribute__((objc_subclassing_restricted))
-@interface MCEditTripViewController : UITableViewController <NSFetchedResultsControllerDelegate, UITextFieldDelegate, MCTonightsBillTransfer>
+@interface MCEditTripViewController : UITableViewController <NSFetchedResultsControllerDelegate, UITextFieldDelegate>
 
 @property (nonatomic) BOOL isInitAsNew;
 

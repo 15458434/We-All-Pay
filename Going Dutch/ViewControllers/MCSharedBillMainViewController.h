@@ -10,7 +10,6 @@
 @import CoreData;
 #import "MCGenericAdBannerViewController.h"
 
-#import "MCTonightsBillTransfer.h"
 #import "MCCurrentViewDelegate.h"
 
 #import "UIViewController+WeAllPayStore.h"

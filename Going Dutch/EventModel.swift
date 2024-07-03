@@ -94,6 +94,24 @@ import Combine
         return result
     }
     
+    @objc var peoplePresentOnEvent: [MCPerson] {
+        let managedObjectContext = event.managedObjectContext!
+        let request = MCPerson.fetchRequest()
+        request.sortDescriptors = [NSSortDescriptor(keyPath: \MCPerson.firstName, ascending: true)]
+        request.predicate = NSPredicate(format: "ANY sharedBill = %@", event)
+        do {
+            let result = try managedObjectContext.fetch(request)
+            return result
+        } catch {
+            fatalError("Error fetching people: \(error)")
+        }
+
+    }
+    
+    @objc var peoplePresentOnEventSortedOnFullName: [MCPerson] {
+        event.getArrayOfPeopleSortedOnFullNames()
+    }
+    
     @objc var amountOfPeoplePresentOnEvent: Int {
         event.peoplePresent?.count ?? 0
     }
