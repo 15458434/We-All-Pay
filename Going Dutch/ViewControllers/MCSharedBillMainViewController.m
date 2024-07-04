@@ -37,7 +37,7 @@ static void * isEditingToggleContext = &isEditingToggleContext;
 @implementation MCSharedBillMainViewController
 
 - (void)updateEventWithObjectID:(NSManagedObjectID *)objectID {
-    NSManagedObjectContext *managedObjectContext = MCWeAllPayStoreController.defaultStore.mainThreadContext;
+    NSManagedObjectContext *managedObjectContext = MCWeAllPayStoreController.defaultStore.viewContext;
     MCSharedBill *event = [managedObjectContext objectWithID:objectID];
     _eventModel = [[MCEventModel alloc] initWithEvent:event];
 }
@@ -209,7 +209,7 @@ static void * isEditingToggleContext = &isEditingToggleContext;
         // Parent is null when back button is pressed in navigationbar
         [self.view endEditing:YES];
         [_eventModel deleteIfStillNew];
-        [[MCWeAllPayStoreController defaultStore] saveMainThreadContext];
+        [[MCWeAllPayStoreController defaultStore] saveViewContext];
     }
 }
 

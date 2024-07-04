@@ -36,8 +36,7 @@ NSString * const MCWeAllPayStoreModelName = @"WeAllPayStore";
 
 @synthesize fetcher = _fetcher;
 @synthesize managedObjectModel = _managedObjectModel;
-@synthesize mainThreadContext = _mainThreadContext;
-@synthesize backgroundThreadContext = _backgroundThreadContext;
+@synthesize viewContext = _viewContext;
 @synthesize persistentStoreCoordinator = _persistentStoreCoordinator;
 
 #pragma mark - Internal methods
@@ -85,24 +84,6 @@ NSString * const MCWeAllPayStoreModelName = @"WeAllPayStore";
     }
 }
 #else
-- (void)openStore:(void (^_Nullable)(BOOL success))completionHandler {
-    [self mainThreadContext];
-    [self backgroundThreadContext];
-    [self startRespondingToStoreChangeNotifications];
-    if (_mainThreadContext && _backgroundThreadContext) {
-        _mainThreadContext.undoManager = [[NSUndoManager alloc] init];
-        [[_mainThreadContext undoManager] disableUndoRegistration];
-        if (completionHandler) {
-            completionHandler(YES);
-        }
-    } else {
-        NSLog(@"Unable to open We All Pay Store.");
-        if (completionHandler) {
-            completionHandler(NO);
-        }
-    }
-}
-
 - (void)openStore {
     if (_container == nil) {
         _container = [[NSPersistentContainer alloc] initWithName:MCWeAllPayStoreModelName];
@@ -127,6 +108,7 @@ NSString * const MCWeAllPayStoreModelName = @"WeAllPayStore";
                 
             }
         }];
+        _container.viewContext.automaticallyMergesChangesFromParent = YES;
     }
 }
 #endif
@@ -148,11 +130,14 @@ NSString * const MCWeAllPayStoreModelName = @"WeAllPayStore";
     return result;
 }
 
-- (void)saveMainThreadContext
-{
-    if (self.mainThreadContext.hasChanges) {
+- (void)performBackgroundTask:(void (^)(NSManagedObjectContext *))block {
+    [_container performBackgroundTask:block];
+}
+
+- (void)saveViewContext {
+    if (self.viewContext.hasChanges) {
         NSError *error;
-        BOOL succes = [_mainThreadContext save:&error];
+        BOOL succes = [_viewContext save:&error];
         if (succes) {
             NSLog(@"Main Thread Context: Succesfully saved.");
         } else {
@@ -161,67 +146,50 @@ NSString * const MCWeAllPayStoreModelName = @"WeAllPayStore";
     }
 }
 
-- (void)savebackgroundContext
-{
-    if (self.backgroundThreadContext.hasChanges) {
-        NSError *error;
-        BOOL succes = [_backgroundThreadContext save:&error];
-        if (succes) {
-            NSLog(@"Background Thread Context Succesfully saved.");
-        } else {
-            NSLog(@"Background save not possible: %@", error);
-        }
-    }
-}
-
 #pragma mark - Undomanager stuff.
 
-- (void)beginUndoGroup
-{
-    [[_mainThreadContext undoManager] enableUndoRegistration];
-    [[_mainThreadContext undoManager] beginUndoGrouping];
+- (void)beginUndoGroup {
+    [_viewContext.undoManager enableUndoRegistration];
+    [_viewContext.undoManager beginUndoGrouping];
 }
 
-- (void)beginUndoGroupWithoutRegistration
-{
-    [[_mainThreadContext undoManager] beginUndoGrouping];
+- (void)beginUndoGroupWithoutRegistration {
+    [_viewContext.undoManager beginUndoGrouping];
 }
 
-- (void)endUndoGroup
-{
-    [[_mainThreadContext undoManager] endUndoGrouping];
-    [[_mainThreadContext undoManager] disableUndoRegistration];
+- (void)endUndoGroup {
+    [_viewContext.undoManager endUndoGrouping];
+    [_viewContext.undoManager disableUndoRegistration];
 }
 
-- (void)endUndoGroupWithoutRegistration
-{
-    [[_mainThreadContext undoManager] endUndoGrouping];
+- (void)endUndoGroupWithoutRegistration {
+    [_viewContext.undoManager endUndoGrouping];
 }
 
-- (void)endUndoGroupAndProcess
-{
-    [[_mainThreadContext undoManager] endUndoGrouping];
-    [[_mainThreadContext undoManager] disableUndoRegistration];
-    [_mainThreadContext processPendingChanges];
+- (void)endUndoGroupAndProcess {
+    [_viewContext.undoManager endUndoGrouping];
+    [_viewContext.undoManager disableUndoRegistration];
+    [_viewContext processPendingChanges];
 }
 
-- (void)endUndoGroupAndProcessWithoutRegistration
-{
-    [[_mainThreadContext undoManager] endUndoGrouping];
-    [_mainThreadContext processPendingChanges];
+- (void)endUndoGroupAndProcessWithoutRegistration {
+    [_viewContext.undoManager endUndoGrouping];
+    [_viewContext processPendingChanges];
 }
 
-- (void)endUndoGroupAndUndo
-{
-    [[_mainThreadContext undoManager] endUndoGrouping];
-    [[_mainThreadContext undoManager] undoNestedGroup];
-    [[_mainThreadContext undoManager] disableUndoRegistration];
+- (void)endUndoGroupAndUndo {
+    [_viewContext.undoManager endUndoGrouping];
+    [_viewContext.undoManager undoNestedGroup];
+    [_viewContext.undoManager disableUndoRegistration];
 }
 
-- (void)endUndoGroupAndUndoWithoutRegistration
-{
-    [[_mainThreadContext undoManager] endUndoGrouping];
-    [[_mainThreadContext undoManager] undoNestedGroup];
+- (void)endUndoGroupAndUndoWithoutRegistration {
+    [_viewContext.undoManager endUndoGrouping];
+    [_viewContext.undoManager undoNestedGroup];
+}
+
+- (void)resetError {
+    self.error = nil;
 }
 
 #pragma mark - Core Data Messages
@@ -229,10 +197,8 @@ NSString * const MCWeAllPayStoreModelName = @"WeAllPayStore";
 - (void)startRespondingToStoreChangeNotifications
 {
     NSNotificationCenter *dc = [NSNotificationCenter defaultCenter];
-    [dc addObserver:self selector:@selector(storeWillSave:) name:NSManagedObjectContextWillSaveNotification object:_mainThreadContext];
-    [dc addObserver:self selector:@selector(storeWillSave:) name:NSManagedObjectContextWillSaveNotification object:_backgroundThreadContext];
-    [dc addObserver:self selector:@selector(storeDidSave:) name:NSManagedObjectContextDidSaveNotification object:_mainThreadContext];
-    [dc addObserver:self selector:@selector(storeDidSave:) name:NSManagedObjectContextDidSaveNotification object:_backgroundThreadContext];
+    [dc addObserver:self selector:@selector(storeWillSave:) name:NSManagedObjectContextWillSaveNotification object:_viewContext];
+    [dc addObserver:self selector:@selector(storeDidSave:) name:NSManagedObjectContextDidSaveNotification object:_viewContext];
 }
 
 - (void)stopRespondingToStorechangeNotifications
@@ -253,20 +219,12 @@ NSString * const MCWeAllPayStoreModelName = @"WeAllPayStore";
 #ifdef DEBUG
     NSLog(@"MCWeAllPayStoreController: Store did save.");
 #endif
-    if (notification.object != _mainThreadContext) {
-        [_mainThreadContext performBlockAndWait:^{
+    if (notification.object != _viewContext) {
+        [_viewContext performBlockAndWait:^{
 #ifdef DEBUG
             NSLog(@"Merging changes into mainContext.");
 #endif
-            [self.mainThreadContext mergeChangesFromContextDidSaveNotification:notification];
-        }];
-    }
-    if (notification.object != _backgroundThreadContext) {
-        [_backgroundThreadContext performBlockAndWait:^{
-#ifdef DEBUG
-            NSLog(@"Merging changes into backgroundContext.");
-#endif
-            [self.backgroundThreadContext mergeChangesFromContextDidSaveNotification:notification];
+            [self.viewContext mergeChangesFromContextDidSaveNotification:notification];
         }];
     }
 }
@@ -275,99 +233,8 @@ NSString * const MCWeAllPayStoreModelName = @"WeAllPayStore";
 
 // Returns the managed object context for the application.
 // If the context doesn't already exist, it is created and bound to the persistent store coordinator for the application.
-- (NSManagedObjectContext *)mainThreadContext {
+- (NSManagedObjectContext *)viewContext {
     return _container.viewContext;
-}
-
-- (NSManagedObjectContext *)backgroundThreadContext
-{
-    if (_backgroundThreadContext != nil) {
-        return _backgroundThreadContext;
-    }
-    
-    NSPersistentStoreCoordinator *coordinator = [self persistentStoreCoordinator];
-    if (coordinator != nil) {
-        _backgroundThreadContext = [[NSManagedObjectContext alloc] initWithConcurrencyType:NSPrivateQueueConcurrencyType];
-        _backgroundThreadContext.mergePolicy = NSMergeByPropertyObjectTrumpMergePolicy;
-        [_backgroundThreadContext setPersistentStoreCoordinator:coordinator];
-    }
-#ifdef DEBUG
-    NSLog(@"backgroundThreadContext has been created.");
-#endif
-    return _backgroundThreadContext;
-}
-
-// Returns the managed object model for the application.
-// If the model doesn't already exist, it is created from the application's model.
-- (NSManagedObjectModel *)managedObjectModel
-{
-    if (_managedObjectModel != nil) {
-        return _managedObjectModel;
-    }
-    NSURL *modelURL = [[NSBundle mainBundle] URLForResource:MCWeAllPayStoreModelName withExtension:@"momd"];
-    _managedObjectModel = [[NSManagedObjectModel alloc] initWithContentsOfURL:modelURL];
-    return _managedObjectModel;
-}
-
-// Returns the persistent store coordinator for the application.
-// If the coordinator doesn't already exist, it is created and the application's store added to it.
-- (NSPersistentStoreCoordinator *)persistentStoreCoordinator {
-    if (_persistentStoreCoordinator != nil) {
-        return _persistentStoreCoordinator;
-    }
-#ifdef SCREENSHOTS
-    NSError *openPersistentStoreError;
-    _persistentStoreCoordinator = [[NSPersistentStoreCoordinator alloc] initWithManagedObjectModel:[self managedObjectModel]];
-    if (![_persistentStoreCoordinator addPersistentStoreWithType:NSInMemoryStoreType configuration:nil URL:nil options:nil error:&openPersistentStoreError]) {
-        NSLog(@"Unable to create in memory persistant store for screenshots: %@", openPersistentStoreError);
-        abort();
-    }
-    return _persistentStoreCoordinator;
-#else
-    NSURL *directoryURL = [[self applicationDocumentsDirectory] URLByAppendingPathComponent:MCWeAllPayStoreDirectoryName isDirectory:YES];
-    NSFileManager *fileManager = [NSFileManager defaultManager];
-    if (![fileManager fileExistsAtPath:directoryURL.path]) {
-        NSError *directoryCreationError;
-        if (![fileManager createDirectoryAtURL:directoryURL withIntermediateDirectories:YES attributes:nil error:&directoryCreationError ]){
-            NSLog(@"Unable to create base directory for WeAllPayStore: %@", directoryCreationError);
-        }
-    }
-    NSURL *storeURL = [directoryURL URLByAppendingPathComponent:MCWeAllPayStoreFileName];
-    NSLog(@"storeURL: %@", storeURL);
-    NSError *error = nil;
-    NSDictionary *storeOptions = @{NSInferMappingModelAutomaticallyOption: @YES,
-                                   NSMigratePersistentStoresAutomaticallyOption: @YES};
-    _persistentStoreCoordinator = [[NSPersistentStoreCoordinator alloc] initWithManagedObjectModel:[self managedObjectModel]];
-    if (![_persistentStoreCoordinator addPersistentStoreWithType:NSSQLiteStoreType configuration:nil URL:storeURL options:storeOptions error:&error]) {
-        /*
-         Replace this implementation with code to handle the error appropriately.
-         
-         abort() causes the application to generate a crash log and terminate. You should not use this function in a shipping application, although it may be useful during development.
-         
-         Typical reasons for an error here include:
-         * The persistent store is not accessible;
-         * The schema for the persistent store is incompatible with current managed object model.
-         Check the error message to determine what the actual problem was.
-         
-         
-         If the persistent store is not accessible, there is typically something wrong with the file path. Often, a file URL is pointing into the application's resources directory instead of a writeable directory.
-         
-         If you encounter schema incompatibility errors during development, you can reduce their frequency by:
-         * Simply deleting the existing store:
-         [[NSFileManager defaultManager] removeItemAtURL:storeURL error:nil]
-         
-         * Performing automatic lightweight migration by passing the following dictionary as the options parameter:
-         @{NSMigratePersistentStoresAutomaticallyOption:@YES, NSInferMappingModelAutomaticallyOption:@YES}
-         
-         Lightweight migration will only work for a limited set of schema changes; consult "Core Data Model Versioning and Data Migration Programming Guide" for details.
-         
-         */
-        NSLog(@"Unresolved error %@, %@", error, [error userInfo]);
-        abort();
-    }
-    
-    return _persistentStoreCoordinator;
-#endif
 }
 
 #pragma mark - Application's Documents directory

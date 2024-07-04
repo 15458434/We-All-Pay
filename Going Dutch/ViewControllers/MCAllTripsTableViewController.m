@@ -107,7 +107,7 @@ static void * notificationCountContext = &notificationCountContext;
     MCSharedBill *poorSucker = [_model.fetchEventsController objectAtIndexPath:indexPath];
     [WhoPayingUserDefaultsStoreInterface sendInvalidUserDefaultsIfTonightsBillIs:poorSucker];
     [_model deleteWithEvent:poorSucker];
-    [[MCWeAllPayStoreController defaultStore] saveMainThreadContext];
+    [[MCWeAllPayStoreController defaultStore] saveViewContext];
 }
 
 #pragma mark - MCPathComponentsToOpenProtocol
@@ -224,7 +224,7 @@ static void * notificationCountContext = &notificationCountContext;
     }
     
     if (!_model.fetchEventsController) {
-        NSManagedObjectContext *managedObjectContext = MCWeAllPayStoreController.defaultStore.mainThreadContext;
+        NSManagedObjectContext *managedObjectContext = MCWeAllPayStoreController.defaultStore.viewContext;
         [_model prepareForUseWithManagedObjectContext:managedObjectContext forDelegate:self];
         [[self tableView] reloadData];
         [self setEmptyMessageWithDuration:0.0];

@@ -24,11 +24,9 @@ NS_ASSUME_NONNULL_BEGIN
 __attribute__((objc_subclassing_restricted))
 @interface MCWeAllPayStoreController : NSObject
 
-@property (nonatomic, strong, readonly) NSPersistentContainer *container;
 @property (nonatomic, strong, readonly, nullable) NSError *error;
 
-@property (nonatomic, strong, readonly) NSManagedObjectContext *mainThreadContext;
-@property (nonatomic, strong, readonly) NSManagedObjectContext *backgroundThreadContext;
+@property (nonatomic, strong, readonly) NSManagedObjectContext *viewContext;
 @property (nonatomic, strong, readonly) NSPersistentStoreCoordinator *persistentStoreCoordinator;
 @property (nonatomic, strong, readonly) NSManagedObjectModel *managedObjectModel;
 
@@ -39,11 +37,10 @@ __attribute__((objc_subclassing_restricted))
 #ifdef SCREENSHOTS
 - (void)openStore:(void (^_Nullable)(MCWeAllPayStoreController *store, BOOL success))completionHandler;
 #else
-- (void)openStore:(void (^_Nullable)(BOOL success))completionHandler __deprecated;
 - (void)openStore;
 #endif
-- (void)saveMainThreadContext;
-- (void)savebackgroundContext;
+- (void)performBackgroundTask:(void (^)(NSManagedObjectContext *))block;
+- (void)saveViewContext;
 
 - (void)beginUndoGroup;
 - (void)beginUndoGroupWithoutRegistration;
@@ -53,6 +50,8 @@ __attribute__((objc_subclassing_restricted))
 - (void)endUndoGroupAndProcessWithoutRegistration;
 - (void)endUndoGroupAndUndo;
 - (void)endUndoGroupAndUndoWithoutRegistration;
+
+- (void)resetError;
 
 @end
 

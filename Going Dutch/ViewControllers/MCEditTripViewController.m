@@ -103,7 +103,7 @@ static void * isEditingToggleContext = &isEditingToggleContext;
     _eventModel.event.tripName = _eventNameTextField.text;
     NSDate *now = [NSDate date];
     _eventModel.event.dateModified = now;
-    [MCWeAllPayStoreController.defaultStore saveMainThreadContext];
+    [MCWeAllPayStoreController.defaultStore saveViewContext];
     if (!_didSomethingChange) {
         _didSomethingChange = YES;
     }
@@ -196,7 +196,7 @@ static void * isEditingToggleContext = &isEditingToggleContext;
     if (editingStyle == UITableViewCellEditingStyleDelete) {
         MCPerson *poorSucker = [_fetchedResultsController objectAtIndexPath:indexPath];
         [_eventModel deletePerson:poorSucker];
-        [MCWeAllPayStoreController.defaultStore saveMainThreadContext];
+        [MCWeAllPayStoreController.defaultStore saveViewContext];
         _didSomethingChange = YES;
     }
 }

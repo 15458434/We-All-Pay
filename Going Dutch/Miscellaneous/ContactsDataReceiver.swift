@@ -10,6 +10,7 @@ import UIKit
 import ContactsUI
 
 final class ContactsDataReceiver: NSObject, ThisEventReadOnly, CNContactPickerDelegate {
+    @objc dynamic private(set) var error: NSError?
     
     @objc init(with tonightsBill: MCSharedBill) {
         self.event = tonightsBill
@@ -41,9 +42,7 @@ final class ContactsDataReceiver: NSObject, ThisEventReadOnly, CNContactPickerDe
     
     func contactPicker(_ picker: CNContactPickerViewController, didSelect contact: CNContact) {
         let tonightsBillID: NSManagedObjectID = event.objectID
-        let backgroundContext: NSManagedObjectContext = MCWeAllPayStoreController.defaultStore().backgroundThreadContext
-        
-        backgroundContext.perform {
+        MCWeAllPayStoreController.defaultStore().performBackgroundTask { backgroundContext in
             let backgroundTonightsBill: MCSharedBill = backgroundContext.object(with: tonightsBillID) as! MCSharedBill
             let newPerson: MCPerson = backgroundTonightsBill.addPerson()!
             newPerson.firstName = contact.givenName
@@ -60,12 +59,20 @@ final class ContactsDataReceiver: NSObject, ThisEventReadOnly, CNContactPickerDe
                 newPerson.setPictureDataFrom(nil)
             }
             
-            MCWeAllPayStoreController.defaultStore().savebackgroundContext()
+            do {
+                try backgroundContext.save()
+            } catch {
+                self.error = error as NSError;
+            }
         }
     }
     
     func contactPickerDidCancel(_ picker: CNContactPickerViewController) {
         debugPrint("Whatever")
+    }
+    
+    func resetError() {
+        self.error = nil;
     }
     
     // MARK: NSObject

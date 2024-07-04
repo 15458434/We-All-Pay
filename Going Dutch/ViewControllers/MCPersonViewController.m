@@ -68,7 +68,7 @@
 - (IBAction)doneButtonPressed:(id)sender {
     [self.view endEditing:YES];
     [[MCWeAllPayStoreController defaultStore] endUndoGroupAndProcess];
-    [[MCWeAllPayStoreController defaultStore] saveMainThreadContext];
+    [[MCWeAllPayStoreController defaultStore] saveViewContext];
     [[[self navigationController] presentingViewController] dismissViewControllerAnimated:YES completion:nil];
 }
 

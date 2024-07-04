@@ -56,7 +56,7 @@ final class PaymentViewController: MCGenericAdBannerTableViewController, AdBanne
     // MARK: IB Actions
     @IBAction func mainCancelPressed(_ sender: UIButton) {
         mainCancelIsPressed = .isPressed
-        if MCWeAllPayStoreController.defaultStore().mainThreadContext.undoManager?.canUndo == true {
+        if MCWeAllPayStoreController.defaultStore().viewContext.undoManager?.canUndo == true {
             MCWeAllPayStoreController.defaultStore().endUndoGroupAndUndo()
         } else {
             MCWeAllPayStoreController.defaultStore().endUndoGroup()
@@ -66,7 +66,7 @@ final class PaymentViewController: MCGenericAdBannerTableViewController, AdBanne
     
     @IBAction func mainDonePressed(_ sender: UIButton) {
         MCWeAllPayStoreController.defaultStore().endUndoGroupAndProcess()
-        MCWeAllPayStoreController.defaultStore().saveMainThreadContext()
+        MCWeAllPayStoreController.defaultStore().saveViewContext()
         navigationController!.presentingViewController!.dismiss(animated: true, completion: { () -> Void in
             WhoPayingUserDefaultsStoreInterface.sendToUserDefaultsStoreInterface(self.model.payment.onWhichBill)
         })
