@@ -93,7 +93,7 @@
         [populator populate];
     }];
 #else
-    [[MCWeAllPayStoreController defaultStore] openStore:nil];
+    [[MCWeAllPayStoreController defaultStore] openStore];
 #endif
     return YES;
 }

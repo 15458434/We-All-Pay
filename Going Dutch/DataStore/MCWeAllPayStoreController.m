@@ -27,6 +27,9 @@ NSString * const MCWeAllPayStoreModelName = @"WeAllPayStore";
 
 @interface MCWeAllPayStoreController ()
 
+@property (nonatomic, strong, readwrite) NSPersistentContainer *container;
+@property (nonatomic, strong, nullable) NSError *error;
+
 @end
 
 @implementation MCWeAllPayStoreController
@@ -99,7 +102,51 @@ NSString * const MCWeAllPayStoreModelName = @"WeAllPayStore";
         }
     }
 }
+
+- (void)openStore {
+    if (_container == nil) {
+        _container = [[NSPersistentContainer alloc] initWithName:MCWeAllPayStoreModelName];
+        
+        NSURL *weAllPayStoreURL = [self weAllPayStoreURL];
+        
+        NSPersistentStoreDescription *storeDescription = [NSPersistentStoreDescription persistentStoreDescriptionWithURL:weAllPayStoreURL];
+//        storeDescription.type = NSInMemoryStoreType;
+        [storeDescription setOption:@YES forKey:NSPersistentHistoryTrackingKey];
+        [storeDescription setOption:@YES forKey:NSPersistentStoreRemoteChangeNotificationPostOptionKey];
+        
+        _container.persistentStoreDescriptions = @[storeDescription];
+        
+        [_container loadPersistentStoresWithCompletionHandler:^(NSPersistentStoreDescription *storeDescription, NSError *error) {
+            if (error != nil) {
+                NSLog(@"Unresolved error %@, %@", error, error.userInfo);
+                dispatch_async(dispatch_get_main_queue(), ^{
+                    self.error = error;
+                });
+                abort();
+            } else {
+                
+            }
+        }];
+    }
+}
 #endif
+
+- (NSURL *)weAllPayStoreURL {
+    NSURL *weAllPayStorageFolder = [[self applicationDocumentsDirectory] URLByAppendingPathComponent:MCWeAllPayStoreDirectoryName];
+    // Create the subdirectory if it doesn't exist
+    NSError *error = nil;
+    [[NSFileManager defaultManager] createDirectoryAtURL:weAllPayStorageFolder withIntermediateDirectories:YES attributes:nil error:&error];
+    if (error) {
+        NSLog(@"Failed to create directory: %@", error);
+        __weak typeof(self) weakSelf = self;
+        dispatch_async(dispatch_get_main_queue(), ^{
+            weakSelf.error = error;
+        });
+    }
+    NSURL *result = [weAllPayStorageFolder URLByAppendingPathComponent:MCWeAllPayStoreFileName];
+    NSLog(@"WeAllPayStorageFile: %@", result);
+    return result;
+}
 
 - (void)saveMainThreadContext
 {
@@ -229,21 +276,7 @@ NSString * const MCWeAllPayStoreModelName = @"WeAllPayStore";
 // Returns the managed object context for the application.
 // If the context doesn't already exist, it is created and bound to the persistent store coordinator for the application.
 - (NSManagedObjectContext *)mainThreadContext {
-    if (_mainThreadContext != nil) {
-        return _mainThreadContext;
-    }
-    
-    NSPersistentStoreCoordinator *coordinator = [self persistentStoreCoordinator];
-    if (coordinator != nil) {
-        _mainThreadContext = [[NSManagedObjectContext alloc] initWithConcurrencyType:NSMainQueueConcurrencyType];
-        _mainThreadContext.mergePolicy = NSMergeByPropertyObjectTrumpMergePolicy;
-        _mainThreadContext.retainsRegisteredObjects = YES;
-        [_mainThreadContext setPersistentStoreCoordinator:coordinator];
-    }
-#ifdef DEBUG
-    NSLog(@"mainThreadContext has been created.");
-#endif
-    return _mainThreadContext;
+    return _container.viewContext;
 }
 
 - (NSManagedObjectContext *)backgroundThreadContext
@@ -300,7 +333,7 @@ NSString * const MCWeAllPayStoreModelName = @"WeAllPayStore";
         }
     }
     NSURL *storeURL = [directoryURL URLByAppendingPathComponent:MCWeAllPayStoreFileName];
-    
+    NSLog(@"storeURL: %@", storeURL);
     NSError *error = nil;
     NSDictionary *storeOptions = @{NSInferMappingModelAutomaticallyOption: @YES,
                                    NSMigratePersistentStoresAutomaticallyOption: @YES};
@@ -340,8 +373,7 @@ NSString * const MCWeAllPayStoreModelName = @"WeAllPayStore";
 #pragma mark - Application's Documents directory
 
 // Returns the URL to the application's Documents directory.
-- (NSURL *)applicationDocumentsDirectory
-{
+- (NSURL *)applicationDocumentsDirectory {
     return [[[NSFileManager defaultManager] URLsForDirectory:NSDocumentDirectory inDomains:NSUserDomainMask] lastObject];
 }
 

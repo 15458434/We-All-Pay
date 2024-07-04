@@ -24,6 +24,9 @@ NS_ASSUME_NONNULL_BEGIN
 __attribute__((objc_subclassing_restricted))
 @interface MCWeAllPayStoreController : NSObject
 
+@property (nonatomic, strong, readonly) NSPersistentContainer *container;
+@property (nonatomic, strong, readonly, nullable) NSError *error;
+
 @property (nonatomic, strong, readonly) NSManagedObjectContext *mainThreadContext;
 @property (nonatomic, strong, readonly) NSManagedObjectContext *backgroundThreadContext;
 @property (nonatomic, strong, readonly) NSPersistentStoreCoordinator *persistentStoreCoordinator;
@@ -36,7 +39,8 @@ __attribute__((objc_subclassing_restricted))
 #ifdef SCREENSHOTS
 - (void)openStore:(void (^_Nullable)(MCWeAllPayStoreController *store, BOOL success))completionHandler;
 #else
-- (void)openStore:(void (^_Nullable)(BOOL success))completionHandler;
+- (void)openStore:(void (^_Nullable)(BOOL success))completionHandler __deprecated;
+- (void)openStore;
 #endif
 - (void)saveMainThreadContext;
 - (void)savebackgroundContext;
