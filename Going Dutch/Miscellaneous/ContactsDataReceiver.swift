@@ -42,7 +42,7 @@ final class ContactsDataReceiver: NSObject, ThisEventReadOnly, CNContactPickerDe
     
     func contactPicker(_ picker: CNContactPickerViewController, didSelect contact: CNContact) {
         let tonightsBillID: NSManagedObjectID = event.objectID
-        MCWeAllPayStoreController.defaultStore().performBackgroundTask { backgroundContext in
+        WeAllPayStoreController.defaultStore.performBackgroundTask { backgroundContext in
             let backgroundTonightsBill: MCSharedBill = backgroundContext.object(with: tonightsBillID) as! MCSharedBill
             let newPerson: MCPerson = backgroundTonightsBill.addPerson()!
             newPerson.firstName = contact.givenName

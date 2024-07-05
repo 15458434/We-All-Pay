@@ -37,7 +37,7 @@ final class SolutionViewController: MCReturnPaymentViewController, MFMailCompose
             self.showRateMeIfNecessary()
             self.presentedViewController!.dismiss(animated: true, completion: {
                 self.event.hasTheMailBeenSent = NSNumber(booleanLiteral: true)
-                MCWeAllPayStoreController.defaultStore().saveViewContext()
+                WeAllPayStoreController.defaultStore.saveViewContext()
             })
         case .failed:
             self.presentedViewController!.dismiss(animated: true, completion: nil)

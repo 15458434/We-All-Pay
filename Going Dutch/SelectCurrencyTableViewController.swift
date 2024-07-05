@@ -73,7 +73,7 @@ class SelectCurrencyTableViewController: UITableViewController, UISearchResultsU
     
     override func viewDidLoad() {
         func prepareCurrencies() {
-            currencies = MCWeAllPayStoreController.defaultStore().fetcher.currencyController.currencies
+            currencies = WeAllPayStoreController.defaultStore.fetcher.currencyController.currencies
             filteredCurrencies = [Currency]()
         }
         
@@ -315,7 +315,7 @@ class PaymentUpdateCurrencyModel: NSObject, CurrencyUpdateModel {
     }
     
     func updateCurrency(with code: String, with completion: @escaping ((Error?) -> Void)) {
-        let mainThreadContext = MCWeAllPayStoreController.defaultStore().viewContext
+        let mainThreadContext = WeAllPayStoreController.defaultStore.viewContext
         let newCurrency = MCCurrency(from: code, from: mainThreadContext)
         let oldCurrency = payment.currency
         payment.currency = newCurrency

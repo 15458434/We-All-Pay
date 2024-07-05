@@ -8,6 +8,7 @@
 
 #import "UIViewController+WeAllPayStore.h"
 #import "MCWeAllPayStoreController.h"
+#import "We_all_pay-Swift.h"
 
 @implementation UIViewController (WeAllPayStore)
 

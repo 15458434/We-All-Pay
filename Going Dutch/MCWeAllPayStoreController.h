@@ -22,17 +22,16 @@ The We All Pay Store Controller is designed to do writing in the background and 
 NS_ASSUME_NONNULL_BEGIN
 
 __attribute__((objc_subclassing_restricted))
+NS_SWIFT_NAME(WeAllPayStoreController)
 @interface MCWeAllPayStoreController : NSObject
 
 @property (nonatomic, strong, readonly, nullable) NSError *error;
 
 @property (nonatomic, strong, readonly) NSManagedObjectContext *viewContext;
-@property (nonatomic, strong, readonly) NSPersistentStoreCoordinator *persistentStoreCoordinator;
-@property (nonatomic, strong, readonly) NSManagedObjectModel *managedObjectModel;
 
 @property (nonatomic, strong, readonly) ExchangeRateFetcher *fetcher;
 
-+ (instancetype)defaultStore;
+@property (class, readonly) MCWeAllPayStoreController *defaultStore;
 
 #ifdef SCREENSHOTS
 - (void)openStore:(void (^_Nullable)(MCWeAllPayStoreController *store, BOOL success))completionHandler;

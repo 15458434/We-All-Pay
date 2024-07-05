@@ -13,6 +13,7 @@
 #import "MCExchangeRate+addons.h"
 
 #import "MCWeAllPayStoreController.h"
+#import "We_all_pay-Swift.h"
 
 @implementation MCPaymentPresence (addons)
 

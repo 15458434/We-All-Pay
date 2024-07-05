@@ -187,8 +187,7 @@
     return newPerson;
 }
 
-- (void)deletePerson:(MCPerson *)toBeDeletedPerson
-{
+- (void)deletePerson:(MCPerson *)toBeDeletedPerson {
     NSSet *presences = [[toBeDeletedPerson sharingPayment] copy];
     for (MCPaymentPresence *paymentPresence in presences) {
         MCPayment *payment = [paymentPresence payment];

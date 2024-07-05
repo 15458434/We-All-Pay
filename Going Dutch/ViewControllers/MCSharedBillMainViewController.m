@@ -48,6 +48,9 @@ static void * isEditingToggleContext = &isEditingToggleContext;
 
 - (IBAction)toggleEdit:(id)sender {
     [_isEditingModel toggle];
+    if (!_isEditingModel.boolValue) {
+        [_eventModel save];
+    }
 }
 
 - (IBAction)peopleOrPaymentsSelectionChangedValue:(id)sender {

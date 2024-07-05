@@ -35,9 +35,6 @@ NSString * const MCWeAllPayStoreModelName = @"WeAllPayStore";
 @implementation MCWeAllPayStoreController
 
 @synthesize fetcher = _fetcher;
-@synthesize managedObjectModel = _managedObjectModel;
-@synthesize viewContext = _viewContext;
-@synthesize persistentStoreCoordinator = _persistentStoreCoordinator;
 
 #pragma mark - Internal methods
 
@@ -54,8 +51,7 @@ NSString * const MCWeAllPayStoreModelName = @"WeAllPayStore";
     }
 }
 
-+ (instancetype)defaultStore
-{
++ (MCWeAllPayStoreController *)defaultStore {
     static MCWeAllPayStoreController *sharedStore = nil;
     @synchronized (self) {
         if (sharedStore == nil) {
@@ -67,48 +63,52 @@ NSString * const MCWeAllPayStoreModelName = @"WeAllPayStore";
 
 #ifdef SCREENSHOTS
 - (void)openStore:(void (^_Nullable)(MCWeAllPayStoreController *store, BOOL success))completionHandler {
-    [self mainThreadContext];
-    [self backgroundThreadContext];
-    [self startRespondingToStoreChangeNotifications];
-    if (_mainThreadContext && _backgroundThreadContext) {
-        _mainThreadContext.undoManager = [[NSUndoManager alloc] init];
-        [[_mainThreadContext undoManager] disableUndoRegistration];
-        if (completionHandler) {
-            completionHandler(self, YES);
-        }
-    } else {
-        NSLog(@"Unable to open We All Pay Store.");
-        if (completionHandler) {
-            completionHandler(self, NO);
-        }
-    }
-}
-#else
-- (void)openStore {
     if (_container == nil) {
         _container = [[NSPersistentContainer alloc] initWithName:MCWeAllPayStoreModelName];
-        
-        NSURL *weAllPayStoreURL = [self weAllPayStoreURL];
-        
+        NSURL *weAllPayStoreURL = [NSURL URLWithString:@"/dev/null"];
         NSPersistentStoreDescription *storeDescription = [NSPersistentStoreDescription persistentStoreDescriptionWithURL:weAllPayStoreURL];
-//        storeDescription.type = NSInMemoryStoreType;
-        [storeDescription setOption:@YES forKey:NSPersistentHistoryTrackingKey];
+        storeDescription.type = NSInMemoryStoreType;
         [storeDescription setOption:@YES forKey:NSPersistentStoreRemoteChangeNotificationPostOptionKey];
-        
         _container.persistentStoreDescriptions = @[storeDescription];
-        
         [_container loadPersistentStoresWithCompletionHandler:^(NSPersistentStoreDescription *storeDescription, NSError *error) {
             if (error != nil) {
                 NSLog(@"Unresolved error %@, %@", error, error.userInfo);
                 dispatch_async(dispatch_get_main_queue(), ^{
                     self.error = error;
                 });
+                completionHandler(self, NO);
                 abort();
             } else {
-                
+                completionHandler(self, YES);
             }
         }];
         _container.viewContext.automaticallyMergesChangesFromParent = YES;
+        _container.viewContext.undoManager = [[NSUndoManager alloc] init];
+    }
+}
+#else
+- (void)openStore {
+    if (_container == nil) {
+        _container = [[NSPersistentContainer alloc] initWithName:MCWeAllPayStoreModelName];
+        NSURL *weAllPayStoreURL = [self weAllPayStoreURL];
+        NSPersistentStoreDescription *storeDescription = [NSPersistentStoreDescription persistentStoreDescriptionWithURL:weAllPayStoreURL];
+        [storeDescription setOption:@YES forKey:NSPersistentStoreRemoteChangeNotificationPostOptionKey];
+        [storeDescription setOption:@YES forKey:NSInferMappingModelAutomaticallyOption];
+        [storeDescription setOption:@YES forKey:NSMigratePersistentStoresAutomaticallyOption];
+        _container.persistentStoreDescriptions = @[storeDescription];
+        [_container loadPersistentStoresWithCompletionHandler:^(NSPersistentStoreDescription *storeDescription, NSError *error) {
+            if (error) {
+                NSLog(@"Unresolved error %@, %@", error, error.userInfo);
+                dispatch_async(dispatch_get_main_queue(), ^{
+                    self.error = error;
+                });
+                abort();
+            }
+        }];
+        self.viewContext.retainsRegisteredObjects = YES;
+        self.viewContext.undoManager = [[NSUndoManager alloc] init];
+        [self.viewContext.undoManager disableUndoRegistration];
+        self.viewContext.automaticallyMergesChangesFromParent = YES;
     }
 }
 #endif
@@ -126,7 +126,9 @@ NSString * const MCWeAllPayStoreModelName = @"WeAllPayStore";
         });
     }
     NSURL *result = [weAllPayStorageFolder URLByAppendingPathComponent:MCWeAllPayStoreFileName];
+#ifdef DEBUG
     NSLog(@"WeAllPayStorageFile: %@", result);
+#endif
     return result;
 }
 
@@ -135,13 +137,16 @@ NSString * const MCWeAllPayStoreModelName = @"WeAllPayStore";
 }
 
 - (void)saveViewContext {
+#ifdef DEBUG
+    NSLog(@"Saving viewContext: %@", self.viewContext);
+#endif
     if (self.viewContext.hasChanges) {
         NSError *error;
-        BOOL succes = [_viewContext save:&error];
-        if (succes) {
-            NSLog(@"Main Thread Context: Succesfully saved.");
+        BOOL success = [self.viewContext save:&error];
+        if (success) {
+            NSLog(@"viewContext: Succesfully saved.");
         } else {
-            NSLog(@"MainQueue save not possible: %@", error);
+            NSLog(@"viewContext save not possible: %@", error);
         }
     }
 }
@@ -149,43 +154,51 @@ NSString * const MCWeAllPayStoreModelName = @"WeAllPayStore";
 #pragma mark - Undomanager stuff.
 
 - (void)beginUndoGroup {
-    [_viewContext.undoManager enableUndoRegistration];
-    [_viewContext.undoManager beginUndoGrouping];
+//    NSParameterAssert(_viewContext.undoManager);
+    [self.viewContext.undoManager enableUndoRegistration];
+    [self.viewContext.undoManager beginUndoGrouping];
 }
 
 - (void)beginUndoGroupWithoutRegistration {
-    [_viewContext.undoManager beginUndoGrouping];
+//    NSParameterAssert(_viewContext.undoManager);
+    [self.viewContext.undoManager beginUndoGrouping];
 }
 
 - (void)endUndoGroup {
-    [_viewContext.undoManager endUndoGrouping];
-    [_viewContext.undoManager disableUndoRegistration];
+//    NSParameterAssert(_viewContext.undoManager);
+    [self.viewContext.undoManager endUndoGrouping];
+    [self.viewContext.undoManager disableUndoRegistration];
 }
 
 - (void)endUndoGroupWithoutRegistration {
-    [_viewContext.undoManager endUndoGrouping];
+//    NSParameterAssert(_viewContext.undoManager);
+    [self.viewContext.undoManager endUndoGrouping];
 }
 
 - (void)endUndoGroupAndProcess {
-    [_viewContext.undoManager endUndoGrouping];
-    [_viewContext.undoManager disableUndoRegistration];
-    [_viewContext processPendingChanges];
+//    NSParameterAssert(_viewContext.undoManager);
+    [self.viewContext.undoManager endUndoGrouping];
+    [self.viewContext.undoManager disableUndoRegistration];
+    [self.viewContext processPendingChanges];
 }
 
 - (void)endUndoGroupAndProcessWithoutRegistration {
-    [_viewContext.undoManager endUndoGrouping];
-    [_viewContext processPendingChanges];
+//    NSParameterAssert(_viewContext.undoManager);
+    [self.viewContext.undoManager endUndoGrouping];
+    [self.viewContext processPendingChanges];
 }
 
 - (void)endUndoGroupAndUndo {
-    [_viewContext.undoManager endUndoGrouping];
-    [_viewContext.undoManager undoNestedGroup];
-    [_viewContext.undoManager disableUndoRegistration];
+//    NSParameterAssert(_viewContext.undoManager);
+    [self.viewContext.undoManager endUndoGrouping];
+    [self.viewContext.undoManager undoNestedGroup];
+    [self.viewContext.undoManager disableUndoRegistration];
 }
 
 - (void)endUndoGroupAndUndoWithoutRegistration {
-    [_viewContext.undoManager endUndoGrouping];
-    [_viewContext.undoManager undoNestedGroup];
+//    NSParameterAssert(_viewContext.undoManager);
+    [self.viewContext.undoManager endUndoGrouping];
+    [self.viewContext.undoManager undoNestedGroup];
 }
 
 - (void)resetError {
@@ -197,8 +210,8 @@ NSString * const MCWeAllPayStoreModelName = @"WeAllPayStore";
 - (void)startRespondingToStoreChangeNotifications
 {
     NSNotificationCenter *dc = [NSNotificationCenter defaultCenter];
-    [dc addObserver:self selector:@selector(storeWillSave:) name:NSManagedObjectContextWillSaveNotification object:_viewContext];
-    [dc addObserver:self selector:@selector(storeDidSave:) name:NSManagedObjectContextDidSaveNotification object:_viewContext];
+    [dc addObserver:self selector:@selector(storeWillSave:) name:NSManagedObjectContextWillSaveNotification object:self.viewContext];
+    [dc addObserver:self selector:@selector(storeDidSave:) name:NSManagedObjectContextDidSaveNotification object:self.viewContext];
 }
 
 - (void)stopRespondingToStorechangeNotifications
@@ -219,8 +232,8 @@ NSString * const MCWeAllPayStoreModelName = @"WeAllPayStore";
 #ifdef DEBUG
     NSLog(@"MCWeAllPayStoreController: Store did save.");
 #endif
-    if (notification.object != _viewContext) {
-        [_viewContext performBlockAndWait:^{
+    if (notification.object != self.viewContext) {
+        [self.viewContext performBlockAndWait:^{
 #ifdef DEBUG
             NSLog(@"Merging changes into mainContext.");
 #endif

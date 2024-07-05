@@ -148,6 +148,10 @@ import Combine
         MCPayment.delete(payment)
     }
     
+    @objc func save() {
+        WeAllPayStoreController.defaultStore.saveViewContext()
+    }
+    
     func reset() {
         if !bag.isEmpty {
             bag.removeAll(keepingCapacity: true)
