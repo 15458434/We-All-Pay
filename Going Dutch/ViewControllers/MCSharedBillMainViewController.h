@@ -25,7 +25,6 @@ __attribute__((objc_subclassing_restricted))
 
 @property (weak, nonatomic) IBOutlet UISegmentedControl *peopleOrPaymentsSelectionControl;
 
-- (void)updateEventWithObjectID:(NSManagedObjectID *)objectID __deprecated;
 - (void)prepareForUseWithEventModel:(MCEventModel *)model;
 
 @end
