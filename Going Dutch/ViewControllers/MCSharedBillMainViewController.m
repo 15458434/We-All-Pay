@@ -15,8 +15,6 @@
 
 #import "MCSharedBill+addons.h"
 
-#import "MCWeAllPayStoreController.h"
-
 #import "We_all_pay-Swift.h"
 
 static void * isEditingToggleContext = &isEditingToggleContext;

@@ -16,7 +16,6 @@
 
 #import "MCBadgeButton.h"
 
-#import "MCWeAllPayStoreController.h"
 #import "MCSharedBill+addons.h"
 #import "MCPerson+addons.h"
 #import "MCCurrency+addons.h"

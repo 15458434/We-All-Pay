@@ -13,9 +13,6 @@
 #import "MCAllTripsTableViewController.h"
 #import "MCPaymentViewController.h"
 
-
-#import "MCWeAllPayStoreController.h"
-
 #import "MCSharedBill+addons.h"
 #import "MCPerson+addons.h"
 #import "MCPayment+addons.h"

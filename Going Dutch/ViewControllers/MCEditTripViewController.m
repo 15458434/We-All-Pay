@@ -14,7 +14,6 @@
 #import "MCSharedBillPageViewController.h"
 #import "UIViewController+WeAllPayStore.h"
 
-#import "MCWeAllPayStoreController.h"
 #import "MCPerson+addons.h"
 #import "MCSharedBill+addons.h"
 #import "MCCurrency+addons.h"

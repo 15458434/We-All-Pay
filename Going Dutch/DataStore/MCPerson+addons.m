@@ -10,7 +10,6 @@
 #import "MCPayment.h"
 #import "MCSharedBill.h"
 #import "MCEmailAddress+addons.h"
-#import "MCWeAllPayStoreController.h"
 #import "We_all_pay-Swift.h"
 
 NS_ASSUME_NONNULL_BEGIN

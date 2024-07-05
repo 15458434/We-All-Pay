@@ -8,7 +8,6 @@
 
 #import "MCEmailAddress+addons.h"
 #import "MCPerson+addons.h"
-#import "MCWeAllPayStoreController.h"
 
 @implementation MCEmailAddress (addons)
 

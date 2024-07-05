@@ -12,7 +12,6 @@
 #import "MCPaymentsTableViewController.h"
 #import "UIViewController+WeAllPayStore.h"
 
-#import "MCWeAllPayStoreController.h"
 #import "MCSharedBill+addons.h"
 #import "MCPerson+addons.h"
 #import "MCPayment+addons.h"

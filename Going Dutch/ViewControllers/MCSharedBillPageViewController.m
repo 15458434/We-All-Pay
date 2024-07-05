@@ -17,8 +17,6 @@
 #import "MCPerson+addons.h"
 #import "MCPayment+addons.h"
 
-#import "MCWeAllPayStoreController.h"
-
 #import "We_all_pay-Swift.h"
 
 #import "MCCurrentViewDelegate.h"

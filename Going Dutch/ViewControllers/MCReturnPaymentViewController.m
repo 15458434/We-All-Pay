@@ -16,7 +16,6 @@
 #import "MCCurrency+addons.h"
 #import "MCSharedBill+addons.h"
 #import "MCPerson+addons.h"
-#import "MCWeAllPayStoreController.h"
 #import "MCBitwiseStuff.h"
 
 #import "We_all_pay-Swift.h"

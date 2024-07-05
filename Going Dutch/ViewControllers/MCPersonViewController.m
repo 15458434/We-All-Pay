@@ -10,7 +10,6 @@
 
 #import "MCPersonViewController.h"
 
-#import "MCWeAllPayStoreController.h"
 #import "MCPerson+addons.h"
 #import "MCSharedBill+addons.h"
 #import "MCEmailAddress+addons.h"
