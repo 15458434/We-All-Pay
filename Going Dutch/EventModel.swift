@@ -14,6 +14,28 @@ import Combine
     @objc dynamic var mainCurrencyFormatter: CurrencyFormatter!
     @objc var dateFormatter: DateFormatter!
     
+    @objc(initWithEvent:) convenience init(event: MCSharedBill) {
+        self.init()
+        self.prepareForUse(with: event)
+    }
+    
+    @objc var peopleFetchedResultsController: NSFetchedResultsController<MCPerson> {
+        let request = MCPerson.fetchRequest()
+        request.relationshipKeyPathsForPrefetching = ["emailAddress", "payments", "sharedBill", "sharedBill.mainCurrency", "payments.currency"]
+        request.sortDescriptors = [NSSortDescriptor(keyPath: \MCPerson.dateCreated, ascending: false)]
+        request.predicate = NSPredicate(format: "ANY sharedBill = %@", event)
+        let new = NSFetchedResultsController(fetchRequest: request, managedObjectContext: event.managedObjectContext!, sectionNameKeyPath: nil, cacheName: nil)
+        return new
+    }
+    @objc var paymentsFetchedResultsController: NSFetchedResultsController<MCPayment> {
+        let request = MCPayment.fetchRequest()
+        request.relationshipKeyPathsForPrefetching = ["payingPerson", "exchangeRate", "currency"]
+        request.sortDescriptors = [NSSortDescriptor(keyPath: \MCPayment.dateCreated, ascending: false)]
+        request.predicate = NSPredicate(format: "onWhichBill = %@", event)
+        let new = NSFetchedResultsController(fetchRequest: request, managedObjectContext: event.managedObjectContext!, sectionNameKeyPath: nil, cacheName: nil)
+        return new
+    }
+    
     private var bag = Set<AnyCancellable>()
     
     convenience init(andPrepareWith event: MCSharedBill) {
@@ -70,6 +92,64 @@ import Combine
         let paymentsWithPeoplePresent: [MCPayment] = try! context.fetch(request)
         let result = paymentsWithPeoplePresent.totalSumOfMoneyInMainCurrency
         return result
+    }
+    
+    @objc var peoplePresentOnEvent: [MCPerson] {
+        let managedObjectContext = event.managedObjectContext!
+        let request = MCPerson.fetchRequest()
+        request.sortDescriptors = [NSSortDescriptor(keyPath: \MCPerson.firstName, ascending: true)]
+        request.predicate = NSPredicate(format: "ANY sharedBill = %@", event)
+        do {
+            let result = try managedObjectContext.fetch(request)
+            return result
+        } catch {
+            fatalError("Error fetching people: \(error)")
+        }
+
+    }
+    
+    @objc var peoplePresentOnEventSortedOnFullName: [MCPerson] {
+        event.getArrayOfPeopleSortedOnFullNames()
+    }
+    
+    @objc var amountOfPeoplePresentOnEvent: Int {
+        event.peoplePresent?.count ?? 0
+    }
+    
+    @objc var doAllPaymentsHaveAPayer: Bool {
+        event.doAllPaymentsHaveAPayer()
+    }
+    
+    @objc var nextPayer: MCPerson? {
+        event.fetchPeoplePresentOrdered(byAmountPaid: true).first
+    }
+    
+    @objc func hasPersonPaidSometing(person: MCPerson) -> Bool {
+        event.hasPersonPaidSomething(person)
+    }
+    
+    @objc var firstPaymentWithoutAPayer: MCPayment {
+        event.getFirstPaymentWithoutAPayer()
+    }
+    
+    @objc func addPerson() -> MCPerson {
+        event.addPerson()
+    }
+    
+    @objc func deleteIfStillNew() {
+        event.deleteIfStillNew()
+    }
+    
+    @objc(deletePerson:) func delete(person: MCPerson) {
+        event.delete(person)
+    }
+    
+    @objc(deletePayment:) func delete(payment: MCPayment) {
+        MCPayment.delete(payment)
+    }
+    
+    @objc func save() {
+        WeAllPayStoreController.defaultStore.saveViewContext()
     }
     
     func reset() {

@@ -56,17 +56,17 @@ final class PaymentViewController: MCGenericAdBannerTableViewController, AdBanne
     // MARK: IB Actions
     @IBAction func mainCancelPressed(_ sender: UIButton) {
         mainCancelIsPressed = .isPressed
-        if MCWeAllPayStoreController.defaultStore().mainThreadContext.undoManager?.canUndo == true {
-            MCWeAllPayStoreController.defaultStore().endUndoGroupAndUndo()
+        if WeAllPayStoreController.defaultStore.viewContext.undoManager?.canUndo == true {
+            WeAllPayStoreController.defaultStore.endUndoGroupAndUndo()
         } else {
-            MCWeAllPayStoreController.defaultStore().endUndoGroup()
+            WeAllPayStoreController.defaultStore.endUndoGroup()
         }
         navigationController?.presentingViewController?.dismiss(animated: true, completion: nil)
     }
     
     @IBAction func mainDonePressed(_ sender: UIButton) {
-        MCWeAllPayStoreController.defaultStore().endUndoGroupAndProcess()
-        MCWeAllPayStoreController.defaultStore().saveMainThreadContext()
+        WeAllPayStoreController.defaultStore.endUndoGroupAndProcess()
+        WeAllPayStoreController.defaultStore.saveViewContext()
         navigationController!.presentingViewController!.dismiss(animated: true, completion: { () -> Void in
             WhoPayingUserDefaultsStoreInterface.sendToUserDefaultsStoreInterface(self.model.payment.onWhichBill)
         })
@@ -92,7 +92,7 @@ final class PaymentViewController: MCGenericAdBannerTableViewController, AdBanne
     }
     
     @objc(prepareForUseWithEvent:) func prepareForUse(with event: MCSharedBill) {
-        MCWeAllPayStoreController.defaultStore().beginUndoGroup()
+        WeAllPayStoreController.defaultStore.beginUndoGroup()
         let newPayment = event.addPayment()!
         title = NSLocalizedString("payment_view_mainLabel_new_payment", value: "New payment", comment: "Header in the paymentView which state new Payment")
         isNew = .isNew
@@ -100,7 +100,7 @@ final class PaymentViewController: MCGenericAdBannerTableViewController, AdBanne
     }
     
     @objc(prepareForUseWithPayment:) func prepareForUse(with payment: MCPayment) {
-        MCWeAllPayStoreController.defaultStore().beginUndoGroup()
+        WeAllPayStoreController.defaultStore.beginUndoGroup()
         title = NSLocalizedString("payment_view_mainLabel_edit_payment", value: "Payment", comment: "Header in the paymentView which states payment")
         isNew = .isNotNew
         model.prepareForUse(with: payment)
@@ -368,13 +368,13 @@ final class PaymentViewController: MCGenericAdBannerTableViewController, AdBanne
             destination.tonightsBill = model.payment.onWhichBill
             destination.thisPayment = model.payment
         case let identifier where identifier == "openSelectCurrency_iPad":
-            MCWeAllPayStoreController.defaultStore().beginUndoGroupWithoutRegistration()
+            WeAllPayStoreController.defaultStore.beginUndoGroupWithoutRegistration()
             let destination = segue.destination as! SelectCurrencyTableViewController
             destination.currencyUpdateModel = PaymentUpdateCurrencyModel(with: model.payment)
             
             destination.dismissMe = {
                 destination.dismiss(animated: true, completion: {
-                    MCWeAllPayStoreController.defaultStore().endUndoGroupAndProcessWithoutRegistration()
+                    WeAllPayStoreController.defaultStore.endUndoGroupAndProcessWithoutRegistration()
                 })
             }
         case let identifier where identifier == "selectCategory_iPad":

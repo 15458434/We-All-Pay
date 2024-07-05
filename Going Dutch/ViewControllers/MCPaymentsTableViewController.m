@@ -12,7 +12,6 @@
 #import "MCPaymentsTableViewController.h"
 #import "UIViewController+WeAllPayStore.h"
 
-#import "MCWeAllPayStoreController.h"
 #import "MCSharedBill+addons.h"
 #import "MCPerson+addons.h"
 #import "MCPayment+addons.h"
@@ -26,6 +25,8 @@
 
 #import "We_all_pay-Swift.h"
 
+static void * isEditingToggleContext = &isEditingToggleContext;
+
 @interface MCPaymentsTableViewController () <ShowPayment>
 
 @property (weak, nonatomic) IBOutlet UIButton *addPaymentButton;
@@ -33,7 +34,7 @@
 
 @property (weak, nonatomic) IBOutlet MCTableEmptyMessage *headerView;
 
-@property (nonatomic, strong) NSFetchedResultsController *dataController;
+@property (nonatomic, strong) NSFetchedResultsController *fetchedResultsController;
 @property (nonatomic, strong) MCPayment *forOpenPaymentWithMissingDataForSegue;
 
 @end
@@ -43,7 +44,7 @@
 #pragma mark - Actions
 
 - (IBAction)addPaymentTouchUpInside:(UIButton *)sender {
-    if (_tonightsBill.peoplePresent.count == 0) {
+    if (_eventModel.amountOfPeoplePresentOnEvent == 0) {
         [self showNoPeoplePresentAlert];
         return;
     }
@@ -58,13 +59,13 @@
 }
 
 - (IBAction)solveEventButtonTouchUpInside:(UIButton *)sender {
-    if (_tonightsBill.peoplePresent.count == 0) {
+    if (_eventModel.amountOfPeoplePresentOnEvent == 0) {
         [self showNoPeoplePresentAlert];
         return;
     }
     
     // Check for all payers present.
-    if ([_tonightsBill doAllPaymentsHaveAPayer]) {
+    if ([_eventModel doAllPaymentsHaveAPayer]) {
         // perform segue
         [self performSegueWithIdentifier:@"solveButton" sender:self];
     } else {
@@ -98,18 +99,18 @@
     [self presentViewController:alertController animated:YES completion:nil];
 }
 
-- (void)prepareDataControllerAndFetch
-{
-    _dataController = [[MCWeAllPayStoreController defaultStore] sharedBillPaymentsDataControllerForDelegate:self];
+- (void)prepareDataControllerAndFetch {
+    _fetchedResultsController = _eventModel.paymentsFetchedResultsController;
+    _fetchedResultsController.delegate = self;
     NSError *error;
-    BOOL success = [_dataController performFetch:&error];
+    BOOL success = [_fetchedResultsController performFetch:&error];
     if (!success) {
         NSLog(@"Something went wrong fetching the payments");
     }
 }
 
 - (void)setEmptyMessageWithDuration:(NSTimeInterval)duration {
-    if (_dataController.fetchedObjects.count != 0) {
+    if (_fetchedResultsController.fetchedObjects.count != 0) {
         if (_emptyMessage.bigMessage.alpha > 0.0) {
             [UIView animateWithDuration:duration animations:^{
                 self.emptyMessage.bigMessage.alpha = 0.0;
@@ -140,14 +141,6 @@
 }
 
 #pragma mark - NSNotification
-
-- (void)writableTonightsBillIsCreated:(NSNotification *)notification
-{
-    // Should be executed on the background thread.
-    NSDictionary *userInfo = [notification userInfo];
-    _writableTonightsBill = [userInfo objectForKey:MCwritableTonightsBillKey];
-    NSLog(@"WritableTonightsBillIsCreated has been executed.");
-}
 
 #pragma mark - ShowPayment
 
@@ -212,7 +205,7 @@
 #pragma mark - UITableViewDelegate
 
 - (void)tableView:(UITableView *)tableView willDisplayCell:(UITableViewCell *)cell forRowAtIndexPath:(NSIndexPath *)indexPath {
-    MCPayment *payment = [_dataController objectAtIndexPath:indexPath];
+    MCPayment *payment = [_fetchedResultsController objectAtIndexPath:indexPath];
     MCPaymentTableViewCell *paymentCell = (MCPaymentTableViewCell *)cell;
     [paymentCell updateWithPayment:payment];
 }
@@ -234,11 +227,11 @@
 #pragma mark - UITableViewDataSource
 
 - (NSInteger)tableView:(UITableView *)tableView numberOfRowsInSection:(NSInteger)section {
-    return _dataController.sections[section].numberOfObjects;
+    return _fetchedResultsController.sections[section].numberOfObjects;
 }
 
 - (NSInteger)numberOfSectionsInTableView:(UITableView *)tableView {
-    return _dataController.sections.count;
+    return _fetchedResultsController.sections.count;
 }
 
 - (UITableViewCell *)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath {
@@ -248,10 +241,10 @@
 
 - (void)tableView:(UITableView *)tableView commitEditingStyle:(UITableViewCellEditingStyle)editingStyle forRowAtIndexPath:(NSIndexPath *)indexPath {
     if (editingStyle == UITableViewCellEditingStyleDelete) {
-        MCPayment *toBeDeletedPayment = [_dataController objectAtIndexPath:indexPath];
-        [MCPayment deletePayment:toBeDeletedPayment];
-        [WhoPayingUserDefaultsStoreInterface sendToUserDefaultsStoreInterface:_tonightsBill];
-        [MCWeAllPayStoreController.defaultStore.mainThreadContext processPendingChanges];
+        MCPayment *toBeDeletedPayment = [_fetchedResultsController objectAtIndexPath:indexPath];
+        [_eventModel deletePayment:toBeDeletedPayment];
+        [WhoPayingUserDefaultsStoreInterface sendToUserDefaultsStoreInterface:_eventModel.event];
+        [MCWeAllPayStoreController.defaultStore.viewContext processPendingChanges];
     }
 }
 
@@ -294,35 +287,41 @@
     
     [[self navigationController] setToolbarHidden:YES animated:YES];
     
-    if (!_dataController) {
+    if (!_fetchedResultsController) {
         [self prepareDataControllerAndFetch];
         [[self tableView] reloadData];
         [self setEmptyMessageWithDuration:0.0];
     }
     
-    BOOL shouldAppearAsEditing = [_myParent isChildTableViewEditing];
-    [[self tableView] setEditing:shouldAppearAsEditing animated:NO];
-    
     _emptyMessage.topConstraint.constant = self.headerView.frame.size.height;
+    
+    // Create KVO
+    NSKeyValueObservingOptions options = NSKeyValueObservingOptionInitial | NSKeyValueObservingOptionNew;
+    [self.isEditingModel addObserver:self forKeyPath:@"boolValue" options:options context:isEditingToggleContext];
 }
 
 - (void)viewWillDisappear:(BOOL)animated {
     [super viewWillDisappear:animated];
     
     [[self view] endEditing:YES];
+    
+    _fetchedResultsController = nil;
+    
+    // Destroy KVO
+    [self.isEditingModel removeObserver:self forKeyPath:@"boolValue" context:isEditingToggleContext];
 }
 
 - (void)viewDidDisappear:(BOOL)animated {
     [super viewDidDisappear:animated];
     
-    _dataController = nil;
+    _fetchedResultsController = nil;
 }
 
 - (void)prepareForSegue:(UIStoryboardSegue *)segue sender:(id)sender {
     if ([segue.identifier isEqualToString:@"openFirstPaymentWithoutPayer"]) {
         MCPaymentNavigationController *navigationController = (MCPaymentNavigationController *)segue.destinationViewController;
         MCPaymentViewController *destination = (MCPaymentViewController *)navigationController.viewControllers[0];
-        [destination prepareForUseWithPayment:[_tonightsBill getFirstPaymentWithoutAPayer]];
+        [destination prepareForUseWithPayment:_eventModel.firstPaymentWithoutAPayer];
         UINavigationController *navController = (UINavigationController *)segue.destinationViewController;
         navController.modalInPresentation = YES;
     } else if ([segue.identifier isEqualToString:@"openPaymentWithMissingData"]) {
@@ -339,27 +338,27 @@
         NSIndexPath *indexPathOfSelectedRow = self.tableView.indexPathForSelectedRow;
         if (indexPathOfSelectedRow) {
             [self.tableView deselectRowAtIndexPath:indexPathOfSelectedRow animated:YES];
-            payment = [_dataController objectAtIndexPath:indexPathOfSelectedRow];
+            payment = [_fetchedResultsController objectAtIndexPath:indexPathOfSelectedRow];
         }
         MCPaymentViewController *paymentViewController = (MCPaymentViewController *)navController.viewControllers[0];
         if (!payment) {
-            [paymentViewController prepareForUseWithEvent:_tonightsBill];
+            [paymentViewController prepareForUseWithEvent:_eventModel.event];
         } else {
             [paymentViewController prepareForUseWithPayment:payment];
         }
     } else if ([segue.identifier isEqualToString:@"solveButton"]) {
         UINavigationController *navController = (UINavigationController *)segue.destinationViewController;
         SolutionViewController *destination = navController.viewControllers.firstObject;
-        [destination updateEvent:_tonightsBill andSendMailDelegate:_mailDelegate];
+        [destination updateEvent:_eventModel.event andSendMailDelegate:_mailDelegate];
     } else if ([segue.identifier isEqualToString:@"openFirstPaymentWithoutPayer_iPad"]) {
         NSParameterAssert([[[segue destinationViewController] viewControllers][0] conformsToProtocol:@protocol(MCThisPaymentProtocol)]);
         UINavigationController *navigationController = (UINavigationController *)segue.destinationViewController;
         PaymentViewController *destination = (PaymentViewController *)navigationController.viewControllers[0];
-        MCPayment *payment = [_tonightsBill getFirstPaymentWithoutAPayer];
+        MCPayment *payment = _eventModel.firstPaymentWithoutAPayer;
         if (payment) {
             [destination prepareForUseWithPayment:payment];
         } else {
-            [destination prepareForUseWithEvent:_tonightsBill];
+            [destination prepareForUseWithEvent:_eventModel.event];
         }
         UINavigationController *navController = (UINavigationController *)segue.destinationViewController;
         navController.modalInPresentation = YES;
@@ -374,13 +373,13 @@
         UINavigationController *navController = (UINavigationController *)segue.destinationViewController;
         navController.modalInPresentation = YES;
         PaymentViewController *destination = (PaymentViewController *)navController.viewControllers.firstObject;
-        [destination prepareForUseWithEvent:_tonightsBill];
+        [destination prepareForUseWithEvent:_eventModel.event];
     } else if ([segue.identifier isEqualToString:@"openPayment_iPad"]) {
         UINavigationController *navController = segue.destinationViewController;
         navController.modalInPresentation = YES;
         PaymentViewController *destination = (PaymentViewController *)navController.viewControllers.firstObject;
         NSIndexPath *indexPath = [self.tableView indexPathForSelectedRow];
-        MCPayment *payment = [_dataController objectAtIndexPath:indexPath];
+        MCPayment *payment = [_fetchedResultsController objectAtIndexPath:indexPath];
         [destination prepareForUseWithPayment:payment];
         [[self tableView] deselectRowAtIndexPath:indexPath animated:YES];
     } else {
@@ -411,6 +410,31 @@
 
 - (void)dealloc {
     [[NSNotificationCenter defaultCenter] removeObserver:self];
+}
+
+- (void)observeValueForKeyPath:(NSString *)keyPath ofObject:(id)object change:(NSDictionary<NSKeyValueChangeKey,id> *)change context:(void *)context {
+    if (context == &isEditingToggleContext) {
+#ifdef DEBUG
+        NSLog(@"change: %@", change);
+#endif
+        NSNumber *changeKeyNumber = (NSNumber *)change[NSKeyValueChangeKindKey];
+        NSKeyValueChange keyValueChange = changeKeyNumber.unsignedIntegerValue;
+        switch (keyValueChange) {
+            case NSKeyValueChangeSetting:
+            {
+                id new = change[NSKeyValueChangeNewKey];
+                if ([new isKindOfClass:[NSNumber class]]) {
+                    NSNumber *isEditing = (NSNumber *)new;
+                    [self.tableView setEditing:isEditing.boolValue animated:YES];
+                }
+            }
+                break;
+            default:
+                break;
+        }
+    } else {
+        [super observeValueForKeyPath:keyPath ofObject:object change:change context:context];
+    }
 }
 
 @end

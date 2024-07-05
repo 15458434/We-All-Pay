@@ -452,6 +452,8 @@
                         <outlet property="adBannerEngine" destination="7is-gh-aEV" id="L4C-2l-43J"/>
                         <outlet property="bottomLayoutContraintAdBanner" destination="TB2-aD-OBg" id="5NS-wE-fCv"/>
                         <outlet property="bottomLayoutCustomContainer" destination="L8f-nf-wVY" id="gFc-TR-edO"/>
+                        <outlet property="eventModel" destination="Q4J-4h-L2z" id="Zd7-B2-8Sb"/>
+                        <outlet property="isEditingModel" destination="RqA-h1-yzG" id="RqN-jY-kKX"/>
                         <outlet property="peopleOrPaymentsSelectionControl" destination="gfW-p5-dHb" id="DD1-3x-fQv"/>
                         <outlet property="worstSalesPitchEverView" destination="XpA-qR-01e" id="i5z-2K-hPp"/>
                         <outlet property="worstSalesPitchEverViewHeight" destination="dyp-OB-9lO" id="N7D-sO-Vyf"/>
@@ -459,6 +461,8 @@
                     </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="U5c-3T-mxe" userLabel="First Responder" sceneMemberID="firstResponder"/>
+                <customObject id="RqA-h1-yzG" customClass="MCToggleModel"/>
+                <customObject id="Q4J-4h-L2z" customClass="MCEventModel"/>
                 <customObject id="7is-gh-aEV" customClass="MCAdBannerEngine"/>
             </objects>
             <point key="canvasLocation" x="243" y="722"/>

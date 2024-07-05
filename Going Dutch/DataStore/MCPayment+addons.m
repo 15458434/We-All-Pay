@@ -14,7 +14,6 @@
 #import "MCPaymentPresence+addons.h"
 #import "MCCurrency+addons.h"
 #import "MCExchangeRate+addons.h"
-#import "MCWeAllPayStoreController.h"
 
 #import "We_all_pay-Swift.h"
 
@@ -24,7 +23,7 @@ NS_ASSUME_NONNULL_BEGIN
 
 + (MCPayment *)addPayment
 {
-    NSManagedObjectContext *context = [[MCWeAllPayStoreController defaultStore] mainThreadContext];
+    NSManagedObjectContext *context = [[MCWeAllPayStoreController defaultStore] viewContext];
     return [MCPayment addPaymentInContext:context];
 }
 
@@ -50,7 +49,7 @@ NS_ASSUME_NONNULL_BEGIN
 
 + (MCPayment *)fetchPaymentWithUniqueId:(NSString *)uuid
 {
-    NSManagedObjectContext *context = [[MCWeAllPayStoreController defaultStore] mainThreadContext];
+    NSManagedObjectContext *context = [[MCWeAllPayStoreController defaultStore] viewContext];
     return [MCPayment fetchPaymentWithUniqueId:uuid fromContext:context];
 }
 
@@ -74,7 +73,7 @@ NS_ASSUME_NONNULL_BEGIN
 
 + (BOOL)isTableInDatabaseEmpty
 {
-    NSManagedObjectContext *context = [[MCWeAllPayStoreController defaultStore] mainThreadContext];
+    NSManagedObjectContext *context = [[MCWeAllPayStoreController defaultStore] viewContext];
     return [self isTableInDatabaseEmptyForContext:context];
 }
 

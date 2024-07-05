@@ -15,7 +15,6 @@
 #import "MCPerson+addons.h"
 #import "MCSharedBill+addons.h"
 #import "MCPaymentPresence+addons.h"
-#import "MCWeAllPayStoreController.h"
 
 #import "MCDismissMeBlockProtocol.h"
 
@@ -81,7 +80,7 @@ static void * CurrencyContext = &CurrencyContext;
 
 - (IBAction)mainCancelButtonPressed:(id)sender {
     [self.view endEditing:YES];
-    if ([[[[MCWeAllPayStoreController defaultStore] mainThreadContext] undoManager] canUndo]) {
+    if ([[[[MCWeAllPayStoreController defaultStore] viewContext] undoManager] canUndo]) {
         [[MCWeAllPayStoreController defaultStore] endUndoGroupAndUndo];
     } else {
         [[MCWeAllPayStoreController defaultStore] endUndoGroup];
@@ -101,12 +100,12 @@ static void * CurrencyContext = &CurrencyContext;
     NSString *paremeterContentType = @"shared_payment";
     [FIRAnalytics logEventWithName:@"save_item" parameters:@{kFIRParameterItemID: parameterItemID, kFIRParameterItemName: parameterName, kFIRParameterContentType: paremeterContentType}];
 
-    if (MCWeAllPayStoreController.defaultStore.mainThreadContext.undoManager.canUndo) {
+    if (MCWeAllPayStoreController.defaultStore.viewContext.undoManager.canUndo) {
         [[MCWeAllPayStoreController defaultStore] endUndoGroupAndProcess];
     } else {
         [[MCWeAllPayStoreController defaultStore] endUndoGroup];
     }
-    [[MCWeAllPayStoreController defaultStore] saveMainThreadContext];
+    [[MCWeAllPayStoreController defaultStore] saveViewContext];
     [self.navigationController.presentingViewController dismissViewControllerAnimated:YES completion:^{
         [WhoPayingUserDefaultsStoreInterface sendToUserDefaultsStoreInterface:self.model.payment.onWhichBill];
     }];

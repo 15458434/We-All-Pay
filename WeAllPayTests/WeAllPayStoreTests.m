@@ -31,7 +31,7 @@
     [super setUp];
     // Put setup code here. This method is called before the invocation of each test method in the class.
     mainController = [MCWeAllPayStoreController defaultStore];
-    context = [[MCWeAllPayStoreController defaultStore] mainThreadContext];
+    context = [[MCWeAllPayStoreController defaultStore] viewContext];
 }
 
 - (void)tearDown
@@ -83,20 +83,21 @@
 - (void)testGetPeopleOnSharedBill
 {
     MCSharedBill *tonightsBill = [MCSharedBill addSharedBill];
-    NSArray *bazinga = [[MCWeAllPayStoreController defaultStore] getPeopleOnSharedBill:tonightsBill];
-    XCTAssertTrue([bazinga count] == 0, @"Aantal mensen op the shared Bill klopt niet.");
-    MCPerson *thisPerson = [tonightsBill addPerson];
+    MCEventModel *eventModel = [[MCEventModel alloc] initWithEvent:tonightsBill];
+    NSArray *peoplePresentOnEvent = eventModel.peoplePresentOnEvent;
+    XCTAssertTrue([peoplePresentOnEvent count] == 0, @"Aantal mensen op the shared Bill klopt niet.");
+    MCPerson *thisPerson = [eventModel addPerson];
     [thisPerson setFirstName:@"Mark"];
-    bazinga = [[MCWeAllPayStoreController defaultStore] getPeopleOnSharedBill:tonightsBill];
-    XCTAssertTrue([bazinga count] == 1, @"Aantal mensen op the shared Bill klopt niet.");
-    MCPerson *thisPerson2 = [tonightsBill addPerson];
+    peoplePresentOnEvent = [eventModel.peoplePresentOnEvent;
+    XCTAssertTrue([peoplePresentOnEvent count] == 1, @"Aantal mensen op the shared Bill klopt niet.");
+    MCPerson *thisPerson2 = [eventModel addPerson];
     [thisPerson2 setFirstName:@"Ilse"];
-    bazinga = [[MCWeAllPayStoreController defaultStore] getPeopleOnSharedBill:tonightsBill];
-    XCTAssertTrue([bazinga count] == 2, @"Aantal mensen op the shared Bill klopt niet.");
-    MCPerson *thisPerson3 = [tonightsBill addPerson];
+    peoplePresentOnEvent = eventModel.peoplePresentOnEvent;
+    XCTAssertTrue([peoplePresentOnEvent count] == 2, @"Aantal mensen op the shared Bill klopt niet.");
+    MCPerson *thisPerson3 = [eventModel addPerson];
     [thisPerson3 setFirstName:@"Iva"];
-    bazinga = [[MCWeAllPayStoreController defaultStore] getPeopleOnSharedBill:tonightsBill];
-    XCTAssertTrue([bazinga count] == 3, @"Aantal mensen op the shared Bill klopt niet.");
+    peoplePresentOnEvent = eventModel.peoplePresentOnEvent;
+    XCTAssertTrue([peoplePresentOnEvent count] == 3, @"Aantal mensen op the shared Bill klopt niet.");
     [MCSharedBill deleteSharedbill:tonightsBill];
 }
 

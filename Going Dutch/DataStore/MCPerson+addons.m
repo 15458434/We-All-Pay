@@ -10,7 +10,7 @@
 #import "MCPayment.h"
 #import "MCSharedBill.h"
 #import "MCEmailAddress+addons.h"
-#import "MCWeAllPayStoreController.h"
+#import "We_all_pay-Swift.h"
 
 NS_ASSUME_NONNULL_BEGIN
 
@@ -20,7 +20,7 @@ NS_ASSUME_NONNULL_BEGIN
 
 + (MCPerson *)addPerson
 {
-    NSManagedObjectContext *context = [[MCWeAllPayStoreController defaultStore] mainThreadContext];
+    NSManagedObjectContext *context = [[MCWeAllPayStoreController defaultStore] viewContext];
     return [MCPerson addPersonInContext:context];
 }
 
@@ -42,7 +42,7 @@ NS_ASSUME_NONNULL_BEGIN
 
 + (BOOL)isTableInDatabaseEmpty
 {
-    NSManagedObjectContext *context = [[MCWeAllPayStoreController defaultStore] mainThreadContext];
+    NSManagedObjectContext *context = [[MCWeAllPayStoreController defaultStore] viewContext];
     return [MCPerson isTableInDatabaseEmptyForContext:context];
 }
 

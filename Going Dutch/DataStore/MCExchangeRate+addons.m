@@ -7,7 +7,6 @@
 //
 
 #import "MCExchangeRate+addons.h"
-#import "MCWeAllPayStoreController.h"
 #import "MCCurrency+addons.h"
 
 #import "We_all_pay-Swift.h"

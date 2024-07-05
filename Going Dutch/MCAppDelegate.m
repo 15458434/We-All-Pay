@@ -13,9 +13,6 @@
 #import "MCAllTripsTableViewController.h"
 #import "MCPaymentViewController.h"
 
-
-#import "MCWeAllPayStoreController.h"
-
 #import "MCSharedBill+addons.h"
 #import "MCPerson+addons.h"
 #import "MCPayment+addons.h"
@@ -89,11 +86,11 @@
     [self executeOnlyOnceDuringStartup];
 #ifdef SCREENSHOTS
     [[MCWeAllPayStoreController defaultStore] openStore:^(MCWeAllPayStoreController *store, BOOL success) {
-        ScreenshotPopulationEngine *populator = [[ScreenshotPopulationEngine alloc] initWithManagedObjectContext:store.mainThreadContext];
+        ScreenshotPopulationEngine *populator = [[ScreenshotPopulationEngine alloc] initWithManagedObjectContext:store.viewContext];
         [populator populate];
     }];
 #else
-    [[MCWeAllPayStoreController defaultStore] openStore:nil];
+    [[MCWeAllPayStoreController defaultStore] openStore];
 #endif
     return YES;
 }
@@ -113,7 +110,7 @@
         taskIdentifier = UIBackgroundTaskInvalid;
     }];
     
-    NSManagedObjectContext *context = [[MCWeAllPayStoreController defaultStore] mainThreadContext];
+    NSManagedObjectContext *context = MCWeAllPayStoreController.defaultStore.viewContext;
     self.saveHandlerOnDidEnterBackground = [[MCCoreDataSaveHandlerWhenEnteringBackground alloc] initWithContext:context];
     [self.saveHandlerOnDidEnterBackground saveAndEndBackgroundTaskWithIdentifier:taskIdentifier];
 }
@@ -147,7 +144,7 @@
     NSString *nextPayerID = pathComponents[2];
     
     // Verify existense of tonightsBill
-    MCSharedBill *tonightsBill = [MCSharedBill fetchSharedBillWithUniqueId:billID inContext:[[MCWeAllPayStoreController defaultStore] mainThreadContext] ];
+    MCSharedBill *tonightsBill = [MCSharedBill fetchSharedBillWithUniqueId:billID inContext:[[MCWeAllPayStoreController defaultStore] viewContext] ];
     if (!tonightsBill) {
         NSLog(@"Unable to open this event.");
         return NO;

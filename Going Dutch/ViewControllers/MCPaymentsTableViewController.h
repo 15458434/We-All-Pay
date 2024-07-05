@@ -11,9 +11,8 @@
 @import MessageUI;
 @import NotificationCenter;
 
-#import "MCTonightsBillTransfer.h"
 #import "MCIndexProtocol.h"
-#import "MCIsEditingProtocol.h"
+#import "We_all_pay-Swift.h"
 
 @class MCSharedBill;
 @class MCAllTripsTableViewController;
@@ -29,19 +28,15 @@
 
 __attribute__((objc_subclassing_restricted))
 NS_SWIFT_NAME(PaymentsTableViewController)
-@interface MCPaymentsTableViewController : UITableViewController <NSFetchedResultsControllerDelegate, MFMailComposeViewControllerDelegate, MCTonightsBillTransfer, MCIndexProtocol>
+@interface MCPaymentsTableViewController : UITableViewController <NSFetchedResultsControllerDelegate, MFMailComposeViewControllerDelegate, MCIndexProtocol>
+
+@property (nonatomic, strong) MCEventModel *eventModel;
+@property (nonatomic, strong) MCToggleModel *isEditingModel;
 
 @property (nonatomic, strong) MCTableEmptyMessage *emptyMessage;
 
-@property (nonatomic, weak) id<MCIsEditingProtocol> myParent;
 @property (nonatomic, weak) MCSharedBillPageViewController *mailDelegate;
-@property (nonatomic, strong) MCSharedBill *tonightsBill;
 
 @property (nonatomic) NSInteger index;
-
-// Only accessible through backgroundContext
-@property (nonatomic, strong) MCSharedBill *writableTonightsBill;
-
-- (void)writableTonightsBillIsCreated:(NSNotification *)notification;
 
 @end

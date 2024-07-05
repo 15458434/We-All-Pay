@@ -11,17 +11,17 @@
 @class MCSharedBill;
 
 // Notification Message that writableTonightsBill is ready to be used.
-extern NSString * const MCWritableTonightsBillReady;
-extern NSString * const MCwritableTonightsBillKey;
+extern NSString * const MCWritableTonightsBillReady __deprecated;
+extern NSString * const MCwritableTonightsBillKey __deprecated;
 
 @protocol MCTonightsBillTransfer <NSObject>
 
 // Accessed on mainThread.
-@property (strong, nonatomic) MCSharedBill *tonightsBill;
+@property (strong, nonatomic) MCSharedBill *tonightsBill __deprecated;
 
 @optional
 // Accessed on privateThread
-@property (strong, nonatomic) MCSharedBill *writableTonightsBill;
+@property (strong, nonatomic) MCSharedBill *writableTonightsBill __deprecated;
 
 @end
 

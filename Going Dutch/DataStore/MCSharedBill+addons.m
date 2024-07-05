@@ -13,7 +13,6 @@
 #import "MCEmailAddress+addons.h"
 #import "MCPayment+addons.h"
 #import "MCPaymentPresence+addons.h"
-#import "MCWeAllPayStoreController.h"
 #import "MCCurrency+addons.h"
 #import "MCExchangeRate+addons.h"
 
@@ -25,7 +24,7 @@
 
 + (MCSharedBill *)addSharedBill
 {
-    NSManagedObjectContext *context = [[MCWeAllPayStoreController defaultStore] mainThreadContext];
+    NSManagedObjectContext *context = [[MCWeAllPayStoreController defaultStore] viewContext];
     return [MCSharedBill addSharedBillToContext:context];
 }
 
@@ -93,7 +92,7 @@
 
 + (BOOL)isTableInDatabaseEmpty
 {
-    NSManagedObjectContext *context = [[MCWeAllPayStoreController defaultStore] mainThreadContext];
+    NSManagedObjectContext *context = [[MCWeAllPayStoreController defaultStore] viewContext];
     return [self isTableInDatabaseEmptyForContext:context];
 }
 
@@ -187,8 +186,7 @@
     return newPerson;
 }
 
-- (void)deletePerson:(MCPerson *)toBeDeletedPerson
-{
+- (void)deletePerson:(MCPerson *)toBeDeletedPerson {
     NSSet *presences = [[toBeDeletedPerson sharingPayment] copy];
     for (MCPaymentPresence *paymentPresence in presences) {
         MCPayment *payment = [paymentPresence payment];
@@ -491,7 +489,7 @@
         }
         if ([self areAllExchangeRatesValid]) {
             NSError *saveError;
-            [[[MCWeAllPayStoreController defaultStore] mainThreadContext] save:&saveError];
+            [[[MCWeAllPayStoreController defaultStore] viewContext] save:&saveError];
             completion([self solveWhoHasToPayWhoFromThisBill], saveError);
         } else {
             NSError *notAllExchangeRatesValidError = [NSError errorWithDomain:@"com.green.We_all_pay" code:1 userInfo:@{@"reason": @"Not all exchangeRates are valid after fetching exchangeRates"}];

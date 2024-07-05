@@ -10,7 +10,6 @@
 
 #import "MCPersonViewController.h"
 
-#import "MCWeAllPayStoreController.h"
 #import "MCPerson+addons.h"
 #import "MCSharedBill+addons.h"
 #import "MCEmailAddress+addons.h"
@@ -68,7 +67,7 @@
 - (IBAction)doneButtonPressed:(id)sender {
     [self.view endEditing:YES];
     [[MCWeAllPayStoreController defaultStore] endUndoGroupAndProcess];
-    [[MCWeAllPayStoreController defaultStore] saveMainThreadContext];
+    [[MCWeAllPayStoreController defaultStore] saveViewContext];
     [[[self navigationController] presentingViewController] dismissViewControllerAnimated:YES completion:nil];
 }
 

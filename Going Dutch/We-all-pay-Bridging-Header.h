@@ -15,9 +15,6 @@
 #import "MCPaymentPresence+addons.h"
 #import "MCEmailAddress+addons.h"
 
-#pragma mark - Persistence
-#import "MCWeAllPayStoreController.h"
-
 #pragma mark - Protocols
 #import "MCTonightsBillTransfer.h"
 #import "MCThisPaymentProtocol.h"

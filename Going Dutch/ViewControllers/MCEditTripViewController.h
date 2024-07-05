@@ -13,9 +13,7 @@
 
 #import "MCPersonViewController.h"
 
-#import "MCTonightsBillTransfer.h"
 #import "MCIndexProtocol.h"
-#import "MCIsEditingProtocol.h"
 
 @class MCPeople;
 @class MCSharedBill;
@@ -23,13 +21,13 @@
 @class MCTableEmptyMessage;
 
 __attribute__((objc_subclassing_restricted))
-@interface MCEditTripViewController : UITableViewController <NSFetchedResultsControllerDelegate, UITextFieldDelegate, MCTonightsBillTransfer>
+@interface MCEditTripViewController : UITableViewController <NSFetchedResultsControllerDelegate, UITextFieldDelegate>
 
 @property (nonatomic) BOOL isInitAsNew;
 
-@property (nonatomic, weak) id<MCIsEditingProtocol> myParent;
-@property (nonatomic, strong) MCSharedBill *tonightsBill;
-@property (nonatomic, strong) MCSharedBill *writableTonightsBill;
+@property (nonatomic, strong) MCEventModel *eventModel;
+@property (nonatomic, strong) MCToggleModel *isEditingModel;
+
 @property (nonatomic, readonly) BOOL didSomethingChange;
 
 @property (nonatomic) NSInteger index;

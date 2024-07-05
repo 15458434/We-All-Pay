@@ -28,6 +28,10 @@ import UIKit
         createFetchEventsController()
     }
     
+    @objc(addEvent) func addEvent() -> MCSharedBill {
+        MCSharedBill.add(to: managedObjectContext)
+    }
+    
     func update(eventAt index: Int, mainCurrencyTo currencyCode: String, with completionHandler: @escaping ((_ event: MCSharedBill) -> ()), andWith failureHandler: ((_ error: Error?) -> ())? ) {
         let event = self.fetchEventsController.fetchedObjects![index]
         event.updateMainCurrency(fromCode: currencyCode) { (error) in

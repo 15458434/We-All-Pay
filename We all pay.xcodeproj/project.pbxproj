@@ -27,6 +27,7 @@
 		3813150C26CBAC3600C27CBB /* MCNotificationTableViewCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 3813150B26CBAC3600C27CBB /* MCNotificationTableViewCell.m */; };
 		3814B495270C500000737A06 /* NavigationViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3814B494270C500000737A06 /* NavigationViewController.swift */; };
 		38163E0F249E193D009E889C /* CoreServices.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 38163E0E249E193D009E889C /* CoreServices.framework */; };
+		381848342C355A030088DC7E /* ToggleModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 381848332C355A030088DC7E /* ToggleModel.swift */; };
 		381C2C3A275A095D00CD82D2 /* SolutionModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 381C2C39275A095D00CD82D2 /* SolutionModel.swift */; };
 		381C2C3C275A412100CD82D2 /* MCTableEmptyMessage.xib in Resources */ = {isa = PBXBuildFile; fileRef = 381C2C3B275A412100CD82D2 /* MCTableEmptyMessage.xib */; };
 		381C2C3E275A414A00CD82D2 /* Main-Iphone.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 381C2C3D275A414A00CD82D2 /* Main-Iphone.storyboard */; };
@@ -124,7 +125,6 @@
 		388FD1E927353CFC00758400 /* PlistTools.swift in Sources */ = {isa = PBXBuildFile; fileRef = 388FD1E827353CFC00758400 /* PlistTools.swift */; };
 		3892E3A417903EF00038894B /* MCEditTripViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 3892E3A317903EF00038894B /* MCEditTripViewController.m */; };
 		3892E3AA17904A240038894B /* MCPersonViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 3892E3A917904A240038894B /* MCPersonViewController.m */; };
-		38955048178B4FCA0077A95A /* MCWeAllPayStoreController.m in Sources */ = {isa = PBXBuildFile; fileRef = 38955047178B4FCA0077A95A /* MCWeAllPayStoreController.m */; };
 		3896D1402760E5F600DC7381 /* Localizable.strings in Resources */ = {isa = PBXBuildFile; fileRef = 3896D1422760E5F600DC7381 /* Localizable.strings */; };
 		3896D1492760F6D400DC7381 /* Available Currencies.plist in Resources */ = {isa = PBXBuildFile; fileRef = 3896D14B2760F6D400DC7381 /* Available Currencies.plist */; };
 		3896D156276103E100DC7381 /* categoryPictures.plist in Resources */ = {isa = PBXBuildFile; fileRef = 3896D1512760F9E700DC7381 /* categoryPictures.plist */; };
@@ -138,6 +138,7 @@
 		38977E5F1B2A32EF008484A4 /* MCPersonTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 38977E5E1B2A32EF008484A4 /* MCPersonTableViewCell.swift */; };
 		38977E611B2A367E008484A4 /* MCPaymentTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 38977E601B2A367E008484A4 /* MCPaymentTableViewCell.swift */; };
 		38977E631B2A37BC008484A4 /* EventTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 38977E621B2A37BC008484A4 /* EventTableViewCell.swift */; };
+		38986C9C2C382EC100C612E7 /* WeAllPayStoreController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 38986C9B2C382EC100C612E7 /* WeAllPayStoreController.swift */; };
 		389950A4191A90F1000B00BC /* MCPaymentPresence+addons.m in Sources */ = {isa = PBXBuildFile; fileRef = 389950A3191A90F1000B00BC /* MCPaymentPresence+addons.m */; };
 		3899D3F4194F43AF00893323 /* Product ids.plist in Resources */ = {isa = PBXBuildFile; fileRef = 3899D3F3194F43AF00893323 /* Product ids.plist */; };
 		389ACFDA23742C650025139F /* NameTextInputValidator.swift in Sources */ = {isa = PBXBuildFile; fileRef = 389ACFD923742C650025139F /* NameTextInputValidator.swift */; };
@@ -368,7 +369,6 @@
 		380327FF2698443300744710 /* NotificationsInfoModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NotificationsInfoModel.swift; sourceTree = "<group>"; };
 		3803280326988B2800744710 /* UnreadNotificationsCountView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UnreadNotificationsCountView.swift; sourceTree = "<group>"; };
 		380700A01A16283500C7FB37 /* MCIndexProtocol.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = MCIndexProtocol.h; sourceTree = "<group>"; };
-		380700A21A174FFB00C7FB37 /* MCIsEditingProtocol.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = MCIsEditingProtocol.h; sourceTree = "<group>"; };
 		380700A31A1B616000C7FB37 /* MCPaymentUpdateTo4.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = MCPaymentUpdateTo4.h; path = "DataStore/Entity Migration Policies/MCPaymentUpdateTo4.h"; sourceTree = "<group>"; };
 		380700A41A1B616000C7FB37 /* MCPaymentUpdateTo4.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = MCPaymentUpdateTo4.m; path = "DataStore/Entity Migration Policies/MCPaymentUpdateTo4.m"; sourceTree = "<group>"; };
 		380700A71A1B751E00C7FB37 /* We all pay database version 1.xcappdata */ = {isa = PBXFileReference; lastKnownFileType = wrapper; path = "We all pay database version 1.xcappdata"; sourceTree = "<group>"; };
@@ -398,6 +398,7 @@
 		3813D8941D8983C900E6B7A4 /* CircularImageView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; lineEnding = 0; path = CircularImageView.swift; sourceTree = "<group>"; xcLanguageSpecificationIdentifier = xcode.lang.swift; };
 		3814B494270C500000737A06 /* NavigationViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NavigationViewController.swift; sourceTree = "<group>"; };
 		38163E0E249E193D009E889C /* CoreServices.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = CoreServices.framework; path = System/Library/Frameworks/CoreServices.framework; sourceTree = SDKROOT; };
+		381848332C355A030088DC7E /* ToggleModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ToggleModel.swift; sourceTree = "<group>"; };
 		381C2C39275A095D00CD82D2 /* SolutionModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SolutionModel.swift; sourceTree = "<group>"; };
 		381C2C3B275A412100CD82D2 /* MCTableEmptyMessage.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; name = MCTableEmptyMessage.xib; path = Views/MCTableEmptyMessage.xib; sourceTree = "<group>"; };
 		381C2C3D275A414A00CD82D2 /* Main-Iphone.storyboard */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.storyboard; name = "Main-Iphone.storyboard"; path = "Views/Main-Iphone.storyboard"; sourceTree = "<group>"; };
@@ -506,8 +507,6 @@
 		3892E3A317903EF00038894B /* MCEditTripViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = MCEditTripViewController.m; path = ViewControllers/MCEditTripViewController.m; sourceTree = "<group>"; };
 		3892E3A817904A240038894B /* MCPersonViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = MCPersonViewController.h; path = ViewControllers/MCPersonViewController.h; sourceTree = "<group>"; };
 		3892E3A917904A240038894B /* MCPersonViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = MCPersonViewController.m; path = ViewControllers/MCPersonViewController.m; sourceTree = "<group>"; };
-		38955046178B4FCA0077A95A /* MCWeAllPayStoreController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = MCWeAllPayStoreController.h; path = DataStore/MCWeAllPayStoreController.h; sourceTree = "<group>"; };
-		38955047178B4FCA0077A95A /* MCWeAllPayStoreController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = MCWeAllPayStoreController.m; path = DataStore/MCWeAllPayStoreController.m; sourceTree = "<group>"; };
 		3896D1432760E5FA00DC7381 /* nl */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = nl; path = nl.lproj/Localizable.strings; sourceTree = "<group>"; };
 		3896D14A2760F6D400DC7381 /* en */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; name = en; path = "en.lproj/Available Currencies.plist"; sourceTree = "<group>"; };
 		3896D14C2760F6D900DC7381 /* nl */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; name = nl; path = "nl.lproj/Available Currencies.plist"; sourceTree = "<group>"; };
@@ -526,6 +525,7 @@
 		38977E5E1B2A32EF008484A4 /* MCPersonTableViewCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = MCPersonTableViewCell.swift; sourceTree = "<group>"; };
 		38977E601B2A367E008484A4 /* MCPaymentTableViewCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = MCPaymentTableViewCell.swift; sourceTree = "<group>"; };
 		38977E621B2A37BC008484A4 /* EventTableViewCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = EventTableViewCell.swift; sourceTree = "<group>"; };
+		38986C9B2C382EC100C612E7 /* WeAllPayStoreController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = WeAllPayStoreController.swift; sourceTree = "<group>"; };
 		3898F33318F1820600BFFC61 /* MCThisPaymentProtocol.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = MCThisPaymentProtocol.h; path = ViewControllers/iPad/MCThisPaymentProtocol.h; sourceTree = "<group>"; };
 		3898F33B18F40B9D00BFFC61 /* MCSharedBillAddOnsTest.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = MCSharedBillAddOnsTest.m; path = ../WeAllPayTests/MCSharedBillAddOnsTest.m; sourceTree = "<group>"; };
 		3898F33D18F40CC100BFFC61 /* MCPersonAddonsTest.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = MCPersonAddonsTest.m; path = ../WeAllPayTests/MCPersonAddonsTest.m; sourceTree = "<group>"; };
@@ -834,8 +834,7 @@
 				389DE8F0197FB2B900169645 /* MCPerson.m */,
 				38DB85D817E45DEA006237CF /* MCPerson+addons.h */,
 				38DB85D917E45DEA006237CF /* MCPerson+addons.m */,
-				38955046178B4FCA0077A95A /* MCWeAllPayStoreController.h */,
-				38955047178B4FCA0077A95A /* MCWeAllPayStoreController.m */,
+				38986C9B2C382EC100C612E7 /* WeAllPayStoreController.swift */,
 				38D796141B2F1CBD00F3872F /* ExchangeRateFetcherForMCExchangeRate.swift */,
 			);
 			name = DataStore;
@@ -1179,17 +1178,19 @@
 			path = Screenshots;
 			sourceTree = "<group>";
 		};
-		386EB43123C7238400FB20B9 /* EventDetailMainViewController */ = {
+		386EB43123C7238400FB20B9 /* Event */ = {
 			isa = PBXGroup;
 			children = (
 				386FC32318E5855400428294 /* MCSharedBillMainViewController.h */,
 				386FC32418E5855400428294 /* MCSharedBillMainViewController.m */,
+				38BEA790275E228B00D05D8B /* EventModel.swift */,
+				381848332C355A030088DC7E /* ToggleModel.swift */,
 				383E0C5B186737EB00AA688D /* MCSharedBillPageViewController.h */,
 				383E0C5C186737EB00AA688D /* MCSharedBillPageViewController.m */,
 				38B1201D2768F00400EB4969 /* People */,
 				38D8CB612750263B00CC1C03 /* Payments */,
 			);
-			name = EventDetailMainViewController;
+			name = Event;
 			sourceTree = "<group>";
 		};
 		3870C2291D34FD5D0030035A /* Resources */ = {
@@ -1326,7 +1327,6 @@
 			isa = PBXGroup;
 			children = (
 				38977E621B2A37BC008484A4 /* EventTableViewCell.swift */,
-				38BEA790275E228B00D05D8B /* EventModel.swift */,
 			);
 			name = EventTableViewCell;
 			sourceTree = "<group>";
@@ -1402,7 +1402,6 @@
 				382F9BD118F7285400818276 /* MCDismissMeBlockProtocol.h */,
 				3801881A1938D8E70085A5AE /* MCDismissKeyboardProtocol.h */,
 				380700A01A16283500C7FB37 /* MCIndexProtocol.h */,
-				380700A21A174FFB00C7FB37 /* MCIsEditingProtocol.h */,
 				385F6AE12747CFBF009ED08D /* PaymentStateModelProtocol.swift */,
 				38358D4C274D0E9E00EA5177 /* MCPathComponentsToOpenProtocol.h */,
 				38C3AB141CBCF3200011C10C /* ViewControllerProtocols.swift */,
@@ -1424,7 +1423,7 @@
 			isa = PBXGroup;
 			children = (
 				3841F8D1238939F600882E40 /* Events */,
-				386EB43123C7238400FB20B9 /* EventDetailMainViewController */,
+				386EB43123C7238400FB20B9 /* Event */,
 				38FBB4B7236C353700E30EE8 /* Person */,
 				38F44CC92364978400215B1C /* Payment */,
 				388E90311D708BB3004CD257 /* SolutionViewController */,
@@ -2237,15 +2236,16 @@
 				384EC90E1BC2F35700A80799 /* SelectCurrencyTableViewCell_iPad.swift in Sources */,
 				38BEA791275E228B00D05D8B /* EventModel.swift in Sources */,
 				38DB85D717E45CA4006237CF /* MCSharedBill+addons.m in Sources */,
+				38986C9C2C382EC100C612E7 /* WeAllPayStoreController.swift in Sources */,
 				386EB43323C723BE00FB20B9 /* AdEngine.swift in Sources */,
 				38DB85DD17E45FB7006237CF /* MCEmailAddress+addons.m in Sources */,
 				38977E4D1B2A2591008484A4 /* MCSelectCategoryTableViewCell_iPhone.swift in Sources */,
 				380328002698443300744710 /* NotificationsInfoModel.swift in Sources */,
 				38EF31451938BA07004912F0 /* UINavigationController+KeyboardDismiss.m in Sources */,
-				38955048178B4FCA0077A95A /* MCWeAllPayStoreController.m in Sources */,
 				389DE8FA197FB2BA00169645 /* MCPayment.m in Sources */,
 				3841F8D323893A0B00882E40 /* EventsModel.swift in Sources */,
 				38894980211C2DDE00BDF9CD /* CoreDataSaveHandlerWhenEnteringBackground.swift in Sources */,
+				381848342C355A030088DC7E /* ToggleModel.swift in Sources */,
 				389DE907197FBE8400169645 /* MCExchangeRate+addons.m in Sources */,
 				38977E631B2A37BC008484A4 /* EventTableViewCell.swift in Sources */,
 				387494D819F05476001614CA /* WeAllPayStore1to4.xcmappingmodel in Sources */,
@@ -2631,7 +2631,7 @@
 				CODE_SIGN_IDENTITY = "";
 				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer";
 				"CODE_SIGN_IDENTITY[sdk=macosx*]" = "Mac Developer";
-				CURRENT_PROJECT_VERSION = 168;
+				CURRENT_PROJECT_VERSION = 169;
 				DEBUG_INFORMATION_FORMAT = dwarf;
 				DEFINES_MODULE = YES;
 				DEVELOPMENT_TEAM = "";
@@ -2653,7 +2653,7 @@
 					"@executable_path/Frameworks",
 					"@loader_path/Frameworks",
 				);
-				MARKETING_VERSION = 1.7.26;
+				MARKETING_VERSION = 1.7.27;
 				MTL_ENABLE_DEBUG_INFO = YES;
 				OTHER_LDFLAGS = "-Wpartial-availability";
 				PRODUCT_BUNDLE_IDENTIFIER = com.GreenHair.CurrencyConverter;
@@ -2690,7 +2690,7 @@
 				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer";
 				"CODE_SIGN_IDENTITY[sdk=macosx*]" = "Mac Developer";
 				COPY_PHASE_STRIP = NO;
-				CURRENT_PROJECT_VERSION = 168;
+				CURRENT_PROJECT_VERSION = 169;
 				DEBUG_INFORMATION_FORMAT = "dwarf-with-dsym";
 				DEFINES_MODULE = YES;
 				DEVELOPMENT_TEAM = "";
@@ -2713,7 +2713,7 @@
 					"@executable_path/Frameworks",
 					"@loader_path/Frameworks",
 				);
-				MARKETING_VERSION = 1.7.26;
+				MARKETING_VERSION = 1.7.27;
 				MTL_ENABLE_DEBUG_INFO = NO;
 				OTHER_LDFLAGS = "-Wpartial-availability";
 				PRODUCT_BUNDLE_IDENTIFIER = com.GreenHair.CurrencyConverter;
@@ -2832,7 +2832,7 @@
 				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer";
 				"CODE_SIGN_IDENTITY[sdk=macosx*]" = "Mac Developer";
 				CODE_SIGN_STYLE = Automatic;
-				CURRENT_PROJECT_VERSION = 168;
+				CURRENT_PROJECT_VERSION = 169;
 				DEBUG_INFORMATION_FORMAT = dwarf;
 				DEFINES_MODULE = YES;
 				DYLIB_COMPATIBILITY_VERSION = 1;
@@ -2849,7 +2849,7 @@
 					"@executable_path/Frameworks",
 					"@loader_path/Frameworks",
 				);
-				MARKETING_VERSION = 1.7.26;
+				MARKETING_VERSION = 1.7.27;
 				MTL_ENABLE_DEBUG_INFO = INCLUDE_SOURCE;
 				MTL_FAST_MATH = YES;
 				PRODUCT_BUNDLE_IDENTIFIER = com.greenhair.WeAllPayDesignableUI;
@@ -2882,7 +2882,7 @@
 				"CODE_SIGN_IDENTITY[sdk=macosx*]" = "Mac Developer";
 				CODE_SIGN_STYLE = Automatic;
 				COPY_PHASE_STRIP = NO;
-				CURRENT_PROJECT_VERSION = 168;
+				CURRENT_PROJECT_VERSION = 169;
 				DEBUG_INFORMATION_FORMAT = "dwarf-with-dsym";
 				DEFINES_MODULE = YES;
 				DYLIB_COMPATIBILITY_VERSION = 1;
@@ -2900,7 +2900,7 @@
 					"@executable_path/Frameworks",
 					"@loader_path/Frameworks",
 				);
-				MARKETING_VERSION = 1.7.26;
+				MARKETING_VERSION = 1.7.27;
 				MTL_ENABLE_DEBUG_INFO = NO;
 				MTL_FAST_MATH = YES;
 				PRODUCT_BUNDLE_IDENTIFIER = com.greenhair.WeAllPayDesignableUI;
@@ -2933,7 +2933,7 @@
 				"CODE_SIGN_IDENTITY[sdk=macosx*]" = "Mac Developer";
 				CODE_SIGN_STYLE = Automatic;
 				COPY_PHASE_STRIP = NO;
-				CURRENT_PROJECT_VERSION = 168;
+				CURRENT_PROJECT_VERSION = 169;
 				DEBUG_INFORMATION_FORMAT = "dwarf-with-dsym";
 				DEFINES_MODULE = YES;
 				DYLIB_COMPATIBILITY_VERSION = 1;
@@ -2951,7 +2951,7 @@
 					"@executable_path/Frameworks",
 					"@loader_path/Frameworks",
 				);
-				MARKETING_VERSION = 1.7.26;
+				MARKETING_VERSION = 1.7.27;
 				MTL_ENABLE_DEBUG_INFO = NO;
 				MTL_FAST_MATH = YES;
 				PRODUCT_BUNDLE_IDENTIFIER = com.greenhair.WeAllPayDesignableUI;
@@ -2984,7 +2984,7 @@
 				"CODE_SIGN_IDENTITY[sdk=macosx*]" = "Mac Developer";
 				CODE_SIGN_STYLE = Automatic;
 				COPY_PHASE_STRIP = NO;
-				CURRENT_PROJECT_VERSION = 168;
+				CURRENT_PROJECT_VERSION = 169;
 				DEBUG_INFORMATION_FORMAT = "dwarf-with-dsym";
 				DEFINES_MODULE = YES;
 				DYLIB_COMPATIBILITY_VERSION = 1;
@@ -3002,7 +3002,7 @@
 					"@executable_path/Frameworks",
 					"@loader_path/Frameworks",
 				);
-				MARKETING_VERSION = 1.7.26;
+				MARKETING_VERSION = 1.7.27;
 				MTL_ENABLE_DEBUG_INFO = NO;
 				MTL_FAST_MATH = YES;
 				PRODUCT_BUNDLE_IDENTIFIER = com.greenhair.WeAllPayDesignableUI;
@@ -3566,7 +3566,7 @@
 				CODE_SIGN_IDENTITY = "iPhone Developer";
 				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer";
 				"CODE_SIGN_IDENTITY[sdk=macosx*]" = "Mac Developer";
-				CURRENT_PROJECT_VERSION = 168;
+				CURRENT_PROJECT_VERSION = 169;
 				DEFINES_MODULE = YES;
 				DEVELOPMENT_TEAM = Z6JP26PUUY;
 				ENABLE_STRICT_OBJC_MSGSEND = YES;
@@ -3586,7 +3586,7 @@
 					"@executable_path/Frameworks",
 					"@executable_path/../../Frameworks",
 				);
-				MARKETING_VERSION = 1.7.26;
+				MARKETING_VERSION = 1.7.27;
 				MTL_ENABLE_DEBUG_INFO = YES;
 				OTHER_LDFLAGS = "-Wpartial-availability";
 				PRODUCT_BUNDLE_IDENTIFIER = "com.GreenHair.We-all-pay.$(PRODUCT_NAME:rfc1034identifier)";
@@ -3622,7 +3622,7 @@
 				CODE_SIGN_IDENTITY = "";
 				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer";
 				"CODE_SIGN_IDENTITY[sdk=macosx*]" = "Mac Developer";
-				CURRENT_PROJECT_VERSION = 168;
+				CURRENT_PROJECT_VERSION = 169;
 				DEBUG_INFORMATION_FORMAT = dwarf;
 				DEFINES_MODULE = YES;
 				DEVELOPMENT_TEAM = "";
@@ -3644,7 +3644,7 @@
 					"@executable_path/Frameworks",
 					"@loader_path/Frameworks",
 				);
-				MARKETING_VERSION = 1.7.26;
+				MARKETING_VERSION = 1.7.27;
 				MTL_ENABLE_DEBUG_INFO = YES;
 				OTHER_LDFLAGS = "-Wpartial-availability";
 				PRODUCT_BUNDLE_IDENTIFIER = com.GreenHair.WhoPayingUserDefaultsStoreInterface;
@@ -3720,7 +3720,7 @@
 				CODE_SIGN_IDENTITY = "";
 				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer";
 				"CODE_SIGN_IDENTITY[sdk=macosx*]" = "Mac Developer";
-				CURRENT_PROJECT_VERSION = 168;
+				CURRENT_PROJECT_VERSION = 169;
 				DEBUG_INFORMATION_FORMAT = dwarf;
 				DEFINES_MODULE = YES;
 				DEVELOPMENT_TEAM = "";
@@ -3742,7 +3742,7 @@
 					"@executable_path/Frameworks",
 					"@loader_path/Frameworks",
 				);
-				MARKETING_VERSION = 1.7.26;
+				MARKETING_VERSION = 1.7.27;
 				MTL_ENABLE_DEBUG_INFO = YES;
 				OTHER_LDFLAGS = "-Wpartial-availability";
 				PRODUCT_BUNDLE_IDENTIFIER = com.GreenHair.CurrencyConverter;
@@ -3818,7 +3818,7 @@
 				CODE_SIGN_IDENTITY = "";
 				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer";
 				"CODE_SIGN_IDENTITY[sdk=macosx*]" = "Mac Developer";
-				CURRENT_PROJECT_VERSION = 168;
+				CURRENT_PROJECT_VERSION = 169;
 				DEBUG_INFORMATION_FORMAT = dwarf;
 				DEFINES_MODULE = YES;
 				DEVELOPMENT_TEAM = "";
@@ -3840,7 +3840,7 @@
 					"@executable_path/Frameworks",
 					"@loader_path/Frameworks",
 				);
-				MARKETING_VERSION = 1.7.26;
+				MARKETING_VERSION = 1.7.27;
 				MTL_ENABLE_DEBUG_INFO = YES;
 				OTHER_LDFLAGS = "-Wpartial-availability";
 				PRODUCT_BUNDLE_IDENTIFIER = com.GreenHair.RateMeControllerForiOS;
@@ -4075,7 +4075,7 @@
 				CODE_SIGN_IDENTITY = "";
 				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer";
 				"CODE_SIGN_IDENTITY[sdk=macosx*]" = "Mac Developer";
-				CURRENT_PROJECT_VERSION = 168;
+				CURRENT_PROJECT_VERSION = 169;
 				DEBUG_INFORMATION_FORMAT = dwarf;
 				DEFINES_MODULE = YES;
 				DEVELOPMENT_TEAM = "";
@@ -4097,7 +4097,7 @@
 					"@executable_path/Frameworks",
 					"@loader_path/Frameworks",
 				);
-				MARKETING_VERSION = 1.7.26;
+				MARKETING_VERSION = 1.7.27;
 				MTL_ENABLE_DEBUG_INFO = YES;
 				OTHER_LDFLAGS = "-Wpartial-availability";
 				PRODUCT_BUNDLE_IDENTIFIER = com.GreenHair.WhoPayingUserDefaultsStoreInterface;
@@ -4133,7 +4133,7 @@
 				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer";
 				"CODE_SIGN_IDENTITY[sdk=macosx*]" = "Mac Developer";
 				COPY_PHASE_STRIP = NO;
-				CURRENT_PROJECT_VERSION = 168;
+				CURRENT_PROJECT_VERSION = 169;
 				DEBUG_INFORMATION_FORMAT = "dwarf-with-dsym";
 				DEFINES_MODULE = YES;
 				DEVELOPMENT_TEAM = "";
@@ -4156,7 +4156,7 @@
 					"@executable_path/Frameworks",
 					"@loader_path/Frameworks",
 				);
-				MARKETING_VERSION = 1.7.26;
+				MARKETING_VERSION = 1.7.27;
 				MTL_ENABLE_DEBUG_INFO = NO;
 				OTHER_LDFLAGS = "-Wpartial-availability";
 				PRODUCT_BUNDLE_IDENTIFIER = com.GreenHair.WhoPayingUserDefaultsStoreInterface;
@@ -4272,7 +4272,7 @@
 				CODE_SIGN_IDENTITY = "iPhone Developer";
 				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer";
 				"CODE_SIGN_IDENTITY[sdk=macosx*]" = "Mac Developer";
-				CURRENT_PROJECT_VERSION = 168;
+				CURRENT_PROJECT_VERSION = 169;
 				DEFINES_MODULE = YES;
 				DEVELOPMENT_TEAM = Z6JP26PUUY;
 				ENABLE_STRICT_OBJC_MSGSEND = YES;
@@ -4292,7 +4292,7 @@
 					"@executable_path/Frameworks",
 					"@executable_path/../../Frameworks",
 				);
-				MARKETING_VERSION = 1.7.26;
+				MARKETING_VERSION = 1.7.27;
 				MTL_ENABLE_DEBUG_INFO = YES;
 				OTHER_LDFLAGS = "-Wpartial-availability";
 				PRODUCT_BUNDLE_IDENTIFIER = "com.GreenHair.We-all-pay.$(PRODUCT_NAME:rfc1034identifier)";
@@ -4328,7 +4328,7 @@
 				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer";
 				"CODE_SIGN_IDENTITY[sdk=macosx*]" = "Mac Developer";
 				COPY_PHASE_STRIP = NO;
-				CURRENT_PROJECT_VERSION = 168;
+				CURRENT_PROJECT_VERSION = 169;
 				DEFINES_MODULE = YES;
 				DEVELOPMENT_TEAM = Z6JP26PUUY;
 				ENABLE_NS_ASSERTIONS = NO;
@@ -4345,7 +4345,7 @@
 					"@executable_path/Frameworks",
 					"@executable_path/../../Frameworks",
 				);
-				MARKETING_VERSION = 1.7.26;
+				MARKETING_VERSION = 1.7.27;
 				MTL_ENABLE_DEBUG_INFO = NO;
 				OTHER_LDFLAGS = "-Wpartial-availability";
 				PRODUCT_BUNDLE_IDENTIFIER = "com.GreenHair.We-all-pay.$(PRODUCT_NAME:rfc1034identifier)";
@@ -4499,7 +4499,7 @@
 				CODE_SIGN_IDENTITY = "";
 				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer";
 				"CODE_SIGN_IDENTITY[sdk=macosx*]" = "Mac Developer";
-				CURRENT_PROJECT_VERSION = 168;
+				CURRENT_PROJECT_VERSION = 169;
 				DEBUG_INFORMATION_FORMAT = dwarf;
 				DEFINES_MODULE = YES;
 				DEVELOPMENT_TEAM = "";
@@ -4521,7 +4521,7 @@
 					"@executable_path/Frameworks",
 					"@loader_path/Frameworks",
 				);
-				MARKETING_VERSION = 1.7.26;
+				MARKETING_VERSION = 1.7.27;
 				MTL_ENABLE_DEBUG_INFO = YES;
 				OTHER_LDFLAGS = "-Wpartial-availability";
 				PRODUCT_BUNDLE_IDENTIFIER = com.GreenHair.RateMeControllerForiOS;
@@ -4556,7 +4556,7 @@
 				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer";
 				"CODE_SIGN_IDENTITY[sdk=macosx*]" = "Mac Developer";
 				COPY_PHASE_STRIP = NO;
-				CURRENT_PROJECT_VERSION = 168;
+				CURRENT_PROJECT_VERSION = 169;
 				DEBUG_INFORMATION_FORMAT = "dwarf-with-dsym";
 				DEFINES_MODULE = YES;
 				DEVELOPMENT_TEAM = "";
@@ -4579,7 +4579,7 @@
 					"@executable_path/Frameworks",
 					"@loader_path/Frameworks",
 				);
-				MARKETING_VERSION = 1.7.26;
+				MARKETING_VERSION = 1.7.27;
 				MTL_ENABLE_DEBUG_INFO = NO;
 				OTHER_LDFLAGS = "-Wpartial-availability";
 				PRODUCT_BUNDLE_IDENTIFIER = com.GreenHair.RateMeControllerForiOS;
@@ -4882,7 +4882,7 @@
 				CODE_SIGN_IDENTITY = "iPhone Developer";
 				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer";
 				"CODE_SIGN_IDENTITY[sdk=macosx*]" = "Mac Developer";
-				CURRENT_PROJECT_VERSION = 168;
+				CURRENT_PROJECT_VERSION = 169;
 				DEFINES_MODULE = YES;
 				DEVELOPMENT_TEAM = Z6JP26PUUY;
 				ENABLE_STRICT_OBJC_MSGSEND = YES;
@@ -4902,7 +4902,7 @@
 					"@executable_path/Frameworks",
 					"@executable_path/../../Frameworks",
 				);
-				MARKETING_VERSION = 1.7.26;
+				MARKETING_VERSION = 1.7.27;
 				MTL_ENABLE_DEBUG_INFO = YES;
 				OTHER_LDFLAGS = "-Wpartial-availability";
 				PRODUCT_BUNDLE_IDENTIFIER = "com.GreenHair.We-all-pay.$(PRODUCT_NAME:rfc1034identifier)";
@@ -4938,7 +4938,7 @@
 				CODE_SIGN_IDENTITY = "";
 				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer";
 				"CODE_SIGN_IDENTITY[sdk=macosx*]" = "Mac Developer";
-				CURRENT_PROJECT_VERSION = 168;
+				CURRENT_PROJECT_VERSION = 169;
 				DEBUG_INFORMATION_FORMAT = dwarf;
 				DEFINES_MODULE = YES;
 				DEVELOPMENT_TEAM = "";
@@ -4960,7 +4960,7 @@
 					"@executable_path/Frameworks",
 					"@loader_path/Frameworks",
 				);
-				MARKETING_VERSION = 1.7.26;
+				MARKETING_VERSION = 1.7.27;
 				MTL_ENABLE_DEBUG_INFO = YES;
 				OTHER_LDFLAGS = "-Wpartial-availability";
 				PRODUCT_BUNDLE_IDENTIFIER = com.GreenHair.WhoPayingUserDefaultsStoreInterface;
@@ -5036,7 +5036,7 @@
 				CODE_SIGN_IDENTITY = "";
 				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer";
 				"CODE_SIGN_IDENTITY[sdk=macosx*]" = "Mac Developer";
-				CURRENT_PROJECT_VERSION = 168;
+				CURRENT_PROJECT_VERSION = 169;
 				DEBUG_INFORMATION_FORMAT = dwarf;
 				DEFINES_MODULE = YES;
 				DEVELOPMENT_TEAM = "";
@@ -5058,7 +5058,7 @@
 					"@executable_path/Frameworks",
 					"@loader_path/Frameworks",
 				);
-				MARKETING_VERSION = 1.7.26;
+				MARKETING_VERSION = 1.7.27;
 				MTL_ENABLE_DEBUG_INFO = YES;
 				OTHER_LDFLAGS = "-Wpartial-availability";
 				PRODUCT_BUNDLE_IDENTIFIER = com.GreenHair.CurrencyConverter;
@@ -5134,7 +5134,7 @@
 				CODE_SIGN_IDENTITY = "";
 				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer";
 				"CODE_SIGN_IDENTITY[sdk=macosx*]" = "Mac Developer";
-				CURRENT_PROJECT_VERSION = 168;
+				CURRENT_PROJECT_VERSION = 169;
 				DEBUG_INFORMATION_FORMAT = dwarf;
 				DEFINES_MODULE = YES;
 				DEVELOPMENT_TEAM = "";
@@ -5156,7 +5156,7 @@
 					"@executable_path/Frameworks",
 					"@loader_path/Frameworks",
 				);
-				MARKETING_VERSION = 1.7.26;
+				MARKETING_VERSION = 1.7.27;
 				MTL_ENABLE_DEBUG_INFO = YES;
 				OTHER_LDFLAGS = "-Wpartial-availability";
 				PRODUCT_BUNDLE_IDENTIFIER = com.GreenHair.RateMeControllerForiOS;
