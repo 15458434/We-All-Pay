@@ -36,7 +36,6 @@
 		3825A826199A2A5500A8885D /* MCTonightsBillTransfer.m in Sources */ = {isa = PBXBuildFile; fileRef = 3825A825199A2A5500A8885D /* MCTonightsBillTransfer.m */; };
 		3826D4D123CC574E009CAC30 /* WebKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 3826D4D023CC574E009CAC30 /* WebKit.framework */; };
 		3826D4D223CC576C009CAC30 /* libsqlite3.0.tbd in Frameworks */ = {isa = PBXBuildFile; fileRef = 3826D4CE23CC573B009CAC30 /* libsqlite3.0.tbd */; };
-		3826D4D323CC5777009CAC30 /* libz.tbd in Frameworks */ = {isa = PBXBuildFile; fileRef = 3826D4CF23CC5745009CAC30 /* libz.tbd */; };
 		3829AD0F178B41320025969D /* WeAllPayStore.xcdatamodeld in Sources */ = {isa = PBXBuildFile; fileRef = 3829AD0D178B41320025969D /* WeAllPayStore.xcdatamodeld */; };
 		382B76E31C398249000C203A /* CurrencyConverter.h in Headers */ = {isa = PBXBuildFile; fileRef = 382B76E21C398249000C203A /* CurrencyConverter.h */; settings = {ATTRIBUTES = (Public, ); }; };
 		382B76EA1C398249000C203A /* CurrencyConverter.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 382B76E01C398249000C203A /* CurrencyConverter.framework */; };
@@ -71,7 +70,7 @@
 		38490D2D1D7052E700A297BA /* SolutionViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 38490D2C1D7052E700A297BA /* SolutionViewController.swift */; };
 		38490D2F1D7056D100A297BA /* ShowMailViewProtocol.swift in Sources */ = {isa = PBXBuildFile; fileRef = 38490D2E1D7056D100A297BA /* ShowMailViewProtocol.swift */; };
 		38490D311D705A7700A297BA /* ThisEvent.swift in Sources */ = {isa = PBXBuildFile; fileRef = 38490D301D705A7700A297BA /* ThisEvent.swift */; };
-		384A8D9A1D54776200A69E15 /* Who is paying next.appex in Embed App Extensions */ = {isa = PBXBuildFile; fileRef = 38B6E0EC1A28BBAB009E69D7 /* Who is paying next.appex */; settings = {ATTRIBUTES = (RemoveHeadersOnCopy, ); }; };
+		384A8D9A1D54776200A69E15 /* Who is paying next.appex in Embed Foundation Extensions */ = {isa = PBXBuildFile; fileRef = 38B6E0EC1A28BBAB009E69D7 /* Who is paying next.appex */; settings = {ATTRIBUTES = (RemoveHeadersOnCopy, ); }; };
 		384EC90C1BC2F17500A80799 /* SelectCategoryTableViewCell_iPad.swift in Sources */ = {isa = PBXBuildFile; fileRef = 384EC90B1BC2F17500A80799 /* SelectCategoryTableViewCell_iPad.swift */; };
 		384EC90E1BC2F35700A80799 /* SelectCurrencyTableViewCell_iPad.swift in Sources */ = {isa = PBXBuildFile; fileRef = 384EC90D1BC2F35700A80799 /* SelectCurrencyTableViewCell_iPad.swift */; };
 		384EC9101BC2F48C00A80799 /* SelectEmailAddressTableViewCell_iPad.swift in Sources */ = {isa = PBXBuildFile; fileRef = 384EC90F1BC2F48C00A80799 /* SelectEmailAddressTableViewCell_iPad.swift */; };
@@ -338,15 +337,15 @@
 			name = "Embed Frameworks";
 			runOnlyForDeploymentPostprocessing = 0;
 		};
-		384A8D9D1D54776300A69E15 /* Embed App Extensions */ = {
+		384A8D9D1D54776300A69E15 /* Embed Foundation Extensions */ = {
 			isa = PBXCopyFilesBuildPhase;
 			buildActionMask = 2147483647;
 			dstPath = "";
 			dstSubfolderSpec = 13;
 			files = (
-				384A8D9A1D54776200A69E15 /* Who is paying next.appex in Embed App Extensions */,
+				384A8D9A1D54776200A69E15 /* Who is paying next.appex in Embed Foundation Extensions */,
 			);
-			name = "Embed App Extensions";
+			name = "Embed Foundation Extensions";
 			runOnlyForDeploymentPostprocessing = 0;
 		};
 		38CB1BE527995E960074769F /* CopyFiles */ = {
@@ -719,7 +718,6 @@
 				38B4E81D23CDE5FC0034CA95 /* AudioToolbox.framework in Frameworks */,
 				38B4E81B23CDE5F40034CA95 /* AdSupport.framework in Frameworks */,
 				38B4E81923CDE5D40034CA95 /* libz.1.2.5.tbd in Frameworks */,
-				3826D4D323CC5777009CAC30 /* libz.tbd in Frameworks */,
 				3826D4D223CC576C009CAC30 /* libsqlite3.0.tbd in Frameworks */,
 				3826D4D123CC574E009CAC30 /* WebKit.framework in Frameworks */,
 				38163E0F249E193D009E889C /* CoreServices.framework in Frameworks */,
@@ -1687,7 +1685,7 @@
 				38572ACF169D437B00969C62 /* Frameworks */,
 				38572AD0169D437B00969C62 /* Resources */,
 				380D611E1B299B94006F8AE4 /* Embed Frameworks */,
-				384A8D9D1D54776300A69E15 /* Embed App Extensions */,
+				384A8D9D1D54776300A69E15 /* Embed Foundation Extensions */,
 				3A0B44C7A86199FA8728561C /* [CP] Embed Pods Frameworks */,
 				74F383D11455E8926023E33F /* [CP] Copy Pods Resources */,
 				38F2A4A323E097C40021F574 /* Crashlytics - This should be the very last step. */,
@@ -1856,10 +1854,11 @@
 		38572AC9169D437B00969C62 /* Project object */ = {
 			isa = PBXProject;
 			attributes = {
+				BuildIndependentTargetsInParallel = YES;
 				CLASSPREFIX = MC;
 				LastSwiftMigration = 0700;
 				LastSwiftUpdateCheck = 1320;
-				LastUpgradeCheck = 1330;
+				LastUpgradeCheck = 1540;
 				ORGANIZATIONNAME = "Mark Cornelisse";
 				TargetAttributes = {
 					382B76DF1C398249000C203A = {
@@ -2638,6 +2637,7 @@
 				DYLIB_COMPATIBILITY_VERSION = 1;
 				DYLIB_CURRENT_VERSION = 1;
 				DYLIB_INSTALL_NAME_BASE = "@rpath";
+				ENABLE_MODULE_VERIFIER = YES;
 				ENABLE_STRICT_OBJC_MSGSEND = YES;
 				GCC_NO_COMMON_BLOCKS = YES;
 				GCC_WARN_64_TO_32_BIT_CONVERSION = YES;
@@ -2654,6 +2654,7 @@
 					"@loader_path/Frameworks",
 				);
 				MARKETING_VERSION = 1.7.27;
+				MODULE_VERIFIER_SUPPORTED_LANGUAGE_STANDARDS = "gnu99 gnu++11";
 				MTL_ENABLE_DEBUG_INFO = YES;
 				OTHER_LDFLAGS = "-Wpartial-availability";
 				PRODUCT_BUNDLE_IDENTIFIER = com.GreenHair.CurrencyConverter;
@@ -2697,6 +2698,7 @@
 				DYLIB_COMPATIBILITY_VERSION = 1;
 				DYLIB_CURRENT_VERSION = 1;
 				DYLIB_INSTALL_NAME_BASE = "@rpath";
+				ENABLE_MODULE_VERIFIER = YES;
 				ENABLE_NS_ASSERTIONS = NO;
 				ENABLE_STRICT_OBJC_MSGSEND = YES;
 				GCC_NO_COMMON_BLOCKS = YES;
@@ -2714,6 +2716,7 @@
 					"@loader_path/Frameworks",
 				);
 				MARKETING_VERSION = 1.7.27;
+				MODULE_VERIFIER_SUPPORTED_LANGUAGE_STANDARDS = "gnu99 gnu++11";
 				MTL_ENABLE_DEBUG_INFO = NO;
 				OTHER_LDFLAGS = "-Wpartial-availability";
 				PRODUCT_BUNDLE_IDENTIFIER = com.GreenHair.CurrencyConverter;
@@ -2838,6 +2841,7 @@
 				DYLIB_COMPATIBILITY_VERSION = 1;
 				DYLIB_CURRENT_VERSION = 1;
 				DYLIB_INSTALL_NAME_BASE = "@rpath";
+				ENABLE_MODULE_VERIFIER = YES;
 				GCC_C_LANGUAGE_STANDARD = gnu11;
 				GCC_WARN_ABOUT_RETURN_TYPE = YES_ERROR;
 				GCC_WARN_UNINITIALIZED_AUTOS = YES_AGGRESSIVE;
@@ -2850,6 +2854,7 @@
 					"@loader_path/Frameworks",
 				);
 				MARKETING_VERSION = 1.7.27;
+				MODULE_VERIFIER_SUPPORTED_LANGUAGE_STANDARDS = "gnu11 gnu++14";
 				MTL_ENABLE_DEBUG_INFO = INCLUDE_SOURCE;
 				MTL_FAST_MATH = YES;
 				PRODUCT_BUNDLE_IDENTIFIER = com.greenhair.WeAllPayDesignableUI;
@@ -2888,6 +2893,7 @@
 				DYLIB_COMPATIBILITY_VERSION = 1;
 				DYLIB_CURRENT_VERSION = 1;
 				DYLIB_INSTALL_NAME_BASE = "@rpath";
+				ENABLE_MODULE_VERIFIER = YES;
 				ENABLE_NS_ASSERTIONS = NO;
 				GCC_C_LANGUAGE_STANDARD = gnu11;
 				GCC_WARN_ABOUT_RETURN_TYPE = YES_ERROR;
@@ -2901,6 +2907,7 @@
 					"@loader_path/Frameworks",
 				);
 				MARKETING_VERSION = 1.7.27;
+				MODULE_VERIFIER_SUPPORTED_LANGUAGE_STANDARDS = "gnu11 gnu++14";
 				MTL_ENABLE_DEBUG_INFO = NO;
 				MTL_FAST_MATH = YES;
 				PRODUCT_BUNDLE_IDENTIFIER = com.greenhair.WeAllPayDesignableUI;
@@ -2939,6 +2946,7 @@
 				DYLIB_COMPATIBILITY_VERSION = 1;
 				DYLIB_CURRENT_VERSION = 1;
 				DYLIB_INSTALL_NAME_BASE = "@rpath";
+				ENABLE_MODULE_VERIFIER = YES;
 				ENABLE_NS_ASSERTIONS = NO;
 				GCC_C_LANGUAGE_STANDARD = gnu11;
 				GCC_WARN_ABOUT_RETURN_TYPE = YES_ERROR;
@@ -2952,6 +2960,7 @@
 					"@loader_path/Frameworks",
 				);
 				MARKETING_VERSION = 1.7.27;
+				MODULE_VERIFIER_SUPPORTED_LANGUAGE_STANDARDS = "gnu11 gnu++14";
 				MTL_ENABLE_DEBUG_INFO = NO;
 				MTL_FAST_MATH = YES;
 				PRODUCT_BUNDLE_IDENTIFIER = com.greenhair.WeAllPayDesignableUI;
@@ -2990,6 +2999,7 @@
 				DYLIB_COMPATIBILITY_VERSION = 1;
 				DYLIB_CURRENT_VERSION = 1;
 				DYLIB_INSTALL_NAME_BASE = "@rpath";
+				ENABLE_MODULE_VERIFIER = YES;
 				ENABLE_NS_ASSERTIONS = NO;
 				GCC_C_LANGUAGE_STANDARD = gnu11;
 				GCC_WARN_ABOUT_RETURN_TYPE = YES_ERROR;
@@ -3003,6 +3013,7 @@
 					"@loader_path/Frameworks",
 				);
 				MARKETING_VERSION = 1.7.27;
+				MODULE_VERIFIER_SUPPORTED_LANGUAGE_STANDARDS = "gnu11 gnu++14";
 				MTL_ENABLE_DEBUG_INFO = NO;
 				MTL_FAST_MATH = YES;
 				PRODUCT_BUNDLE_IDENTIFIER = com.greenhair.WeAllPayDesignableUI;
@@ -3050,6 +3061,7 @@
 				"CODE_SIGN_IDENTITY[sdk=macosx*]" = "Mac Developer: Mark Cornelisse (B9ZEEP43C6)";
 				COPY_PHASE_STRIP = NO;
 				DEFINES_MODULE = YES;
+				ENABLE_MODULE_VERIFIER = YES;
 				ENABLE_STRICT_OBJC_MSGSEND = YES;
 				ENABLE_TESTABILITY = YES;
 				EXCLUDED_ARCHS = "$(inherited)";
@@ -3069,6 +3081,7 @@
 				GCC_WARN_UNUSED_FUNCTION = YES;
 				GCC_WARN_UNUSED_VARIABLE = YES;
 				IPHONEOS_DEPLOYMENT_TARGET = 15.0;
+				MODULE_VERIFIER_SUPPORTED_LANGUAGE_STANDARDS = "gnu99 gnu++11";
 				ONLY_ACTIVE_ARCH = YES;
 				OTHER_SWIFT_FLAGS = "";
 				PROVISIONING_PROFILE = "";
@@ -3112,6 +3125,7 @@
 				"CODE_SIGN_IDENTITY[sdk=macosx*]" = "Developer ID Application: Mark Cornelisse (Z6JP26PUUY)";
 				COPY_PHASE_STRIP = YES;
 				DEFINES_MODULE = YES;
+				ENABLE_MODULE_VERIFIER = YES;
 				ENABLE_STRICT_OBJC_MSGSEND = YES;
 				ENABLE_TESTABILITY = NO;
 				EXCLUDED_ARCHS = "$(inherited)";
@@ -3125,6 +3139,7 @@
 				GCC_WARN_UNUSED_FUNCTION = YES;
 				GCC_WARN_UNUSED_VARIABLE = YES;
 				IPHONEOS_DEPLOYMENT_TARGET = 15.0;
+				MODULE_VERIFIER_SUPPORTED_LANGUAGE_STANDARDS = "gnu99 gnu++11";
 				OTHER_CFLAGS = "-DNS_BLOCK_ASSERTIONS=1";
 				OTHER_SWIFT_FLAGS = "";
 				PROVISIONING_PROFILE = "";
@@ -3305,7 +3320,6 @@
 				PRODUCT_BUNDLE_IDENTIFIER = "com.GreenHair.${PRODUCT_NAME:rfc1034identifier}";
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				PROVISIONING_PROFILE = "";
-				STRIP_STYLE = all;
 				SUPPORTED_PLATFORMS = "iphoneos iphonesimulator";
 				SUPPORTS_MACCATALYST = NO;
 				SUPPORTS_MAC_DESIGNED_FOR_IPHONE_IPAD = NO;
@@ -3358,7 +3372,6 @@
 				PRODUCT_BUNDLE_IDENTIFIER = "com.GreenHair.${PRODUCT_NAME:rfc1034identifier}";
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				PROVISIONING_PROFILE = "";
-				STRIP_STYLE = all;
 				SUPPORTED_PLATFORMS = "iphoneos iphonesimulator";
 				SUPPORTS_MACCATALYST = NO;
 				SUPPORTS_MAC_DESIGNED_FOR_IPHONE_IPAD = NO;
@@ -3404,6 +3417,7 @@
 				"CODE_SIGN_IDENTITY[sdk=macosx*]" = "Mac Developer: Mark Cornelisse (B9ZEEP43C6)";
 				COPY_PHASE_STRIP = NO;
 				DEFINES_MODULE = YES;
+				ENABLE_MODULE_VERIFIER = YES;
 				ENABLE_STRICT_OBJC_MSGSEND = YES;
 				ENABLE_TESTABILITY = YES;
 				EXCLUDED_ARCHS = "$(inherited)";
@@ -3423,6 +3437,7 @@
 				GCC_WARN_UNUSED_FUNCTION = YES;
 				GCC_WARN_UNUSED_VARIABLE = YES;
 				IPHONEOS_DEPLOYMENT_TARGET = 15.0;
+				MODULE_VERIFIER_SUPPORTED_LANGUAGE_STANDARDS = "gnu99 gnu++11";
 				ONLY_ACTIVE_ARCH = YES;
 				OTHER_CFLAGS = "-DSCREENSHOTS=1";
 				OTHER_SWIFT_FLAGS = "-DSCREENSHOTS";
@@ -3537,7 +3552,6 @@
 				PRODUCT_BUNDLE_IDENTIFIER = "com.GreenHair.${PRODUCT_NAME:rfc1034identifier}";
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				PROVISIONING_PROFILE = "";
-				STRIP_STYLE = all;
 				SUPPORTED_PLATFORMS = "iphoneos iphonesimulator";
 				SUPPORTS_MACCATALYST = NO;
 				SUPPORTS_MAC_DESIGNED_FOR_IPHONE_IPAD = NO;
@@ -3569,6 +3583,7 @@
 				CURRENT_PROJECT_VERSION = 169;
 				DEFINES_MODULE = YES;
 				DEVELOPMENT_TEAM = Z6JP26PUUY;
+				ENABLE_MODULE_VERIFIER = YES;
 				ENABLE_STRICT_OBJC_MSGSEND = YES;
 				GCC_PREPROCESSOR_DEFINITIONS = (
 					"DEBUG=1",
@@ -3587,6 +3602,7 @@
 					"@executable_path/../../Frameworks",
 				);
 				MARKETING_VERSION = 1.7.27;
+				MODULE_VERIFIER_SUPPORTED_LANGUAGE_STANDARDS = "gnu99 gnu++11";
 				MTL_ENABLE_DEBUG_INFO = YES;
 				OTHER_LDFLAGS = "-Wpartial-availability";
 				PRODUCT_BUNDLE_IDENTIFIER = "com.GreenHair.We-all-pay.$(PRODUCT_NAME:rfc1034identifier)";
@@ -3594,7 +3610,6 @@
 				PROVISIONING_PROFILE = "";
 				"PROVISIONING_PROFILE[sdk=iphoneos*]" = "";
 				SKIP_INSTALL = YES;
-				STRIP_STYLE = all;
 				SUPPORTED_PLATFORMS = "iphoneos iphonesimulator";
 				SUPPORTS_MACCATALYST = NO;
 				SUPPORTS_MAC_DESIGNED_FOR_IPHONE_IPAD = NO;
@@ -3629,6 +3644,7 @@
 				DYLIB_COMPATIBILITY_VERSION = 1;
 				DYLIB_CURRENT_VERSION = 1;
 				DYLIB_INSTALL_NAME_BASE = "@rpath";
+				ENABLE_MODULE_VERIFIER = YES;
 				ENABLE_STRICT_OBJC_MSGSEND = YES;
 				GCC_NO_COMMON_BLOCKS = YES;
 				GCC_WARN_64_TO_32_BIT_CONVERSION = YES;
@@ -3645,6 +3661,7 @@
 					"@loader_path/Frameworks",
 				);
 				MARKETING_VERSION = 1.7.27;
+				MODULE_VERIFIER_SUPPORTED_LANGUAGE_STANDARDS = "gnu99 gnu++11";
 				MTL_ENABLE_DEBUG_INFO = YES;
 				OTHER_LDFLAGS = "-Wpartial-availability";
 				PRODUCT_BUNDLE_IDENTIFIER = com.GreenHair.WhoPayingUserDefaultsStoreInterface;
@@ -3727,6 +3744,7 @@
 				DYLIB_COMPATIBILITY_VERSION = 1;
 				DYLIB_CURRENT_VERSION = 1;
 				DYLIB_INSTALL_NAME_BASE = "@rpath";
+				ENABLE_MODULE_VERIFIER = YES;
 				ENABLE_STRICT_OBJC_MSGSEND = YES;
 				GCC_NO_COMMON_BLOCKS = YES;
 				GCC_WARN_64_TO_32_BIT_CONVERSION = YES;
@@ -3743,6 +3761,7 @@
 					"@loader_path/Frameworks",
 				);
 				MARKETING_VERSION = 1.7.27;
+				MODULE_VERIFIER_SUPPORTED_LANGUAGE_STANDARDS = "gnu99 gnu++11";
 				MTL_ENABLE_DEBUG_INFO = YES;
 				OTHER_LDFLAGS = "-Wpartial-availability";
 				PRODUCT_BUNDLE_IDENTIFIER = com.GreenHair.CurrencyConverter;
@@ -3825,6 +3844,7 @@
 				DYLIB_COMPATIBILITY_VERSION = 1;
 				DYLIB_CURRENT_VERSION = 1;
 				DYLIB_INSTALL_NAME_BASE = "@rpath";
+				ENABLE_MODULE_VERIFIER = YES;
 				ENABLE_STRICT_OBJC_MSGSEND = YES;
 				GCC_NO_COMMON_BLOCKS = YES;
 				GCC_WARN_64_TO_32_BIT_CONVERSION = YES;
@@ -3841,6 +3861,7 @@
 					"@loader_path/Frameworks",
 				);
 				MARKETING_VERSION = 1.7.27;
+				MODULE_VERIFIER_SUPPORTED_LANGUAGE_STANDARDS = "gnu99 gnu++11";
 				MTL_ENABLE_DEBUG_INFO = YES;
 				OTHER_LDFLAGS = "-Wpartial-availability";
 				PRODUCT_BUNDLE_IDENTIFIER = com.GreenHair.RateMeControllerForiOS;
@@ -4082,6 +4103,7 @@
 				DYLIB_COMPATIBILITY_VERSION = 1;
 				DYLIB_CURRENT_VERSION = 1;
 				DYLIB_INSTALL_NAME_BASE = "@rpath";
+				ENABLE_MODULE_VERIFIER = YES;
 				ENABLE_STRICT_OBJC_MSGSEND = YES;
 				GCC_NO_COMMON_BLOCKS = YES;
 				GCC_WARN_64_TO_32_BIT_CONVERSION = YES;
@@ -4098,6 +4120,7 @@
 					"@loader_path/Frameworks",
 				);
 				MARKETING_VERSION = 1.7.27;
+				MODULE_VERIFIER_SUPPORTED_LANGUAGE_STANDARDS = "gnu99 gnu++11";
 				MTL_ENABLE_DEBUG_INFO = YES;
 				OTHER_LDFLAGS = "-Wpartial-availability";
 				PRODUCT_BUNDLE_IDENTIFIER = com.GreenHair.WhoPayingUserDefaultsStoreInterface;
@@ -4140,6 +4163,7 @@
 				DYLIB_COMPATIBILITY_VERSION = 1;
 				DYLIB_CURRENT_VERSION = 1;
 				DYLIB_INSTALL_NAME_BASE = "@rpath";
+				ENABLE_MODULE_VERIFIER = YES;
 				ENABLE_NS_ASSERTIONS = NO;
 				ENABLE_STRICT_OBJC_MSGSEND = YES;
 				GCC_NO_COMMON_BLOCKS = YES;
@@ -4157,6 +4181,7 @@
 					"@loader_path/Frameworks",
 				);
 				MARKETING_VERSION = 1.7.27;
+				MODULE_VERIFIER_SUPPORTED_LANGUAGE_STANDARDS = "gnu99 gnu++11";
 				MTL_ENABLE_DEBUG_INFO = NO;
 				OTHER_LDFLAGS = "-Wpartial-availability";
 				PRODUCT_BUNDLE_IDENTIFIER = com.GreenHair.WhoPayingUserDefaultsStoreInterface;
@@ -4275,6 +4300,7 @@
 				CURRENT_PROJECT_VERSION = 169;
 				DEFINES_MODULE = YES;
 				DEVELOPMENT_TEAM = Z6JP26PUUY;
+				ENABLE_MODULE_VERIFIER = YES;
 				ENABLE_STRICT_OBJC_MSGSEND = YES;
 				GCC_PREPROCESSOR_DEFINITIONS = (
 					"DEBUG=1",
@@ -4293,6 +4319,7 @@
 					"@executable_path/../../Frameworks",
 				);
 				MARKETING_VERSION = 1.7.27;
+				MODULE_VERIFIER_SUPPORTED_LANGUAGE_STANDARDS = "gnu99 gnu++11";
 				MTL_ENABLE_DEBUG_INFO = YES;
 				OTHER_LDFLAGS = "-Wpartial-availability";
 				PRODUCT_BUNDLE_IDENTIFIER = "com.GreenHair.We-all-pay.$(PRODUCT_NAME:rfc1034identifier)";
@@ -4300,7 +4327,6 @@
 				PROVISIONING_PROFILE = "";
 				"PROVISIONING_PROFILE[sdk=iphoneos*]" = "";
 				SKIP_INSTALL = YES;
-				STRIP_STYLE = all;
 				SUPPORTED_PLATFORMS = "iphoneos iphonesimulator";
 				SUPPORTS_MACCATALYST = NO;
 				SUPPORTS_MAC_DESIGNED_FOR_IPHONE_IPAD = NO;
@@ -4331,6 +4357,7 @@
 				CURRENT_PROJECT_VERSION = 169;
 				DEFINES_MODULE = YES;
 				DEVELOPMENT_TEAM = Z6JP26PUUY;
+				ENABLE_MODULE_VERIFIER = YES;
 				ENABLE_NS_ASSERTIONS = NO;
 				ENABLE_STRICT_OBJC_MSGSEND = YES;
 				GCC_WARN_64_TO_32_BIT_CONVERSION = YES;
@@ -4346,6 +4373,7 @@
 					"@executable_path/../../Frameworks",
 				);
 				MARKETING_VERSION = 1.7.27;
+				MODULE_VERIFIER_SUPPORTED_LANGUAGE_STANDARDS = "gnu99 gnu++11";
 				MTL_ENABLE_DEBUG_INFO = NO;
 				OTHER_LDFLAGS = "-Wpartial-availability";
 				PRODUCT_BUNDLE_IDENTIFIER = "com.GreenHair.We-all-pay.$(PRODUCT_NAME:rfc1034identifier)";
@@ -4353,7 +4381,6 @@
 				PROVISIONING_PROFILE = "";
 				"PROVISIONING_PROFILE[sdk=iphoneos*]" = "";
 				SKIP_INSTALL = YES;
-				STRIP_STYLE = all;
 				SUPPORTED_PLATFORMS = "iphoneos iphonesimulator";
 				SUPPORTS_MACCATALYST = NO;
 				SUPPORTS_MAC_DESIGNED_FOR_IPHONE_IPAD = NO;
@@ -4378,6 +4405,7 @@
 				CLANG_WARN_UNGUARDED_AVAILABILITY = YES_AGGRESSIVE;
 				CODE_SIGN_IDENTITY = "Apple Development";
 				CODE_SIGN_STYLE = Automatic;
+				DEAD_CODE_STRIPPING = YES;
 				DEBUG_INFORMATION_FORMAT = dwarf;
 				DEVELOPMENT_TEAM = Z6JP26PUUY;
 				ENABLE_HARDENED_RUNTIME = YES;
@@ -4409,6 +4437,7 @@
 				CODE_SIGN_IDENTITY = "Apple Development";
 				CODE_SIGN_STYLE = Automatic;
 				COPY_PHASE_STRIP = NO;
+				DEAD_CODE_STRIPPING = YES;
 				DEBUG_INFORMATION_FORMAT = "dwarf-with-dsym";
 				DEVELOPMENT_TEAM = Z6JP26PUUY;
 				ENABLE_HARDENED_RUNTIME = YES;
@@ -4439,6 +4468,7 @@
 				CODE_SIGN_IDENTITY = "Apple Development";
 				CODE_SIGN_STYLE = Automatic;
 				COPY_PHASE_STRIP = NO;
+				DEAD_CODE_STRIPPING = YES;
 				DEBUG_INFORMATION_FORMAT = "dwarf-with-dsym";
 				DEVELOPMENT_TEAM = Z6JP26PUUY;
 				ENABLE_HARDENED_RUNTIME = YES;
@@ -4469,6 +4499,7 @@
 				CODE_SIGN_IDENTITY = "-";
 				CODE_SIGN_STYLE = Automatic;
 				COPY_PHASE_STRIP = NO;
+				DEAD_CODE_STRIPPING = YES;
 				DEBUG_INFORMATION_FORMAT = "dwarf-with-dsym";
 				DEVELOPMENT_TEAM = Z6JP26PUUY;
 				ENABLE_HARDENED_RUNTIME = YES;
@@ -4506,6 +4537,7 @@
 				DYLIB_COMPATIBILITY_VERSION = 1;
 				DYLIB_CURRENT_VERSION = 1;
 				DYLIB_INSTALL_NAME_BASE = "@rpath";
+				ENABLE_MODULE_VERIFIER = YES;
 				ENABLE_STRICT_OBJC_MSGSEND = YES;
 				GCC_NO_COMMON_BLOCKS = YES;
 				GCC_WARN_64_TO_32_BIT_CONVERSION = YES;
@@ -4522,6 +4554,7 @@
 					"@loader_path/Frameworks",
 				);
 				MARKETING_VERSION = 1.7.27;
+				MODULE_VERIFIER_SUPPORTED_LANGUAGE_STANDARDS = "gnu99 gnu++11";
 				MTL_ENABLE_DEBUG_INFO = YES;
 				OTHER_LDFLAGS = "-Wpartial-availability";
 				PRODUCT_BUNDLE_IDENTIFIER = com.GreenHair.RateMeControllerForiOS;
@@ -4563,6 +4596,7 @@
 				DYLIB_COMPATIBILITY_VERSION = 1;
 				DYLIB_CURRENT_VERSION = 1;
 				DYLIB_INSTALL_NAME_BASE = "@rpath";
+				ENABLE_MODULE_VERIFIER = YES;
 				ENABLE_NS_ASSERTIONS = NO;
 				ENABLE_STRICT_OBJC_MSGSEND = YES;
 				GCC_NO_COMMON_BLOCKS = YES;
@@ -4580,6 +4614,7 @@
 					"@loader_path/Frameworks",
 				);
 				MARKETING_VERSION = 1.7.27;
+				MODULE_VERIFIER_SUPPORTED_LANGUAGE_STANDARDS = "gnu99 gnu++11";
 				MTL_ENABLE_DEBUG_INFO = NO;
 				OTHER_LDFLAGS = "-Wpartial-availability";
 				PRODUCT_BUNDLE_IDENTIFIER = com.GreenHair.RateMeControllerForiOS;
@@ -4711,6 +4746,7 @@
 				"CODE_SIGN_IDENTITY[sdk=macosx*]" = "Mac Developer: Mark Cornelisse (B9ZEEP43C6)";
 				COPY_PHASE_STRIP = NO;
 				DEFINES_MODULE = YES;
+				ENABLE_MODULE_VERIFIER = YES;
 				ENABLE_STRICT_OBJC_MSGSEND = YES;
 				ENABLE_TESTABILITY = YES;
 				EXCLUDED_ARCHS = "$(inherited)";
@@ -4730,6 +4766,7 @@
 				GCC_WARN_UNUSED_FUNCTION = YES;
 				GCC_WARN_UNUSED_VARIABLE = YES;
 				IPHONEOS_DEPLOYMENT_TARGET = 15.0;
+				MODULE_VERIFIER_SUPPORTED_LANGUAGE_STANDARDS = "gnu99 gnu++11";
 				ONLY_ACTIVE_ARCH = YES;
 				OTHER_SWIFT_FLAGS = "";
 				PROVISIONING_PROFILE = "";
@@ -4853,7 +4890,6 @@
 				PRODUCT_BUNDLE_IDENTIFIER = "com.GreenHair.${PRODUCT_NAME:rfc1034identifier}";
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				PROVISIONING_PROFILE = "";
-				STRIP_STYLE = all;
 				SUPPORTED_PLATFORMS = "iphoneos iphonesimulator";
 				SUPPORTS_MACCATALYST = NO;
 				SUPPORTS_MAC_DESIGNED_FOR_IPHONE_IPAD = NO;
@@ -4885,6 +4921,7 @@
 				CURRENT_PROJECT_VERSION = 169;
 				DEFINES_MODULE = YES;
 				DEVELOPMENT_TEAM = Z6JP26PUUY;
+				ENABLE_MODULE_VERIFIER = YES;
 				ENABLE_STRICT_OBJC_MSGSEND = YES;
 				GCC_PREPROCESSOR_DEFINITIONS = (
 					"DEBUG=1",
@@ -4903,6 +4940,7 @@
 					"@executable_path/../../Frameworks",
 				);
 				MARKETING_VERSION = 1.7.27;
+				MODULE_VERIFIER_SUPPORTED_LANGUAGE_STANDARDS = "gnu99 gnu++11";
 				MTL_ENABLE_DEBUG_INFO = YES;
 				OTHER_LDFLAGS = "-Wpartial-availability";
 				PRODUCT_BUNDLE_IDENTIFIER = "com.GreenHair.We-all-pay.$(PRODUCT_NAME:rfc1034identifier)";
@@ -4910,7 +4948,6 @@
 				PROVISIONING_PROFILE = "";
 				"PROVISIONING_PROFILE[sdk=iphoneos*]" = "";
 				SKIP_INSTALL = YES;
-				STRIP_STYLE = all;
 				SUPPORTED_PLATFORMS = "iphoneos iphonesimulator";
 				SUPPORTS_MACCATALYST = NO;
 				SUPPORTS_MAC_DESIGNED_FOR_IPHONE_IPAD = NO;
@@ -4945,6 +4982,7 @@
 				DYLIB_COMPATIBILITY_VERSION = 1;
 				DYLIB_CURRENT_VERSION = 1;
 				DYLIB_INSTALL_NAME_BASE = "@rpath";
+				ENABLE_MODULE_VERIFIER = YES;
 				ENABLE_STRICT_OBJC_MSGSEND = YES;
 				GCC_NO_COMMON_BLOCKS = YES;
 				GCC_WARN_64_TO_32_BIT_CONVERSION = YES;
@@ -4961,6 +4999,7 @@
 					"@loader_path/Frameworks",
 				);
 				MARKETING_VERSION = 1.7.27;
+				MODULE_VERIFIER_SUPPORTED_LANGUAGE_STANDARDS = "gnu99 gnu++11";
 				MTL_ENABLE_DEBUG_INFO = YES;
 				OTHER_LDFLAGS = "-Wpartial-availability";
 				PRODUCT_BUNDLE_IDENTIFIER = com.GreenHair.WhoPayingUserDefaultsStoreInterface;
@@ -5043,6 +5082,7 @@
 				DYLIB_COMPATIBILITY_VERSION = 1;
 				DYLIB_CURRENT_VERSION = 1;
 				DYLIB_INSTALL_NAME_BASE = "@rpath";
+				ENABLE_MODULE_VERIFIER = YES;
 				ENABLE_STRICT_OBJC_MSGSEND = YES;
 				GCC_NO_COMMON_BLOCKS = YES;
 				GCC_WARN_64_TO_32_BIT_CONVERSION = YES;
@@ -5059,6 +5099,7 @@
 					"@loader_path/Frameworks",
 				);
 				MARKETING_VERSION = 1.7.27;
+				MODULE_VERIFIER_SUPPORTED_LANGUAGE_STANDARDS = "gnu99 gnu++11";
 				MTL_ENABLE_DEBUG_INFO = YES;
 				OTHER_LDFLAGS = "-Wpartial-availability";
 				PRODUCT_BUNDLE_IDENTIFIER = com.GreenHair.CurrencyConverter;
@@ -5141,6 +5182,7 @@
 				DYLIB_COMPATIBILITY_VERSION = 1;
 				DYLIB_CURRENT_VERSION = 1;
 				DYLIB_INSTALL_NAME_BASE = "@rpath";
+				ENABLE_MODULE_VERIFIER = YES;
 				ENABLE_STRICT_OBJC_MSGSEND = YES;
 				GCC_NO_COMMON_BLOCKS = YES;
 				GCC_WARN_64_TO_32_BIT_CONVERSION = YES;
@@ -5157,6 +5199,7 @@
 					"@loader_path/Frameworks",
 				);
 				MARKETING_VERSION = 1.7.27;
+				MODULE_VERIFIER_SUPPORTED_LANGUAGE_STANDARDS = "gnu99 gnu++11";
 				MTL_ENABLE_DEBUG_INFO = YES;
 				OTHER_LDFLAGS = "-Wpartial-availability";
 				PRODUCT_BUNDLE_IDENTIFIER = com.GreenHair.RateMeControllerForiOS;
