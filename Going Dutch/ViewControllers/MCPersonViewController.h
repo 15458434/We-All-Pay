@@ -17,10 +17,10 @@
 @class MCTwoLabelsTitleView;
 
 __attribute__((objc_subclassing_restricted))
-@interface MCPersonViewController : MCGenericMediumAdBannerViewController <MCThisPersonProtocol>
+@interface MCPersonViewController : MCGenericMediumAdBannerViewController
 
-// Only accessible on the mainThread.
-@property (nonatomic, strong) MCPerson *thisPerson;
 @property (nonatomic) BOOL isNew;
+
+- (void)updateWithPerson:(MCPerson *)person;
 
 @end

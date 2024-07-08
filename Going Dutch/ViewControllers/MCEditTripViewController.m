@@ -26,6 +26,8 @@ static void * isEditingToggleContext = &isEditingToggleContext;
 
 @property (strong, nonatomic) MCTableEmptyMessage *emptyMessage;
 
+@property (nonatomic, strong) MCEventModel *eventModel;
+
 @property (weak, nonatomic) IBOutlet UITableViewHeaderFooterView *headerView;
 @property (weak, nonatomic) IBOutlet UITextField *eventNameTextField;
 @property (weak, nonatomic) IBOutlet UIButton *addPersonButton;
@@ -83,6 +85,9 @@ static void * isEditingToggleContext = &isEditingToggleContext;
         }
     }
 }
+- (void)updateEventModel:(MCEventModel *)eventModel {
+    _eventModel = eventModel;
+}
 
 #pragma mark - UITextFieldDelegate
 
@@ -119,11 +124,6 @@ static void * isEditingToggleContext = &isEditingToggleContext;
     [self.tableView beginUpdates];
 }
 
-- (void)controllerDidChangeContent:(NSFetchedResultsController *)controller {
-    [self setEmptyMessageWithDuration:0.25];
-    [self.tableView endUpdates];
-}
-
 - (void)controller:(NSFetchedResultsController *)controller didChangeObject:(id)anObject atIndexPath:(NSIndexPath *)indexPath forChangeType:(NSFetchedResultsChangeType)type newIndexPath:(NSIndexPath *)newIndexPath {
     switch(type) {
             
@@ -147,6 +147,11 @@ static void * isEditingToggleContext = &isEditingToggleContext;
     }
 }
 
+- (void)controllerDidChangeContent:(NSFetchedResultsController *)controller {
+    [self setEmptyMessageWithDuration:0.25];
+    [self.tableView endUpdates];
+}
+
 #pragma mark - UITableViewController
 
 #pragma mark - UITableViewDataSource
@@ -160,26 +165,10 @@ static void * isEditingToggleContext = &isEditingToggleContext;
 }
 
 - (UITableViewCell *)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath {
-    MCPerson *thisCellsPerson = [_fetchedResultsController objectAtIndexPath:indexPath];
-    MCPersonTableViewCell *thisCell = [tableView dequeueReusableCellWithIdentifier:@"MCPersonTableViewCell"];
-    
-    [[thisCell personImage] setImage:[thisCellsPerson thumbnail]];
-    [[thisCell nameLabel] setText:[thisCellsPerson getFullName]];
-    [[thisCell emailLabel] setText:[thisCellsPerson defaultEmailAddress]];
-    
-    if (![thisCellsPerson hasPersonMadePaymentWithInvalidExchangeRates]) {
-        [thisCell.fetchingExchangeRateIndicator stopAnimating];
-        [[thisCell totalSpent] setHidden:NO];
-        
-        CurrencyFormatter *cf = [[CurrencyFormatter alloc] initWithCurrencyCode:_eventModel.event.mainCurrency.code];
-        thisCell.totalSpent.text = [cf stringForObjectValue:thisCellsPerson.totalSumPaid];
-    } else {
-        [thisCell.fetchingExchangeRateIndicator startAnimating];
-        [[thisCell totalSpent] setHidden:YES];
-    }
-
-    
-    return thisCell;
+    MCPerson *item = [_fetchedResultsController objectAtIndexPath:indexPath];
+    MCPersonTableViewCell *cell = [tableView dequeueReusableCellWithIdentifier:@"MCPersonTableViewCell"];
+    [cell updateWithEventModel:self.eventModel andPerson:item];
+    return cell;
 }
 
 - (BOOL)tableView:(UITableView *)tableView canEditRowAtIndexPath:(NSIndexPath *)indexPath {
@@ -304,11 +293,11 @@ static void * isEditingToggleContext = &isEditingToggleContext;
             thePerson = [_eventModel addPerson];
             [thePerson setThumbnailDataFromImage:nil];
             [thePerson setPictureDataFromImage:nil];
-            destination.thisPerson = thePerson;
+            [destination updateWithPerson:thePerson];
             destination.isNew = YES;
         } else {
             // Person present open it.
-            destination.thisPerson = thePerson;
+            [destination updateWithPerson:thePerson];
             destination.isNew = NO;
             [self.tableView deselectRowAtIndexPath:indexPathOfSelectedRow animated:YES];
         }

@@ -144,7 +144,7 @@ NSInteger const maxPageIndex = 1;
     
     UIStoryboard *storyboard = [UIStoryboard storyboardWithName:@"Main-Iphone" bundle:nil];
     _editTripTableViewController = [storyboard instantiateViewControllerWithIdentifier:@"MCEditTripViewController"];
-    _editTripTableViewController.eventModel = _eventModel;
+    [_editTripTableViewController updateEventModel:_eventModel];
     _editTripTableViewController.isEditingModel = _isEditingModel;
     _editTripTableViewController.index = 0;
     [self setDelegate:self];

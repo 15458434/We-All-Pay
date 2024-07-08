@@ -21,15 +21,17 @@
 @class MCTableEmptyMessage;
 
 __attribute__((objc_subclassing_restricted))
+NS_SWIFT_NAME(PeopleViewController)
 @interface MCEditTripViewController : UITableViewController <NSFetchedResultsControllerDelegate, UITextFieldDelegate>
 
 @property (nonatomic) BOOL isInitAsNew;
 
-@property (nonatomic, strong) MCEventModel *eventModel;
 @property (nonatomic, strong) MCToggleModel *isEditingModel;
 
 @property (nonatomic, readonly) BOOL didSomethingChange;
 
 @property (nonatomic) NSInteger index;
+
+- (void)updateEventModel:(MCEventModel *)eventModel;
 
 @end
