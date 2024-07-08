@@ -26,11 +26,12 @@ NS_SWIFT_NAME(PeopleViewController)
 
 @property (nonatomic) BOOL isInitAsNew;
 
-@property (nonatomic, strong) MCEventModel *eventModel;
 @property (nonatomic, strong) MCToggleModel *isEditingModel;
 
 @property (nonatomic, readonly) BOOL didSomethingChange;
 
 @property (nonatomic) NSInteger index;
+
+- (void)updateEventModel:(MCEventModel *)eventModel;
 
 @end

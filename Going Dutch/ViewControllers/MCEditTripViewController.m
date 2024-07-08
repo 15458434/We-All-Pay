@@ -26,6 +26,9 @@ static void * isEditingToggleContext = &isEditingToggleContext;
 
 @property (strong, nonatomic) MCTableEmptyMessage *emptyMessage;
 
+@property (nonatomic, strong) MCEventModel *eventModel;
+@property (nonatomic, strong) UITableViewDiffableDataSource *diffableDatasource;
+
 @property (weak, nonatomic) IBOutlet UITableViewHeaderFooterView *headerView;
 @property (weak, nonatomic) IBOutlet UITextField *eventNameTextField;
 @property (weak, nonatomic) IBOutlet UIButton *addPersonButton;
@@ -82,6 +85,9 @@ static void * isEditingToggleContext = &isEditingToggleContext;
             } completion:nil];
         }
     }
+}
+- (void)updateEventModel:(MCEventModel *)eventModel {
+    _eventModel = eventModel;
 }
 
 #pragma mark - UITextFieldDelegate
