@@ -21,6 +21,7 @@
 @class MCTableEmptyMessage;
 
 __attribute__((objc_subclassing_restricted))
+NS_SWIFT_NAME(PeopleViewController)
 @interface MCEditTripViewController : UITableViewController <NSFetchedResultsControllerDelegate, UITextFieldDelegate>
 
 @property (nonatomic) BOOL isInitAsNew;
