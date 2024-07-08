@@ -20,7 +20,13 @@ fileprivate let WeAllPayStoreModelName = "WeAllPayStore"
     
     private var container: NSPersistentContainer!
     
-    @objc var fetcher: ExchangeRateFetcher!
+    private var _fetcher: ExchangeRateFetcher!
+    @objc var fetcher: ExchangeRateFetcher {
+        if _fetcher == nil {
+            _fetcher = ExchangeRateFetcher()
+        }
+        return _fetcher
+    }
     
     @objc static let defaultStore = WeAllPayStoreController()
     
