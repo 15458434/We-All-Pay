@@ -71,6 +71,19 @@
     [[[self navigationController] presentingViewController] dismissViewControllerAnimated:YES completion:nil];
 }
 
+- (void)updateWithPerson:(MCPerson *)person {
+    __weak typeof(self) weakSelf = self;
+    [_model prepareForUseWithPerson:person andFetchedResultsControllerDelegate:self andChangeHandler:^(MCPerson * _Nonnull person) {
+        typeof(self) strongSelf = weakSelf;
+        NSParameterAssert(strongSelf);
+        
+        strongSelf.emailField.inputView = nil;
+        strongSelf.emailField.tintColor = UIColor.systemBlueColor;
+        strongSelf.emailTextInputReceiver.target = MCEmailTextInputProxyTargetValidator;
+        strongSelf.selectEmailAddressButton.hidden = person.emailAddress.count > 1 ? NO : YES;
+    }];
+}
+
 #pragma mark - NSFetchedResultsControllerDelegate
 
 - (void)controller:(NSFetchedResultsController *)controller didChangeObject:(id)anObject atIndexPath:(NSIndexPath *)indexPath forChangeType:(NSFetchedResultsChangeType)type newIndexPath:(NSIndexPath *)newIndexPath {
@@ -150,16 +163,6 @@
 - (void)viewDidLoad {
     [super viewDidLoad];
     
-    __weak typeof(self) weakSelf = self;
-    [_model prepareForUseWithPerson:_thisPerson andFetchedResultsControllerDelegate:self andChangeHandler:^(MCPerson * _Nonnull person) {
-        typeof(self) strongSelf = weakSelf;
-        NSParameterAssert(strongSelf);
-        
-        strongSelf.emailField.inputView = nil;
-        strongSelf.emailField.tintColor = UIColor.systemBlueColor;
-        strongSelf.emailTextInputReceiver.target = MCEmailTextInputProxyTargetValidator;
-        strongSelf.selectEmailAddressButton.hidden = person.emailAddress.count > 1 ? NO : YES;
-    }];
     _firstNameFieldValidator = [[MCNameTextInputValidator alloc] initWithModel:_model andTextField:_firstNameField andConfig:MCNameTextInputValidatorConfigFirstName];
     _familyNameFieldValidator = [[MCNameTextInputValidator alloc] initWithModel:_model andTextField:_lastNameField andConfig:MCNameTextInputValidatorConfigFamilyName];
     MCEmailTextInputValidator *validator = [[MCEmailTextInputValidator alloc] initWithTextField:_emailField andModel:_model];
