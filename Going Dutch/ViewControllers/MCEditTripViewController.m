@@ -27,7 +27,6 @@ static void * isEditingToggleContext = &isEditingToggleContext;
 @property (strong, nonatomic) MCTableEmptyMessage *emptyMessage;
 
 @property (nonatomic, strong) MCEventModel *eventModel;
-//@property (nonatomic, strong) UITableViewDiffableDataSource *diffableDatasource;
 
 @property (weak, nonatomic) IBOutlet UITableViewHeaderFooterView *headerView;
 @property (weak, nonatomic) IBOutlet UITextField *eventNameTextField;
@@ -237,14 +236,6 @@ static void * isEditingToggleContext = &isEditingToggleContext;
     
     [self startRespondingToStoreChangeNotifications];
     
-//    _diffableDatasource = [[UITableViewDiffableDataSource alloc] initWithTableView:self.tableView cellProvider:^UITableViewCell * _Nullable(UITableView * _Nonnull tableView, NSIndexPath * _Nonnull indexPath, id  _Nonnull itemIdentifier) {
-//        MCPersonTableViewCell *cell = [tableView dequeueReusableCellWithIdentifier:@"MCPersonTableViewCell"];
-//        MCPerson *person = [self.fetchedResultsController objectAtIndexPath:indexPath];
-//        [cell updatWithEvent:self.eventModel.event andPerson:person];
-//        
-//        return cell;
-//    }];
-//    
     // Make sure a tap in the background dismisses the keyboard as well.
     UITapGestureRecognizer *thatTickles = [[UITapGestureRecognizer alloc] initWithTarget:self action:@selector(tappedInTheBackground:)];
     thatTickles.cancelsTouchesInView = NO;
