@@ -177,7 +177,6 @@
 		38BEA796275F765800D05D8B /* Localizable.strings in Resources */ = {isa = PBXBuildFile; fileRef = 38BEA798275F765800D05D8B /* Localizable.strings */; };
 		38BEA79C275F783400D05D8B /* InfoPlist.strings in Resources */ = {isa = PBXBuildFile; fileRef = 38BEA79E275F783400D05D8B /* InfoPlist.strings */; };
 		38C1AD4726EE871D00E09E09 /* MCPaymentPresenceTableViewCell_iPhone.m in Sources */ = {isa = PBXBuildFile; fileRef = 38C1AD4626EE871D00E09E09 /* MCPaymentPresenceTableViewCell_iPhone.m */; };
-		38C3AB151CBCF3200011C10C /* ViewControllerProtocols.swift in Sources */ = {isa = PBXBuildFile; fileRef = 38C3AB141CBCF3200011C10C /* ViewControllerProtocols.swift */; };
 		38C44BCE23DEDEC900264BBB /* ScrollViewAdjusterToKeyboard.swift in Sources */ = {isa = PBXBuildFile; fileRef = 38C44BCD23DEDEC900264BBB /* ScrollViewAdjusterToKeyboard.swift */; };
 		38C700F21D8EC24100D785BB /* LaunchCounter.swift in Sources */ = {isa = PBXBuildFile; fileRef = 38C700F11D8EC24100D785BB /* LaunchCounter.swift */; };
 		38CB1BEA27995E960074769F /* main.swift in Sources */ = {isa = PBXBuildFile; fileRef = 38CB1BE927995E960074769F /* main.swift */; };
@@ -591,7 +590,6 @@
 		38BF97D6279D3B270033BF38 /* de */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = de; path = de.lproj/Localizable.strings; sourceTree = "<group>"; };
 		38C1AD4526EE871D00E09E09 /* MCPaymentPresenceTableViewCell_iPhone.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = MCPaymentPresenceTableViewCell_iPhone.h; sourceTree = "<group>"; };
 		38C1AD4626EE871D00E09E09 /* MCPaymentPresenceTableViewCell_iPhone.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = MCPaymentPresenceTableViewCell_iPhone.m; sourceTree = "<group>"; };
-		38C3AB141CBCF3200011C10C /* ViewControllerProtocols.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ViewControllerProtocols.swift; sourceTree = "<group>"; };
 		38C44BCD23DEDEC900264BBB /* ScrollViewAdjusterToKeyboard.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ScrollViewAdjusterToKeyboard.swift; sourceTree = "<group>"; };
 		38C700F11D8EC24100D785BB /* LaunchCounter.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = LaunchCounter.swift; sourceTree = "<group>"; };
 		38C725031A2E082D003173E6 /* Who is paying next.entitlements */ = {isa = PBXFileReference; lastKnownFileType = text.xml; path = "Who is paying next.entitlements"; sourceTree = "<group>"; };
@@ -1402,7 +1400,6 @@
 				380700A01A16283500C7FB37 /* MCIndexProtocol.h */,
 				385F6AE12747CFBF009ED08D /* PaymentStateModelProtocol.swift */,
 				38358D4C274D0E9E00EA5177 /* MCPathComponentsToOpenProtocol.h */,
-				38C3AB141CBCF3200011C10C /* ViewControllerProtocols.swift */,
 			);
 			name = "ViewController Protocols";
 			sourceTree = "<group>";
@@ -2282,7 +2279,6 @@
 				3892E3A417903EF00038894B /* MCEditTripViewController.m in Sources */,
 				38DB85D417E45BCA006237CF /* MCPayment+addons.m in Sources */,
 				3868780623721751003D40A9 /* EmailTextInputValidator.swift in Sources */,
-				38C3AB151CBCF3200011C10C /* ViewControllerProtocols.swift in Sources */,
 				387E79CF26F48EDC00C2A424 /* MCPurchaseTableViewCell.m in Sources */,
 				38D177131C3A85C00084604C /* SelectCurrencyTableViewController.swift in Sources */,
 				3813150926CBA1BA00C27CBB /* MCNotificationsCountTableViewCell.m in Sources */,
