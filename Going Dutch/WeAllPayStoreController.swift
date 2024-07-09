@@ -56,6 +56,7 @@ fileprivate let WeAllPayStoreModelName = "WeAllPayStore"
             let storeDescription = NSPersistentStoreDescription(url: weAllPayStoreURL)
             storeDescription.type = NSInMemoryStoreType
             storeDescription.setOption(NSNumber(value: true), forKey: NSPersistentStoreRemoteChangeNotificationPostOptionKey)
+            storeDescription.setOption(true as NSNumber, forKey: NSPersistentHistoryTrackingKey)
             container.persistentStoreDescriptions = [storeDescription]
             container.loadPersistentStores { storeDescription, error in
                 guard error == nil else {
@@ -80,6 +81,8 @@ fileprivate let WeAllPayStoreModelName = "WeAllPayStore"
             storeDescription.setOption(NSNumber(value: true), forKey: NSPersistentStoreRemoteChangeNotificationPostOptionKey)
             storeDescription.setOption(NSNumber(value: true), forKey: NSInferMappingModelAutomaticallyOption)
             storeDescription.setOption(NSNumber(value: true), forKey: NSMigratePersistentStoresAutomaticallyOption)
+            // NSPersistentHistoryTrackingKey is needed to Core Data to be able to store on iPadOS. Test on iPad Pro 13-inch (M4) (17.5) Simulator.
+            storeDescription.setOption(NSNumber(value: true), forKey: NSPersistentHistoryTrackingKey)
             container.persistentStoreDescriptions = [storeDescription]
             container.loadPersistentStores { storeDescription, error in
                 guard error == nil else {
