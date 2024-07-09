@@ -546,10 +546,10 @@
             </objects>
             <point key="canvasLocation" x="5267" y="1309"/>
         </scene>
-        <!--Payment Navigation Controller-->
+        <!--Navigation Controller-->
         <scene sceneID="gXJ-3f-jQp">
             <objects>
-                <navigationController storyboardIdentifier="navPaymentViewController" automaticallyAdjustsScrollViewInsets="NO" modalPresentationStyle="formSheet" useStoryboardIdentifierAsRestorationIdentifier="YES" id="cne-yA-g1T" customClass="MCPaymentNavigationController" sceneMemberID="viewController">
+                <navigationController storyboardIdentifier="navPaymentViewController" automaticallyAdjustsScrollViewInsets="NO" modalPresentationStyle="formSheet" useStoryboardIdentifierAsRestorationIdentifier="YES" id="cne-yA-g1T" sceneMemberID="viewController">
                     <toolbarItems/>
                     <modalFormSheetSimulatedSizeMetrics key="simulatedDestinationMetrics"/>
                     <navigationBar key="navigationBar" contentMode="scaleToFill" id="7qy-YH-jij">

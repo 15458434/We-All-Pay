@@ -138,26 +138,22 @@ class SelectCurrencyTableViewController: UITableViewController, UISearchResultsU
         let myPresenter = self.presentingViewController
         
         let thisCellsCurrency = data(indexPath: indexPath)
-        
-        if let target: PaymentStateModelProtocol = self.target(forAction: #selector(getter: PaymentStateModelProtocol.paymentStateModel), withSender: self) as? PaymentStateModelProtocol {
-            target.paymentStateModel.update(currency: thisCellsCurrency)
-        } else {
-            currencyUpdateModel.updateCurrency(with: thisCellsCurrency.code) { (error) in
-                guard error == nil else {
-                    Swift.debugPrint("Error fetching ExchangeRate: \(error!)")
 
-                    let title = NSLocalizedString("solution_view_alert_title_cannot_fetch_exchange_rates", value: "Unable to fetch exchange rates", comment: "itle message of an alert that pops up when fetching exchange rates is impossibl")
-                    let message = NSLocalizedString("solution_view_alert_message_cannot_fetch_exchange_rates", value: "Fetching exchange rates is not possible at this moment. Check your internet connection and/or hit solve to fetch all missing exchange rates at a later time", comment: "Message explaining what the user can do to refetch exchange rates")
-                    let dismissTitle = NSLocalizedString("solution_view_alert_action_dismiss_cannot_fetch_exchange_rates", value: "Dismiss", comment: "Button title of an alert view to tell the user We All Pay is unable to fetch exchange rates to calculation a solution.")
+        currencyUpdateModel.updateCurrency(with: thisCellsCurrency.code) { (error) in
+            guard error == nil else {
+                Swift.debugPrint("Error fetching ExchangeRate: \(error!)")
 
-                    let alertController = UIAlertController(title: title, message: message, preferredStyle: .alert)
-                    let dismissAction = UIAlertAction(title: dismissTitle, style: .cancel, handler: nil)
-                    alertController.addAction(dismissAction)
+                let title = NSLocalizedString("solution_view_alert_title_cannot_fetch_exchange_rates", value: "Unable to fetch exchange rates", comment: "itle message of an alert that pops up when fetching exchange rates is impossibl")
+                let message = NSLocalizedString("solution_view_alert_message_cannot_fetch_exchange_rates", value: "Fetching exchange rates is not possible at this moment. Check your internet connection and/or hit solve to fetch all missing exchange rates at a later time", comment: "Message explaining what the user can do to refetch exchange rates")
+                let dismissTitle = NSLocalizedString("solution_view_alert_action_dismiss_cannot_fetch_exchange_rates", value: "Dismiss", comment: "Button title of an alert view to tell the user We All Pay is unable to fetch exchange rates to calculation a solution.")
 
-                    myPresenter?.present(alertController, animated: true, completion: nil)
+                let alertController = UIAlertController(title: title, message: message, preferredStyle: .alert)
+                let dismissAction = UIAlertAction(title: dismissTitle, style: .cancel, handler: nil)
+                alertController.addAction(dismissAction)
 
-                    return
-                }
+                myPresenter?.present(alertController, animated: true, completion: nil)
+
+                return
             }
         }
         
@@ -268,65 +264,5 @@ extension SelectCurrencyTableViewController: UISearchBarDelegate {
         } else {
             return UIBarPosition.any
         }
-    }
-}
-
-@objc protocol CurrencyUpdateModel {
-    var currencyCode: String { get }
-    func updateCurrency(with code: String, with completion: @escaping ((_ error: Error?) -> Void))
-    var recentSelectedCurrencies: [MCCurrency] { get }
-}
-
-class EventUpdateCurrencyModel: NSObject, CurrencyUpdateModel {
-    let event: MCSharedBill
-    
-    @objc init(with event: MCSharedBill) {
-        self.event = event
-        super.init()
-    }
-    
-    // MARK: CurrencyUpdateModel
-    
-    var currencyCode: String {
-        return self.event.mainCurrency!.code!
-    }
-    
-    func updateCurrency(with code: String, with completion: @escaping ((Error?) -> Void)) {
-        self.event.updateMainCurrency(fromCode: code, withCompletion: completion)
-    }
-    
-    var recentSelectedCurrencies: [MCCurrency] {
-        return event.recentUsedForeignCurrencies(5) ?? [MCCurrency]()
-    }
-}
-
-class PaymentUpdateCurrencyModel: NSObject, CurrencyUpdateModel {
-    let payment: MCPayment
-    
-    @objc init(with payment: MCPayment) {
-        self.payment = payment
-        super.init()
-    }
-    
-    // MARK: CurrencyUpdateModel
-    
-    var currencyCode: String {
-        return self.payment.currency!.code!
-    }
-    
-    func updateCurrency(with code: String, with completion: @escaping ((Error?) -> Void)) {
-        let mainThreadContext = WeAllPayStoreController.defaultStore.viewContext
-        let newCurrency = MCCurrency(from: code, from: mainThreadContext)
-        let oldCurrency = payment.currency
-        payment.currency = newCurrency
-        if oldCurrency?.sharedBill?.count == 0 && oldCurrency?.payment?.count == 0 {
-            mainThreadContext.delete(oldCurrency!)
-        }
-        
-        payment.setNewCurrencyAndAutomaticallyUpdateExchangeRate(newCurrency, withCompletionHandler: completion)
-    }
-    
-    var recentSelectedCurrencies: [MCCurrency] {
-        return payment.onWhichBill!.recentUsedForeignCurrencies(5) ?? [MCCurrency]()
     }
 }

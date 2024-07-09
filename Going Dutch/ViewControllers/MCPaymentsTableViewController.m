@@ -319,13 +319,13 @@ static void * isEditingToggleContext = &isEditingToggleContext;
 
 - (void)prepareForSegue:(UIStoryboardSegue *)segue sender:(id)sender {
     if ([segue.identifier isEqualToString:@"openFirstPaymentWithoutPayer"]) {
-        MCPaymentNavigationController *navigationController = (MCPaymentNavigationController *)segue.destinationViewController;
+        UINavigationController *navigationController = (UINavigationController *)segue.destinationViewController;
         MCPaymentViewController *destination = (MCPaymentViewController *)navigationController.viewControllers[0];
         [destination prepareForUseWithPayment:_eventModel.firstPaymentWithoutAPayer];
         UINavigationController *navController = (UINavigationController *)segue.destinationViewController;
         navController.modalInPresentation = YES;
     } else if ([segue.identifier isEqualToString:@"openPaymentWithMissingData"]) {
-        MCPaymentNavigationController *navigationController = (MCPaymentNavigationController *)segue.destinationViewController;
+        UINavigationController *navigationController = (UINavigationController *)segue.destinationViewController;
         MCPaymentViewController *destination = (MCPaymentViewController *)navigationController.viewControllers[0];
         [destination prepareForUseWithPayment:_forOpenPaymentWithMissingDataForSegue];
         _forOpenPaymentWithMissingDataForSegue = nil;

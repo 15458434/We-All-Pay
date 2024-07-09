@@ -1739,10 +1739,10 @@
             </objects>
             <point key="canvasLocation" x="2332" y="1880"/>
         </scene>
-        <!--Payment Navigation Controller-->
+        <!--Navigation Controller-->
         <scene sceneID="kuh-rf-mIe">
             <objects>
-                <navigationController storyboardIdentifier="navPaymentViewController" automaticallyAdjustsScrollViewInsets="NO" useStoryboardIdentifierAsRestorationIdentifier="YES" id="R4f-Dn-Lh4" customClass="MCPaymentNavigationController" sceneMemberID="viewController">
+                <navigationController storyboardIdentifier="navPaymentViewController" automaticallyAdjustsScrollViewInsets="NO" useStoryboardIdentifierAsRestorationIdentifier="YES" id="R4f-Dn-Lh4" sceneMemberID="viewController">
                     <toolbarItems/>
                     <simulatedStatusBarMetrics key="simulatedStatusBarMetrics" statusBarStyle="lightContent"/>
                     <simulatedNavigationBarMetrics key="simulatedTopBarMetrics" barStyle="black" translucent="NO" prompted="NO"/>

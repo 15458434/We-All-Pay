@@ -363,7 +363,7 @@ static void * CurrencyContext = &CurrencyContext;
         _selectCurrencyTableViewController = ChildViewStatusIsOpened;
         UINavigationController *navController = (UINavigationController *)segue.destinationViewController;
         SelectCurrencyTableViewController *selectCurrencyViewController = (SelectCurrencyTableViewController *)navController.viewControllers.firstObject;
-        selectCurrencyViewController.currencyUpdateModel = [[PaymentUpdateCurrencyModel alloc] initWith:_model.payment];
+        selectCurrencyViewController.currencyUpdateModel = _model;
     }
     if ([segue.identifier isEqualToString:@"selectCategory"]) {
         UINavigationController *navigationController = (UINavigationController *)segue.destinationViewController;

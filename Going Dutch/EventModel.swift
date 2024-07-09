@@ -9,7 +9,7 @@
 import UIKit
 import Combine
 
-@objc(MCEventModel) final class EventModel: NSObject {
+@objc(MCEventModel) final class EventModel: NSObject, CurrencyUpdateModel {
     @objc dynamic var event: MCSharedBill!
     @objc dynamic var mainCurrencyFormatter: CurrencyFormatter!
     @objc var dateFormatter: DateFormatter!
@@ -156,6 +156,20 @@ import Combine
         if !bag.isEmpty {
             bag.removeAll(keepingCapacity: true)
         }
+    }
+    
+    // MARK: CurrencyUpdateModel
+    
+    var currencyCode: String {
+        return self.event.mainCurrency!.code!
+    }
+    
+    func updateCurrency(with code: String, with completion: @escaping ((Error?) -> Void)) {
+        self.event.updateMainCurrency(fromCode: code, withCompletion: completion)
+    }
+    
+    var recentSelectedCurrencies: [MCCurrency] {
+        return event.recentUsedForeignCurrencies(5) ?? [MCCurrency]()
     }
 
     // MARK: NSObject
