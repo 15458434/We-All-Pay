@@ -14,29 +14,6 @@ import Foundation
     var recentSelectedCurrencies: [MCCurrency] { get }
 }
 
-final class EventUpdateCurrencyModel: NSObject, CurrencyUpdateModel {
-    let event: MCSharedBill
-    
-    @objc init(with event: MCSharedBill) {
-        self.event = event
-        super.init()
-    }
-    
-    // MARK: CurrencyUpdateModel
-    
-    var currencyCode: String {
-        return self.event.mainCurrency!.code!
-    }
-    
-    func updateCurrency(with code: String, with completion: @escaping ((Error?) -> Void)) {
-        self.event.updateMainCurrency(fromCode: code, withCompletion: completion)
-    }
-    
-    var recentSelectedCurrencies: [MCCurrency] {
-        return event.recentUsedForeignCurrencies(5) ?? [MCCurrency]()
-    }
-}
-
 final class PaymentUpdateCurrencyModel: NSObject, CurrencyUpdateModel {
     let payment: MCPayment
     

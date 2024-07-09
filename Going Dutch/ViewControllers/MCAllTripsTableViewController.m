@@ -270,10 +270,10 @@ static void * notificationCountContext = &notificationCountContext;
         [destination prepareForUseWithEventModel:model];
         destination.currentView = MCSelectSharedBillTableView;
     } else if ([segue.identifier isEqualToString:@"selectMainCurrency"]) {
-        MCSharedBill *theBill = _model.fetchEventsController.fetchedObjects[_selectedIndexPathForAction.row];
+        MCSharedBill *event = _model.fetchEventsController.fetchedObjects[_selectedIndexPathForAction.row];
         UINavigationController *navController = (UINavigationController *)segue.destinationViewController;
         SelectCurrencyTableViewController *currencySelector = (SelectCurrencyTableViewController *)navController.viewControllers.firstObject;
-        currencySelector.currencyUpdateModel = [[EventUpdateCurrencyModel alloc] initWith:theBill];
+        currencySelector.currencyUpdateModel = [[MCEventModel alloc] initWithEvent:event];
     } else if ([segue.identifier isEqualToString:@"iScreenSegue"]) {
         UINavigationController *navigationController = (UINavigationController *)segue.destinationViewController;
         navigationController.modalPresentationStyle = UIModalPresentationCustom;
