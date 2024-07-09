@@ -223,6 +223,7 @@
 		38F2A1AC1ADCF7E100831D48 /* TodayViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 38F2A1AA1ADCF7E100831D48 /* TodayViewController.swift */; };
 		38F2A1AD1ADCF7E100831D48 /* WhoIsPayingNextTextLocalizer.swift in Sources */ = {isa = PBXBuildFile; fileRef = 38F2A1AB1ADCF7E100831D48 /* WhoIsPayingNextTextLocalizer.swift */; };
 		38F44CCB2364993400215B1C /* MoneyTextInputValidator.swift in Sources */ = {isa = PBXBuildFile; fileRef = 38F44CCA2364993400215B1C /* MoneyTextInputValidator.swift */; };
+		38F9B88A2C3D1AAE008BA7C9 /* CurrencyUpdateModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 38F9B8892C3D1AAE008BA7C9 /* CurrencyUpdateModel.swift */; };
 		38FE5A082346957100BBA722 /* SideMenuTransitioner.swift in Sources */ = {isa = PBXBuildFile; fileRef = 38FE5A072346957100BBA722 /* SideMenuTransitioner.swift */; };
 		6F6CEECF1E58A332ECA671AD /* Pods_We_all_pay.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = B48C96B2DFBD420A590C8093 /* Pods_We_all_pay.framework */; };
 /* End PBXBuildFile section */
@@ -668,6 +669,7 @@
 		38F2A1AB1ADCF7E100831D48 /* WhoIsPayingNextTextLocalizer.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = WhoIsPayingNextTextLocalizer.swift; sourceTree = "<group>"; };
 		38F44CCA2364993400215B1C /* MoneyTextInputValidator.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MoneyTextInputValidator.swift; sourceTree = "<group>"; };
 		38F7F9A91B2C4A120059DE51 /* CurrencyController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = CurrencyController.swift; path = "../Going Dutch/CurrencyController.swift"; sourceTree = "<group>"; };
+		38F9B8892C3D1AAE008BA7C9 /* CurrencyUpdateModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CurrencyUpdateModel.swift; sourceTree = "<group>"; };
 		38FE5A072346957100BBA722 /* SideMenuTransitioner.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SideMenuTransitioner.swift; sourceTree = "<group>"; };
 		3BB3BF0F9FF45FB3F9898605 /* Pods-We all pay.screenshots.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-We all pay.screenshots.xcconfig"; path = "Target Support Files/Pods-We all pay/Pods-We all pay.screenshots.xcconfig"; sourceTree = "<group>"; };
 		B48C96B2DFBD420A590C8093 /* Pods_We_all_pay.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_We_all_pay.framework; sourceTree = BUILT_PRODUCTS_DIR; };
@@ -1068,7 +1070,7 @@
 				380327FE269843E900744710 /* InfoScreenTable */,
 				3864147B269B173100590ABA /* Notifications */,
 				38D177101C3A5E640084604C /* SelectCategoryTableViewController.swift */,
-				38D177121C3A85C00084604C /* SelectCurrencyTableViewController.swift */,
+				38F9B8882C3D1A74008BA7C9 /* SelectCurrency */,
 				38E0C5E418E9B244005A3F17 /* iPad */,
 				38E0C5E218E9B22E005A3F17 /* iPhone */,
 				38C1956423C8C58A006255AE /* GenericViewController */,
@@ -1493,6 +1495,15 @@
 				38F44CCA2364993400215B1C /* MoneyTextInputValidator.swift */,
 			);
 			name = Payment;
+			sourceTree = "<group>";
+		};
+		38F9B8882C3D1A74008BA7C9 /* SelectCurrency */ = {
+			isa = PBXGroup;
+			children = (
+				38D177121C3A85C00084604C /* SelectCurrencyTableViewController.swift */,
+				38F9B8892C3D1AAE008BA7C9 /* CurrencyUpdateModel.swift */,
+			);
+			name = SelectCurrency;
 			sourceTree = "<group>";
 		};
 		38FBB4B7236C353700E30EE8 /* Person */ = {
@@ -2202,6 +2213,7 @@
 				389DE900197FB2BA00169645 /* MCSharedBill.m in Sources */,
 				38977E531B2A297E008484A4 /* SolutionTotalUsedTableViewCell.swift in Sources */,
 				38572AE7169D437B00969C62 /* MCAppDelegate.m in Sources */,
+				38F9B88A2C3D1AAE008BA7C9 /* CurrencyUpdateModel.swift in Sources */,
 				381C2C3A275A095D00CD82D2 /* SolutionModel.swift in Sources */,
 				38E36EEE1BBD7E820026ED7E /* MCTwoLabelsTitleView.swift in Sources */,
 				3814B495270C500000737A06 /* NavigationViewController.swift in Sources */,
