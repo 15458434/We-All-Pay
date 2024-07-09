@@ -370,7 +370,7 @@ final class PaymentViewController: MCGenericAdBannerTableViewController, AdBanne
         case let identifier where identifier == "openSelectCurrency_iPad":
             WeAllPayStoreController.defaultStore.beginUndoGroupWithoutRegistration()
             let destination = segue.destination as! SelectCurrencyTableViewController
-            destination.currencyUpdateModel = PaymentUpdateCurrencyModel(with: model.payment)
+            destination.currencyUpdateModel = self.model
             
             destination.dismissMe = {
                 destination.dismiss(animated: true, completion: {

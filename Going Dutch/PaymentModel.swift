@@ -11,7 +11,7 @@ import CurrencyConverter
 
 import FirebaseCrashlytics
 
-@objc(MCPaymentModel) @objcMembers public final class PaymentModel: NSObject {
+@objc(MCPaymentModel) @objcMembers public final class PaymentModel: NSObject, CurrencyUpdateModel {
     @objc private(set) var payment: MCPayment!
     private(set) var currencyFormatter: CurrencyFormatter!
     @objc private(set) dynamic var error: NSError?
@@ -107,6 +107,28 @@ import FirebaseCrashlytics
         let mutablePayment = payment.onWhichBill!.mutableSetValue(forKey: "payments")
         mutablePayment.add(payment!)
         payment.managedObjectContext!.undoManager!.endUndoGrouping()
+    }
+    
+    // MARK: CurrencyUpdateModel
+    
+    var currencyCode: String {
+        return self.payment.currency!.code!
+    }
+    
+    func updateCurrency(with code: String, with completion: @escaping ((Error?) -> Void)) {
+        let mainThreadContext = WeAllPayStoreController.defaultStore.viewContext
+        let newCurrency = MCCurrency(from: code, from: mainThreadContext)
+        let oldCurrency = payment.currency
+        payment.currency = newCurrency
+        if oldCurrency?.sharedBill?.count == 0 && oldCurrency?.payment?.count == 0 {
+            mainThreadContext.delete(oldCurrency!)
+        }
+        
+        payment.setNewCurrencyAndAutomaticallyUpdateExchangeRate(newCurrency, withCompletionHandler: completion)
+    }
+    
+    var recentSelectedCurrencies: [MCCurrency] {
+        return payment.onWhichBill!.recentUsedForeignCurrencies(5) ?? [MCCurrency]()
     }
     
     // MARK: NSObject

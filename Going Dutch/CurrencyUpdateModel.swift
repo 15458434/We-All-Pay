@@ -13,34 +13,3 @@ import Foundation
     func updateCurrency(with code: String, with completion: @escaping ((_ error: Error?) -> Void))
     var recentSelectedCurrencies: [MCCurrency] { get }
 }
-
-final class PaymentUpdateCurrencyModel: NSObject, CurrencyUpdateModel {
-    let payment: MCPayment
-    
-    @objc init(with payment: MCPayment) {
-        self.payment = payment
-        super.init()
-    }
-    
-    // MARK: CurrencyUpdateModel
-    
-    var currencyCode: String {
-        return self.payment.currency!.code!
-    }
-    
-    func updateCurrency(with code: String, with completion: @escaping ((Error?) -> Void)) {
-        let mainThreadContext = WeAllPayStoreController.defaultStore.viewContext
-        let newCurrency = MCCurrency(from: code, from: mainThreadContext)
-        let oldCurrency = payment.currency
-        payment.currency = newCurrency
-        if oldCurrency?.sharedBill?.count == 0 && oldCurrency?.payment?.count == 0 {
-            mainThreadContext.delete(oldCurrency!)
-        }
-        
-        payment.setNewCurrencyAndAutomaticallyUpdateExchangeRate(newCurrency, withCompletionHandler: completion)
-    }
-    
-    var recentSelectedCurrencies: [MCCurrency] {
-        return payment.onWhichBill!.recentUsedForeignCurrencies(5) ?? [MCCurrency]()
-    }
-}
