@@ -86,8 +86,6 @@
 		385F5311191C2D140012773D /* MCPersonAddonsTest.m in Sources */ = {isa = PBXBuildFile; fileRef = 3898F33D18F40CC100BFFC61 /* MCPersonAddonsTest.m */; };
 		385F5312191C2D140012773D /* MCSharedBillAddOnsTest.m in Sources */ = {isa = PBXBuildFile; fileRef = 3898F33B18F40B9D00BFFC61 /* MCSharedBillAddOnsTest.m */; };
 		385F5313191C2D140012773D /* WeAllPayStoreTests.m in Sources */ = {isa = PBXBuildFile; fileRef = 38D785FC18DC53C30074B670 /* WeAllPayStoreTests.m */; };
-		385F6AE22747CFBF009ED08D /* PaymentStateModelProtocol.swift in Sources */ = {isa = PBXBuildFile; fileRef = 385F6AE12747CFBF009ED08D /* PaymentStateModelProtocol.swift */; };
-		385F6AE62747E45B009ED08D /* PaymentNavigationController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 385F6AE52747E45B009ED08D /* PaymentNavigationController.swift */; };
 		3860575019EE963600BD5B78 /* categoryPictures.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 3860574F19EE963600BD5B78 /* categoryPictures.xcassets */; };
 		3860575519EEB28300BD5B78 /* MCCategoryPictureStoreTest.m in Sources */ = {isa = PBXBuildFile; fileRef = 3860575419EEB28300BD5B78 /* MCCategoryPictureStoreTest.m */; };
 		3863148D235C6D8C00748B9F /* ScreenshotPopulationEngine.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3863148C235C6D8B00748B9F /* ScreenshotPopulationEngine.swift */; };
@@ -455,8 +453,6 @@
 		385F5303191C2C360012773D /* We all pay Tests-Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = "We all pay Tests-Info.plist"; sourceTree = "<group>"; };
 		385F5305191C2C360012773D /* en */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = en; path = en.lproj/InfoPlist.strings; sourceTree = "<group>"; };
 		385F5309191C2C360012773D /* We all pay Tests-Prefix.pch */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = "We all pay Tests-Prefix.pch"; sourceTree = "<group>"; };
-		385F6AE12747CFBF009ED08D /* PaymentStateModelProtocol.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PaymentStateModelProtocol.swift; sourceTree = "<group>"; };
-		385F6AE52747E45B009ED08D /* PaymentNavigationController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PaymentNavigationController.swift; sourceTree = "<group>"; };
 		3860574419EE904B00BD5B78 /* WeAllPayStore 4.xcdatamodel */ = {isa = PBXFileReference; lastKnownFileType = wrapper.xcdatamodel; path = "WeAllPayStore 4.xcdatamodel"; sourceTree = "<group>"; };
 		3860574F19EE963600BD5B78 /* categoryPictures.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = categoryPictures.xcassets; sourceTree = "<group>"; };
 		3860575419EEB28300BD5B78 /* MCCategoryPictureStoreTest.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = MCCategoryPictureStoreTest.m; sourceTree = "<group>"; };
@@ -1335,7 +1331,6 @@
 				38F2370526D012E300A22F9E /* AdBanner */,
 				3890963C26B2E23100B0EF37 /* EmptyMessage */,
 				3814B494270C500000737A06 /* NavigationViewController.swift */,
-				385F6AE52747E45B009ED08D /* PaymentNavigationController.swift */,
 			);
 			name = GenericViewController;
 			sourceTree = "<group>";
@@ -1400,7 +1395,6 @@
 				382F9BD118F7285400818276 /* MCDismissMeBlockProtocol.h */,
 				3801881A1938D8E70085A5AE /* MCDismissKeyboardProtocol.h */,
 				380700A01A16283500C7FB37 /* MCIndexProtocol.h */,
-				385F6AE12747CFBF009ED08D /* PaymentStateModelProtocol.swift */,
 				38358D4C274D0E9E00EA5177 /* MCPathComponentsToOpenProtocol.h */,
 			);
 			name = "ViewController Protocols";
@@ -2283,7 +2277,6 @@
 				383E0C5D186737EB00AA688D /* MCSharedBillPageViewController.m in Sources */,
 				381179D01A82D1FC00020538 /* MailComposer.swift in Sources */,
 				38B08C591B383A4C00FB84B1 /* MCStoreInterface.swift in Sources */,
-				385F6AE22747CFBF009ED08D /* PaymentStateModelProtocol.swift in Sources */,
 				38ACC5A3236B1FAE000BDEEC /* PaymentModel.swift in Sources */,
 				381275FF1BBD84650004C8C2 /* InfoScreenTableViewController.swift in Sources */,
 				38C700F21D8EC24100D785BB /* LaunchCounter.swift in Sources */,
@@ -2310,7 +2303,6 @@
 				385295CF1C10583E0081894D /* CategoryPictureObject.swift in Sources */,
 				38D6A3E81C73E04300968BB2 /* UIViewControllerRateMeControllerExtension.swift in Sources */,
 				389C2F56193391E300BB9F3E /* MCPaymentPresenceEntityMigrationPolicy.m in Sources */,
-				385F6AE62747E45B009ED08D /* PaymentNavigationController.swift in Sources */,
 				38B7E9521D86F8F600400E72 /* ContactsDataReceiver.swift in Sources */,
 				3812760C1BBE74EF0004C8C2 /* UIViewControllerExtension.swift in Sources */,
 				38D6A3E61C73DF2600968BB2 /* RateMeControllerExtension.swift in Sources */,

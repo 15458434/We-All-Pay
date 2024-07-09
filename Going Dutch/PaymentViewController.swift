@@ -26,7 +26,7 @@ enum CancelButtonPressed {
     case notPressed, isPressed
 }
 
-final class PaymentViewController: MCGenericAdBannerTableViewController, AdBannerEngineDelegate, MCDismissKeyboardProtocol, MCPathComponentsToOpenProtocol, UITextFieldDelegate, NSFetchedResultsControllerDelegate, PaymentStateModelProtocol {
+final class PaymentViewController: MCGenericAdBannerTableViewController, AdBannerEngineDelegate, MCDismissKeyboardProtocol, MCPathComponentsToOpenProtocol, UITextFieldDelegate, NSFetchedResultsControllerDelegate {
 
     // MARK: IB Outlet
     @IBOutlet weak var headerView: UITableViewHeaderFooterView!
@@ -194,12 +194,6 @@ final class PaymentViewController: MCGenericAdBannerTableViewController, AdBanne
     func controllerDidChangeContent(_ controller: NSFetchedResultsController<NSFetchRequestResult>) {
         debugPrint("controllerDidChangeContent")
         tableView.endUpdates()
-    }
-    
-    // MARK: PaymentStateModelProtocol
-    
-    @objc var paymentStateModel: PaymentModel {
-        return self.model
     }
     
     // MARK: AdBannerEngineDelegate
