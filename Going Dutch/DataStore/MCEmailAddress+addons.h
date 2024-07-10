@@ -10,10 +10,8 @@
 
 @interface MCEmailAddress (addons)
 
-+ (MCEmailAddress *)addEmailAddressFor:(MCPerson *)person;
-+ (void)deleteEmailAddress:(MCEmailAddress *)eAddress;
-
-+ (MCEmailAddress *)fetchEmailAddressFor:(MCPerson *)person;
++ (MCEmailAddress *)addEmailAddressFor:(MCPerson *)person __deprecated;
++ (void)deleteEmailAddress:(MCEmailAddress *)eAddress __deprecated;
 
 
 @end

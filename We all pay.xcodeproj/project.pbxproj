@@ -61,6 +61,7 @@
 		382E797A26B845B200A0D1C1 /* MCBorderLineView.h in Headers */ = {isa = PBXBuildFile; fileRef = 38494B4226A735F400F10C64 /* MCBorderLineView.h */; settings = {ATTRIBUTES = (Public, ); }; };
 		382E797B26B8464A00A0D1C1 /* CircularImageView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3813D8941D8983C900E6B7A4 /* CircularImageView.swift */; };
 		382E7BDD17E5E57500A1040A /* MCReturnPaymentViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 382E7BDC17E5E57500A1040A /* MCReturnPaymentViewController.m */; };
+		382F33C52C3E74FA007DDF71 /* WeAllPayStore.xcdatamodeld in Sources */ = {isa = PBXBuildFile; fileRef = 3829AD0D178B41320025969D /* WeAllPayStore.xcdatamodeld */; };
 		3830F6F6179872B400904FAF /* MCPaymentViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 3830F6F5179872B400904FAF /* MCPaymentViewController.m */; };
 		3835EBF92115C40900E2BC3F /* Settings.bundle in Resources */ = {isa = PBXBuildFile; fileRef = 3835EBF82115C40900E2BC3F /* Settings.bundle */; };
 		38370CF51A40DBC300B56460 /* MainInterface.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 38370CF71A40DBC300B56460 /* MainInterface.storyboard */; };
@@ -380,7 +381,6 @@
 		380FB70C26D6B86600B46038 /* CoreGraphics.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = CoreGraphics.framework; path = System/Library/Frameworks/CoreGraphics.framework; sourceTree = SDKROOT; };
 		380FB70F26D6B88100B46038 /* StoreKit.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = StoreKit.framework; path = System/Library/Frameworks/StoreKit.framework; sourceTree = SDKROOT; };
 		380FB71126D6B88F00B46038 /* UIKit.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = UIKit.framework; path = System/Library/Frameworks/UIKit.framework; sourceTree = SDKROOT; };
-		381179CE1A82D1FC00020538 /* We all pay Tests-Bridging-Header.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; name = "We all pay Tests-Bridging-Header.h"; path = "../Going Dutch/We all pay Tests-Bridging-Header.h"; sourceTree = "<group>"; };
 		381179CF1A82D1FC00020538 /* MailComposer.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = MailComposer.swift; sourceTree = "<group>"; };
 		381275FE1BBD84650004C8C2 /* InfoScreenTableViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = InfoScreenTableViewController.swift; sourceTree = "<group>"; };
 		381276011BBD8F120004C8C2 /* nl */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = nl; path = nl.lproj/InfoPlist.strings; sourceTree = "<group>"; };
@@ -1088,7 +1088,6 @@
 		385F5301191C2C360012773D /* We all pay Tests */ = {
 			isa = PBXGroup;
 			children = (
-				381179CE1A82D1FC00020538 /* We all pay Tests-Bridging-Header.h */,
 				3860575419EEB28300BD5B78 /* MCCategoryPictureStoreTest.m */,
 				389DE90F197FD6DF00169645 /* MCCurrencyTest.m */,
 				389DE908197FC5E900169645 /* MCExchangeRateTest.m */,
@@ -2323,6 +2322,7 @@
 				385F5310191C2D140012773D /* MCPaymentAddonsTest.m in Sources */,
 				38D34D07279FE3F5004AA290 /* SolutionReturnPaymentItem.swift in Sources */,
 				385F5311191C2D140012773D /* MCPersonAddonsTest.m in Sources */,
+				382F33C52C3E74FA007DDF71 /* WeAllPayStore.xcdatamodeld in Sources */,
 				389DE910197FD6DF00169645 /* MCCurrencyTest.m in Sources */,
 				388A326E1C10965D00F7459C /* CategoryPictureObject.swift in Sources */,
 				388A326F1C10966000F7459C /* CategoryPictureStoreController.swift in Sources */,
@@ -3324,7 +3324,7 @@
 				SUPPORTS_MACCATALYST = NO;
 				SUPPORTS_MAC_DESIGNED_FOR_IPHONE_IPAD = NO;
 				SUPPORTS_XR_DESIGNED_FOR_IPHONE_IPAD = NO;
-				SWIFT_OBJC_BRIDGING_HEADER = "Going Dutch/We all pay Tests-Bridging-Header.h";
+				SWIFT_OBJC_BRIDGING_HEADER = "Going Dutch/We-all-pay-Bridging-Header.h";
 				SWIFT_OPTIMIZATION_LEVEL = "-Onone";
 				SWIFT_SWIFT3_OBJC_INFERENCE = Default;
 				SWIFT_VERSION = 5.0;
@@ -3376,7 +3376,7 @@
 				SUPPORTS_MACCATALYST = NO;
 				SUPPORTS_MAC_DESIGNED_FOR_IPHONE_IPAD = NO;
 				SUPPORTS_XR_DESIGNED_FOR_IPHONE_IPAD = NO;
-				SWIFT_OBJC_BRIDGING_HEADER = "Going Dutch/We all pay Tests-Bridging-Header.h";
+				SWIFT_OBJC_BRIDGING_HEADER = "Going Dutch/We-all-pay-Bridging-Header.h";
 				SWIFT_SWIFT3_OBJC_INFERENCE = Default;
 				SWIFT_VERSION = 5.0;
 				TARGETED_DEVICE_FAMILY = "1,2";
@@ -3556,7 +3556,7 @@
 				SUPPORTS_MACCATALYST = NO;
 				SUPPORTS_MAC_DESIGNED_FOR_IPHONE_IPAD = NO;
 				SUPPORTS_XR_DESIGNED_FOR_IPHONE_IPAD = NO;
-				SWIFT_OBJC_BRIDGING_HEADER = "Going Dutch/We all pay Tests-Bridging-Header.h";
+				SWIFT_OBJC_BRIDGING_HEADER = "Going Dutch/We-all-pay-Bridging-Header.h";
 				SWIFT_OPTIMIZATION_LEVEL = "-Onone";
 				SWIFT_SWIFT3_OBJC_INFERENCE = Default;
 				SWIFT_VERSION = 5.0;
@@ -4894,7 +4894,7 @@
 				SUPPORTS_MACCATALYST = NO;
 				SUPPORTS_MAC_DESIGNED_FOR_IPHONE_IPAD = NO;
 				SUPPORTS_XR_DESIGNED_FOR_IPHONE_IPAD = NO;
-				SWIFT_OBJC_BRIDGING_HEADER = "Going Dutch/We all pay Tests-Bridging-Header.h";
+				SWIFT_OBJC_BRIDGING_HEADER = "Going Dutch/We-all-pay-Bridging-Header.h";
 				SWIFT_OPTIMIZATION_LEVEL = "-Onone";
 				SWIFT_SWIFT3_OBJC_INFERENCE = Default;
 				SWIFT_VERSION = 5.0;
