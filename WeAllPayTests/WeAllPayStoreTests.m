@@ -6,32 +6,33 @@
 //  Copyright (c) 2014 Mark Cornelisse. All rights reserved.
 //
 
+#import <UIKit/UIKit.h>
 #import <XCTest/XCTest.h>
 
-#import "MCWeAllPayStoreController.h"
 #import "MCPerson+addons.h"
 #import "MCPayment+addons.h"
 #import "MCSharedBill+addons.h"
-#import "MCEmailAddress+addons.h"
+#import "MCEmailAddress+CoreDataProperties.h"
 
 #import "We_all_pay_Tests-Swift.h"
 
 @interface WeAllPayStoreTests : XCTestCase
-{
-    MCWeAllPayStoreController *mainController;
-    NSManagedObjectContext *context;
-}
+
+@property (nonatomic, strong) NSManagedObjectContext *context;
 
 @end
 
 @implementation WeAllPayStoreTests
 
-- (void)setUp
-{
+- (void)setUp {
     [super setUp];
-    // Put setup code here. This method is called before the invocation of each test method in the class.
-    mainController = [MCWeAllPayStoreController defaultStore];
-    context = [[MCWeAllPayStoreController defaultStore] viewContext];
+    NSManagedObjectModel *managedObjectModel = [NSManagedObjectModel mergedModelFromBundles:nil];
+    NSPersistentStoreCoordinator *persistentStoreCoordinator = [[NSPersistentStoreCoordinator alloc] initWithManagedObjectModel:managedObjectModel];
+    NSError *error;
+    NSPersistentStore *persistentStore = [persistentStoreCoordinator addPersistentStoreWithType:NSInMemoryStoreType configuration:nil URL:nil options:nil error:&error];
+    XCTAssertTrue(persistentStore, @"Something went wrong opening the In Memory Store: %@", [error localizedDescription]);
+    _context = [[NSManagedObjectContext alloc] initWithConcurrencyType:NSMainQueueConcurrencyType];
+    _context.persistentStoreCoordinator = persistentStoreCoordinator;
 }
 
 - (void)tearDown
@@ -42,18 +43,18 @@
 
 - (void)testMCPersonAddonsGetName
 {
-    MCPerson *thisPerson = [MCPerson addPerson];
+    MCPerson *thisPerson = [[MCPerson alloc] initWithContext:_context];
     [thisPerson setFirstName:@"Connie"];
     [thisPerson setLastName:@"Carter"];
     [thisPerson addOneEmailAddressFromAString:@"connie@markcornelisse.nl"];
     XCTAssertTrue([[thisPerson getName] isEqualToString:@"Connie"], @"First name is not selected when it's available.");
     XCTAssertTrue([[thisPerson getFullName] isEqualToString:@"Connie Carter"]);
-    MCPerson *thisPersonWithMissingFirstName = [MCPerson addPerson];
+    MCPerson *thisPersonWithMissingFirstName = [[MCPerson alloc] initWithContext:_context];
     [thisPersonWithMissingFirstName setLastName:@"Carter"];
     [thisPersonWithMissingFirstName addOneEmailAddressFromAString:@"connie@markcornelisse.nl"];
     XCTAssertTrue([[thisPersonWithMissingFirstName getName] isEqualToString:@"Carter"], @"Last is not selected when first name is not available");
     XCTAssertTrue([[thisPersonWithMissingFirstName getFullName] isEqualToString:@"Carter"], @"Fullname is wrong when first name is missing.");
-    MCPerson *thisPersonWithMissingFirstAndLastName = [MCPerson addPerson];
+    MCPerson *thisPersonWithMissingFirstAndLastName = [[MCPerson alloc] initWithContext:_context];
     [thisPersonWithMissingFirstAndLastName addOneEmailAddressFromAString:@"connie@markcornelisse.nl"];
     XCTAssertTrue([[thisPersonWithMissingFirstAndLastName getName] isEqualToString:@"connie@markcornelisse.nl"], @"emailAddress is not selected when both first and lastname are not selected.");
     XCTAssertTrue([[thisPersonWithMissingFirstAndLastName getFullName] isEqualToString:@"connie@markcornelisse.nl"], @"emailAddress is not selected when both first and lastnames are not selected.");
@@ -61,7 +62,7 @@
 
 - (void)testPersonExistenceOnSharedBill
 {
-    MCSharedBill *sharedbill = [MCSharedBill addSharedBill];
+    MCSharedBill *sharedbill = [[MCSharedBill alloc] initWithContext:_context];
     MCPerson *mark = [sharedbill addPerson];
     [mark setFirstName:@"Mark"];
     [mark setLastName:@"Cornelisse"];
@@ -82,13 +83,13 @@
 
 - (void)testGetPeopleOnSharedBill
 {
-    MCSharedBill *tonightsBill = [MCSharedBill addSharedBill];
+    MCSharedBill *tonightsBill = [[MCSharedBill alloc] initWithContext:_context];
     MCEventModel *eventModel = [[MCEventModel alloc] initWithEvent:tonightsBill];
     NSArray *peoplePresentOnEvent = eventModel.peoplePresentOnEvent;
     XCTAssertTrue([peoplePresentOnEvent count] == 0, @"Aantal mensen op the shared Bill klopt niet.");
     MCPerson *thisPerson = [eventModel addPerson];
     [thisPerson setFirstName:@"Mark"];
-    peoplePresentOnEvent = [eventModel.peoplePresentOnEvent;
+    peoplePresentOnEvent = eventModel.peoplePresentOnEvent;
     XCTAssertTrue([peoplePresentOnEvent count] == 1, @"Aantal mensen op the shared Bill klopt niet.");
     MCPerson *thisPerson2 = [eventModel addPerson];
     [thisPerson2 setFirstName:@"Ilse"];
@@ -103,7 +104,7 @@
 
 - (void)testGetEmailaddressesFrom
 {
-    MCPerson *thisPerson = [MCPerson addPerson];
+    MCPerson *thisPerson = [[MCPerson alloc] initWithContext:_context];
     [thisPerson setFirstName:@"Mark"];
     [thisPerson setLastName:@"Cornelisse"];
     NSString *emailAddressMark = @"info@markcornelisse.nl";
@@ -115,9 +116,11 @@
     NSString *emailAddress3Mark = @"m.p.cornelisse@gmail.com";
     [thisPerson addNewDefaultEmailAddressFromAString:emailAddress3Mark];
     [thisPerson setNewDefaultEmailaddressObject:firstEmailAddressObject];
-    NSArray *theEmailAddressObjects = [[MCWeAllPayStoreController defaultStore] getEmailaddressesFrom:thisPerson];
+    MCPersonModel *personModel = [[MCPersonModel alloc] init];
+    [personModel prepareForUseWithPerson:thisPerson];
+    NSArray *theEmailAddressObjects = personModel.emailaddresses;
     XCTAssertTrue([theEmailAddressObjects count] == 3, @"The wrong amount of objects is present.");
-    [thisPerson deletAllEmailAddresses];
+    [personModel deleteAllEmailAddresses];
     [MCPerson deletePerson:thisPerson];
 }
 

@@ -7,32 +7,28 @@
 //
 
 #import <XCTest/XCTest.h>
-#import "MCWeAllPayStoreController.h"
 
 #import "MCExchangeRate+addons.h"
 
+#import "We_all_pay_Tests-Swift.h"
+
 @interface MCExchangeRateTest : XCTestCase
-{
-    MCWeAllPayStoreController *_mainController;
-    NSManagedObjectContext *_context;
-}
+
+@property (nonatomic, strong) NSManagedObjectContext *context;
 
 @end
 
 @implementation MCExchangeRateTest
 
-- (void)setUp
-{
+- (void)setUp {
     [super setUp];
-    // Put setup code here. This method is called before the invocation of each test method in the class.
     NSManagedObjectModel *managedObjectModel = [NSManagedObjectModel mergedModelFromBundles:nil];
     NSPersistentStoreCoordinator *persistentStoreCoordinator = [[NSPersistentStoreCoordinator alloc] initWithManagedObjectModel:managedObjectModel];
     NSError *error;
     NSPersistentStore *persistentStore = [persistentStoreCoordinator addPersistentStoreWithType:NSInMemoryStoreType configuration:nil URL:nil options:nil error:&error];
     XCTAssertTrue(persistentStore, @"Something went wrong opening the In Memory Store: %@", [error localizedDescription]);
-    _context = [[NSManagedObjectContext alloc] init];
-    [_context setPersistentStoreCoordinator:persistentStoreCoordinator];
-
+    _context = [[NSManagedObjectContext alloc] initWithConcurrencyType:NSMainQueueConcurrencyType];
+    _context.persistentStoreCoordinator = persistentStoreCoordinator;
 }
 
 - (void)tearDown
@@ -43,7 +39,7 @@
 
 - (void)testInsert
 {
-    MCExchangeRate *newlyInsertedExchangeRate = [MCExchangeRate addExchangeRateForContext:_context];
+    MCExchangeRate *newlyInsertedExchangeRate = [[MCExchangeRate alloc] initWithContext:_context];
     XCTAssertNotNil([newlyInsertedExchangeRate uniqueID], @"unique ID not present.");
     XCTAssertNotNil([newlyInsertedExchangeRate dateCreated], @"dateCreated not present.");
     XCTAssertNotNil([newlyInsertedExchangeRate dateModified], @"dateModified not present.");

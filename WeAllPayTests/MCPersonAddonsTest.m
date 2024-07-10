@@ -8,36 +8,31 @@
 
 #import <XCTest/XCTest.h>
 
-#import "MCWeAllPayStoreController.h"
 #import "MCSharedBill+addons.h"
 #import "MCPerson+addons.h"
-#import "MCEmailAddress+addons.h"
+#import "MCEmailAddress+CoreDataProperties.h"
 #import "MCPayment+addons.h"
 #import "MCExchangeRate+addons.h"
 #import "MCPaymentPresence+addons.h"
 
+#import "We_all_pay_Tests-Swift.h"
+
 @interface MCPersonAddonsTest : XCTestCase
-{
-    MCWeAllPayStoreController *mainController;
-}
 
 @property (nonatomic, strong) NSManagedObjectContext *context;
 @end
 
 @implementation MCPersonAddonsTest
 
-- (void)setUp
-{
+- (void)setUp {
     [super setUp];
-    // Put setup code here. This method is called before the invocation of each test method in the class.
     NSManagedObjectModel *managedObjectModel = [NSManagedObjectModel mergedModelFromBundles:nil];
     NSPersistentStoreCoordinator *persistentStoreCoordinator = [[NSPersistentStoreCoordinator alloc] initWithManagedObjectModel:managedObjectModel];
     NSError *error;
     NSPersistentStore *persistentStore = [persistentStoreCoordinator addPersistentStoreWithType:NSInMemoryStoreType configuration:nil URL:nil options:nil error:&error];
     XCTAssertTrue(persistentStore, @"Something went wrong opening the In Memory Store: %@", [error localizedDescription]);
     _context = [[NSManagedObjectContext alloc] initWithConcurrencyType:NSMainQueueConcurrencyType];
-    [_context setPersistentStoreCoordinator:persistentStoreCoordinator];
-}
+    _context.persistentStoreCoordinator = persistentStoreCoordinator;}
 
 - (void)tearDown
 {
@@ -47,7 +42,7 @@
 
 - (void)testMCPersonAddonsAddAndDeleteEmailAddress
 {
-    MCPerson *thisPerson = [MCPerson addPerson];
+    MCPerson *thisPerson = [[MCPerson alloc] initWithContext:_context];
     [thisPerson setFirstName:@"Mark"];
     [thisPerson setLastName:@"Cornelisse"];
     NSString *emailAddressMark = @"info@markcornelisse.nl";
@@ -73,12 +68,14 @@
     XCTAssertTrue(i == 1, @"Only one emailaddress should have be default.");
     XCTAssertTrue([[thisPerson emailAddress] count] == 3, @"All emailAddresses have been entered.");
     
-    MCEmailAddress *toBeDeletedEmailAddress = [thisPerson getDefaultEmailAddressObject];
-    [thisPerson deleteEmailAddress:toBeDeletedEmailAddress];
+    MCPersonModel *personModel = [[MCPersonModel alloc] init];
+    [personModel prepareForUseWithPerson:thisPerson];
+    MCEmailAddress *toBeDeletedEmailAddress = personModel.defaultEmailaddress;
+    [personModel deleteEmailAddress:toBeDeletedEmailAddress];
     XCTAssertTrue([[thisPerson emailAddress] count] == 2, @"Different amount of emailAddresses then expected.");
     XCTAssertTrue([thisPerson getDefaultEmailAddressObject], @"No new defaultEmailAddress present");
     //XCTAssertFalse([MCEmailAddress isTableInDatabaseEmpty], @"No emailAddresses left in the database.");
-    [thisPerson deletAllEmailAddresses];
+    [personModel deleteAllEmailAddresses];
     //XCTAssertTrue([MCEmailAddress isTableInDatabaseEmpty], @"Email addresses left in the database.");
     XCTAssertFalse([thisPerson isThereAnEmailAddress], @"There is an emailAddress present when two has been added.");
     
@@ -89,7 +86,7 @@
 
 - (void)testSetNewDefaultEmailaddressObject
 {
-    MCPerson *thisPerson = [MCPerson addPerson];
+    MCPerson *thisPerson = [[MCPerson alloc] initWithContext:_context];
     [thisPerson setFirstName:@"Mark"];
     [thisPerson setLastName:@"Cornelisse"];
     NSString *emailAddressMark = @"info@markcornelisse.nl";
@@ -109,7 +106,9 @@
     XCTAssertTrue([[thisPerson defaultEmailAddress] isEqualToString:emailAddress3Mark], @"addNewDefaultEmailAddress failes to set the right defaultEmailAddress");
     [thisPerson setNewDefaultEmailaddressObject:firstEmailAddressObject];
     XCTAssertTrue([[thisPerson defaultEmailAddress] isEqualToString:emailAddressMark], @"setNewDefaultEmailaddressObject failes to set the correct defaultEmailAddress");
-    [thisPerson deletAllEmailAddresses];
+    MCPersonModel *personModel = [[MCPersonModel alloc] init];
+    [personModel prepareForUseWithPerson:thisPerson];
+    [personModel deleteAllEmailAddresses];
     [MCPerson deletePerson:thisPerson];
 }
 

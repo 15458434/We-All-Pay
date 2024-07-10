@@ -85,12 +85,12 @@
     
     [self executeOnlyOnceDuringStartup];
 #ifdef SCREENSHOTS
-    [[MCWeAllPayStoreController defaultStore] openStore:^(MCWeAllPayStoreController *store, BOOL success) {
+    [[WeAllPayStoreController defaultStore] openStore:^(WeAllPayStoreController *store, BOOL success) {
         ScreenshotPopulationEngine *populator = [[ScreenshotPopulationEngine alloc] initWithManagedObjectContext:store.viewContext];
         [populator populate];
     }];
 #else
-    [[MCWeAllPayStoreController defaultStore] openStore];
+    [[WeAllPayStoreController defaultStore] openStore];
 #endif
     return YES;
 }
@@ -110,7 +110,7 @@
         taskIdentifier = UIBackgroundTaskInvalid;
     }];
     
-    NSManagedObjectContext *context = MCWeAllPayStoreController.defaultStore.viewContext;
+    NSManagedObjectContext *context = WeAllPayStoreController.defaultStore.viewContext;
     self.saveHandlerOnDidEnterBackground = [[MCCoreDataSaveHandlerWhenEnteringBackground alloc] initWithContext:context];
     [self.saveHandlerOnDidEnterBackground saveAndEndBackgroundTaskWithIdentifier:taskIdentifier];
 }
@@ -144,7 +144,7 @@
     NSString *nextPayerID = pathComponents[2];
     
     // Verify existense of tonightsBill
-    MCSharedBill *tonightsBill = [MCSharedBill fetchSharedBillWithUniqueId:billID inContext:[[MCWeAllPayStoreController defaultStore] viewContext] ];
+    MCSharedBill *tonightsBill = [MCSharedBill fetchSharedBillWithUniqueId:billID inContext:[[WeAllPayStoreController defaultStore] viewContext] ];
     if (!tonightsBill) {
         NSLog(@"Unable to open this event.");
         return NO;

@@ -8,10 +8,9 @@
 
 @import XCTest;
 
-#import "MCWeAllPayStoreController.h"
 #import "MCSharedBill+addons.h"
 #import "MCPerson+addons.h"
-#import "MCEmailAddress+addons.h"
+#import "MCEmailAddress+CoreDataProperties.h"
 #import "MCPayment+addons.h"
 #import "MCPaymentPresence+addons.h"
 #import "MCCurrency+addons.h"
@@ -21,25 +20,21 @@
 
 @interface MCSharedBillAddOnsTest : XCTestCase
 
-@property (nonatomic, strong) MCWeAllPayStoreController *mainController;
 @property (nonatomic, strong) NSManagedObjectContext *context;
 
 @end
 
 @implementation MCSharedBillAddOnsTest
 
-- (void)setUp
-{
+- (void)setUp {
     [super setUp];
-    // Put setup code here. This method is called before the invocation of each test method in the class.
-    
     NSManagedObjectModel *managedObjectModel = [NSManagedObjectModel mergedModelFromBundles:nil];
     NSPersistentStoreCoordinator *persistentStoreCoordinator = [[NSPersistentStoreCoordinator alloc] initWithManagedObjectModel:managedObjectModel];
     NSError *error;
     NSPersistentStore *persistentStore = [persistentStoreCoordinator addPersistentStoreWithType:NSInMemoryStoreType configuration:nil URL:nil options:nil error:&error];
     XCTAssertTrue(persistentStore, @"Something went wrong opening the In Memory Store: %@", [error localizedDescription]);
-    _context = [[NSManagedObjectContext alloc] init];
-    [_context setPersistentStoreCoordinator:persistentStoreCoordinator];
+    _context = [[NSManagedObjectContext alloc] initWithConcurrencyType:NSMainQueueConcurrencyType];
+    _context.persistentStoreCoordinator = persistentStoreCoordinator;
 }
 
 - (void)tearDown
@@ -51,7 +46,7 @@
 - (void)testMCSharedBillAddOns1
 {
 //    XCTAssertTrue([MCSharedBill isTableInDatabaseEmpty], @"There is a sharedBill present in the empty table?");
-    MCSharedBill *movie = [MCSharedBill addSharedBill];
+    MCSharedBill *movie = [[MCSharedBill alloc] initWithContext:_context];
     [movie setTripName:@"Movie"];
     XCTAssertFalse([movie areTherePeople], @"There are people on a new event?");
     MCPerson *markmovie = [movie addPerson];
@@ -116,7 +111,7 @@
 - (void)testToCheckIfEmailAddressesAreProperlyDeletedWhenDeletingASharedBill
 {
     // This test is to check to see the MCEmailAddressObjects which are of the people on the MCSharedBill are properly deleted.
-    MCSharedBill *movie = [MCSharedBill addSharedBill];
+    MCSharedBill *movie = [[MCSharedBill alloc] initWithContext:_context];
     [movie setTripName:@"Movie"];
     XCTAssertFalse([movie areTherePeople], @"There are people on a new event?");
     MCPerson *markmovie = [movie addPerson];
@@ -230,10 +225,10 @@
     [firstPayment setMoney:@32.00];
     [firstPayment setCurrency:currencyFirstPayment];
     [firstPayment recalculateAveragePeopleOweAndStore];
-    MCExchangeRate *usdToEur = [MCExchangeRate addExchangeRateForContext:_context];
-    [usdToEur setToCurrency:mainCurrency];
-    [usdToEur setFromCurrency:currencyFirstPayment];
-    [usdToEur setExchangeRate:@0.742];
+    MCExchangeRate *usdToEur = [[MCExchangeRate alloc] initWithContext:_context];
+    usdToEur.toCurrency = mainCurrency;
+    usdToEur.fromCurrency = currencyFirstPayment;
+    usdToEur.exchangeRate = @0.742;
     [firstPayment setExchangeRate:usdToEur];
     NSNumber *amountMiekeShouldPay = [tonightsBill amountShouldHavePaidBy:mieke];
     XCTAssertEqualWithAccuracy([@(32.00 * 0.742 / 3.0) doubleValue], [amountMiekeShouldPay doubleValue], 0.001, @"Mieke should pay something else?");
@@ -260,11 +255,11 @@
     [firstPayment setMoney:@30.0];
     [firstPayment setCurrency:currencyFirstPayment];
     [firstPayment recalculateAveragePeopleOweAndStore];
-    MCExchangeRate *usdToEur = [MCExchangeRate addExchangeRateForContext:_context];
-    [usdToEur setToCurrency:mainCurrency];
-    [usdToEur setFromCurrency:currencyFirstPayment];
-    [usdToEur setExchangeRate:@0.72];
-    [firstPayment setExchangeRate:usdToEur];
+    MCExchangeRate *usdToEur = [[MCExchangeRate alloc] initWithContext:_context];
+    usdToEur.toCurrency = mainCurrency;
+    usdToEur.fromCurrency = currencyFirstPayment;
+    usdToEur.exchangeRate = @0.72;
+    firstPayment.exchangeRate = usdToEur;
     NSArray *resultsWithOnlyOnePayment = [tonightsBill solveWhoHasToPayWhoFromThisBill];
     for (MCReturnPayment *rp in resultsWithOnlyOnePayment) {
         XCTAssertEqualWithAccuracy([[rp money] doubleValue], [@(30.0 * 0.72 / 3) doubleValue], 0.001, @"Basic split amount with conversion not ok.");
@@ -287,7 +282,7 @@
     MCPaymentPresence *miekesPaymentPresence = [arrayWithOnlyMiekesPaymentPresence firstObject];
     [miekesPaymentPresence setIsPersonPresent:@NO];
     [secondPayment recalculateAveragePeopleOweAndStore];
-    MCExchangeRate *gbpToEur = [MCExchangeRate addExchangeRateForContext:_context];
+    MCExchangeRate *gbpToEur = [[MCExchangeRate alloc] initWithContext:_context];
     [gbpToEur setToCurrency:mainCurrency];
     [gbpToEur setFromCurrency:currencySecondPayment];
     [gbpToEur setExchangeRate:@1.2625];
@@ -327,7 +322,7 @@
     [firstPayment setMoney:@30.0];
     [firstPayment setCurrency:currencyFirstPayment];
     [firstPayment recalculateAveragePeopleOweAndStore];
-    MCExchangeRate *usdToEur = [MCExchangeRate addExchangeRateForContext:_context];
+    MCExchangeRate *usdToEur = [[MCExchangeRate alloc] initWithContext:_context];
     [usdToEur setToCurrency:mainCurrency];
     [usdToEur setFromCurrency:currencyFirstPayment];
     [usdToEur setExchangeRate:@0.72];
@@ -354,7 +349,7 @@
     MCPaymentPresence *miekesPaymentPresence = [arrayWithOnlyMiekesPaymentPresence firstObject];
     [miekesPaymentPresence setIsPersonPresent:@NO];
     [secondPayment recalculateAveragePeopleOweAndStore];
-    MCExchangeRate *gbpToEur = [MCExchangeRate addExchangeRateForContext:_context];
+    MCExchangeRate *gbpToEur = [[MCExchangeRate alloc] initWithContext:_context];
     [gbpToEur setToCurrency:mainCurrency];
     [gbpToEur setFromCurrency:currencySecondPayment];
     gbpToEur.exchangeRate = nil;
@@ -394,7 +389,7 @@
 
 - (void)testAreAllExchangeRatesValid
 {
-    MCSharedBill *tonightsBill = [MCSharedBill addSharedBill];
+    MCSharedBill *tonightsBill = [[MCSharedBill alloc] initWithContext:_context];
     MCPerson *mark = [tonightsBill addPerson];
     mark.firstName = @"Mark";
     MCPerson *ilse = [tonightsBill addPerson];
@@ -415,7 +410,7 @@
 
 - (void)testFetchPeoplePresentOrderedByAmountPaid
 {
-    MCSharedBill *tonightsBill = [MCSharedBill addSharedBill];
+    MCSharedBill *tonightsBill = [[MCSharedBill alloc] initWithContext:_context];
     MCPerson *mark = [tonightsBill addPerson];
     mark.firstName = @"Mark";
     MCPerson *lieke = [tonightsBill addPerson];
@@ -443,7 +438,7 @@
 
 - (void)testFetchPersonWithID
 {
-    MCSharedBill *tonightsBill = [MCSharedBill addSharedBill];
+    MCSharedBill *tonightsBill = [[MCSharedBill alloc] initWithContext:_context];
     MCPerson *mark = [tonightsBill addPerson];
     mark.firstName = @"Mark";
     mark.lastName = @"Cornelisse";

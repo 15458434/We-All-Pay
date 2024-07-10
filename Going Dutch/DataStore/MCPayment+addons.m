@@ -21,19 +21,10 @@ NS_ASSUME_NONNULL_BEGIN
 
 @implementation MCPayment (addons)
 
-+ (MCPayment *)addPayment
-{
-    NSManagedObjectContext *context = [[MCWeAllPayStoreController defaultStore] viewContext];
-    return [MCPayment addPaymentInContext:context];
-}
-
 + (MCPayment *)addPaymentInContext:(NSManagedObjectContext *)context {
     BOOL isContextPresent = context ? YES : NO;
     [[FIRCrashlytics crashlytics] logWithFormat:@"isContextPresent: %@", @(isContextPresent)];
-    MCPayment *newPayment = [NSEntityDescription insertNewObjectForEntityForName:@"MCPayment" inManagedObjectContext:context];
-    newPayment.uniquePaymentId = [[NSUUID UUID] UUIDString];
-    newPayment.dateCreated = [NSDate date];
-    newPayment.dateModified = newPayment.dateCreated;
+    MCPayment *newPayment = [[MCPayment alloc] initWithContext:context];
     newPayment.currency = [MCCurrency generateCurrencyFromSelectedLocaleForContext:context];
     MCExchangeRate *exchangeRate = [newPayment addExchangeRate];
     exchangeRate.exchangeRate = @1;
@@ -49,7 +40,7 @@ NS_ASSUME_NONNULL_BEGIN
 
 + (MCPayment *)fetchPaymentWithUniqueId:(NSString *)uuid
 {
-    NSManagedObjectContext *context = [[MCWeAllPayStoreController defaultStore] viewContext];
+    NSManagedObjectContext *context = [[WeAllPayStoreController defaultStore] viewContext];
     return [MCPayment fetchPaymentWithUniqueId:uuid fromContext:context];
 }
 
@@ -73,7 +64,7 @@ NS_ASSUME_NONNULL_BEGIN
 
 + (BOOL)isTableInDatabaseEmpty
 {
-    NSManagedObjectContext *context = [[MCWeAllPayStoreController defaultStore] viewContext];
+    NSManagedObjectContext *context = [[WeAllPayStoreController defaultStore] viewContext];
     return [self isTableInDatabaseEmptyForContext:context];
 }
 
@@ -105,10 +96,9 @@ NS_ASSUME_NONNULL_BEGIN
     }
 }
 
-- (void)addPaymentPresenceFor:(MCPerson *)person
-{
+- (void)addPaymentPresenceFor:(MCPerson *)person {
     // When the App goes through an update cycle to version two for eacht payment the presences need to be added.
-    MCPaymentPresence *paymentPresence = [MCPaymentPresence addPaymentPresenceInContext:[self managedObjectContext]];
+    MCPaymentPresence *paymentPresence = [[MCPaymentPresence alloc] initWithContext:self.managedObjectContext];
     
     paymentPresence.person = person;
     [person addSharingPaymentObject:paymentPresence];
@@ -119,10 +109,9 @@ NS_ASSUME_NONNULL_BEGIN
     [self addPeopleSharingPaymentObject:paymentPresence];
 }
 
-- (void)addLateArrivalPaymentPresenceFor:(MCPerson *)person
-{
+- (void)addLateArrivalPaymentPresenceFor:(MCPerson *)person {
     // When someone arrives late and is added later to tonightsBill the presence of this person will be set to nil.
-    MCPaymentPresence *paymentPresence = [MCPaymentPresence addPaymentPresenceInContext:[self managedObjectContext]];
+    MCPaymentPresence *paymentPresence = [[MCPaymentPresence alloc] initWithContext:self.managedObjectContext];
     
     paymentPresence.person = person;
     [person addSharingPaymentObject:paymentPresence];
@@ -152,10 +141,10 @@ NS_ASSUME_NONNULL_BEGIN
 - (void)thisPerson:(MCPerson *)person setIsPresent:(NSNumber *)isPresent
 {
     MCPaymentPresence *thisPersonsPresence = [self fetchPaymentPresenceForPerson:person];
-    [[MCWeAllPayStoreController defaultStore] beginUndoGroupWithoutRegistration];
+    [[WeAllPayStoreController defaultStore] beginUndoGroupWithoutRegistration];
     [thisPersonsPresence setIsPersonPresent:isPresent];
     [self recalculateAveragePeopleOweAndStore];
-    [[MCWeAllPayStoreController defaultStore] endUndoGroupWithoutRegistration];
+    [[WeAllPayStoreController defaultStore] endUndoGroupWithoutRegistration];
 }
 
 - (NSNumber *)peoplePresentOnThisPayment
@@ -208,9 +197,8 @@ NS_ASSUME_NONNULL_BEGIN
     return @(moneyDouble * exchangeRateDouble);
 }
 
-- (MCExchangeRate *)addExchangeRate
-{
-    MCExchangeRate *new = [MCExchangeRate addExchangeRateForContext:[self managedObjectContext]];
+- (MCExchangeRate *)addExchangeRate {
+    MCExchangeRate *new = [[MCExchangeRate alloc] initWithContext:self.managedObjectContext];
     
     self.exchangeRate = new;
     new.payment = self;

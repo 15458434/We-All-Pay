@@ -120,6 +120,29 @@ import UIKit
         self.changeHandler?(self.person)
     }
     
+    @objc(deleteEmailAddress:) func delete(_ emailAddress: MCEmailAddress) {
+        if emailAddress.selected?.boolValue ?? false {
+            let newDefault = person.emailAddress?.first(where: { $0.selected == NSNumber(value: false)
+            })
+            newDefault?.selected = NSNumber(value: true)
+        } 
+        internalDelete(emailAddress)
+    }
+    
+    @objc(deleteAllEmailAddresses) func deleteAllEmailAddresses() {
+        self.emailaddresses.forEach { internalDelete($0) }
+    }
+    
+    private func internalDelete(_ emailAddress: MCEmailAddress) {
+        let owners = emailAddress.owner
+        emailAddress.owner = nil
+        if let emailAdresses = person.emailAddress {
+            let emailAddressesWithoutEmailAddress = emailAdresses.filter { $0.objectID != emailAddress.objectID }
+            person.emailAddress = emailAddressesWithoutEmailAddress
+        }
+        person.managedObjectContext?.delete(emailAddress)
+    }
+    
     func endUpdates() {
         person.sharedBill?.forEach({ event in
             let mutableSet = event.mutableSetValue(forKey: "peoplePresent")

@@ -21,9 +21,9 @@
     NSString *currencyCodeFromCurrentLocale = [[NSLocale currentLocale] objectForKey:NSLocaleCurrencyCode];
     // currencyCode from Current locale is necessary. Set the current locale for the simulator.
     NSParameterAssert(currencyCodeFromCurrentLocale);
-    NSString *currencyNameFromCurrentLocale = [[[MCWeAllPayStoreController defaultStore] fetcher] currencyController][currencyCodeFromCurrentLocale];
-    NSString *currencySymbolFromCurrentLocale = [[[[MCWeAllPayStoreController defaultStore] fetcher] currencyController] currencySymbol:currencyCodeFromCurrentLocale];
-    MCCurrency *newCurrency = [NSEntityDescription insertNewObjectForEntityForName:@"MCCurrency" inManagedObjectContext:context];
+    NSString *currencyNameFromCurrentLocale = [[[WeAllPayStoreController defaultStore] fetcher] currencyController][currencyCodeFromCurrentLocale];
+    NSString *currencySymbolFromCurrentLocale = [[[[WeAllPayStoreController defaultStore] fetcher] currencyController] currencySymbol:currencyCodeFromCurrentLocale];
+    MCCurrency *newCurrency = [[MCCurrency alloc] initWithContext:context];
     newCurrency.code = currencyCodeFromCurrentLocale;
     newCurrency.name = currencyNameFromCurrentLocale;
     newCurrency.symbol = currencySymbolFromCurrentLocale;
@@ -33,12 +33,8 @@
 
 + (MCCurrency *)currencyFrom:(NSString *)code fromContext:(NSManagedObjectContext *)context
 {
-    CurrencyController *currencyController = [[[MCWeAllPayStoreController defaultStore] fetcher] currencyController];
-    MCCurrency *newCurrency = [NSEntityDescription insertNewObjectForEntityForName:@"MCCurrency" inManagedObjectContext:context];
-    NSDate *now = [NSDate date];
-    newCurrency.dateCreated = now;
-    newCurrency.dateModified = now;
-    newCurrency.uniqueID = [[NSUUID UUID] UUIDString];
+    CurrencyController *currencyController = [[[WeAllPayStoreController defaultStore] fetcher] currencyController];
+    MCCurrency *newCurrency = [[MCCurrency alloc] initWithContext:context];
     newCurrency.name = currencyController[code];
     newCurrency.symbol = [currencyController currencySymbol:code];
     newCurrency.code = code;
@@ -49,18 +45,14 @@
 + (void)addAllAvailableCurrenciesToContext:(NSManagedObjectContext *)context
 {
     // TODO: Why is this only used for testing?
-    NSArray *currencies = [[[[MCWeAllPayStoreController defaultStore] fetcher] currencyController] currencies];
+    NSArray *currencies = [[[[WeAllPayStoreController defaultStore] fetcher] currencyController] currencies];
     for (NSDictionary *currency in currencies) {
         // For each currencyCode add it.
-        MCCurrency *newCurrency = [NSEntityDescription insertNewObjectForEntityForName:@"MCCurrency" inManagedObjectContext:context];
-        NSDate *now = [NSDate date];
-        newCurrency.uniqueID = [[NSUUID UUID] UUIDString];
-        newCurrency.dateCreated = now;
-        newCurrency.dateModified = now;
+        MCCurrency *newCurrency = [[MCCurrency alloc] initWithContext:context];
         newCurrency.isStillValid = @YES;
         newCurrency.name = currency[@"name"];
         newCurrency.code = currency[@"code"];
-        newCurrency.symbol = [[[[MCWeAllPayStoreController defaultStore] fetcher] currencyController] currencySymbol:currency[@"code"]];
+        newCurrency.symbol = [[[[WeAllPayStoreController defaultStore] fetcher] currencyController] currencySymbol:currency[@"code"]];
         NSLog(@"Generated MCCurrency: %@", newCurrency);
     }
 }
@@ -68,18 +60,5 @@
 - (BOOL)isEqualToMCCurrency:(MCCurrency *)object {
     return [self.code isEqualToString:object.code];
 }
-
-#pragma mark - NSManagedObject
-
-- (void)awakeFromInsert
-{
-    [super awakeFromInsert];
-    [self setPrimitiveValue:[[NSUUID UUID] UUIDString] forKey:@"uniqueID"];
-    NSDate *now = [NSDate date];
-    [self setPrimitiveValue:now forKey:@"dateCreated"];
-    [self setPrimitiveValue:now forKey:@"dateModified"];
-}
-
-#pragma mark - NSObject
 
 @end

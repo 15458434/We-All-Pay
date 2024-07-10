@@ -244,7 +244,7 @@ static void * isEditingToggleContext = &isEditingToggleContext;
         MCPayment *toBeDeletedPayment = [_fetchedResultsController objectAtIndexPath:indexPath];
         [_eventModel deletePayment:toBeDeletedPayment];
         [WhoPayingUserDefaultsStoreInterface sendToUserDefaultsStoreInterface:_eventModel.event];
-        [MCWeAllPayStoreController.defaultStore.viewContext processPendingChanges];
+        [WeAllPayStoreController.defaultStore.viewContext processPendingChanges];
     }
 }
 

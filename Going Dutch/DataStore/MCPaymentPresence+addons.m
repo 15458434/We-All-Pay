@@ -16,22 +16,6 @@
 
 @implementation MCPaymentPresence (addons)
 
-+ (MCPaymentPresence *)addPaymentPresence
-{
-    NSManagedObjectContext *context = [[MCWeAllPayStoreController defaultStore] viewContext];
-    return [MCPaymentPresence addPaymentPresenceInContext:context];
-}
-
-+ (MCPaymentPresence *)addPaymentPresenceInContext:(NSManagedObjectContext *)context
-{
-    MCPaymentPresence *newPaymentPresence = [NSEntityDescription insertNewObjectForEntityForName:@"MCPaymentPresence" inManagedObjectContext:context];
-    newPaymentPresence.uniqueId = [[NSUUID UUID] UUIDString];
-    NSDate *now = [NSDate date];
-    newPaymentPresence.dateCreated = now;
-    newPaymentPresence.dateModified = now;
-    return newPaymentPresence;
-}
-
 + (void)deletePaymentPresence:(MCPaymentPresence *)paymentPresence
 {
     [[paymentPresence managedObjectContext] deleteObject:paymentPresence];

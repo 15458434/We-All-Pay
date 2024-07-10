@@ -16,4 +16,16 @@
 
 @implementation MCPerson
 
+#pragma mark - NSManagedObject
+
+- (void)awakeFromInsert {
+    [super awakeFromInsert];
+    [self setPrimitiveValue:NSUUID.UUID.UUIDString forKey:@"uniquePersonId"];
+    NSDate *now = NSDate.date;
+    [self setPrimitiveValue:now forKey:@"dateCreated"];
+    [self setPrimitiveValue:now forKey:@"dateModified"];
+}
+
+#pragma mark - NSObject
+
 @end

@@ -9,7 +9,7 @@
 #import "MCPerson+addons.h"
 #import "MCPayment.h"
 #import "MCSharedBill.h"
-#import "MCEmailAddress+addons.h"
+#import "MCEmailAddress+CoreDataProperties.h"
 #import "We_all_pay-Swift.h"
 
 NS_ASSUME_NONNULL_BEGIN
@@ -18,23 +18,6 @@ NS_ASSUME_NONNULL_BEGIN
 
 #pragma mark - Core Data Mutations
 
-+ (MCPerson *)addPerson
-{
-    NSManagedObjectContext *context = [[MCWeAllPayStoreController defaultStore] viewContext];
-    return [MCPerson addPersonInContext:context];
-}
-
-+ (MCPerson *)addPersonInContext:(NSManagedObjectContext *)context
-{
-    MCPerson *newPerson;
-    newPerson = [NSEntityDescription insertNewObjectForEntityForName:@"MCPerson" inManagedObjectContext:context];
-    [newPerson setUniquePersonId:[[NSUUID UUID] UUIDString]];
-    NSDate *nu = [NSDate date];
-    [newPerson setDateCreated:nu];
-    [newPerson setDateModified:nu];
-    return newPerson;
-}
-
 + (void)deletePerson:(MCPerson *)delPerson
 {
     [[delPerson managedObjectContext] deleteObject:delPerson];
@@ -42,7 +25,7 @@ NS_ASSUME_NONNULL_BEGIN
 
 + (BOOL)isTableInDatabaseEmpty
 {
-    NSManagedObjectContext *context = [[MCWeAllPayStoreController defaultStore] viewContext];
+    NSManagedObjectContext *context = [[WeAllPayStoreController defaultStore] viewContext];
     return [MCPerson isTableInDatabaseEmptyForContext:context];
 }
 
@@ -114,9 +97,8 @@ NS_ASSUME_NONNULL_BEGIN
     }
 }
 
-- (void)addOneEmailAddressFromAString:(NSString *)emailAddressAsString
-{
-    NSFetchRequest *request = [NSFetchRequest fetchRequestWithEntityName:@"MCEmailAddress"];
+- (void)addOneEmailAddressFromAString:(NSString *)emailAddressAsString {
+    NSFetchRequest *request = [MCEmailAddress fetchRequest];
     request.sortDescriptors = @[[NSSortDescriptor sortDescriptorWithKey:@"emailAddress" ascending:YES]];
     request.predicate = [NSPredicate predicateWithFormat:@"emailAddress = %@ AND owner = %@", emailAddressAsString, self];
 
@@ -127,7 +109,11 @@ NS_ASSUME_NONNULL_BEGIN
     }
     MCEmailAddress *newEmailAddress;
     if (amountOfEqualEmailAddresses == 0) {
-        newEmailAddress = [MCEmailAddress addEmailAddressFor:self];
+        
+        newEmailAddress = [[MCEmailAddress alloc] initWithContext:self.managedObjectContext];
+        newEmailAddress.owner = self;
+        [self addEmailAddressObject:newEmailAddress];
+        
         if ([[self emailAddress] count] == 1) {
             [newEmailAddress setSelected:@YES];
         } else {
@@ -150,13 +136,22 @@ NS_ASSUME_NONNULL_BEGIN
 {
     MCEmailAddress *oldDefaultEmailAddress = [self getDefaultEmailAddressObject];
     if (oldDefaultEmailAddress) {
-        [oldDefaultEmailAddress setSelected:@NO];
-        [oldDefaultEmailAddress setDateModified:[NSDate date]];
+        oldDefaultEmailAddress.selected = @NO;
+        oldDefaultEmailAddress.dateModified = NSDate.date;
     }
-    MCEmailAddress *newEmailAddress = [MCEmailAddress addEmailAddressFor:self];
-    [newEmailAddress setEmailAddress:newEmailAddressString];
-    [newEmailAddress setSelected:@YES];
-    [self setDateModified:[NSDate date]];
+    MCEmailAddress *newEmailAddress = [self addEmailAddress];
+    newEmailAddress.emailAddress = newEmailAddressString;
+    newEmailAddress.selected = @YES;
+    
+    self.dateModified = NSDate.date;
+}
+
+
+- (MCEmailAddress *)addEmailAddress {
+    MCEmailAddress *new = [[MCEmailAddress alloc] initWithContext:self.managedObjectContext];
+    new.owner = self;
+    [self addEmailAddressObject:new];
+    return new;
 }
 
 - (nullable MCEmailAddress *)getDefaultEmailAddressObject
@@ -185,24 +180,6 @@ NS_ASSUME_NONNULL_BEGIN
     NSDate *now = [NSDate date];
     newDefaultEmailAddress.dateModified = now;
     currentDefaultEmailAddress.dateModified = now;
-}
-
-- (void)deleteEmailAddress:(MCEmailAddress *)eAddress
-{
-    if ([[eAddress selected] boolValue]) {
-        NSString *emailAddressString = [eAddress emailAddress];
-        [MCEmailAddress deleteEmailAddress:eAddress];
-        MCEmailAddress *newDefault;
-        for (MCEmailAddress *ea in [self emailAddress]) {
-            if (![[ea emailAddress] isEqualToString:emailAddressString]) {
-                newDefault = ea;
-                break;
-            }
-        }
-        [newDefault setSelected:@YES];
-    } else {
-        [MCEmailAddress deleteEmailAddress:eAddress];
-    }
 }
 
 - (void)addSharedBillObject:(MCSharedBill *)value
@@ -246,14 +223,6 @@ NS_ASSUME_NONNULL_BEGIN
         return YES;
     } else {
         return NO;
-    }
-}
-
-- (void)deletAllEmailAddresses
-{
-    NSSet *copyOfEmailAddresses = [[self emailAddress] copy];
-    for (MCEmailAddress *ea in copyOfEmailAddresses) {
-        [MCEmailAddress deleteEmailAddress:ea];
     }
 }
 

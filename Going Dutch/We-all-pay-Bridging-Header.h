@@ -13,7 +13,7 @@
 #import "MCCurrency+addons.h"
 #import "MCExchangeRate+addons.h"
 #import "MCPaymentPresence+addons.h"
-#import "MCEmailAddress+addons.h"
+#import "MCEmailAddress+CoreDataProperties.h"
 
 #pragma mark - Protocols
 #import "MCTonightsBillTransfer.h"

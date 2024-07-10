@@ -13,7 +13,7 @@
 
 - (void)startRespondingToStoreChangeNotifications
 {
-    NSManagedObjectContext *mainQueueContext = [[MCWeAllPayStoreController defaultStore] viewContext];
+    NSManagedObjectContext *mainQueueContext = [[WeAllPayStoreController defaultStore] viewContext];
     NSNotificationCenter *dc = [NSNotificationCenter defaultCenter];
     [dc addObserver:self selector:@selector(storeWillSave:) name:NSManagedObjectContextWillSaveNotification object:mainQueueContext];
     [dc addObserver:self selector:@selector(storeDidSave:) name:NSManagedObjectContextDidSaveNotification object:mainQueueContext];

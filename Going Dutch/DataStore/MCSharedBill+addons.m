@@ -10,7 +10,7 @@
 
 #import "MCSharedBill+addons.h"
 #import "MCPerson+addons.h"
-#import "MCEmailAddress+addons.h"
+#import "MCEmailAddress+CoreDataProperties.h"
 #import "MCPayment+addons.h"
 #import "MCPaymentPresence+addons.h"
 #import "MCCurrency+addons.h"
@@ -22,21 +22,9 @@
 
 #pragma mark - New in this class.
 
-+ (MCSharedBill *)addSharedBill
-{
-    NSManagedObjectContext *context = [[MCWeAllPayStoreController defaultStore] viewContext];
-    return [MCSharedBill addSharedBillToContext:context];
-}
-
 + (MCSharedBill *)addSharedBillToContext:(NSManagedObjectContext *)context
 {
     MCSharedBill *sharedBill = [NSEntityDescription insertNewObjectForEntityForName:@"MCSharedBill" inManagedObjectContext:context];
-    sharedBill.uniqueBillId = [[NSUUID UUID] UUIDString];
-    sharedBill.hasTheMailBeenSent = @NO;
-    NSDate *now = [NSDate date];
-    sharedBill.dateCreated = now;
-    sharedBill.dateModified = now;
-    sharedBill.mainCurrency = [MCCurrency generateCurrencyFromSelectedLocaleForContext:context];
     return sharedBill;
 }
 
@@ -92,7 +80,7 @@
 
 + (BOOL)isTableInDatabaseEmpty
 {
-    NSManagedObjectContext *context = [[MCWeAllPayStoreController defaultStore] viewContext];
+    NSManagedObjectContext *context = [[WeAllPayStoreController defaultStore] viewContext];
     return [self isTableInDatabaseEmptyForContext:context];
 }
 
@@ -123,7 +111,7 @@
 {
     MCPayment *payment = [MCPayment addPaymentInContext:self.managedObjectContext];
     for (MCPerson *person in [self peoplePresent]) {
-        MCPaymentPresence *paymentPresence = [MCPaymentPresence addPaymentPresenceInContext:self.managedObjectContext];
+        MCPaymentPresence *paymentPresence = [[MCPaymentPresence alloc] initWithContext:self.managedObjectContext];
         
         paymentPresence.payment = payment;
         [payment addPeopleSharingPaymentObject:paymentPresence];
@@ -175,7 +163,7 @@
     BOOL isContextPresent = context ? YES : NO;
     [[FIRCrashlytics crashlytics] logWithFormat:@"isContextPresent: %@", @(isContextPresent)];
     
-    MCPerson *newPerson = [MCPerson addPersonInContext:context];
+    MCPerson *newPerson = [[MCPerson alloc] initWithContext:self.managedObjectContext];
     for (MCPayment *payment in [self payments]) {
         // Presence of all the exisiting payments on this sharedBill will be created and set tot NO.
         [payment addLateArrivalPaymentPresenceFor:newPerson];
@@ -482,14 +470,14 @@
     for (MCExchangeRate *exchangeRate in arrayOfInvalidExchangeRatesOfThisSharedBill) {
         exchangeRate.status = [NSNumber numberWithShort:MCExchangeRateStatusFetching];
     }
-    [[[MCWeAllPayStoreController defaultStore] fetcher] fetchAll:arrayOfInvalidExchangeRatesOfThisSharedBill completionHandler:^(NSError *error) {
+    [[[WeAllPayStoreController defaultStore] fetcher] fetchAll:arrayOfInvalidExchangeRatesOfThisSharedBill completionHandler:^(NSError *error) {
         if (error) {
             NSLog(@"Something went wrong fetching exchangeRates.");
             completion(nil, error);
         }
         if ([self areAllExchangeRatesValid]) {
             NSError *saveError;
-            [[[MCWeAllPayStoreController defaultStore] viewContext] save:&saveError];
+            [[[WeAllPayStoreController defaultStore] viewContext] save:&saveError];
             completion([self solveWhoHasToPayWhoFromThisBill], saveError);
         } else {
             NSError *notAllExchangeRatesValidError = [NSError errorWithDomain:@"com.green.We_all_pay" code:1 userInfo:@{@"reason": @"Not all exchangeRates are valid after fetching exchangeRates"}];

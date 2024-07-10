@@ -8,12 +8,27 @@
 
 #import "MCPayment.h"
 #import "MCCurrency.h"
-#import "MCExchangeRate.h"
+#import "MCExchangeRate+CoreDataProperties.h"
 #import "MCPaymentPresence.h"
 #import "MCPerson.h"
 #import "MCSharedBill.h"
+#import "MCCurrency+addons.h"
+#import "MCPayment+addons.h"
 
 
 @implementation MCPayment
+
+#pragma mark - NSManagedObject
+
+- (void)awakeFromInsert {
+    [super awakeFromInsert];
+    
+    [self setPrimitiveValue:NSUUID.UUID.UUIDString forKey:@"uniquePaymentId"];
+    NSDate *now = NSDate.date;
+    [self setPrimitiveValue:now forKey:@"dateCreated"];
+    [self setPrimitiveValue:now forKey:@"dateModified"];
+}
+
+#pragma mark - NSObject
 
 @end

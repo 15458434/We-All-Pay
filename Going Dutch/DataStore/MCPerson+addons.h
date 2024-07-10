@@ -12,8 +12,6 @@ NS_ASSUME_NONNULL_BEGIN
 
 @interface MCPerson (addons)
 
-+ (MCPerson *)addPerson;
-+ (MCPerson *)addPersonInContext:(NSManagedObjectContext *)context;
 + (void)deletePerson:(MCPerson *)delPerson;
 
 + (BOOL)isTableInDatabaseEmpty;
@@ -28,8 +26,6 @@ NS_ASSUME_NONNULL_BEGIN
 - (void)addOneEmailAddressFromAString:(NSString *)emailAddressAsString;
 - (nullable MCEmailAddress *)getDefaultEmailAddressObject;
 - (void)setNewDefaultEmailaddressObject:(MCEmailAddress *)newDefaultEmailAddress;
-- (void)deleteEmailAddress:(MCEmailAddress *)eAddress;
-- (void)deletAllEmailAddresses;
 - (BOOL)isThereAnEmailAddress;
 - (BOOL)hasPersonMadePaymentWithInvalidExchangeRates;
 

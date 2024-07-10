@@ -14,7 +14,7 @@ fileprivate let WeAllPayStoreFileName = "persistentStore"
 fileprivate let WeAllPayStoreDirectoryName = "WeAllPayStore/StoreContent"
 fileprivate let WeAllPayStoreModelName = "WeAllPayStore"
 
-@objc(MCWeAllPayStoreController) final class WeAllPayStoreController: NSObject {
+final class WeAllPayStoreController: NSObject {
     
     @objc dynamic private(set) var error: NSError!
     

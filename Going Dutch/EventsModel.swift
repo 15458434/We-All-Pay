@@ -1,5 +1,5 @@
 //
-//  MCEventsModel.swift
+//  EventsModel.swift
 //  We all pay
 //
 //  Created by Mark Cornelisse on 23/11/2019.

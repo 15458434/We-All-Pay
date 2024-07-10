@@ -8,11 +8,10 @@
 
 #import <XCTest/XCTest.h>
 
-#import "MCWeAllPayStoreController.h"
 #import "MCSharedBill+addons.h"
 #import "MCPayment+addons.h"
 #import "MCPerson+addons.h"
-#import "MCEmailAddress+addons.h"
+#import "MCEmailAddress+CoreDataProperties.h"
 #import "MCCurrency+addons.h"
 #import "MCExchangeRate+addons.h"
 
@@ -20,25 +19,21 @@
 
 @interface MCPaymentAddonsTest : XCTestCase
 
-@property (nonatomic, strong) MCWeAllPayStoreController *mainController;
 @property (nonatomic, strong) NSManagedObjectContext *context;
 
 @end
 
 @implementation MCPaymentAddonsTest
 
-- (void)setUp
-{
+- (void)setUp {
     [super setUp];
-    // Put setup code here. This method is called before the invocation of each test method in the class.
-    
     NSManagedObjectModel *managedObjectModel = [NSManagedObjectModel mergedModelFromBundles:nil];
     NSPersistentStoreCoordinator *persistentStoreCoordinator = [[NSPersistentStoreCoordinator alloc] initWithManagedObjectModel:managedObjectModel];
     NSError *error;
     NSPersistentStore *persistentStore = [persistentStoreCoordinator addPersistentStoreWithType:NSInMemoryStoreType configuration:nil URL:nil options:nil error:&error];
     XCTAssertTrue(persistentStore, @"Something went wrong opening the In Memory Store: %@", [error localizedDescription]);
     _context = [[NSManagedObjectContext alloc] initWithConcurrencyType:NSMainQueueConcurrencyType];
-    [_context setPersistentStoreCoordinator:persistentStoreCoordinator];
+    _context.persistentStoreCoordinator = persistentStoreCoordinator;
 }
 
 - (void)tearDown
@@ -49,11 +44,11 @@
 
 - (void)testMCPaymentAddons
 {
-    MCPerson *thisPerson = [MCPerson addPerson];
+    MCPerson *thisPerson = [[MCPerson alloc] initWithContext:_context];
     [thisPerson setFirstName:@"Mark"];
     [thisPerson setLastName:@"Cornelisse"];
     [thisPerson addNewDefaultEmailAddressFromAString:@"support@markcornelisse.nl"];
-    MCPayment *thisPayment = [MCPayment addPayment];
+    MCPayment *thisPayment = [[MCPayment alloc] initWithContext:_context];
     [thisPayment setDescriptionOfPayment:@"Beer"];
     [thisPayment setMoney:@3.25];
     XCTAssertFalse([thisPayment hasPayer], @"PayerPresent");

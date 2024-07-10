@@ -10,8 +10,6 @@
 
 @interface MCPaymentPresence (addons)
 
-+ (MCPaymentPresence *)addPaymentPresence;
-+ (MCPaymentPresence *)addPaymentPresenceInContext:(NSManagedObjectContext *)context;
 + (void)deletePaymentPresence:(MCPaymentPresence *)paymentPresence;
 
 - (NSNumber *)getAverageOweFromPaymentInMainCurrency;

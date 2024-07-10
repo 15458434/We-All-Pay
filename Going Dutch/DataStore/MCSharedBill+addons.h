@@ -11,7 +11,6 @@
 
 @interface MCSharedBill (addons)
 
-+ (MCSharedBill *)addSharedBill;
 + (MCSharedBill *)addSharedBillToContext:(NSManagedObjectContext *)context;
 
 + (void)deleteSharedbill:(MCSharedBill *)deleteBill;

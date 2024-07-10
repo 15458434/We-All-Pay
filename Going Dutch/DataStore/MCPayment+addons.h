@@ -14,7 +14,6 @@ NS_ASSUME_NONNULL_BEGIN
 
 @interface MCPayment (addons)
 
-+ (MCPayment *)addPayment;
 + (MCPayment *)addPaymentInContext:(NSManagedObjectContext *)context;
 
 + (void)deletePayment:(MCPayment *)payment;

@@ -13,11 +13,6 @@
 
 @implementation MCExchangeRate (addons)
 
-+ (MCExchangeRate *)addExchangeRateForContext:(NSManagedObjectContext *)context
-{
-    return [NSEntityDescription insertNewObjectForEntityForName:@"MCExchangeRate" inManagedObjectContext:context];
-}
-
 - (void)fetchExchangeRate:(void (^)(NSError *))completionHandler
 {
     NSParameterAssert(completionHandler);
@@ -29,7 +24,7 @@
         completionHandler(nil);
         return;
     }
-    ExchangeRateFetcher *fetcher = [[MCWeAllPayStoreController defaultStore] fetcher];
+    ExchangeRateFetcher *fetcher = [[WeAllPayStoreController defaultStore] fetcher];
     __weak typeof(self) weakSelf = self;
     [fetcher exchangeRate:self.fromCurrency.code toCode:self.toCurrency.code completionHandler:^(NSString * fromCode, NSString * toCode, NSNumber * exchangeRate, NSError * error) {
         typeof(self) strongSelf = weakSelf;

@@ -8,11 +8,10 @@
 
 #import <XCTest/XCTest.h>
 
-#import "MCWeAllPayStoreController.h"
 #import "MCSharedBill+addons.h"
 #import "MCPayment+addons.h"
 #import "MCPerson+addons.h"
-#import "MCEmailAddress+addons.h"
+#import "MCEmailAddress+CoreDataProperties.h"
 #import "MCPaymentPresence+addons.h"
 #import "MCCurrency+addons.h"
 #import "MCExchangeRate+addons.h"
@@ -21,24 +20,21 @@
 
 @interface MCPaymentPresenceTest : XCTestCase
 
-@property (nonatomic, strong) MCWeAllPayStoreController *mainController;
 @property (nonatomic, strong) NSManagedObjectContext *context;
 
 @end
 
 @implementation MCPaymentPresenceTest
 
-- (void)setUp
-{
+- (void)setUp {
     [super setUp];
-    // Put setup code here. This method is called before the invocation of each test method in the class.    
     NSManagedObjectModel *managedObjectModel = [NSManagedObjectModel mergedModelFromBundles:nil];
     NSPersistentStoreCoordinator *persistentStoreCoordinator = [[NSPersistentStoreCoordinator alloc] initWithManagedObjectModel:managedObjectModel];
     NSError *error;
     NSPersistentStore *persistentStore = [persistentStoreCoordinator addPersistentStoreWithType:NSInMemoryStoreType configuration:nil URL:nil options:nil error:&error];
     XCTAssertTrue(persistentStore, @"Something went wrong opening the In Memory Store: %@", [error localizedDescription]);
-    _context = [[NSManagedObjectContext alloc] init];
-    [_context setPersistentStoreCoordinator:persistentStoreCoordinator];
+    _context = [[NSManagedObjectContext alloc] initWithConcurrencyType:NSMainQueueConcurrencyType];
+    _context.persistentStoreCoordinator = persistentStoreCoordinator;
 }
 
 - (void)tearDown
@@ -357,11 +353,13 @@
     [thisPayment setPayingPerson:marieke];
     [thisPayment setMoney:@4.50];
     [thisPayment recalculateAveragePeopleOweAndStore];
-    MCExchangeRate *exchangeRate = [MCExchangeRate addExchangeRateForContext:_context];
-    [exchangeRate setToCurrency:mainCurrency];
+    MCExchangeRate *exchangeRate = [[MCExchangeRate alloc] initWithContext:_context];
+    exchangeRate.toCurrency = mainCurrency;
+    exchangeRate.fromCurrency = paymentCurrency;
     exchangeRate.fromCurrency = paymentCurrency;
     [exchangeRate setExchangeRate:@0.72];
-    [exchangeRate setPayment:thisPayment];
+    exchangeRate.exchangeRate = @0.72;
+    exchangeRate.payment = thisPayment;
     for (MCPaymentPresence *pp in [thisPayment peopleSharingPayment]) {
         XCTAssertEqualWithAccuracy([[pp getAverageOweFromPaymentInMainCurrency] doubleValue], [@(2.25 * 0.72) doubleValue], 0.001, @"Invalid value for getAverageOweFromPaymentInMainCurrency.");
     }

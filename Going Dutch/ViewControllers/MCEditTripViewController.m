@@ -107,7 +107,7 @@ static void * isEditingToggleContext = &isEditingToggleContext;
     _eventModel.event.tripName = _eventNameTextField.text;
     NSDate *now = [NSDate date];
     _eventModel.event.dateModified = now;
-    [MCWeAllPayStoreController.defaultStore saveViewContext];
+    [WeAllPayStoreController.defaultStore saveViewContext];
     if (!_didSomethingChange) {
         _didSomethingChange = YES;
     }
@@ -184,7 +184,7 @@ static void * isEditingToggleContext = &isEditingToggleContext;
     if (editingStyle == UITableViewCellEditingStyleDelete) {
         MCPerson *poorSucker = [_fetchedResultsController objectAtIndexPath:indexPath];
         [_eventModel deletePerson:poorSucker];
-        [MCWeAllPayStoreController.defaultStore saveViewContext];
+        [WeAllPayStoreController.defaultStore saveViewContext];
         _didSomethingChange = YES;
     }
 }
@@ -287,7 +287,7 @@ static void * isEditingToggleContext = &isEditingToggleContext;
         destination.isAdBannerEnabled = YES;
         NSIndexPath *indexPathOfSelectedRow = [[self tableView] indexPathForSelectedRow];
         MCPerson *thePerson = [_fetchedResultsController objectAtIndexPath:indexPathOfSelectedRow];
-        [MCWeAllPayStoreController.defaultStore beginUndoGroup];
+        [WeAllPayStoreController.defaultStore beginUndoGroup];
         if (!thePerson) {
             // No person present create a new one.
             thePerson = [_eventModel addPerson];
