@@ -127,6 +127,8 @@ import FirebaseCrashlytics
         payment.setNewCurrencyAndAutomaticallyUpdateExchangeRate(newCurrency, withCompletionHandler: completion)
     }
     
+    
+    
     var recentSelectedCurrencies: [MCCurrency] {
         return payment.onWhichBill!.recentUsedForeignCurrencies(5) ?? [MCCurrency]()
     }

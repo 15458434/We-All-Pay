@@ -13,7 +13,7 @@
 #import "MCSharedBill.h"
 #import "MCPaymentPresence+addons.h"
 #import "MCCurrency+addons.h"
-#import "MCExchangeRate+addons.h"
+#import "MCExchangeRate+CoreDataProperties.h"
 
 #import "We_all_pay-Swift.h"
 
@@ -216,12 +216,38 @@ NS_ASSUME_NONNULL_BEGIN
 {
     self.currency = newCurrency;
     self.exchangeRate.fromCurrency = newCurrency;
-    [[self exchangeRate] fetchExchangeRate:^(NSError *error) {
+    
+//    [[self exchangeRate] fetchExchangeRate:^(NSError *error) {
+//        if (error) {
+//            completionHandler(error);
+//            return;
+//        }
+//        [self recalculateAveragePeopleOweAndStore];
+//        completionHandler(nil);
+//    }];
+    self.exchangeRate.status = [NSNumber numberWithShort:MCExchangeRateStatusFetching];
+    // If equal just set the exchangeRate to a value of 1.
+    if ([self.exchangeRate.fromCurrency isEqualToMCCurrency:self.exchangeRate.toCurrency]) {
+        self.exchangeRate.exchangeRate = @(1);
+        self.exchangeRate.status = [NSNumber numberWithShort:MCExchangeRateStatusValid];
+        completionHandler(nil);
+        return;
+    }
+    ExchangeRateFetcher *fetcher = [[WeAllPayStoreController defaultStore] fetcher];
+    __weak typeof(self) weakSelf = self;
+    [fetcher exchangeRate:self.exchangeRate.fromCurrency.code toCode:self.exchangeRate.toCurrency.code completionHandler:^(NSString * fromCode, NSString * toCode, NSNumber * exchangeRate, NSError * error) {
+        typeof(self) strongSelf = weakSelf;
         if (error) {
             completionHandler(error);
+            if (strongSelf) {
+                strongSelf.exchangeRate.status = [NSNumber numberWithShort:MCExchangeRateStatusInvalid];
+            }
             return;
         }
-        [self recalculateAveragePeopleOweAndStore];
+        if (strongSelf) {
+            strongSelf.exchangeRate.exchangeRate = exchangeRate;
+            strongSelf.exchangeRate.status = [NSNumber numberWithShort:MCExchangeRateStatusValid];
+        }
         completionHandler(nil);
     }];
 }

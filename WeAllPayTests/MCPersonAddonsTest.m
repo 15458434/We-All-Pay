@@ -12,7 +12,7 @@
 #import "MCPerson+addons.h"
 #import "MCEmailAddress+CoreDataProperties.h"
 #import "MCPayment+addons.h"
-#import "MCExchangeRate+addons.h"
+#import "MCExchangeRate+CoreDataProperties.h"
 #import "MCPaymentPresence+addons.h"
 
 #import "We_all_pay_Tests-Swift.h"

@@ -35,7 +35,7 @@ NS_ASSUME_NONNULL_BEGIN
 - (void)recalculateAveragePeopleOweAndStore;
 - (NSNumber *)moneyInMainCurrency;
 - (MCExchangeRate *)addExchangeRate;
-- (void)setNewCurrencyAndAutomaticallyUpdateExchangeRate:(MCCurrency *)newCurrency withCompletionHandler:(void (^)(NSError * _Nullable error))completionHandler;
+- (void)setNewCurrencyAndAutomaticallyUpdateExchangeRate:(MCCurrency *)newCurrency withCompletionHandler:(void (^)(NSError * _Nullable error))completionHandler __deprecated;
 
 - (NSString *)fullDescriptionOfPayment;
 

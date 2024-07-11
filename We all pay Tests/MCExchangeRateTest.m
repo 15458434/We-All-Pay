@@ -8,7 +8,7 @@
 
 #import <XCTest/XCTest.h>
 
-#import "MCExchangeRate+addons.h"
+#import "MCExchangeRate+CoreDataProperties.h"
 
 #import "We_all_pay_Tests-Swift.h"
 
