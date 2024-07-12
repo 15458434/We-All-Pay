@@ -12,7 +12,7 @@
 #import "MCPerson+addons.h"
 #import "MCEmailAddress+CoreDataProperties.h"
 #import "MCPayment+addons.h"
-#import "MCPaymentPresence+addons.h"
+#import "MCPaymentPresence+CoreDataProperties.h"
 #import "MCCurrency+addons.h"
 #import "MCExchangeRate+CoreDataProperties.h"
 
@@ -329,8 +329,7 @@
     }
 }
 
-- (NSNumber *)amountShouldHavePaidBy:(MCPerson *)person
-{
+- (NSNumber *)amountShouldHavePaidBy:(MCPerson *)person {
     // Fetch the sum of all paymentPresences for person
     NSFetchRequest *request = [NSFetchRequest fetchRequestWithEntityName:@"MCPaymentPresence"];
     request.predicate = [NSPredicate predicateWithFormat:@"payment.onWhichBill = %@ AND person = %@ AND isPersonPresent = %@", self, person, @YES];
@@ -344,7 +343,7 @@
     
     double sumOfAllOwes = 0;
     for (MCPaymentPresence *paymentPresence in results) {
-        sumOfAllOwes += [[paymentPresence getAverageOweFromPaymentInMainCurrency] doubleValue];
+        sumOfAllOwes += paymentPresence.averageOweFromPaymentInMainCurrency.doubleValue;
     }
     
     return @(sumOfAllOwes);

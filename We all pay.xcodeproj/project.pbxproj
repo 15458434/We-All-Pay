@@ -70,6 +70,7 @@
 		382F34482C3F2698007DDF71 /* CurrencyFormatter.swift in Sources */ = {isa = PBXBuildFile; fileRef = 380C48151BE1330E00C82B0F /* CurrencyFormatter.swift */; };
 		382F34492C3F2833007DDF71 /* SequenceExtension.swift in Sources */ = {isa = PBXBuildFile; fileRef = 38F0DDBC2BE93652004B1A19 /* SequenceExtension.swift */; };
 		3830F6F6179872B400904FAF /* MCPaymentViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 3830F6F5179872B400904FAF /* MCPaymentViewController.m */; };
+		383486B32C4166200078E72E /* MCPaymentPresenceExtension.swift in Sources */ = {isa = PBXBuildFile; fileRef = 383486B22C4166200078E72E /* MCPaymentPresenceExtension.swift */; };
 		3835EBF92115C40900E2BC3F /* Settings.bundle in Resources */ = {isa = PBXBuildFile; fileRef = 3835EBF82115C40900E2BC3F /* Settings.bundle */; };
 		38370CF51A40DBC300B56460 /* MainInterface.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 38370CF71A40DBC300B56460 /* MainInterface.storyboard */; };
 		383D5D841C0708F800BE9F94 /* SolutionReturnPaymentItem.swift in Sources */ = {isa = PBXBuildFile; fileRef = 383D5D831C0708F800BE9F94 /* SolutionReturnPaymentItem.swift */; };
@@ -147,7 +148,6 @@
 		38977E611B2A367E008484A4 /* MCPaymentTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 38977E601B2A367E008484A4 /* MCPaymentTableViewCell.swift */; };
 		38977E631B2A37BC008484A4 /* EventTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 38977E621B2A37BC008484A4 /* EventTableViewCell.swift */; };
 		38986C9C2C382EC100C612E7 /* WeAllPayStoreController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 38986C9B2C382EC100C612E7 /* WeAllPayStoreController.swift */; };
-		389950A4191A90F1000B00BC /* MCPaymentPresence+addons.m in Sources */ = {isa = PBXBuildFile; fileRef = 389950A3191A90F1000B00BC /* MCPaymentPresence+addons.m */; };
 		3899D3F4194F43AF00893323 /* Product ids.plist in Resources */ = {isa = PBXBuildFile; fileRef = 3899D3F3194F43AF00893323 /* Product ids.plist */; };
 		389ACFDA23742C650025139F /* NameTextInputValidator.swift in Sources */ = {isa = PBXBuildFile; fileRef = 389ACFD923742C650025139F /* NameTextInputValidator.swift */; };
 		389ACFE12374A1E60025139F /* EmailTextInputPicker.swift in Sources */ = {isa = PBXBuildFile; fileRef = 389ACFE02374A1E60025139F /* EmailTextInputPicker.swift */; };
@@ -429,6 +429,8 @@
 		382F9BD118F7285400818276 /* MCDismissMeBlockProtocol.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = MCDismissMeBlockProtocol.h; path = ViewControllers/MCDismissMeBlockProtocol.h; sourceTree = "<group>"; };
 		3830F6F4179872B400904FAF /* MCPaymentViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = MCPaymentViewController.h; path = ViewControllers/MCPaymentViewController.h; sourceTree = "<group>"; };
 		3830F6F5179872B400904FAF /* MCPaymentViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = MCPaymentViewController.m; path = ViewControllers/MCPaymentViewController.m; sourceTree = "<group>"; };
+		383486B22C4166200078E72E /* MCPaymentPresenceExtension.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MCPaymentPresenceExtension.swift; sourceTree = "<group>"; };
+		383486B42C416C020078E72E /* WeAllPayStore 5.xcdatamodel */ = {isa = PBXFileReference; lastKnownFileType = wrapper.xcdatamodel; path = "WeAllPayStore 5.xcdatamodel"; sourceTree = "<group>"; };
 		38358D4C274D0E9E00EA5177 /* MCPathComponentsToOpenProtocol.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = MCPathComponentsToOpenProtocol.h; sourceTree = "<group>"; };
 		3835EBF82115C40900E2BC3F /* Settings.bundle */ = {isa = PBXFileReference; lastKnownFileType = "wrapper.plug-in"; path = Settings.bundle; sourceTree = "<group>"; };
 		38370CF61A40DBC300B56460 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/MainInterface.storyboard; sourceTree = "<group>"; };
@@ -536,8 +538,6 @@
 		3898F33D18F40CC100BFFC61 /* MCPersonAddonsTest.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = MCPersonAddonsTest.m; path = ../WeAllPayTests/MCPersonAddonsTest.m; sourceTree = "<group>"; };
 		3898F33F18F40E7700BFFC61 /* MCPaymentAddonsTest.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = MCPaymentAddonsTest.m; path = ../WeAllPayTests/MCPaymentAddonsTest.m; sourceTree = "<group>"; };
 		3899508E191A7282000B00BC /* WeAllPayStore 2.xcdatamodel */ = {isa = PBXFileReference; lastKnownFileType = wrapper.xcdatamodel; path = "WeAllPayStore 2.xcdatamodel"; sourceTree = "<group>"; };
-		389950A2191A90F1000B00BC /* MCPaymentPresence+addons.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = "MCPaymentPresence+addons.h"; path = "DataStore/MCPaymentPresence+addons.h"; sourceTree = "<group>"; };
-		389950A3191A90F1000B00BC /* MCPaymentPresence+addons.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = "MCPaymentPresence+addons.m"; path = "DataStore/MCPaymentPresence+addons.m"; sourceTree = "<group>"; };
 		389950AA191A9469000B00BC /* MCPaymentPresenceTest.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = MCPaymentPresenceTest.m; path = ../WeAllPayTests/MCPaymentPresenceTest.m; sourceTree = "<group>"; };
 		3899D3F3194F43AF00893323 /* Product ids.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; name = "Product ids.plist"; path = "../Product ids.plist"; sourceTree = "<group>"; };
 		389ACFD923742C650025139F /* NameTextInputValidator.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NameTextInputValidator.swift; sourceTree = "<group>"; };
@@ -826,8 +826,7 @@
 				38DB85D317E45BCA006237CF /* MCPayment+addons.m */,
 				389DE8F5197FB2B900169645 /* MCPaymentPresence.h */,
 				389DE8F6197FB2B900169645 /* MCPaymentPresence.m */,
-				389950A2191A90F1000B00BC /* MCPaymentPresence+addons.h */,
-				389950A3191A90F1000B00BC /* MCPaymentPresence+addons.m */,
+				383486B22C4166200078E72E /* MCPaymentPresenceExtension.swift */,
 				389DE8F2197FB2B900169645 /* MCEmailAddress.h */,
 				389DE8F3197FB2B900169645 /* MCEmailAddress.m */,
 				389FBD3E198BDA1C003B4409 /* MCExchangeRate.h */,
@@ -2278,6 +2277,7 @@
 				386EB43323C723BE00FB20B9 /* AdEngine.swift in Sources */,
 				38977E4D1B2A2591008484A4 /* MCSelectCategoryTableViewCell_iPhone.swift in Sources */,
 				380328002698443300744710 /* NotificationsInfoModel.swift in Sources */,
+				383486B32C4166200078E72E /* MCPaymentPresenceExtension.swift in Sources */,
 				38EF31451938BA07004912F0 /* UINavigationController+KeyboardDismiss.m in Sources */,
 				389DE8FA197FB2BA00169645 /* MCPayment.m in Sources */,
 				3841F8D323893A0B00882E40 /* EventsModel.swift in Sources */,
@@ -2324,7 +2324,6 @@
 				3825A82419990BA400A8885D /* UIViewController+WeAllPayStore.m in Sources */,
 				389DE8F7197FB2B900169645 /* MCPaymentPresence.m in Sources */,
 				3892E3AA17904A240038894B /* MCPersonViewController.m in Sources */,
-				389950A4191A90F1000B00BC /* MCPaymentPresence+addons.m in Sources */,
 				389ACFE12374A1E60025139F /* EmailTextInputPicker.swift in Sources */,
 				389DE90E197FD41900169645 /* MCCurrency+addons.m in Sources */,
 				3813150C26CBAC3600C27CBB /* MCNotificationTableViewCell.m in Sources */,
@@ -5460,12 +5459,13 @@
 		3829AD0D178B41320025969D /* WeAllPayStore.xcdatamodeld */ = {
 			isa = XCVersionGroup;
 			children = (
+				383486B42C416C020078E72E /* WeAllPayStore 5.xcdatamodel */,
 				3860574419EE904B00BD5B78 /* WeAllPayStore 4.xcdatamodel */,
 				38AD8C0D197E85AA005C3436 /* WeAllPayStore 3.xcdatamodel */,
 				3899508E191A7282000B00BC /* WeAllPayStore 2.xcdatamodel */,
 				3829AD0E178B41320025969D /* WeAllPayStore.xcdatamodel */,
 			);
-			currentVersion = 3860574419EE904B00BD5B78 /* WeAllPayStore 4.xcdatamodel */;
+			currentVersion = 383486B42C416C020078E72E /* WeAllPayStore 5.xcdatamodel */;
 			path = WeAllPayStore.xcdatamodeld;
 			sourceTree = "<group>";
 			versionGroupType = wrapper.xcdatamodel;

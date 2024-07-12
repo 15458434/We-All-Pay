@@ -14,7 +14,7 @@
 #import "MCPayment+addons.h"
 #import "MCPerson+addons.h"
 #import "MCSharedBill+addons.h"
-#import "MCPaymentPresence+addons.h"
+#import "MCPaymentPresence+CoreDataProperties.h"
 
 #import "MCDismissMeBlockProtocol.h"
 

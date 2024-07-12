@@ -8,7 +8,7 @@
 
 #import "MCPaymentPresenceTableViewCell_iPhone.h"
 
-#import "MCPaymentPresence+addons.h"
+#import "MCPaymentPresence+CoreDataProperties.h"
 #import "MCPayment+addons.h"
 #import "MCPerson+addons.h"
 

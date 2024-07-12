@@ -12,7 +12,7 @@
 #import "MCPerson+addons.h"
 #import "MCEmailAddress+CoreDataProperties.h"
 #import "MCPayment+addons.h"
-#import "MCPaymentPresence+addons.h"
+#import "MCPaymentPresence+CoreDataProperties.h"
 #import "MCCurrency+addons.h"
 #import "MCExchangeRate+CoreDataProperties.h"
 
