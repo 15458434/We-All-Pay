@@ -134,7 +134,6 @@ import UIKit
     }
     
     private func internalDelete(_ emailAddress: MCEmailAddress) {
-        let owners = emailAddress.owner
         emailAddress.owner = nil
         if let emailAdresses = person.emailAddress {
             let emailAddressesWithoutEmailAddress = emailAdresses.filter { $0.objectID != emailAddress.objectID }

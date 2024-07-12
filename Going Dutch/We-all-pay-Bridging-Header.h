@@ -12,7 +12,7 @@
 #import "MCPerson+addons.h"
 #import "MCCurrency+addons.h"
 #import "MCExchangeRate+CoreDataProperties.h"
-#import "MCPaymentPresence+addons.h"
+#import "MCPaymentPresence+CoreDataProperties.h"
 #import "MCEmailAddress+CoreDataProperties.h"
 
 #pragma mark - Protocols

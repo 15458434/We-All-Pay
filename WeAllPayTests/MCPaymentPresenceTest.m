@@ -12,7 +12,7 @@
 #import "MCPayment+addons.h"
 #import "MCPerson+addons.h"
 #import "MCEmailAddress+CoreDataProperties.h"
-#import "MCPaymentPresence+addons.h"
+#import "MCPaymentPresence+CoreDataProperties.h"
 #import "MCCurrency+addons.h"
 #import "MCExchangeRate+CoreDataProperties.h"
 
@@ -361,7 +361,7 @@
     exchangeRate.exchangeRate = @0.72;
     exchangeRate.payment = thisPayment;
     for (MCPaymentPresence *pp in [thisPayment peopleSharingPayment]) {
-        XCTAssertEqualWithAccuracy([[pp getAverageOweFromPaymentInMainCurrency] doubleValue], [@(2.25 * 0.72) doubleValue], 0.001, @"Invalid value for getAverageOweFromPaymentInMainCurrency.");
+        XCTAssertEqualWithAccuracy(pp.averageOweFromPaymentInMainCurrency.doubleValue, [@(2.25 * 0.72) doubleValue], 0.001, @"Invalid value for getAverageOweFromPaymentInMainCurrency.");
     }
 }
 
