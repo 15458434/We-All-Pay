@@ -10,7 +10,7 @@
 
 #import "MCPersonViewController.h"
 
-#import "MCPerson+addons.h"
+#import "MCPerson+CoreDataProperties.h"
 #import "MCSharedBill+addons.h"
 #import "MCEmailAddress+CoreDataProperties.h"
 

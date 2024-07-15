@@ -9,7 +9,7 @@
 @import XCTest;
 
 #import "MCSharedBill+addons.h"
-#import "MCPerson+addons.h"
+#import "MCPerson+CoreDataProperties.h"
 #import "MCEmailAddress+CoreDataProperties.h"
 #import "MCPayment+addons.h"
 #import "MCPaymentPresence+CoreDataProperties.h"
@@ -50,23 +50,27 @@
     [movie setTripName:@"Movie"];
     XCTAssertFalse([movie areTherePeople], @"There are people on a new event?");
     MCPerson *markmovie = [movie addPerson];
-    [markmovie setFirstName:@"Mark"];
-    [markmovie setLastName:@"Cornelisse"];
-    [markmovie addOneEmailAddressFromAString:@"info@markcornelisse.nl"];
-    [markmovie addOneEmailAddressFromAString:@"support@markcornelisse.nl"];
+    MCPersonModel *markModel = [[MCPersonModel alloc] initWithPerson:markmovie];
+    [markModel.person setFirstName:@"Mark"];
+    [markModel.person setLastName:@"Cornelisse"];
+    [markModel addOneEmailAddressFromAString:@"info@markcornelisse.nl"];
+    [markModel addOneEmailAddressFromAString:@"support@markcornelisse.nl"];
     MCPerson *ilsemovie = [movie addPerson];
-    [ilsemovie setFirstName:@"Ilse"];
-    [ilsemovie setLastName:@"Béguin"];
-    [ilsemovie addOneEmailAddressFromAString:@"ilse@markcornelisse.nl"];
+    MCPersonModel *ilseModel = [[MCPersonModel alloc] initWithPerson:ilsemovie];
+    [ilseModel.person setFirstName:@"Ilse"];
+    [ilseModel.person setLastName:@"Béguin"];
+    [ilseModel addOneEmailAddressFromAString:@"ilse@markcornelisse.nl"];
     MCPerson *conniemovie = [movie addPerson];
-    [conniemovie setFirstName:@"Connie"];
-    [conniemovie setLastName:@"Carter"];
-    [conniemovie addOneEmailAddressFromAString:@"connie@markcornelisse.nl"];
+    MCPersonModel *connieModel = [[MCPersonModel alloc] initWithPerson:conniemovie];
+    [connieModel.person setFirstName:@"Connie"];
+    [connieModel.person setLastName:@"Carter"];
+    [connieModel addOneEmailAddressFromAString:@"connie@markcornelisse.nl"];
     MCPerson *liekemovie = [movie addPerson];
-    [liekemovie setFirstName:@"Lieke"];
-    [liekemovie setLastName:@"Koopman"];
-    [liekemovie addOneEmailAddressFromAString:@"lieke@markcornelisse.nl"];
-    [liekemovie addNewDefaultEmailAddressFromAString:@"liekeNewDefault@markcornelisse.nl"];
+    MCPersonModel *liekeModel = [[MCPersonModel alloc] initWithPerson:liekemovie];
+    [liekeModel.person setFirstName:@"Lieke"];
+    [liekeModel.person setLastName:@"Koopman"];
+    [liekeModel addOneEmailAddressFromAString:@"lieke@markcornelisse.nl"];
+    [liekeModel addNewDefaultEmailAddressFromAString:@"liekeNewDefault@markcornelisse.nl"];
     MCPayment *tickets = [movie addPayment];
     [tickets setPayingPerson:markmovie];
     [tickets setMoney:@(8.90*4)];
@@ -115,9 +119,10 @@
     [movie setTripName:@"Movie"];
     XCTAssertFalse([movie areTherePeople], @"There are people on a new event?");
     MCPerson *markmovie = [movie addPerson];
-    [markmovie setFirstName:@"Mark"];
-    [markmovie setLastName:@"Cornelisse"];
-    [markmovie addOneEmailAddressFromAString:@"info@markcornelisse.nl"];
+    MCPersonModel *markModel = [[MCPersonModel alloc] initWithPerson:markmovie];
+    [markModel.person setFirstName:@"Mark"];
+    [markModel.person setLastName:@"Cornelisse"];
+    [markModel addOneEmailAddressFromAString:@"info@markcornelisse.nl"];
     MCEmailAddress *marksOnlyEmailAddress = [[markmovie emailAddress] anyObject];
     [MCSharedBill deleteSharedbill:movie];
     XCTAssertTrue([marksOnlyEmailAddress isDeleted], @"marks email address is not properly deleted.");
@@ -129,13 +134,15 @@
     MCSharedBill *tonightsBill = [MCSharedBill addSharedBillToContext:_context];
     [tonightsBill setTripName:@"No presences test."];
     MCPerson *mark = [tonightsBill addPerson];
-    [mark setFirstName:@"Mark"];
-    [mark setLastName:@"Cornelisse"];
-    [mark addOneEmailAddressFromAString:@"info@markcornelisse.nl"];
+    MCPersonModel *markModel = [[MCPersonModel alloc] initWithPerson:mark];
+    [markModel.person setFirstName:@"Mark"];
+    [markModel.person setLastName:@"Cornelisse"];
+    [markModel addOneEmailAddressFromAString:@"info@markcornelisse.nl"];
     MCPerson *ilse = [tonightsBill addPerson];
-    [ilse setFirstName:@"Ilse"];
-    [ilse setLastName:@"Beguin"];
-    [ilse addOneEmailAddressFromAString:@"ilse.beguin@hotmail.com"];
+    MCPersonModel *ilseModel = [[MCPersonModel alloc] initWithPerson:ilse];
+    [ilseModel.person setFirstName:@"Ilse"];
+    [ilseModel.person setLastName:@"Beguin"];
+    [ilseModel addOneEmailAddressFromAString:@"ilse.beguin@hotmail.com"];
     MCPayment *paymentWithNoPresences = [tonightsBill addPayment];
     [paymentWithNoPresences setMoney:@6.00];
     [paymentWithNoPresences setPayingPerson:ilse];

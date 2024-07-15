@@ -10,7 +10,7 @@
 
 #import "MCSharedBill+addons.h"
 #import "MCPayment+addons.h"
-#import "MCPerson+addons.h"
+#import "MCPerson+CoreDataProperties.h"
 #import "MCEmailAddress+CoreDataProperties.h"
 #import "MCCurrency+addons.h"
 #import "MCExchangeRate+CoreDataProperties.h"
@@ -47,7 +47,8 @@
     MCPerson *thisPerson = [[MCPerson alloc] initWithContext:_context];
     [thisPerson setFirstName:@"Mark"];
     [thisPerson setLastName:@"Cornelisse"];
-    [thisPerson addNewDefaultEmailAddressFromAString:@"support@markcornelisse.nl"];
+    MCPersonModel *model = [[MCPersonModel alloc] initWithPerson:thisPerson];
+    [model addNewDefaultEmailAddressFromAString:@"support@markcornelisse.nl"];
     MCPayment *thisPayment = [[MCPayment alloc] initWithContext:_context];
     [thisPayment setDescriptionOfPayment:@"Beer"];
     [thisPayment setMoney:@3.25];
@@ -58,7 +59,7 @@
     [MCPayment deletePayment:thisPayment];
     XCTAssertTrue([thisPayment isDeleted], @"MCPayment table is not empty");
     
-    [MCPerson deletePerson:thisPerson];
+    [_context deleteObject:thisPerson];
 }
 
 - (void)testCurrency

@@ -9,7 +9,7 @@
 #import <UIKit/UIKit.h>
 #import <XCTest/XCTest.h>
 
-#import "MCPerson+addons.h"
+#import "MCPerson+CoreDataProperties.h"
 #import "MCPayment+addons.h"
 #import "MCSharedBill+addons.h"
 #import "MCEmailAddress+CoreDataProperties.h"
@@ -44,18 +44,21 @@
 - (void)testMCPersonAddonsGetName
 {
     MCPerson *thisPerson = [[MCPerson alloc] initWithContext:_context];
-    [thisPerson setFirstName:@"Connie"];
-    [thisPerson setLastName:@"Carter"];
-    [thisPerson addOneEmailAddressFromAString:@"connie@markcornelisse.nl"];
+    MCPersonModel *model = [[MCPersonModel alloc] initWithPerson:thisPerson];
+    [model.person setFirstName:@"Connie"];
+    [model.person setLastName:@"Carter"];
+    [model addOneEmailAddressFromAString:@"connie@markcornelisse.nl"];
     XCTAssertTrue([thisPerson.name isEqualToString:@"Connie"], @"First name is not selected when it's available.");
     XCTAssertTrue([thisPerson.fullName isEqualToString:@"Connie Carter"]);
     MCPerson *thisPersonWithMissingFirstName = [[MCPerson alloc] initWithContext:_context];
-    [thisPersonWithMissingFirstName setLastName:@"Carter"];
-    [thisPersonWithMissingFirstName addOneEmailAddressFromAString:@"connie@markcornelisse.nl"];
+    MCPersonModel *modelWithMissingFirstName = [[MCPersonModel alloc] initWithPerson:thisPersonWithMissingFirstName];
+    [modelWithMissingFirstName.person setLastName:@"Carter"];
+    [modelWithMissingFirstName addOneEmailAddressFromAString:@"connie@markcornelisse.nl"];
     XCTAssertTrue([thisPersonWithMissingFirstName.name isEqualToString:@"Carter"], @"Last is not selected when first name is not available");
     XCTAssertTrue([thisPersonWithMissingFirstName.fullName isEqualToString:@"Carter"], @"Fullname is wrong when first name is missing.");
     MCPerson *thisPersonWithMissingFirstAndLastName = [[MCPerson alloc] initWithContext:_context];
-    [thisPersonWithMissingFirstAndLastName addOneEmailAddressFromAString:@"connie@markcornelisse.nl"];
+    MCPersonModel *modelWithMissingFirstAndLastName = [[MCPersonModel alloc] initWithPerson:thisPersonWithMissingFirstAndLastName];
+    [modelWithMissingFirstAndLastName addOneEmailAddressFromAString:@"connie@markcornelisse.nl"];
     XCTAssertTrue([thisPersonWithMissingFirstAndLastName.name isEqualToString:@"connie@markcornelisse.nl"], @"emailAddress is not selected when both first and lastname are not selected.");
     XCTAssertTrue([thisPersonWithMissingFirstAndLastName.fullName isEqualToString:@"connie@markcornelisse.nl"], @"emailAddress is not selected when both first and lastnames are not selected.");
 }
@@ -64,11 +67,12 @@
 {
     MCSharedBill *sharedbill = [[MCSharedBill alloc] initWithContext:_context];
     MCPerson *mark = [sharedbill addPerson];
-    [mark setFirstName:@"Mark"];
-    [mark setLastName:@"Cornelisse"];
-    [mark addOneEmailAddressFromAString:@"info@markcornelisse.nl"];
-    [mark addOneEmailAddressFromAString:@"support@markcornelisse.nl"];
-    [mark addNewDefaultEmailAddressFromAString:@"m.p.cornelisse@gmail.com"];
+    MCPersonModel *markModel = [[MCPersonModel alloc] initWithPerson:mark];
+    [markModel.person setFirstName:@"Mark"];
+    [markModel.person setLastName:@"Cornelisse"];
+    [markModel addOneEmailAddressFromAString:@"info@markcornelisse.nl"];
+    [markModel addOneEmailAddressFromAString:@"support@markcornelisse.nl"];
+    [markModel addNewDefaultEmailAddressFromAString:@"m.p.cornelisse@gmail.com"];
     XCTAssertEqualObjects(@"m.p.cornelisse@gmail.com", [mark defaultEmailAddress], @"Default emailAddress is not right.");
     NSString *markFirstName = @"Mark";
     NSString *markLastName = @"Cornelisse";
@@ -105,23 +109,23 @@
 - (void)testGetEmailaddressesFrom
 {
     MCPerson *thisPerson = [[MCPerson alloc] initWithContext:_context];
-    [thisPerson setFirstName:@"Mark"];
-    [thisPerson setLastName:@"Cornelisse"];
+    MCPersonModel *personModel = [[MCPersonModel alloc] initWithPerson:thisPerson];
+    [personModel.person setFirstName:@"Mark"];
+    [personModel.person setLastName:@"Cornelisse"];
     NSString *emailAddressMark = @"info@markcornelisse.nl";
-    [thisPerson addOneEmailAddressFromAString:emailAddressMark];
-    MCEmailAddress *firstEmailAddressObject = [thisPerson getDefaultEmailAddressObject];
+    [personModel addOneEmailAddressFromAString:emailAddressMark];
+    MCEmailAddress *firstEmailAddressObject = thisPerson.defaultEmailAddressObject;
     NSString *emailAddress2Mark = @"mark.cornelisse@yahoo.com";
-    [thisPerson addOneEmailAddressFromAString:emailAddress2Mark];
-    [thisPerson addOneEmailAddressFromAString:emailAddress2Mark];
+    [personModel addOneEmailAddressFromAString:emailAddress2Mark];
+    [personModel addOneEmailAddressFromAString:emailAddress2Mark];
     NSString *emailAddress3Mark = @"m.p.cornelisse@gmail.com";
-    [thisPerson addNewDefaultEmailAddressFromAString:emailAddress3Mark];
-    [thisPerson setNewDefaultEmailaddressObject:firstEmailAddressObject];
-    MCPersonModel *personModel = [[MCPersonModel alloc] init];
+    [personModel addNewDefaultEmailAddressFromAString:emailAddress3Mark];
+    [personModel updateDefaultEmailAddressObject:firstEmailAddressObject];
     [personModel prepareForUseWithPerson:thisPerson];
     NSArray *theEmailAddressObjects = personModel.emailaddresses;
     XCTAssertTrue([theEmailAddressObjects count] == 3, @"The wrong amount of objects is present.");
     [personModel deleteAllEmailAddresses];
-    [MCPerson deletePerson:thisPerson];
+    [_context deleteObject:personModel.person];
 }
 
 @end

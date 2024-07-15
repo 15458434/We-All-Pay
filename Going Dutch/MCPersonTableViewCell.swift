@@ -29,7 +29,7 @@ final class PersonTableViewCell: UITableViewCell {
         self.nameLabel.text = personModel.person.fullName
         self.emailLabel.text = personModel.defaultEmailaddress?.emailAddress
         
-        if personModel.areAllExchangeRatesPresent {
+        if personModel.person.hasPersonMadePaymentWithInvalidExchangeRates {
             fetchingExchangeRateIndicator.startAnimating()
             totalSpent.isHidden = true
         } else {

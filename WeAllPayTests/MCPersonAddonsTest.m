@@ -9,11 +9,12 @@
 #import <XCTest/XCTest.h>
 
 #import "MCSharedBill+addons.h"
-#import "MCPerson+addons.h"
+#import "MCPerson+CoreDataProperties.h"
 #import "MCEmailAddress+CoreDataProperties.h"
 #import "MCPayment+addons.h"
 #import "MCExchangeRate+CoreDataProperties.h"
 #import "MCPaymentPresence+CoreDataProperties.h"
+#import "MCPerson+TestHelper.h"
 
 #import "We_all_pay_Tests-Swift.h"
 
@@ -43,20 +44,21 @@
 - (void)testMCPersonAddonsAddAndDeleteEmailAddress
 {
     MCPerson *thisPerson = [[MCPerson alloc] initWithContext:_context];
-    [thisPerson setFirstName:@"Mark"];
-    [thisPerson setLastName:@"Cornelisse"];
+    MCPersonModel *model = [[MCPersonModel alloc] initWithPerson:thisPerson];
+    [model.person setFirstName:@"Mark"];
+    [model.person setLastName:@"Cornelisse"];
     NSString *emailAddressMark = @"info@markcornelisse.nl";
-    [thisPerson addOneEmailAddressFromAString:emailAddressMark];
-    XCTAssertTrue([thisPerson isThereAnEmailAddress], @"There is no emailAddress present when one had just been added.");
-    XCTAssertTrue([[thisPerson defaultEmailAddress] isEqualToString:emailAddressMark], @"emailAddress Stored is not equal to the new default one");
+    [model addOneEmailAddressFromAString:emailAddressMark];
+    XCTAssertTrue(thisPerson.hasEmailAddress, @"There is no emailAddress present when one had just been added.");
+    XCTAssertTrue([thisPerson.defaultEmailAddress isEqualToString:emailAddressMark], @"emailAddress Stored is not equal to the new default one");
     NSString *emailAddress2Mark = @"mark.cornelisse@yahoo.com";
-    [thisPerson addOneEmailAddressFromAString:emailAddress2Mark];
-    XCTAssertTrue([thisPerson isThereAnEmailAddress], @"There is no emailAddress present when two has been added.");
+    [model addOneEmailAddressFromAString:emailAddress2Mark];
+    XCTAssertTrue(thisPerson.hasEmailAddress, @"There is no emailAddress present when two has been added.");
     XCTAssertTrue([[thisPerson defaultEmailAddress] isEqualToString:emailAddressMark], @"emailAddress Stored is not equal to the first one");
-    [thisPerson addOneEmailAddressFromAString:emailAddress2Mark];
+    [model addOneEmailAddressFromAString:emailAddress2Mark];
     XCTAssertTrue([[thisPerson emailAddress] count] == 2, @"Adding two times the same emailAddress is possible.");
     NSString *emailAddress3Mark = @"m.p.cornelisse@gmail.com";
-    [thisPerson addNewDefaultEmailAddressFromAString:emailAddress3Mark];
+    [model addNewDefaultEmailAddressFromAString:emailAddress3Mark];
     XCTAssertTrue([[thisPerson defaultEmailAddress] isEqualToString:emailAddress3Mark], @"addNewDefaultEmailAddress failes to set the right defaultEmailAddress");
 
     NSInteger i = 0;
@@ -73,43 +75,44 @@
     MCEmailAddress *toBeDeletedEmailAddress = personModel.defaultEmailaddress;
     [personModel deleteEmailAddress:toBeDeletedEmailAddress];
     XCTAssertTrue([[thisPerson emailAddress] count] == 2, @"Different amount of emailAddresses then expected.");
-    XCTAssertTrue([thisPerson getDefaultEmailAddressObject], @"No new defaultEmailAddress present");
+    XCTAssertTrue(thisPerson.defaultEmailAddressObject, @"No new defaultEmailAddress present");
     //XCTAssertFalse([MCEmailAddress isTableInDatabaseEmpty], @"No emailAddresses left in the database.");
     [personModel deleteAllEmailAddresses];
     //XCTAssertTrue([MCEmailAddress isTableInDatabaseEmpty], @"Email addresses left in the database.");
-    XCTAssertFalse([thisPerson isThereAnEmailAddress], @"There is an emailAddress present when two has been added.");
-    
-    XCTAssertFalse([MCPerson isTableInDatabaseEmpty], @"No people left in the database");
-    [MCPerson deletePerson:thisPerson];
+    XCTAssertFalse(thisPerson.hasEmailAddress, @"There is an emailAddress present when two has been added.");
+    XCTAssertFalse([MCPerson isTableInDatabaseEmptyForManagedObjectContext: _context], @"No people left in the database");
+    [_context deleteObject:personModel.person];
     XCTAssertTrue([thisPerson isDeleted], @"This person will be deleted at the next save.");
 }
 
 - (void)testSetNewDefaultEmailaddressObject
 {
     MCPerson *thisPerson = [[MCPerson alloc] initWithContext:_context];
+    MCPersonModel *markModel = [[MCPersonModel alloc] initWithPerson:thisPerson];
     [thisPerson setFirstName:@"Mark"];
     [thisPerson setLastName:@"Cornelisse"];
+    
     NSString *emailAddressMark = @"info@markcornelisse.nl";
-    [thisPerson addOneEmailAddressFromAString:emailAddressMark];
-    XCTAssertTrue([thisPerson isThereAnEmailAddress], @"There is no emailAddress present when one had just been added.");
+    [markModel addOneEmailAddressFromAString:emailAddressMark];
+    XCTAssertTrue(thisPerson.hasEmailAddress, @"There is no emailAddress present when one had just been added.");
     XCTAssertTrue([[thisPerson defaultEmailAddress] isEqualToString:emailAddressMark], @"emailAddress Stored is not equal to the new default one");
-    MCEmailAddress *firstEmailAddressObject = [thisPerson getDefaultEmailAddressObject];
+    MCEmailAddress *firstEmailAddressObject = thisPerson.defaultEmailAddressObject;
     XCTAssertTrue([[firstEmailAddressObject emailAddress] isEqualToString:emailAddressMark], @"Emailaddress stored is not the one retrieved.");
     NSString *emailAddress2Mark = @"mark.cornelisse@yahoo.com";
-    [thisPerson addOneEmailAddressFromAString:emailAddress2Mark];
-    XCTAssertTrue([thisPerson isThereAnEmailAddress], @"There is no emailAddress present when two has been added.");
+    [markModel addOneEmailAddressFromAString:emailAddress2Mark];
+    XCTAssertTrue(thisPerson.hasEmailAddress, @"There is no emailAddress present when two has been added.");
     XCTAssertTrue([[thisPerson defaultEmailAddress] isEqualToString:emailAddressMark], @"emailAddress Stored is not equal to the first one");
-    [thisPerson addOneEmailAddressFromAString:emailAddress2Mark];
+    [markModel addOneEmailAddressFromAString:emailAddress2Mark];
     XCTAssertTrue([[thisPerson emailAddress] count] == 2, @"Adding two times the same emailAddress is possible.");
     NSString *emailAddress3Mark = @"m.p.cornelisse@gmail.com";
-    [thisPerson addNewDefaultEmailAddressFromAString:emailAddress3Mark];
+    [markModel addNewDefaultEmailAddressFromAString:emailAddress3Mark];
     XCTAssertTrue([[thisPerson defaultEmailAddress] isEqualToString:emailAddress3Mark], @"addNewDefaultEmailAddress failes to set the right defaultEmailAddress");
-    [thisPerson setNewDefaultEmailaddressObject:firstEmailAddressObject];
+    [markModel updateDefaultEmailAddressObject:firstEmailAddressObject];
     XCTAssertTrue([[thisPerson defaultEmailAddress] isEqualToString:emailAddressMark], @"setNewDefaultEmailaddressObject failes to set the correct defaultEmailAddress");
     MCPersonModel *personModel = [[MCPersonModel alloc] init];
     [personModel prepareForUseWithPerson:thisPerson];
     [personModel deleteAllEmailAddresses];
-    [MCPerson deletePerson:thisPerson];
+    [_context deleteObject:personModel.person];
 }
 
 - (void)testHasPersonMadePaymentWithInvalidExchangeRates

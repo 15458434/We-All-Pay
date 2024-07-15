@@ -9,7 +9,7 @@
 @import FirebaseCrashlytics;
 
 #import "MCSharedBill+addons.h"
-#import "MCPerson+addons.h"
+#import "MCPerson+CoreDataProperties.h"
 #import "MCEmailAddress+CoreDataProperties.h"
 #import "MCPayment+addons.h"
 #import "MCPaymentPresence+CoreDataProperties.h"
@@ -181,7 +181,7 @@
         [[self managedObjectContext] deleteObject:paymentPresence];
         [payment recalculateAveragePeopleOweAndStore];
     }
-    [MCPerson deletePerson:toBeDeletedPerson];
+    [self.managedObjectContext deleteObject:toBeDeletedPerson];
 }
 
 - (MCPerson *)fetchPersonWithUniqueID:(NSString *)uuid
@@ -310,11 +310,13 @@
 
 - (BOOL)doesEveryoneHaveAnEmailAddress
 {
-    for (MCPerson *person in [self peoplePresent]) {
-        if (![person isThereAnEmailAddress]) {
+    for (MCPerson *person in self.peoplePresent) {
+        if (!person.hasEmailAddress) {
+            NSLog(@"NO - %@", person);
             return NO;
         }
     }
+    NSLog(@"YES");
     return YES;
 }
 
@@ -578,7 +580,7 @@
 - (NSArray<MCPerson *> *)getArrayOfPeopleSortedOnFullNames
 {
     NSArray<MCPerson *> *unsortedPeople = [[self peoplePresent] allObjects];
-    return [[UILocalizedIndexedCollation currentCollation] sortedArrayFromArray:unsortedPeople collationStringSelector:@selector(getFullName)];
+    return [[UILocalizedIndexedCollation currentCollation] sortedArrayFromArray:unsortedPeople collationStringSelector:@selector(fullName)];
 }
 
 - (void)deleteIfStillNew

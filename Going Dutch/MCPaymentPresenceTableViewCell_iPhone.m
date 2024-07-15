@@ -10,7 +10,7 @@
 
 #import "MCPaymentPresence+CoreDataProperties.h"
 #import "MCPayment+addons.h"
-#import "MCPerson+addons.h"
+#import "MCPerson+CoreDataProperties.h"
 
 #import "We_all_pay-Swift.h"
 

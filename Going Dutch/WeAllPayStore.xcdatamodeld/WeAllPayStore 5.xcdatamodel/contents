@@ -65,8 +65,10 @@
         <attribute name="dateModified" optional="YES" attributeType="Date" usesScalarValueType="NO"/>
         <attribute name="defaultEmailAddress" optional="YES" transient="YES" attributeType="String"/>
         <attribute name="firstName" optional="YES" attributeType="String"/>
-        <attribute name="getFullName" optional="YES" transient="YES" attributeType="String"/>
+        <attribute name="fullName" optional="YES" transient="YES" attributeType="String"/>
+        <attribute name="hasEmailAddress" transient="YES" attributeType="Boolean" defaultValueString="NO" usesScalarValueType="YES"/>
         <attribute name="lastName" optional="YES" attributeType="String"/>
+        <attribute name="name" transient="YES" attributeType="String"/>
         <attribute name="phoneNumber" optional="YES" attributeType="String"/>
         <attribute name="picture" optional="YES" transient="YES" customClassName="UIImage"/>
         <attribute name="pictureData" optional="YES" attributeType="Binary" allowsExternalBinaryDataStorage="YES"/>

@@ -17,7 +17,7 @@
 #import "MCBadgeButton.h"
 
 #import "MCSharedBill+addons.h"
-#import "MCPerson+addons.h"
+#import "MCPerson+CoreDataProperties.h"
 #import "MCCurrency+addons.h"
 
 #import "MCEditorType.h"

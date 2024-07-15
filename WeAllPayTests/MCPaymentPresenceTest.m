@@ -10,7 +10,7 @@
 
 #import "MCSharedBill+addons.h"
 #import "MCPayment+addons.h"
-#import "MCPerson+addons.h"
+#import "MCPerson+CoreDataProperties.h"
 #import "MCEmailAddress+CoreDataProperties.h"
 #import "MCPaymentPresence+CoreDataProperties.h"
 #import "MCCurrency+addons.h"
@@ -49,18 +49,20 @@
     MCSharedBill *thisBill = [MCSharedBill addSharedBillToContext:_context];
     [thisBill setTripName:@"testAddAndDelete"];
     MCPerson *mark = [thisBill addPerson];
+    MCPersonModel *markModel = [[MCPersonModel alloc] initWithPerson:mark];
     [mark setFirstName:@"Mark"];
     [mark setLastName:@"Cornelisse"];
-    [mark addOneEmailAddressFromAString:@"info@markcornelisse.nl"];
-//    MCPayment *dummE = [thisBill addPayment];
+    [markModel addOneEmailAddressFromAString:@"info@markcornelisse.nl"];
     MCPerson *ilse = [thisBill addPerson];
+    MCPersonModel *ilseModel = [[MCPersonModel alloc] initWithPerson:ilse];
     [ilse setFirstName:@"Ilse"];
     [ilse setLastName:@"Béguin"];
-    [ilse addOneEmailAddressFromAString:@"ilse.beguin@hotmail.com"];
+    [ilseModel addOneEmailAddressFromAString:@"ilse.beguin@hotmail.com"];
     MCPerson *iva = [thisBill addPerson];
+    MCPersonModel *ivaModel = [[MCPersonModel alloc] initWithPerson:iva];
     [iva setFirstName:@"Iva"];
     [iva setLastName:@"Moslavac"];
-    [iva addOneEmailAddressFromAString:@"ivamavi2002@yahoo.co.uk"];
+    [ivaModel addOneEmailAddressFromAString:@"ivamavi2002@yahoo.co.uk"];
     
     MCPayment *firstPayment = [thisBill addPayment];
     XCTAssertTrue([[firstPayment peopleSharingPayment] count] == [[thisBill peoplePresent] count], @"Amount of people from the sharedBill is not correct.");
@@ -92,17 +94,20 @@
 {
     MCSharedBill *thisBill = [MCSharedBill addSharedBillToContext:_context];
     MCPerson *mark = [thisBill addPerson];
-    [mark setFirstName:@"Mark"];
-    [mark setLastName:@"Cornelisse"];
-    [mark addOneEmailAddressFromAString:@"info@markcornelisse.nl"];
+    MCPersonModel *markModel = [[MCPersonModel alloc] initWithPerson:mark];
+    [markModel.person setFirstName:@"Mark"];
+    [markModel.person setLastName:@"Cornelisse"];
+    [markModel addOneEmailAddressFromAString:@"info@markcornelisse.nl"];
     MCPerson *ilse = [thisBill addPerson];
-    [ilse setFirstName:@"Ilse"];
-    [ilse setLastName:@"Béguin"];
-    [ilse addOneEmailAddressFromAString:@"ilse.beguin@hotmail.com"];
+    MCPersonModel *ilseModel = [[MCPersonModel alloc] initWithPerson:ilse];
+    [ilseModel.person setFirstName:@"Ilse"];
+    [ilseModel.person setLastName:@"Béguin"];
+    [ilseModel addOneEmailAddressFromAString:@"ilse.beguin@hotmail.com"];
     MCPerson *iva = [thisBill addPerson];
-    [iva setFirstName:@"Iva"];
-    [iva setLastName:@"Moslavac"];
-    [iva addOneEmailAddressFromAString:@"ivamavi2002@yahoo.co.uk"];
+    MCPersonModel *ivaModel = [[MCPersonModel alloc] initWithPerson:iva];
+    [ivaModel.person setFirstName:@"Iva"];
+    [ivaModel.person setLastName:@"Moslavac"];
+    [ivaModel addOneEmailAddressFromAString:@"ivamavi2002@yahoo.co.uk"];
     
     MCPayment *thisPayment = [thisBill addPayment];
     XCTAssertTrue([[thisPayment peoplePresentOnThisPayment] unsignedIntegerValue] == 3 , @"There should be three people present on this payment.");
@@ -116,17 +121,20 @@
 {
     MCSharedBill *thisBill = [MCSharedBill addSharedBillToContext:_context];
     MCPerson *mark = [thisBill addPerson];
-    [mark setFirstName:@"Mark"];
-    [mark setLastName:@"Cornelisse"];
-    [mark addOneEmailAddressFromAString:@"info@markcornelisse.nl"];
+    MCPersonModel *markModel = [[MCPersonModel alloc] initWithPerson:mark];
+    [markModel.person setFirstName:@"Mark"];
+    [markModel.person setLastName:@"Cornelisse"];
+    [markModel addOneEmailAddressFromAString:@"info@markcornelisse.nl"];
     MCPerson *ilse = [thisBill addPerson];
-    [ilse setFirstName:@"Ilse"];
-    [ilse setLastName:@"Béguin"];
-    [ilse addOneEmailAddressFromAString:@"ilse.beguin@hotmail.com"];
+    MCPersonModel *ilseModel = [[MCPersonModel alloc] initWithPerson:ilse];
+    [ilseModel.person setFirstName:@"Ilse"];
+    [ilseModel.person setLastName:@"Béguin"];
+    [ilseModel addOneEmailAddressFromAString:@"ilse.beguin@hotmail.com"];
     MCPerson *iva = [thisBill addPerson];
-    [iva setFirstName:@"Iva"];
-    [iva setLastName:@"Moslavac"];
-    [iva addOneEmailAddressFromAString:@"ivamavi2002@yahoo.co.uk"];
+    MCPersonModel *ivaModel = [[MCPersonModel alloc] initWithPerson:iva];
+    [ivaModel.person setFirstName:@"Iva"];
+    [ivaModel.person setLastName:@"Moslavac"];
+    [ivaModel addOneEmailAddressFromAString:@"ivamavi2002@yahoo.co.uk"];
     
     MCPayment *thisPayment = [thisBill addPayment];
     thisPayment.money = @9.00;
@@ -181,17 +189,20 @@
 {
     MCSharedBill *thisBill = [MCSharedBill addSharedBillToContext:_context];
     MCPerson *mark = [thisBill addPerson];
-    [mark setFirstName:@"Mark"];
-    [mark setLastName:@"Cornelisse"];
-    [mark addOneEmailAddressFromAString:@"info@markcornelisse.nl"];
+    MCPersonModel *markModel = [[MCPersonModel alloc] initWithPerson:mark];
+    [markModel.person setFirstName:@"Mark"];
+    [markModel.person setLastName:@"Cornelisse"];
+    [markModel addOneEmailAddressFromAString:@"info@markcornelisse.nl"];
     MCPerson *ilse = [thisBill addPerson];
-    [ilse setFirstName:@"Ilse"];
-    [ilse setLastName:@"Béguin"];
-    [ilse addOneEmailAddressFromAString:@"ilse.beguin@hotmail.com"];
+    MCPersonModel *ilseModel = [[MCPersonModel alloc] initWithPerson:ilse];
+    [ilseModel.person setFirstName:@"Ilse"];
+    [ilseModel.person setLastName:@"Béguin"];
+    [ilseModel addOneEmailAddressFromAString:@"ilse.beguin@hotmail.com"];
     MCPerson *iva = [thisBill addPerson];
-    [iva setFirstName:@"Iva"];
-    [iva setLastName:@"Moslavac"];
-    [iva addOneEmailAddressFromAString:@"ivamavi2002@yahoo.co.uk"];
+    MCPersonModel *ivaModel = [[MCPersonModel alloc] initWithPerson:iva];
+    [ivaModel.person setFirstName:@"Iva"];
+    [ivaModel.person setLastName:@"Moslavac"];
+    [ivaModel addOneEmailAddressFromAString:@"ivamavi2002@yahoo.co.uk"];
     
     MCPayment *thisPayment = [thisBill addPayment];
     [thisPayment setPayingPerson:mark];
@@ -227,17 +238,20 @@
 {
     MCSharedBill *thisBill = [MCSharedBill addSharedBillToContext:_context];
     MCPerson *mark = [thisBill addPerson];
-    [mark setFirstName:@"Mark"];
-    [mark setLastName:@"Cornelisse"];
-    [mark addOneEmailAddressFromAString:@"info@markcornelisse.nl"];
+    MCPersonModel *markModel = [[MCPersonModel alloc] initWithPerson:mark];
+    [markModel.person setFirstName:@"Mark"];
+    [markModel.person setLastName:@"Cornelisse"];
+    [markModel addOneEmailAddressFromAString:@"info@markcornelisse.nl"];
     MCPerson *ilse = [thisBill addPerson];
-    [ilse setFirstName:@"Ilse"];
-    [ilse setLastName:@"Béguin"];
-    [ilse addOneEmailAddressFromAString:@"ilse.beguin@hotmail.com"];
+    MCPersonModel *ilseModel = [[MCPersonModel alloc] initWithPerson:ilse];
+    [ilseModel.person setFirstName:@"Ilse"];
+    [ilseModel.person setLastName:@"Béguin"];
+    [ilseModel addOneEmailAddressFromAString:@"ilse.beguin@hotmail.com"];
     MCPerson *iva = [thisBill addPerson];
-    [iva setFirstName:@"Iva"];
-    [iva setLastName:@"Moslavac"];
-    [iva addOneEmailAddressFromAString:@"ivamavi2002@yahoo.co.uk"];
+    MCPersonModel *ivaModel = [[MCPersonModel alloc] initWithPerson:iva];
+    [ivaModel.person setFirstName:@"Iva"];
+    [ivaModel.person setLastName:@"Moslavac"];
+    [ivaModel addOneEmailAddressFromAString:@"ivamavi2002@yahoo.co.uk"];
     
     MCPayment *thisPayment = [thisBill addPayment];
     [thisPayment setPayingPerson:mark];
@@ -267,13 +281,15 @@
     MCSharedBill *thisBill = [MCSharedBill addSharedBillToContext:_context];
     [thisBill setTripName:@"Movie"];
     MCPerson *mark = [thisBill addPerson];
-    [mark setFirstName:@"Mark"];
-    [mark setLastName:@"Cornelisse"];
-    [mark addOneEmailAddressFromAString:@"info@markcornelisse.nl"];
+    MCPersonModel *markModel = [[MCPersonModel alloc] initWithPerson:mark];
+    [markModel.person setFirstName:@"Mark"];
+    [markModel.person setLastName:@"Cornelisse"];
+    [markModel addOneEmailAddressFromAString:@"info@markcornelisse.nl"];
     MCPerson *ilse = [thisBill addPerson];
-    [ilse setFirstName:@"Ilse"];
-    [ilse setLastName:@"Béguin"];
-    [ilse addOneEmailAddressFromAString:@"ilse.beguin@hotmail.com"];
+    MCPersonModel *ilseModel = [[MCPersonModel alloc] initWithPerson:ilse];
+    [ilseModel.person setFirstName:@"Ilse"];
+    [ilseModel.person setLastName:@"Béguin"];
+    [ilseModel addOneEmailAddressFromAString:@"ilse.beguin@hotmail.com"];
     
     MCPayment *thisPayment = [thisBill addPayment];
     [thisPayment setPayingPerson:mark];
@@ -282,9 +298,10 @@
     [thisPayment setOnWhichBill:thisBill];
     
     MCPerson *iva = [thisBill addPerson];
-    [iva setFirstName:@"Iva"];
-    [iva setLastName:@"Moslavac"];
-    [iva addOneEmailAddressFromAString:@"ivamavi2002@yahoo.co.uk"];
+    MCPersonModel *ivaModel = [[MCPersonModel alloc] initWithPerson:iva];
+    [ivaModel.person setFirstName:@"Iva"];
+    [ivaModel.person setLastName:@"Moslavac"];
+    [ivaModel addOneEmailAddressFromAString:@"ivamavi2002@yahoo.co.uk"];
     
     XCTAssertEqual([[thisPayment peopleSharingPayment] count], 3, @"There can only be 3 people sharing this payment.");
     MCPaymentPresence *presenceOfIva = [[iva sharingPayment] anyObject];
@@ -295,17 +312,20 @@
 {
     MCSharedBill *thisBill = [MCSharedBill addSharedBillToContext:_context];
     MCPerson *mark = [thisBill addPerson];
-    [mark setFirstName:@"Mark"];
-    [mark setLastName:@"Cornelisse"];
-    [mark addOneEmailAddressFromAString:@"info@markcornelisse.nl"];
+    MCPersonModel *markModel = [[MCPersonModel alloc] initWithPerson:mark];
+    [markModel.person setFirstName:@"Mark"];
+    [markModel.person setLastName:@"Cornelisse"];
+    [markModel addOneEmailAddressFromAString:@"info@markcornelisse.nl"];
     MCPerson *ilse = [thisBill addPerson];
-    [ilse setFirstName:@"Ilse"];
-    [ilse setLastName:@"Béguin"];
-    [ilse addOneEmailAddressFromAString:@"ilse.beguin@hotmail.com"];
+    MCPersonModel *ilseModel = [[MCPersonModel alloc] initWithPerson:ilse];
+    [ilseModel.person setFirstName:@"Ilse"];
+    [ilseModel.person setLastName:@"Béguin"];
+    [ilseModel addOneEmailAddressFromAString:@"ilse.beguin@hotmail.com"];
     MCPerson *iva = [thisBill addPerson];
-    [iva setFirstName:@"Iva"];
-    [iva setLastName:@"Moslavac"];
-    [iva addOneEmailAddressFromAString:@"ivamavi2002@yahoo.co.uk"];
+    MCPersonModel *ivaModel = [[MCPersonModel alloc] initWithPerson:iva];
+    [ivaModel.person setFirstName:@"Iva"];
+    [ivaModel.person setLastName:@"Moslavac"];
+    [ivaModel addOneEmailAddressFromAString:@"ivamavi2002@yahoo.co.uk"];
     
     MCPayment *thisPayment = [thisBill addPayment];
     [thisPayment setPayingPerson:mark];

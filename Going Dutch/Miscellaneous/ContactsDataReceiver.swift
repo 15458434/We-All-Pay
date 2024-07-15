@@ -45,18 +45,19 @@ final class ContactsDataReceiver: NSObject, ThisEventReadOnly, CNContactPickerDe
         WeAllPayStoreController.defaultStore.performBackgroundTask { backgroundContext in
             let backgroundTonightsBill: MCSharedBill = backgroundContext.object(with: tonightsBillID) as! MCSharedBill
             let newPerson: MCPerson = backgroundTonightsBill.addPerson()!
-            newPerson.firstName = contact.givenName
-            newPerson.lastName = contact.middleName + contact.familyName
+            let personModel = PersonModel(with: newPerson)
+            personModel.person.firstName = contact.givenName
+            personModel.person.lastName = contact.middleName + contact.familyName
             for emailAddress in contact.emailAddresses {
                 let emailAddressString = emailAddress.value as String
-                newPerson.addOneEmailAddress(fromAString: emailAddressString)
+                personModel.add(emailAddress: emailAddressString)
             }
             if let imageData = contact.imageData {
-                newPerson.setThumbnailDataFrom(UIImage(data: imageData)!)
-                newPerson.setPictureDataFrom(UIImage(data: imageData)!)
+                newPerson.thumbnail = UIImage(data: imageData)!
+                newPerson.picture = UIImage(data: imageData)!
             } else {
-                newPerson.setThumbnailDataFrom(nil)
-                newPerson.setPictureDataFrom(nil)
+                newPerson.thumbnail = nil
+                newPerson.picture = nil
             }
             
             do {

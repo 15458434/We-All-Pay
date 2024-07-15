@@ -14,7 +14,7 @@
 #import "MCSharedBillPageViewController.h"
 #import "UIViewController+WeAllPayStore.h"
 
-#import "MCPerson+addons.h"
+#import "MCPerson+CoreDataProperties.h"
 #import "MCSharedBill+addons.h"
 #import "MCCurrency+addons.h"
 
@@ -291,8 +291,8 @@ static void * isEditingToggleContext = &isEditingToggleContext;
         if (!thePerson) {
             // No person present create a new one.
             thePerson = [_eventModel addPerson];
-            [thePerson setThumbnailDataFromImage:nil];
-            [thePerson setPictureDataFromImage:nil];
+            thePerson.thumbnail = nil;
+            thePerson.picture = nil;
             [destination updateWithPerson:thePerson];
             destination.isNew = YES;
         } else {

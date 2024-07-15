@@ -13,7 +13,7 @@
 #import "UIViewController+WeAllPayStore.h"
 
 #import "MCSharedBill+addons.h"
-#import "MCPerson+addons.h"
+#import "MCPerson+CoreDataProperties.h"
 #import "MCPayment+addons.h"
 
 #import "MCAllTripsTableViewController.h"

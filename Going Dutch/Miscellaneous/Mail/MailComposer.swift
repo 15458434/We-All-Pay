@@ -25,7 +25,7 @@ extension MailComposer where Self: ThisEventReadOnly {
         let allPeople = Array(event.peoplePresent ?? Set<MCPerson>())
         var listOfMailAddresses = [String]()
         for person in allPeople {
-            if let emailAddress = person.defaultEmailAddress() {
+            if let emailAddress = person.defaultEmailAddress {
                 listOfMailAddresses.append(emailAddress)
             }
         }

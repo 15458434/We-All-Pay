@@ -7,7 +7,6 @@
 //
 
 #import "MCSharedBill+CoreDataProperties.h"
-#import "MCPerson+addons.h"
 
 @interface MCSharedBill (addons)
 

@@ -12,7 +12,7 @@
 #import "MCPaymentPresenceTableViewCell_iPhone.h"
 
 #import "MCPayment+addons.h"
-#import "MCPerson+addons.h"
+#import "MCPerson+CoreDataProperties.h"
 #import "MCSharedBill+addons.h"
 #import "MCPaymentPresence+CoreDataProperties.h"
 
@@ -412,7 +412,7 @@ static void * CurrencyContext = &CurrencyContext;
             case NSKeyValueChangeSetting: {
                 id new = change[NSKeyValueChangeNewKey];
                 if ([new isKindOfClass:[MCPerson class]]) {
-                    _payerNameField.text = ((MCPerson *)new).getFullName;
+                    _payerNameField.text = ((MCPerson *)new).fullName;
                     if (_model.payment.payingPerson) {
                         _payerPicture.image = _model.payment.payingPerson.picture;
                     }

@@ -9,7 +9,7 @@
 #pragma mark - Model
 #import "MCSharedBill+addons.h"
 #import "MCPayment+addons.h"
-#import "MCPerson+addons.h"
+#import "MCPerson+CoreDataProperties.h"
 #import "MCCurrency+addons.h"
 #import "MCExchangeRate+CoreDataProperties.h"
 #import "MCPaymentPresence+CoreDataProperties.h"
