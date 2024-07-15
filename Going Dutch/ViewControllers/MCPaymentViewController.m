@@ -262,9 +262,9 @@ static void * CurrencyContext = &CurrencyContext;
     
     // Set the cell alignment to headerView stuff
     NSLayoutConstraint *payerViewToCellNameLabel = [NSLayoutConstraint constraintWithItem:_payerNameField attribute:NSLayoutAttributeLeading relatedBy:NSLayoutRelationEqual toItem:[cell nameLabel] attribute:NSLayoutAttributeLeading multiplier:1.0 constant:-6.0];
-    payerViewToCellNameLabel.identifier = [[thisCellsPresence.person getFullName] stringByAppendingString:@"payerViewToCellNameLabel"];
+    payerViewToCellNameLabel.identifier = [thisCellsPresence.person.fullName stringByAppendingString:@"payerViewToCellNameLabel"];
     NSLayoutConstraint *payerPictureToUser = [NSLayoutConstraint constraintWithItem:_payerPicture attribute:NSLayoutAttributeTrailing relatedBy:NSLayoutRelationEqual toItem:[cell personView] attribute:NSLayoutAttributeTrailing multiplier:1.0 constant:0.0];
-    payerPictureToUser.identifier = [[thisCellsPresence.person getFullName] stringByAppendingString:@"payerPictureToUser"];
+    payerPictureToUser.identifier = [thisCellsPresence.person.fullName stringByAppendingString:@"payerPictureToUser"];
     [self.tableView addConstraints:@[payerViewToCellNameLabel, payerPictureToUser]];
     
     return cell;

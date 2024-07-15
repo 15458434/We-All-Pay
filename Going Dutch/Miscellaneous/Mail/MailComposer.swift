@@ -90,7 +90,7 @@ extension MailComposer where Self: ThisEventReadOnly {
             guard payment.payingPerson != nil else {
                 throw MailComposerError.missingCrititcalInformationIn(payment: payment)
             }
-            let fullname = payment.payingPerson!.getFullName()
+            let fullname = payment.payingPerson!.fullName
             let moneyInMainCurrency = mainCurrencyFormatter.string(for: payment.moneyInMainCurrency)!
             let paymentDescription = payment.fullDescriptionOfPayment()
             if payment.exchangeRate!.exchangeRate!.doubleValue == 1.0 {
@@ -108,7 +108,7 @@ extension MailComposer where Self: ThisEventReadOnly {
         mailBody += String.localizedStringWithFormat(NSLocalizedString("solution_mail_body_3", value: "We each used these amounts:", comment: "The amount of money we used:"))
         mailBody += "\n"
         for person in allPeople {
-            mailBody += String.localizedStringWithFormat(NSLocalizedString("solution_mail_body_4", value: "%1$@ used %2$@ in total.", comment: "%1$@ used %2$@ in total."), person.getFullName(), mainCurrencyFormatter.string(for: event.amountShouldHavePaid(by: person))!)
+            mailBody += String.localizedStringWithFormat(NSLocalizedString("solution_mail_body_4", value: "%1$@ used %2$@ in total.", comment: "%1$@ used %2$@ in total."), person.fullName, mainCurrencyFormatter.string(for: event.amountShouldHavePaid(by: person))!)
             mailBody += "\n"
         }
         mailBody += "\n"
@@ -117,10 +117,10 @@ extension MailComposer where Self: ThisEventReadOnly {
         mailBody += "\n"
         
         for returnPayment in solution {
-            let payerFullName: String = returnPayment.payer?.getFullName() ?? ""
+            let payerFullName: String = returnPayment.payer?.fullName ?? ""
             let moneyNumber = returnPayment.money ?? NSNumber(value: 0.0)
             let moneyString: String = mainCurrencyFormatter.string(for: moneyNumber)!
-            let receiverFullName: String = returnPayment.receiver?.getFullName() ?? ""
+            let receiverFullName: String = returnPayment.receiver?.fullName ?? ""
             mailBody += String.localizedStringWithFormat(NSLocalizedString("solution_mail_body_6", value: "%1$@ pays %2$@ to %3$@.", comment: "%1$@ pays %2$@ to %3$@"), payerFullName, moneyString, receiverFullName)
             mailBody += "\n"
         }

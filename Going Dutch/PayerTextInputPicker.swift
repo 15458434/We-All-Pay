@@ -55,7 +55,7 @@ import FirebaseCrashlytics
         let selectable = selectableFromPeoplePresent[row]
         switch selectable {
         case .person(let person):
-            return person.getFullName()
+            return person.fullName
         case .none(let stringValue):
             return stringValue
         }

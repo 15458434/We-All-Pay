@@ -18,7 +18,7 @@ import UIKit
         moneyLabel.text = model.currencyFormatter!.string(for: item.money)
         
         let owesString = NSLocalizedString("solution_view_cell_who_owes_who_label", value: "%1$@ owes %2$@", comment: "In the solution view: As in Mark owes Yvette x amount of money.")
-        let whoOwesWho = String.localizedStringWithFormat(owesString, item.payer!.getName(), item.receiver!.getName())
+        let whoOwesWho = String.localizedStringWithFormat(owesString, item.payer!.name, item.receiver!.name)
         whoOwesWhoLabel.text = whoOwesWho
         
         self.selectionStyle = .none

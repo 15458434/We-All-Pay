@@ -71,10 +71,6 @@ import UIKit
         return emailaddresses.firstIndex(of: defaultEmailAddressObject) ?? -1
     }
     
-    var fullName: String {
-        person.getFullName()
-    }
-    
     var areAllExchangeRatesPresent: Bool {
         person.hasPersonMadePaymentWithInvalidExchangeRates()
     }

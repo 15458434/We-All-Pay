@@ -113,7 +113,7 @@ static void * isEditingToggleContext = &isEditingToggleContext;
     }
     MCPerson *nextPayer = _eventModel.nextPayer;
 
-    WhoPayingUserDefaultsStoreInterface *groupStore = [[WhoPayingUserDefaultsStoreInterface alloc] initWithTonightsBillUUID:_eventModel.event.uniqueBillId tripName:_eventModel.event.tripName nextPayerUUID:nextPayer.uniquePersonId fullNameOfNextPayer:[nextPayer getFullName]];
+    WhoPayingUserDefaultsStoreInterface *groupStore = [[WhoPayingUserDefaultsStoreInterface alloc] initWithTonightsBillUUID:_eventModel.event.uniqueBillId tripName:_eventModel.event.tripName nextPayerUUID:nextPayer.uniquePersonId fullNameOfNextPayer:nextPayer.fullName];
     [groupStore storeToDefaults];
     [[NCWidgetController widgetController] setHasContent:YES forWidgetWithBundleIdentifier:[WhoPayingUserDefaultsStoreInterface MCWhoIsPayingNextBundleIdentifier]];
 }

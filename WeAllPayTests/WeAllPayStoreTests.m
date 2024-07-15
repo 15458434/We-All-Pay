@@ -47,17 +47,17 @@
     [thisPerson setFirstName:@"Connie"];
     [thisPerson setLastName:@"Carter"];
     [thisPerson addOneEmailAddressFromAString:@"connie@markcornelisse.nl"];
-    XCTAssertTrue([[thisPerson getName] isEqualToString:@"Connie"], @"First name is not selected when it's available.");
-    XCTAssertTrue([[thisPerson getFullName] isEqualToString:@"Connie Carter"]);
+    XCTAssertTrue([thisPerson.name isEqualToString:@"Connie"], @"First name is not selected when it's available.");
+    XCTAssertTrue([thisPerson.fullName isEqualToString:@"Connie Carter"]);
     MCPerson *thisPersonWithMissingFirstName = [[MCPerson alloc] initWithContext:_context];
     [thisPersonWithMissingFirstName setLastName:@"Carter"];
     [thisPersonWithMissingFirstName addOneEmailAddressFromAString:@"connie@markcornelisse.nl"];
-    XCTAssertTrue([[thisPersonWithMissingFirstName getName] isEqualToString:@"Carter"], @"Last is not selected when first name is not available");
-    XCTAssertTrue([[thisPersonWithMissingFirstName getFullName] isEqualToString:@"Carter"], @"Fullname is wrong when first name is missing.");
+    XCTAssertTrue([thisPersonWithMissingFirstName.name isEqualToString:@"Carter"], @"Last is not selected when first name is not available");
+    XCTAssertTrue([thisPersonWithMissingFirstName.fullName isEqualToString:@"Carter"], @"Fullname is wrong when first name is missing.");
     MCPerson *thisPersonWithMissingFirstAndLastName = [[MCPerson alloc] initWithContext:_context];
     [thisPersonWithMissingFirstAndLastName addOneEmailAddressFromAString:@"connie@markcornelisse.nl"];
-    XCTAssertTrue([[thisPersonWithMissingFirstAndLastName getName] isEqualToString:@"connie@markcornelisse.nl"], @"emailAddress is not selected when both first and lastname are not selected.");
-    XCTAssertTrue([[thisPersonWithMissingFirstAndLastName getFullName] isEqualToString:@"connie@markcornelisse.nl"], @"emailAddress is not selected when both first and lastnames are not selected.");
+    XCTAssertTrue([thisPersonWithMissingFirstAndLastName.name isEqualToString:@"connie@markcornelisse.nl"], @"emailAddress is not selected when both first and lastname are not selected.");
+    XCTAssertTrue([thisPersonWithMissingFirstAndLastName.fullName isEqualToString:@"connie@markcornelisse.nl"], @"emailAddress is not selected when both first and lastnames are not selected.");
 }
 
 - (void)testPersonExistenceOnSharedBill

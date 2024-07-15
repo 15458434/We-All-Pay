@@ -34,7 +34,7 @@ static void * AverageOweFromPaymentContext = &AverageOweFromPaymentContext;
         [self.model removeObserver:self forKeyPath:@"averageOweFromPayment" context:AverageOweFromPaymentContext];
     }
     self.model = paymentPresence;
-    self.nameLabel.text = [self.model.person getFullName];
+    self.nameLabel.text = self.model.person.fullName;
     self.personView.image = self.model.person.thumbnail;
     self.isPresentSwitch.on = self.model.isPersonPresent.boolValue;
     NSKeyValueObservingOptions options = NSKeyValueObservingOptionInitial | NSKeyValueObservingOptionNew;

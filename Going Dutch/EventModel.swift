@@ -61,11 +61,11 @@ import Combine
         let allNamesOfPeoplePresent: [String]
         if #available(iOS 15.0, *) {
             let sortDescriptor: SortDescriptor<MCPerson> = SortDescriptor(\.dateCreated, order: .forward)
-            allNamesOfPeoplePresent = event.peoplePresent?.sorted(using: sortDescriptor).map { $0.getName() } ?? [String]()
+            allNamesOfPeoplePresent = event.peoplePresent?.sorted(using: sortDescriptor).map { $0.name } ?? [String]()
         } else {
             allNamesOfPeoplePresent = event.peoplePresent?.sorted(by: {
                 return $0.dateCreated!.compare($1.dateCreated!) == .orderedDescending
-            }).map { $0.getName() } ?? [String]()
+            }).map { $0.name } ?? [String]()
         }
         
         if allNamesOfPeoplePresent.count == 0 {

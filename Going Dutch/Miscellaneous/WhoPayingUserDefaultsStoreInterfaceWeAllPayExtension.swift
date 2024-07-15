@@ -16,7 +16,7 @@ extension WhoPayingUserDefaultsStoreInterface {
         let tripName = tonightsBill?.tripName
         let nextPayer = tonightsBill?.fetchPeoplePresentOrdered(byAmountPaid: true).first
         let nextPayerID = nextPayer?.uniquePersonId
-        let nextPayerName = nextPayer?.getFullName()
+        let nextPayerName = nextPayer?.fullName
         
         // Put it in a backgroundQueue
         let backgroundQueue = DispatchQueue(label: "sendToWhoIsPayingNextQueue", attributes: [])

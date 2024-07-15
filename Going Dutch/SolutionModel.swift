@@ -35,7 +35,7 @@ import UIKit
         
         if let peoplePresentSet = self.event.peoplePresent {
             let unsortedPeoplePresent: [MCPerson] = [MCPerson](peoplePresentSet)
-            let peoplePresentLocalizedSorted = (UILocalizedIndexedCollation.current().sortedArray(from: unsortedPeoplePresent, collationStringSelector: #selector(MCPerson.getFullName)) as! [MCPerson])
+            let peoplePresentLocalizedSorted = (UILocalizedIndexedCollation.current().sortedArray(from: unsortedPeoplePresent, collationStringSelector: #selector(getter: MCPerson.fullName)) as! [MCPerson])
             let totalUsedModel = TotalUsedSectionItemsModel(title: sectionTitle(for: .totalOwes), items: peoplePresentLocalizedSorted)
             let totalSpentModel = TotalSpentSectionItemsModel(title: sectionTitle(for: .totalPaid), items: peoplePresentLocalizedSorted)
             self.addSection(totalUsedModel)

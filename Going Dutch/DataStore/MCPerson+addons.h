@@ -19,8 +19,6 @@ NS_ASSUME_NONNULL_BEGIN
 - (void)setThumbnailDataFromImage:(nullable UIImage *)image;
 - (void)setPictureDataFromImage:(nullable UIImage *)image;
 
-- (NSString *)getFullName;
-- (NSString *)getName;
 - (nullable NSString *)defaultEmailAddress;
 - (void)addNewDefaultEmailAddressFromAString:(NSString *)newEmailAddressString;
 - (void)addOneEmailAddressFromAString:(NSString *)emailAddressAsString;

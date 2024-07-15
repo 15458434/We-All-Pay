@@ -235,7 +235,7 @@ final class PaymentViewController: MCGenericAdBannerTableViewController, AdBanne
         cell.accessibilityIdentifier = "PaymentPresenceTableViewCell-\(indexPath.row)"
         
         let paymentPresenceForThisCell: MCPaymentPresence = model.peoplePresenceController.object(at: indexPath)
-        cell.nameLabel.text = paymentPresenceForThisCell.person!.getFullName()
+        cell.nameLabel.text = paymentPresenceForThisCell.person!.fullName
         cell.personView.image = paymentPresenceForThisCell.person!.thumbnail
         cell.theSwitch.setOn(paymentPresenceForThisCell.isPersonPresent!.boolValue, animated: false)
 
@@ -280,7 +280,7 @@ final class PaymentViewController: MCGenericAdBannerTableViewController, AdBanne
                     return
                 }
                 
-                mySelf.selectPayerButton.setTitle(newValue.getFullName(), for: .normal)
+                mySelf.selectPayerButton.setTitle(newValue.fullName, for: .normal)
                 mySelf.selectPayerButton.invalidateIntrinsicContentSize()
                 
                 mySelf.payerView.image = newValue.picture

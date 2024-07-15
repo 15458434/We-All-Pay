@@ -77,6 +77,8 @@
 		383D5D841C0708F800BE9F94 /* SolutionReturnPaymentItem.swift in Sources */ = {isa = PBXBuildFile; fileRef = 383D5D831C0708F800BE9F94 /* SolutionReturnPaymentItem.swift */; };
 		383E0C5D186737EB00AA688D /* MCSharedBillPageViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 383E0C5C186737EB00AA688D /* MCSharedBillPageViewController.m */; };
 		3841F8D323893A0B00882E40 /* EventsModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3841F8D223893A0A00882E40 /* EventsModel.swift */; };
+		3843805E2C4555E30075AFC6 /* MCPersonExtension.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3843805D2C4555E30075AFC6 /* MCPersonExtension.swift */; };
+		3843805F2C455A030075AFC6 /* MCPersonExtension.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3843805D2C4555E30075AFC6 /* MCPersonExtension.swift */; };
 		38490D2D1D7052E700A297BA /* SolutionViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 38490D2C1D7052E700A297BA /* SolutionViewController.swift */; };
 		38490D2F1D7056D100A297BA /* ShowMailViewProtocol.swift in Sources */ = {isa = PBXBuildFile; fileRef = 38490D2E1D7056D100A297BA /* ShowMailViewProtocol.swift */; };
 		38490D311D705A7700A297BA /* ThisEvent.swift in Sources */ = {isa = PBXBuildFile; fileRef = 38490D301D705A7700A297BA /* ThisEvent.swift */; };
@@ -440,6 +442,7 @@
 		383E0C5B186737EB00AA688D /* MCSharedBillPageViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = MCSharedBillPageViewController.h; path = ViewControllers/MCSharedBillPageViewController.h; sourceTree = "<group>"; };
 		383E0C5C186737EB00AA688D /* MCSharedBillPageViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = MCSharedBillPageViewController.m; path = ViewControllers/MCSharedBillPageViewController.m; sourceTree = "<group>"; };
 		3841F8D223893A0A00882E40 /* EventsModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = EventsModel.swift; sourceTree = "<group>"; };
+		3843805D2C4555E30075AFC6 /* MCPersonExtension.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MCPersonExtension.swift; sourceTree = "<group>"; };
 		38490D2C1D7052E700A297BA /* SolutionViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = SolutionViewController.swift; path = ViewControllers/iPhone/SolutionViewController.swift; sourceTree = "<group>"; };
 		38490D2E1D7056D100A297BA /* ShowMailViewProtocol.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ShowMailViewProtocol.swift; sourceTree = "<group>"; };
 		38490D301D705A7700A297BA /* ThisEvent.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ThisEvent.swift; sourceTree = "<group>"; };
@@ -839,6 +842,7 @@
 				389DE8F0197FB2B900169645 /* MCPerson.m */,
 				38DB85D817E45DEA006237CF /* MCPerson+addons.h */,
 				38DB85D917E45DEA006237CF /* MCPerson+addons.m */,
+				3843805D2C4555E30075AFC6 /* MCPersonExtension.swift */,
 				38986C9B2C382EC100C612E7 /* WeAllPayStoreController.swift */,
 				38D796141B2F1CBD00F3872F /* ExchangeRateFetcherForMCExchangeRate.swift */,
 			);
@@ -2247,6 +2251,7 @@
 				38572AE7169D437B00969C62 /* MCAppDelegate.m in Sources */,
 				38F9B88A2C3D1AAE008BA7C9 /* CurrencyUpdateModel.swift in Sources */,
 				381C2C3A275A095D00CD82D2 /* SolutionModel.swift in Sources */,
+				3843805E2C4555E30075AFC6 /* MCPersonExtension.swift in Sources */,
 				38E36EEE1BBD7E820026ED7E /* MCTwoLabelsTitleView.swift in Sources */,
 				3814B495270C500000737A06 /* NavigationViewController.swift in Sources */,
 				38A8F2A623C2583200CB3B73 /* DescriptionOfPaymentTextInputValidator.swift in Sources */,
@@ -2359,6 +2364,7 @@
 				3860575519EEB28300BD5B78 /* MCCategoryPictureStoreTest.m in Sources */,
 				385F530F191C2D140012773D /* MCPaymentPresenceTest.m in Sources */,
 				382F34472C3F267A007DDF71 /* CurrencyUpdateModel.swift in Sources */,
+				3843805F2C455A030075AFC6 /* MCPersonExtension.swift in Sources */,
 				382F34422C3F2626007DDF71 /* WeAllPayStoreController.swift in Sources */,
 				382F34452C3F2652007DDF71 /* PersonModel.swift in Sources */,
 				382F34432C3F2648007DDF71 /* EventModel.swift in Sources */,

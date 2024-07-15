@@ -69,34 +69,6 @@ NS_ASSUME_NONNULL_BEGIN
     self.pictureData = UIImagePNGRepresentation(thisImage);
 }
 
-- (NSString *)getFullName
-{
-    if ([self firstName ] && [self lastName]) {
-        return [[NSString alloc] initWithFormat:@"%@ %@", [self firstName], [self lastName]];
-    } else if ([self firstName] && ![self lastName]) {
-        return [self firstName];
-    } else if (![self firstName] && [self lastName]) {
-        return [self lastName];
-    } else  if ([self defaultEmailAddress]) {
-        return [self defaultEmailAddress];
-    } else {
-        return @"...";
-    }
-}
-
-- (NSString *)getName
-{
-    if ([self firstName]) {
-        return [self firstName];
-    } else if ([self lastName]) {
-        return [self lastName];
-    } else if ([self defaultEmailAddress]) {
-        return [self defaultEmailAddress];
-    } else {
-        return @"...";
-    }
-}
-
 - (void)addOneEmailAddressFromAString:(NSString *)emailAddressAsString {
     NSFetchRequest *request = [MCEmailAddress fetchRequest];
     request.sortDescriptors = @[[NSSortDescriptor sortDescriptorWithKey:@"emailAddress" ascending:YES]];
