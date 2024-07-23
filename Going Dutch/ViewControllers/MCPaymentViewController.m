@@ -134,10 +134,10 @@ static void * CurrencyContext = &CurrencyContext;
     [self.view endEditing:YES];
 }
 
-- (void)prepareForUseWithEvent:(MCSharedBill *)event {
-    NSParameterAssert(event);
+- (void)prepareForUseWithEventModel:(MCEventModel *)eventModel {
+    NSParameterAssert(eventModel);
     [[WeAllPayStoreController defaultStore] beginUndoGroup];
-    MCPayment *newPayment = [event addPayment];
+    MCPayment *newPayment = [eventModel addPayment];
     _isNew = YES;
     [_model prepareForUseWithPayment:newPayment];
 }
@@ -161,7 +161,8 @@ static void * CurrencyContext = &CurrencyContext;
 - (void)prepareForUseWithPathComponentsToOpen:(NSArray<NSManagedObject *> *)pathComponentsToOpen {
     MCSharedBill *event = (MCSharedBill *)pathComponentsToOpen[0];
     NSParameterAssert(event);
-    [self prepareForUseWithEvent:event];
+    MCEventModel *eventModel = [[MCEventModel alloc] initWithEvent:event];
+    [self prepareForUseWithEventModel:eventModel];
     MCPerson *predefinedPayingPerson = (MCPerson *)pathComponentsToOpen[1];
     NSParameterAssert(predefinedPayingPerson);
     [_model updatePayingPerson:predefinedPayingPerson];

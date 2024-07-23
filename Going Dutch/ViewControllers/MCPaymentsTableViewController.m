@@ -342,7 +342,7 @@ static void * isEditingToggleContext = &isEditingToggleContext;
         }
         MCPaymentViewController *paymentViewController = (MCPaymentViewController *)navController.viewControllers[0];
         if (!payment) {
-            [paymentViewController prepareForUseWithEvent:_eventModel.event];
+            [paymentViewController prepareForUseWithEventModel:_eventModel];
         } else {
             [paymentViewController prepareForUseWithPayment:payment];
         }
@@ -358,7 +358,7 @@ static void * isEditingToggleContext = &isEditingToggleContext;
         if (payment) {
             [destination prepareForUseWithPayment:payment];
         } else {
-            [destination prepareForUseWithEvent:_eventModel.event];
+            [destination prepareForUseWithEventModel:_eventModel];
         }
         UINavigationController *navController = (UINavigationController *)segue.destinationViewController;
         navController.modalInPresentation = YES;
@@ -373,7 +373,7 @@ static void * isEditingToggleContext = &isEditingToggleContext;
         UINavigationController *navController = (UINavigationController *)segue.destinationViewController;
         navController.modalInPresentation = YES;
         PaymentViewController *destination = (PaymentViewController *)navController.viewControllers.firstObject;
-        [destination prepareForUseWithEvent:_eventModel.event];
+        [destination prepareForUseWithEventModel:_eventModel];
     } else if ([segue.identifier isEqualToString:@"openPayment_iPad"]) {
         UINavigationController *navController = segue.destinationViewController;
         navController.modalInPresentation = YES;

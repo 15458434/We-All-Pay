@@ -18,7 +18,7 @@
 + (BOOL)isTableInDatabaseEmpty;
 + (BOOL)isTableInDatabaseEmptyForContext:(NSManagedObjectContext *)context;
 
-- (MCPayment *)addPayment;
+- (MCPayment *)addPayment __deprecated;
 - (void)deletePayment:(MCPayment *)toBeDeletePayment;
 - (void)updatePaymentForSupportWithPaymentPresence;
 

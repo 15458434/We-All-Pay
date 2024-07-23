@@ -86,14 +86,24 @@ final class PaymentViewController: MCGenericAdBannerTableViewController, AdBanne
     
     @objc(prepareForUseWithPathComponentsToOpen:) func prepareForUse(with pathComponentsToOpen: [NSManagedObject]) {
         let event = pathComponentsToOpen[0] as! MCSharedBill
-        self.prepareForUse(with: event)
+        let eventModel = EventModel(event: event)
+        self.prepareForUse(with: eventModel)
         let predefinedPayingPerson = pathComponentsToOpen[1] as! MCPerson
         model.update(payingPerson: predefinedPayingPerson)
     }
     
-    @objc(prepareForUseWithEvent:) func prepareForUse(with event: MCSharedBill) {
+//    @available(*, deprecated, message: "addPayment will be removed from MCSharedBill")
+//    @objc(prepareForUseWithEvent:) func prepareForUse(with event: MCSharedBill) {
+//        WeAllPayStoreController.defaultStore.beginUndoGroup()
+//        let newPayment = event.addPayment()!
+//        title = NSLocalizedString("payment_view_mainLabel_new_payment", value: "New payment", comment: "Header in the paymentView which state new Payment")
+//        isNew = .isNew
+//        model.prepareForUse(with: newPayment)
+//    }
+//    
+    @objc(prepareForUseWithEventModel:) func prepareForUse(with eventModel: EventModel) {
         WeAllPayStoreController.defaultStore.beginUndoGroup()
-        let newPayment = event.addPayment()!
+        let newPayment = eventModel.addPayment()
         title = NSLocalizedString("payment_view_mainLabel_new_payment", value: "New payment", comment: "Header in the paymentView which state new Payment")
         isNew = .isNew
         model.prepareForUse(with: newPayment)

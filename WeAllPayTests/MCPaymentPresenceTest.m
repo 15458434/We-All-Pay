@@ -39,104 +39,110 @@
 
 - (void)tearDown
 {
-    [_context reset];
     // Put teardown code here. This method is called after the invocation of each test method in the class.
     [super tearDown];
 }
 
 - (void)testAddAndDelete
 {
-    MCSharedBill *thisBill = [MCSharedBill addSharedBillToContext:_context];
-    [thisBill setTripName:@"testAddAndDelete"];
-    MCPerson *mark = [thisBill addPerson];
+    MCSharedBill *event = [MCSharedBill addSharedBillToContext:_context];
+    MCEventModel *eventmodel = [[MCEventModel alloc] initWithEvent:event];
+    [event setTripName:@"testAddAndDelete"];
+    MCPerson *mark = [event addPerson];
     MCPersonModel *markModel = [[MCPersonModel alloc] initWithPerson:mark];
     [mark setFirstName:@"Mark"];
     [mark setLastName:@"Cornelisse"];
     [markModel addOneEmailAddressFromAString:@"info@markcornelisse.nl"];
-    MCPerson *ilse = [thisBill addPerson];
+    MCPerson *ilse = [event addPerson];
     MCPersonModel *ilseModel = [[MCPersonModel alloc] initWithPerson:ilse];
     [ilse setFirstName:@"Ilse"];
     [ilse setLastName:@"Béguin"];
     [ilseModel addOneEmailAddressFromAString:@"ilse.beguin@hotmail.com"];
-    MCPerson *iva = [thisBill addPerson];
+    MCPerson *iva = [event addPerson];
     MCPersonModel *ivaModel = [[MCPersonModel alloc] initWithPerson:iva];
     [iva setFirstName:@"Iva"];
     [iva setLastName:@"Moslavac"];
     [ivaModel addOneEmailAddressFromAString:@"ivamavi2002@yahoo.co.uk"];
     
-    MCPayment *firstPayment = [thisBill addPayment];
-    XCTAssertTrue([[firstPayment peopleSharingPayment] count] == [[thisBill peoplePresent] count], @"Amount of people from the sharedBill is not correct.");
+    MCPayment *firstPayment = [eventmodel addPayment];
+    XCTAssertTrue([[firstPayment peopleSharingPayment] count] == [[event peoplePresent] count], @"Amount of people from the sharedBill is not correct.");
     NSSet *thesePeopleOnThisPayment = [firstPayment peopleSharingPayment];
     for (MCPaymentPresence *pp in thesePeopleOnThisPayment) {
         XCTAssertTrue([[pp isPersonPresent] boolValue], @"Person should be present on first creation of the payment.");
     }
-    [thisBill deletePayment:firstPayment];
+    [event deletePayment:firstPayment];
     for (MCPaymentPresence *paymentPresence in thesePeopleOnThisPayment) {
         XCTAssertTrue([paymentPresence isDeleted], @"This person should be deleted.");
     }
     
-    MCPayment *secondPayment = [thisBill addPayment];
+    MCPayment *secondPayment = [eventmodel addPayment];
     [secondPayment setMoney:@8.90];
     [secondPayment setPayingPerson:iva];
     [secondPayment setDescriptionOfPayment:@"Ice cream"];
     NSSet *ppSecondPayment = [secondPayment peopleSharingPayment];
-    [MCSharedBill deleteSharedbill:thisBill];
+    [MCSharedBill deleteSharedbill:event];
     XCTAssertTrue([secondPayment isDeleted], @"The secondPayment should be deleted.");
-    for (MCPayment *payment in [thisBill payments]) {
+    for (MCPayment *payment in [event payments]) {
         XCTAssertTrue([payment isDeleted], @"Payment should have been deleted.");
     }
     for (MCPaymentPresence *pp in ppSecondPayment) {
         XCTAssertTrue([pp isDeleted], @"People presence is not deleted on MCSharedbill delete.");
     }
+    // Disconnect the eventModel from the event.
+    [eventmodel reset];
 }
 
 - (void)testPeoplePresent
 {
-    MCSharedBill *thisBill = [MCSharedBill addSharedBillToContext:_context];
-    MCPerson *mark = [thisBill addPerson];
+    MCSharedBill *event = [MCSharedBill addSharedBillToContext:_context];
+    MCEventModel *eventModel = [[MCEventModel alloc] initWithEvent:event];
+    MCPerson *mark = [event addPerson];
     MCPersonModel *markModel = [[MCPersonModel alloc] initWithPerson:mark];
     [markModel.person setFirstName:@"Mark"];
     [markModel.person setLastName:@"Cornelisse"];
     [markModel addOneEmailAddressFromAString:@"info@markcornelisse.nl"];
-    MCPerson *ilse = [thisBill addPerson];
+    MCPerson *ilse = [event addPerson];
     MCPersonModel *ilseModel = [[MCPersonModel alloc] initWithPerson:ilse];
     [ilseModel.person setFirstName:@"Ilse"];
     [ilseModel.person setLastName:@"Béguin"];
     [ilseModel addOneEmailAddressFromAString:@"ilse.beguin@hotmail.com"];
-    MCPerson *iva = [thisBill addPerson];
+    MCPerson *iva = [event addPerson];
     MCPersonModel *ivaModel = [[MCPersonModel alloc] initWithPerson:iva];
     [ivaModel.person setFirstName:@"Iva"];
     [ivaModel.person setLastName:@"Moslavac"];
     [ivaModel addOneEmailAddressFromAString:@"ivamavi2002@yahoo.co.uk"];
     
-    MCPayment *thisPayment = [thisBill addPayment];
+    MCPayment *thisPayment = [eventModel addPayment];
     XCTAssertTrue([[thisPayment peoplePresentOnThisPayment] unsignedIntegerValue] == 3 , @"There should be three people present on this payment.");
     NSSet *thePeopleOfTheBill = [thisPayment peopleSharingPayment];
     MCPaymentPresence *pp = [thePeopleOfTheBill anyObject];
     [pp setIsPersonPresent:@NO];
     XCTAssertTrue([[thisPayment peoplePresentOnThisPayment] unsignedIntegerValue] == 2, @"Two out of three people should be present on this payment");
+    // Disconnect the eventModel from the event.
+    [eventModel reset];
 }
 
 - (void)testAveragePeopleShouldPay
 {
-    MCSharedBill *thisBill = [MCSharedBill addSharedBillToContext:_context];
-    MCPerson *mark = [thisBill addPerson];
+    MCSharedBill *event = [MCSharedBill addSharedBillToContext:_context];
+    MCEventModel *eventModel = [[MCEventModel alloc] initWithEvent:event];
+    MCPerson *mark = [eventModel addPerson];
     MCPersonModel *markModel = [[MCPersonModel alloc] initWithPerson:mark];
     [markModel.person setFirstName:@"Mark"];
     [markModel.person setLastName:@"Cornelisse"];
     [markModel addOneEmailAddressFromAString:@"info@markcornelisse.nl"];
-    MCPerson *ilse = [thisBill addPerson];
+    MCPerson *ilse = [eventModel addPerson];
     MCPersonModel *ilseModel = [[MCPersonModel alloc] initWithPerson:ilse];
     [ilseModel.person setFirstName:@"Ilse"];
     [ilseModel.person setLastName:@"Béguin"];
     [ilseModel addOneEmailAddressFromAString:@"ilse.beguin@hotmail.com"];
-    MCPerson *iva = [thisBill addPerson];
+    MCPerson *iva = [eventModel addPerson];
     MCPersonModel *ivaModel = [[MCPersonModel alloc] initWithPerson:iva];
     [ivaModel.person setFirstName:@"Iva"];
     [ivaModel.person setLastName:@"Moslavac"];
     [ivaModel addOneEmailAddressFromAString:@"ivamavi2002@yahoo.co.uk"];
     
-    MCPayment *thisPayment = [thisBill addPayment];
+    MCPayment *thisPayment = [eventModel addPayment];
     thisPayment.money = @9.00;
     [thisPayment recalculateAveragePeopleOweAndStore];
     double average = 9.00 / 3.00;
@@ -158,7 +164,7 @@
     }
     
     // Test [thisPayment fetchPaymentPresenceForPerson:]
-    MCPayment *thisPayment2 = [thisBill addPayment];
+    MCPayment *thisPayment2 = [eventModel addPayment];
     thisPayment2.money = @60.00;
     [thisPayment2 setDescriptionOfPayment:@"Bier of some sort."];
     MCPaymentPresence *ppMarkOnThisPayment2 = [thisPayment2 fetchPaymentPresenceForPerson:mark];
@@ -183,121 +189,131 @@
             XCTAssertEqualWithAccuracy(0.00, [[pp averageOweFromPayment] doubleValue], 0.01, @"Average amount not resetted by now presence.");
         }
     }
+    // Disconnect the eventModel from the event.
+    [eventModel reset];
 }
 
 - (void)testAmountShouldHavePaidBy
 {
-    MCSharedBill *thisBill = [MCSharedBill addSharedBillToContext:_context];
-    MCPerson *mark = [thisBill addPerson];
+    MCSharedBill *event = [MCSharedBill addSharedBillToContext:_context];
+    MCEventModel *eventModel = [[MCEventModel alloc] initWithEvent:event];
+    MCPerson *mark = [eventModel addPerson];
     MCPersonModel *markModel = [[MCPersonModel alloc] initWithPerson:mark];
     [markModel.person setFirstName:@"Mark"];
     [markModel.person setLastName:@"Cornelisse"];
     [markModel addOneEmailAddressFromAString:@"info@markcornelisse.nl"];
-    MCPerson *ilse = [thisBill addPerson];
+    MCPerson *ilse = [eventModel addPerson];
     MCPersonModel *ilseModel = [[MCPersonModel alloc] initWithPerson:ilse];
     [ilseModel.person setFirstName:@"Ilse"];
     [ilseModel.person setLastName:@"Béguin"];
     [ilseModel addOneEmailAddressFromAString:@"ilse.beguin@hotmail.com"];
-    MCPerson *iva = [thisBill addPerson];
+    MCPerson *iva = [eventModel addPerson];
     MCPersonModel *ivaModel = [[MCPersonModel alloc] initWithPerson:iva];
     [ivaModel.person setFirstName:@"Iva"];
     [ivaModel.person setLastName:@"Moslavac"];
     [ivaModel addOneEmailAddressFromAString:@"ivamavi2002@yahoo.co.uk"];
     
-    MCPayment *thisPayment = [thisBill addPayment];
+    MCPayment *thisPayment = [eventModel addPayment];
     [thisPayment setPayingPerson:mark];
     [thisPayment setDescriptionOfPayment:@"Drinken op een terras."];
     thisPayment.money = @9.00;
     [thisPayment recalculateAveragePeopleOweAndStore];
     
-    MCPayment *thisPayment2 = [thisBill addPayment];
+    MCPayment *thisPayment2 = [eventModel addPayment];
     [thisPayment2 setPayingPerson:iva];
     [thisPayment2 setDescriptionOfPayment:@"Food"];
     thisPayment2.money = @30.00;
     [thisPayment2 recalculateAveragePeopleOweAndStore];
     
-    MCPayment *thisPayment3 = [thisBill addPayment];
+    MCPayment *thisPayment3 = [eventModel addPayment];
     [thisPayment3 setPayingPerson:ilse];
     [thisPayment3 setDescriptionOfPayment:@"Movie"];
     thisPayment3.money = @36.00;
     [thisPayment3 recalculateAveragePeopleOweAndStore];
     
     // Does the sum function work correct when everybody is always present.
-    NSNumber *sumOfAllOwesOnPaymentsForIlse = [thisBill amountShouldHavePaidBy:ilse];
+    NSNumber *sumOfAllOwesOnPaymentsForIlse = [event amountShouldHavePaidBy:ilse];
     XCTAssertEqualWithAccuracy([sumOfAllOwesOnPaymentsForIlse doubleValue], 25.00, 0.001, @"Sum of all PaymentsPresence is not equal.");
     
     // Does the sum function work correct when someone is not present on one payment.
     [thisPayment3 thisPerson:mark setIsPresent:@NO];
-    NSNumber *sumOfAllOwesOnPaymentsForMark = [thisBill amountShouldHavePaidBy:mark];
+    NSNumber *sumOfAllOwesOnPaymentsForMark = [event amountShouldHavePaidBy:mark];
     XCTAssertEqualWithAccuracy([sumOfAllOwesOnPaymentsForMark doubleValue], 13.00, 0.001, @"Sum of all PaymentsPresence is not equal.");
-    sumOfAllOwesOnPaymentsForIlse = [thisBill amountShouldHavePaidBy:ilse];
+    sumOfAllOwesOnPaymentsForIlse = [event amountShouldHavePaidBy:ilse];
     XCTAssertEqualWithAccuracy([sumOfAllOwesOnPaymentsForIlse doubleValue], 31.00, 0.001, @"Sum of all PaymentsPresence is not equal.");
+    // Disconnect the eventModel from the event.
+    [eventModel reset];
 }
 
 - (void)testSolveWhoOwesWhoWithPaymentPresence
 {
-    MCSharedBill *thisBill = [MCSharedBill addSharedBillToContext:_context];
-    MCPerson *mark = [thisBill addPerson];
+    MCSharedBill *event = [MCSharedBill addSharedBillToContext:_context];
+    MCEventModel *eventModel = [[MCEventModel alloc] initWithEvent:event];
+    MCPerson *mark = [eventModel addPerson];
     MCPersonModel *markModel = [[MCPersonModel alloc] initWithPerson:mark];
     [markModel.person setFirstName:@"Mark"];
     [markModel.person setLastName:@"Cornelisse"];
     [markModel addOneEmailAddressFromAString:@"info@markcornelisse.nl"];
-    MCPerson *ilse = [thisBill addPerson];
+    MCPerson *ilse = [eventModel addPerson];
     MCPersonModel *ilseModel = [[MCPersonModel alloc] initWithPerson:ilse];
     [ilseModel.person setFirstName:@"Ilse"];
     [ilseModel.person setLastName:@"Béguin"];
     [ilseModel addOneEmailAddressFromAString:@"ilse.beguin@hotmail.com"];
-    MCPerson *iva = [thisBill addPerson];
+    MCPerson *iva = [eventModel addPerson];
     MCPersonModel *ivaModel = [[MCPersonModel alloc] initWithPerson:iva];
     [ivaModel.person setFirstName:@"Iva"];
     [ivaModel.person setLastName:@"Moslavac"];
     [ivaModel addOneEmailAddressFromAString:@"ivamavi2002@yahoo.co.uk"];
     
-    MCPayment *thisPayment = [thisBill addPayment];
+    MCPayment *thisPayment = [eventModel addPayment];
     [thisPayment setPayingPerson:mark];
     [thisPayment setDescriptionOfPayment:@"Drinken op een terras."];
     thisPayment.money = @9.00;
     [thisPayment thisPerson:ilse setIsPresent:@NO];
     
-    MCPayment *thisPayment2 = [thisBill addPayment];
+    MCPayment *thisPayment2 = [eventModel addPayment];
     [thisPayment2 setPayingPerson:iva];
     [thisPayment2 setDescriptionOfPayment:@"Food"];
     thisPayment2.money = @30.00;
     
-    MCPayment *thisPayment3 = [thisBill addPayment];
+    MCPayment *thisPayment3 = [eventModel addPayment];
     [thisPayment3 setPayingPerson:ilse];
     [thisPayment3 setDescriptionOfPayment:@"Movie"];
     thisPayment3.money = @36.00;
     [thisPayment3 thisPerson:mark setIsPresent:@NO];
     
-    NSArray *solution = [thisBill solveWhoHasToPayWhoFromThisBill];
+    NSArray *solution = [event solveWhoHasToPayWhoFromThisBill];
     XCTAssertTrue([solution count] == 2, @"The amount of objects in the solution is not ok.");
     XCTAssertEqualWithAccuracy([[[solution objectAtIndex:0] money] doubleValue], 5.50, 0.001, @"The amount Mark should pay is not 5.50.");
     XCTAssertEqualWithAccuracy([[[solution objectAtIndex:1] money] doubleValue], 2.50, 0.001, @"The amount Iva should pay is not 2.50.");
+    
+    // Disconnect the eventModel from the event.
+    [eventModel reset];
 }
 
 - (void)testaddLateArrivalPaymentPresenceFor
 {
-    MCSharedBill *thisBill = [MCSharedBill addSharedBillToContext:_context];
-    [thisBill setTripName:@"Movie"];
-    MCPerson *mark = [thisBill addPerson];
+    MCSharedBill *event = [MCSharedBill addSharedBillToContext:_context];
+    MCEventModel *eventModel = [[MCEventModel alloc] initWithEvent:event];
+    [event setTripName:@"Movie"];
+    MCPerson *mark = [eventModel addPerson];
     MCPersonModel *markModel = [[MCPersonModel alloc] initWithPerson:mark];
     [markModel.person setFirstName:@"Mark"];
     [markModel.person setLastName:@"Cornelisse"];
     [markModel addOneEmailAddressFromAString:@"info@markcornelisse.nl"];
-    MCPerson *ilse = [thisBill addPerson];
+    MCPerson *ilse = [eventModel addPerson];
     MCPersonModel *ilseModel = [[MCPersonModel alloc] initWithPerson:ilse];
     [ilseModel.person setFirstName:@"Ilse"];
     [ilseModel.person setLastName:@"Béguin"];
     [ilseModel addOneEmailAddressFromAString:@"ilse.beguin@hotmail.com"];
     
-    MCPayment *thisPayment = [thisBill addPayment];
+    MCPayment *thisPayment = [eventModel addPayment];
     [thisPayment setPayingPerson:mark];
     [thisPayment setDescriptionOfPayment:@"Movie tickets"];
     [thisPayment setMoney:@26.70];
-    [thisPayment setOnWhichBill:thisBill];
+    [thisPayment setOnWhichBill:event];
     
-    MCPerson *iva = [thisBill addPerson];
+    MCPerson *iva = [eventModel addPerson];
     MCPersonModel *ivaModel = [[MCPersonModel alloc] initWithPerson:iva];
     [ivaModel.person setFirstName:@"Iva"];
     [ivaModel.person setLastName:@"Moslavac"];
@@ -306,6 +322,9 @@
     XCTAssertEqual([[thisPayment peopleSharingPayment] count], 3, @"There can only be 3 people sharing this payment.");
     MCPaymentPresence *presenceOfIva = [[iva sharingPayment] anyObject];
     XCTAssertFalse([[presenceOfIva isPersonPresent] boolValue], @"Iva should not be present.");
+    
+    // Disconnect the eventModel from the event.
+    [eventModel reset];
 }
 
 - (void)testDeletePersonWithPresences

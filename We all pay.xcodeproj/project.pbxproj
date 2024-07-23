@@ -121,6 +121,8 @@
 		386EB43323C723BE00FB20B9 /* AdEngine.swift in Sources */ = {isa = PBXBuildFile; fileRef = 386EB43223C723BE00FB20B9 /* AdEngine.swift */; };
 		386FC32518E5855400428294 /* MCSharedBillMainViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 386FC32418E5855400428294 /* MCSharedBillMainViewController.m */; };
 		3870C22A1D34FDF80030035A /* We all pay app keywords.plist in Resources */ = {isa = PBXBuildFile; fileRef = 3870C22C1D34FDF80030035A /* We all pay app keywords.plist */; };
+		387270882C4F94CE0003B399 /* MCPaymentExtension.swift in Sources */ = {isa = PBXBuildFile; fileRef = 387270872C4F94CE0003B399 /* MCPaymentExtension.swift */; };
+		387270892C4F94E60003B399 /* MCPaymentExtension.swift in Sources */ = {isa = PBXBuildFile; fileRef = 387270872C4F94CE0003B399 /* MCPaymentExtension.swift */; };
 		387494D419F053C2001614CA /* WeAllPayStore3to4.xcmappingmodel in Sources */ = {isa = PBXBuildFile; fileRef = 387494D319F053C2001614CA /* WeAllPayStore3to4.xcmappingmodel */; };
 		387494D619F053E9001614CA /* WeAllPayStore2to4.xcmappingmodel in Sources */ = {isa = PBXBuildFile; fileRef = 387494D519F053E9001614CA /* WeAllPayStore2to4.xcmappingmodel */; };
 		387494D819F05476001614CA /* WeAllPayStore1to4.xcmappingmodel in Sources */ = {isa = PBXBuildFile; fileRef = 387494D719F05476001614CA /* WeAllPayStore1to4.xcmappingmodel */; };
@@ -497,6 +499,7 @@
 		386FC32318E5855400428294 /* MCSharedBillMainViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = MCSharedBillMainViewController.h; path = ViewControllers/MCSharedBillMainViewController.h; sourceTree = "<group>"; };
 		386FC32418E5855400428294 /* MCSharedBillMainViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = MCSharedBillMainViewController.m; path = ViewControllers/MCSharedBillMainViewController.m; sourceTree = "<group>"; };
 		3870C22D1D34FDFA0030035A /* nl */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; name = nl; path = "nl.lproj/We all pay app keywords.plist"; sourceTree = "<group>"; };
+		387270872C4F94CE0003B399 /* MCPaymentExtension.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MCPaymentExtension.swift; sourceTree = "<group>"; };
 		38727E5326F306ED00847DEA /* MCEditorType.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = MCEditorType.h; sourceTree = "<group>"; };
 		387494D319F053C2001614CA /* WeAllPayStore3to4.xcmappingmodel */ = {isa = PBXFileReference; lastKnownFileType = wrapper.xcmappingmodel; path = WeAllPayStore3to4.xcmappingmodel; sourceTree = "<group>"; };
 		387494D519F053E9001614CA /* WeAllPayStore2to4.xcmappingmodel */ = {isa = PBXFileReference; lastKnownFileType = wrapper.xcmappingmodel; path = WeAllPayStore2to4.xcmappingmodel; sourceTree = "<group>"; };
@@ -833,6 +836,7 @@
 				389DE8F9197FB2BA00169645 /* MCPayment.m */,
 				38DB85D217E45BCA006237CF /* MCPayment+addons.h */,
 				38DB85D317E45BCA006237CF /* MCPayment+addons.m */,
+				387270872C4F94CE0003B399 /* MCPaymentExtension.swift */,
 				389DE8F5197FB2B900169645 /* MCPaymentPresence.h */,
 				389DE8F6197FB2B900169645 /* MCPaymentPresence.m */,
 				383486B22C4166200078E72E /* MCPaymentPresenceExtension.swift */,
@@ -2276,6 +2280,7 @@
 				380046BE26CA9802003586F2 /* UIColor+ColorSpawn.m in Sources */,
 				38F2370226D012CF00A22F9E /* MCGenericAdBannerViewController.m in Sources */,
 				38D177111C3A5E640084604C /* SelectCategoryTableViewController.swift in Sources */,
+				387270882C4F94CE0003B399 /* MCPaymentExtension.swift in Sources */,
 				385295D11C105C580081894D /* CategoryPictureStoreController.swift in Sources */,
 				386FC32518E5855400428294 /* MCSharedBillMainViewController.m in Sources */,
 				38977E611B2A367E008484A4 /* MCPaymentTableViewCell.swift in Sources */,
@@ -2375,6 +2380,7 @@
 				389DE909197FC5E900169645 /* MCExchangeRateTest.m in Sources */,
 				3860575519EEB28300BD5B78 /* MCCategoryPictureStoreTest.m in Sources */,
 				385F530F191C2D140012773D /* MCPaymentPresenceTest.m in Sources */,
+				387270892C4F94E60003B399 /* MCPaymentExtension.swift in Sources */,
 				382F34472C3F267A007DDF71 /* CurrencyUpdateModel.swift in Sources */,
 				3843805F2C455A030075AFC6 /* MCPersonExtension.swift in Sources */,
 				382F34422C3F2626007DDF71 /* WeAllPayStoreController.swift in Sources */,

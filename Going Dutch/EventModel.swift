@@ -44,6 +44,7 @@ import Combine
     }
     
     func prepareForUse(with event: MCSharedBill) {
+        bag.removeAll()
         self.event = event
         self.publisher(for: \.event!.mainCurrency, options: [.initial, .new])
             .sink { [unowned self] currency in
@@ -144,6 +145,10 @@ import Combine
         event.delete(person)
     }
     
+    @objc func addPayment() -> MCPayment {
+        event.addPayment()
+    }
+    
     @objc(deletePayment:) func delete(payment: MCPayment) {
         MCPayment.delete(payment)
     }
@@ -152,7 +157,8 @@ import Combine
         WeAllPayStoreController.defaultStore.saveViewContext()
     }
     
-    func reset() {
+    /// Resets the EventModel
+    @objc func reset() {
         if !bag.isEmpty {
             bag.removeAll(keepingCapacity: true)
         }
