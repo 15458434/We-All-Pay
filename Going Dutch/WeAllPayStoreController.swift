@@ -15,7 +15,6 @@ fileprivate let WeAllPayStoreDirectoryName = "WeAllPayStore/StoreContent"
 fileprivate let WeAllPayStoreModelName = "WeAllPayStore"
 
 final class WeAllPayStoreController: NSObject {
-    
     @objc dynamic private(set) var error: NSError!
     
     private var container: NSPersistentContainer!
@@ -52,7 +51,7 @@ final class WeAllPayStoreController: NSObject {
     func openStore(completionHandler: ((_ store: WeAllPayStoreController, _ success: Bool) -> ())?) {
         if self.container == nil {
             container = NSPersistentContainer(name: WeAllPayStoreModelName)
-            let weAllPayStoreURL = URL(string: "/dev/null")
+            let weAllPayStoreURL = URL(string: "/dev/null")!
             let storeDescription = NSPersistentStoreDescription(url: weAllPayStoreURL)
             storeDescription.type = NSInMemoryStoreType
             storeDescription.setOption(NSNumber(value: true), forKey: NSPersistentStoreRemoteChangeNotificationPostOptionKey)
@@ -75,29 +74,44 @@ final class WeAllPayStoreController: NSObject {
     }
     #else
     @objc func openStore() {
-        if container == nil {
-            container = NSPersistentContainer(name: WeAllPayStoreModelName)
-            let storeDescription = NSPersistentStoreDescription(url: weAllPayStoreURL)
-            storeDescription.setOption(NSNumber(value: true), forKey: NSPersistentStoreRemoteChangeNotificationPostOptionKey)
-            storeDescription.setOption(NSNumber(value: true), forKey: NSInferMappingModelAutomaticallyOption)
-            storeDescription.setOption(NSNumber(value: true), forKey: NSMigratePersistentStoresAutomaticallyOption)
-            // NSPersistentHistoryTrackingKey is needed to Core Data to be able to store on iPadOS. Test on iPad Pro 13-inch (M4) (17.5) Simulator.
-            storeDescription.setOption(NSNumber(value: true), forKey: NSPersistentHistoryTrackingKey)
-            container.persistentStoreDescriptions = [storeDescription]
-            container.loadPersistentStores { storeDescription, error in
-                guard error == nil else {
-                    debugPrint("Unresolved error: \(String(describing: error))")
-                    DispatchQueue.main.async {
-                        self.error = error! as NSError
-                    }
-                    fatalError("This shouldn't happen.")
-                }
-            }
-            self.viewContext.retainsRegisteredObjects = true
-            self.viewContext.undoManager = UndoManager()
-            self.viewContext.undoManager!.disableUndoRegistration()
-            self.viewContext.automaticallyMergesChangesFromParent = true
+        openStore(of: NSSQLiteStoreType)
+    }
+    
+    @objc(openStoreOfType:) func openStore(of type: String) {
+        if container != nil {
+            return
         }
+        guard type == NSSQLiteStoreType || type == NSInMemoryStoreType else {
+            fatalError("Only NSSQLiteStoreType or NSInMemoryStoreType are supported")
+        }
+        container = NSPersistentContainer(name: WeAllPayStoreModelName)
+        let weAllPayStoreURL: URL
+        if type == NSInMemoryStoreType {
+            weAllPayStoreURL = URL(string: "/dev/null")!
+        } else {
+            weAllPayStoreURL = self.weAllPayStoreURL
+        }
+        let storeDescription = NSPersistentStoreDescription(url: weAllPayStoreURL)
+        storeDescription.type = type
+        storeDescription.setOption(NSNumber(value: true), forKey: NSPersistentStoreRemoteChangeNotificationPostOptionKey)
+        storeDescription.setOption(NSNumber(value: true), forKey: NSInferMappingModelAutomaticallyOption)
+        storeDescription.setOption(NSNumber(value: true), forKey: NSMigratePersistentStoresAutomaticallyOption)
+        // NSPersistentHistoryTrackingKey is needed to Core Data to be able to store on iPadOS. Test on iPad Pro 13-inch (M4) (17.5) Simulator.
+        storeDescription.setOption(NSNumber(value: true), forKey: NSPersistentHistoryTrackingKey)
+        container.persistentStoreDescriptions = [storeDescription]
+        container.loadPersistentStores { storeDescription, error in
+            guard error == nil else {
+                debugPrint("Unresolved error: \(String(describing: error))")
+                DispatchQueue.main.async {
+                    self.error = error! as NSError
+                }
+                fatalError("This shouldn't happen.")
+            }
+        }
+        self.viewContext.retainsRegisteredObjects = true
+        self.viewContext.undoManager = UndoManager()
+        self.viewContext.undoManager!.disableUndoRegistration()
+        self.viewContext.automaticallyMergesChangesFromParent = true
     }
     #endif
     

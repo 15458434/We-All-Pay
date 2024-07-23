@@ -92,7 +92,7 @@ extension MailComposer where Self: ThisEventReadOnly {
             }
             let fullname = payment.payingPerson!.fullName
             let moneyInMainCurrency = mainCurrencyFormatter.string(for: payment.moneyInMainCurrency)!
-            let paymentDescription = payment.fullDescriptionOfPayment()
+            let paymentDescription = payment.fullDescriptionOfPayment
             if payment.exchangeRate!.exchangeRate!.doubleValue == 1.0 {
                 mailBody += String.localizedStringWithFormat(NSLocalizedString("solution_mail_body_2a", value: "%1$@ paid %2$@ for %3$@.", comment: "%1$@ has paid %2$@ for %3$@."), fullname, moneyInMainCurrency, paymentDescription)
             } else {

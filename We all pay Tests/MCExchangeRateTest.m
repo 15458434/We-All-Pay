@@ -22,13 +22,8 @@
 
 - (void)setUp {
     [super setUp];
-    NSManagedObjectModel *managedObjectModel = [NSManagedObjectModel mergedModelFromBundles:nil];
-    NSPersistentStoreCoordinator *persistentStoreCoordinator = [[NSPersistentStoreCoordinator alloc] initWithManagedObjectModel:managedObjectModel];
-    NSError *error;
-    NSPersistentStore *persistentStore = [persistentStoreCoordinator addPersistentStoreWithType:NSInMemoryStoreType configuration:nil URL:nil options:nil error:&error];
-    XCTAssertTrue(persistentStore, @"Something went wrong opening the In Memory Store: %@", [error localizedDescription]);
-    _context = [[NSManagedObjectContext alloc] initWithConcurrencyType:NSMainQueueConcurrencyType];
-    _context.persistentStoreCoordinator = persistentStoreCoordinator;
+    [WeAllPayStoreController.defaultStore openStoreOfType:NSInMemoryStoreType];
+    _context = WeAllPayStoreController.defaultStore.viewContext;
 }
 
 - (void)tearDown

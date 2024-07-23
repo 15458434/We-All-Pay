@@ -10,7 +10,7 @@
 #import <XCTest/XCTest.h>
 
 #import "MCPerson+CoreDataProperties.h"
-#import "MCPayment+addons.h"
+#import "MCPayment+CoreDataProperties.h"
 #import "MCSharedBill+addons.h"
 #import "MCEmailAddress+CoreDataProperties.h"
 
@@ -26,13 +26,8 @@
 
 - (void)setUp {
     [super setUp];
-    NSManagedObjectModel *managedObjectModel = [NSManagedObjectModel mergedModelFromBundles:nil];
-    NSPersistentStoreCoordinator *persistentStoreCoordinator = [[NSPersistentStoreCoordinator alloc] initWithManagedObjectModel:managedObjectModel];
-    NSError *error;
-    NSPersistentStore *persistentStore = [persistentStoreCoordinator addPersistentStoreWithType:NSInMemoryStoreType configuration:nil URL:nil options:nil error:&error];
-    XCTAssertTrue(persistentStore, @"Something went wrong opening the In Memory Store: %@", [error localizedDescription]);
-    _context = [[NSManagedObjectContext alloc] initWithConcurrencyType:NSMainQueueConcurrencyType];
-    _context.persistentStoreCoordinator = persistentStoreCoordinator;
+    [WeAllPayStoreController.defaultStore openStoreOfType:NSInMemoryStoreType];
+    _context = WeAllPayStoreController.defaultStore.viewContext;
 }
 
 - (void)tearDown
@@ -65,8 +60,9 @@
 
 - (void)testPersonExistenceOnSharedBill
 {
-    MCSharedBill *sharedbill = [[MCSharedBill alloc] initWithContext:_context];
-    MCPerson *mark = [sharedbill addPerson];
+    MCSharedBill *event = [[MCSharedBill alloc] initWithContext:_context];
+    MCEventModel *eventModel = [[MCEventModel alloc] initWithEvent:event];
+    MCPerson *mark = [eventModel addPerson];
     MCPersonModel *markModel = [[MCPersonModel alloc] initWithPerson:mark];
     [markModel.person setFirstName:@"Mark"];
     [markModel.person setLastName:@"Cornelisse"];
@@ -77,11 +73,14 @@
     NSString *markFirstName = @"Mark";
     NSString *markLastName = @"Cornelisse";
     NSString *markDefaultEmailAddress = @"m.p.cornelisse@gmail.com";
-    XCTAssertTrue([sharedbill isPresentWithFirstName:markFirstName andLastName:markLastName andEmailAddress:markDefaultEmailAddress], @"Person is not present.");
+    XCTAssertTrue([event isPresentWithFirstName:markFirstName andLastName:markLastName andEmailAddress:markDefaultEmailAddress], @"Person is not present.");
     NSString *ilseFirstName = @"Ilse";
     NSString *ilseLastName = @"Béguin";
     NSString *ilseDefaultEmailAddress = @"ilse.beguin@hotmail.com";
-    XCTAssertFalse([sharedbill isPresentWithFirstName:ilseFirstName andLastName:ilseLastName andEmailAddress:ilseDefaultEmailAddress], @"Person is present.");
+    XCTAssertFalse([event isPresentWithFirstName:ilseFirstName andLastName:ilseLastName andEmailAddress:ilseDefaultEmailAddress], @"Person is present.");
+    
+    // Disconnect the eventModel from the event.
+    [eventModel reset];
 }
 
 
@@ -104,6 +103,9 @@
     peoplePresentOnEvent = eventModel.peoplePresentOnEvent;
     XCTAssertTrue([peoplePresentOnEvent count] == 3, @"Aantal mensen op the shared Bill klopt niet.");
     [MCSharedBill deleteSharedbill:tonightsBill];
+    
+    // Disconnect the eventModel from the event.
+    [eventModel reset];
 }
 
 - (void)testGetEmailaddressesFrom

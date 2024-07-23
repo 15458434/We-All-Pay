@@ -11,7 +11,7 @@
 #import "MCSharedBill+addons.h"
 #import "MCPerson+CoreDataProperties.h"
 #import "MCEmailAddress+CoreDataProperties.h"
-#import "MCPayment+addons.h"
+#import "MCPayment+CoreDataProperties.h"
 #import "MCPaymentPresence+CoreDataProperties.h"
 #import "MCCurrency+addons.h"
 #import "MCExchangeRate+CoreDataProperties.h"
@@ -107,30 +107,6 @@
     }
 }
 
-- (MCPayment *)addPayment
-{
-    MCPayment *payment = [MCPayment addPaymentInContext:self.managedObjectContext];
-    for (MCPerson *person in [self peoplePresent]) {
-        MCPaymentPresence *paymentPresence = [[MCPaymentPresence alloc] initWithContext:self.managedObjectContext];
-        
-        paymentPresence.payment = payment;
-        [payment addPeopleSharingPaymentObject:paymentPresence];
-        
-        paymentPresence.person = person;
-        [person addSharingPaymentObject:paymentPresence];
-        
-        paymentPresence.isPersonPresent = @(YES);
-    }
-    
-    [self addPaymentsObject:payment];
-    payment.onWhichBill = self;
-    
-    payment.exchangeRate.toCurrency = [self mainCurrency];
-    [self.mainCurrency addExchangeRateToCurrencyObject:payment.exchangeRate];
-    
-    return payment;
-}
-
 - (void)deletePayment:(MCPayment *)toBeDeletePayment
 {
     // It is not allowed to delete a payment belonging to another sharedBill.
@@ -151,27 +127,9 @@
 {
     // Always executed to maintain unit test compatibility.
     for (MCPayment *payment in [self payments]) {
-        [payment recalculateAveragePeopleOweAndStore];
+        MCPaymentModel *model = [[MCPaymentModel alloc] initWithPayment:payment];
+        [model recalculateAveragePeopleOweAndStore];
     }
-}
-
-- (MCPerson *)addPerson {
-    NSArray *keysToExtract = @[@"tripName", @"uniqueBillId"];
-    NSDictionary *selfAsADictionary = [self dictionaryWithValuesForKeys:keysToExtract];
-    [[FIRCrashlytics crashlytics] logWithFormat:@"add person on sharedBill: %@", selfAsADictionary];
-    NSManagedObjectContext *context = [self managedObjectContext];
-    BOOL isContextPresent = context ? YES : NO;
-    [[FIRCrashlytics crashlytics] logWithFormat:@"isContextPresent: %@", @(isContextPresent)];
-    
-    MCPerson *newPerson = [[MCPerson alloc] initWithContext:self.managedObjectContext];
-    for (MCPayment *payment in [self payments]) {
-        // Presence of all the exisiting payments on this sharedBill will be created and set tot NO.
-        [payment addLateArrivalPaymentPresenceFor:newPerson];
-    }
-    [newPerson addSharedBillObject:self];
-    [self addPeoplePresentObject:newPerson];
-    
-    return newPerson;
 }
 
 - (void)deletePerson:(MCPerson *)toBeDeletedPerson {
@@ -179,7 +137,8 @@
     for (MCPaymentPresence *paymentPresence in presences) {
         MCPayment *payment = [paymentPresence payment];
         [[self managedObjectContext] deleteObject:paymentPresence];
-        [payment recalculateAveragePeopleOweAndStore];
+        MCPaymentModel *model = [[MCPaymentModel alloc] initWithPayment:payment];
+        [model recalculateAveragePeopleOweAndStore];
     }
     [self.managedObjectContext deleteObject:toBeDeletedPerson];
 }

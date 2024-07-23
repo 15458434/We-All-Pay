@@ -9,7 +9,7 @@
 #import <XCTest/XCTest.h>
 
 #import "MCSharedBill+addons.h"
-#import "MCPayment+addons.h"
+#import "MCPayment+CoreDataProperties.h"
 #import "MCPerson+CoreDataProperties.h"
 #import "MCEmailAddress+CoreDataProperties.h"
 #import "MCCurrency+addons.h"
@@ -27,13 +27,8 @@
 
 - (void)setUp {
     [super setUp];
-    NSManagedObjectModel *managedObjectModel = [NSManagedObjectModel mergedModelFromBundles:nil];
-    NSPersistentStoreCoordinator *persistentStoreCoordinator = [[NSPersistentStoreCoordinator alloc] initWithManagedObjectModel:managedObjectModel];
-    NSError *error;
-    NSPersistentStore *persistentStore = [persistentStoreCoordinator addPersistentStoreWithType:NSInMemoryStoreType configuration:nil URL:nil options:nil error:&error];
-    XCTAssertTrue(persistentStore, @"Something went wrong opening the In Memory Store: %@", [error localizedDescription]);
-    _context = [[NSManagedObjectContext alloc] initWithConcurrencyType:NSMainQueueConcurrencyType];
-    _context.persistentStoreCoordinator = persistentStoreCoordinator;
+    [WeAllPayStoreController.defaultStore openStoreOfType:NSInMemoryStoreType];
+    _context = WeAllPayStoreController.defaultStore.viewContext;
 }
 
 - (void)tearDown
@@ -44,52 +39,65 @@
 
 - (void)testMCPaymentAddons
 {
-    MCPerson *thisPerson = [[MCPerson alloc] initWithContext:_context];
+    MCSharedBill *event = [[MCSharedBill alloc] initWithContext:_context];
+    MCEventModel *eventModel = [[MCEventModel alloc] initWithEvent:event];
+    MCPerson *thisPerson = [eventModel addPerson];
     [thisPerson setFirstName:@"Mark"];
     [thisPerson setLastName:@"Cornelisse"];
     MCPersonModel *model = [[MCPersonModel alloc] initWithPerson:thisPerson];
     [model addNewDefaultEmailAddressFromAString:@"support@markcornelisse.nl"];
-    MCPayment *thisPayment = [[MCPayment alloc] initWithContext:_context];
+    MCPayment *thisPayment = [eventModel addPayment];
     [thisPayment setDescriptionOfPayment:@"Beer"];
     [thisPayment setMoney:@3.25];
     XCTAssertFalse([thisPayment hasPayer], @"PayerPresent");
     [thisPayment setPayingPerson:thisPerson];
     XCTAssertTrue([thisPayment hasPayer], @"No payer present on thisPayment");
     
-    [MCPayment deletePayment:thisPayment];
+    [eventModel deletePayment:thisPayment];
     XCTAssertTrue([thisPayment isDeleted], @"MCPayment table is not empty");
     
-    [_context deleteObject:thisPerson];
+    // Disconnect the eventModel from the event.
+    [eventModel reset];
 }
 
 - (void)testCurrency
 {
+    MCSharedBill *event = [MCSharedBill addSharedBillToContext:_context];
+    MCEventModel *eventModel = [[MCEventModel alloc] initWithEvent:event];
     // This test checks to see if currency is being setup when a new payment is being made.
-    MCPayment *thisPayment = [MCPayment addPaymentInContext:_context];
+    MCPayment *thisPayment = [eventModel addPayment];
     NSString *currentCurrencyCode = [[NSLocale currentLocale] objectForKey:NSLocaleCurrencyCode];
     XCTAssertTrue([[[thisPayment currency] code] isEqualToString:currentCurrencyCode], @"%@ should be the same as %@", [[thisPayment currency] code], currentCurrencyCode);
+    
+    // Disconnect the eventModel from the event.
+    [eventModel reset];
 }
 
 - (void)testMoneyInMainCurrency
 {
     // This test checks to see if currency is correctly converted to the mainCurrency of the sharedBill.
-    MCSharedBill *tonightsBill = [MCSharedBill addSharedBillToContext:_context];
-    tonightsBill.mainCurrency = [MCCurrency currencyFrom:@"EUR" fromContext:_context];
-    MCPayment *thisPayment = [tonightsBill addPayment];
+    MCSharedBill *event = [MCSharedBill addSharedBillToContext:_context];
+    MCEventModel *eventModel = [[MCEventModel alloc] initWithEvent:event];
+    event.mainCurrency = [MCCurrency currencyFrom:@"EUR" fromContext:_context];
+    MCPayment *thisPayment = [eventModel addPayment];
     thisPayment.currency = [MCCurrency currencyFrom:@"USD" fromContext:_context];
-    MCExchangeRate *exchangeRate = [thisPayment addExchangeRate];
-    [exchangeRate setExchangeRate:@0.7424];
-    [thisPayment setMoney:@2.97];
+    MCExchangeRate *exchangeRate = [eventModel addExchangeRateForPayment:thisPayment];
+    exchangeRate.exchangeRate = @0.7424;
+    thisPayment.money = @2.97;
     NSNumber *valueInMainCurrency = [thisPayment moneyInMainCurrency];
     XCTAssertEqualWithAccuracy([valueInMainCurrency doubleValue], [@(0.7424) doubleValue] * [@(2.97) doubleValue], 0.001, @"Main value after conversion not ok. %@ = %@", valueInMainCurrency, @((double)0.7424 * (double)2.97));
 }
 
-- (void)testAddPaymentForExchangeRateCreation
-{
-    MCPayment *thisPayment = [MCPayment addPaymentInContext:_context];
+- (void)testAddPaymentForExchangeRateCreation {
+    MCSharedBill *event = [MCSharedBill addSharedBillToContext:_context];
+    MCEventModel *eventModel = [[MCEventModel alloc] initWithEvent:event];
+    MCPayment *thisPayment = [eventModel addPayment];
     XCTAssertNotNil([thisPayment exchangeRate], @"There should be an exchangeRate in this payment.");
     XCTAssertEqualWithAccuracy([[[thisPayment exchangeRate] exchangeRate] doubleValue], 1.000, 0.0001, @"Value of exchangeRate should be 1.");
     XCTAssert([[[thisPayment exchangeRate] status] shortValue] == MCExchangeRateStatusValid, @"exchangeRate status should be valid");
+    
+    // Disconnect the eventModel from the event.
+    [eventModel reset];
 }
 
 @end

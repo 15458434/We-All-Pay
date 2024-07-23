@@ -134,7 +134,30 @@ import Combine
     }
     
     @objc func addPerson() -> MCPerson {
-        event.addPerson()
+        let context = event.managedObjectContext!
+        let person = MCPerson(context: context)
+        event.payments?.forEach({ addPaymentPresence(on: $0, person: person, was: false) })
+        person.addSharedBillObject(event)
+        event.addPeoplePresentObject(person)
+        return person
+    }
+    
+    /// addPaymentPresence(on payment: MCPayment, person: MCPerson, was isPresent: Bool)
+    /// - Parameters:
+    ///   - payment: the payment on which the MCPaymentPresence object was linked.
+    ///   - person: the person to which the MCPaymentPresence object was linked.`
+    ///   - isPresent: whether or not the person was present during the payment
+    func addPaymentPresence(on payment: MCPayment, person: MCPerson, was isPresent: Bool) {
+        let context = event.managedObjectContext!
+        let paymentPresence = MCPaymentPresence(context: context)
+        
+        paymentPresence.person = person
+        person.addSharingPaymentObject(paymentPresence)
+        
+        paymentPresence.isPersonPresent = isPresent as NSNumber
+        
+        paymentPresence.payment = payment
+        payment.addPeopleSharingPaymentObject(paymentPresence)
     }
     
     @objc func deleteIfStillNew() {
@@ -146,11 +169,48 @@ import Combine
     }
     
     @objc func addPayment() -> MCPayment {
-        event.addPayment()
+        let context = event.managedObjectContext!
+        let payment = MCPayment(context: context)
+        self.event.addPaymentsObject(payment)
+        payment.onWhichBill = self.event
+        payment.currency = MCCurrency.generateFromSelectedLocale(for: context)
+        let exchangeRate = addExchangeRate(for: payment)
+        exchangeRate.source = "Payment Creation"
+        self.event.peoplePresent?.forEach({ person in
+            let paymentPresence = MCPaymentPresence(context: context)
+            
+            paymentPresence.payment = payment
+            payment.addPeopleSharingPaymentObject(paymentPresence)
+            
+            paymentPresence.person = person
+            person.addSharingPaymentObject(paymentPresence)
+        })
+        
+        payment.exchangeRate!.toCurrency = event.mainCurrency
+        event.mainCurrency!.addExchangeRate(toCurrencyObject: payment.exchangeRate!)
+        
+        return payment
+    }
+    
+    @objc(addExchangeRateForPayment:) func addExchangeRate(for payment: MCPayment) -> MCExchangeRate {
+        let exchangeRate = MCExchangeRate(context: payment.managedObjectContext!)
+        exchangeRate.exchangeRate = NSNumber(value: 1)
+        
+        payment.exchangeRate = exchangeRate
+        exchangeRate.payment = payment
+        
+        exchangeRate.toCurrency = payment.onWhichBill!.mainCurrency
+        payment.onWhichBill!.mainCurrency?.addExchangeRate(toCurrencyObject: exchangeRate)
+        
+        exchangeRate.fromCurrency = payment.currency
+        payment.currency?.addExchangeRate(fromCurrencyObject: exchangeRate)
+        
+        return exchangeRate
     }
     
     @objc(deletePayment:) func delete(payment: MCPayment) {
-        MCPayment.delete(payment)
+        let context = payment.managedObjectContext!
+        context.delete(payment)
     }
     
     @objc func save() {

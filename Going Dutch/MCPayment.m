@@ -13,7 +13,7 @@
 #import "MCPerson.h"
 #import "MCSharedBill.h"
 #import "MCCurrency+addons.h"
-#import "MCPayment+addons.h"
+#import "MCPayment+CoreDataProperties.h"
 
 
 @implementation MCPayment

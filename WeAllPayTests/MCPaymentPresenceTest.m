@@ -9,7 +9,7 @@
 #import <XCTest/XCTest.h>
 
 #import "MCSharedBill+addons.h"
-#import "MCPayment+addons.h"
+#import "MCPayment+CoreDataProperties.h"
 #import "MCPerson+CoreDataProperties.h"
 #import "MCEmailAddress+CoreDataProperties.h"
 #import "MCPaymentPresence+CoreDataProperties.h"
@@ -28,13 +28,8 @@
 
 - (void)setUp {
     [super setUp];
-    NSManagedObjectModel *managedObjectModel = [NSManagedObjectModel mergedModelFromBundles:nil];
-    NSPersistentStoreCoordinator *persistentStoreCoordinator = [[NSPersistentStoreCoordinator alloc] initWithManagedObjectModel:managedObjectModel];
-    NSError *error;
-    NSPersistentStore *persistentStore = [persistentStoreCoordinator addPersistentStoreWithType:NSInMemoryStoreType configuration:nil URL:nil options:nil error:&error];
-    XCTAssertTrue(persistentStore, @"Something went wrong opening the In Memory Store: %@", [error localizedDescription]);
-    _context = [[NSManagedObjectContext alloc] initWithConcurrencyType:NSMainQueueConcurrencyType];
-    _context.persistentStoreCoordinator = persistentStoreCoordinator;
+    [WeAllPayStoreController.defaultStore openStoreOfType:NSInMemoryStoreType];
+    _context = WeAllPayStoreController.defaultStore.viewContext;
 }
 
 - (void)tearDown
@@ -48,17 +43,17 @@
     MCSharedBill *event = [MCSharedBill addSharedBillToContext:_context];
     MCEventModel *eventmodel = [[MCEventModel alloc] initWithEvent:event];
     [event setTripName:@"testAddAndDelete"];
-    MCPerson *mark = [event addPerson];
+    MCPerson *mark = [eventmodel addPerson];
     MCPersonModel *markModel = [[MCPersonModel alloc] initWithPerson:mark];
     [mark setFirstName:@"Mark"];
     [mark setLastName:@"Cornelisse"];
     [markModel addOneEmailAddressFromAString:@"info@markcornelisse.nl"];
-    MCPerson *ilse = [event addPerson];
+    MCPerson *ilse = [eventmodel addPerson];
     MCPersonModel *ilseModel = [[MCPersonModel alloc] initWithPerson:ilse];
     [ilse setFirstName:@"Ilse"];
     [ilse setLastName:@"Béguin"];
     [ilseModel addOneEmailAddressFromAString:@"ilse.beguin@hotmail.com"];
-    MCPerson *iva = [event addPerson];
+    MCPerson *iva = [eventmodel addPerson];
     MCPersonModel *ivaModel = [[MCPersonModel alloc] initWithPerson:iva];
     [iva setFirstName:@"Iva"];
     [iva setLastName:@"Moslavac"];
@@ -96,28 +91,28 @@
 {
     MCSharedBill *event = [MCSharedBill addSharedBillToContext:_context];
     MCEventModel *eventModel = [[MCEventModel alloc] initWithEvent:event];
-    MCPerson *mark = [event addPerson];
+    MCPerson *mark = [eventModel addPerson];
     MCPersonModel *markModel = [[MCPersonModel alloc] initWithPerson:mark];
     [markModel.person setFirstName:@"Mark"];
     [markModel.person setLastName:@"Cornelisse"];
     [markModel addOneEmailAddressFromAString:@"info@markcornelisse.nl"];
-    MCPerson *ilse = [event addPerson];
+    MCPerson *ilse = [eventModel addPerson];
     MCPersonModel *ilseModel = [[MCPersonModel alloc] initWithPerson:ilse];
     [ilseModel.person setFirstName:@"Ilse"];
     [ilseModel.person setLastName:@"Béguin"];
     [ilseModel addOneEmailAddressFromAString:@"ilse.beguin@hotmail.com"];
-    MCPerson *iva = [event addPerson];
+    MCPerson *iva = [eventModel addPerson];
     MCPersonModel *ivaModel = [[MCPersonModel alloc] initWithPerson:iva];
     [ivaModel.person setFirstName:@"Iva"];
     [ivaModel.person setLastName:@"Moslavac"];
     [ivaModel addOneEmailAddressFromAString:@"ivamavi2002@yahoo.co.uk"];
     
     MCPayment *thisPayment = [eventModel addPayment];
-    XCTAssertTrue([[thisPayment peoplePresentOnThisPayment] unsignedIntegerValue] == 3 , @"There should be three people present on this payment.");
+    XCTAssertTrue(thisPayment.peoplePresentOnThisPayment == 3 , @"There should be three people present on this payment.");
     NSSet *thePeopleOfTheBill = [thisPayment peopleSharingPayment];
     MCPaymentPresence *pp = [thePeopleOfTheBill anyObject];
     [pp setIsPersonPresent:@NO];
-    XCTAssertTrue([[thisPayment peoplePresentOnThisPayment] unsignedIntegerValue] == 2, @"Two out of three people should be present on this payment");
+    XCTAssertTrue(thisPayment.peoplePresentOnThisPayment == 2, @"Two out of three people should be present on this payment");
     // Disconnect the eventModel from the event.
     [eventModel reset];
 }
@@ -143,18 +138,19 @@
     [ivaModel addOneEmailAddressFromAString:@"ivamavi2002@yahoo.co.uk"];
     
     MCPayment *thisPayment = [eventModel addPayment];
+    MCPaymentModel *paymentModel = [[MCPaymentModel alloc] initWithPayment:thisPayment];
     thisPayment.money = @9.00;
-    [thisPayment recalculateAveragePeopleOweAndStore];
+    [paymentModel recalculateAveragePeopleOweAndStore];
     double average = 9.00 / 3.00;
     
-    XCTAssertEqualWithAccuracy(average, [[thisPayment averageAmountPeopleShouldHavePaidOnThisPayment] doubleValue], 0.01, @"The average amount of money is different, from what I'm calculating.");
+    XCTAssertEqualWithAccuracy(average, thisPayment.averageAmountPeopleShouldHavePaidOnThisPayment, 0.01, @"The average amount of money is different, from what I'm calculating.");
     for (MCPaymentPresence *pp in [thisPayment peopleSharingPayment]) {
         XCTAssertEqualWithAccuracy(average, [[pp averageOweFromPayment] doubleValue], 0.01, @"Average amount stored is not ok.");
     }
     
     // Test [thisPayment recalculateAveragePeopleOweAndStore]
     [[[thisPayment peopleSharingPayment] anyObject] setIsPersonPresent:@NO];
-    [thisPayment recalculateAveragePeopleOweAndStore];
+    [paymentModel recalculateAveragePeopleOweAndStore];
     for (MCPaymentPresence *pp in [thisPayment peopleSharingPayment]) {
         if ([[pp isPersonPresent] boolValue]) {
             XCTAssertEqualWithAccuracy(4.50, [[pp averageOweFromPayment] doubleValue], 0.01, @"Average amount stored is not ok.");
@@ -165,13 +161,14 @@
     
     // Test [thisPayment fetchPaymentPresenceForPerson:]
     MCPayment *thisPayment2 = [eventModel addPayment];
+    MCPaymentModel *payment2Model = [[MCPaymentModel alloc] initWithPayment:thisPayment2];
     thisPayment2.money = @60.00;
     [thisPayment2 setDescriptionOfPayment:@"Bier of some sort."];
-    MCPaymentPresence *ppMarkOnThisPayment2 = [thisPayment2 fetchPaymentPresenceForPerson:mark];
+    MCPaymentPresence *ppMarkOnThisPayment2 = [payment2Model paymentPresenceForPerson:mark withError:nil];
     XCTAssertTrue([ppMarkOnThisPayment2 person] == mark && [ppMarkOnThisPayment2 payment] == thisPayment2, @"The paymentPresence fetched is the correct one.");
     
     // Test [thisPayment thisPerson: isPresent:]
-    [thisPayment2 thisPerson:mark setIsPresent:@NO];
+    [payment2Model updateWithPerson:mark to:NO error:nil];
     XCTAssertFalse([[ppMarkOnThisPayment2 isPersonPresent] boolValue], @"Mark should not be present.");
     for (MCPaymentPresence *pp in [thisPayment2 peopleSharingPayment]) {
         if ([[pp isPersonPresent] boolValue]) {
@@ -180,7 +177,8 @@
             XCTAssertEqualWithAccuracy(0.00, [[pp averageOweFromPayment] doubleValue], 0.01, @"Average amount not resetted by now presence.");
         }
     }
-    [thisPayment2 thisPerson:mark setIsPresent:@YES];
+    [payment2Model updateWithPerson:mark to:YES error:nil];
+    
     XCTAssertTrue([[ppMarkOnThisPayment2 isPersonPresent] boolValue], @"Mark should not be present.");
     for (MCPaymentPresence *pp in [thisPayment2 peopleSharingPayment]) {
         if ([[pp isPersonPresent] boolValue]) {
@@ -214,29 +212,32 @@
     [ivaModel addOneEmailAddressFromAString:@"ivamavi2002@yahoo.co.uk"];
     
     MCPayment *thisPayment = [eventModel addPayment];
+    MCPaymentModel *paymentModel = [[MCPaymentModel alloc] initWithPayment:thisPayment];
     [thisPayment setPayingPerson:mark];
     [thisPayment setDescriptionOfPayment:@"Drinken op een terras."];
     thisPayment.money = @9.00;
-    [thisPayment recalculateAveragePeopleOweAndStore];
+    [paymentModel recalculateAveragePeopleOweAndStore];
     
     MCPayment *thisPayment2 = [eventModel addPayment];
+    MCPaymentModel *payment2Model = [[MCPaymentModel alloc] initWithPayment:thisPayment2];
     [thisPayment2 setPayingPerson:iva];
     [thisPayment2 setDescriptionOfPayment:@"Food"];
     thisPayment2.money = @30.00;
-    [thisPayment2 recalculateAveragePeopleOweAndStore];
+    [payment2Model recalculateAveragePeopleOweAndStore];
     
     MCPayment *thisPayment3 = [eventModel addPayment];
+    MCPaymentModel *payment3Model = [[MCPaymentModel alloc] initWithPayment:thisPayment3];
     [thisPayment3 setPayingPerson:ilse];
     [thisPayment3 setDescriptionOfPayment:@"Movie"];
     thisPayment3.money = @36.00;
-    [thisPayment3 recalculateAveragePeopleOweAndStore];
+    [payment3Model recalculateAveragePeopleOweAndStore];
     
     // Does the sum function work correct when everybody is always present.
     NSNumber *sumOfAllOwesOnPaymentsForIlse = [event amountShouldHavePaidBy:ilse];
     XCTAssertEqualWithAccuracy([sumOfAllOwesOnPaymentsForIlse doubleValue], 25.00, 0.001, @"Sum of all PaymentsPresence is not equal.");
     
     // Does the sum function work correct when someone is not present on one payment.
-    [thisPayment3 thisPerson:mark setIsPresent:@NO];
+    [payment3Model updateWithPerson:mark to:NO error:nil];
     NSNumber *sumOfAllOwesOnPaymentsForMark = [event amountShouldHavePaidBy:mark];
     XCTAssertEqualWithAccuracy([sumOfAllOwesOnPaymentsForMark doubleValue], 13.00, 0.001, @"Sum of all PaymentsPresence is not equal.");
     sumOfAllOwesOnPaymentsForIlse = [event amountShouldHavePaidBy:ilse];
@@ -266,10 +267,11 @@
     [ivaModel addOneEmailAddressFromAString:@"ivamavi2002@yahoo.co.uk"];
     
     MCPayment *thisPayment = [eventModel addPayment];
+    MCPaymentModel *paymentModel = [[MCPaymentModel alloc] initWithPayment:thisPayment];
     [thisPayment setPayingPerson:mark];
     [thisPayment setDescriptionOfPayment:@"Drinken op een terras."];
     thisPayment.money = @9.00;
-    [thisPayment thisPerson:ilse setIsPresent:@NO];
+    [paymentModel updateWithPerson:ilse to:NO error:nil];
     
     MCPayment *thisPayment2 = [eventModel addPayment];
     [thisPayment2 setPayingPerson:iva];
@@ -277,10 +279,11 @@
     thisPayment2.money = @30.00;
     
     MCPayment *thisPayment3 = [eventModel addPayment];
+    MCPaymentModel *payment3Model = [[MCPaymentModel alloc] initWithPayment:thisPayment3];
     [thisPayment3 setPayingPerson:ilse];
     [thisPayment3 setDescriptionOfPayment:@"Movie"];
     thisPayment3.money = @36.00;
-    [thisPayment3 thisPerson:mark setIsPresent:@NO];
+    [payment3Model updateWithPerson:mark to:NO error:nil];
     
     NSArray *solution = [event solveWhoHasToPayWhoFromThisBill];
     XCTAssertTrue([solution count] == 2, @"The amount of objects in the solution is not ok.");
@@ -380,22 +383,24 @@
 
 - (void)testGetAverageOweFromPaymentInMainCurrency
 {
-    MCSharedBill *tonightsBill = [MCSharedBill addSharedBillToContext:_context];
+    MCSharedBill *event = [MCSharedBill addSharedBillToContext:_context];
+    MCEventModel *eventModel = [[MCEventModel alloc] initWithEvent:event];
     MCCurrency *mainCurrency = [MCCurrency generateCurrencyFromSelectedLocaleForContext:_context];
-    [tonightsBill setMainCurrency:mainCurrency];
-    MCPerson *marieke = [tonightsBill addPerson];
+    [event setMainCurrency:mainCurrency];
+    MCPerson *marieke = [eventModel addPerson];
     [marieke setFirstName:@"Marieke"];
     [marieke setLastName:@"Siemensma"];
-    MCPerson *merit = [tonightsBill addPerson];
+    MCPerson *merit = [eventModel addPerson];
     [merit setFirstName:@"Merit"];
     [merit setLastName:@"Koelink"];
-    MCPayment *thisPayment = [tonightsBill addPayment];
+    MCPayment *thisPayment = [eventModel addPayment];
+    MCPaymentModel *paymentModel = [[MCPaymentModel alloc] initWithPayment:thisPayment];
     MCCurrency *paymentCurrency = [MCCurrency currencyFrom:@"USD" fromContext:_context];
     thisPayment.currency = paymentCurrency;
     [thisPayment setDescriptionOfPayment:@"Thee and cookies"];
     [thisPayment setPayingPerson:marieke];
     [thisPayment setMoney:@4.50];
-    [thisPayment recalculateAveragePeopleOweAndStore];
+    [paymentModel recalculateAveragePeopleOweAndStore];
     MCExchangeRate *exchangeRate = [[MCExchangeRate alloc] initWithContext:_context];
     exchangeRate.toCurrency = mainCurrency;
     exchangeRate.fromCurrency = paymentCurrency;

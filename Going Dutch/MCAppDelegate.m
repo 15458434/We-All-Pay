@@ -15,7 +15,7 @@
 
 #import "MCSharedBill+addons.h"
 #import "MCPerson+CoreDataProperties.h"
-#import "MCPayment+addons.h"
+#import "MCPayment+CoreDataProperties.h"
 
 #import "UIColor+ColorSpawn.h"
 

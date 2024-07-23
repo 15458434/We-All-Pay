@@ -11,7 +11,7 @@
 #import "MCSharedBill+addons.h"
 #import "MCPerson+CoreDataProperties.h"
 #import "MCEmailAddress+CoreDataProperties.h"
-#import "MCPayment+addons.h"
+#import "MCPayment+CoreDataProperties.h"
 #import "MCPaymentPresence+CoreDataProperties.h"
 #import "MCCurrency+addons.h"
 #import "MCExchangeRate+CoreDataProperties.h"
@@ -28,13 +28,8 @@
 
 - (void)setUp {
     [super setUp];
-    NSManagedObjectModel *managedObjectModel = [NSManagedObjectModel mergedModelFromBundles:nil];
-    NSPersistentStoreCoordinator *persistentStoreCoordinator = [[NSPersistentStoreCoordinator alloc] initWithManagedObjectModel:managedObjectModel];
-    NSError *error;
-    NSPersistentStore *persistentStore = [persistentStoreCoordinator addPersistentStoreWithType:NSInMemoryStoreType configuration:nil URL:nil options:nil error:&error];
-    XCTAssertTrue(persistentStore, @"Something went wrong opening the In Memory Store: %@", [error localizedDescription]);
-    _context = [[NSManagedObjectContext alloc] initWithConcurrencyType:NSMainQueueConcurrencyType];
-    _context.persistentStoreCoordinator = persistentStoreCoordinator;
+    [WeAllPayStoreController.defaultStore openStoreOfType:NSInMemoryStoreType];
+    _context = WeAllPayStoreController.defaultStore.viewContext;
 }
 
 - (void)tearDown
@@ -46,55 +41,56 @@
 - (void)testMCSharedBillAddOns1
 {
 //    XCTAssertTrue([MCSharedBill isTableInDatabaseEmpty], @"There is a sharedBill present in the empty table?");
-    MCSharedBill *movie = [[MCSharedBill alloc] initWithContext:_context];
-    [movie setTripName:@"Movie"];
-    XCTAssertFalse([movie areTherePeople], @"There are people on a new event?");
-    MCPerson *markmovie = [movie addPerson];
+    MCSharedBill *event = [[MCSharedBill alloc] initWithContext:_context];
+    MCEventModel *eventModel = [[MCEventModel alloc] initWithEvent:event];
+    [event setTripName:@"Movie"];
+    XCTAssertFalse([event areTherePeople], @"There are people on a new event?");
+    MCPerson *markmovie = [eventModel addPerson];
     MCPersonModel *markModel = [[MCPersonModel alloc] initWithPerson:markmovie];
     [markModel.person setFirstName:@"Mark"];
     [markModel.person setLastName:@"Cornelisse"];
     [markModel addOneEmailAddressFromAString:@"info@markcornelisse.nl"];
     [markModel addOneEmailAddressFromAString:@"support@markcornelisse.nl"];
-    MCPerson *ilsemovie = [movie addPerson];
+    MCPerson *ilsemovie = [eventModel addPerson];
     MCPersonModel *ilseModel = [[MCPersonModel alloc] initWithPerson:ilsemovie];
     [ilseModel.person setFirstName:@"Ilse"];
     [ilseModel.person setLastName:@"Béguin"];
     [ilseModel addOneEmailAddressFromAString:@"ilse@markcornelisse.nl"];
-    MCPerson *conniemovie = [movie addPerson];
+    MCPerson *conniemovie = [eventModel addPerson];
     MCPersonModel *connieModel = [[MCPersonModel alloc] initWithPerson:conniemovie];
     [connieModel.person setFirstName:@"Connie"];
     [connieModel.person setLastName:@"Carter"];
     [connieModel addOneEmailAddressFromAString:@"connie@markcornelisse.nl"];
-    MCPerson *liekemovie = [movie addPerson];
+    MCPerson *liekemovie = [eventModel addPerson];
     MCPersonModel *liekeModel = [[MCPersonModel alloc] initWithPerson:liekemovie];
     [liekeModel.person setFirstName:@"Lieke"];
     [liekeModel.person setLastName:@"Koopman"];
     [liekeModel addOneEmailAddressFromAString:@"lieke@markcornelisse.nl"];
     [liekeModel addNewDefaultEmailAddressFromAString:@"liekeNewDefault@markcornelisse.nl"];
-    MCPayment *tickets = [movie addPayment];
+    MCPayment *tickets = [eventModel addPayment];
     [tickets setPayingPerson:markmovie];
     [tickets setMoney:@(8.90*4)];
     [tickets setDescriptionOfPayment:@"Tickets"];
-    MCPayment *drinksAndPopcorn = [movie addPayment];
+    MCPayment *drinksAndPopcorn = [eventModel addPayment];
     [drinksAndPopcorn setPayingPerson:liekemovie];
     [drinksAndPopcorn setMoney:@34.40];
     [drinksAndPopcorn setDescriptionOfPayment:@"Drinks and popcorn for the movie."];
-    MCPayment *parking = [movie addPayment];
+    MCPayment *parking = [eventModel addPayment];
     [parking setPayingPerson:liekemovie];
     [parking setMoney:@6.00];
     [parking setDescriptionOfPayment:@"Parking"];
-    XCTAssertTrue([movie areTherePeople], @"There are no people when 4 people should have been added?");
-    XCTAssertTrue([movie totalAmountOfPeoplePresent] == 4, @"4 people were added, but the returned amount it not 4?");
-    XCTAssertTrue([movie totalAmountOfPeopleWhoHavePaid] == 2, @"Total amount of people who have paid is not 3");
+    XCTAssertTrue([event areTherePeople], @"There are no people when 4 people should have been added?");
+    XCTAssertTrue([event totalAmountOfPeoplePresent] == 4, @"4 people were added, but the returned amount it not 4?");
+    XCTAssertTrue([event totalAmountOfPeopleWhoHavePaid] == 2, @"Total amount of people who have paid is not 3");
     XCTAssertTrue([liekemovie.totalSumPaid doubleValue] == 40.40, @"Total sum is wrong when adding multiple payments.");
-    XCTAssertTrue([[movie totalSumOfMoneyOfThisSharedBill] doubleValue] == 8.90*4+34.40+6.00, @"Total sum is wrong when adding multiple payments.");
-    XCTAssertTrue([movie hasPersonPaidSomething:liekemovie], @"This person should have paid something.");
-    XCTAssertTrue([movie hasPersonPaidSomething:markmovie], @"This person should have paid something.");
-    XCTAssertFalse([movie hasPersonPaidSomething:ilsemovie], @"This person shouldn't have paid something.");
-    XCTAssertFalse([movie hasPersonPaidSomething:conniemovie], @"This person shouldn't have paid something.");
-    XCTAssertTrue([movie doesEveryoneHaveAnEmailAddress], @"Everyone should have an email address");
-    XCTAssertTrue([[movie amountPeopleShouldHavePaid] doubleValue] == (8.90*4+34.40+6.00)/4, @"The average calculated amount is wrong.");
-    NSArray<MCReturnPayment *> *solution = [movie solveWhoHasToPayWhoFromThisBill];
+    XCTAssertTrue([[event totalSumOfMoneyOfThisSharedBill] doubleValue] == 8.90*4+34.40+6.00, @"Total sum is wrong when adding multiple payments.");
+    XCTAssertTrue([event hasPersonPaidSomething:liekemovie], @"This person should have paid something.");
+    XCTAssertTrue([event hasPersonPaidSomething:markmovie], @"This person should have paid something.");
+    XCTAssertFalse([event hasPersonPaidSomething:ilsemovie], @"This person shouldn't have paid something.");
+    XCTAssertFalse([event hasPersonPaidSomething:conniemovie], @"This person shouldn't have paid something.");
+    XCTAssertTrue([event doesEveryoneHaveAnEmailAddress], @"Everyone should have an email address");
+    XCTAssertTrue([[event amountPeopleShouldHavePaid] doubleValue] == (8.90*4+34.40+6.00)/4, @"The average calculated amount is wrong.");
+    NSArray<MCReturnPayment *> *solution = [event solveWhoHasToPayWhoFromThisBill];
     XCTAssertEqual([solution count], 3, @"Amount of MCReturnPayment on solved bill is not ok.");
     MCReturnPayment *one = solution[0];
     XCTAssertEqual(ilsemovie, [one payer], @"Payer not equal to the person that should pay.");
@@ -108,91 +104,116 @@
     XCTAssertEqual(conniemovie, [three payer], @"Payer not equal to the person that should pay.");
     XCTAssertEqualWithAccuracy([@19.00 doubleValue], [[three money] doubleValue], 0.001, @"Amount of money not equal to what should be paid.");
     XCTAssertEqual(liekemovie, [two receiver], @"Receiver not equal to the person that should receive.");
-    [MCSharedBill deleteSharedbill:movie];
-    XCTAssertTrue([movie isDeleted], @"Movie is not deleted");
+    [MCSharedBill deleteSharedbill:event];
+    XCTAssertTrue([event isDeleted], @"Movie is not deleted");
+    
+    // Disconnect the eventModel from the event.
+    [eventModel reset];
 }
 
 - (void)testToCheckIfEmailAddressesAreProperlyDeletedWhenDeletingASharedBill
 {
     // This test is to check to see the MCEmailAddressObjects which are of the people on the MCSharedBill are properly deleted.
-    MCSharedBill *movie = [[MCSharedBill alloc] initWithContext:_context];
-    [movie setTripName:@"Movie"];
-    XCTAssertFalse([movie areTherePeople], @"There are people on a new event?");
-    MCPerson *markmovie = [movie addPerson];
+    MCSharedBill *event = [[MCSharedBill alloc] initWithContext:_context];
+    MCEventModel *eventModel = [[MCEventModel alloc] initWithEvent:event];
+    [event setTripName:@"Movie"];
+    XCTAssertFalse([event areTherePeople], @"There are people on a new event?");
+    MCPerson *markmovie = [eventModel addPerson];
     MCPersonModel *markModel = [[MCPersonModel alloc] initWithPerson:markmovie];
     [markModel.person setFirstName:@"Mark"];
     [markModel.person setLastName:@"Cornelisse"];
     [markModel addOneEmailAddressFromAString:@"info@markcornelisse.nl"];
     MCEmailAddress *marksOnlyEmailAddress = [[markmovie emailAddress] anyObject];
-    [MCSharedBill deleteSharedbill:movie];
+    [MCSharedBill deleteSharedbill:event];
     XCTAssertTrue([marksOnlyEmailAddress isDeleted], @"marks email address is not properly deleted.");
+    
+    // Disconnect the eventModel from the event.
+    [eventModel reset];
 }
 
 - (void)testToCheckCalculationWhenEverybodyIsNotPresentOnPayment
 {
     // This test is to check to see if the - (NSArray *)solveWhoHasToPayWhoFromThisBill still solves the bill correctly if there is a payment present no presences.
-    MCSharedBill *tonightsBill = [MCSharedBill addSharedBillToContext:_context];
-    [tonightsBill setTripName:@"No presences test."];
-    MCPerson *mark = [tonightsBill addPerson];
+    MCSharedBill *event = [MCSharedBill addSharedBillToContext:_context];
+    MCEventModel *eventModel = [[MCEventModel alloc] initWithEvent:event];
+    [event setTripName:@"No presences test."];
+    MCPerson *mark = [eventModel addPerson];
     MCPersonModel *markModel = [[MCPersonModel alloc] initWithPerson:mark];
     [markModel.person setFirstName:@"Mark"];
     [markModel.person setLastName:@"Cornelisse"];
     [markModel addOneEmailAddressFromAString:@"info@markcornelisse.nl"];
-    MCPerson *ilse = [tonightsBill addPerson];
+    MCPerson *ilse = [eventModel addPerson];
     MCPersonModel *ilseModel = [[MCPersonModel alloc] initWithPerson:ilse];
     [ilseModel.person setFirstName:@"Ilse"];
     [ilseModel.person setLastName:@"Beguin"];
     [ilseModel addOneEmailAddressFromAString:@"ilse.beguin@hotmail.com"];
-    MCPayment *paymentWithNoPresences = [tonightsBill addPayment];
+    MCPayment *paymentWithNoPresences = [eventModel addPayment];
+    MCPaymentModel *paymentWithNoPresencesModel = [[MCPaymentModel alloc] initWithPayment:paymentWithNoPresences];
     [paymentWithNoPresences setMoney:@6.00];
     [paymentWithNoPresences setPayingPerson:ilse];
     [paymentWithNoPresences setDescriptionOfPayment:@"Nobody is present on this payment."];
     for (MCPaymentPresence *paymentPresence in [paymentWithNoPresences peopleSharingPayment]) {
         [paymentPresence setIsPersonPresent:@NO];
     }
-    [paymentWithNoPresences recalculateAveragePeopleOweAndStore];
-    MCPayment *paymentWithPresences = [tonightsBill addPayment];
+    [paymentWithNoPresencesModel recalculateAveragePeopleOweAndStore];
+    MCPayment *paymentWithPresences = [eventModel addPayment];
+    MCPaymentModel *paymentWithPresencesModel = [[MCPaymentModel alloc] initWithPayment:paymentWithPresences];
     paymentWithPresences.money = @5.00;
     paymentWithPresences.payingPerson = mark;
     paymentWithPresences.descriptionOfPayment = @"Everybody is present on this payment.";
-    paymentWithPresences.currency = tonightsBill.mainCurrency;
-    [paymentWithPresences recalculateAveragePeopleOweAndStore];
-    NSArray *result = [tonightsBill solveWhoHasToPayWhoFromThisBill];
+    paymentWithPresences.currency = event.mainCurrency;
+    [paymentWithPresencesModel recalculateAveragePeopleOweAndStore];
+    NSArray *result = [event solveWhoHasToPayWhoFromThisBill];
     XCTAssertTrue([result count] == 1, @"There should be one solution.");
     MCReturnPayment *returnPayment = [result lastObject];
     XCTAssertEqualWithAccuracy([[returnPayment money] doubleValue], 2.5, 0.001, @"The amount of money owed should be 2.5");
     XCTAssertTrue([returnPayment payer] == ilse, @"Ilse should be paying.");
     XCTAssertTrue([returnPayment receiver] == mark, @"Mark should be receiving.");
-    XCTAssertEqualWithAccuracy([[tonightsBill totalSumOfMoneyOfThisSharedBill] doubleValue], 5.00, 0.001, @"A total of 5 spent should be present.");
+    XCTAssertEqualWithAccuracy([[event totalSumOfMoneyOfThisSharedBill] doubleValue], 5.00, 0.001, @"A total of 5 spent should be present.");
+    
+    // Disconnect the eventModel from the event.
+    [eventModel reset];
 }
 
 - (void)testDeleteIfStillNew
 {
-    MCSharedBill *tonightsBill = [MCSharedBill addSharedBillToContext:_context];
-    [tonightsBill deleteIfStillNew];
-    XCTAssertTrue([tonightsBill isDeleted], @"tonightsBill should be deleted when tripname is nil, people present count is 0 and payment counts is 0.");
+    MCSharedBill *event = [MCSharedBill addSharedBillToContext:_context];
+    MCEventModel *eventModel = [[MCEventModel alloc] initWithEvent:event];
+    [event deleteIfStillNew];
+    XCTAssertTrue([event isDeleted], @"tonightsBill should be deleted when tripname is nil, people present count is 0 and payment counts is 0.");
+    [eventModel reset];
     
-    tonightsBill = [MCSharedBill addSharedBillToContext:_context];
-    [tonightsBill setTripName:@""];
-    [tonightsBill deleteIfStillNew];
-    XCTAssertTrue([tonightsBill isDeleted], @"tonightsBill should be deleted when tripName length is 0 characters, people present count is 0 and payments count is 0.");
+    event = [MCSharedBill addSharedBillToContext:_context];
+    eventModel = [[MCEventModel alloc] initWithEvent:event];
+    [event setTripName:@""];
+    [event deleteIfStillNew];
+    XCTAssertTrue([event isDeleted], @"tonightsBill should be deleted when tripName length is 0 characters, people present count is 0 and payments count is 0.");
+    [eventModel reset];
     
-    tonightsBill = [MCSharedBill addSharedBillToContext:_context];
-    [tonightsBill setTripName:@"Strip club"];
-    [tonightsBill deleteIfStillNew];
-    XCTAssertFalse([tonightsBill isDeleted], @"tonightsbill should not be deleted when tripname is present.");
-    [MCSharedBill deleteSharedbill:tonightsBill];
+    event = [MCSharedBill addSharedBillToContext:_context];
+    eventModel = [[MCEventModel alloc] initWithEvent:event];
+    [event setTripName:@"Strip club"];
+    [event deleteIfStillNew];
+    XCTAssertFalse([event isDeleted], @"tonightsbill should not be deleted when tripname is present.");
+    [MCSharedBill deleteSharedbill:event];
+    [eventModel reset];
     
-    tonightsBill = [MCSharedBill addSharedBillToContext:_context];
-    [tonightsBill addPerson];
-    [tonightsBill deleteIfStillNew];
-    XCTAssertFalse([tonightsBill isDeleted], @"tonightsbill should not be deleted when a person is present.");
-    [MCSharedBill deleteSharedbill:tonightsBill];
+    event = [MCSharedBill addSharedBillToContext:_context];
+    eventModel = [[MCEventModel alloc] initWithEvent:event];
+    MCPerson *person = [eventModel addPerson];
+    [eventModel deleteIfStillNew];
+    XCTAssertFalse([event isDeleted], @"tonightsbill should not be deleted when a person is present.");
+    [MCSharedBill deleteSharedbill:event];
+    [eventModel reset];
     
-    tonightsBill = [MCSharedBill addSharedBillToContext:_context];
-    [tonightsBill addPayment];
-    [tonightsBill deleteIfStillNew];
-    XCTAssertFalse([tonightsBill isDeleted], @"tonightsbill should not be deleted when a person is present.");
+    event = [MCSharedBill addSharedBillToContext:_context];
+    eventModel = [[MCEventModel alloc] initWithEvent:event];
+    MCPayment *payment = [eventModel addPayment];
+    [eventModel deleteIfStillNew];
+    XCTAssertFalse([event isDeleted], @"tonightsbill should not be deleted when a person is present.");
+    
+    // Disconnect the eventModel from the event.
+    [eventModel reset];
 }
 
 - (void)testmainCurrency
@@ -205,74 +226,86 @@
 
 - (void)testInitialPaymentCurrency
 {
-    MCSharedBill *tonightsBill = [MCSharedBill addSharedBillToContext:_context];
-    MCPayment *thisPayment = [tonightsBill addPayment];
+    MCSharedBill *event = [MCSharedBill addSharedBillToContext:_context];
+    MCEventModel *eventModel = [[MCEventModel alloc] initWithEvent:event];
+    MCPayment *thisPayment = [eventModel addPayment];
     NSString *currentLocaleCurrencyCode = [[NSLocale currentLocale] objectForKey:NSLocaleCurrencyCode];
     XCTAssertTrue([[[thisPayment currency] code] isEqualToString:currentLocaleCurrencyCode], @"%@ is not equal to %@", [[thisPayment currency] code], currentLocaleCurrencyCode);
+    
+    // Disconnect the eventModel from the event.
+    [eventModel reset];
 }
 
 - (void)testAmountShouldHavePaidBy
 {
     // Test to see if amountShouldHavePaidBy delivers the correct amount.
-    MCSharedBill *tonightsBill = [MCSharedBill addSharedBillToContext:_context];
+    MCSharedBill *event = [MCSharedBill addSharedBillToContext:_context];
+    MCEventModel *eventModel = [[MCEventModel alloc] initWithEvent:event];
     MCCurrency *mainCurrency = [MCCurrency currencyFrom:@"EUR" fromContext:_context];
-    MCPerson *mieke = [tonightsBill addPerson];
+    MCPerson *mieke = [eventModel addPerson];
     [mieke setFirstName:@"Mieke"];
     [mieke setLastName:@"Mooi"];
-    MCPerson *anne = [tonightsBill addPerson];
+    MCPerson *anne = [eventModel addPerson];
     [anne setFirstName:@"Anne"];
     [anne setLastName:@"Lief"];
-    MCPerson *mark = [tonightsBill addPerson];
+    MCPerson *mark = [eventModel addPerson];
     [mark setFirstName:@"Mark"];
     [mark setLastName:@"De grootte"];
     MCCurrency *currencyFirstPayment = [MCCurrency currencyFrom:@"USD" fromContext:_context];
-    MCPayment *firstPayment = [tonightsBill addPayment];
+    MCPayment *firstPayment = [eventModel addPayment];
+    MCPaymentModel *payment1Model = [[MCPaymentModel alloc] initWithPayment:firstPayment];
     [firstPayment setDescriptionOfPayment:@"Movie"];
     [firstPayment setPayingPerson:mark];
     [firstPayment setMoney:@32.00];
     [firstPayment setCurrency:currencyFirstPayment];
-    [firstPayment recalculateAveragePeopleOweAndStore];
+    [payment1Model recalculateAveragePeopleOweAndStore];
     MCExchangeRate *usdToEur = [[MCExchangeRate alloc] initWithContext:_context];
     usdToEur.toCurrency = mainCurrency;
     usdToEur.fromCurrency = currencyFirstPayment;
     usdToEur.exchangeRate = @0.742;
     [firstPayment setExchangeRate:usdToEur];
-    NSNumber *amountMiekeShouldPay = [tonightsBill amountShouldHavePaidBy:mieke];
+    NSNumber *amountMiekeShouldPay = [event amountShouldHavePaidBy:mieke];
     XCTAssertEqualWithAccuracy([@(32.00 * 0.742 / 3.0) doubleValue], [amountMiekeShouldPay doubleValue], 0.001, @"Mieke should pay something else?");
+    
+    // Disconnect the eventModel from the event.
+    [eventModel reset];
 }
 
 - (void)testOriginalSolveWhoHasToPayWhoFromThisBill
 {
     // Test to see if calculation containing foreign currency is done the right way.
-    MCSharedBill *tonightsBill = [MCSharedBill addSharedBillToContext:_context];
+    MCSharedBill *event = [MCSharedBill addSharedBillToContext:_context];
+    MCEventModel *eventModel = [[MCEventModel alloc] initWithEvent:event];
     MCCurrency *mainCurrency = [MCCurrency currencyFrom:@"EUR" fromContext:_context];
-    MCPerson *mieke = [tonightsBill addPerson];
+    MCPerson *mieke = [eventModel addPerson];
     [mieke setFirstName:@"Mieke"];
     [mieke setLastName:@"Mooi"];
-    MCPerson *anne = [tonightsBill addPerson];
+    MCPerson *anne = [eventModel addPerson];
     [anne setFirstName:@"Anne"];
     [anne setLastName:@"Lief"];
-    MCPerson *mark = [tonightsBill addPerson];
+    MCPerson *mark = [eventModel addPerson];
     [mark setFirstName:@"Mark"];
     [mark setLastName:@"Leuk"];
     MCCurrency *currencyFirstPayment = [MCCurrency currencyFrom:@"USD" fromContext:_context];
-    MCPayment *firstPayment = [tonightsBill addPayment];
+    MCPayment *firstPayment = [eventModel addPayment];
+    MCPaymentModel *payment1Model = [[MCPaymentModel alloc] initWithPayment:firstPayment];
     [firstPayment setDescriptionOfPayment:@"Movie"];
     [firstPayment setPayingPerson:mark];
     [firstPayment setMoney:@30.0];
     [firstPayment setCurrency:currencyFirstPayment];
-    [firstPayment recalculateAveragePeopleOweAndStore];
+    [payment1Model recalculateAveragePeopleOweAndStore];
     MCExchangeRate *usdToEur = [[MCExchangeRate alloc] initWithContext:_context];
     usdToEur.toCurrency = mainCurrency;
     usdToEur.fromCurrency = currencyFirstPayment;
     usdToEur.exchangeRate = @0.72;
     firstPayment.exchangeRate = usdToEur;
-    NSArray *resultsWithOnlyOnePayment = [tonightsBill solveWhoHasToPayWhoFromThisBill];
+    NSArray *resultsWithOnlyOnePayment = [event solveWhoHasToPayWhoFromThisBill];
     for (MCReturnPayment *rp in resultsWithOnlyOnePayment) {
         XCTAssertEqualWithAccuracy([[rp money] doubleValue], [@(30.0 * 0.72 / 3) doubleValue], 0.001, @"Basic split amount with conversion not ok.");
     }
     MCCurrency *currencySecondPayment = [MCCurrency currencyFrom:@"GBP" fromContext:_context];
-    MCPayment *secondPayment = [tonightsBill addPayment];
+    MCPayment *secondPayment = [eventModel addPayment];
+    MCPaymentModel *payment2Model = [[MCPaymentModel alloc] initWithPayment:secondPayment];
     [secondPayment setDescriptionOfPayment:@"Drinks"];
     [secondPayment setPayingPerson:anne];
     [secondPayment setMoney:@14.50];
@@ -288,13 +321,13 @@
     XCTAssertEqual([arrayWithOnlyMiekesPaymentPresence count], 1, @"More than one Mieke present.");
     MCPaymentPresence *miekesPaymentPresence = [arrayWithOnlyMiekesPaymentPresence firstObject];
     [miekesPaymentPresence setIsPersonPresent:@NO];
-    [secondPayment recalculateAveragePeopleOweAndStore];
+    [payment2Model recalculateAveragePeopleOweAndStore];
     MCExchangeRate *gbpToEur = [[MCExchangeRate alloc] initWithContext:_context];
     [gbpToEur setToCurrency:mainCurrency];
     [gbpToEur setFromCurrency:currencySecondPayment];
     [gbpToEur setExchangeRate:@1.2625];
     [secondPayment setExchangeRate:gbpToEur];
-    NSArray *results = [tonightsBill solveWhoHasToPayWhoFromThisBill];
+    NSArray *results = [event solveWhoHasToPayWhoFromThisBill];
     for (MCReturnPayment *returnPayment in results) {
         if ([[[returnPayment receiver] firstName] isEqualToString:@"Anne"]) {
             XCTAssertEqualWithAccuracy([[returnPayment money] doubleValue], [@(14.50*1.2625 - ((14.50 * 1.2625/2) + (30*0.72/3))) doubleValue], 0.001, @"Anne is not receiving the right amount.");
@@ -304,6 +337,9 @@
             XCTAssertFalse([[[returnPayment receiver] firstName] isEqualToString:@"Mieke"], @"Mieke should not be a receiver of money.");
         }
     }
+    
+    // Disconnect the eventModel from the event.
+    [eventModel reset];
 }
 
 - (void)solveWhoHasToPayWhoFromThisBillWithCompletionBlock
@@ -311,35 +347,38 @@
     XCTestExpectation *expectation = [self expectationWithDescription:@"solveWhoHasToPayWhoFromThisBillWithCompletionBlock"];
     
     // Test to see if calculation containing foreign currency is done the right way.
-    MCSharedBill *tonightsBill = [MCSharedBill addSharedBillToContext:_context];
+    MCSharedBill *event = [MCSharedBill addSharedBillToContext:_context];
+    MCEventModel *eventModel = [[MCEventModel alloc] initWithEvent:event];
     MCCurrency *mainCurrency = [MCCurrency currencyFrom:@"EUR" fromContext:_context];
-    MCPerson *mieke = [tonightsBill addPerson];
+    MCPerson *mieke = [eventModel addPerson];
     [mieke setFirstName:@"Mieke"];
     [mieke setLastName:@"Mooi"];
-    MCPerson *anne = [tonightsBill addPerson];
+    MCPerson *anne = [eventModel addPerson];
     [anne setFirstName:@"Anne"];
     [anne setLastName:@"Lief"];
-    MCPerson *mark = [tonightsBill addPerson];
+    MCPerson *mark = [eventModel addPerson];
     [mark setFirstName:@"Mark"];
     [mark setLastName:@"Leuk"];
     MCCurrency *currencyFirstPayment = [MCCurrency currencyFrom:@"USD" fromContext:_context];
-    MCPayment *firstPayment = [tonightsBill addPayment];
+    MCPayment *firstPayment = [eventModel addPayment];
+    MCPaymentModel *payment1Model = [[MCPaymentModel alloc] initWithPayment:firstPayment];
     [firstPayment setDescriptionOfPayment:@"Movie"];
     [firstPayment setPayingPerson:mark];
     [firstPayment setMoney:@30.0];
     [firstPayment setCurrency:currencyFirstPayment];
-    [firstPayment recalculateAveragePeopleOweAndStore];
+    [payment1Model recalculateAveragePeopleOweAndStore];
     MCExchangeRate *usdToEur = [[MCExchangeRate alloc] initWithContext:_context];
     [usdToEur setToCurrency:mainCurrency];
     [usdToEur setFromCurrency:currencyFirstPayment];
     [usdToEur setExchangeRate:@0.72];
     [firstPayment setExchangeRate:usdToEur];
-    NSArray *resultsWithOnlyOnePayment = [tonightsBill solveWhoHasToPayWhoFromThisBill];
+    NSArray *resultsWithOnlyOnePayment = [event solveWhoHasToPayWhoFromThisBill];
     for (MCReturnPayment *rp in resultsWithOnlyOnePayment) {
         XCTAssertEqualWithAccuracy([[rp money] doubleValue], [@(30.0 * 0.72 / 3) doubleValue], 0.001, @"Basic split amount with conversion not ok.");
     }
     MCCurrency *currencySecondPayment = [MCCurrency currencyFrom:@"GBP" fromContext:_context];
-    MCPayment *secondPayment = [tonightsBill addPayment];
+    MCPayment *secondPayment = [eventModel addPayment];
+    MCPaymentModel *payment2Model = [[MCPaymentModel alloc] initWithPayment:secondPayment];
     [secondPayment setDescriptionOfPayment:@"Drinks"];
     [secondPayment setPayingPerson:anne];
     [secondPayment setMoney:@14.50];
@@ -355,14 +394,14 @@
     XCTAssertEqual([arrayWithOnlyMiekesPaymentPresence count], 1, @"More than one Mieke present.");
     MCPaymentPresence *miekesPaymentPresence = [arrayWithOnlyMiekesPaymentPresence firstObject];
     [miekesPaymentPresence setIsPersonPresent:@NO];
-    [secondPayment recalculateAveragePeopleOweAndStore];
+    [payment2Model recalculateAveragePeopleOweAndStore];
     MCExchangeRate *gbpToEur = [[MCExchangeRate alloc] initWithContext:_context];
     [gbpToEur setToCurrency:mainCurrency];
     [gbpToEur setFromCurrency:currencySecondPayment];
     gbpToEur.exchangeRate = nil;
     gbpToEur.status = [NSNumber numberWithShort:MCExchangeRateStatusInvalid];
     [secondPayment setExchangeRate:gbpToEur];
-    [tonightsBill solveWithHandler:^(NSArray *results, NSError *error) {
+    [event solveWithHandler:^(NSArray *results, NSError *error) {
         XCTAssertNil(error);
         for (MCReturnPayment *returnPayment in results) {
             XCTAssertNotNil(secondPayment.exchangeRate.exchangeRate, @"There should be a value for the exchange rate.");
@@ -381,144 +420,175 @@
     [self waitForExpectationsWithTimeout:90 handler:^(NSError *error) {
         XCTAssertFalse(error, "Error: %@", error);
     }];
+    
+    // Disconnect the eventModel from the event.
+    [eventModel reset];
 }
 
 - (void)testAddPaymentAddToCurrencyToExchangeRate
 {
-    MCSharedBill *tonightsBill = [MCSharedBill addSharedBillToContext:_context];
-    MCPerson *mark = [tonightsBill addPerson];
+    MCSharedBill *event = [MCSharedBill addSharedBillToContext:_context];
+    MCEventModel *eventModel = [[MCEventModel alloc] initWithEvent:event];
+    MCPerson *mark = [eventModel addPerson];
     mark.firstName = @"Mark";
-    MCPerson *ilse = [tonightsBill addPerson];
+    MCPerson *ilse = [eventModel addPerson];
     ilse.firstName = @"Ilse";
-    MCPayment *thisPayment = [tonightsBill addPayment];
+    MCPayment *thisPayment = [eventModel addPayment];
     XCTAssertNotNil([[thisPayment exchangeRate] toCurrency], @"toCurrency in ExchangeRate cannot be nil after creation.");
+    
+    // Disconnect the eventModel from the event.
+    [eventModel reset];
 }
 
 - (void)testAreAllExchangeRatesValid
 {
-    MCSharedBill *tonightsBill = [[MCSharedBill alloc] initWithContext:_context];
-    MCPerson *mark = [tonightsBill addPerson];
+    MCSharedBill *event = [[MCSharedBill alloc] initWithContext:_context];
+    MCEventModel *eventModel = [[MCEventModel alloc] initWithEvent:event];
+    MCPerson *mark = [eventModel addPerson];
     mark.firstName = @"Mark";
-    MCPerson *ilse = [tonightsBill addPerson];
+    MCPerson *ilse = [eventModel addPerson];
     ilse.firstName = @"Ilse";
-    MCPayment *paymentWithValidExchangeRate = [tonightsBill addPayment];
+    MCPayment *paymentWithValidExchangeRate = [eventModel addPayment];
     XCTAssertNotNil(paymentWithValidExchangeRate, @"Should be present.");
-    XCTAssertTrue([tonightsBill areAllExchangeRatesValid], @"All Exchange Rate should be valid.");
-    MCPayment *paymentWithInValidExchangeRate = [tonightsBill addPayment];
-    MCCurrency *foreignCurrency = [MCCurrency currencyFrom:@"GBP" fromContext:[tonightsBill managedObjectContext]];
+    XCTAssertTrue([event areAllExchangeRatesValid], @"All Exchange Rate should be valid.");
+    MCPayment *paymentWithInValidExchangeRate = [eventModel addPayment];
+    MCCurrency *foreignCurrency = [MCCurrency currencyFrom:@"GBP" fromContext:[event managedObjectContext]];
     paymentWithInValidExchangeRate.currency = foreignCurrency;
     XCTAssertNotNil(paymentWithInValidExchangeRate.exchangeRate, @"ExchangeRate should not be nil.");
     paymentWithInValidExchangeRate.exchangeRate.toCurrency = foreignCurrency;
     paymentWithInValidExchangeRate.exchangeRate.status = [NSNumber numberWithShort:MCExchangeRateStatusFetching];
-    XCTAssertFalse([tonightsBill areAllExchangeRatesValid], @"One exchange rate is fetching.");
+    XCTAssertFalse([event areAllExchangeRatesValid], @"One exchange rate is fetching.");
     paymentWithInValidExchangeRate.exchangeRate.status = [NSNumber numberWithShort:MCExchangeRateStatusInvalid];
-    XCTAssertFalse([tonightsBill areAllExchangeRatesValid], @"One exchange rate is invalid.");
+    XCTAssertFalse([event areAllExchangeRatesValid], @"One exchange rate is invalid.");
+    
+    // Disconnect the eventModel from the event.
+    [eventModel reset];
 }
 
 - (void)testFetchPeoplePresentOrderedByAmountPaid
 {
-    MCSharedBill *tonightsBill = [[MCSharedBill alloc] initWithContext:_context];
-    MCPerson *mark = [tonightsBill addPerson];
+    MCSharedBill *event = [[MCSharedBill alloc] initWithContext:_context];
+    MCEventModel *eventModel = [[MCEventModel alloc] initWithEvent:event];
+    MCPerson *mark = [eventModel addPerson];
     mark.firstName = @"Mark";
-    MCPerson *lieke = [tonightsBill addPerson];
+    MCPerson *lieke = [eventModel addPerson];
     lieke.firstName = @"Lieke";
-    MCPerson *marieke = [tonightsBill addPerson];
+    MCPerson *marieke = [eventModel addPerson];
     marieke.firstName = @"Marieke";
-    MCPayment *iceCream = [tonightsBill addPayment];
+    MCPayment *iceCream = [eventModel addPayment];
     iceCream.payingPerson = marieke;
     iceCream.descriptionOfPayment = @"Ice Cream";
     iceCream.money = @6.00;
-    MCPayment *movie = [tonightsBill addPayment];
+    MCPayment *movie = [eventModel addPayment];
     movie.payingPerson = mark;
     movie.descriptionOfPayment = @"Movie";
     movie.money = @36.00;
-    MCPayment *hotelRoom = [tonightsBill addPayment];
+    MCPayment *hotelRoom = [eventModel addPayment];
     hotelRoom.payingPerson = lieke;
     hotelRoom.descriptionOfPayment = @"Place to sleep";
     hotelRoom.money = @100.00;
     hotelRoom.exchangeRate.exchangeRate = @0.3;
-    NSArray *result = [tonightsBill fetchPeoplePresentOrderedByAmountPaid:YES];
+    NSArray *result = [event fetchPeoplePresentOrderedByAmountPaid:YES];
     XCTAssertTrue(result[0] == marieke, @"First person should be Marieke.");
     XCTAssertTrue(result[1] == lieke, @"Second person should be Lieke.");
     XCTAssertTrue(result[2] == mark, @"Third person should be Mark.");
+    
+    // Disconnect the eventModel from the event.
+    [eventModel reset];
 }
 
 - (void)testFetchPersonWithID
 {
-    MCSharedBill *tonightsBill = [[MCSharedBill alloc] initWithContext:_context];
-    MCPerson *mark = [tonightsBill addPerson];
+    MCSharedBill *event = [[MCSharedBill alloc] initWithContext:_context];
+    MCEventModel *eventModel = [[MCEventModel alloc] initWithEvent:event];
+    MCPerson *mark = [eventModel addPerson];
     mark.firstName = @"Mark";
     mark.lastName = @"Cornelisse";
     NSString *uuid = mark.uniquePersonId;
-    MCPerson *fetchedSucker = [tonightsBill fetchPersonWithUniqueID:uuid];
+    MCPerson *fetchedSucker = [event fetchPersonWithUniqueID:uuid];
     XCTAssertTrue([fetchedSucker.uniquePersonId isEqualToString:uuid], @"Fetched uuid should be Mark");
+    
+    // Disconnect the eventModel from the event.
+    [eventModel reset];
 }
 
 - (void)testDoAllPaymentHaveAPayer
 {
-    MCSharedBill *tonightsbill = [MCSharedBill addSharedBillToContext:_context];
-    MCPerson *mark = [tonightsbill addPerson];
+    MCSharedBill *event = [MCSharedBill addSharedBillToContext:_context];
+    MCEventModel *eventModel = [[MCEventModel alloc] initWithEvent:event];
+    MCPerson *mark = [eventModel addPerson];
     mark.firstName = @"Mark";
-    MCPerson *merit = [tonightsbill addPerson];
+    MCPerson *merit = [eventModel addPerson];
     merit.firstName = @"Merit";
-    MCPayment *payment = [tonightsbill addPayment];
+    MCPayment *payment = [eventModel addPayment];
     payment.money = @1.00;
     payment.descriptionOfPayment = @"Knuffel";
-    BOOL noPaymentsWithoutPayers = tonightsbill.doAllPaymentsHaveAPayer;
+    BOOL noPaymentsWithoutPayers = event.doAllPaymentsHaveAPayer;
     XCTAssertFalse(noPaymentsWithoutPayers, @"There should be a payment without a payer.");
-    MCPayment *paymentWithPayer = [tonightsbill addPayment];
+    MCPayment *paymentWithPayer = [eventModel addPayment];
     payment.money = @34.00;
     paymentWithPayer.descriptionOfPayment = @"Massage";
     paymentWithPayer.payingPerson = merit;
-    noPaymentsWithoutPayers = tonightsbill.doAllPaymentsHaveAPayer;
+    noPaymentsWithoutPayers = event.doAllPaymentsHaveAPayer;
     XCTAssertFalse(noPaymentsWithoutPayers, @"There should be a payment without a payer.");
     payment.payingPerson = mark;
-    noPaymentsWithoutPayers = tonightsbill.doAllPaymentsHaveAPayer;
+    noPaymentsWithoutPayers = event.doAllPaymentsHaveAPayer;
     XCTAssertTrue(noPaymentsWithoutPayers, @"All payments should have a payer.");
+    
+    // Disconnect the eventModel from the event.
+    [eventModel reset];
 }
 
 - (void)testGetFirstPaymentWithoutAPayer
 {
-    MCSharedBill *tonightsbill = [MCSharedBill addSharedBillToContext:_context];
-    MCPerson *mark = [tonightsbill addPerson];
+    MCSharedBill *event = [MCSharedBill addSharedBillToContext:_context];
+    MCEventModel *eventModel = [[MCEventModel alloc] initWithEvent:event];
+    MCPerson *mark = [eventModel addPerson];
     mark.firstName = @"Mark";
-    MCPerson *merit = [tonightsbill addPerson];
+    MCPerson *merit = [eventModel addPerson];
     merit.firstName = @"Merit";
-    MCPayment *paymentWithPayer = [tonightsbill addPayment];
+    MCPayment *paymentWithPayer = [eventModel addPayment];
     paymentWithPayer.descriptionOfPayment = @"Massage";
     paymentWithPayer.payingPerson = merit;
     paymentWithPayer.money = @34.00;
-    MCPayment *paymentWithoutAPayer = [tonightsbill addPayment];
+    MCPayment *paymentWithoutAPayer = [eventModel addPayment];
     paymentWithoutAPayer.money = @1.00;
     paymentWithoutAPayer.descriptionOfPayment = @"Knuffel";
-    MCPayment *anotherPaymenWithoutAPayer = [tonightsbill addPayment];
+    MCPayment *anotherPaymenWithoutAPayer = [eventModel addPayment];
     anotherPaymenWithoutAPayer.money = @13.00;
     anotherPaymenWithoutAPayer.descriptionOfPayment = @"This is crazy!";
-    MCPayment *firstPaymentWithoutAPayer = [tonightsbill getFirstPaymentWithoutAPayer];
+    MCPayment *firstPaymentWithoutAPayer = [event getFirstPaymentWithoutAPayer];
     XCTAssertTrue([firstPaymentWithoutAPayer isEqual:paymentWithoutAPayer], @"These two should be the same.");
+    
+    // Disconnect the eventModel from the event.
+    [eventModel reset];
 }
 
 - (void)testRecentUsedForeignCurrencies
 {
-    MCSharedBill *tonightsBill = [MCSharedBill addSharedBillToContext:_context];
-    MCPerson *mark = [tonightsBill addPerson];
+    MCSharedBill *event = [MCSharedBill addSharedBillToContext:_context];
+    MCEventModel *eventModel = [[MCEventModel alloc] initWithEvent:event];
+    MCPerson *mark = [eventModel addPerson];
     mark.firstName = @"Mark";
-    MCPerson *merit = [tonightsBill addPerson];
+    MCPerson *merit = [eventModel addPerson];
     merit.firstName = @"Merit";
     MCCurrency *aud = [MCCurrency currencyFrom:@"AUD" fromContext:_context];
-    MCPayment *payment = [tonightsBill addPayment];
+    MCPayment *payment = [eventModel addPayment];
     payment.payingPerson = mark;
     payment.currency = aud;
     MCCurrency *mainCurrency = [MCCurrency generateCurrencyFromSelectedLocaleForContext:_context];
-    MCPayment *homePayment = [tonightsBill addPayment];
+    MCPayment *homePayment = [eventModel addPayment];
     homePayment.payingPerson = merit;
     homePayment.currency = mainCurrency;
-    NSArray<MCCurrency *> *foreignCurrencies = [tonightsBill recentUsedForeignCurrencies:5];
+    NSArray<MCCurrency *> *foreignCurrencies = [event recentUsedForeignCurrencies:5];
 
     XCTAssertTrue(foreignCurrencies.count > 0, @"There can only be multiple foreign currencies");
     for (MCCurrency *currency in foreignCurrencies) {
         XCTAssertTrue([currency.code isEqualToString:@"AUD"], @"Only foreign currency should be Australian Dollar");
     }
+    
+    // Disconnect the eventModel from the event.
+    [eventModel reset];
 }
 
 @end

@@ -216,7 +216,6 @@
 		38D796151B2F1CBD00F3872F /* ExchangeRateFetcherForMCExchangeRate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 38D796141B2F1CBD00F3872F /* ExchangeRateFetcherForMCExchangeRate.swift */; };
 		38D96ED423E30F5E00C03170 /* MCAdBannerTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 38D96ED323E30F5E00C03170 /* MCAdBannerTableViewCell.swift */; };
 		38D96ED623E31BE000C03170 /* MCBitwiseStuff.m in Sources */ = {isa = PBXBuildFile; fileRef = 38D96ED523E31BE000C03170 /* MCBitwiseStuff.m */; };
-		38DB85D417E45BCA006237CF /* MCPayment+addons.m in Sources */ = {isa = PBXBuildFile; fileRef = 38DB85D317E45BCA006237CF /* MCPayment+addons.m */; };
 		38DB85D717E45CA4006237CF /* MCSharedBill+addons.m in Sources */ = {isa = PBXBuildFile; fileRef = 38DB85D617E45CA4006237CF /* MCSharedBill+addons.m */; };
 		38E1CEA62768AC4600D78CDE /* SolutionTotalSpentTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 38E1CEA52768AC4600D78CDE /* SolutionTotalSpentTableViewCell.swift */; };
 		38E2CB3E1BC2A49C0092B5C8 /* SelectPayerTableViewCell_iPad.swift in Sources */ = {isa = PBXBuildFile; fileRef = 38E2CB3D1BC2A49C0092B5C8 /* SelectPayerTableViewCell_iPad.swift */; };
@@ -651,8 +650,6 @@
 		38D96ED323E30F5E00C03170 /* MCAdBannerTableViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MCAdBannerTableViewCell.swift; sourceTree = "<group>"; };
 		38D96ED523E31BE000C03170 /* MCBitwiseStuff.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = MCBitwiseStuff.m; sourceTree = "<group>"; };
 		38D96ED723E31BF200C03170 /* MCBitwiseStuff.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = MCBitwiseStuff.h; sourceTree = "<group>"; };
-		38DB85D217E45BCA006237CF /* MCPayment+addons.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = "MCPayment+addons.h"; path = "DataStore/MCPayment+addons.h"; sourceTree = "<group>"; };
-		38DB85D317E45BCA006237CF /* MCPayment+addons.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = "MCPayment+addons.m"; path = "DataStore/MCPayment+addons.m"; sourceTree = "<group>"; };
 		38DB85D517E45CA4006237CF /* MCSharedBill+addons.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = "MCSharedBill+addons.h"; path = "DataStore/MCSharedBill+addons.h"; sourceTree = "<group>"; };
 		38DB85D617E45CA4006237CF /* MCSharedBill+addons.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = "MCSharedBill+addons.m"; path = "DataStore/MCSharedBill+addons.m"; sourceTree = "<group>"; };
 		38E0C5DE18E5C94D005A3F17 /* MCTonightsBillTransfer.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = MCTonightsBillTransfer.h; path = ViewControllers/MCTonightsBillTransfer.h; sourceTree = "<group>"; };
@@ -834,8 +831,6 @@
 				38DB85D617E45CA4006237CF /* MCSharedBill+addons.m */,
 				389DE8F8197FB2BA00169645 /* MCPayment.h */,
 				389DE8F9197FB2BA00169645 /* MCPayment.m */,
-				38DB85D217E45BCA006237CF /* MCPayment+addons.h */,
-				38DB85D317E45BCA006237CF /* MCPayment+addons.m */,
 				387270872C4F94CE0003B399 /* MCPaymentExtension.swift */,
 				389DE8F5197FB2B900169645 /* MCPaymentPresence.h */,
 				389DE8F6197FB2B900169645 /* MCPaymentPresence.m */,
@@ -2340,7 +2335,6 @@
 				38C700F21D8EC24100D785BB /* LaunchCounter.swift in Sources */,
 				3864147F269B185400590ABA /* NotificationsTableViewController.swift in Sources */,
 				3892E3A417903EF00038894B /* MCEditTripViewController.m in Sources */,
-				38DB85D417E45BCA006237CF /* MCPayment+addons.m in Sources */,
 				3868780623721751003D40A9 /* EmailTextInputValidator.swift in Sources */,
 				387E79CF26F48EDC00C2A424 /* MCPurchaseTableViewCell.m in Sources */,
 				38D177131C3A85C00084604C /* SelectCurrencyTableViewController.swift in Sources */,

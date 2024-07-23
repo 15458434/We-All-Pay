@@ -7,6 +7,7 @@
 //
 
 import UIKit
+import os
 import CurrencyConverter
 
 import FirebaseCrashlytics
@@ -15,6 +16,11 @@ import FirebaseCrashlytics
     @objc private(set) var payment: MCPayment!
     private(set) var currencyFormatter: CurrencyFormatter!
     @objc private(set) dynamic var error: NSError?
+    
+    @objc(initWithPayment:) convenience init(with payment: MCPayment) {
+        self.init()
+        prepareForUse(with: payment)
+    }
 
     @objc(prepareForUseWithPayment:) func prepareForUse(with payment: MCPayment) {
         func createPeoplePresenceController(for payment: MCPayment) {
@@ -51,6 +57,38 @@ import FirebaseCrashlytics
         payment.managedObjectContext!.undoManager!.beginUndoGrouping()
     }
     
+    @objc(paymentPresenceForPerson:withError:) func paymentPresence(for person: MCPerson) throws -> MCPaymentPresence {
+        let logger = Logger(category: "PaymentModel")
+        let request = MCPaymentPresence.fetchRequest()
+        request.predicate = NSPredicate(format: "payment = %@ AND person = %@", payment, person)
+        request.sortDescriptors = [NSSortDescriptor(keyPath: \MCPaymentPresence.averageOweFromPayment, ascending: true)]
+        do {
+            let results = try payment.managedObjectContext!.fetch(request)
+            return results.first!
+        } catch {
+            logger.error("Something went wrong fetching MCPaymentPresence: \(error)")
+            throw error
+        }
+    }
+    
+    @objc(updateCurrencyAndUpdateExchangeRate:withCompletionHandler:) func update(currency newCurrency: MCCurrency, andUpdateExchangeRateWith completionHandler: @escaping (_ error: (any Error)?) -> Void) {
+        payment.currency = newCurrency
+        payment.exchangeRate!.fromCurrency = newCurrency
+        
+        payment.exchangeRate!.status = MCExchangeRateStatus.fetching.rawValue as NSNumber
+        // If equal just set the exchangeRate to a value of 1.
+        let fetcher = WeAllPayStoreController.defaultStore.fetcher
+        fetcher.exchangeRate(payment.exchangeRate!.fromCurrency!.code!, toCode: payment.exchangeRate!.toCurrency!.code!) { [weak self] fromCode, toCode, exchangeRate, error in
+            guard error == nil else {
+                completionHandler(error!)
+                self?.payment.exchangeRate!.status = MCExchangeRateStatus.invalid.rawValue as NSNumber
+                return
+            }
+            self?.payment.exchangeRate?.exchangeRate = exchangeRate
+            self?.payment.exchangeRate!.status = MCExchangeRateStatus.valid.rawValue as NSNumber
+        }
+    }
+    
     @objc(updatePayingPerson:) func update(payingPerson: MCPerson?) {
         if let payingPerson = payingPerson {
             payingPerson.addPaymentsObject(payment)
@@ -75,7 +113,7 @@ import FirebaseCrashlytics
     
     @objc(updateMoney:) func update(money: NSNumber?) {
         payment.money = money
-        payment.recalculateAveragePeopleOweAndStore()
+        self.recalculateAveragePeopleOweAndStore()
     }
     
     @objc(updateCurrency:) func update(currency: Currency) {
@@ -88,13 +126,41 @@ import FirebaseCrashlytics
             mainThreadContext.delete(oldCurrency!)
         }
         
-        payment.setNewCurrencyAndAutomaticallyUpdateExchangeRate(newCurrency) { [weak self] error in
+        update(currency: newCurrency) { [weak self] error in
             guard error == nil else {
                 // TODO: Handle error
                 self?.error = error! as NSError
                 return
             }
         }
+    }
+    
+    func update(person: MCPerson, to isPresent: Bool) throws {
+        let personPresence = try paymentPresence(for: person)
+        update(paymentPresence: personPresence, to: isPresent)
+    }
+    
+    @objc(updatePaymentPresence:toIsPresent:) func update(paymentPresence: MCPaymentPresence, to isPresent: Bool) {
+        // TODO: Make unit test.
+        WeAllPayStoreController.defaultStore.beginUndoGroupWithoutRegistration()
+        paymentPresence.isPersonPresent = isPresent as NSNumber
+        self.recalculateAveragePeopleOweAndStore()
+        WeAllPayStoreController.defaultStore.endUndoGroupWithoutRegistration()
+    }
+    
+    func recalculateAveragePeopleOweAndStore() {
+        let now = Date()
+        let averagePayedByPeoplePresent = payment.averageAmountPeopleShouldHavePaidOnThisPayment
+        payment.peopleSharingPayment?.forEach({ paymentPresence in
+            if paymentPresence.isPersonPresent?.boolValue ?? false {
+                paymentPresence.averageOweFromPayment = averagePayedByPeoplePresent as NSNumber
+            } else {
+                paymentPresence.averageOweFromPayment = 0 as NSNumber
+                paymentPresence.dateModified = now
+            }
+        })
+        payment.dateModified = now
+        payment.onWhichBill!.dateModified = now
     }
     
     @nonobjc private func updateDateModified() {
@@ -124,7 +190,7 @@ import FirebaseCrashlytics
             mainThreadContext.delete(oldCurrency!)
         }
         
-        payment.setNewCurrencyAndAutomaticallyUpdateExchangeRate(newCurrency, withCompletionHandler: completion)
+        update(currency: newCurrency, andUpdateExchangeRateWith: completion)
     }
     
     

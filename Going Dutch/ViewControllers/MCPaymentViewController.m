@@ -11,7 +11,7 @@
 #import "MCPaymentViewController.h"
 #import "MCPaymentPresenceTableViewCell_iPhone.h"
 
-#import "MCPayment+addons.h"
+#import "MCPayment+CoreDataProperties.h"
 #import "MCPerson+CoreDataProperties.h"
 #import "MCSharedBill+addons.h"
 #import "MCPaymentPresence+CoreDataProperties.h"
@@ -236,7 +236,7 @@ static void * CurrencyContext = &CurrencyContext;
     MCPaymentPresenceTableViewCell_iPhone *paymentPresenceCell = (MCPaymentPresenceTableViewCell_iPhone *)cell;
     // Set the cell contents
     MCPaymentPresence *paymentPresence = [_model.peoplePresenceController objectAtIndexPath:indexPath];
-    [paymentPresenceCell updatePaymentPresence:paymentPresence];
+    [paymentPresenceCell updateModel:_model andPaymentPresence:paymentPresence];
 }
 
 - (CGFloat)tableView:(UITableView *)tableView heightForRowAtIndexPath:(NSIndexPath *)indexPath {

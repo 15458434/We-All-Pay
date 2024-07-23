@@ -8,6 +8,7 @@
 
 @import UIKit;
 
+@class MCPaymentModel;
 @class MCPaymentPresence;
 
 NS_ASSUME_NONNULL_BEGIN
@@ -21,7 +22,7 @@ __attribute__((objc_subclassing_restricted))
 @property (nonatomic, weak) IBOutlet UISwitch *isPresentSwitch;
 @property (nonatomic, weak) UILabel *owesLabel;
 
-- (void)updatePaymentPresence:(MCPaymentPresence *)paymentPresence;
+- (void)updateModel:(MCPaymentModel *)model andPaymentPresence:(MCPaymentPresence *)paymentPresence;
 
 @end
 

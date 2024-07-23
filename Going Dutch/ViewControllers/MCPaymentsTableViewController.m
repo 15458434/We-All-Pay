@@ -14,7 +14,7 @@
 
 #import "MCSharedBill+addons.h"
 #import "MCPerson+CoreDataProperties.h"
-#import "MCPayment+addons.h"
+#import "MCPayment+CoreDataProperties.h"
 
 #import "MCAllTripsTableViewController.h"
 #import "MCEditTripViewController.h"

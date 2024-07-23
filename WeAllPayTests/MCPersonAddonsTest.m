@@ -11,7 +11,7 @@
 #import "MCSharedBill+addons.h"
 #import "MCPerson+CoreDataProperties.h"
 #import "MCEmailAddress+CoreDataProperties.h"
-#import "MCPayment+addons.h"
+#import "MCPayment+CoreDataProperties.h"
 #import "MCExchangeRate+CoreDataProperties.h"
 #import "MCPaymentPresence+CoreDataProperties.h"
 #import "MCPerson+TestHelper.h"
@@ -27,13 +27,9 @@
 
 - (void)setUp {
     [super setUp];
-    NSManagedObjectModel *managedObjectModel = [NSManagedObjectModel mergedModelFromBundles:nil];
-    NSPersistentStoreCoordinator *persistentStoreCoordinator = [[NSPersistentStoreCoordinator alloc] initWithManagedObjectModel:managedObjectModel];
-    NSError *error;
-    NSPersistentStore *persistentStore = [persistentStoreCoordinator addPersistentStoreWithType:NSInMemoryStoreType configuration:nil URL:nil options:nil error:&error];
-    XCTAssertTrue(persistentStore, @"Something went wrong opening the In Memory Store: %@", [error localizedDescription]);
-    _context = [[NSManagedObjectContext alloc] initWithConcurrencyType:NSMainQueueConcurrencyType];
-    _context.persistentStoreCoordinator = persistentStoreCoordinator;}
+    [WeAllPayStoreController.defaultStore openStoreOfType:NSInMemoryStoreType];
+    _context = WeAllPayStoreController.defaultStore.viewContext;
+}
 
 - (void)tearDown
 {
@@ -117,9 +113,10 @@
 
 - (void)testHasPersonMadePaymentWithInvalidExchangeRates
 {
-    MCSharedBill *tonightsBill = [MCSharedBill addSharedBillToContext:_context];
-    MCPerson *mark = [tonightsBill addPerson];
-    MCPayment *thisPayment = [tonightsBill addPayment];
+    MCSharedBill *event = [MCSharedBill addSharedBillToContext:_context];
+    MCEventModel *eventModel = [[MCEventModel alloc] initWithEvent:event];
+    MCPerson *mark = [eventModel addPerson];
+    MCPayment *thisPayment = [eventModel addPayment];
     thisPayment.payingPerson = mark;
     thisPayment.exchangeRate.status = [NSNumber numberWithShort:MCExchangeRateStatusValid];
     XCTAssertFalse([mark hasPersonMadePaymentWithInvalidExchangeRates], @"All payments person has made should be valid.");
@@ -127,16 +124,20 @@
     XCTAssertTrue([mark hasPersonMadePaymentWithInvalidExchangeRates], @"No payment should be valid.");
     thisPayment.exchangeRate.status = [NSNumber numberWithShort:MCExchangeRateStatusFetching];
     XCTAssertTrue([mark hasPersonMadePaymentWithInvalidExchangeRates], @"No payment should be valid.");
+    
+    // Disconnect the eventModel from the event.
+    [eventModel reset];
 }
 
 - (void)testTotalSumPaidBy
 {
-    MCSharedBill *tonightsBill = [MCSharedBill addSharedBillToContext:_context];
-    MCPerson *fred = [tonightsBill addPerson];
+    MCSharedBill *event = [MCSharedBill addSharedBillToContext:_context];
+    MCEventModel *eventModel = [[MCEventModel alloc] initWithEvent:event];
+    MCPerson *fred = [eventModel addPerson];
     fred.firstName = @"Fred";
-    MCPerson *anna = [tonightsBill addPerson];
+    MCPerson *anna = [eventModel addPerson];
     anna.firstName = @"Marieke";
-    MCPayment *drinks = [tonightsBill addPayment];
+    MCPayment *drinks = [eventModel addPayment];
     drinks.payingPerson = fred;
     drinks.money = @(10);
     drinks.descriptionOfPayment = @"coffee";
@@ -144,7 +145,7 @@
     XCTAssertEqualWithAccuracy(@(10).doubleValue, totalPaidByFred.doubleValue, 0.001);
     
     // Test with missing no payment presence
-    MCPayment *tickets = [tonightsBill addPayment];
+    MCPayment *tickets = [eventModel addPayment];
     tickets.payingPerson = anna;
     tickets.money = @(20);
     for (MCPaymentPresence *presence in tickets.peopleSharingPayment) {

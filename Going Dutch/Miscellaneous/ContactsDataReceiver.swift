@@ -44,7 +44,8 @@ final class ContactsDataReceiver: NSObject, ThisEventReadOnly, CNContactPickerDe
         let tonightsBillID: NSManagedObjectID = event.objectID
         WeAllPayStoreController.defaultStore.performBackgroundTask { backgroundContext in
             let backgroundTonightsBill: MCSharedBill = backgroundContext.object(with: tonightsBillID) as! MCSharedBill
-            let newPerson: MCPerson = backgroundTonightsBill.addPerson()!
+            let eventModel = EventModel(event: backgroundTonightsBill)
+            let newPerson: MCPerson = eventModel.addPerson()
             let personModel = PersonModel(with: newPerson)
             personModel.person.firstName = contact.givenName
             personModel.person.lastName = contact.middleName + contact.familyName

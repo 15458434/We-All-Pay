@@ -75,7 +75,7 @@ extension MCPerson  {
         let result: NSDecimalNumber? = self.payments?
             .reduce(NSDecimalNumber.zero) { (partialResult, payment) -> NSDecimalNumber in
                 let partialValue = partialResult.decimalValue
-                let value = payment.moneyInMainCurrency().decimalValue
+                let value = payment.moneyInMainCurrency.decimalValue
                 let resultValue = partialValue + value
                 return NSDecimalNumber(decimal: resultValue)
             }

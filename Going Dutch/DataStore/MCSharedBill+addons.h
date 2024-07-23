@@ -18,11 +18,9 @@
 + (BOOL)isTableInDatabaseEmpty;
 + (BOOL)isTableInDatabaseEmptyForContext:(NSManagedObjectContext *)context;
 
-- (MCPayment *)addPayment __deprecated;
 - (void)deletePayment:(MCPayment *)toBeDeletePayment;
 - (void)updatePaymentForSupportWithPaymentPresence;
 
-- (MCPerson *)addPerson;
 - (void)deletePerson:(MCPerson *)toBeDeletedPerson;
 - (MCPerson *)fetchPersonWithUniqueID:(NSString *)uuid;
 - (BOOL)isPresentWithFirstName:(NSString *)firstName andLastName:(NSString *)lastName andEmailAddress:(NSString *)emailAddress;
