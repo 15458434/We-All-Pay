@@ -329,34 +329,35 @@
 
 - (void)testDeletePersonWithPresences
 {
-    MCSharedBill *thisBill = [MCSharedBill addSharedBillToContext:_context];
-    MCPerson *mark = [thisBill addPerson];
+    MCSharedBill *event = [MCSharedBill addSharedBillToContext:_context];
+    MCEventModel *eventModel = [[MCEventModel alloc] initWithEvent:event];
+    MCPerson *mark = [eventModel addPerson];
     MCPersonModel *markModel = [[MCPersonModel alloc] initWithPerson:mark];
     [markModel.person setFirstName:@"Mark"];
     [markModel.person setLastName:@"Cornelisse"];
     [markModel addOneEmailAddressFromAString:@"info@markcornelisse.nl"];
-    MCPerson *ilse = [thisBill addPerson];
+    MCPerson *ilse = [eventModel addPerson];
     MCPersonModel *ilseModel = [[MCPersonModel alloc] initWithPerson:ilse];
     [ilseModel.person setFirstName:@"Ilse"];
     [ilseModel.person setLastName:@"Béguin"];
     [ilseModel addOneEmailAddressFromAString:@"ilse.beguin@hotmail.com"];
-    MCPerson *iva = [thisBill addPerson];
+    MCPerson *iva = [eventModel addPerson];
     MCPersonModel *ivaModel = [[MCPersonModel alloc] initWithPerson:iva];
     [ivaModel.person setFirstName:@"Iva"];
     [ivaModel.person setLastName:@"Moslavac"];
     [ivaModel addOneEmailAddressFromAString:@"ivamavi2002@yahoo.co.uk"];
     
-    MCPayment *thisPayment = [thisBill addPayment];
+    MCPayment *thisPayment = [eventModel addPayment];
     [thisPayment setPayingPerson:mark];
     [thisPayment setDescriptionOfPayment:@"Drinken op een terras."];
     [thisPayment setMoney:@9.00];
     
-    MCPayment *thisPayment2 = [thisBill addPayment];
+    MCPayment *thisPayment2 = [eventModel addPayment];
     [thisPayment2 setPayingPerson:iva];
     [thisPayment2 setDescriptionOfPayment:@"Food"];
     [thisPayment2 setMoney:@30.00];
     
-    MCPayment *thisPayment3 = [thisBill addPayment];
+    MCPayment *thisPayment3 = [eventModel addPayment];
     [thisPayment3 setPayingPerson:ilse];
     [thisPayment3 setDescriptionOfPayment:@"Movie"];
     [thisPayment3 setMoney:@36.00];
@@ -364,14 +365,17 @@
     XCTAssertEqual([[iva sharingPayment] count], 3, @"There should be 3 paymentPresences for Iva.");
     NSSet *paymentPresencesIva= [iva sharingPayment];
     XCTAssertEqual([[thisPayment peopleSharingPayment] count], 3, @"There should be 3 paymentPresences on the first payment.");
-    [thisBill deletePerson:iva];
+    [event deletePerson:iva];
     XCTAssertEqual([[thisPayment peopleSharingPayment] count], 2, @"There should be 2 paymentPresences left on this payment.");
     XCTAssertTrue([iva isDeleted], @"Iva should be removed.");
     for (MCPaymentPresence *paymentPresence in paymentPresencesIva) {
         XCTAssertTrue([paymentPresence isDeleted], @"Payment presence of Iva should be deleted.");
     }
 //    [thisBill amountShouldHavePaidBy:mark];
-    XCTAssertEqualWithAccuracy([[thisBill amountShouldHavePaidBy:mark] doubleValue], 37.5, 0.001, @"payment presence not updated after deletion.");
+    XCTAssertEqualWithAccuracy([[event amountShouldHavePaidBy:mark] doubleValue], 37.5, 0.001, @"payment presence not updated after deletion.");
+    
+    // Disconnect the eventModel from the event.
+    [eventModel reset];
 }
 
 - (void)testGetAverageOweFromPaymentInMainCurrency
