@@ -8,6 +8,7 @@
 
 #import <UIKit/UIKit.h>
 #import <XCTest/XCTest.h>
+#import "CurrencyConverter/CurrencyConverter.h"
 
 #import "MCPerson+CoreDataProperties.h"
 #import "MCPayment+CoreDataProperties.h"
@@ -61,7 +62,8 @@
 - (void)testPersonExistenceOnSharedBill
 {
     MCSharedBill *event = [[MCSharedBill alloc] initWithContext:_context];
-    MCEventModel *eventModel = [[MCEventModel alloc] initWithEvent:event];
+    MCCurrencyModel *currencyModel = [[MCCurrencyModel alloc] initWithManagedObjectContext:_context andWithCurrencyController:[[CurrencyController alloc] init]];
+    MCEventModel *eventModel = [[MCEventModel alloc] initWithEvent:event andConcurrencyModel:currencyModel];
     MCPerson *mark = [eventModel addPerson];
     MCPersonModel *markModel = [[MCPersonModel alloc] initWithPerson:mark];
     [markModel.person setFirstName:@"Mark"];
@@ -86,8 +88,9 @@
 
 - (void)testGetPeopleOnSharedBill
 {
-    MCSharedBill *tonightsBill = [[MCSharedBill alloc] initWithContext:_context];
-    MCEventModel *eventModel = [[MCEventModel alloc] initWithEvent:tonightsBill];
+    MCSharedBill *event = [[MCSharedBill alloc] initWithContext:_context];
+    MCCurrencyModel *currencyModel = [[MCCurrencyModel alloc] initWithManagedObjectContext:_context andWithCurrencyController:[[CurrencyController alloc] init]];
+    MCEventModel *eventModel = [[MCEventModel alloc] initWithEvent:event andConcurrencyModel:currencyModel];
     NSArray *peoplePresentOnEvent = eventModel.peoplePresentOnEvent;
     XCTAssertTrue([peoplePresentOnEvent count] == 0, @"Aantal mensen op the shared Bill klopt niet.");
     MCPerson *thisPerson = [eventModel addPerson];
@@ -102,7 +105,7 @@
     [thisPerson3 setFirstName:@"Iva"];
     peoplePresentOnEvent = eventModel.peoplePresentOnEvent;
     XCTAssertTrue([peoplePresentOnEvent count] == 3, @"Aantal mensen op the shared Bill klopt niet.");
-    [MCSharedBill deleteSharedbill:tonightsBill];
+    [MCSharedBill deleteSharedbill:event];
     
     // Disconnect the eventModel from the event.
     [eventModel reset];

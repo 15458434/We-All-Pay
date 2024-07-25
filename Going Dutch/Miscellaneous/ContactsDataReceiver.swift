@@ -8,6 +8,7 @@
 
 import UIKit
 import ContactsUI
+import CurrencyConverter
 
 final class ContactsDataReceiver: NSObject, ThisEventReadOnly, CNContactPickerDelegate {
     @objc dynamic private(set) var error: NSError?
@@ -43,8 +44,8 @@ final class ContactsDataReceiver: NSObject, ThisEventReadOnly, CNContactPickerDe
     func contactPicker(_ picker: CNContactPickerViewController, didSelect contact: CNContact) {
         let tonightsBillID: NSManagedObjectID = event.objectID
         WeAllPayStoreController.defaultStore.performBackgroundTask { backgroundContext in
-            let backgroundTonightsBill: MCSharedBill = backgroundContext.object(with: tonightsBillID) as! MCSharedBill
-            let eventModel = EventModel(event: backgroundTonightsBill)
+            let event: MCSharedBill = backgroundContext.object(with: tonightsBillID) as! MCSharedBill
+            let eventModel = EventModel(event: event, currencyModel: CurrencyModel(managedObjectContext: event.managedObjectContext!, currencyController: CurrencyController()))
             let newPerson: MCPerson = eventModel.addPerson()
             let personModel = PersonModel(with: newPerson)
             personModel.person.firstName = contact.givenName

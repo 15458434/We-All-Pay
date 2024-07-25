@@ -161,7 +161,8 @@ static void * CurrencyContext = &CurrencyContext;
 - (void)prepareForUseWithPathComponentsToOpen:(NSArray<NSManagedObject *> *)pathComponentsToOpen {
     MCSharedBill *event = (MCSharedBill *)pathComponentsToOpen[0];
     NSParameterAssert(event);
-    MCEventModel *eventModel = [[MCEventModel alloc] initWithEvent:event];
+    MCCurrencyModel *currencyModel = [[MCCurrencyModel alloc] initWithManagedObjectContext:event.managedObjectContext andWithCurrencyController:[[CurrencyController alloc] init]];
+    MCEventModel *eventModel = [[MCEventModel alloc] initWithEvent:event andConcurrencyModel:currencyModel];
     [self prepareForUseWithEventModel:eventModel];
     MCPerson *predefinedPayingPerson = (MCPerson *)pathComponentsToOpen[1];
     NSParameterAssert(predefinedPayingPerson);

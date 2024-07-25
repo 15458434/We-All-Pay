@@ -10,7 +10,10 @@
 #import "MCCurrency.h"
 #import "MCPayment.h"
 #import "MCPerson.h"
-#import "MCCurrency+addons.h"
+#import "MCCurrency+CoreDataProperties.h"
+#import "CurrencyConverter/CurrencyConverter.h"
+
+#import "We_all_pay-Swift.h"
 
 @implementation MCSharedBill
 
@@ -24,7 +27,10 @@
     NSDate *now = NSDate.date;
     [self setPrimitiveValue:now forKey:@"dateCreated"];
     [self setPrimitiveValue:now forKey:@"dateModified"];
-    MCCurrency *mainCurrency = [MCCurrency generateCurrencyFromSelectedLocaleForContext:self.managedObjectContext];
+    MCCurrencyModel *currencyModel = [[MCCurrencyModel alloc] initWithManagedObjectContext:self.managedObjectContext andWithCurrencyController:[[CurrencyController alloc] init]];
+    NSError *error;
+    MCCurrency *mainCurrency = [currencyModel generateCurrencyFromSelectedLocaleWithError:&error];
+    NSParameterAssert(error == nil);
     [self setPrimitiveValue:mainCurrency forKey:@"mainCurrency"];
 }
 

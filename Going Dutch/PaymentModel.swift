@@ -16,6 +16,7 @@ import FirebaseCrashlytics
     @objc private(set) var payment: MCPayment!
     private(set) var currencyFormatter: CurrencyFormatter!
     @objc private(set) dynamic var error: NSError?
+    private var currencyModel: CurrencyModel!
     
     @objc(initWithPayment:) convenience init(with payment: MCPayment) {
         self.init()
@@ -40,6 +41,7 @@ import FirebaseCrashlytics
         self.payment = payment
         createPeoplePresenceController(for: payment)
         currencyFormatter = CurrencyFormatter(currencyCode: payment.currency!.code!)
+        currencyModel = CurrencyModel(managedObjectContext: payment.managedObjectContext!, currencyController: CurrencyController())
     }
     
     private(set) var peoplePresenceController: NSFetchedResultsController<MCPaymentPresence>!
@@ -119,7 +121,7 @@ import FirebaseCrashlytics
     @objc(updateCurrency:) func update(currency: Currency) {
         currencyFormatter = CurrencyFormatter(currencyCode: currency.code)
         let mainThreadContext = payment.managedObjectContext!
-        let newCurrency = MCCurrency(from: currency.code, from: mainThreadContext)
+        let newCurrency = currencyModel.currency(from: currency.code)
         let oldCurrency = payment.currency
         payment.currency = newCurrency
         if oldCurrency?.sharedBill?.count == 0 && oldCurrency?.payment?.count == 0 {
@@ -183,7 +185,7 @@ import FirebaseCrashlytics
     
     func updateCurrency(with code: String, with completion: @escaping ((Error?) -> Void)) {
         let mainThreadContext = WeAllPayStoreController.defaultStore.viewContext
-        let newCurrency = MCCurrency(from: code, from: mainThreadContext)
+        let newCurrency = currencyModel.currency(from: code)
         let oldCurrency = payment.currency
         payment.currency = newCurrency
         if oldCurrency?.sharedBill?.count == 0 && oldCurrency?.payment?.count == 0 {

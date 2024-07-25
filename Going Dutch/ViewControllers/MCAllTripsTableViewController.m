@@ -8,6 +8,8 @@
 
 @import FirebaseAnalytics;
 
+#import "CurrencyConverter/CurrencyConverter.h"
+
 #import "MCAllTripsTableViewController.h"
 #import "MCPaymentsTableViewController.h"
 #import "MCPaymentViewController.h"
@@ -18,7 +20,7 @@
 
 #import "MCSharedBill+addons.h"
 #import "MCPerson+CoreDataProperties.h"
-#import "MCCurrency+addons.h"
+#import "MCCurrency+CoreDataProperties.h"
 
 #import "MCEditorType.h"
 
@@ -256,7 +258,8 @@ static void * notificationCountContext = &notificationCountContext;
     if ([segue.identifier isEqualToString:@"newTonightsBill"]) {
         _isATonightsBillOpened = MCTonightsBillStatusOpened;
         MCSharedBill *newEvent = [_model addEvent];
-        MCEventModel *eventModel = [[MCEventModel alloc] initWithEvent:newEvent];
+        MCCurrencyModel *currencyModel = [[MCCurrencyModel alloc] initWithManagedObjectContext:newEvent.managedObjectContext andWithCurrencyController:[[CurrencyController alloc] init]];
+        MCEventModel *eventModel = [[MCEventModel alloc] initWithEvent:newEvent andConcurrencyModel:currencyModel];
         MCSharedBillMainViewController *destination = (MCSharedBillMainViewController *)segue.destinationViewController;
         [destination prepareForUseWithEventModel:eventModel];
         destination.currentView = MCSelectEditTripTableView;
@@ -265,7 +268,8 @@ static void * notificationCountContext = &notificationCountContext;
         NSIndexPath *indexPathOfSelectedRow = self.tableView.indexPathForSelectedRow;
         NSParameterAssert(indexPathOfSelectedRow);
         MCSharedBill *selectedEvent = [_model.fetchEventsController objectAtIndexPath:indexPathOfSelectedRow];
-        MCEventModel *model = [[MCEventModel alloc] initWithEvent:selectedEvent];
+        MCCurrencyModel *currencyModel = [[MCCurrencyModel alloc] initWithManagedObjectContext:selectedEvent.managedObjectContext andWithCurrencyController:[[CurrencyController alloc] init]];
+        MCEventModel *model = [[MCEventModel alloc] initWithEvent:selectedEvent andConcurrencyModel:currencyModel];
         MCSharedBillMainViewController *destination = (MCSharedBillMainViewController *)segue.destinationViewController;
         [destination prepareForUseWithEventModel:model];
         destination.currentView = MCSelectSharedBillTableView;
@@ -273,7 +277,8 @@ static void * notificationCountContext = &notificationCountContext;
         MCSharedBill *event = _model.fetchEventsController.fetchedObjects[_selectedIndexPathForAction.row];
         UINavigationController *navController = (UINavigationController *)segue.destinationViewController;
         SelectCurrencyTableViewController *currencySelector = (SelectCurrencyTableViewController *)navController.viewControllers.firstObject;
-        currencySelector.currencyUpdateModel = [[MCEventModel alloc] initWithEvent:event];
+        MCCurrencyModel *currencyModel = [[MCCurrencyModel alloc] initWithManagedObjectContext:event.managedObjectContext andWithCurrencyController:[[CurrencyController alloc] init]];
+        currencySelector.currencyUpdateModel = [[MCEventModel alloc] initWithEvent:event andConcurrencyModel:currencyModel];
     } else if ([segue.identifier isEqualToString:@"iScreenSegue"]) {
         UINavigationController *navigationController = (UINavigationController *)segue.destinationViewController;
         navigationController.modalPresentationStyle = UIModalPresentationCustom;
@@ -287,7 +292,8 @@ static void * notificationCountContext = &notificationCountContext;
         NSParameterAssert(_pathComponents);
         MCSharedBill *event = (MCSharedBill *)_pathComponents[0];
         NSParameterAssert(event);
-        MCEventModel *model = [[MCEventModel alloc] initWithEvent:event];
+        MCCurrencyModel *currencyModel = [[MCCurrencyModel alloc] initWithManagedObjectContext:event.managedObjectContext andWithCurrencyController:[[CurrencyController alloc] init]];
+        MCEventModel *model = [[MCEventModel alloc] initWithEvent:event andConcurrencyModel:currencyModel];
         MCSharedBillMainViewController *destination = (MCSharedBillMainViewController *)segue.destinationViewController;
         [destination prepareForUseWithEventModel:model];
         _pathComponents = nil;

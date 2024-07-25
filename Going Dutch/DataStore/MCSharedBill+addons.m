@@ -13,7 +13,7 @@
 #import "MCEmailAddress+CoreDataProperties.h"
 #import "MCPayment+CoreDataProperties.h"
 #import "MCPaymentPresence+CoreDataProperties.h"
-#import "MCCurrency+addons.h"
+#import "MCCurrency+CoreDataProperties.h"
 #import "MCExchangeRate+CoreDataProperties.h"
 
 #import "We_all_pay-Swift.h"
@@ -363,7 +363,10 @@
 }
 
 - (void)updateMainCurrencyFromCode:(NSString *)code withCompletion:(void (^)(NSError *error))completion {
-    MCCurrency *newMainCurrency = [MCCurrency currencyFrom:code fromContext:self.managedObjectContext];
+    NSParameterAssert(self.managedObjectContext);
+    CurrencyController *currencyController = [[CurrencyController alloc] init];
+    MCCurrencyModel *currencyModel = [[MCCurrencyModel alloc] initWithManagedObjectContext:self.managedObjectContext andWithCurrencyController:currencyController];
+    MCCurrency *newMainCurrency = [currencyModel currencyFromCurrencyCode:code];
     self.mainCurrency = newMainCurrency;
     NSArray<MCExchangeRate *> *allExchangeRates = [self fetchAllExchangeRatesWithError:nil];
     [allExchangeRates enumerateObjectsUsingBlock:^(MCExchangeRate * _Nonnull obj, NSUInteger idx, BOOL * _Nonnull stop) {
@@ -372,7 +375,7 @@
     [self updateAllExchangeRatesWithCompletionHandler:completion];
 }
 
-- (NSArray<MCExchangeRate *> *)fetchAllExchangeRatesWithError:(NSError **)error {
+- (NSArray<MCExchangeRate *> *)fetchAllExchangeRatesWithError:(NSError **)error __deprecated {
     NSFetchRequest *request = [[NSFetchRequest alloc] initWithEntityName:@"MCExchangeRate"];
     request.sortDescriptors = @[[NSSortDescriptor sortDescriptorWithKey:@"dateCreated" ascending:YES]];
     request.predicate = [NSPredicate predicateWithFormat:@"payment.onWhichBill = %@", self];
@@ -388,7 +391,7 @@
     return arrayOfAllExchangeRates;
 }
 
-- (void)updateAllExchangeRatesWithCompletionHandler:(void (^)(NSError *error))completion {
+- (void)updateAllExchangeRatesWithCompletionHandler:(void (^)(NSError *error))completion __deprecated {
     NSError *fetchError;
     NSArray<MCExchangeRate *> *arrayOfAllExchangeRates = [self fetchAllExchangeRatesWithError:&fetchError];
     if (fetchError) {

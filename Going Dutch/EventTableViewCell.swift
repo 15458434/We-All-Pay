@@ -8,6 +8,7 @@
 
 import UIKit
 import Combine
+import CurrencyConverter
 
 @objc(MCEventTableViewCell) final class EventTableViewCell: UITableViewCell {
     @objc private var model: EventModel!
@@ -25,7 +26,7 @@ import Combine
     private var bag = Set<AnyCancellable>()
     
     @objc func prepareForUse(with event: MCSharedBill) {
-        self.model.prepareForUse(with: event)
+        self.model.prepareForUse(with: event, currencyModel: CurrencyModel(managedObjectContext: event.managedObjectContext!, currencyController: CurrencyController()))
         self.nameObservation = self.observe(\.model.event!.tripName, options: [.initial, .new], changeHandler: { mySelf, change in
             guard let newValue = change.newValue else {
                 return

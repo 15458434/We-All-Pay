@@ -8,6 +8,7 @@
 
 import Foundation
 import FirebaseCrashlytics
+import CurrencyConverter
 
 protocol MailComposer {
     func mailAdresses() throws -> [String]
@@ -62,7 +63,7 @@ extension MailComposer where Self: ThisEventReadOnly {
         let mainCurrencyFormatter = CurrencyFormatter()
         let localCurrencyFormatter = CurrencyFormatter()
         mainCurrencyFormatter.currencyCode = event.mainCurrency!.code
-        let model = EventModel(andPrepareWith: event)
+        let model = EventModel(event: event, currencyModel: CurrencyModel(managedObjectContext: event.managedObjectContext!, currencyController: CurrencyController()))
         
         let solution = event.solveWhoHasToPayWhoFromThisBill() as! [SolutionReturnPaymentItem]
 //        let sortDescriptorOnDateCreated = NSSortDescriptor(key: "dateCreated", ascending: true)

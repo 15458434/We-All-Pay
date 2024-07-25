@@ -12,7 +12,7 @@
 #import "MCPaymentPresence.h"
 #import "MCPerson.h"
 #import "MCSharedBill.h"
-#import "MCCurrency+addons.h"
+#import "MCCurrency+CoreDataProperties.h"
 #import "MCPayment+CoreDataProperties.h"
 
 

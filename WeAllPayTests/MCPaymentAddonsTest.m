@@ -7,12 +7,13 @@
 //
 
 #import <XCTest/XCTest.h>
+#import "CurrencyConverter/CurrencyConverter.h"
 
 #import "MCSharedBill+addons.h"
 #import "MCPayment+CoreDataProperties.h"
 #import "MCPerson+CoreDataProperties.h"
 #import "MCEmailAddress+CoreDataProperties.h"
-#import "MCCurrency+addons.h"
+#import "MCCurrency+CoreDataProperties.h"
 #import "MCExchangeRate+CoreDataProperties.h"
 
 #import "We_all_pay_Tests-Swift.h"
@@ -40,7 +41,8 @@
 - (void)testMCPaymentAddons
 {
     MCSharedBill *event = [[MCSharedBill alloc] initWithContext:_context];
-    MCEventModel *eventModel = [[MCEventModel alloc] initWithEvent:event];
+    MCCurrencyModel *currencyModel = [[MCCurrencyModel alloc] initWithManagedObjectContext:_context andWithCurrencyController:[[CurrencyController alloc] init]];
+    MCEventModel *eventModel = [[MCEventModel alloc] initWithEvent:event andConcurrencyModel:currencyModel];
     MCPerson *thisPerson = [eventModel addPerson];
     [thisPerson setFirstName:@"Mark"];
     [thisPerson setLastName:@"Cornelisse"];
@@ -63,7 +65,8 @@
 - (void)testCurrency
 {
     MCSharedBill *event = [MCSharedBill addSharedBillToContext:_context];
-    MCEventModel *eventModel = [[MCEventModel alloc] initWithEvent:event];
+    MCCurrencyModel *currenceModel = [[MCCurrencyModel alloc] initWithManagedObjectContext:_context andWithCurrencyController:[[CurrencyController alloc] init]];
+    MCEventModel *eventModel = [[MCEventModel alloc] initWithEvent:event andConcurrencyModel:currenceModel];
     // This test checks to see if currency is being setup when a new payment is being made.
     MCPayment *thisPayment = [eventModel addPayment];
     NSString *currentCurrencyCode = [[NSLocale currentLocale] objectForKey:NSLocaleCurrencyCode];
@@ -77,10 +80,11 @@
 {
     // This test checks to see if currency is correctly converted to the mainCurrency of the sharedBill.
     MCSharedBill *event = [MCSharedBill addSharedBillToContext:_context];
-    MCEventModel *eventModel = [[MCEventModel alloc] initWithEvent:event];
-    event.mainCurrency = [MCCurrency currencyFrom:@"EUR" fromContext:_context];
+    MCCurrencyModel *currencyModel = [[MCCurrencyModel alloc] initWithManagedObjectContext:_context andWithCurrencyController:[[CurrencyController alloc] init]];
+    MCEventModel *eventModel = [[MCEventModel alloc] initWithEvent:event andConcurrencyModel:currencyModel];
+    event.mainCurrency = [currencyModel currencyFromCurrencyCode:@"EUR"];
     MCPayment *thisPayment = [eventModel addPayment];
-    thisPayment.currency = [MCCurrency currencyFrom:@"USD" fromContext:_context];
+    thisPayment.currency = [currencyModel currencyFromCurrencyCode:@"USD"];
     MCExchangeRate *exchangeRate = [eventModel addExchangeRateForPayment:thisPayment];
     exchangeRate.exchangeRate = @0.7424;
     thisPayment.money = @2.97;
@@ -90,7 +94,8 @@
 
 - (void)testAddPaymentForExchangeRateCreation {
     MCSharedBill *event = [MCSharedBill addSharedBillToContext:_context];
-    MCEventModel *eventModel = [[MCEventModel alloc] initWithEvent:event];
+    MCCurrencyModel *currencyModel = [[MCCurrencyModel alloc] initWithManagedObjectContext:_context andWithCurrencyController:[[CurrencyController alloc] init]];
+    MCEventModel *eventModel = [[MCEventModel alloc] initWithEvent:event andConcurrencyModel:currencyModel];
     MCPayment *thisPayment = [eventModel addPayment];
     XCTAssertNotNil([thisPayment exchangeRate], @"There should be an exchangeRate in this payment.");
     XCTAssertEqualWithAccuracy([[[thisPayment exchangeRate] exchangeRate] doubleValue], 1.000, 0.0001, @"Value of exchangeRate should be 1.");

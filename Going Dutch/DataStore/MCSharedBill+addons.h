@@ -8,6 +8,8 @@
 
 #import "MCSharedBill+CoreDataProperties.h"
 
+@class MCExchangeRate;
+
 @interface MCSharedBill (addons)
 
 + (MCSharedBill *)addSharedBillToContext:(NSManagedObjectContext *)context;
@@ -32,6 +34,8 @@
 - (MCPayment *)getFirstPaymentWithoutAPayer;
 - (BOOL)areAllExchangeRatesValid;
 - (void)updateMainCurrencyFromCode:(NSString *)code withCompletion:(void (^)(NSError *error))completion;
+- (NSArray<MCExchangeRate *> *)fetchAllExchangeRatesWithError:(NSError **)error __deprecated;
+- (void)updateAllExchangeRatesWithCompletionHandler:(void (^)(NSError *error))completion __deprecated;
 - (NSArray *)solveWhoHasToPayWhoFromThisBill;
 - (void)solveWithHandler:(void (^)(NSArray *results, NSError *error))solution;
 - (NSNumber *)totalSumOfMoneyOfThisSharedBill;

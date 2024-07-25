@@ -139,6 +139,8 @@
 		388A32921C11EDBD00F7459C /* WhoPayingUserDefaultsStoreInterface.framework in Embed Frameworks */ = {isa = PBXBuildFile; fileRef = 388A327C1C11EDBD00F7459C /* WhoPayingUserDefaultsStoreInterface.framework */; settings = {ATTRIBUTES = (CodeSignOnCopy, RemoveHeadersOnCopy, ); }; };
 		388A32991C11EEA700F7459C /* WhoPayingUserDefaultsStoreInterface.swift in Sources */ = {isa = PBXBuildFile; fileRef = 388A32701C11C51F00F7459C /* WhoPayingUserDefaultsStoreInterface.swift */; };
 		388A329A1C11EF4700F7459C /* WhoPayingUserDefaultsStoreInterface.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 388A327C1C11EDBD00F7459C /* WhoPayingUserDefaultsStoreInterface.framework */; };
+		388DA6502C523CA3000C993C /* CurrencyModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 388DA64F2C523CA3000C993C /* CurrencyModel.swift */; };
+		388DA6512C5268DC000C993C /* CurrencyModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 388DA64F2C523CA3000C993C /* CurrencyModel.swift */; };
 		388FD1E927353CFC00758400 /* PlistTools.swift in Sources */ = {isa = PBXBuildFile; fileRef = 388FD1E827353CFC00758400 /* PlistTools.swift */; };
 		3892E3A417903EF00038894B /* MCEditTripViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 3892E3A317903EF00038894B /* MCEditTripViewController.m */; };
 		3892E3AA17904A240038894B /* MCPersonViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 3892E3A917904A240038894B /* MCPersonViewController.m */; };
@@ -167,7 +169,6 @@
 		389DE8FA197FB2BA00169645 /* MCPayment.m in Sources */ = {isa = PBXBuildFile; fileRef = 389DE8F9197FB2BA00169645 /* MCPayment.m */; };
 		389DE900197FB2BA00169645 /* MCSharedBill.m in Sources */ = {isa = PBXBuildFile; fileRef = 389DE8FF197FB2BA00169645 /* MCSharedBill.m */; };
 		389DE909197FC5E900169645 /* MCExchangeRateTest.m in Sources */ = {isa = PBXBuildFile; fileRef = 389DE908197FC5E900169645 /* MCExchangeRateTest.m */; };
-		389DE90E197FD41900169645 /* MCCurrency+addons.m in Sources */ = {isa = PBXBuildFile; fileRef = 389DE90D197FD41900169645 /* MCCurrency+addons.m */; };
 		389DE910197FD6DF00169645 /* MCCurrencyTest.m in Sources */ = {isa = PBXBuildFile; fileRef = 389DE90F197FD6DF00169645 /* MCCurrencyTest.m */; };
 		389DE9161982540D00169645 /* MCCurrency.m in Sources */ = {isa = PBXBuildFile; fileRef = 389DE9151982540D00169645 /* MCCurrency.m */; };
 		389FBD40198BDA1C003B4409 /* MCExchangeRate.m in Sources */ = {isa = PBXBuildFile; fileRef = 389FBD3F198BDA1C003B4409 /* MCExchangeRate.m */; };
@@ -237,6 +238,7 @@
 		38F2A1AD1ADCF7E100831D48 /* WhoIsPayingNextTextLocalizer.swift in Sources */ = {isa = PBXBuildFile; fileRef = 38F2A1AB1ADCF7E100831D48 /* WhoIsPayingNextTextLocalizer.swift */; };
 		38F44CCB2364993400215B1C /* MoneyTextInputValidator.swift in Sources */ = {isa = PBXBuildFile; fileRef = 38F44CCA2364993400215B1C /* MoneyTextInputValidator.swift */; };
 		38F9B88A2C3D1AAE008BA7C9 /* CurrencyUpdateModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 38F9B8892C3D1AAE008BA7C9 /* CurrencyUpdateModel.swift */; };
+		38FC75E62C57EBB500363CA8 /* Currency.swift in Sources */ = {isa = PBXBuildFile; fileRef = 38FC75E52C57EBB500363CA8 /* Currency.swift */; };
 		38FE5A082346957100BBA722 /* SideMenuTransitioner.swift in Sources */ = {isa = PBXBuildFile; fileRef = 38FE5A072346957100BBA722 /* SideMenuTransitioner.swift */; };
 		6F6CEECF1E58A332ECA671AD /* Pods_We_all_pay.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = B48C96B2DFBD420A590C8093 /* Pods_We_all_pay.framework */; };
 		75CEE1BF7C9E1960FDE52449 /* Pods_We_all_pay_Tests.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = B3460095B4985DB277C79A80 /* Pods_We_all_pay_Tests.framework */; };
@@ -521,6 +523,7 @@
 		388A32851C11EDBD00F7459C /* WhoPayingUserDefaultsStoreInterfaceTests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = WhoPayingUserDefaultsStoreInterfaceTests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
 		388A328C1C11EDBD00F7459C /* WhoPayingUserDefaultsStoreInterfaceTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = WhoPayingUserDefaultsStoreInterfaceTests.swift; sourceTree = "<group>"; };
 		388A328E1C11EDBD00F7459C /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
+		388DA64F2C523CA3000C993C /* CurrencyModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CurrencyModel.swift; sourceTree = "<group>"; };
 		388FD1E827353CFC00758400 /* PlistTools.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PlistTools.swift; sourceTree = "<group>"; };
 		3892E3A217903EF00038894B /* MCEditTripViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = MCEditTripViewController.h; path = ViewControllers/MCEditTripViewController.h; sourceTree = "<group>"; };
 		3892E3A317903EF00038894B /* MCEditTripViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = MCEditTripViewController.m; path = ViewControllers/MCEditTripViewController.m; sourceTree = "<group>"; };
@@ -569,8 +572,6 @@
 		389DE8FE197FB2BA00169645 /* MCSharedBill.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = MCSharedBill.h; sourceTree = "<group>"; };
 		389DE8FF197FB2BA00169645 /* MCSharedBill.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = MCSharedBill.m; sourceTree = "<group>"; };
 		389DE908197FC5E900169645 /* MCExchangeRateTest.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = MCExchangeRateTest.m; sourceTree = "<group>"; };
-		389DE90C197FD41900169645 /* MCCurrency+addons.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = "MCCurrency+addons.h"; path = "DataStore/MCCurrency+addons.h"; sourceTree = "<group>"; };
-		389DE90D197FD41900169645 /* MCCurrency+addons.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = "MCCurrency+addons.m"; path = "DataStore/MCCurrency+addons.m"; sourceTree = "<group>"; };
 		389DE90F197FD6DF00169645 /* MCCurrencyTest.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = MCCurrencyTest.m; sourceTree = "<group>"; };
 		389DE9141982540D00169645 /* MCCurrency.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = MCCurrency.h; sourceTree = "<group>"; };
 		389DE9151982540D00169645 /* MCCurrency.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = MCCurrency.m; sourceTree = "<group>"; };
@@ -680,6 +681,7 @@
 		38F44CCA2364993400215B1C /* MoneyTextInputValidator.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MoneyTextInputValidator.swift; sourceTree = "<group>"; };
 		38F7F9A91B2C4A120059DE51 /* CurrencyController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = CurrencyController.swift; path = "../Going Dutch/CurrencyController.swift"; sourceTree = "<group>"; };
 		38F9B8892C3D1AAE008BA7C9 /* CurrencyUpdateModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CurrencyUpdateModel.swift; sourceTree = "<group>"; };
+		38FC75E52C57EBB500363CA8 /* Currency.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Currency.swift; sourceTree = "<group>"; };
 		38FE5A072346957100BBA722 /* SideMenuTransitioner.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SideMenuTransitioner.swift; sourceTree = "<group>"; };
 		3BB3BF0F9FF45FB3F9898605 /* Pods-We all pay.screenshots.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-We all pay.screenshots.xcconfig"; path = "Target Support Files/Pods-We all pay/Pods-We all pay.screenshots.xcconfig"; sourceTree = "<group>"; };
 		61FFE9FB80D695E061F97C3D /* Pods-We all pay Tests.adtest.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-We all pay Tests.adtest.xcconfig"; path = "Target Support Files/Pods-We all pay Tests/Pods-We all pay Tests.adtest.xcconfig"; sourceTree = "<group>"; };
@@ -823,8 +825,6 @@
 				380700A41A1B616000C7FB37 /* MCPaymentUpdateTo4.m */,
 				389DE9141982540D00169645 /* MCCurrency.h */,
 				389DE9151982540D00169645 /* MCCurrency.m */,
-				389DE90C197FD41900169645 /* MCCurrency+addons.h */,
-				389DE90D197FD41900169645 /* MCCurrency+addons.m */,
 				389DE8FE197FB2BA00169645 /* MCSharedBill.h */,
 				389DE8FF197FB2BA00169645 /* MCSharedBill.m */,
 				38DB85D517E45CA4006237CF /* MCSharedBill+addons.h */,
@@ -900,6 +900,7 @@
 				38EACFF51C6894950091A9AF /* InfoPlist.strings */,
 				3896D14B2760F6D400DC7381 /* Available Currencies.plist */,
 				382B76E21C398249000C203A /* CurrencyConverter.h */,
+				38FC75E52C57EBB500363CA8 /* Currency.swift */,
 				38F7F9A91B2C4A120059DE51 /* CurrencyController.swift */,
 				3858D6591B2DB6B3006A4E2B /* ExchangeRateFetcher.swift */,
 				382B76E41C398249000C203A /* Info.plist */,
@@ -1202,6 +1203,7 @@
 				386FC32318E5855400428294 /* MCSharedBillMainViewController.h */,
 				386FC32418E5855400428294 /* MCSharedBillMainViewController.m */,
 				38BEA790275E228B00D05D8B /* EventModel.swift */,
+				388DA64F2C523CA3000C993C /* CurrencyModel.swift */,
 				381848332C355A030088DC7E /* ToggleModel.swift */,
 				383E0C5B186737EB00AA688D /* MCSharedBillPageViewController.h */,
 				383E0C5C186737EB00AA688D /* MCSharedBillPageViewController.m */,
@@ -2214,6 +2216,7 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				38FC75E62C57EBB500363CA8 /* Currency.swift in Sources */,
 				382B77001C398268000C203A /* ExchangeRateFetcher.swift in Sources */,
 				382B76FE1C398260000C203A /* CurrencyController.swift in Sources */,
 			);
@@ -2334,6 +2337,7 @@
 				381275FF1BBD84650004C8C2 /* InfoScreenTableViewController.swift in Sources */,
 				38C700F21D8EC24100D785BB /* LaunchCounter.swift in Sources */,
 				3864147F269B185400590ABA /* NotificationsTableViewController.swift in Sources */,
+				388DA6502C523CA3000C993C /* CurrencyModel.swift in Sources */,
 				3892E3A417903EF00038894B /* MCEditTripViewController.m in Sources */,
 				3868780623721751003D40A9 /* EmailTextInputValidator.swift in Sources */,
 				387E79CF26F48EDC00C2A424 /* MCPurchaseTableViewCell.m in Sources */,
@@ -2344,7 +2348,6 @@
 				3892E3AA17904A240038894B /* MCPersonViewController.m in Sources */,
 				389ACFE12374A1E60025139F /* EmailTextInputPicker.swift in Sources */,
 				383486B62C4188080078E72E /* WeAllPayStore4to5.xcmappingmodel in Sources */,
-				389DE90E197FD41900169645 /* MCCurrency+addons.m in Sources */,
 				3813150C26CBAC3600C27CBB /* MCNotificationTableViewCell.m in Sources */,
 				38641482269B18C400590ABA /* NotificationsModel.swift in Sources */,
 				38D96ED423E30F5E00C03170 /* MCAdBannerTableViewCell.swift in Sources */,
@@ -2379,6 +2382,7 @@
 				3843805F2C455A030075AFC6 /* MCPersonExtension.swift in Sources */,
 				382F34422C3F2626007DDF71 /* WeAllPayStoreController.swift in Sources */,
 				382F34452C3F2652007DDF71 /* PersonModel.swift in Sources */,
+				388DA6512C5268DC000C993C /* CurrencyModel.swift in Sources */,
 				382F34432C3F2648007DDF71 /* EventModel.swift in Sources */,
 				385F5310191C2D140012773D /* MCPaymentAddonsTest.m in Sources */,
 				38D34D07279FE3F5004AA290 /* SolutionReturnPaymentItem.swift in Sources */,

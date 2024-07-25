@@ -7,6 +7,7 @@
 //
 
 #import <XCTest/XCTest.h>
+#import "CurrencyConverter/CurrencyConverter.h"
 
 #import "MCSharedBill+addons.h"
 #import "MCPerson+CoreDataProperties.h"
@@ -114,7 +115,8 @@
 - (void)testHasPersonMadePaymentWithInvalidExchangeRates
 {
     MCSharedBill *event = [MCSharedBill addSharedBillToContext:_context];
-    MCEventModel *eventModel = [[MCEventModel alloc] initWithEvent:event];
+    MCCurrencyModel *currencyModel = [[MCCurrencyModel alloc] initWithManagedObjectContext:_context andWithCurrencyController:[[CurrencyController alloc] init]];
+    MCEventModel *eventModel = [[MCEventModel alloc] initWithEvent:event andConcurrencyModel:currencyModel];
     MCPerson *mark = [eventModel addPerson];
     MCPayment *thisPayment = [eventModel addPayment];
     thisPayment.payingPerson = mark;
@@ -132,7 +134,8 @@
 - (void)testTotalSumPaidBy
 {
     MCSharedBill *event = [MCSharedBill addSharedBillToContext:_context];
-    MCEventModel *eventModel = [[MCEventModel alloc] initWithEvent:event];
+    MCCurrencyModel *currencyModel = [[MCCurrencyModel alloc] initWithManagedObjectContext:_context andWithCurrencyController:[[CurrencyController alloc] init]];
+    MCEventModel *eventModel = [[MCEventModel alloc] initWithEvent:event andConcurrencyModel:currencyModel];
     MCPerson *fred = [eventModel addPerson];
     fred.firstName = @"Fred";
     MCPerson *anna = [eventModel addPerson];

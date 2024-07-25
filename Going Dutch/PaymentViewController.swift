@@ -12,6 +12,7 @@ import CoreData
 import FirebaseAnalytics
 
 import WhoPayingUserDefaultsStoreInterface
+import CurrencyConverter
 
 
 enum DidSomethingChange: Int8 {
@@ -86,7 +87,7 @@ final class PaymentViewController: MCGenericAdBannerTableViewController, AdBanne
     
     @objc(prepareForUseWithPathComponentsToOpen:) func prepareForUse(with pathComponentsToOpen: [NSManagedObject]) {
         let event = pathComponentsToOpen[0] as! MCSharedBill
-        let eventModel = EventModel(event: event)
+        let eventModel = EventModel(event: event, currencyModel: CurrencyModel(managedObjectContext: event.managedObjectContext!, currencyController: CurrencyController()))
         self.prepareForUse(with: eventModel)
         let predefinedPayingPerson = pathComponentsToOpen[1] as! MCPerson
         model.update(payingPerson: predefinedPayingPerson)

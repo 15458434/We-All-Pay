@@ -13,7 +13,7 @@
 #import "MCPaymentsTableViewController.h"
 #import "MCSharedBillPageViewController.h"
 
-#import "MCCurrency+addons.h"
+#import "MCCurrency+CoreDataProperties.h"
 #import "MCSharedBill+addons.h"
 #import "MCPerson+CoreDataProperties.h"
 #import "MCBitwiseStuff.h"

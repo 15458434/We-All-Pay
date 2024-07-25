@@ -7,13 +7,15 @@
 //
 
 #import <XCTest/XCTest.h>
-#import "MCCurrency+addons.h"
+#import "MCCurrency+CoreDataProperties.h"
+#import "CurrencyConverter/CurrencyConverter.h"
 
 #import "We_all_pay_Tests-Swift.h"
 
 @interface MCCurrencyTest : XCTestCase
 
 @property (nonatomic, strong) NSManagedObjectContext *context;
+@property (nonatomic, strong) MCCurrencyModel *currencyModel;
 
 @end
 
@@ -23,6 +25,7 @@
     [super setUp];
     [WeAllPayStoreController.defaultStore openStoreOfType:NSInMemoryStoreType];
     _context = WeAllPayStoreController.defaultStore.viewContext;
+    _currencyModel = [[MCCurrencyModel alloc] initWithManagedObjectContext:_context andWithCurrencyController:[[CurrencyController alloc] init]];
 }
 
 - (void)tearDown
@@ -33,7 +36,9 @@
 
 - (void)testGenerateCurrencyFromSelectedLocaleForContext
 {
-    MCCurrency *selectedCurrency = [MCCurrency generateCurrencyFromSelectedLocaleForContext:_context];
+    NSError *error;
+    MCCurrency *selectedCurrency = [_currencyModel generateCurrencyFromSelectedLocaleWithError:&error];
+    XCTAssertNil(error, @"generateCurrencyFromSelectedLocaleWithError shouldn't result in an error");
     NSString *currencyCode = [[NSLocale currentLocale] objectForKey:NSLocaleCurrencyCode];
     XCTAssertTrue([[selectedCurrency code] isEqualToString:currencyCode], @"Wrong currency selected.");
     XCTAssertTrue(selectedCurrency.uniqueID, @"unique ID missing.");
@@ -43,7 +48,7 @@
 
 - (void)testGetCurrencyWithCode
 {
-    MCCurrency *selectedCurrency = [MCCurrency currencyFrom:@"USD" fromContext:_context];
+    MCCurrency *selectedCurrency = [_currencyModel currencyFromCurrencyCode:@"USD"];
     XCTAssertTrue([[selectedCurrency code] isEqualToString:@"USD"], @"Wrong currency selected.");
 }
 
