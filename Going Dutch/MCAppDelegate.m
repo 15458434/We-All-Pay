@@ -25,6 +25,7 @@
 
 @property (nonatomic, strong) MCLaunchCounter *launchCounter;
 @property (nonatomic, strong) MCCoreDataSaveHandlerWhenEnteringBackground *saveHandlerOnDidEnterBackground;
+@property (nonatomic, strong) MCEventsModel *eventsModel;
 
 @end
 
@@ -84,13 +85,15 @@
 #endif
     
     [self executeOnlyOnceDuringStartup];
+    WeAllPayStoreController *store = WeAllPayStoreController.defaultStore;
 #ifdef SCREENSHOTS
-    [[WeAllPayStoreController defaultStore] openStore:^(WeAllPayStoreController *store, BOOL success) {
+    [store openStore:^(WeAllPayStoreController *store, BOOL success) {
         ScreenshotPopulationEngine *populator = [[ScreenshotPopulationEngine alloc] initWithManagedObjectContext:store.viewContext];
         [populator populate];
     }];
 #else
-    [[WeAllPayStoreController defaultStore] openStore];
+    [store openStore];
+    _eventsModel = [[MCEventsModel alloc] initWithManagedObjectContext:store.viewContext andFetchedResultsControllerdDelegate:nil];
 #endif
     return YES;
 }
@@ -140,23 +143,28 @@
     if (pathComponents.count != 3) {
         return NO;
     }
-    NSString *billID = pathComponents[1];
-    NSString *nextPayerID = pathComponents[2];
+    NSString *eventId = pathComponents[1];
+    NSString *nextPayerId = pathComponents[2];
     
-    // Verify existense of tonightsBill
-    MCSharedBill *tonightsBill = [MCSharedBill fetchSharedBillWithUniqueId:billID inContext:[[WeAllPayStoreController defaultStore] viewContext] ];
-    if (!tonightsBill) {
+    // Verify existense of event
+    NSError *fetchError;
+    MCSharedBill *event = [_eventsModel eventWith:eventId error:&fetchError];
+    if (fetchError) {
         NSLog(@"Unable to open this event.");
         return NO;
     }
-    // Verify existendse of payer on tonightsBill
-    MCPerson *nextPayer = [tonightsBill fetchPersonWithUniqueID:nextPayerID];
-    if (!nextPayer) {
+    // Verify existense of person on event
+    CurrencyController *currencyController = [[CurrencyController alloc] init];
+    MCCurrencyModel *currencyModel = [[MCCurrencyModel alloc] initWithManagedObjectContext:_eventsModel.managedObjectContext andWithCurrencyController:currencyController];
+    MCEventModel *eventModel = [[MCEventModel alloc] initWithEvent:event andConcurrencyModel:currencyModel];
+    NSError *fetchPersonError;
+    MCPerson *nextPayer = [eventModel fetchPersonWithUniqueID:nextPayerId withError:&fetchPersonError];
+    if (fetchPersonError || !nextPayer) {
         NSLog(@"Unable to find specified person");
         return NO;
     }
     // Navigate to the add payment screen.
-    NSArray<NSManagedObject *> *pathDuringOpening = @[tonightsBill, nextPayer];
+    NSArray<NSManagedObject *> *pathDuringOpening = @[event, nextPayer];
     UINavigationController *navController = (UINavigationController *)self.window.rootViewController;
     [navController popToRootViewControllerAnimated:NO];
     

@@ -8,6 +8,7 @@
 
 import Foundation
 import CoreData
+import os
 import CurrencyConverter
 
 fileprivate let WeAllPayStoreFileName = "persistentStore"
@@ -15,6 +16,7 @@ fileprivate let WeAllPayStoreDirectoryName = "WeAllPayStore/StoreContent"
 fileprivate let WeAllPayStoreModelName = "WeAllPayStore"
 
 final class WeAllPayStoreController: NSObject {
+    let logger = Logger(category: "WeAllPayStoreController")
     @objc dynamic private(set) var error: NSError!
     
     private var container: NSPersistentContainer!
@@ -124,13 +126,15 @@ final class WeAllPayStoreController: NSObject {
     }
     
     @objc func saveViewContext() {
-        debugPrint("Saving viewContext: \(self.viewContext)")
+        logger.trace(#function)
+        logger.info("viewContext.hasChanges: \(self.viewContext.hasChanges)")
         if self.viewContext.hasChanges {
             do {
                 try self.viewContext.save()
-                debugPrint("viewContext: Successfully saved.")
+                logger.info("viewContext: Successfully saved.")
             } catch {
-                debugPrint("viewContext: Failed saving: \(error)")
+                let nsError = error as NSError
+                logger.error("viewContext: Failed saving:\nError Domain: \(nsError.domain)\nError Code: \(nsError.code)\nDescription: \(nsError.localizedDescription)\nUser Info: \(nsError.userInfo)")
             }
         }
     }

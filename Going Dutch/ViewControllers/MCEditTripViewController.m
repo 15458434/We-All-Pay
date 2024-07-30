@@ -174,7 +174,13 @@ static void * isEditingToggleContext = &isEditingToggleContext;
 - (BOOL)tableView:(UITableView *)tableView canEditRowAtIndexPath:(NSIndexPath *)indexPath {
     if ([[self tableView] isEditing]) {
         MCPerson *person = [_fetchedResultsController objectAtIndexPath:indexPath];
-        return ![_eventModel hasPersonPaidSometingWithPerson:person];
+        NSError *hasPersonPaidSomethingError;
+        NSNumber *hasPersonPaidSomething = [_eventModel hasPersonPaidSomething:person withError:&hasPersonPaidSomethingError];
+        if (hasPersonPaidSomethingError) {
+            NSException *exception = [NSException exceptionWithError:hasPersonPaidSomethingError];
+            @throw exception;
+        }
+        return !hasPersonPaidSomething.boolValue;
     } else {
         return NO;
     }

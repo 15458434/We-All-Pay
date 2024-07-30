@@ -52,7 +52,8 @@ extension MCPayment {
     
     @objc var moneyInMainCurrency: NSDecimalNumber {
         guard let exchangeRate = self.exchangeRate else {
-            fatalError("Exchange Rate needs to be present.")
+            // When the payment is added to the event, the exhcange rate is not present yet on the payment. When the array of payments on the event is observed, the observation is made before the exchange rate is present. Hence in case the exchangeRate isn't present yet, zero is returned. At this point the payment doesn't have a payment value anyway.
+            return NSDecimalNumber.zero
         }
         let moneyDecimal = self.money!.decimalValue
         let exchangeRateDecimal = exchangeRate.exchangeRate!.decimalValue

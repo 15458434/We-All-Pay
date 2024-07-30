@@ -11,35 +11,21 @@ import CoreData
 
 import FirebaseAnalytics
 
-final class SelectPayerTableViewController_iPad: UITableViewController, MCTonightsBillTransfer, MCThisPaymentProtocol {
-    // MARK: Properties
-    var people: [MCPerson]!
-    var tonightsBill: MCSharedBill!
+final class SelectPayerTableViewController_iPad: UITableViewController {
+    // TODO: Rename to 'sortedPeople'. It indicates better what it does.
+    @objc dynamic private var people: [MCPerson]!
+    private weak var eventModel: EventModel!
+    private weak var paymentModel: PaymentModel!
     @objc(writableTonightsBill) var writableTonightsBill: MCSharedBill!
-    var thisPayment: MCPayment!
-
-    // MARK: New in this class
     
-    // MARK: Inherited from super
-    override func viewDidLoad() {
-        super.viewDidLoad()
-        
-        people = tonightsBill.getArrayOfPeopleSortedOnFullNames()
+    func prepareForUse(eventModel: EventModel, paymentModel: PaymentModel) {
+        self.eventModel = eventModel
+        self.paymentModel = paymentModel
     }
     
-    // MARK: UI Table View Delegate
-    override func tableView(_ tableView: UITableView, heightForRowAt indexPath: IndexPath) -> CGFloat {
-        return 44.0
-    }
+    // MARK: UITableViewController
     
-    override func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
-        let payingPerson = people[indexPath.row]
-        payingPerson.addPaymentsObject(thisPayment)
-        thisPayment.payingPerson = payingPerson
-        self.presentingViewController!.dismiss(animated: true)
-    }
-    
-    // MARK: UI Table View Data Source
+    // MARK: UITableViewDataSource
     
     override func numberOfSections(in tableView: UITableView) -> Int {
         return 1
@@ -57,4 +43,27 @@ final class SelectPayerTableViewController_iPad: UITableViewController, MCTonigh
         
         return cell
     }
+    
+    // MARK: UITableViewDelegate
+    
+    override func tableView(_ tableView: UITableView, heightForRowAt indexPath: IndexPath) -> CGFloat {
+        return 44.0
+    }
+    
+    override func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
+        let payingPerson = people[indexPath.row]
+        payingPerson.addPaymentsObject(paymentModel.payment)
+        paymentModel.payment.payingPerson = payingPerson
+        self.presentingViewController!.dismiss(animated: true)
+    }
+    
+    // MARK: UIViewController
+    
+    override func viewDidLoad() {
+        super.viewDidLoad()
+        
+        people = eventModel.peoplePresentOnEventSortedOnFullName
+    }
+    
+    // MARK: NSObject
 }

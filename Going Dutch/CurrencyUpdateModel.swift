@@ -10,6 +10,6 @@ import Foundation
 
 @objc protocol CurrencyUpdateModel {
     var currencyCode: String { get }
-    func updateCurrency(with code: String, with completion: @escaping ((_ error: Error?) -> Void))
+    func updateCurrency(with code: String, with completion: @escaping ((Swift.Error?) -> Void))
     var recentSelectedCurrencies: [MCCurrency] { get }
 }

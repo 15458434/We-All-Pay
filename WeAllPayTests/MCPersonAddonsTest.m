@@ -22,6 +22,8 @@
 @interface MCPersonAddonsTest : XCTestCase
 
 @property (nonatomic, strong) NSManagedObjectContext *context;
+@property (nonatomic, strong) MCEventsModel *eventsModel;
+
 @end
 
 @implementation MCPersonAddonsTest
@@ -30,6 +32,7 @@
     [super setUp];
     [WeAllPayStoreController.defaultStore openStoreOfType:NSInMemoryStoreType];
     _context = WeAllPayStoreController.defaultStore.viewContext;
+    _eventsModel = [[MCEventsModel alloc] initWithManagedObjectContext:_context andFetchedResultsControllerdDelegate:nil];
 }
 
 - (void)tearDown
@@ -114,7 +117,7 @@
 
 - (void)testHasPersonMadePaymentWithInvalidExchangeRates
 {
-    MCSharedBill *event = [MCSharedBill addSharedBillToContext:_context];
+    MCSharedBill *event = [_eventsModel addEvent];
     MCCurrencyModel *currencyModel = [[MCCurrencyModel alloc] initWithManagedObjectContext:_context andWithCurrencyController:[[CurrencyController alloc] init]];
     MCEventModel *eventModel = [[MCEventModel alloc] initWithEvent:event andConcurrencyModel:currencyModel];
     MCPerson *mark = [eventModel addPerson];
@@ -133,7 +136,7 @@
 
 - (void)testTotalSumPaidBy
 {
-    MCSharedBill *event = [MCSharedBill addSharedBillToContext:_context];
+    MCSharedBill *event = [_eventsModel addEvent];
     MCCurrencyModel *currencyModel = [[MCCurrencyModel alloc] initWithManagedObjectContext:_context andWithCurrencyController:[[CurrencyController alloc] init]];
     MCEventModel *eventModel = [[MCEventModel alloc] initWithEvent:event andConcurrencyModel:currencyModel];
     MCPerson *fred = [eventModel addPerson];

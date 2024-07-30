@@ -52,6 +52,7 @@ __attribute__((objc_subclassing_restricted))
 
 /// Sets the payment to be displayed on this View Controller
 /// @param payment Sets the payment to display.
-- (void)prepareForUseWithPayment:(MCPayment *)payment;
+/// @param eventModel Sets the eventModel for the PaymetModel.
+- (void)prepareForUseWithPayment:(MCPayment *)payment andEventModel:(MCEventModel *)eventModel;
 
 @end

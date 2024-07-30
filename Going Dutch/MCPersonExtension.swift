@@ -45,14 +45,14 @@ extension MCPerson  {
         if emailAddress.isEmpty {
             return false
         } else {
-            let amountOfDeleteEmailAddresses = self.emailAddress!.reduce(0) { partialResult, emailAddress in
+            let amountOfDeleteEmailAddresses = emailAddress.reduce(0) { partialResult, emailAddress in
                 if emailAddress.isDeleted {
                     return partialResult + 1
                 } else {
                     return partialResult
                 }
             }
-            return amountOfDeleteEmailAddresses != self.emailAddress!.count
+            return amountOfDeleteEmailAddresses != emailAddress.count
         }
     }
     

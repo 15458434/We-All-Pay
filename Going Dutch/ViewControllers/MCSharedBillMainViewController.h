@@ -25,6 +25,6 @@ __attribute__((objc_subclassing_restricted))
 
 @property (weak, nonatomic) IBOutlet UISegmentedControl *peopleOrPaymentsSelectionControl;
 
-- (void)prepareForUseWithEventModel:(MCEventModel *)model;
+- (void)prepareForUseWithEventModel:(MCEventModel *)model andEventsModel:(MCEventsModel *)eventsModel;
 
 @end

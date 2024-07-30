@@ -10,13 +10,60 @@ import UIKit
 import Combine
 import os
 
+import CurrencyConverter
+
 @objc(MCEventModel) final class EventModel: NSObject, CurrencyUpdateModel {
+    enum Error: Swift.Error, CustomNSError {
+        case invalidPayment(MCPayment)
+        case nilValue
+        case managedObjectContextNotPresentOnEvent(MCSharedBill)
+        
+        // MARK: CustomNSError
+        
+        static var errorDomain: String {
+            "com.markcornelisse.weallpay.EventModelErrorDomain"
+        }
+        
+        var errorCode: Int {
+            switch self {
+            case .invalidPayment(_):
+                return 1_000_001
+            case .nilValue:
+                return 1_000_002
+            case .managedObjectContextNotPresentOnEvent(_):
+                return 1_000_003
+            }
+        }
+        
+        var errorUserInfo: [String : Any] {
+            var userInfo = [String: Any]()
+            switch self {
+            case .invalidPayment(let payment):
+                userInfo[NSLocalizedDescriptionKey] = "Invalid payment"
+                userInfo["payment"] = payment
+            case .nilValue:
+                userInfo[NSLocalizedDescriptionKey] = "Nil value"
+            case .managedObjectContextNotPresentOnEvent(let event):
+                userInfo[NSLocalizedDescriptionKey] = "Managed object context not present on event"
+                userInfo["event"] = event
+            }
+            return userInfo
+        }
+    }
+    
     @objc dynamic var event: MCSharedBill!
     @objc private(set) var currencyModel: CurrencyModel!
     @objc dynamic var mainCurrencyFormatter: CurrencyFormatter!
     @objc var dateFormatter: DateFormatter!
     
     private var logger = Logger(category: "EventModel")
+    
+    @objc(initWithEvent:) convenience init(event: MCSharedBill) {
+        self.init()
+        let currencyController = CurrencyController()
+        let currencyModel = CurrencyModel(managedObjectContext: event.managedObjectContext!, currencyController: currencyController)
+        prepareForUse(with: event, currencyModel: currencyModel)
+    }
     
     @objc(initWithEvent:andConcurrencyModel:) convenience init(event: MCSharedBill, currencyModel: CurrencyModel) {
         self.init()
@@ -106,31 +153,88 @@ import os
         } catch {
             fatalError("Error fetching people: \(error)")
         }
-
     }
     
     @objc var peoplePresentOnEventSortedOnFullName: [MCPerson] {
-        event.getArrayOfPeopleSortedOnFullNames()
+        let unsortedPeoplePresent = Array(event.peoplePresent ?? [])
+        let indexedCollation = UILocalizedIndexedCollation.current()
+        return indexedCollation.sortedArray(from: unsortedPeoplePresent, collationStringSelector: #selector(getter: MCPerson.fullName)) as! [MCPerson]
     }
     
     @objc var amountOfPeoplePresentOnEvent: Int {
         event.peoplePresent?.count ?? 0
     }
     
-    @objc var doAllPaymentsHaveAPayer: Bool {
-        event.doAllPaymentsHaveAPayer()
+    @objc func doAllPaymentsHaveAPayer() throws -> NSNumber {
+        logger.info("doAllPaymentsHaveAPayer()")
+        let managedObjectContext = event.managedObjectContext!
+        let request = MCPayment.fetchRequest()
+        request.predicate = NSPredicate(format: "onWhichBill == %@ AND payingPerson == %@", self.event, NSNull())
+        request.sortDescriptors = [NSSortDescriptor(keyPath: \MCPayment.dateCreated, ascending: true)]
+        do {
+            let amountOfPaymentsWithoutPayers = try managedObjectContext.count(for: request)
+            let result = (amountOfPaymentsWithoutPayers == 0);
+            logger.debug("result: \(result)")
+            return result as NSNumber
+        } catch {
+            logger.error("error: \(error)")
+            throw error
+        }
     }
     
     @objc var nextPayer: MCPerson? {
-        event.fetchPeoplePresentOrdered(byAmountPaid: true).first
+        let sortedPeople = peoplePresentOrderedByAmountPaid(inAscendingOrder: true)
+        let result = sortedPeople.first
+        return result
     }
     
-    @objc func hasPersonPaidSometing(person: MCPerson) -> Bool {
-        event.hasPersonPaidSomething(person)
+    @objc(peoplePresentOrderedByAmountPaidInAscendingOrder:) func peoplePresentOrderedByAmountPaid(inAscendingOrder ascending: Bool) -> [MCPerson] {
+        logger.trace(#function)
+        let people: Set<MCPerson> = event.peoplePresent ?? []
+        let result = people.sorted {
+            let value1 = $0.totalSumPaid as! NSDecimalNumber
+            let value2 = $1.totalSumPaid as! NSDecimalNumber
+            return ascending ? value1.compare(value2) == .orderedAscending : value1.compare(value2) == .orderedDescending
+        }
+        return result
     }
     
-    @objc var firstPaymentWithoutAPayer: MCPayment {
-        event.getFirstPaymentWithoutAPayer()
+    @objc(recentUsedForeignCurrenciesWithFetchLimit:withError:) func recentUsedForeignCurrencies(fetchLimit: UInt) throws -> [MCCurrency] {
+        logger.trace(#function)
+        let request = MCCurrency.fetchRequest()
+        request.fetchLimit = fetchLimit > 0 ? Int(fetchLimit * 2) : 0
+        request.sortDescriptors = [NSSortDescriptor(keyPath: \MCCurrency.dateCreated, ascending: false)]
+        request.predicate = NSPredicate(format: "ANY payment.onWhichBill.uniqueBillId == %@ AND code != %@", event.uniqueBillId!, event.mainCurrency!.code!)
+        do {
+            let managedObjectContext = event.managedObjectContext!
+            let unfilteredResults = try managedObjectContext.fetch(request)
+            if unfilteredResults.count <= 1 {
+                return unfilteredResults
+            }
+            
+            var codes: Set<String> = []
+            let uniqueResults = unfilteredResults.filter { codes.insert($0.code!).inserted }
+            
+            return uniqueResults.prefix(5).map { $0 }
+        } catch {
+            logger.error("Error fetching recentUsedCurrencies: \(error)")
+            throw error
+        }
+    }
+    
+    @objc(allExchangeRatesWithError:) func allExchangeRates() throws -> [MCExchangeRate] {
+        logger.info(#function)
+        let request = MCExchangeRate.fetchRequest()
+        request.sortDescriptors = [NSSortDescriptor(keyPath: \MCExchangeRate.dateCreated, ascending: true)]
+        request.predicate = NSPredicate(format: "payment.onWhichBill == %@", event)
+        
+        do {
+            let results = try event.managedObjectContext!.fetch(request)
+            return results
+        } catch {
+            logger.error("Error fetching all ExchangeRates on this bill: \(error)")
+            throw error
+        }
     }
     
     @objc func addPerson() -> MCPerson {
@@ -160,12 +264,32 @@ import os
         payment.addPeopleSharingPaymentObject(paymentPresence)
     }
     
-    @objc func deleteIfStillNew() {
-        event.deleteIfStillNew()
+    @objc(fetchPersonWithUniqueID:withError:) func person(with uniquePersonID: String) throws -> MCPerson {
+        logger.debug("person(with uniquePersonID: String) throws")
+        let request = MCPerson.fetchRequest()
+        request.sortDescriptors = [NSSortDescriptor(keyPath: \MCPerson.dateCreated, ascending: true)]
+        request.predicate = NSPredicate(format: "ANY sharedBill = %@ AND uniquePersonId = %@", event, uniquePersonID)
+        do {
+            let fetchResult = try event.managedObjectContext!.fetch(request)
+            guard let result = fetchResult.first else {
+                throw Error.nilValue
+            }
+            return result
+        } catch {
+            logger.debug("error fetching: \(error)")
+            throw error
+        }
     }
     
     @objc(deletePerson:) func delete(person: MCPerson) {
-        event.delete(person)
+        let context = event.managedObjectContext!
+        person.sharingPayment?.forEach({ paymentPresence in
+            let payment = paymentPresence.payment!
+            context.delete(paymentPresence)
+            let paymentModel = PaymentModel(with: payment, fromEventOf: self)
+            paymentModel.recalculateAveragePeopleOweAndStore()
+        })
+        context.delete(person)
     }
     
     @objc func addPayment() -> MCPayment {
@@ -215,25 +339,77 @@ import os
         return exchangeRate
     }
     
-    @objc func update(mainCurrencyFrom code: String, with completionHandler: ((_ error: Error?) -> Void)?) {
+    @objc(getFirstPaymentWithoutAPayerWithError:) func getFirstPaymentWithoutAPayer() throws -> MCPayment {
+        logger.debug("getFirstPaymentWithoutAPayer() throws")
+        let request = MCPayment.fetchRequest()
+        request.sortDescriptors = [NSSortDescriptor(keyPath: \MCPayment.dateCreated, ascending: true)]
+        request.predicate = NSPredicate(format: "onWhichBill = %@ AND payingPerson = %@", event, NSNull())
+        do {
+            let paymentsWithoutAPayer = try event.managedObjectContext!.fetch(request)
+            logger.debug("paymentsWithoutAPayer: \(paymentsWithoutAPayer)")
+            guard let result = paymentsWithoutAPayer.first else {
+                logger.debug("No payment without a payer")
+                throw Error.nilValue
+            }
+            return result
+        } catch {
+            logger.error("error fetching payments without a payer: \(error)")
+            throw error
+        }
+    }
+    
+    @objc(totalSumPaidBy:withError:) func totalSumPaid(by person: MCPerson) throws -> NSDecimalNumber {
+        logger.trace(#function)
+        let request = MCPayment.fetchRequest()
+        request.relationshipKeyPathsForPrefetching = ["payingPerson"]
+        request.predicate = NSPredicate(format: "onWhichBill = %@ AND payingPerson = %@ AND ANY peopleSharingPayment.isPersonPresent = YES", event, person)
+        request.sortDescriptors = [NSSortDescriptor(keyPath: \MCPayment.dateCreated, ascending: true)]
+        do {
+            let paymentsOfPerson = try event.managedObjectContext!.fetch(request)
+            let result = paymentsOfPerson.totalSumOfMoneyInMainCurrency
+            logger.debug("totalSumOfMoneyInMainCurrency: \(result)")
+            return result
+        } catch {
+            logger.error("error: \(error)")
+            throw error
+        }
+    }
+    
+    @objc(hasPersonPaidSomething:withError:) func hasPersonPaidSomething(by person: MCPerson) throws -> NSNumber {
+        logger.trace(#function)
+        do {
+            let paid = try totalSumPaid(by: person)
+            let comparison = paid.compare(NSDecimalNumber.zero)
+            if comparison == .orderedDescending {
+                return NSNumber(value: true)
+            } else {
+                return NSNumber(value: false)
+            }
+        } catch {
+            logger.error("error: \(error)")
+            throw error
+        }
+    }
+    
+    @objc(updateMainCurrencyFromCode:withCompletion:) func update(mainCurrencyFrom code: String, with completionHandler: ((_ error: Swift.Error?) -> Void)?) {
         do {
             let newMainCurrency = try currencyModel.generateCurrencyFromSelectedLocale()
             event.mainCurrency = newMainCurrency
             let allExchangeRates = try self.allExchangeRates()
             allExchangeRates.forEach { $0.toCurrency = newMainCurrency }
-            event.updateAllExchangeRates(completionHandler: completionHandler)
+            self.updateAllExchangeRates { results, error in
+                completionHandler?(error)
+            }
         } catch {
             completionHandler?(error)
             return
         }
-        
     }
     
     private func allExchangeRates(with status: MCExchangeRateStatus? = nil) throws -> [MCExchangeRate] {
-//        try event.fetchAllExchangeRates() as! [MCExchangeRate]
         let request = MCExchangeRate.fetchRequest()
         request.sortDescriptors = [NSSortDescriptor(keyPath: \MCExchangeRate.dateCreated, ascending: true)]
-        let eventPredicate = NSPredicate(format: "payment.onWhichBill = %@", self)
+        let eventPredicate = NSPredicate(format: "payment.onWhichBill = %@", event)
         // When status is present add it to the predicate used.
         if let status {
             let statusPredicate = NSPredicate(format: "status != %@", status.rawValue as NSNumber)
@@ -253,27 +429,112 @@ import os
         }
     }
     
-//    private func updateAllExchangeRates(completionHandler: ((_ error: (any Error)?) -> Void)?) throws {
-//        do {
-//            let arrayOfAllExchangeRates = try allExchangeRates()
-//            arrayOfAllExchangeRates.forEach { exchangeRate in
-//                exchangeRate.status = (MCExchangeRateStatus.invalid.rawValue) as NSNumber
-//            }
-//        } catch {
-//            logger.error("Error fetching all exchangeRates: \(error)")
-//            completionHandler?(error)
-//            throw error
-//        }
-//
-//    }
-//    
-//    private func updateInvalidExchangeRates(with completionHandler: ((_ results: [], _ error: Error?) -> Void)? ) {
-//        
-//    }
+    @objc(updateAllExchangeRateswithCompletionHandler:) func updateAllExchangeRates(withCompletionHandler completionHandler: (([Any]?, Swift.Error?) -> Void)?) {
+        let managedObjectContext = event.managedObjectContext!
+        let updateRequest = NSBatchUpdateRequest(entity: MCExchangeRate.entity())
+        updateRequest.predicate = NSPredicate(format: "payment.onWhichBill = %@", event)
+        let invalidStatus = NSNumber(value: MCExchangeRateStatus.fetching.rawValue)
+        updateRequest.propertiesToUpdate = ["status": invalidStatus]
+        do {
+            let result = try managedObjectContext.execute(updateRequest) as! NSBatchUpdateResult
+            guard let exchangeRatesToFetch = result.result as? [MCExchangeRate] else {
+                completionHandler?([], nil)
+                return
+            }
+            WeAllPayStoreController.defaultStore.fetcher.fetchAll(exchangeRatesToFetch) { error in
+                guard error == nil else {
+                    self.logger.error("Error fetching exchange rates: \(error!)")
+                    completionHandler?(nil, error)
+                    return
+                }
+                let solutionModel = SolutionModel(eventModel: self)
+                do {
+                    let areAllExchangeRatesValid = try solutionModel.areAllExchangeRatesValid()
+                    if areAllExchangeRatesValid.boolValue {
+                        try managedObjectContext.save()
+                        let results = try solutionModel.originalSolveWhoHasToPayWhoFromThisBill()
+                        completionHandler?(results, nil)
+                    } else {
+                        completionHandler?([], nil)
+                    }
+                } catch {
+                    self.logger.error("Not all exchangeRates are valid after fetching exchangeRates error: \(error)")
+                    completionHandler?(nil, error)
+                }
+            }
+        } catch {
+            logger.error("Error update all exchange rates: \(error)")
+            completionHandler?(nil, error)
+            return
+        }
+    }
     
-    @objc(deletePayment:) func delete(payment: MCPayment) {
-        let context = payment.managedObjectContext!
-        context.delete(payment)
+    @objc(updateInvalidExchangeRatesWithHandler:) func updateInvalidExchangeRates(completion: @escaping ([SolutionReturnPaymentItem]?, NSError?) -> Void) {
+        // Fetch all exchangeRates that are invalid.
+        let request = NSFetchRequest<MCExchangeRate>(entityName: "MCExchangeRate")
+        request.sortDescriptors = [NSSortDescriptor(key: "dateCreated", ascending: true)]
+        
+        let exchangeRateValidStatus = NSNumber(value: MCExchangeRateStatus.valid.rawValue)
+        request.predicate = NSPredicate(format: "payment.onWhichBill == %@ AND status != %@", event, exchangeRateValidStatus)
+        
+        do {
+            let arrayOfInvalidExchangeRatesOfThisSharedBill = try event.managedObjectContext?.fetch(request)
+            guard let invalidExchangeRates = arrayOfInvalidExchangeRatesOfThisSharedBill else {
+                let fetchError = NSError(domain: "com.green.We_all_pay", code: 0, userInfo: ["reason": "Failed to fetch invalid exchange rates"])
+                print("Something went wrong fetching invalid ExchangeRates: \(fetchError)")
+                completion(nil, fetchError)
+                return
+            }
+            
+            for exchangeRate in invalidExchangeRates {
+                exchangeRate.status = MCExchangeRateStatus.fetching.number
+            }
+            
+            WeAllPayStoreController.defaultStore.fetcher.fetchAll(invalidExchangeRates) { error in
+                if let error = error {
+                    print("Something went wrong fetching exchangeRates.")
+                    completion(nil, error)
+                    return
+                }
+                
+                let solutionModel = SolutionModel(eventModel: self)
+                do {
+                    let areAllExchangeRatesValid = try solutionModel.areAllExchangeRatesValid()
+                    if areAllExchangeRatesValid.boolValue == true {
+                        do {
+                            try WeAllPayStoreController.defaultStore.viewContext.save()
+                        } catch {
+                            completion(nil, error as NSError)
+                            return
+                        }
+                        
+                        let solution = try solutionModel.originalSolveWhoHasToPayWhoFromThisBill()
+                        completion(solution, nil)
+                    } else {
+                        let notAllExchangeRatesValidError = NSError(domain: "com.green.We_all_pay", code: 1, userInfo: ["reason": "Not all exchangeRates are valid after fetching exchangeRates"])
+                        completion(nil, notAllExchangeRatesValidError)
+                    }
+                } catch {
+                    completion(nil, error as NSError)
+                }
+            }
+        } catch {
+            print("Something went wrong fetching invalid ExchangeRates: \(error)")
+            completion(nil, error as NSError)
+        }
+    }
+    
+    @objc(deletePayment:withError:) func delete(payment: MCPayment) throws {
+        // It is not allowed to delete a payment belonging to another sharedBill.
+        guard payment.onWhichBill == event else {
+            throw Error.invalidPayment(payment)
+        }
+        // First delete the people presence on payment data.
+        payment.peopleSharingPayment?.forEach({ paymentPresence in
+            event.managedObjectContext!.delete(paymentPresence)
+        })
+        // Then delete the payment.
+        event.managedObjectContext!.delete(payment)
     }
     
     @objc func save() {
@@ -293,12 +554,12 @@ import os
         return self.event.mainCurrency!.code!
     }
     
-    func updateCurrency(with code: String, with completion: @escaping ((Error?) -> Void)) {
-        self.event.updateMainCurrency(fromCode: code, withCompletion: completion)
+    func updateCurrency(with code: String, with completion: @escaping ((Swift.Error?) -> Void)) {
+        update(mainCurrencyFrom: code, with: completion)
     }
     
     var recentSelectedCurrencies: [MCCurrency] {
-        return event.recentUsedForeignCurrencies(5) ?? [MCCurrency]()
+        return try! recentUsedForeignCurrencies(fetchLimit: 5)
     }
 
     // MARK: NSObject

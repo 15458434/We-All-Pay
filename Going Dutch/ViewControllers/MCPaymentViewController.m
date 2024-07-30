@@ -65,6 +65,7 @@ static void * CurrencyContext = &CurrencyContext;
 @property (nonatomic) BOOL peoplePickerCancelled;
 
 @property (nonatomic, strong) IBOutlet MCPaymentModel *model;
+@property (nonatomic, strong) MCEventModel *eventModel;
 
 @property (nonatomic) MCMoneyValueFieldDismissStatus kindOfPaidFieldDismiss;
 
@@ -136,17 +137,20 @@ static void * CurrencyContext = &CurrencyContext;
 
 - (void)prepareForUseWithEventModel:(MCEventModel *)eventModel {
     NSParameterAssert(eventModel);
+    _eventModel = eventModel;
     [[WeAllPayStoreController defaultStore] beginUndoGroup];
     MCPayment *newPayment = [eventModel addPayment];
     _isNew = YES;
-    [_model prepareForUseWithPayment:newPayment];
+    [_model prepareForUseWithPayment:newPayment fromEventOfEventModel:eventModel];
 }
 
-- (void)prepareForUseWithPayment:(MCPayment *)payment {
+- (void)prepareForUseWithPayment:(MCPayment *)payment andEventModel:(MCEventModel *)eventModel {
     NSParameterAssert(payment);
+    NSParameterAssert(eventModel);
+    _eventModel = eventModel;
     [[WeAllPayStoreController defaultStore] beginUndoGroup];
     _isNew = NO;
-    [_model prepareForUseWithPayment:payment];
+    [_model prepareForUseWithPayment:payment fromEventOfEventModel:eventModel];
 }
 
 - (void)updateSelectCategoryButtonWithTitle:(NSString *)title {
@@ -162,8 +166,8 @@ static void * CurrencyContext = &CurrencyContext;
     MCSharedBill *event = (MCSharedBill *)pathComponentsToOpen[0];
     NSParameterAssert(event);
     MCCurrencyModel *currencyModel = [[MCCurrencyModel alloc] initWithManagedObjectContext:event.managedObjectContext andWithCurrencyController:[[CurrencyController alloc] init]];
-    MCEventModel *eventModel = [[MCEventModel alloc] initWithEvent:event andConcurrencyModel:currencyModel];
-    [self prepareForUseWithEventModel:eventModel];
+    _eventModel = [[MCEventModel alloc] initWithEvent:event andConcurrencyModel:currencyModel];
+    [self prepareForUseWithEventModel:_eventModel];
     MCPerson *predefinedPayingPerson = (MCPerson *)pathComponentsToOpen[1];
     NSParameterAssert(predefinedPayingPerson);
     [_model updatePayingPerson:predefinedPayingPerson];
@@ -370,7 +374,7 @@ static void * CurrencyContext = &CurrencyContext;
     if ([segue.identifier isEqualToString:@"selectCategory"]) {
         UINavigationController *navigationController = (UINavigationController *)segue.destinationViewController;
         SelectCategoryTableViewController *destinationViewController = (SelectCategoryTableViewController *)navigationController.viewControllers.firstObject;
-        [destinationViewController prepareForUseWithPayment:_model.payment];
+        [destinationViewController prepareForUseWithPayment:_model.payment fromEventOfEventModel:_eventModel];
     }
 }
 

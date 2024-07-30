@@ -22,6 +22,7 @@ static void * isEditingToggleContext = &isEditingToggleContext;
 @interface MCSharedBillMainViewController ()
 
 @property (strong, nonatomic) MCSharedBillPageViewController *pageViewController;
+@property (weak, nonatomic) MCEventsModel *eventsModel;
 @property (strong, nonatomic) IBOutlet MCEventModel *eventModel;
 @property (strong, nonatomic) IBOutlet MCToggleModel *isEditingModel;
 
@@ -41,7 +42,8 @@ static void * isEditingToggleContext = &isEditingToggleContext;
     _eventModel = [[MCEventModel alloc] initWithEvent:event andConcurrencyModel:currencyModel];
 }
 
-- (void)prepareForUseWithEventModel:(MCEventModel *)model {
+- (void)prepareForUseWithEventModel:(MCEventModel *)model andEventsModel:(MCEventsModel *)eventsModel {
+    _eventsModel = eventsModel;
     _eventModel = model;
 }
 
@@ -210,7 +212,7 @@ static void * isEditingToggleContext = &isEditingToggleContext;
     if (!parent) {
         // Parent is null when back button is pressed in navigationbar
         [self.view endEditing:YES];
-        [_eventModel deleteIfStillNew];
+        [_eventsModel deleteIfStillNewEvent:_eventModel.event];
         [[WeAllPayStoreController defaultStore] saveViewContext];
     }
 }

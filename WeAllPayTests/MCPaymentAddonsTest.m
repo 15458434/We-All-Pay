@@ -21,6 +21,7 @@
 @interface MCPaymentAddonsTest : XCTestCase
 
 @property (nonatomic, strong) NSManagedObjectContext *context;
+@property (nonatomic, strong) MCEventsModel *eventsModel;
 
 @end
 
@@ -30,6 +31,7 @@
     [super setUp];
     [WeAllPayStoreController.defaultStore openStoreOfType:NSInMemoryStoreType];
     _context = WeAllPayStoreController.defaultStore.viewContext;
+    _eventsModel = [[MCEventsModel alloc] initWithManagedObjectContext:_context andFetchedResultsControllerdDelegate:nil];
 }
 
 - (void)tearDown
@@ -40,7 +42,7 @@
 
 - (void)testMCPaymentAddons
 {
-    MCSharedBill *event = [[MCSharedBill alloc] initWithContext:_context];
+    MCSharedBill *event = [_eventsModel addEvent];
     MCCurrencyModel *currencyModel = [[MCCurrencyModel alloc] initWithManagedObjectContext:_context andWithCurrencyController:[[CurrencyController alloc] init]];
     MCEventModel *eventModel = [[MCEventModel alloc] initWithEvent:event andConcurrencyModel:currencyModel];
     MCPerson *thisPerson = [eventModel addPerson];
@@ -55,7 +57,9 @@
     [thisPayment setPayingPerson:thisPerson];
     XCTAssertTrue([thisPayment hasPayer], @"No payer present on thisPayment");
     
-    [eventModel deletePayment:thisPayment];
+    NSError *deleteError;
+    [eventModel deletePayment:thisPayment withError:&deleteError];
+    XCTAssertNil(deleteError, @"No error should happening when payment is deleted");
     XCTAssertTrue([thisPayment isDeleted], @"MCPayment table is not empty");
     
     // Disconnect the eventModel from the event.
@@ -64,7 +68,7 @@
 
 - (void)testCurrency
 {
-    MCSharedBill *event = [MCSharedBill addSharedBillToContext:_context];
+    MCSharedBill *event = [_eventsModel addEvent];
     MCCurrencyModel *currenceModel = [[MCCurrencyModel alloc] initWithManagedObjectContext:_context andWithCurrencyController:[[CurrencyController alloc] init]];
     MCEventModel *eventModel = [[MCEventModel alloc] initWithEvent:event andConcurrencyModel:currenceModel];
     // This test checks to see if currency is being setup when a new payment is being made.
@@ -79,7 +83,7 @@
 - (void)testMoneyInMainCurrency
 {
     // This test checks to see if currency is correctly converted to the mainCurrency of the sharedBill.
-    MCSharedBill *event = [MCSharedBill addSharedBillToContext:_context];
+    MCSharedBill *event = [_eventsModel addEvent];
     MCCurrencyModel *currencyModel = [[MCCurrencyModel alloc] initWithManagedObjectContext:_context andWithCurrencyController:[[CurrencyController alloc] init]];
     MCEventModel *eventModel = [[MCEventModel alloc] initWithEvent:event andConcurrencyModel:currencyModel];
     event.mainCurrency = [currencyModel currencyFromCurrencyCode:@"EUR"];
@@ -93,7 +97,7 @@
 }
 
 - (void)testAddPaymentForExchangeRateCreation {
-    MCSharedBill *event = [MCSharedBill addSharedBillToContext:_context];
+    MCSharedBill *event = [_eventsModel addEvent];
     MCCurrencyModel *currencyModel = [[MCCurrencyModel alloc] initWithManagedObjectContext:_context andWithCurrencyController:[[CurrencyController alloc] init]];
     MCEventModel *eventModel = [[MCEventModel alloc] initWithEvent:event andConcurrencyModel:currencyModel];
     MCPayment *thisPayment = [eventModel addPayment];

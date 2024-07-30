@@ -15,15 +15,18 @@ import FirebaseCrashlytics
 @objc(MCPaymentModel) @objcMembers public final class PaymentModel: NSObject, CurrencyUpdateModel {
     @objc private(set) var payment: MCPayment!
     private(set) var currencyFormatter: CurrencyFormatter!
+    private(set) var eventModel: EventModel!
     @objc private(set) dynamic var error: NSError?
     private var currencyModel: CurrencyModel!
+    let logger = Logger(category: "PaymentModel")
     
-    @objc(initWithPayment:) convenience init(with payment: MCPayment) {
+    @objc(initWithPayment:fromEventOfEventModel:) convenience init(with payment: MCPayment, fromEventOf eventModel: EventModel) {
         self.init()
-        prepareForUse(with: payment)
+        prepareForUse(with: payment, fromEventOf: eventModel)
     }
 
-    @objc(prepareForUseWithPayment:) func prepareForUse(with payment: MCPayment) {
+    @objc(prepareForUseWithPayment:fromEventOfEventModel:) func prepareForUse(with payment: MCPayment, fromEventOf eventModel: EventModel) {
+        logger.trace(#function)
         func createPeoplePresenceController(for payment: MCPayment) {
             let request = MCPaymentPresence.fetchRequest()
             request.relationshipKeyPathsForPrefetching = [ "person", "payment", "payment.currency", "onWhichBill.mainCurrency", "payment.exchangeRate" ]
@@ -38,6 +41,7 @@ import FirebaseCrashlytics
         let paymentDictionary = payment.dictionaryWithValues(forKeys: ["categoryId", "dateCreated", "dateModified", "descriptionOfPayment", "money", "moneyInMainCurrency", "uniquePaymentId", "managedObjectContext"])
         Crashlytics.crashlytics().log("prepareForUseWithPayment: \(paymentDictionary)")
         
+        self.eventModel = eventModel
         self.payment = payment
         createPeoplePresenceController(for: payment)
         currencyFormatter = CurrencyFormatter(currencyCode: payment.currency!.code!)
@@ -46,13 +50,14 @@ import FirebaseCrashlytics
     
     private(set) var peoplePresenceController: NSFetchedResultsController<MCPaymentPresence>!
     
-    var arrayOfPeoplePresent: [MCPerson] {
-        return self.payment.onWhichBill!.getArrayOfPeopleSortedOnFullNames()
+    var sortedPeoplePresent: [MCPerson] {
+        eventModel.peoplePresentOnEventSortedOnFullName
     }
     
     var suggestedNextPayer: MCPerson? {
-        let peoplePresent = payment.onWhichBill!.fetchPeoplePresentOrdered(byAmountPaid: true)
-        return peoplePresent?.first
+        let peoplePresentSorted = eventModel.peoplePresentOrderedByAmountPaid(inAscendingOrder: true)
+        let result = peoplePresentSorted.first
+        return result
     }
     
     func beginUpdates() {
@@ -119,9 +124,13 @@ import FirebaseCrashlytics
     }
     
     @objc(updateCurrency:) func update(currency: Currency) {
-        currencyFormatter = CurrencyFormatter(currencyCode: currency.code)
+        update(currencyFromCode: currency.code)
+    }
+    
+    func update(currencyFromCode code: String) {
+        currencyFormatter = CurrencyFormatter(currencyCode: code)
         let mainThreadContext = payment.managedObjectContext!
-        let newCurrency = currencyModel.currency(from: currency.code)
+        let newCurrency = currencyModel.currency(from: code)
         let oldCurrency = payment.currency
         payment.currency = newCurrency
         if oldCurrency?.sharedBill?.count == 0 && oldCurrency?.payment?.count == 0 {
@@ -158,8 +167,8 @@ import FirebaseCrashlytics
                 paymentPresence.averageOweFromPayment = averagePayedByPeoplePresent as NSNumber
             } else {
                 paymentPresence.averageOweFromPayment = 0 as NSNumber
-                paymentPresence.dateModified = now
             }
+            paymentPresence.dateModified = now  
         })
         payment.dateModified = now
         payment.onWhichBill!.dateModified = now
@@ -195,10 +204,8 @@ import FirebaseCrashlytics
         update(currency: newCurrency, andUpdateExchangeRateWith: completion)
     }
     
-    
-    
     var recentSelectedCurrencies: [MCCurrency] {
-        return payment.onWhichBill!.recentUsedForeignCurrencies(5) ?? [MCCurrency]()
+        return try! eventModel.recentUsedForeignCurrencies(fetchLimit: 5)
     }
     
     // MARK: NSObject

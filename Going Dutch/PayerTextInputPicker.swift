@@ -31,7 +31,7 @@ import FirebaseCrashlytics
     }
     
     private lazy var selectableFromPeoplePresent: [SelectablePeoplePresent] = {
-        var selectablePeople = model.arrayOfPeoplePresent.map { person in
+        var selectablePeople = model.sortedPeoplePresent.map { person in
             SelectablePeoplePresent.person(person)
         }
         let noneString = "-- \(NSLocalizedString("picker_option_none", value: "none", comment: "An string that indicates that no person is selected in the select payer picker")) --"

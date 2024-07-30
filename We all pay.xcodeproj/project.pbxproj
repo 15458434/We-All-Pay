@@ -17,6 +17,7 @@
 		380FB70D26D6B86600B46038 /* CoreGraphics.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 380FB70C26D6B86600B46038 /* CoreGraphics.framework */; };
 		380FB71026D6B88100B46038 /* StoreKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 380FB70F26D6B88100B46038 /* StoreKit.framework */; };
 		380FB71226D6B88F00B46038 /* UIKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 380FB71126D6B88F00B46038 /* UIKit.framework */; };
+		381080FC2E4381290064187F /* NSExceptionExtension.swift in Sources */ = {isa = PBXBuildFile; fileRef = 381080FB2E4381290064187F /* NSExceptionExtension.swift */; };
 		381179D01A82D1FC00020538 /* MailComposer.swift in Sources */ = {isa = PBXBuildFile; fileRef = 381179CF1A82D1FC00020538 /* MailComposer.swift */; };
 		381275FF1BBD84650004C8C2 /* InfoScreenTableViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 381275FE1BBD84650004C8C2 /* InfoScreenTableViewController.swift */; };
 		381276041BBD8F130004C8C2 /* InfoPlist.strings in Resources */ = {isa = PBXBuildFile; fileRef = 381276061BBD8F130004C8C2 /* InfoPlist.strings */; };
@@ -28,14 +29,22 @@
 		3814B495270C500000737A06 /* NavigationViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3814B494270C500000737A06 /* NavigationViewController.swift */; };
 		38163E0F249E193D009E889C /* CoreServices.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 38163E0E249E193D009E889C /* CoreServices.framework */; };
 		381848342C355A030088DC7E /* ToggleModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 381848332C355A030088DC7E /* ToggleModel.swift */; };
+		381A59152C5EAF6E006E3572 /* MCSharedBillExtension.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3828D6F32C58C8760007FE31 /* MCSharedBillExtension.swift */; };
+		381A59162C5F642F006E3572 /* SolutionModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 381C2C39275A095D00CD82D2 /* SolutionModel.swift */; };
+		381A59172C5F6786006E3572 /* TableViewSectionModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3809A458276377110083D3A8 /* TableViewSectionModel.swift */; };
+		381A591A2C5F6C37006E3572 /* MCSharedBill+TestHelper.m in Sources */ = {isa = PBXBuildFile; fileRef = 381A59192C5F6C37006E3572 /* MCSharedBill+TestHelper.m */; };
 		381C2C3A275A095D00CD82D2 /* SolutionModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 381C2C39275A095D00CD82D2 /* SolutionModel.swift */; };
 		381C2C3C275A412100CD82D2 /* MCTableEmptyMessage.xib in Resources */ = {isa = PBXBuildFile; fileRef = 381C2C3B275A412100CD82D2 /* MCTableEmptyMessage.xib */; };
 		381C2C3E275A414A00CD82D2 /* Main-Iphone.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 381C2C3D275A414A00CD82D2 /* Main-Iphone.storyboard */; };
 		381C2C40275A419900CD82D2 /* Main-iPad.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 381C2C3F275A419900CD82D2 /* Main-iPad.storyboard */; };
+		381E1C042E5748EF000E2955 /* PeopleSpawningPoolExtension.swift in Sources */ = {isa = PBXBuildFile; fileRef = 381E1C032E5748EF000E2955 /* PeopleSpawningPoolExtension.swift */; };
+		381E1C062E574B44000E2955 /* PaymentSpawningPool.swift in Sources */ = {isa = PBXBuildFile; fileRef = 381E1C052E574B44000E2955 /* PaymentSpawningPool.swift */; };
+		381E1C082E57529F000E2955 /* PaymentSpawningPoolExtension.swift in Sources */ = {isa = PBXBuildFile; fileRef = 381E1C072E57529F000E2955 /* PaymentSpawningPoolExtension.swift */; };
 		3825A82419990BA400A8885D /* UIViewController+WeAllPayStore.m in Sources */ = {isa = PBXBuildFile; fileRef = 3825A82319990BA400A8885D /* UIViewController+WeAllPayStore.m */; };
 		3825A826199A2A5500A8885D /* MCTonightsBillTransfer.m in Sources */ = {isa = PBXBuildFile; fileRef = 3825A825199A2A5500A8885D /* MCTonightsBillTransfer.m */; };
 		3826D4D123CC574E009CAC30 /* WebKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 3826D4D023CC574E009CAC30 /* WebKit.framework */; };
 		3826D4D223CC576C009CAC30 /* libsqlite3.0.tbd in Frameworks */ = {isa = PBXBuildFile; fileRef = 3826D4CE23CC573B009CAC30 /* libsqlite3.0.tbd */; };
+		3828D6F42C58C8760007FE31 /* MCSharedBillExtension.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3828D6F32C58C8760007FE31 /* MCSharedBillExtension.swift */; };
 		3829AD0F178B41320025969D /* WeAllPayStore.xcdatamodeld in Sources */ = {isa = PBXBuildFile; fileRef = 3829AD0D178B41320025969D /* WeAllPayStore.xcdatamodeld */; };
 		382B76E31C398249000C203A /* CurrencyConverter.h in Headers */ = {isa = PBXBuildFile; fileRef = 382B76E21C398249000C203A /* CurrencyConverter.h */; settings = {ATTRIBUTES = (Public, ); }; };
 		382B76EA1C398249000C203A /* CurrencyConverter.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 382B76E01C398249000C203A /* CurrencyConverter.framework */; };
@@ -177,6 +186,7 @@
 		38ABFC4A2758B688006AA8E1 /* InfoModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 38ABFC492758B688006AA8E1 /* InfoModel.swift */; };
 		38ACC5A3236B1FAE000BDEEC /* PaymentModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 38ACC5A2236B1FAE000BDEEC /* PaymentModel.swift */; };
 		38AD8C12197E8926005C3436 /* MCAddCurrenciesEntityMigrationPolicy.m in Sources */ = {isa = PBXBuildFile; fileRef = 38AD8C11197E8926005C3436 /* MCAddCurrenciesEntityMigrationPolicy.m */; };
+		38B013852C60AE3A00A0A38A /* MCPaymentPresenceExtension.swift in Sources */ = {isa = PBXBuildFile; fileRef = 383486B22C4166200078E72E /* MCPaymentPresenceExtension.swift */; };
 		38B08C591B383A4C00FB84B1 /* MCStoreInterface.swift in Sources */ = {isa = PBXBuildFile; fileRef = 38B08C581B383A4C00FB84B1 /* MCStoreInterface.swift */; };
 		38B4E81923CDE5D40034CA95 /* libz.1.2.5.tbd in Frameworks */ = {isa = PBXBuildFile; fileRef = 38B4E81823CDE5D40034CA95 /* libz.1.2.5.tbd */; };
 		38B4E81B23CDE5F40034CA95 /* AdSupport.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 38B4E81A23CDE5F40034CA95 /* AdSupport.framework */; };
@@ -203,6 +213,7 @@
 		38D177131C3A85C00084604C /* SelectCurrencyTableViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 38D177121C3A85C00084604C /* SelectCurrencyTableViewController.swift */; };
 		38D1C3801A8A38B5008F2A8E /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 38D1C37F1A8A38B5008F2A8E /* LaunchScreen.storyboard */; };
 		38D34D07279FE3F5004AA290 /* SolutionReturnPaymentItem.swift in Sources */ = {isa = PBXBuildFile; fileRef = 383D5D831C0708F800BE9F94 /* SolutionReturnPaymentItem.swift */; };
+		38D5817C2E4B82C000B88BA9 /* NSDecimalNumberExtension.swift in Sources */ = {isa = PBXBuildFile; fileRef = 38D5817B2E4B82C000B88BA9 /* NSDecimalNumberExtension.swift */; };
 		38D6A3C61C73DDC000968BB2 /* RateMeControllerForiOS.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 38D6A3BC1C73DDBF00968BB2 /* RateMeControllerForiOS.framework */; };
 		38D6A3D11C73DDC000968BB2 /* RateMeControllerForiOS.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 38D6A3BC1C73DDBF00968BB2 /* RateMeControllerForiOS.framework */; };
 		38D6A3D21C73DDC000968BB2 /* RateMeControllerForiOS.framework in Embed Frameworks */ = {isa = PBXBuildFile; fileRef = 38D6A3BC1C73DDBF00968BB2 /* RateMeControllerForiOS.framework */; settings = {ATTRIBUTES = (CodeSignOnCopy, RemoveHeadersOnCopy, ); }; };
@@ -217,7 +228,6 @@
 		38D796151B2F1CBD00F3872F /* ExchangeRateFetcherForMCExchangeRate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 38D796141B2F1CBD00F3872F /* ExchangeRateFetcherForMCExchangeRate.swift */; };
 		38D96ED423E30F5E00C03170 /* MCAdBannerTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 38D96ED323E30F5E00C03170 /* MCAdBannerTableViewCell.swift */; };
 		38D96ED623E31BE000C03170 /* MCBitwiseStuff.m in Sources */ = {isa = PBXBuildFile; fileRef = 38D96ED523E31BE000C03170 /* MCBitwiseStuff.m */; };
-		38DB85D717E45CA4006237CF /* MCSharedBill+addons.m in Sources */ = {isa = PBXBuildFile; fileRef = 38DB85D617E45CA4006237CF /* MCSharedBill+addons.m */; };
 		38E1CEA62768AC4600D78CDE /* SolutionTotalSpentTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 38E1CEA52768AC4600D78CDE /* SolutionTotalSpentTableViewCell.swift */; };
 		38E2CB3E1BC2A49C0092B5C8 /* SelectPayerTableViewCell_iPad.swift in Sources */ = {isa = PBXBuildFile; fileRef = 38E2CB3D1BC2A49C0092B5C8 /* SelectPayerTableViewCell_iPad.swift */; };
 		38E2CB481BC2ABFB0092B5C8 /* SelectPayerTableViewController_iPad.swift in Sources */ = {isa = PBXBuildFile; fileRef = 38E2CB471BC2ABFB0092B5C8 /* SelectPayerTableViewController_iPad.swift */; };
@@ -236,6 +246,10 @@
 		38F2370826D0140100A22F9E /* MCGenericMediumAdBannerViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 38F2370626D0140100A22F9E /* MCGenericMediumAdBannerViewController.m */; };
 		38F2A1AC1ADCF7E100831D48 /* TodayViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 38F2A1AA1ADCF7E100831D48 /* TodayViewController.swift */; };
 		38F2A1AD1ADCF7E100831D48 /* WhoIsPayingNextTextLocalizer.swift in Sources */ = {isa = PBXBuildFile; fileRef = 38F2A1AB1ADCF7E100831D48 /* WhoIsPayingNextTextLocalizer.swift */; };
+		38F2ED772E55BFDC0092A90E /* ExchangeRateFetcherForMCExchangeRate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 38D796141B2F1CBD00F3872F /* ExchangeRateFetcherForMCExchangeRate.swift */; };
+		38F2ED792E55C2080092A90E /* EventModelTest.swift in Sources */ = {isa = PBXBuildFile; fileRef = 38F2ED782E55C2080092A90E /* EventModelTest.swift */; };
+		38F2ED7B2E55C4130092A90E /* EventSpawningPool.swift in Sources */ = {isa = PBXBuildFile; fileRef = 38F2ED7A2E55C4130092A90E /* EventSpawningPool.swift */; };
+		38F2ED7E2E55C5690092A90E /* PeopleSpawningPool.swift in Sources */ = {isa = PBXBuildFile; fileRef = 38F2ED7D2E55C5690092A90E /* PeopleSpawningPool.swift */; };
 		38F44CCB2364993400215B1C /* MoneyTextInputValidator.swift in Sources */ = {isa = PBXBuildFile; fileRef = 38F44CCA2364993400215B1C /* MoneyTextInputValidator.swift */; };
 		38F9B88A2C3D1AAE008BA7C9 /* CurrencyUpdateModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 38F9B8892C3D1AAE008BA7C9 /* CurrencyUpdateModel.swift */; };
 		38FC75E62C57EBB500363CA8 /* Currency.swift in Sources */ = {isa = PBXBuildFile; fileRef = 38FC75E52C57EBB500363CA8 /* Currency.swift */; };
@@ -398,6 +412,7 @@
 		380FB70C26D6B86600B46038 /* CoreGraphics.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = CoreGraphics.framework; path = System/Library/Frameworks/CoreGraphics.framework; sourceTree = SDKROOT; };
 		380FB70F26D6B88100B46038 /* StoreKit.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = StoreKit.framework; path = System/Library/Frameworks/StoreKit.framework; sourceTree = SDKROOT; };
 		380FB71126D6B88F00B46038 /* UIKit.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = UIKit.framework; path = System/Library/Frameworks/UIKit.framework; sourceTree = SDKROOT; };
+		381080FB2E4381290064187F /* NSExceptionExtension.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NSExceptionExtension.swift; sourceTree = "<group>"; };
 		381179CF1A82D1FC00020538 /* MailComposer.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = MailComposer.swift; sourceTree = "<group>"; };
 		381275FE1BBD84650004C8C2 /* InfoScreenTableViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = InfoScreenTableViewController.swift; sourceTree = "<group>"; };
 		381276011BBD8F120004C8C2 /* nl */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = nl; path = nl.lproj/InfoPlist.strings; sourceTree = "<group>"; };
@@ -413,16 +428,22 @@
 		3814B494270C500000737A06 /* NavigationViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NavigationViewController.swift; sourceTree = "<group>"; };
 		38163E0E249E193D009E889C /* CoreServices.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = CoreServices.framework; path = System/Library/Frameworks/CoreServices.framework; sourceTree = SDKROOT; };
 		381848332C355A030088DC7E /* ToggleModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ToggleModel.swift; sourceTree = "<group>"; };
+		381A59182C5F6C37006E3572 /* MCSharedBill+TestHelper.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = "MCSharedBill+TestHelper.h"; sourceTree = "<group>"; };
+		381A59192C5F6C37006E3572 /* MCSharedBill+TestHelper.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = "MCSharedBill+TestHelper.m"; sourceTree = "<group>"; };
 		381C2C39275A095D00CD82D2 /* SolutionModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SolutionModel.swift; sourceTree = "<group>"; };
 		381C2C3B275A412100CD82D2 /* MCTableEmptyMessage.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; name = MCTableEmptyMessage.xib; path = Views/MCTableEmptyMessage.xib; sourceTree = "<group>"; };
 		381C2C3D275A414A00CD82D2 /* Main-Iphone.storyboard */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.storyboard; name = "Main-Iphone.storyboard"; path = "Views/Main-Iphone.storyboard"; sourceTree = "<group>"; };
 		381C2C3F275A419900CD82D2 /* Main-iPad.storyboard */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.storyboard; path = "Main-iPad.storyboard"; sourceTree = "<group>"; };
+		381E1C032E5748EF000E2955 /* PeopleSpawningPoolExtension.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PeopleSpawningPoolExtension.swift; sourceTree = "<group>"; };
+		381E1C052E574B44000E2955 /* PaymentSpawningPool.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PaymentSpawningPool.swift; sourceTree = "<group>"; };
+		381E1C072E57529F000E2955 /* PaymentSpawningPoolExtension.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PaymentSpawningPoolExtension.swift; sourceTree = "<group>"; };
 		3825A82219990BA400A8885D /* UIViewController+WeAllPayStore.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "UIViewController+WeAllPayStore.h"; sourceTree = "<group>"; };
 		3825A82319990BA400A8885D /* UIViewController+WeAllPayStore.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "UIViewController+WeAllPayStore.m"; sourceTree = "<group>"; };
 		3825A825199A2A5500A8885D /* MCTonightsBillTransfer.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = MCTonightsBillTransfer.m; path = ViewControllers/MCTonightsBillTransfer.m; sourceTree = "<group>"; };
 		3826D4CE23CC573B009CAC30 /* libsqlite3.0.tbd */ = {isa = PBXFileReference; lastKnownFileType = "sourcecode.text-based-dylib-definition"; name = libsqlite3.0.tbd; path = usr/lib/libsqlite3.0.tbd; sourceTree = SDKROOT; };
 		3826D4CF23CC5745009CAC30 /* libz.tbd */ = {isa = PBXFileReference; lastKnownFileType = "sourcecode.text-based-dylib-definition"; name = libz.tbd; path = usr/lib/libz.tbd; sourceTree = SDKROOT; };
 		3826D4D023CC574E009CAC30 /* WebKit.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = WebKit.framework; path = System/Library/Frameworks/WebKit.framework; sourceTree = SDKROOT; };
+		3828D6F32C58C8760007FE31 /* MCSharedBillExtension.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MCSharedBillExtension.swift; sourceTree = "<group>"; };
 		3829AD0E178B41320025969D /* WeAllPayStore.xcdatamodel */ = {isa = PBXFileReference; lastKnownFileType = wrapper.xcdatamodel; path = WeAllPayStore.xcdatamodel; sourceTree = "<group>"; };
 		382B76E01C398249000C203A /* CurrencyConverter.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = CurrencyConverter.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		382B76E21C398249000C203A /* CurrencyConverter.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = CurrencyConverter.h; sourceTree = "<group>"; };
@@ -633,6 +654,7 @@
 		38D177121C3A85C00084604C /* SelectCurrencyTableViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SelectCurrencyTableViewController.swift; sourceTree = "<group>"; };
 		38D1C37F1A8A38B5008F2A8E /* LaunchScreen.storyboard */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.storyboard; name = LaunchScreen.storyboard; path = LaunchImage/LaunchScreen.storyboard; sourceTree = "<group>"; };
 		38D2323719A4EF42004B1203 /* We all pay.entitlements */ = {isa = PBXFileReference; lastKnownFileType = text.xml; path = "We all pay.entitlements"; sourceTree = SOURCE_ROOT; };
+		38D5817B2E4B82C000B88BA9 /* NSDecimalNumberExtension.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NSDecimalNumberExtension.swift; sourceTree = "<group>"; };
 		38D6A3BC1C73DDBF00968BB2 /* RateMeControllerForiOS.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = RateMeControllerForiOS.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		38D6A3C51C73DDBF00968BB2 /* RateMeControllerForiOSTests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = RateMeControllerForiOSTests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
 		38D6A3CE1C73DDC000968BB2 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
@@ -651,8 +673,6 @@
 		38D96ED323E30F5E00C03170 /* MCAdBannerTableViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MCAdBannerTableViewCell.swift; sourceTree = "<group>"; };
 		38D96ED523E31BE000C03170 /* MCBitwiseStuff.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = MCBitwiseStuff.m; sourceTree = "<group>"; };
 		38D96ED723E31BF200C03170 /* MCBitwiseStuff.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = MCBitwiseStuff.h; sourceTree = "<group>"; };
-		38DB85D517E45CA4006237CF /* MCSharedBill+addons.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = "MCSharedBill+addons.h"; path = "DataStore/MCSharedBill+addons.h"; sourceTree = "<group>"; };
-		38DB85D617E45CA4006237CF /* MCSharedBill+addons.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = "MCSharedBill+addons.m"; path = "DataStore/MCSharedBill+addons.m"; sourceTree = "<group>"; };
 		38E0C5DE18E5C94D005A3F17 /* MCTonightsBillTransfer.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = MCTonightsBillTransfer.h; path = ViewControllers/MCTonightsBillTransfer.h; sourceTree = "<group>"; };
 		38E0C5DF18E97A8A005A3F17 /* MCCurrentViewDelegate.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = MCCurrentViewDelegate.h; path = ViewControllers/MCCurrentViewDelegate.h; sourceTree = "<group>"; };
 		38E1CEA52768AC4600D78CDE /* SolutionTotalSpentTableViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SolutionTotalSpentTableViewCell.swift; sourceTree = "<group>"; };
@@ -678,6 +698,9 @@
 		38F2370726D0140100A22F9E /* MCGenericMediumAdBannerViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = MCGenericMediumAdBannerViewController.h; sourceTree = "<group>"; };
 		38F2A1AA1ADCF7E100831D48 /* TodayViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = TodayViewController.swift; sourceTree = "<group>"; };
 		38F2A1AB1ADCF7E100831D48 /* WhoIsPayingNextTextLocalizer.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = WhoIsPayingNextTextLocalizer.swift; sourceTree = "<group>"; };
+		38F2ED782E55C2080092A90E /* EventModelTest.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = EventModelTest.swift; sourceTree = "<group>"; };
+		38F2ED7A2E55C4130092A90E /* EventSpawningPool.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = EventSpawningPool.swift; sourceTree = "<group>"; };
+		38F2ED7D2E55C5690092A90E /* PeopleSpawningPool.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PeopleSpawningPool.swift; sourceTree = "<group>"; };
 		38F44CCA2364993400215B1C /* MoneyTextInputValidator.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MoneyTextInputValidator.swift; sourceTree = "<group>"; };
 		38F7F9A91B2C4A120059DE51 /* CurrencyController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = CurrencyController.swift; path = "../Going Dutch/CurrencyController.swift"; sourceTree = "<group>"; };
 		38F9B8892C3D1AAE008BA7C9 /* CurrencyUpdateModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CurrencyUpdateModel.swift; sourceTree = "<group>"; };
@@ -827,8 +850,7 @@
 				389DE9151982540D00169645 /* MCCurrency.m */,
 				389DE8FE197FB2BA00169645 /* MCSharedBill.h */,
 				389DE8FF197FB2BA00169645 /* MCSharedBill.m */,
-				38DB85D517E45CA4006237CF /* MCSharedBill+addons.h */,
-				38DB85D617E45CA4006237CF /* MCSharedBill+addons.m */,
+				3828D6F32C58C8760007FE31 /* MCSharedBillExtension.swift */,
 				389DE8F8197FB2BA00169645 /* MCPayment.h */,
 				389DE8F9197FB2BA00169645 /* MCPayment.m */,
 				387270872C4F94CE0003B399 /* MCPaymentExtension.swift */,
@@ -976,6 +998,8 @@
 			children = (
 				383765D12C46977C008F340A /* MCPerson+TestHelper.h */,
 				383765D22C46977C008F340A /* MCPerson+TestHelper.m */,
+				381A59182C5F6C37006E3572 /* MCSharedBill+TestHelper.h */,
+				381A59192C5F6C37006E3572 /* MCSharedBill+TestHelper.m */,
 			);
 			name = Helpers;
 			sourceTree = "<group>";
@@ -1119,10 +1143,12 @@
 				389950AA191A9469000B00BC /* MCPaymentPresenceTest.m */,
 				3898F33F18F40E7700BFFC61 /* MCPaymentAddonsTest.m */,
 				3898F33D18F40CC100BFFC61 /* MCPersonAddonsTest.m */,
+				38F2ED7C2E55C4A70092A90E /* Spawning Pool */,
 				383765CE2C467C99008F340A /* Helpers */,
 				3898F33B18F40B9D00BFFC61 /* MCSharedBillAddOnsTest.m */,
 				38D785FC18DC53C30074B670 /* WeAllPayStoreTests.m */,
 				385F5302191C2C360012773D /* Supporting Files */,
+				38F2ED782E55C2080092A90E /* EventModelTest.swift */,
 			);
 			path = "We all pay Tests";
 			sourceTree = "<group>";
@@ -1502,6 +1528,18 @@
 			name = AdBanner;
 			sourceTree = "<group>";
 		};
+		38F2ED7C2E55C4A70092A90E /* Spawning Pool */ = {
+			isa = PBXGroup;
+			children = (
+				38F2ED7A2E55C4130092A90E /* EventSpawningPool.swift */,
+				38F2ED7D2E55C5690092A90E /* PeopleSpawningPool.swift */,
+				381E1C032E5748EF000E2955 /* PeopleSpawningPoolExtension.swift */,
+				381E1C052E574B44000E2955 /* PaymentSpawningPool.swift */,
+				381E1C072E57529F000E2955 /* PaymentSpawningPoolExtension.swift */,
+			);
+			path = "Spawning Pool";
+			sourceTree = "<group>";
+		};
 		38F44CC92364978400215B1C /* Payment */ = {
 			isa = PBXGroup;
 			children = (
@@ -1567,6 +1605,8 @@
 				38D96ED523E31BE000C03170 /* MCBitwiseStuff.m */,
 				386E05C82767AE7B005FDD89 /* NSManagedObjectContextExtension.swift */,
 				385BC9752C4D16C00020EF64 /* LoggerExtension.swift */,
+				381080FB2E4381290064187F /* NSExceptionExtension.swift */,
+				38D5817B2E4B82C000B88BA9 /* NSDecimalNumberExtension.swift */,
 			);
 			path = Miscellaneous;
 			sourceTree = "<group>";
@@ -2139,9 +2179,13 @@
 			inputFileListPaths = (
 				"${PODS_ROOT}/Target Support Files/Pods-We all pay/Pods-We all pay-frameworks-${CONFIGURATION}-input-files.xcfilelist",
 			);
+			inputPaths = (
+			);
 			name = "[CP] Embed Pods Frameworks";
 			outputFileListPaths = (
 				"${PODS_ROOT}/Target Support Files/Pods-We all pay/Pods-We all pay-frameworks-${CONFIGURATION}-output-files.xcfilelist",
+			);
+			outputPaths = (
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 			shellPath = /bin/sh;
@@ -2156,9 +2200,13 @@
 			inputFileListPaths = (
 				"${PODS_ROOT}/Target Support Files/Pods-We all pay/Pods-We all pay-resources-${CONFIGURATION}-input-files.xcfilelist",
 			);
+			inputPaths = (
+			);
 			name = "[CP] Copy Pods Resources";
 			outputFileListPaths = (
 				"${PODS_ROOT}/Target Support Files/Pods-We all pay/Pods-We all pay-resources-${CONFIGURATION}-output-files.xcfilelist",
+			);
+			outputPaths = (
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 			shellPath = /bin/sh;
@@ -2281,6 +2329,7 @@
 				387270882C4F94CE0003B399 /* MCPaymentExtension.swift in Sources */,
 				385295D11C105C580081894D /* CategoryPictureStoreController.swift in Sources */,
 				386FC32518E5855400428294 /* MCSharedBillMainViewController.m in Sources */,
+				381080FC2E4381290064187F /* NSExceptionExtension.swift in Sources */,
 				38977E611B2A367E008484A4 /* MCPaymentTableViewCell.swift in Sources */,
 				386E05C92767AE7B005FDD89 /* NSManagedObjectContextExtension.swift in Sources */,
 				38687808237217B3003D40A9 /* TextInputValidator.swift in Sources */,
@@ -2294,7 +2343,6 @@
 				3829AD0F178B41320025969D /* WeAllPayStore.xcdatamodeld in Sources */,
 				384EC90E1BC2F35700A80799 /* SelectCurrencyTableViewCell_iPad.swift in Sources */,
 				38BEA791275E228B00D05D8B /* EventModel.swift in Sources */,
-				38DB85D717E45CA4006237CF /* MCSharedBill+addons.m in Sources */,
 				38986C9C2C382EC100C612E7 /* WeAllPayStoreController.swift in Sources */,
 				386EB43323C723BE00FB20B9 /* AdEngine.swift in Sources */,
 				38977E4D1B2A2591008484A4 /* MCSelectCategoryTableViewCell_iPhone.swift in Sources */,
@@ -2341,10 +2389,12 @@
 				3892E3A417903EF00038894B /* MCEditTripViewController.m in Sources */,
 				3868780623721751003D40A9 /* EmailTextInputValidator.swift in Sources */,
 				387E79CF26F48EDC00C2A424 /* MCPurchaseTableViewCell.m in Sources */,
+				3828D6F42C58C8760007FE31 /* MCSharedBillExtension.swift in Sources */,
 				38D177131C3A85C00084604C /* SelectCurrencyTableViewController.swift in Sources */,
 				3813150926CBA1BA00C27CBB /* MCNotificationsCountTableViewCell.m in Sources */,
 				3825A82419990BA400A8885D /* UIViewController+WeAllPayStore.m in Sources */,
 				389DE8F7197FB2B900169645 /* MCPaymentPresence.m in Sources */,
+				38D5817C2E4B82C000B88BA9 /* NSDecimalNumberExtension.swift in Sources */,
 				3892E3AA17904A240038894B /* MCPersonViewController.m in Sources */,
 				389ACFE12374A1E60025139F /* EmailTextInputPicker.swift in Sources */,
 				383486B62C4188080078E72E /* WeAllPayStore4to5.xcmappingmodel in Sources */,
@@ -2374,6 +2424,8 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				38F2ED7B2E55C4130092A90E /* EventSpawningPool.swift in Sources */,
+				38B013852C60AE3A00A0A38A /* MCPaymentPresenceExtension.swift in Sources */,
 				389DE909197FC5E900169645 /* MCExchangeRateTest.m in Sources */,
 				3860575519EEB28300BD5B78 /* MCCategoryPictureStoreTest.m in Sources */,
 				385F530F191C2D140012773D /* MCPaymentPresenceTest.m in Sources */,
@@ -2382,24 +2434,34 @@
 				3843805F2C455A030075AFC6 /* MCPersonExtension.swift in Sources */,
 				382F34422C3F2626007DDF71 /* WeAllPayStoreController.swift in Sources */,
 				382F34452C3F2652007DDF71 /* PersonModel.swift in Sources */,
+				381A59162C5F642F006E3572 /* SolutionModel.swift in Sources */,
 				388DA6512C5268DC000C993C /* CurrencyModel.swift in Sources */,
 				382F34432C3F2648007DDF71 /* EventModel.swift in Sources */,
 				385F5310191C2D140012773D /* MCPaymentAddonsTest.m in Sources */,
 				38D34D07279FE3F5004AA290 /* SolutionReturnPaymentItem.swift in Sources */,
 				383765D32C46977C008F340A /* MCPerson+TestHelper.m in Sources */,
 				385F5311191C2D140012773D /* MCPersonAddonsTest.m in Sources */,
+				381E1C082E57529F000E2955 /* PaymentSpawningPoolExtension.swift in Sources */,
 				389DE910197FD6DF00169645 /* MCCurrencyTest.m in Sources */,
+				381A59172C5F6786006E3572 /* TableViewSectionModel.swift in Sources */,
 				385BC9772C4D1A110020EF64 /* LoggerExtension.swift in Sources */,
 				382F34492C3F2833007DDF71 /* SequenceExtension.swift in Sources */,
 				388A326E1C10965D00F7459C /* CategoryPictureObject.swift in Sources */,
+				381A59152C5EAF6E006E3572 /* MCSharedBillExtension.swift in Sources */,
 				388A326F1C10966000F7459C /* CategoryPictureStoreController.swift in Sources */,
+				38F2ED792E55C2080092A90E /* EventModelTest.swift in Sources */,
+				381E1C042E5748EF000E2955 /* PeopleSpawningPoolExtension.swift in Sources */,
 				385F5312191C2D140012773D /* MCSharedBillAddOnsTest.m in Sources */,
 				382F34482C3F2698007DDF71 /* CurrencyFormatter.swift in Sources */,
 				382F34462C3F2657007DDF71 /* PaymentModel.swift in Sources */,
 				382F34442C3F264D007DDF71 /* EventsModel.swift in Sources */,
+				38F2ED772E55BFDC0092A90E /* ExchangeRateFetcherForMCExchangeRate.swift in Sources */,
+				38F2ED7E2E55C5690092A90E /* PeopleSpawningPool.swift in Sources */,
 				384A22882C4016F6004060BD /* MCExchangeRateStatus.swift in Sources */,
+				381A591A2C5F6C37006E3572 /* MCSharedBill+TestHelper.m in Sources */,
 				388410C22C3FD52C00EC23D9 /* WeAllPayStore.xcdatamodeld in Sources */,
 				385F5313191C2D140012773D /* WeAllPayStoreTests.m in Sources */,
+				381E1C062E574B44000E2955 /* PaymentSpawningPool.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

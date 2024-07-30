@@ -36,6 +36,10 @@ import UIKit
         super.init()
     }
     
+    public func currency(code: String) -> Currency? {
+        currencies.first(where: { $0.code == code })
+    }
+    
     // MARK: NSObject
     
     @objc convenience public override init() {

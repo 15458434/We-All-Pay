@@ -12,6 +12,7 @@ import CurrencyConverter
 
 @objc(MCEventTableViewCell) final class EventTableViewCell: UITableViewCell {
     @objc private var model: EventModel!
+    @objc private var solutionModel: SolutionModel!
     
     @IBOutlet var waitingForXRatesIndicator: UIActivityIndicatorView!
     @IBOutlet var tripLabel: UILabel!
@@ -27,6 +28,7 @@ import CurrencyConverter
     
     @objc func prepareForUse(with event: MCSharedBill) {
         self.model.prepareForUse(with: event, currencyModel: CurrencyModel(managedObjectContext: event.managedObjectContext!, currencyController: CurrencyController()))
+        self.solutionModel.prepareForUse(eventModel: model)
         self.nameObservation = self.observe(\.model.event!.tripName, options: [.initial, .new], changeHandler: { mySelf, change in
             guard let newValue = change.newValue else {
                 return
@@ -61,15 +63,20 @@ import CurrencyConverter
             .combineLatest(paymentsPublisher)
             .sink { [unowned self] mainCurrency, payments in
                 let totalAmountOfMoneyInMainCurrency = payments?.totalSumOfMoneyInMainCurrency
-                let event = self.model.event!
-                if event.areAllExchangeRatesValid() {
-                    self.totalCostLabel.isHidden = false
-                    self.waitingForXRatesIndicator.stopAnimating()
-                    self.totalCostLabel.text = self.model.mainCurrencyFormatter.string(for: totalAmountOfMoneyInMainCurrency)
-                } else {
-                    self.totalCostLabel.text = self.model.mainCurrencyFormatter.string(for: totalAmountOfMoneyInMainCurrency)
-                    self.totalCostLabel.isHidden = true
-                    self.waitingForXRatesIndicator.startAnimating()
+                let solutionModel = self.solutionModel!
+                do {
+                    let areAllExchangeRatesValid = try solutionModel.areAllExchangeRatesValid()
+                    if areAllExchangeRatesValid.boolValue {
+                        self.totalCostLabel.isHidden = false
+                        self.waitingForXRatesIndicator.stopAnimating()
+                        self.totalCostLabel.text = self.model.mainCurrencyFormatter.string(for: totalAmountOfMoneyInMainCurrency)
+                    } else {
+                        self.totalCostLabel.text = self.model.mainCurrencyFormatter.string(for: totalAmountOfMoneyInMainCurrency)
+                        self.totalCostLabel.isHidden = true
+                        self.waitingForXRatesIndicator.startAnimating()
+                    }
+                } catch {
+                    
                 }
             }.store(in: &bag)
     }
@@ -93,6 +100,7 @@ import CurrencyConverter
     
     override func awakeFromNib() {
         self.model = EventModel()
+        self.solutionModel = SolutionModel()
         
         tripLabel.backgroundColor = .clear
         totalCostLabel.backgroundColor = .clear

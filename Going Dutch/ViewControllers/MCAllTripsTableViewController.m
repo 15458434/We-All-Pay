@@ -226,7 +226,7 @@ static void * notificationCountContext = &notificationCountContext;
     
     if (!_model.fetchEventsController) {
         NSManagedObjectContext *managedObjectContext = WeAllPayStoreController.defaultStore.viewContext;
-        [_model prepareForUseWithManagedObjectContext:managedObjectContext forDelegate:self];
+        [_model prepareForUseWithManagedObjectContext:managedObjectContext andFetchedResultsControllerdDelegate:self];
         [[self tableView] reloadData];
         [self setEmptyMessageWithDuration:0.0];
     }
@@ -261,7 +261,7 @@ static void * notificationCountContext = &notificationCountContext;
         MCCurrencyModel *currencyModel = [[MCCurrencyModel alloc] initWithManagedObjectContext:newEvent.managedObjectContext andWithCurrencyController:[[CurrencyController alloc] init]];
         MCEventModel *eventModel = [[MCEventModel alloc] initWithEvent:newEvent andConcurrencyModel:currencyModel];
         MCSharedBillMainViewController *destination = (MCSharedBillMainViewController *)segue.destinationViewController;
-        [destination prepareForUseWithEventModel:eventModel];
+        [destination prepareForUseWithEventModel:eventModel andEventsModel:_model];
         destination.currentView = MCSelectEditTripTableView;
     } else if ([segue.identifier isEqualToString:@"openTonightsBill"]) {
         _isATonightsBillOpened = MCTonightsBillStatusOpened;
@@ -271,7 +271,7 @@ static void * notificationCountContext = &notificationCountContext;
         MCCurrencyModel *currencyModel = [[MCCurrencyModel alloc] initWithManagedObjectContext:selectedEvent.managedObjectContext andWithCurrencyController:[[CurrencyController alloc] init]];
         MCEventModel *model = [[MCEventModel alloc] initWithEvent:selectedEvent andConcurrencyModel:currencyModel];
         MCSharedBillMainViewController *destination = (MCSharedBillMainViewController *)segue.destinationViewController;
-        [destination prepareForUseWithEventModel:model];
+        [destination prepareForUseWithEventModel:model andEventsModel:_model];
         destination.currentView = MCSelectSharedBillTableView;
     } else if ([segue.identifier isEqualToString:@"selectMainCurrency"]) {
         MCSharedBill *event = _model.fetchEventsController.fetchedObjects[_selectedIndexPathForAction.row];
@@ -295,7 +295,7 @@ static void * notificationCountContext = &notificationCountContext;
         MCCurrencyModel *currencyModel = [[MCCurrencyModel alloc] initWithManagedObjectContext:event.managedObjectContext andWithCurrencyController:[[CurrencyController alloc] init]];
         MCEventModel *model = [[MCEventModel alloc] initWithEvent:event andConcurrencyModel:currencyModel];
         MCSharedBillMainViewController *destination = (MCSharedBillMainViewController *)segue.destinationViewController;
-        [destination prepareForUseWithEventModel:model];
+        [destination prepareForUseWithEventModel:model andEventsModel:_model];
         _pathComponents = nil;
     }
 }

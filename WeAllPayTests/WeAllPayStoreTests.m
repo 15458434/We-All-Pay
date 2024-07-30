@@ -14,12 +14,14 @@
 #import "MCPayment+CoreDataProperties.h"
 #import "MCSharedBill+addons.h"
 #import "MCEmailAddress+CoreDataProperties.h"
+#import "MCSharedBill+TestHelper.h"
 
 #import "We_all_pay_Tests-Swift.h"
 
 @interface WeAllPayStoreTests : XCTestCase
 
 @property (nonatomic, strong) NSManagedObjectContext *context;
+@property (nonatomic, strong) MCEventsModel *eventsModel;
 
 @end
 
@@ -29,6 +31,7 @@
     [super setUp];
     [WeAllPayStoreController.defaultStore openStoreOfType:NSInMemoryStoreType];
     _context = WeAllPayStoreController.defaultStore.viewContext;
+    _eventsModel = [[MCEventsModel alloc] initWithManagedObjectContext:_context andFetchedResultsControllerdDelegate:nil];
 }
 
 - (void)tearDown
@@ -61,7 +64,7 @@
 
 - (void)testPersonExistenceOnSharedBill
 {
-    MCSharedBill *event = [[MCSharedBill alloc] initWithContext:_context];
+    MCSharedBill *event = [_eventsModel addEvent];
     MCCurrencyModel *currencyModel = [[MCCurrencyModel alloc] initWithManagedObjectContext:_context andWithCurrencyController:[[CurrencyController alloc] init]];
     MCEventModel *eventModel = [[MCEventModel alloc] initWithEvent:event andConcurrencyModel:currencyModel];
     MCPerson *mark = [eventModel addPerson];
@@ -88,7 +91,7 @@
 
 - (void)testGetPeopleOnSharedBill
 {
-    MCSharedBill *event = [[MCSharedBill alloc] initWithContext:_context];
+    MCSharedBill *event = [_eventsModel addEvent];
     MCCurrencyModel *currencyModel = [[MCCurrencyModel alloc] initWithManagedObjectContext:_context andWithCurrencyController:[[CurrencyController alloc] init]];
     MCEventModel *eventModel = [[MCEventModel alloc] initWithEvent:event andConcurrencyModel:currencyModel];
     NSArray *peoplePresentOnEvent = eventModel.peoplePresentOnEvent;
@@ -105,7 +108,7 @@
     [thisPerson3 setFirstName:@"Iva"];
     peoplePresentOnEvent = eventModel.peoplePresentOnEvent;
     XCTAssertTrue([peoplePresentOnEvent count] == 3, @"Aantal mensen op the shared Bill klopt niet.");
-    [MCSharedBill deleteSharedbill:event];
+    [_eventsModel deleteWithEvent:event];
     
     // Disconnect the eventModel from the event.
     [eventModel reset];

@@ -41,6 +41,7 @@ final class PaymentViewController: MCGenericAdBannerTableViewController, AdBanne
     @IBOutlet weak var presenceListLabel: UILabel!
     
     @IBOutlet var model: PaymentModel!
+    var eventModel: EventModel!
     
     // MARK: Properties
     var didSomethingChange: DidSomethingChange?
@@ -87,25 +88,27 @@ final class PaymentViewController: MCGenericAdBannerTableViewController, AdBanne
     
     @objc(prepareForUseWithPathComponentsToOpen:) func prepareForUse(with pathComponentsToOpen: [NSManagedObject]) {
         let event = pathComponentsToOpen[0] as! MCSharedBill
-        let eventModel = EventModel(event: event, currencyModel: CurrencyModel(managedObjectContext: event.managedObjectContext!, currencyController: CurrencyController()))
+        self.eventModel = EventModel(event: event, currencyModel: CurrencyModel(managedObjectContext: event.managedObjectContext!, currencyController: CurrencyController()))
         self.prepareForUse(with: eventModel)
         let predefinedPayingPerson = pathComponentsToOpen[1] as! MCPerson
         model.update(payingPerson: predefinedPayingPerson)
     }
      
     @objc(prepareForUseWithEventModel:) func prepareForUse(with eventModel: EventModel) {
+        self.eventModel = eventModel
         WeAllPayStoreController.defaultStore.beginUndoGroup()
         let newPayment = eventModel.addPayment()
         title = NSLocalizedString("payment_view_mainLabel_new_payment", value: "New payment", comment: "Header in the paymentView which state new Payment")
         isNew = .isNew
-        model.prepareForUse(with: newPayment)
+        model.prepareForUse(with: newPayment, fromEventOf: eventModel)
     }
     
-    @objc(prepareForUseWithPayment:) func prepareForUse(with payment: MCPayment) {
+    @objc(prepareForUseWithPayment:fromEventOfEventModel:) func prepareForUse(with payment: MCPayment, fromEventOf eventModel: EventModel) {
+        self.eventModel = eventModel
         WeAllPayStoreController.defaultStore.beginUndoGroup()
         title = NSLocalizedString("payment_view_mainLabel_edit_payment", value: "Payment", comment: "Header in the paymentView which states payment")
         isNew = .isNotNew
-        model.prepareForUse(with: payment)
+        model.prepareForUse(with: payment, fromEventOf: eventModel)
     }
     
     // MARK: DismissKeyboardProtocol
@@ -339,8 +342,7 @@ final class PaymentViewController: MCGenericAdBannerTableViewController, AdBanne
         switch (segue.identifier) {
         case let identifier where identifier == "selectPayer_iPad":
             let destination = segue.destination as! SelectPayerTableViewController_iPad
-            destination.tonightsBill = model.payment.onWhichBill
-            destination.thisPayment = model.payment
+            destination.prepareForUse(eventModel: eventModel, paymentModel: model)
         case let identifier where identifier == "openSelectCurrency_iPad":
             WeAllPayStoreController.defaultStore.beginUndoGroupWithoutRegistration()
             let destination = segue.destination as! SelectCurrencyTableViewController
@@ -353,7 +355,7 @@ final class PaymentViewController: MCGenericAdBannerTableViewController, AdBanne
             }
         case let identifier where identifier == "selectCategory_iPad":
             let destination = segue.destination as! SelectCategoryTableViewController
-            destination.prepareForUse(with: model.payment)
+            destination.prepareForUse(with: model.payment, fromEventOf: eventModel)
             
             destination.dismissMe = {
                 destination.dismiss(animated: true)

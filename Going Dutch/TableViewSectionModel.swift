@@ -8,7 +8,7 @@
 
 import UIKit
 
-@objc(MCTableViewSectionItemsModel) class TableViewSectionItemsModel: NSObject, Comparable {
+@objc class TableViewSectionItemsModel: NSObject, Comparable {
     @objc(MCTableViewSectionItemsModelKind) enum Kind: Int, Comparable {
         case none = -1
         case solution = 0
@@ -107,7 +107,7 @@ final class TotalSpentSectionItemsModel: TableViewSectionItemsModel {
     }
 }
 
-class TableViewSectionModel: NSObject {
+@objc class TableViewSectionModel: NSObject {
     @objc dynamic var sections: [TableViewSectionItemsModel] = [TableViewSectionItemsModel]()
     
     @objc convenience init(sections: [TableViewSectionItemsModel]) {
@@ -143,7 +143,7 @@ class TableViewSectionModel: NSObject {
     }
 }
 
-class ShadowTableViewSectionModel: TableViewSectionModel {
+@objc class ShadowTableViewSectionModel: TableViewSectionModel {
     private var shadowSections: [TableViewSectionItemsModel] = [TableViewSectionItemsModel]()
     
     @objc var isShowing: Bool = false {

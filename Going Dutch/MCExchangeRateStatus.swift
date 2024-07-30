@@ -12,4 +12,13 @@ import Foundation
     case valid
     case invalid
     case fetching
+    
+    init?(number: NSNumber) {
+        let rawValue = Int16(exactly: number.intValue)
+        self.init(rawValue: rawValue ?? Int16(NSNotFound))
+    }
+    
+    var number: NSNumber {
+        NSNumber(value: self.rawValue)
+    }
 }
