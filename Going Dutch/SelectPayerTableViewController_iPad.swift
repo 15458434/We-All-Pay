@@ -52,7 +52,7 @@ final class SelectPayerTableViewController_iPad: UITableViewController {
     
     override func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
         let payingPerson = people[indexPath.row]
-        payingPerson.addPaymentsObject(paymentModel.payment)
+        payingPerson.addToPayments(paymentModel.payment)
         paymentModel.payment.payingPerson = payingPerson
         self.presentingViewController!.dismiss(animated: true)
     }

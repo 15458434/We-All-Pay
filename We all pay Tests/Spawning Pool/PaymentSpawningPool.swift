@@ -6,9 +6,10 @@
 //  Copyright © 2025 Mark Cornelisse. All rights reserved.
 //
 
-import UIKit
+@testable import We_all_pay;
+@testable import CurrencyConverter;
 
-import CurrencyConverter
+import UIKit
 
 final class PaymentSpawningPool: NSObject {
     let eventModel: EventModel

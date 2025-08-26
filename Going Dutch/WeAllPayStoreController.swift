@@ -16,10 +16,10 @@ fileprivate let WeAllPayStoreDirectoryName = "WeAllPayStore/StoreContent"
 fileprivate let WeAllPayStoreModelName = "WeAllPayStore"
 
 final class WeAllPayStoreController: NSObject {
-    let logger = Logger(category: "WeAllPayStoreController")
+    private let logger = Logger(category: String(reflecting: type(of: WeAllPayStoreController.self)))
     @objc dynamic private(set) var error: NSError!
     
-    private var container: NSPersistentContainer!
+    private(set) var container: NSPersistentContainer!
     
     private var _fetcher: ExchangeRateFetcher!
     @objc var fetcher: ExchangeRateFetcher {
@@ -76,10 +76,12 @@ final class WeAllPayStoreController: NSObject {
     }
     #else
     @objc func openStore() {
+        logger.trace(#function)
         openStore(of: NSSQLiteStoreType)
     }
     
     @objc(openStoreOfType:) func openStore(of type: String) {
+        logger.trace(#function)
         if container != nil {
             return
         }
@@ -114,6 +116,13 @@ final class WeAllPayStoreController: NSObject {
         self.viewContext.undoManager = UndoManager()
         self.viewContext.undoManager!.disableUndoRegistration()
         self.viewContext.automaticallyMergesChangesFromParent = true
+        logger.info("MCSharedBill: \(self.container.managedObjectModel.entitiesByName["MCSharedBill"])")
+        logger.info("MCPerson: \(self.container.managedObjectModel.entitiesByName["MCPerson"])")
+        logger.info("MCEmailAddress: \(self.container.managedObjectModel.entitiesByName["MCEmailAddress"])")
+        logger.info("MCPayment: \(self.container.managedObjectModel.entitiesByName["MCPayment"])")
+        logger.info("MCExchangeRate: \(self.container.managedObjectModel.entitiesByName["MCExchangeRate"])")
+        logger.info("MCCurrency: \(self.container.managedObjectModel.entitiesByName["MCCurrency"])")
+        logger.info("MCPaymentPresence: \(self.container.managedObjectModel.entitiesByName["MCPaymentPresence"])")
     }
     #endif
     

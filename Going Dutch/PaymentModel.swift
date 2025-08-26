@@ -88,21 +88,23 @@ import FirebaseCrashlytics
         fetcher.exchangeRate(payment.exchangeRate!.fromCurrency!.code!, toCode: payment.exchangeRate!.toCurrency!.code!) { [weak self] fromCode, toCode, exchangeRate, error in
             guard error == nil else {
                 completionHandler(error!)
-                self?.payment.exchangeRate!.status = MCExchangeRateStatus.invalid.rawValue as NSNumber
+                self?.payment.exchangeRate!.status = MCExchangeRateStatus.invalid.number
                 return
             }
-            self?.payment.exchangeRate?.exchangeRate = exchangeRate
-            self?.payment.exchangeRate!.status = MCExchangeRateStatus.valid.rawValue as NSNumber
+            let payment = self!.payment as MCPayment
+            let exchangeRateOnPayment = payment.exchangeRate! as MCExchangeRate
+            exchangeRateOnPayment.exchangeRate = exchangeRate
+            payment.exchangeRate!.status = MCExchangeRateStatus.valid.rawValue as NSNumber
         }
     }
     
     @objc(updatePayingPerson:) func update(payingPerson: MCPerson?) {
         if let payingPerson = payingPerson {
-            payingPerson.addPaymentsObject(payment)
+            payingPerson.addToPayments(payment)
             payment.payingPerson = payingPerson
         } else {
             let personToBeRemoved = payment.payingPerson
-            personToBeRemoved?.removePaymentsObject(payment)
+            personToBeRemoved?.removeFromPayments(payment)
             payment.payingPerson = nil
         }
         updateDateModified()
@@ -163,6 +165,7 @@ import FirebaseCrashlytics
         let now = Date()
         let averagePayedByPeoplePresent = payment.averageAmountPeopleShouldHavePaidOnThisPayment
         payment.peopleSharingPayment?.forEach({ paymentPresence in
+            let paymentPresence = paymentPresence as! MCPaymentPresence
             if paymentPresence.isPersonPresent?.boolValue ?? false {
                 paymentPresence.averageOweFromPayment = averagePayedByPeoplePresent as NSNumber
             } else {

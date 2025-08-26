@@ -109,11 +109,14 @@ import CurrencyConverter
         let allNamesOfPeoplePresent: [String]
         if #available(iOS 15.0, *) {
             let sortDescriptor: SortDescriptor<MCPerson> = SortDescriptor(\.dateCreated, order: .forward)
-            allNamesOfPeoplePresent = event.peoplePresent?.sorted(using: sortDescriptor).map { $0.name } ?? [String]()
+            allNamesOfPeoplePresent = event.peoplePresent?
+                .map({ $0 as! MCPerson })
+                .sorted(using: sortDescriptor).map { $0.name } ?? [String]()
         } else {
-            allNamesOfPeoplePresent = event.peoplePresent?.sorted(by: {
-                return $0.dateCreated!.compare($1.dateCreated!) == .orderedDescending
-            }).map { $0.name } ?? [String]()
+            allNamesOfPeoplePresent = event.peoplePresent?
+                .map({ $0 as! MCPerson })
+                .sorted(by: { $0.dateCreated!.compare($1.dateCreated!) == .orderedDescending })
+                .map { $0.name } ?? [String]()
         }
         
         if allNamesOfPeoplePresent.count == 0 {
@@ -190,10 +193,10 @@ import CurrencyConverter
     
     @objc(peoplePresentOrderedByAmountPaidInAscendingOrder:) func peoplePresentOrderedByAmountPaid(inAscendingOrder ascending: Bool) -> [MCPerson] {
         logger.trace(#function)
-        let people: Set<MCPerson> = event.peoplePresent ?? []
+        let people: Set<MCPerson> = (event.peoplePresent as? Set<MCPerson>) ?? Set<MCPerson>()
         let result = people.sorted {
-            let value1 = $0.totalSumPaid as! NSDecimalNumber
-            let value2 = $1.totalSumPaid as! NSDecimalNumber
+            let value1 = $0.totalSumPaid!
+            let value2 = $1.totalSumPaid!
             return ascending ? value1.compare(value2) == .orderedAscending : value1.compare(value2) == .orderedDescending
         }
         return result
@@ -240,9 +243,11 @@ import CurrencyConverter
     @objc func addPerson() -> MCPerson {
         let context = event.managedObjectContext!
         let person = MCPerson(context: context)
-        event.payments?.forEach({ addPaymentPresence(on: $0, person: person, was: false) })
-        person.addSharedBillObject(event)
-        event.addPeoplePresentObject(person)
+        event.payments?
+            .map { $0 as! MCPayment }
+            .forEach({ addPaymentPresence(on: $0, person: person, was: false) })
+        person.addToSharedBill(event)
+        event.addToPeoplePresent(person)
         return person
     }
     
@@ -256,12 +261,12 @@ import CurrencyConverter
         let paymentPresence = MCPaymentPresence(context: context)
         
         paymentPresence.person = person
-        person.addSharingPaymentObject(paymentPresence)
+        person.addToSharingPayment(paymentPresence)
         
         paymentPresence.isPersonPresent = isPresent as NSNumber
         
         paymentPresence.payment = payment
-        payment.addPeopleSharingPaymentObject(paymentPresence)
+        payment.addToPeopleSharingPayment(paymentPresence)
     }
     
     @objc(fetchPersonWithUniqueID:withError:) func person(with uniquePersonID: String) throws -> MCPerson {
@@ -283,12 +288,14 @@ import CurrencyConverter
     
     @objc(deletePerson:) func delete(person: MCPerson) {
         let context = event.managedObjectContext!
-        person.sharingPayment?.forEach({ paymentPresence in
-            let payment = paymentPresence.payment!
-            context.delete(paymentPresence)
-            let paymentModel = PaymentModel(with: payment, fromEventOf: self)
-            paymentModel.recalculateAveragePeopleOweAndStore()
-        })
+        person.sharingPayment?
+            .map { $0 as! MCPaymentPresence }
+            .forEach({ paymentPresence in
+                let payment = paymentPresence.payment!
+                context.delete(paymentPresence)
+                let paymentModel = PaymentModel(with: payment, fromEventOf: self)
+                paymentModel.recalculateAveragePeopleOweAndStore()
+            })
         context.delete(person)
     }
     
@@ -296,7 +303,7 @@ import CurrencyConverter
         logger.debug("addPayment on \(self.event)")
         let context = event.managedObjectContext!
         let payment = MCPayment(context: context)
-        self.event.addPaymentsObject(payment)
+        self.event.addToPayments(payment)
         payment.onWhichBill = self.event
         do {
             let currency = try currencyModel.generateCurrencyFromSelectedLocale()
@@ -307,18 +314,20 @@ import CurrencyConverter
         }
         let exchangeRate = addExchangeRate(for: payment)
         exchangeRate.source = "Payment Creation"
-        self.event.peoplePresent?.forEach({ person in
+        let peoplePresent = self.event.peoplePresent as? Set<MCPerson>
+        peoplePresent?.forEach({ person in
+            let person = person as! MCPerson
             let paymentPresence = MCPaymentPresence(context: context)
             
             paymentPresence.payment = payment
-            payment.addPeopleSharingPaymentObject(paymentPresence)
+            payment.addToPeopleSharingPayment(paymentPresence)
             
             paymentPresence.person = person
-            person.addSharingPaymentObject(paymentPresence)
+            person.addToSharingPayment(paymentPresence)
         })
         
         payment.exchangeRate!.toCurrency = event.mainCurrency
-        event.mainCurrency!.addExchangeRate(toCurrencyObject: payment.exchangeRate!)
+        event.mainCurrency!.addToExchangeRateToCurrency(payment.exchangeRate!)
         
         return payment
     }
@@ -331,10 +340,10 @@ import CurrencyConverter
         exchangeRate.payment = payment
         
         exchangeRate.toCurrency = payment.onWhichBill!.mainCurrency
-        payment.onWhichBill!.mainCurrency?.addExchangeRate(toCurrencyObject: exchangeRate)
+        payment.onWhichBill!.mainCurrency?.addToExchangeRateToCurrency(exchangeRate)
         
         exchangeRate.fromCurrency = payment.currency
-        payment.currency?.addExchangeRate(fromCurrencyObject: exchangeRate)
+        payment.currency?.addToExchangeRateFromCurrency(exchangeRate)
         
         return exchangeRate
     }
@@ -531,6 +540,7 @@ import CurrencyConverter
         }
         // First delete the people presence on payment data.
         payment.peopleSharingPayment?.forEach({ paymentPresence in
+            let paymentPresence = paymentPresence as! MCPaymentPresence
             event.managedObjectContext!.delete(paymentPresence)
         })
         // Then delete the payment.

@@ -62,6 +62,7 @@ import CurrencyConverter
         self.publisher(for: \.model!.mainCurrencyFormatter, options: [.initial, .new])
             .combineLatest(paymentsPublisher)
             .sink { [unowned self] mainCurrency, payments in
+                let payments = payments as? Set<MCPayment>
                 let totalAmountOfMoneyInMainCurrency = payments?.totalSumOfMoneyInMainCurrency
                 let solutionModel = self.solutionModel!
                 do {

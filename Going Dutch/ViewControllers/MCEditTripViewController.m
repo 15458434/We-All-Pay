@@ -14,10 +14,6 @@
 #import "MCSharedBillPageViewController.h"
 #import "UIViewController+WeAllPayStore.h"
 
-#import "MCPerson+CoreDataProperties.h"
-#import "MCSharedBill+addons.h"
-#import "MCCurrency+CoreDataProperties.h"
-
 #import "We_all_pay-Swift.h"
 
 static void * isEditingToggleContext = &isEditingToggleContext;

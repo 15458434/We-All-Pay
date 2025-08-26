@@ -13,10 +13,6 @@
 #import "MCAllTripsTableViewController.h"
 #import "MCPaymentViewController.h"
 
-#import "MCSharedBill+addons.h"
-#import "MCPerson+CoreDataProperties.h"
-#import "MCPayment+CoreDataProperties.h"
-
 #import "UIColor+ColorSpawn.h"
 
 #import "We_all_pay-Swift.h"

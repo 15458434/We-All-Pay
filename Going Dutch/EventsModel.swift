@@ -70,14 +70,19 @@ import CurrencyConverter
     
     func delete(event: MCSharedBill) {
         event.payments?.forEach({ payment in
+            let payment = payment as! MCPayment
             payment.peopleSharingPayment?.forEach({ paymentPresence in
+                let paymentPresence = paymentPresence as! MCPaymentPresence
                 managedObjectContext.delete(paymentPresence)
             })
             managedObjectContext.delete(payment)
         })
         
         event.peoplePresent?.forEach({ person in
-            person.emailAddress?.forEach({ emailAddress in
+            let person = person as! MCPerson
+            let emailAddresses = person.emailAddress as? Set<MCEmailAddress>
+            emailAddresses?.forEach({ emailAddress in
+                let emailAddress = emailAddress
                 managedObjectContext.delete(emailAddress)
             })
             managedObjectContext.delete(person)
@@ -87,7 +92,10 @@ import CurrencyConverter
     }
     
     @objc(deleteIfStillNewEvent:) func deleteIfStillNew(event: MCSharedBill) {
-        if (event.tripName?.isEmpty ?? true) && (event.payments?.isEmpty ?? true) && (event.peoplePresent?.isEmpty ?? true) {
+        let tripName = event.tripName
+        let payments = event.payments as? Set<MCPayment>
+        let peoplePresent = event.peoplePresent as? Set<MCPerson>
+        if (tripName?.isEmpty ?? true) && (payments?.isEmpty ?? true) && (peoplePresent?.isEmpty ?? true) {
             self.delete(event: event)
         }
     }

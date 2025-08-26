@@ -83,7 +83,7 @@ import UIKit
     private func addEmailAddress() -> MCEmailAddress {
         let new = MCEmailAddress(context: self.person.managedObjectContext!)
         new.owner = person
-        person.addEmailAddressObject(new)
+        person.addToEmailAddress(new)
         return new
     }
     
@@ -164,7 +164,7 @@ import UIKit
     
     @objc(deleteEmailAddress:) func delete(_ emailAddress: MCEmailAddress) {
         if emailAddress.selected?.boolValue ?? false {
-            let newDefault = person.emailAddress?.first(where: { $0.selected == NSNumber(value: false)
+            let newDefault = (person.emailAddress as? Set<MCEmailAddress>)?.first(where: { $0.selected == NSNumber(value: false)
             })
             newDefault?.selected = NSNumber(value: true)
         } 
@@ -177,15 +177,16 @@ import UIKit
     
     private func internalDelete(_ emailAddress: MCEmailAddress) {
         emailAddress.owner = nil
-        if let emailAdresses = person.emailAddress {
+        if let emailAdresses = person.emailAddress as? Set<MCEmailAddress> {
             let emailAddressesWithoutEmailAddress = emailAdresses.filter { $0.objectID != emailAddress.objectID }
-            person.emailAddress = emailAddressesWithoutEmailAddress
+            person.emailAddress = emailAddressesWithoutEmailAddress as NSSet
         }
         person.managedObjectContext?.delete(emailAddress)
     }
     
     func endUpdates() {
         person.sharedBill?.forEach({ event in
+            let event = event as! MCSharedBill
             let mutableSet = event.mutableSetValue(forKey: "peoplePresent")
             mutableSet.add(person!)
         })

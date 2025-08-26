@@ -6,9 +6,10 @@
 //  Copyright © 2025 Mark Cornelisse. All rights reserved.
 //
 
-import Foundation
+@testable import We_all_pay;
+@testable import CurrencyConverter;
 
-import CurrencyConverter
+import Foundation
 
 extension PaymentSpawningPool {
     func dinner(selectPayer: MCPerson?, selectCurrencyCode: String? = nil, money: NSNumber?) -> MCPayment {

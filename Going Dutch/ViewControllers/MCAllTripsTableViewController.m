@@ -18,13 +18,11 @@
 
 #import "MCBadgeButton.h"
 
-#import "MCSharedBill+addons.h"
-#import "MCPerson+CoreDataProperties.h"
-#import "MCCurrency+CoreDataProperties.h"
-
 #import "MCEditorType.h"
 
 #import "UIViewController+WeAllPayStore.h"
+
+#import "We_all_pay-Swift.h"
 
 typedef NS_ENUM(BOOL, MCTonightsBillStatus) {
     MCTonightsBillStatusClosed,

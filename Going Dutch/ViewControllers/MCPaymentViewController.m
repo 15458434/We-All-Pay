@@ -11,11 +11,6 @@
 #import "MCPaymentViewController.h"
 #import "MCPaymentPresenceTableViewCell_iPhone.h"
 
-#import "MCPayment+CoreDataProperties.h"
-#import "MCPerson+CoreDataProperties.h"
-#import "MCSharedBill+addons.h"
-#import "MCPaymentPresence+CoreDataProperties.h"
-
 #import "MCDismissMeBlockProtocol.h"
 
 #import "We_all_pay-Swift.h"

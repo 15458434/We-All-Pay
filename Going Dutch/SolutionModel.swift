@@ -129,7 +129,8 @@ import CurrencyConverter
     
     @objc(doesEveryoneHaveAnEmailAddress) var doesEveryoneHaveAnEmailAddress: Bool {
         let result = eventModel.event.peoplePresent?.reduce(true, { partialResult, person in
-            person.hasEmailAddress
+            let person = person as! MCPerson
+            return person.hasEmailAddress
         }) ?? true
         return result
     }
@@ -239,7 +240,8 @@ import CurrencyConverter
         var whoHasToPayWho: [SolutionReturnPaymentItem] = []
         
         let sortDescriptors = [SortDescriptor(\MCPerson.dateCreated, order: .forward)]
-        let people = eventModel.event.peoplePresent?.sorted(using: sortDescriptors) ?? [MCPerson]()
+        let setOfPeople = eventModel.event.peoplePresent as? Set<MCPerson>
+        let people = setOfPeople?.sorted(using: sortDescriptors) ?? [MCPerson]()
         
         // Update the database to the current version.
         eventModel.event.updatePaymentForSupportWithPaymentPresence()

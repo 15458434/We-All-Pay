@@ -39,20 +39,20 @@ extension MCPerson  {
     }
     
     @objc(hasEmailAddress) var hasEmailAddress: Bool {
-        guard let emailAddress else {
+        guard let emailAddress = emailAddress as? Set<MCEmailAddress> else {
             return false
         }
         if emailAddress.isEmpty {
             return false
         } else {
-            let amountOfDeleteEmailAddresses = emailAddress.reduce(0) { partialResult, emailAddress in
+            let amountOfDeletedEmailAddresses = emailAddress.reduce(0) { partialResult, emailAddress in
                 if emailAddress.isDeleted {
                     return partialResult + 1
                 } else {
                     return partialResult
                 }
             }
-            return amountOfDeleteEmailAddresses != emailAddress.count
+            return amountOfDeletedEmailAddresses != emailAddress.count
         }
     }
     
@@ -71,9 +71,10 @@ extension MCPerson  {
         return defaultEmailAddresses.first
     }
     
-    @objc(totalSumPaid) var totalSumPaid: NSNumber? {
+    @objc(totalSumPaid) var totalSumPaid: NSDecimalNumber? {
         let result: NSDecimalNumber? = self.payments?
             .reduce(NSDecimalNumber.zero) { (partialResult, payment) -> NSDecimalNumber in
+                let payment = payment as! MCPayment
                 let partialValue = partialResult.decimalValue
                 let value = payment.moneyInMainCurrency.decimalValue
                 let resultValue = partialValue + value

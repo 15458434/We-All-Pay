@@ -6,6 +6,8 @@
 //  Copyright © 2025 Mark Cornelisse. All rights reserved.
 //
 
+@testable import We_all_pay;
+
 import UIKit
 
 final class PeopleSpawningPool: NSObject {

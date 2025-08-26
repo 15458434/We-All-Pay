@@ -10,10 +10,6 @@
 
 #import "MCPersonViewController.h"
 
-#import "MCPerson+CoreDataProperties.h"
-#import "MCSharedBill+addons.h"
-#import "MCEmailAddress+CoreDataProperties.h"
-
 #import "MCTools.h"
 
 @interface MCPersonViewController () <NSFetchedResultsControllerDelegate>

@@ -13,10 +13,6 @@
 #import "MCEditTripViewController.h"
 #import "MCReturnPaymentViewController.h"
 
-#import "MCSharedBill+addons.h"
-#import "MCPerson+CoreDataProperties.h"
-#import "MCPayment+CoreDataProperties.h"
-
 #import "We_all_pay-Swift.h"
 
 #import "MCCurrentViewDelegate.h"

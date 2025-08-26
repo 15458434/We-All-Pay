@@ -8,10 +8,6 @@
 
 #import "MCPaymentPresenceTableViewCell_iPhone.h"
 
-#import "MCPaymentPresence+CoreDataProperties.h"
-#import "MCPayment+CoreDataProperties.h"
-#import "MCPerson+CoreDataProperties.h"
-
 #import "We_all_pay-Swift.h"
 
 static void * AverageOweFromPaymentContext = &AverageOweFromPaymentContext;

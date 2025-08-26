@@ -33,26 +33,6 @@
             ignoreCount = "0"
             continueAfterRunningActions = "No"
             breakpointStackSelectionBehavior = "1">
-            <Locations>
-               <Location
-                  uuid = "938FC593-EBD9-440A-8F66-576DFB23F7EB - 461ae959105c4af4"
-                  shouldBeEnabled = "Yes"
-                  ignoreCount = "0"
-                  continueAfterRunningActions = "No"
-                  symbolName = "_XCTFailureBreakpoint"
-                  moduleName = "XCTestCore"
-                  usesParentBreakpointCondition = "Yes">
-               </Location>
-               <Location
-                  uuid = "938FC593-EBD9-440A-8F66-576DFB23F7EB - a8fcaf08e5397936"
-                  shouldBeEnabled = "Yes"
-                  ignoreCount = "0"
-                  continueAfterRunningActions = "No"
-                  symbolName = "Testing.failureBreakpoint() -&gt; ()"
-                  moduleName = "Testing"
-                  usesParentBreakpointCondition = "Yes">
-               </Location>
-            </Locations>
          </BreakpointContent>
       </BreakpointProxy>
    </Breakpoints>

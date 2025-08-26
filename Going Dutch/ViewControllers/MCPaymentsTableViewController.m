@@ -12,10 +12,6 @@
 #import "MCPaymentsTableViewController.h"
 #import "UIViewController+WeAllPayStore.h"
 
-#import "MCSharedBill+addons.h"
-#import "MCPerson+CoreDataProperties.h"
-#import "MCPayment+CoreDataProperties.h"
-
 #import "MCAllTripsTableViewController.h"
 #import "MCEditTripViewController.h"
 #import "MCPaymentViewController.h"

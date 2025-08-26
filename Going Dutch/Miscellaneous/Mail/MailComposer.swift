@@ -23,7 +23,10 @@ enum MailComposerError: Error {
 
 extension MailComposer where Self: ThisEventReadOnly {
     func mailAdresses() throws -> [String] {
-        let allPeople = Array(event.peoplePresent ?? Set<MCPerson>())
+        guard let peoplePresent = event.peoplePresent as? Set<MCPerson> else {
+            return [String]()
+        }
+        let allPeople = Array(peoplePresent)
         var listOfMailAddresses = [String]()
         for person in allPeople {
             if let emailAddress = person.defaultEmailAddress {
@@ -46,9 +49,10 @@ extension MailComposer where Self: ThisEventReadOnly {
         Crashlytics.crashlytics().log("************** start mail body **************")
         Crashlytics.crashlytics().log("\(String(describing: event))")
         Crashlytics.crashlytics().log("  \(String(describing: event.mainCurrency))")
-        event.peoplePresent?.enumerated().forEach { (index, person) in
+        (event.peoplePresent as? Set<MCPerson>)?.enumerated().forEach { (index, person) in
             Crashlytics.crashlytics().log("  index \(index): \(person)")
-            person.emailAddress?.enumerated().forEach { (index, emailAddress) in
+            
+            (person.emailAddress as? Set<MCEmailAddress>)?.enumerated().forEach { (index, emailAddress) in
                 Crashlytics.crashlytics().log("    index \(index): \(emailAddress)")
             }
 //            person.sharingPayment?.enumerated().forEach { (index, presence) in
@@ -68,8 +72,8 @@ extension MailComposer where Self: ThisEventReadOnly {
         
         let solution = try solutionModel.originalSolveWhoHasToPayWhoFromThisBill()
 //        let sortDescriptorOnDateCreated = NSSortDescriptor(key: "dateCreated", ascending: true)
-        let allPayments = Array(event.payments ?? Set<MCPayment>())
-        let allPeople = Array(event.peoplePresent ?? Set<MCPerson>())
+        let allPayments = Array((event.payments as? Set<MCPayment>) ?? Set<MCPayment>())
+        let allPeople = Array((event.peoplePresent as? Set<MCPerson>) ?? Set<MCPerson>())
         
         var mailBody = String()
         mailBody += "https://itunes.apple.com/us/app/we-all-pay/id642135963?mt=8&uo=4\n\n"
