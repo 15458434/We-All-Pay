@@ -3269,7 +3269,7 @@
 				CODE_SIGN_IDENTITY = "iPhone Developer";
 				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer";
 				"CODE_SIGN_IDENTITY[sdk=macosx*]" = "Mac Developer";
-				CURRENT_PROJECT_VERSION = 170;
+				CURRENT_PROJECT_VERSION = 171;
 				DEVELOPMENT_TEAM = Z6JP26PUUY;
 				ENABLE_TESTING_SEARCH_PATHS = YES;
 				EXCLUDED_ARCHS = "$(inherited)";
@@ -3339,7 +3339,7 @@
 				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer";
 				"CODE_SIGN_IDENTITY[sdk=macosx*]" = "Mac Developer";
 				COPY_PHASE_STRIP = NO;
-				CURRENT_PROJECT_VERSION = 170;
+				CURRENT_PROJECT_VERSION = 171;
 				DEVELOPMENT_TEAM = Z6JP26PUUY;
 				ENABLE_TESTING_SEARCH_PATHS = YES;
 				EXCLUDED_ARCHS = "$(inherited)";
@@ -3569,7 +3569,7 @@
 				CODE_SIGN_IDENTITY = "iPhone Developer";
 				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer";
 				"CODE_SIGN_IDENTITY[sdk=macosx*]" = "Mac Developer";
-				CURRENT_PROJECT_VERSION = 170;
+				CURRENT_PROJECT_VERSION = 171;
 				DEVELOPMENT_TEAM = Z6JP26PUUY;
 				ENABLE_TESTING_SEARCH_PATHS = YES;
 				EXCLUDED_ARCHS = "$(inherited)";
@@ -3688,7 +3688,7 @@
 				CODE_SIGN_IDENTITY = "iPhone Developer";
 				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer";
 				"CODE_SIGN_IDENTITY[sdk=macosx*]" = "Mac Developer";
-				CURRENT_PROJECT_VERSION = 170;
+				CURRENT_PROJECT_VERSION = 171;
 				DEFINES_MODULE = YES;
 				DEVELOPMENT_TEAM = Z6JP26PUUY;
 				ENABLE_MODULE_VERIFIER = YES;
@@ -4405,7 +4405,7 @@
 				CODE_SIGN_IDENTITY = "iPhone Developer";
 				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer";
 				"CODE_SIGN_IDENTITY[sdk=macosx*]" = "Mac Developer";
-				CURRENT_PROJECT_VERSION = 170;
+				CURRENT_PROJECT_VERSION = 171;
 				DEFINES_MODULE = YES;
 				DEVELOPMENT_TEAM = Z6JP26PUUY;
 				ENABLE_MODULE_VERIFIER = YES;
@@ -4462,7 +4462,7 @@
 				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer";
 				"CODE_SIGN_IDENTITY[sdk=macosx*]" = "Mac Developer";
 				COPY_PHASE_STRIP = NO;
-				CURRENT_PROJECT_VERSION = 170;
+				CURRENT_PROJECT_VERSION = 171;
 				DEFINES_MODULE = YES;
 				DEVELOPMENT_TEAM = Z6JP26PUUY;
 				ENABLE_MODULE_VERIFIER = YES;
@@ -4899,7 +4899,7 @@
 				CODE_SIGN_IDENTITY = "iPhone Developer";
 				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer";
 				"CODE_SIGN_IDENTITY[sdk=macosx*]" = "Mac Developer";
-				CURRENT_PROJECT_VERSION = 170;
+				CURRENT_PROJECT_VERSION = 171;
 				DEVELOPMENT_TEAM = Z6JP26PUUY;
 				ENABLE_TESTING_SEARCH_PATHS = YES;
 				EXCLUDED_ARCHS = "$(inherited)";
@@ -5028,7 +5028,7 @@
 				CODE_SIGN_IDENTITY = "iPhone Developer";
 				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer";
 				"CODE_SIGN_IDENTITY[sdk=macosx*]" = "Mac Developer";
-				CURRENT_PROJECT_VERSION = 170;
+				CURRENT_PROJECT_VERSION = 171;
 				DEFINES_MODULE = YES;
 				DEVELOPMENT_TEAM = Z6JP26PUUY;
 				ENABLE_MODULE_VERIFIER = YES;
