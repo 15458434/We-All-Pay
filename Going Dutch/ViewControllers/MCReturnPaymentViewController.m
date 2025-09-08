@@ -13,9 +13,6 @@
 #import "MCPaymentsTableViewController.h"
 #import "MCSharedBillPageViewController.h"
 
-#import "MCCurrency+addons.h"
-#import "MCSharedBill+addons.h"
-#import "MCPerson+addons.h"
 #import "MCBitwiseStuff.h"
 
 #import "We_all_pay-Swift.h"
@@ -57,15 +54,15 @@ static void * sectionsContext = &sectionsContext;
 
 }
 
-- (void)updateEvent:(MCSharedBill *)event andSendMailDelegate:(MCSharedBillPageViewController *)sendMailDelegate {
-    [_model prepareForUseWith:event];
+- (void)updateEventModel:(MCEventModel *)eventModel andSendMailDelegate:(MCSharedBillPageViewController *)sendMailDelegate {
+    [_model prepareForUseWith:eventModel];
     self.sendMailObject = sendMailDelegate;
 }
 
 #pragma mark - Private in this class
 
 - (void)shareBill:(id)sender {
-    if ([self.model.event doesEveryoneHaveAnEmailAddress]) {
+    if (self.model.doesEveryoneHaveAnEmailAddress) {
         [self openMailView:sender];
     } else {
         NSString *title = NSLocalizedStringWithDefaultValue(@"solution_view_alert_title_missing_email_address", nil, NSBundle.mainBundle, @"Unable to send email to all people.", @"Title of an alert shown to the user in case not everyone on the event has an email address.");
@@ -112,7 +109,7 @@ static void * sectionsContext = &sectionsContext;
     [_emptyMessage.activityIndicator startAnimating];
     
     __weak typeof(self) weakSelf = self;
-    [_model.event solveWithHandler:^(NSArray *results, NSError *error) {
+    [_model solveWithHandler:^(NSArray *results, NSError *error) {
         NSParameterAssert([NSThread isMainThread]);
         if (error) {
 #ifdef DEBUG
@@ -207,7 +204,7 @@ static void * sectionsContext = &sectionsContext;
 
 - (void)tableView:(UITableView *)tableView willDisplayCell:(UITableViewCell *)cell forRowAtIndexPath:(NSIndexPath *)indexPath {
     NSInteger section = indexPath.section;
-    MCTableViewSectionItemsModel *sectionModel = _model.sections[section];
+    TableViewSectionItemsModel *sectionModel = _model.sections[section];
     switch (sectionModel.sortIndex) {
         case MCTableViewSectionItemsModelKindSolution: {
             MCWhoOwesWhoTableViewCell *solutionCell = (MCWhoOwesWhoTableViewCell *)cell;
@@ -255,7 +252,7 @@ static void * sectionsContext = &sectionsContext;
 #pragma mark - UITableViewDataSource
 
 - (NSString *)tableView:(UITableView *)tableView titleForHeaderInSection:(NSInteger)section {
-    MCTableViewSectionItemsModel *sectionModel = _model.sections[section];
+    TableViewSectionItemsModel *sectionModel = _model.sections[section];
     return sectionModel.title;
 }
 
@@ -265,7 +262,7 @@ static void * sectionsContext = &sectionsContext;
 }
 
 - (NSInteger)tableView:(UITableView *)tableView numberOfRowsInSection:(NSInteger)section {
-    MCTableViewSectionItemsModel *sectionModel = _model.sections[section];
+    TableViewSectionItemsModel *sectionModel = _model.sections[section];
     NSInteger count = sectionModel.items.count;
     if (sectionModel.sortIndex == MCTableViewSectionItemsModelKindTotalSpent) {
         count++;
@@ -274,7 +271,7 @@ static void * sectionsContext = &sectionsContext;
 }
 
 - (UITableViewCell *)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath {
-    MCTableViewSectionItemsModel *sectionModel = _model.sections[indexPath.section];
+    TableViewSectionItemsModel *sectionModel = _model.sections[indexPath.section];
     switch (sectionModel.sortIndex) {
         case MCTableViewSectionItemsModelKindSolution: {
             MCWhoOwesWhoTableViewCell *cell = [tableView dequeueReusableCellWithIdentifier:@"MCWhoOwesWhoTableViewCell_iPhone"];

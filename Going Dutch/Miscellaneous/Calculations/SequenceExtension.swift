@@ -10,8 +10,8 @@ import Foundation
 
 extension Sequence where Element: MCPayment {
     var totalSumOfMoneyInMainCurrency: NSDecimalNumber {
-        let result =  self.reduce(NSDecimalNumber(value: 0)) { partialResult, payment in
-            let moneyInMainCurrencyDecimal = NSDecimalNumber(decimal: payment.moneyInMainCurrency().decimalValue)
+        let result = self.reduce(NSDecimalNumber(value: 0)) { partialResult, payment in
+            let moneyInMainCurrencyDecimal = NSDecimalNumber(decimal: payment.moneyInMainCurrency.decimalValue)
             let result = partialResult.adding(moneyInMainCurrencyDecimal)
             return result
         }

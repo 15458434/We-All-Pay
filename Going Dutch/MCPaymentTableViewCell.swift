@@ -39,7 +39,7 @@ final class MCPaymentTableViewCell: UITableViewCell {
                     return
                 }
                 
-                self.namePayerLabel.text = newValue.getFullName()
+                self.namePayerLabel.text = newValue.fullName
             })
             self.descriptionOfPaymentObservation = self.observe(\.payment.descriptionOfPayment, options: [.initial, .new], changeHandler: { mySelf, change in
                 guard let newValue = change.newValue as? String else {

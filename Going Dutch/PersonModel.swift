@@ -15,6 +15,11 @@ import UIKit
     private(set) var defaultEmailAddressFetchedResultsController: NSFetchedResultsController<MCEmailAddress>!
     private var changeHandler: ((_ person: MCPerson) -> ())?
     
+    @objc(initWithPerson:) convenience init(with person: MCPerson) {
+        self.init()
+        prepareForUse(withPerson: person)
+    }
+    
     @objc(prepareForUseWithPerson:andFetchedResultsControllerDelegate:andChangeHandler:) func prepareForUse(withPerson person: MCPerson, andFetchedResultsControllerDelegate fetchedResultsControllerDelegate: NSFetchedResultsControllerDelegate, andChangeHandler changeHandler:@escaping ((_ person: MCPerson) -> ())) {
         self.person = person
         createPersonFetchedResultsController(for: fetchedResultsControllerDelegate)
@@ -65,22 +70,54 @@ import UIKit
     }
     
     var indexOfDefaultEmailAddress: Int {
-        guard let defaultEmailAddressObject = person.getDefaultEmailAddressObject() else {
-            return -1
+        guard let defaultEmailAddressObject = person.defaultEmailAddressObject else {
+            return NSNotFound
         }
-        return emailaddresses.firstIndex(of: defaultEmailAddressObject) ?? -1
+        return emailaddresses.firstIndex(of: defaultEmailAddressObject) ?? NSNotFound
     }
-    
-    var fullName: String {
-        person.getFullName()
-    }
-    
-    var areAllExchangeRatesPresent: Bool {
-        person.hasPersonMadePaymentWithInvalidExchangeRates()
-    }
-    
+
     func beginUpdates() {
         person.managedObjectContext!.undoManager!.beginUndoGrouping()
+    }
+    
+    private func addEmailAddress() -> MCEmailAddress {
+        let new = MCEmailAddress(context: self.person.managedObjectContext!)
+        new.owner = person
+        person.addToEmailAddress(new)
+        return new
+    }
+    
+    @objc(addOneEmailAddressFromAString:) func add(emailAddress newEmailAddress: String) {
+        let request = MCEmailAddress.fetchRequest()
+        request.sortDescriptors = [NSSortDescriptor(keyPath: \MCEmailAddress.emailAddress, ascending: true)]
+        request.predicate = NSPredicate(format: "emailAddress = %@ AND owner = %@", newEmailAddress, person)
+        
+        do {
+            let amountOfEqualEmailAddresses = try person.managedObjectContext?.count(for: request)
+            if amountOfEqualEmailAddresses == 0 {
+                let newEmailObject = addEmailAddress()
+                
+                newEmailObject.selected = NSNumber(value: (person.emailAddress!.count == 1))
+                newEmailObject.emailAddress = newEmailAddress
+                let now = Date()
+                newEmailObject.dateModified = now
+                person.dateModified = now
+            }
+        } catch {
+            print("something went wrong in the search for equal email addresses")
+        }
+    }
+    
+    @objc(addNewDefaultEmailAddressFromAString:) func add(defaultEmailAddress newDefaultEmailAddress: String) {
+        let now = Date()
+        if let oldDefaultEmailAddress = self.defaultEmailaddress {
+            oldDefaultEmailAddress.selected = NSNumber(value: false)
+            oldDefaultEmailAddress.dateModified = now
+        }
+        let newEmailAddress = addEmailAddress()
+        newEmailAddress.selected = NSNumber(value: true)
+        newEmailAddress.emailAddress = newDefaultEmailAddress
+        person.dateModified = now
     }
     
     @objc(updateFirstName:) func update(firstName: String?) {
@@ -109,19 +146,47 @@ import UIKit
             defaultEmailAddressObject.emailAddress = defaultEmailAddress
             defaultEmailAddressObject.dateModified = nu
         } else {
-            person.addOneEmailAddress(fromAString: defaultEmailAddress)
+            self.add(emailAddress: defaultEmailAddress)
         }
         person.dateModified = nu
     }
     
     @objc(updateDefaultEmailAddressObject:) public func update(default newEmailaddress: MCEmailAddress) {
         // TODO: Write test function for this test.
-        person.setNewDefaultEmailaddressObject(newEmailaddress)
+        let previousDefaultEmailAddressObject = person.defaultEmailAddressObject
+        previousDefaultEmailAddressObject?.selected = NSNumber(value: false)
+        newEmailaddress.selected = NSNumber(value: true)
+        let now = Date()
+        newEmailaddress.dateModified = now
+        previousDefaultEmailAddressObject?.dateModified = now
         self.changeHandler?(self.person)
+    }
+    
+    @objc(deleteEmailAddress:) func delete(_ emailAddress: MCEmailAddress) {
+        if emailAddress.selected?.boolValue ?? false {
+            let newDefault = (person.emailAddress as? Set<MCEmailAddress>)?.first(where: { $0.selected == NSNumber(value: false)
+            })
+            newDefault?.selected = NSNumber(value: true)
+        } 
+        internalDelete(emailAddress)
+    }
+    
+    @objc(deleteAllEmailAddresses) func deleteAllEmailAddresses() {
+        self.emailaddresses.forEach { internalDelete($0) }
+    }
+    
+    private func internalDelete(_ emailAddress: MCEmailAddress) {
+        emailAddress.owner = nil
+        if let emailAdresses = person.emailAddress as? Set<MCEmailAddress> {
+            let emailAddressesWithoutEmailAddress = emailAdresses.filter { $0.objectID != emailAddress.objectID }
+            person.emailAddress = emailAddressesWithoutEmailAddress as NSSet
+        }
+        person.managedObjectContext?.delete(emailAddress)
     }
     
     func endUpdates() {
         person.sharedBill?.forEach({ event in
+            let event = event as! MCSharedBill
             let mutableSet = event.mutableSetValue(forKey: "peoplePresent")
             mutableSet.add(person!)
         })

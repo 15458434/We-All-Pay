@@ -14,10 +14,6 @@
 #import "MCSharedBillPageViewController.h"
 #import "UIViewController+WeAllPayStore.h"
 
-#import "MCPerson+addons.h"
-#import "MCSharedBill+addons.h"
-#import "MCCurrency+addons.h"
-
 #import "We_all_pay-Swift.h"
 
 static void * isEditingToggleContext = &isEditingToggleContext;
@@ -107,13 +103,13 @@ static void * isEditingToggleContext = &isEditingToggleContext;
     _eventModel.event.tripName = _eventNameTextField.text;
     NSDate *now = [NSDate date];
     _eventModel.event.dateModified = now;
-    [MCWeAllPayStoreController.defaultStore saveViewContext];
+    [WeAllPayStoreController.defaultStore saveViewContext];
     if (!_didSomethingChange) {
         _didSomethingChange = YES;
     }
     MCPerson *nextPayer = _eventModel.nextPayer;
 
-    WhoPayingUserDefaultsStoreInterface *groupStore = [[WhoPayingUserDefaultsStoreInterface alloc] initWithTonightsBillUUID:_eventModel.event.uniqueBillId tripName:_eventModel.event.tripName nextPayerUUID:nextPayer.uniquePersonId fullNameOfNextPayer:[nextPayer getFullName]];
+    WhoPayingUserDefaultsStoreInterface *groupStore = [[WhoPayingUserDefaultsStoreInterface alloc] initWithTonightsBillUUID:_eventModel.event.uniqueBillId tripName:_eventModel.event.tripName nextPayerUUID:nextPayer.uniquePersonId fullNameOfNextPayer:nextPayer.fullName];
     [groupStore storeToDefaults];
     [[NCWidgetController widgetController] setHasContent:YES forWidgetWithBundleIdentifier:[WhoPayingUserDefaultsStoreInterface MCWhoIsPayingNextBundleIdentifier]];
 }
@@ -174,7 +170,13 @@ static void * isEditingToggleContext = &isEditingToggleContext;
 - (BOOL)tableView:(UITableView *)tableView canEditRowAtIndexPath:(NSIndexPath *)indexPath {
     if ([[self tableView] isEditing]) {
         MCPerson *person = [_fetchedResultsController objectAtIndexPath:indexPath];
-        return ![_eventModel hasPersonPaidSometingWithPerson:person];
+        NSError *hasPersonPaidSomethingError;
+        NSNumber *hasPersonPaidSomething = [_eventModel hasPersonPaidSomething:person withError:&hasPersonPaidSomethingError];
+        if (hasPersonPaidSomethingError) {
+            NSException *exception = [NSException exceptionWithError:hasPersonPaidSomethingError];
+            @throw exception;
+        }
+        return !hasPersonPaidSomething.boolValue;
     } else {
         return NO;
     }
@@ -184,7 +186,7 @@ static void * isEditingToggleContext = &isEditingToggleContext;
     if (editingStyle == UITableViewCellEditingStyleDelete) {
         MCPerson *poorSucker = [_fetchedResultsController objectAtIndexPath:indexPath];
         [_eventModel deletePerson:poorSucker];
-        [MCWeAllPayStoreController.defaultStore saveViewContext];
+        [WeAllPayStoreController.defaultStore saveViewContext];
         _didSomethingChange = YES;
     }
 }
@@ -287,12 +289,12 @@ static void * isEditingToggleContext = &isEditingToggleContext;
         destination.isAdBannerEnabled = YES;
         NSIndexPath *indexPathOfSelectedRow = [[self tableView] indexPathForSelectedRow];
         MCPerson *thePerson = [_fetchedResultsController objectAtIndexPath:indexPathOfSelectedRow];
-        [MCWeAllPayStoreController.defaultStore beginUndoGroup];
+        [WeAllPayStoreController.defaultStore beginUndoGroup];
         if (!thePerson) {
             // No person present create a new one.
             thePerson = [_eventModel addPerson];
-            [thePerson setThumbnailDataFromImage:nil];
-            [thePerson setPictureDataFromImage:nil];
+            thePerson.thumbnail = nil;
+            thePerson.picture = nil;
             [destination updateWithPerson:thePerson];
             destination.isNew = YES;
         } else {

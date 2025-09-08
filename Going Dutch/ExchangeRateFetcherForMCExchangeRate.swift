@@ -15,7 +15,7 @@ extension ExchangeRateFetcher {
             let fromCode = exchangeRate.fromCurrency!.code!
             let toCode = exchangeRate.toCurrency!.code!
             let newExchangeRate = calculateExchangeRate(fromCode, toCode: toCode)
-            exchangeRate.exchangeRate = NSNumber(value: newExchangeRate)
+            exchangeRate.exchangeRate = newExchangeRate
             exchangeRate.status = NSNumber(value: MCExchangeRateStatus.valid.rawValue)
         }
     }

@@ -13,8 +13,6 @@
 
 #import "MCSharedBillPageViewController.h"
 
-#import "MCSharedBill+addons.h"
-
 #import "We_all_pay-Swift.h"
 
 static void * isEditingToggleContext = &isEditingToggleContext;
@@ -22,6 +20,7 @@ static void * isEditingToggleContext = &isEditingToggleContext;
 @interface MCSharedBillMainViewController ()
 
 @property (strong, nonatomic) MCSharedBillPageViewController *pageViewController;
+@property (weak, nonatomic) MCEventsModel *eventsModel;
 @property (strong, nonatomic) IBOutlet MCEventModel *eventModel;
 @property (strong, nonatomic) IBOutlet MCToggleModel *isEditingModel;
 
@@ -35,12 +34,14 @@ static void * isEditingToggleContext = &isEditingToggleContext;
 @implementation MCSharedBillMainViewController
 
 - (void)updateEventWithObjectID:(NSManagedObjectID *)objectID {
-    NSManagedObjectContext *managedObjectContext = MCWeAllPayStoreController.defaultStore.viewContext;
+    NSManagedObjectContext *managedObjectContext = WeAllPayStoreController.defaultStore.viewContext;
     MCSharedBill *event = [managedObjectContext objectWithID:objectID];
-    _eventModel = [[MCEventModel alloc] initWithEvent:event];
+    MCCurrencyModel *currencyModel = [[MCCurrencyModel alloc] initWithManagedObjectContext:managedObjectContext andWithCurrencyController:[[CurrencyController alloc] init]];
+    _eventModel = [[MCEventModel alloc] initWithEvent:event andConcurrencyModel:currencyModel];
 }
 
-- (void)prepareForUseWithEventModel:(MCEventModel *)model {
+- (void)prepareForUseWithEventModel:(MCEventModel *)model andEventsModel:(MCEventsModel *)eventsModel {
+    _eventsModel = eventsModel;
     _eventModel = model;
 }
 
@@ -209,8 +210,8 @@ static void * isEditingToggleContext = &isEditingToggleContext;
     if (!parent) {
         // Parent is null when back button is pressed in navigationbar
         [self.view endEditing:YES];
-        [_eventModel deleteIfStillNew];
-        [[MCWeAllPayStoreController defaultStore] saveViewContext];
+        [_eventsModel deleteIfStillNewEvent:_eventModel.event];
+        [[WeAllPayStoreController defaultStore] saveViewContext];
     }
 }
 

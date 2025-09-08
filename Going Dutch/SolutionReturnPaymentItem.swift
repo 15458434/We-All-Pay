@@ -11,9 +11,9 @@ import Foundation
 @objc(MCReturnPayment) final class SolutionReturnPaymentItem: NSObject {
     @objc let payer: MCPerson?
     @objc let receiver: MCPerson?
-    @objc let money: NSNumber?
+    @objc let money: NSDecimalNumber?
     
-    @objc init(payer: MCPerson?, money: NSNumber?, receiver: MCPerson?) {
+    @objc init(payer: MCPerson?, money: NSDecimalNumber?, receiver: MCPerson?) {
         self.payer = payer
         self.receiver = receiver
         self.money = money

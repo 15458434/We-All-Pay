@@ -7,13 +7,6 @@
 //
 
 #pragma mark - Model
-#import "MCSharedBill+addons.h"
-#import "MCPayment+addons.h"
-#import "MCPerson+addons.h"
-#import "MCCurrency+addons.h"
-#import "MCExchangeRate+addons.h"
-#import "MCPaymentPresence+addons.h"
-#import "MCEmailAddress+addons.h"
 
 #pragma mark - Protocols
 #import "MCTonightsBillTransfer.h"

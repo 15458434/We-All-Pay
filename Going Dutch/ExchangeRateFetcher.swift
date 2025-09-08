@@ -7,8 +7,10 @@
 //
 
 import UIKit
+import os
 
 @objc public final class ExchangeRateFetcher: NSObject {
+    private let logger = Logger(category: String(reflecting: type(of: ExchangeRateFetcher.self)))
     @objc public let currencyController: CurrencyController
     public private(set) var baseCurrencyCode: String!
     public private(set) var rates: Dictionary<String, Double>!
@@ -29,35 +31,36 @@ import UIKit
         
         let now = Date()
         let intervalSinceLastFetch = now.timeIntervalSince(self.date)
-        if intervalSinceLastFetch >= 3600.0 {
-            return true
-        } else {
-            return false
-        }
+        return (intervalSinceLastFetch >= 3600.0)
     }
     
-    public func calculateExchangeRate(_ fromCode: String, toCode: String) -> Double {
-        let fromToBaseRate = rates[fromCode]!
-        let toToBaseRate = rates[toCode]!
-        return toToBaseRate / fromToBaseRate
+    public func calculateExchangeRate(_ fromCode: String, toCode: String) -> NSDecimalNumber {
+        logger.trace(#function)
+        let fromToBaseRate = NSDecimalNumber(value: rates[fromCode]!)
+        let toToBaseRate = NSDecimalNumber(value: rates[toCode]!)
+        let result = toToBaseRate.dividing(by: fromToBaseRate)
+        logger.debug("fromToBaseRate: \(fromToBaseRate) divided by toToBaseRate: \(toToBaseRate) equals: \(result)")
+        return result
     }
     
-    @objc public func exchangeRate(_ fromCode: String, toCode: String, completionHandler: @escaping (_ fromCode: String, _ toCode: String, _ exchangeRate: NSNumber?, _ error: NSError?) -> ()) {
+    public func exchangeRate(_ fromCode: String, toCode: String, completionHandler: @escaping (_ fromCode: String, _ toCode: String, _ exchangeRate: NSDecimalNumber?, _ error: NSError?) -> ()) {
         let thisOperationQueue = OperationQueue.current!
         if isLastFetchOlderThanAnHour {
             fetchFromOpenExchangeRates({ (baseCurrency, rates, error) -> () in
-                if error != nil {
-                    completionHandler(fromCode, toCode, nil, error)
+                guard error == nil else {
+                    thisOperationQueue.addOperation {
+                        completionHandler(fromCode, toCode, nil, error)
+                    }
                     return
                 }
                 let exchangeRate = self.calculateExchangeRate(fromCode, toCode: toCode)
                 thisOperationQueue.addOperation({ () -> Void in
-                    completionHandler(fromCode, toCode, exchangeRate as NSNumber?, nil)
+                    completionHandler(fromCode, toCode, exchangeRate, nil)
                 })
             })
         } else {
             let rate = calculateExchangeRate(fromCode, toCode: toCode)
-            completionHandler(fromCode, toCode, rate as NSNumber?, nil)
+            completionHandler(fromCode, toCode, rate, nil)
         }
     }
     

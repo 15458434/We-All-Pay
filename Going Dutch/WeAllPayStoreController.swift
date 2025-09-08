@@ -8,17 +8,18 @@
 
 import Foundation
 import CoreData
+import os
 import CurrencyConverter
 
 fileprivate let WeAllPayStoreFileName = "persistentStore"
 fileprivate let WeAllPayStoreDirectoryName = "WeAllPayStore/StoreContent"
 fileprivate let WeAllPayStoreModelName = "WeAllPayStore"
 
-@objc(MCWeAllPayStoreController) final class WeAllPayStoreController: NSObject {
-    
+final class WeAllPayStoreController: NSObject {
+    private let logger = Logger(category: String(reflecting: type(of: WeAllPayStoreController.self)))
     @objc dynamic private(set) var error: NSError!
     
-    private var container: NSPersistentContainer!
+    private(set) var container: NSPersistentContainer!
     
     private var _fetcher: ExchangeRateFetcher!
     @objc var fetcher: ExchangeRateFetcher {
@@ -52,7 +53,7 @@ fileprivate let WeAllPayStoreModelName = "WeAllPayStore"
     func openStore(completionHandler: ((_ store: WeAllPayStoreController, _ success: Bool) -> ())?) {
         if self.container == nil {
             container = NSPersistentContainer(name: WeAllPayStoreModelName)
-            let weAllPayStoreURL = URL(string: "/dev/null")
+            let weAllPayStoreURL = URL(string: "/dev/null")!
             let storeDescription = NSPersistentStoreDescription(url: weAllPayStoreURL)
             storeDescription.type = NSInMemoryStoreType
             storeDescription.setOption(NSNumber(value: true), forKey: NSPersistentStoreRemoteChangeNotificationPostOptionKey)
@@ -75,29 +76,53 @@ fileprivate let WeAllPayStoreModelName = "WeAllPayStore"
     }
     #else
     @objc func openStore() {
-        if container == nil {
-            container = NSPersistentContainer(name: WeAllPayStoreModelName)
-            let storeDescription = NSPersistentStoreDescription(url: weAllPayStoreURL)
-            storeDescription.setOption(NSNumber(value: true), forKey: NSPersistentStoreRemoteChangeNotificationPostOptionKey)
-            storeDescription.setOption(NSNumber(value: true), forKey: NSInferMappingModelAutomaticallyOption)
-            storeDescription.setOption(NSNumber(value: true), forKey: NSMigratePersistentStoresAutomaticallyOption)
-            // NSPersistentHistoryTrackingKey is needed to Core Data to be able to store on iPadOS. Test on iPad Pro 13-inch (M4) (17.5) Simulator.
-            storeDescription.setOption(NSNumber(value: true), forKey: NSPersistentHistoryTrackingKey)
-            container.persistentStoreDescriptions = [storeDescription]
-            container.loadPersistentStores { storeDescription, error in
-                guard error == nil else {
-                    debugPrint("Unresolved error: \(String(describing: error))")
-                    DispatchQueue.main.async {
-                        self.error = error! as NSError
-                    }
-                    fatalError("This shouldn't happen.")
-                }
-            }
-            self.viewContext.retainsRegisteredObjects = true
-            self.viewContext.undoManager = UndoManager()
-            self.viewContext.undoManager!.disableUndoRegistration()
-            self.viewContext.automaticallyMergesChangesFromParent = true
+        logger.trace(#function)
+        openStore(of: NSSQLiteStoreType)
+    }
+    
+    @objc(openStoreOfType:) func openStore(of type: String) {
+        logger.trace(#function)
+        if container != nil {
+            return
         }
+        guard type == NSSQLiteStoreType || type == NSInMemoryStoreType else {
+            fatalError("Only NSSQLiteStoreType or NSInMemoryStoreType are supported")
+        }
+        container = NSPersistentContainer(name: WeAllPayStoreModelName)
+        let weAllPayStoreURL: URL
+        if type == NSInMemoryStoreType {
+            weAllPayStoreURL = URL(string: "/dev/null")!
+        } else {
+            weAllPayStoreURL = self.weAllPayStoreURL
+        }
+        let storeDescription = NSPersistentStoreDescription(url: weAllPayStoreURL)
+        storeDescription.type = type
+        storeDescription.setOption(NSNumber(value: true), forKey: NSPersistentStoreRemoteChangeNotificationPostOptionKey)
+        storeDescription.setOption(NSNumber(value: true), forKey: NSInferMappingModelAutomaticallyOption)
+        storeDescription.setOption(NSNumber(value: true), forKey: NSMigratePersistentStoresAutomaticallyOption)
+        // NSPersistentHistoryTrackingKey is needed to Core Data to be able to store on iPadOS. Test on iPad Pro 13-inch (M4) (17.5) Simulator.
+        storeDescription.setOption(NSNumber(value: true), forKey: NSPersistentHistoryTrackingKey)
+        container.persistentStoreDescriptions = [storeDescription]
+        container.loadPersistentStores { storeDescription, error in
+            guard error == nil else {
+                debugPrint("Unresolved error: \(String(describing: error))")
+                DispatchQueue.main.async {
+                    self.error = error! as NSError
+                }
+                fatalError("This shouldn't happen.")
+            }
+        }
+        self.viewContext.retainsRegisteredObjects = true
+        self.viewContext.undoManager = UndoManager()
+        self.viewContext.undoManager!.disableUndoRegistration()
+        self.viewContext.automaticallyMergesChangesFromParent = true
+        logger.info("MCSharedBill: \(self.container.managedObjectModel.entitiesByName["MCSharedBill"])")
+        logger.info("MCPerson: \(self.container.managedObjectModel.entitiesByName["MCPerson"])")
+        logger.info("MCEmailAddress: \(self.container.managedObjectModel.entitiesByName["MCEmailAddress"])")
+        logger.info("MCPayment: \(self.container.managedObjectModel.entitiesByName["MCPayment"])")
+        logger.info("MCExchangeRate: \(self.container.managedObjectModel.entitiesByName["MCExchangeRate"])")
+        logger.info("MCCurrency: \(self.container.managedObjectModel.entitiesByName["MCCurrency"])")
+        logger.info("MCPaymentPresence: \(self.container.managedObjectModel.entitiesByName["MCPaymentPresence"])")
     }
     #endif
     
@@ -110,13 +135,15 @@ fileprivate let WeAllPayStoreModelName = "WeAllPayStore"
     }
     
     @objc func saveViewContext() {
-        debugPrint("Saving viewContext: \(self.viewContext)")
+        logger.trace(#function)
+        logger.info("viewContext.hasChanges: \(self.viewContext.hasChanges)")
         if self.viewContext.hasChanges {
             do {
                 try self.viewContext.save()
-                debugPrint("viewContext: Successfully saved.")
+                logger.info("viewContext: Successfully saved.")
             } catch {
-                debugPrint("viewContext: Failed saving: \(error)")
+                let nsError = error as NSError
+                logger.error("viewContext: Failed saving:\nError Domain: \(nsError.domain)\nError Code: \(nsError.code)\nDescription: \(nsError.localizedDescription)\nUser Info: \(nsError.userInfo)")
             }
         }
     }

@@ -16,9 +16,9 @@ import UIKit
     
     @objc(prepareForUseWithPerson:fromSolutionModel:) func prepareForUse(with person: MCPerson, from model: SolutionModel) {
         self.item = person
-        whoPaidHowMuchLabel.text = person.getFullName()
-        let sumUsed = -(model.event.amountShouldHavePaid(by: person).doubleValue)
-        moneyLabel.text = model.currencyFormatter.string(for: NSNumber(value: sumUsed))
+        whoPaidHowMuchLabel.text = person.fullName
+        let sumUsed = -(try! model.amountShouldHavePaid(by: person).doubleValue)
+        moneyLabel.text = model.eventModel.mainCurrencyFormatter.string(for: NSNumber(value: sumUsed))
     }
     
     // MARK: UITableViewCell

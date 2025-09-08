@@ -10,10 +10,6 @@
 
 #import "MCPersonViewController.h"
 
-#import "MCPerson+addons.h"
-#import "MCSharedBill+addons.h"
-#import "MCEmailAddress+addons.h"
-
 #import "MCTools.h"
 
 @interface MCPersonViewController () <NSFetchedResultsControllerDelegate>
@@ -39,7 +35,7 @@
 
 - (IBAction)cancelButtonPressed:(id)sender {
     [self.view endEditing:YES];
-    [[MCWeAllPayStoreController defaultStore] endUndoGroupAndUndo];
+    [[WeAllPayStoreController defaultStore] endUndoGroupAndUndo];
     [self.navigationController.presentingViewController dismissViewControllerAnimated:YES completion:nil];
 }
 
@@ -66,8 +62,8 @@
 
 - (IBAction)doneButtonPressed:(id)sender {
     [self.view endEditing:YES];
-    [[MCWeAllPayStoreController defaultStore] endUndoGroupAndProcess];
-    [[MCWeAllPayStoreController defaultStore] saveViewContext];
+    [[WeAllPayStoreController defaultStore] endUndoGroupAndProcess];
+    [[WeAllPayStoreController defaultStore] saveViewContext];
     [[[self navigationController] presentingViewController] dismissViewControllerAnimated:YES completion:nil];
 }
 

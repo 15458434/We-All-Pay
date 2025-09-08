@@ -11,6 +11,10 @@ target 'We all pay' do
     pod 'Google-Mobile-Ads-SDK'
     pod 'GoogleMobileAdsMediationFacebook'
     pod 'GoogleMobileAdsMediationTestSuite', :configurations => ['AdTest']
+    
+    target 'We all pay Tests' do
+        inherit! :search_paths
+    end
 end
 
 post_install do | installer |

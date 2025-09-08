@@ -21,7 +21,7 @@ final class SolutionViewController: MCReturnPaymentViewController, MFMailCompose
     // MARK: ThisEvent
     var event: MCSharedBill! {
         get {
-            return model.event
+            return model.eventModel.event
         }
     }
     

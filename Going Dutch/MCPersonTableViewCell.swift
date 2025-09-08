@@ -26,10 +26,10 @@ final class PersonTableViewCell: UITableViewCell {
         self.eventModel = eventModel
         personModel.prepareForUse(withPerson: person)
         self.personImage.image = personModel.person.thumbnail
-        self.nameLabel.text = personModel.fullName
+        self.nameLabel.text = personModel.person.fullName
         self.emailLabel.text = personModel.defaultEmailaddress?.emailAddress
         
-        if personModel.areAllExchangeRatesPresent {
+        if personModel.person.hasPersonMadePaymentWithInvalidExchangeRates {
             fetchingExchangeRateIndicator.startAnimating()
             totalSpent.isHidden = true
         } else {

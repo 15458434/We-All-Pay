@@ -23,7 +23,8 @@ final class SelectEmailAddressTableViewController_iPad: UITableViewController {
     override func viewDidLoad() {
         super.viewDidLoad()
         
-        let arrayOfEmailAddresses = Array(model.person.emailAddress ?? Set<MCEmailAddress>())
+        let setOfEmailAddresses = model.person.emailAddress ?? NSSet()
+        let arrayOfEmailAddresses = Array(setOfEmailAddresses)
         let emailAddressSelector: Selector = #selector(getter: MCPerson.emailAddress)
         allEmailAddresses = (UILocalizedIndexedCollation.current().sortedArray(from: arrayOfEmailAddresses, collationStringSelector: emailAddressSelector) as! [MCEmailAddress])
     }

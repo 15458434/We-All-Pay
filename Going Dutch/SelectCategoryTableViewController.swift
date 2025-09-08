@@ -34,8 +34,8 @@ class SelectCategoryTableViewController: UITableViewController, UISearchBarDeleg
         navigationController!.presentingViewController?.dismiss(animated: true, completion: nil)
     }
     
-    @objc(prepareForUseWithPayment:) func prepareForUse(with payment: MCPayment) {
-        self.model.prepareForUse(with: payment)
+    @objc(prepareForUseWithPayment:fromEventOfEventModel:) func prepareForUse(with payment: MCPayment, fromEventOf eventModel: EventModel) {
+        self.model.prepareForUse(with: payment, fromEventOf: eventModel)
     }
     
     // MARK: MCDismissMeBlockProtocol

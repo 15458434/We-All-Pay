@@ -40,7 +40,7 @@ import UIKit
             }
         case .cancelled:
             if model.person.emailAddress!.count >= 1 {
-                textField.text = model.person.defaultEmailAddress()
+                textField.text = model.person.defaultEmailAddress
             } else {
                 textField.text = nil
             }
