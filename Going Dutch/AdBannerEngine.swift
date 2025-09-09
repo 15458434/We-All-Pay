@@ -15,19 +15,19 @@ import GoogleMobileAds
     /// - Parameters:
     ///   - adEngine: The AdEngine that gave the signal of banner being ready. Supply none if the signal is coming from somewhere else.
     ///   - bannerView: The bannerView that was ready.
-    @objc(adEngine:putOnScreenBannerView:) func adEngine(_ adEngine: AdBannerEngine?, putOnscreen bannerView: GADBannerView)
+    @objc(adEngine:putOnScreenBannerView:) func adEngine(_ adEngine: AdBannerEngine?, putOnscreen bannerView: BannerView)
     /// Signals the ad banner has to be removed from the screen.
     /// - Parameters:
     ///   - adEngine: The AdEngine that gave the signal of banner not being ready. Supply non if the signal is coming from somewhere else.
     ///   - bannerView: The bannerVeiw that was not ready.
-    @objc(adEngine:putOffScreenBannerView:) func adEngine(_ adEngine: AdBannerEngine?, putOffScreen bannerView: GADBannerView)
+    @objc(adEngine:putOffScreenBannerView:) func adEngine(_ adEngine: AdBannerEngine?, putOffScreen bannerView: BannerView)
 }
 
-@objc(MCAdBannerEngine) @objcMembers final class AdBannerEngine: AdEngine, GADBannerViewDelegate {
+@objc(MCAdBannerEngine) @objcMembers final class AdBannerEngine: AdEngine, BannerViewDelegate {
     
     private(set) var delegate: AdBannerEngineDelegate!
     
-    @objc(prepareAdBanner:withAdUnitId:andViewController:) func prepare(adBanner: GADBannerView, with adUnitID: String, and viewController: UIViewController) {
+    @objc(prepareAdBanner:withAdUnitId:andViewController:) func prepare(adBanner: BannerView, with adUnitID: String, and viewController: UIViewController) {
         func prepareAdBanner() {
             self.updateSize(for: adBanner, withScreenSize: UIScreen.main.bounds.size)
             adBanner.adUnitID = adUnitID
@@ -48,9 +48,9 @@ import GoogleMobileAds
         }
     }
     
-    @objc(prepareAdSizeBanner:withAdUnitId:andViewController:) func prepare(adSizeBanner: GADBannerView, with adUnitID: String, and viewController: UIViewController) {
+    @objc(prepareAdSizeBanner:withAdUnitId:andViewController:) func prepare(adSizeBanner: BannerView, with adUnitID: String, and viewController: UIViewController) {
         func prepareAdBanner() {
-            adSizeBanner.adSize = GADAdSizeBanner
+            adSizeBanner.adSize = AdSizeBanner
             adSizeBanner.adUnitID = adUnitID
             adSizeBanner.rootViewController = viewController
             adSizeBanner.delegate = self
@@ -69,10 +69,10 @@ import GoogleMobileAds
         }
     }
     
-    @objc(prepareMediumAdBanner:withAdUnitId:andViewController:) func prepare(mediumAdBanner: GADBannerView, with adUnitID: String, and viewController: UIViewController) {
+    @objc(prepareMediumAdBanner:withAdUnitId:andViewController:) func prepare(mediumAdBanner: BannerView, with adUnitID: String, and viewController: UIViewController) {
         func prepareAdBanner() {
             mediumAdBanner.adUnitID = adUnitID
-            mediumAdBanner.adSize = GADAdSizeMediumRectangle
+            mediumAdBanner.adSize = AdSizeMediumRectangle
             mediumAdBanner.rootViewController = viewController
             mediumAdBanner.delegate = self
             mediumAdBanner.load(self.request)
@@ -90,18 +90,18 @@ import GoogleMobileAds
         }
     }
     
-    func updateSize(for bannerView: GADBannerView, withScreenSize size: CGSize) {
+    func updateSize(for bannerView: BannerView, withScreenSize size: CGSize) {
         guard AdEngine.isEnabled else {
             return
         }
-        bannerView.adSize = GADCurrentOrientationAnchoredAdaptiveBannerAdSizeWithWidth(size.width)
+        bannerView.adSize = currentOrientationAnchoredAdaptiveBanner(width: size.width)
     }
     
     private(set) var isReady: Bool = false
 
     // MARK: GADBannerViewDelegate
     
-    func bannerViewDidReceiveAd(_ bannerView: GADBannerView) {
+    func bannerViewDidReceiveAd(_ bannerView: BannerView) {
         guard AdEngine.isEnabled else {
             return
         }
@@ -110,7 +110,7 @@ import GoogleMobileAds
         delegate.adEngine(self, putOnscreen: bannerView)
     }
     
-    func bannerView(_ bannerView: GADBannerView, didFailToReceiveAdWithError error: Error) {
+    func bannerView(_ bannerView: BannerView, didFailToReceiveAdWithError error: Error) {
         guard AdEngine.isEnabled else {
             return
         }
@@ -119,19 +119,19 @@ import GoogleMobileAds
         delegate.adEngine(self, putOffScreen: bannerView)
     }
     
-    func bannerViewWillPresentScreen(_ bannerView: GADBannerView) {
+    func bannerViewWillPresentScreen(_ bannerView: BannerView) {
         
     }
     
-    func bannerViewWillDismissScreen(_ bannerView: GADBannerView) {
+    func bannerViewWillDismissScreen(_ bannerView: BannerView) {
         
     }
     
-    func bannerViewDidDismissScreen(_ bannerView: GADBannerView) {
+    func bannerViewDidDismissScreen(_ bannerView: BannerView) {
         
     }
     
-    func adViewWillLeaveApplication(_ bannerView: GADBannerView) {
+    func adViewWillLeaveApplication(_ bannerView: BannerView) {
         
     }
     
