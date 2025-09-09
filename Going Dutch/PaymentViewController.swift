@@ -181,13 +181,13 @@ final class PaymentViewController: MCGenericAdBannerTableViewController, AdBanne
     
     // MARK: AdBannerEngineDelegate
     
-    func adEngine(_ adEngine: AdBannerEngine?, putOnscreen bannerView: GADBannerView) {
+    func adEngine(_ adEngine: AdBannerEngine?, putOnscreen bannerView: BannerView) {
         UIView.animate(withDuration: 0.35, delay: 0.0, options: .curveEaseOut, animations: {
             self.worstSalesPitchEverView!.alpha = 1
         }, completion: nil)
     }
     
-    func adEngine(_ adEngine: AdBannerEngine?, putOffScreen bannerView: GADBannerView) {
+    func adEngine(_ adEngine: AdBannerEngine?, putOffScreen bannerView: BannerView) {
         UIView.animate(withDuration: 0.35, delay: 0.0, options: .curveEaseOut, animations: {
             self.worstSalesPitchEverView!.alpha = 0
         }, completion: nil)

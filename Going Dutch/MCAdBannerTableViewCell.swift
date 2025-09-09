@@ -10,11 +10,11 @@ import UIKit
 import GoogleMobileAds;
 
 @objc(MCAdBannerTableViewCell) final class AdBannerTableViewCell: UITableViewCell {
-    private weak var bannerView: GADBannerView?
+    private weak var bannerView: BannerView?
     @objc private var itemModel: AdSectionItemsModel?
     private var adStatusObserver: NSKeyValueObservation?
     
-    @objc(updateBannerView:andItemsModel:) func update(bannerView: GADBannerView, itemModel: AdSectionItemsModel) {
+    @objc(updateBannerView:andItemsModel:) func update(bannerView: BannerView, itemModel: AdSectionItemsModel) {
         if let existingBannerView = self.bannerView {
             let constraints = existingBannerView.constraints
             existingBannerView.removeConstraints(constraints)
