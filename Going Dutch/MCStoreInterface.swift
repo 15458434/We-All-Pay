@@ -139,9 +139,13 @@ let kApplyProVersionNotification = "Apply pro version"
         for invalidIdentifier in response.invalidProductIdentifiers {
             print("Invalid product: \(invalidIdentifier)")
         }
-        proProduct = response.products.first
+        guard let proProduct = response.products.first else {
+            let error = NSError(domain: "com.GreenHair.We-all-pay", code: 10000)
+            lastSKProductsRequestError = error
+            return
+        }
         lastSKProductsRequestError = nil
-        NotificationCenter.default.post(name: Notification.Name(rawValue: "Product price"), object: self, userInfo: [proProduct!.productIdentifier: proProduct!.price])
+        NotificationCenter.default.post(name: Notification.Name(rawValue: "Product price"), object: self, userInfo: [proProduct.productIdentifier: proProduct.price])
     }
     
     // MARK: SK Payment Transaction Observer

@@ -12,9 +12,7 @@ import AppTrackingTransparency
 
 import UserMessagingPlatform
 
-import PersonalizedAdConsent
 import GoogleMobileAds
-import AppLovinSDK
 import FBAudienceNetwork
 
 struct TCFReader {
@@ -56,7 +54,7 @@ struct TCFReader {
         return purposes.allSatisfy { (hasAttribute(input: purposeLI, index: $0) && hasVendorLI) || (hasAttribute(input: purposeConsent, index: $0) && hasVendorConsent) }
     }
 
-    fileprivate func canShowAds() -> Bool {
+    func canShowAds() -> Bool {
         let purposeConsent = UserDefaults.standard.string(forKey: "IABTCF_PurposeConsents") ?? ""
         let vendorConsent = UserDefaults.standard.string(forKey: "IABTCF_VendorConsents") ?? ""
         let vendorLI = UserDefaults.standard.string(forKey: "IABTCF_VendorLegitimateInterests") ?? ""
@@ -90,31 +88,12 @@ struct TCFReader {
 }
 
 @objc(MCAdEngine) @objcMembers open class AdEngine: NSObject {
-    // TODO: Remove on 14-08-2022
-    static let kAdBannerConsent = "7DE9F9CF-B4B9-4DCB-94FC-F0FD62F432DC"
     
     #if SCREENSHOTS
     static var isEnabled: Bool = false
     #else
     static var isEnabled: Bool = true
     #endif
-    
-    enum ConsentStatus: Int {
-        case unknown = 0
-        case nonPersonalized = 1
-        case personalized = 2
-        
-        init(consentStatus: PACConsentStatus) {
-            switch consentStatus {
-            case .nonPersonalized:
-                self = .nonPersonalized
-            case .personalized:
-                self = .personalized
-            default:
-                self = .unknown
-            }
-        }
-    }
     
     enum EconomicArea {
         case unknown
@@ -126,7 +105,7 @@ struct TCFReader {
     class func registerDebugDevices() {
         let iPhoneX = "23915c03dc297a967b28ed1458c0f269"
         let iPadRetina = "63f51db641e29b85012042e407de3cba"
-        GADMobileAds.sharedInstance().requestConfiguration.testDeviceIdentifiers = [kGADSimulatorID, iPhoneX, iPadRetina]
+        MobileAds.shared.requestConfiguration.testDeviceIdentifiers = [iPhoneX, iPadRetina]
     }
     
     @objc(presentPrivacyConsentRequestIfNecessaryFromViewController:) class func presentPrivacyConsentRequestIfNecessary(from viewController: UIViewController) {
@@ -138,7 +117,7 @@ struct TCFReader {
         }
         
         func launchAdSystem() {
-            GADMobileAds.sharedInstance().start { status in
+            MobileAds.shared.start { status in
                 debugPrint("consentStatus: \(status.adapterStatusesByClassName)")
                 // Facebook
                 if #available(iOS 14.0, *) {
@@ -149,8 +128,6 @@ struct TCFReader {
                 let tcf = TCFReader()
                 if tcf.gdprApplies() {
                     let canShowPersonalizedAds = tcf.canShowPersonalizedAds()
-                    // AppLovin
-                    ALPrivacySettings.setHasUserConsent(tcf.canShowPersonalizedAds())
                     // Facebook
                     FBAdSettings.setAdvertiserTrackingEnabled(canShowPersonalizedAds)
                 }
@@ -166,24 +143,18 @@ struct TCFReader {
             return
         }
         
-        // clean up old stuff if it exists.
-        if UserDefaults.standard.integer(forKey: kAdBannerConsent) > 0 {
-            UserDefaults.standard.removeObject(forKey: kAdBannerConsent)
-            PACConsentInformation.sharedInstance.reset()
-        }
-        
         // Create a UMPRequestParameters object.
-        let parameters = UMPRequestParameters()
+        let parameters = RequestParameters()
         // Set tag for under age of consent. Here false means users are not under age.
-        parameters.tagForUnderAgeOfConsent = false
+        parameters.isTaggedForUnderAgeOfConsent = false
         
-        let debugSettings = UMPDebugSettings()
+        let debugSettings = DebugSettings()
         debugSettings.testDeviceIdentifiers = ["00000000-0000-0000-0000-000000000000", "E0C4F2B0-1AD9-4FEE-B467-7DE63D5E8939", "73A44587-F726-466C-BB61-E090FC096D70", "B54D6D4B-66D7-47EF-A24C-53152802D822"]
         debugSettings.geography = .disabled
         parameters.debugSettings = debugSettings
         
         // Request an update to the consent information.
-        UMPConsentInformation.sharedInstance.requestConsentInfoUpdate(with: parameters, completionHandler: { error in
+        ConsentInformation.shared.requestConsentInfoUpdate(with: parameters, completionHandler: { error in
             guard error == nil else {
                 // Handle the error.
                 debugPrint("UMPConsentInformation.sharedInstance.requestConsentInfoUpdate error: \(error!)")
@@ -192,11 +163,11 @@ struct TCFReader {
             
             // The consent information state was updated.
             // You are now ready to check if a form is available.
-            switch UMPConsentInformation.sharedInstance.consentStatus {
+            switch ConsentInformation.shared.consentStatus {
             case .required:
-                let formStatus = UMPConsentInformation.sharedInstance.formStatus
-                if formStatus == UMPFormStatus.available {
-                    UMPConsentForm.load(completionHandler: { form, loadError in
+                let formStatus = ConsentInformation.shared.formStatus
+                if formStatus == FormStatus.available {
+                    ConsentForm.load(with: { form, loadError in
                         guard loadError == nil else {
                             // Handle the error
                             debugPrint("UMPConsentForm.loadError: \(loadError!)")
@@ -205,14 +176,14 @@ struct TCFReader {
                         
                         // Present the form. You can also hold on to the reference to present
                         // later.
-                        if UMPConsentInformation.sharedInstance.consentStatus == UMPConsentStatus.required {
+                        if ConsentInformation.shared.consentStatus == ConsentStatus.required {
                             form?.present(from: viewController, completionHandler: { dismissError in
                                 guard dismissError == nil else {
                                     debugPrint("form dismissed error: \(dismissError!)")
                                     return
                                 }
                                 
-                                if UMPConsentInformation.sharedInstance.consentStatus == UMPConsentStatus.obtained {
+                                if ConsentInformation.shared.consentStatus == ConsentStatus.obtained {
                                     printUserDefaults()
                                     launchAdSystem()
                                 }
@@ -230,8 +201,8 @@ struct TCFReader {
         })
     }
     
-    var request: GADRequest {
-        let newRequest = GADRequest()
+    var request: Request {
+        let newRequest = Request()
         return newRequest
     }
     

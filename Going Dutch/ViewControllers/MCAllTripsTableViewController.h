@@ -13,7 +13,7 @@
 #import "MCPathComponentsToOpenProtocol.h"
 
 @class MCNotificationsInfoModel;
-@class MCWeAllPayStoreController;
+@class WeAllPayStoreController;
 @class MCTableEmptyMessage;
 
 __attribute__((objc_subclassing_restricted))

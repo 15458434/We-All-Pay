@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="UTF-8" standalone="yes"?>
-<model type="com.apple.IDECoreDataModeler.DataModel" documentVersion="1.0" lastSavedToolsVersion="19206" systemVersion="20G165" minimumToolsVersion="Automatic" sourceLanguage="Objective-C" userDefinedModelVersionIdentifier="4">
+<model type="com.apple.IDECoreDataModeler.DataModel" documentVersion="1.0" lastSavedToolsVersion="22758" systemVersion="23F79" minimumToolsVersion="Automatic" sourceLanguage="Objective-C" userDefinedModelVersionIdentifier="4">
     <entity name="MCCurrency" representedClassName="MCCurrency" syncable="YES" codeGenerationType="category">
         <attribute name="code" optional="YES" attributeType="String"/>
         <attribute name="dateCreated" optional="YES" attributeType="Date" usesScalarValueType="NO"/>
@@ -46,9 +46,6 @@
         <relationship name="onWhichBill" optional="YES" minCount="1" maxCount="1" deletionRule="Nullify" destinationEntity="MCSharedBill" inverseName="payments" inverseEntity="MCSharedBill"/>
         <relationship name="payingPerson" optional="YES" minCount="1" maxCount="1" deletionRule="Nullify" destinationEntity="MCPerson" inverseName="payments" inverseEntity="MCPerson"/>
         <relationship name="peopleSharingPayment" optional="YES" toMany="YES" deletionRule="Cascade" destinationEntity="MCPaymentPresence" inverseName="payment" inverseEntity="MCPaymentPresence"/>
-        <fetchIndex name="byDateCreatedIndex">
-            <fetchIndexElement property="dateCreated" type="Binary" order="ascending"/>
-        </fetchIndex>
     </entity>
     <entity name="MCPaymentPresence" representedClassName="MCPaymentPresence" syncable="YES" codeGenerationType="category">
         <attribute name="averageOweFromPayment" optional="YES" attributeType="Double" defaultValueString="0.0" usesScalarValueType="NO"/>
@@ -77,9 +74,6 @@
         <relationship name="payments" optional="YES" toMany="YES" deletionRule="Nullify" destinationEntity="MCPayment" inverseName="payingPerson" inverseEntity="MCPayment"/>
         <relationship name="sharedBill" optional="YES" toMany="YES" deletionRule="Nullify" destinationEntity="MCSharedBill" inverseName="peoplePresent" inverseEntity="MCSharedBill"/>
         <relationship name="sharingPayment" optional="YES" toMany="YES" deletionRule="Cascade" destinationEntity="MCPaymentPresence" inverseName="person" inverseEntity="MCPaymentPresence"/>
-        <fetchIndex name="byDateCreatedIndex">
-            <fetchIndexElement property="dateCreated" type="Binary" order="ascending"/>
-        </fetchIndex>
     </entity>
     <entity name="MCSharedBill" representedClassName="MCSharedBill" syncable="YES" codeGenerationType="category">
         <attribute name="dateCreated" optional="YES" attributeType="Date" usesScalarValueType="NO"/>
@@ -90,17 +84,5 @@
         <relationship name="mainCurrency" optional="YES" maxCount="1" deletionRule="Nullify" destinationEntity="MCCurrency" inverseName="sharedBill" inverseEntity="MCCurrency"/>
         <relationship name="payments" optional="YES" toMany="YES" deletionRule="Cascade" destinationEntity="MCPayment" inverseName="onWhichBill" inverseEntity="MCPayment"/>
         <relationship name="peoplePresent" optional="YES" toMany="YES" deletionRule="Cascade" destinationEntity="MCPerson" inverseName="sharedBill" inverseEntity="MCPerson"/>
-        <fetchIndex name="byDateCreatedIndex">
-            <fetchIndexElement property="dateCreated" type="Binary" order="ascending"/>
-        </fetchIndex>
     </entity>
-    <elements>
-        <element name="MCCurrency" positionX="-900" positionY="108" width="128" height="194"/>
-        <element name="MCEmailAddress" positionX="-1118" positionY="9" width="128" height="119"/>
-        <element name="MCExchangeRate" positionX="-891" positionY="117" width="128" height="179"/>
-        <element name="MCPayment" positionX="-342" positionY="-0" width="128" height="209"/>
-        <element name="MCPaymentPresence" positionX="-533" positionY="-27" width="128" height="134"/>
-        <element name="MCPerson" positionX="-837" positionY="-54" width="128" height="284"/>
-        <element name="MCSharedBill" positionX="-558" positionY="225" width="128" height="149"/>
-    </elements>
 </model>

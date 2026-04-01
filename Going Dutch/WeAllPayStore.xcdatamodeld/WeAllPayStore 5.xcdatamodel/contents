@@ -1,0 +1,91 @@
+<?xml version="1.0" encoding="UTF-8" standalone="yes"?>
+<model type="com.apple.IDECoreDataModeler.DataModel" documentVersion="1.0" lastSavedToolsVersion="23788.4" systemVersion="24G90" minimumToolsVersion="Automatic" sourceLanguage="Swift" userDefinedModelVersionIdentifier="5">
+    <entity name="MCCurrency" representedClassName="MCCurrency" syncable="YES" codeGenerationType="category">
+        <attribute name="code" optional="YES" attributeType="String"/>
+        <attribute name="dateCreated" optional="YES" attributeType="Date" usesScalarValueType="NO"/>
+        <attribute name="dateModified" optional="YES" attributeType="Date" usesScalarValueType="NO"/>
+        <attribute name="isStillValid" optional="YES" attributeType="Boolean" usesScalarValueType="NO"/>
+        <attribute name="name" optional="YES" attributeType="String"/>
+        <attribute name="symbol" optional="YES" attributeType="String"/>
+        <attribute name="uniqueID" optional="YES" attributeType="String"/>
+        <relationship name="exchangeRateFromCurrency" optional="YES" toMany="YES" deletionRule="Deny" destinationEntity="MCExchangeRate" inverseName="fromCurrency" inverseEntity="MCExchangeRate"/>
+        <relationship name="exchangeRateToCurrency" optional="YES" toMany="YES" deletionRule="Deny" destinationEntity="MCExchangeRate" inverseName="toCurrency" inverseEntity="MCExchangeRate"/>
+        <relationship name="payment" optional="YES" toMany="YES" deletionRule="Nullify" destinationEntity="MCPayment" inverseName="currency" inverseEntity="MCPayment"/>
+        <relationship name="sharedBill" optional="YES" toMany="YES" deletionRule="Deny" destinationEntity="MCSharedBill" inverseName="mainCurrency" inverseEntity="MCSharedBill"/>
+    </entity>
+    <entity name="MCEmailAddress" representedClassName="MCEmailAddress" syncable="YES" codeGenerationType="category">
+        <attribute name="dateCreated" optional="YES" attributeType="Date" usesScalarValueType="NO"/>
+        <attribute name="dateModified" optional="YES" attributeType="Date" usesScalarValueType="NO"/>
+        <attribute name="emailAddress" attributeType="String"/>
+        <attribute name="selected" attributeType="Boolean" usesScalarValueType="NO"/>
+        <attribute name="uniqueEmailId" attributeType="String"/>
+        <relationship name="owner" minCount="1" maxCount="1" deletionRule="Nullify" destinationEntity="MCPerson" inverseName="emailAddress" inverseEntity="MCPerson"/>
+    </entity>
+    <entity name="MCExchangeRate" representedClassName="MCExchangeRate" syncable="YES" codeGenerationType="category">
+        <attribute name="dateCreated" optional="YES" attributeType="Date" usesScalarValueType="NO"/>
+        <attribute name="dateFetched" optional="YES" attributeType="Date" usesScalarValueType="NO"/>
+        <attribute name="dateModified" optional="YES" attributeType="Date" usesScalarValueType="NO"/>
+        <attribute name="exchangeRate" optional="YES" attributeType="Double" defaultValueString="0.0" usesScalarValueType="NO"/>
+        <attribute name="source" optional="YES" attributeType="String"/>
+        <attribute name="status" optional="YES" attributeType="Integer 16" defaultValueString="0" usesScalarValueType="NO"/>
+        <attribute name="uniqueID" optional="YES" attributeType="String"/>
+        <relationship name="fromCurrency" optional="YES" maxCount="1" deletionRule="Nullify" destinationEntity="MCCurrency" inverseName="exchangeRateFromCurrency" inverseEntity="MCCurrency"/>
+        <relationship name="payment" optional="YES" maxCount="1" deletionRule="Nullify" destinationEntity="MCPayment" inverseName="exchangeRate" inverseEntity="MCPayment"/>
+        <relationship name="toCurrency" optional="YES" maxCount="1" deletionRule="Nullify" destinationEntity="MCCurrency" inverseName="exchangeRateToCurrency" inverseEntity="MCCurrency"/>
+    </entity>
+    <entity name="MCPayment" representedClassName="MCPayment" syncable="YES" codeGenerationType="category">
+        <attribute name="categoryId" optional="YES" attributeType="Integer 16" defaultValueString="0" usesScalarValueType="NO"/>
+        <attribute name="dateCreated" optional="YES" attributeType="Date" usesScalarValueType="NO"/>
+        <attribute name="dateModified" optional="YES" attributeType="Date" usesScalarValueType="NO"/>
+        <attribute name="descriptionOfPayment" optional="YES" attributeType="String"/>
+        <attribute name="money" optional="YES" attributeType="Double" defaultValueString="0.0" usesScalarValueType="NO"/>
+        <attribute name="uniquePaymentId" attributeType="String"/>
+        <relationship name="currency" optional="YES" maxCount="1" deletionRule="Nullify" destinationEntity="MCCurrency" inverseName="payment" inverseEntity="MCCurrency"/>
+        <relationship name="exchangeRate" optional="YES" maxCount="1" deletionRule="Nullify" destinationEntity="MCExchangeRate" inverseName="payment" inverseEntity="MCExchangeRate"/>
+        <relationship name="onWhichBill" optional="YES" minCount="1" maxCount="1" deletionRule="Nullify" destinationEntity="MCSharedBill" inverseName="payments" inverseEntity="MCSharedBill"/>
+        <relationship name="payingPerson" optional="YES" minCount="1" maxCount="1" deletionRule="Nullify" destinationEntity="MCPerson" inverseName="payments" inverseEntity="MCPerson"/>
+        <relationship name="peopleSharingPayment" optional="YES" toMany="YES" deletionRule="Cascade" destinationEntity="MCPaymentPresence" inverseName="payment" inverseEntity="MCPaymentPresence"/>
+        <fetchIndex name="byDateCreatedIndex">
+            <fetchIndexElement property="dateCreated" type="Binary" order="ascending"/>
+        </fetchIndex>
+    </entity>
+    <entity name="MCPaymentPresence" representedClassName="MCPaymentPresence" syncable="YES" codeGenerationType="category">
+        <attribute name="averageOweFromPayment" optional="YES" attributeType="Double" defaultValueString="0.0" usesScalarValueType="NO"/>
+        <attribute name="dateCreated" optional="YES" attributeType="Date" usesScalarValueType="NO"/>
+        <attribute name="dateModified" optional="YES" attributeType="Date" usesScalarValueType="NO"/>
+        <attribute name="isPersonPresent" optional="YES" attributeType="Boolean" defaultValueString="YES" usesScalarValueType="NO"/>
+        <attribute name="uniqueId" attributeType="String"/>
+        <relationship name="payment" optional="YES" maxCount="1" deletionRule="Nullify" destinationEntity="MCPayment" inverseName="peopleSharingPayment" inverseEntity="MCPayment"/>
+        <relationship name="person" optional="YES" maxCount="1" deletionRule="Nullify" destinationEntity="MCPerson" inverseName="sharingPayment" inverseEntity="MCPerson"/>
+    </entity>
+    <entity name="MCPerson" representedClassName="MCPerson" syncable="YES" codeGenerationType="category">
+        <attribute name="dateCreated" optional="YES" attributeType="Date" usesScalarValueType="NO"/>
+        <attribute name="dateModified" optional="YES" attributeType="Date" usesScalarValueType="NO"/>
+        <attribute name="firstName" optional="YES" attributeType="String"/>
+        <attribute name="lastName" optional="YES" attributeType="String"/>
+        <attribute name="phoneNumber" optional="YES" attributeType="String"/>
+        <attribute name="pictureData" optional="YES" attributeType="Binary" allowsExternalBinaryDataStorage="YES"/>
+        <attribute name="thumbnailData" optional="YES" attributeType="Binary" allowsExternalBinaryDataStorage="YES"/>
+        <attribute name="uniquePersonId" attributeType="String"/>
+        <relationship name="emailAddress" optional="YES" toMany="YES" deletionRule="Cascade" destinationEntity="MCEmailAddress" inverseName="owner" inverseEntity="MCEmailAddress"/>
+        <relationship name="payments" optional="YES" toMany="YES" deletionRule="Nullify" destinationEntity="MCPayment" inverseName="payingPerson" inverseEntity="MCPayment"/>
+        <relationship name="sharedBill" optional="YES" toMany="YES" deletionRule="Nullify" destinationEntity="MCSharedBill" inverseName="peoplePresent" inverseEntity="MCSharedBill"/>
+        <relationship name="sharingPayment" optional="YES" toMany="YES" deletionRule="Cascade" destinationEntity="MCPaymentPresence" inverseName="person" inverseEntity="MCPaymentPresence"/>
+        <fetchIndex name="byDateCreatedIndex">
+            <fetchIndexElement property="dateCreated" type="Binary" order="ascending"/>
+        </fetchIndex>
+    </entity>
+    <entity name="MCSharedBill" representedClassName="MCSharedBill" syncable="YES" codeGenerationType="category">
+        <attribute name="dateCreated" optional="YES" attributeType="Date" usesScalarValueType="NO"/>
+        <attribute name="dateModified" optional="YES" attributeType="Date" usesScalarValueType="NO"/>
+        <attribute name="hasTheMailBeenSent" optional="YES" attributeType="Boolean" usesScalarValueType="NO"/>
+        <attribute name="tripName" optional="YES" attributeType="String"/>
+        <attribute name="uniqueBillId" attributeType="String"/>
+        <relationship name="mainCurrency" optional="YES" maxCount="1" deletionRule="Nullify" destinationEntity="MCCurrency" inverseName="sharedBill" inverseEntity="MCCurrency"/>
+        <relationship name="payments" optional="YES" toMany="YES" deletionRule="Cascade" destinationEntity="MCPayment" inverseName="onWhichBill" inverseEntity="MCPayment"/>
+        <relationship name="peoplePresent" optional="YES" toMany="YES" deletionRule="Cascade" destinationEntity="MCPerson" inverseName="sharedBill" inverseEntity="MCPerson"/>
+        <fetchIndex name="byDateCreatedIndex">
+            <fetchIndexElement property="dateCreated" type="Binary" order="ascending"/>
+        </fetchIndex>
+    </entity>
+</model>

@@ -10,11 +10,6 @@
 
 #import "MCPersonViewController.h"
 
-#import "MCWeAllPayStoreController.h"
-#import "MCPerson+addons.h"
-#import "MCSharedBill+addons.h"
-#import "MCEmailAddress+addons.h"
-
 #import "MCTools.h"
 
 @interface MCPersonViewController () <NSFetchedResultsControllerDelegate>
@@ -40,7 +35,7 @@
 
 - (IBAction)cancelButtonPressed:(id)sender {
     [self.view endEditing:YES];
-    [[MCWeAllPayStoreController defaultStore] endUndoGroupAndUndo];
+    [[WeAllPayStoreController defaultStore] endUndoGroupAndUndo];
     [self.navigationController.presentingViewController dismissViewControllerAnimated:YES completion:nil];
 }
 
@@ -58,7 +53,6 @@
         UIPickerView *inputView = [[UIPickerView alloc] init];
         inputView.delegate = _emailTextInputReceiver;
         inputView.dataSource = _emailTextInputReceiver;
-        inputView.showsSelectionIndicator = YES;
         [inputView selectRow:_model.indexOfDefaultEmailAddress inComponent:0 animated:YES];
         _emailField.inputView = inputView;
         _emailField.tintColor = UIColor.clearColor;
@@ -68,9 +62,22 @@
 
 - (IBAction)doneButtonPressed:(id)sender {
     [self.view endEditing:YES];
-    [[MCWeAllPayStoreController defaultStore] endUndoGroupAndProcess];
-    [[MCWeAllPayStoreController defaultStore] saveMainThreadContext];
+    [[WeAllPayStoreController defaultStore] endUndoGroupAndProcess];
+    [[WeAllPayStoreController defaultStore] saveViewContext];
     [[[self navigationController] presentingViewController] dismissViewControllerAnimated:YES completion:nil];
+}
+
+- (void)updateWithPerson:(MCPerson *)person {
+    __weak typeof(self) weakSelf = self;
+    [_model prepareForUseWithPerson:person andFetchedResultsControllerDelegate:self andChangeHandler:^(MCPerson * _Nonnull person) {
+        typeof(self) strongSelf = weakSelf;
+        NSParameterAssert(strongSelf);
+        
+        strongSelf.emailField.inputView = nil;
+        strongSelf.emailField.tintColor = UIColor.systemBlueColor;
+        strongSelf.emailTextInputReceiver.target = MCEmailTextInputProxyTargetValidator;
+        strongSelf.selectEmailAddressButton.hidden = person.emailAddress.count > 1 ? NO : YES;
+    }];
 }
 
 #pragma mark - NSFetchedResultsControllerDelegate
@@ -146,22 +153,12 @@
     _lastNameField.placeholder = NSLocalizedStringWithDefaultValue(@"person_view_placeholder_last_name", nil, NSBundle.mainBundle, @"last name", @"Placeholder of the Last name field in the edit person view");
     _emailField.placeholder = NSLocalizedStringWithDefaultValue(@"person_view_placeholder_email_address", nil, NSBundle.mainBundle, @"e-mail address", @"Placeholder of the e-mail address field in the edit person view");
     NSString *selectEmailAddressButtonTitle = NSLocalizedStringWithDefaultValue(@"person_view_button_select_email", nil, NSBundle.mainBundle, @"Select email address", @"Button in the person view to select an email address of the user in case the user has multiple email addresses from an import of the addressbook");
-    [_selectEmailAddressButton setTitle:selectEmailAddressButtonTitle forState:UIControlStateNormal];
+    _selectEmailAddressButton.titleLabel.text = selectEmailAddressButtonTitle;
 }
 
 - (void)viewDidLoad {
     [super viewDidLoad];
     
-    __weak typeof(self) weakSelf = self;
-    [_model prepareForUseWithPerson:_thisPerson andFetchedResultsControllerDelegate:self andChangeHandler:^(MCPerson * _Nonnull person) {
-        typeof(self) strongSelf = weakSelf;
-        NSParameterAssert(strongSelf);
-        
-        strongSelf.emailField.inputView = nil;
-        strongSelf.emailField.tintColor = UIColor.systemBlueColor;
-        strongSelf.emailTextInputReceiver.target = MCEmailTextInputProxyTargetValidator;
-        strongSelf.selectEmailAddressButton.hidden = person.emailAddress.count > 1 ? NO : YES;
-    }];
     _firstNameFieldValidator = [[MCNameTextInputValidator alloc] initWithModel:_model andTextField:_firstNameField andConfig:MCNameTextInputValidatorConfigFirstName];
     _familyNameFieldValidator = [[MCNameTextInputValidator alloc] initWithModel:_model andTextField:_lastNameField andConfig:MCNameTextInputValidatorConfigFamilyName];
     MCEmailTextInputValidator *validator = [[MCEmailTextInputValidator alloc] initWithTextField:_emailField andModel:_model];
@@ -211,16 +208,7 @@
 - (void)prepareForSegue:(UIStoryboardSegue *)segue sender:(id)sender {
     if ([[segue identifier] isEqualToString:@"openSelectEmailAddress"]) {
         __weak SelectEmailAddressTableViewController_iPad *destination = [segue destinationViewController];
-        destination.thisPerson = _thisPerson;
-        if ([destination conformsToProtocol:@protocol(MCDismissMeBlockProtocol)]) {
-            [destination setDismissMe:^{
-                if (destination) {
-                    [destination dismissViewControllerAnimated:YES completion:^{
-                        self.emailField.text = self.thisPerson.defaultEmailAddress;
-                    }];
-                }
-            }];
-        }
+        [destination updateModel:_model];
     }
 }
 

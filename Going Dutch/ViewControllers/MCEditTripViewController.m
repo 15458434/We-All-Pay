@@ -14,23 +14,22 @@
 #import "MCSharedBillPageViewController.h"
 #import "UIViewController+WeAllPayStore.h"
 
-#import "MCWeAllPayStoreController.h"
-#import "MCPerson+addons.h"
-#import "MCSharedBill+addons.h"
-#import "MCCurrency+addons.h"
-
 #import "We_all_pay-Swift.h"
+
+static void * isEditingToggleContext = &isEditingToggleContext;
 
 @interface MCEditTripViewController ()
 
 @property (strong, nonatomic) MCTableEmptyMessage *emptyMessage;
+
+@property (nonatomic, strong) MCEventModel *eventModel;
 
 @property (weak, nonatomic) IBOutlet UITableViewHeaderFooterView *headerView;
 @property (weak, nonatomic) IBOutlet UITextField *eventNameTextField;
 @property (weak, nonatomic) IBOutlet UIButton *addPersonButton;
 @property (weak, nonatomic) IBOutlet UIButton *addPersonFromContactsButton;
 
-@property (nonatomic, strong) NSFetchedResultsController *dataController;
+@property (nonatomic, strong) NSFetchedResultsController *fetchedResultsController;
 @property (nonatomic, strong) ContactsDataReceiver *contactsInserter;
 
 @end
@@ -39,7 +38,7 @@
 
 - (IBAction)addPersonFromContactsTouchUpInside:(UIButton *)sender {
     if (!_contactsInserter) {
-        _contactsInserter = [[ContactsDataReceiver alloc] initWith:_tonightsBill];
+        _contactsInserter = [[ContactsDataReceiver alloc] initWith:_eventModel.event];
     }
     [_contactsInserter presentContactsPickerWith:self completion:nil];
 }
@@ -57,14 +56,14 @@
 
 - (void)performFetch {
     NSError *error;
-    BOOL success = [_dataController performFetch:&error];
+    BOOL success = [_fetchedResultsController performFetch:&error];
     if (!success) {
         NSLog(@"Something went wrong: %@", error);
     }
 }
 
 - (void)setEmptyMessageWithDuration:(NSTimeInterval)duration {
-    if (_dataController.fetchedObjects.count != 0) {
+    if (_fetchedResultsController.fetchedObjects.count != 0) {
         if (_emptyMessage.bigMessage.alpha > 0.0) {
             [UIView animateWithDuration:duration animations:^{
                 self.emptyMessage.bigMessage.alpha = 0.0;
@@ -82,6 +81,9 @@
         }
     }
 }
+- (void)updateEventModel:(MCEventModel *)eventModel {
+    _eventModel = eventModel;
+}
 
 #pragma mark - UITextFieldDelegate
 
@@ -98,16 +100,16 @@
     NSString *paremeterContentType = @"shared_event";
     [FIRAnalytics logEventWithName:@"save_item" parameters:@{kFIRParameterItemID: parameterItemID, kFIRParameterItemName: parameterName, kFIRParameterContentType: paremeterContentType}];
     
-    _tonightsBill.tripName = _eventNameTextField.text;
+    _eventModel.event.tripName = _eventNameTextField.text;
     NSDate *now = [NSDate date];
-    _tonightsBill.dateModified = now;
-    [MCWeAllPayStoreController.defaultStore saveMainThreadContext];
+    _eventModel.event.dateModified = now;
+    [WeAllPayStoreController.defaultStore saveViewContext];
     if (!_didSomethingChange) {
         _didSomethingChange = YES;
     }
-    MCPerson *nextPayer = [[_tonightsBill fetchPeoplePresentOrderedByAmountPaid:YES] firstObject];
+    MCPerson *nextPayer = _eventModel.nextPayer;
 
-    WhoPayingUserDefaultsStoreInterface *groupStore = [[WhoPayingUserDefaultsStoreInterface alloc] initWithTonightsBillUUID:_tonightsBill.uniqueBillId tripName:_tonightsBill.tripName nextPayerUUID:nextPayer.uniquePersonId fullNameOfNextPayer:[nextPayer getFullName]];
+    WhoPayingUserDefaultsStoreInterface *groupStore = [[WhoPayingUserDefaultsStoreInterface alloc] initWithTonightsBillUUID:_eventModel.event.uniqueBillId tripName:_eventModel.event.tripName nextPayerUUID:nextPayer.uniquePersonId fullNameOfNextPayer:nextPayer.fullName];
     [groupStore storeToDefaults];
     [[NCWidgetController widgetController] setHasContent:YES forWidgetWithBundleIdentifier:[WhoPayingUserDefaultsStoreInterface MCWhoIsPayingNextBundleIdentifier]];
 }
@@ -116,11 +118,6 @@
 
 - (void)controllerWillChangeContent:(NSFetchedResultsController *)controller {
     [self.tableView beginUpdates];
-}
-
-- (void)controllerDidChangeContent:(NSFetchedResultsController *)controller {
-    [self setEmptyMessageWithDuration:0.25];
-    [self.tableView endUpdates];
 }
 
 - (void)controller:(NSFetchedResultsController *)controller didChangeObject:(id)anObject atIndexPath:(NSIndexPath *)indexPath forChangeType:(NSFetchedResultsChangeType)type newIndexPath:(NSIndexPath *)newIndexPath {
@@ -146,49 +143,40 @@
     }
 }
 
+- (void)controllerDidChangeContent:(NSFetchedResultsController *)controller {
+    [self setEmptyMessageWithDuration:0.25];
+    [self.tableView endUpdates];
+}
+
 #pragma mark - UITableViewController
 
 #pragma mark - UITableViewDataSource
 
 - (NSInteger)numberOfSectionsInTableView:(UITableView *)tableView {
-    return _dataController.sections.count;
+    return _fetchedResultsController.sections.count;
 }
 
 - (NSInteger)tableView:(UITableView *)tableView numberOfRowsInSection:(NSInteger)section {
-    return _dataController.fetchedObjects.count;
+    return _fetchedResultsController.fetchedObjects.count;
 }
 
 - (UITableViewCell *)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath {
-    MCPerson *thisCellsPerson = [_dataController objectAtIndexPath:indexPath];
-    MCPersonTableViewCell *thisCell = [tableView dequeueReusableCellWithIdentifier:@"MCPersonTableViewCell"];
-    
-    [[thisCell personImage] setImage:[thisCellsPerson thumbnail]];
-    [[thisCell nameLabel] setText:[thisCellsPerson getFullName]];
-    [[thisCell emailLabel] setText:[thisCellsPerson defaultEmailAddress]];
-    
-    if (![thisCellsPerson hasPersonMadePaymentWithInvalidExchangeRates]) {
-        [thisCell.fetchingExchangeRateIndicator stopAnimating];
-        [[thisCell totalSpent] setHidden:NO];
-        
-        CurrencyFormatter *cf = [[CurrencyFormatter alloc] initWithCurrencyCode:_tonightsBill.mainCurrency.code];
-        thisCell.totalSpent.text = [cf stringForObjectValue:thisCellsPerson.totalSumPaid];
-    } else {
-        [thisCell.fetchingExchangeRateIndicator startAnimating];
-        [[thisCell totalSpent] setHidden:YES];
-    }
-
-    
-    return thisCell;
+    MCPerson *item = [_fetchedResultsController objectAtIndexPath:indexPath];
+    MCPersonTableViewCell *cell = [tableView dequeueReusableCellWithIdentifier:@"MCPersonTableViewCell"];
+    [cell updateWithEventModel:self.eventModel andPerson:item];
+    return cell;
 }
 
 - (BOOL)tableView:(UITableView *)tableView canEditRowAtIndexPath:(NSIndexPath *)indexPath {
     if ([[self tableView] isEditing]) {
-        MCPerson *person = [_dataController objectAtIndexPath:indexPath];
-        if ([_tonightsBill hasPersonPaidSomething:person]) {
-            return NO;
-        } else {
-            return YES;
+        MCPerson *person = [_fetchedResultsController objectAtIndexPath:indexPath];
+        NSError *hasPersonPaidSomethingError;
+        NSNumber *hasPersonPaidSomething = [_eventModel hasPersonPaidSomething:person withError:&hasPersonPaidSomethingError];
+        if (hasPersonPaidSomethingError) {
+            NSException *exception = [NSException exceptionWithError:hasPersonPaidSomethingError];
+            @throw exception;
         }
+        return !hasPersonPaidSomething.boolValue;
     } else {
         return NO;
     }
@@ -196,9 +184,9 @@
 
 - (void)tableView:(UITableView *)tableView commitEditingStyle:(UITableViewCellEditingStyle)editingStyle forRowAtIndexPath:(NSIndexPath *)indexPath {
     if (editingStyle == UITableViewCellEditingStyleDelete) {
-        MCPerson *removablePerson = [_dataController objectAtIndexPath:indexPath];
-        [_tonightsBill deletePerson:removablePerson];
-        [MCWeAllPayStoreController.defaultStore saveMainThreadContext];
+        MCPerson *poorSucker = [_fetchedResultsController objectAtIndexPath:indexPath];
+        [_eventModel deletePerson:poorSucker];
+        [WeAllPayStoreController.defaultStore saveViewContext];
         _didSomethingChange = YES;
     }
 }
@@ -221,10 +209,14 @@
     _eventNameTextField.placeholder = NSLocalizedStringWithDefaultValue(@"people_view_placeholder_event_name", nil, NSBundle.mainBundle, @"Event name", @"Placeholder for the field where you end the name of the event.");
     
     NSString *addPersonButtonTitle = NSLocalizedStringWithDefaultValue(@"people_view_button_add_person", nil, NSBundle.mainBundle, @"Add person", @"Add person button in the people view that adds a person to the event.");
-    [_addPersonButton setTitle:addPersonButtonTitle forState:UIControlStateNormal];
+    UIFont *font = [UIFont systemFontOfSize:15 weight:UIFontWeightSemibold];
+    NSDictionary<NSAttributedStringKey,id> *attrs = @{NSFontAttributeName: font};
+    NSAttributedString *attributedTitle = [[NSAttributedString alloc] initWithString:addPersonButtonTitle attributes:attrs];
+    [_addPersonButton setAttributedTitle:attributedTitle forState:UIControlStateNormal];
     
-    NSString *addPersonFromContactsButton = NSLocalizedStringWithDefaultValue(@"people_view_button_contacts", nil, NSBundle.mainBundle, @"Contacts", @"Add person from contacts button inthe people view that imports a person from the addressbook to the event");
-    [_addPersonFromContactsButton setTitle:addPersonFromContactsButton forState:UIControlStateNormal];
+    NSString *addPersonFromContactsButtonTitle = NSLocalizedStringWithDefaultValue(@"people_view_button_contacts", nil, NSBundle.mainBundle, @"Contacts", @"Add person from contacts button inthe people view that imports a person from the addressbook to the event");
+    NSAttributedString *attributedAddPersonFromContactsButtonTitle = [[NSAttributedString alloc] initWithString:addPersonFromContactsButtonTitle attributes:attrs];
+    [_addPersonFromContactsButton setAttributedTitle:attributedAddPersonFromContactsButtonTitle forState:UIControlStateNormal];
     
     _emptyMessage = [NSBundle.mainBundle loadNibNamed:@"MCTableEmptyMessage" owner:self options:nil][0];
     _emptyMessage.borderlineView.dxInset = 20;
@@ -256,50 +248,58 @@
 - (void)viewWillAppear:(BOOL)animated {
     [super viewWillAppear:animated];
     
-    _eventNameTextField.text = _tonightsBill.tripName;
+    _eventNameTextField.text = _eventModel.event.tripName;
     _eventNameTextField.delegate = self;
     
-    if (!_dataController) {
-        _dataController = [MCWeAllPayStoreController.defaultStore sharedBillPeoplePresentDataControllerForDelegate:self];
+    if (!_fetchedResultsController) {
+        _fetchedResultsController = _eventModel.peopleFetchedResultsController;
+        _fetchedResultsController.delegate = self;
         [self performFetch];
         [self.tableView reloadData];
         [self setEmptyMessageWithDuration:0.0];
     }
-    
-    BOOL shouldAppearAsEditing = [_myParent isChildTableViewEditing];
-    [self.tableView setEditing:shouldAppearAsEditing animated:NO];
 
     _emptyMessage.topConstraint.constant = _headerView.frame.size.height;
     
+    // Create KVO
+    NSKeyValueObservingOptions options = NSKeyValueObservingOptionInitial | NSKeyValueObservingOptionNew;
+    [self.isEditingModel addObserver:self forKeyPath:@"boolValue" options:options context:isEditingToggleContext];
+}
+
+- (void)viewWillDisappear:(BOOL)animated {
+    [super viewWillDisappear:animated];
+    
+    _fetchedResultsController = nil;
+    
+    // Destroy KVO
+    [self.isEditingModel removeObserver:self forKeyPath:@"boolValue" context:isEditingToggleContext];
 }
 
 - (void)viewDidDisappear:(BOOL)animated {
     [super viewDidDisappear:animated];
     
-    _dataController = nil;
+    _fetchedResultsController = nil;
 }
 
 - (void)prepareForSegue:(UIStoryboardSegue *)segue sender:(id)sender {
     if ([[segue identifier] isEqualToString:@"openEditPerson"]) {
         UINavigationController *navController = (UINavigationController *)segue.destinationViewController;
-        if (@available(iOS 13.0, *)) {
-            navController.modalInPresentation = YES;
-        }
+        navController.modalInPresentation = YES;
         MCPersonViewController *destination = navController.viewControllers.firstObject;
         destination.isAdBannerEnabled = YES;
         NSIndexPath *indexPathOfSelectedRow = [[self tableView] indexPathForSelectedRow];
-        MCPerson *thePerson = [_dataController objectAtIndexPath:indexPathOfSelectedRow];
-        [MCWeAllPayStoreController.defaultStore beginUndoGroup];
+        MCPerson *thePerson = [_fetchedResultsController objectAtIndexPath:indexPathOfSelectedRow];
+        [WeAllPayStoreController.defaultStore beginUndoGroup];
         if (!thePerson) {
             // No person present create a new one.
-            thePerson = [_tonightsBill addPerson];
-            [thePerson setThumbnailDataFromImage:nil];
-            [thePerson setPictureDataFromImage:nil];
-            destination.thisPerson = thePerson;
+            thePerson = [_eventModel addPerson];
+            thePerson.thumbnail = nil;
+            thePerson.picture = nil;
+            [destination updateWithPerson:thePerson];
             destination.isNew = YES;
         } else {
             // Person present open it.
-            destination.thisPerson = thePerson;
+            [destination updateWithPerson:thePerson];
             destination.isNew = NO;
             [self.tableView deselectRowAtIndexPath:indexPathOfSelectedRow animated:YES];
         }
@@ -332,6 +332,31 @@
 
 - (void)dealloc {
     [[NSNotificationCenter defaultCenter] removeObserver:self];
+}
+
+- (void)observeValueForKeyPath:(NSString *)keyPath ofObject:(id)object change:(NSDictionary<NSKeyValueChangeKey,id> *)change context:(void *)context {
+    if (context == &isEditingToggleContext) {
+#ifdef DEBUG
+        NSLog(@"change: %@", change);
+#endif
+        NSNumber *changeKeyNumber = (NSNumber *)change[NSKeyValueChangeKindKey];
+        NSKeyValueChange keyValueChange = changeKeyNumber.unsignedIntegerValue;
+        switch (keyValueChange) {
+            case NSKeyValueChangeSetting:
+            {
+                id new = change[NSKeyValueChangeNewKey];
+                if ([new isKindOfClass:[NSNumber class]]) {
+                    NSNumber *isEditing = (NSNumber *)new;
+                    [self.tableView setEditing:isEditing.boolValue animated:YES];
+                }
+            }
+                break;
+            default:
+                break;
+        }
+    } else {
+        [super observeValueForKeyPath:keyPath ofObject:object change:change context:context];
+    }
 }
 
 @end

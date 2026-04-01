@@ -7,7 +7,8 @@
 //
 
 #import "MCPaymentUpdateTo4.h"
-#import "MCPayment+CoreDataProperties.h"
+
+#import "We_all_pay-Swift.h"
 
 @implementation MCPaymentUpdateTo4
 

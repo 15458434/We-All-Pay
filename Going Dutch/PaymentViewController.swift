@@ -12,6 +12,7 @@ import CoreData
 import FirebaseAnalytics
 
 import WhoPayingUserDefaultsStoreInterface
+import CurrencyConverter
 
 
 enum DidSomethingChange: Int8 {
@@ -26,7 +27,7 @@ enum CancelButtonPressed {
     case notPressed, isPressed
 }
 
-final class PaymentViewController: MCGenericAdBannerTableViewController, AdBannerEngineDelegate, MCDismissKeyboardProtocol, MCPathComponentsToOpenProtocol, UITextFieldDelegate, NSFetchedResultsControllerDelegate, PaymentStateModelProtocol {
+final class PaymentViewController: MCGenericAdBannerTableViewController, AdBannerEngineDelegate, MCDismissKeyboardProtocol, MCPathComponentsToOpenProtocol, UITextFieldDelegate, NSFetchedResultsControllerDelegate {
 
     // MARK: IB Outlet
     @IBOutlet weak var headerView: UITableViewHeaderFooterView!
@@ -36,10 +37,11 @@ final class PaymentViewController: MCGenericAdBannerTableViewController, AdBanne
     @IBOutlet weak var categoryButton: UIButton!
     @IBOutlet weak var payerView: UIImageView!
     @IBOutlet weak var selectPayerButton: UIButton!
-    @IBOutlet weak var selectCurrencyButton: RoundedButton!
+    @IBOutlet weak var selectCurrencyButton: UIButton!
     @IBOutlet weak var presenceListLabel: UILabel!
     
     @IBOutlet var model: PaymentModel!
+    var eventModel: EventModel!
     
     // MARK: Properties
     var didSomethingChange: DidSomethingChange?
@@ -56,17 +58,17 @@ final class PaymentViewController: MCGenericAdBannerTableViewController, AdBanne
     // MARK: IB Actions
     @IBAction func mainCancelPressed(_ sender: UIButton) {
         mainCancelIsPressed = .isPressed
-        if MCWeAllPayStoreController.defaultStore().mainThreadContext.undoManager?.canUndo == true {
-            MCWeAllPayStoreController.defaultStore().endUndoGroupAndUndo()
+        if WeAllPayStoreController.defaultStore.viewContext.undoManager?.canUndo == true {
+            WeAllPayStoreController.defaultStore.endUndoGroupAndUndo()
         } else {
-            MCWeAllPayStoreController.defaultStore().endUndoGroup()
+            WeAllPayStoreController.defaultStore.endUndoGroup()
         }
         navigationController?.presentingViewController?.dismiss(animated: true, completion: nil)
     }
     
     @IBAction func mainDonePressed(_ sender: UIButton) {
-        MCWeAllPayStoreController.defaultStore().endUndoGroupAndProcess()
-        MCWeAllPayStoreController.defaultStore().saveMainThreadContext()
+        WeAllPayStoreController.defaultStore.endUndoGroupAndProcess()
+        WeAllPayStoreController.defaultStore.saveViewContext()
         navigationController!.presentingViewController!.dismiss(animated: true, completion: { () -> Void in
             WhoPayingUserDefaultsStoreInterface.sendToUserDefaultsStoreInterface(self.model.payment.onWhichBill)
         })
@@ -86,24 +88,27 @@ final class PaymentViewController: MCGenericAdBannerTableViewController, AdBanne
     
     @objc(prepareForUseWithPathComponentsToOpen:) func prepareForUse(with pathComponentsToOpen: [NSManagedObject]) {
         let event = pathComponentsToOpen[0] as! MCSharedBill
-        self.prepareForUse(with: event)
+        self.eventModel = EventModel(event: event, currencyModel: CurrencyModel(managedObjectContext: event.managedObjectContext!, currencyController: CurrencyController()))
+        self.prepareForUse(with: eventModel)
         let predefinedPayingPerson = pathComponentsToOpen[1] as! MCPerson
         model.update(payingPerson: predefinedPayingPerson)
     }
-    
-    @objc(prepareForUseWithEvent:) func prepareForUse(with event: MCSharedBill) {
-        MCWeAllPayStoreController.defaultStore().beginUndoGroup()
-        let newPayment = event.addPayment()!
+     
+    @objc(prepareForUseWithEventModel:) func prepareForUse(with eventModel: EventModel) {
+        self.eventModel = eventModel
+        WeAllPayStoreController.defaultStore.beginUndoGroup()
+        let newPayment = eventModel.addPayment()
         title = NSLocalizedString("payment_view_mainLabel_new_payment", value: "New payment", comment: "Header in the paymentView which state new Payment")
         isNew = .isNew
-        model.prepareForUse(with: newPayment)
+        model.prepareForUse(with: newPayment, fromEventOf: eventModel)
     }
     
-    @objc(prepareForUseWithPayment:) func prepareForUse(with payment: MCPayment) {
-        MCWeAllPayStoreController.defaultStore().beginUndoGroup()
+    @objc(prepareForUseWithPayment:fromEventOfEventModel:) func prepareForUse(with payment: MCPayment, fromEventOf eventModel: EventModel) {
+        self.eventModel = eventModel
+        WeAllPayStoreController.defaultStore.beginUndoGroup()
         title = NSLocalizedString("payment_view_mainLabel_edit_payment", value: "Payment", comment: "Header in the paymentView which states payment")
         isNew = .isNotNew
-        model.prepareForUse(with: payment)
+        model.prepareForUse(with: payment, fromEventOf: eventModel)
     }
     
     // MARK: DismissKeyboardProtocol
@@ -154,40 +159,18 @@ final class PaymentViewController: MCGenericAdBannerTableViewController, AdBanne
     
     func controller(_ controller: NSFetchedResultsController<NSFetchRequestResult>, didChange anObject: Any, at indexPath: IndexPath?, for type: NSFetchedResultsChangeType, newIndexPath: IndexPath?) {
         debugPrint("didchange")
-        if #available(iOS 9, *) {
-            switch (type) {
-            case .insert:
-                tableView.insertRows(at: [newIndexPath!], with: .fade)
-            case .delete:
-                tableView.deleteRows(at: [indexPath!], with: .fade)
-            case .update:
-                tableView.reloadRows(at: [indexPath!], with: .automatic)
-            case .move:
-                tableView.deleteRows(at: [indexPath!], with: .fade)
-                tableView.insertRows(at: [indexPath!], with: .fade)
-            @unknown default:
-                fatalError("Unknwn value for NSFetchedResultsChangeType")
-            }
-        } else {
-            switch (type) {
-            case .insert:
-                if indexPath == nil {
-                    tableView.insertRows(at: [newIndexPath!], with: .fade)
-                }
-            case .delete:
-                tableView.deleteRows(at: [indexPath!], with: .fade)
-            case .update:
-                tableView.reloadRows(at: [indexPath!], with: .automatic)
-            case .move:
-                if indexPath == newIndexPath {
-                    tableView.reloadRows(at: [indexPath!], with: .automatic)
-                } else {
-                    tableView.deleteRows(at: [indexPath!], with: .fade)
-                    tableView.insertRows(at: [indexPath!], with: .fade)
-                }
-            @unknown default:
-                fatalError("Unknwn value for NSFetchedResultsChangeType")
-            }
+        switch (type) {
+        case .insert:
+            tableView.insertRows(at: [newIndexPath!], with: .automatic)
+        case .delete:
+            tableView.deleteRows(at: [indexPath!], with: .automatic)
+        case .update:
+            ()
+        case .move:
+            tableView.deleteRows(at: [indexPath!], with: .automatic)
+            tableView.insertRows(at: [indexPath!], with: .automatic)
+        @unknown default:
+            fatalError("Unknwn value for NSFetchedResultsChangeType")
         }
     }
     
@@ -196,21 +179,15 @@ final class PaymentViewController: MCGenericAdBannerTableViewController, AdBanne
         tableView.endUpdates()
     }
     
-    // MARK: PaymentStateModelProtocol
-    
-    @objc var paymentStateModel: PaymentModel {
-        return self.model
-    }
-    
     // MARK: AdBannerEngineDelegate
     
-    func adEngine(_ adEngine: AdBannerEngine?, putOnscreen bannerView: GADBannerView) {
+    func adEngine(_ adEngine: AdBannerEngine?, putOnscreen bannerView: BannerView) {
         UIView.animate(withDuration: 0.35, delay: 0.0, options: .curveEaseOut, animations: {
             self.worstSalesPitchEverView!.alpha = 1
         }, completion: nil)
     }
     
-    func adEngine(_ adEngine: AdBannerEngine?, putOffScreen bannerView: GADBannerView) {
+    func adEngine(_ adEngine: AdBannerEngine?, putOffScreen bannerView: BannerView) {
         UIView.animate(withDuration: 0.35, delay: 0.0, options: .curveEaseOut, animations: {
             self.worstSalesPitchEverView!.alpha = 0
         }, completion: nil)
@@ -223,6 +200,17 @@ final class PaymentViewController: MCGenericAdBannerTableViewController, AdBanne
     }
 
     // MARK: UITableViewDelegate
+    
+    override func tableView(_ tableView: UITableView, willDisplay cell: UITableViewCell, forRowAt indexPath: IndexPath) {
+        guard let cell = cell as? MCPaymentPresenceTableViewCell else {
+            fatalError("Expecting MCPaymentPresenceTableViewCell")
+        }
+        let paymentPresenceForThisCell: MCPaymentPresence = model.peoplePresenceController.object(at: indexPath)
+
+        cell.update(model: model, and: paymentPresenceForThisCell)
+        cell.keyboardDismissDelegate = self
+    }
+    
     override func tableView(_ tableView: UITableView, heightForRowAt indexPath: IndexPath) -> CGFloat {
         return 60
     }
@@ -239,17 +227,6 @@ final class PaymentViewController: MCGenericAdBannerTableViewController, AdBanne
     override func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
         let cell: MCPaymentPresenceTableViewCell = tableView.dequeueReusableCell(withIdentifier: "paymentPresenceTableViewCell", for: indexPath) as! MCPaymentPresenceTableViewCell
         cell.accessibilityIdentifier = "PaymentPresenceTableViewCell-\(indexPath.row)"
-        
-        let paymentPresenceForThisCell: MCPaymentPresence = model.peoplePresenceController.object(at: indexPath)
-        cell.nameLabel.text = paymentPresenceForThisCell.person!.getFullName()
-        cell.personView.image = paymentPresenceForThisCell.person!.thumbnail
-        cell.theSwitch.setOn(paymentPresenceForThisCell.isPersonPresent!.boolValue, animated: false)
-
-        let cf: CurrencyFormatter = CurrencyFormatter(currencyCode: paymentPresenceForThisCell.payment!.currency!.code!)
-        let averageOweFromPayment: NSNumber = NSNumber(value: -paymentPresenceForThisCell.averageOweFromPayment!.doubleValue)
-        cell.owesMoneyLabel.text = cf.string(for: averageOweFromPayment)
-        cell.thisCellsPaymentPresence = paymentPresenceForThisCell
-        cell.keyboardDismissDelegate = self
         
         let constraintBetweenNameLabelAndPayerLabel = NSLayoutConstraint(item: selectPayerButton!, attribute: .leading, relatedBy: .equal, toItem: cell.nameLabel, attribute: .leading, multiplier: 1.0, constant: 0.0)
         let constraintBetweenPictureInCellAndPictureOfPayer = NSLayoutConstraint(item: cell.personView!, attribute: .trailing, relatedBy: .equal, toItem: categoryImage, attribute: .trailing, multiplier: 1.0, constant: 0.0)
@@ -286,7 +263,7 @@ final class PaymentViewController: MCGenericAdBannerTableViewController, AdBanne
                     return
                 }
                 
-                mySelf.selectPayerButton.setTitle(newValue.getFullName(), for: .normal)
+                mySelf.selectPayerButton.setTitle(newValue.fullName, for: .normal)
                 mySelf.selectPayerButton.invalidateIntrinsicContentSize()
                 
                 mySelf.payerView.image = newValue.picture
@@ -365,21 +342,20 @@ final class PaymentViewController: MCGenericAdBannerTableViewController, AdBanne
         switch (segue.identifier) {
         case let identifier where identifier == "selectPayer_iPad":
             let destination = segue.destination as! SelectPayerTableViewController_iPad
-            destination.tonightsBill = model.payment.onWhichBill
-            destination.thisPayment = model.payment
+            destination.prepareForUse(eventModel: eventModel, paymentModel: model)
         case let identifier where identifier == "openSelectCurrency_iPad":
-            MCWeAllPayStoreController.defaultStore().beginUndoGroupWithoutRegistration()
+            WeAllPayStoreController.defaultStore.beginUndoGroupWithoutRegistration()
             let destination = segue.destination as! SelectCurrencyTableViewController
-            destination.currencyUpdateModel = PaymentUpdateCurrencyModel(with: model.payment)
+            destination.currencyUpdateModel = self.model
             
             destination.dismissMe = {
                 destination.dismiss(animated: true, completion: {
-                    MCWeAllPayStoreController.defaultStore().endUndoGroupAndProcessWithoutRegistration()
+                    WeAllPayStoreController.defaultStore.endUndoGroupAndProcessWithoutRegistration()
                 })
             }
         case let identifier where identifier == "selectCategory_iPad":
             let destination = segue.destination as! SelectCategoryTableViewController
-            destination.prepareForUse(with: model.payment)
+            destination.prepareForUse(with: model.payment, fromEventOf: eventModel)
             
             destination.dismissMe = {
                 destination.dismiss(animated: true)

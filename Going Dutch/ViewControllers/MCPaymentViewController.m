@@ -11,12 +11,6 @@
 #import "MCPaymentViewController.h"
 #import "MCPaymentPresenceTableViewCell_iPhone.h"
 
-#import "MCPayment+addons.h"
-#import "MCPerson+addons.h"
-#import "MCSharedBill+addons.h"
-#import "MCPaymentPresence+addons.h"
-#import "MCWeAllPayStoreController.h"
-
 #import "MCDismissMeBlockProtocol.h"
 
 #import "We_all_pay-Swift.h"
@@ -38,7 +32,7 @@ static void * CurrencyContext = &CurrencyContext;
 @property (weak, nonatomic) IBOutlet UITextField *payerNameField;
 @property (strong, nonatomic) MCPayerTextInputPicker *payerTextInputPicker;
 @property (weak, nonatomic) IBOutlet UITextField *itemView;
-@property (weak, nonatomic) IBOutlet MCRoundedButton *selectCurrencyButton;
+@property (weak, nonatomic) IBOutlet UIButton *selectCurrencyButton;
 @property (strong, nonatomic) MCDescriptionOfPaymentTextInputValidator *itemViewDelegate;
 @property (weak, nonatomic) IBOutlet UITextField *paidView;
 @property (strong, nonatomic) IBOutlet MCMoneyTextInputValidator *paidViewDelegate;
@@ -66,6 +60,7 @@ static void * CurrencyContext = &CurrencyContext;
 @property (nonatomic) BOOL peoplePickerCancelled;
 
 @property (nonatomic, strong) IBOutlet MCPaymentModel *model;
+@property (nonatomic, strong) MCEventModel *eventModel;
 
 @property (nonatomic) MCMoneyValueFieldDismissStatus kindOfPaidFieldDismiss;
 
@@ -81,10 +76,10 @@ static void * CurrencyContext = &CurrencyContext;
 
 - (IBAction)mainCancelButtonPressed:(id)sender {
     [self.view endEditing:YES];
-    if ([[[[MCWeAllPayStoreController defaultStore] mainThreadContext] undoManager] canUndo]) {
-        [[MCWeAllPayStoreController defaultStore] endUndoGroupAndUndo];
+    if ([[[[WeAllPayStoreController defaultStore] viewContext] undoManager] canUndo]) {
+        [[WeAllPayStoreController defaultStore] endUndoGroupAndUndo];
     } else {
-        [[MCWeAllPayStoreController defaultStore] endUndoGroup];
+        [[WeAllPayStoreController defaultStore] endUndoGroup];
     }
     [[[self navigationController] presentingViewController] dismissViewControllerAnimated:YES completion:nil];
 }
@@ -101,12 +96,12 @@ static void * CurrencyContext = &CurrencyContext;
     NSString *paremeterContentType = @"shared_payment";
     [FIRAnalytics logEventWithName:@"save_item" parameters:@{kFIRParameterItemID: parameterItemID, kFIRParameterItemName: parameterName, kFIRParameterContentType: paremeterContentType}];
 
-    if (MCWeAllPayStoreController.defaultStore.mainThreadContext.undoManager.canUndo) {
-        [[MCWeAllPayStoreController defaultStore] endUndoGroupAndProcess];
+    if (WeAllPayStoreController.defaultStore.viewContext.undoManager.canUndo) {
+        [[WeAllPayStoreController defaultStore] endUndoGroupAndProcess];
     } else {
-        [[MCWeAllPayStoreController defaultStore] endUndoGroup];
+        [[WeAllPayStoreController defaultStore] endUndoGroup];
     }
-    [[MCWeAllPayStoreController defaultStore] saveMainThreadContext];
+    [[WeAllPayStoreController defaultStore] saveViewContext];
     [self.navigationController.presentingViewController dismissViewControllerAnimated:YES completion:^{
         [WhoPayingUserDefaultsStoreInterface sendToUserDefaultsStoreInterface:self.model.payment.onWhichBill];
     }];
@@ -135,19 +130,29 @@ static void * CurrencyContext = &CurrencyContext;
     [self.view endEditing:YES];
 }
 
-- (void)prepareForUseWithEvent:(MCSharedBill *)event {
-    NSParameterAssert(event);
-    [[MCWeAllPayStoreController defaultStore] beginUndoGroup];
-    MCPayment *newPayment = [event addPayment];
+- (void)prepareForUseWithEventModel:(MCEventModel *)eventModel {
+    NSParameterAssert(eventModel);
+    _eventModel = eventModel;
+    [[WeAllPayStoreController defaultStore] beginUndoGroup];
+    MCPayment *newPayment = [eventModel addPayment];
     _isNew = YES;
-    [_model prepareForUseWithPayment:newPayment];
+    [_model prepareForUseWithPayment:newPayment fromEventOfEventModel:eventModel];
 }
 
-- (void)prepareForUseWithPayment:(MCPayment *)payment {
+- (void)prepareForUseWithPayment:(MCPayment *)payment andEventModel:(MCEventModel *)eventModel {
     NSParameterAssert(payment);
-    [[MCWeAllPayStoreController defaultStore] beginUndoGroup];
+    NSParameterAssert(eventModel);
+    _eventModel = eventModel;
+    [[WeAllPayStoreController defaultStore] beginUndoGroup];
     _isNew = NO;
-    [_model prepareForUseWithPayment:payment];
+    [_model prepareForUseWithPayment:payment fromEventOfEventModel:eventModel];
+}
+
+- (void)updateSelectCategoryButtonWithTitle:(NSString *)title {
+    UIFont *font = [UIFont systemFontOfSize:15 weight:UIFontWeightSemibold];
+    NSDictionary<NSAttributedStringKey,id> *attrs = @{NSFontAttributeName: font};
+    NSAttributedString *attrsTitle = [[NSAttributedString alloc] initWithString:title attributes:attrs];
+    [_categoryButton setAttributedTitle:attrsTitle forState:UIControlStateNormal];
 }
 
 #pragma mark - MCPathComponentsToOpenProtocol
@@ -155,7 +160,9 @@ static void * CurrencyContext = &CurrencyContext;
 - (void)prepareForUseWithPathComponentsToOpen:(NSArray<NSManagedObject *> *)pathComponentsToOpen {
     MCSharedBill *event = (MCSharedBill *)pathComponentsToOpen[0];
     NSParameterAssert(event);
-    [self prepareForUseWithEvent:event];
+    MCCurrencyModel *currencyModel = [[MCCurrencyModel alloc] initWithManagedObjectContext:event.managedObjectContext andWithCurrencyController:[[CurrencyController alloc] init]];
+    _eventModel = [[MCEventModel alloc] initWithEvent:event andConcurrencyModel:currencyModel];
+    [self prepareForUseWithEventModel:_eventModel];
     MCPerson *predefinedPayingPerson = (MCPerson *)pathComponentsToOpen[1];
     NSParameterAssert(predefinedPayingPerson);
     [_model updatePayingPerson:predefinedPayingPerson];
@@ -229,7 +236,7 @@ static void * CurrencyContext = &CurrencyContext;
     MCPaymentPresenceTableViewCell_iPhone *paymentPresenceCell = (MCPaymentPresenceTableViewCell_iPhone *)cell;
     // Set the cell contents
     MCPaymentPresence *paymentPresence = [_model.peoplePresenceController objectAtIndexPath:indexPath];
-    [paymentPresenceCell updatePaymentPresence:paymentPresence];
+    [paymentPresenceCell updateModel:_model andPaymentPresence:paymentPresence];
 }
 
 - (CGFloat)tableView:(UITableView *)tableView heightForRowAtIndexPath:(NSIndexPath *)indexPath {
@@ -256,9 +263,9 @@ static void * CurrencyContext = &CurrencyContext;
     
     // Set the cell alignment to headerView stuff
     NSLayoutConstraint *payerViewToCellNameLabel = [NSLayoutConstraint constraintWithItem:_payerNameField attribute:NSLayoutAttributeLeading relatedBy:NSLayoutRelationEqual toItem:[cell nameLabel] attribute:NSLayoutAttributeLeading multiplier:1.0 constant:-6.0];
-    payerViewToCellNameLabel.identifier = [[thisCellsPresence.person getFullName] stringByAppendingString:@"payerViewToCellNameLabel"];
+    payerViewToCellNameLabel.identifier = [thisCellsPresence.person.fullName stringByAppendingString:@"payerViewToCellNameLabel"];
     NSLayoutConstraint *payerPictureToUser = [NSLayoutConstraint constraintWithItem:_payerPicture attribute:NSLayoutAttributeTrailing relatedBy:NSLayoutRelationEqual toItem:[cell personView] attribute:NSLayoutAttributeTrailing multiplier:1.0 constant:0.0];
-    payerPictureToUser.identifier = [[thisCellsPresence.person getFullName] stringByAppendingString:@"payerPictureToUser"];
+    payerPictureToUser.identifier = [thisCellsPresence.person.fullName stringByAppendingString:@"payerPictureToUser"];
     [self.tableView addConstraints:@[payerViewToCellNameLabel, payerPictureToUser]];
     
     return cell;
@@ -285,7 +292,10 @@ static void * CurrencyContext = &CurrencyContext;
     _payerNameField.placeholder = NSLocalizedStringWithDefaultValue(@"payment_view_payerNameField_placeholder", nil, NSBundle.mainBundle, @"Who paid?", @"A placeholder of who paid text field in the edit payment view");
     _itemView.placeholder = NSLocalizedStringWithDefaultValue(@"payment_view_item_description_placeholder", nil, NSBundle.mainBundle, @"What got paid?", @"A placeholder of the item description field in the edit payment view.");
     NSString *currencyButtonTitle = NSLocalizedStringWithDefaultValue(@"payment_view_button_select_currency", nil, NSBundle.mainBundle, @"€$£¥", @"Text on the button that changes the currency in which the currently entered payment was made.");
-    [_selectCurrencyButton setTitle:currencyButtonTitle forState:UIControlStateNormal];
+    UIFont *font = [UIFont systemFontOfSize:15 weight:UIFontWeightSemibold];
+    NSDictionary<NSAttributedStringKey,id> *attrs = @{NSFontAttributeName: font};
+    NSAttributedString *attributedTitle = [[NSAttributedString alloc] initWithString:currencyButtonTitle attributes:attrs];
+    [_selectCurrencyButton setAttributedTitle:attributedTitle forState:UIControlStateNormal];
     _paidView.placeholder = NSLocalizedStringWithDefaultValue(@"payment_view_price_placeholder", nil, NSBundle.mainBundle, @"How much is spent?", @"A placeholder of the price fireld in the edit payment view.");
     _presenceListLabel.text = NSLocalizedStringWithDefaultValue(@"payment_view_presence_list_title", nil, NSBundle.mainBundle, @"Presence of payment", @"Title of the list of people who are present on the current payment in the edit payment view.");
     
@@ -354,12 +364,12 @@ static void * CurrencyContext = &CurrencyContext;
         _selectCurrencyTableViewController = ChildViewStatusIsOpened;
         UINavigationController *navController = (UINavigationController *)segue.destinationViewController;
         SelectCurrencyTableViewController *selectCurrencyViewController = (SelectCurrencyTableViewController *)navController.viewControllers.firstObject;
-        selectCurrencyViewController.currencyUpdateModel = [[PaymentUpdateCurrencyModel alloc] initWith:_model.payment];
+        selectCurrencyViewController.currencyUpdateModel = _model;
     }
     if ([segue.identifier isEqualToString:@"selectCategory"]) {
         UINavigationController *navigationController = (UINavigationController *)segue.destinationViewController;
         SelectCategoryTableViewController *destinationViewController = (SelectCategoryTableViewController *)navigationController.viewControllers.firstObject;
-        [destinationViewController prepareForUseWithPayment:_model.payment];
+        [destinationViewController prepareForUseWithPayment:_model.payment fromEventOfEventModel:_eventModel];
     }
 }
 
@@ -403,7 +413,7 @@ static void * CurrencyContext = &CurrencyContext;
             case NSKeyValueChangeSetting: {
                 id new = change[NSKeyValueChangeNewKey];
                 if ([new isKindOfClass:[MCPerson class]]) {
-                    _payerNameField.text = ((MCPerson *)new).getFullName;
+                    _payerNameField.text = ((MCPerson *)new).fullName;
                     if (_model.payment.payingPerson) {
                         _payerPicture.image = _model.payment.payingPerson.picture;
                     }
@@ -459,18 +469,18 @@ static void * CurrencyContext = &CurrencyContext;
                     CategoryPictureObject *categoryObject = pictureObjects[((NSNumber *)new).shortValue];
                     if (categoryObject.categoryId > 0) {
                         _categoryView.image = categoryObject.largePicture;
-                        [_categoryButton setTitle:categoryObject.categoryDescription forState:UIControlStateNormal];
+                        [self updateSelectCategoryButtonWithTitle:categoryObject.categoryDescription];
                     } else {
                         NSString *buttonText = NSLocalizedStringWithDefaultValue(@"payment_view_button_select_category", nil, NSBundle.mainBundle, @"Select Category", @"Text of the payment category selection button");
                         _categoryView.image = categoryObject.largePicture;
-                        [_categoryButton setTitle:buttonText forState:UIControlStateNormal];
+                        [self updateSelectCategoryButtonWithTitle:buttonText];
                     }
                 } else {
                     NSArray *pictureObjects = CategoryPictureStoreController.shared.pictureObjects;
                     CategoryPictureObject *categoryObject = pictureObjects[0];
                     NSString *buttonText = NSLocalizedStringWithDefaultValue(@"payment_view_button_select_category", nil, NSBundle.mainBundle, @"Select Category", @"Text of the payment category selection button");
                     _categoryView.image = categoryObject.largePicture;
-                    [_categoryButton setTitle:buttonText forState:UIControlStateNormal];
+                    [self updateSelectCategoryButtonWithTitle:buttonText];
                 }
             }
                 break;

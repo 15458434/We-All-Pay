@@ -119,18 +119,10 @@ final public class RateMeController: NSObject {
         
         self.counterValue = UserDefaults.standard.integer(forKey: kRateMeControllerCounterValue)
         if let shouldAskContainerData = UserDefaults.standard.object(forKey: kRateMeControllerShouldAskContainer) as? Data {
-            if #available(iOS 11.0, *) {
-                if let userDefaultShouldAsk = try? NSKeyedUnarchiver.unarchiveTopLevelObjectWithData(shouldAskContainerData) as? RateMeControllerAskStatusContainer {
-                    self.shouldAskContainer = userDefaultShouldAsk
-                } else {
-                    self.shouldAskContainer = RateMeControllerAskStatusContainer()
-                }
+            if let userDefaultShouldAsk = try? NSKeyedUnarchiver.unarchivedObject(ofClass: RateMeControllerAskStatusContainer.self, from: shouldAskContainerData) {
+                self.shouldAskContainer = userDefaultShouldAsk
             } else {
-                if let userDefaultShouldAsk = NSKeyedUnarchiver.unarchiveObject(with: shouldAskContainerData) as? RateMeControllerAskStatusContainer {
-                    self.shouldAskContainer = userDefaultShouldAsk
-                } else {
-                    self.shouldAskContainer = RateMeControllerAskStatusContainer()
-                }
+                self.shouldAskContainer = RateMeControllerAskStatusContainer()
             }
         } else {
             self.shouldAskContainer = RateMeControllerAskStatusContainer()

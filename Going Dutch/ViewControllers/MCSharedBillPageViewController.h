@@ -9,8 +9,7 @@
 @import Foundation;
 @import UIKit;
 
-#import "MCTonightsBillTransfer.h"
-#import "MCIsEditingProtocol.h"
+#import "We_all_pay-Swift.h"
 
 @class MCSharedBill;
 
@@ -26,16 +25,14 @@
 @end
 
 __attribute__((objc_subclassing_restricted))
-@interface MCSharedBillPageViewController : UIPageViewController <UIPageViewControllerDataSource, UIPageViewControllerDelegate, UIAlertViewDelegate, MCIsEditingProtocol>
+@interface MCSharedBillPageViewController : UIPageViewController <UIPageViewControllerDataSource, UIPageViewControllerDelegate, UIAlertViewDelegate>
+
+@property (nonatomic, strong) MCEventModel *eventModel;
+@property (nonatomic, strong) MCToggleModel *isEditingModel;
 
 @property (weak, nonatomic) MCSharedBillMainViewController *mainViewController;
 @property (nonatomic, strong) MCPaymentsTableViewController *sharedBillTableViewController;
 @property (nonatomic, strong) MCEditTripViewController *editTripTableViewController;
-
-@property (nonatomic, strong) MCSharedBill *tonightsBill;
-@property (nonatomic, strong) MCSharedBill *writableTonightsBill;
-
-- (BOOL)toggleEditTableView:(id)sender;
 
 - (void)peopleOrPaymentsSelectionControlTapped:(id)sender;
 

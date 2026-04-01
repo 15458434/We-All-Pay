@@ -10,7 +10,6 @@
 @import CoreData;
 #import "MCGenericAdBannerViewController.h"
 
-#import "MCTonightsBillTransfer.h"
 #import "MCCurrentViewDelegate.h"
 
 #import "UIViewController+WeAllPayStore.h"
@@ -20,14 +19,12 @@
 @class MCSharedBill;
 
 __attribute__((objc_subclassing_restricted))
-@interface MCSharedBillMainViewController : MCGenericAdBannerViewController <MCTonightsBillTransfer, MCCurrentViewDelegate, MCPathComponentsToOpenProtocol>
+@interface MCSharedBillMainViewController : MCGenericAdBannerViewController <MCCurrentViewDelegate, MCPathComponentsToOpenProtocol>
 
 @property (nonatomic) MCSharedBillViewSelector currentView;
-@property (strong, nonatomic) MCSharedBill *tonightsBill;
-@property (nonatomic, strong) MCSharedBill *writableTonightsBill;
 
 @property (weak, nonatomic) IBOutlet UISegmentedControl *peopleOrPaymentsSelectionControl;
 
-- (void)updateEventWithObjectID:(NSManagedObjectID *)objectID;
+- (void)prepareForUseWithEventModel:(MCEventModel *)model andEventsModel:(MCEventsModel *)eventsModel;
 
 @end

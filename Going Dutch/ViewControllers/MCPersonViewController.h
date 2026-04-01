@@ -13,22 +13,14 @@
 
 #import "We_all_pay-Swift.h"
 
-#import "MCTonightsBillTransfer.h"
-
 @class MCPerson;
-@class MCSharedBill;
 @class MCTwoLabelsTitleView;
 
 __attribute__((objc_subclassing_restricted))
-@interface MCPersonViewController : MCGenericMediumAdBannerViewController <MCTonightsBillTransfer, MCThisPersonProtocol>
+@interface MCPersonViewController : MCGenericMediumAdBannerViewController
 
-// Only accessible on the mainThread.
-@property (nonatomic, strong) MCSharedBill *tonightsBill;
-@property (nonatomic, strong) MCPerson *thisPerson;
 @property (nonatomic) BOOL isNew;
 
-// Only accessible on the background thread.
-@property (nonatomic, strong) MCSharedBill *writableTonightsBill;
-@property (nonatomic, strong) MCPerson *writableThisPerson;
+- (void)updateWithPerson:(MCPerson *)person;
 
 @end

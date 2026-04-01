@@ -9,45 +9,8 @@
 import Foundation
 import UIKit
 
-final public class Currency: NSObject {
-    @objc(MCCurrencyType) enum Kind: Int {
-        case unknown = 0
-        case payment = 1
-        case noOfficialcode = 2
-        case unused = 3
-        case legacy = 4
-        case commodity = 5
-    }
-    @objc public let name: String
-    @objc public let code: String
-    public var symbol: String {
-        return (Locale.current as NSLocale).displayName(forKey: .currencySymbol, value: code) ?? ""
-    }
-    
-    // MARK: NSObject
-    
-    public init(name: String, code: String) {
-        self.name = name
-        self.code = code
-        super.init()
-    }
-    
-    subscript(key: String) -> String {
-        switch (key) {
-        case "name":
-            return self.name
-        case "code":
-            return self.code
-        case "symbol":
-            return self.symbol
-        default:
-            return ""
-        }
-    }
-}
-
 @objc final public class CurrencyController: NSObject {
-    @objc public let currencies: [Currency]
+    public let currencies: [Currency]
     
     @objc public func currencySymbol(_ code: String) -> String {
         return Locale.current.localizedString(forCurrencyCode: code) ?? ""
@@ -63,18 +26,18 @@ final public class Currency: NSObject {
                 } else {
                     return true
                 }
-            }).map {
-                return Currency(name: $0["name"] as! String, code: $0["code"] as! String)
-            }
+            }).map { Currency(name: $0["name"] as! String, code: $0["code"] as! String) }
         } else {
             currencies = readCurrencies.map {
-                let name = $0["name"] as! String
-                let code = $0["code"] as! String
-                return Currency(name: name, code: code)
+                Currency(name: $0["name"] as! String, code: $0["code"] as! String)
             }
         }
 
         super.init()
+    }
+    
+    public func currency(code: String) -> Currency? {
+        currencies.first(where: { $0.code == code })
     }
     
     // MARK: NSObject

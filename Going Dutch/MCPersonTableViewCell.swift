@@ -7,13 +7,39 @@
 //
 
 import UIKit
+import Combine
 
-final class MCPersonTableViewCell: UITableViewCell {
+@objc(MCPersonTableViewCell)
+final class PersonTableViewCell: UITableViewCell {
+    @objc private(set) weak var eventModel: EventModel!
+    @objc private(set) var personModel: PersonModel!
+    
     @IBOutlet var fetchingExchangeRateIndicator: UIActivityIndicatorView!
     @IBOutlet var personImage: UIImageView!
     @IBOutlet var nameLabel: UILabel!
     @IBOutlet var emailLabel: UILabel!
     @IBOutlet var totalSpent: UILabel!
+    
+    private var bag = Set<AnyCancellable>()
+    
+    @objc(updateWithEventModel:andPerson:) func update(eventModel: EventModel, person: MCPerson) {
+        self.eventModel = eventModel
+        personModel.prepareForUse(withPerson: person)
+        self.personImage.image = personModel.person.thumbnail
+        self.nameLabel.text = personModel.person.fullName
+        self.emailLabel.text = personModel.defaultEmailaddress?.emailAddress
+        
+        if personModel.person.hasPersonMadePaymentWithInvalidExchangeRates {
+            fetchingExchangeRateIndicator.startAnimating()
+            totalSpent.isHidden = true
+        } else {
+            self.fetchingExchangeRateIndicator.stopAnimating()
+            totalSpent.isHidden = false
+            
+            let cf = eventModel.mainCurrencyFormatter!
+            totalSpent.text = cf.string(for: personModel.person.totalSumPaid)
+        }
+    }
     
     // MARK: UITableViewCell
     
@@ -22,6 +48,10 @@ final class MCPersonTableViewCell: UITableViewCell {
     // MARK: UIResponder
     
     // MARK: NSObject
+    
+    override func awakeFromNib() {
+        self.personModel = PersonModel()
+    }
     
     #if TARGET_INTERFACE_BUILDER
     override class func prepareForInterfaceBuilder() {

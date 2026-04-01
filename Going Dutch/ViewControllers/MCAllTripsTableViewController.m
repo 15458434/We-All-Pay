@@ -8,6 +8,8 @@
 
 @import FirebaseAnalytics;
 
+#import "CurrencyConverter/CurrencyConverter.h"
+
 #import "MCAllTripsTableViewController.h"
 #import "MCPaymentsTableViewController.h"
 #import "MCPaymentViewController.h"
@@ -16,15 +18,11 @@
 
 #import "MCBadgeButton.h"
 
-#import "MCWeAllPayStoreController.h"
-#import "MCSharedBill+addons.h"
-#import "MCPerson+addons.h"
-#import "MCCurrency+addons.h"
-
-#import "MCTonightsBillTransfer.h"
 #import "MCEditorType.h"
 
 #import "UIViewController+WeAllPayStore.h"
+
+#import "We_all_pay-Swift.h"
 
 typedef NS_ENUM(BOOL, MCTonightsBillStatus) {
     MCTonightsBillStatusClosed,
@@ -36,9 +34,10 @@ static void * notificationCountContext = &notificationCountContext;
 @interface MCAllTripsTableViewController ()
 
 @property (nonatomic, strong) IBOutlet MCEventsModel *model;
+@property (nonatomic, strong) UITableViewDiffableDataSource *diffableDataSource;
 
 @property (nonatomic, weak) IBOutlet MCBadgeButton *infoButton;
-@property (weak, nonatomic) IBOutlet MCRoundedButton *createEventButton;
+@property (weak, nonatomic) IBOutlet UIButton *createEventButton;
 @property (nonatomic, strong) MCTableEmptyMessage *emptyMessage;
 @property (weak, nonatomic) IBOutlet UITableViewHeaderFooterView *headerView;
 
@@ -92,24 +91,22 @@ static void * notificationCountContext = &notificationCountContext;
 }
 
 - (void)prepareUserActivity {
-    if (@available(iOS 9.0, *)) {
-        NSUserActivity *activity = [[NSUserActivity alloc] initWithActivityType:@"com.GreenHair.We-all-pay.SharingExpenses"];
-        activity.title = NSLocalizedStringWithDefaultValue(@"app_name", nil, NSBundle.mainBundle, @"We all pay", @"The name of We all pay");
-        NSString *keywordsFilePath = [[NSBundle mainBundle] pathForResource:@"We all pay keywords" ofType:@"plist"];
-        activity.keywords = [NSSet setWithArray:[NSArray arrayWithContentsOfFile:keywordsFilePath]];
-        activity.eligibleForHandoff = NO;
-        activity.eligibleForSearch = YES;
-        activity.eligibleForPublicIndexing = YES;
-        activity.requiredUserInfoKeys = [[NSSet alloc] init];
-        self.userActivity = activity;
-    }
+    NSUserActivity *activity = [[NSUserActivity alloc] initWithActivityType:@"com.GreenHair.We-all-pay.SharingExpenses"];
+    activity.title = NSLocalizedStringWithDefaultValue(@"app_name", nil, NSBundle.mainBundle, @"We all pay", @"The name of We all pay");
+    NSString *keywordsFilePath = [[NSBundle mainBundle] pathForResource:@"We all pay keywords" ofType:@"plist"];
+    activity.keywords = [NSSet setWithArray:[NSArray arrayWithContentsOfFile:keywordsFilePath]];
+    activity.eligibleForHandoff = NO;
+    activity.eligibleForSearch = YES;
+    activity.eligibleForPublicIndexing = YES;
+    activity.requiredUserInfoKeys = [[NSSet alloc] init];
+    self.userActivity = activity;
 }
 
 - (void)deleteBillAtIndexpath:(NSIndexPath *)indexPath {
     MCSharedBill *poorSucker = [_model.fetchEventsController objectAtIndexPath:indexPath];
     [WhoPayingUserDefaultsStoreInterface sendInvalidUserDefaultsIfTonightsBillIs:poorSucker];
     [_model deleteWithEvent:poorSucker];
-    [[MCWeAllPayStoreController defaultStore] saveMainThreadContext];
+    [[WeAllPayStoreController defaultStore] saveViewContext];
 }
 
 #pragma mark - MCPathComponentsToOpenProtocol
@@ -123,68 +120,21 @@ static void * notificationCountContext = &notificationCountContext;
 
 #pragma mark - NSFetchedResultsControllerDelegate
 
-- (void)controllerWillChangeContent:(NSFetchedResultsController *)controller {
-    [self.tableView beginUpdates];
-}
-
-- (void)controller:(NSFetchedResultsController *)controller didChangeObject:(id)anObject atIndexPath:(NSIndexPath *)indexPath forChangeType:(NSFetchedResultsChangeType)type newIndexPath:(NSIndexPath *)newIndexPath {
-    switch(type) {
-        case NSFetchedResultsChangeInsert:
-            [self.tableView insertRowsAtIndexPaths:@[newIndexPath] withRowAnimation:UITableViewRowAnimationFade];
-            break;
-            
-        case NSFetchedResultsChangeDelete:
-            [self.tableView deleteRowsAtIndexPaths:@[indexPath] withRowAnimation:UITableViewRowAnimationFade];
-            break;
-            
-        case NSFetchedResultsChangeUpdate:
-            break;
-            
-        case NSFetchedResultsChangeMove: {
-            [self.tableView deleteRowsAtIndexPaths:@[indexPath] withRowAnimation:UITableViewRowAnimationFade];
-            [self.tableView insertRowsAtIndexPaths:@[newIndexPath] withRowAnimation:UITableViewRowAnimationFade];
-        }
-            break;
-    }
-}
-
-- (void)controllerDidChangeContent:(NSFetchedResultsController *)controller {
+- (void)controller:(NSFetchedResultsController *)controller didChangeContentWithSnapshot:(NSDiffableDataSourceSnapshot<NSString *,NSManagedObjectID *> *)snapshot {
     [self setEmptyMessageWithDuration:0.25];
-    [self.tableView endUpdates];
+    [_diffableDataSource applySnapshot:snapshot animatingDifferences:YES];
 }
 
 #pragma mark - UITableViewController
 
 #pragma mark - UITableViewDataSource
 
-- (NSInteger)numberOfSectionsInTableView:(UITableView *)tableView {
-    return _model.fetchEventsController.sections.count;
-}
-
-- (NSInteger)tableView:(UITableView *)tableView numberOfRowsInSection:(NSInteger)section {
-    return _model.fetchEventsController.sections[section].numberOfObjects;
-}
-
-- (UITableViewCell *)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath {
-    MCEventTableViewCell *allTripsTableViewCell = [tableView dequeueReusableCellWithIdentifier:@"MCAllTripsTableViewCell"];
-    return allTripsTableViewCell;
-}
-
-- (void)tableView:(UITableView *)tableView commitEditingStyle:(UITableViewCellEditingStyle)editingStyle forRowAtIndexPath:(NSIndexPath *)indexPath {
-    if (editingStyle == UITableViewCellEditingStyleDelete) {
-        [self deleteBillAtIndexpath:indexPath];
-    }
-}
-
 #pragma mark - UITableViewDelegate
 
 - (void)tableView:(UITableView *)tableView willDisplayCell:(UITableViewCell *)cell forRowAtIndexPath:(NSIndexPath *)indexPath {
     MCSharedBill *event = [_model.fetchEventsController objectAtIndexPath:indexPath];
     MCEventTableViewCell *eventCell = (MCEventTableViewCell *)cell;
-    
     [eventCell prepareForUseWith:event];
-    
-    return;
 }
 
 - (void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath {
@@ -199,10 +149,10 @@ static void * notificationCountContext = &notificationCountContext;
     return 76;
 }
 
-- (NSArray<UITableViewRowAction *> *)tableView:(UITableView *)tableView editActionsForRowAtIndexPath:(NSIndexPath *)indexPath {
+- (UISwipeActionsConfiguration *)tableView:(UITableView *)tableView trailingSwipeActionsConfigurationForRowAtIndexPath:(NSIndexPath *)indexPath {
     // Delete action
     NSString *deleteTitle = NSLocalizedStringWithDefaultValue(@"events_view_button_delete_event", nil, NSBundle.mainBundle, @"Delete", @"Text on a delete button");
-    UITableViewRowAction *deleteAction = [UITableViewRowAction rowActionWithStyle:UITableViewRowActionStyleDestructive title:deleteTitle handler:^(UITableViewRowAction * _Nonnull action, NSIndexPath * _Nonnull indexPath) {
+    UIContextualAction *deleteAction = [UIContextualAction contextualActionWithStyle:UIContextualActionStyleDestructive title:deleteTitle handler:^(UIContextualAction * _Nonnull action, __kindof UIView * _Nonnull sourceView, void (^ _Nonnull completionHandler)(BOOL)) {
 #ifdef DEBUG
         NSLog(@"Delete action pressed");
 #endif
@@ -210,7 +160,7 @@ static void * notificationCountContext = &notificationCountContext;
     }];
     // Change MainCurrency action
     NSString *selectMainCurrencyTitle = NSLocalizedStringWithDefaultValue(@"events_view_button_change_main_currency", nil, NSBundle.mainBundle, @"€$£¥", @"Text on a button to select a different main currency for an event");
-    UITableViewRowAction *selectCurrencyAction = [UITableViewRowAction rowActionWithStyle:UITableViewRowActionStyleNormal title:selectMainCurrencyTitle handler:^(UITableViewRowAction * _Nonnull action, NSIndexPath * _Nonnull indexPath) {
+    UIContextualAction *selectMainCurrencyAction = [UIContextualAction contextualActionWithStyle:UIContextualActionStyleNormal title:selectMainCurrencyTitle handler:^(UIContextualAction * _Nonnull action, __kindof UIView * _Nonnull sourceView, void (^ _Nonnull completionHandler)(BOOL)) {
 #ifdef DEBUG
         NSLog(@"Change currency pressed");
 #endif
@@ -218,7 +168,10 @@ static void * notificationCountContext = &notificationCountContext;
         [self performSegueWithIdentifier:@"selectMainCurrency" sender:self];
         self.selectedIndexPathForAction = indexPath;
     }];
-    return @[deleteAction, selectCurrencyAction];
+    
+    NSArray *actions = @[deleteAction, selectMainCurrencyAction];
+    UISwipeActionsConfiguration *swipeActions = [UISwipeActionsConfiguration configurationWithActions:actions];
+    return swipeActions;
 }
 
 #pragma mark - UIViewController
@@ -228,7 +181,10 @@ static void * notificationCountContext = &notificationCountContext;
     
     self.navigationItem.title = NSLocalizedStringWithDefaultValue(@"events_view_title", nil, NSBundle.mainBundle , @"Events", @"A list of all the events on which payments have been shared on the people present");
     NSString *createEventButtonTitle = NSLocalizedStringWithDefaultValue(@"events_view_button_create_event", nil, NSBundle.mainBundle, @"New Event", @"Button in the events view that creates a new event");
-    [self.createEventButton setTitle:createEventButtonTitle forState:UIControlStateNormal];
+    UIFont *font = [UIFont systemFontOfSize:15 weight:UIFontWeightSemibold];
+    NSDictionary<NSAttributedStringKey,id> *attrs = @{NSFontAttributeName: font};
+    NSAttributedString *attributedTitle = [[NSAttributedString alloc] initWithString:createEventButtonTitle attributes:attrs];
+    [_createEventButton setAttributedTitle:attributedTitle forState:UIControlStateNormal];
     
     _emptyMessage = [NSBundle.mainBundle loadNibNamed:@"MCTableEmptyMessage" owner:self options:nil][0];
     _emptyMessage.bigMessage.text = NSLocalizedStringWithDefaultValue(@"events_view_empty_message", nil, NSBundle.mainBundle, @"Press \"New event\" to add the event on which you'd like to share the expenses with your friends.", @"A message shown to the user when the list of events is empty.");
@@ -245,6 +201,14 @@ static void * notificationCountContext = &notificationCountContext;
     
     [self prepareUserActivity];
     
+    _diffableDataSource = [[UITableViewDiffableDataSource alloc] initWithTableView:self.tableView cellProvider:^UITableViewCell * _Nullable(UITableView * _Nonnull tableView, NSIndexPath * _Nonnull indexPath, id  _Nonnull itemIdentifier) {
+        MCEventTableViewCell *allTripsTableViewCell = [tableView dequeueReusableCellWithIdentifier:@"MCAllTripsTableViewCell" forIndexPath:indexPath];
+        MCSharedBill *event = [self.model.fetchEventsController objectAtIndexPath:indexPath];
+        [allTripsTableViewCell prepareForUseWith:event];
+        return allTripsTableViewCell;
+    }];
+    self.tableView.dataSource = _diffableDataSource;
+    
     [MCAdEngine presentPrivacyConsentRequestIfNecessaryFromViewController:self];
 #ifdef ADTEST
     [MCAdEngine presentAdTestSuiteFromPresentingViewController:self];
@@ -259,8 +223,8 @@ static void * notificationCountContext = &notificationCountContext;
     }
     
     if (!_model.fetchEventsController) {
-        NSManagedObjectContext *managedObjectContext = MCWeAllPayStoreController.defaultStore.mainThreadContext;
-        [_model prepareForUseWithManagedObjectContext:managedObjectContext forDelegate:self];
+        NSManagedObjectContext *managedObjectContext = WeAllPayStoreController.defaultStore.viewContext;
+        [_model prepareForUseWithManagedObjectContext:managedObjectContext andFetchedResultsControllerdDelegate:self];
         [[self tableView] reloadData];
         [self setEmptyMessageWithDuration:0.0];
     }
@@ -291,18 +255,28 @@ static void * notificationCountContext = &notificationCountContext;
 #endif
     if ([segue.identifier isEqualToString:@"newTonightsBill"]) {
         _isATonightsBillOpened = MCTonightsBillStatusOpened;
+        MCSharedBill *newEvent = [_model addEvent];
+        MCCurrencyModel *currencyModel = [[MCCurrencyModel alloc] initWithManagedObjectContext:newEvent.managedObjectContext andWithCurrencyController:[[CurrencyController alloc] init]];
+        MCEventModel *eventModel = [[MCEventModel alloc] initWithEvent:newEvent andConcurrencyModel:currencyModel];
+        MCSharedBillMainViewController *destination = (MCSharedBillMainViewController *)segue.destinationViewController;
+        [destination prepareForUseWithEventModel:eventModel andEventsModel:_model];
+        destination.currentView = MCSelectEditTripTableView;
     } else if ([segue.identifier isEqualToString:@"openTonightsBill"]) {
         _isATonightsBillOpened = MCTonightsBillStatusOpened;
         NSIndexPath *indexPathOfSelectedRow = self.tableView.indexPathForSelectedRow;
         NSParameterAssert(indexPathOfSelectedRow);
         MCSharedBill *selectedEvent = [_model.fetchEventsController objectAtIndexPath:indexPathOfSelectedRow];
+        MCCurrencyModel *currencyModel = [[MCCurrencyModel alloc] initWithManagedObjectContext:selectedEvent.managedObjectContext andWithCurrencyController:[[CurrencyController alloc] init]];
+        MCEventModel *model = [[MCEventModel alloc] initWithEvent:selectedEvent andConcurrencyModel:currencyModel];
         MCSharedBillMainViewController *destination = (MCSharedBillMainViewController *)segue.destinationViewController;
-        [destination updateEventWithObjectID:selectedEvent.objectID];
+        [destination prepareForUseWithEventModel:model andEventsModel:_model];
+        destination.currentView = MCSelectSharedBillTableView;
     } else if ([segue.identifier isEqualToString:@"selectMainCurrency"]) {
-        MCSharedBill *theBill = _model.fetchEventsController.fetchedObjects[_selectedIndexPathForAction.row];
+        MCSharedBill *event = _model.fetchEventsController.fetchedObjects[_selectedIndexPathForAction.row];
         UINavigationController *navController = (UINavigationController *)segue.destinationViewController;
         SelectCurrencyTableViewController *currencySelector = (SelectCurrencyTableViewController *)navController.viewControllers.firstObject;
-        currencySelector.currencyUpdateModel = [[EventUpdateCurrencyModel alloc] initWith:theBill];
+        MCCurrencyModel *currencyModel = [[MCCurrencyModel alloc] initWithManagedObjectContext:event.managedObjectContext andWithCurrencyController:[[CurrencyController alloc] init]];
+        currencySelector.currencyUpdateModel = [[MCEventModel alloc] initWithEvent:event andConcurrencyModel:currencyModel];
     } else if ([segue.identifier isEqualToString:@"iScreenSegue"]) {
         UINavigationController *navigationController = (UINavigationController *)segue.destinationViewController;
         navigationController.modalPresentationStyle = UIModalPresentationCustom;
@@ -316,8 +290,10 @@ static void * notificationCountContext = &notificationCountContext;
         NSParameterAssert(_pathComponents);
         MCSharedBill *event = (MCSharedBill *)_pathComponents[0];
         NSParameterAssert(event);
+        MCCurrencyModel *currencyModel = [[MCCurrencyModel alloc] initWithManagedObjectContext:event.managedObjectContext andWithCurrencyController:[[CurrencyController alloc] init]];
+        MCEventModel *model = [[MCEventModel alloc] initWithEvent:event andConcurrencyModel:currencyModel];
         MCSharedBillMainViewController *destination = (MCSharedBillMainViewController *)segue.destinationViewController;
-        [destination updateEventWithObjectID:event.objectID];
+        [destination prepareForUseWithEventModel:model andEventsModel:_model];
         _pathComponents = nil;
     }
 }

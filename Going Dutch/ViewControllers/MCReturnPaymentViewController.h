@@ -10,6 +10,7 @@
 
 @class MCSharedBill;
 
+@class MCEventModel;
 @class MCSolutionModel;
 
 @class MCTwoLabelsTitleView;
@@ -29,7 +30,6 @@
 - (IBAction)mainCancelButtonPressed:(id)sender;
 
 - (void)openMailView:(id)sender;
-- (void)updateEvent:(MCSharedBill *)event andSendMailDelegate:(MCSharedBillPageViewController *)sendMailDelegate;
-
+- (void)updateEventModel:(MCEventModel *)eventModel andSendMailDelegate:(MCSharedBillPageViewController *)sendMailDelegate;
 
 @end

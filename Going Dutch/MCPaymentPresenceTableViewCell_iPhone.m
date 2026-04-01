@@ -8,37 +8,34 @@
 
 #import "MCPaymentPresenceTableViewCell_iPhone.h"
 
-#import "MCPaymentPresence+addons.h"
-#import "MCPayment+addons.h"
-#import "MCPerson+addons.h"
-
 #import "We_all_pay-Swift.h"
 
 static void * AverageOweFromPaymentContext = &AverageOweFromPaymentContext;
 
 @interface MCPaymentPresenceTableViewCell_iPhone ()
 
-@property (nonatomic, weak) MCPaymentPresence *model;
+@property (nonatomic, weak) MCPaymentModel *model;
+@property (nonatomic, weak) MCPaymentPresence *paymentPresence;
 
 @end
 
 @implementation MCPaymentPresenceTableViewCell_iPhone
 
 - (IBAction)presenceIsSwitched:(UISwitch *)sender {
-    self.model.isPersonPresent = @(self.isPresentSwitch.isOn);
-    [self.model.payment recalculateAveragePeopleOweAndStore];
+    [_model updatePaymentPresence:_paymentPresence toIsPresent:self.isPresentSwitch.isOn];
 }
 
-- (void)updatePaymentPresence:(MCPaymentPresence *)paymentPresence {
-    if (self.model) {
-        [self.model removeObserver:self forKeyPath:@"averageOweFromPayment" context:AverageOweFromPaymentContext];
+- (void)updateModel:(MCPaymentModel *)model andPaymentPresence:(MCPaymentPresence *)paymentPresence {
+    _model = model;
+    if (self.paymentPresence) {
+        [self.paymentPresence removeObserver:self forKeyPath:@"averageOweFromPayment" context:AverageOweFromPaymentContext];
     }
-    self.model = paymentPresence;
-    self.nameLabel.text = [self.model.person getFullName];
-    self.personView.image = self.model.person.thumbnail;
-    self.isPresentSwitch.on = self.model.isPersonPresent.boolValue;
+    self.paymentPresence = paymentPresence;
+    self.nameLabel.text = self.paymentPresence.person.fullName;
+    self.personView.image = self.paymentPresence.person.thumbnail;
+    self.isPresentSwitch.on = self.paymentPresence.isPersonPresent.boolValue;
     NSKeyValueObservingOptions options = NSKeyValueObservingOptionInitial | NSKeyValueObservingOptionNew;
-    [self.model addObserver:self forKeyPath:@"averageOweFromPayment" options:options context:AverageOweFromPaymentContext];
+    [self.paymentPresence addObserver:self forKeyPath:@"averageOweFromPayment" options:options context:AverageOweFromPaymentContext];
 }
 
 #pragma mark - UITableViewCell
@@ -50,8 +47,8 @@ static void * AverageOweFromPaymentContext = &AverageOweFromPaymentContext;
 #pragma mark - NSObject
 
 - (void)dealloc {
-    if (self.model) {
-        [self.model removeObserver:self forKeyPath:@"averageOweFromPayment" context:AverageOweFromPaymentContext];
+    if (self.paymentPresence) {
+        [self.paymentPresence removeObserver:self forKeyPath:@"averageOweFromPayment" context:AverageOweFromPaymentContext];
     }
 }
 
@@ -70,7 +67,7 @@ static void * AverageOweFromPaymentContext = &AverageOweFromPaymentContext;
                 id new = change[NSKeyValueChangeNewKey];
                 if ([new isKindOfClass:[NSNumber class]]) {
                     NSNumber *averageOweFromPayment = (NSNumber *)new;
-                    CurrencyFormatter *cf = [[CurrencyFormatter alloc] initWithCurrencyCode:self.model.payment.currency.code];
+                    CurrencyFormatter *cf = [[CurrencyFormatter alloc] initWithCurrencyCode:self.paymentPresence.payment.currency.code];
                     NSNumber *averageOwe = @(-averageOweFromPayment.doubleValue);
                     self.owesLabel.text = [cf stringForObjectValue:averageOwe];
                 } else {

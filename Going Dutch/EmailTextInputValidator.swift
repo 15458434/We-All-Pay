@@ -26,11 +26,7 @@ import UIKit
     
     func textFieldDidBeginEditing(_ textField: UITextField) {
         model.beginUpdates()
-        if #available(iOS 13.0, *) {
-            textField.textColor = .label
-        } else {
-            textField.textColor = .darkText
-        }
+        textField.textColor = .label
     }
     
     func textFieldDidEndEditing(_ textField: UITextField, reason: UITextField.DidEndEditingReason) {
@@ -38,17 +34,13 @@ import UIKit
         case .committed:
             if validate(text: textField.text ?? "") {
                 model.update(defaultEmailAddress: textField.text!)
-                if #available(iOS 13.0, *) {
-                    textField.textColor = .label
-                } else {
-                    textField.textColor = .darkText
-                }
+                textField.textColor = .label
             } else {
                 textField.textColor = .red
             }
         case .cancelled:
             if model.person.emailAddress!.count >= 1 {
-                textField.text = model.person.defaultEmailAddress()
+                textField.text = model.person.defaultEmailAddress
             } else {
                 textField.text = nil
             }

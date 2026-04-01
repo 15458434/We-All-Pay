@@ -24,11 +24,7 @@ import UIKit
     
     func updateTextFieldColor(for string: String) {
         if model.currencyFormatter.doubleFromString(string) != nil {
-            if #available(iOS 13.0, *) {
-                textField.textColor = .label
-            } else {
-                textField.textColor = .darkText
-            }
+            textField.textColor = .label
         } else {
             textField.textColor = .red
         }

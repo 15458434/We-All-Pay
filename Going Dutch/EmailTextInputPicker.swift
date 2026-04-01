@@ -13,7 +13,7 @@ import UIKit
     private(set) weak var model: PersonModel!
     
     private lazy var emailAddresses: [MCEmailAddress] = {
-        return model.emailAddreses
+        return model.emailaddresses
     }()
     
     @objc(initWithTextField:andModel:) init(with textField: UITextField, and model: PersonModel) {
@@ -45,7 +45,7 @@ import UIKit
     
     func pickerView(_ pickerView: UIPickerView, didSelectRow row: Int, inComponent component: Int) {
         let pickedEmailAddress = emailAddresses[row]
-        model.update(defaultEmailAddress: pickedEmailAddress)
+        model.update(default: pickedEmailAddress)
     }
     
     // MARK: UIPickerViewDataSource

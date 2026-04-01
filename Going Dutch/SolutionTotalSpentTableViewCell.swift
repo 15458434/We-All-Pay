@@ -18,14 +18,14 @@ import UIKit
     @objc(prepareForUseWithPerson:fromSolutionModel:) func prepareForUse(with person: MCPerson, from model: SolutionModel) {
         self.item = person
         self.model = model
-        nameLabel.text = person.getFullName()
-        moneyLabel.text = model.currencyFormatter.string(for: person.totalSumPaid)
+        nameLabel.text = person.fullName
+        moneyLabel.text = model.eventModel.mainCurrencyFormatter.string(for: person.totalSumPaid)
     }
     
     @objc(prepareForUseWithModel:) func prepareForUse(with model: SolutionModel) {
         self.model = model
         nameLabel.text = NSLocalizedString("solution_view_cell_label_total_spent", value: "Total spent:", comment: "In the solution view: a label before the total amount of money spent on the entire event.")
-        moneyLabel.text = model.currencyFormatter.string(for: model.event.totalSumOfMoneyOfThisSharedBill())
+        moneyLabel.text = model.eventModel.mainCurrencyFormatter.string(for: try! model.totalSumOfMoney())
     }
     
     // MARK: UITableViewCell

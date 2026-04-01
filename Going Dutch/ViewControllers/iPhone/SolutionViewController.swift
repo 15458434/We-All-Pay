@@ -21,7 +21,7 @@ final class SolutionViewController: MCReturnPaymentViewController, MFMailCompose
     // MARK: ThisEvent
     var event: MCSharedBill! {
         get {
-            return model.event
+            return model.eventModel.event
         }
     }
     
@@ -37,7 +37,7 @@ final class SolutionViewController: MCReturnPaymentViewController, MFMailCompose
             self.showRateMeIfNecessary()
             self.presentedViewController!.dismiss(animated: true, completion: {
                 self.event.hasTheMailBeenSent = NSNumber(booleanLiteral: true)
-                MCWeAllPayStoreController.defaultStore().saveMainThreadContext()
+                WeAllPayStoreController.defaultStore.saveViewContext()
             })
         case .failed:
             self.presentedViewController!.dismiss(animated: true, completion: nil)

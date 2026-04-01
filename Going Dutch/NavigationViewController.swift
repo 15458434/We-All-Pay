@@ -17,16 +17,14 @@ import UIKit
     override func loadView() {
         super.loadView()
         
-        if #available(iOS 13, *) {
-            let navigationBar = self.navigationBar
-            let appearance = UINavigationBarAppearance()
-            appearance.configureWithDefaultBackground()
-            appearance.backgroundColor = UIColor(named: "navigationBar")
-            appearance.titleTextAttributes = [.foregroundColor: UIColor.systemBackground];
-            navigationBar.standardAppearance = appearance
-            navigationBar.scrollEdgeAppearance = navigationBar.standardAppearance
-            navigationBar.isTranslucent = false
-        }
+        let navigationBar = self.navigationBar
+        let appearance = UINavigationBarAppearance()
+        appearance.configureWithDefaultBackground()
+        appearance.backgroundColor = UIColor(named: "navigationBar")
+        appearance.titleTextAttributes = [.foregroundColor: UIColor.systemBackground];
+        navigationBar.standardAppearance = appearance
+        navigationBar.scrollEdgeAppearance = navigationBar.standardAppearance
+        navigationBar.isTranslucent = false
     }
     
     // MARK: UIResponder

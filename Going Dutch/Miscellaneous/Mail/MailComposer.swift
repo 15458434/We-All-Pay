@@ -8,6 +8,7 @@
 
 import Foundation
 import FirebaseCrashlytics
+import CurrencyConverter
 
 protocol MailComposer {
     func mailAdresses() throws -> [String]
@@ -22,10 +23,13 @@ enum MailComposerError: Error {
 
 extension MailComposer where Self: ThisEventReadOnly {
     func mailAdresses() throws -> [String] {
-        let allPeople = Array(event.peoplePresent ?? Set<MCPerson>())
+        guard let peoplePresent = event.peoplePresent as? Set<MCPerson> else {
+            return [String]()
+        }
+        let allPeople = Array(peoplePresent)
         var listOfMailAddresses = [String]()
         for person in allPeople {
-            if let emailAddress = person.defaultEmailAddress() {
+            if let emailAddress = person.defaultEmailAddress {
                 listOfMailAddresses.append(emailAddress)
             }
         }
@@ -45,32 +49,31 @@ extension MailComposer where Self: ThisEventReadOnly {
         Crashlytics.crashlytics().log("************** start mail body **************")
         Crashlytics.crashlytics().log("\(String(describing: event))")
         Crashlytics.crashlytics().log("  \(String(describing: event.mainCurrency))")
-        event.peoplePresent?.forEach { person in
-            Crashlytics.crashlytics().log("  \(person)")
-            person.emailAddress?.forEach { emailAddress in
-                Crashlytics.crashlytics().log(    "\(emailAddress)")
+        (event.peoplePresent as? Set<MCPerson>)?.enumerated().forEach { (index, person) in
+            Crashlytics.crashlytics().log("  index \(index): \(person)")
+            
+            (person.emailAddress as? Set<MCEmailAddress>)?.enumerated().forEach { (index, emailAddress) in
+                Crashlytics.crashlytics().log("    index \(index): \(emailAddress)")
             }
-            person.sharingPayment?.forEach { presence in
-                Crashlytics.crashlytics().log(    "\(presence)")
-            }
+//            person.sharingPayment?.enumerated().forEach { (index, presence) in
+//                Crashlytics.crashlytics().log("    index \(index): \(presence)")
+//            }
         }
-        event.payments?.forEach { payment in
-            Crashlytics.crashlytics().log("  \(payment)")
-            payment.peopleSharingPayment?.forEach { peoplePresence in
-                Crashlytics.crashlytics().log("    \(peoplePresence)")
-            }
+        event.payments?.enumerated().forEach { (index, payment) in
+            Crashlytics.crashlytics().log("  index \(index): \(payment)")
         }
         Crashlytics.crashlytics().log("*************** end mail body ***************")
-        
+        let eventModel = EventModel(event: event)
+        let solutionModel = SolutionModel(eventModel: eventModel)
         let mainCurrencyFormatter = CurrencyFormatter()
         let localCurrencyFormatter = CurrencyFormatter()
         mainCurrencyFormatter.currencyCode = event.mainCurrency!.code
-        let model = EventModel(andPrepareWith: event)
+        let model = EventModel(event: event, currencyModel: CurrencyModel(managedObjectContext: event.managedObjectContext!, currencyController: CurrencyController()))
         
-        let solution = event.solveWhoHasToPayWhoFromThisBill() as! [SolutionReturnPaymentItem]
+        let solution = try solutionModel.originalSolveWhoHasToPayWhoFromThisBill()
 //        let sortDescriptorOnDateCreated = NSSortDescriptor(key: "dateCreated", ascending: true)
-        let allPayments = Array(event.payments ?? Set<MCPayment>())
-        let allPeople = Array(event.peoplePresent ?? Set<MCPerson>())
+        let allPayments = Array((event.payments as? Set<MCPayment>) ?? Set<MCPayment>())
+        let allPeople = Array((event.peoplePresent as? Set<MCPerson>) ?? Set<MCPerson>())
         
         var mailBody = String()
         mailBody += "https://itunes.apple.com/us/app/we-all-pay/id642135963?mt=8&uo=4\n\n"
@@ -79,28 +82,29 @@ extension MailComposer where Self: ThisEventReadOnly {
         mailBody += "\n\n"
         
         if let tripName = self.event.tripName {
-            mailBody += String.localizedStringWithFormat(NSLocalizedString("solution_mail_body_1a", value: "Here you go. The full overview of the %1$@ which we spend on our last event %2$@. We spent an average of %3$@ a person. You can find more details below.", comment: "Here you go. The full overview of the %1$@ which we spend on our last event %2$@. We spent an average of %3$@ a person. You can find more of the details below."), mainCurrencyFormatter.string(for: event.totalSumOfMoneyOfThisSharedBill())!, tripName, mainCurrencyFormatter.string(for: event.amountPeopleShouldHavePaid())!)
+            mailBody += String.localizedStringWithFormat(NSLocalizedString("solution_mail_body_1a", value: "Here you go. The full overview of the %1$@ which we spend on our last event %2$@. We spent an average of %3$@ a person. You can find more details below.", comment: "Here you go. The full overview of the %1$@ which we spend on our last event %2$@. We spent an average of %3$@ a person. You can find more of the details below."), mainCurrencyFormatter.string(for: solutionModel.totalSumOfMoney)!, tripName, mainCurrencyFormatter.string(for: try! solutionModel.averageAmountShouldHavePaid())!)
         } else {
-            mailBody += String.localizedStringWithFormat(NSLocalizedString("solution_mail_body_1b", value: "Here you go. The full overview of the %1$@ which we spend on our last event. We spent an average of %2$@ a person. You can find more of the details below.", comment: "Here you go. The full overview of the %1$@ which we spend on our last event. We spent an average of %2$@ a person. You can find more of the details below."), mainCurrencyFormatter.string(for: event.totalSumOfMoneyOfThisSharedBill())!, mainCurrencyFormatter.string(for: event.amountPeopleShouldHavePaid())!)
+            mailBody += String.localizedStringWithFormat(NSLocalizedString("solution_mail_body_1b", value: "Here you go. The full overview of the %1$@ which we spend on our last event. We spent an average of %2$@ a person. You can find more of the details below.", comment: "Here you go. The full overview of the %1$@ which we spend on our last event. We spent an average of %2$@ a person. You can find more of the details below."), mainCurrencyFormatter.string(for: solutionModel.totalSumOfMoney)!, mainCurrencyFormatter.string(for: try! solutionModel.averageAmountShouldHavePaid())!)
         }
         mailBody += "\n\n"
         
         let pluralString = NSLocalizedString("solution_view_email_result_total_sum_paid_by", comment: "")
-        mailBody += String.localizedStringWithFormat(pluralString, event.totalAmountOfPeopleWhoHavePaid())
+        mailBody += String.localizedStringWithFormat(pluralString, try solutionModel.totalAmountOfPeopleWhoHavePaid().uint64Value)
         mailBody += "\n"
         
         for payment in allPayments {
-            guard payment.moneyInMainCurrency != nil else {
-                throw MailComposerError.missingCrititcalInformationIn(payment: payment)
-            }
             guard payment.payingPerson != nil else {
                 throw MailComposerError.missingCrititcalInformationIn(payment: payment)
             }
+            let fullname = payment.payingPerson!.fullName
+            let moneyInMainCurrency = mainCurrencyFormatter.string(for: payment.moneyInMainCurrency)!
+            let paymentDescription = payment.fullDescriptionOfPayment
             if payment.exchangeRate!.exchangeRate!.doubleValue == 1.0 {
-                mailBody += String.localizedStringWithFormat(NSLocalizedString("solution_mail_body_2a", value: "%1$@ paid %2$@ for %3$@.", comment: "%1$@ has paid %2$@ for %3$@."), payment.payingPerson!.getFullName(), mainCurrencyFormatter.string(for: payment.moneyInMainCurrency())!, payment.fullDescriptionOfPayment()!)
+                mailBody += String.localizedStringWithFormat(NSLocalizedString("solution_mail_body_2a", value: "%1$@ paid %2$@ for %3$@.", comment: "%1$@ has paid %2$@ for %3$@."), fullname, moneyInMainCurrency, paymentDescription)
             } else {
                 localCurrencyFormatter.currencyCode = payment.currency!.code!
-                mailBody += String.localizedStringWithFormat(NSLocalizedString("solution_mail_body_2b", value: "%1$@ has paid %2$@(%3$@) for %4$@", comment: "%1$@ has paid %2$@(%3$@) for %4$@."), payment.payingPerson!.getFullName(), mainCurrencyFormatter.string(for: payment.moneyInMainCurrency)!, localCurrencyFormatter.string(for: payment.money!)!, payment.fullDescriptionOfPayment())
+                let localCurrency = localCurrencyFormatter.string(for: payment.money!)!
+                mailBody += String.localizedStringWithFormat(NSLocalizedString("solution_mail_body_2b", value: "%1$@ has paid %2$@(%3$@) for %4$@", comment: "%1$@ has paid %2$@(%3$@) for %4$@."), fullname, moneyInMainCurrency, localCurrency, paymentDescription)
             }
             
             mailBody += "\n"
@@ -110,7 +114,7 @@ extension MailComposer where Self: ThisEventReadOnly {
         mailBody += String.localizedStringWithFormat(NSLocalizedString("solution_mail_body_3", value: "We each used these amounts:", comment: "The amount of money we used:"))
         mailBody += "\n"
         for person in allPeople {
-            mailBody += String.localizedStringWithFormat(NSLocalizedString("solution_mail_body_4", value: "%1$@ used %2$@ in total.", comment: "%1$@ used %2$@ in total."), person.getFullName(), mainCurrencyFormatter.string(for: event.amountShouldHavePaid(by: person))!)
+            mailBody += String.localizedStringWithFormat(NSLocalizedString("solution_mail_body_4", value: "%1$@ used %2$@ in total.", comment: "%1$@ used %2$@ in total."), person.fullName, mainCurrencyFormatter.string(for: try solutionModel.amountShouldHavePaid(by: person))!)
             mailBody += "\n"
         }
         mailBody += "\n"
@@ -119,10 +123,10 @@ extension MailComposer where Self: ThisEventReadOnly {
         mailBody += "\n"
         
         for returnPayment in solution {
-            let payerFullName: String = returnPayment.payer?.getFullName() ?? ""
+            let payerFullName: String = returnPayment.payer?.fullName ?? ""
             let moneyNumber = returnPayment.money ?? NSNumber(value: 0.0)
             let moneyString: String = mainCurrencyFormatter.string(for: moneyNumber)!
-            let receiverFullName: String = returnPayment.receiver?.getFullName() ?? ""
+            let receiverFullName: String = returnPayment.receiver?.fullName ?? ""
             mailBody += String.localizedStringWithFormat(NSLocalizedString("solution_mail_body_6", value: "%1$@ pays %2$@ to %3$@.", comment: "%1$@ pays %2$@ to %3$@"), payerFullName, moneyString, receiverFullName)
             mailBody += "\n"
         }

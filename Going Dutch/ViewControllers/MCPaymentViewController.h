@@ -37,7 +37,7 @@ typedef NS_ENUM(NSUInteger, MCMoneyValueFieldDismissStatus) {
 @end
 
 __attribute__((objc_subclassing_restricted))
-@interface MCPaymentViewController : MCGenericAdBannerTableViewController <NSFetchedResultsControllerDelegate, MCPathComponentsToOpenProtocol, MCPaymentStateModelProtocol>
+@interface MCPaymentViewController : MCGenericAdBannerTableViewController <NSFetchedResultsControllerDelegate, MCPathComponentsToOpenProtocol>
 
 @property (nonatomic, readonly) BOOL didSomethingChange;
 @property (nonatomic, readonly) BOOL isNew;
@@ -47,11 +47,12 @@ __attribute__((objc_subclassing_restricted))
 - (IBAction)mainDoneButtonPressed:(id)sender;
 
 /// Creates a new payment from this event to be displayed on this ViewController
-/// @param event Sets the event to create the payment to be displayed.
-- (void)prepareForUseWithEvent:(MCSharedBill *)event;
+/// @param eventModel Sets the eventModel use to create the payment.
+- (void)prepareForUseWithEventModel:(MCEventModel *)eventModel;
 
 /// Sets the payment to be displayed on this View Controller
 /// @param payment Sets the payment to display.
-- (void)prepareForUseWithPayment:(MCPayment *)payment;
+/// @param eventModel Sets the eventModel for the PaymetModel.
+- (void)prepareForUseWithPayment:(MCPayment *)payment andEventModel:(MCEventModel *)eventModel;
 
 @end

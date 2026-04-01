@@ -27,12 +27,11 @@ import FirebaseCrashlytics
         pickerView = UIPickerView()
         pickerView.delegate = self
         pickerView.dataSource = self
-        pickerView.showsSelectionIndicator = true
         textField.inputView = pickerView
     }
     
     private lazy var selectableFromPeoplePresent: [SelectablePeoplePresent] = {
-        var selectablePeople = model.arrayOfPeoplePresent.map { person in
+        var selectablePeople = model.sortedPeoplePresent.map { person in
             SelectablePeoplePresent.person(person)
         }
         let noneString = "-- \(NSLocalizedString("picker_option_none", value: "none", comment: "An string that indicates that no person is selected in the select payer picker")) --"
@@ -56,7 +55,7 @@ import FirebaseCrashlytics
         let selectable = selectableFromPeoplePresent[row]
         switch selectable {
         case .person(let person):
-            return person.getFullName()
+            return person.fullName
         case .none(let stringValue):
             return stringValue
         }

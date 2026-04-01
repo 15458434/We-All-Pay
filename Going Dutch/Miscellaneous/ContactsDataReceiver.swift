@@ -8,8 +8,10 @@
 
 import UIKit
 import ContactsUI
+import CurrencyConverter
 
 final class ContactsDataReceiver: NSObject, ThisEventReadOnly, CNContactPickerDelegate {
+    @objc dynamic private(set) var error: NSError?
     
     @objc init(with tonightsBill: MCSharedBill) {
         self.event = tonightsBill
@@ -41,31 +43,39 @@ final class ContactsDataReceiver: NSObject, ThisEventReadOnly, CNContactPickerDe
     
     func contactPicker(_ picker: CNContactPickerViewController, didSelect contact: CNContact) {
         let tonightsBillID: NSManagedObjectID = event.objectID
-        let backgroundContext: NSManagedObjectContext = MCWeAllPayStoreController.defaultStore().backgroundThreadContext
-        
-        backgroundContext.perform {
-            let backgroundTonightsBill: MCSharedBill = backgroundContext.object(with: tonightsBillID) as! MCSharedBill
-            let newPerson: MCPerson = backgroundTonightsBill.addPerson()!
-            newPerson.firstName = contact.givenName
-            newPerson.lastName = contact.middleName + contact.familyName
+        WeAllPayStoreController.defaultStore.performBackgroundTask { backgroundContext in
+            let event: MCSharedBill = backgroundContext.object(with: tonightsBillID) as! MCSharedBill
+            let eventModel = EventModel(event: event, currencyModel: CurrencyModel(managedObjectContext: event.managedObjectContext!, currencyController: CurrencyController()))
+            let newPerson: MCPerson = eventModel.addPerson()
+            let personModel = PersonModel(with: newPerson)
+            personModel.person.firstName = contact.givenName
+            personModel.person.lastName = contact.middleName + contact.familyName
             for emailAddress in contact.emailAddresses {
                 let emailAddressString = emailAddress.value as String
-                newPerson.addOneEmailAddress(fromAString: emailAddressString)
+                personModel.add(emailAddress: emailAddressString)
             }
             if let imageData = contact.imageData {
-                newPerson.setThumbnailDataFrom(UIImage(data: imageData)!)
-                newPerson.setPictureDataFrom(UIImage(data: imageData)!)
+                newPerson.thumbnail = UIImage(data: imageData)!
+                newPerson.picture = UIImage(data: imageData)!
             } else {
-                newPerson.setThumbnailDataFrom(nil)
-                newPerson.setPictureDataFrom(nil)
+                newPerson.thumbnail = nil
+                newPerson.picture = nil
             }
             
-            MCWeAllPayStoreController.defaultStore().savebackgroundContext()
+            do {
+                try backgroundContext.save()
+            } catch {
+                self.error = error as NSError;
+            }
         }
     }
     
     func contactPickerDidCancel(_ picker: CNContactPickerViewController) {
         debugPrint("Whatever")
+    }
+    
+    func resetError() {
+        self.error = nil;
     }
     
     // MARK: NSObject

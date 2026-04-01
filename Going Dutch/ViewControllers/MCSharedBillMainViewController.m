@@ -13,15 +13,16 @@
 
 #import "MCSharedBillPageViewController.h"
 
-#import "MCSharedBill+addons.h"
-
-#import "MCWeAllPayStoreController.h"
-
 #import "We_all_pay-Swift.h"
+
+static void * isEditingToggleContext = &isEditingToggleContext;
 
 @interface MCSharedBillMainViewController ()
 
 @property (strong, nonatomic) MCSharedBillPageViewController *pageViewController;
+@property (weak, nonatomic) MCEventsModel *eventsModel;
+@property (strong, nonatomic) IBOutlet MCEventModel *eventModel;
+@property (strong, nonatomic) IBOutlet MCToggleModel *isEditingModel;
 
 @property (weak, nonatomic) IBOutlet NSLayoutConstraint *worstSalesPitchEverViewWidth;
 @property (weak, nonatomic) IBOutlet NSLayoutConstraint *worstSalesPitchEverViewHeight;
@@ -33,20 +34,21 @@
 @implementation MCSharedBillMainViewController
 
 - (void)updateEventWithObjectID:(NSManagedObjectID *)objectID {
-    NSManagedObjectContext *managedObjectContext = MCWeAllPayStoreController.defaultStore.mainThreadContext;
+    NSManagedObjectContext *managedObjectContext = WeAllPayStoreController.defaultStore.viewContext;
     MCSharedBill *event = [managedObjectContext objectWithID:objectID];
-    self.tonightsBill = event;
+    MCCurrencyModel *currencyModel = [[MCCurrencyModel alloc] initWithManagedObjectContext:managedObjectContext andWithCurrencyController:[[CurrencyController alloc] init]];
+    _eventModel = [[MCEventModel alloc] initWithEvent:event andConcurrencyModel:currencyModel];
+}
+
+- (void)prepareForUseWithEventModel:(MCEventModel *)model andEventsModel:(MCEventsModel *)eventsModel {
+    _eventsModel = eventsModel;
+    _eventModel = model;
 }
 
 - (IBAction)toggleEdit:(id)sender {
-    if ([[self childViewControllers][0] toggleEditTableView:sender]) {
-        // Set Done Button
-        UIBarButtonItem *doneButton = [[UIBarButtonItem alloc] initWithBarButtonSystemItem:UIBarButtonSystemItemDone target:self action:@selector(toggleEdit:)];
-        [[self navigationItem] setRightBarButtonItem:doneButton];
-    } else {
-        // Set Edit Button
-        UIBarButtonItem *editButton = [[UIBarButtonItem alloc] initWithBarButtonSystemItem:UIBarButtonSystemItemEdit target:self action:@selector(toggleEdit:)];
-        [[self navigationItem] setRightBarButtonItem:editButton];
+    [_isEditingModel toggle];
+    if (!_isEditingModel.boolValue) {
+        [_eventModel save];
     }
 }
 
@@ -132,6 +134,7 @@
 - (void)prepareForUseWithPathComponentsToOpen:(NSArray<NSManagedObject *> *)pathComponentsToOpen {
     MCSharedBill *event = (MCSharedBill *)pathComponentsToOpen[0];
     NSParameterAssert(event);
+    
     [self updateEventWithObjectID:event.objectID];
 }
 
@@ -143,15 +146,6 @@
 
 #pragma mark - From UIViewController+WeAllPayStore
 
-- (void)storeDidChange:(NSNotification *)notification {
-    if (!_tonightsBill) {
-        NSManagedObjectContext *context = [[MCWeAllPayStoreController defaultStore] mainThreadContext];
-        [context performBlock:^{
-            self.tonightsBill = (MCSharedBill *)[context objectWithID:[self.writableTonightsBill objectID]];
-        }];
-    }
-}
-
 #pragma mark - UIViewController
 
 - (void)loadView {
@@ -162,12 +156,10 @@
     [topSegmentedControl setTitle:selectPeopleButton forSegmentAtIndex:0];
     NSString *selectPaymentsButton = NSLocalizedStringWithDefaultValue(@"event_view_segmentedControl_payments_title", nil, NSBundle.mainBundle, @"Payments", @"A selection button at the top of the event view that allows for selection between the people and the payments on the event. This button is for selecting the payments.");
     [topSegmentedControl setTitle:selectPaymentsButton forSegmentAtIndex:1];
-    if (@available(iOS 13.0, *)) {
-        topSegmentedControl.backgroundColor = [UIColor colorWithWhite:1.0 alpha:0.05];
-        [topSegmentedControl setTitleTextAttributes:@{NSForegroundColorAttributeName: UIColor.systemBackgroundColor} forState:UIControlStateNormal];
-        [topSegmentedControl setTitleTextAttributes:@{NSForegroundColorAttributeName: UIColor.systemBackgroundColor} forState:UIControlStateSelected];
-        topSegmentedControl.selectedSegmentTintColor = [UIColor colorWithWhite:1.0 alpha:0.25];
-    }
+    topSegmentedControl.backgroundColor = [UIColor colorWithWhite:1.0 alpha:0.05];
+    [topSegmentedControl setTitleTextAttributes:@{NSForegroundColorAttributeName: UIColor.systemBackgroundColor} forState:UIControlStateNormal];
+    [topSegmentedControl setTitleTextAttributes:@{NSForegroundColorAttributeName: UIColor.systemBackgroundColor} forState:UIControlStateSelected];
+    topSegmentedControl.selectedSegmentTintColor = [UIColor colorWithWhite:1.0 alpha:0.25];
 }
 
 - (void)viewDidLoad {
@@ -185,15 +177,6 @@
     
     [self startRespondingToStoreChangeNotifications];
     
-    if (!_tonightsBill) {
-        _tonightsBill = [MCSharedBill addSharedBillToContext:[[MCWeAllPayStoreController defaultStore] mainThreadContext]];
-        [[MCWeAllPayStoreController defaultStore] saveMainThreadContext];
-        _currentView = MCSelectEditTripTableView;
-    } else {
-        _currentView = MCSelectSharedBillTableView;
-    }
-    _pageViewController.tonightsBill = _tonightsBill;
-    
     self.bottomLayoutCustomContainer.priority = UILayoutPriorityDefaultHigh + 1;
 }
 
@@ -202,6 +185,19 @@
     
     [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(applyProVersion:) name:[MCStoreInterface applyProVersionNotification] object:[MCStoreInterface defaultStoreInterface]];
     [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(applicationWillEnterForegroundHandler:) name:UIApplicationWillEnterForegroundNotification object:nil];
+    
+    // Create KVO
+    NSKeyValueObservingOptions options = NSKeyValueObservingOptionInitial | NSKeyValueObservingOptionNew;
+    [self.isEditingModel addObserver:self forKeyPath:@"boolValue" options:options context:isEditingToggleContext];
+}
+
+- (void)viewWillDisappear:(BOOL)animated {
+    [super viewWillDisappear:animated];
+    
+    [[NSNotificationCenter defaultCenter] removeObserver:self name:UIApplicationWillEnterForegroundNotification object:nil];
+    
+    // Destroy KVO
+    [self.isEditingModel removeObserver:self forKeyPath:@"boolValue" context:isEditingToggleContext];
 }
 
 - (void)viewDidAppear:(BOOL)animated {
@@ -210,18 +206,12 @@
     [[NSNotificationCenter defaultCenter] removeObserver:self name:[MCStoreInterface applyProVersionNotification] object:[MCStoreInterface defaultStoreInterface]];
 }
 
-- (void)viewWillDisappear:(BOOL)animated {
-    [super viewWillDisappear:animated];
-    
-    [[NSNotificationCenter defaultCenter] removeObserver:self name:UIApplicationWillEnterForegroundNotification object:nil];
-}
-
 - (void)willMoveToParentViewController:(UIViewController *)parent {
     if (!parent) {
         // Parent is null when back button is pressed in navigationbar
         [self.view endEditing:YES];
-        [_tonightsBill deleteIfStillNew];
-        [[MCWeAllPayStoreController defaultStore] saveMainThreadContext];
+        [_eventsModel deleteIfStillNewEvent:_eventModel.event];
+        [[WeAllPayStoreController defaultStore] saveViewContext];
     }
 }
 
@@ -229,25 +219,13 @@
     if ([[segue identifier] isEqualToString:@"pageViewController"]) {
         _pageViewController = (MCSharedBillPageViewController *)[segue destinationViewController];
         _pageViewController.mainViewController = self;
-        if (_tonightsBill.peoplePresent.count > 0) {
+        _pageViewController.eventModel = _eventModel;
+        _pageViewController.isEditingModel = _isEditingModel;
+        if (_eventModel.amountOfPeoplePresentOnEvent > 0) {
             self.peopleOrPaymentsSelectionControl.selectedSegmentIndex = 1;
         } else {
             self.peopleOrPaymentsSelectionControl.selectedSegmentIndex = 0;
         }
-        NSManagedObjectContext *backgroundContext = [[MCWeAllPayStoreController defaultStore] backgroundThreadContext];
-        [backgroundContext performBlock:^{
-            id<MCTonightsBillTransfer> destination = (id<MCTonightsBillTransfer>)[segue destinationViewController];
-            if (self.writableTonightsBill) {
-                [destination setWritableTonightsBill:self.writableTonightsBill];
-                NSManagedObjectContext *mainContext = [[MCWeAllPayStoreController defaultStore] mainThreadContext];
-                [mainContext performBlock:^{
-                    [destination setTonightsBill:self.tonightsBill];
-                }];
-            } else {
-                SEL writeableTonightsBillIsCreated = NSSelectorFromString(@"writeableTonightsBillIsCreated:");
-                [[NSNotificationCenter defaultCenter] addObserver:destination selector:writeableTonightsBillIsCreated name:MCWritableTonightsBillReady object:nil];
-            }
-        }];
     }
 }
 
@@ -257,6 +235,40 @@
 
 - (void)dealloc {
     [[NSNotificationCenter defaultCenter] removeObserver:self];
+}
+
+- (void)observeValueForKeyPath:(NSString *)keyPath ofObject:(id)object change:(NSDictionary<NSKeyValueChangeKey,id> *)change context:(void *)context {
+    if (context == isEditingToggleContext) {
+#ifdef DEBUG
+        NSLog(@"change: %@", change);
+#endif
+        NSNumber *changeKeyNumber = (NSNumber *)change[NSKeyValueChangeKindKey];
+        NSKeyValueChange keyValueChange = changeKeyNumber.unsignedIntegerValue;
+        switch (keyValueChange) {
+            case NSKeyValueChangeSetting:
+            {
+                id new = change[NSKeyValueChangeNewKey];
+                if ([new isKindOfClass:[NSNumber class]]) {
+                    NSNumber *newValue = (NSNumber *)new;
+                    BOOL boolValue = newValue.boolValue;
+                    if (boolValue) {
+                        // Set Done Button
+                        UIBarButtonItem *doneButton = [[UIBarButtonItem alloc] initWithBarButtonSystemItem:UIBarButtonSystemItemDone target:self action:@selector(toggleEdit:)];
+                        self.navigationItem.rightBarButtonItem = doneButton;
+                    } else {
+                        // Set Edit Button
+                        UIBarButtonItem *editButton = [[UIBarButtonItem alloc] initWithBarButtonSystemItem:UIBarButtonSystemItemEdit target:self action:@selector(toggleEdit:)];
+                        self.navigationItem.rightBarButtonItem = editButton;
+                    }
+                }
+            }
+                break;
+            default:
+                break;
+        }
+    } else {
+        [super observeValueForKeyPath:keyPath ofObject:object change:change context:context];
+    }
 }
 
 @end
